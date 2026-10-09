@@ -1,0 +1,88 @@
+{ NQ VWAP Momentum - MultiCharts PowerLanguage signal
+  Part 1: long entry conditions
+    1. Price is above VWAP
+    2. VWAP is rising over the past 15 minutes
+    3. Price has increased at least 0.1% over the past 1 hour
+
+  Apply to a 1-15 minute NQ / MNQ chart. Lookbacks are in minutes and are
+  converted to bar counts for the chart's timeframe.
+
+  VWAP resets at the start of each session, detected as a gap between bars of
+  at least SessionGapMins (the daily CME maintenance break or the weekend). }
+
+Inputs:
+	VwapSlopeMins(15),      { VWAP must be rising over this many minutes }
+	StrictRising(false),    { true = VWAP up on every bar; false = net rise over the window }
+	MomentumMins(60),       { price change lookback in minutes }
+	MinChangePct(0.1),      { minimum % increase over MomentumMins }
+	SessionGapMins(30),     { gap between bars (minutes) that starts a new VWAP session }
+	Contracts(1);
+
+Variables:
+	VwapBars(0), MomentumBars(0),
+	BarMins(0), NewSession(false), BarsInSession(0),
+	BarVol(0), CumPV(0), CumVol(0), VwapVal(0),
+	VwapUpBars(0), Idx(0), PctChange(0),
+	CondAboveVwap(false), CondVwapRising(false), CondMomentum(false), LongSignal(false);
+
+{ ---------- Timeframe -> bar counts ---------- }
+Once begin
+	if BarType <> 1 then
+		RaiseRunTimeError("Use a minute-based chart (1 to 15 minutes).");
+	if BarInterval > VwapSlopeMins then
+		RaiseRunTimeError("Chart timeframe must be " + NumToStr(VwapSlopeMins, 0) + " minutes or less.");
+	VwapBars = MaxList(1, Round(VwapSlopeMins / BarInterval, 0));
+	MomentumBars = MaxList(1, Round(MomentumMins / BarInterval, 0));
+end;
+
+{ ---------- Session-anchored VWAP ---------- }
+BarMins = DateToJulian(Date) * 1440 + TimeToMinutes(Time);
+NewSession = CurrentBar = 1 or BarMins - BarMins[1] >= SessionGapMins;
+
+if BarType < 2 then BarVol = Ticks else BarVol = Volume;
+
+if NewSession then begin
+	CumPV = 0;
+	CumVol = 0;
+	BarsInSession = 0;
+end
+else
+	BarsInSession = BarsInSession + 1;
+
+CumPV = CumPV + (High + Low + Close) / 3 * BarVol;
+CumVol = CumVol + BarVol;
+if CumVol > 0 then VwapVal = CumPV / CumVol else VwapVal = Close;
+
+{ ---------- Long conditions ---------- }
+{ 1. Price above VWAP }
+CondAboveVwap = Close > VwapVal;
+
+{ 2. VWAP rising over the lookback. Only checked once the current session is
+     at least that long, so we never compare against the prior session's VWAP. }
+CondVwapRising = false;
+if BarsInSession >= VwapBars then begin
+	if StrictRising then begin
+		VwapUpBars = 0;
+		for Idx = 0 to VwapBars - 1 begin
+			if VwapVal[Idx] > VwapVal[Idx + 1] then VwapUpBars = VwapUpBars + 1;
+		end;
+		CondVwapRising = (VwapUpBars = VwapBars);
+	end
+	else
+		CondVwapRising = VwapVal > VwapVal[VwapBars];
+end;
+
+{ 3. Price up at least MinChangePct % versus the close one lookback ago }
+CondMomentum = false;
+if CurrentBar > MomentumBars and Close[MomentumBars] > 0 then begin
+	PctChange = (Close / Close[MomentumBars] - 1) * 100;
+	CondMomentum = PctChange >= MinChangePct;
+end;
+
+LongSignal = CondAboveVwap and CondVwapRising and CondMomentum;
+
+{ ---------- Orders ---------- }
+if LongSignal and MarketPosition = 0 then
+	Buy ("Long") Contracts contracts next bar at market;
+
+{ TODO: exits / stops / session filters come in the next parts. }
