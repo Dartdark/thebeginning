@@ -1,11 +1,11 @@
 { NQ VWAP Momentum - MultiCharts PowerLanguage signal
 
   Apply to a 5-minute NQ / MNQ chart. All times are HHMM in the CHART's time
-  zone and default to US Eastern. If your chart uses exchange (Central) time,
-  subtract one hour from every time input (930 -> 830, 1000 -> 900, ...).
+  zone and default to US Central (CME exchange time). Eastern equivalents are
+  shown in brackets.
 
   VWAP
-    Anchored at the 9:30 open and built from 15-minute bars. The 15-minute bars
+    Anchored at the 8:30 CT [9:30 ET] open and built from 15-minute bars. The 15-minute bars
     are assembled from the 5-minute bars, so the value matches a 15-minute
     chart's VWAP and only updates when each 15-minute bar completes.
 
@@ -22,19 +22,20 @@
 
   GUARDRAILS
     One position at a time, max 4 trades a day, max 2 losing trades a day,
-    no entries before 10:00 or after 15:30, flat at 15:55. }
+    no entries before 9:00 CT [10:00 ET] or after 14:30 CT [15:30 ET],
+    flat at 14:55 CT [15:55 ET]. }
 
 Inputs:
-	AnchorTime(930),        { VWAP anchor }
+	AnchorTime(830),        { VWAP anchor: 8:30 CT = 9:30 ET open }
 	VwapBarMins(15),        { VWAP is built from bars of this many minutes }
 	MomentumMins(60),       { price change lookback in minutes }
 	MinChangePct(0.1),      { minimum % move over MomentumMins }
 	StopPts(80),
 	LongTargetPts(40),
 	ShortTargetPts(50),
-	NoTradeUntil(1000),     { first allowed entry time }
-	LastEntryTime(1530),    { no new positions at or after this time }
-	FlattenTime(1555),      { close any open position at this time }
+	NoTradeUntil(900),      { first allowed entry time: 9:00 CT = 10:00 ET }
+	LastEntryTime(1430),    { no new positions at or after this time: 14:30 CT = 15:30 ET }
+	FlattenTime(1455),      { close any open position at this time: 14:55 CT = 15:55 ET }
 	MaxTradesPerDay(4),
 	MaxLossesPerDay(2),
 	Contracts(1);
@@ -56,7 +57,7 @@ Once begin
 	TargetPts = LongTargetPts;
 end;
 
-{ ---------- 15-minute VWAP anchored at 9:30 ---------- }
+{ ---------- 15-minute VWAP anchored at the open ---------- }
 if BarType < 2 then BarVol = Ticks else BarVol = Volume;
 MinsFromAnchor = TimeToMinutes(Time) - TimeToMinutes(AnchorTime);
 
@@ -136,8 +137,8 @@ TradesToday = TotalTrades - DayStartTrades;
 if MarketPosition <> 0 then TradesToday = TradesToday + 1;
 
 { ---------- Entries ---------- }
-{ Orders fill at the next bar's open, so a decision on the bar closing at 10:00
-  fills at 10:00 and the last decision (bar closing 15:25) fills at 15:25. }
+{ Orders fill at the next bar's open, so a decision on the bar closing at 9:00 CT
+  fills at 9:00 CT and the last decision (bar closing 14:25 CT) fills at 14:25 CT. }
 InEntryWindow = Time >= NoTradeUntil and Time < LastEntryTime;
 
 CanEnter = InEntryWindow
@@ -165,7 +166,7 @@ SetStopContract;
 SetStopLoss(StopPts * BigPointValue);
 SetProfitTarget(TargetPts * BigPointValue);
 
-{ Flat at 15:55 }
+{ Flat at FlattenTime }
 if Time >= FlattenTime and MarketPosition <> 0 then begin
 	Sell ("EOD LX") this bar on close;
 	BuyToCover ("EOD SX") this bar on close;
