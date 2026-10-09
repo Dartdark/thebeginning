@@ -1,88 +1,172 @@
 { NQ VWAP Momentum - MultiCharts PowerLanguage signal
-  Part 1: long entry conditions
-    1. Price is above VWAP
-    2. VWAP is rising over the past 15 minutes
-    3. Price has increased at least 0.1% over the past 1 hour
 
-  Apply to a 1-15 minute NQ / MNQ chart. Lookbacks are in minutes and are
-  converted to bar counts for the chart's timeframe.
+  Apply to a 5-minute NQ / MNQ chart. All times are HHMM in the CHART's time
+  zone and default to US Eastern. If your chart uses exchange (Central) time,
+  subtract one hour from every time input (930 -> 830, 1000 -> 900, ...).
 
-  VWAP resets at the start of each session, detected as a gap between bars of
-  at least SessionGapMins (the daily CME maintenance break or the weekend). }
+  VWAP
+    Anchored at the 9:30 open and built from 15-minute bars. The 15-minute bars
+    are assembled from the 5-minute bars, so the value matches a 15-minute
+    chart's VWAP and only updates when each 15-minute bar completes.
+
+  LONG setup                              SHORT setup
+    1. Close above VWAP                     1. Close below VWAP
+    2. VWAP rising over the last 15 min     2. VWAP falling over the last 15 min
+    3. Price up >= 0.1% over the last hour  3. Price down >= 0.1% over the last hour
+  LONG trigger: first red candle of a       SHORT trigger: first green candle of a
+    pullback (red after a non-red candle)     bounce (green after a non-green candle)
+    while the setup is true                   while the setup is true
+  Entry is at the open of the next bar.
+
+  EXITS (points): long 80 stop / 40 target, short 80 stop / 50 target.
+
+  GUARDRAILS
+    One position at a time, max 4 trades a day, max 2 losing trades a day,
+    no entries before 10:00 or after 15:30, flat at 15:55. }
 
 Inputs:
-	VwapSlopeMins(15),      { VWAP must be rising over this many minutes }
-	StrictRising(false),    { true = VWAP up on every bar; false = net rise over the window }
+	AnchorTime(930),        { VWAP anchor }
+	VwapBarMins(15),        { VWAP is built from bars of this many minutes }
 	MomentumMins(60),       { price change lookback in minutes }
-	MinChangePct(0.1),      { minimum % increase over MomentumMins }
-	SessionGapMins(30),     { gap between bars (minutes) that starts a new VWAP session }
+	MinChangePct(0.1),      { minimum % move over MomentumMins }
+	StopPts(80),
+	LongTargetPts(40),
+	ShortTargetPts(50),
+	NoTradeUntil(1000),     { first allowed entry time }
+	LastEntryTime(1530),    { no new positions at or after this time }
+	FlattenTime(1555),      { close any open position at this time }
+	MaxTradesPerDay(4),
+	MaxLossesPerDay(2),
 	Contracts(1);
 
 Variables:
-	VwapBars(0), MomentumBars(0),
-	BarMins(0), NewSession(false), BarsInSession(0),
-	BarVol(0), CumPV(0), CumVol(0), VwapVal(0),
-	VwapUpBars(0), Idx(0), PctChange(0),
-	CondAboveVwap(false), CondVwapRising(false), CondMomentum(false), LongSignal(false);
+	MomentumBars(0), BarVol(0), MinsFromAnchor(0),
+	VwapActive(false), BktOpen(false), BktHigh(0), BktLow(0), BktClose(0), BktVol(0),
+	CumPV(0), CumVol(0), VwapNow(0), VwapPrev(0), VwapCount(0),
+	PctChange(0),
+	LongSetup(false), ShortSetup(false), LongTrigger(false), ShortTrigger(false),
+	DayStartTrades(0), CountedTrades(0), LastNetProfit(0), TradesToday(0), LossesToday(0),
+	InEntryWindow(false), CanEnter(false), TargetPts(0);
 
-{ ---------- Timeframe -> bar counts ---------- }
+{ ---------- Setup ---------- }
 Once begin
-	if BarType <> 1 then
-		RaiseRunTimeError("Use a minute-based chart (1 to 15 minutes).");
-	if BarInterval > VwapSlopeMins then
-		RaiseRunTimeError("Chart timeframe must be " + NumToStr(VwapSlopeMins, 0) + " minutes or less.");
-	VwapBars = MaxList(1, Round(VwapSlopeMins / BarInterval, 0));
+	if BarType <> 1 or Mod(VwapBarMins, BarInterval) <> 0 then
+		RaiseRunTimeError("Use a minute chart whose interval divides evenly into " + NumToStr(VwapBarMins, 0) + " (5 minutes recommended).");
 	MomentumBars = MaxList(1, Round(MomentumMins / BarInterval, 0));
+	TargetPts = LongTargetPts;
 end;
 
-{ ---------- Session-anchored VWAP ---------- }
-BarMins = DateToJulian(Date) * 1440 + TimeToMinutes(Time);
-NewSession = CurrentBar = 1 or BarMins - BarMins[1] >= SessionGapMins;
-
+{ ---------- 15-minute VWAP anchored at 9:30 ---------- }
 if BarType < 2 then BarVol = Ticks else BarVol = Volume;
+MinsFromAnchor = TimeToMinutes(Time) - TimeToMinutes(AnchorTime);
 
-if NewSession then begin
+{ Start a fresh VWAP on the first bar that closes after the anchor time }
+if MinsFromAnchor > 0 and (Date <> Date[1] or TimeToMinutes(Time[1]) <= TimeToMinutes(AnchorTime)) then begin
+	VwapActive = true;
+	BktOpen = false;
 	CumPV = 0;
 	CumVol = 0;
-	BarsInSession = 0;
+	VwapNow = 0;
+	VwapPrev = 0;
+	VwapCount = 0;
 end
-else
-	BarsInSession = BarsInSession + 1;
+else if MinsFromAnchor <= 0 then
+	VwapActive = false;
 
-CumPV = CumPV + (High + Low + Close) / 3 * BarVol;
-CumVol = CumVol + BarVol;
-if CumVol > 0 then VwapVal = CumPV / CumVol else VwapVal = Close;
+if VwapActive then begin
+	{ add this bar to the current 15-minute bar }
+	if BktOpen = false then begin
+		BktHigh = High;
+		BktLow = Low;
+		BktVol = 0;
+		BktOpen = true;
+	end;
+	BktHigh = MaxList(BktHigh, High);
+	BktLow = MinList(BktLow, Low);
+	BktClose = Close;
+	BktVol = BktVol + BarVol;
 
-{ ---------- Long conditions ---------- }
-{ 1. Price above VWAP }
-CondAboveVwap = Close > VwapVal;
-
-{ 2. VWAP rising over the lookback. Only checked once the current session is
-     at least that long, so we never compare against the prior session's VWAP. }
-CondVwapRising = false;
-if BarsInSession >= VwapBars then begin
-	if StrictRising then begin
-		VwapUpBars = 0;
-		for Idx = 0 to VwapBars - 1 begin
-			if VwapVal[Idx] > VwapVal[Idx + 1] then VwapUpBars = VwapUpBars + 1;
+	{ 15-minute bar complete: fold it into the VWAP }
+	if Mod(MinsFromAnchor, VwapBarMins) = 0 then begin
+		CumPV = CumPV + (BktHigh + BktLow + BktClose) / 3 * BktVol;
+		CumVol = CumVol + BktVol;
+		if CumVol > 0 then begin
+			VwapPrev = VwapNow;
+			VwapNow = CumPV / CumVol;
+			VwapCount = VwapCount + 1;
 		end;
-		CondVwapRising = (VwapUpBars = VwapBars);
-	end
-	else
-		CondVwapRising = VwapVal > VwapVal[VwapBars];
+		BktOpen = false;
+	end;
 end;
 
-{ 3. Price up at least MinChangePct % versus the close one lookback ago }
-CondMomentum = false;
-if CurrentBar > MomentumBars and Close[MomentumBars] > 0 then begin
+{ ---------- Setups and triggers ---------- }
+PctChange = 0;
+if CurrentBar > MomentumBars and Close[MomentumBars] > 0 then
 	PctChange = (Close / Close[MomentumBars] - 1) * 100;
-	CondMomentum = PctChange >= MinChangePct;
+
+{ VwapCount >= 2 means there are two completed 15-minute VWAP values to compare }
+LongSetup = VwapActive and VwapCount >= 2
+	and Close > VwapNow
+	and VwapNow > VwapPrev
+	and PctChange >= MinChangePct;
+
+ShortSetup = VwapActive and VwapCount >= 2
+	and Close < VwapNow
+	and VwapNow < VwapPrev
+	and PctChange <= -MinChangePct;
+
+{ first red candle of a pullback toward VWAP / first green candle of a bounce toward VWAP }
+LongTrigger = LongSetup and Close < Open and not (Close[1] < Open[1]);
+ShortTrigger = ShortSetup and Close > Open and not (Close[1] > Open[1]);
+
+{ ---------- Daily guardrail counters ---------- }
+if Date <> Date[1] then begin
+	DayStartTrades = TotalTrades;
+	LossesToday = 0;
 end;
 
-LongSignal = CondAboveVwap and CondVwapRising and CondMomentum;
+{ TotalTrades counts closed trades; one position at a time means one new trade per change }
+if TotalTrades > CountedTrades then begin
+	if NetProfit < LastNetProfit then LossesToday = LossesToday + 1;
+	CountedTrades = TotalTrades;
+	LastNetProfit = NetProfit;
+end;
 
-{ ---------- Orders ---------- }
-if LongSignal and MarketPosition = 0 then
-	Buy ("Long") Contracts contracts next bar at market;
+TradesToday = TotalTrades - DayStartTrades;
+if MarketPosition <> 0 then TradesToday = TradesToday + 1;
 
-{ TODO: exits / stops / session filters come in the next parts. }
+{ ---------- Entries ---------- }
+{ Orders fill at the next bar's open, so a decision on the bar closing at 10:00
+  fills at 10:00 and the last decision (bar closing 15:25) fills at 15:25. }
+InEntryWindow = Time >= NoTradeUntil and Time < LastEntryTime;
+
+CanEnter = InEntryWindow
+	and MarketPosition = 0
+	and TradesToday < MaxTradesPerDay
+	and LossesToday < MaxLossesPerDay;
+
+if MarketPosition = 1 then TargetPts = LongTargetPts
+else if MarketPosition = -1 then TargetPts = ShortTargetPts;
+
+if CanEnter then begin
+	if LongTrigger then begin
+		TargetPts = LongTargetPts;
+		Buy ("Long") Contracts contracts next bar at market;
+	end
+	else if ShortTrigger then begin
+		TargetPts = ShortTargetPts;
+		SellShort ("Short") Contracts contracts next bar at market;
+	end;
+end;
+
+{ ---------- Exits ---------- }
+{ Stop and target in points, per contract. Called every bar so they stay active. }
+SetStopContract;
+SetStopLoss(StopPts * BigPointValue);
+SetProfitTarget(TargetPts * BigPointValue);
+
+{ Flat at 15:55 }
+if Time >= FlattenTime and MarketPosition <> 0 then begin
+	Sell ("EOD LX") this bar on close;
+	BuyToCover ("EOD SX") this bar on close;
+end;
