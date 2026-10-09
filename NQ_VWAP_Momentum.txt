@@ -38,7 +38,7 @@ Inputs:
 	FlattenTime(1455),      { close any open position at this time: 14:55 CT = 15:55 ET }
 	MaxTradesPerDay(4),
 	MaxLossesPerDay(2),
-	Contracts(1);
+	NumContracts(1);
 
 Variables:
 	MomentumBars(0), BarVol(0), MinsFromAnchor(0),
@@ -152,11 +152,11 @@ else if MarketPosition = -1 then TargetPts = ShortTargetPts;
 if CanEnter then begin
 	if LongTrigger then begin
 		TargetPts = LongTargetPts;
-		Buy ("Long") Contracts contracts next bar at market;
+		Buy ("Long") NumContracts contracts next bar at market;
 	end
 	else if ShortTrigger then begin
 		TargetPts = ShortTargetPts;
-		SellShort ("Short") Contracts contracts next bar at market;
+		SellShort ("Short") NumContracts contracts next bar at market;
 	end;
 end;
 
