@@ -73,4 +73,6 @@ if VwapActive and VwapCount >= 1 then begin
 		if VwapNow > VwapPrev then SetPlotColor(1, UpColor)
 		else if VwapNow < VwapPrev then SetPlotColor(1, DownColor);
 	end;
-end;
+end
+else
+	NoPlot(1);   { blank before the anchor instead of carrying yesterday's value forward }
