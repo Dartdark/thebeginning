@@ -1,0 +1,59 @@
+//@version=6
+// NQ VWAP momentum strategy
+// Part 1: long entry conditions
+//   1. Price is above VWAP
+//   2. VWAP is rising over the past 15 minutes
+//   3. Price has increased at least 0.1% over the past 1 hour
+//
+// Built for intraday NQ / MNQ charts (1m, 3m, 5m, 15m...). Lookbacks are given in
+// minutes and converted to bar counts for whatever timeframe the chart is on.
+strategy("NQ VWAP Momentum", overlay = true, initial_capital = 100000, default_qty_type = strategy.fixed, default_qty_value = 1, pyramiding = 0)
+
+// ───────────── Inputs ─────────────
+grpLong         = "Long entry"
+vwapSlopeMins   = input.int(15, "VWAP rising lookback (minutes)", minval = 1, group = grpLong)
+strictRising    = input.bool(false, "VWAP must rise on every bar (instead of net rise)", group = grpLong)
+momentumMins    = input.int(60, "Price change lookback (minutes)", minval = 1, group = grpLong)
+minChangePct    = input.float(0.1, "Min price increase over lookback (%)", minval = 0, step = 0.05, group = grpLong)
+
+// ───────────── Timeframe → bar counts ─────────────
+tfMins = timeframe.in_seconds() / 60.0
+if barstate.isfirst and (not timeframe.isintraday or tfMins > vwapSlopeMins)
+    runtime.error("Use an intraday chart with a timeframe of " + str.tostring(vwapSlopeMins) + " minutes or less.")
+
+vwapBars     = math.max(1, int(math.round(vwapSlopeMins / tfMins)))
+momentumBars = math.max(1, int(math.round(momentumMins / tfMins)))
+
+// ───────────── VWAP (resets each trading day) ─────────────
+newSession    = timeframe.change("1D")
+vwapVal       = ta.vwap(hlc3, newSession)
+barsInSession = ta.barssince(newSession)
+
+// ───────────── Long conditions ─────────────
+// 1. Price above VWAP
+condAboveVwap = close > vwapVal
+
+// 2. VWAP rising over the lookback. Only valid once the current VWAP session
+//    is at least that long, so we never compare against yesterday's VWAP.
+vwapUpBars    = math.sum(vwapVal > vwapVal[1] ? 1 : 0, vwapBars)
+vwapNetRising = vwapVal > vwapVal[vwapBars]
+condVwapRising = not na(barsInSession) and barsInSession >= vwapBars and (strictRising ? vwapUpBars == vwapBars : vwapNetRising)
+
+// 3. Price up at least minChangePct % versus the close one lookback ago
+pctChange     = (close / close[momentumBars] - 1) * 100
+condMomentum  = pctChange >= minChangePct
+
+longSignal = condAboveVwap and condVwapRising and condMomentum
+
+// ───────────── Orders ─────────────
+if longSignal and strategy.position_size == 0
+    strategy.entry("Long", strategy.long)
+
+// TODO: exits / stops / session filters come in the next parts.
+
+// ───────────── Visuals ─────────────
+plot(vwapVal, "VWAP", color = condVwapRising ? color.teal : color.orange, linewidth = 2)
+bgcolor(longSignal ? color.new(color.green, 85) : na, title = "Long conditions met")
+plotshape(longSignal and not longSignal[1], "Long signal", shape.triangleup, location.belowbar, color.green, size = size.small)
+
+alertcondition(longSignal and not longSignal[1], "NQ long setup", "NQ: price > VWAP, VWAP rising, 1h change >= min %")
