@@ -1,0 +1,45 @@
+{ NQ bar exporter - MultiCharts PowerLanguage indicator
+
+  Writes this chart's bars to CSV files, one file per year:
+    <Folder><FilePrefix><year>.csv   e.g. C:\NQdata\NQ_1min_2018.csv
+  with columns: date (YYYYMMDD), time (HHMM, bar close, chart time zone),
+  open, high, low, close, volume.
+
+  Only bars closing between StartTime and EndTime are written, which keeps
+  the files small enough to upload (about 5 MB per year for 1-minute bars).
+
+  Use: create the folder first (e.g. C:\NQdata), then add this indicator to
+  a 1-minute @NQ chart (Exchange time zone) loaded back to 12/01/2017. The
+  files are complete once the chart has finished calculating. Every time the
+  indicator recalculates, the files are deleted and written again from the
+  start, so they never contain duplicate rows. }
+
+Inputs:
+	Folder("C:\NQdata\"),   { must already exist; keep the trailing backslash }
+	FilePrefix("NQ_1min_"),
+	StartTime(800),          { first bar close time written (CT) }
+	EndTime(1515);           { last bar close time written (CT) }
+
+Variables:
+	FileName(""), BarYear(0), LastYear(0), Row(""), Y(0);
+
+{ Start from empty files on every (re)calculation }
+Once begin
+	for Y = 2000 to 2040 begin
+		FileDelete(Folder + FilePrefix + NumToStr(Y, 0) + ".csv");
+	end;
+end;
+
+if BarStatus(1) = 2 and Time >= StartTime and Time <= EndTime then begin
+	BarYear = Year(Date) + 1900;
+	FileName = Folder + FilePrefix + NumToStr(BarYear, 0) + ".csv";
+	if BarYear <> LastYear then begin
+		FileAppend(FileName, "date,time,open,high,low,close,volume" + NewLine);
+		LastYear = BarYear;
+	end;
+	Row = NumToStr(Date + 19000000, 0) + "," + NumToStr(Time, 0) + ","
+		+ NumToStr(Open, 2) + "," + NumToStr(High, 2) + ","
+		+ NumToStr(Low, 2) + "," + NumToStr(Close, 2) + ","
+		+ NumToStr(Ticks, 0);
+	FileAppend(FileName, Row + NewLine);
+end;
