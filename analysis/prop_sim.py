@@ -34,7 +34,7 @@ PRESETS = {
                          max_days=21, max_mnq=60),
     "TOPSTEP_50K": dict(start=50_000.0, target=3_000.0, mll=2_000.0, dll=1_000.0,
                         lock_above_start=0.0, consistency=None, min_days=2,
-                        max_days=63, max_mnq=50),   # no deadline; ~3 months simulated
+                        max_days=21, max_mnq=50),   # assume a 21-trading-day limit
 }
 RULES = PRESETS["APEX_50K_EOD"]
 COST_PER_NQ = 2.25 + 5.0                # commission + slippage per NQ round trip
