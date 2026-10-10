@@ -250,7 +250,16 @@ Break on this data reproduces 1,700 of the 1,743 MultiCharts trades on the same 
 
 v3 did not make the best combined account at any size tested.
 
-Reproduce with `python3 analysis/multi_strategy24.py` (about 1 minute).
+**MultiCharts confirmation of Overnight Bias** (`Backtesting Strategy Performance Report ONB v2.xlsx`,
+15-minute chart, 24-hour session, Bar Magnifier 1 minute, 1 NQ): 997 trades, 49% winners,
+average $278, profit factor 1.39, positive every year. It matches the Python test on 995
+of 997 trades (same day, side and entry price); the small P&L differences come from
+MultiCharts rounding the stop to the tick. All tables above give the same numbers with the
+MultiCharts list. Largest loss at 1 NQ: −$6,080 (2026), which is why it must be sized by
+`RiskPerTrade`.
+
+Reproduce with `python3 analysis/multi_strategy24.py` (about 1 minute; it uses the
+MultiCharts report when it is present).
 
 ## Files
 

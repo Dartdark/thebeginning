@@ -9,8 +9,12 @@ Vault Break and Opening Drive from their MultiCharts reports, and prints:
   - the best single combined account (sizes chosen on 2018-2022 starts)
   - days and cost to the first funded account for each way of running them
 
+Overnight Bias comes from its MultiCharts report (ONB_REPORT) when that file
+exists, otherwise from the Python version.
+
 Usage (from the repo root): python3 analysis/multi_strategy24.py   (about 1 minute)
 """
+import os
 import sys
 import itertools
 import numpy as np
@@ -24,6 +28,7 @@ from multi_strategy import V3_REPORT, zero_edge
 
 VB_REPORT = "Backtesting Strategy Performance Report VB v1.xlsx"
 OD_REPORT = "Backtesting Strategy Performance Report OD v1.xlsx"
+ONB_REPORT = "Backtesting Strategy Performance Report ONB v2.xlsx"
 ONB_RISK = 1100            # $ lost at the stop per Overnight Bias trade
 FEE = 50
 
@@ -98,7 +103,9 @@ if __name__ == "__main__":
     vb_py = execute(g, s, **kw)
     s, kw = vwap_pullback_adx24(g)
     T = {"V3": load_mc(g, V3_REPORT), "VB": load_mc(g, VB_REPORT), "OD": load_mc(g, OD_REPORT),
-         "ONB": overnight_bias24(g), "VPA": execute(g, s, **kw)}
+         "ONB": load_mc(g, ONB_REPORT) if os.path.exists(ONB_REPORT) else overnight_bias24(g),
+         "VPA": execute(g, s, **kw)}
+    print("Overnight Bias:", ONB_REPORT if os.path.exists(ONB_REPORT) else "Python version")
     m = T["VB"]
     same = len(set(zip(m.day, m.j0)) & set(zip(vb_py.day, vb_py.j0)))
     print(f"Check: Python Vault Break reproduces {same} of {len(m)} MultiCharts trades")

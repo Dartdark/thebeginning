@@ -30,9 +30,9 @@ RULES = dict(start=50_000.0, target=3_000.0, mll=2_000.0, dll=1_000.0,
 def load_mc(g, path):
     """A MultiCharts 'List of Trades' export as grid trades (any strategy on a
     minute chart with Bar Magnifier; the bar size is read from the report's
-    Settings sheet). Entry fills at the open of the bar it is stamped with;
-    the exit minute is the first 1-minute bar inside the exit stamp's bar
-    that trades the exit price (the stamp's close for market/EOD exits)."""
+    Settings sheet). The entry and exit minutes are the first 1-minute bars
+    inside their stamped bars that trade the entry / exit price (the bar's
+    open for market entries, the stamp's close for market/EOD exits)."""
     bar = _bar_minutes(path)
     raw = pd.read_excel(path, sheet_name="List of Trades", header=2)
     ent = raw[raw["Type"].astype(str).str.startswith("Entry")].reset_index(drop=True)
@@ -53,6 +53,14 @@ def load_mc(g, path):
     # time exit, strategy market exit) fills at the stamp's close
     kind = np.where([("Stop" in x) for x in sig], 0,
                     np.where([("Profit" in x) or ("Target" in x) for x in sig], 1, 2))
+    # entries: the first 1-minute bar inside the entry bar that trades the entry
+    # price (the bar's open for market orders, later for stop/limit entries)
+    epx = ent["Price"].to_numpy(float)
+    for i in np.nonzero(keep)[0]:
+        for j in range(j0[i], j0[i] + bar):
+            if g.l[day[i], j] <= epx[i] <= g.h[day[i], j]:
+                j0[i] = j
+                break
     for i in np.nonzero(keep)[0]:
         if kind[i] == 2:
             continue
