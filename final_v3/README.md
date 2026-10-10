@@ -6,9 +6,9 @@ Saved 2026-10-10. MultiCharts name: **NQ VWAP Fuck Em v3**.
 
 | File | What it is | MultiCharts type |
 |---|---|---|
-| `NQ_VWAP_Momentum_v3_FINAL.txt` | The strategy, with the final settings as defaults | Signal |
+| `NQ_VWAP_fuckem_v3_FINAL.txt` | The strategy, with the final settings as defaults | Signal |
 | `NQ_VWAP_15m_Anchored.txt` | VWAP line the strategy trades on (8:30 CT anchor, 15-min) | Indicator |
-| `NQ_Filter_Status.txt` | 10-day average range; green = OK to start a challenge | Indicator |
+| `NQ_vwap_fuckem_regime_Status.txt` | 10-day average range; green = OK to start a challenge | Indicator |
 
 ## Strategy rules
 
