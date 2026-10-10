@@ -28,6 +28,12 @@
 
   TradeLongs / TradeShorts switch each side on or off for testing.
 
+  FILTERS (0 = off)
+    MinVwapDistPct: skip entries where the close is less than this % beyond
+      VWAP in the trade's direction (weak, hugging-VWAP setups).
+    MinAvgRangePct: skip days whose average regular-session range over the
+      previous RangeDays days is below this % of price (quiet markets).
+
   GUARDRAILS
     One position at a time, max 4 trades a day, max 2 losing trades a day,
     no entries before 9:00 CT [10:00 ET] or after 14:30 CT [15:30 ET],
@@ -59,6 +65,10 @@ Inputs:
 	TradeLongs(true),       { take long entries }
 	TradeShorts(true),      { take short entries }
 	MaxTradeMins(0),        { time stop in minutes; 0 = off }
+	MinVwapDistPct(0),      { filter: min % distance beyond VWAP at entry; 0 = off }
+	MinAvgRangePct(0),      { filter: min avg daily range % over RangeDays; 0 = off }
+	RangeDays(10),
+	SessionEnd(1515),       { last regular-session bar used for the daily range }
 	MaxTradesPerDay(4),
 	MaxLossesPerDay(2),
 	NumContracts(1);
@@ -73,7 +83,12 @@ Variables:
 	InEntryWindow(false), CanEnter(false), TargetPts(0),
 	CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false),
 	IsEarlyClose(false), DayLastEntry(0), DayFlatten(0),
-	CurStopPts(0), CurBEPts(0);
+	CurStopPts(0), CurBEPts(0),
+	RthHi(0), RthLo(0), RthClose(0), RangeCount(0), RangeIdx(0), RangeSum(0), Ri(0),
+	AvgRange(0), DistPct(0), FilterOK(false);
+
+Arrays:
+	RangeHist[100](0);
 
 { ---------- Setup ---------- }
 Once begin
@@ -126,6 +141,35 @@ if VwapActive then begin
 		end;
 		BktOpen = false;
 	end;
+end;
+
+{ ---------- Daily range history for the volatility filter ---------- }
+{ Regular-session (after AnchorTime, up to SessionEnd) high/low/close per day.
+  When a new session starts, the finished day's range % goes into the history. }
+if MinsFromAnchor > 0 and Time <= SessionEnd
+	and (Date <> Date[1] or TimeToMinutes(Time[1]) <= TimeToMinutes(AnchorTime)) then begin
+	if RthClose > 0 then begin
+		RangeHist[RangeIdx] = (RthHi - RthLo) / RthClose * 100;
+		RangeIdx = Mod(RangeIdx + 1, RangeDays);
+		if RangeCount < RangeDays then RangeCount = RangeCount + 1;
+	end;
+	RthHi = High;
+	RthLo = Low;
+	RthClose = Close;
+end
+else if MinsFromAnchor > 0 and Time <= SessionEnd and RthClose > 0 then begin
+	RthHi = MaxList(RthHi, High);
+	RthLo = MinList(RthLo, Low);
+	RthClose = Close;
+end;
+
+AvgRange = 0;
+if RangeCount >= RangeDays then begin
+	RangeSum = 0;
+	for Ri = 0 to RangeDays - 1 begin
+		RangeSum = RangeSum + RangeHist[Ri];
+	end;
+	AvgRange = RangeSum / RangeDays;
 end;
 
 { ---------- Setups and triggers ---------- }
@@ -219,12 +263,19 @@ if CanEnter then begin
 		CurBEPts = BreakevenPts;
 	end;
 
-	if LongTrigger and TradeLongs then begin
+	{ filters, checked in the trade's direction }
+	DistPct = 0;
+	if VwapNow > 0 then DistPct = (Close - VwapNow) / VwapNow * 100;
+	if ShortTrigger then DistPct = -DistPct;
+	FilterOK = (MinVwapDistPct <= 0 or DistPct >= MinVwapDistPct)
+		and (MinAvgRangePct <= 0 or AvgRange >= MinAvgRangePct);
+
+	if LongTrigger and TradeLongs and FilterOK then begin
 		if UsePctExits then TargetPts = Close * LongTargetPct / 100
 		else TargetPts = LongTargetPts;
 		Buy ("Long") NumContracts contracts next bar at market;
 	end
-	else if ShortTrigger and TradeShorts then begin
+	else if ShortTrigger and TradeShorts and FilterOK then begin
 		if UsePctExits then TargetPts = Close * ShortTargetPct / 100
 		else TargetPts = ShortTargetPts;
 		SellShort ("Short") NumContracts contracts next bar at market;
