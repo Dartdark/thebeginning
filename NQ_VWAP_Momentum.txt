@@ -19,6 +19,10 @@
   Entry is at the open of the next bar.
 
   EXITS (points): long 80 stop / 40 target, short 80 stop / 50 target.
+  Optional time stop: MaxTradeMins > 0 closes a trade that has been open that
+  many minutes without reaching its stop or target.
+
+  TradeLongs / TradeShorts switch each side on or off for testing.
 
   GUARDRAILS
     One position at a time, max 4 trades a day, max 2 losing trades a day,
@@ -42,6 +46,9 @@ Inputs:
 	UseHolidayTimes(true),  { use the early-close times below on CME holiday half-days }
 	EarlyLastEntry(1100),   { holiday half-days: no new positions at or after this time }
 	EarlyFlattenTime(1145), { holiday half-days: close any open position at this time }
+	TradeLongs(true),       { take long entries }
+	TradeShorts(true),      { take short entries }
+	MaxTradeMins(0),        { time stop in minutes; 0 = off }
 	MaxTradesPerDay(4),
 	MaxLossesPerDay(2),
 	NumContracts(1);
@@ -191,11 +198,11 @@ if MarketPosition = 1 then TargetPts = LongTargetPts
 else if MarketPosition = -1 then TargetPts = ShortTargetPts;
 
 if CanEnter then begin
-	if LongTrigger then begin
+	if LongTrigger and TradeLongs then begin
 		TargetPts = LongTargetPts;
 		Buy ("Long") NumContracts contracts next bar at market;
 	end
-	else if ShortTrigger then begin
+	else if ShortTrigger and TradeShorts then begin
 		TargetPts = ShortTargetPts;
 		SellShort ("Short") NumContracts contracts next bar at market;
 	end;
@@ -206,6 +213,13 @@ end;
 SetStopContract;
 SetStopLoss(StopPts * BigPointValue);
 SetProfitTarget(TargetPts * BigPointValue);
+
+{ Time stop: close at the next bar's open once the trade has run MaxTradeMins }
+if MaxTradeMins > 0 and MarketPosition <> 0
+	and BarsSinceEntry * BarInterval >= MaxTradeMins then begin
+	Sell ("Time LX") next bar at market;
+	BuyToCover ("Time SX") next bar at market;
+end;
 
 { Flat at the day's flatten time (earlier on holiday half-days) }
 if Time >= DayFlatten and MarketPosition <> 0 then begin
