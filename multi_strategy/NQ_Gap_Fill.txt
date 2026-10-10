@@ -1,0 +1,75 @@
+{ NQ Gap Fill - MultiCharts PowerLanguage signal  (EXPERIMENTAL)
+
+  Fades the overnight gap at the regular-session open, back toward the
+  previous session's close. Built from scratch; it trades 8:30-10:00 CT, before
+  the other strategies, and its daily results are uncorrelated with them.
+
+  Apply to a 5-minute NQ / MNQ chart, Exchange time zone (Central), whose
+  session includes the pre-open (at least the 8:25-8:30 CT bar), e.g. CME
+  24-hour.
+
+  RULE (one trade a day)
+    Previous close = close of the last bar at or before PrevCloseTime (15:15 CT)
+    on the previous trading date.
+    At the close of the 8:30 CT bar: gap % = (close / previous close - 1) x 100.
+      MinGapPct <= gap <= MaxGapPct      ->  sell short next bar at market
+      -MaxGapPct <= gap <= -MinGapPct    ->  buy next bar at market
+    Target and stop: both the gap size in points (target = the gap filled).
+    Exit: at the close of the 10:00 CT bar.
+
+  SIZE: RiskPerTrade > 0 sizes each trade so that a stop-out loses at most
+  RiskPerTrade dollars: contracts = Floor(RiskPerTrade / (gap points x point
+  value)); the trade is skipped when that is 0. RiskPerTrade = 0 trades
+  NumContracts.
+
+  Python test, 2018-2026, after costs: 1,273 trades, 54% winners. At 1 NQ:
+  average $86, profit factor 1.17. With $1,000 fixed risk: average $48, but
+  only $12 from 2023 on, so the edge with sensible sizing is thin. Not part of
+  the recommended plan yet; confirm with a MultiCharts backtest first. }
+
+Inputs:
+	OpenTime(830),          { decision at the close of this bar }
+	ExitTime(1000),
+	PrevCloseTime(1515),
+	MinGapPct(0.2),
+	MaxGapPct(1.0),
+	RiskPerTrade(0),        { $ per trade; 0 = use NumContracts }
+	NumContracts(1);
+
+Variables:
+	PrevClose(0), LastRthClose(0), GapPct(0), GapPts(0), Qty(0), TradedToday(false),
+	TgtPts(0);
+
+{ New date: yesterday's last close at/before PrevCloseTime becomes the reference }
+if Date <> Date[1] then begin
+	if LastRthClose > 0 then PrevClose = LastRthClose;
+	TradedToday = false;
+end;
+if Time <= PrevCloseTime and Time > OpenTime then LastRthClose = Close;
+
+if Time = OpenTime and PrevClose > 0 and MarketPosition = 0 and TradedToday = false then begin
+	GapPct = (Close / PrevClose - 1) * 100;
+	GapPts = AbsValue(Close - PrevClose);
+	Qty = NumContracts;
+	if RiskPerTrade > 0 and GapPts > 0 then
+		Qty = Floor(RiskPerTrade / (GapPts * BigPointValue));
+	if Qty >= 1 and AbsValue(GapPct) >= MinGapPct and AbsValue(GapPct) <= MaxGapPct then begin
+		TgtPts = GapPts;
+		if GapPct > 0 then
+			SellShort ("Gap S") Qty contracts next bar at market
+		else
+			Buy ("Gap L") Qty contracts next bar at market;
+		TradedToday = true;
+	end;
+end;
+
+SetStopContract;
+if TgtPts > 0 then begin
+	SetStopLoss(TgtPts * BigPointValue);
+	SetProfitTarget(TgtPts * BigPointValue);
+end;
+
+if MarketPosition <> 0 and Time >= ExitTime then begin
+	Sell ("Gap LX") this bar on close;
+	BuyToCover ("Gap SX") this bar on close;
+end;
