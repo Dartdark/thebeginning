@@ -41,8 +41,9 @@ def load_mc(g, path):
     dates = et.dt.strftime("%Y%m%d").astype(int).to_numpy()
     day = np.searchsorted(g.dates, dates)
     keep = (day < g.D) & (g.dates[np.minimum(day, g.D - 1)] == dates)
-    j0 = j_of((et.dt.hour * 100 + et.dt.minute).to_numpy()) - (bar - 1)
-    xs = j_of((xt.dt.hour * 100 + xt.dt.minute).to_numpy())
+    jof = getattr(g, "jof", j_of)
+    j0 = jof((et.dt.hour * 100 + et.dt.minute).to_numpy()) - (bar - 1)
+    xs = jof((xt.dt.hour * 100 + xt.dt.minute).to_numpy())
     side = np.where(ent["Type"].astype(str).str.contains("Long"), 1, -1)
     px = ex["Price"].to_numpy(float)
     contracts = ent["Contracts"].to_numpy(float)
@@ -79,8 +80,8 @@ def _bar_minutes(path):
 
 def paths(g, t):
     """Per-day equity paths of a trade list, $ per 1 NQ after costs (times the
-    trade's qty column, if any), relative to the day's start. Returns (worst, real), each (days, NMIN)."""
-    worst = np.zeros((g.D, NMIN)); real = np.zeros((g.D, NMIN))
+    trade's qty column, if any), relative to the day's start. Returns (worst, real), each shaped like the grid."""
+    worst = np.zeros(g.o.shape); real = np.zeros(g.o.shape)
     qty = t["qty"] if "qty" in t else np.ones(len(t))
     for day, j0, j1, side, entry, px, kind, q in zip(t["day"], t["j0"], t["j1"], t["side"],
                                                      t["entry"], t["exit"], t["kind"], qty):
@@ -107,7 +108,7 @@ class Book:
 
     def combine(self, mnq):
         """mnq: {name: size in MNQ}. Returns (worst, real) in $."""
-        w = np.zeros((self.g.D, NMIN)); r = np.zeros((self.g.D, NMIN))
+        w = np.zeros(self.g.o.shape); r = np.zeros(self.g.o.shape)
         for name, s in mnq.items():
             if s:
                 w += self.p[name][0] * s / 10.0
@@ -122,11 +123,12 @@ def _day(w, r, bal, floor, rules):
     lim = max(floor, dll_lvl)
     hit = np.nonzero(bal + w <= lim)[0]
     win = np.nonzero(bal + r - start >= rules["target"])[0]
-    jb = hit[0] if len(hit) else NMIN
-    jp = win[0] if len(win) else NMIN
+    n = len(w)
+    jb = hit[0] if len(hit) else n
+    jp = win[0] if len(win) else n
     if jp < jb:
         return "pass", bal + r[jp]
-    if jb < NMIN:
+    if jb < n:
         if floor >= dll_lvl:
             return "fail", floor
         return None, dll_lvl

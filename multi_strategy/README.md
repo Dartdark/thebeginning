@@ -197,6 +197,61 @@ Vault Break / Opening Drive 0.02.
 Reproduce with:
 `python3 analysis/multi_strategy.py --VB "Backtesting Strategy Performance Report VB v1.xlsx" --DRIVE "Backtesting Strategy Performance Report OD v1.xlsx"`
 
+## Full 24-hour data: Overnight Bias and VWAP Pullback ADX (2026-10-10)
+
+The overnight exports (`NQ_1min_ON_<year>.csv`, 15:16–07:59 CT) joined to the
+08:00–15:15 files give the full day (`analysis/grid24.py`). Check: the Python Vault
+Break on this data reproduces 1,700 of the 1,743 MultiCharts trades on the same bar
+(same P&L on 99.4%); most of the rest are January 2018, before MultiCharts' first trade.
+
+| Per NQ, after costs | Trades | Win rate | Avg trade | Profit factor | Avg 2018–22 | Avg 2023–26 |
+|---|---|---|---|---|---|---|
+| Overnight Bias (`NQ_Overnight_Bias.txt`) | 997 | 49% | $280 | 1.40 | $245 | $321 |
+| VWAP Pullback ADX (`NQ_VWAP_Pullback_ADX.txt`) | 881 | 71% | −$17 | 0.87 | −$29 | −$2 |
+
+- **VWAP Pullback ADX has no edge** as specified, even with the midnight VWAP and ADX
+  over all bars: the 5-bar-high target on 1-minute bars is only a few points away
+  (wins average $159, losses $514). Dropped.
+- **Overnight Bias is robust:** positive every year, profit factor 1.23–1.47 across
+  nearby settings, longs 1.41 and shorts 1.39. Its daily P&L correlates 0.20–0.25
+  with v3, Vault Break and Opening Drive.
+- **Its stop must be sized in dollars.** The stop is 30% of the daily range: about
+  $700 per NQ in 2018 and $2,850 in 2026, more than the whole $2,000 drawdown at
+  8 MNQ. Sized so a stop-out costs about $1,100 (`RiskPerTrade 1100` on MNQ, about
+  6 MNQ in 2026), one account passes **37%** (no edge 26%), steady at 38% for
+  2018–22 starts and 36% for 2023–26.
+
+**Per account** (v3 10, Vault Break 12, Opening Drive 10 MNQ, Overnight Bias $1,100 a trade):
+
+| | Any day | 2018–22 | 2023–26 | Worst start year |
+|---|---|---|---|---|
+| v3 | 33% | 29% | 38% | 5% |
+| Vault Break | 41% | 33% | 51% | 14% |
+| Opening Drive | 33% | 30% | 37% | 21% |
+| Overnight Bias | 37% | 38% | 36% | 22% |
+
+**One combined account** (sizes chosen on 2018–22 starts):
+
+| Account | Any day | 2018–22 | 2023–26 | Worst start year |
+|---|---|---|---|---|
+| Vault Break 8 MNQ + Overnight Bias $1,100 | **44%** | 43% | 45% | 29% |
+| Vault Break 6 + Opening Drive 4 MNQ + Overnight Bias $1,100 | 43% | 43% | 44% | 25% |
+
+**Time and cost to the first funded account** (a failed account is replaced the next day):
+
+| Plan | Typical days | 1 in 5 takes | Worst 5% | Cost |
+|---|---|---|---|---|
+| One at a time: Vault Break alone | 19 | 51+ | 141+ | $158 |
+| One at a time: Overnight Bias alone | 20 | 39+ | 67+ | $121 |
+| **One at a time: one account, Vault Break + Overnight Bias** | **13** | **25+** | **46+** | **$116** |
+| One at a time: one account, Vault Break + Opening Drive + Overnight Bias | 11 | 21+ | 35+ | $113 |
+| Two at once: Vault Break + Overnight Bias | 12 | 26+ | 49+ | $188 |
+| Three at once: Vault Break + Opening Drive + Overnight Bias | 9 | 17+ | 35+ | $235 |
+
+v3 did not make the best combined account at any size tested.
+
+Reproduce with `python3 analysis/multi_strategy24.py` (about 1 minute).
+
 ## Files
 
 | File | What it is |
@@ -204,6 +259,10 @@ Reproduce with:
 | `NQ_Opening_Drive.txt` | Opening Drive signal |
 | `NQ_Vault_Break.txt` | Vault Break signal (your spec) |
 | `NQ_Gap_Fill.txt` | Gap Fill signal, experimental |
+| `NQ_Overnight_Bias.txt` | Overnight Bias signal (your spec), with `RiskPerTrade` sizing |
+| `NQ_VWAP_Pullback_ADX.txt` | VWAP Pullback ADX signal (your spec), no edge in testing |
+| `../analysis/multi_strategy24.py` | Full-day tables: Overnight Bias, combined account, first funded account |
+| `../analysis/grid24.py`, `../analysis/candidates24.py` | 24-hour data grid and the overnight strategies in Python |
 | `../analysis/multi_strategy.py` | Reproduces every table above (about 15 s) |
 | `../analysis/grid.py` | 1-minute grid and execution engine (matches the v3 MultiCharts trades on 99.4%) |
 | `../analysis/portfolio.py` | Apex challenges for one or several strategies on real days, minute by minute; loads any MultiCharts trade list |

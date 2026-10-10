@@ -22,10 +22,11 @@
   The stop and target are sent as distances from the signal bar's close,
   which on a 1-minute chart is almost always the next bar's open.
 
-  Python test (8:30 or 8:00 VWAP, ADX without overnight bars, 2018-2026):
-  about 1,000 trades, 72% winners, profit factor 0.96 - no edge. That test
-  cannot use the midnight VWAP or overnight ADX, so the MultiCharts backtest
-  is the real test. }
+  Python test on the full 24-hour 1-minute data (midnight VWAP, ADX over
+  all bars, 2018-2026, per NQ, after costs): 881 trades, 71% winners,
+  average -$17, profit factor 0.87 - no edge (0.90 with the VWAP from 8:30).
+  Wins average $159 and losses $514: the 5-bar-high target on 1-minute bars
+  is only a few points away. Not part of the plan. }
 
 Inputs:
 	ORStart(830),

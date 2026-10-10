@@ -26,8 +26,18 @@
   The daily ATR is built from this chart's bars, one true range per weekday
   (calendar date, midnight to midnight), like Vault Break.
 
-  Not tested in Python: the exported 1-minute data starts at 8:00 CT, so it
-  has no overnight range. The MultiCharts backtest is the test. }
+  SIZE: the stop is 30% of the daily range, so in dollars it grows with the
+  market (per NQ: about $700 in 2018, $2,850 in 2026). RiskPerTrade > 0 sizes
+  every trade so a stop-out loses at most that much:
+    contracts = Floor(RiskPerTrade / (stop points x point value)),
+  and skips the trade when that is 0. Live on an MNQ chart: RiskPerTrade
+  1100 (about 6 MNQ at 2026 prices). Backtest on NQ: RiskPerTrade 0 and
+  NumContracts 1, so the report is per NQ like the others.
+
+  Python test on the full 24-hour 1-minute data (2018-2026, per NQ, after
+  costs): 997 trades, 49% winners, average $280, profit factor 1.40,
+  positive every year; 1.23-1.47 across nearby settings. Confirm with a
+  MultiCharts backtest. }
 
 Inputs:
 	ONStart(2300),          { overnight range starts after this time (previous evening) }
@@ -41,6 +51,7 @@ Inputs:
 	RewardRisk(3),
 	LastEntryTime(1400),
 	ExitTime(1430),
+	RiskPerTrade(0),        { $ lost at the stop; 0 = trade NumContracts }
 	UseHolidayTimes(true),
 	EarlyLastEntry(1100),
 	EarlyExitTime(1130),
@@ -51,7 +62,7 @@ Variables:
 	OpenPx(0), ORHi(0), ORLo(0), ORDone(false), Bias(0), PosInRange(0),
 	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
 	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
-	StopPts(0), ADXv(0), TradedToday(false), DayStartTrades(0),
+	StopPts(0), ADXv(0), TradedToday(false), DayStartTrades(0), Qty(0),
 	CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false), IsEarlyClose(false),
 	DayLastEntry(0), DayExit(0);
 
@@ -170,10 +181,14 @@ TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
 if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition = 0
 	and Time >= OREnd and Time < DayLastEntry and ADXv > ADXMin then begin
 	StopPts = StopAtrPct * ATRv;
-	if Bias = 1 then
-		Buy ("ON Bias L") NumContracts contracts next bar at ORHi stop
-	else
-		SellShort ("ON Bias S") NumContracts contracts next bar at ORLo stop;
+	Qty = NumContracts;
+	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
+	if Qty >= 1 then begin
+		if Bias = 1 then
+			Buy ("ON Bias L") Qty contracts next bar at ORHi stop
+		else
+			SellShort ("ON Bias S") Qty contracts next bar at ORLo stop;
+	end;
 end;
 
 { ---------- Exits ---------- }
