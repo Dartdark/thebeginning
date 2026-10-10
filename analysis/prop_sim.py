@@ -1,8 +1,12 @@
-"""Topstep 50K Trading Combine simulator for a MultiCharts trade list.
+"""Prop firm evaluation simulator (Apex 50K EOD / Topstep 50K) for a
+MultiCharts trade list.
 
 Same bag-of-days method as the Colab notebook (whole real days resampled
 with replacement, intraday order kept, floor checked at each trade's MAE),
-with the Topstep rules the notebook's Apex presets do not model:
+and two account presets. APEX_50K_EOD mirrors the notebook's preset
+($3,000 target, $2,000 EOD-trailing drawdown that stops trailing at
+start + $100, $1,000 daily loss limit, 21 trading days). TOPSTEP_50K adds
+the Topstep rules the notebook does not model:
 
   - Maximum Loss Limit $2,000, trailing the END-OF-DAY balance high,
     enforced on live equity, and locking once it reaches the start balance.
@@ -17,15 +21,22 @@ with the Topstep rules the notebook's Apex presets do not model:
 
 Verify every number against help.topstep.com before relying on it.
 
-Usage: python3 analysis/topstep_sim.py <report.xlsx> [more reports...]
+Usage: python3 analysis/prop_sim.py <report.xlsx> [more reports...]
+       (edit RULES below to switch account preset)
 """
 import sys
 import numpy as np
 import pandas as pd
 
-RULES = dict(start=50_000.0, target=3_000.0, mll=2_000.0, dll=1_000.0,
-             consistency=None, min_days=2, max_mnq=50)
-HORIZON_DAYS = 63                       # ~3 months of subscription
+PRESETS = {
+    "APEX_50K_EOD": dict(start=50_000.0, target=3_000.0, mll=2_000.0, dll=1_000.0,
+                         lock_above_start=100.0, consistency=None, min_days=1,
+                         max_days=21, max_mnq=60),
+    "TOPSTEP_50K": dict(start=50_000.0, target=3_000.0, mll=2_000.0, dll=1_000.0,
+                        lock_above_start=0.0, consistency=None, min_days=2,
+                        max_days=63, max_mnq=50),   # no deadline; ~3 months simulated
+}
+RULES = PRESETS["APEX_50K_EOD"]
 COST_PER_NQ = 2.25 + 5.0                # commission + slippage per NQ round trip
 SEED = 42
 
@@ -59,11 +70,12 @@ def day_bag(t, first=None, last=None):
             for d in days]
 
 
-def one_challenge(bag, rng, mnq, r=RULES):
+def one_challenge(bag, rng, mnq, r=None):
+    r = r or RULES
     scale = mnq / 10.0                  # backtest is 1 NQ = 10 MNQ
     bal = r["start"]; hwm = bal; floor = bal - r["mll"]
     best_day = 0.0; trade_days = 0
-    for day in range(1, HORIZON_DAYS + 1):
+    for day in range(1, r["max_days"] + 1):
         pnls, maes = bag[rng.integers(len(bag))]
         day_start = bal
         dll_level = day_start - r["dll"] if r["dll"] else -np.inf
@@ -86,10 +98,10 @@ def one_challenge(bag, rng, mnq, r=RULES):
             if profit >= need and trade_days >= r["min_days"]:
                 return "pass", day
         best_day = max(best_day, bal - day_start)
-        if bal > hwm:                   # end-of-day trailing, locks at start balance
+        if bal > hwm:                   # end-of-day trailing, then locks
             hwm = bal
-            floor = min(hwm - r["mll"], r["start"])
-    return "fail_time", HORIZON_DAYS
+            floor = min(hwm - r["mll"], r["start"] + r["lock_above_start"])
+    return "fail_time", r["max_days"]
 
 
 def simulate(bag, mnq, n=4000, seed=SEED):
