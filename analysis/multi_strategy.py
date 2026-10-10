@@ -12,6 +12,11 @@ MultiCharts report is given, e.g.
 Every challenge is started on a real day and run on the real days that
 followed (portfolio.py), at the account sizes in ACCOUNTS.
 
+Extra strategies that only exist as MultiCharts reports can be added with
+  --VPA report.xlsx   (VWAP Pullback ADX, multi_strategy/NQ_VWAP_Pullback_ADX.txt)
+  --ONB report.xlsx   (Overnight Bias, multi_strategy/NQ_Overnight_Bias.txt)
+each as its own 10 MNQ account.
+
 Usage (from the repo root): python3 analysis/multi_strategy.py [--NAME report.xlsx ...]
 Takes about a minute.
 """
@@ -80,6 +85,8 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     for k in ("VB", "DRIVE", "GAP"):
         ap.add_argument(f"--{k}", help=f"MultiCharts report for {k} (default: Python version)")
+    ap.add_argument("--VPA", help="MultiCharts report for VWAP Pullback ADX")
+    ap.add_argument("--ONB", help="MultiCharts report for Overnight Bias")
     args = ap.parse_args()
 
     g = Grid("NQ_1min_*.csv")
@@ -87,6 +94,12 @@ if __name__ == "__main__":
     for k in ("VB", "DRIVE", "GAP"):
         if getattr(args, k):
             T[k] = load_mc(g, getattr(args, k))
+            print(f"{k}: MultiCharts report {getattr(args, k)}")
+    for k, label in (("VPA", "E  VWAP Pullback ADX 10 MNQ"), ("ONB", "F  Overnight Bias 10 MNQ")):
+        if getattr(args, k):
+            T[k] = load_mc(g, getattr(args, k))
+            ACCOUNTS[label] = {k: 10}
+            PLANS.append(PLANS[2] + [label])
             print(f"{k}: MultiCharts report {getattr(args, k)}")
 
     print("\nPer strategy, per NQ (GAP per trade at its $ risk), after costs")

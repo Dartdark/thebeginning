@@ -29,10 +29,11 @@ RULES = dict(start=50_000.0, target=3_000.0, mll=2_000.0, dll=1_000.0,
 
 def load_mc(g, path):
     """A MultiCharts 'List of Trades' export as grid trades (any strategy on a
-    5-minute chart with Bar Magnifier). Entry fills at the open of the
-    5-minute bar it is stamped with; the exit minute is the first 1-minute bar
-    inside the exit stamp's 5-minute bar that trades the exit price (the
-    stamp's close for market/EOD exits)."""
+    minute chart with Bar Magnifier; the bar size is read from the report's
+    Settings sheet). Entry fills at the open of the bar it is stamped with;
+    the exit minute is the first 1-minute bar inside the exit stamp's bar
+    that trades the exit price (the stamp's close for market/EOD exits)."""
+    bar = _bar_minutes(path)
     raw = pd.read_excel(path, sheet_name="List of Trades", header=2)
     ent = raw[raw["Type"].astype(str).str.startswith("Entry")].reset_index(drop=True)
     ex = raw[raw["Type"].astype(str).str.startswith("Exit")].reset_index(drop=True)
@@ -40,27 +41,40 @@ def load_mc(g, path):
     dates = et.dt.strftime("%Y%m%d").astype(int).to_numpy()
     day = np.searchsorted(g.dates, dates)
     keep = (day < g.D) & (g.dates[np.minimum(day, g.D - 1)] == dates)
-    j0 = j_of((et.dt.hour * 100 + et.dt.minute).to_numpy()) - 4
+    j0 = j_of((et.dt.hour * 100 + et.dt.minute).to_numpy()) - (bar - 1)
     xs = j_of((xt.dt.hour * 100 + xt.dt.minute).to_numpy())
     side = np.where(ent["Type"].astype(str).str.contains("Long"), 1, -1)
     px = ex["Price"].to_numpy(float)
     contracts = ent["Contracts"].to_numpy(float)
     j1 = xs.copy()
     sig = ex["Signal"].astype(str).to_numpy()
+    # stop/target exits fill inside the stamp's bar; any other exit (EOD,
+    # time exit, strategy market exit) fills at the stamp's close
+    kind = np.where([("Stop" in x) for x in sig], 0,
+                    np.where([("Profit" in x) or ("Target" in x) for x in sig], 1, 2))
     for i in np.nonzero(keep)[0]:
-        if "EOD" in sig[i] or "Time" in sig[i]:
+        if kind[i] == 2:
             continue
-        for j in range(max(xs[i] - 4, j0[i]), xs[i] + 1):
+        for j in range(max(xs[i] - (bar - 1), j0[i]), xs[i] + 1):
             if g.l[day[i], j] <= px[i] <= g.h[day[i], j]:
                 j1[i] = j
                 break
     t = pd.DataFrame(dict(day=day, j0=j0, j1=j1, side=side, entry=ent["Price"].to_numpy(float),
-                          exit=px, kind=np.where([("Stop" in s) for s in sig], 0, 1),
+                          exit=px, kind=kind,
                           pnl=ent["Profit ($)"].to_numpy(float) / contracts))[keep]
-    t["kind"] = np.where([("EOD" in s) or ("Time" in s) for s in sig[keep]], 2, t["kind"])
     t["date"] = g.ts[t["day"].to_numpy()]
     t["net"] = t["pnl"] - COST
     return t.reset_index(drop=True)
+
+
+def _bar_minutes(path):
+    """Chart bar size in minutes from the report's Settings sheet (default 5)."""
+    try:
+        st = pd.read_excel(path, sheet_name="Settings", header=None)
+        comp = dict(zip(st[0].astype(str), st[1].astype(str))).get("Compression", "5 Minutes")
+        return int(comp.split()[0]) if "Minute" in comp else 5
+    except Exception:
+        return 5
 
 
 def paths(g, t):
