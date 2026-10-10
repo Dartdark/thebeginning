@@ -19,6 +19,10 @@
   Entry is at the open of the next bar.
 
   EXITS (points): long 80 stop / 40 target, short 80 stop / 50 target.
+  UsePctExits = true sizes the stop and targets as a % of the entry price
+  instead of fixed points, so they mean the same thing at NQ 7,000 and
+  NQ 28,000. BreakevenPts / BreakevenPct > 0 moves the stop to the entry
+  price once a trade is that far in profit.
   Optional time stop: MaxTradeMins > 0 closes a trade that has been open that
   many minutes without reaching its stop or target.
 
@@ -40,6 +44,12 @@ Inputs:
 	StopPts(80),
 	LongTargetPts(40),
 	ShortTargetPts(50),
+	UsePctExits(false),     { true = stop/targets as % of entry price (below) }
+	StopPct(0.30),
+	LongTargetPct(0.15),
+	ShortTargetPct(0.19),
+	BreakevenPts(0),        { points mode: move stop to entry after this profit; 0 = off }
+	BreakevenPct(0),        { % mode: move stop to entry after this % profit; 0 = off }
 	NoTradeUntil(900),      { first allowed entry time: 9:00 CT = 10:00 ET }
 	LastEntryTime(1430),    { no new positions at or after this time: 14:30 CT = 15:30 ET }
 	FlattenTime(1455),      { close any open position at this time: 14:55 CT = 15:55 ET }
@@ -62,7 +72,8 @@ Variables:
 	DayStartTrades(0), CountedTrades(0), LastNetProfit(0), TradesToday(0), LossesToday(0),
 	InEntryWindow(false), CanEnter(false), TargetPts(0),
 	CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false),
-	IsEarlyClose(false), DayLastEntry(0), DayFlatten(0);
+	IsEarlyClose(false), DayLastEntry(0), DayFlatten(0),
+	CurStopPts(0), CurBEPts(0);
 
 { ---------- Setup ---------- }
 Once begin
@@ -70,6 +81,8 @@ Once begin
 		RaiseRunTimeError("Use a minute chart whose interval divides evenly into " + NumToStr(VwapBarMins, 0) + " (5 minutes recommended).");
 	MomentumBars = MaxList(1, Round(MomentumMins / BarInterval, 0));
 	TargetPts = LongTargetPts;
+	CurStopPts = StopPts;
+	CurBEPts = BreakevenPts;
 end;
 
 { ---------- 15-minute VWAP anchored at the open ---------- }
@@ -194,25 +207,36 @@ CanEnter = InEntryWindow
 	and TradesToday < MaxTradesPerDay
 	and LossesToday < MaxLossesPerDay;
 
-if MarketPosition = 1 then TargetPts = LongTargetPts
-else if MarketPosition = -1 then TargetPts = ShortTargetPts;
-
+{ Stop, target and breakeven distances are fixed when the entry order is
+  placed (from this bar's close in % mode) and held for the whole trade. }
 if CanEnter then begin
+	if UsePctExits then begin
+		CurStopPts = Close * StopPct / 100;
+		CurBEPts = Close * BreakevenPct / 100;
+	end
+	else begin
+		CurStopPts = StopPts;
+		CurBEPts = BreakevenPts;
+	end;
+
 	if LongTrigger and TradeLongs then begin
-		TargetPts = LongTargetPts;
+		if UsePctExits then TargetPts = Close * LongTargetPct / 100
+		else TargetPts = LongTargetPts;
 		Buy ("Long") NumContracts contracts next bar at market;
 	end
 	else if ShortTrigger and TradeShorts then begin
-		TargetPts = ShortTargetPts;
+		if UsePctExits then TargetPts = Close * ShortTargetPct / 100
+		else TargetPts = ShortTargetPts;
 		SellShort ("Short") NumContracts contracts next bar at market;
 	end;
 end;
 
 { ---------- Exits ---------- }
-{ Stop and target in points, per contract. Called every bar so they stay active. }
+{ Stop, target and breakeven, per contract. Called every bar so they stay active. }
 SetStopContract;
-SetStopLoss(StopPts * BigPointValue);
+SetStopLoss(CurStopPts * BigPointValue);
 SetProfitTarget(TargetPts * BigPointValue);
+if CurBEPts > 0 then SetBreakEven(CurBEPts * BigPointValue);
 
 { Time stop: close at the next bar's open once the trade has run MaxTradeMins }
 if MaxTradeMins > 0 and MarketPosition <> 0
