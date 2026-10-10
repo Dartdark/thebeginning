@@ -137,7 +137,11 @@ from one strategy and a short from another would cancel each other.)
 | Prior-day high/low breakout or failure | Profit factor about 1.0–1.09, unstable |
 | Late-day momentum (at 14:00, trade the day's direction to 15:10) | Profit factor 1.26, but only works at exactly 14:00 (13:30 and 14:30 fail) and passes 16–22% from 2023 on |
 
-All of them are in `analysis/candidates.py`.
+| Vault Break short side (mirror below the open, below VWAP) | Profit factor 0.97–1.05, losing 2023–26; lowers the combined account from 44% to 36–39% |
+| Vault Break capped at 1 or 2 trades a day | No better than 3 (combined account 42% vs 43%) |
+| VWAP Pullback ADX (your spec) | Profit factor 0.87 on the full 24-hour data |
+
+All of them are in `analysis/candidates.py` and `analysis/candidates24.py`.
 
 ## Next steps
 
