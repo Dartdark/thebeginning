@@ -152,6 +152,33 @@ All of them are in `analysis/candidates.py`.
 3. Optional: re-export the 1-minute bars with `StartTime(0)` to test Vault Break with
    the true midnight anchor in Python as well.
 
+## MultiCharts confirmation (2026-10-10)
+
+Reports: `Backtesting Strategy Performance Report OD v1.xlsx` (Opening Drive) and
+`Backtesting Strategy Performance Report VB v1.xlsx` (Vault Break), 1 NQ, 2018–2026.
+
+- **Opening Drive matches the Python test exactly:** the same 1,352 trades (same days,
+  sides and entry bars, identical P&L), all entered at 9:05. MultiCharts did not skip
+  the early entries, so whatever causes v3's 9:50 start is specific to v3.
+- **Vault Break was run on a 5-minute chart** (Settings: Compression 5 Minutes), not
+  30 minutes as specified, so it checks the entry rule every 5 minutes: 2,012 trades,
+  64% winners, average $65, profit factor 1.17 ($76 for 2018–22, $53 for 2023–26).
+  Re-run it on a 30-minute chart before trusting these numbers.
+- Both reports had Bar Magnifier disabled. That makes no difference to Opening Drive,
+  which has a stop but no target; the Vault Break re-run should switch it on.
+
+The plan with the MultiCharts lists for Vault Break and Opening Drive
+(`python3 analysis/multi_strategy.py --VB "...VB v1.xlsx" --DRIVE "...OD v1.xlsx"`):
+
+| Accounts started together | Any day | Line green | Starts 2023–26 | Worst start year |
+|---|---|---|---|---|
+| A (v3 only) | 33% | 40% | 38% | 5% |
+| A + B | 53% | 61% | 55% | 26% |
+| **A + B + C** | **68%** | **71%** | **73%** | **34%** |
+
+Per account: Vault Break (5-minute chart) 37% (no edge: 31%), Opening Drive 33%.
+Daily P&L correlation: v3 / Vault Break 0.24, every other pair 0.09 or below.
+
 ## Files
 
 | File | What it is |
