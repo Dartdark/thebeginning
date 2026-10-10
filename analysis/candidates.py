@@ -203,3 +203,81 @@ def prior_level(g, mode="break", first=900, last=1300, flat=1455, stop_pts=40.0,
     first_ = m & (np.cumsum(m, axis=1) == 1)
     s = _sig(g, first_, b, np.where(lg, 1, -1), stop_pts, tgt_pts, flat)
     return s, dict(max_trades=max_trades)
+
+
+def adx(h, l, c, n=14):
+    """Wilder ADX(n) of one continuous price series (1-D arrays, NaN-free)."""
+    up = np.diff(h, prepend=h[0]); dn = -np.diff(l, prepend=l[0])
+    pdm = np.where((up > dn) & (up > 0), up, 0.0)
+    ndm = np.where((dn > up) & (dn > 0), dn, 0.0)
+    pc = np.r_[c[0], c[:-1]]
+    tr = np.maximum(h - l, np.maximum(np.abs(h - pc), np.abs(l - pc)))
+    def wild(x):
+        return pd.Series(x).ewm(alpha=1 / n, adjust=False).mean().to_numpy()
+    atr = wild(tr)
+    with np.errstate(all="ignore"):
+        pdi = 100 * wild(pdm) / atr; ndi = 100 * wild(ndm) / atr
+        dx = 100 * np.abs(pdi - ndi) / (pdi + ndi)
+    return wild(np.nan_to_num(dx))
+
+
+def grid_adx(g, n=14):
+    """ADX(n) of the 1-minute bars as one continuous series (all days back to
+    back, as on a chart), returned as a (D, NMIN) array."""
+    ok = ~np.isnan(g.c)
+    a = adx(g.h[ok], g.l[ok], g.c[ok], n)
+    out = np.full(g.c.shape, np.nan); out[ok] = a
+    return out
+
+
+def vwap_pullback_adx(g, or_start=830, or_end=900, anchor=830, adx_n=14, adx_min=20,
+                      tp_bars=5, sl_bars=20, last_entry=1430, flat=1455, max_trades=1,
+                      bar_mins=1):
+    """The user's VWAP pullback with ADX gate (longs only), on bar_mins bars.
+    After a close above the 08:30-09:00 high: wait for a bar that touches VWAP
+    (low <= VWAP), then a close above VWAP with ADX > adx_min and ADX not
+    rising (ADX <= previous ADX) -> buy next bar. Target = highest high of the
+    last tp_bars bars, stop = lowest low of the last sl_bars bars (both fixed
+    at the signal), flat at `flat`. Skips a signal when the next open is not
+    between the stop and the target."""
+    if bar_mins == 1:
+        H, L, C = g.h, g.l, g.c
+        J = np.arange(NMIN)
+    else:
+        b = g.bars(bar_mins)
+        H, L, C, J = b["h"], b["l"], b["c"], b["j"]
+    vw = g.vwap_from(anchor)[:, J]
+    ok = ~np.isnan(C)
+    A = np.full(C.shape, np.nan)
+    A[ok] = adx(H[ok], L[ok], C[ok], adx_n)
+    t = J + 480; t = (t // 60) * 100 + t % 60
+    rows = []; skipped = 0
+    for d in range(g.D):
+        h, l, c = H[d], L[d], C[d]
+        orm = (t > or_start) & (t <= or_end)
+        with np.errstate(all="ignore"):
+            orh = np.nanmax(h[orm])
+        if np.isnan(orh):
+            continue
+        broke = pulled = False
+        for k in np.nonzero((t > or_end) & (t < last_entry))[0]:
+            if np.isnan(c[k]) or np.isnan(vw[d, k]) or J[k] >= g.last_j[d]:
+                continue
+            if not broke:
+                broke = c[k] > orh
+                continue
+            if l[k] <= vw[d, k]:
+                pulled = True
+            if pulled and c[k] > vw[d, k] and A[d, k] > adx_min and A[d, k] <= A[d, k - 1]:
+                tp = np.nanmax(h[max(0, k - tp_bars + 1):k + 1])
+                sl = np.nanmin(l[max(0, k - sl_bars + 1):k + 1])
+                nxt = g.o[d, J[k] + 1]
+                if not (sl < nxt < tp):
+                    skipped += 1
+                    continue
+                rows.append((d, J[k], 1, nxt - sl, tp - nxt, j_of(flat)))
+                if max_trades == 1:
+                    break
+    s = pd.DataFrame(rows, columns=["day", "dj", "side", "stop", "target", "exit_j"])
+    s.attrs["skipped"] = skipped
+    return s, dict(max_trades=max_trades)

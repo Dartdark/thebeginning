@@ -1,0 +1,189 @@
+{ NQ Overnight Bias - MultiCharts PowerLanguage signal (long and short)
+
+  Written from the trader's specification:
+    Overnight range: 23:00 CT (previous evening) to 8:30 CT.
+    Bias: the 8:30 open in the top third of the overnight range -> longs only;
+          in the bottom third -> shorts only; middle third -> no trade.
+          (An open above the overnight high counts as top third, below the
+          low as bottom third.)
+    Opening range: the 8:30-8:45 CT bar (first 15-minute bar).
+    Long:  long bias, ADX > 20, price breaks the opening-range high.
+    Short: short bias, ADX > 20, price breaks the opening-range low.
+    One trade a day.
+    Stop: 30% of the average daily true range of the last 15 sessions.
+    Target: 3 x the stop (3R). Otherwise flat at 14:30 CT.
+
+  Apply to a 15-minute NQ / MNQ chart, Exchange time zone (Central), with the
+  CME 24-hour session (needed for the overnight range and the ADX). Bar
+  Magnifier on at 1 minute. Load at least 25 trading days before the
+  backtest start so the ATR is ready.
+
+  The break is a stop order at the opening-range high / low, placed after
+  each 15-minute bar close from 8:45 CT while ADX > 20, so it fills inside
+  the bar the price trades through the level (at the open if it gaps
+  through). LastEntryTime (not in the spec) stops new orders; default 14:00.
+
+  The daily ATR is built from this chart's bars, one true range per weekday
+  (calendar date, midnight to midnight), like Vault Break.
+
+  Not tested in Python: the exported 1-minute data starts at 8:00 CT, so it
+  has no overnight range. The MultiCharts backtest is the test. }
+
+Inputs:
+	ONStart(2300),          { overnight range starts after this time (previous evening) }
+	ONEnd(830),             { ... and ends at the close of this bar }
+	OREnd(845),             { opening range = bars closing after ONEnd up to this time }
+	BiasFraction(0.3333),   { top / bottom part of the overnight range }
+	ADXLength(14),
+	ADXMin(20),
+	AtrDays(15),
+	StopAtrPct(0.30),       { stop = 30% of the average daily range }
+	RewardRisk(3),
+	LastEntryTime(1400),
+	ExitTime(1430),
+	UseHolidayTimes(true),
+	EarlyLastEntry(1100),
+	EarlyExitTime(1130),
+	NumContracts(1);
+
+Variables:
+	ONHi(0), ONLo(0), InON(false), ONReady(false),
+	OpenPx(0), ORHi(0), ORLo(0), ORDone(false), Bias(0), PosInRange(0),
+	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
+	StopPts(0), ADXv(0), TradedToday(false), DayStartTrades(0),
+	CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false), IsEarlyClose(false),
+	DayLastEntry(0), DayExit(0);
+
+Arrays:
+	TrHist[100](0);
+
+ADXv = ADX(ADXLength);
+
+{ ---------- Daily ATR (weekdays, calendar dates) ---------- }
+if Date <> Date[1] then begin
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	DayHi = High;
+	DayLo = Low;
+	{ new trading day }
+	OpenPx = 0;
+	ORHi = 0;
+	ORLo = 0;
+	ORDone = false;
+	Bias = 0;
+	DayStartTrades = TotalTrades;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+
+{ ---------- Overnight range: after ONStart in the evening, to ONEnd ---------- }
+if Time > ONStart and InON = false then begin
+	InON = true;
+	ONReady = false;
+	ONHi = High;
+	ONLo = Low;
+end
+else if InON then begin
+	ONHi = MaxList(ONHi, High);
+	ONLo = MinList(ONLo, Low);
+	if Time = ONEnd then begin
+		InON = false;
+		ONReady = true;
+	end;
+end;
+
+{ ---------- Open, bias and opening range ---------- }
+if ONReady and OpenPx = 0 and Time > ONEnd and Time <= OREnd then begin
+	OpenPx = Open;
+	if ONHi > ONLo then begin
+		PosInRange = (OpenPx - ONLo) / (ONHi - ONLo);
+		if PosInRange >= 1 - BiasFraction then Bias = 1
+		else if PosInRange <= BiasFraction then Bias = -1;
+	end;
+end;
+if OpenPx > 0 and Time > ONEnd and Time <= OREnd then begin
+	if ORHi = 0 then begin
+		ORHi = High;
+		ORLo = Low;
+	end
+	else begin
+		ORHi = MaxList(ORHi, High);
+		ORLo = MinList(ORLo, Low);
+	end;
+	if Time = OREnd then ORDone = true;
+end;
+
+{ ---------- CME holiday half-days ---------- }
+CalMonth = Month(Date);
+CalDay = DayOfMonth(Date);
+CalDow = DayOfWeek(Date);
+CalYear = Year(Date) + 1900;
+IsWeekday = CalDow >= 1 and CalDow <= 5;
+IsEarlyClose = UseHolidayTimes and (
+	(CalMonth = 1 and ((CalDay = 1 and IsWeekday) or (CalDay = 2 and CalDow = 1)))
+	or (CalMonth = 1 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 2 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 5 and CalDow = 1 and CalDay >= 25)
+	or (CalMonth = 6 and CalYear >= 2022 and ((CalDay = 19 and IsWeekday)
+		or (CalDay = 18 and CalDow = 5) or (CalDay = 20 and CalDow = 1)))
+	or (CalMonth = 7 and (((CalDay = 3 or CalDay = 4) and IsWeekday) or (CalDay = 5 and CalDow = 1)))
+	or (CalMonth = 9 and CalDow = 1 and CalDay <= 7)
+	or (CalMonth = 11 and CalDow = 4 and CalDay >= 22 and CalDay <= 28)
+	or (CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29)
+	or (CalMonth = 12 and (((CalDay = 24 or CalDay = 25) and IsWeekday) or (CalDay = 26 and CalDow = 1))));
+if IsEarlyClose then begin
+	DayLastEntry = EarlyLastEntry;
+	DayExit = EarlyExitTime;
+end
+else begin
+	DayLastEntry = LastEntryTime;
+	DayExit = ExitTime;
+end;
+
+{ ---------- Entries: stop orders at the opening-range high / low ---------- }
+{ a trade that opened and closed inside one bar still counts }
+TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
+
+if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition = 0
+	and Time >= OREnd and Time < DayLastEntry and ADXv > ADXMin then begin
+	StopPts = StopAtrPct * ATRv;
+	if Bias = 1 then
+		Buy ("ON Bias L") NumContracts contracts next bar at ORHi stop
+	else
+		SellShort ("ON Bias S") NumContracts contracts next bar at ORLo stop;
+end;
+
+{ ---------- Exits ---------- }
+SetStopContract;
+if StopPts > 0 then begin
+	SetStopLoss(StopPts * BigPointValue);
+	SetProfitTarget(RewardRisk * StopPts * BigPointValue);
+end;
+
+if MarketPosition <> 0 and Time >= DayExit then begin
+	Sell ("ON Bias LX") this bar on close;
+	BuyToCover ("ON Bias SX") this bar on close;
+end;

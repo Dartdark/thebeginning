@@ -86,7 +86,7 @@ class Grid:
         """k-minute OHLCV arrays (D, K), aligned to 08:00 and stamped at their close
         (k=5: 08:05 .. 15:15; k=30: 08:30 .. 15:00), with "j" = the last 1-minute
         column of each bar. A bar with no data is NaN."""
-        ks = np.arange(1, NMIN // k + 1) * k
+        ks = np.arange(1, (NMIN - 1) // k + 1) * k
         o = np.full((self.D, len(ks)), np.nan); h = o.copy(); l = o.copy(); c = o.copy(); v = o.copy()
         rows = np.arange(self.D)
         for i, je in enumerate(ks):
