@@ -23,7 +23,10 @@
   GUARDRAILS
     One position at a time, max 4 trades a day, max 2 losing trades a day,
     no entries before 9:00 CT [10:00 ET] or after 14:30 CT [15:30 ET],
-    flat at 14:55 CT [15:55 ET]. }
+    flat at 14:55 CT [15:55 ET].
+    On CME holiday early-close days (the market halts around 12:00 CT) there is
+    no 14:55 bar, so those days use earlier times: no entries from 11:00 CT,
+    flat at 11:45 CT. }
 
 Inputs:
 	AnchorTime(830),        { VWAP anchor: 8:30 CT = 9:30 ET open }
@@ -36,6 +39,9 @@ Inputs:
 	NoTradeUntil(900),      { first allowed entry time: 9:00 CT = 10:00 ET }
 	LastEntryTime(1430),    { no new positions at or after this time: 14:30 CT = 15:30 ET }
 	FlattenTime(1455),      { close any open position at this time: 14:55 CT = 15:55 ET }
+	UseHolidayTimes(true),  { use the early-close times below on CME holiday half-days }
+	EarlyLastEntry(1100),   { holiday half-days: no new positions at or after this time }
+	EarlyFlattenTime(1145), { holiday half-days: close any open position at this time }
 	MaxTradesPerDay(4),
 	MaxLossesPerDay(2),
 	NumContracts(1);
@@ -47,7 +53,9 @@ Variables:
 	PctChange(0),
 	LongSetup(false), ShortSetup(false), LongTrigger(false), ShortTrigger(false),
 	DayStartTrades(0), CountedTrades(0), LastNetProfit(0), TradesToday(0), LossesToday(0),
-	InEntryWindow(false), CanEnter(false), TargetPts(0);
+	InEntryWindow(false), CanEnter(false), TargetPts(0),
+	CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false),
+	IsEarlyClose(false), DayLastEntry(0), DayFlatten(0);
 
 { ---------- Setup ---------- }
 Once begin
@@ -120,6 +128,39 @@ ShortSetup = VwapActive and VwapCount >= 2
 LongTrigger = LongSetup and Close < Open and not (Close[1] < Open[1]);
 ShortTrigger = ShortSetup and Close > Open and not (Close[1] > Open[1]);
 
+{ ---------- CME holiday early closes ---------- }
+{ Equity index futures halt around 12:00 CT (12:15 on some days) on these
+  days, so the normal 14:55 flatten bar never comes. DayOfWeek: 0 = Sunday. }
+CalMonth = Month(Date);
+CalDay = DayOfMonth(Date);
+CalDow = DayOfWeek(Date);
+CalYear = Year(Date) + 1900;
+IsWeekday = CalDow >= 1 and CalDow <= 5;
+
+IsEarlyClose = UseHolidayTimes and (
+	(CalMonth = 1 and ((CalDay = 1 and IsWeekday) or (CalDay = 2 and CalDow = 1)))     { New Year's Day }
+	or (CalMonth = 1 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)                 { MLK Day }
+	or (CalMonth = 2 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)                 { Presidents Day }
+	or (CalMonth = 5 and CalDow = 1 and CalDay >= 25)                                  { Memorial Day }
+	or (CalMonth = 6 and CalYear >= 2022 and ((CalDay = 19 and IsWeekday)
+		or (CalDay = 18 and CalDow = 5) or (CalDay = 20 and CalDow = 1)))              { Juneteenth }
+	or (CalMonth = 7 and (((CalDay = 3 or CalDay = 4) and IsWeekday)
+		or (CalDay = 5 and CalDow = 1)))                                               { July 3rd / 4th }
+	or (CalMonth = 9 and CalDow = 1 and CalDay <= 7)                                   { Labor Day }
+	or (CalMonth = 11 and CalDow = 4 and CalDay >= 22 and CalDay <= 28)                { Thanksgiving }
+	or (CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29)                { day after Thanksgiving }
+	or (CalMonth = 12 and (((CalDay = 24 or CalDay = 25) and IsWeekday)
+		or (CalDay = 26 and CalDow = 1))));                                            { Christmas Eve / Day }
+
+if IsEarlyClose then begin
+	DayLastEntry = EarlyLastEntry;
+	DayFlatten = EarlyFlattenTime;
+end
+else begin
+	DayLastEntry = LastEntryTime;
+	DayFlatten = FlattenTime;
+end;
+
 { ---------- Daily guardrail counters ---------- }
 if Date <> Date[1] then begin
 	DayStartTrades = TotalTrades;
@@ -139,7 +180,7 @@ if MarketPosition <> 0 then TradesToday = TradesToday + 1;
 { ---------- Entries ---------- }
 { Orders fill at the next bar's open, so a decision on the bar closing at 9:00 CT
   fills at 9:00 CT and the last decision (bar closing 14:25 CT) fills at 14:25 CT. }
-InEntryWindow = Time >= NoTradeUntil and Time < LastEntryTime;
+InEntryWindow = Time >= NoTradeUntil and Time < DayLastEntry;
 
 CanEnter = InEntryWindow
 	and MarketPosition = 0
@@ -166,8 +207,8 @@ SetStopContract;
 SetStopLoss(StopPts * BigPointValue);
 SetProfitTarget(TargetPts * BigPointValue);
 
-{ Flat at FlattenTime }
-if Time >= FlattenTime and MarketPosition <> 0 then begin
+{ Flat at the day's flatten time (earlier on holiday half-days) }
+if Time >= DayFlatten and MarketPosition <> 0 then begin
 	Sell ("EOD LX") this bar on close;
 	BuyToCover ("EOD SX") this bar on close;
 end;
