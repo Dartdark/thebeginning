@@ -71,12 +71,28 @@ def day_bag(t, first=None, last=None):
 
 
 def one_challenge(bag, rng, mnq, r=None):
+    """One challenge on days drawn at random (with replacement) from the bag."""
+    return run_challenge(lambda: bag[rng.integers(len(bag))], mnq, r)
+
+
+def challenge_from(days, start, mnq, r=None):
+    """One challenge on the real days that followed `start` (an index into days).
+    Returns None if the data ends before the challenge could finish."""
+    it = iter(days[start:])
+    out = run_challenge(lambda: next(it, None), mnq, r)
+    return out
+
+
+def run_challenge(next_day, mnq, r=None):
     r = r or RULES
     scale = mnq / 10.0                  # backtest is 1 NQ = 10 MNQ
     bal = r["start"]; hwm = bal; floor = bal - r["mll"]
     best_day = 0.0; trade_days = 0
     for day in range(1, r["max_days"] + 1):
-        pnls, maes = bag[rng.integers(len(bag))]
+        nd = next_day()
+        if nd is None:
+            return None
+        pnls, maes = nd
         day_start = bal
         dll_level = day_start - r["dll"] if r["dll"] else -np.inf
         if len(pnls):
