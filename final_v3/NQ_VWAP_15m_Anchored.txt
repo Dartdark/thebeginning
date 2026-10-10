@@ -1,0 +1,78 @@
+{ NQ 15-minute anchored VWAP - MultiCharts PowerLanguage indicator
+
+  Plots the same VWAP the NQ VWAP Momentum signal trades on: anchored at the
+  8:30 CT [9:30 ET] open and built from 15-minute bars.
+
+  Works on a 15-minute chart, and on a 5-minute (or 1/3-minute) chart, where it
+  shows the 15-minute VWAP. On the faster chart the line steps, updating only
+  when each 15-minute bar completes, exactly as the strategy sees it.
+
+  Times are HHMM in the chart's time zone (Exchange = Central).
+  Green = VWAP rising vs the prior 15-minute value, red = falling. }
+
+Inputs:
+	AnchorTime(830),        { VWAP anchor: 8:30 CT = 9:30 ET open }
+	VwapBarMins(15),        { VWAP is built from bars of this many minutes }
+	UpColor(Green),
+	DownColor(Red);
+
+Variables:
+	BarVol(0), MinsFromAnchor(0),
+	VwapActive(false), BktOpen(false), BktHigh(0), BktLow(0), BktClose(0), BktVol(0),
+	CumPV(0), CumVol(0), VwapNow(0), VwapPrev(0), VwapCount(0);
+
+Once begin
+	if BarType <> 1 or Mod(VwapBarMins, BarInterval) <> 0 then
+		RaiseRunTimeError("Use a minute chart whose interval divides evenly into " + NumToStr(VwapBarMins, 0) + ".");
+end;
+
+{ ---------- 15-minute VWAP anchored at the open (same logic as the signal) ---------- }
+if BarType < 2 then BarVol = Ticks else BarVol = Volume;
+MinsFromAnchor = TimeToMinutes(Time) - TimeToMinutes(AnchorTime);
+
+if MinsFromAnchor > 0 and (Date <> Date[1] or TimeToMinutes(Time[1]) <= TimeToMinutes(AnchorTime)) then begin
+	VwapActive = true;
+	BktOpen = false;
+	CumPV = 0;
+	CumVol = 0;
+	VwapNow = 0;
+	VwapPrev = 0;
+	VwapCount = 0;
+end
+else if MinsFromAnchor <= 0 then
+	VwapActive = false;
+
+if VwapActive then begin
+	if BktOpen = false then begin
+		BktHigh = High;
+		BktLow = Low;
+		BktVol = 0;
+		BktOpen = true;
+	end;
+	BktHigh = MaxList(BktHigh, High);
+	BktLow = MinList(BktLow, Low);
+	BktClose = Close;
+	BktVol = BktVol + BarVol;
+
+	if Mod(MinsFromAnchor, VwapBarMins) = 0 then begin
+		CumPV = CumPV + (BktHigh + BktLow + BktClose) / 3 * BktVol;
+		CumVol = CumVol + BktVol;
+		if CumVol > 0 then begin
+			VwapPrev = VwapNow;
+			VwapNow = CumPV / CumVol;
+			VwapCount = VwapCount + 1;
+		end;
+		BktOpen = false;
+	end;
+end;
+
+{ ---------- Plot ---------- }
+if VwapActive and VwapCount >= 1 then begin
+	Plot1(VwapNow, "VWAP15");
+	if VwapCount >= 2 then begin
+		if VwapNow > VwapPrev then SetPlotColor(1, UpColor)
+		else if VwapNow < VwapPrev then SetPlotColor(1, DownColor);
+	end;
+end
+else
+	NoPlot(1);   { blank before the anchor instead of carrying yesterday's value forward }

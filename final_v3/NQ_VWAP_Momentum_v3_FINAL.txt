@@ -1,0 +1,309 @@
+{ NQ VWAP Momentum - FINAL VERSION v3 - MultiCharts PowerLanguage signal
+
+  Saved 2026-10-10. Same code as the backtested "NQ VWAP Fuck Em v3"; only the
+  input defaults are set to the final settings (MinVwapDistPct 0.35,
+  MinAvgRangePct 0), so a freshly inserted copy starts correctly.
+  NumContracts: 1 for NQ backtests, 10 when trading live on MNQ.
+  Trading rules and backtest results: final_v3/README.md
+
+  Apply to a 5-minute NQ / MNQ chart. All times are HHMM in the CHART's time
+  zone and default to US Central (CME exchange time). Eastern equivalents are
+  shown in brackets.
+
+  VWAP
+    Anchored at the 8:30 CT [9:30 ET] open and built from 15-minute bars. The 15-minute bars
+    are assembled from the 5-minute bars, so the value matches a 15-minute
+    chart's VWAP and only updates when each 15-minute bar completes.
+
+  LONG setup                              SHORT setup
+    1. Close above VWAP                     1. Close below VWAP
+    2. VWAP rising over the last 15 min     2. VWAP falling over the last 15 min
+    3. Price up >= 0.1% over the last hour  3. Price down >= 0.1% over the last hour
+  LONG trigger: first red candle of a       SHORT trigger: first green candle of a
+    pullback (red after a non-red candle)     bounce (green after a non-green candle)
+    while the setup is true                   while the setup is true
+  Entry is at the open of the next bar.
+
+  EXITS (points): long 80 stop / 40 target, short 80 stop / 50 target.
+  UsePctExits = true sizes the stop and targets as a % of the entry price
+  instead of fixed points, so they mean the same thing at NQ 7,000 and
+  NQ 28,000. BreakevenPts / BreakevenPct > 0 moves the stop to the entry
+  price once a trade is that far in profit.
+  Optional time stop: MaxTradeMins > 0 closes a trade that has been open that
+  many minutes without reaching its stop or target.
+
+  TradeLongs / TradeShorts switch each side on or off for testing.
+
+  FILTERS (0 = off)
+    MinVwapDistPct: skip entries where the close is less than this % beyond
+      VWAP in the trade's direction (weak, hugging-VWAP setups).
+    MinAvgRangePct: skip days whose average regular-session range over the
+      previous RangeDays days is below this % of price (quiet markets).
+
+  GUARDRAILS
+    One position at a time, max 4 trades a day, max 2 losing trades a day,
+    no entries before 9:00 CT [10:00 ET] or after 14:30 CT [15:30 ET],
+    flat at 14:55 CT [15:55 ET].
+    On CME holiday early-close days (the market halts around 12:00 CT) there is
+    no 14:55 bar, so those days use earlier times: no entries from 11:00 CT,
+    flat at 11:45 CT. }
+
+Inputs:
+	AnchorTime(830),        { VWAP anchor: 8:30 CT = 9:30 ET open }
+	VwapBarMins(15),        { VWAP is built from bars of this many minutes }
+	MomentumMins(60),       { price change lookback in minutes }
+	MinChangePct(0.1),      { minimum % move over MomentumMins }
+	StopPts(80),
+	LongTargetPts(40),
+	ShortTargetPts(50),
+	UsePctExits(false),     { true = stop/targets as % of entry price (below) }
+	StopPct(0.30),
+	LongTargetPct(0.15),
+	ShortTargetPct(0.19),
+	BreakevenPts(0),        { points mode: move stop to entry after this profit; 0 = off }
+	BreakevenPct(0),        { % mode: move stop to entry after this % profit; 0 = off }
+	NoTradeUntil(900),      { first allowed entry time: 9:00 CT = 10:00 ET }
+	LastEntryTime(1430),    { no new positions at or after this time: 14:30 CT = 15:30 ET }
+	FlattenTime(1455),      { close any open position at this time: 14:55 CT = 15:55 ET }
+	UseHolidayTimes(true),  { use the early-close times below on CME holiday half-days }
+	EarlyLastEntry(1100),   { holiday half-days: no new positions at or after this time }
+	EarlyFlattenTime(1145), { holiday half-days: close any open position at this time }
+	TradeLongs(true),       { take long entries }
+	TradeShorts(true),      { take short entries }
+	MaxTradeMins(0),        { time stop in minutes; 0 = off }
+	MinVwapDistPct(0.35),   { filter: min % distance beyond VWAP at entry; 0 = off }
+	MinAvgRangePct(0),      { filter: min avg daily range % over RangeDays; 0 = off }
+	RangeDays(10),
+	SessionEnd(1515),       { last regular-session bar used for the daily range }
+	MaxTradesPerDay(4),
+	MaxLossesPerDay(2),
+	NumContracts(1);
+
+Variables:
+	MomentumBars(0), BarVol(0), MinsFromAnchor(0),
+	VwapActive(false), BktOpen(false), BktHigh(0), BktLow(0), BktClose(0), BktVol(0),
+	CumPV(0), CumVol(0), VwapNow(0), VwapPrev(0), VwapCount(0),
+	PctChange(0),
+	LongSetup(false), ShortSetup(false), LongTrigger(false), ShortTrigger(false),
+	DayStartTrades(0), CountedTrades(0), LastNetProfit(0), TradesToday(0), LossesToday(0),
+	InEntryWindow(false), CanEnter(false), TargetPts(0),
+	CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false),
+	IsEarlyClose(false), DayLastEntry(0), DayFlatten(0),
+	CurStopPts(0), CurBEPts(0),
+	RthHi(0), RthLo(0), RthClose(0), RangeCount(0), RangeIdx(0), RangeSum(0), Ri(0),
+	AvgRange(0), DistPct(0), FilterOK(false);
+
+Arrays:
+	RangeHist[100](0);
+
+{ ---------- Setup ---------- }
+Once begin
+	if BarType <> 1 or Mod(VwapBarMins, BarInterval) <> 0 then
+		RaiseRunTimeError("Use a minute chart whose interval divides evenly into " + NumToStr(VwapBarMins, 0) + " (5 minutes recommended).");
+	MomentumBars = MaxList(1, Round(MomentumMins / BarInterval, 0));
+	TargetPts = LongTargetPts;
+	CurStopPts = StopPts;
+	CurBEPts = BreakevenPts;
+end;
+
+{ ---------- 15-minute VWAP anchored at the open ---------- }
+if BarType < 2 then BarVol = Ticks else BarVol = Volume;
+MinsFromAnchor = TimeToMinutes(Time) - TimeToMinutes(AnchorTime);
+
+{ Start a fresh VWAP on the first bar that closes after the anchor time }
+if MinsFromAnchor > 0 and (Date <> Date[1] or TimeToMinutes(Time[1]) <= TimeToMinutes(AnchorTime)) then begin
+	VwapActive = true;
+	BktOpen = false;
+	CumPV = 0;
+	CumVol = 0;
+	VwapNow = 0;
+	VwapPrev = 0;
+	VwapCount = 0;
+end
+else if MinsFromAnchor <= 0 then
+	VwapActive = false;
+
+if VwapActive then begin
+	{ add this bar to the current 15-minute bar }
+	if BktOpen = false then begin
+		BktHigh = High;
+		BktLow = Low;
+		BktVol = 0;
+		BktOpen = true;
+	end;
+	BktHigh = MaxList(BktHigh, High);
+	BktLow = MinList(BktLow, Low);
+	BktClose = Close;
+	BktVol = BktVol + BarVol;
+
+	{ 15-minute bar complete: fold it into the VWAP }
+	if Mod(MinsFromAnchor, VwapBarMins) = 0 then begin
+		CumPV = CumPV + (BktHigh + BktLow + BktClose) / 3 * BktVol;
+		CumVol = CumVol + BktVol;
+		if CumVol > 0 then begin
+			VwapPrev = VwapNow;
+			VwapNow = CumPV / CumVol;
+			VwapCount = VwapCount + 1;
+		end;
+		BktOpen = false;
+	end;
+end;
+
+{ ---------- Daily range history for the volatility filter ---------- }
+{ Regular-session (after AnchorTime, up to SessionEnd) high/low/close per day.
+  When a new session starts, the finished day's range % goes into the history. }
+if MinsFromAnchor > 0 and Time <= SessionEnd
+	and (Date <> Date[1] or TimeToMinutes(Time[1]) <= TimeToMinutes(AnchorTime)) then begin
+	if RthClose > 0 then begin
+		RangeHist[RangeIdx] = (RthHi - RthLo) / RthClose * 100;
+		RangeIdx = Mod(RangeIdx + 1, RangeDays);
+		if RangeCount < RangeDays then RangeCount = RangeCount + 1;
+	end;
+	RthHi = High;
+	RthLo = Low;
+	RthClose = Close;
+end
+else if MinsFromAnchor > 0 and Time <= SessionEnd and RthClose > 0 then begin
+	RthHi = MaxList(RthHi, High);
+	RthLo = MinList(RthLo, Low);
+	RthClose = Close;
+end;
+
+AvgRange = 0;
+if RangeCount >= RangeDays then begin
+	RangeSum = 0;
+	for Ri = 0 to RangeDays - 1 begin
+		RangeSum = RangeSum + RangeHist[Ri];
+	end;
+	AvgRange = RangeSum / RangeDays;
+end;
+
+{ ---------- Setups and triggers ---------- }
+PctChange = 0;
+if CurrentBar > MomentumBars and Close[MomentumBars] > 0 then
+	PctChange = (Close / Close[MomentumBars] - 1) * 100;
+
+{ VwapCount >= 2 means there are two completed 15-minute VWAP values to compare }
+LongSetup = VwapActive and VwapCount >= 2
+	and Close > VwapNow
+	and VwapNow > VwapPrev
+	and PctChange >= MinChangePct;
+
+ShortSetup = VwapActive and VwapCount >= 2
+	and Close < VwapNow
+	and VwapNow < VwapPrev
+	and PctChange <= -MinChangePct;
+
+{ first red candle of a pullback toward VWAP / first green candle of a bounce toward VWAP }
+LongTrigger = LongSetup and Close < Open and not (Close[1] < Open[1]);
+ShortTrigger = ShortSetup and Close > Open and not (Close[1] > Open[1]);
+
+{ ---------- CME holiday early closes ---------- }
+{ Equity index futures halt around 12:00 CT (12:15 on some days) on these
+  days, so the normal 14:55 flatten bar never comes. DayOfWeek: 0 = Sunday. }
+CalMonth = Month(Date);
+CalDay = DayOfMonth(Date);
+CalDow = DayOfWeek(Date);
+CalYear = Year(Date) + 1900;
+IsWeekday = CalDow >= 1 and CalDow <= 5;
+
+IsEarlyClose = UseHolidayTimes and (
+	(CalMonth = 1 and ((CalDay = 1 and IsWeekday) or (CalDay = 2 and CalDow = 1)))     { New Year's Day }
+	or (CalMonth = 1 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)                 { MLK Day }
+	or (CalMonth = 2 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)                 { Presidents Day }
+	or (CalMonth = 5 and CalDow = 1 and CalDay >= 25)                                  { Memorial Day }
+	or (CalMonth = 6 and CalYear >= 2022 and ((CalDay = 19 and IsWeekday)
+		or (CalDay = 18 and CalDow = 5) or (CalDay = 20 and CalDow = 1)))              { Juneteenth }
+	or (CalMonth = 7 and (((CalDay = 3 or CalDay = 4) and IsWeekday)
+		or (CalDay = 5 and CalDow = 1)))                                               { July 3rd / 4th }
+	or (CalMonth = 9 and CalDow = 1 and CalDay <= 7)                                   { Labor Day }
+	or (CalMonth = 11 and CalDow = 4 and CalDay >= 22 and CalDay <= 28)                { Thanksgiving }
+	or (CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29)                { day after Thanksgiving }
+	or (CalMonth = 12 and (((CalDay = 24 or CalDay = 25) and IsWeekday)
+		or (CalDay = 26 and CalDow = 1))));                                            { Christmas Eve / Day }
+
+if IsEarlyClose then begin
+	DayLastEntry = EarlyLastEntry;
+	DayFlatten = EarlyFlattenTime;
+end
+else begin
+	DayLastEntry = LastEntryTime;
+	DayFlatten = FlattenTime;
+end;
+
+{ ---------- Daily guardrail counters ---------- }
+if Date <> Date[1] then begin
+	DayStartTrades = TotalTrades;
+	LossesToday = 0;
+end;
+
+{ TotalTrades counts closed trades; one position at a time means one new trade per change }
+if TotalTrades > CountedTrades then begin
+	if NetProfit < LastNetProfit then LossesToday = LossesToday + 1;
+	CountedTrades = TotalTrades;
+	LastNetProfit = NetProfit;
+end;
+
+TradesToday = TotalTrades - DayStartTrades;
+if MarketPosition <> 0 then TradesToday = TradesToday + 1;
+
+{ ---------- Entries ---------- }
+{ Orders fill at the next bar's open, so a decision on the bar closing at 9:00 CT
+  fills at 9:00 CT and the last decision (bar closing 14:25 CT) fills at 14:25 CT. }
+InEntryWindow = Time >= NoTradeUntil and Time < DayLastEntry;
+
+CanEnter = InEntryWindow
+	and MarketPosition = 0
+	and TradesToday < MaxTradesPerDay
+	and LossesToday < MaxLossesPerDay;
+
+{ Stop, target and breakeven distances are fixed when the entry order is
+  placed (from this bar's close in % mode) and held for the whole trade. }
+if CanEnter then begin
+	if UsePctExits then begin
+		CurStopPts = Close * StopPct / 100;
+		CurBEPts = Close * BreakevenPct / 100;
+	end
+	else begin
+		CurStopPts = StopPts;
+		CurBEPts = BreakevenPts;
+	end;
+
+	{ filters, checked in the trade's direction }
+	DistPct = 0;
+	if VwapNow > 0 then DistPct = (Close - VwapNow) / VwapNow * 100;
+	if ShortTrigger then DistPct = -DistPct;
+	FilterOK = (MinVwapDistPct <= 0 or DistPct >= MinVwapDistPct)
+		and (MinAvgRangePct <= 0 or AvgRange >= MinAvgRangePct);
+
+	if LongTrigger and TradeLongs and FilterOK then begin
+		if UsePctExits then TargetPts = Close * LongTargetPct / 100
+		else TargetPts = LongTargetPts;
+		Buy ("Long") NumContracts contracts next bar at market;
+	end
+	else if ShortTrigger and TradeShorts and FilterOK then begin
+		if UsePctExits then TargetPts = Close * ShortTargetPct / 100
+		else TargetPts = ShortTargetPts;
+		SellShort ("Short") NumContracts contracts next bar at market;
+	end;
+end;
+
+{ ---------- Exits ---------- }
+{ Stop, target and breakeven, per contract. Called every bar so they stay active. }
+SetStopContract;
+SetStopLoss(CurStopPts * BigPointValue);
+SetProfitTarget(TargetPts * BigPointValue);
+if CurBEPts > 0 then SetBreakEven(CurBEPts * BigPointValue);
+
+{ Time stop: close at the next bar's open once the trade has run MaxTradeMins }
+if MaxTradeMins > 0 and MarketPosition <> 0
+	and BarsSinceEntry * BarInterval >= MaxTradeMins then begin
+	Sell ("Time LX") next bar at market;
+	BuyToCover ("Time SX") next bar at market;
+end;
+
+{ Flat at the day's flatten time (earlier on holiday half-days) }
+if Time >= DayFlatten and MarketPosition <> 0 then begin
+	Sell ("EOD LX") this bar on close;
+	BuyToCover ("EOD SX") this bar on close;
+end;

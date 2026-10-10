@@ -1,0 +1,65 @@
+{ NQ filter status - MultiCharts PowerLanguage indicator
+
+  Plots the average regular-session daily range over the previous RangeDays
+  days, as % of price, calculated exactly as the strategy's MinAvgRangePct
+  filter does, with lines at the thresholds.
+
+    green line  = average range at or above Threshold (volatile market)
+    red line    = below Threshold (quiet market)
+
+  Use it to time prop challenges: start a challenge only while the line is
+  green. In the 2018-2026 backtest, challenges started in volatile periods
+  passed noticeably more often. If the strategy itself has MinAvgRangePct
+  set, it also takes no trades while the line is red.
+
+  Add it to the same 5-minute NQ chart (Exchange time zone). It plots in its
+  own panel; do not set it to "Same as Instrument". }
+
+Inputs:
+	AnchorTime(830),        { regular session start (CT) }
+	SessionEnd(1515),       { last regular-session bar used for the daily range }
+	RangeDays(10),
+	Threshold(1.50),        { the strategy's MinAvgRangePct }
+	AltThreshold(1.30),     { second level shown for comparison; 0 = hide }
+	OnColor(Green),
+	OffColor(Red);
+
+Variables:
+	MinsFromAnchor(0), RthHi(0), RthLo(0), RthClose(0),
+	RangeCount(0), RangeIdx(0), RangeSum(0), Ri(0), AvgRange(0);
+
+Arrays:
+	RangeHist[100](0);
+
+{ Same daily range history as the strategy }
+MinsFromAnchor = TimeToMinutes(Time) - TimeToMinutes(AnchorTime);
+
+if MinsFromAnchor > 0 and Time <= SessionEnd
+	and (Date <> Date[1] or TimeToMinutes(Time[1]) <= TimeToMinutes(AnchorTime)) then begin
+	if RthClose > 0 then begin
+		RangeHist[RangeIdx] = (RthHi - RthLo) / RthClose * 100;
+		RangeIdx = Mod(RangeIdx + 1, RangeDays);
+		if RangeCount < RangeDays then RangeCount = RangeCount + 1;
+	end;
+	RthHi = High;
+	RthLo = Low;
+	RthClose = Close;
+end
+else if MinsFromAnchor > 0 and Time <= SessionEnd and RthClose > 0 then begin
+	RthHi = MaxList(RthHi, High);
+	RthLo = MinList(RthLo, Low);
+	RthClose = Close;
+end;
+
+if RangeCount >= RangeDays then begin
+	RangeSum = 0;
+	for Ri = 0 to RangeDays - 1 begin
+		RangeSum = RangeSum + RangeHist[Ri];
+	end;
+	AvgRange = RangeSum / RangeDays;
+
+	Plot1(AvgRange, "AvgRange%");
+	if AvgRange >= Threshold then SetPlotColor(1, OnColor) else SetPlotColor(1, OffColor);
+	Plot2(Threshold, "Threshold");
+	if AltThreshold > 0 then Plot3(AltThreshold, "AltThreshold");
+end;
