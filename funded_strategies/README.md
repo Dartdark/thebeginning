@@ -101,6 +101,17 @@ adds little diversification. ES is parked.
 **GC and CL:** the MultiCharts data feed only has about a week of 1-minute history for
 them, so they cannot be tested for now. The search continues with NQ and ES data.
 
+## NQ–ES spread (2026-10-11): too thin after costs
+
+Long NQ / short beta-weighted ES (or the reverse), using spread moves from the 8:30 open
+measured against their normal size at that time of day:
+- **Fading large spread moves loses** at every threshold and horizon (−$1 to −$34
+  per NQ of notional, gross). Spread moves keep going.
+- **Following them**, first signal of the day, held to 15:00: +$79 gross per NQ of
+  notional at 2x normal (752 days, t = 2.4, 7/9 years positive). A round trip in both legs
+  costs about $60 (NQ $7.25 + 1.5 ES x $5 + 1 tick per fill on both legs), so about $20 is
+  left. Not worth trading.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
