@@ -1,0 +1,36 @@
+{ Daily close exporter - MultiCharts PowerLanguage indicator
+
+  Writes this chart's daily closes to one CSV file:
+    <Folder><FileName>   e.g. C:\NQdata\VIX3M_daily.csv
+  with columns DATE (YYYY-MM-DD), CLOSE - the format analysis/vix_regime.py
+  reads from data/VIX3M_daily.csv and data/SPY_daily.csv.
+
+  Use: create the folder first (e.g. C:\NQdata). Open a DAILY chart of the
+  symbol (VIX3M, or SPY), load it back to 01/01/2017, add this indicator and
+  set FileName (VIX3M_daily.csv or SPY_daily.csv). The file is complete once
+  the chart has finished calculating; it is deleted and rewritten on every
+  recalculation, so it never has duplicate rows. }
+
+Inputs:
+	Folder("C:\NQdata\"),          { must already exist; keep the trailing backslash }
+	FileName("VIX3M_daily.csv");
+
+Variables:
+	Path(""), D(0), Row("");
+
+Once begin
+	Path = Folder + FileName;
+	FileDelete(Path);
+	FileAppend(Path, "DATE,CLOSE" + NewLine);
+end;
+
+if BarStatus(1) = 2 then begin
+	D = Date + 19000000;
+	Row = NumToStr(IntPortion(D / 10000), 0) + "-"
+		+ RightStr("0" + NumToStr(Mod(IntPortion(D / 100), 100), 0), 2) + "-"
+		+ RightStr("0" + NumToStr(Mod(D, 100), 0), 2) + ","
+		+ NumToStr(Close, 2);
+	FileAppend(Path, Row + NewLine);
+end;
+
+Plot1(Close, "Close");
