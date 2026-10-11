@@ -140,6 +140,23 @@ measured against their normal size at that time of day:
   we lack: futures trend/contrarian (cross-market), volatility targeting, VIX basis,
   ETF arbitrage (high-frequency), leveraged-ETF rebalancing (late-day momentum, fragile).
 
+- **Citations of "151 Trading Strategies"** (1,890 references). Of the 147 on intraday
+  trading, overnight returns, futures, announcements or technical rules, the ones that
+  fit NQ/ES day trading were tested (`analysis/event_days.py`, `event_days_test.py`):
+
+  | Paper | Test on NQ / ES, 2018–2026, per contract after costs | Verdict |
+  |---|---|---|
+  | Lucca & Moench (2015), pre-FOMC drift | Long 8:30 to 12:55 CT on FOMC days: NQ −$12, ES −$44 (69 days). From midnight: NQ +$255, t = 1.0 | **Gone** since 2018 (as later studies also report) |
+  | Savor & Wilson (2013), announcement-day premium | Long on 8:30 ET release days: NQ +$93 vs +$49 on normal days, t = 0.4; ES −$41 | No premium |
+  | Reaction to 8:30 ET releases (7:30 CT) | **Fading the 7:30–8:00 CT reaction from 8:00 to 8:30 CT: NQ +$63 net, t = 2.9, 485 days, 6/9 years** (spike above 2x normal); +$84, t = 2.3 above 3x. ES +$6, t = 1.5 | **Candidate**: small, NQ only, and found after trying about 24 variants |
+  | Brock et al. (1992), Sullivan–Timmermann–White (1999), Dempster & Jones (2002), Lo et al. (2000) | Technical rules on index data; the later papers find the edge disappears after correcting for data-snooping | Supports our caution with technical rules |
+  | Osler (2000, 2003) | Round numbers, already tested | Too small |
+  | Shum et al. (2016), leveraged-ETF rebalancing | Late-day momentum, already tested | Fragile |
+  | Index arbitrage papers (Yadav & Pope, Richie et al., Marshall et al.) | Futures vs cash, high-frequency | Not for us |
+
+  FOMC dates are in `event_days.FOMC_DATES`. Each was confirmed against the 13:00 CT
+  volatility spike: median 3.6x normal on NQ, 4.0x on ES.
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
