@@ -1,5 +1,5 @@
 """Strategies that need the overnight session, on the 24-hour grid (grid24.py).
-Each follows the PowerLanguage version in multi_strategy/ line by line.
+Each follows the PowerLanguage version in apex_strategies/, funded_strategies/ or multi_strategy/ line by line.
 
   vault_break24       NQ_Vault_Break.txt      (30-minute bars, midnight open and VWAP)
   vwap_pullback_adx24 NQ_VWAP_Pullback_ADX.txt (1-minute bars, midnight VWAP)

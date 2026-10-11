@@ -6,9 +6,17 @@ daily loss limit, 21 trading days, $50 per account). Apex only; ignore Topstep.
 
 **Repo:** github.com/Dartdark/thebeginning. Branches `claude/nq-trading-strategy-params-5h9d20`
 (main working branch) and `claude/quirky-noether-4dla64` are identical; keep them in sync.
-**Read first:** `multi_strategy/TWO_STRATEGY_PLAN.md`, `multi_strategy/FUNDED_PLAN.md`,
+**Read first:** `apex_strategies/TWO_STRATEGY_PLAN.md`, `funded_strategies/FUNDED_PLAN.md`,
 `multi_strategy/README.md`, this file.
 **Please always give me direct GitHub links** (raw links for code I paste into MultiCharts).
+
+## Folders (2026-10-11)
+- `apex_strategies/`: **Apex strategies**, for passing the challenge only (Vault Break,
+  Overnight Bias, their indicators, `TWO_STRATEGY_PLAN.md`). Not for making money.
+- `funded_strategies/`: **funded strategies**, built to maximize PA payouts (roster,
+  design rules, benchmark in `funded_strategies/README.md`; interim plan in
+  `FUNDED_PLAN.md`). The Apex strategies are only the benchmark there.
+- `multi_strategy/`: research history, other tested strategies, `RESEARCH_TOPICS.md`.
 
 ## Current plan (decided)
 One Apex account at a time, running two strategies together, both on **MNQ**, each in
@@ -17,8 +25,8 @@ on at 1 minute for backtests:
 
 | Strategy | File | Chart | Live inputs |
 |---|---|---|---|
-| Vault Break (mine) | `multi_strategy/NQ_Vault_Break.txt` | 30 min | `NumContracts` 8 |
-| Overnight Bias (mine) | `multi_strategy/NQ_Overnight_Bias.txt` | 15 min | `RiskPerTrade` 1100, `NumContracts` 1, `ExitTime` 1430, `EarlyExitTime` 1130 (= 3-4 MNQ at late-2026 prices) |
+| Vault Break (mine) | `apex_strategies/NQ_Vault_Break.txt` | 30 min | `NumContracts` 8 |
+| Overnight Bias (mine) | `apex_strategies/NQ_Overnight_Bias.txt` | 15 min | `RiskPerTrade` 1100, `NumContracts` 1, `ExitTime` 1430, `EarlyExitTime` 1130 (= 3-4 MNQ at late-2026 prices) |
 
 Results (backtests 2018-2026 from my MultiCharts reports, real-day Apex simulation):
 combined account passes **44%** (2018-22 43%, 2023-26 45%, worst start year 29%);
@@ -74,8 +82,8 @@ RiskPerTrade 1100 only on an MNQ chart (on NQ it buys 0 contracts most days).
   `candidates.py`, `start_timing.py`, `prop_sim.py`, `replica.py`.
 - MC reports in repo root: `Backtesting Strategy Performance Report VB v1.xlsx`,
   `... OD v1.xlsx`, `... ONB v2.xlsx`, v3: `... v2 filtered up test.xlsx`.
-- Indicators: `multi_strategy/NQ_Strategy_ATR.txt` (ATR, 30% ATR, ONB MNQ size),
-  `multi_strategy/NQ_ONB_ADX.txt`. Not yet compiled by me; may need fixes.
+- Indicators: `apex_strategies/NQ_Strategy_ATR.txt` (ATR, 30% ATR, ONB MNQ size),
+  `apex_strategies/NQ_ONB_ADX.txt`. Not yet compiled by me; may need fixes.
 - Colab notebook `TheInstitutionalProtocol_PropSimulations_ChartAcademy.ipynb` (course):
   assumes 1 NQ per trade, adds $2.25 + $5 costs; Cells 21b/21c fixed to run with one
   strategy. It cannot model RiskPerTrade sizing, so it understates Overnight Bias.
@@ -92,12 +100,12 @@ RiskPerTrade 1100 only on an MNQ chart (on NQ it buys 0 contracts most days).
   (Format Signals > select signal > Format... > Properties).
 - Order and Position Tracker: View > Show Order and Position Tracker Window (Ctrl+Shift+O).
 
-## Funded phase (2026-10-11, `multi_strategy/FUNDED_PLAN.md`)
+## Funded phase (2026-10-11, `funded_strategies/FUNDED_PLAN.md`)
 Goal once funded: maximize payouts (50K PA: max 6 payouts, caps 1,500/1,500/2,000/
 2,500/2,500/3,000 = $13,000; 5 days of $250+, 50% consistency, safety net $52,100).
 - Challenge sizes in a PA expect only ~$2,700 within a year (75% blown).
 - Recommended funded sizes ("Balanced"): VB 3 MNQ, ONB RiskPerTrade 300, new
-  **Overnight Drift** (`multi_strategy/NQ_Overnight_Drift.txt`, long midnight-3:00 CT
+  **Overnight Drift** (`funded_strategies/NQ_Overnight_Drift.txt`, long midnight-3:00 CT
   after a down session, stop 30% ATR) RiskPerTrade 500: ~$5,900 within 1 year,
   ~$6,800 within 2. Slower plans (VB 1-2) reach $8,000-9,700 within 2 years.
 - Take each payout as soon as the full cap is allowed.
@@ -113,12 +121,12 @@ Tested (`analysis/intraday_research.py`): VWAP trend (no edge after costs), big-
 reversal (loses), round numbers (loses), full noise-area version (PF 1.26, real edge,
 but not better than VB in the funded plan; long-only 1 MNQ in place of 1 VB is about equal).
 
-## VIX regime test (2026-10-11, `multi_strategy/VIX_REGIME.md`)
+## VIX regime test (2026-10-11, `apex_strategies/VIX_REGIME.md`)
 "The Volatility Edge" regimes (eVRP and backwardation; stand-ins for VIX3M/SPY):
 Vault Break and Overnight Bias earn ~30% more per trade in the calm "short vol" regime
 and least in "cash"/"half short"; Overnight Drift/Opening Drive lean the other way.
 Sizing VB by regime changes challenge/funded results only within noise; kept as
-`multi_strategy/NQ_Vault_Break_VIX.txt` (data2 = daily VIX) for later. With real S&P vol
+`apex_strategies/NQ_Vault_Break_VIX.txt` (data2 = daily VIX) for later. With real S&P vol
 (`data/SPY_daily.csv`, @ES export): VB weakest on "cash" days ($39/trade); skipping them
 = 45.3% pass vs 43.8%. My MultiCharts feed has no VIX, so it is parked.
 

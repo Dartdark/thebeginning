@@ -1,5 +1,11 @@
 # Funded phase plan: Apex 50K EOD Performance Account
 
+> **Status (2026-10-11): interim.** This plan runs the Apex strategies (Vault Break,
+> Overnight Bias) at smaller sizes plus Overnight Drift. The Apex strategies were built
+> to pass the challenge, not to maximize payouts. They are the benchmark until purpose-built
+> funded strategies replace them (see `README.md` in this folder). With 1 tick of
+> slippage on every strategy, the Balanced plan's estimate is about $5,400, not $5,900.
+
 Started 2026-10-11. The goal changes once an account is funded: it is no longer
 passing, it is **the money taken out**. A 50K Performance Account (PA) pays at most 6
 payouts (caps $1,500 / $1,500 / $2,000 / $2,500 / $2,500 / $3,000 = **$13,000**), then
@@ -146,8 +152,8 @@ On the day the challenge passes, change the inputs (do not reuse the challenge s
 
 | Strategy | File | Chart | Funded inputs | At October 2026 prices |
 |---|---|---|---|---|
-| Vault Break | `NQ_Vault_Break.txt` | 30 min MNQ | `NumContracts` 3 | 3 MNQ |
-| Overnight Bias | `NQ_Overnight_Bias.txt` | 15 min MNQ | `RiskPerTrade` 300 | 1 MNQ (0 = skipped when the stop is over $300, i.e. 15-day ATR above 500 points) |
+| Vault Break | `../apex_strategies/NQ_Vault_Break.txt` | 30 min MNQ | `NumContracts` 3 | 3 MNQ |
+| Overnight Bias | `../apex_strategies/NQ_Overnight_Bias.txt` | 15 min MNQ | `RiskPerTrade` 300 | 1 MNQ (0 = skipped when the stop is over $300, i.e. 15-day ATR above 500 points) |
 | Overnight Drift (new) | `NQ_Overnight_Drift.txt` | 5 min MNQ | `RiskPerTrade` 500 | 1 MNQ |
 
 - Request a payout as soon as the balance is at least $52,100 + the next cap, with

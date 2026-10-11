@@ -27,7 +27,7 @@
   sized by RiskPerTrade:  contracts = Floor(RiskPerTrade / (stop points x
   point value)), and the trade is skipped when that is 0. Backtest on NQ with
   RiskPerTrade 0 and NumContracts 1 (report per NQ). Funded phase live on
-  MNQ: see multi_strategy/FUNDED_PLAN.md for the RiskPerTrade.
+  MNQ: see funded_strategies/FUNDED_PLAN.md for the RiskPerTrade.
 
   Python test (analysis/funded24.py, 1-minute data 2018-2026, per NQ, after
   $7.25 costs): 1,041 trades, 55% winners, average $83, profit factor 1.25,

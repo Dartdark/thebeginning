@@ -3,7 +3,7 @@ together. Reproduces the tables in multi_strategy/README.md.
 
 Strategies (trade lists):
   V3     NQ VWAP Momentum v3, from its MultiCharts report
-  VB     Vault Break (multi_strategy/NQ_Vault_Break.txt)
+  VB     Vault Break (apex_strategies/NQ_Vault_Break.txt)
   DRIVE  Opening Drive (multi_strategy/NQ_Opening_Drive.txt)
   GAP    Gap Fill, experimental (multi_strategy/NQ_Gap_Fill.txt)
 VB, DRIVE and GAP come from the Python versions in candidates.py unless a
@@ -14,7 +14,7 @@ followed (portfolio.py), at the account sizes in ACCOUNTS.
 
 Extra strategies that only exist as MultiCharts reports can be added with
   --VPA report.xlsx   (VWAP Pullback ADX, multi_strategy/NQ_VWAP_Pullback_ADX.txt)
-  --ONB report.xlsx   (Overnight Bias, multi_strategy/NQ_Overnight_Bias.txt)
+  --ONB report.xlsx   (Overnight Bias, apex_strategies/NQ_Overnight_Bias.txt)
 each as its own 10 MNQ account.
 
 Usage (from the repo root): python3 analysis/multi_strategy.py [--NAME report.xlsx ...]

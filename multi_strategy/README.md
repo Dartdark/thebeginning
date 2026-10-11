@@ -1,3 +1,8 @@
+> **Folders (2026-10-11):** the challenge strategies (Vault Break, Overnight Bias and their
+> indicators) are in `../apex_strategies/`; strategies built for funded payouts are in
+> `../funded_strategies/`. This folder keeps the research history, the other tested
+> strategies (Opening Drive, Gap Fill, VWAP Pullback ADX) and `RESEARCH_TOPICS.md`.
+
 # Multi-strategy plan for Apex 50K
 
 Started 2026-10-10. Goal: more strategies that, together with NQ VWAP Momentum v3
@@ -295,15 +300,15 @@ sizing, capped at 0.25x–3x.
 | File | What it is |
 |---|---|
 | `NQ_Opening_Drive.txt` | Opening Drive signal |
-| `NQ_Vault_Break.txt` | Vault Break signal (your spec) |
+| `../apex_strategies/NQ_Vault_Break.txt` | Vault Break signal (your spec); moved to `apex_strategies/` |
 | `NQ_Gap_Fill.txt` | Gap Fill signal, experimental |
-| `NQ_Overnight_Bias.txt` | Overnight Bias signal (your spec), with `RiskPerTrade` sizing |
-| `NQ_Overnight_Drift.txt` | Overnight Drift signal (funded phase, see `FUNDED_PLAN.md`): long midnight-3:00 CT after a down session |
-| `NQ_Strategy_ATR.txt` | Indicator: the 15-day ATR, its 30% (Vault Break noise distance, Overnight Bias stop) and Overnight Bias's MNQ size |
-| `NQ_ONB_ADX.txt` | Indicator: Overnight Bias's ADX(14) with the 20 threshold |
+| `../apex_strategies/NQ_Overnight_Bias.txt` | Overnight Bias signal (your spec), with `RiskPerTrade` sizing; moved to `apex_strategies/` |
+| `../funded_strategies/NQ_Overnight_Drift.txt` | Overnight Drift signal; moved to `funded_strategies/` |
+| `../apex_strategies/NQ_Strategy_ATR.txt` | Indicator: the 15-day ATR, its 30% (Vault Break noise distance, Overnight Bias stop) and Overnight Bias's MNQ size |
+| `../apex_strategies/NQ_ONB_ADX.txt` | Indicator: Overnight Bias's ADX(14) with the 20 threshold |
 | `NQ_VWAP_Pullback_ADX.txt` | VWAP Pullback ADX signal (your spec), no edge in testing |
-| `NQ_Vault_Break_VIX.txt`, `VIX_REGIME.md` | Vault Break with VIX-regime sizing (data2 = daily VIX) and its test |
-| `FUNDED_PLAN.md` | Funded phase: payout rules, sizes, Overnight Drift |
+| `../apex_strategies/NQ_Vault_Break_VIX.txt`, `../apex_strategies/VIX_REGIME.md` | Vault Break with VIX-regime sizing (data2 = daily VIX) and its test |
+| `../funded_strategies/FUNDED_PLAN.md` | Funded phase: payout rules, sizes, Overnight Drift |
 | `../analysis/funded_sim.py`, `../analysis/funded24.py` | Performance Account payout simulator and the funded-phase tables |
 | `../analysis/multi_strategy24.py` | Full-day tables: Overnight Bias, combined account, first funded account |
 | `../analysis/grid24.py`, `../analysis/candidates24.py` | 24-hour data grid and the overnight strategies in Python |
