@@ -1,0 +1,30 @@
+{ NQ Overnight Bias ADX - MultiCharts PowerLanguage indicator
+
+  Shows the ADX that NQ Overnight Bias uses to allow its entry orders:
+  ADX(ADXLength) of this chart's bars, the same built-in ADX function the
+  strategy calls. From 8:45 to 14:00 CT the strategy only places its
+  opening-range stop order after a bar that closes with ADX above ADXMin.
+
+    green  = ADX above ADXMin (orders allowed, if there is a bias that day)
+    gray   = ADX at or below ADXMin (no order for the next bar)
+    line   = the ADXMin threshold
+
+  Add it to the Overnight Bias 15-minute chart (24-hour session, Exchange time
+  zone), in its own panel. The ADX runs over all bars, overnight included, so
+  it only matches the strategy on the same chart and session. }
+
+Inputs:
+	ADXLength(14),
+	ADXMin(20),
+	OnColor(Green),
+	OffColor(DarkGray),
+	LevelColor(Red);
+
+Variables:
+	ADXv(0);
+
+ADXv = ADX(ADXLength);
+
+Plot1(ADXv, "ADX");
+if ADXv > ADXMin then SetPlotColor(1, OnColor) else SetPlotColor(1, OffColor);
+Plot2(ADXMin, "ADXMin", LevelColor);

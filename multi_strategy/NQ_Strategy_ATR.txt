@@ -1,0 +1,69 @@
+{ NQ Strategy ATR - MultiCharts PowerLanguage indicator
+
+  Shows the daily ATR exactly as NQ Vault Break and NQ Overnight Bias calculate
+  it: one true range per weekday (calendar date, midnight to midnight, from
+  this chart's bars, with the previous date's last close), averaged over the
+  last AtrDays completed weekdays. The value is fixed for the whole day.
+
+  Plots (read the exact values on the chart's status line or Data Window):
+    ATR       the 15-day average daily range, points
+    30% ATR   Vault Break: how far above the midnight open the noise level is
+              Overnight Bias: the stop distance (the target is 3 x this)
+    MNQ size  Overnight Bias contracts at RiskPerTrade on this chart:
+              Floor(RiskPerTrade / (30% ATR x point value)); 0 = no trade
+              (meaningful on an MNQ chart; on NQ it uses NQ's $20 a point)
+
+  Add it to the Vault Break 30-minute chart and/or the Overnight Bias
+  15-minute chart (24-hour session, Exchange time zone). It plots in its own
+  panel. Load at least a month of data so the 15 days are complete. }
+
+Inputs:
+	AtrDays(15),
+	AtrPct(0.30),           { Vault Break NoiseMult = Overnight Bias StopAtrPct = 0.30 }
+	RiskPerTrade(1100),     { Overnight Bias RiskPerTrade }
+	ShowSize(true);
+
+Variables:
+	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0), Part(0), Qty(0);
+
+Arrays:
+	TrHist[100](0);
+
+{ ---------- Daily ATR, same as the strategies ---------- }
+if Date <> Date[1] then begin
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	DayHi = High;
+	DayLo = Low;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+	Part = AtrPct * ATRv;
+	Qty = 0;
+	if Part > 0 then Qty = Floor(RiskPerTrade / (Part * BigPointValue));
+
+	Plot1(ATRv, "ATR");
+	Plot2(Part, "30% ATR");
+	if ShowSize then Plot3(Qty, "MNQ size");
+end;
