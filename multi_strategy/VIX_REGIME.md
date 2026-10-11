@@ -74,10 +74,39 @@ noise. Removing Vault Break's weaker trades also removes profit and qualifying d
 - a **re-test with real VIX3M and SPY data**. The stand-ins blur the signal, especially
   the backwardation one.
 
+## Re-run with real S&P 500 volatility (2026-10-11)
+
+`data/SPY_daily.csv` is the daily **@ES** close from your MultiCharts export (2017–2026),
+so eVRP now uses the S&P 500's own 10-day volatility. The backwardation stand-in is
+unchanged, because your data feed has no VIX/VIX3M.
+
+| Regime (share of days) | Vault Break | Overnight Bias | Opening Drive | Overnight Drift |
+|---|---|---|---|---|
+| Short vol (67%) | $111, PF 1.34 (1,095) | $266 | $105 | $46 |
+| Half short (13%) | $120, PF 1.37 (167) | $380 | $98 | $29 |
+| Long vol (3%) | $248, PF 1.86 (59) | $387 | $130 | $230 |
+| **Cash (16%)** | **$39, PF 1.09** (422) | $231 | $183 | **$177** |
+
+| Rule for Vault Break | Challenge pass | Funded payouts within 1 year |
+|---|---|---|
+| Same size every day | 43.8% | $5,919 |
+| **Skip "cash" days** | **45.3%** (2023–26: 48.8%) | $5,983 |
+| Half size on "cash" and "half short" days | 45.0% | $5,878 |
+
+- With real S&P volatility, the "half short" regime is no longer weak. The one result
+  that holds in both versions is that **Vault Break is weakest on "cash" days**: the
+  volatility premium is positive, but VIX has jumped above its recent average. Overnight
+  Drift is strongest on those same days.
+- Skipping Vault Break on "cash" days adds about 1.5 points of pass rate. It is still
+  within noise, so the plan is unchanged.
+- **Live use needs daily VIX**, and your MultiCharts feed has none, so
+  `NQ_Vault_Break_VIX.txt` cannot run as is. Parked until a VIX source is available.
+
 ## Files
 
 | File | What it is |
 |---|---|
 | `NQ_Vault_Break_VIX.txt` | Vault Break + regime sizing. data2 = daily VIX. `UseRegime` false = plain Vault Break. Defaults: half size in "half short" and "cash" |
 | `../analysis/vix_regime.py` | All tables above (about 20 s) |
+| `../data/SPY_daily.csv` | Daily @ES closes 2017–2026 (your MultiCharts export), used for the S&P 500 10-day volatility |
 | `../data/VIX_daily.csv` | Daily VIX 1990 – 22 Sep 2026 (CBOE, via github.com/datasets/finance-vix) |

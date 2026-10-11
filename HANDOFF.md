@@ -118,7 +118,9 @@ but not better than VB in the funded plan; long-only 1 MNQ in place of 1 VB is a
 Vault Break and Overnight Bias earn ~30% more per trade in the calm "short vol" regime
 and least in "cash"/"half short"; Overnight Drift/Opening Drive lean the other way.
 Sizing VB by regime changes challenge/funded results only within noise; kept as
-`multi_strategy/NQ_Vault_Break_VIX.txt` (data2 = daily VIX) for later.
+`multi_strategy/NQ_Vault_Break_VIX.txt` (data2 = daily VIX) for later. With real S&P vol
+(`data/SPY_daily.csv`, @ES export): VB weakest on "cash" days ($39/trade); skipping them
+= 45.3% pass vs 43.8%. My MultiCharts feed has no VIX, so it is parked.
 
 ## Where I am / next steps
 1. Both charts are set up on MNQ; turning on auto trading on Paper Trader.
