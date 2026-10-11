@@ -125,6 +125,21 @@ measured against their normal size at that time of day:
   On NQ, 15-minute bars, 2018–2026: 596 trades, 30% winners, PF 0.94, losing since 2023
   (longs PF 1.07, shorts 0.82). Its real test is on gold data (pending).
 
+- **Kakushadze & Serur (2018), "151 Trading Strategies", SSRN 3247865** (in the repo as
+  `ssrn-3247865.pdf`). A 361-page catalogue of strategy formulas across asset classes,
+  with no backtests. The parts that apply to NQ/ES day trading, tested here
+  (2018–2026, per contract, after costs):
+
+  | Idea | Result |
+  |---|---|
+  | IBS (where yesterday closed in its range): buy next day's session | Not monotonic and not significant (NQ t = 1.4 after IBS < 0.2, −1.1 for 0.5–0.8; ES flat) |
+  | IBS < 0.2 then long midnight to 3:00 | NQ t = 1.8; weaker than Overnight Drift's "down day" condition (t = 2.5) |
+  | Pivot points (side of the pivot at 9:00, exit at R1/S1 or 15:00) | Loses (NQ −$74, ES −$74 net) |
+
+  Other relevant entries were already tested in this repo or need data or infrastructure
+  we lack: futures trend/contrarian (cross-market), volatility targeting, VIX basis,
+  ETF arbitrage (high-frequency), leveraged-ETF rebalancing (late-day momentum, fragile).
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
