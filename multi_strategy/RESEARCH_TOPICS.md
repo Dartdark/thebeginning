@@ -126,3 +126,51 @@ might fit the plan.
   - Is there an independent replication?
   - Is the explanation a structural flow (hedging, rebalancing, liquidity), not just a
     pattern?
+
+## Results on NQ (2026-10-11, `analysis/intraday_research.py`)
+
+1-minute data from 2018 to 9 Oct 2026, regular session (flat at the 15:00 close), per
+NQ, after $7.25 costs **and 1 tick of slippage on every market and stop fill**.
+"Sharpe" is the annualized daily Sharpe ratio (Vault Break 1.46, Overnight Bias 1.32
+on the same basis).
+
+| Topic | Best setting | Trades/day | Avg trade | PF | Years + | Verdict |
+|---|---|---|---|---|---|---|
+| 1. VWAP trend (Zarattini & Aziz) | 30-min checks, buffer 5% ATR | 2.0 | $51 | 1.08 | 7 of 9 | **No** (2023–26 ≈ $0) |
+| 1. VWAP trend, as in the paper | 1-min checks, no buffer | 16 | −$1 | 0.99 | 4 of 9 | **No**: +$6 a trade before costs, $17 of costs |
+| 2. Noise area, full paper version | 30-min checks, both sides, VWAP trail | 0.79 | $133 | 1.26 | 8 of 9 | **Real edge**, but no better than VB in the plan |
+| 2. Same, long only | | 0.41 | $167 | 1.39 | 9 of 9 | Real edge; optional 1 MNQ |
+| 3. Big-move reversal (any setting) | 30-min move > 3x normal, high-vol days | 0.6 | −$7 | 0.99 | 4 of 9 | **No**: every setting loses |
+| 4. Round numbers, fade | | 2–3.4 | −$39 to −$53 | 0.59–0.85 | 0–1 | **No** |
+| 4. Round numbers, break | | 3–4.3 | −$16 to −$32 | 0.89–0.95 | 0–2 | **No** |
+
+**What this says about NQ:** on these data and these rules, every mean-reversion idea
+lost money and every high-frequency idea was eaten by costs. The edges that survive
+hold a trend for hours (Vault Break, Overnight Bias, noise area). The VWAP paper's
+QQQ result had almost no costs. On NQ the 1-minute version makes about 6 dollars a
+trade before costs, against $17 of costs (commission plus 2 ticks of slippage).
+
+**Noise area in detail** (the paper's version: band from the average absolute move from
+the open at each minute, 14-day lookback, checks every 30 minutes from 9:00, trailing
+stop at max(band, VWAP), reversals allowed):
+- Robust: profit factor 1.23–1.31 for lookback 10/14/20, first check 9:00/9:30, last
+  entry 14:00/14:30.
+- Short side weak and erratic: profit factor 1.16, with −$177 a trade in 2026 and −$74
+  in 2019. Long side: profit factor 1.39, positive every year (2020 only +$5).
+- Daily correlation 0.25 with Vault Break (0.39 long only), 0.31 with Overnight Bias.
+- Daily Sharpe 1.0, lower than Vault Break's 1.46: fewer, larger wins (39% win rate),
+  so the funded consistency rule bites harder.
+
+**In the funded plan** (expected payouts per PA, `analysis/funded_sim.py`):
+
+| Plan | Within 1 year | Within 2 years | Blown (1 yr) |
+|---|---|---|---|
+| Balanced: VB 3, ONB $300, OND $500 | $5,919 | $6,823 | 45% |
+| VB 2 + noise area long only 1 MNQ + ONB $300 + OND $500 | $5,991 | $8,008 | 36% |
+| VB 2 + noise area both sides 1 MNQ + ONB + OND | $5,215 | $7,086 | 48% |
+| Balanced + noise area both sides 1 MNQ | $5,094 | $6,286 | 51% |
+| Noise area both sides 3 MNQ instead of VB | $2,002 | $3,749 | 72% |
+
+Swapping one Vault Break contract for 1 MNQ of long-only noise area is about equal
+within 1 year and better within 2 years, but the gain is within the noise of these
+estimates. Adding the both-sides version lowers payouts.

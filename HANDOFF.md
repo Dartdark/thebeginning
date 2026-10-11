@@ -109,6 +109,9 @@ Goal once funded: maximize payouts (50K PA: max 6 payouts, caps 1,500/1,500/2,00
 ## Research direction (2026-10-11)
 I prefer intraday strategies with more trades a day and published research behind them.
 Reading list and test plan: `multi_strategy/RESEARCH_TOPICS.md`.
+Tested (`analysis/intraday_research.py`): VWAP trend (no edge after costs), big-move
+reversal (loses), round numbers (loses), full noise-area version (PF 1.26, real edge,
+but not better than VB in the funded plan; long-only 1 MNQ in place of 1 VB is about equal).
 
 ## Where I am / next steps
 1. Both charts are set up on MNQ; turning on auto trading on Paper Trader.
