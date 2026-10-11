@@ -106,6 +106,10 @@ Goal once funded: maximize payouts (50K PA: max 6 payouts, caps 1,500/1,500/2,00
 - Code: `analysis/funded_sim.py` (PA simulator, rules/assumptions at the top),
   `analysis/funded24.py` (all funded tables, ~1 min).
 
+## Research direction (2026-10-11)
+I prefer intraday strategies with more trades a day and published research behind them.
+Reading list and test plan: `multi_strategy/RESEARCH_TOPICS.md`.
+
 ## Where I am / next steps
 1. Both charts are set up on MNQ; turning on auto trading on Paper Trader.
 2. Run 1-2 weeks on sim; log each trade (time, side, size, price) and compare with the
