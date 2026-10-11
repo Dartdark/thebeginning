@@ -265,6 +265,31 @@ MultiCharts list. Largest loss at 1 NQ: −$6,080 (2026), which is why it must b
 Reproduce with `python3 analysis/multi_strategy24.py` (about 1 minute; it uses the
 MultiCharts report when it is present).
 
+## Volatility-scaled sizing (Moreira & Muir 2017; Harvey et al. 2018)
+
+`analysis/vol_scaling.py` sizes every strategy by NQ's volatility known before the day
+(previous month's realized volatility of 5-minute moves, or the 15-day ATR): 1/volatility
+(volatility targeting) or 1/variance (volatility-managed), averaging the same size as fixed
+sizing, capped at 0.25x–3x.
+
+| Daily Sharpe ratio | Fixed size | 1/vol, ATR | 1/vol, realized vol | 1/variance, ATR | 1/variance, realized vol |
+|---|---|---|---|---|---|
+| v3 | **1.11** | 1.07 | 1.00 | 0.94 | 0.83 |
+| Vault Break | **1.46** | 1.24 | 1.20 | 0.87 | 0.90 |
+| Opening Drive | 0.95 | 1.05 | **1.11** | 1.03 | 1.12 |
+| Overnight Bias | 1.32 | **1.43** | 1.41 | 1.16 | 1.15 |
+
+- **1/variance (Moreira–Muir) made every strategy worse** on Apex pass rates (Vault Break
+  40% → 29–30%, Overnight Bias 31% → 26–29%) and all but Opening Drive on Sharpe.
+- **1/vol helps Overnight Bias**, and it already trades that way: its stop is 30% of the
+  ATR and `RiskPerTrade` fixes the dollar risk, so contracts ∝ 1/ATR (Sharpe 1.45 as traded).
+- **1/vol hurts Vault Break's Sharpe** (1.46 → 1.24): its edge is larger in volatile
+  markets (about $131 a trade when the 10-day range is high vs $70 when low), so cutting
+  size then removes its best trades. Its pass rate alone rose (40% → 46%), but mostly by
+  trading 24–28 MNQ in 2018–19 (one stop-out over $3,600, more than the drawdown); in the
+  combined account it made no difference (44% fixed vs 44% scaled).
+- v3 and Opening Drive: small or no change. **No change to the plan.**
+
 ## Files
 
 | File | What it is |
