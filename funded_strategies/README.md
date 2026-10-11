@@ -96,7 +96,10 @@ market or stop fill.
 
 The same ideas that work on NQ are much weaker on ES. Even the paper written for SPY
 makes only $5 a trade from 2023 on. ES would also be highly correlated with NQ, so it
-adds little diversification. ES is parked; the next markets to test are GC and CL.
+adds little diversification. ES is parked.
+
+**GC and CL:** the MultiCharts data feed only has about a week of 1-minute history for
+them, so they cannot be tested for now. The search continues with NQ and ES data.
 
 ## Papers reviewed for funded strategies
 
