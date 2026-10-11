@@ -298,9 +298,12 @@ sizing, capped at 0.25x–3x.
 | `NQ_Vault_Break.txt` | Vault Break signal (your spec) |
 | `NQ_Gap_Fill.txt` | Gap Fill signal, experimental |
 | `NQ_Overnight_Bias.txt` | Overnight Bias signal (your spec), with `RiskPerTrade` sizing |
+| `NQ_Overnight_Drift.txt` | Overnight Drift signal (funded phase, see `FUNDED_PLAN.md`): long midnight-3:00 CT after a down session |
 | `NQ_Strategy_ATR.txt` | Indicator: the 15-day ATR, its 30% (Vault Break noise distance, Overnight Bias stop) and Overnight Bias's MNQ size |
 | `NQ_ONB_ADX.txt` | Indicator: Overnight Bias's ADX(14) with the 20 threshold |
 | `NQ_VWAP_Pullback_ADX.txt` | VWAP Pullback ADX signal (your spec), no edge in testing |
+| `FUNDED_PLAN.md` | Funded phase: payout rules, sizes, Overnight Drift |
+| `../analysis/funded_sim.py`, `../analysis/funded24.py` | Performance Account payout simulator and the funded-phase tables |
 | `../analysis/multi_strategy24.py` | Full-day tables: Overnight Bias, combined account, first funded account |
 | `../analysis/grid24.py`, `../analysis/candidates24.py` | 24-hour data grid and the overnight strategies in Python |
 | `../analysis/multi_strategy.py` | Reproduces every table above (about 15 s) |

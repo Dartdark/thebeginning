@@ -5,7 +5,9 @@ Each follows the PowerLanguage version in multi_strategy/ line by line.
   vwap_pullback_adx24 NQ_VWAP_Pullback_ADX.txt (1-minute bars, midnight VWAP)
   overnight_bias24    NQ_Overnight_Bias.txt    (15-minute bars, 23:00-8:30 range,
                                                 stop-order entries)
-The first two return signals for grid.execute(); overnight_bias24 executes
+  overnight_drift24   NQ_Overnight_Drift.txt   (long midnight to 3:00 after a
+                                                down regular session)
+The first two and overnight_drift24 return signals for grid.execute(); overnight_bias24 executes
 its own stop-order entries and returns trades.
 """
 import numpy as np
@@ -149,3 +151,25 @@ def overnight_bias24(g, on_start=2300, on_end=830, or_end=845, frac=1 / 3, adx_n
     t["date"] = g.ts[t["day"].to_numpy()]
     t["net"] = t["pnl"] - COST
     return t
+
+
+def overnight_drift24(g, entry=0, exit=300, rth_start=830, rth_end=1500, stop_atr=0.30,
+                      atr_n=15, down_only=True):
+    """Long from midnight (open of the first bar after `entry`) to the close of
+    the `exit` bar, on trading days whose previous regular session closed
+    down (close of the last bar up to rth_end below the close of the
+    rth_start bar). Stop stop_atr x the 15-day ATR, no target."""
+    atr = g.daily_atr(atr_n)
+    C = pd.DataFrame(g.c).ffill(axis=1).to_numpy()
+    tr = g.trading
+    rows = []
+    for i in range(1, len(tr)):
+        d, p = tr[i], tr[i - 1]
+        if np.isnan(atr[d]):
+            continue
+        chg = C[p, jof(rth_end)] - C[p, jof(rth_start)]
+        if down_only and not chg < 0:
+            continue
+        rows.append((d, jof(entry), 1, stop_atr * atr[d], np.inf, jof(exit)))
+    s = pd.DataFrame(rows, columns=["day", "dj", "side", "stop", "target", "exit_j"])
+    return s, dict(max_trades=1)

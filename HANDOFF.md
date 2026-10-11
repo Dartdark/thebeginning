@@ -6,7 +6,8 @@ daily loss limit, 21 trading days, $50 per account). Apex only; ignore Topstep.
 
 **Repo:** github.com/Dartdark/thebeginning. Branches `claude/nq-trading-strategy-params-5h9d20`
 (main working branch) and `claude/quirky-noether-4dla64` are identical; keep them in sync.
-**Read first:** `multi_strategy/TWO_STRATEGY_PLAN.md`, `multi_strategy/README.md`, this file.
+**Read first:** `multi_strategy/TWO_STRATEGY_PLAN.md`, `multi_strategy/FUNDED_PLAN.md`,
+`multi_strategy/README.md`, this file.
 **Please always give me direct GitHub links** (raw links for code I paste into MultiCharts).
 
 ## Current plan (decided)
@@ -91,10 +92,24 @@ RiskPerTrade 1100 only on an MNQ chart (on NQ it buys 0 contracts most days).
   (Format Signals > select signal > Format... > Properties).
 - Order and Position Tracker: View > Show Order and Position Tracker Window (Ctrl+Shift+O).
 
+## Funded phase (2026-10-11, `multi_strategy/FUNDED_PLAN.md`)
+Goal once funded: maximize payouts (50K PA: max 6 payouts, caps 1,500/1,500/2,000/
+2,500/2,500/3,000 = $13,000; 5 days of $250+, 50% consistency, safety net $52,100).
+- Challenge sizes in a PA expect only ~$2,700 within a year (75% blown).
+- Recommended funded sizes ("Balanced"): VB 3 MNQ, ONB RiskPerTrade 300, new
+  **Overnight Drift** (`multi_strategy/NQ_Overnight_Drift.txt`, long midnight-3:00 CT
+  after a down session, stop 30% ATR) RiskPerTrade 500: ~$5,900 within 1 year,
+  ~$6,800 within 2. Slower plans (VB 1-2) reach $8,000-9,700 within 2 years.
+- Take each payout as soon as the full cap is allowed.
+- Overnight Drift is Python-only so far (PF 1.25, 8 of 9 years positive, flat 2023-24,
+  correlation ~0 with the rest); needs a MultiCharts backtest (`... OND v1.xlsx`).
+- Code: `analysis/funded_sim.py` (PA simulator, rules/assumptions at the top),
+  `analysis/funded24.py` (all funded tables, ~1 min).
+
 ## Where I am / next steps
 1. Both charts are set up on MNQ; turning on auto trading on Paper Trader.
 2. Run 1-2 weeks on sim; log each trade (time, side, size, price) and compare with the
    backtest; check the two charts don't interfere (account position = sum of both).
 3. Then start Apex accounts one at a time; stop and review after 3 failures in a row.
-4. Before passing: plan the funded phase (at $1,100 risk a $2,000 drawdown within a year
-   is near certain, so size down once funded).
+4. Funded phase planned (see above). Next: MultiCharts backtest of Overnight Drift,
+   check the assumed PA rules on Apex's help center, sim-trade Overnight Drift.

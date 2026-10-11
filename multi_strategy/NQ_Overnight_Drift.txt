@@ -1,0 +1,127 @@
+{ NQ Overnight Drift - MultiCharts PowerLanguage signal (long only)
+
+  Idea (Boyarchenko, Larsen & Whelan, "The Overnight Drift", Review of
+  Financial Studies 2023): US stock index futures earn much of their return
+  in the early overnight hours around the European open, and more so after
+  a down US session (dealers who absorbed the day's selling are paid to
+  carry it overnight). On NQ the drift sits between midnight and 3:00 CT.
+
+  Rules (all times CT):
+    Previous session change = close of the 15:00 bar - close of the 8:30 bar
+    of the last regular session (the last bar up to 15:00 on half-days).
+    At midnight, if that change was negative (a down day): buy at the open
+    of the first bar after midnight.
+    Stop: 30% of the average daily true range of the last 15 weekdays
+    (same ATR as Vault Break and Overnight Bias). No target.
+    Exit at the close of the 3:00 bar. One trade a night, Monday-Friday.
+
+  It trades while the other strategies are flat (they trade 8:30-14:30), so
+  it shares no hours with them. Daily P&L correlation with Vault Break 0.06,
+  Overnight Bias -0.06, Opening Drive -0.05.
+
+  Apply to a 5-minute NQ / MNQ chart, Exchange time zone (Central), CME
+  24-hour session, Bar Magnifier on at 1 minute. Load at least 25 trading
+  days before the backtest start so the ATR is ready.
+
+  SIZE: like Overnight Bias, the stop is a share of the daily range, so it is
+  sized by RiskPerTrade:  contracts = Floor(RiskPerTrade / (stop points x
+  point value)), and the trade is skipped when that is 0. Backtest on NQ with
+  RiskPerTrade 0 and NumContracts 1 (report per NQ). Funded phase live on
+  MNQ: see multi_strategy/FUNDED_PLAN.md for the RiskPerTrade.
+
+  Python test (analysis/funded24.py, 1-minute data 2018-2026, per NQ, after
+  $7.25 costs): 1,041 trades, 55% winners, average $83, profit factor 1.25,
+  positive in 8 of 9 years (2018 negative). Confirm with a MultiCharts
+  backtest before trading it. }
+
+Inputs:
+	EntryTime(0),           { 0 = the first bar of the new date (midnight) }
+	ExitTime(300),
+	RTHStart(830),          { previous session change: close of this bar ... }
+	RTHEnd(1500),           { ... to the close of the last bar up to this time }
+	DownOnly(true),         { true: only after a down session; false: every night }
+	AtrDays(15),
+	StopAtrPct(0.30),
+	RiskPerTrade(0),        { $ lost at the stop; 0 = trade NumContracts }
+	NumContracts(1);
+
+Variables:
+	Px830(0), RTHLast(0), HaveOpen(false), HaveLast(false), PrevChg(0), PrevOK(false),
+	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
+	StopPts(0), Qty(0), EntryNow(false), Dow(0);
+
+Arrays:
+	TrHist[100](0);
+
+{ ---------- Daily ATR (weekdays, calendar dates), as in Overnight Bias ---------- }
+if Date <> Date[1] then begin
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	DayHi = High;
+	DayLo = Low;
+	{ the regular session of the date that just ended, if it had one }
+	if HaveOpen and HaveLast then begin
+		PrevChg = RTHLast - Px830;
+		PrevOK = true;
+	end;
+	HaveOpen = false;
+	HaveLast = false;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+
+{ ---------- Regular session prices of the current date ---------- }
+if Time > RTHStart - 30 and Time <= RTHStart then begin
+	Px830 = Close;
+	HaveOpen = true;
+end;
+if HaveOpen and Time > RTHStart and Time <= RTHEnd then begin
+	RTHLast = Close;
+	HaveLast = true;
+end;
+
+{ ---------- Entry at midnight ---------- }
+Dow = DayOfWeek(Date);
+if EntryTime = 0 then
+	EntryNow = Date <> Date[1]
+else
+	EntryNow = Time >= EntryTime and (Time[1] < EntryTime or Date <> Date[1]);
+
+if EntryNow and MarketPosition = 0 and Dow >= 1 and Dow <= 5 and PrevOK and ATRv > 0
+	and (DownOnly = false or PrevChg < 0) then begin
+	StopPts = StopAtrPct * ATRv;
+	Qty = NumContracts;
+	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
+	if Qty >= 1 then
+		Buy ("ON Drift L") Qty contracts next bar at market;
+end;
+
+{ ---------- Exits ---------- }
+SetStopContract;
+if StopPts > 0 then SetStopLoss(StopPts * BigPointValue);
+
+if MarketPosition > 0 and Time >= ExitTime and Time < RTHStart then
+	Sell ("ON Drift LX") this bar on close;
