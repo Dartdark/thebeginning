@@ -26,7 +26,9 @@ def jof(hhmm):
 
 class Grid24:
     def __init__(self, day_pattern="NQ_1min_20*.csv", night_pattern="NQ_1min_ON_*.csv"):
-        files = sorted(glob.glob(day_pattern)) + sorted(glob.glob(night_pattern))
+        """Other instruments: Grid24("data/GC_1min_20*.csv", night_pattern="") for
+        full-day exports (NQ_Bar_Exporter with StartTime 0, EndTime 2359)."""
+        files = sorted(glob.glob(day_pattern)) + (sorted(glob.glob(night_pattern)) if night_pattern else [])
         d = pd.concat([pd.read_csv(f) for f in files], ignore_index=True)
         d = d.drop_duplicates(["date", "time"])
         day_dates = np.array(sorted(pd.concat([pd.read_csv(f, usecols=["date", "time"])
@@ -46,6 +48,8 @@ class Grid24:
         has = ~np.isnan(self.c)
         self.last_j = np.where(has.any(1), NMIN24 - 1 - np.argmax(has[:, ::-1], axis=1), -1)
         self.trading = np.searchsorted(self.dates, day_dates)      # weekday trading rows
+        # full-day exports (other instruments) also have Sunday-evening dates: keep weekdays
+        self.trading = self.trading[pd.DatetimeIndex(self.ts[self.trading]).dayofweek < 5]
         self.jof = jof
 
     # ---------- bars of k minutes, aligned to midnight ----------
