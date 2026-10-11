@@ -1,0 +1,241 @@
+{ NQ Vault Break + VIX regime sizing - MultiCharts PowerLanguage signal (longs only)
+
+  Vault Break exactly as in NQ_Vault_Break.txt, with the size set each day
+  by the volatility regime of "The Volatility Edge" (Zarattini, Mele & Aziz
+  2025), known at the previous close:
+    eVRP  = previous VIX close - RVScale x NQ 10-day realized volatility
+            (close-to-close of the 15:00 CT closes, annualized, in %)
+    Back  = backwardation stand-in: VIX close > BackMult x its 20-day average
+            (the paper uses VIX > VIX3M; VIX3M history was not available
+            for the test)
+    short vol  : eVRP > 0 and not Back  -> SizeShortVol  x NumContracts
+    half short : eVRP <= 0 and not Back -> SizeHalfShort x NumContracts
+    long vol   : eVRP <= 0 and Back     -> SizeLongVol   x NumContracts
+    cash       : eVRP > 0 and Back      -> SizeCash      x NumContracts
+  Contracts are rounded down; 0 means no Vault Break trades that day.
+
+  Python test (analysis/vix_regime.py, MultiCharts VB trades, per NQ):
+  short vol $130 a trade (PF 1.42), half short $61, long vol $190, cash $42
+  (PF 1.10). Defaults = half size in "half short" and "cash", the best of the
+  rules tested for the funded phase (+$140 expected payouts per PA, within
+  noise). See multi_strategy/VIX_REGIME.md.
+
+  SETUP: data1 = the 30-minute NQ/MNQ chart as for Vault Break (24-hour
+  session, Exchange time zone). Insert Symbol: data2 = the VIX index
+  (e.g. $VIX.X or VIX, depending on the data feed), DAILY bars. Load at least
+  60 trading days before the backtest start (ATR, 20-day VIX average,
+  10-day volatility). Until those are ready it trades the full size.
+
+  Original Vault Break notes:
+
+  Written from the trader's own specification:
+    Noise level = session open price + NoiseMult x ATR(AtrDays daily bars)
+                = midnight open + 30% x 15-day ATR
+    VWAP        = from midnight
+    Entry       = 30-minute close above the noise level AND above VWAP,
+                  decisions from 10:00 CT, entries before 14:30 CT,
+                  max 3 trades a day, one position at a time
+    Exits       = target $800 / stop $1,500 per NQ (40 / 75 points),
+                  or flat at 14:30 CT
+
+  Apply to a 30-minute NQ / MNQ chart, Exchange time zone (Central), with a
+  session that includes the overnight hours (e.g. CME 24-hour), so the
+  midnight open and the midnight VWAP exist. Load at least 20 trading days
+  before the backtest start so the ATR is ready.
+
+  "Midnight" is where the chart's date changes (00:00 CT on an Exchange time
+  zone chart). The daily ATR is built from this chart's own bars, one true
+  range per calendar date (high/low since midnight, previous date's last
+  close), averaged over the previous AtrDays completed dates.
+
+  Python test (2018-2026, 1 NQ, after $7.25 costs) with the open and VWAP
+  anchored at 08:00 CT instead of midnight, because the exported 1-minute
+  data starts at 08:00: 1,656 trades, 64% winners, average $75, profit
+  factor 1.21; 2021-2026 matched the course's vaultbreak list closely
+  (win 66% vs 67%, average $97 vs $98). Confirm with a MultiCharts backtest.
+
+  Holiday half-days (market halts around 12:00 CT): no entries from
+  EarlyLastEntry, flat at EarlyFlattenTime, so no position is carried
+  overnight in the backtest. }
+
+Inputs:
+	UseRegime(true),        { false = plain Vault Break }
+	RVScale(0.8),           { NQ is about 1.25x as volatile as the S&P 500 }
+	RVDays(10),
+	BackMult(1.10),
+	VixAvgDays(20),
+	SizeShortVol(1),
+	SizeHalfShort(0.5),
+	SizeLongVol(1),
+	SizeCash(0.5),
+	NoiseMult(0.30),        { 30% of the ATR }
+	AtrDays(15),
+	FirstDecision(1000),    { first bar close that can trigger an entry }
+	LastEntryTime(1430),    { no new positions from this time }
+	FlattenTime(1430),      { close any position at the close of this bar }
+	TargetPts(40),          { $800 per NQ }
+	StopPts(75),            { $1,500 per NQ }
+	MaxTradesPerDay(3),
+	UseHolidayTimes(true),
+	EarlyLastEntry(1100),
+	EarlyFlattenTime(1130),
+	NumContracts(1);        { 1 for NQ backtests; 10 MNQ = 1 NQ }
+
+Variables:
+	BarVol(0), CumPV(0), CumVol(0), DayVwap(0),
+	SessOpen(0), DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0), Noise(0),
+	DayStartTrades(0), TradesToday(0),
+	CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false), IsEarlyClose(false),
+	DayLastEntry(0), DayFlatten(0),
+	VixPrev(0), VixLastDate(0), VixCount(0), VixIdx(0), VixSum(0), VixAvg(0),
+	PxRTH(0), HaveRTH(false), PrevRTHClose(0), RetCount(0), RetIdx(0), RetMean(0), RetSS(0),
+	RVv(0), EVRP(0), IsBack(false), Regime(0), SizeMult(1), Qty(0);
+
+Arrays:
+	TrHist[100](0), VixHist[100](0), RetHist[100](0);
+
+if BarType < 2 then BarVol = Ticks else BarVol = Volume;
+
+{ ---------- New calendar date (midnight) ---------- }
+if Date <> Date[1] then begin
+	{ store the finished date's true range (weekdays only: the Sunday
+	  evening session is a partial day and would shrink the ATR) }
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	SessOpen = Open;
+	DayHi = High;
+	DayLo = Low;
+	CumPV = 0;
+	CumVol = 0;
+	DayStartTrades = TotalTrades;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+{ ---------- VIX regime, known at the previous close ---------- }
+if Date <> Date[1] then begin
+	{ the regular session that just ended: one 15:00 close per trading day }
+	if HaveRTH then begin
+		if PrevRTHClose > 0 then begin
+			RetHist[RetIdx] = Log(PxRTH / PrevRTHClose);
+			RetIdx = Mod(RetIdx + 1, RVDays);
+			if RetCount < RVDays then RetCount = RetCount + 1;
+		end;
+		PrevRTHClose = PxRTH;
+	end;
+	HaveRTH = false;
+	{ the last completed daily VIX bar }
+	if Date data2 <> VixLastDate and Close data2 > 0 then begin
+		VixLastDate = Date data2;
+		VixPrev = Close data2;
+		VixHist[VixIdx] = VixPrev;
+		VixIdx = Mod(VixIdx + 1, VixAvgDays);
+		if VixCount < VixAvgDays then VixCount = VixCount + 1;
+	end;
+	SizeMult = 1;
+	Regime = 0;
+	if UseRegime and RetCount >= RVDays and VixCount >= VixAvgDays then begin
+		RetMean = 0;
+		for Ti = 0 to RVDays - 1 begin
+			RetMean = RetMean + RetHist[Ti];
+		end;
+		RetMean = RetMean / RVDays;
+		RetSS = 0;
+		for Ti = 0 to RVDays - 1 begin
+			RetSS = RetSS + Square(RetHist[Ti] - RetMean);
+		end;
+		RVv = SquareRoot(RetSS / (RVDays - 1)) * SquareRoot(252) * 100;
+		VixSum = 0;
+		for Ti = 0 to VixAvgDays - 1 begin
+			VixSum = VixSum + VixHist[Ti];
+		end;
+		VixAvg = VixSum / VixAvgDays;
+		EVRP = VixPrev - RVScale * RVv;
+		IsBack = VixPrev > BackMult * VixAvg;
+		if EVRP > 0 and IsBack = false then begin Regime = 1; SizeMult = SizeShortVol; end
+		else if EVRP <= 0 and IsBack = false then begin Regime = 2; SizeMult = SizeHalfShort; end
+		else if EVRP <= 0 and IsBack then begin Regime = 3; SizeMult = SizeLongVol; end
+		else begin Regime = 4; SizeMult = SizeCash; end;
+	end;
+end;
+if Time > 830 and Time <= 1500 then begin
+	PxRTH = Close;
+	HaveRTH = true;
+end;
+
+{ ---------- VWAP from midnight ---------- }
+CumPV = CumPV + (High + Low + Close) / 3 * BarVol;
+CumVol = CumVol + BarVol;
+if CumVol > 0 then DayVwap = CumPV / CumVol;
+
+{ ---------- Noise level ---------- }
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+Noise = SessOpen + NoiseMult * ATRv;
+
+{ ---------- CME holiday half-days ---------- }
+CalMonth = Month(Date);
+CalDay = DayOfMonth(Date);
+CalDow = DayOfWeek(Date);
+CalYear = Year(Date) + 1900;
+IsWeekday = CalDow >= 1 and CalDow <= 5;
+IsEarlyClose = UseHolidayTimes and (
+	(CalMonth = 1 and ((CalDay = 1 and IsWeekday) or (CalDay = 2 and CalDow = 1)))
+	or (CalMonth = 1 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 2 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 5 and CalDow = 1 and CalDay >= 25)
+	or (CalMonth = 6 and CalYear >= 2022 and ((CalDay = 19 and IsWeekday)
+		or (CalDay = 18 and CalDow = 5) or (CalDay = 20 and CalDow = 1)))
+	or (CalMonth = 7 and (((CalDay = 3 or CalDay = 4) and IsWeekday) or (CalDay = 5 and CalDow = 1)))
+	or (CalMonth = 9 and CalDow = 1 and CalDay <= 7)
+	or (CalMonth = 11 and CalDow = 4 and CalDay >= 22 and CalDay <= 28)
+	or (CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29)
+	or (CalMonth = 12 and (((CalDay = 24 or CalDay = 25) and IsWeekday) or (CalDay = 26 and CalDow = 1))));
+if IsEarlyClose then begin
+	DayLastEntry = EarlyLastEntry;
+	DayFlatten = EarlyFlattenTime;
+end
+else begin
+	DayLastEntry = LastEntryTime;
+	DayFlatten = FlattenTime;
+end;
+
+{ ---------- Entries ---------- }
+TradesToday = TotalTrades - DayStartTrades;
+if MarketPosition <> 0 then TradesToday = TradesToday + 1;
+
+if ATRv > 0 and Time >= FirstDecision and Time < DayLastEntry
+	and MarketPosition = 0 and TradesToday < MaxTradesPerDay
+	and Close > Noise and Close > DayVwap then begin
+	Qty = Floor(NumContracts * SizeMult + 0.0001);
+	if Qty >= 1 then
+		Buy ("VaultBreak") Qty contracts next bar at market;
+end;
+
+{ ---------- Exits ---------- }
+SetStopContract;
+SetStopLoss(StopPts * BigPointValue);
+SetProfitTarget(TargetPts * BigPointValue);
+
+if MarketPosition > 0 and Time >= DayFlatten then
+	Sell ("VB EOD") this bar on close;

@@ -113,6 +113,13 @@ Tested (`analysis/intraday_research.py`): VWAP trend (no edge after costs), big-
 reversal (loses), round numbers (loses), full noise-area version (PF 1.26, real edge,
 but not better than VB in the funded plan; long-only 1 MNQ in place of 1 VB is about equal).
 
+## VIX regime test (2026-10-11, `multi_strategy/VIX_REGIME.md`)
+"The Volatility Edge" regimes (eVRP and backwardation; stand-ins for VIX3M/SPY):
+Vault Break and Overnight Bias earn ~30% more per trade in the calm "short vol" regime
+and least in "cash"/"half short"; Overnight Drift/Opening Drive lean the other way.
+Sizing VB by regime changes challenge/funded results only within noise; kept as
+`multi_strategy/NQ_Vault_Break_VIX.txt` (data2 = daily VIX) for later.
+
 ## Where I am / next steps
 1. Both charts are set up on MNQ; turning on auto trading on Paper Trader.
 2. Run 1-2 weeks on sim; log each trade (time, side, size, price) and compare with the
