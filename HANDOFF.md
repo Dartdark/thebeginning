@@ -122,6 +122,16 @@ Sizing VB by regime changes challenge/funded results only within noise; kept as
 (`data/SPY_daily.csv`, @ES export): VB weakest on "cash" days ($39/trade); skipping them
 = 45.3% pass vs 43.8%. My MultiCharts feed has no VIX, so it is parked.
 
+## Intraday research results (2026-10-11, end of `multi_strategy/RESEARCH_TOPICS.md`)
+- "Beat the Market" full version (trailing exit, long+short): higher avg/trade but 43% wins;
+  worse in the funded sim ($4,100 vs $5,387 Balanced, both with 1 tick slippage) and the
+  challenge (35% vs 43%). Win rate and smooth days matter more than PF under Apex rules.
+- Fading large intraday moves: loses in every variant (NQ intraday = momentum).
+- Round numbers: price passes through 100/50 levels slightly more than other levels; too
+  small to trade.
+- With 1 tick slippage on everything, Balanced funded estimate is ~$5,400 (not $5,900).
+- Code: `analysis/intraday_research.py` (~1 min).
+
 ## Where I am / next steps
 1. Both charts are set up on MNQ; turning on auto trading on Paper Trader.
 2. Run 1-2 weeks on sim; log each trade (time, side, size, price) and compare with the

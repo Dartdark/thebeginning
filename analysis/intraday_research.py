@@ -1,406 +1,324 @@
-"""Intraday NQ strategies from the research list (multi_strategy/RESEARCH_TOPICS.md),
-tested on the 1-minute data (Grid24, regular session 8:30-15:00 CT, flat at the
-15:00 close; holiday half-days flat at their last bar).
+"""Intraday research from multi_strategy/RESEARCH_TOPICS.md, on the 24-hour
+1-minute grid (grid24.py), with costs ($7.25 per NQ round trip) plus one tick
+(0.25 point, $5 per NQ) of slippage on every market or stop fill.
 
-  1. VWAP trend         Zarattini & Aziz, "VWAP: The Holy Grail for Day Trading
-                        Systems" (SSRN 4631351): long above the session VWAP, short
-                        below, checked every k minutes; optional buffer.
-  2. Noise area         Zarattini, Aziz & Barbon, "Beat the Market" (2024): band =
-                        max/min(open, previous close) x (1 +/- m x average absolute
-                        move from the open at that minute over 14 days); checks
-                        every 30 minutes from 9:00; trailing stop at the band or
-                        VWAP; re-entries and reversals during the day.
-  3. Big-move reversal  Grant, Wolf & Yu (2005); Nagel (2012): fade an L-minute move
-                        that is k times the normal move for that time of day,
-                        optionally only when volatility is high; target half the
-                        move back, stop one move further, time stop.
-  4. Round numbers      Osler (2003): (a) fade the first touch of a 100/50-point level,
-                        (b) follow a close through a level.
+  1. noise_momentum()   Zarattini, Aziz & Barbon, "Beat the Market" (2024):
+                        time-of-day noise band from the 8:30 open, checks every
+                        30 minutes, trailing exit at max(band, VWAP) (long),
+                        flat 15:00. Vault Break is a cut-down version of it.
+  2. vol_fade()         fade large 30/60-minute moves (Grant, Wolf & Yu 2005;
+                        Nagel 2012), optionally only in high-volatility regimes
+  3. round_levels()     Osler (2003): first touches of 100-point levels vs
+                        placebo levels (event study), then fade / breakout rules
 
-Costs: $7.25 per NQ round trip, plus 1 tick (0.25 point) of slippage on every
-market or stop fill (limit entries and targets get no slippage; targets need
-price 1 point through, as in the other tests). Slippage is put into the fill
-prices, so portfolio.paths() and the funded simulator see it too.
-
-Usage (from the repo root): python3 analysis/intraday_research.py   (a few minutes)
+All trade lists have the columns portfolio.paths() needs (day, j0, j1, side,
+entry, exit, kind, pnl, net, date); P&L per 1 NQ.
 """
 import sys
-import warnings
 import numpy as np
 import pandas as pd
 sys.path.insert(0, "analysis")
-warnings.filterwarnings("ignore")
-from grid import _walk, njit, FILL_THROUGH, POINT_VALUE, COST
-from grid24 import Grid24, jof
+from grid24 import jof
+from candidates24 import _early
 
-TICK = 0.25
-J_OPEN = jof(830)          # column of the bar closing 8:30; the session opens at J_OPEN + 1
-J_FLAT = jof(1500)
-
-
-# ---------------------------------------------------------------- data
-class Data:
-    def __init__(self, g):
-        tr = g.trading
-        self.g, self.tr = g, tr
-        self.O, self.H, self.L, self.C, self.V = (getattr(g, k)[tr] for k in ("o", "h", "l", "c", "v"))
-        self.D = len(tr)
-        self.ts = g.ts[tr]
-        self.yr = pd.DatetimeIndex(self.ts).year.to_numpy()
-        rth = np.zeros(self.D, dtype=np.int64)
-        for i in range(self.D):
-            ok = np.nonzero(~np.isnan(self.C[i, J_OPEN + 1:J_FLAT + 1]))[0]
-            rth[i] = J_OPEN + 1 + ok[-1] if len(ok) else -1
-        self.flat = rth                                           # last regular-session column
-        self.open = self.O[:, J_OPEN + 1]
-        self.close = np.array([self.C[i, f] if f > 0 else np.nan for i, f in enumerate(rth)])
-        self.prev_close = np.r_[np.nan, self.close[:-1]]
-        self.atr = g.daily_atr(15)[tr]
-        # session VWAP from 8:30, value at each 1-minute close
-        tp = (self.H + self.L + self.C) / 3
-        m = np.zeros(1440, bool); m[J_OPEN + 1:] = True
-        v = np.where(m[None, :] & ~np.isnan(self.C), np.nan_to_num(self.V), 0.0)
-        pv = np.where(v > 0, tp, 0.0) * v
-        with np.errstate(all="ignore"):
-            self.VW = np.cumsum(pv, 1) / np.cumsum(v, 1)
-        self.Cf = pd.DataFrame(self.C).ffill(axis=1).to_numpy()   # last close at each minute
+PV = 20.0
+COST = 7.25
+SLIP = 0.25                     # points per market / stop fill
 
 
-def trades_df(d, rec, name):
-    t = pd.DataFrame(rec, columns=["i", "j0", "j1", "side", "entry", "exit", "kind"])
-    t = t[t.i >= 0].reset_index(drop=True)
-    t["i"] = t.i.astype(int); t["j0"] = t.j0.astype(int); t["j1"] = t.j1.astype(int)
-    t["side"] = t.side.astype(int); t["kind"] = t.kind.astype(int)
-    t["day"] = d.tr[t.i.to_numpy()]
-    t["date"] = d.ts[t.i.to_numpy()]
-    t["pnl"] = (t.exit - t.entry) * t.side * POINT_VALUE
-    t["net"] = t.pnl - COST
-    t.attrs["name"] = name
+def _frame(rows, g):
+    t = pd.DataFrame(rows, columns=["day", "j0", "j1", "side", "entry", "exit", "kind", "slips"])
+    t["pnl"] = (t["exit"] - t["entry"]) * t["side"] * PV
+    t["net"] = t["pnl"] - COST - t["slips"] * SLIP * PV
+    t["date"] = g.ts[t["day"].to_numpy()]
     return t
 
 
-@njit(cache=True)
-def _put(out, n, i, j0, j1, side, entry, exit_, kind):
-    out[n, 0] = i; out[n, 1] = j0; out[n, 2] = j1; out[n, 3] = side
-    out[n, 4] = entry; out[n, 5] = exit_; out[n, 6] = kind
+def rth_basics(g):
+    """Per trading row: RTH open (open of the 8:31 bar), previous RTH close
+    (15:00 bar, last bar before it on half-days), forward-filled closes."""
+    tr = g.trading
+    C = pd.DataFrame(g.c).ffill(axis=1).to_numpy()
+    op = g.o[tr, jof(831)]
+    cl = C[tr, jof(1500)]
+    prev_cl = np.r_[np.nan, cl[:-1]]
+    return tr, C, op, prev_cl
 
 
-# ---------------------------------------------------------------- 1. VWAP trend
-@njit(cache=True)
-def _vwap_trend(O, C, VW, flat, step, buf, long_only, first_j, last_j):
-    D = O.shape[0]
-    out = np.full((D * 60, 7), -1.0); n = 0
-    for i in range(D):
-        fj = flat[i]
-        if fj < 0:
+# ---------------------------------------------------------------- 1. noise momentum
+def noise_momentum(g, lookback=14, mult=1.0, first=900, last=1430, step=30, flat=1500,
+                   long_only=False, trail=True, stop_pts=None, tp_pts=None, vwap_trail=True):
+    """Beat the Market on NQ (CT times; the paper's 10:00 ET = 9:00 CT).
+    sigma_T = average |close at T / day open - 1| over the previous `lookback`
+    trading days. Upper band = max(open, prev close) x (1 + mult x sigma_T),
+    lower = min(open, prev close) x (1 - mult x sigma_T). At each decision
+    time: flat and close above the upper band -> long at the next minute's
+    open (below the lower -> short); long and close below max(upper, VWAP) ->
+    exit (trail=True). Optional fixed stop / target in points, checked on
+    1-minute bars. Flat at the close of the `flat` bar."""
+    tr, C, op, prev_cl = rth_basics(g)
+    times = list(range(first, last + 1, 100)) if step == 60 else \
+        [t for t in range(first, last + 1, 5) if (t % 100) % step == 0 and t % 100 < 60]
+    J = np.array([jof(t) for t in times])
+    R = np.abs(C[tr][:, J] / op[:, None] - 1)
+    sig = pd.DataFrame(R).rolling(lookback).mean().shift(1).to_numpy()
+    # VWAP from 8:31 on 1-minute bars
+    a = jof(831)
+    tp = (g.h + g.l + g.c) / 3
+    vol = np.nan_to_num(g.v)
+    early = _early(g)
+    rows = []
+    for i, d in enumerate(tr):
+        if np.isnan(op[i]) or np.isnan(prev_cl[i]) or np.isnan(sig[i]).any():
             continue
-        pos = 0; ent = 0.0; j0 = 0
-        for j in range(first_j, fj):
-            if (j - J_OPEN) % step != 0 or np.isnan(C[i, j]) or np.isnan(VW[i, j]):
-                continue
-            want = pos
-            if C[i, j] > VW[i, j] + buf[i]:
-                want = 1
-            elif C[i, j] < VW[i, j] - buf[i]:
-                want = 0 if long_only else -1
-            if j >= last_j and want != 0 and pos == 0:
-                want = 0
-            if want != pos and not np.isnan(O[i, j + 1]):
-                px = O[i, j + 1]
-                if pos != 0:
-                    _put(out, n, i, j0, j + 1, pos, ent, px - pos * TICK, 2); n += 1
-                pos = want
-                if pos != 0:
-                    ent = px + pos * TICK; j0 = j + 1
+        hi_ref, lo_ref = max(op[i], prev_cl[i]), min(op[i], prev_cl[i])
+        endj = min(jof(flat), g.last_j[d])
+        if early[d]:
+            endj = min(endj, jof(1145))
+        pv = np.cumsum(np.nan_to_num(tp[d, a:endj + 1]) * vol[d, a:endj + 1])
+        vv = np.cumsum(vol[d, a:endj + 1])
+        with np.errstate(all="ignore"):
+            vw = pv / vv
+        pos = 0; entry = j0 = None
+        for k, (t, jt) in enumerate(zip(times, J)):
+            if jt + 1 > endj:
+                break
+            px = C[d, jt]
+            ub = hi_ref * (1 + mult * sig[i, k]); lb = lo_ref * (1 - mult * sig[i, k])
+            w = vw[jt - a]
+            # fixed stop / target inside the last interval
+            if pos != 0 and (stop_pts or tp_pts):
+                j_from = j0 if k == 0 else max(j0, J[k - 1] + 1)
+                hit = _bracket(g, d, j_from, jt, pos, entry, stop_pts, tp_pts)
+                if hit:
+                    jx, px_x, kind, sl = hit
+                    rows.append((d, j0, jx, pos, entry, px_x, kind, 1 + sl)); pos = 0
+            if pos == 1 and trail and px < (max(ub, w) if vwap_trail else ub):
+                rows.append((d, j0, jt + 1, 1, entry, g.o[d, jt + 1], 2, 2)); pos = 0
+            elif pos == -1 and trail and px > (min(lb, w) if vwap_trail else lb):
+                rows.append((d, j0, jt + 1, -1, entry, g.o[d, jt + 1], 2, 2)); pos = 0
+            if pos == 0:
+                side = 1 if px > ub else (-1 if px < lb and not long_only else 0)
+                if side and t < last + 1:
+                    j0 = jt + 1; entry = g.o[d, j0]; pos = side
+                    if np.isnan(entry):
+                        pos = 0
         if pos != 0:
-            _put(out, n, i, j0, fj, pos, ent, C[i, fj] - pos * TICK, 2); n += 1
-    return out[:n]
+            if stop_pts or tp_pts:
+                j_from = j0 if j0 > J[k - 1] else J[k - 1] + 1
+                hit = _bracket(g, d, j_from, endj, pos, entry, stop_pts, tp_pts)
+                if hit:
+                    jx, px_x, kind, sl = hit
+                    rows.append((d, j0, jx, pos, entry, px_x, kind, 1 + sl)); continue
+            rows.append((d, j0, endj, pos, entry, C[d, endj], 2, 2))
+    return _frame(rows, g)
 
 
-def vwap_trend(d, step=1, buf_atr=0.0, long_only=False, start=830, last=1430):
-    buf = np.nan_to_num(buf_atr * d.atr)
-    rec = _vwap_trend(d.O, d.C, d.VW, d.flat, step, buf, long_only, jof(start) + step, jof(last))
-    return trades_df(d, rec, f"VWAP trend {step}m buf {buf_atr}")
-
-
-# ---------------------------------------------------------------- 2. noise area
-def noise_sigma(d, lookback=14):
-    """Average |close / session open - 1| at each minute over the previous
-    `lookback` trading days (known before the day)."""
-    mv = np.abs(d.Cf / d.open[:, None] - 1)
-    mv[:, :J_OPEN + 1] = np.nan
-    s = pd.DataFrame(mv).rolling(lookback, min_periods=lookback).mean().shift(1)
-    return s.to_numpy()
-
-
-@njit(cache=True)
-def _noise(O, C, VW, flat, op, pc, sig, mult, step, first_j, long_only, trail_vwap, last_j):
-    D = O.shape[0]
-    out = np.full((D * 20, 7), -1.0); n = 0
-    for i in range(D):
-        fj = flat[i]
-        if fj < 0 or np.isnan(pc[i]) or np.isnan(op[i]):
+def _bracket(g, d, j_from, j_to, side, entry, stop_pts, tp_pts):
+    """First stop / target hit on 1-minute bars from j_from to j_to (stop first
+    when both are in one bar). Returns (j, price, kind, extra slippage fills)."""
+    for j in range(j_from, j_to + 1):
+        h, l, o = g.h[d, j], g.l[d, j], g.o[d, j]
+        if np.isnan(h):
             continue
-        hi_ref = max(op[i], pc[i]); lo_ref = min(op[i], pc[i])
-        pos = 0; ent = 0.0; j0 = 0
-        for j in range(first_j, fj):
-            if (j - J_OPEN) % step != 0 or np.isnan(C[i, j]) or np.isnan(sig[i, j]):
-                continue
-            ub = hi_ref * (1 + mult * sig[i, j]); lb = lo_ref * (1 - mult * sig[i, j])
-            c = C[i, j]
-            want = pos
-            if pos == 1:
-                stop = max(ub, VW[i, j]) if trail_vwap else ub
-                if c < stop:
-                    want = 0
-            elif pos == -1:
-                stop = min(lb, VW[i, j]) if trail_vwap else lb
-                if c > stop:
-                    want = 0
-            if want == 0 and j < last_j:
-                if c > ub:
-                    want = 1
-                elif c < lb and not long_only:
-                    want = -1
-            if want != pos and not np.isnan(O[i, j + 1]):
-                px = O[i, j + 1]
-                if pos != 0:
-                    _put(out, n, i, j0, j + 1, pos, ent, px - pos * TICK, 2); n += 1
-                pos = want
-                if pos != 0:
-                    ent = px + pos * TICK; j0 = j + 1
-        if pos != 0:
-            _put(out, n, i, j0, fj, pos, ent, C[i, fj] - pos * TICK, 2); n += 1
-    return out[:n]
+        if stop_pts:
+            sp = entry - side * stop_pts
+            if (side > 0 and l <= sp) or (side < 0 and h >= sp):
+                fill = min(o, sp) if side > 0 else max(o, sp)
+                return j, fill, 0, 1
+        if tp_pts:
+            tp = entry + side * tp_pts
+            if (side > 0 and h >= tp + 1) or (side < 0 and l <= tp - 1):
+                return j, tp, 1, 0
+    return None
 
 
-def noise_area(d, sig, mult=1.0, step=30, first=900, long_only=False, trail_vwap=True, last=1430):
-    rec = _noise(d.O, d.C, d.VW, d.flat, d.open, d.prev_close, sig, mult, step, jof(first),
-                 long_only, trail_vwap, jof(last))
-    return trades_df(d, rec, f"Noise area m{mult} {step}m")
+# ---------------------------------------------------------------- shared reporting
+def summary(t):
+    y = pd.DatetimeIndex(t["date"]).year
+    w, l = t.net[t.net > 0].sum(), -t.net[t.net < 0].sum()
+    days = t["day"].nunique()
+    by = t.groupby(y).net.mean()
+    return dict(trades=len(t), per_day=round(len(t) / max(days, 1), 2), win=f"{(t.net > 0).mean():.0%}",
+                avg=round(t.net.mean()), pf=round(w / l, 2) if l else np.nan,
+                t_stat=round(t.net.mean() / t.net.std() * np.sqrt(len(t)), 1),
+                avg_2018_22=round(t.net[y < 2023].mean()), avg_2023_26=round(t.net[y >= 2023].mean()),
+                years_pos=f"{(by > 0).sum()}/{len(by)}")
 
 
-# ---------------------------------------------------------------- 3. big-move reversal
-@njit(cache=True)
-def _reversal(O, H, L, C, Cf, flat, norm, ok_day, lag, k, back, stop_m, hold, first_j, last_j, max_tr):
-    D = O.shape[0]
-    out = np.full((D * max_tr, 7), -1.0); n = 0
-    for i in range(D):
-        fj = flat[i]
-        if fj < 0 or not ok_day[i]:
+def daily(g, t):
+    s = t.groupby("day").net.sum()
+    return s.reindex(g.trading, fill_value=0.0).to_numpy()
+
+
+# ---------------------------------------------------------------- 2. volatility-conditioned fade
+def vol_fade(g, look=30, k=2.0, first=900, last=1400, step=15, hold=60, tgt_frac=0.5,
+             stop_frac=1.0, max_trades=3, regime=None, lookback=14, flat=1500):
+    """At each `step`-minute close from first to last: move = close - close
+    `look` minutes earlier; normal size = average |move| at that time of day
+    over the previous `lookback` days. If |move| > k x normal: fade it at the
+    next minute's open, target tgt_frac x |move| back, stop stop_frac x |move|
+    beyond the entry, out after `hold` minutes or at `flat`. `regime`: boolean
+    array per trading row (trade only where True)."""
+    tr, C, op, prev_cl = rth_basics(g)
+    times = [t for t in range(first, last + 1, 5) if (t % 100) % step == 0 and t % 100 < 60]
+    J = np.array([jof(t) for t in times])
+    M = C[tr][:, J] - C[tr][:, J - look]
+    norm = pd.DataFrame(np.abs(M)).rolling(lookback).mean().shift(1).to_numpy()
+    early = _early(g)
+    rows = []
+    for i, d in enumerate(tr):
+        if regime is not None and not regime[i]:
             continue
-        busy_to = -1; cnt = 0
-        for j in range(first_j, min(last_j, fj)):
-            if j <= busy_to or cnt >= max_tr or np.isnan(C[i, j]) or np.isnan(norm[i, j]):
+        if np.isnan(norm[i]).any():
+            continue
+        endj = min(jof(flat), g.last_j[d])
+        if early[d]:
+            endj = min(endj, jof(1145))
+        busy_until = -1; n = 0
+        for kk, jt in enumerate(J):
+            if jt + 1 > endj or n >= max_trades:
+                break
+            if jt < busy_until:
                 continue
-            mv = Cf[i, j] - Cf[i, j - lag]
-            if norm[i, j] <= 0 or abs(mv) < k * norm[i, j] or np.isnan(O[i, j + 1]):
+            mv = M[i, kk]
+            if np.isnan(mv) or abs(mv) <= k * norm[i, kk]:
                 continue
             side = -1 if mv > 0 else 1
-            e = O[i, j + 1]
-            size = abs(mv)
-            stop_px = e - side * stop_m * size
-            tgt_px = e + side * back * size
-            jend = min(j + 1 + hold, fj)
-            j1, px, kind, w = _walk(O[i], H[i], L[i], C[i], j + 1, jend, side, stop_px, tgt_px, FILL_THROUGH)
-            xpx = px if kind == 1 else px - side * TICK
-            _put(out, n, i, j + 1, j1, side, e + side * TICK, xpx, kind); n += 1
-            cnt += 1; busy_to = j1
-    return out[:n]
-
-
-def move_norm(d, lag, lookback=20):
-    mv = np.abs(d.Cf - np.roll(d.Cf, lag, axis=1))
-    mv[:, :J_OPEN + 1 + lag] = np.nan
-    return pd.DataFrame(mv).rolling(lookback, min_periods=lookback).mean().shift(1).to_numpy()
-
-
-def high_vol_days(d, window=250):
-    v = pd.Series(d.atr / d.open)
-    return (v > v.rolling(window, min_periods=60).median().shift(1)).to_numpy()
-
-
-def reversal(d, norm, lag=30, k=2.5, back=0.5, stop_m=1.0, hold=60, cond=None, first=900, last=1430, max_tr=3):
-    ok = np.ones(d.D, bool) if cond is None else cond
-    rec = _reversal(d.O, d.H, d.L, d.C, d.Cf, d.flat, norm, ok, lag, k, back, stop_m, hold,
-                    jof(first), jof(last), max_tr)
-    return trades_df(d, rec, f"Reversal {lag}m k{k}")
-
-
-# ---------------------------------------------------------------- 4. round numbers
-@njit(cache=True)
-def _round(O, H, L, C, flat, atr, R, mode, s_atr, t_atr, b_atr, hold, first_j, last_j, max_tr):
-    """mode 0: fade the first touch of each level (limit at the level).
-    mode 1: follow a 1-minute close at least b x ATR through a level."""
-    D = O.shape[0]
-    out = np.full((D * max_tr, 7), -1.0); n = 0
-    for i in range(D):
-        fj = flat[i]
-        if fj < 0 or np.isnan(atr[i]):
-            continue
-        s = s_atr * atr[i]; t = t_atr * atr[i]; b = b_atr * atr[i]
-        touched = np.zeros(64)       # levels already traded today (ring)
-        nt = 0; busy_to = -1; cnt = 0
-        for j in range(first_j, min(last_j, fj)):
-            if j <= busy_to or cnt >= max_tr or np.isnan(C[i, j - 1]) or np.isnan(H[i, j]):
+            j0 = jt + 1; entry = g.o[d, j0]
+            if np.isnan(entry):
                 continue
-            p = C[i, j - 1]
-            up = np.ceil(p / R) * R; dn = np.floor(p / R) * R
-            if mode == 0:
-                for side, lev in ((-1, up), (1, dn)):
-                    if lev == p:
-                        continue
-                    hit = H[i, j] >= lev + TICK if side < 0 else L[i, j] <= lev - TICK
-                    if not hit:
-                        continue
-                    seen = False
-                    for q in range(nt):
-                        if touched[q] == lev:
-                            seen = True
-                    if seen:
-                        continue
-                    touched[nt % 64] = lev; nt += 1
-                    e = max(O[i, j], lev) if side < 0 else min(O[i, j], lev)
-                    stop_px = e - side * s; tgt_px = e + side * t
-                    # same bar: assume the stop is hit if the bar reached it
-                    if (side < 0 and H[i, j] >= stop_px) or (side > 0 and L[i, j] <= stop_px):
-                        _put(out, n, i, j, j, side, e, stop_px - side * TICK, 0); n += 1
-                        cnt += 1; busy_to = j
-                        break
-                    jend = min(j + hold, fj)
-                    j1, px, kind, w = _walk(O[i], H[i], L[i], C[i], j + 1, jend, side, stop_px, tgt_px, FILL_THROUGH)
-                    xpx = px if kind == 1 else px - side * TICK
-                    _put(out, n, i, j, j1, side, e, xpx, kind); n += 1
-                    cnt += 1; busy_to = j1
-                    break
+            jend = min(j0 + hold - 1, endj)
+            hit = _bracket(g, d, j0, jend, side, entry, stop_frac * abs(mv), tgt_frac * abs(mv))
+            if hit:
+                jx, px, kind, sl = hit
+                rows.append((d, j0, jx, side, entry, px, kind, 1 + sl))
             else:
-                c = C[i, j]
-                lev_up = np.floor((c - b) / R) * R       # level crossed upward
-                if p < lev_up + b <= c and not np.isnan(O[i, j + 1]):
-                    side = 1; lev = lev_up
-                else:
-                    lev_dn = np.ceil((c + b) / R) * R
-                    if p > lev_dn - b >= c and not np.isnan(O[i, j + 1]):
-                        side = -1; lev = lev_dn
-                    else:
+                jx = jend
+                rows.append((d, j0, jx, side, entry, C[d, jx], 2, 2))
+            busy_until = jx; n += 1
+    return _frame(rows, g)
+
+
+def high_vol_regime(g, atr_n=15, base=100):
+    """True where the 15-day ATR known before the day is above its own
+    `base`-day median (also known before the day)."""
+    a = pd.Series(g.daily_atr(atr_n)[g.trading])
+    return (a > a.rolling(base).median()).to_numpy()
+
+
+# ---------------------------------------------------------------- 3. round numbers
+def level_events(g, offsets=(0, 50, 25, 75, 37, 63, 12, 88), step=100, first=845, last=1430,
+                 x_pts=(10, 20), horizon=30, cross_pts=5):
+    """Event study of first touches of price levels L = n x step + offset in
+    the RTH window. For each first touch of the day (from below: high >= L
+    after closing below it; from above: the mirror), records:
+      rev_X  : 1 if price went X points back (away from L, against the
+               approach) before X points through L, within `horizon` minutes
+      fwd    : move from L to the close `horizon` minutes later, in the
+               direction of the approach (+ = continued through)
+      cross  : 1 if a close went cross_pts through L within the horizon, and
+      cont_X : after that close, 1 if X more points came before a return to L
+    Returns a DataFrame of events with the level's offset."""
+    tr = g.trading
+    a, b = jof(first), jof(last)
+    out = []
+    for d in tr:
+        h, l, c = g.h[d], g.l[d], g.c[d]
+        if np.isnan(c[a]):
+            continue
+        with np.errstate(all="ignore"):
+            lo, hi = np.nanmin(l[a:b + 1]), np.nanmax(h[a:b + 1])
+        if np.isnan(lo):
+            continue
+        for off in offsets:
+            n0 = int(np.floor((lo - off) / step)); n1 = int(np.ceil((hi - off) / step))
+            for n in range(n0, n1 + 1):
+                L = n * step + off
+                start = c[a]
+                if np.isnan(start) or abs(start - L) < 2:
+                    continue
+                side = 1 if start < L else -1               # approach direction
+                jt = None
+                for j in range(a + 1, b + 1):
+                    if np.isnan(h[j]):
                         continue
-                seen = False
-                for q in range(nt):
-                    if touched[q] == lev * side:
-                        seen = True
-                if seen:
+                    if (side > 0 and h[j] >= L) or (side < 0 and l[j] <= L):
+                        jt = j; break
+                if jt is None:
                     continue
-                touched[nt % 64] = lev * side; nt += 1
-                e = O[i, j + 1]
-                stop_px = lev - side * s; tgt_px = e + side * t
-                if (side > 0 and stop_px >= e) or (side < 0 and stop_px <= e):
-                    continue
-                jend = min(j + 1 + hold, fj)
-                j1, px, kind, w = _walk(O[i], H[i], L[i], C[i], j + 1, jend, side, stop_px, tgt_px, FILL_THROUGH)
-                xpx = px if kind == 1 else px - side * TICK
-                _put(out, n, i, j + 1, j1, side, e + side * TICK, xpx, kind); n += 1
-                cnt += 1; busy_to = j1
-    return out[:n]
-
-
-def round_numbers(d, R=100.0, mode=0, s_atr=0.05, t_atr=0.05, b_atr=0.02, hold=60,
-                  first=835, last=1430, max_tr=5):
-    rec = _round(d.O, d.H, d.L, d.C, d.flat, d.atr, R, mode, s_atr, t_atr, b_atr, hold,
-                 jof(first), jof(last), max_tr)
-    return trades_df(d, rec, f"Round {R:.0f} {'fade' if mode == 0 else 'break'}")
-
-
-# ---------------------------------------------------------------- reporting
-def stats(d, t, ref=None):
-    daily = np.zeros(d.D); np.add.at(daily, t.i.to_numpy(), t.net.to_numpy())
-    td = np.zeros(d.D, bool); td[t.i.to_numpy()] = True
-    w, l = t.net[t.net > 0].sum(), -t.net[t.net < 0].sum()
-    by = pd.Series(daily[td]).groupby(d.yr[td]).mean()
-    dd = daily[td]
-    out = dict(trades=len(t), per_day=len(t) / d.D, win=(t.net > 0).mean(), avg=t.net.mean(),
-               pf=w / l if l > 0 else np.nan, t_days=dd.mean() / dd.std() * np.sqrt(len(dd)),
-               sharpe=daily.mean() / daily.std() * np.sqrt(252), yrs_pos=int((by > 0).sum()),
-               avg_18_22=t.net[d.yr[t.i] < 2023].mean(), avg_23_26=t.net[d.yr[t.i] >= 2023].mean())
-    if ref is not None:
-        for k, r in ref.items():
-            out["corr_" + k] = np.corrcoef(daily, r)[0, 1]
-    return out, daily
-
-
-def table(rows):
-    df = pd.DataFrame(rows).T
-    fm = {"per_day": "{:.2f}", "win": "{:.0%}", "avg": "{:.0f}", "pf": "{:.2f}", "t_days": "{:.1f}",
-          "sharpe": "{:.2f}", "avg_18_22": "{:.0f}", "avg_23_26": "{:.0f}"}
-    for c in df:
-        if c.startswith("corr_"):
-            fm[c] = "{:.2f}"
-    print(df.to_string(formatters={k: v.format for k, v in fm.items() if k in df}))
-
-
-def reference_daily(d):
-    """Daily P&L per NQ of the plan's strategies (MultiCharts reports, Python OND)."""
-    from grid import execute
-    from portfolio import load_mc
-    from candidates24 import overnight_drift24
-    from multi_strategy24 import VB_REPORT, ONB_REPORT
-    pos = {r: i for i, r in enumerate(d.tr)}
-    s, kw = overnight_drift24(d.g)
-    ref = {}
-    for k, t in (("VB", load_mc(d.g, VB_REPORT)), ("ONB", load_mc(d.g, ONB_REPORT)),
-                 ("OND", execute(d.g, s, **kw))):
-        x = np.zeros(d.D)
-        for day, net in zip(t.day, t.net):
-            if day in pos:
-                x[pos[day]] += net
-        ref[k] = x
-    return ref
+                end = min(jt + horizon, g.last_j[d])
+                ev = dict(day=d, off=off, side=side, j=jt)
+                for X in x_pts:
+                    res = np.nan
+                    for j in range(jt + 1, end + 1):
+                        if np.isnan(h[j]):
+                            continue
+                        up = (h[j] >= L + X) if side > 0 else (l[j] <= L - X)
+                        dn = (l[j] <= L - X) if side > 0 else (h[j] >= L + X)
+                        if up and dn:
+                            res = np.nan; break
+                        if dn:
+                            res = 1; break
+                        if up:
+                            res = 0; break
+                    ev[f"rev_{X}"] = res
+                cc = c[end] if not np.isnan(c[end]) else np.nan
+                ev["fwd"] = (cc - L) * side
+                # crossing by cross_pts on a close, then continuation
+                jc = None
+                for j in range(jt, end + 1):
+                    if not np.isnan(c[j]) and (c[j] - L) * side >= cross_pts:
+                        jc = j; break
+                ev["cross"] = 0 if jc is None else 1
+                for X in x_pts:
+                    res = np.nan
+                    if jc is not None:
+                        ref = c[jc]
+                        for j in range(jc + 1, min(jc + horizon, g.last_j[d]) + 1):
+                            if np.isnan(h[j]):
+                                continue
+                            up = (h[j] >= ref + X) if side > 0 else (l[j] <= ref - X)
+                            back = (l[j] <= L) if side > 0 else (h[j] >= L)
+                            if up and back:
+                                break
+                            if back:
+                                res = 0; break
+                            if up:
+                                res = 1; break
+                    ev[f"cont_{X}"] = res
+                out.append(ev)
+    return pd.DataFrame(out)
 
 
 if __name__ == "__main__":
-    d = Data(Grid24())
-    ref = reference_daily(d)
-
-    print("1. VWAP trend (per NQ, after costs and 1 tick slippage per market fill)")
+    import warnings
+    warnings.filterwarnings("ignore")
+    from grid24 import Grid24
+    from portfolio import load_mc
+    from multi_strategy24 import VB_REPORT
+    g = Grid24()
+    pd.set_option("display.width", 250)
+    vb = load_mc(g, VB_REPORT)
+    vb["net"] = vb["net"] - SLIP * PV * (1 + (vb["kind"] != 1))
+    rows = {"Vault Break (MultiCharts list)": summary(vb)}
+    for name, kw in {"Beat the Market: long + short, trailing exit": {},
+                     "long only, trailing exit": dict(long_only=True),
+                     "long only, trailing exit + 75 pt stop": dict(long_only=True, stop_pts=75),
+                     "long only, Vault Break exits (40/75)": dict(long_only=True, trail=False, stop_pts=75, tp_pts=40)
+                     }.items():
+        rows[name] = summary(noise_momentum(g, **kw))
+    print("1. Noise momentum, per NQ after costs and 1 tick slippage"); print(pd.DataFrame(rows).T.to_string())
+    hv = high_vol_regime(g)
     rows = {}
-    for step in (1, 5, 15, 30):
-        for buf in (0.0, 0.02, 0.05):
-            t = vwap_trend(d, step=step, buf_atr=buf)
-            rows[f"{step}m, buffer {buf} ATR"] = stats(d, t, ref)[0]
-    for step in (5, 15):
-        t = vwap_trend(d, step=step, buf_atr=0.02, long_only=True)
-        rows[f"{step}m, buffer 0.02 ATR, long only"] = stats(d, t, ref)[0]
-    table(rows)
-
-    print("\n2. Noise area, the paper's full version")
-    sig = noise_sigma(d)
-    rows = {}
-    for mult in (1.0, 1.5):
-        for step in (30, 15):
-            for lo in (False, True):
-                t = noise_area(d, sig, mult=mult, step=step, long_only=lo)
-                rows[f"m {mult}, every {step}m{', long only' if lo else ''}"] = stats(d, t, ref)[0]
-    t = noise_area(d, sig, trail_vwap=False)
-    rows["m 1.0, 30m, band stop only (no VWAP trail)"] = stats(d, t, ref)[0]
-    table(rows)
-
-    print("\n3. Big-move reversal")
-    rows = {}
-    hv = high_vol_days(d)
-    for lag in (15, 30, 60):
-        nm = move_norm(d, lag)
-        for k in (2.0, 3.0):
-            for cond, cn in ((None, "all days"), (hv, "high-vol days")):
-                t = reversal(d, nm, lag=lag, k=k, hold=lag * 2, cond=cond)
-                rows[f"{lag}m move > {k}x normal, {cn}"] = stats(d, t, ref)[0]
-    table(rows)
-
-    print("\n4. Round numbers")
-    rows = {}
-    for R in (100.0, 50.0):
-        for s, tg in ((0.03, 0.03), (0.05, 0.05), (0.05, 0.10), (0.10, 0.10)):
-            t = round_numbers(d, R=R, mode=0, s_atr=s, t_atr=tg)
-            rows[f"fade {R:.0f}s, stop {s} / target {tg} ATR"] = stats(d, t, ref)[0]
-        for s, tg in ((0.03, 0.06), (0.05, 0.10), (0.05, 0.20)):
-            t = round_numbers(d, R=R, mode=1, s_atr=s, t_atr=tg)
-            rows[f"break {R:.0f}s, stop {s} / target {tg} ATR"] = stats(d, t, ref)[0]
-    table(rows)
+    for look, k in ((30, 2.0), (30, 3.0), (60, 2.0)):
+        for reg, r in (("all days", None), ("high-vol days", hv)):
+            rows[f"{look}-min move > {k}x normal, {reg}"] = summary(vol_fade(g, look=look, k=k, regime=r))
+    print("\n2. Fading large moves"); print(pd.DataFrame(rows).T.to_string())
+    ev = level_events(g)
+    ev["kind"] = ev.off.map({0: "100s", 50: "50s", 25: "placebo", 75: "placebo", 37: "placebo",
+                             63: "placebo", 12: "placebo", 88: "placebo"})
+    print("\n3. First touches of price levels: share reversing 10 / 20 pts first; continuation after a 5-pt close through")
+    print(ev.groupby("kind").agg(events=("fwd", "size"), rev10=("rev_10", "mean"), rev20=("rev_20", "mean"),
+                                 fwd30_pts=("fwd", "mean"), cont10=("cont_10", "mean"),
+                                 cont20=("cont_20", "mean")).round(3).to_string())

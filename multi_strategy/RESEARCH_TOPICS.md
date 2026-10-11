@@ -174,3 +174,66 @@ stop at max(band, VWAP), reversals allowed):
 Swapping one Vault Break contract for 1 MNQ of long-only noise area is about equal
 within 1 year and better within 2 years, but the gain is within the noise of these
 estimates. Adding the both-sides version lowers payouts.
+
+## Results of the first three tests (2026-10-11, `analysis/intraday_research.py`)
+
+All tests are per NQ, with $7.25 costs plus 1 tick (0.25 point) of slippage on every
+market or stop fill. Data: the 1-minute bars, 2018–2026.
+
+### 1. "Beat the Market" full version: better per trade, worse for Apex
+
+| | Trades | Win | Avg | PF | Years + |
+|---|---|---|---|---|---|
+| Vault Break (MultiCharts list, + slippage) | 1,743 | 66% | $92 | 1.26 | 9/9 |
+| Paper version, long + short, trailing exit | 2,068 | 40% | $120 | 1.25 | 8/9 |
+| … longs only | 1,012 | 44% | $155 | 1.38 | 9/9 |
+| … shorts only | 1,056 | 37% | $87 | 1.16 | 7/9 (2023–26: $53) |
+| Long only, trailing exit + 75-pt stop | 1,036 | 43% | $174 | 1.45 | 9/9 |
+| Long only, Vault Break's 40/75 exits | 1,654 | 64% | $74 | 1.19 | 8/9 |
+
+Daily correlation with Vault Break: 0.38. **In the accounts it loses**, with 1 tick of
+slippage on every strategy:
+
+| Plan | Funded payouts, 1 year | Blown | Challenge pass |
+|---|---|---|---|
+| Balanced: VB 3, ONB $300, OND $500 | **$5,387** | 48% | VB 8 + ONB $1,100: **42.8%** |
+| Trailing version 2 instead of VB | $4,100 | 39% | (8 MNQ instead of VB) 34.7% |
+| VB 2 + trailing version 1 | $5,208 | 41% | VB 6 + trailing 4: 40.2% |
+
+The trailing exit wins bigger but less often (43%). The Apex rules punish that: fewer
+$250 days, big days that break the 50% consistency rule, and runs of losses against a
+fixed $2,000 cushion. **For prop accounts, a high win rate and smooth days matter more
+than profit factor.** Vault Break's fixed 40-point target stays.
+
+### 2. Fading large intraday moves: loses everywhere
+
+Every version lost money: 30- or 60-minute moves above 2–3x normal, all days, high-ATR
+days, low-ATR days, and the VIX regimes (PF 0.71–0.95). The only positive cell was the
+VIX "long vol" regime, with 94–175 trades, which is noise. NQ keeps moving after large
+intraday moves (momentum), which is consistent with Vault Break working.
+
+### 3. Round numbers: a real but tiny effect, the opposite of the fade idea
+
+There are about 4,400 first touches each of 100- and 50-point levels, against
+8,800–8,900 for each pair of non-round "placebo" levels (12/88, 25/75, 37/63).
+
+| Level | Reverses 10 pts first | Moves 30 min later (pts, in the approach direction) |
+|---|---|---|
+| 100s | 48.9% | +1.1 |
+| 50s | 49.1% | +0.6 |
+| Placebo | 51.7–52.0% | +0.2 to +0.5 |
+
+Price goes *through* round levels slightly more often than through other levels
+(about 3 points, about 3 standard errors, in 7 of 9 years). There is no extra follow-through
+after a 5-point close through the level. Worth about 0.4 point per trade, below the
+costs, so it is not a strategy. At most it is a small tilt: do not place Vault Break's
+target just short of a round number.
+
+### Where this leaves the list
+- Topics 2–4 are done. None beats the current funded plan.
+- Lesson for the funded search: look for **high-win-rate, many-small-wins** edges, the
+  same shape as Vault Break (fixed target closer than the stop) and unlike trend
+  followers. Next candidates in that shape:
+  - Vault Break's entry at other times or on other bands (e.g. a short-side version
+    with a 40/75 bracket gated to downtrend days)
+  - an Overnight Drift-style fixed-time trade with a small target
