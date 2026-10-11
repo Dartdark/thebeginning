@@ -31,7 +31,7 @@
   every trade so a stop-out loses at most that much:
     contracts = Floor(RiskPerTrade / (stop points x point value)),
   and skips the trade when that is 0. Live on an MNQ chart: RiskPerTrade
-  1100 (about 6 MNQ at 2026 prices). Backtest on NQ: RiskPerTrade 0 and
+  1100 (3-4 MNQ at late-2026 prices). Backtest on NQ: RiskPerTrade 0 and
   NumContracts 1, so the report is per NQ like the others.
 
   Python test on the full 24-hour 1-minute data (2018-2026, per NQ, after

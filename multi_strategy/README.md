@@ -222,7 +222,7 @@ Break on this data reproduces 1,700 of the 1,743 MultiCharts trades on the same 
 - **Its stop must be sized in dollars.** The stop is 30% of the daily range: about
   $700 per NQ in 2018 and $2,850 in 2026, more than the whole $2,000 drawdown at
   8 MNQ. Sized so a stop-out costs about $1,100 (`RiskPerTrade 1100` on MNQ, about
-  6 MNQ in 2026), one account passes **37%** (no edge 26%), steady at 38% for
+  3-4 MNQ in 2026; 6 MNQ was typical over 2018-2026), one account passes **37%** (no edge 26%), steady at 38% for
   2018–22 starts and 36% for 2023–26.
 
 **Per account** (v3 10, Vault Break 12, Opening Drive 10 MNQ, Overnight Bias $1,100 a trade):
