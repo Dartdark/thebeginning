@@ -81,6 +81,23 @@ instrument's 1-minute exports: `Grid24("data/GC_1min_20*.csv", night_pattern="")
   breakout across markets (Zarattini et al.), so the first test on GC/CL/ES is the
   momentum breakout and the overnight-bias idea, each on its own market.
 
+## ES round (2026-10-11): no edge worth adding
+
+`data/ES_1min_<year>.csv` covers 2017 to 9 Oct 2026, full 24-hour days. Results are per
+ES contract for 2018–2026, with a $5 round trip plus 1 tick ($12.50) of slippage per
+market or stop fill.
+
+| Rules on ES | Trades | Win | Avg | PF | Years + |
+|---|---|---|---|---|---|
+| Noise breakout (Vault Break rules, target/stop scaled by ATR) | 1,720 | 62% | $3 | 1.01 | 6/9 |
+| Overnight Bias rules | 1,077 | 46% | $56 | 1.13 | 6/9 |
+| Overnight Drift rules | 1,021 | 50% | $6 | 1.03 | 4/9 |
+| "Beat the Market" (the paper's own SPY rules), long + short | 1,967 | 38% | $35 | 1.12 | 7/9 |
+
+The same ideas that work on NQ are much weaker on ES. Even the paper written for SPY
+makes only $5 a trade from 2023 on. ES would also be highly correlated with NQ, so it
+adds little diversification. ES is parked; the next markets to test are GC and CL.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

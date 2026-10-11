@@ -139,10 +139,12 @@ def summary(t):
     w, l = t.net[t.net > 0].sum(), -t.net[t.net < 0].sum()
     days = t["day"].nunique()
     by = t.groupby(y).net.mean()
+    def rnd(x):
+        return round(x) if pd.notna(x) else np.nan
     return dict(trades=len(t), per_day=round(len(t) / max(days, 1), 2), win=f"{(t.net > 0).mean():.0%}",
                 avg=round(t.net.mean()), pf=round(w / l, 2) if l else np.nan,
                 t_stat=round(t.net.mean() / t.net.std() * np.sqrt(len(t)), 1),
-                avg_2018_22=round(t.net[y < 2023].mean()), avg_2023_26=round(t.net[y >= 2023].mean()),
+                avg_2018_22=rnd(t.net[y < 2023].mean()), avg_2023_26=rnd(t.net[y >= 2023].mean()),
                 years_pos=f"{(by > 0).sum()}/{len(by)}")
 
 
