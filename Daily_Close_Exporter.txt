@@ -16,21 +16,21 @@ Inputs:
 	FileName("VIX3M_daily.csv");
 
 Variables:
-	Path(""), D(0), Row("");
+	OutFile(""), BarDt(0), RowStr("");
 
 Once begin
-	Path = Folder + FileName;
-	FileDelete(Path);
-	FileAppend(Path, "DATE,CLOSE" + NewLine);
+	OutFile = Folder + FileName;
+	FileDelete(OutFile);
+	FileAppend(OutFile, "DATE,CLOSE" + NewLine);
 end;
 
 if BarStatus(1) = 2 then begin
-	D = Date + 19000000;
-	Row = NumToStr(IntPortion(D / 10000), 0) + "-"
-		+ RightStr("0" + NumToStr(Mod(IntPortion(D / 100), 100), 0), 2) + "-"
-		+ RightStr("0" + NumToStr(Mod(D, 100), 0), 2) + ","
+	BarDt = Date + 19000000;
+	RowStr = NumToStr(IntPortion(BarDt / 10000), 0) + "-"
+		+ RightStr("0" + NumToStr(Mod(IntPortion(BarDt / 100), 100), 0), 2) + "-"
+		+ RightStr("0" + NumToStr(Mod(BarDt, 100), 0), 2) + ","
 		+ NumToStr(Close, 2);
-	FileAppend(Path, Row + NewLine);
+	FileAppend(OutFile, RowStr + NewLine);
 end;
 
 Plot1(Close, "Close");
