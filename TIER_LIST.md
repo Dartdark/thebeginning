@@ -68,6 +68,7 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 | NQ–ES spread (follow) | Strategy | +$79 gross, too thin after costs |
 | Overnight Drift GEX filter | Filter | Funded $5,433–6,150 |
 | Gap Fill (old research set) | Strategy | PF 1.14, but $12 a trade in 2023–26 (vs $76 before) |
+| 60-min breakout, longs only, entries 9:00–14:00, flat 15:00 (your idea) | Strategy | PF 1.31, t = 2.4, but 2025–26 negative; correlation 0.41 with VB; funded +$133 year 1, −$309 year 2 at $200 risk |
 | Yes/no (logistic) ML filter for ONB (after Vilkov 2026) | Filter | Kept beat skipped only 2–5/8 years; ridge version stays |
 
 ## F
@@ -92,6 +93,7 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 | Momentum Turning Points (Goulding, Harvey & Mazzoleni, SSRN 3489539) | Paper / filter | Monthly states; on NQ 2018–26 'Bear' months were followed by gains (+278 bp), not losses; strategy splits flip with the window |
 | Fact, Fiction and Momentum Investing (Asness et al. 2014, SSRN 2435323) | Paper | Cross-sectional stock momentum (12-1 month winners vs losers); myth-busting essay, no NQ day-trading rule |
 | Index MA agreement for ES (your idea; ES + NQ only so far, YM pending) | Strategy | MA 5–200, three modes: −$72 to +$23 a day, t −1.9 to +1.0; shorts lose; long side ≈ market drift |
+| 60-min 40-bar breakout + 200 SMA, 2x ATR stop (your idea) | Strategy | As written: PF 1.08, t 0.7, shorts lose, −$97k max DD, holds 2–3 days (not Apex-legal); 2026 −$76k |
 | 0DTE trading rules (Vilkov 2026) | Paper | SPX options; not tradable on Apex |
 | 0DTE gamma and volatility (Dim, Eraker & Vilkov 2025) | Paper | Needs intraday 0DTE dealer positions (paid Cboe data) |
 | Contrarian VRP ETF strategy (SSRN 4841308) | Paper | Rules undefined, no costs, multi-day ETFs |
