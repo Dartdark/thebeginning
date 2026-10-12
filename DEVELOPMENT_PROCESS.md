@@ -219,3 +219,20 @@ cluster and most short clusters.
   grid shows a **plateau from 33 to 42 points** (0.94–1.14) that falls away from 45 points up.
   Decision times 9:45 and 10:00 are the same bar on the 30-minute chart; 10:15/10:30 was better in
   2018–22 but much worse in 2023–26. Target 40 sits inside the plateau; nothing to change.
+
+### Robustness of every strategy (2026-10-12, `analysis/robustness_all_test.py`)
+
+Rank = percentile among all tested combinations (higher is better); folds = 3-year windows
+2018–20 … 2024–26; holdout = 2023–26 Calmar, never used for choosing.
+
+| Strategy | Combinations | Current: holdout rank | Current: fold ranks | Sensitivity | Action |
+|---|---|---|---|---|---|
+| Vault Break (challenge + funded) | 720 | 84% | 60–94% | Smooth on stop/noise; target plateau 33–42 pts; start 10:00 regime-dependent | Keep |
+| Overnight Bias plain (challenge) | 500 | ADX 20: 59%; **ADX 30 / 0.25 ATR: 99%** | ADX 20: 46–93%; **ADX 30: 93–100%** | ADX 30 setting smooth (≤22% drops) | **Switch to ADX 30 / 0.25 ATR** |
+| Overnight Bias ML v2 (funded) | 432 | 63% | 55–98% | Stop and target flat; ADX 20 is a peak (−30% at 15/25), partly by construction (the ML weights were fitted on ADX-20 trades) | Keep. Stop 0.25 tested: better with cushion sizing (+$623 year 1), worse at fixed size (−$433), better only in the two latest folds, so no change |
+| Overnight Drift (funded) | 150 | 96% | 90–98% (33% in 2018–20) | **Peaky**: entry 30 min later −48%, exit 2:00/4:00 −40%, stop 0.2 −40%, all days instead of down days −47% | Keep, but it sits on a narrow peak: the least robust strategy, consistent with its B tier |
+| Expiration Open Short (funded) | 105 | 91% | 49–74% early, 91–97% since 2022 | Start must be 8:30 (the settlement mechanism, −76% at 8:45); exit flat 9:15–10:30; stop flat 0.2–1.0 | Keep (9:30 exit scores higher over 2018–26 but the same plateau; 105 trades is too few to fine-tune) |
+
+By side (Overnight Bias ML): the long side's current settings rank 52–99% across folds with
+smooth stop/target curves; the short side ranks 44–83% and prefers a tighter stop (0.2–0.25) in
+most folds, but the funded bench doesn't confirm a change.
