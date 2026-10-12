@@ -1,0 +1,113 @@
+Mean reversion, scheduled news and headline shocks on NQ (2026-10-12, user request).
+
+=== A1. Asia session VWAP fade (VWAP from 17:00, entries 17:30-23:00, out 23:59) ===
+stretch 0.1 ATR, stop 0.1 ATR                  n= 1416 win 44% avg $  -47 PF 0.83 t=-2.9 yrs+ 2/9 | 23+ $  -68 PF 0.81 | L $ -32 S $ -61
+stretch 0.1 ATR, stop 0.2 ATR                  n= 1416 win 53% avg $  -59 PF 0.82 t=-2.8 yrs+ 2/9 | 23+ $ -109 PF 0.77 | L $ -25 S $ -92
+stretch 0.15 ATR, stop 0.1 ATR                 n=  782 win 42% avg $  -21 PF 0.93 t=-0.8 yrs+ 2/9 | 23+ $  -43 PF 0.90 | L $ -14 S $ -29
+stretch 0.15 ATR, stop 0.2 ATR                 n=  782 win 51% avg $  -32 PF 0.92 t=-0.9 yrs+ 3/9 | 23+ $  -64 PF 0.89 | L $ -13 S $ -51
+stretch 0.25 ATR, stop 0.1 ATR                 n=  219 win 32% avg $ -173 PF 0.57 t=-3.2 yrs+ 2/9 | 23+ $ -295 PF 0.51 | L $-166 S $-182
+stretch 0.25 ATR, stop 0.2 ATR                 n=  219 win 44% avg $ -160 PF 0.68 t=-2.1 yrs+ 4/9 | 23+ $ -231 PF 0.69 | L $ -78 S $-265
+
+=== A2. London / pre-market VWAP fade (VWAP from 0:00, entries 0:30-6:30, out 7:25) ===
+stretch 0.1 ATR, stop 0.1 ATR                  n= 1876 win 45% avg $  -31 PF 0.89 t=-2.1 yrs+ 2/9 | 23+ $  -25 PF 0.93 | L $ -24 S $ -37
+stretch 0.1 ATR, stop 0.2 ATR                  n= 1876 win 57% avg $  -19 PF 0.95 t=-1.0 yrs+ 3/9 | 23+ $  -19 PF 0.96 | L $ -11 S $ -26
+stretch 0.15 ATR, stop 0.1 ATR                 n= 1204 win 38% avg $  -46 PF 0.86 t=-2.2 yrs+ 2/9 | 23+ $  -88 PF 0.80 | L $ -36 S $ -57
+stretch 0.15 ATR, stop 0.2 ATR                 n= 1204 win 51% avg $  -17 PF 0.96 t=-0.6 yrs+ 3/9 | 23+ $   -8 PF 0.98 | L $  13 S $ -49
+stretch 0.25 ATR, stop 0.1 ATR                 n=  386 win 37% avg $   10 PF 1.03 t= 0.2 yrs+ 5/9 | 23+ $  -38 PF 0.92 | L $  69 S $ -79
+stretch 0.25 ATR, stop 0.2 ATR                 n=  386 win 52% avg $   21 PF 1.05 t= 0.3 yrs+ 7/9 | 23+ $  -91 PF 0.86 | L $  48 S $ -19
+
+=== A3. Multi-day pullback, trade the next session 8:30-15:00 ===
+after 2 sessions same way, stop 0.3 ATR        n= 1059 win 38% avg $   28 PF 1.03 t= 0.4 yrs+ 4/9 | 23+ $  -93 PF 0.92 | L $ 131 S $ -34
+after 2 sessions same way, stop none ATR       n= 1059 win 49% avg $   22 PF 1.02 t= 0.2 yrs+ 4/9 | 23+ $ -192 PF 0.87 | L $ 261 S $-120
+after 3 sessions same way, stop 0.3 ATR        n=  516 win 37% avg $   50 PF 1.06 t= 0.5 yrs+ 4/9 | 23+ $  -23 PF 0.98 | L $   7 S $  68
+after 3 sessions same way, stop none ATR       n=  516 win 48% avg $   87 PF 1.08 t= 0.6 yrs+ 4/9 | 23+ $ -185 PF 0.87 | L $ 384 S $ -40
+after 4 sessions same way, stop 0.3 ATR        n=  249 win 40% avg $  120 PF 1.15 t= 0.8 yrs+ 3/9 | 23+ $    2 PF 1.00 | L $ -53 S $ 168
+after 4 sessions same way, stop none ATR       n=  249 win 51% avg $  169 PF 1.18 t= 0.9 yrs+ 6/9 | 23+ $ -192 PF 0.85 | L $ 764 S $   4
+
+=== B1/B2. FOMC statement 13:00 CT and press conference 13:30 ===
+follow 13:00->1305, out 1329                   n=   69 win 43% avg $ -120 PF 0.63 t=-1.4 yrs+ 2/9 | 23+ $ -157 PF 0.60 | L $-163 S $ -68
+follow 13:00->1305, out 1400                   n=   69 win 49% avg $  -73 PF 0.92 t=-0.3 yrs+ 4/9 | 23+ $  190 PF 1.19 | L $ 188 S $-393
+follow 13:00->1305, out 1500                   n=   69 win 42% avg $ -355 PF 0.75 t=-0.8 yrs+ 4/9 | 23+ $ -480 PF 0.73 | L $-682 S $  45
+follow 13:00->1310, out 1329                   n=   69 win 46% avg $ -158 PF 0.54 t=-1.9 yrs+ 2/9 | 23+ $ -211 PF 0.48 | L $-132 S $-186
+follow 13:00->1310, out 1400                   n=   69 win 49% avg $ -144 PF 0.84 t=-0.5 yrs+ 5/9 | 23+ $  537 PF 1.74 | L $ 206 S $-526
+follow 13:00->1310, out 1500                   n=   69 win 43% avg $ -416 PF 0.71 t=-0.9 yrs+ 5/9 | 23+ $   84 PF 1.06 | L $-702 S $-104
+follow 13:00->1315, out 1329                   n=   69 win 42% avg $ -162 PF 0.54 t=-1.9 yrs+ 4/9 | 23+ $  -56 PF 0.85 | L $ -50 S $-291
+follow 13:00->1315, out 1400                   n=   69 win 46% avg $   29 PF 1.04 t= 0.1 yrs+ 4/9 | 23+ $  925 PF 2.84 | L $ 443 S $-451
+follow 13:00->1315, out 1500                   n=   69 win 43% avg $ -377 PF 0.73 t=-0.9 yrs+ 3/9 | 23+ $  247 PF 1.18 | L $-565 S $-160
+fade 13:00->1305, out 1329                     n=   69 win 52% avg $   86 PF 1.38 t= 1.0 yrs+ 7/9 | 23+ $  123 PF 1.48 | L $  33 S $ 128
+fade 13:00->1305, out 1400                     n=   69 win 51% avg $   38 PF 1.05 t= 0.1 yrs+ 4/9 | 23+ $ -225 PF 0.81 | L $ 358 S $-223
+fade 13:00->1305, out 1500                     n=   69 win 57% avg $  321 PF 1.30 t= 0.7 yrs+ 5/9 | 23+ $  445 PF 1.34 | L $ -79 S $ 647
+fade 13:00->1310, out 1329                     n=   69 win 51% avg $  123 PF 1.62 t= 1.5 yrs+ 7/9 | 23+ $  176 PF 1.82 | L $ 151 S $  98
+fade 13:00->1310, out 1400                     n=   69 win 51% avg $  110 PF 1.14 t= 0.4 yrs+ 4/9 | 23+ $ -571 PF 0.56 | L $ 492 S $-240
+fade 13:00->1310, out 1500                     n=   69 win 55% avg $  382 PF 1.36 t= 0.9 yrs+ 4/9 | 23+ $ -119 PF 0.92 | L $  70 S $ 668
+fade 13:00->1315, out 1329                     n=   69 win 54% avg $  127 PF 1.62 t= 1.5 yrs+ 4/9 | 23+ $   21 PF 1.07 | L $ 256 S $  16
+fade 13:00->1315, out 1400                     n=   69 win 54% avg $  -63 PF 0.92 t=-0.2 yrs+ 5/9 | 23+ $ -959 PF 0.34 | L $ 417 S $-478
+fade 13:00->1315, out 1500                     n=   69 win 55% avg $  343 PF 1.33 t= 0.8 yrs+ 6/9 | 23+ $ -282 PF 0.83 | L $ 126 S $ 530
+follow 13:00->13:30 move, 13:30->15:00         n=   69 win 49% avg $ -244 PF 0.82 t=-0.6 yrs+ 5/9 | 23+ $  278 PF 1.20 | L $-535 S $ 133
+follow presser 13:30->13:45, ->15:00           n=   69 win 51% avg $  -19 PF 0.98 t=-0.0 yrs+ 6/9 | 23+ $-1044 PF 0.52 | L $-742 S $ 921
+fade 13:00->13:30 move, 13:30->15:00           n=   69 win 51% avg $  210 PF 1.18 t= 0.5 yrs+ 4/9 | 23+ $ -312 PF 0.81 | L $-168 S $ 500
+fade presser 13:30->13:45, ->15:00             n=   69 win 46% avg $  -15 PF 0.99 t=-0.0 yrs+ 3/9 | 23+ $ 1009 PF 1.90 | L $-955 S $ 708
+
+=== B3. 9:00 CT releases (9:00-9:05 range > 3x normal) ===
+  44 days
+follow 9:00->905, out 935                      n=   44 win 55% avg $   79 PF 1.15 t= 0.3 yrs+ 5/9 | 23+ $  381 PF 1.88 | L $ -99 S $ 192
+follow 9:00->905, out 1005                     n=   44 win 57% avg $  239 PF 1.39 t= 0.8 yrs+ 5/9 | 23+ $  725 PF 2.45 | L $  37 S $ 367
+follow 9:00->910, out 940                      n=   44 win 59% avg $  -29 PF 0.95 t=-0.1 yrs+ 6/9 | 23+ $  172 PF 1.31 | L $-517 S $ 342
+follow 9:00->910, out 1010                     n=   44 win 57% avg $  -39 PF 0.94 t=-0.1 yrs+ 6/9 | 23+ $  498 PF 2.70 | L $-460 S $ 281
+fade 9:00->905, out 935                        n=   44 win 36% avg $ -114 PF 0.81 t=-0.5 yrs+ 4/9 | 23+ $ -416 PF 0.50 | L $-227 S $  65
+fade 9:00->905, out 1005                       n=   44 win 41% avg $ -274 PF 0.69 t=-0.9 yrs+ 3/9 | 23+ $ -759 PF 0.39 | L $-401 S $ -72
+fade 9:00->910, out 940                        n=   44 win 41% avg $   -6 PF 0.99 t=-0.0 yrs+ 3/9 | 23+ $ -207 PF 0.72 | L $-377 S $ 483
+fade 9:00->910, out 1010                       n=   44 win 43% avg $    4 PF 1.01 t= 0.0 yrs+ 3/9 | 23+ $ -532 PF 0.35 | L $-316 S $ 426
+
+=== B4. 7:30 releases: NFP-like (Friday, day <= 10) vs other ===
+  NFP-like 76, other 179
+NFP: follow 7:29->7:45, out 800                n=   76 win 47% avg $   49 PF 1.21 t= 0.6 yrs+ 4/9 | 23+ $  158 PF 1.63 | L $  32 S $  70
+NFP: follow 7:29->7:45, out 830                n=   76 win 41% avg $ -199 PF 0.57 t=-1.8 yrs+ 2/9 | 23+ $ -366 PF 0.44 | L $-138 S $-275
+NFP: follow 7:29->7:45, out 900                n=   76 win 46% avg $ -420 PF 0.49 t=-2.2 yrs+ 1/9 | 23+ $ -505 PF 0.47 | L $-495 S $-327
+NFP: fade 7:29->7:45, out 800                  n=   76 win 53% avg $  -83 PF 0.72 t=-1.0 yrs+ 4/9 | 23+ $ -193 PF 0.55 | L $-104 S $ -67
+NFP: fade 7:29->7:45, out 830                  n=   76 win 55% avg $  165 PF 1.58 t= 1.5 yrs+ 7/9 | 23+ $  332 PF 2.10 | L $ 240 S $ 103
+NFP: fade 7:29->7:45, out 900                  n=   76 win 53% avg $  385 PF 1.92 t= 2.0 yrs+ 8/9 | 23+ $  471 PF 2.03 | L $ 293 S $ 460
+other: follow 7:29->7:45, out 800              n=  179 win 52% avg $  -11 PF 0.95 t=-0.2 yrs+ 6/9 | 23+ $ -101 PF 0.66 | L $ -22 S $   6
+other: follow 7:29->7:45, out 830              n=  179 win 49% avg $   -3 PF 0.99 t=-0.0 yrs+ 6/9 | 23+ $ -117 PF 0.70 | L $ -55 S $  73
+other: follow 7:29->7:45, out 900              n=  179 win 49% avg $ -145 PF 0.82 t=-0.9 yrs+ 5/9 | 23+ $ -217 PF 0.75 | L $-137 S $-157
+other: fade 7:29->7:45, out 800                n=  179 win 44% avg $  -24 PF 0.90 t=-0.5 yrs+ 3/9 | 23+ $   67 PF 1.32 | L $ -40 S $ -12
+other: fade 7:29->7:45, out 830                n=  179 win 46% avg $  -31 PF 0.91 t=-0.5 yrs+ 3/9 | 23+ $   83 PF 1.28 | L $-108 S $  21
+other: fade 7:29->7:45, out 900                n=  179 win 51% avg $  110 PF 1.17 t= 0.7 yrs+ 4/9 | 23+ $  182 PF 1.27 | L $ 122 S $ 102
+
+=== C. Headline-shock proxy: unscheduled 5-minute jumps ===
+day 8:40-14:15 >4x follow 15m                  n= 2896 win 47% avg $   -7 PF 0.98 t=-0.4 yrs+ 4/9 | 23+ $   -3 PF 0.99 | L $  10 S $ -19
+day 8:40-14:15 >4x follow 30m                  n= 2583 win 44% avg $   14 PF 1.04 t= 0.7 yrs+ 4/9 | 23+ $   21 PF 1.05 | L $  39 S $  -5
+day 8:40-14:15 >4x follow 60m                  n= 2212 win 39% avg $   28 PF 1.06 t= 1.0 yrs+ 4/9 | 23+ $   59 PF 1.10 | L $  40 S $  18
+day 8:40-14:15 >4x fade 15m                    n= 2914 win 45% avg $  -25 PF 0.92 t=-1.5 yrs+ 1/9 | 23+ $  -35 PF 0.91 | L $ -31 S $ -18
+day 8:40-14:15 >4x fade 30m                    n= 2638 win 43% avg $  -43 PF 0.89 t=-2.2 yrs+ 1/9 | 23+ $  -42 PF 0.92 | L $ -45 S $ -41
+day 8:40-14:15 >4x fade 60m                    n= 2338 win 38% avg $  -50 PF 0.90 t=-1.9 yrs+ 2/9 | 23+ $  -55 PF 0.91 | L $ -32 S $ -76
+day 8:40-14:15 >6x follow 15m                  n=  766 win 48% avg $   28 PF 1.08 t= 0.6 yrs+ 7/9 | 23+ $   73 PF 1.13 | L $ 131 S $ -54
+day 8:40-14:15 >6x follow 30m                  n=  702 win 50% avg $   93 PF 1.23 t= 1.8 yrs+ 8/9 | 23+ $  121 PF 1.21 | L $ 219 S $  -6
+day 8:40-14:15 >6x follow 60m                  n=  637 win 44% avg $  168 PF 1.36 t= 2.5 yrs+ 8/9 | 23+ $  305 PF 1.49 | L $ 199 S $ 144
+day 8:40-14:15 >6x fade 15m                    n=  779 win 46% avg $  -30 PF 0.92 t=-0.7 yrs+ 1/9 | 23+ $  -60 PF 0.90 | L $  32 S $-108
+day 8:40-14:15 >6x fade 30m                    n=  730 win 43% avg $  -61 PF 0.87 t=-1.2 yrs+ 3/9 | 23+ $  -82 PF 0.88 | L $ -23 S $-111
+day 8:40-14:15 >6x fade 60m                    n=  688 win 40% avg $  -90 PF 0.85 t=-1.5 yrs+ 2/9 | 23+ $ -143 PF 0.83 | L $ -66 S $-122
+day 8:40-14:15 >8x follow 15m                  n=  261 win 44% avg $  -10 PF 0.98 t=-0.1 yrs+ 5/9 | 23+ $  -22 PF 0.97 | L $ 115 S $-115
+day 8:40-14:15 >8x follow 30m                  n=  241 win 45% avg $  -48 PF 0.92 t=-0.4 yrs+ 5/9 | 23+ $ -153 PF 0.84 | L $  46 S $-120
+day 8:40-14:15 >8x follow 60m                  n=  228 win 40% avg $  -11 PF 0.98 t=-0.1 yrs+ 3/9 | 23+ $  -83 PF 0.92 | L $ -53 S $  23
+day 8:40-14:15 >8x fade 15m                    n=  263 win 49% avg $   -6 PF 0.99 t=-0.1 yrs+ 5/9 | 23+ $  -35 PF 0.96 | L $  89 S $-122
+day 8:40-14:15 >8x fade 30m                    n=  249 win 49% avg $   28 PF 1.05 t= 0.3 yrs+ 4/9 | 23+ $   76 PF 1.09 | L $  88 S $ -44
+day 8:40-14:15 >8x fade 60m                    n=  240 win 44% avg $   20 PF 1.03 t= 0.1 yrs+ 4/9 | 23+ $  122 PF 1.13 | L $ 102 S $ -87
+overnight 17:30-7:15 >4x follow 15m            n= 5930 win 41% avg $  -19 PF 0.86 t=-3.5 yrs+ 0/9 | 23+ $  -19 PF 0.89 | L $  -6 S $ -31
+overnight 17:30-7:15 >4x follow 30m            n= 5327 win 40% avg $   -9 PF 0.95 t=-1.2 yrs+ 3/9 | 23+ $   -6 PF 0.97 | L $   1 S $ -17
+overnight 17:30-7:15 >4x follow 60m            n= 4720 win 37% avg $  -16 PF 0.92 t=-1.7 yrs+ 2/9 | 23+ $  -14 PF 0.95 | L $  -2 S $ -29
+overnight 17:30-7:15 >4x fade 15m              n= 6130 win 46% avg $  -17 PF 0.88 t=-3.3 yrs+ 1/9 | 23+ $  -11 PF 0.94 | L $ -10 S $ -23
+overnight 17:30-7:15 >4x fade 30m              n= 5575 win 45% avg $  -13 PF 0.92 t=-2.0 yrs+ 1/9 | 23+ $   -5 PF 0.98 | L $  -9 S $ -19
+overnight 17:30-7:15 >4x fade 60m              n= 4959 win 41% avg $   -6 PF 0.97 t=-0.6 yrs+ 4/9 | 23+ $   -8 PF 0.97 | L $   0 S $ -12
+overnight 17:30-7:15 >6x follow 15m            n= 2225 win 41% avg $  -14 PF 0.92 t=-1.2 yrs+ 3/9 | 23+ $  -11 PF 0.95 | L $  31 S $ -51
+overnight 17:30-7:15 >6x follow 30m            n= 2058 win 43% avg $   -1 PF 1.00 t=-0.0 yrs+ 3/9 | 23+ $    4 PF 1.01 | L $  43 S $ -37
+overnight 17:30-7:15 >6x follow 60m            n= 1896 win 39% avg $    3 PF 1.01 t= 0.1 yrs+ 3/9 | 23+ $   21 PF 1.06 | L $  59 S $ -43
+overnight 17:30-7:15 >6x fade 15m              n= 2274 win 48% avg $  -25 PF 0.85 t=-2.5 yrs+ 1/9 | 23+ $  -24 PF 0.90 | L $  -5 S $ -49
+overnight 17:30-7:15 >6x fade 30m              n= 2127 win 46% avg $  -29 PF 0.86 t=-2.3 yrs+ 2/9 | 23+ $  -37 PF 0.87 | L $  -7 S $ -57
+overnight 17:30-7:15 >6x fade 60m              n= 1993 win 44% avg $  -28 PF 0.89 t=-1.7 yrs+ 4/9 | 23+ $  -57 PF 0.84 | L $   3 S $ -67
+overnight 17:30-7:15 >8x follow 15m            n= 1012 win 39% avg $  -36 PF 0.82 t=-1.9 yrs+ 2/9 | 23+ $  -57 PF 0.81 | L $ -17 S $ -52
+overnight 17:30-7:15 >8x follow 30m            n=  937 win 41% avg $  -16 PF 0.93 t=-0.7 yrs+ 4/9 | 23+ $  -49 PF 0.86 | L $  17 S $ -43
+overnight 17:30-7:15 >8x follow 60m            n=  881 win 38% avg $    2 PF 1.01 t= 0.1 yrs+ 3/9 | 23+ $   34 PF 1.08 | L $  68 S $ -50
+overnight 17:30-7:15 >8x fade 15m              n= 1036 win 50% avg $   -9 PF 0.95 t=-0.5 yrs+ 5/9 | 23+ $   -2 PF 0.99 | L $  -6 S $ -13
+overnight 17:30-7:15 >8x fade 30m              n=  976 win 48% avg $  -24 PF 0.90 t=-1.1 yrs+ 4/9 | 23+ $   -6 PF 0.98 | L $  -2 S $ -53
+overnight 17:30-7:15 >8x fade 60m              n=  925 win 45% avg $  -48 PF 0.84 t=-1.8 yrs+ 2/9 | 23+ $  -77 PF 0.82 | L $ -16 S $ -89

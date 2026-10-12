@@ -1,0 +1,142 @@
+Headline Shock Follow and NFP Fade: full checks (2026-10-12, from analysis/news_meanrev_test.py).
+
+1. Grid: 100 combinations (K 5-7, lookback 10-30 trading days, hold 45-120 min / to 14:55)
+   design 2018-22 PF > 1 in 88%, holdout 2023-26 PF > 1 in 99%
+ size  score_mean k_range lookback_range hold_range  medoid_k  medoid_lookback  medoid_hold
+    7    0.569355 5.5-5.5          10-14     45-120       5.5             14.0         60.0
+    5    0.649534     5-5          10-14     60-120       5.0             14.0         90.0
+    4    0.634434   6-6.5          10-14      45-90       6.0             14.0         60.0
+    4    0.669533   5-5.5          10-14    400-400       5.0             10.0        400.0
+   medoid K 5.5 / 14 days / 60 min: design Calmar 0.56 t 1.6 | holdout Calmar 1.19 PF 1.39 avg $232 (rank 71%)
+   medoid K 5.0 / 14 days / 90 min: design Calmar 0.80 t 2.3 | holdout Calmar 0.95 PF 1.23 avg $147 (rank 50%)
+   medoid K 6.0 / 14 days / 60 min: design Calmar 0.58 t 1.5 | holdout Calmar 1.44 PF 1.50 avg $312 (rank 84%)
+   medoid K 5.0 / 10 days / 400 min: design Calmar 0.55 t 1.7 | holdout Calmar 0.78 PF 1.24 avg $171 (rank 39%)
+
+   Chosen (largest cluster's medoid): K 5.5, lookback 14 trading days, hold 60
+   Sensitivity (one at a time, 2018-26 avg / PF):
+     k: 5: $101/1.23  5.5: $142/1.31  6: $175/1.38  6.5: $174/1.36  7: $141/1.27
+     lookback: 10: $118/1.27  14: $142/1.31  20: $135/1.27  30: $83/1.16
+     hold: 45: $84/1.19  60: $142/1.31  90: $165/1.34  120: $206/1.39  400: $251/1.44
+
+2. Chosen version, per NQ after costs:
+Headline Shock Follow                          n=  835 win 43% avg $  142 PF 1.31 t= 2.5 yrs+ 6/9 | 23+ $  232 PF 1.39 | L $ 142 S $ 141
+  longs                                        n=  352 win 45% avg $  142 PF 1.31 t= 1.5 yrs+ 7/9 | 23+ $  239 PF 1.37 | L $ 142 S $ nan
+  shorts                                       n=  483 win 41% avg $  141 PF 1.31 t= 2.1 yrs+ 6/9 | 23+ $  227 PF 1.39 | L $ nan S $ 141
+   by year: {2018: 2152, 2019: -96, 2020: 15760, 2021: 3304, 2022: 20581, 2023: -3437, 2024: -2059, 2025: 53430, 2026: 28756}
+   trades a year: 93.0 | jumps by hour: {8: 31, 9: 103, 10: 124, 11: 187, 12: 179, 13: 170, 14: 41}
+   placebo (same days, random times, follow the last 5 min, 20 runs): real $142 vs $32 (-75..117)
+   no stop                                     n=  756 win 49% avg $  137 PF 1.27 t= 2.0 yrs+ 5/9 | 23+ $  257 PF 1.41 | L $ 176 S $ 110
+
+3. NFP Fade (7:29 -> 7:45 reaction faded, 7:46 -> 9:00, stop 0.5 ATR), per NQ:
+NFP Fade                                       n=   76 win 51% avg $  319 PF 1.71 t= 1.7 yrs+ 7/9 | 23+ $  471 PF 2.03 | L $ 293 S $ 340
+  longs                                        n=   34 win 59% avg $  293 PF 1.84 t= 1.3 yrs+ 6/9 | 23+ $  674 PF 3.47 | L $ 293 S $ nan
+  shorts                                       n=   42 win 45% avg $  340 PF 1.64 t= 1.2 yrs+ 5/9 | 23+ $  369 PF 1.67 | L $ nan S $ 340
+   by year: {2018: 612, 2019: -1382, 2020: -2700, 2021: 5935, 2022: 6228, 2023: 6908, 2024: 1313, 2025: 3536, 2026: 3779}
+   placebo (same days and times, random side, 200 runs, no stop): real $319 vs $-8 (95% $315)
+
+4. Standard metrics per NQ, 2018-2026:
+           trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+HSF           835 43% $142 $13,189   0.81    1.82          1.31 $18,486   0.71  7.43       3.55
+HSF longs     352 45% $142  $5,580   0.54    1.15          1.31 $14,072   0.40  5.07       2.20
+HSF shorts    483 41% $141  $7,609   0.68    1.44          1.31 $13,815   0.55  7.14       2.13
+NFP            76 51% $319  $2,699   0.56    1.12          1.71  $7,562   0.36  5.36       1.01
+NFP longs      34 59% $293  $1,108   0.44    0.72          1.84  $5,806   0.19  2.93       0.76
+NFP shorts     42 45% $340  $1,591   0.39    0.86          1.64  $6,598   0.24  5.65       0.56
+   2023 onward:
+           trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+HSF           331 46% $232 $19,862   0.95    2.32          1.39 $16,710   1.19 13.00       3.05
+HSF longs     130 45% $239  $8,048   0.61    1.41          1.37 $13,197   0.61  7.48       2.15
+HSF shorts    201 46% $227 $11,815   0.82    1.78          1.39 $12,034   0.98  9.52       2.48
+NFP            33 58% $471  $4,024   0.80    1.77          2.03  $4,784   0.84  3.23       2.49
+
+5. Funded bench, cushion sizing:
+                           1y 1y 2023+      2y blown 1y blown 2y days to 1st
+Current plan           $7,676   $8,606 $12,012       6%       4%          72
++ HSF 1 MNQ            $7,922   $8,965 $12,097       5%       4%          70
++ HSF 2 MNQ            $8,413  $10,261 $11,690       8%      10%          72
++ HSF 3 MNQ            $7,801   $9,471 $11,178      13%      14%          73
++ HSF longs 2 MNQ      $7,802   $8,759 $12,088       5%       4%          75
++ HSF shorts 2 MNQ     $8,386   $9,947 $11,701       8%       9%          68
++ NFP $300             $7,843   $8,867 $12,049       5%       3%          74
++ NFP $500             $8,093   $9,194 $12,086       4%       3%          74
++ HSF 2 MNQ + NFP $500 $8,531  $10,294 $11,498       9%      10%          69
+   daily P&L correlation with the plan:
+       VB  ONB_ML2_MC  MON_MC   EOS  LDF_MC   HSF   NFP
+HSF  0.02        0.01    0.08  0.01    0.15  1.00 -0.08
+NFP -0.02       -0.02   -0.00 -0.00   -0.02 -0.08  1.00
+
+   Portfolio at full size:
+             trades win avg  annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+current plan   1676 55% $87 $16,226   2.51    4.76          1.70 $3,743   4.33  1.30      24.90
++ HSF 2 MNQ    1787 54% $95 $18,864   2.53    4.98          1.72 $4,482   4.21  1.39      27.11
+
+6. Bootstrap (10-day blocks, 5,000 runs):
+                                     actual        p5       p50       p95
+name                 metric                                              
+HSF 2023-26          sharpe            0.95      0.27      0.95      1.50
+                     sortino           2.32      0.54      2.27      4.19
+                     pf_day            1.53      1.12      1.51      1.97
+                     calmar            1.19      0.19      1.15      3.04
+                     ulcer            13.00      3.33      7.20     18.71
+                     max_dd       16,709.75 10,173.85 16,575.75 30,100.26
+                     P(Sharpe<=0)       NaN       NaN      0.01       NaN
+HSF longs 2023-26    sharpe            0.61     -0.16      0.62      1.17
+                     sortino           1.41     -0.25      1.40      3.21
+                     pf_day            1.45      0.92      1.44      2.09
+                     calmar            0.61     -0.07      0.63      2.19
+                     ulcer             7.48      3.00      6.94     19.54
+                     max_dd       13,196.75  7,039.73 12,227.25 22,952.90
+                     P(Sharpe<=0)       NaN       NaN      0.09       NaN
+HSF shorts 2023-26   sharpe            0.82     -0.01      0.79      1.43
+                     sortino           1.78     -0.01      1.71      3.90
+                     pf_day            1.47      1.00      1.45      2.03
+                     calmar            0.98     -0.00      0.75      2.29
+                     ulcer             9.52      3.53      7.93     21.31
+                     max_dd       12,034.50  8,715.09 14,587.00 27,193.66
+                     P(Sharpe<=0)       NaN       NaN      0.05       NaN
+HSF 2018-26          sharpe            0.81      0.34      0.80      1.21
+                     sortino           1.82      0.64      1.74      3.03
+                     pf_day            1.44      1.15      1.42      1.74
+                     calmar            0.71      0.15      0.62      1.52
+                     ulcer             7.43      3.49      7.03     18.88
+                     max_dd       18,485.50 12,622.74 20,088.75 36,124.11
+                     P(Sharpe<=0)       NaN       NaN      0.00       NaN
+NFP 2023-26          sharpe            0.80      0.01      0.81      1.42
+                     sortino           1.77      0.02      1.80      4.64
+                     pf_day            2.03      1.01      2.05      4.23
+                     calmar            0.84      0.00      0.86      3.01
+                     ulcer             3.23      1.23      2.95      8.19
+                     max_dd        4,784.00  2,256.72  4,559.62  9,389.53
+                     P(Sharpe<=0)       NaN       NaN      0.05       NaN
+NFP 2018-26          sharpe            0.56      0.06      0.58      1.03
+                     sortino           1.12      0.10      1.17      2.76
+                     pf_day            1.71      1.06      1.75      2.89
+                     calmar            0.36      0.02      0.37      1.16
+                     ulcer             5.36      1.86      4.32     11.74
+                     max_dd        7,562.33  4,019.12  7,461.83 14,579.41
+                     P(Sharpe<=0)       NaN       NaN      0.03       NaN
+plan + HSF 2 2023-26 sharpe            2.67      1.98      2.71      3.39
+                     sortino           5.34      3.64      5.40      7.38
+                     pf_day            1.77      1.51      1.78      2.09
+                     calmar            5.69      2.26      4.41      7.61
+                     ulcer             1.43      1.07      1.68      3.09
+                     max_dd        4,221.22  3,724.00  5,407.26  8,662.07
+                     P(Sharpe<=0)       NaN       NaN      0.00       NaN
+plan 2023-26         sharpe            2.68      1.95      2.73      3.49
+                     sortino           5.05      3.41      5.13      7.17
+                     pf_day            1.74      1.49      1.76      2.08
+                     calmar            5.36      2.00      3.97      6.88
+                     ulcer             1.26      1.02      1.65      3.15
+                     max_dd        3,743.18  3,529.67  5,049.95  8,223.74
+                     P(Sharpe<=0)       NaN       NaN      0.00       NaN
+
+   Permutation:
+                     actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+HSF 2023-26            $16,710      32% $18,990 $29,920 $35,954        100%        100%        100%
+HSF longs 2023-26      $13,197      39% $14,244 $22,529 $26,997        100%        100%        100%
+HSF shorts 2023-26     $12,034      18% $15,123 $24,211 $29,727        100%        100%        100%
+HSF 2018-26            $18,486      26% $21,611 $34,331 $41,536        100%        100%        100%
+NFP 2023-26             $4,784      54%  $4,649  $7,563  $9,024        100%        100%         95%
+NFP 2018-26             $7,562      52%  $7,460 $12,008 $14,479        100%        100%        100%
+plan + HSF 2 2023-26    $4,221       7%  $5,677  $8,672 $10,415        100%        100%        100%
+plan 2023-26            $3,743       7%  $5,081  $7,816  $9,563        100%        100%        100%

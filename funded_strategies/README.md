@@ -426,6 +426,59 @@ drift that any long in that window gets; the down-day condition adds the rest (a
 trade). Consistent with its B tier.
 
 
+## Mean reversion, scheduled news and headline round (2026-10-12)
+
+Code: `../analysis/news_meanrev_test.py` (first pass, output `..._output.txt`) and
+`../analysis/headline_shock_test.py` (full checks, output `..._output.txt`). Per NQ after $7.25 + 1
+tick per market/stop fill, 2018–2026. Not re-tested (already ranked): RTH big-move fades, round
+numbers, VWAP fade, RSI(2), IBS, quiet-day fade, gap fill, the 7:30 release fade, pre-FOMC drift.
+
+**Mean reversion: nothing works.**
+
+| Idea | Best version | Verdict |
+|---|---|---|
+| Asia-session VWAP fade (17:00–23:59, target VWAP) | PF 0.57–0.93, t −0.8 to −3.2, 2–4/9 years | F |
+| London / pre-market VWAP fade (0:00–7:25) | PF 0.86–1.05, t ≤ 0.3; 2023+ negative | F |
+| Multi-day pullback (2–4 sessions the same way → fade next session) | PF 1.02–1.18, t ≤ 0.9; 2023+ negative | F |
+
+**Scheduled news: one small lead.**
+
+| Idea | Result | Verdict |
+|---|---|---|
+| FOMC 13:00 statement, follow / fade the first 5–15 min, out 13:29 / 14:00 / 15:00; press conference 13:30 | 69 days; best (fade 13:00→13:10, out 13:29) PF 1.62, t 1.5, best of 22; the sign flips by exit and in 2023+ | D |
+| 9:00 CT releases (ISM, JOLTS...; 44 spike days) | t ≤ 0.8 | F |
+| 7:30 releases other than payrolls (CPI, PPI, retail...; 179 days) | t ≤ 0.9 | F |
+| **NFP Fade**: payroll Friday, fade the 7:29→7:45 reaction from 7:46 to 9:00, stop 0.5 ATR | 76 trades, 51% win, $319, PF 1.71, t 1.7, 7/9 years (2021–26 all positive); all 20 timing cells positive (t 1.4–3.0); random-side placebo $−8 (95% $315); funded + $500 risk: $8,093 / $12,086 vs $7,676 / $12,012, blown 4% / 3% | C: within noise, ~9 trades a year, found as a subgroup of a D idea |
+
+**Headlines.** There is no headline feed for NQ here, so the stand-in for a headline is an
+unscheduled 5-minute move far above normal for that time of day: |move| > K x the same slot's
+mean |move| over the last N trading days, excluding scheduled minutes (7:30, 8:30–8:40, 9:00–9:10,
+10:00, 15:00, FOMC afternoons). Jeon, McCurdy & Zhao (2022, JFE): jumps with news continue.
+- Fading jumps loses (day and overnight). Overnight jumps go nowhere either way.
+- **Headline Shock Follow** (day session 8:40–14:15): follow the jump from the next minute, stop =
+  the jump's size, out after H minutes (by 14:55). Grid of 100 (K 5–7, N 10–30 days, H 45 min–14:55):
+  PF > 1 in 88% of combinations on 2018–22 and 99% on 2023–26. The largest top cluster's medoid
+  (K 5.5, N 14, H 60) is used:
+
+| HSF, per NQ | Trades | Win | Avg | PF | t | Sharpe | Sortino | Calmar | Ulcer | Max DD |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Both, 2018–26 | 835 | 43% | $142 | 1.31 | 2.5 | 0.81 | 1.82 | 0.71 | 7.43 | $18,486 |
+| Longs | 352 | 45% | $142 | 1.31 | 1.5 | 0.54 | 1.15 | 0.40 | 5.07 | $14,072 |
+| Shorts | 483 | 41% | $141 | 1.31 | 2.1 | 0.68 | 1.44 | 0.55 | 7.14 | $13,815 |
+| Both, 2023–26 | 331 | 46% | $232 | 1.39 | – | 0.95 | 2.32 | 1.19 | 13.0 | $16,710 |
+
+  - Placebo (same days, random times, follow the last 5 minutes): $32 vs $142 (20 runs, max $117).
+  - Bootstrap Sharpe 2023–26: 0.95 (0.27–1.50), P(≤ 0) 1%; longs 9%, shorts 5%.
+  - **Regime-bound:** by year 2018 +$2k, 2019 −$0.1k, 2020 +$16k, 2021 +$3k, 2022 +$21k, 2023 −$3k,
+    2024 −$2k, 2025 +$53k, 2026 +$29k. It earns in headline-heavy years (Covid, 2022 rate shock,
+    2025 tariffs) and loses a little in calm ones.
+  - Correlation ≤ 0.15 with every strategy in the plan (0.15 with Late-Day Flow).
+  - Funded bench (cushion sizing): + 1 MNQ $7,922 / $12,097 (blown 5% / 4%); + 2 MNQ $8,413 /
+    $11,690 (8% / 10%); shorts only 2 MNQ $8,386 / $11,701. Year 1 up, year 2 flat or down: within
+    noise, **not added**. Portfolio Sharpe 2.51 → 2.53 at 2 MNQ, max drawdown $3,743 → $4,482.
+  - Tier C: a real, uncorrelated edge, but small per unit of risk (Sharpe 0.8) and carried by
+    headline years. Python only; it would need a MultiCharts version before any use.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
@@ -635,3 +688,5 @@ trade). Consistent with its B tier.
 - Round-number levels: too small to trade
 
 See `../multi_strategy/RESEARCH_TOPICS.md` for details.
+- Mean reversion (overnight VWAP fades, multi-day pullbacks), FOMC, 9:00 and non-payroll 7:30
+  releases, fading headline jumps: no edge (see the 2026-10-12 news round above)
