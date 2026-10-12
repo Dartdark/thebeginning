@@ -158,6 +158,41 @@ funded strategy needs a decent win rate, has to sit out a lot of days, and must 
 uncorrelated with the others. Every-day, low-win-rate trend trades destroy payouts even
 with t = 2.5.
 
+## Quiet-day and unused-hours round (2026-10-12)
+
+Ideas were pre-filtered by the funded rules (win rate, sit out days, uncorrelated, fixed
+risk). `funded_candidates.window_signals` builds fixed-bracket trades in hours no strategy
+uses:
+- midday 11:00–13:00 or 12:00–14:00 CT
+- pre-market 3:00–7:00 or 5:00–7:15 CT
+
+Each follows or fades the preceding move. The test covers all days, and "quiet" days
+(no Vault Break or Overnight Bias entry yet, known in real time). About 140 variants in
+total (`analysis/window_trades_test.py`).
+
+- **Nothing is significant.** The best is t = 1.4, while about 2.5 would be expected by
+  luck alone from 140 tries.
+- **The one sensible pattern:** on quiet days, fading the 8:30–12:00 move from 12:00 to
+  14:00 makes +$30–53 a trade, with a 66% win rate on the 0.15/0.08 ATR bracket.
+  Following the move on those same days loses (t = −3.5). Days without a trend drift
+  back after noon.
+- **Funded check (QMF):** correlation with VB, ONB and OND is −0.01, 0.00 and 0.04, as
+  intended. But it does not raise payouts:
+
+  | Plan | Expected payouts within 1 year |
+  |---|---|
+  | Benchmark | $5,387 |
+  | Benchmark + QMF | $3,732–5,153 |
+  | Best re-sized plan with QMF (VB 2, ONB $300, OND $500, QMF $150) | $5,363 |
+
+  The edge is too thin (t = 1.4) to pay for the risk it adds.
+
+**Where the funded search stands:** five rounds of NQ/ES candidates (new exits, ES, the
+NQ–ES spread, event days, the overnight-positioning family, quiet days and unused hours)
+have not beaten the benchmark. A new funded strategy needs an edge about as strong as
+Vault Break's or Overnight Bias's (t of about 4 or more on its own), not just low
+correlation.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

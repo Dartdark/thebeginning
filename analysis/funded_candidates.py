@@ -186,3 +186,25 @@ def on_signals(g, ctx, kind, stop_atr=0.2, tgt_atr=None, first=845, last=1200, f
         side = -brk if kind == "or_fade" else brk
         rows.append((d, j, side, stop_atr * atr[d], tgt_atr * atr[d] if tgt_atr else np.inf, jof(flat)))
     return pd.DataFrame(rows, columns=["day", "dj", "side", "stop", "target", "exit_j"])
+
+
+# ---------------------------------------------------------------- window trades (fixed bracket)
+def window_signals(g, t0, t1, look_from, mode="follow", k=0.0, stop_atr=0.10, tgt_atr=0.10,
+                   lookback=14, skip_rows=None):
+    """At the close of the t0 bar: move = close(t0) - close(look_from). If |move|
+    exceeds k x its normal size at that time of day (average over `lookback`
+    days), trade it (`follow`) or against it (`fade`) at the next minute's open
+    with a fixed bracket (stop/target in ATR) and a time exit at t1.
+    skip_rows: trading rows to skip (e.g. days another strategy already traded)."""
+    tr = g.trading
+    C = pd.DataFrame(g.c[tr]).ffill(axis=1).to_numpy()
+    mv = C[:, jof(t0)] - C[:, jof(look_from)]
+    norm = pd.Series(np.abs(mv)).rolling(lookback).mean().shift(1).to_numpy()
+    atr = g.daily_atr(15)[tr]
+    m = ~np.isnan(mv) & ~np.isnan(norm) & ~np.isnan(atr) & (np.abs(mv) > k * norm) & (mv != 0)
+    if skip_rows is not None:
+        m &= ~np.isin(tr, skip_rows)
+    side = np.sign(mv) * (1 if mode == "follow" else -1)
+    s = pd.DataFrame(dict(day=tr[m], dj=jof(t0), side=side[m].astype(int), stop=stop_atr * atr[m],
+                          target=tgt_atr * atr[m] if tgt_atr else np.inf, exit_j=jof(t1)))
+    return s

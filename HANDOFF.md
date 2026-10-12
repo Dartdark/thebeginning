@@ -21,7 +21,9 @@ daily loss limit, 21 trading days, $50 per account). Apex only; ignore Topstep.
 ## Funded build status (2026-10-11)
 Instruments are open: NQ, ES, GC, CL, anything with an edge. Test bench:
 `analysis/funded_lab.py`; candidates `analysis/funded_candidates.py`; results in
-`funded_strategies/README.md`. NQ-only candidates so far are below the $5,387 benchmark.
+`funded_strategies/README.md`. Five rounds of NQ/ES funded candidates (new exits, ES, NQ-ES spread, event days,
+overnight-positioning family, quiet-day/unused-hours brackets) are all below the $5,387
+benchmark (VB 3 + ONB $300 + OND $500); details in funded_strategies/README.md.
 Next step needs 1-minute 24-hour exports of GC, CL, ES (NQ_Bar_Exporter, StartTime 0,
 EndTime 2359, FilePrefix e.g. GC_1min_) into data/.
 
