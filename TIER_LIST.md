@@ -42,6 +42,7 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 
 | Item | Type | Key numbers | Why not adopted |
 |---|---|---|---|
+| Monday Long (new direction source, 2026-10-12) | Funded candidate | 452 trades, 55% win, $413 avg, PF 1.52, t 3.2; 2018–22 PF 1.18, 2023–26 PF 1.92; Tue–Fri placebo t ≤ 0.7; corr ≤ 0.18 with the set; replacing OND (cushion sizing) 1y $7,142 vs $6,876, 2y $11,807 vs $11,366 | Needs a MultiCharts confirmation; strong only since 2023 (regime-dependent) |
 | ONB skips the day after negative GEX | Filter | t = 4.1, 9/9 years; funded +$342 (year 2 flat) | Needs daily GEX typed in; no price-only version matched it |
 | Noise-area momentum, long only ("Beat the Market") | Strategy | PF 1.38–1.45, 9/9 years | Wins only 43%; replaces VB poorly ($4,100 vs $5,387) |
 | Opening Drive | Strategy (old research set) | 1,352 trades, 41% win, PF 1.23, MC-confirmed | Superseded by the current challenge pair |
@@ -70,6 +71,7 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 | Overnight Drift GEX filter | Filter | Funded $5,433–6,150 |
 | Gap Fill (old research set) | Strategy | PF 1.14, but $12 a trade in 2023–26 (vs $76 before) |
 | 60-min breakout, longs only, entries 9:00–14:00, flat 15:00 (your idea) | Strategy | PF 1.31, t = 2.4, but 2025–26 negative; correlation 0.41 with VB; funded +$133 year 1, −$309 year 2 at $200 risk |
+| Morning direction at 10:30 CT, followed to 15:00 (direction search) | Signal | t 2.2, 7/9 years, $112 a day; not yet tested as a trade |
 | Yes/no (logistic) ML filter for ONB (after Vilkov 2026) | Filter | Kept beat skipped only 2–5/8 years; ridge version stays |
 
 ## F
@@ -96,6 +98,8 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 | Index MA agreement for ES (your idea; ES + NQ only so far, YM pending) | Strategy | MA 5–200, three modes: −$72 to +$23 a day, t −1.9 to +1.0; shorts lose; long side ≈ market drift |
 | 60-min 40-bar breakout + 200 SMA, 2x ATR stop (your idea) | Strategy | As written: PF 1.08, t 0.7, shorts lose, −$97k max DD, holds 2–3 days (not Apex-legal); 2026 −$76k |
 | Hybrid channel breakout + MA retrace + volume (Rogul 2026, SSRN 6469419) | Paper / strategy | 42 trades in 3 hand-picked months, perfect-hindsight bias, parameters withheld. Mechanical 1-min version: no bias PF 1.01–1.11 (Sharpe 0.47); hindsight bias PF 2.29 (the paper's 'edge'); ONB bias PF 1.62 but random entries in the ONB direction do better ($356 vs $284), so the engine adds nothing |
+| Price-pattern direction search: 25 signals known by 8:45 (Asia/Europe session, gap, order-flow imbalance, prior day, 2–60-day momentum, NQ–ES, VIX) and a frozen ridge of the non-ONB ones | Signal search | Overnight-range signals just re-find ONB (80–95% agreement); the rest: ridge t 3–4 in 2018–22, negative 2023–26 and walk-forward ≈ $0 |
+| Pre-holiday / post-holiday / mid-month pay days | Calendar | t ≤ 0.5 |
 | 0DTE trading rules (Vilkov 2026) | Paper | SPX options; not tradable on Apex |
 | 0DTE gamma and volatility (Dim, Eraker & Vilkov 2025) | Paper | Needs intraday 0DTE dealer positions (paid Cboe data) |
 | Contrarian VRP ETF strategy (SSRN 4841308) | Paper | Rules undefined, no costs, multi-day ETFs |

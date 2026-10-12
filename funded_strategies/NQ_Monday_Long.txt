@@ -1,0 +1,125 @@
+{ NQ Monday Long - MultiCharts PowerLanguage signal (funded candidate, 2026-10-12)
+
+  On Mondays, buy at the 8:30 CT open and sell at the close of the 15:00 CT bar
+  (11:45 CT on CME early-close Mondays: MLK, Presidents, Memorial, Labor Day and
+  the Monday after a weekend New Year / July 4 / Juneteenth / Christmas).
+  Stop = StopAtrPct x 15-day ATR.
+
+  Why: from 2018 to 2026 almost all of NQ's regular-session gain came on Mondays
+  (8:30 -> 15:00: Monday +0.13% on average, Tuesday-Friday +0.005%). ES shows
+  the same (Monday t = 2.1, every other weekday negative). It holds after up and
+  down Fridays and after up and down weekend gaps. Likely flows: money arriving
+  over the weekend (retail and fund inflows bought on Monday) and, since 2022,
+  dealer hedging of Monday-expiring 0DTE index options. Found by the direction
+  search (analysis/direction_search.py, direction_ridge.py): price-pattern
+  signals failed out of sample, the weekday flow did not.
+
+  Python test (analysis/monday_long_test.py, 1-minute NQ, per NQ after $7.25
+  and 1 tick per fill, stop 0.5 ATR, exit 15:00): 452 trades, 55% winners,
+  average $413, profit factor 1.52, t = 3.2, 7 of 9 years positive.
+  2018-2022 only $132 (PF 1.18, weak: 2018 lost); 2023-2026 $786 (PF 1.92).
+  Sharpe 1.07, Sortino 1.90, Calmar 1.00, Ulcer 10.7 (2023-26: 1.65 / 3.14 /
+  2.51 / 3.7). Bootstrap 2023-26 Sharpe 0.89-2.38 (90%). Placebo: the same
+  trade on Tuesday-Friday makes $12-93 (t <= 0.7). Every stop from 0.3 ATR to
+  none and both 14:30 / 15:00 exits are positive (t 2.2-3.2). Correlation with
+  VB 0.18, ONB ML 0.09, OND 0.02, EOS 0.00.
+  Funded bench with cushion sizing: replacing Overnight Drift with Monday Long
+  at RiskPerTrade 300 gives 1-year payouts $7,142 vs $6,876, 2-year $11,807 vs
+  $11,366, blown 9% vs 10-11%. Regime-dependent: the effect is much stronger
+  since 2023. Confirm with a MultiCharts backtest before trading it.
+
+  Apply to a 5-minute NQ / MNQ chart, Exchange time zone (Central), CME
+  24-hour session (for the ATR), Bar Magnifier on at 1 minute. Load at least
+  25 trading days before the backtest start.
+
+  SIZE: RiskPerTrade > 0 sizes the trade so a stop-out loses at most that:
+  contracts = Floor(RiskPerTrade / (stop points x point value)); skipped if 0.
+  Funded candidate: RiskPerTrade 300 on MNQ. Backtest on NQ: RiskPerTrade 0,
+  NumContracts 1. }
+
+Inputs:
+	EntryBarTime(830),      { the bar closing at 8:30 -> buy at the next bar's open }
+	ExitTime(1500),
+	EarlyExitTime(1145),
+	UseHolidayTimes(true),
+	TradeDay(1),            { 1 = Monday }
+	AtrDays(15),
+	StopAtrPct(0.50),
+	RiskPerTrade(0),        { $ lost at the stop; 0 = trade NumContracts }
+	NumContracts(1);
+
+Variables:
+	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
+	StopPts(0), Qty(0), TradedToday(false), DayStartTrades(0),
+	CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsEarlyClose(false), DayExit(0);
+
+Arrays:
+	TrHist[100](0);
+
+{ ---------- Daily ATR (weekdays, calendar dates), as in Overnight Bias ---------- }
+if Date <> Date[1] then begin
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	DayHi = High;
+	DayLo = Low;
+	DayStartTrades = TotalTrades;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+
+{ ---------- CME early-close Mondays ---------- }
+CalMonth = Month(Date);
+CalDay = DayOfMonth(Date);
+CalDow = DayOfWeek(Date);
+CalYear = Year(Date) + 1900;
+IsEarlyClose = UseHolidayTimes and CalDow = 1 and (
+	(CalMonth = 1 and (CalDay = 1 or CalDay = 2))
+	or (CalMonth = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 2 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 5 and CalDay >= 25)
+	or (CalMonth = 6 and CalYear >= 2022 and (CalDay = 19 or CalDay = 20))
+	or (CalMonth = 7 and (CalDay = 4 or CalDay = 5))
+	or (CalMonth = 9 and CalDay <= 7)
+	or (CalMonth = 12 and (CalDay = 25 or CalDay = 26)));
+if IsEarlyClose then DayExit = EarlyExitTime else DayExit = ExitTime;
+
+{ ---------- Entry: long at the 8:30 open ---------- }
+TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
+if CalDow = TradeDay and Time = EntryBarTime and MarketPosition = 0 and TradedToday = false
+	and ATRv > 0 then begin
+	StopPts = StopAtrPct * ATRv;
+	Qty = NumContracts;
+	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
+	if Qty >= 1 then
+		Buy ("Monday L") Qty contracts next bar at market;
+end;
+
+{ ---------- Exits ---------- }
+SetStopContract;
+if StopPts > 0 then SetStopLoss(StopPts * BigPointValue);
+
+if MarketPosition > 0 and Time >= DayExit then
+	Sell ("Monday LX") this bar on close;
