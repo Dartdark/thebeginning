@@ -3,7 +3,7 @@
 S–F scale, updated as each new idea is tested. Results are NQ 2018–2026 unless noted, per
 NQ after $7.25 costs and 1 tick of slippage per fill. "Funded" = expected payouts per Apex
 50K Performance Account within 1 year (2 years in brackets); the current set (VB 3, ONB ML $400,
-Monday Long 1 MNQ, EOS $700, cushion sizing) scores $7,153 ($11,612).
+Monday Long 1 MNQ, EOS $700, Late-Day Flow 2 MNQ, cushion sizing) scores $7,676 ($12,012).
 
 ## What the tiers mean
 
@@ -28,7 +28,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 
 | Item | Type | Key numbers | Why |
 |---|---|---|---|
-| Late-Day Flow (leveraged-ETF / last-hour flow): follow a ≥ 0.4 ATR move at 14:00 to 14:30 | Funded candidate, MultiCharts-confirmed (`NQ_Late_Day_Flow.txt`) | MC: 895 trades, 55% win, $95 avg, PF 1.44, t 3.5, 7/9 years (all 895 match Python); longs PF 1.39, shorts 1.48; 2023–26 Sharpe 1.22 (bootstrap 0.45–1.96); corr ≤ 0.13; funded + 2 MNQ: $7,676 / $12,012 vs $7,153 / $11,612, blown 4–6% vs 9–10% | Forced flow, uncorrelated; long side weaker since 2023 (Sharpe 0.59); recommended addition to the funded plan |
+| Late-Day Flow (leveraged-ETF / last-hour flow): follow a ≥ 0.4 ATR move at 14:00 to 14:30 | Funded strategy (in the plan since 2026-10-12, 2 MNQ), MultiCharts-confirmed (`NQ_Late_Day_Flow.txt`) | MC: 895 trades, 55% win, $95 avg, PF 1.44, t 3.5, 7/9 years (all 895 match Python); longs PF 1.39, shorts 1.48; 2023–26 Sharpe 1.22 (bootstrap 0.45–1.96); corr ≤ 0.13; funded + 2 MNQ: $7,676 / $12,012 vs $7,153 / $11,612, blown 4–6% vs 9–10% | Forced flow, uncorrelated; long side weaker since 2023 (Sharpe 0.59) |
 | Overnight Bias (plain; recommended ADX 30 / 0.25 ATR from parameter clusters, challenge pass 46.8% vs 43.3%) | Challenge strategy (in use) | 997 trades, 49% win, $268 avg, PF 1.38, t 3.8, 8/9 years, about $30,400 a year per NQ | Challenge pass 43.8% with VB 8; the ML version adds nothing to the challenge |
 | Expiration Open Short | Funded strategy | 105 trades (12 a year, so only ~$5,700 a year per NQ: not S), t 2.6, 59% win, $474 avg, PF 1.93, 8/9 years | Forced flow: index options settle on the expiration-day open; zero correlation; +$1,100 funded |
 | Cushion sizing | Risk rule | Blown 34% → 10–12%; 2-year payouts $8,379 → $11,485 | Cuts size exactly when an account is closest to blowing up |

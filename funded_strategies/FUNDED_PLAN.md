@@ -1,6 +1,72 @@
 # Funded phase plan: Apex 50K EOD Performance Account
 
-## Current plan (updated 2026-10-12): Monday Long replaces Overnight Drift
+## Current plan (updated 2026-10-12): five strategies, Late-Day Flow added
+
+Five MultiCharts-confirmed strategies, sized to the drawdown cushion. Code and numbers:
+`analysis/funded_plan_ldf.py` (output in `analysis/funded_plan_ldf_output.txt`).
+
+| Strategy | File | Chart | Funded inputs (full size) | Trades |
+|---|---|---|---|---|
+| Vault Break | `../apex_strategies/NQ_Vault_Break.txt` | 30 min MNQ | `NumContracts` 3 | ~107 a year |
+| Overnight Bias ML (v2) | `NQ_Overnight_Bias_ML.txt` | 15 min MNQ | `RiskPerTrade` 400 | ~38 a year |
+| Monday Long | `NQ_Monday_Long.txt` | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 | every Monday, 8:30–15:00 CT |
+| Expiration Open Short | `NQ_Expiration_Open_Short.txt` | 5 min MNQ | `RiskPerTrade` 700 | 12 a year |
+| **Late-Day Flow (new)** | `NQ_Late_Day_Flow.txt` | 5 min MNQ | `NumContracts` 2, `RiskPerTrade` 0 | ~100 a year, 14:00–14:30 CT |
+| ~~Overnight Drift~~ | `NQ_Overnight_Drift.txt` | — | **off** (backup) | — |
+
+**Cushion sizing (part of the plan).** Each morning, before the session: cushion = account
+balance − trailing drawdown threshold. Size factor f = cushion / $2,000, kept between 0.5 and
+1.0. Multiply each full-size input by f and round down:
+
+| Cushion | f | Vault Break | ONB ML risk | Monday Long | EOS risk | Late-Day Flow |
+|---|---|---|---|---|---|---|
+| $2,000 or more (always true after the $52,100 lock) | 1.0 | 3 | 400 | 1 | 700 | 2 |
+| $1,500 | 0.75 | 2 | 300 | 0 (off) | 525 | 1 |
+| $1,000 or less | 0.5 | 1 | 200 | 0 (off) | 350 | 1 |
+
+Monday Long and Late-Day Flow use fixed contracts, not RiskPerTrade: their ATR stops are
+about $467 and $235 per MNQ at October 2026 prices, so a small RiskPerTrade would skip most
+trades.
+
+**Expected payouts per account** (all MultiCharts trade lists, $7.25/NQ + 1 tick per fill, a
+start on every trading day 2018–2026):
+
+| Plan | 1 year | Starts 2023+ | 2 years | Blown (1y / 2y) | Days to 1st payout |
+|---|---|---|---|---|---|
+| VB 3, ONB ML $400, OND $500, EOS $700 (before Monday Long) | $6,876 | $7,350 | $11,366 | 10% / 11% | 84 |
+| VB 3, ONB ML $400, Monday 1 MNQ, EOS $700 (previous plan) | $7,153 | $8,776 | $11,612 | 9% / 10% | 77 |
+| **+ Late-Day Flow 2 MNQ (current plan)** | **$7,676** | **$8,606** | **$12,012** | **6% / 4%** | **72** |
+| Current plan at fixed size (no cushion sizing) | $7,619 | $7,860 | — | 32% | 42 |
+
+Neighbours (sizes not re-optimized): VB 2 $7,332 / $11,975 (blown 3%); ONB ML $300 $7,352 /
+$11,945; EOS $500 $7,509 / $12,226 (blown 1–2%); Late-Day Flow 3 MNQ $7,489 / $11,811. All
+within noise of the plan.
+
+**Portfolio at full size, 2018–2026** (standard metrics, `analysis/metrics.py`):
+
+| | Sharpe | Sortino | PF (days) | Calmar | Ulcer | Max DD | $/yr |
+|---|---|---|---|---|---|---|---|
+| **Current portfolio (5 strategies)** | **2.51** | **4.76** | 1.70 | **4.33** | **1.30** | $3,743 | $16,226 |
+| Previous (4 strategies) | 2.35 | 4.36 | 1.68 | 3.51 | 1.55 | $4,082 | $14,339 |
+| Late-Day Flow 2 MNQ alone | 1.17 | 2.05 | 1.44 | 0.62 | 1.78 | $3,028 | $1,887 |
+
+Bootstrap (10-day blocks) Sharpe 90% interval: 2.01–3.00 (2018–26), 1.95–3.49 (2023–26). The
+real max drawdown ($3,743) is smaller than 99% of shuffled orders of the same days; plan for
+about $5,500 typical and $8,200 in a bad order. Daily P&L correlations all ≤ 0.18. Portfolio
+by year: 2018 +$2,587, 2019 +$7,257, then +$14,894 to +$24,157 a year (2026 to date +$15,512).
+
+**Why Late-Day Flow:** forced flow (leveraged-ETF rebalancing and last-hour flows follow a big
+day's move), MultiCharts-confirmed (895 trades, PF 1.44, every trade matches Python),
+uncorrelated with the rest, and it cuts blown accounts from 9–10% to 4–6%. Its long side is
+weaker since 2023 (Sharpe 0.59); watch it.
+
+**Risks to watch:** Monday Long is regime-dependent (weak 2018–2022); if it loses for a few
+months in a row, Overnight Drift can be switched back on in its place.
+
+**Payouts:** request each payout as soon as the balance is at least $52,100 + the next cap,
+with 5 qualifying days ($250+) and the 50% consistency rule met.
+
+### Before Late-Day Flow (2026-10-12): Monday Long replaced Overnight Drift
 
 Four MultiCharts-confirmed strategies, sized to the drawdown cushion. Code and numbers:
 `analysis/funded_plan_monday.py` (output in `analysis/funded_plan_monday_output.txt`).

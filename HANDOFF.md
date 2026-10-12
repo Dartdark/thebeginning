@@ -22,8 +22,9 @@ Tier list of everything tested (S–F): `TIER_LIST.md`. Development process (who
 
 ## Funded plan (updated 2026-10-12)
 Current funded set (`funded_strategies/FUNDED_PLAN.md`): VB 3 MNQ, Overnight Bias ML v2 RiskPerTrade 400,
-**Monday Long 1 MNQ** (replaced Overnight Drift), Expiration Open Short RiskPerTrade 700, with cushion
-sizing (f = cushion/$2,000 in 0.5-1). Expected payouts $7,153 (1y) / $11,612 (2y), blown 9-10%.
+Monday Long 1 MNQ (replaced Overnight Drift), Expiration Open Short RiskPerTrade 700, **Late-Day Flow
+2 MNQ** (added), with cushion sizing (f = cushion/$2,000 in 0.5-1). Expected payouts $7,676 (1y) /
+$12,012 (2y), blown 4-6%; portfolio Sharpe 2.51.
 
 ## Funded build status (2026-10-11)
 Instruments are open: NQ, ES, GC, CL, anything with an edge. Test bench:

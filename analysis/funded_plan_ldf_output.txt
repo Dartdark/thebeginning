@@ -1,0 +1,54 @@
+Funded bench, cushion sizing (payouts per account):
+                                 1y 1y 2018-22 1y 2023+      2y blown 1y blown 2y any payout all 6 (2y) days to 1st worst start yr
+Previous plan (4 strategies) $7,153     $6,242   $8,776 $11,612       9%      10%        88%        87%          77           $607
+NEW: + Late-Day Flow 2 MNQ   $7,676     $7,154   $8,606 $12,012       6%       4%        88%        87%          72           $572
+  VB 2                       $7,332     $6,711   $8,441 $11,975       3%       3%        88%        86%          79           $444
+  ONB ML $300                $7,352     $6,677   $8,556 $11,945       4%       4%        88%        86%          78           $455
+  EOS $500                   $7,509     $6,844   $8,694 $12,226       2%       1%        89%        88%          72           $589
+  Late-Day Flow 3 MNQ        $7,489     $6,958   $8,434 $11,811       9%       4%        87%        85%          71           $484
+
+Fixed size (no cushion sizing), for reference:
+              expected s2018_22 s2023_on worst_year blown any_payout all_6 days_to_1st
+Previous plan   $6,685   $6,439   $7,124       $500   39%        72%   26%          42
+New plan        $7,619   $7,484   $7,860       $895   32%        75%   42%          42
+
+Standard metrics at funded size (full size, 2018-2026):
+                           trades win  avg  annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+Vault Break 3 MNQ             942 62%  $51  $5,341   1.35    2.07          1.41 $4,085   1.31  1.46       7.31
+Overnight Bias ML $400        334 56% $119  $4,428   1.71    3.95          2.11 $2,417   1.83  1.36       6.52
+Monday Long 1 MNQ             450 55%  $43  $2,132   1.11    1.97          1.55 $2,078   1.03  1.47       2.91
+Expiration Open Short $700    105 59% $208  $2,437   1.06    2.28          2.20 $1,362   1.79  0.88       5.57
+Late-Day Flow 2 MNQ           895 55%  $19  $1,887   1.17    2.05          1.44 $3,028   0.62  1.78       2.12
+NEW PORTFOLIO                1676 55%  $87 $16,226   2.51    4.76          1.70 $3,743   4.33  1.30      24.90
+previous portfolio           1394 57%  $92 $14,339   2.35    4.36          1.68 $4,082   3.51  1.55      18.49
+
+Correlation of daily P&L:
+                            Vault Break 3 MNQ  Overnight Bias ML $400  Monday Long 1 MNQ  Expiration Open Short $700  Late-Day Flow 2 MNQ
+Vault Break 3 MNQ                        1.00                    0.14               0.18                       -0.01                 0.13
+Overnight Bias ML $400                   0.14                    1.00               0.07                       -0.01                 0.01
+Monday Long 1 MNQ                        0.18                    0.07               1.00                       -0.00                 0.01
+Expiration Open Short $700              -0.01                   -0.01              -0.00                        1.00                -0.02
+Late-Day Flow 2 MNQ                      0.13                    0.01               0.01                       -0.02                 1.00
+
+New portfolio by year: {2018: 2587, 2019: 7257, 2020: 18146, 2021: 21148, 2022: 19099, 2023: 22846, 2024: 14894, 2025: 24157, 2026: 15512}
+
+Bootstrap:
+                           actual       p5      p50      p95
+name        metric                                          
+new 2023-26 sharpe           2.68     1.95     2.73     3.49
+            sortino          5.05     3.41     5.13     7.17
+            pf_day           1.74     1.49     1.76     2.08
+            calmar           5.36     2.00     3.97     6.88
+            ulcer            1.26     1.02     1.65     3.15
+            max_dd       3,743.18 3,529.67 5,049.95 8,223.74
+            P(Sharpe<=0)      NaN      NaN     0.00      NaN
+new 2018-26 sharpe           2.51     2.01     2.51     3.00
+            sortino          4.76     3.60     4.74     5.97
+            pf_day           1.70     1.52     1.70     1.89
+            calmar           4.33     1.72     2.95     4.63
+            ulcer            1.30     0.86     1.29     2.19
+            max_dd       3,743.18 3,898.82 5,410.72 8,267.97
+            P(Sharpe<=0)      NaN      NaN     0.00      NaN
+            actual_dd pct_rank   dd50   dd95   dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+new 2023-26    $3,743       7% $5,081 $7,816 $9,563        100%        100%        100%
+new 2018-26    $3,743       1% $5,517 $8,160 $9,660        100%        100%        100%

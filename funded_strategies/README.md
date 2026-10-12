@@ -51,13 +51,13 @@ Tier list of everything tested: `../TIER_LIST.md`.
 |---|---|---|
 | Vault Break (Apex strategy) | 30 min MNQ | `NumContracts` 3 |
 | Overnight Bias ML v2 | 15 min MNQ | `RiskPerTrade` 400 |
-| **Monday Long** (replaced Overnight Drift 2026-10-12) | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 |
+| Monday Long (replaced Overnight Drift) | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 |
 | Expiration Open Short | 5 min MNQ | `RiskPerTrade` 700 |
+| **Late-Day Flow** (added 2026-10-12) | 5 min MNQ | `NumContracts` 2, `RiskPerTrade` 0 |
 
-With cushion sizing: **$7,153 expected payouts within 1 year, $11,612 within 2 years,
-9–10% of accounts blown** (old set with Overnight Drift: $6,876 / $11,366 / 10–11%).
-Portfolio Sharpe 2.35, Sortino 4.36, Calmar 3.51, Ulcer 1.55. Overnight Drift is kept as
-a backup (`NQ_Overnight_Drift.txt`).
+With cushion sizing: **$7,676 expected payouts within 1 year, $12,012 within 2 years, 4–6% of
+accounts blown** (before Late-Day Flow: $7,153 / $11,612 / 9–10%). Portfolio Sharpe 2.51,
+Sortino 4.76, Calmar 4.33, Ulcer 1.30. Overnight Drift is kept as a backup.
 
 **Overnight Drift check:** the MultiCharts report has the same entry and P&L on all
 1,037 days it shares with Python. Its extra trades were on holidays without a midnight
