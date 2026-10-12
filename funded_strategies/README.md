@@ -393,6 +393,22 @@ As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (curren
   foundation it would need a multi-commodity monthly book, not NQ/ES day trades.
   The price-only trend filters it suggests were already tried in the GEX round and did not help.
 
+- **Baltussen, Da, Lammers & Martens (2021), "Hedging demand and market intraday
+  momentum", SSRN 3760365.** 60+ futures, 1974–2020. The return from the previous close
+  to 30 minutes before today's close ("rest of day") predicts the last 30 minutes in the
+  same direction (equity futures t = 7.3; Sharpe 0.9–1.7 before costs). The explanation is
+  hedging that has to happen near the close: dealers short options gamma, leveraged ETFs,
+  vol-targeting funds. The effect is only present when dealer gamma is negative. Tested exactly on NQ/ES
+  2018–2026 (`analysis/intraday_momentum_test.py`, 15:00 CT close, trade 14:30–15:00):
+  - **gone on average:** NQ gross +$2 per trade (−$15 net, t = −0.8), ES +$1 (−$29 net);
+    the regression t is 1.05 on NQ and 0.54 on ES, against 7.3 in the paper
+  - no better on big days (|ROD| > 1–2 sd: −$48 to +$84 net, t ≤ 1.1)
+  - only after negative-GEX days: NQ +$102 net (t = 1.1), +$261 with |ROD| > 1 sd
+    (t = 1.6, 117 trades), but carried by 2020 and 2025; this is the "gamma last 30"
+    trade that already lowered funded payouts in the GEX round
+  **Verdict:** the published edge has been arbitraged away in NQ/ES since 2018, except
+  in crash regimes. Not a foundation for a funded strategy.
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
