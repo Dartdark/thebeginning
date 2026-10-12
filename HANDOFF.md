@@ -10,7 +10,7 @@ daily loss limit, 21 trading days, $50 per account). Apex only; ignore Topstep.
 `multi_strategy/README.md`, this file.
 **Please always give me direct GitHub links** (raw links for code I paste into MultiCharts).
 
-Tier list of everything tested (S–F): `TIER_LIST.md`.
+Tier list of everything tested (S–F): `TIER_LIST.md`. Development process (whole strategy first, then longs and shorts separately): `DEVELOPMENT_PROCESS.md`; project rules: `CLAUDE.md`.
 
 ## Folders (2026-10-11)
 - `apex_strategies/`: **Apex strategies**, for passing the challenge only (Vault Break,
