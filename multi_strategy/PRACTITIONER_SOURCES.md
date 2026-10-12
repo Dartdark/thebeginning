@@ -119,12 +119,12 @@ forced-flow family that has worked best here (Expiration Open Short, Late-Day Fl
 | Leveraged-ETF and last-hour rebalancing | Bank derivatives notes, BIS / Fed papers | **Late-Day Flow (A)** |
 | Weekend / Monday inflows | Flow desks (fund flows) | **Monday Long (A)** |
 | Dealer gamma regime (long vs short gamma days) | SqueezeMetrics, Nomura / JPM notes, Eifert | GEX filter B (needs daily data entry) |
-| Vol-control and risk-parity deleveraging | JPM / Nomura notes, BIS | Simple realized-vol trigger F; a version using published vol-control models is **untested** |
-| CTA trend-following trigger levels | GS / Nomura CTA models, Man / AQR / Carver on trend rules | **Untested**: rebuild a public CTA model (e.g. 20/60/120-day breakouts on NQ) and test the day after a trigger level is crossed |
+| Vol-control and risk-parity deleveraging | JPM / Nomura notes, BIS | Simple trigger F; S&P risk-control model (2026-10-12): **Vol-Control Sell Flow C** (short the last hour after a lagged sell signal) |
+| CTA trend-following trigger levels | GS / Nomura CTA models, Man / AQR / Carver on trend rules | Tested 2026-10-12 (1/3/6/12-month model): following flips F, fading them D (random lookbacks do as well) |
 | Buyback blackout windows | GS flow desk | F (no effect found) |
 | Pension / quarter-end rebalancing | Bank strategists, Hoffstein (timing luck) | F (quarter-end fade) |
 | Index rebalances (S&P, Nasdaq-100 reconstitution, QQQ special rebalances) | Research Affiliates, bank index desks | F for regular rebalance days; **Nasdaq-100 special rebalances untested** |
 | Futures roll and auction mechanics | Quantitative Brokers, CME | Roll-week short D |
 
-The two **untested** forced flows above (CTA trigger levels, vol-control models) are the
-next candidates when you want a test without a new paper.
+CTA trigger levels and vol-control models were tested on 2026-10-12 (see
+`../funded_strategies/README.md`). Still untested from this table: Nasdaq-100 special rebalances.

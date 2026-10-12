@@ -1,0 +1,87 @@
+Follow-up to cta_volcontrol_test.py (2026-10-12): the day after a CTA signal flip reverses.
+
+1. CTA flips (21/63/126/252): fade the next day 8:30 -> 15:00, $ per NQ before stops
+  >= 1 flips: fade next day                                      n= 307 avg $  335 PF 1.29 t=  1.7 yrs+ 6/9 | 18-22 $  261 | 23+ $  423
+  >= 1 flips UP (bullish flip): short next day                   n= 156 avg $   62 PF 1.05 t=  0.2 yrs+ 5/9 | 18-22 $   84 | 23+ $   37
+  >= 1 flips DOWN (bearish flip): long next day                  n= 151 avg $  618 PF 1.57 t=  2.2 yrs+ 7/9 | 18-22 $  442 | 23+ $  826 <
+  >= 2 flips: fade next day                                      n=  22 avg $ 2397 PF 14.26 t=  4.0 yrs+ 5/7 | 18-22 $ 2198 | 23+ $ 2927 <==
+  >= 2 flips UP (bullish flip): short next day                   n=8
+  >= 2 flips DOWN (bearish flip): long next day                  n=14
+  single lookback 21: fade next day                              n= 173 avg $  209 PF 1.18 t=  0.8 yrs+ 6/9 | 18-22 $  328 | 23+ $   97
+  single lookback 63: fade next day                              n=  90 avg $  478 PF 1.40 t=  1.2 yrs+ 5/9 | 18-22 $ -173 | 23+ $ 1189
+  single lookback 126: fade next day                             n=  41 avg $  783 PF 2.14 t=  1.8 yrs+ 4/7 | 18-22 $ 1084 | 23+ $  314
+  single lookback 252: fade next day                             n=  33 avg $ 1342 PF 2.20 t=  1.7 yrs+ 2/5 | 18-22 $ 1231 | 23+ $ 1755
+   >= 1 flip, fade, by year: {2018: 6010, 2019: -419, 2020: 49487, 2021: 25434, 2022: -37206, 2023: -14566, 2024: 11850, 2025: 61812, 2026: 552}
+
+2. Big-move control: flip days vs non-flip days with the same |close-to-close| / ATR
+    |move| 0.00-0.27 ATR, flip days: fade the move next day      n=  74 avg $  311 PF 1.29 t=  0.8 yrs+ 6/9 | 18-22 $  598 | 23+ $   68
+    |move| 0.00-0.27 ATR, no flip: fade the move next day        n= 711 avg $   18 PF 1.02 t=  0.2 yrs+ 6/9 | 18-22 $   91 | 23+ $  -73
+    |move| 0.27-0.63 ATR, flip days: fade the move next day      n=  78 avg $  191 PF 1.17 t=  0.5 yrs+ 6/9 | 18-22 $  307 | 23+ $   24
+    |move| 0.27-0.63 ATR, no flip: fade the move next day        n= 575 avg $  120 PF 1.10 t=  0.7 yrs+ 3/9 | 18-22 $   39 | 23+ $  238
+    |move| 0.63-1.00 ATR, flip days: fade the move next day      n=  79 avg $  560 PF 1.57 t=  1.4 yrs+ 6/9 | 18-22 $   -2 | 23+ $ 1265
+    |move| 0.63-1.00 ATR, no flip: fade the move next day        n= 360 avg $ -160 PF 0.88 t= -0.9 yrs+ 4/9 | 18-22 $  -77 | 23+ $ -280
+    |move| 1.00-3.05 ATR, flip days: fade the move next day      n=  79 avg $  569 PF 1.45 t=  1.3 yrs+ 6/9 | 18-22 $  745 | 23+ $  349
+    |move| 1.00-3.05 ATR, no flip: fade the move next day        n= 227 avg $  165 PF 1.17 t=  0.8 yrs+ 6/9 | 18-22 $  532 | 23+ $ -319
+   (fade the move = fade the flip: a flip up needs an up close)
+
+3. Placebo: 200 random lookback sets (4 lookbacks, 15-300 days, away from 21/63/126/252)
+   real fade $335 a day vs random sets: mean $323, 5% $-59, 95% $808; real beats 56% of them
+
+4. As a trade: fade the next day from 8:31, stop 0.3 / 0.5 ATR / none, out 15:00
+  fade CTA flip next day, stop 0.3                   n=  280 win 40% avg $  126 PF 1.12 t= 0.7 yrs+ 4/8 | 23+ $   89 PF 1.07 | L $ 153 S $ 100
+  fade CTA flip next day, stop 0.5                   n=  280 win 49% avg $  284 PF 1.24 t= 1.4 yrs+ 5/8 | 23+ $  335 PF 1.26 | L $ 500 S $  80
+  fade CTA flip next day, stop none                  n=  280 win 55% avg $  350 PF 1.29 t= 1.6 yrs+ 5/8 | 23+ $  395 PF 1.31 | L $ 659 S $  58
+
+5. Fade the trigger touch intraday (limit at the nearest trigger 8:45-14:00, stop 0.3 ATR, out 15:00)
+  fade trigger touch                                 n=  185 win 45% avg $  183 PF 1.20 t= 0.9 yrs+ 5/8 | 23+ $  400 PF 1.40 | L $ 137 S $ 257
+
+6. Vol-control flow known at the open (lag 1), last hour 14:01 -> 15:00, by sign
+  sell flow > 0.04: short 14:01-15:00                            n= 126 avg $  311 PF 1.56 t=  1.7 yrs+ 6/9 | 18-22 $   -4 | 23+ $  597
+  buy flow > 0.04: long 14:01-15:00                              n=0
+  sell flow > 0.04: short 8:30-15:00                             n= 126 avg $ -136 PF 0.92 t= -0.3 yrs+ 6/9 | 18-22 $ -314 | 23+ $   27
+  sell flow > 0.06: short 14:01-15:00                            n=  67 avg $  591 PF 2.56 t=  2.7 yrs+ 7/9 | 18-22 $  190 | 23+ $ 1030 <
+  buy flow > 0.06: long 14:01-15:00                              n=0
+  sell flow > 0.06: short 8:30-15:00                             n=  67 avg $  171 PF 1.11 t=  0.3 yrs+ 3/9 | 18-22 $  100 | 23+ $  247
+  sell flow > 0.08: short 14:01-15:00                            n=  41 avg $  589 PF 2.55 t=  2.1 yrs+ 5/9 | 18-22 $   74 | 23+ $ 1316 <
+  buy flow > 0.08: long 14:01-15:00                              n=0
+  sell flow > 0.08: short 8:30-15:00                             n=  41 avg $ -157 PF 0.91 t= -0.2 yrs+ 4/9 | 18-22 $ -368 | 23+ $  141
+   sell flow > 0.06, last hour short, by year: {2018: -1218, 2019: 374, 2020: -5501, 2021: 11722, 2022: 1264, 2023: 1784, 2024: 14883, 2025: 9624, 2026: 6657}
+
+7. Vol-control sell-flow last hour as a trade (short 14:01, stop k ATR, out 15:00) and in the funded bench
+  sell flow > 0.04, stop 0.15              n=  126 win 44% avg $  227 PF 1.51 t= 1.7 yrs+ 5/9 | 23+ $  444 PF 2.00 | L $ nan S $ 227
+  sell flow > 0.04, stop 0.25              n=  126 win 52% avg $  256 PF 1.50 t= 1.7 yrs+ 7/9 | 23+ $  384 PF 1.72 | L $ nan S $ 256
+  sell flow > 0.04, stop none              n=  126 win 58% avg $  311 PF 1.56 t= 1.7 yrs+ 6/9 | 23+ $  597 PF 2.29 | L $ nan S $ 311
+  sell flow > 0.06, stop 0.15              n=   67 win 46% avg $  353 PF 1.93 t= 1.7 yrs+ 6/9 | 23+ $  601 PF 2.64 | L $ nan S $ 353
+  sell flow > 0.06, stop 0.25              n=   67 win 55% avg $  455 PF 2.15 t= 2.2 yrs+ 8/9 | 23+ $  695 PF 3.13 | L $ nan S $ 455
+  sell flow > 0.06, stop none              n=   67 win 63% avg $  591 PF 2.56 t= 2.7 yrs+ 7/9 | 23+ $ 1030 PF 8.02 | L $ nan S $ 591
+  sell flow > 0.08, stop 0.15              n=   41 win 39% avg $  281 PF 1.68 t= 1.1 yrs+ 4/9 | 23+ $  567 PF 2.23 | L $ nan S $ 281
+  sell flow > 0.08, stop 0.25              n=   41 win 46% avg $  380 PF 1.86 t= 1.4 yrs+ 4/9 | 23+ $  718 PF 2.75 | L $ nan S $ 380
+  sell flow > 0.08, stop none              n=   41 win 56% avg $  589 PF 2.55 t= 2.1 yrs+ 5/9 | 23+ $ 1316 PF 13.40 | L $ nan S $ 589
+                                 trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+VC sell 0.06 / 0.25 ATR, 2018-26     67 55% $455 $3,395   0.70    1.74          2.15 $5,509   0.62  4.40       1.54
+  2023-26                            32 66% $695 $5,760   1.00    2.88          3.13 $3,148   1.83  1.57       7.34
+  correlation with the plan: {'VB': -0.02, 'ONB_ML2_MC': 0.05, 'MON_MC': -0.03, 'EOS': -0.0, 'LDF_MC': -0.03, 'VCS': 1.0}
+  days traded by both VCS and Late-Day Flow: 34 of 67
+  current plan       1y $7,676 (2023+ $8,606) 2y $12,012 blown 6% / 4%
+  + VCS 1 MNQ        1y $7,785 (2023+ $8,784) 2y $11,938 blown 6% / 4%
+  + VCS 2 MNQ        1y $8,049 (2023+ $9,652) 2y $11,789 blown 7% / 8%
+  + VCS $300 risk    1y $7,801 (2023+ $8,797) 2y $11,234 blown 14% / 13%
+                           actual       p5      p50       p95
+name        metric                                           
+VCS 2023-26 sharpe           1.00     0.32     1.02      1.56
+            sortino          2.88     0.60     2.97      8.67
+            pf_day           3.13     1.38     3.17     10.01
+            calmar           1.83     0.22     1.46      5.08
+            ulcer            1.57     0.63     2.14      6.13
+            max_dd       3,148.00 1,662.58 3,794.67  8,061.53
+            P(Sharpe<=0)      NaN      NaN     0.01       NaN
+VCS 2018-26 sharpe           0.70     0.23     0.71      1.09
+            sortino          1.74     0.44     1.78      3.60
+            pf_day           2.15     1.26     2.16      3.72
+            calmar           0.62     0.10     0.56      1.56
+            ulcer            4.40     1.39     3.19      8.42
+            max_dd       5,508.67 3,183.41 5,966.58 11,451.72
+            P(Sharpe<=0)      NaN      NaN     0.01       NaN
+            actual_dd pct_rank   dd50   dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+VCS 2023-26    $3,148      32% $3,741 $6,050  $7,248        100%        100%         76%
+VCS 2018-26    $5,509      41% $5,838 $9,530 $11,372        100%        100%        100%

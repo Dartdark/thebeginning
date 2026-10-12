@@ -479,6 +479,50 @@ mean |move| over the last N trading days, excluding scheduled minutes (7:30, 8:3
   - Tier C: a real, uncorrelated edge, but small per unit of risk (Sharpe 0.8) and carried by
     headline years. Python only; it would need a MultiCharts version before any use.
 
+## CTA trigger levels and vol-control rebalancing (2026-10-12)
+
+The two untested forced flows from `../multi_strategy/PRACTITIONER_SOURCES.md`, rebuilt from the
+public descriptions bank flow desks give. Code: `../analysis/cta_volcontrol_test.py` (first pass)
+and `../analysis/cta_fade_test.py` (follow-up); outputs in the matching `_output.txt` files. Per NQ
+after $7.25 + 1 tick per market/stop fill, 2018–2026; about 45 comparisons in all, so |t| ≥ 3 is
+the bar.
+
+**CTA model:** signals sign(close − close N days ago), N = 21 / 63 / 126 / 252, position = mean
+signal × min(2, 15% / 63-day vol); trigger level = the close N days ago. About 39 flips a year.
+- *Following* CTA flows loses or does nothing: next day after a flip −$370 (t −1.9); after 2+
+  flips −$2,432 (22 days, t −4.1); 14:00 → 15:00 when the 14:00 price would flip a signal +$40
+  (t 0.4); buying / selling the break of the nearest trigger −$409 (t −2.4). **F.**
+- *Fading* the next day looks good at first (2+ flips: +$2,397, t 4.0, 22 days; 1+ flips +$335, t 1.7),
+  but **200 random lookback sets that CTAs don't use fade just as well** (the real set beats 56% of
+  them). So it is generic reversal after trend-signal flips, not CTA flow. As a trade with a 0.3 /
+  0.5 ATR stop: t 0.7 / 1.4. Fading the trigger touch intraday: $183, t 0.9. **D.**
+
+**Vol-control model** (S&P Daily Risk Control style): exposure = min(150%, 10% / vol), vol = the
+larger of the EWMA(0.94) and EWMA(0.97) vols of daily ES returns; flow = new exposure − drifted
+exposure. Vol-control funds almost only *sell* in size (vol jumps fast, falls slowly).
+- Lag 0 (today's return in the vol, estimated at 14:00), follow 14:01 → 15:00: t −0.5 to 0.6. **F.**
+- It does not explain Late-Day Flow: LDF trades earn the same whether the vol-control flow agrees
+  ($87) or opposes ($102), longs too ($69 vs $81).
+- **Vol-Control Sell Flow (lag 1: exposure set from yesterday's vol, so the sell is known before
+  the open)**: when the model must sell more than 6% of fund size, short NQ 14:01 → 15:00
+  (the funds trade into the close), stop 0.25 ATR:
+
+| VCS, per NQ | Trades | Win | Avg | PF | t | Sharpe | Sortino | Calmar | Ulcer | Max DD |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 2018–26 | 67 | 55% | $455 | 2.15 | 2.2 | 0.70 | 1.74 | 0.62 | 4.40 | $5,509 |
+| 2023–26 | 32 | 66% | $695 | 3.13 | – | 1.00 | 2.88 | 1.83 | 1.57 | $3,148 |
+
+  - Shorts only by construction (no large buy flows exist). 8/9 years positive; 2018 and 2020 lost.
+  - Thresholds 0.04 / 0.08 and stops 0.15 / none: t 1.1–2.7, all positive. Shorting the whole day
+    instead of the last hour: ≈ $0, so it is the closing flow.
+  - Random-day placebo: last-hour shorts average $7 a day; 95% of random 67-day samples ≤ $269 vs
+    $591 (no stop).
+  - Bootstrap Sharpe 2023–26: 1.00 (0.32–1.56); 2018–26: 0.70 (0.23–1.09); P(Sharpe ≤ 0) 1%.
+  - Correlation with every plan strategy ≤ 0.05 (Late-Day Flow −0.03, even though they trade the
+    same afternoon on 34 of the 67 days).
+  - Funded bench: + 1 MNQ $7,785 / $11,938 (blown 6% / 4%); + 2 MNQ $8,049 / $11,789 (7% / 8%). Within
+    noise: **not added.** Tier **C** (real, uncorrelated, but ~8 trades a year and t 2.2).
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

@@ -1,0 +1,49 @@
+CTA trigger levels and vol-control fund rebalancing (2026-10-12, from multi_strategy/PRACTITIONER_SOURCES.md).
+
+=== V. Vol-control funds (10% target, EWMA 0.94/0.97, cap 150%) ===
+  flow (fund units) at 14:00: median |flow| 0.010, 90th pct 0.024
+  V1 |flow14| > 0.0: follow flow 14:01->15:00                    n=2184 avg $  -13 PF 0.97 t= -0.5 yrs+ 4/9 | 18-22 $  -49 | 23+ $   35
+  V1 |flow14| > 0.03: follow flow 14:01->15:00                   n= 148 avg $    8 PF 1.02 t=  0.1 yrs+ 5/9 | 18-22 $  133 | 23+ $ -106
+  V1 |flow14| > 0.06: follow flow 14:01->15:00                   n=  58 avg $ -146 PF 0.80 t= -0.5 yrs+ 4/9 | 18-22 $  -15 | 23+ $ -285
+  V1 |flow14| > 0.1: follow flow 14:01->15:00                    n=  22 avg $  222 PF 1.35 t=  0.6 yrs+ 3/7 | 18-22 $  294 | 23+ $  162
+  V1 sell flow > 0.03 on UP days (opposes LETF buying)           n=  79 avg $   94 PF 1.26 t=  0.5 yrs+ 4/9 | 18-22 $  217 | 23+ $  -14
+  V1 sell flow > 0.03 on DOWN days (same way as LETF)            n=  69 avg $  -90 PF 0.88 t= -0.4 yrs+ 4/9 | 18-22 $   41 | 23+ $ -217
+  V1 buy flow > 0.03 (vol falling)                               n=0
+  V1 sell flow > 0.06 on UP days (opposes LETF buying)           n=  28 avg $ -390 PF 0.48 t= -0.9 yrs+ 4/8 | 18-22 $   33 | 23+ $ -708
+  V1 sell flow > 0.06 on DOWN days (same way as LETF)            n=  30 avg $   83 PF 1.12 t=  0.2 yrs+ 4/7 | 18-22 $  -48 | 23+ $  278
+  V1 buy flow > 0.06 (vol falling)                               n=0
+  V2 |flow known at open| > 0.03: follow 8:30->15:00             n= 175 avg $ -537 PF 0.71 t= -1.6 yrs+ 2/9 | 18-22 $ -246 | 23+ $ -824
+  V2 |flow known at open| > 0.03: follow 14:01->15:00            n= 175 avg $   85 PF 1.14 t=  0.6 yrs+ 4/9 | 18-22 $ -167 | 23+ $  334
+  V2 |flow known at open| > 0.06: follow 8:30->15:00             n=  67 avg $  171 PF 1.11 t=  0.3 yrs+ 3/9 | 18-22 $  100 | 23+ $  247
+  V2 |flow known at open| > 0.06: follow 14:01->15:00            n=  67 avg $  591 PF 2.56 t=  2.7 yrs+ 7/9 | 18-22 $  190 | 23+ $ 1030 <
+  V2 |flow known at open| > 0.1: follow 8:30->15:00              n=  28 avg $  124 PF 1.06 t=  0.1 yrs+ 3/7 | 18-22 $  360 | 23+ $ -112
+  V2 |flow known at open| > 0.1: follow 14:01->15:00             n=  28 avg $  872 PF 4.39 t=  2.7 yrs+ 5/7 | 18-22 $  537 | 23+ $ 1206 <
+
+  V3 Late-Day Flow (MC trades, $ per NQ after costs + 2 ticks) by vol-control flow at 14:00:
+    flow agrees                      n= 426 avg $   87 t= 2.3 | 23+ n=185 $  120
+    flow opposes                     n= 469 avg $  102 t= 2.7 | 23+ n=218 $  115
+    longs, flow opposes (selling)    n= 218 avg $   81 t= 1.4 | 23+ n=97 $   78
+    longs, flow agrees               n= 268 avg $   69 t= 1.6 | 23+ n=123 $   74
+    shorts, flow agrees (selling)    n= 158 avg $  117 t= 1.6 | 23+ n=62 $  213
+    shorts, flow opposes             n= 251 avg $  120 t= 2.3 | 23+ n=121 $  146
+    longs with sell flow > 0.06      n=  23 avg $  386
+
+=== C. CTA trend-model trigger levels ===
+
+  CTA lookbacks 21/63/126/252: flips per year 39
+  C1 CTA loo >= 1 flips -> next day 8:30-15:00                   n= 307 avg $ -370 PF 0.75 t= -1.9 yrs+ 2/9 | 18-22 $ -295 | 23+ $ -458
+  C1 CTA loo >= 2 flips -> next day 8:30-15:00                   n=  22 avg $-2432 PF 0.07 t= -4.1 yrs+ 2/7 | 18-22 $-2233 | 23+ $-2961 <==
+  C1 CTA loo >= 1 flip -> overnight (15:00 -> 8:30)              n= 313 avg $  -63 PF 0.94 t= -0.4 yrs+ 6/9 | 18-22 $  -12 | 23+ $ -124
+  C1 CTA loo model position change top 20% -> next day           n= 431 avg $ -316 PF 0.77 t= -1.9 yrs+ 5/9 | 18-22 $ -114 | 23+ $ -566
+  C2 CTA loo 14:00 price flips a signal -> 14:01-15:00           n= 290 avg $   40 PF 1.08 t=  0.4 yrs+ 5/9 | 18-22 $  174 | 23+ $ -119
+  C3 CTA loo break of nearest trigger, stop 0.3 ATR            n=  184 win 39% avg $ -409 PF 0.65 t=-2.4 yrs+ 1/8 | 23+ $ -611 PF 0.57 | L $-466 S $-375
+
+  placebo lookbacks 35/45/90/160/200: flips per year 50
+  C1 placebo >= 1 flips -> next day 8:30-15:00                   n= 376 avg $  -38 PF 0.97 t= -0.2 yrs+ 5/9 | 18-22 $ -220 | 23+ $  251
+  C1 placebo >= 2 flips -> next day 8:30-15:00                   n=  45 avg $ -848 PF 0.44 t= -2.0 yrs+ 4/9 | 18-22 $-1071 | 23+ $  -71
+  C1 placebo >= 1 flip -> overnight (15:00 -> 8:30)              n= 386 avg $   10 PF 1.01 t=  0.1 yrs+ 5/9 | 18-22 $ -144 | 23+ $  251
+  C1 placebo model position change top 20% -> next day           n= 430 avg $   70 PF 1.06 t=  0.4 yrs+ 8/9 | 18-22 $  -85 | 23+ $  311
+  C2 placebo 14:00 price flips a signal -> 14:01-15:00           n= 365 avg $   42 PF 1.10 t=  0.6 yrs+ 5/9 | 18-22 $   96 | 23+ $  -41
+  C3 placebo break of nearest trigger, stop 0.3 ATR            n=  207 win 38% avg $ -180 PF 0.83 t=-1.0 yrs+ 3/8 | 23+ $ -278 PF 0.78 | L $-261 S $-130
+
+comparisons: 24 (plus the C3 rows); with this many, |t| >= 3 is the bar

@@ -56,6 +56,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | 60-min breakout, longs only, entries 9:00–14:00, flat 15:00 (your idea) | Strategy | PF 1.31, t = 2.4, but 2025–26 negative; correlation 0.41 with VB; funded +$133 year 1, −$309 year 2 at $200 risk | Lost in 2025–26 |
 | Headline Shock Follow: follow an unscheduled 5-min jump > 5.5x its normal size, 8:40–14:15, stop = jump, out 60 min | Strategy (Python only) | 835 trades, $142, PF 1.31, t 2.5, 6/9 years; longs and shorts both PF 1.31; placebo $32; corr ≤ 0.15; funded + 1 MNQ $7,922 / $12,097, + 2 MNQ $8,413 / $11,690 | Real edge, but regime-bound: 2025 (tariff headlines) is 45% of the profit, 2023–24 lost; funded within noise |
 | NFP Fade: fade the 7:29→7:45 payroll reaction, 7:46→9:00, stop 0.5 ATR | Strategy (Python only) | 76 trades, $319, PF 1.71, t 1.7, 7/9 years (2021–26 all +); placebo at its 95% level; funded + $500 risk $8,093 / $12,086 | 9 trades a year; a subgroup of the D-tier release fade, so the bar is higher |
+| Vol-Control Sell Flow: when a lagged S&P vol-control model (10% target, EWMA 0.94/0.97) must sell > 6% of fund size, short 14:01→15:00, stop 0.25 ATR | Strategy (Python only) | 67 trades, 55% win, $455, PF 2.15, t 2.2, 8/9 years; 2023–26 PF 3.13; random-day placebo 95% $269 vs $591; corr ≤ 0.05; funded + 1 MNQ $7,785 / $11,938, + 2 MNQ $8,049 / $11,789 | Real closing flow, but ~8 trades a year; funded within noise |
 | Morning direction at 10:30 CT, followed to 15:00 (direction search) | Signal | t 2.2, 7/9 years, $112 a day; not yet tested as a trade | Test as a trade next |
 
 ## D
@@ -79,6 +80,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | NQ–ES spread (follow) | Strategy | +$79 gross, too thin after costs |
 | Overnight Drift GEX filter | Filter | Funded $5,433–6,150 |
 | FOMC statement reaction (follow / fade 13:00→13:05–13:15, out 13:29–15:00; press conference) | News | 69 days; best of 22 PF 1.62, t 1.5; sign flips with the exit and since 2023 |
+| CTA trend-signal flip, fade next day (21/63/126/252-day model) | Forced flow | 2+ flips +$2,397 (22 days, t 4.0), 1+ flips $335 (t 1.7); but random non-CTA lookback sets fade as well (real beats 56%), so not CTA flow; with a stop t 0.7–1.4 |
 | Gap Fill (old research set) | Strategy | PF 1.14, but $12 a trade in 2023–26 (vs $76 before) |
 | Yes/no (logistic) ML filter for ONB (after Vilkov 2026) | Filter | Kept beat skipped only 2–5/8 years; ridge version stays |
 
@@ -111,6 +113,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Multi-day pullback (fade 2–4 sessions in a row, next 8:30–15:00) | Mean reversion | PF 1.02–1.18, t ≤ 0.9, 2023+ negative |
 | 9:00 CT releases and non-payroll 7:30 releases (CPI, PPI...), follow or fade | News | t ≤ 0.9 |
 | Fading headline jumps (day or overnight); following overnight jumps | News | Fades lose (t to −3.5); overnight follow ≈ $0 |
+| Following CTA flows (next day, into the close, break of the trigger level) and same-day vol-control flow | Forced flow | CTA follow next day t −1.9 (2+ flips −4.1), trigger break −$409 (t −2.4), into close t 0.4; vol-control lag 0 t ≤ 0.6; vol-control does not explain Late-Day Flow |
 | Pre-holiday / post-holiday / mid-month pay days | Calendar | t ≤ 0.5 |
 | Technical rules and FX intervention (LeBaron 1996, SSRN 1105) | Paper | 150-day MA rule on DM/yen 1979–92, Sharpe 0.7–1.0, but almost all of it on Fed intervention days (Sharpe 0.1–0.4 without); currencies, multi-day holds, and that intervention regime is gone. MA rules on NQ already failed here (MA 5–200 agreement, 50-day MA distance) |
 | Forced-flow round 3: vol-target de-levering (realized-vol jumps), quarter-end pension fade, Friday pre-weekend de-risking | Forced flow | t ≤ 0.8 (vol target), −0.2 (quarter end), Friday windows −1.0 to 0.2 |
