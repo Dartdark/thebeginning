@@ -379,6 +379,26 @@ MultiCharts trades 2018–2026, same 40/75-point bracket and 14:30 exit, $7.25 +
   entry timing add value.
 - **Fills:** requiring a 1-tick trade-through costs about $5 a trade; target exits drop from 52% to 51%.
 
+**Same placebo for Overnight Bias ML and Expiration Open Short** (`analysis/placebo_onb_eos_test.py`;
+same stop, target and exit; 20–30 random runs each; the strategy beat every run in every test):
+
+| Strategy (own trades) | Placebo | Avg / trade | Win |
+|---|---|---|---|
+| **Overnight Bias ML: $550**, 55% win (411 trades) | Same days and direction, random time after its entry | $156 | 53% |
+| | Same days and entry time, random direction | $148 | 46% |
+| | Same days and entry time, opposite direction | −$238 | 35% |
+| | Random days, random time, random direction | $4 | 46% |
+| **Expiration Open Short: $474**, 59% win (105 trades) | Short 8:30–10:00 on random days | −$20 | 44% |
+| | Short 8:30–10:00 on other Fridays | −$39 | 39% |
+| | Expiration days, short a random 90 minutes later in the day | −$3 | 47% |
+| | Expiration days 8:30–10:00, random direction | $47 | 48% |
+
+- **Overnight Bias ML:** the day choice (bias plus ML filter) is worth about $150 a trade on its
+  own, the direction about $300 more, and entering on the breakout beats entering later.
+- **Expiration Open Short:** the edge is specific to that one window: same time on other days,
+  other times on the same day, or the other direction all make about nothing.
+
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
