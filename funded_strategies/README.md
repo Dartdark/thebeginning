@@ -340,6 +340,23 @@ As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (curren
 
 **Verdict:** no change. The raw drifts do not survive a stop and a 15:00 exit.
 
+## CFTC positioning round (2026-10-12): nothing usable
+
+Weekly Commitments of Traders, Traders in Financial Futures (`data/cot/`, 2017–2026,
+`analysis/cot_flows.py`, `analysis/cot_test.py`). Net positions of leveraged funds, asset
+managers, dealers and small traders as a share of open interest, ranked against the previous
+3 years, used only from the Monday after the Friday release.
+
+- **Next-week and next-month returns:** no relation on NQ or ES. Correlations −0.04 to
+  +0.09, the largest t about 1.3; quintiles are not monotonic.
+- **Funded strategies by positioning quintile:** noisy, non-monotonic patterns (e.g. Overnight
+  Drift −$73 when leveraged funds are most long, Overnight Bias ML $169 when asset managers
+  are least long), each one cell out of 12.
+- **Those two as filters:** $6,757 and $6,805 vs $6,928 within 1 year; $8,204 and $8,344 vs
+  $8,379 within 2 years.
+
+**Verdict:** weekly positioning carries no timing information for NQ/ES day trades; no change.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
