@@ -510,6 +510,16 @@ As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (curren
 
   **Verdict:** a low-win-rate trend trade that duplicates Overnight Bias; not added.
 
+- **Zarattini & Aziz (2023, rev. 2025), "Can Day Trading Really Be Profitable?", SSRN
+  4416622.** 5-minute ORB on QQQ 2016–2023: enter at the second 5-minute candle's open in the
+  first candle's direction, stop at the other side of the first candle, 10R target or the
+  close. 24% winners, +0.13R a trade, Sharpe 1.12, no slippage assumed. On NQ 2018–2026
+  (`analysis/orb_qqq_test.py`) the paper replicates exactly before costs (24% winners,
+  +0.132R), but after $7.25 and 1 tick of slippage: $42 a trade, PF 1.07, t = 1.1, 2023 and
+  2026 negative; 5R/3R targets and 15/30-minute ranges are no better than t = 2.0. ES loses in every
+  version. **Verdict:** the edge is real but too thin for futures costs; not added
+  (the volume-filtered version above already failed the funded bench).
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
