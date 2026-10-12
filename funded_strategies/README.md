@@ -551,6 +551,14 @@ managers, dealers and small traders as a share of open interest, ranked against 
   month; V-shaped recoveries), and the funded strategies make money in every state, with
   splits that flip between 12m/1m and 6m/2w windows. No filter. Tier F.
 
+- **Asness, Frazzini, Israel & Moskowitz (2014), "Fact, Fiction and Momentum Investing",
+  SSRN 2435323.** AQR essay refuting ten myths about cross-sectional momentum (buy the past
+  12-month winners, short the losers, skipping the last month): it is large and robust (212
+  years, 40 countries, many asset classes), works on both long and short sides and in large
+  stocks, survives realistic costs, and works best combined with value. It's about ranking
+  many securities against each other over months, not about trading one index intraday.
+  Tier F for us.
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
