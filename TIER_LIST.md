@@ -28,6 +28,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 
 | Item | Type | Key numbers | Why |
 |---|---|---|---|
+| Late-Day Flow (leveraged-ETF / last-hour flow): follow a ≥ 0.4 ATR move at 14:00 to 14:30 | Funded candidate, MultiCharts-confirmed (`NQ_Late_Day_Flow.txt`) | MC: 895 trades, 55% win, $95 avg, PF 1.44, t 3.5, 7/9 years (all 895 match Python); longs PF 1.39, shorts 1.48; 2023–26 Sharpe 1.22 (bootstrap 0.45–1.96); corr ≤ 0.13; funded + 2 MNQ: $7,676 / $12,012 vs $7,153 / $11,612, blown 4–6% vs 9–10% | Forced flow, uncorrelated; long side weaker since 2023 (Sharpe 0.59); recommended addition to the funded plan |
 | Overnight Bias (plain; recommended ADX 30 / 0.25 ATR from parameter clusters, challenge pass 46.8% vs 43.3%) | Challenge strategy (in use) | 997 trades, 49% win, $268 avg, PF 1.38, t 3.8, 8/9 years, about $30,400 a year per NQ | Challenge pass 43.8% with VB 8; the ML version adds nothing to the challenge |
 | Expiration Open Short | Funded strategy | 105 trades (12 a year, so only ~$5,700 a year per NQ: not S), t 2.6, 59% win, $474 avg, PF 1.93, 8/9 years | Forced flow: index options settle on the expiration-day open; zero correlation; +$1,100 funded |
 | Cushion sizing | Risk rule | Blown 34% → 10–12%; 2-year payouts $8,379 → $11,485 | Cuts size exactly when an account is closest to blowing up |
@@ -38,7 +39,6 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 
 | Item | Type | Key numbers | Notes |
 |---|---|---|---|
-| Late-Day Flow (leveraged-ETF / last-hour flow): follow a ≥ 0.4 ATR move at 14:00 to 14:30 | Funded candidate (`NQ_Late_Day_Flow.txt`) | 898 trades, 55% win, $94 avg, PF 1.44, t 3.5, 7/9 years; longs and shorts both positive; neighbours t 2.9–3.9; beats all 20 random-side runs; funded + 2 MNQ: $7,648 / $12,019 vs $7,153 / $11,612, blown 4–6% vs 9–10% | Found among ~70 comparisons; ES weaker (t 1.2); needs a MultiCharts check |
 | ONB skips the day after negative GEX | Filter | t = 4.1, 9/9 years; funded +$342 (year 2 flat) | Needs daily GEX typed in; no price-only version matched it |
 | Noise-area momentum, long only ("Beat the Market") | Strategy | PF 1.38–1.45, 9/9 years | Wins only 43%; replaces VB poorly ($4,100 vs $5,387) |
 | Bootstrap + permutation (out-of-sample resampling) | Method | Funded portfolio Sharpe 90% interval 1.53–3.00 (2023–26); real drawdown smaller than 99% of shuffles (95% shuffle $8,347 vs real $3,351) | Adopted as a standard check; shows the edges aren't luck but the real drawdowns were, and that losses don't cluster |

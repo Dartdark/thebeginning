@@ -1,0 +1,59 @@
+MC per NQ (+1 tick per fill): n=895 win 55% avg $95 PF 1.44 t=3.5 | longs n=486 $74 PF 1.39 | shorts n=409 $119 PF 1.48
+  by year avg: {2018: 89, 2019: -75, 2020: -14, 2021: 108, 2022: 237, 2023: 183, 2024: 14, 2025: 50, 2026: 247} | 2018-22 76 2023+ 118
+match: {'both': 895, 'left_only': 3, 'right_only': 0}
+  common days: same side 100.0%, entry within 1 tick 100.0%, Python avg $95 vs MC $95, corr 1.000
+  only in Python: 3 [datetime.date(2018, 1, 8), datetime.date(2018, 1, 11), datetime.date(2025, 9, 12)]
+  only in MC: 0 []
+
+Standard metrics per NQ (MC trades, with slippage):
+               trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+all 2018-26       895 55%  $95  $9,435   1.17    2.05          1.44 $15,140   0.62  7.37       2.56
+all 2023-26       403 57% $118 $12,284   1.22    2.20          1.45 $10,482   1.17  4.63       5.31
+longs 2018-26     486 56%  $74  $4,011   0.72    1.29          1.39 $10,652   0.38  4.58       1.75
+longs 2023-26     220 56%  $76  $4,304   0.59    1.10          1.31 $10,652   0.40  5.15       1.67
+shorts 2018-26    409 54% $119  $5,424   0.92    1.61          1.48  $8,092   0.67  5.31       2.04
+shorts 2023-26    183 58% $168  $7,979   1.13    1.99          1.59  $6,988   1.14  4.01       3.98
+corr with set: {'LDF_MC': 1.0, 'VB': 0.13, 'ONB_ML2_MC': -0.01, 'MON_MC': 0.01, 'EOS': -0.04}
+
+Bootstrap, 2023-26:
+                               actual       p5       p50       p95
+name           metric                                             
+all 2023-26    sharpe            1.22     0.45      1.24      1.96
+               sortino           2.20     0.71      2.24      3.97
+               pf_day            1.45     1.14      1.45      1.84
+               calmar            1.17     0.27      1.18      2.83
+               ulcer             4.63     2.25      4.73     11.91
+               max_dd       10,482.50 6,244.04 10,376.00 19,092.53
+               P(Sharpe<=0)       NaN      NaN      0.01       NaN
+longs 2023-26  sharpe            0.59    -0.20      0.59      1.26
+               sortino           1.10    -0.29      1.07      2.80
+               pf_day            1.31     0.92      1.30      1.81
+               calmar            0.40    -0.08      0.48      1.80
+               ulcer             5.15     2.38      5.58     15.73
+               max_dd       10,652.50 4,844.20  8,723.38 17,287.53
+               P(Sharpe<=0)       NaN      NaN      0.10       NaN
+shorts 2023-26 sharpe            1.13     0.42      1.17      1.86
+               sortino           1.99     0.65      2.08      3.82
+               pf_day            1.59     1.18      1.61      2.19
+               calmar            1.14     0.27      1.20      2.92
+               ulcer             4.01     1.63      3.34      8.26
+               max_dd        6,987.50 4,003.47  6,712.12 12,399.89
+               P(Sharpe<=0)       NaN      NaN      0.01       NaN
+
+Permutation, 2023-26:
+               actual_dd pct_rank   dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+all 2023-26      $10,482      59% $9,864 $15,679 $19,165        100%        100%        100%
+longs 2023-26    $10,652      76% $8,798 $13,786 $16,357        100%        100%        100%
+shorts 2023-26    $6,988      47% $7,110 $11,648 $13,781        100%        100%        100%
+
+Funded bench, cushion sizing:
+  current plan             1y $7,153 (2018-22 $6,242, 2023+ $8,776) blown 9% | 2y $11,612 blown 10% | 1st payout 77d
+  + Late-Day Flow 1 MNQ    1y $7,296 (2018-22 $6,435, 2023+ $8,831) blown 10% | 2y $11,634 blown 9% | 1st payout 74d
+  + Late-Day Flow 2 MNQ    1y $7,676 (2018-22 $7,154, 2023+ $8,606) blown 6% | 2y $12,012 blown 4% | 1st payout 72d
+  + Late-Day Flow 3 MNQ    1y $7,489 (2018-22 $6,958, 2023+ $8,434) blown 9% | 2y $11,811 blown 4% | 1st payout 71d
+
+Side split in the funded bench (cushion sizing):
+  both sides 2 MNQ     1y $7,676 (2023+ $8,606) blown 6% | 2y $12,012 blown 4%
+  shorts only 2 MNQ    1y $7,551 (2023+ $9,292) blown 3% | 2y $12,380 blown 2%
+  longs only 2 MNQ     1y $7,189 (2023+ $8,379) blown 8% | 2y $12,043 blown 6%
+  shorts 2 + longs 1   1y $7,499 (2023+ $9,154) blown 2% | 2y $12,293 blown 2%

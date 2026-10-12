@@ -30,6 +30,12 @@
   24-hour session (for the ATR), Bar Magnifier on at 1 minute. Load at least
   25 trading days before the backtest start.
 
+  MULTICHARTS CONFIRMED (2026-10-12, analysis/late_day_flow_confirm.py): 895
+  trades, 55% winners, $95 average, PF 1.44, t = 3.5; all 895 match the Python
+  test (same side and entry, P&L correlation 1.00). Longs PF 1.39 (weaker since
+  2023), shorts PF 1.48. Funded bench at 2 MNQ: 1-year $7,676 vs $7,153, 2-year
+  $12,012 vs $11,612, blown 4-6% vs 9-10%.
+
   SIZE: funded candidate NumContracts 2 on MNQ with RiskPerTrade 0 (at October
   2026 prices the 0.25 ATR stop is about $235 per MNQ, so a small RiskPerTrade
   would skip most trades). Backtest on NQ: RiskPerTrade 0, NumContracts 1. }
