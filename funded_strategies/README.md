@@ -43,7 +43,7 @@ every market or stop fill.
 
 ## Current funded set (all MultiCharts-confirmed, 2026-10-12)
 
-Rating, weaknesses and the recommended cushion sizing: `FUNDED_RATING.md`.
+Rating, weaknesses and the recommended cushion sizing: `FUNDED_RATING.md`. Tier list of everything tested: `../TIER_LIST.md`.
 
 | Strategy | Chart | Funded inputs |
 |---|---|---|
