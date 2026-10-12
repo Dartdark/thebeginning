@@ -5,6 +5,8 @@
 > to pass the challenge, not to maximize payouts. They are the benchmark until purpose-built
 > funded strategies replace them (see `README.md` in this folder). With 1 tick of
 > slippage on every strategy, the Balanced plan's estimate is about $5,400, not $5,900.
+> **Update 2026-10-12:** adding the new funded strategy `NQ_Expiration_Open_Short.txt`
+> (RiskPerTrade 500, about 12 trades a year) raises the estimate to about $6,500 (see README).
 
 Started 2026-10-11. The goal changes once an account is funded: it is no longer
 passing, it is **the money taken out**. A 50K Performance Account (PA) pays at most 6

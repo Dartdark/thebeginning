@@ -39,6 +39,7 @@ every market or stop fill.
 | Strategy | File | Status | Notes |
 |---|---|---|---|
 | Overnight Drift | `NQ_Overnight_Drift.txt` | Python-tested; needs a MultiCharts backtest | Long midnight to 3:00 CT after a down session. PF 1.25, 8/9 years positive, flat 2023–24. Correlation about 0 with everything else |
+| **Expiration Open Short** | `NQ_Expiration_Open_Short.txt` | Python-tested; needs a MultiCharts backtest | Short at the 8:30 open on monthly options expiration day, out at 10:00, stop 0.3 ATR. 105 trades, 59% winners, $474 a trade, PF 1.93, 8/9 years positive. **Benchmark + it at $500 risk: $6,516 vs $5,387** |
 
 ## Benchmark (to beat)
 
@@ -192,6 +193,48 @@ NQ–ES spread, event days, the overnight-positioning family, quiet days and unu
 have not beaten the benchmark. A new funded strategy needs an edge about as strong as
 Vault Break's or Overnight Bias's (t of about 4 or more on its own), not just low
 correlation.
+
+## Calendar-flow round (2026-10-12): first funded strategy that beats the benchmark
+
+Code: `analysis/calendar_flows.py` (calendar flags) and `analysis/calendar_flows_test.py`.
+Results are NQ, 8:30–15:00 long, per contract after costs (2018–2026), with about 40
+comparisons:
+
+| Effect | Result |
+|---|---|
+| Turn of month: first 3 trading days | +$376, t = 2.0, 7/9 years (ES +$187, t = 2.1); with a 0.3-ATR stop t = 3.7, 9/9 years, but $188 in 2018–22 vs $1,009 from 2023 |
+| Last trading day; the 3 days before it | Not significant |
+| Month-end rebalancing (fade the month-to-date move over the last 3 days) | NQ +$188 to +$338, t ≤ 1.7; ES nothing |
+| Expiration week / week after / Monday after | Not significant |
+| **Options expiration day** | **NQ −$639 long, t = −2.0, 1/9 years positive**; ES weaker in the same direction |
+
+**Expiration day, examined further (NQ, short):**
+- **By time of day:** 8:30–10:00 +$529 gross (t = 2.7); 10:00–12:00 −$97;
+  12:00–15:00 +$190.
+- **All-day short fades:** 2025 +$16, 2026 −$530. **The 8:30–10:00 window holds:**
+  2025 +$1,302, 2026 +$132.
+- **Placebo:** shorting other Fridays loses money (−$126).
+- **Reason:** monthly SPX and NDX options settle on Friday's opening prices, so hedges tied
+  to them come off at the open.
+
+**Funded bench (1 year):**
+
+| Plan | Expected | Blown |
+|---|---|---|
+| Benchmark | $5,387 | 48% |
+| + Expiration short 8:30–10:00, $300 risk | $6,207 | 43% |
+| **+ Expiration short 8:30–10:00, $500 risk** | **$6,516** | **41%** |
+| + Expiration short all day, $500 risk | $6,371 | 42% |
+| + Expiration short $500 + turn of month $150 | $6,567 | 41% |
+| + Turn of month alone ($150–400 risk) | $3,840–5,648 | 46–61% |
+
+Over 2 years: $7,320 vs $6,467. The turn-of-month long adds almost nothing on top, so it
+is parked; it is a watch item because it has been much stronger since 2023.
+
+**Caveats:**
+- Only 105 trades (12 a year), t = 2.6, found among about 40 comparisons.
+- The calendar needs the exchange holiday list: Good Friday and Juneteenth move expiration
+  to Thursday. The known ones are hard-coded.
 
 ## Papers reviewed for funded strategies
 

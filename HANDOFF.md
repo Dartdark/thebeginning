@@ -24,6 +24,9 @@ Instruments are open: NQ, ES, GC, CL, anything with an edge. Test bench:
 `funded_strategies/README.md`. Five rounds of NQ/ES funded candidates (new exits, ES, NQ-ES spread, event days,
 overnight-positioning family, quiet-day/unused-hours brackets) are all below the $5,387
 benchmark (VB 3 + ONB $300 + OND $500); details in funded_strategies/README.md.
+Calendar round found the first one that helps: **Expiration Open Short**
+(`funded_strategies/NQ_Expiration_Open_Short.txt`): short NQ 8:30-10:00 CT on monthly options
+expiration day, stop 0.3 ATR, RiskPerTrade 500 -> funded estimate $6,516 vs $5,387.
 Next step needs 1-minute 24-hour exports of GC, CL, ES (NQ_Bar_Exporter, StartTime 0,
 EndTime 2359, FilePrefix e.g. GC_1min_) into data/.
 
