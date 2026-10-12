@@ -107,6 +107,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Pre-holiday / post-holiday / mid-month pay days | Calendar | t ≤ 0.5 |
 | Technical rules and FX intervention (LeBaron 1996, SSRN 1105) | Paper | 150-day MA rule on DM/yen 1979–92, Sharpe 0.7–1.0, but almost all of it on Fed intervention days (Sharpe 0.1–0.4 without); currencies, multi-day holds, and that intervention regime is gone. MA rules on NQ already failed here (MA 5–200 agreement, 50-day MA distance) |
 | Forced-flow round 3: vol-target de-levering (realized-vol jumps), quarter-end pension fade, Friday pre-weekend de-risking | Forced flow | t ≤ 0.8 (vol target), −0.2 (quarter end), Friday windows −1.0 to 0.2 |
+| The Power of Price Action Reading (Zarattini & Stamatoudis 2024, SSRN 4879527) | Paper | Single stocks gapping up ≥ 6%, held up to 30–50 days: every mechanical rule loses or is ~0R (best +0.07R); profits only with a human picking charts (+0.25R) and managing trades (+0.9R), not reproducible as rules. NQ has no such gaps; NQ gap follow and opening-range rules were already tested here (gap follow t −0.1 out of sample) |
 | 0DTE trading rules (Vilkov 2026) | Paper | SPX options; not tradable on Apex |
 | 0DTE gamma and volatility (Dim, Eraker & Vilkov 2025) | Paper | Needs intraday 0DTE dealer positions (paid Cboe data) |
 | Contrarian VRP ETF strategy (SSRN 4841308) | Paper | Rules undefined, no costs, multi-day ETFs |
