@@ -54,6 +54,21 @@ Whenever parameters are searched (Step 1 or Step 3), don't take the top-scoring 
 6. Check the result on the 2023-onward holdout and in the funded bench / challenge simulator
    before adopting it. Do it separately for longs and shorts.
 
+## Resampling: how sure, and how bad could it get?
+
+Run `analysis/resampling.py` on the 2023-onward holdout (out of sample) and on 2018–2026,
+for the whole strategy and each side:
+
+1. **Block bootstrap** (10-day blocks, 5,000 runs): 90% interval for Sharpe, Sortino, profit
+   factor, Calmar, Ulcer and max drawdown, plus P(Sharpe ≤ 0). Adopt only if the low (5%)
+   end is still acceptable, not just the point estimate.
+2. **Permutation** (5,000 shuffles of the same days): where the real max drawdown ranks among
+   the shuffled ones, the 95%/99% shuffled drawdown, and P(drawdown ≥ $1k/$2k/$3k). Size for
+   the 95% shuffled drawdown, not the historical one.
+3. **Apex window risk**: share of start days with a $2,000 drawdown in the next 20 / 60
+   trading days, real order vs shuffled. Real above the shuffled band means losses cluster,
+   so the i.i.d. challenge simulator understates the risk.
+
 ## Step 4: decide and recombine
 
 For each side: keep it as is, keep it with its own settings or size, or drop it. Then put
@@ -236,3 +251,40 @@ Rank = percentile among all tested combinations (higher is better); folds = 3-ye
 By side (Overnight Bias ML): the long side's current settings rank 52–99% across folds with
 smooth stop/target curves; the short side ranks 44–83% and prefers a tighter stop (0.2–0.25) in
 most folds, but the funded bench doesn't confirm a change.
+
+### Bootstrap and permutation (2026-10-12, `analysis/resampling_test.py`)
+
+Fixed sizes (funded: VB 3 MNQ, ONB ML v2 $400, OND $500, EOS $700; combine: VB 8 MNQ, plain
+ONB $1,100), no cushion sizing. Bootstrap 90% intervals for Sharpe; permutation = day order.
+
+| | Sharpe 2018–26 (5–95%) | Sharpe 2023–26 (5–95%) | P(Sharpe ≤ 0) 2023–26 | Real max DD 2023–26 | Shuffled 95% DD | Real DD rank |
+|---|---|---|---|---|---|---|
+| Vault Break 3 MNQ | 1.35 (0.85–1.86) | 1.46 (0.67–2.28) | 0% | $4,085 | $7,680 | 25% |
+| ONB ML v2 $400 | 1.71 (1.25–2.12) | 1.77 (1.12–2.48) | 0% | $1,753 | $2,675 | 57% |
+| · longs | 1.26 (0.75–1.72) | 1.78 (1.14–2.43) | 0% | $1,048 | $1,613 | 57% |
+| · shorts | 1.19 (0.72–1.62) | 0.76 (−0.02–1.54) | 5% | $1,768 | $3,024 | 44% |
+| Overnight Drift $500 | 0.40 (−0.10–0.89) | 0.50 (−0.26–1.22) | 14% | $3,530 | $5,525 | 50% |
+| Expiration Open Short $700 | 1.06 (0.58–1.50) | 1.12 (0.38–1.75) | 1% | $1,063 | $3,124 | 1% |
+| **Funded portfolio** | **2.16 (1.68–2.61)** | **2.22 (1.53–3.00)** | 0% | **$3,351** | **$8,347** | **1%** |
+| Combine pair (VB 8 + ONB $1,100) | 1.72 (1.22–2.21) | 1.91 (1.18–2.71) | 0% | $12,972 | $27,072 | 8% |
+| · plain ONB longs | 1.10 (0.57–1.57) | 1.51 (0.74–2.23) | 0% | $6,456 | $13,536 | 13% |
+| · plain ONB shorts | 0.86 (0.41–1.32) | 0.70 (−0.04–1.47) | 6% | $7,800 | $18,608 | 4% |
+
+- **Edges are not luck of a few days:** every strategy except Overnight Drift keeps a
+  positive Sharpe at the 5% end of the full-period bootstrap. OND's interval includes zero
+  (P(Sharpe ≤ 0) 9% full, 14% holdout), which matches the placebo: it is the first to cut.
+- **Weak spot: the short sides since 2023.** ONB ML shorts and plain ONB shorts both have
+  intervals touching zero in the holdout (5–6% chance Sharpe ≤ 0); longs carried 2023–26.
+  Not a reason to drop them (2018–26 intervals are clearly positive, zero correlation with
+  longs), but the side to watch.
+- **The real drawdowns were lucky.** The funded portfolio's 2023–26 drawdown ($3,351) is
+  smaller than 99% of shuffled orders of the same days; the median shuffle is $5,333 and the
+  95% one $8,347. EOS (1%) and the combine pair (8%) are the same. Plan for drawdowns about
+  1.5–2.5× the historical ones; this is what cushion sizing is for.
+- **Losses do not cluster.** In the Apex window test the real share of 20/60-day windows with
+  a $2,000 drawdown is at or below the shuffled average for every strategy (portfolio 60-day,
+  2018–26: 30% real vs 45% shuffled). So the i.i.d. challenge simulator is not too kind, but
+  the funded bench, which replays the real order, is probably somewhat optimistic about
+  blow-ups.
+- ONB ML longs' full-period drawdown ($3,916) ranks above every shuffle: it is all 2018
+  (−$2,491 that year), the first year of the frozen model; 2019–2026 were all positive.

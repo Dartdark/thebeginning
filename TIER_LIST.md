@@ -35,7 +35,8 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 | Item | Type | Key numbers | Why |
 |---|---|---|---|
 | Overnight Bias (plain; recommended ADX 30 / 0.25 ATR from parameter clusters, challenge pass 46.8% vs 43.3%) | Challenge strategy | 997 trades, 49% win, $280 avg, PF 1.40, every year positive | Challenge pass 43.8% with VB 8; the ML version adds nothing to the challenge |
-| Overnight Drift | Funded strategy | 1,039 trades, $71 avg, PF 1.22 (at funded size PF 1.10) | Helps year 1, costs year 2; first to cut. Placebo: $71 vs $36 for random-day longs in the same window, so about half is general overnight drift |
+| Bootstrap + permutation (out-of-sample resampling) | Method | Funded portfolio Sharpe 90% interval 1.53–3.00 (2023–26); real drawdown smaller than 99% of shuffles (95% shuffle $8,347 vs real $3,351) | Adopted as a standard check; shows the edges aren't luck but the real drawdowns were, and that losses don't cluster |
+| Overnight Drift | Funded strategy | 1,039 trades, $71 avg, PF 1.22 (at funded size PF 1.10) | Helps year 1, costs year 2; first to cut. Placebo: $71 vs $36 for random-day longs in the same window, so about half is general overnight drift. Bootstrap Sharpe interval includes zero (P ≤ 0: 9%, 14% since 2023) |
 
 ## C
 
