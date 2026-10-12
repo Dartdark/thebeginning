@@ -42,10 +42,10 @@
   v2 (2026-10-12), long side improved under the long/short development process:
   longs need a score of at least LongMinScore (0.03), shorts at least ShortMinScore (0).
   Walk-forward (model never saw the test year), plain ONB longs 2019+: score 0-0.03 averaged
-  $127 a trade ($82 in 2023-26) vs $484 for 0.03 and up. Long side at $300 risk: max drawdown
-  $3,265 -> $1,776, Calmar 0.53 -> 0.95, Ulcer 1.79 -> 0.83, Sharpe 1.24 -> 1.45, PF 1.97 -> 2.77,
-  same yearly $; whole strategy Calmar 1.63 -> 2.62, Ulcer 1.18 -> 0.67; funded payouts
-  $7,184 vs $6,928 (1 year), $8,554 vs $8,379 (2 years). LongMinScore 0 = v1.
+  $127 a trade ($82 in 2023-26) vs $484 for 0.03 and up. MultiCharts-confirmed (343 trades, PF 2.14). From
+  April 2018, long side at $300: PF 2.18 -> 2.72, Sharpe 1.40 -> 1.46, but max drawdown
+  $1,502 -> $1,778 and about 6% less profit a year; funded payouts within noise of v1
+  ($7,202 vs $6,928 fixed size; $6,876 vs $6,995 with cushion sizing). LongMinScore 0 = v1.
   EnableLongs / EnableShorts switch a side off.
   UseMLFilter false = plain Overnight Bias. ScoreFile (e.g. "C:\temp\onb_score.csv")
   writes each trading day's date and score, to compare with the Python model. }

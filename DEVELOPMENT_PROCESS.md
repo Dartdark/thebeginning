@@ -126,6 +126,27 @@ Tried on the 230 long trades (`analysis/onb_ml_long_side_test.py`):
 | Whole strategy v1 | 1.82 | 4.35 | 2.14 | 1.63 | 1.18 | $2,348 | $3,816 |
 | **Whole strategy v2** | **1.94** | **4.97** | **2.50** | **2.62** | **0.67** | **$1,442** | $3,776 |
 
-Adopted: `LongMinScore` 0.03 in `NQ_Overnight_Bias_ML.txt` (shorts stay at 0). Same yearly
-profit, drawdown nearly halved. Pending: MultiCharts confirmation (expected about 337 trades
-2018–2026: 156 longs, 181 shorts, average about $667, PF about 2.18).
+Adopted: `LongMinScore` 0.03 in `NQ_Overnight_Bias_ML.txt` (shorts stay at 0).
+
+**MultiCharts confirmation and correction (2026-10-12)**
+(`Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx`,
+`analysis/onb_ml_v2_confirm.py`): 343 trades (162 longs, 181 shorts), $646 average, PF 2.14.
+Every decision matches the Python model except 6 days in January–February 2018, the filter's
+warm-up (as with v1).
+
+**Correction:** the "drawdown nearly halved" figures above compared v1 *including* its
+January–March 2018 warm-up losses with v2 *without* them. Like for like, from April 2018:
+
+| ($300 risk, from 2018-04) | Sharpe | Sortino | PF | Calmar | Ulcer | Max DD | $/yr |
+|---|---|---|---|---|---|---|---|
+| Longs v1 | 1.40 | 3.09 | 2.18 | **1.25** | **0.65** | **$1,502** | $1,878 |
+| Longs v2 | **1.46** | **3.40** | **2.72** | 0.92 | 0.85 | $1,778 | $1,635 |
+| Whole v1 | 1.97 | 4.83 | 2.30 | **2.97** | **0.59** | **$1,359** | $4,041 |
+| Whole v2 | **1.98** | **5.07** | **2.54** | 2.64 | 0.67 | $1,441 | $3,801 |
+
+So v2 improves trade quality (win rate, profit factor, Sharpe, Sortino) but **not** the
+drawdown, and it earns about 6% less a year. Funded bench with the MultiCharts lists: fixed
+sizes $7,202 / $8,547 vs $6,928 / $8,379 (1 / 2 years); recommended plan with cushion sizing
+$6,876 / $11,366 vs $6,995 / $11,485, blown 10% vs 12%. **Net: within noise.** v2 stays the
+default (the walk-forward evidence that low-score longs are weak still holds), and
+`LongMinScore` 0 returns to v1 at any time.
