@@ -87,6 +87,7 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 | Index rebalance days, buyback blackout, VIX-expiration Wednesday | Calendar | Too few days, no effect, or FOMC overlap |
 | Commodity storage/momentum (Gorton et al. 2008) | Paper | Monthly commodity book; nothing for NQ |
 | Implied equity term structure (NY Fed SR 1203) | Paper | Long-horizon asset pricing; no trading rule |
+| The Golden Dilemma (Erb & Harvey 2013, SSRN 2078535) | Paper | Gold valuation over years to decades; no trading rule, and GC data here covers one week |
 | 0DTE trading rules (Vilkov 2026) | Paper | SPX options; not tradable on Apex |
 | 0DTE gamma and volatility (Dim, Eraker & Vilkov 2025) | Paper | Needs intraday 0DTE dealer positions (paid Cboe data) |
 | Contrarian VRP ETF strategy (SSRN 4841308) | Paper | Rules undefined, no costs, multi-day ETFs |

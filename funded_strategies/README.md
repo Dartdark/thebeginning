@@ -537,6 +537,12 @@ managers, dealers and small traders as a share of open interest, ranked against 
   version. **Verdict:** the edge is real but too thin for futures costs; not added
   (the volume-filtered version above already failed the funded bench).
 
+- **Erb & Harvey (2013), "The Golden Dilemma", SSRN 2078535.** Gold is not a reliable
+  inflation hedge over 1–20 years; when gold's real price is above its long-run average,
+  later real returns have been below average; mine supply barely responds to price;
+  emerging-market central-bank buying could push prices higher anyway. Long-horizon
+  valuation, no trading rule; not usable for intraday futures. Tier F.
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
