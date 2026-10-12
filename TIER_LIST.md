@@ -20,7 +20,7 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 
 | Item | Type | Key numbers | Why |
 |---|---|---|---|
-| Overnight Bias ML | Funded strategy | 41% of ONB days kept; walk-forward kept $476 vs skipped $171, 6/8 years; funded $6,928 vs $6,495, blown 34% vs 42% | Biggest single payout driver; frozen ridge filter on ONB (Kelly & Xiu ML survey) |
+| Overnight Bias ML (v2: longs need score ≥ 0.03) | Funded strategy | 41% of ONB days kept; walk-forward kept $476 vs skipped $171, 6/8 years; funded $6,928 vs $6,495, blown 34% vs 42% | Biggest single payout driver; frozen ridge filter on ONB (Kelly & Xiu ML survey) |
 | Expiration Open Short | Funded strategy | 105 trades, 59% win, $474 avg, PF 1.93, 8/9 years | Forced flow: index options settle on the expiration-day open; zero correlation; +$1,100 funded |
 | Cushion sizing | Risk rule | Blown 34% → 10–12%; 2-year payouts $8,379 → $11,485 | Cuts size exactly when an account is closest to blowing up |
 

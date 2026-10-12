@@ -96,3 +96,36 @@ deeper drawdowns. Sizing the shorts up and the longs down was still not better i
 bench ($200/$400: $6,031 vs $6,928), so equal sizing stays.
 
 Code: `analysis/side_split_test.py`.
+
+### Overnight Bias ML long side improved (v2, 2026-10-12)
+
+Tried on the 230 long trades (`analysis/onb_ml_long_side_test.py`):
+- **Exits:** stops 0.2–0.5 ATR, targets 1.5R–none, time exits 11:00–13:00, breakeven after
+  1–1.5R. None better than the current 0.3 ATR / 3R / 14:30 by more than noise; the longs earn
+  their money late in the day (every earlier exit is worse).
+- **Entry conditions** (15 features by tercile, design 2018–22 vs holdout 2023–26): three were
+  consistent: 20-day trend up, a clearly positive ML score, and the open not at the very top of
+  the overnight range. As long-only filters in the funded bench only the score rule helped:
+
+| Long-side rule | Kept | Kept vs skipped | Years kept > skipped | Funded 1 y / 2 y |
+|---|---|---|---|---|
+| None (v1) | 100% | – | – | $6,928 / $8,379 |
+| 20-day return > 0 | 62% | $645 vs $229 | 5/9 | $6,904 / $8,383 |
+| **ML score ≥ 0.03** | 68% | **$687 vs $60** | **8/9** | **$7,184 / $8,554** |
+| Open ≤ 0.88 of overnight range | 65% | $589 vs $291 | 6/9 | $6,789 / $8,043 |
+| Combinations | 27–43% | | 5–8/9 | $6,758–6,947 / $8,128–8,306 |
+
+- **Walk-forward check** (model never saw the test year), plain ONB longs 2019+: score 0–0.03
+  averaged $127 a trade ($82 in 2023–26) vs $484 at 0.03 and up.
+- **Standard metrics, long side at $300:**
+
+| | Sharpe | Sortino | PF | Calmar | Ulcer | Max DD | $/yr |
+|---|---|---|---|---|---|---|---|
+| Longs v1 | 1.24 | 2.65 | 1.97 | 0.53 | 1.79 | $3,265 | $1,723 |
+| **Longs v2** | **1.45** | **3.49** | **2.77** | **0.95** | **0.83** | **$1,776** | $1,682 |
+| Whole strategy v1 | 1.82 | 4.35 | 2.14 | 1.63 | 1.18 | $2,348 | $3,816 |
+| **Whole strategy v2** | **1.94** | **4.97** | **2.50** | **2.62** | **0.67** | **$1,442** | $3,776 |
+
+Adopted: `LongMinScore` 0.03 in `NQ_Overnight_Bias_ML.txt` (shorts stay at 0). Same yearly
+profit, drawdown nearly halved. Pending: MultiCharts confirmation (expected about 337 trades
+2018–2026: 156 longs, 181 shorts, average about $667, PF about 2.18).

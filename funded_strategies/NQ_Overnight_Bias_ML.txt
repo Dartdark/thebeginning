@@ -39,6 +39,14 @@
   Funded plan: RiskPerTrade 300 on MNQ. Backtest on NQ: RiskPerTrade 0,
   NumContracts 1.
 
+  v2 (2026-10-12), long side improved under the long/short development process:
+  longs need a score of at least LongMinScore (0.03), shorts at least ShortMinScore (0).
+  Walk-forward (model never saw the test year), plain ONB longs 2019+: score 0-0.03 averaged
+  $127 a trade ($82 in 2023-26) vs $484 for 0.03 and up. Long side at $300 risk: max drawdown
+  $3,265 -> $1,776, Calmar 0.53 -> 0.95, Ulcer 1.79 -> 0.83, Sharpe 1.24 -> 1.45, PF 1.97 -> 2.77,
+  same yearly $; whole strategy Calmar 1.63 -> 2.62, Ulcer 1.18 -> 0.67; funded payouts
+  $7,184 vs $6,928 (1 year), $8,554 vs $8,379 (2 years). LongMinScore 0 = v1.
+  EnableLongs / EnableShorts switch a side off.
   UseMLFilter false = plain Overnight Bias. ScoreFile (e.g. "C:\temp\onb_score.csv")
   writes each trading day's date and score, to compare with the Python model. }
 
@@ -60,6 +68,10 @@ Inputs:
 	EarlyExitTime(1130),
 	NumContracts(1),
 	UseMLFilter(true),
+	LongMinScore(0.03),      { longs need a score at least this (v2, 2026-10-12) }
+	ShortMinScore(0),        { shorts need a score at least this }
+	EnableLongs(true),
+	EnableShorts(true),
 	ScoreFile("");
 
 Variables:
@@ -74,7 +86,7 @@ Variables:
 	Cl1500(0), RthOpen(0), HasRTH(false), PrevDate(0), NDays(0), LastMonth(0), MonthCount(0),
 	Ki(0), SumA(0), SumC(0), M5(0), M20(0), V5(0), V20(0), Rk(0),
 	xRet1(0), xRet5(0), xRet20(0), xRth1(0), xAtrRatio(0), xDist50(0), xRv(0),
-	TodayDow(0), TodayTdm(0), FriDom(0), xOpexWk(0), MLScore(0), ScoreReady(false), SkipToday(false);
+	TodayDow(0), TodayTdm(0), FriDom(0), xOpexWk(0), MLScore(0), ScoreReady(false), SkipToday(false), SkipLong(false), SkipShort(false);
 
 Arrays:
 	TrHist[100](0),
@@ -146,6 +158,8 @@ if Date <> Date[1] then begin
 	{ today's score }
 	ScoreReady = false;
 	SkipToday = false;
+	SkipLong = false;
+	SkipShort = false;
 	if NDays >= 59 and ATRv > 0 then begin
 		xRet1 = Log(CH[0] / CH[1]);
 		xRet5 = Log(CH[0] / CH[5]);
@@ -197,7 +211,9 @@ if Date <> Date[1] then begin
 			+ 0.1654566373 * IFF(TodayTdm <= 3, 1, 0)
 			- 0.003794081905 * xOpexWk;
 		ScoreReady = true;
-		SkipToday = UseMLFilter and MLScore < 0;
+		SkipToday = UseMLFilter and MLScore < MinList(LongMinScore, ShortMinScore);
+		SkipLong = UseMLFilter and MLScore < LongMinScore;
+		SkipShort = UseMLFilter and MLScore < ShortMinScore;
 		if ScoreFile <> "" and TodayDow >= 1 and TodayDow <= 5 then
 			FileAppend(ScoreFile, NumToStr(Date + 19000000, 0) + "," + NumToStr(MLScore, 6) + NewLine);
 	end;
@@ -276,7 +292,7 @@ end;
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
 
 if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition = 0
-	and SkipToday = false
+	and ((Bias = 1 and EnableLongs and SkipLong = false) or (Bias = -1 and EnableShorts and SkipShort = false))
 	and Time >= OREnd and Time < DayLastEntry and ADXv > ADXMin then begin
 	StopPts = StopAtrPct * ATRv;
 	Qty = NumContracts;
