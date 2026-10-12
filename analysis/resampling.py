@@ -122,3 +122,49 @@ def report(rows, n=5000, block=10, limits=(1000, 2000, 3000), capital=50_000.0):
     P = pd.DataFrame(p).T
     fmtP = {c: ("${:,.0f}".format if c.startswith("dd") or c == "actual_dd" else "{:.0%}".format) for c in P}
     return B.to_string(float_format=lambda v: f"{v:,.2f}"), P.to_string(formatters=fmtP)
+
+
+def fan_paths(daily, kind="bootstrap", n=2000, block=10, seed=1):
+    """Equity paths for the fan charts: 'bootstrap' (block resample, ends spread out) or
+    'permutation' (shuffled order, every path ends at the same total). Returns (n x days)."""
+    x = pd.Series(daily, dtype=float).fillna(0.0).to_numpy(); T = len(x)
+    rng = np.random.default_rng(seed)
+    if kind == "permutation":
+        X = x[np.argsort(rng.random((n, T)), 1)]
+    else:
+        nb = int(np.ceil(T / block)); starts = rng.integers(0, T - block + 1, (n, nb))
+        X = x[(starts[:, :, None] + np.arange(block)).reshape(n, -1)[:, :T]]
+    return X.cumsum(1)
+
+
+def fan_chart(daily, title, path, n=2000, block=10, limit=None):
+    """Two panels like the slides: bootstrap and permutation equity fans
+    (1-99%, 5-95% and 25-75% bands, median), with the real equity in red."""
+    import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
+    d = pd.Series(daily, dtype=float).fillna(0.0); real = d.cumsum().to_numpy(); t = d.index
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5), facecolor="#111")
+    for ax, kind in zip(axes, ("bootstrap", "permutation")):
+        E = fan_paths(d, kind, n, block)
+        q = np.percentile(E, [1, 5, 25, 50, 75, 95, 99], 0)
+        ax.set_facecolor("#1a1d2b")
+        ax.fill_between(t, q[0], q[6], color="#6a3fb5", alpha=.35, label="1-99%")
+        ax.fill_between(t, q[1], q[5], color="#4b4fc9", alpha=.45, label="5-95%")
+        ax.fill_between(t, q[2], q[4], color="#3a6fd8", alpha=.45, label="25-75%")
+        ax.plot(t, q[3], color="#8fb3ff", lw=1, label="median")
+        ax.plot(t, real, color="#ff3b5c", lw=1.6, label="real")
+        ax.axhline(0, color="#888", lw=.6)
+        if kind == "permutation":
+            dd = -(E - np.maximum.accumulate(np.maximum(E, 0), 1)).min(1)
+            rdd = float(-(real - np.maximum.accumulate(np.maximum(real, 0))).min())
+            sub = (f"max DD real ${rdd:,.0f} | shuffled median ${np.median(dd):,.0f}, "
+                   f"95% ${np.percentile(dd, 95):,.0f}")
+            if limit: sub += f"\nreal DD smaller than {np.mean(dd > rdd):.0%} of shuffles"
+        else:
+            sub = (f"final P&L 5-95%: ${q[1][-1]:,.0f} to ${q[5][-1]:,.0f} "
+                   f"(real ${real[-1]:,.0f}); P(loss) {np.mean(E[:, -1] <= 0):.0%}")
+        ax.set_title(f"{kind.title()}\n{sub}".replace("$", r"\$"), color="w", fontsize=10)
+        ax.tick_params(colors="#ccc"); ax.yaxis.set_major_formatter(
+            matplotlib.ticker.FuncFormatter(lambda v, _: f"${v/1000:,.0f}k"))
+        for s in ax.spines.values(): s.set_color("#444")
+        ax.legend(loc="upper left", fontsize=8, facecolor="#222", labelcolor="w", framealpha=.8)
+    fig.suptitle(title.replace("$", r"\$"), color="w", fontsize=13); fig.tight_layout(); fig.savefig(path, dpi=110); plt.close(fig)
