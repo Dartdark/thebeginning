@@ -102,6 +102,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Hybrid channel breakout + MA retrace + volume (Rogul 2026, SSRN 6469419) | Paper / strategy | 42 trades in 3 hand-picked months, perfect-hindsight bias, parameters withheld. Mechanical 1-min version: no bias PF 1.01–1.11 (Sharpe 0.47); hindsight bias PF 2.29 (the paper's 'edge'); ONB bias PF 1.62 but random entries in the ONB direction do better ($356 vs $284), so the engine adds nothing |
 | Price-pattern direction search: 25 signals known by 8:45 (Asia/Europe session, gap, order-flow imbalance, prior day, 2–60-day momentum, NQ–ES, VIX) and a frozen ridge of the non-ONB ones | Signal search | Overnight-range signals just re-find ONB (80–95% agreement); the rest: ridge t 3–4 in 2018–22, negative 2023–26 and walk-forward ≈ $0 |
 | Pre-holiday / post-holiday / mid-month pay days | Calendar | t ≤ 0.5 |
+| Technical rules and FX intervention (LeBaron 1996, SSRN 1105) | Paper | 150-day MA rule on DM/yen 1979–92, Sharpe 0.7–1.0, but almost all of it on Fed intervention days (Sharpe 0.1–0.4 without); currencies, multi-day holds, and that intervention regime is gone. MA rules on NQ already failed here (MA 5–200 agreement, 50-day MA distance) |
 | 0DTE trading rules (Vilkov 2026) | Paper | SPX options; not tradable on Apex |
 | 0DTE gamma and volatility (Dim, Eraker & Vilkov 2025) | Paper | Needs intraday 0DTE dealer positions (paid Cboe data) |
 | Contrarian VRP ETF strategy (SSRN 4841308) | Paper | Rules undefined, no costs, multi-day ETFs |
