@@ -43,6 +43,8 @@ every market or stop fill.
 
 ## Current funded set (all MultiCharts-confirmed, 2026-10-12)
 
+Rating, weaknesses and the recommended cushion sizing: `FUNDED_RATING.md`.
+
 | Strategy | Chart | Funded inputs |
 |---|---|---|
 | Vault Break (Apex strategy) | 30 min MNQ | `NumContracts` 3 |
