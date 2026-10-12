@@ -23,8 +23,9 @@ Tier list of everything tested (S–F): `TIER_LIST.md`. Development process (who
 ## Starting a new chat (2026-10-12)
 1. Read `CLAUDE.md` (rules), this file, `funded_strategies/FUNDED_PLAN.md`, `TIER_LIST.md`,
    `DEVELOPMENT_PROCESS.md`.
-2. Rebuild the cached data (not in git, ~2 GB): `python3 analysis/build_lab.py scratch_data`
-   (about 1 minute). It writes `g24.pkl` (NQ grid), `ge.pkl` (ES grid) and `lab.pkl` (funded lab
+2. Rebuild the cached data (not in git, ~2 GB): `pip install numba` first (without it the
+   funded simulator falls back to pure Python and the score step takes 30+ minutes), then
+   `python3 analysis/build_lab.py scratch_data` (about 1 minute). It writes `g24.pkl` (NQ grid), `ge.pkl` (ES grid) and `lab.pkl` (funded lab
    with VB, ONB_ML2_MC, EOS, MON_MC, LDF_MC, OND_MC from the MultiCharts reports) and prints the
    current plan's score, which should be $7,676 (1 year) / $12,012 (2 years).
 3. Older test scripts load pickles from the first session's scratchpad path (`SP = ...`); point
