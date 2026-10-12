@@ -129,3 +129,60 @@ def vwap_ema_pullback(g, bar=15, sess_start=830, sess_end=1500, last_entry=1430,
     tdf["net"] = tdf["pnl"] - cost - tdf["slips"] * 0.25 * point_value
     tdf["date"] = g.ts[tdf["day"].to_numpy()]
     return tdf
+
+
+# ---------------------------------------------------------------- overnight-positioning family
+def on_context(g, on_start=2300, on_end=830):
+    """Per trading row: overnight high/low (bars closing after on_start on the
+    previous date through on_end), the 8:31 open, its position in the range
+    (0 = low, 1 = high), and the 8:30-8:45 opening range."""
+    tr = g.trading
+    a, b = jof(on_start) + 1, jof(on_end)
+    out = []
+    for d in tr:
+        with np.errstate(all="ignore"):
+            hh = np.nanmax(np.r_[g.h[d - 1, a:], g.h[d, :b + 1]]); ll = np.nanmin(np.r_[g.l[d - 1, a:], g.l[d, :b + 1]])
+            orh = np.nanmax(g.h[d, jof(831):jof(845) + 1]); orl = np.nanmin(g.l[d, jof(831):jof(845) + 1])
+        op = g.o[d, jof(831)]
+        pos = (op - ll) / (hh - ll) if hh > ll else np.nan
+        out.append((d, hh, ll, op, pos, orh, orl))
+    return pd.DataFrame(out, columns=["day", "onh", "onl", "op", "pos", "orh", "orl"]).set_index("day")
+
+
+def first_cross(g, d, level, side, j_from, j_to):
+    """First 1-minute close from j_from to j_to beyond `level` (side +1 above, -1 below)."""
+    c = g.c[d, j_from:j_to + 1]
+    hit = np.nonzero(((c > level) if side > 0 else (c < level)) & ~np.isnan(c))[0]
+    return j_from + hit[0] if len(hit) else None
+
+
+def on_signals(g, ctx, kind, stop_atr=0.2, tgt_atr=None, first=845, last=1200, flat=1430,
+               middle_only=False, frac=1 / 3):
+    """Signals for grid.execute():
+      'on_break'    first close beyond the overnight high (long) / low (short)
+      'or_fade'     middle-third days: first close beyond the 8:30-8:45 range,
+                    traded against the break (range day)
+      'or_follow'   middle-third days: the same break, followed (control)
+    Stop stop_atr x ATR, optional target tgt_atr x ATR, flat at `flat`."""
+    atr = g.daily_atr(15)
+    rows = []
+    for d, r in ctx.iterrows():
+        if np.isnan(r.pos) or np.isnan(atr[d]):
+            continue
+        mid = frac <= r.pos <= 1 - frac
+        if kind in ("or_fade", "or_follow") and not mid:
+            continue
+        if middle_only and not mid:
+            continue
+        hi, lo = (r.onh, r.onl) if kind == "on_break" else (r.orh, r.orl)
+        j_from, j_to = jof(first), jof(last)
+        ju = first_cross(g, d, hi, 1, j_from, j_to); jd = first_cross(g, d, lo, -1, j_from, j_to)
+        if ju is None and jd is None:
+            continue
+        if jd is None or (ju is not None and ju < jd):
+            j, brk = ju, 1
+        else:
+            j, brk = jd, -1
+        side = -brk if kind == "or_fade" else brk
+        rows.append((d, j, side, stop_atr * atr[d], tgt_atr * atr[d] if tgt_atr else np.inf, jof(flat)))
+    return pd.DataFrame(rows, columns=["day", "dj", "side", "stop", "target", "exit_j"])

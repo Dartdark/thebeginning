@@ -112,6 +112,52 @@ measured against their normal size at that time of day:
   costs about $60 (NQ $7.25 + 1.5 ES x $5 + 1 tick per fill on both legs), so about $20 is
   left. Not worth trading.
 
+## Release-fade and overnight-positioning round (2026-10-12)
+
+**Fading the reaction to 7:30 CT reports** (from the citation review):
+- **The detected days are real release days.** They fall mostly on Thursdays (jobless
+  claims) and Fridays (jobs report), and 79 of the 102 first-Friday jobs reports were
+  caught.
+- **Without a stop**, the trade looks good: jobs-report Fridays make $152 net (t = 2.5).
+- **With a stop** (needed live in that window):
+
+  | Version | Avg trade | Years positive |
+  |---|---|---|
+  | All release days | $11–15 | 3/9 |
+  | Jobs-report Fridays | $49–104 | 5/9, losing in 2018–22 |
+
+- **In the funded bench**, adding it lowers payouts: benchmark + REL $4,149–4,415,
+  + NFP $4,023–4,602, vs $5,387. **Dropped.**
+
+**Overnight-positioning family** (`analysis/funded_candidates.py`: `on_context`,
+`on_signals`):
+
+| Idea | Trades | Win | Avg | PF | t | Years + |
+|---|---|---|---|---|---|---|
+| **Break of the overnight high/low** (first close beyond it 8:45–12:00), hold to 14:30, stop 0.15 ATR | 2,075 | 30% | $99 | 1.18 | 2.5 | 7/9 |
+| … stop 0.2 ATR | 2,075 | 37% | $98 | 1.15 | 2.3 | 7/9 |
+| … middle-third days only (the days Overnight Bias skips) | 677 | 30–36% | $10–52 | 1.02–1.09 | ≤ 0.8 | 4–6/9 |
+| Fade the 8:30–8:45 range break on middle-third days | 722 | 36–46% | −$34 to $66 | 0.94–1.12 | ≤ 1.2 | 3–6/9 |
+| Follow the same break (control) | 722 | 28–47% | −$108 to −$31 | 0.85–0.94 | < 0 | 1–3/9 |
+
+The overnight-range breakout has a real edge (t = 2.5, stable in both periods), but
+**in the funded bench it cuts payouts sharply**:
+
+| Plan | Expected payouts within 1 year |
+|---|---|
+| Benchmark | $5,387 |
+| Benchmark + breakout ($200–400 risk) | $1,558–3,097 |
+| Benchmark + middle-days version ($200–400 risk) | $2,237–4,329 |
+| Breakout + Overnight Drift alone | $700–1,030 |
+
+It trades every day with a 30–37% win rate and correlates 0.53–0.59 with Overnight
+Bias.
+
+**Lesson (now confirmed four times):** under the payout rules an edge is not enough. A
+funded strategy needs a decent win rate, has to sit out a lot of days, and must be nearly
+uncorrelated with the others. Every-day, low-win-rate trend trades destroy payouts even
+with t = 2.5.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
