@@ -31,10 +31,10 @@ MultiCharts-confirmed (`Backtesting Strategy Performance Report EOS v1.xlsx`, id
 Overnight Drift MultiCharts-confirmed (`... OND v1.xlsx`); holiday fix (`MaxEntryDelay` 30).
 Funded set: VB 3 MNQ, ONB $300, OND $500, Expiration Open Short $500 -> $6,495 within 1 year
 (all MultiCharts lists, 1 tick slippage), 42% blown. Next: sim-trade all four together.
-Candidate replacement for ONB (2026-10-12): `funded_strategies/NQ_Overnight_Bias_ML.txt`, ONB plus a
-frozen ridge "skip today" filter (Kelly & Xiu ML survey, `analysis/ml_filter_test.py`). Walk-forward:
-1 year $6,466 vs $6,489, 2 years $9,569 vs $7,268, blown 22% vs 40%; beats random skipping.
-Awaiting the MultiCharts report (with ScoreFile) to confirm.
+Overnight Bias ML replaced ONB in the funded set (2026-10-12): `funded_strategies/NQ_Overnight_Bias_ML.txt`,
+ONB plus a frozen ridge "skip today" filter (Kelly & Xiu ML survey, `analysis/ml_filter_test.py`).
+MultiCharts-confirmed (decisions match Python from April 2018). Funded set now: VB 3 MNQ, ONB ML $300,
+OND $500, EOS $500 -> $6,928 within 1 year, $8,379 within 2 years, 34% blown (MC lists).
 Next step needs 1-minute 24-hour exports of GC, CL, ES (NQ_Bar_Exporter, StartTime 0,
 EndTime 2359, FilePrefix e.g. GC_1min_) into data/.
 

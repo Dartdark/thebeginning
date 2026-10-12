@@ -46,10 +46,9 @@ every market or stop fill.
 | Strategy | Chart | Funded inputs |
 |---|---|---|
 | Vault Break (Apex strategy) | 30 min MNQ | `NumContracts` 3 |
-| Overnight Bias (Apex strategy) | 15 min MNQ | `RiskPerTrade` 300 |
 | Overnight Drift | 5 min MNQ | `RiskPerTrade` 500 |
 | Expiration Open Short | 5 min MNQ | `RiskPerTrade` 500 |
-| *Candidate:* Overnight Bias ML (replaces Overnight Bias if MultiCharts confirms) | 15 min MNQ | `RiskPerTrade` 300 |
+| Overnight Bias ML (replaced Overnight Bias 2026-10-12) | 15 min MNQ | `RiskPerTrade` 300 |
 
 Scored with all four MultiCharts trade lists plus 1 tick of slippage:
 
@@ -442,8 +441,15 @@ As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (curren
   MultiCharts trades from April 2018 it keeps 396 of 973 (avg $597, PF 2.01, every year
   positive) and skips 577 (avg $86, PF 1.11). The PowerLanguage score was replayed in
   Python on 2,203 days: identical, except a 0.004 difference on Juneteenth 2026 that
-  changes no decision. **Pending: MultiCharts confirmation** (run it with ScoreFile set
-  and send the report).
+  changes no decision. **MultiCharts-confirmed** (`Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ
+  Overnight Bias v2.xlsx`): 411 trades 2018–2026, $558 average, PF 1.95, 55% winners.
+  From April 2018 every trade-or-skip decision matches the Python model (405 common days;
+  the 7 differences are January–March 2018, when the Python model lacked 60 days of
+  history). On 12 holiday half-days the exit differs from the older ONB v2 report
+  (early-close exit), not because of the filter. Funded bench with the MultiCharts lists
+  (VB 3, OND $500, EOS $500): **$6,928 within 1 year (vs $6,495), $8,379 within 2 years
+  (vs $7,280), blown 34% (vs 42%)** at RiskPerTrade 300 ($400–500 are no better). It is now
+  in the funded set in place of Overnight Bias.
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
