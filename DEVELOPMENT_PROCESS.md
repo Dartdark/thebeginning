@@ -36,6 +36,18 @@ stop and target, time exit, and size. Each side gets the same overfitting guards
 walk-forward for fitted parameters, a count of variants tried, and a check that the
 improvement holds by year rather than coming from one period.
 
+## Parameter searches: clusters, not the single best
+
+Whenever parameters are searched (Step 1 or Step 3), don't take the top-scoring combination:
+1. Score every combination on the design period only (2018–2022) with a robust measure
+   (Calmar or funded payouts, not net profit); keep 2023 onward untouched.
+2. Take the top 20%, scale each parameter to 0–1, and cluster them (k-means,
+   `analysis/param_clusters.py`).
+3. For each cluster, use the tested combination nearest the centre (the medoid). Prefer the
+   largest, tightest cluster: a broad plateau of good settings.
+4. Check the medoid on the 2023-onward holdout and in the funded bench / challenge simulator
+   before adopting it. Do it separately for longs and shorts.
+
 ## Step 4: decide and recombine
 
 For each side: keep it as is, keep it with its own settings or size, or drop it. Then put
