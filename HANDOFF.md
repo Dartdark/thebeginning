@@ -20,6 +20,21 @@ Tier list of everything tested (S–F): `TIER_LIST.md`. Development process (who
   `FUNDED_PLAN.md`). The Apex strategies are only the benchmark there.
 - `multi_strategy/`: research history, other tested strategies, `RESEARCH_TOPICS.md`.
 
+## Starting a new chat (2026-10-12)
+1. Read `CLAUDE.md` (rules), this file, `funded_strategies/FUNDED_PLAN.md`, `TIER_LIST.md`,
+   `DEVELOPMENT_PROCESS.md`.
+2. Rebuild the cached data (not in git, ~2 GB): `python3 analysis/build_lab.py scratch_data`
+   (about 1 minute). It writes `g24.pkl` (NQ grid), `ge.pkl` (ES grid) and `lab.pkl` (funded lab
+   with VB, ONB_ML2_MC, EOS, MON_MC, LDF_MC, OND_MC from the MultiCharts reports) and prints the
+   current plan's score, which should be $7,676 (1 year) / $12,012 (2 years).
+3. Older test scripts load pickles from the first session's scratchpad path (`SP = ...`); point
+   `SP` at `scratch_data/` to rerun them. Standard tools: `analysis/metrics.py` (Sharpe, Sortino,
+   PF, Calmar, Ulcer), `analysis/resampling.py` (bootstrap, permutation, fan charts),
+   `analysis/param_clusters.py` + `analysis/robustness.py` (clusters, folds, sensitivity),
+   `funded_lab.Lab.score(plan, 250/500, fmin=0.5, fmax=1.0, ref=2000)` (funded bench with cushion sizing).
+4. To confirm a strategy: the user uploads the MultiCharts report (.xlsx) to the repo root;
+   compare with `portfolio.load_mc` as in `analysis/late_day_flow_confirm.py`.
+
 ## Funded plan (updated 2026-10-12)
 Current funded set (`funded_strategies/FUNDED_PLAN.md`): VB 3 MNQ, Overnight Bias ML v2 RiskPerTrade 400,
 Monday Long 1 MNQ (replaced Overnight Drift), Expiration Open Short RiskPerTrade 700, **Late-Day Flow
