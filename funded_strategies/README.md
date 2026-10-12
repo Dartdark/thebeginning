@@ -39,7 +39,7 @@ every market or stop fill.
 | Strategy | File | Status | Notes |
 |---|---|---|---|
 | Overnight Drift | `NQ_Overnight_Drift.txt` | Python-tested; needs a MultiCharts backtest | Long midnight to 3:00 CT after a down session. PF 1.25, 8/9 years positive, flat 2023–24. Correlation about 0 with everything else |
-| **Expiration Open Short** | `NQ_Expiration_Open_Short.txt` | Python-tested; needs a MultiCharts backtest | Short at the 8:30 open on monthly options expiration day, out at 10:00, stop 0.3 ATR. 105 trades, 59% winners, $474 a trade, PF 1.93, 8/9 years positive. **Benchmark + it at $500 risk: $6,516 vs $5,387** |
+| **Expiration Open Short** | `NQ_Expiration_Open_Short.txt` | **MultiCharts-confirmed** (`Backtesting Strategy Performance Report EOS v1.xlsx`): same 105 trades, entries and P&L as Python | Short at the 8:30 open on monthly options expiration day, out at 10:00, stop 0.3 ATR. 105 trades, 59% winners, $474 a trade, PF 1.93, 8/9 years positive. **Benchmark + it at $500 risk: $6,516 vs $5,387** |
 
 ## Benchmark (to beat)
 
@@ -230,6 +230,18 @@ comparisons:
 
 Over 2 years: $7,320 vs $6,467. The turn-of-month long adds almost nothing on top, so it
 is parked; it is a watch item because it has been much stronger since 2023.
+
+**MultiCharts confirmation (2026-10-12):** `Backtesting Strategy Performance Report EOS v1.xlsx`
+(5-minute @NQ, Bar Magnifier 1 minute, RiskPerTrade 0, NumContracts 1, from 19 Jan 2018)
+matches the Python test:
+- the same 105 trades on the same days
+- the same entry price on 100%
+- P&L within $25 on 100% (the exit price differs on 21%, where MultiCharts rounds the stop
+  to the tick)
+
+After $7.25 plus 1 tick per fill: 59% winners, $474 a trade, PF 1.93, 8/9 years positive.
+With the MultiCharts list in the funded bench, benchmark + it at $500 = **$6,516**
+($7,320 within 2 years).
 
 **Caveats:**
 - Only 105 trades (12 a year), t = 2.6, found among about 40 comparisons.
