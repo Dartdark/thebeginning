@@ -1,0 +1,57 @@
+Forced-flow round 3 (2026-10-12): flows from players who must trade regardless of price.
+
+A. Leveraged-ETF rebalancing: follow the day's move into 15:00
+  |8:30->14:00| >= 0%: follow 14:00->15:00                   n=2186 avg $   32 t=  1.2 yrs+ 5/9 | 18-22 $   79 | 23+ $  -31
+  |8:30->14:00| >= 1.0%: follow 14:00->15:00                 n= 597 avg $   84 t=  1.3 yrs+ 4/9 | 18-22 $  123 | 23+ $   15
+  |8:30->14:00| >= 1.5%: follow 14:00->15:00                 n= 275 avg $  263 t=  2.4 yrs+ 5/9 | 18-22 $  231 | 23+ $  342 <
+  |8:30->14:00| >= 2.0%: follow 14:00->15:00                 n= 134 avg $  367 t=  2.1 yrs+ 6/9 | 18-22 $  267 | 23+ $  663 <
+  |8:30->14:30| >= 0%: follow 14:30->15:00                   n=2186 avg $  -20 t= -1.0 yrs+ 2/9 | 18-22 $   34 | 23+ $  -91
+  |8:30->14:30| >= 1.0%: follow 14:30->15:00                 n= 640 avg $  -10 t= -0.2 yrs+ 4/9 | 18-22 $   65 | 23+ $ -143
+  |8:30->14:30| >= 1.5%: follow 14:30->15:00                 n= 315 avg $   36 t=  0.5 yrs+ 4/9 | 18-22 $   85 | 23+ $  -81
+  |8:30->14:30| >= 2.0%: follow 14:30->15:00                 n= 166 avg $  126 t=  1.2 yrs+ 6/9 | 18-22 $  145 | 23+ $   76
+
+B. After settlement: 15:00 -> 15:15 vs the day's / last hour's direction
+  follow the day (8:30->15:00)                               n=2186 avg $  -24 t= -2.1 yrs+ 2/9 | 18-22 $  -27 | 23+ $  -21 <
+  follow the last hour (14:00->15:00)                        n=2186 avg $  -46 t= -4.0 yrs+ 1/9 | 18-22 $  -63 | 23+ $  -25 <==
+  follow the day, |day| >= 1.5%                              n= 340 avg $  -88 t= -2.2 yrs+ 4/9 | 18-22 $ -154 | 23+ $   63 <
+
+C. Vol-target de/re-levering (realized vol of RTH closes)
+  rv5/rv20 falling(<1) long, rising(>1) short: 8:30->15:00   n= 998 avg $    1 t=  0.0 yrs+ 4/9 | 18-22 $  135 | 23+ $ -182
+  rv5 jumped >25% yesterday -> short 8:30->15:00             n= 263 avg $  167 t=  0.8 yrs+ 6/9 | 18-22 $  309 | 23+ $  -28
+  rv5 fell >15% yesterday -> long 8:30->15:00                n= 335 avg $   32 t=  0.2 yrs+ 5/9 | 18-22 $  114 | 23+ $  -87
+
+D. Weekday x time of day (long)
+  Mon 8:30-10:00                                             n= 452 avg $  177 t=  1.9 yrs+ 6/9 | 18-22 $   33 | 23+ $  368
+  Mon 10:00-12:00                                            n= 452 avg $   84 t=  1.3 yrs+ 5/9 | 18-22 $  -25 | 23+ $  229
+  Mon 12:00-15:00                                            n= 410 avg $  146 t=  1.7 yrs+ 6/9 | 18-22 $  121 | 23+ $  180
+  Tue 8:30-10:00                                             n= 456 avg $ -168 t= -1.8 yrs+ 2/9 | 18-22 $ -174 | 23+ $ -161
+  Tue 10:00-12:00                                            n= 456 avg $   94 t=  1.2 yrs+ 5/9 | 18-22 $   47 | 23+ $  156
+  Tue 12:00-15:00                                            n= 452 avg $   50 t=  0.6 yrs+ 4/9 | 18-22 $  -71 | 23+ $  209
+  Wed 8:30-10:00                                             n= 453 avg $    5 t=  0.1 yrs+ 6/9 | 18-22 $  108 | 23+ $ -131
+  Wed 10:00-12:00                                            n= 452 avg $   28 t=  0.4 yrs+ 5/9 | 18-22 $   49 | 23+ $    1
+  Wed 12:00-15:00                                            n= 447 avg $  -60 t= -0.5 yrs+ 3/9 | 18-22 $ -168 | 23+ $   84
+  Thu 8:30-10:00                                             n= 455 avg $  -63 t= -0.6 yrs+ 5/9 | 18-22 $  148 | 23+ $ -347
+  Thu 10:00-12:00                                            n= 455 avg $  -43 t= -0.5 yrs+ 4/9 | 18-22 $  -25 | 23+ $  -68
+  Thu 12:00-15:00                                            n= 442 avg $ -126 t= -1.3 yrs+ 2/9 | 18-22 $  -57 | 23+ $ -220
+  Fri 8:30-10:00                                             n= 446 avg $ -105 t= -1.0 yrs+ 4/9 | 18-22 $ -176 | 23+ $  -13
+  Fri 10:00-12:00                                            n= 446 avg $  -12 t= -0.2 yrs+ 5/9 | 18-22 $ -135 | 23+ $  149
+  Fri 12:00-15:00                                            n= 434 avg $   20 t=  0.2 yrs+ 6/9 | 18-22 $  129 | 23+ $ -124
+  Mon overnight (prev 15:00 -> 8:30)                         n= 440 avg $  157 t=  1.1 yrs+ 6/9 | 18-22 $ -126 | 23+ $  537
+  Tue overnight (prev 15:00 -> 8:30)                         n= 413 avg $  227 t=  1.8 yrs+ 6/9 | 18-22 $  398 | 23+ $    3
+  Wed overnight (prev 15:00 -> 8:30)                         n= 450 avg $  284 t=  2.5 yrs+ 8/9 | 18-22 $  177 | 23+ $  425 <
+  Thu overnight (prev 15:00 -> 8:30)                         n= 449 avg $  125 t=  0.9 yrs+ 5/9 | 18-22 $ -174 | 23+ $  529
+  Fri overnight (prev 15:00 -> 8:30)                         n= 433 avg $   10 t=  0.1 yrs+ 5/9 | 18-22 $  -13 | 23+ $   42
+
+E. Quarter-end: fade the quarter-to-date move over the last 3 trading days
+  last 3 days of quarter: fade QTD, 8:30->15:00              n= 108 avg $  -46 t= -0.2 yrs+ 5/9 | 18-22 $   84 | 23+ $ -210
+  last day of quarter: fade QTD, 8:30->15:00                 n=  36 avg $   32 t=  0.1 yrs+ 6/9 | 18-22 $ -434 | 23+ $  615
+
+F. European close / morning momentum
+  follow 8:30->10:00 to 15:00                                n=2186 avg $   62 t=  1.1 yrs+ 4/9 | 18-22 $   30 | 23+ $  105
+  follow 8:30->10:00 to 15:00, |move| >= 0.5%                n= 883 avg $  169 t=  1.9 yrs+ 7/9 | 18-22 $  121 | 23+ $  239
+  follow 8:30->10:30 to 15:00                                n=2186 avg $  110 t=  2.1 yrs+ 7/9 | 18-22 $  102 | 23+ $  121 <
+  follow 8:30->10:30 to 15:00, |move| >= 0.5%                n= 967 avg $  188 t=  2.0 yrs+ 7/9 | 18-22 $  129 | 23+ $  273 <
+  follow 8:30->11:00 to 15:00                                n=2186 avg $   88 t=  1.8 yrs+ 6/9 | 18-22 $   92 | 23+ $   83
+  follow 8:30->11:00 to 15:00, |move| >= 0.5%                n=1029 avg $  134 t=  1.6 yrs+ 5/9 | 18-22 $  107 | 23+ $  176
+
+comparisons: 42

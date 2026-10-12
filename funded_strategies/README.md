@@ -340,6 +340,20 @@ As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (curren
 
 **Verdict:** no change. The raw drifts do not survive a stop and a 15:00 exit.
 
+## Forced-flow round 3 (2026-10-12): Late-Day Flow candidate
+
+Code: `analysis/forced_flows3_test.py` (42 raw windows), `analysis/letf_rebalance_test.py`
+(trade, neighbours, placebo, funded bench; outputs in the matching `_output.txt` files).
+
+| Flow | Result |
+|---|---|
+| **Leveraged-ETF / last-hour flow: follow a big 8:30→14:00 move from 14:00** | **Candidate.** As a trade (move ≥ 0.4 ATR, stop 0.25 ATR, out 14:30): 898 trades, PF 1.44, t 3.5, 7/9 years, both sides positive; random side −$13 vs $94. Funded + 2 MNQ: $7,648 / $12,019 vs $7,153 / $11,612, blown 4–6% vs 9–10%. `NQ_Late_Day_Flow.txt`, needs a MultiCharts check |
+| Futures settlement: 15:00–15:15 reverses the last hour | Consistent (t −4.0) but ~$29 gross: too thin |
+| Vol-target funds de-/re-levering after realized-vol changes | Nothing (t ≤ 0.8) |
+| Weekday × time of day | Only Monday (already traded) and Wednesday overnight (t 2.5, 1 of 20) |
+| Quarter-end pension rebalancing (fade QTD, last 3 days) | Nothing (t −0.2) |
+| European close / morning momentum at 10:30 | t 2.1 (unchanged, C) |
+
 ## CFTC positioning round (2026-10-12): nothing usable
 
 Weekly Commitments of Traders, Traders in Financial Futures (`data/cot/`, 2017–2026,

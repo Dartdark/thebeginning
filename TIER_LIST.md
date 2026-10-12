@@ -38,6 +38,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 
 | Item | Type | Key numbers | Notes |
 |---|---|---|---|
+| Late-Day Flow (leveraged-ETF / last-hour flow): follow a ≥ 0.4 ATR move at 14:00 to 14:30 | Funded candidate (`NQ_Late_Day_Flow.txt`) | 898 trades, 55% win, $94 avg, PF 1.44, t 3.5, 7/9 years; longs and shorts both positive; neighbours t 2.9–3.9; beats all 20 random-side runs; funded + 2 MNQ: $7,648 / $12,019 vs $7,153 / $11,612, blown 4–6% vs 9–10% | Found among ~70 comparisons; ES weaker (t 1.2); needs a MultiCharts check |
 | ONB skips the day after negative GEX | Filter | t = 4.1, 9/9 years; funded +$342 (year 2 flat) | Needs daily GEX typed in; no price-only version matched it |
 | Noise-area momentum, long only ("Beat the Market") | Strategy | PF 1.38–1.45, 9/9 years | Wins only 43%; replaces VB poorly ($4,100 vs $5,387) |
 | Bootstrap + permutation (out-of-sample resampling) | Method | Funded portfolio Sharpe 90% interval 1.53–3.00 (2023–26); real drawdown smaller than 99% of shuffles (95% shuffle $8,347 vs real $3,351) | Adopted as a standard check; shows the edges aren't luck but the real drawdowns were, and that losses don't cluster |
@@ -59,6 +60,8 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 
 | Item | Type | Result |
 |---|---|---|
+| Post-settlement reversal (15:00–15:15 fades the last hour) | Forced flow | Very consistent (t −4.0 for following, 1/9 years) but only ~$29 gross a trade: about $12 after costs |
+| Wednesday overnight long (prev 15:00 → 8:30) | Calendar | t 2.5, 8/9 years, but 1 of 20 weekday-window tests and overlaps Overnight Drift |
 | VIX regime size tilt | Filter | VB +30% per trade in "short vol"; OND better in stress; Funded/pass changes within noise; tilt with cushion sizing untested |
 | Release fade (8:00–8:30 CT after 7:30 data) | Strategy | +$63, t = 2.9, 485 days; Found after ~24 variants; loses with a stop in the funded bench |
 | Last-30-minute momentum (Baltussen et al. 2021) | Paper / strategy | Regression t 1.0 NQ vs 7.3 in the paper; ~$0 per trade since 2018 |
@@ -103,6 +106,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Price-pattern direction search: 25 signals known by 8:45 (Asia/Europe session, gap, order-flow imbalance, prior day, 2–60-day momentum, NQ–ES, VIX) and a frozen ridge of the non-ONB ones | Signal search | Overnight-range signals just re-find ONB (80–95% agreement); the rest: ridge t 3–4 in 2018–22, negative 2023–26 and walk-forward ≈ $0 |
 | Pre-holiday / post-holiday / mid-month pay days | Calendar | t ≤ 0.5 |
 | Technical rules and FX intervention (LeBaron 1996, SSRN 1105) | Paper | 150-day MA rule on DM/yen 1979–92, Sharpe 0.7–1.0, but almost all of it on Fed intervention days (Sharpe 0.1–0.4 without); currencies, multi-day holds, and that intervention regime is gone. MA rules on NQ already failed here (MA 5–200 agreement, 50-day MA distance) |
+| Forced-flow round 3: vol-target de-levering (realized-vol jumps), quarter-end pension fade, Friday pre-weekend de-risking | Forced flow | t ≤ 0.8 (vol target), −0.2 (quarter end), Friday windows −1.0 to 0.2 |
 | 0DTE trading rules (Vilkov 2026) | Paper | SPX options; not tradable on Apex |
 | 0DTE gamma and volatility (Dim, Eraker & Vilkov 2025) | Paper | Needs intraday 0DTE dealer positions (paid Cboe data) |
 | Contrarian VRP ETF strategy (SSRN 4841308) | Paper | Rules undefined, no costs, multi-day ETFs |
