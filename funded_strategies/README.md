@@ -457,6 +457,24 @@ As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (curren
   2019 (+0.4 points) and needs a median 9 days instead of 6. Larger sizes ($1,500–2,000) are worse. **Verdict:
   keep plain Overnight Bias for the challenge** and Overnight Bias ML for funded accounts.
 
+- **Baldi-Lanfranchi, Collin-Dufresne & Daniel (2026), "Asymmetric Reversals", NBER
+  w35840.** US stocks 1972–2022. They split each stock's return into a part explained by
+  systematic factors and public news (SYS) and a residual (RES). SYS continues, RES
+  reverses (order-flow pressure that liquidity providers get paid to absorb), and negative
+  residual shocks reverse much faster than positive ones (29% on the first day vs 4%).
+  A long-short stock factor built on this has a Sharpe ratio of 2.55, declining over time.
+  The paper's factor is a stock-picking strategy; we tested the time-series version on NQ
+  (`analysis/asymmetric_reversal_test.py`):
+  - the asymmetry shows up: after a big **no-news** down day (RTH move < −1 sd) the next
+    8:30–15:00 session gains 23 bp on average (t = 2.4, 235 days); big up days don't reverse
+  - news days don't continue as the paper predicts (big news down days rebound even more
+    over 5 days, t = 3.1); the NQ-vs-ES residual has no reversal; splitting Overnight Drift
+    by news or residual doesn't help
+  - as a trade (long next 8:30–15:00, stop 0.3–0.5 ATR): PF 1.20–1.44, t = 0.7–1.8, 2026
+    negative; funded bench $6,184–7,049 vs $6,928 (within noise, best version cherry-picked)
+
+  **Verdict:** real but too weak to trade after a stop; nothing added.
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
