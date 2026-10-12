@@ -95,6 +95,7 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 | Fact, Fiction and Momentum Investing (Asness et al. 2014, SSRN 2435323) | Paper | Cross-sectional stock momentum (12-1 month winners vs losers); myth-busting essay, no NQ day-trading rule |
 | Index MA agreement for ES (your idea; ES + NQ only so far, YM pending) | Strategy | MA 5–200, three modes: −$72 to +$23 a day, t −1.9 to +1.0; shorts lose; long side ≈ market drift |
 | 60-min 40-bar breakout + 200 SMA, 2x ATR stop (your idea) | Strategy | As written: PF 1.08, t 0.7, shorts lose, −$97k max DD, holds 2–3 days (not Apex-legal); 2026 −$76k |
+| Hybrid channel breakout + MA retrace + volume (Rogul 2026, SSRN 6469419) | Paper / strategy | 42 trades in 3 hand-picked months, perfect-hindsight bias, parameters withheld. Mechanical 1-min version: no bias PF 1.01–1.11 (Sharpe 0.47); hindsight bias PF 2.29 (the paper's 'edge'); ONB bias PF 1.62 but random entries in the ONB direction do better ($356 vs $284), so the engine adds nothing |
 | 0DTE trading rules (Vilkov 2026) | Paper | SPX options; not tradable on Apex |
 | 0DTE gamma and volatility (Dim, Eraker & Vilkov 2025) | Paper | Needs intraday 0DTE dealer positions (paid Cboe data) |
 | Contrarian VRP ETF strategy (SSRN 4841308) | Paper | Rules undefined, no costs, multi-day ETFs |
