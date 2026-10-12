@@ -162,3 +162,33 @@ sizes $7,202 / $8,547 vs $6,928 / $8,379 (1 / 2 years); recommended plan with cu
 $6,876 / $11,366 vs $6,995 / $11,485, blown 10% vs 12%. **Net: within noise.** v2 stays the
 default (the walk-forward evidence that low-score longs are weak still holds), and
 `LongMinScore` 0 returns to v1 at any time.
+
+### First parameter-cluster runs (2026-10-12, `analysis/param_clusters_vb_onb_test.py`)
+
+**Vault Break** (720 combinations: noise 0.2–0.5 ATR, first entry 9:30–11:00, target 25–80,
+stop 50–110). The single best design combination (target 60 / stop 75 from 10:30) collapsed
+in 2023–26 (holdout Calmar 0.37, worse than 83% of all combinations); the five cluster medoids
+scored 0.17–1.02. The **current settings** (0.3 ATR, 10:00, 40/75) score holdout Calmar 1.42,
+better than 84% of all combinations, and rank in the top 5% on the design period too.
+**Keep Vault Break as is.**
+
+**Overnight Bias** (500 combinations: bias fraction 0.25–0.4, ADX minimum 0–30, stop 0.2–0.5
+ATR, target 1.5–6R). The largest top cluster sits at **ADX ≥ 25–30**, stop 0.2–0.3 ATR, 1/3
+fraction; its medoid (1/3, **ADX 30, stop 0.25 ATR**, 3R) scores holdout Calmar 2.43 (better
+than 99% of all combinations) vs 1.37 for the current settings. ADX 30 appears in every long
+cluster and most short clusters.
+
+| Plain Overnight Bias, 2018–26 | Trades | Avg | PF | Sharpe | Sortino | Calmar | Ulcer |
+|---|---|---|---|---|---|---|---|
+| Current (ADX 20, 0.30 ATR) | 997 | $270 | 1.38 | 1.29 | 2.39 | 1.13 | 4.77 |
+| **Medoid (ADX 30, 0.25 ATR)** | 676 | $372 | 1.66 | 1.61 | 3.31 | 2.06 | 2.87 |
+
+- **Challenge** (VB 8 + ONB $1,100): pass **46.8% vs 43.3%** (2023–26: 51.1% vs 45.3%), same
+  median 6 days. Adopted as the recommended challenge setting (inputs only: `ADXMin` 30,
+  `StopAtrPct` 0.25), pending a MultiCharts backtest.
+- **Funded** (ML filter on top): worse ($5,914 / $7,432 vs $7,190 / $8,544; cushion plan $6,318
+  vs $6,897 in year 1): the ML filter was trained on the ADX-20 trades and the two filters
+  overlap. **Overnight Bias ML keeps ADX 20.**
+- By side, longs' current settings already hold up in 2023–26 (holdout Calmar 1.26 vs medoids
+  0.52–1.11); shorts improve with ADX 25 / 0.25 ATR (1.00 vs 0.48). Consistent with the ADX 30
+  change helping mostly through the short side.
