@@ -45,7 +45,13 @@ Whenever parameters are searched (Step 1 or Step 3), don't take the top-scoring 
    `analysis/param_clusters.py`).
 3. For each cluster, use the tested combination nearest the centre (the medoid). Prefer the
    largest, tightest cluster: a broad plateau of good settings.
-4. Check the medoid on the 2023-onward holdout and in the funded bench / challenge simulator
+4. **Fold stability** (`analysis/robustness.py`): re-optimize on overlapping 3-year windows
+   (2018–20, 2019–21, … 2024–26). A robust choice ranks near the top in every fold, and the
+   per-fold optimum stays in the same region.
+5. **Sensitivity:** move one parameter at a time around the choice, others fixed. Smooth, flat
+   curves = robust; a big drop to a neighbouring value = overfit. Prefer the middle of a flat
+   region over a higher but isolated peak.
+6. Check the result on the 2023-onward holdout and in the funded bench / challenge simulator
    before adopting it. Do it separately for longs and shorts.
 
 ## Step 4: decide and recombine
@@ -192,3 +198,24 @@ cluster and most short clusters.
 - By side, longs' current settings already hold up in 2023–26 (holdout Calmar 1.26 vs medoids
   0.52–1.11); shorts improve with ADX 25 / 0.25 ATR (1.00 vs 0.48). Consistent with the ADX 30
   change helping mostly through the short side.
+
+### Fold stability and sensitivity (2026-10-12, `analysis/robustness_vb_onb_test.py`)
+
+**Overnight Bias, ADX 30 / 0.25 ATR (challenge setting): passes both.**
+- The per-fold optimum uses ADX 30 in 6 of 7 folds (25 in the last), stop 0.25 ATR in 5 of 7,
+  fraction 1/3 in 4 of 7, target 3–4R in all.
+- The ADX 30 setting ranks in the top 7% in every fold (93–100%); the current ADX 20 setting
+  ranks 46–93%.
+- Sensitivity around ADX 30: every one-step change costs at most 22% of Calmar; the target is
+  flat from 3R to 6R. Around ADX 20, the bias fraction drops 52% one step away (to 0.4).
+- By side: the short side gains most (fold ranks 65–100%); the long side is flat across ADX.
+
+**Vault Break: keep the current settings, with a known weak spot.**
+- No stable optimum: the per-fold best moves across noise 0.2–0.5, target 25–80 and stop
+  50–90. The current settings rank in the top 6–40% of every fold (60–94th percentile), good
+  in every period but never the best.
+- Stop and noise curves are smooth (stop 50–110 within 15–30%). The target and start time looked
+  like a spike on the coarse grid (40 points: Calmar 1.14; 30 and 50 points: 0.72 and 0.64). A fine
+  grid shows a **plateau from 33 to 42 points** (0.94–1.14) that falls away from 45 points up.
+  Decision times 9:45 and 10:00 are the same bar on the 30-minute chart; 10:15/10:30 was better in
+  2018–22 but much worse in 2023–26. Target 40 sits inside the plateau; nothing to change.
