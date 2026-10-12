@@ -312,6 +312,32 @@ these, but:
 
 Keep it as an option if you ever automate a daily GEX feed.
 
+## Structural calendar-flow round 2 (2026-10-12): nothing tradeable
+
+Forced, calendar-timed flows (the kind behind Expiration Open Short), tested on NQ and ES
+2018–2026 (`analysis/calendar_flows2_test.py`). Raw windows per contract (8:30–10:00,
+8:30–15:00, last hour, last 30 minutes, 15:00 to the next 8:30), compared with all days:
+
+| Event | Best window | Result |
+|---|---|---|
+| S&P quarterly rebalance (triple-witching close) | 8:30–15:00 down (−$552 NQ) | t = −1.0 NQ, −1.7 ES. The open is already traded by Expiration Open Short |
+| Nasdaq-100 reconstitution (December) | 8:30–10:00 up | 8 days, t = 1.4: too few |
+| Russell reconstitution (last Friday of June) | Overnight after it up | 9 days, t = 1.8: too few |
+| VIX expiration Wednesday | 8:30–15:00 down, t = −1.5 | **FOMC overlap**: 23 of 105 are FOMC days; without them t = −0.4 |
+| Roll week (the week before triple witching) | 8:30–15:00 down | ES t = −2.2, NQ −1.4 (without FOMC days) |
+| Roll Thursday | none | t < 1.5 |
+| Buyback blackout (about the 15th of the quarter's last month to the 25th of the next) vs open window | none | No difference (t < 0.7) |
+| Day after triple witching | 8:30–15:00 up | t = 1.6 NQ, 1.3 ES |
+
+As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (current set $6,495):
+
+| Candidate | Trades | Funded, 1 year |
+|---|---|---|
+| Roll-week short, 8:30–15:00 | 175, PF 1.06–1.13, t = 0.3–0.6, no weekday stands out | $5,113–6,050 (worse) |
+| Day after triple witching, long | 35, PF 1.06, t = 0.1 | $5,947–6,155 (worse) |
+
+**Verdict:** no change. The raw drifts do not survive a stop and a 15:00 exit.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
@@ -356,6 +382,16 @@ Keep it as an option if you ever automate a daily GEX feed.
 
   FOMC dates are in `event_days.FOMC_DATES`. Each was confirmed against the 13:00 CT
   volatility spike: median 3.6x normal on NQ, 4.0x on ES.
+
+- **Gorton, Hayashi & Rouwenhorst (2008), "The Fundamentals of Commodity Futures
+  Returns", SSRN 996930.** 31 commodity futures, 1969–2006. Low inventories mean higher
+  risk premiums. High-basis (backwardated) and 12-month-momentum commodities beat the
+  low ones by 10–14% a year (t = 3.7–4.9), held a month at a time. Trader positions
+  (COT "hedging pressure") do **not** predict returns. **Not usable here:** it is a
+  monthly long-short across many commodities, and equity-index futures have no
+  inventory or convenience yield (the basis is just rates minus dividends). As a
+  foundation it would need a multi-commodity monthly book, not NQ/ES day trades.
+  The price-only trend filters it suggests were already tried in the GEX round and did not help.
 
 ## Tested and not good enough for funded
 
