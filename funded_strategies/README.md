@@ -450,6 +450,13 @@ As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (curren
   (VB 3, OND $500, EOS $500): **$6,928 within 1 year (vs $6,495), $8,379 within 2 years
   (vs $7,280), blown 34% (vs 42%)** at RiskPerTrade 300 ($400–500 are no better). It is now
   in the funded set in place of Overnight Bias.
+
+  **50K challenge (combine) check:** VB 8 + Overnight Bias $1,100 passes 43.8% (2019+:
+  45.7%, median 6 days). With Overnight Bias ML at $1,100 the MultiCharts list passes 49.0%
+  (2019+: 51.7%), but that list is in-sample; the walk-forward version passes 46.1% from
+  2019 (+0.4 points) and needs a median 9 days instead of 6. Larger sizes ($1,500–2,000) are worse. **Verdict:
+  keep plain Overnight Bias for the challenge** and Overnight Bias ML for funded accounts.
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark

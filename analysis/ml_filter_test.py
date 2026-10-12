@@ -195,3 +195,20 @@ pickle.dump((res,X),open(SP+"ml1.pkl","wb"))
 # d=(mcs-py).abs()
 # print("days compared",len(d),"max abs diff",d.max(),"sign disagreements",(np.sign(mcs)!=np.sign(py)).sum())
 # print(d.sort_values().tail(5))
+
+# ======================= chal_ml (50K challenge: plain ONB vs ONB ML)
+# exec(open("/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/chal4.py").read().split("plans = {")[0].replace('"EOS": load_mc(g, "Backtesting Strategy Performance Report EOS v1.xlsx")}',
+#  '"EOS": load_mc(g, "Backtesting Strategy Performance Report EOS v1.xlsx"), "ONBML": load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias v2.xlsx")}'))
+# res,X0=pickle.load(open(SP_:="/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/ml1.pkl","rb"))
+# wf=res[("ONB_frozenset_wf",100)]
+# t=T["ONB"]; dt=pd.DatetimeIndex(g.ts[t.day.to_numpy()]); keep=wf.reindex(dt).to_numpy()>=0
+# w_, r_ = paths(g, t[keep]); P[("ONBWF",False)]=(w_[tr]/10, r_[tr]/10)
+# plans={"Current: VB 8 + ONB $1,100": {"VB":8,"ONB":("risk",1100)}}
+# for rk in (1100,1500,2000):
+#     plans[f"VB 8 + ONB ML (MC list) ${rk:,}"]={"VB":8,"ONBML":("risk",rk)}
+# for rk in (1100,1500,2000):
+#     plans[f"VB 8 + ONB ML walk-forward ${rk:,} (2019+)"]={"VB":8,"ONBWF":("risk",rk)}
+# m19=yr>=2019
+# for name,p in plans.items():
+#     o,dd=run(p,False)
+#     print(f"{name:<44} pass {np.nanmean(o):.1%}  2019+ {np.nanmean(o[m19]):.1%}  2018-22 {np.nanmean(o[yr<2023]):.1%}  2023-26 {np.nanmean(o[yr>=2023]):.1%}  worst yr {pd.Series(o).groupby(yr).mean().min():.0%}  median days {np.nanmedian(dd):.0f}",flush=True)
