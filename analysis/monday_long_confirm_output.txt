@@ -1,0 +1,38 @@
+MC rows: 450 columns: ['day', 'j0', 'j1', 'side', 'entry', 'exit', 'kind', 'pnl', 'date', 'net']
+MC (per NQ, +1 tick per fill): n=450 win 55% avg $425 PF 1.55 | weekdays {0: 450} | first 2018-01-08 last 2026-10-05
+  by year avg: {2018: -218, 2019: 71, 2020: 949, 2021: 114, 2022: -108, 2023: 861, 2024: 314, 2025: 911, 2026: 1135}
+match: {'both': 449, 'left_only': 2, 'right_only': 1}
+  on common days: Python avg $433, MC avg $431, corr 1.000; |diff| > $200 on 1%
+  only in Python: [datetime.date(2020, 3, 9), datetime.date(2020, 3, 16)]
+  only in MC: [datetime.date(2018, 12, 24)]
+
+Standard metrics per NQ (MC trades, with slippage):
+                       trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+MC Monday Long 2018-26    450 55% $425 $21,318   1.11    1.97          1.55 $20,782   1.03 10.54       4.04
+MC Monday Long 2023-26    194 59% $784 $39,398   1.64    3.13          1.92 $15,752   2.50  3.69      21.35
+Python 2018-26            452 55% $413 $20,782   1.07    1.90          1.52 $20,847   1.00 10.66       3.90
+corr with set: {'MON_MC': 1.0, 'VB': 0.18, 'ONB_ML2_MC': 0.09, 'OND_MC': 0.02, 'EOS': -0.0}
+
+Bootstrap:
+                           actual        p5       p50       p95
+name       metric                                              
+MC 2023-26 sharpe            1.64      0.88      1.64      2.38
+           sortino           3.13      1.46      3.10      5.34
+           pf_day            1.92      1.40      1.90      2.66
+           calmar            2.50      0.70      1.97      4.38
+           ulcer             3.69      2.57      5.46     14.18
+           max_dd       15,751.75 12,068.76 19,536.00 34,405.01
+           P(Sharpe<=0)       NaN       NaN      0.00       NaN
+MC 2018-26 sharpe            1.11      0.56      1.10      1.59
+           sortino           1.97      0.90      1.94      3.12
+           pf_day            1.55      1.24      1.54      1.89
+           calmar            1.03      0.27      0.80      1.72
+           ulcer            10.54      3.23      6.59     17.45
+           max_dd       20,781.50 16,291.23 25,827.38 44,948.85
+           P(Sharpe<=0)       NaN       NaN      0.00       NaN
+
+Funded bench, cushion sizing:
+  Funded set                 1y $6,876 (2023+ $7,350) blown 10% | 2y $11,366 blown 11% | worst yr $630
+  Monday $300 replaces OND   1y $7,087 (2023+ $8,107) blown 9% | 2y $11,810 blown 9% | worst yr $759
+  Monday $500 replaces OND   1y $7,558 (2023+ $9,405) blown 12% | 2y $11,421 blown 12% | worst yr $844
+  + Monday $300              1y $7,601 (2023+ $8,217) blown 12% | 2y $11,346 blown 13% | worst yr $605

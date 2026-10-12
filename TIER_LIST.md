@@ -36,13 +36,13 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 |---|---|---|---|
 | Overnight Bias (plain; recommended ADX 30 / 0.25 ATR from parameter clusters, challenge pass 46.8% vs 43.3%) | Challenge strategy | 997 trades, 49% win, $280 avg, PF 1.40, every year positive | Challenge pass 43.8% with VB 8; the ML version adds nothing to the challenge |
 | Bootstrap + permutation (out-of-sample resampling) | Method | Funded portfolio Sharpe 90% interval 1.53–3.00 (2023–26); real drawdown smaller than 99% of shuffles (95% shuffle $8,347 vs real $3,351) | Adopted as a standard check; shows the edges aren't luck but the real drawdowns were, and that losses don't cluster |
+| Monday Long (new direction source) | Funded candidate, MultiCharts-confirmed | MC: 450 trades, 55% win, $425 avg, PF 1.55 (Python 452 / $413 / 1.52, 449 days match); 2023–26 PF 1.92; corr ≤ 0.18; replacing OND at $300 (cushion sizing) 1y $7,087 vs $6,876, 2y $11,810 vs $11,366, blown 9% vs 10–11% | Recommended to replace Overnight Drift; regime-dependent (weak 2018–22) |
 | Overnight Drift | Funded strategy | 1,039 trades, $71 avg, PF 1.22 (at funded size PF 1.10) | Helps year 1, costs year 2; first to cut. Placebo: $71 vs $36 for random-day longs in the same window, so about half is general overnight drift. Bootstrap Sharpe interval includes zero (P ≤ 0: 9%, 14% since 2023) |
 
 ## C
 
 | Item | Type | Key numbers | Why not adopted |
 |---|---|---|---|
-| Monday Long (new direction source, 2026-10-12) | Funded candidate | 452 trades, 55% win, $413 avg, PF 1.52, t 3.2; 2018–22 PF 1.18, 2023–26 PF 1.92; Tue–Fri placebo t ≤ 0.7; corr ≤ 0.18 with the set; replacing OND (cushion sizing) 1y $7,142 vs $6,876, 2y $11,807 vs $11,366 | Needs a MultiCharts confirmation; strong only since 2023 (regime-dependent) |
 | ONB skips the day after negative GEX | Filter | t = 4.1, 9/9 years; funded +$342 (year 2 flat) | Needs daily GEX typed in; no price-only version matched it |
 | Noise-area momentum, long only ("Beat the Market") | Strategy | PF 1.38–1.45, 9/9 years | Wins only 43%; replaces VB poorly ($4,100 vs $5,387) |
 | Opening Drive | Strategy (old research set) | 1,352 trades, 41% win, PF 1.23, MC-confirmed | Superseded by the current challenge pair |

@@ -29,7 +29,12 @@
   Funded bench with cushion sizing: replacing Overnight Drift with Monday Long
   at RiskPerTrade 300 gives 1-year payouts $7,142 vs $6,876, 2-year $11,807 vs
   $11,366, blown 9% vs 10-11%. Regime-dependent: the effect is much stronger
-  since 2023. Confirm with a MultiCharts backtest before trading it.
+  since 2023.
+  MULTICHARTS CONFIRMED (2026-10-12, analysis/monday_long_confirm.py): 450 trades,
+  55% winners, $425 average, PF 1.55; 449 of 450 days match the Python test
+  (trade P&L correlation 1.00). Funded bench with the MC trades: replacing
+  Overnight Drift at $300 gives 1-year $7,087 vs $6,876, 2-year $11,810 vs
+  $11,366, blown 9% vs 10-11%.
 
   Apply to a 5-minute NQ / MNQ chart, Exchange time zone (Central), CME
   24-hour session (for the ATR), Bar Magnifier on at 1 minute. Load at least
