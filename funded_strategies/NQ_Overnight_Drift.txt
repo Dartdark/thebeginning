@@ -31,12 +31,18 @@
 
   Python test (analysis/funded24.py, 1-minute data 2018-2026, per NQ, after
   $7.25 costs): 1,041 trades, 55% winners, average $83, profit factor 1.25,
-  positive in 8 of 9 years (2018 negative). Confirm with a MultiCharts
-  backtest before trading it. }
+  positive in 8 of 9 years (2018 negative).
+  MultiCharts check (Backtesting Strategy Performance Report OND v1.xlsx):
+  same entry and P&L on all 1,037 common days. Its extra trades came from
+  holidays without a midnight bar (25 Dec, 1 Jan: the first bar is the 17:00
+  reopen, so it bought the evening and held to 3:00) and one data gap; fixed
+  with MaxEntryDelay (entries only up to 00:30). }
 
 Inputs:
 	EntryTime(0),           { 0 = the first bar of the new date (midnight) }
 	ExitTime(300),
+	MaxEntryDelay(30),      { minutes after EntryTime the entry may still happen; skips
+	                          holidays whose first bar is the 17:00 reopen and data gaps }
 	RTHStart(830),          { previous session change: close of this bar ... }
 	RTHEnd(1500),           { ... to the close of the last bar up to this time }
 	DownOnly(true),         { true: only after a down session; false: every night }
@@ -106,9 +112,10 @@ end;
 { ---------- Entry at midnight ---------- }
 Dow = DayOfWeek(Date);
 if EntryTime = 0 then
-	EntryNow = Date <> Date[1]
+	EntryNow = Date <> Date[1] and Time <= MaxEntryDelay
 else
-	EntryNow = Time >= EntryTime and (Time[1] < EntryTime or Date <> Date[1]);
+	EntryNow = Time >= EntryTime and (Time[1] < EntryTime or Date <> Date[1])
+		and Time <= CalcTime(EntryTime, MaxEntryDelay);
 
 if EntryNow and MarketPosition = 0 and Dow >= 1 and Dow <= 5 and PrevOK and ATRv > 0
 	and (DownOnly = false or PrevChg < 0) then begin

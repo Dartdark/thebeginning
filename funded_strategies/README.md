@@ -38,8 +38,30 @@ every market or stop fill.
 
 | Strategy | File | Status | Notes |
 |---|---|---|---|
-| Overnight Drift | `NQ_Overnight_Drift.txt` | Python-tested; needs a MultiCharts backtest | Long midnight to 3:00 CT after a down session. PF 1.25, 8/9 years positive, flat 2023–24. Correlation about 0 with everything else |
+| Overnight Drift | `NQ_Overnight_Drift.txt` | **MultiCharts-confirmed** (`Backtesting Strategy Performance Report OND v1.xlsx`), holiday fix added | Long midnight to 3:00 CT after a down session. PF 1.25, 8/9 years positive, flat 2023–24. Correlation about 0 with everything else |
 | **Expiration Open Short** | `NQ_Expiration_Open_Short.txt` | **MultiCharts-confirmed** (`Backtesting Strategy Performance Report EOS v1.xlsx`): same 105 trades, entries and P&L as Python | Short at the 8:30 open on monthly options expiration day, out at 10:00, stop 0.3 ATR. 105 trades, 59% winners, $474 a trade, PF 1.93, 8/9 years positive. **Benchmark + it at $500 risk: $6,516 vs $5,387** |
+
+## Current funded set (all MultiCharts-confirmed, 2026-10-12)
+
+| Strategy | Chart | Funded inputs |
+|---|---|---|
+| Vault Break (Apex strategy) | 30 min MNQ | `NumContracts` 3 |
+| Overnight Bias (Apex strategy) | 15 min MNQ | `RiskPerTrade` 300 |
+| Overnight Drift | 5 min MNQ | `RiskPerTrade` 500 |
+| Expiration Open Short | 5 min MNQ | `RiskPerTrade` 500 |
+
+Scored with all four MultiCharts trade lists plus 1 tick of slippage:
+
+| | Expected payouts, 1 year | Expected payouts, 2 years | Blown within a year |
+|---|---|---|---|
+| Expected | **$6,495** | $7,280 | 42% |
+| Without Expiration Open Short | $5,340 | $6,448 | 48% |
+
+**Overnight Drift check:** the MultiCharts report has the same entry and P&L on all
+1,037 days it shares with Python. Its extra trades were on holidays without a midnight
+bar (25 Dec, 1 Jan, where it bought the 17:00 reopen and held to 3:00) and one data gap
+(5 Nov 2018, 05:25). Fixed with `MaxEntryDelay` (entries only until 00:30). With the fix:
+1,039 trades, 54% winners, $71 a trade, PF 1.22, 7/9 years positive.
 
 ## Benchmark (to beat)
 
