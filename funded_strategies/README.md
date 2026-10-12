@@ -409,6 +409,35 @@ As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (curren
   **Verdict:** the published edge has been arbitraged away in NQ/ES since 2018, except
   in crash regimes. Not a foundation for a funded strategy.
 
+- **Kelly & Xiu (2023), "Financial Machine Learning", SSRN 4501707** (in the repo as
+  `ssrn-4501707.pdf`). A 159-page survey, not a strategy. Main points:
+  - "complex" models with heavy shrinkage (ridge) beat small, simple ones out of sample,
+    even with few observations
+  - judge a model by trading results, not R²; a tiny R² can still be very profitable
+  - machine learning works best across thousands of stocks; on a single market
+    (one time series) the data is small and overfitting is the main risk
+  - the price-chart CNN (Jiang, Kelly & Xiu) and news/LLM signals are stock-picking tools
+
+  **Built on top of it (`analysis/ml_filter_test.py`):** a walk-forward ridge model that
+  predicts each funded strategy's next-day P&L from about 20 inputs known at the previous
+  close (returns over 1/5/20 days, yesterday's 8:30–15:00 move, ATR vs its 60-day average,
+  distance from the 50-day average, short vs long volatility, weekday, month start/end,
+  expiration week; optionally VIX, GEX, DIX). Retrained every January from 2019, trading only
+  on days with a positive prediction.
+
+  | Strategy filtered | Kept vs skipped trades (2019+) | Funded bench (current set, 2019+ starts: $6,489 / $7,268) |
+  |---|---|---|
+  | Overnight Bias, all inputs | $565 vs $86 per NQ, 7/8 years kept > skipped | **$6,666 (1 year) / $9,650 (2 years)**; blown 40% → 19% |
+  | Overnight Bias, price + calendar only (no VIX/GEX) | $510 vs $146, 6–7/8 years | $6,464 / $9,491 |
+  | Overnight Bias, 55% of days skipped **at random** (30 draws) | – | $5,311 ± 526 / $7,664 ± 873; the model beat all 30 |
+  | Overnight Drift | $187 vs −$9 | Worse ($3,838–5,657): fewer trades and qualifying days |
+  | Vault Break | Kept trades better, but no clean split | Not benched |
+
+  **Status: promising, not yet adopted.** The Overnight Bias filter beats both the current set
+  and the random-skip placebo, works without GEX/DIX, and stays consistent across
+  shrinkage levels. It still needs: freezing the weights into a fixed formula,
+  a PowerLanguage version, and a MultiCharts confirmation.
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
