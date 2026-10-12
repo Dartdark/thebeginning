@@ -212,3 +212,42 @@ pickle.dump((res,X),open(SP+"ml1.pkl","wb"))
 # for name,p in plans.items():
 #     o,dd=run(p,False)
 #     print(f"{name:<44} pass {np.nanmean(o):.1%}  2019+ {np.nanmean(o[m19]):.1%}  2018-22 {np.nanmean(o[yr<2023]):.1%}  2023-26 {np.nanmean(o[yr>=2023]):.1%}  worst yr {pd.Series(o).groupby(yr).mean().min():.0%}  median days {np.nanmedian(dd):.0f}",flush=True)
+
+# ======================= logit1 (yes/no logistic target instead of ridge, after Vilkov 2026 '0DTE Trading Rules')
+# import sys, warnings, pickle; warnings.filterwarnings("ignore"); sys.path.insert(0,"analysis")
+# import numpy as np, pandas as pd
+# SP="/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/"
+# lab=pickle.load(open(SP+"lab.pkl","rb")); res,X0=pickle.load(open(SP+"ml1.pkl","rb"))
+# dates=X0.index; yr=dates.year
+# COLS=["ret1","ret5","ret20","rth1","atr_ratio","dist50","rv5_rv20","dow0","dow1","dow2","dow3","dow4","tdm","opex_wk"]
+# X=X0[COLS]; y=pd.Series(lab.daily("ONB"),index=dates); tdd=y!=0
+# def logit(A,b,lam):
+#     w=np.zeros(A.shape[1]); c=np.log(b.mean()/(1-b.mean()))
+#     for _ in range(50):   # Newton / IRLS with L2 on w
+#         p=1/(1+np.exp(-(c+A@w))); Wt=p*(1-p)
+#         g=np.r_[np.sum(p-b), A.T@(p-b)+lam*w]
+#         Aa=np.c_[np.ones(len(b)),A]; H=Aa.T@(Aa*Wt[:,None]); H[1:,1:]+=lam*np.eye(A.shape[1])
+#         step=np.linalg.solve(H,g); c-=step[0]; w-=step[1:]
+#         if np.abs(step).max()<1e-8: break
+#     return c,w
+# out={}
+# for lam in (10,100,1000):
+#     pr=pd.Series(np.nan,index=dates)
+#     for Y in range(2019,2027):
+#         trn=tdd&(yr<Y); tst=tdd&(yr==Y)
+#         mu,sd=X[trn].mean(),X[trn].std().replace(0,1)
+#         c,w=logit(((X[trn]-mu)/sd).to_numpy(),(y[trn]>0).astype(float).to_numpy(),lam)
+#         pr[tst]=1/(1+np.exp(-(c+((X[tst]-mu)/sd).to_numpy()@w)))
+#     out[lam]=pr
+#     m=tdd&(yr>=2019); pp=pr[m]; yy=y[m]
+#     for thr_name,thr in (("p<0.5",0.5),("p<median of training-period p",None)):
+#         if thr is None:
+#             sk=pd.Series(False,index=pp.index)
+#             for Y in range(2019,2027):
+#                 s=pp[pp.index.year==Y]; sk[s.index]=s<pp[pp.index.year<Y].median() if (pp.index.year<Y).any() else s<0.5
+#         else: sk=pp<thr
+#         byk=yy[~sk].groupby(yy[~sk].index.year).mean(); bys=yy[sk].groupby(yy[sk].index.year).mean()
+#         print(f"logit lam {lam:4d} skip {thr_name:<30}: skip {sk.mean():.0%} kept ${yy[~sk].mean():.0f} (win {np.mean(yy[~sk]>0):.0%}) skipped ${yy[sk].mean():.0f} years kept>skipped {(byk>bys.reindex(byk.index)).sum()}/8")
+# r=res[("ONB_frozenset_wf",100)]; m=tdd&(yr>=2019); sk=r[m]<0; yy=y[m]
+# print(f"ridge (current)                                 : skip {sk.mean():.0%} kept ${yy[~sk].mean():.0f} (win {np.mean(yy[~sk]>0):.0%}) skipped ${yy[sk].mean():.0f}")
+# pickle.dump(out,open(SP+"logit_wf.pkl","wb"))

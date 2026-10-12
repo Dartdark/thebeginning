@@ -477,6 +477,22 @@ As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (curren
 
   **Verdict:** real but too weak to trade after a stop; nothing added.
 
+  **Yes/no version tested (2026-10-12)**, after Vilkov (2026) "0DTE Trading Rules" (SSRN
+  4641356), where a logistic win/lose model beat return prediction: same inputs, logistic
+  regression on "trade wins", walk-forward. Worse for Overnight Bias: kept vs skipped
+  $326–487 vs $142–284 and kept better in only 2–5 of 8 years (ridge: 6/8). Overnight Bias
+  has a 3R target, so how much a day wins matters, not just whether it wins. Ridge stays.
+
+- **Vilkov (2026), "0DTE Trading Rules", SSRN 4641356**: same-day SPX options; selling
+  premium earns little after costs; 10:00 ET logistic timing rules reach net Sharpe 1.0–1.3
+  out of sample. Not tradable on Apex (futures only; needs 0DTE option-chain data).
+- **Dim, Eraker & Vilkov (2025), "0DTEs: Trading, Gamma Risk and Volatility Propagation",
+  SSRN 4692190**: market makers are mostly long 0DTE gamma, which lowers intraday
+  volatility; low 0DTE gamma means intraday momentum, high gamma means reversal (about 10 bp per hour
+  apart); longer-dated gamma doesn't show the momentum effect. Needs intraday 0DTE
+  market-maker positions (Cboe Open-Close data); our daily all-expiry GEX test already found
+  the effect too weak to trade.
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
