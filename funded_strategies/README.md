@@ -357,6 +357,28 @@ managers, dealers and small traders as a share of open interest, ranked against 
 
 **Verdict:** weekly positioning carries no timing information for NQ/ES day trades; no change.
 
+## Vault Break robustness checks (2026-10-12, from an r/algotrading post)
+
+The post ("I backtested 100+ retail trading strategies (~700 versions)") argues that a high win
+rate often comes from the stop/target geometry, not the entry, and that limit orders filled "on
+touch" flatter backtests. Both checks on Vault Break (`analysis/vb_random_entry_test.py`, 1,743
+MultiCharts trades 2018–2026, same 40/75-point bracket and 14:30 exit, $7.25 + 1 tick):
+
+| Test | Avg / trade | Win |
+|---|---|---|
+| Vault Break, target filled on touch | $97 | 66% |
+| Vault Break, target must trade 1 tick through | $92 | 66% |
+| Random long entries 10:00–14:00, all days (10 runs) | $6 | 59% |
+| Random entry after VB's first signal, same days (30 runs) | $42 (range −$26 to $79) | 61% |
+| VB's first trade each day | $90 | 65% |
+
+- **The post is right about win rate:** random entries with the same bracket win 59–61%, so most of
+  VB's 66% comes from the 40-point target being closer than the 75-point stop.
+- **VB still has a real edge:** its first trade makes $90 vs $42 for a random entry after the
+  same signal (beat all 30 random runs) and $6 for random days. Both the day selection and the
+  entry timing add value.
+- **Fills:** requiring a 1-tick trade-through costs about $5 a trade; target exits drop from 52% to 51%.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

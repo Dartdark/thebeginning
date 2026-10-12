@@ -47,6 +47,7 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 | VIX regime size tilt | Filter | VB +30% per trade in "short vol"; OND better in stress | Funded/pass changes within noise; tilt with cushion sizing untested |
 | Turn of the month | Strategy | +$376, t = 2.0 (t = 3.7 with stop) | Weak 2018–22; hurts funded payouts at any size |
 | Release fade (8:00–8:30 CT after 7:30 data) | Strategy | +$63, t = 2.9, 485 days | Found after ~24 variants; loses with a stop in the funded bench |
+| r/algotrading post: 100+ retail strategies, ~700 versions | Article / method | Random-entry placebo and trade-through fills applied to Vault Break: passes (first trade $90 vs random-after-signal $42, beat all 30 runs; $97 → $92 with 1-tick trade-through) |
 
 ## D
 
