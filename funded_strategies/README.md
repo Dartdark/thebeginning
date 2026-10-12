@@ -398,6 +398,19 @@ same stop, target and exit; 20–30 random runs each; the strategy beat every ru
 - **Expiration Open Short:** the edge is specific to that one window: same time on other days,
   other times on the same day, or the other direction all make about nothing.
 
+**Overnight Drift** (same placebo; own trades **$71**, 54% win, 1,039 trades, t = 2.1):
+
+| Placebo | Avg / trade | Win | Own beats |
+|---|---|---|---|
+| Long 0:00–3:00 on random days | $36 | 52% | 97% of runs |
+| Long 0:00–3:00 after up days (opposite condition) | $10 | 51% | 97% |
+| Same days, a random 3-hour window starting 3:00–5:00 | −$35 | 51% | 100% |
+| Same days 0:00–3:00, random direction | −$39 | 48% | 100% |
+
+Passes, but less decisively: about half its profit is the general midnight-to-3:00 upward
+drift that any long in that window gets; the down-day condition adds the rest (about $35–60 a
+trade). Consistent with its B tier.
+
 
 ## Papers reviewed for funded strategies
 

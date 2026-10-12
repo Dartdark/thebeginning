@@ -57,3 +57,26 @@ tests={
 for k,fn in tests.items():
     r=runs(fn,30,2); beat=np.mean(r[:,0]<a[0])
     print(f"  {k:<58} avg ${r[:,0].mean():5.0f} (range {r[:,0].min():.0f} to {r[:,0].max():.0f}) win {r[:,1].mean():.0%} | own beats {beat:.0%} of runs")
+
+# ======================= Overnight Drift placebo
+# exec(open("/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/placebo2.py").read().split("# ---------------- Overnight Bias ML")[0])
+# od=load_mc(g,"Backtesting Strategy Performance Report OND v1.xlsx"); od=od[(od.j0<=jof(30))]; od=od[yrs(od)]
+# j0m,j3=jof(0),jof(300)
+# own=[br(int(t.day),int(t.j0),1,0.3*atr[int(t.day)],None,int(t.j1) if t.kind!=0 else j3,entry=t.entry) for _,t in od.iterrows()]
+# a=st(own); print(f"OVERNIGHT DRIFT ({a[2]} trades): own re-simulated avg ${a[0]:.0f} win {a[1]:.0%} (MC report avg ${od.net.mean():.0f})")
+# tr=g.trading[pd.DatetimeIndex(g.ts[g.trading]).year>=2018]
+# C=pd.DataFrame(g.c).ffill(axis=1).to_numpy()
+# rth=pd.Series(C[g.trading,jof(1500)]-g.o[g.trading,jof(831)],index=g.trading)
+# prev=rth.shift(1)                                 # previous session's 8:30-15:00 move, known at midnight
+# updays=np.array([d for d in tr if prev.get(d,np.nan)>0]); alld=tr
+# oddays=od.day.astype(int).to_numpy()
+# tests={
+#  "long 0:00-3:00 on RANDOM days": lambda rng: [br(int(d),j0m,1,0.3*atr[int(d)],None,j3) for d in rng.choice(alld,len(od))],
+#  "long 0:00-3:00 after UP days (opposite condition)": lambda rng: [br(int(d),j0m,1,0.3*atr[int(d)],None,j3) for d in rng.choice(updays,len(od))],
+#  "same days, long a random 3h window starting 3:00-5:00": lambda rng: [br(int(d),int(s),1,0.3*atr[int(d)],None,int(s)+180) for d in oddays for s in [rng.integers(jof(300),jof(500)+1)]],
+#  "same days 0:00-3:00, RANDOM direction": lambda rng: [br(int(d),j0m,int(rng.choice([-1,1])),0.3*atr[int(d)],None,j3) for d in oddays],
+# }
+# for k,fn in tests.items():
+#     r=runs(fn,30,3); beat=np.mean(r[:,0]<a[0])
+#     print(f"  {k:<55} avg ${r[:,0].mean():5.0f} (range {r[:,0].min():.0f} to {r[:,0].max():.0f}) win {r[:,1].mean():.0%} | own beats {beat:.0%} of runs")
+# x=np.array([v for v in own if v is not None]); print(f"  own: t={x.mean()/x.std()*np.sqrt(len(x)):.1f}")
