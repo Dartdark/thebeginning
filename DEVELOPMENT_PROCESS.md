@@ -8,7 +8,9 @@ Before any splitting, the full strategy (both sides together) must pass the usua
 
 - Costs: $7.25 per NQ round trip (ES $5) plus 1 tick of slippage on every market and stop fill.
 - At least 2018–2026 on the 1-minute data, reported by year and for 2023 onward.
-- t-stat, profit factor, win rate, years positive, max drawdown.
+- t-stat, win rate, years positive, and the standard metrics from `analysis/metrics.py`:
+  **Sharpe, Sortino, profit factor, Calmar, Ulcer index** (plus max drawdown and Ulcer
+  performance). Daily $ P&L, 252 days a year, drawdown % against the $50,000 account.
 - Random-entry placebo with the same stop, target and exit (`analysis/vb_random_entry_test.py`,
   `analysis/placebo_onb_eos_test.py`).
 - Walk-forward / out-of-sample for anything with fitted parameters.
@@ -20,7 +22,8 @@ Treat the long side and the short side as two separate strategies:
 
 | Check | Per side |
 |---|---|
-| Trades, win rate, average, PF, t | yes |
+| Trades, win rate, average, t | yes |
+| Sharpe, Sortino, profit factor, Calmar, Ulcer index | yes |
 | By year, and 2023 onward | yes |
 | Random-entry placebo (same days, random direction / time) | yes |
 | Correlation with the other side and with the funded set | yes |
@@ -79,5 +82,17 @@ the noise of the estimate, in both the 1-year and 2-year payouts.
 - A separate ML filter per side (walk-forward): longs kept $348 vs skipped $240 (joint filter
   $395 vs $206), shorts $539 vs $158 (joint $585 vs $131); funded $6,305 / $9,071 vs $6,466 /
   $9,569 for the shared filter. Keep the shared filter.
+
+Standard metrics by side at $300 risk (`analysis/funded_metrics.py`):
+
+| Side | Sharpe | Sortino | PF | Calmar | Ulcer | Max DD |
+|---|---|---|---|---|---|---|
+| Longs | 1.24 | 2.65 | 1.97 | 0.53 | 1.79 | $3,265 |
+| Shorts | 1.33 | 3.56 | 2.34 | 2.25 | 0.58 | $930 |
+| Both | 1.82 | 4.35 | 2.14 | 1.63 | 1.18 | $2,348 |
+
+The shorts are the smoother side (Calmar 2.25 vs 0.53, Ulcer 0.58 vs 1.79); the longs carry the
+deeper drawdowns. Sizing the shorts up and the longs down was still not better in the funded
+bench ($200/$400: $6,031 vs $6,928), so equal sizing stays.
 
 Code: `analysis/side_split_test.py`.

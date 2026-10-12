@@ -19,6 +19,21 @@ Correlations of daily P&L: 0.16 (VB–ONB ML), all others −0.02 to 0.04. Years
 (OND −$4,469), then +$9,127 to +$19,829 every year. 24% of months negative; worst −$2,144.
 About 52 days a year make $250+ (the payout qualifying days).
 
+## Standard metrics (2018–2026, funded sizes, `analysis/funded_metrics.py`)
+
+Daily $ P&L, 252 days a year; drawdown % against the $50,000 account; "days" = days with a trade.
+
+| Strategy | Days | Sharpe | Sortino | Profit factor | Calmar | Ulcer index | Max DD | $/yr |
+|---|---|---|---|---|---|---|---|---|
+| Vault Break (3 MNQ) | 942 | 1.35 | 2.07 | 1.41 | 1.31 | 1.46 | $4,085 | $5,341 |
+| Overnight Bias ML ($300) | 373 | 1.82 | 4.35 | 2.14 | 1.63 | 1.18 | $2,348 | $3,816 |
+| Overnight Drift ($500) | 1,029 | 0.40 | 0.57 | 1.10 | 0.17 | 4.38 | $5,879 | $1,006 |
+| Expiration Open Short ($500) | 104 | 1.05 | 2.30 | 2.21 | 1.45 | 0.67 | $1,149 | $1,671 |
+| **Portfolio** | 1,687 | **2.08** | **3.57** | 1.50 | **2.24** | 2.19 | $5,278 | $11,834 |
+| Portfolio, recommended sizes (ONB ML $400, EOS $700) | 1,699 | 2.16 | 3.82 | 1.53 | 2.48 | 2.20 | $5,482 | $13,605 |
+
+Overnight Drift is clearly the weak link on every measure (Sharpe 0.40, Calmar 0.17, the worst Ulcer).
+
 ## Payouts per account
 
 | | 1 year | 2 years |
