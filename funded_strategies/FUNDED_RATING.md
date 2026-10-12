@@ -50,7 +50,7 @@ threshold locks at $50,100 and the cushion is $2,000+ for good: full size from t
 | Current + cushion sizing | $5,768 | $11,073 | 10% / 11% | 97 days |
 | **Recommended: cushion sizing, VB 3, ONB ML $400, OND $500, EOS $700** | **$6,995** | **$11,485** | **12% / 11%** | 79 days |
 | Same without Overnight Drift | $6,526 | $11,918 | 8% / 7% | 79 days |
-| Recommended + 1 tick extra slippage (current plan sizing) | $5,015 | $10,805 | 10% / 11% | 105 days |
+| Current + cushion sizing, +1 tick extra slippage per fill | $5,015 | $10,805 | 10% / 11% | 105 days |
 
 Raising Vault Break (4 MNQ) or everything at once (about 1.35x) brings blowups back
 (39–43%). Staged sizes by payout number and a $500–1,000 payout buffer help less than
