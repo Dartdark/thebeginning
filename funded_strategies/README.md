@@ -493,6 +493,23 @@ As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (curren
   market-maker positions (Cboe Open-Close data); our daily all-expiry GEX test already found
   the effect too weak to trade.
 
+- **Zarattini, Barbon & Aziz (2024), "A Profitable Day Trading Strategy For The U.S.
+  Equity Market", SSRN 4729284.** 5-minute opening range breakout (trade the break in the
+  direction of the first candle, stop 10% of ATR, hold to the close) on 7,000 US stocks
+  2016–2023. On all stocks it barely works (Sharpe 0.48); limited to the top 20 "stocks in
+  play" (opening volume far above normal, usually company news) it made 1,600% (Sharpe 2.81).
+  NQ/ES version with opening volume vs its 14-day average (`analysis/orb_rvol_test.py`, 18
+  variants each):
+  - ES: loses in every variant
+  - NQ: only the 15-minute range, stop 0.2 ATR, above-average opening volume holds up
+    (991 trades, 34% winners, $181 avg, PF 1.26, t = 2.6, 9/9 years); 5-minute versions and
+    "very high volume" days (≥1.5x) don't
+  - it overlaps Overnight Bias (same 8:30–8:45 breakout; correlation 0.33 with plain ONB)
+  - funded bench: $6,798 vs $6,928 at $200 risk, worse at $400; with the recommended
+    cushion sizing $6,546 / $10,129 vs $6,995 / $11,485, blown 22% vs 12%
+
+  **Verdict:** a low-win-rate trend trade that duplicates Overnight Bias; not added.
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
