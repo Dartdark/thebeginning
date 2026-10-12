@@ -49,6 +49,7 @@ every market or stop fill.
 | Overnight Bias (Apex strategy) | 15 min MNQ | `RiskPerTrade` 300 |
 | Overnight Drift | 5 min MNQ | `RiskPerTrade` 500 |
 | Expiration Open Short | 5 min MNQ | `RiskPerTrade` 500 |
+| *Candidate:* Overnight Bias ML (replaces Overnight Bias if MultiCharts confirms) | 15 min MNQ | `RiskPerTrade` 300 |
 
 Scored with all four MultiCharts trade lists plus 1 tick of slippage:
 
@@ -433,11 +434,16 @@ As trades on NQ (stop 0.3–0.5 ATR, flat at 15:00), in the funded bench (curren
   | Overnight Drift | $187 vs −$9 | Worse ($3,838–5,657): fewer trades and qualifying days |
   | Vault Break | Kept trades better, but no clean split | Not benched |
 
-  **Status: promising, not yet adopted.** The Overnight Bias filter beats both the current set
-  and the random-skip placebo, works without GEX/DIX, and stays consistent across
-  shrinkage levels. It still needs: freezing the weights into a fixed formula,
-  a PowerLanguage version, and a MultiCharts confirmation.
-
+  **Frozen (2026-10-12): `NQ_Overnight_Bias_ML.txt`.** Price and calendar inputs only,
+  with the month-end flag dropped (MultiCharts can't know future holidays). Walk-forward with
+  this exact input set: kept $476 vs skipped $171, 6/8 years; funded bench $6,466 / **$9,569**
+  (1 / 2 years) vs $6,489 / $7,268, blown 22% vs 40%. The weights are fitted on all
+  2018–2026 trades, so a backtest over that period is in-sample. On the ONB v2
+  MultiCharts trades from April 2018 it keeps 396 of 973 (avg $597, PF 2.01, every year
+  positive) and skips 577 (avg $86, PF 1.11). The PowerLanguage score was replayed in
+  Python on 2,203 days: identical, except a 0.004 difference on Juneteenth 2026 that
+  changes no decision. **Pending: MultiCharts confirmation** (run it with ScoreFile set
+  and send the report).
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark

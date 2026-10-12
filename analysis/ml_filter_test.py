@@ -136,3 +136,62 @@ pickle.dump((res,X),open(SP+"ml1.pkl","wb"))
 #     p=dict(base); p.pop("ONB_19"); p["R"]=("risk",300); r1.append(lab.score(p,250)["expected"]); r2.append(lab.score(p,500)["expected"])
 # for r in rows: print(f"{r[0]:<40} 1y ${r[1]:,.0f}  2y ${r[2]:,.0f}   pct vs random: 1y {np.mean(np.array(r1)<r[1]):.0%} 2y {np.mean(np.array(r2)<r[2]):.0%}")
 # print(f"random 55% skip $300 (30 draws): 1y mean ${np.mean(r1):,.0f} sd {np.std(r1):,.0f}; 2y mean ${np.mean(r2):,.0f} sd {np.std(r2):,.0f}")
+
+# ======================= ml6 (frozen input set + final fit) and mlchk (replay of the PowerLanguage score)
+# import sys, warnings, pickle; warnings.filterwarnings("ignore"); sys.path.insert(0,"analysis")
+# import numpy as np, pandas as pd
+# SP="/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/"
+# lab=pickle.load(open(SP+"lab.pkl","rb")); res,X0=pickle.load(open(SP+"ml1.pkl","rb"))
+# dates=X0.index; yr=dates.year
+# COLS=["ret1","ret5","ret20","rth1","atr_ratio","dist50","rv5_rv20","dow0","dow1","dow2","dow3","dow4","tdm","opex_wk"]
+# y=pd.Series(lab.daily("ONB"),index=dates); tdd=y!=0
+# R=y/pd.Series(lab.stop["ONB"]*20,index=dates)
+# def fit(trn,X):
+#     mu,sd=X[trn].mean(),X[trn].std().replace(0,1)
+#     A=((X[trn]-mu)/sd).to_numpy(); b=R[trn].to_numpy(); lo,hi=np.percentile(b,[2,98]); b=np.clip(b,lo,hi); b=b-b.mean()
+#     w=np.linalg.solve(A.T@A+len(b)*np.eye(A.shape[1]),A.T@b)
+#     return mu,sd,w
+# X=X0[COLS]
+# pred=pd.Series(np.nan,index=dates)
+# for Y in range(2019,2027):
+#     trn=tdd&(yr<Y); tst=tdd&(yr==Y); mu,sd,w=fit(trn,X); pred[tst]=((X[tst]-mu)/sd).to_numpy()@w
+# m=tdd&(yr>=2019); sk=pred[m]<0; yy=y[m]
+# byk=yy[~sk].groupby(yy[~sk].index.year).mean(); bys=yy[sk].groupby(yy[sk].index.year).mean()
+# print(f"walk-forward, frozen input set: skip {sk.mean():.0%} kept ${yy[~sk].mean():.0f} skipped ${yy[sk].mean():.0f} years kept>skipped {(byk>bys).sum()}/8")
+# print(" kept",byk.round().to_dict()); print(" skipped",bys.round().to_dict())
+# res[("ONB_frozenset_wf",100)]=pred
+# # final frozen fit on all ONB trades 2018-2026
+# mu,sd,w=fit(tdd,X)
+# a=w/sd.to_numpy(); c0=-(w*mu.to_numpy()/sd.to_numpy()).sum()
+# coef=pd.DataFrame(dict(mean=mu,sd=sd,w_std=w,coef_raw=a))
+# print(coef.to_string()); print("const",c0)
+# full=c0+X.to_numpy()@a
+# fs=pd.Series(full,index=dates)
+# print(f"in-sample (all years): skip {(fs[tdd]<0).mean():.0%} kept ${y[tdd&(fs>=0)].mean():.0f} skipped ${y[tdd&(fs<0)].mean():.0f}")
+# pickle.dump((res,X0),open(SP+"ml1.pkl","wb")); pickle.dump(dict(mu=mu,sd=sd,w=w,a=a,c0=c0,cols=COLS,score=fs),open(SP+"frozen.pkl","wb"))
+# import sys, warnings, pickle; warnings.filterwarnings("ignore"); sys.path.insert(0,"analysis")
+# import numpy as np, pandas as pd
+# from grid24 import jof
+# SP="/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/"
+# g=pickle.load(open(SP+"g24.pkl","rb")); fz=pickle.load(open(SP+"frozen.pkl","rb"))
+# tr=g.trading; C=pd.DataFrame(g.c).ffill(axis=1).to_numpy(); atr=g.daily_atr(15)
+# CH=[];OH=[];AH=[]; last_month=0; mc=0; out={}
+# ts=pd.DatetimeIndex(g.ts)
+# for d in tr:   # MC loop: at the start of trading date d, history holds earlier trading days
+#     dt=ts[d]
+#     if len(CH)>=59:
+#         x={}
+#         x["ret1"]=np.log(CH[0]/CH[1]); x["ret5"]=np.log(CH[0]/CH[5]); x["ret20"]=np.log(CH[0]/CH[20]); x["rth1"]=np.log(CH[0]/OH[0])
+#         x["atr_ratio"]=atr[d]/((atr[d]+sum(AH[:59]))/60); x["dist50"]=np.log(CH[0]/np.mean(CH[:50]))
+#         r=[np.log(CH[k]/CH[k+1]) for k in range(20)]; x["rv5_rv20"]=np.std(r[:5],ddof=1)/np.std(r,ddof=1)
+#         dow=dt.dayofweek+1
+#         for k in range(5): x[f"dow{k}"]=1.0 if dow==k+1 else 0.0
+#         tdm=1 if dt.month!=last_month else mc+1; x["tdm"]=1.0 if tdm<=3 else 0.0
+#         fri=dt.day+(5-dow); x["opex_wk"]=1.0 if 15<=fri<=21 else 0.0
+#         out[dt]=fz["c0"]+sum(a*x[c] for c,a in zip(fz["cols"],fz["a"]))
+#     CH.insert(0,C[d,jof(1500)]); OH.insert(0,g.o[d,jof(831)]); AH.insert(0,atr[d])
+#     mc=1 if dt.month!=last_month else mc+1; last_month=dt.month
+# mcs=pd.Series(out); py=fz["score"].reindex(mcs.index)
+# d=(mcs-py).abs()
+# print("days compared",len(d),"max abs diff",d.max(),"sign disagreements",(np.sign(mcs)!=np.sign(py)).sum())
+# print(d.sort_values().tail(5))

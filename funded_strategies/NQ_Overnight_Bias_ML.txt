@@ -1,0 +1,302 @@
+{ NQ Overnight Bias ML - MultiCharts PowerLanguage signal (funded strategy)
+
+  Overnight Bias (apex_strategies/NQ_Overnight_Bias.txt, unchanged rules) plus a
+  frozen machine-learning "skip today" filter. Built on Kelly & Xiu (2023),
+  "Financial Machine Learning" (SSRN 4501707): a ridge regression (heavy
+  shrinkage) of each Overnight Bias trade's result, in units of its stop, on 14
+  inputs known before the 8:30 CT open. Overnight Bias trades only on days with
+  a score >= 0. The score is a fixed formula; it is never retrained here.
+
+  Inputs (trading days = weekdays with a bar at or after 11:00; "close" = the
+  last price at or before 15:00 CT; "open" = the 8:30 CT open):
+    ret1, ret5, ret20  log return of the close over the last 1 / 5 / 20 trading days
+    rth1               yesterday's 8:30-15:00 log return
+    atr_ratio          today's 15-day ATR / average of it over the last 60 trading days
+    dist50             log distance of yesterday's close from its 50-day average
+    rv5_rv20           st. dev. of the last 5 daily log returns / of the last 20
+    dow0..dow4         weekday (Monday..Friday)
+    tdm                1 on the first 3 trading days of the month
+    opex_wk            1 in the week of the monthly options expiration (third Friday)
+  Largest weights: yesterday up (ret1, rth1), first 3 days of the month and
+  Monday raise the score; a close far above the 50-day average lowers it.
+
+  Evidence (analysis/ml_filter_test.py, funded_strategies/README.md):
+  - walk-forward (retrained each January from 2019, never seeing the test
+    year): kept trades $476 per NQ vs $171 for skipped ones, 6 of 8 years better
+  - funded bench (VB 3 MNQ, OND $500, EOS $500; Overnight Bias $300 risk),
+    starts from 2019: expected payouts $6,466 vs $6,489 within 1 year,
+    $9,569 vs $7,268 within 2 years; blown accounts 22% vs 40%
+  - skipping the same share of days at random does worse ($5,311 / $7,664)
+  The frozen weights below are fitted on all 2018-2026 trades, so a backtest
+  over that period is in-sample (it keeps about 41% of the trades: 406 of 997,
+  average $571 vs $60 for the skipped ones). The walk-forward numbers above are
+  the honest estimate.
+
+  Apply exactly like Overnight Bias: 15-minute NQ / MNQ chart, Exchange time
+  zone (Central), CME 24-hour session, Bar Magnifier on at 1 minute. Load at
+  least 90 trading days before the backtest start: the filter needs 60
+  trading days of history (until then it lets every trade through).
+  Funded plan: RiskPerTrade 300 on MNQ. Backtest on NQ: RiskPerTrade 0,
+  NumContracts 1.
+
+  UseMLFilter false = plain Overnight Bias. ScoreFile (e.g. "C:\temp\onb_score.csv")
+  writes each trading day's date and score, to compare with the Python model. }
+
+Inputs:
+	ONStart(2300),          { overnight range starts after this time (previous evening) }
+	ONEnd(830),             { ... and ends at the close of this bar }
+	OREnd(845),             { opening range = bars closing after ONEnd up to this time }
+	BiasFraction(0.3333),   { top / bottom part of the overnight range }
+	ADXLength(14),
+	ADXMin(20),
+	AtrDays(15),
+	StopAtrPct(0.30),       { stop = 30% of the average daily range }
+	RewardRisk(3),
+	LastEntryTime(1400),
+	ExitTime(1430),
+	RiskPerTrade(0),        { $ lost at the stop; 0 = trade NumContracts }
+	UseHolidayTimes(true),
+	EarlyLastEntry(1100),
+	EarlyExitTime(1130),
+	NumContracts(1),
+	UseMLFilter(true),
+	ScoreFile("");
+
+Variables:
+	ONHi(0), ONLo(0), InON(false), ONReady(false),
+	OpenPx(0), ORHi(0), ORLo(0), ORDone(false), Bias(0), PosInRange(0),
+	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
+	StopPts(0), ADXv(0), TradedToday(false), DayStartTrades(0), Qty(0),
+	CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false), IsEarlyClose(false),
+	DayLastEntry(0), DayExit(0),
+	{ ML filter }
+	Cl1500(0), RthOpen(0), HasRTH(false), PrevDate(0), NDays(0), LastMonth(0), MonthCount(0),
+	Ki(0), SumA(0), SumC(0), M5(0), M20(0), V5(0), V20(0), Rk(0),
+	xRet1(0), xRet5(0), xRet20(0), xRth1(0), xAtrRatio(0), xDist50(0), xRv(0),
+	TodayDow(0), TodayTdm(0), FriDom(0), xOpexWk(0), MLScore(0), ScoreReady(false), SkipToday(false);
+
+Arrays:
+	TrHist[100](0),
+	CH[100](0), OH[100](0), AH[100](0);   { previous trading days, most recent first: close, open, ATR }
+
+ADXv = ADX(ADXLength);
+
+{ ---------- Daily ATR (weekdays, calendar dates) ---------- }
+if Date <> Date[1] then begin
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	DayHi = High;
+	DayLo = Low;
+	{ new trading day }
+	OpenPx = 0;
+	ORHi = 0;
+	ORLo = 0;
+	ORDone = false;
+	Bias = 0;
+	DayStartTrades = TotalTrades;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+
+{ ---------- ML filter: score today from previous trading days (frozen weights) ---------- }
+if Date <> Date[1] then begin
+	{ store the date that just ended, if it was a trading day }
+	if PrevDate > 0 and DayOfWeek(PrevDate) >= 1 and DayOfWeek(PrevDate) <= 5 and HasRTH
+		and Cl1500 > 0 and RthOpen > 0 then begin
+		for Ki = 99 downto 1 begin
+			CH[Ki] = CH[Ki - 1];
+			OH[Ki] = OH[Ki - 1];
+			AH[Ki] = AH[Ki - 1];
+		end;
+		CH[0] = Cl1500;
+		OH[0] = RthOpen;
+		AH[0] = ATRv[1];
+		NDays = NDays + 1;
+		if Month(PrevDate) <> LastMonth then MonthCount = 1 else MonthCount = MonthCount + 1;
+		LastMonth = Month(PrevDate);
+	end;
+	PrevDate = Date;
+	HasRTH = false;
+	Cl1500 = 0;
+	RthOpen = 0;
+
+	{ today's score }
+	ScoreReady = false;
+	SkipToday = false;
+	if NDays >= 59 and ATRv > 0 then begin
+		xRet1 = Log(CH[0] / CH[1]);
+		xRet5 = Log(CH[0] / CH[5]);
+		xRet20 = Log(CH[0] / CH[20]);
+		xRth1 = Log(CH[0] / OH[0]);
+		SumA = ATRv;
+		for Ki = 0 to 58 begin
+			SumA = SumA + AH[Ki];
+		end;
+		xAtrRatio = ATRv / (SumA / 60);
+		SumC = 0;
+		for Ki = 0 to 49 begin
+			SumC = SumC + CH[Ki];
+		end;
+		xDist50 = Log(CH[0] / (SumC / 50));
+		{ sample standard deviations of the last 5 and 20 daily log returns }
+		M5 = 0; M20 = 0;
+		for Ki = 0 to 19 begin
+			Rk = Log(CH[Ki] / CH[Ki + 1]);
+			M20 = M20 + Rk;
+			if Ki < 5 then M5 = M5 + Rk;
+		end;
+		M5 = M5 / 5; M20 = M20 / 20;
+		V5 = 0; V20 = 0;
+		for Ki = 0 to 19 begin
+			Rk = Log(CH[Ki] / CH[Ki + 1]);
+			V20 = V20 + Square(Rk - M20);
+			if Ki < 5 then V5 = V5 + Square(Rk - M5);
+		end;
+		if V20 > 0 then xRv = SquareRoot(V5 / 4) / SquareRoot(V20 / 19) else xRv = 1;
+		TodayDow = DayOfWeek(Date);
+		if Month(Date) <> LastMonth then TodayTdm = 1 else TodayTdm = MonthCount + 1;
+		FriDom = DayOfMonth(Date) + (5 - TodayDow);
+		if TodayDow >= 1 and TodayDow <= 5 and FriDom >= 15 and FriDom <= 21 then xOpexWk = 1 else xOpexWk = 0;
+
+		MLScore = 0.05535517974
+			+ 2.550842376 * xRet1
+			+ 0.05697325462 * xRet5
+			- 0.08269967616 * xRet20
+			+ 1.729498386 * xRth1
+			- 0.03608247696 * xAtrRatio
+			- 0.3355796551 * xDist50
+			- 0.03976333906 * xRv
+			+ 0.07809504609 * IFF(TodayDow = 1, 1, 0)
+			- 0.008560935801 * IFF(TodayDow = 2, 1, 0)
+			- 0.02267574106 * IFF(TodayDow = 3, 1, 0)
+			- 0.03459885088 * IFF(TodayDow = 4, 1, 0)
+			- 0.005544247888 * IFF(TodayDow = 5, 1, 0)
+			+ 0.1654566373 * IFF(TodayTdm <= 3, 1, 0)
+			- 0.003794081905 * xOpexWk;
+		ScoreReady = true;
+		SkipToday = UseMLFilter and MLScore < 0;
+		if ScoreFile <> "" and TodayDow >= 1 and TodayDow <= 5 then
+			FileAppend(ScoreFile, NumToStr(Date + 19000000, 0) + "," + NumToStr(MLScore, 6) + NewLine);
+	end;
+end;
+{ this date's 8:30 open and last price at or before 15:00 }
+if Time > 830 and Time <= 845 and RthOpen = 0 then RthOpen = Open;
+if Time <= 1500 then Cl1500 = Close;
+if Time >= 1100 and Time <= 1515 then HasRTH = true;
+
+{ ---------- Overnight range: after ONStart in the evening, to ONEnd ---------- }
+if Time > ONStart and InON = false then begin
+	InON = true;
+	ONReady = false;
+	ONHi = High;
+	ONLo = Low;
+end
+else if InON then begin
+	ONHi = MaxList(ONHi, High);
+	ONLo = MinList(ONLo, Low);
+	if Time = ONEnd then begin
+		InON = false;
+		ONReady = true;
+	end;
+end;
+
+{ ---------- Open, bias and opening range ---------- }
+if ONReady and OpenPx = 0 and Time > ONEnd and Time <= OREnd then begin
+	OpenPx = Open;
+	if ONHi > ONLo then begin
+		PosInRange = (OpenPx - ONLo) / (ONHi - ONLo);
+		if PosInRange >= 1 - BiasFraction then Bias = 1
+		else if PosInRange <= BiasFraction then Bias = -1;
+	end;
+end;
+if OpenPx > 0 and Time > ONEnd and Time <= OREnd then begin
+	if ORHi = 0 then begin
+		ORHi = High;
+		ORLo = Low;
+	end
+	else begin
+		ORHi = MaxList(ORHi, High);
+		ORLo = MinList(ORLo, Low);
+	end;
+	if Time = OREnd then ORDone = true;
+end;
+
+{ ---------- CME holiday half-days ---------- }
+CalMonth = Month(Date);
+CalDay = DayOfMonth(Date);
+CalDow = DayOfWeek(Date);
+CalYear = Year(Date) + 1900;
+IsWeekday = CalDow >= 1 and CalDow <= 5;
+IsEarlyClose = UseHolidayTimes and (
+	(CalMonth = 1 and ((CalDay = 1 and IsWeekday) or (CalDay = 2 and CalDow = 1)))
+	or (CalMonth = 1 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 2 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 5 and CalDow = 1 and CalDay >= 25)
+	or (CalMonth = 6 and CalYear >= 2022 and ((CalDay = 19 and IsWeekday)
+		or (CalDay = 18 and CalDow = 5) or (CalDay = 20 and CalDow = 1)))
+	or (CalMonth = 7 and (((CalDay = 3 or CalDay = 4) and IsWeekday) or (CalDay = 5 and CalDow = 1)))
+	or (CalMonth = 9 and CalDow = 1 and CalDay <= 7)
+	or (CalMonth = 11 and CalDow = 4 and CalDay >= 22 and CalDay <= 28)
+	or (CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29)
+	or (CalMonth = 12 and (((CalDay = 24 or CalDay = 25) and IsWeekday) or (CalDay = 26 and CalDow = 1))));
+if IsEarlyClose then begin
+	DayLastEntry = EarlyLastEntry;
+	DayExit = EarlyExitTime;
+end
+else begin
+	DayLastEntry = LastEntryTime;
+	DayExit = ExitTime;
+end;
+
+{ ---------- Entries: stop orders at the opening-range high / low ---------- }
+{ a trade that opened and closed inside one bar still counts }
+TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
+
+if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition = 0
+	and SkipToday = false
+	and Time >= OREnd and Time < DayLastEntry and ADXv > ADXMin then begin
+	StopPts = StopAtrPct * ATRv;
+	Qty = NumContracts;
+	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
+	if Qty >= 1 then begin
+		if Bias = 1 then
+			Buy ("ON Bias L") Qty contracts next bar at ORHi stop
+		else
+			SellShort ("ON Bias S") Qty contracts next bar at ORLo stop;
+	end;
+end;
+
+{ ---------- Exits ---------- }
+SetStopContract;
+if StopPts > 0 then begin
+	SetStopLoss(StopPts * BigPointValue);
+	SetProfitTarget(RewardRisk * StopPts * BigPointValue);
+end;
+
+if MarketPosition <> 0 and Time >= DayExit then begin
+	Sell ("ON Bias LX") this bar on close;
+	BuyToCover ("ON Bias SX") this bar on close;
+end;
