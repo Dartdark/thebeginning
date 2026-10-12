@@ -88,6 +88,7 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 | Commodity storage/momentum (Gorton et al. 2008) | Paper | Monthly commodity book; nothing for NQ |
 | Implied equity term structure (NY Fed SR 1203) | Paper | Long-horizon asset pricing; no trading rule |
 | The Golden Dilemma (Erb & Harvey 2013, SSRN 2078535) | Paper | Gold valuation over years to decades; no trading rule, and GC data here covers one week |
+| Momentum Turning Points (Goulding, Harvey & Mazzoleni, SSRN 3489539) | Paper / filter | Monthly states; on NQ 2018–26 'Bear' months were followed by gains (+278 bp), not losses; strategy splits flip with the window |
 | 0DTE trading rules (Vilkov 2026) | Paper | SPX options; not tradable on Apex |
 | 0DTE gamma and volatility (Dim, Eraker & Vilkov 2025) | Paper | Needs intraday 0DTE dealer positions (paid Cboe data) |
 | Contrarian VRP ETF strategy (SSRN 4841308) | Paper | Rules undefined, no costs, multi-day ETFs |

@@ -543,6 +543,14 @@ managers, dealers and small traders as a share of open interest, ranked against 
   emerging-market central-bank buying could push prices higher anyway. Long-horizon
   valuation, no trading rule; not usable for intraday futures. Tier F.
 
+- **Goulding, Harvey & Mazzoleni, "Momentum Turning Points", SSRN 3489539.** US stocks
+  1969–2018: slow (12-month) and fast (1-month) trend signals define Bull, Correction, Bear and
+  Rebound states; Bear months are followed by negative returns (−7.7% a year) and a blend of
+  slow and fast momentum earns alpha. On NQ 2018–2026 (`analysis/momentum_states_test.py`,
+  states known at the previous close): Bear states were followed by **gains** (+278 bp next
+  month; V-shaped recoveries), and the funded strategies make money in every state, with
+  splits that flip between 12m/1m and 6m/2w windows. No filter. Tier F.
+
 ## Tested and not good enough for funded
 
 - Vault Break with the "Beat the Market" trailing exit: $4,100 vs the $5,400 benchmark
