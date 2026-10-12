@@ -9,8 +9,8 @@ Monday Long 1 MNQ, EOS $700, cushion sizing) scores $7,153 ($11,612).
 
 | Tier | Meaning |
 |---|---|
-| **S** | In the plan, MultiCharts-confirmed, and one of the main sources of payouts |
-| **A** | In the plan and MultiCharts-confirmed; solid but not the main driver |
+| **S** | Extreme profit, scalability and a very strong edge. In numbers: about $20,000+ a year per NQ, a t-stat of 4.5+ with PF 2+ and 8/9 years positive, and enough trades in liquid hours to size up without hurting fills |
+| **A** | A very good, very profitable strategy, better than most of what's been tested. In numbers: t 2.5+, PF 1.4+ (or 1.9+ when it trades rarely), positive in 7+ of 9 years, MultiCharts-confirmed |
 | **B** | In use with a narrow role (backup, challenge-only, or thin edge) |
 | **C** | Real edge or useful tool, not adopted (needs data, automation or more proof) |
 | **D** | The effect exists but is too weak to trade after costs, stops or Apex rules |
@@ -20,16 +20,16 @@ Monday Long 1 MNQ, EOS $700, cushion sizing) scores $7,153 ($11,612).
 
 | Item | Type | Key numbers | Why |
 |---|---|---|---|
-| Overnight Bias ML (v2: longs need score ≥ 0.03) | Funded strategy | 41% of ONB days kept; walk-forward kept $476 vs skipped $171, 6/8 years; funded $6,928 vs $6,495, blown 34% vs 42% | Biggest single payout driver; frozen ridge filter on ONB (Kelly & Xiu ML survey) |
-| Expiration Open Short | Funded strategy | 105 trades, 59% win, $474 avg, PF 1.93, 8/9 years | Forced flow: index options settle on the expiration-day open; zero correlation; +$1,100 funded |
-| Cushion sizing | Risk rule | Blown 34% → 10–12%; 2-year payouts $8,379 → $11,485 | Cuts size exactly when an account is closest to blowing up |
+| Overnight Bias ML (v2: longs need score ≥ 0.03) | Funded strategy | 41% of ONB days kept; walk-forward kept $476 vs skipped $171, 6/8 years; funded $6,928 vs $6,495, blown 34% vs 42% | Per NQ (MC): 343 trades, $636 avg, PF 2.12, t 5.0, 8/9 years, about $24,800 a year; 15-min stop-order entries in the opening hour scale easily. Biggest single payout driver; frozen ridge filter on ONB (Kelly & Xiu ML survey) |
 
 ## A
 
 | Item | Type | Key numbers | Why |
 |---|---|---|---|
+| Expiration Open Short | Funded strategy | 105 trades (12 a year, so only ~$5,700 a year per NQ: not S), t 2.6, 59% win, $474 avg, PF 1.93, 8/9 years | Forced flow: index options settle on the expiration-day open; zero correlation; +$1,100 funded |
+| Cushion sizing | Risk rule | Blown 34% → 10–12%; 2-year payouts $8,379 → $11,485 | Cuts size exactly when an account is closest to blowing up |
 | Monday Long (new direction source) | Funded strategy (replaced OND 2026-10-12) | MC: 450 trades, 55% win, $425 avg, PF 1.55; 2023–26 PF 1.92; corr ≤ 0.18; funded plan $7,153 / $11,612 (1y / 2y) vs $6,876 / $11,366, blown 9–10% | Uncorrelated; weak in 2018–22, so regime-dependent |
-| Vault Break | Challenge + funded strategy | 1,743 trades, 66% win, $92 avg, PF 1.26, 9/9 years | High win rate fits Apex rules; the challenge engine; biggest swings in the funded set, so keep at 3 MNQ |
+| Vault Break | Challenge + funded strategy | 1,743 trades, 66% win, $92 avg, PF 1.26, 9/9 years (funded version: t 4.1, PF 1.41, ~$18,200 a year per NQ; strong but PF too low for S) | High win rate fits Apex rules; the challenge engine; biggest swings in the funded set, so keep at 3 MNQ |
 
 ## B
 
