@@ -270,6 +270,48 @@ With the MultiCharts list in the funded bench, benchmark + it at $500 = **$6,516
 - The calendar needs the exchange holiday list: Good Friday and Juneteenth move expiration
   to Thursday. The known ones are hard-coded.
 
+## Dealer gamma (GEX) and dark-pool (DIX) round (2026-10-12): real effects, too weak to trade
+
+Data: `data/DIX.csv` (SqueezeMetrics, daily 2011 to 9 Oct 2026: S&P close, DIX, GEX). Each
+day uses the previous day's values, because they are published after the close. GEX is
+ranked against the past year, since its level grows with the market. Code:
+`analysis/gex_flows.py`, `analysis/gex_flows_test.py`.
+
+**The data behaves as the research says:**
+- NQ's 8:30–15:00 range averages 2.49% after the lowest-GEX days and 1.09% after the
+  highest. Dealers dampen moves when they are long gamma.
+- Last 30 minutes vs the day so far (Baltussen et al.; Barbon et al.): correlation +0.17
+  after negative-GEX days (momentum) and −0.12 after the top 20% (reversal). Each is only
+  t ≈ 1.6–1.8, on NQ and ES alike.
+
+**Your strategies by the previous day's GEX** (MultiCharts lists, per NQ):
+
+| Strategy | Low GEX | Middle | High | GEX < 0 |
+|---|---|---|---|---|
+| Vault Break | $113 | $105 | $77 | $104 |
+| Overnight Bias | $260 | $351 | $228 | **$51** |
+| Overnight Drift | **$160** | $14 | $50 | **$220** |
+| Expiration Open Short | $576 | $301 | $506 (PF 2.81) | $1,011 (18 trades) |
+
+**Candidates in the funded bench** (current set: VB 3, ONB $300, OND $500, EOS $500 =
+$6,495):
+
+| Candidate | Stand-alone | Funded, 1 year |
+|---|---|---|
+| Overnight Bias skips the day after negative GEX | t = 4.1, 9/9 years | **$6,837** (+$342); 2 years $7,333 vs $7,280 |
+| … the same filter from price only (6 versions: high ATR, below 20/50/100-day average, 5–8% drawdown) | The skipped trades were profitable | $5,706–6,640 (none better) |
+| Overnight Drift only after low-GEX days | $150 a trade, but 2023–24 negative | $5,433–6,150 |
+| Last 30 minutes: follow after negative GEX, fade after top-20% GEX | t = 1.4, 5/9 years | $3,835–5,006 |
+| Long the session after a top-20% DIX day (stop 0.3 ATR) | t = 2.1; 2025 alone +$1,732, 2024 and 2026 negative | +$104 at $150 risk, worse at $300 |
+
+**Verdict:** no change to the funded set. The Overnight Bias GEX filter is the best of
+these, but:
+- it adds about $340 in year 1 and nothing over 2 years;
+- it needs yesterday's GEX typed in every morning;
+- no price-only version matches it.
+
+Keep it as an option if you ever automate a daily GEX feed.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
