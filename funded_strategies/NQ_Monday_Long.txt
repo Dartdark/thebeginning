@@ -1,8 +1,11 @@
 { NQ Monday Long - MultiCharts PowerLanguage signal (funded candidate, 2026-10-12)
 
   On Mondays, buy at the 8:30 CT open and sell at the close of the 15:00 CT bar
-  (11:45 CT on CME early-close Mondays: MLK, Presidents, Memorial, Labor Day and
-  the Monday after a weekend New Year / July 4 / Juneteenth / Christmas).
+  Skips Mondays when the stock market is closed (CME early close: MLK,
+  Presidents, Memorial, Labor Day and the Monday after a weekend New Year /
+  July 4 / Juneteenth / Christmas); the test had only one such Monday.
+  Only Mondays: the same trade on Tuesday-Friday has no edge, and the 6
+  Tuesdays after a holiday Monday averaged -$487.
   Stop = StopAtrPct x 15-day ATR.
 
   Why: from 2018 to 2026 almost all of NQ's regular-session gain came on Mondays
@@ -108,8 +111,8 @@ if IsEarlyClose then DayExit = EarlyExitTime else DayExit = ExitTime;
 
 { ---------- Entry: long at the 8:30 open ---------- }
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
-if CalDow = TradeDay and Time = EntryBarTime and MarketPosition = 0 and TradedToday = false
-	and ATRv > 0 then begin
+if CalDow = TradeDay and IsEarlyClose = false and Time = EntryBarTime and MarketPosition = 0
+	and TradedToday = false and ATRv > 0 then begin
 	StopPts = StopAtrPct * ATRv;
 	Qty = NumContracts;
 	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
