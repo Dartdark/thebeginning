@@ -1,5 +1,74 @@
 # Funded phase plan: Apex 50K EOD Performance Account
 
+## Current plan (updated 2026-10-12): Monday Long replaces Overnight Drift
+
+Four MultiCharts-confirmed strategies, sized to the drawdown cushion. Code and numbers:
+`analysis/funded_plan_monday.py` (output in `analysis/funded_plan_monday_output.txt`).
+
+| Strategy | File | Chart | Funded inputs (full size) | Trades |
+|---|---|---|---|---|
+| Vault Break | `../apex_strategies/NQ_Vault_Break.txt` | 30 min MNQ | `NumContracts` 3 | ~107 a year |
+| Overnight Bias ML (v2) | `NQ_Overnight_Bias_ML.txt` | 15 min MNQ | `RiskPerTrade` 400 | ~38 a year |
+| **Monday Long (new)** | `NQ_Monday_Long.txt` | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 | every Monday, 8:30–15:00 CT |
+| Expiration Open Short | `NQ_Expiration_Open_Short.txt` | 5 min MNQ | `RiskPerTrade` 700 | 12 a year |
+| ~~Overnight Drift~~ | `NQ_Overnight_Drift.txt` | — | **turn off** (kept as a backup) | — |
+
+**Cushion sizing (part of the plan, not optional).** Each morning, before the session:
+cushion = account balance − trailing drawdown threshold. Size factor f = cushion / $2,000,
+kept between 0.5 and 1.0. Multiply each full-size input above by f and round down:
+
+| Cushion | f | Vault Break | ONB ML RiskPerTrade | Monday Long | EOS RiskPerTrade |
+|---|---|---|---|---|---|
+| $2,000 or more (always true after the $52,100 lock) | 1.0 | 3 | 400 | 1 | 700 |
+| $1,500 | 0.75 | 2 | 300 | 0 (off) | 525 |
+| $1,000 or less | 0.5 | 1 | 200 | 0 (off) | 350 |
+
+Monday Long at 1 MNQ rounds to 0 whenever f < 1, so it only trades when the cushion is
+the full $2,000. Use 1 MNQ, not RiskPerTrade: its 0.5 ATR stop is about $467 per MNQ at
+October 2026 prices, so RiskPerTrade 300 would skip every trade (it took 284 of 450 in the
+test, none in 2026).
+
+**Expected payouts per account** (all MultiCharts trade lists, $7.25/NQ + 1 tick per fill,
+a start on every trading day 2018–2026):
+
+| Plan | 1 year | Starts 2023+ | 2 years | Blown (1y / 2y) | All 6 payouts (2y) | Days to 1st payout |
+|---|---|---|---|---|---|---|
+| Old: VB 3, ONB ML $400, **OND $500**, EOS $700, cushion | $6,876 | $7,350 | $11,366 | 10% / 11% | 84% | 84 |
+| **New: VB 3, ONB ML $400, Monday 1 MNQ, EOS $700, cushion** | **$7,153** | **$8,776** | **$11,612** | **9% / 10%** | 87% | 77 |
+| New at fixed size (no cushion sizing) | $6,685 | $7,124 | — | 39% | — | 42 |
+
+Neighbours of the chosen sizes (cushion sizing; the sizes were not re-optimized):
+VB 2 $6,807 / $12,508 (slower, fewest blowups); VB 4 $6,720 / $9,765 (blown 24%);
+ONB ML $500 $7,615 / $11,583; Monday 2 MNQ $7,012 / $10,313 (blown 22%); EOS $900
+$7,376 / $11,618. All within noise of the plan except the bigger VB / Monday sizes, which
+bring blowups back.
+
+**Portfolio at full size, 2018–2026** (standard metrics, `analysis/metrics.py`):
+
+| | Sharpe | Sortino | PF (days) | Calmar | Ulcer | Max DD | $/yr |
+|---|---|---|---|---|---|---|---|
+| **New portfolio** | **2.35** | **4.36** | 1.68 | **3.51** | **1.55** | $4,082 | $14,339 |
+| Old portfolio (with OND) | 2.16 | 3.79 | 1.53 | 2.46 | 2.04 | $5,377 | $13,213 |
+| Monday Long 1 MNQ alone | 1.11 | 1.97 | 1.55 | 1.03 | 1.47 | $2,078 | $2,132 |
+
+Daily P&L correlations in the new set are all ≤ 0.18. New portfolio by year: 2018 +$903, then
++$9,750 to +$19,483 a year (2026 to date +$7,264).
+
+**Why the change:** Overnight Drift was the weak link on every measure (Sharpe 0.40, bootstrap
+Sharpe interval including zero, half its edge is generic overnight drift). Monday Long is
+MultiCharts-confirmed (450 trades, PF 1.55, 449 of 450 days match Python) and uncorrelated with
+the rest. **Risk:** Monday Long is regime-dependent — weak in 2018–2022 (2018 and 2022 lost),
+strong since 2023. If it loses for a few months in a row, Overnight Drift can be switched
+back on.
+
+**Payouts:** request each payout as soon as the balance is at least $52,100 + the next cap,
+with 5 qualifying days ($250+) and the 50% consistency rule met.
+
+---
+
+## History: interim plan of 2026-10-11 (superseded)
+
+
 > **Status (2026-10-11): interim.** This plan runs the Apex strategies (Vault Break,
 > Overnight Bias) at smaller sizes plus Overnight Drift. The Apex strategies were built
 > to pass the challenge, not to maximize payouts. They are the benchmark until purpose-built

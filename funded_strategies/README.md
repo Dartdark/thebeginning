@@ -38,26 +38,26 @@ every market or stop fill.
 
 | Strategy | File | Status | Notes |
 |---|---|---|---|
-| Overnight Drift | `NQ_Overnight_Drift.txt` | **MultiCharts-confirmed** (`Backtesting Strategy Performance Report OND v1.xlsx`), holiday fix added | Long midnight to 3:00 CT after a down session. PF 1.25, 8/9 years positive, flat 2023–24. Correlation about 0 with everything else |
+| Overnight Drift (backup, off since 2026-10-12) | `NQ_Overnight_Drift.txt` | **MultiCharts-confirmed** (`Backtesting Strategy Performance Report OND v1.xlsx`), holiday fix added | Long midnight to 3:00 CT after a down session. PF 1.25, 8/9 years positive, flat 2023–24. Correlation about 0 with everything else |
+| **Monday Long** | `NQ_Monday_Long.txt` | **MultiCharts-confirmed** (`Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx`): 449 of 450 days match Python | Long Mondays 8:30–15:00 CT, stop 0.5 ATR. 450 trades, 55% winners, $425 a trade, PF 1.55; 2023–26 PF 1.92, 2018–22 weak. In the funded set since 2026-10-12 (1 MNQ) |
 | **Expiration Open Short** | `NQ_Expiration_Open_Short.txt` | **MultiCharts-confirmed** (`Backtesting Strategy Performance Report EOS v1.xlsx`): same 105 trades, entries and P&L as Python | Short at the 8:30 open on monthly options expiration day, out at 10:00, stop 0.3 ATR. 105 trades, 59% winners, $474 a trade, PF 1.93, 8/9 years positive. **Benchmark + it at $500 risk: $6,516 vs $5,387** |
 
-## Current funded set (all MultiCharts-confirmed, 2026-10-12)
+## Current funded set (all MultiCharts-confirmed, updated 2026-10-12)
 
-Rating, weaknesses and the recommended cushion sizing: `FUNDED_RATING.md`. Tier list of everything tested: `../TIER_LIST.md`.
+Full plan, cushion sizing table and payouts: `FUNDED_PLAN.md`. Rating: `FUNDED_RATING.md`.
+Tier list of everything tested: `../TIER_LIST.md`.
 
-| Strategy | Chart | Funded inputs |
+| Strategy | Chart | Funded inputs (full size; scale with cushion sizing) |
 |---|---|---|
 | Vault Break (Apex strategy) | 30 min MNQ | `NumContracts` 3 |
-| Overnight Drift | 5 min MNQ | `RiskPerTrade` 500 |
-| Expiration Open Short | 5 min MNQ | `RiskPerTrade` 500 |
-| Overnight Bias ML (replaced Overnight Bias 2026-10-12) | 15 min MNQ | `RiskPerTrade` 300 |
+| Overnight Bias ML v2 | 15 min MNQ | `RiskPerTrade` 400 |
+| **Monday Long** (replaced Overnight Drift 2026-10-12) | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 |
+| Expiration Open Short | 5 min MNQ | `RiskPerTrade` 700 |
 
-Scored with all four MultiCharts trade lists plus 1 tick of slippage:
-
-| | Expected payouts, 1 year | Expected payouts, 2 years | Blown within a year |
-|---|---|---|---|
-| Expected | **$6,495** | $7,280 | 42% |
-| Without Expiration Open Short | $5,340 | $6,448 | 48% |
+With cushion sizing: **$7,153 expected payouts within 1 year, $11,612 within 2 years,
+9–10% of accounts blown** (old set with Overnight Drift: $6,876 / $11,366 / 10–11%).
+Portfolio Sharpe 2.35, Sortino 4.36, Calmar 3.51, Ulcer 1.55. Overnight Drift is kept as
+a backup (`NQ_Overnight_Drift.txt`).
 
 **Overnight Drift check:** the MultiCharts report has the same entry and P&L on all
 1,037 days it shares with Python. Its extra trades were on holidays without a midnight

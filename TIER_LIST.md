@@ -2,8 +2,8 @@
 
 S–F scale, updated as each new idea is tested. Results are NQ 2018–2026 unless noted, per
 NQ after $7.25 costs and 1 tick of slippage per fill. "Funded" = expected payouts per Apex
-50K Performance Account within 1 year (2 years in brackets); the current set scores
-$6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
+50K Performance Account within 1 year (2 years in brackets); the current set (VB 3, ONB ML $400,
+Monday Long 1 MNQ, EOS $700, cushion sizing) scores $7,153 ($11,612).
 
 ## What the tiers mean
 
@@ -28,6 +28,7 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 
 | Item | Type | Key numbers | Why |
 |---|---|---|---|
+| Monday Long (new direction source) | Funded strategy (replaced OND 2026-10-12) | MC: 450 trades, 55% win, $425 avg, PF 1.55; 2023–26 PF 1.92; corr ≤ 0.18; funded plan $7,153 / $11,612 (1y / 2y) vs $6,876 / $11,366, blown 9–10% | Uncorrelated; weak in 2018–22, so regime-dependent |
 | Vault Break | Challenge + funded strategy | 1,743 trades, 66% win, $92 avg, PF 1.26, 9/9 years | High win rate fits Apex rules; the challenge engine; biggest swings in the funded set, so keep at 3 MNQ |
 
 ## B
@@ -36,8 +37,7 @@ $6,928 ($8,379), or $6,995 ($11,485) with cushion sizing.
 |---|---|---|---|
 | Overnight Bias (plain; recommended ADX 30 / 0.25 ATR from parameter clusters, challenge pass 46.8% vs 43.3%) | Challenge strategy | 997 trades, 49% win, $280 avg, PF 1.40, every year positive | Challenge pass 43.8% with VB 8; the ML version adds nothing to the challenge |
 | Bootstrap + permutation (out-of-sample resampling) | Method | Funded portfolio Sharpe 90% interval 1.53–3.00 (2023–26); real drawdown smaller than 99% of shuffles (95% shuffle $8,347 vs real $3,351) | Adopted as a standard check; shows the edges aren't luck but the real drawdowns were, and that losses don't cluster |
-| Monday Long (new direction source) | Funded candidate, MultiCharts-confirmed | MC: 450 trades, 55% win, $425 avg, PF 1.55 (Python 452 / $413 / 1.52, 449 days match); 2023–26 PF 1.92; corr ≤ 0.18; replacing OND at $300 (cushion sizing) 1y $7,087 vs $6,876, 2y $11,810 vs $11,366, blown 9% vs 10–11% | Recommended to replace Overnight Drift; regime-dependent (weak 2018–22) |
-| Overnight Drift | Funded strategy | 1,039 trades, $71 avg, PF 1.22 (at funded size PF 1.10) | Helps year 1, costs year 2; first to cut. Placebo: $71 vs $36 for random-day longs in the same window, so about half is general overnight drift. Bootstrap Sharpe interval includes zero (P ≤ 0: 9%, 14% since 2023) |
+| Overnight Drift (backup; replaced by Monday Long 2026-10-12) | Funded strategy | 1,039 trades, $71 avg, PF 1.22 (at funded size PF 1.10) | Helps year 1, costs year 2; first to cut. Placebo: $71 vs $36 for random-day longs in the same window, so about half is general overnight drift. Bootstrap Sharpe interval includes zero (P ≤ 0: 9%, 14% since 2023) |
 
 ## C
 

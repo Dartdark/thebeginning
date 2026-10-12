@@ -26,8 +26,8 @@
   trade on Tuesday-Friday makes $12-93 (t <= 0.7). Every stop from 0.3 ATR to
   none and both 14:30 / 15:00 exits are positive (t 2.2-3.2). Correlation with
   VB 0.18, ONB ML 0.09, OND 0.02, EOS 0.00.
-  Funded bench with cushion sizing: replacing Overnight Drift with Monday Long
-  at RiskPerTrade 300 gives 1-year payouts $7,142 vs $6,876, 2-year $11,807 vs
+  Funded bench with cushion sizing (Python trades): replacing Overnight Drift
+  with Monday Long at RiskPerTrade 300 gives 1-year payouts $7,142 vs $6,876, 2-year $11,807 vs
   $11,366, blown 9% vs 10-11%. Regime-dependent: the effect is much stronger
   since 2023.
   MULTICHARTS CONFIRMED (2026-10-12, analysis/monday_long_confirm.py): 450 trades,
@@ -42,8 +42,11 @@
 
   SIZE: RiskPerTrade > 0 sizes the trade so a stop-out loses at most that:
   contracts = Floor(RiskPerTrade / (stop points x point value)); skipped if 0.
-  Funded candidate: RiskPerTrade 300 on MNQ. Backtest on NQ: RiskPerTrade 0,
-  NumContracts 1. }
+  FUNDED PLAN (2026-10-12): NumContracts 1 on MNQ with RiskPerTrade 0. Do not
+  use RiskPerTrade 300: the 0.5 ATR stop is about $467 per MNQ at October 2026
+  prices, so it would skip every trade. With cushion sizing (FUNDED_PLAN.md)
+  it is off whenever the cushion is below $2,000. Backtest on NQ:
+  RiskPerTrade 0, NumContracts 1. }
 
 Inputs:
 	EntryBarTime(830),      { the bar closing at 8:30 -> buy at the next bar's open }

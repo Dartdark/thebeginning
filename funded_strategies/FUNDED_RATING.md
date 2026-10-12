@@ -1,5 +1,10 @@
 # Funded set rating (2026-10-12)
 
+> **Update (2026-10-12, later):** Overnight Drift, the weak link below, has been replaced by
+> Monday Long (1 MNQ). New plan with cushion sizing: $7,153 within 1 year, $11,612 within
+> 2 years, blown 9–10%; portfolio Sharpe 2.35, Calmar 3.51. See `FUNDED_PLAN.md`. The
+> rating below is of the set before the change.
+
 Set: Vault Break 3 MNQ, Overnight Bias ML RiskPerTrade 300, Overnight Drift 500,
 Expiration Open Short 500. All MultiCharts trade lists, 2018–2026, $7.25/NQ costs plus 1 tick
 of slippage per fill. Simulator: Apex 50K EOD Performance Account (`analysis/funded_sim.py`),
