@@ -1,6 +1,6 @@
 # Funded phase plan: Apex 50K EOD Performance Account
 
-## Current plan (updated 2026-10-13): eight strategies, faster to $13k
+## Current plan (updated 2026-10-13): seven strategies (Vol-Control Sell dropped), faster to $13k
 
 Priority: collect all 6 payouts ($13,000) sooner. **New: the Bridge's Monday Long NQ** (it ships with The Bridge,
 Strategies screen, `L644NQ_MondayLong_NQ` v2.1), MultiCharts-confirmed (`../analysis/bridge_monday_confirm.py`,
@@ -16,6 +16,7 @@ Flow are MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`); full size sta
 | Late-Day Flow | `NQ_Late_Day_Flow.txt` | 5 min MNQ | `NumContracts` 2, `RiskPerTrade` 0 | ~100 a year |
 | NFP Fade | `NQ_NFP_Fade.txt` | 5 min MNQ | `RiskPerTrade` 500 | ~9 a year (payroll Fridays, 7:45–9:00 CT) |
 | Vol-Control Sell Flow | `NQ_Vol_Control_Sell.txt` | 5 min MNQ + **5 min @ES as data2** | `NumContracts` 1, `RiskPerTrade` 0 | ~8 a year (14:00–15:00 CT, shorts) |
+| ~~Vol-Control Sell Flow~~ **dropped 2026-10-13** | — | — | — | without it: $9,313 / $12,569, blown 2% / 1%, median 255 days (with it: $9,313 / $12,436, 3% / 1%, 255); it adds nothing next to the Bridge Monday Long and needs @ES data2 (`../analysis/funded_today_check.py` and the session note) |
 | **Bridge Monday Long (new)** | The Bridge → Strategies → `L644NQ_MondayLong_NQ` (import as a Signal) | 5 min MNQ, full Globex session, Exchange time | `NumContracts` 1, defaults otherwise (`TargetPts` 100, `StopPts` 0) | ~25 a year (Sunday 19:00 CT → Monday 15:55) |
 
 **Other candidates checked 2026-10-13** (`../analysis/funded_today_check.py`): DriftPullback shorts 1 MNQ (Python
@@ -39,7 +40,8 @@ The Bridge Monday Long enters on Sunday evening, so use Sunday's cushion (Friday
 |---|---|---|---|---|---|
 | Previous plan (5 strategies, $2,000 cushion) | $7,676 | $12,012 | 6% / 4% | 306 | 21% |
 | Previous plan (7 strategies, $1,500 cushion) | $8,770 | $12,236 | 3% / 2% | 278 | 36% |
-| **Current plan (8 strategies: + Bridge Monday Long 1 MNQ)** | **$9,313** | **$12,436** | **3% / 1%** | **255** | **48%** |
+| Plan with 8 strategies (+ Bridge Monday Long 1 MNQ) | $9,313 | $12,436 | 3% / 1% | 255 | 48% |
+| **Current plan (7: the 8 without Vol-Control Sell)** | **$9,313** | **$12,569** | **2% / 1%** | **255** | **47%** |
 
 Bridge Monday Long at 2 MNQ: $8,747 / $11,212, blown 11% / 12%, so keep it at 1. Same-method portfolio metrics
 at full size, 2018–2026 (`bridge_monday_confirm.py`): 8 strategies Sharpe 2.82, Sortino 5.65, PF (days) 1.82,

@@ -3,8 +3,8 @@
 S–F scale, updated as each new idea is tested. Results are NQ 2018–2026 unless noted, per
 NQ after $7.25 costs and 1 tick of slippage per fill. "Funded" = expected payouts per Apex
 50K Performance Account within 1 year (2 years in brackets); the current set (VB 3, ONB ML $400,
-Monday Long 1 MNQ, EOS $700, Late-Day Flow 2 MNQ, NFP Fade $500, Vol-Control Sell 1 MNQ, Bridge Monday Long
-1 MNQ, full size from a $1,500 cushion) scores $9,313 ($12,436); before the Bridge Monday Long $8,770 ($12,236); the previous 5-strategy set $7,676 ($12,012).
+Monday Long 1 MNQ, EOS $700, Late-Day Flow 2 MNQ, NFP Fade $500, Bridge Monday Long 1 MNQ, full size from a
+$1,500 cushion; Vol-Control Sell dropped) scores $9,313 ($12,569); with Vol-Control Sell $9,313 ($12,436); before the Bridge Monday Long $8,770 ($12,236); the previous 5-strategy set $7,676 ($12,012).
 
 ## What the tiers mean
 

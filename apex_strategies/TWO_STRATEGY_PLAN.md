@@ -9,6 +9,9 @@ One Apex 50K account, both strategies on MNQ, each on its own chart with the CME
 > 6 days; cost per funded account about $107 vs $117 at $50 a challenge. RiskPerTrade stays 1100. Details:
 > `../analysis/onb_adx30_confirm.py`.
 
+> **Update 2026-10-13 (late): use two add-ons, Bridge Monday Long 2 MNQ + EOS $500 → pass 50.1% (2023–26 54.5%).**
+> Vol-Control Sell is dropped: it adds only 0.4 points (50.5%) and needs @ES data2.
+>
 > **Update 2026-10-13 (evening): three small add-ons raise the pass rate to 50.5% (from 46.9%).**
 > Tested in `../analysis/combine_addons_test.py` (output in `..._output.txt`), MultiCharts trade lists, a challenge
 > started on every trading day 2018–2026, Apex rules ($3,000 target, $2,000 trailing, $1,000 daily loss, 21 days).

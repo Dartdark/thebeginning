@@ -37,7 +37,10 @@ Tier list of everything tested (S–F): `TIER_LIST.md`. Development process (who
    compare with `portfolio.load_mc` as in `analysis/late_day_flow_confirm.py`.
 
 ## Funded plan (updated 2026-10-13, latest)
-Eight strategies: the seven below + **the Bridge's Monday Long NQ 1 MNQ** (Sunday 19:00 CT → Monday 15:55,
+**Vol-Control Sell dropped (late 2026-10-13):** without it $9,313 / $12,569, blown 2% / 1%, median 255 days (adds
+nothing next to the Bridge Monday Long; needs @ES data2). Combine add-ons are now Bridge Monday Long 2 MNQ + EOS $500
+(pass 50.1%).
+Before that: eight strategies: the seven below + **the Bridge's Monday Long NQ 1 MNQ** (Sunday 19:00 CT → Monday 15:55,
 daily ADX(7) filter, 100-pt target; ships with The Bridge; MC-confirmed 217/217 trades,
 `analysis/bridge_monday_confirm.py`). $9,313 (1y) / $12,436 (2y), blown 1-3%, median 255 trading days to all 6
 payouts (was 278), 48% get all 6 within a year (was 36%).
