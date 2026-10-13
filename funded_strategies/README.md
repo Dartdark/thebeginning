@@ -1179,6 +1179,25 @@ Targets 1 / 1.5 / 2 / 3 R, the breakout extreme, or none; flat 14:55. X = 0.15�
   no-breakout control in this script had a look-ahead bug, choosing the day's side from price up to 10:30;
   it's removed.)
 
+### Open-breakout pullback on 15-minute bars (follow-up): better on longs, still not enough for the plans
+
+Code `../analysis/open_pullback_15m_test.py` (output in `..._output.txt`). Entry A on 15-min bars: after the breakout,
+a 15-min bar that touches the open and closes back on the breakout side (the bar after the breakout bar), stop
+past its low / high. Breakout = any trade beyond X% or a 15-min close beyond X%. 120 combinations.
+- **Longs, breakout = touch:** 50% of combinations positive in 2018–22, and all of those positive after.
+  Best: **0.15%, 3R target: 625 trades, $153, PF 1.30, t 2.4, 7/9 years** (2018–22 $121, 2023–26 $197).
+  No target $202 (t 2.2). Close-based breakouts are weaker (best t 1.8). Shorts: best t 0.7.
+- **Controls:** shorting the same fills −$109 (1/9 years); the same long trade (time, stop, 3R) on random days
+  −$37. So the pullback-after-a-move day does select better long entries.
+- **Standard metrics** (0.15% 3R): Sharpe 0.79, Sortino 1.56, PF 1.30, Calmar 0.51, Ulcer 6.8, max DD
+  $21,050. 2023+ Sharpe 0.86 (bootstrap 0.16–1.59, P ≤ 0 2%). Correlation with the plan ≤ 0.19.
+- **But:** it's the best of 120, and a 0.15% "breakout" is almost any move off the open. Funded with risk
+  sizing blows up (the 15-min bar-low stop is often tight: median 35 points, 10% under 10 points): $200 risk
+  $8,348 / $10,814, blown 17%. At a fixed 1 MNQ $9,492 / $12,589, blown 2% / 1% vs $9,313 / $12,436, within
+  noise; 2 MNQ blown 14%. Combine with the new add-on set: + $500 risk 46.0% vs 50.5%.
+- **Verdict: C.** A real, if modest, long-side pattern. Better on 15-minute bars than 5. No room in either plan:
+  neutral funded at 1 MNQ, worse in the combine. Watch item.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

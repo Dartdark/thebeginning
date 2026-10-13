@@ -25,26 +25,35 @@ XS = (0.15, 0.25, 0.35, 0.50, 0.75)
 TGTS = (1.0, 1.5, 2.0, 3.0, "ext", None)
 
 
-def day_trade(g, d, atr_d, x, entry, tgt, sides):
+def day_trade(g, d, atr_d, x, entry, tgt, sides, k=5, brk="touch", skip_break_bar=False):
+    """k: signal bar minutes (entry A); brk 'touch' = any trade beyond X%, 'close' = a k-min close beyond X%."""
     O, H, L, C = g.o[d], g.h[d], g.l[d], g.c[d]
     op = O[jof(831)]
     if np.isnan(op) or np.isnan(atr_d): return None
     up, dn = op * (1 + x / 100), op * (1 - x / 100)
     side = 0; jb = None
-    for j in range(jof(831), jof(1030) + 1):
-        if np.isnan(H[j]): continue
-        hu, hd = H[j] >= up, L[j] <= dn
-        if hu or hd:
-            side = 1 if (hu and not hd) else (-1 if (hd and not hu) else (1 if abs(O[j] - up) < abs(O[j] - dn) else -1))
-            jb = j; break
+    if brk == "touch":
+        for j in range(jof(831), jof(1030) + 1):
+            if np.isnan(H[j]): continue
+            hu, hd = H[j] >= up, L[j] <= dn
+            if hu or hd:
+                side = 1 if (hu and not hd) else (-1 if (hd and not hu) else (1 if abs(O[j] - up) < abs(O[j] - dn) else -1))
+                jb = j; break
+    else:
+        for jc in range(jof(830) + k, jof(1030) + 1, k):
+            cc = C[jc - k + 1:jc + 1]; cc = cc[~np.isnan(cc)]
+            if not len(cc): continue
+            if cc[-1] >= up: side, jb = 1, jc; break
+            if cc[-1] <= dn: side, jb = -1, jc; break
     if side == 0 or side not in sides: return None
     # entry search
     ext = np.nanmax(H[jof(831):jb + 1]) if side > 0 else np.nanmin(L[jof(831):jb + 1])
     j0 = e = stop = None
     if entry == "A":
-        first5 = ((jb // 5) + 1) * 5                 # first 5-min bar closing after the breakout minute's bar
-        for jc in range(first5, jof(1200) + 1, 5):
-            seg = slice(jc - 4, jc + 1)
+        cbar = -(-jb // k) * k                       # close of the bar holding the breakout minute
+        first = cbar + k if skip_break_bar else ((jb // k) + 1) * k
+        for jc in range(first, jof(1200) + 1, k):
+            seg = slice(jc - k + 1, jc + 1)
             if np.isnan(C[seg]).all(): continue
             hi, lo = np.nanmax(H[seg]), np.nanmin(L[seg]); cl = C[seg][~np.isnan(C[seg])][-1]
             if side > 0 and lo <= op and cl > op:
@@ -80,11 +89,11 @@ def day_trade(g, d, atr_d, x, entry, tgt, sides):
                 net=(px - e) * side * PV - COST)
 
 
-def run(g, x, entry, tgt, sides=(1, -1)):
+def run(g, x, entry, tgt, sides=(1, -1), **kw):
     ts = pd.DatetimeIndex(g.ts); atr = g.daily_atr(15); out = []
     for d in g.trading:
         if ts[d].year < 2018: continue
-        r = day_trade(g, d, atr[d], x, entry, tgt, sides)
+        r = day_trade(g, d, atr[d], x, entry, tgt, sides, **kw)
         if r is None: continue
         r["date"] = ts[d]; out.append(r)
     return pd.DataFrame(out)

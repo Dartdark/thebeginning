@@ -1,0 +1,176 @@
+Open-breakout pullback on 15-minute bars (user's follow-up, 2026-10-13). Same as analysis/open_pullback_test.py
+
+LONGS, breakout = touch: sorted by design (2018-22) average
+  brk side    x  tgt   n    avg   pf     t       d        h yrs
+touch long 0.75  ext 117 179.37 1.36  1.24  208.33   121.47 5/8
+touch long 0.75 None 118 468.09 1.74  1.21  125.60 1,161.85 5/8
+touch long 0.15  3.0 625 153.20 1.30  2.37  120.65   196.56 7/9
+touch long 0.15 None 625 201.95 1.39  2.18  113.97   319.15 7/9
+touch long 0.75  1.0 118  75.76 1.16  0.63  103.19    20.19 5/8
+touch long 0.75  3.0 118  89.40 1.14  0.52   60.41   148.13 4/8
+touch long 0.75  2.0 118  62.71 1.10  0.39   58.51    71.21 4/8
+touch long 0.15  2.0 625  80.21 1.16  1.41   52.47   117.17 7/9
+touch long 0.15  1.5 625  69.31 1.15  1.30   28.33   123.89 7/9
+touch long 0.75  1.5 118  32.96 1.06  0.23   25.41    48.26 3/8
+touch long 0.35 None 425 298.20 1.53  2.30   18.43   664.62 6/9
+touch long 0.35  3.0 425 177.08 1.32  2.08   14.89   389.52 5/9
+touch long 0.35  ext 401 116.89 1.33  2.11   14.87   248.64 7/9
+touch long 0.50  ext 269  46.15 1.10  0.58    3.78   103.76 5/9
+touch long 0.25  ext 469  49.16 1.15  1.13    0.17   116.21 4/9
+touch long 0.15  ext 500  48.16 1.18  1.27  -10.40   127.07 5/9
+touch long 0.15  1.0 625  36.68 1.09  0.80  -14.20   104.45 7/9
+touch long 0.25  3.0 528  88.50 1.16  1.22  -19.98   240.36 5/9
+touch long 0.25 None 528 152.36 1.26  1.42  -27.28   403.86 5/9
+touch long 0.50 None 280 195.98 1.33  1.10  -45.18   536.93 6/9
+touch long 0.50  3.0 280  42.52 1.07  0.42  -50.94   174.65 5/9
+touch long 0.35  2.0 425  92.99 1.18  1.24  -51.36   282.04 5/9
+touch long 0.50  1.0 280  -9.30 0.98 -0.12  -69.23    75.42 3/9
+touch long 0.50  2.0 280  11.84 1.02  0.13  -72.28   130.77 5/9
+touch long 0.50  1.5 280  23.62 1.04  0.26  -82.04   172.99 4/9
+touch long 0.25  2.0 528  11.85 1.02  0.18  -83.87   145.86 4/9
+touch long 0.25  1.5 528  10.73 1.02  0.16 -106.37   174.67 4/9
+touch long 0.35  1.5 425  56.82 1.11  0.82 -108.60   273.48 5/9
+touch long 0.35  1.0 425  46.99 1.11  0.81 -116.71   261.39 5/9
+touch long 0.25  1.0 528   6.77 1.01  0.12 -120.12   184.43 4/9
+   design avg > 0: 50%; of those holdout > 0: 100%; best t 2.4
+
+SHORTS, breakout = touch: sorted by design (2018-22) average
+  brk  side    x  tgt   n     avg   pf     t      d       h yrs
+touch short 0.50 None 278   91.35 1.14  0.67 105.08   60.16 5/9
+touch short 0.75 None 136   88.19 1.13  0.48  82.25  105.32 4/9
+touch short 0.50  3.0 278   44.22 1.07  0.39  71.82  -18.43 4/9
+touch short 0.15  3.0 594   32.68 1.05  0.45  55.54    1.66 5/9
+touch short 0.50  1.5 278    1.10 1.00  0.01  51.56 -113.46 5/9
+touch short 0.15 None 594   33.03 1.05  0.40  50.19    9.73 3/9
+touch short 0.75  3.0 136   90.76 1.14  0.53  47.55  215.46 4/9
+touch short 0.25  3.0 514   -1.38 1.00 -0.02  43.59  -69.18 5/9
+touch short 0.50  1.0 278  -22.38 0.95 -0.31  41.58 -167.60 5/9
+touch short 0.50  2.0 278   17.57 1.03  0.18  35.78  -23.78 4/9
+touch short 0.35 None 401   43.87 1.07  0.42  26.69   71.14 3/9
+touch short 0.25  2.0 514  -46.55 0.92 -0.71  26.26 -156.30 5/9
+touch short 0.15  2.0 594    1.38 1.00  0.02  24.48  -29.97 4/9
+touch short 0.25  1.5 514  -13.89 0.97 -0.23  24.21  -71.34 4/9
+touch short 0.25  1.0 514  -22.36 0.95 -0.43  23.66  -91.71 4/9
+touch short 0.25 None 514  -19.40 0.97 -0.24   5.65  -57.15 2/9
+touch short 0.75  2.0 136   42.46 1.07  0.27   3.99  153.46 4/9
+touch short 0.15  1.5 594    1.71 1.00  0.03   3.82   -1.16 5/9
+touch short 0.35  1.5 401  -46.04 0.91 -0.68   1.40 -121.33 4/9
+touch short 0.15  1.0 594  -18.16 0.96 -0.36   0.83  -43.94 4/9
+touch short 0.15  ext 460  -10.79 0.96 -0.29   0.34  -25.80 4/9
+touch short 0.35  3.0 401   -8.60 0.99 -0.10 -10.66   -5.31 5/9
+touch short 0.35  2.0 401  -22.09 0.96 -0.29 -12.66  -37.06 5/9
+touch short 0.25  ext 447  -52.44 0.84 -1.29 -12.76 -111.31 2/9
+touch short 0.75  1.5 136  -32.10 0.95 -0.24 -23.83  -55.96 4/9
+touch short 0.35  1.0 401  -67.85 0.86 -1.17 -26.15 -134.02 4/9
+touch short 0.75  ext 132 -108.16 0.81 -0.97 -34.80 -319.60 3/9
+touch short 0.50  ext 263  -72.50 0.84 -1.04 -34.83 -154.18 5/9
+touch short 0.75  1.0 136  -75.30 0.86 -0.70 -49.38 -150.11 2/9
+touch short 0.35  ext 367  -55.79 0.85 -1.13 -65.45  -40.49 3/9
+   design avg > 0: 70%; of those holdout > 0: 33%; best t 0.7
+
+LONGS, breakout = close: sorted by design (2018-22) average
+  brk side    x  tgt   n    avg   pf     t       d        h yrs
+close long 0.75  1.0  61 211.68 1.54  1.26   55.82   615.10 4/8
+close long 0.75 None  61 982.91 2.77  1.39   51.95 3,392.46 5/8
+close long 0.50 None 165 421.84 1.76  1.49   44.30   960.40 7/9
+close long 0.50  ext 163 120.57 1.24  1.03   31.38   245.18 6/9
+close long 0.25  ext 388 107.70 1.28  1.80   19.80   225.25 8/9
+close long 0.50  3.0 165 138.08 1.26  1.03   10.84   319.59 5/9
+close long 0.35  3.0 288  79.69 1.16  0.87   -3.14   197.33 5/9
+close long 0.35  ext 285  63.29 1.14  0.83   -4.88   159.78 5/9
+close long 0.35 None 288 239.61 1.46  1.41   -4.94   586.91 5/9
+close long 0.25  3.0 392  92.62 1.19  1.22   -5.46   223.40 4/9
+close long 0.25 None 392 242.29 1.48  1.83   -5.69   572.93 5/9
+close long 0.15  ext 501  62.36 1.17  1.30  -11.53   153.73 8/9
+close long 0.50  2.0 165  50.42 1.10  0.43  -12.40   140.03 5/9
+close long 0.35  2.0 288  54.78 1.11  0.65  -25.68   169.05 5/9
+close long 0.50  1.0 165  15.23 1.03  0.16  -26.48    74.74 6/9
+close long 0.75  ext  61 184.72 1.34  0.83  -29.30   738.63 5/8
+close long 0.25  2.0 392  64.29 1.14  0.92  -50.42   217.24 5/9
+close long 0.15 None 513 166.02 1.33  1.57  -54.19   436.97 6/9
+close long 0.15  3.0 513  54.10 1.11  0.86  -59.23   193.53 3/9
+close long 0.35  1.0 288  10.41 1.03  0.16  -62.69   114.22 4/9
+close long 0.25  1.0 392  21.88 1.06  0.40  -75.08   151.17 6/9
+close long 0.15  2.0 513   9.77 1.02  0.18  -85.96   127.55 5/9
+close long 0.15  1.0 513   4.87 1.01  0.11  -91.61   123.60 6/9
+close long 0.25  1.5 392  22.88 1.05  0.35  -93.78   178.43 5/9
+close long 0.35  1.5 288  15.43 1.03  0.19 -100.31   179.81 3/9
+close long 0.50  1.5 165  28.27 1.06  0.26 -100.86   212.46 4/9
+close long 0.15  1.5 513  -1.66 1.00 -0.03 -118.58   142.21 4/9
+close long 0.75  3.0  61 239.96 1.44  0.94 -118.73 1,168.34 4/8
+close long 0.75  2.0  61 154.39 1.29  0.69 -131.80   895.10 4/8
+close long 0.75  1.5  61  38.69 1.07  0.19 -199.18   654.37 3/8
+   design avg > 0: 20%; of those holdout > 0: 100%; best t 1.8
+
+SHORTS, breakout = close: sorted by design (2018-22) average
+  brk  side    x  tgt   n     avg   pf     t      d       h yrs
+close short 0.75  1.0  76   72.03 1.17  0.55 140.07 -118.50 5/9
+close short 0.75  2.0  76   62.75 1.11  0.34 120.79  -99.75 5/9
+close short 0.75  3.0  76   92.22 1.15  0.46  86.95  107.00 5/9
+close short 0.35  1.0 245   -3.52 0.99 -0.05  80.20 -163.98 6/9
+close short 0.35  3.0 245   30.97 1.06  0.29  76.76  -56.77 4/9
+close short 0.35  1.5 245    5.83 1.01  0.07  73.67 -124.18 5/9
+close short 0.35  2.0 245   14.95 1.03  0.16  59.12  -69.69 5/9
+close short 0.50  1.0 162   23.52 1.06  0.26  54.89  -42.83 4/9
+close short 0.75  1.5  76  -18.24 0.97 -0.11  51.77 -214.25 4/9
+close short 0.25  1.0 357  -20.54 0.95 -0.38  49.37 -141.14 5/9
+close short 0.75  ext  76  -10.21 0.98 -0.07  46.05 -167.75 4/9
+close short 0.25  1.5 357  -13.31 0.97 -0.20  27.30  -83.38 5/9
+close short 0.50  2.0 162   59.94 1.11  0.46  24.34  135.25 4/9
+close short 0.50  1.5 162   -2.25 1.00 -0.02  18.64  -46.43 3/9
+close short 0.15  1.0 454  -62.31 0.84 -1.37   8.50 -183.99 2/9
+close short 0.35 None 245   18.65 1.03  0.15   6.01   42.87 4/9
+close short 0.50  ext 160  -15.78 0.97 -0.15 -15.14  -17.15 4/9
+close short 0.15  1.5 454  -65.75 0.85 -1.20 -16.19 -150.93 3/9
+close short 0.25  3.0 357  -52.85 0.90 -0.64 -18.09 -112.82 3/9
+close short 0.25  2.0 357  -23.69 0.95 -0.32 -19.84  -30.34 3/9
+close short 0.50  3.0 162   57.35 1.10  0.41 -21.25  223.62 4/9
+close short 0.35  ext 238  -40.53 0.91 -0.54 -37.85  -45.81 4/9
+close short 0.25 None 357  -82.49 0.85 -0.94 -39.20 -157.17 4/9
+close short 0.15  3.0 454  -90.04 0.83 -1.29 -48.56 -161.32 4/9
+close short 0.15  2.0 454  -75.58 0.85 -1.22 -52.44 -115.33 4/9
+close short 0.15  ext 432  -50.17 0.86 -1.12 -63.24  -27.50 4/9
+close short 0.50 None 162   77.78 1.13  0.48 -67.48  385.06 4/9
+close short 0.25  ext 346  -50.88 0.87 -0.93 -69.68  -17.21 3/9
+close short 0.75 None  76  -82.84 0.87 -0.43 -70.38 -117.75 4/9
+close short 0.15 None 454 -134.61 0.75 -1.85 -78.75 -230.60 1/9
+   design avg > 0: 53%; of those holdout > 0: 19%; best t 0.5
+
+Best of all 120 by full-period t: {'brk': 'touch', 'side': 'long', 'x': 0.15, 'tgt': '3.0', 'n': 625, 'avg': 153.198, 'pf': 1.3030896555653686, 't': 2.367492581300897, 'd': 120.64915966386555, 'h': 196.55597014925374, 'yrs': '7/9'}
+            trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+best 15-min    625 35% $153 $10,667   0.79    1.56          1.30 $21,050   0.51  6.78       3.15
+   by year: {2018: 4834, 2019: 6808, 2020: 24272, 2021: 8795, 2022: -1636, 2023: -9766, 2024: 12579, 2025: 37585, 2026: 12278}
+
+Checks on the best 15-min long versions (0.15% touch breakout, 3R and no target):
+long 0.15% 15-min target 3.0                       n= 625 win 35% avg $  153 PF 1.30 t= 2.4 yrs+ 7/9 | 18-22 $ 121 PF 1.29 | 23-26 $ 197 PF 1.32
+   placebo: short at the same fills                n= 625 win 28% avg $ -109 PF 0.82 t=-1.7 yrs+ 1/9 | 18-22 $ -67 PF 0.86 | 23-26 $-164 PF 0.79
+long 0.15% 15-min target None                      n= 625 win 32% avg $  202 PF 1.39 t= 2.2 yrs+ 7/9 | 18-22 $ 114 PF 1.27 | 23-26 $ 319 PF 1.50
+   placebo: short at the same fills                n= 625 win 23% avg $ -123 PF 0.80 t=-1.7 yrs+ 1/9 | 18-22 $-110 PF 0.78 | 23-26 $-140 PF 0.82
+long 0.15% 15-min target 2.0                       n= 625 win 38% avg $   80 PF 1.16 t= 1.4 yrs+ 7/9 | 18-22 $  52 PF 1.13 | 23-26 $ 117 PF 1.19
+   placebo: short at the same fills                n= 625 win 33% avg $  -90 PF 0.84 t=-1.5 yrs+ 3/9 | 18-22 $ -48 PF 0.90 | 23-26 $-147 PF 0.80
+control: long, same time / stop / 3R, random days  n= 610 win 33% avg $  -37 PF 0.92 t=-0.7 yrs+ 4/9 | 18-22 $ -37 PF 0.91 | 23-26 $ -37 PF 0.93
+                     trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+long 0.15% 15-min 3R    625 35% $153 $10,667   0.79    1.56          1.30 $21,050   0.51  6.78       3.15
+                      actual        p5       p50       p95
+name  metric                                              
+2023+ sharpe            0.86      0.16      0.88      1.59
+      sortino           1.69      0.29      1.73      3.47
+      pf_day            1.32      1.05      1.33      1.66
+      calmar            0.78      0.10      0.82      2.27
+      ulcer            12.60      3.72      7.72     20.10
+      max_dd       17,429.50 10,172.70 16,822.12 30,977.37
+      P(Sharpe<=0)       NaN       NaN      0.02       NaN
+      actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+2023+   $17,430      41% $18,691 $29,895 $36,498        100%        100%        100%
+   correlation: {'VB': 0.19, 'ONB_ML2_MC': 0.05, 'MON_MC': 0.11, 'LDF_MC': 0.1}
+Funded bench (8-strategy plan; + this at RiskPerTrade with its own bar-low stop):
+   current plan   1y $9,313 2y $12,436 blown 3% / 1%
+   + $200         1y $8,348 2y $10,814 blown 17% / 18%
+   + $300         1y $6,256 2y $6,950 blown 43% / 49%
+Combine (VB 8 + ONB ADX30 $1,100 + Bridge Monday 2 + EOS $500 + VCS 2, + this at $X risk):
+   current combine set            pass 50.5% | 2023-26 55.4%
+   + open pullback 15-min $500    pass 46.0% | 2023-26 51.9%
+   + $1,000                       pass 40.2% | 2023-26 42.8%
+Fixed size instead of risk sizing (stop distance: median 34.8 points, 10% 10.1, 90% 94.7):
+   + 1 MNQ fixed  1y $9,492 2y $12,589 blown 2% / 1%
+   + 2 MNQ fixed  1y $9,006 2y $11,058 blown 14% / 15%
