@@ -1,0 +1,64 @@
+Donchian breakout + Larry Williams Large Trade Index + volume filter (user's paste), 2026-10-13.
+
+1. As coded (24 h, no time exit, one entry a day):
+5-min bars                               n= 2314 win 35% avg $   18 PF 1.03 t= 0.6 yrs+ 6/9 | 18-22 $ -45 | 23-26 $  89 | L $  88 S $ -69 | overnight 18%
+15-min bars                              n= 1871 win 38% avg $   67 PF 1.10 t= 1.8 yrs+ 7/9 | 18-22 $  85 | 23-26 $  45 | L $  88 S $  38 | overnight 18%
+30-min bars                              n= 1383 win 41% avg $   90 PF 1.13 t= 1.9 yrs+ 9/9 | 18-22 $ 126 | 23-26 $  48 | L $ 118 S $  53 | overnight 21%
+   15-min by year: {2018: 10373, 2019: 10934, 2020: 21593, 2021: 28006, 2022: 14921, 2023: 33354, 2024: 23306, 2025: -3742, 2026: -14181}
+   15-min: worst trade $-6,987; exit fill beyond the 50-pt stop level: 30% of trades
+
+2. Apex version (signals 8:30-15:00 CT, flat after 15:00):
+5-min bars                               n= 2159 win 40% avg $   20 PF 1.04 t= 0.7 yrs+ 5/9 | 18-22 $   4 | 23-26 $  42 | L $  61 S $ -26 | overnight 0%
+15-min bars                              n= 1631 win 44% avg $   61 PF 1.11 t= 1.8 yrs+ 6/9 | 18-22 $ 113 | 23-26 $  -6 | L $  92 S $  21 | overnight 0%
+30-min bars                              n= 1255 win 47% avg $   33 PF 1.06 t= 0.8 yrs+ 6/9 | 18-22 $  82 | 23-26 $ -28 | L $  42 S $  19 | overnight 0%
+   15-min by year: {2018: 11236, 2019: -6412, 2020: 102, 2021: 32959, 2022: 65877, 2023: 11735, 2024: 17132, 2025: -14138, 2026: -18947}
+  15-min longs                           n=  923 win 47% avg $   92 PF 1.19 t= 2.2 yrs+ 6/9 | 18-22 $ 132 | 23-26 $  43 | L $  92 S $ nan | overnight 0%
+  15-min shorts                          n=  708 win 40% avg $   21 PF 1.03 t= 0.4 yrs+ 3/9 | 18-22 $  89 | 23-26 $ -73 | L $ nan S $  21 | overnight 0%
+   placebo (same entry bars, random side, 10 runs): $6 (-50..90) vs $61
+15-min Apex, no LWTI filter              n= 1818 win 42% avg $   21 PF 1.04 t= 0.6 yrs+ 5/9 | 18-22 $  61 | 23-26 $ -32 | L $  73 S $ -48 | overnight 0%
+15-min Apex, no volume filter            n= 1701 win 44% avg $   54 PF 1.10 t= 1.7 yrs+ 5/9 | 18-22 $ 112 | 23-26 $ -21 | L $  83 S $  16 | overnight 0%
+15-min Apex, neither filter              n= 1867 win 42% avg $   18 PF 1.03 t= 0.6 yrs+ 5/9 | 18-22 $  63 | 23-26 $ -41 | L $  66 S $ -46 | overnight 0%
+15-min Apex, TP 50 / SL 50               n= 1631 win 52% avg $   41 PF 1.09 t= 1.5 yrs+ 6/9 | 18-22 $  76 | 23-26 $  -5 | L $  72 S $  -0 | overnight 0%
+15-min Apex, TP 150 / SL 75              n= 1631 win 45% avg $   33 PF 1.05 t= 0.8 yrs+ 6/9 | 18-22 $ 136 | 23-26 $-100 | L $  63 S $  -6 | overnight 0%
+
+3. Standard metrics per NQ (15-min):
+            trades win avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+as coded      1871 38% $67 $13,855   0.61    1.02          1.10 $55,092   0.25  8.76       3.16
+Apex          1631 44% $61 $11,090   0.61    0.96          1.11 $51,462   0.22  8.92       2.49
+Apex longs     923 47% $92  $9,469   0.72    1.14          1.19 $24,006   0.39  5.67       3.34
+Apex shorts    708 40% $21  $1,621   0.13    0.20          1.03 $36,600   0.04 15.25       0.21
+                                  actual        p5       p50       p95
+name              metric                                              
+as coded 2023+    sharpe            0.44     -0.49      0.40      1.27
+                  sortino           0.73     -0.78      0.66      2.23
+                  pf_day            1.07      0.93      1.06      1.22
+                  calmar            0.19     -0.15      0.23      1.15
+                  ulcer            14.39      8.20     21.97     70.28
+                  max_dd       55,092.50 24,021.64 42,787.00 82,937.16
+                  P(Sharpe<=0)       NaN       NaN      0.23       NaN
+Apex 2023+        sharpe           -0.05     -0.90     -0.10      0.67
+                  sortino          -0.08     -1.31     -0.15      1.08
+                  pf_day            0.99      0.86      0.98      1.12
+                  calmar           -0.02     -0.22     -0.05      0.54
+                  ulcer            21.99     11.46     32.93     92.50
+                  max_dd       51,462.25 23,406.94 44,821.25 92,050.99
+                  P(Sharpe<=0)       NaN       NaN      0.60       NaN
+Apex longs 2023+  sharpe            0.30     -0.49      0.28      1.02
+                  sortino           0.46     -0.71      0.43      1.64
+                  pf_day            1.07      0.90      1.07      1.26
+                  calmar            0.19     -0.18      0.17      0.99
+                  ulcer            11.78      6.29     15.71     45.62
+                  max_dd       24,006.50 13,797.27 24,683.00 48,770.11
+                  P(Sharpe<=0)       NaN       NaN      0.27       NaN
+Apex shorts 2023+ sharpe           -0.40     -1.24     -0.44      0.34
+                  sortino          -0.61     -1.76     -0.68      0.56
+                  pf_day            0.90      0.71      0.89      1.09
+                  calmar           -0.15     -0.25     -0.16      0.23
+                  ulcer            24.47     12.86     37.67     82.29
+                  max_dd       36,600.50 19,310.79 40,617.12 74,823.80
+                  P(Sharpe<=0)       NaN       NaN      0.82       NaN
+                  actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+as coded 2023+      $55,092      91% $38,274 $59,346 $71,412        100%        100%        100%
+Apex 2023+          $51,462      69% $45,386 $69,156 $82,139        100%        100%        100%
+Apex longs 2023+    $24,006      36% $26,526 $40,946 $48,337        100%        100%        100%
+Apex shorts 2023+   $36,600      34% $39,950 $55,403 $62,580        100%        100%        100%

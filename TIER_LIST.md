@@ -100,6 +100,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Gap Fill (old research set) | Strategy | PF 1.14, but $12 a trade in 2023–26 (vs $76 before) |
 | Yes/no (logistic) ML filter for ONB (after Vilkov 2026) | Filter | Kept beat skipped only 2–5/8 years; ridge version stays |
 | VWAP Pullback + ADX gate (the Bridge's C.S. profile: ADX(14) 1-min ≥ 20 and falling, long only, flat 15:55) | Strategy (Python replica) | 1,052 trades, $60, PF 1.23, t 2.2, 6/9 years (2018–20 lose; 2023+ $152); no gate $59, random gate $47, inverted gate $21; random-side placebo $0 (= NQ drift); Sharpe 0.73, Calmar 0.27, Ulcer 16.8; funded + 1 MNQ $9,250 / $11,841, blown 7% (plan $9,313 / $12,436) |
+| Donchian(96) breakout + Larry Williams Large Trade Index > / < 50 + volume above average, TP 100 / SL 50 points (user's paste) | Strategy (Python) | 15-min as coded $67, PF 1.10, t 1.8 (holds overnight); Apex version 1,631 trades, $61, PF 1.11, t 1.8, 6/9 years, 2018–22 $113 vs 2023–26 −$6; shorts t 0.4; placebo $6; without LWTI $21; Sharpe 0.61, 2023+ −0.05 |
 
 ## F
 

@@ -93,6 +93,7 @@ The Bridge's Overnight Bias ORB (`analysis/bridge_onb_orb_test.py`): $313, PF 1.
 combine 38.9% vs 46.9%; keep ours (B).
 The Bridge's VWAP Fade (`analysis/bridge_vwap_fade_test.py`): −$25 a trade, PF 0.93, worse than random (F).
 The Bridge's Large Trade Predictability (`analysis/bridge_large_trade_test.py`): 1-min gross edge $2-8 a trade < $17 costs (F).
+Donchian + LWTI (`analysis/donchian_lwti_test.py`): t 1.8, worked 2018-22, negative since 2023 (D).
 Setup notes: restart MultiCharts after any DLL / data change ("OLD DLL" error); compile every OFB function
 ("unverified function" error); Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close
 conversion unchecked.

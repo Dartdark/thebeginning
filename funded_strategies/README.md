@@ -1094,6 +1094,27 @@ repeats. Data: the Bridge's big_trade per minute (2018–2026 RTH), 8:31–15:00
   The information in a whale print lasts about a minute and is worth less than the spread plus commission.
   It needs market-maker economics, not a retail futures account.
 
+## Donchian breakout + Larry Williams Large Trade Index (2026-10-13, user's paste): weak, gone since 2024
+
+Code `../analysis/donchian_lwti_test.py` (output in `..._output.txt`). The 96-bar Donchian breakout (current bar
+included) with LWTI on the right side of 50 and volume above its 30-bar average; one entry a calendar day. Exits as
+coded: the bar's high/low against the signal close + 100 / − 50 points, then out at the next open. The LWTI
+function wasn't pasted; the common definition is used, 50 + 50 × SMA(close − close[25], 20) / ATR(25), and only
+its side of 50 matters. Bar size not given: 15-minute assumed (96 bars = a day), 5 and 30 also run. Per NQ after
+$7.25 + 1 tick per market fill.
+- **As coded** (24 h, no time exit, 18% held overnight, not Apex-legal): 15-min 1,871 trades, $67, PF 1.10,
+  t 1.8, 7/9 years; 5-min $18; 30-min $90 (t 1.9). The next-open exits overshoot: 30% of trades lose more than
+  the 50-point stop; worst −$6,987.
+- **Apex version** (signals 8:30–15:00 CT, flat after 15:00), 15-min: 1,631 trades, $61, PF 1.11, t 1.8, 6/9
+  years. 2018–22 $113, 2023–26 −$6 (2025 −$14,138, 2026 −$18,947). Longs $92 (t 2.2), shorts $21 (t 0.4,
+  3/9 years). Random-side placebo $6 (−$50 to $90).
+- **The LWTI filter does the work:** without it $21; without the volume filter $54. Other targets / stops
+  are worse (50/50 $41, 150/75 $33).
+- **Standard metrics (15-min Apex):** Sharpe 0.61, Sortino 0.96, PF 1.11, Calmar 0.22, Ulcer 8.9, max DD
+  $51,462 per NQ; longs Sharpe 0.72, shorts 0.13. 2023+: Sharpe −0.05 (P ≤ 0 60%); longs 0.30, shorts −0.40.
+- **Verdict: D.** A momentum filter on breakouts helped in 2018–22 and has stopped working. The longs are
+  mostly NQ's trend. No funded bench run: it's negative on the 2023+ holdout.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
