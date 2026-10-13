@@ -70,6 +70,8 @@ Funded re-check (`analysis/funded_today_check.py`): nothing else worth adding. D
 Open-breakout pullback (user's idea, `analysis/open_pullback_test.py`): longs t 1.6 at best, shorts lose; funded worse (D).
 On 15-min bars (`analysis/open_pullback_15m_test.py`): longs 0.15% 3R t 2.4, controls clean, but best of 120; funded
 neutral at 1 MNQ, combine worse (C, watch). On 1-min bars (`analysis/open_pullback_1m_test.py`): fails (F).
+Time clusters in the plans' trades (`analysis/time_clusters_test.py`): nothing to change; current exits best; VB September
+weak (7/9 years) is a watch item, not a filter.
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily

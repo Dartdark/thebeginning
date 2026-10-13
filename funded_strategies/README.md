@@ -1208,6 +1208,26 @@ touching the open and closing back on the breakout side; stop past that minute's
 - The one-minute stop is too tight: costs and noise take most trades out before the move. **F.** Of the three
   bar sizes, 15 minutes is the only one with a pattern (C).
 
+## Time clusters in the plans' trades (2026-10-13): nothing to change
+
+Code `../analysis/time_clusters_test.py` (output in `..._output.txt`), on the MultiCharts trade lists of every plan
+strategy, per NQ after $7.25 + 1 tick. VB / ONB ML v2 / ONB ADX30 by entry half-hour, weekday and month (each side for
+ONB); the fixed-time strategies by exit time (closing each trade earlier) and by weekday / month. About 170 cells,
+so ~8 with |t| ≥ 2 are expected by chance; 12 appeared, most with 3–12 trades.
+- **Entry time:** no consistent half-hour cluster. VB is flat across 10:00–14:00 ($44–153 per slot, every slot
+  positive overall; 13:30 weakest at $6, t −1.3). The ONB ML v2 10:00 slot (−$270) is 12 trades.
+- **Exit time:** the current exits are the best or tied. Monday Long improves every hour to 15:00 ($169 at 9:00 →
+  $426 at 15:00). EOS keeps rising to 10:00 ($334 → $474). The Bridge Monday Long makes most of its money from the 8:30
+  open on ($126 at 8:30 → $541 at 15:55). Late-Day Flow is out by 14:30. NFP Fade at 8:45 makes $401 vs $331 at 9:00
+  (PF 2.33 vs 1.79), but funded $9,501 / $12,260 with blown 5% / 4% vs $9,313 / $12,569, 2% / 1%: not adopted.
+- **Calendar cells tested on the bench:**
+  - VB without September: $9,833 / $12,670, blown 1% / 0%, 247 vs 255 days. September lost in 7 of 9 years, also in
+    up Septembers (2024, 2025), but 2026 was positive and it's 1 of 170 cells. Combine 49.8% vs 50.1%.
+  - LDF without Fridays: $9,303 / $12,547. LDF Tue–Thu: $9,415 / $12,652, but slower (264 days).
+  - ONB ML without Fridays: $9,011 / $12,254. All within noise or worse.
+- **Verdict:** keep both plans as they are. VB September is a watch item: if September 2027 also loses, revisit.
+  Calendar filters found by scanning many cells tend not to hold up.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
