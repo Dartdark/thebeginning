@@ -72,3 +72,13 @@ Tested 2026-10-13 (`../analysis/forced_flows4_test.py`): items 1–3 below, none
    the call strike" version is possible later.
 4. With paid data only: MOC imbalance (14:50), strike-level open interest (gamma walls), CME large
    open interest by account type.
+
+## Data source found (2026-10-13): The Bridge (MatFin ApS)
+
+A commercial MultiCharts add-on the user has: 0DTE NDX dealer gamma per minute (gamma flip + steepness,
+major positive / negative gamma strikes, open-interest ladder; backtest-legal "cumulative" weighting from
+2023-03-28), CME MBO order flow from 2017 (book imbalance, depth, walls, big prints, cumulative delta,
+POC / VWAP), and COT. Export with `OFB_Gamma_Exporter.txt` (this folder) to CSV for testing here. First
+tests planned: gamma regime (above / below the flip) as a filter on Late-Day Flow, Vault Break, ONB ML and
+EOS; afternoon pin toward the major gamma strike on expiry days; flip-cross breakouts.
+

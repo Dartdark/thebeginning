@@ -1,0 +1,52 @@
+{ OFB gamma + order-flow exporter - MultiCharts PowerLanguage indicator (2026-10-13)
+
+  Writes The Bridge's (MatFin) 0DTE dealer-gamma levels and a few order-flow numbers to CSV, one file
+  per year, so they can be tested in this repo:
+    <Folder><FilePrefix><year>.csv   e.g. C:\OFBexport\GEX_1min_2024.csv
+  Columns: date, time (bar close, CHART time zone), close,
+    flip, flip_steep, centroid, maj_pos, maj_neg, basis, spot, dte   (cumulative weighting = backtest-legal)
+    flip_oi, maj_pos_oi, maj_neg_oi                                 (open-interest weighting, prior close)
+    big_trade, big_trade_px, bid_depth10, ask_depth10               (order flow)
+  0 means "no data for this bar" (The Bridge's convention), not a real zero. Gamma levels are in NDX index
+  points; add basis for the NQ level (the Python side does that).
+
+  Use: compile The Bridge's OFB functions first (its Functions screen). Create the folder (C:\OFBexport\).
+  Add this indicator to a 1-minute chart of The Bridge's own bars (C:\OFB\ofb_bars_NQ.csv, mapped in
+  QuoteManager as described in its manual, section 4.3) loaded from 2022-09-01. That chart is keyed
+  EASTERN, so the default window 930-1615 is the US cash session in New York time. Only the
+  cumulative weighting is valid for backtests, and only from 2023-03-28 (the options tape starts then);
+  the earlier rows are written but will be ignored. Files are deleted and rewritten on every recalculation.
+  About 12 MB per year at the default window. }
+
+Inputs:
+	Folder("C:\OFBexport\"),   { must already exist; keep the trailing backslash }
+	FilePrefix("GEX_1min_"),
+	StartTime(930),            { first bar close written, chart time (Eastern on The Bridge's bars) }
+	EndTime(1615);             { last bar close written }
+
+Variables:
+	FileName(""), BarYear(0), LastYear(0), Row(""), Y(0);
+
+Once begin
+	for Y = 2000 to 2040 begin
+		FileDelete(Folder + FilePrefix + NumToStr(Y, 0) + ".csv");
+	end;
+end;
+
+if BarStatus(1) = 2 and Time >= StartTime and Time <= EndTime then begin
+	BarYear = Year(Date) + 1900;
+	FileName = Folder + FilePrefix + NumToStr(BarYear, 0) + ".csv";
+	if BarYear <> LastYear then begin
+		FileAppend(FileName, "date,time,close,flip,flip_steep,centroid,maj_pos,maj_neg,basis,spot,dte,"
+			+ "flip_oi,maj_pos_oi,maj_neg_oi,big_trade,big_trade_px,bid_depth10,ask_depth10" + NewLine);
+		LastYear = BarYear;
+	end;
+	Row = NumToStr(Date + 19000000, 0) + "," + NumToStr(Time, 0) + "," + NumToStr(Close, 2) + ","
+		+ NumToStr(OFB_GexFlip, 2) + "," + NumToStr(OFB_GexFlipSteep, 4) + "," + NumToStr(OFB_GexCentroid, 2) + ","
+		+ NumToStr(OFB_GexMajPos, 2) + "," + NumToStr(OFB_GexMajNeg, 2) + "," + NumToStr(OFB_GexBasis, 2) + ","
+		+ NumToStr(OFB_GexSpot, 2) + "," + NumToStr(OFB_GexDTE, 2) + ","
+		+ NumToStr(OFB_GexFlipOI, 2) + "," + NumToStr(OFB_GexPosOI, 2) + "," + NumToStr(OFB_GexNegOI, 2) + ","
+		+ NumToStr(OFB_BigTrade, 0) + "," + NumToStr(OFB_BigTradePx, 2) + ","
+		+ NumToStr(OFB_BidDepth(10), 0) + "," + NumToStr(OFB_AskDepth(10), 0);
+	FileAppend(FileName, Row + NewLine);
+end;
