@@ -732,6 +732,28 @@ bar. Per NQ after $7.25 + 1 tick per fill, 2018–2026.
 - **Combination:** nothing passes on its own, so there is nothing to combine; stacking several t ≈ 1–2
   results from 36 tries would only add noise. **F / D.**
 
+## The plan's forced flows on ES (2026-10-13): same direction, weaker — stay on NQ
+
+Code `../analysis/es_forced_flows_test.py` (output in `..._output.txt`). Python versions of Expiration Open
+Short, Monday Long, NFP Fade, Late-Day Flow and Vol-Control Sell Flow, run the same way on NQ and ES
+(ES $50 a point, $5 costs, 1 tick per fill). 1 NQ ≈ 1.34 ES of notional.
+
+| Per contract | NQ avg / PF / t | ES avg / PF / t | Daily corr NQ–ES |
+|---|---|---|---|
+| Expiration Open Short | $475 / 1.94 / 2.6 | $139 / 1.48 / 1.6 | 0.86 |
+| Monday Long | $413 / 1.52 / 3.2 | $114 / 1.25 / 1.7 | 0.79 |
+| NFP Fade | $354 / 1.82 / 1.9 | $30 / 1.09 / 0.3 | 0.71 |
+| Late-Day Flow | $94 / 1.44 / 3.5 | $25 / 1.17 / 1.5 | 0.95 |
+| Vol-Control Sell Flow | $455 / 2.15 / 2.2 | $182 / 1.64 / 1.5 | 0.92 |
+
+- **Every strategy has the same sign on ES**, which supports the mechanisms (they are not NQ quirks),
+  except NFP Fade, which barely shows on ES (t 0.3): treat it as the most fragile of the seven.
+- Per dollar of notional ES is weaker everywhere (Sharpe 0.12–0.64 vs 0.62–1.16), and NQ and ES move
+  together (0.71–0.95), so splitting between them lowers the risk-adjusted result: all five on NQ
+  Sharpe 1.85, on ES 1.04, half / half 1.60.
+- **Decision:** keep the plan on NQ / MNQ. ES is not a diversifier for these flows; a different market
+  (GC, CL, ZN) would be.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
