@@ -103,6 +103,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Yes/no (logistic) ML filter for ONB (after Vilkov 2026) | Filter | Kept beat skipped only 2–5/8 years; ridge version stays |
 | VWAP Pullback + ADX gate (the Bridge's C.S. profile: ADX(14) 1-min ≥ 20 and falling, long only, flat 15:55) | Strategy (Python replica) | 1,052 trades, $60, PF 1.23, t 2.2, 6/9 years (2018–20 lose; 2023+ $152); no gate $59, random gate $47, inverted gate $21; random-side placebo $0 (= NQ drift); Sharpe 0.73, Calmar 0.27, Ulcer 16.8; funded + 1 MNQ $9,250 / $11,841, blown 7% (plan $9,313 / $12,436) |
 | Donchian(96) breakout + Larry Williams Large Trade Index > / < 50 + volume above average, TP 100 / SL 50 points (user's paste) | Strategy (Python) | 15-min as coded $67, PF 1.10, t 1.8 (holds overnight); Apex version 1,631 trades, $61, PF 1.11, t 1.8, 6/9 years, 2018–22 $113 vs 2023–26 −$6; shorts t 0.4; placebo $6; without LWTI $21; Sharpe 0.61, 2023+ −0.05 |
+| Open-breakout pullback (your idea): break X% from the 8:30 open by 10:30, buy the pullback to the open (limit or 5-min confirmation, bar-low / 0.20-ATR stop), R-multiple or breakout-extreme targets | Strategy (Python, 120 combinations) | No combination t ≥ 2; best longs 0.50% limit at the open 2R: 336 trades, $171, PF 1.23, t 1.6 (2018–22 $128, 2023–26 $233); after a 0.15% break $37; mirrored short −$16; Sharpe 0.54; funded + $200 risk $9,545 / $11,533, blown 9%; shorts mostly negative |
 
 ## F
 

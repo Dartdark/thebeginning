@@ -64,6 +64,7 @@ Add-ons (`analysis/combine_addons_test.py`): + Bridge Monday Long 2 MNQ + EOS $5
 pass 50.5% (2023-26 55.4%), blown 47.8% vs 50.0%; our Monday Long and NFP Fade don't help the combine.
 Funded re-check (`analysis/funded_today_check.py`): nothing else worth adding. DriftPullback shorts 1 MNQ is within noise
 (median 245 vs 255 days, +$140 / +$56, blown 4% vs 3%) and weak since 2023: watch item, not a plan candidate.
+Open-breakout pullback (user's idea, `analysis/open_pullback_test.py`): longs t 1.6 at best, shorts lose; funded worse (D).
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily

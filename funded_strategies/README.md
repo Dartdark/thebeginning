@@ -1154,6 +1154,31 @@ last daily close is above its 50-day SMA, short if < 30 and below (Legacy sister
 - **Verdict:** daily / filter versions **F**. The weekly hold is **C**: a possible edge on the long side,
   too few trades to trust, and it can't be held on Apex. Worth a look only for a swing account.
 
+## Open-breakout pullback (2026-10-13, user's idea): longs a little positive, not enough; shorts don't work
+
+Code `../analysis/open_pullback_test.py` (output in `..._output.txt`). Idea: after price breaks X% away from the 8:30 CT
+open (before 10:30), it pulls back to the open and continues. Exits and sizing designed here. NQ, 5-min signal bars,
+fills on 1-minute bars. Entry A (the user's): a 5-min bar touching the open and closing back on the breakout side,
+market next bar, stop past that bar's low / high. Entry B: a limit at the open, stop 0.20 ATR. Entries until 12:00.
+Targets 1 / 1.5 / 2 / 3 R, the breakout extreme, or none; flat 14:55. X = 0.15–0.75%. 120 combinations, design
+2018–22, holdout 2023–26, per NQ after $7.25 + 1 tick per market / stop fill.
+- **No combination reaches t 2** (best t 1.6). Longs: 63% of combinations positive in 2018–22, and 63% of those
+  positive after. Shorts: 38% positive in design, 43% of those after; most lose.
+- **Best region:** longs, 0.50% breakout, limit at the open. 2R: 336 trades, $171, PF 1.23, t 1.6, 6/9 years
+  (2018–22 $128, 2023–26 $233). 1.5R $121; breakout-extreme target $123, 7/9 years. Entry A (the 5-min confirmation
+  with a bar-low stop) is weaker at 0.50% ($−20 to $146 depending on target).
+- **Controls:** the same rule after only a 0.15% breakout makes $37 (2018–22 −$62). Shorting the same fills with
+  the mirrored 2R makes −$16. Being long every day 8:30 → 14:55 makes $35. So the bigger breakout and the long
+  side carry something, but not much.
+- **Standard metrics** (long 0.50% B 2R): Sharpe 0.54, Sortino 0.97, PF 1.23, Calmar 0.25, Ulcer 9.0, max DD
+  $25,708 per NQ. 2023+ Sharpe 0.61 (bootstrap −0.26 to 1.43, P ≤ 0 12%). Long-only, so longs = all.
+- **Funded** (8-strategy plan $9,313 / $12,436, blown 3% / 1%): + RiskPerTrade $200 → $9,545 / $11,533, blown
+  9% / 10%; $400 → $8,008 / $9,558, blown 25%.
+- **Verdict: D** (longs) / **F** (shorts). There's a faint "buy the first pullback to the open after a strong
+  up-break" effect, but it's within noise, and it costs the funded plan in year 2 and in blowups. (A first
+  no-breakout control in this script had a look-ahead bug, choosing the day's side from price up to 10:30;
+  it's removed.)
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

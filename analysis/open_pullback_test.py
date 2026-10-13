@@ -25,23 +25,19 @@ XS = (0.15, 0.25, 0.35, 0.50, 0.75)
 TGTS = (1.0, 1.5, 2.0, 3.0, "ext", None)
 
 
-def day_trade(g, d, atr_d, x, entry, tgt, sides, need_break=True, side_override=None):
+def day_trade(g, d, atr_d, x, entry, tgt, sides):
     O, H, L, C = g.o[d], g.h[d], g.l[d], g.c[d]
     op = O[jof(831)]
     if np.isnan(op) or np.isnan(atr_d): return None
     up, dn = op * (1 + x / 100), op * (1 - x / 100)
     side = 0; jb = None
-    if need_break:
-        for j in range(jof(831), jof(1030) + 1):
-            if np.isnan(H[j]): continue
-            hu, hd = H[j] >= up, L[j] <= dn
-            if hu or hd:
-                side = 1 if (hu and not hd) else (-1 if (hd and not hu) else (1 if abs(O[j] - up) < abs(O[j] - dn) else -1))
-                jb = j; break
-        if side == 0 or side not in sides: return None
-    else:                                            # control: no breakout required, side = where price went first
-        side = side_override; jb = jof(831)
-        if side not in sides: return None
+    for j in range(jof(831), jof(1030) + 1):
+        if np.isnan(H[j]): continue
+        hu, hd = H[j] >= up, L[j] <= dn
+        if hu or hd:
+            side = 1 if (hu and not hd) else (-1 if (hd and not hu) else (1 if abs(O[j] - up) < abs(O[j] - dn) else -1))
+            jb = j; break
+    if side == 0 or side not in sides: return None
     # entry search
     ext = np.nanmax(H[jof(831):jb + 1]) if side > 0 else np.nanmin(L[jof(831):jb + 1])
     j0 = e = stop = None
@@ -84,21 +80,11 @@ def day_trade(g, d, atr_d, x, entry, tgt, sides, need_break=True, side_override=
                 net=(px - e) * side * PV - COST)
 
 
-def run(g, x, entry, tgt, sides=(1, -1), need_break=True):
+def run(g, x, entry, tgt, sides=(1, -1)):
     ts = pd.DatetimeIndex(g.ts); atr = g.daily_atr(15); out = []
     for d in g.trading:
         if ts[d].year < 2018: continue
-        if need_break:
-            r = day_trade(g, d, atr[d], x, entry, tgt, sides)
-        else:                                        # control: the same pullback without a prior breakout of X
-            op = g.o[d, jof(831)]
-            if np.isnan(op): continue
-            seg = g.c[d, jof(831):jof(1030) + 1]; seg = seg[~np.isnan(seg)]
-            if not len(seg): continue
-            mx, mn = seg.max() / op - 1, seg.min() / op - 1
-            if max(mx, -mn) * 100 >= x: continue     # only days WITHOUT the breakout
-            side = 1 if mx > -mn else -1
-            r = day_trade(g, d, atr[d], x, entry, tgt, sides, need_break=False, side_override=side)
+        r = day_trade(g, d, atr[d], x, entry, tgt, sides)
         if r is None: continue
         r["date"] = ts[d]; out.append(r)
     return pd.DataFrame(out)
@@ -136,3 +122,44 @@ if __name__ == "__main__":
         print(q.sort_values("d", ascending=False).to_string(index=False, float_format=lambda v: f"{v:,.2f}"))
         print(f"   {sd}s: combinations with design avg > 0: {np.mean(q.d > 0):.0%}; of those, holdout avg > 0: {np.mean(q[q.d > 0].h > 0):.0%}")
     pickle.dump(dict(G=G, T=T), open(SP + "open_pullback.pkl", "wb"))
+
+    print("\n2. The best region (longs, 0.50% breakout, limit at the open = entry B) vs controls:")
+    from bridge_monday_confirm import load_bridge_mc
+    atr = g.daily_atr(15); ts = pd.DatetimeIndex(g.ts)
+    for tgt in (1.5, 2.0, 3.0, "ext"):
+        print(line(T[(1, 0.50, "B", tgt)], f"long 0.50% B target {tgt}"))
+    best = T[(1, 0.50, "B", 2.0)]
+    print(line(T[(1, 0.15, "B", 2.0)], "control: the same rule after only a 0.15% breakout"))
+    # mirrored placebo: short at the same fills, same stop / target distances
+    pl = []
+    for r in best.itertuples():
+        d = int(r.day); e = r.entry; risk = r.risk; stop, tp = e + risk, e - 2 * risk
+        O, H, L, C = g.o[d], g.h[d], g.l[d], g.c[d]; px = None
+        for j in range(int(r.j0), jof(1455) + 1):
+            if np.isnan(H[j]): continue
+            if H[j] >= stop: px = (max(O[j], stop) if j > r.j0 else stop) + TICK; break
+            if L[j] <= tp: px = min(O[j], tp) if j > r.j0 else tp; break
+        if px is None:
+            cc = C[int(r.j0):jof(1455) + 1]; px = cc[~np.isnan(cc)][-1] + TICK
+        pl.append(dict(date=r.date, side=-1, net=(e - px) * PV - COST))
+    print(line(pd.DataFrame(pl), "placebo: SHORT at the same fills, mirrored 2R"))
+    days = pd.DatetimeIndex(g.ts[g.trading]); days = days[days.year >= 2018]
+    long_all = []
+    for d in g.trading:
+        if ts[d].year < 2018: continue
+        o, c = g.o[d, jof(831)], g.c[d, jof(1455)]
+        if not (np.isnan(o) or np.isnan(c)): long_all.append(dict(date=ts[d], side=1, net=(c - o - 2 * TICK) * PV - COST))
+    print(line(pd.DataFrame(long_all), "control: long every day 8:30 open -> 14:55"))
+    dl = lambda t: t.groupby(t.date).net.sum().reindex(days, fill_value=0.0)
+    print("\n3. Standard metrics per NQ (long 0.50% B 2R):")
+    print(M.table({"long 0.50 B 2R": (dl(best), best.net)}))
+    bt, pm = R.report({"2023+": dl(best)[dl(best).index >= "2023-01-01"]}, n=3000); print(bt); print(pm)
+    print("\n4. Funded bench (8-strategy plan; + this at RiskPerTrade, stop = 0.20 ATR):")
+    lab = pickle.load(open(SP + "lab.pkl", "rb")); lab.add("MON_BR_MC", load_bridge_mc(g), slippage=False)
+    lab.add("OPB", best, stop_pts=0.20 * atr, slippage=False)
+    plan = {"VB": 3, "ONB_ML2_MC": ("risk", 400), "MON_MC": 1, "EOS": ("risk", 700), "LDF_MC": 2, "NFP_MC": ("risk", 500),
+            "VCS_MC": 1, "MON_BR_MC": 1}
+    CS = dict(fmin=0.5, fmax=1.0, ref=1500.0)
+    for nm, p in (("current plan", plan), ("+ open pullback $200", {**plan, "OPB": ("risk", 200)}), ("+ open pullback $400", {**plan, "OPB": ("risk", 400)})):
+        a, c = lab.score(p, 250, **CS), lab.score(p, 500, **CS)
+        print(f"   {nm:<26} 1y ${a['expected']:,.0f} 2y ${c['expected']:,.0f} blown {a['blown']:.0%} / {c['blown']:.0%}")
