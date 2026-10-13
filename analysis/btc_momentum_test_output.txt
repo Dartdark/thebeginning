@@ -1,0 +1,29 @@
+BTC Momentum ("September Winner", user's MultiCharts file, 2026-10-13) and Bitcoin forced flows, on CME
+trading days 2013, 2018-12-17 .. 2026-10-12; per 1 BTC (= 10 MBT) after costs
+share of 8:00-15:00 minutes with a trade: 83% (missing minutes = no trades; prices carried forward)
+
+1. The strategy (shorts only, hold to 15:00, no stop):
+as coded (7:55 -> 8:25 window)                       n= 993 win 46% avg $    47 PF 1.14 t= 1.3 yrs+ 5/8 | 23+ $    90 PF 1.21
+as documented (8:00 -> 8:30)                         n= 947 win 47% avg $    34 PF 1.10 t= 0.9 yrs+ 4/8 | 23+ $    66 PF 1.16
+   as coded by year: {2019: -4125, 2020: -8935, 2021: 9520, 2022: 3875, 2023: -2115, 2024: 21030, 2025: 25885, 2026: 1345}
+   as coded by month (avg): {1: 20, 2: -3, 3: 111, 4: 29, 5: 165, 6: 4, 7: -46, 8: -21, 9: 25, 10: -52, 11: 38, 12: 355}
+   as documented by year: {2019: -1560, 2020: -6795, 2021: -330, 2022: 9675, 2023: -440, 2024: 3995, 2025: 24385, 2026: 3015}
+   as documented by month (avg): {1: -36, 2: -46, 3: 199, 4: 21, 5: 137, 6: 63, 7: -87, 8: -133, 9: -39, 10: 116, 11: 55, 12: 226}
+longs only (morning up -> long)                      n= 981 win 45% avg $   -43 PF 0.89 t=-1.2 yrs+ 1/8 | 23+ $   -32 PF 0.94
+both sides                                           n=1928 win 46% avg $    -5 PF 0.99 t=-0.2 yrs+ 3/8 | 23+ $    17 PF 1.04
+shorts, stop 1%                                      n= 947 win 37% avg $    46 PF 1.18 t= 1.7 yrs+ 5/8 | 23+ $    85 PF 1.24
+shorts, stop 2%                                      n= 947 win 45% avg $    53 PF 1.18 t= 1.7 yrs+ 5/8 | 23+ $    61 PF 1.15
+shorts, stop 3%                                      n= 947 win 46% avg $    47 PF 1.15 t= 1.4 yrs+ 6/8 | 23+ $    64 PF 1.15
+shorts, exit 1000                                    n= 947 win 43% avg $   -13 PF 0.94 t=-0.6 yrs+ 2/8 | 23+ $   -12 PF 0.96
+shorts, exit 1200                                    n= 947 win 44% avg $     9 PF 1.03 t= 0.3 yrs+ 4/8 | 23+ $    20 PF 1.05
+shorts, exit 1400                                    n= 947 win 46% avg $    37 PF 1.12 t= 1.0 yrs+ 5/8 | 23+ $    61 PF 1.15
+   placebo (same days, random side, 20 runs): $-42 (-125..21) vs $34
+control: short EVERY day 8:31 -> 15:00               n=1990 win 45% avg $     4 PF 1.01 t= 0.2 yrs+ 4/8 | 23+ $    17 PF 1.04
+
+2. Forced flow (a): last hour, follow the day's move (|0:00 -> 14:00| >= 1%), 14:01 -> 15:00:
+before spot ETFs (2019 - 10 Jan 2024)                n= 349 win 35% avg $   -25 PF 0.72 t=-1.7 yrs+ 1/6 | 23+ $   -22 PF 0.68
+with spot ETFs (11 Jan 2024 on)                      n= 208 win 40% avg $   -75 PF 0.62 t=-2.6 yrs+ 0/3 | 23+ $   -75 PF 0.62
+
+3. Forced flow (b): CME monthly settlement (last Friday, BRR at 16:00 London ~ 10:00 CT):
+   expiry Fridays  n= 95: 9:00->10:00 mean +0.052% |abs| 0.849%; 10:00->11:00 mean +0.095%; reversal corr -0.04
+   other Fridays   n=288: 9:00->10:00 mean -0.066% |abs| 0.693%; 10:00->11:00 mean +0.047%; reversal corr +0.23

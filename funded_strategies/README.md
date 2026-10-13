@@ -778,6 +778,25 @@ day. Per NQ after $7.25 + 1 tick per fill.
   (2) after an early close InRTH stays true, so stop orders can be placed overnight before the next
   open, relative to the previous day's open — reset InRTH at the date change.
 
+## Bitcoin (2026-10-13): BTC Momentum file and Bitcoin forced flows — nothing tradeable yet
+
+Data: CME Bitcoin futures 1-minute bars uploaded by the user (`BTC_1min_2018..2026.csv` in the repo root,
+Dec 2018 – Oct 2026, CT; 83% of 8:00–15:00 minutes trade, prices carried forward). Code
+`../analysis/btc_momentum_test.py` (output in `..._output.txt`). Costs per MBT $2.50 a round trip + 1 tick
+($0.50) per fill; results per 1 BTC (= 10 MBT).
+- **BTC Momentum ("September Winner")**, short if the morning window is down, hold to 15:00, no stop:
+  as coded (the 5-minute bar stamped 8:00 opens at 7:55, so the window is 7:55→8:25) 993 trades, $47
+  per BTC (= $4.70 per MBT), PF 1.14, t 1.3, 5/8 years; as documented (8:00→8:30) $34, t 0.9. All the
+  profit is 2024–25. Random-side placebo −$42; shorting every day $4; longs after an up morning lose
+  (t −1.2); 1–2% stops t 1.7; earlier exits lose. No September effect (September average $25 as coded,
+  −$39 as documented). **D.**
+- **Spot-ETF close** (creations / redemptions against a ~15:00 CT benchmark since 11 Jan 2024): following
+  a ≥ 1% day into 15:00 loses (t −2.6 since the ETFs, −1.7 before); fading it is ≈ $0 after costs. **F.**
+- **CME monthly settlement** (CF Bitcoin Reference Rate, last Friday ~10:00 CT): 9:00–10:00 is ~20% more
+  volatile on expiry Fridays (0.85% vs 0.69%), no direction, no reversal after. **F.**
+- For Apex: even the best version makes ~$5 per MBT per trade; a 3% Bitcoin day is ~$250 per MBT, so
+  sizes that matter would dominate the drawdown. Not a candidate.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
