@@ -1029,6 +1029,37 @@ after $7.25 + 1 tick per market / stop fill.
 - **Verdict: D.** Positive only since 2021, no directional information beyond the drift, and the ADX gate is
   close to a random filter. Not adopted.
 
+## The Bridge's Overnight Bias ORB vs ours (2026-10-13): same idea, ours is better
+
+Code `../analysis/bridge_onb_orb_test.py` (output in `..._output.txt`). It's a Python replica of the pasted
+`OFB_OvernightBiasORB_Signal` on 15-minute bars, with fills on 1-minute bars and Central-time inputs (8:30 /
+8:45 / 12:00 / 14:30 / 15:00). Ours = the MultiCharts trade lists. Per NQ after $7.25 + 1 tick per market /
+stop fill.
+- **What's different:** the Bridge's version enters on a 15-min close beyond the opening range (market next
+  bar), not a stop order at the level. It allows up to 4 trades a day and uses ADX(16) ≥ 20. It skips
+  breakout bars over 2.5× the 20-bar average range, and days whose opening range is over 2× its 20-day EMA.
+  The stop is 0.30 × the regular-session ATR, measured from the signal close. Last entry 12:00, flat after
+  14:30, overnight range from 23:45.
+- **Results:** Bridge 779 trades, 52% win, $313, PF 1.52, t 4.4, 9/9 years (2018–22 $241, 2023–26 $402).
+  Longs $308 (t 3.5), shorts $320 (t 2.7). Random-side placebo $56. Ours: **ONB ADX30** 676 trades, $372,
+  PF 1.66, t 4.9, 9/9 years; **ONB ML v2** 343, $636, PF 2.12, t 5.0. Exits: the Bridge's target is hit only
+  6% of the time (stop 37%, time 58%).
+- **Standard metrics, 2018–26:** Bridge Sharpe 1.47, Sortino 2.79, Calmar 1.64, Ulcer 3.1, max DD $16,611.
+  ONB ADX30 1.60 / 3.31 / 2.06 / 3.0 / $13,614. ONB ML v2 1.63 / 3.48 / 1.56 / 3.1 / $15,627. On the 2023+
+  holdout all three are close (Sharpe 1.60 / 1.54 / 1.55). Bridge shorts 2023+ Sharpe 0.76 (P ≤ 0 6%).
+  Daily correlation with ours 0.70 (ADX30) and 0.53 (ML v2).
+- **Each difference undone:** our ADX gate (ADX(14) > 30) on the Bridge's mechanics gives $364, PF 1.66, the
+  same as ours, so the ADX threshold is most of the gap. One trade a day: $288, so re-entries help them a
+  little (second trades average $557). Without the OR-size band: $283. Without the bar-range skip: $331.
+  Our ATR or stop anchor: no change. Last entry 14:00: $280. Stop 0.25: $252.
+- **Their OR-size band on our trades:** it skips only 20 ADX30 trades ($18 average) and 5 ML trades. Combine
+  pass 46.5% vs 46.9%; funded $9,098 / $12,143 vs $9,313 / $12,436. No gain.
+- **Funded** (Overnight Bias ML $400 swapped): Bridge $400 $6,860 / $8,833, blown 31%; $300 $7,712 / $10,491,
+  blown 13%; added at $200 next to ML $9,295 / $11,378, blown 11%. **Combine** (VB 8 MNQ + $1,100 risk):
+  Bridge pass 38.9% vs our ADX30 46.9% (2023–26 44.0% vs 51.1%).
+- **Verdict: B, not adopted.** A real edge, but a weaker version of the strategy we already run. Keep ONB
+  ADX30 for the combine and ONB ML v2 for funded.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

@@ -1,0 +1,97 @@
+The Bridge's OFB_OvernightBiasORB_Signal vs our Overnight Bias (ADX30 combine / ML v2 funded), 2026-10-13.
+
+1. As written vs ours (per NQ, 1 contract):
+Bridge ORB (Python replica)                    n= 779 win 52% avg $  313 PF 1.52 t= 4.4 yrs+ 9/9 | 18-22 $ 241 PF 1.50 | 23-26 $ 402 PF 1.54 | L $ 308 S $ 320
+ours: ONB ADX30 (MC, combine)                  n= 676 win 51% avg $  372 PF 1.66 t= 4.9 yrs+ 9/9 | 18-22 $ 342 PF 1.77 | 23-26 $ 406 PF 1.57 | L $ 337 S $ 412
+ours: ONB ML v2 (MC, funded)                   n= 343 win 56% avg $  636 PF 2.12 t= 5.0 yrs+ 8/9 | 18-22 $ 574 PF 2.39 | 23-26 $ 715 PF 1.93 | L $ 630 S $ 641
+   Bridge exits: stop 37%, target 6%, time 58%; trades a day when it trades 1.10; second+ trades of a day $557 (n 74)
+   Bridge by year: {2018: 5087, 2019: 8073, 2020: 24411, 2021: 21337, 2022: 44468, 2023: 17486, 2024: 59563, 2025: 6335, 2026: 57377}
+   ONB ADX30 by year: {2018: 7408, 2019: 3605, 2020: 13708, 2021: 38532, 2022: 60895, 2023: 12826, 2024: 68940, 2025: 19494, 2026: 25970}
+   ONB ML v2 by year: {2018: -3303, 2019: 12953, 2020: 17063, 2021: 30020, 2022: 53570, 2023: 13904, 2024: 39594, 2025: 18619, 2026: 35773}
+  Bridge longs                                 n= 432 win 56% avg $  308 PF 1.56 t= 3.5 yrs+ 8/9 | 18-22 $ 179 PF 1.42 | 23-26 $ 450 PF 1.66 | L $ 308 S $ nan
+  Bridge shorts                                n= 347 win 47% avg $  320 PF 1.48 t= 2.7 yrs+ 9/9 | 18-22 $ 311 PF 1.57 | 23-26 $ 334 PF 1.40 | L $ nan S $ 320
+  ADX30 longs                                  n= 360 win 55% avg $  337 PF 1.67 t= 3.5 yrs+ 9/9 | 18-22 $ 290 PF 1.81 | 23-26 $ 386 PF 1.59 | L $ 337 S $ nan
+  ADX30 shorts                                 n= 316 win 47% avg $  412 PF 1.64 t= 3.4 yrs+ 7/9 | 18-22 $ 396 PF 1.75 | 23-26 $ 432 PF 1.55 | L $ nan S $ 412
+   placebo (same signal bars, random side, 10 runs): $56 (-71..224) vs $313
+
+2. Each Bridge difference undone on its own (toward ours):
+1 trade a day                                  n= 705 win 51% avg $  288 PF 1.48 t= 3.9 yrs+ 9/9 | 18-22 $ 245 PF 1.51 | 23-26 $ 342 PF 1.45 | L $ 280 S $ 299
+ADX(14) > 30 (our combine gate)                n= 576 win 55% avg $  364 PF 1.66 t= 4.5 yrs+ 8/9 | 18-22 $ 303 PF 1.69 | 23-26 $ 439 PF 1.64 | L $ 342 S $ 389
+ADX(14) >= 20                                  n= 820 win 51% avg $  318 PF 1.54 t= 4.6 yrs+ 9/9 | 18-22 $ 245 PF 1.51 | 23-26 $ 408 PF 1.56 | L $ 303 S $ 337
+no bar-range skip                              n= 813 win 51% avg $  331 PF 1.54 t= 4.7 yrs+ 9/9 | 18-22 $ 265 PF 1.54 | 23-26 $ 415 PF 1.55 | L $ 287 S $ 385
+no OR-size band                                n= 806 win 51% avg $  283 PF 1.46 t= 4.1 yrs+ 9/9 | 18-22 $ 221 PF 1.46 | 23-26 $ 356 PF 1.47 | L $ 287 S $ 277
+24-hour daily ATR (ours)                       n= 762 win 53% avg $  327 PF 1.53 t= 4.4 yrs+ 9/9 | 18-22 $ 237 PF 1.48 | 23-26 $ 440 PF 1.58 | L $ 322 S $ 334
+stop from the fill (ours)                      n= 778 win 52% avg $  316 PF 1.53 t= 4.4 yrs+ 9/9 | 18-22 $ 242 PF 1.50 | 23-26 $ 406 PF 1.55 | L $ 308 S $ 325
+last entry 14:00 (ours)                        n= 929 win 51% avg $  280 PF 1.49 t= 4.5 yrs+ 9/9 | 18-22 $ 199 PF 1.42 | 23-26 $ 380 PF 1.55 | L $ 262 S $ 300
+stop 0.25 ATR                                  n= 841 win 47% avg $  252 PF 1.44 t= 4.0 yrs+ 9/9 | 18-22 $ 181 PF 1.38 | 23-26 $ 338 PF 1.48 | L $ 251 S $ 253
+bias thirds 0.6667 / 0.3333                    n= 788 win 52% avg $  315 PF 1.53 t= 4.5 yrs+ 9/9 | 18-22 $ 244 PF 1.51 | 23-26 $ 402 PF 1.54 | L $ 311 S $ 321
+
+3. Standard metrics per NQ, 1 contract:
+               trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+Bridge ORB        779 52% $313 $27,198   1.47    2.79          1.52 $16,611   1.64  3.14      17.34
+Bridge longs      432 56% $308 $14,813   1.20    2.16          1.56 $14,195   1.04  4.32       6.86
+Bridge shorts     347 47% $320 $12,386   0.90    1.78          1.48 $14,814   0.84  3.91       6.33
+ONB ADX30 (MC)    676 51% $372 $28,005   1.60    3.31          1.66 $13,614   2.06  2.98      18.78
+ONB ML v2 (MC)    343 56% $636 $24,308   1.63    3.48          2.12 $15,627   1.56  3.05      15.93
+                                     actual        p5       p50       p95
+name                 metric                                              
+Bridge ORB 2023+     sharpe            1.60      0.95      1.63      2.30
+                     sortino           3.02      1.61      3.07      4.83
+                     pf_day            1.61      1.32      1.62      2.02
+                     calmar            2.19      0.78      2.03      4.23
+                     ulcer             5.28      2.54      5.06     12.46
+                     max_dd       16,611.05 11,389.26 18,024.90 30,761.48
+                     P(Sharpe<=0)       NaN       NaN      0.00       NaN
+Bridge longs 2023+   sharpe            1.53      0.77      1.57      2.28
+                     sortino           2.80      1.23      2.90      4.78
+                     pf_day            1.76      1.32      1.80      2.40
+                     calmar            2.68      0.61      1.86      4.13
+                     ulcer             3.92      2.19      4.53     10.84
+                     max_dd        8,921.45  7,911.98 12,830.05 22,569.46
+                     P(Sharpe<=0)       NaN       NaN      0.00       NaN
+Bridge shorts 2023+  sharpe            0.76     -0.06      0.77      1.50
+                     sortino           1.47     -0.10      1.49      3.56
+                     pf_day            1.44      0.97      1.44      2.15
+                     calmar            0.85     -0.03      0.63      2.16
+                     ulcer             7.36      3.93      9.88     29.76
+                     max_dd       14,813.70 11,023.46 19,948.52 38,933.95
+                     P(Sharpe<=0)       NaN       NaN      0.06       NaN
+ONB ADX30 (MC) 2023+ sharpe            1.54      0.95      1.60      2.28
+                     sortino           3.09      1.76      3.24      5.00
+                     pf_day            1.57      1.32      1.61      1.97
+                     calmar            2.42      0.83      2.13      4.32
+                     ulcer             3.27      2.55      4.79     11.14
+                     max_dd       13,613.50 10,430.41 16,021.50 26,616.86
+                     P(Sharpe<=0)       NaN       NaN      0.00       NaN
+ONB ML v2 (MC) 2023+ sharpe            1.55      0.88      1.61      2.32
+                     sortino           3.08      1.49      3.25      5.62
+                     pf_day            1.93      1.43      1.99      2.81
+                     calmar            1.79      0.65      1.85      4.22
+                     ulcer             3.73      2.15      4.78     11.77
+                     max_dd       15,626.75  8,704.00 15,626.75 26,881.57
+                     P(Sharpe<=0)       NaN       NaN      0.00       NaN
+                     actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+Bridge ORB 2023+       $16,611      25% $19,725 $31,433 $39,112        100%        100%        100%
+Bridge longs 2023+      $8,921       3% $13,695 $22,365 $26,944        100%        100%        100%
+Bridge shorts 2023+    $14,814      18% $18,760 $30,156 $35,869        100%        100%        100%
+ONB ADX30 (MC) 2023+   $13,614       9% $18,462 $29,597 $35,480        100%        100%        100%
+ONB ML v2 (MC) 2023+   $15,627      56% $14,884 $23,834 $29,182        100%        100%        100%
+   daily correlation Bridge vs ADX30 0.70, vs ML v2 0.53
+
+4. Funded bench (8-strategy plan; Overnight Bias ML $400 swapped or the Bridge added, risk-sized at 0.30 x RTH ATR):
+   current plan (ONB ML $400)       1y $9,313 2y $12,436 blown 3% / 1%
+   Bridge ORB $400 instead          1y $6,860 2y $8,833 blown 31% / 33%
+   Bridge ORB $300 instead          1y $7,712 2y $10,491 blown 13% / 16%
+   ONB ML $400 + Bridge ORB $200    1y $9,295 2y $11,378 blown 11% / 11%
+
+5. Combine (VB 8 MNQ + Overnight Bias at $1,100 risk, 21 trading days, every start day):
+   ONB ADX30 (MC)   pass 46.9% | 2023-26 51.1%
+   Bridge ORB       pass 38.9% | 2023-26 44.0%
+
+6. The Bridge's OR-size band (OR <= 2 x its 20-day EMA) applied to OUR trade lists:
+ONB ADX30 (MC) kept                            n= 656 win 52% avg $  383 PF 1.68 t= 5.0 yrs+ 9/9 | 18-22 $ 363 PF 1.83 | 23-26 $ 406 PF 1.58 | L $ 316 S $ 460 
+ONB ADX30 (MC) skipped                         n=  20 win 30% avg $   18 PF 1.02 t= 0.0 yrs+ 2/7 | 18-22 $-467 PF 0.28 | 23-26 $ 415 PF 1.45 | L $1371 S $-710
+   combine with ONB ADX30 band-filtered: pass 46.5% | 2023-26 51.1%
+ONB ML v2 (MC) kept                            n= 338 win 56% avg $  640 PF 2.12 t= 5.0 yrs+ 8/9 | 18-22 $ 576 PF 2.38 | 23-26 $ 722 PF 1.93 | L $ 630 S $ 649 
+ONB ML v2 (MC) skipped                         n=   5 win 60% avg $  371 PF 1.92 t= 0.5 yrs+ 2/3 | 18-22 $ 405 PF 2.92 | 23-26 $ 348 PF 1.66 | L $ nan S $ 371
+   funded with ONB ML v2 band-filtered $400: 1y $9,098 2y $12,143 blown 4% / 3%

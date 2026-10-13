@@ -89,6 +89,8 @@ VaultBreak v8 (the Bridge's, `analysis/vault_break_v8_test.py`): slightly worse 
 Sunday sessions); VWAP exit never fires; keep v1 (C).
 VWAP Pullback + ADX (C.S. profile, `analysis/vwap_pullback_adx_test.py`): t 2.2, 6/9 years, only since 2021, gate ≈ random;
 funded worse (D).
+The Bridge's Overnight Bias ORB (`analysis/bridge_onb_orb_test.py`): $313, PF 1.52 vs our ADX30 $372 / PF 1.66;
+combine 38.9% vs 46.9%; keep ours (B).
 Setup notes: restart MultiCharts after any DLL / data change ("OLD DLL" error); compile every OFB function
 ("unverified function" error); Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close
 conversion unchecked.
