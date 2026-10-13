@@ -42,6 +42,13 @@ Monday Long 1 MNQ (replaced Overnight Drift), Expiration Open Short RiskPerTrade
 2 MNQ** (added), with cushion sizing (f = cushion/$2,000 in 0.5-1). Expected payouts $7,676 (1y) /
 $12,012 (2y), blown 4-6%; portfolio Sharpe 2.51.
 
+## Speed to $13k (2026-10-13)
+New priority: reach all 6 payouts sooner. Current plan: median 306 trading days. Full size from a
+$1,500 cushion (f = cushion/$1,500, 0.5-1): 289. Adding NFP Fade ($500) + Vol-Control Sell Flow (1 MNQ,
+MultiCharts code written, `funded_strategies/NQ_NFP_Fade.txt`, `NQ_Vol_Control_Sell.txt`, awaiting
+backtests): 278. Biggest lever: 2-3 PAs in parallel ($13k in total after ~225 / ~200 days).
+Details: `funded_strategies/FUNDED_PLAN.md` (speed section).
+
 ## Funded build status (2026-10-11)
 Instruments are open: NQ, ES, GC, CL, anything with an edge. Test bench:
 `analysis/funded_lab.py`; candidates `analysis/funded_candidates.py`; results in

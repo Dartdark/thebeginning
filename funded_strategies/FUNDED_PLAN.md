@@ -70,6 +70,63 @@ with 5 qualifying days ($250+) and the 50% consistency rule met.
 1 MNQ: +$456 in year 1 (90% interval $123–826), +$10 in year 2, blown 4% / 3%. Needs MultiCharts
 versions first; details in `README.md` (combined add-on section).
 
+## Speed to the full $13,000 (2026-10-13): new priority
+
+Goal: collect all 6 payouts ($13,000) of a PA sooner. Code `../analysis/speed_to_13k.py` and
+`../analysis/speed_to_13k_followup.py` (outputs in the matching `_output.txt`). Every start day from
+2018 to late 2023, 3-year horizon, the funded-bench simulator. "Median" = median trading days to the
+6th payout over all accounts (blown ones count as never); 21 trading days = 1 month.
+
+**Why it takes about 14 months now:** six payouts need $13,000 out plus the $2,100 buffer, at least 30
+qualifying days ($250+) and the 50% consistency rule each cycle. At full size the plan makes about
+$16,000 a year, so roughly a year is the floor at this size. Faster means more dollars a day (bigger
+size or more edge) or more accounts.
+
+| Setup (one account) | Median days to $13k | All 6 within 1 year | Within 2 years | Blown (3 years) | Max MNQ |
+|---|---|---|---|---|---|
+| **Current plan** (full size at $2,000 cushion) | 306 (≈14.5 months) | 21% | 89% | 1% | 21 |
+| Full size from a **$1,500** cushion (available now) | 289 | 31% | 90% | 4% | 21 |
+| + NFP Fade $500 + Vol-Control Sell 1 MNQ | 287 | 27% | 88% | 0% | 21 |
+| **+ NFP + VCS, full size from $1,500** | **278 (≈13 months)** | **36%** | 89% | 1% | 21 |
+| + NFP + VCS + Headline Shock 1, ramp, $1,500 | 270 | 42% | 87% | 2% | 37 |
+| Size ramp after payouts (×1.25 after 2, ×1.5 after 3–4, ×1.75 after 5) | 295 | 25% | 88% | 1% | 37 |
+| Whole plan × 1.25 | 293 | 28% | 86% | 10% | 26 |
+| Whole plan × 1.5 | 267 | 41% | 80% | 20% | — |
+| Whole plan × 2 | 320 | 41% | 51% | 49% | — |
+
+- **Bigger size is a bad trade.** × 1.5 saves about 6 weeks but blows 1 account in 5; × 2 is slower
+  overall because half the accounts blow up.
+- **The size ramp barely helps** (−11 days) and pushes rare days to 37 MNQ, above Apex's contract
+  tiers; not recommended.
+- **Full size from a $1,500 cushion** is the one change you can make today: f = cushion / $1,500,
+  kept between 0.5 and 1 (cushion $1,500 or more: full size; $1,125: 0.75; $750 or less: 0.5).
+  −17 days, all-6-within-a-year 21% → 31%, blown 1% → 4%.
+- With NFP Fade and Vol-Control Sell Flow (after MultiCharts confirms them): **278 days, 36% within a
+  year, blown 1%**.
+
+**The biggest lever: several accounts with the same trades.** Median trading days until one
+account's cumulative payouts reach each amount (25-day steps):
+
+| Plan | $3,000 (2 payouts) | $5,000 (3) | $7,500 (4) | $10,000 (5) | $13,000 (6) |
+|---|---|---|---|---|---|
+| Current plan | 150 | 200 | 225 | 275 | 325 |
+| + NFP + VCS, full size from $1,500 | 150 | 175 | 200–225 | 250 | 275–300 |
+
+$13,000 in total arrives after about **325 days with 1 account, about 225 with 2 accounts** ($7,500
+each), **about 200 with 3** ($5,000 each) and **about 150 with 5** ($3,000 each). Each extra account
+costs a challenge (about $117 per funded account at a 44% pass rate) plus Apex's account fees, and
+every account still goes on to its own $13,000. The catch: identical trades mean the accounts win
+and lose together (a bad stretch can blow several at once; at these sizes 1–4% of accounts blow).
+Check Apex's current limit on simultaneous PA accounts and its rules on copying trades between
+your own accounts before doing this.
+
+**Recommended for speed:** (1) now: full size from a $1,500 cushion; (2) run 2–3 PAs in parallel as
+soon as they are funded; (3) add NFP Fade ($500) and Vol-Control Sell Flow (1 MNQ) once the
+MultiCharts backtests match (`NQ_NFP_Fade.txt`, `NQ_Vol_Control_Sell.txt`).
+
+Caveats: the $1,500 setting and the add-ons were chosen on the same 2018–2026 history; the add-ons
+are Python-only so far.
+
 ### Before Late-Day Flow (2026-10-12): Monday Long replaced Overnight Drift
 
 Four MultiCharts-confirmed strategies, sized to the drawdown cushion. Code and numbers:
