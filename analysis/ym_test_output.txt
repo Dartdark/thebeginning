@@ -1,0 +1,42 @@
+YM (Dow futures) vs NQ (user's export, 2026-10-13): correlation, and the plan's strategies on YM.
+
+1. Correlation, 1226 common sessions 2022-01-03 .. 2026-10-09
+   daily close-to-close: {2022: 0.89, 2023: 0.7, 2024: 0.65, 2025: 0.84, 2026: 0.62} all 0.79
+   regular session 8:30 -> 15:00: {2022: 0.89, 2023: 0.73, 2024: 0.57, 2025: 0.87, 2026: 0.56} all 0.79
+   30-minute returns 9:00-15:00: 0.83
+   on big NQ days (|8:30->15:00| > 1.5%, n 191): correlation 0.91; YM same direction 94%; YM move / NQ move 0.50
+   all days: opposite direction 27%; regular-session volatility YM / NQ 0.66
+   down days NQ < -1%: YM down too 90%, YM fell less 93%
+
+2. The plan's strategies 2022-2026 (YM / NQ daily range ratio 1.53, used to scale point targets / stops)
+Vault Break NQ                 n=1107 win 68% avg $    90 PF 1.23 t= 3.1 yrs+ 5/5 | L $   90 S $  nan
+Vault Break YM                 n=1102 win 63% avg $     2 PF 1.01 t= 0.2 yrs+ 3/5 | L $    2 S $  nan
+                                  daily P&L correlation NQ vs YM (days both trade): 0.52
+ONB ADX30 NQ                   n= 392 win 53% avg $   490 PF 1.71 t= 4.1 yrs+ 5/5 | L $  449 S $  534
+ONB ADX30 YM                   n= 407 win 38% avg $   -30 PF 0.92 t=-0.7 yrs+ 2/5 | L $  -26 S $  -36
+                                  daily P&L correlation NQ vs YM (days both trade): 0.45
+EOS NQ                         n=  57 win 60% avg $   741 PF 2.16 t= 2.4 yrs+ 5/5 | L $  nan S $  741
+EOS YM                         n=  56 win 55% avg $    39 PF 1.14 t= 0.4 yrs+ 3/5 | L $  nan S $   39
+                                  daily P&L correlation NQ vs YM (days both trade): 0.52
+Monday Long NQ                 n= 245 win 57% avg $   599 PF 1.62 t= 2.9 yrs+ 4/5 | L $  599 S $  nan
+Monday Long YM                 n= 242 win 53% avg $    44 PF 1.10 t= 0.6 yrs+ 3/5 | L $   44 S $  nan
+                                  daily P&L correlation NQ vs YM (days both trade): 0.47
+NFP Fade NQ                    n=  45 win 60% avg $   543 PF 2.18 t= 2.0 yrs+ 5/5 | L $  473 S $  603
+NFP Fade YM                    n=  39 win 44% avg $   -82 PF 0.77 t=-0.6 yrs+ 1/5 | L $ -177 S $  -28
+                                  daily P&L correlation NQ vs YM (days both trade): 0.75
+Late-Day Flow NQ               n= 506 win 59% avg $   141 PF 1.55 t= 3.3 yrs+ 5/5 | L $  130 S $  153
+Late-Day Flow YM               n= 465 win 48% avg $    12 PF 1.10 t= 0.7 yrs+ 3/5 | L $   17 S $    6
+                                  daily P&L correlation NQ vs YM (days both trade): 0.85
+Bridge Monday NQ               n= 117 win 69% avg $   539 PF 1.75 t= 2.6 yrs+ 5/5 | L $  539 S $  nan
+Bridge Monday YM               n= 109 win 68% avg $    96 PF 1.27 t= 1.0 yrs+ 3/5 | L $   96 S $  nan
+                                  daily P&L correlation NQ vs YM (days both trade): 0.33
+
+   Standard metrics per contract (YM), 2022-2026:
+                 trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+Vault Break YM     1102 63%   $2    $415   0.07    0.10          1.01 $13,842   0.03  8.21       0.10
+ONB ADX30 YM        407 38% $-30 $-2,545  -0.32   -0.54          0.92 $29,159  -0.09 19.40      -0.26
+EOS YM               56 55%  $39    $450   0.18    0.28          1.14  $4,360   0.10  3.43       0.26
+Monday Long YM      242 53%  $44  $2,026   0.25    0.38          1.10  $9,545   0.21  6.94       0.58
+NFP Fade YM          39 44% $-82   $-655  -0.28   -0.38          0.77  $7,076  -0.09  8.17      -0.16
+Late-Day Flow YM    465 48%  $12  $1,132   0.31    0.50          1.10  $6,620   0.17  6.44       0.35
+Bridge Monday YM    109 68%  $96  $2,154   0.47    0.60          1.27  $6,891   0.31  4.93       0.87
