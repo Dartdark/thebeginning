@@ -69,6 +69,8 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Wednesday overnight long (prev 15:00 → 8:30) | Calendar | t 2.5, 8/9 years, but 1 of 20 weekday-window tests and overlaps Overnight Drift |
 | VIX regime size tilt | Filter | VB +30% per trade in "short vol"; OND better in stress; Funded/pass changes within noise; tilt with cushion sizing untested |
 | RSI(2) dip-buying held overnight (from the QQQ RSI + EMA + VWAP article, RSI part only; Apex-legal re-entry at midnight) | Strategy | 94 trades, $1,828, PF 1.97, t 2.2, beats 96% of random-day placebos; Sharpe 0.51, $37k max DD per NQ without a stop, 2025 = 47% of the profit; funded + 1 MNQ $7,134 / $11,898 (worse) |
+| Multi-timeframe trend filter on the plan's strategies (daily SMA 20/50/200, 60-min EMA) | Filter | 28 strategy × measure tests on the MultiCharts lists: 1 with t ≥ 2 (ONB ML with the 20-day SMA, $906 vs $388, 8/9 years), about what chance gives; filtering all strategies cuts funded payouts to $3,126–6,470 (from $8,770); ONB-only SMA20 $7,915 / $11,826 |
+| Timeframe ensemble: Vault Break on 15 + 30 + 60-min bars, 1 MNQ each, vs 30-min × 3 | Sizing / diversification | Daily correlation 0.77–0.84; Sharpe 1.16 vs 1.20; funded $7,350 / $11,749 vs $8,471 / $12,203 (1-MNQ legs also round to 0 under cushion sizing) |
 | Release fade (8:00–8:30 CT after 7:30 data) | Strategy | +$63, t = 2.9, 485 days; Found after ~24 variants; loses with a stop in the funded bench |
 | Last-30-minute momentum (Baltussen et al. 2021) | Paper / strategy | Regression t 1.0 NQ vs 7.3 in the paper; ~$0 per trade since 2018 |
 | Gamma last-30 trade (follow after GEX<0, fade high GEX) | Strategy | t = 1.4; funded $3,835–5,006 |

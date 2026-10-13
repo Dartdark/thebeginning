@@ -649,6 +649,38 @@ target 65 points intrabar; flat 15:55 CT (Apex). Per NQ after $7.25 + 1 tick per
   edge is about $7 a trade.
 - **F.** The only positive variant is the best of 12, with t 1.3 and 5/9 years: noise.
 
+## Multiple timeframes (2026-10-13, user idea): no improvement
+
+Code `../analysis/multi_timeframe_test.py` (output in `..._output.txt`). Two meanings tested on the
+plan's own strategies.
+
+**A. Higher-timeframe trend filter** (keep a trade only if it agrees with the slower trend: previous
+close vs its 20 / 50 / 200-day SMA, or the last 60-minute close vs its 60-minute EMA(20)), on the
+MultiCharts lists of all 7 plan strategies:
+- 28 strategy × measure comparisons, 1 with t ≥ 2: Overnight Bias ML with the 20-day SMA (agree $906 vs
+  disagree $388, 8/9 years); expected by chance from 28 tries. Several go the other way (Vault Break and
+  Late-Day Flow do better *against* the 200-day trend; Expiration Open Short better against the 20-day).
+- Funded bench (current plan $8,770 / $12,236): filtering every strategy by SMA20 / SMA50 / SMA200 / H60
+  gives $4,105 / $3,807 / $3,126 / $6,470 in year 1; filtering only ONB ML by SMA20 $7,915 / $11,826.
+  The plan's edges come from flows that don't care about the trend; a trend filter just throws away
+  good trades.
+
+**B. Timeframe ensemble** (Vault Break on 15-, 30- and 60-minute bars at 1 MNQ each vs 30-minute at 3 MNQ;
+Python version, which matches the MultiCharts 30-minute list within $10 a trade):
+
+| Per NQ, 2018–26 | Trades | Avg | PF | t | Years + |
+|---|---|---|---|---|---|
+| 15-min | 1,877 | $64 | 1.17 | 3.1 | 8/9 |
+| 30-min (the plan) | 1,742 | $82 | 1.23 | 3.8 | 9/9 |
+| 60-min | 1,611 | $73 | 1.21 | 3.4 | 8/9 |
+
+- The three are 0.77–0.84 correlated day to day, so the mix diversifies little: Sharpe 1.16 vs 1.20 for
+  30-min alone, Calmar 1.11 vs 1.14.
+- Funded bench: $7,350 / $11,749 vs $8,471 / $12,203 (also because 1-MNQ legs round to zero when the
+  cushion factor drops below 1).
+- Useful as a robustness check: Vault Break works on every bar size (t 3.1–3.8), so 30 minutes is not a
+  lucky setting. **Verdict: keep single timeframes; D for both ideas.**
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
