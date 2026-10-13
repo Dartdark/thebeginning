@@ -50,6 +50,10 @@ Monday Long 1 MNQ (replaced Overnight Drift), Expiration Open Short RiskPerTrade
 2 MNQ** (added), with cushion sizing (f = cushion/$2,000 in 0.5-1). Expected payouts $7,676 (1y) /
 $12,012 (2y), blown 4-6%; portfolio Sharpe 2.51.
 
+## Apex rules confirmed (2026-10-13)
+The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily
+loss limit, contract tiers, payout rules). Each challenge account costs $50.
+
 ## Speed to $13k (2026-10-13)
 New priority: reach all 6 payouts sooner. Current plan: median 306 trading days. Full size from a
 $1,500 cushion (f = cushion/$1,500, 0.5-1): 289. Adding NFP Fade ($500) + Vol-Control Sell Flow (1 MNQ,

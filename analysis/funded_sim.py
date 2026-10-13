@@ -13,7 +13,7 @@ Rules (Apex EOD Performance Account payouts page, 50K, as supplied):
   - a payout is at least $500 and at most the cap for its number, and it
     cannot take the balance below the safety net ($52,100)
 Rules assumed from Apex's help center as quoted by third-party guides (the
-help center itself is not reachable from here; check them):
+help center itself is not reachable from here; confirmed by the user on 2026-10-13):
   - $2,000 drawdown trailing the end-of-day balance, locking at $50,100
     (start + $100, reached when the balance closes at $52,100); open equity
     at or below the threshold closes the account

@@ -41,6 +41,8 @@ Ulcer 1.30, max drawdown $3,743 (unchanged), $16,939 a year. Bootstrap Sharpe 20
 - Vol-Control Sell Flow: data1 5-minute MNQ, data2 5-minute @ES, same session; load at least a year of
   history so the EWMA vols have converged (the January 2018 trades in the backtest are warm-up noise).
 
+**Apex rules** in `../analysis/funded_sim.py` confirmed by the user (2026-10-13). Each challenge costs $50.
+
 **Faster still:** run 2–3 PAs in parallel with the same trades ($13k in total after ~225 / ~200
 trading days instead of ~300; see the speed section below).
 
@@ -280,7 +282,7 @@ From the payout pages you sent (50K EOD):
   balance below the **$52,100 safety net**. Maximum 6 payouts, then the PA closes.
 
 From Apex's help center as quoted by third-party guides. The help center itself was
-not reachable from here, so **check these**:
+not reachable from here (**confirmed by the user on 2026-10-13**):
 - $2,000 drawdown trailing the end-of-day balance, locking at $50,100 once the balance
   closes at $52,100. Open equity touching it closes the PA.
 - Daily loss limit: $1,000 under $3,000 profit, $2,000 from $3,000, $3,000 from
