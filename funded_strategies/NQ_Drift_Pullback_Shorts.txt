@@ -1,0 +1,136 @@
+{ NQ Drift Pullback - SHORTS ONLY - MultiCharts PowerLanguage signal (2026-10-13)
+
+  Shorts-only version of DriftPullback v2.1 (Francesco Agnello, shared in The Bridge's Strategies Feedbacks
+  section), reduced to the settings that were tested: session-VWAP anchor (AnchorType 2), fixed-point exits
+  (ExitMode 0), 1 contract. The logic of the short side is unchanged.
+
+  Rules (Central time chart):
+    15-min signal bars (data2): session VWAP of (H+L+C)/3 x volume over the 15-min bars closing after 8:30 up
+    to 15:00, reset at midnight, frozen inside each 15-min bar. Drift = 15-min close vs 4 bars back, in %.
+    At each new 15-min bar: ARM SHORT if the 15-min close < VWAP, VWAP falling (vs the previous 15-min
+    boundary) and drift <= -0.10%; otherwise disarm. An arm expires after 6 five-minute bars and is used
+    up by an entry.
+    5-min execution bars (data1): armed and a GREEN 5-min bar (close > open) -> sell short next bar at
+    market, only on bars closing 9:30-14:25, at most 4 trades and 2 losing trades a day.
+    Stop 80 points (+2 ticks of extra slippage, as in the original), target 50 points; flat at the open of
+    the bar after 14:55 (FlatTime); SetExitOnClose on early-close days.
+
+  Python test (analysis/drift_pullback_test.py, 1-minute NQ, per NQ after $7.25 + 1 tick per market fill):
+  2,701 shorts 2018-2026 (~300 a year), 60% win, $53 a trade, PF 1.10, t 2.4, 8/9 years positive;
+  2018-2022 $84 (PF 1.18), 2023-2026 $20 (PF 1.04; 2023 lost $20,736 per NQ). Sharpe 0.75, Sortino 1.30,
+  Calmar 0.45, Ulcer 8.2, max drawdown $35,035 per NQ. 2023+ bootstrap Sharpe -0.49 to 1.06
+  (P(Sharpe <= 0) 28%). Random-side placebo for the shorts: -$27 a trade. Daily correlation with the funded
+  set -0.11 to 0.15.
+  Funded bench (8-strategy plan $9,313 / $12,436, blown 3% / 1%): + 1 MNQ shorts $9,453 / $12,492, blown
+  4% / 2%: within noise. NOT in the funded plan. This file is for the MultiCharts confirmation run; adopt
+  only if MC matches the Python test and a later re-check clears noise.
+
+  SETUP
+    Signal (strategy). Data1 = NQ 5 minute, Data2 = NQ 15 minute (Insert -> Series, same symbol).
+    CME 24-hour session (the drift uses the 15-min bars around the clock), Exchange time zone (Central).
+    Bar Magnifier on, 1 minute. Load a few days before the backtest start.
+    Backtest: @NQ, NumContracts 1, 2018 to now, same commission / slippage settings as the other reports.
+    Funded use (if ever adopted): MNQ chart, NumContracts 1.
+    On an EASTERN chart move all five session inputs one hour later (1030 / 1530 / 1555 / 930 / 1600). }
+
+Inputs:
+	DriftLen(4),
+	DriftThreshPct(0.10),
+	PullbackWindow(6),
+	ShortSLpts(80),           { stop, points [validated: 80] }
+	ShortTPpts(50),           { target, points [validated: 50] }
+	StopSlipTicks(2),         { extra adverse ticks on the stop only (as in the original) }
+	MaxTradesPerDay(4),
+	MaxLossesPerDay(2),
+	SessStart(930), SessEnd(1430), FlatTime(1455),
+	VwapStart(830), VwapEnd(1500),
+	NumContracts(1);
+
+Variables:
+	ma2(0), ma2prev(0), driftPct(0), anchorOK(false),
+	t2(-1), newBar2(false),
+	shortArmed(false), armedBars(0),
+	tradesToday(0), lossesToday(0), prevMP(0), tradeCount(0),
+	sPV(0), sVol(0), sVwap(0), sVwapLast(0), sVwapPrev(0),
+	slipPts(0);
+
+slipPts = StopSlipTicks * MinMove / PriceScale;
+
+{ ---------------- daily reset ---------------- }
+if Date <> Date[1] then begin
+	tradesToday = 0;
+	lossesToday = 0;
+	shortArmed = false;
+	armedBars = 0;
+	sPV = 0; sVol = 0; sVwap = 0; sVwapLast = 0; sVwapPrev = 0;
+end;
+
+{ ---------------- new 15-min bar ---------------- }
+newBar2 = false;
+if Time of data2 <> t2 then begin
+	newBar2 = true;
+	t2 = Time of data2;
+end;
+
+{ ---------------- session VWAP on the 15-min bars, frozen inside each bar ---------------- }
+if newBar2 then begin
+	sVwapPrev = sVwapLast;
+	if Time of data2 > VwapStart and Time of data2 <= VwapEnd then begin
+		sPV = sPV + ((High of data2 + Low of data2 + Close of data2) / 3) * Volume of data2;
+		sVol = sVol + Volume of data2;
+	end;
+	if sVol > 0 then sVwap = sPV / sVol;
+	sVwapLast = sVwap;
+end;
+
+ma2 = sVwapLast;
+if sVwapPrev > 0 then ma2prev = sVwapPrev else ma2prev = ma2;
+anchorOK = ma2 > 0;
+
+{ ---------------- drift (15-min close vs DriftLen bars back) ---------------- }
+if Close[DriftLen] of data2 <> 0 then
+	driftPct = (Close of data2 - Close[DriftLen] of data2) / Close[DriftLen] of data2 * 100;
+
+{ ---------------- arming at each new 15-min bar ---------------- }
+if newBar2 then begin
+	if anchorOK and Close of data2 < ma2 and ma2 < ma2prev and driftPct <= -DriftThreshPct then begin
+		shortArmed = true;
+		armedBars = 0;
+	end
+	else
+		shortArmed = false;
+end;
+
+{ ---------------- arm expiry ---------------- }
+if shortArmed then begin
+	armedBars = armedBars + 1;
+	if armedBars > PullbackWindow then shortArmed = false;
+end;
+
+{ ---------------- daily loss and trade counters ---------------- }
+if TotalTrades > tradeCount then begin
+	if PositionProfit(1) < 0 then lossesToday = lossesToday + 1;
+	tradeCount = TotalTrades;
+end;
+if MarketPosition <> 0 and prevMP = 0 then tradesToday = tradesToday + 1;
+prevMP = MarketPosition;
+
+{ ---------------- entry: green 5-min bar while armed ---------------- }
+if MarketPosition = 0 and Time >= SessStart and Time < SessEnd
+	and tradesToday < MaxTradesPerDay and lossesToday < MaxLossesPerDay then begin
+	if shortArmed and Close > Open then begin
+		SellShort ("DriftPB.S") NumContracts contracts next bar at market;
+		shortArmed = false;
+	end;
+end;
+
+{ ---------------- exits ---------------- }
+if MarketPosition = -1 then begin
+	BuyToCover ("S.SL") next bar at EntryPrice + ShortSLpts + slipPts stop;
+	BuyToCover ("S.TP") next bar at EntryPrice - ShortTPpts limit;
+end;
+
+if MarketPosition <> 0 and Time >= FlatTime then
+	BuyToCover ("S.Flat") next bar at market;
+
+SetExitOnClose;
