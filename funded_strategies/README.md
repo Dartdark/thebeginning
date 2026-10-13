@@ -1230,32 +1230,30 @@ so ~8 with |t| ≥ 2 are expected by chance; 12 appeared, most with 3–12 trade
 
 ## YM (Dow futures) vs NQ (2026-10-13): less correlated, but the plan's edges don't carry over
 
-Code `../analysis/ym_test.py` (output in `..._output.txt`). Data: `../data/YM_1min_2022..2026.csv` (user export, full day,
-Central time). **2022–2026 only** (2018–21 not sent), so there's no 2018–22 design period. YM costs: $5 + 1 tick
-(1 point = $5) per fill.
-- **Correlation with NQ:** daily 0.79 (by year 0.62–0.89; 2024 0.65, 2026 0.62), regular session 0.79, 30-minute
-  returns 0.83. That's clearly lower than ES (0.93). YM moves in the opposite direction to NQ on 27% of days, and
-  its regular-session volatility is 0.66× NQ's. On big NQ days (|move| > 1.5%, 191 days) correlation is 0.91 and
-  YM goes the same way 94% of the time, but moves only half as far. On NQ down days below −1%, YM falls too 90% of
-  the time and falls less 93% of the time.
-- **The plan's strategies on YM, 2022–26, per contract** (point targets / stops scaled by the 1.53× daily-range ratio):
+Code `../analysis/ym_test.py` (output in `..._output.txt`). Data: `../data/YM_1min_2017..2026.csv` (user export, full day,
+Central time), 2,257 common sessions 2018-01-02 → 2026-10-09. YM costs: $5 + 1 tick (1 point = $5) per fill.
+- **Correlation with NQ:** daily 0.80 (by year 0.60–0.89: 2021 0.60, 2024 0.65, 2026 0.62), regular session 0.79,
+  30-minute returns 0.84. Clearly lower than ES (0.93). YM moves opposite to NQ on 27% of days; its regular-session
+  volatility is 0.74× NQ's. On big NQ days (|move| > 1.5%, 342 days) correlation is 0.89 and YM goes the same way
+  94% of the time, moving 0.57× as far. On NQ days below −1%, YM falls too 89% of the time and falls less 88% of
+  the time.
+- **The plan's strategies on YM, 2018–26, per contract** (point targets / stops scaled by the 1.72× daily-range ratio):
 
-| Strategy | NQ avg / PF / t | YM avg / PF / t | Daily P&L corr NQ vs YM |
-|---|---|---|---|
-| Vault Break | $90 / 1.23 / 3.1 | $2 / 1.01 / 0.2 | 0.52 |
-| Overnight Bias ADX30 | $490 / 1.71 / 4.1 | −$30 / 0.92 / −0.7 | 0.45 |
-| EOS | $741 / 2.16 / 2.4 | $39 / 1.14 / 0.4 | 0.52 |
-| Monday Long | $599 / 1.62 / 2.9 | $44 / 1.10 / 0.6 | 0.47 |
-| NFP Fade | $543 / 2.18 / 2.0 | −$82 / 0.77 / −0.6 | 0.75 |
-| Late-Day Flow | $141 / 1.55 / 3.3 | $12 / 1.10 / 0.7 | 0.85 |
-| Bridge Monday Long | $539 / 1.75 / 2.6 | $96 / 1.27 / 1.0 | 0.33 |
+| Strategy | NQ avg / PF / t (years +) | YM avg / PF / t (years +) | YM 2018–22 / 2023–26 | Daily P&L corr |
+|---|---|---|---|---|
+| Vault Break | $91 / 1.26 / 4.2 (9/9) | $1 / 1.00 / 0.1 (4/9) | $0 / $2 | 0.53 |
+| Overnight Bias ADX30 | $381 / 1.68 / 5.0 (9/9) | $4 / 1.01 / 0.1 (6/9) | $68 / −$75 | 0.46 |
+| EOS | $475 / 1.94 / 2.6 (8/9) | $9 / 1.03 / 0.1 (5/9) | −$34 / $66 | 0.48 |
+| Monday Long | $413 / 1.52 / 3.2 (7/9) | $41 / 1.11 / 0.8 (5/9) | $17 / $73 | 0.43 |
+| NFP Fade | $354 / 1.82 / 1.9 (7/9) | −$43 / 0.84 / −0.6 (3/9) | $7 / −$122 | 0.61 |
+| Late-Day Flow | $94 / 1.44 / 3.5 (7/9) | $8 / 1.07 / 0.7 (6/9) | $4 / $14 | 0.81 |
+| Bridge Monday Long | $561 / 2.03 / 4.4 (9/9) | $80 / 1.24 / 1.3 (5/9) | $76 / $84 | 0.37 |
 
-  YM Sharpe ratios run from −0.32 to 0.47 (NQ versions 0.8–1.6). All are long or short as on NQ, so long and
-  short sides are listed in the output.
-- **Verdict: don't add YM.** It's less correlated with NQ than ES is, but none of the plan's edges survive on it:
+  YM Sharpe ratios run from −0.19 to 0.43 (Calmar ≤ 0.25); the long / short split for each is in the output.
+- **Verdict: don't add YM.** It's less correlated with NQ than ES is, but none of the plan's edges survive on it.
   Vault Break, Overnight Bias, EOS, Late-Day Flow and NFP are tech / leverage / options-driven flows that are
-  strongest in the Nasdaq. Its lower correlation only helps if a strategy actually makes money on YM, and none do.
-  It's ranked F as a home for the plan's strategies. A YM-specific flow would need its own idea.
+  strongest in the Nasdaq. A lower correlation only helps if a strategy makes money there, and none do (best: the
+  Bridge Monday Long, t 1.3). Ranked F as a home for the plan's strategies; a YM-specific flow would need its own idea.
 
 ## Papers reviewed for funded strategies
 
