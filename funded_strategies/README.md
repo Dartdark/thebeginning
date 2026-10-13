@@ -523,6 +523,51 @@ exposure. Vol-control funds almost only *sell* in size (vol jumps fast, falls sl
   - Funded bench: + 1 MNQ $7,785 / $11,938 (blown 6% / 4%); + 2 MNQ $8,049 / $11,789 (7% / 8%). Within
     noise: **not added.** Tier **C** (real, uncorrelated, but ~8 trades a year and t 2.2).
 
+## Combined add-on of the three small edges (2026-10-13)
+
+Headline Shock Follow (HSF), NFP Fade (NFP) and Vol-Control Sell Flow (VCS), each tier C and
+within noise alone, tested together on top of the current plan. Code `../analysis/addon_combo_test.py`
+(output in `..._output.txt`). They barely overlap (30–33 shared days with HSF, 4 between NFP and VCS);
+daily correlations −0.08 to 0.05; correlation of the bundle with the plan 0.06.
+
+| Per NQ (1 NQ each) | Trades | Win | Avg | PF | Sharpe | Sortino | Calmar | Ulcer |
+|---|---|---|---|---|---|---|---|---|
+| Bundle 2018–26 | 978 | 44% | $177 | 1.39 | 1.11 | 2.49 | 1.39 | 6.90 |
+| · longs | 386 | 46% | $156 | 1.35 | 0.63 | 1.31 | 0.56 | 4.36 |
+| · shorts | 592 | 43% | $191 | 1.42 | 0.99 | 2.21 | 1.00 | 8.36 |
+| Bundle 2023–26 | 396 | 48% | $289 | 1.51 | 1.34 | 3.30 | 2.14 | 7.32 |
+
+Bundle by year: 2019 −$1.1k, all other years positive (2025 +$62k, mostly HSF).
+
+**Funded bench** (27 size combinations; current plan $7,676 / $12,012):
+
+| Add-on | 1 year | 2 years | Blown 1y / 2y | 1-year gain, 90% interval | 2-year gain, 90% interval |
+|---|---|---|---|---|---|
+| NFP $500 + VCS 1 MNQ | $8,131 | $12,022 | 4% / 3% | **+$456 ($123 to $826)**, 6/8 start years | +$10 (−$183 to $252) |
+| HSF 1 + NFP $500 + VCS 1 | $8,272* | $11,747* | – | +$596 ($151 to $1,011), 6/8 | −$265 (−$634 to $18) |
+| NFP $500 + VCS 2 MNQ | $8,281 | $11,976 | 3% / 3% | – | – |
+| Best of grid: HSF 2 + NFP $500 + VCS 2 | $8,733 | $11,653 | 8% / 10% | +$1,057 ($423 to $1,488) | −$359 (−$1,243 to $423) |
+
+\* plan + gain. Intervals: block bootstrap over start days (60-day blocks), paired against the plan.
+
+- **Year 1 gains clear the noise; year 2 does not.** Anything with HSF lowers the 2-year payout (the
+  2-year window ends with 2023–24 starts, HSF's two losing years). NFP + VCS lifts year 1 by ~$450,
+  leaves year 2 unchanged and lowers blowups (6% → 4%, 4% → 3%).
+- Portfolio at full size with HSF 1 + NFP $500 + VCS 1: Sharpe 2.51 → 2.68, Sortino 4.76 → 5.21,
+  Calmar 4.33 → 4.52, Ulcer 1.30 → 1.34, max drawdown $3,743 → $4,028. 2023–26 bootstrap Sharpe
+  2.90 (2.19–3.66) vs 2.68 (1.95–3.49).
+- **Decision: not adopted yet.** The rule (beat the plan by more than noise in both 1 and 2 years) is
+  not met, and all three are Python-only and were picked from ~150 tests (selection bias makes these
+  gains optimistic). **Best candidate: NFP Fade $500 + Vol-Control Sell Flow 1–2 MNQ**, the one
+  version that helps year 1 without costing year 2. Next step if wanted: MultiCharts versions of
+  both, then re-score with the MultiCharts trade lists.
+
+**Nasdaq-100 special rebalance:** only one in 2018–2026 (announced 7 July 2023, traded at the close
+on 21 July 2023). That day NQ fell 113 points by 14:00, 38 more into 15:00 and rose 10 after
+settlement. One event can't be tested; the next one only happens if Nasdaq's concentration limit is
+breached. **F (not testable).** Regular December reconstitution and quarterly rebalances were
+already tested (F).
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

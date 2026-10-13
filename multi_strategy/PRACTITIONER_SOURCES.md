@@ -127,4 +127,4 @@ forced-flow family that has worked best here (Expiration Open Short, Late-Day Fl
 | Futures roll and auction mechanics | Quantitative Brokers, CME | Roll-week short D |
 
 CTA trigger levels and vol-control models were tested on 2026-10-12 (see
-`../funded_strategies/README.md`). Still untested from this table: Nasdaq-100 special rebalances.
+`../funded_strategies/README.md`). Nasdaq-100 special rebalances: only one in the data (July 2023), so not testable.

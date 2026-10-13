@@ -57,6 +57,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Headline Shock Follow: follow an unscheduled 5-min jump > 5.5x its normal size, 8:40–14:15, stop = jump, out 60 min | Strategy (Python only) | 835 trades, $142, PF 1.31, t 2.5, 6/9 years; longs and shorts both PF 1.31; placebo $32; corr ≤ 0.15; funded + 1 MNQ $7,922 / $12,097, + 2 MNQ $8,413 / $11,690 | Real edge, but regime-bound: 2025 (tariff headlines) is 45% of the profit, 2023–24 lost; funded within noise |
 | NFP Fade: fade the 7:29→7:45 payroll reaction, 7:46→9:00, stop 0.5 ATR | Strategy (Python only) | 76 trades, $319, PF 1.71, t 1.7, 7/9 years (2021–26 all +); placebo at its 95% level; funded + $500 risk $8,093 / $12,086 | 9 trades a year; a subgroup of the D-tier release fade, so the bar is higher |
 | Vol-Control Sell Flow: when a lagged S&P vol-control model (10% target, EWMA 0.94/0.97) must sell > 6% of fund size, short 14:01→15:00, stop 0.25 ATR | Strategy (Python only) | 67 trades, 55% win, $455, PF 2.15, t 2.2, 8/9 years; 2023–26 PF 3.13; random-day placebo 95% $269 vs $591; corr ≤ 0.05; funded + 1 MNQ $7,785 / $11,938, + 2 MNQ $8,049 / $11,789 | Real closing flow, but ~8 trades a year; funded within noise |
+| Bundle of the three C edges (HSF + NFP Fade + Vol-Control Sell Flow) | Funded add-on (Python only) | Per NQ: 978 trades, PF 1.39, Sharpe 1.11 (2023–26 1.34, bootstrap 0.79–1.97); corr with plan 0.06; NFP $500 + VCS 1 MNQ: funded +$456 year 1 (90% $123–826), +$10 year 2, blown 4% / 3% | Clears noise in year 1 only; candidate for MultiCharts versions, not adopted |
 | Morning direction at 10:30 CT, followed to 15:00 (direction search) | Signal | t 2.2, 7/9 years, $112 a day; not yet tested as a trade | Test as a trade next |
 
 ## D
@@ -114,6 +115,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | 9:00 CT releases and non-payroll 7:30 releases (CPI, PPI...), follow or fade | News | t ≤ 0.9 |
 | Fading headline jumps (day or overnight); following overnight jumps | News | Fades lose (t to −3.5); overnight follow ≈ $0 |
 | Following CTA flows (next day, into the close, break of the trigger level) and same-day vol-control flow | Forced flow | CTA follow next day t −1.9 (2+ flips −4.1), trigger break −$409 (t −2.4), into close t 0.4; vol-control lag 0 t ≤ 0.6; vol-control does not explain Late-Day Flow |
+| Nasdaq-100 special rebalance | Forced flow | One event in 2018–26 (21 Jul 2023): not testable |
 | Pre-holiday / post-holiday / mid-month pay days | Calendar | t ≤ 0.5 |
 | Technical rules and FX intervention (LeBaron 1996, SSRN 1105) | Paper | 150-day MA rule on DM/yen 1979–92, Sharpe 0.7–1.0, but almost all of it on Fed intervention days (Sharpe 0.1–0.4 without); currencies, multi-day holds, and that intervention regime is gone. MA rules on NQ already failed here (MA 5–200 agreement, 50-day MA distance) |
 | Forced-flow round 3: vol-target de-levering (realized-vol jumps), quarter-end pension fade, Friday pre-weekend de-risking | Forced flow | t ≤ 0.8 (vol target), −0.2 (quarter end), Friday windows −1.0 to 0.2 |

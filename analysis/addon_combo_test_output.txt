@@ -1,0 +1,98 @@
+Combined funded add-on of the three small uncorrelated edges (2026-10-13):
+
+1. Trades and overlap (days both trade):
+   HSF 835 / NFP 76: 33 shared days
+   HSF 835 / VCS 67: 30 shared days
+   NFP 76 / VCS 67: 4 shared days
+   daily correlation:
+      HSF   NFP   VCS
+HSF  1.00 -0.08  0.05
+NFP -0.08  1.00 -0.04
+VCS  0.05 -0.04  1.00
+
+   Standard metrics per NQ, 2018-26:
+                   trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+HSF                   835 43% $142 $13,189   0.81    1.82          1.31 $18,486   0.71  7.43       3.55
+NFP                    76 51% $319  $2,699   0.56    1.12          1.71  $7,562   0.36  5.36       1.01
+VCS                    67 55% $455  $3,395   0.70    1.74          2.15  $5,509   0.62  4.40       1.54
+BUNDLE (1 NQ each)    978 44% $177 $19,284   1.11    2.49          1.39 $13,912   1.39  6.90       5.59
+  bundle longs        386 46% $156  $6,688   0.63    1.31          1.35 $12,016   0.56  4.36       3.07
+  bundle shorts       592 43% $191 $12,595   0.99    2.21          1.42 $12,626   1.00  8.36       3.01
+   2023-26:
+         trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+BUNDLE      396 48% $289 $29,646   1.34    3.30          1.51 $13,868   2.14  7.32       8.10
+  longs     141 47% $273  $9,967   0.74    1.71          1.45 $12,016   0.83  5.07       3.93
+  shorts    255 49% $298 $19,679   1.23    2.91          1.55 $10,344   1.90  5.19       7.58
+   bundle by year: {2018: 3554, 2019: -1105, 2020: 8999, 2021: 19262, 2022: 27917, 2023: 3738, 2024: 9211, 2025: 62326, 2026: 39192}
+
+2. Funded bench (cushion sizing), current plan $7,676 / $12,012; top 12 by 1y + 2y:
+ HSF  NFP  VCS     y1   y1_23      y2 blown1 blown2 days1st     sum
+   2  500    2 $8,733 $11,198 $11,653     8%    10%      68 $20,386
+   1  500    2 $8,406 $10,265 $11,858     4%     4%      67 $20,264
+   0  500    2 $8,281 $10,041 $11,976     3%     3%      69 $20,257
+   1  300    2 $8,239 $10,014 $11,976     4%     4%      68 $20,215
+   2  300    2 $8,572 $11,089 $11,632     9%    10%      71 $20,205
+   0  500    0 $8,093  $9,194 $12,086     4%     3%      74 $20,179
+   1  500    0 $8,205  $9,466 $11,949     4%     4%      72 $20,153
+   0  500    1 $8,131  $9,320 $12,022     4%     3%      72 $20,153
+   2    0    2 $8,567 $11,035 $11,565    10%    11%      67 $20,132
+   2    0    0 $8,413 $10,261 $11,690     8%    10%      72 $20,103
+   2  500    1 $8,603 $10,517 $11,461     9%    10%      67 $20,065
+   2    0    1 $8,415 $10,435 $11,642     9%    10%      72 $20,056
+   ... bottom 3:
+ HSF  NFP  VCS     y1   y1_23      y2 blown1 blown2 days1st     sum
+   2  300    0 $8,305 $10,350 $11,387    11%    12%      72 $19,692
+   0    0    0 $7,676  $8,606 $12,012     6%     4%      72 $19,688
+   2  300    1 $8,324 $10,463 $11,359    11%    12%      71 $19,682
+
+3. Gain over the current plan, paired by start day; 90% block-bootstrap interval (60-day blocks):
+   1y HSF 1 + NFP $500 + VCS 1                 gain $   596 (90%: $151 to $1,011) | start years better 6/8: 18:+193 19:-1138 20:+469 21:+996 22:+1674 23:+1733 24:-1064 25:+2237
+   1y NFP $500 + VCS 1                         gain $   456 (90%: $123 to $826) | start years better 6/8: 18:+58 19:-1556 20:-362 21:+1039 22:+2372 23:+714 24:+293 25:+1242
+   1y HSF 1 + NFP $300 + VCS 1                 gain $   340 (90%: $-48 to $691) | start years better 5/8: 18:+169 19:-744 20:+709 21:-360 22:+808 23:+924 24:-446 25:+1993
+   1y best of grid: HSF 2, NFP $500, VCS 2     gain $ 1,057 (90%: $423 to $1,488) | start years better 6/8: 18:-111 19:-1671 20:+1128 21:+944 22:+690 23:+2494 24:+1722 25:+3802
+   2y HSF 1 + NFP $500 + VCS 1                 gain $  -265 (90%: $-634 to $18) | start years better 2/7: 18:-479 19:+0 20:+0 21:+0 22:+23 23:+385 24:-2079
+   2y NFP $500 + VCS 1                         gain $    10 (90%: $-183 to $252) | start years better 3/7: 18:-763 19:+0 20:+0 21:+0 22:+23 23:+541 24:+319
+   2y HSF 1 + NFP $300 + VCS 1                 gain $   -33 (90%: $-322 to $217) | start years better 2/7: 18:-160 19:+0 20:+0 21:+0 22:+23 23:+463 24:-662
+   2y best of grid: HSF 2, NFP $500, VCS 2     gain $  -359 (90%: $-1,243 to $423) | start years better 3/7: 18:-5212 19:-81 20:-140 21:+0 22:+23 23:+541 24:+2863
+
+   Portfolio at full size (HSF 1 MNQ, NFP $500, VCS 1 MNQ):
+              trades win avg  annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+current plan    1676 55% $87 $16,226   2.51    4.76          1.70 $3,743   4.33  1.30      24.90
+plan + bundle   1810 54% $90 $18,201   2.68    5.21          1.75 $4,028   4.52  1.34      27.23
+bundle alone     620 48% $29  $1,975   1.10    2.43          1.56 $1,740   1.14  1.17       3.37
+   correlation of the bundle with the plan: 0.06
+                                     actual       p5      p50      p95
+name                  metric                                          
+bundle 2023-26        sharpe           1.39     0.79     1.40     1.97
+                      sortino          3.47     1.68     3.47     5.48
+                      pf_day           1.77     1.36     1.76     2.25
+                      calmar           2.27     0.72     2.12     4.61
+                      ulcer            0.74     0.49     0.83     1.67
+                      max_dd       1,386.80   926.64 1,434.23 2,445.52
+                      P(Sharpe<=0)      NaN      NaN     0.00      NaN
+plan + bundle 2023-26 sharpe           2.90     2.19     2.94     3.66
+                      sortino          5.67     3.94     5.74     7.84
+                      pf_day           1.82     1.56     1.84     2.17
+                      calmar           5.82     2.46     4.66     7.90
+                      ulcer            1.17     0.94     1.50     2.79
+                      max_dd       3,982.20 3,491.25 4,958.16 7,983.52
+                      P(Sharpe<=0)      NaN      NaN     0.00      NaN
+plan 2023-26          sharpe           2.68     1.95     2.73     3.49
+                      sortino          5.05     3.41     5.13     7.17
+                      pf_day           1.74     1.49     1.76     2.08
+                      calmar           5.36     2.00     3.97     6.88
+                      ulcer            1.26     1.02     1.65     3.15
+                      max_dd       3,743.18 3,529.67 5,049.95 8,223.74
+                      P(Sharpe<=0)      NaN      NaN     0.00      NaN
+                      actual_dd pct_rank   dd50   dd95   dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+bundle 2023-26           $1,387      23% $1,662 $2,635 $3,217         99%         24%          2%
+plan + bundle 2023-26    $3,982      13% $5,039 $7,710 $9,202        100%        100%        100%
+plan 2023-26             $3,743       7% $5,081 $7,816 $9,563        100%        100%        100%
+
+4. Nasdaq-100 special rebalance (announced Fri 7 Jul 2023, traded at the close Fri 21 Jul 2023):
+   2023-07-07: 8:30->14:00   +80.2 pts, 14:00->15:00 -117.2, 15:00->15:15  +15.2 (15-day ATR 193)
+   2023-07-10: 8:30->14:00   +20.0 pts, 14:00->15:00   +1.5, 15:00->15:15  +17.8 (15-day ATR 191)
+   2023-07-20: 8:30->14:00  -227.8 pts, 14:00->15:00  -18.0, 15:00->15:15   +6.2 (15-day ATR 193)
+   2023-07-21: 8:30->14:00  -112.8 pts, 14:00->15:00  -38.0, 15:00->15:15  +10.2 (15-day ATR 205)
+   2023-07-24: 8:30->14:00   -14.0 pts, 14:00->15:00   -0.8, 15:00->15:15   -0.8 (15-day ATR 201)
+   One event: can't be tested as a strategy (the next one depends on Nasdaq's concentration rule being hit).

@@ -66,6 +66,10 @@ months in a row, Overnight Drift can be switched back on in its place.
 **Payouts:** request each payout as soon as the balance is at least $52,100 + the next cap,
 with 5 qualifying days ($250+) and the 50% consistency rule met.
 
+**Candidate add-on (2026-10-13, Python only, not adopted):** NFP Fade $500 + Vol-Control Sell Flow
+1 MNQ: +$456 in year 1 (90% interval $123–826), +$10 in year 2, blown 4% / 3%. Needs MultiCharts
+versions first; details in `README.md` (combined add-on section).
+
 ### Before Late-Day Flow (2026-10-12): Monday Long replaced Overnight Drift
 
 Four MultiCharts-confirmed strategies, sized to the drawdown cushion. Code and numbers:
