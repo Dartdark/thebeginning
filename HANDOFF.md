@@ -36,7 +36,15 @@ Tier list of everything tested (S–F): `TIER_LIST.md`. Development process (who
 4. To confirm a strategy: the user uploads the MultiCharts report (.xlsx) to the repo root;
    compare with `portfolio.load_mc` as in `analysis/late_day_flow_confirm.py`.
 
-## Funded plan (updated 2026-10-12)
+## Funded plan (updated 2026-10-13)
+Seven strategies, full size from a $1,500 cushion (f = cushion/$1,500 in 0.5-1): VB 3 MNQ, ONB ML v2
+RiskPerTrade 400, Monday Long 1 MNQ, EOS RiskPerTrade 700, Late-Day Flow 2 MNQ, **NFP Fade RiskPerTrade
+500, Vol-Control Sell Flow 1 MNQ** (both MultiCharts-confirmed 2026-10-13; VCS needs 5-min @ES as data2).
+Expected payouts $8,770 (1y) / $12,236 (2y), blown 2-3%, median 278 trading days to all 6 payouts
+(was 306); portfolio Sharpe 2.61. `python3 analysis/build_lab.py scratch_data` prints both plans
+(install numba first).
+
+## Funded plan (2026-10-12, previous)
 Current funded set (`funded_strategies/FUNDED_PLAN.md`): VB 3 MNQ, Overnight Bias ML v2 RiskPerTrade 400,
 Monday Long 1 MNQ (replaced Overnight Drift), Expiration Open Short RiskPerTrade 700, **Late-Day Flow
 2 MNQ** (added), with cushion sizing (f = cushion/$2,000 in 0.5-1). Expected payouts $7,676 (1y) /

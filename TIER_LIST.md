@@ -3,7 +3,8 @@
 S–F scale, updated as each new idea is tested. Results are NQ 2018–2026 unless noted, per
 NQ after $7.25 costs and 1 tick of slippage per fill. "Funded" = expected payouts per Apex
 50K Performance Account within 1 year (2 years in brackets); the current set (VB 3, ONB ML $400,
-Monday Long 1 MNQ, EOS $700, Late-Day Flow 2 MNQ, cushion sizing) scores $7,676 ($12,012).
+Monday Long 1 MNQ, EOS $700, Late-Day Flow 2 MNQ, NFP Fade $500, Vol-Control Sell 1 MNQ, full size
+from a $1,500 cushion) scores $8,770 ($12,236); the previous 5-strategy set $7,676 ($12,012).
 
 ## What the tiers mean
 
@@ -39,6 +40,8 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 
 | Item | Type | Key numbers | Notes |
 |---|---|---|---|
+| NFP Fade: fade the 7:30→7:45 payroll reaction, 7:46→9:00, stop 0.5 ATR | Funded strategy (in the plan since 2026-10-13), MultiCharts-confirmed (`NQ_NFP_Fade.txt`) | MC: 79 trades, 52% win, $335, PF 1.79, t 1.9, 7/9 years; 2023–26 PF 2.30, bootstrap Sharpe 0.19–1.54; all 76 Python trades match (corr 1.000); corr ≤ 0.04 | ~9 trades a year; t < 2.5 keeps it below A |
+| Vol-Control Sell Flow: short 14:00→15:00 when a lagged S&P vol-control model must sell > 6% of fund size | Funded strategy (in the plan since 2026-10-13), MultiCharts-confirmed (`NQ_Vol_Control_Sell.txt`) | MC: 71 trades (4 Jan-2018 warm-up), 55% win, $427, PF 2.12, t 2.1; 2023–26 PF 3.12, bootstrap Sharpe 0.32–1.56; all 67 Python trades match (corr 1.000); corr ≤ 0.05 | Forced flow, ~8 trades a year; t < 2.5 keeps it below A |
 | ONB skips the day after negative GEX | Filter | t = 4.1, 9/9 years; funded +$342 (year 2 flat) | Needs daily GEX typed in; no price-only version matched it |
 | Noise-area momentum, long only ("Beat the Market") | Strategy | PF 1.38–1.45, 9/9 years | Wins only 43%; replaces VB poorly ($4,100 vs $5,387) |
 | Bootstrap + permutation (out-of-sample resampling) | Method | Funded portfolio Sharpe 90% interval 1.53–3.00 (2023–26); real drawdown smaller than 99% of shuffles (95% shuffle $8,347 vs real $3,351) | Adopted as a standard check; shows the edges aren't luck but the real drawdowns were, and that losses don't cluster |
@@ -55,9 +58,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Overnight-range breakout | Strategy | t = 2.5; funded $1,558–3,097 | Overlaps ONB; funded worse than the set |
 | 60-min breakout, longs only, entries 9:00–14:00, flat 15:00 (your idea) | Strategy | PF 1.31, t = 2.4, but 2025–26 negative; correlation 0.41 with VB; funded +$133 year 1, −$309 year 2 at $200 risk | Lost in 2025–26 |
 | Headline Shock Follow: follow an unscheduled 5-min jump > 5.5x its normal size, 8:40–14:15, stop = jump, out 60 min | Strategy (Python only) | 835 trades, $142, PF 1.31, t 2.5, 6/9 years; longs and shorts both PF 1.31; placebo $32; corr ≤ 0.15; funded + 1 MNQ $7,922 / $12,097, + 2 MNQ $8,413 / $11,690 | Real edge, but regime-bound: 2025 (tariff headlines) is 45% of the profit, 2023–24 lost; funded within noise |
-| NFP Fade: fade the 7:29→7:45 payroll reaction, 7:46→9:00, stop 0.5 ATR | Strategy (Python only) | 76 trades, $319, PF 1.71, t 1.7, 7/9 years (2021–26 all +); placebo at its 95% level; funded + $500 risk $8,093 / $12,086 | 9 trades a year; a subgroup of the D-tier release fade, so the bar is higher |
-| Vol-Control Sell Flow: when a lagged S&P vol-control model (10% target, EWMA 0.94/0.97) must sell > 6% of fund size, short 14:01→15:00, stop 0.25 ATR | Strategy (Python only) | 67 trades, 55% win, $455, PF 2.15, t 2.2, 8/9 years; 2023–26 PF 3.13; random-day placebo 95% $269 vs $591; corr ≤ 0.05; funded + 1 MNQ $7,785 / $11,938, + 2 MNQ $8,049 / $11,789 | Real closing flow, but ~8 trades a year; funded within noise |
-| Bundle of the three C edges (HSF + NFP Fade + Vol-Control Sell Flow) | Funded add-on (Python only) | Per NQ: 978 trades, PF 1.39, Sharpe 1.11 (2023–26 1.34, bootstrap 0.79–1.97); corr with plan 0.06; NFP $500 + VCS 1 MNQ: funded +$456 year 1 (90% $123–826), +$10 year 2, blown 4% / 3% | Clears noise in year 1 only; candidate for MultiCharts versions, not adopted |
+| Bundle of the three edges (HSF + NFP Fade + Vol-Control Sell Flow) | Funded add-on (NFP + VCS adopted 2026-10-13 after MC confirmation) | Per NQ: 978 trades, PF 1.39, Sharpe 1.11 (2023–26 1.34, bootstrap 0.79–1.97); corr with plan 0.06; NFP $500 + VCS 1 MNQ: funded +$456 year 1 (90% $123–826), +$10 year 2, blown 4% / 3% | Clears noise in year 1 only; candidate for MultiCharts versions, not adopted |
 | Morning direction at 10:30 CT, followed to 15:00 (direction search) | Signal | t 2.2, 7/9 years, $112 a day; not yet tested as a trade | Test as a trade next |
 
 ## D

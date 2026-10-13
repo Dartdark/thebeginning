@@ -9,8 +9,8 @@ Writes to SCRATCH_DIR (default: ./scratch_data, git-ignored size ~2 GB, not comm
             MultiCharts trade lists in the repo root, +1 tick slippage per non-limit fill:
               VB (VB v1), ONB_ML2_MC (+ _L/_S), MON_MC, EOS, LDF_MC (+ _L/_S), OND_MC (backup)
 Older test scripts load these from the first session's scratchpad path (SP = ...); point SP
-at SCRATCH_DIR to rerun them. Check: the current plan should score about $7,676 (1 year) and
-$12,012 (2 years) with cushion sizing (see the end of this script).
+at SCRATCH_DIR to rerun them. Check: the previous 5-strategy plan scores $7,676 (1 year) / $12,012 (2 years); the current
+7-strategy plan with full size from a $1,500 cushion is printed after it (see the end).
 """
 import sys, os, pickle, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
 import numpy as np
@@ -27,6 +27,8 @@ REPORTS = {   # name: (report file, stop in ATR for risk sizing)
     "OND_MC": ("Backtesting Strategy Performance Report OND v1.xlsx", 0.30),
     "MON_MC": ("Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx", 0.50),
     "LDF_MC": ("Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx", 0.25),
+    "NFP_MC": ("Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx", 0.50),
+    "VCS_MC": ("Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx", 0.25),
 }
 
 if __name__ == "__main__":
@@ -46,4 +48,8 @@ if __name__ == "__main__":
     plan = {"VB": 3, "ONB_ML2_MC": ("risk", 400), "MON_MC": 1, "EOS": ("risk", 700), "LDF_MC": 2}
     for h in (250, 500):
         r = lab.score(plan, h, fmin=0.5, fmax=1.0, ref=2000.0)
-        print(f"current plan, cushion sizing, {h // 250}y: ${r['expected']:,.0f} blown {r['blown']:.0%}")
+        print(f"previous plan (5 strategies, $2,000 cushion), {h // 250}y: ${r['expected']:,.0f} blown {r['blown']:.0%}")
+    plan7 = {**plan, "NFP_MC": ("risk", 500), "VCS_MC": 1}
+    for h in (250, 500):
+        r = lab.score(plan7, h, fmin=0.5, fmax=1.0, ref=1500.0)
+        print(f"current plan (7 strategies, full size from $1,500 cushion), {h // 250}y: ${r['expected']:,.0f} blown {r['blown']:.0%}")

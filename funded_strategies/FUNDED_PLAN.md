@@ -1,6 +1,50 @@
 # Funded phase plan: Apex 50K EOD Performance Account
 
-## Current plan (updated 2026-10-12): five strategies, Late-Day Flow added
+## Current plan (updated 2026-10-13): seven strategies, faster to $13k
+
+Priority: collect all 6 payouts ($13,000) sooner. NFP Fade and Vol-Control Sell Flow are now
+MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`, output in `..._output.txt`), and full size
+starts at a **$1,500** cushion instead of $2,000.
+
+| Strategy | File | Chart | Funded inputs (full size) | Trades |
+|---|---|---|---|---|
+| Vault Break | `../apex_strategies/NQ_Vault_Break.txt` | 30 min MNQ | `NumContracts` 3 | ~107 a year |
+| Overnight Bias ML (v2) | `NQ_Overnight_Bias_ML.txt` | 15 min MNQ | `RiskPerTrade` 400 | ~38 a year |
+| Monday Long | `NQ_Monday_Long.txt` | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 | every Monday |
+| Expiration Open Short | `NQ_Expiration_Open_Short.txt` | 5 min MNQ | `RiskPerTrade` 700 | 12 a year |
+| Late-Day Flow | `NQ_Late_Day_Flow.txt` | 5 min MNQ | `NumContracts` 2, `RiskPerTrade` 0 | ~100 a year |
+| **NFP Fade (new)** | `NQ_NFP_Fade.txt` | 5 min MNQ | `RiskPerTrade` 500 | ~9 a year (payroll Fridays, 7:45–9:00 CT) |
+| **Vol-Control Sell Flow (new)** | `NQ_Vol_Control_Sell.txt` | 5 min MNQ + **5 min @ES as data2** | `NumContracts` 1, `RiskPerTrade` 0 | ~8 a year (14:00–15:00 CT, shorts) |
+
+**Cushion sizing:** cushion = balance − trailing threshold, each morning. f = cushion / **$1,500**,
+kept between 0.5 and 1; multiply each full-size input by f and round down:
+
+| Cushion | f | VB | ONB ML risk | Monday | EOS risk | LDF | NFP risk | VCS |
+|---|---|---|---|---|---|---|---|---|
+| $1,500 or more | 1.0 | 3 | 400 | 1 | 700 | 2 | 500 | 1 |
+| $1,125 | 0.75 | 2 | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) |
+| $750 or less | 0.5 | 1 | 200 | 0 (off) | 350 | 1 | 250 | 0 (off) |
+
+| All MultiCharts trade lists, $7.25 + 1 tick per fill | 1 year | 2 years | Blown (1y / 2y) | Median days to all 6 payouts | All 6 within 1 year |
+|---|---|---|---|---|---|
+| Previous plan (5 strategies, $2,000 cushion) | $7,676 | $12,012 | 6% / 4% | 306 | 21% |
+| **Current plan (7 strategies, $1,500 cushion)** | **$8,770** | **$12,236** | **3% / 2%** | **278** | **36%** |
+
+Portfolio at full size 2018–2026: Sharpe 2.61 (was 2.51), Sortino 5.00, PF (days) 1.73, Calmar 4.53,
+Ulcer 1.30, max drawdown $3,743 (unchanged), $16,939 a year. Bootstrap Sharpe 2023–26 2.84
+(2.12–3.64). Daily correlations of the two new strategies with the rest ≤ 0.05. Every year positive
+(2018 +$3,784 … 2025 +$25,046; 2026 to date +$16,427).
+
+**Setup notes for the two new charts:**
+- NFP Fade: 5-minute MNQ, CME 24-hour session (it needs the 7:30 CT bar), load at least 30 trading
+  days of history.
+- Vol-Control Sell Flow: data1 5-minute MNQ, data2 5-minute @ES, same session; load at least a year of
+  history so the EWMA vols have converged (the January 2018 trades in the backtest are warm-up noise).
+
+**Faster still:** run 2–3 PAs in parallel with the same trades ($13k in total after ~225 / ~200
+trading days instead of ~300; see the speed section below).
+
+## Previous plan (2026-10-12): five strategies, Late-Day Flow added
 
 Five MultiCharts-confirmed strategies, sized to the drawdown cushion. Code and numbers:
 `analysis/funded_plan_ldf.py` (output in `analysis/funded_plan_ldf_output.txt`).
@@ -66,9 +110,8 @@ months in a row, Overnight Drift can be switched back on in its place.
 **Payouts:** request each payout as soon as the balance is at least $52,100 + the next cap,
 with 5 qualifying days ($250+) and the 50% consistency rule met.
 
-**Candidate add-on (2026-10-13, Python only, not adopted):** NFP Fade $500 + Vol-Control Sell Flow
-1 MNQ: +$456 in year 1 (90% interval $123–826), +$10 in year 2, blown 4% / 3%. Needs MultiCharts
-versions first; details in `README.md` (combined add-on section).
+**Update 2026-10-13:** NFP Fade and Vol-Control Sell Flow were MultiCharts-confirmed and added (see the
+current plan at the top).
 
 ## Speed to the full $13,000 (2026-10-13): new priority
 

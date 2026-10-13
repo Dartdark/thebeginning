@@ -1,4 +1,4 @@
-{ NQ Vol-Control Sell Flow - MultiCharts PowerLanguage signal (funded candidate, 2026-10-13)
+{ NQ Vol-Control Sell Flow - MultiCharts PowerLanguage signal (funded plan since 2026-10-13)
 
   Volatility-control funds (S&P 500 Daily Risk Control style) hold exposure
   E = min(MaxExposure, TargetVol / vol), with vol = the larger of two exponentially
@@ -25,6 +25,12 @@
   15:00 bar each trading day; on early-close days (no 15:00 bar) the day counts as a
   zero return, as in the Python test. UseES false uses NQ's own 15:00 close instead
   (not tested).
+
+  MULTICHARTS CONFIRMED (2026-10-13, analysis/nfp_vcs_confirm.py): 71 trades, 55% winners,
+  $427 average, PF 2.12, t = 2.1; all 67 Python trades match (same entry, P&L correlation
+  1.000). The 4 extra trades are in January 2018, while the EWMA vols were still warming up
+  (the backtest's data started in January 2018): live, load at least a year of history.
+  In the funded plan since 2026-10-13 at NumContracts 1.
 
   SIZE: funded NumContracts 1 MNQ with RiskPerTrade 0 (the 0.25 ATR stop is about
   $235 per MNQ at October 2026 prices). Backtest on NQ: RiskPerTrade 0, NumContracts 1. }

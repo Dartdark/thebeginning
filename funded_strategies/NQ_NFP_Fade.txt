@@ -1,4 +1,4 @@
-{ NQ NFP Fade - MultiCharts PowerLanguage signal (funded candidate, 2026-10-13)
+{ NQ NFP Fade - MultiCharts PowerLanguage signal (funded plan since 2026-10-13)
 
   On payroll Fridays (Friday, day of month <= 10, and the 7:30-7:35 CT bar's range
   more than SpikeMult x its median over the previous SpikeDays weekdays), fade the
@@ -26,6 +26,12 @@
   Apply to a 5-minute NQ / MNQ chart, Exchange time zone (Central), CME 24-hour
   session (the 7:30 bar and the ATR need the overnight session), Bar Magnifier on
   at 1 minute. Load at least 30 trading days before the backtest start.
+
+  MULTICHARTS CONFIRMED (2026-10-13, analysis/nfp_vcs_confirm.py): 79 trades, 52% winners,
+  $335 average, PF 1.79, t = 1.9; all 76 Python trades match (same side and entry, P&L
+  correlation 1.000). The 3 extra MultiCharts trades (2018-01-05, 2020-04-03, 2023-04-07) are
+  days the Python spike baseline skipped (missing days in its 20-day window). In the funded plan
+  since 2026-10-13 at RiskPerTrade 500.
 
   SIZE: funded RiskPerTrade 500 on MNQ (at October 2026 prices the 0.5 ATR stop is
   about $475 per MNQ, so 1 MNQ). Backtest on NQ: RiskPerTrade 0, NumContracts 1. }
