@@ -823,6 +823,48 @@ touch then reclaim, 20-bar swing stop, 5-bar swing target, one trade a day). Per
   entry. As an extra 1-MNQ entry on ONB ML days: funded $8,986 / $12,194 vs $8,770 / $12,236 (within noise,
   and it is just more size on the same trades). Nothing to adopt.
 
+## 0DTE dealer gamma from The Bridge (2026-10-13): real volatility effect, no trading edge
+
+Code `../analysis/gamma_regime_test.py` (output in `..._output.txt`); data `GEX_1min_<year>.csv` exported with
+`../multi_strategy/OFB_Gamma_Exporter.txt` (0DTE NDX dealer gamma, cumulative weighting only, so no look-ahead):
+641 sessions, 2023-03-28 to 2026-07-07. The Bridge's NQ closes match the NQ grid on 97.6% of minutes (ET −1 h),
+so flip + basis goes straight onto NQ. Regime = price above / below the flip with steepness > 0.02 (the
+manual's "worth trusting"); 67% of 10:00 ET readings are above, 31% below. Design 2023-03-28 to 2024-12-31,
+holdout 2025-01-01 to 2026-07-07. Data starts in 2023, so the 2018–2022 standard can't be met.
+- **The regime is real but it is mostly volatility.** Below the flip the next 30 minutes move 30% more
+  (20.0 vs 15.3 bp; design 18.4 vs 14.8, holdout 21.9 vs 15.8). Within quintiles of the last hour's realized
+  volatility the gap shrinks to 1.33× in the quietest fifth and ~1.0–1.07× in the top three. After
+  controlling for the first 30 minutes' range, the rest-of-day range is the same above and below.
+  There's **no momentum vs mean-reversion difference**: correlation of the last 30 minutes with the next
+  30 is −0.007 above and −0.004 below. The "dealers damp above, amplify below" story shows up only as
+  slightly bigger moves, and realized vol already measures those.
+- **As a filter on the plan's MultiCharts trades (regime at entry, each side):** no split with |t| ≥ 2
+  except Vol-Control Sell Flow, above the flip $1,331 (n 15) vs below −$262 (n 12), t 2.5, same sign in
+  both periods. That's 27 trades and one of ~20 splits, so not adopted; watch it. Others: LDF shorts
+  below $94 vs above $29; ONB ML shorts below $1,165 vs above $228 (t −1.1); EOS above $1,068 vs below
+  −$211 (t 1.3, 23 trades).
+- **Previous session's regime** (read at 13:00, 14:00, 14:30, 14:55, 15:15 CT): it doesn't confirm the
+  old SPX "ONB skips the day after negative GEX" filter. For ONB the sign flips with the reading time
+  (below the flip better at 13:00, worse at 15:15) and 2023–24 contradicts 2025–26. Vault Break makes
+  more after a below-flip close at every reading time (t −1.4 to −2.1), but almost all of it is
+  2025–26 (2023–24 equal). Possible size tilt to recheck when more data exists, not a filter (above-flip
+  days still make money).
+- **Stand-alone ideas, all fail:**
+  - Follow or fade the first hour by regime: follow −$105 a trade under the regime rule, PF 0.91. Following
+    beats fading in both regimes, so the regime adds nothing.
+  - Flip-cross breakout (trade the first close through the flip): −$79, PF 0.93, t −0.6. Fake levels at
+    flip ±0.5% / ±1% do the same (−$406 to +$22). Fading the cross: $140, t 1.3.
+  - Afternoon pin toward the major positive-gamma strike from 13:30 CT on above-flip days: price moves
+    toward it 49% of the time; −$161 a trade (t −1.8) vs −$115 toward another 100-point NDX strike.
+    No pin.
+- Standard metrics for the stand-alone versions (2023-03-28 on, per NQ): regime rule Sharpe −0.54, PF
+  0.91, Calmar −0.28, Ulcer 77.5; flip cross −0.39 / 0.93 / −0.23 / 54.9 (longs −1.46, shorts 0.37 with
+  bootstrap P(Sharpe ≤ 0) 30%); pin −1.13 / 0.71 / −0.30 / 42.5. All bootstrap intervals include or sit
+  below zero.
+- **Verdict:** the 0DTE gamma regime is a volatility gauge (D), not a direction signal. The flip, the
+  flip cross and the strike pin are F. Not tested yet: the order-flow columns (big prints, depth) and
+  the Bridge's MBO history from 2017, which can be tested on the full 2018–2026 standard.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

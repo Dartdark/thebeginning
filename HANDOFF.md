@@ -66,6 +66,16 @@ MultiCharts code written, `funded_strategies/NQ_NFP_Fade.txt`, `NQ_Vol_Control_S
 backtests): 278. Biggest lever: 2-3 PAs in parallel ($13k in total after ~225 / ~200 days).
 Details: `funded_strategies/FUNDED_PLAN.md` (speed section).
 
+## The Bridge 0DTE gamma data tested (2026-10-13)
+User has The Bridge (MatFin MultiCharts add-on). `GEX_1min_<year>.csv` (repo root, 2022-09 to 2026-07-07,
+exported by `multi_strategy/OFB_Gamma_Exporter.txt` on a 1-min chart of `C:\OFB\ofb_bars_NQ.csv`, Exchange
+time zone = Eastern) tested in `analysis/gamma_regime_test.py`: below the flip NQ moves ~30% more, but
+realized vol explains it; no filter on the plan clears noise (watch VCS above-flip, t 2.5 on 27 trades);
+flip cross, regime follow / fade, strike pin all F. Next possible: the Bridge's MBO order flow from 2017.
+Setup notes: restart MultiCharts after any DLL / data change ("OLD DLL" error); compile every OFB function
+("unverified function" error); Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close
+conversion unchecked.
+
 ## Funded build status (2026-10-11)
 Instruments are open: NQ, ES, GC, CL, anything with an edge. Test bench:
 `analysis/funded_lab.py`; candidates `analysis/funded_candidates.py`; results in

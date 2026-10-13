@@ -82,3 +82,9 @@ POC / VWAP), and COT. Export with `OFB_Gamma_Exporter.txt` (this folder) to CSV 
 tests planned: gamma regime (above / below the flip) as a filter on Late-Day Flow, Vault Break, ONB ML and
 EOS; afternoon pin toward the major gamma strike on expiry days; flip-cross breakouts.
 
+Tested 2026-10-13 (`../analysis/gamma_regime_test.py`, 641 sessions 2023-03-28 → 2026-07-07): below the flip, NQ
+moves ~30% more, but realized volatility explains almost all of it, and momentum vs reversion doesn't differ.
+No filter on the plan clears noise (VCS above-flip t 2.5 on 27 trades: watch). Flip-cross breakouts, regime
+follow / fade and the afternoon pin to the major gamma strike all fail (F). The 0DTE gamma data is a volatility
+gauge, not a forced-flow direction. Next with The Bridge: the MBO order-flow history from 2017 (big prints,
+book imbalance, depth), which can be tested on 2018–2026.
