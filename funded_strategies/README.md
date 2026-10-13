@@ -754,6 +754,29 @@ Short, Monday Long, NFP Fade, Late-Day Flow and Vol-Control Sell Flow, run the s
 - **Decision:** keep the plan on NQ / MNQ. ES is not a diversifier for these flows; a different market
   (GC, CL, ZN) would be.
 
+## Crabel Stretch Breakout (2026-10-13, user's MultiCharts file v3): real edge, wrong shape for Apex
+
+Code `../analysis/crabel_stretch_test.py` (output in `..._output.txt`), a Python replica of
+`Crabel_Stretch_Breakout_NQ_v3`: stretch = 10-day average of min(high − open, open − low); stop entries
+at open ± 1.4 × stretch from 8:31 to 9:30 CT; stop 0.7 × stretch; out at the 14:56 open; one trade a
+day. Per NQ after $7.25 + 1 tick per fill.
+- Defaults: 1,653 trades, **22% win**, $120, PF 1.25, t 2.7, 9/9 years; Sharpe 0.90, Sortino 2.57, Calmar
+  0.95, Ulcer 7.67. Author's split: 2018–23 PF 1.26, 2024–26 PF 1.23, so the out-of-sample claim holds.
+  Longs PF 1.28, shorts 1.22. Random-side placebo $44 vs $120.
+- Neighbours: stops 0.7–1.0 × with entries 1.2–1.6 × all give PF 1.17–1.25, t 2.4–2.9 (a plateau);
+  a 0.5 × stop kills it. NR7 / inside-day setups: fewer trades, worse after 2023; the 20-day trend filter
+  on both sides PF 1.30 on half the trades.
+- Correlation with the plan 0.23 (ONB ML), 0.19 (Late-Day Flow), 0.15 (VB).
+- **Funded bench:** + 1 MNQ $8,591 / $11,969, blown 8% / 6% (plan $8,770 / $12,236, 3% / 2%); + 2 MNQ
+  $7,083 / $9,965. **Combine:** + 2 MNQ 45.7% vs 46.9%; in place of Vault Break 34.1%.
+- Like the "Beat the Market" noise-area breakout (B): a genuine opening-breakout edge, but a low win
+  rate, long losing streaks and one big year (2022 = 36% of the profit) work against Apex's trailing
+  drawdown and consistency rule. **B** as a strategy; not added.
+- Two issues in the file if you ever run it: (1) on early-close days (no 15:55 ET bar) the EOD exit never
+  fires, so a position is held overnight (an Apex violation) — add a session-end / holiday exit;
+  (2) after an early close InRTH stays true, so stop orders can be placed overnight before the next
+  open, relative to the previous day's open — reset InRTH at the date change.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

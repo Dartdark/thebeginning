@@ -1,0 +1,64 @@
+Crabel Stretch Breakout (user's MultiCharts file Crabel_Stretch_Breakout_NQ_v3, 2026-10-13), replicated on NQ.
+
+1. Defaults (every day, 1.4x entry, 0.7x stop, entries to 9:30 CT, no trend filter):
+defaults                                       n=1653 win 22% avg $  120 PF 1.25 t= 2.7 yrs+ 9/9 | 18-23 $  107 PF 1.26 | 24-26 $  148 PF 1.23 | L $ 132 S $ 110
+   by year: {2018: 4923, 2019: 10930, 2020: 14618, 2021: 7230, 2022: 71188, 2023: 9936, 2024: 18256, 2025: 31767, 2026: 30263}
+  longs                                        n= 811 win 25% avg $  132 PF 1.28 t= 2.2 yrs+ 5/9 | 18-23 $  145 PF 1.37 | 24-26 $  102 PF 1.16 | L $ 132 S $ nan
+  shorts                                       n= 842 win 20% avg $  110 PF 1.22 t= 1.7 yrs+ 5/9 | 18-23 $   68 PF 1.16 | 24-26 $  189 PF 1.28 | L $ nan S $ 110
+   placebo (same entry time, random side, 20 runs): $44 (-16..76) vs $120
+
+2. Neighbours (design 2018-23 vs holdout 2024-26):
+entry 1.0x stop 0.5x until 930                 n=1991 win 14% avg $    6 PF 1.02 t= 0.2 yrs+ 5/9 | 18-23 $   -4 PF 0.99 | 24-26 $   28 PF 1.05 | L $  17 S $  -5
+entry 1.0x stop 0.5x until 1030                n=2123 win 15% avg $   -0 PF 1.00 t=-0.0 yrs+ 4/9 | 18-23 $   -5 PF 0.98 | 24-26 $   11 PF 1.02 | L $  14 S $ -14
+entry 1.0x stop 0.7x until 930                 n=1991 win 21% avg $   79 PF 1.16 t= 2.0 yrs+ 7/9 | 18-23 $   53 PF 1.12 | 24-26 $  132 PF 1.20 | L $  85 S $  73
+entry 1.0x stop 0.7x until 1030                n=2123 win 21% avg $   63 PF 1.12 t= 1.7 yrs+ 7/9 | 18-23 $   44 PF 1.10 | 24-26 $  104 PF 1.15 | L $  72 S $  54
+entry 1.0x stop 1.0x until 930                 n=1991 win 29% avg $   92 PF 1.14 t= 2.0 yrs+ 7/9 | 18-23 $   70 PF 1.13 | 24-26 $  137 PF 1.16 | L $  65 S $ 119
+entry 1.0x stop 1.0x until 1030                n=2123 win 29% avg $   72 PF 1.11 t= 1.7 yrs+ 7/9 | 18-23 $   57 PF 1.11 | 24-26 $  104 PF 1.12 | L $  55 S $  89
+entry 1.2x stop 0.5x until 930                 n=1829 win 15% avg $   63 PF 1.16 t= 1.7 yrs+ 7/9 | 18-23 $   85 PF 1.26 | 24-26 $   18 PF 1.03 | L $  87 S $  40
+entry 1.2x stop 0.5x until 1030                n=2016 win 16% avg $   57 PF 1.15 t= 1.6 yrs+ 7/9 | 18-23 $   80 PF 1.25 | 24-26 $    8 PF 1.02 | L $  81 S $  34
+entry 1.2x stop 0.7x until 930                 n=1829 win 21% avg $  105 PF 1.21 t= 2.5 yrs+ 7/9 | 18-23 $   91 PF 1.22 | 24-26 $  136 PF 1.21 | L $ 111 S $ 100
+entry 1.2x stop 0.7x until 1030                n=2016 win 22% avg $   98 PF 1.20 t= 2.4 yrs+ 7/9 | 18-23 $   83 PF 1.20 | 24-26 $  131 PF 1.20 | L $ 108 S $  88
+entry 1.2x stop 1.0x until 930                 n=1829 win 29% avg $  110 PF 1.18 t= 2.4 yrs+ 8/9 | 18-23 $   85 PF 1.16 | 24-26 $  163 PF 1.20 | L $ 113 S $ 108
+entry 1.2x stop 1.0x until 1030                n=2016 win 29% avg $  109 PF 1.17 t= 2.4 yrs+ 8/9 | 18-23 $   86 PF 1.16 | 24-26 $  157 PF 1.19 | L $ 108 S $ 109
+entry 1.4x stop 0.5x until 930                 n=1653 win 15% avg $   37 PF 1.10 t= 1.0 yrs+ 7/9 | 18-23 $   35 PF 1.11 | 24-26 $   41 PF 1.08 | L $  62 S $  12
+entry 1.4x stop 0.5x until 1030                n=1892 win 16% avg $   36 PF 1.09 t= 1.0 yrs+ 5/9 | 18-23 $   40 PF 1.12 | 24-26 $   26 PF 1.05 | L $  65 S $   7
+entry 1.4x stop 0.7x until 930                 n=1653 win 22% avg $  120 PF 1.25 t= 2.7 yrs+ 9/9 | 18-23 $  107 PF 1.26 | 24-26 $  148 PF 1.23 | L $ 132 S $ 110
+entry 1.4x stop 0.7x until 1030                n=1892 win 23% avg $  111 PF 1.23 t= 2.7 yrs+ 9/9 | 18-23 $  113 PF 1.28 | 24-26 $  105 PF 1.16 | L $ 131 S $  91
+entry 1.4x stop 1.0x until 930                 n=1653 win 30% avg $  135 PF 1.22 t= 2.7 yrs+ 7/9 | 18-23 $   90 PF 1.17 | 24-26 $  226 PF 1.28 | L $ 147 S $ 123
+entry 1.4x stop 1.0x until 1030                n=1892 win 31% avg $  117 PF 1.19 t= 2.5 yrs+ 8/9 | 18-23 $   94 PF 1.18 | 24-26 $  165 PF 1.20 | L $ 138 S $  96
+entry 1.6x stop 0.5x until 930                 n=1436 win 14% avg $   -6 PF 0.98 t=-0.2 yrs+ 5/9 | 18-23 $    2 PF 1.01 | 24-26 $  -20 PF 0.96 | L $   2 S $ -13
+entry 1.6x stop 0.5x until 1030                n=1741 win 15% avg $    7 PF 1.02 t= 0.2 yrs+ 6/9 | 18-23 $    3 PF 1.01 | 24-26 $   14 PF 1.03 | L $  19 S $  -6
+entry 1.6x stop 0.7x until 930                 n=1436 win 22% avg $   95 PF 1.20 t= 2.1 yrs+ 8/9 | 18-23 $   79 PF 1.20 | 24-26 $  130 PF 1.21 | L $ 141 S $  53
+entry 1.6x stop 0.7x until 1030                n=1741 win 23% avg $   99 PF 1.21 t= 2.4 yrs+ 8/9 | 18-23 $   81 PF 1.20 | 24-26 $  137 PF 1.22 | L $ 154 S $  47
+entry 1.6x stop 1.0x until 930                 n=1436 win 30% avg $  147 PF 1.24 t= 2.8 yrs+ 9/9 | 18-23 $  120 PF 1.24 | 24-26 $  200 PF 1.25 | L $ 145 S $ 149
+entry 1.6x stop 1.0x until 1030                n=1741 win 31% avg $  140 PF 1.23 t= 2.9 yrs+ 8/9 | 18-23 $  118 PF 1.24 | 24-26 $  185 PF 1.23 | L $ 155 S $ 126
+entry 1.8x stop 0.5x until 930                 n=1238 win 14% avg $   -7 PF 0.98 t=-0.2 yrs+ 4/9 | 18-23 $    8 PF 1.03 | 24-26 $  -35 PF 0.93 | L $  38 S $ -49
+entry 1.8x stop 0.5x until 1030                n=1592 win 16% avg $    9 PF 1.02 t= 0.2 yrs+ 6/9 | 18-23 $   20 PF 1.06 | 24-26 $  -13 PF 0.97 | L $  35 S $ -16
+entry 1.8x stop 0.7x until 930                 n=1238 win 21% avg $   68 PF 1.14 t= 1.4 yrs+ 7/9 | 18-23 $   48 PF 1.12 | 24-26 $  107 PF 1.17 | L $  49 S $  87
+entry 1.8x stop 0.7x until 1030                n=1592 win 23% avg $   73 PF 1.15 t= 1.7 yrs+ 8/9 | 18-23 $   56 PF 1.14 | 24-26 $  107 PF 1.17 | L $  52 S $  94
+entry 1.8x stop 1.0x until 930                 n=1238 win 29% avg $  127 PF 1.21 t= 2.2 yrs+ 8/9 | 18-23 $  102 PF 1.20 | 24-26 $  173 PF 1.22 | L $  95 S $ 157
+entry 1.8x stop 1.0x until 1030                n=1592 win 31% avg $  116 PF 1.19 t= 2.4 yrs+ 8/9 | 18-23 $   96 PF 1.19 | 24-26 $  156 PF 1.19 | L $  95 S $ 136
+
+3. Setup and trend modes (defaults otherwise):
+NR7                                            n= 226 win 30% avg $  254 PF 1.57 t= 2.1 yrs+ 7/9 | 18-23 $  346 PF 1.93 | 24-26 $   46 PF 1.07 | L $ 205 S $ 308
+inside day                                     n= 180 win 21% avg $   83 PF 1.17 t= 0.6 yrs+ 5/9 | 18-23 $   47 PF 1.12 | 24-26 $  140 PF 1.22 | L $-132 S $ 297
+NR7 + inside                                   n=  45 win 31% avg $  347 PF 1.74 t= 1.2 yrs+ 5/9 | 18-23 $  696 PF 3.08 | 24-26 $ -286 PF 0.60 | L $  87 S $ 618
+trend filter both sides                        n= 877 win 23% avg $  142 PF 1.30 t= 2.4 yrs+ 9/9 | 18-23 $  143 PF 1.35 | 24-26 $  139 PF 1.22 | L $ 128 S $ 165
+trend filter longs only                        n=1382 win 22% avg $  118 PF 1.25 t= 2.5 yrs+ 9/9 | 18-23 $   90 PF 1.23 | 24-26 $  176 PF 1.28 | L $ 152 S $  99
+
+4. Standard metrics per NQ, defaults:
+                trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+2018-26           1653 22% $120 $22,182   0.90    2.57          1.25 $23,404   0.95  7.67       5.78
+longs              811 25% $132 $11,883   0.75    2.04          1.28 $26,898   0.44  6.38       3.72
+shorts             842 20% $110 $10,299   0.55    1.62          1.22 $30,449   0.34 16.67       1.24
+holdout 2024-26    541 23% $148 $28,257   0.89    2.52          1.23 $23,404   1.21  9.84       5.74
+   correlation with the plan: {'VB': 0.15, 'ONB_ML2_MC': 0.23, 'MON_MC': 0.07, 'EOS': 0.04, 'LDF_MC': 0.19, 'NFP_MC': -0.01, 'VCS_MC': -0.05, 'CRB': 1.0}
+   current plan       1y $8,770 2y $12,236 blown 3% / 2%
+   + Crabel 1 MNQ     1y $8,591 2y $11,969 blown 8% / 6%
+   + Crabel 2 MNQ     1y $7,083 2y $9,965 blown 19% / 21%
+
+5. Combine (VB 8 MNQ + ONB ADX30 $1,100 [+ Crabel], 21 days, every start day, with slippage):
+   VB 8 + ONB                   pass 46.9% | 2023-26 51.1%
+   + Crabel 2 MNQ               pass 45.7% | 2023-26 48.4%
+   + Crabel 4 MNQ               pass 43.0% | 2023-26 43.0%
+   Crabel 8 MNQ instead of VB   pass 34.1% | 2023-26 35.1%
