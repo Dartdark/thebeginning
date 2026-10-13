@@ -984,6 +984,29 @@ the code's 2 extra ticks on stops; at most 4 trades and 2 losses a day; flat 15:
   the short side is weak since 2023. Not adopted; shorts-only is a watch item if MultiCharts later
   confirms it. Better suited to a larger account without a tight trailing drawdown.
 
+## VaultBreak v8 (2026-10-13, the Bridge's version) vs our Vault Break v1: keep v1
+
+Code `../analysis/vault_break_v8_test.py` (output in `..._output.txt`). One 30-minute-bar engine with switches for
+each v8 change; fills on 1-minute bars (Bar Magnifier); per NQ after $7.25 + 1 tick per market / stop fill.
+- **Validation:** with v1 settings the engine matches the MultiCharts VB v1 trade list: 1,731 of 1,743 entries,
+  P&L correlation 0.993, $91 vs $92 a trade, PF 1.26 both.
+- **What v8 changes:** (1) the noise band uses the 15-session average of each calendar date's high − low,
+  counting Sunday-evening and holiday sessions; v1 uses weekday true range. (2) A VWAP exit after 7 closes
+  below VWAP. (3) The time exit is at the next bar's open instead of the 14:30 close. (4) No holiday times.
+- **Results:** v8 1,880 trades, $82, PF 1.23, t 3.9, 9/9 years (2018–22 $81, 2023–26 $84) vs MC v1 1,743,
+  $92, PF 1.26, t 4.3 (2018–22 $83, 2023–26 $100). Sharpe 1.25 vs 1.35, Sortino 1.89 vs 2.07, Calmar 1.02
+  vs 1.31, Ulcer 3.4 vs 3.2, max drawdown $16,886 vs $13,618 per NQ. 2023+ bootstrap Sharpe v8 0.47–2.04,
+  v1 0.67–2.26. Daily correlation 0.96. Long-only, so longs = all.
+- **Which change does it:** only the band. v1 with the v8 band = $83, PF 1.23: short Sunday sessions shrink
+  the average range, the band gets closer to the open, and more weaker breakouts trade. The VWAP exit never
+  fires (0% of exits, at 4, 7 or 10 bars): the bracket or the 14:30 exit always comes first. The time exit
+  and the holiday handling change nothing ($91 either way).
+- **Funded** (8-strategy plan, VB swapped at 3 MNQ): v8 $8,750 / $12,259, blown 5% / 4% vs $9,313 / $12,436,
+  3% / 1%; v8 2 MNQ $9,050 / $12,320. **Combine** (VB 8 MNQ + ONB ADX30): v8 pass 43.1% vs v1 46.9%
+  (2023–26 45.5% vs 51.1%).
+- **Verdict:** keep v1 in both plans. v8 is the same strategy with a slightly worse noise band (C as a
+  variant).
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

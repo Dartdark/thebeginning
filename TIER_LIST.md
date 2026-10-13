@@ -64,6 +64,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Headline Shock Follow: follow an unscheduled 5-min jump > 5.5x its normal size, 8:40–14:15, stop = jump, out 60 min | Strategy (Python only) | 835 trades, $142, PF 1.31, t 2.5, 6/9 years; longs and shorts both PF 1.31; placebo $32; corr ≤ 0.15; funded + 1 MNQ $7,922 / $12,097, + 2 MNQ $8,413 / $11,690 | Real edge, but regime-bound: 2025 (tariff headlines) is 45% of the profit, 2023–24 lost; funded within noise |
 | Bundle of the three edges (HSF + NFP Fade + Vol-Control Sell Flow) | Funded add-on (NFP + VCS adopted 2026-10-13 after MC confirmation) | Per NQ: 978 trades, PF 1.39, Sharpe 1.11 (2023–26 1.34, bootstrap 0.79–1.97); corr with plan 0.06; NFP $500 + VCS 1 MNQ: funded +$456 year 1 (90% $123–826), +$10 year 2, blown 4% / 3% | Clears noise in year 1 only; candidate for MultiCharts versions, not adopted |
 | Morning direction at 10:30 CT, followed to 15:00 (direction search) | Signal | t 2.2, 7/9 years, $112 a day; not yet tested as a trade | Test as a trade next |
+| VaultBreak v8 (the Bridge's version): noise band from the 15-session high − low average incl. Sunday sessions, + 7-bar VWAP exit, next-bar time exit | Variant of Vault Break | 1,880 trades, $82, PF 1.23, t 3.9, 9/9 years vs v1 (MC) $92, PF 1.26, t 4.3; Sharpe 1.25 vs 1.35, Calmar 1.02 vs 1.31; only the band matters (VWAP exit never fires); funded at 3 MNQ $8,750 / $12,259 blown 5% / 4% vs $9,313 / $12,436; combine pass 43.1% vs 46.9% | Same strategy, slightly worse band; keep v1 |
 
 ## D
 

@@ -83,7 +83,10 @@ them (F); LDF-long delta filter D (no funded gain). Export quirk: MC `Volume` = 
 The Bridge's Monday Long NQ (`analysis/bridge_monday_long_test.py`, its v2.1 code ported): PF 2.04, t 4.4, 9/9 years;
 MC-confirmed (217/217 trades match): A, in the funded plan at 1 MNQ.
 DriftPullback v2.1 (`analysis/drift_pullback_test.py`): real edge (t 4.0, 9/9 years, placebo −$16) but funded
-worse (+1 MNQ blown 13%): B, not adopted.
+worse (+1 MNQ blown 13%): B, not adopted. MC code for shorts only: `funded_strategies/NQ_Drift_Pullback_Shorts.txt`
+(needs 15-min data2; user dropped the MC run).
+VaultBreak v8 (the Bridge's, `analysis/vault_break_v8_test.py`): slightly worse than our v1 (band from H-L incl.
+Sunday sessions); VWAP exit never fires; keep v1 (C).
 Setup notes: restart MultiCharts after any DLL / data change ("OLD DLL" error); compile every OFB function
 ("unverified function" error); Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close
 conversion unchecked.
