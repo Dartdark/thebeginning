@@ -9,7 +9,7 @@ Python replica on the 1-minute NQ grid, Central time (the code's defaults):
   short and a green bar); only bars closing 9:30-14:25; at most 4 trades and 2 losses a day; flat; 1 contract.
   Exits from the bar after the entry bar (MultiCharts places them at the entry bar's close): long stop 80 /
   target 40 points, short stop 80 / target 50; the stop carries the code's 2 ticks of extra slippage; market
-  flat at the open of the 15:00 bar (FlatTime 1455). Fills inside the 5-min bars on 1-minute bars (Bar
+  flat at the open of the 15:00 bar (FlatTime 1455); on early closes at the session's last bar. Fills inside the 5-min bars on 1-minute bars (Bar
   Magnifier); if one minute touches both, the stop counts first.
 Costs: $7.25 per NQ + 1 tick on market entries and the flat exit; stops: the code's 2 ticks; targets: limits.
   python3 analysis/drift_pullback_test.py [SCRATCH_DIR]
@@ -22,7 +22,7 @@ import metrics as M, resampling as R
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 PV, TICK, COST = 20.0, 0.25, 7.25
 DEF = dict(drift=0.10, dlen=4, window=6, lsl=80.0, ltp=40.0, ssl=80.0, stp=50.0, slip_ticks=2, longs=True,
-           shorts=True, max_tr=4, max_loss=2, start=930, end=1430, flat=1455, anchor=2, malen=20, exit_atr=None)
+           shorts=True, max_tr=4, max_loss=2, start=930, end=1430, flat=1455, anchor=2, malen=20, exit_atr=None, through=0.0)
 
 
 def prep(g):
@@ -84,7 +84,7 @@ def run(g, P, rand=None, **kw):
                 for m in mins:
                     if np.isnan(g.h[d, m]): continue
                     hit_s = (g.l[d, m] <= pos_["stop"]) if s > 0 else (g.h[d, m] >= pos_["stop"])
-                    hit_t = (g.h[d, m] >= pos_["tgt"]) if s > 0 else (g.l[d, m] <= pos_["tgt"])
+                    hit_t = (g.h[d, m] >= pos_["tgt"] + p["through"]) if s > 0 else (g.l[d, m] <= pos_["tgt"] - p["through"])
                     if hit_s:
                         px = min(g.o[d, m], pos_["stop"]) if s > 0 else max(g.o[d, m], pos_["stop"]); kind = 0
                     elif hit_t:
@@ -129,11 +129,11 @@ def run(g, P, rand=None, **kw):
                     av = atr5[d * 288 + i5] if atr5 is not None else None
                     pend = (side, av); trades += 1
             if pos_ is not None and t >= p["flat"]: flat_pend = True
-        if pos_ is not None:                                                 # safety: close at 15:05
-            px = g.c[d, jof(1505)] if not np.isnan(g.c[d, jof(1505)]) else g.c[d, jof(1500)]
-            out.append(dict(day=d, date=ts[d], side=pos_["side"], j0=pos_["j0"], j1=jof(1505), entry=pos_["e"],
-                            exit=px - pos_["side"] * TICK, kind=2, slips=0,
-                            net=(px - pos_["side"] * TICK - pos_["e"]) * pos_["side"] * PV - COST))
+        if pos_ is not None:                     # early closes / holidays: SetExitOnClose at the session's last bar
+            r = g.c[d, :jof(1505) + 1]; okj = np.flatnonzero(~np.isnan(r)); jx = okj[-1]
+            px = r[jx] - pos_["side"] * TICK
+            out.append(dict(day=d, date=ts[d], side=pos_["side"], j0=pos_["j0"], j1=max(int(jx), pos_["j0"]), entry=pos_["e"],
+                            exit=px, kind=2, slips=0, net=(px - pos_["e"]) * pos_["side"] * PV - COST))
     return pd.DataFrame(out)
 
 
@@ -172,7 +172,8 @@ if __name__ == "__main__":
            ("targets 30 / 40", dict(ltp=30, stp=40)), ("targets 50 / 60", dict(ltp=50, stp=60)), ("targets 60 / 75", dict(ltp=60, stp=75)),
            ("start 8:45 (incl. first hour)", dict(start=845)), ("no daily caps", dict(max_tr=99, max_loss=99)),
            ("anchor 0: SMA(20) of 15-min closes", dict(anchor=0)),
-           ("ExitMode 1: ATR 3.0 / 1.5, 3.0 / 1.9", dict(exit_atr=(3.0, 1.5, 3.0, 1.9)))]
+           ("ExitMode 1: ATR 3.0 / 1.5, 3.0 / 1.9", dict(exit_atr=(3.0, 1.5, 3.0, 1.9))),
+           ("targets must trade through by 1 tick", dict(through=0.25)), ("targets through by 1 point", dict(through=1.0))]
     VR = {}
     for nm, kw in var:
         VR[nm] = run(g, P, **kw); print(line(VR[nm], nm))

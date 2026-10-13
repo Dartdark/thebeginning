@@ -82,6 +82,8 @@ flip cross, regime follow / fade, strike pin all F. Order flow (MBO 2018-2026, `
 them (F); LDF-long delta filter D (no funded gain). Export quirk: MC `Volume` = buy volume on these bars.
 The Bridge's Monday Long NQ (`analysis/bridge_monday_long_test.py`, its v2.1 code ported): PF 2.04, t 4.4, 9/9 years;
 MC-confirmed (217/217 trades match): A, in the funded plan at 1 MNQ.
+DriftPullback v2.1 (`analysis/drift_pullback_test.py`): real edge (t 4.0, 9/9 years, placebo −$16) but funded
+worse (+1 MNQ blown 13%): B, not adopted.
 Setup notes: restart MultiCharts after any DLL / data change ("OLD DLL" error); compile every OFB function
 ("unverified function" error); Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close
 conversion unchecked.

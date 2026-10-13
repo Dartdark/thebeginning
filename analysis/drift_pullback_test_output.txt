@@ -1,0 +1,74 @@
+DriftPullback v2.1 (Francesco Agnello, shared in The Bridge's Strategies Feedbacks; user's paste), 2026-10-13.
+
+1. Defaults (session-VWAP anchor, drift 0.10%, long 80/40, short 80/50, 9:30-14:30 CT):
+defaults                                       n= 5733 win 63% avg $   56 PF 1.12 t= 4.0 yrs+ 9/9 | 18-22 $  62 PF 1.15 | 23-26 $  50 PF 1.10 | L $  60 S $  53
+   exits: stop 24%, target 55%, flat 20%; trades a year 637
+   by year: {2018: 20259, 2019: 9848, 2020: 60892, 2021: 39237, 2022: 49093, 2023: 15658, 2024: 42184, 2025: 52331, 2026: 33459}
+  longs                                        n= 3032 win 65% avg $   60 PF 1.14 t= 3.3 yrs+ 8/9 | 18-22 $  42 PF 1.11 | 23-26 $  77 PF 1.18 | L $  60 S $ nan
+  shorts                                       n= 2701 win 60% avg $   53 PF 1.10 t= 2.4 yrs+ 8/9 | 18-22 $  84 PF 1.18 | 23-26 $  20 PF 1.04 | L $ nan S $  53
+   longs by year: {2018: -5573, 2019: 6502, 2020: 45347, 2021: 16184, 2022: 1752, 2023: 36394, 2024: 37007, 2025: 20435, 2026: 22389}
+   shorts by year: {2018: 25832, 2019: 3345, 2020: 15546, 2021: 23053, 2022: 47341, 2023: -20736, 2024: 5177, 2025: 31896, 2026: 11070}
+   placebo (same entry bars, random side with that side's stop / target, 10 runs): $-16 (-40..13) vs $56
+   placebo longs $-5, shorts $-27
+
+2. Neighbours (one change at a time):
+drift 0.05%                                    n= 5805 win 62% avg $   46 PF 1.10 t= 3.2 yrs+ 9/9 | 18-22 $  52 PF 1.12 | 23-26 $  39 PF 1.08 | L $  48 S $  43
+drift 0.15%                                    n= 5608 win 62% avg $   53 PF 1.11 t= 3.7 yrs+ 9/9 | 18-22 $  65 PF 1.15 | 23-26 $  40 PF 1.08 | L $  55 S $  51
+drift 0.20%                                    n= 5409 win 62% avg $   47 PF 1.10 t= 3.2 yrs+ 8/9 | 18-22 $  68 PF 1.16 | 23-26 $  24 PF 1.05 | L $  43 S $  50
+stop 60                                        n= 5874 win 58% avg $   41 PF 1.09 t= 3.3 yrs+ 9/9 | 18-22 $  53 PF 1.13 | 23-26 $  29 PF 1.06 | L $  49 S $  32
+stop 100                                       n= 5543 win 65% avg $   51 PF 1.11 t= 3.3 yrs+ 9/9 | 18-22 $  50 PF 1.11 | 23-26 $  52 PF 1.10 | L $  49 S $  53
+targets 30 / 40                                n= 6256 win 66% avg $   28 PF 1.07 t= 2.3 yrs+ 9/9 | 18-22 $  26 PF 1.07 | 23-26 $  31 PF 1.07 | L $  35 S $  21
+targets 50 / 60                                n= 5282 win 58% avg $   45 PF 1.09 t= 2.8 yrs+ 9/9 | 18-22 $  59 PF 1.12 | 23-26 $  31 PF 1.05 | L $  50 S $  38
+targets 60 / 75                                n= 4831 win 55% avg $   42 PF 1.07 t= 2.3 yrs+ 9/9 | 18-22 $  66 PF 1.13 | 23-26 $  18 PF 1.03 | L $  48 S $  35
+start 8:45 (incl. first hour)                  n= 5997 win 63% avg $   48 PF 1.10 t= 3.4 yrs+ 8/9 | 18-22 $  58 PF 1.13 | 23-26 $  39 PF 1.08 | L $  57 S $  39
+no daily caps                                  n= 7462 win 62% avg $   38 PF 1.08 t= 3.0 yrs+ 9/9 | 18-22 $  53 PF 1.12 | 23-26 $  24 PF 1.05 | L $  43 S $  32
+anchor 0: SMA(20) of 15-min closes             n= 5525 win 62% avg $   56 PF 1.12 t= 3.9 yrs+ 8/9 | 18-22 $  65 PF 1.16 | 23-26 $  46 PF 1.09 | L $  60 S $  51
+ExitMode 1: ATR 3.0 / 1.5, 3.0 / 1.9           n= 5969 win 63% avg $   19 PF 1.04 t= 1.1 yrs+ 5/9 | 18-22 $  23 PF 1.06 | 23-26 $  13 PF 1.02 | L $  16 S $  21
+targets must trade through by 1 tick           n= 5715 win 62% avg $   53 PF 1.11 t= 3.7 yrs+ 9/9 | 18-22 $  58 PF 1.14 | 23-26 $  47 PF 1.09 | L $  56 S $  49
+targets through by 1 point                     n= 5676 win 62% avg $   43 PF 1.09 t= 3.0 yrs+ 9/9 | 18-22 $  46 PF 1.11 | 23-26 $  41 PF 1.08 | L $  48 S $  39
+
+3. Standard metrics per NQ (defaults):
+       trades win avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+all      5733 63% $56 $35,980   1.30    1.99          1.12 $35,301   1.02  5.57      12.92
+longs    3032 65% $60 $20,102   1.06    1.69          1.14 $17,446   1.15  6.65       6.05
+shorts   2701 60% $53 $15,878   0.75    1.30          1.10 $35,035   0.45  8.19       3.88
+                             actual        p5       p50       p95
+name         metric                                              
+all 2023+    sharpe            1.16      0.38      1.14      1.93
+             sortino           1.77      0.56      1.73      3.06
+             pf_day            1.19      1.06      1.19      1.34
+             calmar            1.05      0.22      1.01      2.57
+             ulcer            11.29      5.01     10.92     31.76
+             max_dd       35,301.00 22,169.85 35,667.88 64,238.70
+             P(Sharpe<=0)       NaN       NaN      0.01       NaN
+longs 2023+  sharpe            1.39      0.61      1.38      2.16
+             sortino           2.28      0.95      2.27      3.69
+             pf_day            1.28      1.11      1.28      1.47
+             calmar            1.82      0.39      1.39      3.08
+             ulcer             4.81      3.50      6.98     17.70
+             max_dd       16,507.75 13,555.91 21,255.12 37,282.17
+             P(Sharpe<=0)       NaN       NaN      0.00       NaN
+shorts 2023+ sharpe            0.30     -0.49      0.28      1.06
+             sortino           0.49     -0.78      0.47      1.87
+             pf_day            1.06      0.91      1.05      1.22
+             calmar            0.20     -0.17      0.17      1.02
+             ulcer            31.76      8.58     22.75     68.10
+             max_dd       35,035.00 22,543.70 40,472.38 79,447.60
+             P(Sharpe<=0)       NaN       NaN      0.28       NaN
+             actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+all 2023+      $35,301      40% $37,320 $58,430 $68,654        100%        100%        100%
+longs 2023+    $16,508       9% $22,576 $35,309 $42,425        100%        100%        100%
+shorts 2023+   $35,035      25% $41,375 $65,350 $75,867        100%        100%        100%
+
+4. Daily correlation with the plan:
+         VB  ONB_ML2_MC  MON_MC   EOS  LDF_MC  NFP_MC  VCS_MC
+DPB    0.23        0.18    0.07  0.03    0.11   -0.01   -0.00
+DPB_L  0.46        0.09    0.22 -0.03    0.06    0.00   -0.01
+DPB_S -0.10        0.15   -0.11  0.06    0.09   -0.01    0.01
+
+5. Funded bench (current 8-strategy plan; the Bridge Monday Long added from its MC trades):
+   current plan               1y $9,313 2y $12,436 blown 3% / 1%
+   + DriftPullback 1 MNQ      1y $9,170 2y $11,182 blown 13% / 13%
+   + DriftPullback 2 MNQ      1y $6,553 2y $7,117 blown 43% / 46%
+   + longs only 1 MNQ         1y $8,238 2y $10,945 blown 15% / 15%
+   + shorts only 1 MNQ        1y $9,453 2y $12,492 blown 4% / 2%

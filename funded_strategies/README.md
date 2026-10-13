@@ -950,6 +950,40 @@ description (CME 17:00–16:00 daily bars) gave 203 trades, $508, PF 1.89. The e
   once every two weeks (inactivity rule). The Apex PA $1,000 daily loss limit isn't modelled; the worst
   trade is −$617 per MNQ.
 
+## DriftPullback v2.1 (2026-10-13, F. Agnello via The Bridge's Strategies Feedbacks): real edge, wrong shape for Apex
+
+Code `../analysis/drift_pullback_test.py` (output in `..._output.txt`), a Python replica of the pasted v2.1 code on
+the 1-minute grid (Central time). It uses 15-minute signal bars: session VWAP from 8:30, drift = 15-min close vs 4
+bars back. Arm long when the close is above a rising VWAP and drift ≥ +0.10% (short mirrored). It enters on the
+next red 5-minute bar (green for shorts) from 9:30 to 14:25 CT. Long stop 80 / target 40 points, short 80 / 50;
+the code's 2 extra ticks on stops; at most 4 trades and 2 losses a day; flat 15:00. Fills on 1-minute bars
+(Bar Magnifier), with exits from the bar after the entry bar as MultiCharts places them. Per NQ after $7.25 +
+1 tick on market fills.
+- **Defaults:** 5,733 trades (637 a year), 63% win, $56 a trade, PF 1.12, t 4.0, **9/9 years** positive;
+  2018–22 $62 (PF 1.15), 2023–26 $50 (PF 1.10). Exits: target 55%, stop 24%, flat 20%.
+- **Longs:** 3,032 trades, $60, PF 1.14, t 3.3, 8/9 years (2018–22 $42, 2023–26 $77). **Shorts:** 2,701 trades,
+  $53, PF 1.10, t 2.4, 8/9 years (2018–22 $84, 2023–26 $20; 2023 −$20,736).
+- **Placebo** (same entry bars, random side with that side's stop / target, 10 runs): −$16 (−$40 to +$13)
+  vs $56; longs −$5, shorts −$27. The direction carries real information.
+- **Neighbours** are all positive with t 2.3–3.9: drift 0.05–0.20%, stops 60 / 100, targets 30–75, the first
+  hour included, no daily caps, an SMA(20) anchor instead of VWAP. The validated defaults are the best of
+  them. The ATR exits (ExitMode 1, "to be calibrated") are $19, t 1.1. Stricter target fills (price must
+  trade through, as in your MultiCharts settings): 1 tick $53, t 3.7; 1 point $43, t 3.0.
+- **Standard metrics, 2018–26:** Sharpe 1.30, Sortino 1.99, PF 1.12, Calmar 1.02, Ulcer 5.6, max drawdown
+  $35,301 per NQ. Longs Sharpe 1.06 / Calmar 1.15 / Ulcer 6.7; shorts 0.75 / 0.45 / 8.2. 2023+ holdout:
+  all Sharpe 1.16 (bootstrap 0.38–1.93, P ≤ 0 1%); longs 1.39 (0.61–2.16); shorts 0.30 (−0.49 to 1.06,
+  P ≤ 0 28%).
+- **Correlation:** longs 0.46 with Vault Break (both buy strength in the RTH trend) and 0.22 with Monday Long;
+  shorts −0.10 to 0.15 with everything.
+- **Funded bench** (8-strategy plan $9,313 / $12,436, blown 3% / 1%): + 1 MNQ $9,170 / $11,182, blown 13%;
+  + 2 MNQ $6,553 / $7,117, blown 43%; longs only $8,238 / $10,945, blown 15%; shorts only $9,453 / $12,492,
+  blown 4% / 2% (within noise). It's many small edges with 80-point stops, two losses allowed a day, so
+  daily swings are big against a $2,000 trailing drawdown. The longs also double up on Vault Break days.
+- **Verdict: B.** It's a genuine intraday trend-pullback edge, one of the few price-pattern signals here
+  with a clean placebo and 9/9 years. But, as with Crabel, the shape doesn't fit Apex funded rules, and
+  the short side is weak since 2023. Not adopted; shorts-only is a watch item if MultiCharts later
+  confirms it. Better suited to a larger account without a tight trailing drawdown.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
