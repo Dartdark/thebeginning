@@ -1,0 +1,46 @@
+{ OFB COT exporter - MultiCharts PowerLanguage indicator (2026-10-13)
+
+  Writes The Bridge's weekly COT values (the same function the OFB_CotDealerRank_Signal uses) to one CSV, one
+  row per CFTC release, so the dealer-positioning signal can be tested in this repo:
+    <Folder><FileName>   e.g. C:\OFBexport\COT_NQ.csv
+  Columns: date, time (the first chart bar after the release, chart time zone), then for each series:
+    net, rank13, rank26, ok   (rank = OFB_CotPercentile over 13 / 26 weeks; ok = 1 when the rank is valid)
+  Series: NQ_TFF_DEALER_NET (the signal's default) and NQ_LEG_COMM_NET (its Legacy sister).
+
+  Use: compile OFB_CotPercentile first (The Bridge's Functions screen); make sure ofb_cot.bin is current (Data
+  screen, COT card, "Refresh COT now"). Add this indicator to a 15-minute @NQ chart from your normal feed, full
+  session, a US-time zone (Exchange / Central is fine), loaded from 2017-06-01 (or as far back as the COT file
+  goes). The folder must already exist. The file is deleted and rewritten on every recalculation. }
+
+Inputs:
+	Folder("C:\OFBexport\"),
+	FileName("COT_NQ.csv"),
+	SeriesA("NQ_TFF_DEALER_NET"),
+	SeriesB("NQ_LEG_COMM_NET");
+
+Variables:
+	okA13(0), netA13(0), rA13(0), okA26(0), netA26(0), rA26(0),
+	okB13(0), netB13(0), rB13(0), okB26(0), netB26(0), rB26(0),
+	Row(""), Header(false);
+
+Once begin
+	FileDelete(Folder + FileName);
+end;
+
+rA13 = OFB_CotPercentile(SeriesA, 13, okA13, netA13);
+rA26 = OFB_CotPercentile(SeriesA, 26, okA26, netA26);
+rB13 = OFB_CotPercentile(SeriesB, 13, okB13, netB13);
+rB26 = OFB_CotPercentile(SeriesB, 26, okB26, netB26);
+
+if Header = false then begin
+	FileAppend(Folder + FileName, "date,time,tff_net,tff_rank13,tff_rank26,tff_ok,leg_net,leg_rank13,leg_rank26,leg_ok" + NewLine);
+	Header = true;
+end;
+
+{ one row per release: the value changes only at the release }
+if CurrentBar > 1 and (netA13 <> netA13[1] or netB13 <> netB13[1]) then begin
+	Row = NumToStr(Date + 19000000, 0) + "," + NumToStr(Time, 0)
+		+ "," + NumToStr(netA13, 0) + "," + NumToStr(rA13, 2) + "," + NumToStr(rA26, 2) + "," + NumToStr(okA13, 0)
+		+ "," + NumToStr(netB13, 0) + "," + NumToStr(rB13, 2) + "," + NumToStr(rB26, 2) + "," + NumToStr(okB13, 0);
+	FileAppend(Folder + FileName, Row + NewLine);
+end;
