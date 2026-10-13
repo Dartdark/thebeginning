@@ -1115,6 +1115,22 @@ $7.25 + 1 tick per market fill.
 - **Verdict: D.** A momentum filter on breakouts helped in 2018–22 and has stopped working. The longs are
   mostly NQ's trend. No funded bench run: it's negative on the 2023+ holdout.
 
+## The Bridge's Liquidity Predictability (2026-10-13): the resting book doesn't predict the next bar
+
+Code `../analysis/bridge_liquidity_test.py` (output in `..._output.txt`). Imbalance = (bid − ask depth) / (bid + ask)
+over 10 / 20 / 50 levels (the Bridge's MBO depth, 2018–2026 RTH). Follow the book at ±20% or ±40%, or the candle,
+or both agreeing; next bar at market, out after exactly 1 bar. 1- and 5-minute bars, 8:31–15:00 CT. Per NQ after
+$7.25 + 1 tick per fill. The book is rarely lopsided: 50 levels ≥ +20% on 1% of minutes, ≤ −20% on 2%.
+- **1-minute bars:** following the book is negative before costs at 10 and 20 levels (−0.04 to −0.30 points)
+  and +0.05 at 50 levels (t 0.7). "Both agree" at 50 levels +0.35 points (t 2.5) is the best of 22 rows, still
+  −$10 a trade net. Every row nets −$10 to −$23 a trade (PF 0.72–0.84).
+- **5-minute bars:** two of 11 rows are net positive, both ±40% on few trades: 20 levels $26 (612 trades,
+  gross t 1.9; 2018–22 $36, 2023–26 $8) and 50 levels $27 (292 trades; 2023–26 −$21). The rest −$4 to −$29.
+- Fading the book doesn't work either (−$18 / −$29).
+- **Verdict: F.** This matches the earlier finding (depth imbalance vs the next 5–30 minutes, |corr| ≤ 0.024).
+  Resting size is easy to cancel and gets pulled; it doesn't carry direction beyond costs. The two positive
+  5-minute rows are what chance gives among 22 tries and fail the holdout.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
