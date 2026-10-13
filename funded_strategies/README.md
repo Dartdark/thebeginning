@@ -1131,6 +1131,29 @@ $7.25 + 1 tick per fill. The book is rarely lopsided: 50 levels ≥ +20% on 1% o
   Resting size is easy to cancel and gets pulled; it doesn't carry direction beyond costs. The two positive
   5-minute rows are what chance gives among 22 tries and fail the holdout.
 
+## The Bridge's COT Dealer Rank (2026-10-13): maybe something weekly, nothing Apex can trade
+
+Code `../analysis/bridge_cot_test.py` (output in `..._output.txt`). Data: `COT_NQ.csv`, 458 CFTC releases from 2018
+to Oct 2026, exported from The Bridge with `../multi_strategy/OFB_COT_Exporter.txt`. Each value is used only after
+the chart time it became known. State at each release: long if the TFF dealer net's 13-week rank is > 70 and the
+last daily close is above its 50-day SMA, short if < 30 and below (Legacy sister: commercial net, 26-week rank,
+60 / 40). Per NQ after $7.25 + 1 tick per fill.
+- **As written** (re-decided weekly, held through nights and weekends; **not Apex-legal**): TFF default 51
+  trades, $3,185, PF 1.98, t 1.8, 8/9 years. All of it is the longs: 32 trades, $5,854 a trade. The shorts
+  lose (19, −$1,311). Without the SMA filter: $646, PF 1.12. Legacy sister $2,387, PF 1.48, t 0.9. TFF
+  26-week $936, t 0.4.
+- **Control:** a weekly long whenever the close is above the 50-day SMA (no COT) makes $864 a week held;
+  the COT longs make $2,428 a week held. So the dealer rank may pick better long weeks, but on 32 trades
+  (t ≈ 1.8), and the gain is in overnight / weekend holding.
+- **Apex-legal daily version** (trade 8:30 → 15:00 in the state known at the open): TFF $42 a day, PF 1.03,
+  t 0.3 (longs $113, shorts −$116); random-side placebo $17. Sharpe 0.09, Calmar 0.04, Ulcer 35.8; 2023+
+  Sharpe 0.20 (P ≤ 0 34%). Legacy $47, t 0.4; the other variants are negative. Controls: the 50-day SMA
+  trend alone −$81 a day; long every day +$36.
+- **As a filter on the plan's MultiCharts trades:** agree vs disagree, all |t| ≤ 1.2 (VB $152 vs $61, ONB ML
+  $1,283 vs $554 on 50 / 23 trades). Most trades fall on flat-state days.
+- **Verdict:** daily / filter versions **F**. The weekly hold is **C**: a possible edge on the long side,
+  too few trades to trust, and it can't be held on Apex. Worth a look only for a swing account.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

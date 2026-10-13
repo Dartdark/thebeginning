@@ -95,6 +95,8 @@ The Bridge's VWAP Fade (`analysis/bridge_vwap_fade_test.py`): −$25 a trade, PF
 The Bridge's Large Trade Predictability (`analysis/bridge_large_trade_test.py`): 1-min gross edge $2-8 a trade < $17 costs (F).
 Donchian + LWTI (`analysis/donchian_lwti_test.py`): t 1.8, worked 2018-22, negative since 2023 (D).
 The Bridge's Liquidity Predictability (`analysis/bridge_liquidity_test.py`): book imbalance doesn't predict the next bar (F).
+The Bridge's COT Dealer Rank (`analysis/bridge_cot_test.py`, `COT_NQ.csv`): weekly hold C (32 longs carry it, not
+Apex-legal); Apex daily / filter versions F.
 Setup notes: restart MultiCharts after any DLL / data change ("OLD DLL" error); compile every OFB function
 ("unverified function" error); Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close
 conversion unchecked.

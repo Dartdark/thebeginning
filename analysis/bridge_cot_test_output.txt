@@ -1,0 +1,75 @@
+The Bridge's OFB_CotDealerRank_Signal (TFF dealer net, 13-week rank) and its Legacy sister, on NQ, 2026-10-13.
+releases: 458 (20180105 .. 20261009)
+
+== TFF dealer rank13 70/30 (default): state shares long 17%, short 8%
+A. as written (weekly hold):  n=  51 win 61% avg $  3185 PF 1.98 t= 1.8 yrs+ 8/9 | 18-22 $  2636 | 23-26 $  3853 | L $  5854 (n 32) S $ -1311 (n 19)
+   without the 50-day SMA filter:  n=  90 win 56% avg $   646 PF 1.12 t= 0.4 yrs+ 6/9 | 18-22 $   227 | 23-26 $  1248 | L $  5695 (n 42) S $ -3771 (n 48)
+B. Apex daily (8:30 -> 15:00):   n= 538 win 51% avg $    42 PF 1.03 t= 0.3 yrs+ 6/9 | 18-22 $   -30 | 23-26 $    98 | L $   113 (n 371) S $  -116 (n 167)
+   placebo (same days, random side, 20 runs): $17 (-250..273) vs $42
+
+== TFF rank26 70/30: state shares long 18%, short 8%
+A. as written (weekly hold):  n=  53 win 53% avg $   936 PF 1.19 t= 0.4 yrs+ 5/9 | 18-22 $   891 | 23-26 $  1016 | L $  3430 (n 34) S $ -3527 (n 19)
+   without the 50-day SMA filter:  n=  68 win 57% avg $  1198 PF 1.21 t= 0.5 yrs+ 6/9 | 18-22 $   963 | 23-26 $  1691 | L $  6335 (n 33) S $ -3645 (n 35)
+B. Apex daily (8:30 -> 15:00):   n= 532 win 50% avg $   -18 PF 0.99 t=-0.1 yrs+ 6/9 | 18-22 $  -131 | 23-26 $   117 | L $    79 (n 367) S $  -235 (n 165)
+   placebo (same days, random side, 20 runs): $-79 (-493..226) vs $-18
+
+== Legacy commercial rank26 60/40 (sister): state shares long 25%, short 12%
+A. as written (weekly hold):  n=  57 win 53% avg $  2387 PF 1.48 t= 0.9 yrs+ 8/9 | 18-22 $  1046 | 23-26 $  4370 | L $  7144 (n 34) S $ -4644 (n 23)
+   without the 50-day SMA filter:  n=  81 win 52% avg $  1411 PF 1.25 t= 0.7 yrs+ 7/9 | 18-22 $   551 | 23-26 $  2663 | L $  6326 (n 41) S $ -3627 (n 40)
+B. Apex daily (8:30 -> 15:00):   n= 762 win 51% avg $    47 PF 1.04 t= 0.4 yrs+ 7/9 | 18-22 $   -89 | 23-26 $   225 | L $   217 (n 516) S $  -308 (n 246)
+   placebo (same days, random side, 20 runs): $-5 (-180..217) vs $47
+
+== Legacy rank13 70/30: state shares long 19%, short 11%
+A. as written (weekly hold):  n=  57 win 51% avg $   613 PF 1.13 t= 0.3 yrs+ 6/9 | 18-22 $   -73 | 23-26 $  1323 | L $  4005 (n 37) S $ -5662 (n 20)
+   without the 50-day SMA filter:  n=  92 win 55% avg $   127 PF 1.03 t= 0.1 yrs+ 6/9 | 18-22 $   344 | 23-26 $  -167 | L $  2741 (n 46) S $ -2486 (n 46)
+B. Apex daily (8:30 -> 15:00):   n= 624 win 49% avg $   -76 PF 0.95 t=-0.5 yrs+ 5/9 | 18-22 $  -249 | 23-26 $    86 | L $    74 (n 402) S $  -347 (n 222)
+   placebo (same days, random side, 20 runs): $1 (-498..273) vs $-76
+
+Control: the 50-day SMA trend alone (long above, short below, Apex daily):  n=2134 win 50% avg $   -81 PF 0.94 t=-1.1 yrs+ 4/9 | 18-22 $   -73 | 23-26 $   -91 | L $   -25 (n 1455) S $  -201 (n 679)
+Control: long every day 8:30 -> 15:00:  n=2134 win 53% avg $    36 PF 1.03 t= 0.5 yrs+ 5/9 | 18-22 $    -1 | 23-26 $    83 | L $    36 (n 2134) S $   nan (n 0)
+
+Standard metrics per NQ (Apex daily version, TFF default):
+       trades win   avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+all       538 51%   $42  $2,530   0.09    0.12          1.03 $67,432   0.04 35.84       0.14
+longs     371 55%  $113  $4,682   0.21    0.29          1.10 $41,787   0.11 18.59       0.50
+shorts    167 43% $-116 $-2,152  -0.11   -0.17          0.94 $50,015  -0.04 46.21      -0.09
+                             actual        p5       p50        p95
+name         metric                                               
+all 2023+    sharpe            0.20     -0.52      0.18       0.93
+             sortino           0.29     -0.71      0.26       1.48
+             pf_day            1.06      0.85      1.06       1.33
+             calmar            0.20     -0.19      0.11       0.88
+             ulcer            19.39     10.73     31.61     102.19
+             max_dd       38,523.50 34,942.54 63,108.25 122,624.20
+             P(Sharpe<=0)       NaN       NaN      0.34        NaN
+longs 2023+  sharpe            0.18     -0.64      0.17       1.01
+             sortino           0.24     -0.79      0.22       1.48
+             pf_day            1.07      0.79      1.06       1.43
+             calmar            0.13     -0.20      0.09       0.91
+             ulcer            23.19      9.06     29.01     100.22
+             max_dd       40,286.25 26,476.90 54,464.75 112,621.46
+             P(Sharpe<=0)       NaN       NaN      0.37        NaN
+shorts 2023+ sharpe            0.10     -0.61      0.10       0.71
+             sortino           0.18     -0.92      0.18       1.50
+             pf_day            1.06      0.70      1.06       1.57
+             calmar            0.08     -0.21      0.06       0.76
+             ulcer            22.33      8.70     24.85      71.12
+             max_dd       28,774.25 19,069.75 36,626.88  74,385.74
+             P(Sharpe<=0)       NaN       NaN      0.41        NaN
+             actual_dd pct_rank    dd50     dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+all 2023+      $38,524       1% $66,787 $104,504 $121,478        100%        100%        100%
+longs 2023+    $40,286      12% $54,703  $83,984  $96,766        100%        100%        100%
+shorts 2023+   $28,774       8% $41,378  $63,784  $73,585        100%        100%        100%
+
+C. The plan's MultiCharts trades vs the TFF state known at entry (agree / disagree / flat state):
+   VB           agree $   152 (n  317) | disagree $    61 (n  159) | flat $    80 (n 1267) | diff t +1.0
+   ONB_ML2_MC   agree $  1283 (n   50) | disagree $   554 (n   23) | flat $   523 (n  270) | diff t +1.2
+   EOS          agree $   819 (n    7) | disagree $   337 (n   21) | flat $   480 (n   77) | diff t +0.4
+   MON_MC       agree $   826 (n   77) | disagree $  1273 (n   32) | flat $   255 (n  341) | diff t -0.6
+   LDF_MC       agree $   148 (n  117) | disagree $   126 (n   93) | flat $    81 (n  685) | diff t +0.2
+   NFP_MC       agree $  1648 (n    7) | disagree $   782 (n    8) | flat $   135 (n   64) | diff t +0.9
+   VCS_MC       agree $  1062 (n    5) | disagree $   455 (n    8) | flat $   368 (n   58) | diff t +0.4
+
+Control for A: weekly hold, long whenever the close > 50-day SMA at a release (no COT), flat otherwise:
+    n=  34 win 47% avg $  7678 PF 2.60 t= 1.7 yrs+ 7/9 | 18-22 $  2715 | 23-26 $ 13262 | L $  7678 (n 34) S $   nan (n 0)
+   TFF default longs only: n 32 avg $5854; per week held: COT longs $2428 vs SMA-only $864
