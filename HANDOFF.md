@@ -36,7 +36,13 @@ Tier list of everything tested (S–F): `TIER_LIST.md`. Development process (who
 4. To confirm a strategy: the user uploads the MultiCharts report (.xlsx) to the repo root;
    compare with `portfolio.load_mc` as in `analysis/late_day_flow_confirm.py`.
 
-## Funded plan (updated 2026-10-13)
+## Funded plan (updated 2026-10-13, latest)
+Eight strategies: the seven below + **the Bridge's Monday Long NQ 1 MNQ** (Sunday 19:00 CT → Monday 15:55,
+daily ADX(7) filter, 100-pt target; ships with The Bridge; MC-confirmed 217/217 trades,
+`analysis/bridge_monday_confirm.py`). $9,313 (1y) / $12,436 (2y), blown 1-3%, median 255 trading days to all 6
+payouts (was 278), 48% get all 6 within a year (was 36%).
+
+## Funded plan (updated 2026-10-13, 7 strategies)
 Seven strategies, full size from a $1,500 cushion (f = cushion/$1,500 in 0.5-1): VB 3 MNQ, ONB ML v2
 RiskPerTrade 400, Monday Long 1 MNQ, EOS RiskPerTrade 700, Late-Day Flow 2 MNQ, **NFP Fade RiskPerTrade
 500, Vol-Control Sell Flow 1 MNQ** (both MultiCharts-confirmed 2026-10-13; VCS needs 5-min @ES as data2).
@@ -75,7 +81,7 @@ flip cross, regime follow / fade, strike pin all F. Order flow (MBO 2018-2026, `
 `multi_strategy/OFB_OrderFlow_Exporter.txt`, test `analysis/orderflow_test.py`): describes moves, doesn't predict
 them (F); LDF-long delta filter D (no funded gain). Export quirk: MC `Volume` = buy volume on these bars.
 The Bridge's Monday Long NQ (`analysis/bridge_monday_long_test.py`, its v2.1 code ported): PF 2.04, t 4.4, 9/9 years;
-next to ours at 1 MNQ funded $9,300 / $12,438 vs $8,770 / $12,236. B, A once an MC backtest confirms it.
+MC-confirmed (217/217 trades match): A, in the funded plan at 1 MNQ.
 Setup notes: restart MultiCharts after any DLL / data change ("OLD DLL" error); compile every OFB function
 ("unverified function" error); Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close
 conversion unchecked.

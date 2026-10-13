@@ -1,0 +1,61 @@
+MultiCharts confirmation of the Bridge's Monday Long NQ (L644NQ v2.1), 2026-10-13.
+MC: 217 trades 2018-02-26 .. 2026-10-05; entries all Sunday 19:00: True; target exits 46%
+Python port over the same dates: 217 trades; both 217, MC only 0, Python only 0
+   matched: entry price diff median 0.00 pts, same exit type 100%, P&L correlation 0.988, mean |diff| $20
+
+MC trades with costs: n=217 win 70% avg $541 PF 1.99 t=4.4 years+ 9/9 | 2018-22 $503 2023-26 $588 | worst $-6,172
+   by year: {2018: 1204, 2019: 7390, 2020: 27882, 2021: 22189, 2022: 1197, 2023: 14290, 2024: 828, 2025: 24796, 2026: 17681}
+   MC gross (as in its report): $120,705 total, PF 2.03
+
+Standard metrics per NQ (long-only):
+                        trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+Bridge Monday Long (MC)    217 70% $541 $13,085   1.40    2.08          1.99 $16,827   0.78  3.74       6.99
+2023+                       98 71% $588 $14,917   1.38    1.98          1.91 $16,827   0.89  7.37       4.05
+                         actual       p5       p50       p95
+name     metric                                             
+MC 2023+ sharpe            1.38     0.49      1.35      2.31
+         sortino           1.98     0.64      1.93      3.88
+         pf_day            1.91     1.26      1.88      3.05
+         calmar            0.89     0.32      1.27      3.22
+         ulcer             7.37     2.10      4.65     12.36
+         max_dd       16,827.00 6,429.50 11,307.50 20,822.49
+         P(Sharpe<=0)       NaN      NaN      0.00       NaN
+         actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+MC 2023+   $16,827      91% $11,433 $18,318 $22,220        100%        100%        100%
+
+   daily correlation with the plan: {'MON_MC': 0.3, 'VB': 0.06, 'ONB_ML2_MC': 0.03, 'EOS': -0.0, 'LDF_MC': -0.01, 'NFP_MC': -0.0, 'VCS_MC': -0.0}
+Funded bench (cushion sizing from $1,500):
+   current plan                               1y $8,770 2y $12,236 blown 3% / 2%
+   + Bridge Monday Long 1 MNQ (MC trades)     1y $9,313 2y $12,436 blown 3% / 1%
+   + Bridge Monday Long 2 MNQ                 1y $8,747 2y $11,212 blown 11% / 12%
+
+Portfolio at full size, 2018-2026 ($ per day, MNQ sizes of the plan):
+                               trades win  avg  annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+current plan (7)                 1715 55%  $99 $18,912   2.71    5.35          1.78 $4,004   4.72  1.35      27.99
++ Bridge Monday Long 1 MNQ (8)   1715 56% $106 $20,221   2.82    5.65          1.82 $4,004   5.05  1.33      30.45
+                                                    actual       p5      p50      p95
+name                                 metric                                          
+current plan (7) 2023+               sharpe           2.99     2.27     3.05     3.78
+                                     sortino          5.94     4.15     6.07     8.23
+                                     pf_day           1.86     1.59     1.89     2.23
+                                     calmar           6.03     2.47     4.77     8.10
+                                     ulcer            1.09     0.92     1.49     2.89
+                                     max_dd       4,004.10 3,597.75 5,089.93 8,237.55
+                                     P(Sharpe<=0)      NaN      NaN     0.00      NaN
++ Bridge Monday Long 1 MNQ (8) 2023+ sharpe           3.09     2.35     3.15     3.87
+                                     sortino          6.21     4.37     6.32     8.57
+                                     pf_day           1.90     1.62     1.92     2.27
+                                     calmar           6.40     2.61     4.95     8.38
+                                     ulcer            1.08     0.91     1.46     2.82
+                                     max_dd       4,004.10 3,601.95 5,192.16 8,298.05
+                                     P(Sharpe<=0)      NaN      NaN     0.00      NaN
+                                     actual_dd pct_rank   dd50   dd95   dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+current plan (7) 2023+                  $4,004      15% $4,936 $7,584 $9,423        100%        100%        100%
++ Bridge Monday Long 1 MNQ (8) 2023+    $4,004      15% $4,942 $7,549 $9,498        100%        100%        100%
+   current plan (7) by year: {2018: 3270, 2019: 7078, 2020: 18133, 2021: 24685, 2022: 23365, 2023: 25801, 2024: 20135, 2025: 27817, 2026: 19475}
+   + Bridge Monday Long 1 MNQ (8) by year: {2018: 3391, 2019: 7817, 2020: 20921, 2021: 26904, 2022: 23485, 2023: 27230, 2024: 20218, 2025: 30296, 2026: 21243}
+
+Speed to $13k (analysis/speed_to_13k.py method: trading days to the 6th payout, every start day):
+                           full6m full1y full2y median if_done blown per_month   exp3y max_mnq
+current plan                   0%    36%    89%    278     278    0%      $817 $12,948      66
++ Bridge Monday Long 1 MNQ     0%    48%    92%    255     255    0%      $871 $12,948      67

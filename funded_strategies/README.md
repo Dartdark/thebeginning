@@ -902,7 +902,7 @@ the RTH open, so the RTH delta is rebuilt from buys − sells.
   in both periods but no funded gain). The Bridge's built-in signals (`OFB_LargeTradePredictability`,
   `OFB_LiquidityPredictability`) weren't tested; the same data says not to expect much.
 
-## The Bridge's Monday Long NQ (L644NQ) vs ours (2026-10-13): better Monday trade, best run next to ours
+## The Bridge's Monday Long NQ (L644NQ) vs ours (2026-10-13): MultiCharts-confirmed, added to the funded plan
 
 Code `../analysis/bridge_monday_long_test.py` (output in `..._output.txt`). It ports the Bridge's own code (v2.1,
 pasted by the user). Buy the close of Sunday's 19:00 CT bar when the last regular session's ADX(7) is ≥ 10 and
@@ -935,7 +935,15 @@ description (CME 17:00–16:00 daily bars) gave 203 trades, $508, PF 1.89. The e
 | Ours at 2 MNQ (control: just more Monday size) | $8,422 | $10,573 | 18% / 19% |
 | No Monday strategy | $8,218 | $11,964 | 4% / 1% |
 
-- **Verdict: B now, A once MultiCharts confirms it.** It's the strongest Monday version tested (9/9 years,
+- **MultiCharts confirmation** (`../analysis/bridge_monday_confirm.py`; 5-min @NQ, Bar Magnifier): all 217 trades
+  match the Python port (same Mondays, entry prices, exit types; P&L correlation 0.988). With $7.25 + 1 tick:
+  $541 a trade, PF 1.99, t 4.4, 9/9 years (2018–22 $503, 2023–26 $588; 2024 the weak year +$828). Sharpe 1.40,
+  Sortino 2.08, Calmar 0.78, Ulcer 3.7; 2023+ Sharpe 1.38 (bootstrap 0.49–2.31, P ≤ 0 0%), Calmar 0.89,
+  Ulcer 7.4. The 2023+ drawdown ($16,827 per NQ) is at the 91st percentile of shuffled orders (losses came
+  together), so plan for that. Daily correlation: ours 0.30, the rest −0.01 to 0.06. Funded + 1 MNQ:
+  $9,313 / $12,436, blown 3% / 1%; median days to all 6 payouts 278 → 255, all 6 within a year 36% → 48%.
+  **Adopted (A).**
+- **Earlier verdict (before the MC run): B, A once MultiCharts confirms it.** It's the strongest Monday version tested (9/9 years,
   steady across eras). Added at 1 MNQ next to ours it gives +$530 in year 1 (the speed goal) and +$202 in
   year 2 with no extra blowups. Doubling ours instead blows 18%, so the gain is diversification (different
   entry and days), not size. The Bridge's own note applies: never run it alone, because it trades about

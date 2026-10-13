@@ -3,8 +3,8 @@
 S–F scale, updated as each new idea is tested. Results are NQ 2018–2026 unless noted, per
 NQ after $7.25 costs and 1 tick of slippage per fill. "Funded" = expected payouts per Apex
 50K Performance Account within 1 year (2 years in brackets); the current set (VB 3, ONB ML $400,
-Monday Long 1 MNQ, EOS $700, Late-Day Flow 2 MNQ, NFP Fade $500, Vol-Control Sell 1 MNQ, full size
-from a $1,500 cushion) scores $8,770 ($12,236); the previous 5-strategy set $7,676 ($12,012).
+Monday Long 1 MNQ, EOS $700, Late-Day Flow 2 MNQ, NFP Fade $500, Vol-Control Sell 1 MNQ, Bridge Monday Long
+1 MNQ, full size from a $1,500 cushion) scores $9,313 ($12,436); before the Bridge Monday Long $8,770 ($12,236); the previous 5-strategy set $7,676 ($12,012).
 
 ## What the tiers mean
 
@@ -35,6 +35,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Cushion sizing | Risk rule | Blown 34% → 10–12%; 2-year payouts $8,379 → $11,485 | Cuts size exactly when an account is closest to blowing up |
 | Monday Long (new direction source) | Funded strategy (replaced OND 2026-10-12) | MC: 450 trades, 55% win, $425 avg, PF 1.55; 2023–26 PF 1.92; corr ≤ 0.18; funded plan $7,153 / $11,612 (1y / 2y) vs $6,876 / $11,366, blown 9–10% | Uncorrelated; weak in 2018–22, so regime-dependent |
 | Vault Break | Challenge + funded strategy | 1,743 trades, 66% win, $92 avg, PF 1.26, 9/9 years (funded version: t 4.1, PF 1.41, ~$18,200 a year per NQ; strong but PF too low for S) | High win rate fits Apex rules; the challenge engine; biggest swings in the funded set, so keep at 3 MNQ |
+| The Bridge's Monday Long NQ (L644NQ v2.1): Sunday 19:00 CT → Monday 15:55, regular-session daily ADX(7) 10–50 and DI+ > DI−, 100-pt target, no stop | Funded strategy (added 2026-10-13, 1 MNQ next to ours) | MC-confirmed (217/217 trades match the Python port): $541, PF 1.99, t 4.4, 9/9 years, 70% win; Sharpe 1.40, Calmar 0.78, Ulcer 3.7; 2023+ bootstrap Sharpe 0.49–2.31; other weekdays t ≤ 1.0; corr 0.30 with our Monday Long; funded $9,313 / $12,436 vs $8,770 / $12,236, median days to $13k 278 → 255 | Different Monday days and entry from ours; adds by diversifying, not size (2 MNQ blows 11%); never run alone |
 
 ## B
 
@@ -48,7 +49,6 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Noise-area momentum, long only ("Beat the Market") | Strategy | PF 1.38–1.45, 9/9 years | Wins only 43%; replaces VB poorly ($4,100 vs $5,387) |
 | Bootstrap + permutation (out-of-sample resampling) | Method | Funded portfolio Sharpe 90% interval 1.53–3.00 (2023–26); real drawdown smaller than 99% of shuffles (95% shuffle $8,347 vs real $3,351) | Adopted as a standard check; shows the edges aren't luck but the real drawdowns were, and that losses don't cluster |
 | r/algotrading post: 100+ retail strategies, ~700 versions | Article / method | Random-entry placebo and trade-through fills applied to all four funded strategies: all pass (Overnight Drift least decisively, beat 97% of random-day runs) (first trade $90 vs random-after-signal $42, beat all 30 runs; $97 → $92 with 1-tick trade-through) |  |
-| The Bridge's Monday Long NQ (L644NQ v2.1, its code ported): Sunday 19:00 CT → Monday 15:55, regular-session daily ADX(7) 10–50 and DI+ > DI−, 100-pt target, no stop | Funded add-on candidate (A once MultiCharts confirms) | 217 trades, 70% win, $563, PF 2.04, t 4.4, 9/9 years (2018–22 $505, 2023–26 $634); Sharpe 1.43, Sortino 2.17, Calmar 1.04, Ulcer 3.4; 2023+ bootstrap Sharpe 0.58–2.34; other weekdays t ≤ 1.0; corr 0.31 with ours; funded ours + it 1 MNQ $9,300 / $12,438 vs $8,770 / $12,236, blown 3% / 1% (ours at 2 MNQ blows 18%) | Strongest Monday version; adds by diversifying, not size; never alone (trades every ~2 weeks) |
 
 ## C
 

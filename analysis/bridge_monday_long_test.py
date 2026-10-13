@@ -108,7 +108,7 @@ def bridge(g, A, weekday=0, filt=True, target=100.0, entry_t=1900, exit_t=1555, 
         e = g.c[e_row, e_j]
         if np.isnan(e): continue
         e += TICK
-        tgt = e + target if target else None
+        tgt = e - TICK + target if target else None      # target from the fill price (the tick is slippage)
         # walk: rest of the entry row, then row d up to exit_t
         px, kind, j1 = None, 2, jof(exit_t)
         segs = ([(e_row, e_j + 1, 1439)] if e_row != d else []) + [(d, (e_j + 1 if e_row == d else 0), jof(exit_t))]

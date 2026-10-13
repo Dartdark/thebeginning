@@ -1,10 +1,11 @@
 # Funded phase plan: Apex 50K EOD Performance Account
 
-## Current plan (updated 2026-10-13): seven strategies, faster to $13k
+## Current plan (updated 2026-10-13): eight strategies, faster to $13k
 
-Priority: collect all 6 payouts ($13,000) sooner. NFP Fade and Vol-Control Sell Flow are now
-MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`, output in `..._output.txt`), and full size
-starts at a **$1,500** cushion instead of $2,000.
+Priority: collect all 6 payouts ($13,000) sooner. **New: the Bridge's Monday Long NQ** (it ships with The Bridge,
+Strategies screen, `L644NQ_MondayLong_NQ` v2.1), MultiCharts-confirmed (`../analysis/bridge_monday_confirm.py`,
+output in `..._output.txt`). It runs next to our Monday Long, not instead of it. NFP Fade and Vol-Control Sell
+Flow are MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`); full size starts at a **$1,500** cushion.
 
 | Strategy | File | Chart | Funded inputs (full size) | Trades |
 |---|---|---|---|---|
@@ -13,22 +14,32 @@ starts at a **$1,500** cushion instead of $2,000.
 | Monday Long | `NQ_Monday_Long.txt` | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 | every Monday |
 | Expiration Open Short | `NQ_Expiration_Open_Short.txt` | 5 min MNQ | `RiskPerTrade` 700 | 12 a year |
 | Late-Day Flow | `NQ_Late_Day_Flow.txt` | 5 min MNQ | `NumContracts` 2, `RiskPerTrade` 0 | ~100 a year |
-| **NFP Fade (new)** | `NQ_NFP_Fade.txt` | 5 min MNQ | `RiskPerTrade` 500 | ~9 a year (payroll Fridays, 7:45–9:00 CT) |
-| **Vol-Control Sell Flow (new)** | `NQ_Vol_Control_Sell.txt` | 5 min MNQ + **5 min @ES as data2** | `NumContracts` 1, `RiskPerTrade` 0 | ~8 a year (14:00–15:00 CT, shorts) |
+| NFP Fade | `NQ_NFP_Fade.txt` | 5 min MNQ | `RiskPerTrade` 500 | ~9 a year (payroll Fridays, 7:45–9:00 CT) |
+| Vol-Control Sell Flow | `NQ_Vol_Control_Sell.txt` | 5 min MNQ + **5 min @ES as data2** | `NumContracts` 1, `RiskPerTrade` 0 | ~8 a year (14:00–15:00 CT, shorts) |
+| **Bridge Monday Long (new)** | The Bridge → Strategies → `L644NQ_MondayLong_NQ` (import as a Signal) | 5 min MNQ, full Globex session, Exchange time | `NumContracts` 1, defaults otherwise (`TargetPts` 100, `StopPts` 0) | ~25 a year (Sunday 19:00 CT → Monday 15:55) |
 
 **Cushion sizing:** cushion = balance − trailing threshold, each morning. f = cushion / **$1,500**,
 kept between 0.5 and 1; multiply each full-size input by f and round down:
 
-| Cushion | f | VB | ONB ML risk | Monday | EOS risk | LDF | NFP risk | VCS |
-|---|---|---|---|---|---|---|---|---|
-| $1,500 or more | 1.0 | 3 | 400 | 1 | 700 | 2 | 500 | 1 |
-| $1,125 | 0.75 | 2 | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) |
-| $750 or less | 0.5 | 1 | 200 | 0 (off) | 350 | 1 | 250 | 0 (off) |
+| Cushion | f | VB | ONB ML risk | Monday | EOS risk | LDF | NFP risk | VCS | Bridge Monday |
+|---|---|---|---|---|---|---|---|---|---|
+| $1,500 or more | 1.0 | 3 | 400 | 1 | 700 | 2 | 500 | 1 | 1 |
+| $1,125 | 0.75 | 2 | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) | 0 (off) |
+| $750 or less | 0.5 | 1 | 200 | 0 (off) | 350 | 1 | 250 | 0 (off) | 0 (off) |
+
+The Bridge Monday Long enters on Sunday evening, so use Sunday's cushion (Friday's close balance) for it.
 
 | All MultiCharts trade lists, $7.25 + 1 tick per fill | 1 year | 2 years | Blown (1y / 2y) | Median days to all 6 payouts | All 6 within 1 year |
 |---|---|---|---|---|---|
 | Previous plan (5 strategies, $2,000 cushion) | $7,676 | $12,012 | 6% / 4% | 306 | 21% |
-| **Current plan (7 strategies, $1,500 cushion)** | **$8,770** | **$12,236** | **3% / 2%** | **278** | **36%** |
+| Previous plan (7 strategies, $1,500 cushion) | $8,770 | $12,236 | 3% / 2% | 278 | 36% |
+| **Current plan (8 strategies: + Bridge Monday Long 1 MNQ)** | **$9,313** | **$12,436** | **3% / 1%** | **255** | **48%** |
+
+Bridge Monday Long at 2 MNQ: $8,747 / $11,212, blown 11% / 12%, so keep it at 1. Same-method portfolio metrics
+at full size, 2018–2026 (`bridge_monday_confirm.py`): 8 strategies Sharpe 2.82, Sortino 5.65, PF (days) 1.82,
+Calmar 5.05, Ulcer 1.33, max drawdown $4,004, $20,221 a year; the 7-strategy set on the same method 2.71 /
+5.35 / 1.78 / 4.72 / 1.35 / $4,004 / $18,912. 2023+ bootstrap Sharpe 3.09 (2.35–3.87). Every year better.
+The block below describes the 7-strategy set as it was measured on 2026-10-13 (portfolio script).
 
 Portfolio at full size 2018–2026: Sharpe 2.61 (was 2.51), Sortino 5.00, PF (days) 1.73, Calmar 4.53,
 Ulcer 1.30, max drawdown $3,743 (unchanged), $16,939 a year. Bootstrap Sharpe 2023–26 2.84
@@ -40,6 +51,12 @@ Ulcer 1.30, max drawdown $3,743 (unchanged), $16,939 a year. Bootstrap Sharpe 20
   days of history.
 - Vol-Control Sell Flow: data1 5-minute MNQ, data2 5-minute @ES, same session; load at least a year of
   history so the EWMA vols have converged (the January 2018 trades in the backtest are warm-up noise).
+
+- Bridge Monday Long: import from The Bridge's Strategies screen as a **Signal**. Use a 5-minute MNQ chart
+  from your normal feed (not the Bridge's bars; it needs Sunday evening), CME full Globex session 17:00–16:00,
+  Exchange (Central) time, Bar Magnifier 1 minute, a few months of history for the daily ADX. Never run it
+  alone (it trades about once every two weeks; inactivity rule). If an ad-hoc market closure is announced
+  for a Monday, don't run it that week (see its header).
 
 **Apex rules** in `../analysis/funded_sim.py` confirmed by the user (2026-10-13). Each challenge costs $50.
 
