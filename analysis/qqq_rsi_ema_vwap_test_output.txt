@@ -1,0 +1,116 @@
+RSI + EMA + rolling VWAP pullback (Rule-Based Trader, "We Combined RSI, EMA, and VWAP on QQQ",
+
+Daily bars 2018-01-02 .. 2026-10-09; signals need 210 days of history (trading from late 2018)
+
+1. The article's filter comparison (base spec), per NQ, per position:
+RSI only          HOLD                                     n= 94 win 73% avg $ 1880 PF 1.97 t= 2.5 yrs+ 7/9 | 23+ n=49 $ 3704 PF 3.38
+RSI only          RTH                                      n= 94 win 57% avg $   70 PF 1.03 t= 0.1 yrs+ 7/9 | 23+ n=49 $   -1 PF 1.00
+RSI only          NIGHT                                    n= 94 win 72% avg $ 1828 PF 1.97 t= 2.2 yrs+ 6/9 | 23+ n=49 $ 3121 PF 2.63
+RSI only          EVE                                      n= 50 win 80% avg $ 3875 PF 3.22 t= 3.2 yrs+ 5/5 | 23+ n=47 $ 4117 PF 3.54
+RSI + EMA         HOLD                                     n= 72 win 75% avg $ 1464 PF 1.71 t= 1.7 yrs+ 6/8 | 23+ n=43 $ 2755 PF 2.55
+RSI + EMA         RTH                                      n= 72 win 56% avg $ -889 PF 0.71 t=-1.0 yrs+ 4/8 | 23+ n=43 $-1229 PF 0.67
+RSI + EMA         NIGHT                                    n= 72 win 74% avg $ 1282 PF 1.66 t= 1.5 yrs+ 6/8 | 23+ n=43 $ 1887 PF 1.86
+RSI + EMA         EVE                                      n= 41 win 78% avg $ 3267 PF 2.76 t= 2.5 yrs+ 3/4 | 23+ n=41 $ 3267 PF 2.76
+RSI + VWAP        HOLD                                     n= 57 win 70% avg $ 1218 PF 1.46 t= 1.0 yrs+ 6/9 | 23+ n=25 $ 2488 PF 1.88
+RSI + VWAP        RTH                                      n= 57 win 56% avg $ -241 PF 0.92 t=-0.2 yrs+ 6/9 | 23+ n=25 $ -853 PF 0.81
+RSI + VWAP        NIGHT                                    n= 57 win 65% avg $ 1003 PF 1.43 t= 0.8 yrs+ 5/9 | 23+ n=25 $ 1585 PF 1.52
+RSI + VWAP        EVE                                      n= 27 win 78% avg $ 2648 PF 1.98 t= 1.2 yrs+ 4/5 | 23+ n=25 $ 3189 PF 2.29
+RSI + EMA + VWAP  HOLD                                     n= 37 win 73% avg $  517 PF 1.16 t= 0.3 yrs+ 5/8 | 23+ n=21 $  800 PF 1.24
+RSI + EMA + VWAP  RTH                                      n= 37 win 54% avg $-1996 PF 0.51 t=-1.3 yrs+ 3/8 | 23+ n=21 $-3231 PF 0.41
+RSI + EMA + VWAP  NIGHT                                    n= 37 win 65% avg $ -155 PF 0.94 t=-0.1 yrs+ 4/8 | 23+ n=21 $ -863 PF 0.76
+RSI + EMA + VWAP  EVE                                      n= 21 win 76% avg $ 1772 PF 1.60 t= 0.7 yrs+ 3/4 | 23+ n=21 $ 1772 PF 1.60
+   (QQQ 2018-2026 in the article: 67 trades, 76.1% win, PF 2.66, before costs)
+
+2. Neighbouring specs (RSI + EMA + VWAP), HOLD and NIGHT:
+  RSI(2)<5  EMA100 disc 0% exit RSI>50: n= 39 HOLD avg $ 1927 PF 2.82 | NIGHT avg $ 1593 PF 2.50
+  RSI(2)<5  EMA100 disc 0% exit RSI>70: n= 39 HOLD avg $ 2935 PF 3.33 | NIGHT avg $ 2120 PF 2.28
+  RSI(2)<5  EMA100 disc 2% exit RSI>50: n= 25 HOLD avg $ 2692 PF 3.62 | NIGHT avg $ 1622 PF 2.46
+  RSI(2)<5  EMA100 disc 2% exit RSI>70: n= 25 HOLD avg $ 2405 PF 2.11 | NIGHT avg $  916 PF 1.36
+  RSI(2)<5  EMA100 disc 3% exit RSI>50: n= 15 HOLD avg $ 1846 PF 2.32 | NIGHT avg $ 2096 PF 2.58
+  RSI(2)<5  EMA100 disc 3% exit RSI>70: n= 15 HOLD avg $  158 PF 1.04 | NIGHT avg $  113 PF 1.03
+  RSI(2)<5  EMA200 disc 0% exit RSI>50: n= 41 HOLD avg $ 1423 PF 2.01 | NIGHT avg $ 1274 PF 1.94
+  RSI(2)<5  EMA200 disc 0% exit RSI>70: n= 41 HOLD avg $ 2603 PF 2.66 | NIGHT avg $ 2034 PF 2.06
+  RSI(2)<5  EMA200 disc 2% exit RSI>50: n= 27 HOLD avg $ 1870 PF 2.21 | NIGHT avg $ 1136 PF 1.73
+  RSI(2)<5  EMA200 disc 2% exit RSI>70: n= 27 HOLD avg $ 1941 PF 1.76 | NIGHT avg $  874 PF 1.30
+  RSI(2)<5  EMA200 disc 3% exit RSI>50: n= 17 HOLD avg $ 1136 PF 1.54 | NIGHT avg $ 2116 PF 2.06
+  RSI(2)<5  EMA200 disc 3% exit RSI>70: n= 17 HOLD avg $  321 PF 1.08 | NIGHT avg $  901 PF 1.23
+  RSI(2)<10 EMA100 disc 0% exit RSI>50: n= 70 HOLD avg $ 1450 PF 2.39 | NIGHT avg $  859 PF 1.67
+  RSI(2)<10 EMA100 disc 0% exit RSI>70: n= 66 HOLD avg $ 2232 PF 2.55 | NIGHT avg $ 1622 PF 1.93
+  RSI(2)<10 EMA100 disc 2% exit RSI>50: n= 37 HOLD avg $ 2004 PF 2.86 | NIGHT avg $  511 PF 1.42
+  RSI(2)<10 EMA100 disc 2% exit RSI>70: n= 35 HOLD avg $ 2413 PF 2.31 | NIGHT avg $  690 PF 1.34
+  RSI(2)<10 EMA100 disc 3% exit RSI>50: n= 19 HOLD avg $ 2597 PF 3.36 | NIGHT avg $ 2469 PF 2.90
+  RSI(2)<10 EMA100 disc 3% exit RSI>70: n= 18 HOLD avg $ 1584 PF 1.53 | NIGHT avg $ 1478 PF 1.50
+  RSI(2)<10 EMA200 disc 0% exit RSI>50: n= 75 HOLD avg $ 1194 PF 1.96 | NIGHT avg $  698 PF 1.48
+  RSI(2)<10 EMA200 disc 0% exit RSI>70: n= 70 HOLD avg $ 1349 PF 1.64 | NIGHT avg $ 1186 PF 1.60
+  RSI(2)<10 EMA200 disc 2% exit RSI>50: n= 40 HOLD avg $ 1413 PF 1.94 | NIGHT avg $  213 PF 1.14
+  RSI(2)<10 EMA200 disc 2% exit RSI>70: n= 37 HOLD avg $  517 PF 1.16 | NIGHT avg $ -155 PF 0.94
+  RSI(2)<10 EMA200 disc 3% exit RSI>50: n= 24 HOLD avg $ 2273 PF 2.53 | NIGHT avg $ 2099 PF 2.15
+  RSI(2)<10 EMA200 disc 3% exit RSI>70: n= 22 HOLD avg $  703 PF 1.17 | NIGHT avg $ 1679 PF 1.51
+  RSI(2)<15 EMA100 disc 0% exit RSI>50: n= 99 HOLD avg $ 1712 PF 2.63 | NIGHT avg $ 1215 PF 1.91
+  RSI(2)<15 EMA100 disc 0% exit RSI>70: n= 93 HOLD avg $ 2810 PF 3.19 | NIGHT avg $ 2222 PF 2.34
+  RSI(2)<15 EMA100 disc 2% exit RSI>50: n= 44 HOLD avg $ 1959 PF 2.64 | NIGHT avg $  582 PF 1.42
+  RSI(2)<15 EMA100 disc 2% exit RSI>70: n= 41 HOLD avg $ 2542 PF 2.29 | NIGHT avg $  863 PF 1.39
+  RSI(2)<15 EMA100 disc 3% exit RSI>50: n= 20 HOLD avg $ 2671 PF 3.55 | NIGHT avg $ 2674 PF 3.16
+  RSI(2)<15 EMA100 disc 3% exit RSI>70: n= 19 HOLD avg $ 1988 PF 1.70 | NIGHT avg $ 1993 PF 1.71
+  RSI(2)<15 EMA200 disc 0% exit RSI>50: n=104 HOLD avg $ 1579 PF 2.34 | NIGHT avg $ 1182 PF 1.81
+  RSI(2)<15 EMA200 disc 0% exit RSI>70: n= 97 HOLD avg $ 2207 PF 2.24 | NIGHT avg $ 1983 PF 2.08
+  RSI(2)<15 EMA200 disc 2% exit RSI>50: n= 47 HOLD avg $ 1458 PF 1.94 | NIGHT avg $  323 PF 1.19
+  RSI(2)<15 EMA200 disc 2% exit RSI>70: n= 43 HOLD avg $  904 PF 1.29 | NIGHT avg $  128 PF 1.05
+  RSI(2)<15 EMA200 disc 3% exit RSI>50: n= 25 HOLD avg $ 2345 PF 2.64 | NIGHT avg $ 2277 PF 2.30
+  RSI(2)<15 EMA200 disc 3% exit RSI>70: n= 23 HOLD avg $ 1075 PF 1.26 | NIGHT avg $ 2096 PF 1.66
+  RSI(3)<20 EMA100 disc 0% exit RSI>50: n= 64 HOLD avg $ 1371 PF 1.95 | NIGHT avg $  810 PF 1.47
+  RSI(3)<20 EMA100 disc 0% exit RSI>70: n= 57 HOLD avg $ 1519 PF 1.48 | NIGHT avg $  333 PF 1.09
+  RSI(3)<20 EMA100 disc 2% exit RSI>50: n= 38 HOLD avg $ 1179 PF 1.56 | NIGHT avg $  204 PF 1.10
+  RSI(3)<20 EMA100 disc 2% exit RSI>70: n= 30 HOLD avg $ -820 PF 0.85 | NIGHT avg $-2702 PF 0.54
+  RSI(3)<20 EMA100 disc 3% exit RSI>50: n= 19 HOLD avg $  516 PF 1.17 | NIGHT avg $  979 PF 1.35
+  RSI(3)<20 EMA100 disc 3% exit RSI>70: n= 16 HOLD avg $-1304 PF 0.80 | NIGHT avg $-1420 PF 0.75
+  RSI(3)<20 EMA200 disc 0% exit RSI>50: n= 68 HOLD avg $  594 PF 1.28 | NIGHT avg $  497 PF 1.25
+  RSI(3)<20 EMA200 disc 0% exit RSI>70: n= 62 HOLD avg $ 1360 PF 1.40 | NIGHT avg $  990 PF 1.30
+  RSI(3)<20 EMA200 disc 2% exit RSI>50: n= 41 HOLD avg $ -235 PF 0.93 | NIGHT avg $ -391 PF 0.84
+  RSI(3)<20 EMA200 disc 2% exit RSI>70: n= 33 HOLD avg $ -272 PF 0.95 | NIGHT avg $-1522 PF 0.70
+  RSI(3)<20 EMA200 disc 3% exit RSI>50: n= 23 HOLD avg $ -639 PF 0.85 | NIGHT avg $  864 PF 1.27
+  RSI(3)<20 EMA200 disc 3% exit RSI>70: n= 20 HOLD avg $ 1780 PF 1.34 | NIGHT avg $ 1576 PF 1.38
+
+3. Base spec in detail: 37 positions, average hold 4.8 days
+   HOLD by year: {2019: 11831, 2020: -23509, 2021: 27866, 2022: -13884, 2023: 15214, 2024: 14416, 2025: -25729, 2026: 12906}
+   NIGHT by year: {2019: 13188, 2020: -1536, 2021: 13496, 2022: -12752, 2023: 12662, 2024: -4865, 2025: -34177, 2026: 8256}
+   placebo (random rising-EMA days, same hold lengths, 200 runs): HOLD real $517 vs $890 (95% $2898); NIGHT real $-155 vs $464 (95% $2383)
+
+4. Standard metrics per NQ (daily P&L; HOLD booked on the entry day):
+                      trades win   avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+HOLD (not Apex-legal)     37 73%  $517  $2,129   0.11    0.12          1.16 $38,637   0.06 23.88       0.18
+NIGHT (Apex-legal)        37 65% $-155   $-638  -0.03   -0.03          0.94 $57,936  -0.01 25.03      -0.05
+NIGHT 2023-26             21 62% $-863 $-4,694  -0.14   -0.19          0.76 $57,936  -0.08 42.74      -0.22
+   correlation with the plan: {'VB': 0.09, 'ONB_ML2_MC': -0.02, 'MON_MC': 0.08, 'EOS': 0.01, 'LDF_MC': -0.03, 'RSIV': 1.0}
+   current plan                 1y $7,676 2y $12,012 blown 6% / 4%
+   + RSI/EMA/VWAP NIGHT 1 MNQ   1y $7,155 2y $11,869 blown 9% / 6%
+   + RSI/EMA/VWAP NIGHT 2 MNQ   1y $5,626 2y $9,491 blown 31% / 28%
+                              actual        p5       p50        p95
+name          metric                                               
+NIGHT 2023-26 sharpe           -0.14     -0.76     -0.12       0.50
+              sortino          -0.19     -0.95     -0.16       0.73
+              pf_day            0.93      0.68      0.94       1.32
+              calmar           -0.08     -0.23     -0.07       0.48
+              ulcer            42.74      9.17     40.10     129.18
+              max_dd       57,936.25 28,004.00 59,236.00 130,260.19
+              P(Sharpe<=0)       NaN       NaN      0.62        NaN
+NIGHT 2018-26 sharpe           -0.03     -0.41     -0.02       0.37
+              sortino          -0.03     -0.52     -0.02       0.53
+              pf_day            0.98      0.78      0.99       1.26
+              calmar           -0.01     -0.09     -0.01       0.25
+              ulcer            25.03      9.60     37.51     126.68
+              max_dd       57,936.25 30,762.46 63,452.62 132,211.95
+              P(Sharpe<=0)       NaN       NaN      0.53        NaN
+              actual_dd pct_rank    dd50     dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+NIGHT 2023-26   $57,936      20% $71,548 $105,860 $120,549        100%        100%        100%
+NIGHT 2018-26   $57,936      11% $79,064 $118,121 $135,486        100%        100%        100%
+
+5. RSI only (the strongest NQ variant), Apex-legal NIGHT: placebo and funded bench
+   real $1828 per position vs random days with the same hold lengths $586 (95% $1783); real beats 96%
+   by year: {2018: -521, 2019: 14610, 2020: -4499, 2021: 14410, 2022: -5046, 2023: 12938, 2024: 25374, 2025: 79597, 2026: 35012}
+               trades win    avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+RSI only NIGHT     94 72% $1,828 $19,148   0.51    0.81          1.97 $37,042   0.52 12.93       2.96
+  2023-26          49 80% $3,121 $39,047   0.81    1.36          2.63 $37,042   1.05  9.78       7.98
+   + RSI-only NIGHT 1 MNQ       1y $7,134 2y $11,898 blown 7% / 5%
+   + RSI-only NIGHT 2 MNQ       1y $4,471 2y $7,434 blown 46% / 46%
+   note: EVE rows are incomplete (positions with a missing 17:00 bar are dropped), so they are not used

@@ -67,6 +67,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Post-settlement reversal (15:00–15:15 fades the last hour) | Forced flow | Very consistent (t −4.0 for following, 1/9 years) but only ~$29 gross a trade: about $12 after costs |
 | Wednesday overnight long (prev 15:00 → 8:30) | Calendar | t 2.5, 8/9 years, but 1 of 20 weekday-window tests and overlaps Overnight Drift |
 | VIX regime size tilt | Filter | VB +30% per trade in "short vol"; OND better in stress; Funded/pass changes within noise; tilt with cushion sizing untested |
+| RSI(2) dip-buying held overnight (from the QQQ RSI + EMA + VWAP article, RSI part only; Apex-legal re-entry at midnight) | Strategy | 94 trades, $1,828, PF 1.97, t 2.2, beats 96% of random-day placebos; Sharpe 0.51, $37k max DD per NQ without a stop, 2025 = 47% of the profit; funded + 1 MNQ $7,134 / $11,898 (worse) |
 | Release fade (8:00–8:30 CT after 7:30 data) | Strategy | +$63, t = 2.9, 485 days; Found after ~24 variants; loses with a stop in the funded bench |
 | Last-30-minute momentum (Baltussen et al. 2021) | Paper / strategy | Regression t 1.0 NQ vs 7.3 in the paper; ~$0 per trade since 2018 |
 | Gamma last-30 trade (follow after GEX<0, fade high GEX) | Strategy | t = 1.4; funded $3,835–5,006 |
@@ -116,6 +117,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Fading headline jumps (day or overnight); following overnight jumps | News | Fades lose (t to −3.5); overnight follow ≈ $0 |
 | Following CTA flows (next day, into the close, break of the trigger level) and same-day vol-control flow | Forced flow | CTA follow next day t −1.9 (2+ flips −4.1), trigger break −$409 (t −2.4), into close t 0.4; vol-control lag 0 t ≤ 0.6; vol-control does not explain Late-Day Flow |
 | Nasdaq-100 special rebalance | Forced flow | One event in 2018–26 (21 Jul 2023): not testable |
+| RSI + EMA + rolling VWAP on QQQ (Rule-Based Trader, Oct 2026) | Article / strategy | Claimed PF 3.54; on NQ 2018–26 the 3-filter version PF 1.16, t 0.3, below random rising-EMA days ($517 vs $890); each filter lowers PF; Apex-legal version −$155; 48 neighbours PF 0.54–3.62 (fragile); RTH part ≈ 0 |
 | Pre-holiday / post-holiday / mid-month pay days | Calendar | t ≤ 0.5 |
 | Technical rules and FX intervention (LeBaron 1996, SSRN 1105) | Paper | 150-day MA rule on DM/yen 1979–92, Sharpe 0.7–1.0, but almost all of it on Fed intervention days (Sharpe 0.1–0.4 without); currencies, multi-day holds, and that intervention regime is gone. MA rules on NQ already failed here (MA 5–200 agreement, 50-day MA distance) |
 | Forced-flow round 3: vol-target de-levering (realized-vol jumps), quarter-end pension fade, Friday pre-weekend de-risking | Forced flow | t ≤ 0.8 (vol target), −0.2 (quarter end), Friday windows −1.0 to 0.2 |

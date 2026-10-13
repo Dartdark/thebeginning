@@ -568,6 +568,48 @@ settlement. One event can't be tested; the next one only happens if Nasdaq's con
 breached. **F (not testable).** Regular December reconstitution and quarterly rebalances were
 already tested (F).
 
+## RSI + EMA + rolling VWAP pullback (Rule-Based Trader article on QQQ, 2026-10-13)
+
+**What it is:** long QQQ when a fast RSI is oversold, a long EMA is rising and the close is well
+below the 10-day rolling volume-weighted price; buy the next open, hold until RSI recovers (avg 3.6
+days), no stop. Claimed 1999–2026: 215 trades, 79.5% win, PF 3.54 (RSI alone 2.19); 2018–2026 PF 2.66;
+before costs. Exact RSI period / level, EMA length, discount and exit are not given.
+
+**Why it might make money:** short-term reversal in an index with a rising trend (buy-the-dip);
+the rebound is mostly earned overnight, like the overnight drift. It is a price-pattern signal, not
+a forced flow.
+
+**Can it be traded on Apex?** Not as written (multi-day holds; Apex needs flat by 15:59 CT). The
+closest legal version closes at 15:55 and buys back at midnight each day ("NIGHT"); an RTH-only
+version trades 8:30–15:00 each day of the hold. Code `../analysis/qqq_rsi_ema_vwap_test.py` (output in
+`..._output.txt`). NQ daily bars from the 1-minute data (15:00 CT close), per NQ after $7.25 + 1 tick
+per fill; signals from late 2018 (210 days of history needed). Base spec: RSI(2) < 10, EMA(200) rising
+over 5 days, close < 10-day VWAP − 2%, exit RSI(2) > 70 (max 10 days).
+
+| NQ 2018–2026, per position | Trades | Win | Avg | PF | t |
+|---|---|---|---|---|---|
+| RSI only, held (not Apex-legal) | 94 | 73% | $1,880 | 1.97 | 2.5 |
+| RSI + EMA, held | 72 | 75% | $1,464 | 1.71 | 1.7 |
+| RSI + VWAP, held | 57 | 70% | $1,218 | 1.46 | 1.0 |
+| **RSI + EMA + VWAP, held (the article's version)** | 37 | 73% | $517 | **1.16** | 0.3 |
+| RSI + EMA + VWAP, NIGHT (Apex-legal) | 37 | 65% | −$155 | 0.94 | −0.1 |
+| RSI + EMA + VWAP, RTH only | 37 | 54% | −$1,996 | 0.51 | −1.3 |
+| RSI only, NIGHT (Apex-legal) | 94 | 72% | $1,828 | 1.97 | 2.2 |
+| RSI only, RTH only | 94 | 57% | $70 | 1.03 | 0.1 |
+
+- **On NQ the filters do the opposite of the article's claim:** each one lowers the profit factor
+  (1.97 → 1.71 / 1.46 → 1.16). The three-filter version is worse than random entries on rising-EMA
+  days with the same hold lengths ($517 vs $890). 48 neighbouring specs range from PF 0.54 to 3.62:
+  fragile, consistent with a fitted combination.
+- **The edge is overnight:** the RTH-only part is ≈ $0 or negative in every version.
+- **RSI only, NIGHT** is the one real effect: beats 96% of random-day placebos ($1,828 vs $586), but
+  Sharpe 0.51 (2023–26 0.81), max drawdown $37,000 per NQ with no stop, and 2025 alone is 47% of the
+  profit. In the funded bench it hurts: + 1 MNQ $7,134 / $11,898 (blown 7% / 5%) vs $7,676 / $12,012;
+  + 2 MNQ $4,471 / $7,434 (46% blown). The three-filter NIGHT version: $7,155 / $11,869.
+- **Verdict:** article's combination **F** on NQ (no edge after costs, filters hurt, below placebo);
+  RSI(2) dip-buying held overnight **D** (real but regime-bound, and its unstopped drawdowns break
+  the Apex drawdown rule). Not a foundation for a funded strategy.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
