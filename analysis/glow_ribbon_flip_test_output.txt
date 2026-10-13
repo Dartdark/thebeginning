@@ -1,0 +1,32 @@
+Glow Ribbon Flip (TradingView, 2026-10-13): EMA basis + ratcheting ATR band, stop-and-reverse flips
+
+1. Variants, per NQ:
+ 5-min, target 2R, band 2.0 ATR              n=20146 win 35% avg $   -6 PF 0.99 t= -0.7 yrs+ 2/9 | 23+ $   -2 PF 1.00 | L $   4 PF 1.01 S $ -16 PF 0.96
+ 5-min, target 2R, band 3.0 ATR              n=14441 win 36% avg $   -6 PF 0.99 t= -0.5 yrs+ 4/9 | 23+ $   11 PF 1.02 | L $   9 PF 1.02 S $ -21 PF 0.96
+ 5-min, target none, band 2.0 ATR            n=17780 win 33% avg $    5 PF 1.01 t=  0.4 yrs+ 7/9 | 23+ $   15 PF 1.03 | L $  18 PF 1.05 S $ -10 PF 0.98
+ 5-min, target none, band 3.0 ATR            n=12611 win 34% avg $    6 PF 1.01 t=  0.4 yrs+ 4/9 | 23+ $   25 PF 1.04 | L $  30 PF 1.07 S $ -20 PF 0.96
+15-min, target 2R, band 2.0 ATR              n= 7829 win 36% avg $    2 PF 1.00 t=  0.1 yrs+ 7/9 | 23+ $   36 PF 1.05 | L $  34 PF 1.06 S $ -30 PF 0.96
+15-min, target 2R, band 3.0 ATR              n= 6152 win 37% avg $   -7 PF 0.99 t= -0.2 yrs+ 3/9 | 23+ $   13 PF 1.01 | L $  50 PF 1.07 S $ -63 PF 0.92
+15-min, target none, band 2.0 ATR            n= 7261 win 33% avg $   19 PF 1.03 t=  0.8 yrs+ 6/9 | 23+ $   45 PF 1.06 | L $  62 PF 1.11 S $ -25 PF 0.96
+15-min, target none, band 3.0 ATR            n= 5746 win 34% avg $   -0 PF 1.00 t= -0.0 yrs+ 7/9 | 23+ $   10 PF 1.01 | L $  68 PF 1.10 S $ -70 PF 0.92
+30-min, target 2R, band 2.0 ATR              n= 4564 win 38% avg $   -5 PF 0.99 t= -0.1 yrs+ 3/9 | 23+ $  -16 PF 0.98 | L $  34 PF 1.05 S $ -45 PF 0.95
+30-min, target 2R, band 3.0 ATR              n= 3799 win 41% avg $  -14 PF 0.99 t= -0.3 yrs+ 3/9 | 23+ $  -83 PF 0.93 | L $  39 PF 1.05 S $ -67 PF 0.94
+30-min, target none, band 2.0 ATR            n= 4442 win 36% avg $   -1 PF 1.00 t= -0.0 yrs+ 5/9 | 23+ $  -26 PF 0.98 | L $  42 PF 1.06 S $ -46 PF 0.95
+30-min, target none, band 3.0 ATR            n= 3720 win 39% avg $  -12 PF 0.99 t= -0.3 yrs+ 4/9 | 23+ $  -74 PF 0.94 | L $  54 PF 1.07 S $ -80 PF 0.93
+60-min, target 2R, band 2.0 ATR              n= 2569 win 44% avg $   31 PF 1.03 t=  0.6 yrs+ 6/9 | 23+ $   33 PF 1.03 | L $  88 PF 1.11 S $ -27 PF 0.97
+60-min, target 2R, band 3.0 ATR              n= 2270 win 48% avg $   44 PF 1.05 t=  0.8 yrs+ 6/9 | 23+ $   62 PF 1.05 | L $  81 PF 1.10 S $   5 PF 1.00
+60-min, target none, band 2.0 ATR            n= 2552 win 44% avg $   43 PF 1.05 t=  0.8 yrs+ 8/9 | 23+ $   34 PF 1.03 | L $ 120 PF 1.15 S $ -35 PF 0.97
+60-min, target none, band 3.0 ATR            n= 2264 win 47% avg $   39 PF 1.04 t=  0.7 yrs+ 6/9 | 23+ $   29 PF 1.02 | L $  83 PF 1.10 S $  -7 PF 0.99
+15-min, 2R, 2.0 ATR, day session only        n= 2954 win 45% avg $   45 PF 1.06 t=  1.2 yrs+ 5/9 | 23+ $   38 PF 1.04 | L $  47 PF 1.07 S $  43 PF 1.05
+15-min, 2R, 2.0 ATR, no pullbacks (flips only) n= 4512 win 38% avg $   13 PF 1.02 t=  0.4 yrs+ 3/9 | 23+ $   35 PF 1.04 | L $  35 PF 1.05 S $  -9 PF 0.99
+30-min, 2R, 2.0 ATR, day session only        n= 2115 win 46% avg $   57 PF 1.07 t=  1.1 yrs+ 5/9 | 23+ $   12 PF 1.01 | L $  72 PF 1.10 S $  42 PF 1.05
+30-min, 2R, 2.0 ATR, no pullbacks (flips only) n= 2353 win 43% avg $   36 PF 1.04 t=  0.7 yrs+ 6/9 | 23+ $   -4 PF 1.00 | L $  28 PF 1.03 S $  43 PF 1.05
+
+2. Best of 20 by t: 15-min, 2R, 2.0 ATR, day session only
+   by year: {2018: 15192, 2019: 17042, 2020: 18147, 2021: 51053, 2022: -15814, 2023: -1001, 2024: -2239, 2025: 72478, 2026: -22072}
+   placebo (same entry times, random side, 10 runs): $-1 (-32..33) vs real $45
+                  trades win avg  annual sharpe sortino profit_factor   max_dd calmar  ulcer ulcer_perf
+defaults (15-min)   7829 36%  $2 $-1,018  -0.02   -0.03          1.00 $145,223  -0.01 102.23      -0.02
+best                2954 45% $45 $14,793   0.38    0.55          1.06  $81,878   0.18  18.72       1.58
+  best longs        1442 47% $47  $7,630   0.30    0.46          1.07  $61,078   0.12  13.71       1.11
+  best shorts       1512 43% $43  $7,163   0.25    0.41          1.05  $75,772   0.09  24.23       0.59

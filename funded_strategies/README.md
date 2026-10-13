@@ -698,6 +698,21 @@ tick per fill, 2018–2026. (No gold data here beyond one week, so the gold clai
   already in the tier list.
 - **F** for the gold strategy on NQ.
 
+## Glow Ribbon Flip (2026-10-13, TradingView): no edge
+
+Code `../analysis/glow_ribbon_flip_test.py` (output in `..._output.txt`). EMA(21) basis, band = EMA ∓
+ATR(10) × 2 that only ratchets with the trend; a close beyond the band flips and reverses; pullback
+re-entries on a close back across the EMA; the band is the intrabar stop, optional 2R target; flat
+15:55 CT for Apex. 20 variants (5 / 15 / 30 / 60-min, 2R or no target, 2 or 3 ATR, day session only,
+flips only). Per NQ after $7.25 + 1 tick per market/stop fill, 2018–2026.
+- **Defaults (15-min):** 7,829 trades, 36% win, $2, PF 1.00, Sharpe −0.02, max drawdown $145,000 per NQ.
+- Every variant: PF 0.99–1.07, t −0.7 to 1.2. Best of 20 (15-min, day session only): 2,954 trades, $45,
+  t 1.2, 5/9 years (2022–24 and 2026 lose), Sharpe 0.38, $82,000 max drawdown; beats the random-side
+  placebo (−$1) but not by enough to matter after picking the best of 20.
+- Longs beat shorts in every variant (PF up to 1.15 vs ≤ 1.05): that is NQ's upward drift, not the system.
+- 2,500–20,000 trades over 9 years means costs of $17 a trade dominate a gross edge of a few dollars.
+  **F.**
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
