@@ -1,0 +1,77 @@
+{ OFB order-flow exporter - MultiCharts PowerLanguage indicator (2026-10-13)
+
+  Writes The Bridge's (MatFin) per-minute order-flow numbers to CSV so they can be tested in this repo on
+  2018-2026 (the MBO history starts mid-2017). Files are split into parts of SplitMonths months to stay under
+  GitHub's 25 MB upload limit:
+    <Folder><FilePrefix><year>_<part>.csv   e.g. C:\OFBexport\OF_1min_2024_1.csv (Jan-Mar with SplitMonths 3)
+
+  Columns (0 = "no data for this bar", The Bridge's convention, not a real zero):
+    date, time (bar close, CHART time zone = Eastern on The Bridge's bars), open, high, low, close,
+    volume, upvol, downvol                                (aggressor-exact split from the tape)
+    s2..s17   always-computed slots: spread_ticks, bid_sz_top, ask_sz_top, size_imb, count_imb,
+              qdepl_bid, qdepl_ask, pulled_bid, pulled_ask, ice_bid, ice_ask, trade_rate, cum_delta,
+              event_rate, levels_bid, levels_ask
+    s46, s47  big_trade (signed: + bought, - sold), big_trade_px
+    s48..s53  resting size at 10 / 20 / 50 levels (bid and ask)
+    s54..s61  the two largest walls per side (prices and sizes)
+    vwap, vwap_sd, poc, poc_prev, vah, val                (RTH, Mode 2; 0 if that family is unticked in
+                                                           The Bridge's Data screen, section 3.4)
+
+  Use: same chart as the gamma exporter - a 1-minute chart of The Bridge's own bars (C:\OFB\ofb_bars_NQ.csv,
+  Map ASCII as in the manual section 4.3, time zone Exchange) - but loaded from the FIRST day of your order-flow
+  data (2017 / 2018 if you pulled the full history). Compile The Bridge's OFB functions first (OFB_Get, OFB_VWAP,
+  OFB_VWAP_SD, OFB_POC, OFB_PriorPOC, OFB_VAH, OFB_VAL). The folder must already exist. Files are deleted and
+  rewritten on every recalculation. About 8 MB per 3-month part at the default RTH window.
+  Full Globex session (if your data was built with SESSION = Globex): StartTime 0, EndTime 2359, SplitMonths 1. }
+
+Inputs:
+	Folder("C:\OFBexport\"),   { must already exist; keep the trailing backslash }
+	FilePrefix("OF_1min_"),
+	StartTime(930),            { first bar close written, chart time (Eastern on The Bridge's bars) }
+	EndTime(1615),             { last bar close written }
+	SplitMonths(3);            { months per file: 1, 2, 3, 4, 6 or 12 }
+
+Variables:
+	FileName(""), BarYear(0), Part(0), LastKey(0), Row(""), Y(0), P(0);
+
+Once begin
+	for Y = 2000 to 2040 begin
+		for P = 1 to 12 begin
+			FileDelete(Folder + FilePrefix + NumToStr(Y, 0) + "_" + NumToStr(P, 0) + ".csv");
+		end;
+	end;
+end;
+
+if BarStatus(1) = 2 and Time >= StartTime and Time <= EndTime then begin
+	BarYear = Year(Date) + 1900;
+	Part = IntPortion((Month(Date) - 1) / SplitMonths) + 1;
+	FileName = Folder + FilePrefix + NumToStr(BarYear, 0) + "_" + NumToStr(Part, 0) + ".csv";
+	if BarYear * 100 + Part <> LastKey then begin
+		FileAppend(FileName, "date,time,open,high,low,close,volume,upvol,downvol,"
+			+ "spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,"
+			+ "ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,"
+			+ "big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,"
+			+ "vwap,vwap_sd,poc,poc_prev,vah,val" + NewLine);
+		LastKey = BarYear * 100 + Part;
+	end;
+	Row = NumToStr(Date + 19000000, 0) + "," + NumToStr(Time, 0) + ","
+		+ NumToStr(Open, 2) + "," + NumToStr(High, 2) + "," + NumToStr(Low, 2) + "," + NumToStr(Close, 2) + ","
+		+ NumToStr(Volume, 0) + "," + NumToStr(UpTicks, 0) + "," + NumToStr(DownTicks, 0);
+	Row = Row + "," + NumToStr(OFB_Get(2), 2) + "," + NumToStr(OFB_Get(3), 0) + "," + NumToStr(OFB_Get(4), 0)
+		+ "," + NumToStr(OFB_Get(5), 4) + "," + NumToStr(OFB_Get(6), 4)
+		+ "," + NumToStr(OFB_Get(7), 2) + "," + NumToStr(OFB_Get(8), 2)
+		+ "," + NumToStr(OFB_Get(9), 2) + "," + NumToStr(OFB_Get(10), 2)
+		+ "," + NumToStr(OFB_Get(11), 0) + "," + NumToStr(OFB_Get(12), 0)
+		+ "," + NumToStr(OFB_Get(13), 2) + "," + NumToStr(OFB_Get(14), 0) + "," + NumToStr(OFB_Get(15), 2)
+		+ "," + NumToStr(OFB_Get(16), 0) + "," + NumToStr(OFB_Get(17), 0);
+	Row = Row + "," + NumToStr(OFB_Get(46), 0) + "," + NumToStr(OFB_Get(47), 2)
+		+ "," + NumToStr(OFB_Get(48), 0) + "," + NumToStr(OFB_Get(49), 0) + "," + NumToStr(OFB_Get(50), 0)
+		+ "," + NumToStr(OFB_Get(51), 0) + "," + NumToStr(OFB_Get(52), 0) + "," + NumToStr(OFB_Get(53), 0)
+		+ "," + NumToStr(OFB_Get(54), 2) + "," + NumToStr(OFB_Get(55), 2) + "," + NumToStr(OFB_Get(56), 2)
+		+ "," + NumToStr(OFB_Get(57), 2) + "," + NumToStr(OFB_Get(58), 2) + "," + NumToStr(OFB_Get(59), 2)
+		+ "," + NumToStr(OFB_Get(60), 2) + "," + NumToStr(OFB_Get(61), 2);
+	Row = Row + "," + NumToStr(OFB_VWAP(2), 2) + "," + NumToStr(OFB_VWAP_SD(2), 2)
+		+ "," + NumToStr(OFB_POC(2), 2) + "," + NumToStr(OFB_PriorPOC(2), 2)
+		+ "," + NumToStr(OFB_VAH(2), 2) + "," + NumToStr(OFB_VAL(2), 2);
+	FileAppend(FileName, Row + NewLine);
+end;
