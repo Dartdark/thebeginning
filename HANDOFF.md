@@ -71,7 +71,9 @@ User has The Bridge (MatFin MultiCharts add-on). `GEX_1min_<year>.csv` (repo roo
 exported by `multi_strategy/OFB_Gamma_Exporter.txt` on a 1-min chart of `C:\OFB\ofb_bars_NQ.csv`, Exchange
 time zone = Eastern) tested in `analysis/gamma_regime_test.py`: below the flip NQ moves ~30% more, but
 realized vol explains it; no filter on the plan clears noise (watch VCS above-flip, t 2.5 on 27 trades);
-flip cross, regime follow / fade, strike pin all F. Next possible: the Bridge's MBO order flow from 2017.
+flip cross, regime follow / fade, strike pin all F. Order flow (MBO 2018-2026, `OF_1min_*.csv`, exporter
+`multi_strategy/OFB_OrderFlow_Exporter.txt`, test `analysis/orderflow_test.py`): describes moves, doesn't predict
+them (F); LDF-long delta filter D (no funded gain). Export quirk: MC `Volume` = buy volume on these bars.
 Setup notes: restart MultiCharts after any DLL / data change ("OLD DLL" error); compile every OFB function
 ("unverified function" error); Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close
 conversion unchecked.

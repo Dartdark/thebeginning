@@ -865,6 +865,43 @@ holdout 2025-01-01 to 2026-07-07. Data starts in 2023, so the 2018–2022 standa
   flip cross and the strike pin are F. Not tested yet: the order-flow columns (big prints, depth) and
   the Bridge's MBO history from 2017, which can be tested on the full 2018–2026 standard.
 
+## CME order flow from The Bridge (2026-10-13): describes the move, doesn't predict it
+
+Code `../analysis/orderflow_test.py` and `../analysis/orderflow_ldf_filter.py` (outputs in `..._output.txt`).
+Data: `OF_1min_<year>_<part>.csv`, exported with `../multi_strategy/OFB_OrderFlow_Exporter.txt` from The Bridge's MBO
+history. That's 1-minute RTH bars, 2018-01-02 to 2026-07-07 (2,117 full sessions), so the full 2018–2026
+standard applies. Design 2018–2022, holdout 2023–2026. Notes on the export: MultiCharts' `Volume` came out
+as buy volume (buys + `downvol` = the grid's volume on 97% of minutes), and `cum_delta` doesn't reset at
+the RTH open, so the RTH delta is rebuilt from buys − sells.
+- **Short-term prediction (5 / 15 / 30 minutes, 13 features):** delta over 5–30 min, RTH delta, book
+  size and order-count imbalance, depth over 10 and 50 levels, pulled orders, queue depletion, icebergs,
+  big prints, wall sizes. Every correlation with the next move is between −0.008 and +0.013. The best
+  pooled one, RTH delta at 15 minutes, is +0.010, t 2.3, 8/9 years. Order flow does describe the move
+  over the same window (delta vs the same 5 minutes +0.53). Costs need roughly |corr| > 0.05.
+- **The best design-period feature as a trade** (50-level depth imbalance, top / bottom 10% by 2018–22
+  thresholds, 15-minute hold): 2018–22 $4 a trade, 2023–26 −$24 (holdout correlation −0.005).
+  2018–26 Sharpe −0.27, PF 0.97; holdout Sharpe −0.80 (bootstrap P(Sharpe ≤ 0) 98%). Longs and shorts
+  both lose in the holdout (−$13 / −$31).
+- **Opening flow:** trading the sign of the 8:30–9:30 RTH delta at 9:31 CT to 14:55 makes $8 a trade
+  (PF 1.01, Sharpe 0.05). Following the price move instead makes $111 (t 2.0). When delta and price
+  disagree, delta's side loses −$214 (t −1.8), so at the open the price move carries the information,
+  not the flow. At 9:00 the two are equal ($100 vs $103).
+- **Big prints** (largest trade in the minute ≥ the 99.5th percentile of the prior 20 sessions; follow for
+  15 / 30 / 60 min): $2 / −$9 / −$2 a trade, PF 0.97–1.01; buys and sells alike. No information.
+- **As a filter on the plan's MultiCharts trades** (RTH delta so far, or the last 30 minutes, agrees with
+  the trade side; each side; about 40 splits): only Late-Day Flow longs with the last 30 minutes'
+  delta agreeing hold in both periods ($138 vs −$4; 2018–22 $138 / −$7, 2023–26 $139 / $0; t 2.1).
+  Dropping the disagreeing longs: LDF Sharpe 1.17 → 1.25, PF 1.44 → 1.57, Calmar 0.62 → 0.91, Ulcer
+  7.4 → 5.4; 2023+ bootstrap Sharpe 0.50–2.02. But funded at 2 MNQ is $8,801 / $11,843, blown 8% / 7%,
+  vs $8,770 / $12,236, blown 3% / 2% (3 MNQ worse). Fewer long trades leave the cushion growing more
+  slowly. Filtering both sides: $8,836 / $12,220 (noise). The rest are noise or contradict each other:
+  ONB ML agrees better (t 1.4) but ONB ADX30 disagrees better (t −1.9); EOS, Monday Long, NFP and VCS
+  have no consistent split.
+- **Verdict:** at minutes to hours on NQ, MBO order flow is a description of the price move, not a
+  forecast. Short-horizon prediction, opening delta and big prints are F; the LDF long filter is D (real
+  in both periods but no funded gain). The Bridge's built-in signals (`OFB_LargeTradePredictability`,
+  `OFB_LiquidityPredictability`) weren't tested; the same data says not to expect much.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

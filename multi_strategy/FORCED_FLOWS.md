@@ -88,3 +88,8 @@ No filter on the plan clears noise (VCS above-flip t 2.5 on 27 trades: watch). F
 follow / fade and the afternoon pin to the major gamma strike all fail (F). The 0DTE gamma data is a volatility
 gauge, not a forced-flow direction. Next with The Bridge: the MBO order-flow history from 2017 (big prints,
 book imbalance, depth), which can be tested on 2018–2026.
+
+Order flow tested 2026-10-13 (`../analysis/orderflow_test.py`, MBO 2018-01-02 → 2026-07-07): book, tape, depth,
+icebergs and big prints all describe the move but don't predict the next 5–30 minutes (|corr| ≤ 0.013);
+opening delta and big-print following ≈ $0 after costs (F). One filter holds in both periods (Late-Day Flow longs
+when the last 30 minutes' delta agrees) but doesn't raise funded payouts (D).
