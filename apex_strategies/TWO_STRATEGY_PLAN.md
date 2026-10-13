@@ -9,6 +9,27 @@ One Apex 50K account, both strategies on MNQ, each on its own chart with the CME
 > 6 days; cost per funded account about $107 vs $117 at $50 a challenge. RiskPerTrade stays 1100. Details:
 > `../analysis/onb_adx30_confirm.py`.
 
+> **Update 2026-10-13 (evening): three small add-ons raise the pass rate to 50.5% (from 46.9%).**
+> Tested in `../analysis/combine_addons_test.py` (output in `..._output.txt`), MultiCharts trade lists, a challenge
+> started on every trading day 2018–2026, Apex rules ($3,000 target, $2,000 trailing, $1,000 daily loss, 21 days).
+>
+> | Combine set | Pass 2018–26 | 2023–26 | Blown (trailing DD) | Median days to pass |
+> |---|---|---|---|---|
+> | VB 8 MNQ + ONB ADX30 $1,100 (current) | 46.9% | 51.1% | 50.0% | 6 |
+> | + Bridge Monday Long 2 MNQ | 48.6% | 53.3% | 49.3% | 6 |
+> | + Bridge Monday Long 2 + EOS $500 | 50.1% | 54.5% | 48.1% | 6 |
+> | **+ Bridge Monday Long 2 + EOS $500 + Vol-Control Sell 2 MNQ** | **50.5%** | **55.4%** | **47.8%** | 6 |
+> | + those + Late-Day Flow 2 MNQ | 50.3% | 55.3% | 48.2% | 6 |
+>
+> Single add-ons: our Monday Long hurts (1 MNQ 46.4%, 2 MNQ 45.1%); Bridge Monday 1 / 3 / 4 / 6 MNQ 48.2 / 47.8 /
+> 46.5 / 47.0%; EOS $500 48.1%, $1,000 47.2%; VCS 1 / 2 MNQ 47.3 / 47.6%; LDF 2 MNQ 47.3%; NFP Fade ≤ 46.9%.
+> At $50 a challenge, the cost per pass falls from about $107 to $99. The gain is small: it's the best of about
+> 20 combinations, but each piece is an independent, MultiCharts-confirmed edge already used in the funded plan,
+> with no settings fitted for the combine. Setup (same files as funded): Bridge Monday Long `NumContracts` 2 (5-min
+> MNQ, full Globex session, enters Sunday 19:00 CT); `../funded_strategies/NQ_Expiration_Open_Short.txt`
+> `RiskPerTrade` 500; `../funded_strategies/NQ_Vol_Control_Sell.txt` `NumContracts` 2 (needs 5-min @ES as data2).
+> All are flat by 15:00 CT; the Bridge Monday Long exits Monday 15:55 CT.
+
 ## Vault Break (`NQ_Vault_Break.txt`)
 
 **Chart:** 30-minute MNQ, 24-hour session. **Size:** `NumContracts` 8 (8 MNQ).

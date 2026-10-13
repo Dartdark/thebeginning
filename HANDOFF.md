@@ -60,6 +60,8 @@ $12,012 (2y), blown 4-6%; portfolio Sharpe 2.51.
 MultiCharts report `Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx`
 (ADXMin 30, StopAtrPct 0.25): 676 trades, PF 1.66, 675/676 match Python. Combine pass with VB 8 MNQ
 46.9% (was 42.8%); switch the live combine chart to these inputs. `analysis/onb_adx30_confirm.py`.
+Add-ons (`analysis/combine_addons_test.py`): + Bridge Monday Long 2 MNQ + EOS $500 + Vol-Control Sell 2 MNQ ->
+pass 50.5% (2023-26 55.4%), blown 47.8% vs 50.0%; our Monday Long and NFP Fade don't help the combine.
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily
