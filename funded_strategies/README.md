@@ -772,8 +772,9 @@ day. Per NQ after $7.25 + 1 tick per fill.
 - Like the "Beat the Market" noise-area breakout (B): a genuine opening-breakout edge, but a low win
   rate, long losing streaks and one big year (2022 = 36% of the profit) work against Apex's trailing
   drawdown and consistency rule. **B** as a strategy; not added.
-- Two issues in the file if you ever run it: (1) on early-close days (no 15:55 ET bar) the EOD exit never
-  fires, so a position is held overnight (an Apex violation) — add a session-end / holiday exit;
+- Two issues in the file if you ever run it: (1) on early-close days (no 15:55 ET bar) the EOD exit only fires on
+  the first evening bar after the reopen, so a position is held through the close (an Apex violation) —
+  add a session-end / holiday exit;
   (2) after an early close InRTH stays true, so stop orders can be placed overnight before the next
   open, relative to the previous day's open — reset InRTH at the date change.
 
