@@ -62,6 +62,8 @@ MultiCharts report `Backtesting Strategy Performance Report _ @NQ - 15 Minutes N
 46.9% (was 42.8%); switch the live combine chart to these inputs. `analysis/onb_adx30_confirm.py`.
 Add-ons (`analysis/combine_addons_test.py`): + Bridge Monday Long 2 MNQ + EOS $500 + Vol-Control Sell 2 MNQ ->
 pass 50.5% (2023-26 55.4%), blown 47.8% vs 50.0%; our Monday Long and NFP Fade don't help the combine.
+Funded re-check (`analysis/funded_today_check.py`): only DriftPullback shorts 1 MNQ helps (median 245 vs 255 days,
+within noise on money); needs an MC run first (15-min data2).
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily

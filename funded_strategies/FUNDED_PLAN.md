@@ -18,6 +18,12 @@ Flow are MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`); full size sta
 | Vol-Control Sell Flow | `NQ_Vol_Control_Sell.txt` | 5 min MNQ + **5 min @ES as data2** | `NumContracts` 1, `RiskPerTrade` 0 | ~8 a year (14:00–15:00 CT, shorts) |
 | **Bridge Monday Long (new)** | The Bridge → Strategies → `L644NQ_MondayLong_NQ` (import as a Signal) | 5 min MNQ, full Globex session, Exchange time | `NumContracts` 1, defaults otherwise (`TargetPts` 100, `StopPts` 0) | ~25 a year (Sunday 19:00 CT → Monday 15:55) |
 
+**Other candidates checked 2026-10-13** (`../analysis/funded_today_check.py`): DriftPullback shorts 1 MNQ (Python
+replica, not MC-confirmed) $9,453 / $12,492, blown 4% / 2%, median days to all 6 payouts 245 (vs 255), all 6 within
+a year 51% (vs 48%). That's the only one that helps, it's within noise on money, and its shorts are weak since 2023
+($20 a trade): add it only after a MultiCharts run confirms it. No change: VCS 2 MNQ (blown 10%), Bridge Monday 2
+MNQ (blown 11–12%), EOS $500 (slower, 269 days), dropping our Monday Long (274 days).
+
 **Cushion sizing:** cushion = balance − trailing threshold, each morning. f = cushion / **$1,500**,
 kept between 0.5 and 1; multiply each full-size input by f and round down:
 
