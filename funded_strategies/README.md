@@ -816,6 +816,12 @@ touch then reclaim, 20-bar swing stop, 5-bar swing target, one trade a day). Per
 - On the mechanism: VWAP execution algorithms trade on a volume schedule through the day; they don't
   buy because price touched VWAP, so "VWAP as a passive-flow zone" doesn't follow from benchmarking.
   The data agree (VWAP fade, VWAP trend and VWAP Pullback ADX also failed here). **F.**
+- **Improvement attempt** (`../analysis/vwap_pullback_improve_test.py`): use the pullback only as an entry for a
+  direction with a proven edge. With the plain Overnight Bias direction: $9, t 0.4 (nothing). On the days
+  Overnight Bias ML trades, same side: $162, PF 1.70, t 3.2, 8/9 years (random side −$69), so the direction
+  carries the edge; but on those same 304 days ONB ML's own entry makes $412, so the VWAP entry is the worse
+  entry. As an extra 1-MNQ entry on ONB ML days: funded $8,986 / $12,194 vs $8,770 / $12,236 (within noise,
+  and it is just more size on the same trades). Nothing to adopt.
 
 ## Papers reviewed for funded strategies
 

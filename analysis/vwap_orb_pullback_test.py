@@ -38,7 +38,7 @@ def pivots(h, l, n):
     return vh, vl
 
 
-def run(g, s, sh, sl, th, tl, apex=True, retest=1, stopmode=1, minrr=0.0, longs=True, shorts=True, rand=None):
+def run(g, s, sh, sl, th, tl, apex=True, retest=1, stopmode=1, minrr=0.0, longs=True, shorts=True, rand=None, bias=None, exit_t=None):
     O, H, L, C, V, row, col = s["o"], s["h"], s["l"], s["c"], s["v"], s["row"], s["col"]
     N = len(C); hhmm = (col // 60) * 100 + col % 60
     ts = pd.DatetimeIndex(g.ts); rng = np.random.default_rng(rand) if rand is not None else None
@@ -58,11 +58,17 @@ def run(g, s, sh, sl, th, tl, apex=True, retest=1, stopmode=1, minrr=0.0, longs=
         vwap = np.cumsum(tp * vv) / np.cumsum(vv)
         vmap = dict(zip(vw_idx, vwap))
         lb = sb = ltouch = stouch = lthru = sthru = False; pbl = pbh = None
+        if bias is not None:                     # direction from another signal instead of the opening-range break
+            bd = bias.get(int(d), 0)
+            if bd == 0: continue
         entry = None
         for k in seg[seg > rs[-1]]:
             if hhmm[k] > 1700: break
-            if C[k] > orh: lb = True
-            if C[k] < orl: sb = True
+            if bias is None:
+                if C[k] > orh: lb = True
+                if C[k] < orl: sb = True
+            else:
+                lb, sb = bd > 0, bd < 0
             if k not in vmap or not (900 < hhmm[k] <= end_entry): continue
             vw = vmap[k]
             lsig = ssig = False
@@ -106,7 +112,7 @@ def run(g, s, sh, sl, th, tl, apex=True, retest=1, stopmode=1, minrr=0.0, longs=
                 px = ((min(O[j], stop) if side > 0 else max(O[j], stop)) if j > k + 1 else stop) - side * TICK; break
             if (H[j] >= tgt) if side > 0 else (L[j] <= tgt):
                 px = (max(O[j], tgt) if side > 0 else min(O[j], tgt)); kind = 1; break
-            if apex and 1555 <= hhmm[j] < 1700:
+            if (apex and 1555 <= hhmm[j] < 1700) or (exit_t is not None and hhmm[j] >= exit_t and hhmm[j] < 1700):
                 px = C[j] - side * TICK; break
             j += 1
         if px is None: continue
