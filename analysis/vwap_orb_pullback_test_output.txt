@@ -1,0 +1,28 @@
+VWAP Pullback after an opening-range break (user's MultiCharts file VWAP_Pullback_NQ_Margin_Vol_1min_TF,
+
+1. As written (bracket only, entries to 17:00) and the Apex version (entries to 15:00, flat 15:55):
+original                                         n=1810 win 54% avg $   23 PF 1.06 t= 0.8 yrs+ 5/9 | 2021+ $   74 PF 1.17 win 57% | 23+ $  111 | L $  70 S $ -27
+   original: 3% of trades held past the day; target hit 55%
+Apex version                                     n=1761 win 53% avg $   -2 PF 0.99 t=-0.1 yrs+ 4/9 | 2021+ $   41 PF 1.09 win 56% | 23+ $   66 | L $  46 S $ -52
+   original by year: {2018: -14118, 2019: -4793, 2020: -29258, 2021: 200, 2022: -612, 2023: 13816, 2024: 5884, 2025: 61170, 2026: 8488}
+   Apex by year: {2018: -15014, 2019: -6860, 2020: -29509, 2021: 4069, 2022: -8091, 2023: 12534, 2024: 3246, 2025: 42838, 2026: -6860}
+  Apex longs                                     n= 898 win 55% avg $   46 PF 1.14 t= 1.3 yrs+ 6/9 | 2021+ $  108 PF 1.28 win 59% | 23+ $  153 | L $  46 S $ nan
+  Apex shorts                                    n= 863 win 50% avg $  -52 PF 0.88 t=-1.3 yrs+ 1/9 | 2021+ $  -28 PF 0.94 win 53% | 23+ $  -22 | L $ nan S $ -52
+   placebo (same entry bars, random side, 10 runs): $-0 (-29..29) vs $-2
+
+2. Variants (Apex version):
+RetestMode 2 (close through, reclaim)            n=1631 win 53% avg $  -21 PF 0.94 t=-0.8 yrs+ 2/9 | 2021+ $   13 PF 1.03 win 56% | 23+ $   25 | L $  14 S $ -57
+StopMode 2 (pullback extreme)                    n=1833 win 25% avg $  -10 PF 0.94 t=-0.8 yrs+ 4/9 | 2021+ $   10 PF 1.05 win 28% | 23+ $   32 | L $   5 S $ -25
+MinRR 1                                          n=1534 win 35% avg $  -35 PF 0.88 t=-1.7 yrs+ 3/9 | 2021+ $  -35 PF 0.90 win 37% | 23+ $  -32 | L $  19 S $ -91
+MinRR 1.5                                        n=1395 win 28% avg $  -30 PF 0.87 t=-1.9 yrs+ 2/9 | 2021+ $  -31 PF 0.88 win 29% | 23+ $  -37 | L $ -20 S $ -42
+longs only                                       n=1065 win 56% avg $   62 PF 1.19 t= 2.0 yrs+ 6/9 | 2021+ $  113 PF 1.31 win 59% | 23+ $  154 | L $  62 S $ nan
+
+3. Standard metrics per NQ:
+             trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+original       1810 54%  $23  $4,543   0.26    0.37          1.06 $65,723   0.07 73.10       0.12
+Apex version   1761 53%  $-2   $-406  -0.03   -0.03          0.99 $66,112  -0.01 81.73      -0.01
+Apex longs      898 55%  $46  $4,634   0.44    0.58          1.14 $32,815   0.14 28.87       0.32
+Apex shorts     863 50% $-52 $-5,040  -0.45   -0.57          0.88 $54,276  -0.09 64.70      -0.16
+   correlation with the plan: {'VB': 0.02, 'ONB_ML2_MC': 0.05, 'LDF_MC': -0.01, 'VWP': 1.0}
+   current plan             1y $8,770 2y $12,236 blown 3% / 2%
+   + VWAP pullback 1 MNQ    1y $8,423 2y $11,672 blown 4% / 3%

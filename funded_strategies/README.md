@@ -797,6 +797,26 @@ Dec 2018 – Oct 2026, CT; 83% of 8:00–15:00 minutes trade, prices carried for
 - For Apex: even the best version makes ~$5 per MBT per trade; a 3% Bitcoin day is ~$250 per MBT, so
   sizes that matter would dominate the drawdown. Not a candidate.
 
+## VWAP pullback after an opening-range break (2026-10-13, user's file): no edge outside 2021+
+
+Code `../analysis/vwap_orb_pullback_test.py` (output in `..._output.txt`), a replica of
+`VWAP_Pullback_NQ_Margin_Vol_1min_TF` (8:30–9:00 CT opening range, a close beyond it sets the bias, VWAP
+touch then reclaim, 20-bar swing stop, 5-bar swing target, one trade a day). Per NQ after $7.25 + 1 tick.
+- **The replica reproduces the author's numbers:** from 2021, bracket-only as written, $74 a trade,
+  PF 1.17, 57% win (author: ~$80, PF ~1.2, 58%).
+- **But 2018–2020 lose $48,000 per NQ**: over 2018–2026 $23, PF 1.06, t 0.8, 5/9 years. Starting the test
+  in 2021 is what makes it look good.
+- **Apex version** (entries until 15:00, flat 15:55; the original holds 3% of trades past the day):
+  −$2, PF 0.99; Sharpe −0.03, max drawdown $66,000 per NQ.
+- **Random-side placebo** (same entry bars, random direction): $0, the same as the real signals, so the
+  ORB bias + VWAP reclaim has no directional information. Shorts lose in 8 of 9 years; longs only $62
+  (t 2.0), which is NQ's upward drift (the placebo shows no edge in direction).
+- Variants (close-through retest, pullback-extreme stop, minimum reward:risk 1 or 1.5) are all worse.
+- Funded bench: + 1 MNQ $8,423 / $11,672 vs $8,770 / $12,236.
+- On the mechanism: VWAP execution algorithms trade on a volume schedule through the day; they don't
+  buy because price touched VWAP, so "VWAP as a passive-flow zone" doesn't follow from benchmarking.
+  The data agree (VWAP fade, VWAP trend and VWAP Pullback ADX also failed here). **F.**
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
