@@ -48,6 +48,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Noise-area momentum, long only ("Beat the Market") | Strategy | PF 1.38–1.45, 9/9 years | Wins only 43%; replaces VB poorly ($4,100 vs $5,387) |
 | Bootstrap + permutation (out-of-sample resampling) | Method | Funded portfolio Sharpe 90% interval 1.53–3.00 (2023–26); real drawdown smaller than 99% of shuffles (95% shuffle $8,347 vs real $3,351) | Adopted as a standard check; shows the edges aren't luck but the real drawdowns were, and that losses don't cluster |
 | r/algotrading post: 100+ retail strategies, ~700 versions | Article / method | Random-entry placebo and trade-through fills applied to all four funded strategies: all pass (Overnight Drift least decisively, beat 97% of random-day runs) (first trade $90 vs random-after-signal $42, beat all 30 runs; $97 → $92 with 1-tick trade-through) |  |
+| The Bridge's Monday Long NQ (L644NQ): Sunday 19:00 CT → Monday 15:55, daily ADX(7) 10–50 and DI+ > DI−, 100-pt target, no stop (Python replica from the manual) | Funded add-on candidate (needs code check + MultiCharts) | 203 trades, 68% win, $508, PF 1.89, t 3.9, 7/9 years (2018–22 $602, 2023–26 $385); Sharpe 1.26, Calmar 0.71, Ulcer 4.3; 2023+ bootstrap Sharpe −0.03 to 1.69; other weekdays t ≤ 0.9; corr 0.29 with ours; funded ours + it 1 MNQ $9,132 / $12,327 vs $8,770 / $12,236, blown unchanged (ours at 2 MNQ blows 18%) | Real Monday edge, different days from ours; the ADX filter hurt since 2023 |
 
 ## C
 

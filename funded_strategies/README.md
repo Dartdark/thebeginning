@@ -902,6 +902,42 @@ the RTH open, so the RTH delta is rebuilt from buys − sells.
   in both periods but no funded gain). The Bridge's built-in signals (`OFB_LargeTradePredictability`,
   `OFB_LiquidityPredictability`) weren't tested; the same data says not to expect much.
 
+## The Bridge's Monday Long NQ (L644NQ) vs ours (2026-10-13): a different Monday trade that adds a little
+
+Code `../analysis/bridge_monday_long_test.py` (output in `..._output.txt`). Python replica of
+`L644NQ_MondayLong_NQ` from the manual's description (code not seen yet): buy the close of Sunday's 19:00 CT bar
+when the previous session's daily ADX(7) is 10–50 and DI+ > DI−, take profit at 100 points, no stop, out Monday
+15:55 CT. Ours: Monday 8:30 → 15:00, stop 0.5 ATR (MultiCharts trades). Per NQ after $7.25 + 1 tick.
+- **Bridge version:** 203 trades (half the Mondays), 68% win, $508 a trade, PF 1.89, t 3.9, 7/9 years.
+  2018–22 $602, 2023–26 $385; target hit 45%; worst trade −$6,172. Ours: 450 trades, $425, PF 1.55,
+  t 3.3; 2018–22 $153, 2023–26 $784. The two are good in different eras.
+- **Standard metrics, 2018–26:** Bridge Sharpe 1.26, Sortino 1.84, PF 1.89, Calmar 0.71, Ulcer 4.3; ours
+  1.11 / 1.97 / 1.55 / 1.03 / 10.5. On the 2023+ holdout: Bridge Sharpe 0.81 (bootstrap −0.03 to 1.69,
+  P ≤ 0 6%), ours 1.64 (0.88–2.37). Daily correlation 0.29. Long-only, so longs = all.
+- **Where it comes from:** the ADX/DI filter helped 2018–22 (skipped Mondays −$352) but hurt since 2023
+  (skipped Mondays +$1,157). Without the filter, the Bridge entry makes $403 (2023+ Sharpe 2.09) but
+  only $123 in 2018–22. The Sunday-evening overnight part alone is $162 (t 1.3). Our trade on the
+  Bridge-filter Mondays makes $489 vs $373 on the others.
+- **Placebo:** the same rule on Tuesday–Friday makes −$164 to +$160 (t ≤ 0.9). The Monday effect is real,
+  as found before.
+- **Funded bench** (cushion sizing from $1,500):
+
+| Monday set | 1 year | 2 years | Blown 1y / 2y |
+|---|---|---|---|
+| Current plan (ours 1 MNQ) | $8,770 | $12,236 | 3% / 2% |
+| **Ours + Bridge 1 MNQ** | **$9,132** | **$12,327** | 3% / 2% |
+| Bridge 1 MNQ instead of ours | $8,515 | $12,249 | 4% / 1% |
+| Bridge without the filter instead of ours | $8,930 | $12,146 | 3% / 2% |
+| Ours at 2 MNQ (control: just more Monday size) | $8,422 | $10,573 | 18% / 19% |
+| No Monday strategy | $8,218 | $11,964 | 4% / 1% |
+
+- **Verdict: B.** It's a real Monday edge with a different shape: Sunday-evening entry, a target, and a
+  filter that picks other days than ours. Adding it at 1 MNQ next to ours gives +$362 in year 1
+  (helps the speed goal), +$91 in year 2, with no extra blowups. Doubling ours instead blows 18%, so
+  the gain comes from diversifying, not from size. Before adopting: get the Bridge's code (to check the
+  replica: daily bars, ADX formula, entry fill) and a MultiCharts backtest. The filter was chosen by the
+  Bridge's author, and it has worked against the trade since 2023, so it's the weak part.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
