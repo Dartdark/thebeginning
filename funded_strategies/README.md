@@ -1077,6 +1077,23 @@ tape-exact RTH values they're within 0.1 point and 0.99× sigma. Per NQ after $7
 - **Verdict: F.** It agrees with earlier tests here (VWAP fade, VWAP 2σ). Moves beyond 2σ of the Globex VWAP
   keep going more often than they snap back. The Bridge's manual calls it an example to adapt, not a strategy.
 
+## The Bridge's Large Trade Predictability (2026-10-13): a small real gross edge, far below costs
+
+Code `../analysis/bridge_large_trade_test.py` (output in `..._output.txt`), the horizon-matched version. At each bar
+close the direction comes from the candle colour (mode 1), the bar's largest print if ≥ 100 / 200 contracts
+(mode 2), or both agreeing (mode 3). It holds one bar from the next open and keeps the position while the signal
+repeats. Data: the Bridge's big_trade per minute (2018–2026 RTH), 8:31–15:00 CT, 1- and 5-minute bars.
+- **1-minute bars, before costs:** every mode is slightly positive. Candle colour +0.05 points a bar, whale
+  ≥ 100 +0.22, both ≥ 200 +0.40, i.e. $2–8 a trade. There is short-lived momentum after big prints. A round
+  trip costs $17.25 (0.86 points).
+- **After costs:** candle −$15 a trade (421,670 trades, t −45), whale ≥ 100 −$13 (4,385, PF 0.85), whale
+  ≥ 200 −$14, both ≥ 100 −$14, both ≥ 200 −$9 (647 trades, PF 0.89). Sharpe −0.33 to −13.
+- **5-minute bars:** the gross edge turns negative (−0.12 to −1.25 points a bar), so the effect is gone
+  within minutes. Net −$21 to −$44 a trade.
+- **Verdict: F.** This matches the earlier order-flow result (big prints followed for 15–60 minutes ≈ $0).
+  The information in a whale print lasts about a minute and is worth less than the spread plus commission.
+  It needs market-maker economics, not a retail futures account.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
