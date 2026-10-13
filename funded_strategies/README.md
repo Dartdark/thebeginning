@@ -1198,6 +1198,16 @@ past its low / high. Breakout = any trade beyond X% or a 15-min close beyond X%.
 - **Verdict: C.** A real, if modest, long-side pattern. Better on 15-minute bars than 5. No room in either plan:
   neutral funded at 1 MNQ, worse in the combine. Watch item.
 
+### Open-breakout pullback on 1-minute bars (follow-up): fails
+
+Code `../analysis/open_pullback_1m_test.py` (output in `..._output.txt`). Same rules with a 1-minute signal bar (a minute
+touching the open and closing back on the breakout side; stop past that minute's low / high). 120 combinations.
+- Longs: only 3% of combinations are positive in 2018–22 (touch and close breakouts alike); shorts 13–20%.
+  Best overall t 1.6 (close breakout 0.25%, breakout-extreme target: $49, 2018–22 −$10, 5/9 years).
+- The 15-minute winner's settings (0.15%, 3R) on 1-minute bars: −$13 a trade, 4/9 years (2018–22 −$65).
+- The one-minute stop is too tight: costs and noise take most trades out before the move. **F.** Of the three
+  bar sizes, 15 minutes is the only one with a pattern (C).
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

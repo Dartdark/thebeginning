@@ -66,7 +66,7 @@ Funded re-check (`analysis/funded_today_check.py`): nothing else worth adding. D
 (median 245 vs 255 days, +$140 / +$56, blown 4% vs 3%) and weak since 2023: watch item, not a plan candidate.
 Open-breakout pullback (user's idea, `analysis/open_pullback_test.py`): longs t 1.6 at best, shorts lose; funded worse (D).
 On 15-min bars (`analysis/open_pullback_15m_test.py`): longs 0.15% 3R t 2.4, controls clean, but best of 120; funded
-neutral at 1 MNQ, combine worse (C, watch).
+neutral at 1 MNQ, combine worse (C, watch). On 1-min bars (`analysis/open_pullback_1m_test.py`): fails (F).
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily
