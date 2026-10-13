@@ -1,0 +1,147 @@
+{ NQ NFP Fade - MultiCharts PowerLanguage signal (funded candidate, 2026-10-13)
+
+  On payroll Fridays (Friday, day of month <= 10, and the 7:30-7:35 CT bar's range
+  more than SpikeMult x its median over the previous SpikeDays weekdays), fade the
+  first 15 minutes of the reaction to the 7:30 CT jobs report: if NQ rose from the
+  7:30 close to the 7:45 close, sell short at the next bar's open (7:45); if it fell,
+  buy. Stop StopAtrPct x 15-day ATR, out at the close of the 9:00 bar.
+
+  Why: the payroll report hits a thin pre-market book; the first reaction overshoots
+  and partly reverses once the cash market opens at 8:30 and full liquidity arrives.
+  Fading the reaction of other 7:30 releases (CPI, PPI, retail sales) does not work
+  (analysis/news_meanrev_test.py), so this is payroll-specific.
+
+  Python test (analysis/headline_shock_test.py, 1-minute NQ, 2018-2026, per NQ after
+  $7.25 and 1 tick per fill; reference 7:29 close): 76 trades, 51% winners, $319
+  average, PF 1.71, t = 1.7, 7 of 9 years positive (2021-2026 all positive); longs
+  $293, shorts $340. All 20 tested reaction-end / exit combinations are positive
+  (t 1.4-3.0). Random-side placebo -$8 (95% of runs <= $315). Daily correlation
+  with the funded plan about 0. Funded bench (with Vol-Control Sell Flow 1 MNQ):
+  +$456 in year 1, +$10 in year 2, blown 4% / 3% vs 6% / 4%. Tier C: about 9 trades
+  a year and found as a subgroup of a weaker idea, so confirm before using.
+
+  Difference from the Python test: on a 5-minute chart the reference price is the
+  close of the 7:30 bar (7:30:00, just before the release) instead of 7:29.
+
+  Apply to a 5-minute NQ / MNQ chart, Exchange time zone (Central), CME 24-hour
+  session (the 7:30 bar and the ATR need the overnight session), Bar Magnifier on
+  at 1 minute. Load at least 30 trading days before the backtest start.
+
+  SIZE: funded RiskPerTrade 500 on MNQ (at October 2026 prices the 0.5 ATR stop is
+  about $475 per MNQ, so 1 MNQ). Backtest on NQ: RiskPerTrade 0, NumContracts 1. }
+
+Inputs:
+	RefBarTime(730),        { close of this bar = price before the release }
+	SpikeBarTime(735),      { range of this bar = the release spike (7:30-7:35) }
+	ReactBarTime(745),      { reaction = close of this bar - reference; enter at the next bar's open }
+	ExitTime(900),
+	SpikeMult(3.0),
+	SpikeDays(20),
+	MaxDayOfMonth(10),
+	StopAtrPct(0.50),
+	AtrDays(15),
+	RiskPerTrade(0),        { $ lost at the stop; 0 = trade NumContracts }
+	NumContracts(1);
+
+Variables:
+	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
+	RefPx(0), SpikeRange(0), SpikeBase(0), IsSpike(false), SpCount(0), SpIdx(0),
+	Si(0), Sj(0), Tmp(0), Reaction(0), StopPts(0), Qty(0),
+	TradedToday(false), DayStartTrades(0);
+
+Arrays:
+	TrHist[100](0),
+	SpHist[100](0),
+	SpSort[100](0);
+
+{ ---------- Daily ATR (weekdays, calendar dates), as in Overnight Bias ---------- }
+if Date <> Date[1] then begin
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	DayHi = High;
+	DayLo = Low;
+	RefPx = 0;
+	IsSpike = false;
+	DayStartTrades = TotalTrades;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+
+{ ---------- Reference price and release spike ---------- }
+if Time = RefBarTime then RefPx = Close;
+
+if Time = SpikeBarTime and DayOfWeek(Date) >= 1 and DayOfWeek(Date) <= 5 then begin
+	SpikeRange = High - Low;
+	{ median of the previous SpikeDays weekday ranges (before adding today's) }
+	SpikeBase = 0;
+	if SpCount >= SpikeDays then begin
+		for Si = 0 to SpikeDays - 1 begin
+			SpSort[Si] = SpHist[Si];
+		end;
+		for Si = 1 to SpikeDays - 1 begin          { insertion sort }
+			Tmp = SpSort[Si];
+			Sj = Si - 1;
+			while Sj >= 0 and SpSort[Sj] > Tmp begin
+				SpSort[Sj + 1] = SpSort[Sj];
+				Sj = Sj - 1;
+			end;
+			SpSort[Sj + 1] = Tmp;
+		end;
+		if Mod(SpikeDays, 2) = 0 then
+			SpikeBase = (SpSort[SpikeDays / 2 - 1] + SpSort[SpikeDays / 2]) / 2
+		else
+			SpikeBase = SpSort[(SpikeDays - 1) / 2];
+	end;
+	IsSpike = SpikeBase > 0 and SpikeRange > SpikeMult * SpikeBase;
+	SpHist[SpIdx] = SpikeRange;
+	SpIdx = Mod(SpIdx + 1, SpikeDays);
+	if SpCount < SpikeDays then SpCount = SpCount + 1;
+end;
+
+{ ---------- Entry at 7:45: fade the payroll reaction ---------- }
+TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
+if Time = ReactBarTime and IsSpike and DayOfWeek(Date) = 5 and DayOfMonth(Date) <= MaxDayOfMonth
+	and RefPx > 0 and ATRv > 0 and MarketPosition = 0 and TradedToday = false then begin
+	Reaction = Close - RefPx;
+	StopPts = StopAtrPct * ATRv;
+	Qty = NumContracts;
+	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
+	if Qty >= 1 and Reaction <> 0 then begin
+		if Reaction > 0 then
+			SellShort ("NFP Fade S") Qty contracts next bar at market
+		else
+			Buy ("NFP Fade L") Qty contracts next bar at market;
+	end;
+end;
+
+{ ---------- Exits ---------- }
+SetStopContract;
+if StopPts > 0 then SetStopLoss(StopPts * BigPointValue);
+
+if MarketPosition <> 0 and Time >= ExitTime then begin
+	Sell ("NFP Fade LX") this bar on close;
+	BuyToCover ("NFP Fade SX") this bar on close;
+end;

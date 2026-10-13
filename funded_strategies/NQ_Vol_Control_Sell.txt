@@ -1,0 +1,150 @@
+{ NQ Vol-Control Sell Flow - MultiCharts PowerLanguage signal (funded candidate, 2026-10-13)
+
+  Volatility-control funds (S&P 500 Daily Risk Control style) hold exposure
+  E = min(MaxExposure, TargetVol / vol), with vol = the larger of two exponentially
+  weighted vols of daily S&P returns (lambda 0.94 and 0.97, annualized), and set
+  today's exposure from vol known at yesterday's close. So the size of today's
+  rebalance, E(yesterday) - E(day before), is known before the open. When it is a
+  sale of more than MinSellFlow of fund size, sell NQ short at the 14:00 CT bar's
+  close (they trade into the cash close), stop StopAtrPct x 15-day ATR, out at the
+  close of the 15:00 bar. Short only: large buy flows don't happen (vol jumps fast,
+  falls slowly).
+
+  Python test (analysis/cta_fade_test.py, 1-minute NQ, ES 15:00 closes for the vol,
+  2018-2026, per NQ after $7.25 and 1 tick per fill): 67 trades, 55% winners, $455
+  average, PF 2.15, t = 2.2, 8 of 9 years positive; 2023-2026 PF 3.13. Thresholds
+  0.04-0.08 and stops 0.15 / 0.25 / none all positive (t 1.1-2.7). Shorting the whole
+  day instead is about $0, so the edge is in the closing hour. Random-day last-hour
+  shorts average $7 (95% of 67-day samples <= $269 vs $591 here). Correlation with
+  the funded plan <= 0.05. Tier C: about 8 trades a year; confirm before using.
+
+  SETUP: 5-minute NQ / MNQ chart as data1, **5-minute @ES as data2** (Insert >
+  Instrument, same CME 24-hour session, Exchange time zone). Bar Magnifier on at 1
+  minute. Load both from January 2017 or earlier so the EWMA vols are warmed up by
+  2018 (the Python test started in December 2017). The vol uses the ES close of the
+  15:00 bar each trading day; on early-close days (no 15:00 bar) the day counts as a
+  zero return, as in the Python test. UseES false uses NQ's own 15:00 close instead
+  (not tested).
+
+  SIZE: funded NumContracts 1 MNQ with RiskPerTrade 0 (the 0.25 ATR stop is about
+  $235 per MNQ at October 2026 prices). Backtest on NQ: RiskPerTrade 0, NumContracts 1. }
+
+Inputs:
+	TargetVol(0.10),
+	MaxExposure(1.5),
+	Lambda1(0.94),
+	Lambda2(0.97),
+	MinSellFlow(0.06),      { short when yesterday's exposure is this much below the day before's }
+	CloseBarTime(1500),     { daily close used for the vol }
+	EntryBarTime(1400),     { short at the next bar's open }
+	ExitTime(1500),
+	StopAtrPct(0.25),
+	AtrDays(15),
+	RiskPerTrade(0),        { $ lost at the stop; 0 = trade NumContracts }
+	NumContracts(1),
+	UseES(true);
+
+Variables:
+	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
+	LastPx(0), Px(0), Ret(0), V1(-1), V2(-1), VolA(0), ENew(0), E1(-1), E2(-1), Flow(0),
+	UpdatedToday(false), HadRTH(false), DoUpdate(false),
+	StopPts(0), Qty(0), TradedToday(false), DayStartTrades(0);
+
+Arrays:
+	TrHist[100](0);
+
+{ ---------- New date: close out the previous trading day if it had no 15:00 bar ---------- }
+DoUpdate = false;
+if Date <> Date[1] then begin
+	if HadRTH and UpdatedToday = false and LastPx > 0 then begin
+		Px = LastPx;                     { early close: zero return for that day }
+		DoUpdate = true;
+	end;
+	UpdatedToday = false;
+	HadRTH = false;
+end;
+
+{ ---------- Daily ATR (weekdays, calendar dates), as in Overnight Bias ---------- }
+if Date <> Date[1] then begin
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	DayHi = High;
+	DayLo = Low;
+	DayStartTrades = TotalTrades;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+
+if Time >= 1100 and Time <= 1500 and DayOfWeek(Date) >= 1 and DayOfWeek(Date) <= 5 then
+	HadRTH = true;
+
+{ ---------- Entry at 14:00: yesterday's model sell flow (known since the open) ---------- }
+Flow = 0;
+if E1 > 0 and E2 > 0 then Flow = E1 - E2;
+TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
+if Time = EntryBarTime and Flow < -MinSellFlow and ATRv > 0
+	and MarketPosition = 0 and TradedToday = false then begin
+	StopPts = StopAtrPct * ATRv;
+	Qty = NumContracts;
+	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
+	if Qty >= 1 then
+		SellShort ("VolCtl S") Qty contracts next bar at market;
+end;
+
+{ ---------- Daily vol-control model update at the 15:00 close ---------- }
+if Time = CloseBarTime and UpdatedToday = false and DayOfWeek(Date) >= 1 and DayOfWeek(Date) <= 5 then begin
+	if UseES then Px = Close Data2 else Px = Close;
+	DoUpdate = true;
+end;
+
+if DoUpdate then begin
+	if LastPx > 0 and Px > 0 then begin
+		Ret = Px / LastPx - 1;
+		if V1 < 0 then begin
+			V1 = Ret * Ret;
+			V2 = Ret * Ret;
+		end
+		else begin
+			V1 = Lambda1 * V1 + (1 - Lambda1) * Ret * Ret;
+			V2 = Lambda2 * V2 + (1 - Lambda2) * Ret * Ret;
+		end;
+		VolA = SquareRoot(252 * MaxList(V1, V2));
+		if VolA > 0 then begin
+			ENew = MinList(MaxExposure, TargetVol / VolA);
+			E2 = E1;
+			E1 = ENew;
+		end;
+	end;
+	if Px > 0 then LastPx = Px;
+	if Time = CloseBarTime then UpdatedToday = true;
+end;
+
+{ ---------- Exits ---------- }
+SetStopContract;
+if StopPts > 0 then SetStopLoss(StopPts * BigPointValue);
+
+if MarketPosition < 0 and Time >= ExitTime then
+	BuyToCover ("VolCtl SX") this bar on close;

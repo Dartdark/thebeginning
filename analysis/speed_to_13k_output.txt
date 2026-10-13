@@ -1,0 +1,60 @@
+How to collect the full $13,000 (all 6 payouts) of an Apex 50K PA faster (2026-10-13).
+
+1. Current plan and size scale (cushion sizing as now: full size at $2,000 cushion, 0.5-1x):
+           full6m full1y full2y median if_done blown per_month   exp3y max_mnq
+scale 0.5      0%     0%     2%    686     609    0%      $323 $10,613      25
+scale 0.75     0%     0%    79%    381     379    0%      $601 $12,917      37
+scale 1.0      0%    21%    89%    306     305    1%      $779 $12,922      53
+scale 1.25     0%    28%    86%    293     280   10%      $828 $11,710      64
+scale 1.5      0%    41%    80%    267     249   20%      $907 $10,465      78
+scale 2.0      1%    41%    51%    320     223   49%      $926  $6,744     106
+
+2. Cushion-sizing curve x scale (fmin 0.5): ref = cushion for full size, fmax = cap above it
+                                 full6m full1y full2y median if_done blown per_month   exp3y max_mnq
+scale 1.25, ref $1,000, fmax 1.0     0%    41%    67%    266     241   32%      $892  $8,869      64
+scale 1.5, ref $2,000, fmax 1.0      0%    41%    80%    267     249   20%      $907 $10,465      78
+scale 1.5, ref $1,500, fmax 1.0      0%    43%    62%    274     230   38%      $916  $8,244      78
+scale 1.0, ref $1,000, fmax 1.0      0%    37%    80%    275     255   19%      $870 $10,623      53
+scale 1.5, ref $1,000, fmax 1.0      0%    44%    59%    275     221   41%      $942  $7,857      78
+scale 1.25, ref $1,500, fmax 1.0     0%    35%    84%    276     261   13%      $857 $11,312      64
+scale 1.0, ref $1,000, fmax 1.5      0%    42%    71%    279     242   28%      $886  $9,492      78
+scale 1.5, ref $2,000, fmax 1.5      0%    33%    79%    282     261   21%      $879 $10,334     117
+scale 1.0, ref $1,500, fmax 1.5      0%    35%    87%    287     277   10%      $844 $11,758      78
+scale 1.0, ref $1,500, fmax 1.0      0%    31%    90%    289     284    4%      $821 $12,495      53
+scale 1.25, ref $2,000, fmax 1.0     0%    28%    86%    293     280   10%      $828 $11,710      64
+scale 1.25, ref $1,500, fmax 1.5     0%    32%    79%    294     273   20%      $846 $10,429      97
+scale 1.5, ref $2,000, fmax 2.0      0%    29%    79%    294     277   21%      $846 $10,308     159
+scale 1.5, ref $1,500, fmax 1.5      0%    37%    55%    297     230   45%      $878  $7,353     117
+scale 1.0, ref $1,500, fmax 2.0      0%    29%    87%    299     286   11%      $825 $11,609     106
+scale 1.25, ref $2,000, fmax 1.5     0%    27%    86%    302     287   13%      $821 $11,286      97
+scale 1.0, ref $1,000, fmax 2.0      0%    36%    61%    304     239   39%      $849  $8,095     106
+scale 1.0, ref $2,000, fmax 1.5      0%    20%    87%    304     304    1%      $770 $12,929      78
+scale 1.25, ref $1,500, fmax 2.0     0%    28%    79%    304     282   20%      $814 $10,373     131
+scale 1.0, ref $2,000, fmax 1.0      0%    21%    89%    306     305    1%      $779 $12,922      53
+scale 1.25, ref $1,000, fmax 1.5     0%    36%    58%    307     235   42%      $875  $7,673      97
+scale 1.25, ref $2,000, fmax 2.0     0%    24%    86%    308     294   13%      $805 $11,317     131
+scale 1.0, ref $2,000, fmax 2.0      0%    18%    88%    314     314    0%      $766 $12,948     106
+scale 1.5, ref $1,500, fmax 2.0      0%    30%    52%    336     240   48%      $832  $6,996     159
+scale 1.25, ref $1,000, fmax 2.0     0%    33%    52%    340     230   48%      $862  $6,861     131
+scale 1.5, ref $1,000, fmax 1.5      0%    38%    50%    484     223   50%      $909  $6,692     117
+scale 1.5, ref $1,000, fmax 2.0      0%    30%    41%   >750     212   59%      $856  $5,493     159
+
+3. Stage sizing (multiplier while n payouts have been made), scale 1:
+                                     full6m full1y full2y median if_done blown per_month   exp3y max_mnq
+flat                                     0%    21%    89%    306     305    1%      $779 $12,922      53
+after 2 payouts x1.25                    0%    22%    88%    302     302    1%      $783 $12,922      64
+after 2 payouts x1.5                     0%    24%    87%    297     296    1%      $787 $12,849      78
+ramp 1 / 1 / 1.25 / 1.5 / 1.5 / 1.75     0%    25%    88%    295     294    1%      $790 $12,922      91
+after the 1st payout x1.5                0%    23%    85%    297     292    5%      $786 $12,454      78
+x2 from payout 3                         0%    20%    81%    311     303    8%      $763 $12,175     106
+
+4. Add-ons (MultiCharts-spec NFP Fade, VCS, Headline Shock), scale 1 and 1.25:
+                              full6m full1y full2y median if_done blown per_month   exp3y max_mnq
+scale 1.0                         0%    21%    89%    306     305    1%      $779 $12,922      53
+scale 1.0 + NFP $500 + VCS 1      0%    27%    88%    287     287    0%      $789 $12,948      66
+scale 1.0 + HSF 1                 0%    25%    90%    297     297    0%      $798 $12,948      54
+scale 1.0 + all three             0%    33%    89%    280     280    1%      $816 $12,862      67
+scale 1.25                        0%    28%    86%    293     280   10%      $828 $11,710      64
+scale 1.25 + NFP $500 + VCS 1     0%    35%    86%    280     268   11%      $841 $11,553      81
+scale 1.25 + HSF 1                0%    35%    86%    277     266   10%      $860 $11,715      65
+scale 1.25 + all three            0%    41%    86%    271     256   11%      $872 $11,552      82
