@@ -50,6 +50,11 @@ Monday Long 1 MNQ (replaced Overnight Drift), Expiration Open Short RiskPerTrade
 2 MNQ** (added), with cushion sizing (f = cushion/$2,000 in 0.5-1). Expected payouts $7,676 (1y) /
 $12,012 (2y), blown 4-6%; portfolio Sharpe 2.51.
 
+## Combine: Overnight Bias ADX30 confirmed (2026-10-13)
+MultiCharts report `Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx`
+(ADXMin 30, StopAtrPct 0.25): 676 trades, PF 1.66, 675/676 match Python. Combine pass with VB 8 MNQ
+46.9% (was 42.8%); switch the live combine chart to these inputs. `analysis/onb_adx30_confirm.py`.
+
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily
 loss limit, contract tiers, payout rules). Each challenge account costs $50.
@@ -89,7 +94,7 @@ on at 1 minute for backtests:
 | Strategy | File | Chart | Live inputs |
 |---|---|---|---|
 | Vault Break (mine) | `apex_strategies/NQ_Vault_Break.txt` | 30 min | `NumContracts` 8 |
-| Overnight Bias (mine) | `apex_strategies/NQ_Overnight_Bias.txt` | 15 min | `RiskPerTrade` 1100, `NumContracts` 1, `ExitTime` 1430, `EarlyExitTime` 1130 (= 3-4 MNQ at late-2026 prices) |
+| Overnight Bias ADX30 (mine, since 2026-10-13) | `apex_strategies/NQ_Overnight_Bias_ADX30.txt` | 15 min | `RiskPerTrade` 1100, `NumContracts` 1, `ADXMin` 30, `StopAtrPct` 0.25, `ExitTime` 1430, `EarlyExitTime` 1130 (= 4-5 MNQ at late-2026 prices) |
 
 Results (backtests 2018-2026 from my MultiCharts reports, real-day Apex simulation):
 combined account passes **44%** (2018-22 43%, 2023-26 45%, worst start year 29%);

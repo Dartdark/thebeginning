@@ -3,6 +3,12 @@
 One Apex 50K account, both strategies on MNQ, each on its own chart with the CME
 24-hour session (Exchange time zone). All times are Central (CT).
 
+> **Update 2026-10-13: Overnight Bias now runs with `ADXMin` 30 and `StopAtrPct` 0.25**
+> (`NQ_Overnight_Bias_ADX30.txt`, MultiCharts-confirmed: 676 trades, PF 1.66, 9/9 years; 675 of 676 match
+> Python). Challenge with Vault Break 8 MNQ: pass **46.9% vs 42.8%** (2023-26 51.1% vs 44.4%), same median
+> 6 days; cost per funded account about $107 vs $117 at $50 a challenge. RiskPerTrade stays 1100. Details:
+> `../analysis/onb_adx30_confirm.py`.
+
 ## Vault Break (`NQ_Vault_Break.txt`)
 
 **Chart:** 30-minute MNQ, 24-hour session. **Size:** `NumContracts` 8 (8 MNQ).
@@ -38,7 +44,7 @@ winners, $99 average trade, profit factor 1.28, profitable every year.
 - The target is closer than the stop, so it wins often (66%). The losses are bigger
   but rarer, and the 14:30 exit avoids late-day reversals.
 
-## Overnight Bias (`NQ_Overnight_Bias.txt`)
+## Overnight Bias (`NQ_Overnight_Bias_ADX30.txt` since 2026-10-13; ADX > 30, stop 0.25 ATR)
 
 **Chart:** 15-minute MNQ, 24-hour session. **Size:** `RiskPerTrade` 1100,
 `NumContracts` 1, `ExitTime` 1430, `EarlyExitTime` 1130. The code works out the
