@@ -628,6 +628,27 @@ Per NQ after $7.25 + 1 tick per market/stop fill, 2018–2026.
   and fading them pays the costs twice. The opposite (following band breaks) is what Vault Break and
   the noise-area breakout already do. **F.**
 
+## 20/50 EMA zone pullback (2026-10-13, user spec): no edge
+
+Code `../analysis/ema_zone_pullback_test.py` (output in `..._output.txt`). 10-minute NQ: trend = EMA20
+vs EMA50; long when the bar's low touches the zone and it closes above it (short mirrored); optional
+bullish / bearish confirmation (the signal bar, or the next bar); one position at a time; stop 30 /
+target 65 points intrabar; flat 15:55 CT (Apex). Per NQ after $7.25 + 1 tick per market/stop fill.
+
+| Version | Trades | Win | Avg | PF | t | Years + |
+|---|---|---|---|---|---|---|
+| **As specified** (confirm on the signal bar, 24h) | 11,627 | 33% | −$10 | 0.98 | −1.2 | 4/9 |
+| · longs / shorts | 5,934 / 5,693 | 35% / 32% | $7 / −$28 | 1.02 / 0.93 | | |
+| Day session only | 5,232 | 35% | −$9 | 0.98 | −0.8 | 3/9 |
+| Stop / target scaled to price (0.12% / 0.26%) | 17,503 | 32% | −$9 | 0.96 | −2.2 | 3/9 |
+| Best of 12 (next-bar confirmation, 24h) | 9,430 | 35% | $12 | 1.03 | 1.3 | 5/9 |
+
+- **Placebo:** the same number of entries at random 10-minute closes, in the EMA-trend direction,
+  average −$7 (random side −$16) vs −$10 for the real signals: the pullback trigger adds nothing.
+- About 1,300 trades a year pay ~$17 each in costs and slippage (~$22,000 a year per NQ); the gross
+  edge is about $7 a trade.
+- **F.** The only positive variant is the best of 12, with t 1.3 and 5/9 years: noise.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

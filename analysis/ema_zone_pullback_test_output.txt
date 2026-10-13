@@ -1,0 +1,47 @@
+20/50 EMA zone pullback (user spec, 2026-10-13), NQ 10-minute bars.
+
+1. As specified and variants (per NQ):
+confirm same 24h 30/65 pts                     n=11627 win 33% avg $  -10 PF 0.98 t= -1.2 yrs+ 4/9 | 23+ $   -0 PF 1.00 | L $   7 PF 1.02 S $ -28 PF 0.93
+confirm same 24h scaled                        n=17503 win 32% avg $   -9 PF 0.96 t= -2.2 yrs+ 3/9 | 23+ $   -6 PF 0.98 | L $  -0 PF 1.00 S $ -19 PF 0.92
+confirm same RTH 30/65 pts                     n= 5232 win 35% avg $   -9 PF 0.98 t= -0.8 yrs+ 3/9 | 23+ $  -16 PF 0.96 | L $   4 PF 1.01 S $ -22 PF 0.94
+confirm same RTH scaled                        n= 6814 win 32% avg $  -12 PF 0.95 t= -1.7 yrs+ 3/9 | 23+ $  -25 PF 0.93 | L $ -10 PF 0.96 S $ -14 PF 0.94
+confirm next 24h 30/65 pts                     n= 9430 win 35% avg $   12 PF 1.03 t=  1.3 yrs+ 5/9 | 23+ $   30 PF 1.08 | L $  25 PF 1.07 S $  -3 PF 0.99
+confirm next 24h scaled                        n=13256 win 33% avg $    0 PF 1.00 t=  0.0 yrs+ 3/9 | 23+ $   14 PF 1.04 | L $   5 PF 1.02 S $  -6 PF 0.98
+confirm next RTH 30/65 pts                     n= 3922 win 37% avg $   14 PF 1.04 t=  1.1 yrs+ 4/9 | 23+ $   17 PF 1.04 | L $  17 PF 1.05 S $  11 PF 1.03
+confirm next RTH scaled                        n= 4876 win 33% avg $   -6 PF 0.98 t= -0.7 yrs+ 3/9 | 23+ $   -6 PF 0.98 | L $  -8 PF 0.97 S $  -3 PF 0.99
+confirm off  24h 30/65 pts                     n=13028 win 34% avg $   -7 PF 0.98 t= -0.9 yrs+ 2/9 | 23+ $   -2 PF 1.00 | L $  10 PF 1.03 S $ -24 PF 0.94
+confirm off  24h scaled                        n=20511 win 32% avg $   -7 PF 0.97 t= -1.8 yrs+ 2/9 | 23+ $   -2 PF 0.99 | L $   1 PF 1.00 S $ -16 PF 0.93
+confirm off  RTH 30/65 pts                     n= 6080 win 34% avg $  -10 PF 0.98 t= -0.9 yrs+ 3/9 | 23+ $  -23 PF 0.94 | L $   3 PF 1.01 S $ -22 PF 0.94
+confirm off  RTH scaled                        n= 8488 win 32% avg $   -9 PF 0.96 t= -1.5 yrs+ 2/9 | 23+ $  -18 PF 0.95 | L $  -5 PF 0.98 S $ -14 PF 0.94
+
+2. As specified (confirm same bar, 24h, 30/65 points), by year:
+    date    2018   2019   2020   2021   2022  2023  2024   2025   2026
+count    692    585   1330   1191   1747  1145  1397   1793   1747
+sum   -48047 -19171 -49298 -32510  37164  4379  3207 -20004  11534
+mean     -69    -33    -37    -27     21     4     2    -11      7
+   exits: target 28%, stop / time 72%; trades held past midnight 13%
+   placebo, same number of entries at random 10-min closes (10 runs each):
+     side = EMA trend: $-7 (-12..-0); random side: $-16 (-37..-4); real $-10
+
+3. Standard metrics per NQ, 2018-26:
+                                 trades win  avg   annual sharpe sortino profit_factor   max_dd calmar  ulcer ulcer_perf
+as specified                      11627 33% $-10  $-8,126  -0.26   -0.37          0.98 $155,208  -0.05 164.08      -0.10
+  longs                            5934 35%   $7   $6,880   0.32    0.50          1.02  $38,610   0.18  21.95       0.63
+  shorts                           5693 32% $-28 $-15,005  -0.70   -1.06          0.93 $183,774  -0.08 231.89      -0.13
+best: confirm next 24h 30/65 pts   9430 35%  $12  $15,425   0.56    0.84          1.03  $70,072   0.22  49.73       0.62
+                                     actual        p5       p50        p95
+name                 metric                                               
+best 2023-26         sharpe            1.33      0.59      1.34       2.13
+                     sortino           2.09      0.89      2.11       3.49
+                     pf_day            1.24      1.10      1.24       1.41
+                     calmar            1.14      0.36      1.26       2.83
+                     ulcer             9.49      4.32      9.31      25.83
+                     max_dd       36,338.00 21,172.78 33,066.25  57,138.00
+                     P(Sharpe<=0)       NaN       NaN      0.00        NaN
+as specified 2023-26 sharpe            0.13     -0.70      0.14       0.97
+                     sortino           0.18     -0.94      0.19       1.42
+                     pf_day            1.02      0.89      1.02       1.17
+                     calmar            0.06     -0.20      0.07       0.79
+                     ulcer            34.16     12.28     37.46     121.43
+                     max_dd       74,384.75 37,406.80 70,663.12 137,991.88
+                     P(Sharpe<=0)       NaN       NaN      0.41        NaN
