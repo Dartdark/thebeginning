@@ -73,7 +73,8 @@ neutral at 1 MNQ, combine worse (C, watch). On 1-min bars (`analysis/open_pullba
 Time clusters in the plans' trades (`analysis/time_clusters_test.py`): nothing to change; current exits best; VB September
 weak (7/9 years) is a watch item, not a filter.
 YM (`data/YM_1min_2017..2026.csv`, `analysis/ym_test.py`): correlation with NQ 0.80, but none of the plan's strategies
-work on YM (t <= 1.3, 2018-2026): don't add it. CL / GC: user's feed stops at Oct 4 (NYMEX / COMEX entitlement); export pending.
+work on YM (t <= 1.3, 2018-2026): don't add it. NQ-YM spread (`analysis/nq_ym_spread_test.py`): divergences trend
+intraday but two legs of costs eat it; the NQ leg is NQ's own opening momentum (D). CL / GC: user's feed stops at Oct 4 (NYMEX / COMEX entitlement); export pending.
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily

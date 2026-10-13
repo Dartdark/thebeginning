@@ -1255,6 +1255,25 @@ Central time), 2,257 common sessions 2018-01-02 → 2026-10-09. YM costs: $5 + 1
   strongest in the Nasdaq. A lower correlation only helps if a strategy makes money there, and none do (best: the
   Bridge Monday Long, t 1.3). Ranked F as a home for the plan's strategies; a YM-specific flow would need its own idea.
 
+### NQ–YM relative value (follow-up, user's idea): divergences trend, but the spread doesn't pay after two legs
+
+Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread from the 8:30 open = r_NQ − β × r_YM (β =
+60-day regression, median 1.03; 1.6 YM per NQ of notional), z = spread / its 60-day daily std. At 9:00 / 9:30 / 10:30
+/ 12:00, or on the overnight gap, |z| > 0.5 / 1 / 1.5: follow or fade, both legs, out 14:55. Costs per 1 NQ: NQ $17.25
++ YM $15 × 1.6 contracts. 30 versions, 2018–2026.
+- **Fading a divergence loses almost everywhere:** 9:00, 9:30 and 10:30 at 0.5σ make −$139 to −$192 a trade, 0/9
+  years, t −2.6 to −3.6; 12:00 −$87, t −3.1. So rotation days keep going into the close: a real intraday spread
+  momentum of roughly $100 a trade before costs.
+- **Following it with both legs:** best 9:00, |z| ≥ 1: 204 trades, $164, PF 1.28, t 1.3, 5/9 years (2018–22 $254,
+  2023–26 $55). Random-side placebo −$1. Sharpe 0.42, Calmar 0.19, Ulcer 9.8; 2023+ Sharpe 0.12 (P ≤ 0 40%). Two
+  legs of costs eat most of the edge. Only 37% of the 30 versions are positive in 2018–22.
+- **The NQ leg alone** makes $538 (t 2.4, 7/9 years) and the YM leg loses $374. But the spread points the same way
+  as NQ's own 8:30 → 9:00 move 95% of the time, and simply following the biggest NQ early moves (no YM) makes $623
+  (t 1.9). So it's NQ's opening momentum, already known here (morning direction, C), not new information from YM.
+- **Verdict: D.** Rotation trends within the day, but too little is left after costs on two contracts, and the
+  profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
+  awkward there in any case.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

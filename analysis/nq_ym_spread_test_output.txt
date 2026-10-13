@@ -1,0 +1,66 @@
+NQ vs YM relative value (user's idea, 2026-10-13): trade the days they decouple (daily correlation 0.80 vs 0.93 for ES).
+common sessions 2257; beta median 1.03 (10-90%: 0.75-1.38); YM contracts per NQ median 1.62
+daily spread (8:30->15:00) autocorrelation day to day -0.016; std 0.71%
+
+1. Spread trades (both legs, per 1 NQ of exposure), all 30 versions sorted by design (2018-22) average:
+   T    z   mode    n     avg   pf     t       d       h yrs
+ 900 1.00 follow  204  164.06 1.28  1.27  253.84   54.77 5/9
+ 900 0.50 follow  818  105.48 1.16  1.48  119.94   90.29 5/9
+1030 1.50   fade  166  -52.62 0.91 -0.43   89.76 -262.99 3/9
+ 930 1.00 follow  346   61.47 1.10  0.66   39.47   87.04 6/9
+1200 1.50 follow  211   40.36 1.11  0.49   17.60   70.37 5/9
+ gap 1.00 follow  556  -12.39 0.99 -0.11   11.35  -41.44 4/9
+ gap 1.50   fade  258  -55.16 0.95 -0.32   10.68 -138.34 3/9
+1030 0.50 follow 1090   58.52 1.14  1.47    5.59  120.30 5/9
+ 930 1.50 follow   98 -224.54 0.74 -1.03    3.43 -493.05 4/9
+ 930 0.50 follow  980   52.86 1.10  1.00    1.79  110.83 5/9
+ gap 0.50 follow 1130  -56.59 0.94 -0.76    0.45 -126.93 3/9
+1200 0.50 follow 1197    1.64 1.00  0.06   -3.52    8.10 4/9
+1030 1.00   fade  462  -81.81 0.85 -1.23  -15.32 -163.01 3/9
+1200 1.00 follow  545  -14.39 0.96 -0.31  -32.57    6.27 5/9
+ 900 1.50 follow   53   96.34 1.12  0.31  -33.65  253.40 5/9
+ 900 1.50   fade   53 -182.51 0.80 -0.59  -47.80 -345.29 2/9
+1200 1.00   fade  545  -71.52 0.82 -1.54  -48.76  -97.40 3/9
+1030 1.00 follow  462   -4.35 0.99 -0.07  -67.07   72.24 4/9
+1200 0.50   fade 1197  -87.29 0.77 -3.06  -77.48  -99.55 0/9
+ gap 0.50   fade 1130  -28.66 0.97 -0.38  -81.19   36.13 2/9
+ 930 0.50   fade  980 -139.09 0.79 -2.62  -83.46 -202.24 0/9
+ 930 1.50   fade   98  139.39 1.20  0.64  -85.29  404.03 5/9
+1030 0.50   fade 1090 -144.33 0.73 -3.62  -86.75 -211.51 0/9
+ gap 1.50 follow  258  -28.81 0.97 -0.16  -91.22   50.02 6/9
+ gap 1.00   fade  556  -72.56 0.93 -0.63  -92.14  -48.59 4/9
+1200 1.50   fade  211 -124.91 0.73 -1.51  -98.29 -160.01 4/9
+ 930 1.00   fade  346 -148.38 0.79 -1.59 -123.16 -177.70 3/9
+1030 1.50 follow  166  -32.88 0.94 -0.27 -171.66  172.19 4/9
+ 900 0.50   fade  818 -191.62 0.76 -2.70 -201.05 -181.70 0/9
+ 900 1.00   fade  204 -250.52 0.69 -1.93 -336.49 -145.85 3/9
+   design avg > 0: 37%; of those holdout > 0: 55%; best t 1.5
+
+2. Best design version (900, np.float64(1.0), 'follow'): legs and checks
+   NQ leg $538, YM leg $-374 a trade (YM contracts per NQ 1.71)
+   single leg NQ: n 204 avg $538 PF 1.58 t 2.4 | 18-22 $705 23-26 $334 yrs 7/9
+   single leg YM: n 204 avg $-206 PF 0.65 t -2.2 | 18-22 $-234 23-26 $-171 yrs 1/9
+   placebo (same days, random direction, 20 runs): $-1 (-149..298) vs $164
+                                             trades win  avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+best spread (900, np.float64(1.0), 'follow')    204 56% $164 $3,737   0.42    0.63          1.28 $19,857   0.19  9.76       0.77
+                      actual       p5       p50       p95
+name  metric                                             
+2023+ sharpe            0.12    -0.69      0.13      0.98
+      sortino           0.17    -0.85      0.19      1.72
+      pf_day            1.07     0.68      1.08      1.71
+      calmar            0.07    -0.21      0.07      0.96
+      ulcer            19.34     4.93     13.82     41.02
+      max_dd       18,704.87 9,699.35 19,154.40 39,292.64
+      P(Sharpe<=0)       NaN      NaN      0.40       NaN
+      actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+2023+   $18,705      47% $19,052 $29,327 $33,436        100%        100%        100%
+
+3. Is the NQ-only leg just NQ's own early momentum? (9:00, follow, out 14:55, NQ only)
+   spread days (|z| >= 1), NQ in the spread's direction           n  204 avg $  538 t  2.4 | 18-22 $  705 23-26 $  334
+   same days, NQ in its OWN 8:30->9:00 direction                  n  204 avg $  468 t  2.1 | 18-22 $  609 23-26 $  297
+   on those days the spread and NQ's own move point the same way 95% of the time
+     days they disagree: NQ in the spread's direction             n   11 avg $  629 t  0.6 | 18-22 $  582 23-26 $  838
+   control: the 10% biggest NQ 8:30->9:00 moves, follow NQ        n  205 avg $  623 t  1.9 | 18-22 $  392 23-26 $ 1156
+      |z| 0.5-1.0: NQ in the spread's direction                   n  614 avg $  239 t  1.7 | 18-22 $  159 23-26 $  319
+      |z| 1.0-1.5: NQ in the spread's direction                   n  151 avg $  630 t  2.6 | 18-22 $  911 23-26 $  287
+      |z| 1.5-9: NQ in the spread's direction                     n   53 avg $  275 t  0.6 | 18-22 $  116 23-26 $  468
