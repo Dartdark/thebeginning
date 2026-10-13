@@ -610,6 +610,24 @@ over 5 days, close < 10-day VWAP − 2%, exit RSI(2) > 70 (max 10 days).
   RSI(2) dip-buying held overnight **D** (real but regime-bound, and its unstopped drawdowns break
   the Apex drawdown rule). Not a foundation for a funded strategy.
 
+## Bollinger Band reversals (2026-10-13, user idea): no edge
+
+Code `../analysis/bollinger_reversal_test.py` (output in `..._output.txt`). Bands SMA(20) ± K·sd on
+continuous 5- or 15-minute bars; "touch" fades a close outside a band, "reentry" fades the close back
+inside after a close outside; target the middle band (limit), stop 0.15 ATR, out after 60 minutes;
+day session (8:45–14:00 signals) or overnight (18:00–6:00); filters none / ADX(14) < 20 / narrow bands.
+Per NQ after $7.25 + 1 tick per market/stop fill, 2018–2026.
+- 72 versions: **none reaches t 2**; 92% lose money; 42% lose significantly (t ≤ −2), worst overnight
+  (t −3 to −5.5, 0–2 of 9 years positive). Quiet-day filters lift the day-session versions to about
+  break-even, no more.
+- Best (5-min, K 3, re-entry, quiet days): 205 trades, $66, t 1.1; with other stops / holds t −0.1 to 1.3.
+  Best of 72: noise.
+- Daily version (close below the lower band → buy the next day 8:30–15:00): $483, t 0.8, 5/9 years;
+  with a rising 200-day EMA $198, t 0.5; shorting upper-band closes $37.
+- Same conclusion as every other fade tested here: NQ intraday moves continue more than they revert,
+  and fading them pays the costs twice. The opposite (following band breaks) is what Vault Break and
+  the noise-area breakout already do. **F.**
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
