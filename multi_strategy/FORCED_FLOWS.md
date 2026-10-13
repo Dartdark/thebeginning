@@ -24,7 +24,7 @@ trade, and what has been tested. Times are CT.
 | When | Who | Why | Status |
 |---|---|---|---|
 | Monday | Weekend inflows (payroll, 401k, retail), dealers re-hedging after the weekend | Cash arrives at the start of the week | **Monday Long (A, in plan)** |
-| Friday afternoon | Weekly options expire (PM-settled SPX / NDX / QQQ weeklies): pinning to big strikes, then hedges come off | Expiry at the close | **Untested** (only the monthly AM expiry open is tested) |
+| Friday afternoon | Weekly options expire (PM-settled SPX / NDX / QQQ weeklies): pinning to big strikes, then hedges come off | Expiry at the close | F (2026-10-13): only ~5% quieter, no tradeable pin or direction |
 | Friday | Pre-weekend de-risking | Risk limits over the weekend | F |
 | Monday–Thursday since 2022 | Daily 0DTE options expire at the close | Dealer gamma concentrated in the last hours | Partly inside Late-Day Flow; strike-level data needed for more |
 | Wednesday (monthly) | VIX settlement at the 8:30 open (SPX options used to settle VIX) | Expiry at the open | F |
@@ -45,8 +45,8 @@ trade, and what has been tested. Times are CT.
 |---|---|---|---|
 | 3rd Friday of Mar / Jun / Sep / Dec | Triple witching: futures, index options and single-stock options expire together; S&P / Nasdaq-100 quarterly rebalances at the close | Index funds must trade at the close | D / F |
 | Week before | Futures roll (ES / NQ rolled to the next quarter) | Contracts expire | Roll-week short D |
-| Last business day of the quarter | **JPMorgan Hedged Equity fund collar reset** (sells calls, buys put spreads on SPX, ~$15–20bn): dealers hedge a huge position that resets on a known date | Fund rules | **Untested** |
-| Last business day of Feb / May / Aug / Nov | **MSCI quarterly index reviews**: global index funds trade at the close | Index changes effective at the close | **Untested** |
+| Last business day of the quarter | **JPMorgan Hedged Equity fund collar reset** (sells calls, buys put spreads on SPX, ~$15–20bn): dealers hedge a huge position that resets on a known date | Fund rules | F (2026-10-13): ~9% lower ranges before, no direction |
+| Last business day of Feb / May / Aug / Nov | **MSCI quarterly index reviews**: global index funds trade at the close | Index changes effective at the close | D (2026-10-13): last 10 minutes 2.25× normal, direction unpredictable; all month-ends: close momentum t 1.1–2.1 (D) |
 | Quarter end | Pension rebalancing, window dressing | Quarterly rebalance | F |
 | Earnings blackout (~2 weeks before earnings) | Company buybacks pause | Rules on insider periods | F |
 
@@ -60,6 +60,8 @@ trade, and what has been tested. Times are CT.
 | Rare | Nasdaq-100 special rebalance (concentration limit), S&P additions of giants | Index rules | Not testable (one event in the data) |
 
 ## What is left to test (price data only)
+
+Tested 2026-10-13 (`../analysis/forced_flows4_test.py`): items 1–3 below, none tradeable; see the tier list.
 
 1. **Weekly (PM-settled) options expiry Fridays:** does NQ pin in the afternoon and break out after
    (Friday 13:00–15:00 vs other days; Monday after)? About 40 non-monthly Fridays a year.

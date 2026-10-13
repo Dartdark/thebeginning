@@ -713,6 +713,25 @@ flips only). Per NQ after $7.25 + 1 tick per market/stop fill, 2018–2026.
 - 2,500–20,000 trades over 9 years means costs of $17 a trade dominate a gross edge of a few dollars.
   **F.**
 
+## Forced-flow round 4 (2026-10-13): weekly expiries, MSCI reviews, JPMorgan collar — nothing tradeable
+
+Code `../analysis/forced_flows4_test.py` (output in `..._output.txt`); 36 comparisons, so |t| ≥ 3 is the
+bar. Per NQ after $7.25 + 1 tick per fill, 2018–2026.
+- **Weekly options expiry Fridays** (344 non-monthly Fridays): the 13:00–15:00 move is only ~5% smaller
+  than Mon–Thu (0.18–0.20 vs 0.19–0.21 ATR), so little pinning; following or fading the morning into the
+  close t ≤ 0.5; trading toward the nearest 100-point level at 13:00 $28 (t 0.8; on monthly Fridays −$127);
+  the Monday after t ≤ 0.6. Side finding: since 2022, Mon–Thu afternoons trend (follow 13:00→15:00 t 1.8,
+  fade t −2.3), the 0DTE era; Late-Day Flow already trades that.
+- **MSCI review days** (35): the close is clearly bigger (last 10 minutes 0.18 vs 0.08 ATR, last hour
+  0.26 vs 0.14), so the flow is real, but its direction can't be told from the day's move (t −0.1).
+  Across all month-ends, following the day into the close works a little (14:46→15:00 $235, t 2.1;
+  other windows t −0.6 to 1.4; ES t 1.6): D, about 12 trades a year.
+- **JPMorgan collar reset** (35 quarter-ends; strike estimated as the previous reset × 1.04): day ranges are
+  ~9% lower in the 5 days before (0.75 vs 0.83 ATR) and higher after (0.86), consistent with a pin, but no
+  direction: short near the strike −$104, long the 3 days after $373 (t 1.1).
+- **Combination:** nothing passes on its own, so there is nothing to combine; stacking several t ≈ 1–2
+  results from 36 tries would only add noise. **F / D.**
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

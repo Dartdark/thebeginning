@@ -1,0 +1,71 @@
+Forced-flow round 4 (2026-10-13, from multi_strategy/FORCED_FLOWS.md): weekly options expiry Fridays,
+
+W1. |13:00 -> 15:00| / ATR (smaller = pinned):
+   weekly-expiry Fridays   2018-21: 0.202 (n=155) 2022+: 0.183 (n=189)
+   monthly 3rd Fridays     2018-21: 0.192 (n=47) 2022+: 0.183 (n=55)
+   Mon-Thu                 2018-21: 0.211 (n=829) 2022+: 0.191 (n=987)
+
+W2. 8:30 -> 13:00 direction, then 13:01 -> 15:00:
+  weekly Fridays 2018-21: follow                                 n= 150 avg $  -51 PF 0.87 t= -0.5 yrs+ 2/4 | 18-22 $  -51 | 23+ $  nan
+  weekly Fridays 2018-21: fade                                   n= 150 avg $   17 PF 1.05 t=  0.2 yrs+ 2/4 | 18-22 $   17 | 23+ $  nan
+  weekly Fridays 2022+: follow                                   n= 183 avg $  -76 PF 0.89 t= -0.5 yrs+ 1/5 | 18-22 $  695 | 23+ $ -285
+  weekly Fridays 2022+: fade                                     n= 183 avg $   41 PF 1.07 t=  0.3 yrs+ 4/5 | 18-22 $ -730 | 23+ $  250
+  monthly Fridays 2018-21: follow                                n=  47 avg $   91 PF 1.27 t=  0.5 yrs+ 3/4 | 18-22 $   91 | 23+ $  nan
+  monthly Fridays 2018-21: fade                                  n=  47 avg $ -126 PF 0.72 t= -0.7 yrs+ 1/4 | 18-22 $ -126 | 23+ $  nan
+  monthly Fridays 2022+: follow                                  n=  54 avg $  -33 PF 0.95 t= -0.1 yrs+ 3/5 | 18-22 $ -227 | 23+ $   16
+  monthly Fridays 2022+: fade                                    n=  54 avg $   -1 PF 1.00 t= -0.0 yrs+ 2/5 | 18-22 $  192 | 23+ $  -51
+  Mon-Thu 2018-21: follow                                        n= 800 avg $  -25 PF 0.94 t= -0.6 yrs+ 0/4 | 18-22 $  -25 | 23+ $  nan
+  Mon-Thu 2018-21: fade                                          n= 800 avg $   -9 PF 0.98 t= -0.2 yrs+ 1/4 | 18-22 $   -9 | 23+ $  nan
+  Mon-Thu 2022+: follow                                          n= 951 avg $  110 PF 1.19 t=  1.8 yrs+ 4/5 | 18-22 $  255 | 23+ $   71
+  Mon-Thu 2022+: fade                                            n= 951 avg $ -144 PF 0.80 t= -2.3 yrs+ 1/5 | 18-22 $ -290 | 23+ $ -105 <
+
+W3. Strike magnet at 13:00 (NQ: within 25 points of a 100; target the level, stop 0.15 ATR, out 15:00):
+   weekly Fridays                 n=  155 win 79% avg $   28 PF 1.18 t= 0.8 yrs+ 6/9 | 23+ $   -8 PF 0.96 | L $  47 S $   7
+   monthly Fridays                n=   49 win 61% avg $ -127 PF 0.53 t=-1.8 yrs+ 3/9 | 23+ $ -160 PF 0.51 | L $-168 S $ -61
+   Mon-Thu                        n=  776 win 71% avg $  -31 PF 0.85 t=-1.7 yrs+ 3/9 | 23+ $  -44 PF 0.81 | L $ -30 S $ -31
+
+W4. Monday 8:30 -> 15:00 after an expiry Friday, vs Friday's 13:00 -> 15:00 direction:
+  after weekly expiry: follow Friday afternoon                   n= 299 avg $ -114 PF 0.90 t= -0.6 yrs+ 4/9 | 18-22 $ -103 | 23+ $ -129
+  after weekly expiry: fade Friday afternoon                     n= 299 avg $   80 PF 1.07 t=  0.4 yrs+ 5/9 | 18-22 $   68 | 23+ $   95
+  after monthly expiry: follow Friday afternoon                  n=  88 avg $  591 PF 1.67 t=  1.8 yrs+ 5/9 | 18-22 $  391 | 23+ $  854
+  after monthly expiry: fade Friday afternoon                    n=  88 avg $ -626 PF 0.58 t= -1.9 yrs+ 4/9 | 18-22 $ -426 | 23+ $ -889
+
+M1. Size of the close (|move| / ATR); MSCI days n=35:
+   MSCI review days     14:00->15:00 0.255 | 14:50->15:00 0.180
+   other month-ends     14:00->15:00 0.167 | 14:50->15:00 0.121
+   all other days       14:00->15:00 0.144 | 14:50->15:00 0.080
+
+M2. Late-Day Flow logic (|8:30->14:00| >= 0.4 ATR, follow to 15:00):
+  MSCI days                                                      n=9
+  other month-ends                                               n=  30 avg $  370 PF 2.61 t=  2.0 yrs+ 5/9 | 18-22 $  183 | 23+ $  583 <
+  all other days                                                 n= 859 avg $   55 PF 1.14 t=  1.2 yrs+ 4/9 | 18-22 $  120 | 23+ $  -25
+
+M3. Last 10 minutes (14:51 -> 15:00) vs the 8:30 -> 14:50 direction:
+  MSCI days: follow                                              n=  30 avg $  -13 PF 0.97 t= -0.1 yrs+ 5/9 | 18-22 $  195 | 23+ $ -284
+  MSCI days: fade                                                n=  30 avg $  -22 PF 0.95 t= -0.1 yrs+ 4/9 | 18-22 $ -229 | 23+ $  249
+  other month-ends: follow                                       n=  71 avg $  216 PF 1.94 t=  2.1 yrs+ 5/9 | 18-22 $   67 | 23+ $  407 <
+  other month-ends: fade                                         n=  71 avg $ -250 PF 0.46 t= -2.4 yrs+ 3/9 | 18-22 $ -102 | 23+ $ -441 <
+
+J. JPMorgan collar resets (quarter-ends) since 2018: 35
+   J1 day range / ATR: days -5..-1 0.751, days +1..+5 0.860, all days 0.828
+   J2 ES day -5 -> reset: mean +0.43% (up 54%); reset -> day +3: mean +0.24% (up 60%); n=35
+      ES close at reset vs estimated call strike: median +1.6%; within 1% below: 6%
+  J3 days -5..-1, ES within 2% below the est. strike (prev close): short NQ n=  28 avg $ -104 PF 0.89 t= -0.2 yrs+ 4/7 | 18-22 $  296 | 23+ $ -363
+  J3 control: days -5..-1, not near the strike: short NQ         n= 137 avg $  313 PF 1.33 t=  1.2 yrs+ 5/9 | 18-22 $  -19 | 23+ $  794
+  J4 days +1..+3 after the reset: long NQ                        n=  94 avg $  373 PF 1.33 t=  1.1 yrs+ 7/9 | 18-22 $  501 | 23+ $  221
+
+comparisons (rep): 25; with this many, |t| >= 3 is the bar
+
+F. Follow-up: month-end close momentum (all month-ends, MSCI included), robustness
+  month-end: 8:30->1440 direction, 1451->15:00                   n= 101 avg $  110 PF 1.34 t=  1.1 yrs+ 3/9 | 18-22 $   40 | 23+ $  202
+    control, other days: same window                             n=2085 avg $  -20 PF 0.91 t= -1.4 yrs+ 5/9 | 18-22 $   13 | 23+ $  -65
+  month-end: 8:30->1445 direction, 1446->15:00                   n= 101 avg $  235 PF 1.83 t=  2.1 yrs+ 6/9 | 18-22 $  273 | 23+ $  187 <
+    control, other days: same window                             n=2085 avg $  -24 PF 0.91 t= -1.5 yrs+ 4/9 | 18-22 $   27 | 23+ $  -92
+  month-end: 8:30->1450 direction, 1451->15:00                   n= 101 avg $  148 PF 1.49 t=  1.4 yrs+ 4/9 | 18-22 $  105 | 23+ $  203
+    control, other days: same window                             n=2085 avg $  -10 PF 0.96 t= -0.7 yrs+ 5/9 | 18-22 $   29 | 23+ $  -62
+  month-end: 8:30->1455 direction, 1456->15:00                   n= 101 avg $  -33 PF 0.86 t= -0.6 yrs+ 2/9 | 18-22 $  -38 | 23+ $  -26
+    control, other days: same window                             n=2084 avg $  -20 PF 0.87 t= -2.2 yrs+ 4/9 | 18-22 $  -13 | 23+ $  -30 <
+  ES month-end: follow 8:30->14:50, 14:51->15:00 ($50/pt)        n= 101 avg $  104 PF 1.55 t=  1.6 yrs+ 6/9 | 18-22 $   53 | 23+ $  169
+  day before month-end, same rule                                n= 101 avg $  -28 PF 0.88 t= -0.5 yrs+ 5/9 | 18-22 $   38 | 23+ $ -114
+  first day of the month, same rule                              n= 100 avg $  -46 PF 0.82 t= -0.6 yrs+ 6/9 | 18-22 $   93 | 23+ $ -232
+comparisons (rep): 36
