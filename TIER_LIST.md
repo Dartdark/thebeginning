@@ -98,6 +98,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | CTA trend-signal flip, fade next day (21/63/126/252-day model) | Forced flow | 2+ flips +$2,397 (22 days, t 4.0), 1+ flips $335 (t 1.7); but random non-CTA lookback sets fade as well (real beats 56%), so not CTA flow; with a stop t 0.7–1.4 |
 | Gap Fill (old research set) | Strategy | PF 1.14, but $12 a trade in 2023–26 (vs $76 before) |
 | Yes/no (logistic) ML filter for ONB (after Vilkov 2026) | Filter | Kept beat skipped only 2–5/8 years; ridge version stays |
+| VWAP Pullback + ADX gate (the Bridge's C.S. profile: ADX(14) 1-min ≥ 20 and falling, long only, flat 15:55) | Strategy (Python replica) | 1,052 trades, $60, PF 1.23, t 2.2, 6/9 years (2018–20 lose; 2023+ $152); no gate $59, random gate $47, inverted gate $21; random-side placebo $0 (= NQ drift); Sharpe 0.73, Calmar 0.27, Ulcer 16.8; funded + 1 MNQ $9,250 / $11,841, blown 7% (plan $9,313 / $12,436) |
 
 ## F
 

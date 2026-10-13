@@ -38,11 +38,13 @@ def pivots(h, l, n):
     return vh, vl
 
 
-def run(g, s, sh, sl, th, tl, apex=True, retest=1, stopmode=1, minrr=0.0, longs=True, shorts=True, rand=None, bias=None, exit_t=None):
+def run(g, s, sh, sl, th, tl, apex=True, retest=1, stopmode=1, minrr=0.0, longs=True, shorts=True, rand=None, bias=None, exit_t=None,
+        gate=None, end_entry=None):
+    """gate: optional boolean per bar of the series (e.g. an ADX condition on the signal bar; it delays, the latches stay)."""
     O, H, L, C, V, row, col = s["o"], s["h"], s["l"], s["c"], s["v"], s["row"], s["col"]
     N = len(C); hhmm = (col // 60) * 100 + col % 60
     ts = pd.DatetimeIndex(g.ts); rng = np.random.default_rng(rand) if rand is not None else None
-    end_entry = 1500 if apex else 1700
+    end_entry = (1500 if apex else 1700) if end_entry is None else end_entry
     out = []; i = 0
     # walk day by day: a "day" starts at the 23:00 reset
     starts = np.where((hhmm > 2300) & (np.r_[True, hhmm[:-1] <= 2300]))[0]
@@ -88,6 +90,7 @@ def run(g, s, sh, sl, th, tl, apex=True, retest=1, stopmode=1, minrr=0.0, longs=
                     ssig = sthru and C[k] < vw
             if ltouch or lthru: pbl = L[k] if pbl is None else min(pbl, L[k])
             if stouch or sthru: pbh = H[k] if pbh is None else max(pbh, H[k])
+            if gate is not None and not gate[k]: lsig = ssig = False
             for side, sig in ((1, lsig and longs), (-1, ssig and shorts)):
                 if not sig: continue
                 stop = (sl[k] if stopmode == 1 else pbl) if side > 0 else (sh[k] if stopmode == 1 else pbh)

@@ -1007,6 +1007,28 @@ each v8 change; fills on 1-minute bars (Bar Magnifier); per NQ after $7.25 + 1 t
 - **Verdict:** keep v1 in both plans. v8 is the same strategy with a slightly worse noise band (C as a
   variant).
 
+## VWAP Pullback + ADX gate (2026-10-13, the Bridge's "C.S." profile): the gate adds little, funded worse
+
+Code `../analysis/vwap_pullback_adx_test.py` (output in `..._output.txt`), on the replica of the VWAP pullback tested
+earlier (`vwap_orb_pullback_test.py`, F) plus this profile's changes: ADX(14) of the 1-minute bars ≥ 20 and falling
+on the signal bar (delays, doesn't cancel), long only, 1 trade a day, entries 9:01–17:00, flat 15:55 CT. Per NQ
+after $7.25 + 1 tick per market / stop fill.
+- **C.S. profile:** 1,052 trades (117 a year), 61% win, $60, PF 1.23, t 2.2, **6/9 years**. 2018–20 lose
+  (−$2,110, −$3,129, −$5,505); 2023+ $152 a trade (2025 +$23,990, 2026 +$26,697).
+- **The gate:** no gate $59 (PF 1.19), ADX ≥ 20 only $59, falling only $53, ADX ≥ 25 and falling $38,
+  inverted (ADX < 20) $21. A random gate passing the same 31% of bars makes $47 ($20–62). The gate adds a
+  little win rate (61% vs 55%), not much money.
+- **Placebo** (same entry bars, random side): $0, vs $60 for the longs. The long side's edge looks like NQ's
+  upward drift since 2021 (the earlier test found the same: longs only $62, t 2.0). The short side with the
+  gate: −$19, PF 0.94. MinRR 1: −$28; StopMode 2: $23.
+- **Standard metrics, 2018–26 (longs):** Sharpe 0.73, Sortino 0.98, PF 1.23, Calmar 0.27, Ulcer 16.8, max
+  drawdown $26,411. 2023+: Sharpe 1.63 (bootstrap 0.78–2.57), Calmar 2.31, Ulcer 3.9. It's a recent-regime
+  strategy. Shorts 2023+ Sharpe 0.06.
+- **Funded** (8-strategy plan $9,313 / $12,436, blown 3% / 1%): + 1 MNQ $9,250 / $11,841, blown 7%; + 2 MNQ
+  $8,626 / $10,355, blown 18%. Correlation ≤ 0.11.
+- **Verdict: D.** Positive only since 2021, no directional information beyond the drift, and the ADX gate is
+  close to a random filter. Not adopted.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

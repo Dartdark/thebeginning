@@ -87,6 +87,8 @@ worse (+1 MNQ blown 13%): B, not adopted. MC code for shorts only: `funded_strat
 (needs 15-min data2; user dropped the MC run).
 VaultBreak v8 (the Bridge's, `analysis/vault_break_v8_test.py`): slightly worse than our v1 (band from H-L incl.
 Sunday sessions); VWAP exit never fires; keep v1 (C).
+VWAP Pullback + ADX (C.S. profile, `analysis/vwap_pullback_adx_test.py`): t 2.2, 6/9 years, only since 2021, gate ≈ random;
+funded worse (D).
 Setup notes: restart MultiCharts after any DLL / data change ("OLD DLL" error); compile every OFB function
 ("unverified function" error); Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close
 conversion unchecked.
