@@ -91,6 +91,7 @@ VWAP Pullback + ADX (C.S. profile, `analysis/vwap_pullback_adx_test.py`): t 2.2,
 funded worse (D).
 The Bridge's Overnight Bias ORB (`analysis/bridge_onb_orb_test.py`): $313, PF 1.52 vs our ADX30 $372 / PF 1.66;
 combine 38.9% vs 46.9%; keep ours (B).
+The Bridge's VWAP Fade (`analysis/bridge_vwap_fade_test.py`): −$25 a trade, PF 0.93, worse than random (F).
 Setup notes: restart MultiCharts after any DLL / data change ("OLD DLL" error); compile every OFB function
 ("unverified function" error); Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close
 conversion unchecked.

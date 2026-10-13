@@ -1,0 +1,59 @@
+The Bridge's OFB_VWAPFade_SIG: fade the Globex VWAP 2-sigma bands (user's paste), 2026-10-13.
+
+1. Defaults (2 sigma in, 1 sigma out, no stop, 60 bars, 8:30-14:00 CT):
+defaults                                     n= 4009 win 62% avg $  -25 PF 0.93 t= -1.5 yrs+ 3/9 | 18-22 $ -18 | 23-26 $ -33 | L $ -26 S $ -24
+   exits: {'target': 0.64, 'time': 0.28, 'eod': 0.08, 'close': 0.0}; trades a year 445; worst trade $-17,857
+   by year: {2018: -8602, 2019: -20064, 2020: 7874, 2021: 50, 2022: -20296, 2023: 5084, 2024: -22830, 2025: -24921, 2026: -15299}
+  longs (below -2 sigma)                     n= 2013 win 65% avg $  -26 PF 0.93 t= -1.0 yrs+ 2/9 | 18-22 $ -12 | 23-26 $ -44 | L $ -26 S $ nan
+  shorts (above +2 sigma)                    n= 1996 win 59% avg $  -24 PF 0.92 t= -1.1 yrs+ 2/9 | 18-22 $ -25 | 23-26 $ -22 | L $ nan S $ -24
+   placebo (same entry bars, random side, 5 runs): $-13 (-14..-11) vs $-25
+
+2. Variants:
+entry 2.5 sigma                              n= 1396 win 60% avg $  -41 PF 0.90 t= -1.2 yrs+ 2/9 | 18-22 $ -25 | 23-26 $ -60 | L $ -36 S $ -48
+entry 3 sigma                                n=  333 win 57% avg $  -94 PF 0.82 t= -1.1 yrs+ 3/9 | 18-22 $ -24 | 23-26 $-166 | L $ -38 S $-199
+target at VWAP                               n= 3626 win 54% avg $   -9 PF 0.98 t= -0.4 yrs+ 5/9 | 18-22 $  19 | 23-26 $ -43 | L $  -1 S $ -15
+target 1.5 sigma                             n= 4949 win 68% avg $  -16 PF 0.93 t= -1.5 yrs+ 4/9 | 18-22 $  -3 | 23-26 $ -32 | L $ -15 S $ -16
+time exit 30 bars                            n= 4936 win 57% avg $  -18 PF 0.94 t= -1.5 yrs+ 3/9 | 18-22 $ -12 | 23-26 $ -26 | L $ -20 S $ -17
+time exit 120 bars                           n= 3604 win 66% avg $  -26 PF 0.92 t= -1.4 yrs+ 1/9 | 18-22 $ -24 | 23-26 $ -29 | L $ -24 S $ -29
+stop at 3 sigma                              n= 8036 win 40% avg $  -16 PF 0.94 t= -2.0 yrs+ 0/9 | 18-22 $ -16 | 23-26 $ -16 | L $ -17 S $ -15
+stop at 3.5 sigma                            n= 5679 win 52% avg $  -16 PF 0.95 t= -1.3 yrs+ 2/9 | 18-22 $ -18 | 23-26 $ -13 | L $ -15 S $ -16
+entries from 9:00                            n= 3108 win 60% avg $  -19 PF 0.94 t= -1.0 yrs+ 4/9 | 18-22 $ -15 | 23-26 $ -25 | L $ -25 S $ -14
+3 sigma, target VWAP, stop 4 sigma           n=  543 win 35% avg $   22 PF 1.05 t=  0.4 yrs+ 7/9 | 18-22 $  29 | 23-26 $  15 | L $  26 S $  16
+
+3. Standard metrics per NQ (defaults):
+       trades win  avg   annual sharpe sortino profit_factor   max_dd calmar ulcer ulcer_perf
+all      4009 62% $-25 $-11,030  -0.52   -0.64          0.93 $107,963  -0.10 90.12      -0.24
+longs    2013 65% $-26  $-5,791  -0.34   -0.40          0.93  $71,798  -0.08 47.76      -0.24
+shorts   1996 59% $-24  $-5,239  -0.41   -0.51          0.92  $52,347  -0.10 51.47      -0.20
+                             actual        p5       p50        p95
+name         metric                                               
+all 2023+    sharpe           -0.56     -1.29     -0.56       0.18
+             sortino          -0.67     -1.49     -0.67       0.23
+             pf_day            0.89      0.76      0.89       1.04
+             calmar           -0.20     -0.25     -0.18       0.11
+             ulcer            61.48     22.74     74.76     162.75
+             max_dd       76,252.67 39,410.44 86,154.71 156,655.49
+             P(Sharpe<=0)       NaN       NaN      0.90        NaN
+longs 2023+  sharpe           -0.46     -1.14     -0.44       0.30
+             sortino          -0.53     -1.27     -0.52       0.36
+             pf_day            0.88      0.72      0.88       1.08
+             calmar           -0.16     -0.24     -0.16       0.19
+             ulcer            48.37     16.17     53.41     125.56
+             max_dd       60,698.50 27,614.40 60,921.61 118,378.58
+             P(Sharpe<=0)       NaN       NaN      0.84        NaN
+shorts 2023+ sharpe           -0.32     -1.08     -0.36       0.45
+             sortino          -0.39     -1.24     -0.44       0.58
+             pf_day            0.92      0.74      0.91       1.12
+             calmar           -0.15     -0.24     -0.13       0.30
+             ulcer            28.01     11.56     35.85      86.47
+             max_dd       32,985.15 19,561.85 41,454.18  79,705.03
+             P(Sharpe<=0)       NaN       NaN      0.77        NaN
+             actual_dd pct_rank    dd50     dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+all 2023+      $76,253      24% $85,819 $113,301 $129,288        100%        100%        100%
+longs 2023+    $60,698      42% $62,868  $85,894  $95,392        100%        100%        100%
+shorts 2023+   $32,985      17% $40,685  $57,271  $64,662        100%        100%        100%
+
+4. Funded bench (8-strategy plan):
+   current plan                                         1y $9,313 2y $12,436 blown 3% / 1%
+   + VWAP fade defaults 1 MNQ                           1y $8,644 2y $11,986 blown 7% / 4%
+   + best variant (3 sigma, target VWAP, stop 4 sigma) 1 MNQ 1y $9,296 2y $12,358 blown 4% / 2%

@@ -1060,6 +1060,23 @@ stop fill.
 - **Verdict: B, not adopted.** A real edge, but a weaker version of the strategy we already run. Keep ONB
   ADX30 for the combine and ONB ML v2 for funded.
 
+## The Bridge's VWAP Fade (2026-10-13): loses money
+
+Code `../analysis/bridge_vwap_fade_test.py` (output in `..._output.txt`). Rules, on a 1-minute chart in Central time:
+fade a close beyond the Globex VWAP (from 17:00 CT) ± 2 sigma, target VWAP ± 1 sigma, no stop, out after 60 bars
+or at 14:00. Entries 8:30–14:00. VWAP and sigma are rebuilt from 1-minute bars; against the Bridge's
+tape-exact RTH values they're within 0.1 point and 0.99× sigma. Per NQ after $7.25 + 1 tick per market fill.
+- **Defaults:** 4,009 trades (445 a year), 62% win, −$25 a trade, PF 0.93, t −1.5, 3/9 years. Longs −$26,
+  shorts −$24. Worst trade −$17,857 (no stop). Exits: target 64%, time 28%, end of day 8%. Random-side
+  placebo −$13, so fading is worse than random.
+- **Variants** (10): every one loses except 3 sigma in, target at VWAP, stop at 4 sigma ($22, t 0.4, 543
+  trades). Wider bands lose more (2.5σ −$41, 3σ −$94); stops at 3 / 3.5 σ −$16.
+- **Standard metrics:** Sharpe −0.52, Sortino −0.64, PF 0.93, Calmar −0.10, Ulcer 90, max drawdown
+  $107,963 per NQ; longs Sharpe −0.34, shorts −0.41; 2023+ P(Sharpe ≤ 0) 90%.
+- **Funded:** + 1 MNQ $8,644 / $11,986, blown 7% / 4% vs $9,313 / $12,436; best variant $9,296 / $12,358.
+- **Verdict: F.** It agrees with earlier tests here (VWAP fade, VWAP 2σ). Moves beyond 2σ of the Globex VWAP
+  keep going more often than they snap back. The Bridge's manual calls it an example to adapt, not a strategy.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
