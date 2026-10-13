@@ -20,8 +20,8 @@ Flow are MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`); full size sta
 
 **Other candidates checked 2026-10-13** (`../analysis/funded_today_check.py`): DriftPullback shorts 1 MNQ (Python
 replica, not MC-confirmed) $9,453 / $12,492, blown 4% / 2%, median days to all 6 payouts 245 (vs 255), all 6 within
-a year 51% (vs 48%). That's the only one that helps, it's within noise on money, and its shorts are weak since 2023
-($20 a trade): add it only after a MultiCharts run confirms it. No change: VCS 2 MNQ (blown 10%), Bridge Monday 2
+a year 51% (vs 48%). Within noise on money and speed, slightly more blowups, and the shorts are weak since 2023 ($20 a trade,
+P(Sharpe <= 0) 28%): not worth adding (watch item only). No change: VCS 2 MNQ (blown 10%), Bridge Monday 2
 MNQ (blown 11–12%), EOS $500 (slower, 269 days), dropping our Monday Long (274 days).
 
 **Cushion sizing:** cushion = balance − trailing threshold, each morning. f = cushion / **$1,500**,
