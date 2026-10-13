@@ -1,9 +1,11 @@
 """The Bridge's L644NQ_MondayLong_NQ vs our Monday Long (funded_strategies/NQ_Monday_Long.txt), 2026-10-13.
 
-Bridge rules (manual section 8.6; code not seen): buy the close of Sunday's 19:00 CT bar when the previous
-daily bar's ADX(7) is between 10 and 50 and DI+ > DI-; target 100 points; no stop; out Monday 15:55 CT; skips
-Monday closures and early closes. Daily bars here = CME sessions (17:00 CT -> 16:00 CT), Wilder ADX / DI(7);
-"previous daily bar" before Sunday 19:00 = Friday's session.
+Bridge rules (its code, v2.1, ported): buy the close of Sunday's 19:00 CT bar when the last regular session's
+ADX(7) is >= 10 and < 50 and DI+ > DI-; target 100 points; no stop; out at the close of Monday's 15:55 bar; no
+trade when Monday is an NYSE closure or early close. Daily bars = regular sessions (5-min bars 8:35-15:00 CT,
+close = the 15:00 close, or 12:00 on early closes; days need the 8:30 bar and the 12:00 or 15:00 bar; NYSE
+closures with a partial CME session are left out); Wilder smoothing seeded with the first value, as coded.
+(The first version of this test used CME 17:00-16:00 sessions and ADX <= 50: 203 trades, $508, PF 1.89.)
 Ours: Monday 8:30 CT open -> close of the 15:00 bar, stop 0.5 x 15-day ATR (MultiCharts trade list).
 Per NQ after $7.25 + 1 tick per market fill (the target is a limit: no slippage). The Sunday 19:00 entry is
 booked on Monday's row (Apex counts Sunday evening as Monday's trading day); the bench's worst-point path
@@ -22,44 +24,82 @@ PV, TICK, COST = 20.0, 0.25, 7.25
 MON_FILE = "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx"
 
 
-def sessions(g):
-    """CME session bars for each trading row d: previous calendar row from 17:00 + row d up to 16:00."""
-    out = []
-    for d in g.trading:
-        h = np.r_[g.h[d - 1, jof(1700):], g.h[d, :jof(1600) + 1]]
-        l = np.r_[g.l[d - 1, jof(1700):], g.l[d, :jof(1600) + 1]]
-        c = np.r_[g.c[d - 1, jof(1700):], g.c[d, :jof(1600) + 1]]
-        ok = ~np.isnan(c)
-        if ok.sum() < 30: out.append((d, np.nan, np.nan, np.nan)); continue
-        out.append((d, np.nanmax(h), np.nanmin(l), c[ok][-1]))
-    return pd.DataFrame(out, columns=["d", "h", "l", "c"]).dropna().reset_index(drop=True)
+def nyse_holidays(y0=2017, y1=2027):
+    """NYSE full closures and early closes by rule, as in the Bridge's L644NQ v2.1 code."""
+    import datetime as dt
+    D = lambda y, m, d: dt.date(y, m, d)
+    obs = lambda x: x - dt.timedelta(1) if x.weekday() == 5 else (x + dt.timedelta(1) if x.weekday() == 6 else x)
+    nth = lambda y, m, wd, n: D(y, m, 1) + dt.timedelta((wd - D(y, m, 1).weekday()) % 7 + 7 * (n - 1))
+    closures, early = set(), set()
+    for y in range(y0, y1 + 1):
+        ny = D(y, 1, 1)
+        if ny.weekday() == 6: closures.add(ny + dt.timedelta(1))
+        elif ny.weekday() != 5: closures.add(ny)
+        closures |= {nth(y, 1, 0, 3), nth(y, 2, 0, 3)}
+        a = y % 19; b = y // 100; c = y % 100; d_ = b // 4; e = b % 4; f = (b + 8) // 25; g_ = (b - f + 1) // 3
+        h = (19 * a + b - d_ - g_ + 15) % 30; i = c // 4; k = c % 4; l = (32 + 2 * e + 2 * i - h - k) % 7
+        m = (a + 11 * h + 22 * l) // 451; mo = (h + l - 7 * m + 114) // 31; dy = (h + l - 7 * m + 114) % 31 + 1
+        closures.add(D(y, mo, dy) - dt.timedelta(2))
+        mem = D(y, 5, 31); closures.add(mem - dt.timedelta((mem.weekday() - 0) % 7))
+        if y >= 2022: closures.add(obs(D(y, 6, 19)))
+        closures |= {obs(D(y, 7, 4)), nth(y, 9, 0, 1), nth(y, 11, 3, 4), obs(D(y, 12, 25))}
+        if D(y, 7, 3).weekday() <= 3: early.add(D(y, 7, 3))
+        early.add(nth(y, 11, 3, 4) + dt.timedelta(1))
+        if D(y, 12, 24).weekday() <= 3: early.add(D(y, 12, 24))
+    f = lambda S: {int(x.strftime("%Y%m%d")) for x in S}
+    return f(closures), f(early)
 
 
-def adx(S, n=7):
-    h, l, c = S.h.to_numpy(), S.l.to_numpy(), S.c.to_numpy()
-    pc = np.r_[np.nan, c[:-1]]
-    tr = np.nanmax(np.c_[h - l, np.abs(h - pc), np.abs(l - pc)], 1)
-    up, dn = np.r_[np.nan, np.diff(h)], -np.r_[np.nan, np.diff(l)]
-    pdm = np.where((up > dn) & (up > 0), up, 0.0); mdm = np.where((dn > up) & (dn > 0), dn, 0.0)
-    w = lambda x: pd.Series(x).ewm(alpha=1 / n, adjust=False).mean().to_numpy()
-    atr = w(tr); pdi = 100 * w(pdm) / atr; mdi = 100 * w(mdm) / atr
-    dx = 100 * np.abs(pdi - mdi) / np.maximum(pdi + mdi, 1e-9)
-    return pd.DataFrame({"d": S.d, "adx": w(dx), "pdi": pdi, "mdi": mdi})
+def bridge_adx(g, n=7):
+    """The Bridge's daily bookkeeping on regular sessions. Returns {calendar row: (PrevADX, PrevDIDiff)}
+    holding the values after that row's session (-1 when not yet valid)."""
+    closures, _ = nyse_holidays()
+    has = lambda d, t: not np.isnan(g.c[d, jof(t) - 4:jof(t) + 1]).all()        # the 5-min bar stamped t exists
+    st = dict(pc=None, ph=None, pl=None, tr=0., up=0., dn=0., dirc=0, adx=0., dxc=0, di=0.)
+    out = {}; prev = (-1.0, 0.0)
+    for d in range(g.D):
+        if has(d, 830) and (has(d, 1200) or has(d, 1500)) and g.dates[d] not in closures:
+            seg = slice(jof(831), jof(1500) + 1)
+            if not np.isnan(g.h[d, seg]).all():
+                hi, lo = np.nanmax(g.h[d, seg]), np.nanmin(g.l[d, seg])
+                cl = g.c[d, jof(1500)] if has(d, 1500) else g.c[d, jof(1200)]
+                if np.isnan(cl):
+                    r = g.c[d, :jof(1500 if has(d, 1500) else 1200) + 1]; cl = r[~np.isnan(r)][-1]
+                th, tl = hi, lo
+                if st["pc"] is not None: th, tl = max(th, st["pc"]), min(tl, st["pc"])
+                dtr = th - tl; up = dn = 0.0
+                if st["ph"] is not None:
+                    um, dm = hi - st["ph"], st["pl"] - lo
+                    if um > dm and um > 0: up = um
+                    if dm > um and dm > 0: dn = dm
+                if st["dirc"] == 0: st["tr"], st["up"], st["dn"] = dtr, up, dn
+                else:
+                    st["tr"] += (dtr - st["tr"]) / n; st["up"] += (up - st["up"]) / n; st["dn"] += (dn - st["dn"]) / n
+                st["dirc"] += 1
+                if st["dirc"] >= n and st["tr"] > 0:
+                    diu, did = 100 * st["up"] / st["tr"], 100 * st["dn"] / st["tr"]
+                    if diu + did > 0:
+                        dx = 100 * abs(diu - did) / (diu + did)
+                        st["adx"] = dx if st["dxc"] == 0 else st["adx"] + (dx - st["adx"]) / n
+                        st["dxc"] += 1; st["di"] = diu - did
+                prev = (st["adx"], st["di"]) if st["dxc"] >= n else (-1.0, 0.0)
+                st["ph"], st["pl"], st["pc"] = hi, lo, cl
+        out[d] = prev
+    return out
 
 
 def bridge(g, A, weekday=0, filt=True, target=100.0, entry_t=1900, exit_t=1555, rth_only=False):
     """Trades for a given weekday (0 = Monday): enter at the close of the previous evening's entry_t bar."""
-    ts = pd.DatetimeIndex(g.ts); tr = set(g.trading); rows = []
-    prev_ind = dict(zip(A.d, zip(A.adx, A.pdi, A.mdi)))
+    ts = pd.DatetimeIndex(g.ts); rows = []
+    closures, early = nyse_holidays()
     trading = list(g.trading)
     for k, d in enumerate(trading):
         if ts[d].dayofweek != weekday or ts[d].year < 2018: continue
-        if g.last_j[d] < jof(1500) or np.isnan(g.c[d, jof(1455)]): continue      # early close / missing
-        # the last completed session before the previous evening = the trading row before d
-        p = trading[k - 1]
-        if p not in prev_ind: continue
-        a, pdi, mdi = prev_ind[p]
-        sig = (10 <= a <= 50) and pdi > mdi
+        if g.dates[d] in closures or g.dates[d] in early: continue                # NoTradeDay
+        if np.isnan(g.c[d, jof(1455)]): continue                                    # missing data
+        a, didiff = A[d - 1]                    # state after the last regular session before the evening entry (Friday for Mondays)
+        if a < 0: continue
+        sig = (10 <= a < 50) and didiff > 0
         if filt and not sig: continue
         if rth_only:
             e_row, e_j = d, jof(830)
@@ -97,7 +137,7 @@ def stat(t, nm, w=52):
 if __name__ == "__main__":
     g = pickle.load(open(SP + "g24.pkl", "rb"))
     print(__doc__.split("\n")[0])
-    A = adx(sessions(g))
+    A = bridge_adx(g)
     br = bridge(g, A)
     ours = with_slippage(load_mc(g, MON_FILE)); ours["net"] = (ours.exit - ours.entry) * ours.side * PV - COST
     ours = ours[ours.date >= "2018-01-01"].reset_index(drop=True)

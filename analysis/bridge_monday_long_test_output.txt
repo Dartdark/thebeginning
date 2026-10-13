@@ -1,41 +1,41 @@
 The Bridge's L644NQ_MondayLong_NQ vs our Monday Long (funded_strategies/NQ_Monday_Long.txt), 2026-10-13.
 
 1. As specified, and ours (per NQ):
-Bridge: Sun 19:00 -> Mon 15:55, ADX(7) 10-50 & DI+>DI-, 100-pt target n=203 win 68% avg $  508 PF 1.89 t= 3.9 yrs+ 7/9 | 18-22 $  602 | 23-26 $  385 | worst $-6,172
+Bridge: Sun 19:00 -> Mon 15:55, ADX(7) 10-50 & DI+>DI-, 100-pt target n=217 win 70% avg $  563 PF 2.04 t= 4.4 yrs+ 9/9 | 18-22 $  505 | 23-26 $  634 | worst $-6,172
 ours (MultiCharts): Mon 8:30 -> 15:00, stop 0.5 ATR  n=450 win 55% avg $  425 PF 1.55 t= 3.3 yrs+ 7/9 | 18-22 $  153 | 23-26 $  784 | worst $-9,437
-   Bridge: target hit 45%; days traded 203 of 407 Mondays; overnight part (Sun 19:00 -> Mon 8:30) $174 a trade
-   Bridge by year: {2018: -1307, 2019: 6155, 2020: 28272, 2021: 24213, 2022: 11894, 2023: 4941, 2024: -7718, 2025: 20911, 2026: 15748}
+   Bridge: target hit 46%; days traded 217 of 406 Mondays; overnight part (Sun 19:00 -> Mon 8:30) $196 a trade
+   Bridge by year: {2018: 1210, 2019: 7400, 2020: 27956, 2021: 22259, 2022: 1247, 2023: 14350, 2024: 5192, 2025: 24896, 2026: 17741}
    ours by year: {2018: -11362, 2019: 3698, 2020: 46520, 2021: 5903, 2022: -5520, 2023: 43042, 2024: 16308, 2025: 47378, 2026: 45390}
 
 2. Which part does the work?
-Bridge without the ADX filter                        n=407 win 70% avg $  403 PF 1.52 t= 3.4 yrs+ 6/9 | 18-22 $  123 | 23-26 $  771 | worst $-10,687
-  the Mondays the filter skips                       n=204 win 72% avg $  299 PF 1.31 t= 1.5 yrs+ 5/9 | 18-22 $ -352 | 23-26 $ 1157 | worst $-10,687
-Bridge, no target (hold to 15:55)                    n=203 win 62% avg $  743 PF 2.01 t= 3.5 yrs+ 7/9 | 18-22 $  659 | 23-26 $  854 | worst $-9,102
-Bridge, out at 15:00                                 n=203 win 67% avg $  493 PF 1.86 t= 3.7 yrs+ 7/9 | 18-22 $  569 | 23-26 $  395 | worst $-6,542
-overnight part only (Sun 19:00 -> Mon 8:30, filtered) n=203 win 54% avg $  162 PF 1.33 t= 1.3 yrs+ 5/9 | 18-22 $  238 | 23-26 $   62 | worst $-9,227
-ours on the Bridge-filter Mondays                    n=203 win 60% avg $  489 PF 1.75 t= 3.0 yrs+ 7/9 | 18-22 $  387 | 23-26 $  621 | worst $-4,587
-ours on the other Mondays                            n=247 win 51% avg $  373 PF 1.42 t= 2.0 yrs+ 5/9 | 18-22 $  -37 | 23-26 $  919 | worst $-9,437
+Bridge without the ADX filter                        n=406 win 70% avg $  403 PF 1.52 t= 3.4 yrs+ 6/9 | 18-22 $  122 | 23-26 $  771 | worst $-10,687
+  the Mondays the filter skips                       n=189 win 70% avg $  220 PF 1.21 t= 1.1 yrs+ 5/9 | 18-22 $ -288 | 23-26 $  942 | worst $-10,687
+Bridge, no target (hold to 15:55)                    n=217 win 63% avg $  782 PF 2.06 t= 3.7 yrs+ 8/9 | 18-22 $  491 | 23-26 $ 1135 | worst $-9,102
+Bridge, out at 15:00                                 n=217 win 69% avg $  547 PF 1.99 t= 4.2 yrs+ 8/9 | 18-22 $  470 | 23-26 $  640 | worst $-6,542
+overnight part only (Sun 19:00 -> Mon 8:30, filtered) n=217 win 54% avg $  184 PF 1.38 t= 1.5 yrs+ 7/9 | 18-22 $  161 | 23-26 $  211 | worst $-9,227
+ours on the Bridge-filter Mondays                    n=217 win 59% avg $  492 PF 1.75 t= 3.1 yrs+ 8/9 | 18-22 $  259 | 23-26 $  774 | worst $-4,587
+ours on the other Mondays                            n=233 win 52% avg $  364 PF 1.41 t= 1.8 yrs+ 6/9 | 18-22 $   61 | 23-26 $  795 | worst $-9,437
 
 3. Placebo: the same rule on other weekdays (previous evening 19:00 -> 15:55, ADX filter, target):
-   Tuesday                                           n=224 win 61% avg $    7 PF 1.01 t= 0.0 yrs+ 5/9 | 18-22 $  -65 | 23-26 $   91 | worst $-17,007
-   Wednesday                                         n=212 win 67% avg $  160 PF 1.19 t= 0.9 yrs+ 5/9 | 18-22 $  108 | 23-26 $  232 | worst $-11,127
-   Thursday                                          n=216 win 63% avg $   93 PF 1.10 t= 0.5 yrs+ 6/9 | 18-22 $   75 | 23-26 $  117 | worst $-12,167
-   Friday                                            n=213 win 60% avg $ -164 PF 0.85 t=-0.7 yrs+ 4/9 | 18-22 $ -204 | 23-26 $ -117 | worst $-28,297
+   Tuesday                                           n=245 win 59% avg $ -134 PF 0.87 t=-0.8 yrs+ 2/9 | 18-22 $ -132 | 23-26 $ -135 | worst $-17,007
+   Wednesday                                         n=229 win 66% avg $  151 PF 1.17 t= 0.9 yrs+ 5/9 | 18-22 $  118 | 23-26 $  193 | worst $-11,127
+   Thursday                                          n=230 win 65% avg $  173 PF 1.20 t= 1.0 yrs+ 5/9 | 18-22 $  199 | 23-26 $  141 | worst $-12,167
+   Friday                                            n=222 win 60% avg $ -164 PF 0.85 t=-0.7 yrs+ 4/9 | 18-22 $  -48 | 23-26 $ -296 | worst $-28,297
 
 4. Standard metrics per NQ (long-only strategies, so longs = all):
                    trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
-Bridge Monday Long    203 68% $508 $11,487   1.26    1.84          1.89 $16,220   0.71  4.26       5.39
+Bridge Monday Long    217 70% $563 $13,620   1.43    2.17          2.04 $13,048   1.04  3.37       8.09
 ours                  450 55% $425 $21,318   1.11    1.97          1.55 $20,782   1.03 10.54       4.04
-Bridge, no filter     407 70% $403 $18,278   1.13    1.44          1.52 $24,448   0.75 14.61       2.50
+Bridge, no filter     406 70% $403 $18,248   1.12    1.44          1.52 $24,448   0.75 14.68       2.49
                                          actual        p5       p50       p95
 name                     metric                                              
-Bridge Monday Long 2023+ sharpe            0.81     -0.03      0.77      1.69
-                         sortino           1.09     -0.04      1.03      2.59
-                         pf_day            1.48      0.98      1.46      2.31
-                         calmar            0.54     -0.02      0.59      2.03
-                         ulcer            10.25      3.04      7.51     20.69
-                         max_dd       16,219.75  7,655.14 13,822.75 26,566.67
-                         P(Sharpe<=0)       NaN       NaN      0.06       NaN
+Bridge Monday Long 2023+ sharpe            1.44      0.58      1.42      2.34
+                         sortino           2.13      0.78      2.11      4.13
+                         pf_day            1.98      1.32      1.96      3.17
+                         calmar            1.23      0.40      1.41      3.47
+                         ulcer             5.90      2.03      4.39     11.04
+                         max_dd       13,047.50  6,313.34 11,159.75 20,042.87
+                         P(Sharpe<=0)       NaN       NaN      0.00       NaN
 ours 2023+               sharpe            1.64      0.88      1.63      2.37
                          sortino           3.13      1.46      3.10      5.35
                          pf_day            1.92      1.40      1.90      2.65
@@ -51,19 +51,19 @@ Bridge, no filter 2023+  sharpe            2.09      1.19      2.11      3.13
                          max_dd       13,365.75  9,441.14 14,663.25 24,421.44
                          P(Sharpe<=0)       NaN       NaN      0.00       NaN
                          actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
-Bridge Monday Long 2023+   $16,220      68% $14,163 $23,082 $27,721        100%        100%        100%
+Bridge Monday Long 2023+   $13,048      70% $11,336 $18,078 $21,509        100%        100%        100%
 ours 2023+                 $15,752      18% $19,433 $31,669 $38,108        100%        100%        100%
 Bridge, no filter 2023+    $13,366      21% $16,222 $25,370 $30,280        100%        100%        100%
-   daily correlation Bridge vs ours: 0.29
+   daily correlation Bridge vs ours: 0.31
 
 5. Funded bench (Apex 50K PA, cushion sizing from $1,500), current plan with each Monday version:
    current plan (ours 1 MNQ)        1y $8,770 2y $12,236 blown 3% / 2%
-   Bridge 1 MNQ instead of ours     1y $8,515 2y $12,249 blown 4% / 1%
-   Bridge 2 MNQ instead of ours     1y $8,350 2y $11,191 blown 12% / 11%
-   ours + Bridge 1 MNQ              1y $9,132 2y $12,327 blown 3% / 2%
+   Bridge 1 MNQ instead of ours     1y $8,718 2y $12,271 blown 4% / 1%
+   Bridge 2 MNQ instead of ours     1y $8,717 2y $11,512 blown 9% / 9%
+   ours + Bridge 1 MNQ              1y $9,300 2y $12,438 blown 3% / 1%
    no Monday strategy               1y $8,218 2y $11,964 blown 4% / 1%
    controls (is it just more Monday size?):
    ours 2 MNQ                             1y $8,422 2y $10,573 blown 18% / 19%
    ours + Bridge no-filter 1 MNQ          1y $8,847 2y $12,164 blown 4% / 4%
    Bridge no-filter 1 MNQ instead of ours 1y $8,930 2y $12,146 blown 3% / 2%
-   ours + Bridge per NQ each, daily: Sharpe 1.39 (ours alone 1.11, Bridge alone 1.26)
+   ours + Bridge per NQ each, daily: Sharpe 1.46 (ours alone 1.11, Bridge alone 1.43)

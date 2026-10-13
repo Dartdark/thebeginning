@@ -74,8 +74,8 @@ realized vol explains it; no filter on the plan clears noise (watch VCS above-fl
 flip cross, regime follow / fade, strike pin all F. Order flow (MBO 2018-2026, `OF_1min_*.csv`, exporter
 `multi_strategy/OFB_OrderFlow_Exporter.txt`, test `analysis/orderflow_test.py`): describes moves, doesn't predict
 them (F); LDF-long delta filter D (no funded gain). Export quirk: MC `Volume` = buy volume on these bars.
-The Bridge's Monday Long NQ (`analysis/bridge_monday_long_test.py`, replica from the manual): B; next to ours at
-1 MNQ funded $9,132 / $12,327 vs $8,770 / $12,236. Needs the Bridge's code + an MC backtest before adopting.
+The Bridge's Monday Long NQ (`analysis/bridge_monday_long_test.py`, its v2.1 code ported): PF 2.04, t 4.4, 9/9 years;
+next to ours at 1 MNQ funded $9,300 / $12,438 vs $8,770 / $12,236. B, A once an MC backtest confirms it.
 Setup notes: restart MultiCharts after any DLL / data change ("OLD DLL" error); compile every OFB function
 ("unverified function" error); Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close
 conversion unchecked.
