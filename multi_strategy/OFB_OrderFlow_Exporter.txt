@@ -19,7 +19,7 @@
 
   Use: same chart as the gamma exporter - a 1-minute chart of The Bridge's own bars (C:\OFB\ofb_bars_NQ.csv,
   Map ASCII as in the manual section 4.3, time zone Exchange) - but loaded from the FIRST day of your order-flow
-  data (2017 / 2018 if you pulled the full history). Compile The Bridge's OFB functions first (OFB_Get, OFB_VWAP,
+  data (2017 / 2018 if you pulled the full history). Compile The Bridge's OFB functions first (OFB_VWAP,
   OFB_VWAP_SD, OFB_POC, OFB_PriorPOC, OFB_VAH, OFB_VAL). The folder must already exist. Files are deleted and
   rewritten on every recalculation. About 8 MB per 3-month part at the default RTH window.
   Full Globex session (if your data was built with SESSION = Globex): StartTime 0, EndTime 2359, SplitMonths 1. }
@@ -32,7 +32,19 @@ Inputs:
 	SplitMonths(3);            { months per file: 1, 2, 3, 4, 6 or 12 }
 
 Variables:
-	FileName(""), BarYear(0), Part(0), LastKey(0), Row(""), Y(0), P(0);
+	FileName(""), BarYear(0), Part(0), LastKey(0), Row(""), Y(0), P(0), BarKey(0);
+
+{ Slots are read straight from The Bridge's DLL, the same way its own OFB_BigTrade function does it:
+  OFB_GetAt(slot, BarKey) is the historical value of a slot for the bar stamped BarKey. }
+DefineDLLFunc: "C:\OFB\OrderFlowBridge.dll", double, "OFB_GetAt",    int, double;
+DefineDLLFunc: "C:\OFB\OrderFlowBridge.dll", int,    "OFB_LoadHist", lpstr;
+DefineDLLFunc: "C:\OFB\OrderFlowBridge.dll", int,    "OFB_HistCount";
+DefineDLLFunc: "C:\OFB\OrderFlowBridge.dll", int,    "OFB_Version";
+
+if CurrentBar = 1 and OFB_HistCount = 0 then
+	Value99 = OFB_LoadHist( "C:\OFB\ofb_hist.bin" );
+if CurrentBar = 1 and OFB_Version < 10300 then
+	RaiseRunTimeError( "OrderFlowBridge: MultiCharts is still running an OLD DLL. Close MultiCharts completely and reopen it." );
 
 Once begin
 	for Y = 2000 to 2040 begin
@@ -54,22 +66,23 @@ if BarStatus(1) = 2 and Time >= StartTime and Time <= EndTime then begin
 			+ "vwap,vwap_sd,poc,poc_prev,vah,val" + NewLine);
 		LastKey = BarYear * 100 + Part;
 	end;
+	BarKey = ( Date + 19000000 ) * 1000000 + Time * 100;
 	Row = NumToStr(Date + 19000000, 0) + "," + NumToStr(Time, 0) + ","
 		+ NumToStr(Open, 2) + "," + NumToStr(High, 2) + "," + NumToStr(Low, 2) + "," + NumToStr(Close, 2) + ","
 		+ NumToStr(Volume, 0) + "," + NumToStr(UpTicks, 0) + "," + NumToStr(DownTicks, 0);
-	Row = Row + "," + NumToStr(OFB_Get(2), 2) + "," + NumToStr(OFB_Get(3), 0) + "," + NumToStr(OFB_Get(4), 0)
-		+ "," + NumToStr(OFB_Get(5), 4) + "," + NumToStr(OFB_Get(6), 4)
-		+ "," + NumToStr(OFB_Get(7), 2) + "," + NumToStr(OFB_Get(8), 2)
-		+ "," + NumToStr(OFB_Get(9), 2) + "," + NumToStr(OFB_Get(10), 2)
-		+ "," + NumToStr(OFB_Get(11), 0) + "," + NumToStr(OFB_Get(12), 0)
-		+ "," + NumToStr(OFB_Get(13), 2) + "," + NumToStr(OFB_Get(14), 0) + "," + NumToStr(OFB_Get(15), 2)
-		+ "," + NumToStr(OFB_Get(16), 0) + "," + NumToStr(OFB_Get(17), 0);
-	Row = Row + "," + NumToStr(OFB_Get(46), 0) + "," + NumToStr(OFB_Get(47), 2)
-		+ "," + NumToStr(OFB_Get(48), 0) + "," + NumToStr(OFB_Get(49), 0) + "," + NumToStr(OFB_Get(50), 0)
-		+ "," + NumToStr(OFB_Get(51), 0) + "," + NumToStr(OFB_Get(52), 0) + "," + NumToStr(OFB_Get(53), 0)
-		+ "," + NumToStr(OFB_Get(54), 2) + "," + NumToStr(OFB_Get(55), 2) + "," + NumToStr(OFB_Get(56), 2)
-		+ "," + NumToStr(OFB_Get(57), 2) + "," + NumToStr(OFB_Get(58), 2) + "," + NumToStr(OFB_Get(59), 2)
-		+ "," + NumToStr(OFB_Get(60), 2) + "," + NumToStr(OFB_Get(61), 2);
+	Row = Row + "," + NumToStr(OFB_GetAt(2, BarKey), 2) + "," + NumToStr(OFB_GetAt(3, BarKey), 0) + "," + NumToStr(OFB_GetAt(4, BarKey), 0)
+		+ "," + NumToStr(OFB_GetAt(5, BarKey), 4) + "," + NumToStr(OFB_GetAt(6, BarKey), 4)
+		+ "," + NumToStr(OFB_GetAt(7, BarKey), 2) + "," + NumToStr(OFB_GetAt(8, BarKey), 2)
+		+ "," + NumToStr(OFB_GetAt(9, BarKey), 2) + "," + NumToStr(OFB_GetAt(10, BarKey), 2)
+		+ "," + NumToStr(OFB_GetAt(11, BarKey), 0) + "," + NumToStr(OFB_GetAt(12, BarKey), 0)
+		+ "," + NumToStr(OFB_GetAt(13, BarKey), 2) + "," + NumToStr(OFB_GetAt(14, BarKey), 0) + "," + NumToStr(OFB_GetAt(15, BarKey), 2)
+		+ "," + NumToStr(OFB_GetAt(16, BarKey), 0) + "," + NumToStr(OFB_GetAt(17, BarKey), 0);
+	Row = Row + "," + NumToStr(OFB_GetAt(46, BarKey), 0) + "," + NumToStr(OFB_GetAt(47, BarKey), 2)
+		+ "," + NumToStr(OFB_GetAt(48, BarKey), 0) + "," + NumToStr(OFB_GetAt(49, BarKey), 0) + "," + NumToStr(OFB_GetAt(50, BarKey), 0)
+		+ "," + NumToStr(OFB_GetAt(51, BarKey), 0) + "," + NumToStr(OFB_GetAt(52, BarKey), 0) + "," + NumToStr(OFB_GetAt(53, BarKey), 0)
+		+ "," + NumToStr(OFB_GetAt(54, BarKey), 2) + "," + NumToStr(OFB_GetAt(55, BarKey), 2) + "," + NumToStr(OFB_GetAt(56, BarKey), 2)
+		+ "," + NumToStr(OFB_GetAt(57, BarKey), 2) + "," + NumToStr(OFB_GetAt(58, BarKey), 2) + "," + NumToStr(OFB_GetAt(59, BarKey), 2)
+		+ "," + NumToStr(OFB_GetAt(60, BarKey), 2) + "," + NumToStr(OFB_GetAt(61, BarKey), 2);
 	Row = Row + "," + NumToStr(OFB_VWAP(2), 2) + "," + NumToStr(OFB_VWAP_SD(2), 2)
 		+ "," + NumToStr(OFB_POC(2), 2) + "," + NumToStr(OFB_PriorPOC(2), 2)
 		+ "," + NumToStr(OFB_VAH(2), 2) + "," + NumToStr(OFB_VAL(2), 2);
