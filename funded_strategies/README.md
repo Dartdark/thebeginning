@@ -681,6 +681,23 @@ Python version, which matches the MultiCharts 30-minute list within $10 a trade)
 - Useful as a robustness check: Vault Break works on every bar size (t 3.1–3.8), so 30 minutes is not a
   lucky setting. **Verdict: keep single timeframes; D for both ideas.**
 
+## Gold Breakout 15M ported to NQ (2026-10-13): no edge as written
+
+Code `../analysis/range_breakout_gold_test.py` (output in `..._output.txt`). Range from the 17:00 CT
+reopen to 23:00 CT (the TradingView default 00:00–07:00 GMT+3), buy stop at the high and sell stop at
+the low (one cancels the other), stop 1% of entry, no target, out at 12:00 CT; 24 NQ variants (range
+to 23:00 / 2:00 / 8:30, stop 1% / 0.5% / range / 0.3 ATR, out 12:00 / 15:00). Per NQ after $7.25 + 1
+tick per fill, 2018–2026. (No gold data here beyond one week, so the gold claim itself is untested.)
+- **Gold-literal on NQ:** 2,246 trades, 46% win, −$36, PF 0.97, t −0.6, 4/9 years; longs PF 1.06,
+  shorts 0.87; worse than the same entries with a random side (−$20).
+- Asia-only ranges (to 23:00 or 2:00): PF 0.97–1.07, t ≤ 1.1 in every version.
+- Only the full overnight range (to 8:30, i.e. a US-session breakout) is positive: best of 24 (0.5%
+  stop, out 12:00) $83, PF 1.13, t 2.0, 8/9 years; but the random-side placebo makes $46, it is 0.39
+  correlated with Overnight Bias ML (same range), and in the funded bench it hurts: + 1 MNQ $8,531 /
+  $11,755, blown 9% / 7% (plan $8,770 / $12,236, 3% / 2%). This is the C-tier overnight-range breakout
+  already in the tier list.
+- **F** for the gold strategy on NQ.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
