@@ -110,7 +110,8 @@ account's cumulative payouts reach each amount (25-day steps):
 | Plan | $3,000 (2 payouts) | $5,000 (3) | $7,500 (4) | $10,000 (5) | $13,000 (6) |
 |---|---|---|---|---|---|
 | Current plan | 150 | 200 | 225 | 275 | 325 |
-| + NFP + VCS, full size from $1,500 | 150 | 175 | 200–225 | 250 | 275–300 |
+| Full size from $1,500 | 150 | 175 | 200 | 250 | 300 |
+| + NFP + VCS | 150 | 175 | 225 | 250 | 300 |
 
 $13,000 in total arrives after about **325 days with 1 account, about 225 with 2 accounts** ($7,500
 each), **about 200 with 3** ($5,000 each) and **about 150 with 5** ($3,000 each). Each extra account
