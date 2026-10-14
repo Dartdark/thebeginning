@@ -182,13 +182,13 @@ if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition 
 		EntryBuf = EntryBufTicks * MinMove / PriceScale;
 		if Bias = 1 then begin
 			if Close >= ORHi - EntryBuf then
-				Buy ("ON Bias L") Qty contracts next bar at market
+				Buy ("ON Bias LM") Qty contracts next bar at market
 			else
 				Buy ("ON Bias L") Qty contracts next bar at ORHi stop;
 		end
 		else begin
 			if Close <= ORLo + EntryBuf then
-				SellShort ("ON Bias S") Qty contracts next bar at market
+				SellShort ("ON Bias SM") Qty contracts next bar at market
 			else
 				SellShort ("ON Bias S") Qty contracts next bar at ORLo stop;
 		end;
