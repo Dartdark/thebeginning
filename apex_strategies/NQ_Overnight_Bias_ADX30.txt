@@ -30,6 +30,7 @@
   LIVE (combine): MNQ chart, RiskPerTrade 1100 as now (the tighter stop buys about 20% more MNQ). }
 
 Inputs:
+	EntryBufTicks(2),       { live: enter at market if price is within this many ticks of / through the stop level }
 	ONStart(2300),          { overnight range starts after this time (previous evening) }
 	ONEnd(830),             { ... and ends at the close of this bar }
 	OREnd(845),             { opening range = bars closing after ONEnd up to this time }
@@ -48,6 +49,7 @@ Inputs:
 	NumContracts(1);
 
 Variables:
+	EntryBuf(0),
 	ONHi(0), ONLo(0), InON(false), ONReady(false),
 	OpenPx(0), ORHi(0), ORLo(0), ORDone(false), Bias(0), PosInRange(0),
 	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
@@ -174,10 +176,22 @@ if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition 
 	Qty = NumContracts;
 	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
 	if Qty >= 1 then begin
-		if Bias = 1 then
-			Buy ("ON Bias L") Qty contracts next bar at ORHi stop
-		else
-			SellShort ("ON Bias S") Qty contracts next bar at ORLo stop;
+		{ live fix (2026-10-14): a stop order on the wrong side of the market is rejected by the broker
+		  ("Invalid StopMarket order parameters"), so when price is already at / through the level
+		  (within EntryBufTicks) enter at market instead, which is how the backtest fills a gapped stop }
+		EntryBuf = EntryBufTicks * MinMove / PriceScale;
+		if Bias = 1 then begin
+			if Close >= ORHi - EntryBuf then
+				Buy ("ON Bias L") Qty contracts next bar at market
+			else
+				Buy ("ON Bias L") Qty contracts next bar at ORHi stop;
+		end
+		else begin
+			if Close <= ORLo + EntryBuf then
+				SellShort ("ON Bias S") Qty contracts next bar at market
+			else
+				SellShort ("ON Bias S") Qty contracts next bar at ORLo stop;
+		end;
 	end;
 end;
 
