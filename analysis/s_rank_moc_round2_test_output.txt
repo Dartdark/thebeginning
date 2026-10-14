@@ -1,0 +1,378 @@
+S-rank program, round 2 item 1 (2026-10-14): the closing-auction (MOC) follow on NQ + ES + YM, pooled.
+sessions: NQ 2262, ES 2262, YM 2258; all three 2257
+correlation of the 14:00 -> 14:50 moves (ATR units):
+       NQ     ES     YM
+NQ  1.000  0.947  0.865
+ES  0.947  1.000  0.957
+YM  0.865  0.957  1.000
+correlation of the 14:50 -> 15:00 moves:
+       NQ     ES     YM
+NQ  1.000  0.945  0.879
+ES  0.945  1.000  0.954
+YM  0.879  0.954  1.000
+
+======================================================================================================================
+0. Round-1 rule per index: own |14:00->14:50| >= th ATR, 14:51 open -> 15:00 close, stop 0.25 ATR
+   POOL own >= 0.2 stop None                                  n= 539 avg $  242 PF 1.39 t  2.3 win 51% yrs+ 7/9 | 18-22 $  407 (t  3.3) 23-26 $  -21 (t -0.1)
+      NQ $/contract                                           n= 350 avg $  177 PF 1.75 t  3.3 win 57% yrs+ 8/9 | 18-22 $  223 (t  3.8) 23-26 $   96 (t  0.9)
+      ES $/contract                                           n= 441 avg $   52 PF 1.30 t  1.8 win 51% yrs+ 5/9 | 18-22 $   96 (t  2.7) 23-26 $  -20 (t -0.4)
+      YM $/contract                                           n= 418 avg $   50 PF 1.42 t  2.2 win 51% yrs+ 7/9 | 18-22 $   90 (t  3.0) 23-26 $  -20 (t -0.6)
+   POOL own >= 0.2 stop 0.25                                  n= 539 avg $  286 PF 1.51 t  3.0 win 50% yrs+ 7/9 | 18-22 $  444 (t  3.8) 23-26 $   32 (t  0.2)
+      NQ $/contract                                           n= 350 avg $  189 PF 1.87 t  3.9 win 57% yrs+ 8/9 | 18-22 $  239 (t  4.3) 23-26 $  100 (t  1.1)
+      ES $/contract                                           n= 441 avg $   65 PF 1.41 t  2.4 win 51% yrs+ 5/9 | 18-22 $  102 (t  3.0) 23-26 $    5 (t  0.1)
+      YM $/contract                                           n= 418 avg $   55 PF 1.48 t  2.6 win 51% yrs+ 7/9 | 18-22 $   96 (t  3.4) 23-26 $  -17 (t -0.6)
+   POOL own >= 0.3 stop None                                  n= 250 avg $  494 PF 1.87 t  2.8 win 56% yrs+ 8/9 | 18-22 $  683 (t  3.7) 23-26 $  175 (t  0.5)
+      NQ $/contract                                           n= 140 avg $  258 PF 2.06 t  2.7 win 59% yrs+ 8/9 | 18-22 $  392 (t  4.2) 23-26 $   52 (t  0.3)
+      ES $/contract                                           n= 202 avg $  142 PF 1.88 t  2.8 win 59% yrs+ 7/9 | 18-22 $  188 (t  3.4) 23-26 $   57 (t  0.6)
+      YM $/contract                                           n= 189 avg $  119 PF 2.06 t  3.1 win 58% yrs+ 7/9 | 18-22 $  174 (t  3.5) 23-26 $   20 (t  0.3)
+   POOL own >= 0.3 stop 0.25                                  n= 250 avg $  546 PF 2.11 t  3.7 win 56% yrs+ 8/9 | 18-22 $  705 (t  4.1) 23-26 $  278 (t  1.0)
+      NQ $/contract                                           n= 140 avg $  263 PF 2.19 t  3.1 win 58% yrs+ 8/9 | 18-22 $  398 (t  4.3) 23-26 $   54 (t  0.3)
+      ES $/contract                                           n= 202 avg $  158 PF 2.11 t  3.5 win 58% yrs+ 8/9 | 18-22 $  189 (t  3.6) 23-26 $   99 (t  1.2)
+      YM $/contract                                           n= 189 avg $  123 PF 2.17 t  3.4 win 58% yrs+ 7/9 | 18-22 $  171 (t  3.5) 23-26 $   37 (t  0.8)
+   POOL own >= 0.4 stop None                                  n= 113 avg $  677 PF 2.14 t  2.3 win 55% yrs+ 8/9 | 18-22 $ 1010 (t  3.9) 23-26 $  114 (t  0.2)
+      NQ $/contract                                           n=  66 avg $  501 PF 3.40 t  3.2 win 67% yrs+ 8/9 | 18-22 $  630 (t  3.9) 23-26 $  303 (t  1.0)
+      ES $/contract                                           n=  96 avg $  169 PF 1.95 t  2.0 win 56% yrs+ 7/9 | 18-22 $  308 (t  3.6) 23-26 $  -72 (t -0.4)
+      YM $/contract                                           n=  80 avg $  106 PF 1.93 t  1.9 win 57% yrs+ 7/9 | 18-22 $  175 (t  3.2) 23-26 $  -10 (t -0.1)
+   POOL own >= 0.4 stop 0.25                                  n= 113 avg $  722 PF 2.45 t  3.0 win 54% yrs+ 8/9 | 18-22 $  966 (t  3.7) 23-26 $  310 (t  0.6)
+      NQ $/contract                                           n=  66 avg $  473 PF 3.36 t  3.3 win 65% yrs+ 8/9 | 18-22 $  631 (t  3.9) 23-26 $  231 (t  0.9)
+      ES $/contract                                           n=  96 avg $  186 PF 2.21 t  2.6 win 55% yrs+ 8/9 | 18-22 $  282 (t  3.2) 23-26 $   20 (t  0.2)
+      YM $/contract                                           n=  80 avg $  105 PF 1.98 t  2.2 win 56% yrs+ 7/9 | 18-22 $  148 (t  2.6) 23-26 $   34 (t  0.4)
+
+======================================================================================================================
+1. Agreement across NQ / ES / YM (14:00 -> 14:50 signs)
+   all-three sessions with an agreeing sign: 1678 of 2181 (74% of days)
+   POOL own >= 0.2 & signs agree, stop None                   n= 527 avg $  248 PF 1.40 t  2.3 win 51% yrs+ 7/9 | 18-22 $  411 (t  3.3) 23-26 $  -18 (t -0.1)
+      NQ $/contract                                           n= 344 avg $  182 PF 1.77 t  3.4 win 57% yrs+ 8/9 | 18-22 $  227 (t  3.8) 23-26 $  100 (t  0.9)
+      ES $/contract                                           n= 439 avg $   52 PF 1.30 t  1.8 win 51% yrs+ 5/9 | 18-22 $   95 (t  2.6) 23-26 $  -19 (t -0.4)
+      YM $/contract                                           n= 413 avg $   50 PF 1.42 t  2.2 win 52% yrs+ 7/9 | 18-22 $   90 (t  3.0) 23-26 $  -20 (t -0.6)
+   POOL own >= 0.2 & signs agree, stop 0.25                   n= 527 avg $  293 PF 1.52 t  3.0 win 51% yrs+ 7/9 | 18-22 $  449 (t  3.8) 23-26 $   37 (t  0.2)
+      NQ $/contract                                           n= 344 avg $  194 PF 1.90 t  3.9 win 57% yrs+ 8/9 | 18-22 $  243 (t  4.3) 23-26 $  105 (t  1.1)
+      ES $/contract                                           n= 439 avg $   65 PF 1.41 t  2.4 win 51% yrs+ 5/9 | 18-22 $  101 (t  3.0) 23-26 $    6 (t  0.1)
+      YM $/contract                                           n= 413 avg $   55 PF 1.49 t  2.6 win 51% yrs+ 7/9 | 18-22 $   96 (t  3.4) 23-26 $  -16 (t -0.5)
+   POOL own >= 0.3 & signs agree, stop None                   n= 247 avg $  501 PF 1.88 t  2.9 win 57% yrs+ 8/9 | 18-22 $  690 (t  3.7) 23-26 $  183 (t  0.5)
+      NQ $/contract                                           n= 139 avg $  263 PF 2.09 t  2.8 win 59% yrs+ 8/9 | 18-22 $  401 (t  4.2) 23-26 $   52 (t  0.3)
+      ES $/contract                                           n= 201 avg $  141 PF 1.87 t  2.8 win 59% yrs+ 7/9 | 18-22 $  187 (t  3.4) 23-26 $   57 (t  0.6)
+      YM $/contract                                           n= 188 avg $  121 PF 2.08 t  3.1 win 59% yrs+ 7/9 | 18-22 $  174 (t  3.5) 23-26 $   24 (t  0.4)
+   POOL own >= 0.3 & signs agree, stop 0.25                   n= 247 avg $  554 PF 2.12 t  3.7 win 56% yrs+ 8/9 | 18-22 $  713 (t  4.1) 23-26 $  287 (t  1.0)
+      NQ $/contract                                           n= 139 avg $  267 PF 2.22 t  3.2 win 58% yrs+ 8/9 | 18-22 $  407 (t  4.4) 23-26 $   54 (t  0.3)
+      ES $/contract                                           n= 201 avg $  157 PF 2.10 t  3.4 win 58% yrs+ 8/9 | 18-22 $  188 (t  3.6) 23-26 $   99 (t  1.2)
+      YM $/contract                                           n= 188 avg $  125 PF 2.20 t  3.5 win 58% yrs+ 7/9 | 18-22 $  171 (t  3.5) 23-26 $   42 (t  0.9)
+   POOL own >= 0.4 & signs agree, stop None                   n= 113 avg $  677 PF 2.14 t  2.3 win 55% yrs+ 8/9 | 18-22 $ 1010 (t  3.9) 23-26 $  114 (t  0.2)
+      NQ $/contract                                           n=  66 avg $  501 PF 3.40 t  3.2 win 67% yrs+ 8/9 | 18-22 $  630 (t  3.9) 23-26 $  303 (t  1.0)
+      ES $/contract                                           n=  96 avg $  169 PF 1.95 t  2.0 win 56% yrs+ 7/9 | 18-22 $  308 (t  3.6) 23-26 $  -72 (t -0.4)
+      YM $/contract                                           n=  80 avg $  106 PF 1.93 t  1.9 win 57% yrs+ 7/9 | 18-22 $  175 (t  3.2) 23-26 $  -10 (t -0.1)
+   POOL own >= 0.4 & signs agree, stop 0.25                   n= 113 avg $  722 PF 2.45 t  3.0 win 54% yrs+ 8/9 | 18-22 $  966 (t  3.7) 23-26 $  310 (t  0.6)
+      NQ $/contract                                           n=  66 avg $  473 PF 3.36 t  3.3 win 65% yrs+ 8/9 | 18-22 $  631 (t  3.9) 23-26 $  231 (t  0.9)
+      ES $/contract                                           n=  96 avg $  186 PF 2.21 t  2.6 win 55% yrs+ 8/9 | 18-22 $  282 (t  3.2) 23-26 $   20 (t  0.2)
+      YM $/contract                                           n=  80 avg $  105 PF 1.98 t  2.2 win 56% yrs+ 7/9 | 18-22 $  148 (t  2.6) 23-26 $   34 (t  0.4)
+   POOL all three >= 0.2 same sign, stop None                 n= 264 avg $  595 PF 1.77 t  3.0 win 58% yrs+ 8/9 | 18-22 $  813 (t  3.8) 23-26 $  173 (t  0.4)
+      NQ $/contract                                           n= 264 avg $  218 PF 1.94 t  3.4 win 59% yrs+ 8/9 | 18-22 $  282 (t  4.0) 23-26 $   94 (t  0.7)
+      ES $/contract                                           n= 264 avg $  124 PF 1.75 t  2.9 win 58% yrs+ 8/9 | 18-22 $  171 (t  3.5) 23-26 $   32 (t  0.4)
+      YM $/contract                                           n= 264 avg $   98 PF 1.84 t  3.1 win 56% yrs+ 7/9 | 18-22 $  148 (t  3.7) 23-26 $    1 (t  0.0)
+   POOL all three >= 0.2 same sign, stop 0.25                 n= 264 avg $  645 PF 1.93 t  3.6 win 57% yrs+ 8/9 | 18-22 $  842 (t  4.2) 23-26 $  266 (t  0.7)
+      NQ $/contract                                           n= 264 avg $  227 PF 2.06 t  3.8 win 59% yrs+ 8/9 | 18-22 $  298 (t  4.4) 23-26 $   91 (t  0.8)
+      ES $/contract                                           n= 264 avg $  134 PF 1.89 t  3.5 win 57% yrs+ 8/9 | 18-22 $  170 (t  3.6) 23-26 $   65 (t  1.0)
+      YM $/contract                                           n= 264 avg $  100 PF 1.90 t  3.4 win 56% yrs+ 7/9 | 18-22 $  147 (t  3.8) 23-26 $   10 (t  0.2)
+   POOL all three >= 0.3 same sign, stop None                 n= 101 avg $ 1150 PF 2.74 t  3.2 win 64% yrs+ 8/9 | 18-22 $ 1562 (t  4.4) 23-26 $  407 (t  0.5)
+      NQ $/contract                                           n= 101 avg $  413 PF 3.11 t  3.7 win 66% yrs+ 8/9 | 18-22 $  518 (t  4.5) 23-26 $  224 (t  0.9)
+      ES $/contract                                           n= 101 avg $  238 PF 2.63 t  3.0 win 63% yrs+ 8/9 | 18-22 $  334 (t  4.0) 23-26 $   64 (t  0.4)
+      YM $/contract                                           n= 101 avg $  170 PF 2.57 t  2.8 win 61% yrs+ 7/9 | 18-22 $  265 (t  3.7) 23-26 $   -1 (t -0.0)
+   POOL all three >= 0.3 same sign, stop 0.25                 n= 101 avg $ 1172 PF 3.02 t  3.7 win 62% yrs+ 8/9 | 18-22 $ 1511 (t  4.3) 23-26 $  559 (t  0.9)
+      NQ $/contract                                           n= 101 avg $  400 PF 3.16 t  3.9 win 65% yrs+ 8/9 | 18-22 $  526 (t  4.6) 23-26 $  172 (t  0.9)
+      ES $/contract                                           n= 101 avg $  240 PF 2.75 t  3.4 win 61% yrs+ 7/9 | 18-22 $  305 (t  3.5) 23-26 $  121 (t  1.0)
+      YM $/contract                                           n= 101 avg $  170 PF 2.65 t  3.1 win 60% yrs+ 7/9 | 18-22 $  243 (t  3.3) 23-26 $   37 (t  0.5)
+   POOL all three >= 0.4 same sign, stop None                 n=  49 avg $ 1468 PF 3.01 t  2.4 win 71% yrs+ 8/9 | 18-22 $ 1968 (t  4.4) 23-26 $  742 (t  0.6)
+      NQ $/contract                                           n=  49 avg $  507 PF 3.37 t  2.8 win 71% yrs+ 8/9 | 18-22 $  649 (t  4.6) 23-26 $  300 (t  0.8)
+      ES $/contract                                           n=  49 avg $  284 PF 2.83 t  2.4 win 69% yrs+ 8/9 | 18-22 $  405 (t  4.2) 23-26 $  109 (t  0.4)
+      YM $/contract                                           n=  49 avg $  178 PF 2.57 t  2.1 win 65% yrs+ 7/9 | 18-22 $  289 (t  3.8) 23-26 $   16 (t  0.1)
+   POOL all three >= 0.4 same sign, stop 0.25                 n=  49 avg $ 1529 PF 3.79 t  3.2 win 69% yrs+ 8/9 | 18-22 $ 1863 (t  4.0) 23-26 $ 1047 (t  1.1)
+      NQ $/contract                                           n=  49 avg $  473 PF 3.38 t  3.0 win 69% yrs+ 8/9 | 18-22 $  653 (t  4.7) 23-26 $  212 (t  0.7)
+      ES $/contract                                           n=  49 avg $  298 PF 3.35 t  3.0 win 67% yrs+ 8/9 | 18-22 $  356 (t  3.4) 23-26 $  214 (t  1.1)
+      YM $/contract                                           n=  49 avg $  181 PF 2.84 t  2.7 win 63% yrs+ 6/9 | 18-22 $  241 (t  2.9) 23-26 $   94 (t  0.8)
+   control (not selectable): own >= 0.3 but signs disagree, stop 0.25
+   POOL disagree (control)                                    n=3
+      NQ $/contract                                           n=1
+      ES $/contract                                           n=1
+      YM $/contract                                           n=1
+      NQ own >= 0.3 against the other two: follow own         n=0
+      NQ   ... follow the other two instead                   n=0
+      ES own >= 0.3 against the other two: follow own         n=0
+      ES   ... follow the other two instead                   n=0
+      YM own >= 0.3 against the other two: follow own         n=1
+      YM   ... follow the other two instead                   n=1
+
+======================================================================================================================
+2a. Composite = mean of the three 14:00 -> 14:50 moves in ATR; all legs trade its sign
+   POOL composite >= 0.1, stop None                           n= 930 avg $   39 PF 1.05 t  0.5 win 48% yrs+ 6/9 | 18-22 $  146 (t  1.6) 23-26 $ -133 (t -0.9)
+      NQ $/contract                                           n= 930 avg $   55 PF 1.24 t  2.1 win 52% yrs+ 8/9 | 18-22 $   77 (t  2.6) 23-26 $   19 (t  0.4)
+      ES $/contract                                           n= 930 avg $   -0 PF 1.00 t -0.0 win 47% yrs+ 4/9 | 18-22 $   16 (t  0.8) 23-26 $  -28 (t -1.0)
+      YM $/contract                                           n= 930 avg $    4 PF 1.04 t  0.3 win 48% yrs+ 6/9 | 18-22 $   25 (t  1.5) 23-26 $  -29 (t -1.6)
+   POOL composite >= 0.1, stop 0.25                           n= 930 avg $   84 PF 1.11 t  1.1 win 48% yrs+ 6/9 | 18-22 $  190 (t  2.2) 23-26 $  -88 (t -0.6)
+      NQ $/contract                                           n= 930 avg $   63 PF 1.29 t  2.6 win 52% yrs+ 8/9 | 18-22 $   89 (t  3.2) 23-26 $   21 (t  0.4)
+      ES $/contract                                           n= 930 avg $   10 PF 1.07 t  0.7 win 47% yrs+ 4/9 | 18-22 $   26 (t  1.4) 23-26 $  -15 (t -0.6)
+      YM $/contract                                           n= 930 avg $   11 PF 1.10 t  0.9 win 47% yrs+ 5/9 | 18-22 $   31 (t  2.1) 23-26 $  -23 (t -1.4)
+   POOL composite >= 0.2, stop None                           n= 376 avg $  391 PF 1.49 t  2.5 win 54% yrs+ 7/9 | 18-22 $  590 (t  3.3) 23-26 $   31 (t  0.1)
+      NQ $/contract                                           n= 376 avg $  161 PF 1.69 t  3.2 win 57% yrs+ 8/9 | 18-22 $  212 (t  3.7) 23-26 $   69 (t  0.7)
+      ES $/contract                                           n= 376 avg $   78 PF 1.46 t  2.4 win 54% yrs+ 7/9 | 18-22 $  118 (t  3.0) 23-26 $    5 (t  0.1)
+      YM $/contract                                           n= 376 avg $   60 PF 1.50 t  2.5 win 53% yrs+ 7/9 | 18-22 $  104 (t  3.3) 23-26 $  -19 (t -0.5)
+   POOL composite >= 0.2, stop 0.25                           n= 376 avg $  438 PF 1.60 t  3.1 win 54% yrs+ 8/9 | 18-22 $  636 (t  3.9) 23-26 $   80 (t  0.3)
+      NQ $/contract                                           n= 376 avg $  169 PF 1.77 t  3.6 win 57% yrs+ 8/9 | 18-22 $  227 (t  4.2) 23-26 $   64 (t  0.7)
+      ES $/contract                                           n= 376 avg $   88 PF 1.57 t  2.9 win 53% yrs+ 8/9 | 18-22 $  124 (t  3.3) 23-26 $   24 (t  0.5)
+      YM $/contract                                           n= 376 avg $   65 PF 1.57 t  2.9 win 53% yrs+ 7/9 | 18-22 $  108 (t  3.6) 23-26 $  -14 (t -0.4)
+   POOL composite >= 0.3, stop None                           n= 167 avg $  804 PF 2.04 t  2.9 win 61% yrs+ 7/9 | 18-22 $ 1052 (t  3.6) 23-26 $  337 (t  0.6)
+      NQ $/contract                                           n= 167 avg $  304 PF 2.34 t  3.4 win 65% yrs+ 8/9 | 18-22 $  385 (t  4.0) 23-26 $  152 (t  0.8)
+      ES $/contract                                           n= 167 avg $  168 PF 2.05 t  2.9 win 60% yrs+ 7/9 | 18-22 $  225 (t  3.5) 23-26 $   60 (t  0.5)
+      YM $/contract                                           n= 167 avg $  129 PF 2.15 t  3.0 win 59% yrs+ 7/9 | 18-22 $  187 (t  3.5) 23-26 $   20 (t  0.3)
+   POOL composite >= 0.3, stop 0.25                           n= 167 avg $  900 PF 2.40 t  3.8 win 60% yrs+ 8/9 | 18-22 $ 1113 (t  4.2) 23-26 $  499 (t  1.1)
+      NQ $/contract                                           n= 167 avg $  321 PF 2.64 t  4.0 win 65% yrs+ 8/9 | 18-22 $  409 (t  4.5) 23-26 $  156 (t  1.0)
+      ES $/contract                                           n= 167 avg $  188 PF 2.39 t  3.7 win 59% yrs+ 8/9 | 18-22 $  227 (t  3.7) 23-26 $  116 (t  1.3)
+      YM $/contract                                           n= 167 avg $  134 PF 2.30 t  3.4 win 59% yrs+ 7/9 | 18-22 $  186 (t  3.6) 23-26 $   35 (t  0.6)
+   POOL composite >= 0.4, stop None                           n=  74 avg $ 1167 PF 2.68 t  2.5 win 64% yrs+ 8/9 | 18-22 $ 1556 (t  3.6) 23-26 $  449 (t  0.4)
+      NQ $/contract                                           n=  74 avg $  434 PF 3.20 t  3.1 win 68% yrs+ 8/9 | 18-22 $  543 (t  3.9) 23-26 $  233 (t  0.8)
+      ES $/contract                                           n=  74 avg $  232 PF 2.51 t  2.4 win 62% yrs+ 8/9 | 18-22 $  328 (t  3.2) 23-26 $   56 (t  0.3)
+      YM $/contract                                           n=  74 avg $  154 PF 2.33 t  2.1 win 59% yrs+ 7/9 | 18-22 $  248 (t  2.8) 23-26 $  -20 (t -0.2)
+   POOL composite >= 0.4, stop 0.25                           n=  74 avg $ 1205 PF 3.09 t  3.1 win 62% yrs+ 8/9 | 18-22 $ 1495 (t  3.5) 23-26 $  671 (t  0.9)
+      NQ $/contract                                           n=  74 avg $  411 PF 3.18 t  3.2 win 66% yrs+ 8/9 | 18-22 $  546 (t  3.9) 23-26 $  161 (t  0.6)
+      ES $/contract                                           n=  74 avg $  243 PF 2.80 t  2.8 win 61% yrs+ 7/9 | 18-22 $  300 (t  2.9) 23-26 $  136 (t  0.9)
+      YM $/contract                                           n=  74 avg $  155 PF 2.45 t  2.3 win 58% yrs+ 6/9 | 18-22 $  219 (t  2.4) 23-26 $   36 (t  0.4)
+   POOL composite >= 0.5, stop None                           n=  37 avg $ 1422 PF 2.71 t  1.9 win 78% yrs+ 8/9 | 18-22 $ 2021 (t  3.8) 23-26 $  544 (t  0.3)
+      NQ $/contract                                           n=  37 avg $  486 PF 3.00 t  2.2 win 78% yrs+ 8/9 | 18-22 $  650 (t  4.0) 23-26 $  246 (t  0.5)
+      ES $/contract                                           n=  37 avg $  277 PF 2.62 t  1.9 win 76% yrs+ 8/9 | 18-22 $  418 (t  3.6) 23-26 $   71 (t  0.2)
+      YM $/contract                                           n=  37 avg $  165 PF 2.25 t  1.6 win 70% yrs+ 7/9 | 18-22 $  298 (t  3.3) 23-26 $  -29 (t -0.1)
+   POOL composite >= 0.5, stop 0.25                           n=  37 avg $ 1504 PF 3.54 t  2.7 win 76% yrs+ 8/9 | 18-22 $ 1882 (t  3.4) 23-26 $  950 (t  0.8)
+      NQ $/contract                                           n=  37 avg $  442 PF 2.98 t  2.4 win 76% yrs+ 8/9 | 18-22 $  656 (t  4.1) 23-26 $  128 (t  0.3)
+      ES $/contract                                           n=  37 avg $  296 PF 3.20 t  2.5 win 73% yrs+ 8/9 | 18-22 $  354 (t  2.8) 23-26 $  212 (t  0.9)
+      YM $/contract                                           n=  37 avg $  170 PF 2.52 t  2.1 win 68% yrs+ 7/9 | 18-22 $  235 (t  2.3) 23-26 $   75 (t  0.5)
+
+2b. Which part of the hour: 14:30 -> 14:50 (last 20 min) vs 14:00 -> 14:30, composite, stop 0.25
+   POOL composite 14:30->14:50 >= 0.1                         n= 622 avg $  124 PF 1.15 t  1.2 win 48% yrs+ 5/9 | 18-22 $  237 (t  2.0) 23-26 $  -83 (t -0.4)
+      NQ $/contract                                           n= 622 avg $   61 PF 1.25 t  1.8 win 49% yrs+ 7/9 | 18-22 $   94 (t  2.4) 23-26 $    1 (t  0.0)
+      ES $/contract                                           n= 622 avg $   24 PF 1.14 t  1.1 win 47% yrs+ 4/9 | 18-22 $   45 (t  1.7) 23-26 $  -13 (t -0.3)
+      YM $/contract                                           n= 622 avg $   25 PF 1.20 t  1.5 win 48% yrs+ 5/9 | 18-22 $   48 (t  2.2) 23-26 $  -18 (t -0.7)
+   POOL composite 14:30->14:50 >= 0.15                        n= 303 avg $  296 PF 1.36 t  1.9 win 49% yrs+ 6/9 | 18-22 $  391 (t  2.2) 23-26 $   99 (t  0.3)
+      NQ $/contract                                           n= 303 avg $  121 PF 1.50 t  2.4 win 50% yrs+ 8/9 | 18-22 $  156 (t  2.7) 23-26 $   49 (t  0.5)
+      ES $/contract                                           n= 303 avg $   70 PF 1.41 t  2.0 win 49% yrs+ 6/9 | 18-22 $   92 (t  2.2) 23-26 $   24 (t  0.4)
+      YM $/contract                                           n= 303 avg $   56 PF 1.46 t  2.1 win 49% yrs+ 5/9 | 18-22 $   85 (t  2.4) 23-26 $   -2 (t -0.1)
+   POOL composite 14:30->14:50 >= 0.2                         n= 170 avg $  629 PF 1.81 t  2.7 win 52% yrs+ 8/9 | 18-22 $  773 (t  2.8) 23-26 $  366 (t  0.8)
+      NQ $/contract                                           n= 170 avg $  228 PF 1.98 t  3.0 win 56% yrs+ 8/9 | 18-22 $  288 (t  3.2) 23-26 $  119 (t  0.9)
+      ES $/contract                                           n= 170 avg $  148 PF 1.89 t  2.7 win 52% yrs+ 8/9 | 18-22 $  182 (t  2.6) 23-26 $   84 (t  1.0)
+      YM $/contract                                           n= 170 avg $  105 PF 1.85 t  2.5 win 53% yrs+ 7/9 | 18-22 $  151 (t  2.7) 23-26 $   21 (t  0.4)
+   POOL composite 14:30->14:50 >= 0.3                         n=  58 avg $ 1194 PF 2.48 t  2.4 win 57% yrs+ 6/9 | 18-22 $ 1295 (t  2.2) 23-26 $ 1071 (t  1.3)
+      NQ $/contract                                           n=  58 avg $  385 PF 2.44 t  2.3 win 60% yrs+ 7/9 | 18-22 $  480 (t  2.5) 23-26 $  269 (t  0.9)
+      ES $/contract                                           n=  58 avg $  257 PF 2.53 t  2.3 win 55% yrs+ 6/9 | 18-22 $  271 (t  1.8) 23-26 $  241 (t  1.4)
+      YM $/contract                                           n=  58 avg $  161 PF 2.18 t  1.8 win 55% yrs+ 5/9 | 18-22 $  212 (t  1.6) 23-26 $   99 (t  0.9)
+   POOL composite 14:00->14:30 >= 0.1                         n= 663 avg $  184 PF 1.25 t  1.9 win 50% yrs+ 6/9 | 18-22 $  274 (t  2.5) 23-26 $   43 (t  0.3)
+      NQ $/contract                                           n= 663 avg $   88 PF 1.39 t  2.8 win 54% yrs+ 7/9 | 18-22 $  115 (t  3.1) 23-26 $   47 (t  0.8)
+      ES $/contract                                           n= 663 avg $   23 PF 1.14 t  1.2 win 49% yrs+ 6/9 | 18-22 $   36 (t  1.5) 23-26 $    2 (t  0.1)
+      YM $/contract                                           n= 663 avg $   17 PF 1.14 t  1.1 win 50% yrs+ 5/9 | 18-22 $   35 (t  1.7) 23-26 $  -11 (t -0.6)
+   POOL composite 14:00->14:30 >= 0.2                         n= 227 avg $  424 PF 1.56 t  2.4 win 56% yrs+ 8/9 | 18-22 $  614 (t  3.1) 23-26 $  150 (t  0.5)
+      NQ $/contract                                           n= 227 avg $  163 PF 1.73 t  2.9 win 60% yrs+ 7/9 | 18-22 $  220 (t  3.5) 23-26 $   80 (t  0.8)
+      ES $/contract                                           n= 227 avg $   80 PF 1.51 t  2.3 win 56% yrs+ 7/9 | 18-22 $  108 (t  2.6) 23-26 $   40 (t  0.7)
+      YM $/contract                                           n= 227 avg $   46 PF 1.39 t  1.9 win 55% yrs+ 5/9 | 18-22 $   84 (t  2.6) 23-26 $   -9 (t -0.2)
+   POOL composite 14:00->14:30 >= 0.3                         n=  70 avg $  785 PF 2.07 t  2.4 win 59% yrs+ 8/9 | 18-22 $  880 (t  2.0) 23-26 $  657 (t  1.3)
+      NQ $/contract                                           n=  70 avg $  255 PF 2.13 t  2.4 win 61% yrs+ 7/9 | 18-22 $  309 (t  2.3) 23-26 $  182 (t  1.0)
+      ES $/contract                                           n=  70 avg $  153 PF 2.00 t  2.3 win 59% yrs+ 7/9 | 18-22 $  155 (t  1.7) 23-26 $  152 (t  1.5)
+      YM $/contract                                           n=  70 avg $   74 PF 1.59 t  1.5 win 56% yrs+ 5/9 | 18-22 $   97 (t  1.4) 23-26 $   44 (t  0.7)
+   POOL composite >= 0.2 & last 20 min same sign              n= 330 avg $  455 PF 1.62 t  3.0 win 53% yrs+ 7/9 | 18-22 $  702 (t  4.0) 23-26 $  -19 (t -0.1)
+      NQ $/contract                                           n= 330 avg $  171 PF 1.77 t  3.4 win 56% yrs+ 8/9 | 18-22 $  247 (t  4.3) 23-26 $   24 (t  0.2)
+      ES $/contract                                           n= 330 avg $   93 PF 1.60 t  2.8 win 53% yrs+ 8/9 | 18-22 $  137 (t  3.5) 23-26 $    8 (t  0.1)
+      YM $/contract                                           n= 330 avg $   70 PF 1.61 t  2.8 win 53% yrs+ 7/9 | 18-22 $  120 (t  3.7) 23-26 $  -26 (t -0.7)
+   POOL composite >= 0.2 & last 20 min opposite               n=  46 avg $  316 PF 1.43 t  0.9 win 57% yrs+ 5/9 | 18-22 $   64 (t  0.1) 23-26 $  615 (t  1.2)
+      NQ $/contract                                           n=  46 avg $  156 PF 1.76 t  1.4 win 65% yrs+ 5/9 | 18-22 $   53 (t  0.3) 23-26 $  279 (t  1.8)
+      ES $/contract                                           n=  46 avg $   55 PF 1.36 t  0.8 win 52% yrs+ 5/9 | 18-22 $    7 (t  0.1) 23-26 $  112 (t  1.2)
+      YM $/contract                                           n=  46 avg $   26 PF 1.24 t  0.6 win 54% yrs+ 6/9 | 18-22 $    7 (t  0.1) 23-26 $   49 (t  0.7)
+   POOL composite >= 0.3 & last 20 min same sign              n= 152 avg $  939 PF 2.51 t  3.7 win 60% yrs+ 8/9 | 18-22 $ 1174 (t  4.3) 23-26 $  460 (t  0.9)
+      NQ $/contract                                           n= 152 avg $  329 PF 2.73 t  3.9 win 65% yrs+ 8/9 | 18-22 $  427 (t  4.5) 23-26 $  128 (t  0.8)
+      ES $/contract                                           n= 152 avg $  197 PF 2.48 t  3.7 win 59% yrs+ 8/9 | 18-22 $  240 (t  3.7) 23-26 $  110 (t  1.1)
+      YM $/contract                                           n= 152 avg $  145 PF 2.42 t  3.4 win 59% yrs+ 7/9 | 18-22 $  201 (t  3.7) 23-26 $   32 (t  0.5)
+   POOL composite >= 0.3 & last 20 min opposite               n=  15 avg $  503 PF 1.61 t  0.7 win 60% yrs+ 5/8 | 18-22 $  230 (t  0.2) 23-26 $  741 (t  0.8)
+      NQ $/contract                                           n=  15 avg $  241 PF 1.93 t  1.0 win 60% yrs+ 5/8 | 18-22 $  142 (t  0.4) 23-26 $  328 (t  1.0)
+      ES $/contract                                           n=  15 avg $   96 PF 1.60 t  0.7 win 60% yrs+ 5/8 | 18-22 $   36 (t  0.2) 23-26 $  149 (t  0.8)
+      YM $/contract                                           n=  15 avg $   20 PF 1.18 t  0.2 win 53% yrs+ 5/8 | 18-22 $  -26 (t -0.2) 23-26 $   60 (t  0.6)
+
+2c. Whole-session move (8:31 open -> 14:50, the leveraged-ETF rebalancing hypothesis), composite, stop 0.25
+   POOL composite 8:31->14:50 >= 0.25                         n=1258 avg $  -63 PF 0.92 t -1.0 win 45% yrs+ 4/9 | 18-22 $   87 (t  1.2) 23-26 $ -259 (t -2.5)
+      NQ $/contract                                           n=1258 avg $    3 PF 1.01 t  0.2 win 48% yrs+ 6/9 | 18-22 $   45 (t  1.9) 23-26 $  -51 (t -1.5)
+      ES $/contract                                           n=1258 avg $  -14 PF 0.91 t -1.1 win 44% yrs+ 2/9 | 18-22 $   11 (t  0.7) 23-26 $  -47 (t -2.4)
+      YM $/contract                                           n=1258 avg $   -3 PF 0.97 t -0.4 win 44% yrs+ 3/9 | 18-22 $   22 (t  1.7) 23-26 $  -36 (t -3.0)
+   POOL composite 8:31->14:50 >= 0.5                          n= 629 avg $  -53 PF 0.94 t -0.6 win 45% yrs+ 5/9 | 18-22 $   80 (t  0.7) 23-26 $ -227 (t -1.4)
+      NQ $/contract                                           n= 629 avg $    6 PF 1.02 t  0.2 win 47% yrs+ 4/9 | 18-22 $   52 (t  1.5) 23-26 $  -55 (t -1.1)
+      ES $/contract                                           n= 629 avg $  -15 PF 0.91 t -0.8 win 44% yrs+ 5/9 | 18-22 $    4 (t  0.2) 23-26 $  -41 (t -1.4)
+      YM $/contract                                           n= 629 avg $   -4 PF 0.97 t -0.3 win 45% yrs+ 4/9 | 18-22 $   19 (t  1.1) 23-26 $  -34 (t -1.8)
+   POOL composite 8:31->14:50 >= 0.75                         n= 289 avg $ -103 PF 0.88 t -0.7 win 41% yrs+ 4/9 | 18-22 $   -5 (t -0.0) 23-26 $ -242 (t -1.0)
+      NQ $/contract                                           n= 289 avg $   -3 PF 0.99 t -0.1 win 46% yrs+ 6/9 | 18-22 $   25 (t  0.5) 23-26 $  -45 (t -0.5)
+      ES $/contract                                           n= 289 avg $  -25 PF 0.86 t -0.9 win 39% yrs+ 4/9 | 18-22 $  -12 (t -0.4) 23-26 $  -42 (t -0.9)
+      YM $/contract                                           n= 289 avg $  -13 PF 0.89 t -0.7 win 40% yrs+ 4/9 | 18-22 $    7 (t  0.2) 23-26 $  -42 (t -1.4)
+   POOL composite 8:31->14:50 >= 1.0                          n= 126 avg $   90 PF 1.10 t  0.4 win 48% yrs+ 4/9 | 18-22 $  100 (t  0.4) 23-26 $   71 (t  0.1)
+      NQ $/contract                                           n= 126 avg $   53 PF 1.19 t  0.6 win 52% yrs+ 5/9 | 18-22 $   62 (t  0.8) 23-26 $   36 (t  0.2)
+      ES $/contract                                           n= 126 avg $   19 PF 1.10 t  0.4 win 45% yrs+ 4/9 | 18-22 $   13 (t  0.2) 23-26 $   32 (t  0.3)
+      YM $/contract                                           n= 126 avg $   20 PF 1.15 t  0.6 win 44% yrs+ 4/9 | 18-22 $   30 (t  0.7) 23-26 $    2 (t  0.0)
+   POOL composite >= 0.3 & session move >= 0.5 same sign      n=  90 avg $  916 PF 2.31 t  2.7 win 62% yrs+ 6/9 | 18-22 $ 1413 (t  3.9) 23-26 $   16 (t  0.0)
+      NQ $/contract                                           n=  90 avg $  317 PF 2.41 t  2.7 win 68% yrs+ 6/9 | 18-22 $  514 (t  4.0) 23-26 $  -39 (t -0.2)
+      ES $/contract                                           n=  90 avg $  195 PF 2.35 t  2.8 win 61% yrs+ 7/9 | 18-22 $  284 (t  3.5) 23-26 $   34 (t  0.3)
+      YM $/contract                                           n=  90 avg $  133 PF 2.16 t  2.6 win 60% yrs+ 6/9 | 18-22 $  231 (t  3.5) 23-26 $  -44 (t -0.6)
+   POOL composite >= 0.3 & session move >= 1.0 same sign      n=  37 avg $  496 PF 1.51 t  0.9 win 59% yrs+ 6/8 | 18-22 $ 1169 (t  2.3) 23-26 $ -904 (t -0.7)
+      NQ $/contract                                           n=  37 avg $  121 PF 1.35 t  0.6 win 68% yrs+ 5/8 | 18-22 $  455 (t  2.8) 23-26 $ -574 (t -1.4)
+      ES $/contract                                           n=  37 avg $  136 PF 1.69 t  1.1 win 57% yrs+ 6/8 | 18-22 $  237 (t  2.0) 23-26 $  -76 (t -0.3)
+      YM $/contract                                           n=  37 avg $  105 PF 1.70 t  1.2 win 57% yrs+ 6/8 | 18-22 $  199 (t  2.0) 23-26 $  -91 (t -0.5)
+   OLS 2018-22: y(14:50->15:00) on 14:00->14:30 +0.0982 (t 3.5), 14:30->14:50 +0.1376 (t 4.8), 8:31->14:00 +0.0044 (t 0.6)  n=1248
+   OLS 2023-26: y(14:50->15:00) on 14:00->14:30 +0.0598 (t 2.0), 14:30->14:50 +0.0553 (t 1.7), 8:31->14:00 -0.0047 (t -0.6)  n=933
+
+======================================================================================================================
+Pick: every selectable variant ranked by the 2018-22 t of the pooled daily stream (holdout not used)
+   POOL all three >= 0.3 same sign, stop None                 n= 101 avg $ 1150 PF 2.74 t  3.2 win 64% yrs+ 8/9 | 18-22 $ 1562 (t  4.4) 23-26 $  407 (t  0.5)  [18-22 t 4.43]
+   POOL all three >= 0.4 same sign, stop None                 n=  49 avg $ 1468 PF 3.01 t  2.4 win 71% yrs+ 8/9 | 18-22 $ 1968 (t  4.4) 23-26 $  742 (t  0.6)  [18-22 t 4.39]
+   POOL all three >= 0.3 same sign, stop 0.25                 n= 101 avg $ 1172 PF 3.02 t  3.7 win 62% yrs+ 8/9 | 18-22 $ 1511 (t  4.3) 23-26 $  559 (t  0.9)  [18-22 t 4.27]
+   POOL composite >= 0.3 & last 20 min same sign              n= 152 avg $  939 PF 2.51 t  3.7 win 60% yrs+ 8/9 | 18-22 $ 1174 (t  4.3) 23-26 $  460 (t  0.9)  [18-22 t 4.27]
+   POOL composite >= 0.3, stop 0.25                           n= 167 avg $  900 PF 2.40 t  3.8 win 60% yrs+ 8/9 | 18-22 $ 1113 (t  4.2) 23-26 $  499 (t  1.1)  [18-22 t 4.19]
+   POOL all three >= 0.2 same sign, stop 0.25                 n= 264 avg $  645 PF 1.93 t  3.6 win 57% yrs+ 8/9 | 18-22 $  842 (t  4.2) 23-26 $  266 (t  0.7)  [18-22 t 4.18]
+   POOL own >= 0.3 stop 0.25                                  n= 250 avg $  546 PF 2.11 t  3.7 win 56% yrs+ 8/9 | 18-22 $  705 (t  4.1) 23-26 $  278 (t  1.0)  [18-22 t 4.06]
+   POOL own >= 0.3 & signs agree, stop 0.25                   n= 247 avg $  554 PF 2.12 t  3.7 win 56% yrs+ 8/9 | 18-22 $  713 (t  4.1) 23-26 $  287 (t  1.0)  [18-22 t 4.06]
+   POOL all three >= 0.4 same sign, stop 0.25                 n=  49 avg $ 1529 PF 3.79 t  3.2 win 69% yrs+ 8/9 | 18-22 $ 1863 (t  4.0) 23-26 $ 1047 (t  1.1)  [18-22 t 4.04]
+   POOL composite >= 0.2 & last 20 min same sign              n= 330 avg $  455 PF 1.62 t  3.0 win 53% yrs+ 7/9 | 18-22 $  702 (t  4.0) 23-26 $  -19 (t -0.1)  [18-22 t 4.01]
+   POOL composite >= 0.3 & session move >= 0.5 same sign      n=  90 avg $  916 PF 2.31 t  2.7 win 62% yrs+ 6/9 | 18-22 $ 1413 (t  3.9) 23-26 $   16 (t  0.0)  [18-22 t 3.89]
+   POOL own >= 0.4 stop None                                  n= 113 avg $  677 PF 2.14 t  2.3 win 55% yrs+ 8/9 | 18-22 $ 1010 (t  3.9) 23-26 $  114 (t  0.2)  [18-22 t 3.87]
+
+   picked among the stop-0.25 variants (no-stop variants are listed for reference; Apex needs a stop): all three >= 0.3 same sign, stop 0.25 [18-22 t 4.27]
+
+======================================================================================================================
+4. Entry / exit timing for the pick (all three >= 0.3 same sign, stop 0.25); the 14:51 bar opens at 14:50:00 = the first imbalance message
+   POOL decide 1450 (move from 14:00), enter 1451 open, exit 1500 close n= 101 avg $ 1172 PF 3.02 t  3.7 win 62% yrs+ 8/9 | 18-22 $ 1511 (t  4.3) 23-26 $  559 (t  0.9)  [18-22 t 4.27]
+   POOL decide 1450 (move from 14:00), enter 1451 open, exit 1459 close n= 101 avg $  965 PF 2.84 t  3.6 win 60% yrs+ 8/9 | 18-22 $ 1225 (t  4.1) 23-26 $  495 (t  0.9)  [18-22 t 4.07]
+   POOL decide 1450 (move from 14:00), enter 1452 open, exit 1500 close n= 101 avg $  825 PF 2.22 t  2.8 win 60% yrs+ 8/9 | 18-22 $ 1128 (t  3.5) 23-26 $  276 (t  0.5)  [18-22 t 3.50]
+   POOL decide 1450 (move from 14:00), enter 1452 open, exit 1459 close n= 101 avg $  616 PF 2.06 t  2.6 win 63% yrs+ 8/9 | 18-22 $  827 (t  3.2) 23-26 $  234 (t  0.5)  [18-22 t 3.16]
+   POOL decide 1450 (move from 14:00), enter 1453 open, exit 1500 close n= 101 avg $  740 PF 2.20 t  2.7 win 63% yrs+ 8/9 | 18-22 $  985 (t  3.4) 23-26 $  297 (t  0.5)  [18-22 t 3.42]
+   POOL decide 1450 (move from 14:00), enter 1453 open, exit 1459 close n= 101 avg $  539 PF 2.07 t  2.5 win 64% yrs+ 8/9 | 18-22 $  689 (t  3.0) 23-26 $  268 (t  0.6)  [18-22 t 3.01]
+   POOL decide 1451 (move from 14:00), enter 1452 open, exit 1500 close n= 128 avg $  931 PF 2.71 t  3.8 win 64% yrs+ 8/9 | 18-22 $ 1176 (t  4.6) 23-26 $  393 (t  0.7)  [18-22 t 4.56]
+   POOL decide 1452 (move from 14:00), enter 1453 open, exit 1500 close n= 130 avg $  787 PF 2.37 t  3.4 win 63% yrs+ 8/9 | 18-22 $  914 (t  3.7) 23-26 $  538 (t  1.1)  [18-22 t 3.67]
+   final pick (2018-22 t): all three >= 0.3 same sign, stop 0.25, decide 1451, enter 1452 open, exit 1500 close
+
+======================================================================================================================
+3. Day types for the pick (pre-registered: 4 splits, 8 cells; descriptive unless a cell beats the rest in both periods)
+   POOL month-end                                             n=7
+   POOL not month-end                                         n= 121 avg $  826 PF 2.43 t  3.3 win 63% yrs+ 8/9 | 18-22 $ 1179 (t  4.4) 23-26 $   24 (t  0.0)
+   POOL Friday                                                n=  25 avg $ 1207 PF 4.68 t  1.9 win 68% yrs+ 6/8 | 18-22 $  868 (t  1.3) 23-26 $ 2563 (t  1.4)
+   POOL not Friday                                            n= 103 avg $  864 PF 2.44 t  3.3 win 63% yrs+ 8/9 | 18-22 $ 1266 (t  4.6) 23-26 $   83 (t  0.2)
+   POOL 3rd Friday (opex)                                     n=2
+   POOL not 3rd Friday (opex)                                 n= 126 avg $  943 PF 2.70 t  3.8 win 64% yrs+ 8/9 | 18-22 $ 1199 (t  4.6) 23-26 $  393 (t  0.7)
+   POOL prior VIX > 252d median                               n=  90 avg $ 1156 PF 3.04 t  3.6 win 64% yrs+ 8/9 | 18-22 $ 1327 (t  4.1) 23-26 $  658 (t  0.8)
+   POOL not prior VIX > 252d median                           n=  38 avg $  399 PF 1.81 t  1.3 win 63% yrs+ 5/8 | 18-22 $  692 (t  2.3) 23-26 $   36 (t  0.1)
+
+======================================================================================================================
+Full report: all three >= 0.3 same sign, stop 0.25, decide 1451, enter 1452 open, exit 1500 close (pooled NQ-eq $ = each leg sized to NQ's ATR risk)
+   NQ $/contract whole                                        n= 128 avg $  309 PF 2.84 t  3.8 win 67% yrs+ 8/9 | 18-22 $  415 (t  4.7) 23-26 $   75 (t  0.5)
+   NQ   longs                                                 n=  52 avg $  385 PF 4.67 t  3.4 win 73% yrs+ 7/9 | 18-22 $  453 (t  3.5) 23-26 $  182 (t  0.8)
+   NQ   shorts                                                n=  76 avg $  257 PF 2.22 t  2.3 win 63% yrs+ 7/9 | 18-22 $  385 (t  3.2) 23-26 $   24 (t  0.1)
+   by year: 2018 $3,648 | 2019 $654 | 2020 $14,335 | 2021 $7,813 | 2022 $10,066 | 2023 $4,298 | 2024 $48 | 2025 $-4,865 | 2026 $3,536
+   ES $/contract whole                                        n= 128 avg $  199 PF 2.61 t  3.7 win 64% yrs+ 8/9 | 18-22 $  251 (t  4.1) 23-26 $   85 (t  0.8)
+   ES   longs                                                 n=  52 avg $  249 PF 3.83 t  2.9 win 63% yrs+ 8/9 | 18-22 $  290 (t  2.9) 23-26 $  127 (t  0.7)
+   ES   shorts                                                n=  76 avg $  165 PF 2.11 t  2.3 win 64% yrs+ 8/9 | 18-22 $  220 (t  2.9) 23-26 $   64 (t  0.5)
+   by year: 2018 $2,765 | 2019 $433 | 2020 $8,900 | 2021 $4,528 | 2022 $5,462 | 2023 $2,515 | 2024 $2,879 | 2025 $-3,158 | 2026 $1,145
+   YM $/contract whole                                        n= 128 avg $  162 PF 2.99 t  3.9 win 64% yrs+ 7/9 | 18-22 $  214 (t  4.1) 23-26 $   48 (t  0.7)
+   YM   longs                                                 n=  52 avg $  192 PF 3.99 t  2.7 win 65% yrs+ 7/9 | 18-22 $  230 (t  2.6) 23-26 $   78 (t  0.7)
+   YM   shorts                                                n=  76 avg $  142 PF 2.52 t  2.8 win 63% yrs+ 7/9 | 18-22 $  202 (t  3.3) 23-26 $   33 (t  0.4)
+   by year: 2018 $3,300 | 2019 $320 | 2020 $8,145 | 2021 $3,165 | 2022 $3,912 | 2023 $1,925 | 2024 $1,708 | 2025 $-1,713 | 2026 $-15
+   POOL whole (per active day)                                n= 128 avg $  931 PF 2.71 t  3.8 win 64% yrs+ 8/9 | 18-22 $ 1176 (t  4.6) 23-26 $  393 (t  0.7)
+   POOL longs                                                 n=  52 avg $ 1161 PF 4.34 t  3.2 win 65% yrs+ 8/9 | 18-22 $ 1308 (t  3.4) 23-26 $  720 (t  0.8)
+   POOL shorts                                                n=  76 avg $  774 PF 2.14 t  2.4 win 63% yrs+ 8/9 | 18-22 $ 1071 (t  3.1) 23-26 $  236 (t  0.4)
+   by year: 2018 $11,566 | 2019 $1,685 | 2020 $37,331 | 2021 $24,509 | 2022 $28,385 | 2023 $12,625 | 2024 $11,770 | 2025 $-14,411 | 2026 $5,753
+   metrics 2018-2026 (daily $, $50k):
+             trades win    avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+pool            128 64%   $931 $13,275   1.22    2.52          2.71 $23,388   0.57  4.88       5.44
+pool longs       52 65% $1,161  $6,721   1.00    3.30          4.34  $5,969   1.13  2.76       4.87
+pool shorts      76 63%   $774  $6,555   0.77    1.35          2.14 $19,282   0.34  5.89       2.23
+NQ /contract    128 67%   $309  $4,404   1.22    2.72          2.84  $8,933   0.49  3.51       2.51
+ES /contract    128 64%   $199  $2,837   1.17    2.53          2.61  $4,848   0.59  2.34       2.43
+YM /contract    128 64%   $162  $2,315   1.23    3.07          2.99  $2,733   0.85  1.51       3.06
+   metrics 2023-2026:
+             trades win  avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+pool             40 55% $393 $4,072   0.38    0.60          1.38 $23,388   0.17 15.93       0.51
+pool longs       13 46% $720 $2,420   0.43    0.96          1.97  $5,969   0.41  5.48       0.88
+pool shorts      27 59% $236 $1,651   0.18    0.26          1.20 $19,282   0.09 14.48       0.23
+NQ /contract     40 55%  $75   $781   0.23    0.36          1.22  $8,933   0.09  8.59       0.18
+ES /contract     40 57%  $85   $876   0.39    0.64          1.41  $4,848   0.18  4.72       0.37
+YM /contract     40 55%  $48   $495   0.37    0.60          1.40  $2,733   0.18  2.95       0.34
+   bootstrap (10-day blocks, 3,000 runs), 2023+:
+                                  actual       p5       p50       p95
+name              metric                                             
+pool 2023+        sharpe            0.38    -0.46      0.43      1.28
+                  sortino           0.60    -0.58      0.68      3.39
+                  pf_day            1.38     0.68      1.44      3.46
+                  calmar            0.17    -0.16      0.26      1.84
+                  ulcer            15.93     2.59     10.30     36.10
+                  max_dd       23,388.08 6,359.84 15,878.87 37,202.82
+                  P(Sharpe<=0)       NaN      NaN      0.22       NaN
+pool longs 2023+  sharpe            0.43    -0.55      0.43      1.05
+                  sortino           0.96    -0.68      1.03      7.37
+                  pf_day            1.97     0.43      1.99      8.92
+                  calmar            0.41    -0.21      0.41      3.70
+                  ulcer             5.48     0.88      4.25     15.27
+                  max_dd        5,968.63 1,353.70  5,968.63 14,338.60
+                  P(Sharpe<=0)       NaN      NaN      0.19       NaN
+pool shorts 2023+ sharpe            0.18    -0.68      0.20      1.10
+                  sortino           0.26    -0.78      0.29      2.76
+                  pf_day            1.20     0.49      1.23      3.63
+                  calmar            0.09    -0.22      0.12      1.39
+                  ulcer            14.48     2.71     11.01     36.49
+                  max_dd       19,281.76 5,991.35 14,820.09 33,633.76
+                  P(Sharpe<=0)       NaN      NaN      0.35       NaN
+NQ 2023+          sharpe            0.23    -0.61      0.25      1.11
+                  sortino           0.36    -0.75      0.39      2.56
+                  pf_day            1.22     0.60      1.24      2.89
+                  calmar            0.09    -0.20      0.15      1.42
+                  ulcer             8.59     1.38      4.56     14.11
+                  max_dd        8,932.75 2,016.61  5,596.37 12,646.29
+                  P(Sharpe<=0)       NaN      NaN      0.32       NaN
+ES 2023+          sharpe            0.39    -0.48      0.44      1.27
+                  sortino           0.64    -0.60      0.73      3.74
+                  pf_day            1.41     0.67      1.47      3.65
+                  calmar            0.18    -0.17      0.28      2.04
+                  ulcer             4.72     0.71      2.57      8.34
+                  max_dd        4,848.13 1,205.83  3,344.27  7,698.07
+                  P(Sharpe<=0)       NaN      NaN      0.22       NaN
+YM 2023+          sharpe            0.37    -0.49      0.40      1.20
+                  sortino           0.60    -0.61      0.67      3.72
+                  pf_day            1.40     0.64      1.44      3.62
+                  calmar            0.18    -0.18      0.27      2.11
+                  ulcer             2.95     0.41      1.55      5.11
+                  max_dd        2,733.17   645.00  1,951.25  4,495.95
+                  P(Sharpe<=0)       NaN      NaN      0.23       NaN
+   permutation, 2023+:
+                  actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+pool 2023+          $23,388      95% $14,893 $23,554 $27,026        100%        100%        100%
+pool longs 2023+     $5,969      53%  $5,812  $8,287  $9,037        100%        100%        100%
+pool shorts 2023+   $19,282      86% $14,365 $21,930 $25,248        100%        100%        100%
+NQ 2023+             $8,933      98%  $5,162  $8,083  $9,333        100%        100%         98%
+ES 2023+             $4,848      96%  $3,035  $4,764  $5,502        100%         96%         52%
+YM 2023+             $2,733      92%  $1,868  $2,875  $3,275        100%         40%          3%
+
+   placebo 1: the same rule decided at other times (51-minute move, enter 1 min later, out 9 min after the decision)
+   POOL decide 1051                                           n= 114 avg $ -180 PF 0.78 t -0.8 win 44% yrs+ 4/9 | 18-22 $ -358 (t -1.9) 23-26 $  103 (t  0.2)
+   POOL decide 1151                                           n=  78 avg $ -125 PF 0.82 t -0.6 win 44% yrs+ 4/9 | 18-22 $  -67 (t -0.3) 23-26 $ -208 (t -0.6)
+   POOL decide 1251                                           n=  84 avg $  255 PF 1.44 t  1.0 win 48% yrs+ 5/9 | 18-22 $  303 (t  1.2) 23-26 $  200 (t  0.4)
+   POOL decide 1321                                           n=  94 avg $ -301 PF 0.64 t -1.5 win 39% yrs+ 4/9 | 18-22 $ -568 (t -2.5) 23-26 $  111 (t  0.3)
+   POOL decide 1351                                           n= 106 avg $   -9 PF 0.99 t -0.0 win 45% yrs+ 4/9 | 18-22 $ -271 (t -1.6) 23-26 $  345 (t  0.9)
+   POOL decide 1421                                           n= 104 avg $  145 PF 1.20 t  0.6 win 49% yrs+ 5/9 | 18-22 $   86 (t  0.4) 23-26 $  242 (t  0.5)
+   POOL decide 1451                                           n= 128 avg $  931 PF 2.71 t  3.8 win 64% yrs+ 8/9 | 18-22 $ 1176 (t  4.6) 23-26 $  393 (t  0.7)
+   placebo 2: random sides on the same days (one coin per day for all legs; full re-simulation with the stop), 500 draws
+   rule $931 per active day; random sides: mean $22, 95th $417, 99th $543, max $602; share >= rule 0.0000
+
+   correlation with the NQ plan's daily net (VB, ONB ML2, MON, EOS, LDF, NFP; per NQ): all days -0.021, days both trade -0.085 (n=100)
+   pick on Late-Day Flow days: 71 of 128, avg $428; other days $1558
+
+   NQ 15-day ATR median 2023+: 303 pts -> 0.25 ATR stop = $1,516 per NQ ($152 per MNQ)
+   ES leg weight (contracts per NQ-eq), median 2023+: 2.00
+   YM leg weight (contracts per NQ-eq), median 2023+: 2.79
+   daily P&L correlation between the legs on trade days:
+       NQ     ES     YM
+NQ  1.000  0.870  0.835
+ES  0.870  1.000  0.963
+YM  0.835  0.963  1.000
+   fixed micro size (net scaled from the full contracts; micro commissions differ slightly):
+                             trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+1 MNQ + 2 MES + 3 MYM           128 64% $119 $1,701   1.24    2.85          2.87 $2,507   0.68  1.41       2.41
+1 MNQ + 2 MES + 3 MYM, 2023+     40 55%  $39   $401   0.36    0.55          1.36 $2,507   0.16  2.62       0.31
+1 MNQ only                      128 67%  $31   $440   1.22    2.72          2.84   $893   0.49  0.60       1.46
+1 MNQ only, 2023+                40 55%   $8    $78   0.23    0.35          1.22   $893   0.09  0.98       0.16
+
+   variants tried: 0 own 6, 1 agree 12, 2 composite 10, 2 split 11, 2 session 6, 4 timing 7, 3 day types 8; total 60
