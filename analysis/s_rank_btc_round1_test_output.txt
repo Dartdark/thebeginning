@@ -1,0 +1,337 @@
+S-rank program, Bitcoin round 1 (S_RANK_PROGRAM.md, 2026-10-14): CME Bitcoin futures, Dec 2018 - Oct 2026, CT.
+BTC grid 20181217 .. 20261013; 2002 weekday sessions from 2019; per 1 BTC after $25 + 1 tick per market/stop fill
+
+==============================================================================================================
+H1. CME weekend gap (Friday last price -> Sunday 17:00 reopen) and the Mon-Thu 16:00-17:00 break gap
+   401 Sunday reopens 2019-01-07 .. 2026-10-12; |gap| median 0.23 ATR, 75% 0.47, 90% 0.85; mean signed gap +0.071 ATR
+   continuation in the gap's direction, mean ATR (no costs), and gap-fill rate by Monday 15:00, by |gap|:
+                  n  Sun 20:00  Mon 02:00  Mon 08:30  Mon 15:00   fill
+   bucket                                                             
+   [0.0, 0.1)   113     -0.001     -0.073     -0.048     -0.069  0.903
+   [0.1, 0.25)  104      0.072      0.107      0.100      0.108  0.673
+   [0.25, 0.5)   88      0.074      0.085      0.137      0.146  0.432
+   [0.5, 1.0)    64      0.108      0.149      0.038      0.080  0.328
+   [1.0, 99.0)   32      0.251      0.409      0.474      0.630  0.031
+   t of continuation to Sun 20:00: all +4.6; |gap| >= 0.25: +4.6
+   t of continuation to Mon 02:00: all +3.4; |gap| >= 0.25: +4.0
+   t of continuation to Mon 08:30: all +2.8; |gap| >= 0.25: +3.1
+   t of continuation to Mon 15:00: all +2.6; |gap| >= 0.25: +3.1
+   'gap fill' placebo (Wed/Thu 17:01 vs the price 49 h earlier, touch by next day 15:00) by |distance|:
+                weekend n  weekend fill  placebo n  placebo fill
+   [0.0, 0.1)         113          0.90         86          0.94
+   [0.1, 0.25)        104          0.67        106          0.68
+   [0.25, 0.5)         88          0.43        160          0.49
+   [0.5, 1.0)          64          0.33        252          0.19
+   [1.0, 99.0)         32          0.03        194          0.06
+
+   Trades from the bar after the Sunday opening print (follow = trade in the gap's direction; fade = against it):
+   follow -> Sun 20:00, |gap|>=0.0, stop -        n= 396 win 46% avg $    43 PF 1.21 t=  1.1 yrs+ 5/8 | 19-22 $  -23 t -0.6 | 23-26 $  115 t  1.8 | L 233 $   24 S 163 $   70
+   fade -> Sun 20:00, |gap|>=0.0, stop -          n= 396 win 39% avg $  -113 PF 0.61 t= -3.0 yrs+ 1/8 | 19-22 $  -47 t -1.1 | 23-26 $ -185 t -2.9 | L 163 $ -140 S 233 $  -94
+   follow -> Sun 20:00, |gap|>=0.0, stop 0.5      n= 396 win 46% avg $    46 PF 1.23 t=  1.3 yrs+ 5/8 | 19-22 $  -10 t -0.3 | 23-26 $  106 t  1.6 | L 233 $   22 S 163 $   81
+   fade -> Sun 20:00, |gap|>=0.0, stop 0.5        n= 396 win 39% avg $  -107 PF 0.62 t= -3.1 yrs+ 1/8 | 19-22 $  -37 t -1.0 | 23-26 $ -183 t -3.1 | L 163 $ -124 S 233 $  -96
+   follow -> Sun 20:00, |gap|>=0.0, stop 1.0      n= 396 win 46% avg $    43 PF 1.21 t=  1.1 yrs+ 5/8 | 19-22 $  -24 t -0.6 | 23-26 $  115 t  1.8 | L 233 $   24 S 163 $   70
+   fade -> Sun 20:00, |gap|>=0.0, stop 1.0        n= 396 win 39% avg $  -118 PF 0.60 t= -3.0 yrs+ 1/8 | 19-22 $  -44 t -1.1 | 23-26 $ -197 t -2.9 | L 163 $ -146 S 233 $  -98
+   follow -> Sun 20:00, |gap|>=0.25, stop -       n= 183 win 50% avg $    68 PF 1.34 t=  1.2 yrs+ 6/8 | 19-22 $  -27 t -0.4 | 23-26 $  202 t  2.0 | L 109 $   89 S 74 $   38
+   fade -> Sun 20:00, |gap|>=0.25, stop -         n= 183 win 34% avg $  -138 PF 0.56 t= -2.4 yrs+ 1/8 | 19-22 $  -43 t -0.7 | 23-26 $ -272 t -2.6 | L 74 $ -108 S 109 $ -159
+   follow -> Sun 20:00, |gap|>=0.25, stop 0.5     n= 183 win 50% avg $    79 PF 1.41 t=  1.4 yrs+ 6/8 | 19-22 $   -5 t -0.1 | 23-26 $  197 t  1.9 | L 109 $   93 S 74 $   59
+   fade -> Sun 20:00, |gap|>=0.25, stop 0.5       n= 183 win 33% avg $  -135 PF 0.56 t= -2.5 yrs+ 1/8 | 19-22 $  -26 t -0.4 | 23-26 $ -289 t -3.0 | L 74 $ -129 S 109 $ -139
+   follow -> Sun 20:00, |gap|>=0.25, stop 1.0     n= 183 win 50% avg $    68 PF 1.33 t=  1.2 yrs+ 6/8 | 19-22 $  -28 t -0.4 | 23-26 $  202 t  2.0 | L 109 $   88 S 74 $   37
+   fade -> Sun 20:00, |gap|>=0.25, stop 1.0       n= 183 win 34% avg $  -139 PF 0.55 t= -2.4 yrs+ 1/8 | 19-22 $  -38 t -0.6 | 23-26 $ -282 t -2.6 | L 74 $ -124 S 109 $ -149
+   follow -> Sun 20:00, |gap|>=0.5, stop -        n=  96 win 54% avg $   105 PF 1.46 t=  1.1 yrs+ 6/8 | 19-22 $   18 t  0.2 | 23-26 $  251 t  1.4 | L 52 $  159 S 44 $   41
+   fade -> Sun 20:00, |gap|>=0.5, stop -          n=  96 win 29% avg $  -175 PF 0.54 t= -1.9 yrs+ 2/8 | 19-22 $  -88 t -0.8 | 23-26 $ -321 t -1.8 | L 44 $ -111 S 52 $ -229
+   follow -> Sun 20:00, |gap|>=0.5, stop 0.5      n=  96 win 54% avg $   125 PF 1.60 t=  1.4 yrs+ 7/8 | 19-22 $   56 t  0.6 | 23-26 $  241 t  1.3 | L 52 $  166 S 44 $   77
+   fade -> Sun 20:00, |gap|>=0.5, stop 0.5        n=  96 win 27% avg $  -161 PF 0.55 t= -1.9 yrs+ 2/8 | 19-22 $  -58 t -0.6 | 23-26 $ -333 t -2.1 | L 44 $ -131 S 52 $ -187
+   follow -> Sun 20:00, |gap|>=0.5, stop 1.0      n=  96 win 54% avg $   104 PF 1.46 t=  1.1 yrs+ 6/8 | 19-22 $   16 t  0.2 | 23-26 $  251 t  1.4 | L 52 $  158 S 44 $   41
+   fade -> Sun 20:00, |gap|>=0.5, stop 1.0        n=  96 win 29% avg $  -176 PF 0.53 t= -1.8 yrs+ 2/8 | 19-22 $  -76 t -0.8 | 23-26 $ -343 t -1.7 | L 44 $ -137 S 52 $ -209
+   follow -> Mon 02:00, |gap|>=0.0, stop -        n= 398 win 47% avg $    44 PF 1.13 t=  0.8 yrs+ 6/8 | 19-22 $  -22 t -0.3 | 23-26 $  115 t  1.1 | L 234 $   45 S 164 $   43
+   fade -> Mon 02:00, |gap|>=0.0, stop -          n= 398 win 42% avg $  -114 PF 0.73 t= -1.9 yrs+ 1/8 | 19-22 $  -48 t -0.8 | 23-26 $ -185 t -1.8 | L 164 $ -113 S 234 $ -115
+   follow -> Mon 02:00, |gap|>=0.0, stop 0.5      n= 398 win 47% avg $    71 PF 1.23 t=  1.3 yrs+ 6/8 | 19-22 $    6 t  0.1 | 23-26 $  141 t  1.5 | L 234 $   46 S 164 $  107
+   fade -> Mon 02:00, |gap|>=0.0, stop 0.5        n= 398 win 41% avg $   -86 PF 0.77 t= -1.8 yrs+ 1/8 | 19-22 $  -18 t -0.3 | 23-26 $ -158 t -2.0 | L 164 $  -70 S 234 $  -97
+   follow -> Mon 02:00, |gap|>=0.0, stop 1.0      n= 398 win 47% avg $    51 PF 1.15 t=  0.9 yrs+ 6/8 | 19-22 $  -11 t -0.2 | 23-26 $  119 t  1.2 | L 234 $   45 S 164 $   60
+   fade -> Mon 02:00, |gap|>=0.0, stop 1.0        n= 398 win 42% avg $  -106 PF 0.74 t= -1.9 yrs+ 1/8 | 19-22 $  -30 t -0.5 | 23-26 $ -188 t -2.0 | L 164 $  -90 S 234 $ -117
+   follow -> Mon 02:00, |gap|>=0.25, stop -       n= 184 win 49% avg $   122 PF 1.37 t=  1.3 yrs+ 6/8 | 19-22 $   27 t  0.3 | 23-26 $  254 t  1.4 | L 110 $  175 S 74 $   43
+   fade -> Mon 02:00, |gap|>=0.25, stop -         n= 184 win 39% avg $  -192 PF 0.61 t= -2.0 yrs+ 0/8 | 19-22 $  -97 t -0.9 | 23-26 $ -324 t -1.8 | L 74 $ -113 S 110 $ -245
+   follow -> Mon 02:00, |gap|>=0.25, stop 0.5     n= 184 win 49% avg $   167 PF 1.58 t=  1.9 yrs+ 7/8 | 19-22 $   57 t  0.6 | 23-26 $  319 t  1.9 | L 110 $  170 S 74 $  161
+   fade -> Mon 02:00, |gap|>=0.25, stop 0.5       n= 184 win 38% avg $  -128 PF 0.68 t= -1.8 yrs+ 1/8 | 19-22 $  -32 t -0.4 | 23-26 $ -261 t -2.1 | L 74 $  -83 S 110 $ -158
+   follow -> Mon 02:00, |gap|>=0.25, stop 1.0     n= 184 win 49% avg $   136 PF 1.43 t=  1.5 yrs+ 7/8 | 19-22 $   43 t  0.5 | 23-26 $  265 t  1.5 | L 110 $  175 S 74 $   78
+   fade -> Mon 02:00, |gap|>=0.25, stop 1.0       n= 184 win 39% avg $  -151 PF 0.67 t= -1.7 yrs+ 1/8 | 19-22 $  -60 t -0.7 | 23-26 $ -277 t -1.7 | L 74 $  -67 S 110 $ -207
+   follow -> Mon 02:00, |gap|>=0.5, stop -        n=  96 win 53% avg $   270 PF 1.88 t=  1.8 yrs+ 7/8 | 19-22 $  122 t  0.7 | 23-26 $  516 t  1.7 | L 52 $  290 S 44 $  245
+   fade -> Mon 02:00, |gap|>=0.5, stop -          n=  96 win 32% avg $  -340 PF 0.45 t= -2.2 yrs+ 1/8 | 19-22 $ -192 t -1.2 | 23-26 $ -586 t -1.9 | L 44 $ -315 S 52 $ -360
+   follow -> Mon 02:00, |gap|>=0.5, stop 0.5      n=  96 win 53% avg $   330 PF 2.35 t=  2.4 yrs+ 7/8 | 19-22 $  188 t  1.4 | 23-26 $  566 t  2.0 | L 52 $  295 S 44 $  371
+   fade -> Mon 02:00, |gap|>=0.5, stop 0.5        n=  96 win 30% avg $  -165 PF 0.62 t= -1.5 yrs+ 2/8 | 19-22 $  -88 t -0.7 | 23-26 $ -293 t -1.4 | L 44 $  -98 S 52 $ -221
+   follow -> Mon 02:00, |gap|>=0.5, stop 1.0      n=  96 win 53% avg $   288 PF 2.00 t=  2.0 yrs+ 7/8 | 19-22 $  151 t  1.0 | 23-26 $  516 t  1.7 | L 52 $  290 S 44 $  285
+   fade -> Mon 02:00, |gap|>=0.5, stop 1.0        n=  96 win 32% avg $  -266 PF 0.51 t= -2.0 yrs+ 2/8 | 19-22 $ -121 t -0.9 | 23-26 $ -507 t -1.9 | L 44 $ -233 S 52 $ -294
+   follow -> Mon 08:30, |gap|>=0.0, stop -        n= 398 win 45% avg $    33 PF 1.07 t=  0.5 yrs+ 5/8 | 19-22 $  -64 t -0.7 | 23-26 $  136 t  1.2 | L 234 $   51 S 164 $    7
+   fade -> Mon 08:30, |gap|>=0.0, stop -          n= 398 win 46% avg $  -103 PF 0.80 t= -1.4 yrs+ 1/8 | 19-22 $   -6 t -0.1 | 23-26 $ -206 t -1.8 | L 164 $  -77 S 234 $ -121
+   follow -> Mon 08:30, |gap|>=0.0, stop 0.5      n= 398 win 43% avg $    49 PF 1.12 t=  0.8 yrs+ 4/8 | 19-22 $   12 t  0.2 | 23-26 $   88 t  0.8 | L 234 $   43 S 164 $   57
+   fade -> Mon 08:30, |gap|>=0.0, stop 0.5        n= 398 win 41% avg $   -83 PF 0.82 t= -1.4 yrs+ 1/8 | 19-22 $   37 t  0.5 | 23-26 $ -212 t -2.4 | L 164 $  -34 S 234 $ -118
+   follow -> Mon 08:30, |gap|>=0.0, stop 1.0      n= 398 win 45% avg $    46 PF 1.11 t=  0.7 yrs+ 5/8 | 19-22 $  -39 t -0.5 | 23-26 $  137 t  1.2 | L 234 $   58 S 164 $   28
+   fade -> Mon 08:30, |gap|>=0.0, stop 1.0        n= 398 win 45% avg $   -94 PF 0.81 t= -1.4 yrs+ 1/8 | 19-22 $   27 t  0.3 | 23-26 $ -225 t -2.1 | L 164 $  -51 S 234 $ -125
+   follow -> Mon 08:30, |gap|>=0.25, stop -       n= 184 win 49% avg $   127 PF 1.31 t=  1.1 yrs+ 5/8 | 19-22 $   81 t  0.6 | 23-26 $  191 t  1.0 | L 110 $  162 S 74 $   75
+   fade -> Mon 08:30, |gap|>=0.25, stop -         n= 184 win 41% avg $  -197 PF 0.66 t= -1.7 yrs+ 1/8 | 19-22 $ -151 t -1.0 | 23-26 $ -261 t -1.3 | L 74 $ -145 S 110 $ -232
+   follow -> Mon 08:30, |gap|>=0.25, stop 0.5     n= 184 win 48% avg $   178 PF 1.51 t=  1.7 yrs+ 5/8 | 19-22 $  156 t  1.3 | 23-26 $  208 t  1.1 | L 110 $  178 S 74 $  178
+   fade -> Mon 08:30, |gap|>=0.25, stop 0.5       n= 184 win 35% avg $  -151 PF 0.69 t= -1.7 yrs+ 2/8 | 19-22 $  -34 t -0.3 | 23-26 $ -313 t -2.3 | L 74 $  -96 S 110 $ -188
+   follow -> Mon 08:30, |gap|>=0.25, stop 1.0     n= 184 win 49% avg $   152 PF 1.39 t=  1.4 yrs+ 5/8 | 19-22 $  114 t  0.9 | 23-26 $  205 t  1.1 | L 110 $  171 S 74 $  124
+   fade -> Mon 08:30, |gap|>=0.25, stop 1.0       n= 184 win 40% avg $  -150 PF 0.72 t= -1.4 yrs+ 2/8 | 19-22 $  -84 t -0.7 | 23-26 $ -241 t -1.4 | L 74 $  -64 S 110 $ -208
+   follow -> Mon 08:30, |gap|>=0.5, stop -        n=  96 win 46% avg $   197 PF 1.48 t=  1.1 yrs+ 4/8 | 19-22 $  157 t  0.8 | 23-26 $  263 t  0.8 | L 52 $  158 S 44 $  243
+   fade -> Mon 08:30, |gap|>=0.5, stop -          n=  96 win 41% avg $  -267 PF 0.59 t= -1.5 yrs+ 2/8 | 19-22 $ -227 t -1.2 | 23-26 $ -333 t -1.0 | L 44 $ -313 S 52 $ -228
+   follow -> Mon 08:30, |gap|>=0.5, stop 0.5      n=  96 win 43% avg $   241 PF 1.70 t=  1.5 yrs+ 4/8 | 19-22 $  224 t  1.4 | 23-26 $  271 t  0.8 | L 52 $  145 S 44 $  355
+   fade -> Mon 08:30, |gap|>=0.5, stop 0.5        n=  96 win 33% avg $  -132 PF 0.73 t= -1.1 yrs+ 2/8 | 19-22 $ -114 t -0.8 | 23-26 $ -161 t -0.7 | L 44 $  -54 S 52 $ -198
+   follow -> Mon 08:30, |gap|>=0.5, stop 1.0      n=  96 win 46% avg $   222 PF 1.58 t=  1.3 yrs+ 4/8 | 19-22 $  197 t  1.1 | 23-26 $  264 t  0.8 | L 52 $  154 S 44 $  303
+   fade -> Mon 08:30, |gap|>=0.5, stop 1.0        n=  96 win 39% avg $  -203 PF 0.65 t= -1.4 yrs+ 2/8 | 19-22 $ -127 t -0.8 | 23-26 $ -330 t -1.2 | L 44 $ -161 S 52 $ -239
+   follow -> Mon 15:00, |gap|>=0.0, stop -        n= 398 win 46% avg $    69 PF 1.13 t=  0.8 yrs+ 4/8 | 19-22 $  -59 t -0.6 | 23-26 $  206 t  1.4 | L 234 $  143 S 164 $  -37
+   fade -> Mon 15:00, |gap|>=0.0, stop -          n= 398 win 48% avg $  -139 PF 0.79 t= -1.6 yrs+ 2/8 | 19-22 $  -11 t -0.1 | 23-26 $ -276 t -1.9 | L 164 $  -33 S 234 $ -213
+   follow -> Mon 15:00, |gap|>=0.0, stop 0.5      n= 398 win 41% avg $    76 PF 1.15 t=  1.0 yrs+ 3/8 | 19-22 $   11 t  0.1 | 23-26 $  147 t  1.1 | L 234 $  104 S 164 $   37
+   fade -> Mon 15:00, |gap|>=0.0, stop 0.5        n= 398 win 40% avg $   -81 PF 0.85 t= -1.1 yrs+ 2/8 | 19-22 $   23 t  0.3 | 23-26 $ -193 t -1.7 | L 164 $  -15 S 234 $ -128
+   follow -> Mon 15:00, |gap|>=0.0, stop 1.0      n= 398 win 46% avg $    93 PF 1.18 t=  1.1 yrs+ 4/8 | 19-22 $  -49 t -0.5 | 23-26 $  245 t  1.7 | L 234 $  166 S 164 $  -12
+   fade -> Mon 15:00, |gap|>=0.0, stop 1.0        n= 398 win 47% avg $  -135 PF 0.78 t= -1.6 yrs+ 2/8 | 19-22 $   20 t  0.2 | 23-26 $ -303 t -2.1 | L 164 $ -101 S 234 $ -160
+   follow -> Mon 15:00, |gap|>=0.25, stop -       n= 184 win 49% avg $   198 PF 1.37 t=  1.4 yrs+ 5/8 | 19-22 $   33 t  0.2 | 23-26 $  428 t  1.7 | L 110 $  330 S 74 $    1
+   fade -> Mon 15:00, |gap|>=0.25, stop -         n= 184 win 42% avg $  -268 PF 0.65 t= -1.8 yrs+ 2/8 | 19-22 $ -103 t -0.6 | 23-26 $ -498 t -1.9 | L 74 $  -71 S 110 $ -400
+   follow -> Mon 15:00, |gap|>=0.25, stop 0.5     n= 184 win 44% avg $   254 PF 1.58 t=  2.1 yrs+ 4/8 | 19-22 $  162 t  1.2 | 23-26 $  380 t  1.7 | L 110 $  358 S 74 $   99
+   fade -> Mon 15:00, |gap|>=0.25, stop 0.5       n= 184 win 33% avg $  -151 PF 0.74 t= -1.4 yrs+ 3/8 | 19-22 $   18 t  0.1 | 23-26 $ -386 t -2.0 | L 74 $ -126 S 110 $ -168
+   follow -> Mon 15:00, |gap|>=0.25, stop 1.0     n= 184 win 49% avg $   225 PF 1.44 t=  1.6 yrs+ 4/8 | 19-22 $   72 t  0.5 | 23-26 $  437 t  1.8 | L 110 $  362 S 74 $   21
+   fade -> Mon 15:00, |gap|>=0.25, stop 1.0       n= 184 win 40% avg $  -250 PF 0.66 t= -1.9 yrs+ 2/8 | 19-22 $  -31 t -0.2 | 23-26 $ -554 t -2.3 | L 74 $ -171 S 110 $ -303
+   follow -> Mon 15:00, |gap|>=0.5, stop -        n=  96 win 45% avg $   265 PF 1.47 t=  1.2 yrs+ 4/8 | 19-22 $  208 t  0.9 | 23-26 $  362 t  0.7 | L 52 $  395 S 44 $  113
+   fade -> Mon 15:00, |gap|>=0.5, stop -          n=  96 win 42% avg $  -335 PF 0.61 t= -1.5 yrs+ 2/8 | 19-22 $ -278 t -1.3 | 23-26 $ -432 t -0.9 | L 44 $ -183 S 52 $ -465
+   follow -> Mon 15:00, |gap|>=0.5, stop 0.5      n=  96 win 39% avg $   347 PF 1.81 t=  1.9 yrs+ 4/8 | 19-22 $  284 t  1.6 | 23-26 $  451 t  1.1 | L 52 $  468 S 44 $  203
+   fade -> Mon 15:00, |gap|>=0.5, stop 0.5        n=  96 win 30% avg $  -128 PF 0.78 t= -0.8 yrs+ 3/8 | 19-22 $ -116 t -0.7 | 23-26 $ -149 t -0.4 | L 44 $ -124 S 52 $ -132
+   follow -> Mon 15:00, |gap|>=0.5, stop 1.0      n=  96 win 45% avg $   336 PF 1.68 t=  1.6 yrs+ 4/8 | 19-22 $  257 t  1.3 | 23-26 $  466 t  1.1 | L 52 $  480 S 44 $  166
+   fade -> Mon 15:00, |gap|>=0.5, stop 1.0        n=  96 win 40% avg $  -266 PF 0.65 t= -1.3 yrs+ 2/8 | 19-22 $ -118 t -0.7 | 23-26 $ -513 t -1.2 | L 44 $ -229 S 52 $ -297
+
+   best design-period (2019-22) t of the 72 variants (tradable sign): follow -> Mon 15:00, |gap|>=0.5, stop 0.5
+   follow -> Mon 15:00, |gap|>=0.5, stop 0.5      n=  96 win 39% avg $   347 PF 1.81 t=  1.9 yrs+ 4/8 | 19-22 $  284 t  1.6 | 23-26 $  451 t  1.1 | L 52 $  468 S 44 $  203
+   placebo: always long $197 (t 1.1); random side $149 [-52..308], t range [-0.3..1.5]
+   gross continuation to Sun 20:00, |gap|>=0.25 (ATR): 2019-22 +0.091 (t +2.7), 2023-26 +0.152 (t +4.1); by year {2019: 0.11, 2020: 0.14, 2021: 0.02, 2022: 0.1, 2023: 0.2, 2024: 0.12, 2025: 0.13, 2026: 0.17}
+   gross continuation to Mon 02:00, |gap|>=0.25 (ATR): 2019-22 +0.134 (t +2.5), 2023-26 +0.204 (t +3.2); by year {2019: 0.13, 2020: 0.17, 2021: 0.08, 2022: 0.17, 2023: 0.33, 2024: 0.14, 2025: 0.18, 2026: 0.14}
+   Sunday open bar: median high-low 115 points (23 ticks), median volume 19 contracts vs 6 in a 9:00-14:00 minute -> 1 tick of slippage at the open is optimistic
+   LOOK-AHEAD: filled AT the opening print -> Sun 20:00 n= 183 win 59% avg $   171 PF 2.08 t=  2.9 yrs+ 8/8 | 19-22 $   57 t  1.0 | 23-26 $  331 t  3.0 | L 109 $  172 S 74 $  169  (only via the opening auction, without knowing the gap)
+   follow |gap|>=0.25 stop 0.5, entry 17:02 -> Sun 20:00 n= 183 win 50% avg $    79 PF 1.41 t=  1.4 yrs+ 6/8 | 19-22 $   -5 t -0.1 | 23-26 $  197 t  1.9 | L 109 $   93 S 74 $   59
+   follow |gap|>=0.25 stop 0.5, entry 17:02 -> Mon 02:00 n= 184 win 49% avg $   167 PF 1.58 t=  1.9 yrs+ 7/8 | 19-22 $   57 t  0.6 | 23-26 $  319 t  1.9 | L 110 $  170 S 74 $  161
+   follow |gap|>=0.25 stop 0.5, entry 17:05 -> Sun 20:00 n= 183 win 50% avg $    29 PF 1.14 t=  0.5 yrs+ 5/8 | 19-22 $  -28 t -0.5 | 23-26 $  110 t  1.1 | L 109 $   42 S 74 $   10
+   follow |gap|>=0.25 stop 0.5, entry 17:05 -> Mon 02:00 n= 184 win 49% avg $   122 PF 1.40 t=  1.4 yrs+ 6/8 | 19-22 $   40 t  0.4 | 23-26 $  236 t  1.5 | L 110 $  133 S 74 $  107
+   follow |gap|>=0.25 stop 0.5, entry 17:15 -> Sun 20:00 n= 183 win 48% avg $    23 PF 1.11 t=  0.4 yrs+ 5/8 | 19-22 $  -39 t -0.7 | 23-26 $  111 t  1.1 | L 109 $   12 S 74 $   41
+   follow |gap|>=0.25 stop 0.5, entry 17:15 -> Mon 02:00 n= 184 win 47% avg $   113 PF 1.36 t=  1.3 yrs+ 6/8 | 19-22 $   42 t  0.4 | 23-26 $  213 t  1.3 | L 110 $  101 S 74 $  132
+   follow |gap|>=0.25 stop 0.5, entry 17:30 -> Sun 20:00 n= 183 win 47% avg $   -12 PF 0.94 t= -0.3 yrs+ 5/8 | 19-22 $  -64 t -1.2 | 23-26 $   61 t  0.7 | L 109 $  -34 S 74 $   20
+   follow |gap|>=0.25 stop 0.5, entry 17:30 -> Mon 02:00 n= 184 win 46% avg $    72 PF 1.23 t=  0.8 yrs+ 5/8 | 19-22 $   11 t  0.1 | 23-26 $  158 t  1.0 | L 110 $   49 S 74 $  107
+   follow |gap|>=0.25 stop 0.5, entry 18:00 -> Sun 20:00 n= 183 win 46% avg $    23 PF 1.13 t=  0.5 yrs+ 5/8 | 19-22 $  -43 t -0.9 | 23-26 $  116 t  1.3 | L 109 $    1 S 74 $   57
+   follow |gap|>=0.25 stop 0.5, entry 18:00 -> Mon 02:00 n= 184 win 47% avg $    66 PF 1.21 t=  0.8 yrs+ 6/8 | 19-22 $    8 t  0.1 | 23-26 $  145 t  0.9 | L 110 $   68 S 74 $   62
+   gross continuation open -> 1705, |gap|>=0.25: +0.055 ATR (t +4.8)
+   gross continuation 1705 -> 2000, |gap|>=0.25: +0.062 ATR (t +2.5)
+   gross continuation 1730 -> 2000, |gap|>=0.25: +0.038 ATR (t +1.8)
+   follow variants meeting the advance rule (t >= 2.5, both periods > 0): 0 of 36
+   placebo Tue-Thu 17:01 follow 49h move -> 20:00 n= 919 win 40% avg $   -39 PF 0.77 t= -2.3 yrs+ 1/8 | 19-22 $  -44 t -2.1 | 23-26 $  -34 t -1.3 | L 491 $  -64 S 428 $  -11
+   placebo Tue-Thu 17:01 follow 49h move -> next 02:00 n= 919 win 41% avg $   -60 PF 0.78 t= -2.3 yrs+ 1/8 | 19-22 $  -72 t -2.6 | 23-26 $  -49 t -1.1 | L 491 $  -68 S 428 $  -51
+   post hoc: best overall t of the 36 follow variants: follow -> Mon 02:00, |gap|>=0.5, stop 0.5
+   placebo: always long $115 (t 0.9); random side $103 [-59..250], t range [-0.5..1.8]
+
+   Mon-Thu maintenance break (16:00 -> 17:00 reopen) gap:
+   1601 breaks; |gap| median 0.054 ATR, 90% 0.183
+   break follow -> 20:00, |gap|>=0.0              n=1533 win 38% avg $   -48 PF 0.73 t= -3.7 yrs+ 0/8 | 19-22 $  -62 t -3.7 | 23-26 $  -35 t -1.7 | L 873 $  -66 S 660 $  -25
+   break fade -> 20:00, |gap|>=0.0                n=1533 win 42% avg $   -22 PF 0.87 t= -1.6 yrs+ 1/8 | 19-22 $   -8 t -0.5 | 23-26 $  -35 t -1.7 | L 660 $  -45 S 873 $   -4
+   break follow -> 20:00, |gap|>=0.05             n= 841 win 36% avg $   -74 PF 0.63 t= -3.9 yrs+ 0/8 | 19-22 $  -66 t -2.6 | 23-26 $  -81 t -2.9 | L 501 $  -85 S 340 $  -57
+   break fade -> 20:00, |gap|>=0.05               n= 841 win 45% avg $     4 PF 1.02 t=  0.2 yrs+ 4/8 | 19-22 $   -4 t -0.2 | 23-26 $   11 t  0.4 | L 340 $  -13 S 501 $   15
+   break follow -> 20:00, |gap|>=0.1              n= 402 win 37% avg $   -72 PF 0.64 t= -2.7 yrs+ 0/8 | 19-22 $  -35 t -1.1 | 23-26 $ -104 t -2.6 | L 244 $  -82 S 158 $  -58
+   break fade -> 20:00, |gap|>=0.1                n= 402 win 48% avg $     2 PF 1.02 t=  0.1 yrs+ 3/8 | 19-22 $  -35 t -1.1 | 23-26 $   34 t  0.8 | L 158 $  -12 S 244 $   12
+   break follow -> next 02:00, |gap|>=0.0         n=1533 win 42% avg $   -32 PF 0.88 t= -1.5 yrs+ 2/8 | 19-22 $  -61 t -2.5 | 23-26 $   -2 t -0.1 | L 873 $  -59 S 660 $    4
+   break fade -> next 02:00, |gap|>=0.0           n=1533 win 44% avg $   -38 PF 0.86 t= -1.8 yrs+ 1/8 | 19-22 $   -9 t -0.4 | 23-26 $  -68 t -2.0 | L 660 $  -74 S 873 $  -11
+   break follow -> next 02:00, |gap|>=0.05        n= 841 win 44% avg $   -41 PF 0.86 t= -1.4 yrs+ 0/8 | 19-22 $  -43 t -1.4 | 23-26 $  -39 t -0.8 | L 501 $  -47 S 340 $  -33
+   break fade -> next 02:00, |gap|>=0.05          n= 841 win 45% avg $   -29 PF 0.90 t= -1.0 yrs+ 1/8 | 19-22 $  -27 t -0.9 | 23-26 $  -31 t -0.6 | L 340 $  -37 S 501 $  -23
+   break follow -> next 02:00, |gap|>=0.1         n= 402 win 46% avg $   -18 PF 0.94 t= -0.4 yrs+ 3/8 | 19-22 $  -41 t -0.8 | 23-26 $    1 t  0.0 | L 244 $  -48 S 158 $   28
+   break fade -> next 02:00, |gap|>=0.1           n= 402 win 45% avg $   -52 PF 0.83 t= -1.2 yrs+ 3/8 | 19-22 $  -29 t -0.6 | 23-26 $  -71 t -1.0 | L 158 $  -98 S 244 $  -22
+   break follow -> next 08:30, |gap|>=0.0         n=1533 win 45% avg $    26 PF 1.07 t=  0.9 yrs+ 5/8 | 19-22 $  -12 t -0.4 | 23-26 $   64 t  1.4 | L 873 $   45 S 660 $    1
+   break fade -> next 08:30, |gap|>=0.0           n=1533 win 45% avg $   -96 PF 0.77 t= -3.3 yrs+ 0/8 | 19-22 $  -58 t -1.6 | 23-26 $ -134 t -2.9 | L 660 $  -71 S 873 $ -115
+   break follow -> next 08:30, |gap|>=0.05        n= 841 win 46% avg $    35 PF 1.10 t=  0.9 yrs+ 5/8 | 19-22 $   18 t  0.4 | 23-26 $   51 t  0.8 | L 501 $   87 S 340 $  -42
+   break fade -> next 08:30, |gap|>=0.05          n= 841 win 45% avg $  -105 PF 0.76 t= -2.6 yrs+ 0/8 | 19-22 $  -88 t -1.9 | 23-26 $ -121 t -1.8 | L 340 $  -28 S 501 $ -157
+   break follow -> next 08:30, |gap|>=0.1         n= 402 win 47% avg $    62 PF 1.18 t=  1.1 yrs+ 4/8 | 19-22 $   -6 t -0.1 | 23-26 $  121 t  1.3 | L 244 $   42 S 158 $   93
+   break fade -> next 08:30, |gap|>=0.1           n= 402 win 46% avg $  -132 PF 0.71 t= -2.2 yrs+ 2/8 | 19-22 $  -64 t -1.0 | 23-26 $ -191 t -2.0 | L 158 $ -163 S 244 $ -112
+   break follow -> next 15:00, |gap|>=0.0         n=1533 win 47% avg $     4 PF 1.01 t=  0.1 yrs+ 5/8 | 19-22 $  -17 t -0.4 | 23-26 $   25 t  0.4 | L 873 $  -36 S 660 $   57
+   break fade -> next 15:00, |gap|>=0.0           n=1533 win 46% avg $   -74 PF 0.87 t= -1.8 yrs+ 1/8 | 19-22 $  -53 t -1.3 | 23-26 $  -95 t -1.4 | L 660 $ -127 S 873 $  -34
+   break follow -> next 15:00, |gap|>=0.05        n= 841 win 48% avg $    36 PF 1.07 t=  0.6 yrs+ 5/8 | 19-22 $   47 t  0.8 | 23-26 $   25 t  0.3 | L 501 $   29 S 340 $   46
+   break fade -> next 15:00, |gap|>=0.05          n= 841 win 45% avg $  -106 PF 0.82 t= -1.9 yrs+ 0/8 | 19-22 $ -117 t -2.0 | 23-26 $  -95 t -1.0 | L 340 $ -116 S 501 $  -99
+   break follow -> next 15:00, |gap|>=0.1         n= 402 win 47% avg $    76 PF 1.14 t=  0.9 yrs+ 4/8 | 19-22 $   55 t  0.6 | 23-26 $   94 t  0.7 | L 244 $   -7 S 158 $  205
+   break fade -> next 15:00, |gap|>=0.1           n= 402 win 48% avg $  -146 PF 0.78 t= -1.7 yrs+ 1/8 | 19-22 $ -125 t -1.4 | 23-26 $ -164 t -1.2 | L 158 $ -275 S 244 $  -63
+   best design variant of 24: break follow -> next 15:00, |gap|>=0.05
+   break follow -> next 15:00, |gap|>=0.05        n= 841 win 48% avg $    36 PF 1.07 t=  0.6 yrs+ 5/8 | 19-22 $   47 t  0.8 | 23-26 $   25 t  0.3 | L 501 $   29 S 340 $   46
+   placebo: always long $-29 (t -0.5); random side $-39 [-141..73], t range [-2.5..1.3]
+
+==============================================================================================================
+H2. Intraday seasonality: 30-minute windows (bp, log return from the first trade in the window to its last close), 2019-2026
+   46 tradable windows; all-window mean -0.13 bp (drift); t_ex = t of (window - all-window mean)
+   Bonferroni |t| for 5% family-wise over 46 windows: 3.27; expected false positives at |t|>=3: 0.12, at |t|>=2: 2.1
+             n    bp     t  t_ex  yrs  ny  since21  t_1922  t_2326  t_pre  t_post  bp_post
+   win                                                                                    
+   00:00  1981  1.59  1.69  1.83    6   8        4    1.54    0.70   1.93   -0.24    -0.24
+   00:30  1992  0.21  0.21  0.33    5   8        5   -0.28    0.92  -0.37    1.20     1.53
+   01:00  1992 -0.59 -0.61 -0.48    4   8        3   -0.77    0.07  -0.67   -0.06    -0.08
+   01:30  1989  0.67  0.71  0.85    4   8        2    0.57    0.43   0.38    0.77     1.02
+   02:00  1996  1.66  1.57  1.69    5   8        5    0.99    1.44   0.93    1.63     2.22
+   02:30  1998  0.35  0.29  0.39    4   8        3    0.73   -0.98   0.58   -0.75    -0.88
+   03:00  1998  1.38  1.36  1.49    7   8        5    0.18    2.21   0.42    2.06     2.83
+   03:30  2000  0.30  0.29  0.42    4   8        3   -0.31    1.12   0.45   -0.27    -0.33
+   04:00  2001 -0.52 -0.49 -0.38    4   8        4   -1.09    1.19  -1.13    1.50     1.65
+   04:30  1999  2.11  2.12  2.25    6   8        4    2.10    0.55   1.91    0.93     0.98
+   05:00  1998 -0.34 -0.34 -0.21    5   8        3    0.44   -1.49   0.47   -1.83    -2.18
+   05:30  1999  0.41  0.32  0.42    6   8        5    0.10    0.69   0.19    0.50     0.51
+   06:00  1998 -0.39 -0.37 -0.25    3   8        3   -0.31   -0.20  -0.46    0.11     0.13
+   06:30  1997  1.45  1.27  1.39    6   8        4    1.19    0.47   1.44   -0.18    -0.20
+   07:00  2004  0.31  0.25  0.35    4   8        3    0.15    0.28   0.34   -0.21    -0.25
+   07:30  2004  0.01  0.00  0.08    4   8        3    0.00   -0.00   0.13   -0.30    -0.53
+   08:00  2004  0.97  0.85  0.96    5   8        5    0.76    0.38   0.90    0.08     0.11
+   08:30  2004 -0.55 -0.32 -0.25    5   8        5    0.92   -1.47   0.20   -0.77    -2.32
+   09:00  2002 -0.77 -0.48 -0.40    3   8        2   -0.61   -0.06  -0.35   -0.33    -0.91
+   09:30  2002 -1.48 -0.91 -0.84    6   8        5   -0.72   -0.56  -0.87   -0.33    -0.78
+   10:00  1986  0.28  0.20  0.28    4   8        2    0.59   -0.47   0.43   -0.34    -0.71
+   10:30  1986  1.50  1.14  1.23    5   8        3    1.76   -0.59   1.41   -0.18    -0.33
+   11:00  1982 -0.91 -0.68 -0.59    4   8        2   -1.78    1.55  -1.10    0.62     1.12
+   11:30  1980 -1.13 -0.93 -0.83    5   8        4   -0.96   -0.28  -0.71   -0.63    -1.11
+   12:00  1963 -1.24 -1.03 -0.92    5   8        4   -1.73    0.51  -1.75    0.90     1.61
+   12:30  1956  0.06  0.05  0.16    4   8        3   -0.96    1.29  -0.43    0.78     1.31
+   13:00  1947 -1.31 -1.09 -0.99    5   8        4   -0.62   -1.06  -0.65   -1.12    -1.75
+   13:30  1951 -0.23 -0.18 -0.08    5   8        3   -0.12   -0.15   0.26   -0.87    -1.48
+   14:00  1952 -0.85 -0.75 -0.64    4   8        3   -0.94   -0.01  -1.25    0.69     1.11
+   14:30  1953 -0.03 -0.02  0.07    3   8        2    0.78   -1.20   1.12   -2.40    -3.79
+   15:00  1951  2.13  1.70  1.80    7   8        6    0.59    2.39   0.55    2.83     4.28
+   15:30  1950 -1.81 -1.50 -1.40    6   8        4   -1.80    0.12  -1.64    0.04     0.05
+   17:00  1995  2.30  1.63  1.72    4   8        3    1.18    1.20   1.79    0.05     0.08
+   17:30  1985 -0.88 -0.87 -0.74    5   8        4   -0.82   -0.31  -0.64   -0.65    -0.82
+   18:00  1994 -2.88 -2.19 -2.09    5   8        3   -2.15   -0.58  -2.09   -0.67    -0.97
+   18:30  1994 -1.60 -1.43 -1.32    5   8        4   -1.64    0.06  -1.21   -0.80    -1.01
+   19:00  1997 -0.32 -0.26 -0.16    3   8        3   -0.28   -0.06  -0.28   -0.03    -0.05
+   19:30  1994 -0.03 -0.03  0.08    2   8        2   -0.19    0.23  -0.07    0.07     0.11
+   20:00  1995 -0.20 -0.19 -0.07    4   8        3   -0.10   -0.17  -0.02   -0.33    -0.52
+   20:30  1994 -1.90 -1.86 -1.74    5   8        3   -2.60    0.34  -2.38    0.28     0.42
+   21:00  1989 -1.21 -1.18 -1.06    6   8        4   -1.57    0.27  -1.30   -0.08    -0.12
+   21:30  1985 -0.11 -0.11  0.02    4   8        4    0.26   -0.68   0.00   -0.24    -0.31
+   22:00  1995 -0.88 -0.76 -0.65    5   8        4   -0.65   -0.42  -0.77   -0.12    -0.14
+   22:30  1983 -0.95 -1.16 -1.01    5   8        4   -1.35   -0.04  -1.08   -0.43    -0.49
+   23:00  1985 -1.35 -1.42 -1.28    5   8        3   -1.51   -0.16  -1.68    0.27     0.30
+   23:30  1980  0.98  0.94  1.07    5   8        4    0.52    1.23   0.54    1.31     1.26
+   windows with |t| >= 3: []; >= Bonferroni: []
+   windows with |t_post| >= 3: []; >= Bonferroni: []
+   windows with |t_pre| >= 3: []; >= Bonferroni: []
+   windows with |t_1922| >= 3: []; >= Bonferroni: []
+   windows same sign every year since 2021 and |t| >= 3: []
+
+   best design window 20:30 (short, chosen by 2019-22 |t| among 46):
+   30-min window 20:30 short                      n=1994 win 32% avg $   -32 PF 0.62 t= -6.5 yrs+ 0/8 | 19-22 $  -27 t -5.8 | 23-26 $  -38 t -4.3 | L 0 $    0 S 1994 $  -32
+   placebo: always long $-38 (t -7.6); random side $-36 [-46..-23], t range [-9.2..-4.7]
+   best since-ETF window 15:00 (chosen in-sample on 2024+, for information):   n= 686 win 48% avg $    -0 PF 1.00 t= -0.0 yrs+ 2/3 | 19-22 $  nan t  nan | 23-26 $   -0 t -0.0 | L 686 $   -0 S 0 $    0
+   US open 8:30-9:00        mean -0.6 bp t -0.3 | pre-ETF t +0.2 | since ETF -2.3 bp t -0.8
+   ETF NAV 14:00-15:00      mean -0.9 bp t -0.5 | pre-ETF t +0.0 | since ETF -2.7 bp t -1.2
+   Asia open 19:00-20:00    mean -0.3 bp t -0.2 | pre-ETF t -0.2 | since ETF +0.1 bp t +0.0
+   ETF fix short 14:31-15:00, before ETFs         n=1267 win 25% avg $   -46 PF 0.41 t= -8.5 yrs+ 0/6 | 19-22 $  -46 t -7.3 | 23-26 $  -47 t -4.8 | L 0 $    0 S 1267 $  -46
+   ETF fix short 14:31-15:00, since ETFs (in-sample) n= 686 win 47% avg $    -3 PF 0.98 t= -0.2 yrs+ 2/3 | 19-22 $  nan t  nan | 23-26 $   -3 t -0.2 | L 0 $    0 S 686 $   -3
+   ETF fix long 15:01-15:30, before ETFs          n=1265 win 30% avg $   -33 PF 0.53 t= -6.5 yrs+ 0/6 | 19-22 $  -34 t -5.5 | 23-26 $  -32 t -4.2 | L 1265 $  -33 S 0 $    0
+   ETF fix long 15:01-15:30, since ETFs (in-sample) n= 686 win 48% avg $    -0 PF 1.00 t= -0.0 yrs+ 2/3 | 19-22 $  nan t  nan | 23-26 $   -0 t -0.0 | L 686 $   -0 S 0 $    0
+   ETF fix both legs, before ETFs                 n=1301 win 24% avg $   -78 PF 0.38 t=-10.5 yrs+ 0/6 | 19-22 $  -78 t -8.9 | 23-26 $  -77 t -5.9 | L 1301 $  -78 S 0 $    0
+   ETF fix both legs, since ETFs (in-sample)      n= 701 win 47% avg $    -3 PF 0.98 t= -0.2 yrs+ 2/3 | 19-22 $  nan t  nan | 23-26 $   -3 t -0.2 | L 701 $   -3 S 0 $    0
+
+==============================================================================================================
+H3. NQ engine ports (prices x 0.05: one BTC tick = 0.25 scaled; $20 a scaled point per BTC)
+   BTC / NQ ATR ratio (scaled points per NQ point, 2019-26 medians): 0.37; by year: {2019: 0.08, 2020: 0.09, 2021: 0.59, 2022: 0.28, 2023: 0.19, 2024: 0.52, 2025: 0.65, 2026: 0.49}
+   Vault Break long, fixed tp/sl                  n=1291 win 54% avg $   -32 PF 0.80 t= -3.3 yrs+ 0/8 | 19-22 $  -34 t -2.7 | 23-26 $  -30 t -2.2 | L 1291 $  -32 S 0 $    0
+   Vault Break long, prior-year ratio             n=1371 win 58% avg $   -23 PF 0.81 t= -2.7 yrs+ 0/8 | 19-22 $  -29 t -3.6 | 23-26 $  -17 t -1.2 | L 1371 $  -23 S 0 $    0
+   Vault Break short (mirrored), fixed tp/sl      n=1186 win 56% avg $    -5 PF 0.97 t= -0.5 yrs+ 2/8 | 19-22 $   -2 t -0.1 | 23-26 $   -7 t -0.5 | L 0 $    0 S 1186 $   -5
+   Vault Break short (mirrored), prior-year ratio n=1257 win 58% avg $    -7 PF 0.94 t= -0.8 yrs+ 3/8 | 19-22 $  -10 t -1.3 | 23-26 $   -5 t -0.3 | L 0 $    0 S 1257 $   -7
+   Vault Break both sides, prior-year ratio       n=2628 win 58% avg $   -15 PF 0.88 t= -2.5 yrs+ 2/8 | 19-22 $  -20 t -3.6 | 23-26 $  -11 t -1.1 | L 1371 $  -23 S 1257 $   -7
+   placebo: always long $-40 (t -6.3); random side $-34 [-49..-21], t range [-7.8..-3.4]
+   ONB ADX>-1 stop 0.25 ATR                       n=1058 win 41% avg $    25 PF 1.11 t=  1.1 yrs+ 5/8 | 19-22 $   -7 t -0.3 | 23-26 $   60 t  1.5 | L 598 $    7 S 460 $   50
+   ONB ADX>-1 stop 0.3 ATR                        n=1058 win 42% avg $    19 PF 1.08 t=  0.8 yrs+ 5/8 | 19-22 $   -8 t -0.3 | 23-26 $   49 t  1.2 | L 598 $   -5 S 460 $   51
+   ONB ADX>-1 stop 0.5 ATR                        n=1058 win 45% avg $    24 PF 1.09 t=  0.9 yrs+ 5/8 | 19-22 $   -9 t -0.3 | 23-26 $   59 t  1.2 | L 598 $   -7 S 460 $   63
+   ONB ADX>20 stop 0.25 ATR                       n= 925 win 42% avg $    36 PF 1.16 t=  1.5 yrs+ 5/8 | 19-22 $  -11 t -0.5 | 23-26 $   85 t  2.0 | L 522 $   14 S 403 $   65
+   ONB ADX>20 stop 0.3 ATR                        n= 925 win 43% avg $    29 PF 1.12 t=  1.2 yrs+ 4/8 | 19-22 $  -11 t -0.5 | 23-26 $   71 t  1.6 | L 522 $   -2 S 403 $   69
+   ONB ADX>20 stop 0.5 ATR                        n= 925 win 45% avg $    34 PF 1.13 t=  1.2 yrs+ 4/8 | 19-22 $  -16 t -0.5 | 23-26 $   87 t  1.8 | L 522 $    1 S 403 $   77
+   ONB ADX>30 stop 0.25 ATR                       n= 656 win 41% avg $    35 PF 1.17 t=  1.3 yrs+ 5/8 | 19-22 $  -11 t -0.5 | 23-26 $   85 t  1.7 | L 365 $    6 S 291 $   72
+   ONB ADX>30 stop 0.3 ATR                        n= 656 win 42% avg $    21 PF 1.09 t=  0.8 yrs+ 4/8 | 19-22 $  -18 t -0.7 | 23-26 $   63 t  1.3 | L 365 $  -17 S 291 $   69
+   ONB ADX>30 stop 0.5 ATR                        n= 656 win 45% avg $    32 PF 1.14 t=  1.0 yrs+ 4/8 | 19-22 $  -29 t -0.9 | 23-26 $   97 t  1.7 | L 365 $   -1 S 291 $   74
+   best ONB by design t (of 9): ONB ADX>-1 stop 0.5 ATR
+   placebo: always long $-59 (t -2.1); random side $-40 [-77..10], t range [-2.8..0.4]
+   TSMOM prior 24 h -> 8:31-15:00, stop - ATR     n=1977 win 45% avg $   -42 PF 0.88 t= -1.7 yrs+ 2/8 | 19-22 $  -61 t -2.5 | 23-26 $  -22 t -0.5 | L 1037 $  -79 S 940 $   -1
+   TSMOM prior 24 h -> 8:31-15:00, stop 1.0 ATR   n=1977 win 45% avg $   -40 PF 0.89 t= -1.6 yrs+ 2/8 | 19-22 $  -62 t -2.6 | 23-26 $  -17 t -0.4 | L 1037 $  -80 S 940 $    4
+   TSMOM prior 5 days -> 8:31-15:00, stop - ATR   n=1984 win 44% avg $   -44 PF 0.88 t= -1.8 yrs+ 2/8 | 19-22 $  -27 t -1.1 | 23-26 $  -62 t -1.4 | L 1058 $  -80 S 926 $   -3
+   TSMOM prior 5 days -> 8:31-15:00, stop 1.0 ATR n=1984 win 44% avg $   -41 PF 0.89 t= -1.7 yrs+ 2/8 | 19-22 $  -25 t -1.1 | 23-26 $  -58 t -1.3 | L 1058 $  -82 S 926 $    5
+   best TSMOM by design t (of 4): TSMOM prior 5 days, stop 1.0
+   placebo: always long $-75 (t -3.0); random side $-30 [-93..18], t range [-3.7..0.7]
+
+==============================================================================================================
+H4. NQ spillover: big NQ 8:30 -> 10:00 move -> BTC 10:01 -> 15:00 in the same direction
+   corr(NQ 8:30->10:00, BTC 10:00->15:00): all +0.048; by year {2019: 0.11, 2020: -0.02, 2021: 0.1, 2022: 0.18, 2023: -0.04, 2024: 0.05, 2025: 0.0, 2026: -0.03}
+   corr(ES 8:30->10:00, BTC 10:00->15:00): all +0.036; by year {2019: 0.03, 2020: 0.03, 2021: 0.06, 2022: 0.11, 2023: 0.03, 2024: 0.02, 2025: 0.01, 2026: -0.0}
+   corr(YM 8:30->10:00, BTC 10:00->15:00): all +0.029; by year {2019: 0.01, 2020: 0.02, 2021: 0.03, 2022: 0.03, 2023: 0.08, 2024: 0.08, 2025: 0.01, 2026: -0.07}
+   corr(BTC own 8:30->10:00, BTC 10:00->15:00): all +0.084; by year {2019: 0.07, 2020: 0.01, 2021: 0.12, 2022: 0.16, 2023: 0.08, 2024: 0.07, 2025: 0.07, 2026: 0.15}
+   NQ |move|>=0.3 ATR, follow, stop -             n= 698 win 44% avg $     1 PF 1.00 t=  0.0 yrs+ 4/8 | 19-22 $   18 t  0.6 | 23-26 $  -16 t -0.3 | L 358 $  -59 S 340 $   64
+   NQ |move|>=0.3 ATR, follow, stop 0.5           n= 698 win 44% avg $   -13 PF 0.95 t= -0.4 yrs+ 3/8 | 19-22 $   -2 t -0.1 | 23-26 $  -24 t -0.4 | L 358 $  -67 S 340 $   44
+   NQ |move|>=0.5 ATR, follow, stop -             n= 285 win 45% avg $    59 PF 1.23 t=  1.1 yrs+ 5/8 | 19-22 $   52 t  1.0 | 23-26 $   65 t  0.7 | L 113 $   -7 S 172 $  102
+   NQ |move|>=0.5 ATR, follow, stop 0.5           n= 285 win 44% avg $    37 PF 1.14 t=  0.7 yrs+ 4/8 | 19-22 $   23 t  0.4 | 23-26 $   51 t  0.5 | L 113 $  -24 S 172 $   77
+   NQ |move|>=0.75 ATR, follow, stop -            n=  99 win 46% avg $   116 PF 1.43 t=  1.1 yrs+ 6/8 | 19-22 $  104 t  0.9 | 23-26 $  129 t  0.7 | L 36 $   93 S 63 $  129
+   NQ |move|>=0.75 ATR, follow, stop 0.5          n=  99 win 45% avg $    70 PF 1.22 t=  0.7 yrs+ 4/8 | 19-22 $   93 t  0.9 | 23-26 $   45 t  0.2 | L 36 $   -3 S 63 $  111
+   ES |move|>=0.3 ATR, follow, stop -             n= 613 win 44% avg $    -6 PF 0.98 t= -0.2 yrs+ 3/8 | 19-22 $    2 t  0.0 | 23-26 $  -14 t -0.2 | L 310 $  -58 S 303 $   47
+   ES |move|>=0.3 ATR, follow, stop 0.5           n= 613 win 44% avg $   -12 PF 0.96 t= -0.3 yrs+ 3/8 | 19-22 $  -10 t -0.3 | 23-26 $  -14 t -0.2 | L 310 $  -62 S 303 $   39
+   ES |move|>=0.5 ATR, follow, stop -             n= 233 win 47% avg $    41 PF 1.14 t=  0.6 yrs+ 3/8 | 19-22 $   24 t  0.4 | 23-26 $   57 t  0.5 | L 95 $   26 S 138 $   51
+   ES |move|>=0.5 ATR, follow, stop 0.5           n= 233 win 46% avg $    17 PF 1.05 t=  0.3 yrs+ 3/8 | 19-22 $   24 t  0.4 | 23-26 $   10 t  0.1 | L 95 $  -11 S 138 $   36
+   ES |move|>=0.75 ATR, follow, stop -            n=  73 win 41% avg $    -6 PF 0.98 t= -0.1 yrs+ 4/8 | 19-22 $   40 t  0.4 | 23-26 $  -71 t -0.4 | L 26 $  -22 S 47 $    4
+   ES |move|>=0.75 ATR, follow, stop 0.5          n=  73 win 41% avg $   -63 PF 0.81 t= -0.6 yrs+ 4/8 | 19-22 $   34 t  0.3 | 23-26 $ -203 t -1.0 | L 26 $  -83 S 47 $  -52
+   YM |move|>=0.3 ATR, follow, stop -             n= 649 win 45% avg $   -30 PF 0.90 t= -0.8 yrs+ 1/8 | 19-22 $  -29 t -0.8 | 23-26 $  -31 t -0.5 | L 324 $  -97 S 325 $   37
+   YM |move|>=0.3 ATR, follow, stop 0.5           n= 649 win 45% avg $   -27 PF 0.91 t= -0.8 yrs+ 3/8 | 19-22 $  -29 t -0.8 | 23-26 $  -24 t -0.4 | L 324 $  -95 S 325 $   41
+   YM |move|>=0.5 ATR, follow, stop -             n= 264 win 45% avg $     3 PF 1.01 t=  0.0 yrs+ 4/8 | 19-22 $   23 t  0.4 | 23-26 $  -16 t -0.2 | L 132 $   -5 S 132 $   10
+   YM |move|>=0.5 ATR, follow, stop 0.5           n= 264 win 45% avg $   -10 PF 0.97 t= -0.2 yrs+ 4/8 | 19-22 $    8 t  0.1 | 23-26 $  -27 t -0.3 | L 132 $  -12 S 132 $   -9
+   YM |move|>=0.75 ATR, follow, stop -            n=  88 win 48% avg $   -58 PF 0.82 t= -0.6 yrs+ 4/8 | 19-22 $  -25 t -0.3 | 23-26 $  -95 t -0.5 | L 39 $   85 S 49 $ -173
+   YM |move|>=0.75 ATR, follow, stop 0.5          n=  88 win 48% avg $   -94 PF 0.74 t= -1.0 yrs+ 3/8 | 19-22 $  -44 t -0.4 | 23-26 $ -149 t -0.9 | L 39 $   55 S 49 $ -213
+   BTC own |move|>=0.3 ATR, follow, stop -        n= 368 win 51% avg $   119 PF 1.45 t=  2.3 yrs+ 7/8 | 19-22 $   56 t  1.0 | 23-26 $  161 t  2.0 | L 174 $    1 S 194 $  226
+   BTC own |move|>=0.3 ATR, follow, stop 0.5      n= 368 win 51% avg $   121 PF 1.46 t=  2.4 yrs+ 7/8 | 19-22 $   72 t  1.5 | 23-26 $  153 t  2.0 | L 174 $   10 S 194 $  220
+   BTC own |move|>=0.5 ATR, follow, stop -        n= 125 win 58% avg $   248 PF 2.17 t=  2.8 yrs+ 6/8 | 19-22 $   80 t  0.7 | 23-26 $  350 t  2.9 | L 65 $  133 S 60 $  373
+   BTC own |move|>=0.5 ATR, follow, stop 0.5      n= 125 win 58% avg $   235 PF 2.05 t=  2.7 yrs+ 7/8 | 19-22 $  122 t  1.2 | 23-26 $  303 t  2.4 | L 65 $  139 S 60 $  340
+   BTC own |move|>=0.75 ATR, follow, stop -       n=  39 win 56% avg $   254 PF 1.79 t=  1.2 yrs+ 5/8 | 19-22 $ -170 t -0.5 | 23-26 $  421 t  1.5 | L 25 $   59 S 14 $  602
+   BTC own |move|>=0.75 ATR, follow, stop 0.5     n=  39 win 54% avg $   267 PF 1.89 t=  1.3 yrs+ 5/8 | 19-22 $    6 t  0.0 | 23-26 $  369 t  1.3 | L 25 $   92 S 14 $  578
+   best NQ variant by design t (of 6): NQ |move|>=0.5 ATR, follow, stop -
+   placebo: always long $-106 (t -1.9); random side $-22 [-98..55], t range [-1.8..1.0]
+   random days, random side (50 x 285 days): avg $-35 [-91..45]
+
+==============================================================================================================
+Candidates: the best design-period variant of each family; advance = t >= 2.5 after costs, positive in 2019-22 and 2023-26
+   stops    H1 weekend gap: follow -> Mon 15:00, |gap|>=0.5, stop 0.5              n=  96 win 39% avg $   347 PF 1.81 t=  1.9 yrs+ 4/8 | 19-22 $  284 t  1.6 | 23-26 $  451 t  1.1 | L 52 $  468 S 44 $  203
+   stops    H1 weekend gap (post hoc, best overall t): follow -> Mon 02:00, |gap|>=0.5, stop 0.5 n=  96 win 53% avg $   330 PF 2.35 t=  2.4 yrs+ 7/8 | 19-22 $  188 t  1.4 | 23-26 $  566 t  2.0 | L 52 $  295 S 44 $  371
+   stops    H1 break gap: break follow -> next 15:00, |gap|>=0.05                  n= 841 win 48% avg $    36 PF 1.07 t=  0.6 yrs+ 5/8 | 19-22 $   47 t  0.8 | 23-26 $   25 t  0.3 | L 501 $   29 S 340 $   46
+   stops    H2 window 20:30 short                                                  n=1994 win 32% avg $   -32 PF 0.62 t= -6.5 yrs+ 0/8 | 19-22 $  -27 t -5.8 | 23-26 $  -38 t -4.3 | L 0 $    0 S 1994 $  -32
+   stops    H3 VB short (mirrored), fixed tp/sl                                    n=1186 win 56% avg $    -5 PF 0.97 t= -0.5 yrs+ 2/8 | 19-22 $   -2 t -0.1 | 23-26 $   -7 t -0.5 | L 0 $    0 S 1186 $   -5
+   stops    H3 ONB ADX>-1 stop 0.5 ATR                                             n=1058 win 45% avg $    24 PF 1.09 t=  0.9 yrs+ 5/8 | 19-22 $   -9 t -0.3 | 23-26 $   59 t  1.2 | L 598 $   -7 S 460 $   63
+   stops    H3 TSMOM prior 5 days, stop 1.0                                        n=1984 win 44% avg $   -41 PF 0.89 t= -1.7 yrs+ 2/8 | 19-22 $  -25 t -1.1 | 23-26 $  -58 t -1.3 | L 1058 $  -82 S 926 $    5
+   stops    H4 NQ |move|>=0.5 ATR, follow, stop -                                  n= 285 win 45% avg $    59 PF 1.23 t=  1.1 yrs+ 5/8 | 19-22 $   52 t  1.0 | 23-26 $   65 t  0.7 | L 113 $   -7 S 172 $  102
+   nothing advances; full metrics shown for the best overall t anyway (for the record)
+
+   --- H1 weekend gap (post hoc, best overall t): follow -> Mon 02:00, |gap|>=0.5, stop 0.5
+          trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+   whole      96 53% $330 $3,989   0.83    2.10          2.35 $3,410   1.17  1.72       4.65
+   longs      52 52% $295 $1,933   0.63    1.48          2.30 $3,042   0.64  1.68       2.30
+   shorts     44 55% $371 $2,056   0.55    1.49          2.40 $3,173   0.65  2.03       2.02
+   by year $: {2019: 539, 2020: 698, 2021: 6511, 2022: 3560, 2023: 4398, 2024: 11099, 2025: 7180, 2026: -2295}
+   daily correlation with NQ 8:30->15:00 (1 NQ): +0.07
+   bootstrap 2023+:
+                         actual       p5      p50      p95
+   name   metric                                          
+   whole  sharpe           0.97     0.26     0.99     1.53
+          sortino          2.65     0.44     2.67     6.78
+          pf_day           2.76     1.26     2.77     6.57
+          calmar           1.56     0.16     1.34     4.33
+          ulcer            2.18     0.88     2.28     6.62
+          max_dd       3,410.33 1,862.67 3,852.83 8,015.09
+          P(Sharpe<=0)      NaN      NaN     0.02      NaN
+   longs  sharpe           0.82     0.08     0.85     1.44
+          sortino          1.87     0.11     2.00     9.29
+          pf_day           2.86     1.10     2.93    11.24
+          calmar           0.81     0.05     1.04     5.19
+          ulcer            1.73     0.39     1.49     4.81
+          max_dd       3,042.50   695.00 2,272.17 5,189.68
+          P(Sharpe<=0)      NaN      NaN     0.04      NaN
+   shorts sharpe           0.62    -0.23     0.61     1.13
+          sortino          1.89    -0.33     1.82     6.92
+          pf_day           2.69     0.74     2.62     9.02
+          calmar           1.05    -0.11     0.86     3.79
+          ulcer            2.01     0.67     2.27     7.08
+          max_dd       2,723.00 1,430.33 3,201.67 6,917.75
+          P(Sharpe<=0)      NaN      NaN     0.10      NaN
+   permutation 2023+:
+          actual_dd pct_rank   dd50   dd95   dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+   whole     $3,410      36% $3,803 $6,074 $7,328        100%        100%         78%
+   longs     $3,042      74% $2,472 $3,930 $4,405        100%        100%         26%
+   shorts    $2,723      31% $3,202 $5,174 $5,959        100%         92%         60%
