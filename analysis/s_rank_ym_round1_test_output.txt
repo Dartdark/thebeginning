@@ -1,0 +1,329 @@
+S-rank program, YM round 1 (2026-10-14): is there a Dow-specific edge? (S_RANK_PROGRAM.md, YM hypotheses 1-4.)
+YM sessions 2018-01-02 .. 2026-10-12: 2258 (2182 full); median ATR(15) 442 pts = $2,209
+
+======================================================================================================================
+1. Overnight Bias on YM + ML (ridge) filter refit on YM
+   ONB ADX 20 / stop 0.3 ATR / 3R                               n=1053 avg $    -1 PF 1.00 t -0.0 win 43% yrs+ 5/9 | 18-22 $   41 (t  1.2) 23-26 $  -55 (t -1.3)
+   ONB ADX 30 / stop 0.25 ATR / 3R                              n= 730 avg $     2 PF 1.01 t  0.1 win 41% yrs+ 5/9 | 18-22 $   66 (t  1.8) 23-26 $  -77 (t -1.7)
+   design-period refit, 24 cells (ADX 20/25/30 x stop 0.20/0.25/0.30/0.40 ATR x 2R/3R):
+     ADX 25 stop 0.2 3R (design t 2.0)                          n= 902 avg $     8 PF 1.03 t  0.3 win 38% yrs+ 5/9 | 18-22 $   63 (t  2.0) 23-26 $  -61 (t -1.7)
+     ADX 30 stop 0.3 3R (design t 2.0)                          n= 730 avg $    -1 PF 1.00 t -0.0 win 44% yrs+ 5/9 | 18-22 $   78 (t  2.0) 23-26 $  -99 (t -2.1)
+     ADX 30 stop 0.3 2R (design t 1.8)                          n= 730 avg $   -10 PF 0.97 t -0.3 win 44% yrs+ 5/9 | 18-22 $   67 (t  1.8) 23-26 $ -105 (t -2.3)
+     ADX 30 stop 0.25 3R (design t 1.8)                         n= 730 avg $     2 PF 1.01 t  0.1 win 41% yrs+ 5/9 | 18-22 $   66 (t  1.8) 23-26 $  -77 (t -1.7)
+     ADX 25 stop 0.3 2R (design t 1.7)                          n= 902 avg $     8 PF 1.02 t  0.3 win 45% yrs+ 5/9 | 18-22 $   59 (t  1.7) 23-26 $  -55 (t -1.3)
+     ADX 30 stop 0.2 3R (design t 1.7)                          n= 730 avg $   -11 PF 0.96 t -0.4 win 37% yrs+ 5/9 | 18-22 $   56 (t  1.7) 23-26 $  -94 (t -2.5)
+   cells with design t > 0: 24/24; median design t 1.42
+
+   ML filter (skip score < 0). WF = walk-forward 2019-26 (expanding, retrained each January); FZ = frozen at 2022, 2023-26
+   base ADX 20 / 0.3 / 3R, NQ input set                  : WF skip 49%, kept $-6 vs skipped $2, years kept > skipped 4/8, vs random skips pct 45%; FZ 2023-26 kept $-67 (n 243) vs skipped $-42
+        kept trades (WF), 2019-26                               n= 485 avg $    -6 PF 0.98 t -0.2 win 44% yrs+ 3/8 | 18-22 $   79 (t  1.4) 23-26 $  -85 (t -1.7)
+        kept trades 2023-26 with frozen-2022 weights            n= 243 avg $   -67 PF 0.82 t -1.3 win 41% yrs+ 1/4 | 18-22 $  nan (t  nan) 23-26 $  -67 (t -1.3)
+   base ADX 20 / 0.3 / 3R, + cross-index (YM-ES, YM-NQ)  : WF skip 48%, kept $-13 vs skipped $9, years kept > skipped 4/8, vs random skips pct 36%; FZ 2023-26 kept $-55 (n 246) vs skipped $-55
+        kept trades (WF), 2019-26                               n= 494 avg $   -13 PF 0.96 t -0.3 win 43% yrs+ 5/8 | 18-22 $   53 (t  0.9) 23-26 $  -77 (t -1.5)
+        kept trades 2023-26 with frozen-2022 weights            n= 246 avg $   -55 PF 0.86 t -0.9 win 40% yrs+ 1/4 | 18-22 $  nan (t  nan) 23-26 $  -55 (t -0.9)
+   base ADX 30 / 0.25 / 3R, NQ input set                  : WF skip 52%, kept $-11 vs skipped $4, years kept > skipped 3/8, vs random skips pct 32%; FZ 2023-26 kept $-147 (n 148) vs skipped $-18
+        kept trades (WF), 2019-26                               n= 313 avg $   -11 PF 0.97 t -0.2 win 41% yrs+ 4/8 | 18-22 $  106 (t  1.6) 23-26 $ -147 (t -2.1)
+        kept trades 2023-26 with frozen-2022 weights            n= 148 avg $  -147 PF 0.66 t -2.1 win 32% yrs+ 0/4 | 18-22 $  nan (t  nan) 23-26 $ -147 (t -2.1)
+   base ADX 30 / 0.25 / 3R, + cross-index (YM-ES, YM-NQ)  : WF skip 51%, kept $-27 vs skipped $20, years kept > skipped 3/8, vs random skips pct 15%; FZ 2023-26 kept $-146 (n 149) vs skipped $-18
+        kept trades (WF), 2019-26                               n= 321 avg $   -27 PF 0.92 t -0.6 win 40% yrs+ 4/8 | 18-22 $   53 (t  0.9) 23-26 $ -121 (t -1.8)
+        kept trades 2023-26 with frozen-2022 weights            n= 149 avg $  -146 PF 0.66 t -2.1 win 33% yrs+ 0/4 | 18-22 $  nan (t  nan) 23-26 $ -146 (t -2.1)
+   base ADX 25 / 0.2 / 3R, NQ input set                  : WF skip 52%, kept $-11 vs skipped $18, years kept > skipped 5/8, vs random skips pct 30%; FZ 2023-26 kept $-60 (n 184) vs skipped $-61
+        kept trades (WF), 2019-26                               n= 388 avg $   -11 PF 0.96 t -0.3 win 37% yrs+ 4/8 | 18-22 $   69 (t  1.3) 23-26 $  -96 (t -1.8)
+        kept trades 2023-26 with frozen-2022 weights            n= 184 avg $   -60 PF 0.82 t -1.1 win 33% yrs+ 0/4 | 18-22 $  nan (t  nan) 23-26 $  -60 (t -1.1)
+   base ADX 25 / 0.2 / 3R, + cross-index (YM-ES, YM-NQ)  : WF skip 51%, kept $-13 vs skipped $20, years kept > skipped 4/8, vs random skips pct 25%; FZ 2023-26 kept $-96 (n 195) vs skipped $-28
+        kept trades (WF), 2019-26                               n= 394 avg $   -13 PF 0.96 t -0.4 win 37% yrs+ 4/8 | 18-22 $   72 (t  1.4) 23-26 $ -100 (t -1.9)
+        kept trades 2023-26 with frozen-2022 weights            n= 195 avg $   -96 PF 0.72 t -1.9 win 31% yrs+ 0/4 | 18-22 $  nan (t  nan) 23-26 $  -96 (t -1.9)
+   frozen-2022 weights (standardized), NQ recipe on YM base ADX 20: {'ret1': -0.016, 'ret5': -0.018, 'ret20': -0.005, 'rth1': 0.01, 'atr_ratio': -0.015, 'dist50': -0.02, 'rv5_rv20': 0.026, 'dow0': 0.049, 'dow1': 0.005, 'dow2': -0.012, 'dow3': -0.052, 'dow4': 0.017, 'tdm': 0.019, 'opex_wk': -0.027}
+
+======================================================================================================================
+2. MOC auction follow on YM: sign(14:00 -> 14:50) at the 14:51 open, out at the 15:00 close
+   |14:00->14:50| >= 0.1 ATR, stop none                         n= 996 avg $     4 PF 1.04 t  0.3 win 48% yrs+ 6/9 | 18-22 $   23 (t  1.4) 23-26 $  -25 (t -1.5)
+   |14:00->14:50| >= 0.1 ATR, stop 0.25                         n= 996 avg $    10 PF 1.09 t  0.9 win 48% yrs+ 6/9 | 18-22 $   30 (t  2.0) 23-26 $  -21 (t -1.3)
+   |14:00->14:50| >= 0.2 ATR, stop none                         n= 418 avg $    50 PF 1.42 t  2.2 win 51% yrs+ 7/9 | 18-22 $   90 (t  3.0) 23-26 $  -20 (t -0.6)
+   |14:00->14:50| >= 0.2 ATR, stop 0.25                         n= 418 avg $    55 PF 1.48 t  2.6 win 51% yrs+ 7/9 | 18-22 $   96 (t  3.4) 23-26 $  -17 (t -0.6)
+   |14:00->14:50| >= 0.3 ATR, stop none                         n= 189 avg $   119 PF 2.06 t  3.1 win 58% yrs+ 7/9 | 18-22 $  174 (t  3.5) 23-26 $   20 (t  0.3)
+   |14:00->14:50| >= 0.3 ATR, stop 0.25                         n= 189 avg $   123 PF 2.17 t  3.4 win 58% yrs+ 7/9 | 18-22 $  171 (t  3.5) 23-26 $   37 (t  0.8)
+   |14:00->14:50| >= 0.4 ATR, stop none                         n=  80 avg $   106 PF 1.93 t  1.9 win 57% yrs+ 7/9 | 18-22 $  175 (t  3.2) 23-26 $  -10 (t -0.1)
+   |14:00->14:50| >= 0.4 ATR, stop 0.25                         n=  80 avg $   105 PF 1.98 t  2.2 win 56% yrs+ 7/9 | 18-22 $  148 (t  2.6) 23-26 $   34 (t  0.4)
+   |14:00->14:50| >= 0.5 ATR, stop none                         n=  42 avg $   132 PF 2.19 t  1.5 win 64% yrs+ 7/9 | 18-22 $  219 (t  3.0) 23-26 $  -63 (t -0.3)
+   |14:00->14:50| >= 0.5 ATR, stop 0.25                         n=  42 avg $   134 PF 2.42 t  2.0 win 62% yrs+ 7/9 | 18-22 $  171 (t  2.1) 23-26 $   53 (t  0.4)
+   pick by 2018-22 t: (0.3, 0.25) (t 3.5)
+     longs                                                      n=  79 avg $   159 PF 2.79 t  2.6 win 57% yrs+ 6/9 | 18-22 $  185 (t  2.4) 23-26 $   88 (t  1.1)
+     shorts                                                     n= 110 avg $    97 PF 1.83 t  2.2 win 58% yrs+ 7/9 | 18-22 $  158 (t  2.6) 23-26 $   15 (t  0.3)
+   gross move in ATR, YM / ES / NQ, same rule (MOC follow is a cash-close flow, so it should show on all three):
+     YM: $ per contract                                         n= 189 avg $   123 PF 2.17 t  3.4 win 58% yrs+ 7/9 | 18-22 $  171 (t  3.5) 23-26 $   37 (t  0.8) | gross +0.0467 ATR (t 3.5)
+     ES: $ per contract                                         n= 202 avg $   158 PF 2.11 t  3.5 win 58% yrs+ 8/9 | 18-22 $  189 (t  3.6) 23-26 $   99 (t  1.2) | gross +0.0492 ATR (t 3.4)
+     NQ: $ per contract                                         n= 140 avg $   263 PF 2.19 t  3.1 win 58% yrs+ 8/9 | 18-22 $  398 (t  4.3) 23-26 $   54 (t  0.3) | gross +0.0489 ATR (t 3.2)
+   placebo: the same rule at other times (50-minute move, then the next 10 minutes), YM:
+     decide 1050                                                n= 214 avg $   -42 PF 0.60 t -2.5 win 42% yrs+ 1/9 | 18-22 $  -59 (t -2.6) 23-26 $  -20 (t -0.8)
+     decide 1150                                                n= 140 avg $   -37 PF 0.64 t -1.8 win 45% yrs+ 2/9 | 18-22 $  -40 (t -1.6) 23-26 $  -31 (t -0.9)
+     decide 1250                                                n= 138 avg $    18 PF 1.22 t  0.8 win 47% yrs+ 4/9 | 18-22 $   42 (t  1.4) 23-26 $  -10 (t -0.3)
+     decide 1320                                                n= 152 avg $   -35 PF 0.68 t -1.7 win 45% yrs+ 3/9 | 18-22 $  -77 (t -2.8) 23-26 $   11 (t  0.4)
+     decide 1350                                                n= 162 avg $   -14 PF 0.88 t -0.6 win 42% yrs+ 3/9 | 18-22 $  -40 (t -1.2) 23-26 $   21 (t  0.6)
+     decide 1420                                                n= 158 avg $    -4 PF 0.97 t -0.1 win 51% yrs+ 6/9 | 18-22 $   -6 (t -0.1) 23-26 $   -0 (t -0.0)
+     decide 1450                                                n= 189 avg $   123 PF 2.17 t  3.4 win 58% yrs+ 7/9 | 18-22 $  171 (t  3.5) 23-26 $   37 (t  0.8)
+
+======================================================================================================================
+3. YM - ES rotation (beta-adjusted residual), trade YM only
+   rolling beta YM on ES: median 0.85; residual sd median 35 bp
+   (a) prior-day residual z -> YM 8:31 open to 15:00 close next day
+     |z| >= 1.0, revert, stop none                              n= 626 avg $    37 PF 1.07 t  0.6 win 49% yrs+ 7/9 | 18-22 $  113 (t  1.5) 23-26 $  -57 (t -0.5)
+     |z| >= 1.0, revert, stop 0.5                               n= 626 avg $    22 PF 1.05 t  0.4 win 46% yrs+ 6/9 | 18-22 $   26 (t  0.4) 23-26 $   17 (t  0.2)
+     |z| >= 1.0, continue, stop none                            n= 626 avg $   -67 PF 0.88 t -1.1 win 49% yrs+ 2/9 | 18-22 $ -143 (t -1.9) 23-26 $   27 (t  0.3)
+     |z| >= 1.0, continue, stop 0.5                             n= 626 avg $   -41 PF 0.92 t -0.7 win 45% yrs+ 2/9 | 18-22 $ -127 (t -2.0) 23-26 $   67 (t  0.7)
+     |z| >= 1.5, revert, stop none                              n= 286 avg $   167 PF 1.37 t  1.9 win 54% yrs+ 7/9 | 18-22 $  186 (t  1.6) 23-26 $  141 (t  1.0)
+     |z| >= 1.5, revert, stop 0.5                               n= 286 avg $    80 PF 1.17 t  1.0 win 50% yrs+ 4/9 | 18-22 $   50 (t  0.4) 23-26 $  119 (t  1.0)
+     |z| >= 1.5, continue, stop none                            n= 286 avg $  -197 PF 0.69 t -2.2 win 45% yrs+ 2/9 | 18-22 $ -216 (t -1.9) 23-26 $ -171 (t -1.2)
+     |z| >= 1.5, continue, stop 0.5                             n= 286 avg $  -119 PF 0.77 t -1.6 win 42% yrs+ 2/9 | 18-22 $ -177 (t -1.9) 23-26 $  -42 (t -0.3)
+     |z| >= 2.0, revert, stop none                              n= 124 avg $   215 PF 1.45 t  1.5 win 53% yrs+ 5/9 | 18-22 $  209 (t  1.1) 23-26 $  226 (t  1.1)
+     |z| >= 2.0, revert, stop 0.5                               n= 124 avg $    20 PF 1.03 t  0.1 win 48% yrs+ 4/9 | 18-22 $  -58 (t -0.3) 23-26 $  156 (t  0.7)
+     |z| >= 2.0, continue, stop none                            n= 124 avg $  -245 PF 0.65 t -1.7 win 47% yrs+ 3/9 | 18-22 $ -239 (t -1.2) 23-26 $ -256 (t -1.2)
+     |z| >= 2.0, continue, stop 0.5                             n= 124 avg $  -187 PF 0.68 t -1.6 win 43% yrs+ 5/9 | 18-22 $ -231 (t -1.5) 23-26 $ -109 (t -0.6)
+   (b) morning residual (8:31 open -> decision), z vs its own 60-day sd -> YM from the next bar to 15:00
+     decide 1000, |z| >= 1.0, revert, stop none                 n= 676 avg $   -11 PF 0.97 t -0.2 win 52% yrs+ 4/9 | 18-22 $   21 (t  0.3) 23-26 $  -56 (t -0.7)
+     decide 1000, |z| >= 1.0, revert, stop 0.5                  n= 676 avg $    13 PF 1.03 t  0.3 win 49% yrs+ 4/9 | 18-22 $   52 (t  0.9) 23-26 $  -40 (t -0.7)
+     decide 1000, |z| >= 1.0, continue, stop none               n= 676 avg $   -19 PF 0.96 t -0.4 win 47% yrs+ 4/9 | 18-22 $  -51 (t -0.8) 23-26 $   26 (t  0.3)
+     decide 1000, |z| >= 1.0, continue, stop 0.5                n= 676 avg $   -10 PF 0.97 t -0.2 win 45% yrs+ 3/9 | 18-22 $  -32 (t -0.6) 23-26 $   19 (t  0.2)
+     decide 1000, |z| >= 1.5, revert, stop none                 n= 283 avg $    50 PF 1.12 t  0.6 win 55% yrs+ 7/9 | 18-22 $   36 (t  0.3) 23-26 $   67 (t  0.8)
+     decide 1000, |z| >= 1.5, revert, stop 0.5                  n= 283 avg $    99 PF 1.28 t  1.4 win 54% yrs+ 9/9 | 18-22 $  137 (t  1.3) 23-26 $   53 (t  0.6)
+     decide 1000, |z| >= 1.5, continue, stop none               n= 283 avg $   -80 PF 0.83 t -1.0 win 45% yrs+ 2/9 | 18-22 $  -66 (t -0.5) 23-26 $  -97 (t -1.1)
+     decide 1000, |z| >= 1.5, continue, stop 0.5                n= 283 avg $   -76 PF 0.83 t -1.1 win 44% yrs+ 2/9 | 18-22 $  -59 (t -0.6) 23-26 $  -98 (t -1.2)
+     decide 1000, |z| >= 2.0, revert, stop none                 n= 118 avg $   197 PF 1.54 t  1.5 win 59% yrs+ 7/9 | 18-22 $  186 (t  0.9) 23-26 $  211 (t  1.4)
+     decide 1000, |z| >= 2.0, revert, stop 0.5                  n= 118 avg $   229 PF 1.70 t  1.9 win 57% yrs+ 7/9 | 18-22 $  270 (t  1.4) 23-26 $  178 (t  1.2)
+     decide 1000, |z| >= 2.0, continue, stop none               n= 118 avg $  -227 PF 0.61 t -1.7 win 41% yrs+ 2/9 | 18-22 $ -216 (t -1.0) 23-26 $ -241 (t -1.6)
+     decide 1000, |z| >= 2.0, continue, stop 0.5                n= 118 avg $  -219 PF 0.59 t -2.0 win 39% yrs+ 1/9 | 18-22 $ -234 (t -1.4) 23-26 $ -200 (t -1.6)
+     decide 1100, |z| >= 1.0, revert, stop none                 n= 659 avg $     7 PF 1.02 t  0.2 win 54% yrs+ 6/9 | 18-22 $   63 (t  1.1) 23-26 $  -61 (t -0.8)
+     decide 1100, |z| >= 1.0, revert, stop 0.5                  n= 659 avg $    19 PF 1.06 t  0.5 win 52% yrs+ 5/9 | 18-22 $   59 (t  1.2) 23-26 $  -29 (t -0.6)
+     decide 1100, |z| >= 1.0, continue, stop none               n= 659 avg $   -37 PF 0.90 t -0.8 win 45% yrs+ 2/9 | 18-22 $  -93 (t -1.6) 23-26 $   31 (t  0.4)
+     decide 1100, |z| >= 1.0, continue, stop 0.5                n= 659 avg $   -47 PF 0.87 t -1.1 win 44% yrs+ 2/9 | 18-22 $  -92 (t -1.9) 23-26 $    9 (t  0.1)
+     decide 1100, |z| >= 1.5, revert, stop none                 n= 299 avg $   -23 PF 0.94 t -0.3 win 55% yrs+ 6/9 | 18-22 $   20 (t  0.2) 23-26 $  -75 (t -0.6)
+     decide 1100, |z| >= 1.5, revert, stop 0.5                  n= 299 avg $    -4 PF 0.99 t -0.1 win 53% yrs+ 4/9 | 18-22 $   17 (t  0.2) 23-26 $  -31 (t -0.4)
+     decide 1100, |z| >= 1.5, continue, stop none               n= 299 avg $    -7 PF 0.98 t -0.1 win 43% yrs+ 2/9 | 18-22 $  -50 (t -0.6) 23-26 $   45 (t  0.3)
+     decide 1100, |z| >= 1.5, continue, stop 0.5                n= 299 avg $   -65 PF 0.84 t -0.9 win 42% yrs+ 2/9 | 18-22 $ -114 (t -1.5) 23-26 $   -3 (t -0.0)
+     decide 1100, |z| >= 2.0, revert, stop none                 n= 120 avg $    17 PF 1.05 t  0.2 win 56% yrs+ 6/9 | 18-22 $  -51 (t -0.3) 23-26 $  105 (t  0.9)
+     decide 1100, |z| >= 2.0, revert, stop 0.5                  n= 120 avg $   -12 PF 0.96 t -0.2 win 53% yrs+ 6/9 | 18-22 $ -112 (t -1.0) 23-26 $  118 (t  1.1)
+     decide 1100, |z| >= 2.0, continue, stop none               n= 120 avg $   -47 PF 0.88 t -0.5 win 42% yrs+ 3/9 | 18-22 $   21 (t  0.1) 23-26 $ -135 (t -1.1)
+     decide 1100, |z| >= 2.0, continue, stop 0.5                n= 120 avg $  -111 PF 0.75 t -1.1 win 41% yrs+ 2/9 | 18-22 $  -77 (t -0.5) 23-26 $ -155 (t -1.3)
+     decide 1200, |z| >= 1.0, revert, stop none                 n= 664 avg $    21 PF 1.07 t  0.5 win 53% yrs+ 6/9 | 18-22 $   54 (t  1.0) 23-26 $  -20 (t -0.3)
+     decide 1200, |z| >= 1.0, revert, stop 0.5                  n= 664 avg $    37 PF 1.13 t  1.1 win 53% yrs+ 7/9 | 18-22 $   52 (t  1.0) 23-26 $   17 (t  0.4)
+     decide 1200, |z| >= 1.0, continue, stop none               n= 664 avg $   -51 PF 0.85 t -1.2 win 45% yrs+ 2/9 | 18-22 $  -84 (t -1.6) 23-26 $  -10 (t -0.2)
+     decide 1200, |z| >= 1.0, continue, stop 0.5                n= 664 avg $   -55 PF 0.84 t -1.4 win 44% yrs+ 2/9 | 18-22 $  -95 (t -2.1) 23-26 $   -5 (t -0.1)
+     decide 1200, |z| >= 1.5, revert, stop none                 n= 294 avg $   -37 PF 0.90 t -0.5 win 52% yrs+ 6/9 | 18-22 $    5 (t  0.0) 23-26 $  -84 (t -0.7)
+     decide 1200, |z| >= 1.5, revert, stop 0.5                  n= 294 avg $     8 PF 1.03 t  0.2 win 51% yrs+ 5/9 | 18-22 $   16 (t  0.2) 23-26 $   -1 (t -0.0)
+     decide 1200, |z| >= 1.5, continue, stop none               n= 294 avg $     7 PF 1.02 t  0.1 win 47% yrs+ 3/9 | 18-22 $  -35 (t -0.4) 23-26 $   54 (t  0.5)
+     decide 1200, |z| >= 1.5, continue, stop 0.5                n= 294 avg $   -25 PF 0.93 t -0.4 win 46% yrs+ 3/9 | 18-22 $  -79 (t -1.0) 23-26 $   36 (t  0.3)
+     decide 1200, |z| >= 2.0, revert, stop none                 n= 122 avg $   -60 PF 0.84 t -0.7 win 47% yrs+ 3/9 | 18-22 $  -66 (t -0.5) 23-26 $  -53 (t -0.5)
+     decide 1200, |z| >= 2.0, revert, stop 0.5                  n= 122 avg $   -44 PF 0.88 t -0.5 win 46% yrs+ 4/9 | 18-22 $  -53 (t -0.4) 23-26 $  -34 (t -0.3)
+     decide 1200, |z| >= 2.0, continue, stop none               n= 122 avg $    30 PF 1.09 t  0.3 win 53% yrs+ 5/9 | 18-22 $   36 (t  0.3) 23-26 $   23 (t  0.2)
+     decide 1200, |z| >= 2.0, continue, stop 0.5                n= 122 avg $    -9 PF 0.97 t -0.1 win 51% yrs+ 3/9 | 18-22 $  -51 (t -0.4) 23-26 $   38 (t  0.4)
+   pick by 2018-22 t (of 48 cells): ('prior day', 1.5, 'revert', None) (t 1.6)
+     longs                                                      n= 152 avg $   163 PF 1.38 t  1.3 win 59% yrs+ 6/9 | 18-22 $  269 (t  1.7) 23-26 $   36 (t  0.2)
+     shorts                                                     n= 134 avg $   171 PF 1.36 t  1.3 win 49% yrs+ 6/9 | 18-22 $  100 (t  0.6) 23-26 $  276 (t  1.4)
+     placebo: same rule on YM's own move (no ES)                n= 299 avg $   102 PF 1.19 t  1.1 win 49% yrs+ 5/9 | 18-22 $  143 (t  1.1) 23-26 $   50 (t  0.4)
+   placebo: random sides on the same days (200 draws): mean $-12, 95th pct $131; picked $167
+
+======================================================================================================================
+4. Forced-flow battery, YM vs ES vs NQ (same rules; $ per contract; gross move in ATR units)
+   Expiry 8:30 open short (8:31 -> 10:00, stop 0.3 ATR)
+     YM   n= 105 avg $    10 PF 1.04 t  0.2 win 51% yrs+ 5/9 | 18-22 $  -33 (t -0.4) 23-26 $   67 (t  0.7) | gross +0.0129 ATR (t  0.5)
+     ES   n= 105 avg $   139 PF 1.48 t  1.6 win 54% yrs+ 6/9 | 18-22 $   66 (t  0.6) 23-26 $  236 (t  1.6) | gross +0.0566 ATR (t  2.2)
+     NQ   n= 105 avg $   475 PF 1.94 t  2.6 win 59% yrs+ 8/9 | 18-22 $  313 (t  1.6) 23-26 $  692 (t  2.0) | gross +0.1047 ATR (t  3.4)
+     quarterly expiries only
+     YM   n=  35 avg $    83 PF 1.36 t  0.8 win 63% yrs+ 5/9 | 18-22 $   23 (t  0.2) 23-26 $  162 (t  1.0) | gross +0.0539 ATR (t  1.2)
+     ES   n=  35 avg $   174 PF 1.57 t  1.1 win 54% yrs+ 5/9 | 18-22 $   24 (t  0.1) 23-26 $  374 (t  1.3) | gross +0.0776 ATR (t  1.6)
+     NQ   n=  35 avg $   260 PF 1.42 t  0.8 win 60% yrs+ 6/9 | 18-22 $   52 (t  0.2) 23-26 $  536 (t  0.8) | gross +0.0835 ATR (t  1.5)
+   Monday long (8:31 -> 15:00, stop 0.5 ATR)
+     YM   n= 452 avg $    32 PF 1.08 t  0.6 win 53% yrs+ 5/9 | 18-22 $   18 (t  0.3) 23-26 $   50 (t  0.6) | gross +0.0238 ATR (t  1.1)
+     ES   n= 452 avg $   114 PF 1.25 t  1.7 win 55% yrs+ 6/9 | 18-22 $  -43 (t -0.6) 23-26 $  322 (t  2.8) | gross +0.0422 ATR (t  2.1)
+     NQ   n= 452 avg $   413 PF 1.52 t  3.2 win 55% yrs+ 7/9 | 18-22 $  132 (t  1.0) 23-26 $  786 (t  3.3) | gross +0.0778 ATR (t  3.6)
+   Month-end last hour long (14:01 -> 15:00)
+     YM   n= 100 avg $    59 PF 1.25 t  0.8 win 51% yrs+ 6/9 | 18-22 $   -8 (t -0.1) 23-26 $  147 (t  1.3) | gross +0.0260 ATR (t  0.8)
+     ES   n= 100 avg $    38 PF 1.11 t  0.4 win 50% yrs+ 6/9 | 18-22 $  -48 (t -0.4) 23-26 $  152 (t  0.9) | gross +0.0079 ATR (t  0.2)
+     NQ   n= 100 avg $   130 PF 1.28 t  0.9 win 51% yrs+ 6/9 | 18-22 $   33 (t  0.2) 23-26 $  258 (t  1.0) | gross +0.0226 ATR (t  0.9)
+   Month-end last hour follow 8:30->14:00 (14:01 -> 15:00)
+     YM   n= 100 avg $   143 PF 1.73 t  2.0 win 55% yrs+ 5/9 | 18-22 $  149 (t  1.6) 23-26 $  134 (t  1.2) | gross +0.0561 ATR (t  1.8)
+     ES   n= 100 avg $   171 PF 1.61 t  1.7 win 59% yrs+ 5/9 | 18-22 $  163 (t  1.4) 23-26 $  181 (t  1.1) | gross +0.0334 ATR (t  1.0)
+     NQ   n= 100 avg $   210 PF 1.49 t  1.5 win 58% yrs+ 4/9 | 18-22 $  185 (t  1.1) 23-26 $  243 (t  0.9) | gross +0.0278 ATR (t  1.1)
+   Quarter-end last hour long (14:01 -> 15:00)
+     YM   n=  35 avg $    -5 PF 0.98 t -0.1 win 57% yrs+ 5/9 | 18-22 $ -160 (t -1.0) 23-26 $  200 (t  1.7) | gross +0.0027 ATR (t  0.1)
+     ES   n=  35 avg $  -156 PF 0.64 t -1.0 win 40% yrs+ 3/9 | 18-22 $ -261 (t -1.3) 23-26 $  -15 (t -0.1) | gross -0.0450 ATR (t -0.9)
+     NQ   n=  35 avg $  -247 PF 0.61 t -1.2 win 43% yrs+ 2/9 | 18-22 $ -368 (t -1.4) 23-26 $  -86 (t -0.2) | gross -0.0330 ATR (t -0.9)
+   Quarter-end last hour follow 8:30->14:00 (14:01 -> 15:00)
+     YM   n=  35 avg $    61 PF 1.28 t  0.6 win 51% yrs+ 7/9 | 18-22 $  102 (t  0.6) 23-26 $    6 (t  0.0) | gross +0.0037 ATR (t  0.1)
+     ES   n=  35 avg $   135 PF 1.47 t  0.9 win 54% yrs+ 6/9 | 18-22 $   78 (t  0.4) 23-26 $  212 (t  0.9) | gross +0.0242 ATR (t  0.5)
+     NQ   n=  35 avg $   179 PF 1.43 t  0.8 win 60% yrs+ 6/9 | 18-22 $   91 (t  0.3) 23-26 $  296 (t  0.8) | gross +0.0308 ATR (t  0.8)
+   Post-settlement fade of 14:00->15:00 (|move| >= 0.2 ATR), 15:01 -> 15:15
+     YM   n= 582 avg $    25 PF 1.40 t  2.6 win 54% yrs+ 6/9 | 18-22 $   28 (t  2.2) 23-26 $   21 (t  1.5) | gross +0.0108 ATR (t  2.5)
+     ES   n= 617 avg $    11 PF 1.11 t  0.8 win 47% yrs+ 5/9 | 18-22 $   18 (t  1.1) 23-26 $    0 (t  0.0) | gross -0.0028 ATR (t -0.6)
+     NQ   n= 515 avg $     8 PF 1.04 t  0.3 win 53% yrs+ 4/9 | 18-22 $   34 (t  1.3) 23-26 $  -35 (t -0.5) | gross +0.0010 ATR (t  0.2)
+   Post-settlement fade of 14:50->15:00 (|move| >= 0.05 ATR), 15:01 -> 15:15
+     YM   n=1327 avg $     0 PF 1.01 t  0.1 win 48% yrs+ 6/9 | 18-22 $   -4 (t -0.5) 23-26 $    6 (t  0.8) | gross +0.0012 ATR (t  0.5)
+     ES   n=1392 avg $   -23 PF 0.78 t -2.9 win 43% yrs+ 2/9 | 18-22 $  -21 (t -2.1) 23-26 $  -27 (t -2.0) | gross -0.0086 ATR (t -3.2)
+     NQ   n=1299 avg $   -22 PF 0.88 t -1.4 win 47% yrs+ 2/9 | 18-22 $   -7 (t -0.4) 23-26 $  -43 (t -1.3) | gross -0.0029 ATR (t -1.0)
+   Post-settlement fade of 8:31->15:00 (|move| >= 0.2 ATR), 15:01 -> 15:15
+     YM   n=1452 avg $   -10 PF 0.86 t -1.9 win 44% yrs+ 2/9 | 18-22 $    0 (t  0.0) 23-26 $  -24 (t -3.0) | gross -0.0060 ATR (t -2.6)
+     ES   n=1488 avg $   -10 PF 0.90 t -1.3 win 45% yrs+ 4/9 | 18-22 $   -4 (t -0.4) 23-26 $  -19 (t -1.5) | gross -0.0071 ATR (t -2.7)
+     NQ   n=1532 avg $     2 PF 1.01 t  0.1 win 48% yrs+ 2/9 | 18-22 $   12 (t  0.8) 23-26 $  -13 (t -0.5) | gross -0.0023 ATR (t -0.8)
+   YM-specific (YM |t| >= 2.5 and its ATR-scaled move > 1.5x both ES and NQ): none
+   Dow component changes (effective dates typed in, list may be incomplete; n = 6 -> descriptive only):
+     2018-06-26: effective day YM -0.08 ATR vs ES -0.04; next day YM -0.94 vs ES -1.23
+     2019-04-02: effective day YM -0.12 ATR vs ES -0.02; next day YM -0.20 vs ES -0.28
+     2020-04-06: effective day YM +0.51 ATR vs ES +0.44; next day YM -0.64 vs ES -0.58
+     2020-08-31: effective day YM -0.55 ATR vs ES -0.26; next day YM +0.85 vs ES +0.61
+     2024-02-26: effective day YM -0.20 ATR vs ES -0.51; next day YM -0.20 vs ES +0.04
+     2024-11-08: effective day YM +0.36 ATR vs ES +0.34; next day YM +0.23 vs ES -0.15
+
+   4b. Post-settlement fade of 14:00 -> 15:00 on YM: sensitivity and placebos
+     |14:00->15:00| >= 0.1 ATR, out 1505                        n=1177 avg $     6 PF 1.12 t  1.3 win 49% yrs+ 6/9 | 18-22 $    5 (t  0.9) 23-26 $    7 (t  1.0)
+     |14:00->15:00| >= 0.1 ATR, out 1510                        n=1177 avg $     7 PF 1.13 t  1.4 win 50% yrs+ 6/9 | 18-22 $    5 (t  0.8) 23-26 $   11 (t  1.3)
+     |14:00->15:00| >= 0.1 ATR, out 1515                        n=1177 avg $    14 PF 1.22 t  2.2 win 51% yrs+ 7/9 | 18-22 $   13 (t  1.5) 23-26 $   16 (t  1.7)
+     |14:00->15:00| >= 0.1 ATR, out 1530                        n=1177 avg $     9 PF 1.13 t  1.4 win 51% yrs+ 7/9 | 18-22 $    1 (t  0.2) 23-26 $   21 (t  1.9)
+     |14:00->15:00| >= 0.2 ATR, out 1505                        n= 582 avg $    20 PF 1.41 t  2.7 win 53% yrs+ 6/9 | 18-22 $   19 (t  2.0) 23-26 $   21 (t  2.0)
+     |14:00->15:00| >= 0.2 ATR, out 1510                        n= 582 avg $    19 PF 1.33 t  2.4 win 54% yrs+ 6/9 | 18-22 $   17 (t  1.7) 23-26 $   22 (t  1.8)
+     |14:00->15:00| >= 0.2 ATR, out 1515                        n= 582 avg $    25 PF 1.40 t  2.6 win 54% yrs+ 6/9 | 18-22 $   28 (t  2.2) 23-26 $   21 (t  1.5)
+     |14:00->15:00| >= 0.2 ATR, out 1530                        n= 582 avg $    18 PF 1.25 t  1.7 win 53% yrs+ 8/9 | 18-22 $   13 (t  1.0) 23-26 $   26 (t  1.4)
+     |14:00->15:00| >= 0.3 ATR, out 1505                        n= 283 avg $    25 PF 1.50 t  2.2 win 54% yrs+ 7/9 | 18-22 $   20 (t  1.3) 23-26 $   36 (t  2.5)
+     |14:00->15:00| >= 0.3 ATR, out 1510                        n= 283 avg $    26 PF 1.45 t  2.1 win 56% yrs+ 8/9 | 18-22 $   23 (t  1.4) 23-26 $   33 (t  1.8)
+     |14:00->15:00| >= 0.3 ATR, out 1515                        n= 283 avg $    36 PF 1.52 t  2.3 win 56% yrs+ 6/9 | 18-22 $   39 (t  1.9) 23-26 $   30 (t  1.3)
+     |14:00->15:00| >= 0.3 ATR, out 1530                        n= 283 avg $    25 PF 1.32 t  1.4 win 53% yrs+ 8/9 | 18-22 $   15 (t  0.7) 23-26 $   45 (t  1.4)
+     |14:00->15:00| >= 0.4 ATR, out 1505                        n= 168 avg $    34 PF 1.61 t  2.0 win 57% yrs+ 6/9 | 18-22 $   26 (t  1.1) 23-26 $   51 (t  2.7)
+     |14:00->15:00| >= 0.4 ATR, out 1510                        n= 168 avg $    34 PF 1.50 t  1.8 win 57% yrs+ 8/9 | 18-22 $   24 (t  1.0) 23-26 $   53 (t  2.0)
+     |14:00->15:00| >= 0.4 ATR, out 1515                        n= 168 avg $    63 PF 1.96 t  2.8 win 60% yrs+ 8/9 | 18-22 $   55 (t  1.8) 23-26 $   80 (t  3.2)
+     |14:00->15:00| >= 0.4 ATR, out 1530                        n= 168 avg $    35 PF 1.41 t  1.4 win 57% yrs+ 7/9 | 18-22 $   24 (t  0.8) 23-26 $   58 (t  1.6)
+     picked rule with 2 ticks per fill instead of 1             n= 582 avg $    15 PF 1.23 t  1.6 win 50% yrs+ 5/9 | 18-22 $   18 (t  1.4) 23-26 $   11 (t  0.8)
+   placebo, other times (fade the prior 60-minute move >= 0.2 ATR, hold 14 minutes):
+     decide 1000                                                n= 807 avg $   -12 PF 0.89 t -1.1 win 46% yrs+ 4/9 | 18-22 $  -17 (t -1.2) 23-26 $   -6 (t -0.4)
+     decide 1100                                                n= 584 avg $   -49 PF 0.57 t -4.4 win 44% yrs+ 1/9 | 18-22 $  -37 (t -2.4) 23-26 $  -64 (t -3.9)
+     decide 1200                                                n= 411 avg $   -17 PF 0.83 t -1.3 win 47% yrs+ 2/9 | 18-22 $  -23 (t -1.3) 23-26 $  -10 (t -0.5)
+     decide 1300                                                n= 424 avg $    -9 PF 0.92 t -0.6 win 42% yrs+ 5/9 | 18-22 $    1 (t  0.0) 23-26 $  -19 (t -0.9)
+     decide 1400                                                n= 460 avg $   -16 PF 0.86 t -1.0 win 48% yrs+ 3/9 | 18-22 $  -43 (t -2.1) 23-26 $   18 (t  0.7)
+     decide 1430                                                n= 418 avg $   -34 PF 0.76 t -1.8 win 45% yrs+ 4/9 | 18-22 $  -46 (t -2.1) 23-26 $  -16 (t -0.5)
+   placebo: random sides on the same days (300 draws): mean $-15, 95th pct $-0; rule $25
+   regime: 2018-20 $8 (n 220), 2021-26 $36 (n 362)
+
+======================================================================================================================
+5. Advance check (|t| >= 2.5 overall and the same sign in 2018-22 and 2023-26), all YM variants tested
+   77 YM variants tested; advancing: 3
+   largest |t| among all YM variants (for reference):
+     [2 MOC] th 0.3 stop 0.25                                   n= 189 avg $   123 PF 2.17 t  3.4 win 58% yrs+ 7/9 | 18-22 $  171 (t  3.5) 23-26 $   37 (t  0.8)
+     [2 MOC] th 0.3 stop None                                   n= 189 avg $   119 PF 2.06 t  3.1 win 58% yrs+ 7/9 | 18-22 $  174 (t  3.5) 23-26 $   20 (t  0.3)
+     [4 battery] Post-settlement fade of 14:00->15:00 (|move| > n= 582 avg $    25 PF 1.40 t  2.6 win 54% yrs+ 6/9 | 18-22 $   28 (t  2.2) 23-26 $   21 (t  1.5)
+     [2 MOC] th 0.2 stop 0.25                                   n= 418 avg $    55 PF 1.48 t  2.6 win 51% yrs+ 7/9 | 18-22 $   96 (t  3.4) 23-26 $  -17 (t -0.6)
+     [2 MOC] th 0.2 stop None                                   n= 418 avg $    50 PF 1.42 t  2.2 win 51% yrs+ 7/9 | 18-22 $   90 (t  3.0) 23-26 $  -20 (t -0.6)
+     [2 MOC] th 0.4 stop 0.25                                   n=  80 avg $   105 PF 1.98 t  2.2 win 56% yrs+ 7/9 | 18-22 $  148 (t  2.6) 23-26 $   34 (t  0.4)
+     [3 YM-ES] ('prior day', 1.5, 'continue', None)             n= 286 avg $  -197 PF 0.69 t -2.2 win 45% yrs+ 2/9 | 18-22 $ -216 (t -1.9) 23-26 $ -171 (t -1.2)
+     [3 YM-ES] (1000, 2.0, 'continue', 0.5)                     n= 118 avg $  -219 PF 0.59 t -2.0 win 39% yrs+ 1/9 | 18-22 $ -234 (t -1.4) 23-26 $ -200 (t -1.6)
+
+   ---- full report: [2 MOC] th 0.3 stop None ----
+       trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+whole     189 58% $119 $2,503   1.00    1.88          2.06 $3,570   0.70  2.00       2.51
+longs      79 57% $149 $1,310   0.76    1.87          2.49 $2,500   0.52  1.38       1.89
+shorts    110 59%  $97 $1,193   0.66    1.06          1.80 $3,515   0.34  2.20       1.09
+   whole                                                        n= 189 avg $   119 PF 2.06 t  3.1 win 58% yrs+ 7/9 | 18-22 $  174 (t  3.5) 23-26 $   20 (t  0.3)
+   longs                                                        n=  79 avg $   149 PF 2.49 t  2.3 win 57% yrs+ 5/9 | 18-22 $  171 (t  2.1) 23-26 $   88 (t  1.1)
+   shorts                                                       n= 110 avg $    97 PF 1.80 t  2.0 win 59% yrs+ 7/9 | 18-22 $  177 (t  3.0) 23-26 $  -10 (t -0.1)
+   by year: 2018 $2,890 | 2019 $570 | 2020 $9,635 | 2021 $2,040 | 2022 $5,935 | 2023 $1,185 | 2024 $3,050 | 2025 $-2,570 | 2026 $-305
+                                              actual     p5      p50      p95
+name                           metric                                        
+[2 MOC] th 0.3 stop None 2023+ sharpe           0.17  -0.47     0.20     1.03
+                               sortino          0.22  -0.53     0.26     2.31
+                               pf_day           1.14   0.66     1.16     2.08
+                               calmar           0.10  -0.19     0.13     1.71
+                               ulcer            3.64   0.53     2.32     7.86
+                               max_dd       3,570.00 900.00 3,110.00 6,990.00
+                               P(Sharpe<=0)      NaN    NaN     0.33      NaN
+longs 2023+                    sharpe           0.54  -0.24     0.55     1.12
+                               sortino          1.26  -0.35     1.30     4.68
+                               pf_day           1.96   0.76     1.97     5.00
+                               calmar           0.92  -0.11     0.61     2.84
+                               ulcer            0.57   0.21     0.61     1.76
+                               max_dd         520.00 290.00   775.00 1,705.00
+                               P(Sharpe<=0)      NaN    NaN     0.12      NaN
+shorts 2023+                   sharpe          -0.07  -0.72    -0.06     0.86
+                               sortino         -0.08  -0.77    -0.07     1.93
+                               pf_day           0.94   0.45     0.95     2.12
+                               calmar          -0.04  -0.24    -0.03     1.15
+                               ulcer            3.88   0.57     2.92     9.33
+                               max_dd       3,515.00 885.00 3,290.00 7,945.50
+                               P(Sharpe<=0)      NaN    NaN     0.54      NaN
+                               actual_dd pct_rank   dd50   dd95   dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+[2 MOC] th 0.3 stop None 2023+    $3,570      48% $3,615 $4,975 $5,605        100%        100%         85%
+longs 2023+                         $520       0%   $830 $1,335 $1,510         27%          0%          0%
+shorts 2023+                      $3,515      41% $3,670 $4,875 $5,410        100%        100%         86%
+   correlation with NQ 8:30 -> 15:00 (1 NQ $): all days 0.06, traded days 0.17
+
+   ---- full report: [2 MOC] th 0.3 stop 0.25 ----
+       trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+whole     189 58% $123 $2,594   1.12    2.63          2.17 $2,016   1.29  1.21       4.30
+longs      79 57% $159 $1,405   0.84    2.62          2.79 $1,810   0.78  1.09       2.57
+shorts    110 58%  $97 $1,188   0.73    1.43          1.83 $2,148   0.55  1.45       1.64
+   whole                                                        n= 189 avg $   123 PF 2.17 t  3.4 win 58% yrs+ 7/9 | 18-22 $  171 (t  3.5) 23-26 $   37 (t  0.8)
+   longs                                                        n=  79 avg $   159 PF 2.79 t  2.6 win 57% yrs+ 6/9 | 18-22 $  185 (t  2.4) 23-26 $   88 (t  1.1)
+   shorts                                                       n= 110 avg $    97 PF 1.83 t  2.2 win 58% yrs+ 7/9 | 18-22 $  158 (t  2.6) 23-26 $   15 (t  0.3)
+   by year: 2018 $1,488 | 2019 $805 | 2020 $9,635 | 2021 $3,074 | 2022 $5,689 | 2023 $1,120 | 2024 $2,935 | 2025 $-1,203 | 2026 $-305
+                                              actual     p5      p50      p95
+name                           metric                                        
+[2 MOC] th 0.3 stop 0.25 2023+ sharpe           0.40  -0.28     0.39     1.04
+                               sortino          0.65  -0.38     0.65     2.22
+                               pf_day           1.31   0.83     1.30     2.07
+                               calmar           0.33  -0.13     0.33     1.55
+                               ulcer            1.90   0.55     1.41     3.94
+                               max_dd       2,015.92 957.79 1,896.83 3,914.04
+                               P(Sharpe<=0)      NaN    NaN     0.17      NaN
+longs 2023+                    sharpe           0.54  -0.24     0.55     1.12
+                               sortino          1.26  -0.35     1.30     4.68
+                               pf_day           1.96   0.76     1.97     5.00
+                               calmar           0.92  -0.11     0.61     2.84
+                               ulcer            0.57   0.21     0.61     1.76
+                               max_dd         520.00 290.00   775.00 1,705.00
+                               P(Sharpe<=0)      NaN    NaN     0.12      NaN
+shorts 2023+                   sharpe           0.13  -0.63     0.11     0.84
+                               sortino          0.19  -0.78     0.17     1.76
+                               pf_day           1.11   0.59     1.10     2.10
+                               calmar           0.09  -0.22     0.07     1.06
+                               ulcer            2.29   0.62     1.85     5.16
+                               max_dd       2,147.58 956.67 2,146.92 4,588.93
+                               P(Sharpe<=0)      NaN    NaN     0.40      NaN
+                               actual_dd pct_rank   dd50   dd95   dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+[2 MOC] th 0.3 stop 0.25 2023+    $2,016      28% $2,369 $3,660 $4,368        100%         73%         19%
+longs 2023+                         $520       0%   $830 $1,335 $1,510         27%          0%          0%
+shorts 2023+                      $2,148      36% $2,374 $3,605 $4,120        100%         74%         19%
+   correlation with NQ 8:30 -> 15:00 (1 NQ $): all days 0.04, traded days 0.14
+
+   ---- full report: [4 battery] Post-settlement fade of 14:00->15:00 (|move| >= 0.2 ATR), 15:01 -> 15:15 ----
+       trades win avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+whole     582 54% $25 $1,637   0.88    1.38          1.40 $3,535   0.46  2.62       1.25
+longs     297 55% $24   $795   0.61    0.86          1.37 $2,430   0.33  1.38       1.15
+shorts    285 53% $26   $842   0.64    1.13          1.44 $2,375   0.35  2.04       0.83
+   whole                                                        n= 582 avg $    25 PF 1.40 t  2.6 win 54% yrs+ 6/9 | 18-22 $   28 (t  2.2) 23-26 $   21 (t  1.5)
+   longs                                                        n= 297 avg $    24 PF 1.37 t  1.8 win 55% yrs+ 7/9 | 18-22 $   21 (t  1.1) 23-26 $   29 (t  1.8)
+   shorts                                                       n= 285 avg $    26 PF 1.44 t  1.9 win 53% yrs+ 7/9 | 18-22 $   35 (t  2.0) 23-26 $   12 (t  0.6)
+   by year: 2018 $-2,390 | 2019 $585 | 2020 $3,485 | 2021 $2,935 | 2022 $5,675 | 2023 $2,565 | 2024 $2,070 | 2025 $-100 | 2026 $-155
+                                                                                                          actual     p5      p50      p95
+name                                                                                       metric                                        
+[4 battery] Post-settlement fade of 14:00->15:00 (|move| >= 0.2 ATR), 15:01 -> 15:15 2023+ sharpe           0.78  -0.12     0.80     1.77
+                                                                                           sortino          1.13  -0.15     1.17     3.25
+                                                                                           pf_day           1.35   0.95     1.36     1.96
+                                                                                           calmar           0.47  -0.05     0.53     2.09
+                                                                                           ulcer            1.88   0.60     1.48     4.19
+                                                                                           max_dd       2,440.00 995.00 2,105.00 4,400.25
+                                                                                           P(Sharpe<=0)      NaN    NaN     0.08      NaN
+longs 2023+                                                                                sharpe           0.89   0.01     0.90     1.65
+                                                                                           sortino          1.62   0.01     1.63     3.71
+                                                                                           pf_day           1.55   1.00     1.55     2.36
+                                                                                           calmar           0.79   0.00     0.74     2.37
+                                                                                           ulcer            0.80   0.36     0.77     2.04
+                                                                                           max_dd       1,040.00 580.00 1,090.00 2,145.00
+                                                                                           P(Sharpe<=0)      NaN    NaN     0.05      NaN
+shorts 2023+                                                                               sharpe           0.28  -0.49     0.29     1.22
+                                                                                           sortino          0.36  -0.57     0.38     2.16
+                                                                                           pf_day           1.18   0.73     1.18     2.00
+                                                                                           calmar           0.13  -0.19     0.18     1.23
+                                                                                           ulcer            2.17   0.56     1.49     4.25
+                                                                                           max_dd       2,375.00 815.00 1,775.00 3,775.75
+                                                                                           P(Sharpe<=0)      NaN    NaN     0.28      NaN
+                                                                                           actual_dd pct_rank   dd50   dd95   dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+[4 battery] Post-settlement fade of 14:00->15:00 (|move| >= 0.2 ATR), 15:01 -> 15:15 2023+    $2,440      79% $1,950 $3,015 $3,585        100%         46%          5%
+longs 2023+                                                                                   $1,040      55% $1,000 $1,645 $2,010         51%          1%          0%
+shorts 2023+                                                                                  $2,375      82% $1,900 $2,840 $3,205        100%         42%          3%
+   correlation with NQ 8:30 -> 15:00 (1 NQ $): all days 0.03, traded days 0.06
