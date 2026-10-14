@@ -84,7 +84,10 @@ strategy except NFP (VB -$32, LDF -$69, EOS -$250 a trade), same as random delay
 Market Intraday Momentum (Gao et al., SSRN 2440866, `analysis/gao_intraday_momentum_test.py`): first half-hour -> last half-hour
 is gone on NQ / ES 2018-26 (out-of-sample R2 < 0, timing -$28 a trade); LDF's 14:30 exit confirmed (F).
 Gamma x intraday momentum (`analysis/gamma_momentum_test.py`): no momentum into the close below the 0DTE flip (F), but LDF earns
-$158 below the flip vs $36 above (both halves, p 0.09): watch item for sizing LDF by the flip (C).
+$158 below the flip vs $36 above (both halves, p 0.09): watch item for sizing LDF by the flip (C); on the funded bench (2023+ starts, `analysis/ldf_gamma_sizing_check.py`)
+3 MNQ below / 1 above: $10,924 vs $10,489 a year, blown 3% vs 7% (in-sample). Tracked in `WATCHLIST.md` with the other watch items.
+Volatility targeting (SSRN 3175538, `analysis/vol_target_test.py`): our edges grow with vol, every vol-scaled plan is worse (F).
+Abnormal volume (Bajo, SSRN 675587, `analysis/abnormal_volume_test.py`): no next-day continuation on NQ; spikes are sell-offs (F).
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily

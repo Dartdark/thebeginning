@@ -1,0 +1,45 @@
+Volatility targeting (Harvey, Hoyle, Korgaonkar, Rattray, Sargaison & Van Hemert 2018, SSRN 3175538) on the funded plan.
+
+1. Net $ per trade by the previous day's NQ volatility tercile (20-day half-life EWMA), MultiCharts lists
+   VB          low: n  546 avg $   64 sd $  856 avg/sd  0.07 | mid: n  567 avg $   94 sd $  908 avg/sd  0.10 | high: n  630 avg $  114 sd $  932 avg/sd  0.12
+   ONB_ML2_MC  low: n   98 avg $  789 sd $ 1859 avg/sd  0.42 | mid: n  112 avg $  705 sd $ 2455 avg/sd  0.29 | high: n  132 avg $  463 sd $ 2562 avg/sd  0.18
+   MON_MC      low: n  148 avg $  548 sd $ 2249 avg/sd  0.24 | mid: n  151 avg $  270 sd $ 2626 avg/sd  0.10 | high: n  151 avg $  461 sd $ 3144 avg/sd  0.15
+   EOS         low: n   35 avg $  653 sd $ 1814 avg/sd  0.36 | mid: n   34 avg $  280 sd $ 1694 avg/sd  0.17 | high: n   36 avg $  482 sd $ 2138 avg/sd  0.23
+   LDF_MC      low: n  327 avg $   75 sd $  662 avg/sd  0.11 | mid: n  291 avg $   98 sd $  847 avg/sd  0.12 | high: n  275 avg $  115 sd $  917 avg/sd  0.13
+   NFP_MC      low: n   34 avg $  328 sd $ 1482 avg/sd  0.22 | mid: n   23 avg $  284 sd $ 1398 avg/sd  0.20 | high: n   21 avg $  421 sd $ 2057 avg/sd  0.20
+   MON_BR      low: n   73 avg $  688 sd $ 1522 avg/sd  0.45 | mid: n   78 avg $  264 sd $ 2002 avg/sd  0.13 | high: n   66 avg $  708 sd $ 1911 avg/sd  0.37
+   NQ vol (annualized, 20-day half-life): terciles at 17% / 23%
+
+2. Funded bench, horizon 250 trading days, every start day 2018-2026 (2012 accounts)
+                                          paid blown all6 med6
+current plan                            $9,313    2%  50%  250
+fixed-size strategies, hl 10, 0.50-1.50 $8,408   13%  39% >250
+fixed-size strategies, hl 10, 0.67-1.33 $8,622   13%  38% >250
+fixed-size strategies, hl 10, 0.50-1.00 $8,100   11%  33% >250
+fixed-size strategies, hl 20, 0.50-1.50 $8,480   11%  38% >250
+whole plan, hl 20, 0.50-1.50            $7,415   17%  32% >250
+fixed-size strategies, hl 20, 0.67-1.33 $8,704   10%  39% >250
+whole plan, hl 20, 0.67-1.33            $8,217   12%  33% >250
+fixed-size strategies, hl 20, 0.50-1.00 $8,222   11%  33% >250
+whole plan, hl 20, 0.50-1.00            $7,725    8%  29% >250
+fixed-size strategies, hl 40, 0.50-1.50 $8,487   13%  40% >250
+fixed-size strategies, hl 40, 0.67-1.33 $8,771   12%  42% >250
+fixed-size strategies, hl 40, 0.50-1.00 $8,457    9%  36% >250
+
+2. Funded bench, horizon 500 trading days, every start day 2018-2026 (1762 accounts)
+                                           paid blown all6 med6
+current plan                            $12,569    1%  94%  256
+fixed-size strategies, hl 10, 0.50-1.50 $11,484   11%  85%  277
+fixed-size strategies, hl 10, 0.67-1.33 $11,575   10%  87%  278
+fixed-size strategies, hl 10, 0.50-1.00 $11,550    9%  84%  287
+fixed-size strategies, hl 20, 0.50-1.50 $11,581   10%  87%  282
+whole plan, hl 20, 0.50-1.50            $10,472   19%  77%  316
+fixed-size strategies, hl 20, 0.67-1.33 $11,717    9%  89%  278
+whole plan, hl 20, 0.67-1.33            $11,194   12%  83%  294
+fixed-size strategies, hl 20, 0.50-1.00 $11,569   10%  86%  286
+whole plan, hl 20, 0.50-1.00            $11,552    8%  83%  307
+fixed-size strategies, hl 40, 0.50-1.50 $11,414   12%  86%  273
+fixed-size strategies, hl 40, 0.67-1.33 $11,528   11%  87%  271
+fixed-size strategies, hl 40, 0.50-1.00 $11,644    9%  86%  276
+
+   best 1-year version: fixed-size strategies, hl 40, 0.67-1.33

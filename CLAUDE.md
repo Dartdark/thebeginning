@@ -1,7 +1,7 @@
 # Project notes for Claude
 
 NQ/ES futures strategies in MultiCharts PowerLanguage for Apex 50K prop accounts (challenge and
-funded). Start with `HANDOFF.md`, `funded_strategies/README.md` and `TIER_LIST.md`.
+funded). Start with `HANDOFF.md`, `funded_strategies/README.md`, `TIER_LIST.md` and `WATCHLIST.md` (items to recheck).
 
 ## Working rules
 

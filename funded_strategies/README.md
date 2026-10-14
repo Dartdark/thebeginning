@@ -1274,6 +1274,77 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
   profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
   awkward there in any case.
 
+## Volatility targeting (Harvey, Hoyle, Korgaonkar, Rattray, Sargaison & Van Hemert 2018, SSRN 3175538; user's upload 2026-10-14): hurts the plan
+
+**What it is.** Man Group's study of 60+ assets, 1926–2017.
+- Scaling a position by 1 / recent volatility (EWMA of daily returns, 10–90-day half-life) targets a constant risk
+  level.
+- It raises the Sharpe ratio only for risk assets. S&P 500 futures go from 0.50 to 0.59–0.63, and US equities from
+  0.40 to 0.48–0.51, through the leverage effect: falling markets get more volatile, so scaling adds some momentum.
+- For bonds, currencies and commodities the Sharpe ratio is unchanged.
+- For every asset it cuts vol-of-vol, the left tail and drawdowns. It also helps 60-40 and risk-parity portfolios.
+
+**Why it should make money.** For buy-and-hold equity exposure, high-volatility periods don't pay more, so cutting
+size there improves return per unit of risk. **Foundation?** It's a sizing rule, not a signal. The question is
+whether our fixed-size strategies (VB 3, Monday 1, LDF 2, Bridge Monday 1 MNQ) should be resized by NQ volatility.
+ONB ML, EOS and NFP already size by ATR stops.
+
+Code `../analysis/vol_target_test.py` (output in `..._output.txt`).
+- **Our edges grow with volatility; they don't shrink.** Average / std of net $ per trade, by the previous day's NQ
+  volatility tercile (low / mid / high):
+  - VB 0.07 / 0.10 / 0.12 ($64 / $94 / $114);
+  - LDF 0.11 / 0.12 / 0.13;
+  - ONB ML 0.42 / 0.29 / 0.18;
+  - Monday 0.24 / 0.10 / 0.15;
+  - Bridge Monday 0.45 / 0.13 / 0.37.
+  These are intraday strategies paid by flows that are bigger on volatile days. That's the opposite of the
+  buy-and-hold case the paper's gain comes from.
+- **Funded bench (every start day 2018–26)** with the fixed-size strategies or the whole plan scaled by
+  clip(target / vol). Target = trailing 252-day median; half-life 10 / 20 / 40 days; caps 0.5–1.5, 0.67–1.33, and
+  0.5–1.0 (scale down only):
+  - **Every version is worse.** Current plan $9,313 (1 year) / $12,569 (2 years), blown 2% / 1%, all 6 payouts 50%.
+    Vol-targeted fixed sizes: $8,100–8,771 / $11,414–11,717, blown 9–13%.
+  - **Whole plan:** $7,415–8,217, blown 8–17%.
+  - **Speed:** median days to $13k 271–287 vs 256.
+  - Scaling down even partly drops the 1-MNQ strategies to zero on volatile days (contracts are whole numbers),
+    exactly when they earn most.
+- **Verdict: F for the plan.** The paper's result holds for long-only equity exposure, not for flow-driven intraday
+  trades. The plan's cushion-based sizing already does the risk control that matters for Apex.
+
+## Abnormal trading volume (Bajo 2010, SSRN 675587; user's upload 2026-10-14): no continuation on NQ
+
+**What it is.** Milan stocks, 1997–2003.
+- An abnormal-volume day (normalized abnormal volume, NAV > 2.33, no event in the prior 30 days) earns +2.5% on the
+  day and +1.0% the next day, without reversal over 30 days.
+- The paper reads this as insider / informed trading in a weak-enforcement market, stronger for family firms, small
+  caps and high market-to-book stocks.
+- Trading it next day (open → close in the event day's direction): longs +0.32–0.39% a day after spreads, shorts
+  lose.
+
+**Why it should make money.** Volume reveals private information that prices haven't fully absorbed. That's an
+information story about single stocks, not a forced flow, and NQ has no insiders. **Foundation?** Weak, but testable
+as "big-volume days continue next day".
+
+Code `../analysis/abnormal_volume_test.py` (output in `..._output.txt`). NQ 8:30–15:00 volume, 2018–2026, 1 NQ,
+$17.25 a round trip.
+- **The paper's log NAV almost never fires on NQ** (> 2.33 on 1 day), so I used the raw-volume z-score with the same
+  66-day window (> 2.33 on 2.3% of days) and volume vs its 66-day median.
+- **Next day, following the event day's direction (always-long benchmark $44):**
+  - NAV > 1.64: −$747 a trade (t −1.7).
+  - NAV > 2.33: −$223.
+  - NAV > 3.09: −$308.
+  - Volume ≥ 1.5× median: −$352 (t −1.4). ≥ 2×: −$786; longs −$2,929 on 9 trades.
+  - Only the "fresh event" version at NAV > 1.64 is positive: $708, but on 20 trades (t 1.5). At 2.33 it's $179
+    (t 0.2).
+  - Abnormal volume on NQ mostly marks sell-offs (shorts are 75–80% of events). Fading is mildly positive (≥ 1.5×
+    median $317, t 1.2; 2023–26 −$44).
+- **Same-day version** (abnormal morning volume at 12:00, follow 8:30 → 12:00 to 14:59): NAV > 1.64 −$257, > 2.33
+  −$522. The quiet-morning days are $25.
+- **Metrics (NAV > 2.33, follow):** Sharpe −0.15, PF 0.84, max drawdown $23.6k; longs −$670, shorts −$92.
+  2023–26 Sharpe 0.12, P(Sharpe ≤ 0) 38%.
+- **Verdict: F.** It's an insider-information effect in illiquid single stocks. On an index future, abnormal volume
+  is panic selling that partly reverses rather than continues.
+
 ## Gamma × intraday momentum (2026-10-14, user's idea): no forced momentum into the close; Late-Day Flow is stronger below the flip (watch)
 
 **Idea.** Dealer gamma hedging is a forced flow (Baltussen, Da, Lammers & Martens 2021; Barbon et al. 2021). Short

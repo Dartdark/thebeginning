@@ -1,0 +1,78 @@
+Abnormal trading volume (Bajo 2010, "The Information Content of Abnormal Trading Volume", SSRN 675587) on NQ.
+sessions 2262; NAV > 1.64 on 6.3% of days, > 2.33 2.3%, > 3.09 0.9%
+   paper's log NAV: > 1.64 on 0.6%, > 2.33 0.0% -> raw-volume z used below; volume / 66-day median >= 1.5 on 7.4%, >= 2 on 1.4%
+   event-day |move| / ATR: NAV > 2.33 1.12 vs other days 0.37
+
+1. Next day 8:31 -> 14:59 after abnormal volume, side = sign of the event day's move
+   always long (benchmark)                                          n=2261 avg $   44 PF 1.04 t  0.6 yrs+ 6/9 | 18-22 $  -17 23-26 $  125
+   NAV > 1.64: follow                                               n= 143 avg $ -747 PF 0.61 t -1.7 yrs+ 4/9 | 18-22 $ -188 23-26 $-1754
+      longs (event day up)                                          n=  35 avg $-1412 PF 0.49 t -1.5 yrs+ 3/8 | 18-22 $-1421 23-26 $-1391
+      shorts (event day down)                                       n= 108 avg $ -531 PF 0.68 t -1.1 yrs+ 6/9 | 18-22 $  272 23-26 $-1843
+   NAV > 1.64, fresh (no event in prior 30 days): follow            n=  20 avg $  708 PF 2.21 t  1.5 yrs+ 6/9 | 18-22 $  849 23-26 $  568
+      longs (event day up)                                          n=2
+      shorts (event day down)                                       n=  18 avg $  673 PF 2.03 t  1.3 yrs+ 6/9 | 18-22 $  849 23-26 $  452
+   NAV > 2.33: follow                                               n=  53 avg $ -223 PF 0.84 t -0.5 yrs+ 3/9 | 18-22 $ -393 23-26 $  301
+      longs (event day up)                                          n=  12 avg $ -670 PF 0.70 t -0.5 yrs+ 3/7 | 18-22 $-1620 23-26 $ 4080
+      shorts (event day down)                                       n=  41 avg $  -92 PF 0.92 t -0.2 yrs+ 6/9 | 18-22 $   16 23-26 $ -386
+   NAV > 2.33, fresh (no event in prior 30 days): follow            n=  20 avg $  179 PF 1.14 t  0.2 yrs+ 7/9 | 18-22 $  404 23-26 $ -158
+      longs (event day up)                                          n=4
+      shorts (event day down)                                       n=  16 avg $  427 PF 1.45 t  0.4 yrs+ 8/9 | 18-22 $ 1203 23-26 $ -572
+   NAV > 3.09: follow                                               n=  21 avg $ -308 PF 0.69 t -0.6 yrs+ 3/8 | 18-22 $ -768 23-26 $ 1165
+      longs (event day up)                                          n=2
+      shorts (event day down)                                       n=  19 avg $ -225 PF 0.77 t -0.4 yrs+ 3/7 | 18-22 $ -722 23-26 $ 1165
+   NAV > 3.09, fresh (no event in prior 30 days): follow            n=  11 avg $ -345 PF 0.64 t -0.6 yrs+ 3/8 | 18-22 $ -847 23-26 $  994
+      longs (event day up)                                          n=2
+      shorts (event day down)                                       n=   9 avg $ -179 PF 0.81 t -0.2 yrs+ 3/7 | 18-22 $ -766 23-26 $  994
+   volume >= 1.5 x 66-day median: follow                            n= 167 avg $ -352 PF 0.75 t -1.4 yrs+ 3/9 | 18-22 $ -431 23-26 $    9
+      longs                                                         n=  52 avg $ -255 PF 0.84 t -0.5 yrs+ 4/8 | 18-22 $ -508 23-26 $ 1371
+      shorts                                                        n= 115 avg $ -395 PF 0.70 t -1.4 yrs+ 4/9 | 18-22 $ -393 23-26 $ -405
+      fade instead                                                  n= 167 avg $  317 PF 1.30 t  1.2 yrs+ 6/9 | 18-22 $  396 23-26 $  -44
+   volume >= 2.0 x 66-day median: follow                            n=  32 avg $ -786 PF 0.54 t -1.3 yrs+ 1/7 | 18-22 $ -922 23-26 $ 1268
+      longs                                                         n=   9 avg $-2929 PF 0.19 t -2.2 yrs+ 0/4 | 18-22 $-2929 23-26 $  nan
+      shorts                                                        n=  23 avg $   53 PF 1.05 t  0.1 yrs+ 2/6 | 18-22 $  -62 23-26 $ 1268
+      fade instead                                                  n=  32 avg $  751 PF 1.79 t  1.3 yrs+ 6/7 | 18-22 $  888 23-26 $-1302
+   with a minimum event-day move (NAV > 2.33):
+      |move| >= 0.5 ATR, follow                                     n=  39 avg $ -429 PF 0.71 t -0.7 yrs+ 5/9 | 18-22 $ -430 23-26 $ -425
+         longs                                                      n=   7 avg $ -217 PF 0.90 t -0.1 yrs+ 3/4 | 18-22 $ -709 23-26 $ 2733
+         shorts                                                     n=  32 avg $ -475 PF 0.65 t -0.8 yrs+ 6/9 | 18-22 $ -358 23-26 $ -776
+         control: same move on normal volume (NAV <= 0.5)           n= 479 avg $  187 PF 1.18 t  1.3 yrs+ 5/9 | 18-22 $    6 23-26 $  436
+         fade instead                                               n=  39 avg $  395 PF 1.37 t  0.7 yrs+ 4/9 | 18-22 $  396 23-26 $  391
+      |move| >= 1.0 ATR, follow                                     n=  29 avg $ -292 PF 0.81 t -0.4 yrs+ 4/8 | 18-22 $ -215 23-26 $ -493
+         longs                                                      n=4
+         shorts                                                     n=  25 avg $ -505 PF 0.64 t -0.7 yrs+ 5/8 | 18-22 $ -330 23-26 $ -954
+         control: same move on normal volume (NAV <= 0.5)           n=  71 avg $ -343 PF 0.66 t -1.0 yrs+ 5/9 | 18-22 $ -606 23-26 $  205
+         fade instead                                               n=  29 avg $  257 PF 1.21 t  0.3 yrs+ 4/8 | 18-22 $  180 23-26 $  458
+      |move| >= 1.5 ATR, follow                                     n=  15 avg $  -60 PF 0.95 t -0.1 yrs+ 4/6 | 18-22 $ -183 23-26 $  279
+         longs                                                      n=2
+         shorts                                                     n=  13 avg $  159 PF 1.21 t  0.3 yrs+ 3/5 | 18-22 $  106 23-26 $  279
+         control: same move on normal volume (NAV <= 0.5)           n=   8 avg $  611 PF 1.81 t  0.6 yrs+ 3/5 | 18-22 $ -214 23-26 $ 1986
+         fade instead                                               n=  15 avg $   25 PF 1.02 t  0.0 yrs+ 2/6 | 18-22 $  148 23-26 $ -314
+
+2. Same day: at 12:00 CT, abnormal volume so far (vs the same window of the last 66 days), follow 8:30 -> 12:00 to 14:59
+   follow 8:30 -> 12:00, every day                                  n=2262 avg $   55 PF 1.09 t  1.3 yrs+ 6/9 | 18-22 $   33 23-26 $   83
+      morning NAV > 1.0                                             n= 348 avg $   31 PF 1.04 t  0.2 yrs+ 5/9 | 18-22 $  -92 23-26 $  199
+         longs                                                      n= 115 avg $  298 PF 1.47 t  1.5 yrs+ 7/9 | 18-22 $  326 23-26 $  256
+         shorts                                                     n= 233 avg $ -101 PF 0.89 t -0.6 yrs+ 3/9 | 18-22 $ -310 23-26 $  173
+      morning NAV > 1.64                                            n= 138 avg $ -257 PF 0.76 t -1.0 yrs+ 3/9 | 18-22 $ -499 23-26 $  227
+         longs                                                      n=  36 avg $ -258 PF 0.76 t -0.6 yrs+ 4/9 | 18-22 $ -117 23-26 $ -623
+         shorts                                                     n= 102 avg $ -257 PF 0.77 t -0.9 yrs+ 4/9 | 18-22 $ -649 23-26 $  463
+      morning NAV > 2.33                                            n=  60 avg $ -522 PF 0.63 t -1.2 yrs+ 3/9 | 18-22 $ -860 23-26 $  332
+         longs                                                      n=  17 avg $ -855 PF 0.49 t -1.1 yrs+ 3/7 | 18-22 $ -814 23-26 $ -931
+         shorts                                                     n=  43 avg $ -390 PF 0.70 t -0.7 yrs+ 4/9 | 18-22 $ -876 23-26 $ 1021
+      morning NAV < 0 (quiet)                                       n=1137 avg $   25 PF 1.05 t  0.5 yrs+ 3/9 | 18-22 $   37 23-26 $    9
+
+                           trades win   avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+NAV > 2.33 follow next day     53 55% $-223 $-1,315  -0.15   -0.19          0.84 $23,626  -0.06 26.03      -0.10
+  longs                        12 42% $-670   $-895  -0.17   -0.21          0.70 $16,737  -0.05 19.94      -0.09
+  shorts                       41 59%  $-92   $-420  -0.06   -0.08          0.92 $22,122  -0.02 18.35      -0.05
+                                         actual       p5       p50       p95
+name                     metric                                             
+NAV > 2.33 follow, 2023+ sharpe            0.12    -0.59      0.15      1.15
+                         sortino           0.15    -0.62      0.20      4.20
+                         pf_day            1.19     0.31      1.20      6.31
+                         calmar            0.06    -0.24      0.08      2.03
+                         ulcer            13.71     1.22     10.20     38.37
+                         max_dd       15,938.50 2,152.25 12,697.25 32,982.35
+                         P(Sharpe<=0)       NaN      NaN      0.38       NaN
+                         actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+NAV > 2.33 follow, 2023+   $15,938      69% $14,544 $19,022 $20,869        100%        100%        100%
