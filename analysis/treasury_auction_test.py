@@ -6,8 +6,9 @@ Trades here, 1 contract, as in the paper's windows:
   pre   short ZN at the 9:00 CT close, cover at the 11:59 close (yields up = price down)
   post  long ZN at the 12:01 close (after the results), out at the 15:00 close; also from 12:10 (robustness)
   both  pre + post on the same day
-Auction days: no calendar is reachable from this session, so they are found in the data: the 12:00-12:02 CT ZN volume
-spike (coupon auctions close at 12:00 CT) against the 11:30-11:59 median. Volume only, no price direction.
+Auction days: data/treasury_auctions.csv (fiscaldata.treasury.gov auctions_query, notes and bonds 2017-12 .. 2026-10),
+nominal coupons (no TIPS / FRN) closing at 1:00 PM ET = 12:00 CT; reopenings grouped with their maturity (9-Year 11-Month
+= 10-year). The first run (no calendar reachable) used the 12:00 CT ZN volume spike instead; kept as auction_days().
 Placebo: the same windows on all other weekdays. Costs: ZN $1,000 a point, tick 1/64 ($15.625), $7.25 + 1 tick a fill =
 $38.50 a round trip; GC $100 a point, $27.25; 6E $125,000, tick $6.25, $19.75.
   python3 analysis/treasury_auction_test.py [SCRATCH_DIR]
@@ -63,16 +64,22 @@ if __name__ == "__main__":
     pd.set_option("display.width", 220)
     print(__doc__.split("\n")[0])
     zn = load("ZN")
+    cal = pd.read_csv("data/treasury_auctions.csv")
+    cal = cal[(cal.inflation_index_security == "No") & (cal.floating_rate == "No") & (cal.closing_time_comp == "01:00 PM")]
+    yrs = cal.security_term.str.extract(r"^(\d+)-Year")[0].astype(int)
+    cal["fam"] = yrs.map(lambda y: {9: 10, 19: 20, 29: 30}.get(y, y))
+    cal["d"] = pd.to_datetime(cal.auction_date)
+    fam = cal.groupby("d").fam.max()          # one per day (the longest maturity)
+    print("\nCalendar: 1:00 PM ET nominal coupon auction days by maturity (longest per day):", fam.value_counts().sort_index().to_dict())
     ratio = auction_days(zn)
     ratio = ratio[(ratio.index >= "2018-01-01")].dropna()
     print("\nAuction-day detection: 12:00-12:02 CT volume / 11:30-11:59 median")
     print("   ratio quantiles:", " ".join(f"{q:.0%}:{ratio.quantile(q):.1f}" for q in (.5, .7, .75, .8, .85, .9, .95)))
     for th in (3, 4, 5, 6, 8):
         a = ratio[ratio >= th]; print(f"   ratio >= {th}: {len(a)} days, {len(a) / (len(ratio) / 252):.0f} a year")
-    TH = 5.0
-    auc = ratio >= TH
-    A = ratio.index[auc]
-    print(f"   using >= {TH}: weekday mix", pd.Series(A.dayofweek).value_counts().sort_index().to_dict(),
+    A = pd.DatetimeIndex(fam.index[fam.index >= "2018-01-01"])
+    print(f"   volume ratio on calendar auction days: median {ratio.reindex(A).median():.1f}; on other days {ratio[~ratio.index.isin(A)].median():.1f}")
+    print(f"   calendar days: weekday mix", pd.Series(A.dayofweek).value_counts().sort_index().to_dict(),
           "| day-of-month mix", np.histogram(A.day, bins=[1, 6, 16, 20, 32])[0].tolist(), "(1-5, 6-15, 16-19, 20-31)")
 
     for sym in ("ZN", "GC", "6E"):
@@ -92,11 +99,12 @@ if __name__ == "__main__":
         print(line(post[isA] - c, "auction  post long NET"))
         print(line(pre[isA] + post[isA] - 2 * c, "auction  both NET"))
         if sym == "ZN":
-            dom = idx.day
-            for nm, m in (("days 6-15 (3/10/30-year cycle)", (dom >= 6) & (dom <= 15)), ("days 20-31 (2/5/7-year cycle)", dom >= 20),
-                          ("days 16-19 (20-year / TIPS)", (dom >= 16) & (dom <= 19))):
-                m = pd.Series(m, index=idx) & isA
-                print(line(pre[m] + post[m], f"both gross, {nm}"))
+            F = fam.reindex(idx)
+            for f in (2, 3, 5, 7, 10, 20, 30):
+                m = F == f
+                print(line(pre[m] + post[m], f"both gross, {f}-year auction days"))
+            m = F.isin([10, 30])
+            print(line(pre[m], "pre short gross, 10 + 30-year days")); print(line(post[m], "post long gross, 10 + 30-year days"))
             ZN_both = (pre + post)[isA]
 
     # standard metrics on the net ZN trade (whole, and each leg = 'longs' post / 'shorts' pre)
