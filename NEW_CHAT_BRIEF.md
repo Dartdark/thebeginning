@@ -102,6 +102,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     after fear); neither version beats the funded plan: F.
   - ES mean reversion (six families + day-to-day fade): F on ES; ES reverts only slightly more than NQ and far below its
     $30 round trip; the day-to-day fade is stronger on NQ (t 2.2, 5/9 years: D).
+  - The Bridge's exported indicators (order flow, gamma) scanned as filters on the plan: 1 pass in 63 (chance level), no bench
+    gain: F (`analysis/bridge_filter_scan.py`; features cached in scratch `bridge_features.pkl`).
   - YM's own events (Dow heavyweight earnings, ZN overnight / lead-lag / shocks): F (`analysis/ym_dow_events_test.py`).
   - BTC short-only euphoria fades (multi-day / overnight / intraday spike / heavy-volume / round numbers): F.
   - Funded bench rebuilt this session (numba, build_lab, s_rank_gap_round2 + gy / btc grids): reproduces the documented numbers.
