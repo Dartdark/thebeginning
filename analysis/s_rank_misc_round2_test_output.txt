@@ -1,0 +1,211 @@
+S-rank program, round 2 items 3-5 (S_RANK_PROGRAM.md, 2026-10-14): three independent pre-registered tests.
+
+==============================================================================================================
+A. ES Overnight Bias through NQ's ridge, refit on NQ 2018-22 only (ONB ADX20, stop 0.30 ATR, 3R, out 14:30)
+   NQ ONB plain                                                 n= 997 avg $  270 PF 1.38 t  3.9 win 49% yrs+ 9/9 | 18-22 $  236 (t  3.1) 23-26 $  312 (t  2.5)
+   ES ONB plain                                                 n=1077 avg $   56 PF 1.13 t  1.6 win 46% yrs+ 6/9 | 18-22 $   48 (t  1.1) 23-26 $   66 (t  1.1)
+     ES longs                                                   n= 627 avg $   98 PF 1.26 t  2.2 win 50% yrs+ 6/9 | 18-22 $   83 (t  1.6) 23-26 $  115 (t  1.6)
+     ES shorts                                                  n= 450 avg $   -1 PF 1.00 t -0.0 win 39% yrs+ 4/9 | 18-22 $    3 (t  0.0) 23-26 $   -7 (t -0.1)
+   NQ 2018-22 ridge (standardized weights): ret1 +0.032, ret5 +0.005, ret20 -0.011, rth1 +0.044, atr_ratio +0.001, dist50 -0.019, rv5_rv20 +0.001, dow0 +0.057, dow1 +0.006, dow2 -0.026, dow3 -0.033, dow4 +0.000, tdm +0.057, opex_wk -0.001
+   score correlation on ES trades, NQ vs ES scaling: 0.99; ES score >= 0 share 43% (NQ scaling)
+
+   NQ reference: NQ-trained (2018-22) -> NQ 2023-26 (pure out of sample)
+   NQ 2023-26 plain                                             n= 449 avg $  312 PF 1.35 t  2.5 win 49% yrs+ 4/4 | 18-22 $  nan (t  nan) 23-26 $  312 (t  2.5)
+   NQ 23-26 v2 longs >= 0.03: kept (39%)                        n= 174 avg $  469 PF 1.56 t  2.3 win 52% yrs+ 4/4 | 18-22 $  nan (t  nan) 23-26 $  469 (t  2.3)
+      skipped n=275 avg $212 (t 1.4); kept - skipped t +1.0; years kept > skipped 4/4; random keep 39%: avg $312, 95th $572, share >= kept 0.154
+      kept longs n=95 $735 | kept shorts n=79 $149
+   NQ 23-26 v1 >= 0: kept (44%)                                 n= 196 avg $  348 PF 1.40 t  1.8 win 51% yrs+ 4/4 | 18-22 $  nan (t  nan) 23-26 $  348 (t  1.8)
+      skipped n=253 avg $283 (t 1.7); kept - skipped t +0.3; years kept > skipped 3/4; random keep 44%: avg $313, 95th $552, share >= kept 0.403
+      kept longs n=117 $482 | kept shorts n=79 $149
+
+   ES: NQ-trained (2018-22) -> ES 2023-26 (pure out of sample, cross-market); ES 2018-22 shown for the same years as the fit
+   ES 2023-26 plain                                             n= 475 avg $   66 PF 1.14 t  1.1 win 46% yrs+ 2/4 | 18-22 $  nan (t  nan) 23-26 $   66 (t  1.1)
+   -- NQ scaling, v2 longs >= 0.03 [PRE-REGISTERED]
+   ES 23-26: kept (39%)                                         n= 186 avg $   38 PF 1.08 t  0.4 win 45% yrs+ 2/4 | 18-22 $  nan (t  nan) 23-26 $   38 (t  0.4)
+      skipped n=289 avg $84 (t 1.1); kept - skipped t -0.4; years kept > skipped 2/4; random keep 39%: avg $66, 95th $190, share >= kept 0.647
+      kept longs n=111 $144 | kept shorts n=75 $-118
+   ES 18-22 (same years as fit): kept (40%)                     n= 241 avg $  152 PF 1.42 t  2.0 win 49% yrs+ 4/5 | 18-22 $  152 (t  2.0) 23-26 $  nan (t  nan)
+      skipped n=361 avg $-21 (t -0.4); kept - skipped t +1.9; years kept > skipped 3/5; random keep 40%: avg $48, 95th $136, share >= kept 0.024
+      kept longs n=127 $108 | kept shorts n=114 $202
+   ES kept, 2018-26 combined                                    n= 427 avg $  103 PF 1.25 t  1.7 win 48% yrs+ 6/9 | 18-22 $  152 (t  2.0) 23-26 $   38 (t  0.4)
+   -- NQ scaling, v1 >= 0
+   ES 23-26: kept (43%)                                         n= 205 avg $   47 PF 1.10 t  0.5 win 46% yrs+ 3/4 | 18-22 $  nan (t  nan) 23-26 $   47 (t  0.5)
+      skipped n=270 avg $81 (t 1.0); kept - skipped t -0.3; years kept > skipped 1/4; random keep 43%: avg $66, 95th $176, share >= kept 0.615
+      kept longs n=130 $142 | kept shorts n=75 $-118
+   ES 18-22 (same years as fit): kept (44%)                     n= 262 avg $  149 PF 1.42 t  2.1 win 50% yrs+ 4/5 | 18-22 $  149 (t  2.1) 23-26 $  nan (t  nan)
+      skipped n=340 avg $-29 (t -0.6); kept - skipped t +2.0; years kept > skipped 4/5; random keep 44%: avg $48, 95th $128, share >= kept 0.020
+      kept longs n=148 $108 | kept shorts n=114 $202
+   ES kept, 2018-26 combined                                    n= 467 avg $  104 PF 1.25 t  1.9 win 48% yrs+ 7/9 | 18-22 $  149 (t  2.1) 23-26 $   47 (t  0.5)
+   -- ES 18-22 scaling, v2 longs >= 0.03
+   ES 23-26: kept (39%)                                         n= 183 avg $   80 PF 1.17 t  0.8 win 47% yrs+ 3/4 | 18-22 $  nan (t  nan) 23-26 $   80 (t  0.8)
+      skipped n=292 avg $57 (t 0.8); kept - skipped t +0.2; years kept > skipped 3/4; random keep 39%: avg $65, 95th $185, share >= kept 0.418
+      kept longs n=109 $207 | kept shorts n=74 $-107
+   ES 18-22 (same years as fit): kept (40%)                     n= 241 avg $  149 PF 1.41 t  2.0 win 50% yrs+ 4/5 | 18-22 $  149 (t  2.0) 23-26 $  nan (t  nan)
+      skipped n=361 avg $-19 (t -0.4); kept - skipped t +1.9; years kept > skipped 4/5; random keep 40%: avg $49, 95th $138, share >= kept 0.032
+      kept longs n=131 $118 | kept shorts n=110 $186
+   ES kept, 2018-26 combined                                    n= 424 avg $  119 PF 1.29 t  2.0 win 49% yrs+ 7/9 | 18-22 $  149 (t  2.0) 23-26 $   80 (t  0.8)
+   -- ES 18-22 scaling, v1 >= 0
+   ES 23-26: kept (42%)                                         n= 201 avg $   49 PF 1.10 t  0.5 win 47% yrs+ 3/4 | 18-22 $  nan (t  nan) 23-26 $   49 (t  0.5)
+      skipped n=274 avg $79 (t 1.0); kept - skipped t -0.2; years kept > skipped 2/4; random keep 42%: avg $66, 95th $176, share >= kept 0.593
+      kept longs n=127 $140 | kept shorts n=74 $-107
+   ES 18-22 (same years as fit): kept (43%)                     n= 257 avg $  141 PF 1.39 t  1.9 win 50% yrs+ 4/5 | 18-22 $  141 (t  1.9) 23-26 $  nan (t  nan)
+      skipped n=345 avg $-21 (t -0.4); kept - skipped t +1.8; years kept > skipped 3/5; random keep 43%: avg $48, 95th $129, share >= kept 0.031
+      kept longs n=147 $107 | kept shorts n=110 $186
+   ES kept, 2018-26 combined                                    n= 458 avg $  101 PF 1.24 t  1.8 win 49% yrs+ 7/9 | 18-22 $  141 (t  1.9) 23-26 $   49 (t  0.5)
+
+   pre-registered ES kept set (2018-22 kept is cross-market in-period, 2023-26 pure OOS): does not advance
+
+==============================================================================================================
+B. EOS (short 8:31 open on the monthly 3rd Friday, out 10:00, stop 0.3 ATR) split by prior VIX vs its 252-day median
+
+   NQ (MultiCharts-confirmed trade list)
+   NQ EOS plain                                                 n= 105 avg $  474 PF 1.93 t  2.6 win 59% yrs+ 8/9 | 18-22 $  312 (t  1.6) 23-26 $  690 (t  2.0)
+   by year: 2018 $233 | 2019 $-177 | 2020 $5,473 | 2021 $2,108 | 2022 $11,058 | 2023 $8,513 | 2024 $5,753 | 2025 $15,618 | 2026 $1,175
+   NQ: prior VIX < its 252-day median                           n=  49 avg $  600 PF 2.86 t  2.8 win 69% yrs+ 9/9 | 18-22 $  665 (t  2.9) 23-26 $  534 (t  1.4)
+   NQ: prior VIX >= its 252-day median                          n=  56 avg $  363 PF 1.54 t  1.3 win 50% yrs+ 5/9 | 18-22 $   59 (t  0.2) 23-26 $  869 (t  1.5)
+      low - high difference $237 (t +0.7)
+   NQ: prior VIX < 20 (sanity)                                  n=  64 avg $  451 PF 2.19 t  2.3 win 64% yrs+ 9/9 | 18-22 $  320 (t  1.9) 23-26 $  567 (t  1.7)
+   NQ: prior VIX >= 20 (sanity)                                 n=  41 avg $  509 PF 1.71 t  1.4 win 51% yrs+ 5/9 | 18-22 $  303 (t  0.9) 23-26 $ 1070 (t  1.1)
+      placebo: random 49 of the 105 EOS days: 95th pct $788; low-VIX $600; share >= 0.256
+
+   YM (Python engine, same rules; independent check)
+   YM EOS plain                                                 n= 105 avg $    7 PF 1.03 t  0.1 win 51% yrs+ 5/9 | 18-22 $  -33 (t -0.4) 23-26 $   61 (t  0.6)
+   by year: 2018 $-2,688 | 2019 $-1,790 | 2020 $2,014 | 2021 $1,612 | 2022 $-1,132 | 2023 $1,824 | 2024 $361 | 2025 $2,755 | 2026 $-2,182
+   YM: prior VIX < its 252-day median                           n=  50 avg $  141 PF 1.90 t  1.8 win 62% yrs+ 7/9 | 18-22 $  197 (t  2.3) 23-26 $   85 (t  0.6)
+   YM: prior VIX >= its 252-day median                          n=  55 avg $ -114 PF 0.68 t -1.2 win 42% yrs+ 4/9 | 18-22 $ -197 (t -1.6) 23-26 $   31 (t  0.2)
+      low - high difference $255 (t +2.1)
+   YM: prior VIX < 20 (sanity)                                  n=  64 avg $   50 PF 1.26 t  0.7 win 53% yrs+ 6/9 | 18-22 $   32 (t  0.4) 23-26 $   66 (t  0.6)
+   YM: prior VIX >= 20 (sanity)                                 n=  41 avg $  -59 PF 0.84 t -0.5 win 49% yrs+ 3/9 | 18-22 $  -99 (t -0.7) 23-26 $   48 (t  0.2)
+      placebo: random 50 of the 105 EOS days: 95th pct $117; low-VIX $141; share >= 0.024
+
+   ES (Python engine, same rules; replication of round 1)
+   ES EOS plain                                                 n= 105 avg $  131 PF 1.45 t  1.5 win 53% yrs+ 5/9 | 18-22 $   66 (t  0.6) 23-26 $  216 (t  1.5)
+   by year: 2018 $-2,622 | 2019 $-1,655 | 2020 $2,325 | 2021 $1,767 | 2022 $4,167 | 2023 $5,390 | 2024 $-211 | 2025 $4,946 | 2026 $-387
+   ES: prior VIX < its 252-day median                           n=  50 avg $  265 PF 2.97 t  2.9 win 62% yrs+ 8/9 | 18-22 $  362 (t  3.4) 23-26 $  169 (t  1.1)
+   ES: prior VIX >= its 252-day median                          n=  55 avg $    8 PF 1.02 t  0.1 win 45% yrs+ 5/9 | 18-22 $ -145 (t -0.9) 23-26 $  276 (t  1.0)
+      low - high difference $257 (t +1.5)
+   ES: prior VIX < 20 (sanity)                                  n=  64 avg $  101 PF 1.45 t  1.2 win 56% yrs+ 6/9 | 18-22 $  107 (t  1.1) 23-26 $   95 (t  0.7)
+   ES: prior VIX >= 20 (sanity)                                 n=  41 avg $  178 PF 1.44 t  1.0 win 49% yrs+ 5/9 | 18-22 $   26 (t  0.1) 23-26 $  592 (t  1.4)
+      placebo: random 50 of the 105 EOS days: 95th pct $284; low-VIX $265; share >= 0.075
+
+   advancing (|t| >= 2.5, same sign both periods): NQ EOS low VIX, ES EOS low VIX
+
+   == full metrics: NQ EOS low VIX
+   all                                                          n=  49 avg $  600 PF 2.86 t  2.8 win 69% yrs+ 9/9 | 18-22 $  665 (t  2.9) 23-26 $  534 (t  1.4)
+   longs                                                        n=0
+   shorts                                                       n=  49 avg $  600 PF 2.86 t  2.8 win 69% yrs+ 9/9 | 18-22 $  665 (t  2.9) 23-26 $  534 (t  1.4)
+   by year: 2018 $748 | 2019 $1,517 | 2020 $1,413 | 2021 $5,558 | 2022 $7,378 | 2023 $4,935 | 2024 $2,024 | 2025 $1,931 | 2026 $3,916
+          trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+all           49 69% $600 $3,278   0.87    1.83          2.86 $3,652   0.90  1.15       5.72
+shorts        49 69% $600 $3,278   0.87    1.83          2.86 $3,652   0.90  1.15       5.72
+all 2023+     24 62% $534 $3,317   0.70    1.30          2.10 $3,652   0.91  1.52       4.37
+                                    actual       p5      p50       p95
+name                 metric                                           
+NQ EOS low VIX 2023+ sharpe           0.70    -0.11     0.73      1.46
+                     sortino          1.30    -0.16     1.40      5.16
+                     pf_day           2.10     0.89     2.16      6.13
+                     calmar           0.91    -0.05     0.70      3.05
+                     ulcer            1.52     0.97     3.17     10.11
+                     max_dd       3,652.25 1,939.73 4,841.25 10,653.84
+                     P(Sharpe<=0)      NaN      NaN     0.08       NaN
+  shorts 2023+       sharpe           0.70    -0.11     0.73      1.46
+                     sortino          1.30    -0.16     1.40      5.16
+                     pf_day           2.10     0.89     2.16      6.13
+                     calmar           0.91    -0.05     0.70      3.05
+                     ulcer            1.52     0.97     3.17     10.11
+                     max_dd       3,652.25 1,939.73 4,841.25 10,653.84
+                     P(Sharpe<=0)      NaN      NaN     0.08       NaN
+                     actual_dd pct_rank   dd50   dd95   dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+NQ EOS low VIX 2023+    $3,652       0% $4,980 $7,861 $9,201        100%        100%        100%
+  shorts 2023+          $3,652       0% $4,980 $7,861 $9,201        100%        100%        100%
+   daily correlation with NQ RTH 8:30->15:00: all days -0.08; trade days -0.75
+
+   == full metrics: ES EOS low VIX
+   all                                                          n=  50 avg $  265 PF 2.97 t  2.9 win 62% yrs+ 8/9 | 18-22 $  362 (t  3.4) 23-26 $  169 (t  1.1)
+   longs                                                        n=0
+   shorts                                                       n=  50 avg $  265 PF 2.97 t  2.9 win 62% yrs+ 8/9 | 18-22 $  362 (t  3.4) 23-26 $  169 (t  1.1)
+   by year: 2018 $232 | 2019 $372 | 2020 $1,322 | 2021 $3,212 | 2022 $3,910 | 2023 $3,620 | 2024 $-1,119 | 2025 $1,551 | 2026 $163
+          trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+all           50 62% $265 $1,467   0.90    2.07          2.97 $1,686   0.87  1.06       2.77
+shorts        50 62% $265 $1,467   0.90    2.07          2.97 $1,686   0.87  1.06       2.77
+all 2023+     25 56% $169 $1,083   0.57    1.03          1.74 $1,686   0.64  1.86       1.17
+                                    actual       p5      p50      p95
+name                 metric                                          
+ES EOS low VIX 2023+ sharpe           0.57    -0.29     0.58     1.32
+                     sortino          1.03    -0.39     1.05     3.79
+                     pf_day           1.74     0.76     1.76     4.17
+                     calmar           0.64    -0.12     0.49     2.30
+                     ulcer            1.86     0.58     1.66     4.86
+                     max_dd       1,686.50 1,046.75 2,199.25 4,772.89
+                     P(Sharpe<=0)      NaN      NaN     0.13      NaN
+  shorts 2023+       sharpe           0.57    -0.29     0.58     1.32
+                     sortino          1.03    -0.39     1.05     3.79
+                     pf_day           1.74     0.76     1.76     4.17
+                     calmar           0.64    -0.12     0.49     2.30
+                     ulcer            1.86     0.58     1.66     4.86
+                     max_dd       1,686.50 1,046.75 2,199.25 4,772.89
+                     P(Sharpe<=0)      NaN      NaN     0.13      NaN
+                     actual_dd pct_rank   dd50   dd95   dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+ES EOS low VIX 2023+    $1,686      19% $2,226 $3,516 $4,242        100%         62%         14%
+  shorts 2023+          $1,686      19% $2,226 $3,516 $4,242        100%         62%         14%
+   daily correlation with NQ RTH 8:30->15:00: all days -0.07; trade days -0.62
+
+==============================================================================================================
+C. Gold: options-expiry pinning fade, LBMA auction limit short
+   options-expiry days: 105 (2018-01-26 .. 2026-09-25); median ATR $2,577 per GC
+
+   1. Expiry-pinning fade (enter on the first close >= k ATR from the 7:20 open, 7:21-11:30; target the open; out 12:30)
+   expiry day, k 0.25 ATR, stop 0.5 ATR                         n=  87 avg $  137 PF 1.50 t  1.3 win 55% yrs+ 4/9 | 18-22 $  -33 (t -0.3) 23-26 $  356 (t  1.7)  [targets 33%]
+   expiry day, k 0.25 ATR, stop 1.0 ATR                         n=  87 avg $  138 PF 1.50 t  1.3 win 55% yrs+ 5/9 | 18-22 $  -43 (t -0.4) 23-26 $  371 (t  1.8)  [targets 33%]
+   expiry day, k 0.4 ATR, stop 0.5 ATR                          n=  50 avg $  346 PF 2.71 t  2.2 win 66% yrs+ 7/9 | 18-22 $  -23 (t -0.2) 23-26 $  856 (t  2.9)  [targets 30%]
+   expiry day, k 0.4 ATR, stop 1.0 ATR                          n=  50 avg $  385 PF 3.25 t  2.5 win 68% yrs+ 7/9 | 18-22 $   44 (t  0.3) 23-26 $  856 (t  2.9)  [targets 30%]
+   expiry day, k 0.6 ATR, stop 0.5 ATR                          n=  23 avg $  144 PF 1.58 t  0.9 win 65% yrs+ 5/7 | 18-22 $  -62 (t -0.3) 23-26 $  613 (t  2.6)  [targets 13%]
+   expiry day, k 0.6 ATR, stop 1.0 ATR                          n=  23 avg $  250 PF 2.46 t  1.7 win 70% yrs+ 6/7 | 18-22 $   92 (t  0.5) 23-26 $  613 (t  2.6)  [targets 13%]
+   == pick by 2018-22 t -> k 0.6, stop 1.0 (design t 0.5)
+   picked                                                       n=  23 avg $  250 PF 2.46 t  1.7 win 70% yrs+ 6/7 | 18-22 $   92 (t  0.5) 23-26 $  613 (t  2.6)
+     longs (fade a fall)                                        n=  13 avg $  150 PF 1.80 t  0.8 win 62% yrs+ 3/7 | 18-22 $ -256 (t -1.7) 23-26 $  624 (t  2.3)
+     shorts (fade a rise)                                       n=  10 avg $  380 PF 3.56 t  1.7 win 80% yrs+ 5/5 | 18-22 $  362 (t  1.5) 23-26 $  543 (t  nan)
+   by year: 2018 $628 | 2019 $524 | 2020 $-319 | 2021 $23 | 2022 $608 | 2023 $1,551 | 2025 $2,738
+   placebo at the pick:
+   non-expiry days                                              n= 606 avg $  -29 PF 0.94 t -0.4 win 49% yrs+ 1/9 | 18-22 $ -102 (t -2.0) 23-26 $   58 (t  0.4)
+   day before expiry                                            n=  16 avg $  180 PF 1.39 t  0.3 win 38% yrs+ 5/8 | 18-22 $  126 (t  0.4) 23-26 $  223 (t  0.2)
+   day after expiry                                             n=  29 avg $ -164 PF 0.76 t -0.5 win 48% yrs+ 4/9 | 18-22 $   -9 (t -0.0) 23-26 $ -383 (t -0.5)
+   random sets of 23 non-expiry trades: avg $-23, 95th $526; expiry $250; share >= 0.196
+   all six cells, expiry minus non-expiry avg $: k0.25/s0.5 +140, k0.25/s1.0 +148, k0.4/s0.5 +346, k0.4/s1.0 +438, k0.6/s0.5 +136, k0.6/s1.0 +279
+
+   2. LBMA auction short with a resting limit (ref = close 1 minute before the auction; filled if high >= limit + 1 tick)
+   AM short limit ref+1 ticks, out +10 min                      n=1881 avg $  -19 PF 0.73 t -3.8 win 43% yrs+ 1/9 | 18-22 $  -24 (t -6.5) 23-26 $  -14 (t -1.3)  [fill 82%]
+   AM short limit ref+1 ticks, out +20 min                      n=1975 avg $  -28 PF 0.70 t -4.4 win 43% yrs+ 0/9 | 18-22 $  -27 (t -5.7) 23-26 $  -29 (t -2.3)  [fill 87%]
+   AM short limit ref+1 ticks, out +30 min                      n=2039 avg $  -23 PF 0.79 t -2.7 win 44% yrs+ 2/9 | 18-22 $  -22 (t -3.4) 23-26 $  -23 (t -1.4)  [fill 89%]
+   AM short limit ref+2 ticks, out +10 min                      n=1691 avg $  -20 PF 0.73 t -3.6 win 42% yrs+ 1/9 | 18-22 $  -25 (t -6.1) 23-26 $  -14 (t -1.3)  [fill 74%]
+   AM short limit ref+2 ticks, out +20 min                      n=1835 avg $  -27 PF 0.71 t -4.0 win 43% yrs+ 0/9 | 18-22 $  -26 (t -5.3) 23-26 $  -28 (t -2.1)  [fill 80%]
+   AM short limit ref+2 ticks, out +30 min                      n=1919 avg $  -22 PF 0.80 t -2.5 win 45% yrs+ 2/9 | 18-22 $  -22 (t -3.2) 23-26 $  -21 (t -1.2)  [fill 84%]
+   AM short limit ref+3 ticks, out +10 min                      n=1514 avg $  -22 PF 0.71 t -3.7 win 42% yrs+ 0/9 | 18-22 $  -26 (t -5.8) 23-26 $  -18 (t -1.6)  [fill 66%]
+   AM short limit ref+3 ticks, out +20 min                      n=1695 avg $  -30 PF 0.69 t -4.3 win 43% yrs+ 0/9 | 18-22 $  -26 (t -4.9) 23-26 $  -34 (t -2.5)  [fill 74%]
+   AM short limit ref+3 ticks, out +30 min                      n=1802 avg $  -27 PF 0.76 t -3.0 win 44% yrs+ 2/9 | 18-22 $  -22 (t -3.0) 23-26 $  -32 (t -1.9)  [fill 79%]
+   PM short limit ref+1 ticks, out +10 min                      n=2070 avg $  -25 PF 0.85 t -2.3 win 45% yrs+ 1/9 | 18-22 $  -23 (t -2.7) 23-26 $  -27 (t -1.2)  [fill 91%]
+   PM short limit ref+1 ticks, out +20 min                      n=2118 avg $  -26 PF 0.87 t -2.0 win 45% yrs+ 2/9 | 18-22 $  -30 (t -3.0) 23-26 $  -20 (t -0.7)  [fill 93%]
+   PM short limit ref+1 ticks, out +30 min                      n=2139 avg $  -30 PF 0.87 t -2.0 win 45% yrs+ 2/9 | 18-22 $  -40 (t -3.4) 23-26 $  -17 (t -0.5)  [fill 94%]
+   PM short limit ref+2 ticks, out +10 min                      n=1986 avg $  -23 PF 0.86 t -2.1 win 45% yrs+ 1/9 | 18-22 $  -25 (t -2.8) 23-26 $  -21 (t -1.0)  [fill 87%]
+   PM short limit ref+2 ticks, out +20 min                      n=2056 avg $  -26 PF 0.87 t -1.9 win 45% yrs+ 2/9 | 18-22 $  -32 (t -3.1) 23-26 $  -18 (t -0.7)  [fill 90%]
+   PM short limit ref+2 ticks, out +30 min                      n=2079 avg $  -32 PF 0.86 t -2.1 win 46% yrs+ 2/9 | 18-22 $  -43 (t -3.5) 23-26 $  -19 (t -0.6)  [fill 91%]
+   PM short limit ref+3 ticks, out +10 min                      n=1892 avg $  -25 PF 0.84 t -2.2 win 45% yrs+ 1/9 | 18-22 $  -24 (t -2.6) 23-26 $  -27 (t -1.2)  [fill 83%]
+   PM short limit ref+3 ticks, out +20 min                      n=1985 avg $  -29 PF 0.86 t -2.1 win 45% yrs+ 2/9 | 18-22 $  -32 (t -3.0) 23-26 $  -25 (t -0.9)  [fill 87%]
+   PM short limit ref+3 ticks, out +30 min                      n=2021 avg $  -36 PF 0.84 t -2.4 win 45% yrs+ 2/9 | 18-22 $  -43 (t -3.5) 23-26 $  -28 (t -0.9)  [fill 89%]
+   == pick by 2018-22 t -> ('PM', 3, 10) (design t -2.6)
+   picked                                                       n=1892 avg $  -25 PF 0.84 t -2.2 win 45% yrs+ 1/9 | 18-22 $  -24 (t -2.6) 23-26 $  -27 (t -1.2)
+   by year: 2018 $-6,427 | 2019 $-8,158 | 2020 $-835 | 2021 $-6,393 | 2022 $-2,987 | 2023 $-11,319 | 2024 $1,788 | 2025 $-12,231 | 2026 $-1,585
+   gross short ref -> +10 min, every day: $14.1 (t 1.3); filled days only (gross from the limit): $-8.2
+   placebo at the pick:
+   same rule -120 min from the auction                          n=1808 avg $  -29 PF 0.73 t -3.5 win 41% yrs+ 1/9 | 18-22 $  -28 (t -5.1) 23-26 $  -30 (t -1.8)
+   same rule -60 min from the auction                           n=1917 avg $  -31 PF 0.77 t -3.4 win 44% yrs+ 0/9 | 18-22 $  -23 (t -3.4) 23-26 $  -41 (t -2.2)
+   same rule +60 min from the auction                           n=1919 avg $  -33 PF 0.73 t -3.8 win 44% yrs+ 0/9 | 18-22 $  -34 (t -5.8) 23-26 $  -32 (t -1.8)
+   same rule +120 min from the auction                          n=1738 avg $  -20 PF 0.79 t -2.5 win 42% yrs+ 1/9 | 18-22 $  -21 (t -4.5) 23-26 $  -19 (t -1.2)
+   mirror: buy limit ref - k ticks, long                        n=1991 avg $  -43 PF 0.75 t -3.6 win 46% yrs+ 0/9 | 18-22 $  -33 (t -3.8) 23-26 $  -55 (t -2.3)
+   DST-mismatch days only (London clock)                        n= 120 avg $   41 PF 1.32 t  0.9 win 55% yrs+ 6/9 | 18-22 $    9 (t  0.2) 23-26 $   78 (t  0.9)
+   DST-mismatch days at the usual CT time (placebo)             n= 137 avg $  -85 PF 0.59 t -1.9 win 42% yrs+ 3/9 | 18-22 $  -20 (t -0.6) 23-26 $ -157 (t -1.8)
+
+   advancing (|t| >= 2.5, same sign both periods): none
+
+==============================================================================================================
+Variants tried: {'A ES via NQ ridge': 4, 'A NQ reference': 2, 'B EOS VIX split': 6, 'C1 expiry fade': 6, 'C2 LBMA limit short': 18} (total 36)
