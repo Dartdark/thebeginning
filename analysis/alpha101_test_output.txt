@@ -1,0 +1,131 @@
+WorldQuant's 101 Formulaic Alphas (Kakushadze 2015, SSRN 2701346) on NQ (user's upload, 2026-10-14).
+
+=== NQ: 2262 sessions 2018-01-02 .. 2026-10-09; alphas with values 99/101; first valid day median 2018-04-26
+   benchmark always long 8:30->14:59: avg $45 | design $-13 holdout $122
+
+   rule 'sign': top 10 by design t (of 98)
+          n    avg     t      d       h   td    th  yrs  long%
+25 2,097.00 114.94  1.51 195.75   19.42 2.34  0.15  4/9   0.50
+90 2,120.00 -20.56 -0.27 186.11 -269.82 2.26 -2.04  4/9   0.52
+48 1,951.00 -33.10 -0.41 212.64 -280.09 2.24 -2.12  3/8   0.49
+11 2,140.00 123.86  1.65 180.82   55.54 2.21  0.42  6/9   0.50
+49 1,048.00 -33.66 -0.34 222.14 -332.88 1.98 -1.98  4/9   0.36
+51 1,048.00 -33.66 -0.34 222.14 -332.88 1.98 -1.98  4/9   0.36
+70 2,121.00  49.88  0.66 161.07  -81.31 1.94 -0.62  7/9   0.50
+42 2,136.00  -3.13 -0.04 158.12 -196.97 1.93 -1.49  5/9   0.49
+57 2,113.00  64.61  0.85 159.87  -47.01 1.91 -0.36  6/9   0.50
+3  2,134.00  19.48  0.26 150.57 -136.95 1.83 -1.04  5/9   0.51
+   cross-section: {'set': 'NQ sign', 'n': 97, 'design_pos': 0.52, 'holdout_pos': 0.31, 'rho': np.float64(0.05), 'winners': 28, 'winners_hold_pos': 0.25, 'winners_hold_avg': -109.38}
+   placebo (random signs, same days, 200 runs): rho -0.00 (5-95% -0.16..+0.16); winners' holdout positive 46% (95% 73%); holdout positive overall 45% (95% 54%)
+
+   rule 'extreme': top 10 by design t (of 98)
+        n    avg     t      d       h   td    th  yrs  long%
+37 917.00 327.14  2.72 527.50  137.41 3.83  0.71  6/8   0.51
+57 848.00 175.21  1.31 380.18  -54.35 2.69 -0.23  5/9   0.52
+54 914.00  35.29  0.33 296.71 -297.65 2.46 -1.55  5/9   0.52
+28 889.00  87.52  0.70 313.80 -174.46 2.35 -0.79  5/9   0.53
+60 856.00 229.23  1.97 308.10  137.61 2.29  0.70  8/9   0.52
+42 996.00  11.71  0.10 287.96 -318.10 2.26 -1.47  6/9   0.52
+18 857.00 187.94  1.50 300.49   57.54 2.24  0.26  6/9   0.52
+9  913.00 167.92  1.38 266.61   43.58 2.11  0.19  3/9   0.53
+33 880.00 182.88  1.48 265.17   86.80 2.00  0.40  5/9   0.54
+49 782.00 -90.10 -0.75 264.65 -514.60 1.96 -2.47  5/9   0.46
+   cross-section: {'set': 'NQ extreme', 'n': 97, 'design_pos': 0.62, 'holdout_pos': 0.3, 'rho': np.float64(0.11), 'winners': 27, 'winners_hold_pos': 0.44, 'winners_hold_avg': -76.74}
+   placebo (random signs, same days, 200 runs): rho -0.00 (5-95% -0.17..+0.17); winners' holdout positive 46% (95% 70%); holdout positive overall 47% (95% 56%)
+
+=== ES: 2519 sessions 2017-01-03 .. 2026-10-09; alphas with values 99/101; first valid day median 2017-04-28
+   benchmark always long 8:30->14:59: avg $-2 | design $-29 holdout $42
+
+   rule 'sign': top 10 by design t (of 98)
+           n    avg     t      d       h   td    th   yrs  long%
+60  2,332.00  20.24  0.53  62.43  -38.68 1.45 -0.57  4/10   0.50
+45  1,468.00  56.10  1.22  81.19   19.71 1.38  0.27   5/9   0.48
+54  2,459.00 -19.43 -0.54  51.56 -127.84 1.30 -1.88  3/10   0.50
+28  2,377.00  -8.88 -0.24  41.84  -82.06 1.00 -1.21  3/10   0.50
+11  2,397.00  27.43  0.74  40.78    7.90 0.99  0.12  5/10   0.50
+93  2,317.00 -24.82 -0.66  40.61 -116.34 0.95 -1.71  5/10   0.50
+100 1,017.00  10.19  0.15 142.17  -15.92 0.89 -0.22   4/9   0.52
+57  2,370.00 -27.93 -0.75  36.04 -119.77 0.86 -1.76  3/10   0.51
+83  2,341.00  -5.53 -0.15  36.75  -64.97 0.86 -0.96  4/10   0.49
+26    486.00 -50.04 -0.71  50.35 -243.55 0.80 -1.45  4/10   0.50
+   cross-section: {'set': 'ES sign', 'n': 98, 'design_pos': 0.29, 'holdout_pos': 0.18, 'rho': np.float64(-0.03), 'winners': 4, 'winners_hold_pos': 0.25, 'winners_hold_avg': -57.22}
+
+   rule 'extreme': top 10 by design t (of 98)
+           n    avg     t      d       h   td    th   yrs  long%
+100   428.00 119.30  1.05 468.44   57.91 1.85  0.46   6/9   0.54
+45    621.00  74.51  1.04 141.67  -25.83 1.63 -0.21   5/9   0.51
+37  1,031.00  64.08  1.16  99.27   18.30 1.41  0.21   5/9   0.50
+18    971.00  49.69  0.76  83.62   -0.23 1.22 -0.00  4/10   0.52
+46    153.00   9.95  0.08 185.28 -187.29 1.15 -0.88  5/10   0.31
+25    974.00 122.61  1.87  78.86  187.84 1.10  1.52  4/10   0.53
+57    967.00  -1.78 -0.03  81.27 -116.55 1.08 -0.94  3/10   0.52
+70    973.00  28.49  0.44  70.62  -34.22 1.04 -0.28  5/10   0.53
+15     40.00 188.75  1.07 227.35  160.22 0.99  0.61   2/2   0.38
+3   1,066.00  32.43  0.53  60.30   -5.58 0.94 -0.05  5/10   0.52
+   cross-section: {'set': 'ES extreme', 'n': 98, 'design_pos': 0.37, 'holdout_pos': 0.28, 'rho': np.float64(0.06), 'winners': 8, 'winners_hold_pos': 0.38, 'winners_hold_avg': -12.51}
+
+=== Combination (vote of signs), 1 contract, trade when |vote| >= threshold
+   NQ all 101                |vote|>0.0: n 2047 avg $   26 t  0.3 | design $  184 holdout $ -151 (t -1.1) yrs 4/9 | longs $   94 (999) shorts $  -39 (1048)
+   NQ all 101                |vote|>0.1: n 1640 avg $  -23 t -0.3 | design $  162 holdout $ -228 (t -1.5) yrs 4/9 | longs $  102 (787) shorts $ -139 (853)
+   NQ all 101                |vote|>0.2: n 1206 avg $  -25 t -0.2 | design $  179 holdout $ -257 (t -1.4) yrs 3/9 | longs $  224 (581) shorts $ -256 (625)
+   NQ design winners (28)    |vote|>0.0: n 2073 avg $   63 t  0.8 | design $  224 holdout $ -126 (t -0.9) yrs 5/9 | longs $  132 (1002) shorts $   -1 (1071)
+   NQ design winners (28)    |vote|>0.1: n 1941 avg $   47 t  0.6 | design $  249 holdout $ -193 (t -1.4) yrs 4/9 | longs $  131 (934) shorts $  -31 (1007)
+   NQ design winners (28)    |vote|>0.2: n 1713 avg $   68 t  0.8 | design $  278 holdout $ -181 (t -1.2) yrs 6/9 | longs $  188 (822) shorts $  -42 (891)
+   ES all 101                |vote|>0.0: n 2312 avg $  -20 t -0.5 | design $   38 holdout $ -102 (t -1.5) yrs 3/10 | longs $    7 (1119) shorts $  -46 (1193)
+   ES all 101                |vote|>0.1: n 1845 avg $  -27 t -0.6 | design $   18 holdout $  -91 (t -1.2) yrs 3/10 | longs $   11 (870) shorts $  -60 (975)
+   ES all 101                |vote|>0.2: n 1347 avg $  -59 t -1.2 | design $    0 holdout $ -147 (t -1.5) yrs 3/10 | longs $    7 (639) shorts $ -118 (708)
+   ES design winners (4)     |vote|>0.0: n 2185 avg $   16 t  0.4 | design $   71 holdout $  -62 (t -0.9) yrs 3/10 | longs $   73 (1092) shorts $  -40 (1093)
+   ES design winners (4)     |vote|>0.1: n 2185 avg $   16 t  0.4 | design $   71 holdout $  -62 (t -0.9) yrs 3/10 | longs $   73 (1092) shorts $  -40 (1093)
+   ES design winners (4)     |vote|>0.2: n 2185 avg $   16 t  0.4 | design $   71 holdout $  -62 (t -0.9) yrs 3/10 | longs $   73 (1092) shorts $  -40 (1093)
+   ES using NQ's design winners (28): n 2314 avg $-20 t -0.5 | design $34 holdout $-100 yrs 3/10
+
+=== Standard metrics, NQ, 1 contract
+                           trades win  avg  annual sharpe sortino profit_factor   max_dd calmar ulcer ulcer_perf
+all 101                      2047 51%  $26  $5,957   0.11    0.16          1.02 $192,092   0.03 22.39       0.53
+all 101 longs                 999 55%  $94 $10,516   0.25    0.36          1.07  $86,433   0.12 16.07       1.31
+all 101 shorts               1048 47% $-39 $-4,559  -0.14   -0.20          0.97 $149,284  -0.03 29.48      -0.31
+design winners (28)          2073 51%  $63 $14,586   0.27    0.40          1.05 $152,310   0.10 18.38       1.59
+design winners (28) longs    1002 55% $132 $14,738   0.36    0.51          1.10  $84,339   0.17 15.93       1.85
+design winners (28) shorts   1071 48%  $-1   $-152  -0.00   -0.01          1.00 $142,257  -0.00 25.35      -0.01
+                                     actual        p5        p50        p95
+name                metric                                                 
+all 101             sharpe            -0.58     -1.34      -0.57       0.19
+                    sortino           -0.80     -1.73      -0.78       0.27
+                    pf_day             0.90      0.79       0.90       1.03
+                    calmar            -0.20     -0.25      -0.18       0.12
+                    ulcer             78.05     36.68     142.56     359.86
+                    max_dd       192,092.00 97,340.23 211,428.50 365,386.60
+                    P(Sharpe<=0)        NaN       NaN       0.89        NaN
+design winners (28) sharpe            -0.48     -1.29      -0.50       0.29
+                    sortino           -0.67     -1.69      -0.70       0.43
+                    pf_day             0.92      0.80       0.91       1.05
+                    calmar            -0.20     -0.25      -0.16       0.17
+                    ulcer             87.38     33.17     129.13     348.54
+                    max_dd       152,310.50 95,662.31 204,296.38 358,553.92
+                    P(Sharpe<=0)        NaN       NaN       0.85        NaN
+                    actual_dd pct_rank     dd50     dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+all 101              $192,092      27% $213,362 $282,822 $312,706        100%        100%        100%
+design winners (28)  $152,310       8% $196,136 $265,483 $301,229        100%        100%        100%
+
+=== The one design standout: Alpha#37 'extreme' (design t 3.8, best of 196 NQ tests) by year, longs / shorts, ES
+   NQ: 2019 n93 $15 | 2020 n115 $842 | 2021 n117 $415 | 2022 n121 $732 | 2023 n134 $114 | 2024 n138 $-153 | 2025 n113 $1063 | 2026 n86 $-575
+      longs: n 464 avg $488 | design $559 holdout $428 (t 1.5)
+      shorts: n 453 avg $162 | design $498 holdout $-194 (t -0.8)
+   ES: 2018 n104 $-111 | 2019 n111 $-43 | 2020 n130 $298 | 2021 n119 $8 | 2022 n119 $291 | 2023 n121 $-42 | 2024 n127 $43 | 2025 n110 $211 | 2026 n90 $-170
+      longs: n 516 avg $79 | design $114 holdout $40 (t 0.3)
+      shorts: n 515 avg $49 | design $87 holdout $-7 (t -0.1)
+               trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+A37 extreme NQ    917 54% $327 $33,420   0.90    1.52          1.29 $75,166   0.44  6.63      10.09
+  longs           464 58% $488 $25,234   0.90    1.55          1.45 $41,284   0.61  4.06      12.43
+  shorts          453 49% $162  $8,187   0.34    0.55          1.14 $60,554   0.14 12.21       1.34
+                          actual        p5       p50        p95
+name      metric                                               
+A37 2023+ sharpe            0.36     -0.54      0.33       1.11
+          sortino           0.59     -0.75      0.53       2.18
+          pf_day            1.10      0.88      1.09       1.37
+          calmar            0.22     -0.18      0.20       1.22
+          ulcer            30.27     10.17     32.86     117.41
+          max_dd       75,165.50 40,952.20 75,434.38 144,721.06
+          P(Sharpe<=0)       NaN       NaN      0.26        NaN
+          actual_dd pct_rank    dd50     dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+A37 2023+   $75,166      53% $73,764 $116,097 $134,141        100%        100%        100%

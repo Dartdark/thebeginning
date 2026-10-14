@@ -1274,6 +1274,56 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
   profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
   awkward there in any case.
 
+## 101 Formulaic Alphas (Kakushadze 2015, SSRN 2701346; user's upload 2026-10-14): fails on NQ
+
+**What it is.** WorldQuant published the formulas of 101 of its production stock alphas: price-volume expressions
+(open, high, low, close, volume, VWAP, returns, ADV) built from cross-sectional `rank`, industry-neutralization and
+time-series operators. They are held 0.6–6.4 days on about 2,000 US stocks, with Sharpe 1.2–4.2 in 2010–13 **before
+costs**. The paper's real findings are about the alphas as a set: an average pairwise correlation of 15.9%, and
+return ∝ volatility^0.76 with no dependence on turnover.
+**Why it should make money.** Each alpha is a faint, short-lived relative-value bet across stocks: mean reversion
+against the cross-section, sometimes momentum. The money comes from combining thousands of them into one
+"mega-alpha" and from internal crossing of trades. Both need a large cross-section, and NQ is one instrument.
+**Foundation for an Apex strategy?** Only through a time-series port, and that port turns them into the
+price-pattern timing that has failed here before. Tested anyway, because the formulas are explicit.
+
+Code `../analysis/alpha101_test.py` (output in `..._output.txt`).
+- **Port:** `rank` becomes the 60-day percentile. IndNeutralize becomes the identity, cap = 1. Daily bar = the
+  8:30–15:00 session.
+- **Trade:** the alpha at yesterday's close sets today's side, 8:30 open → 14:59. Costs: $17.25 per NQ, $22.50 per ES.
+- **Rules:**
+  - "sign": the alpha vs its 60-day median, so it trades almost every day.
+  - "extreme": trade only in the top or bottom 20%.
+- **Split:** design to 2022, holdout 2023–26. NQ and ES.
+
+Results:
+- **97 of 101 can be tested.** #96 and #97 produce almost no values, because their nested windows break on NaN correlations. #7 is nearly a constant short, since it compares dollar ADV with contract volume. #84 degenerates.
+- **Design winners don't stay winners.** NQ "sign":
+  - 28 alphas have design t > 1, and only 25% of them are positive in 2023–26. Random signs on the same days give 46%
+    (95% band up to 73%).
+  - The design-vs-holdout rank correlation is +0.05, inside the placebo band of ±0.16.
+  - Only 31% of all alphas are positive in the holdout, below the random 45%. Taking each one's sign at face value
+    loses in the bull run.
+  - "extreme": holdout winners 44%, rho +0.11 (still inside the placebo band).
+  - ES: 4 design winners, holdout 25%, rho −0.03.
+- **Mega-alpha (the paper's own use).** The vote of all 101 signs:
+  - NQ: $184 a trade in design, −$151 in the holdout (t −1.1); Sharpe 0.11 for 2018–26, holdout −0.58,
+    P(Sharpe ≤ 0) 89%.
+  - The 28 design winners' vote: design $224, holdout −$126. Longs $132 a trade, shorts −$1, so the longs are NQ's
+    drift (always long in 2023–26 makes $122 a day).
+  - ES: all 101 −$20, design winners −$62 in the holdout. NQ's winners applied to ES: −$100.
+- **Alpha#37 is the one standout:** `rank(correlation(delay(open − close, 1), close, 200)) + rank(open − close)`.
+  - "extreme" NQ: design t 3.8, the best of 196 tests, but holdout $137 (t 0.7), with 2024 −$153 and 2026 −$575 a
+    trade.
+  - Longs: holdout $428 (t 1.5), about NQ's drift on a long day. Shorts: holdout −$194.
+  - Sharpe 0.90 for the whole period, holdout 0.36 (P ≤ 0 26%). PF 1.29, Calmar 0.44, Ulcer 6.6. Max drawdown
+    $75k per NQ, far beyond a $2,000 trailing drawdown even at 1 MNQ.
+  - ES holdout $18 (t 0.2).
+- **Verdict: F.** These are cross-sectional stock signals. On a single index future they are price-volume patterns
+  with no edge after costs. The holdout is worse than random signs, and combining them doesn't help. Nothing goes on
+  the funded bench. The paper's lesson that applies here: many weakly correlated edges beat one strong one, which is
+  how the plan is already built.
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN
