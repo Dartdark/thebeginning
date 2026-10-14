@@ -1,0 +1,99 @@
+Cross-asset co-movement map: when do NQ, ES, YM, gold, oil and bitcoin move together, and do the breaks or
+
+A. Session correlation of 5-minute returns with NQ (8:30-15:00), mean by year
+        ES    YM    GC    CL   BTC
+2018  0.88  0.76 -0.07  0.20 -0.04
+2019  0.89  0.79 -0.24  0.29  0.00
+2020  0.88  0.73  0.12  0.29  0.22
+2021  0.81  0.49  0.17  0.17  0.22
+2022  0.94  0.80  0.21  0.17  0.61
+2023  0.89  0.65  0.14  0.11  0.38
+2024  0.90  0.51  0.15  0.03  0.38
+2025  0.92  0.62  0.08  0.12  0.48
+2026  0.89  0.46  0.38 -0.23  0.44
+
+   by day type (mean session correlation; n days)
+                                                 ES    YM    GC    CL   BTC     n
+all                                            0.89  0.65  0.10  0.14  0.34  2262
+FOMC decision day                              0.93  0.77  0.37  0.17  0.43    69
+7:30 data-release day                          0.91  0.69  0.18  0.17  0.41   255
+NFP Friday                                     0.90  0.70  0.17  0.19  0.40    62
+monthly opex Friday                            0.89  0.68  0.07  0.17  0.34   102
+month-end                                      0.89  0.68  0.10  0.14  0.31   106
+Monday                                         0.86  0.59  0.05  0.10  0.29   452
+Friday                                         0.90  0.68  0.09  0.17  0.33   446
+VIX low third                                  0.87  0.58  0.03  0.07  0.21   753
+VIX high third                                 0.91  0.77  0.17  0.22  0.44   755
+biggest NQ days (top 10% |move|, descriptive)  0.93  0.72  0.22  0.15  0.53   227
+
+B. Lead-lag: corr(NQ return now, market X return k minutes earlier), pooled 8:30-15:00 sessions
+          corr_18_22                                    corr_23_26                                   
+leader           BTC     CL     ES     GC     NQ     YM        BTC     CL     ES     GC     NQ     YM
+bars  lag                                                                                            
+1-min 1        0.006  0.003  0.015  0.002  0.018  0.012      0.004 -0.001 -0.001  0.003  0.000 -0.003
+      2       -0.004 -0.003 -0.011  0.005 -0.012 -0.011      0.003  0.002  0.007  0.001  0.006  0.006
+      3        0.003  0.002 -0.009 -0.002 -0.008 -0.009     -0.001  0.000 -0.002 -0.003 -0.003 -0.003
+      5       -0.003 -0.003 -0.007  0.001 -0.003 -0.009     -0.005 -0.001  0.000  0.001 -0.003  0.001
+      10      -0.000  0.002  0.002  0.006  0.002  0.002     -0.000 -0.001  0.003  0.005  0.006  0.001
+5-min 1       -0.006 -0.003 -0.024 -0.001 -0.009 -0.022      0.004  0.001  0.005  0.004  0.002  0.004
+      2       -0.005 -0.002 -0.016 -0.001 -0.016 -0.015      0.001 -0.002 -0.013  0.004 -0.009 -0.015
+      3       -0.002 -0.004  0.008 -0.001  0.007  0.006      0.012  0.005  0.006 -0.002  0.006  0.006
+   (standard error of a correlation here ~0.0026; 1-minute costs need |corr| well above 0.03 to trade)
+
+C. Event reactions: other markets' first 15 minutes vs NQ afterwards (1 NQ, $17.25 costs)
+   -- 7:30 data days (255 days); NQ after the first 15 minutes, to 15:00
+   follow NQ's own first 15 minutes                                   n= 255 avg $  -588 t -2.4 | 18-22 $  -412 (t -1.2) 23-26 $  -733 (t -2.0)
+   long NQ if ES rose in the first 15 minutes (else short)            n= 255 avg $  -494 t -2.0 | 18-22 $  -239 (t -0.7) 23-26 $  -703 (t -2.0)
+      follow NQ when ES moved the same way                            n= 243 avg $  -582 t -2.2 | 18-22 $  -334 (t -1.0) 23-26 $  -794 (t -2.1)
+      follow NQ when ES moved the other way                           n=  12 avg $  -708 t -0.8 | 18-22 $ -3331 (t -12.5) 23-26 $   166 (t  0.2)
+   long NQ if YM rose in the first 15 minutes (else short)            n= 253 avg $  -547 t -2.2 | 18-22 $  -280 (t -0.8) 23-26 $  -769 (t -2.1)
+      follow NQ when YM moved the same way                            n= 231 avg $  -620 t -2.3 | 18-22 $  -371 (t -1.0) 23-26 $  -835 (t -2.1)
+      follow NQ when YM moved the other way                           n=  24 avg $  -281 t -0.5 | 18-22 $  -962 (t -0.9) 23-26 $    59 (t  0.1)
+   long NQ if GC rose in the first 15 minutes (else short)            n= 255 avg $    43 t  0.2 | 18-22 $  -301 (t -0.9) 23-26 $   324 (t  0.9)
+      follow NQ when GC moved the same way                            n= 165 avg $  -376 t -1.3 | 18-22 $  -521 (t -1.1) 23-26 $  -277 (t -0.7)
+      follow NQ when GC moved the other way                           n=  90 avg $  -976 t -2.2 | 18-22 $  -259 (t -0.6) 23-26 $ -1797 (t -2.3)
+   long NQ if CL rose in the first 15 minutes (else short)            n= 255 avg $   290 t  1.2 | 18-22 $   395 (t  1.2) 23-26 $   203 (t  0.6)
+      follow NQ when CL moved the same way                            n= 162 avg $  -189 t -0.7 | 18-22 $    -7 (t -0.0) 23-26 $  -370 (t -0.9)
+      follow NQ when CL moved the other way                           n=  93 avg $ -1283 t -2.7 | 18-22 $ -1375 (t -2.1) 23-26 $ -1230 (t -1.9)
+   long NQ if BTC rose in the first 15 minutes (else short)           n= 194 avg $  -220 t -0.7 | 18-22 $  -133 (t -0.3) 23-26 $  -271 (t -0.7)
+      follow NQ when BTC moved the same way                           n= 150 avg $  -515 t -1.5 | 18-22 $  -407 (t -0.7) 23-26 $  -576 (t -1.4)
+      follow NQ when BTC moved the other way                          n= 105 avg $  -692 t -2.0 | 18-22 $  -416 (t -1.2) 23-26 $ -1074 (t -1.5)
+   -- FOMC days (13:00 statement) (69 days); NQ after the first 15 minutes, to 15:00
+   follow NQ's own first 15 minutes                                   n=  69 avg $  -376 t -0.9 | 18-22 $  -858 (t -1.8) 23-26 $   251 (t  0.3)
+   long NQ if ES rose in the first 15 minutes (else short)            n=  69 avg $  -237 t -0.6 | 18-22 $  -747 (t -1.5) 23-26 $   427 (t  0.6)
+      follow NQ when ES moved the same way                            n=  66 avg $  -320 t -0.7 | 18-22 $  -845 (t -1.7) 23-26 $   351 (t  0.5)
+      follow NQ when ES moved the other way                           n=3
+   long NQ if YM rose in the first 15 minutes (else short)            n=  69 avg $   408 t  1.0 | 18-22 $    69 (t  0.1) 23-26 $   850 (t  1.2)
+      follow NQ when YM moved the same way                            n=  57 avg $    17 t  0.0 | 18-22 $  -450 (t -0.9) 23-26 $   708 (t  0.9)
+      follow NQ when YM moved the other way                           n=  12 avg $ -2243 t -2.0 | 18-22 $ -3631 (t -2.5) 23-26 $ -1252 (t -0.8)
+   long NQ if GC rose in the first 15 minutes (else short)            n=  69 avg $   378 t  0.9 | 18-22 $   177 (t  0.4) 23-26 $   638 (t  0.9)
+      follow NQ when GC moved the same way                            n=  50 avg $   -40 t -0.1 | 18-22 $  -468 (t -1.0) 23-26 $   505 (t  0.5)
+      follow NQ when GC moved the other way                           n=  19 avg $ -1261 t -1.5 | 18-22 $ -1852 (t -1.5) 23-26 $  -449 (t -0.4)
+   long NQ if CL rose in the first 15 minutes (else short)            n=  69 avg $  -709 t -1.7 | 18-22 $  -367 (t -0.7) 23-26 $ -1154 (t -1.6)
+      follow NQ when CL moved the same way                            n=  52 avg $  -714 t -1.7 | 18-22 $  -766 (t -1.5) 23-26 $  -638 (t -0.8)
+      follow NQ when CL moved the other way                           n=  17 avg $   659 t  0.6 | 18-22 $ -1214 (t -0.9) 23-26 $  2323 (t  1.5)
+   long NQ if BTC rose in the first 15 minutes (else short)           n=  56 avg $   495 t  1.0 | 18-22 $   362 (t  0.5) 23-26 $   618 (t  0.9)
+      follow NQ when BTC moved the same way                           n=  43 avg $   202 t  0.4 | 18-22 $  -440 (t -0.5) 23-26 $   759 (t  1.0)
+      follow NQ when BTC moved the other way                          n=  26 avg $ -1331 t -2.3 | 18-22 $ -1298 (t -2.5) 23-26 $ -1422 (t -0.8)
+
+D. Morning decoupling (8:30-11:00 correlations, known at 11:00) and NQ 11:00 -> 15:00
+   NQ-ES morning corr bottom 20%: follow the morning move to 15:00    n= 402 avg $    15 t  0.2 | 18-22 $    11 (t  0.1) 23-26 $    22 (t  0.1)
+   NQ-ES morning corr bottom 20%: fade the morning move               n= 402 avg $   -49 t -0.6 | 18-22 $   -45 (t -0.6) 23-26 $   -57 (t -0.3)
+                                                                     afternoon |move| $668 vs all $905
+   NQ-ES morning corr top 20%: follow the morning move to 15:00       n= 522 avg $   156 t  1.1 | 18-22 $    84 (t  0.6) 23-26 $   246 (t  0.9)
+   NQ-ES morning corr top 20%: fade the morning move                  n= 522 avg $  -190 t -1.3 | 18-22 $  -118 (t -0.8) 23-26 $  -281 (t -1.1)
+                                                                     afternoon |move| $1,305 vs all $905
+   NQ-ES decoupled: trade NQ in the direction of its morning out-performance vs ES n= 402 avg $    78 t  0.9 | 18-22 $   -49 (t -0.6) 23-26 $   297 (t  1.7)
+   NQ-ES decoupled: trade NQ against its morning out-performance vs ES n= 402 avg $  -113 t -1.4 | 18-22 $    15 (t  0.2) 23-26 $  -331 (t -1.9)
+   NQ-gold morning corr bottom 20%: follow the morning move to 15:00  n= 268 avg $   143 t  1.4 | 18-22 $   170 (t  1.5) 23-26 $    76 (t  0.3)
+   NQ-gold morning corr bottom 20%: fade the morning move             n= 268 avg $  -178 t -1.7 | 18-22 $  -205 (t -1.8) 23-26 $  -110 (t -0.5)
+                                                                     afternoon |move| $688 vs all $905
+   NQ-gold morning corr top 20%: follow the morning move to 15:00     n= 630 avg $   202 t  1.8 | 18-22 $   163 (t  1.5) 23-26 $   267 (t  1.1)
+   NQ-gold morning corr top 20%: fade the morning move                n= 630 avg $  -237 t -2.1 | 18-22 $  -197 (t -1.8) 23-26 $  -301 (t -1.2)
+                                                                     afternoon |move| $1,072 vs all $905
+   NQ-bitcoin morning corr bottom 20%: follow the morning move to 15:00 n= 207 avg $   -18 t -0.2 | 18-22 $    61 (t  0.8) 23-26 $  -171 (t -0.9)
+   NQ-bitcoin morning corr bottom 20%: fade the morning move          n= 207 avg $   -17 t -0.2 | 18-22 $   -95 (t -1.2) 23-26 $   137 (t  0.7)
+                                                                     afternoon |move| $510 vs all $905
+   NQ-bitcoin morning corr top 20%: follow the morning move to 15:00  n=  51 avg $   561 t  0.6 | 18-22 $   938 (t  nan) 23-26 $   553 (t  0.6)
+   NQ-bitcoin morning corr top 20%: fade the morning move             n=  51 avg $  -595 t -0.6 | 18-22 $  -972 (t  nan) 23-26 $  -588 (t -0.6)
+                                                                     afternoon |move| $2,295 vs all $905

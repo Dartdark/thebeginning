@@ -1274,6 +1274,50 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
   profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
   awkward there in any case.
 
+## Cross-asset co-movement map and its zoom-ins (2026-10-14, user's idea)
+
+Code `../analysis/cross_asset_map_test.py` and `../analysis/release_reaction_fade_test.py` (outputs in the matching
+`_output.txt`). Data: NQ, ES, YM, GC, CL, BTC 1-minute, 2018–2026.
+
+**The map** (each session's correlation of 5-minute returns with NQ, 8:30–15:00):
+- **ES 0.89 every year.**
+- **YM** has drifted away: 0.80 in 2018 → 0.46 in 2026 (rotation between tech and the Dow).
+- **Gold** went from −0.24 (2019) to +0.38 (2026).
+- **Oil** went from +0.29 (2019–20) to −0.23 (2026): in 2026 oil and Nasdaq trade against each other.
+- **Bitcoin** went from ≈0 (2018–19) to 0.4–0.6 since 2022.
+- **What lifts the correlations:** FOMC days (gold 0.37, bitcoin 0.43, YM 0.77), the high-VIX third (gold 0.17,
+  bitcoin 0.44) and data-release days. Mondays and low-VIX days are the least correlated.
+- So the markets co-move most when a common macro driver (rates, risk) is in play.
+
+**Lead-lag (does another market move first?):**
+- No. At 1 minute, every correlation of NQ with another market's previous minute is ≤ 0.018 in 2018–22 and ≤ 0.007
+  in 2023–26. NQ's own lag is 0.018 / 0.000. At 5 minutes, ≤ 0.024 and inconsistent in sign.
+- Prices sync within the minute, nothing to trade. **F.**
+
+**Morning decoupling (8:30–11:00 correlation, known at 11:00) → NQ 11:00–15:00:**
+- Low NQ–ES correlation days have quieter afternoons ($668 vs $905 median move). Following or fading does nothing
+  (t ≤ 0.6).
+- High NQ–gold correlation (macro mornings): following the morning move +$202 (t 1.8), fading −$237 (t −2.1).
+  Afternoon momentum, consistent in both halves but under the bar.
+- Trading NQ in the direction of its morning out-performance vs ES on decoupled days: +$78 (2018–22 −$49).
+  **F / D.**
+
+**Event reactions → the zoom-in:**
+- On 7:30 data days, following NQ's 7:30 → 7:45 reaction to the close loses (−$588, t −2.4, both halves). It loses
+  more when oil moves the other way (−$1,283, t −2.7). So the reaction tends to reverse.
+- **Fading it** (entry 7:46; out 9:00 / 10:30 / 12:00 / 15:00; stop none / 0.5 / 1.0 ATR):
+  - All release days, out 15:00: +$553 a trade, t 2.2, 9/9 years.
+  - Placebo (the same fade on ordinary days): −$37, so it really is the data reaction.
+  - But it's mostly NFP. Non-NFP release days: best +$425 (t 1.4). The design pick (out 15:00, stop 0.5) makes $232,
+    t 0.9, 2023–26 $100. Funded + 1 MNQ: $9,115 vs $9,313. **D.**
+  - Oil disagreeing with NQ (61 non-NFP days): +$1,067 out 15:00 (t 1.6, 7/9 years; 2018–22 $1,622, 2023–26 $753).
+    The right direction, but small and found after looking.
+- **NFP Fridays (the plan's NFP Fade):** holding longer pays much more per trade.
+  - Out 12:00 with a 1.0 ATR stop: $874 vs $360, t 2.4, PF 2.31, Sharpe 0.77 (2023+ 1.11), longs $985, shorts $788.
+  - But the funded bench gets worse at every size: $8,995–9,161 vs $9,313, blown 8–14% vs 2%. Holding through
+    NFP mornings adds large adverse swings on a day other strategies also trade.
+  - Keep the 9:00 exit. On the watchlist (#8).
+
 ## Cross-asset overnight signals (2026-10-14): gold, oil and bitcoin overnight say nothing new about NQ's day
 
 Code `../analysis/cross_asset_overnight_test.py` (output in `..._output.txt`).
