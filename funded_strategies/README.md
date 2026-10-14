@@ -1274,6 +1274,29 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
   profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
   awkward there in any case.
 
+## The plan's strategies on CL and GC (2026-10-14): none carries over
+
+Code `../analysis/commodity_plan_port_test.py` (output in `..._output.txt`). Same Python versions as the YM port. Prices
+are rescaled (CL ×25, GC ×2.5) so one tick = the code's 0.25-point slip; point targets / stops are scaled by the daily
+range ratio. 1 contract, $7.25 + 1 tick a fill, 2018–2026.
+
+| Strategy | NQ | CL | GC |
+|---|---|---|---|
+| Vault Break | $91, PF 1.26, t 4.2 | −$15, PF 0.91, t −1.7 | −$11, PF 0.94 |
+| Overnight Bias ADX30 | $381, PF 1.68, t 5.0 | $32, PF 1.11, t 1.1 (shorts $62) | $35, PF 1.10, t 0.8 (2023–26 −$5) |
+| EOS (equity expiry) | $475, PF 1.94 | −$8 | $93, PF 1.27, t 0.7 |
+| Monday Long | $413, PF 1.52 | $34, t 0.7 | −$60 |
+| NFP Fade | $354, PF 1.82 | 14 trades | −$8 |
+| Late-Day Flow | $94, PF 1.44 | −$17, PF 0.77 | $1 |
+| Bridge Monday Long | $561, PF 2.03 | −$161 | −$195 |
+
+- Sharpe on CL ranges −0.56 to 0.36, on GC −0.53 to 0.28 (all in the output, by longs / shorts).
+- **Why:** the plan's edges are Nasdaq forced flows (leveraged ETFs, options, index funds, equity expiry), and they
+  don't exist in commodities. The only half-alive one is Overnight Bias (an overnight-range direction rule), which
+  is weak on both.
+- **Verdict: F.** Commodities need their own ideas. So far the only real one is the gold Asian breakout (C, watchlist
+  #6).
+
 ## Crude oil (CL) forced flows (2026-10-14, user's CL export 2017-11 → 2026-10): nothing tradeable yet
 
 Data: `data/CL_1min_2017..2026.csv`, converted from the Eastern-time export to Central. It's an unadjusted front-month
