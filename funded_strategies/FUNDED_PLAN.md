@@ -563,6 +563,13 @@ fees. Scored at the backtest edge and at 75% of it.
     Re-checked against Tran 2026 ('From Funded to Paid', `../analysis/funded_to_paid_check.py`): $1,500 is best on every
     measure - expected payouts, chance of any payout (93%), blown (4% / 2%) and all 6 payouts within 2 years (95%); fixed or
     bolder sizing is worse on all of them (fixed 2x: paid 46%, blown 62% / 66%).
+  - **Netting (several strategies on one account), checked 2026-10-14 (`../analysis/plan_overlap_check.py`):** only 2.5% of
+    the plan's NQ trades start while an opposite plan trade is open (Overnight Bias ML / Late-Day Flow against a Monday long);
+    the broker nets them and the P&L is the same as the sum, so the bench is right to keep them. Operational rules:
+    (1) run every NQ strategy on the SAME symbol (all MNQ) - long NQ with short MNQ is a hedge Apex prohibits, while one
+    symbol simply nets; (2) let each chart send its own entries / exits (do not let MultiCharts 'sync' a chart to the
+    broker's net position); (3) on a netted account the broker shows the NET position, so a chart can be 'long' while the
+    account is flat - check fills per chart, not the account position.
   - Scale 1.25 (+19% at the edge, +25% at 75%) costs more blown accounts (1.4–2.7 per slot over 3 years). Consider
     it only after the live edge ratio is ≥ 0.9 over ~40 trades.
   - Caveat: in-sample, and medians move in steps of the payout amounts.
