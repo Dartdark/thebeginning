@@ -201,6 +201,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | 0DTE gamma and volatility (Dim, Eraker & Vilkov 2025) | Paper | Needs intraday 0DTE dealer positions (paid Cboe data) |
 | Contrarian VRP ETF strategy (SSRN 4841308) | Paper | Rules undefined, no costs, multi-day ETFs |
 | SPY/TQQQ "arbitrage" (SSRN 4944736) | Paper | Unhedged 1:1 share pair; a disguised directional bet |
+| Treasury auction price pressure (Fleming, Liu & Nguyen 2026, NY Fed Staff Report 1188, SSRN 6447502): yields rise 3 h before a coupon auction closes (12:00 CT) and fall 3 h after; trade = short ZN 9:00 → 11:59 CT, long 12:01 → 15:00 | Paper / forced flow (ZN, GC, 6E; Python) | Paper: 10-year 1.19 bp 1991–2024 but only 0.59 bp 2015–24 (≈ $40 a ZN for both legs vs $77 cost). Here (`analysis/treasury_auction_test.py`, auction days found from the 12:00 CT ZN volume spike, no calendar reachable): ZN both legs gross −$6 (t −0.7), placebo days +$6; Tue–Thu only −$2 to −$17; best subset (3/10/30-year cycle, days 6–15) +$15–19 gross, t ≤ 1.2; net −$83 a day (Sharpe −3.1, 1/9 years; 2023+ bootstrap P(Sharpe ≤ 0) 100%), shorts (pre) −$39, longs (post) −$44. Gold: GC same windows −$51 gross (post leg −$207 in 2023–26); 6E (2018–21) +$13 vs placebo +$25 |
 | Futures short-term reversal (QuantConnect) | Article | Code contradicts its description; weekly multi-market holds |
 | Mean-reversion Colab notebook | Notebook | Not noteworthy (reviewed earlier) |
 

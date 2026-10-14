@@ -82,7 +82,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   - The user's CL forced-flow chat: Platts window, EIA sweep fade and round numbers F; USO roll short D.
   - Gold / BTC FOMC: D.
 - **Next research (needs data from the user):**
-  - **ZN (10-year) and DX / 6E 1-minute exports** for gold (rates / dollar divergence).
+  - **ZN is in** (`data/ZN_1min_*.csv`, 2017-12 .. 2026-10-14); **6E 2017–21 is in, 2022–26 still to export.** Next: gold vs
+    rates / dollar divergence (S-rank round 3, GC).
+  - Treasury-auction price pressure paper (NY Fed SR 1188) tested on ZN / GC / 6E: F (edge ≤ $19 gross vs $77 cost).
   - Closing-imbalance or options open-interest data for ES.
   - Without new data, the clock flows on GC / ES / YM / BTC are exhausted.
 - **Watchlist (`WATCHLIST.md`), notable items:**
@@ -107,4 +109,4 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 1. Compile the fixed Overnight Bias code (combine chart now; funded ML version later) and re-enable auto trading.
 2. Keep the PC / connection awake during trading hours (Monday's miss).
 3. Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
-4. Check Apex allows MCL; send weekly live reports; export ZN + DX for gold research.
+4. Check Apex allows MCL; send weekly live reports; export 6E 2022–2026 (exporter `Decimals` 5).

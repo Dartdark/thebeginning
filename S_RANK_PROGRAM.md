@@ -78,7 +78,7 @@ The clock flows on GC / ES / YM / BTC are exhausted with 1-minute prices; S on t
 3. **GC:** gold–dollar / rates conditioning (needs DXY or ZN exports); expiry pinning with open interest by strike.
 4. **BTC:** the weekend gap is gone (24/7 trading); the remaining idea is the ETF 15:00 benchmark with flow data.
 
-Data that would unlock round 3 (ask the user): ZN (10-year note) and 6E / DX 1-minute exports from MultiCharts;
+Data status (2026-10-14): ZN 1-minute 2017-12 .. 2026-10-14 and 6E 2017–2021 are in `data/` (6E 2022–26 still to come). Treasury-auction price pressure (SR 1188) tested on ZN / GC / 6E: F. Data that would unlock round 3 (ask the user): ZN (10-year note) and 6E / DX 1-minute exports from MultiCharts;
 NYSE / Nasdaq closing imbalance history; CME open interest by strike.
 
 ## Round 1 hypotheses (forced or scheduled flows native to each market)
