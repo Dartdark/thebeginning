@@ -104,7 +104,7 @@ funded about neutral; combine (`analysis/combine_gold_test.py`) no gain (pass 49
 on real history. With the backtest edge, about $800 a month per slot, nearly linear (3 slots: about $30k in year one,
 $13k net after about 8 months). At 75% / 50% of the edge it's still positive over 3 years, but year one can be
 negative. Plan: start 3 slots, scale to 5-10 once live results are >= ~75% of the backtest per trade (`analysis/live_vs_backtest.py`).
-Check Apex's account limit and copier rules first. Details: `funded_strategies/FUNDED_PLAN.md` (last section).
+Apex allows trade copying (user, 2026-10-14): one master per phase; reduce a follower's multiplier if its cushion falls well below the master's. User starting 3 slots together on 2026-10-14. Details: `funded_strategies/FUNDED_PLAN.md` (last section).
 Live tracking: export live reports to `live/<KEY>_live.xlsx`, run `python3 analysis/live_vs_backtest.py --all live/` (see `live/README.md`).
 Cross-asset overnight (gold / oil / bitcoin) filters: 0 of 25 pass (`analysis/cross_asset_overnight_test.py`); ONB-after-gold-up on the watchlist (#7).
 

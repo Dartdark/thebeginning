@@ -511,9 +511,16 @@ unchanged; activation $85, stagger 10 days):
 2. **Scale to 5, then 10, only when live results confirm the edge.** After about 2 months (roughly 40 plan trades)
    the live average per trade should be at least ~75% of the backtest's for the same days (tracked with
    `../analysis/live_vs_backtest.py`).
-3. **Check with Apex before scaling:** the current limit on simultaneous PA accounts, and whether a trade copier
-   across your own accounts is allowed (both have changed over time). Each account needs its own MultiCharts
-   charts (or a copier).
+3. **Trade copying: allowed by Apex (user confirmed 2026-10-14).** Still check the current limit on simultaneous PA
+   accounts before going past 5.
+   - One master per phase: the challenge accounts copy a master running the combine set, the funded accounts copy
+     a master running the funded plan.
+   - The funded plan sizes by each account's own cushion, but a copier mirrors the master's size. If a follower's
+     cushion falls well below the master's (e.g. under ~$1,100 while the master is at full size), set that
+     follower's multiplier to 0.5–0.75 or put it on its own chart until it recovers.
+   - Starting the 3 slots together is fine (simulated: $29,595 net in 12 months vs $27,095 staggered). Accounts
+     drift apart naturally as each one passes, finishes or blows.
+   - Live tracking: export the master's report (one per phase) into `live/` weekly.
 
 Caveats: the backtest edge is in-sample (the strategies were chosen on this history); the simulator assumes the
 Apex rules in `../analysis/funded_sim.py`; payouts are counted when requested.
