@@ -99,6 +99,13 @@ below the plan (C, watchlist #6). Plan strategies on CL / GC (`analysis/commodit
 Gold breakout exits (`analysis/gold_breakout_exit_test.py`): hold to 12:00 CT best (+0.091 R t 2.2); tighter stops / breakeven / targets worse;
 funded about neutral; combine (`analysis/combine_gold_test.py`) no gain (pass 49.4-50.2% vs 50.1%).
 
+## Account pipeline (2026-10-14): how many accounts
+`analysis/account_pipeline_test.py`: N slots each cycling challenge -> funded -> 6 payouts or blown -> next challenge,
+on real history. With the backtest edge, about $800 a month per slot, nearly linear (3 slots: about $30k in year one,
+$13k net after about 8 months). At 75% / 50% of the edge it's still positive over 3 years, but year one can be
+negative. Plan: start 3 slots, scale to 5-10 once live results are >= ~75% of the backtest per trade (`analysis/live_vs_backtest.py`).
+Check Apex's account limit and copier rules first. Details: `funded_strategies/FUNDED_PLAN.md` (last section).
+
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily
 loss limit, contract tiers, payout rules). Each challenge account costs $50.

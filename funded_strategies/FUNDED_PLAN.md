@@ -455,3 +455,65 @@ On the day the challenge passes, change the inputs (do not reuse the challenge s
   year are inside the noise.
 - The model assumes live fills like the backtest. Overnight liquidity is thinner, so
   expect some extra slippage on Overnight Drift's stop.
+
+## How many accounts to run: the full pipeline (2026-10-14)
+
+Code `../analysis/account_pipeline_test.py` (output in `..._output.txt`). Each "slot" cycles through:
+- buy a 50K challenge ($50 a try) with the combine set (VB 8 + ONB ADX30 $1,100 + Bridge Monday 2 + EOS $500; pass
+  50.1%, median 6 days a try);
+- on a pass, activate a funded PA ($0 / $85 / $140 tested) and run the 7-strategy funded plan (full size from a
+  $1,500 cushion) until the 6th payout or until it is blown;
+- then the next challenge.
+
+N slots run in parallel, started together or staggered. 70 start months 2018-01 → 2023-10, 3-year windows, real day
+order. Accounts with the same strategies get the same trades, so their correlation is whatever the real history
+gives.
+
+**With the backtest edge as it is** (activation $85, medians over start months):
+
+| Slots | Net after 6 months | 12 months | 24 months | 36 months | Months to $13k net | Worst cash point | Challenges / funded over 3 years |
+|---|---|---|---|---|---|---|---|
+| 1 | $1,365 | $9,865 | $20,180 | $28,545 | 17.6 | −$160 | 6 / 3 |
+| 2 | $2,730 | $19,730 | $40,360 | $57,090 | 9.4 | −$320 | 12 / 6 |
+| 3 | $4,095 | $29,595 | $60,540 | $85,635 | 8.2 | −$480 | 18 / 9 |
+| 5 | $6,825 | $49,325 | $100,900 | $142,725 | 7.0 | −$800 | 30 / 15 |
+| 10 (staggered 10 days) | $6,725 | $62,700 | $174,525 | $283,300 | 7.3 | −$1,280 | 62 / 30 |
+
+- About $790–800 a month per slot, nearly linear in the number of slots, because the backtest funded plan almost
+  never blows (median 0 blown over 3 years).
+- Fees hardly matter: $0 vs $140 activation changes 3-year results by about 1%.
+- Staggering the starts changes little. Starting together is faster (accounts pass on the same days); a 10-day
+  stagger spreads the risk.
+
+**Stress test, the edge assumed weaker live** (each strategy's average daily profit cut by 25% or 50%, volatility
+unchanged; activation $85, stagger 10 days):
+
+| Edge kept | Challenge pass | Funded PA: all 6 / blown | Slots | Net 12 months (10th pct) | Net 36 months (10th pct) | Worst cash, 10th pct | Months to $13k |
+|---|---|---|---|---|---|---|---|
+| 75% | 40.7% | 77% / 23% | 1 | $3,740 (−$638) | $20,055 ($9,545) | −$642 | 25.4 |
+| 75% | | | 3 | $10,110 (−$1,720) | $60,165 ($28,616) | −$1,806 | 12.8 |
+| 75% | | | 5 | $15,955 (−$2,685) | $101,575 ($47,718) | −$2,825 | 10.8 |
+| 50% | 34.3% | 38% / 61% | 1 | $1,755 (−$920) | $13,852 ($4,606) | −$1,608 | 32.1 |
+| 50% | | | 3 | $4,735 (−$2,565) | $41,508 ($13,852) | −$4,794 | 16.6 |
+| 50% | | | 5 | $9,045 (−$4,248) | $69,048 ($23,158) | −$7,917 | 13.3 |
+| 50% | | | 10 | $17,192 (−$7,996) | $134,552 ($47,828) | −$14,322 | 11.4 |
+
+- Even at half the edge, every slot count is positive over 3 years in the median and at the 10th percentile. But
+  the first year can be negative (10th percentile −$2.6k to −$8k for 3–10 slots), and the fees you might spend
+  before the payouts arrive grow with the number of slots.
+- Blow-up clustering is mild: with 5 slots, 3+ funded accounts blew within the same 10 days in 0–3% of start
+  months.
+
+**Recommendation:**
+1. **Start with 3 slots** (3 challenges at a time; each pass becomes a funded account; each finished or blown
+   account is replaced by a new challenge). Median about $30k net in the first year with the backtest edge, about
+   $10k at 75% of the edge, and the worst cash point stays under about $1,800 at the 10th percentile.
+2. **Scale to 5, then 10, only when live results confirm the edge.** After about 2 months (roughly 40 plan trades)
+   the live average per trade should be at least ~75% of the backtest's for the same days (tracked with
+   `../analysis/live_vs_backtest.py`).
+3. **Check with Apex before scaling:** the current limit on simultaneous PA accounts, and whether a trade copier
+   across your own accounts is allowed (both have changed over time). Each account needs its own MultiCharts
+   charts (or a copier).
+
+Caveats: the backtest edge is in-sample (the strategies were chosen on this history); the simulator assumes the
+Apex rules in `../analysis/funded_sim.py`; payouts are counted when requested.
