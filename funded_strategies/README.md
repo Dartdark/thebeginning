@@ -1832,6 +1832,41 @@ Results:
   the funded bench. The paper's lesson that applies here: many weakly correlated edges beat one strong one, which is
   how the plan is already built.
 
+## Option-income (covered-call) ETF rolls (2026-10-14, user's pick from the forced-flow list): the flow is EOS, already in the plan
+
+**What it is.** QYLD follows the Cboe NASDAQ-100 BuyWrite index (BXN): the expiring 1-month at-the-money NDX call
+settles at the 3rd-Friday open, and the new one is sold at the VWAP of 11:30-12:00 ET (10:30-11:00 CT). XYLD does the
+same on SPX (BXM). JEPQ (May 2022 on) and QQQI / QDTE (2024 on) write weekly / daily OTM calls with no published minute.
+The dealers who buy these calls must sell futures to hedge (long delta), and they end up long gamma, which should damp
+moves and pin price near the strike afterwards. Scripts: `analysis/option_income_etf_test.py` (measures) and
+`analysis/opex_morning_short_test.py` (trade, controls, bench). NQ 2018-2026, 105 roll days.
+
+| Test | Roll days | Other Fridays | Verdict |
+|---|---|---|---|
+| Sell window 10:30 -> 11:00 CT ($ per NQ) | +$46 (t 0.5); 2018-22 every year negative, 2023-26 every year positive | +$8 | No selling in the window (ES the same) |
+| Range / ATR on day +1 .. +5 (long gamma -> quieter?) | 0.76-0.85 | 0.76-0.88 | No difference (one cell of 14 at t -3.0) |
+| Pin: \|close - roll price\| / ATR, day +1 .. +10 | 0.61-1.77 | 0.58-1.76 | No pin |
+| Fade the 8:30 gap away from the roll price, days +1..+5 | -$190 (t -1.2) | +$114 | Moves continue instead |
+| **8:30 -> 10:30 CT** | **-$487 (t -2.3, 7/9 years down; 2018-21 -$335, 2022-26 -$615)** | -$2 | **The effect: the morning before the window** |
+
+**Reading.** The selling happens before the window, not in it: dealers pre-hedge the call purchase (and the expiring
+calls' hedges unwind at the open settlement), so NQ is pushed down 8:30-10:30 CT on the roll day. That is exactly
+**Expiration Open Short (EOS)**, already in the plan (short the 8:30 open, out 10:00, stop 0.3 ATR): the trade test's
+grid finds the same edge (out 10:00, stop 0.5 ATR: $515 a trade, PF 2.04, t 2.7, 8/9 years, 2023-26 $702; daily correlation
+with EOS 0.78), and adding it on top of EOS does nothing on the funded bench ($9,291-9,387 vs $9,313; 2 MNQ or more blows
+10-13%). So this test adds a *reason* for EOS, not a new strategy. Controls at out 11:00: same short on random other
+Fridays averages -$16 (the roll days' result is beaten by 2.2% of 2,000 random sets); the long version loses -$459; the
+same short on the Friday a week before +$106 (t 0.4); the Thursday before t -1.0; non-quarterly months ($469) as strong as
+quarterly ($337), so it's the options expiry, not the futures roll. Holding past 10:30 weakens in 2023-26 (out 11:00
+$146), so EOS's 10:00 exit stays right. The plan's trades on roll days: VB $25 vs $98 on other Fridays, ONB ML 5 trades
+-$417; no filter worth adding.
+
+**One new lead (watchlist #9):** the Friday *after* the roll, NQ goes up in the morning (long 8:31 -> 11:00, stop 0.5 ATR:
+$399 a trade, t 1.8; 2023-26 $782, but 2018-22 only $101; two and three weeks after: negative). It's 2023+ only and found
+as a control, so not tradeable yet. It could be the JEPQ-era weekly flow.
+
+Tier: the ETF-roll flow as its own trade F (window, pin and volatility all null); the morning effect is EOS (A, unchanged).
+
 ## Papers reviewed for funded strategies
 
 - **Bhatti (2026), "A Regime-Filtered Intraday Trading Framework for Gold", SSRN

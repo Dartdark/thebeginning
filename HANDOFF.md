@@ -112,6 +112,9 @@ Cross-asset overnight (gold / oil / bitcoin) filters: 0 of 25 pass (`analysis/cr
 Cross-asset map (`analysis/cross_asset_map_test.py`): correlations rise on FOMC / high-VIX days; no lead-lag; decoupling not tradeable.
 Zoom-in (`analysis/release_reaction_fade_test.py`): data-reaction fade is mostly NFP; NFP held to 12:00 earns 2.4x per trade but blows
 more funded accounts -> keep 9:00 (watchlist #8).
+Covered-call ETF rolls (`analysis/option_income_etf_test.py`, `analysis/opex_morning_short_test.py`): no selling in the BXN 10:30-11:00 window,
+no pin, no damped vol (F); the roll-morning drop (8:30-10:30 -$487) is EOS already in the plan (now with a mechanism: dealer pre-hedging).
+Friday after the roll long 2023+ only (watchlist #9).
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily
