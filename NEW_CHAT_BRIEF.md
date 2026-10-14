@@ -88,6 +88,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     synchronised clock; `analysis/co_oc_reversal_test.py`).
   - A Tale of One Day (SSRN 4192163), morning momentum / afternoon reversal on NQ / ES / YM: F
     (`analysis/morning_afternoon_test.py`).
+  - Maroy 2025 exits (SSRN 5095349) on Vault Break: **VWAP exit is a C candidate** (watchlist #15): test file
+    `apex_strategies/NQ_Vault_Break_VWAP.txt` for the user to backtest in MultiCharts; the live VB file is unchanged.
 - **Next research (needs data from the user):**
   - Closing-imbalance or options open-interest data for ES.
   - Without new data, the clock flows on GC / ES / YM / BTC are exhausted.
@@ -114,3 +116,4 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 2. Keep the PC / connection awake during trading hours (Monday's miss).
 3. Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 4. Check Apex allows MCL; send weekly live reports; no exports pending (ZN and 6E are complete).
+5. Backtest `apex_strategies/NQ_Vault_Break_VWAP.txt` in MultiCharts (UseTarget true, then false) and send both reports.
