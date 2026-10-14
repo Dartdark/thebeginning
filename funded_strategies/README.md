@@ -1419,6 +1419,13 @@ Each was bucketed on 2018–22 only; only clear patterns were kept, then run onc
   - Correlation with the plan is about 0.
 - **Gold alone in its own funded account:** at most $2,029 over 3 years, and blown 11–94% at sizes that earn
   anything. A $2,000 trailing drawdown can't carry a 38%-win strategy with gold's swings.
+- **Tighter stops (user's question; `../analysis/gold_breakout_stop_test.py`):**
+  - 0.5× range: win rate 25%, −0.015 R a trade (t −0.3), 2018–22 −0.066 R, a 31-trade losing streak.
+  - 0.25× range: win rate 13%, −0.113 R (t −1.6), a 54-trade losing streak.
+  - With filter B: 0.5× −0.002 R, 0.25× −0.115 R. Holdout Sharpe 0.57 / 0.45 vs 0.95 for the full-range stop.
+  - Risk-sized on the funded bench (same $ per trade, so more MGC): $3,416–7,618, blown 23–77%.
+  - At fixed 1 MGC they look similar ($8,888–8,996), only because they risk less.
+  - The breakouts need room: most of the stop-outs that 0.5× adds recover later in the morning. Keep the full range.
 - **Verdict:** C (filter B makes it a real, uncorrelated edge). It doesn't speed up the $13k at Apex sizes, so it
   stays on the watchlist (#6), recheck in 6 months. It could matter in a larger account or with a different payout
   rule.

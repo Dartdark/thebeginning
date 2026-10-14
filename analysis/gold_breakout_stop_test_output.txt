@@ -1,0 +1,139 @@
+Gold Asian-range breakout: tighter stops, 0.5 x and 0.25 x the Asian range (user's question, 2026-10-14).
+
+1. Per GC; R = net / $ risked (stop distance x $100)
+   stop 1.0 x       n 2243 win 39% $   83 PF 1.16 | +0.045 R t 1.4 | 2018-22 +0.026 2023-26 +0.070 | yrs+ (R) 6/9 | stopped 49% | longest losing run 14, worst 20 trades -15.7 R
+   stop 1.0 x + B   n 1804 win 38% $  113 PF 1.22 | +0.078 R t 2.0 | 2018-22 +0.060 2023-26 +0.103 | yrs+ (R) 7/9 | stopped 52% | longest losing run 19, worst 20 trades -15.3 R
+   stop 0.5 x       n 2243 win 25% $   28 PF 1.07 | -0.015 R t -0.3 | 2018-22 -0.066 2023-26 +0.052 | yrs+ (R) 4/9 | stopped 73% | longest losing run 31, worst 20 trades -22.1 R
+   stop 0.5 x + B   n 1804 win 23% $   34 PF 1.09 | -0.002 R t -0.0 | 2018-22 -0.052 2023-26 +0.066 | yrs+ (R) 5/9 | stopped 75% | longest losing run 28, worst 20 trades -22.4 R
+   stop 0.25 x      n 2243 win 13% $    2 PF 1.01 | -0.113 R t -1.6 | 2018-22 -0.209 2023-26 +0.015 | yrs+ (R) 4/9 | stopped 87% | longest losing run 54, worst 20 trades -26.8 R
+   stop 0.25 x + B  n 1804 win 12% $   12 PF 1.05 | -0.115 R t -1.4 | 2018-22 -0.225 2023-26 +0.037 | yrs+ (R) 4/9 | stopped 88% | longest losing run 61, worst 20 trades -26.7 R
+
+2. Standard metrics per GC (whole, longs, shorts)
+           trades win avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+stop 1.0 x   2243 39% $83 $20,644   0.66    1.11          1.16 $61,229   0.34 12.34       3.35
+  longs      1151 41% $96 $12,249   0.65    1.10          1.19 $38,486   0.32 20.54       1.19
+  shorts     1092 36% $70  $8,395   0.33    0.57          1.12 $49,893   0.17  9.91       1.69
+               trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+stop 1.0 x + B   1804 38% $113 $22,483   0.78    1.32          1.22 $34,234   0.66  6.63       6.78
+  longs           914 41% $121 $12,200   0.72    1.22          1.25 $26,526   0.46 12.68       1.92
+  shorts          890 36% $105 $10,283   0.44    0.75          1.19 $38,509   0.27  7.75       2.65
+           trades win avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+stop 0.5 x   2243 25% $28 $7,019   0.27    0.59          1.07 $56,387   0.12 34.59       0.41
+  longs      1151 27% $35 $4,426   0.28    0.56          1.09 $42,661   0.10 18.66       0.47
+  shorts     1092 22% $21 $2,594   0.13    0.29          1.05 $40,775   0.06 36.70       0.14
+               trades win avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+stop 0.5 x + B   1804 23% $34 $6,825   0.29    0.64          1.09 $37,363   0.18 24.65       0.55
+  longs           914 25% $27 $2,685   0.20    0.38          1.07 $35,720   0.08 17.02       0.32
+  shorts          890 21% $42 $4,140   0.22    0.52          1.11 $30,794   0.13 33.40       0.25
+            trades win avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+stop 0.25 x   2243 13%  $2   $559   0.03    0.08          1.01 $78,615   0.01 50.97       0.02
+  longs       1151 15% $10 $1,222   0.10    0.26          1.04 $42,009   0.03 22.04       0.11
+  shorts      1092 12% $-5  $-663  -0.05   -0.12          0.98 $47,992  -0.01 35.44      -0.04
+                trades win avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+stop 0.25 x + B   1804 12% $12 $2,418   0.15    0.39          1.05 $54,365   0.04 43.24       0.11
+  longs            914 13% $21 $2,152   0.20    0.53          1.09 $26,957   0.08 19.74       0.22
+  shorts           890 11%  $3   $266   0.02    0.06          1.01 $34,084   0.01 30.77       0.02
+                                      actual        p5       p50       p95
+name                  metric                                              
+stop 1.0 x 2023+      sharpe            0.88      0.14      0.88      1.61
+                      sortino           1.46      0.21      1.49      3.04
+                      pf_day            1.20      1.03      1.20      1.39
+                      calmar            0.64      0.08      0.80      2.17
+                      ulcer            16.86      5.72     13.98     49.43
+                      max_dd       61,228.50 28,976.51 48,744.50 90,683.13
+                      P(Sharpe<=0)       NaN       NaN      0.02       NaN
+stop 1.0 x + B 2023+  sharpe            0.95      0.30      0.97      1.63
+                      sortino           1.58      0.44      1.63      3.19
+                      pf_day            1.26      1.08      1.26      1.46
+                      calmar            1.14      0.21      1.01      2.54
+                      ulcer             9.69      4.39     10.41     32.94
+                      max_dd       34,234.00 22,084.29 38,206.25 68,116.45
+                      P(Sharpe<=0)       NaN       NaN      0.01       NaN
+stop 0.5 x 2023+      sharpe            0.58     -0.16      0.56      1.22
+                      sortino           1.24     -0.30      1.21      2.93
+                      pf_day            1.14      0.97      1.13      1.32
+                      calmar            0.38     -0.07      0.44      1.58
+                      ulcer            16.71      7.14     17.90     62.23
+                      max_dd       56,387.25 25,868.97 45,711.13 87,205.81
+                      P(Sharpe<=0)       NaN       NaN      0.10       NaN
+stop 0.5 x + B 2023+  sharpe            0.57     -0.10      0.56      1.14
+                      sortino           1.24     -0.19      1.24      2.88
+                      pf_day            1.16      0.97      1.16      1.36
+                      calmar            0.51     -0.05      0.50      1.59
+                      ulcer            15.82      6.20     15.10     49.35
+                      max_dd       37,362.50 21,954.32 36,743.00 70,352.82
+                      P(Sharpe<=0)       NaN       NaN      0.08       NaN
+stop 0.25 x 2023+     sharpe            0.28     -0.67      0.24      1.07
+                      sortino           0.68     -1.38      0.59      3.07
+                      pf_day            1.07      0.86      1.06      1.30
+                      calmar            0.09     -0.19      0.13      1.00
+                      ulcer            30.03      8.47     25.26     84.03
+                      max_dd       78,615.25 24,063.56 45,240.00 91,074.51
+                      P(Sharpe<=0)       NaN       NaN      0.33       NaN
+stop 0.25 x + B 2023+ sharpe            0.45     -0.44      0.41      1.17
+                      sortino           1.13     -0.97      1.05      3.67
+                      pf_day            1.14      0.88      1.12      1.42
+                      calmar            0.19     -0.15      0.26      1.31
+                      ulcer            25.66      6.60     18.34     59.84
+                      max_dd       54,365.25 19,209.27 34,734.25 68,223.14
+                      P(Sharpe<=0)       NaN       NaN      0.21       NaN
+                      actual_dd pct_rank    dd50    dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+stop 1.0 x 2023+        $61,229      63% $56,019 $86,035 $106,404        100%        100%        100%
+stop 1.0 x + B 2023+    $34,234       4% $49,531 $77,945  $92,437        100%        100%        100%
+stop 0.5 x 2023+        $56,387      65% $50,947 $79,710  $94,673        100%        100%        100%
+stop 0.5 x + B 2023+    $37,363      22% $45,526 $71,945  $88,559        100%        100%        100%
+stop 0.25 x 2023+       $78,615      99% $40,962 $64,116  $75,048        100%        100%        100%
+stop 0.25 x + B 2023+   $54,365      97% $33,136 $52,055  $62,574        100%        100%        100%
+
+3. Funded bench (plan + gold on MGC), same $ risk per trade and fixed 1 MGC
+   current plan                       1y $9,313 2y $12,569 blown 2% / 1%
+   + stop 1.0 x, 1 MGC                1y $8,845 2y $12,108 blown 7% / 5%
+   + stop 1.0 x, risk $75             1y $9,088 2y $12,186 blown 6% / 4%
+   + stop 1.0 x, risk $100            1y $8,673 2y $11,583 blown 10% / 10%
+   + stop 1.0 x, risk $150            1y $7,746 2y $9,147 blown 22% / 29%
+   + stop 1.0 x + B, 1 MGC            1y $8,997 2y $12,239 blown 6% / 4%
+   + stop 1.0 x + B, risk $75         1y $9,124 2y $12,239 blown 5% / 4%
+   + stop 1.0 x + B, risk $100        1y $8,812 2y $11,652 blown 10% / 10%
+   + stop 1.0 x + B, risk $150        1y $7,706 2y $9,121 blown 25% / 28%
+   + stop 0.5 x, 1 MGC                1y $8,975 2y $12,341 blown 4% / 2%
+   + stop 0.5 x, risk $75             1y $7,352 2y $9,177 blown 25% / 29%
+   + stop 0.5 x, risk $100            1y $6,373 2y $7,359 blown 38% / 44%
+   + stop 0.5 x, risk $150            1y $3,813 2y $3,831 blown 65% / 73%
+   + stop 0.5 x + B, 1 MGC            1y $8,899 2y $12,382 blown 3% / 0%
+   + stop 0.5 x + B, risk $75         1y $7,618 2y $9,499 blown 23% / 26%
+   + stop 0.5 x + B, risk $100        1y $6,648 2y $7,664 blown 37% / 42%
+   + stop 0.5 x + B, risk $150        1y $3,979 2y $4,323 blown 62% / 69%
+   + stop 0.25 x, 1 MGC               1y $8,996 2y $11,807 blown 8% / 7%
+   + stop 0.25 x, risk $75            1y $4,943 2y $6,092 blown 47% / 52%
+   + stop 0.25 x, risk $100           1y $3,416 2y $3,657 blown 65% / 72%
+   + stop 0.25 x, risk $150           1y $2,116 2y $1,767 blown 77% / 84%
+   + stop 0.25 x + B, 1 MGC           1y $8,888 2y $11,837 blown 7% / 6%
+   + stop 0.25 x + B, risk $75        1y $5,884 2y $7,379 blown 39% / 43%
+   + stop 0.25 x + B, risk $100       1y $4,030 2y $4,546 blown 58% / 64%
+   + stop 0.25 x + B, risk $150       1y $2,513 2y $2,498 blown 72% / 79%
+                             full6m full1y full2y median if_done blown per_month   exp3y max_mnq
+current plan                     0%    47%    94%    255     255    0%      $871 $13,000      66
++ stop 1.0 x, 1 MGC              0%    41%    88%    268     264    5%      $856 $12,444      67
++ stop 1.0 x, risk $75           0%    43%    91%    260     258    3%      $863 $12,579      69
++ stop 1.0 x, risk $100          0%    39%    87%    270     262    9%      $848 $11,882      70
++ stop 1.0 x, risk $150          0%    32%    66%    296     259   31%      $724  $9,188      72
++ stop 1.0 x + B, 1 MGC          0%    43%    89%    264     261    3%      $863 $12,585      67
++ stop 1.0 x + B, risk $75       0%    44%    91%    259     257    3%      $865 $12,604      69
++ stop 1.0 x + B, risk $100      0%    42%    87%    266     255   10%      $856 $11,744      70
++ stop 1.0 x + B, risk $150      0%    35%    66%    293     253   28%      $774  $9,445      72
++ stop 0.5 x, 1 MGC              0%    39%    89%    270     267    2%      $847 $12,698      67
++ stop 0.5 x, risk $75           0%    26%    64%    316     269   34%      $732  $8,744      72
++ stop 0.5 x, risk $100          2%    22%    54%    367     271   45%      $689  $7,318      75
++ stop 0.5 x, risk $150          0%     6%    25%   >750     288   75%      $484  $3,531      79
++ stop 0.5 x + B, 1 MGC          0%    42%    89%    268     268    0%      $836 $12,991      67
++ stop 0.5 x + B, risk $75       0%    30%    68%    320     268   29%      $757  $9,250      72
++ stop 0.5 x + B, risk $100      2%    27%    60%    338     264   39%      $738  $8,008      75
++ stop 0.5 x + B, risk $150      0%     6%    32%   >750     322   67%      $526  $4,516      79
++ stop 0.25 x, 1 MGC             0%    46%    87%    258     251    6%      $880 $12,168      67
++ stop 0.25 x, risk $75          0%    12%    42%   >750     321   51%      $594  $6,488      79
++ stop 0.25 x, risk $100         0%     5%    24%   >750     378   73%      $471  $3,710      84
++ stop 0.25 x, risk $150         0%     1%     7%   >750     443   85%      $306  $2,003      93
++ stop 0.25 x + B, 1 MGC         1%    44%    87%    266     257    6%      $870 $12,200      67
++ stop 0.25 x + B, risk $75      1%    17%    53%    454     311   43%      $668  $7,431      79
++ stop 0.25 x + B, risk $100     0%    10%    33%   >750     327   63%      $542  $4,893      84
++ stop 0.25 x + B, risk $150     0%     2%    14%   >750     425   78%      $392  $2,854      93
