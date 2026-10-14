@@ -1,0 +1,179 @@
+Forced-flow round 4: the groups on the untested list (2026-10-14, user: "test everything on the list").
+
+A. Closing-auction (MOC) proxy, $ per NQ before costs
+   sign(1400->14:50) x (14:50->15:00)                               n=2262 avg $    26 PF 1.13 t  1.8 win 48% yrs+ 8/9 | 18-22 $    38 23-26 $    10
+      same, |1400->14:50| >= 0.2 ATR                                n= 350 avg $   194 PF 1.85 t  3.7 win 58% yrs+ 8/9 | 18-22 $   239 23-26 $   113  <-- passes
+   sign(1430->14:50) x (14:50->15:00)                               n=2262 avg $    14 PF 1.07 t  1.0 win 47% yrs+ 5/9 | 18-22 $    21 23-26 $     6
+      same, |1430->14:50| >= 0.2 ATR                                n= 136 avg $   289 PF 2.17 t  2.9 win 59% yrs+ 7/9 | 18-22 $   340 23-26 $   204  <-- passes
+   sign(14:50->15:00) x (15:00->15:15): follow the auction after the close n=2262 avg $     4 PF 1.02 t  0.3 win 48% yrs+ 5/9 | 18-22 $    -5 23-26 $    16
+   sign(14:00->15:00) x (15:00->15:15) (known post-settlement reversal) n=2262 avg $   -28 PF 0.83 t -2.5 win 45% yrs+ 3/9 | 18-22 $   -44 23-26 $    -7
+   trade: follow the 14:30 -> 14:50 move at the 14:51 open, out 15:00 close (net)
+   MOC follow 14:51 -> 15:00, |14:30->14:50| >= 0.0 ATR             n=2169 avg $    -2 PF 0.99 t -0.1 win 47% yrs+ 3/9 | 18-22 $     5 23-26 $   -11
+   MOC follow 14:51 -> 15:00, |14:30->14:50| >= 0.1 ATR             n= 559 avg $    30 PF 1.11 t  0.8 win 47% yrs+ 6/9 | 18-22 $    42 23-26 $    10
+   MOC follow 14:51 -> 15:00, |14:30->14:50| >= 0.2 ATR             n= 136 avg $   274 PF 2.08 t  2.7 win 58% yrs+ 7/9 | 18-22 $   325 23-26 $   188  <-- passes
+
+B. Quarterly rebalance closes (3rd Friday of Mar / Jun / Sep / Dec), $ per NQ before costs
+   1300->1500: quarterly 3rd Fridays                                n=  35 avg $  -114 PF 0.81 t -0.4 win 46% yrs+ 3/9 | 18-22 $  -259 23-26 $    80
+      monthly-only   -262 | other Fridays    144 | quarterly - other Fridays t -0.9
+   1400->1500: quarterly 3rd Fridays                                n=  35 avg $   -31 PF 0.91 t -0.2 win 51% yrs+ 4/9 | 18-22 $  -204 23-26 $   201
+      monthly-only   -152 | other Fridays     92 | quarterly - other Fridays t -0.7
+   1450->1500: quarterly 3rd Fridays                                n=  35 avg $    94 PF 1.53 t  0.8 win 49% yrs+ 3/9 | 18-22 $   -18 23-26 $   243
+      monthly-only    -68 | other Fridays     44 | quarterly - other Fridays t 0.4
+   1500->1515: quarterly 3rd Fridays                                n=  35 avg $    91 PF 1.88 t  1.2 win 63% yrs+ 7/9 | 18-22 $   -26 23-26 $   248
+      monthly-only    -66 | other Fridays    -23 | quarterly - other Fridays t 1.5
+   against the quarter's NQ return, 14:00 -> 15:00 (winners trimmed?) n=  34 avg $     4 PF 1.01 t  0.0 win 47% yrs+ 5/9 | 18-22 $   -73 23-26 $   101
+   follow the day's 8:30 -> 14:00 move, 14:00 -> 15:00              n=  35 avg $    42 PF 1.13 t  0.3 win 43% yrs+ 6/9 | 18-22 $    25 23-26 $    65
+
+C. European close: follow 8:30 -> London close to 15:00 (net, 1 NQ)
+   London close in CT: {1030: 2108, 1130: 154} (mismatch days 154)
+   follow from the London close, |move| >= 0.0 ATR, stop none       n=2259 avg $   119 PF 1.17 t  2.4 win 54% yrs+ 7/9 | 18-22 $   108 23-26 $   133
+   follow from the London close, |move| >= 0.0 ATR, stop 0.5        n=2259 avg $   111 PF 1.16 t  2.4 win 53% yrs+ 7/9 | 18-22 $   128 23-26 $    89
+   follow from the London close, |move| >= 0.0 ATR, stop 1.0        n=2259 avg $   131 PF 1.19 t  2.7 win 54% yrs+ 8/9 | 18-22 $   130 23-26 $   132  <-- passes
+   follow from the London close, |move| >= 0.25 ATR, stop none      n=1066 avg $   171 PF 1.23 t  2.1 win 56% yrs+ 5/9 | 18-22 $   114 23-26 $   240
+   follow from the London close, |move| >= 0.25 ATR, stop 0.5       n=1066 avg $   189 PF 1.27 t  2.5 win 55% yrs+ 7/9 | 18-22 $   169 23-26 $   212  <-- passes
+   follow from the London close, |move| >= 0.25 ATR, stop 1.0       n=1066 avg $   195 PF 1.27 t  2.5 win 56% yrs+ 7/9 | 18-22 $   166 23-26 $   229
+   follow from the London close, |move| >= 0.5 ATR, stop none       n= 396 avg $   145 PF 1.19 t  1.1 win 58% yrs+ 5/9 | 18-22 $    58 23-26 $   254
+   follow from the London close, |move| >= 0.5 ATR, stop 0.5        n= 396 avg $   210 PF 1.30 t  1.8 win 57% yrs+ 5/9 | 18-22 $   175 23-26 $   253
+   follow from the London close, |move| >= 0.5 ATR, stop 1.0        n= 396 avg $   191 PF 1.26 t  1.5 win 58% yrs+ 5/9 | 18-22 $   135 23-26 $   261
+   natural experiment on the mismatch days (London closes at 11:30 CT): decide at 10:30 vs at 11:30, |move| >= 0.25 ATR, no stop
+      mismatch days, decide at 1030                                 n=  70 avg $  -157 PF 0.86 t -0.4 win 53% yrs+ 5/9 | 18-22 $  -544 23-26 $   425
+      mismatch days, decide at 1130                                 n=  70 avg $   539 PF 1.90 t  1.8 win 66% yrs+ 7/9 | 18-22 $   233 23-26 $   947
+      normal days, decide at 1030                                   n= 996 avg $   145 PF 1.19 t  1.7 win 56% yrs+ 5/9 | 18-22 $   106 23-26 $   193
+      normal days, decide at 1130                                   n=1123 avg $    47 PF 1.07 t  0.7 win 54% yrs+ 4/9 | 18-22 $    87 23-26 $    -7
+
+D. Follow the Tokyo and London opens (net, 1 NQ). Tokyo = the evening before each trading day
+   Tokyo open in CT (evening before): {1900: 1506, 1800: 756}; London open in CT: {200: 2108, 300: 154}
+   Tokyo open: follow the first 15 min, hold 60 min                 n=2232 avg $    -8 PF 0.96 t -0.6 win 48% yrs+ 4/9 | 18-22 $     0 23-26 $   -19
+   Tokyo open: follow the first 15 min, hold 120 min                n=2232 avg $   -13 PF 0.95 t -0.7 win 49% yrs+ 5/9 | 18-22 $    -6 23-26 $   -23
+   Tokyo open: follow the first 15 min, hold 8:25                   n=2232 avg $   -63 PF 0.92 t -1.3 win 48% yrs+ 4/9 | 18-22 $   -24 23-26 $  -113
+   Tokyo open: follow the first 30 min, hold 60 min                 n=2238 avg $   -29 PF 0.86 t -2.3 win 46% yrs+ 1/9 | 18-22 $   -27 23-26 $   -32
+   Tokyo open: follow the first 30 min, hold 120 min                n=2238 avg $   -28 PF 0.90 t -1.6 win 48% yrs+ 2/9 | 18-22 $   -27 23-26 $   -29
+   Tokyo open: follow the first 30 min, hold 8:25                   n=2238 avg $   -88 PF 0.89 t -1.9 win 48% yrs+ 2/9 | 18-22 $   -39 23-26 $  -153
+   London open: follow the first 15 min, hold 60 min                n=2230 avg $   -38 PF 0.85 t -2.5 win 46% yrs+ 1/9 | 18-22 $   -21 23-26 $   -60  <-- passes
+   London open: follow the first 15 min, hold 120 min               n=2230 avg $   -48 PF 0.86 t -2.4 win 48% yrs+ 0/9 | 18-22 $   -31 23-26 $   -71
+   London open: follow the first 15 min, hold 8:25                  n=2230 avg $   -46 PF 0.92 t -1.3 win 48% yrs+ 2/9 | 18-22 $   -48 23-26 $   -44
+   London open: follow the first 30 min, hold 60 min                n=2246 avg $   -41 PF 0.84 t -2.7 win 47% yrs+ 1/9 | 18-22 $   -27 23-26 $   -60  <-- passes
+   London open: follow the first 30 min, hold 120 min               n=2246 avg $   -75 PF 0.78 t -3.8 win 47% yrs+ 1/9 | 18-22 $   -33 23-26 $  -131  <-- passes
+   London open: follow the first 30 min, hold 8:25                  n=2246 avg $   -53 PF 0.91 t -1.5 win 48% yrs+ 5/9 | 18-22 $   -30 23-26 $   -84
+
+Survivors (|t| >= 2.5, same sign 2018-22 and 2023-26): 8
+
+==    same, |1400->14:50| >= 0.2 ATR
+                               trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+same, |1400->14:50| >= 0.2 ATR    350 58% $194 $7,562   1.20    1.98          1.85 $9,415   0.80  2.64       5.74
+                                                     actual       p5       p50       p95
+name                                  metric                                            
+same, |1400->14:50| >= 0.2 ATR, 2023+ sharpe           0.55    -0.27      0.63      1.61
+                                      sortino          0.77    -0.33      0.90      3.32
+                                      pf_day           1.35     0.86      1.40      2.36
+                                      calmar           0.39    -0.11      0.40      2.01
+                                      ulcer            6.24     1.65      6.29     20.62
+                                      max_dd       9,415.00 3,865.00 10,220.00 22,084.00
+                                      P(Sharpe<=0)      NaN      NaN      0.13       NaN
+                                      actual_dd pct_rank   dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+same, |1400->14:50| >= 0.2 ATR, 2023+    $9,415      47% $9,552 $15,121 $17,615        100%        100%        100%
+
+==    same, |1430->14:50| >= 0.2 ATR
+                               trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+same, |1430->14:50| >= 0.2 ATR    136 59% $289 $4,382   0.95    1.69          2.17 $7,995   0.55  3.62       2.42
+                                                     actual       p5      p50       p95
+name                                  metric                                           
+same, |1430->14:50| >= 0.2 ATR, 2023+ sharpe           0.57    -0.19     0.63      1.41
+                                      sortino          0.87    -0.23     1.01      4.07
+                                      pf_day           1.59     0.85     1.64      3.26
+                                      calmar           0.34    -0.09     0.50      2.65
+                                      ulcer            6.62     0.94     3.64     12.02
+                                      max_dd       7,995.00 2,025.00 5,840.00 12,391.50
+                                      P(Sharpe<=0)      NaN      NaN     0.10       NaN
+                                      actual_dd pct_rank   dd50   dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+same, |1430->14:50| >= 0.2 ATR, 2023+    $7,995      81% $6,630 $9,425 $11,000        100%        100%        100%
+
+== MOC follow 14:51 -> 15:00, |14:30->14:50| >= 0.2 ATR
+                                         trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+MOC follow 14:51 -> 15:00, |14:30->14:50    136 58% $274 $4,149   0.90    1.59          2.08 $8,018   0.52  3.73       2.23
+                                                               actual       p5      p50       p95
+name                                            metric                                           
+MOC follow 14:51 -> 15:00, |14:30->14:50, 2023+ sharpe           0.53    -0.23     0.58      1.37
+                                                sortino          0.80    -0.29     0.93      3.88
+                                                pf_day           1.53     0.83     1.58      3.12
+                                                calmar           0.31    -0.10     0.45      2.50
+                                                ulcer            6.70     0.98     3.79     12.54
+                                                max_dd       8,017.50 2,064.50 5,938.38 12,653.01
+                                                P(Sharpe<=0)      NaN      NaN     0.12       NaN
+                                                actual_dd pct_rank   dd50   dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+MOC follow 14:51 -> 15:00, |14:30->14:50, 2023+    $8,018      80% $6,682 $9,449 $10,864        100%        100%        100%
+
+== follow from the London close, |move| >= 0.0 ATR, stop 1.0
+                                         trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+follow from the London close, |move| >=    2259 54% $131 $32,920   0.89    1.40          1.19 $45,391   0.73  7.93       8.31
+                                                                actual        p5       p50        p95
+name                                            metric                                               
+follow from the London close, |move| >= , 2023+ sharpe            0.74     -0.08      0.80       1.60
+                                                sortino           1.22     -0.11      1.31       3.14
+                                                pf_day            1.16      0.99      1.17       1.41
+                                                calmar            0.73     -0.04      0.63       2.13
+                                                ulcer            13.94      6.99     18.80      64.96
+                                                max_dd       45,391.50 32,413.91 54,327.58 102,088.20
+                                                P(Sharpe<=0)       NaN       NaN      0.07        NaN
+                                                actual_dd pct_rank    dd50    dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+follow from the London close, |move| >= , 2023+   $45,391      16% $57,357 $90,514 $109,976        100%        100%        100%
+
+== follow from the London close, |move| >= 0.25 ATR, stop 0.5
+                                         trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+follow from the London close, |move| >=    1066 55% $189 $22,406   0.84    1.51          1.27 $52,372   0.43  8.58       5.22
+                                                                actual        p5       p50       p95
+name                                            metric                                              
+follow from the London close, |move| >= , 2023+ sharpe            0.76     -0.13      0.77      1.54
+                                                sortino           1.49     -0.19      1.47      3.91
+                                                pf_day            1.24      0.97      1.24      1.66
+                                                calmar            0.50     -0.06      0.62      2.36
+                                                ulcer             8.91      5.79     16.19     53.91
+                                                max_dd       52,371.75 22,925.61 40,004.83 75,554.18
+                                                P(Sharpe<=0)       NaN       NaN      0.08       NaN
+                                                actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+follow from the London close, |move| >= , 2023+   $52,372      85% $39,340 $62,313 $74,909        100%        100%        100%
+
+== London open: follow the first 15 min, hold 60 min
+                                         trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+London open: follow the first 15 min, ho   2230 46% $-38 $-9,421  -0.84   -1.15          0.85 $90,298  -0.10 61.77      -0.31
+                                                                actual        p5       p50        p95
+name                                            metric                                               
+London open: follow the first 15 min, ho, 2023+ sharpe           -1.12     -1.92     -1.13      -0.25
+                                                sortino          -1.47     -2.39     -1.47      -0.36
+                                                pf_day            0.81      0.70      0.81       0.96
+                                                calmar           -0.24     -0.26     -0.23      -0.10
+                                                ulcer            44.95     25.61     68.80     122.02
+                                                max_dd       63,198.25 30,926.60 65,926.38 107,235.54
+                                                P(Sharpe<=0)       NaN       NaN      0.98        NaN
+                                                actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+London open: follow the first 15 min, ho, 2023+   $63,198      32% $65,848 $78,118 $83,428        100%        100%        100%
+
+== London open: follow the first 30 min, hold 60 min
+                                         trades win  avg   annual sharpe sortino profit_factor   max_dd calmar ulcer ulcer_perf
+London open: follow the first 30 min, ho   2246 47% $-41 $-10,352  -0.91   -1.19          0.84 $100,692  -0.10 70.54      -0.29
+                                                                actual        p5       p50        p95
+name                                            metric                                               
+London open: follow the first 30 min, ho, 2023+ sharpe           -1.07     -1.87     -1.11      -0.33
+                                                sortino          -1.39     -2.31     -1.42      -0.46
+                                                pf_day            0.81      0.70      0.81       0.94
+                                                calmar           -0.23     -0.26     -0.23      -0.12
+                                                ulcer            45.23     28.97     71.76     123.23
+                                                max_dd       64,805.25 34,365.58 68,712.12 108,115.90
+                                                P(Sharpe<=0)       NaN       NaN      0.99        NaN
+                                                actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+London open: follow the first 30 min, ho, 2023+   $64,805      36% $66,808 $79,227 $85,494        100%        100%        100%
+
+== London open: follow the first 30 min, hold 120 min
+                                         trades win  avg   annual sharpe sortino profit_factor   max_dd calmar  ulcer ulcer_perf
+London open: follow the first 30 min, ho   2246 47% $-75 $-18,833  -1.27   -1.62          0.78 $174,426  -0.11 107.87      -0.35
+                                                                 actual        p5        p50        p95
+name                                            metric                                                 
+London open: follow the first 30 min, ho, 2023+ sharpe            -1.83     -2.60      -1.87      -1.10
+                                                sortino           -2.25     -3.06      -2.29      -1.42
+                                                pf_day             0.70      0.60       0.70       0.81
+                                                calmar            -0.24     -0.26      -0.25      -0.22
+                                                ulcer             91.08     78.50     146.95     217.95
+                                                max_dd       136,327.00 83,520.32 135,617.00 190,780.77
+                                                P(Sharpe<=0)        NaN       NaN       1.00        NaN
+                                                actual_dd pct_rank     dd50     dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+London open: follow the first 30 min, ho, 2023+  $136,327      70% $133,258 $144,749 $149,973        100%        100%        100%

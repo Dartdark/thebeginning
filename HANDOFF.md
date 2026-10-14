@@ -115,6 +115,9 @@ more funded accounts -> keep 9:00 (watchlist #8).
 Covered-call ETF rolls (`analysis/option_income_etf_test.py`, `analysis/opex_morning_short_test.py`): no selling in the BXN 10:30-11:00 window,
 no pin, no damped vol (F); the roll-morning drop (8:30-10:30 -$487) is EOS already in the plan (now with a mechanism: dealer pre-hedging).
 Friday after the roll long 2023+ only (watchlist #9).
+Forced-flow round 4 (`analysis/forced_groups_round4_test.py`, `analysis/moc_london_close_test.py`): MOC follow 14:51-15:00 after a 0.3 ATR
+14:00-14:50 move $263 t 3.1, placebo clean, but 2023+ $54 -> watchlist #10 (funded 2 MNQ: 255 -> 239 days to $13k); London-close follow
+not London-specific, hurts funded (C); quarterly rebalance closes, Tokyo / London opens F.
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily

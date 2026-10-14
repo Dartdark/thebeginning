@@ -1832,6 +1832,33 @@ Results:
   the funded bench. The paper's lesson that applies here: many weakly correlated edges beat one strong one, which is
   how the plan is already built.
 
+## Forced-flow round 4 (2026-10-14, user: "test everything on the list"): the closing auction is real but weak lately; the rest fails
+
+The untested groups from the forced-flow list. Scripts: `analysis/forced_groups_round4_test.py` (screen; a result counts
+only with |t| >= 2.5 and the same sign in 2018-22 and 2023-26) and `analysis/moc_london_close_test.py` (the two
+survivors as trades, with placebos and the funded bench). NQ 2018-2026, $7.25 + 1 tick a fill.
+
+| Group (when they must trade) | Result | Tier |
+|---|---|---|
+| **Closing-auction (MOC) imbalances** (published 14:50 CT, cleared at the 15:00 cash close) | After a >= 0.3 ATR 14:00 -> 14:50 move, follow 14:51 -> 15:00 (stop 0.25 ATR): 140 trades, **$263, PF 2.19, t 3.1, 8/9 years**, Sharpe 1.02, Sortino 2.01, Calmar 0.49, Ulcer 3.0; longs $311 (PF 2.67), shorts $227 (PF 1.92). **Placebo clean:** the same rule at 10:50 / 11:50 / 12:50 / 13:20 / 13:50 / 14:20 earns -$140 to +$37. **But 2023-26 only $54 a trade** (Sharpe 0.18, bootstrap -0.54 to 0.91; 2025 -$5,340). Stronger on days Late-Day Flow didn't trade ($548 vs $79). Half days (auction 11:50-12:00, 17 days): -$74 | C (watchlist #10) |
+| Nasdaq-100 / S&P quarterly rebalance closes (3rd Friday Mar / Jun / Sep / Dec) | 35 days; every afternoon window vs other Fridays t -0.9 to 1.5; no direction from the quarter's return | F |
+| European close (London 16:30 = 10:30 CT; 11:30 CT in the DST-mismatch weeks) | Follow 8:30 -> close to 15:00: $110, PF 1.16, t 2.3 (longs carry it: $154 vs shorts $60, 2023+ shorts -$48); **not London-specific** (deciding at 9:30 $107, at 11:00 $90; mismatch days 11:30 $32 vs 10:30 -$62); max DD $52k per NQ; corr LDF 0.34; funded + 1 MNQ $7,891, blown 13% | C (unchanged) |
+| Asian open (Tokyo 9:00 JST = 18:00 / 19:00 CT), followed | -$8 to -$88 a trade | F |
+| European open (London 8:00 = 2:00 CT), followed | -$38 to -$75 (t to -3.8): the first move reverses, but fading it only pays since 2023 | F |
+
+**Funded bench (current plan $9,313 / $12,569, blown 2%, median 255 days to $13k):**
+
+| Added | 1 year | 2 years | Blown 1y | Median days to $13k |
+|---|---|---|---|---|
+| MOC 1 MNQ | $9,430 | $12,498 | 3% | 246 |
+| **MOC 2 MNQ** | **$9,639** | **$12,518** | **4%** | **239** |
+| MOC 3 MNQ | $9,789 | $12,543 | 4% | 229 |
+| London close 1 MNQ | $7,891 | $11,239 | 13% | 300 |
+| London close risk $300 | $8,465 | $10,261 | 20% | 278 |
+
+MOC follow is uncorrelated with the plan (<= 0.08) and gets to the first payouts faster, but its edge since 2023 is
+small and the 2-year total doesn't move, so it waits on new trades (watchlist #10) before a MultiCharts version.
+
 ## Option-income (covered-call) ETF rolls (2026-10-14, user's pick from the forced-flow list): the flow is EOS, already in the plan
 
 **What it is.** QYLD follows the Cboe NASDAQ-100 BuyWrite index (BXN): the expiring 1-month at-the-money NDX call
