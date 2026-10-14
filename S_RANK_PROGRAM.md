@@ -30,16 +30,38 @@ Contracts (full / micro; costs per round trip + 1 tick per market or stop fill):
 | CL | $1,000 | 0.01 ($10) | $7.25 | MCL | 2017-11 → 2026, `cl.pkl` |
 | BTC (as 1 BTC = 10 MBT) | $1 | 5 ($5) | $25 (10 MBT × $2.50) | MBT | 2018-12 → 2026, `btc.pkl` |
 
-## Status
+## Status (after round 1, 2026-10-14)
 
-| Symbol | Best so far | Tier | Round 1 |
+| Symbol | Best so far | Tier | Round 1 result |
 |---|---|---|---|
 | NQ | Overnight Bias ML v2 | **S** (done) | — |
-| ES | Plan ports PF 1.01–1.13; forced flows same sign as NQ, weaker (EOS t 1.6, LDF 1.5) | C/D | running |
-| YM | Every plan strategy ≈ 0 | F | running |
-| GC | Asian-range breakout, filter B + 12:00 exit (+0.091 R, t 2.2) | C | running |
-| CL | Index-roll front-run, short business days 1–4 (t 1.4) | D | running |
-| BTC | Momentum file t 1.3; ETF close / BRR settlement no edge | D/F | running |
+| ES | MOC auction follow ($158 / ES, PF 2.11, t 3.5, 8/9 years; 2023–26 $99, t 1.2) | **B** | VIX-expiry Wednesday, ES-trained ONB ridge, GEX regime F; EOS in calm VIX C |
+| YM | MOC follow ($123, t 3.4, 2023–26 $37) / post-settlement fade ($25, t 2.6, YM-only, fragile) | C | ONB / ML on YM dead (every cell flips sign in 2023–26) |
+| GC | Asian-range breakout (unchanged, +0.091 R, t 2.2) | C | Nothing advances (533 variants). LBMA auction fall is real (moves with the London clock) but below costs; expiry-day pinning real (range 0.62 vs 0.71 ATR) |
+| CL | **Sunday-open gap fade** ($442 / CL, PF 2.26, t 3.2, 9/9 years; ~$7.4k a year) | **B** | API, rig count, options expiry, roll windows, ONB-CL F |
+| BTC | Weekend-gap continuation (real before costs, t 4.6, but not fillable) | C | Seasonality, VB / ONB / TSMOM ports, NQ spillover F |
+
+No S on any new symbol yet. Two B leads (ES MOC, CL Sunday gap) and one mechanism confirmed on three markets (the
+closing auction). With 1-minute prices and $25–35 round trips on GC / CL / BTC, small clock flows don't survive
+costs; the S candidates will have to be large, rare moves (gaps, auctions) or need extra data.
+
+**Data note (round 1):** continuous contracts are not back-adjusted. Rolls jump at 03:32 CT or at the 17:01 reopen
+(NQ since 2023 +120 to +310 points per quarterly roll; GC +$500–6,300 per contract; CL at 03:32). Checked: none of the
+NQ plan's 4,500+ trades spans a roll jump except one Bridge Monday Long trade (2024-12-16); the gold breakout has 16 of
+2,243 trades across one (net ≈ $0). New tests must drop windows that contain a roll bar.
+
+## Round 2 (planned)
+
+1. **MOC auction, pooled:** NQ + ES (+ YM) — trade only when the 14:00 → 14:50 moves agree, or size by agreement;
+   longs-only ES; holdout 2023–26 must stand on its own.
+2. **Weekend gap family:** CL Sunday fade walk-forward (side and threshold re-picked each year); the same rule on
+   GC / ES / NQ / YM Sunday gaps (placebo and basket), excluding roll Sundays; BTC continuation with a 17:01 limit /
+   stop entry at the open price ± k ticks.
+3. **ES Overnight Bias via NQ:** refit the NQ ONB ridge on 2018–22 only and apply it to ES 2023–26 (the only ML route
+   with signal: NQ weights on ES inputs kept $122 vs skipped $15).
+4. **Gold expiry pinning as a short-vol trade:** fade ≥ 0.5 ATR moves back toward the open on COMEX options-expiry
+   days; LBMA auction short with MGC limit orders.
+5. **EOS low-VIX split on NQ** (independent check of the ES split).
 
 ## Round 1 hypotheses (forced or scheduled flows native to each market)
 

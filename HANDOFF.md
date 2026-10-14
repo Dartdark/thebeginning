@@ -118,6 +118,9 @@ Friday after the roll long 2023+ only (watchlist #9).
 Forced-flow round 4 (`analysis/forced_groups_round4_test.py`, `analysis/moc_london_close_test.py`): MOC follow 14:51-15:00 after a 0.3 ATR
 14:00-14:50 move $263 t 3.1, placebo clean, but 2023+ $54 -> watchlist #10 (funded 2 MNQ: 255 -> 239 days to $13k); London-close follow
 not London-specific, hurts funded (C); quarterly rebalance closes, Tokyo / London opens F.
+S-rank program (`S_RANK_PROGRAM.md`, user's goal 2026-10-14: one S strategy per symbol): round 1 on ES / YM / GC / CL / BTC found no S;
+B leads: ES MOC follow (t 3.5), CL Sunday-gap fade (t 3.2, 9/9 years). Continuous contracts have unadjusted roll jumps (NQ +120..310 pts
+per roll since 2023, GC, CL) at 03:32 or 17:01: the NQ plan's trades are clear of them; drop roll bars in new tests.
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily
