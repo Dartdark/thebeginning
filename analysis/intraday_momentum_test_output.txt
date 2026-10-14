@@ -1,0 +1,112 @@
+Market Intraday Momentum (Gao, Han, Li & Zhou 2018 JFE, SSRN 2440866; user's upload 2026-10-14) on NQ and ES.
+
+================ NQ: 2244 sessions 2018-01-03 .. 2026-10-09
+1. Regressions of r13 (14:30 -> 15:00 CT) x 100, White t:
+   r1                           2018-26: slopes [0.022] t [0.96] R2 0.32%
+   r1                           2018-22: slopes [0.038] t [1.13] R2 0.79%
+   r1                           2023-26: slopes [-0.008] t [-0.68] R2 0.08%
+   r1 RTH only (8:30 -> 9:00)   2018-26: slopes [0.025] t [0.53] R2 0.10%
+   r1 RTH only (8:30 -> 9:00)   2018-22: slopes [0.037] t [0.51] R2 0.17%
+   r1 RTH only (8:30 -> 9:00)   2023-26: slopes [0.005] t [0.2] R2 0.01%
+   r12                          2018-26: slopes [0.115] t [1.36] R2 0.61%
+   r12                          2018-22: slopes [0.162] t [1.37] R2 1.07%
+   r12                          2023-26: slopes [0.008] t [0.1] R2 0.00%
+   r1 + r12                     2018-26: slopes [0.02  0.109] t [0.9  1.34] R2 0.87%
+   r1 + r12                     2018-22: slopes [0.034 0.15 ] t [1.08 1.33] R2 1.71%
+   r1 + r12                     2023-26: slopes [-0.009  0.009] t [-0.68  0.13] R2 0.08%
+   recursive out-of-sample R2 from 2020 (expanding window): r1 -1.16%, r1 + r12 -1.98%
+
+2. Timing trades 14:30 -> 15:00 CT, 1 contract after costs
+                                                         n  win    avg   pf     t  yrs       d      h       L       S
+sign(r1) (paper)                                      2244 0.47 -28.28 0.91 -1.42  2/9  -29.97 -26.04  -29.54  -26.68
+sign(r12)                                             2173 0.48  -1.81 0.99 -0.09  4/9   40.81 -58.15   -4.58    1.06
+r1 and r12 agree (paper)                              1143 0.48 -15.34 0.95 -0.53  4/9   24.64 -64.78  -42.68   19.94
+sign(r1 RTH 8:30-9:00)                                2241 0.46 -34.30 0.89 -1.72  2/9  -20.56 -52.50  -35.74  -32.66
+always long                                           2244 0.47 -19.98 0.94 -1.00  2/9  -31.86  -4.25  -19.98     NaN
+sign(r1), |r1| above its running median               1127 0.46 -46.51 0.87 -1.43  2/9  -56.91 -31.54  -49.37  -42.86
+sign(r1), first half-hour vol top third (running)      746 0.48 -26.18 0.94 -0.57  4/9  -38.80   6.24  -54.26   -1.51
+sign(r1), first half-hour vol bottom third (running)   671 0.45 -52.44 0.77 -2.16  2/9  -63.37 -43.23  -27.67 -104.63
+agree, vol top third (running)                         388 0.49  15.43 1.04  0.23  5/9   59.26 -91.23  -34.44   67.94
+sign(r1), FOMC decision days                            69 0.49 114.20 1.21  0.52  3/9 -389.17 768.58 -274.53  891.66
+sign(r1), other days                                  2175 0.47 -32.80 0.89 -1.69  3/9  -18.67 -51.54  -20.23  -48.59
+   random side placebo (50 runs): $-20.6 (-56.2 .. 10.1) a trade
+   sign(r1) by year: 2018 $-1 | 2019 $-19 | 2020 $64 | 2021 $-110 | 2022 $-83 | 2023 $-59 | 2024 $-15 | 2025 $-80 | 2026 $70
+
+================ ES: 2245 sessions 2018-01-02 .. 2026-10-09
+1. Regressions of r13 (14:30 -> 15:00 CT) x 100, White t:
+   r1                           2018-26: slopes [0.012] t [0.41] R2 0.08%
+   r1                           2018-22: slopes [0.021] t [0.53] R2 0.22%
+   r1                           2023-26: slopes [-0.012] t [-0.72] R2 0.12%
+   r1 RTH only (8:30 -> 9:00)   2018-26: slopes [-0.02] t [-0.23] R2 0.03%
+   r1 RTH only (8:30 -> 9:00)   2018-22: slopes [-0.029] t [-0.24] R2 0.06%
+   r1 RTH only (8:30 -> 9:00)   2023-26: slopes [0.004] t [0.09] R2 0.00%
+   r12                          2018-26: slopes [0.083] t [0.82] R2 0.29%
+   r12                          2018-22: slopes [0.117] t [0.84] R2 0.49%
+   r12                          2023-26: slopes [-0.] t [-0.] R2 0.00%
+   r1 + r12                     2018-26: slopes [0.011 0.081] t [0.38 0.83] R2 0.35%
+   r1 + r12                     2018-22: slopes [0.018 0.11 ] t [0.48 0.83] R2 0.66%
+   r1 + r12                     2023-26: slopes [-0.012  0.   ] t [-0.72  0.  ] R2 0.12%
+   recursive out-of-sample R2 from 2020 (expanding window): r1 -1.97%, r1 + r12 -3.47%
+
+2. Timing trades 14:30 -> 15:00 CT, 1 contract after costs
+                                                         n  win    avg   pf     t  yrs       d      h       L      S
+sign(r1) (paper)                                      2229 0.44 -40.44 0.81 -3.11  1/9  -53.03 -23.80  -47.03 -32.04
+sign(r12)                                             2129 0.47 -15.78 0.92 -1.17  3/9    7.50 -46.67  -24.20  -7.11
+r1 and r12 agree (paper)                              1088 0.46 -27.10 0.88 -1.40  2/9  -15.14 -42.04  -33.18 -19.26
+sign(r1 RTH 8:30-9:00)                                2216 0.44 -46.32 0.79 -3.55  1/9  -52.92 -37.54  -54.90 -36.92
+always long                                           2245 0.44 -38.75 0.82 -3.00  0/9  -48.30 -26.09  -38.75    NaN
+sign(r1), |r1| above its running median               1086 0.46 -63.40 0.76 -2.96  0/9  -67.54 -57.17  -60.17 -67.61
+sign(r1), first half-hour vol top third (running)      713 0.48 -34.87 0.89 -1.07  4/9  -65.21  42.94  -60.23 -14.46
+sign(r1), first half-hour vol bottom third (running)   736 0.40 -38.76 0.73 -2.68  1/9  -51.82 -27.92  -34.59 -46.68
+agree, vol top third (running)                         365 0.52  10.68 1.04  0.23  5/9   -7.40  52.61    5.23  16.11
+sign(r1), FOMC decision days                            69 0.48  95.00 1.30  0.75  4/9 -215.26 498.33 -190.00 488.10
+sign(r1), other days                                  2160 0.44 -44.77 0.79 -3.51  0/9  -47.89 -40.65  -42.30 -47.90
+   random side placebo (50 runs): $-31.1 (-51.0 .. -15.5) a trade
+   sign(r1) by year: 2018 $-41 | 2019 $-32 | 2020 $-27 | 2021 $-89 | 2022 $-76 | 2023 $5 | 2024 $-33 | 2025 $-45 | 2026 $-22
+
+3. Overlap with Late-Day Flow (LDF trades 14:00 -> 14:30 after a big 8:30 -> 14:00 move)
+   daily P&L correlation sign(r1) vs LDF: 0.02; LDF days 894 of 2244; same side 65%
+   sign(r1) on LDF days $-25 (same side $-50), on other days $-30
+   = holding LDF to 15:00 when r1 agrees: +$-50 a trade on 578 trades (t -1.3)
+                                                         trades win  avg  annual sharpe sortino profit_factor   max_dd calmar ulcer ulcer_perf
+sign(r1) (paper)                                           2244 47% $-28 $-7,070  -0.47   -0.66          0.91 $117,220  -0.06 82.32      -0.17
+sign(r1) (paper) longs                                     1257 47% $-30 $-4,136  -0.41   -0.57          0.90  $70,197  -0.06 60.42      -0.14
+sign(r1) (paper) shorts                                     987 48% $-27 $-2,934  -0.26   -0.38          0.92  $61,868  -0.05 40.89      -0.14
+r1 and r12 agree (paper)                                   1143 48% $-15 $-1,953  -0.18   -0.26          0.95  $55,239  -0.04 32.62      -0.12
+r1 and r12 agree (paper) longs                              644 47% $-43 $-3,062  -0.41   -0.57          0.86  $46,699  -0.07 34.65      -0.18
+r1 and r12 agree (paper) shorts                             499 50%  $20  $1,109   0.14    0.21          1.06  $19,222   0.06 11.99       0.18
+sign(r1), first half-hour vol top third (running)           746 48% $-26 $-2,176  -0.19   -0.27          0.94  $64,352  -0.03 46.47      -0.09
+sign(r1), first half-hour vol top third (running) longs     349 46% $-54 $-2,109  -0.29   -0.42          0.87  $46,191  -0.05 36.40      -0.12
+sign(r1), first half-hour vol top third (running) shorts    397 50%  $-2    $-67  -0.01   -0.01          1.00  $23,188  -0.00 20.32      -0.01
+                                         actual        p5       p50       p95
+name                     metric                                              
+sign(r1) (paper)         sharpe           -0.39     -1.21     -0.36      0.38
+                         sortino          -0.55     -1.62     -0.51      0.58
+                         pf_day            0.93      0.80      0.93      1.07
+                         calmar           -0.11     -0.24     -0.13      0.25
+                         ulcer            56.99     13.90     39.82     93.73
+                         max_dd       58,592.50 22,458.70 46,022.25 87,430.59
+                         P(Sharpe<=0)       NaN       NaN      0.78       NaN
+r1 and r12 agree (paper) sharpe           -0.70     -1.46     -0.69      0.07
+                         sortino          -0.98     -1.88     -0.96      0.10
+                         pf_day            0.83      0.69      0.84      1.02
+                         calmar           -0.17     -0.25     -0.20      0.04
+                         ulcer            56.65     15.06     43.40     85.24
+                         max_dd       49,025.25 19,761.56 42,941.25 74,753.14
+                         P(Sharpe<=0)       NaN       NaN      0.93       NaN
+                         actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+sign(r1) (paper)           $58,592      85% $47,075 $66,483 $75,469        100%        100%        100%
+r1 and r12 agree (paper)   $49,025      76% $43,726 $57,382 $63,910        100%        100%        100%
+
+   Funded bench (7-strategy plan) + intraday momentum:
+   current plan               1y $9,313 2y $12,569 blown 2% / 1%
+   + IMOM 1 MNQ               1y $8,636 2y $11,930 blown 10% / 6%
+   + IMOM 2 MNQ               1y $6,205 2y $9,756 blown 29% / 23%
+   + IMOM agree 2 MNQ         1y $7,699 2y $10,884 blown 18% / 14%
+   + IMOM high-vol 2 MNQ      1y $7,666 2y $11,496 blown 14% / 9%
+                      full6m full1y full2y median if_done blown per_month   exp3y max_mnq
+current plan              0%    47%    94%    255     255    0%      $871 $13,000      66
++ IMOM 1 MNQ              0%    37%    88%    277     269    6%      $856 $12,186      67
++ IMOM 2 MNQ              1%    25%    74%    308     283   19%      $769 $10,675      68
++ IMOM agree 2 MNQ        1%    39%    84%    278     266   10%      $843 $11,705      68
++ IMOM high-vol 2 MNQ     0%    36%    83%    273     264   11%      $841 $11,685      68

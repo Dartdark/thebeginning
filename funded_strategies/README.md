@@ -1274,6 +1274,46 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
   profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
   awkward there in any case.
 
+## Market Intraday Momentum (Gao, Han, Li & Zhou 2018, SSRN 2440866; user's upload 2026-10-14): gone on NQ / ES since 2018
+
+**What it is.** On SPY 1993–2013, the first half-hour return predicts the last half-hour return.
+- The first half-hour, r1, runs from the previous 16:00 ET close to 10:00 ET.
+- r1 predicts r13 (15:30–16:00 ET): R² 1.6%, t 4.1, out-of-sample R² 1.4%.
+- r12 (15:00–15:30) adds to it.
+- Timing the last half-hour by sign(r1) makes 6.7% a year at Sharpe 1.08, and still 4.5% after spreads.
+- It is stronger on volatile and high-volume days, in recessions, and on news days (FOMC minutes R² 11%). It holds
+  on 10 other ETFs, including QQQ.
+
+**Why it should make money.** Investors who rebalance infrequently or learn the news late trade near the close, in
+the same direction as the morning. That is a flow story close to our Late-Day Flow (follow a big 8:30 → 14:00 move
+from 14:00 to 14:30). **Foundation?** Yes in principle: a fixed-time Apex-legal trade, 14:30 → 15:00 CT.
+
+Code `../analysis/intraday_momentum_test.py` (output in `..._output.txt`). r1 = previous 15:00 CT close → 9:00,
+r12 = 14:00 → 14:30, r13 = 14:30 → 15:00. NQ and ES 2018–2026, 1 contract, $7.25 ($5 ES) + 1 tick a fill.
+- **The predictability is gone.**
+  - NQ r1 slope t 0.96, R² 0.3% (2018–22 t 1.1, 2023–26 t −0.7). r12 t 1.4 (2023–26 t 0.1). Both together R²
+    0.9%.
+  - Recursive out-of-sample R² from 2020: −1.2% (r1), −2.0% (both).
+  - ES: r1 t 0.4, out-of-sample R² −2.0%.
+  - Using only the 8:30–9:00 move as r1 is no better (t 0.5).
+- **Timing trades (14:30 → 15:00):**
+  - **NQ sign(r1):** −$28 a trade, PF 0.91, 2/9 years, Sharpe −0.47. That's below the random-side placebo (−$21),
+    with longs −$30 and shorts −$27.
+  - **Both signals agreeing (the paper's 77% hit rate):** −$15, 2023–26 −$65.
+  - **High first-half-hour volatility (the paper's strongest case):** −$26. Low volatility −$52 (t −2.2).
+  - **FOMC days:** $114 on 69 trades (t 0.5; 2018–22 −$389).
+  - **ES:** worse everywhere. sign(r1) −$40 (t −3.1, 1/9 years); always-long the last half-hour −$39.
+  - The last half-hour is roughly a zero-gross window that $17.25 of costs turns negative.
+- **Overlap with Late-Day Flow:** daily P&L correlation 0.02. Holding LDF on to 15:00 when r1 agrees would add −$50
+  a trade (578 trades, t −1.3), so LDF's 14:30 exit is right.
+- **Funded bench:**
+  - Adding it at 1 MNQ: $8,636 / $11,930, blown 10% (plan $9,313 / $12,569, 2%).
+  - 2 MNQ: $6,205, blown 29%.
+  - Median days to $13k 277–308 vs 255.
+- **Verdict: F.** It's a well-documented effect, but on the 1993–2013 sample. On NQ and ES futures it doesn't exist
+  in 2018–26, as later replications report for post-2013 data. The real late-day flow is the 14:00–14:30 window LDF
+  already trades.
+
 ## Fast alphas as an execution overlay (Zarattini & Pagani, Concretum QuanTips #2, Feb 2026; user's upload 2026-10-14): hurts on NQ
 
 **What it is.** A 7-page research note on SPY 5-minute bars, 2007–26.
