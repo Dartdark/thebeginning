@@ -1274,6 +1274,52 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
   profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
   awkward there in any case.
 
+## "Beta from A to Z" (Oct 2026 textbook, user's upload 2026-10-14): the pairs tools don't find an edge on NQ
+
+**What it is.** A 99-page textbook that proves beta estimation from scratch:
+- OLS, robust estimators (Huber, Theil–Sen), shrinkage;
+- horizon effects (Dimson, Scholes–Williams, overnight vs intraday beta);
+- high-frequency beta (Epps effect, Hayashi–Yoshida, semibetas);
+- time-varying beta (EWMA, Kalman, GARCH / DCC, Markov regimes);
+- option-implied beta, basket betas, and the two-asset case (TLS / Deming, cointegration, spread half-life).
+
+It has no trading results and makes no claim to make money. **Foundation for a strategy?** Not by itself. Its
+pairs recipe is the only part that could be traded: a Kalman hedge ratio whose innovation / √F is a z-score,
+cointegration for the long-run level, and the point that a 1-period beta above the long-run one means the spread
+over-reacts and reverts. Here it's a better way to build the NQ–YM spread already tested (D), so I ran that recipe on
+NQ vs ES and NQ vs YM.
+
+Code `../analysis/beta_pairs_test.py` (output in `..._output.txt`). Costs per round trip: NQ $17.25, ES $30, YM $15.
+Both legs, per 1 NQ of exposure. Design 2018–22, holdout 2023–26.
+- **Facts (ch. 13 / 14 / 22).**
+  - NQ's beta on ES is 1.14 at 1 minute, 1.18 at 30 minutes and 1.21 for the regular session. Daily close-to-close
+    1.16, 5 days 1.13, 20 days 1.16; overnight 1.12. Correlation 0.93 / 0.94.
+  - On YM it is about 1.0 at every interval (correlation 0.79).
+  - So there is almost no Epps effect at 1 minute, and the short-run beta isn't above the long-run one: no sign of
+    the over-reaction the book's reversion example needs.
+- **Cointegration (Engle–Granger).** Neither pair is cointegrated:
+  - NQ–ES: ADF t −2.61 (5% critical about −3.34), γ drifting from 1.83 to 1.26 over three periods.
+  - NQ–YM: t −3.23, γ 1.62–1.87, never significant by period. Half-lives of 21–144 sessions, far longer than a
+    day trade.
+- **Kalman intraday spread** (q and R by maximum likelihood on 2018–22: β 1.26 on ES, 1.03 on YM). At 9:00, 10:30 or
+  12:00, |z| ≥ 0.25 / 0.5 / 1, follow or fade to 14:55:
+  - **ES:** 16 of 18 versions lose. Fading loses 1/9 years almost everywhere (t to −5.8). The best design version
+    (9:00, |z| ≥ 1, follow) makes $3 a trade, holdout −$147.
+  - **YM:** following at 9:00 is the same result as the OLS spread test. |z| ≥ 1 makes $221 (t 1.2), but its 2023–26
+    is −$76. |z| ≥ 0.5 makes $136 (t 1.7, 6/9 years, holdout $102). Most of it is long NQ ($478 vs short $41), so
+    it's NQ's opening momentum again. Holdout Sharpe of the best design version −0.12, P(Sharpe ≤ 0) 59%.
+- **Multi-day reversion** (rolling 250-day cointegration residual at yesterday's close; fade today 8:31 → 14:55, so
+  flat every night):
+  - Every version is −$150 to +$69 a trade, t ≤ 0.6; follow and fade both lose on two legs.
+  - From |z| ≥ 2 the spread keeps moving **away**: −6 / −35 / −129 bp over the next 1 / 5 / 20 sessions on ES and
+    −14 / −72 / −150 bp on YM, in the fade direction. These spreads trend (NQ's multi-year outperformance) rather
+    than revert.
+- **Verdict: F.** These are the right statistical tools, but the index pairs don't have the structure they exploit.
+  There's no cointegration and no short-run over-reaction, and intraday divergences trend, as the NQ–YM test found.
+  Useful takeaways:
+  - The hedge ratio for any NQ-vs-ES work is about 1.2 notional (Kalman range 1.11–1.45).
+  - The overnight and intraday betas are nearly equal.
+
 ## 101 Formulaic Alphas (Kakushadze 2015, SSRN 2701346; user's upload 2026-10-14): fails on NQ
 
 **What it is.** WorldQuant published the formulas of 101 of its production stock alphas: price-volume expressions

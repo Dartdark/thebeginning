@@ -1,0 +1,147 @@
+'Beta from A to Z' (Oct 2026 textbook, user's upload 2026-10-14): its pairs-trading tools on NQ vs ES and NQ vs YM.
+
+================ NQ vs ES (2262 sessions)
+1. beta of NQ on ES by sampling interval: {'1m': np.float64(1.14), '5m': np.float64(1.16), '15m': np.float64(1.17), '30m': np.float64(1.18), '60m': np.float64(1.21), 'RTH day': np.float64(1.21), '1d close': np.float64(1.16), '5d close': np.float64(1.13), '20d close': np.float64(1.16), 'overnight': np.float64(1.12), 'corr RTH': np.float64(0.93), 'corr overnight': np.float64(0.94)}
+   cointegration 2018-26 (whole sample, descriptive): gamma 1.38, ADF t -2.61 (5% critical ~ -3.34), half-life 130 sessions
+      2018-2020: gamma 1.83, ADF t -2.17, half-life 51
+      2021-2023: gamma 1.56, ADF t -2.98, half-life 47
+      2024-2026: gamma 1.26, ADF t -2.73, half-life 32
+
+2. Kalman (ML on 2018-22): q 0.003, R = 1.60e-05; beta median 1.26 (10-90% 1.11-1.45)
+   intraday spread with the Kalman hedge (both legs), sorted by 2018-22 average:
+   T    z   mode    n     avg   pf     t       d       h yrs
+ 900 1.00 follow  212    2.94 1.01  0.04   79.88 -146.68 5/9
+ 900 0.50 follow  765   -0.95 1.00 -0.02   50.83  -73.34 4/9
+ 900 0.25 follow 1363  -38.86 0.90 -1.46    4.26  -93.05 2/9
+1200 0.50   fade 1102  -69.04 0.70 -4.30  -55.25  -89.41 1/9
+1200 1.00 follow  473  -51.93 0.78 -2.04  -56.59  -42.90 3/9
+1030 0.50   fade 1019  -79.52 0.74 -3.50  -58.59 -110.34 1/9
+1030 0.25   fade 1540  -74.24 0.74 -4.18  -61.15  -92.08 1/9
+1200 0.25   fade 1567  -77.79 0.66 -5.77  -61.41  -99.83 1/9
+1030 1.00   fade  412  -87.73 0.74 -2.21  -62.61 -133.98 1/9
+1030 0.25 follow 1540  -58.92 0.79 -3.32  -62.85  -53.58 2/9
+1200 0.25 follow 1567  -55.72 0.74 -4.13  -63.13  -45.74 1/9
+1030 1.00 follow  412  -46.16 0.86 -1.16  -64.03  -13.25 3/9
+1030 0.50 follow 1019  -53.90 0.81 -2.37  -66.58  -35.22 1/9
+1200 0.50 follow 1102  -64.32 0.71 -4.00  -70.13  -55.73 2/9
+1200 1.00   fade  473  -81.57 0.67 -3.21  -70.22 -103.57 1/9
+ 900 0.25   fade 1363  -95.61 0.76 -3.60 -129.50  -53.02 1/9
+ 900 0.50   fade  765 -133.80 0.71 -3.51 -177.42  -72.81 1/9
+ 900 1.00   fade  212 -137.67 0.73 -1.68 -207.94   -1.05 3/9
+
+3. Multi-day reversion: rolling 250-day cointegration residual at yesterday's 15:00 close, fade today 8:31 -> 14:55
+   z          legs    n     avg   pf     t       d       h yrs
+1.00          both 1017  -69.22 0.88 -1.50 -100.97  -32.41 3/9
+1.00 both (follow) 1017  -67.33 0.88 -1.46  -22.74 -119.01 1/9
+1.00            nq 1017  -90.02 0.94 -0.79 -135.21  -37.64 4/9
+1.00   nq (follow) 1017   55.52 1.04  0.49  100.71    3.14 4/9
+1.50          both  580  -86.57 0.87 -1.30 -149.31   -0.18 4/9
+1.50 both (follow)  580  -47.55 0.92 -0.72   27.52 -150.93 2/9
+1.50            nq  580 -117.59 0.92 -0.71 -224.39   29.49 5/9
+1.50   nq (follow)  580   83.09 1.06  0.50  189.89  -63.99 4/9
+2.00          both  334  -17.19 0.97 -0.20 -100.69  159.93 4/6
+2.00 both (follow)  334 -112.77 0.82 -1.28  -18.51 -312.75 2/6
+2.00            nq  334  -21.62 0.99 -0.10 -166.99  286.77 3/6
+2.00   nq (follow)  334  -12.88 0.99 -0.06  132.49 -321.27 3/6
+   residual z: 51% of days |z| >= 1, 17% >= 2; day-to-day autocorrelation 0.980
+   from |z| >= 2: spread change over the next  1 sessions in the fade direction   -6.1 bp (all days  -1.6 bp)
+   from |z| >= 2: spread change over the next  5 sessions in the fade direction  -35.3 bp (all days  -6.5 bp)
+   from |z| >= 2: spread change over the next 20 sessions in the fade direction -129.1 bp (all days  -1.8 bp)
+
+================ NQ vs YM (2257 sessions)
+1. beta of NQ on YM by sampling interval: {'1m': np.float64(1.01), '5m': np.float64(1.03), '15m': np.float64(1.02), '30m': np.float64(1.02), '60m': np.float64(1.01), 'RTH day': np.float64(1.07), '1d close': np.float64(1.03), '5d close': np.float64(0.97), '20d close': np.float64(1.02), 'overnight': np.float64(1.0), 'corr RTH': np.float64(0.79), 'corr overnight': np.float64(0.83)}
+   cointegration 2018-26 (whole sample, descriptive): gamma 1.87, ADF t -3.23 (5% critical ~ -3.34), half-life 76 sessions
+      2018-2020: gamma 1.74, ADF t -1.26, half-life 144
+      2021-2023: gamma 1.78, ADF t -2.27, half-life 58
+      2024-2026: gamma 1.62, ADF t -3.35, half-life 21
+
+2. Kalman (ML on 2018-22): q 0.001, R = 6.41e-05; beta median 1.03 (10-90% 0.78-1.35)
+   intraday spread with the Kalman hedge (both legs), sorted by 2018-22 average:
+   T    z   mode    n     avg   pf     t       d       h yrs
+ 900 1.00 follow  136  221.03 1.31  1.20  462.34  -75.66 6/9
+ 900 0.50 follow  661  135.52 1.21  1.67  169.47  101.89 6/9
+ 900 0.25 follow 1223   41.13 1.06  0.75   54.33   26.64 5/9
+1200 1.00 follow  387   -4.55 0.99 -0.08   33.23  -50.33 5/9
+1030 0.50 follow  937   58.60 1.13  1.33   12.63  111.88 4/9
+1200 0.50 follow 1021   14.40 1.04  0.45    2.55   28.35 5/9
+1030 0.25 follow 1483   54.22 1.13  1.63    1.20  116.00 6/9
+1200 0.25 follow 1557  -12.73 0.96 -0.51  -13.15  -12.22 4/9
+1030 1.00   fade  329  -21.17 0.96 -0.25  -34.28   -3.89 5/9
+1030 1.00 follow  329  -66.88 0.89 -0.80  -51.21  -87.52 2/9
+1200 0.25   fade 1557  -73.02 0.80 -2.95  -67.38  -79.94 1/9
+1030 0.25   fade 1483 -140.44 0.73 -4.23  -82.30 -208.17 0/9
+1200 0.50   fade 1021 -100.81 0.75 -3.13  -84.03 -120.56 0/9
+1030 0.50   fade  937 -145.12 0.74 -3.29  -94.80 -203.43 1/9
+1200 1.00   fade  387  -82.49 0.81 -1.45 -116.89  -40.80 4/9
+ 900 0.25   fade 1223 -127.73 0.83 -2.34 -136.16 -118.49 1/9
+ 900 0.50   fade  661 -223.06 0.74 -2.75 -252.72 -193.66 1/9
+ 900 1.00   fade  136 -311.35 0.68 -1.68 -550.56  -17.23 2/9
+
+3. Multi-day reversion: rolling 250-day cointegration residual at yesterday's 15:00 close, fade today 8:31 -> 14:55
+   z          legs   n     avg   pf     t       d       h yrs
+1.00          both 972   -4.83 1.00 -0.05  -44.93   43.44 4/8
+1.00 both (follow) 972  -94.64 0.91 -1.04  -42.14 -157.86 3/8
+1.00            nq 972  -14.89 0.99 -0.12 -145.53  142.41 3/8
+1.00   nq (follow) 972  -19.61 0.98 -0.16  111.03 -176.91 4/8
+1.50          both 579   69.14 1.07  0.58 -152.75  380.35 5/8
+1.50 both (follow) 579 -165.12 0.85 -1.39   68.72 -493.07 2/8
+1.50            nq 579 -103.05 0.92 -0.74 -100.02 -107.31 2/8
+1.50   nq (follow) 579   68.55 1.06  0.49   65.52   72.81 6/8
+2.00          both 347  -55.36 0.95 -0.36 -146.15   90.73 5/8
+2.00 both (follow) 347  -36.37 0.97 -0.24   64.78 -199.13 2/8
+2.00            nq 347 -150.18 0.89 -0.84  -35.82 -334.17 3/8
+2.00   nq (follow) 347  115.68 1.10  0.65    1.32  299.67 5/8
+   residual z: 48% of days |z| >= 1, 17% >= 2; day-to-day autocorrelation 0.979
+   from |z| >= 2: spread change over the next  1 sessions in the fade direction  -14.4 bp (all days  -1.2 bp)
+   from |z| >= 2: spread change over the next  5 sessions in the fade direction  -72.0 bp (all days  -6.7 bp)
+   from |z| >= 2: spread change over the next 20 sessions in the fade direction -150.2 bp (all days   4.4 bp)
+
+=== Standard metrics (per 1 NQ of exposure): best design version of each family
+                                            trades win   avg  annual sharpe sortino profit_factor   max_dd calmar ulcer ulcer_perf
+ES Kalman intraday 900 z1.0 follow             212 50%    $3     $69   0.01    0.02          1.01  $21,324   0.00 13.47       0.01
+ES Kalman intraday 900 z1.0 follow long NQ      95 55%  $141  $1,492   0.38    0.58          1.37   $6,691   0.22  4.92       0.61
+ES Kalman intraday 900 z1.0 follow short NQ    117 47% $-109 $-1,422  -0.33   -0.43          0.78  $20,427  -0.07 13.94      -0.20
+ES multi-day fade z2.0 both                    334 47%  $-17   $-640  -0.07   -0.09          0.97  $36,162  -0.02 35.62      -0.04
+ES multi-day fade z2.0 both long NQ            151 55%  $124  $2,085   0.34    0.49          1.26  $13,432   0.16  6.13       0.68
+ES multi-day fade z2.0 both short NQ           183 40% $-134 $-2,725  -0.36   -0.50          0.80  $37,808  -0.07 38.46      -0.14
+YM Kalman intraday 900 z1.0 follow             136 56%  $221  $3,356   0.40    0.60          1.31  $22,899   0.15 10.63       0.63
+YM Kalman intraday 900 z1.0 follow long NQ      56 61%  $478  $2,986   0.53    0.89          1.76  $12,196   0.24  7.13       0.84
+YM Kalman intraday 900 z1.0 follow short NQ     80 52%   $41    $370   0.06    0.08          1.05  $23,849   0.02 10.32       0.07
+YM multi-day fade z2.0 nq                      347 46% $-150 $-5,818  -0.28   -0.41          0.89 $103,484  -0.06 49.88      -0.23
+YM multi-day fade z2.0 nq long NQ               88 49%   $-7    $-67  -0.01   -0.01          1.00  $38,020  -0.00 24.88      -0.01
+YM multi-day fade z2.0 nq short NQ             259 45% $-199 $-5,752  -0.34   -0.49          0.85  $87,074  -0.07 39.82      -0.29
+                                                   actual        p5       p50        p95
+name                               metric                                               
+ES Kalman intraday 900 z1.0 follow sharpe           -0.48     -1.25     -0.49       0.31
+                                   sortino          -0.62     -1.44     -0.63       0.47
+                                   pf_day            0.74      0.44      0.74       1.20
+                                   calmar           -0.19     -0.26     -0.17       0.21
+                                   ulcer            14.32      5.46     16.38      36.38
+                                   max_dd       14,666.06  7,160.25 16,044.35  30,843.38
+                                   P(Sharpe<=0)       NaN       NaN      0.84        NaN
+ES multi-day fade z2.0 both        sharpe            0.43     -0.37      0.47       1.24
+                                   sortino           0.64     -0.47      0.70       2.35
+                                   pf_day            1.27      0.82      1.30       2.14
+                                   calmar            0.23     -0.14      0.32       1.49
+                                   ulcer             5.16      2.08      8.24      28.64
+                                   max_dd       19,427.56  6,973.06 14,979.40  31,765.66
+                                   P(Sharpe<=0)       NaN       NaN      0.17        NaN
+YM Kalman intraday 900 z1.0 follow sharpe           -0.12     -0.89     -0.12       0.71
+                                   sortino          -0.16     -1.05     -0.16       1.21
+                                   pf_day            0.92      0.53      0.92       1.59
+                                   calmar           -0.05     -0.24     -0.06       0.65
+                                   ulcer            26.15      5.35     17.11      47.37
+                                   max_dd       22,899.36  9,299.81 20,087.03  42,118.78
+                                   P(Sharpe<=0)       NaN       NaN      0.59        NaN
+YM multi-day fade z2.0 nq          sharpe           -0.55     -1.43     -0.60       0.16
+                                   sortino          -0.78     -1.78     -0.84       0.25
+                                   pf_day            0.77      0.51      0.75       1.09
+                                   calmar           -0.16     -0.26     -0.19       0.10
+                                   ulcer            54.70     16.94     59.61     144.18
+                                   max_dd       74,461.00 27,574.90 64,440.00 128,613.06
+                                   P(Sharpe<=0)       NaN       NaN      0.90        NaN
+                                   actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+ES Kalman intraday 900 z1.0 follow   $14,666      31% $16,226 $22,100 $24,604        100%        100%        100%
+ES multi-day fade z2.0 both          $19,428      82% $15,030 $23,859 $27,671        100%        100%        100%
+YM Kalman intraday 900 z1.0 follow   $22,899      66% $20,665 $30,537 $34,332        100%        100%        100%
+YM multi-day fade z2.0 nq            $74,461      76% $65,620 $87,961 $98,977        100%        100%        100%
