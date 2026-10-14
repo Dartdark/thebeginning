@@ -556,8 +556,10 @@ fees. Scored at the backtest edge and at 75% of it.
 - **Contract use stays within Apex's caps:** at full size a median 3 MNQ a day, 99th percentile 14, at scale 1.25
   17. Over 20 MNQ on 0.1–0.4% of days, all on low-volatility 2018 days.
 - **Recommendation:**
-  - For the 3 live slots now: full size from a **$1,000 cushion** (f = cushion / $1,000, kept between 0.5 and 1):
-    about +7% net in both scenarios.
+  - **User's decision (2026-10-14): full size from a $1,500 cushion** (f = cushion / $1,500, kept between 0.5 and 1;
+    the table at the top of this file). The $1,000 setting nets about +7% per slot only by counting blown accounts as
+    cheap restarts; per account the funded bench (current plan + CL fade) gives $1,500: $9,818 / $12,595, blown 4% / 2%
+    vs $1,000: $9,293 / $10,734, blown 17% / 18%. Protecting each funded account comes first.
   - Scale 1.25 (+19% at the edge, +25% at 75%) costs more blown accounts (1.4–2.7 per slot over 3 years). Consider
     it only after the live edge ratio is ≥ 0.9 over ~40 trades.
   - Caveat: in-sample, and medians move in steps of the payout amounts.

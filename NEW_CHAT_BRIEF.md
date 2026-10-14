@@ -54,7 +54,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 | **CL Sunday Gap Fade** (new, `CL_Sunday_Gap_Fade.txt`) | 5 min **MCL**, Eastern exchange time | `NumContracts` 2, `ExitTime` 1000 (= 9:00 CT) |
 
 - **Cushion sizing:** f = cushion / ref, kept in 0.5–1.
-  - The live recommendation is full size from a **$1,000** cushion (pipeline tuning: +7% net per slot).
+  - **Funded phase: full size from a $1,500 cushion (user's decision, 2026-10-14).** The $1,000 setting blows 17–18%
+    of accounts in the bench vs 2–4% at $1,500; it only looked better counting blown accounts as cheap restarts.
   - The funded bench numbers below use ref $1,500.
 - **Backtest per account** (bench, ref $1,500):
   - $9,818 in year 1, $12,595 in 2 years, blown 4% / 2%.
