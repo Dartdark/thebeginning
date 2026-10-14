@@ -126,7 +126,12 @@ end;
 
 { ---------------- exits ---------------- }
 if MarketPosition = -1 then begin
-	BuyToCover ("S.SL") next bar at EntryPrice + ShortSLpts + slipPts stop;
+	{ live fix (2026-10-14): a buy stop at or below the market is rejected by the broker, which would leave the
+	  short without a stop, so if price is already at / above the stop level cover at market }
+	if Close >= EntryPrice + ShortSLpts + slipPts then
+		BuyToCover ("S.SLM") next bar at market
+	else
+		BuyToCover ("S.SL") next bar at EntryPrice + ShortSLpts + slipPts stop;
 	BuyToCover ("S.TP") next bar at EntryPrice - ShortTPpts limit;
 end;
 
