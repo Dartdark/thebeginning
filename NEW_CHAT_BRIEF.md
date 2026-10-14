@@ -92,6 +92,11 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     confirm** (target on $4,947 / yr, Sharpe 1.29; off $5,849, 1.00; live VB $5,341, 1.35): D. Live VB unchanged.
   - Mesfin 2026 MNQ falsification study (SSRN 6709401): F; its London Signal B only works with a look-ahead entry
     (`analysis/london_signal_b_test.py`).
+  - Mega-cap earnings on NQ (Alpha Vantage data in `data/ndx_megacap_earnings.csv`; the user's API key is NOT stored):
+    pre-specified rules no edge; 'sell the news' short D (all from 2024–25); intraday shape F.
+  - CL round 3 (Friday, Monday after the fade, overnight, London open): F. The Sunday up-gap fade stands alone.
+  - Plan combination: **Vault Break after an Overnight Bias ML long earns $214 vs $64 (t 2.55)**: C, watchlist #15;
+    sizing VB up then adds money but not Sharpe at the account level and makes the worst day −$2,345. Needs the funded bench.
 - **Next research (needs data from the user):**
   - Closing-imbalance or options open-interest data for ES.
   - Without new data, the clock flows on GC / ES / YM / BTC are exhausted.

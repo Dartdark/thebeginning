@@ -59,6 +59,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 
 | Item | Type | Key numbers | Notes |
 |---|---|---|---|
+| Vault Break sized up after Overnight Bias ML has gone long the same day (plan-combination project, `analysis/plan_agreement_test.py`) | Sizing rule (MultiCharts trade lists) | Pre-specified test B: VB trades entering after an ONB ML long entry $214 (n 243, PF 1.77, win 71%) vs no ONB trade $64 (n 1,469); difference t 2.55; 2018–22 $116 vs $73, 2023–26 $280 vs $55, 8/9 years (2018 −$531); not just 'up mornings' (VB on no-ONB days with NQ up 8:30–10:00 $60). VB 3 MNQ → 6 MNQ after an ONB long: VB stream $7,079 / yr Sharpe 1.49 max DD $3,636 (now $5,341, 1.35, $4,085; flat 4 MNQ $7,122, 1.35, $5,447); with ONB (2 MNQ proxy) Sharpe unchanged 1.92, max DD $4,801 vs $4,153, worst day −$2,345 vs −$1,435 (both long the same day): more profit, same Sharpe, bigger single-day risk | See watchlist |
 | Overnight Drift (backup; replaced by Monday Long 2026-10-12) | Funded strategy (backup) | 1,039 trades, $71 avg, PF 1.22 (at funded size PF 1.10) | Helps year 1, costs year 2; first to cut. Placebo: $71 vs $36 for random-day longs in the same window, so about half is general overnight drift. Bootstrap Sharpe interval includes zero (P ≤ 0: 9%, 14% since 2023) |
 | Opening Drive | Strategy (old research set) | 1,352 trades, 41% win, PF 1.23, MC-confirmed | Superseded by the current challenge pair |
 | Turn of the month | Strategy | +$376, t = 2.0 (t = 3.7 with stop) | Weak 2018–22; hurts funded payouts at any size |
@@ -129,6 +130,9 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 
 | Item | Type | Result |
 |---|---|---|
+| Mega-cap earnings intraday shape on NQ (2026-10-14, `analysis/megacap_earnings_intraday_test.py`): run-up into after-close reports (report day 13:00–15:00 −$28, 8:30–15:00 −$97), first 30 minutes of the event session followed / faded 9:00–15:00 (−$130 / +$95, t 0.4; on other days follow +$110 t 1.7 = the known opening drive), dealer-gamma rule (fade the earnings-night move above the flip, follow below: +$262, t 0.4, only 65 sessions with GEX) | Event / calendar (NQ) | No edge beyond the D-tier 'sell the news' short |
+| CL round 3 (2026-10-14, `analysis/cl_round3_test.py`): Friday pre-weekend 8:00–13:29 (long −$3, short −$52, fade the week −$81 t −1.5; Tue–Thu placebo +$14), Monday after the Sunday up-gap fade 9:00–13:29 (continue short −$38, long −$17; fade worked / failed splits −$136 / −$227), overnight 16:00–8:00 (long −$18, short −$36), day 8:00–13:29 long −$49, London open follow 1:00–2:00 into 2:00–4:00 −$33 (t −2.6) / fade −$22 | Forced flows (CL) | No second CL edge; the Sunday up-gap fade stands alone |
+| Plan-combination ideas (2026-10-14, `analysis/plan_agreement_test.py`): agreement with earlier same-day plan trades (pooled z: same side +0.14, opposite +0.19, none +0.15: no effect), sizing by trailing 5 / 20-day plan P&L (after up +0.25 / +0.20 z, after down +0.18 / +0.32: no momentum) | Sizing / filters | Only the VB-after-ONB-long cell (C) stands out |
 | VWAP always-in, 1-minute (Zarattini & Aziz) | Paper / strategy | −$1 a trade; costs $17 vs edge $6 |
 | Fading big intraday moves | Strategy | Loses in every setting (PF 0.71–0.95) |
 | Round numbers (fade or break) | Strategy | PF 0.59–0.95 |
