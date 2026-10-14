@@ -81,7 +81,7 @@ Beta from A to Z (textbook, `analysis/beta_pairs_test.py`): Kalman / cointegrati
 no short-run over-reaction, spreads keep diverging from extremes (F). NQ-on-ES hedge ratio ~1.2 at every horizon.
 Fast-alpha execution overlay (Concretum 2026, `analysis/fast_alpha_test.py`): waiting for a 5-min counter bar costs every plan
 strategy except NFP (VB -$32, LDF -$69, EOS -$250 a trade), same as random delays: keep market entries (F).
-Market Intraday Momentum (Gao et al., SSRN 2440866, `analysis/intraday_momentum_test.py`): first half-hour -> last half-hour
+Market Intraday Momentum (Gao et al., SSRN 2440866, `analysis/gao_intraday_momentum_test.py`): first half-hour -> last half-hour
 is gone on NQ / ES 2018-26 (out-of-sample R2 < 0, timing -$28 a trade); LDF's 14:30 exit confirmed (F).
 
 ## Apex rules confirmed (2026-10-13)

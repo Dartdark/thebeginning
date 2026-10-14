@@ -1288,7 +1288,7 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
 the same direction as the morning. That is a flow story close to our Late-Day Flow (follow a big 8:30 → 14:00 move
 from 14:00 to 14:30). **Foundation?** Yes in principle: a fixed-time Apex-legal trade, 14:30 → 15:00 CT.
 
-Code `../analysis/intraday_momentum_test.py` (output in `..._output.txt`). r1 = previous 15:00 CT close → 9:00,
+Code `../analysis/gao_intraday_momentum_test.py` (output in `..._output.txt`). r1 = previous 15:00 CT close → 9:00,
 r12 = 14:00 → 14:30, r13 = 14:30 → 15:00. NQ and ES 2018–2026, 1 contract, $7.25 ($5 ES) + 1 tick a fill.
 - **The predictability is gone.**
   - NQ r1 slope t 0.96, R² 0.3% (2018–22 t 1.1, 2023–26 t −0.7). r12 t 1.4 (2023–26 t 0.1). Both together R²
