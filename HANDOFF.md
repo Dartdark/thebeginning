@@ -1,5 +1,8 @@
 # Handoff: NQ strategies for Apex 50K (paste into a new chat)
 
+**Latest state (2026-10-14): read `NEW_CHAT_BRIEF.md` first.** It supersedes the older plan sections below (the
+combine is now 4 strategies with ONB ADX30, and the funded plan has 8 including the CL Sunday Gap Fade).
+
 I'm building NQ strategies in MultiCharts (PowerLanguage) to pass Apex 50K challenges
 (EOD trailing: $3,000 target, $2,000 trailing drawdown that locks at start + $100, $1,000
 daily loss limit, 21 trading days, $50 per account). Apex only; ignore Topstep.
@@ -185,7 +188,7 @@ OND $500, EOS $500 -> $6,928 within 1 year, $8,379 within 2 years, 34% blown (MC
 Next step needs 1-minute 24-hour exports of GC, CL, ES (NQ_Bar_Exporter, StartTime 0,
 EndTime 2359, FilePrefix e.g. GC_1min_) into data/.
 
-## Current plan (decided)
+## Current plan (decided) — SUPERSEDED (2026-10-12 version; see `NEW_CHAT_BRIEF.md` for the live combine and funded plans)
 One Apex account at a time, running two strategies together, both on **MNQ**, each in
 its **own chart window**, **CME 24-hour session**, Exchange time zone (CT), Bar Magnifier
 on at 1 minute for backtests:
