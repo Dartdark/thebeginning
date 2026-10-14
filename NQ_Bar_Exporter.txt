@@ -15,7 +15,9 @@
 
   Use: create the folder first (e.g. C:\NQdata), then add this indicator to
   a 1-minute @NQ chart (Exchange time zone) loaded back to 12/01/2017. The
-  files are complete once the chart has finished calculating. Every time the
+  files are complete once the chart has finished calculating. For full-day
+  exports of other markets use StartTime 0 and EndTime 2359, and set Decimals
+  to the contract's precision (ZN 6, 6E 5). Every time the
   indicator recalculates, the files are deleted and written again from the
   start, so they never contain duplicate rows. }
 
@@ -23,7 +25,8 @@ Inputs:
 	Folder("C:\NQdata\"),   { must already exist; keep the trailing backslash }
 	FilePrefix("NQ_1min_"),
 	StartTime(800),          { first bar close time written (CT) }
-	EndTime(1515);           { last bar close time written (CT); earlier than StartTime = past midnight }
+	EndTime(1515),           { last bar close time written (CT); earlier than StartTime = past midnight }
+	Decimals(2);             { price decimals: 2 for NQ / ES / GC / CL, 6 for ZN (1/64 ticks), 5 for 6E }
 
 Variables:
 	FileName(""), BarYear(0), LastYear(0), Row(""), Y(0), InWindow(false);
@@ -48,8 +51,8 @@ if BarStatus(1) = 2 and InWindow then begin
 		LastYear = BarYear;
 	end;
 	Row = NumToStr(Date + 19000000, 0) + "," + NumToStr(Time, 0) + ","
-		+ NumToStr(Open, 2) + "," + NumToStr(High, 2) + ","
-		+ NumToStr(Low, 2) + "," + NumToStr(Close, 2) + ","
+		+ NumToStr(Open, Decimals) + "," + NumToStr(High, Decimals) + ","
+		+ NumToStr(Low, Decimals) + "," + NumToStr(Close, Decimals) + ","
 		+ NumToStr(Ticks, 0);
 	FileAppend(FileName, Row + NewLine);
 end;
