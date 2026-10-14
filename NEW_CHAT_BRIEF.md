@@ -98,6 +98,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   - CL round 3 (Friday, Monday after the fade, overnight, London open): F. The Sunday up-gap fade stands alone.
   - Plan combination: Vault Break after an Overnight Bias ML long earns $214 vs $64 (t 2.55), but the funded bench says
     extra VB on those days lowers payouts and raises blow-ups at every size (+1 MNQ $9,519 vs $9,818; +2 blown 12%): D.
+  - YM's own events (Dow heavyweight earnings, ZN overnight / lead-lag / shocks): F (`analysis/ym_dow_events_test.py`).
   - BTC short-only euphoria fades (multi-day / overnight / intraday spike / heavy-volume / round numbers): F.
   - Funded bench rebuilt this session (numba, build_lab, s_rank_gap_round2 + gy / btc grids): reproduces the documented numbers.
 - **Next research (needs data from the user):**
