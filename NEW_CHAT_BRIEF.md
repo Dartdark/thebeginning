@@ -90,6 +90,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     (`analysis/morning_afternoon_test.py`).
   - Maroy 2025 exits (SSRN 5095349) on Vault Break: the VWAP exit looked better in Python but **MultiCharts did not
     confirm** (target on $4,947 / yr, Sharpe 1.29; off $5,849, 1.00; live VB $5,341, 1.35): D. Live VB unchanged.
+  - Mesfin 2026 MNQ falsification study (SSRN 6709401): F; its London Signal B only works with a look-ahead entry
+    (`analysis/london_signal_b_test.py`).
 - **Next research (needs data from the user):**
   - Closing-imbalance or options open-interest data for ES.
   - Without new data, the clock flows on GC / ES / YM / BTC are exhausted.
