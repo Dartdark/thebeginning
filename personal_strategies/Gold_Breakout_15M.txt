@@ -1,0 +1,134 @@
+{ Gold Breakout 15M - MultiCharts PowerLanguage signal (personal account, NOT for Apex)
+
+  Written 2026-10-14 from the user's TradingView description. Python test on GC 2018-2026 (analysis/gold_breakout_15m_test.py):
+  2,228 trades, $138 per GC (PF 1.23, t 3.1, 7/9 years), longs $195 / shorts $80, a random side on the same days -$30;
+  max drawdown ~$43k per GC (~$4.3k per MGC); 2018-22 only $34 a trade vs $277 in 2023-26 (gold's bull run).
+  It LOWERS the Apex funded plan (bench: + 1 MGC blows 9% of accounts vs 4%) - use it on a personal account only.
+
+  RULES (chart in EXCHANGE time = Central Time; the description's "New York + 7h" broker clock = CT + 8h all year):
+    Range      high / low of the bars that OPEN from RangeStart to RangeEnd (default 16:00 -> 23:00 CT = broker 00:00 -> 07:00;
+               gold reopens 17:00 CT, so in practice 17:00 -> 23:00). It restarts every session.
+    Entries    after the range: a buy stop at the range high AND a sell stop at the range low; the first fill wins and no
+               second trade is taken that session. Entries only while the next bar opens before ExitTime.
+               If price is already through a level at the bar close, that side enters at market instead (a stop on the
+               wrong side of the market is rejected live - the Rithmic "Invalid StopMarket" error).
+    Stop       StopMode 1: SLPct % of the fill price (default 1%). StopMode 2: the opposite side of the range.
+    Exit       no target; the stop, or at market on the first bar that opens at/after ExitTime (default 12:00 CT = broker 20:00).
+    Size       contracts = floor( min( equity x RiskPct% / (stop distance x point value),
+                                       equity x MaxLeverage / (price x point value) ) ), equity = AccountSize + closed P&L.
+               If that is below 1 contract the side is skipped. FixedContracts > 0 overrides the sizing.
+               With a $50k account, 1% risk and a 1% stop on gold near $4,000: GC risks $4,000 per contract (0 contracts),
+               MGC $400 (1 contract) - so run it on MGC unless the account is large.
+    Guard      UseEquityGuard: flat and no more trading until the next range when the session's drawdown from its equity
+               peak (estimated at the bar close from the bar's adverse extreme) reaches GuardPct %.
+    Alerts     SendAlerts: a MultiCharts alert (enable alerts in Format Signal -> Alerts: pop-up / sound / e-mail) on every
+               entry and exit with side, price, size and stop. MultiCharts has no native webhooks.
+
+  SETUP: 15-minute GC or MGC chart, Exchange time zone, CME 24-hour (Globex) session, at least 2 sessions loaded.
+  Backtest with Bar Magnifier on (1 minute). Format -> Strategy Properties: costs $7.25 / contract (GC) or your MGC rate,
+  slippage 1 tick. If a single 15-minute bar spans the whole range after a fill, MultiCharts can reverse into the other
+  side on that bar (no native one-cancels-other inside a bar); with Bar Magnifier this is rare. }
+
+Inputs:
+	RangeStart(1600),       { first range bar OPENS at this time (CT); 1600 = broker 00:00 }
+	RangeEnd(2300),         { range ends when bars open at this time (CT); 2300 = broker 07:00 }
+	ExitTime(1200),         { flat on the first bar opening at/after this time (CT); 1200 = broker 20:00 }
+	StopMode(1),            { 1 = % of the fill, 2 = opposite range edge }
+	SLPct(1.0),             { stop distance in % of price (StopMode 1) }
+	RiskPct(1.0),           { % of equity risked per trade }
+	MaxLeverage(10),        { notional cap: contracts x price x point value <= equity x MaxLeverage }
+	AccountSize(50000),     { starting equity of the account the signal sizes for }
+	FixedContracts(0),      { > 0 = trade this many contracts and ignore the risk sizing }
+	MaxContracts(50),       { hard cap }
+	UseEquityGuard(false),
+	GuardPct(4.0),
+	SendAlerts(true);
+
+Variables:
+	InRange(false), RH(0), RL(0), Ready(false), Traded(false), Halted(false),
+	MP(0), Eq(0), EqClose(0), WorstEq(0), PeakEq(0),
+	DistL(0), DistS(0), QtyL(0), QtyS(0), CanTrade(false), StopPts(0);
+
+MP = MarketPosition;
+
+{ ---------- range: bars closing after RangeStart and up to RangeEnd (= bars opening in [RangeStart, RangeEnd)) ---------- }
+InRange = Time > RangeStart and Time <= RangeEnd;
+if InRange and (CurrentBar = 1 or InRange[1] = false) then begin       { a new session's range starts }
+	RH = High; RL = Low; Ready = false; Traded = false; Halted = false;
+	PeakEq = AccountSize + NetProfit + OpenPositionProfit;
+end
+else if InRange then begin
+	RH = MaxList(RH, High); RL = MinList(RL, Low);
+end;
+if CurrentBar > 1 and InRange = false and InRange[1] and RH > RL then Ready = true;   { range complete }
+if Time >= ExitTime and Time <= RangeStart then Ready = false;                       { trading window over }
+
+{ one trade a session, also when it opened and closed inside the same bar }
+if MP <> 0 or TotalTrades > TotalTrades[1] then Traded = true;
+
+{ ---------- size ---------- }
+Eq = AccountSize + NetProfit;
+if StopMode = 1 then begin
+	DistL = RH * SLPct / 100; DistS = RL * SLPct / 100;
+end
+else begin
+	DistL = RH - RL; DistS = RH - RL;
+end;
+QtyL = 0; QtyS = 0;
+if DistL > 0 and RH > 0 then
+	QtyL = Floor(MinList(Eq * RiskPct / 100 / (DistL * BigPointValue), Eq * MaxLeverage / (RH * BigPointValue)));
+if DistS > 0 and RL > 0 then
+	QtyS = Floor(MinList(Eq * RiskPct / 100 / (DistS * BigPointValue), Eq * MaxLeverage / (RL * BigPointValue)));
+if FixedContracts > 0 then begin QtyL = FixedContracts; QtyS = FixedContracts; end;
+QtyL = MinList(QtyL, MaxContracts); QtyS = MinList(QtyS, MaxContracts);
+
+{ ---------- stop-loss (per contract, measured from the actual fill by MultiCharts) ---------- }
+SetStopContract;
+if StopMode = 1 then begin
+	if MP <> 0 then StopPts = EntryPrice * SLPct / 100 else StopPts = RH * SLPct / 100;
+end
+else
+	StopPts = RH - RL;
+if StopPts > 0 then SetStopLoss(StopPts * BigPointValue);
+
+{ ---------- equity guard (session drawdown from its peak, estimated at the bar close) ---------- }
+if UseEquityGuard then begin
+	EqClose = AccountSize + NetProfit + OpenPositionProfit;
+	if MP > 0 then WorstEq = EqClose - (Close - Low) * CurrentContracts * BigPointValue
+	else if MP < 0 then WorstEq = EqClose - (High - Close) * CurrentContracts * BigPointValue
+	else WorstEq = EqClose;
+	if PeakEq > 0 and (PeakEq - WorstEq) / PeakEq * 100 >= GuardPct then begin
+		Halted = true;
+		if MP > 0 then Sell ("GB Guard L") next bar at market;
+		if MP < 0 then BuyToCover ("GB Guard S") next bar at market;
+	end;
+	PeakEq = MaxList(PeakEq, EqClose);
+end;
+
+{ ---------- entries ---------- }
+CanTrade = Ready and Traded = false and Halted = false and (Time >= RangeEnd or Time < ExitTime);
+if MP = 0 and CanTrade then begin
+	if QtyL >= 1 then begin
+		if Close >= RH then Buy ("GB Long M") QtyL contracts next bar at market
+		else Buy ("GB Long") QtyL contracts next bar at RH stop;
+	end;
+	if QtyS >= 1 then begin
+		if Close <= RL then SellShort ("GB Short M") QtyS contracts next bar at market
+		else SellShort ("GB Short") QtyS contracts next bar at RL stop;
+	end;
+end;
+
+{ ---------- time exit ---------- }
+if MP > 0 and Time >= ExitTime and Time <= RangeStart then Sell ("GB Time L") next bar at market;
+if MP < 0 and Time >= ExitTime and Time <= RangeStart then BuyToCover ("GB Time S") next bar at market;
+
+{ ---------- alerts ---------- }
+if SendAlerts and CurrentBar > 1 then begin
+	if MP <> 0 and MP[1] = 0 then
+		Alert("Gold Breakout ENTRY " + IffString(MP > 0, "LONG", "SHORT") + " " + NumToStr(CurrentContracts, 0)
+			+ " @ " + NumToStr(EntryPrice, 2) + " stop " + NumToStr(IFF(MP > 0, EntryPrice - StopPts, EntryPrice + StopPts), 2)
+			+ " range " + NumToStr(RL, 2) + "-" + NumToStr(RH, 2));
+	if MP = 0 and MP[1] <> 0 then
+		Alert("Gold Breakout EXIT " + IffString(MP[1] > 0, "LONG", "SHORT") + " @ " + NumToStr(Close, 2)
+			+ " closed P&L " + NumToStr(NetProfit, 0));
+end;
