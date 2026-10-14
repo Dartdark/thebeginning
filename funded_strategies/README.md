@@ -1274,6 +1274,47 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
   profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
   awkward there in any case.
 
+## Gamma × intraday momentum (2026-10-14, user's idea): no forced momentum into the close; Late-Day Flow is stronger below the flip (watch)
+
+**Idea.** Dealer gamma hedging is a forced flow (Baltussen, Da, Lammers & Martens 2021; Barbon et al. 2021). Short
+gamma, dealers must trade with the day's move, mostly near the close, so the move should continue. Long gamma, it
+should revert. If that holds, the gamma regime could revive the intraday momentum that is gone on average since 2018
+(Gao et al., Baltussen et al.).
+
+Code `../analysis/gamma_momentum_test.py` (output in `..._output.txt`).
+- **Bridge data:** 0DTE NDX gamma flip from The Bridge, using only days with that day's own data. 634 sessions,
+  2023-03-28 → 2026-07-07. At 14:30 the price is above the flip 59% of the time, below 33%. Design to 2024, holdout
+  2025–26.
+- **SqueezeMetrics:** previous-day S&P GEX, 2018–26.
+- **Costs:** 1 NQ, $17.25 a round trip.
+
+Results:
+- **Last half-hour (14:30 → 15:00), following the day's move:**
+  - Following the move since the previous close loses in every regime: all −$110 (t −2.5), below the flip −$141
+    (t −1.8), above −$104.
+  - Below minus above −$37; shuffled-regime placebo p 0.67.
+  - Below the flip on down days, where dealers should be selling into the close, it's the worst: −$201 (t −2.2).
+  - Distance to the flip changes nothing.
+  - So the short-gamma momentum the papers describe is **not** in NQ's last half-hour.
+- **Fading the last half-hour** makes $75 (t 1.7) in both halves of 2023–26, about the same above the flip ($70).
+  It isn't a gamma effect. By year on all days it loses 2018–23 (−$3 to −$139) and is positive only in 2024 ($58) and
+  2025 ($153).
+- **SqueezeMetrics GEX, 2018–26:** follow after GEX < 0 +$102 (t 1.1, only 18 trades since 2023), and after the top
+  20% −$69 (t −2.7). Fading after the top 20% makes $35 (t 1.4). That's the same picture as the earlier "gamma
+  last 30" test (t 1.4, lowered funded payouts).
+- **The Late-Day Flow window (14:00 → 14:30) is where gamma matters:**
+  - Following the 8:30 → 14:00 move every day: below the flip at 14:00 $127 a trade (t 2.0), above $28 (t 0.8).
+    Below beats above in both halves (design $64 vs −$9, holdout $193 vs $70). Placebo p 0.09.
+  - On the actual MultiCharts trades: LDF below the flip $158 (PF 1.64, t 2.0; design $134, holdout $183), above
+    $36 (PF 1.15; $33 / $40).
+  - Holding LDF on to 15:00 below the flip loses (−$163 gross, t −1.5), so the 14:30 exit stays.
+- **Verdict:**
+  - **F for gamma-conditioned end-of-day momentum** (14:30 → 15:00).
+  - **C (watch) for sizing Late-Day Flow by the flip:** about 2 MNQ below the flip vs 1 above. Consistent in both
+    halves, but p 0.09 on 2.3 years, and the funded bench can't test it before 2023. It would also need the
+    Bridge's flip live at 14:00 (`OFB_Get`).
+  - Revisit once another year of gamma data is in.
+
 ## Market Intraday Momentum (Gao, Han, Li & Zhou 2018, SSRN 2440866; user's upload 2026-10-14): gone on NQ / ES since 2018
 
 **What it is.** On SPY 1993–2013, the first half-hour return predicts the last half-hour return.

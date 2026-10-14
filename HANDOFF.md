@@ -83,6 +83,8 @@ Fast-alpha execution overlay (Concretum 2026, `analysis/fast_alpha_test.py`): wa
 strategy except NFP (VB -$32, LDF -$69, EOS -$250 a trade), same as random delays: keep market entries (F).
 Market Intraday Momentum (Gao et al., SSRN 2440866, `analysis/gao_intraday_momentum_test.py`): first half-hour -> last half-hour
 is gone on NQ / ES 2018-26 (out-of-sample R2 < 0, timing -$28 a trade); LDF's 14:30 exit confirmed (F).
+Gamma x intraday momentum (`analysis/gamma_momentum_test.py`): no momentum into the close below the 0DTE flip (F), but LDF earns
+$158 below the flip vs $36 above (both halves, p 0.09): watch item for sizing LDF by the flip (C).
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily
