@@ -1,0 +1,99 @@
+Gold Asian-range breakout: exit management (user's request 2026-10-14, "there must be a way to optimize it").
+
+1. All 32 versions, sorted by 2018-22 t (R per trade = net / range $)
+                                  n   win      R      t  R_18_22  t_18_22  R_23_26  yrs  streak  worst20R
+version                                                                                                  
+out 1200, BE off, target none  1804 0.380  0.091  2.178    0.071    1.260    0.119  7/9      17   -16.488
+out 1200, BE on , target 3.0   1804 0.298  0.071  2.237    0.050    1.179    0.100  6/9      19   -14.967
+out 1200, BE on , target none  1804 0.282  0.080  2.166    0.058    1.156    0.111  7/9      28   -16.145
+out 1000, BE off, target none  1804 0.384  0.078  1.983    0.060    1.141    0.103  7/9      19   -15.332
+out 1200, BE off, target 3.0   1804 0.391  0.070  2.005    0.053    1.135    0.094  7/9      17   -15.864
+out 1000, BE on , target none  1804 0.296  0.069  1.949    0.053    1.110    0.091  6/9      19   -15.035
+out 0725, BE off, target none  1804 0.448  0.037  1.296    0.041    1.050    0.031  6/9      10   -12.750
+out 0725, BE on , target none  1804 0.395  0.041  1.501    0.039    1.025    0.045  7/9      10   -12.750
+out 0725, BE off, target 1.5   1804 0.472  0.031  1.285    0.030    0.942    0.031  6/9      10   -12.679
+out 1000, BE off, target 3.0   1804 0.393  0.059  1.732    0.039    0.874    0.085  7/9      12   -15.332
+out 1000, BE on , target 3.0   1804 0.307  0.058  1.871    0.035    0.864    0.088  6/9      19   -15.035
+out 1000, BE off, target 1.5   1804 0.456  0.055  2.019    0.029    0.820    0.091  7/9       9   -13.529
+out 1200, BE off, target 1.5   1804 0.462  0.060  2.153    0.030    0.816    0.101  6/9      12   -13.988
+out 1000, BE on , target 1.5   1804 0.403  0.055  2.130    0.027    0.790    0.095  5/9      12   -13.231
+out 0725, BE off, target 3.0   1804 0.448  0.028  1.053    0.028    0.768    0.029  6/9      10   -12.750
+out 1000, BE off, target 2.0   1804 0.416  0.045  1.499    0.028    0.712    0.068  6/9      12   -16.224
+out 1200, BE off, target 2.0   1804 0.417  0.047  1.534    0.029    0.709    0.073  6/9      13   -16.391
+out 1200, BE on , target 1.5   1804 0.403  0.058  2.229    0.024    0.709    0.106  5/9      12   -13.231
+out 0725, BE on , target 3.0   1804 0.397  0.033  1.256    0.024    0.678    0.045  6/9      10   -12.750
+out 0725, BE off, target 2.0   1804 0.456  0.021  0.851    0.023    0.673    0.019  6/9      10   -12.328
+out 1200, BE on , target 2.0   1804 0.337  0.053  1.863    0.024    0.652    0.092  5/9      17   -14.217
+out 0725, BE on , target 1.5   1804 0.437  0.029  1.271    0.019    0.614    0.044  6/9      10   -12.679
+out 1000, BE on , target 2.0   1804 0.343  0.047  1.691    0.021    0.586    0.082  5/9      17   -14.356
+out 0725, BE on , target 2.0   1804 0.408  0.022  0.888    0.013    0.384    0.034  5/9      10   -12.179
+out 0500, BE off, target none  1804 0.477 -0.002 -0.109   -0.001   -0.023   -0.005  5/9      12   -12.263
+out 0500, BE off, target 1.5   1804 0.487  0.001  0.036   -0.002   -0.054    0.004  5/9      12   -12.334
+out 0500, BE on , target none  1804 0.447 -0.001 -0.067   -0.004   -0.142    0.002  5/9      12   -12.263
+out 0500, BE on , target 1.5   1804 0.463  0.001  0.051   -0.004   -0.154    0.008  5/9      12   -12.334
+out 0500, BE off, target 2.0   1804 0.481 -0.002 -0.095   -0.005   -0.186    0.003  5/9      12   -12.263
+out 0500, BE off, target 3.0   1804 0.477 -0.004 -0.174   -0.007   -0.231    0.000  5/9      12   -12.263
+out 0500, BE on , target 3.0   1804 0.447 -0.002 -0.109   -0.010   -0.330    0.008  5/9      12   -12.263
+out 0500, BE on , target 2.0   1804 0.453 -0.003 -0.131   -0.012   -0.430    0.010  5/9      12   -12.263
+   versions positive in 2018-22: 24/32, of those positive in 2023-26: 24; Spearman 2018-22 vs 2023-26 R across versions +0.77
+
+2. Pick by 2018-22: out 1200, BE off, target none (reference = filter B as before: out 1000, BE off, target none)
+                              trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+out 1000, BE off, target none   1804 38% $113 $22,483   0.78    1.32          1.22 $34,234   0.66  6.63       6.78
+  longs                          914 41% $121 $12,200   0.72    1.22          1.25 $26,526   0.46 12.68       1.92
+  shorts                         890 36% $105 $10,283   0.44    0.75          1.19 $38,509   0.27  7.75       2.65
+      R by year: 2018 +0.145 | 2019 -0.157 | 2020 +0.220 | 2021 +0.040 | 2022 +0.069 | 2023 -0.042 | 2024 +0.147 | 2025 +0.137 | 2026 +0.203
+                              trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+out 1200, BE off, target none   1804 38% $141 $28,112   0.88    1.63          1.26 $34,779   0.81  6.51       8.64
+  longs                          914 39% $113 $11,432   0.64    1.09          1.22 $35,586   0.32 16.69       1.37
+  shorts                         890 37% $170 $16,680   0.63    1.22          1.30 $38,509   0.43  6.12       5.45
+      R by year: 2018 +0.136 | 2019 -0.151 | 2020 +0.262 | 2021 +0.049 | 2022 +0.077 | 2023 -0.035 | 2024 +0.232 | 2025 +0.090 | 2026 +0.220
+                                                    actual        p5       p50       p95
+name                                metric                                              
+out 1000, BE off, target none 2023+ sharpe            0.95      0.30      0.97      1.63
+                                    sortino           1.58      0.44      1.63      3.19
+                                    pf_day            1.26      1.08      1.26      1.46
+                                    calmar            1.14      0.21      1.01      2.54
+                                    ulcer             9.69      4.39     10.41     32.94
+                                    max_dd       34,234.00 22,084.29 38,206.25 68,116.45
+                                    P(Sharpe<=0)       NaN       NaN      0.01       NaN
+out 1200, BE off, target none 2023+ sharpe            1.09      0.56      1.11      1.70
+                                    sortino           1.97      0.95      2.02      3.47
+                                    pf_day            1.31      1.15      1.32      1.52
+                                    calmar            1.42      0.48      1.43      2.88
+                                    ulcer             9.90      4.22      8.61     21.92
+                                    max_dd       34,779.25 22,975.64 33,904.00 57,405.10
+                                    P(Sharpe<=0)       NaN       NaN      0.00       NaN
+                                    actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+out 1000, BE off, target none 2023+   $34,234       4% $49,531 $77,945 $92,437        100%        100%        100%
+out 1200, BE off, target none 2023+   $34,779       5% $49,934 $79,276 $94,821        100%        100%        100%
+   placebo (same fills, random side, 10 runs): +0.020 R (-0.015..+0.078) vs +0.091
+
+3. Funded bench (plan + gold on MGC)
+   current plan                                             1y $9,313 2y $12,569 blown 2% / 1%
+   + out 1200, BE off, target none, 1 MGC                   1y $9,129 2y $12,285 blown 6% / 4%
+   + out 1200, BE off, target none, 2 MGC                   1y $8,516 2y $11,547 blown 13% / 10%
+   + out 1200, BE off, target none, risk $75                1y $9,252 2y $12,449 blown 4% / 3%
+   + out 1200, BE on , target 3.0, 1 MGC                    1y $9,006 2y $12,377 blown 6% / 3%
+   + out 1200, BE on , target 3.0, 2 MGC                    1y $8,754 2y $12,159 blown 8% / 5%
+   + out 1200, BE on , target 3.0, risk $75                 1y $9,119 2y $12,679 blown 2% / 1%
+   + out 1200, BE on , target none, 1 MGC                   1y $9,025 2y $12,294 blown 6% / 4%
+   + out 1200, BE on , target none, 2 MGC                   1y $8,496 2y $11,304 blown 13% / 11%
+   + out 1200, BE on , target none, risk $75                1y $9,121 2y $12,383 blown 4% / 3%
+   + out 1000, BE off, target none, 1 MGC                   1y $8,997 2y $12,239 blown 6% / 4%
+   + out 1000, BE off, target none, 2 MGC                   1y $8,440 2y $11,432 blown 12% / 10%
+   + out 1000, BE off, target none, risk $75                1y $9,124 2y $12,239 blown 5% / 4%
+                                          full6m full1y full2y median if_done blown per_month   exp3y max_mnq
+current plan                                  0%    47%    94%    255     255    0%      $871 $13,000      66
++ out 1200, BE off, target none, 1 MGC        0%    46%    90%    258     254    3%      $886 $12,589      67
++ out 1200, BE off, target none, 2 MGC        4%    48%    88%    256     248    6%      $904 $12,227      68
++ out 1200, BE off, target none, risk $75     0%    46%    93%    257     255    3%      $871 $12,630      69
++ out 1200, BE on , target 3.0, 1 MGC         2%    41%    92%    274     271    3%      $868 $12,649      67
++ out 1200, BE on , target 3.0, 2 MGC         4%    41%    91%    267     265    2%      $870 $12,736      68
++ out 1200, BE on , target 3.0, risk $75      0%    36%    95%    273     273    0%      $852 $13,000      69
++ out 1200, BE on , target none, 1 MGC        1%    44%    91%    263     259    3%      $876 $12,629      67
++ out 1200, BE on , target none, 2 MGC        4%    43%    85%    269     258    9%      $875 $11,911      68
++ out 1200, BE on , target none, risk $75     0%    42%    92%    264     262    3%      $867 $12,630      69
++ out 1000, BE off, target none, 1 MGC        0%    43%    89%    264     261    3%      $863 $12,585      67
++ out 1000, BE off, target none, 2 MGC        4%    46%    88%    258     254    4%      $887 $12,439      68
++ out 1000, BE off, target none, risk $75     0%    44%    91%    259     257    3%      $865 $12,604      69

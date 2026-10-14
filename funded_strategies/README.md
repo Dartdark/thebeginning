@@ -1426,6 +1426,23 @@ Each was bucketed on 2018–22 only; only clear patterns were kept, then run onc
   - Risk-sized on the funded bench (same $ per trade, so more MGC): $3,416–7,618, blown 23–77%.
   - At fixed 1 MGC they look similar ($8,888–8,996), only because they risk less.
   - The breakouts need room: most of the stop-outs that 0.5× adds recover later in the morning. Keep the full range.
+- **Exit management (`../analysis/gold_breakout_exit_test.py`; 32 pre-registered versions on the filter-B trades,
+  chosen on 2018–22):** time exit 05:00 / 07:25 / 10:00 / 12:00 CT × breakeven after +1R on / off × target none /
+  1.5R / 2R / 3R.
+  - **Holding longer is the lever.** Out at 12:00: +0.091 R a trade (t 2.2; 2018–22 +0.071, 2023–26 +0.119), Sharpe
+    0.88 (2023+ 1.09, P ≤ 0 0%), PF 1.26, Sortino 1.63, Calmar 0.81, Ulcer 6.5. Longs $113, shorts $170 a trade.
+  - **Leaving early loses the edge:** out at 07:25 +0.037 R, out at 05:00 ≈ 0. The break keeps running through the
+    US morning.
+  - **Breakeven and targets don't help.** They raise the win rate (to 46–49%) and shorten streaks (9–12) but cut R
+    (targets 1.5R–3R: +0.03 to +0.07). Best with them: breakeven + 3R target, +0.071 R.
+  - **The grid is stable:** 24/32 versions positive in 2018–22, all 24 positive in 2023–26. Rank correlation of the
+    two periods across versions +0.77.
+  - **Placebo** (same fills, random side): +0.020 R (max +0.078) vs +0.091.
+  - **Funded bench** (plan $9,313 / $12,569, blown 2%, median 255 days):
+    - Out at 12:00 risk $75: $9,252 / $12,449, blown 4%.
+    - Breakeven + 3R target risk $75: $9,119 / $12,679, blown 2% / 1%, 3-year $13,000.
+    - 2 MGC out at 12:00: $904 a month recycled vs $871, median 256 days.
+    - So it's now roughly neutral to the plan, not yet a speed-up.
 - **Verdict:** C (filter B makes it a real, uncorrelated edge). It doesn't speed up the $13k at Apex sizes, so it
   stays on the watchlist (#6), recheck in 6 months. It could matter in a larger account or with a different payout
   rule.
