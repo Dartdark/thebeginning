@@ -1274,6 +1274,24 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
   profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
   awkward there in any case.
 
+## Cross-asset overnight signals (2026-10-14): gold, oil and bitcoin overnight say nothing new about NQ's day
+
+Code `../analysis/cross_asset_overnight_test.py` (output in `..._output.txt`).
+- **Features:** overnight z-scores (previous 15:00 CT → 8:25 CT, vs each market's trailing 60-day std) of gold, oil
+  and bitcoin; risk-off = gold − oil (and with bitcoin).
+- **Targets:** NQ 8:30 → 15:00, and the plan's VB, ONB ML v2, Late-Day Flow and Monday Long trades. Terciles from
+  trailing ranks.
+- **Bar:** 25 splits, so |t| ≥ 2.5 with the same sign in 2018–22 and 2023–26.
+- **Correlations overnight:** gold–NQ 0.11, oil–NQ 0.15, bitcoin–NQ 0.34 (ES–NQ 0.94).
+- **Results:**
+  - **0 of 25 splits pass.**
+  - The closest: ONB ML v2 after gold-up nights, $1,279 vs $393 after gold-down nights (t 2.0; 2018–22 t 1.3,
+    2023–26 t 1.6). Risk-off (gold − oil) gives the same split (t 1.7).
+  - Everything else |t| ≤ 1.1 over 2018–26.
+- **Controls:** NQ's own overnight move gives the one consistent result, VB better after an up night (t 2.5, both
+  periods +1.8). That's the known overnight-bias effect, not a cross-asset one.
+- **Verdict: F** as a filter. ONB-after-gold-up goes to the watchlist (#7).
+
 ## The plan's strategies on CL and GC (2026-10-14): none carries over
 
 Code `../analysis/commodity_plan_port_test.py` (output in `..._output.txt`). Same Python versions as the YM port. Prices

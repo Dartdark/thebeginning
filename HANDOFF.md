@@ -105,6 +105,8 @@ on real history. With the backtest edge, about $800 a month per slot, nearly lin
 $13k net after about 8 months). At 75% / 50% of the edge it's still positive over 3 years, but year one can be
 negative. Plan: start 3 slots, scale to 5-10 once live results are >= ~75% of the backtest per trade (`analysis/live_vs_backtest.py`).
 Check Apex's account limit and copier rules first. Details: `funded_strategies/FUNDED_PLAN.md` (last section).
+Live tracking: export live reports to `live/<KEY>_live.xlsx`, run `python3 analysis/live_vs_backtest.py --all live/` (see `live/README.md`).
+Cross-asset overnight (gold / oil / bitcoin) filters: 0 of 25 pass (`analysis/cross_asset_overnight_test.py`); ONB-after-gold-up on the watchlist (#7).
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily
