@@ -1274,6 +1274,56 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
   profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
   awkward there in any case.
 
+## Fast alphas as an execution overlay (Zarattini & Pagani, Concretum QuanTips #2, Feb 2026; user's upload 2026-10-14): hurts on NQ
+
+**What it is.** A 7-page research note on SPY 5-minute bars, 2007–26.
+- After a streak of N same-direction 5-minute bars, the next bar reverts by 0.1–0.4 bp: a "fast alpha".
+- Traded alone it makes CAGR 32% and Sharpe 2.1 before costs, and −0.7% after IBKR commissions.
+- So they use it as an overlay on a slow strategy, an intraday ATR breakout:
+  - enter when a 15-minute close is beyond the open ± 0.5 × ATR(14);
+  - stop when price closes back at the open;
+  - flat at the close.
+- With the overlay, the breakout enters only after a 5-minute bar against it, and a stop exits only after a 5-minute
+  bar in the trade's favour. Result: CAGR +2 pp, Sharpe 0.86 → 0.99.
+
+**Why it should make money.** You get a slightly better price on fills you would make anyway, which is a form of
+liquidity provision, without paying the turnover of the fast signal. **Foundation?** Not a strategy in itself, but it
+applies directly to every entry in our plans. So the useful test is our own trades, not only their breakout.
+
+Code `../analysis/fast_alpha_test.py` (output in `..._output.txt`). NQ 2018–2026, 8:30–15:00 CT, $7.25 + 1 tick a fill,
+1 NQ.
+- **The fast alpha exists on NQ, mostly after down bars.** After 1 / 2 / 3 down bars, the next 5-minute bar makes
+  +0.20 / +0.39 / +0.40 points (t 3.1 / 3.9 / 2.7), in both 2018–22 and 2023–26. After up bars it's −0.12 points
+  (t −2.0 to −1.1, close to 0 since 2023). Traded alone (always in, 39 round trips a day) it makes $6.27 gross a
+  round trip against $17.25 of costs, −$428 a day. That matches the paper.
+- **Their breakout on NQ:**
+  - **Baseline:** 1,325 trades, $128, PF 1.17, t 1.8, 6/9 years, Sharpe 0.62, max drawdown $52k per NQ. Shorts
+    $162, longs $95.
+  - **With the overlay on entries and exits:** $130, Sharpe 0.69. That looks like the paper's gain, but:
+    - entries alone make $124 (worse);
+    - exits alone make $134;
+    - the same delays at random (the control) make $122, so waiting for a counter bar adds about $1–8 a trade, inside
+      the noise;
+    - 2023–26: baseline $116, overlay $102;
+    - holdout Sharpe 0.45 vs 0.46, P(Sharpe ≤ 0) 18% both.
+- **The overlay on the plan's MultiCharts trades** (delay each entry to the first 5-minute bar against the trade,
+  median delay 10 minutes; exits unchanged):
+  - **Every forced-flow and breakout strategy gets worse.** Per trade:
+    - VB −$32 (t −3.4, $92 → $60);
+    - ONB ADX30 −$62 (t −2.5);
+    - ONB ML v2 −$27;
+    - Monday Long −$94 to −$119 (t −2.2 to −2.6);
+    - EOS −$244 to −$270 ($474 → about $225);
+    - LDF −$69 to −$73 (t −3.5 to −3.8, $95 → $23).
+  - Skipping trades with no counter bar is worse still, for example ONB ML −$244.
+  - Random delays of the same length cost about the same. So the loss is the waiting itself: these edges pay in the
+    first minutes after the entry time.
+  - Only the NFP Fade improves (+$16 to +$42, t ≤ 0.7, 79 trades; 2018–22 worse).
+- **Verdict: F.** The fast alpha is real on NQ but small. As an overlay it doesn't beat random waiting on their own
+  breakout, and it costs every plan strategy except NFP, because our entries are timed to forced flows that move
+  right away. Keep entering at market at the strategy's time. The ATR breakout itself (t 1.8, $52k drawdown) is a
+  D-tier opening-range breakout and isn't added.
+
 ## "Beta from A to Z" (Oct 2026 textbook, user's upload 2026-10-14): the pairs tools don't find an edge on NQ
 
 **What it is.** A 99-page textbook that proves beta estimation from scratch:

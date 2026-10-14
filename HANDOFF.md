@@ -79,6 +79,8 @@ intraday but two legs of costs eat it; the NQ leg is NQ's own opening momentum (
 design winners fail in 2023-26 (below random), the 101-alpha vote loses in the holdout (F).
 Beta from A to Z (textbook, `analysis/beta_pairs_test.py`): Kalman / cointegration pairs on NQ-ES and NQ-YM: not cointegrated,
 no short-run over-reaction, spreads keep diverging from extremes (F). NQ-on-ES hedge ratio ~1.2 at every horizon.
+Fast-alpha execution overlay (Concretum 2026, `analysis/fast_alpha_test.py`): waiting for a 5-min counter bar costs every plan
+strategy except NFP (VB -$32, LDF -$69, EOS -$250 a trade), same as random delays: keep market entries (F).
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily
