@@ -1,0 +1,324 @@
+S-rank program, CL round 1 (2026-10-14): crude oil's scheduled flows from S_RANK_PROGRAM.md, looking for an S strategy.
+trading days 2278 (2018-01-01 .. 2026-10-13), full sessions 2260, median ATR 2.01 pts ($2,010)
+export roll check: months with a >= $0.15 03:30-03:33 jump in the 8 days before LTD: 68 of 106; business days before LTD: {2: 31, 3: 13, 0: 7, 1: 6, 6: 5, 4: 4, 5: 2}
+   overnight trades skip 144 possible roll days (LTD - 2 and every detected jump day)
+
+1. API weekly inventory report, 15:30 CT Tuesday (Wednesday in Monday / Tuesday-holiday weeks)
+   API days 455; median |15:30 -> 15:35| $110 vs $20 other days; |15:30 -> 15:58| $130 vs $50
+   by year, median |15:30 -> 15:35| API / other: 2018:220/20 2019:190/10 2020:155/20 2021:135/20 2022:115/35 2023:70/20 2024:95/20 2025:50/20 2026:60/60
+   API follow the first 5 min, in 15:36, out 15:58                    n= 442 avg $  -20 PF 0.69 t -2.8 win 39% yrs+ 1/9 | 18-22 $  -17 (t -1.7) 23-26 $  -23 (t -2.3) | x-Apr20 $  -18
+      control: same on non-API Mon-Thu                                n=1113 avg $  -23 PF 0.57 t -5.2 win 35% yrs+ 0/9 | 18-22 $  -21 (t -4.4) 23-26 $  -27 (t -3.2) | x-Apr20 $  -24
+   API fade the first 5 min, in 15:36, out 15:58                      n= 442 avg $  -35 PF 0.50 t -4.9 win 42% yrs+ 1/9 | 18-22 $  -37 (t -3.8) 23-26 $  -32 (t -3.1) | x-Apr20 $  -36
+      control: same on non-API Mon-Thu                                n=1113 avg $  -31 PF 0.46 t -7.0 win 36% yrs+ 0/9 | 18-22 $  -34 (t -7.3) 23-26 $  -28 (t -3.4) | x-Apr20 $  -31
+   API follow the first 10 min, in 15:41, out 15:58                   n= 445 avg $  -29 PF 0.50 t -4.9 win 36% yrs+ 0/9 | 18-22 $  -25 (t -3.5) 23-26 $  -34 (t -3.4) | x-Apr20 $  -27
+      control: same on non-API Mon-Thu                                n=1175 avg $  -28 PF 0.47 t -7.7 win 33% yrs+ 0/9 | 18-22 $  -31 (t -7.4) 23-26 $  -24 (t -3.8) | x-Apr20 $  -28
+   API fade the first 10 min, in 15:41, out 15:58                     n= 445 avg $  -26 PF 0.54 t -4.4 win 37% yrs+ 1/9 | 18-22 $  -29 (t -4.0) 23-26 $  -21 (t -2.1) | x-Apr20 $  -27
+      control: same on non-API Mon-Thu                                n=1175 avg $  -26 PF 0.49 t -7.3 win 35% yrs+ 0/9 | 18-22 $  -24 (t -5.7) 23-26 $  -30 (t -4.7) | x-Apr20 $  -27
+   API follow the first 15 min, in 15:46, out 15:58                   n= 447 avg $  -31 PF 0.40 t -6.8 win 31% yrs+ 0/9 | 18-22 $  -31 (t -5.2) 23-26 $  -30 (t -4.3) | x-Apr20 $  -30
+      control: same on non-API Mon-Thu                                n=1184 avg $  -30 PF 0.39 t -9.3 win 31% yrs+ 0/9 | 18-22 $  -31 (t -8.5) 23-26 $  -29 (t -5.1) | x-Apr20 $  -30
+   API fade the first 15 min, in 15:46, out 15:58                     n= 447 avg $  -24 PF 0.48 t -5.3 win 36% yrs+ 1/9 | 18-22 $  -23 (t -3.9) 23-26 $  -24 (t -3.5) | x-Apr20 $  -25
+      control: same on non-API Mon-Thu                                n=1184 avg $  -24 PF 0.48 t -7.5 win 33% yrs+ 0/9 | 18-22 $  -23 (t -6.3) 23-26 $  -26 (t -4.5) | x-Apr20 $  -25
+   API: follow 15:30->1545, in 17:01, out next day 800                n= 421 avg $   29 PF 1.08 t  0.4 win 52% yrs+ 5/9 | 18-22 $  -59 (t -0.8) 23-26 $  150 (t  1.2) | x-Apr20 $   30
+      control non-API Mon-Thu: follow 15:30->1545, in 17:01, out next day 800 n=1084 avg $  -48 PF 0.89 t -1.2 win 49% yrs+ 3/9 | 18-22 $   -2 (t -0.0) 23-26 $ -108 (t -1.6) | x-Apr20 $  -58
+   API: follow 15:30->1545, in 17:01, out next day 900                n= 421 avg $   44 PF 1.10 t  0.6 win 51% yrs+ 6/9 | 18-22 $  -23 (t -0.3) 23-26 $  135 (t  1.0) | x-Apr20 $   36
+      control non-API Mon-Thu: follow 15:30->1545, in 17:01, out next day 900 n=1084 avg $  -58 PF 0.88 t -1.3 win 48% yrs+ 2/9 | 18-22 $   10 (t  0.2) 23-26 $ -147 (t -2.1) | x-Apr20 $  -69
+   API: follow 15:30->1545, in 17:01, out next day 929                n= 421 avg $   39 PF 1.09 t  0.6 win 52% yrs+ 5/9 | 18-22 $  -33 (t -0.4) 23-26 $  138 (t  1.1) | x-Apr20 $   35
+      control non-API Mon-Thu: follow 15:30->1545, in 17:01, out next day 929 n=1084 avg $  -46 PF 0.91 t -1.0 win 49% yrs+ 2/9 | 18-22 $   21 (t  0.4) 23-26 $ -134 (t -1.8) | x-Apr20 $  -58
+   API: fade 15:30->1545, in 17:01, out next day 800                  n= 421 avg $  -84 PF 0.81 t -1.2 win 45% yrs+ 3/9 | 18-22 $    5 (t  0.1) 23-26 $ -204 (t -1.6) | x-Apr20 $  -84
+      control non-API Mon-Thu: fade 15:30->1545, in 17:01, out next day 800 n=1084 avg $   -7 PF 0.98 t -0.2 win 50% yrs+ 5/9 | 18-22 $  -53 (t -1.1) 23-26 $   54 (t  0.8) | x-Apr20 $    4
+   API: fade 15:30->1545, in 17:01, out next day 900                  n= 421 avg $  -99 PF 0.80 t -1.4 win 45% yrs+ 2/9 | 18-22 $  -31 (t -0.4) 23-26 $ -190 (t -1.5) | x-Apr20 $  -91
+      control non-API Mon-Thu: fade 15:30->1545, in 17:01, out next day 900 n=1084 avg $    3 PF 1.01 t  0.1 win 49% yrs+ 6/9 | 18-22 $  -65 (t -1.2) 23-26 $   93 (t  1.3) | x-Apr20 $   14
+   API: fade 15:30->1545, in 17:01, out next day 929                  n= 421 avg $  -94 PF 0.81 t -1.3 win 46% yrs+ 2/9 | 18-22 $  -21 (t -0.3) 23-26 $ -193 (t -1.5) | x-Apr20 $  -89
+      control non-API Mon-Thu: fade 15:30->1545, in 17:01, out next day 929 n=1084 avg $   -8 PF 0.98 t -0.2 win 49% yrs+ 5/9 | 18-22 $  -75 (t -1.3) 23-26 $   80 (t  1.1) | x-Apr20 $    3
+   API: follow 15:30->1558, in 17:01, out next day 800                n= 415 avg $   74 PF 1.20 t  1.1 win 52% yrs+ 6/9 | 18-22 $   28 (t  0.4) 23-26 $  135 (t  1.1) | x-Apr20 $   71
+      control non-API Mon-Thu: follow 15:30->1558, in 17:01, out next day 800 n=1122 avg $  -83 PF 0.82 t -2.2 win 47% yrs+ 2/9 | 18-22 $  -34 (t -0.8) 23-26 $ -148 (t -2.3) | x-Apr20 $  -90
+   API: follow 15:30->1558, in 17:01, out next day 900                n= 415 avg $   80 PF 1.20 t  1.1 win 51% yrs+ 7/9 | 18-22 $    8 (t  0.1) 23-26 $  177 (t  1.4) | x-Apr20 $   78
+      control non-API Mon-Thu: follow 15:30->1558, in 17:01, out next day 900 n=1122 avg $  -66 PF 0.87 t -1.6 win 48% yrs+ 1/9 | 18-22 $   -9 (t -0.2) 23-26 $ -141 (t -2.0) | x-Apr20 $  -74
+   API: follow 15:30->1558, in 17:01, out next day 929                n= 415 avg $   82 PF 1.20 t  1.1 win 52% yrs+ 7/9 | 18-22 $   33 (t  0.4) 23-26 $  149 (t  1.1) | x-Apr20 $   77
+      control non-API Mon-Thu: follow 15:30->1558, in 17:01, out next day 929 n=1122 avg $  -80 PF 0.85 t -1.8 win 47% yrs+ 2/9 | 18-22 $  -25 (t -0.5) 23-26 $ -152 (t -2.1) | x-Apr20 $  -91
+   API: fade 15:30->1558, in 17:01, out next day 800                  n= 415 avg $ -128 PF 0.72 t -1.9 win 45% yrs+ 2/9 | 18-22 $  -83 (t -1.1) 23-26 $ -190 (t -1.5) | x-Apr20 $ -125
+      control non-API Mon-Thu: fade 15:30->1558, in 17:01, out next day 800 n=1122 avg $   29 PF 1.07 t  0.8 win 51% yrs+ 4/9 | 18-22 $  -20 (t -0.4) 23-26 $   93 (t  1.4) | x-Apr20 $   35
+   API: fade 15:30->1558, in 17:01, out next day 900                  n= 415 avg $ -135 PF 0.74 t -1.9 win 45% yrs+ 2/9 | 18-22 $  -62 (t -0.8) 23-26 $ -232 (t -1.8) | x-Apr20 $ -132
+      control non-API Mon-Thu: fade 15:30->1558, in 17:01, out next day 900 n=1122 avg $   11 PF 1.02 t  0.3 win 50% yrs+ 4/9 | 18-22 $  -45 (t -0.9) 23-26 $   86 (t  1.2) | x-Apr20 $   20
+   API: fade 15:30->1558, in 17:01, out next day 929                  n= 415 avg $ -137 PF 0.74 t -1.9 win 45% yrs+ 1/9 | 18-22 $  -87 (t -1.1) 23-26 $ -203 (t -1.6) | x-Apr20 $ -132
+      control non-API Mon-Thu: fade 15:30->1558, in 17:01, out next day 929 n=1122 avg $   25 PF 1.05 t  0.6 win 51% yrs+ 5/9 | 18-22 $  -29 (t -0.5) 23-26 $   97 (t  1.3) | x-Apr20 $   36
+   pre-API / pre-EIA drift
+   API day long 13:31 -> 15:29                                        n= 455 avg $    0 PF 1.00 t  0.0 win 48% yrs+ 4/9 | 18-22 $  -16 (t -0.8) 23-26 $   21 (t  0.6) | x-Apr20 $   -6
+      control non-API Mon-Thu long 13:31 -> 15:29                     n=1303 avg $  -14 PF 0.89 t -1.1 win 49% yrs+ 3/9 | 18-22 $  -26 (t -2.0) 23-26 $    1 (t  0.0) | x-Apr20 $  -18
+   API day short 13:31 -> 15:29                                       n= 455 avg $  -55 PF 0.60 t -3.0 win 41% yrs+ 0/9 | 18-22 $  -39 (t -2.1) 23-26 $  -75 (t -2.2) | x-Apr20 $  -49
+      control non-API Mon-Thu short 13:31 -> 15:29                    n=1303 avg $  -40 PF 0.72 t -3.0 win 42% yrs+ 1/9 | 18-22 $  -29 (t -2.2) 23-26 $  -56 (t -2.2) | x-Apr20 $  -37
+   API day follow 8:00->13:29 13:31 -> 15:29                          n= 452 avg $  -55 PF 0.60 t -3.0 win 43% yrs+ 0/9 | 18-22 $  -32 (t -1.7) 23-26 $  -84 (t -2.5) | x-Apr20 $  -50
+      control non-API Mon-Thu follow 8:00->13:29 13:31 -> 15:29       n=1296 avg $  -32 PF 0.77 t -2.4 win 45% yrs+ 1/9 | 18-22 $  -36 (t -2.8) 23-26 $  -27 (t -1.0) | x-Apr20 $  -33
+   overnight into EIA: long 17:01 (API evening) -> 9:29               n= 429 avg $   27 PF 1.06 t  0.4 win 51% yrs+ 5/9 | 18-22 $  144 (t  1.8) 23-26 $ -125 (t -1.0) | x-Apr20 $   21
+   overnight into EIA: short 17:01 (API evening) -> 9:29              n= 429 avg $  -82 PF 0.83 t -1.2 win 46% yrs+ 3/9 | 18-22 $ -199 (t -2.5) 23-26 $   71 (t  0.6) | x-Apr20 $  -76
+   -> API: pick by 2018-22 t = ('into EIA', 'long') (design t 1.8, 23 variants)
+   API pick ('into EIA', 'long')                                      n= 429 avg $   27 PF 1.06 t  0.4 win 51% yrs+ 5/9 | 18-22 $  144 (t  1.8) 23-26 $ -125 (t -1.0) | x-Apr20 $   21
+
+2. Commodity-index roll: short the front by business day of the month (business days = sessions with a settlement)
+   short night 17:01->8:00, BD 1-4                                    n= 409 avg $ -152 PF 0.72 t -2.1 win 43% yrs+ 4/9 | 18-22 $ -324 (t -4.1) 23-26 $   72 (t  0.6) | x-Apr20 $ -140
+   short night 17:01->8:00, BD 5-9 (GSCI)                             n= 522 avg $  -95 PF 0.79 t -1.5 win 44% yrs+ 0/9 | 18-22 $  -73 (t -1.1) 23-26 $ -125 (t -1.1) | x-Apr20 $  -98
+   short night 17:01->8:00, BD 6-10 (BCOM)                            n= 515 avg $ -121 PF 0.74 t -2.3 win 43% yrs+ 1/9 | 18-22 $  -46 (t -0.7) 23-26 $ -220 (t -2.8) | x-Apr20 $ -126
+   short night 17:01->8:00, BD 11+                                    n=1057 avg $   67 PF 1.19 t  1.8 win 50% yrs+ 7/9 | 18-22 $   64 (t  1.3) 23-26 $   71 (t  1.2) | x-Apr20 $   61
+      roll days (5-10) minus other days: t -1.6; BD 1-4 minus BD 11+: t -2.7
+   short day 8:01->13:29, BD 1-4                                      n= 417 avg $   92 PF 1.21 t  1.3 win 52% yrs+ 7/9 | 18-22 $  110 (t  1.2) 23-26 $   69 (t  0.7) | x-Apr20 $  100
+   short day 8:01->13:29, BD 5-9 (GSCI)                               n= 530 avg $   29 PF 1.06 t  0.5 win 48% yrs+ 5/9 | 18-22 $   37 (t  0.5) 23-26 $   18 (t  0.2) | x-Apr20 $   15
+   short day 8:01->13:29, BD 6-10 (BCOM)                              n= 529 avg $   40 PF 1.09 t  0.7 win 48% yrs+ 7/9 | 18-22 $   -7 (t -0.1) 23-26 $  101 (t  1.1) | x-Apr20 $   33
+   short day 8:01->13:29, BD 11+                                      n=1193 avg $  -63 PF 0.86 t -1.9 win 45% yrs+ 2/9 | 18-22 $  -80 (t -1.7) 23-26 $  -42 (t -0.9) | x-Apr20 $  -66
+      roll days (5-10) minus other days: t 1.0; BD 1-4 minus BD 11+: t 2.0
+   short roll hour 12:31->13:29, BD 1-4                               n= 411 avg $   18 PF 1.12 t  0.8 win 51% yrs+ 5/9 | 18-22 $   -3 (t -0.1) 23-26 $   46 (t  1.3) | x-Apr20 $   23
+   short roll hour 12:31->13:29, BD 5-9 (GSCI)                        n= 529 avg $   -4 PF 0.97 t -0.2 win 48% yrs+ 4/9 | 18-22 $    7 (t  0.3) 23-26 $  -20 (t -0.5) | x-Apr20 $  -13
+   short roll hour 12:31->13:29, BD 6-10 (BCOM)                       n= 529 avg $  -36 PF 0.79 t -1.7 win 47% yrs+ 2/9 | 18-22 $  -18 (t -0.7) 23-26 $  -59 (t -1.6) | x-Apr20 $  -42
+   short roll hour 12:31->13:29, BD 11+                               n=1178 avg $  -27 PF 0.83 t -2.1 win 43% yrs+ 2/9 | 18-22 $  -28 (t -1.5) 23-26 $  -27 (t -1.5) | x-Apr20 $  -29
+      roll days (5-10) minus other days: t 0.3; BD 1-4 minus BD 11+: t 1.7
+   short after 13:31->15:58, BD 1-4                                   n= 404 avg $  -59 PF 0.64 t -2.9 win 42% yrs+ 2/9 | 18-22 $  -49 (t -1.9) 23-26 $  -72 (t -2.2) | x-Apr20 $  -57
+   short after 13:31->15:58, BD 5-9 (GSCI)                            n= 528 avg $  -61 PF 0.64 t -2.3 win 42% yrs+ 1/9 | 18-22 $  -46 (t -2.5) 23-26 $  -80 (t -1.4) | x-Apr20 $  -57
+   short after 13:31->15:58, BD 6-10 (BCOM)                           n= 529 avg $  -35 PF 0.77 t -1.4 win 43% yrs+ 0/9 | 18-22 $  -26 (t -1.4) 23-26 $  -46 (t -0.9) | x-Apr20 $  -31
+   short after 13:31->15:58, BD 11+                                   n=1155 avg $  -42 PF 0.73 t -3.4 win 43% yrs+ 1/9 | 18-22 $  -24 (t -1.6) 23-26 $  -66 (t -3.1) | x-Apr20 $  -38
+      roll days (5-10) minus other days: t -0.4; BD 1-4 minus BD 11+: t -0.7
+   short $ per CL by business day (n ~ 105 each); t in brackets
+   night 17:01->8:00        1:-203(-1.6) 2:-274(-1.5) 3: -94(-0.8) 4: -40(-0.3) 5:   4(+0.0) 6: -89(-0.7) 7: -95(-0.8) 8:-332(-2.8) 9:  26(+0.2) 10:-124(-1.2) 11: 477(+3.3) 12:  30(+0.2)
+   day 8:01->13:29          1: 178(+1.3) 2: -32(-0.3) 3: 167(+1.1) 4:  62(+0.5) 5:  24(+0.2) 6: 112(+0.9) 7: 105(+0.7) 8:  99(+0.7) 9:-196(-1.7) 10:  80(+0.7) 11:-214(-2.0) 12: -13(-0.1)
+   roll hour 12:31->13:29   1:  17(+0.3) 2:  -0(-0.0) 3:  60(+1.4) 4:  -2(-0.0) 5: 128(+2.6) 6: -68(-1.5) 7: -46(-0.7) 8:   3(+0.1) 9: -37(-1.1) 10: -32(-0.7) 11:  16(+0.4) 12: -21(-0.5)
+   after 13:31->15:58       1:-101(-2.2) 2: -30(-0.8) 3: -53(-1.6) 4: -54(-1.2) 5:-164(-3.4) 6:  61(+0.6) 7: -98(-2.5) 8: -43(-1.1) 9: -62(-1.9) 10: -31(-0.8) 11: -30(-0.8) 12: -14(-0.3)
+   -> index roll: pick by 2018-22 t = ('day 8:01->13:29', 'BD 1-4') (design t 1.2, 12 variants)
+   index roll pick ('day 8:01->13:29', 'BD 1-4')                      n= 417 avg $   92 PF 1.21 t  1.3 win 52% yrs+ 7/9 | 18-22 $  110 (t  1.2) 23-26 $   69 (t  0.7) | x-Apr20 $  100
+
+3. Sunday-open gap (Sunday 17:01 open vs the last price before it)
+   Sundays 458, median |gap| 0.06 ATR ($140); |gap| >= 0.25 ATR on 17%
+   fade the Sunday gap, in 17:01, out Mon 800, |gap| >= 0.0 ATR, no stop n= 409 avg $   55 PF 1.13 t  0.8 win 49% yrs+ 4/9 | 18-22 $   45 (t  0.5) 23-26 $   68 (t  0.6) | x-Apr20 $   66
+   fade the Sunday gap, in 17:01, out Mon 800, |gap| >= 0.1 ATR, no stop n= 151 avg $  150 PF 1.31 t  1.1 win 50% yrs+ 6/9 | 18-22 $   82 (t  0.5) 23-26 $  205 (t  0.9) | x-Apr20 $  154
+   fade the Sunday gap, in 17:01, out Mon 800, |gap| >= 0.25 ATR, no stop n=  71 avg $   77 PF 1.13 t  0.4 win 45% yrs+ 5/9 | 18-22 $  193 (t  0.7) 23-26 $   -3 (t -0.0) | x-Apr20 $   43
+   fade the Sunday gap, in 17:01, out Mon 1000, |gap| >= 0.0 ATR, no stop n= 409 avg $   67 PF 1.14 t  0.8 win 48% yrs+ 6/9 | 18-22 $   57 (t  0.5) 23-26 $   81 (t  0.6) | x-Apr20 $   79
+   fade the Sunday gap, in 17:01, out Mon 1000, |gap| >= 0.1 ATR, no stop n= 151 avg $  256 PF 1.55 t  1.7 win 52% yrs+ 7/9 | 18-22 $  271 (t  2.0) 23-26 $  244 (t  1.0) | x-Apr20 $  261
+   fade the Sunday gap, in 17:01, out Mon 1000, |gap| >= 0.25 ATR, no stop n=  71 avg $  218 PF 1.39 t  1.0 win 51% yrs+ 6/9 | 18-22 $  389 (t  1.6) 23-26 $  100 (t  0.3) | x-Apr20 $  194
+   fade the Sunday gap, in 17:01, out Mon 1329, |gap| >= 0.0 ATR, no stop n= 409 avg $   66 PF 1.11 t  0.7 win 48% yrs+ 6/9 | 18-22 $   16 (t  0.1) 23-26 $  131 (t  0.8) | x-Apr20 $   82
+   fade the Sunday gap, in 17:01, out Mon 1329, |gap| >= 0.1 ATR, no stop n= 151 avg $  281 PF 1.49 t  1.6 win 51% yrs+ 6/9 | 18-22 $  141 (t  0.8) 23-26 $  396 (t  1.3) | x-Apr20 $  302
+   fade the Sunday gap, in 17:01, out Mon 1329, |gap| >= 0.25 ATR, no stop n=  71 avg $  351 PF 1.53 t  1.2 win 55% yrs+ 6/9 | 18-22 $  262 (t  0.9) 23-26 $  412 (t  0.9) | x-Apr20 $  329
+   follow the Sunday gap, in 17:01, out Mon 800, |gap| >= 0.0 ATR, no stop n= 409 avg $ -110 PF 0.79 t -1.6 win 48% yrs+ 3/9 | 18-22 $ -100 (t -1.1) 23-26 $ -123 (t -1.1) | x-Apr20 $ -121
+   follow the Sunday gap, in 17:01, out Mon 800, |gap| >= 0.1 ATR, no stop n= 151 avg $ -204 PF 0.69 t -1.4 win 48% yrs+ 3/9 | 18-22 $ -137 (t -0.9) 23-26 $ -260 (t -1.2) | x-Apr20 $ -208
+   follow the Sunday gap, in 17:01, out Mon 800, |gap| >= 0.25 ATR, no stop n=  71 avg $ -132 PF 0.81 t -0.6 win 49% yrs+ 4/9 | 18-22 $ -248 (t -0.9) 23-26 $  -52 (t -0.2) | x-Apr20 $  -97
+   follow the Sunday gap, in 17:01, out Mon 1000, |gap| >= 0.0 ATR, no stop n= 409 avg $ -122 PF 0.79 t -1.5 win 50% yrs+ 3/9 | 18-22 $ -111 (t -1.0) 23-26 $ -136 (t -1.0) | x-Apr20 $ -133
+   follow the Sunday gap, in 17:01, out Mon 1000, |gap| >= 0.1 ATR, no stop n= 151 avg $ -311 PF 0.59 t -2.1 win 46% yrs+ 0/9 | 18-22 $ -325 (t -2.4) 23-26 $ -299 (t -1.2) | x-Apr20 $ -315
+   follow the Sunday gap, in 17:01, out Mon 1000, |gap| >= 0.25 ATR, no stop n=  71 avg $ -272 PF 0.66 t -1.2 win 49% yrs+ 2/9 | 18-22 $ -444 (t -1.8) 23-26 $ -154 (t -0.5) | x-Apr20 $ -249
+   follow the Sunday gap, in 17:01, out Mon 1329, |gap| >= 0.0 ATR, no stop n= 409 avg $ -120 PF 0.82 t -1.3 win 50% yrs+ 3/9 | 18-22 $  -70 (t -0.6) 23-26 $ -185 (t -1.2) | x-Apr20 $ -136
+   follow the Sunday gap, in 17:01, out Mon 1329, |gap| >= 0.1 ATR, no stop n= 151 avg $ -336 PF 0.62 t -1.9 win 46% yrs+ 2/9 | 18-22 $ -196 (t -1.1) 23-26 $ -450 (t -1.5) | x-Apr20 $ -356
+   follow the Sunday gap, in 17:01, out Mon 1329, |gap| >= 0.25 ATR, no stop n=  71 avg $ -405 PF 0.61 t -1.4 win 44% yrs+ 2/9 | 18-22 $ -317 (t -1.1) 23-26 $ -466 (t -1.1) | x-Apr20 $ -383
+   with stops (in 17:01):
+   fade, out 800, |gap| >= 0.1 ATR, stop 0.5 ATR                      n= 151 avg $   17 PF 1.03 t  0.1 win 43% yrs+ 5/9 | 18-22 $  -82 (t -0.5) 23-26 $   99 (t  0.4) | x-Apr20 $   12
+   fade, out 800, |gap| >= 0.1 ATR, stop 1.0 ATR                      n= 151 avg $   57 PF 1.10 t  0.4 win 48% yrs+ 5/9 | 18-22 $  -95 (t -0.5) 23-26 $  181 (t  0.8) | x-Apr20 $   59
+   fade, out 1329, |gap| >= 0.1 ATR, stop 0.5 ATR                     n= 151 avg $   83 PF 1.13 t  0.5 win 38% yrs+ 4/9 | 18-22 $ -181 (t -1.1) 23-26 $  299 (t  1.1) | x-Apr20 $   81
+   fade, out 1329, |gap| >= 0.1 ATR, stop 1.0 ATR                     n= 151 avg $  125 PF 1.18 t  0.7 win 48% yrs+ 5/9 | 18-22 $ -112 (t -0.5) 23-26 $  320 (t  1.1) | x-Apr20 $  135
+   follow, out 800, |gap| >= 0.1 ATR, stop 0.5 ATR                    n= 151 avg $ -156 PF 0.74 t -1.4 win 45% yrs+ 3/9 | 18-22 $ -151 (t -1.0) 23-26 $ -160 (t -0.9) | x-Apr20 $ -153
+   follow, out 800, |gap| >= 0.1 ATR, stop 1.0 ATR                    n= 151 avg $ -213 PF 0.68 t -1.5 win 47% yrs+ 3/9 | 18-22 $ -117 (t -0.8) 23-26 $ -291 (t -1.3) | x-Apr20 $ -217
+   follow, out 1329, |gap| >= 0.1 ATR, stop 0.5 ATR                   n= 151 avg $ -317 PF 0.59 t -2.5 win 38% yrs+ 1/9 | 18-22 $ -443 (t -3.0) 23-26 $ -214 (t -1.1) | x-Apr20 $ -329
+   follow, out 1329, |gap| >= 0.1 ATR, stop 1.0 ATR                   n= 151 avg $ -316 PF 0.62 t -2.0 win 44% yrs+ 2/9 | 18-22 $ -204 (t -1.2) 23-26 $ -409 (t -1.6) | x-Apr20 $ -336
+   -> Sunday gap: pick by 2018-22 t = ('fade', 1705, 1000, 0.1, None) (design t 3.1, 108 variants)
+   Sunday gap pick ('fade', 1705, 1000, 0.1, None)                    n= 151 avg $  442 PF 2.26 t  3.2 win 62% yrs+ 9/9 | 18-22 $  508 (t  3.1) 23-26 $  387 (t  1.8) | x-Apr20 $  458  <-- passes
+   weekday 17:00 reopen gaps: median |gap| 0.01 ATR
+      placebo: picked rule on the weekday 17:00 reopen gaps           n=  42 avg $ -620 PF 0.53 t -1.3 win 40% yrs+ 3/8 | 18-22 $  698 (t  2.0) 23-26 $-1279 (t -1.9) | x-Apr20 $ -620
+
+3b. Sunday-gap fade, robustness (fade = trade against the 17:01 gap; no stop)
+   avg $ (t) by entry time x Monday exit, |gap| >= 0.1 ATR, gap measured at 17:01:
+      entry               800             900            1000            1100            1329
+       1701        150 ( 1.1)      259 ( 1.7)      256 ( 1.7)      269 ( 1.8)      281 ( 1.6)
+       1705        335 ( 2.7)      444 ( 3.0)      442 ( 3.2)      455 ( 3.1)      467 ( 2.7)
+       1710        380 ( 2.9)      489 ( 3.2)      487 ( 3.4)      500 ( 3.2)      512 ( 2.8)
+       1715        370 ( 2.9)      479 ( 3.2)      476 ( 3.3)      489 ( 3.1)      501 ( 2.7)
+       1730        315 ( 2.5)      423 ( 2.9)      421 ( 3.1)      434 ( 2.9)      446 ( 2.5)
+       1800        296 ( 2.4)      404 ( 2.8)      402 ( 3.0)      415 ( 2.8)      427 ( 2.5)
+       1900        300 ( 2.6)      410 ( 2.9)      407 ( 3.1)      421 ( 2.9)      433 ( 2.5)
+       2100        284 ( 2.1)      394 ( 2.4)      391 ( 2.6)      404 ( 2.3)      416 ( 2.1)
+   avg $ (t) by entry time x Monday exit, |gap| >= 0.1 ATR, gap measured at the entry bar:
+      entry               800             900            1000            1100            1329
+       1701        150 ( 1.1)      259 ( 1.7)      256 ( 1.7)      269 ( 1.8)      281 ( 1.6)
+       1705         57 ( 0.6)      125 ( 1.1)       83 ( 0.7)      145 ( 1.2)      124 ( 0.9)
+       1710        122 ( 1.3)      164 ( 1.5)      132 ( 1.2)      170 ( 1.4)      151 ( 1.1)
+       1715         75 ( 0.8)      112 ( 1.0)       64 ( 0.6)       92 ( 0.8)       68 ( 0.5)
+       1730         77 ( 0.9)      115 ( 1.1)       56 ( 0.5)      114 ( 1.1)      104 ( 0.8)
+       1800         21 ( 0.3)       66 ( 0.7)       27 ( 0.3)       61 ( 0.6)       35 ( 0.3)
+       1900         73 ( 1.0)      101 ( 1.1)       80 ( 0.9)      112 ( 1.1)       88 ( 0.8)
+       2100         62 ( 0.8)       77 ( 0.8)       56 ( 0.6)       92 ( 0.9)       98 ( 0.8)
+   threshold sensitivity, in 17:05, out 10:00 (gap at 17:01): >= 0.0: n 409 $124 t 1.6 | >= 0.05: n 232 $224 t 2.1 | >= 0.1: n 151 $442 t 3.2 | >= 0.15: n 114 $465 t 2.7 | >= 0.2: n 87 $553 t 2.7 | >= 0.3: n 57 $647 t 2.6 | >= 0.5: n 32 $834 t 2.1
+   first minutes: the 17:01 open -> 17:05 close moves further with the gap by 0.092 ATR ($184) on |gap| >= 0.1 ATR Sundays
+      longs (fading down-gaps)                                        n=  58 avg $  121 PF 1.27 t  0.7 win 57% yrs+ 7/9 | 18-22 $  508 (t  2.1) 23-26 $ -265 (t -1.0) | x-Apr20 $  150
+      shorts (fading up-gaps)                                         n=  93 avg $  642 PF 3.17 t  3.3 win 66% yrs+ 9/9 | 18-22 $  509 (t  2.3) 23-26 $  738 (t  2.5) | x-Apr20 $  645
+   placebo 1, random side on the same Sundays (2,000 draws): mean $-23, 95th pct $210, share >= real 0.05%
+      placebo 2, Mon-Thu 17:00 reopen gap, top 34% (>= 0.021 ATR): fade in 17:05, out next day 10:00 n= 571 avg $ -182 PF 0.71 t -2.6 win 44% yrs+ 1/9 | 18-22 $ -106 (t -1.2) 23-26 $ -277 (t -2.4) | x-Apr20 $ -187
+   concentration: median trade $283; without the best 5 trades $245 (t 2.2); best 5: 2025-06-23 $3,863, 2025-06-16 $5,003, 2026-03-16 $5,213, 2022-03-07 $7,403, 2026-03-23 $9,513
+   shorts without their best 5 trades $326 (t 2.4)
+      placebo 3, same Sundays, fade Friday's 8:00 -> 15:58 move instead of the gap n= 146 avg $  213 PF 1.46 t  1.5 win 50% yrs+ 5/9 | 18-22 $  255 (t  1.5) 23-26 $  180 (t  0.8) | x-Apr20 $  208
+      ex-2020                                                         n= 127 avg $  445 PF 2.16 t  2.8 win 61% yrs+ 8/8 | 18-22 $  552 (t  2.5) 23-26 $  387 (t  1.8) | x-Apr20 $  445
+      2026 only                                                       n=  31 avg $  520 PF 1.72 t  1.0 win 58% yrs+ 1/1 | 18-22 $  nan (t  nan) 23-26 $  520 (t  1.0) | x-Apr20 $  520
+
+4a. Baker Hughes rig count, Friday 12:00 CT (control: Thursday)
+   Fridays 434; median |12:00 -> 12:05| $60 vs Thursday $60, all other days $60
+   rig count: follow the first 5 min, out 1329                        n= 412 avg $  -50 PF 0.73 t -2.0 win 43% yrs+ 1/9 | 18-22 $  -32 (t -0.9) 23-26 $  -74 (t -2.2) | x-Apr20 $  -47
+      control Thursday                                                n= 426 avg $    6 PF 1.03 t  0.2 win 50% yrs+ 4/9 | 18-22 $   19 (t  0.5) 23-26 $  -11 (t -0.3) | x-Apr20 $    4
+   rig count: follow the first 5 min, out 1558                        n= 412 avg $  -53 PF 0.78 t -1.8 win 45% yrs+ 2/9 | 18-22 $  -53 (t -1.4) 23-26 $  -53 (t -1.1) | x-Apr20 $  -48
+      control Thursday                                                n= 426 avg $   -2 PF 0.99 t -0.1 win 47% yrs+ 3/9 | 18-22 $    3 (t  0.1) 23-26 $   -9 (t -0.2) | x-Apr20 $   -4
+   rig count: fade the first 5 min, out 1329                          n= 412 avg $   -5 PF 0.97 t -0.2 win 51% yrs+ 2/9 | 18-22 $  -22 (t -0.6) 23-26 $   19 (t  0.6) | x-Apr20 $   -8
+      control Thursday                                                n= 426 avg $  -60 PF 0.74 t -2.0 win 45% yrs+ 1/9 | 18-22 $  -73 (t -1.8) 23-26 $  -43 (t -1.0) | x-Apr20 $  -58
+   rig count: fade the first 5 min, out 1558                          n= 412 avg $   -1 PF 0.99 t -0.0 win 51% yrs+ 3/9 | 18-22 $   -1 (t -0.0) 23-26 $   -1 (t -0.0) | x-Apr20 $   -6
+      control Thursday                                                n= 426 avg $  -52 PF 0.80 t -1.6 win 47% yrs+ 2/9 | 18-22 $  -57 (t -1.3) 23-26 $  -45 (t -0.9) | x-Apr20 $  -51
+   rig count: follow the first 10 min, out 1329                       n= 416 avg $   -1 PF 0.99 t -0.1 win 44% yrs+ 5/9 | 18-22 $   42 (t  1.2) 23-26 $  -59 (t -1.9) | x-Apr20 $   -4
+      control Thursday                                                n= 438 avg $   -9 PF 0.95 t -0.3 win 48% yrs+ 4/9 | 18-22 $    2 (t  0.1) 23-26 $  -24 (t -0.6) | x-Apr20 $  -10
+   rig count: follow the first 10 min, out 1558                       n= 416 avg $   26 PF 1.14 t  0.9 win 50% yrs+ 5/9 | 18-22 $   67 (t  1.9) 23-26 $  -28 (t -0.6) | x-Apr20 $   23
+      control Thursday                                                n= 438 avg $  -19 PF 0.92 t -0.6 win 45% yrs+ 3/9 | 18-22 $  -38 (t -0.9) 23-26 $    6 (t  0.1) | x-Apr20 $  -19
+   rig count: fade the first 10 min, out 1329                         n= 416 avg $  -53 PF 0.70 t -2.3 win 48% yrs+ 4/9 | 18-22 $  -96 (t -2.9) 23-26 $    5 (t  0.2) | x-Apr20 $  -50
+      control Thursday                                                n= 438 avg $  -45 PF 0.79 t -1.6 win 46% yrs+ 2/9 | 18-22 $  -57 (t -1.5) 23-26 $  -31 (t -0.7) | x-Apr20 $  -44
+   rig count: fade the first 10 min, out 1558                         n= 416 avg $  -81 PF 0.66 t -2.9 win 46% yrs+ 2/9 | 18-22 $ -121 (t -3.4) 23-26 $  -26 (t -0.6) | x-Apr20 $  -77
+      control Thursday                                                n= 438 avg $  -36 PF 0.85 t -1.1 win 50% yrs+ 3/9 | 18-22 $  -17 (t -0.4) 23-26 $  -60 (t -1.2) | x-Apr20 $  -35
+   rig count: follow the first 15 min, out 1329                       n= 424 avg $  -11 PF 0.93 t -0.5 win 45% yrs+ 5/9 | 18-22 $   25 (t  0.8) 23-26 $  -57 (t -1.9) | x-Apr20 $   -8
+      control Thursday                                                n= 436 avg $   16 PF 1.09 t  0.6 win 50% yrs+ 5/9 | 18-22 $    8 (t  0.2) 23-26 $   27 (t  0.7) | x-Apr20 $   21
+   rig count: follow the first 15 min, out 1558                       n= 424 avg $    2 PF 1.01 t  0.1 win 50% yrs+ 4/9 | 18-22 $   35 (t  1.0) 23-26 $  -40 (t -0.9) | x-Apr20 $    8
+      control Thursday                                                n= 436 avg $   -5 PF 0.98 t -0.2 win 47% yrs+ 5/9 | 18-22 $  -20 (t -0.5) 23-26 $   13 (t  0.3) | x-Apr20 $   -2
+   rig count: fade the first 15 min, out 1329                         n= 424 avg $  -43 PF 0.74 t -2.0 win 47% yrs+ 2/9 | 18-22 $  -79 (t -2.6) 23-26 $    3 (t  0.1) | x-Apr20 $  -47
+      control Thursday                                                n= 436 avg $  -71 PF 0.68 t -2.7 win 44% yrs+ 0/9 | 18-22 $  -63 (t -1.7) 23-26 $  -82 (t -2.1) | x-Apr20 $  -75
+   rig count: fade the first 15 min, out 1558                         n= 424 avg $  -57 PF 0.75 t -2.0 win 46% yrs+ 3/9 | 18-22 $  -90 (t -2.6) 23-26 $  -14 (t -0.3) | x-Apr20 $  -62
+      control Thursday                                                n= 436 avg $  -49 PF 0.80 t -1.6 win 48% yrs+ 3/9 | 18-22 $  -35 (t -0.9) 23-26 $  -68 (t -1.4) | x-Apr20 $  -53
+   rig count pre-drift long 11:01 -> 11:59                            n= 434 avg $  -29 PF 0.80 t -1.6 win 45% yrs+ 2/9 | 18-22 $  -34 (t -1.5) 23-26 $  -23 (t -0.8) | x-Apr20 $  -30
+   rig count pre-drift short 11:01 -> 11:59                           n= 434 avg $  -25 PF 0.82 t -1.4 win 44% yrs+ 3/9 | 18-22 $  -21 (t -0.9) 23-26 $  -31 (t -1.1) | x-Apr20 $  -24
+   -> Baker Hughes: pick by 2018-22 t = (10, 'follow', 1558) (design t 1.9, 14 variants)
+   Baker Hughes pick (10, 'follow', 1558)                             n= 416 avg $   26 PF 1.14 t  0.9 win 50% yrs+ 5/9 | 18-22 $   67 (t  1.9) 23-26 $  -28 (t -0.6) | x-Apr20 $   23
+
+4b. WTI options expiry (LTD - 3 and LTD - 1 business days)
+   LTD-3: 105 days; 13:29 distance to nearest $0.50 strike mean 0.119 vs 0.127 other days (uniform = 0.125), t -1.0; 12:00-13:30 range 0.28 vs 0.32 ATR
+   LTD-3 long, 12:01 -> 13:29                                         n= 104 avg $   28 PF 1.17 t  0.6 win 54% yrs+ 4/9 | 18-22 $   20 (t  0.3) 23-26 $   38 (t  0.6) | x-Apr20 $   27
+   LTD-3 short, 12:01 -> 13:29                                        n= 104 avg $  -82 PF 0.63 t -1.7 win 43% yrs+ 1/9 | 18-22 $  -75 (t -1.0) 23-26 $  -93 (t -1.4) | x-Apr20 $  -81
+   LTD-3 follow 8:00->12:00, 12:01 -> 13:29                           n= 104 avg $   30 PF 1.18 t  0.6 win 50% yrs+ 4/9 | 18-22 $   88 (t  1.3) 23-26 $  -47 (t -0.7) | x-Apr20 $   32
+      control: other days                                             n=1697 avg $  -22 PF 0.89 t -1.5 win 45% yrs+ 2/9 | 18-22 $  -18 (t -0.9) 23-26 $  -26 (t -1.3) | x-Apr20 $  -24
+   LTD-3 fade 8:00->12:00, 12:01 -> 13:29                             n= 104 avg $  -84 PF 0.62 t -1.7 win 47% yrs+ 3/9 | 18-22 $ -143 (t -2.0) 23-26 $   -7 (t -0.1) | x-Apr20 $  -86
+   LTD-3 toward strike, 12:01 -> 13:29                                n=  63 avg $   -0 PF 1.00 t -0.0 win 49% yrs+ 5/9 | 18-22 $  -13 (t -0.2) 23-26 $   16 (t  0.2) | x-Apr20 $    3
+      control: other days                                             n=1035 avg $  -59 PF 0.73 t -3.1 win 45% yrs+ 2/9 | 18-22 $  -51 (t -2.0) 23-26 $  -70 (t -2.5) | x-Apr20 $  -56
+   LTD-1: 105 days; 13:29 distance to nearest $0.50 strike mean 0.120 vs 0.127 other days (uniform = 0.125), t -0.9; 12:00-13:30 range 0.29 vs 0.32 ATR
+   LTD-1 long, 12:01 -> 13:29                                         n= 102 avg $   -0 PF 1.00 t -0.0 win 48% yrs+ 3/9 | 18-22 $   49 (t  0.7) 23-26 $  -63 (t -0.7) | x-Apr20 $   18
+   LTD-1 short, 12:01 -> 13:29                                        n= 102 avg $  -54 PF 0.75 t -0.9 win 48% yrs+ 4/9 | 18-22 $ -103 (t -1.4) 23-26 $    9 (t  0.1) | x-Apr20 $  -72
+   LTD-1 follow 8:00->12:00, 12:01 -> 13:29                           n= 101 avg $  -45 PF 0.79 t -0.8 win 49% yrs+ 2/9 | 18-22 $   67 (t  0.9) 23-26 $ -191 (t -2.0) | x-Apr20 $  -27
+      control: other days                                             n=1697 avg $  -22 PF 0.89 t -1.5 win 45% yrs+ 2/9 | 18-22 $  -18 (t -0.9) 23-26 $  -26 (t -1.3) | x-Apr20 $  -24
+   LTD-1 fade 8:00->12:00, 12:01 -> 13:29                             n= 101 avg $   -9 PF 0.95 t -0.2 win 48% yrs+ 4/9 | 18-22 $ -122 (t -1.7) 23-26 $  137 (t  1.5) | x-Apr20 $  -27
+   LTD-1 toward strike, 12:01 -> 13:29                                n=  59 avg $   30 PF 1.18 t  0.4 win 47% yrs+ 5/9 | 18-22 $   -6 (t -0.1) 23-26 $   75 (t  0.7) | x-Apr20 $   -0
+      control: other days                                             n=1035 avg $  -59 PF 0.73 t -3.1 win 45% yrs+ 2/9 | 18-22 $  -51 (t -2.0) 23-26 $  -70 (t -2.5) | x-Apr20 $  -56
+   -> options expiry: pick by 2018-22 t = (3, 'follow 8:00->12:00') (design t 1.3, 10 variants)
+   options expiry pick (3, 'follow 8:00->12:00')                      n= 104 avg $   30 PF 1.18 t  0.6 win 50% yrs+ 4/9 | 18-22 $   88 (t  1.3) 23-26 $  -47 (t -0.7) | x-Apr20 $   32
+
+4c. Overnight Bias for CL (8:00 price in the overnight range)
+   ONB-CL range from 1700, market 8:01, ADX>0, stop 0.25 ATR, 3R, out 13:29 n=1600 avg $  -31 PF 0.91 t -1.4 win 36% yrs+ 2/9 | 18-22 $  -33 (t -1.1) 23-26 $  -29 (t -0.9) | x-Apr20 $  -31
+      longs $  -27 (t -0.9) shorts $  -37 (t -1.0)
+   ONB-CL range from 1700, market 8:01, ADX>0, stop 0.5 ATR, 3R, out 13:29 n=1600 avg $  -31 PF 0.93 t -1.0 win 46% yrs+ 4/9 | 18-22 $  -28 (t -0.7) 23-26 $  -34 (t -0.8) | x-Apr20 $  -38
+      longs $  -41 (t -1.2) shorts $  -17 (t -0.4)
+   ONB-CL range from 1700, market 8:01, ADX>20, stop 0.25 ATR, 3R, out 13:29 n=1218 avg $  -19 PF 0.95 t -0.7 win 36% yrs+ 3/9 | 18-22 $   -7 (t -0.2) 23-26 $  -36 (t -0.9) | x-Apr20 $  -19
+      longs $   -7 (t -0.2) shorts $  -34 (t -0.8)
+   ONB-CL range from 1700, market 8:01, ADX>20, stop 0.5 ATR, 3R, out 13:29 n=1218 avg $  -18 PF 0.96 t -0.5 win 46% yrs+ 2/9 | 18-22 $    5 (t  0.1) 23-26 $  -48 (t -1.0) | x-Apr20 $  -27
+      longs $  -20 (t -0.5) shorts $  -16 (t -0.3)
+   ONB-CL range from 1700, market 8:01, ADX>30, stop 0.25 ATR, 3R, out 13:29 n= 632 avg $  -10 PF 0.97 t -0.3 win 36% yrs+ 2/9 | 18-22 $    8 (t  0.2) 23-26 $  -37 (t -0.7) | x-Apr20 $   -9
+      longs $   -3 (t -0.1) shorts $  -17 (t -0.3)
+   ONB-CL range from 1700, market 8:01, ADX>30, stop 0.5 ATR, 3R, out 13:29 n= 632 avg $   27 PF 1.06 t  0.5 win 47% yrs+ 3/9 | 18-22 $   66 (t  0.9) 23-26 $  -27 (t -0.4) | x-Apr20 $   10
+      longs $  -32 (t -0.5) shorts $   84 (t  1.0)
+   ONB-CL range from 1700, stop at 8:15 range, ADX>0, stop 0.25 ATR, 3R, out 13:29 n=1256 avg $  -36 PF 0.90 t -1.5 win 38% yrs+ 3/9 | 18-22 $  -25 (t -0.8) 23-26 $  -48 (t -1.4) | x-Apr20 $  -35
+      longs $  -52 (t -1.8) shorts $  -15 (t -0.4)
+   ONB-CL range from 1700, stop at 8:15 range, ADX>0, stop 0.5 ATR, 3R, out 13:29 n=1256 avg $  -23 PF 0.94 t -0.8 win 48% yrs+ 4/9 | 18-22 $   -2 (t -0.0) 23-26 $  -50 (t -1.2) | x-Apr20 $  -26
+      longs $  -33 (t -0.9) shorts $  -12 (t -0.2)
+   ONB-CL range from 1700, stop at 8:15 range, ADX>20, stop 0.25 ATR, 3R, out 13:29 n=1132 avg $  -33 PF 0.90 t -1.3 win 39% yrs+ 3/9 | 18-22 $  -13 (t -0.4) 23-26 $  -58 (t -1.7) | x-Apr20 $  -33
+      longs $  -50 (t -1.6) shorts $  -12 (t -0.3)
+   ONB-CL range from 1700, stop at 8:15 range, ADX>20, stop 0.5 ATR, 3R, out 13:29 n=1132 avg $  -24 PF 0.94 t -0.7 win 47% yrs+ 3/9 | 18-22 $    2 (t  0.0) 23-26 $  -56 (t -1.3) | x-Apr20 $  -27
+      longs $  -42 (t -1.1) shorts $    0 (t  0.0)
+   ONB-CL range from 1700, stop at 8:15 range, ADX>30, stop 0.25 ATR, 3R, out 13:29 n= 760 avg $  -24 PF 0.93 t -0.8 win 41% yrs+ 4/9 | 18-22 $  -10 (t -0.2) 23-26 $  -44 (t -1.0) | x-Apr20 $  -17
+      longs $  -52 (t -1.4) shorts $    7 (t  0.1)
+   ONB-CL range from 1700, stop at 8:15 range, ADX>30, stop 0.5 ATR, 3R, out 13:29 n= 760 avg $  -18 PF 0.95 t -0.5 win 49% yrs+ 4/9 | 18-22 $    4 (t  0.1) 23-26 $  -48 (t -0.9) | x-Apr20 $  -13
+      longs $  -62 (t -1.3) shorts $   31 (t  0.5)
+   ONB-CL range from 2300, market 8:01, ADX>0, stop 0.25 ATR, 3R, out 13:29 n=1544 avg $  -31 PF 0.92 t -1.3 win 35% yrs+ 3/9 | 18-22 $  -29 (t -0.9) 23-26 $  -33 (t -0.9) | x-Apr20 $  -31
+      longs $  -20 (t -0.7) shorts $  -44 (t -1.2)
+   ONB-CL range from 2300, market 8:01, ADX>0, stop 0.5 ATR, 3R, out 13:29 n=1544 avg $  -35 PF 0.92 t -1.2 win 46% yrs+ 4/9 | 18-22 $  -24 (t -0.6) 23-26 $  -49 (t -1.2) | x-Apr20 $  -43
+      longs $  -42 (t -1.2) shorts $  -26 (t -0.5)
+   ONB-CL range from 2300, market 8:01, ADX>20, stop 0.25 ATR, 3R, out 13:29 n=1171 avg $  -18 PF 0.95 t -0.7 win 36% yrs+ 2/9 | 18-22 $    2 (t  0.1) 23-26 $  -45 (t -1.1) | x-Apr20 $  -17
+      longs $   -6 (t -0.2) shorts $  -33 (t -0.8)
+   ONB-CL range from 2300, market 8:01, ADX>20, stop 0.5 ATR, 3R, out 13:29 n=1171 avg $  -17 PF 0.96 t -0.5 win 46% yrs+ 2/9 | 18-22 $   19 (t  0.4) 23-26 $  -64 (t -1.3) | x-Apr20 $  -26
+      longs $  -17 (t -0.4) shorts $  -16 (t -0.3)
+   ONB-CL range from 2300, market 8:01, ADX>30, stop 0.25 ATR, 3R, out 13:29 n= 601 avg $  -17 PF 0.96 t -0.4 win 35% yrs+ 1/9 | 18-22 $    2 (t  0.0) 23-26 $  -43 (t -0.8) | x-Apr20 $  -16
+      longs $   -6 (t -0.1) shorts $  -27 (t -0.5)
+   ONB-CL range from 2300, market 8:01, ADX>30, stop 0.5 ATR, 3R, out 13:29 n= 601 avg $   22 PF 1.05 t  0.4 win 46% yrs+ 4/9 | 18-22 $   68 (t  0.9) 23-26 $  -41 (t -0.6) | x-Apr20 $    4
+      longs $  -31 (t -0.5) shorts $   74 (t  0.9)
+   ONB-CL range from 2300, stop at 8:15 range, ADX>0, stop 0.25 ATR, 3R, out 13:29 n=1215 avg $  -30 PF 0.91 t -1.2 win 38% yrs+ 3/9 | 18-22 $  -13 (t -0.4) 23-26 $  -52 (t -1.5) | x-Apr20 $  -29
+      longs $  -40 (t -1.3) shorts $  -17 (t -0.4)
+   ONB-CL range from 2300, stop at 8:15 range, ADX>0, stop 0.5 ATR, 3R, out 13:29 n=1215 avg $  -30 PF 0.93 t -1.0 win 47% yrs+ 3/9 | 18-22 $   -8 (t -0.2) 23-26 $  -59 (t -1.3) | x-Apr20 $  -33
+      longs $  -36 (t -1.0) shorts $  -23 (t -0.4)
+   ONB-CL range from 2300, stop at 8:15 range, ADX>20, stop 0.25 ATR, 3R, out 13:29 n=1092 avg $  -26 PF 0.92 t -1.0 win 38% yrs+ 4/9 | 18-22 $    1 (t  0.0) 23-26 $  -60 (t -1.7) | x-Apr20 $  -24
+      longs $  -43 (t -1.4) shorts $   -4 (t -0.1)
+   ONB-CL range from 2300, stop at 8:15 range, ADX>20, stop 0.5 ATR, 3R, out 13:29 n=1092 avg $  -22 PF 0.94 t -0.7 win 47% yrs+ 3/9 | 18-22 $   10 (t  0.2) 23-26 $  -64 (t -1.4) | x-Apr20 $  -25
+      longs $  -39 (t -1.0) shorts $   -0 (t -0.0)
+   ONB-CL range from 2300, stop at 8:15 range, ADX>30, stop 0.25 ATR, 3R, out 13:29 n= 750 avg $  -20 PF 0.94 t -0.6 win 41% yrs+ 4/9 | 18-22 $   -5 (t -0.1) 23-26 $  -40 (t -0.9) | x-Apr20 $  -12
+      longs $  -45 (t -1.2) shorts $    9 (t  0.2)
+   ONB-CL range from 2300, stop at 8:15 range, ADX>30, stop 0.5 ATR, 3R, out 13:29 n= 750 avg $  -18 PF 0.95 t -0.5 win 49% yrs+ 3/9 | 18-22 $    8 (t  0.1) 23-26 $  -54 (t -1.0) | x-Apr20 $  -13
+      longs $  -52 (t -1.1) shorts $   21 (t  0.3)
+   -> ONB-CL: pick by 2018-22 t = (1700, 'market 8:01', 30, 0.5) (design t 0.9, 24 variants)
+   ONB-CL pick (1700, 'market 8:01', 30, 0.5)                         n= 632 avg $   27 PF 1.06 t  0.5 win 47% yrs+ 3/9 | 18-22 $   66 (t  0.9) 23-26 $  -27 (t -0.4) | x-Apr20 $   10
+      placebo: middle-third days, random side, market 8:01, same stop / target n= 633 avg $  -21 PF 0.95 t -0.5 win 45% yrs+ 2/9 | 18-22 $  -81 (t -1.5) 23-26 $   61 (t  0.9) | x-Apr20 $  -10
+
+== Candidate: Sunday-gap fade (in 17:05 Sunday, out Monday 10:00, |gap| >= 0.1 ATR, no stop): metrics whole / longs / shorts
+            trades win  avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+Sunday fade    151 62% $442 $7,381   1.02    2.16          2.26 $11,068   0.67  1.42      10.42
+  longs         58 57% $121   $779   0.22    0.32          1.27  $8,238   0.09  4.80       0.32
+  shorts        93 66% $642 $6,603   1.05    2.72          3.17  $5,366   1.23  1.11      11.92
+   by year: 2018 $1,062 (8) | 2019 $5,123 (12) | 2020 $10,266 (24) | 2021 $3,626 (13) | 2022 $14,490 (11) | 2023 $3,935 (9) | 2024 $122 (19) | 2025 $11,986 (24) | 2026 $16,115 (31)
+   2023+ only:
+            trades win   avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+Sunday fade     83 61%  $387  $8,244   0.89    1.69          1.81 $11,068   0.74  2.76       5.98
+  longs         29 48% $-265 $-1,969  -0.49   -0.59          0.58  $7,723  -0.25  8.57      -0.46
+  shorts        54 69%  $738 $10,213   1.22    2.89          2.84  $5,366   1.90  1.50      13.58
+                                   actual       p5       p50       p95
+name               metric                                             
+Sunday fade, 2023+ sharpe            0.89    -0.03      0.91      1.67
+                   sortino           1.69    -0.05      1.75      4.75
+                   pf_day            1.81     0.98      1.82      3.36
+                   calmar            0.74    -0.01      0.81      2.91
+                   ulcer             2.76     1.95      5.41     17.92
+                   max_dd       11,068.00 5,039.61 10,180.13 21,769.05
+                   P(Sharpe<=0)       NaN      NaN      0.06       NaN
+  longs, 2023+     sharpe           -0.49    -1.18     -0.50      0.35
+                   sortino          -0.59    -1.25     -0.60      0.59
+                   pf_day            0.58     0.21      0.57      1.46
+                   calmar           -0.25    -0.26     -0.18      0.27
+                   ulcer             8.57     2.76     11.17     26.46
+                   max_dd        7,723.00 3,600.64 10,557.13 22,526.74
+                   P(Sharpe<=0)       NaN      NaN      0.84       NaN
+  shorts, 2023+    sharpe            1.22     0.40      1.25      1.87
+                   sortino           2.89     0.60      2.97      8.02
+                   pf_day            2.84     1.36      2.82      5.98
+                   calmar            1.90     0.25      1.64      5.43
+                   ulcer             1.50     1.08      2.82      8.58
+                   max_dd        5,366.25 2,593.86  6,184.75 12,345.13
+                   P(Sharpe<=0)       NaN      NaN      0.01       NaN
+                   actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+Sunday fade, 2023+   $11,068      73%  $9,291 $14,939 $17,942        100%        100%        100%
+  longs, 2023+        $7,723       2% $10,913 $14,393 $15,602        100%        100%        100%
+  shorts, 2023+       $5,366      25%  $6,324  $9,570 $11,455        100%        100%        100%
+   per year per CL $7,381; average CL price $69 (notional $69,145); worst trade $-5,207, best $9,513
+
+Survivors (t >= 2.5, positive in 2018-22 and in 2023-26) out of all tested lines: 1
+   Sunday gap pick ('fade', 1705, 1000, 0.1, None)
+
+== Sunday gap pick ('fade', 1705, 1000, 0.1, None)
+                                             trades win  avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+Sunday gap pick ('fade', 1705, 1000, 0.1, No    151 62% $442 $7,381   1.02    2.16          2.26 $11,068   0.67  1.42      10.42
+   by year: 2018 $1,062 (8) | 2019 $5,123 (12) | 2020 $10,266 (24) | 2021 $3,626 (13) | 2022 $14,490 (11) | 2023 $3,935 (9) | 2024 $122 (19) | 2025 $11,986 (24) | 2026 $16,115 (31)
+      without April 2020                                              n= 148 avg $  458 PF 2.32 t  3.2 win 62% yrs+ 9/9 | 18-22 $  548 (t  3.3) 23-26 $  387 (t  1.8) | x-Apr20 $  458
+                                                                actual       p5       p50       p95
+name                                            metric                                             
+Sunday gap pick ('fade', 1705, 1000, 0.1, 2023+ sharpe            0.89    -0.03      0.91      1.67
+                                                sortino           1.69    -0.05      1.75      4.75
+                                                pf_day            1.81     0.98      1.82      3.36
+                                                calmar            0.74    -0.01      0.81      2.91
+                                                ulcer             2.76     1.95      5.41     17.92
+                                                max_dd       11,068.00 5,039.61 10,180.13 21,769.05
+                                                P(Sharpe<=0)       NaN      NaN      0.06       NaN
+                                                actual_dd pct_rank   dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+Sunday gap pick ('fade', 1705, 1000, 0.1, 2023+   $11,068      73% $9,291 $14,939 $17,942        100%        100%        100%
+   daily correlation with NQ RTH (8:30 -> 15:00) on trade days: -0.17
+
+Picks by design-period t (one per hypothesis):
+   API              ('into EIA', 'long')                                       n  429 avg $   27 PF 1.06 t  0.4 yrs+ 5/9 | 18-22 t  1.8 23-26 $ -125 t -1.0
+   index roll       ('day 8:01->13:29', 'BD 1-4')                              n  417 avg $   92 PF 1.21 t  1.3 yrs+ 7/9 | 18-22 t  1.2 23-26 $   69 t  0.7
+   Sunday gap       ('fade', 1705, 1000, 0.1, None)                            n  151 avg $  442 PF 2.26 t  3.2 yrs+ 9/9 | 18-22 t  3.1 23-26 $  387 t  1.8
+   Baker Hughes     (10, 'follow', 1558)                                       n  416 avg $   26 PF 1.14 t  0.9 yrs+ 5/9 | 18-22 t  1.9 23-26 $  -28 t -0.6
+   options expiry   (3, 'follow 8:00->12:00')                                  n  104 avg $   30 PF 1.18 t  0.6 yrs+ 4/9 | 18-22 t  1.3 23-26 $  -47 t -0.7
+   ONB-CL           (1700, 'market 8:01', 30, 0.5)                             n  632 avg $   27 PF 1.06 t  0.5 yrs+ 3/9 | 18-22 t  0.9 23-26 $  -27 t -0.4
