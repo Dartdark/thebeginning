@@ -92,6 +92,8 @@ Gold Asian-range breakout (user's file, `analysis/asian_breakout_test.py`): NQ $
 overnight breakout, funded worse (F). Its code re-enters after stop-outs (not one a day as described).
 GC 2017-11 -> 2026-10 now in `data/GC_1min_*.csv` (converted ET -> CT). On gold itself the breakout is real but thin
 (`analysis/gold_asian_breakout_gc_test.py`: Sharpe 0.66, uncorrelated, +0.045 R t 1.4); funded bench worse (C, watchlist #6).
+CL 2017-11 -> 2026-10 in `data/CL_1min_*.csv` (converted ET -> CT). Forced flows (`analysis/cl_forced_flows_test.py`): EIA, settlement,
+expiry, weekday all F; front-running the index roll (short BD 1-4) t 1.4 (D). CL-NQ corr 0.16, GC-NQ 0.12: diversifiers if an edge turns up.
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily

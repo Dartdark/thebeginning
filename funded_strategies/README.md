@@ -1274,6 +1274,37 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
   profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
   awkward there in any case.
 
+## Crude oil (CL) forced flows (2026-10-14, user's CL export 2017-11 → 2026-10): nothing tradeable yet
+
+Data: `data/CL_1min_2017..2026.csv`, converted from the Eastern-time export to Central. It's an unadjusted front-month
+continuous series that rolls before expiry (low $6.90 on 2020-04-21, not the −$37 print). 1 CL = $1,000 a point;
+$27.25 a round trip. Code `../analysis/cl_forced_flows_test.py` (output in `..._output.txt`). About 30 pre-specified
+lines, so |t| ≥ 3 is the bar.
+- **Correlation (daily, 13:30 CT closes):** CL–NQ +0.16 (2026 −0.42), CL–GC +0.06, GC–NQ +0.12. So both are genuine
+  diversifiers for the plan.
+- **EIA report (Wednesday 9:30 CT; Thursday in holiday weeks; 457 reports):** the 9:30–9:35 move is about 2× other
+  days ($170 vs $90 per CL).
+  - Pre-release long −$66 (t −2.4), short +$12.
+  - Following the first 5 minutes to 10:30: +$11; to 13:29: +$21 (big reactions only +$76, t 0.9).
+  - Fading loses (to 10:30 −$65, t −2.5, 1/9 years), so the reaction continues a little, but not enough for $27 of
+    costs.
+- **Settlement (13:28–13:30 CT):** following the day into 13:29 −$31 (t −4.1, 0/9 years); fading −$23. After
+  settlement, following −$38 (t −5.3), fading −$16. The windows are too small for the costs. CL has no late-day flow
+  like NQ's.
+- **Commodity-index roll (business days 5–9):** short the front on roll days +$43 (t 0.7).
+  - Front-running it (short on business days 1–4): +$97, PF 1.21, t 1.4, 7/9 years, both halves positive ($109 /
+    $81). Sharpe 0.47, Sortino 0.76, Calmar 0.19, Ulcer 9.6.
+  - Placebo: 4.7% of random-day samples do as well, but it's the best of ~30 lines.
+  - 2026 lost −$21,843 and 2020 −$5,928. Holdout Sharpe 0.41 (P ≤ 0 26%), drawdown at the 96th percentile of
+    permutations.
+- **Expiry window and day of week:** expiry days −5 … +1: t ≤ 1.5 everywhere. Long Tuesday −$155 (t −2.5), Wednesday
+  −$101. Nothing beyond chance.
+- **Verdict:**
+  - **F** for the EIA and settlement flows.
+  - **D** for front-running the index roll: the right story, but t 1.4 and a bad 2026.
+  - CL's real forced flow is in the calendar spread (front vs second month), which a continuous front-month series
+    can't capture. Testing it would need each contract month exported separately (e.g. CLX26 and CLZ26).
+
 ## Gold Asian-range breakout (user's file Gold_Asian_Breakout_Strategy.txt, 2026-10-14): nothing to use on NQ / ES
 
 **Rules:**
