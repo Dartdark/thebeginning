@@ -1303,14 +1303,14 @@ Both legs, per 1 NQ of exposure. Design 2018–22, holdout 2023–26.
     day trade.
 - **Kalman intraday spread** (q and R by maximum likelihood on 2018–22: β 1.26 on ES, 1.03 on YM). At 9:00, 10:30 or
   12:00, |z| ≥ 0.25 / 0.5 / 1, follow or fade to 14:55:
-  - **ES:** 16 of 18 versions lose. Fading loses 1/9 years almost everywhere (t to −5.8). The best design version
+  - **ES:** 17 of 18 versions lose. Fading loses 1/9 years almost everywhere (t to −5.8). The best design version
     (9:00, |z| ≥ 1, follow) makes $3 a trade, holdout −$147.
   - **YM:** following at 9:00 is the same result as the OLS spread test. |z| ≥ 1 makes $221 (t 1.2), but its 2023–26
     is −$76. |z| ≥ 0.5 makes $136 (t 1.7, 6/9 years, holdout $102). Most of it is long NQ ($478 vs short $41), so
     it's NQ's opening momentum again. Holdout Sharpe of the best design version −0.12, P(Sharpe ≤ 0) 59%.
 - **Multi-day reversion** (rolling 250-day cointegration residual at yesterday's close; fade today 8:31 → 14:55, so
   flat every night):
-  - Every version is −$150 to +$69 a trade, t ≤ 0.6; follow and fade both lose on two legs.
+  - Every version is −$165 to +$116 a trade, t ≤ 0.65; follow and fade both lose on two legs.
   - From |z| ≥ 2 the spread keeps moving **away**: −6 / −35 / −129 bp over the next 1 / 5 / 20 sessions on ES and
     −14 / −72 / −150 bp on YM, in the fade direction. These spreads trend (NQ's multi-year outperformance) rather
     than revert.
