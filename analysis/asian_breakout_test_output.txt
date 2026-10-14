@@ -1,0 +1,59 @@
+Gold Asian-range breakout (user's file Gold_Asian_Breakout_Strategy.txt, 2026-10-14) ported to NQ and ES.
+
+=== NQ
+   as coded (20:00-00:00 CT, stop 1.0 x range, out 10:00, re-entry) n=5551 win 32% avg $  -27 PF 0.95 t -1.2 yrs+ 2/9 | 18-22 $  -48 23-26 $   -3 | L $  -18 S $  -36
+   as described (one trade a day)                             n=2257 win 32% avg $   -3 PF 1.00 t -0.1 yrs+ 6/9 | 18-22 $  -30 23-26 $   33 | L $   57 S $  -76
+      trades a day as coded: 2.46; median range 42.5 points; entries by hour {0: 1220, 1: 554, 2: 292, 3: 71, 4: 36, 5: 22, 6: 24, 7: 18, 8: 17, 9: 3}
+      placebo (one a day, random side, 10 runs): $-28 (-71..8) vs $-3
+   grid of 36: t > 2 in 0, t > 0 in 17; top 6:
+   range 20:00-0700, stop 1.0 x, out 1500, one a day          n=2217 win 44% avg $   97 PF 1.10 t  1.6 yrs+ 8/9 | 18-22 $   36 23-26 $  177 | L $  157 S $   22
+   range 20:00-0700, stop 0.5 x, out 1500, one a day          n=2217 win 31% avg $   52 PF 1.07 t  1.0 yrs+ 8/9 | 18-22 $   38 23-26 $   72 | L $  105 S $  -13
+   range 20:00-0200, stop 1.0 x, out 1500, one a day          n=2257 win 32% avg $   48 PF 1.05 t  0.8 yrs+ 7/9 | 18-22 $   21 23-26 $   84 | L $   96 S $  -12
+   range 20:00-0700, stop 1.0 x, out 1500, re-entry           n=3593 win 43% avg $   28 PF 1.03 t  0.6 yrs+ 5/9 | 18-22 $   30 23-26 $   25 | L $   55 S $   -3
+   range 20:00-0200, stop 1.0 x, out 1500, re-entry           n=5596 win 32% avg $   15 PF 1.02 t  0.5 yrs+ 5/9 | 18-22 $   16 23-26 $   13 | L $   40 S $  -12
+   range 20:00-0700, stop 0.5 x, out 1500, re-entry           n=5086 win 31% avg $   11 PF 1.02 t  0.4 yrs+ 6/9 | 18-22 $   18 23-26 $    3 | L $   23 S $   -2
+
+=== ES
+   as coded (20:00-00:00 CT, stop 1.0 x range, out 10:00, re-entry) n=5639 win 31% avg $  -51 PF 0.85 t -4.3 yrs+ 0/9 | 18-22 $  -52 23-26 $  -50 | L $  -37 S $  -67
+   as described (one trade a day)                             n=2260 win 31% avg $  -42 PF 0.89 t -1.9 yrs+ 2/9 | 18-22 $  -43 23-26 $  -41 | L $   -3 S $  -89
+      trades a day as coded: 2.50; median range 10.0 points; entries by hour {0: 1322, 1: 510, 2: 289, 3: 61, 4: 21, 5: 14, 6: 18, 7: 10, 8: 9, 9: 6}
+      placebo (one a day, random side, 10 runs): $-23 (-49..16) vs $-42
+   grid of 36: t > 2 in 0, t > 0 in 1; top 6:
+   range 20:00-0700, stop 1.0 x, out 1500, one a day          n=2206 win 45% avg $   16 PF 1.03 t  0.5 yrs+ 4/9 | 18-22 $  -11 23-26 $   52 | L $   48 S $  -24
+   range 20:00-0700, stop 1.0 x, out 1200, one a day          n=2147 win 46% avg $  -13 PF 0.97 t -0.5 yrs+ 3/9 | 18-22 $   -7 23-26 $  -21 | L $    8 S $  -40
+   range 20:00-0700, stop 0.5 x, out 1500, one a day          n=2206 win 31% avg $  -15 PF 0.96 t -0.6 yrs+ 3/9 | 18-22 $  -17 23-26 $  -13 | L $   21 S $  -61
+   range 20:00-0700, stop 1.0 x, out 1500, re-entry           n=3509 win 42% avg $  -16 PF 0.97 t -0.6 yrs+ 3/9 | 18-22 $  -20 23-26 $  -11 | L $    6 S $  -40
+   range 20:00-0200, stop 1.0 x, out 1500, one a day          n=2256 win 31% avg $  -23 PF 0.96 t -0.7 yrs+ 3/9 | 18-22 $  -27 23-26 $  -16 | L $   -8 S $  -40
+   range 20:00-0200, stop 1.0 x, out 1200, one a day          n=2254 win 35% avg $  -27 PF 0.94 t -1.0 yrs+ 3/9 | 18-22 $  -16 23-26 $  -41 | L $  -18 S $  -37
+
+                                                           trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+NQ as described                                              2257 32%  $-3   $-746  -0.02   -0.04          1.00 $92,113  -0.01 64.64      -0.02
+  longs NQ as described                                      1237 35%  $57  $7,892   0.36    0.66          1.09 $39,465   0.20 16.86       0.94
+  shorts NQ as described                                     1020 29% $-76 $-8,637  -0.39   -0.67          0.90 $92,818  -0.09 91.82      -0.19
+NQ best: range 20:00-0700, stop 1.0 x, out 1500, one a day   2217 44%  $97 $23,938   0.53    0.89          1.10 $66,722   0.36 18.35       2.61
+  longs NQ best: range 20:00                                 1229 47% $157 $21,463   0.65    1.14          1.17 $41,911   0.51 14.11       3.04
+  shorts NQ best: range 20:00                                 988 42%  $22  $2,475   0.08    0.13          1.02 $83,078   0.03 32.50       0.15
+                                      actual        p5       p50        p95
+name                  metric                                               
+NQ as described 2023+ sharpe            0.22     -0.57      0.22       1.02
+                      sortino           0.39     -0.95      0.38       1.94
+                      pf_day            1.04      0.91      1.04       1.19
+                      calmar            0.16     -0.19      0.12       0.91
+                      ulcer            22.78     11.11     32.13     112.12
+                      max_dd       52,343.25 37,008.08 65,456.25 128,779.43
+                      P(Sharpe<=0)       NaN       NaN      0.33        NaN
+NQ best 2023+         sharpe            0.79      0.14      0.81       1.47
+                      sortino           1.36      0.22      1.40       2.72
+                      pf_day            1.15      1.02      1.15       1.30
+                      calmar            1.08      0.08      0.76       2.02
+                      ulcer            14.97      7.06     16.52      53.61
+                      max_dd       40,537.50 37,190.53 58,398.00 105,695.51
+                      P(Sharpe<=0)       NaN       NaN      0.03        NaN
+                      actual_dd pct_rank    dd50     dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+NQ as described 2023+   $52,343      16% $67,167 $106,245 $125,372        100%        100%        100%
+NQ best 2023+           $40,538       0% $70,885 $112,399 $136,441        100%        100%        100%
+   correlation of the NQ best with the plan: {'VB': 0.3, 'ONB_ML2_MC': 0.36, 'MON_MC': 0.13, 'EOS': 0.02, 'LDF_MC': 0.13}
+   current plan             1y $9,313 2y $12,569 blown 2% / 1%
+   + as described 1 MNQ     1y $8,328 2y $11,862 blown 9% / 7%
+   + best 1 MNQ             1y $7,082 2y $11,509 blown 12% / 10%
+   + best 2 MNQ             1y $3,728 2y $4,845 blown 63% / 65%

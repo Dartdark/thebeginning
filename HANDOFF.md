@@ -88,6 +88,8 @@ $158 below the flip vs $36 above (both halves, p 0.09): watch item for sizing LD
 3 MNQ below / 1 above: $10,924 vs $10,489 a year, blown 3% vs 7% (in-sample). Tracked in `WATCHLIST.md` with the other watch items.
 Volatility targeting (SSRN 3175538, `analysis/vol_target_test.py`): our edges grow with vol, every vol-scaled plan is worse (F).
 Abnormal volume (Bajo, SSRN 675587, `analysis/abnormal_volume_test.py`): no next-day continuation on NQ; spikes are sell-offs (F).
+Gold Asian-range breakout (user's file, `analysis/asian_breakout_test.py`): NQ $-3 a trade, ES $-42, best of 36 = the ONB-like
+overnight breakout, funded worse (F). Its code re-enters after stop-outs (not one a day as described).
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily

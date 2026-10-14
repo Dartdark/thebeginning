@@ -1274,6 +1274,39 @@ Code `../analysis/nq_ym_spread_test.py` (output in `..._output.txt`). Spread fro
   profitable part is NQ momentum we already have. Apex also restricts hedged positions, so a two-leg trade is
   awkward there in any case.
 
+## Gold Asian-range breakout (user's file Gold_Asian_Breakout_Strategy.txt, 2026-10-14): nothing to use on NQ / ES
+
+**Rules:**
+- Range = high / low 21:00 → 01:00 NY (20:00 → 00:00 CT).
+- At 01:00 NY, an OCO buy stop at the high and sell stop at the low.
+- Stop = 1.0 × the range width, no target, out at 11:00 NY (10:00 CT).
+- Author's gold claim: Sharpe ~0.89, PF 1.18, 34% win.
+
+**Code note:** the orders stay armed after a stop-out (`armed` is only reset at the exit time), so as coded it
+re-enters, about 2.5 trades a day on NQ. The description says one a day. No gold data here (the GC feed stops at
+Oct 4), so the gold claim itself is untested.
+
+Code `../analysis/asian_breakout_test.py` (output in `..._output.txt`). 1 contract, $7.25 ($5 ES) + 1 tick per fill,
+2018–2026.
+- **NQ:**
+  - As coded: 5,551 trades, −$27, PF 0.95, 2/9 years.
+  - One a day: 2,257 trades, 32% win, −$3, PF 1.00, Sharpe −0.02, max drawdown $92k per NQ. Longs $57, shorts
+    −$76.
+  - The random-side placebo makes −$28.
+- **ES:** as coded −$51 (t −4.3, 0/9 years); one a day −$42 (t −1.9).
+- **Grid of 36** (range end 00:00 / 02:00 / 07:00, stop 1.0 / 0.5 × range, out 10:00 / 12:00 / 15:00, one a day /
+  re-entry): no version t > 2 on NQ (17 of 36 positive), and 1 positive on ES.
+  - Best on NQ: range to 07:00, stop 1.0 ×, out 15:00. $97, PF 1.10, t 1.6, 8/9 years, Sharpe 0.53; longs $157,
+    shorts $22; max drawdown $67k.
+  - That best version correlates 0.36 with ONB ML and 0.30 with VB: it's the overnight-range breakout again.
+- **Funded bench** (plan $9,313 / $12,569, blown 2%):
+  - As described at 1 MNQ: $8,328 / $11,862, blown 9%.
+  - Best at 1 MNQ: $7,082, blown 12%.
+  - Best at 2 MNQ: $3,728, blown 63%.
+- **Verdict: F.** Arming the orders the moment the range closes is good practice, but VB and ONB already work that
+  way. Gold's Asia-quiet / London-break rhythm doesn't exist in NQ / ES: by 00:00 CT the index range is set by the
+  US close and the Asian open, and the break carries nothing.
+
 ## Volatility targeting (Harvey, Hoyle, Korgaonkar, Rattray, Sargaison & Van Hemert 2018, SSRN 3175538; user's upload 2026-10-14): hurts the plan
 
 **What it is.** Man Group's study of 60+ assets, 1926–2017.
