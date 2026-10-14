@@ -1314,6 +1314,21 @@ Results:
     halves, but p 0.09 on 2.3 years, and the funded bench can't test it before 2023. It would also need the
     Bridge's flip live at 14:00 (`OFB_Get`).
   - Revisit once another year of gamma data is in.
+- **On the funded bench** (`../analysis/ldf_gamma_sizing_check.py`, output in `..._output.txt`). Only accounts
+  starting from 2023-03-28 are scored, with LDF sized per day by the regime at 14:00 (2 MNQ on days without gamma
+  data).
+  - **Current plan:** 1-year $10,489, blown 7%, all 6 payouts 61%, median 235 days.
+  - **Below 3 / above 1 MNQ:** $10,924, blown 3%, 63%, 231 days.
+  - **Below 4 / above 2:** $10,715, blown 5%.
+  - **Below 4 / above 0:** $10,921, blown 4%, 65%.
+  - **Size control (LDF 3 everywhere):** $9,966, blown 11%, so the gain comes from the regime, not from size.
+  - **Placebo (shuffled regimes):** $10,314 (95th percentile $10,776) for 3 / 1, and $10,007 (95th $10,588) for 4 / 2.
+    Both real versions are above the 95th percentile.
+  - **2-year horizon:** every regime version reaches the full $13,000 with no account blown (current $12,685, 2%
+    blown).
+  - **Caveat:** the split was found in the same 2023–26 data, so this is in-sample and the gain is small (+$435 a
+    year, −4 points blown). Recommended only as a low-risk tweak: below 3 / above 1 keeps the average size under the
+    current 2 MNQ.
 
 ## Market Intraday Momentum (Gao, Han, Li & Zhou 2018, SSRN 2440866; user's upload 2026-10-14): gone on NQ / ES since 2018
 

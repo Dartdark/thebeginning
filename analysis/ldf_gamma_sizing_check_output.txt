@@ -1,0 +1,28 @@
+Does sizing Late-Day Flow by the 0DTE gamma flip help the funded plan? (user's question, 2026-10-14)
+gamma days 634: below 34%, above 63%, weak 3%
+
+=== horizon 250 trading days, 663 start days (2023-03-28 .. 2025-10-21)
+                                   paid blown any all6 med6
+current (LDF 2 everywhere)      $10,489    7% 95%  61%  235
+below 3 / above 1               $10,924    3% 98%  63%  231
+below 4 / above 2               $10,715    5% 97%  62%  222
+below 3 / above 2               $10,581    6% 96%  59%  237
+below 4 / above 1               $10,867    3% 98%  62%  230
+below 2 / above 0 (skip above)  $10,808    3% 98%  60%  234
+below 4 / above 0               $10,921    4% 98%  65%  229
+LDF 3 everywhere (size control)  $9,966   11% 95%  55%  244
+   placebo below 3 / above 1 (shuffled regimes, 50 runs): $10,314 (5-95% $9,704 .. $10,776) vs real $10,924
+   placebo below 4 / above 2 (shuffled regimes, 50 runs): $10,007 (5-95% $9,340 .. $10,588) vs real $10,715
+
+=== horizon 500 trading days, 413 start days (2023-03-28 .. 2024-10-30)
+                                   paid blown  any all6 med6
+current (LDF 2 everywhere)      $12,685    2%  98%  98%  248
+below 3 / above 1               $13,000    0% 100% 100%  247
+below 4 / above 2               $13,000    0% 100% 100%  247
+below 3 / above 2               $13,000    0% 100% 100%  252
+below 4 / above 1               $13,000    0% 100% 100%  249
+below 2 / above 0 (skip above)  $13,000    0% 100% 100%  252
+below 4 / above 0               $13,000    0% 100% 100%  243
+LDF 3 everywhere (size control) $12,409    5%  96%  95%  257
+   placebo below 3 / above 1 (shuffled regimes, 50 runs): $12,556 (5-95% $11,354 .. $13,000) vs real $13,000
+   placebo below 4 / above 2 (shuffled regimes, 50 runs): $12,133 (5-95% $10,676 .. $12,969) vs real $13,000
