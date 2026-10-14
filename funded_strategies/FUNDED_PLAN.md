@@ -560,6 +560,9 @@ fees. Scored at the backtest edge and at 75% of it.
     the table at the top of this file). The $1,000 setting nets about +7% per slot only by counting blown accounts as
     cheap restarts; per account the funded bench (current plan + CL fade) gives $1,500: $9,818 / $12,595, blown 4% / 2%
     vs $1,000: $9,293 / $10,734, blown 17% / 18%. Protecting each funded account comes first.
+    Re-checked against Tran 2026 ('From Funded to Paid', `../analysis/funded_to_paid_check.py`): $1,500 is best on every
+    measure - expected payouts, chance of any payout (93%), blown (4% / 2%) and all 6 payouts within 2 years (95%); fixed or
+    bolder sizing is worse on all of them (fixed 2x: paid 46%, blown 62% / 66%).
   - Scale 1.25 (+19% at the edge, +25% at 75%) costs more blown accounts (1.4–2.7 per slot over 3 years). Consider
     it only after the live edge ratio is ≥ 0.9 over ~40 trades.
   - Caveat: in-sample, and medians move in steps of the payout amounts.
