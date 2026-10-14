@@ -84,6 +84,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **Gold vs rates / dollar** (ZN + 6E now in `data/`, 2017-12 → 2026-10): F (`analysis/gold_rates_dollar_test.py`).
   - Treasury-auction price pressure paper (NY Fed SR 1188) on ZN / GC / 6E: D (pre-auction ZN fall real, +$15 gross t 2.3, vs $38.50 cost;
     `analysis/treasury_auction_test.py`).
+  - Overnight-Intraday Reversal Everywhere (SSRN 2730304), cross-sectional on the 7 markets: F (gross negative on a
+    synchronised clock; `analysis/co_oc_reversal_test.py`).
 - **Next research (needs data from the user):**
   - Closing-imbalance or options open-interest data for ES.
   - Without new data, the clock flows on GC / ES / YM / BTC are exhausted.

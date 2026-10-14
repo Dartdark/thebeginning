@@ -204,6 +204,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | 0DTE gamma and volatility (Dim, Eraker & Vilkov 2025) | Paper | Needs intraday 0DTE dealer positions (paid Cboe data) |
 | Contrarian VRP ETF strategy (SSRN 4841308) | Paper | Rules undefined, no costs, multi-day ETFs |
 | SPY/TQQQ "arbitrage" (SSRN 4944736) | Paper | Unhedged 1:1 share pair; a disguised directional bet |
+| Overnight-Intraday Reversal Everywhere (Liu, Liu, Wang, Zhou & Zhu 2025, SSRN 2730304): buy the futures with the lowest close → open return, sell the highest, hold open → close | Paper / cross-sectional reversal (7 markets; Python) | Paper (32 futures 2004–18, daily open / close): Sharpe 5.5 equity indices, 1.6–3.5 others, weaker after 2010. Here with a synchronised clock (signal 15:00 → 8:30 CT, roll jumps removed; trade 8:30 → 15:00, risk-scaled; `analysis/co_oc_reversal_test.py`): all 7 (NQ ES YM GC CL ZN 6E) gross −$42 a day (t −1.6, 2/9 years), net −$155 (Sharpe −2.1, 2023+ P(Sharpe ≤ 0) 100%); equities only gross $0 (net −$12); GC/CL/ZN/6E gross −$23; per-market fade of |z| ≥ 1 overnight moves: NQ +$31 net t 0.2 (2018–22 −$146, 2023–26 +$258), others −$89 to −$14 net. The paper's daily 'open' on 24-hour futures is likely a stale / non-synchronous print; the effect is gone on a clean clock |
 | Futures short-term reversal (QuantConnect) | Article | Code contradicts its description; weekly multi-market holds |
 | Mean-reversion Colab notebook | Notebook | Not noteworthy (reviewed earlier) |
 
