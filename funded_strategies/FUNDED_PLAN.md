@@ -524,3 +524,32 @@ unchanged; activation $85, stagger 10 days):
 
 Caveats: the backtest edge is in-sample (the strategies were chosen on this history); the simulator assumes the
 Apex rules in `../analysis/funded_sim.py`; payouts are counted when requested.
+
+### Tuning the sizing for the whole pipeline (2026-10-14)
+
+Code `../analysis/pipeline_tuning_test.py` (output in `..._output.txt`). One slot, 70 start months, 3 years, net of
+fees. Scored at the backtest edge and at 75% of it.
+- **Combine sizing doesn't matter much.** 72 sets (VB 4–10 MNQ × ONB $700–1,500 × Bridge Monday 1–3 × EOS off /
+  $500) all land at about $29–31k net over 3 years at the full edge and about $20–22k at 75%. The pipeline is driven
+  by the funded phase, and the challenge only decides how fast you get there. The current combine (pass 50.1%, the
+  highest) stays.
+- **Funded sizing does matter.** Recycling a blown account costs only a few challenges, so being a bit more
+  aggressive in the funded phase pays:
+
+  | Full size from cushion | Scale | Net 3 years (edge) | Blown per slot | Net 3 years (75% edge) | Blown per slot |
+  |---|---|---|---|---|---|
+  | $1,500 (current) | 1.0 | $30,420 | 0.04 | $21,212 | 0.53 |
+  | **$1,000** | **1.0** | **$32,702** | 0.49 | **$22,570** | 2.53 |
+  | $1,500 | 1.25 | $32,828 | 0.33 | $22,680 | 1.61 |
+  | $1,000 | 1.25 | $36,100 | 1.43 | $26,558 | 2.73 |
+  | $2,000 | 1.0 | $28,478 | 0.14 | $15,655 | 0.31 |
+  | $1,500 | 0.75 | $25,445 | 0.00 | $19,955 | 0.16 |
+
+- **Contract use stays within Apex's caps:** at full size a median 3 MNQ a day, 99th percentile 14, at scale 1.25
+  17. Over 20 MNQ on 0.1–0.4% of days, all on low-volatility 2018 days.
+- **Recommendation:**
+  - For the 3 live slots now: full size from a **$1,000 cushion** (f = cushion / $1,000, kept between 0.5 and 1):
+    about +7% net in both scenarios.
+  - Scale 1.25 (+19% at the edge, +25% at 75%) costs more blown accounts (1.4–2.7 per slot over 3 years). Consider
+    it only after the live edge ratio is ≥ 0.9 over ~40 trades.
+  - Caveat: in-sample, and medians move in steps of the payout amounts.

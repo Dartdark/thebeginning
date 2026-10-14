@@ -105,6 +105,8 @@ on real history. With the backtest edge, about $800 a month per slot, nearly lin
 $13k net after about 8 months). At 75% / 50% of the edge it's still positive over 3 years, but year one can be
 negative. Plan: start 3 slots, scale to 5-10 once live results are >= ~75% of the backtest per trade (`analysis/live_vs_backtest.py`).
 Apex allows trade copying (user, 2026-10-14): one master per phase; reduce a follower's multiplier if its cushion falls well below the master's. User starting 3 slots together on 2026-10-14. Details: `funded_strategies/FUNDED_PLAN.md` (last section).
+Pipeline tuning (`analysis/pipeline_tuning_test.py`): combine sizing barely matters (keep current); funded full size from a $1,000
+cushion (instead of $1,500) adds ~7% net per slot at the edge and at 75% of it; scale 1.25 only after the live edge ratio is >= 0.9.
 Live tracking: export live reports to `live/<KEY>_live.xlsx`, run `python3 analysis/live_vs_backtest.py --all live/` (see `live/README.md`).
 Cross-asset overnight (gold / oil / bitcoin) filters: 0 of 25 pass (`analysis/cross_asset_overnight_test.py`); ONB-after-gold-up on the watchlist (#7).
 Cross-asset map (`analysis/cross_asset_map_test.py`): correlations rise on FOMC / high-VIX days; no lead-lag; decoupling not tradeable.
