@@ -1364,6 +1364,42 @@ converted from the Eastern-time export to Central. 1 GC ($100 / point), $7.25 + 
   doesn't fit a $2,000 trailing drawdown. It would need a filter that cuts the losing streaks (range width vs ATR,
   London-open timing) before it could join the plan. On the watchlist.
 
+### Filter for the gold breakout (watchlist #6, 2026-10-14): a better strategy, still not a plan addition
+
+Code `../analysis/gold_breakout_filter_test.py` (output in `..._output.txt`). Six candidate filters, all known at entry.
+Each was bucketed on 2018–22 only; only clear patterns were kept, then run once on 2023–26.
+- **Rejected on 2018–22 (not monotone, or a single bucket):**
+  - range width / ATR;
+  - ATR percentile (it flips sign in 2023–26);
+  - weekday (only Wednesday is weak, t −2.2).
+- **Chosen:**
+  - **B:** cancel the unfilled orders at 02:00 CT. Fills in the first two hours make +0.060 R; later fills (London
+    / US fakeouts) lose −0.10 to −0.25 R.
+  - **B+D:** also skip breakouts in yesterday's direction.
+  - B+C (against the 20-day trend) is shown for comparison.
+- **Results (R = net / range width):**
+
+  | Version | Trades a year | R a trade (t) | 2018–22 / 2023–26 | Sharpe (2023+) | Max drawdown per GC | Worst 20 trades per MGC |
+  |---|---|---|---|---|---|---|
+  | Base | 255 | +0.045 (1.4) | +0.026 / +0.070 | 0.66 (0.88) | $61,229 | −$4,193 |
+  | **B: fills before 02:00** | 205 | **+0.078 (2.0)** | +0.060 / +0.103 | 0.78 (0.95) | $34,234 | −$3,111 |
+  | B+D | 109 | +0.106 (2.0) | +0.114 / +0.095 | 0.74 (0.99), Sortino 1.58 | $21,873 | −$1,677 |
+  | B+C (comparison) | 105 | +0.123 (2.1) | +0.070 / +0.197 | 0.74 (0.91) | $38,509 | −$2,407 |
+
+- **Notes on the table:**
+  - B: PF 1.22, Calmar 0.66, Ulcer 6.6; longs $121, shorts $105; 7/9 years positive in R (2019 and 2023 lose).
+  - Placebo (random subsets of the base trades of the same size): B is above the 95th percentile (+0.078 vs
+    +0.072). B+D is at it (+0.106 vs +0.109).
+- **Funded bench, still slightly below the current plan** (plan $9,313 / $12,569, blown 2%, median 255 days):
+  - B at 1 MGC: $8,997 / $12,239, blown 6%, 264 days.
+  - B+D at risk $100: $9,127 / $11,798, blown 9%, median 254 days, $890 a month recycled vs $871.
+  - Correlation with the plan is about 0.
+- **Gold alone in its own funded account:** at most $2,029 over 3 years, and blown 11–94% at sizes that earn
+  anything. A $2,000 trailing drawdown can't carry a 38%-win strategy with gold's swings.
+- **Verdict:** C (filter B makes it a real, uncorrelated edge). It doesn't speed up the $13k at Apex sizes, so it
+  stays on the watchlist (#6), recheck in 6 months. It could matter in a larger account or with a different payout
+  rule.
+
 ## Volatility targeting (Harvey, Hoyle, Korgaonkar, Rattray, Sargaison & Van Hemert 2018, SSRN 3175538; user's upload 2026-10-14): hurts the plan
 
 **What it is.** Man Group's study of 60+ assets, 1926–2017.
