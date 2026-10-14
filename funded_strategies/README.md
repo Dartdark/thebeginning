@@ -1307,6 +1307,32 @@ Code `../analysis/asian_breakout_test.py` (output in `..._output.txt`). 1 contra
   way. Gold's Asia-quiet / London-break rhythm doesn't exist in NQ / ES: by 00:00 CT the index range is set by the
   US close and the Asian open, and the break carries nothing.
 
+### On gold itself (GC 2018–2026, user's export, 2026-10-14): real but small, and too volatile for Apex
+
+Code `../analysis/gold_asian_breakout_gc_test.py` (output in `..._output.txt`). GC data in `data/GC_1min_2017..2026.csv`,
+converted from the Eastern-time export to Central. 1 GC ($100 / point), $7.25 + 1 tick ($10) a fill.
+- **As described (one trade a day):** 2,243 trades, 39% win, $83 a trade, PF 1.16, t 2.0, 7/9 years. Sharpe 0.66,
+  Sortino 1.11, Calmar 0.34, Ulcer 12.3. Longs $96, shorts $70. Placebo (random side) $1.
+  - 2023+ holdout: Sharpe 0.88 (90% 0.14–1.61, P ≤ 0 2%), PF 1.20.
+  - That matches the author's claim (Sharpe ~0.89, PF 1.18, 34% win).
+  - As coded (re-entry after stops) it's weaker: $31, t 1.2.
+- **Robust to the settings:** 33 of 36 versions positive, and all 22 that were positive in 2018–22 stay positive in
+  2023–26. The best by 2018–22 (out at 12:00) makes $96, t 2.1, holdout Sharpe 0.94.
+- **But the $ numbers ride gold's price rise.** In risk units the edge is +0.045 R a trade (t 1.4): 2018–22 +0.026 R,
+  2023–26 +0.070 R. 2019 (−0.145 R), 2021 and 2023 lose. In dollars 2026 alone is +$89,874 per GC.
+- **Uncorrelated with the plan** (−0.05 to +0.01 daily), which is what we wanted.
+- **Funded bench, it still hurts** (plan $9,313 / $12,569, blown 2%):
+  - 1 MGC: $8,845, blown 7%.
+  - 2 MGC: $7,840, 16%.
+  - Risk-sized at $100 / $150 / $250 a trade: $8,673 / $7,746 / $4,547, blown 10% / 22% / 64%.
+  - Median days to $13k: 296 at $150 vs 255.
+  - The reason is the profile: 61% losers, a 14-trade losing streak, and the worst 20-trade run −$4,193 per MGC in
+    the 2025–26 volatility. That is more than the $2,000 trailing drawdown at a single micro.
+  - Checking with end-of-day-only drawdown gives the same result, so it isn't the simulator's intraday path.
+- **Verdict: C (watch).** A genuine, uncorrelated gold edge, but thin per unit of risk and with a loss profile that
+  doesn't fit a $2,000 trailing drawdown. It would need a filter that cuts the losing streaks (range width vs ATR,
+  London-open timing) before it could join the plan. On the watchlist.
+
 ## Volatility targeting (Harvey, Hoyle, Korgaonkar, Rattray, Sargaison & Van Hemert 2018, SSRN 3175538; user's upload 2026-10-14): hurts the plan
 
 **What it is.** Man Group's study of 60+ assets, 1926–2017.

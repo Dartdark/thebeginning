@@ -90,6 +90,8 @@ Volatility targeting (SSRN 3175538, `analysis/vol_target_test.py`): our edges gr
 Abnormal volume (Bajo, SSRN 675587, `analysis/abnormal_volume_test.py`): no next-day continuation on NQ; spikes are sell-offs (F).
 Gold Asian-range breakout (user's file, `analysis/asian_breakout_test.py`): NQ $-3 a trade, ES $-42, best of 36 = the ONB-like
 overnight breakout, funded worse (F). Its code re-enters after stop-outs (not one a day as described).
+GC 2017-11 -> 2026-10 now in `data/GC_1min_*.csv` (converted ET -> CT). On gold itself the breakout is real but thin
+(`analysis/gold_asian_breakout_gc_test.py`: Sharpe 0.66, uncorrelated, +0.045 R t 1.4); funded bench worse (C, watchlist #6).
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily

@@ -1,0 +1,62 @@
+Gold Asian-range breakout (user's file Gold_Asian_Breakout_Strategy.txt) on gold itself: GC 2018-2026 (user's export).
+GC sessions 2302 (2017-11-30 .. 2026-10-13)
+
+1. Rules as given
+   as coded (re-entry after a stop)                           n=4246 win 38% avg $   31 PF 1.07 t  1.2 yrs+ 6/9 | 18-22 $    6 23-26 $   67 | L $   33 S $   28
+   as described (one trade a day)                             n=2243 win 39% avg $   83 PF 1.16 t  2.0 yrs+ 7/9 | 18-22 $   27 23-26 $  158 | L $   96 S $   70
+      trades a day as coded 1.89; median range 7.0 points ($700 per GC)
+      placebo (random side, 20 runs): $1 (-57..73) vs $83
+      by year (one a day): 2018 $3,164 | 2019 $-10,769 | 2020 $28,514 | 2021 $5,304 | 2022 $8,144 | 2023 $-9,243 | 2024 $34,007 | 2025 $37,783 | 2026 $89,874
+
+2. Grid of 36: t > 2 in 2, t > 0 in 33; design (2018-22) > 0 in 22, of which holdout > 0: 22
+   range 20:00-0000, stop 1.0 x, out 1200, one a day          n=2250 win 38% avg $   96 PF 1.17 t  2.1 yrs+ 7/9 | 18-22 $   30 23-26 $  184 | L $   93 S $  100
+   range 20:00-0000, stop 1.0 x, out 1000, one a day          n=2243 win 39% avg $   83 PF 1.16 t  2.0 yrs+ 7/9 | 18-22 $   27 23-26 $  158 | L $   96 S $   70
+   range 20:00-0000, stop 1.0 x, out 1500, one a day          n=2252 win 36% avg $  103 PF 1.17 t  2.1 yrs+ 6/9 | 18-22 $   26 23-26 $  204 | L $   92 S $  114
+   range 20:00-0200, stop 1.0 x, out 1200, one a day          n=2212 win 42% avg $   71 PF 1.13 t  1.6 yrs+ 6/9 | 18-22 $   21 23-26 $  138 | L $   60 S $   82
+   range 20:00-0200, stop 1.0 x, out 1500, one a day          n=2225 win 40% avg $   73 PF 1.12 t  1.6 yrs+ 6/9 | 18-22 $   17 23-26 $  148 | L $   58 S $   89
+   range 20:00-0700, stop 1.0 x, out 1200, one a day          n=1983 win 47% avg $   47 PF 1.10 t  1.4 yrs+ 6/9 | 18-22 $   16 23-26 $   89 | L $   51 S $   43
+
+3. Standard metrics per GC (best = range 20:00-0000, stop 1.0 x, out 1200, one a day)
+                       trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+as described             2243 39%  $83 $20,644   0.66    1.11          1.16 $61,229   0.34 12.34       3.35
+as described longs       1151 41%  $96 $12,249   0.65    1.10          1.19 $38,486   0.32 20.54       1.19
+as described shorts      1092 36%  $70  $8,395   0.33    0.57          1.12 $49,893   0.17  9.91       1.69
+best by 2018-22          2250 38%  $96 $23,883   0.69    1.25          1.17 $48,876   0.49 13.49       3.54
+best by 2018-22 longs    1154 39%  $93 $11,800   0.58    1.01          1.17 $51,465   0.23 27.62       0.85
+best by 2018-22 shorts   1096 36% $100 $12,083   0.43    0.80          1.17 $45,855   0.26  8.96       2.70
+                                       actual        p5       p50       p95
+name                   metric                                              
+as described 2023+     sharpe            0.88      0.14      0.88      1.61
+                       sortino           1.46      0.21      1.49      3.04
+                       pf_day            1.20      1.03      1.20      1.39
+                       calmar            0.64      0.08      0.80      2.17
+                       ulcer            16.86      5.72     13.98     49.43
+                       max_dd       61,228.50 28,976.51 48,744.50 90,683.13
+                       P(Sharpe<=0)       NaN       NaN      0.02       NaN
+best by 2018-22, 2023+ sharpe            0.94      0.32      0.95      1.58
+                       sortino           1.66      0.53      1.70      3.11
+                       pf_day            1.22      1.07      1.22      1.40
+                       calmar            0.93      0.22      1.03      2.44
+                       ulcer            15.49      5.50     12.33     35.25
+                       max_dd       48,875.75 28,217.25 44,292.00 78,714.96
+                       P(Sharpe<=0)       NaN       NaN      0.01       NaN
+                       actual_dd pct_rank    dd50    dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+as described 2023+       $61,229      63% $56,019 $86,035 $106,404        100%        100%        100%
+best by 2018-22, 2023+   $48,876      23% $57,683 $90,338 $106,311        100%        100%        100%
+   correlation (as described) with the plan: {'VB': 0.01, 'ONB_ML2_MC': -0.05, 'MON_MC': -0.01, 'EOS': -0.01, 'LDF_MC': 0.01}
+   current plan               1y $9,313 2y $12,569 blown 2% / 1%
+   + gold breakout 1 MGC      1y $8,845 2y $12,108 blown 7% / 5%
+   + gold breakout 2 MGC      1y $7,840 2y $11,225 blown 16% / 11%
+   + best-by-design 1 MGC     1y $8,967 2y $12,210 blown 8% / 4%
+   + best-by-design 2 MGC     1y $7,868 2y $11,355 blown 13% / 10%
+
+4. In risk units (R = net / (range width x $100), removes gold's price level) and risk-sized in the funded bench
+   as described: avg +0.045 R, t 1.4; by year 2018 +0.098 | 2019 -0.145 | 2020 +0.140 | 2021 -0.014 | 2022 +0.049 | 2023 -0.072 | 2024 +0.149 | 2025 +0.073 | 2026 +0.151; 2018-22 +0.026, 2023-26 +0.070
+   best by 2018-22: avg +0.050 R, t 1.4; by year 2018 +0.093 | 2019 -0.128 | 2020 +0.164 | 2021 -0.018 | 2022 +0.048 | 2023 -0.078 | 2024 +0.196 | 2025 +0.033 | 2026 +0.162; 2018-22 +0.032, 2023-26 +0.073
+   + gold breakout risk $100 a trade (MGC count = risk / range $)  1y $8,673 2y $11,583 blown 10% / 10%
+   + gold breakout risk $150 a trade (MGC count = risk / range $)  1y $7,746 2y $9,147 blown 22% / 29%
+   + gold breakout risk $250 a trade (MGC count = risk / range $)  1y $4,547 2y $4,212 blown 64% / 70%
+                 full6m full1y full2y median if_done blown per_month   exp3y max_mnq
+current plan         0%    47%    94%    255     255    0%      $871 $13,000      66
++ gold risk $150     0%    32%    66%    296     259   31%      $724  $9,188      72
++ gold risk $250     0%    19%    27%   >750     228   73%      $593  $3,908      77
