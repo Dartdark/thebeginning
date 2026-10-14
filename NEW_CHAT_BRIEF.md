@@ -86,6 +86,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     `analysis/treasury_auction_test.py`).
   - Overnight-Intraday Reversal Everywhere (SSRN 2730304), cross-sectional on the 7 markets: F (gross negative on a
     synchronised clock; `analysis/co_oc_reversal_test.py`).
+  - A Tale of One Day (SSRN 4192163), morning momentum / afternoon reversal on NQ / ES / YM: F
+    (`analysis/morning_afternoon_test.py`).
 - **Next research (needs data from the user):**
   - Closing-imbalance or options open-interest data for ES.
   - Without new data, the clock flows on GC / ES / YM / BTC are exhausted.
