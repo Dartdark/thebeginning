@@ -63,6 +63,11 @@ NQ plan's 4,500+ trades spans a roll jump except one Bridge Monday Long trade (2
 Side finding: Overnight Bias ML v2's filter, fit on 2018–22 only, keeps $469 vs skips $212 on 2023–26 (t 1.0):
 direction holds, power is low; watchlist #13 (the live reports decide).
 
+## User's CL forced-flow chat (2026-10-14)
+
+`analysis/cl_forced_flows_round2_test.py`: Platts window, EIA sweep fade, round-number hedging walls F; USO roll short
+8:00 → 13:29 $122 / t 1.7 (D, same as the index-roll short). The Sunday up-gap fade stays CL's strategy.
+
 ## Round 3 (next)
 
 The clock flows on GC / ES / YM / BTC are exhausted with 1-minute prices; S on those needs new information:
