@@ -38,7 +38,7 @@ Contracts (full / micro; costs per round trip + 1 tick per market or stop fill):
 | ES | MOC auction follow ($158 / ES, PF 2.11, t 3.5, 8/9 years; 2023–26 $99, t 1.2) | **B** | VIX-expiry Wednesday, ES-trained ONB ridge, GEX regime F; EOS in calm VIX C |
 | YM | MOC follow ($123, t 3.4, 2023–26 $37) / post-settlement fade ($25, t 2.6, YM-only, fragile) | C | ONB / ML on YM dead (every cell flips sign in 2023–26) |
 | GC | Asian-range breakout (unchanged, +0.091 R, t 2.2) | C | Nothing advances (533 variants). LBMA auction fall is real (moves with the London clock) but below costs; expiry-day pinning real (range 0.62 vs 0.71 ATR) |
-| CL | **Sunday up-gap fade, stop 0.75 ATR** ($602 / CL, PF 2.94, t 3.2, 9/9 years, 2023+ bootstrap 5th pct 0.37; funded + 2 MCL 255 → 238 days to $13k) | **B → A if MultiCharts confirms** | `funded_strategies/CL_Sunday_Gap_Fade.txt` written; API, rig count, options expiry, roll windows, ONB-CL F |
+| CL | **Sunday up-gap fade, stop 0.75 ATR, out 9:00 CT** — MultiCharts-confirmed (96/97 trades): $653 / CL, PF 3.02, t 3.2, 9/9 years | **A** (in the funded plan, 2 MCL) | S needs t ≥ 4.5: not reachable at ~11 trades a year; API, rig count, options expiry, roll windows, ONB-CL F |
 | BTC | Weekend-gap continuation (real before costs, t 4.6, but not fillable) | C | Seasonality, VB / ONB / TSMOM ports, NQ spillover F |
 
 No S on any new symbol yet. Two B leads (ES MOC, CL Sunday gap) and one mechanism confirmed on three markets (the

@@ -456,6 +456,14 @@ On the day the challenge passes, change the inputs (do not reuse the challenge s
 - The model assumes live fills like the backtest. Overnight liquidity is thinner, so
   expect some extra slippage on Overnight Drift's stop.
 
+## CL Sunday Gap Fade added (2026-10-14)
+
+First strategy on another market: `CL_Sunday_Gap_Fade.txt` on a 5-minute **MCL** chart (Eastern exchange time,
+`NumContracts` 2, `ExitTime` 1000 = 9:00 CT). MultiCharts-confirmed (96/97 trades). Trades about 11 Sundays a year
+(17:05 CT → Monday 9:00 CT, stop 0.75 ATR); uncorrelated with the NQ strategies (≤ 0.08). Funded bench: $9,818 (1y) /
+$12,595 (2y) vs $9,313 / $12,569, blown 4% / 2%, median days to all 6 payouts 255 → 239. Check that Apex allows
+MCL on the account before turning it on; it runs on its own chart and the copier like the other funded strategies.
+
 ## How many accounts to run: the full pipeline (2026-10-14)
 
 Code `../analysis/account_pipeline_test.py` (output in `..._output.txt`). Each "slot" cycles through:

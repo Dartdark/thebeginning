@@ -1,8 +1,9 @@
-{ CL Sunday Gap Fade - MultiCharts PowerLanguage signal (funded candidate, crude oil)
+{ CL Sunday Gap Fade - MultiCharts PowerLanguage signal (funded strategy, crude oil; MultiCharts-confirmed 2026-10-14)
 
   When crude reopens on Sunday evening (17:00 CT) above Friday's last price by
-  at least GapAtrPct x the 15-day ATR, sell short at the 17:05 bar open and buy
-  back at the close of Monday's 10:00 CT bar, stop StopAtrPct x ATR.
+  at least GapAtrPct x the 15-day ATR, sell short at the 17:05 CT bar open and
+  buy back at the close of Monday's 9:00 CT bar (ExitTime 1000 on the chart's
+  Eastern exchange time), stop StopAtrPct x ATR.
   Up-gaps only by default (FadeDownGaps = false): fading down-gaps did not hold
   up (2023-26 PF 0.58).
 
@@ -23,8 +24,18 @@
   (2026-03-08, crude $98 -> $119 on Sunday night) had a -$16,567 open loss per
   CL: keep the stop on.
 
-  Apply to a 5-minute CL or MCL chart, Exchange time zone (Central), CME
-  24-hour session, Bar Magnifier on at 1 minute. Load at least 25 trading days
+  MultiCharts report (5-minute @CL, Bar Magnifier 1 min, 2018-03 -> 2026-10,
+  analysis/cl_sunday_fade_confirm.py): 97 trades; 96 identical to the Python
+  rule run with the same timing (entry prices 100% equal, P&L within $30 on
+  98%); after $27.25 costs $653 a trade, PF 3.02, t 3.2, 66% winners, 9 of 9
+  years, Sharpe 1.04, Sortino 3.00, Calmar 1.40, Ulcer 1.43. Funded bench with
+  this spec: plan + 2 MCL $9,818 / $12,595, blown 4% / 2%, median days to all
+  6 payouts 255 -> 239.
+
+  Apply to a 5-minute CL or MCL chart, Exchange time zone (NYMEX = Eastern,
+  as in the confirmed backtest: entries stamped 18:10 ET, ExitTime 1000 =
+  10:00 ET = 9:00 CT), 24-hour session, Bar Magnifier on at 1 minute. On a
+  Central-time chart set ExitTime 900 instead. Load at least 25 trading days
   before the backtest start (for the ATR). Backtest on CL: RiskPerTrade 0,
   NumContracts 1. Funded plan: MCL, NumContracts 2.
 

@@ -54,6 +54,7 @@ Tier list of everything tested: `../TIER_LIST.md`.
 | Monday Long (replaced Overnight Drift) | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 |
 | Expiration Open Short | 5 min MNQ | `RiskPerTrade` 700 |
 | **Late-Day Flow** (added 2026-10-12) | 5 min MNQ | `NumContracts` 2, `RiskPerTrade` 0 |
+| **CL Sunday Gap Fade** (added 2026-10-14) | 5 min MCL (Eastern exchange time) | `NumContracts` 2, `RiskPerTrade` 0, `ExitTime` 1000 |
 
 With cushion sizing: **$7,676 expected payouts within 1 year, $12,012 within 2 years, 4–6% of
 accounts blown** (before Late-Day Flow: $7,153 / $11,612 / 9–10%). Portfolio Sharpe 2.51,
@@ -714,6 +715,13 @@ flips only). Per NQ after $7.25 + 1 tick per market/stop fill, 2018–2026.
   **F.**
 
 ## S-rank program rounds 1-2 (2026-10-14): CL Sunday up-gap fade is the best non-NQ strategy
+
+**MultiCharts-confirmed and added to the funded plan at 2 MCL (2026-10-14).** Report `Backtesting Strategy Performance
+Report _ CL - 5 Minutes CL Sunday Gap.xlsx` (the chart ran on Eastern time, so ExitTime 1000 = 9:00 CT): 97 trades, 96
+identical to the Python rule with that timing; after $27.25 costs $653 a trade, PF 3.02, t 3.2, 9/9 years, Sharpe 1.04,
+Sortino 3.00, Calmar 1.40, Ulcer 1.43. Bench on this spec: + 2 MCL $9,818 / $12,595, blown 4% / 2%, median 255 -> 239
+days to all 6 payouts (`../analysis/cl_sunday_fade_confirm.py`, `../analysis/cl_sunday_fade_bench.py`). The
+numbers below are the original Python test (exit 10:00 CT).
 
 Goal (user): one S strategy per symbol (`../S_RANK_PROGRAM.md`). Ten agent-run test scripts
 (`../analysis/s_rank_<symbol>_round1_test.py`, `s_rank_{moc,gap,misc}_round2_test.py`), every output reproduced.

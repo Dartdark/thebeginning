@@ -122,7 +122,8 @@ S-rank program (`S_RANK_PROGRAM.md`, user's goal 2026-10-14: one S strategy per 
 B leads: ES MOC follow (t 3.5), CL Sunday-gap fade (t 3.2, 9/9 years). Continuous contracts have unadjusted roll jumps (NQ +120..310 pts
 per roll since 2023, GC, CL) at 03:32 or 17:01: the NQ plan's trades are clear of them; drop roll bars in new tests.
 Round 2: CL Sunday up-gap fade (shorts, stop 0.75 ATR) $602 PF 2.94 t 3.2 9/9 yrs, funded + 2 MCL 255 -> 238 days; MultiCharts code
-`funded_strategies/CL_Sunday_Gap_Fade.txt` awaits the user's backtest. MOC pooled B (no gain); ES ONB via NQ ridge F; EOS calm-VIX C.
+`funded_strategies/CL_Sunday_Gap_Fade.txt` MultiCharts-confirmed (96/97 trades, $653 PF 3.02; chart on ET so exit 9:00 CT) -> A, funded plan + 2 MCL.
+Live fix: Overnight Bias stop entries rejected when price is already through the level -> market entry (all ONB files). MOC pooled B (no gain); ES ONB via NQ ridge F; EOS calm-VIX C.
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily

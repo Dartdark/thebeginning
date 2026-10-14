@@ -1,7 +1,8 @@
 """Funded bench for the CL shorts-only Sunday-gap fade (S-rank round 2's best non-NQ line), 2026-10-14.
 
 Rule (analysis/s_rank_gap_round2_test.py): when CL's Sunday 17:01 open is >= 0.1 x 15-day ATR above the last price
-before the weekend close, short at the 17:05 bar open - 1 tick, out at the Monday 10:00 close + 1 tick, stop 0.75 x ATR (fills at max(open, stop) + 1 tick);
+before the weekend close, short at the 17:05 bar open - 1 tick, out at the Monday 9:00 CT close + 1 tick (MultiCharts-confirmed spec; the
+original Python test used 10:00 CT: $602 a trade, bench +2 MCL $9,839 / $12,630), stop 0.75 x ATR (fills at max(open, stop) + 1 tick);
 (no stop: $642 a trade, PF 3.17, but one open loss of -$16.6k per CL on 2026-03-08, crude $98 -> $119 on Sunday night;
 stops 0.5 / 0.75 / 1.0 / 1.5 / 2.0 ATR: t 2.8 / 3.2 / 2.9 / 2.7 / 2.6, 2018-22 $350 / $507 / $509 / $509 / $509);
 roll weekends skipped. $7.25 + 1 tick per fill, 1 CL; the bench trades it in MCL (1/10) next to the NQ funded plan,
@@ -17,6 +18,9 @@ import metrics as M, resampling as R
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 PV, TICK, COMM = 1000.0, 0.01, 7.25
 STOP = 0.75
+# MultiCharts-confirmed spec (analysis/cl_sunday_fade_confirm.py: 96/97 trades identical): the chart ran on Eastern time, so
+# the exit is 10:00 ET = 9:00 CT, the entry the 17:05 CT 5-minute bar open, and roll weekends are not skipped.
+EXIT_CT, ENTRY_T, ROLL_SKIP = 900, 1706, False
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
@@ -24,8 +28,8 @@ if __name__ == "__main__":
     O, H, C = cl.o.ravel(), cl.h.ravel(), pd.Series(cl.c.ravel()).ffill().to_numpy()
     rows = []
     for r in fr.itertuples():
-        if not r.ok or r.roll or not (r.gA >= 0.1): continue
-        e_i = int(r.sun) * 1440 + jof(1705); x_i = int(r.mon) * 1440 + jof(1000)
+        if not r.ok or (ROLL_SKIP and r.roll) or not (r.gA >= 0.1): continue
+        e_i = int(r.sun) * 1440 + jof(ENTRY_T); x_i = int(r.mon) * 1440 + jof(EXIT_CT)
         if np.isnan(O[e_i]): continue
         e = O[e_i] - TICK; px = C[x_i] + TICK; sp = e + STOP * r.atr; jx = x_i
         hit = np.where(H[e_i:x_i + 1] >= sp)[0]
