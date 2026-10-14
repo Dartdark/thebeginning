@@ -1,0 +1,39 @@
+Funded bench for the CL shorts-only Sunday-gap fade (S-rank round 2's best non-NQ line), 2026-10-14.
+trades 93, avg $602, PF 2.94, t 3.2, 2018-22 $507, 2023-26 $670; worst open loss per CL $-4,547
+   by year: 2018 $256 | 2019 $1,925 | 2020 $5,252 | 2021 $1,792 | 2022 $10,549 | 2023 $3,218 | 2024 $7,253 | 2025 $9,273 | 2026 $16,444
+                               trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+CL Sunday up-gap fade (shorts)     93 65% $602 $6,191   1.00    2.73          2.94 $5,366   1.15  1.17      10.61
+  2023+                            54 67% $670 $9,277   1.14    2.84          2.58 $5,366   1.73  1.66      11.16
+                                     actual       p5      p50       p95
+name                  metric                                           
+CL Sunday fade, 2023+ sharpe           1.14     0.37     1.15      1.72
+                      sortino          2.84     0.62     2.78      6.41
+                      pf_day           2.58     1.31     2.53      5.04
+                      calmar           1.73     0.26     1.61      4.48
+                      ulcer            1.66     1.21     2.70      7.51
+                      max_dd       5,366.25 3,163.50 5,563.88 10,723.19
+                      P(Sharpe<=0)      NaN      NaN     0.01       NaN
+                      actual_dd pct_rank   dd50   dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+CL Sunday fade, 2023+    $5,366      40% $5,746 $9,366 $11,646        100%        100%        100%
+daily correlation with the plan: {'VB': -0.02, 'ONB_ML2_MC': 0.01, 'EOS': -0.0, 'LDF_MC': -0.03, 'MON_MC': -0.07, 'MON_BR_MC': 0.05}
+   cushion $1,500: plan             1y $9,313 2y $12,569 blown 2% / 1%
+   cushion $1,500: plan + 1 MCL     1y $9,447 2y $12,590 blown 3% / 1%
+   cushion $1,500: plan + 2 MCL     1y $9,839 2y $12,630 blown 3% / 2%
+   cushion $1,500: plan + 3 MCL     1y $9,923 2y $12,661 blown 4% / 2%
+   cushion $1,500: plan + 5 MCL     1y $9,699 2y $12,329 blown 7% / 5%
+   cushion $1,000: plan             1y $9,001 2y $10,707 blown 17% / 18%
+   cushion $1,000: plan + 1 MCL     1y $9,102 2y $10,621 blown 18% / 19%
+   cushion $1,000: plan + 2 MCL     1y $9,197 2y $10,655 blown 18% / 18%
+   cushion $1,000: plan + 3 MCL     1y $9,314 2y $10,660 blown 18% / 18%
+   cushion $1,000: plan + 5 MCL     1y $8,548 2y $9,472 blown 29% / 28%
+                             full6m full1y full2y median if_done blown per_month   exp3y max_mnq
+cushion $1,500: plan             0%    47%    94%    255     255    0%      $871 $13,000      66
+cushion $1,500: plan + 1 MCL     0%    50%    94%    250     250    0%      $883 $13,000      67
+cushion $1,500: plan + 2 MCL     0%    57%    94%    238     237    2%      $924 $12,768      68
+cushion $1,500: plan + 3 MCL     0%    59%    94%    234     233    2%      $938 $12,768      69
+cushion $1,500: plan + 5 MCL     0%    59%    92%    233     230    5%      $943 $12,322      71
+cushion $1,000: plan             0%    50%    85%    250     239   14%      $932 $11,226      66
+cushion $1,000: plan + 1 MCL     0%    55%    84%    241     233   15%      $953 $11,129      67
+cushion $1,000: plan + 2 MCL     0%    58%    83%    235     225   16%      $975 $10,981      68
+cushion $1,000: plan + 3 MCL     0%    59%    84%    232     221   16%      $986 $10,978      69
+cushion $1,000: plan + 5 MCL     0%    56%    72%    235     213   28%      $968  $9,521      71

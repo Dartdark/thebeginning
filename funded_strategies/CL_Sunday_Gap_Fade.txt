@@ -1,0 +1,116 @@
+{ CL Sunday Gap Fade - MultiCharts PowerLanguage signal (funded candidate, crude oil)
+
+  When crude reopens on Sunday evening (17:00 CT) above Friday's last price by
+  at least GapAtrPct x the 15-day ATR, sell short at the 17:05 bar open and buy
+  back at the close of Monday's 10:00 CT bar, stop StopAtrPct x ATR.
+  Up-gaps only by default (FadeDownGaps = false): fading down-gaps did not hold
+  up (2023-26 PF 0.58).
+
+  Why: weekend news (OPEC, geopolitics) is priced into the Sunday open all at
+  once, by thin overnight liquidity; the up-gap overshoots and gives back part
+  of it by the Monday morning session. The same fade on the Monday-Thursday
+  17:00 reopen gaps loses, and the Sunday fade does not work on gold or the
+  equity indices, so it is specific to crude's weekend gap.
+
+  Python test (analysis/s_rank_gap_round2_test.py, analysis/cl_sunday_fade_bench.py;
+  1-minute CL 2018-2026, per CL after $7.25 and 1 tick per fill): 93 trades,
+  65% winners, $602 a trade, PF 2.94, t 3.2, 9 of 9 years positive (2018-22
+  $507, 2023-26 $670); Sharpe 1.00, Sortino 2.73, Calmar 1.15, Ulcer 1.17;
+  2023+ bootstrap Sharpe 5-95% 0.37-1.72. Daily correlation with every NQ plan
+  strategy within +/-0.07. Funded bench (plan + 2 MCL, full size from a $1,500
+  cushion): $9,839 (1 year) / $12,630 (2 years) vs $9,313 / $12,569, blown 3%,
+  median days to all 6 payouts 255 -> 238. Without the stop one trade
+  (2026-03-08, crude $98 -> $119 on Sunday night) had a -$16,567 open loss per
+  CL: keep the stop on.
+
+  Apply to a 5-minute CL or MCL chart, Exchange time zone (Central), CME
+  24-hour session, Bar Magnifier on at 1 minute. Load at least 25 trading days
+  before the backtest start (for the ATR). Backtest on CL: RiskPerTrade 0,
+  NumContracts 1. Funded plan: MCL, NumContracts 2.
+
+  NOTES
+  - The Python test skipped 21 roll weekends of the continuous contract (the
+    unadjusted series jumps at the roll); including them changes the result
+    only slightly ($591 vs $602 a trade), and a live position in one contract
+    has no roll jump, so this code does not skip them.
+  - US holiday Mondays: the Python test had no trade when Monday was not a
+    regular trading day; this code trades them (Globex is open Monday morning
+    on those holidays), so expect a few extra trades in the MultiCharts report. }
+
+Inputs:
+	GapAtrPct(0.10),        { minimum gap, x 15-day ATR }
+	StopAtrPct(0.75),
+	ExitTime(1000),         { Monday, CT: buy back at the close of this bar }
+	FadeDownGaps(false),    { true = also buy down-gaps (not recommended) }
+	AtrDays(15),
+	RiskPerTrade(0),        { $ lost at the stop; 0 = trade NumContracts }
+	NumContracts(1);
+
+Variables:
+	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
+	RefClose(0), Gap(0), StopPts(0), Qty(0), Side(0), SundayBar(0);
+
+Arrays:
+	TrHist[100](0);
+
+{ ---------- Daily ATR (weekdays, calendar dates), as in Overnight Bias / EOS ---------- }
+if Date <> Date[1] then begin
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	DayHi = High;
+	DayLo = Low;
+	SundayBar = 0;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+SundayBar = SundayBar + 1;
+
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+
+{ ---------- Entry: the first Sunday bar (17:00-17:05) decides, enter at the next bar's open ---------- }
+if DayOfWeek(Date) = 0 and SundayBar = 1 and MarketPosition = 0 and ATRv > 0 then begin
+	RefClose = Close[1];                   { Friday's last price }
+	Gap = Open - RefClose;                 { Sunday 17:00 open vs Friday }
+	Side = 0;
+	if Gap >= GapAtrPct * ATRv then Side = -1;
+	if FadeDownGaps and Gap <= -GapAtrPct * ATRv then Side = 1;
+	if Side <> 0 then begin
+		StopPts = StopAtrPct * ATRv;
+		Qty = NumContracts;
+		if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
+		if Qty >= 1 then begin
+			if Side < 0 then SellShort ("SunGap S") Qty contracts next bar at market
+			else Buy ("SunGap L") Qty contracts next bar at market;
+		end;
+	end;
+end;
+
+{ ---------- Exits ---------- }
+SetStopContract;
+if StopPts > 0 then SetStopLoss(StopPts * BigPointValue);
+
+if MarketPosition <> 0 and DayOfWeek(Date) >= 1 and Time >= ExitTime then begin
+	if MarketPosition < 0 then BuyToCover ("SunGap SX") this bar on close
+	else Sell ("SunGap LX") this bar on close;
+end;

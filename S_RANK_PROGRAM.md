@@ -38,7 +38,7 @@ Contracts (full / micro; costs per round trip + 1 tick per market or stop fill):
 | ES | MOC auction follow ($158 / ES, PF 2.11, t 3.5, 8/9 years; 2023–26 $99, t 1.2) | **B** | VIX-expiry Wednesday, ES-trained ONB ridge, GEX regime F; EOS in calm VIX C |
 | YM | MOC follow ($123, t 3.4, 2023–26 $37) / post-settlement fade ($25, t 2.6, YM-only, fragile) | C | ONB / ML on YM dead (every cell flips sign in 2023–26) |
 | GC | Asian-range breakout (unchanged, +0.091 R, t 2.2) | C | Nothing advances (533 variants). LBMA auction fall is real (moves with the London clock) but below costs; expiry-day pinning real (range 0.62 vs 0.71 ATR) |
-| CL | **Sunday-open gap fade** ($442 / CL, PF 2.26, t 3.2, 9/9 years; ~$7.4k a year) | **B** | API, rig count, options expiry, roll windows, ONB-CL F |
+| CL | **Sunday up-gap fade, stop 0.75 ATR** ($602 / CL, PF 2.94, t 3.2, 9/9 years, 2023+ bootstrap 5th pct 0.37; funded + 2 MCL 255 → 238 days to $13k) | **B → A if MultiCharts confirms** | `funded_strategies/CL_Sunday_Gap_Fade.txt` written; API, rig count, options expiry, roll windows, ONB-CL F |
 | BTC | Weekend-gap continuation (real before costs, t 4.6, but not fillable) | C | Seasonality, VB / ONB / TSMOM ports, NQ spillover F |
 
 No S on any new symbol yet. Two B leads (ES MOC, CL Sunday gap) and one mechanism confirmed on three markets (the
@@ -50,18 +50,31 @@ costs; the S candidates will have to be large, rare moves (gaps, auctions) or ne
 NQ plan's 4,500+ trades spans a roll jump except one Bridge Monday Long trade (2024-12-16); the gold breakout has 16 of
 2,243 trades across one (net ≈ $0). New tests must drop windows that contain a roll bar.
 
-## Round 2 (planned)
+## Round 2 results (2026-10-14)
 
-1. **MOC auction, pooled:** NQ + ES (+ YM) — trade only when the 14:00 → 14:50 moves agree, or size by agreement;
-   longs-only ES; holdout 2023–26 must stand on its own.
-2. **Weekend gap family:** CL Sunday fade walk-forward (side and threshold re-picked each year); the same rule on
-   GC / ES / NQ / YM Sunday gaps (placebo and basket), excluding roll Sundays; BTC continuation with a 17:01 limit /
-   stop entry at the open price ± k ticks.
-3. **ES Overnight Bias via NQ:** refit the NQ ONB ridge on 2018–22 only and apply it to ES 2023–26 (the only ML route
-   with signal: NQ weights on ES inputs kept $122 vs skipped $15).
-4. **Gold expiry pinning as a short-vol trade:** fade ≥ 0.5 ATR moves back toward the open on COMEX options-expiry
-   days; LBMA auction short with MGC limit orders.
-5. **EOS low-VIX split on NQ** (independent check of the ES split).
+| Item | Result | Tier |
+|---|---|---|
+| 1 MOC pooled NQ + ES + YM (`analysis/s_rank_moc_round2_test.py`) | Best: all three ≥ 0.3 ATR, enter 14:52: $931 / NQ-eq day, PF 2.71, t 3.8; 2023–26 Sharpe 0.38, 2025 lost on all three; legs 0.84–0.96 correlated | B (no gain from pooling) |
+| 2 Weekend gaps (`analysis/s_rank_gap_round2_test.py`, `analysis/cl_sunday_fade_bench.py`) | CL shorts-only fade best (above); walk-forward re-picking worse; GC / NQ / ES / YM / basket no; BTC stop entry 2023+ only, and CME BTC trades 24/7 since 2026-05-29 | CL B (A pending MC) |
+| 3 ES ONB with NQ's ridge fit on 2018–22 | ES 2023–26 kept $38 vs skipped $84 | F |
+| 4 Gold expiry pinning fade / LBMA limit short | Pinning fade only pays 2023–26; limit shorts lose in all 18 cells | D / F |
+| 5 EOS in calm VIX on NQ / YM | Same direction on all three indices (+$237 to +$257), each weak | C (sizing idea) |
+
+Side finding: Overnight Bias ML v2's filter, fit on 2018–22 only, keeps $469 vs skips $212 on 2023–26 (t 1.0):
+direction holds, power is low; watchlist #13 (the live reports decide).
+
+## Round 3 (next)
+
+The clock flows on GC / ES / YM / BTC are exhausted with 1-minute prices; S on those needs new information:
+1. **CL:** MultiCharts confirmation of the Sunday fade (user); other weekend/holiday reopens on CL (Monday-holiday
+   reopen, after US holidays); OPEC-meeting weekends.
+2. **ES / YM:** a second data series — real NYSE closing imbalance data, or options open interest by strike (pinning
+   for EOS), or ETF flow data; without new data, ES's best stays the MOC follow (B).
+3. **GC:** gold–dollar / rates conditioning (needs DXY or ZN exports); expiry pinning with open interest by strike.
+4. **BTC:** the weekend gap is gone (24/7 trading); the remaining idea is the ETF 15:00 benchmark with flow data.
+
+Data that would unlock round 3 (ask the user): ZN (10-year note) and 6E / DX 1-minute exports from MultiCharts;
+NYSE / Nasdaq closing imbalance history; CME open interest by strike.
 
 ## Round 1 hypotheses (forced or scheduled flows native to each market)
 

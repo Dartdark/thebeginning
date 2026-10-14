@@ -713,6 +713,31 @@ flips only). Per NQ after $7.25 + 1 tick per market/stop fill, 2018–2026.
 - 2,500–20,000 trades over 9 years means costs of $17 a trade dominate a gross edge of a few dollars.
   **F.**
 
+## S-rank program rounds 1-2 (2026-10-14): CL Sunday up-gap fade is the best non-NQ strategy
+
+Goal (user): one S strategy per symbol (`../S_RANK_PROGRAM.md`). Ten agent-run test scripts
+(`../analysis/s_rank_<symbol>_round1_test.py`, `s_rank_{moc,gap,misc}_round2_test.py`), every output reproduced.
+No S outside NQ. Best per symbol: ES MOC follow (B), YM MOC / post-settlement fade (C), GC Asian breakout (C), BTC
+none (C; CME bitcoin trades 24/7 since 2026-05-29), **CL Sunday up-gap fade (B, A if MultiCharts confirms)**.
+
+**CL Sunday up-gap fade** (`CL_Sunday_Gap_Fade.txt`): when crude reopens Sunday 17:00 CT >= 0.1 ATR above Friday's
+last price, short at 17:05, out Monday 10:00, stop 0.75 ATR. 93 trades, 65% win, $602 per CL, PF 2.94, t 3.2, 9/9
+years (2018-22 $507, 2023-26 $670); Sharpe 1.00, Sortino 2.73, Calmar 1.15, Ulcer 1.17; 2023+ bootstrap Sharpe 5-95%
+0.37-1.72. Placebos: the weekday 17:00 reopen gaps lose, random sides are never as good, and the same fade fails on
+GC / NQ / ES / YM. Correlation with the plan's strategies within +/-0.07.
+
+| Funded bench (full size from $1,500) | 1 year | 2 years | Blown | Median days to $13k |
+|---|---|---|---|---|
+| Plan | $9,313 | $12,569 | 2% | 255 |
+| + 1 MCL | $9,447 | $12,590 | 3% | 250 |
+| **+ 2 MCL** | **$9,839** | **$12,630** | **3%** | **238** |
+| + 3 MCL | $9,923 | $12,661 | 4% | 234 |
+| + 5 MCL | $9,699 | $12,329 | 7% | 233 |
+
+Stop choice: none / 0.5 / 0.75 / 1.0 / 1.5 / 2.0 ATR give t 3.3 / 2.8 / 3.2 / 2.9 / 2.7 / 2.6 (2018-22 $509 / $350 /
+$507 / $509 / $509 / $509); without a stop one trade (2026-03-08, crude $98 -> $119 on Sunday night) had a -$16.6k open
+loss per CL. Down-gap fades fail since 2023 (PF 0.58). Next: MultiCharts backtest on 5-minute CL from 2018.
+
 ## Forced-flow round 4 (2026-10-13): weekly expiries, MSCI reviews, JPMorgan collar — nothing tradeable
 
 Code `../analysis/forced_flows4_test.py` (output in `..._output.txt`); 36 comparisons, so |t| ≥ 3 is the
