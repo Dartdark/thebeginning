@@ -96,6 +96,8 @@ CL 2017-11 -> 2026-10 in `data/CL_1min_*.csv` (converted ET -> CT). Forced flows
 expiry, weekday all F; front-running the index roll (short BD 1-4) t 1.4 (D). CL-NQ corr 0.16, GC-NQ 0.12: diversifiers if an edge turns up.
 Gold breakout filter (`analysis/gold_breakout_filter_test.py`): cancel at 02:00 CT -> +0.078 R t 2.0, holds 2023-26; funded still
 below the plan (C, watchlist #6). Plan strategies on CL / GC (`analysis/commodity_plan_port_test.py`): none carries over (F).
+Gold breakout exits (`analysis/gold_breakout_exit_test.py`): hold to 12:00 CT best (+0.091 R t 2.2); tighter stops / breakeven / targets worse;
+funded about neutral; combine (`analysis/combine_gold_test.py`) no gain (pass 49.4-50.2% vs 50.1%).
 
 ## Apex rules confirmed (2026-10-13)
 The user confirmed the PA rules assumed in `analysis/funded_sim.py` (trailing drawdown and lock, daily

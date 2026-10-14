@@ -1,0 +1,32 @@
+Combine (Apex 50K challenge) with the gold Asian breakout added (user's request 2026-10-14).
+
+1. Combine pass rates (every start day)
+   current combine (VB 8 + ONB30 + BrMon 2 + EOS) pass 50.1% | 2023-26 54.5% | MLL fail 48.1% | median days to pass 6
+   + gold out 12:00, 1 MGC                      pass 49.4% | 2023-26 53.6% | MLL fail 48.6% | median days to pass 6
+   + gold out 12:00, 2 MGC                      pass 47.8% | 2023-26 50.8% | MLL fail 50.0% | median days to pass 6
+   + gold out 12:00, 3 MGC                      pass 47.3% | 2023-26 50.5% | MLL fail 50.6% | median days to pass 5
+   + gold out 12:00, 5 MGC                      pass 44.1% | 2023-26 43.7% | MLL fail 54.7% | median days to pass 5
+   + gold out 12:00, risk $100 (median 1 MGC)   pass 49.8% | 2023-26 55.1% | MLL fail 48.2% | median days to pass 6
+   + gold out 12:00, risk $200 (median 3 MGC)   pass 48.5% | 2023-26 54.0% | MLL fail 49.8% | median days to pass 6
+   + gold out 12:00, risk $300 (median 4 MGC)   pass 47.1% | 2023-26 53.5% | MLL fail 52.1% | median days to pass 6
+   + gold BE + 3R, out 12:00, 1 MGC             pass 49.7% | 2023-26 54.2% | MLL fail 48.9% | median days to pass 6
+   + gold BE + 3R, out 12:00, 2 MGC             pass 48.7% | 2023-26 53.6% | MLL fail 49.4% | median days to pass 6
+   + gold BE + 3R, out 12:00, 3 MGC             pass 48.1% | 2023-26 52.5% | MLL fail 50.3% | median days to pass 5
+   + gold BE + 3R, out 12:00, 5 MGC             pass 45.1% | 2023-26 48.2% | MLL fail 53.6% | median days to pass 5
+   + gold BE + 3R, out 12:00, risk $100 (median 1 MGC) pass 50.2% | 2023-26 55.7% | MLL fail 47.9% | median days to pass 6
+   + gold BE + 3R, out 12:00, risk $200 (median 3 MGC) pass 49.7% | 2023-26 56.9% | MLL fail 48.9% | median days to pass 6
+   + gold BE + 3R, out 12:00, risk $300 (median 4 MGC) pass 48.2% | 2023-26 56.1% | MLL fail 50.9% | median days to pass 6
+
+2. Gold alone as a combine strategy (no NQ), risk-sized
+   gold only out 12:00, risk $200               pass 2.0% | 2023-26 1.7% | MLL fail 6.9% | median days to pass 16
+   gold only out 12:00, risk $300               pass 9.5% | 2023-26 3.6% | MLL fail 25.2% | median days to pass 14
+   gold only out 12:00, risk $500               pass 25.1% | 2023-26 19.9% | MLL fail 52.5% | median days to pass 9
+   gold only BE + 3R, out 12:00, risk $200      pass 0.1% | 2023-26 0.0% | MLL fail 2.5% | median days to pass 19
+   gold only BE + 3R, out 12:00, risk $300      pass 4.1% | 2023-26 1.6% | MLL fail 16.1% | median days to pass 16
+   gold only BE + 3R, out 12:00, risk $500      pass 20.2% | 2023-26 17.4% | MLL fail 45.2% | median days to pass 13
+
+3. Same-day overlap: gold trades also on NQ trade days (combine risk stacking)
+   VB: 80% of its days also have a gold trade
+   ONB_ADX30: 77% of its days also have a gold trade
+   MON_BR: 80% of its days also have a gold trade
+   EOS: 84% of its days also have a gold trade

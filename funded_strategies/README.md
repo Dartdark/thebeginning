@@ -1443,6 +1443,16 @@ Each was bucketed on 2018–22 only; only clear patterns were kept, then run onc
     - Breakeven + 3R target risk $75: $9,119 / $12,679, blown 2% / 1%, 3-year $13,000.
     - 2 MGC out at 12:00: $904 a month recycled vs $871, median 256 days.
     - So it's now roughly neutral to the plan, not yet a speed-up.
+- **In the combine (`../analysis/combine_gold_test.py`, challenge simulator, every start day):**
+  - **Current combine** (VB 8 + ONB30 $1,100 + Bridge Monday 2 + EOS $500): pass 50.1% (2023–26 54.5%), median 6
+    days.
+  - **Plus gold, out 12:00:** 1 MGC 49.4%; 2 MGC 47.8%; 5 MGC 44.1%; risk $100 49.8% (2023–26 55.1%).
+  - **Plus gold, breakeven + 3R:** risk $100 50.2% (55.7%); risk $200 49.7% (2023–26 56.9%); 5 MGC 45.1%.
+  - **Gold alone:** pass at most 25% (risk $500), with 52% MLL failures.
+  - **Why it doesn't help:** in a 21-day challenge, gold's ~$9 a day per MGC is too slow to matter next to VB's 8
+    MNQ, and its losing streaks add MLL risk. Gold trades on about 80% of the NQ strategies' days, so the risk
+    stacks.
+  - Within noise (±0.5 point on 2018–26; at best +2.4 points on 2023–26 only). Not adopted.
 - **Verdict:** C (filter B makes it a real, uncorrelated edge). It doesn't speed up the $13k at Apex sizes, so it
   stays on the watchlist (#6), recheck in 6 months. It could matter in a larger account or with a different payout
   rule.
