@@ -1,0 +1,57 @@
+Gold vs rates and the dollar (2026-10-14; new data: ZN 10-year note and 6E euro futures, 1-minute, CT).
+gold days 2280; with ZN and 6E data 2280
+rolling betas (gold ATR per ATR): ZN median 0.27 (by year {2018: 0.25, 2019: 0.41, 2020: 0.26, 2021: 0.35, 2022: 0.31, 2023: 0.35, 2024: 0.17, 2025: 0.02, 2026: 0.2})
+                                  6E median 0.36 (by year {2018: 0.56, 2019: 0.35, 2020: 0.25, 2021: 0.43, 2022: 0.27, 2023: 0.43, 2024: 0.27, 2025: 0.25, 2026: 0.44})
+
+1. Co-movement and lead-lag
+   30-min correlation gold-ZN by year: 2018 0.30 2019 0.53 2020 0.27 2021 0.42 2022 0.46 2023 0.57 2024 0.39 2025 0.13 2026 0.35
+   30-min correlation gold-6E by year: 2018 0.53 2019 0.42 2020 0.32 2021 0.43 2022 0.43 2023 0.58 2024 0.42 2025 0.27 2026 0.54
+   k= 1 min: gold next on [gold past, ZN past, 6E past]: coef -0.075 / +0.019 / -0.007, t -6.0 / +2.2 / -0.6  (n 18240)
+   k= 5 min: gold next on [gold past, ZN past, 6E past]: coef -0.025 / +0.015 / -0.016, t -2.4 / +1.6 / -1.7  (n 18240)
+   k=15 min: gold next on [gold past, ZN past, 6E past]: coef +0.014 / +0.021 / -0.019, t +1.5 / +2.5 / -2.1  (n 18237)
+   k=30 min: gold next on [gold past, ZN past, 6E past]: coef +0.031 / +0.007 / -0.027, t +3.9 / +1.0 / -3.4  (n 18235)
+
+2. Trades: 152 rules (plus the same number of placebos)
+   real    : design-positive 17 of 152; of those, holdout-positive 35%; design t >= 2: 0, of those holdout t >= 1: 0; mean holdout $ of the top-10 design rules: $-260
+   placebo : design-positive 37 of 152; of those, holdout-positive 62%; design t >= 2: 4, of those holdout t >= 1: 0; mean holdout $ of the top-10 design rules: $-53
+
+   top 12 rules by design t (key = T, W, H, k, rule  or  ON, exit, k, rule):
+                       key   n     avg     t  t_d  avg_d   avg_h   t_h
+(570, 30, 30, 0.15, catch)  20 -255.75 -0.89 1.99 203.86 -631.80 -1.28
+(570, 30, 60, 0.15, catch)  20 -266.25 -0.71 1.79 182.75 -633.61 -0.95
+(540, 60, 60, 0.15, catch)  31  112.10  0.80 1.63 349.63 -141.25 -0.89
+(660, 30, 60, 0.15, catch)   6  171.08  1.19 1.10 192.75   62.75   NaN
+(660, 30, 30, 0.15, catch)   6   94.42  1.13 1.01 102.75   52.75   NaN
+ (720, 30, 30, 0.15, fade) 102 -141.37 -1.25 0.64  24.03 -282.70 -1.37
+ (720, 30, 60, 0.15, fade) 102  -21.56 -0.34 0.51  33.39  -68.52 -0.66
+(540, 60, 30, 0.15, catch)  31  -32.09 -0.34 0.47  60.25 -130.58 -0.92
+(720, 60, 60, 0.15, catch)   9  -48.36 -0.34 0.36  45.61 -377.25   NaN
+(570, 60, 60, 0.15, catch)  35 -201.25 -1.44 0.35  30.53 -446.66 -1.69
+    (ON, 1230, 0.3, catch)  32 -177.56 -0.74 0.30  44.86 -502.63 -0.92
+  (510, 30, 60, 0.3, fade)  56  274.18  1.05 0.15  26.94  580.75  1.07
+
+== best design rule (570, 30, 30, 0.15, 'catch')
+   picked                                                                 n=  20 avg $  -256 PF 0.43 t -0.9 win 50% yrs+ 5/7 | 18-22 $   204 (t  2.0) 23-26 $  -632 (t -1.3)
+      its placebo (ZN / 6E from random days)                              n=  63 avg $    -3 PF 0.98 t -0.0 win 41% yrs+ 3/8 | 18-22 $    27 (t  0.5) 23-26 $   -56 (t -0.3)
+       trades win   avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+picked     20 50% $-256  $-565  -0.30   -0.31          0.43 $7,077  -0.08  3.74      -0.30
+                             actual       p5      p50       p95
+name          metric                                           
+picked, 2023+ sharpe          -0.63    -1.07    -0.67      0.15
+              sortino         -0.64    -1.10    -0.70      0.26
+              pf_day           0.20     0.01     0.20      1.25
+              calmar          -0.26    -0.26    -0.23      0.10
+              ulcer            5.73     0.99     8.07     21.78
+              max_dd       6,949.75 1,001.61 6,947.50 17,498.09
+              P(Sharpe<=0)      NaN      NaN     0.92       NaN
+              actual_dd pct_rank   dd50   dd95   dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+picked, 2023+    $6,950       0% $7,613 $8,585 $8,698        100%        100%        100%
+
+3. Session level: residual of gold's previous session (17:00 -> 15:59) vs ZN / 6E -> trade today's session
+   session betas (250-day): ZN median 0.31, 6E median 0.35; residual sd 0.61 ATR
+   fade the previous session's residual, |resid| >= 0.0 ATR               n=1975 avg $   -67 PF 0.94 t -0.8 win 50% yrs+ 3/9 | 18-22 $   -66 (t -1.3) 23-26 $   -67 (t -0.4)
+   follow the previous session's residual, |resid| >= 0.0 ATR             n=1975 avg $    12 PF 1.01 t  0.2 win 49% yrs+ 5/9 | 18-22 $    11 (t  0.2) 23-26 $    13 (t  0.1)
+   fade the previous session's residual, |resid| >= 0.5 ATR               n= 699 avg $   -29 PF 0.97 t -0.2 win 49% yrs+ 4/9 | 18-22 $   -77 (t -0.9) 23-26 $    19 (t  0.1)
+   follow the previous session's residual, |resid| >= 0.5 ATR             n= 699 avg $   -25 PF 0.98 t -0.2 win 49% yrs+ 5/9 | 18-22 $    22 (t  0.3) 23-26 $   -74 (t -0.3)
+   fade the previous session's residual, |resid| >= 1.0 ATR               n= 189 avg $  -131 PF 0.90 t -0.4 win 48% yrs+ 2/9 | 18-22 $  -232 (t -1.3) 23-26 $   -49 (t -0.1)
+   follow the previous session's residual, |resid| >= 1.0 ATR             n= 189 avg $    77 PF 1.06 t  0.2 win 50% yrs+ 6/9 | 18-22 $   177 (t  1.0) 23-26 $    -5 (t -0.0)

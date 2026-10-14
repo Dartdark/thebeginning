@@ -68,6 +68,11 @@ direction holds, power is low; watchlist #13 (the live reports decide).
 `analysis/cl_forced_flows_round2_test.py`: Platts window, EIA sweep fade, round-number hedging walls F; USO roll short
 8:00 → 13:29 $122 / t 1.7 (D, same as the index-roll short). The Sunday up-gap fade stays CL's strategy.
 
+## Gold vs rates / dollar (2026-10-14, ZN + 6E data)
+
+`analysis/gold_rates_dollar_test.py`: no edge intraday (real rules worse than random-day placebos) or at session
+level. Gold stays C (Asian breakout, parked). ZN and 6E data are now in `data/` (2017-12 → 2026-10) for other uses.
+
 ## Round 3 (next)
 
 The clock flows on GC / ES / YM / BTC are exhausted with 1-minute prices; S on those needs new information:

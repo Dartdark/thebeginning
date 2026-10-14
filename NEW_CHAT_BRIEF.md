@@ -81,8 +81,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   - S-rank rounds 1–2 on ES / YM / GC / CL / BTC.
   - The user's CL forced-flow chat: Platts window, EIA sweep fade and round numbers F; USO roll short D.
   - Gold / BTC FOMC: D.
+- **Gold vs rates / dollar** (ZN + 6E now in `data/`, 2017-12 → 2026-10): F (`analysis/gold_rates_dollar_test.py`).
 - **Next research (needs data from the user):**
-  - **ZN (10-year) and DX / 6E 1-minute exports** for gold (rates / dollar divergence).
   - Closing-imbalance or options open-interest data for ES.
   - Without new data, the clock flows on GC / ES / YM / BTC are exhausted.
 - **Watchlist (`WATCHLIST.md`), notable items:**
