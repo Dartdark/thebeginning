@@ -68,6 +68,11 @@ direction holds, power is low; watchlist #13 (the live reports decide).
 `analysis/cl_forced_flows_round2_test.py`: Platts window, EIA sweep fade, round-number hedging walls F; USO roll short
 8:00 → 13:29 $122 / t 1.7 (D, same as the index-roll short). The Sunday up-gap fade stays CL's strategy.
 
+## Gold vs rates / dollar (2026-10-14, ZN + 6E data)
+
+`analysis/gold_rates_dollar_test.py`: no edge intraday (real rules worse than random-day placebos) or at session
+level. Gold stays C (Asian breakout, parked). ZN and 6E data are now in `data/` (2017-12 → 2026-10) for other uses.
+
 ## Round 3 (next)
 
 The clock flows on GC / ES / YM / BTC are exhausted with 1-minute prices; S on those needs new information:
@@ -78,7 +83,7 @@ The clock flows on GC / ES / YM / BTC are exhausted with 1-minute prices; S on t
 3. **GC:** gold–dollar / rates conditioning (needs DXY or ZN exports); expiry pinning with open interest by strike.
 4. **BTC:** the weekend gap is gone (24/7 trading); the remaining idea is the ETF 15:00 benchmark with flow data.
 
-Data status (2026-10-14): ZN 1-minute 2017-12 .. 2026-10-14 and 6E 2017–2021 are in `data/` (6E 2022–26 still to come). Treasury-auction price pressure (SR 1188) tested on ZN / GC / 6E: F. Data that would unlock round 3 (ask the user): ZN (10-year note) and 6E / DX 1-minute exports from MultiCharts;
+Data status (2026-10-14): ZN and 6E 1-minute 2017-12 .. 2026-10-14 are in `data/`. Treasury-auction price pressure (SR 1188) tested on ZN / GC / 6E: F. Data that would unlock round 3 (ask the user): ZN (10-year note) and 6E / DX 1-minute exports from MultiCharts;
 NYSE / Nasdaq closing imbalance history; CME open interest by strike.
 
 ## Round 1 hypotheses (forced or scheduled flows native to each market)
