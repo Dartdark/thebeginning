@@ -46,9 +46,9 @@ if __name__ == "__main__":
     print("\nc. gamma rule on event sessions (2022-26): fade R above the flip, follow R below")
     G = []
     for f in sorted(glob.glob("GEX_1min_20*.csv")):
-        d = pd.read_csv(f, usecols=["date", "time", "close", "flip"]); d = d[(d.time == 931) & (d.flip > 0)]; G.append(d)
+        d = pd.read_csv(f, usecols=["date", "time", "close", "flip", "basis"]); d = d[(d.time == 931) & (d.flip > 0) & (d.basis > 0)]; G.append(d)
     G = pd.concat(G); G.index = pd.to_datetime(G.date.astype(str)); G = G[~G.index.duplicated()]
-    pos = (G.close > G.flip).reindex(idx)
+    pos = (G.close > G.flip + G.basis).reindex(idx)   # gamma levels are NDX points: NQ level = level + basis (fixed 2026-10-14)
     sig = np.where(pos == True, -np.sign(P.R), np.where(pos == False, np.sign(P.R), np.nan))
     z = pd.Series(sig, index=idx) * (P[1500] - P[830]) * PV - COST
     for nm, m in (("gamma rule, event sessions", isT), ("gamma rule, other days (placebo)", ~isT)):

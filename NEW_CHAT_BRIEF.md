@@ -104,6 +104,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     $30 round trip; the day-to-day fade is stronger on NQ (t 2.2, 5/9 years: D).
   - The Bridge's exported indicators (order flow, gamma) scanned as filters on the plan: 1 pass in 63 (chance level), no bench
     gain: F (`analysis/bridge_filter_scan.py`; features cached in scratch `bridge_features.pkl`).
+  - Bridge indicators round 2 (user's code: depth, walls, other VWAP anchors, gamma fixed for the NDX → NQ basis): no filter
+    beats the plan. GAMMA LEVELS ARE NDX POINTS: NQ level = level + basis. Earnings-day gamma rule on watchlist #15.
   - YM's own events (Dow heavyweight earnings, ZN overnight / lead-lag / shocks): F (`analysis/ym_dow_events_test.py`).
   - BTC short-only euphoria fades (multi-day / overnight / intraday spike / heavy-volume / round numbers): F.
   - Funded bench rebuilt this session (numba, build_lab, s_rank_gap_round2 + gy / btc grids): reproduces the documented numbers.
