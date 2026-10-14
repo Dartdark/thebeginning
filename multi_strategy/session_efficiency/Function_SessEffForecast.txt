@@ -1,0 +1,213 @@
+{ SessEffForecast  (PowerLanguage FUNCTION, return type: Numeric, storage: Auto-detect / Series)
+
+  FORECAST of the current session's Kaufman efficiency ratio, made only from completed past sessions.
+  Model: logistic regression on 15 daily features ("Telonics" next-day-ER model), fitted once on NQ 2010-07..2018-12,
+  one model per bar size (3, 5 or 15 minutes; the ER and its features are measured on that bar size). It estimates the
+  probability that today is MORE efficient (trendier) than a median day, and an expected ER from a linear calibration.
+
+  Honest strength: weak. Correlation of the forecast with the day's actual ER is ~0.10-0.15 (2019-2025 out of sample);
+  low-forecast days averaged 5-min ER ~0.12 vs ~0.145 for high-forecast days. Use it as a tilt, not a switch.
+
+  Needs >= 65 complete sessions on the chart before it outputs anything, and >= 252 sessions to reproduce the reference
+  values exactly (the "chop" feature uses a 1-year median). Load at least 13 months of 1-minute (or 5-minute) data.
+
+  Outputs: oP        probability today is an above-median-efficiency day (-1 = not enough history yet)
+           oExpER    expected ER for today on TFMinutes bars (linear calibration of oP; -1 = n/a)
+           oBucket   1 = low (bottom third of the training forecasts), 2 = mid, 3 = high, 0 = n/a
+           oPrevER   last complete session's actual ER on TFMinutes bars (-1 = n/a)
+  Returns oP. During a session the values are the forecast FOR that session; after the close they switch to the forecast
+  for the NEXT session. Session times in the chart's time zone (930/1600 ET, 830/1500 Central). }
+
+Inputs:
+    TFMinutes(numericsimple), SessStartHHMM(numericsimple), SessEndHHMM(numericsimple),
+    oP(numericref), oExpER(numericref), oBucket(numericref), oPrevER(numericref);
+
+Vars:
+    MaxD(300), ND(0), SessStartMin(0), SessEndMin(0), BarStartMin(0), MinBuckets(0),
+    Bucket(-1), LastBucket(-1), CurClose(0), FirstClose(0), LastFin(0), PathLen(0), NFin(0),
+    SumLR(0), SumLR2(0), NLR(0), DayHi(0), DayLo(0), Done(true), FinalizeNow(false), Inited(false),
+    Intercept(0), CutLo(0), CutHi(0), CalA(0), CalB(0),
+    DayER(0), DayRV(0), Med(0), NM(0), K(0), J(0), S1(0), S2(0), Mx(0), My(0), Vx(0), Vy(0), Lin(0),
+    Prob(-1), ExpER(-1), Bkt(0), PrevER(-1), FbNow(0);
+
+Arrays:
+    DC[300](0), DH[300](0), DL[300](0), DER[300](0), DRV[300](0), DCHOP[300](0), DRUN[300](0),
+    Mu[15](0), Sd[15](0), Cf[15](0), Feat[15](0), Tmp[300](0);
+
+if Inited = false then begin
+    if Mod(TFMinutes, BarInterval) <> 0 then RaiseRunTimeError("SessEffForecast: the chart's bar size must divide TFMinutes");
+    if TFMinutes = 3 then begin
+        Intercept = -0.000289985278846; CutLo = 0.471665619761; CutHi = 0.539088035024; CalA = 0.02207051752; CalB = 0.146177032;
+        Mu[0] = 0.000650388409445; Sd[0] = 0.000337862994968; Cf[0] = -0.0368504299452;
+        Mu[1] = 0.0951284173695; Sd[1] = 0.0740472517553; Cf[1] = -0.166080492563;
+        Mu[2] = 0.249194580466; Sd[2] = 0.187206341725; Cf[2] = -0.0332449585895;
+        Mu[3] = 0.895842964709; Sd[3] = 0.210564842396; Cf[3] = 0.086311745702;
+        Mu[4] = 0.335596906718; Sd[4] = 0.109267801864; Cf[4] = 0.00280839142116;
+        Mu[5] = 0.0141822257896; Sd[5] = 0.034399556477; Cf[5] = -0.176761692096;
+        Mu[6] = 1.03769937168; Sd[6] = 1.6151871473; Cf[6] = -0.196711037611;
+        Mu[7] = 0.492603404553; Sd[7] = 0.307380075419; Cf[7] = -0.00826009002721;
+        Mu[8] = 0.347151219858; Sd[8] = 0.249786857976; Cf[8] = -0.119615542266;
+        Mu[9] = 0.0951861773044; Sd[9] = 0.0164533906127; Cf[9] = -0.136642155318;
+        Mu[10] = 0.0951607275357; Sd[10] = 0.0740239793787; Cf[10] = -0.0649388246539;
+        Mu[11] = 0.0952338419867; Sd[11] = 0.0740244360321; Cf[11] = 0.0345323311098;
+        Mu[12] = -0.0643720089027; Sd[12] = 0.376595809335; Cf[12] = 0.00455077471845;
+        Mu[13] = 0.49956500725; Sd[13] = 0.221880490105; Cf[13] = 0.132627151197;
+        Mu[14] = 0.499613339778; Sd[14] = 0.159028254779; Cf[14] = -0.135202588622;
+    end
+    else if TFMinutes = 5 then begin
+        Intercept = 0.000107620570529; CutLo = 0.477917151462; CutHi = 0.532012637845; CalA = 0.02157359493; CalB = 0.2016862049;
+        Mu[0] = 0.00082456060537; Sd[0] = 0.000443497121115; Cf[0] = 0.00599441202498;
+        Mu[1] = 0.122390125235; Sd[1] = 0.0938066659082; Cf[1] = -0.164916507718;
+        Mu[2] = 0.249194580466; Sd[2] = 0.187206341725; Cf[2] = -0.0245938579242;
+        Mu[3] = 0.895842964709; Sd[3] = 0.210564842396; Cf[3] = 0.0663399080669;
+        Mu[4] = 0.335596906718; Sd[4] = 0.109267801864; Cf[4] = 0.0604975801856;
+        Mu[5] = 0.0141822257896; Sd[5] = 0.034399556477; Cf[5] = -0.109860639535;
+        Mu[6] = 1.03189946834; Sd[6] = 1.60871277324; Cf[6] = -0.152085356195;
+        Mu[7] = 0.492603404553; Sd[7] = 0.307380075419; Cf[7] = -0.0159369304158;
+        Mu[8] = 0.347151219858; Sd[8] = 0.249786857976; Cf[8] = -0.0850669348154;
+        Mu[9] = 0.122440023432; Sd[9] = 0.020293359557; Cf[9] = -0.0899385694023;
+        Mu[10] = 0.122422239427; Sd[10] = 0.0937879068968; Cf[10] = -0.0838981297647;
+        Mu[11] = 0.122519058667; Sd[11] = 0.093774282362; Cf[11] = 0.00536973272424;
+        Mu[12] = -0.0643720089027; Sd[12] = 0.376595809335; Cf[12] = 0.0235918789158;
+        Mu[13] = 0.500821652972; Sd[13] = 0.221093426595; Cf[13] = 0.0683918204237;
+        Mu[14] = 0.500724987917; Sd[14] = 0.157882678877; Cf[14] = -0.126260904277;
+    end
+    else if TFMinutes = 15 then begin
+        Intercept = 0.000607469196839; CutLo = 0.480206392824; CutHi = 0.527138198162; CalA = 0.05732868437; CalB = 0.3134599985;
+        Mu[0] = 0.00134494596821; Sd[0] = 0.000771868742567; Cf[0] = 0.0787519921708;
+        Mu[1] = 0.214085820027; Sd[1] = 0.160869430029; Cf[1] = -0.109080211868;
+        Mu[2] = 0.249194580466; Sd[2] = 0.187206341725; Cf[2] = -0.0325308636075;
+        Mu[3] = 0.895842964709; Sd[3] = 0.210564842396; Cf[3] = 0.0450950600028;
+        Mu[4] = 0.335596906718; Sd[4] = 0.109267801864; Cf[4] = 0.0648772854483;
+        Mu[5] = 0.0141822257896; Sd[5] = 0.034399556477; Cf[5] = -0.0466075066156;
+        Mu[6] = 0.982116964717; Sd[6] = 1.38070748405; Cf[6] = -0.105870380605;
+        Mu[7] = 0.492603404553; Sd[7] = 0.307380075419; Cf[7] = -0.0405231045051;
+        Mu[8] = 0.347151219858; Sd[8] = 0.249786857976; Cf[8] = -0.0802748024926;
+        Mu[9] = 0.214380800994; Sd[9] = 0.0337568146078; Cf[9] = -0.0983673545039;
+        Mu[10] = 0.214069084014; Sd[10] = 0.16088658745; Cf[10] = -0.00809978711557;
+        Mu[11] = 0.214255975563; Sd[11] = 0.160947322026; Cf[11] = -0.0161023272303;
+        Mu[12] = -0.0643720089027; Sd[12] = 0.376595809335; Cf[12] = -0.0258539321846;
+        Mu[13] = 0.499081681972; Sd[13] = 0.217832046276; Cf[13] = 0.0322635030658;
+        Mu[14] = 0.498840019333; Sd[14] = 0.149624313618; Cf[14] = -0.0197395035722;
+    end
+    else RaiseRunTimeError("SessEffForecast: TFMinutes must be 3, 5 or 15 (the bar sizes the model was fitted on)");
+    Inited = true;
+end;
+
+SessStartMin = TimeToMinutes(SessStartHHMM);
+SessEndMin   = TimeToMinutes(SessEndHHMM);
+MinBuckets   = 0.9 * (SessEndMin - SessStartMin) / TFMinutes;
+BarStartMin  = TimeToMinutes(Time) - BarInterval;          { MultiCharts time-stamps a bar with its CLOSE time }
+
+{ ---------------------------------------------------------------- end of a session -> store the day, forecast the next }
+FinalizeNow = false;
+if Done = false and (BarStartMin >= SessEndMin or (CurrentBar > 1 and Date <> Date[1])) then FinalizeNow = true;
+if FinalizeNow then begin
+    if LastBucket >= 0 then begin
+        if NFin = 0 then FirstClose = CurClose
+        else begin
+            PathLen = PathLen + AbsValue(CurClose - LastFin);
+            S1 = Log(CurClose / LastFin); SumLR = SumLR + S1; SumLR2 = SumLR2 + S1 * S1; NLR = NLR + 1;
+        end;
+        LastFin = CurClose; NFin = NFin + 1;
+    end;
+    Done = true;
+    if NFin >= MinBuckets and PathLen > 0 then begin
+        DayER = AbsValue(LastFin - FirstClose) / PathLen;
+        DayRV = SquareRoot(MaxList(SumLR2 / NLR - (SumLR / NLR) * (SumLR / NLR), 0));     { population std (ddof 0) }
+        PrevER = DayER;
+        { shift the daily history: index 0 = the day just finished }
+        if ND < MaxD then ND = ND + 1;
+        for K = ND - 1 downto 1 begin
+            DC[K] = DC[K - 1]; DH[K] = DH[K - 1]; DL[K] = DL[K - 1]; DER[K] = DER[K - 1];
+            DRV[K] = DRV[K - 1]; DCHOP[K] = DCHOP[K - 1]; DRUN[K] = DRUN[K - 1];
+        end;
+        DC[0] = LastFin; DH[0] = DayHi; DL[0] = DayLo; DER[0] = DayER; DRV[0] = DayRV;
+        { chop flag: ER below its trailing 252-day median (needs >= 60 days, else 0), and the consecutive-chop run }
+        NM = MinList(ND, 252);
+        DCHOP[0] = 0;
+        if NM >= 60 then begin
+            for K = 0 to NM - 1 begin Tmp[K] = DER[K]; end;
+            Array_Sort(Tmp, 0, NM - 1, true);
+            if Mod(NM, 2) = 1 then Med = Tmp[IntPortion(NM / 2)] else Med = (Tmp[IntPortion(NM / 2) - 1] + Tmp[IntPortion(NM / 2)]) / 2;
+            if DER[0] < Med then DCHOP[0] = 1;
+        end;
+        if DCHOP[0] = 1 then begin
+            if ND > 1 then DRUN[0] = DRUN[1] + 1 else DRUN[0] = 1;
+        end else DRUN[0] = 0;
+        { features -> forecast for the NEXT session (needs 65 days for the 60-day variance ratio of 5-day returns) }
+        Prob = -1; ExpER = -1; Bkt = 0;
+        if ND >= 65 then begin
+            Feat[0] = DRV[0];
+            Feat[1] = DER[0];
+            { eff(n) = |c0 - cn| / sum of |daily close changes| over the last n days }
+            S1 = 0; for K = 0 to 19 begin S1 = S1 + AbsValue(DC[K] - DC[K + 1]); end;
+            Feat[2] = AbsValue(DC[0] - DC[20]) / S1;
+            { variance ratio: var(5-day log returns, 60) / (5 * var(1-day log returns, 60)), sample variances }
+            Mx = 0; My = 0;
+            for K = 0 to 59 begin Mx = Mx + Log(DC[K] / DC[K + 5]); My = My + Log(DC[K] / DC[K + 1]); end;
+            Mx = Mx / 60; My = My / 60; Vx = 0; Vy = 0;
+            for K = 0 to 59 begin
+                Vx = Vx + Square(Log(DC[K] / DC[K + 5]) - Mx); Vy = Vy + Square(Log(DC[K] / DC[K + 1]) - My);
+            end;
+            Feat[3] = (Vx / 59) / (5 * Vy / 59);
+            { failed-breakout rate over 20 days: took out yesterday's high or low but closed back inside }
+            S1 = 0;
+            for K = 0 to 19 begin
+                FbNow = 0;
+                if (DH[K] > DH[K + 1] or DL[K] < DL[K + 1]) and DC[K] <= DH[K + 1] and DC[K] >= DL[K + 1] then FbNow = 1;
+                S1 = S1 + FbNow;
+            end;
+            Feat[4] = S1 / 20;
+            S1 = 0; for K = 0 to 49 begin S1 = S1 + DC[K]; end;
+            Feat[5] = (DC[0] - S1 / 50) / DC[0];
+            Feat[6] = DRUN[0];
+            S1 = 0; for K = 0 to 4 begin S1 = S1 + AbsValue(DC[K] - DC[K + 1]); end;
+            Feat[7] = AbsValue(DC[0] - DC[5]) / S1;
+            S1 = 0; for K = 0 to 9 begin S1 = S1 + AbsValue(DC[K] - DC[K + 1]); end;
+            Feat[8] = AbsValue(DC[0] - DC[10]) / S1;
+            S1 = 0; for K = 0 to 19 begin S1 = S1 + DER[K]; end;
+            Feat[9] = S1 / 20;
+            Feat[10] = DER[1];
+            Feat[11] = DER[2];
+            { dvol = std(5 daily log returns) / std(20) - 1, sample std }
+            Mx = 0; for K = 0 to 4 begin Mx = Mx + Log(DC[K] / DC[K + 1]); end; Mx = Mx / 5;
+            Vx = 0; for K = 0 to 4 begin Vx = Vx + Square(Log(DC[K] / DC[K + 1]) - Mx); end;
+            My = 0; for K = 0 to 19 begin My = My + Log(DC[K] / DC[K + 1]); end; My = My / 20;
+            Vy = 0; for K = 0 to 19 begin Vy = Vy + Square(Log(DC[K] / DC[K + 1]) - My); end;
+            Feat[12] = SquareRoot(Vx / 4) / SquareRoot(Vy / 19) - 1;
+            S1 = 0; for K = 0 to 4 begin S1 = S1 + DCHOP[K]; end;
+            Feat[13] = S1 / 5;
+            S1 = 0; for K = 0 to 9 begin S1 = S1 + DCHOP[K]; end;
+            Feat[14] = S1 / 10;
+            Lin = Intercept;
+            for J = 0 to 14 begin Lin = Lin + Cf[J] * (Feat[J] - Mu[J]) / Sd[J]; end;
+            Prob = 1 / (1 + ExpValue(-Lin));
+            ExpER = CalA + CalB * Prob;
+            if Prob <= CutLo then Bkt = 1 else if Prob > CutHi then Bkt = 3 else Bkt = 2;
+        end;
+    end;
+end;
+
+{ ---------------------------------------------------------------- inside the session: TF buckets, high / low }
+if BarStartMin >= SessStartMin and BarStartMin < SessEndMin then begin
+    if Done then begin
+        Done = false; LastBucket = -1; NFin = 0; PathLen = 0; SumLR = 0; SumLR2 = 0; NLR = 0;
+        DayHi = High; DayLo = Low;
+    end;
+    DayHi = MaxList(DayHi, High); DayLo = MinList(DayLo, Low);
+    Bucket = IntPortion((BarStartMin - SessStartMin) / TFMinutes);
+    if LastBucket >= 0 and Bucket <> LastBucket then begin
+        if NFin = 0 then FirstClose = CurClose
+        else begin
+            PathLen = PathLen + AbsValue(CurClose - LastFin);
+            S1 = Log(CurClose / LastFin); SumLR = SumLR + S1; SumLR2 = SumLR2 + S1 * S1; NLR = NLR + 1;
+        end;
+        LastFin = CurClose; NFin = NFin + 1;
+    end;
+    CurClose = Close;
+    LastBucket = Bucket;
+end;
+
+oP = Prob; oExpER = ExpER; oBucket = Bkt; oPrevER = PrevER;
+SessEffForecast = Prob;
