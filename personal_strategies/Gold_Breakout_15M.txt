@@ -60,7 +60,10 @@ end
 else if InRange then begin
 	RH = MaxList(RH, High); RL = MinList(RL, Low);
 end;
-if CurrentBar > 1 and InRange = false and InRange[1] and RH > RL then Ready = true;   { range complete }
+{ range complete at the close of its last bar (closing at RangeEnd), so the stops are live from the first bar after it;
+  fallback: the first bar after the range if no bar closes exactly at RangeEnd }
+if InRange and Time = RangeEnd and RH > RL then Ready = true;
+if CurrentBar > 1 and InRange = false and InRange[1] and RH > RL then Ready = true;
 if Time >= ExitTime and Time <= RangeStart then Ready = false;                       { trading window over }
 
 { one trade a session, also when it opened and closed inside the same bar }
@@ -109,11 +112,11 @@ end;
 CanTrade = Ready and Traded = false and Halted = false and (Time >= RangeEnd or Time < ExitTime);
 if MP = 0 and CanTrade then begin
 	if QtyL >= 1 then begin
-		if Close >= RH then Buy ("GB Long M") QtyL contracts next bar at market
+		if Close > RH then Buy ("GB Long M") QtyL contracts next bar at market
 		else Buy ("GB Long") QtyL contracts next bar at RH stop;
 	end;
 	if QtyS >= 1 then begin
-		if Close <= RL then SellShort ("GB Short M") QtyS contracts next bar at market
+		if Close < RL then SellShort ("GB Short M") QtyS contracts next bar at market
 		else SellShort ("GB Short") QtyS contracts next bar at RL stop;
 	end;
 end;
