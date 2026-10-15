@@ -112,6 +112,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     $21 vs $123 a trade the session after an interior single print; funded VB 3 / 1 on flagged days $10,184 vs $9,818 (1 year),
     blown 3% vs 4%, beats all random-day placebos: B. MC-CONFIRMED (262 / 274 flagged days identical, no false skips);
     user to paste it over `NQ Vault Break` outside market hours. Combine: FlaggedContracts -1 (= old VB, no gain).
+  - Twin Continuation (user's MC code; `analysis/twin_continuation_*.py`, checker `checks/candidates/twin_continuation/verdict.md`):
+    real edge (t 5.5, DSR 0.995, checker replica 99.8%, PASS WITH CONCERNS) but wrong shape for Apex (BO swing stops ~$6k/NQ,
+    fat-tailed MO wins vs consistency): no gain in funded plan / own PA / combine. B pending a MultiCharts run; non-prop account idea.
   - Trials log + deflated Sharpe (`analysis/trials.py`, `TRIALS.csv`, `metrics.deflated_sharpe` / `t_threshold`): 193 items tested,
     bar |t| 3.47; plan DSR: ONB ML 0.99 passes, VB 0.92, Bridge Monday 0.91, LDF 0.79, Monday 0.73, EOS 0.42, NFP 0.16 (forced-flow
     items stand on the pre-registered rule; watch them live). New promotion rule in DEVELOPMENT_PROCESS.md.
