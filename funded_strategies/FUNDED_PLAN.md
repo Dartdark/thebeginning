@@ -305,6 +305,9 @@ From the payout pages you sent (50K EOD):
   payout; losing days reduce that profit).
 - A payout is $500 minimum and at most the cap for its number. It cannot take the
   balance below the **$52,100 safety net**. Maximum 6 payouts, then the PA closes.
+- **Rechecked against the user's Apex dashboard on 2026-10-15:** $2,000 drawdown, 5 days of $250+,
+  safety net $52,100, minimum balance to request $52,600, 6 payouts then the account closes.
+  All match `funded_sim.py`; no change to the bench numbers.
 
 From Apex's help center as quoted by third-party guides. The help center itself was
 not reachable from here (**confirmed by the user on 2026-10-13**):

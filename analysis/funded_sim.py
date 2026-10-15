@@ -4,7 +4,7 @@ The goal in the funded phase is not passing but the money taken out: at most
 6 payouts per account, capped at $1,500 / $1,500 / $2,000 / $2,500 / $2,500 /
 $3,000 for the 50K, $13,000 in all. After the 6th payout the account closes.
 
-Rules (Apex EOD Performance Account payouts page, 50K, as supplied):
+Rules (Apex EOD Performance Account payouts page, 50K, as supplied; rechecked against the user's dashboard 2026-10-15):
   - payout request needs, since the last approved payout (or the start):
       * at least 5 trading days that each made at least $250 (net)
       * balance at least $52,600 (safety net $52,100 + $500 minimum payout)

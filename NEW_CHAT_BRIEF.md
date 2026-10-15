@@ -109,7 +109,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   - Bridge indicators round 2 (user's code: depth, walls, other VWAP anchors, gamma fixed for the NDX → NQ basis): no filter
     beats the plan. GAMMA LEVELS ARE NDX POINTS: NQ level = level + basis. Earnings-day gamma rule on watchlist #15.
   - Waiting on the user: `GEXOI_<year>.csv` from `multi_strategy/OFB_GexOI_Exporter.txt` (NDX 0DTE OI / gamma by strike) for
-    pinning / wall tests on NQ; Apex PA terms check (drawdown, safety net, min day, split vs the simulator).
+    pinning / wall tests on NQ. Apex PA terms CONFIRMED from the user's dashboard 2026-10-15 ($2,000 drawdown, safety net
+    $52,100, min balance to request $52,600, 5 days of $250+, 6 payouts then closed): the simulator already matches, no change.
   - YM's own events (Dow heavyweight earnings, ZN overnight / lead-lag / shocks): F (`analysis/ym_dow_events_test.py`).
   - BTC short-only euphoria fades (multi-day / overnight / intraday spike / heavy-volume / round numbers): F.
   - Funded bench rebuilt this session (numba, build_lab, s_rank_gap_round2 + gy / btc grids): reproduces the documented numbers.
