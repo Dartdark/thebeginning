@@ -57,7 +57,7 @@ def run(g, sig, variant, side_override=None):
             last = np.where(~np.isnan(c[:JX]))[0][-1]; px, kind = c[last], 2
         net = (px - ent) * side * PV - COMM - (slip_in + 1) * TICK * PV
         out.append(dict(date=pd.Timestamp(g.ts[r]), side=side, entry=ent, exit=px, kind=kind, net=net, stop_pts=stopd,
-                        ej=j_in, row=r))
+                        ej=j_in, xj=j, row=r))
     return pd.DataFrame(out)
 
 
