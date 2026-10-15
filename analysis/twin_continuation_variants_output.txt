@@ -1,1 +1,31 @@
 Twin Continuation for prop accounts (2026-10-15): the breakout's swing-level stop risks ~$4,300 per NQ when hit (worst trade
+
+Breakout leg by stop cap (per NQ, repo costs):
+   orig BO                    n   725 avg $ 207.7 PF 1.44 t  3.31 win 76% yrs+ 7/9 | 2018-22 $  69.9 2023-26 $ 378.3 | worst $-11,717
+   orig MO                    n   349 avg $ 530.0 PF 1.91 t  4.50 win 51% yrs+ 8/9 | 2018-22 $ 428.5 2023-26 $ 661.7 | worst $-1,517
+   orig ALL                   n  1074 avg $ 312.5 PF 1.62 t  5.46 win 68% yrs+ 8/9 | 2018-22 $ 188.0 2023-26 $ 468.8
+   cap1 BO                    n   742 avg $ 116.0 PF 1.39 t  3.48 win 46% yrs+ 8/9 | 2018-22 $ 127.3 2023-26 $ 102.0 | worst $-2,937
+   cap1 MO                    n   359 avg $ 533.1 PF 1.92 t  4.62 win 51% yrs+ 8/9 | 2018-22 $ 439.5 2023-26 $ 659.1 | worst $-1,517
+   cap1 ALL                   n  1101 avg $ 252.0 PF 1.64 t  5.70 win 47% yrs+ 8/9 | 2018-22 $ 231.5 2023-26 $ 278.1
+   cap2 BO                    n   742 avg $ 112.0 PF 1.27 t  2.60 win 57% yrs+ 8/9 | 2018-22 $ 116.1 2023-26 $ 106.9 | worst $-3,836
+   cap2 MO                    n   358 avg $ 533.8 PF 1.92 t  4.61 win 51% yrs+ 8/9 | 2018-22 $ 439.5 2023-26 $ 661.7 | worst $-1,517
+   cap2 ALL                   n  1100 avg $ 249.3 PF 1.53 t  5.21 win 55% yrs+ 8/9 | 2018-22 $ 224.1 2023-26 $ 281.5
+
+Funded bench (cushion $1,500):
+   plan                         $10,184 / $12,450  blown 3% / 3%  paid 92% | 1y 2018-22 $9,215 2023+ $11,912
+   + Twin cap1 1 MNQ            $10,360 / $12,491  blown 3% / 3%  paid 92% | 1y 2018-22 $9,557 2023+ $11,791
+   + Twin cap1 2 MNQ            $9,579 / $11,579  blown 11% / 11%  paid 86% | 1y 2018-22 $9,327 2023+ $10,028
+   + Twin cap2 1 MNQ            $10,121 / $12,431  blown 4% / 3%  paid 91% | 1y 2018-22 $9,473 2023+ $11,277
+   + Twin cap2 2 MNQ            $9,159 / $11,401  blown 12% / 12%  paid 84% | 1y 2018-22 $9,035 2023+ $9,381
+   + MO 1 MNQ                   $10,084 / $12,352  blown 4% / 4%  paid 92% | 1y 2018-22 $9,161 2023+ $11,729
+   ONB ML -> MO 2 MNQ           $8,022 / $10,087  blown 12% / 20%  paid 83% | 1y 2018-22 $7,187 2023+ $9,511
+   ONB ML -> Twin cap1 2 MNQ    $8,393 / $10,256  blown 16% / 17%  paid 81% | 1y 2018-22 $8,360 2023+ $8,453
+
+Combine (VB 8 + ONB ADX30 $1,100 + Bridge Monday 2 + EOS $500, Apex challenge rules, every start day):
+   combine now            pass 50.1% (2023-26 54.5%), median days 6
+   + Twin cap1 2 MNQ      pass 50.7% (2023-26 52.6%), median days 6
+   + Twin cap1 4 MNQ      pass 48.1% (2023-26 47.3%), median days 5
+   + Twin cap2 2 MNQ      pass 49.2% (2023-26 51.6%), median days 6
+   + MO 2 MNQ             pass 51.0% (2023-26 53.8%), median days 6
+   + MO 4 MNQ             pass 49.4% (2023-26 50.8%), median days 6
+   + Twin orig 2 MNQ      pass 46.9% (2023-26 50.3%), median days 5
