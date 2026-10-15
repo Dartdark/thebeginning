@@ -44,7 +44,7 @@ def half_day(d):
     return ((m == 7) & (dd == 3)) | ((m == 12) & (dd == 24)) | ((m == 11) & (dow == 4) & (dd >= 23) & (dd <= 29))
 
 
-def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, mo_target=0.0):
+def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, mo_target=0.0, pv=PV, tick=TICK, comm=COMM, mo_stop=75.0, mo_stop_atr=0.0):
     n = len(B["c"]); o, h, l, c, sm, sess, j, date = (B[k] for k in ("o", "h", "l", "c", "sm", "sess", "j", "date"))
     halfd = half_day(date)
     # ---- precompute bucket boundaries (last existing bar of each 15m bucket / 6h candle / 10m bucket)
@@ -68,7 +68,8 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
         # ---------------- fills during bar i (orders from bar i-1) ----------------
         if pos == 0 and pend_mo != 0:
             side = pend_mo if placebo_rng is None else placebo_rng.choice([-1, 1])
-            pos, setup, ent, ent_i = side, "MO", o[i], i; stop = ent - side * 75.0; pend_mo = 0
+            dist = mo_stop_atr * B["atr"][i] if mo_stop_atr > 0 else mo_stop
+            pos, setup, ent, ent_i = side, "MO", o[i], i; stop = ent - side * dist; pend_mo = 0
         elif pos == 0 and pend_bo:
             fl = fs = None
             if okl and h[i] >= lvll: fl = max(o[i], lvll)
@@ -173,8 +174,9 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
         if pos != 0 and setup == "MO" and 1450 <= (j[i] // 60) * 100 + j[i] % 60 <= 1600: mo_exit_pend = True
     T = pd.DataFrame(trades)
     T["slips"] = np.where(T.kind == 1, 1, 2)
-    T["net"] = (T.exit - T.entry) * T.side * PV - COMM - T.slips * TICK * PV
-    T["net_user"] = (T.exit - T.entry) * T.side * PV - 6.0
+    T["net"] = (T.exit - T.entry) * T.side * pv - comm - T.slips * tick * pv
+    T["net_user"] = (T.exit - T.entry) * T.side * pv - 6.0
+    T["pct"] = (T.exit - T.entry) * T.side / T.entry * 100 - (comm / pv + T.slips * tick) / T.entry * 100
     T["date"] = pd.to_datetime(B["date"][T.i1].astype(str))
     T["edate"] = pd.to_datetime(B["date"][T.i0].astype(str))
     T["ej"] = B["j"][T.i0]; T["xj"] = B["j"][T.i1]
