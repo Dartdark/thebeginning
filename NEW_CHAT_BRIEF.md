@@ -117,6 +117,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   - Twin-like search (2026-10-15): round 1 Twin is NQ-only (ES/GC/YM/CL fail); MO risk-sized doesn't fit. Round 2 MO with a
     tight 0.10-ATR stop: $374, PF 2.00, t 4.07, 9/9 yrs, but 29% win rate → losing streaks vs $2k trail: no Apex gain (B, not adopted).
     LESSON: for Apex look for HIGH win rate frequent edges (VB-like 66%), not trend-day capture.
+    Round 3 high-win search: MO entry + T 0.10 / S 0.20 ATR = 75% win, t 4.13 (B) -- but adding ANY new risk to the funded plan
+    raises blown (3% → 7%+): the plan's risk budget is full. Gains now need replacements, more accounts, or the combine.
   - Twin Continuation (user's MC code; `analysis/twin_continuation_*.py`, checker `checks/candidates/twin_continuation/verdict.md`):
     real edge (t 5.5, DSR 0.995, checker replica 99.8%, PASS WITH CONCERNS) but wrong shape for Apex (BO swing stops ~$6k/NQ,
     fat-tailed MO wins vs consistency): no gain in funded plan / own PA / combine. MC-CONFIRMED (v2 report: 1,069/1,074 entries identical, $296 t 5.3): A.
