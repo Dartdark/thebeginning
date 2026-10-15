@@ -112,6 +112,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     $21 vs $123 a trade the session after an interior single print; funded VB 3 / 1 on flagged days $10,184 vs $9,818 (1 year),
     blown 3% vs 4%, beats all random-day placebos: B. MC-CONFIRMED (262 / 274 flagged days identical, no false skips);
     user to paste it over `NQ Vault Break` outside market hours. Combine: FlaggedContracts -1 (= old VB, no gain).
+  - OU mean-reversion regime (user's post, `analysis/ou_regime_test.py`): theta doesn't persist day to day; VWAP fade loses, worse in
+    the 'MR regime': F. Side find: Late-Day Flow $191 vs $19 in high-theta regime (t 3.1, 8/9 yrs) but funded no gain: watchlist #16.
   - NDX 0DTE open interest by strike (`data/GEXOI_*.csv`, `analysis/gex_oi_pin_test.py`): no pinning, no wall effect, put/call
     useless, 0 / 15 plan filters pass: F. Export has no Mondays; use only the 9:31 ET OI snapshot. Apex PA terms CONFIRMED from the user's dashboard 2026-10-15 ($2,000 drawdown, safety net
     $52,100, min balance to request $52,600, 5 days of $250+, 6 payouts then closed): the simulator already matches, no change.
