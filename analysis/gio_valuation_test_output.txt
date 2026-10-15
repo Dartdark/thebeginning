@@ -1,0 +1,25 @@
+GIO Valuation Tool 2.0 (user's TradingView code, 2026-10-15): val = normalise( ROC_n(asset) - ROC_n(reference), n ), where
+
+vs ZN price (n 13): below -75 on 5% of days, above +75 on 4%
+     'undervalued' -> long next session         n= 117 avg $ 544.5 PF 1.29 t  0.9 SR  1.3 yrs+ 7/9 | 18-22 $ 693.1 23-26 $ 338.3
+     'overvalued' -> short next session         n=  80 avg $-207.4 PF 0.83 t -0.6 SR -1.0 yrs+ 2/8 | 18-22 $-297.5 23-26 $-107.8
+     both                                       n= 197 avg $ 239.2 PF 1.15 t  0.6 SR  0.7 yrs+ 6/9 | 18-22 $ 314.9 23-26 $ 143.4
+   5-day forward NQ % after undervalued +0.93, overvalued +0.77, all days +0.39; rank corr(val, 5-day fwd) -0.056
+
+vs ZN, flipped (= vs yield): below -75 on 6% of days, above +75 on 5%
+     'undervalued' -> long next session         n= 130 avg $-108.0 PF 0.95 t -0.2 SR -0.3 yrs+ 4/9 | 18-22 $-185.4 23-26 $  -5.6
+     'overvalued' -> short next session         n= 103 avg $-403.5 PF 0.65 t -1.7 SR -2.6 yrs+ 3/9 | 18-22 $-111.7 23-26 $-970.4
+     both                                       n= 233 avg $-238.6 PF 0.86 t -0.7 SR -0.8 yrs+ 3/9 | 18-22 $-150.1 23-26 $-376.7
+   5-day forward NQ % after undervalued +1.13, overvalued +0.67, all days +0.39; rank corr(val, 5-day fwd) -0.006
+
+vs 6E (n 10, inverse dollar): below -75 on 7% of days, above +75 on 5%
+     'undervalued' -> long next session         n= 153 avg $  45.6 PF 1.02 t  0.1 SR  0.1 yrs+ 5/9 | 18-22 $ 292.1 23-26 $-197.8
+     'overvalued' -> short next session         n= 108 avg $-375.3 PF 0.73 t -1.1 SR -1.7 yrs+ 4/9 | 18-22 $-113.2 23-26 $-585.0
+     both                                       n= 261 avg $-128.6 PF 0.93 t -0.4 SR -0.4 yrs+ 4/9 | 18-22 $ 135.2 23-26 $-367.4
+   5-day forward NQ % after undervalued +0.25, overvalued +0.70, all days +0.39; rank corr(val, 5-day fwd) -0.005
+
+no reference (NQ own ROC 13): below -75 on 5% of days, above +75 on 4%
+     'undervalued' -> long next session         n= 121 avg $ 293.1 PF 1.15 t  0.5 SR  0.7 yrs+ 5/9 | 18-22 $ 212.3 23-26 $ 411.8
+     'overvalued' -> short next session         n=  85 avg $-283.4 PF 0.74 t -1.0 SR -1.8 yrs+ 3/9 | 18-22 $-170.9 23-26 $-479.3
+     both                                       n= 206 avg $  55.2 PF 1.03 t  0.2 SR  0.2 yrs+ 6/9 | 18-22 $  48.1 23-26 $  66.5
+   5-day forward NQ % after undervalued +0.94, overvalued +0.54, all days +0.39; rank corr(val, 5-day fwd) -0.031

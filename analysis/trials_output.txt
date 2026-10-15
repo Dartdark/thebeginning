@@ -1,23 +1,23 @@
 Trials log and multiple-testing check (added 2026-10-15).
 
-TRIALS.csv: 204 ranked items, 835 variants in all; by tier {'S': 1, 'A': 9, 'B': 15, 'C': 20, 'D': 43, 'F': 116}
+TRIALS.csv: 205 ranked items, 836 variants in all; by tier {'S': 1, 'A': 9, 'B': 15, 'C': 20, 'D': 43, 'F': 117}
 
 The bar for the best of N trials (one-sided 5%):
    one pre-registered test  N     1: |t| >= 1.64; best noise Sharpe on 252 days x sqrt(252) = 0.00, on 1,000 trades per trade x sqrt(n) = 0.00
    a 10-variant scan        N    10: |t| >= 2.58; best noise Sharpe on 252 days x sqrt(252) = 1.58, on 1,000 trades per trade x sqrt(n) = 1.58
-   N_items                  N   204: |t| >= 3.49; best noise Sharpe on 252 days x sqrt(252) = 2.78, on 1,000 trades per trade x sqrt(n) = 2.77
-   N_all                    N   835: |t| >= 3.85; best noise Sharpe on 252 days x sqrt(252) = 3.21, on 1,000 trades per trade x sqrt(n) = 3.21
+   N_items                  N   205: |t| >= 3.49; best noise Sharpe on 252 days x sqrt(252) = 2.78, on 1,000 trades per trade x sqrt(n) = 2.77
+   N_all                    N   836: |t| >= 3.85; best noise Sharpe on 252 days x sqrt(252) = 3.21, on 1,000 trades per trade x sqrt(n) = 3.21
 
 Deflated Sharpe of the plan's strategies (per trade, MultiCharts lists, $7.25 + 1 tick):
                   strategy  trades    t   PSR  DSR_items  DSR_all  passes_items  MinTRL  regime_rho
                Vault Break    1743 4.25 1.000      0.921    0.841         False     287        0.80
       Overnight Bias ML v2     343 5.04 1.000      0.992    0.975          True      33        0.67
                Monday Long     450 3.34 1.000      0.723    0.557         False     101        0.52
-     Expiration Open Short     105 2.58 0.995      0.417    0.258         False      42        0.75
-             Late-Day Flow     895 3.51 1.000      0.787    0.629         False     169        0.42
+     Expiration Open Short     105 2.58 0.995      0.416    0.258         False      42        0.75
+             Late-Day Flow     895 3.51 1.000      0.786    0.629         False     169        0.42
                   NFP Fade      79 1.85 0.977      0.158    0.071         False      54        0.60
         Bridge Monday Long     217 4.36 1.000      0.904    0.829         False      46        0.40
-Vol-Control Sell (dropped)      71 2.14 0.993      0.224    0.104         False      32        0.61
+Vol-Control Sell (dropped)      71 2.14 0.993      0.223    0.103         False      32        0.61
 
 Tier S-B items: quoted t vs t_threshold(N_items) = 3.49 (t not quoted = blank):
 tier                                                                                                                                         item  variants  t_quoted  clears
