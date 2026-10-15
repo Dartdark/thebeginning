@@ -44,7 +44,7 @@ def half_day(d):
     return ((m == 7) & (dd == 3)) | ((m == 12) & (dd == 24)) | ((m == 11) & (dow == 4) & (dd >= 23) & (dd <= 29))
 
 
-def simulate(B, use_bo=True, use_mo=True, placebo_rng=None):
+def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0):
     n = len(B["c"]); o, h, l, c, sm, sess, j, date = (B[k] for k in ("o", "h", "l", "c", "sm", "sess", "j", "date"))
     halfd = half_day(date)
     # ---- precompute bucket boundaries (last existing bar of each 15m bucket / 6h candle / 10m bucket)
@@ -79,6 +79,8 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None):
             if fl is not None or fs is not None:
                 side = 1 if fl is not None else -1; px = fl if fl is not None else fs
                 st = stpl if side > 0 else stps; tg = px + side * 2.0 * atru
+                if max_stop_mult > 0 and (st - px) * side < 0:   # BO_MaxStopMult: stop no farther than k x ATR
+                    st = max(st, px - max_stop_mult * atru) if side > 0 else min(st, px + max_stop_mult * atru)
                 if placebo_rng is not None and placebo_rng.random() < 0.5:
                     side = -side; d_st, d_tg = abs(px - st), abs(tg - px); st = px - side * d_st; tg = px + side * d_tg
                 pos, setup, ent, ent_i, stop, tgt = side, "BO", px, i, st, tg
