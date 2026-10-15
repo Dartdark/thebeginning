@@ -1,1 +1,13 @@
 Overnight Bias sized by implied vol (user's request after the VIX / VXN resources, 2026-10-15). Pre-registered, one change:
+median ATR 257 pts, median implied sigma 212 pts -> k 1.21
+   ATR sizing: MNQ median 2; stopped trades 93: loss $ mean -322, sd 79, worst -469; all trades $ sd 405, total $40,395
+   VXN sizing: MNQ median 2; stopped trades 93: loss $ mean -351, sd 114, worst -714; all trades $ sd 444, total $42,975
+
+Funded bench (cushion $1,500):
+   plan, ONB ML ATR-sized $400    $10,184 / $12,450  blown 3% / 3%  paid 92%  all 6 in 2y 94% | 1y 2018-22 $9,215 2023+ $11,912
+   plan, ONB ML VXN-sized $400    $10,262 / $12,529  blown 3% / 3%  paid 90%  all 6 in 2y 94% | 1y 2018-22 $9,272 2023+ $12,028
+   plan, ONB ML VXN-sized $500    $10,296 / $11,709  blown 9% / 10%  paid 90%  all 6 in 2y 90% | 1y 2018-22 $9,197 2023+ $12,254
+
+Combine (VB 8 + ONB ADX30 $1,100 + Bridge Monday 2 + EOS $500):
+   ONB30 ATR-sized    pass 50.1% (2023-26 54.5%), blown 48.1%
+   ONB30 VXN-sized    pass 49.2% (2023-26 52.4%), blown 48.5%
