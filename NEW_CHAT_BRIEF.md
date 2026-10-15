@@ -112,6 +112,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     $21 vs $123 a trade the session after an interior single print; funded VB 3 / 1 on flagged days $10,184 vs $9,818 (1 year),
     blown 3% vs 4%, beats all random-day placebos: B. MC-CONFIRMED (262 / 274 flagged days identical, no false skips);
     user to paste it over `NQ Vault Break` outside market hours. Combine: FlaggedContracts -1 (= old VB, no gain).
+  - **USER PREFERENCE (2026-10-15): Twin Continuation is the profile the user wants -- a big edge that trades a lot. Keep it
+    logged for future use (a personal / non-prop account, or a prop firm with a larger or static drawdown).** Look for more like it.
   - Twin Continuation (user's MC code; `analysis/twin_continuation_*.py`, checker `checks/candidates/twin_continuation/verdict.md`):
     real edge (t 5.5, DSR 0.995, checker replica 99.8%, PASS WITH CONCERNS) but wrong shape for Apex (BO swing stops ~$6k/NQ,
     fat-tailed MO wins vs consistency): no gain in funded plan / own PA / combine. MC-CONFIRMED (v2 report: 1,069/1,074 entries identical, $296 t 5.3): A.

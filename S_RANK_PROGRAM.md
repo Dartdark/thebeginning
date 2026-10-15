@@ -50,6 +50,13 @@ costs; the S candidates will have to be large, rare moves (gaps, auctions) or ne
 NQ plan's 4,500+ trades spans a roll jump except one Bridge Monday Long trade (2024-12-16); the gold breakout has 16 of
 2,243 trades across one (net ≈ $0). New tests must drop windows that contain a roll bar.
 
+## Twin Continuation (user's strategy, 2026-10-15)
+
+NQ, MultiCharts-confirmed: 1,082 trades 2018-26 (~123 a year), $296 a trade, PF 1.60, t 5.3, ~$34,500 a year per NQ,
+Sharpe 1.71, max DD $16.1k. Meets every S number except PF 2+ (Morning Momentum leg alone: PF 1.94, ~$20,900 a year,
+352 trades). Ranked A; not usable in the Apex plans (risk shape). The user's target profile: great edge AND many trades.
+`personal_strategies/Twin_Continuation.txt`, `checks/candidates/twin_continuation/verdict.md`.
+
 ## Round 2 results (2026-10-14)
 
 | Item | Result | Tier |
