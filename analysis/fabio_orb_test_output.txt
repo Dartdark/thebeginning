@@ -1,0 +1,43 @@
+Fabio Valentini ORB (The Institutional Protocol, M. Conti 2026, 'Fabio Valentini Opening Range Breakout' validation PDF
+
+A. Rules as tested (range 8:30-9:00 CT, 1R target, stop = range low):
+   no delta filter, flat 14:00                    n=1444 win 55% avg $   74 PF 1.12 t +1.6 yrs+ 7/9 | 18-22 $   20 23-26 $  144 | 21-26.04 (paper) $  155
+   delta >= 200, flat 14:00                       n=1058 win 56% avg $   83 PF 1.14 t +1.6 yrs+ 6/9 | 18-22 $   25 23-26 $  163 | 21-26.04 (paper) $  151
+   delta > 0, flat 14:00                          n=1292 win 56% avg $   88 PF 1.15 t +1.9 yrs+ 7/9 | 18-22 $   33 23-26 $  164 | 21-26.04 (paper) $  163
+   no delta filter, flat 15:00                    n=1494 win 56% avg $   74 PF 1.11 t +1.5 yrs+ 7/9 | 18-22 $   51 23-26 $  105 | 21-26.04 (paper) $  166
+   delta >= 200, flat 15:00                       n=1092 win 56% avg $  102 PF 1.16 t +1.9 yrs+ 7/9 | 18-22 $   58 23-26 $  167 | 21-26.04 (paper) $  174
+   net $ by year (no filter, 14:00): {2018: -8147, 2019: 10229, 2020: -21910, 2021: 27717, 2022: 8801, 2023: 26263, 2024: 18363, 2025: 30264, 2026: 15236}
+   exits: {'time': 0.55, 'stop': 0.23, 'target': 0.22}; median range 82 pts (2018 36, 2025 124); avg loss on stops $-2,011
+
+B. What the delta filter does (no-filter trades with delta data, breakout bar delta in contracts):
+   breakout-bar delta: median 459, share >= 200 75%, share > 0 92%
+   delta >= 200 (kept)                            n=1058 win 56% avg $   83 PF 1.14 t +1.6 yrs+ 6/9 | 18-22 $   25 23-26 $  163 | 21-26.04 (paper) $  151
+   delta < 200 (removed)                          n= 347 win 55% avg $   32 PF 1.05 t +0.4 yrs+ 6/9 | 18-22 $    9 23-26 $   64 | 21-26.04 (paper) $  166
+   delta <= 0                                     n= 113 win 48% avg $ -133 PF 0.83 t -0.8 yrs+ 5/9 | 18-22 $ -117 23-26 $ -157 | 21-26.04 (paper) $   67
+   avg $ by delta quintile: [18, 158, 229, -64, 10]
+
+C. Control: same days (those with a breakout), long at a random 5-min bar after 9:00, same stop / target rules (10 runs):
+   random-time longs avg $100 (range 45..143) vs breakout $74
+
+Standard metrics (no filter, flat 14:00, 1 NQ; long only):
+              trades win avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+all (= longs)   1444 55% $74 $11,900   0.54    0.76          1.12 $35,215   0.34 18.98       1.25
+                      actual        p5       p50       p95
+name  metric                                              
+2023+ sharpe            0.88      0.10      0.93      1.79
+      sortino           1.25      0.14      1.32      2.74
+      pf_day            1.19      1.02      1.20      1.43
+      calmar            0.66      0.05      0.70      2.09
+      ulcer             8.90      4.94     12.01     38.60
+      max_dd       35,214.75 20,026.44 34,170.38 64,193.85
+      P(Sharpe<=0)       NaN       NaN      0.03       NaN
+      actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+2023+   $35,215      54% $34,395 $53,799 $63,760        100%        100%        100%
+
+D. Same-day P&L correlation with the plan (days where both trade):
+   VB: 853 shared days, corr +0.42
+   ONB_ML2_MC: 217 shared days, corr +0.47
+
+C2. Fair control without look-ahead (C picks days that later broke out): every day, long at the 9:05 close,
+    stop = range low, target = 1 x range width, flat 14:00:
+   long every day at 9:05 (same exits)            n=1996 win 40% avg $   53 PF 1.10 t +1.5 yrs+ 8/9 | 18-22 $   17 23-26 $  101 | 21-26.04 (paper) $   91
