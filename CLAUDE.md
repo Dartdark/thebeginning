@@ -25,7 +25,8 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   t ≥ `metrics.t_threshold(N_items)` or deflated Sharpe ≥ 0.95, unless pre-registered (see `DEVELOPMENT_PROCESS.md`).
   **Independent check:** before promoting, put the candidate in `checks/candidates/<name>/` and run the
   `strategy-checker` agent (it rebuilds the rule from the spec, then `analysis/checker.py`).
-- **Development process:** follow `DEVELOPMENT_PROCESS.md`. Every strategy is checked as a
+- **Development process:** follow `DEVELOPMENT_PROCESS.md` (including the strategy lifecycle: backtest → MultiCharts + checker →
+  Apex incubation → personal live account). Every strategy is checked as a
   whole first, then its **longs and shorts are analysed and improved separately** and
   recombined.
 - **Papers / articles:** summarize (what it's about, findings, why it should make money), say

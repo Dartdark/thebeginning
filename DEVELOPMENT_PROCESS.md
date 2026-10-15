@@ -110,6 +110,31 @@ Before anything is promoted above C or added to a plan, it goes through a checke
    reruns the gates and writes `verdict.md` (PASS / PASS WITH CONCERNS / FAIL).
 4. Only a PASS (or PASS WITH CONCERNS that the user accepts) moves on to the funded bench and MultiCharts confirmation.
 
+## Strategy lifecycle: backtest → Apex → live (user's plan, 2026-10-15)
+
+Apex is the live test bench (only fees at risk); a personal account is where proven strategies earn without Apex's
+per-account caps (`funded_strategies/FUNDED_PLAN.md`, 'Apex vs a personal account'). Every strategy moves through four
+stages and only forward through a gate:
+
+| Stage | Where | Gate to move on |
+|---|---|---|
+| 1. Research | Python backtest, Steps 1–5 above | t ≥ `metrics.t_threshold(N_items)` or DSR ≥ 0.95 (or pre-registered), clean placebo, 2018–22 and 2023–26 both positive |
+| 2. Confirmation | MultiCharts backtest + `strategy-checker` | MC report matches the Python replica; checker verdict PASS |
+| 3. Apex incubation | Apex accounts, small size, next to the plan | ≥ 40 live trades (or 6 months for rare strategies) with live / backtest average ≥ 0.75 and no ALARM (`analysis/live_vs_backtest.py`); funded bench with it added does not raise blown |
+| 4. Live (personal account) | own capital, MNQ first | sized so the plan's max drawdown is ≤ 20–30% of the account; grows with the account |
+
+Rules:
+- **Incubation runs on accounts that carry the whole plan** (copier), with the candidate at the smallest size (1 MNQ or
+  its risk equivalent). Never run a candidate alone on a separate Apex account: if it is short while the plan is long on
+  another account, that is cross-account hedging, which Apex prohibits. On one account one symbol simply nets.
+- Funded-bench check before incubation: the candidate at 1 MNQ may not raise the funded plan's blown rate by more than
+  ~1 point (the risk budget is full); if it does, incubate on combine accounts only.
+- **Demotion:** ALARM in live → half size and review (as in `live/README.md`); a second ALARM or a live / backtest ratio
+  < 0.5 after 40 trades → back to stage 3 (or retired), never straight to deletion of the record.
+- Promotion and demotion are recorded in `TIER_LIST.md` (tier + stage) and `NEW_CHAT_BRIEF.md`.
+- Current status: the whole plan is at stage 3 (live on Apex since 2026-10-12); the personal account starts after
+  ~6–12 months of live results that match the backtest, funded from Apex payouts.
+
 ## Guardrails
 
 - Each side has about half the trades, so its t-stat is lower. Don't drop a side for one bad
