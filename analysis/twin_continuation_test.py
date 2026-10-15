@@ -44,7 +44,7 @@ def half_day(d):
     return ((m == 7) & (dd == 3)) | ((m == 12) & (dd == 24)) | ((m == 11) & (dow == 4) & (dd >= 23) & (dd <= 29))
 
 
-def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0):
+def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, mo_target=0.0):
     n = len(B["c"]); o, h, l, c, sm, sess, j, date = (B[k] for k in ("o", "h", "l", "c", "sm", "sess", "j", "date"))
     halfd = half_day(date)
     # ---- precompute bucket boundaries (last existing bar of each 15m bucket / 6h candle / 10m bucket)
@@ -91,6 +91,8 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0):
                 if mo_exit_pend: px, kind = o[i], 2
                 elif (pos > 0 and l[i] <= stop) or (pos < 0 and h[i] >= stop):
                     px, kind = (min(o[i], stop) if pos > 0 else max(o[i], stop)), 0
+                elif mo_target > 0 and ((pos > 0 and h[i] >= ent + mo_target) or (pos < 0 and l[i] <= ent - mo_target)):
+                    px, kind = (max(o[i], ent + mo_target) if pos > 0 else min(o[i], ent - mo_target)), 1   # variant: MO profit target
             else:
                 if (pos > 0 and stop >= ent) or (pos < 0 and stop <= ent):
                     if i == ent_i + 1: px, kind = o[i], 2
