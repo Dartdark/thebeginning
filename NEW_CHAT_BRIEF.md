@@ -45,7 +45,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 | Strategy | Chart | Inputs |
 |---|---|---|
-| Vault Break | 30 min MNQ | 3 MNQ |
+| Vault Break | 30 min MNQ | 3 MNQ (candidate: `NQ_Vault_Break_SP.txt` 3 / `FlaggedContracts` 1, see below) |
 | Overnight Bias ML v2 (`NQ_Overnight_Bias_ML.txt`) | 15 min MNQ | `RiskPerTrade` 400 |
 | Monday Long | 5 min MNQ | 1 MNQ |
 | Expiration Open Short | 5 min MNQ | `RiskPerTrade` 700 |
@@ -108,6 +108,10 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   - Gold Breakout 15M (user's TradingView strategy): real (t 3.1, beats a random side) but lowers the funded plan at 1 MGC: C.
   - Bridge indicators round 2 (user's code: depth, walls, other VWAP anchors, gamma fixed for the NDX → NQ basis): no filter
     beats the plan. GAMMA LEVELS ARE NDX POINTS: NQ level = level + basis. Earnings-day gamma rule on watchlist #15.
+  - Single-print day filter (Red Ledger RL-FS-2026-01, `analysis/single_print_test.py`): replicates on our NQ 2018-26; VB earns
+    $21 vs $123 a trade the session after an interior single print; funded VB 3 / 1 on flagged days $10,184 vs $9,818 (1 year),
+    blown 3% vs 4%, beats all random-day placebos: B. MC code `apex_strategies/NQ_Vault_Break_SP.txt`; user to backtest it
+    (FlaggedContracts 1) so the flagged days can be checked against Python. Combine unchanged (no gain).
   - NDX 0DTE open interest by strike (`data/GEXOI_*.csv`, `analysis/gex_oi_pin_test.py`): no pinning, no wall effect, put/call
     useless, 0 / 15 plan filters pass: F. Export has no Mondays; use only the 9:31 ET OI snapshot. Apex PA terms CONFIRMED from the user's dashboard 2026-10-15 ($2,000 drawdown, safety net
     $52,100, min balance to request $52,600, 5 days of $250+, 6 payouts then closed): the simulator already matches, no change.

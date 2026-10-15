@@ -39,3 +39,9 @@ Analysis code for these is in `../analysis/` (`multi_strategy24.py`, `portfolio.
 
 - https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Vault_Break.txt
 - https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Overnight_Bias.txt
+
+## NQ_Vault_Break_SP.txt (2026-10-15)
+
+Vault Break plus the single-print day filter: `FlaggedContracts` contracts (instead of `NumContracts`) on the session after an
+interior 30-minute TPO single print in the 8:30-15:00 CT session. -1 = off (identical to `NQ_Vault_Break.txt`). Funded candidate:
+3 / 1. Prints each session's flag to the Output window (`ShowFlag`). Evidence: `TIER_LIST.md` (B), `analysis/single_print_test.py`.

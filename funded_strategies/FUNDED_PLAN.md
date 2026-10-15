@@ -7,6 +7,10 @@ Strategies screen, `L644NQ_MondayLong_NQ` v2.1), MultiCharts-confirmed (`../anal
 output in `..._output.txt`). It runs next to our Monday Long, not instead of it. NFP Fade and Vol-Control Sell
 Flow are MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`); full size starts at a **$1,500** cushion.
 
+**Candidate change (2026-10-15, pending a MultiCharts check):** Vault Break via `../apex_strategies/NQ_Vault_Break_SP.txt` with
+`NumContracts` 3, `FlaggedContracts` 1 (1 MNQ on the session after an interior TPO single print; `TIER_LIST.md`, B):
+1-year $10,184 vs $9,818, blown 3% vs 4%; beats every random-day placebo. Combine: leave `FlaggedContracts` -1.
+
 | Strategy | File | Chart | Funded inputs (full size) | Trades |
 |---|---|---|---|---|
 | Vault Break | `../apex_strategies/NQ_Vault_Break.txt` | 30 min MNQ | `NumContracts` 3 | ~107 a year |

@@ -1,0 +1,20 @@
+Funded bench for the single-print day flag (analysis/single_print_test.py, Red Ledger RL-FS-2026-01): size the breakout
+bench days 2262, flagged 29%
+   VB: $/NQ a day flagged 14.2, other 93.5
+   ONB_ML2_MC: $/NQ a day flagged 89.2, other 99.4
+   plan (VB 3)                              $9,818 / $12,595  blown 4% / 2% | 1y 2018-22 $9,176 2023+ $10,963
+   VB 3 / flagged 2                         $9,906 / $12,513  blown 4% / 3% | 1y 2018-22 $9,258 2023+ $11,059
+   VB 3 / flagged 1                         $10,184 / $12,450  blown 3% / 3% | 1y 2018-22 $9,215 2023+ $11,912
+   VB 3 / flagged 0                         $10,135 / $12,434  blown 3% / 3% | 1y 2018-22 $9,084 2023+ $12,010
+   VB 4 / flagged 1                         $9,564 / $10,119  blown 20% / 23% | 1y 2018-22 $8,964 2023+ $10,634
+   VB 3 / flagged 1 + ONB $400 / flagged $200 $10,090 / $12,480  blown 0% / 0% | 1y 2018-22 $9,121 2023+ $11,817
+   ONB $400 / flagged $200 only             $9,478 / $12,249  blown 4% / 2% | 1y 2018-22 $8,856 2023+ $10,588
+
+   placebo: VB 3 / 1 on a random 30% of days (20 draws)
+   real $10,184; placebo mean $9,252, max $9,922; share >= real 0.00
+
+real	10m23.158s
+user	9m30.605s
+sys	0m34.434s
+
+[exited with code 0]

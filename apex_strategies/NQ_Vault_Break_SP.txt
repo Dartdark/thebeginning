@@ -1,0 +1,221 @@
+{ NQ Vault Break SP - Vault Break with the single-print day filter (2026-10-15)
+
+  Identical to NQ_Vault_Break.txt, plus one rule: on the session after an "interior single print" day, trade
+  FlaggedContracts instead of NumContracts. (Red Ledger RL-FS-2026-01; tested in analysis/single_print_test.py,
+  single_print_bench.py, single_print_combine.py.)
+  Single print, from the previous regular session 8:30-15:00 CT = the 13 thirty-minute bars closing 9:00 .. 15:00 on
+  this 30-minute chart (each bar is one TPO period): a run of at least SPMinTicks ticks (8 = 2 points) printed by
+  exactly one bar, not containing the session high or low. All 13 bars must exist (half days never flag).
+  Backtest 2018-2026, VB per NQ: flagged sessions (29%) $21 a trade vs $123 on the others, weaker in 7 of 9 years
+  (random-day p 0.014). Funded bench: VB 3 / flagged 1 = $10,184 vs $9,818 in 1 year, blown 3% vs 4%.
+  FlaggedContracts -1 = filter off (plain Vault Break). The text below is the original header.
+
+  NQ Vault Break - MultiCharts PowerLanguage signal (longs only)
+
+  Written from the trader's own specification:
+    Noise level = session open price + NoiseMult x ATR(AtrDays daily bars)
+                = midnight open + 30% x 15-day ATR
+    VWAP        = from midnight
+    Entry       = 30-minute close above the noise level AND above VWAP,
+                  decisions from 10:00 CT, entries before 14:30 CT,
+                  max 3 trades a day, one position at a time
+    Exits       = target $800 / stop $1,500 per NQ (40 / 75 points),
+                  or flat at 14:30 CT
+
+  Apply to a 30-minute NQ / MNQ chart, Exchange time zone (Central), with a
+  session that includes the overnight hours (e.g. CME 24-hour), so the
+  midnight open and the midnight VWAP exist. Load at least 20 trading days
+  before the backtest start so the ATR is ready.
+
+  "Midnight" is where the chart's date changes (00:00 CT on an Exchange time
+  zone chart). The daily ATR is built from this chart's own bars, one true
+  range per calendar date (high/low since midnight, previous date's last
+  close), averaged over the previous AtrDays completed dates.
+
+  Python test (2018-2026, 1 NQ, after $7.25 costs) with the open and VWAP
+  anchored at 08:00 CT instead of midnight, because the exported 1-minute
+  data starts at 08:00: 1,656 trades, 64% winners, average $75, profit
+  factor 1.21; 2021-2026 matched the course's vaultbreak list closely
+  (win 66% vs 67%, average $97 vs $98). Confirm with a MultiCharts backtest.
+
+  Holiday half-days (market halts around 12:00 CT): no entries from
+  EarlyLastEntry, flat at EarlyFlattenTime, so no position is carried
+  overnight in the backtest. }
+
+Inputs:
+	NoiseMult(0.30),        { 30% of the ATR }
+	AtrDays(15),
+	FirstDecision(1000),    { first bar close that can trigger an entry }
+	LastEntryTime(1430),    { no new positions from this time }
+	FlattenTime(1430),      { close any position at the close of this bar }
+	TargetPts(40),          { $800 per NQ }
+	StopPts(75),            { $1,500 per NQ }
+	MaxTradesPerDay(3),
+	UseHolidayTimes(true),
+	EarlyLastEntry(1100),
+	EarlyFlattenTime(1130),
+	NumContracts(1),        { 1 for NQ backtests; 10 MNQ = 1 NQ }
+	FlaggedContracts(-1),   { contracts on single-print-flagged sessions; -1 = filter off; funded 1 (with 3), combine see README }
+	SPMinTicks(8),          { minimum single-print run, ticks }
+	ShowFlag(true);         { print the flag in the Output window each session }
+
+Variables:
+	BarVol(0), CumPV(0), CumVol(0), DayVwap(0),
+	SessOpen(0), DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0), Noise(0),
+	DayStartTrades(0), TradesToday(0),
+	CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false), IsEarlyClose(false),
+	DayLastEntry(0), DayFlatten(0);
+
+Arrays:
+	TrHist[100](0), PerHi[13](0), PerLo[13](0), Cov[4000](0);
+
+Variables:
+	NPer(0), Pi(0), Tk(0), SessHiT(0), SessLoT(0), NTk(0), RunLen(0), RunStart(0), HasSP(false), SPFlag(false),
+	Computed(false), PerA(0), PerB(0), Qty(0), TickSz(0.25);
+
+if BarType < 2 then BarVol = Ticks else BarVol = Volume;
+
+{ ---------- New calendar date (midnight) ---------- }
+if Date <> Date[1] then begin
+	{ store the finished date's true range (weekdays only: the Sunday
+	  evening session is a partial day and would shrink the ATR) }
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	SessOpen = Open;
+	DayHi = High;
+	DayLo = Low;
+	CumPV = 0;
+	CumVol = 0;
+	DayStartTrades = TotalTrades;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+{ ---------- VWAP from midnight ---------- }
+CumPV = CumPV + (High + Low + Close) / 3 * BarVol;
+CumVol = CumVol + BarVol;
+if CumVol > 0 then DayVwap = CumPV / CumVol;
+
+{ ---------- Noise level ---------- }
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+Noise = SessOpen + NoiseMult * ATRv;
+
+{ ---------- CME holiday half-days ---------- }
+CalMonth = Month(Date);
+CalDay = DayOfMonth(Date);
+CalDow = DayOfWeek(Date);
+CalYear = Year(Date) + 1900;
+IsWeekday = CalDow >= 1 and CalDow <= 5;
+IsEarlyClose = UseHolidayTimes and (
+	(CalMonth = 1 and ((CalDay = 1 and IsWeekday) or (CalDay = 2 and CalDow = 1)))
+	or (CalMonth = 1 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 2 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 5 and CalDow = 1 and CalDay >= 25)
+	or (CalMonth = 6 and CalYear >= 2022 and ((CalDay = 19 and IsWeekday)
+		or (CalDay = 18 and CalDow = 5) or (CalDay = 20 and CalDow = 1)))
+	or (CalMonth = 7 and (((CalDay = 3 or CalDay = 4) and IsWeekday) or (CalDay = 5 and CalDow = 1)))
+	or (CalMonth = 9 and CalDow = 1 and CalDay <= 7)
+	or (CalMonth = 11 and CalDow = 4 and CalDay >= 22 and CalDay <= 28)
+	or (CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29)
+	or (CalMonth = 12 and (((CalDay = 24 or CalDay = 25) and IsWeekday) or (CalDay = 26 and CalDow = 1))));
+if IsEarlyClose then begin
+	DayLastEntry = EarlyLastEntry;
+	DayFlatten = EarlyFlattenTime;
+end
+else begin
+	DayLastEntry = LastEntryTime;
+	DayFlatten = FlattenTime;
+end;
+
+{ ---------- Single prints of the regular session (30-minute bars closing 9:00 .. 15:00 CT) ---------- }
+{ SPFlag = result of the last weekday session; it is computed at that session's 15:00 bar and used by the entries of the
+  next weekday (the Sunday evening bars don't touch it). A weekday without a 15:00 bar (half day) clears it. }
+if Date <> Date[1] then begin
+	if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 and Computed = false then SPFlag = false;
+	Computed = false;
+	NPer = 0;
+end;
+if Time > 830 and Time <= 1500 and NPer < 13 then begin
+	PerHi[NPer] = High;
+	PerLo[NPer] = Low;
+	NPer = NPer + 1;
+end;
+if Time = 1500 then begin
+	SPFlag = false;
+	Computed = true;
+	if NPer = 13 then begin
+		TickSz = MinMove / PriceScale;
+		SessHiT = 0; SessLoT = 999999999;
+		for Pi = 0 to 12 begin
+			SessHiT = MaxList(SessHiT, Round(PerHi[Pi] / TickSz, 0));
+			SessLoT = MinList(SessLoT, Round(PerLo[Pi] / TickSz, 0));
+		end;
+		NTk = SessHiT - SessLoT + 1;
+		if NTk <= 4000 then begin
+			for Tk = 0 to NTk - 1 begin Cov[Tk] = 0; end;
+			for Pi = 0 to 12 begin
+				PerA = Round(PerLo[Pi] / TickSz, 0) - SessLoT;
+				PerB = Round(PerHi[Pi] / TickSz, 0) - SessLoT;
+				for Tk = PerA to PerB begin Cov[Tk] = Cov[Tk] + 1; end;
+			end;
+			HasSP = false; RunLen = 0; RunStart = 0;
+			for Tk = 0 to NTk - 1 begin
+				if Cov[Tk] = 1 then begin
+					if RunLen = 0 then RunStart = Tk;
+					RunLen = RunLen + 1;
+				end
+				else begin
+					if RunLen >= SPMinTicks and RunStart > 0 then HasSP = true;
+					RunLen = 0;
+				end;
+			end;
+			{ a run reaching the session high (last tick) is a tail: not counted }
+			SPFlag = HasSP;
+		end;
+	end;
+	if ShowFlag then
+		Print(ELDateToString(Date), " single print today: ", SPFlag, " -> next session trades ",
+			IIFString(SPFlag and FlaggedContracts >= 0, "FlaggedContracts", "NumContracts"));
+end;
+
+{ ---------- Entries ---------- }
+TradesToday = TotalTrades - DayStartTrades;
+if MarketPosition <> 0 then TradesToday = TradesToday + 1;
+
+if ATRv > 0 and Time >= FirstDecision and Time < DayLastEntry
+	and MarketPosition = 0 and TradesToday < MaxTradesPerDay
+	and Close > Noise and Close > DayVwap then
+	begin
+	Qty = NumContracts;
+	if SPFlag and FlaggedContracts >= 0 then Qty = FlaggedContracts;
+	if Qty > 0 then Buy ("VaultBreak") Qty contracts next bar at market;
+	end;
+
+{ ---------- Exits ---------- }
+SetStopContract;
+SetStopLoss(StopPts * BigPointValue);
+SetProfitTarget(TargetPts * BigPointValue);
+
+if MarketPosition > 0 and Time >= DayFlatten then
+	Sell ("VB EOD") this bar on close;

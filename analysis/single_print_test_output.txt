@@ -1,0 +1,58 @@
+TPO single prints as a day-type flag (Red Ledger Research, field study RL-FS-2026-01, "Single Prints Mark the Day, Not the
+
+A. 2165 sessions 2018-02-01 .. 2026-10-09; flagged 30% (paper 31%)
+   value overlaps prior value   flagged 0.556  other 0.478  controlled +0.102 [+0.039, +0.171]  by era +0.021 +0.104 +0.121
+   efficiency |C-O| / range     flagged 0.464  other 0.494  controlled -0.033 [-0.068, +0.001]  by era -0.062 -0.020 -0.032
+   range / 20-day avg           flagged 1.028  other 1.031  controlled -0.173 [-0.251, -0.095]  by era -0.194 -0.209 -0.143
+
+B. Plan trades (MultiCharts lists), flagged vs other sessions (net $ per contract)
+ strat  n_flag  n_other  flagged  other    t  design_diff  holdout_diff
+BRIDGE      59      158    708.8  478.7  0.9        507.2        -144.5
+   EOS      28       77    289.7  540.8 -0.6       -452.2          17.1
+   LDF     250      645    140.6   76.8  1.0        138.4         -28.4
+   MON     133      317    505.3  391.7  0.5        347.7        -137.7
+   NFP      19       60    368.8  323.7  0.1       -107.9         112.8
+ONB_ML     121      222    504.6  707.8 -0.7       -174.3        -239.2
+    VB     537     1206     21.3  123.0 -2.1        -55.3        -147.6
+   VCS      39       32    639.2  168.2  1.2        278.1         585.3
+
+C. Responsive: at 9:00 CT outside the prior value area -> toward the prior POC (target POC, stop = same distance, out 15:00)
+   flagged  n  419 avg $ 175.3 t  1.4 win 50% | 2018-22 $ 139.8 2023-26 $ 222.4
+   other    n 1084 avg $-101.0 t -1.4 win 49% | 2018-22 $-107.2 2023-26 $ -92.9
+
+   flagged-day responsive trade, standard metrics:
+       trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+all       419 50% $175  $8,549   0.47    0.76          1.20 $40,847   0.21 11.16       1.53
+longs     173 56% $484  $9,739   0.72    1.28          1.54 $31,945   0.30  6.01       3.24
+shorts    246 46% $-42 $-1,190  -0.10   -0.14          0.95 $32,284  -0.04 24.55      -0.10
+
+2023+ bootstrap:
+                       actual        p5       p50       p95
+name   metric                                              
+all    sharpe            0.51     -0.30      0.53      1.31
+       sortino           0.82     -0.44      0.85      2.47
+       pf_day            1.21      0.90      1.21      1.65
+       calmar            0.26     -0.13      0.36      1.52
+       ulcer            11.85      5.94     15.76     50.19
+       max_dd       40,847.00 16,565.06 30,174.25 59,474.24
+       P(Sharpe<=0)       NaN       NaN      0.15       NaN
+longs  sharpe            0.69     -0.18      0.75      1.54
+       sortino           1.25     -0.24      1.34      3.79
+       pf_day            1.51      0.91      1.56      2.72
+       calmar            0.34     -0.08      0.57      2.28
+       ulcer             8.58      3.56     10.10     32.84
+       max_dd       31,944.75 10,375.19 19,928.88 40,106.53
+       P(Sharpe<=0)       NaN       NaN      0.09       NaN
+shorts sharpe           -0.02     -0.88     -0.05      0.77
+       sortino          -0.03     -1.11     -0.07      1.24
+       pf_day            0.99      0.66      0.98      1.42
+       calmar           -0.01     -0.24     -0.03      0.68
+       ulcer            18.54      7.14     21.23     58.14
+       max_dd       26,261.00 13,792.17 27,545.00 55,135.21
+       P(Sharpe<=0)       NaN       NaN      0.54       NaN
+
+2023+ drawdown permutation:
+       actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+all      $40,847      88% $29,072 $46,183 $54,897        100%        100%        100%
+longs    $31,945      98% $18,101 $28,706 $34,689        100%        100%        100%
+shorts   $26,261      45% $26,967 $40,966 $47,734        100%        100%        100%
