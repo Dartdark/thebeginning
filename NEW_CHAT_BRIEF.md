@@ -17,7 +17,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 ## Live status (2026-10-14)
 
 - **1 combine account live since Monday 2026-10-12** (user corrected 2026-10-15: running one account first as a shakedown
-  week for errors / screen sleep; 2 of 2 trades so far). Plan: add accounts one at a time, 5–10 trading days apart. First live days:
+  week for errors / screen sleep; 2 of 2 trades so far). Plan: add accounts one at a time, 5–10 trading days apart.
+  Next: EOS trades Fri 10/16 and Bridge Monday Sun 10/18 19:00 CT on account #1 (first live runs of both); if clean,
+  **add account #2 Tue 10/20**, #3 about a week later. First live days:
   - **Monday 10/12:** a winning trade was missed because the connection dropped.
   - **Tuesday 10/14:** the Overnight Bias short (5 MNQ) was rejected by Rithmic: *"Invalid StopMarket order
     parameters"*, a sell stop placed above the market.
