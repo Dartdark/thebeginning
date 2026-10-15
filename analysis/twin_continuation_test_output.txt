@@ -1,0 +1,78 @@
+Twin Continuation (user's MultiCharts code, 2026-10-15): Swing Breakout (6h fractal swing levels, stop entries) + Morning
+
+1074 trades 2018-01-02 .. 2026-10-08; overnight-held BO trades 5%
+   ALL net (repo costs)       n  1074 avg $ 312.5 PF 1.62 t  5.46 win 68% yrs+ 8/9 | 2018-22 $ 188.0 2023-26 $ 468.8
+   ALL net ($5 + $1)          n  1074 avg $ 321.4 PF 1.64 t  5.62 win 68% yrs+ 8/9 | 2018-22 $ 197.0 2023-26 $ 477.7
+      ALL longs               n   590 avg $ 282.5 PF 1.65 t  4.11 win 71% yrs+ 8/9 | 2018-22 $ 126.3 2023-26 $ 482.1
+      ALL shorts              n   484 avg $ 349.0 PF 1.59 t  3.66 win 64% yrs+ 8/9 | 2018-22 $ 264.5 2023-26 $ 452.9
+   BO net (repo costs)        n   725 avg $ 207.7 PF 1.44 t  3.31 win 76% yrs+ 7/9 | 2018-22 $  69.9 2023-26 $ 378.3
+   BO net ($5 + $1)           n   725 avg $ 215.6 PF 1.46 t  3.44 win 76% yrs+ 7/9 | 2018-22 $  77.8 2023-26 $ 386.1
+      BO longs                n   413 avg $ 175.1 PF 1.43 t  2.31 win 78% yrs+ 8/9 | 2018-22 $  65.3 2023-26 $ 307.9
+      BO shorts               n   312 avg $ 250.9 PF 1.45 t  2.37 win 73% yrs+ 6/9 | 2018-22 $  75.9 2023-26 $ 474.4
+   MO net (repo costs)        n   349 avg $ 530.0 PF 1.91 t  4.50 win 51% yrs+ 8/9 | 2018-22 $ 428.5 2023-26 $ 661.7
+   MO net ($5 + $1)           n   349 avg $ 541.3 PF 1.93 t  4.60 win 52% yrs+ 8/9 | 2018-22 $ 439.7 2023-26 $ 672.9
+      MO longs                n   177 avg $ 533.1 PF 2.05 t  3.69 win 56% yrs+ 8/9 | 2018-22 $ 257.7 2023-26 $ 934.7
+      MO shorts               n   172 avg $ 526.9 PF 1.79 t  2.81 win 47% yrs+ 8/9 | 2018-22 $ 623.4 2023-26 $ 415.9
+
+   by year (repo costs): {2018: 5660.0, 2019: -4694.0, 2020: 32627.0, 2021: 40129.0, 2022: 38712.0, 2023: 41894.0, 2024: 43109.0, 2025: 45915.0, 2026: 92227.0}
+   BO exits: {'target': 490, 'time/mkt': 213, 'stop': 22} | MO exits: {'time': 234, 'stop': 115}
+
+Standard metrics (1 NQ, repo costs):
+       trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+ALL      1074 68% $312 $36,271   1.76    2.71          1.62 $16,141   2.25  6.10      11.89
+longs     590 71% $283 $17,799   1.31    1.89          1.65 $19,251   0.92  4.59       7.75
+shorts    484 64% $349 $18,472   1.19    1.93          1.59 $17,337   1.07  8.89       4.16
+BO        725 76% $208 $15,907   1.05    1.29          1.44 $25,022   0.64  8.02       3.97
+MO        349 51% $530 $20,365   1.46    3.63          1.91 $12,205   1.67  5.01       8.13
+
+2023+ bootstrap:
+                       actual        p5       p50       p95
+name   metric                                              
+ALL    sharpe            2.47      1.66      2.46      3.27
+       sortino           4.13      2.50      4.12      6.14
+       pf_day            1.93      1.55      1.92      2.41
+       calmar            4.65      1.77      3.73      6.63
+       ulcer             3.00      1.83      3.33      7.34
+       max_dd       12,149.26 10,098.04 14,922.42 24,320.91
+       P(Sharpe<=0)       NaN       NaN      0.00       NaN
+longs  sharpe            1.99      1.17      1.99      2.79
+       sortino           3.29      1.70      3.31      5.43
+       pf_day            2.08      1.52      2.07      2.89
+       calmar            2.76      1.02      2.57      5.28
+       ulcer             3.78      1.66      3.38      8.30
+       max_dd       11,352.71  7,361.18 11,930.05 20,671.89
+       P(Sharpe<=0)       NaN       NaN      0.00       NaN
+shorts sharpe            1.52      0.72      1.53      2.34
+       sortino           2.54      1.04      2.56      4.61
+       pf_day            1.78      1.30      1.78      2.47
+       calmar            1.69      0.47      1.63      3.76
+       ulcer             4.12      2.43      5.20     13.50
+       max_dd       14,884.00  9,254.64 15,344.62 27,425.96
+       P(Sharpe<=0)       NaN       NaN      0.00       NaN
+BO     sharpe            1.85      0.87      1.81      2.82
+       sortino           2.46      1.08      2.41      4.15
+       pf_day            1.77      1.32      1.75      2.42
+       calmar            2.21      0.59      1.78      3.91
+       ulcer             4.50      2.43      5.05     12.73
+       max_dd       13,919.65 10,261.96 16,552.19 29,746.15
+       P(Sharpe<=0)       NaN       NaN      0.00       NaN
+MO     sharpe            1.62      0.91      1.64      2.30
+       sortino           4.06      1.94      4.10      6.65
+       pf_day            1.96      1.43      1.96      2.68
+       calmar            2.11      0.72      2.12      4.62
+       ulcer             3.94      2.24      4.36     10.00
+       max_dd       12,205.25  7,586.25 12,103.88 21,381.50
+       P(Sharpe<=0)       NaN       NaN      0.00       NaN
+
+2023+ drawdown permutation:
+       actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+ALL      $12,149       5% $17,220 $26,446 $32,582        100%        100%        100%
+longs    $11,353      30% $12,850 $20,227 $24,357        100%        100%        100%
+shorts   $14,884      42% $15,631 $24,682 $30,640        100%        100%        100%
+BO       $13,920      23% $16,717 $26,504 $31,908        100%        100%        100%
+MO       $12,205      60% $11,450 $18,208 $23,346        100%        100%        100%
+
+Random-side placebo (same entry times, exits mirrored), 20 runs:
+   ALL: real $312.5; placebo mean $61.1, max $156.4; share >= real 0.00
+   BO: real $207.7; placebo mean $60.4, max $133.7; share >= real 0.00
+   MO: real $530.0; placebo mean $63.0, max $227.0; share >= real 0.00
