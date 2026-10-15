@@ -96,6 +96,19 @@ on 2026-10-15) and prints the bar: the best of N noise trials reaches |t| = `met
   pre-registered forced-flow rule (mechanism first, few variants, holdout and MultiCharts confirmation) and stay small in
   the plan; the live drift alarm is their real test.
 
+## Independent checker (maker-checker split, added 2026-10-15)
+
+Before anything is promoted above C or added to a plan, it goes through a checker that never sees how it was found:
+1. The maker writes `checks/candidates/<name>/`: `spec.md` (rules in plain words, instrument, costs, mechanism, variants
+   tried, pre-registered or not), `trades.csv` (date, side, net per contract after costs; filters add `kept` and list all
+   base trades), `meta.json` (kind, pre_registered, variants), optional `placebo.csv` (run, net).
+2. `python3 analysis/checker.py checks/candidates/<name>` runs fixed gates (G1 significance with the trials bar, G2 holdout,
+   G3 years, G4 concentration, G5 placebo, G6 resampling) and writes `checker_report.md`.
+3. The `strategy-checker` agent (`.claude/agents/strategy-checker.md`, a fresh agent with no access to the maker's scripts,
+   outputs or the tier list) rebuilds the rule from `spec.md` on raw data, compares with `trades.csv`, looks for leaks,
+   reruns the gates and writes `verdict.md` (PASS / PASS WITH CONCERNS / FAIL).
+4. Only a PASS (or PASS WITH CONCERNS that the user accepts) moves on to the funded bench and MultiCharts confirmation.
+
 ## Guardrails
 
 - Each side has about half the trades, so its t-stat is lower. Don't drop a side for one bad

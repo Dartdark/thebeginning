@@ -23,6 +23,8 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   with bootstrap intervals and drawdown permutation (`analysis/resampling.py`) on the
   2023-onward holdout. **Multiple testing:** run `analysis/trials.py` after ranking; promotion above C needs
   t ≥ `metrics.t_threshold(N_items)` or deflated Sharpe ≥ 0.95, unless pre-registered (see `DEVELOPMENT_PROCESS.md`).
+  **Independent check:** before promoting, put the candidate in `checks/candidates/<name>/` and run the
+  `strategy-checker` agent (it rebuilds the rule from the spec, then `analysis/checker.py`).
 - **Development process:** follow `DEVELOPMENT_PROCESS.md`. Every strategy is checked as a
   whole first, then its **longs and shorts are analysed and improved separately** and
   recombined.
