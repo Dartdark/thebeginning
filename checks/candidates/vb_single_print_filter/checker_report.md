@@ -8,10 +8,9 @@ kind filter, pre-registered True, variants 1, N (ranked items in TRIALS.csv) 193
 | G2 holdout | PASS | kept - skipped: 2018-22 $+73.3, 2023-26 $+156.4 |
 | G3 years | PASS | kept beats skipped in 7/9 years: 2018 -15, 2019 +5, 2020 +230, 2021 +96, 2022 +33, 2023 +197, 2024 +209, 2025 -63, 2026 +246 |
 | G5 placebo | PASS | labels shuffled within years (2,000): p 0.0075 |
-| G4 concentration | PASS | n/a for filters |
 | G6 resampling | PASS | kept trades 2023+ P(Sharpe <= 0) 0.000 |
 
-**Gates: 6/6 pass -> PASS**
+**Gates: 5/5 pass -> PASS**
 
 ## Standard metrics
 ```
