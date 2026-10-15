@@ -1,0 +1,47 @@
+ReversionCheck (user's MultiCharts code, 2026-10-15): on every bar, fade the bar's close-to-close move (up bar -> sell short
+
+A. The check as written: 10-min bars, HoldBars 1, 1 contract (gross ticks a trade; cost of a round trip in ticks)
+   6E all hours (lag-1 ac -0.019)     trades/yr   16586  gross +0.169 ticks vs cost 3.16 ticks  net $ -18.69/trade  $  -310,039/yr  yrs+ 0/9 | gross 18-22 +0.166 23-26 +0.173
+   6E day 8:30-15:00 (lag-1 ac +0.001) trades/yr    4535  gross +0.114 ticks vs cost 3.16 ticks  net $ -19.04/trade  $   -86,336/yr  yrs+ 0/9 | gross 18-22 +0.131 23-26 +0.092
+   NQ all hours (lag-1 ac -0.011)     trades/yr   17048  gross +0.396 ticks vs cost 3.45 ticks  net $ -15.27/trade  $  -260,300/yr  yrs+ 0/9 | gross 18-22 +0.477 23-26 +0.290
+   NQ day 8:30-15:00 (lag-1 ac -0.016) trades/yr    4667  gross +0.656 ticks vs cost 3.45 ticks  net $ -13.97/trade  $   -65,181/yr  yrs+ 0/9 | gross 18-22 +1.142 23-26 +0.015
+   ES all hours (lag-1 ac -0.013)     trades/yr   16620  gross +0.128 ticks vs cost 2.40 ticks  net $ -28.40/trade  $  -472,080/yr  yrs+ 0/9 | gross 18-22 +0.115 23-26 +0.144
+   ES day 8:30-15:00 (lag-1 ac -0.014) trades/yr    4586  gross +0.161 ticks vs cost 2.40 ticks  net $ -27.99/trade  $  -128,364/yr  yrs+ 0/9 | gross 18-22 +0.229 23-26 +0.072
+   YM all hours (lag-1 ac -0.009)     trades/yr   16888  gross +0.238 ticks vs cost 3.45 ticks  net $ -16.06/trade  $  -271,255/yr  yrs+ 0/9 | gross 18-22 +0.318 23-26 +0.132
+   YM day 8:30-15:00 (lag-1 ac -0.013) trades/yr    4629  gross +0.136 ticks vs cost 3.45 ticks  net $ -16.57/trade  $   -76,704/yr  yrs+ 0/9 | gross 18-22 +0.361 23-26 -0.163
+   GC all hours (lag-1 ac -0.003)     trades/yr   16854  gross +0.000 ticks vs cost 2.73 ticks  net $ -27.25/trade  $  -459,216/yr  yrs+ 0/9 | gross 18-22 +0.060 23-26 -0.077
+   GC day 8:30-15:00 (lag-1 ac -0.000) trades/yr    4588  gross +0.012 ticks vs cost 2.73 ticks  net $ -27.13/trade  $  -124,463/yr  yrs+ 0/9 | gross 18-22 +0.047 23-26 -0.033
+   CL all hours (lag-1 ac -0.046)     trades/yr   16690  gross +0.054 ticks vs cost 2.73 ticks  net $ -26.71/trade  $  -445,706/yr  yrs+ 0/9 | gross 18-22 +0.014 23-26 +0.107
+   CL day 8:30-15:00 (lag-1 ac -0.060) trades/yr    4589  gross -0.003 ticks vs cost 2.73 ticks  net $ -27.28/trade  $  -125,204/yr  yrs+ 0/9 | gross 18-22 +0.005 23-26 -0.014
+   ZN all hours (lag-1 ac -0.051)     trades/yr   14378  gross +0.049 ticks vs cost 2.46 ticks  net $ -37.73/trade  $  -542,561/yr  yrs+ 0/9 | gross 18-22 +0.040 23-26 +0.060
+   ZN day 8:30-15:00 (lag-1 ac -0.014) trades/yr    4089  gross +0.044 ticks vs cost 2.46 ticks  net $ -37.81/trade  $  -154,580/yr  yrs+ 0/9 | gross 18-22 +0.025 23-26 +0.070
+
+B. 6E: timeframe x HoldBars, all hours
+   6E 1-min, hold 1                   trades/yr  145602  gross +0.015 ticks vs cost 3.16 ticks  net $ -19.66/trade  $-2,862,277/yr  yrs+ 0/9 | gross 18-22 +0.016 23-26 +0.013
+   6E 1-min, hold 3                   trades/yr   78147  gross +0.025 ticks vs cost 3.16 ticks  net $ -19.59/trade  $-1,531,264/yr  yrs+ 0/9 | gross 18-22 +0.031 23-26 +0.016
+   6E 5-min, hold 1                   trades/yr   32525  gross +0.070 ticks vs cost 3.16 ticks  net $ -19.31/trade  $  -628,178/yr  yrs+ 0/9 | gross 18-22 +0.101 23-26 +0.029
+   6E 5-min, hold 3                   trades/yr   16771  gross +0.112 ticks vs cost 3.16 ticks  net $ -19.05/trade  $  -319,495/yr  yrs+ 0/9 | gross 18-22 +0.131 23-26 +0.086
+   6E 10-min, hold 1                  trades/yr   16586  gross +0.169 ticks vs cost 3.16 ticks  net $ -18.69/trade  $  -310,039/yr  yrs+ 0/9 | gross 18-22 +0.166 23-26 +0.173
+   6E 10-min, hold 3                  trades/yr    8472  gross +0.238 ticks vs cost 3.16 ticks  net $ -18.27/trade  $  -154,749/yr  yrs+ 0/9 | gross 18-22 +0.216 23-26 +0.266
+   6E 30-min, hold 1                  trades/yr    5643  gross +0.342 ticks vs cost 3.16 ticks  net $ -17.61/trade  $   -99,382/yr  yrs+ 0/9 | gross 18-22 +0.393 23-26 +0.276
+   6E 30-min, hold 3                  trades/yr    2855  gross +0.236 ticks vs cost 3.16 ticks  net $ -18.27/trade  $   -52,178/yr  yrs+ 0/9 | gross 18-22 +0.456 23-26 -0.053
+   6E 60-min, hold 1                  trades/yr    2844  gross +0.366 ticks vs cost 3.16 ticks  net $ -17.46/trade  $   -49,670/yr  yrs+ 0/9 | gross 18-22 +0.326 23-26 +0.418
+   6E 60-min, hold 3                  trades/yr    1434  gross +0.370 ticks vs cost 3.16 ticks  net $ -17.44/trade  $   -25,005/yr  yrs+ 0/9 | gross 18-22 +0.115 23-26 +0.705
+
+C. 6E: fade only big bars (|move| >= k x sd of the last 100 bars), 10-min
+   6E all k 2 hold 1                  trades/yr    1954  gross +0.325 ticks vs cost 3.16 ticks  net $ -17.72/trade  $   -34,624/yr  yrs+ 0/9 | gross 18-22 +0.385 23-26 +0.243
+      net $ by year: {2018: -36480, 2019: -32991, 2020: -37433, 2021: -38039, 2022: -31950, 2023: -33763, 2024: -41373, 2025: -34567, 2026: -25025}
+   6E all k 2 hold 3                  trades/yr    1569  gross +0.479 ticks vs cost 3.16 ticks  net $ -16.76/trade  $   -26,291/yr  yrs+ 0/9 | gross 18-22 +0.760 23-26 +0.088
+      net $ by year: {2018: -28560, 2019: -25511, 2020: -20138, 2021: -26457, 2022: -22355, 2023: -30167, 2024: -33698, 2025: -31343, 2026: -18389}
+   6E all k 3 hold 1                  trades/yr     660  gross +0.098 ticks vs cost 3.16 ticks  net $ -19.14/trade  $   -12,622/yr  yrs+ 0/9 | gross 18-22 -0.106 23-26 +0.389
+      net $ by year: {2018: -16957, 2019: -12653, 2020: -14054, 2021: -14874, 2022: -12775, 2023: -13205, 2024: -14561, 2025: -8887, 2026: -5633}
+   6E all k 3 hold 3                  trades/yr     594  gross +0.389 ticks vs cost 3.16 ticks  net $ -17.32/trade  $   -10,280/yr  yrs+ 0/9 | gross 18-22 +0.326 23-26 +0.481
+      net $ by year: {2018: -13909, 2019: -10934, 2020: -15273, 2021: -12384, 2022: -3486, 2023: -12631, 2024: -9281, 2025: -9569, 2026: -5052}
+   6E day k 2 hold 1                  trades/yr     320  gross -0.644 ticks vs cost 3.16 ticks  net $ -23.78/trade  $    -7,601/yr  yrs+ 0/9 | gross 18-22 -0.735 23-26 -0.527
+      net $ by year: {2018: -8061, 2019: -7727, 2020: -7733, 2021: -7879, 2022: -7993, 2023: -7059, 2024: -6640, 2025: -10033, 2026: -5283}
+   6E day k 2 hold 3                  trades/yr     288  gross -0.314 ticks vs cost 3.16 ticks  net $ -21.71/trade  $    -6,256/yr  yrs+ 0/9 | gross 18-22 +0.132 23-26 -0.899
+      net $ by year: {2018: -3220, 2019: -4271, 2020: -4603, 2021: -7469, 2022: -8277, 2023: -7328, 2024: -4592, 2025: -9503, 2026: -7043}
+   6E day k 3 hold 1                  trades/yr     192  gross -0.850 ticks vs cost 3.16 ticks  net $ -25.06/trade  $    -4,803/yr  yrs+ 0/9 | gross 18-22 -1.226 23-26 -0.348
+      net $ by year: {2018: -5441, 2019: -5712, 2020: -5814, 2021: -6559, 2022: -3503, 2023: -5167, 2024: -2869, 2025: -4908, 2026: -3257}
+   6E day k 3 hold 3                  trades/yr     184  gross -0.281 ticks vs cost 3.16 ticks  net $ -21.51/trade  $    -3,948/yr  yrs+ 0/9 | gross 18-22 -0.305 23-26 -0.249
+      net $ by year: {2018: -4762, 2019: -4598, 2020: -2038, 2021: -6143, 2022: -3035, 2023: -4161, 2024: -1948, 2025: -4968, 2026: -3881}
