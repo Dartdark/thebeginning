@@ -638,6 +638,18 @@ no-activation $249. One slot = one account at a time, every 5th start day 2018�
 - Within a size the fee option changes the 3-year net by under $300. 150K: no-activation is cheapest (fails cost $249,
   the $150 activation is paid only on a pass, but 2.4 tries x $30 more for EOD + $150 > $0). 50K: EOD 5-pack is cheapest.
 
+### Scaling up while the account grows (2026-10-15)
+
+Code `../analysis/payout_scaling_test.py`. Letting the cushion rule go above full size (fmax 1.25–2) or stepping sizes up
+after each payout (x1.25–2) does not speed up the payouts:
+- **50K:** current $10,184 / $12,450, blown 3%, all 6 in 2 years 94%, median 230 trading days to the 6th payout. Above-full
+  cushion sizing: blown 6–7%, $11.95–12.02k; stage 'mild' / 'ladder' the same as now; 'bold' blown 10–11%. Keep as is.
+- **150K:** current $15,731 / $19,743, blown 0%, all 6 91%, 238 days. Cushion fmax 1.5: $16,276 / $19,887, blown 0%,
+  all 6 94%, 223 days (+$550 in year 1, ~15 days sooner) — small; optional once a 150K account is past its first payout.
+- Why: the payouts are paced by Apex's rules (5 days of $250 / $350+ between payouts, the 50% consistency rule, fixed caps),
+  not by how fast the balance grows; bigger size makes bigger single days, which trips the consistency rule, and adds
+  drawdown risk.
+
 ### Tuning the sizing for the whole pipeline (2026-10-14)
 
 Code `../analysis/pipeline_tuning_test.py` (output in `..._output.txt`). One slot, 70 start months, 3 years, net of
