@@ -1,0 +1,33 @@
+Overnight range and the RTH open vs the overnight midpoint (user's post, 2026-10-15: NQ 2015-25, 2,827 days; open above the
+
+2181 sessions 2018-2026; open inside the ON range 100% (outside = already broken at the open)
+
+A. Replication
+   any ON level broken in RTH 95.5% (post 94.2%); only high 38.9%, only low 31.7%, both 24.8%, neither 4.5%
+   open inside range, above mid: high first 77.9% (post 76.2%); below mid: low first 74.1% (post 75.6%); n 2074
+   minutes to first break: median 10; within 5 / 15 / 30 / 60 / 120: 40% / 57% / 70% / 83% / 91%
+
+B. Null: random-walk P(high first) = position of the open in the ON range
+   all: actual high-first 55.2% vs geometric 54.5%
+   above mid: actual high-first 77.9% vs geometric 76.8%  (n 1170)
+   below mid: actual high-first 25.9% vs geometric 25.8%  (n 904)
+              n  actual  geometric
+dec                               
+(0.0, 0.1]  142     4.9        5.9
+(0.1, 0.2]  211    15.6       14.8
+(0.2, 0.3]  188    27.7       25.2
+(0.3, 0.4]  183    30.6       35.2
+(0.4, 0.5]  180    47.8       45.2
+(0.5, 0.6]  194    56.7       55.0
+(0.6, 0.7]  210    68.1       65.2
+(0.7, 0.8]  230    74.8       75.0
+(0.8, 0.9]  268    85.4       85.2
+(0.9, 1.0]  268    95.9       94.8
+   actual - geometric = +0.7 pts (t 0.75); above mid +1.1, below mid +0.1
+
+C. Trades (net per NQ)
+   toward the nearer level (target it, stop the far one): n 2074 avg $3.8 t 0.12 win 76% | 2018-22 $45.0 2023-26 $-50.8
+   break-and-continue, target 1 x ON range, stop at mid: n 2082 avg $44.1 t 0.95 win 42% | 2018-22 $51.5 2023-26 $34.2
+   break-and-continue, target 0.5 x ON range, stop at mid: n 2082 avg $-0.6 t -0.02 win 51% | 2018-22 $30.4 2023-26 $-41.8
+
+   opposite-side sweep after the first break, by gap size (quartiles of |gap| / ON range): {'tiny': 0.287, 'small': 0.283, 'medium': 0.243, 'large': 0.224} | ON range / ATR does the same job? corr(|gap|/range, range) = 0.1
