@@ -132,8 +132,15 @@ Rules:
 - **Demotion:** ALARM in live → half size and review (as in `live/README.md`); a second ALARM or a live / backtest ratio
   < 0.5 after 40 trades → back to stage 3 (or retired), never straight to deletion of the record.
 - Promotion and demotion are recorded in `TIER_LIST.md` (tier + stage) and `NEW_CHAT_BRIEF.md`.
-- Current status: the whole plan is at stage 3 (live on Apex since 2026-10-12); the personal account starts after
-  ~6–12 months of live results that match the backtest, funded from Apex payouts.
+- **Early personal start (user, 2026-10-15): from month 3** at about 1/10 size (MNQ; ~$10k covers the plan's 1-NQ
+  drawdown of $24k / 10 at a 25% tolerance), if the plan has ≥ ~100 live trades (it makes ~36 a month), live / backtest
+  ≥ 0.75 and no ALARM. Full sizing only after 6–12 months. Why small: the plan's edge is t ≈ 7 over 8.8 years, so 3 months
+  of live trades give t ≈ 1.2 (6 months 1.7) — enough to catch a broken plan, not to prove it (a dead edge would still look
+  ≥ 75% of the backtest after 3 months about 1 time in 5, after 6 months 1 in 10).
+- Strategies that trade rarely (EOS ~12 a year, NFP ~9, CL fade ~11) cannot reach 40 live trades in a year; they move to the
+  personal account with the plan as a whole, on the plan-level evidence.
+- Current status: the whole plan is at stage 3 (live on Apex since 2026-10-12); personal account from ~month 3 at 1/10 size,
+  funded from Apex payouts, full size after 6–12 months of live results that match the backtest.
 
 ## Guardrails
 
