@@ -1,0 +1,65 @@
+Ornstein-Uhlenbeck mean-reversion regime (user's post, 2026-10-15: OU theta / half-life of price vs a 50-bar VWAP as a regime
+
+NQ: 2001 sessions; half-life (prior 20 sessions) median 18.8 bars (5-95%: 13.6-23.6); MR-regime share 45%
+   A. corr(theta prior 20, theta today) -0.015; rank -0.007; MR-regime days' own theta 0.0712 vs trend-regime 0.0712
+   B. VWAP50 z-score fade (|z| >= 2 -> z = 0, stop |z| 4, out 15:00)
+   all signals                        n   814 avg $-112.6 PF 0.86 t  -1.4 | 2018-22 $-137.1 2023-26 $ -78.9
+   MR regime (theta > 120-day avg)    n   438 avg $-326.6 PF 0.63 t  -3.0 | 2018-22 $-144.4 2023-26 $-613.9
+   trend regime                       n   376 avg $ 136.6 PF 1.18 t   1.1 | 2018-22 $-127.4 2023-26 $ 449.8
+      avg $ by theta quintile (0 = slowest reversion): {0: 90.1, 1: -178.9, 2: 59.5, 3: -210.7, 4: -325.2} | trades {0: 164, 1: 162, 2: 162, 3: 165, 4: 161}
+      MR - trend: $-463.3, t -2.87
+
+ES: 2125 sessions; half-life (prior 20 sessions) median 19.3 bars (5-95%: 13.8-25.4); MR-regime share 44%
+   A. corr(theta prior 20, theta today) -0.000; rank -0.011; MR-regime days' own theta 0.0674 vs trend-regime 0.0694
+   B. VWAP50 z-score fade (|z| >= 2 -> z = 0, stop |z| 4, out 15:00)
+   all signals                        n   977 avg $ -78.0 PF 0.82 t  -2.1 | 2018-22 $-111.8 2023-26 $ -20.1
+   MR regime (theta > 120-day avg)    n   477 avg $-176.4 PF 0.64 t  -3.2 | 2018-22 $-101.5 2023-26 $-299.9
+   trend regime                       n   500 avg $  15.8 PF 1.04 t   0.3 | 2018-22 $-121.4 2023-26 $ 259.8
+      avg $ by theta quintile (0 = slowest reversion): {0: 62.7, 1: -39.4, 2: -78.1, 3: -125.4, 4: -212.9} | trades {0: 201, 1: 191, 2: 194, 3: 195, 4: 196}
+      MR - trend: $-192.2, t -2.55
+
+   ES fade in the MR regime, standard metrics (per ES):
+              trades win   avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+MR regime all    477 43% $-176 $-9,699  -1.05   -1.16          0.64 $87,808  -0.11 80.41      -0.24
+longs            309 43% $-168 $-5,981  -0.88   -0.96          0.63 $55,150  -0.11 49.22      -0.24
+shorts           168 42% $-192 $-3,718  -0.54   -0.61          0.65 $34,198  -0.11 34.62      -0.21
+2023+ bootstrap:
+                              actual        p5       p50       p95
+name          metric                                              
+MR regime all sharpe           -1.28     -1.78     -1.30     -0.67
+              sortino          -1.37     -1.87     -1.41     -0.79
+              pf_day            0.46      0.30      0.47      0.71
+              calmar           -0.26     -0.27     -0.26     -0.21
+              ulcer            64.20     25.72     61.75    113.34
+              max_dd       54,910.00 25,575.00 55,008.75 93,876.25
+              P(Sharpe<=0)       NaN       NaN      1.00       NaN
+longs         sharpe           -1.10     -1.58     -1.10     -0.39
+              sortino          -1.16     -1.64     -1.16     -0.45
+              pf_day            0.44      0.27      0.44      0.77
+              calmar           -0.25     -0.27     -0.25     -0.15
+              ulcer            38.35     13.72     40.15     72.70
+              max_dd       35,665.00 14,174.00 36,036.25 61,136.12
+              P(Sharpe<=0)       NaN       NaN      0.99       NaN
+shorts        sharpe           -0.60     -1.17     -0.64     -0.08
+              sortino          -0.67     -1.38     -0.74     -0.11
+              pf_day            0.59      0.38      0.59      0.95
+              calmar           -0.26     -0.27     -0.23     -0.04
+              ulcer            27.84      7.84     26.08     54.37
+              max_dd       20,735.00  8,832.25 23,556.25 46,865.62
+              P(Sharpe<=0)       NaN       NaN      0.97       NaN
+2023+ drawdown permutation:
+              actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+MR regime all   $54,910      19% $57,075 $62,822 $65,733        100%        100%        100%
+longs           $35,665      34% $36,544 $41,401 $43,395        100%        100%        100%
+shorts          $20,735       4% $25,968 $32,292 $34,825        100%        100%        100%
+
+C. Plan NQ trades by NQ OU regime (known at the prior close)
+ strat  n_mr  n_trend    mr  trend    t  design  holdout
+BRIDGE    93      124 418.0  633.7 -0.8  -356.0    -50.9
+   EOS    45       59 800.1  224.5  1.5   660.3    396.7
+   LDF   394      490 191.2   18.8  3.1   128.2    217.7
+   MON   191      255 357.6  476.8 -0.5  -283.6      9.3
+   NFP    31       47 484.4  237.3  0.7  -389.2    961.4
+ONB_ML   144      194 664.9  634.9  0.1  -104.1    147.7
+    VB   781      960 104.4   81.7  0.5    33.6     11.2
+   VCS    16       52 376.5  460.1 -0.2    28.1   -175.3
