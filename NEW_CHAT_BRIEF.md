@@ -114,6 +114,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     user to paste it over `NQ Vault Break` outside market hours. Combine: FlaggedContracts -1 (= old VB, no gain).
   - **USER PREFERENCE (2026-10-15): Twin Continuation is the profile the user wants -- a big edge that trades a lot. Keep it
     logged for future use (a personal / non-prop account, or a prop firm with a larger or static drawdown).** Look for more like it.
+  - Twin-like search (2026-10-15): round 1 Twin is NQ-only (ES/GC/YM/CL fail); MO risk-sized doesn't fit. Round 2 MO with a
+    tight 0.10-ATR stop: $374, PF 2.00, t 4.07, 9/9 yrs, but 29% win rate → losing streaks vs $2k trail: no Apex gain (B, not adopted).
+    LESSON: for Apex look for HIGH win rate frequent edges (VB-like 66%), not trend-day capture.
   - Twin Continuation (user's MC code; `analysis/twin_continuation_*.py`, checker `checks/candidates/twin_continuation/verdict.md`):
     real edge (t 5.5, DSR 0.995, checker replica 99.8%, PASS WITH CONCERNS) but wrong shape for Apex (BO swing stops ~$6k/NQ,
     fat-tailed MO wins vs consistency): no gain in funded plan / own PA / combine. MC-CONFIRMED (v2 report: 1,069/1,074 entries identical, $296 t 5.3): A.

@@ -1,1 +1,16 @@
 Funded bench for Morning Momentum with a tight stop (round 2 'V3', analysis/mo_pullback_test.py): Twin's MO signal, market
+trades 378; MNQ at $250 risk: 2018 median 10, 2026 2
+daily corr with the plan: {'VB': 0.12, 'ONB_ML2_MC': 0.38, 'MON_MC': 0.08, 'EOS': 0.04, 'LDF_MC': 0.05, 'NFP_MC': -0.03, 'MON_BR_MC': 0.04}
+   plan                           $10,184 / $12,450  blown 3% / 3%  paid 92%  all 6 in 2y 94%  days to 1st 54 | 1y 2018-22 $9,215 2023+ $11,912
+   plan + MO-tight risk $150      $9,940 / $12,587  blown 3% / 3%  paid 97%  all 6 in 2y 96%  days to 1st 52 | 1y 2018-22 $9,280 2023+ $11,118
+   plan + MO-tight risk $250      $8,133 / $11,479  blown 10% / 11%  paid 91%  all 6 in 2y 87%  days to 1st 53 | 1y 2018-22 $7,701 2023+ $8,902
+   plan + MO-tight risk $350      $6,511 / $9,825  blown 21% / 23%  paid 80%  all 6 in 2y 73%  days to 1st 52 | 1y 2018-22 $6,275 2023+ $6,933
+   MO-tight alone risk $300       $1,129 / $2,566  blown 16% / 14%  paid 66%  all 6 in 2y 0%  days to 1st 139 | 1y 2018-22 $1,252 2023+ $911
+   MO-tight alone risk $500       $796 / $1,617  blown 54% / 54%  paid 41%  all 6 in 2y 0%  days to 1st 106 | 1y 2018-22 $844 2023+ $712
+   MO-tight alone risk $700       $634 / $1,419  blown 64% / 62%  paid 32%  all 6 in 2y 0%  days to 1st 100 | 1y 2018-22 $728 2023+ $465
+
+Combine (current set + MO-tight risk-sized):
+   combine + MO-tight $0: pass 50.1% (2023-26 54.5%), median days 6
+   combine + MO-tight $200: pass 51.9% (2023-26 53.4%), median days 6
+   combine + MO-tight $400: pass 52.0% (2023-26 50.1%), median days 6
+   combine + MO-tight $600: pass 46.6% (2023-26 45.1%), median days 5

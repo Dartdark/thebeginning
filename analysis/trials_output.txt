@@ -1,21 +1,21 @@
 Trials log and multiple-testing check (added 2026-10-15).
 
-TRIALS.csv: 196 ranked items, 819 variants in all; by tier {'S': 1, 'A': 9, 'B': 13, 'C': 20, 'D': 43, 'F': 110}
+TRIALS.csv: 197 ranked items, 820 variants in all; by tier {'S': 1, 'A': 9, 'B': 14, 'C': 20, 'D': 43, 'F': 110}
 
 The bar for the best of N trials (one-sided 5%):
    one pre-registered test  N     1: |t| >= 1.64; best noise Sharpe on 252 days x sqrt(252) = 0.00, on 1,000 trades per trade x sqrt(n) = 0.00
    a 10-variant scan        N    10: |t| >= 2.58; best noise Sharpe on 252 days x sqrt(252) = 1.58, on 1,000 trades per trade x sqrt(n) = 1.58
-   N_items                  N   196: |t| >= 3.48; best noise Sharpe on 252 days x sqrt(252) = 2.76, on 1,000 trades per trade x sqrt(n) = 2.76
-   N_all                    N   819: |t| >= 3.84; best noise Sharpe on 252 days x sqrt(252) = 3.20, on 1,000 trades per trade x sqrt(n) = 3.20
+   N_items                  N   197: |t| >= 3.48; best noise Sharpe on 252 days x sqrt(252) = 2.77, on 1,000 trades per trade x sqrt(n) = 2.76
+   N_all                    N   820: |t| >= 3.84; best noise Sharpe on 252 days x sqrt(252) = 3.20, on 1,000 trades per trade x sqrt(n) = 3.20
 
 Deflated Sharpe of the plan's strategies (per trade, MultiCharts lists, $7.25 + 1 tick):
                   strategy  trades    t   PSR  DSR_items  DSR_all  passes_items
                Vault Break    1743 4.25 1.000      0.923    0.842         False
       Overnight Bias ML v2     343 5.04 1.000      0.993    0.976          True
-               Monday Long     450 3.34 1.000      0.728    0.559         False
+               Monday Long     450 3.34 1.000      0.727    0.559         False
      Expiration Open Short     105 2.58 0.995      0.422    0.260         False
              Late-Day Flow     895 3.51 1.000      0.791    0.631         False
-                  NFP Fade      79 1.85 0.977      0.162    0.072         False
+                  NFP Fade      79 1.85 0.977      0.161    0.072         False
         Bridge Monday Long     217 4.36 1.000      0.906    0.830         False
 Vol-Control Sell (dropped)      71 2.14 0.993      0.228    0.105         False
 
@@ -32,6 +32,7 @@ tier                                                                            
    A CL Sunday up-gap fade (funded_strategies/CL_Sunday_Gap_Fade.txt): Sunday 17:05 CT short when the 17:00 open is ≥ 0.1 ATR above Friday's last         1      3.20   False
    A Twin Continuation (user's MultiCharts code, 2026-10-15; checks/candidates/twin_continuation/Twin_Continuation.txt): Swing Breakout on 6h fra         1      5.46    True
    B Single-print day filter on Vault Break (Red Ledger RL-FS-2026-01; analysis/single_print_test.py, single_print_bench.py, single_print_combine         1     -2.10   False
+   B Morning Momentum, tight stop (Twin-like round 2, analysis/mo_pullback_test.py V3, analysis/mo_tight_bench.py): Twin's MO signal, market entr         1      4.07    True
    B                                                                       NFP Fade: fade the 7:30→7:45 payroll reaction, 7:46→9:00, stop 0.5 ATR         1      1.90   False
    B                                     Vol-Control Sell Flow: short 14:00→15:00 when a lagged S&P vol-control model must sell > 6% of fund size         1      2.10   False
    B                                         ES versions of the plan's forced flows (EOS, Monday Long, NFP Fade, Late-Day Flow, Vol-Control Sell)         1      1.60   False
