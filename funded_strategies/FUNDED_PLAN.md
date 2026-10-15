@@ -597,6 +597,24 @@ At 75% of the edge (challenge pass 40.7%): A $9,445 / $62,540 (12 / 36 m), B–E
   a bad month hits all of them. Check whether Apex's 20 counts evaluations + PAs together, and that the copier and
   MultiCharts handle 20 followers.
 
+### 150K accounts (2026-10-15)
+
+Code `../analysis/plan_150k_test.py`, `../analysis/slot_150k_vs_50k_test.py` (simulators `../analysis/funded_sim150.py`,
+`../analysis/account_pipeline150.py` = the 50K ones with 150K numbers; the 50K check reproduces the funded bench exactly).
+150K rules used: evaluation +$9,000 in 30 days, $4,000 EOD trailing drawdown (locks $150,100), $2,000 daily loss pause;
+funded: 6 payouts, $20,500 in all (**ladder 2,400 / 2,400 / 3,100 / 3,900 / 3,900 / 4,800 and the $350 qualifying day are
+ASSUMED from 2026 guides; confirm in the dashboard**).
+- **Evaluation:** the combine set x 2.5 passes 41.6% (2018–22 38.9%, 2023–26 45.4%; x 2 38.7%, x 3 40.7%), vs 50.1% on the
+  50K: the 150K target is 2.25x its drawdown (50K 1.5x). Adding Twin cap1 does not help (39–42%).
+  Inputs x 2.5: VB 20 MNQ, ONB ADX30 `RiskPerTrade` 2750, Bridge Monday 5 MNQ, EOS `RiskPerTrade` 1250.
+- **Funded:** the funded plan x 1.5 with full size from a **$3,000** cushion: $15,866 / $19,725 (1 / 2 years), **blown 0% /
+  0%**, all 6 payouts within 2 years 91%. Bigger (x 2–3) or a faster cushion blows 9–37%; Twin adds nothing.
+  Inputs x 1.5 (whole MNQ, rounded down): VB 4 (`FlaggedContracts` 1), ONB ML $600, Monday 1, EOS $1,050, LDF 3, NFP $750,
+  Bridge Monday 1, CL fade 3 MCL; half size while the cushion is under $1,500, full from $3,000.
+- **Per slot over 3 years** (before fees): 50K $35.4k mean payouts (6.1 challenges, 3.5 funded); **150K $54.8k** (7.7
+  challenges, 3.3 funded) = **+55% per slot**. With Apex's 20-account cap, a 150K slot is worth more as long as its
+  evaluation + activation cost less than about $2,500 more per funded account than the 50K's.
+
 ### Tuning the sizing for the whole pipeline (2026-10-14)
 
 Code `../analysis/pipeline_tuning_test.py` (output in `..._output.txt`). One slot, 70 start months, 3 years, net of
