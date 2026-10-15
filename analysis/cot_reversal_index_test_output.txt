@@ -1,0 +1,45 @@
+CoT reversal index (Dreesmann, Herberger & Charifzadeh 2023, 'The Commitment of Traders report as a trading signal?',
+
+NQ: 510 reports 2017-01-03..2026-10-06; index >= 0.7 28% of weeks, <= 0.3 39%; commercial net corr with NQ/ES weekly close level n/a
+  A. index + 10-week MA (paper): days LONG 17%, SHORT 8%
+   NQ day trade in the state                n= 531 avg $    79 PF 1.07 t +0.5 yrs+ 4/9 | 18-22 $    49 23-26 $   107 | L $  148 (n 369) S $  -77 (n 162)
+      placebo (same days, random side, 50 runs) avg $16 (5-95% -216..273)
+  A. index alone: days LONG 28%, SHORT 38%
+   NQ day trade in the state                n=1444 avg $    84 PF 1.08 t +1.0 yrs+ 6/9 | 18-22 $    46 23-26 $   130 | L $  187 (n 608) S $    9 (n 836)
+      placebo (same days, random side, 50 runs) avg $-16 (5-95% -123..117)
+   NQ control: long every day               n=2186 avg $    37 PF 1.03 t +0.5 yrs+ 5/9 | 18-22 $     2 23-26 $    83
+
+ES: 510 reports 2017-01-03..2026-10-06; index >= 0.7 33% of weeks, <= 0.3 32%; commercial net corr with NQ/ES weekly close level n/a
+  A. index + 10-week MA (paper): days LONG 23%, SHORT 9%
+   ES day trade in the state                n= 692 avg $   -80 PF 0.87 t -1.3 yrs+ 2/8 | 18-22 $   -98 23-26 $   -57 | L $  -16 (n 502) S $ -248 (n 190)
+      placebo (same days, random side, 50 runs) avg $-29 (5-95% -113..56)
+  A. index alone: days LONG 33%, SHORT 32%
+   ES day trade in the state                n=1433 avg $   -28 PF 0.96 t -0.6 yrs+ 3/9 | 18-22 $   -53 23-26 $     6 | L $   40 (n 724) S $  -97 (n 709)
+      placebo (same days, random side, 50 runs) avg $-36 (5-95% -100..43)
+   ES control: long every day               n=2186 avg $     0 PF 1.00 t +0.0 yrs+ 5/9 | 18-22 $   -22 23-26 $    31
+
+Standard metrics, NQ paper version as a day trade (per NQ):
+       trades win  avg   annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+all       531 50%  $79  $20,013   0.36    0.51          1.07 $79,904   0.25 16.77       2.39
+longs     369 54% $148  $37,291   0.71    0.96          1.14 $55,714   0.67 11.39       6.55
+shorts    162 43% $-77 $-19,343  -0.32   -0.48          0.95 $45,383  -0.43 31.78      -1.22
+
+B. The plan's NQ trades by the CoT state at entry (NQ index; ES index in the second block). 'gate' = keep only agreeing trades
+
+  state from the NQ index (+ MA):
+   VB          all $   92 (n 1743) | agree $   78 (n 311) against $  -52 (n 136) neutral $  110 (n 1296) | agree-vs-against t +1.3 | gate keeps 18% of trades, 15% of P&L
+   ONB_ML2_MC  all $  636 (n  343) | agree $  614 (n  39) against $  727 (n  43) neutral $  625 (n  261) | agree-vs-against t -0.2 | gate keeps 11% of trades, 11% of P&L
+   EOS         all $  474 (n  105) | agree $  772 (n   8) against $  904 (n  22) neutral $  316 (n   75) | agree-vs-against t -0.2 | gate keeps 8% of trades, 12% of P&L
+   MON_MC      all $  425 (n  450) | agree $  696 (n  77) against $  218 (n  33) neutral $  384 (n  340) | agree-vs-against t +0.8 | gate keeps 17% of trades, 28% of P&L
+   LDF_MC      all $   95 (n  895) | agree $  119 (n 125) against $   65 (n  92) neutral $   94 (n  678) | agree-vs-against t +0.5 | gate keeps 14% of trades, 18% of P&L
+   NFP_MC      all $  335 (n   79) | agree $ 1077 (n   7) against $  723 (n   9) neutral $  196 (n   63) | agree-vs-against t +0.6 | gate keeps 9% of trades, 29% of P&L
+   MON_BR      all $  541 (n  217) | agree $  901 (n  40) against $  705 (n  11) neutral $  444 (n  166) | agree-vs-against t +0.3 | gate keeps 18% of trades, 31% of P&L
+
+  state from the ES index (+ MA):
+   VB          all $   92 (n 1743) | agree $   87 (n 372) against $  120 (n 160) neutral $   89 (n 1211) | agree-vs-against t -0.4 | gate keeps 21% of trades, 20% of P&L
+   ONB_ML2_MC  all $  636 (n  343) | agree $  698 (n  54) against $  805 (n  50) neutral $  587 (n  239) | agree-vs-against t -0.3 | gate keeps 16% of trades, 17% of P&L
+   EOS         all $  474 (n  105) | agree $ -168 (n  10) against $  991 (n  24) neutral $  389 (n   71) | agree-vs-against t -1.4 | gate keeps 10% of trades, -3% of P&L
+   MON_MC      all $  425 (n  450) | agree $  680 (n 105) against $  478 (n  37) neutral $  332 (n  308) | agree-vs-against t +0.4 | gate keeps 23% of trades, 37% of P&L
+   LDF_MC      all $   95 (n  895) | agree $   56 (n 140) against $   71 (n 135) neutral $  108 (n  620) | agree-vs-against t -0.2 | gate keeps 16% of trades, 9% of P&L
+   NFP_MC      all $  335 (n   79) | agree $  -78 (n  10) against $  352 (n  13) neutral $  404 (n   56) | agree-vs-against t -0.8 | gate keeps 13% of trades, -3% of P&L
+   MON_BR      all $  541 (n  217) | agree $  692 (n  68) against $  966 (n  10) neutral $  437 (n  139) | agree-vs-against t -0.7 | gate keeps 31% of trades, 40% of P&L
