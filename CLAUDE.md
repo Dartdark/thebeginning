@@ -1,7 +1,7 @@
 # Project notes for Claude
 
 NQ/ES futures strategies in MultiCharts PowerLanguage for Apex 50K prop accounts (challenge and
-funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `funded_strategies/README.md`, `TIER_LIST.md`, `WATCHLIST.md` (items to recheck) and `S_RANK_PROGRAM.md` (current goal: one S-rank strategy per symbol).
+funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `funded_strategies/README.md`, `TIER_LIST.md`, `WATCHLIST.md` (items to recheck), `MULTICHARTS_PITFALLS.md` (error log: read before writing MultiCharts code, add every solved error) and `S_RANK_PROGRAM.md` (current goal: one S-rank strategy per symbol).
 
 ## Working rules
 
