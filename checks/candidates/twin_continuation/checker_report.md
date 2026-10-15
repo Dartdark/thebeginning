@@ -1,10 +1,10 @@
 # Checker report: twin_continuation
 
-kind strategy, pre-registered True, variants 1, N (ranked items in TRIALS.csv) 199, t_threshold(N) 3.48
+kind strategy, pre-registered True, variants 1, N (ranked items in TRIALS.csv) 201, t_threshold(N) 3.48
 
 | Gate | Result | Detail |
 |---|---|---|
-| G1 significance | PASS | t 5.46, PSR 1.000, DSR(N=199) 0.995 |
+| G1 significance | PASS | t 5.46, PSR 1.000, DSR(N=201) 0.995 |
 | G2 holdout | PASS | 2018-22 $188.0 (t 2.66), 2023-26 $468.8 (t 5.03) |
 | G3 years | PASS | 8/9 years positive: 2018 $5,660, 2019 $-4,694, 2020 $32,627, 2021 $40,129, 2022 $38,712, 2023 $41,894, 2024 $43,109, 2025 $45,915, 2026 $92,227 |
 | G4 concentration | PASS | without the best 5% of trades: $85,813 total ($84.1 a trade) vs $335,578 |
@@ -12,7 +12,7 @@ kind strategy, pre-registered True, variants 1, N (ranked items in TRIALS.csv) 1
 | G6 resampling | PASS | 2023+ P(Sharpe <= 0) 0.000 |
 | G7 MinTRL | PASS | 1074 trades vs MinTRL 110 |
 | G8 regime stability | PASS | rho 0.63 (yearly Sharpe 2018 0.4, 2019 -0.6, 2020 1.9, 2021 2.3, 2022 1.2, 2023 2.3, 2024 2.1, 2025 1.9, 2026 3.8) |
-| G9 PBO | PASS | CSCV over 17 variants, 16 blocks: PBO 0.25 |
+| G9 PBO | PASS | CSCV over 17 variants, 16 blocks: PBO 0.26 |
 
 **Gates: 9/9 pass -> PASS**
 

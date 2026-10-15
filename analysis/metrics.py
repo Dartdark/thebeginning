@@ -130,14 +130,20 @@ def regime_rho(daily, by=None):
     return float(np.clip(rho, 0, 1)), srw
 
 
-def pbo(R, S=16, max_splits=3000, seed=1):
-    R = pd.DataFrame(R).fillna(0.0); n = len(R); blocks = np.array_split(np.arange(n), S)
+def pbo(R, S=16, max_splits=3000, seed=1, full=False):
+    """CSCV exactly as Bailey, Borwein, Lopez de Prado & Zhu (2015): relative OOS rank of the IS winner w = rank / (N + 1),
+    logit l = ln(w / (1 - w)), PBO = share of l <= 0. full=True also returns the paper's performance degradation (slope of
+    the selected strategy's OOS Sharpe on its IS Sharpe) and probability of loss (share of OOS Sharpe < 0), plus the logits."""
+    R = pd.DataFrame(R).fillna(0.0); n, N = R.shape; blocks = np.array_split(np.arange(n), S)
     combos = list(combinations(range(S), S // 2)); rng = np.random.default_rng(seed)
     if len(combos) > max_splits: combos = [combos[i] for i in rng.choice(len(combos), max_splits, replace=False)]
     sh = lambda M: M.mean(0) / M.std(0).replace(0, np.nan)
-    below = []
+    lam, sis, sos = [], [], []
     for c in combos:
         ins = np.concatenate([blocks[i] for i in c]); oos = np.setdiff1d(np.arange(n), ins)
-        best = sh(R.iloc[ins]).idxmax(); so = sh(R.iloc[oos])
-        below.append(float(so.rank(pct=True)[best] <= 0.5))
-    return float(np.mean(below))
+        si = sh(R.iloc[ins]); so = sh(R.iloc[oos]); best = si.idxmax()
+        w = so.rank()[best] / (N + 1); lam.append(np.log(w / (1 - w))); sis.append(si[best]); sos.append(so[best])
+    lam = np.array(lam); p = float(np.mean(lam <= 0))
+    if not full: return p
+    slope = float(np.polyfit(sis, sos, 1)[0]) if np.std(sis) > 0 else np.nan
+    return dict(pbo=p, degradation_slope=slope, p_loss=float(np.mean(np.array(sos) < 0)), logits=lam)
