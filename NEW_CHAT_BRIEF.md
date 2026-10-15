@@ -108,6 +108,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   - Gold Breakout 15M (user's TradingView strategy): real (t 3.1, beats a random side) but lowers the funded plan at 1 MGC: C.
   - Bridge indicators round 2 (user's code: depth, walls, other VWAP anchors, gamma fixed for the NDX → NQ basis): no filter
     beats the plan. GAMMA LEVELS ARE NDX POINTS: NQ level = level + basis. Earnings-day gamma rule on watchlist #15.
+  - Waiting on the user: `GEXOI_<year>.csv` from `multi_strategy/OFB_GexOI_Exporter.txt` (NDX 0DTE OI / gamma by strike) for
+    pinning / wall tests on NQ; Apex PA terms check (drawdown, safety net, min day, split vs the simulator).
   - YM's own events (Dow heavyweight earnings, ZN overnight / lead-lag / shocks): F (`analysis/ym_dow_events_test.py`).
   - BTC short-only euphoria fades (multi-day / overnight / intraday spike / heavy-volume / round numbers): F.
   - Funded bench rebuilt this session (numba, build_lab, s_rank_gap_round2 + gy / btc grids): reproduces the documented numbers.

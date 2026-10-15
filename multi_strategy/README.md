@@ -327,3 +327,6 @@ sizing, capped at 0.25x–3x.
 - Neighbouring start days share most of the same days, so all pass rates are rough
   estimates (a few points either way).
 - Live trading is usually a bit worse than the backtest (stop slippage, news days).
+
+- `OFB_GexOI_Exporter.txt` (2026-10-15): The Bridge's NDX 0DTE per-strike profile (strike, gamma exposure, call / put open
+  interest, basis, DTE) at 9:31 / 12:00 / 15:30 ET each session, to `GEXOI_<year>.csv`; for expiry-pinning and gamma-wall tests.

@@ -1,0 +1,86 @@
+{ OFB gamma-walls / open-interest exporter - MultiCharts PowerLanguage indicator (2026-10-15)
+
+  Writes The Bridge's (MatFin) NDX 0DTE option-chain profile - the same data its OrderFlowBridge_GexWalls heatmap
+  draws - to CSV, so strike-level open interest and gamma can be tested in this repo (expiry pinning, call / put walls).
+  One file per year:  <Folder><FilePrefix><year>.csv   e.g. C:\OFBexport\GEXOI_2024.csv
+
+  One row per strike, per snapshot time, per session:
+    date, time (bar close, CHART time zone = Eastern on The Bridge's bars), basis, dte, strike, gex, call_oi, put_oi
+      basis    NQ - NDX for that session (OFB_GexScalar 8): NQ level of a strike = strike + basis
+      dte      0 = a real 0DTE chain; > 0 = the next expiry was used (only in older gamma files; drop those rows)
+      strike   NDX index points
+      gex      gamma exposure at that strike (the GexWalls / GEX studies' slot 1)
+      call_oi, put_oi   open interest at that strike (contracts)
+  Snapshots at Time1 / Time2 / Time3 (Eastern bar-close times; defaults 9:31 open, 12:00, 15:30): open interest is an
+  end-of-day snapshot that is identical all session, but the profile is the strikes nearest the forward, which moves, and
+  gex changes with price - three snapshots cover both.
+
+  BACKTEST CAVEATS (from The Bridge's own GEX notes): the history starts 2022-09-01; before 2023-03-28 the gamma
+  weighting is whole-day (it knows the afternoon) - the Python side uses only open interest before that date, and
+  gex only from 2023-03-28. Open interest itself is the prior close's figure, known before the session.
+
+  SETUP: compile nothing else (this calls the DLL directly, like OrderFlowBridge_GexWalls). Create the folder first.
+  Add this indicator to a 1-minute chart of The Bridge's own bars (C:\OFB\ofb_bars_NQ.csv, Exchange (ET) time zone),
+  loaded from 2022-09-01. Files are deleted and rewritten on every recalculation; they are complete when the chart has
+  finished calculating. Size: about 128 strikes x 3 snapshots a session, roughly 5-8 MB a year. MinOI > 0 skips strikes
+  with less combined open interest (smaller files). Upload the CSVs to the repo (data/ or the root). }
+
+Inputs:
+	Folder("C:\OFBexport\"),   { must already exist; keep the trailing backslash }
+	FilePrefix("GEXOI_"),
+	Time1(931),                { snapshot bar-close times, chart time (Eastern) }
+	Time2(1200),
+	Time3(1530),
+	MinOI(0);                  { skip strikes with call_oi + put_oi below this }
+
+DefineDLLFunc: "C:\OFB\OrderFlowBridge.dll", double, "OFB_GexAt", int, int, double;
+DefineDLLFunc: "C:\OFB\OrderFlowBridge.dll", int,    "OFB_GexStrikes";
+DefineDLLFunc: "C:\OFB\OrderFlowBridge.dll", int,    "OFB_GexCount";
+DefineDLLFunc: "C:\OFB\OrderFlowBridge.dll", int,    "OFB_LoadGex", lpstr;
+DefineDLLFunc: "C:\OFB\OrderFlowBridge.dll", double, "OFB_GexScalar", int, double;
+
+Variables:
+	FileName(""), BarYear(0), LastYear(0), BarKey(0), NStrk(0), Ix(0), Y(0), Loaded(0),
+	Px(0), Gx(0), COI(0), POI(0), Sh(0), Dte(0), Head(""), Block(""), NRows(0);
+
+{ start from empty files on every (re)calculation }
+Once begin
+	for Y = 2020 to 2040 begin
+		FileDelete(Folder + FilePrefix + NumToStr(Y, 0) + ".csv");
+	end;
+end;
+
+{ one fresh read of the gamma file per chart load (same pattern as the GEX studies) }
+if CurrentBar = 1 and OFB_GexCount = 0 then
+	Loaded = OFB_LoadGex("C:\OFB\ofb_gex.bin");
+
+if BarStatus(1) = 2 and (Time = Time1 or Time = Time2 or Time = Time3) then begin
+	BarKey = (Date + 19000000) * 1000000 + Time * 100;          { yyyymmddHHMMSS, Eastern - matches the DLL's keys }
+	NStrk = OFB_GexStrikes;
+	if NStrk > 0 and OFB_GexAt(0, 0, BarKey) > 0 then begin
+		Sh = OFB_GexScalar(8, BarKey);                             { NQ - NDX basis for this session }
+		Dte = OFB_GexScalar(9, BarKey);
+		BarYear = Year(Date) + 1900;
+		FileName = Folder + FilePrefix + NumToStr(BarYear, 0) + ".csv";
+		if BarYear <> LastYear then begin
+			FileAppend(FileName, "date,time,basis,dte,strike,gex,call_oi,put_oi" + NewLine);
+			LastYear = BarYear;
+		end;
+		Head = NumToStr(Date + 19000000, 0) + "," + NumToStr(Time, 0) + "," + NumToStr(Sh, 2) + "," + NumToStr(Dte, 0) + ",";
+		Block = ""; NRows = 0;
+		for Ix = 0 to NStrk - 1 begin
+			Px = OFB_GexAt(Ix, 0, BarKey);
+			if Px > 0 then begin
+				Gx  = OFB_GexAt(Ix, 1, BarKey);
+				COI = OFB_GexAt(Ix, 2, BarKey);
+				POI = OFB_GexAt(Ix, 3, BarKey);
+				if COI + POI >= MinOI then begin
+					Block = Block + Head + NumToStr(Px, 2) + "," + NumToStr(Gx, 4) + "," + NumToStr(COI, 0) + ","
+						+ NumToStr(POI, 0) + NewLine;
+					NRows = NRows + 1;
+				end;
+			end;
+		end;
+		if NRows > 0 then FileAppend(FileName, Block);           { one write per snapshot: much faster than per strike }
+	end;
+end;
