@@ -39,7 +39,8 @@ def exits(g, E, tgt, stp, sides=None):
         if px is None:
             last = np.where(~np.isnan(c[:e.jx + 1]))[0]; px, kind = c[last[-1]], 2
         slips = e.slip_in + (0 if kind == 1 else 1)
-        out.append(dict(date=pd.Timestamp(g.ts[e.row]), side=side, net=(px - e.entry) * side * PV - COMM - slips * TICK * PV, kind=kind))
+        out.append(dict(date=pd.Timestamp(g.ts[e.row]), side=side, net=(px - e.entry) * side * PV - COMM - slips * TICK * PV, kind=kind,
+                        row=e.row, ej=e.ej, xj=j if px is not None else e.jx, entry=e.entry, exit=px))
     return pd.DataFrame(out).set_index("date")
 
 
