@@ -61,8 +61,10 @@ if __name__ == "__main__":
         x = T[T.strat == k].net
         if len(x) < 10: continue
         t = x.mean() / x.std() * np.sqrt(len(x))
+        dd = T[T.strat == k].set_index("date").net; dd = dd.groupby(level=0).sum().reindex(pd.bdate_range("2018-01-01", dd.index.max()), fill_value=0.0)
         rows.append(dict(strategy=nm, trades=len(x), t=round(t, 2), PSR=M.psr(x), DSR_items=M.deflated_sharpe(x, n_items),
-                         DSR_all=M.deflated_sharpe(x, n_all), passes_items=M.deflated_sharpe(x, n_items) >= 0.95))
+                         DSR_all=M.deflated_sharpe(x, n_all), passes_items=M.deflated_sharpe(x, n_items) >= 0.95,
+                         MinTRL=round(M.min_trl(x)), regime_rho=round(M.regime_rho(dd)[0], 2)))
     print(pd.DataFrame(rows).round(3).to_string(index=False))
 
     print(f"\nTier S-B items: quoted t vs t_threshold(N_items) = {M.t_threshold(n_items):.2f} (t not quoted = blank):")

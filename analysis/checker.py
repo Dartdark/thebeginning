@@ -17,6 +17,9 @@ Gates (all from the repo's testing standard; N = ranked items in TRIALS.csv):
   G5 placebo       placebo.csv given: share of placebo runs with mean >= the real mean < 0.05 (strategy);
                    filter: kept/skipped labels shuffled within each year 2,000 times, p < 0.05 (always run)
   G6 resampling    strategy: 2023+ block bootstrap P(Sharpe <= 0) < 0.20
+  G7 MinTRL        trades >= the minimum track record length for the per-trade Sharpe (Minerva / Bailey & Lopez de Prado)
+  G8 regime        regime composite over calendar years >= 0.60 (Minerva eq. 3)
+  G9 PBO           only when variant trade lists are supplied (trades_replica_*.csv or variants/*.csv): CSCV PBO <= 0.50
 Also printed: Sharpe, Sortino, profit factor, Calmar, Ulcer for all / longs / shorts (filter: kept trades and all trades),
 2023+ bootstrap and drawdown permutation.
   python3 analysis/checker.py checks/candidates/<name>
@@ -93,6 +96,19 @@ def check(cdir):
         for nm, s in (("kept longs", 1), ("kept shorts", -1)):
             xs = xk[T.side[k] == s]
             if len(xs) >= 5: rows[nm] = (daily(xs).reindex(idx, fill_value=0.0), xs)
+    # ---- Minerva gates (2026-10-15): MinTRL, regime stability (calendar years), PBO over variants if supplied
+    xs = T.net if meta["kind"] == "strategy" else T.net[T.kept.astype(bool)]
+    mt = M.min_trl(xs); G["G7 MinTRL"] = len(xs) >= mt, f"{len(xs)} trades vs MinTRL {mt:.0f}"
+    rho, srw = M.regime_rho(daily(xs)); G["G8 regime stability"] = rho >= 0.60, f"rho {rho:.2f} (yearly Sharpe {', '.join(f'{k} {v:.1f}' for k, v in srw.items())})"
+    import glob as _g
+    vf = sorted(_g.glob(os.path.join(cdir, "trades_replica_*.csv"))) + sorted(_g.glob(os.path.join(cdir, "variants", "*.csv")))
+    if len(vf) >= 3:
+        cols = {"base": daily(xs)}
+        for f in vf:
+            v = pd.read_csv(f, parse_dates=["date"]); v = v[v.date >= "2018-01-01"].set_index("date")
+            cols[os.path.basename(f)] = daily(v.net)
+        Rm = pd.DataFrame(cols).fillna(0.0); pb = M.pbo(Rm)
+        G["G9 PBO"] = pb <= 0.50, f"CSCV over {Rm.shape[1]} variants, 16 blocks: PBO {pb:.2f}"
     out.append("| Gate | Result | Detail |\n|---|---|---|")
     for g, (ok, txt) in G.items(): out.append(f"| {g} | {'PASS' if ok else 'FAIL'} | {txt} |")
     n_fail = sum(not ok for ok, _ in G.values())

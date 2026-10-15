@@ -103,7 +103,8 @@ Before anything is promoted above C or added to a plan, it goes through a checke
    tried, pre-registered or not), `trades.csv` (date, side, net per contract after costs; filters add `kept` and list all
    base trades), `meta.json` (kind, pre_registered, variants), optional `placebo.csv` (run, net).
 2. `python3 analysis/checker.py checks/candidates/<name>` runs fixed gates (G1 significance with the trials bar, G2 holdout,
-   G3 years, G4 concentration, G5 placebo, G6 resampling) and writes `checker_report.md`.
+   G3 years, G4 concentration, G5 placebo, G6 resampling; since 2026-10-15 also the Minerva gates G7 MinTRL, G8 regime
+   stability rho >= 0.60 over calendar years, G9 PBO <= 0.50 when variant trade lists are supplied) and writes `checker_report.md`.
 3. The `strategy-checker` agent (`.claude/agents/strategy-checker.md`, a fresh agent with no access to the maker's scripts,
    outputs or the tier list) rebuilds the rule from `spec.md` on raw data, compares with `trades.csv`, looks for leaks,
    reruns the gates and writes `verdict.md` (PASS / PASS WITH CONCERNS / FAIL).

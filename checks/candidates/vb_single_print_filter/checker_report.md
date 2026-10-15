@@ -1,6 +1,6 @@
 # Checker report: vb_single_print_filter
 
-kind filter, pre-registered True, variants 1, N (ranked items in TRIALS.csv) 193, t_threshold(N) 3.47
+kind filter, pre-registered True, variants 1, N (ranked items in TRIALS.csv) 199, t_threshold(N) 3.48
 
 | Gate | Result | Detail |
 |---|---|---|
@@ -9,8 +9,10 @@ kind filter, pre-registered True, variants 1, N (ranked items in TRIALS.csv) 193
 | G3 years | PASS | kept beats skipped in 7/9 years: 2018 -15, 2019 +5, 2020 +230, 2021 +96, 2022 +33, 2023 +197, 2024 +209, 2025 -63, 2026 +246 |
 | G5 placebo | PASS | labels shuffled within years (2,000): p 0.0075 |
 | G6 resampling | PASS | kept trades 2023+ P(Sharpe <= 0) 0.000 |
+| G7 MinTRL | PASS | 1238 trades vs MinTRL 136 |
+| G8 regime stability | PASS | rho 0.79 (yearly Sharpe 2018 0.3, 2019 0.5, 2020 2.7, 2021 2.2, 2022 1.0, 2023 2.4, 2024 1.5, 2025 1.9, 2026 1.6) |
 
-**Gates: 5/5 pass -> PASS**
+**Gates: 7/7 pass -> PASS**
 
 ## Standard metrics
 ```

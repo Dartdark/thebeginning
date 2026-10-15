@@ -101,3 +101,43 @@ def deflated_sharpe(x, n):
 
 def t_threshold(n, alpha=0.05):
     return _N.inv_cdf(1 - alpha / max(1, n))
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Minerva gates (Santoni, Jouanne & Scullin 2026, 'Equity Strategy Backtesting: Luck or Edge?'), added 2026-10-15.
+# min_trl(x)        Minimum Track Record Length (Bailey & Lopez de Prado): observations needed for the per-period Sharpe to
+#                   be > 0 at 95%: 1 + (1 - g3 SR + (g4 - 1)/4 SR^2) (z / SR)^2. Pass if len(x) >= MinTRL.
+# regime_rho(x)     regime composite over windows (here calendar years): 0.5 p+ + 0.3 clip(1 - sd(SR_w) / 2) + 0.2 logistic(min SR_w),
+#                   SR_w = annualised Sharpe of each window's daily P&L. Pass if >= 0.60.
+# pbo(R)            Probability of Backtest Overfitting by CSCV (Bailey et al.): R = daily P&L, one column per variant; S
+#                   blocks; for each half / half split pick the in-sample best by Sharpe and record whether it falls below
+#                   the out-of-sample median. Pass if <= 0.50.
+# ---------------------------------------------------------------------------------------------------------------------
+from itertools import combinations
+
+
+def min_trl(x, alpha=0.05):
+    x = pd.Series(x, dtype=float).dropna(); sr = x.mean() / x.std()
+    if sr <= 0: return np.inf
+    g3 = float(((x - x.mean()) ** 3).mean() / x.std() ** 3); g4 = float(((x - x.mean()) ** 4).mean() / x.std() ** 4)
+    return 1 + (1 - g3 * sr + (g4 - 1) / 4 * sr ** 2) * (_N.inv_cdf(1 - alpha) / sr) ** 2
+
+
+def regime_rho(daily, by=None):
+    d = pd.Series(daily, dtype=float).fillna(0.0); grp = d.groupby(by if by is not None else d.index.year)
+    srw = grp.apply(lambda w: w.mean() / w.std() * np.sqrt(252) if w.std() > 0 else 0.0)
+    rho = 0.5 * (srw > 0).mean() + 0.3 * np.clip(1 - srw.std() / 2.0, 0, 1) + 0.2 / (1 + np.exp(-srw.min()))
+    return float(np.clip(rho, 0, 1)), srw
+
+
+def pbo(R, S=16, max_splits=3000, seed=1):
+    R = pd.DataFrame(R).fillna(0.0); n = len(R); blocks = np.array_split(np.arange(n), S)
+    combos = list(combinations(range(S), S // 2)); rng = np.random.default_rng(seed)
+    if len(combos) > max_splits: combos = [combos[i] for i in rng.choice(len(combos), max_splits, replace=False)]
+    sh = lambda M: M.mean(0) / M.std(0).replace(0, np.nan)
+    below = []
+    for c in combos:
+        ins = np.concatenate([blocks[i] for i in c]); oos = np.setdiff1d(np.arange(n), ins)
+        best = sh(R.iloc[ins]).idxmax(); so = sh(R.iloc[oos])
+        below.append(float(so.rank(pct=True)[best] <= 0.5))
+    return float(np.mean(below))
