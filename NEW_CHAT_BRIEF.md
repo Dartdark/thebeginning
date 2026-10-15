@@ -37,6 +37,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   Backtest: pass 50.1% per try, median 6 trading days; combine sizing barely matters (`analysis/pipeline_tuning_test.py`).
 - **Live tracking:** the user exports weekly MultiCharts reports into `live/`.
   - Run `python3 analysis/live_vs_backtest.py --all live/` (see `live/README.md`).
+  - It now also prints a CUSUM **drift alarm** per strategy (OK / WATCH / ALARM = half size and review; `live/README.md`).
   - Count technical misses separately from the edge.
   - Scale beyond 3 slots only when the live edge is ≥ ~75% of backtest (×1.25 sizing only at ≥ 90%).
 

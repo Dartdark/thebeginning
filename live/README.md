@@ -30,3 +30,21 @@ Decision rule (from `funded_strategies/FUNDED_PLAN.md`, account pipeline):
 - After about 40 trades, an edge ratio of 0.75 or more means it's OK to go from 3 account slots to 5–10.
 - 0.5–0.75: hold the current number of slots.
 - Below 0.5: stop scaling and investigate.
+
+## Drift alarm (added 2026-10-15)
+
+`--all` now also prints a **drift alarm** per strategy: a one-sided CUSUM on % return per trade (points ÷ entry price)
+against the strategy's backtest from 2023 up to the first live trade. It asks "has this strategy's edge gone?", separately
+from the edge ratio, which asks "is my execution matching the backtest?".
+
+| Status | Meaning | Action |
+|---|---|---|
+| OK | CUSUM below half the alarm level | nothing |
+| WATCH | between half and the alarm level | check the strategy's recent trades and the market regime |
+| ALARM | at or above the alarm level | cut that strategy to **half size** and review; restart the monitoring after acting |
+
+The alarm level is calibrated per strategy so a healthy strategy false-alarms only ~5% of the time over about a year of its
+trades. It is slow for small edges: a complete loss of edge is caught in a median ~31–73 trades for Bridge Monday,
+Overnight Bias ML, EOS and Monday Long, but ~220 trades (about 2 years) for Vault Break and Late-Day Flow — a safety net
+for a real breakdown, not a quick switch. History demo (`--drift-demo`, reference 2018–20, monitored 2021–26): no alarms
+except Bridge Monday in Feb 2023 (its weak 2023–24 stretch).
