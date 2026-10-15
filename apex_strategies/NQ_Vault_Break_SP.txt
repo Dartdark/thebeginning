@@ -194,9 +194,12 @@ if Time = 1500 then begin
 			SPFlag = HasSP;
 		end;
 	end;
-	if ShowFlag then
-		Print(ELDateToString(Date), " single print today: ", SPFlag, " -> next session trades ",
-			IIFString(SPFlag and FlaggedContracts >= 0, "FlaggedContracts", "NumContracts"));
+	if ShowFlag then begin
+		if SPFlag then
+			Print(NumToStr(Date + 19000000, 0), " single print: YES -> next session trades FlaggedContracts")
+		else
+			Print(NumToStr(Date + 19000000, 0), " single print: no -> next session trades NumContracts");
+	end;
 end;
 
 { ---------- Entries ---------- }
