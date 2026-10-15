@@ -44,6 +44,7 @@ C,"EOS in calm markets (prior-day VIX below its 252-day median), NQ / ES / YM (r
 C,"YM MOC auction follow (≥ 0.3 ATR, stop 0.25)",1,3.4
 C,"YM post-settlement fade (fade a ≥ 0.2 ATR 14:00 → 15:00 move, 15:01 → 15:15)",77,2.6
 C,BTC CME weekend-gap continuation (follow the Sunday gap ≥ 0.5 ATR),1,4.6
+C,"Overnight Bias ML (funded v2) at $1,100 in the combine instead of ONB ADX30 (analysis/combine_swap_test.py)",1,
 D,"Fade yesterday's session move (8:30–15:00), next session 8:31–15:00 (follow-up to the ES mean-reversion premise)",1,2.2
 D,"Vault Break sized up after Overnight Bias ML has gone long the same day (analysis/plan_agreement_test.py, bench analysis/vb_after_onb_bench.",1,2.55
 D,NQ after mega-cap earnings (index-level PEAD idea from the Fink / Sojka reviews),1,0.7
@@ -90,6 +91,7 @@ D,"BTC Overnight Bias port (no ADX, 0.5 ATR stop, 3R)",1,0.9
 D,"Fabio Valentini ORB with a delta filter (The Institutional Protocol / M. Conti 2026 validation: NQ 2021–26-04, 823 trades, 58% win, PF 1.28 ",1,1.6
 D,"Supply disruptions and trend-following in crude oil (user's original study, July 2026: hourly 20-bar breakout + SMA200, 1.5 ATR stop, trail ",1,2.0
 D,"Do Large Trades Predict Price? (The Institutional Protocol, Order Flow N-01, M. Conti 2026: follow the minute's largest print ≥ 100 lots, fi",1,1.9
+D,"Combine state levers (2026-10-15, analysis/combine_levers_test.py): size by cushion / days left / distance to target, daily stop −$500 / −$7",12,
 F,"ES mean reversion (user's focus, 2026-10-14; analysis/es_mean_reversion_premise.py, analysis/es_mean_reversion_test.py)",1,-7.8
 F,"Mega-cap earnings intraday shape on NQ (2026-10-14, analysis/megacap_earnings_intraday_test.py): run-up into after-close reports (report day",1,0.4
 F,"CL round 3 (2026-10-14, analysis/cl_round3_test.py): Friday pre-weekend 8:00–13:29 (long −$3, short −$52, fade the week −$81 t −1.5; Tue–Thu",1,-1.5

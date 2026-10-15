@@ -540,6 +540,38 @@ unchanged; activation $85, stagger 10 days):
 Caveats: the backtest edge is in-sample (the strategies were chosen on this history); the simulator assumes the
 Apex rules in `../analysis/funded_sim.py`; payouts are counted when requested.
 
+### Combine levers and staggering (2026-10-15)
+
+Code `../analysis/combine_levers_test.py`, `../analysis/combine_swap_test.py` (outputs in `..._output.txt`). Every start
+day 2018–26, Apex 50K combine rules (+$3,000, $2,000 EOD trailing floor locking at $50,100, $1,000 daily pause, 30 calendar
+days = 21 trading days). Current set: 50.1% pass (2018–22 46.7%, 2023–26 54.5%), 48.1% blown, 1.9% out of time.
+
+- **State-dependent sizing and daily stops do not lift it** (12 pre-specified variants): scale 0.75 / 1.25 / 1.5 →
+  47.6 / 48.8 / 46.3%; halve when the cushion < $1,000 46.3%; press while the cushion ≥ $1,500 48.6%; press when behind
+  after day 10 50.2%; halve once up $2,000 51.2%; daily stop −$500 45.9%, −$750 50.9%; profit lock +$1,000 41.7%,
+  +$1,500 46.5%. The best post-hoc pair (halve at +$2,000 and stop the day at −$750) 52.4% — within noise.
+- **Swap Overnight Bias ADX30 for the funded Overnight Bias ML at $1,100 risk: 52.0%** (2018–22 48.8%, 2023–26 56.3%),
+  blown 39% instead of 48%, but 9% run out of time (median 9 days to pass instead of 6). Better in both halves but small
+  (+2 points). Optional; it also means one Overnight Bias code for both phases (`NQ_Overnight_Bias_ML.txt`,
+  `RiskPerTrade` 1100). Adding it on top of ADX30, raising VB to 10, or the funded plan scaled 1.5–3x (42–51%) do not help.
+- **The pass rate is near its ceiling for this edge**: a zero-edge strategy passes about 40% (target $3,000 against a
+  $2,000 floor), the plan 50–52%. More pass rate needs more edge per unit of risk, not different sizing.
+- **Staggering matters more than any lever.** Combines on one copier take identical trades, so accounts started the
+  same day share one outcome:
+
+  | Start gap (trading days) | Both pass | Both blown | At least one passes | Outcome correlation |
+  |---|---|---|---|---|
+  | 0 (same day) | 50.1% | 48.1% | 50.1% | +1.00 |
+  | 2 | 41.6% | 40.4% | 58.5% | +0.66 |
+  | 5 | 34.9% | 33.6% | 65.4% | +0.39 |
+  | 10 | 30.1% | 28.2% | 70.4% | +0.19 |
+  | 21 | 25.5% | 22.6% | 75.3% | +0.00 |
+
+  Expected passes are the same either way (0.5 per account), but same-day starts are one bet placed 3 times: all pass or
+  all fail together. **Start each new combine at least 5, ideally 10, trading days after the previous one** (the
+  simplest way: replace each finished or failed combine immediately, which staggers them naturally, and buy the next
+  slot's combine a week or two after the last). The 3 live combines started 2026-10-12 together will share one outcome.
+
 ### Tuning the sizing for the whole pipeline (2026-10-14)
 
 Code `../analysis/pipeline_tuning_test.py` (output in `..._output.txt`). One slot, 70 start months, 3 years, net of
