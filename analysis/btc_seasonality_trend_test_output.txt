@@ -1,0 +1,77 @@
+Bitcoin seasonality, trend-following and mean reversion (Padysak & Vojtko, Quantpedia, SSRN 4081000; Gemini spot hourly
+
+A. Mean log return by UTC hour ending (CME futures; hours inside the CME halt have no data):
+     2018-22 (paper overlap) bp  OOS 2022-26 bp  n OOS
+utc                                                   
+0                           2.2            -0.0   1213
+1                          -1.6            -2.0   1212
+2                          -4.8             0.4   1210
+3                          -4.2             0.3   1207
+4                          -3.1             0.1   1206
+5                          -2.6            -0.0   1201
+6                           3.1             0.5   1204
+7                           2.0             0.5   1195
+8                           4.4             4.3   1194
+9                           1.5             1.0   1197
+10                          0.2             0.6   1201
+11                          1.3             1.0   1198
+12                          5.9            -0.3   1202
+13                         10.5            -4.2   1209
+14                         -4.4             0.5   1214
+15                          8.7            -0.9   1216
+16                          2.1            -2.5   1203
+17                         -2.6             0.1   1203
+18                         -0.8            -0.7   1196
+19                          1.2            -1.3   1185
+20                         -3.1             1.9   1184
+21                         -1.3             1.2   1041
+22                          5.5             2.8    883
+23                          1.0            -0.2   1084
+
+   long ~21:00 -> 23:00 UTC (across halt) n  1108 avg $   -3.6 PF 0.97 t -0.31 win 43% | 2018-12..22-02 $   -9.8 (t -0.6) | OOS 22-03..26 $   -0.1 (t -0.0)
+
+B. Daily signals (per 1 BTC, next session 17:00 -> 15:59 CT):
+   10-day high -> long next           n   409 avg $  -11.4 PF 0.98 t -0.14 win 47% | 2018-12..22-02 $   14.4 (t  0.1) | OOS 22-03..26 $  -31.4 (t -0.3)
+   10-day low -> long next            n   300 avg $  -25.6 PF 0.96 t -0.24 win 49% | 2018-12..22-02 $   14.2 (t  0.1) | OOS 22-03..26 $  -52.8 (t -0.3)
+   10-day high or low                 n   709 avg $  -17.4 PF 0.97 t -0.27 win 48% | 2018-12..22-02 $   14.3 (t  0.2) | OOS 22-03..26 $  -40.8 (t -0.4)
+   10-day neither (risky zone)        n  1289 avg $  -49.3 PF 0.91 t -1.17 win 45% | 2018-12..22-02 $  -50.0 (t -0.9) | OOS 22-03..26 $  -48.9 (t -0.8)
+   50-day high -> long next           n   215 avg $  -29.9 PF 0.95 t -0.25 win 50% | 2018-12..22-02 $  -66.0 (t -0.5) | OOS 22-03..26 $   10.0 (t  0.0)
+   50-day low -> long next            n    96 avg $ -111.7 PF 0.86 t -0.49 win 48% | 2018-12..22-02 $   -1.0 (t -0.0) | OOS 22-03..26 $ -201.5 (t -0.6)
+   50-day high or low                 n   311 avg $  -55.2 PF 0.92 t -0.51 win 50% | 2018-12..22-02 $  -48.1 (t -0.4) | OOS 22-03..26 $  -62.3 (t -0.3)
+   50-day neither (risky zone)        n  1687 avg $  -34.8 PF 0.93 t -0.94 win 45% | 2018-12..22-02 $  -21.1 (t -0.4) | OOS 22-03..26 $  -43.6 (t -0.8)
+   long every session                 n  1998 avg $  -38.0 PF 0.93 t -1.07 win 46% | 2018-12..22-02 $  -26.3 (t -0.6) | OOS 22-03..26 $  -46.1 (t -0.9)
+
+Standard metrics (per 1 BTC; this is long-only, so 'longs' = all):
+                         trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+10-day high or low          709 48% $-17 $-1,554  -0.09   -0.13          0.97 $52,270  -0.03 35.15      -0.09
+10-day high -> long next    409 47% $-11   $-586  -0.05   -0.07          0.98 $42,670  -0.01 30.75      -0.04
+10-day low -> long next     300 49% $-26   $-968  -0.08   -0.11          0.96 $31,735  -0.03 20.55      -0.09
+OOS 2022-26 bootstrap:
+                                         actual        p5       p50        p95
+name                     metric                                               
+10-day high or low       sharpe           -0.19     -0.95     -0.18       0.54
+                         sortino          -0.26     -1.22     -0.25       0.82
+                         pf_day            0.94      0.74      0.95       1.18
+                         calmar           -0.09     -0.19     -0.07       0.37
+                         ulcer            33.59     11.92     37.67      97.92
+                         max_dd       38,285.00 24,214.75 48,730.00 100,039.75
+                         P(Sharpe<=0)       NaN       NaN      0.65        NaN
+10-day high -> long next sharpe           -0.12     -0.84     -0.10       0.61
+                         sortino          -0.17     -1.09     -0.14       0.95
+                         pf_day            0.95      0.71      0.96       1.27
+                         calmar           -0.05     -0.19     -0.04       0.45
+                         ulcer            27.79      9.34     24.97      64.97
+                         max_dd       32,725.00 15,369.25 30,382.50  60,470.50
+                         P(Sharpe<=0)       NaN       NaN      0.59        NaN
+10-day low -> long next  sharpe           -0.15     -0.89     -0.15       0.62
+                         sortino          -0.20     -1.08     -0.20       0.92
+                         pf_day            0.93      0.67      0.93       1.35
+                         calmar           -0.06     -0.19     -0.06       0.40
+                         ulcer            19.66      7.58     27.00      74.86
+                         max_dd       31,735.00 15,894.50 33,872.50  72,249.00
+                         P(Sharpe<=0)       NaN       NaN      0.63        NaN
+OOS drawdown permutation:
+                         actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+10-day high or low         $38,285      15% $49,175 $71,456 $81,832        100%        100%        100%
+10-day high -> long next   $32,725      57% $31,425 $46,726 $53,942        100%        100%        100%
+10-day low -> long next    $31,735      42% $33,435 $49,751 $57,068        100%        100%        100%
