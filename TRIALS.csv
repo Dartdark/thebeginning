@@ -1,0 +1,194 @@
+tier,item,variants,t_quoted
+S,Overnight Bias ML (v2: longs need score ≥ 0.03),1,5.0
+A,Late-Day Flow (leveraged-ETF / last-hour flow): follow a ≥ 0.4 ATR move at 14:00 to 14:30,1,3.5
+A,"Overnight Bias (plain, challenge; ADX 30 / 0.25 ATR since 2026-10-13, MultiCharts-confirmed)",1,4.9
+A,Expiration Open Short,1,2.6
+A,Cushion sizing,1,
+A,Monday Long (new direction source),1,
+A,Vault Break,1,4.1
+A,"The Bridge's Monday Long NQ (L644NQ v2.1): Sunday 19:00 CT → Monday 15:55, regular-session daily ADX(7) 10–50 and DI+ > DI−, 100-pt target, ",1,4.4
+A,CL Sunday up-gap fade (funded_strategies/CL_Sunday_Gap_Fade.txt): Sunday 17:05 CT short when the 17:00 open is ≥ 0.1 ATR above Friday's last,1,3.2
+B,"Single-print day filter on Vault Break (Red Ledger RL-FS-2026-01; analysis/single_print_test.py, single_print_bench.py, single_print_combine",1,-2.1
+B,"NFP Fade: fade the 7:30→7:45 payroll reaction, 7:46→9:00, stop 0.5 ATR",1,1.9
+B,Vol-Control Sell Flow: short 14:00→15:00 when a lagged S&P vol-control model must sell > 6% of fund size,1,2.1
+B,"ES versions of the plan's forced flows (EOS, Monday Long, NFP Fade, Late-Day Flow, Vol-Control Sell)",1,1.6
+B,"Crabel Stretch Breakout (your MultiCharts file v3): open ± 1.4 × 10-day stretch stop entries to 9:30 CT, stop 0.7 × stretch, out 14:56",1,2.7
+B,ONB skips the day after negative GEX,1,4.1
+B,"Noise-area momentum, long only (""Beat the Market"")",1,
+B,Bootstrap + permutation (out-of-sample resampling),1,
+B,"r/algotrading post: 100+ retail strategies, ~700 versions",1,
+B,"DriftPullback v2.1 (F. Agnello, Bridge Strategies Feedbacks): 15-min VWAP + 0.10% drift arms, 5-min counter-bar entry, 9:30–14:25 CT, long 8",1,4.0
+B,"The Bridge's Overnight Bias ORB (close beyond the 8:30–8:45 range, ADX(16) ≥ 20, up to 4 trades a day, bar-range and OR-size filters, RTH-AT",1,4.4
+B,Combine add-ons: Bridge Monday Long 2 MNQ + EOS $500 + Vol-Control Sell 2 MNQ on top of VB 8 + ONB ADX30,20,
+B,"ES MOC auction follow: after a ≥ 0.3 ATR 14:00 → 14:50 CT move, follow 14:51 → 15:00, stop 0.25 ATR (round 1, analysis/s_rank_es_round1_test",1,3.5
+C,"Gold Breakout 15M (user's TradingView description, 2026-10-14; analysis/gold_breakout_15m_test.py, bench analysis/gold_breakout_15m_bench.py",1,3.1
+C,Overnight Drift (backup; replaced by Monday Long 2026-10-12),1,
+C,Opening Drive,1,
+C,Turn of the month,1,2.0
+C,Asymmetric reversal: buy after a big no-news down day (NBER w35840),1,2.4
+C,Overnight-range breakout,1,2.5
+C,"60-min breakout, longs only, entries 9:00–14:00, flat 15:00 (your idea)",1,2.4
+C,"Headline Shock Follow: follow an unscheduled 5-min jump > 5.5x its normal size, 8:40–14:15, stop = jump, out 60 min",1,2.5
+C,Bundle of the three edges (HSF + NFP Fade + Vol-Control Sell Flow),1,
+C,"Morning direction at the European close (London 16:30 = 10:30 CT, 11:30 in DST-mismatch weeks), followed to 15:00 — tested as a trade 2026-1",1,2.3
+C,"MOC imbalance follow (closing auction): after a ≥ 0.3 ATR 14:00 → 14:50 CT move, follow it at the 14:51 open to the 15:00 cash close, stop 0",1,3.1
+C,"VaultBreak v8 (the Bridge's version): noise band from the 15-session high − low average incl. Sunday sessions, + 7-bar VWAP exit, next-bar t",1,3.9
+C,"The Bridge's COT Dealer Rank, weekly hold (TFF dealer net 13-week rank > 70 / < 30 + 50-day SMA, re-decided each Friday release)",1,1.8
+C,"Open-breakout pullback on 15-min bars (your idea): 0.15% break from the 8:30 open, a 15-min bar touching the open and closing back up, bar-l",1,2.4
+C,Late-Day Flow sized by the 0DTE gamma flip at 14:00 (The Bridge): more below the flip,1,2.0
+C,"Gold Asian-range breakout on gold (GC 2018–2026, user's file as described: range 20:00–00:00 CT, OCO, stop 1× range, out 10:00 CT); with fil",1,2.2
+C,"EOS in calm markets (prior-day VIX below its 252-day median), NQ / ES / YM (rounds 1–2, analysis/s_rank_misc_round2_test.py)",1,2.8
+C,"YM MOC auction follow (≥ 0.3 ATR, stop 0.25)",1,3.4
+C,"YM post-settlement fade (fade a ≥ 0.2 ATR 14:00 → 15:00 move, 15:01 → 15:15)",77,2.6
+C,BTC CME weekend-gap continuation (follow the Sunday gap ≥ 0.5 ATR),1,4.6
+D,"Fade yesterday's session move (8:30–15:00), next session 8:31–15:00 (follow-up to the ES mean-reversion premise)",1,2.2
+D,"Vault Break sized up after Overnight Bias ML has gone long the same day (analysis/plan_agreement_test.py, bench analysis/vb_after_onb_bench.",1,2.55
+D,NQ after mega-cap earnings (index-level PEAD idea from the Fink / Sojka reviews),1,0.7
+D,"Improvements to Intraday Momentum Strategies (Maroy 2025, SSRN 5095349): VWAP / exit-band / ladder exits on Vault Break",1,
+D,"Treasury auction price pressure (Fleming, Liu & Nguyen 2026, NY Fed Staff Report 1188, SSRN 6447502): yields rise 3 h before a coupon auctio",1,2.3
+D,Post-settlement reversal (15:00–15:15 fades the last hour),1,-4.0
+D,Wednesday overnight long (prev 15:00 → 8:30),1,2.5
+D,VIX regime size tilt,1,
+D,"RSI(2) dip-buying held overnight (from the QQQ RSI + EMA + VWAP article, RSI part only; Apex-legal re-entry at midnight)",1,2.2
+D,"Multi-timeframe trend filter on the plan's strategies (daily SMA 20/50/200, 60-min EMA)",1,
+D,"Timeframe ensemble: Vault Break on 15 + 30 + 60-min bars, 1 MNQ each, vs 30-min × 3",1,
+D,MSCI quarterly review closes (last business day of Feb / May / Aug / Nov),1,-0.1
+D,Month-end close momentum: follow the 8:30→14:45/14:50 direction into the 15:00 close on the last business day,1,1.1
+D,"BTC Momentum ""September Winner"" (your MBT file): short when 8:00→8:30 CT is down, hold to 15:00",1,1.3
+D,"0DTE NDX gamma regime from The Bridge (price above / below the cumulative gamma flip, steepness > 0.02) as a volatility gauge and as a filte",1,-1.4
+D,Late-Day Flow longs only when the last 30 minutes of order-flow delta agree (The Bridge MBO),40,2.1
+D,Release fade (8:00–8:30 CT after 7:30 data),24,2.9
+D,Last-30-minute momentum (Baltussen et al. 2021),1,1.0
+D,"Gamma last-30 trade (follow after GEX<0, fade high GEX)",1,1.4
+D,QQQ 5-minute ORB (Zarattini & Aziz 2023),1,1.1
+D,ORB + opening-volume filter (Zarattini et al. 2024),1,2.6
+D,Month-end rebalancing fade,1,
+D,Roll-week short,1,-2.2
+D,"Day after triple witching, long",1,1.6
+D,DIX-high long,1,2.1
+D,Quiet-day midday fade,1,1.4
+D,"VWAP trend, slow version (Zarattini & Aziz VWAP paper)",1,
+D,NQ–ES spread (follow),1,
+D,Overnight Drift GEX filter,1,
+D,"FOMC statement reaction (follow / fade 13:00→13:05–13:15, out 13:29–15:00; press conference)",1,1.5
+D,"CTA trend-signal flip, fade next day (21/63/126/252-day model)",1,4.0
+D,Gap Fill (old research set),1,
+D,Yes/no (logistic) ML filter for ONB (after Vilkov 2026),1,
+D,"VWAP Pullback + ADX gate (the Bridge's C.S. profile: ADX(14) 1-min ≥ 20 and falling, long only, flat 15:55)",1,2.2
+D,"Donchian(96) breakout + Larry Williams Large Trade Index > / < 50 + volume above average, TP 100 / SL 50 points (user's paste)",1,1.8
+D,"Open-breakout pullback (your idea): break X% from the 8:30 open by 10:30, buy the pullback to the open (limit or 5-min confirmation, bar-low",120,1.6
+D,"Time clusters in the plans' trades (entry half-hour, weekday, month, earlier exits; ~170 cells)",1,
+D,"NQ–YM relative value (your idea): follow / fade the β-hedged spread from the 8:30 open at 9:00–12:00 or on the gap, hold to 14:55",1,1.3
+D,CL: short the front on business days 1–4 (front-running the commodity-index roll),1,1.4
+D,Fade NQ's 7:30–7:45 reaction on non-NFP data days (zoom-in from the cross-asset map),1,2.2
+D,YM–ES prior-day rotation reversal (,1,1.9
+D,Gold: short on COMEX options-expiry day (active months) / follow the NFP 7:30–7:40 move to 9:00 / short the LBMA auction 10 min in DST-misma,1,1.7
+D,"BTC Overnight Bias port (no ADX, 0.5 ATR stop, 3R)",1,0.9
+F,"ES mean reversion (user's focus, 2026-10-14; analysis/es_mean_reversion_premise.py, analysis/es_mean_reversion_test.py)",1,-7.8
+F,"Mega-cap earnings intraday shape on NQ (2026-10-14, analysis/megacap_earnings_intraday_test.py): run-up into after-close reports (report day",1,0.4
+F,"CL round 3 (2026-10-14, analysis/cl_round3_test.py): Friday pre-weekend 8:00–13:29 (long −$3, short −$52, fade the week −$81 t −1.5; Tue–Thu",1,-1.5
+F,"Plan-combination ideas (2026-10-14, analysis/plan_agreement_test.py): agreement with earlier same-day plan trades (pooled z: same side +0.14",1,
+F,"VWAP always-in, 1-minute (Zarattini & Aziz)",1,
+F,Fading big intraday moves,1,
+F,Round numbers (fade or break),1,
+F,VWAP Pullback ADX,1,
+F,Pre-FOMC drift (Lucca & Moench),1,
+F,Announcement-day premium (Savor & Wilson),1,
+F,"IBS, pivot points (""151 Trading Strategies"")",1,
+F,Bhatti gold VWAP-EMA pullback (SSRN 6650958),1,
+F,ES versions of VB / ONB / OND,1,
+F,Window trades (fixed brackets in unused hours),1,
+F,CFTC positioning (Traders in Financial Futures),1,
+F,"Index rebalance days, buyback blackout, VIX-expiration Wednesday",1,
+F,Commodity storage/momentum (Gorton et al. 2008),1,
+F,Implied equity term structure (NY Fed SR 1203),1,
+F,"The Golden Dilemma (Erb & Harvey 2013, SSRN 2078535)",1,
+F,"Momentum Turning Points (Goulding, Harvey & Mazzoleni, SSRN 3489539)",1,
+F,"Fact, Fiction and Momentum Investing (Asness et al. 2014, SSRN 2435323)",1,
+F,"Index MA agreement for ES (your idea; ES + NQ only so far, YM pending)",1,-1.9
+F,"60-min 40-bar breakout + 200 SMA, 2x ATR stop (your idea)",1,0.7
+F,"Hybrid channel breakout + MA retrace + volume (Rogul 2026, SSRN 6469419)",1,
+F,"Price-pattern direction search: 25 signals known by 8:45 (Asia/Europe session, gap, order-flow imbalance, prior day, 2–60-day momentum, NQ–E",1,
+F,"Overnight VWAP fades (Asia 17:00–23:59, London 0:00–7:25, target VWAP)",1,
+F,"Multi-day pullback (fade 2–4 sessions in a row, next 8:30–15:00)",1,
+F,"9:00 CT releases and non-payroll 7:30 releases (CPI, PPI...), follow or fade",1,
+F,Fading headline jumps (day or overnight); following overnight jumps,1,
+F,"Following CTA flows (next day, into the close, break of the trigger level) and same-day vol-control flow",1,-1.9
+F,Nasdaq-100 special rebalance,1,
+F,"RSI + EMA + rolling VWAP on QQQ (Rule-Based Trader, Oct 2026)",1,0.3
+F,"Bollinger Band reversals (your idea): fade a close outside the bands or the close back inside; 5 / 15-min, K 2–3, RTH and overnight, ADX / b",1,1.1
+F,"20/50 EMA zone pullback, 10-min, stop 30 / target 65 points (your spec)",12,-1.2
+F,"Gold Breakout 15M (TradingView): Asia-range (17:00–23:00 CT) both-side stop breakout, 1% stop, out 12:00 CT, ported to NQ",1,-0.6
+F,"Glow Ribbon Flip (TradingView): EMA(21) + ratcheting ATR band, stop-and-reverse flips + pullback re-entries",20,1.2
+F,"Weekly (PM-settled) options expiry Fridays: afternoon pin, follow / fade into the close, strike magnet (NQ 100s), Monday after",1,0.8
+F,"JPMorgan Hedged Equity collar reset (quarter-ends, est. call strike = previous reset × 1.04)",1,-0.2
+F,"Bitcoin forced flows: spot-ETF close (follow the day 14:01→15:00 since Jan 2024) and CME monthly settlement (BRR, last Friday ~10:00 CT)",1,-2.6
+F,"VWAP pullback after a 30-min opening-range break (user's file VWAP_Pullback_NQ_Margin_Vol), swing stop / target",1,0.8
+F,"Gamma flip cross breakout (The Bridge 0DTE NDX flip + basis on NQ): first close through the flip 9:00–13:30 CT, trade the cross, stop 0.3 AT",1,-0.6
+F,"Gamma regime follow / fade: follow the first hour below the flip, fade it above",1,
+F,"'Bench a strategy in heavy drawdown; failures and passes cluster' (The Bridge, 'Propfirms as a business' live 005; analysis/bench_in_dd_test",1,-0.5
+F,Ornstein-Uhlenbeck regime filter for mean reversion (user's post citing Jashnani 2025: OU theta / half-life of price vs a 50-bar VWAP; analy,1,-2.1
+F,"NDX 0DTE open interest by strike (The Bridge, data/GEXOI_.csv, 742 Tue–Fri sessions 2022-09 → 2026-07; analysis/gex_oi_pin_test.py): trade t",1,-2.1
+F,0DTE strike pin: from 13:30 CT on above-flip days trade toward the major positive-gamma strike (0.15–1% away),1,-1.8
+F,"Order-flow prediction (The Bridge MBO, 2018–2026): delta 5–30 min, RTH delta, book / count imbalance, depth 10 / 50, pulled orders, queue de",1,
+F,Opening order flow: trade the sign of the 8:30–9:30 CT delta to 14:55,1,2.0
+F,Big prints (≥ 99.5th percentile of the prior 20 sessions): follow 15 / 30 / 60 min,1,
+F,"The Bridge's VWAP Fade: fade a 1-min close beyond Globex VWAP ± 2σ, target ± 1σ, no stop, 60-bar time exit, 8:30–14:00 CT",10,-1.5
+F,"The Bridge's Large Trade Predictability (next-bar: candle colour / whale print ≥ 100–200 / both, 1- and 5-min bars)",1,
+F,"The Bridge's Liquidity Predictability (follow resting-book imbalance, 10 / 20 / 50 levels, ±20 / 40%, next bar)",1,2.5
+F,The Bridge's COT Dealer Rank as an Apex day trade (8:30 → 15:00 in the weekly state) or a filter on the plan,1,0.3
+F,"Open-breakout pullback on 1-min bars (your idea, follow-up)",120,1.6
+F,"The plan's strategies on YM (Dow futures), 2018–2026",1,
+F,"Cross-asset lead-lag and morning decoupling (NQ vs ES, YM, gold, oil, bitcoin; 1- and 5-minute)",1,1.8
+F,"Cross-asset overnight signals (gold, oil, bitcoin overnight z-scores; risk-off = gold − oil) as filters on NQ's day and the plan",25,2.0
+F,"The plan's strategies on CL and GC (Python versions, prices rescaled to the code's tick, point targets by range ratio)",1,1.1
+F,"CL forced flows: EIA report (pre-release drift, follow / fade the first 5 minutes), settlement 13:30 CT (follow / fade into and after it), e",1,0.9
+F,"Gold Asian-range breakout ported to NQ / ES (user's file): range 20:00–00:00 CT, OCO stops at the edges, stop 1× range, no target, out 10:00",1,-1.9
+F,"Volatility targeting (Harvey, Hoyle et al. 2018, SSRN 3175538): size the plan's fixed-MNQ strategies (or all) by 1 / recent NQ vol",1,
+F,"Abnormal trading volume (Bajo 2010, SSRN 675587): follow the move the day after a volume spike",1,-1.7
+F,Gamma-conditioned end-of-day momentum (user's idea): follow the day's move 14:30 → 15:00 when NQ is below the 0DTE flip (The Bridge) or afte,1,-1.8
+F,"Market Intraday Momentum (Gao, Han, Li & Zhou 2018, SSRN 2440866): first half-hour (prev close → 9:00 CT) predicts the last (14:30 → 15:00)",1,1.0
+F,"Fast alphas as an execution overlay (Zarattini & Pagani, Concretum QuanTips #2, 2026): wait for a 5-min counter bar before entering / exitin",1,2.7
+F,Beta from A to Z (Oct 2026 textbook): its pairs recipe on NQ–ES and NQ–YM (Kalman hedge ratio + innovation z-score intraday; rolling cointeg,1,-2.6
+F,"101 Formulaic Alphas (Kakushadze / WorldQuant 2015, SSRN 2701346), time-series port on NQ and ES (rank → 60-day percentile, yesterday's clos",1,3.8
+F,Option-income (covered-call) ETF roll flow as its own trade (QYLD / BXN 3rd-Friday sell window 10:30–11:00 CT; JEPQ / QQQI weekly; pin and d,1,0.5
+F,"Asian and European opens, followed (Tokyo 9:00 JST = 18:00 / 19:00 CT; London 8:00 = 2:00 / 3:00 CT): follow the first 15 / 30 minutes for 1",1,-0.6
+F,Nasdaq-100 / S&P quarterly rebalance closes (3rd Friday of Mar / Jun / Sep / Dec; 35 days),1,-0.9
+F,"CL forced flows from the user's AI chat (2026-10-14, analysis/cl_forced_flows_round2_test.py): Platts Market-on-Close window 16:00–16:30 Lon",1,1.3
+F,"MOC auction follow filtered by order flow (The Bridge MBO, NQ 2018–2026-07; analysis/moc_orderflow_test.py): 14:00–14:50 / 14:30–14:50 / 14:",1,
+F,"Gold vs rates and the dollar (ZN 10-year + 6E euro, user's new exports 2026-10-14; analysis/gold_rates_dollar_test.py): fade gold's residual",1,2.5
+F,"Gold and bitcoin follow-ups after the CL fade joined the plan (2026-10-14, analysis/gold_btc_next_test.py): gold Asian breakout re-benched n",1,2.7
+F,S-rank round 2 failures (2026-10-14): ES Overnight Bias with NQ's ridge refit on 2018–22 only (ES 2023–26 kept $38 vs skipped $84); gold COM,1,2.5
+F,"S-rank round 1 failures (2026-10-14): ES VIX-expiry Wednesday open (t 0.6), ES-trained Overnight Bias ridge (walk-forward t 1.0, frozen 2022",48,0.6
+F,Pre-holiday / post-holiday / mid-month pay days,1,
+F,"Technical rules and FX intervention (LeBaron 1996, SSRN 1105)",1,
+F,"Forced-flow round 3: vol-target de-levering (realized-vol jumps), quarter-end pension fade, Friday pre-weekend de-risking",1,
+F,"The Power of Price Action Reading (Zarattini & Stamatoudis 2024, SSRN 4879527)",1,-0.1
+F,0DTE trading rules (Vilkov 2026),1,
+F,"0DTE gamma and volatility (Dim, Eraker & Vilkov 2025)",1,
+F,Contrarian VRP ETF strategy (SSRN 4841308),1,
+F,"SPY/TQQQ ""arbitrage"" (SSRN 4944736)",1,
+F,"Overnight-Intraday Reversal Everywhere (Liu, Liu, Wang, Zhou & Zhu 2025, SSRN 2730304): buy the futures with the lowest close → open return,",1,-1.6
+F,"A Tale of One Day: morning momentum, afternoon reversal (Xu & Zhu 2022, SSRN 4192163)",1,0.8
+F,"Structural Limits of OHLCV-Based Intraday Momentum Signals in MNQ (Mesfin 2026, SSRN 6709401)",1,4.3
+F,"A review of the Post-Earnings-Announcement Drift (Fink 2021, J. Behavioral & Experimental Finance 29, 100446)",1,
+F,"Stock Market Trading Volume (Lo & Wang 2009, Handbook of Financial Econometrics, SSRN 1405583)",1,
+F,"Signature Decomposition Method Applying to Pair Trading (Guo, Jin, Kuang, Qian & Wang 2025, arXiv 2505.05332)",1,
+F,"Quantitative Spread Trading on Crude Oil and Refined Products Markets (Cummins & Bucca 2011, SSRN 1932471)",1,
+F,"Statistical Arbitrage in the U.S. Equities Market (Avellaneda & Lee 2008, SSRN 1153505)",1,
+F,"Trading VIX Futures under Mean Reversion with Regime Switching (Li 2016, SSRN 2784215)",1,
+F,"0DTE Index Options and Market Volatility: How Large is Their Impact? (Amaya, Garcia-Ares, Pearson & Vasquez 2025, SSRN 5113405)",1,
+F,"50 Years in PEAD Research (Sojka 2018, SSRN 3281679)",1,
+F,"BTC short-only 'fade the retail euphoria' (user's idea, 2026-10-14, analysis/btc_retail_fade_test.py): CME bitcoin, US hours, per 1 BTC (10 ",1,0.2
+F,"YM's own events (2026-10-14, analysis/ym_dow_events_test.py): Dow heavyweight earnings (GS, CAT, HD, JPM, UNH, AXP; data/dow_heavy_earnings.",1,1.7
+F,"Market Sentiment and an Overnight Anomaly (Vojtko & Hanicová, Quantpedia, SSRN 3829582)",1,2.1
+F,"Post Earnings Announcement Drift (PEAD) in Polish Stock Market (Sojka 2018, SSRN 3202541)",1,
+F,"The Bridge's exported indicators as filters on the current plan (2026-10-14, analysis/bridge_filter_scan.py, bench analysis/onb_delta_bench.",63,1.7
+F,"The Bridge's indicators, round 2 (2026-10-14, after the user's indicator code; analysis/bridge_filter_scan2.py, analysis/bridge_gamma_ldf_ch",40,2.2
+F,"From Funded to Paid: how big to bet in a funded futures account (Tran 2026, user's PDF)",1,
+F,Session Efficiency Forecast (user's MultiCharts indicator README: logistic model on 15 daily features predicting today's Kaufman efficiency ,18,1.0
+F,Netting script: delete any trade entered while an opposite trade from another strategy is open (user's Python script for prop-firm portfolio,1,
+F,"Intraday Bias Check + Time Rotation Strategy (The Institutional Protocol, user's MultiCharts code): hour-by-hour long scan, then long the 'u",1,-2.5
+F,"Prop-firm economics papers (user's PDFs, 2026-10-14): Lim 2026 'The Price of a Funded Account' (challenge as a first-passage claim: time lim",1,
+F,Futures short-term reversal (QuantConnect),1,
+F,Mean-reversion Colab notebook,1,

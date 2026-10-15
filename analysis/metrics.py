@@ -57,3 +57,47 @@ def table(rows, capital=50_000.0):
            "profit_factor": "{:.2f}".format, "max_dd": "${:,.0f}".format, "calmar": "{:.2f}".format,
            "ulcer": "{:.2f}".format, "ulcer_perf": "{:.2f}".format}
     return df.to_string(formatters=fmt)
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Multiple testing (added 2026-10-15). Every idea ever tested is a trial (TRIALS.csv, built from TIER_LIST.md by
+# analysis/trials.py). The more trials, the higher the bar for calling the best one real.
+#
+# psr(x, sr0)            Probabilistic Sharpe ratio (Bailey & Lopez de Prado 2012): P(true per-period Sharpe > sr0), using
+#                        the sample's length, skew and kurtosis.
+# expected_max_sr(n, T)  Sharpe (per period) the best of n trials of PURE NOISE reaches on T observations
+#                        (Bailey, Borwein, Lopez de Prado & Zhu 2014): sqrt(V) x [(1 - g) z(1 - 1/n) + g z(1 - 1/(n e))],
+#                        g = 0.5772 (Euler), V = 1 / (T - 1) the variance of a zero-edge Sharpe estimate.
+# deflated_sharpe(x, n)  DSR = psr(x, expected_max_sr(n, len(x))): probability the strategy beats the best of n noise trials.
+#                        >= 0.95 passes. Conservative when n counts trials of unrelated ideas.
+# t_threshold(n)         |t| a single result needs when it is the best of n tests (Bonferroni, one-sided 5%): for filters and
+#                        splits, where a return series is not the thing tested.
+# ---------------------------------------------------------------------------------------------------------------------
+from statistics import NormalDist
+
+_N = NormalDist()
+EULER = 0.5772156649
+
+
+def psr(x, sr0=0.0):
+    x = pd.Series(x, dtype=float).dropna(); T = len(x)
+    if T < 10 or x.std() == 0: return np.nan
+    sr = x.mean() / x.std(); g3 = float(((x - x.mean()) ** 3).mean() / x.std() ** 3)
+    g4 = float(((x - x.mean()) ** 4).mean() / x.std() ** 4)
+    den = np.sqrt(max(1e-12, 1 - g3 * sr + (g4 - 1) / 4 * sr ** 2))
+    return _N.cdf((sr - sr0) * np.sqrt(T - 1) / den)
+
+
+def expected_max_sr(n, T):
+    if n <= 1: return 0.0
+    v = 1.0 / (T - 1)
+    return np.sqrt(v) * ((1 - EULER) * _N.inv_cdf(1 - 1 / n) + EULER * _N.inv_cdf(1 - 1 / (n * np.e)))
+
+
+def deflated_sharpe(x, n):
+    x = pd.Series(x, dtype=float).dropna()
+    return psr(x, expected_max_sr(n, len(x)))
+
+
+def t_threshold(n, alpha=0.05):
+    return _N.inv_cdf(1 - alpha / max(1, n))

@@ -82,6 +82,20 @@ the noise of the estimate, in both the 1-year and 2-year payouts.
   settings where they differ, so the side split stays visible and reversible.
 - Record the per-side results in the strategy's README section and in `TIER_LIST.md`.
 
+## Multiple testing: the trials log (added 2026-10-15)
+
+Every ranked item in `TIER_LIST.md` is a trial. `python3 analysis/trials.py` rebuilds `TRIALS.csv` (193 items, ~816 variants
+on 2026-10-15) and prints the bar: the best of N noise trials reaches |t| = `metrics.t_threshold(N)` (3.47 at N = 193).
+- **A new strategy or filter is promoted above C only if** its t clears `t_threshold(N_items)` or its deflated Sharpe
+  (`metrics.deflated_sharpe(per-trade P&L, N_items)`) is >= 0.95,
+- **or** it was pre-registered from a stated economic mechanism or a published result, with <= 3 variants: then t >= 2.0
+  plus a clean placebo / replication, and the TIER_LIST row says so.
+- Scans (many features x strategies) are always judged against their own shuffled-P&L null, as before.
+- Status 2026-10-15 (per trade, N_items = 193): Overnight Bias ML DSR 0.99 passes; Vault Break 0.92 and Bridge Monday 0.91
+  near; Late-Day Flow 0.79, Monday Long 0.73; EOS 0.42, Vol-Control Sell 0.23, NFP Fade 0.16 do not -- they stand on the
+  pre-registered forced-flow rule (mechanism first, few variants, holdout and MultiCharts confirmation) and stay small in
+  the plan; the live drift alarm is their real test.
+
 ## Guardrails
 
 - Each side has about half the trades, so its t-stat is lower. Don't drop a side for one bad

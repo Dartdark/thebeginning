@@ -21,7 +21,8 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   (`analysis/funded_lab.py`). **Always report Sharpe, Sortino, profit factor, Calmar and Ulcer
   index** (`analysis/metrics.py`), for the whole strategy and for longs and shorts separately,
   with bootstrap intervals and drawdown permutation (`analysis/resampling.py`) on the
-  2023-onward holdout.
+  2023-onward holdout. **Multiple testing:** run `analysis/trials.py` after ranking; promotion above C needs
+  t ≥ `metrics.t_threshold(N_items)` or deflated Sharpe ≥ 0.95, unless pre-registered (see `DEVELOPMENT_PROCESS.md`).
 - **Development process:** follow `DEVELOPMENT_PROCESS.md`. Every strategy is checked as a
   whole first, then its **longs and shorts are analysed and improved separately** and
   recombined.

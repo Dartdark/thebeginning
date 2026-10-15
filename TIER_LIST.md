@@ -244,6 +244,10 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 
 ## Adding a new item
 
+Multiple testing (2026-10-15): after adding a row, run `python3 analysis/trials.py` (rebuilds `TRIALS.csv`). Above C needs
+t ≥ t_threshold(N_items) (3.47 at 193 items) or deflated Sharpe ≥ 0.95, unless pre-registered from a mechanism / published
+result with ≤ 3 variants (t ≥ 2.0 + clean placebo); see `DEVELOPMENT_PROCESS.md`.
+
 Test it on the funded bench (or the challenge simulator if it's a challenge idea), then
 place it by the definitions above, with its key numbers and a one-line reason. Move items
 when new evidence arrives (e.g. a MultiCharts confirmation moves C → A/S, a live

@@ -112,6 +112,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     $21 vs $123 a trade the session after an interior single print; funded VB 3 / 1 on flagged days $10,184 vs $9,818 (1 year),
     blown 3% vs 4%, beats all random-day placebos: B. MC-CONFIRMED (262 / 274 flagged days identical, no false skips);
     user to paste it over `NQ Vault Break` outside market hours. Combine: FlaggedContracts -1 (= old VB, no gain).
+  - Trials log + deflated Sharpe (`analysis/trials.py`, `TRIALS.csv`, `metrics.deflated_sharpe` / `t_threshold`): 193 items tested,
+    bar |t| 3.47; plan DSR: ONB ML 0.99 passes, VB 0.92, Bridge Monday 0.91, LDF 0.79, Monday 0.73, EOS 0.42, NFP 0.16 (forced-flow
+    items stand on the pre-registered rule; watch them live). New promotion rule in DEVELOPMENT_PROCESS.md.
   - The Bridge's 'Propfirms as a business' slides: 'bench strategies in drawdown' tested on our plan (`analysis/bench_in_dd_test.py`):
     no clustering, benching lowers the combine pass rate (50.1% → 41-48%): F. Don't bench on drawdown; the drift alarm covers a dead edge.
   - OU mean-reversion regime (user's post, `analysis/ou_regime_test.py`): theta doesn't persist day to day; VWAP fade loses, worse in
