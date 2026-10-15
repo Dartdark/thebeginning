@@ -75,7 +75,7 @@ def run(p, bars):
         nonlocal pos, setup, total
         pts = (px - ep) * pos
         cost = COMM + SLIP + (0.0 if kind == "limit" else SLIP)
-        trades.append((D[i], pos, pts * PV - cost, setup, D[ei], J[ei], J[i], ep, px, kind, pts, elvl))
+        trades.append((D[i], pos, pts * PV - cost, setup, D[ei], J[ei], J[i], ep, px, kind, pts, elvl, (StpL if pos == 1 else StpS) if setup == "BO" else ep - pos * MSTP, ep + pos * TM * AtrU if setup == "BO" else np.nan))
         pos = 0; setup = None; total += 1
 
     for i in range(n):
@@ -260,12 +260,12 @@ def run(p, bars):
         if pos != 0 and SmNow == SessEndSm - 1: on_close_exit = True
         if on_close_exit and pos != 0:
             close_trade(i, c, "close"); o_exit = None
-    cols = ["date", "side", "net", "setup", "entry_d", "entry_j", "exit_j", "entry", "exit", "kind", "pts", "level"]
+    cols = ["date", "side", "net", "setup", "entry_d", "entry_j", "exit_j", "entry", "exit", "kind", "pts", "level", "stop", "tgt"]
     T = pd.DataFrame(trades, columns=cols)
     T["date"] = pd.to_datetime(T.date.astype(str)).dt.strftime("%Y-%m-%d")
     T["entry_date"] = pd.to_datetime(T.entry_d.astype(str)).dt.strftime("%Y-%m-%d")
     T["entry_time_ct"] = T.entry_j.map(m2t); T["exit_time_ct"] = T.exit_j.map(m2t)
-    T = T[["date", "side", "net", "setup", "entry_date", "entry_time_ct", "exit_time_ct", "entry", "exit", "kind", "pts", "level"]]
+    T = T[["date", "side", "net", "setup", "entry_date", "entry_time_ct", "exit_time_ct", "entry", "exit", "kind", "pts", "level", "stop", "tgt"]]
     T.attrs["both_hits"] = both_hits
     return T
 
