@@ -650,6 +650,18 @@ after each payout (x1.25–2) does not speed up the payouts:
   not by how fast the balance grows; bigger size makes bigger single days, which trips the consistency rule, and adds
   drawdown risk.
 
+### Apex vs a personal account (2026-10-15)
+
+Code `../analysis/personal_account_test.py`. The plan without Apex's rules, every strategy at 1 NQ (CL fade 1 CL), 2018–26
+backtest: **$101k a year, max drawdown $24k**, worst month −$15.9k, 19% losing months, Sharpe 2.75 (2018–22 $72k / DD
+$22.6k; 2023–26 $141k / DD $24.1k; 2018 itself only +$538). Capital for a 20% / 30% max drawdown: $121k / $80k →
+84% / 126% a year on capital (in-sample; live will be lower).
+- Apex caps each account ($13,000 / $20,500, 5-day + consistency pacing), not the edge; but with 20 accounts the total is
+  ~20 x $17–18k a year on 150K slots for ~$13k a year of fees and no trading capital at risk.
+- A personal account is uncapped and compounds, but needs ~$80–120k per 1-NQ plan and the losses are real.
+- Path: Apex first (no capital at risk) while the live edge is confirmed; move payouts into a personal account once
+  ~6–12 months of live results match the backtest, start it at MNQ size and scale with the account.
+
 ### Tuning the sizing for the whole pipeline (2026-10-14)
 
 Code `../analysis/pipeline_tuning_test.py` (output in `..._output.txt`). One slot, 70 start months, 3 years, net of
