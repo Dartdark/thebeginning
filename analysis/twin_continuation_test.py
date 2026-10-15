@@ -63,7 +63,7 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
     a_piv, a_osc = 2 / 22, 2 / 4; mH = mL = None; mN = 0; mC = None; nb = 0; prevC = None; atrw = 0.0; piv = 0.0
     osc = None; oscp = None; traded_date = -1
     pos = 0; setup = None; ent = 0.0; ent_i = 0; stop = tgt = 0.0; pend_mo = 0; pend_bo = False; mo_exit_pend = False
-    ntr = 0
+    ntr = 0; sig_piv = np.nan; sig_i = -1
     for i in range(n):
         # ---------------- fills during bar i (orders from bar i-1) ----------------
         if pos == 0 and pend_mo != 0:
@@ -104,7 +104,8 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
                 elif px is None and sm[i] + 1 >= 1365 and sm[i] < 1380:
                     px, kind = c[i], 2
             if px is not None:
-                trades.append(dict(i0=ent_i, i1=i, setup=setup, side=pos, entry=ent, exit=px, kind=kind)); ntr += 1
+                trades.append(dict(i0=ent_i, i1=i, setup=setup, side=pos, entry=ent, exit=px, kind=kind,
+                                   piv=sig_piv if setup == "MO" else np.nan, sig_i=sig_i if setup == "MO" else -1)); ntr += 1
                 pos = 0; setup = None; mo_exit_pend = False
         # ---------------- bar-close script ----------------
         if swh_open and h[i] >= swh: swh_open = False
@@ -168,7 +169,7 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
             mH = mL = None; mN = 0
         # orders for the next bar
         pend_mo = 0
-        if fire != 0: armed = False; pend_mo = fire
+        if fire != 0: armed = False; pend_mo = fire; sig_piv = piv; sig_i = i
         if armed and (pos != 0 or ntr > arm_trades): armed = False
         pend_bo = armed and pos == 0 and sm[i] + 1 < 1350 and fire == 0
         if pos != 0 and setup == "MO" and 1450 <= (j[i] // 60) * 100 + j[i] % 60 <= 1600: mo_exit_pend = True
