@@ -35,6 +35,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   | Expiration Open Short | `funded_strategies/NQ_Expiration_Open_Short.txt` | 5 min | `RiskPerTrade` 500; next trade **Fri 2026-10-16** (3rd Friday) |
 
   Backtest: pass 50.1% per try, median 6 trading days; combine sizing barely matters (`analysis/pipeline_tuning_test.py`).
+  2026-10-15: state sizing / daily stops don't help (`analysis/combine_levers_test.py`); optional swap ONB ADX30 → ONB ML
+  $1,100 = 52.0% (`analysis/combine_swap_test.py`). **Stagger new combines 5–10 trading days apart**: same-day combines on one
+  copier share one outcome (correlation +1.0; 10 days apart +0.19). See FUNDED_PLAN.md 'Combine levers and staggering'.
 - **Live tracking:** the user exports weekly MultiCharts reports into `live/`.
   - Run `python3 analysis/live_vs_backtest.py --all live/` (see `live/README.md`).
   - It now also prints a CUSUM **drift alarm** per strategy (OK / WATCH / ALARM = half size and review; `live/README.md`).
