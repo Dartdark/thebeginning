@@ -1,25 +1,25 @@
 Trials log and multiple-testing check (added 2026-10-15).
 
-TRIALS.csv: 194 ranked items, 817 variants in all; by tier {'S': 1, 'A': 9, 'B': 13, 'C': 20, 'D': 43, 'F': 108}
+TRIALS.csv: 196 ranked items, 819 variants in all; by tier {'S': 1, 'A': 9, 'B': 13, 'C': 20, 'D': 43, 'F': 110}
 
 The bar for the best of N trials (one-sided 5%):
    one pre-registered test  N     1: |t| >= 1.64; best noise Sharpe on 252 days x sqrt(252) = 0.00, on 1,000 trades per trade x sqrt(n) = 0.00
    a 10-variant scan        N    10: |t| >= 2.58; best noise Sharpe on 252 days x sqrt(252) = 1.58, on 1,000 trades per trade x sqrt(n) = 1.58
-   N_items                  N   194: |t| >= 3.47; best noise Sharpe on 252 days x sqrt(252) = 2.76, on 1,000 trades per trade x sqrt(n) = 2.76
-   N_all                    N   817: |t| >= 3.84; best noise Sharpe on 252 days x sqrt(252) = 3.20, on 1,000 trades per trade x sqrt(n) = 3.20
+   N_items                  N   196: |t| >= 3.48; best noise Sharpe on 252 days x sqrt(252) = 2.76, on 1,000 trades per trade x sqrt(n) = 2.76
+   N_all                    N   819: |t| >= 3.84; best noise Sharpe on 252 days x sqrt(252) = 3.20, on 1,000 trades per trade x sqrt(n) = 3.20
 
 Deflated Sharpe of the plan's strategies (per trade, MultiCharts lists, $7.25 + 1 tick):
                   strategy  trades    t   PSR  DSR_items  DSR_all  passes_items
-               Vault Break    1743 4.25 1.000      0.923    0.843         False
+               Vault Break    1743 4.25 1.000      0.923    0.842         False
       Overnight Bias ML v2     343 5.04 1.000      0.993    0.976          True
-               Monday Long     450 3.34 1.000      0.729    0.559         False
-     Expiration Open Short     105 2.58 0.995      0.424    0.260         False
-             Late-Day Flow     895 3.51 1.000      0.792    0.632         False
+               Monday Long     450 3.34 1.000      0.728    0.559         False
+     Expiration Open Short     105 2.58 0.995      0.422    0.260         False
+             Late-Day Flow     895 3.51 1.000      0.791    0.631         False
                   NFP Fade      79 1.85 0.977      0.162    0.072         False
-        Bridge Monday Long     217 4.36 1.000      0.907    0.830         False
-Vol-Control Sell (dropped)      71 2.14 0.993      0.230    0.105         False
+        Bridge Monday Long     217 4.36 1.000      0.906    0.830         False
+Vol-Control Sell (dropped)      71 2.14 0.993      0.228    0.105         False
 
-Tier S-B items: quoted t vs t_threshold(N_items) = 3.47 (t not quoted = blank):
+Tier S-B items: quoted t vs t_threshold(N_items) = 3.48 (t not quoted = blank):
 tier                                                                                                                                         item  variants  t_quoted  clears
    S                                                                                              Overnight Bias ML (v2: longs need score ≥ 0.03)         1      5.00    True
    A                                                    Late-Day Flow (leveraged-ETF / last-hour flow): follow a ≥ 0.4 ATR move at 14:00 to 14:30         1      3.50    True
