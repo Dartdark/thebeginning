@@ -10,6 +10,7 @@ $1,500 cushion; Vol-Control Sell dropped) scores $9,313 ($12,569); with Vol-Cont
 
 | Tier | Meaning |
 |---|---|
+| **S+** | Meets every S requirement **and is confirmed in live trading**: at least 40 live trades (or 6 months for rare strategies) with the live average ≥ 75% of the backtest for the same days and no drift ALARM (`analysis/live_vs_backtest.py`). Empty until the live record exists (added 2026-10-15) |
 | **S** | Extreme profit, scalability and a very strong edge. In numbers: about $20,000+ a year per NQ, a t-stat of 4.5+ with PF 2+ and 8/9 years positive, and enough trades in liquid hours to size up without hurting fills |
 | **A** | A very good, very profitable strategy, better than most of what's been tested. In numbers: t 2.5+, PF 1.4+ (or 1.9+ when it trades rarely), positive in 7+ of 9 years, MultiCharts-confirmed |
 | **B** | A good strategy (or tool): a real, profitable edge, clearly below A. Roughly t 2–3.5 or PF 1.25–1.4 with most years positive, or a strong effect that still needs data / automation / a MultiCharts check |
@@ -18,6 +19,12 @@ $1,500 cushion; Vol-Control Sell dropped) scores $9,313 ($12,569); with Vol-Cont
 | **F** | Fails: no edge, loses money, flawed study, or can't be traded on Apex |
 
 Tiers rank how good an item is, not whether it's in the plan; the Type column says which ones are in use.
+
+## S+
+
+| Item | Type | Key numbers | Why |
+|---|---|---|---|
+| (none yet; first candidate ONB ML once its live record qualifies) | | | |
 
 ## S
 
