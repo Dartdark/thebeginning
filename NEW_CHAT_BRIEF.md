@@ -114,7 +114,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
     user to paste it over `NQ Vault Break` outside market hours. Combine: FlaggedContracts -1 (= old VB, no gain).
   - Twin Continuation (user's MC code; `analysis/twin_continuation_*.py`, checker `checks/candidates/twin_continuation/verdict.md`):
     real edge (t 5.5, DSR 0.995, checker replica 99.8%, PASS WITH CONCERNS) but wrong shape for Apex (BO swing stops ~$6k/NQ,
-    fat-tailed MO wins vs consistency): no gain in funded plan / own PA / combine. B pending a MultiCharts run; non-prop account idea.
+    fat-tailed MO wins vs consistency): no gain in funded plan / own PA / combine. MC-CONFIRMED (v2 report: 1,069/1,074 entries identical, $296 t 5.3): A.
+    Non-prop account idea; v2.1 in personal_strategies/ (holiday fix, SetExitOnClose removed).
   - Trials log + deflated Sharpe (`analysis/trials.py`, `TRIALS.csv`, `metrics.deflated_sharpe` / `t_threshold`): 193 items tested,
     bar |t| 3.47; plan DSR: ONB ML 0.99 passes, VB 0.92, Bridge Monday 0.91, LDF 0.79, Monday 0.73, EOS 0.42, NFP 0.16 (forced-flow
     items stand on the pre-registered rule; watch them live). New promotion rule in DEVELOPMENT_PROCESS.md.

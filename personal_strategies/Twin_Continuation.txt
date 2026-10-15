@@ -22,6 +22,10 @@
   NQ_Vault_Break.txt): no new entries from EarlyLastEntry (11:00 CT), everything
   flat at the close of the EarlyFlatten bar (11:30 CT), Morning Momentum skipped.
   For Apex / prop use also set BO_MaxStopMult 1 (the swing stop risks ~$6,000/NQ).
+  v2.1 (2026-10-15): SetExitOnClose removed. On the user's chart it fired at MIDNIGHT and closed
+  47 evening breakout trades at 00:00 in backtests (-$20.8k vs holding them) while doing nothing
+  live, so backtest and live differed. Normal days end at the 15:45 / 14:50 exits, early-close
+  days at 11:30 (holiday fix), so it is not needed.
 ===================================================================== }
 
 Inputs:
@@ -388,4 +392,4 @@ If HolFlat Then Begin
     BuyToCover ( "HOL-SX" ) this bar on close;
 End;
 
-SetExitOnClose;
+{ SetExitOnClose removed in v2.1: backtest-only, fired at midnight on a 24h chart }

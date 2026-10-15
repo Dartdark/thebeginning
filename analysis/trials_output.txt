@@ -1,6 +1,6 @@
 Trials log and multiple-testing check (added 2026-10-15).
 
-TRIALS.csv: 194 ranked items, 817 variants in all; by tier {'S': 1, 'A': 8, 'B': 14, 'C': 20, 'D': 43, 'F': 108}
+TRIALS.csv: 194 ranked items, 817 variants in all; by tier {'S': 1, 'A': 9, 'B': 13, 'C': 20, 'D': 43, 'F': 108}
 
 The bar for the best of N trials (one-sided 5%):
    one pre-registered test  N     1: |t| >= 1.64; best noise Sharpe on 252 days x sqrt(252) = 0.00, on 1,000 trades per trade x sqrt(n) = 0.00
@@ -30,8 +30,8 @@ tier                                                                            
    A                                                                                                                                  Vault Break         1      4.10    True
    A The Bridge's Monday Long NQ (L644NQ v2.1): Sunday 19:00 CT → Monday 15:55, regular-session daily ADX(7) 10–50 and DI+ > DI−, 100-pt target,          1      4.40    True
    A CL Sunday up-gap fade (funded_strategies/CL_Sunday_Gap_Fade.txt): Sunday 17:05 CT short when the 17:00 open is ≥ 0.1 ATR above Friday's last         1      3.20   False
+   A Twin Continuation (user's MultiCharts code, 2026-10-15; checks/candidates/twin_continuation/Twin_Continuation.txt): Swing Breakout on 6h fra         1      5.46    True
    B Single-print day filter on Vault Break (Red Ledger RL-FS-2026-01; analysis/single_print_test.py, single_print_bench.py, single_print_combine         1     -2.10   False
-   B Twin Continuation (user's MultiCharts code, 2026-10-15; checks/candidates/twin_continuation/Twin_Continuation.txt): Swing Breakout on 6h fra         1      5.46    True
    B                                                                       NFP Fade: fade the 7:30→7:45 payroll reaction, 7:46→9:00, stop 0.5 ATR         1      1.90   False
    B                                     Vol-Control Sell Flow: short 14:00→15:00 when a lagged S&P vol-control model must sell > 6% of fund size         1      2.10   False
    B                                         ES versions of the plan's forced flows (EOS, Monday Long, NFP Fade, Late-Day Flow, Vol-Control Sell)         1      1.60   False
