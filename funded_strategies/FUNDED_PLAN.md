@@ -7,13 +7,13 @@ Strategies screen, `L644NQ_MondayLong_NQ` v2.1), MultiCharts-confirmed (`../anal
 output in `..._output.txt`). It runs next to our Monday Long, not instead of it. NFP Fade and Vol-Control Sell
 Flow are MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`); full size starts at a **$1,500** cushion.
 
-**Candidate change (2026-10-15, pending a MultiCharts check):** Vault Break via `../apex_strategies/NQ_Vault_Break_SP.txt` with
+**Adopted 2026-10-15 (MultiCharts-confirmed: 262 / 274 flagged days identical, no false skips):** Vault Break via `../apex_strategies/NQ_Vault_Break_SP.txt` with
 `NumContracts` 3, `FlaggedContracts` 1 (1 MNQ on the session after an interior TPO single print; `TIER_LIST.md`, B):
 1-year $10,184 vs $9,818, blown 3% vs 4%; beats every random-day placebo. Combine: leave `FlaggedContracts` -1.
 
 | Strategy | File | Chart | Funded inputs (full size) | Trades |
 |---|---|---|---|---|
-| Vault Break | `../apex_strategies/NQ_Vault_Break.txt` | 30 min MNQ | `NumContracts` 3 | ~107 a year |
+| Vault Break | `../apex_strategies/NQ_Vault_Break_SP.txt` | 30 min MNQ | `NumContracts` 3, `FlaggedContracts` 1 | ~107 a year |
 | Overnight Bias ML (v2) | `NQ_Overnight_Bias_ML.txt` | 15 min MNQ | `RiskPerTrade` 400 | ~38 a year |
 | Monday Long | `NQ_Monday_Long.txt` | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 | every Monday |
 | Expiration Open Short | `NQ_Expiration_Open_Short.txt` | 5 min MNQ | `RiskPerTrade` 700 | 12 a year |
