@@ -572,6 +572,31 @@ days = 21 trading days). Current set: 50.1% pass (2018–22 46.7%, 2023–26 54.
   simplest way: replace each finished or failed combine immediately, which staggers them naturally, and buy the next
   slot's combine a week or two after the last). Live: one combine since 2026-10-12 (shakedown week); add the next ones 5–10 trading days apart.
 
+### Ramp to Apex's 20-account limit (2026-10-15)
+
+Code `../analysis/ramp_to_20_test.py` (output in `..._output.txt`). Slots = accounts (challenge → funded → next
+challenge), all on the same copier plan; $50 a challenge, $85 activation; every 10th start day 2018–2023, 3 years.
+Cash = payouts − fees, medians (p10 = bad case):
+
+| Schedule | 3 m | 6 m | 12 m | 24 m | 36 m | 12 m p10 | Worst cash p10 |
+|---|---|---|---|---|---|---|---|
+| A 3 slots | −$455 | $3,995 | $29,295 | $60,440 | $89,685 | $2,915 | −$805 |
+| B +1 a week to 20 | −$1,785 | $11,650 | $129,650 | $349,200 | $568,550 | $11,220 | −$4,300 |
+| C +2 a week to 20 | −$2,855 | $19,300 | $151,300 | $366,100 | $578,000 | $16,780 | −$4,450 |
+| **D 3 for 2 months, then +2 a week** | −$1,405 | $8,200 | $115,500 | $340,650 | $564,200 | $8,970 | −$4,350 |
+| E 20 at once | −$2,700 | $27,300 | $196,300 | $403,600 | $603,900 | $25,300 | −$5,700 |
+
+At 75% of the edge (challenge pass 40.7%): A $9,445 / $62,540 (12 / 36 m), B–E $46k–93k / $402k–409k, 12-month p10
+−$10k to −$12k for any 20-slot schedule (A −$1,670).
+- Faster is richer IF the edge is real (each slot is worth ~$13k per funded cycle); the cost of ramping is fees spent
+  before the first payouts (worst cash −$4k to −$6k) and, if the edge is weaker or gone, fees keep burning: with no edge
+  20 slots buy about 20 challenges a month (~$1,000 a month at $50 each, more at full price).
+- **Recommended: D.** Run 3 slots for ~2 months (~40 live plan trades), then add 2 accounts a week to 20 only if the live
+  edge ratio is ≥ 0.75 (`../analysis/live_vs_backtest.py`); costs ~$36k of first-year median vs C, buys the live check.
+- Every account copies the same plan, so 20 accounts are one bet sized 20x (staggering only spreads start dates):
+  a bad month hits all of them. Check whether Apex's 20 counts evaluations + PAs together, and that the copier and
+  MultiCharts handle 20 followers.
+
 ### Tuning the sizing for the whole pipeline (2026-10-14)
 
 Code `../analysis/pipeline_tuning_test.py` (output in `..._output.txt`). One slot, 70 start months, 3 years, net of
