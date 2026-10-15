@@ -16,14 +16,15 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Live status (2026-10-14)
 
-- **3 combine accounts started together** (trade copier allowed by Apex: one master per phase). First live days:
+- **1 combine account live since Monday 2026-10-12** (user corrected 2026-10-15: running one account first as a shakedown
+  week for errors / screen sleep; 2 of 2 trades so far). Plan: add accounts one at a time, 5–10 trading days apart. First live days:
   - **Monday 10/12:** a winning trade was missed because the connection dropped.
   - **Tuesday 10/14:** the Overnight Bias short (5 MNQ) was rejected by Rithmic: *"Invalid StopMarket order
     parameters"*, a sell stop placed above the market.
     - **Fixed:** all Overnight Bias versions now enter at market when price is already at / through the
       opening-range level (`EntryBufTicks` 2). The new order names are "ON Bias LM / SM".
     - **User must paste and compile the new code before the next open.**
-  - Accounts still flat at $50,000; pass odds unchanged (~50%).
+  - Pass odds per account unchanged (~50%).
 - **All strategy files were audited:** every other entry is a market order; order names are unique per file.
 - **Combine set** (`apex_strategies/`, MNQ, 24-hour session, Exchange time CT):
 

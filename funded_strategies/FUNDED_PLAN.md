@@ -570,7 +570,7 @@ days = 21 trading days). Current set: 50.1% pass (2018–22 46.7%, 2023–26 54.
   Expected passes are the same either way (0.5 per account), but same-day starts are one bet placed 3 times: all pass or
   all fail together. **Start each new combine at least 5, ideally 10, trading days after the previous one** (the
   simplest way: replace each finished or failed combine immediately, which staggers them naturally, and buy the next
-  slot's combine a week or two after the last). The 3 live combines started 2026-10-12 together will share one outcome.
+  slot's combine a week or two after the last). Live: one combine since 2026-10-12 (shakedown week); add the next ones 5–10 trading days apart.
 
 ### Tuning the sizing for the whole pipeline (2026-10-14)
 
