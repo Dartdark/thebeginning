@@ -1,0 +1,8 @@
+Anti-hedging lock (user's PDF 'MultiCharts Prop-Firm Anti-Hedging Lock', 2026-10-15) vs netting, on the funded plan.
+NQ plan trades: 3834 ({'VB': 1743, 'LDF_MC': 897, 'MON_MC': 450, 'ONB_ML2_MC': 343, 'MON_BR_MC': 217, 'EOS': 105, 'NFP_MC': 79})
+MODE any
+trades the script would delete: 1092 (28.5%); by strategy {'VB': 386, 'LDF_MC': 374, 'MON_MC': 177, 'ONB_ML2_MC': 155}
+   their P&L per NQ: total $260,533, avg $239 (all plan trades avg $221)
+trades entered while a SAME-side plan trade is open (size stacks, nothing rejected): 1067
+   plan as is (trades summed)         $9,818 / $12,595  paid 93%  blown 4% / 2%
+   plan with the lock / deletions     $6,933 / $11,375  paid 81%  blown 9% / 5%

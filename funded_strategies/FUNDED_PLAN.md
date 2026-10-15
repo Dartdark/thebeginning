@@ -577,6 +577,11 @@ fees. Scored at the backtest edge and at 75% of it.
     symbol simply nets; (2) let each chart send its own entries / exits (do not let MultiCharts 'sync' a chart to the
     broker's net position); (3) on a netted account the broker shows the NET position, so a chart can be 'long' while the
     account is flat - check fills per chart, not the account position.
+  - **Anti-hedging 'global lock' (user's PDF, 2026-10-15, `../analysis/anti_hedge_lock_check.py`):** blocking any entry while
+    another plan strategy holds a position removes 1,092 of 3,834 NQ trades (28.5%; ONB ML 155, VB 386, LDF 374, Monday 177;
+    they average $239 vs $221) and drops the bench from $9,818 / $12,595, paid 93%, blown 4% / 2% to $6,933 / $11,375, paid
+    81%, blown 9% / 5%. Do NOT use it. Netting on one account / one symbol is not a hedge; never split different strategies
+    across accounts -- give every account the whole plan (copier), so all accounts always hold the same direction.
   - Scale 1.25 (+19% at the edge, +25% at 75%) costs more blown accounts (1.4–2.7 per slot over 3 years). Consider
     it only after the live edge ratio is ≥ 0.9 over ~40 trades.
   - Caveat: in-sample, and medians move in steps of the payout amounts.
