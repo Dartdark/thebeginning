@@ -1,6 +1,6 @@
 """Apex 150K EOD Performance Account: a copy of funded_sim.py with the 150K numbers (2026-10-15; user: $4,000 drawdown,
-$2,000 DLL; payout ladder 2,400 / 2,400 / 3,100 / 3,900 / 3,900 / 4,800 = $20,500 and the $350 qualifying day ASSUMED from
-2026 guides). Docstring below is the 50K original.
+$2,000 DLL; payout ladder 2,500 / 3,000 / 3,000 / 3,000 / 4,000 / 5,000 = $20,500, $350 qualifying day, safety net $154,100, min request
+$154,600: Apex's pages, user's screenshots 2026-10-15). Docstring below is the 50K original.
 
 Apex 50K EOD Performance Account (funded phase): payouts on real days.
 
@@ -55,7 +55,7 @@ SAFETY = 154_100.0
 MIN_PAYOUT = 500.0
 MIN_DAY = 350.0
 MIN_DAYS = 5
-CAPS = np.array([2400.0, 2400.0, 3100.0, 3900.0, 3900.0, 4800.0])
+CAPS = np.array([2500.0, 3000.0, 3000.0, 3000.0, 4000.0, 5000.0])
 FULL = CAPS.sum()
 
 

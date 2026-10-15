@@ -602,18 +602,41 @@ At 75% of the edge (challenge pass 40.7%): A $9,445 / $62,540 (12 / 36 m), B–E
 Code `../analysis/plan_150k_test.py`, `../analysis/slot_150k_vs_50k_test.py` (simulators `../analysis/funded_sim150.py`,
 `../analysis/account_pipeline150.py` = the 50K ones with 150K numbers; the 50K check reproduces the funded bench exactly).
 150K rules used: evaluation +$9,000 in 30 days, $4,000 EOD trailing drawdown (locks $150,100), $2,000 daily loss pause;
-funded: 6 payouts, $20,500 in all (**ladder 2,400 / 2,400 / 3,100 / 3,900 / 3,900 / 4,800 and the $350 qualifying day are
-ASSUMED from 2026 guides; confirm in the dashboard**).
+funded: 6 payouts, $20,500 in all (ladder 2,500 / 3,000 / 3,000 / 3,000 / 4,000 / 5,000, $350 qualifying days, request from
+$154,600: Apex's pages, user's screenshots in the repo root, 2026-10-15).
 - **Evaluation:** the combine set x 2.5 passes 41.6% (2018–22 38.9%, 2023–26 45.4%; x 2 38.7%, x 3 40.7%), vs 50.1% on the
   50K: the 150K target is 2.25x its drawdown (50K 1.5x). Adding Twin cap1 does not help (39–42%).
   Inputs x 2.5: VB 20 MNQ, ONB ADX30 `RiskPerTrade` 2750, Bridge Monday 5 MNQ, EOS `RiskPerTrade` 1250.
-- **Funded:** the funded plan x 1.5 with full size from a **$3,000** cushion: $15,866 / $19,725 (1 / 2 years), **blown 0% /
-  0%**, all 6 payouts within 2 years 91%. Bigger (x 2–3) or a faster cushion blows 9–37%; Twin adds nothing.
+- **Funded:** the funded plan x 1.5 with full size from a **$3,000** cushion: $15,731 / $19,743 (1 / 2 years), **blown 0% /
+  0%**, all 6 payouts within 2 years 91% (real ladder; the assumed one gave $15,866 / $19,725). Bigger (x 2–3) or a faster cushion blows 9–37%; Twin adds nothing.
   Inputs x 1.5 (whole MNQ, rounded down): VB 4 (`FlaggedContracts` 1), ONB ML $600, Monday 1, EOS $1,050, LDF 3, NFP $750,
   Bridge Monday 1, CL fade 3 MCL; half size while the cushion is under $1,500, full from $3,000.
 - **Per slot over 3 years** (before fees): 50K $35.4k mean payouts (6.1 challenges, 3.5 funded); **150K $54.8k** (7.7
   challenges, 3.3 funded) = **+55% per slot**. With Apex's 20-account cap, a 150K slot is worth more as long as its
   evaluation + activation cost less than about $2,500 more per funded account than the 50K's.
+
+### Which Apex path: 50K or 150K, with or without the activation fee (2026-10-15)
+
+Code `../analysis/apex_paths_test.py` (output in `..._output.txt`). Prices from the user's screenshots: 50K EOD $59 (5-pack
+$24.50 each) + $130 activation; 50K no-activation $119 (5-pack $109); 150K EOD $219 (5-pack $199) + $150 activation; 150K
+no-activation $249. One slot = one account at a time, every 5th start day 2018–2023, 3 years, means:
+
+| Rank | Path | Cost per funded account | Fees over 3 years | Net 12 months | Net 36 months | Net per $1 of fees |
+|---|---|---|---|---|---|---|
+| 1 | **150K no-activation ($249)** | $598 | $1,954 | $13,351 | **$52,788** | 27 |
+| 2 | 150K EOD 5-pack ($199 + $150) | $628 | $2,060 | $13,316 | $52,682 | 26 |
+| 3 | 150K EOD single ($219 + $150) | $676 | $2,216 | $13,264 | $52,525 | 24 |
+| 4 | **50K EOD 5-pack ($24.50 + $130)** | $179 | $598 | $9,248 | $34,813 | **58** |
+| 5 | 50K no-activation 5-pack ($109) | $218 | $661 | $9,227 | $34,751 | 53 |
+| 6 | 50K no-activation single ($119) | $238 | $721 | $9,207 | $34,690 | 48 |
+| 7 | 50K EOD single ($59 + $130) | $248 | $808 | $9,178 | $34,604 | 43 |
+
+- Payouts per slot: 50K $9,447 / $22,029 / $35,411 (12 / 24 / 36 months), 150K $14,003 / $32,802 / $54,742.
+- Speed: median trading days from the first evaluation to the first payout 87 (50K) vs 95 (150K); to one full
+  account's worth ($13,000 / $20,500) 249 vs 263. The 50K is about 2 weeks quicker to each milestone, the 150K pays ~50%
+  more per slot. Fees are 2–4% of payouts on every path, so the account size decides, not the fee option.
+- Within a size the fee option changes the 3-year net by under $300. 150K: no-activation is cheapest (fails cost $249,
+  the $150 activation is paid only on a pass, but 2.4 tries x $30 more for EOD + $150 > $0). 50K: EOD 5-pack is cheapest.
 
 ### Tuning the sizing for the whole pipeline (2026-10-14)
 

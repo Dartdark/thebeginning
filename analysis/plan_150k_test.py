@@ -1,7 +1,7 @@
 """The plan scaled up on an Apex 150K account (user, 2026-10-15). 150K rules as in analysis/twin_150k_test.py (evaluation
 +$9,000 in 21 trading days, $4,000 EOD trailing drawdown locking at $150,100, $2,000 daily loss pause; funded: request at
 safety net $154,100 + the payout's cap, 5 days >= $350 since the last payout, 50% consistency, 6 payouts $20,500 with the
-assumed ladder 2,400 / 2,400 / 3,100 / 3,900 / 3,900 / 4,800). Same simulator also run with the 50K rules on the 50K plan
+ladder 2,500 / 3,000 / 3,000 / 3,000 / 4,000 / 5,000 (Apex, user's screenshots)). Same simulator also run with the 50K rules on the 50K plan
 as a check against the funded bench ($10,184 / $12,450, blown 3% / 3%).
   A  evaluation: the 50K combine set x 1.5 / 2 / 2.5 / 3; + Twin cap1 4-8 MNQ; the funded plan x 2-4
   B  funded PA: the current funded plan (VB_N 3 / VB_F 1, ONB ML $400, Monday 1, EOS $700, LDF 2, NFP $500, Bridge Monday 1,
@@ -22,7 +22,7 @@ from twin_continuation_bench import grids
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 ONB30 = "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"
 R150 = dict(st=150_000.0, dd=4_000.0, dll=2_000.0, lock=150_100.0, tgt=9_000.0, safe=154_100.0, qday=350.0,
-            caps=[2400.0, 2400.0, 3100.0, 3900.0, 3900.0, 4800.0])
+            caps=[2500.0, 3000.0, 3000.0, 3000.0, 4000.0, 5000.0])
 R50 = dict(st=50_000.0, dd=2_000.0, dll=1_000.0, lock=50_100.0, tgt=3_000.0, safe=52_100.0, qday=250.0,
            caps=[1500.0, 1500.0, 2000.0, 2500.0, 2500.0, 3000.0])
 

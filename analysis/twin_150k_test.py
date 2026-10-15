@@ -6,7 +6,7 @@ consistency rule bit (analysis/twin_apex_test.py). The 150K doubles the drawdown
               limit (pauses the day), 30 calendar days = 21 trading days
   funded PA   same drawdown / lock / DLL; payout when the balance >= $154,600 (safety net $154,100 + $500), 5 days of
               >= $350 since the last payout, best day < 50% of the profit since the last payout; 6 payouts, $20,500 in
-              all (assumed ladder 2,400 / 2,400 / 3,100 / 3,900 / 3,900 / 4,800, the 50K ladder scaled), then it closes
+              all (ladder 2,500 / 3,000 / 3,000 / 3,000 / 4,000 / 5,000 (Apex, user's screenshots), the 50K ladder scaled), then it closes
 Twin as MultiCharts-confirmed (v2.1 defaults) and with the breakout stop capped at 1 ATR ('cap1'); fixed MNQ sizes; costs
 as always; a day = its lowest open-equity P&L and its close (paths from twin_continuation_bench.grids). Every start day
 2018-2025 (1 year) / 2018-2024 (2 years); evaluation every start day 2018-2026. Funded also with cushion sizing.
@@ -19,7 +19,7 @@ from twin_continuation_bench import grids
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 ST, DD, DLL, LOCK, TGT = 150_000.0, 4_000.0, 2_000.0, 150_100.0, 9_000.0
-SAFE, MINREQ, QDAY, CAPS = 154_100.0, 154_600.0, 350.0, [2400.0, 2400.0, 3100.0, 3900.0, 3900.0, 4800.0]
+SAFE, MINREQ, QDAY, CAPS = 154_100.0, 154_600.0, 350.0, [2500.0, 3000.0, 3000.0, 3000.0, 4000.0, 5000.0]
 
 
 def evaluation(W, R, s, q, D):
