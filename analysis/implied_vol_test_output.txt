@@ -1,0 +1,54 @@
+Implied volatility as the volatility unit (user's 3 resources, 2026-10-15: Cboe VIX methodology -- VIX / VXN are 30-day
+
+A. NQ with VXN (2237 days): R^2 of log day-session realised vol / range on log predictors
+   rv   implied 0.443  ATR15 0.370  yesterday RV 0.398  20-day RV 0.325  history (ATR+RV1+RV20) 0.464  implied + history 0.503
+   rng  implied 0.358  ATR15 0.293  yesterday RV 0.324  20-day RV 0.263  history (ATR+RV1+RV20) 0.373  implied + history 0.405
+   2018-22: rv ~ implied 0.503, ~ history 0.530, ~ both 0.566
+   2023-26: rv ~ implied 0.294, ~ history 0.306, ~ both 0.351
+   bias: mean |close-to-close| / implied sigma 0.66 (|N(0,1)| would be 0.80); day-session RV / implied 0.59 (median); implied > realised close-to-close sd: True (1.51% vs 1.43%)
+
+A. ES with VIX (2254 days): R^2 of log day-session realised vol / range on log predictors
+   rv   implied 0.483  ATR15 0.402  yesterday RV 0.455  20-day RV 0.347  history (ATR+RV1+RV20) 0.513  implied + history 0.548
+   rng  implied 0.404  ATR15 0.325  yesterday RV 0.388  20-day RV 0.287  history (ATR+RV1+RV20) 0.428  implied + history 0.460
+   2018-22: rv ~ implied 0.529, ~ history 0.580, ~ both 0.605
+   2023-26: rv ~ implied 0.351, ~ history 0.345, ~ both 0.405
+   bias: mean |close-to-close| / implied sigma 0.60 (|N(0,1)| would be 0.80); day-session RV / implied 0.53 (median); implied > realised close-to-close sd: True (1.22% vs 1.13%)
+
+B. Vault Break v1 exits: fixed 40 / 75 points vs scaled by implied sigma / ATR (median day keeps 40 / 75)
+   median implied sigma 212 pts, median ATR 257 pts
+fixed 40 / 75                  n= 1758 win 66% avg $   92 PF 1.26 t= 4.3 yrs+ 9/9 | 18-22 $  89 PF 1.29 | 23-26 $  94 PF 1.24
+      by year: {2018: 4569, 2019: 3256, 2020: 26420, 2021: 26865, 2022: 16022, 2023: 26332, 2024: 13562, 2025: 34567, 2026: 9412}
+implied-sigma scaled           n= 1499 win 64% avg $   55 PF 1.13 t= 1.9 yrs+ 7/9 | 18-22 $  54 PF 1.16 | 23-26 $  55 PF 1.11
+      by year: {2018: 447, 2019: -380, 2020: 17428, 2021: 18296, 2022: 7272, 2023: 19439, 2024: 10666, 2025: 24060, 2026: -15500}
+ATR scaled                     n= 1478 win 64% avg $   57 PF 1.14 t= 2.0 yrs+ 7/9 | 18-22 $  45 PF 1.13 | 23-26 $  71 PF 1.14
+      by year: {2018: 4284, 2019: -430, 2020: 709, 2021: 23140, 2022: 6991, 2023: 28888, 2024: 5490, 2025: 15684, 2026: -151}
+
+Standard metrics per NQ (Vault Break is long only):
+                     trades win avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+fixed 40 / 75          1758 66% $92 $17,718   1.34    2.06          1.26 $13,906   1.27  3.06      11.59
+implied-sigma scaled   1499 64% $55  $8,994   0.62    0.87          1.13 $22,992   0.39  4.62       3.90
+ATR scaled             1478 64% $57  $9,310   0.64    0.90          1.14 $17,690   0.53  5.02       3.71
+2023+ bootstrap:
+                                     actual        p5       p50       p95
+name                 metric                                              
+fixed 40 / 75        sharpe            1.37      0.59      1.39      2.16
+                     sortino           2.09      0.85      2.13      3.52
+                     pf_day            1.39      1.15      1.40      1.69
+                     calmar            1.54      0.39      1.39      3.07
+                     ulcer             5.24      2.92      5.78     13.99
+                     max_dd       13,905.50 10,030.25 15,615.88 27,380.04
+                     P(Sharpe<=0)       NaN       NaN      0.00       NaN
+implied-sigma scaled sharpe            0.54     -0.28      0.57      1.37
+                     sortino           0.75     -0.36      0.80      2.04
+                     pf_day            1.14      0.93      1.15      1.39
+                     calmar            0.43     -0.11      0.37      1.46
+                     ulcer             7.58      5.38     13.63     43.31
+                     max_dd       22,992.30 14,927.12 26,741.71 53,874.09
+                     P(Sharpe<=0)       NaN       NaN      0.13       NaN
+ATR scaled           sharpe            0.71     -0.08      0.73      1.52
+                     sortino           1.01     -0.11      1.05      2.32
+                     pf_day            1.18      0.98      1.19      1.44
+                     calmar            0.72     -0.04      0.56      1.71
+                     ulcer             6.78      4.66     11.11     33.99
+                     max_dd       17,689.51 14,018.01 23,619.14 46,421.32
+                     P(Sharpe<=0)       NaN       NaN      0.07       NaN

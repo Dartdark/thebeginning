@@ -37,7 +37,9 @@ def sim(g, ent, B, rule):
         if k == "ladder":
             R_ = rule["r"] * Bd; stop = ef - R_; tgt = ef + rule["a"] * R_; step = 0; qty = 1.0; pnl = 0.0; slips = 0
         else:
-            stop = ef - rule.get("sl", 75.0); tgt = ef + rule.get("tp", 1e9)
+            sl_ = rule.get("sl", 75.0); tp_ = rule.get("tp", 1e9)
+            sl_ = sl_[d] if hasattr(sl_, "__len__") else sl_; tp_ = tp_[d] if hasattr(tp_, "__len__") else tp_   # per-day arrays allowed
+            stop = ef - sl_; tgt = ef + tp_
             if k == "band": stop = max(stop, so + rule["kx"] * Bd)
         j_end = flat; done = False
         for m in range(m0, flat + 1):
