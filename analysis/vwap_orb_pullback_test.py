@@ -39,7 +39,7 @@ def pivots(h, l, n):
 
 
 def run(g, s, sh, sl, th, tl, apex=True, retest=1, stopmode=1, minrr=0.0, longs=True, shorts=True, rand=None, bias=None, exit_t=None,
-        gate=None, end_entry=None):
+        gate=None, end_entry=None, fsl=None, ftp=None):
     """gate: optional boolean per bar of the series (e.g. an ADX condition on the signal bar; it delays, the latches stay)."""
     O, H, L, C, V, row, col = s["o"], s["h"], s["l"], s["c"], s["v"], s["row"], s["col"]
     N = len(C); hhmm = (col // 60) * 100 + col % 60
@@ -110,6 +110,9 @@ def run(g, s, sh, sl, th, tl, apex=True, retest=1, stopmode=1, minrr=0.0, longs=
         j = k + 1
         if j >= N: continue
         e = O[j] + side * TICK; px = None; kind = 0
+        if fsl is not None:                      # fixed exits (points, or per-day arrays) anchored to the entry price
+            sl_ = fsl[row[k]] if hasattr(fsl, '__len__') else fsl; tp_ = ftp[row[k]] if hasattr(ftp, '__len__') else ftp
+            stop, tgt = O[j] - side * sl_, O[j] + side * tp_
         while j < N:
             if (L[j] <= stop) if side > 0 else (H[j] >= stop):
                 px = ((min(O[j], stop) if side > 0 else max(O[j], stop)) if j > k + 1 else stop) - side * TICK; break
