@@ -18,6 +18,9 @@ Ranked by expected value per unit of research, from what has worked so far:
 4. **Execution**: fewer missed / rejected orders (MULTICHARTS_PITFALLS), lower commissions as volume grows, limit instead of
    market fills where a backtest shows no adverse selection.
 5. **Pruning**: retire or halve strategies the live drift alarm flags; a dead edge costs more than a missing one.
+Round 5 forced flows (2026-10-16, `analysis/forced_flows_round5_test.py`): ES stocks-vs-bonds month-end rebalancing D
+(t 1.2; last day only t 1.6, all of it 2023–26), gold FND long liquidation F (t 0.1), CL holiday-reopen fade too rare
+(4 trades). Monte Carlo (`analysis/montecarlo.py`) now part of every test.
 Guardrails: every change goes through DEVELOPMENT_PROCESS (multiple-testing bar, placebo, checker, Apex incubation); each
 new tweak raises the number of trials and the bar for the next one, so prefer new independent edges over re-tuning.
 

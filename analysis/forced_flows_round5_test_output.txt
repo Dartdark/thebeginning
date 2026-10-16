@@ -1,0 +1,64 @@
+Forced flows on ES and gold, round 5 (user, 2026-10-16: 'find strategies on ES, gold or oil based on forced flows' +
+
+=== E1: rebalancing flow, conditional on stocks vs bonds
+
+  ES:
+   month-ends, all (last 3 days)                  n= 315 win 51% avg $   124 PF 1.21 t +1.2 yrs+ 6/9 | 18-22 $    71 23-26 $   195
+   quarter-ends only                              n= 105 win 48% avg $   -23 PF 0.96 t -0.1 yrs+ 5/9 | 18-22 $  -116 23-26 $   102
+   strong |S| (above past median)                 n= 126 win 48% avg $   156 PF 1.27 t +0.9 yrs+ 5/8 | 18-22 $   213 23-26 $    54
+   strong quarter-ends                            n=  36 win 50% avg $   134 PF 1.32 t +0.7 yrs+ 5/8 | 18-22 $   230 23-26 $   -59
+     day T-2 only                                 n= 105 win 48% avg $    42 PF 1.07 t +0.2 yrs+ 5/9 | 18-22 $   208 23-26 $  -178
+     day T-1 only                                 n= 105 win 48% avg $    16 PF 1.03 t +0.1 yrs+ 3/9 | 18-22 $    54 23-26 $   -35
+     day T (last day) only                        n= 105 win 58% avg $   314 PF 1.55 t +1.6 yrs+ 5/9 | 18-22 $   -49 23-26 $   798
+   control: same rule mid-month (days 9-11)       n= 315 win 45% avg $   -64 PF 0.90 t -0.6 yrs+ 3/9 | 18-22 $  -152 23-26 $    52
+   control: random sides on the same days: avg $-34 (5-95% -201..135)
+                   trades win  avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+ES month-ends, all    315 51% $124 $4,356   0.40    0.59          1.21 $20,945   0.21 10.94       0.80
+  longs               108 51% $135 $1,623   0.19    0.27          1.15 $15,452   0.11  8.59       0.38
+  shorts              207 51% $118 $2,733   0.41    0.62          1.27 $13,632   0.20  9.19       0.59
+   Monte Carlo ES month-ends as 1 MES (x0.1): trades 315 | total p5 $-1,468 / p50 $3,832 / p95 $9,274, P(total <= 0) 11.3%
+      max DD actual $2,094 (rank 36%), shuffled p50 $2,405 / p95 $4,749 / p99 $6,243; losing streak actual 6, p95 11
+      252-day block bootstrap: P&L p5 $-1,144 / p50 $368 / p95 $2,100, P(loss) 35.4%, max DD p95 $1,768, P(hit $2,000 EOD trailing) 2.7%
+
+  NQ:
+   month-ends, all (last 3 days)                  n= 312 win 49% avg $   206 PF 1.19 t +1.1 yrs+ 8/9 | 18-22 $   120 23-26 $   317
+   quarter-ends only                              n= 105 win 48% avg $    70 PF 1.07 t +0.2 yrs+ 4/9 | 18-22 $  -205 23-26 $   437
+   strong |S| (above past median)                 n= 120 win 51% avg $   405 PF 1.43 t +1.3 yrs+ 6/8 | 18-22 $   777 23-26 $  -154
+   strong quarter-ends                            n=  39 win 54% avg $   312 PF 1.44 t +0.9 yrs+ 5/8 | 18-22 $   250 23-26 $   411
+     day T-2 only                                 n= 104 win 46% avg $    91 PF 1.08 t +0.3 yrs+ 4/9 | 18-22 $   313 23-26 $  -200
+     day T-1 only                                 n= 104 win 50% avg $    35 PF 1.03 t +0.1 yrs+ 5/9 | 18-22 $    -1 23-26 $    81
+     day T (last day) only                        n= 104 win 52% avg $   491 PF 1.51 t +1.5 yrs+ 5/9 | 18-22 $    49 23-26 $  1071
+   control: same rule mid-month (days 9-11)       n= 312 win 44% avg $   -77 PF 0.94 t -0.4 yrs+ 2/9 | 18-22 $  -149 23-26 $    16
+   control: random sides on the same days: avg $-31 (5-95% -337..286)
+
+=== G1: gold first-notice-day liquidation (short 7:20 -> 12:30 CT, 3 days before FND)
+   short, 3 days before FND (active months)       n= 159 win 50% avg $    25 PF 1.05 t +0.1 yrs+ 6/9 | 18-22 $   -60 23-26 $   137
+     day FND-3 only                               n=  53 win 55% avg $   254 PF 1.91 t +1.5 yrs+ 7/9 | 18-22 $    37 23-26 $   536
+     day FND-2 only                               n=  53 win 51% avg $  -235 PF 0.65 t -1.0 yrs+ 4/9 | 18-22 $  -208 23-26 $  -270
+     day FND-1 only                               n=  53 win 43% avg $    58 PF 1.08 t +0.1 yrs+ 3/9 | 18-22 $   -10 23-26 $   145
+   info: long on FND day itself (rebound)         n=  52 win 42% avg $  -588 PF 0.51 t -0.9 yrs+ 4/9 | 18-22 $   -74 23-26 $ -1290
+   control: same days, non-delivery months        n= 159 win 48% avg $    74 PF 1.15 t +0.5 yrs+ 5/9 | 18-22 $    99 23-26 $    42
+   control: random sides on the FND days: avg $-31 (5-95% -333..258)
+             trades win avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+GC FND short    159 50% $25   $450   0.05    0.08          1.05 $19,738   0.02 13.87       0.06
+   Monte Carlo GC FND short as 1 MGC (x0.1): trades 159 | total p5 $-4,114 / p50 $280 / p95 $5,120, P(total <= 0) 45.9%
+      max DD actual $1,974 (rank 34%), shuffled p50 $2,458 / p95 $5,283 / p99 $6,628; losing streak actual 7, p95 10
+      252-day block bootstrap: P&L p5 $-1,279 / p50 $11 / p95 $1,606, P(loss) 49.3%, max DD p95 $1,601, P(hit $2,000 EOD trailing) 1.5%
+
+=== O1: CL holiday-reopen up-gap fade (Sunday fade rule on non-Sunday breaks >= 20 h)
+   holiday reopens 2018-26: 13 (12 usable); dates: 2018-01-02, 2018-12-26, 2019-01-02, 2019-12-26, 2020-01-02, 2022-12-27, 2023-01-03, 2023-12-26, 2024-01-02, 2024-12-26, 2025-01-02, 2025-12-26 ...
+   short holiday up-gaps >= 0.1 ATR (the rule)    n=4
+     >= 0.25 ATR                                  n=1
+   control: long holiday down-gaps >= 0.1 ATR (fade) n=0
+   control: ordinary weekday reopen up-gap short  n=  29 win 34% avg $  -392 PF 0.63 t -0.9 yrs+ 3/8 | 18-22 $     1 23-26 $  -669
+   reference: Sunday up-gap fade (in the plan)    n=  93 win 66% avg $   620 PF 3.03 t +3.2 yrs+ 9/9 | 18-22 $   527 23-26 $   687
+   Sunday + holiday reopens together              n=  97 win 65% avg $   601 PF 3.04 t +3.3 yrs+ 9/9 | 18-22 $   492 23-26 $   684
+                    trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+CL Sunday fade          93 66% $620 $6,377   1.03    2.83          3.03 $5,266   1.21  1.12      11.38
+CL Sunday + holiday     97 65% $601 $6,445   1.04    2.86          3.04 $5,266   1.22  1.11      11.66
+   Monte Carlo CL Sunday fade as 2 MCL (the plan) (x0.2): trades 93 | total p5 $5,921 / p50 $11,406 / p95 $17,464, P(total <= 0) 0.0%
+      max DD actual $1,053 (rank 49%), shuffled p50 $1,066 / p95 $1,976 / p99 $2,492; losing streak actual 4, p95 6
+      252-day block bootstrap: P&L p5 $-480 / p50 $981 / p95 $3,878, P(loss) 14.2%, max DD p95 $993, P(hit $2,000 EOD trailing) 0.0%
+   Monte Carlo CL Sunday + holiday as 2 MCL (x0.2): trades 97 | total p5 $5,959 / p50 $11,474 / p95 $17,643, P(total <= 0) 0.0%
+      max DD actual $1,053 (rank 49%), shuffled p50 $1,064 / p95 $1,962 / p99 $2,510; losing streak actual 4, p95 6
+      252-day block bootstrap: P&L p5 $-463 / p50 $1,000 / p95 $3,878, P(loss) 13.9%, max DD p95 $992, P(hit $2,000 EOD trailing) 0.0%

@@ -68,6 +68,11 @@ for the whole strategy and each side:
 3. **Apex window risk**: share of start days with a $2,000 drawdown in the next 20 / 60
    trading days, real order vs shuffled. Real above the shuffled band means losses cluster,
    so the i.i.d. challenge simulator understates the risk.
+4. **Monte Carlo** (since 2026-10-16, `analysis/montecarlo.py`, `MC.report(trades, daily, size=...)`): reshuffle the
+   trades (10,000 bootstrap runs: 5/50/95% total, P(total ≤ 0), shuffled max drawdown 50/95/99% and where the real one
+   ranks, longest losing streak) and block-bootstrap one year of daily P&L (P(loss), 95% drawdown, P(hitting the $2,000
+   Apex EOD trailing drawdown)) at the size the strategy would actually trade (e.g. 0.1 for one micro). Every new test
+   prints it; a strategy whose one-year P(trailing hit) at plan size is above ~5% needs smaller size or a cushion rule.
 
 ## Step 4: decide and recombine
 

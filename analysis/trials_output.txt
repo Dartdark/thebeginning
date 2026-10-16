@@ -1,28 +1,28 @@
 Trials log and multiple-testing check (added 2026-10-15).
 
-TRIALS.csv: 206 ranked items, 837 variants in all; by tier {'S': 1, 'A': 9, 'B': 15, 'C': 20, 'D': 43, 'F': 118}
+TRIALS.csv: 223 ranked items, 865 variants in all; by tier {'S': 1, 'A': 10, 'B': 16, 'C': 21, 'D': 50, 'F': 125}
 
 The bar for the best of N trials (one-sided 5%):
    one pre-registered test  N     1: |t| >= 1.64; best noise Sharpe on 252 days x sqrt(252) = 0.00, on 1,000 trades per trade x sqrt(n) = 0.00
    a 10-variant scan        N    10: |t| >= 2.58; best noise Sharpe on 252 days x sqrt(252) = 1.58, on 1,000 trades per trade x sqrt(n) = 1.58
-   N_items                  N   206: |t| >= 3.49; best noise Sharpe on 252 days x sqrt(252) = 2.78, on 1,000 trades per trade x sqrt(n) = 2.78
-   N_all                    N   837: |t| >= 3.85; best noise Sharpe on 252 days x sqrt(252) = 3.21, on 1,000 trades per trade x sqrt(n) = 3.21
+   N_items                  N   223: |t| >= 3.51; best noise Sharpe on 252 days x sqrt(252) = 2.81, on 1,000 trades per trade x sqrt(n) = 2.80
+   N_all                    N   865: |t| >= 3.86; best noise Sharpe on 252 days x sqrt(252) = 3.22, on 1,000 trades per trade x sqrt(n) = 3.22
 
 Deflated Sharpe of the plan's strategies (per trade, MultiCharts lists, $7.25 + 1 tick):
                   strategy  trades    t   PSR  DSR_items  DSR_all  passes_items  MinTRL  regime_rho
-               Vault Break    1743 4.25 1.000      0.920    0.841         False     287        0.80
+               Vault Break    1743 4.25 1.000      0.917    0.839         False     287        0.80
       Overnight Bias ML v2     343 5.04 1.000      0.992    0.975          True      33        0.67
-               Monday Long     450 3.34 1.000      0.722    0.557         False     101        0.52
-     Expiration Open Short     105 2.58 0.995      0.416    0.258         False      42        0.75
-             Late-Day Flow     895 3.51 1.000      0.786    0.629         False     169        0.42
-                  NFP Fade      79 1.85 0.977      0.157    0.071         False      54        0.60
-        Bridge Monday Long     217 4.36 1.000      0.904    0.829         False      46        0.40
-Vol-Control Sell (dropped)      71 2.14 0.993      0.223    0.103         False      32        0.61
+               Monday Long     450 3.34 1.000      0.713    0.553         False     101        0.52
+     Expiration Open Short     105 2.58 0.995      0.406    0.255         False      42        0.75
+             Late-Day Flow     895 3.51 1.000      0.778    0.625         False     169        0.42
+                  NFP Fade      79 1.85 0.977      0.151    0.070         False      54        0.60
+        Bridge Monday Long     217 4.36 1.000      0.900    0.827         False      46        0.40
+Vol-Control Sell (dropped)      71 2.14 0.993      0.214    0.101         False      32        0.61
 
-Tier S-B items: quoted t vs t_threshold(N_items) = 3.49 (t not quoted = blank):
+Tier S-B items: quoted t vs t_threshold(N_items) = 3.51 (t not quoted = blank):
 tier                                                                                                                                         item  variants  t_quoted  clears
    S                                                                                              Overnight Bias ML (v2: longs need score ≥ 0.03)         1      5.00    True
-   A                                                    Late-Day Flow (leveraged-ETF / last-hour flow): follow a ≥ 0.4 ATR move at 14:00 to 14:30         1      3.50    True
+   A                                                    Late-Day Flow (leveraged-ETF / last-hour flow): follow a ≥ 0.4 ATR move at 14:00 to 14:30         1      3.50   False
    A                                                 Overnight Bias (plain, challenge; ADX 30 / 0.25 ATR since 2026-10-13, MultiCharts-confirmed)         1      4.90    True
    A                                                                                                                        Expiration Open Short         1      2.60   False
    A                                                                                                                               Cushion sizing         1       NaN   False
@@ -31,6 +31,7 @@ tier                                                                            
    A The Bridge's Monday Long NQ (L644NQ v2.1): Sunday 19:00 CT → Monday 15:55, regular-session daily ADX(7) 10–50 and DI+ > DI−, 100-pt target,          1      4.40    True
    A CL Sunday up-gap fade (funded_strategies/CL_Sunday_Gap_Fade.txt): Sunday 17:05 CT short when the 17:00 open is ≥ 0.1 ATR above Friday's last         1      3.20   False
    A Twin Continuation (user's MultiCharts code, 2026-10-15; checks/candidates/twin_continuation/Twin_Continuation.txt): Swing Breakout on 6h fra         1      5.46    True
+   A The plan on Apex 150K accounts (analysis/plan_150k_test.py, analysis/slot_150k_vs_50k_test.py, analysis/apex_paths_test.py; Apex's real pric         1       NaN   False
    B Single-print day filter on Vault Break (Red Ledger RL-FS-2026-01; analysis/single_print_test.py, single_print_bench.py, single_print_combine         1     -2.10   False
    B Morning Momentum, tight stop (Twin-like round 2, analysis/mo_pullback_test.py V3, analysis/mo_tight_bench.py): Twin's MO signal, market entr         1      4.07    True
    B High-win-rate search round 3 (analysis/high_winrate_test.py, high_winrate_bench.py): known edges with small-target / wide-stop exits, 9 pre-         1      4.13    True
@@ -45,4 +46,5 @@ tier                                                                            
    B DriftPullback v2.1 (F. Agnello, Bridge Strategies Feedbacks): 15-min VWAP + 0.10% drift arms, 5-min counter-bar entry, 9:30–14:25 CT, long 8         1      4.00    True
    B The Bridge's Overnight Bias ORB (close beyond the 8:30–8:45 range, ADX(16) ≥ 20, up to 4 trades a day, bar-range and OR-size filters, RTH-AT         1      4.40    True
    B                                     Combine add-ons: Bridge Monday Long 2 MNQ + EOS $500 + Vol-Control Sell 2 MNQ on top of VB 8 + ONB ADX30        20       NaN   False
-   B ES MOC auction follow: after a ≥ 0.3 ATR 14:00 → 14:50 CT move, follow 14:51 → 15:00, stop 0.25 ATR (round 1, analysis/s_rank_es_round1_test         1      3.50    True
+   B ES MOC auction follow: after a ≥ 0.3 ATR 14:00 → 14:50 CT move, follow 14:51 → 15:00, stop 0.25 ATR (round 1, analysis/s_rank_es_round1_test         1      3.50   False
+   B Twin Continuation on an Apex 150K account ($9,000 target, $4,000 EOD drawdown, $2,000 DLL; 6 payouts ≈ $20,500, ladder assumed; analysis/twi         1       NaN   False
