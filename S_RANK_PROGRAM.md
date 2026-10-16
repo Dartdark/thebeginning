@@ -5,6 +5,22 @@ combine account passes, so the funded accounts can trade several uncorrelated ma
 in one account share the $2,000 trailing drawdown, so a second market with its own edge lowers the blow-up risk more
 than anything else can.
 
+## Edge-improvement roadmap (user, 2026-10-16: "find ways to improve my edge all the time")
+
+Ranked by expected value per unit of research, from what has worked so far:
+1. **Personal-account-only strategies** (no Apex drawdown / flat-by-15:59 / consistency limits): Twin Continuation
+   (A, ~$36k a year per NQ, MC-confirmed), multi-day holds (CoT dealer weekly longs, oil supply-window trend), wider-stop
+   versions of existing strategies. Biggest pool of edge the Apex rules currently exclude.
+2. **More uncorrelated markets** (this program): every independent edge raises the plan's Sharpe, which lowers its drawdown
+   per dollar earned and lets the same capital trade more size. Worth more than tuning an existing strategy.
+3. **Forced / scheduled flows** (option expiration, fund rebalancing, event fades): the family that keeps passing here;
+   price-pattern ideas mostly fail (TIER_LIST D/F rows).
+4. **Execution**: fewer missed / rejected orders (MULTICHARTS_PITFALLS), lower commissions as volume grows, limit instead of
+   market fills where a backtest shows no adverse selection.
+5. **Pruning**: retire or halve strategies the live drift alarm flags; a dead edge costs more than a missing one.
+Guardrails: every change goes through DEVELOPMENT_PROCESS (multiple-testing bar, placebo, checker, Apex incubation); each
+new tweak raises the number of trials and the bar for the next one, so prefer new independent edges over re-tuning.
+
 ## The S bar, per symbol
 
 The tier list's S (written for NQ) scaled so it means the same thing on every contract:
