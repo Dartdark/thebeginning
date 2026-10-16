@@ -31,6 +31,10 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
   Bias entry rejection of 10/14. Fix (EOS): keep `SetStopLoss`, and add a bar-close guard that exits at market when the bar
   closes at or through the stop level (`Exp Open SG`). The other strategies that use `SetStopLoss` (VB, ONB, LDF, Monday,
   NFP, CL fade, Bridge Monday as shipped) can hit the same thing in a fast move; apply the same guard to each.
+- **'Interactive Brokers: Unable to connect to TWS' (127.0.0.1 : 7497)** (2026-10-16, 8:37 CT): some chart or the Trading
+  panel has its broker profile set to Interactive Brokers (MultiCharts' default) instead of Rithmic. Any strategy on that
+  profile sends nothing to Apex. Fix: every strategy chart -> Format Signals -> Properties -> Auto Trading -> broker profile
+  = Rithmic (the Apex account); also check the default broker in the Trading panel / DOM and new charts.
 - After any rejection: check the Order and Position Tracker / the broker position at once; flatten by hand if the
   account holds a position the chart does not manage.
 
