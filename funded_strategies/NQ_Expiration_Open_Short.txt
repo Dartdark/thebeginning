@@ -118,6 +118,11 @@ end;
 { ---------- Exits ---------- }
 SetStopContract;
 if StopPts > 0 then SetStopLoss(StopPts * BigPointValue);
+{ live guard (2026-10-16): Rithmic rejects a protective buy stop that is already below the market ("Invalid StopMarket
+  order parameters"), which left the 10/16 short without its stop. If a bar closes at or through the stop level, cover
+  at market on the next bar instead of relying on the rejected stop order. }
+if MarketPosition < 0 and StopPts > 0 and Close >= EntryPrice + StopPts then
+	BuyToCover ("Exp Open SG") next bar at market;
 
 if MarketPosition < 0 and Time >= ExitTime then
 	BuyToCover ("Exp Open SX") this bar on close;

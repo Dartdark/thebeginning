@@ -24,6 +24,16 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - **Bar-time minutes vs HHMM**: when porting, 15:30 CT is minute 1350 / HHMM 1530, not 1290 (a Python port bug,
   FillEnd 1290). Convert with one helper (`jof` in `analysis/grid24.py`), never by hand.
 
+## Live order rejections
+- **'Invalid StopMarket order parameters' on a protective stop** (EOS, 2026-10-16, 6:34 PT = 8:34 CT: "Buy Stop 1 @MNQ @ 30168"
+  rejected): the short filled at the 8:30 open, price ran up through the stop level before the stop order reached Rithmic,
+  and a buy stop below the market is invalid, so the position was left without its stop. Same family as the Overnight
+  Bias entry rejection of 10/14. Fix (EOS): keep `SetStopLoss`, and add a bar-close guard that exits at market when the bar
+  closes at or through the stop level (`Exp Open SG`). The other strategies that use `SetStopLoss` (VB, ONB, LDF, Monday,
+  NFP, CL fade, Bridge Monday as shipped) can hit the same thing in a fast move; apply the same guard to each.
+- After any rejection: check the Order and Position Tracker / the broker position at once; flatten by hand if the
+  account holds a position the chart does not manage.
+
 ## Setup checklist
 - A signal runs on data1 only; each strategy needs its own chart window.
 - Report Settings sheet to check: name, inputs, Compression, Bar Magnifier, commission / slippage 0, fill limit +1 point.
