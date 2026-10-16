@@ -35,6 +35,12 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
   panel has its broker profile set to Interactive Brokers (MultiCharts' default) instead of Rithmic. Any strategy on that
   profile sends nothing to Apex. Fix: every strategy chart -> Format Signals -> Properties -> Auto Trading -> broker profile
   = Rithmic (the Apex account); also check the default broker in the Trading panel / DOM and new charts.
+- **Every Rithmic (Apex) order so far was rejected; the only fills were on Paper Trader** (Order tracker, 2026-10-16): 10/12
+  fills = Paper Trader dxFeed / SIM 001; 10/14 ONB entry stop and 10/16 EOS stop losses (20 retries in one second) = Rithmic
+  'Invalid StopMarket order parameters', all with instrument `@MNQ`. `@MNQ` is the dxFeed continuous symbol; Rithmic needs the
+  real contract (MNQZ26 until the December roll). Most likely fix: symbol mapping @MNQ -> current MNQ contract for the
+  Rithmic profile (or chart the contract itself), update at every roll; then confirm with a 1-MNQ manual test order through
+  MultiCharts before relying on auto-trading. (Diagnosis pending the user's check.)
 - After any rejection: check the Order and Position Tracker / the broker position at once; flatten by hand if the
   account holds a position the chart does not manage.
 
