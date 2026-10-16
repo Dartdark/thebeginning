@@ -1,0 +1,27 @@
+Daily profit cap vs the 50% consistency rule (user, 2026-10-16: 'wouldn't it be counterproductive to have a trade more
+   check VB: best >= worst on 1.0000 of minutes, same close True
+   check ONB_ML2_MC: best >= worst on 1.0000 of minutes, same close True
+
+=== Evaluation (50K, $3,000 target, no consistency rule), combine set, every start day 2018-26
+   cap    none: pass 50.1%, blown 48.1%, out of time  1.9%, median days to pass 6
+   cap  $2,500: pass 47.3%, blown 50.7%, out of time  2.0%, median days to pass 7
+   cap  $2,000: pass 44.8%, blown 52.1%, out of time  3.1%, median days to pass 8
+   cap  $1,500: pass 45.3%, blown 50.7%, out of time  4.0%, median days to pass 9
+   cap  $1,250: pass 41.7%, blown 51.5%, out of time  6.8%, median days to pass 10
+   cap  $1,000: pass 39.4%, blown 49.1%, out of time 11.6%, median days to pass 11
+   cap    $750: pass 35.2%, blown 48.4%, out of time 16.4%, median days to pass 13
+   cap    $500: pass 20.8%, blown 44.7%, out of time 34.5%, median days to pass 14
+
+=== Funded PA (50K, consistency on), the plan with cushion sizing; every 2nd start day
+cap                                  1y paid  blown  1st payout (days)   2y paid  blown  all 6
+none                                 $10,169     3%                 54   $12,424     3%    94%
+$2,500                               $10,175     3%                 54   $12,424     3%    94%
+$2,000                               $10,190     3%                 54   $12,424     3%    94%
+$1,500                               $10,314     3%                 54   $12,424     3%    94%
+$1,250                               $10,340     3%                 55   $12,461     3%    94%
+$1,000                               $10,513     3%                 55   $12,549     3%    95%
+$750                                 $10,455     4%                 58   $12,457     3%    93%
+$500                                  $8,807     6%                 68   $12,326     2%    91%
+profit since payout, min $500         $9,875     4%                 60   $12,554     2%    94%
+profit since payout, min $750        $10,434     3%                 58   $12,556     3%    95%
+profit since payout, min $1,000      $10,472     3%                 54   $12,540     3%    95%
