@@ -1,0 +1,63 @@
+{ NQ Level Short - MultiCharts PowerLanguage signal (manual price levels)
+
+  Sells short with a limit order at EntryPrice (30,026) and buys back with a
+  limit order at TargetPrice (29,692), a 334-point target. One trade, then it
+  stops trading.
+
+  Apply to a 1-minute or 5-minute NQ / MNQ chart, Exchange time zone
+  (Central), CME 24-hour session. Auto trading: broker profile Rithmic with
+  the symbol mapped to the real contract (MNQZ6 until the December roll; see
+  MULTICHARTS_PITFALLS.md), mode AA, initial position Flat.
+
+  - LiveOnly true: orders are only sent from the last bar on the chart, so
+    the historical bars cannot "use up" the trade before you go live.
+  - If price is already ABOVE EntryPrice when the order is sent, the sell
+    limit is marketable and fills at once (at a better price than 30,026).
+  - StopPrice: the protective buy stop, 0 = no stop (as requested). If you
+    set one, it must be above EntryPrice; a bar close at or above it also
+    exits at market (guard against the Rithmic 'Invalid StopMarket' reject).
+  - Apex: no new entry from LastEntryTime to 17:00 CT, and any open short is
+    bought back at market on the bar closing at FlatTime (15:55 CT), so the
+    account is flat before 15:59.
+  - The target order goes in on the bar after the entry fills (exit orders
+    are only sent while in a position). }
+
+Inputs:
+	EntryPrice(30026),
+	TargetPrice(29692),
+	StopPrice(0),           { 0 = no protective stop }
+	NumContracts(1),
+	LiveOnly(true),
+	LastEntryTime(1530),    { no new entry from 15:30 to 17:00 CT }
+	SessionOpen(1700),
+	FlatTime(1555);         { flatten at market, flat before 15:59 CT }
+
+Variables:
+	Mp(0), Done(false), InFlatWindow(false), InNoEntry(false), ValidLevels(false);
+
+Mp = MarketPosition;
+if TotalTrades > 0 then Done = true;
+
+ValidLevels = EntryPrice > TargetPrice and (StopPrice = 0 or StopPrice > EntryPrice);
+InFlatWindow = Time >= FlatTime and Time < SessionOpen;
+InNoEntry = Time >= LastEntryTime and Time < SessionOpen;
+
+{ Entry }
+if ValidLevels and Mp = 0 and Done = false and InNoEntry = false
+	and (LiveOnly = false or LastBarOnChart) then
+	SellShort ("Lvl Short") NumContracts contracts next bar at EntryPrice limit;
+
+{ Exits }
+if Mp = -1 then begin
+	if InFlatWindow then
+		BuyToCover ("Apex Flat") next bar at market
+	else begin
+		BuyToCover ("Lvl Target") next bar at TargetPrice limit;
+		if StopPrice > 0 then begin
+			if Close >= StopPrice then
+				BuyToCover ("Stop Guard") next bar at market
+			else
+				BuyToCover ("Lvl Stop") next bar at StopPrice stop;
+		end;
+	end;
+end;
