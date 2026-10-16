@@ -44,6 +44,10 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
       opening-range level (`EntryBufTicks` 2). The new order names are "ON Bias LM / SM".
     - **User must paste and compile the new code before the next open.**
   - Pass odds per account unchanged (~50%).
+- **Evaluation finish line (2026-10-16):** `apex_strategies/Apex_Target_Guard.txt`, an exit-only signal added next to each
+  strategy on its chart; set `StartBalance` (the Apex balance) before the session, `TargetBalance` 53050; it closes the
+  position by limit when the account would reach the target. No consistency rule in the Apex evaluation and no early exits
+  otherwise (`analysis/profit_cap_test.py`).
 - **All strategy files were audited:** every other entry is a market order; order names are unique per file.
 - **Combine set** (`apex_strategies/`, MNQ, 24-hour session, Exchange time CT):
 

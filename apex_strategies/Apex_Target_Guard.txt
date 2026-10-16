@@ -1,0 +1,34 @@
+// Apex Target Guard (2026-10-16)
+// Exit-only signal for an EVALUATION account: closes the chart's open position as soon as that trade would take the
+// account balance to TargetBalance (the $3,000 target + a small buffer for commissions). Nothing above the target counts
+// in an evaluation, so this is the finish line, not an early exit.
+//
+// How to use
+//   1. Add it to EVERY strategy chart that trades the evaluation account (Format Signals > Add > Apex Target Guard),
+//      next to the strategy's own signal. All signals on one chart are one strategy, so its exit closes the whole
+//      position whichever signal entered (works with The Bridge's Monday Long too).
+//   2. Before the session set StartBalance = the account balance shown by Apex (e.g. 51480). 0 = guard off.
+//   3. TargetBalance: 53050 for a 50K ($53,000 target + $50 buffer); 159050 for a 150K.
+// It places a limit order at the price where this position's profit = TargetBalance - StartBalance. Limit orders work
+// inside the bar, so the strategy does NOT need Intrabar Order Generation. If the market is already past that price the
+// order fills at once.
+// Limits: each chart counts only its own trade. If two charts are in profit at the same time the account can pass the
+// target before either guard fires (rare in the combine set; check the account if two positions are open together).
+// The guard is not active on the entry bar itself (MultiCharts places it from the next bar on).
+
+inputs: TargetBalance(53050), StartBalance(0);
+variables: Tk(0), Need(0), Px(0);
+
+Tk = MinMove / PriceScale;
+
+if StartBalance > 0 and TargetBalance > StartBalance and MarketPosition <> 0 and CurrentContracts > 0 then begin
+	Need = (TargetBalance - StartBalance) / (BigPointValue * CurrentContracts);     // points needed on the whole position
+	if MarketPosition > 0 then begin
+		Px = IntPortion((AvgEntryPrice + Need) / Tk + 0.999999) * Tk;                // round up to a tick
+		Sell ("Target Guard LX") next bar at Px limit;
+	end
+	else begin
+		Px = IntPortion((AvgEntryPrice - Need) / Tk + 0.000001) * Tk;                // round down to a tick
+		BuyToCover ("Target Guard SX") next bar at Px limit;
+	end;
+end;

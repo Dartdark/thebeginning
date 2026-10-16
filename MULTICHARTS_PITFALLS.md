@@ -49,6 +49,8 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 
 ## Setup checklist
 - A signal runs on data1 only; each strategy needs its own chart window.
+- Several signals on one chart form ONE strategy sharing one position: an exit-only signal (e.g. `Apex_Target_Guard`)
+  added next to a strategy closes that strategy's position. It cannot see or close positions on other charts.
 - Report Settings sheet to check: name, inputs, Compression, Bar Magnifier, commission / slippage 0, fill limit +1 point.
 - Data: Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close conversion unchecked.
 - Auto trading: Format Signals > Properties > Auto Trading (broker, account), mode AA, initial position Flat, no automatic
