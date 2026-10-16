@@ -1,1 +1,19 @@
 Ramp to 20 accounts with 150K No-Activation accounts (user, 2026-10-16). Real Apex prices / rules (analysis/apex_paths_test.py):
+   edge 100% 50K evaluation pass 50.1%
+   edge 100% 150K evaluation pass 41.6%
+
+=== backtest edge
+schedule                                                    3m        6m       12m       24m       36m   12m p10    36m p10  worst p10  months to $100k
+A  3 x 50K, then +2 x 150K a week to 20                   $-4k       $2k     $176k     $557k     $986k      $-8k      $703k    $-18.7k             10.0
+B  as A, 50K slots switch to 150K after 1st account       $-4k       $2k     $175k     $569k   $1,033k      $-8k      $723k    $-18.8k             10.0
+C  all 20 slots 150K                                      $-5k       $5k     $194k     $591k   $1,043k     $-16k      $730k    $-22.6k              9.6
+D  all 20 slots 50K (reference)                           $-2k      $11k     $152k     $390k     $672k       $9k      $505k     $-5.7k             10.7
+   edge 75% 50K evaluation pass 40.7%
+   edge 75% 150K evaluation pass 30.9%
+
+=== 75% of the edge
+schedule                                                    3m        6m       12m       24m       36m   12m p10    36m p10  worst p10  months to $100k
+A  3 x 50K, then +2 x 150K a week to 20                   $-5k      $-9k      $95k     $391k     $715k     $-31k      $354k    $-34.9k             12.3
+B  as A, 50K slots switch to 150K after 1st account       $-5k      $-9k      $96k     $400k     $743k     $-33k      $364k    $-35.7k             12.2
+C  all 20 slots 150K                                      $-6k      $-9k     $104k     $417k     $756k     $-34k      $364k    $-39.4k             12.0
+D  all 20 slots 50K (reference)                           $-2k      $-1k      $65k     $259k     $494k     $-12k      $273k    $-14.6k             14.0

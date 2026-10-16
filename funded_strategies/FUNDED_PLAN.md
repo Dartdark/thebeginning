@@ -666,6 +666,26 @@ $22.6k; 2023–26 $141k / DD $24.1k; 2018 itself only +$538). Capital for a 20% 
 - Path: Apex first (no capital at risk) while the live edge is confirmed; move payouts into a personal account once
   ~6–12 months of live results match the backtest, start it at MNQ size and scale with the account.
 
+### Ramp to 20 with 150K No-Activation accounts (2026-10-16)
+
+Code `../analysis/ramp150_test.py` (output in `..._output.txt`). Real prices (50K EOD single $59 + $130, 150K No-Activation
+$249); 3 x 50K at 0 / +6 / +11 trading days, +2 accounts a week from day 42 to 20; medians, 10th percentile = bad case.
+
+| Schedule | 6 m | 12 m | 24 m | 36 m | 12 m p10 | Worst cash p10 | Months to $100k |
+|---|---|---|---|---|---|---|---|
+| A 3 x 50K, then 150K | $2k | $176k | $557k | $986k | −$8k | −$18.7k | 10.0 |
+| **B as A, 50K slots switch to 150K after their 1st account** | $2k | $175k | $569k | $1,033k | −$8k | −$18.8k | 10.0 |
+| C all 20 slots 150K | $5k | $194k | $591k | $1,043k | −$16k | −$22.6k | 9.6 |
+| D all 20 slots 50K | $11k | $152k | $390k | $672k | +$9k | −$5.7k | 10.7 |
+
+At 75% of the edge (150K evaluation pass 30.9%, 50K 40.7%): A / B / C $95k–104k at 12 months, $715k–756k at 36,
+12-month p10 −$31k to −$34k, worst cash p10 −$35k to −$39k, $100k after ~12 months; D $65k / $494k, worst −$14.6k.
+- 150K roughly doubles the 3-year total (+$340k vs all-50K) but the fees come first: 17 new slots x $249 evaluations
+  (2.4 tries per funded account, 3.2 if the edge is weaker) need a budget of ~$19k (backtest edge) to ~$35k (75% edge) before
+  the payouts catch up; the all-50K ramp needs ~$6k–15k.
+- Recommended: B, with an evaluation budget set aside up front (~$20k), and new 150K slots added only while the live edge
+  ratio stays ≥ 0.75; pause additions if cumulative cash falls below −$20k.
+
 ### Tuning the sizing for the whole pipeline (2026-10-14)
 
 Code `../analysis/pipeline_tuning_test.py` (output in `..._output.txt`). One slot, 70 start months, 3 years, net of
