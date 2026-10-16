@@ -29,6 +29,10 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Live status (2026-10-14)
 
+- **2026-10-16 finding: nothing had traded on the Apex account yet.** The 10/12 fills were on Paper Trader (SIM 001); every
+  Rithmic order (ONB 10/14, EOS 10/16 stops, a manual test) was rejected because Symbol Mapping sent `@MNQ` to Rithmic. Fixed:
+  `@MNQ (dxFeed) -> MNQZ6`. Live start = first real Apex fill; confirm with a test order Sunday 17:00 CT before Bridge Monday
+  (19:00 CT). Roll the mapping to MNQH7 ~Dec 11. Add account #2 only after a real fill. EOS got a stop guard (paste new code).
 - **1 combine account live since Monday 2026-10-12** (user corrected 2026-10-15: running one account first as a shakedown
   week for errors / screen sleep; 2 of 2 trades so far). Plan: add accounts one at a time, 5–10 trading days apart.
   Next: EOS trades Fri 10/16 and Bridge Monday Sun 10/18 19:00 CT on account #1 (first live runs of both); if clean,

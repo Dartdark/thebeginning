@@ -40,7 +40,10 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
   'Invalid StopMarket order parameters', all with instrument `@MNQ`. `@MNQ` is the dxFeed continuous symbol; Rithmic needs the
   real contract (MNQZ26 until the December roll). Most likely fix: symbol mapping @MNQ -> current MNQ contract for the
   Rithmic profile (or chart the contract itself), update at every roll; then confirm with a 1-MNQ manual test order through
-  MultiCharts before relying on auto-trading. (Diagnosis pending the user's check.)
+  MultiCharts before relying on auto-trading. **Confirmed and fixed 2026-10-16:** File -> Broker Profiles -> Symbol Mapping
+  (Rithmic) had `@MNQ (dxFeed) -> @MNQ`; a manual Sell Limit was rejected the same way. Now `@MNQ (dxFeed) -> MNQZ6 (Rithmic,
+  CME)`. In the Rithmic lookup search `MNQ` (no @; Rithmic uses one-digit years: MNQZ6). **Roll checklist:** change the
+  broker symbol at every roll — MNQ / NQ quarterly (next ~2026-12-11: MNQZ6 -> MNQH7), MCL monthly once the CL fade is live.
 - After any rejection: check the Order and Position Tracker / the broker position at once; flatten by hand if the
   account holds a position the chart does not manage.
 
