@@ -92,13 +92,17 @@ story += [p("1. Executive summary", H1),
                  ["Evaluation pass rate", "50% (50K) / 42% (150K)", "Zero-skill baseline is ~40%"],
                  ["Payout per funded account", "$12.5k (50K) / $19.7k (150K)", "Within 2 years; blown 3% / 0%"],
                  ["Value per account slot, 3 years", "$34.8k (50K) / $52.8k (150K)", "Net of all fees"],
-                 ["Year-1 outlook", "+$29k (3 accounts), ~+$115k (ramp to 20)", "Backtest-based; ~1/3 of that if live keeps 75% of the edge"],
-                 ["Cost of testing the edge live", "~$400-600", "If it fails, we stop after Phase 1"]],
+                 ["Year-1 outlook (ramp to 20, mostly 150K)", "~+$175k; ~$1.03M over 3 years", "Backtest-based; ~$95k / $740k if live keeps 75% of the edge"],
+                 ["Evaluation budget for the scale-up", "~$20k set aside", "Fees paid before payouts catch up; up to ~$35k if the edge is weaker"],
+                 ["Cost of testing the edge live", "~$400-800", "If it fails, we stop after Phase 1"],
+                 ["First payouts expected", "~mid-to-late February 2027", "Range: January to April+"]],
                 [2.1 * inch, 2.0 * inch, 2.9 * inch]),
           Spacer(1, 8),
-          callout("<b>Recommendation.</b> Continue the 3-account test on <b>50K EOD</b> accounts (bought one at a time, $59) for about two "
-                  "months. If live results reach at least 75% of the backtest over ~40-70 trades, scale with <b>150K No-Activation</b> "
-                  "accounts at two per week up to 20, and open a small personal account from month 3 using the first payouts.", GREEN)]
+          callout("<b>Recommendation, in priority order.</b> (1) <b>Prove the edge live</b>: accounts #1-#2 on <b>50K EOD</b> ($59 each), "
+                  "#3 as a <b>150K No-Activation</b> ($249) to test the 150K setup early; pass the live check (~40-70 trades at 75%+ of "
+                  "backtest). (2) <b>Scale Apex</b>: with ~$20k set aside for evaluation fees, add 150K No-Activation accounts two per "
+                  "week to 20. (3) <b>Open the personal account from the first payouts</b> (~$10k, around February), not from savings; "
+                  "per dollar, Apex evaluations earn far more in year 1 than a small personal account.", GREEN)]
 
 # 2 Strategy portfolio
 story += [PageBreak(), p("2. The strategy portfolio", H1),
@@ -176,34 +180,37 @@ story += [PageBreak(), p("4. Financial projections", H1),
                 [1.0 * inch, 1.5 * inch, 1.5 * inch, 1.5 * inch, 1.5 * inch]),
           p("Month 1 is fees only: evaluations pass in about 6 trading days, but Apex payouts need the balance built up first, so "
             "the first payout usually arrives in month 2-4.", SM),
-          p("Scaling to 20 accounts (cash after fees, median)", H2),
-          table([["Schedule", "6 months", "12 months", "24 months", "36 months", "Most cash outlay"],
-                 ["Stay at 3 accounts", "$4.0k", "$29k", "$60k", "$90k", "-$0.8k"],
-                 ["Recommended: 3 for 2 months, then +2 per week", "$8.2k", "$116k", "$341k", "$564k", "-$4.4k"],
-                 ["+2 per week immediately", "$19.3k", "$151k", "$366k", "$578k", "-$4.5k"],
-                 ["All 20 at once", "$27.3k", "$196k", "$404k", "$604k", "-$5.7k"]],
-                [2.3 * inch, 0.8 * inch, 0.85 * inch, 0.85 * inch, 0.85 * inch, 1.05 * inch], highlight=[2]),
-          p("Scaling figures use 50K economics; 150K slots pay about 50% more per slot. The recommended schedule gives up some "
-            "upside in exchange for confirming the edge before committing fees to 20 accounts.", SM),
+          p("Scaling to 20 accounts (cash after fees, median; real Apex prices)", H2),
+          table([["Schedule", "6 months", "12 months", "24 months", "36 months", "Bad case 12 m", "Most cash outlay (bad case)"],
+                 ["Recommended: first 3 slots 50K, each switching to 150K after its first funded account closes; +2 x 150K per week from month 2", "$2k", "$175k", "$569k", "$1.03M", "-$8k", "-$18.8k"],
+                 ["All 20 slots 150K from the start", "$5k", "$194k", "$591k", "$1.04M", "-$16k", "-$22.6k"],
+                 ["All 20 slots 50K", "$11k", "$152k", "$390k", "$672k", "+$9k", "-$5.7k"],
+                 ["Recommended, if live keeps 75% of the edge", "-$9k", "$96k", "$400k", "$743k", "-$33k", "-$35.7k"]],
+                [2.45 * inch, 0.6 * inch, 0.7 * inch, 0.7 * inch, 0.7 * inch, 0.8 * inch, 1.05 * inch], highlight=[1]),
+          p("150K accounts roughly double the 3-year total, but evaluation fees ($249 a try, ~2.4 tries per funded account) come "
+            "before the payouts: set aside ~$20k, and pause new accounts if cumulative cash falls below -$20k. Cumulative cash "
+            "reaches $100k after ~10 months (backtest edge) or ~12 months (75% edge).", SM),
           p("Personal account (Phase 3 onward)", H2),
           p("Without Apex's caps, the full plan at 1 NQ per strategy made about <b>$101k a year</b> in the backtest with a <b>$24k</b> "
-            "maximum drawdown. Starting at 1/10 size (micro contracts) needs roughly <b>$10k</b>, with a historical worst drawdown "
-            "near $2.4k; size grows with the account.")]
+            "maximum drawdown; full 1-NQ size needs about <b>$100k</b> (the drawdown is then ~24% of the account; $80k is the bare "
+            "minimum). Start at 1/10 size (MNQ) with about <b>$10k from the first Apex payouts</b> and step up as the account grows: "
+            "~$25k = 1/4, ~$50k = 1/2, ~$100k = full size. At 1/10 size it earns only ~$10k a year in the backtest, which is why the "
+            "Apex scale-up comes first.")]
 
 # 5 Roadmap
 story += [PageBreak(), p("5. Roadmap", H1),
           table([["Phase", "Timing", "Actions", "Gate to move on"],
                  ["1. Prove", "Now to ~week 8",
-                  "3 x 50K EOD accounts, added 5-10 trading days apart (#2 Tue 10/20, #3 ~10/27). Weekly MultiCharts reports for live-vs-backtest tracking.",
+                  "#1 50K EOD (live since 10/12), #2 50K EOD Tue 10/20, #3 150K No-Activation ~10/27 (tests the 150K setup). Single evaluations, 5-10 trading days apart (5-pack evaluations all start at purchase). Weekly MultiCharts reports for live-vs-backtest tracking.",
                   "~40-70 live trades, live average at least 75% of backtest, no drift alarm"],
                  ["2. Scale", "~Month 2-5",
-                  "Add 150K No-Activation accounts, 2 per week, to 20 total; replace finished 50K accounts with 150K. Four copier masters (50K / 150K x evaluation / funded).",
-                  "Live edge holds; no clustered blow-ups"],
-                 ["3. Personal account", "From month 3",
-                  "Open with ~$10k from payouts; run the plan at 1/10 size (MNQ). Add Twin Continuation at small size (stop capped at 1 ATR).",
+                  "~$20k evaluation budget set aside. Add 150K No-Activation accounts, 2 per week, to 20 total. 50K slots keep cycling until their first funded account pays all 6 payouts ($13,000) or blows, then switch to 150K. Four copier masters (50K / 150K x evaluation / funded).",
+                  "Live edge holds; cumulative cash above -$20k"],
+                 ["3. Personal account", "From the first payouts (~Feb 2027)",
+                  "Open with ~$10k from Apex payouts (not savings); run the plan at 1/10 size (MNQ). Add Twin Continuation at small size (stop capped at 1 ATR). Step up size as the balance grows.",
                   "6-12 months of live results matching backtest"],
                  ["4. Grow", "Month 6-12+",
-                  "Personal account to full size; promote live-confirmed strategies to S+; new strategies enter through the lifecycle below.",
+                  "Personal account to full 1-NQ size (~$100k); promote live-confirmed strategies to S+; new strategies enter through the lifecycle below.",
                   "Ongoing monitoring"]],
                 [0.9 * inch, 0.9 * inch, 3.3 * inch, 1.9 * inch], bold_first_col=True),
           p("Strategy lifecycle (how new strategies are added)", H2),
@@ -237,8 +244,8 @@ story += [PageBreak(), p("7. Risks and mitigations", H1),
           table([["Risk", "What could happen", "Mitigation"],
                  ["Backtest overstates the edge", "Strategies were selected on the same history they are tested on; live results are typically lower",
                   "Phase-1 gate before scaling; multiple-testing correction; independent checker; drift alarm"],
-                 ["Weaker live edge (75% case)", "Year 1: ~$10k with 3 accounts, ~$46k with 20; bad-case first year with 20 accounts about -$10k",
-                  "Scale only after the gate; half size on any ALARM"],
+                 ["Weaker live edge (75% case)", "Year 1 ~$96k with the 150K ramp, but the bad case is about -$33k and up to ~$36k of fees go out before payouts",
+                  "Scale only after the gate; ~$20k evaluation budget; pause new accounts below -$20k cumulative; half size on any ALARM"],
                  ["Correlated accounts", "All accounts trade the same signals, so a bad month hits all of them together",
                   "Stagger account starts 5-10 trading days apart; gradual ramp"],
                  ["Prop-firm rule or payout changes", "Apex can change prices, rules or payout timing",
@@ -257,9 +264,10 @@ story += [p("8. Immediate next steps", H1),
                  ["Fri 10/16", "Expiration Open Short trades on account #1: check fill, size and exit"],
                  ["Sun 10/18, 19:00 CT", "Bridge Monday Long enters: confirm position and size on Monday morning"],
                  ["Tue 10/20", "If both were clean, add account #2 (single 50K EOD, $59)"],
-                 ["~Tue 10/27", "Add account #3"],
+                 ["~Tue 10/27", "Add account #3 as a 150K No-Activation ($249), with its own copier master and 150K settings"],
                  ["Every week", "Export MultiCharts reports to the live/ folder for the live-vs-backtest check"],
-                 ["~Mid-December", "Phase-1 gate decision: scale with 150K No-Activation, or review"]],
+                 ["~Mid-December", "Phase-1 gate decision: scale with 150K No-Activation, or review"],
+                 ["~Feb 2027", "First payouts expected; open the personal account (~$10k) from them"]],
                 [1.5 * inch, 5.5 * inch], bold_first_col=True),
           Spacer(1, 10),
           p("Appendix: account settings", H2),

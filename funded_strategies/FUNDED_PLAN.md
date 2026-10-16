@@ -1,5 +1,18 @@
 # Funded phase plan: Apex 50K EOD Performance Account
 
+## Account and growth plan (agreed 2026-10-16)
+
+Priority order (details in the sections below and in `../reports/Trading_Business_Plan.pdf`):
+1. **Prove the edge live** on 3 accounts: #1 50K EOD (since 2026-10-12), #2 50K EOD (Tue 10/20), #3 150K No-Activation
+   (~10/27, tests the 150K settings). Single evaluations 5–10 trading days apart (5-pack evaluations all start at purchase).
+   Gate ~mid-December: ~40–70 live plan trades at ≥ 75% of backtest, no ALARM.
+2. **Scale Apex with 150K No-Activation** ($249): ~$20k evaluation budget, +2 accounts a week to 20; 50K slots switch to 150K
+   after their first funded account pays all 6 ($13,000) or blows; pause additions if cumulative cash falls below −$20k.
+   Year 1 ~$175k, 3 years ~$1.03M (backtest; 75% edge ~$96k / $743k) — 'Ramp to 20 with 150K No-Activation accounts'.
+3. **Personal account from the first Apex payouts** (expected ~Feb 2027): ~$10k at 1/10 size, stepping up with the balance
+   (~$25k = 1/4, ~$50k = 1/2, ~$100k = full 1 NQ). Per dollar, Apex evaluations earn far more in year 1, so the personal
+   account is funded from payouts, not savings.
+
 ## Current plan (updated 2026-10-13): seven strategies (Vol-Control Sell dropped), faster to $13k
 
 Priority: collect all 6 payouts ($13,000) sooner. **New: the Bridge's Monday Long NQ** (it ships with The Bridge,

@@ -12,8 +12,16 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **Business plan (2026-10-16): `reports/Trading_Business_Plan.pdf`** (rebuild: `python3 reports/build_business_plan.py`): account
   choice (test on single 50K EOD $59 -- 5-pack evals all start at purchase, so they'd share one outcome; scale with 150K no-activation), projections, roadmap, risks, settings per account type.
 - Long-term path (user, 2026-10-15): Apex = live test bench and funding source; proven strategies and Apex payouts move to a
-  personal account (`DEVELOPMENT_PROCESS.md` 'Strategy lifecycle'). Ramp: 3 accounts → +2 a week to 20 (150K no-activation
-  preferred) once ~40 live trades confirm the edge.
+  personal account (`DEVELOPMENT_PROCESS.md` 'Strategy lifecycle').
+- **The plan, in priority order (agreed 2026-10-16; full version `reports/Trading_Business_Plan.pdf`):**
+  1. **Prove the edge live:** #1 50K EOD (since 10/12), #2 50K EOD Tue 10/20 ($59 single; 5-pack evals all start at purchase),
+     #3 **150K No-Activation** ~10/27 ($249, tests the 150K settings / copier master early). Gate ~mid-December: ~40–70 live
+     trades at ≥ 75% of backtest, no ALARM.
+  2. **Scale Apex:** ~$20k set aside for evaluation fees; +2 x 150K No-Activation a week to 20; 50K slots keep cycling until
+     their first funded account pays all 6 ($13,000) or blows, then switch to 150K; pause adding if cumulative cash < −$20k.
+     Sim (`analysis/ramp150_test.py`): year 1 ~$175k, 3 years ~$1.03M (75% edge: ~$96k / $743k, bad case −$33k).
+  3. **Personal account from the first Apex payouts** (expected ~mid/late Feb 2027), ~$10k at 1/10 size, not from savings;
+     full 1-NQ size needs ~$100k (DD $24k); add Twin there (stop cap 1 ATR).
 - Preferences: forced / scheduled flows (they work here; price patterns fail), low correlation, longs and shorts
   analysed separately. Always give **direct GitHub links + raw links** for code to paste into MultiCharts.
 - Working rules, testing standard and branch rules are in `CLAUDE.md` (push every commit to
@@ -24,7 +32,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **1 combine account live since Monday 2026-10-12** (user corrected 2026-10-15: running one account first as a shakedown
   week for errors / screen sleep; 2 of 2 trades so far). Plan: add accounts one at a time, 5–10 trading days apart.
   Next: EOS trades Fri 10/16 and Bridge Monday Sun 10/18 19:00 CT on account #1 (first live runs of both); if clean,
-  **add account #2 Tue 10/20**, #3 about a week later. First live days:
+  **add account #2 Tue 10/20** (50K EOD), #3 about a week later (150K No-Activation). First live days:
   - **Monday 10/12:** a winning trade was missed because the connection dropped.
   - **Tuesday 10/14:** the Overnight Bias short (5 MNQ) was rejected by Rithmic: *"Invalid StopMarket order
     parameters"*, a sell stop placed above the market.
