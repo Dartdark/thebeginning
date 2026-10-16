@@ -637,6 +637,10 @@ no-activation $249. One slot = one account at a time, every 5th start day 2018â€
   more per slot. Fees are 2â€“4% of payouts on every path, so the account size decides, not the fee option.
 - Within a size the fee option changes the 3-year net by under $300. 150K: no-activation is cheapest (fails cost $249,
   the $150 activation is paid only on a pass, but 2.4 tries x $30 more for EOD + $150 > $0). 50K: EOD 5-pack is cheapest.
+- **5-packs start all five evaluations at purchase (user, 2026-10-16).** On one copier they trade identical days, so the five
+  pass or fail together (one bet x 5; same expected passes, no diversification). Use single 50K EOD ($59, ~$248 per funded
+  account, +$69 vs the 5-pack) to keep accounts 5-10 trading days apart. A 5-pack only makes sense when deliberately adding
+  five accounts at once after the live gate.
 
 ### Scaling up while the account grows (2026-10-15)
 

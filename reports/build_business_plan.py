@@ -96,7 +96,7 @@ story += [p("1. Executive summary", H1),
                  ["Cost of testing the edge live", "~$400-600", "If it fails, we stop after Phase 1"]],
                 [2.1 * inch, 2.0 * inch, 2.9 * inch]),
           Spacer(1, 8),
-          callout("<b>Recommendation.</b> Continue the 3-account test on <b>50K EOD</b> accounts (bought as a 5-pack) for about two "
+          callout("<b>Recommendation.</b> Continue the 3-account test on <b>50K EOD</b> accounts (bought one at a time, $59) for about two "
                   "months. If live results reach at least 75% of the backtest over ~40-70 trades, scale with <b>150K No-Activation</b> "
                   "accounts at two per week up to 20, and open a small personal account from month 3 using the first payouts.", GREEN)]
 
@@ -151,7 +151,7 @@ story += [PageBreak(), p("3. Funding model: Apex Trader Funding", H1),
                  ["7", "50K EOD, single", "$59 + $130 activation", "$248", "$34,604"]],
                 [0.55 * inch, 2.2 * inch, 1.6 * inch, 1.35 * inch, 1.3 * inch], highlight=[1, 4]),
           Spacer(1, 6),
-          bullets(["<b>Test phase:</b> 50K EOD 5-pack, the cheapest way to get live evidence (about $179 per funded account).",
+          bullets(["<b>Test phase:</b> single 50K EOD ($59 + $130 activation on a pass, ~$248 per funded account). The 5-pack is cheaper ($179) but all five evaluations start the day of purchase, so they trade identical days on the copier and pass or fail together: one bet placed five times. Singles keep accounts 5-10 trading days apart.",
                    "<b>Scale phase:</b> 150K No-Activation. Each slot earns ~$18k more over 3 years; with a 20-account cap that is what counts.",
                    "<b>Speed:</b> 50K reaches its first payout ~2 weeks sooner (median 87 vs 95 trading days); 150K pays ~50% more.",
                    "Fees are only 2-4% of payouts on every path, so account size matters far more than the fee option."])]
@@ -256,7 +256,7 @@ story += [p("8. Immediate next steps", H1),
           table([["When", "Action"],
                  ["Fri 10/16", "Expiration Open Short trades on account #1: check fill, size and exit"],
                  ["Sun 10/18, 19:00 CT", "Bridge Monday Long enters: confirm position and size on Monday morning"],
-                 ["Tue 10/20", "If both were clean, add account #2 (50K EOD; check whether the 5-pack clocks start at purchase or activation)"],
+                 ["Tue 10/20", "If both were clean, add account #2 (single 50K EOD, $59)"],
                  ["~Tue 10/27", "Add account #3"],
                  ["Every week", "Export MultiCharts reports to the live/ folder for the live-vs-backtest check"],
                  ["~Mid-December", "Phase-1 gate decision: scale with 150K No-Activation, or review"]],

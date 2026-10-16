@@ -10,7 +10,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   $1,000 daily loss limit.
 - Goal: **funded payouts** (6 payouts = $13,000 per account), reached as fast as possible.
 - **Business plan (2026-10-16): `reports/Trading_Business_Plan.pdf`** (rebuild: `python3 reports/build_business_plan.py`): account
-  choice (test on 50K EOD 5-pack, scale with 150K no-activation), projections, roadmap, risks, settings per account type.
+  choice (test on single 50K EOD $59 -- 5-pack evals all start at purchase, so they'd share one outcome; scale with 150K no-activation), projections, roadmap, risks, settings per account type.
 - Long-term path (user, 2026-10-15): Apex = live test bench and funding source; proven strategies and Apex payouts move to a
   personal account (`DEVELOPMENT_PROCESS.md` 'Strategy lifecycle'). Ramp: 3 accounts → +2 a week to 20 (150K no-activation
   preferred) once ~40 live trades confirm the edge.
