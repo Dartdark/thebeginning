@@ -9,6 +9,8 @@ Priority order (details in the sections below and in `../reports/Trading_Busines
 2. **Scale Apex with 150K No-Activation** ($249): ~$20k evaluation budget, +2 accounts a week to 20; 50K slots switch to 150K
    after their first funded account pays all 6 ($13,000) or blows; pause additions if cumulative cash falls below −$20k.
    Year 1 ~$175k, 3 years ~$1.03M (backtest; 75% edge ~$96k / $743k) — 'Ramp to 20 with 150K No-Activation accounts'.
+   +3 a week instead of +2 (`../analysis/ramp150_speed_test.py`, #3 as 150K): year 1 $188k vs $182k, 3 years $1.049M vs
+   $1.031M, worst cash p10 −$20.8k vs −$20.0k; at 75% edge identical ($98k vs $99k). Either is fine; +3 reaches 20 ~3 weeks sooner.
 3. **Personal account from the first Apex payouts** (expected ~Feb 2027): ~$10k at 1/10 size, stepping up with the balance
    (~$25k = 1/4, ~$50k = 1/2, ~$100k = full 1 NQ). Per dollar, Apex evaluations earn far more in year 1, so the personal
    account is funded from payouts, not savings.
