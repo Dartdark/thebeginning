@@ -486,6 +486,39 @@ First strategy on another market: `CL_Sunday_Gap_Fade.txt` on a 5-minute **MCL**
 $12,595 (2y) vs $9,313 / $12,569, blown 4% / 2%, median days to all 6 payouts 255 → 239. Check that Apex allows
 MCL on the account before turning it on; it runs on its own chart and the copier like the other funded strategies.
 
+## Monte Carlo at plan size (2026-10-17)
+
+`analysis/plan_montecarlo_test.py` (output `analysis/plan_montecarlo_test_output.txt`) runs `analysis/montecarlo.py` on every
+plan strategy at its funded size (full size, i.e. a cushion of $1,500 or more) and on the whole plan. The bench reproduces
+exactly ($10,184 / $12,450, blown 3% / 3%).
+
+| Strategy (size) | Trades | Max DD actual | Reshuffled DD p95 | One year p5 / p50 | P(losing year) | P(hit $2,000 trail in a year, alone) |
+|---|---|---|---|---|---|---|
+| Vault Break (3 / 1 flagged) | 942 | $3,509 | $7,106 | −$136 / $5,152 | 5.4% | 28.6% |
+| Overnight Bias ML v2 ($400) | 343 | $2,417 | $3,814 | $439 / $4,225 | 3.1% | 6.4% |
+| Monday Long (1) | 450 | $2,078 | $4,430 | −$887 / $2,029 | 12.9% | 11.1% |
+| Expiration Open Short ($700) | 105 | $1,362 | $4,666 | −$1,143 / $2,432 | 13.6% | 9.9% |
+| Late-Day Flow (2) | 895 | $3,028 | $3,579 | −$766 / $1,846 | 12.8% | 6.9% |
+| NFP Fade ($500) | 78 | $2,034 | $2,332 | −$719 / $331 | 31.3% | 0.0% |
+| Bridge Monday Long (1) | 217 | $1,683 | $2,161 | −$195 / $1,310 | 7.4% | 0.1% |
+| CL Sunday fade (2 MCL) | 96 | $1,031 | $2,111 | −$519 / $1,059 | 15.3% | 0.2% |
+| **Whole plan, full size** | 1,700 | $3,963 | $6,989 | $8,955 / $18,857 | 0.1% | 22.7% |
+
+What it says:
+- **The cushion sizing carries the risk control.** The whole plan at full size with no cushion rule would hit the $2,000
+  EOD trail in about 23% of years (2023 onward the same); the bench, with half size below a $1,500 cushion, blows 3%.
+  Keep the cushion rule exactly as set; never run the funded plan at full size from a fresh account.
+- **Vault Break is the plan's main drawdown source** (alone 28.6% / year at 3 MNQ; reshuffled DD p95 $7,106). It is also
+  the largest earner ($5,134 / yr), so it stays, but it is the first thing to cut if the drift alarm fires.
+- **NFP Fade adds little:** $375 / yr, Sharpe 0.53, P(losing year) 31%, its 10-trade losing streak was above the reshuffled
+  p95 (9) and its drawdown at the 91st percentile (2018–22; 2023 onward it is fine, Sharpe 0.96). It costs no trail risk.
+  No change (it is a pre-registered forced-flow item), but it is the weakest line to watch live.
+- **Overnight Bias ML longs lost all of 2018** (−$2,491; max DD $3,916 is worse than 99% of reshuffles, so the losses
+  cluster in time); positive every year since. Shorts have no such cluster. A regime, not a broken rule; the drift alarm
+  covers a repeat.
+- Every strategy's whole-period total is positive in ≥ 95% of reshuffles (NFP 94.7%); every strategy's Sharpe 5th
+  percentile on 2023 onward is above 0.
+
 ## How many accounts to run: the full pipeline (2026-10-14)
 
 Code `../analysis/account_pipeline_test.py` (output in `..._output.txt`). Each "slot" cycles through:

@@ -44,7 +44,14 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **Other AIs (user asked):** idea = a second, different-lab model (OpenAI reasoning model; Gemini runner-up, e.g. via
   Google Antigravity) as an extra blind checker of strategy specs in `checks/candidates/`. Needs an `OPENAI_API_KEY`
   in the environment's Network secrets (never pasted in chat). Not set up yet.
-- **Next ideas:** run Monte Carlo on every strategy in the plan at plan size; more forced-flow candidates on ES / GC / CL;
+- **Monte Carlo on the whole funded plan at plan size (done 2026-10-17;** `analysis/plan_montecarlo_test.py`, FUNDED_PLAN.md
+  'Monte Carlo at plan size'): bench reproduces ($10,184 / $12,450, blown 3%). Full size with no cushion rule would hit the
+  $2,000 trail in ~23% of years -- the cushion rule (half size below $1,500) is what keeps blown at 3%. Vault Break is the main
+  drawdown source (alone 29% / yr at 3 MNQ); NFP Fade the weakest line ($375 / yr, P(losing year) 31%, no trail risk);
+  ONB ML longs lost all of 2018 (clustered, DD rank 99%), fine since. No plan change.
+- **Apex Target Guard reviewed statically** (can't compile here): logic and tick rounding look right; still needs the
+  user's compile on the VB, ONB and Bridge Monday charts.
+- **Next ideas:** more forced-flow candidates on ES / GC / CL;
   apply the stop-rejection guard to every strategy using SetStopLoss (offered, not done).
 
 ## Live status (2026-10-14)
