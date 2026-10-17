@@ -43,7 +43,7 @@ bottom). Times are Central (CT).
 
 ## Done
 
-(nothing yet)
+- [x] 2026-10-17: Docker Jesse + Antigravity installed on the user's PC and connected (MCP working). First blind-check task: when the user asks.
 
 ## Reminders
 

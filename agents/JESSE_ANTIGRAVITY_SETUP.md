@@ -103,6 +103,20 @@ anything ambiguous in the spec and how you resolved it). Never touch broker, exc
 Results come back to Claude through you: save the CSV + report and upload them, or commit them to a branch of
 `thebeginning` named `antigravity/<task>` (never to the `claude/...` branches).
 
+## Fixes found during the first install (2026-10-17, done and working)
+
+- **Password with a `$`** gets cut short by Docker (warning `The "j" variable is not set`): use letters, numbers, `!`, `_`, `-`.
+- **`ports are not available ... 9001`** (Windows reserves that port): in `jesse-bot\docker\docker-compose.yml` delete the
+  two lines `# LSP Port` and `- "9001:9001"` (editor code hints only; not needed), then `docker compose down` and
+  `docker compose up -d`.
+- **Two different tokens:** `LICENSE_API_TOKEN` in `.env` = the jesse.trade account token (https://jesse.trade/user/api-tokens);
+  the token in Antigravity's config = the dashboard **MCP token** (Connect an assistant → Manual connection details →
+  Copy token). The wrong one gives `Unauthorized`.
+- **Antigravity (this version):** Customizations → MCP Servers → the 'copy config file path' icon; open that path in
+  Notepad (`notepad <path>`), paste the JSON from section 5, save, restart Antigravity. The store (+) has no Jesse entry.
+- Don't use 'Fix with Agent' or paste tokens into the Antigravity chat: that sends them to Google's servers.
+- Docker Desktop's 'Gordon' assistant isn't needed; reject its requests.
+
 ## 7. What not to do
 
 - No live trading or exchange API keys in Jesse (it trades crypto exchanges only; our trading stays in MultiCharts / Apex).
