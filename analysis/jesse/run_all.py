@@ -30,6 +30,9 @@ RUNS = {  # strategy: (candle file, timeframe, point value, tick)
     "LateDayFlow": ("jesse_nq.npy", "5m", 20.0, 0.25),
     "NFPFade": ("jesse_nq.npy", "5m", 20.0, 0.25),
     "CLSundayFade": ("jesse_cl_et.npy", "5m", 1000.0, 0.01),
+    # Antigravity's GoldenCross (2026-10-17): as written (holds overnight) and Apex-flat at 15:00 CT; 1-hour bars as its report
+    "GoldenCross": ("jesse_nq.npy", "1h", 20.0, 0.25),
+    "GoldenCrossEOD": ("jesse_nq.npy", "1h", 20.0, 0.25),
 }
 
 

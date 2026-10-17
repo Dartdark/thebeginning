@@ -63,6 +63,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   unfiltered until its score had 60 days of history (now stands aside; user pastes the funded file when funded). Monday
   report / bench include 40 holiday Mondays the code skips (negligible). Setup sheet for Docker Jesse + Antigravity on the
   user's PC: `agents/JESSE_ANTIGRAVITY_SETUP.md` (user will say when to write Antigravity's first task).
+- **Antigravity's work lands on branch `antigravity/jesse`** (user's jesse-bot folder; `git fetch origin antigravity/jesse`).
+  First item: Golden Cross 50/200 (never backtested by it) -> F on our data (`analysis/jesse/strategies/GoldenCross`).
 - **Next ideas:** more forced-flow candidates on ES / GC / CL.
 
 ## Live status (2026-10-14)

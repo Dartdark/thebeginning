@@ -1,0 +1,30 @@
+
+=== GoldenCross: 69 trades 2018-26, held median 2.1 days (max 18), across a contract roll 11
+   all             n  69 avg $   -824 PF 0.69 win  33% t -1.14 total $-56,829
+   longs           n  35 avg $    414 PF 1.19 win  34% t  0.35 total $14,498
+   shorts          n  34 avg $  -2098 PF 0.33 win  32% t -2.75 total $-71,328
+   2023+           n  31 avg $   -657 PF 0.76 win  26% t -0.53 total $-20,362
+   no roll trades  n  58 avg $   -948 PF 0.62 win  31% t -1.45 total $-54,998
+   by year: 2018 $3,584 | 2019 $-6,930 | 2020 $-3,266 | 2021 $6,831 | 2022 $-36,687 | 2023 $-17,336 | 2024 $16,557 | 2025 $-36,508 | 2026 $16,926
+                   trades win     avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+GoldenCross per NQ     69 33%   $-824 $-5,175  -0.32   -0.53          0.69 $81,685  -0.06 66.10      -0.16
+  longs                35 34%    $414  $2,153   0.16    0.38          1.19 $34,985   0.06 26.07       0.17
+  shorts               34 32% $-2,098 $-7,328  -0.79   -0.92          0.33 $71,402  -0.10 61.72      -0.24
+   Monte Carlo GoldenCross at 1 MNQ (x0.1): trades 69 | total p5 $-13,505 / p50 $-5,862 / p95 $2,945, P(total <= 0) 86.8%
+      max DD actual $8,723 (rank 54%), shuffled p50 $8,360 / p95 $14,482 / p99 $16,982; losing streak actual 11, p95 14
+      252-day block bootstrap: P&L p5 $-3,079 / p50 $-679 / p95 $2,519, P(loss) 66.0%, max DD p95 $3,302, P(hit $2,000 EOD trailing) 27.9%
+
+=== GoldenCrossEOD: 55 trades 2018-26, held median 0.1 days (max 1), across a contract roll 0
+   all             n  55 avg $   -250 PF 0.69 win  53% t -0.91 total $-13,772
+   longs           n  28 avg $    -92 PF 0.86 win  50% t -0.28 total $-2,584
+   shorts          n  27 avg $   -414 PF 0.59 win  56% t -0.92 total $-11,188
+   2023+           n  24 avg $     48 PF 1.08 win  58% t  0.12 total $1,162
+   no roll trades  n  55 avg $   -250 PF 0.69 win  53% t -0.91 total $-13,772
+   by year: 2018 $31 | 2019 $-1,636 | 2020 $-878 | 2021 $-202 | 2022 $-12,249 | 2023 $3,149 | 2024 $2,288 | 2025 $-8,407 | 2026 $4,132
+                      trades win   avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+GoldenCrossEOD per NQ     55 53% $-250 $-1,516  -0.30   -0.36          0.69 $20,171  -0.08 22.15      -0.14
+  longs                   28 50%  $-92   $-284  -0.09   -0.12          0.86  $8,217  -0.03  7.94      -0.07
+  shorts                  27 56% $-414 $-1,231  -0.31   -0.36          0.59 $14,370  -0.09 17.68      -0.14
+   Monte Carlo GoldenCrossEOD at 1 MNQ (x0.1): trades 55 | total p5 $-3,954 / p50 $-1,368 / p95 $994, P(total <= 0) 82.1%
+      max DD actual $2,017 (rank 44%), shuffled p50 $2,160 / p95 $4,336 / p99 $5,420; losing streak actual 6, p95 8
+      252-day block bootstrap: P&L p5 $-1,104 / p50 $-101 / p95 $627, P(loss) 58.8%, max DD p95 $1,245, P(hit $2,000 EOD trailing) 0.4%
