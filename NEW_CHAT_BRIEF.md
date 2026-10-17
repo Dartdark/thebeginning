@@ -31,7 +31,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 - **Antigravity Phase 2 done (2026-10-17, `agents/results/PHASE2_VERDICT.md`):** 40 pre-registered variants on the 8 plan
   strategies, none beat the originals in both periods; LDF move ≥ 0.50 ATR on the bootstrapped bench a wash; its new
-  ESEuroCloseTrend rebuilt = t 1.4, F. Still open for it: Task 09 (ES MOC blind check). Journal: `journal/` (Obsidian).
+  ESEuroCloseTrend rebuilt = t 1.4, F. Task 09 (ES MOC) done: PASS on the rule; its run was 1 minute early (read close stamps as open) and still made $156-161
+  per ES, PF 2.19 = robust to the minute (`agents/results/TASK_09_VERDICT.md`). Journal: `journal/` (Obsidian).
 - **User's to-do list: `TODO.md`** (reminders scheduled in the original session: Sun + Wed 10:52 CT, and Sun 10/18 15:30 CT).
 
 - **Account #1 (50K EOD evaluation): about +$1,500, $1,500 left to the $3,000 target.** The user entered the ONB trade

@@ -19,6 +19,7 @@ REPORTS = {  # strategy: (report, point value, tick, cost per fill)
     "LateDayFlow": (R + "_ @NQ - 5 Minutes Late Day Flow.xlsx", 20.0, 0.25, 7.25),
     "NFPFade": (R + "_ @NQ - 5 Minutes NFP Fade.xlsx", 20.0, 0.25, 7.25),
     "CLSundayFade": (R + "_ CL - 5 Minutes CL Sunday Gap.xlsx", 1000.0, 0.01, 7.25),
+    "ESMOCFollow": (R + "_ @ES - 5 Minutes ES MOC Follow.xlsx", 50.0, 0.25, 5.0),
 }
 
 

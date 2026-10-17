@@ -56,12 +56,22 @@
       2024-09-06 #0: AG 18855.25->18745.75 (time) | MC 18853.50->18745.75  diff $35
       only MC: [datetime.date(2018, 1, 5)]
 
+=== Task 09 ESMOCFollow: MC 199 | Antigravity 195 | Claude's Jesse 199; same day+order as MC 171 (only MC 28, only AG 24), same side 100.0%
+   P&L within $50 of MC 27.5% (corr 0.929); within $50 of Claude's Jesse 26.3%
+   gross $ per trade: MC 190 | AG 164 | Claude's Jesse 190
+      2020-03-13 #0: AG 2614.75->2670.00 (time) | MC 2617.00->2692.50  diff $-1,012
+      2024-12-18 #0: AG 5976.25->5956.25 (time) | MC 5976.00->5939.50  diff $-825
+      2018-02-05 #0: AG 2664.75->2656.50 (time) | MC 2659.25->2666.75  diff $788
+      only MC: [datetime.date(2018, 2, 28), datetime.date(2018, 10, 1), datetime.date(2018, 10, 15), datetime.date(2019, 7, 19), datetime.date(2019, 12, 3), datetime.date(2020, 1, 10), datetime.date(2020, 1, 31), datetime.date(2020, 2, 25)]
+      only AG: [datetime.date(2018, 2, 1), datetime.date(2018, 2, 6), datetime.date(2018, 10, 4), datetime.date(2018, 10, 31), datetime.date(2019, 5, 13), datetime.date(2020, 2, 28), datetime.date(2020, 10, 6), datetime.date(2021, 3, 18)]
+
 Summary:
 task     strategy   mc  antigravity  claude_jesse  same_days_mc  only_mc  only_ag  same_side  pnl50_mc  corr_mc  pnl50_jesse  gross_mc  gross_ag  gross_j
-  02   VaultBreak 1743         1747          1748          1742        1        5        1.0     0.993    0.987          1.0   106.368   109.242  108.547
-  03  ONBiasADX30  677          673           675           671        6        2        1.0     1.000    1.000          1.0   389.838   394.232  389.417
-  04     ONBiasML  344          328           329           328       16        0        1.0     0.991    1.000          1.0   655.509   705.460  693.183
-  05   MondayLong  451          409           410           409       42        0        1.0     0.995    1.000          1.0   434.867   479.941  479.965
-  06 ExpOpenShort  105          105           105           105        0        0        1.0     1.000    1.000          1.0   491.095   491.130  491.130
-  07  LateDayFlow  898          889           897           889        9        0        1.0     0.999    1.000          1.0   110.780   113.228  111.998
-  08      NFPFade   79           78            79            78        1        0        1.0     1.000    1.000          1.0   351.772   353.694  352.698
+  02   VaultBreak 1743         1747          1748          1742        1        5        1.0     0.993    0.987        1.000   106.368   109.242  108.547
+  03  ONBiasADX30  677          673           675           671        6        2        1.0     1.000    1.000        1.000   389.838   394.232  389.417
+  04     ONBiasML  344          328           329           328       16        0        1.0     0.991    1.000        1.000   655.509   705.460  693.183
+  05   MondayLong  451          409           410           409       42        0        1.0     0.995    1.000        1.000   434.867   479.941  479.965
+  06 ExpOpenShort  105          105           105           105        0        0        1.0     1.000    1.000        1.000   491.095   491.130  491.130
+  07  LateDayFlow  898          889           897           889        9        0        1.0     0.999    1.000        1.000   110.780   113.228  111.998
+  08      NFPFade   79           78            79            78        1        0        1.0     1.000    1.000        1.000   351.772   353.694  352.698
+  09  ESMOCFollow  199          195           199           171       28       24        1.0     0.275    0.929        0.263   189.510   164.275  190.172

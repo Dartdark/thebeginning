@@ -78,6 +78,8 @@ weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail
   - all in **Central** time, stamped at the bar's close, not back-adjusted (contract roll jumps around 03:30 or 17:00 CT).
 - **`C:\NQData`** (the user's own exports): NQ is Central time, but **CL is Eastern**. For a task, use the files it
   names; if you use `C:\NQData`, check it matches and say so.
+- **Stamps (Task 09 slip):** the repo's 1-minute CSVs are stamped at the bar's CLOSE (row `1450` = the minute 14:49-14:50).
+  Before running, check a known price: ES 2020-03-13, the row stamped 14:50 closes at 2617.00.
 - **Jesse traps you already found:**
   - fill missing minutes only after a bucket's first real minute;
   - a 5-minute route runs only if the bucket's 5th minute exists;

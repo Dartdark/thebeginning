@@ -8,7 +8,7 @@ SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 sys.argv = sys.argv[:1]
 import compare as C
 
-TASKS = {"02": "VaultBreak", "03": "ONBiasADX30", "04": "ONBiasML", "05": "MondayLong", "06": "ExpOpenShort", "07": "LateDayFlow", "08": "NFPFade"}
+TASKS = {"02": "VaultBreak", "03": "ONBiasADX30", "04": "ONBiasML", "05": "MondayLong", "06": "ExpOpenShort", "07": "LateDayFlow", "08": "NFPFade", "09": "ESMOCFollow"}
 
 
 def ag(nn):

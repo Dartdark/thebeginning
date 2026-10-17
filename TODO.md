@@ -33,7 +33,7 @@ bottom). Times are Central (CT).
 - [x] (2026-10-17, confirmed 199/199) MultiCharts backtest: [ES_MOC_Follow.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/ES_MOC_Follow.txt)
   on a 5-minute **@ES** chart (Exchange time, 24-hour session, Bar Magnifier 1 min, from Jan 2018, NumContracts 1, no costs);
   save the report as "Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx" and push / send it.
-- [ ] Antigravity: Task 09 blind check (pull `agents/tasks` and the `ES_1min_*.csv` files first).
+- [x] (2026-10-17, PASS on the rule; its clock ran 1 min early, see agents/results/TASK_09_VERDICT.md) Antigravity: Task 09 blind check (pull `agents/tasks` and the `ES_1min_*.csv` files first).
 - [ ] When funded: ES MOC Follow (IN THE PLAN since 2026-10-17) on a 5-min MES chart, NumContracts 2, Symbol Mapping `@MES -> MESZ6` (roll with MNQ). Vault Break funded: `NumContracts` 2, `FlaggedContracts` 1 (decided 2026-10-17).
 
 ## Journal (Obsidian)
