@@ -1,0 +1,34 @@
+Meta-labeling on Vault Break (user, 2026-10-17): the rule decides the entry; a model decides whether to take it.
+
+Out of sample 2019-26: 1620 trades, kept 1267 (78%) avg $99 (t 3.7) | skipped 353 avg $88 (t 2.1) | kept - skipped t +0.23; IC +0.019
+   by year ($ a trade):
+       kept  skipped  n_skip
+date                        
+2019   27.0     22.0      70
+2020   15.0    171.0     124
+2021  194.0     17.0      58
+2022   46.0    223.0      35
+2023  116.0    147.0      32
+2024   44.0    302.0      13
+2025  173.0     16.0       6
+2026   96.0   -614.0      15
+   kept beats skipped in 4/8 years
+   secondary (skip the bottom third per year): kept $128 vs skipped $34, t +1.93
+   total P&L change from skipping: $-31,046 per NQ; random skips of the same share: p50 $-32,891, p95 $-11,656; P(random >= filter) 0.441
+
+   latest weights (trained on 2018-25, standardised, $ per trade per 1 sd):
+   sp            -20.6
+   prev_win       15.5
+   rth1          -14.5
+   dow0           12.7
+   rv5_rv20      -12.3
+   range_today   -12.1
+   opex_wk       -11.3
+   dist50        -11.2
+   tdm3           10.7
+   day_move        9.5
+
+Funded bench (cushion sizing, full from $1,500):
+   plan, VB as now (3 / 1 flagged)      1y $10,184 blown 3% (2023+ starts $11,912) | 2y $12,450 blown 3%
+   plan, VB meta-labelled (3 / 1)       1y $9,464 blown 4% (2023+ starts $11,622) | 2y $12,292 blown 3%
+   plan, VB meta-labelled 4 / 1         1y $9,081 blown 19% (2023+ starts $10,576) | 2y $10,371 blown 21%
