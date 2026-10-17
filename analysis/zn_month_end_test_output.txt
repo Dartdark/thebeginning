@@ -1,0 +1,28 @@
+Month-end Treasury index extension on ZN (2026-10-17, literature scan): bond index funds must buy duration at the
+
+2263 ZN days 2018-26; month-ends 106
+   A last business day 7:21 -> 13:59 (long)       n  105 avg $ -31.0 PF 0.71 win 48% t -1.4 yrs+ 3/9 | 18-22 $   7.0 (t +0.2) | 23+ $ -79.7 (t -2.3)
+   B day before 7:21 -> 13:59                     n  106 avg $ -22.9 PF 0.80 win 56% t -0.9 yrs+ 3/9 | 18-22 $ -33.2 (t -1.0) | 23+ $  -9.4 (t -0.2)
+   C last business day 12:00 -> 13:59             n  104 avg $ -55.8 PF 0.31 win 31% t -4.0 yrs+ 1/9 | 18-22 $ -34.1 (t -1.6) | 23+ $ -84.3 (t -5.8)
+   A, refunding months (Feb/May/Aug/Nov)          n   34 avg $  26.9 PF 1.36 win 62% t +0.6 yrs+ 5/9 | 18-22 $  57.0 (t +1.0) | 23+ $ -11.4 (t -0.2)
+   A, other months                                n   71 avg $ -58.7 PF 0.52 win 41% t -2.2 yrs+ 2/9 | 18-22 $ -16.8 (t -0.5) | 23+ $-112.8 (t -2.7)
+   placebo: all other days 7:21 -> 13:59          n 2035 avg $ -62.3 PF 0.59 win 42% t -8.6 yrs+ 0/9 | 18-22 $ -62.8 (t -6.8) | 23+ $ -61.6 (t -5.3)
+   placebo: first business day 7:21 -> 13:59      n   99 avg $  -8.8 PF 0.94 win 44% t -0.2 yrs+ 4/9 | 18-22 $ -14.8 (t -0.3) | 23+ $  -0.7 (t -0.0)
+   gross (before costs) A: $14.7 a trade; other days $-16.5
+
+                              trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+ZN month-end long (A), per ZN    106 47% $-31  $-358  -0.45   -0.58          0.71 $4,662  -0.08  2.94      -0.24
+                                     actual       p5      p50      p95
+name                  metric                                          
+ZN month-end A, 2023+ sharpe          -1.12    -1.76    -1.08    -0.31
+                      sortino         -1.27    -1.85    -1.22    -0.39
+                      pf_day           0.40     0.20     0.41     0.79
+                      calmar          -0.21    -0.26    -0.23    -0.12
+                      ulcer            3.96     1.65     4.37     7.79
+                      max_dd       4,535.38 1,712.55 3,821.06 6,514.24
+                      P(Sharpe<=0)      NaN      NaN     0.99      NaN
+                      actual_dd pct_rank   dd50   dd95   dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+ZN month-end A, 2023+    $4,535      92% $3,960 $4,619 $4,924        100%        100%        100%
+   Monte Carlo per ZN (x1): trades 105 | total p5 $-7,241 / p50 $-3,257 / p95 $681, P(total <= 0) 91.3%
+      max DD actual $4,662 (rank 57%), shuffled p50 $4,368 / p95 $7,853 / p99 $9,166; losing streak actual 8, p95 10
+      252-day block bootstrap: P&L p5 $-1,626 / p50 $-302 / p95 $1,011, P(loss) 64.8%, max DD p95 $1,807, P(hit $2,000 EOD trailing) 2.8%
