@@ -1,0 +1,60 @@
+User's regime filter (2026-10-17): 20-trading-day change of the market > +5% = bull, -5%..+5% = sideways, < -5% = bear.
+NQ days by state 2018-26: side 61%, bull 27%, bear 13%
+CL days by state 2018-26: side 40%, bull 33%, bear 27%
+
+=== VaultBreak  (1743 trades, net $ per contract)
+   all    bull n  429 $    93 (t  2.2) | side n 1024 $    47 (t  1.7) | bear n  290 $   205 (t  3.8)   most different: bear vs rest t +2.5 (2018-22 +1.7, 2023+ +2.3)
+
+=== ONBiasADX30  (676 trades, net $ per contract)
+   all    bull n  188 $   296 (t  2.3) | side n  412 $   306 (t  3.3) | bear n   76 $   856 (t  2.6)   most different: bear vs rest t +1.6 (2018-22 +1.5, 2023+ +0.9)
+   longs  bull n   85 $   326 (t  2.1) | side n  229 $   221 (t  2.0) | bear n   45 $   880 (t  2.2)   most different: bear vs rest t +1.5 (2018-22 +2.5, 2023+ +0.4)
+   shorts bull n  103 $   272 (t  1.4) | side n  183 $   413 (t  2.7) | bear n   31 $   821 (t  1.5)   most different: bull vs rest t -0.8 (2018-22 -1.1, 2023+ -0.1)
+
+=== ONBiasML  (343 trades, net $ per contract)
+   all    bull n   91 $   607 (t  3.0) | side n  211 $   636 (t  4.1) | bear n   41 $   658 (t  1.2)   most different: bull vs rest t -0.1 (2018-22 -0.6, 2023+ +0.4)
+   longs  bull n   41 $  1035 (t  4.2) | side n  102 $   617 (t  3.0) | bear n   18 $  -293 (t -0.4)   most different: bull vs rest t +1.7 (2018-22 +1.7, 2023+ +0.9)
+   shorts bull n   50 $   256 (t  0.9) | side n  109 $   653 (t  2.8) | bear n   23 $  1403 (t  1.8)   most different: bull vs rest t -1.4 (2018-22 -1.9, 2023+ -0.2)
+
+=== MondayLong  (451 trades, net $ per contract)
+   all    bull n  118 $   413 (t  2.0) | side n  275 $   356 (t  2.3) | bear n   58 $   662 (t  1.3)   most different: bear vs rest t +0.6 (2018-22 +0.3, 2023+ +0.8)
+
+=== ExpOpenShort  (105 trades, net $ per contract)
+   all    bull n   27 $   517 (t  1.8) | side n   66 $   520 (t  2.2) | bear n   12 $    57 (t  0.1)   most different: bear vs rest t -0.7 (2018-22 -0.7, 2023+ +nan)
+
+=== LateDayFlow  (895 trades, net $ per contract)
+   all    bull n  219 $    68 (t  1.6) | side n  569 $    88 (t  2.8) | bear n  107 $   121 (t  1.0)   most different: bull vs rest t -0.5 (2018-22 -1.2, 2023+ +0.3)
+   longs  bull n  122 $    52 (t  1.1) | side n  298 $    73 (t  1.9) | bear n   65 $    68 (t  0.4)   most different: bull vs rest t -0.3 (2018-22 -1.3, 2023+ +0.5)
+   shorts bull n   97 $    89 (t  1.2) | side n  271 $   103 (t  2.1) | bear n   42 $   203 (t  1.1)   most different: bear vs rest t +0.5 (2018-22 +2.0, 2023+ -1.0)
+
+=== NFPFade  (79 trades, net $ per contract)
+   all    bull n   18 $   213 (t  1.0) | side n   49 $   333 (t  1.4) | bear n   12 $   476 (t  0.8)   most different: bull vs rest t -0.5 (2018-22 -0.9, 2023+ +0.1)
+   longs  bull n    9 $   492 (t  1.6) | side n   21 $   336 (t  1.2) | bear n    5 $   -94 (t -0.1)   most different: bull vs rest t +0.6 (2018-22 +nan, 2023+ -0.0)
+   shorts bull n    9 $   -65 (t -0.2) | side n   28 $   331 (t  0.9) | bear n    7 $   882 (t  1.1)   most different: bull vs rest t -1.1 (2018-22 -1.3, 2023+ +nan)
+
+=== CLSundayFade  (97 trades, net $ per contract)
+   all    bull n   38 $  1229 (t  2.8) | side n   37 $   463 (t  2.7) | bear n   22 $   -55 (t -0.2)   most different: bear vs rest t -2.2 (2018-22 -2.2, 2023+ -1.2)
+
+Summary: tests run 48 (strategy x side x state); |t| >= 2 in 2 of 16 best-state rows; same sign in both periods and |t| >= 2 overall: 2
+    strategy   side state     t  t_1822  t_23
+  VaultBreak    all  bear  2.47    1.72  2.33
+ ONBiasADX30    all  bear  1.65    1.49  0.91
+ ONBiasADX30  longs  bear  1.54    2.48  0.38
+ ONBiasADX30 shorts  bull -0.80   -1.14 -0.14
+    ONBiasML    all  bull -0.13   -0.62  0.38
+    ONBiasML  longs  bull  1.74    1.72  0.92
+    ONBiasML shorts  bull -1.40   -1.88 -0.21
+  MondayLong    all  bear  0.55    0.30  0.79
+ExpOpenShort    all  bear -0.67   -0.74   NaN
+ LateDayFlow    all  bull -0.46   -1.21  0.30
+ LateDayFlow  longs  bull -0.32   -1.27  0.48
+ LateDayFlow shorts  bear  0.52    2.04 -1.00
+     NFPFade    all  bull -0.47   -0.87  0.09
+     NFPFade  longs  bull  0.58     NaN -0.05
+     NFPFade shorts  bull -1.14   -1.27   NaN
+CLSundayFade    all  bear -2.20   -2.15 -1.20
+
+Funded bench (analysis/regime20_bench.py):
+   plan (bench)                               1y $10,184 blown 3% | 2y $12,450 blown 3%
+   CL fade skipped in CL bear state           1y $10,253 blown 2% | 2y $12,640 blown 2%
+   VB 4 MNQ in NQ bear state (else 3 / 1)     1y $10,250 blown 7% | 2y $11,804 blown 7%
+   VB 2 MNQ outside bear (bear 3)             1y $10,116 blown 5% | 2y $12,032 blown 5%
