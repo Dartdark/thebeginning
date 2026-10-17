@@ -36,6 +36,11 @@ bottom). Times are Central (CT).
 - [ ] Antigravity: Task 09 blind check (pull `agents/tasks` and the `ES_1min_*.csv` files first).
 - [ ] When funded: ES MOC Follow (IN THE PLAN since 2026-10-17) on a 5-min MES chart, NumContracts 2, Symbol Mapping `@MES -> MESZ6` (roll with MNQ). Vault Break funded: `NumContracts` 2, `FlaggedContracts` 1 (decided 2026-10-17).
 
+## Journal (Obsidian)
+
+- [ ] One-time setup: follow [journal/README.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/journal/README.md) (separate clone in `C:\TradingVault`, Daily notes + Templates plugins).
+- [ ] From Mon 10/19: a daily note each trading day; run `journal\sync.ps1` and tell Claude "read my journal".
+
 ## Later
 
 - [ ] Before the CL Sunday fade goes live: confirm Apex allows MCL on the account.

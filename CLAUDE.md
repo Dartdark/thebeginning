@@ -11,6 +11,10 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   commit to all of them.
 - **Links:** always give direct GitHub links, and raw links
   (`raw.githubusercontent.com/...`) for code to paste into MultiCharts.
+- **Journal (Obsidian, 2026-10-17):** `journal/daily/` and `journal/ideas/` are the user's notes, pushed to the work branch by
+  `journal/sync.ps1` (with `live/` reports). On "read my journal": `git pull` the work branch, read the new notes, compare
+  with the backtest trades of those days, act on problems (fix / `MULTICHARTS_PITFALLS.md` / `TODO.md`), test ideas and set
+  their `Status:` line. Never edit the user's notes otherwise. The user also pushes now: always pull before pushing.
 - **Folders:** `apex_strategies/` = challenge-only strategies (Vault Break, Overnight Bias);
   `funded_strategies/` = funded strategies. Comparing them is fine; the challenge ones are not
   meant for making money in funded accounts.

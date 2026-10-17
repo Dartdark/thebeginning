@@ -1,0 +1,30 @@
+# {{date:YYYY-MM-DD}} ({{date:dddd}})
+
+## Accounts
+| Account | Start balance | End balance | Day P&L | Note |
+|---|---|---|---|---|
+| #1 50K (combine) |  |  |  |  |
+
+## Strategies today
+Fill in only the ones that traded or should have. "Fill vs chart": did the live fill match the MultiCharts chart arrow?
+
+| Strategy | Traded? | Side / contracts | Entry → exit | P&L | Fill vs chart | Issue |
+|---|---|---|---|---|---|---|
+| Vault Break |  |  |  |  |  |  |
+| ONB ADX30 |  |  |  |  |  |  |
+| EOS (expiration Fridays) |  |  |  |  |  |  |
+| Bridge Monday (Sun 19:00 → Mon) |  |  |  |  |  |  |
+
+## Problems
+- Order rejections / error messages (copy the exact text):
+- Disconnections, PC asleep, MultiCharts restarts:
+- Anything I did by hand (closed, moved or cancelled an order):
+
+## Checklist
+- [ ] StartBalance on the Target Guard set to this morning's Apex balance
+- [ ] Auto-trading on, all charts green, Rithmic connected
+- [ ] Flat by 15:59 CT
+
+## How I felt / what I noticed
+
+## Questions or ideas for Claude
