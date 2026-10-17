@@ -1,0 +1,21 @@
+ES MOC Follow: MultiCharts report vs the Python test (s_rank_es_round1_test.py section 5) and the Jesse port, trade by trade
+
+MultiCharts 199 trades (2018-01-26 .. 2026-07-29) | Python 199 | Jesse 199; same days MC/Python 199 (only MC 0, only Python 0); same side 100.0%
+   entry price identical (Python before its 1-tick slippage) 100.0%, within 1 tick 100.0%
+   gross P&L within $25: 99.5% of matched trades; corr 1.000
+      2021-02-23: MC 3885.50->3878.00 (close) | Python 3885.75->3875.89 kind 0  diff $93
+      2021-02-26: MC 3848.50->3836.25 (stop) | Python 3848.75->3836.50 kind 0  diff $-25
+      2022-04-18: MC 4367.50->4385.00 (close) | Python 4367.25->4384.77 kind 0  diff $-24
+      2019-07-31: MC 2991.50->2985.25 (stop) | Python 2991.75->2985.46 kind 0  diff $-23
+      2018-02-05: MC 2659.25->2666.75 (stop) | Python 2659.00->2666.55 kind 0  diff $-23
+   only MC: [] | only Python: []
+
+MultiCharts trades net of $5 + 1 tick per market / stop fill: n 199, $171 a trade, PF 2.23, t 3.7, win 58%; 2018-22 $206, 2023+ $109; years + 8/9
+   by year: 2018 $1,705 | 2019 $478 | 2020 $11,860 | 2021 $4,742 | 2022 $7,575 | 2023 $2,188 | 2024 $8,550 | 2025 $-4,605 | 2026 $1,612
+                           trades win  avg annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
+ES MOC Follow (MC), per ES    199 58% $171 $3,873   1.22    2.44          2.23 $6,758   0.57  2.52       3.07
+  longs                        80 61% $243 $2,210   1.07    3.44          3.38 $1,878   1.18  1.16       3.80
+  shorts                      119 56% $123 $1,663   0.68    1.15          1.75 $6,072   0.27  2.97       1.12
+   Monte Carlo at 2 MES (x0.2): trades 199 | total p5 $3,866 / p50 $6,814 / p95 $9,824, P(total <= 0) 0.0%
+      max DD actual $1,352 (rank 96%), shuffled p50 $718 / p95 $1,306 / p99 $1,688; losing streak actual 4, p95 8
+      252-day block bootstrap: P&L p5 $-332 / p50 $676 / p95 $2,227, P(loss) 11.8%, max DD p95 $987, P(hit $2,000 EOD trailing) 0.1%

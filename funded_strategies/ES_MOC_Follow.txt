@@ -25,6 +25,15 @@
   - blown accounts 5-9% versus 12-16%;
   - all 6 payouts as fast or faster.
 
+  MULTICHARTS CONFIRMED (2026-10-17, analysis/es_moc_confirm.py; user's @ES 5-minute report, 2018-01 -> 2026-07):
+  - 199 trades, all on the same days and sides as the Python test and the Jesse port;
+  - entry prices identical, gross P&L within $25 on 99.5% of trades.
+  - After $5 + 1 tick per market / stop fill: $171 a trade, PF 2.23, t 3.7, 58% winners, 8 of 9 years positive
+    (2025 -$4,605: its worst stretch, drawdown at the 96th percentile of reshuffles); 2018-22 $206, 2023+ $109.
+  - Longs $243 (PF 3.38), shorts $123 (PF 1.75).
+  - Sharpe 1.22, Sortino 2.44, Calmar 0.57.
+  - Monte Carlo at 2 MES: P(hit the $2,000 trail in a year) 0.1%.
+
   Apply to a 5-minute ES or MES chart, Exchange time zone (Central), CME 24-hour session (for the ATR), Bar Magnifier on
   at 1 minute. Load at least 25 trading days before the backtest start.
 
