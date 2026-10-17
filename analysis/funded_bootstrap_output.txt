@@ -1,0 +1,58 @@
+Bootstrapped funded bench (2026-10-17). The funded bench (funded_lab / funded_sim) runs every start day of ONE history;
+Single-history bench for reference: 1y $10,184 / 2y $12,450, blown 3% / 3%
+
+Block length 10 days, 600 histories (963 decision minutes kept):
+         y1 y1_p5      y2 y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan $8,577    $0 $11,358    $0 $13,000 12.7%   85.5%   278      50.0%      $0       0.0%
+
+Block length 20 days, 600 histories (963 decision minutes kept):
+         y1 y1_p5      y2 y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan $8,446    $0 $11,052    $0 $13,000 15.5%   83.7%   279      50.0%      $0       0.0%
+
+Block length 60 days, 600 histories (963 decision minutes kept):
+         y1 y1_p5      y2 y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan $8,518    $0 $11,430    $0 $13,000 12.7%   85.8%   282      50.0%      $0       0.0%
+
+Example decisions (1,000 paired histories, L 20):
+                   y1 y1_p5      y2 y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan           $8,450    $0 $11,158    $0 $13,000 14.2%   84.1%   279      50.0%      $0       0.0%
+drop NFP       $8,151    $0 $11,056    $0 $13,000 14.7%   82.8%   288      49.5%   $-102       0.5%
+plan, VB 2 / 1 $8,302    $0 $11,792    $0 $13,000  8.6%   88.4%   291      52.0%    $634      -5.6%
+Decisions on 1,000 paired bootstrapped histories (L 20, 2-year horizon, cushion ref $1,500 unless noted):
+                            y1 y1_p5      y2 y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan (VB 3 / 1)         $8,450    $0 $11,158    $0 $13,000 14.2%   84.1%   279      50.0%      $0       0.0%
+VB 2 / 1                $8,302    $0 $11,792    $0 $13,000  8.6%   88.4%   291      52.0%    $634      -5.6%
+VB 2 / 0                $8,348    $0 $11,882    $0 $13,000  7.8%   89.1%   293      52.8%    $725      -6.4%
+drop NFP                $8,151    $0 $11,056    $0 $13,000 14.7%   82.8%   288      49.5%   $-102       0.5%
++ ES MOC 1 MES          $8,612    $0 $11,240    $0 $13,000 13.8%   84.6%   273      50.3%     $82      -0.4%
++ ES MOC 2 MES          $8,865    $0 $11,412    $0 $13,000 12.4%   86.4%   267      51.6%    $254      -1.8%
+VB 2 / 1 + ES MOC 2 MES $8,810    $0 $12,035    $0 $13,000  7.2%   91.0%   278      53.4%    $878      -7.0%
+NFP -> ES MOC 2 MES     $8,629    $0 $11,328    $0 $13,000 13.0%   85.7%   273      50.8%    $171      -1.2%
+
+   cushion ref $1,000 (full size from that cushion):
+             y1 y1_p5      y2 y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan     $8,238    $0 $10,192    $0 $13,000 22.9%   76.6%   280      50.0%      $0       0.0%
+VB 2 / 1 $8,367    $0 $10,904    $0 $13,000 16.9%   82.1%   284      52.4%    $712      -6.0%
+
+   cushion ref $2,000 (full size from that cushion):
+             y1 y1_p5      y2  y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan     $8,279    $0 $11,949     $0 $13,000  7.4%   89.2%   290      50.0%      $0       0.0%
+VB 2 / 1 $7,869    $0 $12,264 $7,500 $13,000  3.6%   91.0%   304      50.9%    $315      -3.8%
+
+Block length 10, seed 2, 800 histories:
+                            y1 y1_p5      y2 y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan (VB 3 / 1)         $8,402    $0 $11,032    $0 $13,000 15.6%   82.6%   279      50.0%      $0       0.0%
+VB 2 / 1                $8,421    $0 $11,733    $0 $13,000  9.5%   87.9%   284      52.5%    $701      -6.1%
+VB 2 / 1 + ES MOC 2 MES $8,878    $0 $11,882    $0 $13,000  8.5%   89.8%   272      53.8%    $850      -7.1%
+
+Block length 60, seed 3, 800 histories:
+                            y1  y1_p5      y2  y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan (VB 3 / 1)         $8,637     $0 $11,508     $0 $13,000 11.4%   86.4%   278      50.0%      $0       0.0%
+VB 2 / 1                $8,481     $0 $12,059     $0 $13,000  6.2%   90.1%   287      52.4%    $551      -5.1%
+VB 2 / 1 + ES MOC 2 MES $9,138 $1,500 $12,270 $5,000 $13,000  5.0%   92.6%   269      53.5%    $762      -6.4%
+
+Block length 20, seed 4, 800 histories:
+                            y1  y1_p5      y2  y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan (VB 3 / 1)         $8,652     $0 $11,457     $0 $13,000 11.9%   86.0%   281      50.0%      $0       0.0%
+VB 2 / 1                $8,548     $0 $11,938     $0 $13,000  7.5%   89.8%   288      51.9%    $481      -4.4%
+VB 2 / 1 + ES MOC 2 MES $9,011 $1,500 $12,220 $1,500 $13,000  5.8%   92.5%   276      53.5%    $763      -6.1%

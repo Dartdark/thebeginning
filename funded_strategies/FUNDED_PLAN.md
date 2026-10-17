@@ -519,6 +519,41 @@ What it says:
 - Every strategy's whole-period total is positive in ≥ 95% of reshuffles (NFP 94.7%); every strategy's Sharpe 5th
   percentile on 2023 onward is above 0.
 
+## Bootstrapped bench: realistic numbers and a better sizing (2026-10-17)
+
+`analysis/funded_bootstrap.py` runs the same Apex PA simulator on 600-1,000 resampled histories (20-day blocks of whole
+trading days, all strategies kept together; paired across plans). Check: on the real, unshuffled history it reproduces
+the old bench exactly ($12,433, blown 3.1%).
+
+**Realistic plan numbers** (the old single-history bench in brackets):
+
+| | 1 year | 2 years | Blown (2y) | All 6 payouts in 2y | Median days to 6th payout |
+|---|---|---|---|---|---|
+| Current plan (VB 3 / 1) | ~$8,450 ($10,184) | ~$11,200 ($12,450) | **12-16%** (3%) | 83-86% | ~279 (229) |
+
+The real 2018-26 order of days was kind to the plan. Budget for roughly 1 in 7 funded accounts blowing within 2 years,
+and about 13 months to all 6 payouts.
+
+**Decisions on paired histories** (2-year payouts / blown; three block lengths and seeds agree):
+
+| Plan | 2 years | Blown | Days to 6 | vs plan |
+|---|---|---|---|---|
+| Current (VB 3 / 1) | $11,032-11,508 | 11-16% | ~279 | - |
+| VB 2 / 1 | +$481 to +$701 | **−4 to −6 pts** | +6 to +12 | safer, slightly slower |
+| **VB 2 / 1 + ES MOC follow 2 MES** | **+$762 to +$878** | **−6 to −7 pts (5-9%)** | **−3 to −9** | safer AND as fast or faster |
+| Drop NFP | −$102 | +0.5 pt | +9 | a wash (NOT the 3% → 8% the single history showed) |
+| Cushion ref $2,000 (VB 2 / 1) | +$315 | 3.6% | +25 | safest, slower |
+| Cushion ref $1,000 | −$966 | 23% | ≈ | worse |
+
+**Recommendation for the funded phase:**
+1. **VB 2 / 1 instead of 3 / 1.** This only changes `NumContracts`, ready when an account goes funded.
+2. **Add ES MOC follow at 2 MES.**
+   - It is a B-rated forced flow: $158 per ES, t 3.5, uncorrelated with the plan.
+   - It needs, before use: a MultiCharts version and its confirmation, a blind check, and confirmation that Apex allows
+     MES.
+
+The evaluation set is unchanged: this is about the funded account only.
+
 ## How many accounts to run: the full pipeline (2026-10-14)
 
 Code `../analysis/account_pipeline_test.py` (output in `..._output.txt`). Each "slot" cycles through:

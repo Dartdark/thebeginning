@@ -18,7 +18,7 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   preferred; funded payouts are the main goal, challenge improvements are a bonus.
 - **Testing standard:** costs $7.25/NQ ($5/ES) + 1 tick slippage per market/stop fill; 2018–2026;
   by year and 2023 onward; placebo / walk-forward where relevant; funded bench
-  (`analysis/funded_lab.py`). **Always report Sharpe, Sortino, profit factor, Calmar and Ulcer
+  (`analysis/funded_lab.py`; plan decisions on the bootstrapped bench `analysis/funded_bootstrap.py`, which gives ranges). **Always report Sharpe, Sortino, profit factor, Calmar and Ulcer
   index** (`analysis/metrics.py`), for the whole strategy and for longs and shorts separately,
   with bootstrap intervals and drawdown permutation (`analysis/resampling.py`) on the
   2023-onward holdout, plus **Monte Carlo** (`analysis/montecarlo.py`: trade reshuffle + one-year block bootstrap with
