@@ -12,11 +12,13 @@ compares those trades with MultiCharts and its own Jesse runs (`analysis/jesse/c
 | 05 | `TASK_05_MONDAY_LONG.md` | NQ, 5 min | **done: PASS** (`agents/results/TASKS_02_08_VERDICT.md`) |
 | 06 | `TASK_06_EXPIRATION_OPEN_SHORT.md` | NQ, 5 min | **done: PASS** (`agents/results/TASKS_02_08_VERDICT.md`) |
 | 07 | `TASK_07_LATE_DAY_FLOW.md` | NQ, 5 min | **done: PASS** (`agents/results/TASKS_02_08_VERDICT.md`) |
-| 09 | `TASK_09_ES_MOC_FOLLOW.md` | ES, 5 min | new funded candidate (2026-10-17) |
+| 09 | `TASK_09_ES_MOC_FOLLOW.md` | ES, 5 min | **still to run** (ES MOC Follow is in the funded plan since 2026-10-17) |
 | 08 | `TASK_08_NFP_FADE.md` | NQ, 5 min | **done: PASS** (`agents/results/TASKS_02_08_VERDICT.md`) |
 
 Not included: Vault Break SP (Vault Break's entries; its single-print flag only sets the size) and Bridge Monday Long
 (closed source).
+
+Phase 2 (improvement) on 01-08: done 2026-10-17, no variant passed; see `agents/results/PHASE2_VERDICT.md`.
 
 Suggested order: 01, then 06 (simplest NQ rule), 05, 07, 08, 02, 03, 04.
 
