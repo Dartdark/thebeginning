@@ -5,14 +5,14 @@ bottom). Times are Central (CT).
 
 ## Before Sunday 10/18 (test order 17:00 CT, Bridge Monday enters 19:00 CT)
 
-- [ ] **Paste and compile the stop-guard update on the combine charts** (outside market hours; inputs and backtests unchanged):
-  - [ ] Vault Break: [NQ_Vault_Break.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Vault_Break.txt)
+- [x] (2026-10-17, user: done) **Paste and compile the stop-guard update on the combine charts** (outside market hours; inputs and backtests unchanged):
+  - [x] Vault Break: [NQ_Vault_Break.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Vault_Break.txt)
     (or [NQ_Vault_Break_SP.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Vault_Break_SP.txt) if you already switched)
-  - [ ] ONB ADX30: [NQ_Overnight_Bias_ADX30.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Overnight_Bias_ADX30.txt)
-  - [ ] EOS: [NQ_Expiration_Open_Short.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Expiration_Open_Short.txt)
-- [ ] **Bridge Monday chart: add [Apex_Stop_Guard.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Stop_Guard.txt)**,
+  - [x] ONB ADX30: [NQ_Overnight_Bias_ADX30.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Overnight_Bias_ADX30.txt)
+  - [x] EOS: [NQ_Expiration_Open_Short.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Expiration_Open_Short.txt)
+- [x] **Bridge Monday chart: add [Apex_Stop_Guard.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Stop_Guard.txt)**,
   `StopPoints` a few ticks wider than the Bridge's own stop (read it from its inputs or its stop order).
-- [ ] **Compile [Apex_Target_Guard.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Target_Guard.txt)**
+- [x] **Compile [Apex_Target_Guard.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Target_Guard.txt)**
   and add it to the VB, ONB and Bridge Monday charts; `TargetBalance` 53050, `StartBalance` = the Apex balance (set it before
   every session).
 - [ ] **Test order Sunday 17:00 CT** to confirm a real Rithmic fill on the Apex account (Symbol Mapping `@MNQ -> MNQZ6`).
