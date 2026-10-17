@@ -86,12 +86,39 @@ weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail
 ## Rules for every task
 
 1. One task per conversation. Read the task file plus `tasks/COMMON_NQ.md` for NQ tasks.
-2. **Blind:** only the task text. No other code or results about that rule. No optimisation or parameter changes.
+2. **Blind:** only the task text. No other code or results about that rule. No optimisation or parameter changes during the check (improving comes after, see Phase 2).
 3. Ambiguity: take the most literal reading, keep going, list it in the report.
 4. **Output only in `tasks/out_NN/`:** `trades.csv` (columns as the task says), `strategy.py`, `report.md`.
 5. Use only the data the task needs; no extra imports or extra backtests.
 6. **Never** touch live trading, broker or exchange settings, or API keys. Never put tokens or passwords in chat.
 7. When done, tell the user. They commit `tasks/out_NN/` and push it to `antigravity/jesse`.
+
+## Phase 2: improving a strategy (only after its blind check passed AND the user says "improve task NN")
+
+You may then try to make that strategy better. These guardrails decide whether an "improvement" is real or luck, so they
+are not optional.
+
+1. **Write the idea before testing it.** Save `tasks/out_NN/improve_plan.md` first, listing at most **5 variants**. For
+   each: the change, and WHY it should help (a market mechanism, not "the numbers looked better"). Good ideas:
+   - an exit that matches the strategy's reason for working;
+   - skipping a day type with a stated cause;
+   - a better entry fill.
+   Bad ideas: sweeping parameters across a grid, adding indicators until something sticks.
+2. **Design on 2018-2022 only.** Choose using those years. Then run the chosen variant(s) **once** on 2023-2026, the
+   holdout. Don't go back and change things after seeing the holdout; if you do, say so, and it counts as a new trial.
+3. **Same costs as the testing standard;** report longs and shorts separately.
+4. **Count everything you tried,** including failures, in `improve_report.md`. Ten tries and one winner usually means
+   no winner.
+5. **To count as better, a variant must beat the original:**
+   - in BOTH 2018-22 and 2023-26;
+   - on net $ per contract AND on the worst drawdown;
+   - with no new overnight holding (flat by 15:59 CT) and no position sizing above the original.
+6. **Output:** `tasks/out_NN/improve_report.md` (each variant: the idea, the result by period, the trial count) and
+   `improve_strategy.py`.
+
+Claude then re-tests any winner on its own data, on the funded-account simulator and with Monte Carlo. A change only goes
+into the user's MultiCharts code if it also helps there, because an improvement that raises the chance of hitting
+Apex's $2,000 trailing drawdown is not an improvement.
 
 ## Order of the remaining tasks
 
