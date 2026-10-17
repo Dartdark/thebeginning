@@ -1,0 +1,36 @@
+Meta-labeling on Late-Day Flow (user, 2026-10-17), same method as analysis/vb_meta_label_test.py.
+
+Out of sample 2019-26: 792 trades, kept 582 (73%) avg $87 (t 2.4) | skipped 210 avg $119 (t 2.4) | kept - skipped t -0.51; IC -0.012
+   longs: kept $59 (n 294) vs skipped $113 (n 137), t -0.66
+   shorts: kept $115 (n 288) vs skipped $130 (n 73), t -0.16
+   by year ($ a trade):
+       kept  skipped  n_skip
+date                        
+2019 -101.0    -41.0      38
+2020 -220.0     86.0      60
+2021   76.0    154.0      45
+2022  239.0    231.0      24
+2023  189.0    144.0      15
+2024   -5.0    673.0       3
+2025  127.0  -1007.0       7
+2026  131.0    653.0      18
+   kept beats skipped in 3/8 years
+   secondary (skip the bottom third per year): kept $73 vs skipped $140, t -1.12
+   P&L change from skipping: $-24,972 per NQ; random skips p50 $-14,365, p95 $-1,044; P(random >= filter) 0.893
+
+   latest weights ($ per trade per 1 sd):
+   atr_ratio         -26.7
+   move_atr           25.3
+   last_hour          23.0
+   rth1               21.0
+   dow2               16.2
+   dow0              -15.9
+   ret1               15.4
+   dow4              -14.5
+   afternoon_share    12.9
+   dow1               12.7
+
+Funded bench (cushion sizing, full from $1,500):
+   plan, LDF as now (2 MNQ)         1y $10,184 blown 3% | 2y $12,450 blown 3%
+   plan, LDF meta-labelled (2)      1y $10,070 blown 3% | 2y $12,461 blown 3%
+   plan, LDF meta-labelled 3        1y $9,809 blown 5% | 2y $12,198 blown 5%

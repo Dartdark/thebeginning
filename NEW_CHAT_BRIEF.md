@@ -65,6 +65,12 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   user's PC: `agents/JESSE_ANTIGRAVITY_SETUP.md` (user will say when to write Antigravity's first task).
 - **Antigravity's work lands on branch `antigravity/jesse`** (user's jesse-bot folder; `git fetch origin antigravity/jesse`).
   First item: Golden Cross 50/200 (never backtested by it) -> F on our data (`analysis/jesse/strategies/GoldenCross`).
+- **Data that would unlock new forced flows (researched 2026-10-17):** NYSE closing-auction imbalances (NYSE TAQ Order
+  Imbalances from 2008, or Databento NYSE Integrated imbalance schema from May 2018, paid) and SPY / SPX option open interest
+  by strike (historicaloptiondata.com ALLSPY from 2005 ~$455; historicaldata.net from 2002, free 6-month sample incl. SPX;
+  optionsDX). User to decide on a purchase; free route first = historicaldata.net sample to check the format.
+- **Meta-labeling (2026-10-17):** VB and LDF both F (pre-registered walk-forward ridge; no trade-level predictability). ONB is
+  the only strategy where a day filter works.
 - **Next ideas:** more forced-flow candidates on ES / GC / CL.
 
 ## Live status (2026-10-14)
