@@ -1,0 +1,16 @@
+User's rule (2026-10-17): gold futures (GC), 1-hour chart, buy when SMA50 crosses above SMA200, close when it crosses
+
+Oct 2023 - Oct 2026 (1 GC, roll-adjusted, net): 53 trades, total $118,682, avg $2,239, win 45%, PF 1.78; median hold 7.7 days, in the market 58% of the time
+   buy and hold 1 GC over the same span: $182,040 (gold 2365 -> 4185, roll-adjusted)
+   biggest trades: 2025-09-22 31d $38,755, 2026-08-04 26d $30,585, 2025-08-25 25d $27,076
+   worst open loss inside a trade: $-22,290 per GC ($-2,229 per MGC; Apex trailing drawdown $2,000)
+
+2018-26, same rule: 161 trades, avg $559, t 1.0
+   by year, rule / buy-and-hold ($ per GC): 2018 -12,575 / -5,070 | 2019 1,045 / 19,870 | 2020 -28,834 / 30,970 | 2021 4,548 / -9,980 | 2022 10,264 / -4,640 | 2023 13,593 / 12,370 | 2024 28,869 / 43,110 | 2025 73,403 / 151,210 | 2026 -307 / -34,100
+
+Placebo (random entries, same holding times, Oct 2023 - Oct 2026): median $100,262, 95th $264,548; P(random >= rule) 0.43
+                           trades win    avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+GC golden cross 1h, per GC     53 45% $2,239 $39,203   0.84    1.86          1.78 $53,947   0.73 11.44       6.85
+   Monte Carlo at 1 MGC (x0.1): trades 53 | total p5 $-1,324 / p50 $11,708 / p95 $25,527, P(total <= 0) 7.2%
+      max DD actual $5,395 (rank 72%), shuffled p50 $4,219 / p95 $8,636 / p99 $11,600; losing streak actual 7, p95 9
+      252-day block bootstrap: P&L p5 $-3,118 / p50 $3,859 / p95 $12,042, P(loss) 18.0%, max DD p95 $5,444, P(hit $2,000 EOD trailing) 38.8%
