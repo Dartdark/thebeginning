@@ -1,0 +1,23 @@
+Plan strategies' trades split by the non-overlapping states of analysis/regime_markov2_test.py (previous day's 1-day
+VaultBreak    [ 1d] down n  515 $    70 | flat n  715 $   142 | up n  490 $    28
+VaultBreak    [vol] calm n  489 $    74 | normal n  709 $    96 | wild n  485 $    80
+ONBiasADX30   [ 1d] down n  164 $   341 | flat n  308 $   197 | up n  192 $   697
+ONBiasADX30   [vol] calm n  199 $   250 | normal n  269 $   527 | wild n  171 $   324
+ONBiasML      [ 1d] down n   46 $   809 | flat n  128 $   420 | up n  156 $   837
+ONBiasML      [vol] calm n  102 $   457 | normal n  115 $   749 | wild n  100 $   864
+MondayLong    [ 1d] down n  119 $   211 | flat n  190 $   586 | up n  130 $   360
+MondayLong    [vol] calm n  133 $   511 | normal n  164 $   357 | wild n  126 $   455
+ExpOpenShort  [ 1d] down n   30 $   578 | flat n   43 $   621 | up n   29 $   182
+ExpOpenShort  [vol] calm n   29 $   691 | normal n   41 $   567 | wild n   29 $   164
+LateDayFlow   [ 1d] down n  243 $    35 | flat n  388 $   114 | up n  239 $    92
+LateDayFlow   [vol] calm n  299 $    70 | normal n  333 $   131 | wild n  207 $    56
+NFPFade       [ 1d] down n   27 $   475 | flat n   27 $   412 | up n   22 $    54
+NFPFade       [vol] calm n   29 $   560 | normal n   28 $   -31 | wild n   16 $   645
+CLSundayFade  [ 1d] down n   26 $   269 | flat n   43 $   395 | up n   27 $  1423
+CLSundayFade  [vol] calm n   15 $   299 | normal n   45 $   330 | wild n   34 $  1227
+
+48 tests; |t| >= 2 with the same sign in both periods: 3
+   strategy kind state   n     t  t1822   t23
+ VaultBreak   1d  flat 715  2.14   0.98  1.99
+ONBiasADX30   1d  flat 308 -2.20  -2.54 -0.90
+ONBiasADX30   1d    up 192  2.46   1.73  1.76
