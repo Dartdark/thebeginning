@@ -50,7 +50,7 @@ Tier list of everything tested: `../TIER_LIST.md`.
 
 | Strategy | Chart | Funded inputs (full size; scale with cushion sizing) |
 |---|---|---|
-| Vault Break (Apex strategy) | 30 min MNQ | `NumContracts` 3 |
+| Vault Break (`NQ_Vault_Break_SP.txt`) | 30 min MNQ | `NumContracts` 2, `FlaggedContracts` 1 (2 / 1 since 2026-10-17; was 3 / 1) |
 | Overnight Bias ML v2 | 15 min MNQ | `RiskPerTrade` 400 |
 | Monday Long (replaced Overnight Drift) | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 |
 | Expiration Open Short | 5 min MNQ | `RiskPerTrade` 700 |
