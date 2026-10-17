@@ -19,9 +19,11 @@ Not included: Vault Break SP (Vault Break's entries; its single-print flag only 
 
 Suggested order: 01, then 06 (simplest NQ rule), 05, 07, 08, 02, 03, 04.
 
+Start every conversation with `tasks/ANTIGRAVITY_BRIEF.md` (project summary, roles, rules).
+
 How to run each one:
 - **One task per Antigravity conversation**, strongest Gemini Pro model, high effort.
-- Prompt: `Read tasks/TASK_NN_....md (and the files it names) and do exactly what it says, using the Jesse MCP tools.
+- Prompt: `Read tasks/ANTIGRAVITY_BRIEF.md, then tasks/TASK_NN_....md (and the files it names) and do exactly what it says, using the Jesse MCP tools.
   Don't skip the backtest.`
 - Output goes in `tasks/out_NN/`. Commit and push it to `antigravity/jesse`.
 
