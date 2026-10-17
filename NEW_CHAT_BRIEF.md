@@ -71,6 +71,11 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   optionsDX). Free SPX sample tested 2026-10-17 (`analysis/spx_gex_sample_test.py`, data on branch `antigravity/jesse` options_sample/): GEX's range signal is already in VIX, no direction / pinning -> don't buy the option history. The closing-imbalance data (Databento): user declined (2026-10-17); no paid data for now.
 - **Meta-labeling (2026-10-17):** VB and LDF both F (pre-registered walk-forward ridge; no trade-level predictability). ONB is
   the only strategy where a day filter works.
+- **IMPORTANT (2026-10-17, `analysis/nfp_replacement_test.py`): the funded bench is path-fragile.** Reshuffling only NFP's
+  78 results among its own days (same total) moves 2-year blown from 2% to 16% (median 10%) and 2-year payouts $10,992-12,562.
+  The plan's '3% blown' is a lucky ordering of one history; plan differences of a few % blown or a few hundred $ are noise.
+  Future plan decisions need a bootstrapped bench (many resampled histories), not the single history. NFP replacement: none
+  passes; NFP stays.
 - **Next ideas:** more forced-flow candidates on ES / GC / CL.
 
 ## Live status (2026-10-14)
