@@ -29,6 +29,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **User's to-do list: `TODO.md`** (reminders scheduled in the original session: Sun + Wed 10:52 CT, and Sun 10/18 15:30 CT).
+
 - **Account #1 (50K EOD evaluation): about +$1,500, $1,500 left to the $3,000 target.** The user entered the ONB trade
   manually after a rejection and closed it at +$1,500 (agreed afterwards: **no early exits, no re-entries** -- the Apex
   evaluation has no consistency rule; capping days at $1,500 cuts pass rate 50.1% → 45.3%, `analysis/profit_cap_test.py`).
