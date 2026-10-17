@@ -131,6 +131,12 @@ end;
 { ---------- Exits ---------- }
 SetStopContract;
 if StopPts > 0 then SetStopLoss(StopPts * BigPointValue);
+{ live stop guard (2026-10-17, as EOS 2026-10-16): Rithmic rejects a protective stop that is already through the market
+  ("Invalid StopMarket order parameters"), which leaves the position without its stop. If the position is still open at the
+  close of a bar that traded at or through the stop level, exit at market on the next bar. In a backtest the stop has always
+  filled inside that bar first, so the guard never fires there (backtests unchanged). }
+if MarketPosition > 0 and StopPts > 0 and Low <= EntryPrice - StopPts then
+	Sell ("Monday SG") next bar at market;
 
 if MarketPosition > 0 and Time >= DayExit then
 	Sell ("Monday LX") this bar on close;

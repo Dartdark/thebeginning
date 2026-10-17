@@ -29,8 +29,13 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
   rejected): the short filled at the 8:30 open, price ran up through the stop level before the stop order reached Rithmic,
   and a buy stop below the market is invalid, so the position was left without its stop. Same family as the Overnight
   Bias entry rejection of 10/14. Fix (EOS): keep `SetStopLoss`, and add a bar-close guard that exits at market when the bar
-  closes at or through the stop level (`Exp Open SG`). The other strategies that use `SetStopLoss` (VB, ONB, LDF, Monday,
-  NFP, CL fade, Bridge Monday as shipped) can hit the same thing in a fast move; apply the same guard to each.
+  trades at or through the stop level and the position is still open (`Exp Open SG`). **Applied to every live / funded
+  strategy using `SetStopLoss` (2026-10-17):** VB, VB SP (`VB SG`), Overnight Bias / ADX30 / ML (`ON Bias LSG / SSG`),
+  Monday (`Monday SG`), LDF (`LateFlow LSG / SSG`), NFP (`NFP Fade LSG / SSG`), CL fade (`SunGap LSG / SSG`); the
+  condition is the bar's Low / High (not Close: a spike through the stop that closes back inside would otherwise stay
+  unprotected). Backtests are unchanged (the stop always fills inside that bar first). The Bridge Monday Long can't be
+  edited: add `apex_strategies/Apex_Stop_Guard.txt` to its chart with `StopPoints` a few ticks wider than its stop.
+  Limitation: the guard acts at bar close, so on a 30-minute chart (VB) an unprotected position can run up to one bar.
 - **'Interactive Brokers: Unable to connect to TWS' (127.0.0.1 : 7497)** (2026-10-16, 8:37 CT): some chart or the Trading
   panel has its broker profile set to Interactive Brokers (MultiCharts' default) instead of Rithmic. Any strategy on that
   profile sends nothing to Apex. Fix: every strategy chart -> Format Signals -> Properties -> Auto Trading -> broker profile

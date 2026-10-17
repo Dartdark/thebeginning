@@ -1,0 +1,24 @@
+// Apex Stop Guard (2026-10-17)
+// Exit-only add-on signal for a strategy whose code we can't edit (The Bridge's Monday Long). Our own strategies have the
+// same guard built in (order names "... SG"), so do NOT add this to their charts.
+//
+// Why: Rithmic rejects a protective stop that is already through the market ("Invalid StopMarket order parameters",
+// EOS 2026-10-16), which leaves the position with no stop. This signal checks at each bar close: if the position is still
+// open and the bar traded at or through the stop level, it exits at market on the next bar.
+//
+// How to use
+//   1. Add it to the strategy's chart (Format Signals > Add > Apex Stop Guard), next to the strategy's own signal.
+//      All signals on one chart are one strategy, so its exit closes the whole position whichever signal entered.
+//   2. StopPoints = the strategy's own stop distance in points from the entry price (read it from the strategy's inputs or
+//      its stop order in the Order and Position Tracker). Set it slightly WIDER than the real stop (a few ticks), so the
+//      strategy's own stop always gets the first chance to fill. 0 = guard off.
+// It does not place a stop of its own and does not change the strategy's backtest when StopPoints >= the real stop.
+
+inputs: StopPoints(0);
+
+if StopPoints > 0 then begin
+	if MarketPosition > 0 and Low <= EntryPrice - StopPoints then
+		Sell ("Stop Guard LX") next bar at market;
+	if MarketPosition < 0 and High >= EntryPrice + StopPoints then
+		BuyToCover ("Stop Guard SX") next bar at market;
+end;

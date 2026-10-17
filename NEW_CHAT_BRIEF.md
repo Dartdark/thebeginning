@@ -51,8 +51,12 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   ONB ML longs lost all of 2018 (clustered, DD rank 99%), fine since. No plan change.
 - **Apex Target Guard reviewed statically** (can't compile here): logic and tick rounding look right; still needs the
   user's compile on the VB, ONB and Bridge Monday charts.
-- **Next ideas:** more forced-flow candidates on ES / GC / CL;
-  apply the stop-rejection guard to every strategy using SetStopLoss (offered, not done).
+- **Stop-rejection guard on every strategy (2026-10-17):** all live / funded files using `SetStopLoss` now exit at market
+  when a bar trades through the stop and the position is still open (MULTICHARTS_PITFALLS.md 'Live order rejections');
+  EOS switched from Close to High. Bridge Monday: new add-on `apex_strategies/Apex_Stop_Guard.txt` (`StopPoints` a few
+  ticks wider than its stop). **User: paste and compile the updated files outside market hours** (VB, ONB ADX30, EOS on
+  the combine charts now; the funded files when an account passes); inputs unchanged, backtests unchanged.
+- **Next ideas:** more forced-flow candidates on ES / GC / CL.
 
 ## Live status (2026-10-14)
 
