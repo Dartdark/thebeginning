@@ -56,7 +56,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **Stop-rejection guard on every strategy (2026-10-17):** all live / funded files using `SetStopLoss` now exit at market
   when a bar trades through the stop and the position is still open (MULTICHARTS_PITFALLS.md 'Live order rejections');
   EOS switched from Close to High. Bridge Monday: new add-on `apex_strategies/Apex_Stop_Guard.txt` (`StopPoints` a few
-  ticks wider than its stop). **User: paste and compile the updated files outside market hours** (VB, ONB ADX30, EOS on
+  ticks wider than its stop) -- NOT NEEDED as shipped: the Bridge runs `StopPts` 0 (no stop; target 100, out 15:55, as
+  backtested and MC-confirmed), so there is no stop order to be rejected; user's chart has no Stop Guard (correct, 2026-10-17). **User: paste and compile the updated files outside market hours** (VB, ONB ADX30, EOS on
   the combine charts now; the funded files when an account passes); inputs unchanged, backtests unchanged.
 - **Jesse cross-check (2026-10-17, `analysis/jesse/README.md`):** all nine current strategies ported to Jesse (independent
   engine) on our data; trade-by-trade agreement with MultiCharts 97-100% (P&L within $50). Found and fixed: ONB ML traded
