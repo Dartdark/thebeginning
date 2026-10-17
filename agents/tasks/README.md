@@ -6,13 +6,13 @@ compares those trades with MultiCharts and its own Jesse runs (`analysis/jesse/c
 | # | Task | Market / bars | Note |
 |---|---|---|---|
 | 01 | `TASK_01_CL_SUNDAY_FADE.md` | CL, 5 min, Eastern | **done: PASS** (`agents/results/TASK_01_VERDICT.md`) |
-| 02 | `TASK_02_VAULT_BREAK.md` | NQ, 30 min | needs COMMON_NQ.md |
-| 03 | `TASK_03_OVERNIGHT_BIAS_ADX30.md` | NQ, 15 min | needs COMMON_NQ.md |
-| 04 | `TASK_04_OVERNIGHT_BIAS_ML.md` | NQ, 15 min | needs COMMON_NQ.md + Task 03 |
-| 05 | `TASK_05_MONDAY_LONG.md` | NQ, 5 min | needs COMMON_NQ.md |
-| 06 | `TASK_06_EXPIRATION_OPEN_SHORT.md` | NQ, 5 min | needs COMMON_NQ.md |
-| 07 | `TASK_07_LATE_DAY_FLOW.md` | NQ, 5 min | needs COMMON_NQ.md |
-| 08 | `TASK_08_NFP_FADE.md` | NQ, 5 min | needs COMMON_NQ.md |
+| 02 | `TASK_02_VAULT_BREAK.md` | NQ, 30 min | **done: PASS** (`agents/results/TASKS_02_08_VERDICT.md`) |
+| 03 | `TASK_03_OVERNIGHT_BIAS_ADX30.md` | NQ, 15 min | **done: PASS** (`agents/results/TASKS_02_08_VERDICT.md`) |
+| 04 | `TASK_04_OVERNIGHT_BIAS_ML.md` | NQ, 15 min | **done: PASS** (`agents/results/TASKS_02_08_VERDICT.md`) |
+| 05 | `TASK_05_MONDAY_LONG.md` | NQ, 5 min | **done: PASS** (`agents/results/TASKS_02_08_VERDICT.md`) |
+| 06 | `TASK_06_EXPIRATION_OPEN_SHORT.md` | NQ, 5 min | **done: PASS** (`agents/results/TASKS_02_08_VERDICT.md`) |
+| 07 | `TASK_07_LATE_DAY_FLOW.md` | NQ, 5 min | **done: PASS** (`agents/results/TASKS_02_08_VERDICT.md`) |
+| 08 | `TASK_08_NFP_FADE.md` | NQ, 5 min | **done: PASS** (`agents/results/TASKS_02_08_VERDICT.md`) |
 
 Not included: Vault Break SP (Vault Break's entries; its single-print flag only sets the size) and Bridge Monday Long
 (closed source).

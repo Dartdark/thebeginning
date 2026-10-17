@@ -76,6 +76,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   The plan's '3% blown' is a lucky ordering of one history; plan differences of a few % blown or a few hundred $ are noise.
   Future plan decisions need a bootstrapped bench (many resampled histories), not the single history. NFP replacement: none
   passes; NFP stays.
+- **Antigravity blind checks: all 8 strategies PASS (2026-10-17;** `agents/results/TASK_01_VERDICT.md`, `TASKS_02_08_VERDICT.md`):
+  MultiCharts, Claude's Jesse ports and Antigravity's blind Jesse rebuilds agree within $50 on 99-100% of matched trades. Phase 2
+  (improvement under the brief's rules) is open for any strategy.
 - **Next ideas:** more forced-flow candidates on ES / GC / CL.
 
 ## Live status (2026-10-14)
