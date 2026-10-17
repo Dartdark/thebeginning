@@ -16,8 +16,6 @@ services:
       - "9000:9000"
       # Jupyter Port
       - "8888:8888"
-      # LSP Port
-      - "9001:9001"
     volumes:
       - ../:/home
     container_name: jesse
