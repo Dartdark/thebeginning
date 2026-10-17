@@ -1,0 +1,22 @@
+First look at SPX / SPXW option open interest (historicaldata.net free sample, 2022-07-01 .. 2022-12-30, 127 days) as a
+
+127 file days -> next ES session. SPX at the file close 3577-4305; naive GEX $-42.4bn .. $24.8bn per 1%, negative on 71% of days; put/call OI 1.71
+
+Volatility (expected: negative / low GEX -> bigger next-day moves):
+   gex           vs next range -0.32 (t -3.7) | vs next |return| -0.19 (t -2.2)
+   flip_pct      vs next range +0.02 (t +0.2) | vs next |return| +0.04 (t +0.4)
+   pcr           vs next range -0.12 (t -1.3) | vs next |return| -0.11 (t -1.2)
+   next ES range: GEX below median 1.83% vs above 1.50%
+
+Direction / pinning (expected per the folklore: drift toward max OI / walls):
+   gex           vs next return -0.03 (t -0.4)
+   flip_pct      vs next return +0.11 (t +1.2)
+   pcr           vs next return -0.15 (t -1.7)
+   callwall_pct  vs next return +0.07 (t +0.8)
+   putwall_pct   vs next return -0.06 (t -0.7)
+   maxoi_pct     vs next return -0.05 (t -0.5)
+   move toward maxoi_pct    : -0.101% a day (t -1.0)
+   move toward callwall_pct : +0.037% a day (t +0.4)
+   move toward putwall_pct  : -0.065% a day (t -0.6)
+
+Next ES range on previous range + VIX + GEX (127 days): GEX coefficient -0.0005 per $bn (t -0.1); previous range t -1.2, VIX t +3.8
