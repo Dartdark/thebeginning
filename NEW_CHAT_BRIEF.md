@@ -68,7 +68,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **Data that would unlock new forced flows (researched 2026-10-17):** NYSE closing-auction imbalances (NYSE TAQ Order
   Imbalances from 2008, or Databento NYSE Integrated imbalance schema from May 2018, paid) and SPY / SPX option open interest
   by strike (historicaloptiondata.com ALLSPY from 2005 ~$455; historicaldata.net from 2002, free 6-month sample incl. SPX;
-  optionsDX). Free SPX sample tested 2026-10-17 (`analysis/spx_gex_sample_test.py`, data on branch `antigravity/jesse` options_sample/): GEX's range signal is already in VIX, no direction / pinning -> don't buy the option history. The closing-imbalance data (Databento) is the remaining lead.
+  optionsDX). Free SPX sample tested 2026-10-17 (`analysis/spx_gex_sample_test.py`, data on branch `antigravity/jesse` options_sample/): GEX's range signal is already in VIX, no direction / pinning -> don't buy the option history. The closing-imbalance data (Databento): user declined (2026-10-17); no paid data for now.
 - **Meta-labeling (2026-10-17):** VB and LDF both F (pre-registered walk-forward ridge; no trade-level predictability). ONB is
   the only strategy where a day filter works.
 - **Next ideas:** more forced-flow candidates on ES / GC / CL.
