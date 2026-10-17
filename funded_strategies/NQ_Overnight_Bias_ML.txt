@@ -35,7 +35,10 @@
   Apply exactly like Overnight Bias: 15-minute NQ / MNQ chart, Exchange time
   zone (Central), CME 24-hour session, Bar Magnifier on at 1 minute. Load at
   least 90 trading days before the backtest start: the filter needs 60
-  trading days of history (until then it lets every trade through).
+  trading days of history. Until then it does NOT trade (2026-10-17; before,
+  it let every trade through: in the Jesse cross-check those unfiltered
+  warm-up trades lost about $4,700 per NQ). Live: load at least 90 trading
+  days on the chart, or the strategy stays flat for its first weeks.
   Funded plan: RiskPerTrade 300 on MNQ. Backtest on NQ: RiskPerTrade 0,
   NumContracts 1.
 
@@ -295,6 +298,7 @@ TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
 
 if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition = 0
 	and ((Bias = 1 and EnableLongs and SkipLong = false) or (Bias = -1 and EnableShorts and SkipShort = false))
+	and (UseMLFilter = false or ScoreReady)      { 2026-10-17: no trades until the filter has its 60 days of history }
 	and Time >= OREnd and Time < DayLastEntry and ADXv > ADXMin then begin
 	StopPts = StopAtrPct * ATRv;
 	Qty = NumContracts;

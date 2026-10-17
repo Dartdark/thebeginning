@@ -58,6 +58,11 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   EOS switched from Close to High. Bridge Monday: new add-on `apex_strategies/Apex_Stop_Guard.txt` (`StopPoints` a few
   ticks wider than its stop). **User: paste and compile the updated files outside market hours** (VB, ONB ADX30, EOS on
   the combine charts now; the funded files when an account passes); inputs unchanged, backtests unchanged.
+- **Jesse cross-check (2026-10-17, `analysis/jesse/README.md`):** all nine current strategies ported to Jesse (independent
+  engine) on our data; trade-by-trade agreement with MultiCharts 97-100% (P&L within $50). Found and fixed: ONB ML traded
+  unfiltered until its score had 60 days of history (now stands aside; user pastes the funded file when funded). Monday
+  report / bench include 40 holiday Mondays the code skips (negligible). Setup sheet for Docker Jesse + Antigravity on the
+  user's PC: `agents/JESSE_ANTIGRAVITY_SETUP.md` (user will say when to write Antigravity's first task).
 - **Next ideas:** more forced-flow candidates on ES / GC / CL.
 
 ## Live status (2026-10-14)
