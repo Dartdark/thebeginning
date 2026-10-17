@@ -31,6 +31,7 @@ RUNS = {  # strategy: (candle file, timeframe, point value, tick)
     "NFPFade": ("jesse_nq.npy", "5m", 20.0, 0.25),
     "CLSundayFade": ("jesse_cl_et.npy", "5m", 1000.0, 0.01),
     # Antigravity's GoldenCross (2026-10-17): as written (holds overnight) and Apex-flat at 15:00 CT; 1-hour bars as its report
+    "ESMOCFollow": ("jesse_es.npy", "5m", 50.0, 0.25),
     "GoldenCross": ("jesse_nq.npy", "1h", 20.0, 0.25),
     "GoldenCrossEOD": ("jesse_nq.npy", "1h", 20.0, 0.25),
 }
@@ -39,7 +40,7 @@ RUNS = {  # strategy: (candle file, timeframe, point value, tick)
 def run(name):
     f, tf, pv, tick = RUNS[name]
     c = np.load(SP + f)
-    sym = "CL-USD" if "cl" in f else "NQ-USD"
+    sym = "CL-USD" if "cl" in f else ("ES-USD" if "_es" in f else "NQ-USD")
     config = {"starting_balance": 1e9, "fee": 0, "type": "futures", "futures_leverage": 100,
               "futures_leverage_mode": "cross", "exchange": "Custom Data", "warm_up_candles": 0}
     routes = [{"exchange": "Custom Data", "strategy": name, "symbol": sym, "timeframe": tf}]

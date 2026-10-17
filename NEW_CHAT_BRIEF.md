@@ -82,7 +82,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **Bootstrapped bench built (2026-10-17, `analysis/funded_bootstrap.py`; FUNDED_PLAN.md 'Bootstrapped bench'):** use it for
   every plan decision. Realistic plan: 1y ~$8.5k, 2y ~$11.2k, blown 12-16% in 2 years, ~279 days to 6 payouts (single history
   said $10.2k / $12.5k / 3% / 229). Best found: **VB 2 / 1 + ES MOC follow 2 MES**: 2y +$760-880, blown 5-9%, as fast or faster.
-  To do before the funded phase: MultiCharts ES MOC follow code + confirmation + Antigravity blind check + Apex allows MES; VB 2 / 1
+  MES is allowed (user, 2026-10-17). ES MOC follow MultiCharts code written (`funded_strategies/ES_MOC_Follow.txt`; its Jesse port = the Python test's 202 trades, same days); to do: user's MC backtest + Antigravity Task 09; VB 2 / 1
   is just an input. Business-plan projections (`reports/Trading_Business_Plan.pdf`, ramp sims) used the single history: redo
   with the bootstrap.
 - **Next ideas:** more forced-flow candidates on ES / GC / CL.

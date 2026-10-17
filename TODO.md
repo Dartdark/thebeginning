@@ -27,6 +27,14 @@ bottom). Times are Central (CT).
 - [ ] **~Mon 10/27: account #3** (150K No-Activation, $249).
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
+## ES MOC Follow (funded candidate, 2026-10-17)
+
+- [ ] MultiCharts backtest: [ES_MOC_Follow.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/ES_MOC_Follow.txt)
+  on a 5-minute **@ES** chart (Exchange time, 24-hour session, Bar Magnifier 1 min, from Jan 2018, NumContracts 1, no costs);
+  save the report as "Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx" and push / send it.
+- [ ] Antigravity: Task 09 blind check (pull `agents/tasks` and the `ES_1min_*.csv` files first).
+- [ ] When funded: MES chart, NumContracts 2, Symbol Mapping `@MES -> MESZ6` (roll with MNQ); Vault Break funded at 2 / 1.
+
 ## Later
 
 - [ ] Before the CL Sunday fade goes live: confirm Apex allows MCL on the account.

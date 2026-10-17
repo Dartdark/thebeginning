@@ -1,0 +1,145 @@
+{ ES MOC Follow - MultiCharts PowerLanguage signal (funded-plan CANDIDATE, 2026-10-17; not in the plan until confirmed)
+
+  At 14:50 CT, if ES has moved at least MinMoveAtr x the 15-day ATR since the
+  14:00 close, enter in the direction of that move at the next bar's open
+  (14:50:00) and exit at the close of the 15:00 bar (the cash close), stop
+  StopAtrPct x ATR. One trade a day. Skipped on CME early-close days.
+
+  Why (forced flow): the NYSE / Nasdaq closing auctions match market-on-close
+  orders at 15:00 CT; imbalance information is published from 14:50 CT, and a
+  big afternoon move tends to come with a same-side MOC imbalance (index funds,
+  leveraged-ETF rebalancing, end-of-day hedging). The last ten minutes keep
+  moving with it.
+
+  Python test (analysis/s_rank_es_round1_test.py, section 5; 1-minute ES 2018-2026,
+  per ES after $5 commission and 1 tick per market / stop fill):
+  - 202 trades, $158 a trade, PF 2.11, t 3.5; 2018-22 $189, 2023-26 $99; daily correlation
+    with the NQ plan about 0.
+  - The same rule decided at other times of day does not work.
+  - A random side on the same days is far below it.
+  B-rated in TIER_LIST.md.
+
+  Bootstrapped funded bench (analysis/funded_bootstrap.py, 2026-10-17): with Vault Break at 2 / 1, adding this at 2 MES
+  gives:
+  - 2-year payouts +$760 to +$880 versus the current plan;
+  - blown accounts 5-9% versus 12-16%;
+  - all 6 payouts as fast or faster.
+
+  Apply to a 5-minute ES or MES chart, Exchange time zone (Central), CME 24-hour session (for the ATR), Bar Magnifier on
+  at 1 minute. Load at least 25 trading days before the backtest start.
+
+  Backtest (to confirm against Python): @ES, from January 2018, NumContracts 1, no commission or slippage. Save the
+  report as "Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx" in the repo root.
+  Funded plan once confirmed: MES, NumContracts 2. Rithmic symbol mapping as for MNQ: @MES -> MESZ6, and roll it with
+  MNQ. }
+
+Inputs:
+	DecisionTime(1450),     { bar closing at 14:50 -> enter at the next bar's open }
+	RefTime(1400),          { move measured from the close of this bar }
+	ExitTime(1500),         { exit at the close of this bar (the cash close) }
+	MinMoveAtr(0.30),
+	StopAtrPct(0.25),
+	AtrDays(15),
+	RiskPerTrade(0),        { $ lost at the stop; 0 = trade NumContracts }
+	NumContracts(1),
+	UseHolidayTimes(true);
+
+Variables:
+	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
+	RefPx(0), MovePts(0), StopPts(0), Qty(0), TradedToday(false), DayStartTrades(0),
+	CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false), IsEarlyClose(false);
+
+Arrays:
+	TrHist[100](0);
+
+{ ---------- Daily ATR (weekdays, calendar dates), as in Overnight Bias / Late-Day Flow ---------- }
+if Date <> Date[1] then begin
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	DayHi = High;
+	DayLo = Low;
+	RefPx = 0;
+	DayStartTrades = TotalTrades;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+
+{ ---------- 14:00 reference price ---------- }
+if Time = RefTime then RefPx = Close;
+
+{ ---------- CME early-close days (skipped: the auction is at 12:00 CT then) ---------- }
+CalMonth = Month(Date);
+CalDay = DayOfMonth(Date);
+CalDow = DayOfWeek(Date);
+CalYear = Year(Date) + 1900;
+IsWeekday = CalDow >= 1 and CalDow <= 5;
+IsEarlyClose = UseHolidayTimes and (
+	(CalMonth = 1 and ((CalDay = 1 and IsWeekday) or (CalDay = 2 and CalDow = 1)))
+	or (CalMonth = 1 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 2 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 5 and CalDow = 1 and CalDay >= 25)
+	or (CalMonth = 6 and CalYear >= 2022 and ((CalDay = 19 and IsWeekday)
+		or (CalDay = 18 and CalDow = 5) or (CalDay = 20 and CalDow = 1)))
+	or (CalMonth = 7 and (((CalDay = 3 or CalDay = 4) and IsWeekday) or (CalDay = 5 and CalDow = 1)))
+	or (CalMonth = 9 and CalDow = 1 and CalDay <= 7)
+	or (CalMonth = 11 and CalDow = 4 and CalDay >= 22 and CalDay <= 28)
+	or (CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29)
+	or (CalMonth = 12 and (((CalDay = 24 or CalDay = 25) and IsWeekday) or (CalDay = 26 and CalDow = 1))));
+
+{ ---------- Entry at 14:50 in the direction of the afternoon move ---------- }
+TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
+if Time = DecisionTime and IsEarlyClose = false and RefPx > 0 and ATRv > 0
+	and MarketPosition = 0 and TradedToday = false then begin
+	MovePts = Close - RefPx;
+	if AbsValue(MovePts) >= MinMoveAtr * ATRv then begin
+		StopPts = StopAtrPct * ATRv;
+		Qty = NumContracts;
+		if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
+		if Qty >= 1 then begin
+			if MovePts > 0 then
+				Buy ("MOC Follow L") Qty contracts next bar at market
+			else
+				SellShort ("MOC Follow S") Qty contracts next bar at market;
+		end;
+	end;
+end;
+
+{ ---------- Exits ---------- }
+SetStopContract;
+if StopPts > 0 then SetStopLoss(StopPts * BigPointValue);
+{ live stop guard (as every plan strategy, 2026-10-17): Rithmic rejects a protective stop that is already through the
+  market ("Invalid StopMarket order parameters"). If the position is still open at the close of a bar that traded at or
+  through the stop level, exit at market on the next bar. In a backtest the stop has always filled inside that bar first,
+  so the guard never fires there. }
+if MarketPosition > 0 and StopPts > 0 and Low <= EntryPrice - StopPts then
+	Sell ("MOC Follow LSG") next bar at market;
+if MarketPosition < 0 and StopPts > 0 and High >= EntryPrice + StopPts then
+	BuyToCover ("MOC Follow SSG") next bar at market;
+
+if MarketPosition <> 0 and Time >= ExitTime then begin
+	Sell ("MOC Follow LX") this bar on close;
+	BuyToCover ("MOC Follow SX") this bar on close;
+end;
