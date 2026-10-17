@@ -5,7 +5,7 @@ compares those trades with MultiCharts and its own Jesse runs (`analysis/jesse/c
 
 | # | Task | Market / bars | Note |
 |---|---|---|---|
-| 01 | `TASK_01_CL_SUNDAY_FADE.md` | CL, 5 min, Eastern | self-contained (own data section) |
+| 01 | `TASK_01_CL_SUNDAY_FADE.md` | CL, 5 min, Eastern | **done: PASS** (`agents/results/TASK_01_VERDICT.md`) |
 | 02 | `TASK_02_VAULT_BREAK.md` | NQ, 30 min | needs COMMON_NQ.md |
 | 03 | `TASK_03_OVERNIGHT_BIAS_ADX30.md` | NQ, 15 min | needs COMMON_NQ.md |
 | 04 | `TASK_04_OVERNIGHT_BIAS_ML.md` | NQ, 15 min | needs COMMON_NQ.md + Task 03 |
@@ -24,3 +24,5 @@ How to run each one:
 - Prompt: `Read tasks/TASK_NN_....md (and the files it names) and do exactly what it says, using the Jesse MCP tools.
   Don't skip the backtest.`
 - Output goes in `tasks/out_NN/`. Commit and push it to `antigravity/jesse`.
+
+Rules learned from task 01: one task per conversation, output only in `tasks/out_NN/`, use the task's data, no extra backtests.

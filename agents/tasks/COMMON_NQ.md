@@ -11,7 +11,7 @@ is only done when a backtest has actually run and the trade list exists.
 - `NQ_1min_<year>.csv`: the day session, 08:00 to 15:15.
 - `NQ_1min_ON_<year>.csv`: the rest of the 24-hour session, 15:16 to 07:59 (Sunday evening to Friday).
 
-Merge both sets into one series. If a (date, time) appears in both, keep the row from the day file.
+Use these files (or identical copies already imported from `C:\NQData`: check that a few rows match exactly and that the weekday break is 16:00-17:00, i.e. Central time; report what you used). Import only what the task needs. Merge both sets into one series. If a (date, time) appears in both, keep the row from the day file.
 - `date` = YYYYMMDD, `time` = HHMM, in **US Central time (America/Chicago)**.
 - Each row is stamped with the bar's **closing** minute: `20190102,801` is the bar from 08:00 to 08:01 CT.
 - Minutes without trades are missing. The market is closed 16:00 to 17:00 CT on weekdays and from Friday 16:00 to
