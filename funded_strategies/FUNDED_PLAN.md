@@ -545,6 +545,8 @@ and about 13 months to all 6 payouts.
 | Cushion ref $2,000 (VB 2 / 1) | +$315 | 3.6% | +25 | safest, slower |
 | Cushion ref $1,000 | −$966 | 23% | ≈ | worse |
 
+**Decided 2026-10-17 (user): ES MOC Follow is in the funded plan at 2 MES** (MultiCharts-confirmed 199/199). VB 2 / 1 still awaits the user's OK.
+
 **Recommendation for the funded phase:**
 1. **VB 2 / 1 instead of 3 / 1.** This only changes `NumContracts`, ready when an account goes funded.
 2. **Add ES MOC follow at 2 MES.**

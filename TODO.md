@@ -33,7 +33,7 @@ bottom). Times are Central (CT).
   on a 5-minute **@ES** chart (Exchange time, 24-hour session, Bar Magnifier 1 min, from Jan 2018, NumContracts 1, no costs);
   save the report as "Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx" and push / send it.
 - [ ] Antigravity: Task 09 blind check (pull `agents/tasks` and the `ES_1min_*.csv` files first).
-- [ ] When funded: MES chart, NumContracts 2, Symbol Mapping `@MES -> MESZ6` (roll with MNQ); Vault Break funded at 2 / 1.
+- [ ] When funded: ES MOC Follow (IN THE PLAN since 2026-10-17) on a 5-min MES chart, NumContracts 2, Symbol Mapping `@MES -> MESZ6` (roll with MNQ). Vault Break 2 / 1: awaiting your OK.
 
 ## Later
 

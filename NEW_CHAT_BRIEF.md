@@ -140,6 +140,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 | NFP Fade | 5 min MNQ | `RiskPerTrade` 500 |
 | Bridge Monday Long | as shipped | 1 MNQ |
 | **CL Sunday Gap Fade** (new, `CL_Sunday_Gap_Fade.txt`) | 5 min **MCL**, Eastern exchange time | `NumContracts` 2, `ExitTime` 1000 (= 9:00 CT) |
+| **ES MOC Follow** (added 2026-10-17, `ES_MOC_Follow.txt`) | 5 min **MES**, Central | `NumContracts` 2; mapping `@MES -> MESZ6` |
 
 - **Cushion sizing:** f = cushion / ref, kept in 0.5–1.
   - **Funded phase: full size from a $1,500 cushion (user's decision, 2026-10-14).** The $1,000 setting blows 17–18%
