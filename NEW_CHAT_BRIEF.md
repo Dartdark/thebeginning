@@ -1,4 +1,4 @@
-# New-chat brief (2026-10-14): read this first
+# New-chat brief (updated 2026-10-17): read this first
 
 Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in github.com/Dartdark/thebeginning (branch
 `claude/nq-trading-strategy-params-5h9d20`) and continue from there."*
@@ -26,6 +26,26 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   analysed separately. Always give **direct GitHub links + raw links** for code to paste into MultiCharts.
 - Working rules, testing standard and branch rules are in `CLAUDE.md` (push every commit to
   `claude/nq-trading-strategy-params-5h9d20`, `claude/quirky-noether-4dla64` and the session's own branch).
+
+## Latest (2026-10-17)
+
+- **Account #1 (50K EOD evaluation): about +$1,500, $1,500 left to the $3,000 target.** The user entered the ONB trade
+  manually after a rejection and closed it at +$1,500 (agreed afterwards: **no early exits, no re-entries** -- the Apex
+  evaluation has no consistency rule; capping days at $1,500 cuts pass rate 50.1% → 45.3%, `analysis/profit_cap_test.py`).
+- **Finish line:** `apex_strategies/Apex_Target_Guard.txt` (exit-only signal added next to each strategy on its chart;
+  `StartBalance` = Apex balance before the session, `TargetBalance` 53050). Not yet compiled by the user; confirm it compiles
+  and is on the VB, ONB and Bridge Monday charts before Monday. After the pass: auto-trading off on that account.
+- Still waiting on the user: test order confirming real Rithmic fills (Sunday 17:00 CT), EOS stop-guard paste, weekly
+  live reports into `live/`.
+- **Research this week:** forced flows round 5 (`analysis/forced_flows_round5_test.py`): ES stocks-vs-bonds month-end
+  rebalancing D (t 1.2), gold first-notice-day short F, CL holiday-reopen fade too rare. **Monte Carlo**
+  (`analysis/montecarlo.py`, `MC.report(trades, daily, size=...)`) is now part of the testing standard (CLAUDE.md,
+  DEVELOPMENT_PROCESS.md); CL Sunday fade at 2 MCL: P(losing year) 14%, P(hit $2,000 trailing) 0%.
+- **Other AIs (user asked):** idea = a second, different-lab model (OpenAI reasoning model; Gemini runner-up, e.g. via
+  Google Antigravity) as an extra blind checker of strategy specs in `checks/candidates/`. Needs an `OPENAI_API_KEY`
+  in the environment's Network secrets (never pasted in chat). Not set up yet.
+- **Next ideas:** run Monte Carlo on every strategy in the plan at plan size; more forced-flow candidates on ES / GC / CL;
+  apply the stop-rejection guard to every strategy using SetStopLoss (offered, not done).
 
 ## Live status (2026-10-14)
 
