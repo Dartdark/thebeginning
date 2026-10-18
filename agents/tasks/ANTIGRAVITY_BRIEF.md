@@ -87,6 +87,8 @@ weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail
 
 ## Rules for every task
 
+0. **No unproven 'proven':** never call an edge 'proven', 'robust' or 'high-probability' unless a test in this repo
+   shows it (cite the file). Ideas are hypotheses until tested; 2026-10-18 its list of 'proven' per-symbol edges all failed.
 0. **Citations:** when you cite a paper or book, quote what it actually found (with page or section). Never attach a
    finding, threshold or time to a source that does not state it; write "our setting" or "my inference" instead.
 
