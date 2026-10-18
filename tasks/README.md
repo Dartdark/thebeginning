@@ -13,6 +13,11 @@ compares those trades with MultiCharts and its own Jesse runs (`analysis/jesse/c
 | 06 | `TASK_06_EXPIRATION_OPEN_SHORT.md` | NQ, 5 min | needs COMMON_NQ.md |
 | 07 | `TASK_07_LATE_DAY_FLOW.md` | NQ, 5 min | needs COMMON_NQ.md |
 | 08 | `TASK_08_NFP_FADE.md` | NQ, 5 min | needs COMMON_NQ.md |
+| 09 | `TASK_09_ES_MOC_FOLLOW.md` | ES, 5 min | needs COMMON_NQ.md (done: PASS, 198 trades, +636.17 pts) |
+
+## Academic Research & Strategy Foundations
+
+- `RESEARCH_ACADEMIC_EDGE.md`: Deep literature synthesis of market microstructure forced flows (Cheng & Madhavan 2009, Admati & Pfleiderer 1988, Berkman et al. 2012, Ni et al. 2005) and quantitative trade construction using Dr. Ernest P. Chan's *Algorithmic Trading* (Wiley, 2013).
 
 Not included: Vault Break SP (Vault Break's entries; its single-print flag only sets the size) and Bridge Monday Long
 (closed source).
