@@ -34,7 +34,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   ESEuroCloseTrend rebuilt = t 1.4, F. Task 09 (ES MOC) done: PASS on the rule; its run was 1 minute early (read close stamps as open) and still made $156-161
   per ES, PF 2.19 = robust to the minute (`agents/results/TASK_09_VERDICT.md`). Journal: `journal/` (Obsidian).
 - **New candidate (2026-10-18): Vault Break sized by NR7 day** (Kaufman book via Antigravity): VB $217 vs $60 a trade after an
-  NR7 day (t 2.8, both periods, placebo p 0.005); bench VB 1 / NR7 3 blown 3.5% vs 7.2%, 2y +$415. Next: MC version + checker + user OK.
+  NR7 day (t 2.8, both periods, placebo p 0.005); bench VB 1 / NR7 3 blown 3.5% vs 7.2%, 2y +$415. MC-confirmed 135/135, but checker FAIL (t 2.81 < 3.53,
+  regime 0.55): NOT in the plan (user: add only if it passes); WATCHLIST #21 forward recheck. NR7Contracts stays -1.
   Antigravity book readings so far: Chan (F), Prado (no trade), Kaufman (this).
 - **User's to-do list: `TODO.md`** (reminders scheduled in the original session: Sun + Wed 10:52 CT, and Sun 10/18 15:30 CT).
 

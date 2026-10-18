@@ -47,7 +47,7 @@ bottom). Times are Central (CT).
   on a 30-min **@NQ** chart (same settings as before, from Jan 2018), inputs **NumContracts 1, NR7Contracts 2, FlaggedContracts -1**,
   no costs; save as "Backtesting Strategy Performance Report _ @NQ - 30 Minutes VB NR7.xlsx" and push / send it.
   (Live combine charts: nothing changes; NR7Contracts defaults to -1 = off.)
-- [ ] Then: strategy-checker + Antigravity blind check, then your OK for funded sizing NumContracts 1 / NR7Contracts 3 / FlaggedContracts 1.
+- [x] (2026-10-18) Strategy-checker: **FAIL** (t 2.81 below 3.53; 2023-26 weaker). Not added to the plan (your condition). Leave `NR7Contracts` -1 everywhere; recheck on new data (WATCHLIST #21).
 
 ## Later
 
