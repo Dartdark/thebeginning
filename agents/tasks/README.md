@@ -18,6 +18,7 @@ compares those trades with MultiCharts and its own Jesse runs (`analysis/jesse/c
 Not included: Vault Break SP (Vault Break's entries; its single-print flag only sets the size) and Bridge Monday Long
 (closed source).
 
+Paper screening: `TASK_PAPER_SCREEN.md` (score a folder of PDFs, quotes and pages, no backtests; send the top ≤ 5 to Claude).
 Book reading: `TASK_BOOK_READING.md` (extract testable ideas with quotes and pages, no backtests; one book per
 conversation; never commit the book itself).
 

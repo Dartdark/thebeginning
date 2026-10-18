@@ -70,6 +70,10 @@ weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail
   - order-flow indicator filters;
   - gamma / open-interest pinning;
   - the plan's strategies ported to ES / YM / GC / CL.
+  - overnight reversal of the closing / leveraged-ETF push (17:00 → 8:30 fade of big days, 2026-10-18);
+  - index-rebalancing next-morning reversal on NQ / ES (Franz 2019; stock-level effect, nets out in the index);
+  - closing-auction heavy days, turn of month, overnight drift, time-series momentum, NR7 / narrow-range days, gap
+    momentum, CL / ZN opening-range breakouts, gold PM fix, 0DTE gamma flip / strike pinning.
 
 ## Data notes
 
