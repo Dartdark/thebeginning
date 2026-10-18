@@ -1,0 +1,34 @@
+Overnight / multi-day round for a future personal account (user, 2026-10-18). Pre-registered before looking; NOT Apex
+
+A. Overnight long, 15:00 close -> next 8:30 open (per contract, after costs)
+ ES  (249 roll-week nights left out)
+   every night                                n=2013 $   28.7 PF 1.06 t  0.9 yrs+ 7/9 | 18-22 $24 23+ $34
+   after a down 8:30-15:00 session            n= 899 $   14.7 PF 1.03 t  0.3 yrs+ 6/9 | 18-22 $3 23+ $30
+   after an up session                        n=1114 $   40.1 PF 1.09 t  1.0 yrs+ 5/9 | 18-22 $42 23+ $38
+     (weekend / holiday nights only)          n= 404 $   46.7 PF 1.09 t  0.5 yrs+ 6/9 | 18-22 $18 23+ $84
+     (gross, before costs)                    n=2013 $   63.7 PF 1.14 t  2.0 yrs+ 8/9 | 18-22 $59 23+ $69
+ NQ  (249 roll-week nights left out)
+   every night                                n=2012 $   83.3 PF 1.10 t  1.4 yrs+ 8/9 | 18-22 $42 23+ $137
+   after a down 8:30-15:00 session            n= 925 $   79.2 PF 1.09 t  0.8 yrs+ 6/9 | 18-22 $-9 23+ $196
+   after an up session                        n=1087 $   86.8 PF 1.12 t  1.2 yrs+ 6/9 | 18-22 $86 23+ $88
+     (weekend / holiday nights only)          n= 419 $  109.9 PF 1.13 t  0.8 yrs+ 6/9 | 18-22 $-7 23+ $263
+     (gross, before costs)                    n=2012 $  107.8 PF 1.14 t  1.8 yrs+ 8/9 | 18-22 $67 23+ $162
+
+B. Turn of the month: 15:00 close of day -2 -> 15:00 close of day +3 (per contract, after costs)
+   ES no stop                                 n= 105 $  426.4 PF 1.32 t  1.0 yrs+ 4/9 | 18-22 $176 23+ $760
+   ES 1 ATR stop                              n= 105 $ -115.8 PF 0.92 t -0.3 yrs+ 3/9 | 18-22 $-268 23+ $87
+   NQ no stop                                 n= 105 $ 1063.2 PF 1.45 t  1.4 yrs+ 7/9 | 18-22 $304 23+ $2075
+   NQ 1 ATR stop                              n= 105 $  177.4 PF 1.07 t  0.3 yrs+ 4/9 | 18-22 $-230 23+ $720
+
+C. Time-series momentum portfolio (ES NQ ZN CL GC 6E), weekly, 4% vol per market, 3 bp a side
+   ES: 39 roll jumps removed
+   NQ: 36 roll jumps removed
+   ZN: 35 roll jumps removed
+   CL: 102 roll jumps removed
+   GC: 51 roll jumps removed
+   6E: 36 roll jumps removed
+   portfolio, net     2018-12-20..2026-10-14: return 4.4%/yr, vol 9.6%, Sharpe 0.46, max DD -16.8%, t 1.3
+   portfolio, gross   2018-12-20..2026-10-14: return 5.3%/yr, vol 9.6%, Sharpe 0.55, max DD -16.1%, t 1.6
+   by year (net): {2018: '-1.0%', 2019: '7.0%', 2020: '4.7%', 2021: '4.9%', 2022: '10.3%', 2023: '-3.3%', 2024: '2.5%', 2025: '3.7%', 2026: '6.7%'}
+   per market Sharpe (gross): {'ES': np.float64(0.26), 'NQ': np.float64(0.39), 'ZN': np.float64(0.47), 'CL': np.float64(0.23), 'GC': np.float64(0.46), '6E': np.float64(-0.18)}
+   average gross leverage (sum |weight|): 1.58x
