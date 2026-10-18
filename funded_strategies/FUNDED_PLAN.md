@@ -816,3 +816,17 @@ fees. Scored at the backtest edge and at 75% of it.
   - Scale 1.25 (+19% at the edge, +25% at 75%) costs more blown accounts (1.4–2.7 per slot over 3 years). Consider
     it only after the live edge ratio is ≥ 0.9 over ~40 trades.
   - Caveat: in-sample, and medians move in steps of the payout amounts.
+
+## Replacement sweep (2026-10-18): no swap beats the plan
+
+User rule (CLAUDE.md, 2026-10-18): candidates are also tested as replacements, not only additions. `analysis/replacement_sweep.py`
+(stage 1, one history) and `analysis/replacement_sweep_stage2b.py` (bootstrapped bench, 1,000 paired 2-year histories) put
+15 tested candidates (noise-band, NQ MOC follow, Headline Shock, Crabel, Bridge ORB, Morning Momentum tight, release fade,
+VWAP / open pullbacks, gold breakout, NFP 8:45, DriftPullback shorts, Overnight Drift, Vol-Control Sell, LDF / ONB halves)
+in place of each plan slot (whole, and in part for VB / LDF / ES MOC / CL), each against the slot left EMPTY as control.
+- The one-history screen overstates swaps badly (2 MNQ swaps that looked +$700 blew 17-22% on the bootstrapped bench).
+- On the bootstrapped bench every swap is within noise of the plan (best +$114 on $12,035, P(beats plan) ≤ 50.3%):
+  VB 1 / 1 + NQ MOC $400 +$114 (blown 5.8%, 10 days slower); Monday Long -> NFP 8:45 $400 +$80; CL 1 MCL +$82 with nothing added.
+- Removing Monday Long, Bridge Monday or the CL fade changes the 2-year payout by under $30: at bench level the plan is
+  saturated; its drawdown budget, not missing edges, is the limit. Swaps only trade speed against blow-up risk.
+Decision: keep the plan. Live data (drift alarm, mid-December gate) decides the next change.

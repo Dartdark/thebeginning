@@ -55,6 +55,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   day) holds on ES $626 / NQ $1,104 but t 1.4 on ~35 days: D, WATCHLIST #23. Antigravity committed the 3 PDFs to its branch (copyright: remove).
 - **Noise-band intraday momentum (Chuk 2026, SSRN 7609644; Antigravity screen b): C.** Replicates partly (t 2.6 at our costs,
   2023-26 t 1.1); a near-twin of Vault Break; funded bench +1 MNQ −$224 / blown +1.5 pts: not added.
+- **Replacement sweep (2026-10-18, FUNDED_PLAN.md 'Replacement sweep'): no swap beats the plan.** 15 candidates in each slot
+  vs the empty slot, bootstrapped: all within noise (best +$114); the plan is saturated, its drawdown budget is the limit.
+  Test order filled 2026-10-18 17:00 CT (real Apex fill): account #2 Tue 10/20 is a go.
 - **User's to-do list: `TODO.md`** (reminders scheduled in the original session: Sun + Wed 10:52 CT, and Sun 10/18 15:30 CT).
 
 - **Account #1 (50K EOD evaluation): about +$1,500, $1,500 left to the $3,000 target.** The user entered the ONB trade
