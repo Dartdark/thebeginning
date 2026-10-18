@@ -106,3 +106,53 @@ if __name__ == "__main__":
     print(__doc__.split("\n")[0])
     for s in ("ES", "NQ"): fomc_test(s)
     for s in ("YM", "ES", "NQ"): ym_open(s)
+
+
+# ---- Follow-up after reading the PDFs (2026-10-18, pushed by the user to antigravity/jesse) ----
+# FOMC paper, as the paper defines it: excess liquidity = the prior day's average RTH minute DOLLAR volume / its average over
+# the previous month (21 trading days); low if <= 1. Antigravity misread it: the 32-39 bp after low-liquidity days is the
+# WHOLE announcement-day return (prior close -> FOMC-day close), not the post-announcement leg; the paper's post-announcement
+# finding is a negative slope (high liquidity -> negative post-announcement return), with the low-high gap significant only
+# for depth. Tested here (disclosed: the 'short after high volume' cell was seen in the first run above, t -2.4 as a long):
+#   P1 post-announcement 13:00 -> 15:00: long after low, short after high, and both;  P2 Apex-legal day version: long from the
+#   17:00 reopen before the FOMC day to 15:00 on it, after low liquidity.  ES and NQ.
+# YM paper: entries 9:35-9:59 ET (8:35-8:59 CT), short side, claimed only for 2023-26 (its own 2021-22 sample loses). Variant:
+# first 5-minute bar 8:30 -> 8:35 up >= 0.05 ATR -> short at 8:35, 1:1 bracket 0.1 ATR, out 9:00; 2023+ only reported too.
+def fomc_paper(sym):
+    g, d, cf = daily(sym); pv, cost, tick = MK[sym][1], MK[sym][2], MK[sym][3]
+    px = np.array([cf(int(r), 1500) for r in d.r])
+    dv = d.vol.to_numpy() * px * pv
+    ex = pd.Series(dv / pd.Series(dv).rolling(21).mean().shift(1).to_numpy(), index=d.index)
+    low = (ex <= 1).shift(1); rows = []
+    for k, (dt, x) in enumerate(d.iterrows()):
+        if dt not in FOMC or k == 0: continue
+        r = int(x.r); e = cf(r, 1300); lw = bool(low.iloc[k])
+        side = 1 if lw else -1
+        seg = g.o[r - 1, jof(1701):jof(1710) + 1]; ok = np.flatnonzero(~np.isnan(seg))
+        day = (cf(r, 1500) - seg[ok[0]]) * pv - cost if len(ok) else np.nan
+        rows.append(dict(date=dt, low=lw, post=trade(g, r, jof(1300), jof(1500), side, e, tick=tick) * pv - cost, day=day))
+    f = pd.DataFrame(rows)
+    print(f"\n2b. FOMC paper's definition, {sym} ({len(f)} days, {f.low.sum()} after low liquidity)")
+    stats(f.post[f.low], f.date[f.low], "P1 long 13:00 -> 15:00 after LOW liquidity")
+    stats(f.post[~f.low], f.date[~f.low], "P1 short 13:00 -> 15:00 after HIGH liquidity")
+    stats(f.post, f.date, "P1 both (long low / short high)")
+    stats(f.day[f.low], f.date[f.low], "P2 long 17:00 reopen -> FOMC 15:00 after LOW")
+    stats(f.day[~f.low], f.date[~f.low], "   (same after HIGH, long)")
+
+
+def ym_paper(sym):
+    g, d, cf = daily(sym); pv, cost, tick = MK[sym][1], MK[sym][2], MK[sym][3]; rows = []
+    for dt, x in d.iterrows():
+        r = int(x.r); o = g.o[r, jof(831)]; e = cf(r, 835)
+        if np.isnan(o) or np.isnan(e) or not x.atr > 0 or (e - o) < 0.05 * x.atr: continue
+        b = 0.1 * x.atr
+        rows.append(dict(date=dt, pnl=trade(g, r, jof(835), jof(900), -1, e, stop=b, tgt=b, tick=tick) * pv - cost))
+    f = pd.DataFrame(rows); h = f[f.date >= "2023-01-01"]
+    print(f"\n3b. YM paper's window, {sym}: short at 8:35 after an up first 5-min bar, 1:1 bracket 0.1 ATR, out 9:00")
+    stats(f.pnl, f.date, "2018-2026")
+    stats(h.pnl, h.date, "2023-2026 only (the paper's period)")
+
+
+if __name__ == "__main__":
+    for s in ("ES", "NQ"): fomc_paper(s)
+    for s in ("YM", "ES", "NQ"): ym_paper(s)

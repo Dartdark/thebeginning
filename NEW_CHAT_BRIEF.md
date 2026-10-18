@@ -51,6 +51,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   (fade the last 30 min of rebalancing dates to 10:30 next day) loses on NQ and ES (`analysis/index_rebalance_reversal_test.py`).
 - **Antigravity paper screen (TASK_PAPER_SCREEN, 2026-10-18): 3 picks, none new.** Treasury auctions already tested; FOMC
   liquidity premium and YM opening-range reversal both F (`analysis/anti_papers_1018_test.py`).
+  After reading the PDFs: Antigravity misread the FOMC paper; the paper's real post-announcement sign (short after a high-liquidity
+  day) holds on ES $626 / NQ $1,104 but t 1.4 on ~35 days: D, WATCHLIST #23. Antigravity committed the 3 PDFs to its branch (copyright: remove).
 - **User's to-do list: `TODO.md`** (reminders scheduled in the original session: Sun + Wed 10:52 CT, and Sun 10/18 15:30 CT).
 
 - **Account #1 (50K EOD evaluation): about +$1,500, $1,500 left to the $3,000 target.** The user entered the ONB trade
