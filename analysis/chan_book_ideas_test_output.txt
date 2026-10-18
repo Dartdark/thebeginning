@@ -1,0 +1,22 @@
+
+===== NQ (per contract) =====
+ A. Opening-gap momentum, 8:30 open -> 15:00 close
+   A1 as written (no stop)                  n= 942 $  -125 PF 0.90 t -1.2 yrs+ 2/9 | 18-22 $  -89 23+ $ -174 | L $  -27 (591) S $ -289 (351)
+   A2 0.1 sd threshold (no stop)            n= 702 $  -134 PF 0.89 t -1.0 yrs+ 2/9 | 18-22 $  -83 23+ $ -203 | L $  -37 (435) S $ -291 (267)
+   A3 = A1 + 0.5 ATR stop                   n= 942 $   -95 PF 0.92 t -1.0 yrs+ 3/9 | 18-22 $  -30 23+ $ -186 | L $    6 (591) S $ -265 (351)
+   control: long every day                  n=2244 $    37 PF 1.03 t  0.5 yrs+ 5/9 | 18-22 $   -1 23+ $   88 | L $   37 (2244) S $  nan (0)
+   control: short every day                 n=2244 $   -72 PF 0.94 t -1.0 yrs+ 3/9 | 18-22 $  -33 23+ $ -123 | L $  nan (0) S $  -72 (2244)
+ B. Leveraged-ETF momentum: prev close -> 14:45, in 14:46, out 15:00
+   B |return| > 2%                          n= 313 $    28 PF 1.07 t  0.4 yrs+ 4/9 | 18-22 $  134 23+ $ -224 | L $   62 (151) S $   -5 (162)
+   B |return| > 1%                          n= 850 $   -27 PF 0.91 t -0.9 yrs+ 2/9 | 18-22 $   52 23+ $ -147 | L $  -56 (471) S $    9 (379)
+
+===== ES (per contract) =====
+ A. Opening-gap momentum, 8:30 open -> 15:00 close
+   A1 as written (no stop)                  n= 946 $   -56 PF 0.91 t -1.0 yrs+ 4/9 | 18-22 $   -1 23+ $ -138 | L $  -10 (588) S $ -131 (358)
+   A2 0.1 sd threshold (no stop)            n= 742 $   -44 PF 0.93 t -0.7 yrs+ 6/9 | 18-22 $    3 23+ $ -114 | L $   10 (453) S $ -128 (289)
+   A3 = A1 + 0.5 ATR stop                   n= 946 $   -53 PF 0.91 t -1.1 yrs+ 5/9 | 18-22 $   14 23+ $ -153 | L $  -13 (588) S $ -120 (358)
+   control: long every day                  n=2229 $    -1 PF 1.00 t -0.0 yrs+ 5/9 | 18-22 $  -32 23+ $   40 | L $   -1 (2229) S $  nan (0)
+   control: short every day                 n=2229 $   -59 PF 0.91 t -1.5 yrs+ 2/9 | 18-22 $  -28 23+ $ -100 | L $  nan (0) S $  -59 (2229)
+ B. Leveraged-ETF momentum: prev close -> 14:45, in 14:46, out 15:00
+   B |return| > 2%                          n= 151 $    27 PF 1.07 t  0.3 yrs+ 3/9 | 18-22 $   96 23+ $ -266 | L $   91 (62) S $  -18 (89)
+   B |return| > 1%                          n= 574 $   -64 PF 0.75 t -2.2 yrs+ 2/9 | 18-22 $  -21 23+ $ -141 | L $  -70 (319) S $  -56 (255)
