@@ -26,6 +26,8 @@ B,"The Bridge's Overnight Bias ORB (close beyond the 8:30–8:45 range, ADX(16) 
 B,Combine add-ons: Bridge Monday Long 2 MNQ + EOS $500 + Vol-Control Sell 2 MNQ on top of VB 8 + ONB ADX30,20,
 B,"ES MOC auction follow: after a ≥ 0.3 ATR 14:00 → 14:50 CT move, follow 14:51 → 15:00, stop 0.25 ATR (round 1, analysis/s_rank_es_round1_test",1,3.5
 B,"Twin Continuation on an Apex 150K account ($9,000 target, $4,000 EOD drawdown, $2,000 DLL; 6 payouts ≈ $20,500, ladder assumed; analysis/twi",1,
+C,"NQ Sunday reopen first-minute push (user's 'NQ_WKND_v2' write-up, 2026-10-18; rebuild analysis/sunday_reopen_test.py): trade the weekend gap",1,2.6
+C,"Vault Break sized by NR7 day (Crabel's narrow-range day via Kaufman, Trading Systems and Methods, Antigravity's book reading 2026-10-18; ana",1,2.8
 C,"Gold Breakout 15M (user's TradingView description, 2026-10-14; analysis/gold_breakout_15m_test.py, bench analysis/gold_breakout_15m_bench.py",1,3.1
 C,Overnight Drift (backup; replaced by Monday Long 2026-10-12),1,
 C,Opening Drive,1,
@@ -47,6 +49,10 @@ C,"YM MOC auction follow (≥ 0.3 ATR, stop 0.25)",1,3.4
 C,"YM post-settlement fade (fade a ≥ 0.2 ATR 14:00 → 15:00 move, 15:01 → 15:15)",77,2.6
 C,BTC CME weekend-gap continuation (follow the Sunday gap ≥ 0.5 ATR),1,4.6
 C,"Overnight Bias ML (funded v2) at $1,100 in the combine instead of ONB ADX30 (analysis/combine_swap_test.py)",1,
+D,"Extreme Money Flow (E Trades research paper, user's EMF.txt, 2026-10-18): session-anchored Chaikin Money Flow (20 one-minute bars) crossing ",1,1.4
+D,"Midday Range Breakout (user's file midday_breakout.pla, 2026-10-18; idea from Matteo's TrendFollowingCheck; rebuild analysis/midday_breakout",1,2.1
+D,"ES 'Core 3' (user's weekend finds, 2026-10-18; files Crabel_NR7_ES.txt / Crabel_2BarNR_ES.txt; Python rebuild analysis/es_core3_test.py, $30",1,1.7
+D,"Overnight round for a personal account (2026-10-18, pre-registered, analysis/overnight_round.py; not Apex-legal)",1,0.9
 D,"Fade yesterday's session move (8:30–15:00), next session 8:31–15:00 (follow-up to the ES mean-reversion premise)",1,2.2
 D,"Vault Break sized up after Overnight Bias ML has gone long the same day (analysis/plan_agreement_test.py, bench analysis/vb_after_onb_bench.",1,2.55
 D,NQ after mega-cap earnings (index-level PEAD idea from the Fink / Sojka reviews),1,0.7
@@ -98,6 +104,25 @@ D,"Scaling size up as a funded account grows (cushion above full size, or x1.25�
 D,"Pension / balanced-fund rebalancing conditional on stocks vs bonds (2026-10-16, analysis/forced_flows_round5_test.py): signal at T−4 close S",1,1.2
 D,"CL holiday-reopen up-gap fade (2026-10-16, same script): the Sunday up-gap fade rule on the 17:00 CT reopens after Christmas / New Year (the",1,3.3
 D,"Daily profit cap vs the 50% consistency rule (user, 2026-10-16: cut the day at +$1,500 so the next day can satisfy consistency; analysis/pro",1,
+F,"Leveraged-ETF / closing push reverses overnight (Lead 1, 2026-10-18, pre-registered, analysis/letf_overnight_reversal_test.py; Apex-legal: 1",1,0.3
+F,"Antigravity's per-symbol 'proven structural edges' (2026-10-18, analysis/anti_symbol_edges_test.py, pre-registered; the rest of its list was",1,-1.4
+F,"Antigravity's 'where real alpha comes from' list (2026-10-18; analysis/anti_forced_flow_ideas_test.py, pre-registered): European close (alre",1,2.3
+F,"Limit instead of market entries for the plan (VB, LDF, ES MOC, Monday Long, EOS, NFP Fade; MC trades; limit at the decision close 0-2 ticks ",1,
+F,"Antigravity book readings, batch 2026-10-18: Taulli Commodities, Pruitt Building Winning Algorithmic Trading Systems (TradeStation), Covel T",1,
+F,"MaxAI: RL + Genetic Algorithm for intraday NQ (Huber 2025, SSRN 5761402, preprint, not peer reviewed)",1,
+F,"NR7 family test (2026-10-18, analysis/nr7_family_test.py, pre-registered out-of-sample: the user's NR7 stretch breakout unchanged on NQ, YM,",1,-0.2
+F,"Grimes, The Art and Science of Technical Analysis, Antigravity's book reading (2026-10-18): shortlist = discretionary price-action patterns ",1,-2.3
+F,"Carver, Systematic Trading (2015), Antigravity's book reading (2026-10-18, antigravity/jesse tasks/out_book_carver_systematic/)",1,
+F,"Who Trades at the Close? (Bogousslavsky & Muravyev, J. Financial Markets 2023): ES MOC Follow on heavy-close days (3rd Friday, Russell recon",1,1.1
+F,"Do S&P 500 Options Increase Market Volatility? Evidence from 0DTEs (Adams, Dim, Eraker, Fontaine, Ornthanalai & Vilkov, SSRN 5641974): momen",1,-1.2
+F,"Hilpisch, Python for Algorithmic Trading (2020), Antigravity's book reading (2026-10-18, antigravity/jesse tasks/out_book_hilpisch_algotradi",1,
+F,"Pedersen, Efficiently Inefficient and Chan, Machine Trading: Antigravity's book readings (2026-10-18, agents/results/BOOKS_PEDERSEN_CHANML_R",1,
+F,"Kaufman, Trading Systems and Methods (5th ed.), Antigravity's book reading (2026-10-18): shortlist = opening-range breakouts (Crabel inside ",1,0.7
+F,"López de Prado, Advances in Financial Machine Learning (2018), Antigravity's book reading (agents/results/BOOK_PRADO_AFML_REVIEW.md, 2026-10",1,
+F,"Chan, Algorithmic Trading (2013) ch. 7, the two Apex-fit ideas from Antigravity's book reading (tasks/out_book_chan_algotrading/ on antigrav",1,-1.2
+F,"Antigravity's NarangBlackBox (2026-10-18; ES 1h EMA50/200 + ADX trend filter, Bollinger-touch entries, 1.6 / 2.5 ATR, out after 24 bars; age",1,
+F,"Antigravity's ESEuroCloseTrend (2026-10-17; follow the 8:30→10:30 CT move at the European close if ≥ 0.25 ATR, VWAP side, ADX ≥ 20; stop 0.3",1,1.4
+F,"Antigravity Phase 2: 40 pre-registered improvement variants on the 8 plan strategies (2026-10-17, agents/results/PHASE2_VERDICT.md)",1,
 F,"ES mean reversion (user's focus, 2026-10-14; analysis/es_mean_reversion_premise.py, analysis/es_mean_reversion_test.py)",1,-7.8
 F,"Mega-cap earnings intraday shape on NQ (2026-10-14, analysis/megacap_earnings_intraday_test.py): run-up into after-close reports (report day",1,0.4
 F,"CL round 3 (2026-10-14, analysis/cl_round3_test.py): Friday pre-weekend 8:00–13:29 (long −$3, short −$52, fade the week −$81 t −1.5; Tue–Thu",1,-1.5
@@ -223,31 +248,13 @@ F,"Bitcoin seasonality + trend / bounce (Padysak & Vojtko, Quantpedia, SSRN 4081
 F,"Twin Continuation on other markets (analysis/twin_family_test.py): exact defaults on ES, YM, GC, CL, MO stop translated to 0.292 x daily ATR",1,4.8
 F,"Morning Momentum (Twin's MO leg) risk-sized for Apex (analysis/twin_mo_risk_bench.py): stop 0.292 x ATR, MNQ = risk / stop",1,
 F,"Gold first-notice-day long liquidation (2026-10-16, analysis/forced_flows_round5_test.py): short GC 7:20 → 12:30 CT on the 3 days before FND",1,0.1
-F,"Golden Cross 50/200 SMA on 1-hour RTH NQ bars (Antigravity, 2026-10-17): as written and flat at 15:00 CT",2,-1.1
-F,"20-day regime filter (bull > +5% / bear < -5%) on the plan strategies (user, 2026-10-17)",48,2.5
-F,"Markov regime transitions: 20-day bull/side/bear + 1d / 5d / vol states, next-day return on NQ ES YM GC CL BTC and plan trades (user, 2026-10-17)",588,3.0
-F,"Meta-labeling Vault Break: walk-forward ridge on 21 daily + entry-moment inputs, take if predicted net >= 0 (user, 2026-10-17, pre-registered)",2,0.2
-F,"Meta-labeling Late-Day Flow: walk-forward ridge on daily + 14:00 signal features (user, 2026-10-17, pre-registered)",2,-0.5
-F,"SPX option OI / GEX (free 2022-H2 sample) -> next ES session: range, direction, pinning (2026-10-17)",12,-1.7
-F,"Golden Cross 50/200 SMA on GC 1-hour, long only, no stop (user, Oct 2023 - Oct 2026)",1,1.0
-F,"NFP Fade replacement: drop / VCS / ES MOC follow (MES) / High-win MO, funded bench swap (2026-10-17, pre-registered)",12,
-F,"VIX-ETP end-of-day rebalancing follow 15:05-15:15 CT on ES / NQ (Bangsgaard & Kokholm 2025; 2026-10-17, pre-registered)",8,-4.6
-F,"Month-end Treasury index extension: long ZN last business day / day before / last afternoon (2026-10-17, pre-registered)",5,-1.4
-F,"Antigravity ESEuroCloseTrend: ES follow 8:30-10:30 move at the European close, VWAP + ADX filters (2026-10-17)",4,1.4
-F,"Antigravity Phase 2: 5 pre-registered improvement variants x 8 plan strategies (2026-10-17)",40,
-F,"Antigravity NarangBlackBox: ES 1h EMA/ADX trend + Bollinger touch, 24-bar hold (2026-10-18)",3,1.4
-F,"Chan Algorithmic Trading ch.7: opening-gap momentum NQ/ES (3 variants) + leveraged-ETF close momentum prev close->14:45 (2 thresholds) (2026-10-18, pre-registered)",10,0.4
-C,"Vault Break sized by NR7 / inside day; ONB by NR7 / inside day (Kaufman via Antigravity, 2026-10-18, pre-registered); best VB NR7",4,2.8
-F,"ZN follow the 7:30-7:35 macro-release move to 9:00 / 14:00, stop none / 8 ticks (Pedersen / Chan ML via Antigravity, 2026-10-18, pre-registered)",4,-1.0
-F,"Who Trades at the Close: ES MOC on heavy-close days (2026-10-18, pre-registered)",1,1.1
-F,"0DTE dealer gamma (Adams et al.): ES MOC and VB below vs above the flip (2026-10-18, pre-registered)",2,-1.2
-D,"Overnight round (personal account): overnight long ES/NQ (+down-day filter), turn of month ES/NQ (+1 ATR stop), 6-market TSMOM (2026-10-18, pre-registered)",9,1.4
-F,"Grimes failure test (prior-session high/low probe and reclaim), NQ/ES, exit 15:00 or 4-bar time stop (2026-10-18, pre-registered)",4,-1.2
-D,"ES Core 3 (user): NR7 stretch breakout, 2-bar NR breakout, Monday after up Friday; rebuilt (2026-10-18)",8,1.7
-F,"NR7 family test out-of-sample: NR7 stretch breakout on NQ/YM/CL/GC, NR7 vs other days (2026-10-18, pre-registered)",4,0.6
-D,"Midday Range Breakout NQ (user): longs / shorts / both + buy-12:31 control (2026-10-18)",4,2.1
-D,"Extreme Money Flow: session CMF20 +/-0.25 cross, 80/80 bracket, NQ (E Trades paper, user, 2026-10-18)",1,1.4
-C,"NQ Sunday reopen first-minute gap push (user; rebuild NQ/ES/YM, 0-4 tick entries, 1 minute late) (2026-10-18)",6,2.6
-F,"Limit entries (0-2 ticks better, 1-5 min) vs market on 6 plan strategies (2026-10-18)",48,
-F,"NQ after 10y/30y auctions follow; trapped overnight inventory fade (Antigravity list, 2026-10-18, pre-registered)",4,0.5
-F,"Antigravity per-symbol edges: CL / ZN pit-open breakouts, GC morning continuation, GC PM-fix follow (2026-10-18, pre-registered)",4,-0.5
+F,"Month-end Treasury index extension on ZN (2026-10-17, literature scan; analysis/zn_month_end_test.py, pre-registered): long ZN on the last b",1,-1.4
+F,"VIX-ETP end-of-day rebalancing (Bangsgaard & Kokholm, SSRN 4470636, J. Banking & Finance 2025; analysis/vix_etp_eod_test.py, pre-registered)",1,-4.6
+F,"NFP Fade replacement hunt (user, 2026-10-17; analysis/nfp_replacement_test.py, pre-registered: beat the plan on 1y AND 2y payouts, blown no ",1,3.5
+F,"SPX / SPXW option open interest → next ES session (historicaldata.net free sample 2022-H2, 127 days; analysis/spx_gex_sample_test.py): naive",1,-3.7
+F,"Meta-labeling Late-Day Flow (user, 2026-10-17; analysis/ldf_meta_label_test.py, pre-registered, same method as VB): ridge on daily inputs + ",1,-0.5
+F,"Meta-labeling Vault Break (user, 2026-10-17; analysis/vb_meta_label_test.py, pre-registered): walk-forward ridge on 21 inputs (ONB-filter da",1,0.2
+F,"Markov regime transitions (user, 2026-10-17, video 'with Fable 5'): bull / sideways / bear states and their 9 transitions, plus non-overlapp",1,2.5
+F,"20-day regime filter (user, 2026-10-17): previous close vs 20 trading days earlier > +5% bull, < −5% bear, else sideways (analysis/regime20_",48,2.5
+F,"Golden Cross 50 / 200 SMA on gold (user, 2026-10-17; analysis/gc_golden_cross_test.py): GC 1-hour, long only, no stop / target, Oct 2023 – O",1,1.0
+F,"Golden Cross 50 / 200 SMA (Antigravity + Jesse, 2026-10-17; branch antigravity/jesse, ported in analysis/jesse/strategies/GoldenCross): 1-ho",1,-1.1

@@ -1,0 +1,52 @@
+Lead 1 (user, 2026-10-18): the leveraged-ETF / closing price push reverses overnight. Apex-legal version: the Apex day
+
+NQ: 1931 usable nights 2018-2026
+   NQ fade, |move| >= 0.4 ATR                         n= 861 $  26.2 PF 1.03 t  0.3 yrs+ 5/9 | 18-22 $-127 23+ $236
+      longs (after down days = Overnight Drift subset) n= 394 $ 144.1 PF 1.16 t  1.0 yrs+ 5/9 | 18-22 $-114 23+ $491
+      shorts (after up days, the new part)            n= 467 $ -73.2 PF 0.90 t -0.8 yrs+ 2/9 | 18-22 $-137 23+ $16
+      gross, before costs                             n= 861 $  50.7 PF 1.06 t  0.6 yrs+ 6/9 | 18-22 $-102 23+ $261
+      by year: {2018: -6890.0, 2019: 2040.0, 2020: -38750.0, 2021: -16640.0, 2022: -2880.0, 2023: 30116.0, 2024: 39048.0, 2025: 8136.0, 2026: 8406.0}
+   NQ fade, |move| >= 0.8 ATR                         n= 284 $ -16.0 PF 0.98 t -0.1 yrs+ 5/9 | 18-22 $-189 23+ $262
+      longs (after down days = Overnight Drift subset) n= 154 $ -21.9 PF 0.98 t -0.1 yrs+ 4/9 | 18-22 $-305 23+ $434
+      shorts (after up days, the new part)            n= 130 $  -9.0 PF 0.99 t -0.0 yrs+ 5/9 | 18-22 $-52 23+ $59
+      gross, before costs                             n= 284 $   8.5 PF 1.01 t  0.1 yrs+ 5/9 | 18-22 $-165 23+ $286
+   control (a): small days, same fade                 n=1070 $ -49.5 PF 0.94 t -0.7 yrs+ 3/9 | 18-22 $-34 23+ $-70
+   control: always long on big days                   n= 861 $  79.1 PF 1.10 t  0.9 yrs+ 5/9 | 18-22 $-3 23+ $192
+   control: always long, every night                  n=1931 $  84.9 PF 1.12 t  1.6 yrs+ 6/9 | 18-22 $40 23+ $144
+   control (b): random side p = 0.272 (gross mean $50.7)
+   NQ (c) 14:40-15:00 push fade, |push| >= 0.15 ATR   n= 391 $ 264.6 PF 1.34 t  1.8 yrs+ 6/9 | 18-22 $184 23+ $401
+      longs (after down days = Overnight Drift subset) n= 194 $ 597.1 PF 1.85 t  2.8 yrs+ 7/9 | 18-22 $345 23+ $1054
+      shorts (after up days, the new part)            n= 197 $ -62.8 PF 0.93 t -0.3 yrs+ 4/9 | 18-22 $18 23+ $-192
+      gross, before costs                             n= 391 $ 289.1 PF 1.37 t  2.0 yrs+ 6/9 | 18-22 $209 23+ $426
+   NQ (c) 14:40-15:00 push fade, |push| >= 0.3 ATR    n=  70 $-250.9 PF 0.77 t -0.7 yrs+ 3/9 | 18-22 $-45 23+ $-645
+      longs (after down days = Overnight Drift subset) n=  42 $ -44.4 PF 0.95 t -0.1 yrs+ 4/9 | 18-22 $-252 23+ $476
+      shorts (after up days, the new part)            n=  28 $-560.6 PF 0.61 t -0.8 yrs+ 5/9 | 18-22 $343 23+ $-1766
+      gross, before costs                             n=  70 $-226.4 PF 0.79 t -0.7 yrs+ 4/9 | 18-22 $-21 23+ $-621
+
+ES: 1921 usable nights 2018-2026
+   ES fade, |move| >= 0.4 ATR                         n= 807 $ -22.3 PF 0.95 t -0.5 yrs+ 3/9 | 18-22 $-47 23+ $12
+      longs (after down days = Overnight Drift subset) n= 361 $  89.6 PF 1.19 t  1.1 yrs+ 5/9 | 18-22 $-19 23+ $233
+      shorts (after up days, the new part)            n= 446 $-112.9 PF 0.75 t -1.9 yrs+ 1/9 | 18-22 $-70 23+ $-172
+      gross, before costs                             n= 807 $  12.7 PF 1.03 t  0.3 yrs+ 5/9 | 18-22 $-12 23+ $47
+      by year: {2018: -8380.0, 2019: -128.0, 2020: -7978.0, 2021: -6875.0, 2022: 1405.0, 2023: -2862.0, 2024: 15595.0, 2025: -22022.0, 2026: 13250.0}
+   ES fade, |move| >= 0.8 ATR                         n= 260 $  -5.2 PF 0.99 t -0.1 yrs+ 4/9 | 18-22 $-17 23+ $12
+      longs (after down days = Overnight Drift subset) n= 145 $  23.0 PF 1.05 t  0.2 yrs+ 5/9 | 18-22 $-29 23+ $113
+      shorts (after up days, the new part)            n= 115 $ -40.9 PF 0.91 t -0.3 yrs+ 3/9 | 18-22 $0 23+ $-92
+      gross, before costs                             n= 260 $  29.8 PF 1.06 t  0.3 yrs+ 5/9 | 18-22 $18 23+ $47
+   control (a): small days, same fade                 n=1114 $ -83.7 PF 0.82 t -2.3 yrs+ 4/9 | 18-22 $-92 23+ $-73
+   control: always long on big days                   n= 807 $  63.8 PF 1.15 t  1.3 yrs+ 6/9 | 18-22 $-9 23+ $161
+   control: always long, every night                  n=1921 $  43.9 PF 1.11 t  1.5 yrs+ 6/9 | 18-22 $36 23+ $54
+   control (b): random side p = 0.392 (gross mean $12.7)
+   ES (c) 14:40-15:00 push fade, |push| >= 0.15 ATR   n= 485 $  60.0 PF 1.12 t  0.9 yrs+ 4/9 | 18-22 $43 23+ $86
+      longs (after down days = Overnight Drift subset) n= 248 $ 210.1 PF 1.52 t  2.4 yrs+ 7/9 | 18-22 $148 23+ $323
+      shorts (after up days, the new part)            n= 237 $ -97.1 PF 0.83 t -0.9 yrs+ 3/9 | 18-22 $-79 23+ $-122
+      gross, before costs                             n= 485 $  95.0 PF 1.21 t  1.4 yrs+ 5/9 | 18-22 $78 23+ $121
+   ES (c) 14:40-15:00 push fade, |push| >= 0.3 ATR    n= 115 $  52.7 PF 1.11 t  0.4 yrs+ 6/9 | 18-22 $-13 23+ $196
+      longs (after down days = Overnight Drift subset) n=  62 $  50.3 PF 1.11 t  0.3 yrs+ 5/9 | 18-22 $-43 23+ $262
+      shorts (after up days, the new part)            n=  53 $  55.6 PF 1.10 t  0.2 yrs+ 5/9 | 18-22 $24 23+ $122
+      gross, before costs                             n= 115 $  87.7 PF 1.18 t  0.6 yrs+ 6/9 | 18-22 $22 23+ $231
+
+YM out-of-market check of the post-hoc cut (1917 nights)
+   YM long after down push >= 0.15 ATR                n= 228 $  41.8 PF 1.13 t  0.7 yrs+ 4/9 | 18-22 $52 23+ $19
+   YM control: always long, every night               n=1917 $  32.4 PF 1.10 t  1.4 yrs+ 5/9 | 18-22 $40 23+ $22
+   YM short after up push >= 0.15 ATR                 n= 217 $ -49.9 PF 0.89 t -0.6 yrs+ 3/9 | 18-22 $-109 23+ $57
