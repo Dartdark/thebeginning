@@ -49,6 +49,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   'long after a down 14:40→15:00 push' (NQ t 2.8, ES t 2.4) failed on YM (t 0.7). Nothing to add.
 - **Index rebalancing next-morning reversal (Franz 2019, SSRN 3459744; 2026-10-18): F.** Stock-level effect; the index analog
   (fade the last 30 min of rebalancing dates to 10:30 next day) loses on NQ and ES (`analysis/index_rebalance_reversal_test.py`).
+- **Antigravity paper screen (TASK_PAPER_SCREEN, 2026-10-18): 3 picks, none new.** Treasury auctions already tested; FOMC
+  liquidity premium and YM opening-range reversal both F (`analysis/anti_papers_1018_test.py`).
 - **User's to-do list: `TODO.md`** (reminders scheduled in the original session: Sun + Wed 10:52 CT, and Sun 10/18 15:30 CT).
 
 - **Account #1 (50K EOD evaluation): about +$1,500, $1,500 left to the $3,000 target.** The user entered the ONB trade

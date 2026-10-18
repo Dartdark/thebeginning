@@ -74,6 +74,9 @@ weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail
   - index-rebalancing next-morning reversal on NQ / ES (Franz 2019; stock-level effect, nets out in the index);
   - closing-auction heavy days, turn of month, overnight drift, time-series momentum, NR7 / narrow-range days, gap
     momentum, CL / ZN opening-range breakouts, gold PM fix, 0DTE gamma flip / strike pinning.
+  - Treasury auction price pressure on ZN (Fleming, Liu & Nguyen 2026: pre-auction leg real but a third of the cost,
+    post-auction rebound absent); FOMC 13:00 statement follow / fade / long-after-illiquid-day; pre-FOMC drift; fading the
+    8:30-8:45 opening push on YM / ES / NQ (pushes continue). Search `TIER_LIST.md` for the paper's title or SSRN id too.
 
 ## Data notes
 
