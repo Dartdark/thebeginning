@@ -87,6 +87,9 @@ weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail
 
 ## Rules for every task
 
+0. **Citations:** when you cite a paper or book, quote what it actually found (with page or section). Never attach a
+   finding, threshold or time to a source that does not state it; write "our setting" or "my inference" instead.
+
 1. One task per conversation. Read the task file plus `tasks/COMMON_NQ.md` for NQ tasks.
 2. **Blind:** only the task text. No other code or results about that rule. No optimisation or parameter changes during the check (improving comes after, see Phase 2).
 3. Ambiguity: take the most literal reading, keep going, list it in the report.
