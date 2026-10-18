@@ -42,6 +42,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **Overnight round for a future personal account (2026-10-18, `analysis/overnight_round.py`): all D.** Overnight long NQ $83/night
   (t 1.4), turn of month NQ $1,063 (t 1.4), 6-market trend portfolio Sharpe 0.46 (2022 +10%, corr ES −0.09). Personal account =
   the intraday plan without Apex limits first; these only as small diversifiers.
+- **Limit vs market entries (2026-10-18, `analysis/limit_entry_test.py`): keep MARKET entries** — limits miss the big winners on every
+  plan strategy (ES MOC −$76 to −$109 a signal).
 - **User's to-do list: `TODO.md`** (reminders scheduled in the original session: Sun + Wed 10:52 CT, and Sun 10/18 15:30 CT).
 
 - **Account #1 (50K EOD evaluation): about +$1,500, $1,500 left to the $3,000 target.** The user entered the ONB trade
