@@ -18,6 +18,9 @@ compares those trades with MultiCharts and its own Jesse runs (`analysis/jesse/c
 Not included: Vault Break SP (Vault Break's entries; its single-print flag only sets the size) and Bridge Monday Long
 (closed source).
 
+Book reading: `TASK_BOOK_READING.md` (extract testable ideas with quotes and pages, no backtests; one book per
+conversation; never commit the book itself).
+
 Phase 2 (improvement) on 01-08: done 2026-10-17, no variant passed; see `agents/results/PHASE2_VERDICT.md`.
 
 Suggested order: 01, then 06 (simplest NQ rule), 05, 07, 08, 02, 03, 04.
