@@ -97,7 +97,7 @@ weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail
 5. Use only the data the task needs; no extra imports or extra backtests.
 6. **Never** touch live trading, broker or exchange settings, or API keys. Never put tokens or passwords in chat.
 7. **Push every time:** when a task or idea is finished, run `git add -A`, `git commit -m "<task>"`,
-   `git push origin antigravity/jesse`, then say "pushed". New strategy ideas must also follow Phase 2's rules
+   `git push mine HEAD:antigravity/jesse`, then say "pushed". New strategy ideas must also follow Phase 2's rules
    (written plan first, 2018-22 design / 2023-26 holdout, full costs, flat by 15:59 CT, losses that fit a $2,000 trail).
 8. When done, tell the user. They commit `tasks/out_NN/` and push it to `antigravity/jesse`.
 

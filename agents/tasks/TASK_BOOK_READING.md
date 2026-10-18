@@ -39,7 +39,7 @@ Read `tasks/ANTIGRAVITY_BRIEF.md` first (rules 0, 6 and 7 apply here). One book 
 
 ## Output, then push
 `tasks/out_book_<book>/ideas.md` and `summary.md` only. Then:
-`git add tasks/out_book_<book>` → `git commit -m "book: <book>"` → `git push origin antigravity/jesse` → say "pushed".
+`git add tasks/out_book_<book>` → `git commit -m "book: <book>"` → `git push mine HEAD:antigravity/jesse` → say "pushed".
 
 Prompt for the user to paste:
 `Read tasks/ANTIGRAVITY_BRIEF.md, then tasks/TASK_BOOK_READING.md, and do it for the book <file path>, short name <book>.`
