@@ -41,6 +41,14 @@ bottom). Times are Central (CT).
 - [x] (2026-10-17, done) One-time setup: follow [journal/README.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/journal/README.md) (separate clone in `C:\TradingVault`, Daily notes + Templates plugins).
 - [ ] From Mon 10/19: a daily note each trading day; run `journal\sync.ps1` and tell Claude "read my journal".
 
+## Vault Break NR7 sizing (candidate, 2026-10-18)
+
+- [ ] MultiCharts backtest of [NQ_Vault_Break_SP.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Vault_Break_SP.txt)
+  on a 30-min **@NQ** chart (same settings as before, from Jan 2018), inputs **NumContracts 1, NR7Contracts 2, FlaggedContracts -1**,
+  no costs; save as "Backtesting Strategy Performance Report _ @NQ - 30 Minutes VB NR7.xlsx" and push / send it.
+  (Live combine charts: nothing changes; NR7Contracts defaults to -1 = off.)
+- [ ] Then: strategy-checker + Antigravity blind check, then your OK for funded sizing NumContracts 1 / NR7Contracts 3 / FlaggedContracts 1.
+
 ## Later
 
 - [ ] Before the CL Sunday fade goes live: confirm Apex allows MCL on the account.

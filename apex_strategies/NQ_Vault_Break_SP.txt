@@ -8,7 +8,17 @@
   exactly one bar, not containing the session high or low. All 13 bars must exist (half days never flag).
   Backtest 2018-2026, VB per NQ: flagged sessions (29%) $21 a trade vs $123 on the others, weaker in 7 of 9 years
   (random-day p 0.014). Funded bench: VB 3 / flagged 1 = $10,184 vs $9,818 in 1 year, blown 3% vs 4%.
-  FlaggedContracts -1 = filter off (plain Vault Break). The text below is the original header.
+  FlaggedContracts -1 = filter off (plain Vault Break).
+
+  NR7 sizing (added 2026-10-18, CANDIDATE, off by default: NR7Contracts -1): on the session after an NR7 day (the last
+  regular session's 8:30-15:00 range is the narrowest of the last NRDays sessions, ties count), trade NR7Contracts.
+  A single-print session still trades FlaggedContracts (single print wins). Crabel's narrow-range day, from Kaufman,
+  Trading Systems and Methods (Antigravity's book reading). Python (analysis/kaufman_day_filters_test.py, MC trades
+  2018-2026): VB $217 vs $60 a trade after NR7 days, t 2.8, 2018-22 $222 / 2023+ $212, random-day placebo p 0.005.
+  Funded bench (analysis/vb_nr7_bench.py): NumContracts 1, NR7Contracts 3, FlaggedContracts 1 = 2-year payouts +$415,
+  blown 3.5% vs 7.2% (vs the plan's 2 / 1). Not in the plan until MultiCharts-confirmed and the user agrees.
+  Half days count as sessions (their range to the early close), as in the Python test.
+  The text below is the original header.
 
   NQ Vault Break - MultiCharts PowerLanguage signal (longs only)
 
@@ -57,6 +67,8 @@ Inputs:
 	NumContracts(1),        { 1 for NQ backtests; 10 MNQ = 1 NQ }
 	FlaggedContracts(-1),   { contracts on single-print-flagged sessions; -1 = filter off; funded 1 (with 3), combine see README }
 	SPMinTicks(8),          { minimum single-print run, ticks }
+	NR7Contracts(-1),       { contracts on the session after an NR7 day; -1 = filter off (candidate, see header) }
+	NRDays(7),              { NR7 = narrowest regular-session range of the last NRDays sessions }
 	ShowFlag(true);         { print the flag in the Output window each session }
 
 Variables:
@@ -68,11 +80,12 @@ Variables:
 	DayLastEntry(0), DayFlatten(0);
 
 Arrays:
-	TrHist[100](0), PerHi[13](0), PerLo[13](0), Cov[4000](0);
+	TrHist[100](0), PerHi[13](0), PerLo[13](0), Cov[4000](0), RngHist[50](0);
 
 Variables:
 	NPer(0), Pi(0), Tk(0), SessHiT(0), SessLoT(0), NTk(0), RunLen(0), RunStart(0), HasSP(false), SPFlag(false),
-	Computed(false), PerA(0), PerB(0), Qty(0), TickSz(0.25);
+	Computed(false), PerA(0), PerB(0), Qty(0), TickSz(0.25),
+	RthHi(0), RthLo(0), RngCount(0), RngIdx(0), RngMin(0), Ri(0), NRFlag(false), LastRng(0);
 
 if BarType < 2 then BarVol = Ticks else BarVol = Volume;
 
@@ -202,6 +215,44 @@ if Time = 1500 then begin
 	end;
 end;
 
+{ ---------- NR7: regular-session range (bars closing 9:00 .. 15:00 CT, or to the early close) ---------- }
+{ Stored when the date changes after a weekday that had regular-session bars, so the Sunday evening open does not touch
+  it (MULTICHARTS_PITFALLS: 'Sunday session wipes daily flags'); NRFlag is used by the next weekday's entries. }
+if Date <> Date[1] then begin
+	if RthHi > 0 and DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+		LastRng = RthHi - RthLo;
+		NRFlag = false;
+		if RngCount >= NRDays - 1 then begin
+			RngMin = 999999999;
+			for Ri = 1 to NRDays - 1 begin
+				RngMin = MinList(RngMin, RngHist[Mod(RngIdx - Ri + 50, 50)]);
+			end;
+			NRFlag = LastRng <= RngMin;
+		end;
+		RngHist[RngIdx] = LastRng;
+		RngIdx = Mod(RngIdx + 1, 50);
+		if RngCount < 49 then RngCount = RngCount + 1;
+		if ShowFlag then begin
+			if NRFlag then
+				Print(NumToStr(Date[1] + 19000000, 0), " NR", NumToStr(NRDays, 0), ": YES -> next session trades NR7Contracts")
+			else
+				Print(NumToStr(Date[1] + 19000000, 0), " NR", NumToStr(NRDays, 0), ": no");
+		end;
+	end;
+	RthHi = 0;
+	RthLo = 0;
+end;
+if Time > 830 and Time <= 1500 then begin
+	if RthHi = 0 then begin
+		RthHi = High;
+		RthLo = Low;
+	end
+	else begin
+		RthHi = MaxList(RthHi, High);
+		RthLo = MinList(RthLo, Low);
+	end;
+end;
+
 { ---------- Entries ---------- }
 TradesToday = TotalTrades - DayStartTrades;
 if MarketPosition <> 0 then TradesToday = TradesToday + 1;
@@ -211,6 +262,7 @@ if ATRv > 0 and Time >= FirstDecision and Time < DayLastEntry
 	and Close > Noise and Close > DayVwap then
 	begin
 	Qty = NumContracts;
+	if NRFlag and NR7Contracts >= 0 then Qty = NR7Contracts;
 	if SPFlag and FlaggedContracts >= 0 then Qty = FlaggedContracts;
 	if Qty > 0 then Buy ("VaultBreak") Qty contracts next bar at market;
 	end;
