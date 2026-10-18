@@ -16,12 +16,12 @@ bottom). Times are Central (CT).
 - [x] **Compile [Apex_Target_Guard.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Target_Guard.txt)**
   and add it to the VB, ONB and Bridge Monday charts; `TargetBalance` 53050, `StartBalance` = the Apex balance (set it before
   every session).
-- [ ] **Test order Sunday 17:00 CT** to confirm a real Rithmic fill on the Apex account (Symbol Mapping `@MNQ -> MNQZ6`).
-- [ ] Keep the PC and connection awake during trading hours (screen sleep off).
+- [x] (2026-10-18, user: filled) **Test order Sunday 17:00 CT** to confirm a real Rithmic fill on the Apex account (Symbol Mapping `@MNQ -> MNQZ6`).
+- [x] (2026-10-18, user: set) Keep the PC and connection awake during trading hours (screen sleep off).
 
 ## This week and next
 
-- [ ] **Tue 10/20: buy account #2** (single 50K EOD, $59): only after a real Apex fill is confirmed.
+- [ ] **Tue 10/20: buy account #2** (single 50K EOD, $59): real Apex fill confirmed 2026-10-18, so go ahead.
 - [ ] **Fri 10/23 (and every Friday): export the weekly MultiCharts reports into `live/`** and tell Claude (it runs
   `analysis/live_vs_backtest.py --all live/` and the drift alarm).
 - [ ] When account #1 passes ($53,000): turn auto-trading off on that account.
