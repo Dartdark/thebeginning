@@ -37,6 +37,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   NR7 day (t 2.8, both periods, placebo p 0.005); bench VB 1 / NR7 3 blown 3.5% vs 7.2%, 2y +$415. MC-confirmed 135/135, but checker FAIL (t 2.81 < 3.53,
   regime 0.55): NOT in the plan (user: add only if it passes); WATCHLIST #21 forward recheck. NR7Contracts stays -1.
   Antigravity book readings so far: Chan (F), Prado (no trade), Kaufman (NR7), Pedersen + Chan ML (F, ZN releases tested), Hilpisch (coding book, nothing), Carver (framework, nothing), Grimes (price action; failure test F).
+- **NR7 family test FAIL (2026-10-18):** the user's NR7 breakout on NQ / YM / CL / GC shows no NR7 effect (pooled z 0.31); VB and ES
+  NR7 results likely chance. ES Core 3 (user's weekend finds): D (Sharpe 0.88 rebuilt, Monday filter backwards).
 - **Overnight round for a future personal account (2026-10-18, `analysis/overnight_round.py`): all D.** Overnight long NQ $83/night
   (t 1.4), turn of month NQ $1,063 (t 1.4), 6-market trend portfolio Sharpe 0.46 (2022 +10%, corr ES −0.09). Personal account =
   the intraday plan without Apex limits first; these only as small diversifiers.
