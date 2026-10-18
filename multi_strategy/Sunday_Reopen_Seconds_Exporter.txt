@@ -1,0 +1,37 @@
+{ Sunday reopen seconds exporter - MultiCharts PowerLanguage indicator (2026-10-18)
+
+  Purpose: measure how much of the Sunday-reopen push (WATCHLIST #22) is left a few seconds after 17:00:00 CT,
+  which our 1-minute data cannot show. Writes every 1-second bar from 17:00:00 to 17:02:00 CT on Sundays to one CSV.
+
+  Use: a NEW chart of @NQ (or @MNQ), resolution 1 SECOND, time zone Exchange (Central), 24-hour session, loaded as far
+  back as your data feed allows (dxFeed tick history decides how many Sundays you get). Add this indicator, let it
+  calculate once, then send the file (or push it). The folder must already exist.
+  Columns: date, time (HHMMSS, bar close, Central), open, high, low, close, volume, fri_close (last price before the
+  reopen = Friday's close, the gap reference).
+  Note: second bars only exist when a trade happened, so gaps in the times are normal. }
+
+Inputs:
+	FileName("C:\OFBexport\NQ_reopen_seconds.csv"),
+	FromTime(170000),     { HHMMSS, Central }
+	ToTime(170200);
+
+Variables:
+	InWin(false), FriClose(0), Row("");
+
+Once begin
+	FileDelete(FileName);
+	FileAppend(FileName, "date,time,open,high,low,close,volume,fri_close" + NewLine);
+end;
+
+InWin = DayOfWeek(Date) = 0 and Time_s > FromTime and Time_s <= ToTime;
+
+if InWin and InWin[1] = false then FriClose = Close[1];          { the bar before the first Sunday bar = Friday's last }
+
+if InWin and BarStatus(1) = 2 then begin
+	Row = NumToStr(Date + 19000000, 0) + "," + NumToStr(Time_s, 0) + ","
+		+ NumToStr(Open, 2) + "," + NumToStr(High, 2) + "," + NumToStr(Low, 2) + "," + NumToStr(Close, 2) + ","
+		+ NumToStr(Volume, 0) + "," + NumToStr(FriClose, 2);
+	FileAppend(FileName, Row + NewLine);
+end;
+
+Plot1(Close, "Close");
