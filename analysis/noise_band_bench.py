@@ -30,3 +30,22 @@ B = FB.Boot(lab)
 plans = {"current plan": CUR, "+ noise-band 1 MNQ": {**CUR, "NB_MNQ": 1}, "+ noise-band 2 MNQ": {**CUR, "NB_MNQ": 2},
          "+ NB shorts only 1 MNQ": {**CUR, "NBS_MNQ": 1}, "+ NB shorts only 2 MNQ": {**CUR, "NBS_MNQ": 2}}
 df, s, _ = B.compare(plans, base="current plan", n=1000, L=20); print(__doc__.split("\n")[0]); print(s)
+
+# Replacement test (user rule 2026-10-18: a candidate may replace instead of add). Noise-band overlaps Vault Break most.
+rep = {"current plan": CUR,
+       "VB 0 / 0, NB 1 MNQ": {**CUR, "VB_N": 0, "VB_F": 0, "NB_MNQ": 1},
+       "VB 0 / 0, NB 2 MNQ": {**CUR, "VB_N": 0, "VB_F": 0, "NB_MNQ": 2},
+       "VB 0 / 0, NB 3 MNQ": {**CUR, "VB_N": 0, "VB_F": 0, "NB_MNQ": 3},
+       "VB 1 / 1, NB 1 MNQ": {**CUR, "VB_N": 1, "VB_F": 1, "NB_MNQ": 1},
+       "VB 2 / 1, NB longs-out: shorts 1": {**CUR, "NBS_MNQ": 1},
+       "VB 1 / 1, NB shorts 1": {**CUR, "VB_N": 1, "VB_F": 1, "NBS_MNQ": 1}}
+df, s, _ = B.compare(rep, base="current plan", n=1000, L=20)
+print("\nReplacement (in place of / in part of Vault Break):"); print(s)
+
+# Control: is the lower blow-up rate the noise band, or just less Vault Break?
+ctl = {"current plan": CUR, "VB 0 / 0, nothing": {**CUR, "VB_N": 0, "VB_F": 0},
+       "VB 1 / 1, nothing": {**CUR, "VB_N": 1, "VB_F": 1},
+       "VB 1 / 1, NB shorts 1": {**CUR, "VB_N": 1, "VB_F": 1, "NBS_MNQ": 1},
+       "VB 0 / 0, NB 1 MNQ": {**CUR, "VB_N": 0, "VB_F": 0, "NB_MNQ": 1}}
+df, s, _ = B.compare(ctl, base="current plan", n=1000, L=20)
+print("\nControl (VB cut with nothing in its place):"); print(s)
