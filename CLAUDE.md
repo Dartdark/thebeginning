@@ -9,8 +9,9 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
 - **Branches:** work on `claude/nq-trading-strategy-params-5h9d20`; keep
   `claude/quirky-noether-4dla64` and the session's designated branch identical; push every
   commit to all of them.
-- **Links:** always give direct GitHub links, and raw links
-  (`raw.githubusercontent.com/...`) for code to paste into MultiCharts.
+- **Links:** always give direct GitHub links (and the raw link for code to paste into MultiCharts). The repo is PRIVATE since
+  2026-10-19: raw links only open while logged in to GitHub, and scripted downloads (Invoke-WebRequest) fail; on the PC use
+  `git pull` in the clone instead.
 - **Journal (Obsidian, 2026-10-17):** `journal/daily/` and `journal/ideas/` are the user's notes, pushed to the work branch by
   `journal/sync.ps1` (with `live/` reports). On "read my journal": `git pull` the work branch, read the new notes, compare
   with the backtest trades of those days, act on problems (fix / `MULTICHARTS_PITFALLS.md` / `TODO.md`), test ideas and set

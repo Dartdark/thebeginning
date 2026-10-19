@@ -28,6 +28,7 @@ local chores.
   run `journal\sync.ps1` and report its output.
 - **Papers:** download PDFs the user names into `C:\Paper` and copy them into the repo's `papers/` folder; when asked, start Antigravity's screen by giving the user
   the prompt from `tasks\TASK_PAPER_SCREEN.md` (the user pastes it; Cowork doesn't drive Antigravity).
-- **Repo refresh:** when asked, download updated files from raw.githubusercontent.com links into the folders above.
+- **Repo refresh:** the repo is private, so don't download raw links; run `git pull` in `C:\TradingVault` (and in
+  `C:\Users\dmoto\jesse-bot` for Antigravity's files) instead.
 
 When something fails, report the exact error text; don't work around it by touching the trading apps.
