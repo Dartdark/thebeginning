@@ -61,8 +61,10 @@ Claude chores, Obsidian / `C:\TradingVault`, Antigravity / Docker, MultiCharts b
 after 15:59 CT, never with a position open.
 
 - [x] (2026-10-19) Memory check: MultiCharts with the 4 live charts uses ~290 MB in total (app 100 MB + background
-      processes ~190 MB); ~30 charts later ≈ 1.5-3 GB + 2 GB Windows: the starter tier (8 GB) is plenty.
-- [ ] Buy the plan (starter tier, Chicago).
+      processes ~190 MB); ~30 charts later ≈ 1.5-3 GB + 2 GB Windows. QuantVPS tiers (user's screenshot 2026-10-19): Starter
+      $29.99 (2 cores, 4 GB), Lite $59.99 (4 cores, 8 GB), Pro $99.99 (6 cores, 16 GB); annual -20%.
+- [ ] Buy **VPS Lite** (Chicago, Windows; annual if sure). Starter's 4 GB / 2 cores is too tight once accounts and the
+      copier are added; move to Pro only if startup / reconnects get slow.
 - [ ] Ask Apex / Rithmic whether one login may be connected from two machines at once; plan for live on the VPS ONLY.
 - [ ] On the home PC: export the MultiCharts workspace(s) and the compiled signals (VB, ONB ADX30, EOS, Target Guard,
       Stop Guard, Bridge Monday) and note every chart's settings: inputs (VB 8, ONB `RiskPerTrade` 1100 / ADX 30 /
