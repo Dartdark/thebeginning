@@ -54,6 +54,31 @@ bottom). Times are Central (CT).
 - [ ] Install the Claude desktop app, open Cowork, give it only the folders in `cowork/INSTRUCTIONS.md`, and paste that
   file into its instructions. Test it with: "copy this week's MultiCharts reports into C:\TradingVault\live and run journal\sync.ps1".
 
+## Move live trading to the VPS (QuantVPS, 2026-10-19)
+
+Split: VPS = live trading only (MultiCharts live charts, Rithmic, later the copier). Home PC = everything else (local
+Claude chores, Obsidian / `C:\TradingVault`, Antigravity / Docker, MultiCharts backtests). Do the move on a weekend or
+after 15:59 CT, never with a position open.
+
+- [ ] Buy the plan (starter tier is enough for now; Chicago). Check Task Manager first: MultiCharts memory per chart x
+      number of live charts + ~2 GB for Windows should stay under ~6 GB.
+- [ ] Ask Apex / Rithmic whether one login may be connected from two machines at once; plan for live on the VPS ONLY.
+- [ ] On the home PC: export the MultiCharts workspace(s) and the compiled signals (VB, ONB ADX30, EOS, Target Guard,
+      Stop Guard, Bridge Monday) and note every chart's settings: inputs (VB 8, ONB `RiskPerTrade` 1100 / ADX 30 /
+      StopAtrPct 0.25, EOS $500, Bridge 2 MNQ), bar size, session template (CME 24h), Exchange time zone, Bar Magnifier,
+      Symbol Mapping `@MNQ -> MNQZ6`, Target Guard `StartBalance` / `TargetBalance` 53050.
+- [ ] On the VPS: install MultiCharts + the data feed + Rithmic connection, import the workspace and signals, check every
+      input against the list above.
+- [ ] Same-result check: run one backtest per strategy on the VPS and on the PC (same dates); the trade lists must match.
+- [ ] VPS Windows: updates paused during market hours (set active hours / pause), sleep and screen-off disabled,
+      MultiCharts set to start with Windows if the VPS restarts.
+- [ ] Switch over: turn auto-trading OFF on the PC charts, ON on the VPS charts (after 15:59 CT or on a weekend);
+      watch the first live trade on the VPS (fill shows in Rithmic / Apex).
+- [ ] Reports: each Friday export the weekly MultiCharts reports on the VPS and copy them to the PC (remote-desktop
+      copy / paste) into `C:\TradingVault\live\` before 16:47 CT (or later: git on the VPS exporting straight into `live\`).
+- [ ] Keep the PC's MultiCharts for backtests only, logged in with data only (no live trading login), so it can't
+      kick the VPS off Rithmic.
+
 ## Later
 
 - [ ] Before the CL Sunday fade goes live: confirm Apex allows MCL on the account.
