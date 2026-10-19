@@ -14,10 +14,12 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
 - **Journal (Obsidian, 2026-10-17):** `journal/daily/` and `journal/ideas/` are the user's notes, pushed to the work branch by
   `journal/sync.ps1` (with `live/` reports). On "read my journal": `git pull` the work branch, read the new notes, compare
   with the backtest trades of those days, act on problems (fix / `MULTICHARTS_PITFALLS.md` / `TODO.md`), test ideas and set
-  their `Status:` line. Never edit the user's notes otherwise. The user also pushes now: always pull before pushing.
+  their `Status:` line. Since 2026-10-19 Claude (Cowork on the user's PC) writes the daily notes from the user's answers;
+  keep the user's own words, never invent fills or numbers. The user also pushes now: always pull before pushing.
 - **Friday review (scheduled, 2026-10-19):** each Friday after the close: pull, read the week's journal notes and `live/`
   reports, run `analysis/live_vs_backtest.py --all live/`, update `TIER_LIST.md` / `WATCHLIST.md` / `TODO.md` /
   `NEW_CHAT_BRIEF.md`, add new lines to `LESSONS.md`, and condense the brief on the first Friday of each month.
+- **Papers in git (user, 2026-10-19):** research-paper PDFs may be committed (folder `papers/`). Books stay out.
 - **Folders:** `apex_strategies/` = challenge-only strategies (Vault Break, Overnight Bias);
   `funded_strategies/` = funded strategies. Comparing them is fine; the challenge ones are not
   meant for making money in funded accounts.
