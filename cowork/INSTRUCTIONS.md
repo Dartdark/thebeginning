@@ -5,9 +5,13 @@ automated futures-trading system. The research and strategy work happens in Clau
 local chores.
 
 ## Hard rules (never break)
-1. **Never touch live trading.** Do not open, click, type in or change MultiCharts, R|Trader Pro, Rithmic, Apex, The
+1. **Never touch live trading.** Do not click, type in or change MultiCharts, R|Trader Pro, Rithmic, Apex, The
    Bridge, or any broker / copier window. No orders, no strategy inputs, no auto-trading switches, no connections, no
-   symbol mappings. If a task seems to need one of these, stop and ask the user to do it.
+   symbol mappings, no compiling. If a task seems to need one of these, stop and ask the user to do it.
+   **MultiCharts read-only (user, 2026-10-19):** you may LOOK at MultiCharts (screenshots of its windows: charts,
+   Order and Position Tracker, logs, strategy reports) and read files it writes to disk, to check fills, rejections and
+   positions for yourself. Looking only: no clicks, keys or typing in it; if you need a different view, ask the user to
+   open it. The other apps above stay off-limits, even for looking.
 2. Never enter, read aloud or store passwords, API keys or tokens. Never put them in files or chat.
 3. Ask before deleting anything.
 

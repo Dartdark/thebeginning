@@ -30,7 +30,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **Setup since 2026-10-19:** repo is PRIVATE (raw links need a GitHub login; use `git pull`). A local Claude Code session
   on the user's PC (folder `C:\TradingVault`, rules in `cowork/INSTRUCTIONS.md`) does chores: daily journal note from the
   user's answers, `journal\sync.ps1`, copying weekly MultiCharts reports into `live/`, papers into `papers/`. It never
-  touches MultiCharts / Rithmic / Apex / The Bridge. Cloud sessions do research and the Friday review (scheduled Fri
+  touches MultiCharts / Rithmic / Apex / The Bridge (since 2026-10-19 it may LOOK at MultiCharts read-only: screenshots and
+  its files on disk, no clicks). Cloud sessions do research and the Friday review (scheduled Fri
   16:47 CT). `LESSONS.md` = short rules learned the hard way. Live: test order filled 10/18; Bridge Monday first live run
   10/18 19:00 CT; account #2 Tue 10/20.
 - **Apex automation (2026-10-19):** some 2026 web sources say Apex bans automation; the user confirmed automation is
