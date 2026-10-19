@@ -49,6 +49,11 @@ bottom). Times are Central (CT).
   (Live combine charts: nothing changes; NR7Contracts defaults to -1 = off.)
 - [x] (2026-10-18) Strategy-checker: **FAIL** (t 2.81 below 3.53; 2023-26 weaker). Not added to the plan (your condition). Leave `NR7Contracts` -1 everywhere; recheck on new data (WATCHLIST #21).
 
+## Cowork (2026-10-19)
+
+- [ ] Install the Claude desktop app, open Cowork, give it only the folders in `cowork/INSTRUCTIONS.md`, and paste that
+  file into its instructions. Test it with: "copy this week's MultiCharts reports into C:\TradingVault\live and run journal\sync.ps1".
+
 ## Later
 
 - [ ] Before the CL Sunday fade goes live: confirm Apex allows MCL on the account.
