@@ -60,8 +60,9 @@ Split: VPS = live trading only (MultiCharts live charts, Rithmic, later the copi
 Claude chores, Obsidian / `C:\TradingVault`, Antigravity / Docker, MultiCharts backtests). Do the move on a weekend or
 after 15:59 CT, never with a position open.
 
-- [ ] Buy the plan (starter tier is enough for now; Chicago). Check Task Manager first: MultiCharts memory per chart x
-      number of live charts + ~2 GB for Windows should stay under ~6 GB.
+- [x] (2026-10-19) Memory check: MultiCharts with the 4 live charts uses ~290 MB in total (app 100 MB + background
+      processes ~190 MB); ~30 charts later ≈ 1.5-3 GB + 2 GB Windows: the starter tier (8 GB) is plenty.
+- [ ] Buy the plan (starter tier, Chicago).
 - [ ] Ask Apex / Rithmic whether one login may be connected from two machines at once; plan for live on the VPS ONLY.
 - [ ] On the home PC: export the MultiCharts workspace(s) and the compiled signals (VB, ONB ADX30, EOS, Target Guard,
       Stop Guard, Bridge Monday) and note every chart's settings: inputs (VB 8, ONB `RiskPerTrade` 1100 / ADX 30 /
