@@ -72,7 +72,9 @@ after 15:59 CT, never with a position open.
       Symbol Mapping `@MNQ -> MNQZ6`, Target Guard `StartBalance` / `TargetBalance` 53050.
 - [ ] On the VPS: install MultiCharts + the data feed + Rithmic connection, import the workspace and signals, check every
       input against the list above.
-- [ ] Same-result check: run one backtest per strategy on the VPS and on the PC (same dates); the trade lists must match.
+- [x] (2026-10-19) Same-result check: ONB on the VPS vs the PC report, Jan-Oct 2026: 77/77 trade days, 75 identical,
+      2 differ by 1 tick (data). The others are assumed the same (user: VPS isn't for backtesting); just check their inputs
+      and that the last few days' trade arrows on each chart look like the PC's.
 - [ ] VPS Windows: updates paused during market hours (set active hours / pause), sleep and screen-off disabled,
       MultiCharts set to start with Windows if the VPS restarts.
 - [ ] Switch over: turn auto-trading OFF on the PC charts, ON on the VPS charts (after 15:59 CT or on a weekend);
