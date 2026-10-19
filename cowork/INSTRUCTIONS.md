@@ -30,9 +30,11 @@ local chores.
 - **Friday, after the user has exported the weekly MultiCharts reports:** copy the new report files into
   `C:\TradingVault\live\` (keep the file names), then run `journal\sync.ps1` in PowerShell from `C:\TradingVault` and
   report its output. (Claude Code's Friday review runs at 16:47 CT, so finish before then.)
+- **Trades are filled in automatically (2026-10-19):** the VPS logs every fill and Claude's 16:40 CT task writes them into
+  the note between the `auto-trades` markers. Never edit that block; run `git pull` before writing the note.
 - **Daily journal (every trading day, after 15:59 CT):** write `C:\TradingVault\journal\daily\<YYYY-MM-DD>.md` from
-  the template `journal\templates\Daily.md`. Ask the user a few quick questions (which strategies traded, fills vs
-  expected, anything odd: disconnects, rejections, manual actions, how they felt about the day) and write their answers
+  the template `journal\templates\Daily.md`. Ask the user only what the log can't show: the Apex end-of-day balance, anything odd (disconnects,
+  rejections, manual actions) and how they felt about the day and write their answers
   in plain words; never invent fills or numbers you weren't told or can't read from files in the allowed folders. Then
   run `journal\sync.ps1` and report its output.
 - **Papers:** download PDFs the user names into `C:\Paper` and copy them into the repo's `papers/` folder; when asked, start Antigravity's screen by giving the user
