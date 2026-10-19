@@ -19,17 +19,9 @@ bottom). Times are Central (CT).
 - [x] (2026-10-18, user: filled) **Test order Sunday 17:00 CT** to confirm a real Rithmic fill on the Apex account (Symbol Mapping `@MNQ -> MNQZ6`).
 - [x] (2026-10-18, user: set) Keep the PC and connection awake during trading hours (screen sleep off).
 
-## URGENT (2026-10-19): Apex automation rule
-
-- [ ] **Ask Apex support in writing (ticket / email) before buying account #2:** "I run fully automated MultiCharts strategies
-  (my own code, via Rithmic) on my evaluation and plan to on Performance Accounts. Is that allowed on (a) evaluations,
-  (b) PAs, (c) with a trade copier across my own accounts, (d) from a VPS?" Keep the written answer. Several 2026 sources quote
-  Apex's support pages as 'No Automation or Algorithm Usage allowed' on all account types (others say evaluations only);
-  breaking it can forfeit the account and its balance. Until answered: don't buy more accounts.
-
 ## This week and next
 
-- [ ] **Tue 10/20: buy account #2** (single 50K EOD, $59): real Apex fill confirmed 2026-10-18; ON HOLD until Apex answers the automation question above.
+- [ ] **Tue 10/20: buy account #2** (single 50K EOD, $59): real Apex fill confirmed 2026-10-18, so go ahead (automation confirmed allowed by the user 2026-10-19).
 - [ ] **Fri 10/23 (and every Friday): export the weekly MultiCharts reports into `live/`** and tell Claude (it runs
   `analysis/live_vs_backtest.py --all live/` and the drift alarm).
 - [ ] When account #1 passes ($53,000): turn auto-trading off on that account.
