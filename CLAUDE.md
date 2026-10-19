@@ -1,7 +1,7 @@
 # Project notes for Claude
 
 NQ/ES futures strategies in MultiCharts PowerLanguage for Apex 50K prop accounts (challenge and
-funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `funded_strategies/README.md`, `TIER_LIST.md`, `TODO.md` (user's open to-dos; tick off what they say is done), `WATCHLIST.md` (items to recheck), `MULTICHARTS_PITFALLS.md` (error log: read before writing MultiCharts code, add every solved error) and `S_RANK_PROGRAM.md` (current goal: one S-rank strategy per symbol).
+funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `funded_strategies/README.md`, `TIER_LIST.md`, `TODO.md` (user's open to-dos; tick off what they say is done), `WATCHLIST.md` (items to recheck), `MULTICHARTS_PITFALLS.md` (error log: read before writing MultiCharts code, add every solved error), `LESSONS.md` (short rules learned the hard way; add to it in the Friday review) and `S_RANK_PROGRAM.md` (current goal: one S-rank strategy per symbol).
 
 ## Working rules
 
@@ -15,6 +15,9 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   `journal/sync.ps1` (with `live/` reports). On "read my journal": `git pull` the work branch, read the new notes, compare
   with the backtest trades of those days, act on problems (fix / `MULTICHARTS_PITFALLS.md` / `TODO.md`), test ideas and set
   their `Status:` line. Never edit the user's notes otherwise. The user also pushes now: always pull before pushing.
+- **Friday review (scheduled, 2026-10-19):** each Friday after the close: pull, read the week's journal notes and `live/`
+  reports, run `analysis/live_vs_backtest.py --all live/`, update `TIER_LIST.md` / `WATCHLIST.md` / `TODO.md` /
+  `NEW_CHAT_BRIEF.md`, add new lines to `LESSONS.md`, and condense the brief on the first Friday of each month.
 - **Folders:** `apex_strategies/` = challenge-only strategies (Vault Break, Overnight Bias);
   `funded_strategies/` = funded strategies. Comparing them is fine; the challenge ones are not
   meant for making money in funded accounts.
