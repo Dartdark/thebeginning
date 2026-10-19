@@ -35,3 +35,5 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - Rithmic rejects stops already through the market: every strategy needs the stop guard (ONB rejection 2026-10-14).
 - A copier sends every account the same size; cushion sizing needs per-account groups or multipliers (2026-10-19).
 - Copied evaluations pass or fail together; stagger new evaluations 5-10 trading days apart (2026-10-15).
+- "Permission denied, contact the FCM" from Rithmic was a wrong password: check the simple things first, and set
+  up / test a second machine only after the close (VPS move, 2026-10-19).

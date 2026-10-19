@@ -52,6 +52,14 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - After any rejection: check the Order and Position Tracker / the broker position at once; flatten by hand if the
   account holds a position the chart does not manage.
 
+## Rithmic connection errors (2026-10-19)
+- "Trading System / Market Data / PnL Connection Login Failed. Please contact the FCM/IB who issued your login id
+  (permission denied)" was simply a WRONG PASSWORD in the broker profile (File > Broker Profiles > Rithmic > Edit),
+  not a machine lock. Check the password first, then System (working setup: Rithmic 01, Gateway Chicago Area, Reset
+  reloads the server lines), then that no other machine is logged in with the same login.
+- Never test a second machine's broker login during market hours or with a position open: a failed / duplicate login
+  can disconnect the live machine.
+
 ## Setup checklist
 - A signal runs on data1 only; each strategy needs its own chart window.
 - Several signals on one chart form ONE strategy sharing one position: an exit-only signal (e.g. `Apex_Target_Guard`)
