@@ -27,6 +27,14 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - Working rules, testing standard and branch rules are in `CLAUDE.md` (push every commit to
   `claude/nq-trading-strategy-params-5h9d20`, `claude/quirky-noether-4dla64` and the session's own branch).
 
+## !! Open risk (2026-10-19): Apex may prohibit automated trading
+
+Several 2026 sources (QuantVPS, Oct 2026; PropTradingVibes, Aug 2026) quote Apex support pages: 'No Automation or Algorithm
+Usage allowed', 'strictly prohibited on all account types' (AI, autobots, algorithms, fully automated systems); PickMyTrade
+(Aug 2026) says evaluations allowed, PAs not. Apex's own pages return 403 here, so unverified. The whole plan is automated
+MultiCharts on Apex: the user is asking Apex in writing (TODO 'URGENT'); account #2 on hold. If banned on PAs, the plan moves
+to firms / accounts that allow automation, or to a personal account (the business plan's risk section).
+
 ## Latest (2026-10-17)
 
 - **Antigravity Phase 2 done (2026-10-17, `agents/results/PHASE2_VERDICT.md`):** 40 pre-registered variants on the 8 plan
