@@ -1,4 +1,4 @@
-# New-chat brief (updated 2026-10-17): read this first
+# New-chat brief (updated 2026-10-19): read this first
 
 Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in github.com/Dartdark/thebeginning (branch
 `claude/nq-trading-strategy-params-5h9d20`) and continue from there."*
@@ -27,6 +27,12 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - Working rules, testing standard and branch rules are in `CLAUDE.md` (push every commit to
   `claude/nq-trading-strategy-params-5h9d20`, `claude/quirky-noether-4dla64` and the session's own branch).
 
+- **Setup since 2026-10-19:** repo is PRIVATE (raw links need a GitHub login; use `git pull`). A local Claude Code session
+  on the user's PC (folder `C:\TradingVault`, rules in `cowork/INSTRUCTIONS.md`) does chores: daily journal note from the
+  user's answers, `journal\sync.ps1`, copying weekly MultiCharts reports into `live/`, papers into `papers/`. It never
+  touches MultiCharts / Rithmic / Apex / The Bridge. Cloud sessions do research and the Friday review (scheduled Fri
+  16:47 CT). `LESSONS.md` = short rules learned the hard way. Live: test order filled 10/18; Bridge Monday first live run
+  10/18 19:00 CT; account #2 Tue 10/20.
 - **Apex automation (2026-10-19):** some 2026 web sources say Apex bans automation; the user confirmed automation is
   allowed for their accounts. Resolved; plan unchanged.
 
