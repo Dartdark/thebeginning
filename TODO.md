@@ -50,6 +50,12 @@ bottom). Times are Central (CT).
   as a NEW signal on a **1-minute MNQ chart with 1-minute @ES added as Data2** (same feed, Exchange time, first RTH bar 08:31,
   IOG off), 50K: `TradeDir` 1, `NumContracts` 1; 150K: `TradeDir` 0, `NumContracts` 1; Trade Logger tag `RS`.
 
+## Antigravity's NQAlignedWeaknessShort (2026-10-20, C)
+
+- [ ] MultiCharts backtest: [NQ_Aligned_Weakness_Short.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/aligned_weakness_short/NQ_Aligned_Weakness_Short.txt)
+  on a 1-minute @NQ chart with 1-minute @ES as Data2 (same feed, CME 24h, Exchange time, first RTH bar 08:31), data from
+  Sep 2017, commission / slippage 0, IOG off; save as "Backtesting Strategy Performance Report _ @NQ - 1 Minute Aligned Weakness Short.xlsx".
+
 ## Journal (Obsidian)
 
 - [x] (2026-10-17, done) One-time setup: follow [journal/README.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/journal/README.md) (separate clone in `C:\TradingVault`, Daily notes + Templates plugins).
