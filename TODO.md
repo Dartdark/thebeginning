@@ -52,7 +52,7 @@ bottom). Times are Central (CT).
 
 ## Antigravity's NQAlignedWeaknessShort (2026-10-20, C)
 
-- [ ] MultiCharts backtest: [NQ_Aligned_Weakness_Short.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/aligned_weakness_short/NQ_Aligned_Weakness_Short.txt)
+- [x] (2026-10-20, confirmed 216/216) MultiCharts backtest: [NQ_Aligned_Weakness_Short.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/aligned_weakness_short/NQ_Aligned_Weakness_Short.txt)
   on a 1-minute @NQ chart with 1-minute @ES as Data2 (same feed, CME 24h, Exchange time, first RTH bar 08:31), data from
   Sep 2017, commission / slippage 0, IOG off; save as "Backtesting Strategy Performance Report _ @NQ - 1 Minute Aligned Weakness Short.xlsx".
 
