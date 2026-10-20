@@ -65,7 +65,7 @@ trade). For every candidate, report its daily correlation with each column and h
 
 | Strategy | When it is in the market (CT) | Direction | Trades / year |
 |---|---|---|---|
-| Vault Break | 10:00-14:30, most weekdays | long only (morning breakouts) | ~200 |
+| Vault Break | 10:00-14:30 | long only (morning breakouts) | ~110 days |
 | Overnight Bias ML | 8:45-14:30, ~40% of days | both | ~40 |
 | Monday Long | Mondays 8:30-15:00 | long | ~50 |
 | Bridge Monday Long | Sunday 19:00 -> Monday 15:55 | long | ~25 |
