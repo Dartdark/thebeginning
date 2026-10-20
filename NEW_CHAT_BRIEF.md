@@ -39,6 +39,10 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   reminder Sun/Wed 10:52 CT. Fresh-session-per-run doesn't work (new sessions can't reach the private repo).
 - **Account #2 (2026-10-20):** a second 50K evaluation on the VPS, its own chart set (no copier: Rithmic copy trading not
   enabled yet), logger tags VB-2 / ONB-2 / EOS-2 / MON_BR-2. Rejected-order stop set to 10 per chart.
+- **Rithmic copier enabled (user, 2026-10-20):** plan is account #1 leads, #2 follows, set-2 auto-trading off. To
+  confirm with the user: direction, multiplier 1, Apex OK. Caveats: #1's Target Guard closes #2 too; when #1 passes, #2
+  needs set 2 back on (or becomes leader); after an Apex lock on #1 check #2 by hand; set-2 loggers (if left on) log chart
+  prices, not #2's real fills.
 - **First Apex daily-loss-limit day (2026-10-19):** VB long 8 MNQ at 10:30 CT reversed; Apex's $1,000 daily limit closed it
   at -$1,017 (11:01 CT) and locked the account ('Account is done for day'); MultiCharts kept re-sending VB's exits (rejected).
   Within the plan (the combine sim models the limit). VB size vs the limit (`analysis/combine_vb_size_test.py`): 6 MNQ
