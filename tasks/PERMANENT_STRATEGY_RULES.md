@@ -47,3 +47,12 @@ These rules are mandatory for all strategy development, evaluation, and reportin
 ## 6. Real-World Drawdown Sizing (Apex & Funded Account Realism)
 - **Mandate**: Drawdown must be measured in **dollars per contract** ($ / NQ or $ / MNQ), never masked by arbitrary starting balances ($1,000,000).
 - **Survival Standard**: On 1 MNQ, maximum peak-to-valley drawdown must never exceed the evaluation/funded account limit (e.g., **\$2,000 trailing drawdown**). Any strategy breaching this in $> 10\%$ of years is ranked **F**.
+
+---
+
+## 7. In-Sample vs. Out-of-Sample Decision Rule ($t \ge 2.5$ Gate)
+- **Mandate**: Strict chronological split to prevent in-sample leakage and curve-fitting:
+  - **In-Sample (IS) Window**: **2018-04-01 through 2022-12-31**. All architecture design, rule selection, and parameter testing must be evaluated on this period ALONE.
+  - **In-Sample Candidate Gate**: A strategy is **ONLY a candidate if $t \ge 2.5$** (target $t \ge 3.6$, $p < 0.01$) on 2018–2022 data under real friction.
+  - **Out-of-Sample (OOS) Validation**: **2023-01-01 through 2026-10-09**. Strictly locked. Tested once without changes. The strategy must remain profitable on 2023–2026.
+- **Hard Stop Decision Rule**: If $t < 2.5$ on 2018–2022, OR if performance turns negative on 2023–2026 out-of-sample, the strategy **FAILS IMMEDIATELY and must be reported as Ranked F**. No rationalizations, no "viable seed", and no passing grade allowed.

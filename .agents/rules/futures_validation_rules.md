@@ -61,4 +61,11 @@ Drawdown must always be tracked and reported in **dollars per contract** ($ / NQ
    - Can accommodate wider dollar drawdowns (e.g., \$4,000–\$10,000+ per contract or swing multi-day holding).
    - Evaluated on long-term compound growth, multi-year Sharpe $> 1.25$, and full-cycle survival without prop firm rule constraints.
 
-*A strategy is only ranked F if it fails statistical validity across ALL phases (e.g., negative in recent years, fails random entry test, or loses money under real costs).*
+---
+
+## Rule 7: In-Sample vs. Out-of-Sample Decision Rule ($t \ge 2.5$ Gate)
+- **Mandate**: Strict chronological split to prevent in-sample leakage and curve-fitting:
+  - **In-Sample (IS) Window**: **2018-04-01 through 2022-12-31**. All architecture design, rule selection, and parameter testing must be evaluated on this period ALONE.
+  - **In-Sample Candidate Gate**: A strategy is **ONLY a candidate if $t \ge 2.5$** (target $t \ge 3.6$, $p < 0.01$) on 2018–2022 data under real friction.
+  - **Out-of-Sample (OOS) Validation**: **2023-01-01 through 2026-10-09**. Strictly locked. Tested once without changes. The strategy must remain profitable on 2023–2026.
+- **Hard Stop Decision Rule**: If $t < 2.5$ on 2018–2022, OR if performance turns negative on 2023–2026 out-of-sample, the strategy **FAILS IMMEDIATELY and must be reported as Ranked F**. No rationalizations, no "viable seed", and no passing grade allowed.
