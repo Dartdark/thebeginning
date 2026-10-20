@@ -86,6 +86,10 @@ trade). For every candidate, report its daily correlation with each column and h
 Gaps worth aiming at: **shorts** (the plan is long-heavy), **11:30-14:00**, **the overnight session that closes before
 15:59** (e.g. 3:00-8:30), other markets' forced flows (ES / YM / GC / CL). A morning long breakout (your NQIBBreakout:
 correlation 0.41 with Vault Break, 557 of 766 days shared) adds little even when it is real.
+**Fills (NQRelWeaknessShort audit, 2026-10-20):** its shorts were filled ~11 points above the entry minute's close, half at
+that minute's high: a price the market never offered. Re-filled at the next minute's open the edge fell from t 5.4 to 1.3.
+Always check that every entry price lies inside a REAL bar that comes AFTER the signal bar (market = next bar's open +
+1 tick), and that stops / targets / breakevens are decided on 1-minute data in time order.
 Also: report every $ figure **per 1 NQ or 1 MNQ contract**. Jesse's `price x 5` notional sizing made NQIBBreakout's
 drawdown read $857 instead of ~$22,000 per NQ.
 
