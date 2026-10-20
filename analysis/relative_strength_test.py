@@ -86,20 +86,21 @@ def trades(days, N, Z, zmin=1.25, decide=900, through=0.0, stop_f=0.6, tgt_f=1.0
         z = Z[i]
         if ok[i] and np.isfinite(z) and abs(z) >= zmin and np.isfinite(avg) and jd + 1 <= 389:
             s = 1 if z > 0 else -1; e = N["o"][i, jd + 1]; sp = e - s * stop_f * avg; tp = e + s * tgt_f * avg
-            x, kind = None, "flat"
+            x, kind, jx = None, "flat", 390
             for t in range(jd + 2, 391):
                 o, h, l = N["o"][i, t], N["h"][i, t], N["l"][i, t]
                 if s > 0:
-                    if l <= sp: x, kind = (min(o, sp), "stop"); break
-                    if h >= tp + through: x, kind = (max(o, tp), "target"); break
+                    if l <= sp: x, kind, jx = min(o, sp), "stop", t; break
+                    if h >= tp + through: x, kind, jx = max(o, tp), "target", t; break
                 else:
-                    if h >= sp: x, kind = (max(o, sp), "stop"); break
-                    if l <= tp - through: x, kind = (min(o, tp), "target"); break
+                    if h >= sp: x, kind, jx = max(o, sp), "stop", t; break
+                    if l <= tp - through: x, kind, jx = min(o, tp), "target", t; break
             if x is None: x = N["c"][i, 390]
             cost = COMM + TICK * PV * (1 if kind == "target" else 2)
-            out.append((pd.Timestamp(str(days.date[i])), s, z, e, x, kind, (x - e) * s * PV, (x - e) * s * PV - cost))
+            out.append((pd.Timestamp(str(days.date[i])), s, z, e, x, kind, (x - e) * s * PV, (x - e) * s * PV - cost,
+                        int(days.d[i]), jof(830) + jd + 1, jof(830) + jx))
         if ok[i]: hist.append(rng_[i])
-    return pd.DataFrame(out, columns=["date", "side", "z", "entry", "exit", "kind", "gross", "pnl"])
+    return pd.DataFrame(out, columns=["date", "side", "z", "entry", "exit", "kind", "gross", "pnl", "day", "j0", "j1"])
 
 
 def tstat(x): x = np.asarray(x, float); return x.mean() / x.std(ddof=1) * np.sqrt(len(x))
