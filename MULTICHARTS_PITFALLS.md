@@ -70,6 +70,13 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
   reloads the server lines), then that no other machine is logged in with the same login.
 - Never test a second machine's broker login during market hours or with a position open: a failed / duplicate login
   can disconnect the live machine.
+- **R|Trader Pro: 'You have been logged out because another program has logged in with your credentials and would cause
+  your session count to exceed its maximum'** (2026-10-20, trying R|Trader Pro for the copier): the Rithmic login is
+  already in use by MultiCharts (the VPS's live connection, and the PC's MultiCharts if its Rithmic profile still connects).
+  Uninstalling R|Trader on the PC changes nothing. Each R|Trader login can bump MultiCharts' live session, and MultiCharts
+  reconnects and bumps R|Trader back. Fix: use R|Trader Pro only after 15:59 CT with every account flat: disconnect Rithmic
+  in MultiCharts on the VPS and the PC (or close MultiCharts), log in to R|Trader, do the setup, log out, reconnect
+  MultiCharts and check the charts are green and flat before the next open.
 
 ## Setup checklist
 - A signal runs on data1 only; each strategy needs its own chart window.
