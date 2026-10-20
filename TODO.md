@@ -106,7 +106,9 @@ after 15:59 CT, never with a position open.
   [NFP Fade](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_NFP_Fade.txt),
   [CL Sunday Fade](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/CL_Sunday_Gap_Fade.txt),
   VB SP, EOS.
-- [ ] **~Thu 12/10: roll Symbol Mapping** `@MNQ -> MNQH7` (before the December roll, ~12/11).
+- [ ] **Thu 12/10 (after the close): roll Symbol Mapping on the VPS** `@MNQ (dxFeed) -> MNQH7` (was MNQZ6; before the
+  December roll ~12/11), then auto-trading off / on and a 1-MNQ test order per account. Reminder set: 12/10 08:00 CT
+  (scheduled-jobs session).
 - [ ] **Mid-December gate:** ~40–70 live trades at ≥ 75% of backtest and no ALARM → start scaling (FUNDED_PLAN.md).
 - [ ] Optional: add an `OPENAI_API_KEY` to the environment's secrets for a second, different-lab strategy checker.
 
