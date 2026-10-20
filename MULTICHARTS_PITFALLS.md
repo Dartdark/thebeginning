@@ -52,6 +52,17 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - After any rejection: check the Order and Position Tracker / the broker position at once; flatten by hand if the
   account holds a position the chart does not manage.
 
+## Apex daily loss limit vs the strategy (2026-10-19)
+- Symptom: VB long 8 MNQ closed at -$1,017 mid-bar (11:01:41 CT), then dozens of 'Sell Stop 8 / Sell Limit 8 ... Rejected:
+  Account is done for day' per second; the tracker shows those orders with price 0.00. Cause: Apex's $1,000 daily loss
+  limit (50K evaluation) liquidated the account and locked it for the day; MultiCharts didn't see that exit, kept its
+  position (long 8) and kept re-sending VB's stop / target. Not a MultiCharts bug.
+- Danger: the chart still believes it's in a position. Next day the account reopens and those exits would be ACCEPTED,
+  opening an unplanned short. Fix after any Apex liquidation / lock: with the account flat, turn auto-trading OFF and ON
+  on every affected chart (initial position Flat) or reload it, and check Strategy Positions shows flat before the open.
+- VB 8 MNQ has a $1,200 stop, above the $1,000 daily loss limit, so a full VB loss is cut by Apex at about -$1,000 and
+  the account is done for the day (the combine simulator already models this: pass ~50% includes it).
+
 ## Rithmic connection errors (2026-10-19)
 - "Trading System / Market Data / PnL Connection Login Failed. Please contact the FCM/IB who issued your login id
   (permission denied)" was simply a WRONG PASSWORD in the broker profile (File > Broker Profiles > Rithmic > Edit),

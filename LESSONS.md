@@ -37,3 +37,5 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - Copied evaluations pass or fail together; stagger new evaluations 5-10 trading days apart (2026-10-15).
 - "Permission denied, contact the FCM" from Rithmic was a wrong password: check the simple things first, and set
   up / test a second machine only after the close (VPS move, 2026-10-19).
+- Read the broker's reason before calling it a bug: the 'repeating 0.00 orders' were Apex's daily loss limit
+  ('Account is done for day'); after any Apex lock, reset the charts (auto-trading off/on, flat) before the next open (2026-10-19).
