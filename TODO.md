@@ -45,7 +45,10 @@ bottom). Times are Central (CT).
   time = CT, first RTH bar 08:31), data loaded from **Sep 2017**, default inputs, **commission and slippage 0** (Claude adds
   costs), Intrabar Order Generation off. Save as "Backtesting Strategy Performance Report _ @NQ - 1 Minute Relative Strength.xlsx"
   and push / send it.
-- [ ] Decide: funded plan incubation as **longs only, 1 MNQ** (`TradeDir` 1) when an account passes? Full long + short = personal-account candidate.
+- [x] (2026-10-20, you: include it in all relevant plans) In the plans: 50K funded longs only 1 MNQ, 150K funded both sides 1 MNQ, personal account; not in evaluations.
+- [ ] When an account is funded: add [NQ_Relative_Strength.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Relative_Strength.txt)
+  as a NEW signal on a **1-minute MNQ chart with 1-minute @ES added as Data2** (same feed, Exchange time, first RTH bar 08:31,
+  IOG off), 50K: `TradeDir` 1, `NumContracts` 1; 150K: `TradeDir` 0, `NumContracts` 1; Trade Logger tag `RS`.
 
 ## Journal (Obsidian)
 

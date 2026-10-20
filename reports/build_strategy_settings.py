@@ -52,7 +52,7 @@ s.append(Paragraph(f"Updated {UPDATED}. All times Central (CT, exchange time). M
 s.append(Paragraph("1. Evaluation (combine) plan - Apex 50K EOD", H2))
 s.append(Paragraph("Rules: +$3,000 target (pass at $53,000), $2,000 end-of-day trailing drawdown, $1,000 daily loss limit (Apex "
                    "closes everything and locks the day), flat by 15:59 CT. Backtest: about 50% pass per try, median 6 trading days. "
-                   "Start new evaluations 5-10 trading days apart; each account gets its own chart set (no copier yet).", B))
+                   "Start new evaluations 5-10 trading days apart; each account gets its own chart set (copier only later, for funded accounts). Relative Strength is NOT used in evaluations (lowers the pass rate).", B))
 s.append(Spacer(1, 4))
 s.append(tbl([
     ["Strategy", "Code (repo file)", "Chart", "Inputs (evaluation)", "When it trades"],
@@ -85,8 +85,8 @@ s.append(Paragraph("<b>On every evaluation chart, next to the strategy:</b> "
 # ---------------- Funded ----------------
 s.append(PageBreak())
 s.append(Paragraph("2. Funded plan - Apex 50K EOD Performance Account (after an account passes)", H2))
-s.append(Paragraph("Goal: all 6 payouts ($13,000). Bootstrapped bench: 2-year expected payouts about $12,000, blown about 7%, "
-                   "median 278 days to the 6th payout. Remove the Target Guard on funded charts. Sizes below are FULL size "
+s.append(Paragraph("Goal: all 6 payouts ($13,000). Bootstrapped bench (with Relative Strength longs, added 2026-10-20): 2-year expected "
+                   "payouts about $12,000, blown about 8%, median 258 days to the 6th payout (278 without it). Remove the Target Guard on funded charts. Sizes below are FULL size "
                    "(cushion $1,500 or more); see the cushion table.", B))
 s.append(Spacer(1, 4))
 s.append(tbl([
@@ -115,6 +115,10 @@ s.append(tbl([
     ["ES MOC Follow", "funded_strategies/ES_MOC_Follow.txt", "5-min <b>MES</b>, CME 24h, Exchange time, Bar Magnifier 1 min",
      "NumContracts <b>2</b>, RiskPerTrade 0, MinMoveAtr 0.30, StopAtrPct 0.25, DecisionTime 1450, ExitTime 1500",
      "Follow a >= 0.3 ATR 14:00->14:50 move, 14:51->15:00"],
+    ["Relative Strength NQ / ES (added 2026-10-20)", "funded_strategies/NQ_Relative_Strength.txt",
+     "<b>1-min MNQ</b> + <b>1-min @ES as Data2</b> (same feed), CME 24h, Exchange time (first RTH bar 08:31), IOG off",
+     "<b>TradeDir 1</b> (longs only), NumContracts <b>1</b>; others default (DecideHHMM 900, ZMin 1.25, StopFrac 0.6, TgtFrac 1.0, FlatHHMM 1500)",
+     "9:00 check of NQ's move beyond its ES beta; buy 9:01, stop / target from the 20-day range, out 15:00 (~68 longs a year)"],
 ], [1.2, 1.85, 1.75, 2.85, 2.35]))
 s.append(Spacer(1, 6))
 s.append(Paragraph("<b>Cushion sizing (funded):</b> each morning cushion = Apex balance - trailing threshold; f = cushion / $1,500, "
@@ -122,11 +126,18 @@ s.append(Paragraph("<b>Cushion sizing (funded):</b> each morning cushion = Apex 
                    "Sunday's cushion (Friday's close).", B))
 s.append(Spacer(1, 4))
 s.append(tbl([
-    ["Cushion", "f", "VB (Num / Flagged)", "ONB ML risk", "Monday", "EOS risk", "LDF", "NFP risk", "Bridge", "CL fade (MCL)", "ES MOC (MES)"],
-    ["$1,500 or more", "1.0", "2 / 1", "$400", "1", "$700", "2", "$500", "1", "2", "2"],
-    ["$1,125", "0.75", "1 / 0", "$300", "0 (off)", "$525", "1", "$375", "0 (off)", "1", "1"],
-    ["$750 or less", "0.5", "1 / 0", "$200", "0 (off)", "$350", "1", "$250", "0 (off)", "1", "1"],
-], [1.05, 0.4, 1.05, 0.8, 0.65, 0.75, 0.5, 0.75, 0.65, 0.95, 0.95]))
+    ["Cushion", "f", "VB (Num / Flagged)", "ONB ML risk", "Monday", "EOS risk", "LDF", "NFP risk", "Bridge", "CL fade (MCL)", "ES MOC (MES)", "Rel. Strength"],
+    ["$1,500 or more", "1.0", "2 / 1", "$400", "1", "$700", "2", "$500", "1", "2", "2", "1 (longs)"],
+    ["$1,125", "0.75", "1 / 0", "$300", "0 (off)", "$525", "1", "$375", "0 (off)", "1", "1", "0 (off)"],
+    ["$750 or less", "0.5", "1 / 0", "$200", "0 (off)", "$350", "1", "$250", "0 (off)", "1", "1", "0 (off)"],
+], [1.0, 0.35, 1.0, 0.75, 0.6, 0.7, 0.45, 0.7, 0.6, 0.9, 0.9, 0.85]))
+
+s.append(Paragraph("2b. Funded plan on an Apex 150K Performance Account (account #3 and the scale-up)", H2))
+s.append(Paragraph("Every funded input above x 1.5, rounded down (VB 3 / 1, ONB ML $600, Monday 1, EOS $1,050, LDF 3, NFP $750, "
+                   "Bridge 1, CL fade 3, ES MOC 3), full size from a $3,000 cushion; plus <b>Relative Strength both sides</b> "
+                   "(TradeDir <b>0</b>, NumContracts <b>1</b>): single-history bench 1y $16,705 vs $16,067, 2y $20,038 vs $19,808, "
+                   "blown 0%, all 6 payouts 95% vs 93% (2 MNQ about the same, 4 MNQ blows 20%). Not used in any evaluation "
+                   "(50K or 150K): it lowers the pass rate at every size.", B))
 
 # ---------------- Common setup ----------------
 s.append(PageBreak())
@@ -140,9 +151,9 @@ s.append(tbl([
     ["Symbol mapping", "File > Broker Profiles > Symbol Mapping (Rithmic): @MNQ -> MNQZ6 (and @MES -> MESZ6, MCL monthly when live). "
      "Roll ~Thu 12/10: MNQZ6 -> MNQH7."],
     ["Trade logger", "Apex Trade Logger on every live chart, Tag per strategy (VB, ONB, EOS, MON_BR; funded: ONB_ML, MON, LDF, NFP, "
-     "MOC_MES, CLS; account suffix -2, -3 ...). Writes C:\\TradingLogs\\YYYYMMDD.csv; Task Scheduler 'PushTradeLogs' pushes it "
+     "MOC_MES, CLS, RS; account suffix -2, -3 ...). Writes C:\\TradingLogs\\YYYYMMDD.csv; Task Scheduler 'PushTradeLogs' pushes it "
      "16:10 CT; Claude fills the journal at 16:40 CT."],
-    ["Stop guards", "Built into VB, ONB, EOS, Monday, LDF, NFP, CL fade (orders named 'SG'). Bridge: StopPts 0, nothing to guard."],
+    ["Stop guards", "Built into VB, ONB, EOS, Monday, LDF, NFP, CL fade, Relative Strength (orders named 'SG'). Bridge: StopPts 0, nothing to guard."],
     ["One login", "Only the VPS is logged in to Rithmic with the live login. Never test a second machine during market hours."],
 ], [1.4, 8.6]))
 s.append(Paragraph("4. Daily routine", H2))

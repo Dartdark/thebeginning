@@ -63,7 +63,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   profit, 9:00 decision only (9:30 t 1.3), shorts weak since 2023. Funded bench + 1 MNQ: faster to 6 payouts (278 -> 250
   days) but blown +1.3 pt; longs only +0.5 pt. Optimisation (pre-registered, design 2018-22): nothing beats the user's
   settings; VXN regime splits strongly (high $508 vs low $94 a trade) -> WATCHLIST #24. MultiCharts check postponed (user
-  can't backtest while live); incubation decision open.
+  can't backtest while live). **In the plans (user, 2026-10-20):** 50K funded longs 1 MNQ (bootstrapped: 6 payouts in 258 vs
+  278 days, blown +0.5 pt), 150K funded both sides 1 MNQ, personal account both sides; NOT in evaluations (lowers the pass
+  rate). File `funded_strategies/NQ_Relative_Strength.txt` (+ stop guard, 2027 holidays). FUNDED_PLAN.md section.
 - **Building blocks program (user, 2026-10-20):** build strategies from entry / exit / filter blocks (Antigravity's
   catalog on `antigravity/jesse`: 10 entries, 10 exits, 143 filters, plus our own filters). Library `analysis/blocks.py`.
   Step 1 (entries alone, pre-registered, 64 trials, `analysis/blocks_step1_test.py`): 62 F; only E9 SMA 10/50 cross SHORT
@@ -214,6 +216,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 | Bridge Monday Long | as shipped | 1 MNQ |
 | **CL Sunday Gap Fade** (new, `CL_Sunday_Gap_Fade.txt`) | 5 min **MCL**, Eastern exchange time | `NumContracts` 2, `ExitTime` 1000 (= 9:00 CT) |
 | **ES MOC Follow** (added 2026-10-17, `ES_MOC_Follow.txt`) | 5 min **MES**, Central | `NumContracts` 2; mapping `@MES -> MESZ6` |
+| **Relative Strength** (added 2026-10-20, `NQ_Relative_Strength.txt`) | 1 min MNQ + @ES Data2, Central | 50K: longs only 1 MNQ (`TradeDir` 1); 150K: both sides 1 MNQ; not in evaluations |
 
 - **Cushion sizing:** f = cushion / ref, kept in 0.5–1.
   - **Funded phase: full size from a $1,500 cushion (user's decision, 2026-10-14).** The $1,000 setting blows 17–18%

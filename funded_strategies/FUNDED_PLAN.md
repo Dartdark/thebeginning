@@ -15,6 +15,25 @@ Priority order (details in the sections below and in `../reports/Trading_Busines
    (~$25k = 1/4, ~$50k = 1/2, ~$100k = full 1 NQ). Per dollar, Apex evaluations earn far more in year 1, so the personal
    account is funded from payouts, not savings.
 
+## Relative Strength NQ / ES added (2026-10-20)
+
+The user's RelStrength_v3 (`NQ_Relative_Strength.txt`; research `../analysis/relative_strength_test.py`, checker PASS WITH
+CONCERNS, TIER_LIST B): at 9:00 CT, NQ's move since 8:30 beyond its ES beta as a Z score; |Z| >= 1.25 follow at 9:01, stop
+0.6 / target 1.0 x the 20-day average RTH range, flat 15:00. Per NQ 2018-26: $306 a trade, PF 1.36, t 4.0, 9/9 years.
+Included in every plan where it helps (`../analysis/relative_strength_bench.py`, `../analysis/relative_strength_plans_test.py`):
+
+| Plan | RS setting | Effect | Decision |
+|---|---|---|---|
+| 50K funded (bootstrapped bench, 1,000 histories) | **longs only, 1 MNQ** (`TradeDir` 1) | y1 $9,294 vs $8,810, median days to 6 payouts 258 vs 278, blown 7.7% vs 7.2% (both sides 1 MNQ: 250 days but blown +1.3 pt; 2 MNQ blown 34%) | **in the plan** |
+| 150K funded (plan x 1.5, full from $3,000; single history) | **both sides, 1 MNQ** (`TradeDir` 0) | 1y $16,705 vs $16,067, 2y $20,038 vs $19,808, blown 0%, all 6 payouts 95% vs 93% (4 MNQ blows 20%) | **in the plan** |
+| 50K evaluation | - | pass 50.1% -> 47.5% (1 MNQ both) / 48.8% (longs 1) | not used |
+| 150K evaluation (combine set x 2.5) | - | pass 41.6% -> 40.5% (2 MNQ) / 41.4% (longs 2-3) | not used |
+| Personal account | both sides, ~1 MNQ per $25,000 | 1 NQ: ~$39.6k a year, max DD $28.5k (Monte Carlo 95% $66k) | in the personal plan |
+
+Cushion sizing: RS is 1 MNQ, so it is off (0) while f < 1 (cushion under $1,500 on 50K, under $3,000 on 150K). MultiCharts
+confirmation skipped by the user (no backtests while trading live); the user's own MultiCharts run in the research note
+matches the rebuild (PF 1.37 vs 1.38 before costs, longs PF 1.46 both). Live: the drift alarm decides (`../live/README.md`).
+
 ## Current plan (updated 2026-10-13): seven strategies (Vol-Control Sell dropped), faster to $13k
 
 Priority: collect all 6 payouts ($13,000) sooner. **New: the Bridge's Monday Long NQ** (it ships with The Bridge,
