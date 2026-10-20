@@ -70,6 +70,10 @@ weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail
   - order-flow indicator filters;
   - gamma / open-interest pinning;
   - the plan's strategies ported to ES / YM / GC / CL.
+  - overnight reversal of the closing / leveraged-ETF push (17:00 → 8:30 fade of big days, 2026-10-18);
+  - index-rebalancing next-morning reversal on NQ / ES (Franz 2019; stock-level effect, nets out in the index);
+  - closing-auction heavy days, turn of month, overnight drift, time-series momentum, NR7 / narrow-range days, gap
+    momentum, CL / ZN opening-range breakouts, gold PM fix, 0DTE gamma flip / strike pinning.
 
 ## Data notes
 
@@ -78,6 +82,8 @@ weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail
   - all in **Central** time, stamped at the bar's close, not back-adjusted (contract roll jumps around 03:30 or 17:00 CT).
 - **`C:\NQData`** (the user's own exports): NQ is Central time, but **CL is Eastern**. For a task, use the files it
   names; if you use `C:\NQData`, check it matches and say so.
+- **Stamps (Task 09 slip):** the repo's 1-minute CSVs are stamped at the bar's CLOSE (row `1450` = the minute 14:49-14:50).
+  Before running, check a known price: ES 2020-03-13, the row stamped 14:50 closes at 2617.00.
 - **Jesse traps you already found:**
   - fill missing minutes only after a bucket's first real minute;
   - a 5-minute route runs only if the bucket's 5th minute exists;
@@ -85,13 +91,21 @@ weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail
 
 ## Rules for every task
 
+0. **No unproven 'proven':** never call an edge 'proven', 'robust' or 'high-probability' unless a test in this repo
+   shows it (cite the file). Ideas are hypotheses until tested; 2026-10-18 its list of 'proven' per-symbol edges all failed.
+0. **Citations:** when you cite a paper or book, quote what it actually found (with page or section). Never attach a
+   finding, threshold or time to a source that does not state it; write "our setting" or "my inference" instead.
+
 1. One task per conversation. Read the task file plus `tasks/COMMON_NQ.md` for NQ tasks.
 2. **Blind:** only the task text. No other code or results about that rule. No optimisation or parameter changes during the check (improving comes after, see Phase 2).
 3. Ambiguity: take the most literal reading, keep going, list it in the report.
 4. **Output only in `tasks/out_NN/`:** `trades.csv` (columns as the task says), `strategy.py`, `report.md`.
 5. Use only the data the task needs; no extra imports or extra backtests.
 6. **Never** touch live trading, broker or exchange settings, or API keys. Never put tokens or passwords in chat.
-7. When done, tell the user. They commit `tasks/out_NN/` and push it to `antigravity/jesse`.
+7. **Push every time:** when a task or idea is finished, run `git add -A`, `git commit -m "<task>"`,
+   `git push mine HEAD:antigravity/jesse`, then say "pushed". New strategy ideas must also follow Phase 2's rules
+   (written plan first, 2018-22 design / 2023-26 holdout, full costs, flat by 15:59 CT, losses that fit a $2,000 trail).
+8. When done, tell the user. They commit `tasks/out_NN/` and push it to `antigravity/jesse`.
 
 ## Phase 2: improving a strategy (only after its blind check passed AND the user says "improve task NN")
 
