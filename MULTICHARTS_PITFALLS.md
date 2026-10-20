@@ -50,8 +50,9 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
   CME)`. In the Rithmic lookup search `MNQ` (no @; Rithmic uses one-digit years: MNQZ6). **Roll checklist:** change the
   broker symbol at every roll — MNQ / NQ quarterly (next ~2026-12-11: MNQZ6 -> MNQH7), MCL monthly once the CL fade is live.
 - **'Invalid Market order parameters: Buy 8 @MNQ.CME' on the VPS** (2026-10-20, 10:00 CT, VB on both accounts): the
-  order went out as `@MNQ` (dxFeed's continuous symbol), the same failure as 10/16 on the PC. Most likely cause: Symbol
-  Mapping is stored per MultiCharts installation and wasn't set up on the new VPS (the PC had `@MNQ -> MNQZ6`). Fix on
+  order went out as `@MNQ` (dxFeed's continuous symbol), the same failure as 10/16 on the PC. **Confirmed:** the VPS's
+  Symbol Mapping had `@MNQ (dxFeed) -> @MNQ` (the default; mapping is stored per MultiCharts installation; the PC had
+  `@MNQ -> MNQZ6`). Fix on
   the VPS: File -> Broker Profiles -> Rithmic -> Symbol Mapping: `@MNQ (dxFeed) -> MNQZ6`; then auto-trading off / on with
   Strategy Positions flat. On every new machine or account set, copy the Symbol Mapping and test one manual 1-MNQ order
   after the close before relying on it.
