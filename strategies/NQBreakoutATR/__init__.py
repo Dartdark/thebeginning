@@ -14,7 +14,7 @@ class NQBreakoutATR(Strategy):
     - Entry 10: Resting Stop Breakout (Highest High / Lowest Low of last X bars)
     - Exit 8: Dynamic ATR Volatility Stop Loss
     - Exit 4: Trailing Dollar/Point Giveback from Peak
-    - Iteration 1: Active Filter Case 91 (ADX > 30: Strong Trend Regime only)
+    - Iteration 2: Combined Filter (ADX > 30 AND US RTH Cash Session 08:30-14:30 CT)
     """
 
     def __init__(self):
@@ -28,13 +28,23 @@ class NQBreakoutATR(Strategy):
             {"name": "atr_period", "type": int, "min": 5, "max": 25, "default": 14},
             {"name": "atr_mult", "type": float, "min": 1.0, "max": 3.5, "default": 2.0, "step": 0.5},
             {"name": "giveback_points", "type": int, "min": 20, "max": 80, "default": 40},
-            {"name": "filter_case", "type": int, "min": 0, "max": 143, "default": 91},
+            {"name": "filter_case", "type": int, "min": 0, "max": 9999, "default": 9128},
         ]
 
     def _check_filter(self) -> bool:
         fc = self.hp["filter_case"]
         if fc == 0:
             return True
+
+        dt_ct = datetime.fromtimestamp(self.current_candle[0] / 1000.0, tz=CT_TZ)
+        time_int = dt_ct.hour * 100 + dt_ct.minute
+
+        # Case 9128: Combined ADX > 30 AND US Cash Session (08:30 to 14:30 CT)
+        if fc == 9128:
+            if not (830 <= time_int <= 1430):
+                return False
+            adx_val = ta.adx(self.candles, period=14)
+            return adx_val > 30
 
         # Family 1: Trend / Moving Average Position
         if fc == 4:  # Close > 10 MA
@@ -54,8 +64,6 @@ class NQBreakoutATR(Strategy):
             return self.close > ma200
 
         # Family 2: Intraday Time Windows (CT)
-        dt_ct = datetime.fromtimestamp(self.current_candle[0] / 1000.0, tz=CT_TZ)
-        time_int = dt_ct.hour * 100 + dt_ct.minute
         if fc == 24:  # Before 10:00 AM CT
             return time_int < 1000
         if fc == 25:  # Before 12:00 PM CT
