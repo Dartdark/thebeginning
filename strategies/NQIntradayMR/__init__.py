@@ -15,9 +15,9 @@ class NQIntradayMR(Strategy):
     - Iteration 1: Macro Trend-Aligned Fades (SMA 200 regime filter)
         * Only buy dips when Close > 200 SMA (uptrend)
         * Only sell rallies when Close < 200 SMA (downtrend)
-    - Iteration 2B: Asymmetric Payoff Modulation (2.0x ATR target vs 1.5x ATR stop)
-    - Exit 6: Tight Volatility Stop Loss (Entry +/- 1.5 * ATR)
-    - Exit 7: Quick Spike Take-Profit Limit (Entry -/+ 2.0 * ATR back to mean)
+    - Iteration 3B (Champion): Asymmetric 2:1 R:R Payoff
+        * Exit 6: Tight Volatility Stop Loss (Entry +/- 1.25 * ATR)
+        * Exit 7: Quick Spike Take-Profit Limit (Entry -/+ 2.5 * ATR back to mean)
     - Mandatory Intraday Flat: Liquidate at 15:50 CT (Zero overnight exposure)
     - Real Futures Friction: Evaluated on full 2018-2026 data under $17.25/NQ ($1.72/MNQ)
     """
@@ -26,8 +26,8 @@ class NQIntradayMR(Strategy):
         return [
             {"name": "lookback", "type": int, "min": 5, "max": 20, "default": 8},
             {"name": "atr_period", "type": int, "min": 5, "max": 25, "default": 14},
-            {"name": "atr_mult_stop", "type": float, "min": 1.0, "max": 3.0, "default": 1.5, "step": 0.25},
-            {"name": "atr_mult_target", "type": float, "min": 1.0, "max": 4.0, "default": 2.0, "step": 0.25},
+            {"name": "atr_mult_stop", "type": float, "min": 1.0, "max": 3.0, "default": 1.25, "step": 0.25},
+            {"name": "atr_mult_target", "type": float, "min": 1.0, "max": 4.0, "default": 2.5, "step": 0.25},
             {"name": "adx_threshold", "type": int, "min": 15, "max": 35, "default": 25},
             {"name": "trend_ma_period", "type": int, "min": 50, "max": 250, "default": 200},
             {"name": "wick_ratio", "type": float, "min": 0.0, "max": 2.0, "default": 0.0, "step": 0.25},
