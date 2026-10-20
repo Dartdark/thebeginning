@@ -56,6 +56,11 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **Building blocks program (user, 2026-10-20):** build strategies from entry / exit / filter blocks (Antigravity's
+  catalog on `antigravity/jesse`: 10 entries, 10 exits, 143 filters, plus our own filters). Library `analysis/blocks.py`.
+  Step 1 (entries alone, pre-registered, 64 trials, `analysis/blocks_step1_test.py`): 62 F; only E9 SMA 10/50 cross SHORT
+  passes (NQ $129, t 2.4, holdout +; ES weaker) = C, about chance level. Next: Step 2 = Apex-fit exits (ATR stop / target /
+  trail / time / 15:55) on E9 short, then a few pre-chosen filter families; count trials.
 - **Antigravity Phase 2 done (2026-10-17, `agents/results/PHASE2_VERDICT.md`):** 40 pre-registered variants on the 8 plan
   strategies, none beat the originals in both periods; LDF move ≥ 0.50 ATR on the bootstrapped bench a wash; its new
   ESEuroCloseTrend rebuilt = t 1.4, F. Task 09 (ES MOC) done: PASS on the rule; its run was 1 minute early (read close stamps as open) and still made $156-161
