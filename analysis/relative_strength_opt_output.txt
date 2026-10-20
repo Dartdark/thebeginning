@@ -1,0 +1,73 @@
+Base (user's settings):
+   base 0.6 / 1.0 / 15:00                   n 1161 $  306  t  4.0 | design Sharpe 1.34 $271 | 2023+ Sharpe 1.37 $344 | full 1.33
+
+=== Stage 1: exits, both sides ===
+
+Both sides: design 2018-22 daily Sharpe (columns = target x range; 'none' = no target)
+           none   0.6   0.8   1.0   1.5
+flat stop                              
+1500 0.4   1.08  0.94  1.04  1.14  1.13
+     0.5   1.03  0.90  1.02  1.09  1.08
+     0.6   1.26  1.20  1.32  1.34  1.32
+     0.8   1.08  1.04  1.14  1.16  1.14
+     1.0   1.06  1.07  1.15  1.17  1.13
+1555 0.4   1.03  0.97  1.01  1.03  1.05
+     0.5   1.00  0.96  1.02  1.01  1.02
+     0.6   1.27  1.29  1.37  1.32  1.30
+     0.8   1.13  1.16  1.23  1.18  1.16
+     1.0   1.07  1.13  1.19  1.15  1.11
+
+   plateau pick: stop 0.8, target 0.6, flat 1555 (design Sharpe 1.16, plateau 1.23); base design 1.34 (plateau 1.18); single best cell 1.37
+   PICK                                     n 1161 $  279  t  3.8 | design Sharpe 1.16 $224 | 2023+ Sharpe 1.41 $338 | full 1.26
+   base                                     n 1161 $  306  t  4.0 | design Sharpe 1.34 $271 | 2023+ Sharpe 1.37 $344 | full 1.33
+   PICK + breakeven at +0.5 range           n 1161 $  273  t  3.8 | design Sharpe 1.16 $223 | 2023+ Sharpe 1.39 $328 | full 1.25
+
+=== Stage 2: sides ===
+
+Longs: design 2018-22 daily Sharpe (columns = target x range; 'none' = no target)
+           none   0.6   0.8   1.0   1.5
+flat stop                              
+1500 0.4   1.06  1.08  0.93  0.96  1.03
+     0.5   1.00  1.00  0.86  0.89  0.97
+     0.6   1.07  1.12  0.98  0.97  1.04
+     0.8   1.10  1.19  1.03  1.01  1.07
+     1.0   1.04  1.15  0.96  0.94  1.01
+1555 0.4   1.08  1.13  0.96  0.92  1.03
+     0.5   1.05  1.09  0.94  0.89  1.00
+     0.6   1.14  1.23  1.10  0.99  1.10
+     0.8   1.26  1.38  1.22  1.13  1.22
+     1.0   1.19  1.31  1.15  1.05  1.15
+   Longs own pick: stop 1.0, target 0.6, flat 1555: design 1.31 vs shared setting 1.38 -> keep shared
+   Longs own pick                           n  598 $  456  t  4.6 | design Sharpe 1.31 $342 | 2023+ Sharpe 1.73 $590 | full 1.50
+   Longs shared pick                        n  598 $  426  t  4.3 | design Sharpe 1.38 $349 | 2023+ Sharpe 1.53 $518 | full 1.43
+
+Shorts: design 2018-22 daily Sharpe (columns = target x range; 'none' = no target)
+           none   0.6   0.8   1.0   1.5
+flat stop                              
+1500 0.4   0.46  0.24  0.55  0.66  0.57
+     0.5   0.45  0.26  0.58  0.66  0.56
+     0.6   0.71  0.56  0.88  0.93  0.82
+     0.8   0.43  0.27  0.59  0.65  0.54
+     1.0   0.46  0.35  0.67  0.71  0.58
+1555 0.4   0.36  0.23  0.47  0.55  0.45
+     0.5   0.34  0.25  0.50  0.55  0.44
+     0.6   0.64  0.58  0.84  0.88  0.74
+     0.8   0.33  0.27  0.53  0.57  0.43
+     1.0   0.32  0.28  0.54  0.58  0.43
+   Shorts own pick: stop 0.8, target 1.0, flat 1500: design 0.65 vs shared setting 0.27 -> candidate
+   Shorts own pick                          n  563 $  179  t  1.5 | design Sharpe 0.65 $219 | 2023+ Sharpe 0.37 $139 | full 0.49
+   Shorts shared pick                       n  563 $  122  t  1.1 | design Sharpe 0.27 $80 | 2023+ Sharpe 0.48 $164 | full 0.37
+   short |Z| >= 1.5                         n 1088 $  290  t  3.8 | design Sharpe 1.24 $244 | 2023+ Sharpe 1.37 $339 | full 1.28
+   short |Z| >= 2.0                         n  970 $  328  t  4.1 | design Sharpe 1.33 $281 | 2023+ Sharpe 1.43 $380 | full 1.35
+
+=== Stage 3: filters on the pick ===
+   F1 VXN above its 1-year median       (expected +) kept 595: design $261 vs skipped $168 | 2023+ $723 vs $68
+      pick with F1                          n  595 $  440  t  3.7 | design Sharpe 0.92 $261 | 2023+ Sharpe 1.56 $723 | full 1.23
+   F2 not FOMC day                      (expected +) kept 1136: design $237 vs skipped $-313 | 2023+ $340 vs $206
+      pick with F2                          n 1136 $  287  t  3.9 | design Sharpe 1.22 $237 | 2023+ Sharpe 1.41 $340 | full 1.29
+   F3 not a 7:30 release day            (expected ?) kept 1018: design $173 vs skipped $783 | 2023+ $342 vs $315
+      pick with F3                          n 1018 $  250  t  3.2 | design Sharpe 0.85 $173 | 2023+ Sharpe 1.32 $342 | full 1.08
+   F4 overnight move with the trade     (expected ?) kept 568: design $167 vs skipped $277 | 2023+ $354 vs $321
+      pick with F4                          n  568 $  259  t  2.5 | design Sharpe 0.63 $167 | 2023+ Sharpe 1.04 $354 | full 0.83
+   F5 size 2x when |Z| >= 2                 n 1161 $  477  t  3.7 | design Sharpe 1.19 $399 | 2023+ Sharpe 1.35 $561 | full 1.25
+   |Z| buckets (all years, $ a trade): {Interval(1.25, 1.5, closed='right'): {'count': 154, 'mean': 213.0}, Interval(1.5, 2.0, closed='right'): {'count': 263, 'mean': 231.0}, Interval(2.0, 2.5, closed='right'): {'count': 225, 'mean': 256.0}, Interval(2.5, 3.0, closed='right'): {'count': 168, 'mean': 121.0}, Interval(3.0, 99.0, closed='right'): {'count': 351, 'mean': 434.0}}

@@ -27,7 +27,7 @@ import relative_strength_test as RS
 from grid24 import jof
 import event_days as EV
 
-STOPS, TGTS, FLATS = (0.4, 0.5, 0.6, 0.8, 1.0), (0.6, 0.8, 1.0, 1.5, None), (1500, 1555)
+STOPS, TGTS, FLATS = (0.4, 0.5, 0.6, 0.8, 1.0), (0.6, 0.8, 1.0, 1.5, 0), (1500, 1555)   # target 0 = none
 
 
 def sharpe(t, idx, lo=None, hi=None, w=None):
@@ -61,7 +61,7 @@ def plateau(G):
 
 
 def show(G, nm):
-    tab = G.assign(tgt=G.tgt.fillna(0)).pivot_table(index=["flat", "stop"], columns="tgt", values="sh").round(2)
+    tab = G.pivot_table(index=["flat", "stop"], columns="tgt", values="sh").round(2)
     tab.columns = ["none" if c == 0 else c for c in tab.columns]
     print(f"\n{nm}: design 2018-22 daily Sharpe (columns = target x range; 'none' = no target)\n{tab.to_string()}")
 

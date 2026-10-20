@@ -1,0 +1,16 @@
+1. Stop sweep, target 1.0, flat 15:00: design / 2023+ / full daily Sharpe, $ a trade
+   stop 0.4   design 1.14  2023+ 1.13  full 1.11  $236  stops hit 41%
+   stop 0.5   design 1.09  2023+ 1.22  full 1.14  $254  stops hit 32%
+   stop 0.55  design 1.35  2023+ 1.32  full 1.31  $297  stops hit 27%
+   stop 0.6   design 1.34  2023+ 1.37  full 1.33  $306  stops hit 24%
+   stop 0.65  design 1.38  2023+ 1.52  full 1.42  $332  stops hit 20%
+   stop 0.7   design 1.21  2023+ 1.42  full 1.30  $308  stops hit 19%
+   stop 0.8   design 1.16  2023+ 1.42  full 1.27  $308  stops hit 14%
+   stop 1.0   design 1.17  2023+ 1.59  full 1.37  $334  stops hit 7%
+
+2. Base settings by VXN regime (VXN at yesterday's close vs its 1-year median)
+   VXN high  n  595 $  508 (t 4.1) | design $329 (t 2.5) | 2023+ $792 (t 3.2)
+   VXN low   n  566 $   94 (t 1.1) | design $183 (t 1.8) | 2023+ $31 (t 0.2)
+   base 1x always                           n 1161 $  306  t  4.0 | design Sharpe 1.34 $271 | 2023+ Sharpe 1.37 $344 | full 1.33
+   1x VXN high / 0.5x VXN low               n 1161 $  283  t  4.2 | design Sharpe 1.26 $235 | 2023+ Sharpe 1.55 $335 | full 1.39
+   1x VXN high / 0.0x VXN low               n 1161 $  260  t  4.0 | design Sharpe 1.10 $199 | 2023+ Sharpe 1.61 $326 | full 1.34

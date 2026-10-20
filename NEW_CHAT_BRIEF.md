@@ -61,7 +61,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **Relative Strength NQ / ES (user's new strategy, 2026-10-20): B, checker PASS WITH CONCERNS.** Rebuild t 4.0, $306 per NQ,
   9/9 years, holdout holds, random side p 0.002, the ES adjustment is what works. Concerns: top 5% of trades carry the
   profit, 9:00 decision only (9:30 t 1.3), shorts weak since 2023. Funded bench + 1 MNQ: faster to 6 payouts (278 -> 250
-  days) but blown +1.3 pt; longs only +0.5 pt. Waiting: user's MultiCharts report with costs; user's decision on incubation.
+  days) but blown +1.3 pt; longs only +0.5 pt. Optimisation (pre-registered, design 2018-22): nothing beats the user's
+  settings; VXN regime splits strongly (high $508 vs low $94 a trade) -> WATCHLIST #24. MultiCharts check postponed (user
+  can't backtest while live); incubation decision open.
 - **Building blocks program (user, 2026-10-20):** build strategies from entry / exit / filter blocks (Antigravity's
   catalog on `antigravity/jesse`: 10 entries, 10 exits, 143 filters, plus our own filters). Library `analysis/blocks.py`.
   Step 1 (entries alone, pre-registered, 64 trials, `analysis/blocks_step1_test.py`): 62 F; only E9 SMA 10/50 cross SHORT
