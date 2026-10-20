@@ -11,7 +11,10 @@ CT_TZ = ZoneInfo("America/Chicago")
 class NQIntradayMR(Strategy):
     """
     Intraday Mean Reversion Strategy (Phase 1 & Phase 2 Compliant):
-    - Entry 4: Low-Volume / Low-Momentum Reversal (Fade extremes when volume is low and ADX < 25)
+    - Entry 4: Low-Volume / Low-Momentum Reversal
+    - Iteration 1 Controlled Change: Trend-Aligned Fades (SMA 200 regime filter)
+        * Only buy dips when Close > 200 SMA (uptrend)
+        * Only sell rallies when Close < 200 SMA (downtrend)
     - Exit 6: Tight Volatility Stop Loss (Entry +/- 1.5 * ATR)
     - Exit 7: Quick Spike Take-Profit Limit (Entry -/+ 1.5 * ATR back to mean)
     - Mandatory Intraday Flat: Liquidate at 15:50 CT (Zero overnight exposure)
@@ -25,6 +28,7 @@ class NQIntradayMR(Strategy):
             {"name": "atr_mult_stop", "type": float, "min": 1.0, "max": 3.0, "default": 1.5, "step": 0.5},
             {"name": "atr_mult_target", "type": float, "min": 1.0, "max": 3.0, "default": 1.5, "step": 0.5},
             {"name": "adx_threshold", "type": int, "min": 15, "max": 35, "default": 25},
+            {"name": "trend_ma_period", "type": int, "min": 50, "max": 250, "default": 200},
         ]
 
     def _get_time_ct(self):
@@ -33,31 +37,8 @@ class NQIntradayMR(Strategy):
 
     def should_long(self) -> bool:
         lookback = self.hp["lookback"]
-        if len(self.candles) < max(lookback + 10, 50):
-            return False
-
-        time_int = self._get_time_ct()
-        # Only enter between 08:45 and 14:00 CT (leaves plenty of time to resolve before 15:50 CT flat)
-        if not (845 <= time_int <= 1400):
-            return False
-
-        # Regime Filter: ADX < threshold (Chop / Mean-Reverting regime, not trending)
-        adx_val = ta.adx(self.candles, period=14)
-        if adx_val >= self.hp["adx_threshold"]:
-            return False
-
-        # Entry 4 Condition: Volume below 10-bar average (exhaustion)
-        vol_avg = np.mean(self.candles[-11:-1, 5])
-        if self.current_candle[5] >= vol_avg:
-            return False
-
-        # Price hits lowest low of last X bars (excluding current bar) -> Fade the low
-        lowest_low = np.min(self.candles[-lookback - 1 : -1, 4])
-        return self.close <= lowest_low
-
-    def should_short(self) -> bool:
-        lookback = self.hp["lookback"]
-        if len(self.candles) < max(lookback + 10, 50):
+        ma_period = self.hp["trend_ma_period"]
+        if len(self.candles) < max(lookback + 10, ma_period + 10):
             return False
 
         time_int = self._get_time_ct()
@@ -65,6 +46,11 @@ class NQIntradayMR(Strategy):
         if not (845 <= time_int <= 1400):
             return False
 
+        # Trend Filter: Only fade dips if macro trend is UP (Close > 200 SMA)
+        ma_val = ta.sma(self.candles, period=ma_period)
+        if self.close <= ma_val:
+            return False
+
         # Regime Filter: ADX < threshold (Chop / Mean-Reverting regime, not trending)
         adx_val = ta.adx(self.candles, period=14)
         if adx_val >= self.hp["adx_threshold"]:
@@ -75,7 +61,37 @@ class NQIntradayMR(Strategy):
         if self.current_candle[5] >= vol_avg:
             return False
 
-        # Price hits highest high of last X bars (excluding current bar) -> Fade the high
+        # Price hits lowest low of last X bars (excluding current bar) -> Fade the dip in an uptrend
+        lowest_low = np.min(self.candles[-lookback - 1 : -1, 4])
+        return self.close <= lowest_low
+
+    def should_short(self) -> bool:
+        lookback = self.hp["lookback"]
+        ma_period = self.hp["trend_ma_period"]
+        if len(self.candles) < max(lookback + 10, ma_period + 10):
+            return False
+
+        time_int = self._get_time_ct()
+        # Only enter between 08:45 and 14:00 CT
+        if not (845 <= time_int <= 1400):
+            return False
+
+        # Trend Filter: Only fade rallies if macro trend is DOWN (Close < 200 SMA)
+        ma_val = ta.sma(self.candles, period=ma_period)
+        if self.close >= ma_val:
+            return False
+
+        # Regime Filter: ADX < threshold (Chop / Mean-Reverting regime, not trending)
+        adx_val = ta.adx(self.candles, period=14)
+        if adx_val >= self.hp["adx_threshold"]:
+            return False
+
+        # Entry 4 Condition: Volume below 10-bar average (exhaustion)
+        vol_avg = np.mean(self.candles[-11:-1, 5])
+        if self.current_candle[5] >= vol_avg:
+            return False
+
+        # Price hits highest high of last X bars (excluding current bar) -> Fade the rally in a downtrend
         highest_high = np.max(self.candles[-lookback - 1 : -1, 3])
         return self.close >= highest_high
 
