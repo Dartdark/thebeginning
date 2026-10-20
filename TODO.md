@@ -38,6 +38,15 @@ bottom). Times are Central (CT).
 - [x] (2026-10-17, PASS on the rule; its clock ran 1 min early, see agents/results/TASK_09_VERDICT.md) Antigravity: Task 09 blind check (pull `agents/tasks` and the `ES_1min_*.csv` files first).
 - [ ] When funded: ES MOC Follow (IN THE PLAN since 2026-10-17) on a 5-min MES chart, NumContracts 2, Symbol Mapping `@MES -> MESZ6` (roll with MNQ). Vault Break funded: `NumContracts` 2, `FlaggedContracts` 1 (decided 2026-10-17).
 
+## Relative Strength NQ / ES (your new strategy, 2026-10-20: B, checker PASS WITH CONCERNS)
+
+- [ ] MultiCharts backtest for the trade-by-trade check: [RelStrength_v3.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/relative_strength/RelStrength_v3.txt)
+  (your code, unchanged) on a **1-minute @NQ chart with 1-minute @ES as Data2** (same feed, CME 24h session, Exchange
+  time = CT, first RTH bar 08:31), data loaded from **Sep 2017**, default inputs, **commission and slippage 0** (Claude adds
+  costs), Intrabar Order Generation off. Save as "Backtesting Strategy Performance Report _ @NQ - 1 Minute Relative Strength.xlsx"
+  and push / send it.
+- [ ] Decide: funded plan incubation as **longs only, 1 MNQ** (`TradeDir` 1) when an account passes? Full long + short = personal-account candidate.
+
 ## Journal (Obsidian)
 
 - [x] (2026-10-17, done) One-time setup: follow [journal/README.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/journal/README.md) (separate clone in `C:\TradingVault`, Daily notes + Templates plugins).
