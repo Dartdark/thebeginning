@@ -10,65 +10,59 @@
 - **Session Flat Mandate**: Liquidate at **15:50 CT** (Zero overnight holds)
 - **Core Architecture**:
   - **Entry 4**: Low-Volume / Low-Momentum Reversal (Fade extreme when volume < 10-bar SMA and ADX < 25)
-  - **Regime Filter (Iteration 1)**: 200 SMA Macro Trend Alignment (Only buy dips above 200 SMA; only sell rallies below 200 SMA)
+  - **Regime Filter**: 200 SMA Macro Trend Alignment (Only buy dips above 200 SMA; only sell rallies below 200 SMA)
   - **Exit 6**: Protective ATR Stop Loss (1.5 $\times$ ATR)
-  - **Exit 7**: Quick Spike Limit Target (1.5 $\times$ ATR)
+  - **Exit 7**: Quick Spike Limit Target (2.0 $\times$ ATR)
   - **Intraday Flat**: 15:50 CT mandatory liquidation
 
 ---
 
-## 2. Iteration History & Comparative Metrics
+## 2. Controlled Experiment Matrix (Full 8.5 Years: 2018–2026)
 
-| Metric | Iteration 0 (Raw Baseline) | Iteration 1 (Trend-Aligned 200 SMA) | Delta / Impact |
-| :--- | :--- | :--- | :--- |
-| **Session ID** | `7de41011-3348-48cf-bba3-f542d2f1ca69` | `68f404e7-c3f4-47bd-a691-4bfd83fd4c8f` | - |
-| **Dashboard URL** | [View Baseline](http://localhost:9000/#/backtest/7de41011-3348-48cf-bba3-f542d2f1ca69) | [View Iteration 1](http://localhost:9000/#/backtest/68f404e7-c3f4-47bd-a691-4bfd83fd4c8f) | - |
-| **Total Trades** | 965 | 259 | -706 trades (-73.2% noise eliminated) |
-| **Longs / Shorts** | 302 / 663 (68.7% short) | 100 / 159 (61.4% short) | Shifted towards balanced exposure |
-| **Win Rate (Total)** | 49.0% | **49.42%** | +0.42% |
-| **Win Rate (Longs)** | 51.7% | **52.0%** | +0.30% |
-| **Win Rate (Shorts)** | 47.8% | **47.8%** | Unchanged (still lagging) |
-| **Win / Loss Ratio** | 1.03 : 1 | **1.086 : 1** | +5.4% improvement |
-| **Average Win** | \$269.47 | **\$292.45** | +\$22.98 |
-| **Average Loss** | \$262.83 | **\$269.17** | -\$6.34 |
-| **Gross Profit** | +\$127,457.22 | +\$37,433.34 | Concentrated quality |
-| **Gross Loss** | -\$129,310.73 | -\$35,261.35 | Reduced total loss exposure |
-| **Fees Paid (Friction)** | \$4,343.66 | **\$1,169.43** | -\$3,174.23 fees saved |
-| **Net Profit** | **-\$1,853.51** | **+\$2,171.99** | **+\$4,025.50 turnaround (profitable)** |
-| **Expectancy / Trade** | -\$1.92 | **+\$8.39** | Positive statistical expectation |
-| **Sharpe Ratio** | -0.07 | **0.17** | Positive risk-adjusted return |
-| **Sortino Ratio** | -0.10 | **0.24** | Improved downside deviation |
-| **Max Drawdown** | **-1.38%** (~\$2,768 on 1 MNQ) | **-0.31%** (~\$620 on 1 MNQ) | **-77.5% drawdown reduction** |
-| **Largest Losing Trade** | -\$1,385.25 | **-\$907.63** | Reduced tail risk |
+| Metric | Iteration 0 (Raw Baseline) | Iteration 1 (200 SMA Trend Filter) | Iteration 2A (Rejection Wick Alone) | Iteration 2B (Asymmetric Payoff Alone) | Iteration 2C (Combined: Wick + Asymmetric) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Session ID** | `7de41011-3348-48cf-bba3-f542d2f1ca69` | `68f404e7-c3f4-47bd-a691-4bfd83fd4c8f` | `f837910e-b70d-4e63-b2a7-4520c11e2bf5` | `076a4d39-78a4-47e0-95bc-83c2515a509f` | `c3ca82b7-3ba1-4b9b-b0f9-4db0bf964352` |
+| **Dashboard URL** | [View Baseline](http://localhost:9000/#/backtest/7de41011-3348-48cf-bba3-f542d2f1ca69) | [View Iter 1](http://localhost:9000/#/backtest/68f404e7-c3f4-47bd-a691-4bfd83fd4c8f) | [View Iter 2A](http://localhost:9000/#/backtest/f837910e-b70d-4e63-b2a7-4520c11e2bf5) | [View Iter 2B](http://localhost:9000/#/backtest/076a4d39-78a4-47e0-95bc-83c2515a509f) | [View Iter 2C](http://localhost:9000/#/backtest/c3ca82b7-3ba1-4b9b-b0f9-4db0bf964352) |
+| **Target : Stop Ratio** | 1.5 ATR : 1.5 ATR (1.0 : 1) | 1.5 ATR : 1.5 ATR (1.0 : 1) | 1.5 ATR : 1.5 ATR (1.0 : 1) | **2.0 ATR : 1.5 ATR (1.33 : 1)** | 2.0 ATR : 1.5 ATR (1.33 : 1) |
+| **Wick Absorption Filter**| None | None | `wick >= body * 1.0` | None | `wick >= body * 1.0` |
+| **Total Trades** | 965 | 259 | 29 (-89% starvation) | **258** | 29 (-89% starvation) |
+| **Win Rate (Total)** | 49.0% | 49.42% | 41.38% | **47.29%** | 41.38% |
+| **Win Rate (Longs)** | 51.7% | 52.0% | 54.55% | **49.49%** | 54.55% |
+| **Win Rate (Shorts)** | 47.8% | 47.8% | 33.33% | **45.91%** | 33.33% |
+| **Payoff Ratio (W/L)** | 1.03 : 1 | 1.086 : 1 | 1.223 : 1 | **1.309 : 1** | 1.441 : 1 |
+| **Average Win** | \$269.47 | \$292.45 | \$327.00 | **\$354.83** | \$385.11 |
+| **Average Loss** | \$262.83 | \$269.17 | \$267.29 | **\$271.13** | \$267.29 |
+| **Total Fees Paid** | \$4,343.66 | \$1,169.43 | \$151.97 | **\$1,160.37** | \$151.95 |
+| **Net Profit** | -\$1,853.51 | +\$2,171.99 | -\$620.01 | **+\$6,415.22** | +\$77.40 |
+| **Expectancy / Trade** | -\$1.92 | +\$8.39 | -\$21.38 | **+\$24.87** | +\$2.67 |
+| **Sharpe Ratio** | -0.07 | 0.17 | -0.13 | **0.43** | 0.01 |
+| **Sortino Ratio** | -0.10 | 0.24 | -0.19 | **0.69** | 0.02 |
+| **Calmar Ratio** | -0.05 | 0.08 | -0.04 | **0.19** | 0.005 |
+| **Max Drawdown** | -1.38% (~\$2,768 on 1 MNQ) | -0.31% (~\$620 on 1 MNQ) | -0.19% (~\$380 on 1 MNQ) | **-0.40% (~\$800 on 1 MNQ)** | -0.19% (~\$380 on 1 MNQ) |
+| **Max Underwater Days** | 1,920 days | 1,920 days | 1,422 days | **924 days (-52% reduction)** | 1,374 days |
 
 ---
 
 ## 3. Account Phase Assessment
 
-| Phase | Evaluation Rule | Iteration 0 Result | Iteration 1 Result | Status |
-| :--- | :--- | :--- | :--- | :--- |
-| **Phase 1: Prop Evaluation (Apex)** | Max DD $\le \$2,000$ per contract, strict 15:55 CT flat | **FAILED** (Max DD \$2,768 on 1 MNQ breaches \$2k limit) | **PASSED** (Max DD is \$620 on 1 MNQ, well within \$2,000 trailing limit) | **Viable Candidate** |
-| **Phase 2: Funded / PA Account** | Payout preservation, consistent edge, low volatility | **FAILED** (Negative expectancy) | **MARGINAL** (Positive expectancy +\$8.39/trade, low trade frequency ~30 trades/yr) | **Needs Edge Enhancement** |
-| **Phase 3: Personal Capital** | High Sharpe, compounding, flexible drawdown tolerance | **FAILED** (Negative Sharpe) | **ACCEPTABLE SEED** (Positive Sharpe 0.17, clean risk bounds) | **Building Block Validated** |
+| Phase | Evaluation Rule | Iteration 1 Result | Iteration 2A Result | Iteration 2B (Winner) Result | Phase Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Phase 1: Prop Evaluation (Apex)** | Max DD $\le \$2,000$ on 1 MNQ; 15:55 CT flat | **PASSED** (\$620 DD) | **PASSED** (\$380 DD) | **PASSED** (\$800 DD, well within \$2,000 trailing limit) | **Viable Evaluation Strategy** |
+| **Phase 2: Funded / PA Account** | Payout preservation, consistent edge, positive expectancy | **MARGINAL** (+\$8.39/trade) | **FAILED** (Negative expectancy -\$21.38/trade) | **PASSED** (+\$24.87/trade expectancy, 1.31:1 payoff ratio) | **Approved for Funded Testing** |
+| **Phase 3: Personal Capital** | High Sharpe, steady compounding, low tail risk | **MARGINAL SEED** (0.17 Sharpe) | **FAILED** (-0.13 Sharpe) | **PASSED** (0.43 Sharpe, 0.69 Sortino, 924 max underwater days) | **Solid Intraday Allocator** |
 
 ---
 
-## 4. Key Diagnostic Insights from Iteration 1
+## 4. Key Quantitative Discoveries
 
-1. **Macro Trend Alignment is Mandatory for Mean Reversion**:
-   - The baseline strategy suffered from shorting low-volume upward grinds during bull markets. In Nasdaq, low volume during an uptrend is typically institutional accumulation, not a reversal.
-   - Enforcing `Close > 200 SMA` for Longs and `Close < 200 SMA` for Shorts eliminated 706 unpromising trades and turned a -\$1,853 loss into a +\$2,172 net profit after full futures fees.
-2. **Drawdown Compression**:
-   - Max drawdown dropped from \$2,768 down to \$620 on 1 MNQ (a 77.5% drop), transforming the strategy from an automatic Apex fail into a strategy that satisfies the \$2,000 trailing drawdown constraint.
-3. **The Persistent Short Disadvantage**:
-   - While Longs won 52.0%, Shorts still lagged at 47.8%. Touching the 8-bar high in a downtrend is not sufficient by itself—it requires price rejection confirmation.
-
----
-
-## 5. Next Controlled Hypotheses
-
-- **Iteration 2A: Rejection Wick Confirmation (Intrabar Absorption)**:
-  - Require a lower rejection wick for Longs (`lower_wick >= 1.0 * body`) confirming buyers defended the low.
-  - Require an upper rejection wick for Shorts (`upper_wick >= 1.0 * body`) confirming sellers defended the high.
-- **Iteration 2B: Asymmetric Risk / Reward**:
-  - Test expanding target from 1.5 $\times$ ATR to 2.0 $\times$ ATR while keeping stop at 1.5 $\times$ ATR (1.33:1 reward-to-risk ratio) to improve average win and boost expectancy.
+1. **The Rejection Wick Filter is an Over-Filtering Trap (Option A)**:
+   - Requiring a rejection wick (`lower_wick >= body` for longs or `upper_wick >= body` for shorts) at the 8-bar extreme reduced trade opportunity by **89%** (from 259 down to 29 trades over 8.5 years).
+   - Worse, it degraded short performance to a catastrophic **33.3% win rate** and pushed net profit into the negative (-\$620). Price wick formation during low-volume pauses is noise on intraday NQ, not true institutional absorption.
+2. **Asymmetric Payoff Modulation is Highly Effective (Option B)**:
+   - Expanding the take-profit target to **2.0 $\times$ ATR** while keeping the stop at **1.5 $\times$ ATR** preserved 258 trades while boosting the average winning trade from \$292 to **\$354.83**.
+   - Net profit nearly tripled from **+\$2,172 to +\$6,415**.
+   - Expectancy increased by **196%** (from +\$8.39 to **+\$24.87 per trade**).
+   - Sharpe ratio increased from **0.17 to 0.43** (Sortino from 0.24 to 0.69).
+   - Max underwater duration was cut in half (from 1,920 days down to 924 days).
+3. **Selected Production Variant**:
+   - **`NQIntradayMR` (Iteration 2B)** is selected as the winning architecture: 200 SMA Macro Trend Alignment + 1.5 ATR Stop + 2.0 ATR Asymmetric Target + 15:50 CT Intraday Flat.
