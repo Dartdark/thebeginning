@@ -109,6 +109,6 @@ after 15:59 CT, never with a position open.
 
 ## Reminders
 
-Claude reminds you in this session (scheduled tasks, Central time): every **Sunday and Wednesday at 10:52 CT**, plus a
-last call **Sunday 10/18 at 15:30 CT** before the 17:00 test order. Say "stop the reminders" to turn them off, or ask for a
-different schedule.
+Claude reminds you every **Sunday and Wednesday at 10:52 CT** (Central). Since 2026-10-20 the reminders run in the
+separate session 'Scheduled jobs (journal, Friday review, reminders)', together with the 16:40 CT journal trades and the
+Friday review. Say "stop the reminders" to turn them off, or ask for a different schedule.
