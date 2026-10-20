@@ -15,6 +15,11 @@ class NQBreakoutATR(Strategy):
     - Exit 8: Dynamic ATR Volatility Stop Loss
     - Exit 4: Trailing Dollar/Point Giveback from Peak
     - Iteration 2: Combined Filter (ADX > 30 AND US RTH Cash Session 08:30-14:30 CT)
+    - Exit Modulations:
+        exit_mode = 0: Baseline (Exit 4 Trailing Giveback only)
+        exit_mode = 5: Exit 5 (Protect Profit Ratio: lock 50% profit if peak gain >= protect_trigger)
+        exit_mode = 7: Exit 7 (Quick Spike Profit: limit take-profit target at entry +/- spike_mult * ATR)
+        exit_mode = 10: Exit 10 (Stale Bar Exit: liquidate if bars >= 16 and profit < 20 points)
     """
 
     def __init__(self):
@@ -29,6 +34,10 @@ class NQBreakoutATR(Strategy):
             {"name": "atr_mult", "type": float, "min": 1.0, "max": 3.5, "default": 2.0, "step": 0.5},
             {"name": "giveback_points", "type": int, "min": 20, "max": 80, "default": 40},
             {"name": "filter_case", "type": int, "min": 0, "max": 9999, "default": 9128},
+            {"name": "exit_mode", "type": int, "min": 0, "max": 10, "default": 5},
+            {"name": "protect_trigger", "type": float, "min": 30.0, "max": 100.0, "default": 50.0},
+            {"name": "spike_mult", "type": float, "min": 2.0, "max": 5.0, "default": 3.5, "step": 0.5},
+            {"name": "stale_bars", "type": int, "min": 8, "max": 24, "default": 16},
         ]
 
     def _check_filter(self) -> bool:
@@ -127,24 +136,64 @@ class NQBreakoutATR(Strategy):
         if self.is_long:
             self.peak_price = self.price
             self.stop_loss = self.position.qty, self.price - stop_dist
+            # Exit 7: Quick Spike Profit Limit Target
+            if self.hp["exit_mode"] == 7:
+                target_dist = atr * self.hp["spike_mult"]
+                self.take_profit = self.position.qty, self.price + target_dist
         elif self.is_short:
             self.trough_price = self.price
             self.stop_loss = self.position.qty, self.price + stop_dist
+            # Exit 7: Quick Spike Profit Limit Target
+            if self.hp["exit_mode"] == 7:
+                target_dist = atr * self.hp["spike_mult"]
+                self.take_profit = self.position.qty, self.price - target_dist
 
     def should_cancel_entry(self) -> bool:
         return False
 
     def update_position(self):
         giveback = self.hp["giveback_points"]
+        mode = self.hp["exit_mode"]
 
-        # Trailing giveback exit (Exit 4)
+        # Track peaks / troughs
         if self.is_long:
             if self.price > self.peak_price:
                 self.peak_price = self.price
-            elif (self.peak_price - self.price) >= giveback:
-                self.liquidate()
         elif self.is_short:
             if self.price < self.trough_price:
                 self.trough_price = self.price
-            elif (self.price - self.trough_price) >= giveback:
+
+        # Exit 10: Stale Bar Exit (chop timeout)
+        if mode == 10:
+            bars_held = int((self.current_candle[0] - self.position.opened_at) / (15 * 60 * 1000))
+            if bars_held >= self.hp["stale_bars"]:
+                profit_dist = (self.price - self.position.entry_price) if self.is_long else (self.position.entry_price - self.price)
+                if profit_dist < 20.0:
+                    self.liquidate()
+                    return
+
+        # Exit 5: Protect Profit Ratio
+        if mode == 5:
+            trigger = self.hp["protect_trigger"]
+            if self.is_long:
+                max_gain = self.peak_price - self.position.entry_price
+                if max_gain >= trigger:
+                    current_gain = self.price - self.position.entry_price
+                    if (current_gain / max_gain) < 0.50:
+                        self.liquidate()
+                        return
+            elif self.is_short:
+                max_gain = self.position.entry_price - self.trough_price
+                if max_gain >= trigger:
+                    current_gain = self.position.entry_price - self.price
+                    if (current_gain / max_gain) < 0.50:
+                        self.liquidate()
+                        return
+
+        # Exit 4: Trailing Peak Giveback (active across baseline and as backstop)
+        if self.is_long:
+            if (self.peak_price - self.price) >= giveback:
+                self.liquidate()
+        elif self.is_short:
+            if (self.price - self.trough_price) >= giveback:
                 self.liquidate()
