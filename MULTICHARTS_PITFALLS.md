@@ -82,6 +82,10 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - The ACCOUNT is behind the gear icon next to the broker plug-in (Strategy Properties > Auto Trading > Rithmic > gear).
   'Stop auto-trading after N rejected orders' was 102 (2026-10-19: ~100 rejections after the Apex lock): set it to 10.
   A second Apex account = a second set of charts with the other account selected (no copier yet).
+- **New chart setup (user's note, 2026-10-20):** click the small side-arrow on the chart's right edge to open / activate
+  Chart Trading, then set its broker drop-down (green dot) to Rithmic and pick the Apex account. Missed, the chart sat on
+  'SIM 001' (Simulated Trading Profile) and didn't work. Also check Strategy Properties > Auto Trading > Rithmic > gear =
+  the right Apex account: that one decides where the strategy's orders go.
 - Export "Export cancelled by user" in a report = the export did not finish; export again before sending.
 
 ## Reading MultiCharts reports

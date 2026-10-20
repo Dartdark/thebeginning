@@ -136,6 +136,7 @@ s.append(tbl([
     ["Auto Trading", "Format Signals > Properties > Auto Trading: Broker plug-in Rithmic; ACCOUNT via the gear icon next to Rithmic "
      "(each chart set on its own account); mode AA; initial position Flat; 'Stop auto-trading after N rejected orders' = 10; "
      "intra-bar order generation off."],
+    ["Chart Trading (new charts)", "Click the small side-arrow on the chart's right edge to open / activate Chart Trading, then set its broker drop-down (green dot) to Rithmic and pick the Apex account. If skipped, the chart sits on SIM 001 and doesn't work."],
     ["Symbol mapping", "File > Broker Profiles > Symbol Mapping (Rithmic): @MNQ -> MNQZ6 (and @MES -> MESZ6, MCL monthly when live). "
      "Roll ~Thu 12/10: MNQZ6 -> MNQH7."],
     ["Trade logger", "Apex Trade Logger on every live chart, Tag per strategy (VB, ONB, EOS, MON_BR; funded: ONB_ML, MON, LDF, NFP, "
