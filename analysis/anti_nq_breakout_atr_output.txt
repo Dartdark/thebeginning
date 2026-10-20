@@ -1,0 +1,20 @@
+15-min bars 210505, 2017-12-01 .. 2026-10-09
+   A as coded (exit 5, overnight)     n  1830 $    55 PF 1.11 t  1.5 win 38% yrs+ 5/9 | 18-22 $82 (t 1.9) 23+ $24 (t 0.4) | long $93 short $18 | hold 6 bars
+      by year: {2018: 12921.0, 2019: -4499.0, 2020: -3789.0, 2021: 33128.0, 2022: 42672.0, 2023: 11008.0, 2024: 60787.0, 2025: -34744.0, 2026: -16356.0}
+      2019-24 only (its window): 113 $ a trade per NQ
+   B exit 4 only                      n  1820 $    44 PF 1.09 t  1.2 win 37% yrs+ 5/9 | 18-22 $79 (t 1.8) 23+ $5 (t 0.1) | long $87 short $2 | hold 6 bars
+   C no filter                        n  4279 $    57 PF 1.11 t  2.4 win 38% yrs+ 6/9 | 18-22 $74 (t 2.6) 23+ $37 (t 0.9) | long $84 short $29 | hold 5 bars
+   D Apex: A + flat 15:55             n  1877 $    39 PF 1.08 t  1.2 win 41% yrs+ 5/9 | 18-22 $74 (t 2.0) 23+ $-3 (t -0.1) | long $72 short $6 | hold 6 bars
+   A: share of trades still open after 15:59 CT: 23%; their average $1055 vs same-day $-244
+   placebo A: real $55 vs random $12 (p95 $68), p = 0.109
+   placebo D: real $39 vs random $-6 (p95 $48), p = 0.085
+
+   A:  {'trades': 1830, 'win': 0.3808743169398907, 'avg': 55.26159023252232, 'annual': 11128.574214685586, 'sharpe': 0.5105473532859818, 'sortino': 0.9091401054576281, 'profit_factor': 1.1086998690717502, 'max_dd': 70617.19090772179, 'calmar': 0.15759015717897537, 'ulcer': 11.25019669210554, 'ulcer_perf': 1.9783786042593732}
+   Monte Carlo A 1 MNQ (x0.1): trades 1830 | total p5 $-379 / p50 $9,902 / p95 $20,754, P(total <= 0) 5.5%
+      max DD actual $7,062 (rank 89%), shuffled p50 $4,508 / p95 $8,301 / p99 $10,694; losing streak actual 16, p95 19
+      252-day block bootstrap: P&L p5 $-2,401 / p50 $1,024 / p95 $4,686, P(loss) 31.6%, max DD p95 $3,701, P(hit $2,000 EOD trailing) 36.7%
+
+   D:  {'trades': 1877, 'win': 0.41076185402237614, 'avg': 38.94486735314429, 'annual': 7984.139976194222, 'sharpe': 0.3936113759667949, 'sortino': 0.6679939766406102, 'profit_factor': 1.0815829999957076, 'max_dd': 72887.70661683542, 'calmar': 0.1095402825357941, 'ulcer': 11.663109400281552, 'ulcer_perf': 1.3691271687808195}
+   Monte Carlo D 1 MNQ (x0.1): trades 1863 | total p5 $-2,643 / p50 $7,264 / p95 $17,045, P(total <= 0) 11.6%
+      max DD actual $7,312 (rank 89%), shuffled p50 $4,601 / p95 $8,584 / p99 $11,019; losing streak actual 12, p95 17
+      252-day block bootstrap: P&L p5 $-2,510 / p50 $770 / p95 $4,221, P(loss) 35.2%, max DD p95 $3,618, P(hit $2,000 EOD trailing) 36.3%

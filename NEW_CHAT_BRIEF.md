@@ -56,6 +56,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **Antigravity's NQBreakoutATR (its first block-built strategy, 2026-10-20): F.** Our rebuild 2018-26: $55 per NQ, t 1.5,
+  5/9 years, 2025-26 −$51k, random-entry p 0.11; its report used 2019-24 only; the filter adds nothing; profit = overnight holds.
 - **Relative Strength NQ / ES (user's new strategy, 2026-10-20): B, checker PASS WITH CONCERNS.** Rebuild t 4.0, $306 per NQ,
   9/9 years, holdout holds, random side p 0.002, the ES adjustment is what works. Concerns: top 5% of trades carry the
   profit, 9:00 decision only (9:30 t 1.3), shorts weak since 2023. Funded bench + 1 MNQ: faster to 6 payouts (278 -> 250
