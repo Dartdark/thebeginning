@@ -86,8 +86,7 @@ after 15:59 CT, never with a position open.
 
 ## Trade logger + auto journal (2026-10-19)
 
-- [ ] VPS: create `C:\TradingLogs`; compile `apex_strategies/Apex_Trade_Logger.txt` as a Signal; add it to every live chart
-      (Tag = VB / ONB / EOS / MON_BR). If it doesn't compile, send Claude the error.
+- [x] (2026-10-19) VPS: `C:\TradingLogs` created; Apex Trade Logger compiled and on every live chart (VB / ONB / EOS / MON_BR).
 - [x] (2026-10-19) VPS: Git for Windows + clone to `C:\TradingRepo` + the scheduled push; test log arrived in `live/trades/`.
 
 ## Later
