@@ -34,6 +34,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   views on the PC's copy once live trading runs on a VPS; never orders, inputs or auto-trading). Cloud sessions do research and the Friday review (scheduled Fri
   16:47 CT). `LESSONS.md` = short rules learned the hard way. Live: test order filled 10/18; Bridge Monday first live run
   10/18 19:00 CT; account #2 Tue 10/20.
+- **Scheduled jobs (2026-10-20):** run in their own small session 'Scheduled jobs (journal, Friday review, reminders)'
+  (session_014DKffATms37kZigaa2xR2P, repo attached): journal trades weekdays 16:40 CT, Friday review 16:47 CT, to-do
+  reminder Sun/Wed 10:52 CT. Fresh-session-per-run doesn't work (new sessions can't reach the private repo).
 - **Account #2 (2026-10-20):** a second 50K evaluation on the VPS, its own chart set (no copier: Rithmic copy trading not
   enabled yet), logger tags VB-2 / ONB-2 / EOS-2 / MON_BR-2. Rejected-order stop set to 10 per chart.
 - **First Apex daily-loss-limit day (2026-10-19):** VB long 8 MNQ at 10:30 CT reversed; Apex's $1,000 daily limit closed it
