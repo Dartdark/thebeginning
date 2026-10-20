@@ -34,6 +34,10 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   views on the PC's copy once live trading runs on a VPS; never orders, inputs or auto-trading). Cloud sessions do research and the Friday review (scheduled Fri
   16:47 CT). `LESSONS.md` = short rules learned the hard way. Live: test order filled 10/18; Bridge Monday first live run
   10/18 19:00 CT; account #2 Tue 10/20.
+- **First Apex daily-loss-limit day (2026-10-19):** VB long 8 MNQ at 10:30 CT reversed; Apex's $1,000 daily limit closed it
+  at -$1,017 (11:01 CT) and locked the account ('Account is done for day'); MultiCharts kept re-sending VB's exits (rejected).
+  Within the plan (the combine sim models the limit). VB size vs the limit (`analysis/combine_vb_size_test.py`): 6 MNQ
+  ($900 risk) 49.2% pass vs 8 MNQ 50.1% (4: 48.2%, 10: 50.4%): keep 8. After any Apex lock, reset charts before the open.
 - **VPS + trade log (2026-10-19):** QuantVPS Lite (Chicago, Central clock) runs MultiCharts with Rithmic; ONB backtest on the
   VPS matched the PC (75/77 identical, 2 by 1 tick). Every live chart has `Apex Trade Logger` (writes C:\TradingLogs\YYYYMMDD.csv);
   Task Scheduler 'PushTradeLogs' pushes it to `live/trades/` at 16:10 CT (tested); Claude's 16:40 CT weekday task runs
