@@ -25,6 +25,8 @@ bottom). Times are Central (CT).
 - [ ] **Fri 10/23 (and every Friday): export the weekly MultiCharts reports into `live/`** and tell Claude (it runs
   `analysis/live_vs_backtest.py --all live/` and the drift alarm).
 - [ ] When account #1 passes ($53,000): turn auto-trading off on that account.
+- [ ] **Now: Rithmic copier off (or #2 removed as follower)** while set 2 auto-trades, or #2 trades double size. Copier
+  waits until several funded accounts (2026-10-20).
 - [ ] **~Mon 10/27: account #3** (150K No-Activation, $249).
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
