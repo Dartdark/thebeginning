@@ -31,7 +31,11 @@ local chores.
   `C:\TradingVault\live\` (keep the file names), then run `journal\sync.ps1` in PowerShell from `C:\TradingVault` and
   report its output. (Claude Code's Friday review runs at 16:47 CT, so finish before then.)
 - **Trades are filled in automatically (2026-10-19):** the VPS logs every fill and Claude's 16:40 CT task writes them into
-  the note between the `auto-trades` markers. Never edit that block; run `git pull` before writing the note.
+  the note between the `auto-trades` markers. Run `git pull` before writing the note. **You may edit that block**
+  (user, 2026-10-19): fill it yourself (from `live/trades/`, by running `analysis/journal_trades.py`, from MultiCharts'
+  Order and Position Tracker, or from the user's answers), fix it or add missing trades. Still never invent a fill or
+  number, and note where each hand-added trade came from. `journal_trades.py` replaces the whole block when it runs again,
+  so put hand-added trades in the block only after it has run for that day.
 - **Daily journal (every trading day, after 15:59 CT):** write `C:\TradingVault\journal\daily\<YYYY-MM-DD>.md` from
   the template `journal\templates\Daily.md`. Ask the user only what the log can't show: the Apex end-of-day balance, anything odd (disconnects,
   rejections, manual actions) and how they felt about the day and write their answers
