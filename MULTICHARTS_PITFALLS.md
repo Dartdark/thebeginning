@@ -79,6 +79,9 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - Data: Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close conversion unchecked.
 - Auto trading: Format Signals > Properties > Auto Trading (broker, account), mode AA, initial position Flat, no automatic
   position sync, intra-bar order generation off. Tracker: Ctrl+Shift+O.
+- The ACCOUNT is behind the gear icon next to the broker plug-in (Strategy Properties > Auto Trading > Rithmic > gear).
+  'Stop auto-trading after N rejected orders' was 102 (2026-10-19: ~100 rejections after the Apex lock): set it to 10.
+  A second Apex account = a second set of charts with the other account selected (no copier yet).
 - Export "Export cancelled by user" in a report = the export did not finish; export again before sending.
 
 ## Reading MultiCharts reports

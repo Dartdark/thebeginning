@@ -34,6 +34,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   views on the PC's copy once live trading runs on a VPS; never orders, inputs or auto-trading). Cloud sessions do research and the Friday review (scheduled Fri
   16:47 CT). `LESSONS.md` = short rules learned the hard way. Live: test order filled 10/18; Bridge Monday first live run
   10/18 19:00 CT; account #2 Tue 10/20.
+- **Account #2 (2026-10-20):** a second 50K evaluation on the VPS, its own chart set (no copier: Rithmic copy trading not
+  enabled yet), logger tags VB-2 / ONB-2 / EOS-2 / MON_BR-2. Rejected-order stop set to 10 per chart.
 - **First Apex daily-loss-limit day (2026-10-19):** VB long 8 MNQ at 10:30 CT reversed; Apex's $1,000 daily limit closed it
   at -$1,017 (11:01 CT) and locked the account ('Account is done for day'); MultiCharts kept re-sending VB's exits (rejected).
   Within the plan (the combine sim models the limit). VB size vs the limit (`analysis/combine_vb_size_test.py`): 6 MNQ

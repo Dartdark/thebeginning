@@ -21,7 +21,7 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
-- [ ] **Tue 10/20: buy account #2** (single 50K EOD, $59): real Apex fill confirmed 2026-10-18, so go ahead (automation confirmed allowed by the user 2026-10-19).
+- [x] (2026-10-20) Account #2 bought and set up on the VPS: second chart set (VB, ONB ADX30, EOS, Bridge) on the new account, logger tags `-2`, StartBalance 50000.
 - [ ] **Fri 10/23 (and every Friday): export the weekly MultiCharts reports into `live/`** and tell Claude (it runs
   `analysis/live_vs_backtest.py --all live/` and the drift alarm).
 - [ ] When account #1 passes ($53,000): turn auto-trading off on that account.
