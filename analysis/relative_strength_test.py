@@ -39,7 +39,7 @@ def load():
     g = pickle.load(open(SP + "g24.pkl", "rb")); e = pickle.load(open(SP + "ge.pkl", "rb"))
     hol = holidays(); rows = []
     ei = {int(d): k for k, d in enumerate(e.dates)}
-    a, b = jof(830), jof(1500)
+    a, b, b2 = jof(830), jof(1500), jof(1555)              # arrays run to 15:55 (for later flat times); RTH = 8:31-15:00
     for d in g.trading:
         dt = int(g.dates[d])
         if dt < 20170901 or dt not in ei: continue
@@ -48,8 +48,8 @@ def load():
         rows.append((d, k, dt, dt not in hol and g.last_j[d] >= b and e.last_j[k] >= b))
     days = pd.DataFrame(rows, columns=["d", "k", "date", "ok"])
     f = lambda x: pd.DataFrame(x).ffill(axis=1).to_numpy()
-    N = {c: f(getattr(g, c)[days.d.to_numpy(), a:b + 1]) for c in ("o", "h", "l", "c")}   # col 0 = 8:30 bar
-    E = f(e.c[days.k.to_numpy(), a:b + 1])
+    N = {c: f(getattr(g, c)[days.d.to_numpy(), a:b2 + 1]) for c in ("o", "h", "l", "c")}   # col 0 = 8:30 bar, 390 = 15:00
+    E = f(e.c[days.k.to_numpy(), a:b2 + 1])
     N["o"] = np.where(np.isnan(N["o"]), N["c"], N["o"])
     return days, N, E
 
@@ -58,7 +58,7 @@ def signals(days, N, E, decide=900, beta_mode="rel"):
     """Z at the decide bar for every day (NaN where no check), replaying the EWMA over RTH bars of OK days."""
     alpha = 2 / (20 * 390 + 1); cov = v1 = v2 = 0.0; nest = 0; beta = res = 0.0
     jd = jof(decide) - jof(830); Z = np.full(len(days), np.nan)
-    ra = 10000 * np.log(N["c"][:, 1:] / N["c"][:, :-1]); rb = 10000 * np.log(E[:, 1:] / E[:, :-1])   # bar t = col t+1
+    ra = 10000 * np.log(N["c"][:, 1:391] / N["c"][:, :390]); rb = 10000 * np.log(E[:, 1:391] / E[:, :390])   # bar t = col t+1
     ok = days.ok.to_numpy()
     for i in range(len(days)):
         if ok[i]:
@@ -78,16 +78,19 @@ def signals(days, N, E, decide=900, beta_mode="rel"):
     return Z
 
 
-def trades(days, N, Z, zmin=1.25, decide=900, through=0.0, stop_f=0.6, tgt_f=1.0):
-    rng_ = N["h"][:, 1:].max(1) - N["l"][:, 1:].min(1); ok = days.ok.to_numpy()
+def trades(days, N, Z, zmin=1.25, decide=900, through=0.0, stop_f=0.6, tgt_f=1.0, flat=1500, be_f=None, zmin_short=None):
+    """tgt_f None = no target; be_f = move the stop to entry once the open gain reaches be_f x range (bar close); flat HHMM."""
+    rng_ = N["h"][:, 1:391].max(1) - N["l"][:, 1:391].min(1); ok = days.ok.to_numpy(); fc = jof(flat) - jof(830)
     hist, out = [], []; jd = jof(decide) - jof(830)
     for i in range(len(days)):
         avg = np.mean(hist[-20:]) if hist else np.nan
         z = Z[i]
-        if ok[i] and np.isfinite(z) and abs(z) >= zmin and np.isfinite(avg) and jd + 1 <= 389:
-            s = 1 if z > 0 else -1; e = N["o"][i, jd + 1]; sp = e - s * stop_f * avg; tp = e + s * tgt_f * avg
-            x, kind, jx = None, "flat", 390
-            for t in range(jd + 2, 391):
+        zm = zmin if (zmin_short is None or not np.isfinite(z) or z > 0) else zmin_short
+        if ok[i] and np.isfinite(z) and abs(z) >= zm and np.isfinite(avg) and jd + 1 <= 389:
+            s = 1 if z > 0 else -1; e = N["o"][i, jd + 1]; sp = e - s * stop_f * avg
+            tp = e + s * tgt_f * avg if tgt_f else (np.inf if s > 0 else -np.inf)
+            x, kind, jx = None, "flat", fc
+            for t in range(jd + 2, fc + 1):
                 o, h, l = N["o"][i, t], N["h"][i, t], N["l"][i, t]
                 if s > 0:
                     if l <= sp: x, kind, jx = min(o, sp), "stop", t; break
@@ -95,7 +98,8 @@ def trades(days, N, Z, zmin=1.25, decide=900, through=0.0, stop_f=0.6, tgt_f=1.0
                 else:
                     if h >= sp: x, kind, jx = max(o, sp), "stop", t; break
                     if l <= tp - through: x, kind, jx = min(o, tp), "target", t; break
-            if x is None: x = N["c"][i, 390]
+                if be_f and (N["c"][i, t] - e) * s >= be_f * avg: sp = e if s > 0 and sp < e or s < 0 and sp > e else sp
+            if x is None: x = N["c"][i, fc]
             cost = COMM + TICK * PV * (1 if kind == "target" else 2)
             out.append((pd.Timestamp(str(days.date[i])), s, z, e, x, kind, (x - e) * s * PV, (x - e) * s * PV - cost,
                         int(days.d[i]), jof(830) + jd + 1, jof(830) + jx))
