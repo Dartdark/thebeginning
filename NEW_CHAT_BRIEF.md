@@ -61,6 +61,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   Step 1 (entries alone, pre-registered, 64 trials, `analysis/blocks_step1_test.py`): 62 F; only E9 SMA 10/50 cross SHORT
   passes (NQ $129, t 2.4, holdout +; ES weaker) = C, about chance level. Next: Step 2 = Apex-fit exits (ATR stop / target /
   trail / time / 15:55) on E9 short, then a few pre-chosen filter families; count trials.
+  Step 1b (user: not only Apex; blocks as designed, daily bars, 5 / 20-day holds, 7 markets pooled, 32 trials,
+  `analysis/blocks_step1b_daily_test.py`): 0 pass; longs on NQ / ES / YM / GC make money but no more than random long
+  days (= bull drift). Antigravity called the library 'battle-tested': as components yes, as edges no.
 - **Antigravity Phase 2 done (2026-10-17, `agents/results/PHASE2_VERDICT.md`):** 40 pre-registered variants on the 8 plan
   strategies, none beat the originals in both periods; LDF move ≥ 0.50 ATR on the bootstrapped bench a wash; its new
   ESEuroCloseTrend rebuilt = t 1.4, F. Task 09 (ES MOC) done: PASS on the rule; its run was 1 minute early (read close stamps as open) and still made $156-161
