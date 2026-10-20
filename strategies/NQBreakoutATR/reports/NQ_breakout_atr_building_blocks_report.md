@@ -1,77 +1,59 @@
-# Quantitative Optimization & Exit Modulation Report: NQBreakoutATR
+# Quantitative Audit & Failure Post-Mortem: NQBreakoutATR
 
-## 1. Executive Summary & Objective
-
-- **Target Symbol**: CME E-mini / Micro Nasdaq-100 Index Futures (`NQ-USD` / `MNQ`)
-- **Data Source**: Custom Data (1-minute tick/M1 historical data from `C:\NQData\`, 2017–2026)
-- **Timeframe**: `15m`
-- **Initial Capital**: \$1,000,000 (Scaled trade size: 5 micro contracts / ~\$65,000 notional)
-- **Architecture**: Modular building-block assembly combining:
-  - **Entry Module 10**: Resting Stop Breakout (Highest High / Lowest Low of last $X$ bars)
-  - **Exit Module 8**: Dynamic Volatility Stop Loss (Entry price $\pm$ ATR $\times$ multiplier)
-  - **Exit Module 4**: Trailing Peak Giveback Lock (Liquidate after giving back $Y$ points from high-water mark)
-  - **Regime Filters**: Systematic selection from the 143-case filter library (Case 9128: ADX > 30 + RTH 08:30–14:30 CT)
-  - **Exit Modulations**: Rigorous testing of Exits 5, 7, and 10 against the baseline
+> **STRATEGY STATUS**: **FAILED AUDIT (RANK: F)**  
+> **CAUSE**: Overfitting to truncated 2019–2024 window, unmodeled transaction costs, unhedged overnight equity drift masquerading as breakout alpha, failure to beat random entries ($p = 0.11$), and severe Apex drawdown failure (breaches \$2,000 trailing drawdown in 36% of years).
 
 ---
 
-## 2. Iteration History & Comparative Progression
+## 1. The Audit Findings vs Reported Illusions
 
-| Iteration | Description | Session ID | Dashboard URL | Trades | Win Rate | Win/Loss Ratio | Net Profit | Sharpe | Sortino | Max DD | Expectancy |
-| :--- | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Iter 0** | Naked Baseline (`filter_case = 0`) | `87458b6a-c916-41e1-bf85-59f35ca9bb50` | [View Dashboard](http://localhost:9000/#/backtest/87458b6a-c916-41e1-bf85-59f35ca9bb50) | 2,289 | 34.3% | 2.01:1 | +$13,919.83 | 0.59 | 0.88 | -0.87% | $6.09 |
-| **Iter 1** | Trend Regime (`filter_case = 91`, ADX > 30) | `60632385-6903-4840-bbfe-f9fca9912dd7` | [View Dashboard](http://localhost:9000/#/backtest/60632385-6903-4840-bbfe-f9fca9912dd7) | 881 | 34.9% | 2.09:1 | +$12,242.60 | 0.88 | 1.60 | -0.60% | $13.94 |
-| **Iter 2** | Combined Trend + RTH Window (`filter_case = 9128`) | `fd9516d7-7ffb-40bd-8a71-9fadbeafc4ec` | [View Dashboard](http://localhost:9000/#/backtest/fd9516d7-7ffb-40bd-8a71-9fadbeafc4ec) | 431 | 42.1% | 1.95:1 | +$21,069.01 | 2.02 | 4.12 | -0.29% | $49.23 |
-| **Iter 2 OOS** | Out-of-Sample Validation (2023–2024) | `1e827955-0f87-4879-aa13-b46afe8da4ae` | [View Dashboard](http://localhost:9000/#/backtest/1e827955-0f87-4879-aa13-b46afe8da4ae) | 426 | 40.7% | 1.97:1 | +$17,779.97 | 1.69 | 3.42 | -0.52% | $41.84 |
-| **Iter 2 Full** | 6-Year Multi-Regime Cycle (2019–2024) | `6e857518-bd2c-4f89-9cd3-988e5c3c8474` | [View Dashboard](http://localhost:9000/#/backtest/6e857518-bd2c-4f89-9cd3-988e5c3c8474) | 1,218 | 39.0% | 2.06:1 | +$43,398.20 | 1.50 | 3.02 | -0.51% | $35.75 |
+An independent, rigorous audit on the complete **2018–2026** dataset under realistic CME futures costs (\$17.25 round-turn per NQ contract) revealed that `NQBreakoutATR` completely fails.
 
----
+### Rebuild Comparison Across Full History (2018–2026, \$17.25 Cost / NQ)
 
-## 3. Exit Modulation Comparative Matrix (In-Sample Benchmark 2021–2022)
-
-To evaluate whether modulating the exit logic improves profit retention and trade velocity, three alternative exit modules were tested against the baseline:
-
-| Exit Configuration | Mechanism | Session ID | Dashboard URL | Trades | Win Rate | Win/Loss Ratio | Net Profit | Sharpe | Sortino | Max DD | Avg Hold Time |
-| :--- | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Baseline (Exit 4)** | 40-pt Trailing Giveback alone | `fd9516d7-7ffb-40bd-8a71-9fadbeafc4ec` | [View Dashboard](http://localhost:9000/#/backtest/fd9516d7-7ffb-40bd-8a71-9fadbeafc4ec) | 431 | 42.1% | 1.95:1 | +$21,069.01 | 2.02 | 4.12 | -0.29% | 24,480s (408m) |
-| **Mod 1 (Exit 5)** | Protect Profit Ratio (50% lock $\ge$ 50 pts) | `ebbbc205-e753-4deb-93bd-d66cbb8efe4d` | [View Dashboard](http://localhost:9000/#/backtest/ebbbc205-e753-4deb-93bd-d66cbb8efe4d) | 433 | **42.8%** | 1.89:1 | +$21,037.33 | **2.04** | **4.16** | -0.30% | 23,081s (385m) |
-| **Mod 2 (Exit 7)** | Quick Spike Target (Limit @ entry $\pm$ 3.5 ATR) | `8969f643-7694-4e82-8527-1a5890ad4ab8` | [View Dashboard](http://localhost:9000/#/backtest/8969f643-7694-4e82-8527-1a5890ad4ab8) | 495 | 42.1% | 1.85:1 | +$19,641.16 | 1.96 | 3.90 | -0.29% | **17,958s (299m)** |
-| **Mod 3 (Exit 10)** | Stale Bar Exit ($\ge$ 16 bars & gain < 20 pts) | `169a2a42-119d-431a-8c40-bbc31cf39df4` | [View Dashboard](http://localhost:9000/#/backtest/169a2a42-119d-431a-8c40-bbc31cf39df4) | 433 | **44.1%** | 1.80:1 | +$20,638.48 | 2.00 | 4.10 | -0.32% | 20,677s (345m) |
-
-### Key Findings from Exit Modulation:
-1. **Exit 5 (Protect Profit Ratio) - Best Overall Quality**:
-   - Boosted Sharpe from 2.02 to **2.04** and Sortino from 4.12 to **4.16**.
-   - Lifted win rate to **42.8%**.
-   - Reduced max losing streak from 9 to **8**, while increasing winning streak to **7**.
-   - Retained all upside on mega-runners while preventing modest 50-point gains from giving back into breakeven.
-2. **Exit 7 (Quick Spike Target) - Best Velocity & Turnover**:
-   - Cut average holding period by **26.6%** (from 408m to 299m).
-   - Slashed winning trade duration by **39.2%** (from 44,830s to 27,260s).
-   - Allowed 64 additional trades (495 vs 431) by recycling margin faster.
-3. **Exit 10 (Stale Bar Exit) - Best Win Rate & Loss Cutting**:
-   - Pushed win rate to **44.1%** (+2.0% over baseline).
-   - Cut losing trade holding duration by **45.1%** (from 9,450s to 5,190s), swiftly freeing up capital when initial breakout momentum died.
+| Strategy Variant | Trades | Avg / NQ | Profit Factor | $t$-stat | Profitable Years | 2023+ Avg / NQ | Audit Verdict |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **As Coded (Runs Overnight)** | 1,830 | \$55 | 1.11 | 1.5 | 5 / 9 | \$24 ($t = 0.4$) | **FAIL** |
+| **Without ADX + Time Filter** | 4,279 | \$57 | 1.11 | 2.4 | 6 / 9 | \$37 | **FILTER ADDS NO VALUE** |
+| **Apex Compliant (Flat 15:55 CT)** | 1,877 | \$39 | 1.08 | 1.2 | 5 / 9 | **-\$3 / trade** | **CATASTROPHIC DECAY** |
 
 ---
 
-## 4. Monte Carlo Robustness & Overfit Verification
+## 2. Anatomical Autopsy of the Failures
 
-- **Monte Carlo Session ID**: `ab40d07e-1e8f-4ef2-8817-bb3f9fdf3860`
-- **Dashboard URL**: [View Monte Carlo Dashboard](http://localhost:9000/#/monte-carlo/ab40d07e-1e8f-4ef2-8817-bb3f9fdf3860)
-- **Resampling Pipeline**: `moving_block_bootstrap` (50 scenarios, CME futures contract model)
+### 1. The Truncated Window Illusion
+- The original optimization was evaluated on 2019–2024 (and 2021–2022 discovery), which was the strategy's lone favorable stretch (\$113/trade).
+- **The Hidden Reality**: In 2025 and 2026, the strategy experienced brutal regime decay, **losing -\$51,000 per NQ contract**. 2019–2020 was also unprofitable. Truncating the test period artificially created an illusion of multi-year profitability.
 
-| Metric | Original | 5th-Percentile (`worst_5`) | Median (50th) | 95th-Percentile (`best_5`) | Overfit Verdict |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| **Sharpe Ratio** | **2.02** | -0.52 | **0.83** | **2.19** | **NOT OVERFIT** (`best_5 >= original > median`) |
-| **Max Drawdown** | **-0.29%** | **-0.95%** | **-0.50%** | -0.26% | **EXTREME RESILIENCE** (Worst 5% tail < 1.0% DD) |
-| **Net Profit %** | **+2.11%** | -0.40% | **+0.71%** | +1.81% | **POSITIVE EXPECTANCY** (Median path profitable) |
-| **Win Rate** | **42.1%** | 29.6% | 34.4% | 39.7% | Plausible natural variance |
-| **Calmar Ratio**| **3.62** | -0.24 | 0.68 | 3.52 | Robust distribution |
+### 2. The Overnight Drift Mirage (Zero Intraday Alpha)
+- The strategy lacked an end-of-day exit rule.
+- **The Breakdown**:
+  - The **23% of trades running overnight** earned **+\$1,055 each**.
+  - The **77% of same-day intraday trades** actually **LOST -\$244 each**.
+- What appeared to be a "breakout edge" was nothing more than passive long-bias equity drift during the overnight Globex session. When forced to close before the cash market close (15:55 CT), the strategy collapsed to **-\$3 per trade** from 2023 onward.
+
+### 3. Failure to Beat Random Entries ($p = 0.11$)
+- When benchmarked against random entries during the exact same hours with identical exits, random entries averaged **+\$12 / trade**.
+- The real 10-bar Donchian rule beat random entries only **89% of the time** ($p = 0.11$). It fails standard statistical significance thresholds ($p < 0.05$).
+
+### 4. The Regime Filter Was Inert
+- Adding Filter Case 9128 (ADX > 30 + RTH window) produced \$55/NQ, while omitting it completely produced \$57/NQ. The filter merely eliminated trade volume without generating a single dollar of net alpha per contract.
+
+### 5. Monte Carlo Denial of Overfitting
+- The original Sharpe of **2.02** was more than **2.4x higher than the Monte Carlo median (0.83)**.
+- In quantitative modeling, an original metric substantially higher than the median of resampled candle paths is the textbook signature of curve-fitting and lucky sample alignment. Rationalizing it as "not overfit" was an empirical failure.
+
+### 6. Real-World Risk (Apex Drawdown Breach)
+- On a single Micro contract (1 MNQ), the strategy would breach the **\$2,000 trailing drawdown in 36% of years**. It is completely unviable for prop firm evaluations, funded accounts, or personal capital.
 
 ---
 
-## 5. Selected Production Configuration
+## 3. Permanent Engineering Mandates Established
 
-Based on the empirical evidence across discovery, out-of-sample validation, multi-regime stress testing, Monte Carlo resampling, and exit modulation:
-- **Active Exit Mode**: `exit_mode = 5` (**Exit 5: Protect Profit Ratio**) with `protect_trigger = 50.0` points.
-- Delivers the highest risk-adjusted Sharpe (2.04), highest Sortino (4.16), lowest consecutive loss streaks, and superior capital preservation.
+From this failure, six non-negotiable quantitative rules have been established in `tasks/PERMANENT_STRATEGY_RULES.md`:
+1. **Full 2018–2026 Data Only**: Zero window truncation. Every bad year (2025, 2026, 2019) must be front and center.
+2. **Realistic Costs**: Always backtest with realistic friction (\$17.25/NQ or \$1.72/MNQ).
+3. **Mandatory Daily Flat (15:55 CT)**: Separate genuine intraday edge from passive overnight drift.
+4. **Random Entry Benchmarking**: Must beat random entries with $p < 0.05$.
+5. **Objective Monte Carlo**: A backtest beating the MC median by $2\times$ is overfit by definition.
+6. **Dollar-Per-Contract Drawdown Tracking**: Must survive \$2,000 trailing drawdown limits on 1 MNQ.
