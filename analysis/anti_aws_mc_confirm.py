@@ -24,6 +24,6 @@ if __name__ == "__main__":
         s = pd.Series(v.values, index=d.values); yr = s.groupby(s.index.year).sum(); a, b = s[s.index < "2023"], s[s.index >= "2023"]
         print(f"   {nm:<16} n {len(s)} ${s.mean():.0f} t {RS.tstat(s):.2f} yrs+ {(yr > 0).sum()}/{len(yr)} | 2018-22 ${a.mean():.0f} (t {RS.tstat(a):.2f}) 2023+ ${b.mean():.0f} (t {RS.tstat(b):.2f})")
     print("   MC by year:", mc.groupby(mc.date.dt.year).net.sum().round(0).to_dict())
-    idx = pd.bdate_range("2018-01-01", "2026-10-16"); dd = pd.Series(0.0, index=idx); g = mc.groupby("date").net.sum(); dd.loc[g.index] = g.values
+    idx = pd.bdate_range("2018-01-01", "2026-10-20"); dd = pd.Series(0.0, index=idx); g = mc.groupby("date").net.sum(); dd.loc[g.index] = g.values
     print("  ", M.table({"MC short": (dd, mc.net)}).replace("\n", "\n   "))
     print(MC.report(mc.net.to_numpy(), dd.to_numpy(), size=0.1, label="AWS 1 MNQ"))
