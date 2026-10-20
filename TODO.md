@@ -25,7 +25,7 @@ bottom). Times are Central (CT).
 - [ ] **Fri 10/23 (and every Friday): export the weekly MultiCharts reports into `live/`** and tell Claude (it runs
   `analysis/live_vs_backtest.py --all live/` and the drift alarm).
 - [ ] When account #1 passes ($53,000): turn auto-trading off on that account.
-- [ ] **Now: Rithmic copier off (or #2 removed as follower)** while set 2 auto-trades, or #2 trades double size. Copier
+- [x] (2026-10-20, user: done) **Now: Rithmic copier off (or #2 removed as follower)** while set 2 auto-trades, or #2 trades double size. Copier
   waits until several funded accounts (2026-10-20).
 - [ ] **~Mon 10/27: account #3** (150K No-Activation, $249).
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
@@ -83,25 +83,25 @@ after 15:59 CT, never with a position open.
 - [x] (2026-10-19) Memory check: MultiCharts with the 4 live charts uses ~290 MB in total (app 100 MB + background
       processes ~190 MB); ~30 charts later ≈ 1.5-3 GB + 2 GB Windows. QuantVPS tiers (user's screenshot 2026-10-19): Starter
       $29.99 (2 cores, 4 GB), Lite $59.99 (4 cores, 8 GB), Pro $99.99 (6 cores, 16 GB); annual -20%.
-- [ ] Buy **VPS Lite** (Chicago, Windows; annual if sure). Starter's 4 GB / 2 cores is too tight once accounts and the
+- [x] (2026-10-20, user: done) Buy **VPS Lite** (Chicago, Windows; annual if sure). Starter's 4 GB / 2 cores is too tight once accounts and the
       copier are added; move to Pro only if startup / reconnects get slow.
-- [ ] Ask Apex / Rithmic whether one login may be connected from two machines at once; plan for live on the VPS ONLY.
-- [ ] On the home PC: export the MultiCharts workspace(s) and the compiled signals (VB, ONB ADX30, EOS, Target Guard,
+- [x] (2026-10-20, user: done) Ask Apex / Rithmic whether one login may be connected from two machines at once; plan for live on the VPS ONLY.
+- [x] (2026-10-20, user: done) On the home PC: export the MultiCharts workspace(s) and the compiled signals (VB, ONB ADX30, EOS, Target Guard,
       Stop Guard, Bridge Monday) and note every chart's settings: inputs (VB 8, ONB `RiskPerTrade` 1100 / ADX 30 /
       StopAtrPct 0.25, EOS $500, Bridge 2 MNQ), bar size, session template (CME 24h), Exchange time zone, Bar Magnifier,
       Symbol Mapping `@MNQ -> MNQZ6`, Target Guard `StartBalance` / `TargetBalance` 53050.
-- [ ] On the VPS: install MultiCharts + the data feed + Rithmic connection, import the workspace and signals, check every
+- [x] (2026-10-20, user: done) On the VPS: install MultiCharts + the data feed + Rithmic connection, import the workspace and signals, check every
       input against the list above.
 - [x] (2026-10-19) Same-result check: ONB on the VPS vs the PC report, Jan-Oct 2026: 77/77 trade days, 75 identical,
       2 differ by 1 tick (data). The others are assumed the same (user: VPS isn't for backtesting); just check their inputs
       and that the last few days' trade arrows on each chart look like the PC's.
-- [ ] VPS Windows: updates paused during market hours (set active hours / pause), sleep and screen-off disabled,
+- [x] (2026-10-20, user: done) VPS Windows: updates paused during market hours (set active hours / pause), sleep and screen-off disabled,
       MultiCharts set to start with Windows if the VPS restarts.
-- [ ] Switch over: turn auto-trading OFF on the PC charts, ON on the VPS charts (after 15:59 CT or on a weekend);
+- [x] (2026-10-20, user: done) Switch over: turn auto-trading OFF on the PC charts, ON on the VPS charts (after 15:59 CT or on a weekend);
       watch the first live trade on the VPS (fill shows in Rithmic / Apex).
 - [ ] Reports: each Friday export the weekly MultiCharts reports on the VPS and copy them to the PC (remote-desktop
       copy / paste) into `C:\TradingVault\live\` before 16:47 CT (or later: git on the VPS exporting straight into `live\`).
-- [ ] Keep the PC's MultiCharts for backtests only, logged in with data only (no live trading login), so it can't
+- [x] (2026-10-20, user: done) Keep the PC's MultiCharts for backtests only, logged in with data only (no live trading login), so it can't
       kick the VPS off Rithmic.
 
 ## Trade logger + auto journal (2026-10-19)
