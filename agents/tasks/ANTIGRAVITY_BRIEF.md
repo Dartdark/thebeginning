@@ -56,6 +56,13 @@ Sizes are set by a cushion rule: full size only with $1,500+ above the trailing 
 **What they have in common:** most are scheduled or forced flows (option expirations, rebalancing, payroll releases,
 weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail on NQ after costs.
 
+## Your two roles (user's decision, 2026-10-20)
+
+1. **Strategy builder (default):** you know the plan (below) and aim at its gaps. Claude rebuilds and checks everything
+   you build before the user sees a verdict.
+2. **Blind checker (only when a task says 'blind check'):** start a fresh conversation, read only the task text, and do
+   not open `plan_daily_pnl.csv`, results, reports or Claude's scripts for that rule.
+
 ## Building NEW strategies: aim at the gaps in the plan (added 2026-10-20)
 
 All 8 blind checks have passed, so the plan's results are no longer hidden from you. A new strategy is only useful if it

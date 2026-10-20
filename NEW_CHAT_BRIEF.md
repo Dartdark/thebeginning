@@ -56,6 +56,10 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **Antigravity's role (user, 2026-10-20): strategy builder by default** (its brief now shows the plan's hours and
+  `agents/tasks/plan_daily_pnl.csv` so it aims at gaps); blind checker only in a fresh conversation with task text only.
+  Its strategies today: NQBreakoutATR F, NQIntradayMR F, NQIBBreakout C (overlaps VB). Each mistake caught is written into
+  its rules (full 2018-26, costs, flat, random entries, t >= 2.5 on 2018-22 + positive 2023-26, per-contract $).
 - **Antigravity's NQBreakoutATR (its first block-built strategy, 2026-10-20): F.** Our rebuild 2018-26: $55 per NQ, t 1.5,
   5/9 years, 2025-26 −$51k, random-entry p 0.11; its report used 2019-24 only; the filter adds nothing; profit = overnight holds.
 - **Relative Strength NQ / ES (user's new strategy, 2026-10-20): B, checker PASS WITH CONCERNS.** Rebuild t 4.0, $306 per NQ,
