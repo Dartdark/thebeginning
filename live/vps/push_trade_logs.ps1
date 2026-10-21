@@ -16,7 +16,7 @@ if ($LASTEXITCODE -ne 0) {
     schtasks /Create /TN "VpsHealthOpen" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 08:15 /TR "powershell -ExecutionPolicy Bypass -File C:\TradingRepo\live\vps\push_trade_logs.ps1 -Mode open" /F | Out-Null
 }
 
-New-Item -ItemType Directory -Force "live\\health" | Out-Null
+New-Item -ItemType Directory -Force "live\health" | Out-Null
 schtasks /Query /TN "VpsWatchdog" 2>$null | Out-Null
 if ($LASTEXITCODE -ne 0) {
     schtasks /Create /TN "VpsWatchdog" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 08:15 /RI 5 /DU 07:00 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\watchdog.ps1" /F | Out-Null
