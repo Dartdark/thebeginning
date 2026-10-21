@@ -25,8 +25,19 @@ $tz = (Get-TimeZone).Id
 $today = Join-Path $Logs "$day.csv"
 $rows = 0; if (Test-Path $today) { $rows = @(Get-Content $today).Count }
 $errs = 0; if (Test-Path "$Logs\push_errors.txt") { $errs = @(Get-Content "$Logs\push_errors.txt").Count }
+# rejected orders today: scan MultiCharts' own log files (TS Support folders) for 'Rejected' lines written today
+# (catches Symbol Mapping errors like 'Invalid Market order parameters ... @MNQ.CME', Apex locks, wrong accounts).
+$rej = 0; $rejmsg = ""
+$roots = @("$env:LOCALAPPDATA\TS Support", "$env:APPDATA\TS Support", "C:\ProgramData\TS Support") | Where-Object { Test-Path $_ }
+foreach ($r in $roots) {
+    Get-ChildItem $r -Recurse -File -Include *.log, *.txt -ErrorAction SilentlyContinue |
+        Where-Object { $_.LastWriteTime.Date -eq (Get-Date).Date -and $_.Length -lt 200MB } | ForEach-Object {
+            $hits = Select-String -Path $_.FullName -Pattern "Rejected|Invalid .* order|not found|done for day" -SimpleMatch:$false -ErrorAction SilentlyContinue
+            if ($hits) { $rej += @($hits).Count; $rejmsg = ($hits[-1].Line -replace ',', ';' -replace '\s+', ' ').Substring(0, [math]::Min(160, $hits[-1].Line.Length)) }
+        }
+}
 New-Item -ItemType Directory -Force "live\health" | Out-Null
-$line = "$Mode,$(Get-Date -Format 'yyyy-MM-dd HH:mm'),mc_processes=$mc,disk_free_gb=$disk,last_boot=$boot,tz=$tz,log_rows_today=$rows,push_errors=$errs"
+$line = "$Mode,$(Get-Date -Format 'yyyy-MM-dd HH:mm'),mc_processes=$mc,disk_free_gb=$disk,last_boot=$boot,tz=$tz,log_rows_today=$rows,push_errors=$errs,rejected_today=$rej,last_reject=$rejmsg"
 Add-Content "live\health\$day.csv" $line
 
 New-Item -ItemType Directory -Force "live\trades" | Out-Null

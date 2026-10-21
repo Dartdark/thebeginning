@@ -40,6 +40,10 @@ def check(day):
                     out.append(f"- **STALE {tag}**: a {gap}-minute gap in its heartbeat between 08:30 and 15:00 CT (frozen chart or feed?).")
     elif day.weekday() < 5:
         out.append("- No trade-log file for today on the VPS push (logger, C:\\TradingLogs or the 16:10 push task?).")
+    # contract roll weeks: the mapping must move to the next contract (MULTICHARTS_PITFALLS.md roll checklist)
+    if day.month in (3, 6, 9, 12) and 4 <= day.day <= 14:
+        nxt = {3: "M", 6: "U", 9: "Z", 12: "H"}[day.month]; yr = (day.year + (1 if day.month == 12 else 0)) % 10
+        out.append(f"- Roll week: by Thursday move Symbol Mapping @MNQ (and @MES) to the {nxt}{yr} contract (e.g. MNQ{nxt}{yr}) after the close.")
     h = f"live/health/{d}.csv"
     if os.path.exists(h):
         rows = [l.strip().split(",") for l in open(h) if l.strip()]
@@ -49,6 +53,9 @@ def check(day):
             if kv.get("mc_processes", "1") == "0": out.append(f"- **VPS ({r[0]} {r[1]}): MultiCharts not running.**")
             if float(kv.get("disk_free_gb", "99")) < 5: out.append(f"- VPS ({r[0]}): only {kv['disk_free_gb']} GB free on C:.")
             if kv.get("push_errors", "0") not in ("0", ""): out.append(f"- VPS: {kv['push_errors']} lines in push_errors.txt.")
+            if kv.get("rejected_today", "0") not in ("0", ""):
+                m = kv.get("last_reject", ""); hint = " Looks like Symbol Mapping (order sent as @MNQ): fix it in File > Broker Profiles > Symbol Mapping." if ("@MNQ" in m or "@MES" in m or "Invalid" in m) else ""
+                out.append(f"- **REJECTED ORDERS ({r[0]}): {kv['rejected_today']} rejection lines in MultiCharts' logs today**, last: `{m}`.{hint}")
         if day.weekday() < 5 and "open" not in modes: out.append("- VPS morning check (08:15) did not report today.")
     elif day.weekday() < 5:
         out.append("- No VPS health line today (the updated push script installs itself at its next 16:10 run).")
