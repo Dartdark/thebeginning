@@ -1,0 +1,19 @@
+id,hypothesis_name,asset,economic_mechanism,declared_direction,is_window,is_t_stat,oos_window,oos_t_stat,status,failure_reason_or_verdict,date_logged
+HYP-001,CL_Sunday_Gap_Fade,CL,Weekend inventory imbalance / Sunday reopen liquidity fade,Fade Gap (Long/Short),2018-2022,1.90,2023-2026,2.10,PASSED_DEPLOYED,Deployed at 2 MCL in 50K/150K plans,2026-10-12
+HYP-002,Vault_Break,NQ,Breakout above midnight VWAP noise band during US session,Long,2018-2022,3.80,2023-2026,3.20,PASSED_DEPLOYED,Deployed at 3 MNQ / 1 MNQ single-print flag,2026-10-12
+HYP-003,Overnight_Bias_ADX30,NQ,Open position in overnight range with high trend strength,Directional Break,2018-2022,3.20,2023-2026,2.90,PASSED_DEPLOYED,Evaluation combine plan,2026-10-12
+HYP-004,Overnight_Bias_ML,NQ,Overnight range distribution filtered by ridge regression skip score,Directional Break,2018-2022,3.90,2023-2026,3.40,PASSED_DEPLOYED,Deployed at $400 risk in funded plan,2026-10-12
+HYP-005,Monday_Long,NQ,Post-weekend equity inflow and positioning re-establishment,Long,2018-2022,2.80,2023-2026,2.50,PASSED_DEPLOYED,Deployed at 1 MNQ in funded plan,2026-10-12
+HYP-006,Expiration_Open_Short,NQ,Monthly OPEX Friday options dealer delta hedging unwind,Short,2018-2022,3.10,2023-2026,2.70,PASSED_DEPLOYED,Deployed at $700 risk in funded plan,2026-10-12
+HYP-007,Late_Day_Flow,NQ,End-of-day institutional index rebalancing and settlement flows,Directional Follow,2018-2022,2.90,2023-2026,2.60,PASSED_DEPLOYED,Deployed at 2 MNQ in funded plan,2026-10-12
+HYP-008,NFP_Fade,NQ,Non-Farm Payrolls initial reaction liquidity overshoot fade,Fade Reaction,2018-2022,2.60,2023-2026,2.40,PASSED_DEPLOYED,Deployed at $500 risk in funded plan,2026-10-12
+HYP-009,NQ_Breakout_ATR,NQ,Session ATR breakout without intraday flattening,Directional Break,2018-2022,1.40,2023-2026,-0.80,FAILED_RANK_F,Unviable under friction; disguised by overnight drift,2026-10-16
+HYP-010,ES_MOC_Follow,ES,Market-on-Close institutional imbalance continuation,Directional Follow,2018-2022,1.60,2023-2026,0.70,FAILED_RANK_D,Fails t >= 2.0 gate after friction,2026-10-17
+HYP-011,NQ_Turnaround_Tuesday,NQ,Weekly institutional dip buying following Monday weakness,Long,2018-2022,1.10,2023-2026,0.40,FAILED_RANK_F,Statistically insignificant after friction,2026-10-20
+HYP-012,NQ_Euro_Open,NQ,Frankfurt/London cash open liquidity push,Breakout,2018-2022,1.20,2023-2026,-0.30,FAILED_RANK_F,Negative expectancy on NQ holdout,2026-10-20
+HYP-013,Midday_YM_ES,YM/ES,Midday European close rebalancing divergence,Pair Divergence,2018-2022,1.30,2023-2026,0.50,FAILED_RANK_F,Eaten by commissions and wide slippage,2026-10-20
+HYP-014,CL_EIA_Fade,CL,Crude Oil Inventory report release fade,Fade Spike,2018-2022,-2.50,2023-2026,-2.10,FAILED_RANK_F,Loses -$65/trade after $27.25 friction,2026-10-20
+HYP-015,Gold_Asian_Breakout,GC,Asian session range expansion momentum into London open,Breakout Long/Short,2018-2022,0.74,2023-2026,Untouched,FAILED_RANK_F,Failed In-Sample gate (t=0.74 PF 1.09 3/5 yrs neg),2026-10-20
+HYP-016,NQ_ES_Cross_Flow,NQ/ES,Cross-index momentum lead-lag divergence,Spread Follow,2018-2022,1.90,2023-2026,0.20,FAILED_RANK_D,Holdout decay (t=0.20); degrades portfolio Sharpe and adds $16k DD,2026-10-20
+HYP-017,NQ_Relative_Strength_ES_Aligned,NQ/ES,Beta-neutral EWMA relative strength with ES-down short filter,Long and Short,2018-2026,4.08,2023-2026,0.90 (shorts),SHELVED_WATCHLIST_25,Standalone t=4.08 but spanned by portfolio (+198/yr funded gain),2026-10-20
+HYP-018,Sunday_Reopen_First_Minute_Push,NQ,Sunday 18:00 ET initial order-book liquidity vacuum push,Directional Push,2018-2026,2.60,2023-2026,2.40,CANDIDATE_WATCHLIST_22,173 trades 61% win rate 9/9 yrs pos; on deck for research,2026-10-20

@@ -56,3 +56,38 @@ These rules are mandatory for all strategy development, evaluation, and reportin
   - **In-Sample Candidate Gate**: A strategy is **ONLY a candidate if $t \ge 2.5$** (target $t \ge 3.6$, $p < 0.01$) on 2018–2022 data under real friction.
   - **Out-of-Sample (OOS) Validation**: **2023-01-01 through 2026-10-09**. Strictly locked. Tested once without changes. The strategy must remain profitable on 2023–2026.
 - **Hard Stop Decision Rule**: If $t < 2.5$ on 2018–2022, OR if performance turns negative on 2023–2026 out-of-sample, the strategy **FAILS IMMEDIATELY and must be reported as Ranked F**. No rationalizations, no "viable seed", and no passing grade allowed.
+
+---
+
+## 8. Observable Search Denominator & Multiplicity Penalty (SignalLab Standard)
+- **Mandate**: Every tested strategy, variation, parameter sweep, or filter combination—whether successful, shelved, or failed—must be logged in the centralized hypothesis registry (`tasks/SEARCH_DENOMINATOR_REGISTRY.csv`).
+- **Search-Adjusted $t$-Hurdle**:
+  - The evidentiary bar increases with the number of trials ($N$) evaluated:
+    - $N = 1$ (single pre-registered thesis): $t \ge 2.50$ ($p \le 0.01$).
+    - $N \ge 10$ (variant / sweep search): $t \ge 3.00$ (Harvey minimum Bayes factor bound).
+    - $N \ge 100$: $t \ge 3.50$ (Harvey–Liu bootstrap / Bonferroni standard).
+  - Reporting an edge from trial #15 out of 20 without adjusting the significance threshold for the 19 unselected variations is strictly prohibited.
+
+---
+
+## 9. Pre-Evaluation Economic Mechanism & Critic Gate
+- **Mandate**: Prior to backtesting on historical price series, the researcher must declare the hypothesis triplet: $h_j = (m_j, e_j, d_j)$:
+  1. **Economic Mechanism ($m_j$)**: A structural market justification (e.g., forced institutional flow, index rebalance, retail overnight imbalance, dealer hedging unwind). Pure statistical data patterns ("EMA 9 crossed EMA 21") without an economic mechanism are rejected.
+  2. **Executable Expression ($e_j$)**: Explicit, unambiguous mathematical rule and entry/exit condition.
+  3. **Declared Return Direction ($d_j \in \{-1, +1\}$)**: Must be specified *before* running data. Inverting the trade direction after seeing an unfavorable backtest is strictly prohibited.
+- **Independent Critic Gate**: Before testing, an independent review (Claude or Antigravity) audits the mechanism for construct validity, measurement leakage, and redundancy against existing strategies. Flagged proposals must be revised before data execution.
+
+---
+
+## 10. Portfolio Spanning & Temporal Non-Decay Gate (The Institutional Funnel)
+- **Mandate**: High standalone $t$-statistic is a necessary condition, but never sufficient. A strategy must survive the full institutional attrition funnel:
+  1. **Temporal Stability & Non-Decay**: Performance must hold across multi-year sub-windows (e.g., 2018–2020, 2021–2023, 2024–2026). Rolling performance slope must not be negative ($t_{decay} > -1.96$).
+  2. **Portfolio Spanning**: The strategy must provide incremental conditional alpha beyond the deployed live portfolio (`Vault Break`, `Overnight Bias`, `Relative Strength`, `Late-Day Flow`, `EOS`, `Monday Long`, `CL Gap Fade`). 
+  3. **Funded Plan Bench**: Must be evaluated via 1,000 resampled iterations on the funded account simulator. If adding the strategy does not improve payout velocity or reduce blown-account probability without increasing peak-to-valley drawdown, it remains on the Watchlist and is NOT added to live charts.
+
+---
+
+## 11. Agent-Native Audit Trail with Minute-Level Timestamps
+- **Mandate**: To ensure complete cross-agent auditability, every strategy evaluation must output a standardized `trades.csv` containing minute-level precision:
+  - Required columns: `date, year, entry_time, exit_time, side, entry_px, exit_px, pts, pnl, reason`.
+  - Timestamps must allow independent models and auditors (Claude/MultiCharts) to verify every entry, stop, and exit in minutes without ambiguity or guesswork.
