@@ -21,10 +21,9 @@ When trading live capital on prop accounts (e.g., **Apex Trader Funding $2,000 t
 | Strategy | Asset / TF | Classification | Core Driver | Mechanics Guide |
 |---|---|---|---|---|
 | **Vault Break** | NQ (30m) | Session Momentum Breakout | 10:00 CT institutional liquidity takeover above midnight VWAP + ATR volatility noise band. | [Vault Break Mechanics](file:///c:/Users/dmoto/jesse-bot/tasks/strategy_mechanics/vault_break_mechanics.md) |
-| **Overnight Bias (ADX30 & ML)** | NQ (15m) | Range Expansion / Breakout | Open position relative to overnight range + trend momentum filter (ADX > 30 / Ridge ML). | *Coming Soon* |
-| **Expiration Open Short (EOS)** | NQ (5m) | Calendar Institutional Flow | Monthly OPEX 3rd Friday options dealer delta-hedging unwind from 08:30 to 10:00 CT. | *Coming Soon* |
-| **Monday Long** | NQ (30m) | Weekly Capital Deployment | Post-weekend institutional capital inflow and equity positioning re-establishment. | *Coming Soon* |
-| **Late-Day Flow** | NQ (15m) | End-of-Day Settlement | Institutional 14:00–15:00 CT index rebalancing, MOC flows, and closing auction pressure. | *Coming Soon* |
-| **NFP Fade** | NQ (5m) | Macro Release Mean-Reversion | Fading pre-market liquidity overshoot on backward-looking labor employment data (07:30 CT). | *Coming Soon* |
-| **CL Sunday Gap Fade** | CL (5m) | Physical Commodity Reopen | Fading weekend commercial inventory mismatches on Globex 17:00 CT reopen. | *Coming Soon* |
-| **Sunday Reopen Push** | NQ/YM (1m) | Order-Book Vacuum Push | Exploiting the initial 60-second clearing burst through a thin Sunday 17:00:00 CT order book. | *Coming Soon* |
+| **Overnight Bias (ADX30 & ML)** | NQ (15m) | Range Expansion / Breakout | Open position relative to overnight range + trend momentum filter (ADX > 30 / Ridge ML). | [Overnight Bias Mechanics](file:///c:/Users/dmoto/jesse-bot/tasks/strategy_mechanics/overnight_bias_mechanics.md) |
+| **Expiration Open Short (EOS)** | NQ (5m) | Calendar Institutional Flow | Monthly OPEX 3rd Friday options dealer delta-hedging unwind from 08:30 to 10:00 CT. | [Expiration Open Short Mechanics](file:///c:/Users/dmoto/jesse-bot/tasks/strategy_mechanics/expiration_open_short_mechanics.md) |
+| **Monday Long** | NQ (5m) | Weekly Capital Deployment | Post-weekend institutional capital inflow and equity positioning re-establishment. | [Monday Long Mechanics](file:///c:/Users/dmoto/jesse-bot/tasks/strategy_mechanics/monday_long_mechanics.md) |
+| **Late-Day Flow** | NQ (5m) | End-of-Day Settlement | Institutional 14:00–14:30 CT index rebalancing, Leveraged ETF flows, and MOC pressure. | [Late-Day Flow Mechanics](file:///c:/Users/dmoto/jesse-bot/tasks/strategy_mechanics/late_day_flow_mechanics.md) |
+| **NFP Fade** | NQ (5m) | Macro Release Mean-Reversion | Fading pre-market liquidity overshoot on backward-looking labor employment data (07:30 CT). | [NFP Fade Mechanics](file:///c:/Users/dmoto/jesse-bot/tasks/strategy_mechanics/nfp_fade_mechanics.md) |
+| **CL Sunday Gap Fade** | CL (5m) | Physical Commodity Reopen | Fading weekend commercial inventory mismatches on Globex 17:00 CT reopen. | [CL Sunday Gap Fade Mechanics](file:///c:/Users/dmoto/jesse-bot/tasks/strategy_mechanics/cl_sunday_gap_fade_mechanics.md) |
