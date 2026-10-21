@@ -111,7 +111,7 @@ after 15:59 CT, never with a position open.
 
 ## Automatic health checks (2026-10-21)
 
-- [ ] **One time, outside market hours:** paste the updated [Apex_Trade_Logger.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Trade_Logger.txt)
+- [x] (2026-10-21, user: done) **One time, outside market hours:** paste the updated [Apex_Trade_Logger.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Trade_Logger.txt)
   (Raw button) into the existing "Apex Trade Logger" signal on the VPS and compile. Everything else runs by itself.
 
 ## Later
