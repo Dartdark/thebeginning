@@ -154,3 +154,29 @@ The FINSABER study validated three quantitative selection and filtering mechanic
    $$\text{Selection Score}_i = \text{Sharpe}_i \times (1 - \bar{\rho}_i)$$
    where $\bar{\rho}_i$ is the candidate's average pairwise correlation to the universe.
    * **Diversification Gate**: If the average internal correlation of the active candidate set exceeds $0.70$, discard and apply a greedy correlation-minimization fallback (select top Sharpe, then iteratively add lowest-correlated assets). This mirrors our requirement that any new futures strategy must span the active portfolio rather than duplicate existing exposure.
+
+---
+
+## 8. Uncertainty Shocks, Long-Memory Volatility & Tail Risk (Jha, Shirvani, Rachev & Fabozzi, 2025)
+
+Empirical evidence from double-subordinated Normal Inverse Gaussian (NDIG) Lévy processes and ARFIMA-FIGARCH long-memory time series models (Journal of Risk & Financial Management, 2025) establishes core mathematical realities regarding volatility clustering and tail-risk measurement:
+
+### A. Uncertainty Shocks are Directionally i.i.d. White Noise
+* **No Directional Predictability in Volatility Shocks**:
+  * Simulating 10,000 NIG scenarios on ARFIMA-FIGARCH normal innovations derived from option-implied volatility revealed **zero serial correlation or predictable pattern** in risk-reward performance ratios.
+  * **Microstructure Driver**: While volatility clustering persists, the individual shock innovations ($\varepsilon_t$) are uncorrelated white noise. Attempting to trade or fade a volatility spike on the assumption of mechanical directional mean-reversion is statistically invalid unless an explicit structural clearing mechanism exists (e.g., NFP labor survey lag).
+
+### B. Hyperbolic Long Memory in Volatility Clustering ($d = 0.268$)
+* **Volatility Autocorrelation Does Not Decay Exponentially**:
+  * Standard GARCH and ARMA models impose fast exponential memory decay, severely underestimating the duration of market stress regimes.
+  * Real market volatility exhibits **long-range dependence (LRD)** with slow, hyperbolic decay, parameterized by fractional integration $d(m) = 0.268$ (mean) and $d(v) = 0.01$ (FIGARCH variance).
+  * **Trading Implication**: Once a macro shock or volatility explosion occurs (e.g., COVID March 2020, Fed 2022 rate hikes), downside tail risk and elevated Average Value-at-Risk ($AVaR$) remain elevated for months. Strategies operating during post-shock regimes must accommodate prolonged volatility clustering rather than assuming rapid reversion to historical baselines.
+
+### C. Axiomatic Tail-Risk Metrics for Prop Account Survival (STARR vs Sharpe)
+* **The Gaussian Fallacy in Prop Account Risk**:
+  * Traditional Sharpe ratio assumes thin-tailed, symmetric normal distributions and penalizes upside returns equally with downside volatility.
+  * For funded prop accounts governed by strict peak-to-valley limits ($2,000 trailing drawdown), account liquidation is driven entirely by left-tail Expected Shortfall ($AVaR_\gamma$).
+* **The Stable Tail Adjusted Return (STAR) Ratio**:
+  $$\text{STARR}_\gamma(X) = \frac{\mathbb{E}[X]^+}{AVaR_\gamma(X)^+} \quad \text{where } AVaR_\gamma(X) = \frac{1}{\gamma}\int_0^\gamma \text{VaR}_u(X) du$$
+  * **Axiomatic Integrity**: Fully satisfies all four performance axioms (Monotonicity, Quasi-concavity, Scale Invariance, Distribution-based). Quasi-concavity ensures that diversification is mathematically rewarded and risk concentration is penalized.
+  * Evaluates true excess return per unit of tail liquidation risk, providing a robust mathematical benchmark for strategies navigating trailing-drawdown thresholds.
