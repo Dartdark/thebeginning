@@ -23,11 +23,13 @@ All research adhered to strict institutional standards:
 
 ---
 
-## 2. Portfolio Optimization Scorecard
+## 2. Portfolio Optimization & New Strategy Scorecard
 
 | Strategy | Study ID | In-Sample Gate | Holdout Gate | Outcome | Key Metrics (Full Period 2018–2026, Full Friction) |
 |---|---|---|---|---|---|
-| **Vault Break** | `HYP-023` to `HYP-025` | **PASSED** ($t = 3.16$, DD -$1.7k) | **PASSED** ($t = 2.68$, DD -$4.6k) | **DEPLOYED (V3 Combined)** | **+$136,764 Net**, Win Rate **67.8%**, Expectancy **+$104.64/trade**, Max DD **$12,609.00** (-26.7%), $t = 4.09$ |
+| **Vault Break Combined** | `HYP-023` to `HYP-025` | **PASSED** ($t = 3.16$, DD -$1.7k) | **PASSED** ($t = 2.68$, DD -$4.6k) | **DEPLOYED (V3 Combined)** | **+$136,764 Net**, Win Rate **67.8%**, Expectancy **+$104.64/trade**, Max DD **$12,609.00** (-26.7%), $t = 4.09$ |
+| **Sunday Reopen Push** | `HYP-018` | **$t = 1.85 \text{ to } 2.14$** (Fails $t \ge 2.5$ gate) | **PASSED** (PF 2.05, 4/4 pos yrs) | **WATCHLIST #22** | **+$29,839 Net**, PF 2.12, 167 trades across 2018–2026, zero time overlap with weekday strategies. |
+| **Vault Break Short** | `HYP-019` / `HYP-020` | **PASSED** ($t = 3.11$) | **FAILED** (-$13k / -$36k DD) | **FAILED (Rank F)** | Demonstrates that NQ short regimes are structurally asymmetric; failed holdout replication. |
 | **Overnight Bias** | `HYP-026` | **FAILED** (All 4 variants worse) | **Untouched** | **BASE RETAINED** | Base retains **+$250k Net**, 9/9 positive years, $426.73/trade on cash open runners. |
 | **Late-Day Flow** | `HYP-027` | **FAILED** (All 4 variants worse) | **Untouched** | **BASE RETAINED** | Base retains **+$238/trade** on extended days; stretch caps filter out leveraged ETF rebalancing. |
 | **Monday Long** | `HYP-028` | **FAILED GATE** (V3 cut DD by -$5.1k but lower net) | **Untouched** | **BASE RETAINED** | Base retained undefeated; avoids bull-market dip-buy truncation. |
@@ -147,7 +149,36 @@ end;
 
 ---
 
-## 4. The 3 Control Studies: Why the Base Strategies Were Retained
+## 4. Brand New Standalone Strategy Created Today: `SundayReopenPush` (`HYP-018`)
+
+In addition to strategy optimizations, a brand new standalone strategy was coded, backtested, and audited today: **`SundayReopenPush`** (`strategies/SundayReopenPush/__init__.py`), targeting CME Globex Sunday 17:00 CT (18:00 ET) reopen order-flow imbalances.
+
+### A. The Core Economic Mechanism
+* Every Sunday at **17:00:00 CT (18:00 ET / 23:00 UTC)**, CME Globex futures reopen after a 48-hour weekend shutdown.
+* Over the weekend, retail orders, international macro news headlines, and geopolitical updates accumulate on brokerage order books.
+* When trading resumes at 17:00:00 CT, liquidity is exceptionally thin. The opening crossing orders create an initial 60-second momentum continuation in the direction of the weekend gap ($Open_{17:01} - Close_{\text{Friday}}$).
+* **The Strategy Rule**:
+  - Enter long if Sunday 17:00 CT opens $> +0.25$ pts above Friday close; enter short if Sunday 17:00 CT opens $< -0.25$ pts below Friday close.
+  - Skip roll weekends (4th–20th of March, June, September, December).
+  - Enter at 17:00:00 CT first print; **exit precisely 60 seconds later at 17:01:00 CT**.
+
+### B. Empirical Audit & Verification (167 Reopens, 2018–2026)
+* **Full Period Net Profit**: **+$29,839.00** on 1 NQ contract (after $24.50 round-turn friction).
+* **Profit Factor**: **2.12**.
+* **Win Rate**: **61.1%**.
+* **Holdout Validation (2023–2026)**: **+$27,309.00 net**, **4 / 4 positive years**, Profit Factor **2.05**.
+* **Zero Correlation**: Trades exclusively on Sunday evening before any weekday strategies turn on.
+* **Why it was designated WATCHLIST #22**: On YM (200 reopens), in-sample $t$-stat achieved $t = 1.85 \text{ to } 2.14$, which fell below the mandatory $t \ge 2.50$ candidate gate. Furthermore, **Variant 5 proved the entire edge evaporates after the first 60 seconds**: entering at 17:01:00 and exiting at 17:02:00 loses money. Thus, it is retained on the high-priority watchlist pending specialized low-latency order execution verification.
+
+### C. The Failed Experiment: `Vault Break Short` (`HYP-019` & `HYP-020`)
+Earlier today, we also tested creating a short-side mirror of Vault Break (`Vault Break Short`). 
+* In-Sample (2018–2022), filtering by an ES 08:30–09:00 drop seemed to pass the gate ($t = 3.11$, Net +$53k).
+* However, on 2023–2026 Holdout, it **completely collapsed**: losing **-$13,380.00** and inflicting a catastrophic **-$36,250.00 drawdown**.
+* **Microstructure Lesson**: Downside breaks in equity index futures behave with severe structural asymmetry compared to upside momentum. Downside spikes are volatile, mean-reverting, and subject to aggressive liquidity-injection squeezes. The short variant was permanently failed and rejected (Rank F).
+
+---
+
+## 5. The 3 Control Studies: Why the Base Strategies Were Retained
 
 ### Study A: Overnight Bias Time & Price (`HYP-026`)
 - **Hypothesis**: Delay entry from 08:30 CT to 09:00 CT to clear 10:00 ET macro releases, and require 1-bar VWAP confirmation.
@@ -179,7 +210,7 @@ end;
 
 ---
 
-## 5. The 4 Governing Microstructure Laws Discovered
+## 6. The 4 Governing Microstructure Laws Discovered
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
@@ -210,7 +241,7 @@ end;
 
 ---
 
-## 6. Directory of Key Files & Reports in the Repository
+## 7. Directory of Key Files & Reports in the Repository
 
 - **Pre-Registered Plans**:
   - Vault Break Window: [`tasks/vault_break_entry_window_plan.md`](file:///c:/Users/dmoto/jesse-bot/tasks/vault_break_entry_window_plan.md)
@@ -231,7 +262,7 @@ end;
 
 ---
 
-## 7. Adversarial Review Prompts for Claude
+## 8. Adversarial Review Prompts for Claude
 
 When presenting this dossier to Claude, prompt Claude with the following specific review questions:
 1. **Degrees of Freedom & Parameter Stability**: Does the combination of the 12:30 CT runway cutoff and the 0.50 ATR VWAP stretch guard in `NQVBCombined` exhibit parameter cliff risk, or is it structurally supported by market microstructure (14:30 flatten and VWAP mean-reversion)?
