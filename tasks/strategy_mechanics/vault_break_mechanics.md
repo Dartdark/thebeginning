@@ -123,17 +123,108 @@ To prevent repeated top-tick losses and protect capital, three quantitative safe
   * Late-day breakouts have only 60–90 minutes before the mandatory `14:30 CT` flatten, truncating upside targets while taking full stop losses.
   * Restricting the window to `[10:00, 12:30)` CT slashes peak drawdown by **\$3,222.20 (-18.9% less drawdown: \$13,811.80 vs \$17,034.00)**, raises win rate to **67.4%** (69.0% on holdout), and boosts Net P&L / Max DD to **10.05**.
 
-### Safeguard 2: Bullish Trigger Bar Confirmation (`b_close > b_open`)
-* **The Rule**: Require the 30-minute breakout bar to close green (`Close > Open`) in addition to being above noise and VWAP.
-* **Mechanism**: On an extended day, a candle can spike upward intrabar, reject resistance, and close near its low (leaving a massive upper wick), yet still be mathematically above `noise_level`. Requiring `Close > Open` eliminates entering on upper-wick exhaustion candles. In 2018–2022 testing, this boosted net profit to **\$84,640** (vs \$71,342 Base) and cut drawdowns.
+### Safeguard 2: VWAP Stretch Guard ($\text{Close} - \text{VWAP} \le 0.50 \times \text{ATR}$) (`NQVBVWAPStretch`)
+* **The Rule**: Cap the allowable entry distance: $\text{Close} - \text{VWAP} \le 0.50 \times \text{DailyATR}_{15}$.
+* **Mechanism**: When price surges $> 0.50$ ATR above VWAP, it enters a buying climax. A routine intraday mean-reversion retest to VWAP is 60–100 pts deep, which immediately clips the fixed 75-point stop. Entries taken when stretch $> 0.50$ ATR lost -$2,354 net across 8.8 years.
+* **The Empirical Proof**: Slashes peak drawdown by **$3,355.00 (-19.5%)** and lifts trade expectancy to **+$88.87/trade**.
 
-### Safeguard 3: The Single-Print Sizing Filter (Funded Plan Rule)
-* On days where the market open creates a clean, impulsive single-print profile (Market Profile definition), size at full contracts (e.g., 2–3 MNQ).
-* On overlapping, double-distribution, or rotational days, drop size to 1 MNQ.
+### Safeguard 3: The Deployed Champion — Vault Break Combined (`NQVBCombined`)
+* **The Rule**: Simultaneously enforce the `12:30 CT` runway cutoff AND the `0.50 ATR` VWAP stretch guard.
+* **Performance (2018–2026 Full Period, Full $27.25 RT Friction)**:
+  * Slashes Max Drawdown by **-$4,595.00 (-26.7%)** from $17,204 down to **$12,609.00**.
+  * Win Rate reaches **67.8%** (69.5% on holdout).
+  * Expectancy jumps to **+$104.64 per trade** (+$22.42/trade higher than Base).
+  * $t$-stat reaches **4.09**.
+  * On 2 MNQ micros, max drawdown drops to **$1,260.90**, well below the Apex $2,000 trailing limit.
 
 ---
 
-## 6. Prop Account Survival Protocol (Apex $2,000 Trailing Limit)
+## 6. MultiCharts PowerLanguage Production Code
+
+```pascal
+{========================================================================
+ Strategy: NQ Vault Break Combined (Window [10:00-12:30] + VWAP Stretch Guard)
+ Symbol: NQ / MNQ Futures (30-Minute Bars)
+ Account: Apex Trader Funding / Institutional Execution
+ Target: +40.0 pts Limit | Stop: -75.0 pts Stop | Flatten: 14:30 CT
+========================================================================}
+
+[IntrabarOrderGeneration = false]
+inputs:
+    AtrLength(15),             // Daily ATR length
+    NoiseMultiplier(0.30),     // ATR multiplier for midnight noise band
+    StretchCapMultiplier(0.50),// Max allowable distance from VWAP (in ATR units)
+    TargetPts(40.0),           // Profit target in NQ points ($800/contract)
+    StopPts(75.0),             // Stop loss in NQ points ($1,500/contract)
+    StartTimeCT(1000),         // Entry window start (10:00 CT)
+    EndTimeCT(1230),           // Entry window end (12:30 CT cutoff)
+    ExitTimeCT(1430),          // Daily mandatory flattening time (14:30 CT)
+    MaxEntriesPerDay(3);       // Max allowed entries per calendar day
+
+variables:
+    MidnightOpen(0),
+    NoiseLevel(0),
+    DailyVWAP(0),
+    CumVol(0),
+    CumPV(0),
+    TypicalPrice(0),
+    DayATR(0),
+    Stretch(0),
+    EntriesToday(0),
+    CurrentDateLocal(0);
+
+// Calculate Daily ATR-15
+DayATR = AvgTrueRange(AtrLength);
+
+// Reset daily accumulators at midnight (00:00 CT)
+if Date <> CurrentDateLocal or (Time = 0000 or (Time > 0000 and Time[1] >= 2300)) then begin
+    CurrentDateLocal = Date;
+    MidnightOpen = Open;
+    CumVol = 0;
+    CumPV = 0;
+    EntriesToday = 0;
+end;
+
+// Maintain Cumulative Midnight-Anchored VWAP
+TypicalPrice = (High + Low + Close) / 3.0;
+CumVol = CumVol + Volume;
+CumPV = CumPV + (TypicalPrice * Volume);
+
+if CumVol > 0 then
+    DailyVWAP = CumPV / CumVol
+else
+    DailyVWAP = Close;
+
+// Compute Volatility Noise Barrier & VWAP Stretch
+NoiseLevel = MidnightOpen + (NoiseMultiplier * DayATR);
+Stretch = Close - DailyVWAP;
+
+// Track trade count today
+if MarketPosition <> 0 and MarketPosition[1] = 0 then
+    EntriesToday = EntriesToday + 1;
+
+// Entry Condition: Window [10:00-12:30 CT] + Noise Breakout + Above VWAP + Stretch Guard
+if Time >= StartTimeCT and Time <= EndTimeCT and MarketPosition = 0 and EntriesToday < MaxEntriesPerDay then begin
+    if Close > NoiseLevel and Close > DailyVWAP and Stretch <= (StretchCapMultiplier * DayATR) then begin
+        Buy ("VB_Combined_Long") next bar at Market;
+    end;
+end;
+
+// Profit Target & Stop Loss Execution
+if MarketPosition > 0 then begin
+    Sell ("VB_Target") next bar at EntryPrice + TargetPts Limit;
+    Sell ("VB_StopLoss") next bar at EntryPrice - StopPts Stop;
+end;
+
+// Mandatory End-of-Day Flatten at 14:30 CT
+if Time >= ExitTimeCT and MarketPosition > 0 then begin
+    Sell ("VB_TimeExit") next bar at Market;
+end;
+```
+
+---
+
+## 7. Prop Account Survival Protocol (Apex $2,000 Trailing Limit)
 
 For automated traders operating on **Apex 50K accounts** with a **\$2,000 trailing drawdown**, a 3-loss cluster on full contract sizing is dangerous:
 * 3 losses at 75 pts on 1 full NQ = **-\$4,500** (liquidates a 50K account twice over).
@@ -144,4 +235,4 @@ For automated traders operating on **Apex 50K accounts** with a **\$2,000 traili
 2. **Half Size (1 MNQ)**: The instant equity dips within **$\$1,500$ of the trailing threshold**, immediately scale down to **1 MNQ micro**.
 3. **Recovery**: Remain at 1 MNQ until positive expectancy rebuilds the equity cushion beyond $+\$1,500$.
 
-By strictly applying the **`[10:00, 12:30)` entry cutoff** and the **Apex Cushion Rule**, a trader can comfortably endure the inevitable 3-to-4 trade top-tick clusters while harvesting the strategy's massive +$138k long-term alpha.
+By strictly applying the **`[10:00, 12:30)` entry cutoff**, the **`0.50 ATR` VWAP stretch guard**, and the **Apex Cushion Rule**, a trader can comfortably endure the inevitable 3-to-4 trade top-tick clusters while harvesting the strategy's massive +$136k long-term alpha.
