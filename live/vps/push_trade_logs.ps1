@@ -16,6 +16,14 @@ if ($LASTEXITCODE -ne 0) {
     schtasks /Create /TN "VpsHealthOpen" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 08:15 /TR "powershell -ExecutionPolicy Bypass -File C:\TradingRepo\live\vps\push_trade_logs.ps1 -Mode open" /F | Out-Null
 }
 
+New-Item -ItemType Directory -Force "live\\health" | Out-Null
+schtasks /Query /TN "VpsWatchdog" 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    schtasks /Create /TN "VpsWatchdog" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 08:15 /RI 5 /DU 07:00 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\watchdog.ps1" /F | Out-Null
+}
+# alerts the watchdog sent today go to the repo too (live/health/YYYYMMDD_alerts.txt)
+if (Test-Path "$Logs\alerts.txt") { Get-Content "$Logs\alerts.txt" | Where-Object { $_ -like "$((Get-Date).ToString('yyyy-MM-dd'))*" } | Set-Content "live\health\$(Get-Date -Format yyyyMMdd)_alerts.txt" }
+
 # health line
 $day = Get-Date -Format yyyyMMdd
 $mc = @(Get-Process -ErrorAction SilentlyContinue | Where-Object { $_.ProcessName -like "MultiCharts*" }).Count

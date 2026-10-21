@@ -59,6 +59,10 @@ def check(day):
         if day.weekday() < 5 and "open" not in modes: out.append("- VPS morning check (08:15) did not report today.")
     elif day.weekday() < 5:
         out.append("- No VPS health line today (the updated push script installs itself at its next 16:10 run).")
+    al = f"live/health/{d}_alerts.txt"
+    if os.path.exists(al):
+        for l in open(al):
+            if l.strip(): out.append(f"- Alarm sent during the day: {l.strip()}")
     return out
 
 

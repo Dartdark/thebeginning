@@ -29,3 +29,13 @@ note (`journal/daily/YYYY-MM-DD.md`, between the `auto-trades` markers). Errors 
 - **Check:** the 16:40 CT journal job (`analysis/journal_trades.py` -> `analysis/vps_health.py`) writes a 'Health (auto)'
   section into the day's journal note: MISMATCH (position differs from the broker), STALE (no heartbeat > 70 min in
   RTH), VPS problems. 'All clear' when nothing is wrong.
+
+## Live alarm to your phone (2026-10-21)
+
+`watchdog.ps1` runs every 5 minutes, weekdays 08:15-15:10 CT (task `VpsWatchdog`, installed automatically by the 16:10
+push script). It sends a phone alert through the free **ntfy** app the moment: MultiCharts isn't running, it has no live
+internet connections (Rithmic / feed down), a chart's heartbeat is > 45 min old, a chart's position differs from the
+broker's, or a NEW rejected order appears in MultiCharts' logs (Symbol Mapping hint included). Max one alert an hour per
+problem (every new rejection alerts). One-time: install **ntfy** on the phone and subscribe to topic
+`apex-alarm-6e531eb6db8e` (keep the name private: anyone with it can read the alerts). Alerts also land in
+`C:\TradingLogs\alerts.txt`, in `live/health/` and in the journal's Health section.
