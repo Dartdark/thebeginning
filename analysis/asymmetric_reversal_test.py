@@ -40,7 +40,7 @@ zr=N.res/N.res.rolling(60).std().shift(1)
 for lab,m in (("res < 0",N.res<0),("res > 0",N.res>0),("res z < -1",zr<-1),("res z > 1",zr>1)):
     rep(lab,m,"nxt_res")
 # Overnight Drift MC trades split by news / residual of the down day
-ond=load_mc(g,"Backtesting Strategy Performance Report OND v1.xlsx"); ond=ond[ond.j0<=jof(30)]
+ond=load_mc(g,"mc_reports/Backtesting Strategy Performance Report OND v1.xlsx"); ond=ond[ond.j0<=jof(30)]
 od=pd.DatetimeIndex(g.ts[ond.day.to_numpy()])
 prev={d:N.index[N.index<d][-1] if (N.index<d).any() else None for d in od}
 pv=pd.DatetimeIndex([prev[d] for d in od])

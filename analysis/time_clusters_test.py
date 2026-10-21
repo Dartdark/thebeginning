@@ -21,7 +21,7 @@ from bridge_monday_confirm import load_bridge_mc
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 PV, TICK, COST = 20.0, 0.25, 7.25
 SPLIT = pd.Timestamp("2023-01-01")
-ONB30 = "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"
+ONB30 = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"
 
 
 def trades(g):

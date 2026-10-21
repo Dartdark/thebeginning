@@ -94,7 +94,7 @@ Expects scratch pickles; kept as the record."""
 # print(f"VB current holdout Calmar {cur.hold_calmar:.2f} = better than {np.mean(vb.hold_calmar<cur.hold_calmar):.0%} of all 720 combinations; design Calmar rank {np.mean(vb.des_calmar<cur.des_calmar):.0%}")
 # tr=g.trading; D=len(tr); yr=pd.DatetimeIndex(g.ts[tr]).year; atr=g.daily_atr(15)
 # stop_mnq=lambda pct: pct*np.nan_to_num(atr[tr],nan=1e12)*2
-# VB=load_mc(g,"Backtesting Strategy Performance Report VB v1.xlsx")
+# VB=load_mc(g,"mc_reports/Backtesting Strategy Performance Report VB v1.xlsx")
 # w,r=paths(g,with_slippage(VB)); VBw,VBc=w[tr]/10,r[tr]/10
 # variants={"current (1/3, ADX 20, 0.30 ATR, 3R)":dict(frac=1/3,adx_min=20,stop_atr=0.30,rr=3.0),
 #           "cluster medoid (1/3, ADX 30, 0.25 ATR, 3R)":dict(frac=1/3,adx_min=30,stop_atr=0.25,rr=3.0),

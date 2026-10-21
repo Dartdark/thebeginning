@@ -36,7 +36,7 @@ if __name__ == "__main__":
     lab = ns["lab"]; g = lab.g
     q = F[F.strat == "LDF"]; med = q.wallimb[q.date.dt.year < 2023].median()
     low = {(int(r.day), int(r.j0)): (r.wallimb < med) for r in q.itertuples() if not np.isnan(r.wallimb)}
-    t = load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx")
+    t = load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx")
     a = np.array([low.get((int(d), int(j)), None) for d, j in zip(t.day, t.j0)], dtype=object)
     print(f"   LDF trades {len(t)}: kept (wall toward the trade) {int((a == True).sum())}, other {int((a != True).sum())}")
     atr = g.daily_atr(15)

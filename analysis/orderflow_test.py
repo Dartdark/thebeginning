@@ -27,14 +27,14 @@ SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 PV, TICK, COST = 20.0, 0.25, 7.25
 SPLIT = pd.Timestamp("2023-01-01")
 REPORTS = {
-    "VB": "Backtesting Strategy Performance Report VB v1.xlsx",
-    "ONB_ML2": "Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
-    "EOS": "Backtesting Strategy Performance Report EOS v1.xlsx",
-    "MON": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
-    "LDF": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
-    "NFP": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
-    "VCS": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx",
-    "ONB_ADX30 (combine)": "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx",
+    "VB": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+    "ONB_ML2": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+    "EOS": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+    "MON": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+    "LDF": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+    "NFP": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
+    "VCS": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx",
+    "ONB_ADX30 (combine)": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx",
 }
 COLS = {"buy": "volume", "sell": "downvol", "simb": "size_imb", "cimb": "count_imb", "qdb": "qdepl_bid",
         "qda": "qdepl_ask", "plb": "pulled_bid", "pla": "pulled_ask", "icb": "ice_bid", "ica": "ice_ask",
@@ -43,7 +43,7 @@ COLS = {"buy": "volume", "sell": "downvol", "simb": "size_imb", "cimb": "count_i
 
 
 def load_of(g):
-    d = pd.concat([pd.read_csv(f) for f in sorted(glob.glob("OF_1min_*.csv"))], ignore_index=True)
+    d = pd.concat([pd.read_csv(f) for f in sorted(glob.glob("data/OF_1min_*.csv"))], ignore_index=True)
     row = np.minimum(np.searchsorted(g.dates, d.date.values), g.D - 1)
     ok = g.dates[row] == d.date.values
     d, row = d[ok], row[ok]

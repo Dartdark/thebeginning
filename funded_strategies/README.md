@@ -38,11 +38,11 @@ every market or stop fill.
 
 | Strategy | File | Status | Notes |
 |---|---|---|---|
-| Overnight Drift (backup, off since 2026-10-12) | `NQ_Overnight_Drift.txt` | **MultiCharts-confirmed** (`Backtesting Strategy Performance Report OND v1.xlsx`), holiday fix added | Long midnight to 3:00 CT after a down session. PF 1.25, 8/9 years positive, flat 2023–24. Correlation about 0 with everything else |
-| **Monday Long** | `NQ_Monday_Long.txt` | **MultiCharts-confirmed** (`Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx`): 449 of 450 days match Python | Long Mondays 8:30–15:00 CT, stop 0.5 ATR. 450 trades, 55% winners, $425 a trade, PF 1.55; 2023–26 PF 1.92, 2018–22 weak. In the funded set since 2026-10-12 (1 MNQ) |
-| **ES MOC Follow** | `ES_MOC_Follow.txt` | **MultiCharts-confirmed** (`Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx`): 199 of 199 trades match Python and the Jesse port | Follow a ≥ 0.3 ATR 14:00 → 14:50 CT ES move into the 15:00 closing auction, stop 0.25 ATR. $171 per ES net, PF 2.23, t 3.7, 8/9 years (2025 −$4.6k). In the funded set since 2026-10-17 (2 MES); bootstrapped bench: fewer blown accounts, payouts as fast or faster |
+| Overnight Drift (backup, off since 2026-10-12) | `NQ_Overnight_Drift.txt` | **MultiCharts-confirmed** (`mc_reports/Backtesting Strategy Performance Report OND v1.xlsx`), holiday fix added | Long midnight to 3:00 CT after a down session. PF 1.25, 8/9 years positive, flat 2023–24. Correlation about 0 with everything else |
+| **Monday Long** | `NQ_Monday_Long.txt` | **MultiCharts-confirmed** (`mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx`): 449 of 450 days match Python | Long Mondays 8:30–15:00 CT, stop 0.5 ATR. 450 trades, 55% winners, $425 a trade, PF 1.55; 2023–26 PF 1.92, 2018–22 weak. In the funded set since 2026-10-12 (1 MNQ) |
+| **ES MOC Follow** | `ES_MOC_Follow.txt` | **MultiCharts-confirmed** (`mc_reports/Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx`): 199 of 199 trades match Python and the Jesse port | Follow a ≥ 0.3 ATR 14:00 → 14:50 CT ES move into the 15:00 closing auction, stop 0.25 ATR. $171 per ES net, PF 2.23, t 3.7, 8/9 years (2025 −$4.6k). In the funded set since 2026-10-17 (2 MES); bootstrapped bench: fewer blown accounts, payouts as fast or faster |
 | **Relative Strength NQ / ES** (user's, added 2026-10-20) | `NQ_Relative_Strength.txt` | Python rebuild + independent checker (PASS WITH CONCERNS); **MultiCharts-confirmed 2026-10-20** (1,157 days, P&L corr 1.000) | 9:00 CT Z of NQ's move beyond its ES beta, follow at 9:01, stop 0.6 / target 1.0 x 20-day range, flat 15:00. $306 per NQ, PF 1.36, t 4.0, 9/9 years. 50K funded: longs only 1 MNQ; 150K funded: both sides 1 MNQ; not in evaluations |
-| **Expiration Open Short** | `NQ_Expiration_Open_Short.txt` | **MultiCharts-confirmed** (`Backtesting Strategy Performance Report EOS v1.xlsx`): same 105 trades, entries and P&L as Python | Short at the 8:30 open on monthly options expiration day, out at 10:00, stop 0.3 ATR. 105 trades, 59% winners, $474 a trade, PF 1.93, 8/9 years positive. **Benchmark + it at $500 risk: $6,516 vs $5,387** |
+| **Expiration Open Short** | `NQ_Expiration_Open_Short.txt` | **MultiCharts-confirmed** (`mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx`): same 105 trades, entries and P&L as Python | Short at the 8:30 open on monthly options expiration day, out at 10:00, stop 0.3 ATR. 105 trades, 59% winners, $474 a trade, PF 1.93, 8/9 years positive. **Benchmark + it at $500 risk: $6,516 vs $5,387** |
 
 ## Current funded set (all MultiCharts-confirmed, updated 2026-10-12)
 
@@ -260,7 +260,7 @@ comparisons:
 Over 2 years: $7,320 vs $6,467. The turn-of-month long adds almost nothing on top, so it
 is parked; it is a watch item because it has been much stronger since 2023.
 
-**MultiCharts confirmation (2026-10-12):** `Backtesting Strategy Performance Report EOS v1.xlsx`
+**MultiCharts confirmation (2026-10-12):** `mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx`
 (5-minute @NQ, Bar Magnifier 1 minute, RiskPerTrade 0, NumContracts 1, from 19 Jan 2018)
 matches the Python test:
 - the same 105 trades on the same days
@@ -817,7 +817,7 @@ day. Per NQ after $7.25 + 1 tick per fill.
 
 ## Bitcoin (2026-10-13): BTC Momentum file and Bitcoin forced flows — nothing tradeable yet
 
-Data: CME Bitcoin futures 1-minute bars uploaded by the user (`BTC_1min_2018..2026.csv` in the repo root,
+Data: CME Bitcoin futures 1-minute bars uploaded by the user (`data/BTC_1min_2018..2026.csv`,
 Dec 2018 – Oct 2026, CT; 83% of 8:00–15:00 minutes trade, prices carried forward). Code
 `../analysis/btc_momentum_test.py` (output in `..._output.txt`). Costs per MBT $2.50 a round trip + 1 tick
 ($0.50) per fill; results per 1 BTC (= 10 MBT).
@@ -863,7 +863,7 @@ touch then reclaim, 20-bar swing stop, 5-bar swing target, one trade a day). Per
 ## 0DTE dealer gamma from The Bridge (2026-10-13): real volatility effect, no trading edge
 
 Code `../analysis/gamma_regime_test.py` (output in `..._output.txt`); data `GEX_1min_<year>.csv` exported with
-`../multi_strategy/OFB_Gamma_Exporter.txt` (0DTE NDX dealer gamma, cumulative weighting only, so no look-ahead):
+`../tools/exporters/OFB_Gamma_Exporter.txt` (0DTE NDX dealer gamma, cumulative weighting only, so no look-ahead):
 641 sessions, 2023-03-28 to 2026-07-07. The Bridge's NQ closes match the NQ grid on 97.6% of minutes (ET −1 h),
 so flip + basis goes straight onto NQ. Regime = price above / below the flip with steepness > 0.02 (the
 manual's "worth trusting"); 67% of 10:00 ET readings are above, 31% below. Design 2023-03-28 to 2024-12-31,
@@ -905,7 +905,7 @@ holdout 2025-01-01 to 2026-07-07. Data starts in 2023, so the 2018–2022 standa
 ## CME order flow from The Bridge (2026-10-13): describes the move, doesn't predict it
 
 Code `../analysis/orderflow_test.py` and `../analysis/orderflow_ldf_filter.py` (outputs in `..._output.txt`).
-Data: `OF_1min_<year>_<part>.csv`, exported with `../multi_strategy/OFB_OrderFlow_Exporter.txt` from The Bridge's MBO
+Data: `OF_1min_<year>_<part>.csv`, exported with `../tools/exporters/OFB_OrderFlow_Exporter.txt` from The Bridge's MBO
 history. That's 1-minute RTH bars, 2018-01-02 to 2026-07-07 (2,117 full sessions), so the full 2018–2026
 standard applies. Design 2018–2022, holdout 2023–2026. Notes on the export: MultiCharts' `Volume` came out
 as buy volume (buys + `downvol` = the grid's volume on 97% of minutes), and `cum_delta` doesn't reset at
@@ -1171,7 +1171,7 @@ $7.25 + 1 tick per fill. The book is rarely lopsided: 50 levels ≥ +20% on 1% o
 ## The Bridge's COT Dealer Rank (2026-10-13): maybe something weekly, nothing Apex can trade
 
 Code `../analysis/bridge_cot_test.py` (output in `..._output.txt`). Data: `COT_NQ.csv`, 458 CFTC releases from 2018
-to Oct 2026, exported from The Bridge with `../multi_strategy/OFB_COT_Exporter.txt`. Each value is used only after
+to Oct 2026, exported from The Bridge with `../tools/exporters/OFB_COT_Exporter.txt`. Each value is used only after
 the chart time it became known. State at each release: long if the TFF dealer net's 13-week rank is > 70 and the
 last daily close is above its 50-day SMA, short if < 30 and below (Legacy sister: commercial net, 26-week rank,
 60 / 40). Per NQ after $7.25 + 1 tick per fill.

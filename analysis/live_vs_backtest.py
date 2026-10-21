@@ -35,13 +35,13 @@ with a one-sided CUSUM on % return per trade (points / entry price, so NQ's pric
 import sys, os, glob, argparse
 import numpy as np, pandas as pd
 
-KEYS = {"VB": "Backtesting Strategy Performance Report VB v1.xlsx",
-        "ONB_ML2_MC": "Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
-        "EOS": "Backtesting Strategy Performance Report EOS v1.xlsx",
-        "MON_MC": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
-        "LDF_MC": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
-        "NFP_MC": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
-        "MON_BR": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx"}
+KEYS = {"VB": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+        "ONB_ML2_MC": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+        "EOS": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+        "MON_MC": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+        "LDF_MC": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+        "NFP_MC": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
+        "MON_BR": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx"}
 
 
 def read_trades(path):

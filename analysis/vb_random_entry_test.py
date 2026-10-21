@@ -8,7 +8,7 @@ from grid24 import jof
 from portfolio import load_mc
 SP="/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/"
 g=pickle.load(open(SP+"g24.pkl","rb"))
-vb=load_mc(g,"Backtesting Strategy Performance Report VB v1.xlsx"); vb=vb[pd.DatetimeIndex(vb.date).year>=2018]
+vb=load_mc(g,"mc_reports/Backtesting Strategy Performance Report VB v1.xlsx"); vb=vb[pd.DatetimeIndex(vb.date).year>=2018]
 TGT,STP,PV,COST,TICK=40.0,75.0,20,7.25,0.25
 def bracket(d,j0,entry,jend,through=0.0):
     """long from minute j0 (entry price given), target entry+TGT (needs high >= target+through), stop entry-STP, flat at jend close.

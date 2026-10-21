@@ -23,7 +23,7 @@ import metrics as M, resampling as R
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 PV, TICK, COST = 20.0, 0.25, 7.25
-VB_FILE = "Backtesting Strategy Performance Report VB v1.xlsx"
+VB_FILE = "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx"
 
 
 def boundary(g, kind):
@@ -181,7 +181,7 @@ if __name__ == "__main__":
     print("\n5. Combine (VB 8 MNQ + ONB ADX30 $1,100, 21 trading days, every start day, with slippage):")
     from portfolio import paths, challenge
     tr = g.trading; D = len(tr); yr = pd.DatetimeIndex(g.ts[tr]).year; atr = g.daily_atr(15)
-    on = with_slippage(load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"))
+    on = with_slippage(load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"))
     w, r = paths(g, on); Ow, Oc = w[tr] / 10, r[tr] / 10
     q = np.floor(1100 / (0.25 * np.nan_to_num(atr[tr], nan=1e12) * 2))[:, None]
     for nm, t in (("VB v1 (MC)", with_slippage(load_mc(g, VB_FILE))), ("VB v8", v8)):

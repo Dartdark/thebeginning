@@ -17,7 +17,7 @@ LV = {10: ("s48", "s49"), 20: ("s50", "s51"), 50: ("s52", "s53")}
 
 if __name__ == "__main__":
     g = pickle.load(open(SP + "g24.pkl", "rb"))
-    d = pd.concat([pd.read_csv(f, usecols=["date", "time", "s48", "s49", "s50", "s51", "s52", "s53"]) for f in sorted(glob.glob("OF_1min_*.csv"))],
+    d = pd.concat([pd.read_csv(f, usecols=["date", "time", "s48", "s49", "s50", "s51", "s52", "s53"]) for f in sorted(glob.glob("data/OF_1min_*.csv"))],
                   ignore_index=True)
     row = np.minimum(np.searchsorted(g.dates, d.date.values), g.D - 1); ok = g.dates[row] == d.date.values
     d, row = d[ok], row[ok]; col = jof(d.time.values - 100)

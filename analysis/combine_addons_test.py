@@ -23,7 +23,7 @@ if __name__ == "__main__":
     def add(nm, t):
         w, r = paths(g, t); P[nm] = (w[tr] / 10, r[tr] / 10)          # $ per MNQ
     add("VB", with_slippage(load_mc(g, REPORTS["VB"][0])))
-    add("ONB30", with_slippage(load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx")))
+    add("ONB30", with_slippage(load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx")))
     add("MON_BR", load_bridge_mc(g))
     for k in ("MON_MC", "LDF_MC", "VCS_MC", "EOS", "NFP_MC"):
         add(k, with_slippage(load_mc(g, REPORTS[k][0])))

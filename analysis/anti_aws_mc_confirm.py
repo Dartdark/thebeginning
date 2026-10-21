@@ -6,7 +6,7 @@ import sys, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "ana
 import numpy as np, pandas as pd
 import relative_strength_test as RS, metrics as M, montecarlo as MC
 
-F = "Backtesting Strategy Performance Report _ @NQ - 1 Minute Aligned Weakness Short.xlsx"
+F = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Aligned Weakness Short.xlsx"
 if __name__ == "__main__":
     r = pd.read_excel(F, sheet_name="List of Trades", header=2)
     e = r[r.Type.astype(str).str.startswith("Entry")].reset_index(drop=True); x = r[r.Type.astype(str).str.startswith("Exit")].reset_index(drop=True)

@@ -22,14 +22,14 @@ from funded_lab import Lab
 OUT = sys.argv[1] if len(sys.argv) > 1 else "scratch_data"
 os.makedirs(OUT, exist_ok=True)
 REPORTS = {   # name: (report file, stop in ATR for risk sizing)
-    "VB": ("Backtesting Strategy Performance Report VB v1.xlsx", 0.30),
-    "ONB_ML2_MC": ("Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx", 0.30),
-    "EOS": ("Backtesting Strategy Performance Report EOS v1.xlsx", 0.30),
-    "OND_MC": ("Backtesting Strategy Performance Report OND v1.xlsx", 0.30),
-    "MON_MC": ("Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx", 0.50),
-    "LDF_MC": ("Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx", 0.25),
-    "NFP_MC": ("Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx", 0.50),
-    "VCS_MC": ("Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx", 0.25),
+    "VB": ("mc_reports/Backtesting Strategy Performance Report VB v1.xlsx", 0.30),
+    "ONB_ML2_MC": ("mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx", 0.30),
+    "EOS": ("mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx", 0.30),
+    "OND_MC": ("mc_reports/Backtesting Strategy Performance Report OND v1.xlsx", 0.30),
+    "MON_MC": ("mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx", 0.50),
+    "LDF_MC": ("mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx", 0.25),
+    "NFP_MC": ("mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx", 0.50),
+    "VCS_MC": ("mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx", 0.25),
 }
 
 if __name__ == "__main__":

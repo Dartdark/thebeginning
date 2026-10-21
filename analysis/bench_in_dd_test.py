@@ -53,7 +53,7 @@ if __name__ == "__main__":
     def add(nm, t):
         w, r = paths(g, t); P[nm] = (w[tr] / 10, r[tr] / 10); return t
     tv = add("VB", with_slippage(load_mc(g, REPORTS["VB"][0])))
-    to = add("ONB30", with_slippage(load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx")))
+    to = add("ONB30", with_slippage(load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx")))
     add("MON_BR", load_bridge_mc(g)); add("EOS", with_slippage(load_mc(g, REPORTS["EOS"][0])))
     risk = lambda dollars, m: np.floor(dollars / (np.nan_to_num(m * atr[tr], nan=1e12) * 2))[:, None]
     q_onb = risk(1100, 0.25); q_eos = risk(500, REPORTS["EOS"][1])

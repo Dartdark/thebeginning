@@ -31,7 +31,7 @@ def load(sym):
     os.makedirs(SP, exist_ok=True)
     pk = SP + f"{sym.lower()}.pkl"
     if os.path.exists(pk): return pickle.load(open(pk, "rb"))
-    g = (Grid24("NQ_1min_20*.csv", "NQ_1min_ON_*.csv") if sym == "NQ" else Grid24(f"data/{sym}_1min_20*.csv", night_pattern=""))
+    g = (Grid24("data/NQ_1min_20*.csv", "data/NQ_1min_ON_*.csv") if sym == "NQ" else Grid24(f"data/{sym}_1min_20*.csv", night_pattern=""))
     pickle.dump(g, open(pk, "wb"), protocol=4); return g
 
 

@@ -8,7 +8,7 @@ import sys, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "ana
 import numpy as np, pandas as pd
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
-R = "Backtesting Strategy Performance Report "
+R = "mc_reports/Backtesting Strategy Performance Report "
 REPORTS = {  # strategy: (report, point value, tick, cost per fill)
     "VaultBreak": (R + "VB v1.xlsx", 20.0, 0.25, 7.25),
     "ONBias": (R + "ONB v2.xlsx", 20.0, 0.25, 7.25),

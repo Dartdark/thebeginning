@@ -322,7 +322,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - `pip install numba`, then `python3 analysis/build_lab.py scratch_data` builds g24 / ge / lab.
 - The gc / cl pickles build on first `load("GC")` / `load("CL")`; btc via `cross_asset_overnight_test.btc()`.
 - The CL fade's bench needs `scratch_data/s_rank_gap2.pkl`: run `analysis/s_rank_gap_round2_test.py` first.
-- Raw 1-minute CSVs are in `data/` and the repo root.
+- Raw 1-minute CSVs are all in `data/` (moved from the repo root 2026-10-21); MultiCharts reports in `mc_reports/`.
 
 ## Open items for the user
 

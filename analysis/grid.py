@@ -46,7 +46,7 @@ def hhmm_of(j):
 
 
 class Grid:
-    def __init__(self, pattern="NQ_1min_*.csv"):
+    def __init__(self, pattern="data/NQ_1min_*.csv"):
         d = pd.concat([pd.read_csv(f) for f in sorted(glob.glob(pattern))], ignore_index=True)
         d = d.drop_duplicates(["date", "time"])
         last = d.groupby("date")["time"].transform("max")

@@ -20,7 +20,7 @@ if __name__ == "__main__":
     with contextlib.redirect_stdout(io.StringIO()):
         ns = runpy.run_path("analysis/cl_sunday_fade_bench.py", run_name="__main__")
     lab = ns["lab"]; g = lab.g
-    t0 = load_mc(g, "Backtesting Strategy Performance Report OND v1.xlsx"); t0 = t0[t0.j0 <= 30].reset_index(drop=True)
+    t0 = load_mc(g, "mc_reports/Backtesting Strategy Performance Report OND v1.xlsx"); t0 = t0[t0.j0 <= 30].reset_index(drop=True)
     t = with_slippage(t0.copy()); t["net"] = (t.exit - t.entry) * t.side * 20 - 7.25
     t["date"] = pd.DatetimeIndex(g.ts[t.day.values])
     cf = pd.Series(g.c.ravel()).ffill().to_numpy(); tr = g.trading; days = pd.DatetimeIndex(g.ts[tr])

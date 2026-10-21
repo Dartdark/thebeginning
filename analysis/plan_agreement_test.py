@@ -15,14 +15,14 @@ from funded_lab import with_slippage
 from co_oc_reversal_test import load
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
-F = {"VB": "Backtesting Strategy Performance Report VB v1.xlsx",
-     "ONB_ML": "Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
-     "MON": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
-     "EOS": "Backtesting Strategy Performance Report EOS v1.xlsx",
-     "LDF": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
-     "NFP": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
-     "BRIDGE": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx",
-     "VCS": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx"}
+F = {"VB": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+     "ONB_ML": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+     "MON": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+     "EOS": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+     "LDF": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+     "NFP": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
+     "BRIDGE": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx",
+     "VCS": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx"}
 
 
 def tline(x, nm):

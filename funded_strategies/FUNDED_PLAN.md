@@ -112,7 +112,7 @@ trading days instead of ~300; see the speed section below).
 ## Previous plan (2026-10-12): five strategies, Late-Day Flow added
 
 Five MultiCharts-confirmed strategies, sized to the drawdown cushion. Code and numbers:
-`analysis/funded_plan_ldf.py` (output in `analysis/funded_plan_ldf_output.txt`).
+`analysis/funded_plan_ldf.py` (output in `analysis/outputs/funded_plan_ldf_output.txt`).
 
 | Strategy | File | Chart | Funded inputs (full size) | Trades |
 |---|---|---|---|---|
@@ -239,7 +239,7 @@ are Python-only so far.
 ### Before Late-Day Flow (2026-10-12): Monday Long replaced Overnight Drift
 
 Four MultiCharts-confirmed strategies, sized to the drawdown cushion. Code and numbers:
-`analysis/funded_plan_monday.py` (output in `analysis/funded_plan_monday_output.txt`).
+`analysis/funded_plan_monday.py` (output in `analysis/outputs/funded_plan_monday_output.txt`).
 
 | Strategy | File | Chart | Funded inputs (full size) | Trades |
 |---|---|---|---|---|
@@ -479,7 +479,7 @@ On the day the challenge passes, change the inputs (do not reuse the challenge s
    session, Exchange time zone, Bar Magnifier 1 minute, from 2 Jan 2018,
    `RiskPerTrade` 0, `NumContracts` 1, no commission/slippage. Entries should be stamped
    at the bar after midnight and exits at 3:00. Save the report as
-   `Backtesting Strategy Performance Report OND v1.xlsx` in the repo root;
+   `mc_reports/Backtesting Strategy Performance Report OND v1.xlsx`;
    `analysis/funded24.py` then uses it instead of the Python version.
 2. Check the assumed rules (trailing/lock, daily loss limit tiers, contract tiers) on
    Apex's help center. If any differ, change the constants at the top of
@@ -507,7 +507,7 @@ MCL on the account before turning it on; it runs on its own chart and the copier
 
 ## Monte Carlo at plan size (2026-10-17)
 
-`analysis/plan_montecarlo_test.py` (output `analysis/plan_montecarlo_test_output.txt`) runs `analysis/montecarlo.py` on every
+`analysis/plan_montecarlo_test.py` (output `analysis/outputs/plan_montecarlo_test_output.txt`) runs `analysis/montecarlo.py` on every
 plan strategy at its funded size (full size, i.e. a cushion of $1,500 or more) and on the whole plan. The bench reproduces
 exactly ($10,184 / $12,450, blown 3% / 3%).
 
@@ -707,7 +707,7 @@ Code `../analysis/plan_150k_test.py`, `../analysis/slot_150k_vs_50k_test.py` (si
 `../analysis/account_pipeline150.py` = the 50K ones with 150K numbers; the 50K check reproduces the funded bench exactly).
 150K rules used: evaluation +$9,000 in 30 days, $4,000 EOD trailing drawdown (locks $150,100), $2,000 daily loss pause;
 funded: 6 payouts, $20,500 in all (ladder 2,500 / 3,000 / 3,000 / 3,000 / 4,000 / 5,000, $350 qualifying days, request from
-$154,600: Apex's pages, user's screenshots in the repo root, 2026-10-15).
+$154,600: Apex's pages, user's screenshots in reports/screenshots/, 2026-10-15).
 - **Evaluation:** the combine set x 2.5 passes 41.6% (2018–22 38.9%, 2023–26 45.4%; x 2 38.7%, x 3 40.7%), vs 50.1% on the
   50K: the 150K target is 2.25x its drawdown (50K 1.5x). Adding Twin cap1 does not help (39–42%).
   Inputs x 2.5: VB 20 MNQ, ONB ADX30 `RiskPerTrade` 2750, Bridge Monday 5 MNQ, EOS `RiskPerTrade` 1250.

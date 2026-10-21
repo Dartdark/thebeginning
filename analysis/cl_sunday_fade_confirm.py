@@ -1,6 +1,6 @@
 """MultiCharts check of the CL Sunday up-gap fade (2026-10-14).
 
-Report: `Backtesting Strategy Performance Report _ CL - 5 Minutes CL Sunday Gap.xlsx` (5-minute @CL, Bar Magnifier 1 min,
+Report: `mc_reports/Backtesting Strategy Performance Report _ CL - 5 Minutes CL Sunday Gap.xlsx` (5-minute @CL, Bar Magnifier 1 min,
 GapAtrPct 0.10, StopAtrPct 0.75, ExitTime 1000, no commission / slippage). The chart ran on Eastern time (NYMEX
 exchange time): entries are stamped 18:10 ET (= the 17:05 CT open) and ExitTime 1000 meant 10:00 ET = 9:00 CT, one hour
 earlier than the Python test. So the Python rule is re-run with the 9:00 CT exit (and the 17:05 CT 5-minute bar open)
@@ -14,7 +14,7 @@ from cl_forced_flows_test import load
 import metrics as M
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
-REPORT = "Backtesting Strategy Performance Report _ CL - 5 Minutes CL Sunday Gap.xlsx"
+REPORT = "mc_reports/Backtesting Strategy Performance Report _ CL - 5 Minutes CL Sunday Gap.xlsx"
 PV, TICK, COMM = 1000.0, 0.01, 7.25
 COST = COMM + 2 * TICK * PV
 

@@ -51,7 +51,7 @@ def evaluate(days, starts, label):
 
 
 if __name__ == "__main__":
-    bars = load_bars("NQ_1min_*.csv")
+    bars = load_bars("data/NQ_1min_*.csv")
     feats = daily_features(bars)
     calendar = pd.to_datetime(pd.Series(sorted(bars["date"].unique())).astype(str))
     avg = feats["avg10_range_pct"].reindex(sorted(bars["date"].unique())).to_numpy()
@@ -61,7 +61,7 @@ if __name__ == "__main__":
                                 and i.get("avg10_range_pct", np.nan) >= vol)
 
     sets = {
-        "MultiCharts filtered 0.35/1.50": (from_mc("Backtesting Strategy Performance Report v2 filtered.xlsx"), 1.50),
+        "MultiCharts filtered 0.35/1.50": (from_mc("mc_reports/Backtesting Strategy Performance Report v2 filtered.xlsx"), 1.50),
         "Python copy 0.35/1.50": (from_replica(run(bars, entry_filter=flt(0.35, 1.50))), 1.50),
         "Python copy 0.35/1.30": (from_replica(run(bars, entry_filter=flt(0.35, 1.30))), 1.30),
     }

@@ -20,8 +20,8 @@ if __name__ == "__main__":
     with contextlib.redirect_stdout(io.StringIO()):
         ns = runpy.run_path("analysis/cl_sunday_fade_bench.py", run_name="__main__")
     lab, g = ns["lab"], ns["lab"].g
-    vb = load_mc(g, "Backtesting Strategy Performance Report VB v1.xlsx")
-    onb = load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx")
+    vb = load_mc(g, "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx")
+    onb = load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx")
     ol = onb[onb.side == 1].groupby("day").j0.min()
     m = vb.day.map(ol); vbx = vb[m.notna() & (vb.j0 > m)].reset_index(drop=True)
     print(f"VB trades {len(vb)}, boosted subset {len(vbx)}")

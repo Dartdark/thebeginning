@@ -18,7 +18,7 @@ from portfolio import load_mc
 from vb_meta_label_test import features as vb_features, tstat, tdiff, LAM
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
-REP = "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx"
+REP = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx"
 
 
 def signal_features(g, t):

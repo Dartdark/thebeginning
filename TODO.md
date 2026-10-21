@@ -34,7 +34,7 @@ bottom). Times are Central (CT).
 
 - [x] (2026-10-17, confirmed 199/199) MultiCharts backtest: [ES_MOC_Follow.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/ES_MOC_Follow.txt)
   on a 5-minute **@ES** chart (Exchange time, 24-hour session, Bar Magnifier 1 min, from Jan 2018, NumContracts 1, no costs);
-  save the report as "Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx" and push / send it.
+  save the report as "mc_reports/Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx" and push / send it.
 - [x] (2026-10-17, PASS on the rule; its clock ran 1 min early, see agents/results/TASK_09_VERDICT.md) Antigravity: Task 09 blind check (pull `agents/tasks` and the `ES_1min_*.csv` files first).
 - [ ] When funded: ES MOC Follow (IN THE PLAN since 2026-10-17) on a 5-min MES chart, NumContracts 2, Symbol Mapping `@MES -> MESZ6` (roll with MNQ). Vault Break funded: `NumContracts` 2, `FlaggedContracts` 1 (decided 2026-10-17).
 
@@ -43,7 +43,7 @@ bottom). Times are Central (CT).
 - [x] (2026-10-20, done: 1,157 days match, P&L corr 1.000) MultiCharts backtest for the trade-by-trade check: [RelStrength_v3.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/relative_strength/RelStrength_v3.txt)
   (your code, unchanged) on a **1-minute @NQ chart with 1-minute @ES as Data2** (same feed, CME 24h session, Exchange
   time = CT, first RTH bar 08:31), data loaded from **Sep 2017**, default inputs, **commission and slippage 0** (Claude adds
-  costs), Intrabar Order Generation off. Save as "Backtesting Strategy Performance Report _ @NQ - 1 Minute Relative Strength.xlsx"
+  costs), Intrabar Order Generation off. Save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Relative Strength.xlsx"
   and push / send it.
 - [x] (2026-10-20, you: include it in all relevant plans) In the plans: 50K funded longs only 1 MNQ, 150K funded both sides 1 MNQ, personal account; not in evaluations.
 - [ ] When an account is funded: add [NQ_Relative_Strength.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Relative_Strength.txt)
@@ -54,7 +54,7 @@ bottom). Times are Central (CT).
 
 - [x] (2026-10-20, confirmed 216/216) MultiCharts backtest: [NQ_Aligned_Weakness_Short.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/aligned_weakness_short/NQ_Aligned_Weakness_Short.txt)
   on a 1-minute @NQ chart with 1-minute @ES as Data2 (same feed, CME 24h, Exchange time, first RTH bar 08:31), data from
-  Sep 2017, commission / slippage 0, IOG off; save as "Backtesting Strategy Performance Report _ @NQ - 1 Minute Aligned Weakness Short.xlsx".
+  Sep 2017, commission / slippage 0, IOG off; save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Aligned Weakness Short.xlsx".
 
 ## Journal (Obsidian)
 
@@ -65,7 +65,7 @@ bottom). Times are Central (CT).
 
 - [x] (2026-10-18, confirmed 135/135 sessions) MultiCharts backtest of [NQ_Vault_Break_SP.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Vault_Break_SP.txt)
   on a 30-min **@NQ** chart (same settings as before, from Jan 2018), inputs **NumContracts 1, NR7Contracts 2, FlaggedContracts -1**,
-  no costs; save as "Backtesting Strategy Performance Report _ @NQ - 30 Minutes VB NR7.xlsx" and push / send it.
+  no costs; save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 30 Minutes VB NR7.xlsx" and push / send it.
   (Live combine charts: nothing changes; NR7Contracts defaults to -1 = off.)
 - [x] (2026-10-18) Strategy-checker: **FAIL** (t 2.81 below 3.53; 2023-26 weaker). Not added to the plan (your condition). Leave `NR7Contracts` -1 everywhere; recheck on new data (WATCHLIST #21).
 

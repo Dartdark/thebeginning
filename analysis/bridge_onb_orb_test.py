@@ -22,8 +22,8 @@ import metrics as M, resampling as R
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 PV, TICK, COST = 20.0, 0.25, 7.25
-ONB30 = "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"
-ONBML = "Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx"
+ONB30 = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"
+ONBML = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx"
 DEF = dict(adx_n=16, adx_min=20, bias_hi=0.67, bias_lo=0.33, skip_mult=2.5, bar_avg=20, or_max=2.0, or_days=20,
            k=0.30, atr_days=15, rr=3.0, last=1200, flat=1430, max_tr=4, atr_kind="rth", anchor="signal")
 
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     print("\n5. Combine (VB 8 MNQ + Overnight Bias at $1,100 risk, 21 trading days, every start day):")
     from portfolio import paths, challenge
     tr = g.trading; D = len(tr); yr = pd.DatetimeIndex(g.ts[tr]).year
-    vb = with_slippage(load_mc(g, "Backtesting Strategy Performance Report VB v1.xlsx")); w, r = paths(g, vb); Vw, Vc = w[tr] / 10, r[tr] / 10
+    vb = with_slippage(load_mc(g, "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx")); w, r = paths(g, vb); Vw, Vc = w[tr] / 10, r[tr] / 10
     for nm, t, stop in (("ONB ADX30 (MC)", on30, 0.25 * ctx["day"]), ("Bridge ORB", br, 0.30 * ctx["rth"])):
         w, r = paths(g, t); Ow, Oc = w[tr] / 10, r[tr] / 10
         q = np.floor(1100 / (np.nan_to_num(stop[tr], nan=1e12) * 2))[:, None]

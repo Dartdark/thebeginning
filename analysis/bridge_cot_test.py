@@ -92,7 +92,7 @@ def line(t, nm, w=48):
 
 if __name__ == "__main__":
     g = pickle.load(open(SP + "g24.pkl", "rb"))
-    cot = pd.read_csv("COT_NQ.csv")
+    cot = pd.read_csv("data/COT_NQ.csv")
     print(__doc__.split("\n")[0]); print(f"releases: {len(cot)} ({cot.date.min()} .. {cot.date.max()})")
     days = pd.DatetimeIndex(g.ts[g.trading]); days = days[days.year >= 2018]
     dl = lambda t: t.groupby(pd.to_datetime(t.date)).net.sum().reindex(days, fill_value=0.0)

@@ -6,7 +6,7 @@ from portfolio import load_mc
 import metrics as M
 SP='/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/'
 g=pickle.load(open(SP+'g24.pkl','rb')); lab=pickle.load(open(SP+'lab.pkl','rb'))
-new=load_mc(g,glob.glob('*ML (funded) v2*.xlsx')[0]); atr=g.daily_atr(15)
+new=load_mc(g,glob.glob('mc_reports/*ML (funded) v2*.xlsx')[0]); atr=g.daily_atr(15)
 lab.add("ONB_ML2_MC",new,stop_pts=0.3*atr)
 for s,nm in ((1,"L"),(-1,"S")): lab.add(f"ONB_ML2_{nm}",new[new.side==s].reset_index(drop=True),stop_pts=0.3*atr)
 base={"VB":3,"OND_MC":("risk",500),"EOS":("risk",500)}

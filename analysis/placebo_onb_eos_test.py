@@ -26,7 +26,7 @@ def runs(fn,n,seed):
     rng=np.random.default_rng(seed); r=np.array([st(fn(rng))[:2] for _ in range(n)]); return r
 yrs=lambda t: pd.DatetimeIndex(t.date).year>=2018
 # ---------------- Overnight Bias ML
-o=load_mc(g,"Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias v2.xlsx"); o=o[yrs(o)]
+o=load_mc(g,"mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias v2.xlsx"); o=o[yrs(o)]
 jx=jof(1430)
 own=[br(int(t.day),int(t.j0),int(t.side),0.3*atr[int(t.day)],0.9*atr[int(t.day)],jx,entry=t.entry) for _,t in o.iterrows()]
 a=st(own); print(f"\nOVERNIGHT BIAS ML ({a[2]} trades): own trades re-simulated  avg ${a[0]:.0f} win {a[1]:.0%}  (MC report avg ${o.net.mean():.0f})")
@@ -41,7 +41,7 @@ for k,fn in tests.items():
     beat=np.mean(r[:,0]<a[0])
     print(f"  {k:<55} avg ${r[:,0].mean():5.0f} (range {r[:,0].min():.0f} to {r[:,0].max():.0f}) win {r[:,1].mean():.0%} | own beats {beat:.0%} of runs")
 # ---------------- Expiration Open Short
-e=load_mc(g,"Backtesting Strategy Performance Report EOS v1.xlsx"); e=e[yrs(e)]
+e=load_mc(g,"mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx"); e=e[yrs(e)]
 cal=CF.calendar(g); opex=cal.index[cal.opex].to_numpy(); opex=opex[pd.DatetimeIndex(g.ts[opex]).year>=2018]
 j830=jof(831); j10=jof(1000)
 own=[br(int(t.day),int(t.j0),-1,0.3*atr[int(t.day)],None,j10,entry=t.entry) for _,t in e.iterrows()]
@@ -60,7 +60,7 @@ for k,fn in tests.items():
 
 # ======================= Overnight Drift placebo
 # exec(open("/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/placebo2.py").read().split("# ---------------- Overnight Bias ML")[0])
-# od=load_mc(g,"Backtesting Strategy Performance Report OND v1.xlsx"); od=od[(od.j0<=jof(30))]; od=od[yrs(od)]
+# od=load_mc(g,"mc_reports/Backtesting Strategy Performance Report OND v1.xlsx"); od=od[(od.j0<=jof(30))]; od=od[yrs(od)]
 # j0m,j3=jof(0),jof(300)
 # own=[br(int(t.day),int(t.j0),1,0.3*atr[int(t.day)],None,int(t.j1) if t.kind!=0 else j3,entry=t.entry) for _,t in od.iterrows()]
 # a=st(own); print(f"OVERNIGHT DRIFT ({a[2]} trades): own re-simulated avg ${a[0]:.0f} win {a[1]:.0%} (MC report avg ${od.net.mean():.0f})")

@@ -85,6 +85,19 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
   in MultiCharts on the VPS and the PC (or close MultiCharts), log in to R|Trader, do the setup, log out, reconnect
   MultiCharts and check the charts are green and flat before the next open.
 
+## Pre-flight checklist: after ANY live change (new machine, chart set, account, copier, symbol roll) (2026-10-21)
+Do it after 15:59 CT or on a weekend, with every account flat. Each line is an error that has already happened here.
+1. Symbol Mapping on THIS machine: `@MNQ (dxFeed) -> current contract` (and `@MES`, MCL when live). Mapping is per
+   installation (VPS rejections 2026-10-20).
+2. Every chart: Format Signals > Auto Trading = Rithmic, and the gear icon = the RIGHT Apex account; Chart Trading not on
+   SIM 001; 'stop after N rejected orders' = 10.
+3. One Rithmic login in use: only the VPS MultiCharts (no R|Trader, no PC MultiCharts with a Rithmic profile).
+4. Copier: off, or its followers have NO auto-trading charts of their own (double size).
+5. Inputs and the report's Settings sheet match `reports/Strategy_Settings.pdf` (old inputs survive a code paste).
+6. Target Guard StartBalance = the account's balance; Trade Logger on every chart with the right tag.
+7. One 1-MNQ manual test order through MultiCharts per account: it fills on Apex; flatten.
+8. Auto-trading off / on (initial position Flat) on every chart; Strategy Positions all flat; Rithmic connected.
+
 ## Setup checklist
 - A signal runs on data1 only; each strategy needs its own chart window.
 - Several signals on one chart form ONE strategy sharing one position: an exit-only signal (e.g. `Apex_Target_Guard`)

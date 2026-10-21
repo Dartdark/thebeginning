@@ -8,7 +8,7 @@ from grid24 import jof
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"; sys.argv = sys.argv[:1]
 import compare as C, s_rank_es_round1_test as ER, metrics as M, montecarlo as MC
 
-REP = "Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx"
+REP = "mc_reports/Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx"
 PV, COMM, TICK = 50.0, 5.0, 0.25
 
 if __name__ == "__main__":

@@ -41,7 +41,7 @@ PLANS = {
     "Slowest: VB 1, ONB $300, OND $300": dict(VB=1, ONB=300, OND=300),
 }
 PASS_RATE, FEE = 0.44, 50          # challenge plan (multi_strategy24.py)
-OND_REPORT = "Backtesting Strategy Performance Report OND v1.xlsx"   # used when present
+OND_REPORT = "mc_reports/Backtesting Strategy Performance Report OND v1.xlsx"   # used when present
 
 
 class Book:

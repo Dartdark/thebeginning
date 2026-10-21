@@ -6,7 +6,7 @@
 # Multi-strategy plan for Apex 50K
 
 Started 2026-10-10. Goal: more strategies that, together with NQ VWAP Momentum v3
-(`final_v3/`), raise the chance of getting a funded Apex 50K account.
+(`archive/final_v3/`), raise the chance of getting a funded Apex 50K account.
 
 ## Short version
 
@@ -31,7 +31,7 @@ each trades mostly at a different time of day.
 
 | | v3 (existing) | Vault Break (yours) | Opening Drive (new) | Gap Fill (new, experimental) |
 |---|---|---|---|---|
-| File | `final_v3/` | `NQ_Vault_Break.txt` | `NQ_Opening_Drive.txt` | `NQ_Gap_Fill.txt` |
+| File | `../archive/final_v3/` | `NQ_Vault_Break.txt` | `NQ_Opening_Drive.txt` | `NQ_Gap_Fill.txt` |
 | Chart | 5 min | 30 min, 24-hour session | 5 min | 5 min, with pre-open |
 | Idea | Pullback in a VWAP trend | Long breakout above the open + 30% of ATR, above VWAP | Follow the first 30 minutes' direction | Fade the overnight gap back to yesterday's close |
 | Window (CT) | 9:50–14:55 | 10:00–14:30 | 9:00–11:00 | 8:30–10:00 |
@@ -163,8 +163,8 @@ All of them are in `analysis/candidates.py` and `analysis/candidates24.py`.
 
 ## MultiCharts confirmation (2026-10-10)
 
-Reports: `Backtesting Strategy Performance Report OD v1.xlsx` (Opening Drive, 5-minute
-chart) and `Backtesting Strategy Performance Report VB v1.xlsx` (Vault Break, 30-minute
+Reports: `mc_reports/Backtesting Strategy Performance Report OD v1.xlsx` (Opening Drive, 5-minute
+chart) and `mc_reports/Backtesting Strategy Performance Report VB v1.xlsx` (Vault Break, 30-minute
 chart with the overnight session), 1 NQ, 2018–2026, Bar Magnifier at 1 minute.
 
 - **Opening Drive matches the Python test exactly:** the same 1,352 trades (same days,
@@ -204,7 +204,7 @@ Vault Break / Opening Drive 0.02.
 | **A + B + C** | **69%** | **74%** | **78%** | **34%** | **1.07** |
 
 Reproduce with:
-`python3 analysis/multi_strategy.py --VB "Backtesting Strategy Performance Report VB v1.xlsx" --DRIVE "Backtesting Strategy Performance Report OD v1.xlsx"`
+`python3 analysis/multi_strategy.py --VB "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx" --DRIVE "mc_reports/Backtesting Strategy Performance Report OD v1.xlsx"`
 
 ## Full 24-hour data: Overnight Bias and VWAP Pullback ADX (2026-10-10)
 
@@ -259,7 +259,7 @@ Break on this data reproduces 1,700 of the 1,743 MultiCharts trades on the same 
 
 v3 did not make the best combined account at any size tested.
 
-**MultiCharts confirmation of Overnight Bias** (`Backtesting Strategy Performance Report ONB v2.xlsx`,
+**MultiCharts confirmation of Overnight Bias** (`mc_reports/Backtesting Strategy Performance Report ONB v2.xlsx`,
 15-minute chart, 24-hour session, Bar Magnifier 1 minute, 1 NQ): 997 trades, 49% winners,
 average $278, profit factor 1.39, positive every year. It matches the Python test on 995
 of 997 trades (same day, side and entry price); the small P&L differences come from

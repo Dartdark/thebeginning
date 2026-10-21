@@ -19,7 +19,7 @@ from grid24 import jof
 from portfolio import load_mc
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
-REP = "Backtesting Strategy Performance Report VB v1.xlsx"
+REP = "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx"
 LAM = 100.0
 
 

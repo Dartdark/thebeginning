@@ -29,7 +29,7 @@ from grid import Grid, execute
 from portfolio import Book, load_mc, challenge
 from candidates import vault_break, opening_drive, gap_fade
 
-V3_REPORT = "Backtesting Strategy Performance Report v2 filtered up test.xlsx"
+V3_REPORT = "mc_reports/Backtesting Strategy Performance Report v2 filtered up test.xlsx"
 GREEN = 1.50                   # filter line threshold (10-day average range %)
 
 # account name -> {strategy: MNQ}; GAP is sized by $ risk in the strategy, so
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     ap.add_argument("--ONB", help="MultiCharts report for Overnight Bias")
     args = ap.parse_args()
 
-    g = Grid("NQ_1min_*.csv")
+    g = Grid("data/NQ_1min_*.csv")
     T = {"V3": load_mc(g, V3_REPORT), **python_trades(g)}
     for k in ("VB", "DRIVE", "GAP"):
         if getattr(args, k):

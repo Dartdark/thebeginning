@@ -1,6 +1,6 @@
 """MultiCharts confirmation of the Bridge's Monday Long NQ (L644NQ v2.1), 2026-10-13.
 
-Report: 'Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx' (5-min @NQ, Bar
+Report: 'mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx' (5-min @NQ, Bar
 Magnifier 1 min, no commission / slippage in MC). Matches its trades to the Python port
 (analysis/bridge_monday_long_test.py) by Monday date, then puts the MC trades (with $7.25 + 1 tick per market
 fill; the target is a limit) on the funded bench next to our Monday Long.
@@ -13,7 +13,7 @@ import bridge_monday_long_test as B
 import metrics as M, resampling as R
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
-F = "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx"
+F = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx"
 PV, TICK, COST = 20.0, 0.25, 7.25
 
 def load_bridge_mc(g, path=F):

@@ -20,8 +20,8 @@ standard metrics before / after. Blocks onbl1..onbl4; expects scratch pickles. R
 #         if tg is not None and h>=tg: return tgt*PV-COST-TICK*PV
 #         if be is not None and not moved and h>=e+be*stp: sp=max(sp,e+0.25); moved=True
 #     px=pd.Series(g.c[d,:jend+1]).ffill().iloc[-1]; return (px-e)*PV-COST-2*TICK*PV
-# ml=load_mc(g,"Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias v2.xlsx")
-# pl=load_mc(g,"Backtesting Strategy Performance Report ONB v2.xlsx")
+# ml=load_mc(g,"mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias v2.xlsx")
+# pl=load_mc(g,"mc_reports/Backtesting Strategy Performance Report ONB v2.xlsx")
 # def prep(t):
 #     t=t[(t.side==1)].copy(); t["dt"]=pd.DatetimeIndex(t.date); t=t[t.dt.dt.year>=2018]; return t.reset_index(drop=True)
 # ML,PL=prep(ml),prep(pl)

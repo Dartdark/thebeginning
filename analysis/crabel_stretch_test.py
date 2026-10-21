@@ -139,8 +139,8 @@ if __name__ == "__main__":
     from portfolio import load_mc, paths, challenge
     from funded_lab import with_slippage
     tr = g.trading; D = len(tr); yr = pd.DatetimeIndex(g.ts[tr]).year; atr = g.daily_atr(15)
-    vb = load_mc(g, "Backtesting Strategy Performance Report VB v1.xlsx"); w, r = paths(g, with_slippage(vb)); VBw, VBc = w[tr] / 10, r[tr] / 10
-    on = load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx")
+    vb = load_mc(g, "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx"); w, r = paths(g, with_slippage(vb)); VBw, VBc = w[tr] / 10, r[tr] / 10
+    on = load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx")
     w, r = paths(g, with_slippage(on)); Ow, Oc = w[tr] / 10, r[tr] / 10
     q = np.floor(1100 / (0.25 * np.nan_to_num(atr[tr], nan=1e12) * 2))[:, None]
     w, r = paths(g, base); Cw, Cc = w[tr] / 10, r[tr] / 10

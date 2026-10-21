@@ -25,7 +25,7 @@ def jof(hhmm):
 
 
 class Grid24:
-    def __init__(self, day_pattern="NQ_1min_20*.csv", night_pattern="NQ_1min_ON_*.csv"):
+    def __init__(self, day_pattern="data/NQ_1min_20*.csv", night_pattern="data/NQ_1min_ON_*.csv"):
         """Other instruments: Grid24("data/GC_1min_20*.csv", night_pattern="") for
         full-day exports (NQ_Bar_Exporter with StartTime 0, EndTime 2359)."""
         files = sorted(glob.glob(day_pattern)) + (sorted(glob.glob(night_pattern)) if night_pattern else [])

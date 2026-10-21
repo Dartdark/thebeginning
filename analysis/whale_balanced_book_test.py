@@ -24,7 +24,7 @@ PV, TICK, COMM = 20.0, 0.25, 7.25
 
 
 def features(g):
-    d = pd.concat([pd.read_csv(f, usecols=["date", "time", "big_trade", "big_trade_px", "s52", "s53"]) for f in sorted(glob.glob("OF_1min_*.csv"))],
+    d = pd.concat([pd.read_csv(f, usecols=["date", "time", "big_trade", "big_trade_px", "s52", "s53"]) for f in sorted(glob.glob("data/OF_1min_*.csv"))],
                   ignore_index=True)
     row = np.minimum(np.searchsorted(g.dates, d.date.values), g.D - 1); ok = g.dates[row] == d.date.values
     d, row = d[ok], row[ok]; col = jof(d.time.values - 100)

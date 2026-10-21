@@ -117,7 +117,7 @@ if __name__ == "__main__":
         rep(f"V2 |flow known at open| > {q}: follow 8:30->15:00", np.sign(f_lag_open) * day, dts, np.abs(f_lag_open) > q)
         rep(f"V2 |flow known at open| > {q}: follow 14:01->15:00", np.sign(f_lag_open) * last_hour, dts, np.abs(f_lag_open) > q)
     # V3 Late-Day Flow trades split by vol-control flow
-    ldf = load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx")
+    ldf = load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx")
     ldf["net"] = (ldf.exit - ldf.entry) * ldf.side * PV - 7.25 - 2 * TICK * PV
     pos = pd.Series(np.arange(len(tr)), index=tr)
     li = pos.reindex(ldf.day).to_numpy()

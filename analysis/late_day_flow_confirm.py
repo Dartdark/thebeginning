@@ -7,7 +7,7 @@ from portfolio import load_mc
 import metrics as M, resampling as R
 SP = "/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/"
 lab = pickle.load(open(SP + "lab_mon.pkl", "rb")); g = lab.g
-path = glob.glob("*Late Day Flow*.xlsx")[0]
+path = glob.glob("mc_reports/*Late Day Flow*.xlsx")[0]
 mc = load_mc(g, path); atr = g.daily_atr(15)
 mc["date"] = pd.DatetimeIndex(g.ts[mc.day.values])
 mc["net_mc"] = (mc.exit - mc.entry) * mc.side * 20 - 7.25 - 2 * 5          # +1 tick per market/stop fill

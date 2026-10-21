@@ -40,7 +40,7 @@ Tests
  Advancing (|t| >= 2.5 over all years, same sign in design and holdout): metrics.py whole / longs / shorts, by year,
  resampling.py bootstrap + permutation on 2023+, placebos (Mon-Thu 17:00 reopen gaps at the same threshold and at the
  same share of days, random side on the same Sundays), daily correlation with NQ RTH (8:31 -> 15:00).
-  python3 analysis/s_rank_gap_round2_test.py [SCRATCH_DIR] > analysis/s_rank_gap_round2_test_output.txt
+  python3 analysis/s_rank_gap_round2_test.py [SCRATCH_DIR] > analysis/outputs/s_rank_gap_round2_test_output.txt
 """
 import sys, os, pickle, itertools, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
 import numpy as np, pandas as pd
