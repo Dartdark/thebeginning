@@ -16,3 +16,16 @@
 Claude's weekday task (16:40 CT) runs `python3 analysis/journal_trades.py` and writes the trades into that day's journal
 note (`journal/daily/YYYY-MM-DD.md`, between the `auto-trades` markers). Errors from the push go to
 `C:\TradingLogs\push_errors.txt`.
+
+## Health checks (automatic, 2026-10-21)
+
+- **Logger:** the updated `Apex_Trade_Logger.txt` also writes `POS` rows (strategy position vs the broker's position for
+  that strategy) on every change and every 30 minutes. One-time step: paste the new code into the existing "Apex Trade
+  Logger" signal and compile, outside market hours (all charts that use it pick it up; inputs unchanged, new input
+  `HeartbeatMins` 30).
+- **VPS:** `push_trade_logs.ps1` now adds a health line (`live/health/YYYYMMDD.csv`: MultiCharts running, free disk, last
+  boot, time zone, log rows, push errors) and, on its first run, installs the morning task `VpsHealthOpen` (08:15 CT) by
+  itself. Nothing to set up.
+- **Check:** the 16:40 CT journal job (`analysis/journal_trades.py` -> `analysis/vps_health.py`) writes a 'Health (auto)'
+  section into the day's journal note: MISMATCH (position differs from the broker), STALE (no heartbeat > 70 min in
+  RTH), VPS problems. 'All clear' when nothing is wrong.
