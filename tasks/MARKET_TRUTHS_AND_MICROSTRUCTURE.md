@@ -115,3 +115,42 @@ This document serves as our institutional memory. **Consult this before proposin
 
 ### D. Minute-Level Trade Auditability by Default
 * All strategy backtests and evaluations must output `trades.csv` with exact minute-level timestamps (`entry_time`, `exit_time`), fill prices, and net P&L. Claims must be verifiable by independent models and auditors (Claude / MultiCharts) in minutes.
+
+### E. The 60-Day Evaluation Collapse (Li et al., KDD 2026)
+* **The Fragility of Short Backtest Windows**:
+  * Extending an evaluation window by as little as **60 days** (2 months) caused published AI strategy Sharpe ratios to flip from **+1.44 to -1.25** (MSFT) and **+2.02 to -0.48** (NFLX), with cumulative returns collapsing from +23.3% to -22.0%.
+  * Short-window backtests (< 2–3 years) reflect nothing more than localized regime noise and survivorship. This cements **Rule 1 (Zero Window Truncation)** and **Rule 7 (Chronological In-Sample vs OOS Holdout)**.
+
+---
+
+## 7. Machine Learning, LLM & Complex Model Pathologies (FINSABER / Li et al., KDD 2026)
+
+Empirical evidence from systematic 20-year multi-asset evaluations (FINSABER benchmark, 7,000+ equities, 2004–2024, KDD 2026) reveals structural behavioral failure modes in unconstrained AI/LLM trading agents:
+
+### A. The Regime Miscalibration Axiom
+* **Unconstrained AI Agents are Inversely Calibrated to Market Regimes**:
+  * **Bull Markets (Timid & Under-allocated)**: AI agents exhibit excessively low market beta ($\beta \approx 0.20 - 0.50$), sit in cash, or exit prematurely. They post pathetic Sharpe ratios (FinAgent 0.12, FinMem -0.19) compared to passive equity beta (Buy & Hold Sharpe 0.61), completely missing the market uptrend.
+  * **Bear Markets (Pro-Cyclical Disaster)**: Rather than providing downside hedging, AI agents make pro-cyclical trading decisions that catastrophically amplify drawdowns. In the 2008 crash, FinMem suffered a **-75% peak-to-trough drawdown on John Deere (DE)** vs -50% for SPX, generating a bear-market Sharpe of **-0.97** (FinAgent -0.38).
+  * **Sideways Markets (Noise Whipsaw)**: In range-bound markets, unconstrained agents churn accounts. FinMem produced 5x to 9x higher commission ratios than FinAgent, destroying equity through execution friction.
+* **Core Takeaway for Futures Strategy Design**:
+  * Unconstrained AI/ML models fail because they lack domain-grounded regime awareness. In our intraday futures portfolio, we rely on **explicit structural regime switches** (e.g., ADX > 30 filter, midnight VWAP slope, ATR expansion barriers) rather than open-ended predictive models.
+
+### B. Model Scaling Laws Fail in Financial Markets (Complexity $\ne$ Competence)
+* **NLP Scaling Does Not Translate to Low-SNR Markets**:
+  * In financial series where signal-to-noise ratio (SNR) is exceptionally low, increasing model scale (e.g., GPT-4o vs GPT-4o-mini, multi-agent frameworks) does **not** generate statistically significant alpha.
+  * In CAPM factor regressions, neither FinMem nor FinAgent generated statistically significant alpha (**all $\alpha$ $p$-values $> 0.34$**; FinMem produced persistent negative alpha of $-1.04\%$ to $-1.34\%$).
+  * Across 20 years of data, simple structural and econometric models with explicit financial logic (ARIMA, ATR Volatility Bands, Turn-of-Month) consistently beat complex LLM and Deep RL agents on Sharpe, Sortino, and Maximum Drawdown. Architectural complexity without financial priors simply fits noise.
+
+### C. Quantitative Selection & Filtering Building Blocks (Actionable Formulas)
+The FINSABER study validated three quantitative selection and filtering mechanics that hold institutional robustness:
+
+1. **Momentum with 1-Month Skip Window (Carhart 1997 / Jegadeesh & Titman 1993)**:
+   $$\text{Momentum Score}_t = \frac{\text{Price}_{t - 21}}{\text{Price}_{t - 100}} - 1$$
+   * **Mechanism**: Measuring price momentum over a 100-day window while **skipping the most recent 21 trading days (1 month)** removes the contaminating short-term mean-reversion / liquidity-rebound bounce. Pure medium-term momentum resides strictly in the $(t-100 \to t-21)$ interval.
+2. **The Low-Volatility Anomaly (Blitz & Vliet 2007)**:
+   * **Formula**: Historical volatility measured as the standard deviation of **weekly log returns** over 21 trading days: $\sigma = \text{std}(\ln(P_t / P_{t-5}))$.
+   * **Mechanism**: Weekly returns filter out high-frequency microstructure bounce and bid-ask bounce. Assets/regimes characterized by lower baseline volatility cut maximum portfolio drawdowns by more than half (MDD -14.1% vs -35.1% for random selection) and more than double baseline Sharpe (0.703 vs 0.315).
+3. **Correlation-Discounted Portfolio Construction (FinCon Metric)**:
+   $$\text{Selection Score}_i = \text{Sharpe}_i \times (1 - \bar{\rho}_i)$$
+   where $\bar{\rho}_i$ is the candidate's average pairwise correlation to the universe.
+   * **Diversification Gate**: If the average internal correlation of the active candidate set exceeds $0.70$, discard and apply a greedy correlation-minimization fallback (select top Sharpe, then iteratively add lowest-correlated assets). This mirrors our requirement that any new futures strategy must span the active portfolio rather than duplicate existing exposure.
