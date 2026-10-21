@@ -170,6 +170,12 @@ are not optional.
    - in BOTH 2018-22 and 2023-26;
    - on net $ per contract AND on the worst drawdown;
    - with no new overnight holding (flat by 15:59 CT) and no position sizing above the original.
+   - **for a filter (it removes trades):** compare TOTAL net $, not $ per trade (removing any break-even trades raises the
+     per-trade average by itself); show the removed trades lose money (their average and t); and drop the same number of
+     trades at random 1,000+ times: the filter's max drawdown must beat most random drops (2026-10-21: VB Combined cut DD
+     no better than random removal, P 0.50, and lost $3.4k a year on 2023-26; `agents/results/VB_COMBINED_REVIEW.md`).
+   - Contract maths: 1 MNQ = 1/10 NQ, 2 MNQ = 1/5. MultiCharts code: daily ATR is NOT `AvgTrueRange` on an intraday chart;
+     stops / targets via `SetStopLoss` / `SetProfitTarget` so the entry bar is protected (see `MULTICHARTS_PITFALLS.md`).
 6. **Output:** `tasks/out_NN/improve_report.md` (each variant: the idea, the result by period, the trial count) and
    `improve_strategy.py`.
 

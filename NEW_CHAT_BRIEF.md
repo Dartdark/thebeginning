@@ -56,6 +56,10 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **Antigravity's Vault Break Combined (HYP-025, 2026-10-21): D, not adopted.** Its 12:30 CT last-entry + 0.5-ATR VWAP
+  stretch cap: design t 3.21 vs 2.71 but 2023+ t 2.46 vs 2.66 and −$3.4k a year; removed trades make money (+$42, t 1.1);
+  DD cut = random removal (P 0.50); its MultiCharts code used a 30-min ATR and left the entry bar unprotected.
+  Review `agents/results/VB_COMBINED_REVIEW.md`; its 'microstructure laws' are post-hoc stories, not adopted. Live VB unchanged.
 - **Antigravity's role (user, 2026-10-20): strategy builder by default** (its brief now shows the plan's hours and
   `agents/tasks/plan_daily_pnl.csv` so it aims at gaps); blind checker only in a fresh conversation with task text only.
   Its strategies today: NQBreakoutATR F, NQIntradayMR F, NQIBBreakout C (overlaps VB). Each mistake caught is written into

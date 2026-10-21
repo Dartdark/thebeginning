@@ -24,6 +24,14 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - **Bar-time minutes vs HHMM**: when porting, 15:30 CT is minute 1350 / HHMM 1530, not 1290 (a Python port bug,
   FillEnd 1290). Convert with one helper (`jof` in `analysis/grid24.py`), never by hand.
 
+## Found in reviews of others' code (2026-10-21, Antigravity's VB Combined)
+- **`AvgTrueRange(n)` on an intraday chart is the ATR of n intraday bars**, not n days (30-min ATR ~ 1/10 of the daily one).
+  Fix: per-date true ranges in an array (as `NQ_Vault_Break.txt`) or a daily Data2.
+- **Exits sent only `if MarketPosition > 0`** leave the entry bar without a stop or target (the order exists from the next
+  bar). Fix: `SetStopLoss` / `SetProfitTarget` (they work on the entry bar) plus the bar-close stop guard.
+- **Counting entries with `MarketPosition <> 0 and MarketPosition[1] = 0`** misses trades that open and close in one bar.
+  Fix: `TotalTrades` at the day's start vs now.
+
 ## Live order rejections
 - **'Invalid StopMarket order parameters' on a protective stop** (EOS, 2026-10-16, 6:34 PT = 8:34 CT: "Buy Stop 1 @MNQ @ 30168"
   rejected): the short filled at the 8:30 open, price ran up through the stop level before the stop order reached Rithmic,
