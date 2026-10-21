@@ -12,6 +12,7 @@ NQ / ES futures strategies (MultiCharts PowerLanguage) for Apex 50K / 150K prop 
 | **What runs where, with which inputs** | `reports/Strategy_Settings.pdf`; plan detail `funded_strategies/FUNDED_PLAN.md`; roster `funded_strategies/README.md` |
 | **Business plan / guides** | `reports/` (`Trading_Business_Plan.pdf`, `Performance_Report_Guide.pdf`, screenshots of Apex terms in `reports/screenshots/`) |
 | **Your to-do list** | `TODO.md` |
+| **Milestones: how it started and the progress so far** | `MILESTONES.md` |
 | **Every idea tested and its grade (S-F)** | `TIER_LIST.md`; things to recheck: `WATCHLIST.md`; multiple-testing log `TRIALS.csv` |
 | **Rules learned the hard way** | `LESSONS.md` (short rules), `MULTICHARTS_PITFALLS.md` (every MultiCharts / Rithmic / Apex error and its fix) |
 | **How strategies are developed and promoted** | `DEVELOPMENT_PROCESS.md`; current goal `S_RANK_PROGRAM.md`; history `HANDOFF.md` |
