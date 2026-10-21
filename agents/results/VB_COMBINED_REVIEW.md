@@ -90,3 +90,21 @@ lookahead. The mismatch with the Jesse logic is the ATR definition and the entry
 
 A pre-registered forward test: from 2026-11, the trades the filter would have removed average below $0 over >= 150
 trades (about a year), with the paired-bootstrap DD difference below 0 at 90%.
+
+## Addendum: SundayReopenPush (HYP-018) and Vault Break Short (dossier commit 2a3df6a)
+
+- **SundayReopenPush is our WATCHLIST #22** (the user's NQ_WKND_v2, rebuilt in `analysis/sunday_reopen_test.py` on 2026-10-18).
+  The numbers match ours: $179 per NQ, t 2.5, 171 reopens. It is not a new discovery and not uncorrelated evidence.
+- **The holdout gate means nothing here.** Only 9 of 167 trades fall in 2018-22 (the 17:00 minute is missing from those
+  exports), so there is no design period to hold out from.
+- **The core problem is the fill, not the statistics.** The gap direction is read from the first print, and the trade
+  enters AT that first print. Any order sent after the open is seen is late. Our check (2 ticks + $14.50 a trade):
+  enter at the 17:01 close and hold to 17:02 −$39 (t −1.5), to 17:15 +$10 (t 0.2), to 17:30 −$34; enter at 17:05 and
+  hold to 17:15 +$25 (t 0.7). The dossier's "15-minute hold peaks at +$40,950" is the same first minute plus noise.
+- The only way to get that price is an order in the pre-open auction, with the side taken from CME's indicative opening
+  price. MultiCharts' bar-close signals can't do that; it would be a manual order. WATCHLIST #22 stands: log the
+  indicative price, your fill and the first print for ~20 Sundays before any money goes on it.
+- Their Jesse code's `go_long` buys at `self.price` (the bar's close in Jesse), so it may not even trade the first print.
+  The ledger's prices are the bar open. Check which one the 167 trades actually used.
+- **Vault Break Short (HYP-019/020): F.** We agree. Design t 3.11, then 2023+ −$13.4k with a $36k DD: a filter picked in
+  sample. The "structural asymmetry" story is post hoc again.
