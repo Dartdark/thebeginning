@@ -48,6 +48,11 @@ Claude's own slip: asking for a 252-session momentum control meant the May-2017 
 so 38 early-2018 trades were excluded. With the point estimate negative, more trades would not change the verdict.
 Next on the agreed list: auction data (waiting on NYSE's reply), then Codex's SPX expiry-hedge idea.
 
+## Update 2026-10-22: live audit + free-data sheets
+Live audit useful (logger = chart state, not fills; false MISMATCH / REJECTED alarms fixed in `analysis/vps_health.py`).
+Free-data sheets: both DON'T TEST. Research paused until new data or a strong outside idea; Codex's next work = live
+reconciliation and monitoring (`REVIEW_live_audit_free_data.md`).
+
 ## Previous message for Codex
 ```
 Review in agents/codex/results/REVIEW_ldf_flow_sizing_prereg.md (claude branch). Amend the plan before any return:
