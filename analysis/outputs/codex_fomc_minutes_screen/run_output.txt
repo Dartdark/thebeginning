@@ -1,0 +1,52 @@
+Calendar/occupancy frozen before candidate returns: 19 of 40 events flat
+ side  gross_total  cost_total   total  gross_avg         t  trades      win        avg      annual    sharpe   sortino  profit_factor  max_dd    calmar    ulcer  ulcer_perf
+whole        850.0      327.75  522.25  44.736842  0.140486      19 0.473684  27.486842  102.100078  0.063760  0.093022       1.084064 2488.50  0.041029 1.471425    0.138777
+ long       -460.0      207.00 -667.00 -38.333333 -0.227680      12 0.416667 -55.583333 -130.398759 -0.104861 -0.139564       0.849631 2901.25 -0.044946 1.639413   -0.159080
+short       1310.0      120.75 1189.25 187.142857  0.492384       7 0.571429 169.892857  232.498836  0.230477  0.403671       1.669340 1247.25  0.186409 0.579079    0.802995
+ year  side  trades  gross      net   gross_avg     net_avg         t
+ 2018 whole       4  425.0   356.00  106.250000   89.000000  0.387562
+ 2019 whole       3 -515.0  -566.75 -171.666667 -188.916667 -0.824740
+ 2020 whole       2 2570.0  2535.50 1285.000000 1267.750000  2.881250
+ 2021 whole       5 -675.0  -761.25 -135.000000 -152.250000 -0.630177
+ 2022 whole       5 -955.0 -1041.25 -191.000000 -208.250000 -0.354079
+{
+  "plan_commit": "f1f720d",
+  "trials": 1,
+  "period": "2018-22 only",
+  "gate_checks": {
+    "at_least_20_trades": false,
+    "gross_at_least_1_5_cost": true,
+    "net_positive": true,
+    "net_t_at_least_2": false,
+    "at_least_3_positive_years": false,
+    "at_least_95_percent_unoccupied": true
+  },
+  "design_pass": false,
+  "verdict": "REJECT",
+  "holdout_opened": false,
+  "placebos_run": false,
+  "monte_carlo_run": false,
+  "funded_bench_run": false,
+  "round_trip_per_NQ": 17.25,
+  "gross_hurdle_per_NQ": 25.875,
+  "unoccupied_position_fraction": 1.0,
+  "position_minutes": 433,
+  "overlap_minutes": 0,
+  "roster_interval_counts": {
+    "EOS": 60,
+    "LDF_MC": 492,
+    "MON_MC": 256,
+    "NFP_MC": 43,
+    "ONB_ML2_MC": 192,
+    "RS_L": 324,
+    "VB": 854,
+    "MON_BR_MC_actual": 119,
+    "CLS_actual": 42,
+    "MOC_MES": 131
+  },
+  "audit_counts": {
+    "existing_position": 21,
+    "signal": 19
+  }
+}
+STOP: design failed; no holdout, placebos or account bench
