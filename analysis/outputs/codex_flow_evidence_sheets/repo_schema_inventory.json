@@ -1,0 +1,139 @@
+{
+  "SPY_daily.csv": {
+    "file_count": 1,
+    "first_file": "data/SPY_daily.csv",
+    "distinct_schemas": [
+      [
+        "DATE",
+        "CLOSE"
+      ]
+    ]
+  },
+  "GEXOI_*.csv": {
+    "file_count": 5,
+    "first_file": "data/GEXOI_2022.csv",
+    "distinct_schemas": [
+      [
+        "date",
+        "time",
+        "basis",
+        "dte",
+        "strike",
+        "gex",
+        "call_oi",
+        "put_oi"
+      ]
+    ]
+  },
+  "GEX_1min_*.csv": {
+    "file_count": 5,
+    "first_file": "data/GEX_1min_2022.csv",
+    "distinct_schemas": [
+      [
+        "date",
+        "time",
+        "close",
+        "flip",
+        "flip_steep",
+        "centroid",
+        "maj_pos",
+        "maj_neg",
+        "basis",
+        "spot",
+        "dte",
+        "flip_oi",
+        "maj_pos_oi",
+        "maj_neg_oi",
+        "big_trade",
+        "big_trade_px",
+        "bid_depth10",
+        "ask_depth10"
+      ]
+    ]
+  },
+  "OF_1min_*.csv": {
+    "file_count": 35,
+    "first_file": "data/OF_1min_2018_1.csv",
+    "distinct_schemas": [
+      [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "upvol",
+        "downvol",
+        "spread_ticks",
+        "bid_sz_top",
+        "ask_sz_top",
+        "size_imb",
+        "count_imb",
+        "qdepl_bid",
+        "qdepl_ask",
+        "pulled_bid",
+        "pulled_ask",
+        "ice_bid",
+        "ice_ask",
+        "trade_rate",
+        "cum_delta",
+        "event_rate",
+        "levels_bid",
+        "levels_ask",
+        "big_trade",
+        "big_trade_px",
+        "s48",
+        "s49",
+        "s50",
+        "s51",
+        "s52",
+        "s53",
+        "s54",
+        "s55",
+        "s56",
+        "s57",
+        "s58",
+        "s59",
+        "s60",
+        "s61",
+        "vwap",
+        "vwap_sd",
+        "poc",
+        "poc_prev",
+        "vah",
+        "val"
+      ]
+    ]
+  },
+  "ES_1min_*.csv": {
+    "file_count": 10,
+    "first_file": "data/ES_1min_2017.csv",
+    "distinct_schemas": [
+      [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ]
+    ]
+  },
+  "NQ_1min_20*.csv": {
+    "file_count": 9,
+    "first_file": "data/NQ_1min_2018.csv",
+    "distinct_schemas": [
+      [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ]
+    ]
+  }
+}
