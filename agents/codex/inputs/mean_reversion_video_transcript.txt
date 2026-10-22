@@ -1,0 +1,1438 @@
+0:00
+Hey guys, it's Salah. In this video, I
+0:01
+will show you a mean reversion strategy
+0:03
+in Python which not only has a high win
+0:06
+rate, but it also works on multiple
+0:07
+assets. So, at least until this point,
+0:10
+it is the best mean version strategy
+0:12
+that I have ever written. As always,
+0:13
+first I will show you the entry and exit
+0:15
+rules of the strategy on trading view
+0:17
+and then we will use GPT to convert
+0:20
+those rules into Python code so we can
+0:22
+run some back test on it. So, you can
+0:24
+see that even if you are not a great
+0:25
+programmer, you can still do research
+0:28
+with Python for algo trading. Before we
+0:30
+continue, I got to say I am not a
+0:32
+financial adviser and everything that
+0:33
+you see in this video is simply a
+0:35
+trading tutorial. Trading always has
+0:37
+risk. So no matter what the win rate
+0:39
+that you see for the result of this
+0:41
+strategy, you should always be careful
+0:43
+and do your own research before trading
+0:45
+this strategy or anything like it. So
+0:47
+with that out of the way, let's get
+0:48
+started.
+0:50
+Now, this is a mean reversion strategy,
+0:52
+which means unlike trend following
+0:54
+strategies, we're not going to begin
+0:56
+with a leading trend indicator because
+0:58
+we don't want the price to continue to
+1:00
+its direction. Instead, what we want is
+1:02
+for it to go back to its mean, which
+1:04
+means we're going to take a position the
+1:05
+opposite side of the current direction
+1:07
+of the market. Now, a great indicator
+1:09
+for that is Ballinger band. So, let's
+1:11
+look it up.
+1:14
+By the way, the time frame of the
+1:16
+strategy is 1 hour. All right. So simply
+1:18
+put, we want to buy at the lower band of
+1:20
+the Ballinger bands, which would be this
+1:22
+green line here. And if it's a short
+1:24
+position, we want to do opposite, which
+1:25
+means we're going to open your short
+1:27
+position at this price. Now, in case
+1:29
+you're not already familiar with the
+1:30
+Ballinger bands, this blue line here is
+1:33
+a moving average. And then these two
+1:35
+other lines are simply two standard
+1:37
+deviations away from that mean. because
+1:39
+statistically speaking whenever the
+1:41
+price goes two standard deviation away
+1:43
+from the mean it is more likely to go
+1:46
+back to its mean. Now I don't remember
+1:48
+the exact numbers for this but it's a
+1:50
+very interesting theory. However, what I
+1:52
+just described isn't actually an interle
+1:54
+of the strategy. It's basically where we
+1:57
+want to open the position. Now the next
+1:59
+indicator which is the main indicator of
+2:01
+the strategy is simply the RSI. So let's
+2:04
+look it up on trading view.
+2:08
+Now, as you already know, the RSI is
+2:11
+simply an oscillator. Usually, we want
+2:14
+to short when it goes above the
+2:16
+threshold, which would be here, and we
+2:19
+want to go long when it's vice versa.
+2:22
+But the way I want to use it in this
+2:23
+strategy again, because it's mini
+2:25
+reversion, is actually quite different
+2:27
+because I actually want to buy at a
+2:28
+pullback. So, I want to be a direction.
+2:32
+I want it to be a trend. But instead of
+2:34
+buying instantly, we want to bet that
+2:36
+the price is going to have a pullback.
+2:39
+So I'm actually looking forward for
+2:41
+scenarios like this. So let's say there
+2:43
+is a strong trend, but I want to buy at
+2:45
+pullback like in here for example. So
+2:47
+that when it goes up again, I'm going to
+2:50
+make a profit. But here's the thing. If
+2:52
+I only buy when the price is for example
+2:55
+like here above the threshold, the
+2:57
+window of opportunity is going to be
+2:58
+very small. So instead, what I'll be
+3:01
+doing is I will still use the RSI but on
+3:04
+a bigger time frame. So let's do that on
+3:07
+trading view
+3:10
+and change the time frame to
+3:13
+4 hours.
+3:16
+Click okay.
+3:18
+All right. So now from here all the way
+3:22
+until here would be a valid opportunity
+3:24
+for us to open the position. All right.
+3:26
+Next, we're going to have to think about
+3:28
+situations where maybe the RSI is like
+3:31
+this, but there isn't an actual trend or
+3:33
+volatility in the market like in this
+3:35
+case. So, even if there isn't, for
+3:37
+example, in here, the RSI could still be
+3:40
+overbought. For example, in here, right?
+3:42
+And yes, this is a good candle, but it
+3:44
+doesn't mean that it's a trend, right?
+3:46
+Now, yes, in this case, if we did open a
+3:49
+long position, it would have made us
+3:50
+profit, but there will be many false
+3:52
+breakouts, and we need to be careful
+3:54
+with those. So, the next indicator that
+3:56
+I'll be using is simply the ADX. So,
+3:58
+let's add it to our chart. And because I
+4:00
+don't want to lose so many trades
+4:02
+because this is also some kind of
+4:04
+squeeze strategy, you could call it. So,
+4:06
+we don't want to always wait until the
+4:08
+trend is really, really strong, right?
+4:10
+We want to be early with it. For that
+4:12
+reason, unlike my previous strategies,
+4:14
+instead of setting the ADX threshold to
+4:16
+a number such as 40, in this one, I'm
+4:18
+going to set it to 20. So, let's do that
+4:21
+on Trading View. So, wherever this line
+4:25
+is above this threshold, we're okay to
+4:27
+open the position. But this could also
+4:29
+have some false breakout. So, what I'm
+4:32
+going to do is to do the same thing, but
+4:34
+also on the bigger time frame. So, this
+4:39
+will be again 4 hours. We'll do this.
+4:42
+But for the 4 hours, I'm going to set
+4:44
+the ADX threshold to 40, which would be
+4:47
+this luck. Okay? So, by doing this, I
+4:49
+won't be able to buy here. I can only
+4:52
+buy from here all the way until here.
+4:55
+All right. So, we have all the entry
+4:57
+rules except one more thing. We're going
+4:59
+to need one last filter for the trend.
+5:01
+Now, again, I know this is not supposed
+5:03
+to be a trend following strategy, but
+5:05
+still we need the trend indicator except
+5:07
+that we didn't begin with that. I'll
+5:09
+show you what I mean. So, usually in a
+5:11
+trend following strategy, you want to
+5:13
+use a trend indicator with the current
+5:15
+time frame. And that could be anything.
+5:17
+It could be the moving average, the
+5:18
+super trend, the comma indicator,
+5:20
+whatever. In this one, I'm going to use
+5:22
+the super trend. So, let's add it. And
+5:25
+also remove the RSI and the ADX so we
+5:30
+can see this better. Now, let's also
+5:33
+disable Ballinger bands so that this
+5:35
+will be more clear to see. All right.
+5:36
+So, you see, for example, here we have
+5:39
+an uptrend because the super trend line
+5:42
+is below the current price and it's also
+5:44
+displaying the color green. And here we
+5:47
+have a downtrend because the super trend
+5:49
+value is above the current price. Also,
+5:52
+it color is red. Now, this is important
+5:54
+because that's how we're going to write
+5:55
+the Python code for it. Now, here's the
+5:57
+thing. If we used super trend as it is
+5:59
+right now, for example, in here, this
+6:02
+would have been considered a downtrend.
+6:04
+But as I explained, I actually want the
+6:06
+price to have a pullback, right? So, no
+6:08
+matter where it's going before, I want
+6:11
+it to go actually against that price for
+6:14
+me to be able to open the position. So
+6:16
+if it changes the direction of the trend
+6:17
+very quickly, it won't be good enough
+6:19
+for me. So what I'm going to do is to
+6:21
+simply change a time frame one more time
+6:24
+from whatever my charts is, which in
+6:27
+this case would have been the hourly
+6:29
+into 4 hours.
+6:32
+Click okay. And now you see this period
+6:35
+here is no longer a downtrend, but it is
+6:38
+an uptrend because it is displaying the
+6:40
+green color. And just like that also
+6:42
+this one here isn't considered an
+6:44
+uptrend because on the 4hour time frame
+6:47
+it is still a downtrend. Now this is
+6:49
+something that we would have never done
+6:50
+in a trend following strategy but in a
+6:52
+mini version that's perfectly fine. All
+6:54
+right. So we talked about the entry
+6:55
+rules of the strategy but now let's talk
+6:57
+about the exit rules for both the stop
+6:59
+loss and take profit. So for that I'm
+7:01
+going to disable super trend and enable
+7:04
+the Ballinger bands again. Zoom it in.
+7:08
+All right. So assuming we open the
+7:10
+position at the lower band. So I could
+7:12
+be here for example. I want the takerit
+7:15
+to be at the upper band which would be
+7:17
+here at this red line. And of course do
+7:19
+the opposite for a short position. Now
+7:21
+what about the stop loss? Well for that
+7:23
+just like my previous strategies I'm
+7:25
+going to use the ATR indicator. So
+7:27
+basically it will tell us on average how
+7:30
+much every candle has changed in the
+7:32
+price. So for instance, let's say from
+7:33
+here to here is the actual average price
+7:36
+that every candle is changing because in
+7:38
+one of them is changing less but in
+7:40
+another like here for example is
+7:42
+changing a lot. Right? So let's say this
+7:44
+is the average and then I want six times
+7:46
+of that value to be below my entry. So
+7:49
+if my entry for example is here I want
+7:51
+it to be six times of this below this
+7:54
+which would end up something like here
+7:56
+for example. Now if you want the exact
+7:58
+value of it, of course you could look up
+7:59
+the ATR indicator on trading view and
+8:02
+here you would get that value. So in
+8:04
+here it would have been 725.
+8:08
+So you need to calculate six times of
+8:12
+that and subtract it from here. Now the
+8:14
+ATR indicator isn't really helpful for
+8:16
+manual traders at least based on what
+8:18
+I've seen. But in algo trading it is
+8:20
+actually very handy. Now, I should also
+8:22
+emphasize this that usually in a trend
+8:24
+following strategy, we want to have a
+8:26
+high risk-to-reward ratio, which is why
+8:29
+we want to make sure that when we win,
+8:30
+we win bigger than the amount when we
+8:32
+lose, which is why even when we do use
+8:35
+the ATR, we usually use values such as
+8:37
+two or three. But because this one is a
+8:38
+mini version, we usually do the
+8:40
+opposite, which means the win rate of
+8:42
+the strategy is going to be higher.
+8:44
+Something like 70 80% is like the
+8:47
+minimum for such a strategy. But when we
+8:50
+win, we win less. And when we lose,
+8:52
+we're going to lose in bigger sizes,
+8:54
+which is why our stop loss is being this
+8:56
+much below the current entry. If this
+8:58
+sounds a bit too complicated, just
+8:59
+forget about it once I show you some
+9:02
+back test results. You'll see what I'm
+9:03
+talking about. All right. So, now that
+9:04
+we have both the entry and exit rules of
+9:07
+the strategy, we're ready to convert it
+9:09
+into Python code. So, we can run some
+9:10
+back test on it. Now, for this part, I
+9:12
+want to simply feed the entry and exit
+9:15
+rules to an LLM model and have it write
+9:17
+the Python code for us. And as always,
+9:19
+we have two options. One is to use Jesse
+9:21
+GPT, which is the cloud version of it
+9:24
+that I made myself with some
+9:25
+instructions specifically for aggregate
+9:27
+trading in Python. Or if you don't want
+9:29
+to use my service because you have some
+9:30
+privacy concerns or if you don't want to
+9:33
+pay me anything, that's perfectly fine.
+9:35
+You can just come to my channel and
+9:37
+watch this previous video that I made
+9:39
+which will show you how to selfhost this
+9:42
+by yourself. But again, I'm going to use
+9:43
+JGPT. So, let's get started. All right.
+9:45
+So first we need to ensure we have
+9:48
+picked the right model. Now this is
+9:50
+right now set on quen 3 coder which I
+9:52
+reviewed a while ago but for this I'm
+9:55
+going to go with claw 3.7 sonnet which
+9:58
+I'm always happy with. So I kind of see
+10:00
+no reason to change this. So let's paste
+10:03
+in the in rules. Now I simply ask the
+10:05
+model please write a mini version of
+10:07
+strategy with below rules. Use the RSI
+10:09
+on a bigger time frame specifically the
+10:11
+4 hours time frame. For long positions
+10:13
+the RSI must be above 70. For short
+10:15
+positions, do the opposite. As for the
+10:17
+trend, use the super trend indicator.
+10:19
+Once it is displaying an uptrend, you
+10:21
+want to go long. This should also use
+10:23
+the bigger time frame. For the ADX, it
+10:25
+needs to be above 40 on the bigger time
+10:27
+frame. It needs to be above 20 on the
+10:29
+current trading time frame. For short
+10:31
+positions, do the opposite. For entries
+10:33
+in long positions, the entry price must
+10:35
+be the lower band of the current
+10:36
+Ballinger bands indicator. Set the stop
+10:39
+loss as the current entry price minus
+10:41
+six times of the current ATR. Risk 2% of
+10:44
+the accounts per each trade. For take
+10:46
+profit in long positions, close at the
+10:49
+upper band of the current Ballinger
+10:50
+bands. For short positions, take profit
+10:53
+at the lower band of the current
+10:54
+Ballinger bands. So basically whatever
+10:56
+just showed you on the chart, we are
+10:58
+simply asking the model to write it for
+11:01
+us. Let's hit enter and wait for the
+11:03
+response. All right, so it wrote it for
+11:05
+us. It is called mean version. So let's
+11:07
+copy this name. All right. Let's go to
+11:09
+Jess's dashboard. Create a new strategy
+11:11
+and paste this name here. But I will
+11:13
+also add the name RSI at the end of it.
+11:15
+So it will be mean version RSI. Let's
+11:18
+click on create. And now let's go back,
+11:21
+copy the whole code and paste it here.
+11:24
+Now I could review the code on the
+11:26
+editor inside J's dashboard or we could
+11:29
+open the VS code which is a
+11:31
+significantly better IDE. So that's the
+11:34
+one that I'm going to do. So mean
+11:35
+reversion RSI. So let's look it up. All
+11:38
+right. So first it defined the higher
+11:40
+time frame candles with the syntax get
+11:43
+candles. Then it's passing the current
+11:45
+exchange symbol and specifically the
+11:47
+time frame of 4 hours. So this is
+11:49
+perfect. The higher TF RSI is returning
+11:53
+TA. RSI for the RSI indicator. But
+11:56
+instead of passing the current candles,
+11:58
+it is passing this higher TF candles. So
+12:00
+I really like what it did here. So first
+12:02
+it defined a property and later we can
+12:06
+pass it very easily whenever we need to.
+12:09
+Next it defined the higher time frame
+12:10
+super trend like this TA. Trend again
+12:13
+passing the higher time frame candles.
+12:15
+The higher time frame ADX is again
+12:18
+TA.ADX with the higher TF candles. And
+12:21
+the current TFADX is simply passing TA.
+12:26
+ADX but instead of passing the higher
+12:28
+time frame candles it is passing the
+12:30
+current candles which in Jesse you can
+12:33
+always get it by simply using
+12:35
+selfcandle. So you don't need to define
+12:37
+this anywhere. Now for the Ballinger
+12:39
+bands again it is using this syntax and
+12:42
+passing the current candles because we
+12:44
+don't want the Ballinger bands on the
+12:45
+bigger time frame. We want it on the
+12:48
+trading time frame. All right. Next, it
+12:50
+defined the ATR by simply returning
+12:52
+TA.ATR and then passing the current
+12:55
+candles. And then it defined the integer
+12:57
+rules of the strategy. So, it's also
+13:00
+displaying it here in a beautiful
+13:01
+comment. So, the RSI needs to be above
+13:04
+70 on 4 hours. The super trend is
+13:06
+uptrend on 4 hours. The ADX is above 40.
+13:09
+Now, let's take a look here. So, the
+13:11
+higher TF RSI must be above 70. The
+13:15
+higher TF super trend must be one.
+13:18
+This is incorrect.
+13:20
+And then the higher time frame ADX must
+13:22
+be above 40. And the current time frame
+13:25
+ADX must be above 20. So this is really
+13:27
+good. But this part is not correct. So
+13:31
+let's first see how many times it is
+13:33
+defining this.
+13:35
+Okay. So just once. So instead of this,
+13:39
+I'm going to first of all rename this
+13:41
+into simply trend.
+13:44
+and I will get the super trend value
+13:47
+like this. Then I will say this if the
+13:51
+current
+13:53
+price is above the value of S. trend and
+13:59
+by the way this S dot trend is this
+14:02
+value here. So if the current price is
+14:04
+above it that means we are in uptrend
+14:07
+and if it is below it like in here then
+14:12
+we are in a downtrend right? So I'm
+14:14
+going to say if the current price is
+14:16
+above S. trend return one which means we
+14:20
+are in uptrend otherwise we're going to
+14:23
+return zero. So let's go back
+14:28
+and now this is correct except that we
+14:31
+should remove this
+14:33
+and for short positions we should also
+14:36
+do this. All right. So everything else
+14:38
+looks good. Now let's go to the position
+14:40
+sizing which is right here. Now the
+14:43
+entry price is going to be the lower
+14:45
+band of the current Ballinger bands. So
+14:47
+I know this is correct. The stop loss is
+14:50
+going to be the current entry price
+14:51
+which would be this minus 6 times of the
+14:54
+current ATR and we are risking 3% of per
+14:58
+capita. How? Well by using this utility
+15:00
+function risk to quantity. First it gets
+15:03
+the current available margin which is
+15:06
+how much money your account has for
+15:07
+trading. Then it is passing the number
+15:09
+for risk. So you see the second
+15:12
+parameter is risk per capital. It is
+15:14
+passing three. Next we have the entry
+15:16
+price the surplus price and then we
+15:19
+going to have to set the fee rate and we
+15:22
+are passing the current fee of the
+15:24
+current exchange that we're trading. Now
+15:25
+this one you don't really know. Just
+15:28
+pass it like this and you're good to go.
+15:30
+And then to submit the actual buy order
+15:32
+we're using self buy equals quantity and
+15:35
+then enterprise. So notice that we are
+15:37
+not subitting the surplus but we did the
+15:39
+calculated so that we can use it here to
+15:43
+estimate how much we should be buying in
+15:45
+order to risk only 3% of capital per
+15:48
+that position. Now for a short position
+15:50
+we're doing the opposite. Now the should
+15:52
+cancel entry is true. Now about this one
+15:55
+we need to talk. So let's go back to the
+15:57
+chart
+16:01
+and bring back the Ballinger bands. So
+16:03
+let's remove this. All right. So suppose
+16:06
+that at this point for example we decide
+16:10
+to submit the buy order and of course
+16:13
+because we are setting a price lower
+16:15
+than the current price it's going to be
+16:16
+a limit buy order right so it won't be a
+16:19
+market order and we said that the buy
+16:22
+price is going to be at the lower band
+16:24
+of the Ballinger bands. So in this point
+16:26
+that would have been here right but as
+16:29
+you can see on the next candle the price
+16:31
+didn't reach here. Not only it didn't
+16:33
+reach here but the value of the lower
+16:35
+band is now here. So we need to update
+16:38
+the order or submit another one and
+16:41
+cancel the previous one. Right? And if
+16:43
+we keep doing this at this point now
+16:46
+this one actually isn't touching this
+16:48
+but in this point it is right. So if we
+16:52
+had kept our earlier entry price which
+16:55
+was actually here then even at this
+16:58
+point we would not have opened the
+17:00
+position. So we want to wave to tell
+17:03
+Jesse that hey keep cancelelling that
+17:05
+order and submitting a new one if of
+17:08
+course the in rules are still valid and
+17:11
+to do that in Jesse we need to use the
+17:13
+should cancel entry method and inside it
+17:16
+simply return true if we were returning
+17:18
+false it wouldn't have done this which
+17:20
+means if your strategy is using a market
+17:23
+order through open positions you're not
+17:25
+going to even need to define this at all
+17:27
+anyways after we have an open position
+17:30
+so Assuming our order have been
+17:32
+executed,
+17:34
+we will use this method on open position
+17:37
+which is where we submit both the stop
+17:39
+loss and take profit. So we're saying if
+17:41
+is a long position, this stop loss is
+17:43
+going to have the quantity of the
+17:45
+current position which we pass by
+17:48
+self.position quantity and then the
+17:50
+price of it is going to be the entry
+17:52
+price of the current position minus 6
+17:54
+times of the current ATR. For the
+17:56
+takerit, the quantity will again be the
+17:59
+quantity of the current position and the
+18:01
+price is going to be the upper band of
+18:03
+the current Ballinger bands. And of
+18:05
+course, if it's a short position, we
+18:06
+want to do the opposite. So, very
+18:08
+simple. And then we also have the update
+18:11
+position. Now, this one is keep updating
+18:14
+the takerit price. So, assuming that the
+18:17
+Ballinger bands is changing, which it
+18:19
+is, it is also updating our takeprofit
+18:22
+order. But actually, I don't want it to
+18:25
+do this. So, it's doing something that I
+18:27
+didn't ask for. So, I'm going to remove
+18:29
+this. Now, you see the more specific you
+18:32
+are with your request to the model, the
+18:34
+more likely it is to follow it. Exactly.
+18:36
+Right. And the more vague requests you
+18:39
+give it, it might do some new stuff like
+18:41
+this. So, I should have been more
+18:43
+specific in my request, but it's
+18:44
+perfectly fine. I'm okay with changing
+18:47
+some things in the code, especially when
+18:49
+I'm just removing stuff and all the rest
+18:51
+is perfectly fine. All right. So now
+18:52
+that we have everything working, let's
+18:54
+go to Jesse so we can run our first back
+18:57
+test. So let's remove these.
+19:00
+Choose mean reversion RSI. Change the
+19:04
+time frame to hourly and the
+19:08
+symbol to BTC.
+19:11
+And for the duration of the back test,
+19:13
+I'm going to do since the beginning of
+19:15
+2024 up until 2025.
+19:19
+And I will also choose
+19:22
+this state. All right. So let's
+19:25
+go back and change the fast mode to
+19:29
+enabled. The benchmark is also on. So
+19:33
+let's give this a try.
+19:36
+By the way, the trading fees are set to
+19:40
+almost the double number that it is
+19:42
+actually on Binance. I do this on
+19:44
+purpose because I want to leave some
+19:46
+room for the slippage when the actual
+19:48
+trading is happening or for the funding
+19:50
+fee or any extra fee that isn't visible
+19:53
+inside my back test. I also change the
+19:55
+leverage number to 10, but it doesn't
+19:57
+actually mean that I'm using 10 times
+19:58
+leverage. Right? So, we'll get to that
+20:00
+now. Let's take a look. All right. So,
+20:03
+we took nine trades. We made 9.23%
+20:07
+in profit. Now, the equity curve looks
+20:10
+good, but we're not beating the market
+20:13
+yet, right? So, but let's go down. And
+20:15
+you see the max rodon is near zero.
+20:18
+That's ridiculously low, which is
+20:20
+awesome. And the win rate is 100%. Now,
+20:23
+of course, this isn't realistic. You
+20:25
+should never expect a win rate of 100%.
+20:29
+And the sharp ratio is 2.48, which is
+20:32
+really good. And all right, so
+20:34
+everything else looks really good. Now
+20:36
+the first thing I want to do is to go
+20:38
+back to the code and increase the size
+20:41
+of my position. So I'm going to add the
+20:45
+quantity by five and again for short
+20:47
+positions. Now one very important thing
+20:49
+when you do this you need to remember
+20:51
+that you are multiplying the entire size
+20:54
+of the order by a specific number. So
+20:57
+you're not risking 3% per each capital
+21:00
+anymore. So this is kind of invalid now.
+21:03
+But I'm doing it because I just want to
+21:05
+show you the actual equity curve that
+21:07
+we're getting now because I want to show
+21:08
+you how you can beat the market returns
+21:11
+at the end. But in an actual production
+21:13
+ready, you want to use another formula.
+21:15
+You want to increase maybe this number
+21:17
+or even use some other formula for
+21:19
+position sizing such as the Kelly
+21:21
+criteria. But that's a topic for another
+21:23
+video. So let's go back and rerun this
+21:26
+again.
+21:28
+Now, by the way, we're getting this
+21:30
+error because even though the strategy
+21:32
+is using the bigger time frame, which is
+21:33
+4 hours, I didn't define it here. You
+21:37
+see, I should have added a data route
+21:39
+and chosen the same
+21:42
+route. Sorry, symbol and then it should
+21:45
+have worked. But I didn't do that. And
+21:47
+in back test, that's fine. Jess, it will
+21:49
+give you an error, but it will take care
+21:51
+of it behind the scenes and the back
+21:52
+test will go through. But if you don't
+21:55
+do this in a live trading session,
+21:57
+you're going to face an issue and your
+21:58
+session will get terminated. So be
+22:00
+careful with that. All right. So let's
+22:02
+remove this. And now the equity curve
+22:04
+looks significantly better. Right? We
+22:06
+are closer to beating the market. But
+22:08
+we're still not fully beating it. Of
+22:10
+course, I could simply add to the size
+22:11
+of my position more, especially because
+22:13
+it has still a very low max draw down,
+22:16
+but this isn't a realistic number in all
+22:19
+the periods, right? So I'm not going to
+22:21
+do that. All right. So first I want to
+22:23
+show you the result of the back test on
+22:25
+other periods. So let's change this to
+22:28
+beginning of 2022 up until 2023
+22:32
+and the first day of that year. Let's
+22:36
+run this one more time. I'm going to do
+22:39
+2023 up until 2024 and one more time on
+22:43
+2024 till 2025
+22:46
+and 2025 until
+22:51
+almost the 8th month which is just a few
+22:53
+days ago. So let's run the whole thing.
+22:56
+All right. So in 2022 you see we are
+22:59
+ending with losing a little bit by 9%.
+23:03
+The max draw is minus 22% and the win
+23:07
+rate is 75%. So even though it's not
+23:10
+horrible, we're ending with a loss. So
+23:13
+that's the first lesson that even though
+23:15
+it has a win rate of 100% in 2025 and
+23:19
+2024, it doesn't mean it's always
+23:22
+profitable. In 2023, which you can see
+23:24
+the date here, by the way, we're ending
+23:27
+with 97% profit. The max thon is minus
+23:30
+12% and the win rate is still 100%. So
+23:34
+it looks really great for these three
+23:37
+years but not so great here but it's not
+23:39
+bad either. So let's do one interesting
+23:41
+thing. I want to run the back test
+23:43
+starting this date until this ending
+23:46
+date. Right? So we can see the whole
+23:48
+equity curve.
+23:51
+So let's run it.
+24:00
+All right, there we go. So now if we
+24:02
+were trading this strategy in the past
+24:04
+3.5 years, we would have beaten the
+24:08
+market, right? Not only with the ending
+24:10
+P&L, but the max draw down is minus 22%.
+24:14
+Which is significantly lower than the
+24:16
+max draw down that BTC had in this
+24:19
+period. We ended with 176% in P&L. The
+24:22
+win note is 96% which is absolutely
+24:25
+amazing. The sharp ratio is 1.47
+24:29
+which is a realistic number and very
+24:32
+good. And the average holding time would
+24:34
+have been 33 hours. But actually I think
+24:36
+we made a mistake because if we check
+24:39
+out here it's only taking long
+24:41
+positions. So no short positions. So
+24:43
+let's go back to the code and see why
+24:45
+that is the case. All right. So here for
+24:47
+the trend value when it is an uptrend
+24:51
+I'm returning one but when it's a
+24:53
+downtrend I'm returning minus one. So
+24:56
+that was my mistake. So let's go back
+24:59
+and rerun this one more time. And I'm
+25:01
+also going to rerun this one for 2022.
+25:07
+There we go. Now we are beating the
+25:09
+market and making a profit. So we're
+25:13
+ending with 16% in profit. And in this
+25:16
+one we are beating the market even
+25:18
+further. So we ended with 253%
+25:22
+and the max ardon is still minus 22%.
+25:25
+Which means the sharp is now better. It
+25:27
+is 1.57.
+25:29
+But the win note is slightly lower. It
+25:31
+is 94.59.
+25:34
+All right. So this is actually great.
+25:36
+But there's one problem with this
+25:38
+strategy. You see, I don't like this
+25:40
+total closed trade number because over
+25:43
+3.5 years, it only took 37 trades. And I
+25:48
+think that's very low because the bigger
+25:50
+the number of trades that the strategy
+25:51
+is taking during a period, the higher
+25:54
+the statistical significance of that
+25:57
+strategy. In simple words, it means you
+25:59
+can rely more on the result of the back
+26:02
+test that is in front of you. And 37 for
+26:05
+3.5 years isn't good enough for me. And
+26:08
+that brings me to the next good thing
+26:10
+about the strategy that I found, which
+26:12
+is it doesn't work just with BTC. It
+26:15
+also works well with other coins. So,
+26:18
+let's go back and I'm going to add some
+26:21
+more trading routes. So, I'm going to
+26:22
+add ETH
+26:24
+again on the hourly
+26:28
+and I'm going to add
+26:31
+Doge again on the hourly. And by the
+26:34
+way, let's also change this to be mean
+26:37
+the version RSI. Now, this is enough for
+26:39
+me for now, but you can find others by
+26:42
+yourself. And now, if you run it again,
+26:45
+we're going to get an error because the
+26:47
+fast mode doesn't work when you are
+26:49
+trading multiple trading routes, right?
+26:51
+So, we need to disable this. And I'm
+26:53
+also going to disable the benchmark so
+26:55
+we can see the equity chart better. So,
+26:57
+let's run this one more time.
+27:00
+Voila, we have something with bigger
+27:02
+number of trades. So it is 75 now. And
+27:06
+look at this equity curve. It's
+27:08
+beautiful.
+27:10
+Now the P&L is 813%.
+27:14
+The max RON is still minus 22%. So it
+27:18
+didn't even get worse.
+27:21
+And the win rate is 92%.
+27:24
+And the average holding time is a little
+27:27
+bit higher. Now by the way, you need to
+27:28
+be careful with this cuz it is near to
+27:31
+70 hours, right? So that's a few days.
+27:34
+So if you trade this strategy at any
+27:36
+point, you're going to have to hold the
+27:38
+position for days maybe in a loss and
+27:41
+psychologically that's going to be
+27:42
+difficult. So that's something to be
+27:44
+aware of. And then the sharp is now 1.95
+27:48
+which is amazing. The winning streak is
+27:51
+32 and the losing strike is two. Right.
+27:54
+Overall, I think this looks great.
+27:56
+Probably the best strategy I've ever
+27:58
+made so far. And let's not forget that
+28:01
+I'm still trading only three assets. We
+28:04
+could continue this for some other
+28:05
+assets and find some good ones and
+28:07
+improve the results even further. Now,
+28:09
+as always, I am going to submit both the
+28:12
+code and the result of the back test of
+28:14
+the strategy on other time frames or
+28:16
+symbols on our strategies page which you
+28:19
+can check it out. And if you already
+28:21
+have a free account, you can also
+28:22
+download the code of the strategy
+28:24
+assuming it's a free strategy like this
+28:26
+one that I just shared. Now guys, a lot
+28:28
+of effort goes into research before
+28:30
+making a video like this. So if you want
+28:32
+me to continue making them, please
+28:34
+support me in any way that you can.
+28:36
+Liking the video, posting a comment with
+28:38
+your opinion, and also subscribing to
+28:40
+the channel helps me a lot. So thank you
+28:42
+so much for your continued support. I'll
+28:44
+see you in the next one.

@@ -1,10 +1,10 @@
-# Uploaded RSI/Bollinger, gold and NQ: NEEDS DATA / execution specification
+# Uploaded RSI/Bollinger, gold and NQ: TEST — bounded user-requested diagnostic
 
-Summary: Separate candidate from the video's Donchian breakout; user selected gold and NQ with 1h/4h timeframes.
-Owned minute files include overnight observations for both markets; profitability has not been tested.
-Source risk is not reliably 3%: synthetic long cases range from 3% to 15% of input margin at unchanged ATR.
-Undefined `bbw`, changing ATR at fill, contract units and candle timing need explicit treatment before replay.
-Return trials: zero. Keep this source off live trading; resolve execution parity before a return-test plan.
+Summary: User authorized a separate GC/NQ screen and supplied the matching hourly/four-hour video transcript.
+Fixed-contract diagnostic will isolate signals; it will not reproduce the crypto compounded sizing curve.
+Source risk is not reliably 3%; the video confirms fivefold sizing was added for demonstration after results.
+The new frozen plan defines causal candles, fill-time brackets, conservative limits and an explicit warm-up.
+Return trials at this amendment: zero; TEST authorizes only the bounded design screen, not live use.
 
 Source: [supplied code](../inputs/MeanReversionRSI.py); current official sizing helper pinned in
 [`jesse_rsi_audit/SOURCE.md`](../inputs/jesse_rsi_audit/SOURCE.md).
@@ -84,7 +84,8 @@ rebound or diversification benefit. Neither portfolio correlations nor concurren
 
 ## Decision
 
-**NEEDS DATA / execution specification.** Price data exists; missing inputs are original configuration and a
-verified mapping into futures candles, units and fills. The source audit is complete, not an edge screen.
-Any later fixed-contract original-rule replay and corrected-risk version must be separated, preregistered and
-counted as examined variants; preserve the original and do not silently replace its risk/exit behavior.
+**TEST, diagnostic only**, following the user's explicit request and supplied mean-reversion transcript.
+The original source-audit limitations above remain part of the record. The performance plan
+`agents/codex/plans/rsi_bollinger_screen.md` now fixes the futures mapping and tests only fixed-contract signals,
+with two execution variants on each of two markets. It does not claim original engine/crypto parity or solve
+unknown roll provenance. Reject on the cheap design gate; do not optimize or silently substitute a sizing rule.
