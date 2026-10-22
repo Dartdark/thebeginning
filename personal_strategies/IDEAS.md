@@ -33,6 +33,12 @@ $2,000 trailing limit, no daily loss limit, no payout caps. Everything below sti
 
 ## 4. Rules for running it (from the same sources)
 - Size for about **half the drawdown you think you can take** (Davey); the plan's max drawdown ≤ 20-30% of the account.
-- **Sequence risk** (Radge): the closer the money is to being needed, the lower-volatility the mix should be.
+- **Sequence risk** (Radge): the closer the money is to being needed, the lower-volatility the mix should be. The ORDER
+  of gains and losses matters once money is taken out: $100k, −$10k a year, returns −30% / +20% / +20% ends at $64.4k,
+  the same returns as +20% / +20% / −30% end at $75.4k (without withdrawals both end at $100.8k). A loss before a
+  withdrawal sells at the bottom, and that money misses the recovery (−30% already needs +43% to get back).
+  **Two buckets:** money needed within 1-2 years (bills, the ~$20k evaluation budget, planned purchases) stays in cash or
+  the low-volatility part (e.g. all-weather ETFs); only money not needed for years runs the strategies. Move money from
+  the strategy bucket to the safe bucket as a goal gets closer, so a bad month never forces a sale.
 - Judge in hundreds of trades / years, not months; know in advance the chance of a losing 12-month window.
 - Monthly: place each month's result in the Monte Carlo range (the same check as the Apex review).
