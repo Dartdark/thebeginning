@@ -73,7 +73,7 @@ def main():
     for name, src in (("supplied Pascal block", supplied), ("corrected reference", corrected)):
         say(name + " SHA256 " + hashlib.sha256(src.encode()).hexdigest())
     say("SUPPLIED SOURCE, line 1 = opening comment:")
-    for i, line in enumerate(supplied.splitlines(), 1): say(f"{i:3}: {line}")
+    for i, line in enumerate(supplied.splitlines(), 1): say(f"{i:3}: {line}".rstrip())
     assert len(supplied.splitlines()) == 78
 
     # No assumption of a second midnight reset at 00:30.

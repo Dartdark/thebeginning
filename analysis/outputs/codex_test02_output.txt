@@ -8,7 +8,7 @@ SUPPLIED SOURCE, line 1 = opening comment:
   4:  Account: Apex Trader Funding / Institutional Execution
   5:  Target: +40.0 pts Limit | Stop: -75.0 pts Stop | Flatten: 14:30 CT
   6: ========================================================================}
-  7: 
+  7:
   8: [IntrabarOrderGeneration = false]
   9: inputs:
  10:     AtrLength(15),             // Daily ATR length
@@ -20,7 +20,7 @@ SUPPLIED SOURCE, line 1 = opening comment:
  16:     EndTimeCT(1230),           // Entry window end (12:30 CT cutoff)
  17:     ExitTimeCT(1430),          // Daily mandatory flattening time (14:30 CT)
  18:     MaxEntriesPerDay(3);       // Max allowed entries per calendar day
- 19: 
+ 19:
  20: variables:
  21:     MidnightOpen(0),
  22:     NoiseLevel(0),
@@ -32,10 +32,10 @@ SUPPLIED SOURCE, line 1 = opening comment:
  28:     Stretch(0),
  29:     EntriesToday(0),
  30:     CurrentDateLocal(0);
- 31: 
+ 31:
  32: // Calculate Daily ATR-15 (using daily true range approximation)
  33: DayATR = AvgTrueRange(AtrLength);
- 34: 
+ 34:
  35: // Reset daily accumulators at midnight (00:00 CT)
  36: if Date <> CurrentDateLocal or (Time = 0000 or (Time > 0000 and Time[1] >= 2300)) then begin
  37:     CurrentDateLocal = Date;
@@ -44,38 +44,38 @@ SUPPLIED SOURCE, line 1 = opening comment:
  40:     CumPV = 0;
  41:     EntriesToday = 0;
  42: end;
- 43: 
+ 43:
  44: // Maintain Cumulative Midnight-Anchored VWAP
  45: TypicalPrice = (High + Low + Close) / 3.0;
  46: CumVol = CumVol + Volume;
  47: CumPV = CumPV + (TypicalPrice * Volume);
- 48: 
+ 48:
  49: if CumVol > 0 then
  50:     DailyVWAP = CumPV / CumVol
  51: else
  52:     DailyVWAP = Close;
- 53: 
+ 53:
  54: // Compute Volatility Noise Barrier & VWAP Stretch
  55: NoiseLevel = MidnightOpen + (NoiseMultiplier * DayATR);
  56: Stretch = Close - DailyVWAP;
- 57: 
+ 57:
  58: // Track trade count today
  59: if MarketPosition <> 0 and MarketPosition[1] = 0 then
  60:     EntriesToday = EntriesToday + 1;
- 61: 
+ 61:
  62: // Entry Condition: Window [10:00-12:30 CT] + Noise Breakout + Above VWAP + Stretch Guard
  63: if Time >= StartTimeCT and Time <= EndTimeCT and MarketPosition = 0 and EntriesToday < MaxEntriesPerDay then begin
  64:     if Close > NoiseLevel and Close > DailyVWAP and Stretch <= (StretchCapMultiplier * DayATR) then begin
  65:         Buy ("VB_Combined_Long") next bar at Market;
  66:     end;
  67: end;
- 68: 
+ 68:
  69: // Profit Target & Stop Loss Execution
  70: if MarketPosition > 0 then begin
  71:     Sell ("VB_Target") next bar at EntryPrice + TargetPts Limit;
  72:     Sell ("VB_StopLoss") next bar at EntryPrice - StopPts Stop;
  73: end;
- 74: 
+ 74:
  75: // Mandatory End-of-Day Flatten at 14:30 CT
  76: if Time >= ExitTimeCT and MarketPosition > 0 then begin
  77:     Sell ("VB_TimeExit") next bar at Market;
