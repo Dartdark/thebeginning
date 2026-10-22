@@ -2,8 +2,8 @@
 
 User says this is not the gold-breakout strategy from the video, but asks to check it too.
 Treat the pasted `MeanReversionRSI` class as an independent personal-account candidate.
-Work on `codex/work`, starting from `2a206bf`. Market and primary timeframe were requested asynchronously;
-gold with hourly decisions and four-hour confirmation is provisional context, not a confirmed test configuration.
+Work on `codex/work`, starting from `2a206bf`. The user subsequently answered **both** to gold and NQ with hourly
+decisions and four-hour confirmation. Inspect GC/MGC and NQ/MNQ data readiness separately; do not pool markets.
 
 ## Scope before any historical return
 
@@ -16,14 +16,14 @@ and a source-matched sizing helper. This is a method/quantity audit, not a Jesse
 backtest or strategy-return trial. Include examples where the helper's notional cap binds as well as where it does
 not; do not simply claim every trade risks 15%. Test how changing ATR between submission and fill changes risk.
 
-For provisional gold feasibility, inspect existing CSV headers/date/time fields only, and report coverage/hours.
+For both markets' feasibility, inspect existing CSV headers/date/time fields only, and report coverage/hours.
 Do not read prices/returns or build caches. Check existing catalogue and data loaders for possible reuse.
 Only allowed write paths under agents/codex and analysis/codex_* / analysis/outputs/codex_*.
 
 ## Gates and stop rule
 
 Write an evidence sheet with the seven questions and failure/diversification supplement. A price-based setup has
-no demonstrated forced-flow mechanism; document that limitation. Pending market/timeframe, source defects and
+no demonstrated forced-flow mechanism; document that limitation. Source defects and
 unverified data/execution parity prevent a TEST verdict. No parameter search, stop/target tuning, alternative
 signals, historical return screen, funded bench, purchases, credentials, external messages or live changes.
 
