@@ -88,5 +88,5 @@ No asset-weighted, lagged-liquidity-normalized LDF sizing counterpart found in t
 **TEST, exploratory only**, per review `075254b` adopted by the user before returns. D-1 fund assets and
 the mandatory D-2 stress are sufficient for this limited screen despite unresolved historical publication and
 revision evidence. The amended plan adds 63/252-session momentum controls and 63-session placebo strata,
-and openly selects a later start because 2017 daytime warmup is absent. Archive dated fund snapshots now.
+and waits for the user's promised 2017 daytime export before outcomes. Archive dated fund snapshots now.
 A passing historical snapshot screen remains WATCH, not validated trading evidence. No new edge is asserted.

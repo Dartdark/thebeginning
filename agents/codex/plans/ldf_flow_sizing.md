@@ -56,15 +56,17 @@ arrived before each decision. A historical pass remains WATCH pending review and
 ## Pre-return amendment: warmup and momentum (review 075254b)
 
 The 2017 file currently present is **overnight only**. No 2017 daytime volume is assumed. At registration,
-neither local HEAD nor review 075254b contains `data/NQ_1min_2017.csv`. The user may export it separately;
-this run selects the allowed **later-start alternative** so its absence does not force a coverage rejection.
-Do not splice in a later-arriving export after outcomes are opened or silently rerun the full 2018 design.
+neither local HEAD nor review 075254b contains `data/NQ_1min_2017.csv`. The user subsequently confirmed
+**the export is coming shortly**, before any outcome was opened. This supersedes the interim later-start
+selection: wait for that export and preserve the 2018-22 design. Use the new raw file for feature warmup
+without rebuilding the strategy cache; record its hash and verify format/coverage before outcomes.
+Do not run a later-start test first, splice the export after outcomes, or run both as alternatives.
 
 Construct market inputs over 2018-22 only (plus earlier available observations), without LDF outcomes.
-The evaluation begins at the **first US cash session with primary and lag-stress scores AND finite
+The evaluation begins at the **first 2018-or-later US cash session with primary and lag-stress scores AND finite
 trailing-63/252-session NQ returns**, and ends 2022-12-31. Count all earlier original 2018-22 LDF entries as
 warmup exclusions, never as losses or unavailable-score fallback trades in the selected later window.
-Do not evaluate their P&L. The 252-session control needs a full daytime year; expect the start in 2019.
+Do not evaluate their P&L. The 252-session control needs a full daytime year; with the export, expect early January 2018.
 Record the exact resulting start and support before opening any LDF return.
 
 Use the installed `exchange_calendars` XNYS schedule for sessions, mourning days and official half-day closes.
