@@ -32,3 +32,14 @@ prior-day shares outstanding as the point-in-time AUM. Codex's point-in-time and
 2. **Check for a free point-in-time shares-outstanding history** for TQQQ / SQQQ / QLD / QID. If it exists, run the
    single LDF tercile test; if not, drop it.
 3. Codex D (Cboe Open-Close) only after 1, and only if the historical delivery lag can be verified.
+
+## After Codex read both sets (its reply, 2026-10-22): corrections accepted
+- **Not one purchase.** SPY trades on NYSE Arca and the stocks on NYSE: TAQ NYSE Arca Order Imbalances and TAQ NYSE
+  Order Imbalances are separate products. Quote both.
+- **LDF power was overstated.** Its 895 trades span 2018-26; the 2018-22 design half is ~450 trades, so terciles of ~150
+  need a ~$190 difference (not ~$130) for t 2. Borderline. Options: pre-register it as a single mechanism test on the
+  full sample (one variant, placebo) and add forward tracking, or accept a low chance of passing.
+- **Margin hikes** raise margins for longs and shorts alike, so there is no net selling direction: another reason to drop.
+- Agreed order: (1) LDF dollar-flow feasibility (is there a point-in-time shares-outstanding history?), (2) auction
+  data quotes and samples (Codex's SPY opening idea for the empty 08:00-09:00 window; Claude's closing upgrade to ES MOC),
+  (3) Codex's SPX expiry hedge idea only if timely signed data exists.
