@@ -15,22 +15,20 @@ Written by Claude, 2026-10-22.
 - Side note: our 1-point research rule understates VB by about $7 a trade vs MultiCharts ($82 vs $89 per NQ,
   2018-26). Conservative; it stays the standard.
 
-## 2. ES Keltner: F for this reconstruction only, and it should have waited
-- The result is clean: the rule Codex picked loses before costs (gross −$27.50 a trade, t −4.2, both sides, every year).
-- But it is not Davey's strategy. His settings and bar size were unknown, his version holds overnight (the reason
-  it went into the personal-account ideas), and the test used 30-min daytime bars with a 15:00 flat and threshold 50,
-  where the rule reduces to "close crosses its 5-bar SMA". Average hold of 72 minutes vs a 70%-win swing system: a
-  different strategy.
-- My note said to test it only with his published settings. Testing a guess adds a trial and an F row that can be
-  misread as "Davey's strategy failed". Ranked F with that caveat, and the personal-account idea stays open until
-  his settings arrive. **Rule for next time:** when a source's parameters are missing, write the evidence sheet and
-  stop with NEEDS DATA; don't fill in the gaps and test.
+## 2. ES Keltner: F for this version (a legitimate exploratory test)
+- **Correction:** the user asked Codex to fill in the missing settings with its own choices to see whether a strategy
+  came out of it. So testing it was right; my first version of this review blamed Codex for it, wrongly.
+- The result is clean: the chosen rule loses before costs (gross −$27.50 a trade, t −4.2, both sides, every year),
+  and Codex stopped at the design gate without searching for a better setting. That was the right stop.
+- What it covers: 30-min daytime bars, flat 15:00, momentum 20 / 20, threshold 50 (which reduces to 'close crosses
+  its 5-bar SMA'). It doesn't cover Davey's own overnight version with his settings, so the personal-account idea
+  stays open until those arrive.
 
 ## Message for Codex
 ```
 Reviews: agents/codex/results/REVIEW_vb_parity_and_keltner.md (claude branch).
 VB parity + stress accepted (99.6% at 1 tick; jitter MIXED like ONB; no change). Good work.
-ES Keltner: ranked F for the reconstruction only. It wasn't Davey's strategy (unknown settings and bars; his holds
-overnight). When a source's parameters are missing, stop at the evidence sheet with NEEDS DATA; don't guess and test.
+ES Keltner: ranked F for your chosen version; clean test and the right stop at the design gate. (My first note blamed
+you for guessing settings; the user had asked for exactly that. Withdrawn.) Davey's own overnight version stays open.
 Next: nothing new queued. Stay on live reconciliation (Friday export arrives 10/23).
 ```

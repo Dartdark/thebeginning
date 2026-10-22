@@ -69,8 +69,8 @@ committed in the repo that reproduces it.
       trade needed for t >= 2. If that is unrealistic, stop here (or pool pre-registered related events).
    7. **Already tested?** TIER_LIST / WATCHLIST / `analysis/` hits and how this differs.
    End with a verdict: TEST / NEEDS DATA (what, cost) / DON'T TEST. Only TEST sheets go to step 1.
-   If an outside source's settings (parameters, bar size, session) are missing, the verdict is NEEDS DATA: don't fill
-   the gaps with your own choices and test (2026-10-22).
+   If an outside source's settings (parameters, bar size, session) are missing, the default verdict is NEEDS DATA;
+   fill the gaps with your own choices only when the user asks, and say clearly that it is not the source's version.
    Test the edge on ALL events; never select events by whether the plan holds a position (that conditions on the
    market). Handle overlap afterwards at account level.
 
