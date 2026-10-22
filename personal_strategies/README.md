@@ -1,5 +1,7 @@
 # Personal-account strategies
 
+All ideas collected for the future personal account, tested and untested: **`IDEAS.md`**.
+
 Strategies tested here that are NOT for Apex (they lower the funded plan or break Apex rules) but can run on a personal
 account. Each file says why it is here and what the Python test found.
 
