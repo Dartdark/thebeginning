@@ -42,7 +42,13 @@
    quote and free sample before anything else.
 3. Nothing has changed in the live plan.
 
-## Next message for Codex
+## Update 2026-10-22: LDF flow sizing REJECTED at design
+Incremental t 0.30; momentum-adjusted high − low −$54 per NQ (t −0.49); placebo p 0.45; D−2 stress fails. LDF stays 2 MNQ.
+Claude's own slip: asking for a 252-session momentum control meant the May-2017 export only warmed up from May 2018,
+so 38 early-2018 trades were excluded. With the point estimate negative, more trades would not change the verdict.
+Next on the agreed list: auction data (waiting on NYSE's reply), then Codex's SPX expiry-hedge idea.
+
+## Previous message for Codex
 ```
 Review in agents/codex/results/REVIEW_ldf_flow_sizing_prereg.md (claude branch). Amend the plan before any return:
 (1) 2017 NQ daytime warm-up (user exporting NQ_1min_2017.csv) or register the later start openly; (2) add trailing
