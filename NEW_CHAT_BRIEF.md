@@ -56,6 +56,10 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **Account #01 near its trailing limit (2026-10-22): user keeps it at plan size.** Balance $49,899.44 vs failure line
+  ≈ $49,500.92 (≈ $398 room after 10/16 +$1,500.92, 10/19 −$1,025.66, 10/21 −$575.82); #02 $49,424.18 (≈ $1,424 room).
+  Cushion sizing on the combine was tested and doesn't help (`combine_levers_test`). 10/20 no-fill = orders sent as
+  `@MNQ` (mapping not applied); 10/21 filled on both accounts (`live/orders_20261020_21.md`).
 - **Antigravity's Vault Break Combined (HYP-025, 2026-10-21): D, not adopted.** Its 12:30 CT last-entry + 0.5-ATR VWAP
   stretch cap: design t 3.21 vs 2.71 but 2023+ t 2.46 vs 2.66 and −$3.4k a year; removed trades make money (+$42, t 1.1);
   DD cut = random removal (P 0.50); its MultiCharts code used a 30-min ATR and left the entry bar unprotected.
