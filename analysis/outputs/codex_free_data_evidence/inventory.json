@@ -1,0 +1,209 @@
+{
+  "source_commit": "e097c0f",
+  "inventory_plan_commit": "41ffc93",
+  "trials": 0,
+  "candidate_returns_computed": false,
+  "candidate_price_columns_read": false,
+  "caches_built": false,
+  "purchases": 0,
+  "auction": {
+    "rows": 178,
+    "unique_dates": 178,
+    "by_year": {
+      "2018": 36,
+      "2019": 34,
+      "2020": 36,
+      "2021": 36,
+      "2022": 36
+    },
+    "by_tenor": {
+      "5": 59,
+      "7": 59,
+      "10": 60
+    },
+    "simultaneous_multi_tenor_dates": 0,
+    "planning_signal_fraction": 0.5,
+    "planned_n": 89,
+    "fields_owned": [
+      "auction_date",
+      "security_type",
+      "security_term",
+      "closing_time_comp",
+      "reopening",
+      "offering_amt",
+      "bid_to_cover_ratio",
+      "high_yield",
+      "cusip",
+      "inflation_index_security",
+      "floating_rate"
+    ],
+    "dealer_award_fields_owned": false,
+    "pdf_spot_checks": [
+      {
+        "date": "2018-01-10",
+        "primary_dealer_accepted": 4407365000,
+        "total_competitive_accepted": 19991883000,
+        "primary_dealer_share": 0.2204577227667849,
+        "source": "https://www.treasurydirect.gov/instit/annceresult/press/preanre/2018/R_20180110_1.pdf"
+      },
+      {
+        "date": "2022-01-12",
+        "primary_dealer_accepted": 5977970000,
+        "total_competitive_accepted": 35992396200,
+        "primary_dealer_share": 0.16608980315681232,
+        "source": "https://www.treasurydirect.gov/instit/annceresult/press/preanre/2022/R_20220112_2.pdf"
+      }
+    ],
+    "gap": {
+      "first_minute": 466,
+      "last_minute": 505,
+      "bars": 40,
+      "flat_minute_fraction_by_weekday": {
+        "0": 0.49224806201550386,
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 0.8300395256916997
+      },
+      "equally_weighted_weekday_flat_fraction": 0.8644575175414406,
+      "weekday_weights": {
+        "3": 82,
+        "4": 40,
+        "2": 37,
+        "1": 19
+      },
+      "weighted_flat_minute_fraction": 0.9618066349868989,
+      "interpretation": "weekday-marginal minute occupancy; not event-conditional or whole-window flat"
+    },
+    "power": [
+      {
+        "n": 89,
+        "assumed_sd": 150,
+        "commission": 7.25,
+        "tick_value": 15.625,
+        "round_trip_cost": 38.5,
+        "net_mean_for_t2": 31.799936400190802,
+        "gross_mean_for_t2": 70.2999364001908,
+        "gross_1_5_cost": 57.75,
+        "gross_ticks_for_t2": 4.4991959296122115
+      },
+      {
+        "n": 89,
+        "assumed_sd": 300,
+        "commission": 7.25,
+        "tick_value": 15.625,
+        "round_trip_cost": 38.5,
+        "net_mean_for_t2": 63.599872800381604,
+        "gross_mean_for_t2": 102.0998728003816,
+        "gross_1_5_cost": 57.75,
+        "gross_ticks_for_t2": 6.534391859224423
+      }
+    ]
+  },
+  "zn_liquidity": {
+    "coverage": [
+      {
+        "year": 2018,
+        "observed_window_dates": 257,
+        "complete_weekday_windows": 245
+      },
+      {
+        "year": 2019,
+        "observed_window_dates": 258,
+        "complete_weekday_windows": 253
+      },
+      {
+        "year": 2020,
+        "observed_window_dates": 258,
+        "complete_weekday_windows": 245
+      },
+      {
+        "year": 2021,
+        "observed_window_dates": 259,
+        "complete_weekday_windows": 253
+      },
+      {
+        "year": 2022,
+        "observed_window_dates": 258,
+        "complete_weekday_windows": 253
+      }
+    ],
+    "complete_windows": 1249,
+    "median_window_contracts": 85424.0,
+    "p10_window_contracts": 47605.6,
+    "hypothetical_cash_inventory_shock": 1000000000.0,
+    "assumed_modified_duration": 7,
+    "assumed_zn_dv01": 70,
+    "hypothetical_full_hedge_contracts": 10000.0,
+    "hypothetical_full_hedge_over_median_volume": 0.1170631204345383,
+    "actual_hedge_fraction": "unknown; zero is possible"
+  },
+  "etf_ftd": {
+    "cash_sessions": 1259,
+    "hypothetical_fraction": 0.2,
+    "hypothetical_signal_n": 251,
+    "known_timely_active_closeout_events": 0,
+    "gap": {
+      "first_minute": 481,
+      "last_minute": 505,
+      "bars": 25,
+      "flat_minute_fraction_by_weekday": {
+        "0": 0.49224806201550386,
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 0.8300395256916997
+      },
+      "equally_weighted_weekday_flat_fraction": 0.8644575175414406,
+      "weekday_weights": {
+        "1": 259,
+        "2": 257,
+        "3": 255,
+        "4": 252,
+        "0": 236
+      },
+      "weighted_flat_minute_fraction": 0.8708026235980676,
+      "interpretation": "weekday-marginal minute occupancy; not event-conditional or whole-window flat"
+    },
+    "power": [
+      {
+        "n": 251,
+        "assumed_sd": 500,
+        "commission": 5,
+        "tick_value": 12.5,
+        "round_trip_cost": 30.0,
+        "net_mean_for_t2": 63.119440309780316,
+        "gross_mean_for_t2": 93.11944030978032,
+        "gross_1_5_cost": 45.0,
+        "gross_ticks_for_t2": 7.449555224782426
+      },
+      {
+        "n": 251,
+        "assumed_sd": 1000,
+        "commission": 5,
+        "tick_value": 12.5,
+        "round_trip_cost": 30.0,
+        "net_mean_for_t2": 126.23888061956063,
+        "gross_mean_for_t2": 156.23888061956063,
+        "gross_1_5_cost": 45.0,
+        "gross_ticks_for_t2": 12.499110449564851
+      }
+    ]
+  },
+  "limitations": [
+    "planning SDs are assumed, not observed strategy results",
+    "independence is optimistic; correlated events lower effective n",
+    "calendar has no 2017 award warmup; signal count is an upper planning assumption",
+    "free public historical allocation archive spot-checked, not fully downloaded or audited",
+    "cash-session proxy must be replaced by instrument-specific holiday rules before any test"
+  ],
+  "source_sha256": {
+    "data/treasury_auctions.csv": "05c4238228bb65cc82ef206a46bab5808a67e95e5fad2e6df969092976b2a205",
+    "analysis/outputs/codex_sge_delivery_screen/roster_minute_occupancy.csv": "08d16def7970d96d8a9ce0523f050b27560d1740fd6090f632cc620d288f1cd5",
+    "data/ZN_1min_2018.csv": "db0571f4b128672e7d53008aeeeeae299587efda52413894a52fcd9f2a7599f6",
+    "data/ZN_1min_2019.csv": "afc50608c0144af4b0fadd198c993551698063aacef14ec61ac030c0731cb824",
+    "data/ZN_1min_2020.csv": "9007d755b51e5f94f18bdc6da0de8e65bdb57e555a3a0682c6d5b0e4ae889ee0",
+    "data/ZN_1min_2021.csv": "aaf5c15358ae221e58b9c022bab4cec537bf9eb4fbdae06521b6aec255de7f2d",
+    "data/ZN_1min_2022.csv": "fdad701e25ced9b99919fbeab2fe4b3122cd75227448f51731caaa87da3f3c71"
+  }
+}
