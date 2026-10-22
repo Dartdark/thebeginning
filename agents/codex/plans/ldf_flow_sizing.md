@@ -70,7 +70,8 @@ Record the exact resulting start and support before opening any LDF return.
 Use the installed `exchange_calendars` XNYS schedule for sessions, mourning days and official half-day closes.
 Momentum controls are known at day-D decision: `C_s/C_(s-63)-1` and `C_s/C_(s-252)-1`, where s is D's previous
 cash session and C is NQ's minute close at that session's official US cash close (15:00 CT, 12:00 on half days).
-Require all 64/253 close observations respectively; no fill of missing closes. These continuous-contract price
+Require the two endpoint closes at their exact 63/252-session calendar separation; do not compress the calendar
+across missing sessions and do not fill a missing endpoint. These continuous-contract price
 ratios are trend proxies, not roll-adjusted investable returns; identify this limitation and flag roll-window volume.
 Before outcomes, report Pearson/Spearman correlations of the rolling H percentile rank with both controls,
 group-year counts, control means by low/middle/high, score coverage and roll-Thursday/Friday volume diagnostics.
@@ -81,6 +82,8 @@ calendar year in the registered evaluation window**. Retain >=90% score coverage
 extreme group. Gates 2/3 retain >=3 positive years, now out of the years actually evaluated. No lowered numerical
 significance, return, cost or placebo hurdle. List the reduced sample and updated power estimate openly.
 No parameter or start date is selected from LDF outcomes; a failed support gate stops without outcomes.
+Report momentum-endpoint missingness separately. Gate 1 coverage requires both sizing scores and both momentum
+controls to be available, so missing regression inputs cannot silently change the primary sample later.
 
 ## One primary score, fixed before any outcome inspection
 
