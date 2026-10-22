@@ -1,0 +1,186 @@
+{ TEST_02 - corrected Combined research reference, NOT approved for live use.
+  TEST_01 rejected adopting Combined. No live strategy file is changed.
+  Static review only: not compiled or execution-tested in MultiCharts here.
+
+  Data1: 30-minute NQ/MNQ, Exchange (Central), midnight-aligned 24-hour bars,
+  close stamps, Build Volume On = Trade Volume. Load enough overnight history
+  for 15 complete weekday true ranges plus the preceding close.
+  Bar Magnifier: 1 minute; limits must trade through by 1 NQ point.
+  IOG off; do not enable extra intrabar/order-fill recalculations for this
+  date/VWAP accumulator without making the updates idempotent.
+
+  Calendar convention matches the existing VB source: the first chart bar
+  stamped with a date supplies that date's open, high/low and initial VWAP.
+  Thus a 00:00-stamped bar may contain prior-date minutes. This is NOT a
+  separate daily Data2 session ATR, nor an exact 1-minute-calendar ATR.
+
+  This-bar-on-close gives the requested historical flat price. In automation,
+  an order generated after detecting that close cannot guarantee its price
+  or an exchange fill before a halt. Early flat is 11:30, before 12:00 halts.
+  No bar-based script guarantees flattening through disconnects, missing bars,
+  unexpected halts or rejected orders. See TEST_02.md for remaining limits. }
+
+[IntrabarOrderGeneration = false]
+
+Inputs:
+    AtrLength(15),
+    NoiseMultiplier(0.30),
+    StretchCapMultiplier(0.50),
+    TargetPts(40.0),
+    StopPts(75.0),
+    StartTimeCT(1000),
+    EndTimeCT(1230),
+    ExitTimeCT(1430),
+    MaxEntriesPerDay(3),
+    NumContracts(1),
+    ManualEarlyDate(0),     { optional single PL Date override, e.g. 1261127 }
+    ManualNoTradeDate(0);   { optional single PL Date override; 0 = none }
+
+Variables:
+    Initialized(false), TrackedDate(0), CompleteDate(false),
+    MidnightOpen(0), DayHi(0), DayLo(0), DayClose(0), PrevDateClose(0),
+    DayTR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), DayATR(0),
+    BarVol(0), CumVol(0), CumPV(0), DailyVWAP(0), NoiseLevel(0), Stretch(0),
+    DayStartTrades(0), EntriesToday(0),
+    CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false),
+    IsEarlyClose(false), DayLastEntry(0), DayFlatten(0), EntryTimeOK(false);
+
+Arrays:
+    TrHist[100](0);
+
+{ Fail at initialization rather than allow unsafe array bounds/quantity/times.
+  Only apply/reload this reference while the strategy and broker are flat. }
+if CurrentBar = 1 then begin
+    if BarType_ex <> 2 or BarInterval <> 30 then
+        RaiseRunTimeError("TEST_02 requires a 30-minute time chart");
+    if AtrLength < 1 or AtrLength > 100 or AtrLength <> IntPortion(AtrLength) then
+        RaiseRunTimeError("AtrLength must be an integer from 1 to 100");
+    if NumContracts < 1 or NumContracts <> IntPortion(NumContracts) then
+        RaiseRunTimeError("NumContracts must be a positive integer");
+    if MaxEntriesPerDay < 1 or MaxEntriesPerDay > 3
+        or MaxEntriesPerDay <> IntPortion(MaxEntriesPerDay) then
+        RaiseRunTimeError("MaxEntriesPerDay must be 1, 2 or 3");
+    if TargetPts <= 0 or StopPts <= 0 then
+        RaiseRunTimeError("TargetPts and StopPts must be positive");
+    if StartTimeCT <> 1000 or EndTimeCT <> 1230 or ExitTimeCT <> 1430 then
+        RaiseRunTimeError("This fixed-rule reference requires 1000 / 1230 / 1430");
+end;
+
+{ Built-in exits are armed even while flat, BEFORE the prospective fill.
+  They are evaluated intrabar and can exit on the entry bar with IOG off.
+  BigPointValue follows the chart symbol: NQ 20, MNQ 2 dollars per point. }
+SetStopContract;
+SetStopLoss(StopPts * BigPointValue);
+SetProfitTarget(TargetPts * BigPointValue);
+
+if not Initialized then begin
+    Initialized = true;
+    TrackedDate = Date;
+    CompleteDate = (Time = 0);
+    MidnightOpen = Open;
+    DayHi = High;
+    DayLo = Low;
+    DayStartTrades = TotalTrades;
+end
+else if Date <> TrackedDate then begin
+    { Finalize the PREVIOUS date before touching the new date's OHLC.
+      Weekends do not enter TrHist; their closes still update PrevDateClose.
+      Skip an initial partial date and any TR lacking its previous close. }
+    if CompleteDate and PrevDateClose > 0
+        and DayOfWeek(TrackedDate) >= 1 and DayOfWeek(TrackedDate) <= 5 then begin
+        DayTR = MaxList(DayHi, PrevDateClose) - MinList(DayLo, PrevDateClose);
+        TrHist[TrIdx] = DayTR;
+        TrIdx = Mod(TrIdx + 1, AtrLength);
+        if TrCount < AtrLength then TrCount = TrCount + 1;
+    end;
+    PrevDateClose = DayClose;
+    TrackedDate = Date;
+    CompleteDate = true;
+    MidnightOpen = Open;
+    DayHi = High;
+    DayLo = Low;
+    CumVol = 0;
+    CumPV = 0;
+    DailyVWAP = 0;
+    DayStartTrades = TotalTrades;
+end
+else begin
+    DayHi = MaxList(DayHi, High);
+    DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+{ On intraday charts Ticks is total bar volume when Build Volume On is
+  Trade Volume; Volume alone can mean up-tick volume. Same convention as VB. }
+BarVol = Ticks;
+if BarVol > 0 then begin
+    CumVol = CumVol + BarVol;
+    CumPV = CumPV + (High + Low + Close) / 3.0 * BarVol;
+end;
+if CumVol > 0 then DailyVWAP = CumPV / CumVol;
+
+DayATR = 0;
+if TrCount = AtrLength then begin
+    TrSum = 0;
+    for Ti = 0 to AtrLength - 1 begin
+        TrSum = TrSum + TrHist[Ti];
+    end;
+    DayATR = TrSum / AtrLength;
+end;
+NoiseLevel = MidnightOpen + NoiseMultiplier * DayATR;
+Stretch = Close - DailyVWAP;
+
+{ Same conservative holiday rule as the existing live VB and Python helper.
+  It is not an authoritative future CME schedule. Manual date overrides are
+  provided for a known exception; maintain the calendar before any live use. }
+CalMonth = Month(Date);
+CalDay = DayOfMonth(Date);
+CalDow = DayOfWeek(Date);
+CalYear = Year(Date) + 1900;
+IsWeekday = CalDow >= 1 and CalDow <= 5;
+IsEarlyClose =
+    (CalMonth = 1 and ((CalDay = 1 and IsWeekday) or (CalDay = 2 and CalDow = 1)))
+    or (CalMonth = 1 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+    or (CalMonth = 2 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+    or (CalMonth = 5 and CalDow = 1 and CalDay >= 25)
+    or (CalMonth = 6 and CalYear >= 2022 and ((CalDay = 19 and IsWeekday)
+        or (CalDay = 18 and CalDow = 5) or (CalDay = 20 and CalDow = 1)))
+    or (CalMonth = 7 and (((CalDay = 3 or CalDay = 4) and IsWeekday)
+        or (CalDay = 5 and CalDow = 1)))
+    or (CalMonth = 9 and CalDow = 1 and CalDay <= 7)
+    or (CalMonth = 11 and CalDow = 4 and CalDay >= 22 and CalDay <= 28)
+    or (CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29)
+    or (CalMonth = 12 and (((CalDay = 24 or CalDay = 25) and IsWeekday)
+        or (CalDay = 26 and CalDow = 1)))
+    or (ManualEarlyDate <> 0 and Date = ManualEarlyDate);
+
+DayFlatten = ExitTimeCT;
+DayLastEntry = EndTimeCT;
+if IsEarlyClose then begin
+    DayFlatten = 1130;
+    DayLastEntry = MinList(EndTimeCT, 1100);
+end;
+
+{ Completed trades capture even entry-and-exit inside a single bar.
+  Under this single-position, all-out rule add the currently open trade. }
+EntriesToday = TotalTrades - DayStartTrades;
+if MarketPosition <> 0 then EntriesToday = EntriesToday + 1;
+
+EntryTimeOK = Time >= StartTimeCT and Time <= EndTimeCT and Time < DayFlatten;
+if IsEarlyClose then EntryTimeOK = EntryTimeOK and Time < DayLastEntry;
+
+if CompleteDate and IsWeekday and Date <> ManualNoTradeDate
+    and DayATR > 0 and CumVol > 0 and BarVol > 0 and EntryTimeOK
+    and MarketPosition = 0 and EntriesToday < MaxEntriesPerDay
+    and Close > NoiseLevel and Close > DailyVWAP
+    and Stretch <= StretchCapMultiplier * DayATR then
+    Buy ("VB_Combined_Long") NumContracts contracts next bar at market;
+
+{ Time exit has priority over the rejected-stop fallback at the close.
+  Default regular flat 14:30; holiday flat 11:30, with trading time remaining. }
+if MarketPosition > 0 then begin
+    if Time >= DayFlatten then
+        Sell ("VB_TimeExit") this bar on close
+    else if Low <= EntryPrice - StopPts then
+        Sell ("VB_StopGuard") next bar at market;
+end;

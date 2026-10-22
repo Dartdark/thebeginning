@@ -1,0 +1,100 @@
+TEST_02 plan 6fdb195; deterministic logic probes; zero performance trials.
+supplied Pascal block SHA256 24edac38c489f60ccd4236d50e8e118110c6fe384756d0a6ee9f7f3095e00979
+corrected reference SHA256 3de344a8d5eccb240f78b2d87500818a7abd6fb80b81e510e1be460610f63c55
+SUPPLIED SOURCE, line 1 = opening comment:
+  1: {========================================================================
+  2:  Strategy: NQ Vault Break Combined (Window [10:00-12:30] + VWAP Stretch Guard)
+  3:  Symbol: NQ / MNQ Futures (30-Minute Bars)
+  4:  Account: Apex Trader Funding / Institutional Execution
+  5:  Target: +40.0 pts Limit | Stop: -75.0 pts Stop | Flatten: 14:30 CT
+  6: ========================================================================}
+  7: 
+  8: [IntrabarOrderGeneration = false]
+  9: inputs:
+ 10:     AtrLength(15),             // Daily ATR length
+ 11:     NoiseMultiplier(0.30),     // ATR multiplier for midnight noise band
+ 12:     StretchCapMultiplier(0.50),// Max allowable distance from VWAP (in ATR units)
+ 13:     TargetPts(40.0),           // Profit target in NQ points ($800/contract)
+ 14:     StopPts(75.0),             // Stop loss in NQ points ($1,500/contract)
+ 15:     StartTimeCT(1000),         // Entry window start (10:00 CT)
+ 16:     EndTimeCT(1230),           // Entry window end (12:30 CT cutoff)
+ 17:     ExitTimeCT(1430),          // Daily mandatory flattening time (14:30 CT)
+ 18:     MaxEntriesPerDay(3);       // Max allowed entries per calendar day
+ 19: 
+ 20: variables:
+ 21:     MidnightOpen(0),
+ 22:     NoiseLevel(0),
+ 23:     DailyVWAP(0),
+ 24:     CumVol(0),
+ 25:     CumPV(0),
+ 26:     TypicalPrice(0),
+ 27:     DayATR(0),
+ 28:     Stretch(0),
+ 29:     EntriesToday(0),
+ 30:     CurrentDateLocal(0);
+ 31: 
+ 32: // Calculate Daily ATR-15 (using daily true range approximation)
+ 33: DayATR = AvgTrueRange(AtrLength);
+ 34: 
+ 35: // Reset daily accumulators at midnight (00:00 CT)
+ 36: if Date <> CurrentDateLocal or (Time = 0000 or (Time > 0000 and Time[1] >= 2300)) then begin
+ 37:     CurrentDateLocal = Date;
+ 38:     MidnightOpen = Open;
+ 39:     CumVol = 0;
+ 40:     CumPV = 0;
+ 41:     EntriesToday = 0;
+ 42: end;
+ 43: 
+ 44: // Maintain Cumulative Midnight-Anchored VWAP
+ 45: TypicalPrice = (High + Low + Close) / 3.0;
+ 46: CumVol = CumVol + Volume;
+ 47: CumPV = CumPV + (TypicalPrice * Volume);
+ 48: 
+ 49: if CumVol > 0 then
+ 50:     DailyVWAP = CumPV / CumVol
+ 51: else
+ 52:     DailyVWAP = Close;
+ 53: 
+ 54: // Compute Volatility Noise Barrier & VWAP Stretch
+ 55: NoiseLevel = MidnightOpen + (NoiseMultiplier * DayATR);
+ 56: Stretch = Close - DailyVWAP;
+ 57: 
+ 58: // Track trade count today
+ 59: if MarketPosition <> 0 and MarketPosition[1] = 0 then
+ 60:     EntriesToday = EntriesToday + 1;
+ 61: 
+ 62: // Entry Condition: Window [10:00-12:30 CT] + Noise Breakout + Above VWAP + Stretch Guard
+ 63: if Time >= StartTimeCT and Time <= EndTimeCT and MarketPosition = 0 and EntriesToday < MaxEntriesPerDay then begin
+ 64:     if Close > NoiseLevel and Close > DailyVWAP and Stretch <= (StretchCapMultiplier * DayATR) then begin
+ 65:         Buy ("VB_Combined_Long") next bar at Market;
+ 66:     end;
+ 67: end;
+ 68: 
+ 69: // Profit Target & Stop Loss Execution
+ 70: if MarketPosition > 0 then begin
+ 71:     Sell ("VB_Target") next bar at EntryPrice + TargetPts Limit;
+ 72:     Sell ("VB_StopLoss") next bar at EntryPrice - StopPts Stop;
+ 73: end;
+ 74: 
+ 75: // Mandatory End-of-Day Flatten at 14:30 CT
+ 76: if Time >= ExitTimeCT and MarketPosition > 0 then begin
+ 77:     Sell ("VB_TimeExit") next bar at Market;
+ 78: end;
+RESET now=2330 prev=2300 date_change=False: original=True; date-only=False
+RESET now=0000 prev=2330 date_change=True: original=True; date-only=True
+RESET now=0030 prev=0000 date_change=False: original=False; date-only=False
+RESET now=1000 prev=0930 date_change=False: original=False; date-only=False
+ATR PASS: independent daily aggregation matches all 24 stored weekday TRs; partial startup excluded; Sunday closes retained as TR reference but Sunday TR excluded; first 15-day-ready calculation 2026-08-25 0000.
+ATR PASS: current date's evolving range does not alter that date's ATR.
+COUNTER PASS: three entry/exit round trips observed flat at closes -> sampled-transition count 0, completed-trade baseline count 3; fourth entry blocked.
+ENTRY-BAR PROBE PASS: repo executor exits at minute 601, price 9925 for immediate stop; ordinary manual exits first evaluated at 10:30 can only work from the next opening tick, after this event.
+REJECTION EXAMPLE: late sell stop 9925 is above a current market of 9910; a historical hypothetical fill is not broker acceptance.
+UNITS NQ: per-contract stop $1500, target $800; two contracts double dollars, not price distance.
+UNITS MNQ: per-contract stop $150, target $80; two contracts double dollars, not price distance.
+HOLIDAY PASS: copied predicate matches repo helper for all 3652 dates 2018-2027; this is code parity, not CME schedule certification.
+WINDOW PASS: regular decision minutes [600, 630, 660, 690, 720, 750]; early-day [600, 630]; flats 14:30 / 11:30.
+TIME SEMANTICS: next bar following 14:30 opens after that boundary and is stamped 15:00; not a deliberate 30-minute wait. A 12:00 halt has no 14:30 calculation; a close-based live order cannot guarantee execution at a historical closing tick.
+STRUCTURE PASS: built-in exits before entry, per-contract conversion, completed counter, Low guard, exact-close historical flat, inclusive regular/strict holiday limits, total volume, balanced delimiters.
+BOUNDARY PASS: live strategy directories, pitfalls, tier list and TODO unchanged from TEST_01 commit cb8450b.
+NO INTRABAR LOOK-AHEAD identified under normal close-only calculation: final decision-bar OHLC known before next-bar entry. Synthetic probes do not validate PowerLanguage compilation, order routing, live fills, or market edge.
+PASS: all focused Python assertions. NOT SAFE for immediate live pasting; reference remains uncompiled; TEST_01 rejects adoption.
