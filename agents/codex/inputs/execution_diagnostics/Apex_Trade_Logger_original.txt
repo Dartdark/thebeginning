@@ -1,0 +1,72 @@
+// Apex Trade Logger (2026-10-19; health rows added 2026-10-21)
+// Log-only signal: writes every live entry and exit of the chart's strategy to a daily CSV, so Claude can fill the
+// journal with the real fills. It places NO orders and changes nothing in the strategy.
+//
+// How to use
+//   1. Create the folder C:\TradingLogs on the VPS first (FileAppend does not create folders).
+//   2. Add it to EVERY live strategy chart (Format Signals > Add > Apex Trade Logger), next to the strategy and the Target
+//      Guard. Set Tag to the strategy's short name: VB, ONB, EOS, MON_BR (and later the funded ones: ONB_ML, MON, LDF,
+//      NFP, MOC_MES, CLS).
+//   3. Leave LogHistory false: only real-time trades are written, not the backtest trades replayed when the chart loads.
+// File: <Folder>YYYYMMDD.csv (the exchange date of the bar that saw the event), one line per event, no header:
+//   event,tag,symbol,side,contracts,entry_date,entry_time,entry_price,exit_date,exit_time,exit_price,profit_usd,bar_date,bar_time
+//   event = OPEN (position entered) or CLOSE (position closed); dates YYYYMMDD, times HHMM (Central, exchange time);
+//   profit_usd = MultiCharts' position profit (gross: before commissions unless the strategy has commission set).
+// The logger sees events at bar close, so an entry and exit inside one bar is logged as a CLOSE only.
+
+inputs: Folder("C:\TradingLogs\"), Tag("VB"), LogHistory(false), HeartbeatMins(30);
+variables: LastTT(0), LastEntryKey(0), K(0), N(0), EK(0), Live(false), SideTxt(""), Row(""), FileName(""), BarDay(""),
+	StratPos(0), BrokerPos(0), LastStrat(-999), LastBroker(-999), LastHB(-1), MinOfDay(0), HBKey(0);
+
+Live = LogHistory or GetAppInfo(aiRealTimeCalc) = 1;
+BarDay = NumToStr(Date + 19000000, 0);
+FileName = Folder + BarDay + ".csv";
+
+// closed positions since the last bar (normally 0 or 1), oldest first
+if TotalTrades > LastTT then begin
+	N = TotalTrades - LastTT;
+	if Live then begin
+		for K = N downto 1 begin
+			if MarketPosition(K) > 0 then SideTxt = "long" else SideTxt = "short";
+			Row = "CLOSE," + Tag + "," + GetSymbolName + "," + SideTxt + "," + NumToStr(MaxContracts(K), 0) + ","
+				+ NumToStr(EntryDate(K) + 19000000, 0) + "," + NumToStr(EntryTime(K), 0) + "," + NumToStr(EntryPrice(K), 2) + ","
+				+ NumToStr(ExitDate(K) + 19000000, 0) + "," + NumToStr(ExitTime(K), 0) + "," + NumToStr(ExitPrice(K), 2) + ","
+				+ NumToStr(PositionProfit(K), 2) + "," + BarDay + "," + NumToStr(Time, 0);
+			FileAppend(FileName, Row + NewLine);
+		end;
+	end;
+	LastTT = TotalTrades;
+end;
+
+// a new open position (first bar it is seen)
+if MarketPosition <> 0 then begin
+	EK = EntryDate(0) * 10000 + EntryTime(0);
+	if EK <> LastEntryKey then begin
+		if Live then begin
+			if MarketPosition > 0 then SideTxt = "long" else SideTxt = "short";
+			Row = "OPEN," + Tag + "," + GetSymbolName + "," + SideTxt + "," + NumToStr(CurrentContracts, 0) + ","
+				+ NumToStr(EntryDate(0) + 19000000, 0) + "," + NumToStr(EntryTime(0), 0) + "," + NumToStr(EntryPrice(0), 2)
+				+ ",,,,," + BarDay + "," + NumToStr(Time, 0);
+			FileAppend(FileName, Row + NewLine);
+		end;
+		LastEntryKey = EK;
+	end;
+end;
+
+// ---------- health rows (added 2026-10-21): POS = strategy position vs the broker's position for this strategy ----------
+// Written on every change and every HeartbeatMins (a missing heartbeat = a frozen chart or a dropped feed). Columns as
+// the trade rows: event POS, tag, symbol, -, strategy position (signed contracts), ..., broker position for the strategy
+// (in the profit column), bar date, bar time. Claude's 16:40 CT job flags a mismatch or a missing heartbeat in the journal.
+if GetAppInfo(aiRealTimeCalc) = 1 then begin
+	StratPos = MarketPosition * CurrentContracts;
+	BrokerPos = MarketPosition_at_Broker_for_The_Strategy;
+	MinOfDay = IntPortion(Time * 0.01) * 60 + Mod(Time, 100);
+	HBKey = Date * 10000 + IntPortion(MinOfDay / MaxList(HeartbeatMins, 1));
+	if StratPos <> LastStrat or BrokerPos <> LastBroker or HBKey <> LastHB then begin
+		Row = "POS," + Tag + "," + GetSymbolName + ",," + NumToStr(StratPos, 0) + ",,,,,,," + NumToStr(BrokerPos, 0) + ","
+			+ BarDay + "," + NumToStr(Time, 0);
+		FileAppend(FileName, Row + NewLine);
+		LastStrat = StratPos; LastBroker = BrokerPos; LastHB = HBKey;
+	end;
+end;
+
