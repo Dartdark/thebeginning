@@ -32,6 +32,30 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - **Counting entries with `MarketPosition <> 0 and MarketPosition[1] = 0`** misses trades that open and close in one bar.
   Fix: `TotalTrades` at the day's start vs now.
 
+## Symbol Mapping: how to check and fix it (step by step, 2026-10-22)
+**Symptom:** orders rejected instantly ('Invalid Market / StopMarket order parameters ... @MNQ'); in the Order and Position
+Tracker (Ctrl+Shift+O, Orders tab) the **Instrument column shows `@MNQ`** instead of `MNQZ6` and **Broker Order ID is 0**.
+The trade logger still writes OPEN / CLOSE rows (it logs MultiCharts' strategy position, not broker fills), so a rejected
+day can look traded in `live/trades/`: always confirm fills in the tracker or on the Apex dashboard. Happened 10/14-16
+(PC) and 10/20 (VPS).
+
+**Cause:** `@MNQ` is dxFeed's continuous symbol; Rithmic only accepts a real contract. The mapping is stored per
+MultiCharts installation, so a new machine (the VPS) starts with the default `@MNQ -> @MNQ`.
+
+**Fix** (after 15:59 CT or on a weekend, every account flat):
+1. MultiCharts: **File → Broker Profiles → Rithmic → Symbol Mapping**.
+2. Find the row for `@MNQ` (data source dxFeed). Set the broker symbol to the **current contract**: search `MNQ` (no @) in
+   the Rithmic lookup and pick **MNQZ6** (Rithmic uses one-digit years), exchange CME. Same for `@MES -> MESZ6` and the
+   MCL contract when those strategies go live.
+3. Save / OK. Then on every live chart: auto-trading **off, then on** (initial position Flat); Strategy Positions all flat.
+4. **Test:** one manual 1-MNQ order through MultiCharts per account; the tracker must show `MNQZ6`, a real broker ID and
+   Filled; the fill appears on the Apex dashboard. Flatten it.
+5. Do steps 1-4 on **every** machine that trades (PC and VPS have separate mappings).
+
+**Rolls (quarterly):** change the broker symbol before each roll: **Thu 2026-12-10 after the close: MNQZ6 → MNQH7**
+(and MESZ6 → MESH7); then March → MNQM7, June → MNQU7, September → MNQZ7. Repeat steps 3-4 after each change. A roll
+reminder is scheduled for 12/10 08:00 CT.
+
 ## Live order rejections
 - **'Invalid StopMarket order parameters' on a protective stop** (EOS, 2026-10-16, 6:34 PT = 8:34 CT: "Buy Stop 1 @MNQ @ 30168"
   rejected): the short filled at the 8:30 open, price ran up through the stop level before the stop order reached Rithmic,
