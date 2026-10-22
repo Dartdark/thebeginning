@@ -80,6 +80,7 @@ committed in the repo that reproduces it.
 
 ```
 # <name>: <one-line verdict: REJECT / WATCH / CANDIDATE>
+Summary: <5 lines max: the question, the answer, the 2-3 numbers that decide it, what the user should do>
 Plan: <path, commit>   Script: <path>   Output: <path>   Trials run: <n>
 ## Rule (as tested)
 ## Results (tables: whole / longs / shorts; 2018-22 / 2023+ / by year; vs base or plan)
