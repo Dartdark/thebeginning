@@ -1,0 +1,133 @@
+// PROPOSAL ONLY — UNCOMPILED, NOT DEPLOYED. Claude review required.
+// Based on source commit 37bcba9. No order statements or IOG/cadence changes.
+// InsideBid/InsideAsk are CURRENT CHART-symbol quotes at logger observation time.
+// They are NOT the quote when an earlier broker fill or submission occurred.
+// Chart OPEN/CLOSE and Entry/ExitPrice are model state, NOT execution confirmation.
+// Raw ComputerDateTime is a PC-local serial date; verify timezone/clock/precision.
+// Never assign UTC or microsecond accuracy from NumToStr decimal places.
+// The additive quotes\YYYYMMDD_chart_quotes_v1.csv sidecar has no header and 21 columns:
+// FileAppend cannot create the quotes subfolder. Review/create it only in a separate test environment first.
+// schema,event,tag,chart_symbol,entry_date,entry_time,chart_entry_price,exit_date,exit_time,
+// chart_exit_price,bar_date,bar_time,pc_datetime_serial,bid,ask,chart_close,quote_state,
+// observation_role,pc_zone_label,contract_label,account_label
+// Manual labels are unverified metadata until checked against tracker/export; no commas/newlines.
+// Legacy 14-column CSV and POS logic remain unchanged; consumers must EXCLUDE this sidecar
+// from legacy YYYYMMDD.csv imports. No subscription, account or order ID is inferred.
+// No quote event is emitted for an unobserved same-bar OPEN or a rejected/missed broker order.
+// Recovered CLOSEs all see NOW's quote; this is never backfilled event-time bid/ask.
+// Snapshot freshness/source timestamp are unknown. Positive, uncrossed values alone
+// do not establish freshness or a quote for the mapped actual broker contract.
+// Do not enable intrabar order generation to obtain faster snapshots.
+// Compile/replay only in a separate non-trading environment before any integration.
+// Apex Trade Logger (2026-10-19; health rows added 2026-10-21)
+// Log-only signal: writes every live entry and exit of the chart's strategy to a daily CSV, so Claude can fill the
+// journal with chart-model observations (join broker fills separately). It places NO orders and changes nothing in the strategy.
+//
+// How to use
+//   1. Create the folder C:\TradingLogs on the VPS first (FileAppend does not create folders).
+//   2. Add it to EVERY live strategy chart (Format Signals > Add > Apex Trade Logger), next to the strategy and the Target
+//      Guard. Set Tag to the strategy's short name: VB, ONB, EOS, MON_BR (and later the funded ones: ONB_ML, MON, LDF,
+//      NFP, MOC_MES, CLS).
+//   3. Leave LogHistory false: only real-time trades are written, not the backtest trades replayed when the chart loads.
+// File: <Folder>YYYYMMDD.csv (the exchange date of the bar that saw the event), one line per event, no header:
+//   event,tag,symbol,side,contracts,entry_date,entry_time,entry_price,exit_date,exit_time,exit_price,profit_usd,bar_date,bar_time
+//   event = OPEN (position entered) or CLOSE (position closed); dates YYYYMMDD, times HHMM (Central, exchange time);
+//   profit_usd = MultiCharts' position profit (gross: before commissions unless the strategy has commission set).
+// The logger sees events at bar close, so an entry and exit inside one bar is logged as a CLOSE only.
+
+inputs: Folder("C:\TradingLogs\"), Tag("VB"), LogHistory(false), HeartbeatMins(30), ObsPCZoneLabel("UNVERIFIED"), ObsContractLabel("UNVERIFIED"), ObsAccountLabel("UNVERIFIED");
+variables: LastTT(0), LastEntryKey(0), K(0), N(0), EK(0), Live(false), SideTxt(""), Row(""), FileName(""), BarDay(""),
+	StratPos(0), BrokerPos(0), LastStrat(-999), LastBroker(-999), LastHB(-1), MinOfDay(0), HBKey(0),
+    ObsPCDateTime(0), ObsBid(0), ObsAsk(0), ObsClose(0), ObsQuoteState(""), ObsRow(""), ObsFile("");
+
+Live = LogHistory or GetAppInfo(aiRealTimeCalc) = 1;
+BarDay = NumToStr(Date + 19000000, 0);
+FileName = Folder + BarDay + ".csv";
+
+// closed positions since the last bar (normally 0 or 1), oldest first
+if TotalTrades > LastTT then begin
+	N = TotalTrades - LastTT;
+	if Live then begin
+		for K = N downto 1 begin
+			if MarketPosition(K) > 0 then SideTxt = "long" else SideTxt = "short";
+			Row = "CLOSE," + Tag + "," + GetSymbolName + "," + SideTxt + "," + NumToStr(MaxContracts(K), 0) + ","
+				+ NumToStr(EntryDate(K) + 19000000, 0) + "," + NumToStr(EntryTime(K), 0) + "," + NumToStr(EntryPrice(K), 2) + ","
+				+ NumToStr(ExitDate(K) + 19000000, 0) + "," + NumToStr(ExitTime(K), 0) + "," + NumToStr(ExitPrice(K), 2) + ","
+				+ NumToStr(PositionProfit(K), 2) + "," + BarDay + "," + NumToStr(Time, 0);
+			FileAppend(FileName, Row + NewLine);
+            // Real-time logger-observation snapshot only. No historical quote reconstruction.
+            if GetAppInfo(aiRealTimeCalc) = 1 then begin
+                ObsPCDateTime = ComputerDateTime;
+                ObsBid = InsideBid; ObsAsk = InsideAsk; ObsClose = Close;
+                if ObsBid <= 0 or ObsAsk <= 0 then ObsQuoteState = "INVALID_MISSING"
+                else if ObsAsk < ObsBid then ObsQuoteState = "INVALID_CROSSED"
+                else if ObsAsk = ObsBid then ObsQuoteState = "LOCKED_FRESHNESS_UNKNOWN"
+                else ObsQuoteState = "UNCROSSED_FRESHNESS_UNKNOWN";
+                ObsFile = Folder + "quotes\" + BarDay + "_chart_quotes_v1.csv";
+                ObsRow = "1,CLOSE," + Tag + "," + GetSymbolName
+                    + "," + NumToStr(EntryDate(K) + 19000000, 0) + "," + NumToStr(EntryTime(K), 0)
+                    + "," + NumToStr(EntryPrice(K), 8) + "," + NumToStr(ExitDate(K) + 19000000, 0)
+                    + "," + NumToStr(ExitTime(K), 0) + "," + NumToStr(ExitPrice(K), 8)
+                    + "," + BarDay + "," + NumToStr(Time, 0) + "," + NumToStr(ObsPCDateTime, 10)
+                    + "," + NumToStr(ObsBid, 8) + "," + NumToStr(ObsAsk, 8) + "," + NumToStr(ObsClose, 8)
+                    + "," + ObsQuoteState + ",chart_observation_not_broker_fill," + ObsPCZoneLabel
+                    + "," + ObsContractLabel + "," + ObsAccountLabel;
+                FileAppend(ObsFile, ObsRow + NewLine);
+            end;
+
+		end;
+	end;
+	LastTT = TotalTrades;
+end;
+
+// a new open position (first bar it is seen)
+if MarketPosition <> 0 then begin
+	EK = EntryDate(0) * 10000 + EntryTime(0);
+	if EK <> LastEntryKey then begin
+		if Live then begin
+			if MarketPosition > 0 then SideTxt = "long" else SideTxt = "short";
+			Row = "OPEN," + Tag + "," + GetSymbolName + "," + SideTxt + "," + NumToStr(CurrentContracts, 0) + ","
+				+ NumToStr(EntryDate(0) + 19000000, 0) + "," + NumToStr(EntryTime(0), 0) + "," + NumToStr(EntryPrice(0), 2)
+				+ ",,,,," + BarDay + "," + NumToStr(Time, 0);
+			FileAppend(FileName, Row + NewLine);
+            // Real-time logger-observation snapshot only. No historical quote reconstruction.
+            if GetAppInfo(aiRealTimeCalc) = 1 then begin
+                ObsPCDateTime = ComputerDateTime;
+                ObsBid = InsideBid; ObsAsk = InsideAsk; ObsClose = Close;
+                if ObsBid <= 0 or ObsAsk <= 0 then ObsQuoteState = "INVALID_MISSING"
+                else if ObsAsk < ObsBid then ObsQuoteState = "INVALID_CROSSED"
+                else if ObsAsk = ObsBid then ObsQuoteState = "LOCKED_FRESHNESS_UNKNOWN"
+                else ObsQuoteState = "UNCROSSED_FRESHNESS_UNKNOWN";
+                ObsFile = Folder + "quotes\" + BarDay + "_chart_quotes_v1.csv";
+                ObsRow = "1,OPEN," + Tag + "," + GetSymbolName
+                    + "," + NumToStr(EntryDate(0) + 19000000, 0) + "," + NumToStr(EntryTime(0), 0)
+                    + "," + NumToStr(EntryPrice(0), 8) + ",,,"
+                    + "," + BarDay + "," + NumToStr(Time, 0) + "," + NumToStr(ObsPCDateTime, 10)
+                    + "," + NumToStr(ObsBid, 8) + "," + NumToStr(ObsAsk, 8) + "," + NumToStr(ObsClose, 8)
+                    + "," + ObsQuoteState + ",chart_observation_not_broker_fill," + ObsPCZoneLabel
+                    + "," + ObsContractLabel + "," + ObsAccountLabel;
+                FileAppend(ObsFile, ObsRow + NewLine);
+            end;
+
+		end;
+		LastEntryKey = EK;
+	end;
+end;
+
+// ---------- health rows (added 2026-10-21): POS = strategy position vs the broker's position for this strategy ----------
+// Written on every change and every HeartbeatMins (a missing heartbeat = a frozen chart or a dropped feed). Columns as
+// the trade rows: event POS, tag, symbol, -, strategy position (signed contracts), ..., broker position for the strategy
+// (in the profit column), bar date, bar time. Claude's 16:40 CT job flags a mismatch or a missing heartbeat in the journal.
+if GetAppInfo(aiRealTimeCalc) = 1 then begin
+	StratPos = MarketPosition * CurrentContracts;
+	BrokerPos = MarketPosition_at_Broker_for_The_Strategy;
+	MinOfDay = IntPortion(Time * 0.01) * 60 + Mod(Time, 100);
+	HBKey = Date * 10000 + IntPortion(MinOfDay / MaxList(HeartbeatMins, 1));
+	if StratPos <> LastStrat or BrokerPos <> LastBroker or HBKey <> LastHB then begin
+		Row = "POS," + Tag + "," + GetSymbolName + ",," + NumToStr(StratPos, 0) + ",,,,,,," + NumToStr(BrokerPos, 0) + ","
+			+ BarDay + "," + NumToStr(Time, 0);
+		FileAppend(FileName, Row + NewLine);
+		LastStrat = StratPos; LastBroker = BrokerPos; LastHB = HBKey;
+	end;
+end;
+

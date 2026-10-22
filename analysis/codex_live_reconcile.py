@@ -233,6 +233,7 @@ def audit(ref, out, start="2026-10-12", end="2026-10-21"):
     context_start = (pd.Timestamp(start)-pd.Timedelta(days=1)).strftime("%Y%m%d")
     end_stamp = pd.Timestamp(end).strftime("%Y%m%d")
     trade_files = [p for p in paths if p.startswith("live/trades/") and p.endswith(".csv")
+                   and re.fullmatch(r"\d{8}", Path(p).stem)
                    and context_start <= Path(p).stem <= end_stamp]
     hashes = {}; source_rows=[]; data=[]
     for path in trade_files:
@@ -368,11 +369,25 @@ if __name__=="__main__":
     p.add_argument("--account");p.add_argument("--symbol",choices=["NQ","MNQ"])
     p.add_argument("--expected-qty",help="'report' preserves same-root per-trade sizes; numeric override only for confirmed fixed sizing")
     p.add_argument("--compare-only",action="store_true",help="Skip historical chart audit; compare supplied verified records only")
+    p.add_argument("--execution-diagnostics",action="store_true",help="Read-only entry observations; no strategy replay or live writes")
+    p.add_argument("--orders-input",help="Reviewed canonical entry attempts; default is the pinned Oct20–21 transcription")
+    p.add_argument("--bars-input",help="Reviewed UTC close-stamped minute bars for diagnostic price windows")
+    p.add_argument("--quotes-input",help="Reviewed same-contract contemporaneous quotes, separate from chart logger observations")
+    p.add_argument("--tracker-timezone",help="Explicitly verified IANA timezone of the tracker; omitted means no UTC inference")
     args=p.parse_args();out=Path(args.output).resolve()
     allowed=Path("analysis/outputs").resolve()
     if out.parent!=allowed or not out.name.startswith("codex_"):
         raise SystemExit("Output must be analysis/outputs/codex_*")
     if pd.Timestamp(args.start)>pd.Timestamp(args.end):p.error("--start must not follow --end")
+    if args.execution_diagnostics:
+        if any([args.expected,args.expected_report,args.broker,args.compare_only,args.coverage_complete]):
+            p.error("Execution diagnostics is separate from expected/broker round-trip comparison")
+        out.mkdir(parents=True,exist_ok=True)
+        from codex_execution_diagnostics import run
+        run(args.source,out,args.start,args.end,args.orders_input,args.bars_input,args.quotes_input,args.tracker_timezone)
+        raise SystemExit(0)
+    if any([args.orders_input,args.bars_input,args.quotes_input,args.tracker_timezone]):
+        p.error("Entry diagnostic inputs require --execution-diagnostics")
     if args.expected and args.expected_report:p.error("Choose --expected CSV or --expected-report XLSX")
     if bool(args.expected or args.expected_report)!=bool(args.broker):p.error("Supply expected records and --broker together")
     if args.compare_only and not args.broker:p.error("--compare-only requires expected and broker records")

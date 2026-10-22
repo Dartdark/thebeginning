@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "required_order_fields": [
+    "attempt_id",
+    "event_id",
+    "trading_date",
+    "strategy",
+    "account",
+    "instrument",
+    "actual_contract",
+    "side",
+    "qty",
+    "filled_qty",
+    "order_type",
+    "status",
+    "reason",
+    "order_id",
+    "fill_price",
+    "signal_time_utc",
+    "submission_time_utc",
+    "fill_time_utc"
+  ],
+  "optional_order_fields": {
+    "order_generated_time_raw": "Original displayed tracker timestamp; never silently promoted to signal/submission time",
+    "generated_time_utc": "Optional timezone-verified conversion; still not submission time",
+    "broker_fill_time_raw": "Original filled-column timestamp, blank for unfilled orders",
+    "status_time_raw": "Status transition time including rejection/cancellation, not inherently a fill",
+    "coverage_verified": "Explicit true declaration needed to classify a supplied no-fill expected event as missed",
+    "source": "Original export/source and row identity; preserve raw files and execution-leg details"
+  },
+  "event_unit": "Reviewed strategy signal ID shared across all account copies/retries; distinct IDs need not be statistically independent",
+  "order_statuses": [
+    "filled",
+    "partially_filled",
+    "rejected",
+    "cancelled",
+    "missed",
+    "unresolved"
+  ],
+  "time_rule": "UTC fields must include Z or offset; raw tracker and chart timestamps remain separate",
+  "bar_fields": [
+    "bar_close_time_utc",
+    "symbol",
+    "actual_contract",
+    "open",
+    "high",
+    "low",
+    "close"
+  ],
+  "bar_rule": "Exact minute close at or before anchor+offset; no nearest-future bar, interpolation or forward-fill",
+  "quote_fields": [
+    "attempt_id",
+    "basis",
+    "quote_time_utc",
+    "bid",
+    "ask",
+    "symbol",
+    "actual_contract",
+    "freshness_verified"
+  ],
+  "quote_rule": "One reviewed same-contract quote, not after anchor and at most 1 second old; explicitly verified freshness; bid>0 and ask>bid",
+  "horizons": [
+    -5,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    5
+  ],
+  "proposal_schema": {
+    "columns": [
+      "schema",
+      "event",
+      "tag",
+      "chart_symbol",
+      "entry_date",
+      "entry_time",
+      "chart_entry_price",
+      "exit_date",
+      "exit_time",
+      "chart_exit_price",
+      "bar_date",
+      "bar_time",
+      "pc_datetime_serial",
+      "bid",
+      "ask",
+      "chart_close",
+      "quote_state",
+      "observation_role",
+      "pc_zone_label",
+      "contract_label",
+      "account_label"
+    ],
+    "role": "Chart observation snapshots only; not accepted automatically as canonical signal/submission/fill quotes"
+  }
+}
