@@ -1,0 +1,43 @@
+{
+  "plan_commit": "a161117",
+  "trials": 1,
+  "period": "2018-22 only",
+  "gate_checks": {
+    "at_least_100_trades": true,
+    "gross_at_least_1_5_cost": false,
+    "net_positive": false,
+    "net_t_at_least_2": false,
+    "at_least_3_positive_years": false,
+    "at_least_95_percent_unoccupied": true
+  },
+  "design_pass": false,
+  "holdout_opened": false,
+  "funded_bench_run": false,
+  "verdict": "REJECT",
+  "round_trip_per_GC": 27.25,
+  "gross_hurdle_per_GC": 40.875,
+  "unoccupied_position_fraction": 1.0,
+  "roster_interval_counts": {
+    "EOS": 60,
+    "LDF_MC": 492,
+    "MON_MC": 256,
+    "NFP_MC": 43,
+    "ONB_ML2_MC": 192,
+    "RS_L": 324,
+    "VB": 854,
+    "MON_BR_MC_actual": 119,
+    "CLS_actual": 42,
+    "MOC_MES": 131
+  },
+  "calendar": "XSHG daytime proxy; exact SGE 2022 cross-check passed",
+  "calendar_package_version": "4.13.2",
+  "audit_counts": {
+    "signal": 1031,
+    "existing_position": 128,
+    "Shanghai_closed": 86,
+    "unchanged": 42,
+    "missing_signal_or_ATR": 2
+  },
+  "position_minutes": 15446,
+  "overlap_minutes": 0
+}
