@@ -1,0 +1,647 @@
+TEST_01; plan commit 6818838; fixed filters, no search; seed 20261021
+Python 3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)] numpy 2.5.4 pandas 3.0.1
+Data 2018-01-02 00:00:00 through 2026-10-09 00:00:00 trading days 2262
+COST: $7.25/NQ + $5 entry and $5 non-target exit; claim convention subtracts another $10/trade.
+Whole = longs only. Shorts: 0 trades, all trade metrics N/A in every period.
+
+METRICS full whole/longs
+          trades     win       avg      annual  sharpe  sortino  profit_factor   max_dd  calmar   ulcer  ulcer_perf      total       t  trade_dd  daily_dd
+Base      1742.0  0.6521   81.6392  15843.6366  1.1994   1.8152         1.2284  13905.5  1.1394  3.4746      9.1198  142215.50  3.7817  15802.25   13905.5
+Runway    1391.0  0.6693   93.1634  14437.1101  1.1918   1.8316         1.2478  14279.5  1.0110  3.2802      8.8026  129590.25  3.7098  14279.50   14279.5
+Stretch   1633.0  0.6565   86.5406  15743.9562  1.2173   1.8298         1.2438  13462.0  1.1695  3.2833      9.5903  141320.75  3.8872  14979.25   13462.0
+Combined  1303.0  0.6738  101.9211  14795.0570  1.2495   1.9042         1.2761  13550.0  1.0919  3.0092      9.8333  132803.25  3.9539  14629.00   13550.0
+
+METRICS design whole/longs
+          trades     win       avg      annual  sharpe  sortino  profit_factor    max_dd  calmar   ulcer  ulcer_perf     total       t  trade_dd  daily_dd
+Base       861.0  0.6330   76.4085  12861.5306  1.1740   1.7741         1.2427  10512.00  1.2235  3.7373      6.8827  65787.75  2.7116  10544.75  10512.00
+Runway     684.0  0.6550   95.3670  12752.6858  1.2505   1.8980         1.2899   9085.75  1.4036  3.3582      7.5949  65231.00  2.8953  10486.50   9085.75
+Stretch    809.0  0.6403   83.5411  13212.8448  1.2189   1.8418         1.2680   8208.50  1.6097  3.4807      7.5920  67584.75  2.8771   8800.75   8208.50
+Combined   645.0  0.6605  107.9050  13606.5826  1.3423   2.0387         1.3372   7586.25  1.7936  3.1441      8.6552  69598.75  3.2117   8239.75   7586.25
+
+METRICS holdout whole/longs
+          trades     win      avg      annual  sharpe  sortino  profit_factor   max_dd  calmar   ulcer  ulcer_perf     total       t  trade_dd  daily_dd
+Base       881.0  0.6708  86.7511  19794.2374  1.2601   1.9094         1.2174  13905.5  1.4235  5.5635      7.1157  76427.75  2.6587  15802.25   13905.5
+Runway     707.0  0.6832  91.0315  16668.5827  1.1685   1.8119         1.2161  14279.5  1.1673  5.8516      5.6971  64359.25  2.4094  14279.50   14279.5
+Stretch    824.0  0.6723  89.4854  19097.0935  1.2502   1.8732         1.2251  13462.0  1.4186  5.6845      6.7190  73736.00  2.6561  14979.25   13462.0
+Combined   658.0  0.6869  96.0555  16369.5108  1.1877   1.8151         1.2302  13550.0  1.2081  5.3196      6.1544  63204.50  2.4614  14629.00   13550.0
+
+METRICS 2018 whole/longs
+          trades     win      avg     annual  sharpe  sortino  profit_factor   max_dd  calmar   ulcer  ulcer_perf    total       t  trade_dd  daily_dd
+Base       135.0  0.5852  29.0093  3840.0584  0.4580   0.6508         1.1109  7711.75  0.4979  4.5226      1.6982  3916.25  0.4889   7711.75   7711.75
+Runway     112.0  0.6071  38.6429  4243.7977  0.5673   0.8158         1.1415  7449.50  0.5697  4.4858      1.8921  4328.00  0.5724   7449.50   7449.50
+Stretch    120.0  0.5917  12.8750  1514.9416  0.1870   0.2550         1.0465  7524.50  0.2013  4.5608      0.6643  1545.00  0.2019   7524.50   7524.50
+Combined   103.0  0.5922  28.2840  2856.5720  0.3950   0.5495         1.1009  7262.25  0.3933  4.2150      1.3554  2913.25  0.4007   7262.25   7262.25
+
+METRICS 2019 whole/longs
+          trades     win      avg     annual  sharpe  sortino  profit_factor  max_dd  calmar   ulcer  ulcer_perf    total       t  trade_dd  daily_dd
+Base       121.0  0.5620  22.6674  2678.9651  0.4859   0.6933         1.1187  4995.5  0.5363  3.1420      1.7053  2742.75  0.4749   5123.75    4995.5
+Runway     100.0  0.5700  24.9500  2436.9767  0.4424   0.6352         1.1205  5001.0  0.4873  3.1317      1.5563  2495.00  0.4451   5129.25    5001.0
+Stretch    112.0  0.5714  43.3750  4745.0233  0.9047   1.3455         1.2393  4995.5  0.9499  2.9091      3.2622  4858.00  0.8834   5123.75    4995.5
+Combined    97.0  0.5876  55.8943  5295.6628  0.9880   1.5047         1.3002  5001.0  1.0589  2.8322      3.7396  5421.75  1.0181   5129.25    5001.0
+
+METRICS 2020 whole/longs
+          trades     win       avg      annual  sharpe  sortino  profit_factor   max_dd  calmar   ulcer  ulcer_perf     total       t  trade_dd  daily_dd
+Base       201.0  0.6368  109.8893  21574.0814  1.9054   3.0407         1.3426  8323.00  2.5921  3.7802     11.4142  22087.75  1.8262    8323.0   8323.00
+Runway     152.0  0.6776  180.1184  26741.3023  2.4941   4.1639         1.5853  7045.00  3.7958  2.9587     18.0763  27378.00  2.5480    7045.0   7045.00
+Stretch    193.0  0.6373  110.4702  20824.9186  1.8904   2.9946         1.3418  6690.75  3.1125  3.2013     13.0103  21320.75  1.7847    7283.0   6690.75
+Combined   145.0  0.6759  181.5776  25716.4535  2.4375   4.0100         1.5862  7045.00  3.6503  2.9688     17.3244  26328.75  2.4972    7045.0   7045.00
+
+METRICS 2021 whole/longs
+          trades     win       avg      annual  sharpe  sortino  profit_factor   max_dd  calmar   ulcer  ulcer_perf     total       t  trade_dd  daily_dd
+Base       189.0  0.6508  121.9828  22518.5930  1.9871   3.1244         1.3962  5613.25  4.0117  2.5877     17.4041  23054.75  1.9941   5613.25   5613.25
+Runway     158.0  0.6899  150.2184  23182.5349  2.1080   3.3934         1.4645  5671.50  4.0875  2.5055     18.5054  23734.50  2.1318   5671.50   5671.50
+Stretch    177.0  0.6723  154.4449  26701.0116  2.3171   3.7580         1.5502  6401.00  4.1714  2.5441     20.9907  27336.75  2.5299   6401.00   6401.00
+Combined   143.0  0.7133  188.5892  26341.0814  2.4100   3.8994         1.6460  5671.50  4.6445  2.4176     21.7907  26968.25  2.6471   5671.50   5671.50
+
+METRICS 2022 whole/longs
+          trades     win      avg      annual  sharpe  sortino  profit_factor   max_dd  calmar   ulcer  ulcer_perf     total       t  trade_dd  daily_dd
+Base       215.0  0.6837  65.0523  13660.9884  0.8764   1.2985         1.1555  9815.25  1.3918  6.4284      4.2502  13986.25  0.9598  10544.75   9815.25
+Runway     162.0  0.6852  45.0340   7125.8372  0.5075   0.7274         1.0962  9085.75  0.7843  6.7028      2.1262   7295.50  0.5445  10486.50   9085.75
+Stretch    207.0  0.6812  60.5036  12232.9884  0.7894   1.1628         1.1445  7685.00  1.5918  5.6317      4.3443  12524.25  0.8767   8472.75   7685.00
+Combined   157.0  0.6879  50.7436   7781.4767  0.5485   0.7922         1.1094  7586.25  1.0257  5.6645      2.7475   7966.75  0.6058   8239.75   7586.25
+
+METRICS 2023 whole/longs
+          trades     win       avg      annual  sharpe  sortino  profit_factor   max_dd  calmar   ulcer  ulcer_perf     total       t  trade_dd  daily_dd
+Base       217.0  0.6820  111.8053  23789.7315  1.6734   2.7031         1.3151  7033.75  3.3822  4.0164     11.8464  24261.75  1.7958   7651.50   7033.75
+Runway     161.0  0.6832  113.0916  17853.5136  1.3715   2.1440         1.2968  6830.00  2.6140  4.6163      7.7350  18207.75  1.4895   7617.75   6830.00
+Stretch    194.0  0.6907  112.7500  21447.9455  1.6030   2.5105         1.3174  9397.00  2.2824  5.2888      8.1108  21873.50  1.7107   9397.00   9397.00
+Combined   146.0  0.7055  146.0034  20901.7821  1.6888   2.6192         1.4106  8257.50  2.5312  4.8628      8.5966  21316.50  1.8745   8257.50   8257.50
+
+METRICS 2024 whole/longs
+          trades     win      avg      annual  sharpe  sortino  profit_factor    max_dd  calmar    ulcer  ulcer_perf     total       t  trade_dd  daily_dd
+Base       214.0  0.6542  55.3435  11523.4054  0.7674   1.1553         1.1332  13054.25  0.8827  10.2661      2.2449  11843.50  0.8274  13403.75  13054.25
+Runway     167.0  0.6826  82.3009  13372.7838  0.9823   1.5404         1.1892  14279.50  0.9365   9.6699      2.7659  13744.25  1.0411  14279.50  14279.50
+Stretch    197.0  0.6447  41.4810   7950.8919  0.5638   0.8160         1.0989  13462.00  0.5906  10.8798      1.4616   8171.75  0.5959  14979.25  13462.00
+Combined   153.0  0.6797  71.3448  10620.7297  0.8208   1.2434         1.1615  13550.00  0.7838   8.9239      2.3803  10915.75  0.8596  14629.00  13550.00
+
+METRICS 2025 whole/longs
+          trades     win       avg      annual  sharpe  sortino  profit_factor   max_dd  calmar   ulcer  ulcer_perf     total       t  trade_dd  daily_dd
+Base       226.0  0.6903  136.5996  30270.8872  1.9286   2.9064         1.3707  5483.75  5.5201  3.9330     15.3932  30871.50  2.1617   7730.50   5483.75
+Runway     188.0  0.6862  105.3032  19411.8444  1.3541   2.0185         1.2581  8893.75  2.1826  6.4898      5.9823  19797.00  1.4536   8893.75   8893.75
+Stretch    219.0  0.6895  139.5308  29962.7510  1.8973   2.8687         1.3799  5483.75  5.4639  3.9550     15.1518  30557.25  2.1776   7730.50   5483.75
+Combined   178.0  0.6910  117.1320  20443.8677  1.4345   2.1512         1.2940  8893.75  2.2987  6.3947      6.3940  20849.50  1.5871   8893.75   8893.75
+
+METRICS 2026 whole/longs
+          trades     win      avg     annual  sharpe  sortino  profit_factor    max_dd  calmar   ulcer  ulcer_perf     total       t  trade_dd  daily_dd
+Base       224.0  0.6562  42.1920  11908.260  0.6508   0.9562         1.0923  10756.50  1.1071  8.5533      2.7845   9451.00  0.6147  10756.50  10756.50
+Runway     191.0  0.6806  66.0223  15888.915  0.9649   1.5418         1.1447   6613.50  2.4025  5.1925      6.1200  12610.25  0.8763   6613.50   6613.50
+Stretch    214.0  0.6636  61.3715  16548.210  0.9118   1.3569         1.1375   7511.00  2.2032  5.3113      6.2314  13133.50  0.8781   8421.50   7511.00
+Combined   181.0  0.6740  55.9268  12754.665  0.8034   1.2549         1.1203   8505.25  1.4996  4.9420      5.1618  10122.75  0.7186   8870.25   8505.25
+
+CLAIM COSTS $17.25 commission plus slippage, full:
+           trades     win      avg      annual  sharpe  sortino  profit_factor    max_dd  calmar   ulcer  ulcer_perf      total       t  trade_dd  daily_dd
+Base      1742.0  0.6498  71.6392  13902.9469  1.0561   1.5775         1.1985  14685.50  0.9467  3.9005      7.1287  124795.50  3.3185  16612.25  14685.50
+Runway    1391.0  0.6679  83.1634  12887.4549  1.0676   1.6200         1.2193  14699.50  0.8767  3.6209      7.1184  115680.25  3.3116  14699.50  14699.50
+Stretch   1633.0  0.6558  76.5406  13924.6989  1.0801   1.6028         1.2135  14016.75  0.9934  3.6931      7.5410  124990.75  3.4380  15309.25  14016.75
+Combined  1303.0  0.6731  91.9211  13343.4390  1.1306   1.7018         1.2468  13950.00  0.9565  3.2969      8.0944  119773.25  3.5659  14869.00  13950.00
+CLAIM ARITHMETIC DD reduction 0.2670890490583585 claimed combined DD at 2MNQ 2521.8 at 1MNQ 1260.9
+
+REMOVED/ADDED full {
+  "Runway": {
+    "removed_n": 351,
+    "removed_total": 12625.25,
+    "removed_avg": 35.96937321937322,
+    "removed_t": 0.9072121010179258,
+    "added_n": 0,
+    "added_total": 0.0,
+    "added_avg": NaN,
+    "added_t": NaN
+  },
+  "Stretch": {
+    "removed_n": 191,
+    "removed_total": 12335.25,
+    "removed_avg": 64.58246073298429,
+    "removed_t": 0.9986379882132206,
+    "added_n": 82,
+    "added_total": 11440.5,
+    "added_avg": 139.51829268292684,
+    "added_t": 1.478970775109443
+  },
+  "Combined": {
+    "removed_n": 482,
+    "removed_total": 20780.5,
+    "removed_avg": 43.113070539419084,
+    "removed_t": 1.170505938489353,
+    "added_n": 43,
+    "added_total": 11368.25,
+    "added_avg": 264.3779069767442,
+    "added_t": 2.1138386752394482
+  }
+}
+RANDOM DROP full {
+  "Runway": {
+    "kept": 1391,
+    "dropped": 351,
+    "actual_total": 129590.25,
+    "actual_dd": 14279.5,
+    "random_total_p5_p50_p95": [
+      89817.0,
+      113535.25,
+      139495.5
+    ],
+    "random_dd_p5_p50_p95": [
+      10802.05,
+      13871.0,
+      18127.887500000004
+    ],
+    "fraction_filter_beats_profit": 0.8486,
+    "fraction_filter_beats_dd": 0.4206,
+    "fraction_filter_beats_both": 0.3846,
+    "p_random_ge_profit": 0.15156968606278745
+  },
+  "Stretch": {
+    "kept": 1633,
+    "dropped": 109,
+    "actual_total": 141320.75,
+    "actual_dd": 13462.0,
+    "random_total_p5_p50_p95": [
+      119039.0,
+      133575.75,
+      149155.75
+    ],
+    "random_dd_p5_p50_p95": [
+      11755.35,
+      13963.75,
+      16634.162500000002
+    ],
+    "fraction_filter_beats_profit": 0.7988,
+    "fraction_filter_beats_dd": 0.6432,
+    "fraction_filter_beats_both": 0.5468,
+    "p_random_ge_profit": 0.20135972805438912
+  },
+  "Combined": {
+    "kept": 1303,
+    "dropped": 439,
+    "actual_total": 132803.25,
+    "actual_dd": 13550.0,
+    "random_total_p5_p50_p95": [
+      79529.0,
+      106310.75,
+      134164.0
+    ],
+    "random_dd_p5_p50_p95": [
+      10421.0,
+      13678.0,
+      18569.287500000002
+    ],
+    "fraction_filter_beats_profit": 0.939,
+    "fraction_filter_beats_dd": 0.5212,
+    "fraction_filter_beats_both": 0.505,
+    "p_random_ge_profit": 0.0611877624475105
+  }
+}
+
+REMOVED/ADDED design {
+  "Runway": {
+    "removed_n": 177,
+    "removed_total": 556.75,
+    "removed_avg": 3.1454802259887007,
+    "removed_t": 0.06211409739252446,
+    "added_n": 0,
+    "added_total": 0.0,
+    "added_avg": NaN,
+    "added_t": NaN
+  },
+  "Stretch": {
+    "removed_n": 96,
+    "removed_total": 4934.0,
+    "removed_avg": 51.395833333333336,
+    "removed_t": 0.6123473034990591,
+    "added_n": 44,
+    "added_total": 6731.0,
+    "added_avg": 152.97727272727272,
+    "added_t": 1.2738910428321317
+  },
+  "Combined": {
+    "removed_n": 241,
+    "removed_total": 1902.75,
+    "removed_avg": 7.895228215767635,
+    "removed_t": 0.16393305970821045,
+    "added_n": 25,
+    "added_total": 5713.75,
+    "added_avg": 228.55,
+    "added_t": 1.387249304195224
+  }
+}
+RANDOM DROP design {
+  "Runway": {
+    "kept": 684,
+    "dropped": 177,
+    "actual_total": 65231.0,
+    "actual_dd": 9085.75,
+    "random_total_p5_p50_p95": [
+      36016.0,
+      52286.0,
+      68438.0
+    ],
+    "random_dd_p5_p50_p95": [
+      7470.0,
+      10114.0,
+      13422.25
+    ],
+    "fraction_filter_beats_profit": 0.9048,
+    "fraction_filter_beats_dd": 0.708,
+    "fraction_filter_beats_both": 0.6646,
+    "p_random_ge_profit": 0.09538092381523695
+  },
+  "Stretch": {
+    "kept": 809,
+    "dropped": 52,
+    "actual_total": 67584.75,
+    "actual_dd": 8208.5,
+    "random_total_p5_p50_p95": [
+      52522.5,
+      61719.75,
+      71740.25
+    ],
+    "random_dd_p5_p50_p95": [
+      8695.75,
+      10603.0,
+      12203.0
+    ],
+    "fraction_filter_beats_profit": 0.8392,
+    "fraction_filter_beats_dd": 0.9846,
+    "fraction_filter_beats_both": 0.8318,
+    "p_random_ge_profit": 0.16096780643871225
+  },
+  "Combined": {
+    "kept": 645,
+    "dropped": 216,
+    "actual_total": 69598.75,
+    "actual_dd": 7586.25,
+    "random_total_p5_p50_p95": [
+      32403.75,
+      49181.25,
+      67070.25
+    ],
+    "random_dd_p5_p50_p95": [
+      7094.375,
+      9951.75,
+      13637.025
+    ],
+    "fraction_filter_beats_profit": 0.9668,
+    "fraction_filter_beats_dd": 0.9056,
+    "fraction_filter_beats_both": 0.8844,
+    "p_random_ge_profit": 0.033393321335732855
+  }
+}
+
+REMOVED/ADDED holdout {
+  "Runway": {
+    "removed_n": 174,
+    "removed_total": 12068.5,
+    "removed_avg": 69.35919540229885,
+    "removed_t": 1.1328145825831655,
+    "added_n": 0,
+    "added_total": 0.0,
+    "added_avg": NaN,
+    "added_t": NaN
+  },
+  "Stretch": {
+    "removed_n": 95,
+    "removed_total": 7401.25,
+    "removed_avg": 77.90789473684211,
+    "removed_t": 0.787078421877043,
+    "added_n": 38,
+    "added_total": 4709.5,
+    "added_avg": 123.9342105263158,
+    "added_t": 0.8240031047434433
+  },
+  "Combined": {
+    "removed_n": 241,
+    "removed_total": 18877.75,
+    "removed_avg": 78.33091286307054,
+    "removed_t": 1.4050314346587844,
+    "added_n": 18,
+    "added_total": 5654.5,
+    "added_avg": 314.1388888888889,
+    "added_t": 1.593772648142946
+  }
+}
+RANDOM DROP holdout {
+  "Runway": {
+    "kept": 707,
+    "dropped": 174,
+    "actual_total": 64359.25,
+    "actual_dd": 14279.5,
+    "random_total_p5_p50_p95": [
+      42279.25,
+      61106.75,
+      80300.75
+    ],
+    "random_dd_p5_p50_p95": [
+      10380.8875,
+      13776.875,
+      18280.325
+    ],
+    "fraction_filter_beats_profit": 0.614,
+    "fraction_filter_beats_dd": 0.4098,
+    "fraction_filter_beats_both": 0.3114,
+    "p_random_ge_profit": 0.386122775444911
+  },
+  "Stretch": {
+    "kept": 824,
+    "dropped": 57,
+    "actual_total": 73736.0,
+    "actual_dd": 13462.0,
+    "random_total_p5_p50_p95": [
+      60105.5,
+      71481.0,
+      83406.0
+    ],
+    "random_dd_p5_p50_p95": [
+      11614.575,
+      13978.375,
+      16605.362500000003
+    ],
+    "fraction_filter_beats_profit": 0.628,
+    "fraction_filter_beats_dd": 0.6406,
+    "fraction_filter_beats_both": 0.4624,
+    "p_random_ge_profit": 0.372125574885023
+  },
+  "Combined": {
+    "kept": 658,
+    "dropped": 223,
+    "actual_total": 63204.5,
+    "actual_dd": 13550.0,
+    "random_total_p5_p50_p95": [
+      36247.0,
+      56727.0,
+      77641.75000000001
+    ],
+    "random_dd_p5_p50_p95": [
+      9964.4625,
+      13563.75,
+      18615.5875
+    ],
+    "fraction_filter_beats_profit": 0.69,
+    "fraction_filter_beats_dd": 0.5014,
+    "fraction_filter_beats_both": 0.4096,
+    "p_random_ge_profit": 0.3101379724055189
+  }
+}
+
+PAIRED DELTA full {'actual': -9412.25, 'daily_t': -0.5541909841263747, 'total_p5_p50_p95': [-35272.8, -8875.625, 17709.075], 'p_delta_le_0': 0.714}
+BOOTSTRAP full Base 5/50/95%, PF is DAILY
+              actual          p5         p50         p95
+sharpe       1.1994      0.6844      1.1969      1.7130
+sortino      1.8152      0.9939      1.8118      2.7027
+pf_day       1.3546      1.1883      1.3537      1.5469
+calmar       1.1394      0.3617      0.8986      1.7761
+ulcer        3.4746      2.6817      4.9622     11.2451
+max_dd   13905.5000  11505.8000  17362.8750  28608.5875
+annual   15843.6366   9065.7933  15797.5703  22521.3651
+PERMUTATION {'actual_dd': 13905.5, 'pct_rank': 0.0778, 'dd50': 18911.25, 'dd95': 29372.100000000002, 'dd99': 36618.67750000003, 'P(dd>=1000)': 1.0, 'P(dd>=2000)': 1.0, 'P(dd>=3000)': 1.0}
+   Monte Carlo full Base (x0.2): trades 1742 | total p5 $15,913 / p50 $28,430 / p95 $40,960, P(total <= 0) 0.0%
+      max DD actual $3,160 (rank 27%), shuffled p50 $3,744 / p95 $6,225 / p99 $7,761; losing streak actual 7, p95 9
+      252-day block bootstrap: P&L p5 $-905 / p50 $3,143 / p95 $7,120, P(loss) 10.0%, max DD p95 $3,464, P(hit $2,000 EOD trailing) 24.5%
+   Monte Carlo full Base (x0.8): trades 1742 | total p5 $63,651 / p50 $113,720 / p95 $163,839, P(total <= 0) 0.0%
+      max DD actual $12,642 (rank 27%), shuffled p50 $14,977 / p95 $24,900 / p99 $31,045; losing streak actual 7, p95 9
+      252-day block bootstrap: P&L p5 $-3,619 / p50 $12,573 / p95 $28,479, P(loss) 10.0%, max DD p95 $13,857, P(hit $2,000 EOD trailing) 68.9%
+BOOTSTRAP full Combined 5/50/95%, PF is DAILY
+              actual          p5         p50         p95
+sharpe       1.2495      0.7143      1.2541      1.7716
+sortino      1.9042      1.0446      1.9144      2.8244
+pf_day       1.3776      1.2012      1.3790      1.5805
+calmar       1.0919      0.3839      0.9413      1.8599
+ulcer        3.0092      2.4934      4.5601      9.9239
+max_dd   13550.0000  10358.9625  15504.8750  25205.3000
+annual   14795.0570   8408.0867  14802.6883  21031.0126
+PERMUTATION {'actual_dd': 13550.0, 'pct_rank': 0.1866, 'dd50': 16509.625, 'dd95': 26087.112500000003, 'dd99': 31859.640000000036, 'P(dd>=1000)': 1.0, 'P(dd>=2000)': 1.0, 'P(dd>=3000)': 1.0}
+   Monte Carlo full Combined (x0.2): trades 1303 | total p5 $15,401 / p50 $26,587 / p95 $37,614, P(total <= 0) 0.0%
+      max DD actual $2,926 (rank 33%), shuffled p50 $3,288 / p95 $5,416 / p99 $6,884; losing streak actual 6, p95 8
+      252-day block bootstrap: P&L p5 $-786 / p50 $2,959 / p95 $6,663, P(loss) 9.4%, max DD p95 $3,048, P(hit $2,000 EOD trailing) 19.0%
+   Monte Carlo full Combined (x0.8): trades 1303 | total p5 $61,606 / p50 $106,347 / p95 $150,457, P(total <= 0) 0.0%
+      max DD actual $11,703 (rank 33%), shuffled p50 $13,154 / p95 $21,662 / p99 $27,535; losing streak actual 6, p95 8
+      252-day block bootstrap: P&L p5 $-3,143 / p50 $11,836 / p95 $26,650, P(loss) 9.4%, max DD p95 $12,194, P(hit $2,000 EOD trailing) 65.4%
+
+PAIRED DELTA holdout {'actual': -13223.25, 'daily_t': -0.9906692778718598, 'total_p5_p50_p95': [-33366.575, -13473.625, 6481.312500000005], 'p_delta_le_0': 0.8672}
+BOOTSTRAP holdout Base 5/50/95%, PF is DAILY
+              actual          p5         p50         p95
+sharpe       1.2601      0.4767      1.2871      2.1110
+sortino      1.9094      0.6841      1.9543      3.4016
+pf_day       1.3530      1.1215      1.3630      1.6647
+calmar       1.4235      0.2994      1.2217      2.9451
+ulcer        5.5635      3.1625      6.4863     16.4192
+max_dd   13905.5000  10040.2500  16292.8750  29093.0125
+annual   19794.2374   7459.6953  20156.6007  32890.9888
+PERMUTATION {'actual_dd': 13905.5, 'pct_rank': 0.1872, 'dd50': 17244.5, 'dd95': 27519.47500000001, 'dd99': 33834.41500000001, 'P(dd>=1000)': 1.0, 'P(dd>=2000)': 1.0, 'P(dd>=3000)': 1.0}
+   Monte Carlo holdout Base (x0.2): trades 881 | total p5 $5,679 / p50 $15,329 / p95 $24,795, P(total <= 0) 0.6%
+      max DD actual $3,160 (rank 42%), shuffled p50 $3,359 / p95 $5,948 / p99 $7,641; losing streak actual 5, p95 8
+      252-day block bootstrap: P&L p5 $-996 / p50 $4,009 / p95 $8,847, P(loss) 8.9%, max DD p95 $4,075, P(hit $2,000 EOD trailing) 32.6%
+   Monte Carlo holdout Base (x0.8): trades 881 | total p5 $22,717 / p50 $61,316 / p95 $99,179, P(total <= 0) 0.6%
+      max DD actual $12,642 (rank 42%), shuffled p50 $13,435 / p95 $23,794 / p99 $30,564; losing streak actual 5, p95 8
+      252-day block bootstrap: P&L p5 $-3,985 / p50 $16,037 / p95 $35,388, P(loss) 8.9%, max DD p95 $16,301, P(hit $2,000 EOD trailing) 69.9%
+BOOTSTRAP holdout Combined 5/50/95%, PF is DAILY
+              actual         p5         p50         p95
+sharpe       1.1877     0.3871      1.2104      2.0319
+sortino      1.8151     0.5519      1.8522      3.3323
+pf_day       1.3374     1.0981      1.3439      1.6516
+calmar       1.2081     0.2264      1.1016      2.7307
+ulcer        5.3196     3.1205      6.3607     16.3804
+max_dd   13550.0000  9251.9375  14923.7500  26921.5250
+annual   16369.5108  5261.4518  16735.4676  28040.6396
+PERMUTATION {'actual_dd': 13550.0, 'pct_rank': 0.3, 'dd50': 15415.5, 'dd95': 24574.537500000002, 'dd99': 30382.882500000036, 'P(dd>=1000)': 1.0, 'P(dd>=2000)': 1.0, 'P(dd>=3000)': 1.0}
+   Monte Carlo holdout Combined (x0.2): trades 658 | total p5 $4,113 / p50 $12,597 / p95 $20,900, P(total <= 0) 0.8%
+      max DD actual $2,926 (rank 42%), shuffled p50 $3,116 / p95 $5,523 / p99 $7,192; losing streak actual 4, p95 7
+      252-day block bootstrap: P&L p5 $-1,180 / p50 $3,291 / p95 $7,717, P(loss) 10.6%, max DD p95 $3,692, P(hit $2,000 EOD trailing) 29.2%
+   Monte Carlo holdout Combined (x0.8): trades 658 | total p5 $16,451 / p50 $50,388 / p95 $83,601, P(total <= 0) 0.8%
+      max DD actual $11,703 (rank 42%), shuffled p50 $12,463 / p95 $22,091 / p99 $28,767; losing streak actual 4, p95 7
+      252-day block bootstrap: P&L p5 $-4,719 / p50 $13,166 / p95 $30,869, P(loss) 10.6%, max DD p95 $14,766, P(hit $2,000 EOD trailing) 69.4%
+PLACEBOS 100 /1000
+PLACEBOS 200 /1000
+PLACEBOS 300 /1000
+PLACEBOS 400 /1000
+PLACEBOS 500 /1000
+PLACEBOS 600 /1000
+PLACEBOS 700 /1000
+PLACEBOS 800 /1000
+PLACEBOS 900 /1000
+PLACEBOS 1000 /1000
+STATE AWARE NULL {'random_signal_totals_p5_p50_p95': [34779.5125, 56099.375, 79036.95], 'random_signal_dd_p5_p50_p95': [10542.875, 14483.125, 20498.4375], 'executed_count_p5_p50_p95': [724.0, 739.0, 754.0], 'beats_profit': 0.697, 'beats_dd': 0.651, 'beats_both': 0.508} RANDOM TIME/SIDE {'random_time_long': {'total_p5_p50_p95': [43693.975, 68955.75, 94946.88749999998], 'p_random_ge_actual': 0.6303696303696303}, 'random_side_same_time': {'total_p5_p50_p95': [-70162.2625, -29812.0, 8021.349999999997], 'p_random_ge_actual': 0.000999000999000999}}
+MULTIPLE TESTING: prior items + three filter variants 276 t threshold 3.5661103620851513
+Strategy DSR (not incremental filter evidence) {'Base': 0.8093592385742171, 'Runway': 0.788933114331198, 'Stretch': 0.8349346028342164, 'Combined': 0.8485735527431355}
+FUNDED 2018-01-01 1000 paired 20-day circular blocks; cushion ref $1500
+                       y1       y2          y2_p5_p95  blown   all6  days6 delta_current_y2                            delta_mean_MC90 delta_history_p5_p95 delta_blown delta_rebuilt_y2
+current_MC         9429.5  12062.5     [0.0, 13000.0]   0.07  0.913  257.0              0.0                                 [0.0, 0.0]           [0.0, 0.0]         0.0            181.0
+empty_VB           8142.5  12132.0  [1500.0, 13000.0]  0.051  0.905  297.0             69.5  [-103.32647223732755, 242.32647223732755]    [-3000.0, 3000.0]      -0.019            250.5
+rebuilt_Base       9162.5  11881.5     [0.0, 13000.0]  0.084  0.897  263.5           -181.0  [-263.95077498761566, -98.04922501238431]           [0.0, 0.0]       0.014              0.0
+replace_Combined   9015.5  11856.5     [0.0, 13000.0]  0.084  0.893  265.0           -206.0   [-351.8487551197129, -60.15124488028712]           [0.0, 0.0]       0.014            -25.0
+add_Combined_1MNQ  9242.5  11766.0     [0.0, 13000.0]  0.092  0.892  253.0           -296.5   [-420.6079162859025, -172.3920837140975]           [0.0, 0.0]       0.022           -115.5
+FUNDED 2023-01-01 1000 paired 20-day circular blocks; cushion ref $1500
+                        y1       y2          y2_p5_p95  blown   all6  days6 delta_current_y2                             delta_mean_MC90        delta_history_p5_p95 delta_blown delta_rebuilt_y2
+current_MC         10730.5  12171.5     [0.0, 13000.0]  0.069  0.929  213.5              0.0                                  [0.0, 0.0]                  [0.0, 0.0]         0.0            195.5
+empty_VB            9718.5  12339.5  [5000.0, 13000.0]   0.05  0.936  254.0            168.0   [-2.4382825866040037, 338.43828258660403]                  [0.0, 0.0]      -0.019            363.5
+rebuilt_Base       10482.0  11976.0     [0.0, 13000.0]  0.081  0.914  219.0           -195.5  [-288.42023117225256, -102.57976882774744]                  [0.0, 0.0]       0.012              0.0
+replace_Combined   10084.0  11790.5     [0.0, 13000.0]  0.098  0.899  229.0           -381.0    [-544.0182522159115, -217.9817477840885]   [-5574.999999999995, 0.0]       0.029           -185.5
+add_Combined_1MNQ  10186.0  11701.5     [0.0, 13000.0]  0.102  0.896  220.0           -470.0    [-624.5812585842978, -315.4187414157023]  [-2524.9999999999986, 0.0]       0.033           -274.5
+FUNDED MODEL LIMITS: CL uses existing all-minute daily worst-loss proxy; NQ adverse-minute paths; costs scale /10; no new strategy fit. MC90 is simulation error conditional on history, not a market confidence interval.
+COMPLETE; 4 fixed configurations (3 filter trials); no holdout-driven adjustments.
+VALIDATION PASS: P&L arithmetic, fees, long-only, trade caps, unique entry keys, saved-period metrics and removed/new reconciliation.
+SUPPLEMENTARY: report parity and claim-cost split (accounting only)
+{
+  "base_report_parity": {
+    "mc_report": {
+      "trades": 1743,
+      "win": 0.6569133677567413,
+      "avg": 91.688611589214,
+      "annual": 17804.128647214853,
+      "sharpe": 1.3478569115488468,
+      "sortino": 2.0694315359414466,
+      "profit_factor": 1.259016402741975,
+      "max_dd": 13617.75,
+      "calmar": 1.307420730092332,
+      "ulcer": 3.220791271241708,
+      "ulcer_perf": 11.05574819839278,
+      "total": 159813.25,
+      "t": 4.250928128197593,
+      "trade_dd": 15514.5,
+      "daily_dd": 13617.75
+    },
+    "matched_entry_keys": 1700,
+    "pnl_equal_within_5": 0.9935294117647059
+  },
+  "claim_periods": {
+    "design": {
+      "Base": {
+        "trades": 861,
+        "win": 0.6318234610917538,
+        "avg": 66.40853658536585,
+        "annual": 11178.272304111715,
+        "sharpe": 1.0241645843870784,
+        "sortino": 1.526329319196808,
+        "profit_factor": 1.2085422530780614,
+        "max_dd": 11032.0,
+        "calmar": 1.0132589108150576,
+        "ulcer": 4.12907907045233,
+        "ulcer_perf": 5.414414262058277,
+        "total": 57177.75,
+        "t": 2.356709116776631,
+        "trade_dd": 11032.0,
+        "daily_dd": 11032.0
+      },
+      "Runway": {
+        "trades": 684,
+        "win": 0.6535087719298246,
+        "avg": 85.36695906432749,
+        "annual": 11415.463149728472,
+        "sharpe": 1.123313958784306,
+        "sortino": 1.683468217367985,
+        "profit_factor": 1.25678422732425,
+        "max_dd": 9355.75,
+        "calmar": 1.220154787133952,
+        "ulcer": 3.654046925997275,
+        "ulcer_perf": 6.248120717066557,
+        "total": 58391.0,
+        "t": 2.5916904393252285,
+        "trade_dd": 10826.5,
+        "daily_dd": 9355.75
+      },
+      "Stretch": {
+        "trades": 809,
+        "win": 0.6390605686032138,
+        "avg": 73.5411001236094,
+        "annual": 11631.246702870443,
+        "sharpe": 1.0768301954854707,
+        "sortino": 1.6051524842025464,
+        "profit_factor": 1.2331874639899347,
+        "max_dd": 8668.5,
+        "calmar": 1.3417830885240172,
+        "ulcer": 3.8859025897510997,
+        "ulcer_perf": 5.98638099346461,
+        "total": 59494.75,
+        "t": 2.5326737997299547,
+        "trade_dd": 9270.75,
+        "daily_dd": 8668.5
+      },
+      "Combined": {
+        "trades": 645,
+        "win": 0.6589147286821705,
+        "avg": 97.90503875968992,
+        "annual": 12345.605120248256,
+        "sharpe": 1.2220252502796445,
+        "sortino": 1.8329760783216615,
+        "profit_factor": 1.302704743187211,
+        "max_dd": 7819.25,
+        "calmar": 1.5788733088529279,
+        "ulcer": 3.4103704935312473,
+        "ulcer_perf": 7.24003749367716,
+        "total": 63148.75,
+        "t": 2.91405380679345,
+        "trade_dd": 8549.75,
+        "daily_dd": 7819.25
+      }
+    },
+    "holdout": {
+      "Base": {
+        "trades": 881,
+        "win": 0.6674233825198638,
+        "avg": 76.75113507377979,
+        "annual": 17512.510791366905,
+        "sharpe": 1.1184037091580226,
+        "sortino": 1.673413695226087,
+        "profit_factor": 1.1907684950666422,
+        "max_dd": 14685.5,
+        "calmar": 1.1925035437245517,
+        "ulcer": 6.133611025189392,
+        "ulcer_perf": 5.7103428044089775,
+        "total": 67617.75,
+        "t": 2.3522331160128487,
+        "trade_dd": 16612.25,
+        "daily_dd": 14685.5
+      },
+      "Runway": {
+        "trades": 707,
+        "win": 0.6817538896746818,
+        "avg": 81.03147100424329,
+        "annual": 14837.503597122302,
+        "sharpe": 1.0436879977521338,
+        "sortino": 1.5979693639822077,
+        "profit_factor": 1.1908965574692296,
+        "max_dd": 14699.5,
+        "calmar": 1.009388319134821,
+        "ulcer": 6.346031003113006,
+        "ulcer_perf": 4.676152256376894,
+        "total": 57289.25,
+        "t": 2.144742226446373,
+        "trade_dd": 14699.5,
+        "daily_dd": 14699.5
+      },
+      "Stretch": {
+        "trades": 824,
+        "win": 0.6723300970873787,
+        "avg": 79.48543689320388,
+        "annual": 16962.992805755395,
+        "sharpe": 1.1138014227211632,
+        "sortino": 1.6483213451955174,
+        "profit_factor": 1.198342001862409,
+        "max_dd": 14016.75,
+        "calmar": 1.210194432072727,
+        "ulcer": 6.181751235373896,
+        "ulcer_perf": 5.488086517842353,
+        "total": 65496.0,
+        "t": 2.359252071869839,
+        "trade_dd": 15309.25,
+        "daily_dd": 14016.75
+      },
+      "Combined": {
+        "trades": 658,
+        "win": 0.6869300911854104,
+        "avg": 86.05547112462006,
+        "annual": 14665.338129496402,
+        "sharpe": 1.0674323291244512,
+        "sortino": 1.6113971661790412,
+        "profit_factor": 1.2046988054160257,
+        "max_dd": 13950.0,
+        "calmar": 1.0512787189603157,
+        "ulcer": 5.716589875062383,
+        "ulcer_perf": 5.130799462620664,
+        "total": 56624.5,
+        "t": 2.2051411074587453,
+        "trade_dd": 14869.0,
+        "daily_dd": 13950.0
+      }
+    }
+  }
+}
+REPORT WRITTEN agents/codex/results/TEST_01.md
