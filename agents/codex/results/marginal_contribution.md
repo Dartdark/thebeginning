@@ -2,7 +2,7 @@
 Summary: Remove each current strategy in paired funded-account histories to measure its payout and trailing-risk value.
 No removal passed the design gate; keep the current roster, including ES MOC 2 MES.
 Vault Break costs 3.1/1.2 blowup points but speeds six payouts by 47/31 days in design/holdout, so removal is too blunt.
-Proceed to the preregistered next step: reduce Vault Break only on specified ONB/RS overlap days; if that fails, build new strategies.
+Claude review (2026-10-22) rejects the proposed VB follow-up; stop roster tuning and research new scheduled/forced flows.
 Plans: `agents/codex/plans/marginal_{core,calendar,other}.md`, commit `f0629aa`   Script: `analysis/codex_marginal_contribution.py`   Output: `analysis/outputs/codex_marginal_contribution/`   Trials run: 13 registered slots / 11 unique configurations
 
 ## Rule (as tested)
@@ -62,6 +62,11 @@ six payouts. Negative paid value means the empty slot paid slightly more.
 ES MOC's result settles the repository-status question. It is active and has positive account value in both periods.
 Removing it reduced design/holdout paid value by $444/$177, raised blowups by 2.9/1.3 points and slowed six payouts by
 15/3 days. Combined with the prior 0/1/2-MES study, keep it at 2 MES.
+
+Review correction (Claude branch commit `680f304`, `agents/codex/results/REVIEW_marginal_contribution.md`): the proposed
+targeted VB overlap-sizing test was not preregistered. This report originally mislabeled it as the preregistered next step.
+The design and holdout results below are unchanged, but that follow-up is withdrawn. Existing evidence has VB earning
+$214 versus $64 per trade when ONB ML is already long, which also contradicts reducing those overlapping trades.
 
 The detailed account paths were:
 
@@ -170,7 +175,7 @@ excluded zero for every strategy except MOC (-0.29 to 1.52), yet removing MOC st
 
 Daily correlations remain low. The highest absolute partner for each key concentration was VB-RS **0.23**, ONB-VB
 **0.14**, LDF-VB **0.12**, Monday-Bridge **0.30**, MOC-ONB **0.03**, and CL-Monday **-0.08**. Low daily correlation
-does not eliminate intraday stacking, which is why the narrower Vault Break overlap test remains justified.
+does not establish an edge from reducing intraday stacking. The proposed narrower VB test is withdrawn following review.
 
 ## Placebos and account level
 
@@ -183,8 +188,8 @@ removing another strategy or arbitrary days would answer a different allocation 
 replacement control. Addition tests are also inapplicable because all ten lines are already in the benchmark.
 
 The results do not support dropping a line. VB, Monday and RS have the same qualitative tradeoff in both periods:
-removing them marginally raises capped two-year paid value and lowers blowups, but delays payout six. VB is the only
-tradeoff large enough to justify the already-planned targeted size test. EOS, NFP and CL flip between design and holdout,
+removing them marginally raises capped two-year paid value and lowers blowups, but delays payout six. VB's size tradeoff
+was already addressed when it was reduced from 3 to 2 MNQ. EOS, NFP and CL flip between design and holdout,
 so changing them now would select on the holdout.
 
 ## What could make this wrong (data, fills, look-ahead, multiple testing)
