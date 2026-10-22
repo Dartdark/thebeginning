@@ -46,6 +46,8 @@ Issuer files: `https://accounts.profunds.com/etfdata/ByFund/<TICKER>-historical_
 Claude's immutable input snapshot and audit: commit `c23fc02`, `data/letf/` and
 `agents/claude_evidence/LETF_DATA_FEASIBILITY.md`; inventory script reads blobs without importing another branch.
 Direct AUM is split-invariant; shares are in thousands. Use NAV*shares*1000 as a consistency check only.
+Scope quality checks to 2017 warmup onward. The first inventory attempt found 140 zero-share rows in
+SQQQ's 2010 history (positive NAV/assets), outside all proposed inputs; do not claim all-history share consistency.
 Historical split-adjusted share changes are not themselves proof of creations/redemptions.
 
 Price: free history; no paid product needed for these four funds. NQ minute OHLCV already exists.
