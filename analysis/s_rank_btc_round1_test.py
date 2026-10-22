@@ -37,7 +37,7 @@ CAND = {}                                    # name -> trades (for the candidate
 def load_btc():
     pk = SP + "btc.pkl"
     if os.path.exists(pk): return pickle.load(open(pk, "rb"))
-    G = Grid24("BTC_1min_20*.csv", night_pattern=""); pickle.dump(G, open(pk, "wb"), protocol=4); return G
+    G = Grid24("data/BTC_1min_20*.csv", night_pattern=""); pickle.dump(G, open(pk, "wb"), protocol=4); return G
 
 
 G = load_btc()

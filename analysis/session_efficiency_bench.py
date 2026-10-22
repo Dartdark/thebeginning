@@ -15,8 +15,8 @@ if __name__ == "__main__":
     lab = ns["lab"]; g = lab.g; atr = g.daily_atr(15)
     band = pd.read_pickle(SP + "sess_eff_forecast.pkl").band
     full = pd.read_pickle(SP + "sess_eff_forecast.pkl")
-    for nm, f, sa in (("VB", "Backtesting Strategy Performance Report VB v1.xlsx", 0.30),
-                      ("ONB", "Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx", 0.30)):
+    for nm, f, sa in (("VB", "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx", 0.30),
+                      ("ONB", "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx", 0.30)):
         t = load_mc(g, f); d = pd.DatetimeIndex(g.ts[t.day.values]); b = d.map(band).to_numpy()
         for k, m in (("L", b == 1), ("M", (b == 2) | pd.isna(b)), ("H", b == 3)):
             lab.add(f"{nm}_{k}", t[m].reset_index(drop=True), stop_pts=sa * atr)

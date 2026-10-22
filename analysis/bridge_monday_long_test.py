@@ -21,7 +21,7 @@ import metrics as M, resampling as R
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 PV, TICK, COST = 20.0, 0.25, 7.25
-MON_FILE = "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx"
+MON_FILE = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx"
 
 
 def nyse_holidays(y0=2017, y1=2027):

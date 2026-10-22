@@ -91,7 +91,7 @@ if __name__ == "__main__":
     from build_lab import REPORTS
     tr_ = g.trading; D = len(tr_); yr = pd.DatetimeIndex(g.ts[tr_]).year
     P = {}
-    for nm, t_ in (("VB", with_slippage(load_mc(g, REPORTS["VB"][0]))), ("ONB", with_slippage(load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"))),
+    for nm, t_ in (("VB", with_slippage(load_mc(g, REPORTS["VB"][0]))), ("ONB", with_slippage(load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"))),
                    ("MBR", load_bridge_mc(g)), ("EOS", with_slippage(load_mc(g, REPORTS["EOS"][0]))), ("VCS", with_slippage(load_mc(g, REPORTS["VCS_MC"][0]))), ("OPB", best3)):
         w, r_ = paths(g, t_); P[nm] = (w[tr_] / 10, r_[tr_] / 10)
     rk = lambda dl_, s_: np.floor(dl_ / (np.nan_to_num(s_[tr_], nan=1e12) * 2))[:, None]

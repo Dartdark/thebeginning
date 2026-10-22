@@ -28,7 +28,7 @@
 Claude compares your trades with MultiCharts and its own Jesse runs. Task 01 (CL Sunday fade) passed: your Eastern-time
 variant matched Claude's Jesse run exactly.
 
-## The user's strategies (what each is, no results, on purpose)
+## The user's strategies (what each is; results now in plan_daily_pnl.csv, see 'Building NEW strategies')
 
 Don't look for their code or results: you will be asked to rebuild them blind (tasks 02-08 in `tasks/`).
 
@@ -47,11 +47,51 @@ Don't look for their code or results: you will be asked to rebuild them blind (t
 - Monday Long (task 05), Expiration Open Short, Late-Day Flow (task 07), NFP Fade (task 08)
 - Bridge Monday Long
 - CL Sunday Gap Fade (task 01, done)
+- ES MOC Follow (added 2026-10-17): on MES, follow a >= 0.3 ATR 14:00 -> 14:50 CT ES move into the 15:00 close
+- Relative Strength NQ / ES (the user's, added 2026-10-20): at 9:00 CT, NQ's move since 8:30 beyond its ES beta; follow it
+  9:01 -> 15:00 (50K funded: longs only)
 
 Sizes are set by a cushion rule: full size only with $1,500+ above the trailing drawdown, half size below.
 
 **What they have in common:** most are scheduled or forced flows (option expirations, rebalancing, payroll releases,
 weekend gaps) or simple session breakouts. Plain price-pattern ideas mostly fail on NQ after costs.
+
+## Your two roles (user's decision, 2026-10-20)
+
+1. **Strategy builder (default):** you know the plan (below) and aim at its gaps. Claude rebuilds and checks everything
+   you build before the user sees a verdict.
+2. **Blind checker (only when a task says 'blind check'):** start a fresh conversation, read only the task text, and do
+   not open `plan_daily_pnl.csv`, results, reports or Claude's scripts for that rule.
+
+## Building NEW strategies: aim at the gaps in the plan (added 2026-10-20)
+
+All 8 blind checks have passed, so the plan's results are no longer hidden from you. A new strategy is only useful if it
+earns on days, hours or directions the plan doesn't already cover. **The plan's daily P&L is in
+`plan_daily_pnl.csv`** (this folder; one column per strategy, $ per 1 MNQ / MES / MCL per trading day, 2018-2026, 0 = no
+trade). For every candidate, report its daily correlation with each column and how many of its days overlap.
+
+| Strategy | When it is in the market (CT) | Direction | Trades / year |
+|---|---|---|---|
+| Vault Break | 10:00-14:30 | long only (morning breakouts) | ~110 days |
+| Overnight Bias ML | 8:45-14:30, ~40% of days | both | ~40 |
+| Monday Long | Mondays 8:30-15:00 | long | ~50 |
+| Bridge Monday Long | Sunday 19:00 -> Monday 15:55 | long | ~25 |
+| Expiration Open Short | 3rd Fridays 8:30-10:00 | short | 12 |
+| NFP Fade | payroll Fridays 7:46-9:00 | both | ~9 |
+| Late-Day Flow | 14:00-14:30 | both | ~100 |
+| ES MOC Follow (MES) | 14:51-15:00 | both | ~23 |
+| CL Sunday Gap Fade (MCL) | Sunday 17:05 -> Monday 9:00 | short | ~11 |
+| Relative Strength | 9:01-15:00, ~half of days | both (50K: longs) | ~130 |
+
+Gaps worth aiming at: **shorts** (the plan is long-heavy), **11:30-14:00**, **the overnight session that closes before
+15:59** (e.g. 3:00-8:30), other markets' forced flows (ES / YM / GC / CL). A morning long breakout (your NQIBBreakout:
+correlation 0.41 with Vault Break, 557 of 766 days shared) adds little even when it is real.
+**Fills (NQRelWeaknessShort audit, 2026-10-20):** its shorts were filled ~11 points above the entry minute's close, half at
+that minute's high: a price the market never offered. Re-filled at the next minute's open the edge fell from t 5.4 to 1.3.
+Always check that every entry price lies inside a REAL bar that comes AFTER the signal bar (market = next bar's open +
+1 tick), and that stops / targets / breakevens are decided on 1-minute data in time order.
+Also: report every $ figure **per 1 NQ or 1 MNQ contract**. Jesse's `price x 5` notional sizing made NQIBBreakout's
+drawdown read $857 instead of ~$22,000 per NQ.
 
 ## Testing standard (what "good" means here)
 
@@ -130,6 +170,12 @@ are not optional.
    - in BOTH 2018-22 and 2023-26;
    - on net $ per contract AND on the worst drawdown;
    - with no new overnight holding (flat by 15:59 CT) and no position sizing above the original.
+   - **for a filter (it removes trades):** compare TOTAL net $, not $ per trade (removing any break-even trades raises the
+     per-trade average by itself); show the removed trades lose money (their average and t); and drop the same number of
+     trades at random 1,000+ times: the filter's max drawdown must beat most random drops (2026-10-21: VB Combined cut DD
+     no better than random removal, P 0.50, and lost $3.4k a year on 2023-26; `agents/results/VB_COMBINED_REVIEW.md`).
+   - Contract maths: 1 MNQ = 1/10 NQ, 2 MNQ = 1/5. MultiCharts code: daily ATR is NOT `AvgTrueRange` on an intraday chart;
+     stops / targets via `SetStopLoss` / `SetProfitTarget` so the entry bar is protected (see `MULTICHARTS_PITFALLS.md`).
 6. **Output:** `tasks/out_NN/improve_report.md` (each variant: the idea, the result by period, the trial count) and
    `improve_strategy.py`.
 

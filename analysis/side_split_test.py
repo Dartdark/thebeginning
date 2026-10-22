@@ -9,7 +9,7 @@ g=pickle.load(open(SP+"g24.pkl","rb")); lab=pickle.load(open(SP+"lab.pkl","rb"))
 def st(x):
     by=x.groupby(x.index.year).mean()
     return f"n={len(x):4d} win {np.mean(x>0):.0%} avg ${x.mean():5.0f} PF {x[x>0].sum()/-x[x<0].sum():.2f} t={x.mean()/x.std()*np.sqrt(len(x)):4.1f} yrs+ {(by>0).sum()}/{len(by)} 2023+ ${x[x.index.year>=2023].mean():.0f}"
-for name,f in (("Overnight Bias (plain)","Backtesting Strategy Performance Report ONB v2.xlsx"),("Overnight Bias ML","Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias v2.xlsx")):
+for name,f in (("Overnight Bias (plain)","mc_reports/Backtesting Strategy Performance Report ONB v2.xlsx"),("Overnight Bias ML","mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias v2.xlsx")):
     t=load_mc(g,f); t=t.set_index(pd.DatetimeIndex(t.date)); t=t[t.index.year>=2018]
     print(f"\n{name}"); print("  all    ",st(t.net))
     for s,nm in ((1,"longs "),(-1,"shorts")):
@@ -37,7 +37,7 @@ pickle.dump(lab,open(SP+"lab.pkl","wb"),protocol=4)
 # dates=X0.index; yr=dates.year
 # COLS=["ret1","ret5","ret20","rth1","atr_ratio","dist50","rv5_rv20","dow0","dow1","dow2","dow3","dow4","tdm","opex_wk"]
 # X=X0[COLS]
-# onb=load_mc(g,"Backtesting Strategy Performance Report ONB v2.xlsx")
+# onb=load_mc(g,"mc_reports/Backtesting Strategy Performance Report ONB v2.xlsx")
 # side=pd.Series(0,index=dates); side[pd.DatetimeIndex(g.ts[onb.day.values])]=onb.side.values
 # y=pd.Series(lab.daily("ONB"),index=dates); R=y/pd.Series(lab.stop["ONB"]*20,index=dates); tdd=y!=0
 # def wf(mask):

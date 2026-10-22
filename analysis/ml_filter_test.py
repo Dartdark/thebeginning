@@ -197,8 +197,8 @@ pickle.dump((res,X),open(SP+"ml1.pkl","wb"))
 # print(d.sort_values().tail(5))
 
 # ======================= chal_ml (50K challenge: plain ONB vs ONB ML)
-# exec(open("/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/chal4.py").read().split("plans = {")[0].replace('"EOS": load_mc(g, "Backtesting Strategy Performance Report EOS v1.xlsx")}',
-#  '"EOS": load_mc(g, "Backtesting Strategy Performance Report EOS v1.xlsx"), "ONBML": load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias v2.xlsx")}'))
+# exec(open("/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/chal4.py").read().split("plans = {")[0].replace('"EOS": load_mc(g, "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx")}',
+#  '"EOS": load_mc(g, "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx"), "ONBML": load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias v2.xlsx")}'))
 # res,X0=pickle.load(open(SP_:="/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/ml1.pkl","rb"))
 # wf=res[("ONB_frozenset_wf",100)]
 # t=T["ONB"]; dt=pd.DatetimeIndex(g.ts[t.day.to_numpy()]); keep=wf.reindex(dt).to_numpy()>=0

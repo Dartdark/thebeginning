@@ -38,7 +38,7 @@ if __name__ == "__main__":
         if np.isnan(op) or hi <= lo: continue
         p = (op - lo) / (hi - lo)
         onb[int(d)] = 1 if p >= 2 / 3 else (-1 if p <= 1 / 3 else 0)
-    ml = load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx")
+    ml = load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx")
     mlb = {int(d): int(sd) for d, sd in zip(ml.day, ml.side)}
     res = {}
     res["original (ORB break bias)"] = V.run(g, s, sh, sl, th, tl, apex=True)

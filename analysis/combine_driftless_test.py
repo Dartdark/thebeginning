@@ -20,7 +20,7 @@ from build_lab import REPORTS
 from bridge_monday_confirm import load_bridge_mc
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
-ONB30 = "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"
+ONB30 = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])

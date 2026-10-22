@@ -49,7 +49,7 @@ if __name__ == "__main__":
     atr = g.daily_atr(15); tr = g.trading; D = len(tr); yr = pd.DatetimeIndex(g.ts[tr]).year; P = {}
     def add(nm, t): w, r = paths(g, t); P[nm] = (w[tr] / 10, r[tr] / 10)
     add("VB", with_slippage(load_mc(g, REPORTS["VB"][0])))
-    add("ONB30", with_slippage(load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx")))
+    add("ONB30", with_slippage(load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx")))
     add("MON_BR", load_bridge_mc(g)); add("EOS", with_slippage(load_mc(g, REPORTS["EOS"][0])))
     W, Rr = grid_of(g, X); P["HW"] = (W[tr] / 10, Rr[tr] / 10)
     risk = lambda dollars, m: np.floor(dollars / (np.nan_to_num(m * atr[tr], nan=1e12) * 2))[:, None]

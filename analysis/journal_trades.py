@@ -5,12 +5,19 @@ template if it doesn't exist yet). Facts only: fills and MultiCharts' gross P&L;
 """
 import sys, glob, os, datetime as dt
 import pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 COLS = ["event", "tag", "symbol", "side", "contracts", "entry_date", "entry_time", "entry_price", "exit_date",
         "exit_time", "exit_price", "profit_usd", "bar_date", "bar_time"]
 NAMES = {"VB": "Vault Break", "ONB": "ONB ADX30", "EOS": "EOS", "MON_BR": "Bridge Monday", "ONB_ML": "ONB ML",
-         "MON": "Monday Long", "LDF": "Late-Day Flow", "NFP": "NFP Fade", "MOC_MES": "ES MOC", "CLS": "CL Sunday fade"}
+         "MON": "Monday Long", "LDF": "Late-Day Flow", "NFP": "NFP Fade", "MOC_MES": "ES MOC", "CLS": "CL Sunday fade", "RS": "Relative Strength"}
 START, END = "<!-- auto-trades:start -->", "<!-- auto-trades:end -->"
+
+
+def name(tag):
+    """VB -> Vault Break; VB-2 -> Vault Break (acct 2): tags may carry an account suffix."""
+    base, _, acct = str(tag).partition("-")
+    return NAMES.get(base, base) + (f" (acct {acct})" if acct else "")
 
 
 def hhmm(x):
@@ -40,7 +47,7 @@ def block(day, df):
             pts = (float(r.exit_price) - float(r.entry_price)) * (1 if r.side == "long" else -1)
             pnl = float(r.profit_usd); tot += pnl
             ed = "" if r.entry_date == d else f"{r.entry_date[4:6]}/{r.entry_date[6:]} "
-            lines.append(f"| {NAMES.get(r.tag, r.tag)} | {r.side} | {r.contracts} | {ed}{hhmm(r.entry_time)} @ {r.entry_price} | "
+            lines.append(f"| {name(r.tag)} | {r.side} | {r.contracts} | {ed}{hhmm(r.entry_time)} @ {r.entry_price} | "
                          f"{hhmm(r.exit_time)} @ {r.exit_price} | {pts:+.2f} | {pnl:+,.2f} |")
         lines += ["", f"**Day total (closed trades, gross): ${tot:+,.2f}**"]
         keys = set(zip(closed.tag, closed.entry_date, closed.entry_time))
@@ -50,7 +57,11 @@ def block(day, df):
             for r in still:
                 late = int(r.bar_time) >= 1559 and dt.datetime.strptime(d, "%Y%m%d").weekday() < 5
                 lines.append(f"- {'**CHECK: still open after 15:59 CT?** ' if late else 'Opened, not closed today: '}"
-                             f"{NAMES.get(r.tag, r.tag)} {r.side} {r.contracts} @ {r.entry_price} ({hhmm(r.entry_time)} CT)")
+                             f"{name(r.tag)} {r.side} {r.contracts} @ {r.entry_price} ({hhmm(r.entry_time)} CT)")
+    try:
+        import vps_health; lines += vps_health.block(day)
+    except Exception as e:                       # the health check must never block the journal
+        lines += ["", f"### Health (auto)", "", f"- health check failed: {e}"]
     lines += ["", "Balance: the Apex end-of-day balance goes in the Accounts table below (the log has no account balance).", END]
     return "\n".join(lines)
 

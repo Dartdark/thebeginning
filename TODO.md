@@ -21,10 +21,12 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
-- [ ] **Tue 10/20: buy account #2** (single 50K EOD, $59): real Apex fill confirmed 2026-10-18, so go ahead (automation confirmed allowed by the user 2026-10-19).
+- [x] (2026-10-20) Account #2 bought and set up on the VPS: second chart set (VB, ONB ADX30, EOS, Bridge) on the new account, logger tags `-2`, StartBalance 50000.
 - [ ] **Fri 10/23 (and every Friday): export the weekly MultiCharts reports into `live/`** and tell Claude (it runs
   `analysis/live_vs_backtest.py --all live/` and the drift alarm).
 - [ ] When account #1 passes ($53,000): turn auto-trading off on that account.
+- [x] (2026-10-20, user: done) **Now: Rithmic copier off (or #2 removed as follower)** while set 2 auto-trades, or #2 trades double size. Copier
+  waits until several funded accounts (2026-10-20).
 - [ ] **~Mon 10/27: account #3** (150K No-Activation, $249).
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
@@ -32,9 +34,27 @@ bottom). Times are Central (CT).
 
 - [x] (2026-10-17, confirmed 199/199) MultiCharts backtest: [ES_MOC_Follow.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/ES_MOC_Follow.txt)
   on a 5-minute **@ES** chart (Exchange time, 24-hour session, Bar Magnifier 1 min, from Jan 2018, NumContracts 1, no costs);
-  save the report as "Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx" and push / send it.
+  save the report as "mc_reports/Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx" and push / send it.
 - [x] (2026-10-17, PASS on the rule; its clock ran 1 min early, see agents/results/TASK_09_VERDICT.md) Antigravity: Task 09 blind check (pull `agents/tasks` and the `ES_1min_*.csv` files first).
 - [ ] When funded: ES MOC Follow (IN THE PLAN since 2026-10-17) on a 5-min MES chart, NumContracts 2, Symbol Mapping `@MES -> MESZ6` (roll with MNQ). Vault Break funded: `NumContracts` 2, `FlaggedContracts` 1 (decided 2026-10-17).
+
+## Relative Strength NQ / ES (your new strategy, 2026-10-20: B, checker PASS WITH CONCERNS)
+
+- [x] (2026-10-20, done: 1,157 days match, P&L corr 1.000) MultiCharts backtest for the trade-by-trade check: [RelStrength_v3.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/relative_strength/RelStrength_v3.txt)
+  (your code, unchanged) on a **1-minute @NQ chart with 1-minute @ES as Data2** (same feed, CME 24h session, Exchange
+  time = CT, first RTH bar 08:31), data loaded from **Sep 2017**, default inputs, **commission and slippage 0** (Claude adds
+  costs), Intrabar Order Generation off. Save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Relative Strength.xlsx"
+  and push / send it.
+- [x] (2026-10-20, you: include it in all relevant plans) In the plans: 50K funded longs only 1 MNQ, 150K funded both sides 1 MNQ, personal account; not in evaluations.
+- [ ] When an account is funded: add [NQ_Relative_Strength.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Relative_Strength.txt)
+  as a NEW signal on a **1-minute MNQ chart with 1-minute @ES added as Data2** (same feed, Exchange time, first RTH bar 08:31,
+  IOG off), 50K: `TradeDir` 1, `NumContracts` 1; 150K: `TradeDir` 0, `NumContracts` 1; Trade Logger tag `RS`.
+
+## Antigravity's NQAlignedWeaknessShort (2026-10-20, C)
+
+- [x] (2026-10-20, confirmed 216/216) MultiCharts backtest: [NQ_Aligned_Weakness_Short.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/aligned_weakness_short/NQ_Aligned_Weakness_Short.txt)
+  on a 1-minute @NQ chart with 1-minute @ES as Data2 (same feed, CME 24h, Exchange time, first RTH bar 08:31), data from
+  Sep 2017, commission / slippage 0, IOG off; save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Aligned Weakness Short.xlsx".
 
 ## Journal (Obsidian)
 
@@ -45,7 +65,7 @@ bottom). Times are Central (CT).
 
 - [x] (2026-10-18, confirmed 135/135 sessions) MultiCharts backtest of [NQ_Vault_Break_SP.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Vault_Break_SP.txt)
   on a 30-min **@NQ** chart (same settings as before, from Jan 2018), inputs **NumContracts 1, NR7Contracts 2, FlaggedContracts -1**,
-  no costs; save as "Backtesting Strategy Performance Report _ @NQ - 30 Minutes VB NR7.xlsx" and push / send it.
+  no costs; save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 30 Minutes VB NR7.xlsx" and push / send it.
   (Live combine charts: nothing changes; NR7Contracts defaults to -1 = off.)
 - [x] (2026-10-18) Strategy-checker: **FAIL** (t 2.81 below 3.53; 2023-26 weaker). Not added to the plan (your condition). Leave `NR7Contracts` -1 everywhere; recheck on new data (WATCHLIST #21).
 
@@ -63,25 +83,25 @@ after 15:59 CT, never with a position open.
 - [x] (2026-10-19) Memory check: MultiCharts with the 4 live charts uses ~290 MB in total (app 100 MB + background
       processes ~190 MB); ~30 charts later ≈ 1.5-3 GB + 2 GB Windows. QuantVPS tiers (user's screenshot 2026-10-19): Starter
       $29.99 (2 cores, 4 GB), Lite $59.99 (4 cores, 8 GB), Pro $99.99 (6 cores, 16 GB); annual -20%.
-- [ ] Buy **VPS Lite** (Chicago, Windows; annual if sure). Starter's 4 GB / 2 cores is too tight once accounts and the
+- [x] (2026-10-20, user: done) Buy **VPS Lite** (Chicago, Windows; annual if sure). Starter's 4 GB / 2 cores is too tight once accounts and the
       copier are added; move to Pro only if startup / reconnects get slow.
-- [ ] Ask Apex / Rithmic whether one login may be connected from two machines at once; plan for live on the VPS ONLY.
-- [ ] On the home PC: export the MultiCharts workspace(s) and the compiled signals (VB, ONB ADX30, EOS, Target Guard,
+- [x] (2026-10-20, user: done) Ask Apex / Rithmic whether one login may be connected from two machines at once; plan for live on the VPS ONLY.
+- [x] (2026-10-20, user: done) On the home PC: export the MultiCharts workspace(s) and the compiled signals (VB, ONB ADX30, EOS, Target Guard,
       Stop Guard, Bridge Monday) and note every chart's settings: inputs (VB 8, ONB `RiskPerTrade` 1100 / ADX 30 /
       StopAtrPct 0.25, EOS $500, Bridge 2 MNQ), bar size, session template (CME 24h), Exchange time zone, Bar Magnifier,
       Symbol Mapping `@MNQ -> MNQZ6`, Target Guard `StartBalance` / `TargetBalance` 53050.
-- [ ] On the VPS: install MultiCharts + the data feed + Rithmic connection, import the workspace and signals, check every
+- [x] (2026-10-20, user: done) On the VPS: install MultiCharts + the data feed + Rithmic connection, import the workspace and signals, check every
       input against the list above.
 - [x] (2026-10-19) Same-result check: ONB on the VPS vs the PC report, Jan-Oct 2026: 77/77 trade days, 75 identical,
       2 differ by 1 tick (data). The others are assumed the same (user: VPS isn't for backtesting); just check their inputs
       and that the last few days' trade arrows on each chart look like the PC's.
-- [ ] VPS Windows: updates paused during market hours (set active hours / pause), sleep and screen-off disabled,
+- [x] (2026-10-20, user: done) VPS Windows: updates paused during market hours (set active hours / pause), sleep and screen-off disabled,
       MultiCharts set to start with Windows if the VPS restarts.
-- [ ] Switch over: turn auto-trading OFF on the PC charts, ON on the VPS charts (after 15:59 CT or on a weekend);
+- [x] (2026-10-20, user: done) Switch over: turn auto-trading OFF on the PC charts, ON on the VPS charts (after 15:59 CT or on a weekend);
       watch the first live trade on the VPS (fill shows in Rithmic / Apex).
 - [ ] Reports: each Friday export the weekly MultiCharts reports on the VPS and copy them to the PC (remote-desktop
       copy / paste) into `C:\TradingVault\live\` before 16:47 CT (or later: git on the VPS exporting straight into `live\`).
-- [ ] Keep the PC's MultiCharts for backtests only, logged in with data only (no live trading login), so it can't
+- [x] (2026-10-20, user: done) Keep the PC's MultiCharts for backtests only, logged in with data only (no live trading login), so it can't
       kick the VPS off Rithmic.
 
 ## Trade logger + auto journal (2026-10-19)
@@ -89,7 +109,32 @@ after 15:59 CT, never with a position open.
 - [x] (2026-10-19) VPS: `C:\TradingLogs` created; Apex Trade Logger compiled and on every live chart (VB / ONB / EOS / MON_BR).
 - [x] (2026-10-19) VPS: Git for Windows + clone to `C:\TradingRepo` + the scheduled push; test log arrived in `live/trades/`.
 
+## Automatic health checks (2026-10-21)
+
+- [x] (2026-10-21, user: done) **One time, outside market hours:** paste the updated [Apex_Trade_Logger.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Trade_Logger.txt)
+  (Raw button) into the existing "Apex Trade Logger" signal on the VPS and compile. Everything else runs by itself.
+
+## Codex and new research data (2026-10-22)
+
+- [ ] **Export NQ 2017 daytime 1-minute data** (warm-up for the LDF flow-sizing test), on the **home PC** (not the VPS):
+  new folder `C:\NQdata2017\`; 1-minute **@NQ** chart, Exchange time zone, CME 24h session, data from **05/01/2017**;
+  add the indicator `NQ Bar Exporter` ([tools/exporters/NQ_Bar_Exporter.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/tools/exporters/NQ_Bar_Exporter.txt))
+  with Folder `C:\NQdata2017\`, FilePrefix `NQ_1min_`, StartTime 800, EndTime 1515, Decimals 2; wait until the chart finishes;
+  copy ONLY `NQ_1min_2017.csv` into `C:\TradingVault\data\` (don't overwrite 2018+), then in PowerShell in `C:\TradingVault`:
+  `git pull` · `git add data/NQ_1min_2017.csv` · `git commit -m "NQ 2017 daytime data"` · `git push origin HEAD:claude/nq-trading-strategy-params-5h9d20`
+  (sync.ps1 only uploads journal/ and live/), then tell Claude.
+- [ ] **Email NYSE** (quote + free sample only, no purchase): to **datasales@nyse.com**, text in
+  [agents/claude_evidence/NYSE_QUOTE_EMAIL.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/agents/claude_evidence/NYSE_QUOTE_EMAIL.md)
+  (copy Subject → Thank you, add your name). List price ~$52k (SPY/Arca) + ~$58k (NYSE) for 2018-26: buy only if a
+  SPY-only extract costs a few hundred dollars or the free sample shows a strong signal. Forward their reply to Claude.
+- [ ] **Send Codex the review message** for the LDF flow-sizing plan (in `agents/codex/STATUS.md`, 'Next message for Codex').
+
 ## Later
+
+- [ ] **Export 1-minute data for NG, ZC and ZS** (natural gas, corn, soybeans), Jan 2018 to now, same way as the CL / ZN files
+  (Exchange time, 24-hour session), into `data/` (or `C:\TradingVault`, then sync). Claude then tests the NG storage report
+  (Thursdays 9:30 CT) and the USDA WASDE report (monthly, 11:00 CT) on ZC / ZS (2026-10-20,
+  `agents/results/MARKET_PROFILES_REVIEW.md`). Also check whether Apex offers NG / ZC / ZS (and the micros).
 
 - [ ] Before the CL Sunday fade goes live: confirm Apex allows MCL on the account.
 - [ ] When an account goes funded: paste the funded files (all have the stop guard):
@@ -99,7 +144,9 @@ after 15:59 CT, never with a position open.
   [NFP Fade](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_NFP_Fade.txt),
   [CL Sunday Fade](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/CL_Sunday_Gap_Fade.txt),
   VB SP, EOS.
-- [ ] **~Thu 12/10: roll Symbol Mapping** `@MNQ -> MNQH7` (before the December roll, ~12/11).
+- [ ] **Thu 12/10 (after the close): roll Symbol Mapping on the VPS** `@MNQ (dxFeed) -> MNQH7` (was MNQZ6; before the
+  December roll ~12/11), then auto-trading off / on and a 1-MNQ test order per account. Reminder set: 12/10 08:00 CT
+  (scheduled-jobs session).
 - [ ] **Mid-December gate:** ~40–70 live trades at ≥ 75% of backtest and no ALARM → start scaling (FUNDED_PLAN.md).
 - [ ] Optional: add an `OPENAI_API_KEY` to the environment's secrets for a second, different-lab strategy checker.
 
@@ -109,6 +156,6 @@ after 15:59 CT, never with a position open.
 
 ## Reminders
 
-Claude reminds you in this session (scheduled tasks, Central time): every **Sunday and Wednesday at 10:52 CT**, plus a
-last call **Sunday 10/18 at 15:30 CT** before the 17:00 test order. Say "stop the reminders" to turn them off, or ask for a
-different schedule.
+Claude reminds you every **Sunday and Wednesday at 10:52 CT** (Central). Since 2026-10-20 the reminders run in the
+separate session 'Scheduled jobs (journal, Friday review, reminders)', together with the 16:40 CT journal trades and the
+Friday review. Say "stop the reminders" to turn them off, or ask for a different schedule.

@@ -37,10 +37,10 @@ if __name__ == "__main__":
         m = (cPV[b - 1] - (cPV[a - 1] if a > 0 else 0)) / V; s2 = (cP2V[b - 1] - (cP2V[a - 1] if a > 0 else 0)) / V - m * m
         return (cf[b - 1] - m) / np.sqrt(s2) if s2 > 0 else np.nan
     OFc = ["date", "time", "close", "s48", "s49", "s50", "s51", "s52", "s53", "s54", "s55", "s56", "s57", "s58", "s59", "s60", "s61"]
-    OF = pd.concat(pd.read_csv(f, usecols=OFc) for f in sorted(glob.glob("OF_1min_*.csv"))); OF["m"] = B1.ct_min(OF.time.to_numpy())
+    OF = pd.concat(pd.read_csv(f, usecols=OFc) for f in sorted(glob.glob("data/OF_1min_*.csv"))); OF["m"] = B1.ct_min(OF.time.to_numpy())
     byd = {d: x.sort_values("m") for d, x in OF.groupby("date")}
     G = pd.concat(pd.read_csv(f, usecols=["date", "time", "close", "flip", "centroid", "maj_pos", "maj_neg", "basis"])
-                  for f in sorted(glob.glob("GEX_1min_20*.csv")))
+                  for f in sorted(glob.glob("data/GEX_1min_20*.csv")))
     G = G[(G.date >= 20230328)]; G["m"] = B1.ct_min(G.time.to_numpy()); gb = {d: x.sort_values("m") for d, x in G.groupby("date")}
     rows = []
     for r in T.itertuples():

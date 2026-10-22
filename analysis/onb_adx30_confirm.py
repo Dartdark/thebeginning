@@ -2,7 +2,7 @@
 Report '... 15 Minutes NQ Overnight Bias.xlsx' (inputs ADXMin 30, StopAtrPct 0.25), compared trade by trade
 with the Python version, standard metrics (whole / longs / shorts), bootstrap + permutation on 2023+,
 and the challenge simulator (VB 8 MNQ + ONB RiskPerTrade 1100, 21 trading days, real day order) with the
-MultiCharts lists of both versions (ADX 20: 'Backtesting Strategy Performance Report ONB v2.xlsx').
+MultiCharts lists of both versions (ADX 20: 'mc_reports/Backtesting Strategy Performance Report ONB v2.xlsx').
   python3 analysis/onb_adx30_confirm.py [SCRATCH_DIR]
 """
 import sys, pickle, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
@@ -13,9 +13,9 @@ from candidates24 import overnight_bias24
 import metrics as M, resampling as R
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
-NEW = "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"
-OLD = "Backtesting Strategy Performance Report ONB v2.xlsx"
-VBF = "Backtesting Strategy Performance Report VB v1.xlsx"
+NEW = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx"
+OLD = "mc_reports/Backtesting Strategy Performance Report ONB v2.xlsx"
+VBF = "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx"
 pf = lambda s: s[s > 0].sum() / max(1e-9, -s[s < 0].sum())
 
 

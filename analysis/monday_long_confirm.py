@@ -7,7 +7,7 @@ from portfolio import load_mc
 import metrics as M, resampling as R
 SP = "/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-997c-15fdea9b8719/scratchpad/"
 lab = pickle.load(open(SP + "lab_mon.pkl", "rb")); g = lab.g
-path = glob.glob("*Monday Longs*.xlsx")[0]
+path = glob.glob("mc_reports/*Monday Longs*.xlsx")[0]
 raw = pd.read_excel(path, sheet_name="List of Trades", header=2)
 mc = load_mc(g, path); atr = g.daily_atr(15)
 print("MC rows:", len(mc), "columns:", list(mc.columns))

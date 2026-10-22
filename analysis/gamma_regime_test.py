@@ -28,19 +28,19 @@ PV, TICK, COST = 20.0, 0.25, 7.25
 START, END, SPLIT = pd.Timestamp("2023-03-28"), pd.Timestamp("2026-07-07"), pd.Timestamp("2025-01-01")
 STEEP = 0.02
 REPORTS = {
-    "VB": "Backtesting Strategy Performance Report VB v1.xlsx",
-    "ONB_ML2": "Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
-    "EOS": "Backtesting Strategy Performance Report EOS v1.xlsx",
-    "MON": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
-    "LDF": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
-    "NFP": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
-    "VCS": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx",
-    "ONB_ADX30 (combine)": "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx",
+    "VB": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+    "ONB_ML2": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+    "EOS": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+    "MON": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+    "LDF": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+    "NFP": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
+    "VCS": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx",
+    "ONB_ADX30 (combine)": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx",
 }
 
 
 def load_gex(g):
-    d = pd.concat([pd.read_csv(f) for f in sorted(glob.glob("GEX_1min_*.csv"))], ignore_index=True)
+    d = pd.concat([pd.read_csv(f) for f in sorted(glob.glob("data/GEX_1min_*.csv"))], ignore_index=True)
     row = np.searchsorted(g.dates, d.date.values); row = np.minimum(row, g.D - 1)
     ok = (g.dates[row] == d.date.values) & (pd.to_datetime(d.date.astype(str)) >= START).to_numpy()
     d, row = d[ok], row[ok]

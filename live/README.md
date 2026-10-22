@@ -17,7 +17,7 @@ How to export (MultiCharts): on the live chart, View → Strategy Performance Re
 The report must contain the "List of Trades" sheet (the default).
 
 Then re-run each strategy's **backtest** on the same chart so it covers the live dates, and save it under its usual
-name in the repo root (the names in `analysis/live_vs_backtest.py`, `KEYS`).
+name in `mc_reports/` (the names in `analysis/live_vs_backtest.py`, `KEYS`).
 
 Run:
 

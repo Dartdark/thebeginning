@@ -10,6 +10,7 @@ A,"The Bridge's Monday Long NQ (L644NQ v2.1): Sunday 19:00 CT → Monday 15:55, 
 A,CL Sunday up-gap fade (funded_strategies/CL_Sunday_Gap_Fade.txt): Sunday 17:05 CT short when the 17:00 open is ≥ 0.1 ATR above Friday's last,1,3.2
 A,"Twin Continuation (user's MultiCharts code, 2026-10-15; checks/candidates/twin_continuation/Twin_Continuation.txt): Swing Breakout on 6h fra",1,5.46
 A,"The plan on Apex 150K accounts (analysis/plan_150k_test.py, analysis/slot_150k_vs_50k_test.py, analysis/apex_paths_test.py; Apex's real pric",1,
+B,"Relative Strength NQ / ES (user's RelStrength_v3 + research note, 2026-10-20; checks/candidates/relative_strength/, rebuild analysis/relativ",170,4.0
 B,"Single-print day filter on Vault Break (Red Ledger RL-FS-2026-01; analysis/single_print_test.py, single_print_bench.py, single_print_combine",1,-2.1
 B,"Morning Momentum, tight stop (Twin-like round 2, analysis/mo_pullback_test.py V3, analysis/mo_tight_bench.py): Twin's MO signal, market entr",1,4.07
 B,"High-win-rate search round 3 (analysis/high_winrate_test.py, high_winrate_bench.py): known edges with small-target / wide-stop exits, 9 pre-",1,4.13
@@ -26,6 +27,9 @@ B,"The Bridge's Overnight Bias ORB (close beyond the 8:30–8:45 range, ADX(16) 
 B,Combine add-ons: Bridge Monday Long 2 MNQ + EOS $500 + Vol-Control Sell 2 MNQ on top of VB 8 + ONB ADX30,20,
 B,"ES MOC auction follow: after a ≥ 0.3 ATR 14:00 → 14:50 CT move, follow 14:51 → 15:00, stop 0.25 ATR (round 1, analysis/s_rank_es_round1_test",1,3.5
 B,"Twin Continuation on an Apex 150K account ($9,000 target, $4,000 EOD drawdown, $2,000 DLL; 6 payouts ≈ $20,500, ladder assumed; analysis/twi",1,
+C,Antigravity's NQAlignedWeaknessShort (2026-10-20; rebuild analysis/anti_nq_aligned_weakness_short_test.py): at 9:00 short NQ when (NQ % sinc,1,2.4
+C,"Antigravity's NQIBBreakout (2026-10-20, antigravity/jesse strategies/NQIBBreakout; rebuild analysis/anti_nq_ib_breakout_test.py): long when ",1,2.58
+C,"Building blocks Step 1 survivor: E9 SMA 10 / 50 cross, SHORT side (Antigravity's entry block, 15-min RTH bars, pre-registered 2026-10-20, an",1,2.37
 C,"NQ Sunday reopen first-minute push (user's 'NQ_WKND_v2' write-up, 2026-10-18; rebuild analysis/sunday_reopen_test.py): trade the weekend gap",1,2.6
 C,"Vault Break sized by NR7 day (Crabel's narrow-range day via Kaufman, Trading Systems and Methods, Antigravity's book reading 2026-10-18; ana",1,2.8
 C,"Gold Breakout 15M (user's TradingView description, 2026-10-14; analysis/gold_breakout_15m_test.py, bench analysis/gold_breakout_15m_bench.py",1,3.1
@@ -49,6 +53,8 @@ C,"YM MOC auction follow (≥ 0.3 ATR, stop 0.25)",1,3.4
 C,"YM post-settlement fade (fade a ≥ 0.2 ATR 14:00 → 15:00 move, 15:01 → 15:15)",77,2.6
 C,BTC CME weekend-gap continuation (follow the Sunday gap ≥ 0.5 ATR),1,4.6
 C,"Overnight Bias ML (funded v2) at $1,100 in the combine instead of ONB ADX30 (analysis/combine_swap_test.py)",1,
+D,"Antigravity's Vault Break Combined (HYP-025, antigravity/jesse 2026-10-21; review agents/results/VB_COMBINED_REVIEW.md, rebuild analysis/ant",1,3.95
+D,"Antigravity's NQESCrossFlow ('sister' to Relative Strength, 2026-10-20; analysis/anti_nq_es_crossflow_test.py): at 10:00 CT follow NQ's 9:30",1,2.0
 D,"Noise-band intraday momentum on NQ (Chuk 2026, SSRN 7609644; Antigravity paper screen 2026_10_18_b, read from the PDF; analysis/noise_band_c",1,2.4
 D,"FOMC: short ES / NQ 13:00 → 15:00 CT after a HIGH-liquidity day (Baglioni, Giannozzi, Ribeiro & Roggi, SSRN 4304807, read from the PDF 2026-",1,1.4
 D,"Extreme Money Flow (E Trades research paper, user's EMF.txt, 2026-10-18): session-anchored Chaikin Money Flow (20 one-minute bars) crossing ",1,1.4
@@ -106,6 +112,14 @@ D,"Scaling size up as a funded account grows (cushion above full size, or x1.25�
 D,"Pension / balanced-fund rebalancing conditional on stocks vs bonds (2026-10-16, analysis/forced_flows_round5_test.py): signal at T−4 close S",1,1.2
 D,"CL holiday-reopen up-gap fade (2026-10-16, same script): the Sunday up-gap fade rule on the 17:00 CT reopens after Christmas / New Year (the",1,3.3
 D,"Daily profit cap vs the 50% consistency rule (user, 2026-10-16: cut the day at +$1,500 so the next day can satisfy consistency; analysis/pro",1,
+F,"Codex: FOMC minutes reaction continuation (2026-10-22, codex/work 2c4f5f8, pre-registered agents/codex/plans/fomc_minutes_screen.md, design ",1,0.14
+F,"Codex: Shanghai gold delivery-deadline continuation (2026-10-22, codex/work 5ca37fb, pre-registered agents/codex/plans/sge_delivery_screen.m",1,-6.4
+F,"Codex: London FX-fix reversal on 6E (2026-10-22, codex/work 15369ae, pre-registered agents/codex/plans/fx_fix_reversal.md; analysis/codex_fx",2,-6.3
+F,"Antigravity's NQRelWeaknessShort (2026-10-20, antigravity/jesse strategies/NQRelWeaknessShort, its report 'A+': 367 trades, $398 per NQ, 70%",1,5.41
+F,"Antigravity's NQIntradayMR (2026-10-20, antigravity/jesse strategies/NQIntradayMR, its own report): 15-min fade of an 8-bar low / high on be",1,1.34
+F,"Antigravity's NQBreakoutATR (built from the catalog's blocks, 2026-10-20, antigravity/jesse strategies/NQBreakoutATR; rebuild analysis/anti_",1,1.5
+F,"Building blocks Step 1b: the entry blocks as designed (daily bars, 5 / 20-day holds, NQ ES YM GC CL ZN 6E pooled at equal ATR risk; personal",32,1.9
+F,"Building blocks Step 1: Antigravity's entry blocks alone (2026-10-20, analysis/blocks_step1_test.py; 9 entries x sides x 2 neutral exits x N",64,2.5
 F,"Antigravity's paper screen, batch 2026_10_18 (agents/tasks/TASK_PAPER_SCREEN.md; analysis/anti_papers_1018_test.py, pre-registered on its tr",1,-1.8
 F,"Index rebalancing next-morning reversal (Franz 2019, SSRN 3459744, user 2026-10-18; pre-registered, analysis/index_rebalance_reversal_test.p",1,-1.1
 F,"Leveraged-ETF / closing push reverses overnight (Lead 1, 2026-10-18, pre-registered, analysis/letf_overnight_reversal_test.py; Apex-legal: 1",1,0.3

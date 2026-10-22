@@ -45,7 +45,7 @@ if __name__ == "__main__":
         print("      last-15-min bp by year:", last.groupby(last.index.year).mean().round(2).to_dict())
     print("\nB. Plan trades open at 14:45 CT: P&L from 14:45 to the exit (per NQ, gross)")
     cf = pd.Series(g.c.ravel()).ffill().to_numpy()
-    for nm, t in (("Monday Long", load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx")),
+    for nm, t in (("Monday Long", load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx")),
                   ("Bridge Monday Long", load_bridge_mc(g))):
         t = t.reset_index(drop=True); m = (t.j1 > jof(1445)) & (t.j0 < jof(1445))
         tt = t[m]; p1445 = cf[tt.day.to_numpy() * 1440 + jof(1445)]

@@ -52,7 +52,7 @@ if __name__ == "__main__":
     atr = g.daily_atr(15); tr = g.trading; D = len(tr); yr = pd.DatetimeIndex(g.ts[tr]).year; P = {}
     def add(nm, t): w, r = paths(g, t); P[nm] = (w[tr] / 10, r[tr] / 10)
     add("VB", with_slippage(load_mc(g, REPORTS["VB"][0])))
-    add("ONB30", with_slippage(load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx")))
+    add("ONB30", with_slippage(load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx")))
     add("MON_BR", load_bridge_mc(g)); add("EOS", with_slippage(load_mc(g, REPORTS["EOS"][0])))
     for nm in ("orig", "cap1", "cap2", "orig_MO"):
         P[nm] = (lab.W[nm] * 0 + 0, None)

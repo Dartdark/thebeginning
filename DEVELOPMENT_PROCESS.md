@@ -227,7 +227,7 @@ Tried on the 230 long trades (`analysis/onb_ml_long_side_test.py`):
 Adopted: `LongMinScore` 0.03 in `NQ_Overnight_Bias_ML.txt` (shorts stay at 0).
 
 **MultiCharts confirmation and correction (2026-10-12)**
-(`Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx`,
+(`mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx`,
 `analysis/onb_ml_v2_confirm.py`): 343 trades (162 longs, 181 shorts), $646 average, PF 2.14.
 Every decision matches the Python model except 6 days in January–February 2018, the filter's
 warm-up (as with v1).

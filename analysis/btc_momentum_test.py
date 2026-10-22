@@ -82,7 +82,7 @@ if __name__ == "__main__":
     pk = SP + "gbtc.pkl"
     if os.path.exists(pk): G = pickle.load(open(pk, "rb"))
     else:
-        G = Grid24("BTC_1min_20*.csv", night_pattern=""); pickle.dump(G, open(pk, "wb"), protocol=4)
+        G = Grid24("data/BTC_1min_20*.csv", night_pattern=""); pickle.dump(G, open(pk, "wb"), protocol=4)
     print(__doc__.split("\n")[0])
     ts = pd.DatetimeIndex(G.ts[G.trading])
     print(f"trading days {len(G.trading)}, {ts[0].date()} .. {ts[-1].date()}; per 1 BTC (= 10 MBT) after costs")

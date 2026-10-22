@@ -19,7 +19,7 @@ HALF = COST / 2 + TICK * PV                     # one side: half the commission 
 
 
 def big_trades(g):
-    d = pd.concat([pd.read_csv(f, usecols=["date", "time", "big_trade"]) for f in sorted(glob.glob("OF_1min_*.csv"))], ignore_index=True)
+    d = pd.concat([pd.read_csv(f, usecols=["date", "time", "big_trade"]) for f in sorted(glob.glob("data/OF_1min_*.csv"))], ignore_index=True)
     row = np.minimum(np.searchsorted(g.dates, d.date.values), g.D - 1); ok = g.dates[row] == d.date.values
     B = np.full((g.D, 1440), np.nan); B[row[ok], jof(d.time.values[ok] - 100)] = d.big_trade.values[ok]
     return B

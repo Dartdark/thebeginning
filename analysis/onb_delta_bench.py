@@ -18,7 +18,7 @@ if __name__ == "__main__":
     lab = ns["lab"]; g = lab.g
     F = pd.read_pickle(SP + "bridge_features.pkl"); F = F[F.strat == "ONB_ML"]
     agree = {(int(r.day), int(r.j0)): (r.cd > 0) for r in F.itertuples() if not np.isnan(r.cd)}
-    t = load_mc(g, "Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx")
+    t = load_mc(g, "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx")
     a = np.array([agree.get((int(d), int(j)), None) for d, j in zip(t.day, t.j0)], dtype=object)
     print(f"ONB ML trades {len(t)}: delta agrees {int((a == True).sum())}, disagrees {int((a == False).sum())}, no data {int((a == None).sum())}")
     atr = g.daily_atr(15)

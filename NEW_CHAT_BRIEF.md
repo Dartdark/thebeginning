@@ -34,6 +34,15 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   views on the PC's copy once live trading runs on a VPS; never orders, inputs or auto-trading). Cloud sessions do research and the Friday review (scheduled Fri
   16:47 CT). `LESSONS.md` = short rules learned the hard way. Live: test order filled 10/18; Bridge Monday first live run
   10/18 19:00 CT; account #2 Tue 10/20.
+- **Scheduled jobs (2026-10-20):** run in their own small session 'Scheduled jobs (journal, Friday review, reminders)'
+  (session_014DKffATms37kZigaa2xR2P, repo attached): journal trades weekdays 16:40 CT, Friday review 16:47 CT, to-do
+  reminder Sun/Wed 10:52 CT. Fresh-session-per-run doesn't work (new sessions can't reach the private repo).
+- **Account #2 (2026-10-20):** a second 50K evaluation on the VPS, its own chart set (no copier: Rithmic copy trading not
+  enabled yet), logger tags VB-2 / ONB-2 / EOS-2 / MON_BR-2. Rejected-order stop set to 10 per chart.
+- **Rithmic copier (2026-10-20):** user enabled it in R|Trader Pro, then decided (agreed): NOT for evaluations. Each
+  evaluation keeps its own chart set (own Target Guard / StartBalance; a copier would let #1's Guard close #2's trades and
+  stop #2 when #1 passes). Use the copier later, when several funded accounts run the same plan, grouped by cushion
+  (0.5 multiplier below a $1,500 cushion). Never run the copier and a follower's own chart set at once (double size).
 - **First Apex daily-loss-limit day (2026-10-19):** VB long 8 MNQ at 10:30 CT reversed; Apex's $1,000 daily limit closed it
   at -$1,017 (11:01 CT) and locked the account ('Account is done for day'); MultiCharts kept re-sending VB's exits (rejected).
   Within the plan (the combine sim models the limit). VB size vs the limit (`analysis/combine_vb_size_test.py`): 6 MNQ
@@ -47,6 +56,32 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **Antigravity's Vault Break Combined (HYP-025, 2026-10-21): D, not adopted.** Its 12:30 CT last-entry + 0.5-ATR VWAP
+  stretch cap: design t 3.21 vs 2.71 but 2023+ t 2.46 vs 2.66 and −$3.4k a year; removed trades make money (+$42, t 1.1);
+  DD cut = random removal (P 0.50); its MultiCharts code used a 30-min ATR and left the entry bar unprotected.
+  Review `agents/results/VB_COMBINED_REVIEW.md`; its 'microstructure laws' are post-hoc stories, not adopted. Live VB unchanged.
+- **Antigravity's role (user, 2026-10-20): strategy builder by default** (its brief now shows the plan's hours and
+  `agents/tasks/plan_daily_pnl.csv` so it aims at gaps); blind checker only in a fresh conversation with task text only.
+  Its strategies today: NQBreakoutATR F, NQIntradayMR F, NQIBBreakout C (overlaps VB). Each mistake caught is written into
+  its rules (full 2018-26, costs, flat, random entries, t >= 2.5 on 2018-22 + positive 2023-26, per-contract $).
+- **Antigravity's NQBreakoutATR (its first block-built strategy, 2026-10-20): F.** Our rebuild 2018-26: $55 per NQ, t 1.5,
+  5/9 years, 2025-26 −$51k, random-entry p 0.11; its report used 2019-24 only; the filter adds nothing; profit = overnight holds.
+- **Relative Strength NQ / ES (user's new strategy, 2026-10-20): B, checker PASS WITH CONCERNS.** Rebuild t 4.0, $306 per NQ,
+  9/9 years, holdout holds, random side p 0.002, the ES adjustment is what works. Concerns: top 5% of trades carry the
+  profit, 9:00 decision only (9:30 t 1.3), shorts weak since 2023. Funded bench + 1 MNQ: faster to 6 payouts (278 -> 250
+  days) but blown +1.3 pt; longs only +0.5 pt. Optimisation (pre-registered, design 2018-22): nothing beats the user's
+  settings; VXN regime splits strongly (high $508 vs low $94 a trade) -> WATCHLIST #24. MultiCharts check postponed (user
+  can't backtest while live). **In the plans (user, 2026-10-20):** 50K funded longs 1 MNQ (bootstrapped: 6 payouts in 258 vs
+  278 days, blown +0.5 pt), 150K funded both sides 1 MNQ, personal account both sides; NOT in evaluations (lowers the pass
+  rate). File `funded_strategies/NQ_Relative_Strength.txt` (+ stop guard, 2027 holidays). FUNDED_PLAN.md section.
+- **Building blocks program (user, 2026-10-20):** build strategies from entry / exit / filter blocks (Antigravity's
+  catalog on `antigravity/jesse`: 10 entries, 10 exits, 143 filters, plus our own filters). Library `analysis/blocks.py`.
+  Step 1 (entries alone, pre-registered, 64 trials, `analysis/blocks_step1_test.py`): 62 F; only E9 SMA 10/50 cross SHORT
+  passes (NQ $129, t 2.4, holdout +; ES weaker) = C, about chance level. Next: Step 2 = Apex-fit exits (ATR stop / target /
+  trail / time / 15:55) on E9 short, then a few pre-chosen filter families; count trials.
+  Step 1b (user: not only Apex; blocks as designed, daily bars, 5 / 20-day holds, 7 markets pooled, 32 trials,
+  `analysis/blocks_step1b_daily_test.py`): 0 pass; longs on NQ / ES / YM / GC make money but no more than random long
+  days (= bull drift). Antigravity called the library 'battle-tested': as components yes, as edges no.
 - **Antigravity Phase 2 done (2026-10-17, `agents/results/PHASE2_VERDICT.md`):** 40 pre-registered variants on the 8 plan
   strategies, none beat the originals in both periods; LDF move ≥ 0.50 ATR on the bootstrapped bench a wash; its new
   ESEuroCloseTrend rebuilt = t 1.4, F. Task 09 (ES MOC) done: PASS on the rule; its run was 1 minute early (read close stamps as open) and still made $156-161
@@ -189,6 +224,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 | Bridge Monday Long | as shipped | 1 MNQ |
 | **CL Sunday Gap Fade** (new, `CL_Sunday_Gap_Fade.txt`) | 5 min **MCL**, Eastern exchange time | `NumContracts` 2, `ExitTime` 1000 (= 9:00 CT) |
 | **ES MOC Follow** (added 2026-10-17, `ES_MOC_Follow.txt`) | 5 min **MES**, Central | `NumContracts` 2; mapping `@MES -> MESZ6` |
+| **Relative Strength** (added 2026-10-20, `NQ_Relative_Strength.txt`) | 1 min MNQ + @ES Data2, Central | 50K: longs only 1 MNQ (`TradeDir` 1); 150K: both sides 1 MNQ; not in evaluations |
 
 - **Cushion sizing:** f = cushion / ref, kept in 0.5–1.
   - **Funded phase: full size from a $1,500 cushion (user's decision, 2026-10-14).** The $1,000 setting blows 17–18%
@@ -290,7 +326,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - `pip install numba`, then `python3 analysis/build_lab.py scratch_data` builds g24 / ge / lab.
 - The gc / cl pickles build on first `load("GC")` / `load("CL")`; btc via `cross_asset_overnight_test.btc()`.
 - The CL fade's bench needs `scratch_data/s_rank_gap2.pkl`: run `analysis/s_rank_gap_round2_test.py` first.
-- Raw 1-minute CSVs are in `data/` and the repo root.
+- Raw 1-minute CSVs are all in `data/` (moved from the repo root 2026-10-21); MultiCharts reports in `mc_reports/`.
 
 ## Open items for the user
 

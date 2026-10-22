@@ -10,12 +10,12 @@ from portfolio import load_mc
 from funded_lab import with_slippage
 from bridge_monday_confirm import load_bridge_mc
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
-F = {"VB": "Backtesting Strategy Performance Report VB v1.xlsx",
-     "ONB_ML2_MC": "Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
-     "MON_MC": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
-     "EOS": "Backtesting Strategy Performance Report EOS v1.xlsx",
-     "LDF_MC": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
-     "NFP_MC": "Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx"}
+F = {"VB": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+     "ONB_ML2_MC": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+     "MON_MC": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+     "EOS": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+     "LDF_MC": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+     "NFP_MC": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx"}
 if __name__ == "__main__":
     print(__doc__.split("\n")[0]); sys.argv = ["x", SP]
     with contextlib.redirect_stdout(io.StringIO()):

@@ -28,10 +28,10 @@ def ct_min(t):  # ET hhmm -> CT minute of day
 
 
 def features(T):
-    OF = pd.concat(pd.read_csv(f, usecols=COLS) for f in sorted(glob.glob("OF_1min_*.csv")))
+    OF = pd.concat(pd.read_csv(f, usecols=COLS) for f in sorted(glob.glob("data/OF_1min_*.csv")))
     for c in ("vwap", "vwap_sd", "poc", "poc_prev", "vah", "val"): OF.loc[OF[c] == 0, c] = np.nan
     OF["m"] = ct_min(OF.time.to_numpy()); OF["delta"] = OF.upvol - OF.downvol
-    G = pd.concat(pd.read_csv(f, usecols=["date", "time", "close", "flip"]) for f in sorted(glob.glob("GEX_1min_20*.csv")))
+    G = pd.concat(pd.read_csv(f, usecols=["date", "time", "close", "flip"]) for f in sorted(glob.glob("data/GEX_1min_20*.csv")))
     G = G[G.flip > 0]; G["m"] = ct_min(G.time.to_numpy()); gb = {d: g for d, g in G.groupby("date")}
     byd = {d: g.sort_values("m") for d, g in OF.groupby("date")}
     rows = []

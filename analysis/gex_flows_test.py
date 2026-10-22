@@ -39,7 +39,7 @@ g = pickle.load(open("/tmp/claude-0/-home-user-thebeginning/7f50794d-c1bb-567e-9
 F = GX.features_for(g, d)
 print("\nYour strategies (MultiCharts lists, per NQ after $7.25) by previous day's GEX rank")
 for k, f in (("Vault Break", "VB v1"), ("Overnight Bias", "ONB v2"), ("Overnight Drift", "OND v1"), ("Expiration Open Short", "EOS v1")):
-    t = load_mc(g, f"Backtesting Strategy Performance Report {f}.xlsx")
+    t = load_mc(g, f"mc_reports/Backtesting Strategy Performance Report {f}.xlsx")
     t = t[pd.DatetimeIndex(t.date).year >= 2018]
     fr = F.reindex(t.day.to_numpy())
     grp = pd.cut(fr.gex_rank.to_numpy(), [-0.01, 0.33, 0.67, 1.01], labels=["low", "mid", "high"])
@@ -66,12 +66,12 @@ for k, f in (("Vault Break", "VB v1"), ("Overnight Bias", "ONB v2"), ("Overnight
 #     t2 = t[pd.DatetimeIndex(t.date).year >= 2018].copy(); t2["slips"] = 1 + (t2["kind"] != 1); t2["net"] -= t2["slips"] * 5
 #     s = IR.summary(t2); by = t2.groupby(pd.DatetimeIndex(t2.date).year).net.mean().round().to_dict()
 #     print(f"{name:<52} n={s['trades']:4d} win {s['win']} avg ${s['avg']:5.0f} PF {s['pf']:.2f} t={s['t_stat']:4.1f} yrs+ {s['years_pos']}  {by}")
-# ond = lab_ond = load_mc(g, "Backtesting Strategy Performance Report OND v1.xlsx"); ond = ond[ond.j0 <= jof(30)]
+# ond = lab_ond = load_mc(g, "mc_reports/Backtesting Strategy Performance Report OND v1.xlsx"); ond = ond[ond.j0 <= jof(30)]
 # gr = F.gex_rank.reindex(ond.day.to_numpy()).to_numpy()
 # for cut in (0.33, 0.5):
 #     t = ond[gr < cut]; summ(t, f"Overnight Drift, GEX rank < {cut}"); lab.add(f"OND_G{int(cut*100)}", t, stop_pts=0.3 * atr)
 # summ(ond, "Overnight Drift, all (reference)")
-# onb = load_mc(g, "Backtesting Strategy Performance Report ONB v2.xlsx")
+# onb = load_mc(g, "mc_reports/Backtesting Strategy Performance Report ONB v2.xlsx")
 # neg = F.gex_neg.reindex(onb.day.to_numpy()).to_numpy(dtype=bool)
 # t = onb[~neg]; summ(t, "Overnight Bias, skip GEX < 0"); lab.add("ONB_NN", t, stop_pts=0.3 * atr)
 # # gamma last 30 minutes: follow 8:30->14:30 move when GEX<0, fade it when gex_rank > 0.8
@@ -128,7 +128,7 @@ for k, f in (("Vault Break", "VB v1"), ("Overnight Bias", "ONB v2"), ("Overnight
 #     "drawdown from 60-day high > 5%": prev / cl.rolling(60).max().shift(1) - 1 < -0.05,
 # }
 # neg = F.gex_neg.astype(bool)
-# onb = load_mc(g, "Backtesting Strategy Performance Report ONB v2.xlsx")
+# onb = load_mc(g, "mc_reports/Backtesting Strategy Performance Report ONB v2.xlsx")
 # y = pd.DatetimeIndex(onb.date).year
 # base = {"VB": 3, "ONB": ("risk", 300), "OND_MC": ("risk", 500), "EOS": ("risk", 500)}
 # plans = {"Current funded set": base}

@@ -22,6 +22,8 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   reports, run `analysis/live_vs_backtest.py --all live/`, update `TIER_LIST.md` / `WATCHLIST.md` / `TODO.md` /
   `NEW_CHAT_BRIEF.md`, add new lines to `LESSONS.md`, and condense the brief on the first Friday of each month.
 - **Papers in git (user, 2026-10-19):** research-paper PDFs may be committed (folder `papers/`). Books stay out.
+- **Repo map:** `README.md` (reorganised 2026-10-21): MultiCharts reports in `mc_reports/`, all price data in `data/`,
+  script results in `analysis/outputs/`, exporters in `tools/exporters/`, old material in `archive/`. Put new files there.
 - **Folders:** `apex_strategies/` = challenge-only strategies (Vault Break, Overnight Bias);
   `funded_strategies/` = funded strategies. Comparing them is fine; the challenge ones are not
   meant for making money in funded accounts.

@@ -26,9 +26,9 @@ from portfolio import load_mc, paths, challenge
 from candidates24 import overnight_bias24, vwap_pullback_adx24, vault_break24
 from multi_strategy import V3_REPORT, zero_edge
 
-VB_REPORT = "Backtesting Strategy Performance Report VB v1.xlsx"
-OD_REPORT = "Backtesting Strategy Performance Report OD v1.xlsx"
-ONB_REPORT = "Backtesting Strategy Performance Report ONB v2.xlsx"
+VB_REPORT = "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx"
+OD_REPORT = "mc_reports/Backtesting Strategy Performance Report OD v1.xlsx"
+ONB_REPORT = "mc_reports/Backtesting Strategy Performance Report ONB v2.xlsx"
 ONB_RISK = 1100            # $ lost at the stop per Overnight Bias trade
 FEE = 50
 

@@ -1,7 +1,7 @@
 """MultiCharts confirmation of the NR7 input in apex_strategies/NQ_Vault_Break_SP.txt (2026-10-18).
 User's backtest: 30-min @NQ, same settings as the VB SP confirmation, NumContracts 1, NR7Contracts 2, FlaggedContracts -1
 (single print off, so only NR7 changes the size), saved as
-"Backtesting Strategy Performance Report _ @NQ - 30 Minutes VB NR7.xlsx" in the repo root.
+"mc_reports/Backtesting Strategy Performance Report _ @NQ - 30 Minutes VB NR7.xlsx" in the repo root.
 Checks: the days MultiCharts trades 2 contracts = the sessions after a Python NR7 day; trades otherwise identical to the
 VB v1 report; and the NR7 vs other $ per trade.
 Without the report it writes the expected sessions to analysis/vb_nr7_flags.csv.
@@ -13,7 +13,7 @@ from grid24 import jof
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 sys.argv = sys.argv[:1]
 import compare as C
-REPORT = "Backtesting Strategy Performance Report _ @NQ - 30 Minutes VB NR7.xlsx"
+REPORT = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 30 Minutes VB NR7.xlsx"
 
 
 def nr7_sessions(n=7):

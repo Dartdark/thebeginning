@@ -15,6 +15,25 @@ Priority order (details in the sections below and in `../reports/Trading_Busines
    (~$25k = 1/4, ~$50k = 1/2, ~$100k = full 1 NQ). Per dollar, Apex evaluations earn far more in year 1, so the personal
    account is funded from payouts, not savings.
 
+## Relative Strength NQ / ES added (2026-10-20)
+
+The user's RelStrength_v3 (`NQ_Relative_Strength.txt`; research `../analysis/relative_strength_test.py`, checker PASS WITH
+CONCERNS, TIER_LIST B): at 9:00 CT, NQ's move since 8:30 beyond its ES beta as a Z score; |Z| >= 1.25 follow at 9:01, stop
+0.6 / target 1.0 x the 20-day average RTH range, flat 15:00. Per NQ 2018-26: $306 a trade, PF 1.36, t 4.0, 9/9 years.
+Included in every plan where it helps (`../analysis/relative_strength_bench.py`, `../analysis/relative_strength_plans_test.py`):
+
+| Plan | RS setting | Effect | Decision |
+|---|---|---|---|
+| 50K funded (bootstrapped bench, 1,000 histories) | **longs only, 1 MNQ** (`TradeDir` 1) | y1 $9,294 vs $8,810, median days to 6 payouts 258 vs 278, blown 7.7% vs 7.2% (both sides 1 MNQ: 250 days but blown +1.3 pt; 2 MNQ blown 34%) | **in the plan** |
+| 150K funded (plan x 1.5, full from $3,000; single history) | **both sides, 1 MNQ** (`TradeDir` 0) | 1y $16,705 vs $16,067, 2y $20,038 vs $19,808, blown 0%, all 6 payouts 95% vs 93% (4 MNQ blows 20%) | **in the plan** |
+| 50K evaluation | - | pass 50.1% -> 47.5% (1 MNQ both) / 48.8% (longs 1) | not used |
+| 150K evaluation (combine set x 2.5) | - | pass 41.6% -> 40.5% (2 MNQ) / 41.4% (longs 2-3) | not used |
+| Personal account | both sides, ~1 MNQ per $25,000 | 1 NQ: ~$39.6k a year, max DD $28.5k (Monte Carlo 95% $66k) | in the personal plan |
+
+Cushion sizing: RS is 1 MNQ, so it is off (0) while f < 1 (cushion under $1,500 on 50K, under $3,000 on 150K). MultiCharts
+confirmation skipped by the user (no backtests while trading live); the user's own MultiCharts run in the research note
+matches the rebuild (PF 1.37 vs 1.38 before costs, longs PF 1.46 both). Live: the drift alarm decides (`../live/README.md`).
+
 ## Current plan (updated 2026-10-13): seven strategies (Vol-Control Sell dropped), faster to $13k
 
 Priority: collect all 6 payouts ($13,000) sooner. **New: the Bridge's Monday Long NQ** (it ships with The Bridge,
@@ -93,7 +112,7 @@ trading days instead of ~300; see the speed section below).
 ## Previous plan (2026-10-12): five strategies, Late-Day Flow added
 
 Five MultiCharts-confirmed strategies, sized to the drawdown cushion. Code and numbers:
-`analysis/funded_plan_ldf.py` (output in `analysis/funded_plan_ldf_output.txt`).
+`analysis/funded_plan_ldf.py` (output in `analysis/outputs/funded_plan_ldf_output.txt`).
 
 | Strategy | File | Chart | Funded inputs (full size) | Trades |
 |---|---|---|---|---|
@@ -220,7 +239,7 @@ are Python-only so far.
 ### Before Late-Day Flow (2026-10-12): Monday Long replaced Overnight Drift
 
 Four MultiCharts-confirmed strategies, sized to the drawdown cushion. Code and numbers:
-`analysis/funded_plan_monday.py` (output in `analysis/funded_plan_monday_output.txt`).
+`analysis/funded_plan_monday.py` (output in `analysis/outputs/funded_plan_monday_output.txt`).
 
 | Strategy | File | Chart | Funded inputs (full size) | Trades |
 |---|---|---|---|---|
@@ -460,7 +479,7 @@ On the day the challenge passes, change the inputs (do not reuse the challenge s
    session, Exchange time zone, Bar Magnifier 1 minute, from 2 Jan 2018,
    `RiskPerTrade` 0, `NumContracts` 1, no commission/slippage. Entries should be stamped
    at the bar after midnight and exits at 3:00. Save the report as
-   `Backtesting Strategy Performance Report OND v1.xlsx` in the repo root;
+   `mc_reports/Backtesting Strategy Performance Report OND v1.xlsx`;
    `analysis/funded24.py` then uses it instead of the Python version.
 2. Check the assumed rules (trailing/lock, daily loss limit tiers, contract tiers) on
    Apex's help center. If any differ, change the constants at the top of
@@ -488,7 +507,7 @@ MCL on the account before turning it on; it runs on its own chart and the copier
 
 ## Monte Carlo at plan size (2026-10-17)
 
-`analysis/plan_montecarlo_test.py` (output `analysis/plan_montecarlo_test_output.txt`) runs `analysis/montecarlo.py` on every
+`analysis/plan_montecarlo_test.py` (output `analysis/outputs/plan_montecarlo_test_output.txt`) runs `analysis/montecarlo.py` on every
 plan strategy at its funded size (full size, i.e. a cushion of $1,500 or more) and on the whole plan. The bench reproduces
 exactly ($10,184 / $12,450, blown 3% / 3%).
 
@@ -688,7 +707,7 @@ Code `../analysis/plan_150k_test.py`, `../analysis/slot_150k_vs_50k_test.py` (si
 `../analysis/account_pipeline150.py` = the 50K ones with 150K numbers; the 50K check reproduces the funded bench exactly).
 150K rules used: evaluation +$9,000 in 30 days, $4,000 EOD trailing drawdown (locks $150,100), $2,000 daily loss pause;
 funded: 6 payouts, $20,500 in all (ladder 2,500 / 3,000 / 3,000 / 3,000 / 4,000 / 5,000, $350 qualifying days, request from
-$154,600: Apex's pages, user's screenshots in the repo root, 2026-10-15).
+$154,600: Apex's pages, user's screenshots in reports/screenshots/, 2026-10-15).
 - **Evaluation:** the combine set x 2.5 passes 41.6% (2018–22 38.9%, 2023–26 45.4%; x 2 38.7%, x 3 40.7%), vs 50.1% on the
   50K: the 150K target is 2.25x its drawdown (50K 1.5x). Adding Twin cap1 does not help (39–42%).
   Inputs x 2.5: VB 20 MNQ, ONB ADX30 `RiskPerTrade` 2750, Bridge Monday 5 MNQ, EOS `RiskPerTrade` 1250.

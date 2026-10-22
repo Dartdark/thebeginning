@@ -24,6 +24,14 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - **Bar-time minutes vs HHMM**: when porting, 15:30 CT is minute 1350 / HHMM 1530, not 1290 (a Python port bug,
   FillEnd 1290). Convert with one helper (`jof` in `analysis/grid24.py`), never by hand.
 
+## Found in reviews of others' code (2026-10-21, Antigravity's VB Combined)
+- **`AvgTrueRange(n)` on an intraday chart is the ATR of n intraday bars**, not n days (30-min ATR ~ 1/10 of the daily one).
+  Fix: per-date true ranges in an array (as `NQ_Vault_Break.txt`) or a daily Data2.
+- **Exits sent only `if MarketPosition > 0`** leave the entry bar without a stop or target (the order exists from the next
+  bar). Fix: `SetStopLoss` / `SetProfitTarget` (they work on the entry bar) plus the bar-close stop guard.
+- **Counting entries with `MarketPosition <> 0 and MarketPosition[1] = 0`** misses trades that open and close in one bar.
+  Fix: `TotalTrades` at the day's start vs now.
+
 ## Live order rejections
 - **'Invalid StopMarket order parameters' on a protective stop** (EOS, 2026-10-16, 6:34 PT = 8:34 CT: "Buy Stop 1 @MNQ @ 30168"
   rejected): the short filled at the 8:30 open, price ran up through the stop level before the stop order reached Rithmic,
@@ -49,6 +57,13 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
   (Rithmic) had `@MNQ (dxFeed) -> @MNQ`; a manual Sell Limit was rejected the same way. Now `@MNQ (dxFeed) -> MNQZ6 (Rithmic,
   CME)`. In the Rithmic lookup search `MNQ` (no @; Rithmic uses one-digit years: MNQZ6). **Roll checklist:** change the
   broker symbol at every roll — MNQ / NQ quarterly (next ~2026-12-11: MNQZ6 -> MNQH7), MCL monthly once the CL fade is live.
+- **'Invalid Market order parameters: Buy 8 @MNQ.CME' on the VPS** (2026-10-20, 10:00 CT, VB on both accounts): the
+  order went out as `@MNQ` (dxFeed's continuous symbol), the same failure as 10/16 on the PC. **Confirmed:** the VPS's
+  Symbol Mapping had `@MNQ (dxFeed) -> @MNQ` (the default; mapping is stored per MultiCharts installation; the PC had
+  `@MNQ -> MNQZ6`). Fix on
+  the VPS: File -> Broker Profiles -> Rithmic -> Symbol Mapping: `@MNQ (dxFeed) -> MNQZ6`; then auto-trading off / on with
+  Strategy Positions flat. On every new machine or account set, copy the Symbol Mapping and test one manual 1-MNQ order
+  after the close before relying on it.
 - After any rejection: check the Order and Position Tracker / the broker position at once; flatten by hand if the
   account holds a position the chart does not manage.
 
@@ -70,6 +85,26 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
   reloads the server lines), then that no other machine is logged in with the same login.
 - Never test a second machine's broker login during market hours or with a position open: a failed / duplicate login
   can disconnect the live machine.
+- **R|Trader Pro: 'You have been logged out because another program has logged in with your credentials and would cause
+  your session count to exceed its maximum'** (2026-10-20, trying R|Trader Pro for the copier): the Rithmic login is
+  already in use by MultiCharts (the VPS's live connection, and the PC's MultiCharts if its Rithmic profile still connects).
+  Uninstalling R|Trader on the PC changes nothing. Each R|Trader login can bump MultiCharts' live session, and MultiCharts
+  reconnects and bumps R|Trader back. Fix: use R|Trader Pro only after 15:59 CT with every account flat: disconnect Rithmic
+  in MultiCharts on the VPS and the PC (or close MultiCharts), log in to R|Trader, do the setup, log out, reconnect
+  MultiCharts and check the charts are green and flat before the next open.
+
+## Pre-flight checklist: after ANY live change (new machine, chart set, account, copier, symbol roll) (2026-10-21)
+Do it after 15:59 CT or on a weekend, with every account flat. Each line is an error that has already happened here.
+1. Symbol Mapping on THIS machine: `@MNQ (dxFeed) -> current contract` (and `@MES`, MCL when live). Mapping is per
+   installation (VPS rejections 2026-10-20).
+2. Every chart: Format Signals > Auto Trading = Rithmic, and the gear icon = the RIGHT Apex account; Chart Trading not on
+   SIM 001; 'stop after N rejected orders' = 10.
+3. One Rithmic login in use: only the VPS MultiCharts (no R|Trader, no PC MultiCharts with a Rithmic profile).
+4. Copier: off, or its followers have NO auto-trading charts of their own (double size).
+5. Inputs and the report's Settings sheet match `reports/Strategy_Settings.pdf` (old inputs survive a code paste).
+6. Target Guard StartBalance = the account's balance; Trade Logger on every chart with the right tag.
+7. One 1-MNQ manual test order through MultiCharts per account: it fills on Apex; flatten.
+8. Auto-trading off / on (initial position Flat) on every chart; Strategy Positions all flat; Rithmic connected.
 
 ## Setup checklist
 - A signal runs on data1 only; each strategy needs its own chart window.
@@ -79,6 +114,13 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - Data: Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close conversion unchecked.
 - Auto trading: Format Signals > Properties > Auto Trading (broker, account), mode AA, initial position Flat, no automatic
   position sync, intra-bar order generation off. Tracker: Ctrl+Shift+O.
+- The ACCOUNT is behind the gear icon next to the broker plug-in (Strategy Properties > Auto Trading > Rithmic > gear).
+  'Stop auto-trading after N rejected orders' was 102 (2026-10-19: ~100 rejections after the Apex lock): set it to 10.
+  A second Apex account = a second set of charts with the other account selected (no copier yet).
+- **New chart setup (user's note, 2026-10-20):** click the small side-arrow on the chart's right edge to open / activate
+  Chart Trading, then set its broker drop-down (green dot) to Rithmic and pick the Apex account. Missed, the chart sat on
+  'SIM 001' (Simulated Trading Profile) and didn't work. Also check Strategy Properties > Auto Trading > Rithmic > gear =
+  the right Apex account: that one decides where the strategy's orders go.
 - Export "Export cancelled by user" in a report = the export did not finish; export again before sending.
 
 ## Reading MultiCharts reports

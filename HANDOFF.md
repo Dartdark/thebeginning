@@ -36,7 +36,7 @@ Tier list of everything tested (S–F): `TIER_LIST.md`. Development process (who
    PF, Calmar, Ulcer), `analysis/resampling.py` (bootstrap, permutation, fan charts),
    `analysis/param_clusters.py` + `analysis/robustness.py` (clusters, folds, sensitivity),
    `funded_lab.Lab.score(plan, 250/500, fmin=0.5, fmax=1.0, ref=2000)` (funded bench with cushion sizing).
-4. To confirm a strategy: the user uploads the MultiCharts report (.xlsx) to the repo root;
+4. To confirm a strategy: the user uploads the MultiCharts report (.xlsx) to `mc_reports/`;
    compare with `portfolio.load_mc` as in `analysis/late_day_flow_confirm.py`.
 
 ## Funded plan (updated 2026-10-13, latest)
@@ -63,7 +63,7 @@ Monday Long 1 MNQ (replaced Overnight Drift), Expiration Open Short RiskPerTrade
 $12,012 (2y), blown 4-6%; portfolio Sharpe 2.51.
 
 ## Combine: Overnight Bias ADX30 confirmed (2026-10-13)
-MultiCharts report `Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx`
+MultiCharts report `mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx`
 (ADXMin 30, StopAtrPct 0.25): 676 trades, PF 1.66, 675/676 match Python. Combine pass with VB 8 MNQ
 46.9% (was 42.8%); switch the live combine chart to these inputs. `analysis/onb_adx30_confirm.py`.
 Add-ons (`analysis/combine_addons_test.py`): + Bridge Monday Long 2 MNQ + EOS $500 + Vol-Control Sell 2 MNQ ->
@@ -140,12 +140,12 @@ backtests): 278. Biggest lever: 2-3 PAs in parallel ($13k in total after ~225 / 
 Details: `funded_strategies/FUNDED_PLAN.md` (speed section).
 
 ## The Bridge 0DTE gamma data tested (2026-10-13)
-User has The Bridge (MatFin MultiCharts add-on). `GEX_1min_<year>.csv` (repo root, 2022-09 to 2026-07-07,
-exported by `multi_strategy/OFB_Gamma_Exporter.txt` on a 1-min chart of `C:\OFB\ofb_bars_NQ.csv`, Exchange
+User has The Bridge (MatFin MultiCharts add-on). `data/GEX_1min_<year>.csv` ( 2022-09 to 2026-07-07,
+exported by `tools/exporters/OFB_Gamma_Exporter.txt` on a 1-min chart of `C:\OFB\ofb_bars_NQ.csv`, Exchange
 time zone = Eastern) tested in `analysis/gamma_regime_test.py`: below the flip NQ moves ~30% more, but
 realized vol explains it; no filter on the plan clears noise (watch VCS above-flip, t 2.5 on 27 trades);
 flip cross, regime follow / fade, strike pin all F. Order flow (MBO 2018-2026, `OF_1min_*.csv`, exporter
-`multi_strategy/OFB_OrderFlow_Exporter.txt`, test `analysis/orderflow_test.py`): describes moves, doesn't predict
+`tools/exporters/OFB_OrderFlow_Exporter.txt`, test `analysis/orderflow_test.py`): describes moves, doesn't predict
 them (F); LDF-long delta filter D (no funded gain). Export quirk: MC `Volume` = buy volume on these bars.
 The Bridge's Monday Long NQ (`analysis/bridge_monday_long_test.py`, its v2.1 code ported): PF 2.04, t 4.4, 9/9 years;
 MC-confirmed (217/217 trades match): A, in the funded plan at 1 MNQ.
@@ -177,7 +177,7 @@ benchmark (VB 3 + ONB $300 + OND $500); details in funded_strategies/README.md.
 Calendar round found the first one that helps: **Expiration Open Short**
 (`funded_strategies/NQ_Expiration_Open_Short.txt`): short NQ 8:30-10:00 CT on monthly options
 expiration day, stop 0.3 ATR, RiskPerTrade 500 -> funded estimate $6,516 vs $5,387.
-MultiCharts-confirmed (`Backtesting Strategy Performance Report EOS v1.xlsx`, identical 105 trades).
+MultiCharts-confirmed (`mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx`, identical 105 trades).
 Overnight Drift MultiCharts-confirmed (`... OND v1.xlsx`); holiday fix (`MaxEntryDelay` 30).
 Funded set: VB 3 MNQ, ONB $300, OND $500, Expiration Open Short $500 -> $6,495 within 1 year
 (all MultiCharts lists, 1 tick slippage), 42% blown. Next: sim-trade all four together.
@@ -220,9 +220,9 @@ $2,850/NQ in 2026). **Backtest on @NQ with RiskPerTrade 0 and NumContracts 1**;
 RiskPerTrade 1100 only on an MNQ chart (on NQ it buys 0 contracts most days).
 
 ## Other strategies (not in the plan)
-- v3 VWAP Momentum (`final_v3/`): PF 1.14, 33% pass (41% if started after the 10-day
+- v3 VWAP Momentum (`archive/final_v3/`): PF 1.14, 33% pass (41% if started after the 10-day
   range filter is green 3+ days), worst year 5%. Retired from the challenge plan.
-  Note: `final_v3/README.md` says one stop-out at 10 MNQ is ~$800; it is $1,600.
+  Note: `archive/final_v3/README.md` says one stop-out at 10 MNQ is ~$800; it is $1,600.
 - Opening Drive (`multi_strategy/NQ_Opening_Drive.txt`, made by Claude): at 9:00 CT follow
   the first 30 minutes' direction if the move is at least 0.2%, stop 50 pts, out 11:00. PF 1.23,
   33% pass, most independent of the others. Optional add-on (VB 6 + OD 4 + ONB $1,100 = 43%).
@@ -250,7 +250,7 @@ RiskPerTrade 1100 only on an MNQ chart (on NQ it buys 0 contracts most days).
   "List of Trades" report, bar size from Settings sheet), `multi_strategy24.py` (main
   tables, ~1 min), `monte_carlo_onb.py`, `vol_scaling.py`, `candidates24.py`,
   `candidates.py`, `start_timing.py`, `prop_sim.py`, `replica.py`.
-- MC reports in repo root: `Backtesting Strategy Performance Report VB v1.xlsx`,
+- MC reports in `mc_reports/`: `mc_reports/Backtesting Strategy Performance Report VB v1.xlsx`,
   `... OD v1.xlsx`, `... ONB v2.xlsx`, v3: `... v2 filtered up test.xlsx`.
 - Indicators: `apex_strategies/NQ_Strategy_ATR.txt` (ATR, 30% ATR, ONB MNQ size),
   `apex_strategies/NQ_ONB_ADX.txt`. Not yet compiled by me; may need fixes.
