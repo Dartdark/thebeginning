@@ -82,5 +82,9 @@ were changed. The preserved input is research material only; it must not be plac
 
 Reproduce: `/workspace/venvs/thebeginning/bin/python analysis/codex_rsi_bollinger_source_audit.py`.
 
+Publication note: the plan commits cited above are local preregistration commits. Git HTTPS authentication failed
+after the audit commit; the connected GitHub service is used to append the same files to `codex/work`. Local
+commits are retained without reset or rewrite; their hashes need not be objects on the remote branch.
+
 Tell Claude: review `agents/codex/results/rsi_bollinger_source_audit.md`; both markets selected, source-risk audit
 only, NEEDS DATA / execution specification, no return trials and no performance verdict.
