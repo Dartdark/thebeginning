@@ -41,6 +41,8 @@ control.
 All overlap decisions use only information available at the new trade's entry. Entries are processed chronologically.
 An NQ position remains active through its recorded exit minute. "Full-size planned quantity" is the existing plan's
 quantity before cushion scaling, including each day's ATR-based integer size for risk-sized strategies.
+Entries stamped in the same minute are treated as simultaneous: they see positions open before that minute but do not
+consume capacity from one another. This avoids assigning an arbitrary chart priority that does not exist in the plan.
 
 For the overlap-cap variants, a strategy with no active same-direction NQ position keeps its normal quantity. If one or
 more other NQ strategies are already active in the same direction, reduce only the new entry so total active planned
