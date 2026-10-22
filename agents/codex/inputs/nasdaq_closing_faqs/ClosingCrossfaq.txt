@@ -1,0 +1,138 @@
+GLOBAL TRADING AND MARKET SERVICES
+
+
+
+
+Nasdaq Closing Cross
+Frequently Asked Questions
+
+Almost 10% of Nasdaq’s average daily volume occurs in the closing auction. Providing true price
+and size discovery, the closing auction determines benchmark pricing for index funds and other
+investment strategies. To understand the inner workings, here’s what market participants are asking.
+
+What are the cutoff times for Nasdaq On-Close orders?        •   Number of Paired Shares: The number of on-close
+                                                                 shares that Nasdaq is able to pair off at the current
+Key Times    Key Actions                                         reference price.
+Prior to     Nasdaq begins accepting Market-On-Close         •   Imbalance Side: Indicates the direction of the
+3:50 p.m. ET (MOC), Limit-On-Close (LOC), and Imbalance-         Imbalance.
+             Only (IO) orders.
+                                                             •   Imbalance Quantity: The number of closing shares
+3:50 p.m. ET Early dissemination of closing information          that are seeking additional liquidity at the current
+             begins.                                             reference price.
+             • Nasdaq continues accepting MOC, LOC and       •   Current Reference Price: The price within the
+               IO orders, but they may not be canceled or        Nasdaq Best Bid and Offer (BBO) at which paired
+               modified.                                         shares are maximized. The imbalance is minimized
+                                                                 and the distance from the midpoint is minimized, in
+3:55 p.m. ET Dissemination of closing information begins.
+                                                                 that order.
+             • Nasdaq stops accepting MOC orders.
+                                                             Between 3:55 p.m. ET and 4:00 p.m. ET, Nasdaq will
+             • LOC orders may be entered until
+                                                             disseminate the NOII every second and will include the
+               3:58 p.m. ET, but may not be canceled or
+               modified after posting on the order book      following additional data points:
+
+             • IO orders may be entered until 4:00 p.m. ET   •   Near Indicative Clearing Price: The crossing price
+                                                                 that will maximize the number of shares matched
+3:58 p.m. ET Nasdaq stops accepting entry of LOC orders.         based on on-close orders (MOC, LOC, IO) and
+                                                                 continuous market orders. Effectively, this is the
+4:00 p.m. ET Closing process begins.
+                                                                 price at which the closing cross would occur at that
+                                                                 moment in time.
+How does Nasdaq determine the closing Price?
+                                                             •   Far Indicative Clearing Price: The crossing price
+At 4:00 p.m. ET, Nasdaq calculates the price that will           that will maximize the number of shares matched
+maximize the number of shares matched based on                   based on closing interest only (MOC, LOC, IO). This
+on-close orders (MOC, LOC, IO) and continuous market             calculation excludes continuous market orders.
+orders and execute the cross at a single price called the
+Nasdaq Official Close Price (NOCP).                          How can Auction Imbalances be offset?
+                                                             There are three methods for offsetting imbalances.
+What are the key data points that everyone should be
+aware of?                                                    1. Limit-On-Close Orders (LOC) are orders designed
+Nasdaq begins disseminating the Net Order Imbalance             to encourage greater participation and interaction
+Indicator (NOII) at 3:50 p.m. ET. Between 3:50 p.m. ET          opportunities within the Nasdaq Closing Cross process
+and 3:55 p.m. ET, the information is disseminated every         and support stability in the price discovery process.
+10 seconds and includes these data points:
+
+
+
+NASDAQTRADER.COM                                                                                                         1
+GLOBAL TRADING AND MARKET SERVICES
+
+
+
+
+      • An LOC order entered between 3:55 p.m. ET to 3:58                        In the example below, there are 1,000 shares that can
+        p.m. ET will be accepted at its limit price, unless its                  be offset by either an IO or an LOC.
+        limit price is more aggressive than either the 3:50                      1. 3:56 p.m. ET Customer #1 enters a sell 1,000 shares
+        p.m. ET or 3:55 p.m. ET Reference Prices, in which                          IO @ $9.95
+        case the LOC order will be re-priced to the more
+        aggressive of the two Reference Prices.                                  2. 3:57 p.m. ET Customer #2 enters a sell 1,000 shares
+                                                                                    LOC @ $10.10
+2. Continuous Market Orders are available for entry
+   until the closing cross commences. At that time, they                         3. 3:57:30 p.m. ET Customer #3 enters a sell 1,000
+   will be included in the auction and will be available                            shares LOC @ $10.00
+   for execution with price standing.                                            At 4 p.m., the Nasdaq BBO is $10.00 x $10.15.
+3. Imbalance-Only Orders (IO) are liquidity-providing                            •    The IO is priced @ $10.15 and does not receive a fill
+   orders that stabilize the crossing price.
+                                                                                 •    Customer #2 does not receive a fill
+      • IO orders to buy (or sell) that are priced more
+                                                                                 •    Customer #3 executes at $10.00
+        aggressively than the 4:00 p.m. ET Nasdaq bid (or
+        ask) will be adjusted to the Nasdaq bid (or ask)                         Each order would have paired off the auction in its
+        prior to the execution of the cross.                                     entirety. However, the LOC orders improved the auction
+                                                                                 as they were willing to offset the imbalance at better
+What are the primary differences between an IO and an                            prices, something an IO cannot accomplish due to
+LOC?                                                                             the fact it gets re-priced to the 4:00 p.m. ET Nasdaq
+                                                                                 BBO. This scenario demonstrates the value of LOCs as
+ IO                                LOC
+                                                                                 providing improved price discovery and stability in the
+ • Price is determined by          • LOCs are accepted until 3:58 p.m.           Nasdaq auction.
+   the Nasdaq BBO at the             ET and have price standing in
+   time of the cross                 the auction
+ • Price for potential             • LOC orders entered at prices
+   participation in                  more aggressive than either the
+   the auction is not                3:50 p.m. ET or 3:55 p.m. ET
+   determined until the              Reference Prices are subject to
+   auction process begins            repricing to the more aggressive
+                                     of the two Reference Prices.
+ • Provide liquidity
+   and offset auction              • Provide price stability in
+   imbalances                        offsetting auction imbalances
+
+
+EXAMPLE
+
+ 3:50 p.m                                3:55 p.m                               3:56 p.m. - 3:59 p.m.                   4:00 p.m.
+ QBBO: $9.99 x $10.00                    QBBO: $10.10 x $10.15                  QBBO: $10.10 x $10.15                   QBBO: $10.00 x $10.15
+
+ NOII:                                   Buy 500 shares MOC received            1) Sell 1,000 shares IO received        NOII:
+ Paired Shares: 4,000                                                           at $9.95                                Paired Shares: 5,000
+                                         NOII:
+ Imbalance side: B                                                              2) Sell 1,000 shares LOC                Imbalance shares: 0
+                                         Paired Shares: 4,000
+ Imbalance shares: 500                                                          received at $10.10                      Imbalance side: N
+                                         Imbalance side: B
+ Current ref px: $10.00                                                         3) Sell 1,000 shares LOC                Auction Trades @ $10.00
+                                         Imbalance shares: 1,000
+ Near: $0                                                                       received at $10.00
+                                         Current ref px: $10.15
+ Far: $0
+                                         Near: $10.25
+                                                                                NOII:
+                                         Far: $10.50
+                                                                                Paired Shares: 5,000
+                                                                                Imbalance shares: 0
+                                                                                Imbalance side: N
+                                                                                Near: $10.00
+                                                                                Far: $10.00
+
+
+
+Let's continue the conversation on the Nasdaq Closing Cross. Contact sales and support at:
+Email: sales@nasdaq.com • Call: +1 800 846 0477 • Visit: nasdaq.com
+
+© Copyright 2019. All rights reserved. Nasdaq® is a registered trademark of Nasdaq, Inc. in the United States and other countries.             2593-Q19
+
+
+NASDAQTRADER.COM                                                                                                                                      2

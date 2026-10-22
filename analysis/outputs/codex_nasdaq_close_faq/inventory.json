@@ -1,0 +1,136 @@
+{
+  "source_commit": "b2c8d74",
+  "plan_commits": [
+    "499f12f",
+    "10bd236"
+  ],
+  "trials": 0,
+  "candidate_returns_computed": false,
+  "price_columns_read": false,
+  "caches_built": false,
+  "purchases": 0,
+  "historical_noii_messages_owned": false,
+  "free_2018_archive_verified": false,
+  "pdfs": {
+    "openclose_faqs.pdf": {
+      "sha256": "e07ab18c8f29753623db58d97b09603ae6150e178dd03227f6b9893aebced1b4",
+      "pages": 4,
+      "creation": "Thu Oct 25 23:59:24 2018 UTC",
+      "modified": "Fri Oct 26 20:36:40 2018 UTC",
+      "text_sha256": "0082a0222d42b16f47de097996bc1e6c3b61fb39320eda2fed1785cb3ede624d"
+    },
+    "ClosingCrossfaq.pdf": {
+      "sha256": "96b39aacd1657d024d1a2381e2ce93ba62f4d1d02cb1d2cfdb91771f9346593a",
+      "pages": 2,
+      "creation": "Mon Nov  4 13:22:35 2019 UTC",
+      "modified": "Mon Nov  4 13:22:35 2019 UTC",
+      "text_sha256": "7d4ff1ca4a106a7e19ad5835f992b9d53d5143a0ea3caca4c1822b6cb6c6095b"
+    }
+  },
+  "design_cash_sessions": 1259,
+  "regular_1600ET_sessions": 1249,
+  "excluded_early_close_sessions": 10,
+  "regular_sessions_by_year": {
+    "2018": 248,
+    "2019": 249,
+    "2020": 251,
+    "2021": 251,
+    "2022": 250
+  },
+  "final_minute_bars_present": 1248,
+  "final_minute_bars_missing": 1,
+  "median_final_minute_nq_contracts": 4965.0,
+  "p10_final_minute_nq_contracts": 3128.7,
+  "gap_fraction_weighted_by_regular_sessions": 0.649951779139471,
+  "gap_fraction_weighted_by_saved_map_dates": 0.6439100077579519,
+  "gap_interpretation": "weekday-marginal inclusive endpoints only; not auction-event-conditioned or whole-window joint probability",
+  "n_planning_at_20pct_frequency": 249,
+  "n_planning_with_half_persistence": 124,
+  "hypothetical_flow_scenarios": [
+    {
+      "hypothetical_qqq_imbalance_usd": 100000000,
+      "assumed_nq_level": 20000,
+      "assumed_hedge_fraction": 0.0,
+      "hypothetical_nq_contracts": 0.0,
+      "fraction_of_observed_median_minute_volume": 0.0
+    },
+    {
+      "hypothetical_qqq_imbalance_usd": 100000000,
+      "assumed_nq_level": 20000,
+      "assumed_hedge_fraction": 0.25,
+      "hypothetical_nq_contracts": 62.5,
+      "fraction_of_observed_median_minute_volume": 0.012588116817724069
+    },
+    {
+      "hypothetical_qqq_imbalance_usd": 100000000,
+      "assumed_nq_level": 20000,
+      "assumed_hedge_fraction": 1.0,
+      "hypothetical_nq_contracts": 250.0,
+      "fraction_of_observed_median_minute_volume": 0.050352467270896276
+    }
+  ],
+  "power": [
+    {
+      "case": "assumed_20pct_frequency_case",
+      "n": 249,
+      "assumed_sd": 300.0,
+      "net_for_t2": 38.02345503146868,
+      "gross_for_t2": 55.27345503146868,
+      "gross_points_for_t2": 2.763672751573434,
+      "baseline_round_trip": 17.25,
+      "gross_floor_1_5_cost": 25.875
+    },
+    {
+      "case": "assumed_20pct_frequency_case",
+      "n": 249,
+      "assumed_sd": 600.0,
+      "net_for_t2": 76.04691006293736,
+      "gross_for_t2": 93.29691006293736,
+      "gross_points_for_t2": 4.664845503146868,
+      "baseline_round_trip": 17.25,
+      "gross_floor_1_5_cost": 25.875
+    },
+    {
+      "case": "50pct_persistence_planning_case",
+      "n": 124,
+      "assumed_sd": 300.0,
+      "net_for_t2": 53.881590608032475,
+      "gross_for_t2": 71.13159060803247,
+      "gross_points_for_t2": 3.5565795304016232,
+      "baseline_round_trip": 17.25,
+      "gross_floor_1_5_cost": 25.875
+    },
+    {
+      "case": "50pct_persistence_planning_case",
+      "n": 124,
+      "assumed_sd": 600.0,
+      "net_for_t2": 107.76318121606495,
+      "gross_for_t2": 125.01318121606495,
+      "gross_points_for_t2": 6.2506590608032475,
+      "baseline_round_trip": 17.25,
+      "gross_floor_1_5_cost": 25.875
+    }
+  ],
+  "timing": {
+    "snapshot_1_ET": "15:55:10",
+    "snapshot_2_ET": "15:58:10",
+    "decision_CT": "14:58:10",
+    "entry_CT": "14:59:00",
+    "exit_CT": "15:00:00",
+    "decision_to_entry_seconds": 50
+  },
+  "source_sha256": {
+    "analysis/outputs/codex_sge_delivery_screen/roster_minute_occupancy.csv": "08d16def7970d96d8a9ce0523f050b27560d1740fd6090f632cc620d288f1cd5",
+    "data/NQ_1min_2018.csv": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+    "data/NQ_1min_2019.csv": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+    "data/NQ_1min_2020.csv": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+    "data/NQ_1min_2021.csv": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+    "data/NQ_1min_2022.csv": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2"
+  },
+  "limitations": [
+    "XNYS calendar proxies normal Nasdaq cash closes; verify Nasdaq-specific halts/schedules before any test",
+    "SDs, extreme fraction, persistence fraction, dollar imbalance and hedge fractions are assumptions; rolling ranks do not ensure a fixed 20pct event rate",
+    "No observed imbalance size, hedge sign, expected return or causal transmission is established",
+    "No message files or receipt timestamps downloaded; historical product documentation is not a coverage audit"
+  ]
+}
