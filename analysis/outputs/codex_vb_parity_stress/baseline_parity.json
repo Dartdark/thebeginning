@@ -1,0 +1,48 @@
+{
+  "research_1point": {
+    "py_trades": 1729,
+    "mc_trades": 1743,
+    "matched": 1700,
+    "entry_within_tick": 1.0,
+    "gross_within20": 0.9935294117647059,
+    "gross_corr": 0.9959345192842606,
+    "mean_net_difference": -10.500207887652408,
+    "mc_mean_net": 91.688611589214,
+    "report_sha256": "7169ba79c9f23cb55a8f8324b950c6e956aefdd130ca581fd52d9fdd203f3ccf",
+    "start": "2018-01-25 11:00:00",
+    "end": "2026-10-09 16:00:00",
+    "checks": {
+      "matched_py": true,
+      "matched_mc": false,
+      "entry99": true,
+      "gross95": true,
+      "correlation98": true,
+      "mean_net_tolerance": true
+    },
+    "pass": false,
+    "target_trade_through_points": 1.0
+  },
+  "parity_quarterpoint": {
+    "py_trades": 1741,
+    "mc_trades": 1743,
+    "matched": 1736,
+    "entry_within_tick": 1.0,
+    "gross_within20": 1.0,
+    "gross_corr": 1.0,
+    "mean_net_difference": -3.07416586836392,
+    "mc_mean_net": 91.688611589214,
+    "report_sha256": "7169ba79c9f23cb55a8f8324b950c6e956aefdd130ca581fd52d9fdd203f3ccf",
+    "start": "2018-01-25 11:00:00",
+    "end": "2026-10-09 16:00:00",
+    "checks": {
+      "matched_py": true,
+      "matched_mc": true,
+      "entry99": true,
+      "gross95": true,
+      "correlation98": true,
+      "mean_net_tolerance": true
+    },
+    "pass": true,
+    "target_trade_through_points": 0.25
+  }
+}
