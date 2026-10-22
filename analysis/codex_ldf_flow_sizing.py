@@ -1,6 +1,6 @@
 """Frozen exploratory LDF sizing screen. Run inputs first, then design only.
 
-Plan agents/codex/plans/ldf_flow_sizing.md, amended before outcomes (6ca8950).
+Plan agents/codex/plans/ldf_flow_sizing.md, amended before outcomes for partial 2017 export.
 No 2023+ candidate features, strategy returns, funded simulation or cache creation.
 """
 from __future__ import annotations
@@ -31,6 +31,8 @@ from portfolio import load_mc
 OUT = Path("analysis/outputs/codex_ldf_flow_sizing")
 REPORT = Path("mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx")
 FUND_REF = "c23fc02"
+WARMUP_REF = "35b92cf"
+WARMUP_SHA = "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d"
 END = pd.Timestamp("2022-12-31")
 COEFFICIENTS = {"TQQQ": 6, "SQQQ": 12, "QLD": 2, "QID": 6}
 
@@ -89,17 +91,18 @@ def warmup_frame():
         b = p.read_bytes()
         source = str(p)
     else:
-        source = "origin/claude/nq-trading-strategy-params-5h9d20:data/NQ_1min_2017.csv"
+        source = f"{WARMUP_REF}:data/NQ_1min_2017.csv"
         try:
-            b = git_blob("origin/claude/nq-trading-strategy-params-5h9d20", "data/NQ_1min_2017.csv")
+            b = git_blob(WARMUP_REF, "data/NQ_1min_2017.csv")
         except subprocess.CalledProcessError:
             raise SystemExit("WAITING FOR PROMISED 2017 DAYTIME EXPORT; no inputs or outcomes evaluated")
+    assert sha(b) == WARMUP_SHA, "Warmup file differs from frozen user export"
     x = pd.read_csv(io.BytesIO(b), usecols=["date", "time", "close", "volume"])
     assert not x.duplicated(["date", "time"]).any(), "Duplicate warmup bars; stop before outcomes"
     d = pd.to_datetime(x.date.astype(str), format="%Y%m%d")
     assert (d.dt.year == 2017).all()
     assert x.time.between(800, 1515).all(), "Expected 08:00-15:15 CT daytime export"
-    assert d.min() <= pd.Timestamp("2017-01-04") and d.max() >= pd.Timestamp("2017-12-28")
+    assert d.min() == pd.Timestamp("2017-05-01") and d.max() == pd.Timestamp("2017-12-29")
     return x, dict(source=source, sha256=sha(b), bars=len(x), first=str(d.min().date()), last=str(d.max().date()))
 
 
@@ -211,7 +214,8 @@ def inputs():
     roll.to_csv(OUT / "input_roll_volume_diagnostics.csv")
     frame.to_csv(OUT / "input_cash_features_2017_22.csv")
     entries.to_csv(OUT / "input_entry_features.csv", index=False)
-    manifest = dict(plan_amendment="6ca8950", source_funds=FUND_REF, warmup=warm_manifest,
+    plan_commit = subprocess.check_output(["git", "log", "-1", "--format=%H", "--", "agents/codex/plans/ldf_flow_sizing.md"]).decode().strip()
+    manifest = dict(plan_amendment=plan_commit, source_funds=FUND_REF, warmup=warm_manifest,
                     evaluation_start=str(eligible_start.date()), evaluation_end="2022-12-31",
                     original_design_entries=len(entries), warmup_excluded_entries=int(entries.warmup_excluded.sum()),
                     evaluated_entries=len(evaluated), covered_entries=len(covered), joint_coverage=coverage,

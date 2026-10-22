@@ -4,7 +4,7 @@ Summary: Freeze one 1/2/3 MNQ sizing rule against the current 2 MNQ LDF before i
 Use prior fund assets and lagged NQ liquidity; ranks and controls address momentum and secular growth.
 Run 2018-22 first; any failed gate stops without 2023+ returns or a funded simulation.
 Publication/revision uncertainty is accepted for an exploratory D-1 screen with mandatory D-2 stress.
-Amended before returns per review 075254b: later start if warmup absent, momentum controls, dated snapshots.
+Amended before returns per review 075254b: May-December 2017 warmup, momentum controls, dated snapshots.
 
 Date: 2026-10-22. Branch: `codex/work`. Source audit: Claude `c23fc02`; review: `075254b`.
 Evidence: `agents/codex/evidence/ldf_flow_sizing.md` (TEST, exploratory only).
@@ -55,18 +55,21 @@ arrived before each decision. A historical pass remains WATCH pending review and
 
 ## Pre-return amendment: warmup and momentum (review 075254b)
 
-The 2017 file currently present is **overnight only**. No 2017 daytime volume is assumed. At registration,
-neither local HEAD nor review 075254b contains `data/NQ_1min_2017.csv`. The user subsequently confirmed
-**the export is coming shortly**, before any outcome was opened. This supersedes the interim later-start
-selection: wait for that export and preserve the 2018-22 design. Use the new raw file for feature warmup
-without rebuilding the strategy cache; record its hash and verify format/coverage before outcomes.
-Do not run a later-start test first, splice the export after outcomes, or run both as alternatives.
+The user supplied the daytime export in commit **35b92cf**, now verified before outcomes:
+`data/NQ_1min_2017.csv`, **2017-05-01 through 2017-12-29**, 74,717 bars, 08:00-15:15 CT, no duplicate keys.
+SHA256: `b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d`.
+This supersedes the waiting state and the assumption of a full January-December 2017 file. Use the pinned
+raw blob for warmup without rebuilding any strategy cache or changing the shared data directory.
+No earlier outcome experiment was run. Do not run alternative starts or splice in more data after outcomes.
 
 Construct market inputs over 2018-22 only (plus earlier available observations), without LDF outcomes.
 The evaluation begins at the **first 2018-or-later US cash session with primary and lag-stress scores AND finite
 trailing-63/252-session NQ returns**, and ends 2022-12-31. Count all earlier original 2018-22 LDF entries as
 warmup exclusions, never as losses or unavailable-score fallback trades in the selected later window.
-Do not evaluate their P&L. The 252-session control needs a full daytime year; with the export, expect early January 2018.
+Do not evaluate their P&L. The 252-session control needs a full daytime year; with the partial export, expect
+the first joint-input date around May 2018. This is the one registered input-driven start, still within the
+2018-22 design period. Report the full 492-entry original population, excluded early-2018 count and revised
+evaluation population separately. Score coverage's denominator is that explicitly shortened population.
 Record the exact resulting start and support before opening any LDF return.
 
 Use the installed `exchange_calendars` XNYS schedule for sessions, mourning days and official half-day closes.
@@ -150,14 +153,13 @@ Execute only the 2018-01-01 through 2022-12-31 screen, after the evidence gate p
    its lower bound must be >0. Resampling interval uses 5,000 replicates, seed 2026102201.
 4. Confound-adjusted high-minus-low contrast >0 with robust t>=2: OLS of per-NQ trade net on intercept,
    high/low indicators (middle reference), absolute RTH percentage move, absolute move/lagged ATR,
-lagged ATR/entry reference price, **trailing 63- and 252-session NQ returns**, side and calendar-year fixed
-effects. Test high coefficient minus low.
+   lagged ATR/entry reference price, **trailing 63- and 252-session NQ returns**, side and calendar-year fixed
+   effects. Test high coefficient minus low.
    Newey-West 5 entry-observation lags; also show unadjusted group counts/SD/means and condition diagnostics.
    Singular/rank-deficient design or absent within-year contrast means no demonstrated incremental information.
 5. Match randomized size assignments within **year x side x move/ATR tercile x trailing-63-return tercile**;
-   each tercile dimension uses that design year's eligible signal values independently, without outcomes.
-   Tercile boundaries use only
-   that design year's signal values, never outcomes, for this placebo only. Preserve each cell's exact counts
+   each tercile dimension uses that design year's eligible signal values independently, without outcomes,
+   for this placebo only. Preserve each cell's exact counts
    of 1/2/3 quantities; keep unavailable-score fallback fixed. Use 2,000 permutations, seed 2026102202.
    Require one-sided plus-one p<=.05 on total paired incremental net AND no worse design max DD than
    the median shuffled sizing. Report cell sizes and the full null distribution. Do not silently pool sparse cells.
