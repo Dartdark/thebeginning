@@ -1,0 +1,46 @@
+{
+  "baseline": {
+    "VB_N": 2,
+    "VB_F": 1,
+    "ONB_ML2_MC_risk": 400,
+    "MON_MC": 1,
+    "EOS_risk": 700,
+    "LDF_MC": 2,
+    "NFP_MC_risk": 500,
+    "MON_BR_MC": 1,
+    "CLS_MCL": 2,
+    "MOC_MES": 2,
+    "RS_L_MNQ": 1,
+    "cushion_ref": 1500
+  },
+  "es_moc_active": true,
+  "batches": {
+    "core": [
+      "Vault Break",
+      "Overnight Bias ML v2",
+      "Late-Day Flow",
+      "Relative Strength longs"
+    ],
+    "calendar": [
+      "Monday Long",
+      "Expiration Open Short",
+      "NFP Fade",
+      "Bridge Monday Long"
+    ],
+    "other": [
+      "CL Sunday Gap Fade",
+      "ES MOC Follow"
+    ]
+  },
+  "trials": {
+    "core": 5,
+    "calendar": 5,
+    "other": 3
+  },
+  "seeds": {
+    "full": 20261023,
+    "design": 20261024,
+    "holdout": 20261025
+  },
+  "design_eligible": []
+}
