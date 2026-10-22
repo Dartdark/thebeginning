@@ -220,6 +220,7 @@ def inputs():
                     missing_market_close_sessions=[str(d.date()) for d in frame.index[frame.cash_close.isna()]],
                     implied_t2_gap_assuming_sd810=float(2*810*np.sqrt(1/n_hi+1/n_lo)) if min(n_hi, n_lo)>0 else None,
                     fund_snapshot_archive=archive, report_sha256=sha(REPORT.read_bytes()),
+                    script_sha256=sha(Path(__file__).read_bytes()),
                     cache_sha256=sha(Path("scratch_data/g24.pkl").read_bytes()),
                     market_features_max_date=str(frame.index.max().date()),
                     candidate_strategy_returns_computed=False, return_trials=0,
@@ -306,6 +307,7 @@ def design():
     manifest = json.loads(checkpoint_path.read_text())
     assert not manifest["candidate_strategy_returns_computed"]
     assert manifest["report_sha256"] == sha(REPORT.read_bytes())
+    assert manifest["script_sha256"] == sha(Path(__file__).read_bytes()), "Screen code changed after input checkpoint"
     if not manifest["support_gate_passed"]:
         write_json(OUT/"design_decision.json", dict(verdict="WATCH", reason="Registered input support gate failed; no outcome test",
                    return_trials=0, candidate_configurations_evaluated=[], replication_opened=False, funded_simulations=0))
