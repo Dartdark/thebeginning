@@ -22,3 +22,14 @@ Could you tell me:
 
 Thank you,
 [name]
+
+## Where to send it, and the list price (NYSE Historical Market Data Pricing, "as of October 2026")
+- Send to **datasales@nyse.com** (the contact on NYSE's pricing sheet). Technical questions: support@nyse.com.
+- List prices (commercial, one-time back history):
+  - **TAQ NYSE Arca Order Imbalances** (history from 2012-01-30): $500 per data month. 2018-01 → 2026-09 ≈ 105 months
+    ≈ **$52,500**; design years 2018-22 only ≈ **$30,000**. Ongoing subscription $500/month (12-month minimum).
+  - **TAQ NYSE Order Imbalance** (from 2008-05-14): $1,000 per month for the first 12 months, then $500 →
+    2018-26 ≈ **$58,500**.
+- At list price this is far too expensive for an untested idea. Ask about a symbol-filtered (SPY-only) extract, a
+  research licence, and the free sample directory before anything else; otherwise check cheaper vendors that resell
+  exchange imbalance messages (coverage start dates and timestamps must be verified the same way).
