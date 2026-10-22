@@ -53,6 +53,14 @@ committed in the repo that reproduces it.
 
 ## How every idea is tested
 
+0. **Evidence sheet first.** Use [`templates/evidence_sheet.md`](templates/evidence_sheet.md) before a new strategy
+   preregistration. It preserves the seven evidence questions in Claude's reviewed step 0 and adds the user's
+   2026-10-22 failure/diversification questions: liquidity role, common losses, executable risk and whether any
+   offset can arrive before an account breach. Only TEST sheets advance; NEEDS DATA / DON'T TEST stop here.
+   Use the cheap gross-edge-versus-cost screen before any full funded bench. Test all eligible events; assess
+   overlap later at account level. Previously seen 2023+ history is historical replication, not a fresh holdout;
+   a passing candidate still needs independent review and a frozen forward log before a trading decision.
+
 1. **Plan first.** Commit `agents/codex/plans/<name>.md` BEFORE running anything. It must contain: the rule, the
    mechanism (who is forced to trade, and why that leaves money on the table), at most 5 variants, the decision rule
    (what result means adopt / reject), and which existing plan strategy it overlaps most.

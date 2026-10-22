@@ -11,6 +11,11 @@ Plan: `agents/codex/plans/nasdaq_closing_faq_evidence.md`, **499f12f**, clarifie
 Script: `analysis/codex_nasdaq_close_faq_inventory.py`.
 Output: `analysis/outputs/codex_nasdaq_close_faq/`. Catalogue snapshot: Claude **b2c8d74**. Return trials **0**.
 
+2026-10-22 supplement: failure/diversification review and public sample feasibility under
+`agents/codex/plans/chan_research_framework.md`, **daf9acf**. See
+[`results/chan_research_framework.md`](../results/chan_research_framework.md) for the source links and sample limits.
+The illustrative rule and all previously reported numerical inventory results below are unchanged.
+
 ## Source documents and the important historical distinction
 
 Both uploaded PDFs were read in full and preserved unchanged, with text extractions and SHA256 hashes:
@@ -126,6 +131,13 @@ data-gate work. The current NOII real-time feed must not be confused with a free
 **No purchases or vendor contacts were made.** With the standing free/owned-data budget, this stays blocked unless
 a suitable existing entitlement or genuinely free permitted archive/sample can be established.
 
+**Sample-feasibility update, 2026-10-22:** Nasdaq's public [NOII sample directory][noii-sample] lists
+`S050922-v50-NOII.txt.gz`, apparently for 2022-05-09. The listing is accessible without an account; file contents,
+QQQ closing-message coverage, encoding and receipt timestamps have **not** been verified. This is a route to a
+format check, not an established free historical panel. Databento also documents QQQ in `XNAS.ITCH` with schema
+`imbalance`; account credits and an advertised dataset start do not establish complete QQQ history or our 2017
+warm-up. The linked supplement report records the exact fields and no-return sample audit required next.
+
 ## 5. Can it beat costs in an actual gap?
 
 Baseline full-NQ round trip: **$17.25 = 0.8625 point**, using repository commission plus one tick per market fill.
@@ -191,6 +203,27 @@ entry, apparent revisions are reference-price artifacts, actual liquidity absorp
 effect exists only in QQQ's premium rather than NQ, or it vanishes after price/basis controls. Failure after the
 registered latency/cost/power hurdle is a stop, not permission to test the opposite direction or new clocks.
 
+## 8. Failure and diversification — predictions before returns
+
+| Question | This candidate's prediction / failure | Evidence needed later |
+|---|---|---|
+| What stops the mechanism? | IO/continuous-book liquidity absorbs the imbalance; providers hedge before our entry; reference-price changes mimic demand; hedging occurs elsewhere | Message/quote alignment, imbalance revisions and controls for preceding price/basis moves; then the registered net-cost design test |
+| What liquidity do our orders supply or consume? | Illustrative next-minute market entries/exits consume liquidity, even though the story concerns other participants providing auction liquidity | Executable NQ quotes/spreads and measured or documented delays; no passive-fill assumption or maker rebate |
+| How can losses cluster? | Buy pressure is absorbed just before entry, the move reverses, a news shock dominates, or spreads/data delays worsen around the close | Predeclared delay/slippage stress, missing-data rules and protected execution at actual micro size, all frozen in the later strategy plan |
+| Which plan strategy might lose with it? | ES MOC Follow is the closest concurrent closing-flow exposure; same-direction equity repricing could hurt both. Monday holdings can also overlap. These are predictions, not measured correlations | Candidate-event overlap and conditional joint losses after the edge passes, using the existing funded roster and an empty-slot control |
+| Can it protect before a breach? | No protection established. A 14:59 CT entry cannot rescue an account already stopped or breached earlier that day; an annual offset is insufficient | Chronological account replay under actual EOD trail/daily-limit rules, real entry eligibility and same-symbol netting |
+
+The one-minute illustrative time exit is not a complete risk specification. Before a return test, freeze stop or
+other maximum-loss handling, concurrent exposure and stale-feed handling; a time exit or stop cannot guarantee a
+fill. Do not increase size because a short sample appears smooth. No risk sizing or protective behavior is inferred
+from Chan's fund example, and this same-direction candidate is not labelled a tail hedge.
+
+**Post-close reversal remains separate.** Temporary pressure could reverse after an auction, but the previously
+proposed SPY/ES post-auction reversal is already in this research family. No QQQ reversal rule, clock or variant was
+added here. A failure of persistence must not be reused to select a reversal on the same outcomes.
+
+## 9. Decision and next gate
+
 **NEEDS DATA.** The documents are useful mechanism evidence and support filling this sheet. They do not supply a
 tradable historical signal, a profitable edge or a free licensed dataset. The cheapest next step is to check any
 already-owned Nasdaq NOII entitlement and a small permitted QQQ sample **without NQ returns**, auditing coverage,
@@ -207,3 +240,4 @@ Research trials, candidate backtests, portfolio changes, live changes and purcha
 [history]: https://www.nasdaqtrader.com/TraderNews.aspx?id=dtn2009-059
 [ntv]: https://data.nasdaq.com/databases/NTV
 [qqq]: https://www.invesco.com/qqq-etf/en/home.html
+[noii-sample]: https://emi.nasdaq.com/ITCH/Nasdaq%20ITCH/NOII/
