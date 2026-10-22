@@ -135,6 +135,10 @@ Do it after 15:59 CT or on a weekend, with every account flat. Each line is an e
 - Several signals on one chart form ONE strategy sharing one position: an exit-only signal (e.g. `Apex_Target_Guard`)
   added next to a strategy closes that strategy's position. It cannot see or close positions on other charts.
 - Report Settings sheet to check: name, inputs, Compression, Bar Magnifier, commission / slippage 0, fill limit +1 point.
+- **"Fill limit price exceeded by 1 points" means 1 TICK on NQ, not 1 index point** (found 2026-10-22 from Codex's VB
+  parity check): of 896 VB target fills in the MC report, none was a touch-only fill, but 43 had only 0.25-0.75 point
+  through. MultiCharts' "point" is the symbol's smallest price unit. Our Python tests require 1 full point through, so
+  Python is slightly stricter than MC (conservative); to reproduce an MC report trade-for-trade, use 1 tick through.
 - Data: Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close conversion unchecked.
 - Auto trading: Format Signals > Properties > Auto Trading (broker, account), mode AA, initial position Flat, no automatic
   position sync, intra-bar order generation off. Tracker: Ctrl+Shift+O.

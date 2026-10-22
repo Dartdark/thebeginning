@@ -62,3 +62,10 @@ the rank's correlation with them first; (3) data gate: D-1 assets + the two-sess
 exploratory design screen; start archiving dated fund snapshots. Commit the amendment, then run the 2018-22 screen
 once NQ_1min_2017.csv is in data/.
 ```
+
+## Update 2026-10-22 (evening): break test, execution diagnostics, two gold screens
+- ONB ADX30 break test: BENDS on noise / indicators / timing / execution; joint jitter MIXED (session-clock shifts). No change.
+- VB: parity 97.5% < 98%: MC fills targets with 1 tick through, Python needs 1 point. Codex to rerun with a parity-only
+  1-tick setting under the original gate, then the frozen VB stress families.
+- Execution diagnostics accepted (observation only); bid/ask logger stays a proposal (test chart first).
+- RSI/Bollinger (GC, NQ) and XAU ST Break Free (GC): both F. Review: `REVIEW_break_vb_onb_and_rest.md`.

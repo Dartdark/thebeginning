@@ -56,6 +56,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **Codex break test (2026-10-22, `agents/codex/results/REVIEW_break_vb_onb_and_rest.md`):** ONB ADX30 bends under noise /
+  indicators / timing / execution (no change); VB parity 97.5% because MultiCharts fills targets with 1 tick through (Python
+  needs 1 point, stricter); VB stress rerun pending. Codex's RSI/Bollinger and XAU gold screens: F.
 - **Stack stress test (2026-10-22, `analysis/stack_stress_test.py`, after Kevin Davey's Feb-2018 story):** the funded plan's NQ
   lines at full 50K size, 2018-26: worst day −$1,275 (2025-11-17), no day below −$1,500; Feb 2018 −$638, Mar 2020 −$562,
   Apr 2025 −$968. Worst 5-day stretch −$3,333 (to 2026-10-02): multi-day runs, not single days, threaten the $2,000 trail
