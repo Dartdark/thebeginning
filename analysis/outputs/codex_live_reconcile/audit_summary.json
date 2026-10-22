@@ -1,0 +1,63 @@
+{
+  "source_commit": "e097c0f",
+  "return_trials": 0,
+  "live_changes": false,
+  "source_files": [
+    {
+      "path": "live/trades/20261020.csv",
+      "rows": 70,
+      "exact_duplicates": 0,
+      "POS": 68,
+      "CLOSE": 2
+    },
+    {
+      "path": "live/trades/20261021.csv",
+      "rows": 343,
+      "exact_duplicates": 65,
+      "POS": 313,
+      "OPEN": 26,
+      "CLOSE": 4
+    }
+  ],
+  "unique_chart_closed_trades": 6,
+  "raw_open_rows": 26,
+  "logical_open_keys": 4,
+  "raw_mismatch_rows": 14,
+  "mismatch_bar_groups": 4,
+  "unresolved_terminal_bar_groups": 0,
+  "account_day_actuals": [
+    {
+      "day": "2026-10-21",
+      "account_label": "1",
+      "chart_gross": -560.0,
+      "user_reported_actual_net": -575,
+      "actual_minus_chart": -15.0,
+      "residual_explanation": "unallocated fees/fill differences; broker export required"
+    },
+    {
+      "day": "2026-10-21",
+      "account_label": "2",
+      "chart_gross": -552.0,
+      "user_reported_actual_net": -575,
+      "actual_minus_chart": -23.0,
+      "residual_explanation": "unallocated fees/fill differences; broker export required"
+    }
+  ],
+  "slippage_measurable": false,
+  "edge_ratio_measurable": false,
+  "notes": [
+    "Tags are account labels, not broker IDs",
+    "No complete independent same-day backtest/broker export",
+    "10/20 user-confirmed no-fill takes precedence",
+    "10/21 user confirms -575 each; per-fill prices/fees unknown"
+  ],
+  "source_sha256": {
+    "live/trades/20261020.csv": "841dc4e65e6fb33c7b7be95b42e07a7c36bbe515094ecba552ab29afce75e39a",
+    "live/trades/20261021.csv": "131dbfacc630d9714565bfa40362fcbe3b2ff3f52e9a48f3340e0d5c9f8b45f3",
+    "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx": "7169ba79c9f23cb55a8f8324b950c6e956aefdd130ca581fd52d9fdd203f3ccf",
+    "mc_reports/Backtesting Strategy Performance Report ONB v2.xlsx": "bceebb5e7162d888e1581ee18057f1ab20f24efbf0b0a0be74fbc2ae08e32336",
+    "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx": "2a1c7dd88a261ad0b0df67f310e3c0c33b17d3faf85f7a94c53e9d910f63bc8f",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx": "1c5bd433c0af727659262bcf3f65c61e87b2f53bf542572332ff8e5225b5f436",
+    "live/health/20261021.csv": "7dba7dd2b9681ed5a57ce1dd5f8992fb3ac734e54687c05d44ed6326749608dc"
+  }
+}
