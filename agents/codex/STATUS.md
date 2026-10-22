@@ -69,3 +69,8 @@ once NQ_1min_2017.csv is in data/.
   1-tick setting under the original gate, then the frozen VB stress families.
 - Execution diagnostics accepted (observation only); bid/ask logger stays a proposal (test chart first).
 - RSI/Bollinger (GC, NQ) and XAU ST Break Free (GC): both F. Review: `REVIEW_break_vb_onb_and_rest.md`.
+
+## Update 2026-10-22 (late): VB parity + stress accepted; ES Keltner guess F
+- VB: MC parity 99.6% with the 1-tick target rule; stress same as ONB (BENDS, jitter MIXED). No change.
+- ES Keltner tested with guessed settings (should have stopped at NEEDS DATA): F for the guess only.
+- New brief rule: missing source parameters → evidence sheet with NEEDS DATA, no guessed test.
