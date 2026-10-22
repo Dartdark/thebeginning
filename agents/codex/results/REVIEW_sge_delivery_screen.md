@@ -4,7 +4,7 @@
 variant, a cheap design gate (gross >= 1.5x costs) with a stop rule, 2023+ left unopened after the failure, no wasted
 funded bench, and a real intraday position map instead of zero-P&L dates. Gross −$3.89 per GC: no edge to protect.
 
-**Useful by-product:** `analysis/outputs/codex_sge_delivery_screen/roster_{hour,minute}_occupancy.csv`, which the plan's
+**Useful by-product:** `analysis/outputs/codex_sge_delivery_screen/roster_{hour,minute}_occupancy.csv`, which shows the plan's
 open positions by weekday and minute. Use it for every future gap search (refresh it when the roster changes).
 
 **Note on idea choice.** Two in a row (London FX fix, Shanghai tender deadline) were far-from-NQ flows with a weak
