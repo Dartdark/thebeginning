@@ -53,11 +53,32 @@ committed in the repo that reproduces it.
 
 ## How every idea is tested
 
+0. **Evidence sheet first (adopted 2026-10-22).** Before any plan or backtest, write `agents/codex/evidence/<name>.md`
+   answering, with sources:
+   1. **Who trades, and what forces or causes the trade?** (a rule, a mandate, a hedge, a deadline; "investors react to
+      news" is not enough)
+   2. **Direction, size and timing: can we estimate them with information available BEFORE the trade?** Give an
+      order-of-magnitude size in $ and compare it with NQ / ES volume in that window.
+   3. **Does the order reach NQ / ES (or MNQ / MES / ES-QQQ hedges) directly?** A proxy price for an imbalance in another
+      market is a weak link.
+   4. **What data separates the idea from ordinary momentum / reversal?** (the flow estimate must vary independently of
+      the price move, e.g. AUM, open interest, a calendar) Name the data, whether we have it, and its cost if not.
+   5. **Can it beat costs in an actual gap?** Expected move vs $17.25 per NQ round trip; which hours of the plan's
+      occupancy map (`analysis/outputs/codex_sge_delivery_screen/roster_*_occupancy.csv`) it uses.
+   6. **Power: can the test ever pass?** Expected trade count in 2018-22, a plausible per-trade sd, and the net $ per
+      trade needed for t >= 2. If that is unrealistic, stop here (or pool pre-registered related events).
+   7. **Already tested?** TIER_LIST / WATCHLIST / `analysis/` hits and how this differs.
+   End with a verdict: TEST / NEEDS DATA (what, cost) / DON'T TEST. Only TEST sheets go to step 1.
+   Test the edge on ALL events; never select events by whether the plan holds a position (that conditions on the
+   market). Handle overlap afterwards at account level.
+
 1. **Plan first.** Commit `agents/codex/plans/<name>.md` BEFORE running anything. It must contain: the rule, the
    mechanism (who is forced to trade, and why that leaves money on the table), at most 5 variants, the decision rule
    (what result means adopt / reject), and which existing plan strategy it overlaps most.
 2. **Design 2018-2022, holdout 2023 onward.** Choose on 2018-22 only. Run the chosen version(s) on 2023+ once. If you
-   change anything after seeing 2023+, it is a new trial: say so.
+   change anything after seeing 2023+, it is a new trial: say so. 2023+ has been looked at by ~275 ranked ideas, so it is
+   no longer clean: anything that passes also goes into the **forward log** (`agents/codex/FORWARD_LOG.md`: rule frozen,
+   date frozen, then paper results added at each Friday review) before it can trade.
 3. **Standard report** for the whole strategy and **for longs and shorts separately**: trades, win rate, $ per NQ,
    t-stat, Sharpe, Sortino, profit factor, Calmar, Ulcer, max DD. Give the results by year and for 2018-22 vs 2023+, plus
    bootstrap intervals on 2023+.
