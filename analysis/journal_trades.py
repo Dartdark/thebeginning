@@ -37,7 +37,8 @@ def block(day, df):
     d = day.strftime("%Y%m%d")
     closed = df[(df.event == "CLOSE") & (df.bar_date == d)].copy()
     opens = df[(df.event == "OPEN") & (df.bar_date == d)]
-    lines = [START, "## Trades (auto, from the VPS trade log; gross, before commissions)", ""]
+    lines = [START, "## Trades (auto, from the VPS trade log; gross, before commissions)", "",
+             "_The log records MultiCharts' chart trades, not broker fills: confirm on the Apex dashboard (10/20 was logged but never filled)._", ""]
     if closed.empty and opens.empty:
         lines += ["No trades logged today. (If a strategy should have traded, check its chart, auto-trading and the VPS.)"]
     else:
