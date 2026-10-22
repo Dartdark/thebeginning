@@ -4,9 +4,9 @@ Summary: Free issuer NAV/assets history exists; historical publication and revis
 This is an upgrade to existing LDF exposure, not a new gap-filling strategy or an observed residual-order signal.
 The proposed score isolates asset-weighted pressure per fixed benchmark move, using lagged liquidity only.
 Power is borderline; the committed inventory uses entry dates and an assumed SD, never candidate returns.
-Verdict: NEEDS DATA — historical availability/revision evidence; the requested protocol is conditional, not permission to test.
+Verdict: TEST — exploratory design only, per accepted review 075254b and the user's amendment instruction.
 
-Date: 2026-10-22. Branch: `codex/work`. Return trials: **0**.
+Date: 2026-10-22. Branch: `codex/work`. Return trials before amendment: **0**.
 
 ## 1. Who trades and why
 
@@ -85,7 +85,8 @@ Relevant files: `analysis/letf_rebalance_test.py`, `analysis/ldf_meta_label_test
 `analysis/ou_ldf_bench.py`, `analysis/ldf_gamma_sizing_check.py`, TIER_LIST and WATCHLIST.
 No asset-weighted, lagged-liquidity-normalized LDF sizing counterpart found in those sources.
 
-**NEEDS DATA (historical availability/revision evidence, cost unknown).** The user requested a pre-registration
-now, so `agents/codex/plans/ldf_flow_sizing.md` freezes a conditional protocol. This does not advance the
-builder brief's evidence gate to TEST. Strict validation waits for that gate; a snapshot-assumption study must
-be labeled exploratory/WATCH and cannot be promoted by historical results. No returns are authorized in this task.
+**TEST, exploratory only**, per review `075254b` adopted by the user before returns. D-1 fund assets and
+the mandatory D-2 stress are sufficient for this limited screen despite unresolved historical publication and
+revision evidence. The amended plan adds 63/252-session momentum controls and 63-session placebo strata,
+and openly selects a later start because 2017 daytime warmup is absent. Archive dated fund snapshots now.
+A passing historical snapshot screen remains WATCH, not validated trading evidence. No new edge is asserted.

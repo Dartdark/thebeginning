@@ -1,14 +1,14 @@
-# Late-Day Flow asset-weighted sizing — conditional preregistration
+# Late-Day Flow asset-weighted sizing — exploratory preregistration
 
 Summary: Freeze one 1/2/3 MNQ sizing rule against the current 2 MNQ LDF before inspecting flow-conditioned returns.
 Use prior fund assets and lagged NQ liquidity; ranks and controls address momentum and secular growth.
 Run 2018-22 first; any failed gate stops without 2023+ returns or a funded simulation.
-Publication/revision evidence remains open; today's historical snapshot is not proven point-in-time data.
-Current task ends at this protocol and a return-free inventory; no return test, purchase or live change.
+Publication/revision uncertainty is accepted for an exploratory D-1 screen with mandatory D-2 stress.
+Amended before returns per review 075254b: later start if warmup absent, momentum controls, dated snapshots.
 
-Date: 2026-10-22. Branch: `codex/work`. Source audit: Claude `c23fc02`; research rules read through `a5f0e58`.
-Evidence: `agents/codex/evidence/ldf_flow_sizing.md` (NEEDS DATA).
-The conditional protocol is written at the user's request while that evidence gate remains closed.
+Date: 2026-10-22. Branch: `codex/work`. Source audit: Claude `c23fc02`; review: `075254b`.
+Evidence: `agents/codex/evidence/ldf_flow_sizing.md` (TEST, exploratory only).
+The user's 2026-10-22 instruction adopts the review's three changes and authorizes the design screen.
 
 ## Question, mechanism and scope
 
@@ -45,12 +45,42 @@ Verify units, splits, duplicates, positive assets, NAV*shares identity, calendar
 Reconcile missing fund rows with the historical US cash calendar; closed-market days are not data failures.
 Do not assert unusual share changes are capital flows without checking corporate actions.
 
-For validation, document why the selected prior-NAV row was available before day-D entry in 2018-22,
-and the issuer's revision policy / available vintages. Record source and remaining uncertainty; dates alone
-are insufficient. Without adequate evidence, status stays NEEDS DATA. A future explicitly labeled historical
-snapshot study can only produce exploratory WATCH evidence, even if every numeric gate passes.
-A two-NAV-session lag stress is mandatory and does not solve revisions or prove historical availability.
-During forward observation, archive each original file with actual retrieval timestamps and hash before use.
+Per accepted review 075254b, D-1 assets plus mandatory two-NAV-session lag stress suffice to run an
+**exploratory design screen**. Historical publication times/revisions remain unverified; do not label the
+snapshot proven point-in-time or the result validated for trading. Two-session lag does not solve revisions.
+Begin archiving dated raw fund snapshots now, with UTC storage/retrieval time, source URL and SHA256.
+Distinguish a fresh issuer download from a copy of Claude's supplied git snapshot; a stored git copy cannot
+masquerade as our observation of the issuer's publication time. Forward records must identify what actually
+arrived before each decision. A historical pass remains WATCH pending review and prospective evidence.
+
+## Pre-return amendment: warmup and momentum (review 075254b)
+
+The 2017 file currently present is **overnight only**. No 2017 daytime volume is assumed. At registration,
+neither local HEAD nor review 075254b contains `data/NQ_1min_2017.csv`. The user may export it separately;
+this run selects the allowed **later-start alternative** so its absence does not force a coverage rejection.
+Do not splice in a later-arriving export after outcomes are opened or silently rerun the full 2018 design.
+
+Construct market inputs over 2018-22 only (plus earlier available observations), without LDF outcomes.
+The evaluation begins at the **first US cash session with primary and lag-stress scores AND finite
+trailing-63/252-session NQ returns**, and ends 2022-12-31. Count all earlier original 2018-22 LDF entries as
+warmup exclusions, never as losses or unavailable-score fallback trades in the selected later window.
+Do not evaluate their P&L. The 252-session control needs a full daytime year; expect the start in 2019.
+Record the exact resulting start and support before opening any LDF return.
+
+Use the installed `exchange_calendars` XNYS schedule for sessions, mourning days and official half-day closes.
+Momentum controls are known at day-D decision: `C_s/C_(s-63)-1` and `C_s/C_(s-252)-1`, where s is D's previous
+cash session and C is NQ's minute close at that session's official US cash close (15:00 CT, 12:00 on half days).
+Require all 64/253 close observations respectively; no fill of missing closes. These continuous-contract price
+ratios are trend proxies, not roll-adjusted investable returns; identify this limitation and flag roll-window volume.
+Before outcomes, report Pearson/Spearman correlations of the rolling H percentile rank with both controls,
+group-year counts, control means by low/middle/high, score coverage and roll-Thursday/Friday volume diagnostics.
+Save that return-free checkpoint separately before evaluating strategy P&L.
+
+The later window replaces gate 1's five-design-year representation requirement with representation in **every
+calendar year in the registered evaluation window**. Retain >=90% score coverage and >=100 entries in each
+extreme group. Gates 2/3 retain >=3 positive years, now out of the years actually evaluated. No lowered numerical
+significance, return, cost or placebo hurdle. List the reduced sample and updated power estimate openly.
+No parameter or start date is selected from LDF outcomes; a failed support gate stops without outcomes.
 
 ## One primary score, fixed before any outcome inspection
 
@@ -115,10 +145,13 @@ Execute only the 2018-01-01 through 2022-12-31 screen, after the evidence gate p
    its lower bound must be >0. Resampling interval uses 5,000 replicates, seed 2026102201.
 4. Confound-adjusted high-minus-low contrast >0 with robust t>=2: OLS of per-NQ trade net on intercept,
    high/low indicators (middle reference), absolute RTH percentage move, absolute move/lagged ATR,
-   lagged ATR/entry reference price, side and calendar-year fixed effects. Test high coefficient minus low.
+lagged ATR/entry reference price, **trailing 63- and 252-session NQ returns**, side and calendar-year fixed
+effects. Test high coefficient minus low.
    Newey-West 5 entry-observation lags; also show unadjusted group counts/SD/means and condition diagnostics.
    Singular/rank-deficient design or absent within-year contrast means no demonstrated incremental information.
-5. Match randomized size assignments within **year x side x move/ATR tercile**; tercile boundaries use only
+5. Match randomized size assignments within **year x side x move/ATR tercile x trailing-63-return tercile**;
+   each tercile dimension uses that design year's eligible signal values independently, without outcomes.
+   Tercile boundaries use only
    that design year's signal values, never outcomes, for this placebo only. Preserve each cell's exact counts
    of 1/2/3 quantities; keep unavailable-score fallback fixed. Use 2,000 permutations, seed 2026102202.
    Require one-sided plus-one p<=.05 on total paired incremental net AND no worse design max DD than
@@ -180,4 +213,5 @@ forward paper observation. Create `agents/codex/FORWARD_LOG.md` only after a pas
 freeze date and timestamped issuer snapshots; append at Friday reviews. Minimum forward review point:
 40 qualifying LDF entries AND six calendar months, with positive incremental net, high/low spread >0,
 no adverse drift alarm and acceptable account risk. That review is not automatic authorization to trade.
-No MultiCharts/live edits, purchases, external messages or new strategy research are included in this task.
+This amendment authorizes the exploratory design screen and snapshot archive, not live changes, purchases,
+external messages, an optional mechanism study or parameter rescue. Follow the existing hard stop on failure.
