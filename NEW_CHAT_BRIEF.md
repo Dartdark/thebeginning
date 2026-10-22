@@ -56,6 +56,12 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **Stack stress test (2026-10-22, `analysis/stack_stress_test.py`, after Kevin Davey's Feb-2018 story):** the funded plan's NQ
+  lines at full 50K size, 2018-26: worst day −$1,275 (2025-11-17), no day below −$1,500; Feb 2018 −$638, Mar 2020 −$562,
+  Apr 2025 −$968. Worst 5-day stretch −$3,333 (to 2026-10-02): multi-day runs, not single days, threaten the $2,000 trail
+  (cushion sizing + the bench's 6.7% blow-ups already cover them). Theoretical 'every line's worst day at once': Mon −$4,088,
+  Fri −$3,737, Tue/Wed −$2,528 (never happened). The worst days cluster in 2025-26 (bigger $ moves). No change (overlap
+  cap tested worse); recheck if a single real day goes below −$1,500.
 - **Account #01 near its trailing limit (2026-10-22): user keeps it at plan size.** Balance $49,899.44 vs failure line
   ≈ $49,500.92 (≈ $398 room after 10/16 +$1,500.92, 10/19 −$1,025.66, 10/21 −$575.82); #02 $49,424.18 (≈ $1,424 room).
   Cushion sizing on the combine was tested and doesn't help (`combine_levers_test`). 10/20 no-fill = orders sent as
