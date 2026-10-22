@@ -127,6 +127,12 @@ after 15:59 CT, never with a position open.
   [agents/claude_evidence/NYSE_QUOTE_EMAIL.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/agents/claude_evidence/NYSE_QUOTE_EMAIL.md)
   (copy Subject → Thank you, add your name). List price ~$52k (SPY/Arca) + ~$58k (NYSE) for 2018-26: buy only if a
   SPY-only extract costs a few hundred dollars or the free sample shows a strong signal. Forward their reply to Claude.
+- [ ] **Weekly (Fridays, with the reports): export the order history and fresh 1-minute data** for the execution diagnostics:
+  (1) VPS MultiCharts, Ctrl+Shift+O → Orders tab → right-click → Export (CSV) → save as `live\orders\YYYYMMDD_orders.csv`
+  (or screenshots if there's no export); (2) home PC: NQ Bar Exporter on the 1-minute @NQ chart (as for 2017; Folder
+  `C:\NQdata\`, StartTime 800 / EndTime 1515, and FilePrefix `NQ_1min_ON_` with 1516 / 759 for the overnight file),
+  copy this year's files into `C:\TradingVault\data\`, then `git add data/NQ_1min_2026.csv data/NQ_1min_ON_2026.csv live` ·
+  commit · push (sync.ps1 only adds journal/ and live/).
 - [ ] **Send Codex the review message** for the LDF flow-sizing plan (in `agents/codex/STATUS.md`, 'Next message for Codex').
 
 ## Later
