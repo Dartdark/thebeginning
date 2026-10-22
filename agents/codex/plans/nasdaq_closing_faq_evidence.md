@@ -9,9 +9,10 @@ over the final regular cash minute**. This is a new input proposal within the ex
 claim to have discovered closing-auction trading. Compare explicitly with funded ES MOC, old futures-price MOC tests,
 old NQ order-flow filtering, and the earlier SPY post-close reversal proposal. Do not test the mirror or additional clocks.
 
-An illustrative future specification uses only QQQ NOII messages received by 15:55 and 15:58 ET, consistent direction,
-and an unusually large 15:58 imbalance normalized by a lagged auction-volume scale. Decision at 14:58 CT, earliest
-candidate entry 14:59 CT, exit 15:00 CT. This leaves at least one minute for receipt/execution. No fitted thresholds,
+An illustrative future specification uses only QQQ NOII messages received by 15:55:10 and 15:58:10 ET, consistent direction,
+and an unusually large unmatched-share fraction ranked against previous sessions. Decision at 14:58:10 CT, earliest
+candidate entry 14:59 CT, exit 15:00 CT. This leaves 50 seconds for receipt/execution. The ten-second snapshot buffer
+avoids assuming the first 15:55 message is received at its publication instant. No fitted thresholds,
 signals, returns, stop/target simulation, portfolio/account tests or strategy cache work in this task.
 
 Read both PDFs fully; cross-check current rules and 2018/2019 effective dates. Explicitly distinguish early abbreviated
