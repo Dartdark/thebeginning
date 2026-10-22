@@ -20,7 +20,11 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   `live/trades/YYYYMMDD.csv`); `analysis/journal_trades.py` writes them into the note (weekday task 16:40 CT). The user also pushes now: always pull before pushing.
 - **Friday review (scheduled, 2026-10-19):** each Friday after the close: pull, read the week's journal notes and `live/`
   reports, run `analysis/live_vs_backtest.py --all live/`, update `TIER_LIST.md` / `WATCHLIST.md` / `TODO.md` /
-  `NEW_CHAT_BRIEF.md`, add new lines to `LESSONS.md`, and condense the brief on the first Friday of each month.
+  `NEW_CHAT_BRIEF.md`, add new lines to `LESSONS.md`, and condense the brief on the first Friday of each month. **Also on the
+  first Friday of each month (from December 2026, user 2026-10-22, after Kevin Davey):** per account, place last month's
+  actual P&L (Apex dashboard, fees included) in the Monte Carlo range for one month of the live strategy set at live size
+  (`analysis/montecarlo.py`, 21-day block bootstrap of the backtest daily P&L, 2023 onward) and report its percentile;
+  below the 10th two months running → review with the drift alarm. Count the same signal on two accounts as one event.
 - **Papers in git (user, 2026-10-19):** research-paper PDFs may be committed (folder `papers/`). Books stay out.
 - **Repo map:** `README.md` (reorganised 2026-10-21): MultiCharts reports in `mc_reports/`, all price data in `data/`,
   script results in `analysis/outputs/`, exporters in `tools/exporters/`, old material in `archive/`. Put new files there.
