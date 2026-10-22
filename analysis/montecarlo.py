@@ -7,6 +7,8 @@ Two views, both from the strategy's own results (no model assumptions):
   daily_mc(daily) block bootstrap of daily P&L over a horizon (keeps volatility clustering): distribution of the
                   horizon's P&L, its max drawdown, P(loss), and the chance an Apex-style end-of-day trailing drawdown is
                   hit (trailing from the highest end-of-day balance, locking at start + lock once reached).
+                  return/DD = median P&L / median max DD (Davey's score; descriptive only). END-OF-DAY only: it misses
+                  intraday dips through the limit, so Apex account decisions use funded_sim / prop_sim (intraday lows).
   report(...)     prints both as one compact block; used by every new test from 2026-10-16 (CLAUDE.md testing standard).
 Usage:  import montecarlo as MC;  print(MC.report(pnl_series, daily_series, size=1))
 """
@@ -60,7 +62,7 @@ def report(pnl, daily=None, size=1.0, label="", trail=2000.0, horizon=252):
     if daily is not None:
         dm = daily_mc(np.asarray(daily) * size, horizon=horizon, trail=trail)
         s += (f"\n      {horizon}-day block bootstrap: P&L p5 ${dm['pnl_p5']:,.0f} / p50 ${dm['pnl_p50']:,.0f} / p95 ${dm['pnl_p95']:,.0f}, "
-              f"P(loss) {dm['p_loss']:.1%}, max DD p50 ${dm['dd_p50']:,.0f} / p95 ${dm['dd_p95']:,.0f}, return/DD {dm['ret_dd']:.2f}, P(hit ${trail:,.0f} EOD trailing) {dm['p_trail_hit']:.1%}")
+              f"P(loss) {dm['p_loss']:.1%}, max DD p50 ${dm['dd_p50']:,.0f} / p95 ${dm['dd_p95']:,.0f}, return/DD {dm['ret_dd']:.2f}, P(hit ${trail:,.0f} trailing, EOD check only) {dm['p_trail_hit']:.1%}")
     return s
 
 

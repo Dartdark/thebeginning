@@ -147,6 +147,31 @@ Rules:
 - Current status: the whole plan is at stage 3 (live on Apex since 2026-10-12); personal account from ~month 3 at 1/10 size,
   funded from Apex payouts, full size after 6–12 months of live results that match the backtest.
 
+## Process additions (2026-10-22, with Codex)
+
+1. **Evidence sheet first** (`agents/codex/BUILDER_BRIEF.md` step 0): who is forced to trade, direction / size / timing
+   known beforehand, reaches NQ / ES directly, data that separates it from momentum, beats costs in a real gap, **power**
+   (can the test ever reach t >= 2?), already tested? Verdict TEST / NEEDS DATA / DON'T TEST. Forced or scheduled flows
+   stay the preferred search area for Apex. Personal-account research may also look at well-supported trend or risk-premium
+   ideas, but each still needs a credible reason and the same validation.
+2. **Forward log with its decision rule written first** (`agents/codex/FORWARD_LOG.md`). Before tracking starts, each
+   entry fixes: review dates, minimum observations, costs, and what means CONTINUE / REJECT / EXTEND. Every eligible
+   signal is recorded, including missed, rejected and skipped ones (with the reason), never only the filled trades.
+3. **Break tests: two kinds, reported separately.**
+   - *Implementation stresses* (price noise of a few ticks, nearby indicator settings, ±1-2 ticks of extra slippage,
+     2-point target trade-through, a few minutes of delay): a live strategy must BEND (stay profitable and keep at least
+     half its Sharpe). A BREAK here is a reason to cut or stop it.
+   - *Premise shifts* (moves that change what the strategy is, e.g. ONB's overnight range ending after the 08:30 open,
+     VB's first decision at 09:00 or 11:00, broad joint jitter of session clocks): kept and reported as information on
+     where the edge lives, not as a pass / fail verdict.
+4. **Monte Carlo return / drawdown is descriptive.** Median 1-year P&L / median 1-year max drawdown
+   (`analysis/montecarlo.py`) is reported next to P(loss), drawdown p95 and the trailing-limit hit chance. It describes
+   the shape of past results; it doesn't show that the edge will last.
+5. **Apex risk is judged on the intraday path.** `montecarlo.daily_mc` uses end-of-day P&L only and can miss a day that
+   dips through the limit and recovers. Account decisions use the funded / challenge simulators (`analysis/funded_sim.py`,
+   `funded_bootstrap.py`, `prop_sim.py`), which check each day's intraday low against the trailing threshold and the daily
+   loss limit from the minute paths. That check is mandatory for anything that trades on Apex.
+
 ## Guardrails
 
 - Each side has about half the trades, so its t-stat is lower. Don't drop a side for one bad
