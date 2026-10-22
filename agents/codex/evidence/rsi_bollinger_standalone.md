@@ -89,3 +89,10 @@ The original source-audit limitations above remain part of the record. The perfo
 `agents/codex/plans/rsi_bollinger_screen.md` now fixes the futures mapping and tests only fixed-contract signals,
 with two execution variants on each of two markets. It does not claim original engine/crypto parity or solve
 unknown roll provenance. Reject on the cheap design gate; do not optimize or silently substitute a sizing rule.
+
+## Completed screen — stop
+
+The preregistered screen is now complete: four market/execution trials, no parameter search. GC loses money;
+NQ is positive with only 24 trades and t 0.76. Both fail the frozen support and t gates. See
+[`rsi_bollinger_screen.md`](../results/rsi_bollinger_screen.md). Do not advance these tested versions or open
+2023+ after this failed gate. The TEST decision above records eligibility before the screen, not a live verdict.
