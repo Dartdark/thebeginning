@@ -39,3 +39,5 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
   up / test a second machine only after the close (VPS move, 2026-10-19).
 - Read the broker's reason before calling it a bug: the 'repeating 0.00 orders' were Apex's daily loss limit
   ('Account is done for day'); after any Apex lock, reset the charts (auto-trading off/on, flat) before the next open (2026-10-19).
+- One market out of many is not an edge: Davey's MACD crossover passed 6 of 220 market / bar-size tests (coffee 360-min
+  the "best", PF 1.1). Plain indicator entries need a forced-flow reason before we spend a trial on them (2026-10-22).

@@ -31,6 +31,8 @@ $2,000 trailing limit, no daily loss limit, no payout caps. Everything below sti
 | **Close-based stops** (stop judged on the bar close, exit next open: fewer spike stop-outs) | Nick Radge | Dangerous on Apex (limits hit intrabar); fine to test for multi-day holds |
 | **Parameter "swarm"**: trade several settings of one system at once instead of picking one | Nick Radge (large CTAs) | Our VB 15/30/60-min ensemble was slightly worse; retest on a multi-day system |
 
+| **Multi-market screening of one entry** (one rule, ~44 futures x 5 bar sizes, walk-forward, costs in; keep only cases with net > $25k AND max DD < $25k per contract, and MC return / DD high) | Kevin Davey (MACD test, 2026-10-22) | Futures data for many markets (we have NQ / ES / CL / GC / ZN / 6E); a way to build a personal multi-sector set. His MACD result: 6 of 220 pass, so plain indicator entries are not the starting point |
+
 ## 4. Rules for running it (from the same sources)
 - Size for about **half the drawdown you think you can take** (Davey); the plan's max drawdown ≤ 20-30% of the account.
 - **Sequence risk** (Radge): the closer the money is to being needed, the lower-volatility the mix should be. The ORDER
@@ -43,4 +45,6 @@ $2,000 trailing limit, no daily loss limit, no payout caps. Everything below sti
 - Judge in hundreds of trades / years, not months; know in advance the chance of a losing 12-month window.
 - Rule of thumb (Radge): expect a max drawdown of about 1.7-2 x the annual volatility at some point (stock market 15-16% vol
   → 30%+ drawdowns; a 5% vol mix → 8-10%).
+- Monte Carlo return / drawdown (Davey's favourite; median 1-year P&L / median 1-year max DD, `analysis/montecarlo.py`
+  prints it): his MACD best case was below 1; our plan strategies 1.6-3.2 each, the funded plan ~7 (2023+).
 - Monthly: place each month's result in the Monte Carlo range (the same check as the Apex review).
