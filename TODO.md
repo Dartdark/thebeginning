@@ -120,7 +120,9 @@ after 15:59 CT, never with a position open.
   new folder `C:\NQdata2017\`; 1-minute **@NQ** chart, Exchange time zone, CME 24h session, data from **05/01/2017**;
   add the indicator `NQ Bar Exporter` ([tools/exporters/NQ_Bar_Exporter.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/tools/exporters/NQ_Bar_Exporter.txt))
   with Folder `C:\NQdata2017\`, FilePrefix `NQ_1min_`, StartTime 800, EndTime 1515, Decimals 2; wait until the chart finishes;
-  copy ONLY `NQ_1min_2017.csv` into `C:\TradingVault\data\` (don't overwrite 2018+), run `journal\sync.ps1`, tell Claude.
+  copy ONLY `NQ_1min_2017.csv` into `C:\TradingVault\data\` (don't overwrite 2018+), then in PowerShell in `C:\TradingVault`:
+  `git pull` · `git add data/NQ_1min_2017.csv` · `git commit -m "NQ 2017 daytime data"` · `git push origin HEAD:claude/nq-trading-strategy-params-5h9d20`
+  (sync.ps1 only uploads journal/ and live/), then tell Claude.
 - [ ] **Email NYSE** (quote + free sample only, no purchase): to **datasales@nyse.com**, text in
   [agents/claude_evidence/NYSE_QUOTE_EMAIL.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/agents/claude_evidence/NYSE_QUOTE_EMAIL.md)
   (copy Subject → Thank you, add your name). List price ~$52k (SPY/Arca) + ~$58k (NYSE) for 2018-26: buy only if a
