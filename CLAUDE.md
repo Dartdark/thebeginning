@@ -31,7 +31,10 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   **Also every Friday (user, 2026-10-23): the Claude-Codex cross-review** (`agents/codex/TASK_weekly_cross_review.md`):
   review Codex's week independently into `agents/cross_review/YYYY-MM-DD_claude.md` (max 5 material disagreements, each with
   evidence and the smallest settling check), then read Codex's file when the user has run its side, and write the joint
-  `..._summary.md` (agreed / disputed / user decisions). Remind the user to send Codex "do the weekly cross-review".
+  `..._summary.md` (agreed / disputed / user decisions). Remind the user to send Codex "do the weekly cross-review" One response
+  each, then a deciding check; open items stay 'unresolved' and carry forward. Routine checks run at once; new backtests keep
+  the pre-registration gates. A confirmed accounting / execution defect goes to the user immediately, not on Friday;
+  judgement calls go to the user with both views, the uncertainty and a recommendation.
 - **Papers in git (user, 2026-10-19):** research-paper PDFs may be committed (folder `papers/`). Books stay out.
 - **Repo map:** `README.md` (reorganised 2026-10-21): MultiCharts reports in `mc_reports/`, all price data in `data/`,
   script results in `analysis/outputs/`, exporters in `tools/exporters/`, old material in `archive/`. Put new files there.

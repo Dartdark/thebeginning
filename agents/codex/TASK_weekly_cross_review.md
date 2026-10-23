@@ -12,8 +12,19 @@ When the user says "do the weekly cross-review":
    first. Each: the claim, your position, the evidence (file / line / number), the practical consequence, and **the smallest
    check that would settle it**. Priorities: costs, roll handling, execution assumptions, statistical claims, portfolio /
    account contribution. No wording or style points. "No material disagreements" is a valid result.
-4. **Rules:** any new backtest still follows the pre-registration rules; nobody changes the trading plan or the live setup
-   through this review; anything that needs the user's decision goes in one paragraph with both views and a yes / no question.
+4. **One round each, then a check:** after reading the other's file, each may write ONE response per disputed item; then
+   the agreed deciding check is run. Items still open stay listed as **unresolved** (no forced agreement) and carry forward;
+   resolved items do not.
+5. **Routine checks vs new research:** file comparisons, accounting reconciliation and code checks can be run at once by
+   whoever raised the item. A new strategy backtest still needs a committed plan, trial counting and the existing
+   validation gates.
+6. **Consequential errors don't wait for Friday:** a confirmed accounting or execution defect (wrong costs, a bug that
+   changes a live strategy's behaviour or a plan decision) goes to the user as soon as it is confirmed.
+7. **Judgement calls go to the user properly:** a disagreement about assumptions or the user's risk preferences, that no
+   test can settle, goes to the user with both views, the uncertainty and a recommendation (not a forced yes / no).
+8. **Rules unchanged:** nobody changes the trading plan or the live setup through this review. Keep the weekly output
+   short and link the evidence and fixes.
+(Refinements 4-7 from Codex, 2026-10-23, agreed by Claude and the user.)
 
 Claude does the same on its side inside the Friday review, then writes the joint summary
 (`agents/cross_review/YYYY-MM-DD_summary.md`): agreed, disputed (with the settling check and who runs it), user decisions.
