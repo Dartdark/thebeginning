@@ -66,11 +66,15 @@ MNQ (blown 11–12%), EOS $500 (slower, 269 days), dropping our Monday Long (274
 **Cushion sizing:** cushion = balance − trailing threshold, each morning. f = cushion / **$1,500**,
 kept between 0.5 and 1; multiply each full-size input by f and round down:
 
-| Cushion | f | VB | ONB ML risk | Monday | EOS risk | LDF | NFP risk | VCS | Bridge Monday |
-|---|---|---|---|---|---|---|---|---|---|
-| $1,500 or more | 1.0 | 3 | 400 | 1 | 700 | 2 | 500 | 1 | 1 |
-| $1,125 | 0.75 | 2 | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) | 0 (off) |
-| $750 or less | 0.5 | 1 | 200 | 0 (off) | 350 | 1 | 250 | 0 (off) | 0 (off) |
+| Cushion | f | VB normal / flagged | ONB ML risk | Monday | EOS risk | LDF | NFP risk | Bridge Monday | CL Sunday | ES MOC | RS longs |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| $1,500 or more | 1.0 | 2 / 1 | 400 | 1 | 700 | 2 | 500 | 1 | 2 MCL | 2 MES | 1 |
+| $1,125 | 0.75 | 1 / 0 | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
+| $750 or less | 0.5 | 1 / 0 | 200 | 0 (off) | 350 | 1 | 250 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
+
+(Table updated 2026-10-23 to the current 10-strategy plan; the old one still listed VB 3 and VCS.) Any cushion in between:
+f = cushion / 1,500, multiply, round DOWN to whole contracts (risk inputs: multiply, no rounding). Evaluations (combines)
+are NOT cushion-sized: they run the combine set at fixed size.
 
 The Bridge Monday Long enters on Sunday evening, so use Sunday's cushion (Friday's close balance) for it.
 
