@@ -19,7 +19,7 @@ results are added at each Friday review. 2023+ has been reused by many ideas, so
 
 | Rule | Frozen (date, commit) | Source report | Forward trades | Forward net (per NQ) | Status |
 |---|---|---|---|---|---|
-| **FC 2B v2** (Flow-Confirmed Opening Drive, NQ 1-min; `checks/candidates/fc_2b/FC_2B_v2.txt`) | 2026-10-23, commit aa41668 (v2 report) | `checks/candidates/fc_2b/REVIEW.md`, `verdict.md` | 0 | $0 | Tracking from 2026-10-26 |
+| **FC 2B v2** (Flow-Confirmed Opening Drive, NQ 1-min; `checks/candidates/fc_2b/FC_2B_v2.txt`) | 2026-10-23, code commit 848923d (v2 report aa41668) | `checks/candidates/fc_2b/REVIEW.md`, `verdict.md` | 0 | $0 | Tracking from 2026-10-26 |
 
 ### FC 2B v2: decision rule (written 2026-10-23, before tracking)
 - **Signals:** every day the v2 rule fires, from a re-exported MultiCharts v2 backtest (same chart, same inputs) at each
