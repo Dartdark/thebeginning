@@ -1,0 +1,110 @@
+{ =====================================================================
+  S30 - Cash-session IBS reversal (NQ, ES, RTY). PowerLanguage signal for MultiCharts. Long only.
+
+  RULE (one decision per cash session, at its last bar)
+    IBS = ( Close - SessionLow ) / ( SessionHigh - SessionLow ) of the 08:30-15:00 CT cash session.
+      flat and IBS < IbsEntry (0.20) : buy ContractQty next bar at market
+      long and IBS > IbsExit  (0.80) : sell next bar at market
+    No stop, no target, no filter, no time exit. Positions are held through nights, weekends and
+    holidays until the exit condition. A session with the wrong bar count or zero range makes no
+    decision and leaves any position open.
+
+  SOURCE
+    Pagonidis, "The IBS Effect: Mean Reversion in Equity ETFs" (NAAIM 2014): IBS below 0.20 / above
+    0.80. Exit when IBS > 0.80 as used by practitioners (Murtazin 2025).
+
+  CHART (one chart per market)
+    15-minute bars, full electronic session template (Sun-Fri 17:00-16:00 CT), Exchange time zone,
+    IOG off, pyramiding off. Commission and slippage in Strategy Properties.
+      @NQ (BPV 20), @ES (BPV 50), @RTY (BPV 50): SessionFirstBar 845, SessionLastBar 1500,
+      SessionBars 26, TokyoClock false.
+    TokyoClock true is only for a Nikkei (@NKD) chart and is not part of this release.
+
+  CONTRACT ROLLS
+    Trades last several days and can be open across a quarterly roll. On a raw (unadjusted) continuous
+    chart the backtest then books the price gap between contracts as profit or loss; a back-adjusted
+    chart avoids that. Live, a position still open at expiry has to be rolled to the next contract.
+
+  LIVE
+    Run in synchronous auto-trading mode (SA).
+
+  INPUTS
+    SessionFirstBar  HHMM stamp of the first cash bar (845 = the 08:30-08:45 bar).
+    SessionLastBar   HHMM stamp of the last cash bar (1500).
+    SessionBars      bars in the cash session (26).
+    IbsEntry 0.20, IbsExit 0.80 (source values). ContractQty 1. TokyoClock false.
+  ===================================================================== }
+
+[IntrabarOrderGeneration = false]
+
+Inputs:
+    SessionFirstBar( 845 ),
+    SessionLastBar( 1500 ),
+    SessionBars( 26 ),
+    IbsEntry( 0.20 ),
+    IbsExit( 0.80 ),
+    ContractQty( 1 ),
+    TokyoClock( false );
+
+Variables:
+    FirstBarT( 0 ),
+    LastBarT( 0 ),
+    BarsN( 0 ),
+    Counting( false ),
+    SampleBars( 0 ),
+    SessHi( 0 ),
+    SessLo( 0 ),
+    IbsVal( 0 ),
+    YYY( 0 ),
+    MarFirst( 0 ),
+    NovFirst( 0 ),
+    DstStart( 0 ),
+    DstEnd( 0 ),
+    IsDST( false );
+
+{ ---- session definition for this bar ----------------------------------- }
+if TokyoClock then begin
+    if CurrentBar = 1 or Date <> Date[1] then begin
+        YYY = IntPortion( Date / 10000 );
+        MarFirst = YYY * 10000 + 301;
+        NovFirst = YYY * 10000 + 1101;
+        DstStart = MarFirst + Mod( 7 - DayOfWeek( MarFirst ), 7 ) + 7;
+        DstEnd = NovFirst + Mod( 7 - DayOfWeek( NovFirst ), 7 );
+        IsDST = Date >= DstStart and Date < DstEnd;
+    end;
+    if IsDST then FirstBarT = 1915 else FirstBarT = 1815;
+    if Date >= 1241105 then BarsN = 26 else BarsN = 24;
+    LastBarT = -1;                      { count alone decides on the Tokyo clock }
+end
+else begin
+    FirstBarT = SessionFirstBar;
+    LastBarT = SessionLastBar;
+    BarsN = SessionBars;
+end;
+
+{ ---- accumulate the cash session ---------------------------------------- }
+if Time = FirstBarT then begin
+    Counting = true;
+    SampleBars = 1;
+    SessHi = High;
+    SessLo = Low;
+end
+else if Counting then begin
+    SampleBars = SampleBars + 1;
+    SessHi = MaxList( SessHi, High );
+    SessLo = MinList( SessLo, Low );
+end;
+
+{ ---- decision at the last cash bar -------------------------------------- }
+if Counting and SampleBars = BarsN then begin
+    Counting = false;
+    if ( LastBarT < 0 or Time = LastBarT ) and SessHi > SessLo then begin
+        IbsVal = ( Close - SessLo ) / ( SessHi - SessLo );
+        if MarketPosition = 0 and IbsVal < IbsEntry then
+            Buy ( "S30.L" ) ContractQty contracts next bar at market;
+        if MarketPosition = 1 and IbsVal > IbsExit then
+            Sell ( "S30.X" ) ContractQty contracts next bar at market;
+    end;
+end;
+
+if Counting and SampleBars > BarsN then Counting = false;

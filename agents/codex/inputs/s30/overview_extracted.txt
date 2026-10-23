@@ -1,0 +1,197 @@
+STRATEGY OVERVIEW · NQ, ES, RTY / MICROS
+
+
+S30 — Cash-session IBS reversal
+E-mini Nasdaq-100, S&P 500 and Russell 2000 · 15-minute bars · Chicago time · long only · one decision a day at the
+15:00 CT cash close · holds overnight and over weekends · one contract per market
+
+
+ 1 micro, whole backtest               Net       PF    Trades / yr     Win rate      Average      Max DD       Closed DD                 Grade
+ NQ · MNQ                          $36,868     1.86              28       70.3%       $135.05       $6,677          $3,764                   B
+
+ ES · MES                          $22,623     1.94              27       68.5%        $87.01       $5,238          $2,674                   B
+
+ RTY · M2K                          $5,852     1.30              29       58.7%        $21.59       $3,540          $2,463        not graded
+
+ All three                        $65,342      1.76              82       65.8%        $81.27            —          $5,785
+
+MultiCharts backtests on 15-minute charts, first trade to the last closed trade: NQ 2017-03-02 → 2026-10-15 (273 trades), ES 2017-01-09 → 2026-
+10-07 (260), RTY 2017-08-08 → 2026-10-20 (271). $2.50 commission per contract and $5 slippage per trade. 1 micro = MNQ, MES or M2K (×10 =
+the full contract). Max DD counts closed equity plus each trade's worst open loss; "All three" shows closed-trade drawdown only, because its
+positions overlap. Positions still open at the end of the exports are not counted.
+Roll correction: on the raw continuous charts, 62 trades were open across a quarterly contract roll and booked the price gap between contracts
+(NQ 17, ES 22, RTY 23; together $5,280 per micro, almost all of it profit). Every figure here has that gap removed.
+
+
+Equity path and drawdown
+
+
+
+
+The trade story
+Internal bar strength (IBS) says where a session closed inside its own range: 0 at the low, 1 at the high. When an
+index future ends its cash session in the bottom fifth of the day's range, the day's selling ran right into the close.
+S30 buys just after the close and holds until a session closes in the top fifth of its range, usually a few days later
+(median hold 4 calendar days). The usual explanation is short-term overreaction: selling that has to be done by the
+end of the day (risk cuts, stops, hedges) pushes price too far, and whoever buys it is paid by the bounce. S30 does
+not measure who sells; it trades the published pattern on three index futures with one rule.
+Rules
+ Session                              The 08:30–15:00 CT cash session: 26 fifteen-minute bars on a full-session chart (bar stamps 08:45
+                                      … 15:00).
+
+ Signal                               At the 15:00 CT bar: IBS = (close − session low) ÷ (session high − session low).
+
+ Entry                                Flat and IBS < 0.20: buy one contract at market on the next bar (15:00 CT; the futures keep
+                                      trading).
+
+ Exit                                 Long and IBS > 0.80: sell at market on the next bar.
+
+ Nothing else                         No stop, target, filter or time exit. Positions are held through nights, weekends, holidays and
+                                      contract rolls. A session with missing bars or no range makes no decision. The same file runs on
+                                      @NQ, @ES and @RTY, one chart each.
+
+
+By year, 1 micro
+ Year                NQ trades             NQ net             ES trades             ES net            RTY trades            RTY net      All three
+
+ 2017                          16           $1,699                    16              $855                         6           −⁠$64      $2,490
+
+ 2018                          27           −⁠$324                    24          −⁠$2,582                      28            −⁠$633     −⁠$3,539
+
+ 2019                          24           $1,804                    21            $1,346                      29            $1,051      $4,202
+
+ 2020                          36          $11,254                    36            $7,407                      31            $4,027     $22,688
+
+ 2021                          29           $5,850                    28            $3,084                      31              $786      $9,720
+
+ 2022                          41           $2,953                    39            $4,424                      38            $1,520      $8,898
+
+ 2023                          31           $6,960                    32            $1,513                      31              $216      $8,689
+
+ 2024                          29           −⁠$753                    26              $562                      25          −⁠$2,016     −⁠$2,207
+
+ 2025                          23           $5,486                    22            $3,282                      30            $1,104      $9,872
+
+ 2026                          17           $1,940                    16            $2,731                      22            −⁠$141      $4,530
+
+By exit year; 2017 from each market's first trade, 2026 to the last closed trade. Positive years: NQ 8 of 10, ES 9 of 10, RTY 6 of 10.
+
+
+Worst drawdowns (including open-trade loss), 1 micro
+ Market                         Depth     Peak                             Low                           Recovered                          Days
+
+ NQ                             $6,677    2025-02-12                       2025-04-09                    2025-04-24                            71
+
+ NQ                             $6,014    2024-07-01                       2024-08-08                    2025-01-23                           206
+
+ ES                             $5,238    2024-09-24                       2025-04-09                    2025-05-27                           245
+
+ ES                             $3,430    2018-01-02                       2018-12-26                    2020-03-13                           801
+
+ RTY                            $3,540    2023-01-31                       2025-04-09                    not yet                           1358+
+
+ RTY                            $1,480    2018-06-04                       2018-12-26                    2020-02-05                           611
+
+Now from the peak: NQ −⁠$265, ES $0, RTY −⁠$1,252. Largest single loss: NQ −⁠$2,814, ES −⁠$1,630, RTY −⁠$804; worst open loss inside one trade: NQ
+−⁠$5,148.
+  Why it should work                                                         Risks and caveats
+      Published effect: Pagonidis, "The IBS Effect:                             In rising years it earns about what holding
+      Mean Reversion in Equity ETFs" (NAAIM, 2014):                             would: in the 2023–26 research run each leg
+      equity ETFs averaged +0.35% the next day after                            made roughly what holding the index for the
+      an IBS below 0.20 (before costs, trading at the                           same time in the market made (NQ $133,940 vs
+      close). The exit above 0.80 is the practitioner                           $131,100, ES $90,442 vs $69,600 per full contract).
+      version of the rule (Murtazin, 2025).                                     The edge there shows as a higher PF and a
+      Run once on later data: the thresholds are the                            smaller drawdown, not as extra return.
+      source's, not fitted. After a 2017–2022 run the                           2018 did not repeat 2022: all three lost; ES lost
+      rule was frozen and run once on 2023-01-03 →                              more than holding (−⁠$2,582 vs −⁠$928 per MES),
+      2026-08-10 in research: ES PF 2.06, NQ 1.69, RTY                          NQ about matched it, RTY lost less.
+      1.02 (ES's 2023+ result had been seen once                                RTY is the weak leg: PF 1.69 on 2017–2022 but
+      before, through the ES-only version). In                                  1.02 on 2023–26 in research ($1,880 per full
+      MultiCharts on 2023+ the ES and NQ legs                                   contract against $26,900 for holding).
+      repeated it (PF 2.04 and 1.67).                                           No stop by design: single losses reach −⁠$2,814
+      Two-sided: the mirror trade (short above 0.80                             per MNQ (−⁠$28,135 per NQ).
+      until below 0.20, measured on 2017–2022, not                              Overnight, weekend and roll risk: positions are
+      traded) also made money: ES PF 1.28, NQ 1.35,                             held for days; not for accounts that must be flat
+      RTY 1.36. The reversal is not just a long bias in a                       each day. A position open at a roll has to be
+      rising market.                                                            rolled to the next contract live.
+      2022, a falling year: all three made money while                          Execution: the published effect is measured at
+      holding lost (per micro: NQ $2,953 vs −⁠$10,900,                          the close; a later study found an ETF version fell
+      ES $4,424 vs −⁠$4,615, RTY $1,520 vs −⁠$2,439).                           apart when traded open-to-open (Pandey and
+                                                                                Joshi, 2023 preprint). S30 trades at 15:00 CT, right
+                                                                                after the cash close.
+                                                                                Roll gaps were measured on dxFeed data at each
+                                                                                splice. Two are estimates: June 2022 (the jump
+                                                                                also held a weekend sell-off; the average of the
+                                                                                neighbouring rolls is used) and ES September
+                                                                                2026 (no minute data; the June 2026 roll's size in
+                                                                                percent is used).
+
+
+Robustness grade
+ Split at 2023-01-01, 1 micro                                                    NQ    B                                 ES    B            RTY
+
+ Trades in / out of sample                                                      173 / 101                                164 / 96 not graded
+
+ Expected value per trade, in → out                                   $136.41 → $157.30                       $87.97 → $102.30                —
+
+ Kept out of sample · P(edge ≤ 0)                                          115% · 0.0155                          116% · 0.0023               —
+
+ Out-of-sample net / max DD (closed)                                    $15,888 / $3,764                         $9,821 / $1,863              —
+
+ Return ÷ drawdown, out of sample                                                     4.22                                    5.27            —
+
+ Monte-Carlo max DD, median / 75th / 95th /           $4,482 / $5,658 / $7,966 / $9,979 $2,421 / $3,038 / $4,270 / $5,459                     —
+ 99th
+
+Graded 2026-10-17 on earlier exports with the same trades (NQ's then-open last trade included; the ES grade on the identical ES-only version of
+this rule), before the roll correction. Expected value from a 10,000-draw bootstrap; drawdowns from a 20,000-path Monte Carlo of the trade
+sequence (closed equity). Grade scale S–D combines edge kept out of sample, confidence it is above zero, and return ÷ drawdown.
+Research and earlier MultiCharts runs, 1 micro
+        Research · 2017-07-10 → 2022-12-30           Research · 2023-01-03 → 2026-08-10 (once)                                MultiCharts · 2023 →
+
+ NQ              166 trades · PF 2.07 · $23,058                                  94 · PF 1.69 · $13,394     96 · PF 1.67 · $13,514 (to 2026-09-01)
+
+ ES                  153 · PF 1.98 · $13,925.50                                93 · PF 2.06 · $9,044.20      94 · PF 2.04 · $8,979 (to 2026-09-11)
+
+ RTY                       163 · PF 1.69 · $6,747                                  101 · PF 1.02 · $188                                             —
+
+Research = computer simulation from 1-minute bars at $15 per round trip; the rule was frozen before the 2023+ run. None of these earlier runs
+remove roll gaps. "—" = not run.
+
+
+Tried and rejected — do not repeat
+ When              Tried                                              Result                                                        Verdict
+ 2026-09-16        Also require the close to be below the             Identical trades on 2017–2022: a close in the                 Adds nothing
+                   session VWAP                                       bottom fifth of the range is always below VWAP
+
+ 2026-09-16        Short side (short above 0.80, cover                ES PF 1.28, NQ 1.35, RTY 1.36                                 Not traded; the
+                   below 0.20), measured on 2017–2022                                                                               source rule is
+                                                                                                                                    long only
+
+ 2026-09-16        Fourth market: Nikkei 225 (NKD)                    Research: nothing on 2017–2022 (PF 1.00), then                Dropped
+                                                                      +$102,071 per contract on 2023–26; the
+                                                                      MultiCharts run did not pay
+
+ 2026-10-23        Backtest on the raw continuous chart,              62 trades booked the gap between contracts as                 Corrected here
+                   positions carried through rolls                    profit or loss
+
+
+Kill test — what would prove it wrong
+ Watch                            From the data, 1 micro                                                    Warning sign
+
+ Drawdown                         Worst so far NQ $6,677, ES $5,238, RTY $3,540; Monte-Carlo                Beyond the 75th percentile.
+                                  75th NQ $5,658, ES $3,038
+
+ Win rate vs the win rate it      NQ 70.3% vs 56.1% · ES 68.5% vs 52.8% · RTY 58.7% vs                      Win rate sliding toward the needed
+ needs                            52.4%                                                                     level.
+
+ Trade count                      ≈ 28 a year per market                                                    Materially different: data or session
+                                                                                                            setup changed.
+
+ Falling markets                  2022: all three made money while holding lost; 2018: only ES              A falling year where it loses more
+                                  lost more than holding                                                    than holding on two or more
+                                                                                                            markets.
+
+Median hold: NQ 4, ES 4, RTY 4 calendar days. Largest win: NQ $2,142, ES $1,195, RTY $707. Positive months: NQ 79/116, ES 77/118, RTY 61/111. Source:
+MultiCharts backtests; rules from the strategy code. Backtests, not account results. Prepared 2026-10-23.
+
