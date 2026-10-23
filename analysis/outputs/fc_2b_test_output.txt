@@ -10,3 +10,73 @@ FC 2B, Flow-Confirmed Opening Drive (user's file, 2026-10-23; code + overview in
 
 2. Controls (same exits):
    no flow filter (every drive day)   n=2259 win 59% $  119 PF 1.20 t  3.0 yrs+ 9/9 | 18-22 $ 119 (t 2.5) | 23+ $ 120 (t 1.8)
+   random days + random side, same count (20 runs): $15 (max $161) vs $261
+   same days, random side (20 runs): $13 (max $140)
+   opposite side                      n= 764 win 51% $ -216 PF 0.72 t -3.3 yrs+ 1/9 | 18-22 $-247 (t -3.2) | 23+ $-173 (t -1.5)
+   z >= 0.5                           n=1433 win 61% $  208 PF 1.37 t  4.2 yrs+ 9/9 | 18-22 $ 220 (t 3.7) | 23+ $ 192 (t 2.3)
+   z >= 0.75                          n=1068 win 61% $  243 PF 1.44 t  4.2 yrs+ 9/9 | 18-22 $ 249 (t 3.7) | 23+ $ 235 (t 2.3)
+   z >= 1.25                          n= 527 win 62% $  332 PF 1.65 t  4.0 yrs+ 9/9 | 18-22 $ 386 (t 3.9) | 23+ $ 257 (t 1.8)
+   z >= 1.5                           n= 343 win 61% $  244 PF 1.46 t  2.4 yrs+ 8/9 | 18-22 $ 323 (t 2.8) | 23+ $ 144 (t 0.8)
+   stop 100, no trail, no BE          n= 764 win 48% $   29 PF 1.27 t  1.1 yrs+ 4/9 | 18-22 $ 110 (t 2.6) | 23+ $ -82 (t -2.8)
+   trail 100                          n= 764 win 56% $  215 PF 1.42 t  3.6 yrs+ 9/9 | 18-22 $ 187 (t 2.7) | 23+ $ 253 (t 2.3)
+   trail 200                          n= 764 win 61% $  247 PF 1.45 t  3.6 yrs+ 9/9 | 18-22 $ 298 (t 3.7) | 23+ $ 177 (t 1.5)
+   stop 75                            n= 764 win 61% $  218 PF 1.47 t  3.5 yrs+ 9/9 | 18-22 $ 252 (t 3.4) | 23+ $ 171 (t 1.6)
+   stop 150                           n= 764 win 55% $  270 PF 1.41 t  3.6 yrs+ 9/9 | 18-22 $ 318 (t 3.7) | 23+ $ 205 (t 1.5)
+
+3. Standard metrics per NQ:
+       trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+FC 2B     764 61% $261 $21,971   1.26    2.41          1.48 $16,654   1.32  3.31      13.29
+longs     377 62% $291 $12,066   1.02    1.90          1.54 $15,234   0.79  4.68       5.16
+shorts    387 59% $233  $9,905   0.77    1.51          1.42 $21,557   0.46  6.80       2.91
+                             actual        p5       p50       p95
+name         metric                                              
+FC 2B 2023+  sharpe            0.95      0.17      0.94      1.65
+             sortino           1.84      0.29      1.81      3.57
+             pf_day            1.35      1.05      1.35      1.72
+             calmar            1.11      0.09      0.84      2.35
+             ulcer             9.56      4.04      9.03     26.51
+             max_dd       16,654.50 13,002.52 21,447.62 39,590.32
+             P(Sharpe<=0)       NaN       NaN      0.03       NaN
+longs 2023+  sharpe            1.01      0.18      1.00      1.68
+             sortino           2.00      0.33      1.99      3.81
+             pf_day            1.56      1.08      1.55      2.15
+             calmar            0.89      0.11      0.97      2.67
+             ulcer             6.36      3.09      6.44     18.56
+             max_dd       15,233.50  8,063.50 13,654.75 26,329.31
+             P(Sharpe<=0)       NaN       NaN      0.02       NaN
+shorts 2023+ sharpe            0.34     -0.57      0.35      1.14
+             sortino           0.65     -0.88      0.67      2.60
+             pf_day            1.17      0.78      1.18      1.73
+             calmar            0.22     -0.17      0.22      1.27
+             ulcer            20.84      5.52     14.62     44.82
+             max_dd       21,557.25 12,111.64 22,649.62 45,760.85
+             P(Sharpe<=0)       NaN       NaN      0.25       NaN
+             actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+FC 2B 2023+    $16,654      13% $21,990 $34,666 $43,497        100%        100%        100%
+longs 2023+    $15,234      63% $13,881 $22,355 $26,990        100%        100%        100%
+shorts 2023+   $21,557      51% $21,447 $34,058 $39,749        100%        100%        100%
+   Monte Carlo 1 MNQ (x0.1): trades 764 | total p5 $11,398 / p50 $19,954 / p95 $28,542, P(total <= 0) 0.0%
+      max DD actual $1,665 (rank 15%), shuffled p50 $2,191 / p95 $3,710 / p99 $4,677; losing streak actual 5, p95 9
+      252-day block bootstrap: P&L p5 $-428 / p50 $2,211 / p95 $4,880, P(loss) 8.5%, max DD p50 $981 / p95 $1,955, return/DD 2.25, P(hit $2,000 trailing, EOD check only) 4.0%
+   Monte Carlo 2 MNQ (x0.2): trades 764 | total p5 $22,797 / p50 $39,907 / p95 $57,084, P(total <= 0) 0.0%
+      max DD actual $3,331 (rank 15%), shuffled p50 $4,383 / p95 $7,421 / p99 $9,353; losing streak actual 5, p95 9
+      252-day block bootstrap: P&L p5 $-857 / p50 $4,423 / p95 $9,760, P(loss) 8.5%, max DD p50 $1,963 / p95 $3,910, return/DD 2.25, P(hit $2,000 trailing, EOD check only) 29.3%
+
+4. Overlap with the plan (agents/tasks/plan_daily_pnl.csv, per micro):
+   VaultBreak               corr +0.16   days both trade 338
+   OvernightBiasML          corr +0.19   days both trade 131
+   MondayLong               corr +0.10   days both trade 169
+   ExpirationOpenShort      corr +0.11   days both trade 42
+   LateDayFlow              corr +0.05   days both trade 393
+   NFPFade                  corr -0.01   days both trade 29
+   BridgeMondayLong         corr +0.05   days both trade 80
+   CLSundayFade_perMCL      corr +0.03   days both trade 26
+   ESMOCFollow_perMES       corr -0.01   days both trade 70
+   RelativeStrength         corr +0.36   days both trade 509
+   plan total (1 micro each)  corr +0.37
+
+5. Exit decomposition (added):
+   break-even only (no trail)         n= 764 win 61% $  234 PF 1.42 t  3.4 yrs+ 9/9 | 18-22 $ 288 (t 3.6) | 23+ $ 159 (t 1.3)
+   trail 150 only (no BE)             n= 764 win 48% $   43 PF 1.39 t  1.6 yrs+ 4/9 | 18-22 $ 108 (t 2.7) | 23+ $ -46 (t -1.3)
+   BE at 0.5                          n= 764 win 65% $  235 PF 1.48 t  3.6 yrs+ 9/9 | 18-22 $ 282 (t 3.6) | 23+ $ 170 (t 1.5)
+   BE at 0.8                          n= 764 win 57% $  267 PF 1.46 t  3.8 yrs+ 9/9 | 18-22 $ 305 (t 3.7) | 23+ $ 215 (t 1.7)
