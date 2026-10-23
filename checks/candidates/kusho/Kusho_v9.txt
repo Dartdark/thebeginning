@@ -1,0 +1,316 @@
+{ Kusho v9 - long and short (NQ / MNQ). PowerLanguage signal for MultiCharts.
+  LONG   Signal at the close of a 15-minute bar stamped 09:00-13:59 CT: close > open, close > EMA(50) of closes,
+         lower wick (open - low) <= WickTolTicks (70 ticks). Entry: buy limit at the signal bar's open, next bar.
+  SHORT  The mirror, on DOWN days only (ShortLeg true): close < open, close < EMA(50), upper wick (high - open)
+         <= 70 ticks; sell limit at the signal bar's open, next bar.
+         DOWN day: the prior session's 15:00 close is below the average of the last 50 15:00 closes, and that
+         average is below its value 5 sessions earlier. A prior session without a 15:00 bar: no short that day.
+  EXITS  On the fill: stop at the most recent fractal swing low (short: swing high) of bars 2-10 back if that risk
+         is <= 500 ticks, target 3R, and once price moves 0.5R in favour the stop goes to entry +/- 5 ticks.
+         Otherwise a 200-tick stop and a 200-tick target. Market exit from the first bar at or after EODTime
+         (default 21:00 CT). Friday's session ends at 16:00, so a position still open on Friday is held over the
+         weekend. One position at a time.
+  CHART  @NQ continuous, raw (unadjusted), 15-minute, Exchange time zone, session template Sun-Fri 17:00-16:00 CT
+         with Friday bars to 16:00 (not the template that ends Friday 15:15). Load at least 3 months of history
+         before the first trade (the DOWN filter needs 55 sessions). Costs used in testing: $2.50 commission per
+         side + $5 slippage per order, per NQ contract.
+  LIVE   Use synchronous auto-trading (SA mode). The entries are limit orders; in asynchronous mode a broker fill
+         that the chart does not register leaves the position with no stop and no exit.
+  ROLLS  RawRollHandling = true removes contract-roll gaps from the stored 15:00 closes on a raw @NQ chart (they
+         feed the DOWN filter only), taking the splice as the roll-Friday 03:45 CT bar through 2022-03 and the
+         Sunday 17:00 CT reopen of expiry week from 2022-06. Set it to false on a back-adjusted chart.
+  TAGS   SHORT = the short side; ROLL = contract-roll handling for raw data, not trading logic. }
+
+Inputs:
+	EMALength(50),
+	WickTolTicks(70),        { wick test in ticks: lower wick (long), upper wick (short) }
+	TargetTicks(200),
+	HardStopTicks(200),
+	MaxSwingRiskTicks(500),
+	SwingRR(3.0),
+	SwingBE_R(0.5),          { break-even arms at 0.5R }
+	BEPufferTicks(5),
+	StartTime(0900),
+	EndTime(1359),
+	EODTime(2100),           { HHMM CT: market exit from the first bar at or after this time }
+	ShortLeg(true),          { SHORT: true = short side on (DOWN days only); false = long only }
+	SMALen(50),              { SHORT: DOWN uses the SMA of the last SMALen 15:00 closes }
+	SlopeLag(5),             { SHORT: DOWN compares that SMA with its value SlopeLag sessions earlier }
+	RegimeCloseTime(1500),   { SHORT: DOWN reads the close of the bar stamped exactly this HHMM CT }
+	RawRollHandling(true),   { ROLL: true = raw @NQ chart (roll gaps removed from stored 15:00 closes) }
+	TickSizeOverride(0),
+	FixedContracts(1);       { contracts per trade }
+
+Variables:
+	EMA50(0),
+	TickSize(0),
+	WickTicks(0),
+	SwingLowPrice(0),
+	SwingFound(False),
+	DynamicSL(0),
+	DynamicTP(0),
+	RiskTicks(0),
+	EntryInitialized(False),
+	LookbackBar(0),
+	IsSwingTrade(False),
+	SwingRiskPoints(0),
+	BE_Armed(False),
+	LongWickOK(False),
+	ShortWickOK(False),      { SHORT }
+	SwingHighPrice(0),       { SHORT }
+	TdJul(0),                { SHORT: trading date of this bar (bars after 16:00 CT belong to the next date) }
+	CurTdJul(0),             { SHORT }
+	NewTd(False),            { SHORT }
+	TdDate(0),               { ROLL }
+	TdDow(0),                { ROLL }
+	TdMon(0),                { ROLL }
+	TdDay(0),                { ROLL }
+	SunJul(0),               { ROLL: Julian of 2022-06-01 }
+	CumGap(0),               { ROLL: sum of the roll gaps seen, points }
+	BarMon(0),               { ROLL }
+	BarDay(0),               { ROLL }
+	CurHas15(False),         { SHORT: this session has its 15:00 bar }
+	CurC15(0),               { SHORT: its close, raw - CumGap }
+	SessIdx(0),              { SHORT: finished sessions counted }
+	SIx(0),                  { SHORT }
+	PIx(0),                  { SHORT }
+	QIx(0),                  { SHORT }
+	N15C(0),                 { SHORT: 15:00 closes stored }
+	SumV(0),                 { SHORT }
+	Ix(0),                   { SHORT }
+	DownToday(False);        { SHORT: DOWN for today }
+
+Arrays:
+	C15Ring[999](0),         { SHORT: the 15:00 closes, raw - CumGap }
+	SHas15[999](0),          { SHORT: 1 = that session had its 15:00 close }
+	SC15[999](0),            { SHORT: that session's 15:00 close }
+	SSum[999](0),            { SHORT: sum of the last SMALen 15:00 closes as of that session }
+	SSumOK[999](0);          { SHORT: 1 = at least SMALen closes existed }
+
+EMA50 = XAverage(Close, EMALength);
+
+If TickSizeOverride > 0 then
+	TickSize = TickSizeOverride
+else
+	TickSize = MinMove / PriceScale;
+
+WickTicks = (Open - Low) / TickSize;
+
+{ ===== SHORT: trading date (bars stamped after 16:00 CT open the next date) ===== }
+If Time > 1600 then TdJul = DateToJulian(Date) + 1 else TdJul = DateToJulian(Date);   { SHORT }
+NewTd = TdJul <> CurTdJul;                                                    { SHORT }
+If NewTd then begin                                                           { ROLL / SHORT }
+	TdDate = JulianToDate(TdJul);                                             { ROLL }
+	TdDow = DayOfWeek(TdDate);                                                { ROLL }
+end;                                                                          { ROLL }
+
+{ ===== ROLL: remove contract-roll gaps from stored 15:00 closes (raw @NQ chart) ===== }
+If RawRollHandling and CurrentBar > 1 then begin                              { ROLL }
+	If SunJul = 0 then SunJul = DateToJulian(1220601);                        { ROLL }
+	BarMon = IntPortion(Mod(Date, 10000) / 100);                              { ROLL }
+	BarDay = Mod(Date, 100);                                                  { ROLL }
+	If Date <= 1220331 and Time = 345 and DayOfWeek(Date) = 5
+		and BarDay >= 8 and BarDay <= 14 and Mod(BarMon, 3) = 0 then          { ROLL: roll Friday, the 15-min bar holding the 03:32 splice }
+		CumGap = CumGap + (Close - Close[1]);                                 { ROLL: the gap is measured on the 15-min bar holding the splice }
+	If NewTd and TdJul >= SunJul then begin                                   { ROLL: from 2022-06, the reopen of expiry week }
+		TdMon = IntPortion(Mod(TdDate, 10000) / 100);                         { ROLL }
+		TdDay = Mod(TdDate, 100);                                             { ROLL }
+		If TdDow = 1 and TdDay >= 11 and TdDay <= 17 and Mod(TdMon, 3) = 0 then
+			CumGap = CumGap + (Open - Close[1]);                              { ROLL }
+	end;                                                                      { ROLL }
+end;                                                                          { ROLL }
+
+{ ===== SHORT: new trading date - store the finished session's 15:00 close, today's DOWN ===== }
+If NewTd then begin                                                           { SHORT }
+	If CurTdJul > 0 then begin                                                { SHORT: the previous session is finished }
+		SessIdx = SessIdx + 1;                                                { SHORT }
+		SIx = Mod(SessIdx, 1000);                                             { SHORT }
+		SHas15[SIx] = 0;                                                      { SHORT }
+		SSumOK[SIx] = 0;                                                      { SHORT }
+		If CurHas15 then begin                                                { SHORT: only existing 15:00 closes count }
+			SHas15[SIx] = 1;                                                  { SHORT }
+			SC15[SIx] = CurC15;                                               { SHORT }
+			N15C = N15C + 1;                                                  { SHORT }
+			C15Ring[Mod(N15C, 1000)] = CurC15;                                { SHORT }
+		end;                                                                  { SHORT }
+		If N15C >= SMALen then begin                                          { SHORT: SMA as of that session }
+			SumV = 0;                                                         { SHORT }
+			For Ix = N15C - SMALen + 1 to N15C begin                          { SHORT }
+				SumV = SumV + C15Ring[Mod(Ix, 1000)];                         { SHORT }
+			end;                                                              { SHORT }
+			SSum[SIx] = SumV;                                                 { SHORT: compared as sums }
+			SSumOK[SIx] = 1;                                                  { SHORT }
+		end;                                                                  { SHORT }
+	end;                                                                      { SHORT }
+	CurTdJul = TdJul;                                                         { SHORT }
+	CurHas15 = False;                                                         { SHORT }
+	DownToday = False;                                                        { SHORT: undefined -> no short today }
+	PIx = Mod(SessIdx, 1000);                                                 { SHORT: the prior session }
+	QIx = Mod(SessIdx - SlopeLag, 1000);                                      { SHORT: SlopeLag sessions before it }
+	If SessIdx - SlopeLag >= 1 and SHas15[PIx] = 1 and SSumOK[PIx] = 1 and SSumOK[QIx] = 1 then
+		DownToday = (SMALen * SC15[PIx] < SSum[PIx] and SSum[PIx] < SSum[QIx]);   { SHORT: close < SMA50 and SMA50 falling }
+end;                                                                          { SHORT }
+
+{ ===== SHORT: today's 15:00 close for DOWN ===== }
+If Time = RegimeCloseTime then begin                                          { SHORT }
+	CurHas15 = True;                                                          { SHORT }
+	CurC15 = Close - CumGap;                                                  { ROLL: roll-free frame }
+end;                                                                          { SHORT }
+
+{ ===== WICK TESTS ===== }
+LongWickOK = (Open - Low) <= WickTolTicks * TickSize;
+ShortWickOK = (High - Open) <= WickTolTicks * TickSize;                       { SHORT }
+
+{ ===== LONG ENTRY ===== }
+If MarketPosition = 0
+and Time >= StartTime
+and Time <= EndTime
+and Close > Open
+and LongWickOK                                                                { wick test }
+and Close > EMA50 then
+begin
+	Buy ("NoWickL") FixedContracts contracts next bar at Open limit;
+end;
+
+{ ===== SHORT ENTRY (mirror, DOWN days only) ===== }
+If ShortLeg and DownToday                                                     { SHORT }
+and MarketPosition = 0
+and Time >= StartTime
+and Time <= EndTime
+and Close < Open
+and ShortWickOK
+and Close < EMA50 then
+begin
+	SellShort ("NoWickS") FixedContracts contracts next bar at Open limit;   { SHORT }
+end;
+
+{ ===== RESET WHEN FLAT ===== }
+If MarketPosition = 0 then
+begin
+	EntryInitialized = False;
+	SwingFound = False;
+	SwingLowPrice = 0;
+	SwingHighPrice = 0;                                                       { SHORT }
+	IsSwingTrade = False;
+	SwingRiskPoints = 0;
+	BE_Armed = False;
+end;
+
+{ ===== INITIALIZE LONG TRADE ON FILL ===== }
+If MarketPosition = 1 and EntryInitialized = False then
+begin
+	EntryInitialized = True;
+	SwingFound = False;
+	SwingLowPrice = 0;
+	IsSwingTrade = False;
+
+	{ Fallback }
+	DynamicSL = EntryPrice - (HardStopTicks * TickSize);
+	DynamicTP = EntryPrice + (TargetTicks * TickSize);
+
+	{ Suche aktuellstes Swing Low der letzten 10 Bars }
+	For LookbackBar = 2 to 10 begin
+		If SwingFound = False then
+		begin
+			If Low[LookbackBar] < Low[LookbackBar - 1]
+			and Low[LookbackBar] < Low[LookbackBar + 1] then
+			begin
+				SwingLowPrice = Low[LookbackBar];
+				SwingFound = True;
+			end;
+		end;
+	end;
+
+	{ Verwende Swing Low falls Risiko nicht zu groß }
+	If SwingFound then
+	begin
+		RiskTicks = (EntryPrice - SwingLowPrice) / TickSize;
+		If RiskTicks <= MaxSwingRiskTicks then
+		begin
+			DynamicSL = SwingLowPrice;
+			DynamicTP = EntryPrice + ((EntryPrice - SwingLowPrice) * SwingRR);
+			IsSwingTrade = True;
+			SwingRiskPoints = EntryPrice - SwingLowPrice;
+		end;
+	end;
+end;
+
+{ ===== SHORT: INITIALIZE SHORT TRADE ON FILL (Kusho mirrored) ===== }
+If MarketPosition = -1 and EntryInitialized = False then                     { SHORT }
+begin
+	EntryInitialized = True;                                                  { SHORT }
+	SwingFound = False;                                                       { SHORT }
+	SwingHighPrice = 0;                                                       { SHORT }
+	IsSwingTrade = False;                                                     { SHORT }
+
+	DynamicSL = EntryPrice + (HardStopTicks * TickSize);                      { SHORT: fallback stop above }
+	DynamicTP = EntryPrice - (TargetTicks * TickSize);                        { SHORT: fallback target below }
+
+	For LookbackBar = 2 to 10 begin                                           { SHORT: most recent fractal swing high }
+		If SwingFound = False then
+		begin
+			If High[LookbackBar] > High[LookbackBar - 1]
+			and High[LookbackBar] > High[LookbackBar + 1] then
+			begin
+				SwingHighPrice = High[LookbackBar];                           { SHORT }
+				SwingFound = True;                                            { SHORT }
+			end;
+		end;
+	end;
+
+	If SwingFound then                                                        { SHORT }
+	begin
+		RiskTicks = (SwingHighPrice - EntryPrice) / TickSize;                 { SHORT }
+		If RiskTicks <= MaxSwingRiskTicks then                                { SHORT }
+		begin
+			DynamicSL = SwingHighPrice;                                       { SHORT }
+			DynamicTP = EntryPrice - ((SwingHighPrice - EntryPrice) * SwingRR);   { SHORT }
+			IsSwingTrade = True;                                              { SHORT }
+			SwingRiskPoints = SwingHighPrice - EntryPrice;                    { SHORT }
+		end;
+	end;
+end;
+
+{ ===== SWING BREAKEVEN ===== }
+If MarketPosition = 1 and IsSwingTrade and (not BE_Armed) then
+begin
+	If High >= EntryPrice + (SwingRiskPoints * SwingBE_R) then
+	begin
+		DynamicSL = EntryPrice + (BEPufferTicks * TickSize);
+		BE_Armed = True;
+	end;
+end;
+If MarketPosition = -1 and IsSwingTrade and (not BE_Armed) then             { SHORT }
+begin
+	If Low <= EntryPrice - (SwingRiskPoints * SwingBE_R) then                 { SHORT }
+	begin
+		DynamicSL = EntryPrice - (BEPufferTicks * TickSize);                  { SHORT }
+		BE_Armed = True;                                                      { SHORT }
+	end;
+end;
+
+{ ===== EXITS (INKL. EOD CLOSE) - long verbatim as received; short mirrored ===== }
+If MarketPosition = 1 then
+begin
+	If Time >= EODTime then
+	begin
+		Sell ("L-EOD") next bar at Market;
+	end
+	else
+	begin
+		Sell ("L-TP") next bar at DynamicTP limit;
+		Sell ("L-Stop") next bar at DynamicSL stop;
+	end;
+end;
+If MarketPosition = -1 then                                                   { SHORT }
+begin
+	If Time >= EODTime then
+	begin
+		BuyToCover ("S-EOD") next bar at Market;                              { SHORT }
+	end
+	else
+	begin
+		BuyToCover ("S-TP") next bar at DynamicTP limit;                      { SHORT }
+		BuyToCover ("S-Stop") next bar at DynamicSL stop;                     { SHORT }
+	end;
+end;

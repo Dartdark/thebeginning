@@ -1,0 +1,139 @@
+{ Kusho FAR final - long only (NQ / MNQ). PowerLanguage signal for MultiCharts.
+  SIGNAL At the close of a 15-minute bar stamped 09:00-13:59 CT: close > open, close > EMA(50) of closes,
+         lower wick (open - low) <= WickTolTicks (70 ticks).
+  ENTRY  Buy limit at the signal bar's open, next bar only.
+  EXITS  On the fill: stop at the most recent fractal swing low of bars 2-10 back if that risk is <= 500 ticks,
+         target 3R, and once price moves 0.5R in favour the stop goes to entry + 5 ticks. Otherwise a 200-tick
+         stop and a 200-tick target. Market exit from the first bar at or after EODTime (default 21:00 CT).
+         Friday's session ends at 16:00, so a position still open on Friday is held over the weekend.
+         One position at a time.
+  CHART  @NQ continuous, 15-minute, Exchange time zone, session template Sun-Fri 17:00-16:00 CT with Friday bars
+         to 16:00 (not the template that ends Friday 15:15). Costs used in testing: $2.50 commission per side
+         + $5 slippage per order, per NQ contract.
+  LIVE   Use synchronous auto-trading (SA mode). The entry is a limit order; in asynchronous mode a broker fill
+         that the chart does not register leaves the position with no stop and no exit.
+  ROLLS  On a raw (unadjusted) continuous chart, a position held across a contract roll books the price gap
+         between contracts as profit or loss. }
+
+Inputs:
+	EMALength(50),
+	WickTolTicks(70),   { max lower wick, ticks }
+	TargetTicks(200),
+	HardStopTicks(200),
+	MaxSwingRiskTicks(500),
+	SwingRR(3.0),
+	SwingBE_R(0.5),     { break-even arms at 0.5R }
+	BEPufferTicks(5),
+	StartTime(0900),
+	EndTime(1359),
+	EODTime(2100),
+	TickSizeOverride(0);
+
+Variables:
+	EMA50(0),
+	TickSize(0),
+	WickTicks(0),
+	SwingLowPrice(0),
+	SwingFound(False),
+	DynamicSL(0),
+	DynamicTP(0),
+	RiskTicks(0),
+	EntryInitialized(False),
+	LookbackBar(0),
+	IsSwingTrade(False),
+	SwingRiskPoints(0),
+	BE_Armed(False);
+
+EMA50 = XAverage(Close, EMALength);
+
+If TickSizeOverride > 0 then
+	TickSize = TickSizeOverride
+else
+	TickSize = MinMove / PriceScale;
+
+WickTicks = (Open - Low) / TickSize;
+
+{ ===== LONG ENTRY ===== }
+If MarketPosition = 0
+and Time >= StartTime
+and Time <= EndTime
+and Close > Open
+and (Open - Low) <= WickTolTicks * TickSize
+and Close > EMA50 then
+begin
+	Buy ("NoWickL") next bar at Open limit;
+end;
+
+{ ===== RESET WHEN FLAT ===== }
+If MarketPosition = 0 then
+begin
+	EntryInitialized = False;
+	SwingFound = False;
+	SwingLowPrice = 0;
+	IsSwingTrade = False;
+	SwingRiskPoints = 0;
+	BE_Armed = False;
+end;
+
+{ ===== INITIALIZE TRADE ON FILL ===== }
+If MarketPosition = 1 and EntryInitialized = False then
+begin
+	EntryInitialized = True;
+	SwingFound = False;
+	SwingLowPrice = 0;
+	IsSwingTrade = False;
+
+	{ Fallback }
+	DynamicSL = EntryPrice - (HardStopTicks * TickSize);
+	DynamicTP = EntryPrice + (TargetTicks * TickSize);
+
+	{ Suche aktuellstes Swing Low der letzten 10 Bars }
+	For LookbackBar = 2 to 10 begin
+		If SwingFound = False then
+		begin
+			If Low[LookbackBar] < Low[LookbackBar - 1]
+			and Low[LookbackBar] < Low[LookbackBar + 1] then
+			begin
+				SwingLowPrice = Low[LookbackBar];
+				SwingFound = True;
+			end;
+		end;
+	end;
+
+	{ Verwende Swing Low falls Risiko nicht zu groß }
+	If SwingFound then
+	begin
+		RiskTicks = (EntryPrice - SwingLowPrice) / TickSize;
+		If RiskTicks <= MaxSwingRiskTicks then
+		begin
+			DynamicSL = SwingLowPrice;
+			DynamicTP = EntryPrice + ((EntryPrice - SwingLowPrice) * SwingRR);
+			IsSwingTrade = True;
+			SwingRiskPoints = EntryPrice - SwingLowPrice;
+		end;
+	end;
+end;
+
+{ ===== SWING BREAKEVEN ===== }
+If MarketPosition = 1 and IsSwingTrade and (not BE_Armed) then
+begin
+	If High >= EntryPrice + (SwingRiskPoints * SwingBE_R) then
+	begin
+		DynamicSL = EntryPrice + (BEPufferTicks * TickSize);
+		BE_Armed = True;
+	end;
+end;
+
+{ ===== EXITS (INKL. EOD CLOSE) - verbatim as received ===== }
+If MarketPosition = 1 then
+begin
+	If Time >= EODTime then
+	begin
+		Sell ("L-EOD") next bar at Market;
+	end
+	else
+	begin
+		Sell ("L-TP") next bar at DynamicTP limit;
+		Sell ("L-Stop") next bar at DynamicSL stop;
+	end;
+end;
