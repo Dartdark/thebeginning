@@ -8,7 +8,7 @@ Trades = the user's MultiCharts v2 report (holiday flatten 11:30, entry-bar stop
      (combine_levers_test.challenge: +$3,000 target, $2,000 EOD trail, $1,000 daily limit).
   python3 analysis/fc_2b_bench.py [SCRATCH_DIR]     (needs single_print_sessions.pkl, rs_trades.csv, s_rank_gap2.pkl)
 """
-import sys, pickle, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
+import sys, time, pickle, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
 import numpy as np, pandas as pd
 from portfolio import load_mc, paths
 from funded_lab import with_slippage
@@ -21,8 +21,8 @@ KIND = {"stop": 0, "target": 1, "flat": 2}
 REP = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute FC 2B v2.xlsx"
 
 if __name__ == "__main__":
-    print(__doc__.split("\n")[0])
-    lab = FB.plan_lab(SP); FB.add_moc_mes(lab, SP)
+    print(__doc__.split("\n")[0]); T0 = time.time()
+    lab = FB.plan_lab(SP); print(f"[plan lab {time.time() - T0:.0f}s]"); FB.add_moc_mes(lab, SP)
     rs = pd.read_csv(SP + "rs_trades.csv"); rs["kind"] = rs.kind.map(KIND)
     lab.add("RS_L", rs[rs.side > 0].reset_index(drop=True))
     fc = load_mc(lab.g, REP); fc = fc[pd.DatetimeIndex(lab.g.ts[fc.day]) >= "2018-01-01"].reset_index(drop=True)
@@ -34,12 +34,8 @@ if __name__ == "__main__":
              "+ FC 2B longs 1 MNQ": {**CUR, "FC_L": 1},
              "RS longs -> FC 2B 1": {**drop("RS_L"), "FC": 1}, "RS longs -> FC 2B longs 1": {**drop("RS_L"), "FC_L": 1},
              "  RS longs slot empty": drop("RS_L")}
-    print("\nA. 50K funded, single history (1y / 2y payouts, blown):")
-    for nm, p in plans.items():
-        a, c = lab.score(p, 250, fmin=0.5, fmax=1.0, ref=1500.0), lab.score(p, 500, fmin=0.5, fmax=1.0, ref=1500.0)
-        print(f"   {nm:<28} ${a['expected']:7,.0f} / ${c['expected']:7,.0f}  blown {a['blown']:.0%} / {c['blown']:.0%}")
-    print("\n   Bootstrapped (1,000 paired histories, 20-day blocks, 2 years):")
-    B = FB.Boot(lab); df, s, _ = B.compare(plans, n=1000, L=20); print(s)
+    print("\nA. 50K funded, bootstrapped (1,000 paired histories, 20-day blocks, 2 years; single-history bench skipped):")
+    B = FB.Boot(lab); df, s, _ = B.compare(plans, n=1000, L=20); print(s); print(f"[bootstrap {time.time() - T0:.0f}s]")
     print("\n   Daily correlation of FC 2B with the plan pieces:")
     print(lab.corr(["FC"] + list(CUR)).loc["FC"].round(2).to_string())
 
