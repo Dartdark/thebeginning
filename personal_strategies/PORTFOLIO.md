@@ -35,7 +35,7 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | ~$13,600 | **C**: B + Vault Break | $10,400 | $4,400 | $2,730 |
 | ~$20,400 | **D**: C + Relative Strength + ES MOC | $14,500 | $6,300 | $4,080 |
 | ~$23,500 | **Full**: all 12 | $19,700 | $9,200 | $4,710 |
-| ~$32,900 | **Full + S30 IBS** (NQ + ES, 1 micro each; holds days, no stop) | $25,900 | | $6,570 |
+| ~$32,000 | **Full + S30 IBS** (NQ + ES, 1 micro each; holds days, no stop) | $25,400 | | $6,400 |
 | ~$47,000 | Full x 2 | $39,400 | $18,500 | $9,420 |
 
 A $10k start sits just under set B's line (p95 DD ~22% of $10k): acceptable if you're comfortable with that, or start

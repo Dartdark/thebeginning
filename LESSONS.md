@@ -26,6 +26,8 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - In an ablation, a setting of 0 must mean 'off': check the code's guard (FC 2B 'no break-even' run armed break-even
   at once and made the exits look essential; the checker caught it) (2026-10-23).
 - Book a Sunday-evening exit on the Monday trading date, or daily metrics silently drop it (Kusho, 2026-10-23).
+- A daily P&L series must add up to the trade nets (costs, fills, roll jumps): check the totals match before using it for
+  sizing or Monte Carlo (S30's first daily series overstated it by ~$3k; Codex caught it, 2026-10-23).
 
 ## Research sources
 - Read the PDF before trusting a summary: Antigravity misread the FOMC paper's key number (2026-10-18).

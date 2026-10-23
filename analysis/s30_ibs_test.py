@@ -46,7 +46,13 @@ def run(g, S, pv, tick, comm, rolls, mirror=False):
                 p = j - 1
                 while not np.isfinite(g.c.ravel()[p]): p -= 1
                 gross -= (g.c.ravel()[j] - g.c.ravel()[p]) * pos
-            out.append(dict(date=S.date[e_i], exit_date=x.date, side=pos, net=gross * pv - comm, days=(x.date - S.date[e_i]).days, i0=e_i, i1=i))
+            jumps = []
+            for j in rolls[(rolls > m0) & (rolls <= m1)]:
+                p = j - 1
+                while not np.isfinite(g.c.ravel()[p]): p -= 1
+                jumps.append((int(j // 1440), (g.c.ravel()[j] - g.c.ravel()[p]) * pos * pv))
+            out.append(dict(date=S.date[e_i], exit_date=x.date, side=pos, net=gross * pv - comm, days=(x.date - S.date[e_i]).days, i0=e_i, i1=i,
+                            e_px=e_px, x_px=px, comm=comm, jumps=jumps))
             pos = 0
     return pd.DataFrame(out)
 
@@ -88,15 +94,24 @@ if __name__ == "__main__":
         print(f"   random entry sessions, same hold lengths (500 runs): ${np.mean(rs):.0f} a trade (95th pct ${np.percentile(rs, 95):.0f}) vs S30 ${t.net.mean():.0f}"
               f" -> p {np.mean(np.array(rs) >= t.net.mean()):.3f} (roll jumps not removed in the control)")
         # daily mark-to-market for metrics / correlation
-        pos = pd.Series(0.0, index=S.date)
-        for _, x in t.iterrows(): pos.iloc[x.i0 + 1:x.i1 + 1] = 1.0
-        mtm = (pos * S.set_index("date").c15.ffill().diff().fillna(0) * pv).loc["2018-01-01":]
+        # daily mark-to-market that reconciles to the trade nets (fix 2026-10-23 after Codex's audit: the first version marked
+        # raw 15:00 closes and left out costs, entry / exit fills and roll jumps; it overstated the pair by ~$3k per micro)
+        c15 = S.c15.ffill().values; rowpos = {int(r): k for k, r in enumerate(S.r)}; pnl = np.zeros(len(S))
+        for _, x in t.iterrows():
+            prev = x.e_px
+            for k in range(x.i0 + 1, x.i1):
+                pnl[k] += (c15[k] - prev) * pv; prev = c15[k]
+            pnl[x.i1] += (x.x_px - prev) * pv - x.comm
+            for row, jv in x.jumps:
+                k = max([kk for rr, kk in rowpos.items() if rr <= row] or [x.i1]); k = min(max(k, x.i0 + 1), x.i1); pnl[k] -= jv
+        mtm = pd.Series(pnl, index=S.date).loc["2018-01-01":]
         alld = pd.bdate_range("2018-01-01", t.exit_date.max()); mtm = mtm.reindex(alld, fill_value=0.0)
+        print(f"   reconciliation: daily marked total ${mtm.sum():,.2f} vs trade nets ${t.net.sum():,.2f}")
         daily[sym] = mtm
         print(M.table({f"{sym} S30 (daily marked)": (mtm, t.net)}))
         bt, pm = R.report({f"{sym} 2023+": mtm[mtm.index >= "2023-01-01"]}, n=2000); print(bt)
         print(MC.report(t.net, mtm, size=0.1, label="1 micro"))
-        t.to_csv(f"checks/candidates/s30_ibs/python_trades_{sym}.csv", index=False)
+        t.drop(columns=["jumps"]).to_csv(f"checks/candidates/s30_ibs/python_trades_{sym}.csv", index=False)
     both = (daily["NQ"] + daily["ES"].reindex(daily["NQ"].index, fill_value=0)) / 10
     e = both.cumsum(); print(f"\nNQ + ES at 1 micro each (daily marked): ${both.sum() / (len(both) / 252):,.0f} a year, max DD ${-(e - e.cummax()).min():,.0f}, "
                           f"corr NQ / ES {np.corrcoef(daily['NQ'], daily['ES'].reindex(daily['NQ'].index, fill_value=0))[0, 1]:.2f}")

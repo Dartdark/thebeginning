@@ -28,6 +28,10 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   actual P&L (Apex dashboard, fees included) in the Monte Carlo range for one month of the live strategy set at live size
   (`analysis/montecarlo.py`, 21-day block bootstrap of the backtest daily P&L, 2023 onward) and report its percentile;
   below the 10th two months running → review with the drift alarm. Count the same signal on two accounts as one event.
+  **Also every Friday (user, 2026-10-23): the Claude-Codex cross-review** (`agents/codex/TASK_weekly_cross_review.md`):
+  review Codex's week independently into `agents/cross_review/YYYY-MM-DD_claude.md` (max 5 material disagreements, each with
+  evidence and the smallest settling check), then read Codex's file when the user has run its side, and write the joint
+  `..._summary.md` (agreed / disputed / user decisions). Remind the user to send Codex "do the weekly cross-review".
 - **Papers in git (user, 2026-10-19):** research-paper PDFs may be committed (folder `papers/`). Books stay out.
 - **Repo map:** `README.md` (reorganised 2026-10-21): MultiCharts reports in `mc_reports/`, all price data in `data/`,
   script results in `analysis/outputs/`, exporters in `tools/exporters/`, old material in `archive/`. Put new files there.
