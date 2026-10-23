@@ -7,18 +7,18 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 ## The pieces (1 micro each)
 | Piece | Market | $ a year | 2023+ a year | Max DD | Sharpe | Status |
 |---|---|---|---|---|---|---|
-| Relative Strength (both sides) | MNQ | $3,889 | $4,900 | $2,871 | 1.30 | B, MC-confirmed, live (longs) on Apex |
+| Relative Strength (both sides) | MNQ | $3,889 | $4,900 | $2,871 | 1.30 | B, MC-confirmed; funded plan (longs) |
 | Twin Continuation v2.1 | MNQ | $3,589 | $5,648 | $1,629 | 1.73 | A, MC-confirmed, personal only (overnight, wide stop) |
-| ONB ML | MNQ | $2,410 | $2,773 | $1,564 | 1.62 | S, live on Apex |
+| ONB ML | MNQ | $2,410 | $2,773 | $1,564 | 1.62 | S; funded plan (the combine runs plain ONB ADX30) |
 | FC 2B v2 | MNQ | $2,366 | $2,213 | $1,534 | 1.33 | A, MC-confirmed, **forward log first** |
-| Monday Long | MNQ | $2,104 | $3,912 | $2,086 | 1.09 | live on Apex |
-| Vault Break | MNQ | $1,723 | $2,237 | $1,385 | 1.30 | live on Apex |
-| Bridge Monday | MNQ | $1,295 | $1,478 | $1,689 | 1.39 | live on Apex |
-| Late-Day Flow | MNQ | $889 | $1,171 | $1,590 | 1.10 | live on Apex |
-| CL Sunday fade | MCL | $692 | $1,042 | $518 | 1.01 | live on Apex |
-| EOS | MNQ | $548 | $798 | $746 | 0.83 | live on Apex |
-| ES MOC | MES | $342 | $172 | $701 | 1.09 | live on Apex |
-| NFP Fade | MNQ | $291 | $467 | $826 | 0.60 | live on Apex |
+| Monday Long | MNQ | $2,104 | $3,912 | $2,086 | 1.09 | funded plan |
+| Vault Break | MNQ | $1,723 | $2,237 | $1,385 | 1.30 | live on Apex (combine) |
+| Bridge Monday | MNQ | $1,295 | $1,478 | $1,689 | 1.39 | live on Apex (combine) |
+| Late-Day Flow | MNQ | $889 | $1,171 | $1,590 | 1.10 | funded plan |
+| CL Sunday fade | MCL | $692 | $1,042 | $518 | 1.01 | funded plan |
+| EOS | MNQ | $548 | $798 | $746 | 0.83 | live on Apex (combine) |
+| ES MOC | MES | $342 | $172 | $701 | 1.09 | funded plan |
+| NFP Fade | MNQ | $291 | $467 | $826 | 0.60 | funded plan |
 
 ## Whole portfolio, every piece at 1 micro
 - **$20,100 a year** (2023+: $26,800), every year positive (2018 $4.7k, 2019 $3.0k, then $19-32k).
