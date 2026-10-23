@@ -13,6 +13,7 @@ $2,000 trailing limit, no daily loss limit, no payout caps. Everything below sti
 | **Twin Continuation v2.1** (user's; swing breakout + morning momentum, NQ, can hold overnight) | A: t 5.5, DSR 0.995, MultiCharts-confirmed (1,069/1,074 entries); wrong shape for Apex (swing stops ~$6k per NQ). The profile the user wants: big edge, trades a lot | `personal_strategies/Twin_Continuation.txt`, `checks/candidates/twin_continuation/` |
 | **Relative Strength NQ / ES, both sides** | B: $306 per NQ, t 4.0, 9/9 years, MC-confirmed; ~1 MNQ per $25k of account | `funded_strategies/NQ_Relative_Strength.txt` |
 | **Gold Breakout 15M** (user's TradingView idea) | C: $138 per GC, t 3.1, 7/9 years; hurt the Apex plan, fine as a small diversifier | `personal_strategies/Gold_Breakout_15M.txt` |
+| **FC 2B, Flow-Confirmed Opening Drive** (user's file, 2026-10-23; NQ, 09:01 entry in the opening drive's direction when its volume-weighted candle flow is unusually one-sided) | A on its numbers: MC-confirmed, $275 per NQ, PF 1.51, t 4.0, 9/9 years, checker PASS WITH CONCERNS; adds nothing to the Apex plans (cap-bound); forward log from 2026-10-26 | `checks/candidates/fc_2b/` |
 | **Sunday reopen push** (trade the weekend gap's direction at the 17:00 CT first print, out 17:01) | WATCHLIST #22: $179 per NQ, t 2.5, but only fillable with a pre-open auction order; forward-log ~20 Sundays first | `analysis/sunday_reopen_test.py` |
 
 ## 2. Tested, weak (only as small diversifiers)

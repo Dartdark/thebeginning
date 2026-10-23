@@ -56,6 +56,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **FC 2B (user's opening-drive strategy, 2026-10-23):** MultiCharts-confirmed (v2 with holiday flatten + entry-bar stop),
+  $275 per NQ, t 4.0, checker PASS WITH CONCERNS → A; but the 50K funded plan is near the payout cap and the combine gains
+  nothing, so it is NOT added; forward-logged (`agents/codex/FORWARD_LOG.md`), personal-account candidate.
 - **Codex break test (2026-10-22, `agents/codex/results/REVIEW_break_vb_onb_and_rest.md`):** ONB ADX30 bends under noise /
   indicators / timing / execution (no change); VB parity 97.5% because MultiCharts fills targets with 1 tick through (Python
   needs 1 point, stricter); VB stress rerun pending. Codex's RSI/Bollinger and XAU gold screens: F.
