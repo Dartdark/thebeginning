@@ -5,6 +5,8 @@ match the backtest (`DEVELOPMENT_PROCESS.md` 'Strategy lifecycle'). No Apex rule
 $2,000 trailing limit, no daily loss limit, no payout caps. Everything below still goes through the normal process
 (evidence sheet → plan → test → checker → forward log) before money goes on it.
 
+**Portfolio built from these: [`PORTFOLIO.md`](PORTFOLIO.md)** (2026-10-23).
+
 ## 1. Already tested and ready (strongest first)
 
 | Idea | Status / evidence | Where |

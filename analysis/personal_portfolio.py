@@ -1,0 +1,79 @@
+"""Personal-account portfolio from everything tested so far (user, 2026-10-23: 'what would my personal portfolio look
+like, with plan numbers'). No Apex rules: overnight holds allowed, no trailing limit, no payout cap.
+Pieces (daily $ per 1 micro, 2018-01 -> 2026-10, after costs):
+  - the 10 funded-plan strategies (agents/tasks/plan_daily_pnl.csv; RS both sides; CL fade per MCL, ES MOC per MES)
+  - FC 2B v2 (checks/candidates/fc_2b/trades.csv = MultiCharts v2 trades after $7.25 + 1 tick, per NQ / 10)
+  - Twin Continuation v2.1 (checks/candidates/twin_continuation/trades.csv, per NQ / 10; holds overnight, uncapped stop)
+Micro costs: the repo's per-NQ costs / 10 give $0.725 commission per round trip; real micro commissions are ~$1.25, so
+$0.55 more is charged per micro trade (plan pieces: per day with a trade, a slight underestimate for VB's re-entries).
+Portfolio = every piece at 1 micro. Sizing: Davey (size for half the drawdown you think you can take) and Radge
+(max DD ~ 1.7-2 x annual volatility): capital so the 1-year Monte Carlo p95 drawdown is <= 20% of it.
+  python3 analysis/personal_portfolio.py
+"""
+import sys, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
+import numpy as np, pandas as pd
+import metrics as M, montecarlo as MC
+
+EXTRA = 0.55
+
+if __name__ == "__main__":
+    print(__doc__.split("\n")[0])
+    p = pd.read_csv("agents/tasks/plan_daily_pnl.csv", parse_dates=["date"]).set_index("date")
+    p = p - EXTRA * (p != 0)
+    days = p.index
+    def from_trades(path, nm):
+        t = pd.read_csv(path, parse_dates=["date"]); x = t.net / 10 - EXTRA
+        return x.groupby(t.date).sum().reindex(days, fill_value=0.0).rename(nm), len(t)
+    fc, nfc = from_trades("checks/candidates/fc_2b/trades.csv", "FC2B")
+    tw, ntw = from_trades("checks/candidates/twin_continuation/trades.csv", "TwinContinuation")
+    P = pd.concat([p, fc, tw], axis=1)
+    names = {"VaultBreak": "Vault Break", "OvernightBiasML": "ONB ML", "MondayLong": "Monday Long", "ExpirationOpenShort": "EOS",
+             "LateDayFlow": "Late-Day Flow", "NFPFade": "NFP Fade", "BridgeMondayLong": "Bridge Monday", "CLSundayFade_perMCL": "CL Sunday (MCL)",
+             "ESMOCFollow_perMES": "ES MOC (MES)", "RelativeStrength": "Relative Strength", "FC2B": "FC 2B", "TwinContinuation": "Twin Continuation"}
+    yrs = len(P) / 252
+    print(f"\n1. Pieces at 1 micro each, {days.min().date()} -> {days.max().date()} ({yrs:.1f} years), after micro costs:")
+    rows = []
+    for c in P:
+        x = P[c]; e = x.cumsum(); a = x[x.index.year >= 2023]
+        rows.append(dict(piece=names[c], per_year=x.sum() / yrs, y2023=a.sum() / (len(a) / 252), max_dd=-(e - e.cummax()).min(),
+                         sharpe=x.mean() / x.std() * np.sqrt(252), days=int((x != 0).sum())))
+    t = pd.DataFrame(rows).set_index("piece")
+    print(t.to_string(formatters={"per_year": "${:,.0f}".format, "y2023": "${:,.0f}".format, "max_dd": "${:,.0f}".format, "sharpe": "{:.2f}".format}))
+
+    tot = P.sum(axis=1)
+    print("\n2. Whole portfolio, every piece at 1 micro:")
+    e = tot.cumsum(); dd = (e - e.cummax()).min(); m = tot.resample("ME").sum(); yv = tot.std() * np.sqrt(252)
+    print(f"   ${tot.sum() / yrs:,.0f} a year | max DD ${-dd:,.0f} | worst month ${m.min():,.0f} | losing months {np.mean(m < 0):.0%} | "
+          f"annual volatility ${yv:,.0f}")
+    print("   by year:", {k: f"${v:,.0f}" for k, v in tot.groupby(tot.index.year).sum().items()})
+    print(M.table({"portfolio": (tot, tot[tot != 0]), "  2023+": (tot[tot.index >= "2023-01-01"], tot[(tot != 0) & (tot.index >= "2023-01-01")])}))
+    dm = MC.daily_mc(tot.values, horizon=252, n=5000, block=20, trail=1e12)
+    print(f"   Monte Carlo, 1 year (20-day blocks): P&L p5 ${dm['pnl_p5']:,.0f} / p50 ${dm['pnl_p50']:,.0f} / p95 ${dm['pnl_p95']:,.0f}, "
+          f"P(losing year) {dm['p_loss']:.1%}, max DD p50 ${dm['dd_p50']:,.0f} / p95 ${dm['dd_p95']:,.0f}, return/DD {dm['ret_dd']:.1f}")
+    print("\n   Correlation of daily P&L (pieces with the rest of the portfolio):")
+    print("   " + ", ".join(f"{names[c]} {np.corrcoef(P[c], tot - P[c])[0, 1]:+.2f}" for c in P))
+
+    print("\n3. Sizing (capital so the 1-year MC p95 drawdown <= 20%; historical max DD shown as % of it):")
+    for cap in (10000, 15000, 20000, 25000, 50000):
+        k = max(1, int(np.floor(0.20 * cap / dm["dd_p95"] + 1e-9)))
+        print(f"   ${cap:>6,}: {k} x the 1-micro portfolio -> ${k * dm['pnl_p50']:,.0f} a year (p50, {k * dm['pnl_p50'] / cap:.0%}), "
+              f"p5 ${k * dm['pnl_p5']:,.0f}, DD p95 ${k * dm['dd_p95']:,.0f} ({k * dm['dd_p95'] / cap:.0%}), worst historical DD {k * -dd / cap:.0%}")
+    need = dm["dd_p95"] / 0.20
+    print(f"   capital for 1x at the 20% rule: ${need:,.0f}")
+
+    print("\n4. Without Twin Continuation (its uncapped swing stop is the biggest single-trade risk):")
+    t2 = tot - P["TwinContinuation"]; d2 = MC.daily_mc(t2.values, horizon=252, n=5000, block=20, trail=1e12); e2 = t2.cumsum()
+    print(f"   ${t2.sum() / yrs:,.0f} a year, max DD ${-(e2 - e2.cummax()).min():,.0f}, MC p50 ${d2['pnl_p50']:,.0f}, DD p95 ${d2['dd_p95']:,.0f}, "
+          f"return/DD {d2['ret_dd']:.1f}, capital at the 20% rule ${d2['dd_p95'] / 0.20:,.0f}")
+    print(f"   worst single Twin trade per MNQ ${pd.read_csv('checks/candidates/twin_continuation/trades.csv').net.min() / 10:,.0f}; "
+          f"worst portfolio day ${tot.min():,.0f}")
+
+    print("\n5. Starter sets for a smaller account (1 micro each; capital at the 20% rule), then add pieces as it grows:")
+    sets = {"A. 5 pieces: Twin, ONB ML, Bridge, CL Sunday, NFP": ["TwinContinuation", "OvernightBiasML", "BridgeMondayLong", "CLSundayFade_perMCL", "NFPFade"],
+            "B. 6 pieces: A + EOS": ["TwinContinuation", "OvernightBiasML", "BridgeMondayLong", "CLSundayFade_perMCL", "NFPFade", "ExpirationOpenShort"],
+            "C. 7 pieces: B + Vault Break": ["TwinContinuation", "OvernightBiasML", "BridgeMondayLong", "CLSundayFade_perMCL", "NFPFade", "ExpirationOpenShort", "VaultBreak"],
+            "D. 9 pieces: C + RS + ES MOC": ["TwinContinuation", "OvernightBiasML", "BridgeMondayLong", "CLSundayFade_perMCL", "NFPFade", "ExpirationOpenShort", "VaultBreak", "RelativeStrength", "ESMOCFollow_perMES"]}
+    for nm, ks in sets.items():
+        x = P[ks].sum(axis=1); d = MC.daily_mc(x.values, horizon=252, n=5000, block=20, trail=1e12); e = x.cumsum()
+        print(f"   {nm:<52} ${x.sum() / yrs:,.0f} a year, Sharpe {x.mean() / x.std() * np.sqrt(252):.2f}, max DD ${-(e - e.cummax()).min():,.0f}, "
+              f"MC p5 / p50 ${d['pnl_p5']:,.0f} / ${d['pnl_p50']:,.0f}, DD p95 ${d['dd_p95']:,.0f} -> capital ${d['dd_p95'] / 0.20:,.0f}")
