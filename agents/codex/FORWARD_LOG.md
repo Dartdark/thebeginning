@@ -20,6 +20,9 @@ results are added at each Friday review. 2023+ has been reused by many ideas, so
 | Rule | Frozen (date, commit) | Source report | Forward trades | Forward net (per NQ) | Status |
 |---|---|---|---|---|---|
 | **FC 2B v2** (Flow-Confirmed Opening Drive, NQ 1-min; `checks/candidates/fc_2b/FC_2B_v2.txt`) | 2026-10-23, code commit 848923d (v2 report aa41668) | `checks/candidates/fc_2b/REVIEW.md`, `verdict.md` | 0 | $0 | Tracking from 2026-10-26 |
+| **S47 v2** (Europe-Open Impulse, NQ; rule = `checks/candidates/s47_v2/S47_v2.txt`, fixed code `S47_v2_fixed.txt`) | 2026-10-23, rule script commit 130020c | `checks/candidates/s47_v2/REVIEW.md` | 0 | $0 | Tracking from 2026-10-26 |
+| **Kusho v9** (both exits: 21:00 with weekend holds, and flat 15:45; NQ; `checks/candidates/kusho/Kusho_v9.txt`) | 2026-10-23, rule script commit ea18c5f | `checks/candidates/kusho/REVIEW.md` | 0 | $0 | Tracking from 2026-10-26 |
+| **S30 IBS reversal** (NQ + ES, long only; `checks/candidates/s30_ibs/S30_IBS.txt`) | 2026-10-23, rule script commit 28be7ae | `checks/candidates/s30_ibs/REVIEW.md` | 0 | $0 | Tracking from 2026-10-26 |
 
 ### FC 2B v2: decision rule (written 2026-10-23, before tracking)
 - **Signals:** every day the v2 rule fires, from a re-exported MultiCharts v2 backtest (same chart, same inputs) at each
@@ -29,3 +32,16 @@ results are added at each Friday review. 2023+ has been reused by many ideas, so
 - **CONTINUE** if the forward mean per trade is inside the backtest's 10-90% Monte Carlo band for that many trades;
   **REJECT** if below the 10% band, or forward mean <= 0 with t <= -1 at 40 signals; **EXTEND** once (to 80) when in
   between. **PROMOTE** (personal account or a 150K plan test) only after 80 signals, and only by the user.
+
+### S47 v2, Kusho v9, S30: decision rule (written 2026-10-23, before tracking)
+- **Signals:** every signal of the frozen rule from 2026-10-26 on, computed with the frozen Python rebuilds
+  (`analysis/s47_test.py`, `analysis/kusho_test.py`, `analysis/s30_ibs_test.py`, unchanged) on the weekly 1-minute NQ / ES
+  exports (TODO: 'export fresh 1-minute data' each Friday); a MultiCharts run of the same code replaces the rebuild once
+  the user exports one. Paper only: none of them is traded.
+- **Costs:** as in each review ($7.25 per NQ / $5 per ES round trip + 1 tick per market / stop fill; limits 1 tick through,
+  targets 1 point through).
+- **Checkpoints:** S47 v2 40 / 80 signals (~6 / 12 months); Kusho v9 100 / 200 signals (~4 / 8 months); S30 20 / 40 trades
+  per market (~9 / 18 months; it trades ~28 times a year).
+- **CONTINUE** if the forward mean per trade is inside the backtest's 10-90% Monte Carlo band for that many trades;
+  **REJECT** if below the 10% band, or forward mean <= 0 with t <= -1 at the first checkpoint; **EXTEND** once when in
+  between. **PROMOTE** (personal account; S30 only once the account is ~$33k) only after the last checkpoint, by the user.
