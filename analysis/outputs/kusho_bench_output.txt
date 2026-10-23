@@ -1,0 +1,40 @@
+Kusho in the Apex plans (2026-10-23): the Apex-shaped versions only (Kusho v9 flat at 15:45 = 'v9_RTH', and C03).
+[CL fade trades 96, avg $653 per CL]
+per NQ from the lab: v9_RTH $92, C03 $64
+
+A. 50K funded, bootstrapped (1000 paired histories, 20-day blocks, 2 years):
+                                 y1  y1_p5      y2  y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan                         $9,354     $0 $12,088     $0 $13,000  7.0%   91.8%   259      50.0%      $0       0.0%
++ Kusho v9 15:45 1 MNQ       $9,551     $0 $11,929     $0 $13,000  8.5%   90.6%   246      49.6%   $-158       1.5%
++ Kusho v9 15:45 2 MNQ       $8,963     $0 $10,378     $0 $13,000 20.8%   78.8%   243      43.2% $-1,710      13.8%
++ C03 1 MNQ                  $8,934     $0 $11,774     $0 $13,000  9.6%   89.2%   268      48.3%   $-314       2.6%
+VB -> Kusho v9 15:45 1       $9,083     $0 $12,177 $1,500 $13,000  5.7%   92.0%   266      50.0%     $90      -1.3%
+  VB slot empty              $8,226     $0 $12,020 $1,500 $13,000  6.8%   89.8%   296      48.5%    $-67      -0.2%
+RS longs -> Kusho v9 15:45 1 $9,490     $0 $12,020 $1,500 $13,000  7.5%   91.0%   254      49.5%    $-68       0.5%
+  RS longs slot empty        $8,938 $1,500 $12,125 $1,500 $13,000  6.3%   91.7%   274      50.0%     $38      -0.7%
+
+   Daily correlation with the plan pieces:
+            v9_RTH   C03
+v9_RTH        1.00  0.67
+C03           0.67  1.00
+VB_N          0.31  0.23
+VB_F          0.22  0.17
+ONB_ML2_MC    0.12  0.09
+MON_MC        0.09  0.12
+EOS          -0.02 -0.02
+LDF_MC        0.20  0.19
+NFP_MC        0.00 -0.00
+MON_BR_MC     0.07  0.05
+CLS          -0.01  0.02
+MOC_MES       0.02  0.01
+RS_L          0.19  0.17
+B. 50K evaluation:
+   combine set                  pass 50.1% (18-22 46.7%, 23-26 54.5%) | median days to pass 6
+   + Kusho v9 15:45 1 MNQ       pass 49.2% (18-22 46.5%, 23-26 52.8%) | median days to pass 6
+   + Kusho v9 15:45 2 MNQ       pass 47.1% (18-22 44.7%, 23-26 50.2%) | median days to pass 5
+   + Kusho v9 15:45 3 MNQ       pass 46.8% (18-22 45.8%, 23-26 48.1%) | median days to pass 5
+   + C03 1 MNQ                  pass 48.5% (18-22 46.2%, 23-26 51.7%) | median days to pass 6
+   + C03 2 MNQ                  pass 46.7% (18-22 44.8%, 23-26 49.1%) | median days to pass 5
+   + C03 3 MNQ                  pass 43.4% (18-22 42.7%, 23-26 44.5%) | median days to pass 5
+   VB 8 -> Kusho v9 15:45 4     pass 44.2% (18-22 42.2%, 23-26 46.9%) | median days to pass 7
+   VB 8 -> Kusho v9 15:45 8     pass 39.0% (18-22 39.3%, 23-26 38.5%) | median days to pass 5
