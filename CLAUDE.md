@@ -6,6 +6,9 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
 ## Working rules
 
 - **Apex only** (ignore Topstep). Positions flat by 15:59 CT; $2,000 end-of-day trailing drawdown.
+- **Notifications (user, 2026-10-23):** send one PushNotification (under 200 characters, the reply's headline) at the end of
+  every reply to the user, so each new message reaches the phone. (A hook can't do this from the cloud container: ntfy.sh
+  answers 429 from the shared proxy.)
 - **Branches:** work on `claude/nq-trading-strategy-params-5h9d20`; keep
   `claude/quirky-noether-4dla64` and the session's designated branch identical; push every
   commit to all of them.
