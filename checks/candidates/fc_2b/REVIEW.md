@@ -79,3 +79,12 @@ return/DD 2.25, P(hit $2,000 trail, EOD) 4%; at 2 MNQ 29% (too big alone for a 5
    funded bootstrap bench with intraday paths and MNQ commissions.
 Also: 'flow' is a candle-and-volume proxy, not measured aggressor volume; the code accepts an incomplete opening range
 (if the 09:00 bar is missing the signal comes one bar later). Neither changes the verdict.
+
+## Update 2026-10-23: v2 MultiCharts report (user's export)
+- Same 826 signal days as v1; 31 trades changed, all for the intended reasons: **0 exits after 15:00** (the 26 holiday
+  trades now exit at 11:31; the 12:15 CT close days now 11:31 too); **3 entry-bar backstop stops** ("Stop Loss" at 09:01:
+  2020-03-03 −$2,000 instead of −$3,835 per NQ, 2024-09-04 −$2,000 instead of −$2,390), which confirms the v1 entry
+  minute was unprotected. The stop-through-market fallback didn't fire in the backtest.
+- v2 under our costs, 2018-26: 773 trades, $275 per NQ, PF 1.51, **t 4.0**, 9/9 years; 2018-22 $292 (t 3.7), 2023+ $252
+  (t 2.1); longs $305 (t 3.3, 9/9 years), shorts $246 (t 2.5; 2023+ t 0.9); Sharpe 1.32, Sortino 2.58, Calmar 1.53,
+  Ulcer 2.7, max DD $15.3k per NQ. v2 is the version to test further.
