@@ -33,3 +33,9 @@ Codex's source reviews: codex/work `agents/codex/results/{kusho,c03}_source_revi
   a lower blown rate). If VB ever weakens live, it is the first replacement to test. Needs its own MC run + entry-bar stop.
 - **C03: C** (weaker than plain v9 with a 15:45 flat; 2018-22 t 1.9). The ATR redesign didn't help.
 - FAR: superseded by v9.
+
+## Roll-adjusted indicators (Codex's cross-review, 2026-10-23; replay registered before running)
+The code removes contract-roll gaps before EMA / ATR / regime / swings; my first test fed raw prices. Corrected replay
+(`analysis/kusho_roll_adjusted_replay.py`): 98.9-99.9% of entries identical; FAR $97 → $97, v9 $108 → $107 (t 5.2),
+v9 flat 15:45 $92 → $91 (t 4.8), C03 $64 → $62 (t 3.2). Rankings unchanged (v9 B, v9 15:45 B, C03 C); benches not rerun
+(changes far smaller than the bench differences).
