@@ -115,7 +115,8 @@ def main():
        closed_peak_plus_trade_MAE_drawdown_NQ=mae_from_closed_peak,max_trade_MAE_NQ=float(-t.mae.min()),
        largest_loss_NQ=float(t.gross.min()),one_point_gross_winners=onepoint,
        entries_all_0901=bool(t.entry_time.dt.strftime('%H:%M').eq('09:01').all()),
-       intraday_all=bool((t.entry_time.dt.date==t.exit_time.dt.date).all()),
+       same_calendar_date_all=bool((t.entry_time.dt.date==t.exit_time.dt.date).all()),
+       exits_after_1500=int((t.exit_time.dt.hour*60+t.exit_time.dt.minute>15*60).sum()),
        end_of_day_fallbacks=int(t.exit_signal.eq('End of Day Exit').sum()),
        no_commission_or_slippage=True,source_parameters_match_export=True,
        not_new_backtest=True,new_strategy_trials=0,analytic_fixed_ledger_cost_rescores=1)
@@ -205,9 +206,13 @@ extrema are each consistent with a $1.50 micro debit, but that observation does 
   Actual micro round-trip costs above $2 would turn these outcomes negative; costs exactly $2 make them flat.
   A higher fee-adjusted losing-trade count need not eliminate positive overall expectancy. Recalculate using
   actual micro fees/fills; dividing full-contract net by 10 is not proof of micro net or its win rate.
-- **Trading clock:** all positions are intraday in the supplied list; {summary['end_of_day_fallbacks']} use the
-  platform End of Day Exit label rather than the explicit time order. Session/holiday handling needs inspection
-  before relying on SetExitOnClose. Bar 09:01 is a close stamp: its open corresponds to 09:00 CT under owned data.
+- **Trading clock (corrected after Claude's review):** all exits have the same calendar date as entry, but that
+  does not establish compliance with the trading session. **{summary['exits_after_1500']} exits are after 15:00**;
+  Claude's paired review identifies holiday positions held through the daytime halt into the evening reopen.
+  {summary['end_of_day_fallbacks']} exits use the platform End of Day Exit label rather than the explicit time
+  order; those labels alone do not identify every holiday carry. The first audit omitted this clock check.
+  The separately frozen v2 report addresses these exits; see `fc2b_bench_forward_review.md`.
+  Bar 09:01 is a close stamp: its open corresponds to 09:00 CT under owned data.
 
 ## Evidence status and next step
 

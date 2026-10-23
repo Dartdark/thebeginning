@@ -91,9 +91,13 @@ extrema are each consistent with a $1.50 micro debit, but that observation does 
   Actual micro round-trip costs above $2 would turn these outcomes negative; costs exactly $2 make them flat.
   A higher fee-adjusted losing-trade count need not eliminate positive overall expectancy. Recalculate using
   actual micro fees/fills; dividing full-contract net by 10 is not proof of micro net or its win rate.
-- **Trading clock:** all positions are intraday in the supplied list; 4 use the
-  platform End of Day Exit label rather than the explicit time order. Session/holiday handling needs inspection
-  before relying on SetExitOnClose. Bar 09:01 is a close stamp: its open corresponds to 09:00 CT under owned data.
+- **Trading clock (corrected after Claude's review):** all exits have the same calendar date as entry, but that
+  does not establish compliance with the trading session. **26 exits are after 15:00**;
+  Claude's paired review identifies holiday positions held through the daytime halt into the evening reopen.
+  4 exits use the platform End of Day Exit label rather than the explicit time
+  order; those labels alone do not identify every holiday carry. The first audit omitted this clock check.
+  The separately frozen v2 report addresses these exits; see `fc2b_bench_forward_review.md`.
+  Bar 09:01 is a close stamp: its open corresponds to 09:00 CT under owned data.
 
 ## Evidence status and next step
 
