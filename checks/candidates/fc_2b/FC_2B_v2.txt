@@ -12,7 +12,9 @@
   v2 (Claude, 2026-10-23): (1) CME holiday half-days (market halts ~12:00 CT): flat at EarlyFlattenTime 11:30, because
   the MultiCharts report held 26 holiday trades through the halt to the 17:00 reopen (an Apex breach live);
   (2) a backstop SetStopLoss at SLpoints so the entry bar is protected (the custom stop starts one bar later);
-  (3) SetExitOnClose removed (it fires after the session end; the explicit flatten does the job). Rule unchanged. }
+  (3) SetExitOnClose removed (it fires after the session end; the explicit flatten does the job); (4) when a raised
+  stop is already through the market at the bar close, exit at market next bar (a live stop there would be rejected;
+  the backtest already fills it at the next open). Rule unchanged. }
 { FC-ORB FIXED+TRAIL TEST v1 -- 2b entries, fixed SLpoints initial stop,
   optional point-trail. Trail: stop = highest high since entry - TrailPts,
   never below the fixed stop. TrailPts 0 = trail off (= pure SL100 ablation).
@@ -135,7 +137,11 @@ if MarketPosition = 1 then begin
         if beArmed then
             stopNow = MaxList( stopNow, EntryPrice + 4 * tickPts );
     end;
-    Sell ( "FT.LX.stp" ) next bar at stopNow stop;
+    { a raised stop already at / above the market would be rejected live: exit at market instead }
+    if stopNow >= Close then
+        Sell ( "FT.LX.mkt" ) next bar at market
+    else
+        Sell ( "FT.LX.stp" ) next bar at stopNow stop;
 end;
 
 if MarketPosition = -1 then begin
@@ -150,7 +156,10 @@ if MarketPosition = -1 then begin
         if beArmed then
             stopNow = MinList( stopNow, EntryPrice - 4 * tickPts );
     end;
-    BuyToCover ( "FT.SX.stp" ) next bar at stopNow stop;
+    if stopNow <= Close then
+        BuyToCover ( "FT.SX.mkt" ) next bar at market
+    else
+        BuyToCover ( "FT.SX.stp" ) next bar at stopNow stop;
 end;
 
 if Time >= DayExit then begin

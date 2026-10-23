@@ -22,6 +22,10 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - **A day-session chart doesn't stop a holiday trade at the 12:00 CT halt** (FC 2B, 2026-10-23): with ExitTime 14:58
   and `SetExitOnClose`, MultiCharts held 26 holiday trades through the halt and exited them at the 17:00 reopen. Every
   strategy needs the `IsEarlyClose` list and an early flatten, whatever the chart's session.
+- **`Volume` on intraday bars is up-tick volume; `Ticks` is the total** (Codex, FC 2B review 2026-10-23). Our exporter
+  writes `Ticks`, so a Python replay of a strategy that uses `Volume` is only approximate; use the MC report as the reference.
+- **A raised stop can already be through the market** when it is sent at the bar close (break-even / trail after a fast
+  reversal): live it is rejected. Exit at market next bar when the new stop is at or beyond the close.
 - **The wrong code under the right name** (2026-10-23): "Study is missing Data 2" on FC 2B meant the Overnight Sentiment
   code (4 data series) had been pasted into the FC 2B signal. Check the first comment lines after every paste.
 - **Old input values survive a code replace**: pasting new code into an existing signal keeps inputs with the same name

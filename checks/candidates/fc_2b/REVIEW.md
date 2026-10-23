@@ -54,8 +54,10 @@ return/DD 2.25, P(hit $2,000 trail, EOD) 4%; at 2 MNQ 29% (too big alone for a 5
 ## Update 2026-10-23: MultiCharts report (user's export) vs the rebuild (`analysis/fc_2b_mc_confirm.py`)
 - MC 826 trades (2017-05-30 → 2026-10-16), Python 818; 773 on the same day: **side 100%, entry price 100%**, exit
   price 97.4%, gross within $20 97.7%, gross correlation 0.998. 53 MC-only / 45 Python-only days, mostly near the
-  z threshold: holiday sessions are in MC's data but not in our day export, so the 60-day z history differs slightly.
-  The rule is implemented correctly; the day-level match (94%) is below our 98% gate for data reasons, not logic.
+  z threshold (median |z| ≈ 1.0). **Correction (after Codex's review):** not missing holidays (they are in our data)
+  but the volume definition: MultiCharts' intraday `Volume` is up-tick volume, `Ticks` the total, and our exporter
+  writes `Ticks`. The live strategy uses `Volume`, so the MC report, not the Python rebuild, is the reference for this
+  rule; the rebuild is a close approximation (same side and entry on all 773 shared days).
 - **MC trades under our costs, 2018-26:** 773 trades, $272 per NQ, PF 1.49, **t 3.94**, 9/9 years; 2018-22 $290
   (t 3.6), 2023+ $247 (t 2.1); longs $297 (t 3.2), shorts $248 (t 2.5; 2023+ t 0.9); Sharpe 1.30, Sortino 2.52,
   Calmar 1.52, Ulcer 2.8, max DD $15.2k; DSR at N = 282: 0.87. Clears the t bar (3.57), not the DSR bar.
@@ -63,3 +65,17 @@ return/DD 2.25, P(hit $2,000 trail, EOD) 4%; at 2 MNQ 29% (too big alone for a 5
   stopped at 17:01 for −$2,000 per NQ; 2022-02-21 +$4,475). Small in total (+$3.4k gross) but each one is an Apex
   breach live. Fixed in **`FC_2B_v2.txt`**: holiday half-day list + flat at 11:30, entry-bar backstop
   `SetStopLoss(SLpoints x BigPointValue)`, `SetExitOnClose` removed. Rule otherwise unchanged; rerun v2 in MC.
+
+## Codex's review (2026-10-23) and what changed
+1. Exits have no clean holdout (selected on the full sample; the 211-trade holdout belongs to the range-stop version):
+   agreed; forward log needed.
+2. Entry minute unprotected: agreed; v2 adds `SetStopLoss`. Check in the v2 report and live that the stop appears
+   right after the fill (Order and Position Tracker).
+3. `Volume` (up-ticks) vs our CSV (`Ticks`, total): agreed, it explains the ~50 near-threshold mismatched days (above).
+   Don't change the code's `Volume`: the MC report is the reference. A Python replay would need an up-volume export.
+4. A raised break-even / trail stop can already be through the market when sent: v2 exits at market next bar in that
+   case. (The Python replay already applies stop updates only after the bar closes and fills at the next open.)
+5. Account risk (open-loss drawdown vs closed-trade MC; MNQ costs are not 1/10 of NQ's): agreed; decided only on the
+   funded bootstrap bench with intraday paths and MNQ commissions.
+Also: 'flow' is a candle-and-volume proxy, not measured aggressor volume; the code accepts an incomplete opening range
+(if the 09:00 bar is missing the signal comes one bar later). Neither changes the verdict.
