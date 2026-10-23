@@ -1,0 +1,548 @@
+{ C03 - Kusho in volatility units, long and short (NQ / MNQ). PowerLanguage signal for MultiCharts.
+  RULE (CT clock; 1-minute chart; 15-minute strategy bars built in code, stamped at the slot end)
+   - EMA50 = exponential average (XAverage 50) of 15-minute closes. ATR15 = Wilder ATR(20) of 15-minute bars.
+   - DOWN day: the prior session's 15:00 close is below the average of the last 50 15:00 closes, and that average
+     is below its value 5 sessions earlier. Shorts are taken on DOWN days only.
+   - Long signal at the close of a 15-minute bar stamped 09:00-13:45: close > open, close > EMA50 and lower wick
+     (open - low) <= 0.5 x ATR15. Short signal (DOWN days): close < open, close < EMA50, upper wick
+     (high - open) <= 0.5 x ATR15.
+   - When flat at the signal close: a limit order at the signal bar's open, live for the next 15-minute bar.
+     A newer signal replaces an unfilled limit.
+   - R = fill - lowest low of the 9 bars before the signal bar (short: highest high - fill).
+     If 0 < R <= 3 x ATR15: stop at that swing level, target 3R; once the move in favour reaches 0.5R (checked at
+     15-minute closes) the stop goes to fill +/- 0.05 x ATR15. Otherwise: stop and target at 1 x ATR15, no
+     break-even. ATR15 is the signal bar's value.
+   - Exits are placed at the close of the 15-minute bar in which the limit filled. Flat at market from 15:45 CT
+     (or at the scheduled close of an early-close session). One position at a time.
+  CHART  @NQ continuous, UNADJUSTED (raw), 1-minute, Exchange time zone, session template Sun-Fri 17:00-16:00 CT
+         (not the template that ends Friday 15:15, or the 15:45 flat never fires on Fridays).
+         Load at least 3 months of history before the first trade (the DOWN filter needs 55 sessions).
+         IOG OFF, Bar Magnifier OFF, Max bars back user defined 50. Limit orders filled when price touches them.
+  LIVE   Use synchronous auto-trading (SA mode). The entry is a limit order; in asynchronous mode a broker fill
+         that the chart does not register leaves the position with no stop and no exit.
+  ROLLS  RawRollHandling = true removes contract-roll gaps on a raw @NQ chart using the splice times measured on
+         dxFeed @NQ: the Friday 03:32-03:34 CT bar through 2022-03; the Sunday 17:00 CT reopen of expiry week from
+         2022-06 to 2024-12, except 2024-06-18 and 2024-12-16 (03:32 CT bar); the Monday 17:00 CT reopen of expiry
+         week from 2025-03. Each applied splice prints "C03 SPLICE" in the Output window. Another data feed may
+         splice at other times. Set RawRollHandling = false on a back-adjusted chart.
+  LINE TAGS  Every executable line ends with a tag in braces:
+   S = the strategy rule.
+   P = platform bookkeeping that implements a rule (clock and calendar arithmetic, bar building, state).
+   D = contract-roll handling for raw data. Not trading logic.
+   G = diagnostics (Print only). No orders. }
+
+[IntrabarOrderGeneration = false]
+
+Inputs:
+	RR(3),                   { S  swing-bracket target = fill +/- RR x R (tested 2 and 3; default 3). Valid > 0. }
+	WickMult(0.5),           { S  w: wick limit (O - L long, H - O short) <= WickMult x ATR15 (default 0.5; 1.0 also tested).
+	                              0 = no wick condition. Valid >= 0. }
+	ShortLeg(true),          { S  true = the regime-gated short mirror is on (default on); false = longs only. }
+	SigFirstTime(900),       { S  first 15-minute bar stamp (slot END, HHMM CT) whose close can signal. }
+	SigLastTime(1345),       { S  last 15-minute bar stamp (slot END, HHMM CT) whose close can signal. }
+	FlatTime(1545),          { S  flat at market at the close of the first 1-minute bar at or after this HHMM CT; on
+	                              an early-close session at the session's scheduled close if that is earlier. }
+	EMALen(50),              { S  EMA50 = XAverage(EMALen) of 15-minute closes. Whole number >= 1. }
+	ATRLen(20),              { S  ATR15 = Wilder ATR(ATRLen) of 15-minute bars. Whole number 1..999. }
+	SwingBars(9),            { S  SL / SH = lowest low / highest high of the SwingBars 15-minute bars before the signal
+	                              bar (= bars 2-10 back from the fill bar). Whole number 1..998. }
+	RiskCapMult(3.0),        { S  swing bracket only if 0 < R <= RiskCapMult x ATR15. Valid > 0. }
+	FallbackMult(1.0),       { S  fallback bracket: stop and target at fill -/+ FallbackMult x ATR15. Valid > 0. }
+	BETrigR(0.5),            { S  break-even trigger: post-fill favourable extreme >= BETrigR x R (swing only). > 0. }
+	BEOffsetMult(0.05),      { S  break-even stop = fill +/- BEOffsetMult x ATR15 (nearest tick). Valid >= 0. }
+	SMALen(50),              { S  DOWN: SMA of the last SMALen 15:00 closes. Whole number 1..999. }
+	SlopeLag(5),             { S  DOWN: SMA compared with its value SlopeLag data sessions earlier. Whole 1..900. }
+	RegimeCloseTime(1500),   { S  DOWN: the RTH close = close of the 1-minute bar stamped exactly this HHMM CT. }
+	ContractQty(1),          { S  NQ contracts per trade. Every recorded result is 1. Whole number >= 1. }
+	RawRollHandling(true);   { D  NOT FROM SPEC. true = Data1 is raw (unadjusted) @NQ: roll gaps are removed from
+	                              every multi-bar value. false = Data1 is already additively back-adjusted. }
+
+Variables:
+	TickSz(0.25),            { S  CME NQ tick (checked against MinMove / PriceScale) }
+	BarSpan(15),             { S  strategy bar = 15 minutes (fixed, not an input) }
+	InitDone(false),         { P }
+	SigFirstSM(0),           { P  session minutes: 1 = the 17:01 bar, 420 = 00:00, 931 = 08:31, 1380 = 16:00 }
+	SigLastSM(0),            { P }
+	FlatSM(0),               { P }
+	FlatSMEff(0),            { P  today's flat clock = earlier of FlatSM and the scheduled close }
+	EMAAlpha(0),             { P  2 / (EMALen + 1) }
+	BarMin(0),               { P  minutes after midnight of this bar's stamp }
+	SessMin(0),              { P  session minute of this bar }
+	TdJul(0),                { P  trading date (Julian); a bar stamped after 16:00 belongs to the next date }
+	TdDate(0),               { P  trading date YYYMMDD }
+	TdDow(0),                { P  its day of week, 0 = Sunday }
+	InSess(false),           { P  bar inside a Monday-Friday 17:00-16:00 session }
+	AbsMin(0),               { P  absolute minute of this bar's stamp }
+	NewTd(false),            { P  first bar of a trading date }
+	GuardDate(0),            { P }
+	GuardCnt(0),             { P }
+	CumGap(0),               { D  sum of all NQ roll gaps seen: values are kept as raw price - CumGap at their bar }
+	LastGap(0),              { D  gap of the latest splice, points }
+	SplBarNum(0),            { D  CurrentBar of the latest splice bar }
+	CandOn(false),           { D  a 03:32-03:34 splice candidate is pending }
+	CandGap(0),              { D }
+	CandBarNum(0),           { D }
+	InWin(false),            { D  bar inside the roll-Friday 03:32-03:34 window (through 2022-03) }
+	JumpPx(0),               { D }
+	SunJul(0),               { D  Julian of 2022-06-01: Sunday-reopen splices from here }
+	MonEveJul(0),            { D  Julian of 2025-03-01: Monday-evening-reopen splices from here (ROLL FIX) }
+	BarMon(0),               { D }
+	BarDay(0),               { D }
+	TdMon(0),                { D }
+	TdDay(0),                { D }
+	CalY(0),                 { P  calendar of today's trading date }
+	CalM(0),                 { P }
+	CalD(0),                 { P }
+	CalOpen(false),          { P }
+	CalClose(0),             { P  scheduled close HHMM CT }
+	DCloseSM(0),             { P  scheduled close, session minutes }
+	EzYear(0),               { P  Easter cache }
+	EzGFJul(0),              { P }
+	EzA(0),                  { P }
+	EzB(0),                  { P }
+	EzC(0),                  { P }
+	EzH(0),                  { P }
+	EzL(0),                  { P }
+	EzM(0),                  { P }
+	EzMon(0),                { P }
+	EzDay(0),                { P }
+	CurTdJul(0),             { P  trading date of the session being accumulated }
+	SessIdx(0),              { P  finished data sessions }
+	CurHas15(false),         { P  the session has its 15:00 bar }
+	CurC15(0),               { P  its close, roll-free frame }
+	N15C(0),                 { P  15:00 closes stored }
+	SumV(0),                 { P }
+	SIx(0),                  { P }
+	Ix(0),                   { P }
+	PIx(0),                  { P }
+	QIx(0),                  { P }
+	DownToday(false),        { S  DOWN for today's session }
+	SlotNow(0),              { P  15-minute clock slot of this bar (slot k = minutes (15k-15, 15k]) }
+	SlotCur(0),              { P  slot being built }
+	SlotOpen(false),         { P  SlotCur has bars and has not been closed }
+	SlPass(0),               { P }
+	DoClose(false),          { P }
+	CloseBack(0),            { P  bars back to the last bar of the closing slot (0 on time, 1 late) }
+	KBack(0),                { P }
+	KAbs(0),                 { P }
+	KDone(false),            { P }
+	KOff(0),                 { D }
+	O15(0),                  { P  the completed 15-minute bar, roll-free frame }
+	H15(0),                  { P }
+	L15(0),                  { P }
+	C15(0),                  { P }
+	N15(0),                  { P  15-minute bars completed }
+	TR15(0),                 { P }
+	ATRSum(0),               { P }
+	ATR15(0),                { S  Wilder ATR(20) of 15-minute bars, includes the bar just closed }
+	EMA15(0),                { S  XAverage(50) of 15-minute closes }
+	PrevC15(0),              { P }
+	SwingLo(0),              { S  SL }
+	SwingHi(0),              { S  SH }
+	SlotEndMin(0),           { P }
+	SlotSM(0),               { P  session minute of the 15-minute bar's stamp }
+	WickOK(false),           { P }
+	SigUp(false),            { S }
+	SigDn(false),            { S }
+	SlotCloseHere(false),    { P  a 15-minute bar was completed on this bar }
+	ClosedBarNum(0),         { P  CurrentBar of that 15-minute bar's last 1-minute bar }
+	Armed(false),            { P  a limit is armed for the next 15-minute bar }
+	ArmSide(0),              { P }
+	ArmLim(0),               { P  limit = signal bar's open, roll-free frame }
+	ArmSwing(0),             { P  SL / SH, roll-free frame }
+	ArmATR(0),               { P  ATR15 frozen at the signal close }
+	PosPrev(0),              { P }
+	PosSide(0),              { P }
+	EntryBarNum(0),          { P }
+	EntryTdJul(0),           { P }
+	RiskPts(0),              { S  signed R }
+	StopPx(0),               { S }
+	TgtPx(0),                { S }
+	BEOn(false),             { S  swing bracket: break-even armed }
+	BEDone(false),           { S }
+	BETrigPts(0),            { S }
+	BEOffPts(0),             { S }
+	MFE(0),                  { S  post-fill favourable extreme, points }
+	ProtOn(false),           { S  exits live (from the bar after the fill bar's 15-minute close) }
+	NewStop(0),              { P }
+	BPVal(0);                { G }
+
+Arrays:
+	H15Ring[999](0),         { P  15-minute highs, slot Mod(n, 1000), roll-free frame }
+	L15Ring[999](0),         { P  15-minute lows }
+	C15Ring[999](0),         { P  15:00 closes, slot Mod(n, 1000), roll-free frame }
+	SHas15[999](0),          { P  per finished session (slot Mod(index, 1000)): 1 = it has its 15:00 bar }
+	SC15[999](0),            { P  its 15:00 close }
+	SSum[999](0),            { P  sum of the last SMALen 15:00 closes as of that session }
+	SSumOK[999](0);          { P  1 = at least SMALen 15:00 closes existed }
+
+{ ---------------- 0. One-time setup: clock Inputs to session minutes, Input and symbol checks ---------------- }
+If InitDone = false then begin                                                                    {P}
+	InitDone = true;                                                                              {P}
+	SigFirstSM = IntPortion(SigFirstTime / 100) * 60 + Mod(SigFirstTime, 100);                    {P}
+	If SigFirstTime > 1600 then SigFirstSM = SigFirstSM - 1020 else SigFirstSM = SigFirstSM + 420; {P}
+	SigLastSM = IntPortion(SigLastTime / 100) * 60 + Mod(SigLastTime, 100);                       {P}
+	If SigLastTime > 1600 then SigLastSM = SigLastSM - 1020 else SigLastSM = SigLastSM + 420;     {P}
+	FlatSM = IntPortion(FlatTime / 100) * 60 + Mod(FlatTime, 100);                                {P}
+	If FlatTime > 1600 then FlatSM = FlatSM - 1020 else FlatSM = FlatSM + 420;                    {P}
+	EMAAlpha = 2 / (EMALen + 1);                                                                  {S XAverage smoothing}
+	SunJul = DateToJulian(1220601);                                                               {D}
+	MonEveJul = DateToJulian(1250301);                                                            {D ROLL FIX}
+	If RR <= 0 or WickMult < 0 or EMALen < 1 or IntPortion(EMALen) <> EMALen
+		or ATRLen < 1 or ATRLen > 999 or IntPortion(ATRLen) <> ATRLen
+		or SwingBars < 1 or SwingBars > 998 or IntPortion(SwingBars) <> SwingBars
+		or RiskCapMult <= 0 or FallbackMult <= 0 or BETrigR <= 0 or BEOffsetMult < 0
+		or SMALen < 1 or SMALen > 999 or IntPortion(SMALen) <> SMALen
+		or SlopeLag < 1 or SlopeLag > 900 or IntPortion(SlopeLag) <> SlopeLag
+		or ContractQty < 1 or IntPortion(ContractQty) <> ContractQty
+		or SigFirstSM < 1 or SigLastSM < SigFirstSM or SigLastSM > 1380 or FlatSM < 1 or FlatSM > 1380 then {P}
+		RaiseRunTimeError("C03: an Input is outside its valid range; see the Inputs comments");   {P}
+	If SigFirstTime < 0 or SigFirstTime > 2359 or IntPortion(SigFirstTime) <> SigFirstTime or Mod(SigFirstTime, 100) >= 60
+		or SigLastTime < 0 or SigLastTime > 2359 or IntPortion(SigLastTime) <> SigLastTime or Mod(SigLastTime, 100) >= 60
+		or FlatTime < 0 or FlatTime > 2359 or IntPortion(FlatTime) <> FlatTime or Mod(FlatTime, 100) >= 60
+		or RegimeCloseTime < 1 or RegimeCloseTime > 1600 or IntPortion(RegimeCloseTime) <> RegimeCloseTime
+		or Mod(RegimeCloseTime, 100) >= 60 then                                                   {P}
+		RaiseRunTimeError("C03: a clock Input is not a whole HHMM time with minutes 00-59");      {P}
+	If AbsValue(MinMove / PriceScale - TickSz) > 0.000001 then                                    {P}
+		RaiseRunTimeError("C03: MinMove/PriceScale is not 0.25; CME NQ tick is 0.25");            {P}
+	If MaxBarsBack < 20 then                                                                      {P}
+		RaiseRunTimeError("C03: set Max bars back (user defined) to 20 or more: the 15-minute bar is read up to 16 bars back"); {P}
+	BPVal = BigPointValue;                                                                        {G}
+	Print("C03 START ", NumToStr(Date, 0), " ", NumToStr(Time, 0), " BigPointValue=", NumToStr(BPVal, 2),
+		" MaxBarsBack=", NumToStr(MaxBarsBack, 0), " RR=", NumToStr(RR, 2), " WickMult=", NumToStr(WickMult, 2));          {G}
+	If AbsValue(BPVal - 20) > 0.000001 then                                                       {P}
+		RaiseRunTimeError("C03: BigPointValue is not 20; CME NQ is 20 USD per index point. Fix the symbol settings"); {P}
+end;                                                                                              {P}
+
+{ ---------------- A. Clock: trading date and session minute of this bar ---------------- }
+BarMin = IntPortion(Time / 100) * 60 + Mod(Time, 100);                                            {P}
+If Time > 1600 then begin                                                                         {S a bar stamped after 16:00 belongs to the next trading date}
+	TdJul = DateToJulian(Date) + 1;                                                               {S}
+	SessMin = BarMin - 1020;                                                                      {P 17:01 -> 1}
+end else begin                                                                                    {P}
+	TdJul = DateToJulian(Date);                                                                   {S}
+	SessMin = BarMin + 420;                                                                       {P 00:00 -> 420, 16:00 -> 1380}
+end;                                                                                              {P}
+TdDate = JulianToDate(TdJul);                                                                     {P}
+TdDow = DayOfWeek(TdDate);                                                                        {P}
+InSess = (SessMin >= 1 and SessMin <= 1380 and TdDow >= 1 and TdDow <= 5);                        {S CME 17:00-16:00, Monday-Friday trading dates}
+AbsMin = DateToJulian(Date) * 1440 + BarMin;                                                      {P}
+NewTd = (InSess and TdJul <> CurTdJul);                                                           {P}
+If InSess = false then begin                                                                      {P chart-clock guard}
+	If Date <> GuardDate then begin                                                               {P}
+		GuardDate = Date;                                                                         {P}
+		GuardCnt = 0;                                                                             {P}
+	end;                                                                                          {P}
+	GuardCnt = GuardCnt + 1;                                                                      {P}
+	If GuardCnt > 5 then                                                                          {P}
+		RaiseRunTimeError("C03: bars between 16:00 and 17:00 CT or on a Saturday. Use Exchange time and a 17:00-16:00 CT session template"); {P}
+end;                                                                                              {P}
+
+{ ---------------- R. Contract roll on the raw @NQ continuous series ----------------
+  dxFeed @NQ switches contract 2016-09 .. 2022-03 on the Friday one week before the third Friday of
+  Mar/Jun/Sep/Dec, on one of the bars stamped 03:32-03:34 CT (the bar of that window with the largest
+  |Open - prior Close|, the first one on a tie). From 2022-06 (ROLL FIX, measured 2026-10-23): the first bar of
+  the session dated the Monday of expiry week (the Sunday 17:00 CT reopen) through 2024-12, except the quarters
+  of 2024-06 and 2024-12, whose splices are the first bar at or after 03:32 CT on 2024-06-18 and 2024-12-16; from
+  2025-03 the first bar of the session dated the Tuesday of expiry week (the Monday 17:00 CT reopen). CumGap
+  collects the gaps (splice bar Open - prior bar Close); every value the rule keeps across bars is stored as raw
+  price - CumGap at its bar, so the gaps never enter a comparison. Everything here is [D]. }
+If RawRollHandling and CurrentBar > 1 then begin                                                  {D}
+	BarMon = IntPortion(Mod(Date, 10000) / 100);                                                  {D}
+	BarDay = Mod(Date, 100);                                                                      {D}
+	InWin = (Date <= 1220331 and Time >= 332 and Time <= 334 and DayOfWeek(Date) = 5
+		and BarDay >= 8 and BarDay <= 14 and Mod(BarMon, 3) = 0);                                 {D roll Friday 03:32-03:34, through 2022-03}
+	If CandOn and InWin = false then begin                                                        {D the window is over: apply the largest jump}
+		CumGap = CumGap + CandGap;                                                                {D}
+		LastGap = CandGap;                                                                        {D}
+		SplBarNum = CandBarNum;                                                                   {D}
+		CandOn = false;                                                                           {D}
+	end;                                                                                          {D}
+	If InWin then begin                                                                           {D}
+		JumpPx = Open - Close[1];                                                                 {D}
+		If CandOn = false or AbsValue(JumpPx) > AbsValue(CandGap) then begin                      {D first largest |Open - prior Close|}
+			CandGap = JumpPx;                                                                     {D}
+			CandBarNum = CurrentBar;                                                              {D}
+			CandOn = true;                                                                        {D}
+		end;                                                                                      {D}
+	end;                                                                                          {D}
+	If NewTd and TdJul >= SunJul and TdJul < MonEveJul
+		and TdDate <> 1240617 and TdDate <> 1241216 then begin                                    {D 2022-06 .. 2024-12: the Sunday reopen of expiry week (ROLL FIX: not 2024-06, 2024-12)}
+		TdMon = IntPortion(Mod(TdDate, 10000) / 100);                                             {D}
+		TdDay = Mod(TdDate, 100);                                                                 {D}
+		If TdDow = 1 and TdDay >= 11 and TdDay <= 17 and Mod(TdMon, 3) = 0 then begin             {D Monday of expiry week}
+			LastGap = Open - Close[1];                                                            {D}
+			CumGap = CumGap + LastGap;                                                            {D}
+			SplBarNum = CurrentBar;                                                               {D}
+			Print("C03 SPLICE ", NumToStr(Date, 0), " ", NumToStr(Time, 0), " gap ", NumToStr(LastGap, 2));   {G}
+		end;                                                                                      {D}
+	end;                                                                                          {D}
+	If (Date = 1240618 or Date = 1241216) and Time >= 332
+		and (Time[1] < 332 or Date[1] <> Date) then begin                                         {D ROLL FIX: measured 03:32 CT splices, 2024-06-18 and 2024-12-16}
+		LastGap = Open - Close[1];                                                                {D}
+		CumGap = CumGap + LastGap;                                                                {D}
+		SplBarNum = CurrentBar;                                                                   {D}
+		Print("C03 SPLICE ", NumToStr(Date, 0), " ", NumToStr(Time, 0), " gap ", NumToStr(LastGap, 2));       {G}
+	end;                                                                                          {D}
+	If NewTd and TdJul >= MonEveJul then begin                                                    {D ROLL FIX, from 2025-03: the Monday 17:00 CT reopen of expiry week}
+		TdMon = IntPortion(Mod(TdDate, 10000) / 100);                                             {D}
+		TdDay = Mod(TdDate, 100);                                                                 {D}
+		If TdDow = 2 and TdDay >= 12 and TdDay <= 18 and Mod(TdMon, 3) = 0 then begin             {D Tuesday of expiry week}
+			LastGap = Open - Close[1];                                                            {D}
+			CumGap = CumGap + LastGap;                                                            {D}
+			SplBarNum = CurrentBar;                                                               {D}
+			Print("C03 SPLICE ", NumToStr(Date, 0), " ", NumToStr(Time, 0), " gap ", NumToStr(LastGap, 2));   {G}
+		end;                                                                                      {D}
+	end;                                                                                          {D}
+end;                                                                                              {D}
+
+{ ---------------- B. Entry fill on this bar: the frozen bracket from the actual fill ---------------- }
+If MarketPosition <> 0 and PosPrev = 0 then begin                                                 {P the armed limit filled on this bar}
+	PosSide = MarketPosition;                                                                     {P}
+	EntryBarNum = CurrentBar;                                                                     {P}
+	EntryTdJul = TdJul;                                                                           {P}
+	Armed = false;                                                                                {S a filled limit is consumed}
+	RiskPts = PosSide * (EntryPrice - (ArmSwing + CumGap));                                       {S signed R: long fill - SL, short SH - fill}
+	If RiskPts > 0 and RiskPts <= RiskCapMult * ArmATR then begin                                 {S swing bracket}
+		StopPx = ArmSwing + CumGap;                                                               {S stop at SL (SH)}
+		TgtPx = Floor((EntryPrice + PosSide * RR * RiskPts) / TickSz + 0.5) * TickSz;             {S target fill +/- RR x R}
+		BEOn = true;                                                                              {S}
+		BETrigPts = BETrigR * RiskPts;                                                            {S}
+		BEOffPts = BEOffsetMult * ArmATR;                                                         {S}
+	end else begin                                                                                {S fallback bracket (R <= 0 or R > 3 x ATR15)}
+		StopPx = Floor((EntryPrice - PosSide * FallbackMult * ArmATR) / TickSz + 0.5) * TickSz;   {S}
+		TgtPx = Floor((EntryPrice + PosSide * FallbackMult * ArmATR) / TickSz + 0.5) * TickSz;    {S}
+		BEOn = false;                                                                             {S no break-even}
+	end;                                                                                          {P}
+	BEDone = false;                                                                               {P}
+	MFE = 0;                                                                                      {P}
+	ProtOn = false;                                                                               {S exits wait for the fill bar's 15-minute close}
+end;                                                                                              {P}
+
+{ ---------------- C. First bar of a trading date: store the finished session's 15:00 close, today's DOWN,
+  today's scheduled close (CME equity calendar) ---------------- }
+If NewTd then begin                                                                               {P}
+	If CurTdJul > 0 then begin                                                                    {P the previous data session is finished}
+		SessIdx = SessIdx + 1;                                                                    {P}
+		SIx = Mod(SessIdx, 1000);                                                                 {P}
+		SHas15[SIx] = 0;                                                                          {P}
+		SSumOK[SIx] = 0;                                                                          {P}
+		If CurHas15 then begin                                                                    {S only existing 15:00 closes count}
+			SHas15[SIx] = 1;                                                                      {P}
+			SC15[SIx] = CurC15;                                                                   {S}
+			N15C = N15C + 1;                                                                      {P}
+			C15Ring[Mod(N15C, 1000)] = CurC15;                                                    {P}
+		end;                                                                                      {P}
+		If N15C >= SMALen then begin                                                              {S SMA50 as of that session: its last 50 existing 15:00 closes}
+			SumV = 0;                                                                             {P}
+			For Ix = N15C - SMALen + 1 to N15C begin                                              {P}
+				SumV = SumV + C15Ring[Mod(Ix, 1000)];                                             {S}
+			end;                                                                                  {P}
+			SSum[SIx] = SumV;                                                                     {S compared as sums: 50 x close vs sum}
+			SSumOK[SIx] = 1;                                                                      {P}
+		end;                                                                                      {P}
+	end;                                                                                          {P}
+	CurTdJul = TdJul;                                                                             {P}
+	CurHas15 = false;                                                                             {P}
+	DownToday = false;                                                                            {S undefined -> no short today}
+	PIx = Mod(SessIdx, 1000);                                                                     {P the prior data session}
+	QIx = Mod(SessIdx - SlopeLag, 1000);                                                          {P five data sessions before it}
+	If SessIdx - SlopeLag >= 1 and SHas15[PIx] = 1 and SSumOK[PIx] = 1 and SSumOK[QIx] = 1 then   {S prior session has its 15:00 close; both SMAs exist}
+		DownToday = (SMALen * SC15[PIx] < SSum[PIx] and SSum[PIx] < SSum[QIx]);                   {S DOWN: close < SMA50 and SMA50 < SMA50 five sessions earlier}
+	CalY = IntPortion(TdDate / 10000) + 1900;                                                     {P}
+	CalM = IntPortion(Mod(TdDate, 10000) / 100);                                                  {P}
+	CalD = Mod(TdDate, 100);                                                                      {P}
+	CalOpen = (TdDow >= 1 and TdDow <= 5);                                                        {P}
+	CalClose = 1600;                                                                              {P regular close}
+	If (CalM = 1 and CalD = 1) or (CalM = 1 and CalD = 2 and TdDow = 1)
+		or (CalM = 12 and CalD = 25) or (CalM = 12 and CalD = 24 and TdDow = 5)
+		or (CalM = 12 and CalD = 26 and TdDow = 1) then                                           {P New Year, Christmas (observed): closed}
+		CalOpen = false;                                                                          {P}
+	If CalY <> EzYear then begin                                                                  {P Good Friday = Gregorian Easter - 2 days}
+		EzYear = CalY;                                                                            {P}
+		EzA = Mod(CalY, 19);                                                                      {P}
+		EzB = IntPortion(CalY / 100);                                                             {P}
+		EzC = Mod(CalY, 100);                                                                     {P}
+		EzH = Mod(19 * EzA + EzB - IntPortion(EzB / 4) - IntPortion((EzB - IntPortion((EzB + 8) / 25) + 1) / 3) + 15, 30); {P}
+		EzL = Mod(32 + 2 * Mod(EzB, 4) + 2 * IntPortion(EzC / 4) - EzH - Mod(EzC, 4), 7);         {P}
+		EzM = IntPortion((EzA + 11 * EzH + 22 * EzL) / 451);                                      {P}
+		EzMon = IntPortion((EzH + EzL - 7 * EzM + 114) / 31);                                     {P}
+		EzDay = Mod(EzH + EzL - 7 * EzM + 114, 31) + 1;                                           {P}
+		EzGFJul = DateToJulian((CalY - 1900) * 10000 + EzMon * 100 + EzDay) - 2;                  {P}
+	end;                                                                                          {P}
+	If TdJul = EzGFJul then begin                                                                 {P Good Friday}
+		If TdDate = 1210402 or TdDate = 1230407 or TdDate = 1260403 then                          {P jobs-report Good Fridays: open to 08:15}
+			CalClose = 815                                                                        {P}
+		else                                                                                      {P}
+			CalOpen = false;                                                                      {P}
+	end;                                                                                          {P}
+	If ((CalM = 1 or CalM = 2) and TdDow = 1 and CalD >= 15 and CalD <= 21)
+		or (CalM = 5 and TdDow = 1 and CalD >= 25)
+		or (CalY >= 2022 and CalM = 6 and (CalD = 19 or (CalD = 18 and TdDow = 5) or (CalD = 20 and TdDow = 1)))
+		or (CalM = 7 and (CalD = 4 or (CalD = 3 and TdDow = 5) or (CalD = 5 and TdDow = 1)))
+		or (CalM = 9 and TdDow = 1 and CalD <= 7)
+		or (CalM = 11 and TdDow = 4 and CalD >= 22 and CalD <= 28) then                           {P MLK, Presidents, Memorial, Juneteenth, Independence, Labor, Thanksgiving}
+		CalClose = 1200;                                                                          {P}
+	If (CalM = 7 and CalD = 3 and TdDow <= 4) or (CalM = 12 and CalD = 24 and TdDow <= 4)
+		or (CalM = 11 and TdDow = 5 and CalD >= 23 and CalD <= 29) then                           {P July 3, December 24, Thanksgiving Friday}
+		CalClose = 1215;                                                                          {P}
+	If TdDate = 1181205 or TdDate = 1250109 then CalClose = 830;                                  {P national days of mourning}
+	If CalOpen = false then CalClose = 1600;                                                      {P bars on a scheduled closed day: regular close}
+	DCloseSM = IntPortion(CalClose / 100) * 60 + Mod(CalClose, 100) + 420;                        {P}
+	FlatSMEff = MinList(FlatSM, DCloseSM);                                                        {S flat at 15:45, or at the scheduled close if earlier}
+end;                                                                                              {P}
+
+{ ---------------- D. Today's RTH close (the bar stamped exactly 15:00) for DOWN ---------------- }
+If InSess and Time = RegimeCloseTime then begin                                                   {S}
+	CurHas15 = true;                                                                              {P}
+	CurC15 = Close - CumGap;                                                                      {D roll-free frame}
+end;                                                                                              {P}
+
+{ ---------------- E. 15-minute strategy bars (clock grid, stamped at the slot end, built from the 1-minute bars
+  present). A slot completes on its last 1-minute bar; when that bar is not stamped at the slot end (missing
+  bars), the file only learns it on the next bar and completes the slot one bar late (PARITY GAPS 1). At each
+  completion: ATR15, EMA50, SL/SH, the signal test, expiry of the previous limit and arming of a new one. ---------------- }
+SlotCloseHere = false;                                                                            {P}
+SlotNow = IntPortion((AbsMin + BarSpan - 1) / BarSpan);                                           {P}
+For SlPass = 1 to 2 begin                                                                         {P pass 1: a slot that ended on the previous bar; pass 2: this bar}
+	DoClose = false;                                                                              {P}
+	If SlPass = 1 then begin                                                                      {P}
+		If SlotOpen and SlotNow <> SlotCur then begin                                             {P the previous bar was its slot's last bar}
+			DoClose = true;                                                                       {P}
+			CloseBack = 1;                                                                        {P}
+		end;                                                                                      {P}
+	end else begin                                                                                {P}
+		SlotCur = SlotNow;                                                                        {P}
+		SlotOpen = true;                                                                          {P}
+		If Mod(AbsMin, BarSpan) = 0 then begin                                                    {P this bar is stamped at the slot end}
+			DoClose = true;                                                                       {P}
+			CloseBack = 0;                                                                        {P}
+		end;                                                                                      {P}
+	end;                                                                                          {P}
+	If DoClose then begin                                                                         {P}
+		SlotOpen = false;                                                                         {P}
+		SlotCloseHere = true;                                                                     {P}
+		ClosedBarNum = CurrentBar - CloseBack;                                                    {P}
+		KBack = CloseBack;                                                                        {P}
+		KDone = false;                                                                            {P}
+		While KDone = false begin                                                                 {P newest bar of the slot first}
+			If KBack >= CloseBack + BarSpan then                                                  {P}
+				KDone = true                                                                      {P}
+			else begin                                                                            {P}
+				KAbs = DateToJulian(Date[KBack]) * 1440 + IntPortion(Time[KBack] / 100) * 60 + Mod(Time[KBack], 100); {P}
+				If IntPortion((KAbs + BarSpan - 1) / BarSpan) <> SlotCur then                     {P}
+					KDone = true                                                                  {P}
+				else begin                                                                        {P}
+					KOff = CumGap;                                                                {D}
+					If CurrentBar - KBack < SplBarNum then KOff = CumGap - LastGap;               {D a bar before the latest splice}
+					If KBack = CloseBack then begin                                               {P}
+						H15 = High[KBack] - KOff;                                                 {S}
+						L15 = Low[KBack] - KOff;                                                  {S}
+						C15 = Close[KBack] - KOff;                                                {S}
+					end else begin                                                                {P}
+						H15 = MaxList(H15, High[KBack] - KOff);                                   {S}
+						L15 = MinList(L15, Low[KBack] - KOff);                                    {S}
+					end;                                                                          {P}
+					O15 = Open[KBack] - KOff;                                                     {S open of the slot's first bar}
+					KBack = KBack + 1;                                                            {P}
+				end;                                                                              {P}
+			end;                                                                                  {P}
+		end;                                                                                      {P}
+		N15 = N15 + 1;                                                                            {P}
+		If N15 = 1 then                                                                           {P}
+			TR15 = H15 - L15                                                                      {S first TR = H - L}
+		else                                                                                      {P}
+			TR15 = MaxList(H15, PrevC15) - MinList(L15, PrevC15);                                 {S TR against the prior 15-minute close}
+		If N15 < ATRLen then                                                                      {P}
+			ATRSum = ATRSum + TR15                                                                {P}
+		else if N15 = ATRLen then                                                                 {P}
+			ATR15 = (ATRSum + TR15) / ATRLen                                                      {S seed = mean of the first ATRLen TRs}
+		else                                                                                      {P}
+			ATR15 = (ATR15 * (ATRLen - 1) + TR15) / ATRLen;                                       {S Wilder smoothing}
+		If N15 = 1 then                                                                           {P}
+			EMA15 = C15                                                                           {S XAverage seeded at the first close}
+		else                                                                                      {P}
+			EMA15 = EMA15 + EMAAlpha * (C15 - EMA15);                                             {S}
+		If N15 > SwingBars then begin                                                             {S nine prior 15-minute bars needed}
+			SwingLo = L15Ring[Mod(N15 - 1, 1000)];                                                {S}
+			SwingHi = H15Ring[Mod(N15 - 1, 1000)];                                                {S}
+			For Ix = N15 - SwingBars to N15 - 2 begin                                             {P}
+				SwingLo = MinList(SwingLo, L15Ring[Mod(Ix, 1000)]);                               {S SL}
+				SwingHi = MaxList(SwingHi, H15Ring[Mod(Ix, 1000)]);                               {S SH}
+			end;                                                                                  {P}
+		end;                                                                                      {P}
+		H15Ring[Mod(N15, 1000)] = H15;                                                            {P}
+		L15Ring[Mod(N15, 1000)] = L15;                                                            {P}
+		PrevC15 = C15;                                                                            {P}
+		SlotEndMin = Mod(SlotCur * BarSpan, 1440);                                                {P}
+		If SlotEndMin > 960 then SlotSM = SlotEndMin - 1020 else SlotSM = SlotEndMin + 420;       {P}
+		SigUp = false;                                                                            {P}
+		SigDn = false;                                                                            {P}
+		If N15 > SwingBars and N15 >= ATRLen and SlotSM >= SigFirstSM and SlotSM <= SigLastSM then begin {S bars stamped 09:00-13:45; SL/SH and ATR15 exist}
+			If WickMult > 0 then WickOK = (O15 - L15 <= WickMult * ATR15) else WickOK = true;     {S (O - L) <= w x ATR15; w off: no condition}
+			SigUp = C15 > O15 and C15 > EMA15 and WickOK;                                         {S long: C > O, C > EMA50}
+			If ShortLeg and DownToday then begin                                                  {S short leg on and DOWN today}
+				If WickMult > 0 then WickOK = (H15 - O15 <= WickMult * ATR15) else WickOK = true; {S (H - O) <= w x ATR15}
+				SigDn = C15 < O15 and C15 < EMA15 and WickOK;                                     {S short: C < O, C < EMA50}
+			end;                                                                                  {P}
+		end;                                                                                      {P}
+		If CloseBack = 1 and (Armed or MarketPosition <> 0 or SigUp or SigDn) then               {G}
+			Print("C03 SLOT LATE ", NumToStr(Date, 0), " ", NumToStr(Time, 0), ": the 15-minute bar ending ",
+				NumToStr(Date[1], 0), " ", NumToStr(Time[1], 0), " completes one bar late (its slot-end bar is missing)"); {G}
+		Armed = false;                                                                            {S the previous limit has had its one 15-minute bar}
+		If SigUp or SigDn then begin                                                              {P}
+			If MarketPosition = 0 then begin {S flat at the signal close}
+				Armed = true;                                                                     {S}
+				If SigUp then ArmSide = 1 else ArmSide = -1;                                      {S}
+				ArmLim = O15;                                                                     {S limit at the signal bar's open}
+				If SigUp then ArmSwing = SwingLo else ArmSwing = SwingHi;                         {S}
+				ArmATR = ATR15;                                                                   {S ATR15 frozen for the trade}
+			end;                                                                                  {P}
+		end;                                                                                      {P}
+	end;                                                                                          {P}
+end;                                                                                              {P}
+
+{ ---------------- F. Open position: post-fill extreme, exits from the fill bar's 15-minute close, break-even at
+  15-minute closes, flat at 15:45 ---------------- }
+If MarketPosition <> 0 then begin                                                                 {P}
+	If CurrentBar > EntryBarNum then begin                                                        {S the fill bar's own extremes are excluded}
+		If PosSide = 1 then                                                                       {P}
+			MFE = MaxList(MFE, High - EntryPrice)                                                 {S}
+		else                                                                                      {P}
+			MFE = MaxList(MFE, EntryPrice - Low);                                                 {S}
+	end;                                                                                          {P}
+	If SlotCloseHere and ClosedBarNum >= EntryBarNum then begin                                   {S a 15-minute close at or after the fill bar}
+		ProtOn = true;                                                                            {S exits live from the next bar}
+		If BEOn and BEDone = false and MFE >= BETrigPts - TickSz * 0.000001 then begin            {S extreme reached fill +/- 0.5 R (float tolerance, P)}
+			NewStop = Floor((EntryPrice + PosSide * BEOffPts) / TickSz + 0.5) * TickSz;           {S fill +/- 0.05 x ATR15, nearest tick}
+			If (PosSide = 1 and NewStop > StopPx) or (PosSide = -1 and NewStop < StopPx) then     {S never loosens}
+				StopPx = NewStop;                                                                 {S}
+			BEDone = true;                                                                        {S once}
+		end;                                                                                      {P}
+	end;                                                                                          {P}
+	If SessMin >= FlatSMEff or TdJul <> EntryTdJul then begin                                     {S flat at the 15:45 bar close (outage: a later session's first bar)}
+		If PosSide = 1 then                                                                       {P}
+			Sell ("C03.LX.EOD") this bar on close                                                 {S}
+		else                                                                                      {P}
+			BuyToCover ("C03.SX.EOD") this bar on close;                                          {S}
+	end else if ProtOn then begin                                                                 {S}
+		If PosSide = 1 then begin                                                                 {P}
+			Sell ("C03.LX.Stop") next bar at StopPx stop;                                         {S}
+			Sell ("C03.LX.Tgt") next bar at TgtPx limit;                                          {S}
+		end else begin                                                                            {P}
+			BuyToCover ("C03.SX.Stop") next bar at StopPx stop;                                   {S}
+			BuyToCover ("C03.SX.Tgt") next bar at TgtPx limit;                                    {S}
+		end;                                                                                      {P}
+	end;                                                                                          {P}
+end;                                                                                              {P}
+
+{ ---------------- G. The armed limit: live on every bar of the next 15-minute bar while flat ---------------- }
+If MarketPosition = 0 and Armed then begin                                                        {S}
+	If ArmSide = 1 then                                                                           {P}
+		Buy ("C03.LE") ContractQty contracts next bar at ArmLim + CumGap limit                    {S buy limit at the signal bar's open}
+	else                                                                                          {P}
+		SellShort ("C03.SE") ContractQty contracts next bar at ArmLim + CumGap limit;             {S sell limit at the signal bar's open}
+end;                                                                                              {P}
+
+{ ---------------- H. End-of-bar bookkeeping ---------------- }
+PosPrev = MarketPosition;                                                                         {P}
