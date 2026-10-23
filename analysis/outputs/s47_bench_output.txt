@@ -1,0 +1,32 @@
+S47 v2 (user's Europe-Open Impulse, 2026-10-23) in the Apex plans: add or replace, same benches as FC 2B
+[CL fade trades 96, avg $653 per CL]
+S47 v2 trades 714; per NQ from the lab $346 a trade (rebuild $346)
+
+A. 50K funded, bootstrapped (1000 paired histories, 20-day blocks, 2 years):
+                          y1  y1_p5      y2  y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan                  $9,354     $0 $12,088     $0 $13,000  7.0%   91.8%   259      50.0%      $0       0.0%
++ S47 v2 1 MNQ        $9,519     $0 $11,976     $0 $13,000  8.0%   91.0%   252      49.6%   $-111       1.0%
++ S47 v2 2 MNQ        $8,924     $0 $10,708     $0 $13,000 18.2%   81.3%   252      44.5% $-1,380      11.2%
++ S47 v2 1 + FC 2B 1  $9,460     $0 $11,794     $0 $13,000  9.4%   89.6%   248      49.0%   $-294       2.4%
+RS longs -> S47 v2 1  $9,528     $0 $12,108 $1,500 $13,000  6.9%   92.1%   256      50.2%     $21      -0.1%
+  RS longs slot empty $8,938 $1,500 $12,125 $1,500 $13,000  6.3%   91.7%   274      50.0%     $38      -0.7%
+
+   Daily correlation of S47 v2 with the plan pieces:
+S47           1.00
+FC            0.19
+VB_N          0.11
+VB_F          0.09
+ONB_ML2_MC    0.17
+MON_MC        0.04
+EOS           0.05
+LDF_MC        0.07
+NFP_MC        0.05
+MON_BR_MC    -0.00
+CLS          -0.03
+MOC_MES      -0.01
+RS_L          0.19
+B. 50K evaluation (combine set + S47 v2):
+   combine set + S47 v2 0 MNQ: pass 50.1% (18-22 46.7%, 23-26 54.5%)
+   combine set + S47 v2 1 MNQ: pass 49.7% (18-22 48.3%, 23-26 51.5%)
+   combine set + S47 v2 2 MNQ: pass 48.5% (18-22 47.9%, 23-26 49.2%)
+   combine set + S47 v2 3 MNQ: pass 47.0% (18-22 47.6%, 23-26 46.1%)

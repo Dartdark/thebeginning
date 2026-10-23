@@ -69,7 +69,7 @@ def last_close(g, r, minute):
     return seg[-1] if len(seg) else np.nan
 
 
-def run(g, T, v2=True, stop_atr=0.5, thr=0.0625, side_override=None):
+def run(g, T, v2=True, stop_atr=0.5, thr=0.0625, side_override=None, ny_only=False):
     usable = (T.n >= 700) & T.first_ok & ~T.roll
     onr = T.rng.where(usable)
     atr = onr.shift(1).rolling(20, min_periods=1).mean(); cnt = onr.shift(1).rolling(20, min_periods=1).count()
@@ -81,8 +81,12 @@ def run(g, T, v2=True, stop_atr=0.5, thr=0.0625, side_override=None):
         ny0, c930 = last_close(g, r, jof(830)), g.c[r, jof(930)]
         if not np.all(np.isfinite([p0, p1, ny0, c930])): continue
         s = (p1 - p0) / A
-        if abs(s) <= thr: continue
-        side = 1 if s > 0 else -1
+        if ny_only:                                  # control (Codex): New York's first hour alone, London ignored
+            if c930 == ny0: continue
+            side = 1 if c930 > ny0 else -1
+        else:
+            if abs(s) <= thr: continue
+            side = 1 if s > 0 else -1
         if v2 and not ((side > 0 and c930 > ny0) or (side < 0 and c930 < ny0)): continue
         if side_override is not None: side = side_override(i, side)
         e = g.o[r, jof(931)]
@@ -131,6 +135,15 @@ if __name__ == "__main__":
         print(line(run(g, T, v2=True, stop_atr=st), f"stop {st} x ATR_ON"))
     for th in (0.03, 0.125):
         print(line(run(g, T, v2=True, thr=th), f"threshold {th}"))
+
+    print("\n2b. Does London add beyond New York's first hour? (Codex's control; every usable day, side = 08:30 -> 09:30)")
+    ny = run(g, T, ny_only=True)
+    lon = ny.s.abs() > 0.0625; agree = lon & (np.sign(ny.s) == ny.side)
+    for nm, t in (("NY direction, every day", ny), ("  London agrees (= S47 v2)", ny[agree]), ("  London opposite", ny[lon & ~agree]),
+                  ("  London too small (|s| <= 0.0625)", ny[~lon])):
+        print(line(t, nm))
+    d = ny[agree].net.mean() - ny[~agree].net.mean(); se = np.sqrt(ny[agree].net.var() / agree.sum() + ny[~agree].net.var() / (~agree).sum())
+    print(f"   London-agree minus the rest: ${d:.0f} a trade (t {d / se:.1f})")
 
     alld = pd.bdate_range("2018-01-01", v2.date.max())
     dl = lambda q: q.groupby(q.date).net.sum().reindex(alld, fill_value=0.0)
