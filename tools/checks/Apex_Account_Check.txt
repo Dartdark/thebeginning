@@ -1,0 +1,21 @@
+{ Apex_Account_Check - INDICATOR (no orders). Step 1 of automatic cushion sizing (Claude, 2026-10-23).
+  Prints what MultiCharts receives from Rithmic for this chart's account, so we know whether a strategy can read the
+  account balance by itself. Put it on any live chart (e.g. the VB chart) during the session, with auto-trading on, and
+  read the Output window (View > Output / PowerLanguage Editor Output). It prints once a minute.
+  AccountName: leave empty to use the chart's broker account (GetAccount(1)); or type the account (e.g. APEX-681524-01).
+  Send Claude a screenshot of the lines and the Apex dashboard balance at the same time. }
+
+Inputs: AccountName("");
+Vars: Acct(""), NW(0), EQ(0), LastMin(-1);
+
+If GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
+	If AccountName = "" then Acct = GetAccount(1) else Acct = AccountName;
+	If Mod(Time, 100) <> LastMin then begin
+		LastMin = Mod(Time, 100);
+		NW = GetRTAccountNetWorth(Acct);
+		EQ = GetRTAccountEquity(Acct);
+		Print("Apex_Account_Check ", NumToStr(Date, 0), " ", NumToStr(Time, 0), " account=[", Acct, "] NetWorth=",
+			NumToStr(NW, 2), " Equity=", NumToStr(EQ, 2));
+	end;
+end;
+Plot1(0, "Check");

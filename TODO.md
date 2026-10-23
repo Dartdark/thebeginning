@@ -122,6 +122,10 @@ after 15:59 CT, never with a position open.
 - [ ] **Account #1 is ~$398 above its trailing line:** one full VB stop at 8 MNQ (~$1,200) would end it. Your call (plan size kept
       2026-10-22); check the Apex dashboard each morning.
 
+- [ ] **Automatic cushion sizing, step 1 (any day, ~5 minutes):** add the indicator `tools/checks/Apex_Account_Check.txt`
+      to one live chart with auto-trading on, open the Output window, and send Claude a screenshot of its line next to the
+      Apex dashboard balance. If MultiCharts sees the right balance, Claude builds the automatic sizing (FUNDED_PLAN.md).
+
 ## Codex and new research data (2026-10-22)
 
 - [ ] **Export NQ 2017 daytime 1-minute data** (warm-up for the LDF flow-sizing test), on the **home PC** (not the VPS):

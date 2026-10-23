@@ -76,6 +76,18 @@ kept between 0.5 and 1; multiply each full-size input by f and round down:
 f = cushion / 1,500, multiply, round DOWN to whole contracts (risk inputs: multiply, no rounding). Evaluations (combines)
 are NOT cushion-sized: they run the combine set at fixed size.
 
+**Automatic cushion sizing (planned 2026-10-23, user asked).** MultiCharts can't read Apex's dashboard, so automation
+depends on Rithmic reporting the account balance to MultiCharts. Step 1 (now, on an evaluation account; nothing trades):
+put `../tools/checks/Apex_Account_Check.txt` (indicator, no orders) on a live chart and compare its NetWorth line with the
+Apex balance. If they match, step 2: one shared function used by every funded signal:
+- threshold = max(threshold, end-of-day balance − $2,000), locked at start + $100 once reached (Apex's EOD trail); seeded
+  by an input `StartThreshold` (today's threshold from the dashboard) so a chart restart doesn't lose it;
+- f = (balance at the session open − threshold) / $1,500, between 0.5 and 1, frozen for the day;
+- each signal's contracts = floor(full size × f), risk inputs × f; a missing or zero balance falls back to f = 0.5 and
+  prints a warning.
+It is compared with the manual table for a week (paper) before it replaces the morning routine. Until a funded account
+exists (earliest ~December), the manual table above is the method.
+
 The Bridge Monday Long enters on Sunday evening, so use Sunday's cushion (Friday's close balance) for it.
 
 | All MultiCharts trade lists, $7.25 + 1 tick per fill | 1 year | 2 years | Blown (1y / 2y) | Median days to all 6 payouts | All 6 within 1 year |
