@@ -23,12 +23,23 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - A candidate can earn its place by replacing, not only by adding (user rule, CLAUDE.md, 2026-10-18).
 - Count every variant you looked at; a sub-cut found after seeing results needs an untouched market or period to confirm it
   (the LETF push sub-cut failed on YM, 2026-10-18).
+- In an ablation, a setting of 0 must mean 'off': check the code's guard (FC 2B 'no break-even' run armed break-even
+  at once and made the exits look essential; the checker caught it) (2026-10-23).
+- Book a Sunday-evening exit on the Monday trading date, or daily metrics silently drop it (Kusho, 2026-10-23).
 
 ## Research sources
 - Read the PDF before trusting a summary: Antigravity misread the FOMC paper's key number (2026-10-18).
 - A paper with 'proposed', 'framework', 'may' and no 'we find' has no results (gamma expiration draft, 2026-10-18).
 - Check `TIER_LIST.md` for a paper's title / SSRN id before testing: Treasury auctions came back as 'new' (2026-10-18).
 - Never attach a finding, number or citation to a source that doesn't state it (Antigravity's invented citations, 2026-10).
+- One market out of many is not an edge: Davey's MACD crossover passed 6 of 220 market / bar-size tests (coffee 360-min
+  the "best", PF 1.1). Plain indicator entries need a forced-flow reason before we spend a trial on them (2026-10-22).
+- A plan near Apex's payout cap can't use a better strategy: FC 2B (A), S47 v2, OB v2 and Kusho all added nothing as
+  additions or replacements; judge a candidate on the bench, not on its own t-stat (2026-10-23).
+- The small uncorrelated pieces keep the funded plan alive: removing ES MOC alone takes blown 7.0% → 9.5%; replacing a
+  'weak' diversifier with a strong same-hours strategy makes the plan worse (2026-10-23).
+- Split a multi-day strategy's profit into weekend / weekday and into 'holding the index for the same days' before
+  crediting the pattern (Kusho: 40-44% from weekend holds; S30: about half index drift) (2026-10-23).
 
 ## Live operations
 - A dropped connection costs real trades (missed winner 2026-10-12): reliability (VPS, screen sleep off) beats speed.
@@ -39,5 +50,7 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
   up / test a second machine only after the close (VPS move, 2026-10-19).
 - Read the broker's reason before calling it a bug: the 'repeating 0.00 orders' were Apex's daily loss limit
   ('Account is done for day'); after any Apex lock, reset the charts (auto-trading off/on, flat) before the next open (2026-10-19).
-- One market out of many is not an edge: Davey's MACD crossover passed 6 of 220 market / bar-size tests (coffee 360-min
-  the "best", PF 1.1). Plain indicator entries need a forced-flow reason before we spend a trial on them (2026-10-22).
+- After pasting code, read its first comment lines: "Study is missing Data 2" on FC 2B was the Overnight Sentiment code
+  pasted under the FC 2B name (2026-10-23).
+- A day-session chart doesn't stop a trade at a holiday's 12:00 halt: FC 2B v1 held 26 holiday trades to the 17:00 reopen;
+  every strategy needs the early-close list and an explicit early flatten (2026-10-23).

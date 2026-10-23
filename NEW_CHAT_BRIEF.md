@@ -56,6 +56,13 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **Friday review 2026-10-23 (week of 10/19):** live = Vault Break only. #1: 10/19 −$1,025.66 (Apex daily-loss lock), 10/21
+  −$575.82 → $49,899.44 (~$398 above its trailing line; user keeps plan size). #2: 10/21 −$575.82 → $49,424.18. 10/20 logged
+  but not filled (@MNQ symbol mapping, fixed). 10/22-23 no trades. No weekly MultiCharts reports in live/, so no
+  live-vs-backtest / drift run (3 live VB days is too few to judge anyway). Research this week: FC 2B (A), S47 v2, OB v2,
+  Kusho v9, S30 IBS (B), C03 (C) — none improves either Apex plan (cap-bound funded plan; combine drawdown vs target);
+  replacing the 'weak' diversifiers (ES MOC, NFP, EOS, LDF) with FC 2B is worse; S47 / Kusho replacement batch running.
+  Personal portfolio built (`personal_strategies/PORTFOLIO.md`); accounts → income table in `funded_strategies/FUNDED_PLAN.md`.
 - **FC 2B (user's opening-drive strategy, 2026-10-23):** MultiCharts-confirmed (v2 with holiday flatten + entry-bar stop),
   $275 per NQ, t 4.0, checker PASS WITH CONCERNS → A; but the 50K funded plan is near the payout cap and the combine gains
   nothing, so it is NOT added; forward-logged (`agents/codex/FORWARD_LOG.md`), personal-account candidate.

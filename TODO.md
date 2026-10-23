@@ -114,6 +114,14 @@ after 15:59 CT, never with a position open.
 - [x] (2026-10-21, user: done) **One time, outside market hours:** paste the updated [Apex_Trade_Logger.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Trade_Logger.txt)
   (Raw button) into the existing "Apex Trade Logger" signal on the VPS and compile. Everything else runs by itself.
 
+## New strategies (2026-10-23)
+- [ ] **First Friday of each month (next: 11/06): re-export the FC 2B v2 MultiCharts report** (same chart and inputs) into
+      `mc_reports/` for the forward log (`agents/codex/FORWARD_LOG.md`). Paper only, not traded.
+- [ ] Optional, only if you want them on the shelf: MultiCharts runs of `checks/candidates/s47_v2/S47_v2_fixed.txt` (new signal,
+      not over FC 2B) and of Kusho v9 / C03 (reports .xlsx into `mc_reports/`).
+- [ ] **Account #1 is ~$398 above its trailing line:** one full VB stop at 8 MNQ (~$1,200) would end it. Your call (plan size kept
+      2026-10-22); check the Apex dashboard each morning.
+
 ## Codex and new research data (2026-10-22)
 
 - [ ] **Export NQ 2017 daytime 1-minute data** (warm-up for the LDF flow-sizing test), on the **home PC** (not the VPS):
