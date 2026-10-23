@@ -676,6 +676,21 @@ days = 21 trading days). Current set: 50.1% pass (2018–22 46.7%, 2023–26 54.
   simplest way: replace each finished or failed combine immediately, which staggers them naturally, and buy the next
   slot's combine a week or two after the last). Live: one combine since 2026-10-12 (shakedown week); add the next ones 5–10 trading days apart.
 
+### Income target → number of accounts (2026-10-23)
+
+Per slot (one account at a time: evaluation → funded → next evaluation), net of fees, 3-year means from
+`../analysis/apex_paths_test.py`; '75% edge' scales by the ramp test's 36-month ratio (0.72). Steady state, after the
+~4-month wait for the first payout; every account copies the same plan, so they win and lose together.
+
+| Monthly target | 150K slots (backtest / 75% edge) | 50K slots (backtest / 75% edge) |
+|---|---|---|
+| per slot | $1,466 / $1,056 a month | $961 / $692 a month |
+| $2,500 | 2 / 3 | 3 / 4 |
+| $5,000 | 4 / 5 | 6 / 8 |
+| $10,000 | 7 / 10 | 11 / 15 |
+| $20,000 | 14 / 19 | 21 / 29 (over Apex's 20 cap) |
+| 20 slots (the cap) | $29.3k / $21.1k a month | $19.2k / $13.8k a month |
+
 ### Ramp to Apex's 20-account limit (2026-10-15)
 
 Code `../analysis/ramp_to_20_test.py` (output in `..._output.txt`). Slots = accounts (challenge → funded → next
