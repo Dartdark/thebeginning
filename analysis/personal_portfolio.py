@@ -21,11 +21,26 @@ if __name__ == "__main__":
     p = pd.read_csv("agents/tasks/plan_daily_pnl.csv", parse_dates=["date"]).set_index("date")
     p = p - EXTRA * (p != 0)
     days = p.index
-    def from_trades(path, nm):
-        t = pd.read_csv(path, parse_dates=["date"]); x = t.net / 10 - EXTRA
-        return x.groupby(t.date).sum().reindex(days, fill_value=0.0).rename(nm), len(t)
+    def to_trading_day(d):
+        # book each exit on the next plan trading day on or after its calendar date (Sunday-evening exits -> Monday,
+        # market-closed weekdays -> the next session); fix 2026-10-23 after Codex's cross-review (9 Twin exits were dropped)
+        k = days.searchsorted(pd.DatetimeIndex(d)); k = np.minimum(k, len(days) - 1); return days[k]
+    def from_trades(path, nm, df=None):
+        t = df if df is not None else pd.read_csv(path, parse_dates=["date"]); t = t[pd.DatetimeIndex(t.date) <= days[-1]]
+        x = (t.net / 10 - EXTRA).to_numpy()
+        out = pd.Series(x, index=to_trading_day(t.date)).groupby(level=0).sum().reindex(days, fill_value=0.0).rename(nm)
+        assert abs(out.sum() - x.sum()) < 1e-6, nm      # every trade booked, none dropped
+        return out, len(t)
     fc, nfc = from_trades("checks/candidates/fc_2b/trades.csv", "FC2B")
+    # Twin: no v2.1 ledger exists. Main = the Python port v1 (checker ledger, 1,074 trades; has 4 holiday carries v2.1 removes);
+    # sensitivity = the MultiCharts v2 report (MC-confirmed; v2.1 differs by its evening SetExitOnClose and holiday fixes).
     tw, ntw = from_trades("checks/candidates/twin_continuation/trades.csv", "TwinContinuation")
+    raw = pd.read_excel("mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Twin Continuation v2.xlsx", sheet_name="List of Trades", header=2)
+    en = raw[raw.Type.astype(str).str.startswith("Entry")].reset_index(drop=True); ex = raw[raw.Type.astype(str).str.startswith("Exit")].reset_index(drop=True)
+    sd = np.where(en.Type.str.contains("Long"), 1, -1)
+    tmc = pd.DataFrame(dict(date=pd.to_datetime(ex.Date).dt.normalize(), net=(ex.Price.astype(float) - en.Price.astype(float)) * sd * 20 - 7.25 - 2 * 0.25 * 20))
+    tmc = tmc[tmc.date >= "2018-01-01"]
+    tw_mc, _ = from_trades(None, "TwinContinuation", tmc)
     P = pd.concat([p, fc, tw], axis=1)
     names = {"VaultBreak": "Vault Break", "OvernightBiasML": "ONB ML", "MondayLong": "Monday Long", "ExpirationOpenShort": "EOS",
              "LateDayFlow": "Late-Day Flow", "NFPFade": "NFP Fade", "BridgeMondayLong": "Bridge Monday", "CLSundayFade_perMCL": "CL Sunday (MCL)",
@@ -65,6 +80,10 @@ if __name__ == "__main__":
     t2 = tot - P["TwinContinuation"]; d2 = MC.daily_mc(t2.values, horizon=252, n=5000, block=20, trail=1e12); e2 = t2.cumsum()
     print(f"   ${t2.sum() / yrs:,.0f} a year, max DD ${-(e2 - e2.cummax()).min():,.0f}, MC p50 ${d2['pnl_p50']:,.0f}, DD p95 ${d2['dd_p95']:,.0f}, "
           f"return/DD {d2['ret_dd']:.1f}, capital at the 20% rule ${d2['dd_p95'] / 0.20:,.0f}")
+    for nm_, twx in (("Twin = MultiCharts v2 report", tw_mc),):
+        alt = tot - P["TwinContinuation"] + twx; da = MC.daily_mc(alt.values, horizon=252, n=5000, block=20, trail=1e12); ea = alt.cumsum()
+        print(f"   full 12 with {nm_}: ${alt.sum() / yrs:,.0f} a year, max DD ${-(ea - ea.cummax()).min():,.0f}, MC p50 ${da['pnl_p50']:,.0f}, "
+              f"DD p95 ${da['dd_p95']:,.0f}, capital at the 20% rule ${da['dd_p95'] / 0.20:,.0f} (Twin alone ${twx.sum() / yrs:,.0f} a year vs port ${P['TwinContinuation'].sum() / yrs:,.0f})")
     print(f"   worst single Twin trade per MNQ ${pd.read_csv('checks/candidates/twin_continuation/trades.csv').net.min() / 10:,.0f}; "
           f"worst portfolio day ${tot.min():,.0f}")
 
