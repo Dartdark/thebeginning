@@ -1,0 +1,35 @@
+{
+  "ref": "52a6543589941455b775d46dfc23dcfbf16ec188",
+  "operation": "Source/previously published ledger arithmetic; no new strategy returns",
+  "new_strategy_return_trials": 0,
+  "input_count": 1074,
+  "input_version_claim": "personal_portfolio.py calls this Twin Continuation v2.1",
+  "actual_ledger_spec": "unchanged original source, date=calendar exit date",
+  "holiday_carry_net_micro": -613.9,
+  "holiday_1130_bar_present": {
+    "2024-07-04": true,
+    "2018-05-28": true,
+    "2018-11-23": true,
+    "2021-09-06": true
+  },
+  "dropped_rows": 9,
+  "dropped_gross_scaled_net_micro": 755.5322635360022,
+  "dropped_after_portfolio_own_extra_fee_micro": 750.5822635360022,
+  "dropped_sunday_count": 8,
+  "evening_exit_rows": 34,
+  "evening_exit_net_micro": 2569.8256903658416,
+  "evening_exit_date_stays_same_calendar_day": true,
+  "no_corrected_portfolio_or_capital_computed": true,
+  "consequence": "Starter/full capital ladders use a superseded Twin ledger and calendar-date bucketing; corrected magnitude unknown.",
+  "minimal_check": "Use the exact proposed version, map evening/Sunday/holiday exits to the declared futures trading date, reconcile its full net to included daily net, then recompute the existing portfolio risk without changing entry rules.",
+  "input_sha256": {
+    "analysis/personal_portfolio.py": "078da0e75f1ec7703f0daa58854150d52e9cd9e0e0494127851ff91b59a89f91",
+    "personal_strategies/Twin_Continuation.txt": "25884f1e730cfc4923f5f73dfda87bd779cde3dc741e38bf3053a300305fb18b",
+    "checks/candidates/twin_continuation/spec.md": "f92cb3ebc98f371488d5421ffb8ebaf01413b21c9d26d62cdbccab43f80817bd",
+    "checks/candidates/twin_continuation/trades.csv": "2e0fe7f717a711bd2416ccee377886287da0c6ed5a0dfd5653dcccd1c30c549e",
+    "agents/tasks/plan_daily_pnl.csv": "631e3c3b558a3279e804c233566371f7e0051e85996bf8ac1c7ee5a9f4db1dfb"
+  },
+  "script_sha256": "9c28df9b12f3980f98f32c2e6c6080afb72e1ee6f8a57737fed28d5705b266cd",
+  "input_paths_relative_to": "original repository tree at ref",
+  "raw_trade_rows_included": false
+}

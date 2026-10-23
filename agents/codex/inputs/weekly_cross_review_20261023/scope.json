@@ -1,0 +1,1280 @@
+{
+  "review_date": "2026-10-23",
+  "timezone": "America/Chicago",
+  "since_inclusive": "2026-10-17T00:00:00-05:00",
+  "source_ref": "52a6543589941455b775d46dfc23dcfbf16ec188",
+  "codex_start": "80f3bed2184d0ed6fcb055acfcb230bcdf23d6ef",
+  "commits_triaged": 253,
+  "scope": "Saturday after prior Friday through current Friday; initial review; historical artifacts and revised latest files",
+  "claude_assessment_read": false,
+  "cross_review_paths_at_start": [
+    "agents/cross_review/README.md"
+  ],
+  "commits": [
+    {
+      "sha": "52a6543589941455b775d46dfc23dcfbf16ec188",
+      "title": "Cross-review: Codex's refinements (independent first, one response + deciding check, routine vs research, defects reported at once, judgement calls with a recommendation)",
+      "committed_at": "2026-10-23T22:43:18Z"
+    },
+    {
+      "sha": "729c58378ecb707a4dd598ad95efac3ac279c330",
+      "title": "S30 daily series fixed after Codex's audit (reconciles to trade nets); weekly Claude-Codex cross-review set up",
+      "committed_at": "2026-10-23T22:39:03Z"
+    },
+    {
+      "sha": "91a70c9bf2b3eb050e77eb87b52df33fe4ae8775",
+      "title": "Automatic cushion sizing: step-1 account check indicator and design (FUNDED_PLAN, TODO)",
+      "committed_at": "2026-10-23T22:26:02Z"
+    },
+    {
+      "sha": "5a96a42a007be6685d437e7926259a519c1a0051",
+      "title": "FUNDED_PLAN: cushion-sizing table updated to the current 10-strategy plan",
+      "committed_at": "2026-10-23T22:23:27Z"
+    },
+    {
+      "sha": "1888913ab2873af2459cd4e5dfceac260b2b3eb3",
+      "title": "Process (user): forward log is discretionary; a candidate that clears every test incl. the bench goes straight into the plan",
+      "committed_at": "2026-10-23T22:14:16Z"
+    },
+    {
+      "sha": "1fdb6ad986d50d51c922868d92216fda3f8b9cde",
+      "title": "Forward log: add S47 v2, Kusho v9 and S30 with decision rules written before tracking",
+      "committed_at": "2026-10-23T22:09:28Z"
+    },
+    {
+      "sha": "ae1e7feed31952541126532534b9caa4aed18612",
+      "title": "Replace-weak bench (combine): every EOS / Bridge replacement lowers the pass rate; plans unchanged",
+      "committed_at": "2026-10-23T22:01:56Z"
+    },
+    {
+      "sha": "291137cf2a1bb8b20f48e20871adcceeed330cbc",
+      "title": "Replace-weak bench (funded): no replacement of ES MOC / NFP / EOS / LDF beats the plan",
+      "committed_at": "2026-10-23T22:01:25Z"
+    },
+    {
+      "sha": "b75b3035f3563f934d145e80b9e4fa049d2dc730",
+      "title": "CLAUDE.md: push notification at the end of every reply (user request)",
+      "committed_at": "2026-10-23T21:50:25Z"
+    },
+    {
+      "sha": "c77f8873305cde39128f663341bc7c8d88295ef8",
+      "title": "Friday review 2026-10-23: week of live VB trades, 7 lessons, brief and to-dos (no weekly MC reports in live/)",
+      "committed_at": "2026-10-23T21:48:58Z"
+    },
+    {
+      "sha": "d85032b932e3da1fe1e9c2d499cd020b6ec6c68c",
+      "title": "Journal: 2026-10-23 trades (none logged)",
+      "committed_at": "2026-10-23T21:41:08Z"
+    },
+    {
+      "sha": "93c9470186c31e70e441963cf28677a70c04498c",
+      "title": "live trades + health 2026-10-23 (close)",
+      "committed_at": "2026-10-23T21:10:11Z"
+    },
+    {
+      "sha": "28be7aeb7b2ee2e4b9e10b3b157fe091fcdc2609",
+      "title": "S30 IBS reversal: rebuild (NQ t 3.5, ES t 3.6; half index drift), B, personal-portfolio step at ~$33k",
+      "committed_at": "2026-10-23T21:02:38Z"
+    },
+    {
+      "sha": "46b20b0299a45831670c2811c1ba13fe973b0632",
+      "title": "Bench: replace the weaker plan strategies (ES MOC, NFP, EOS, LDF; combine EOS / Bridge) with FC 2B / S47 / Kusho",
+      "committed_at": "2026-10-23T18:54:17Z"
+    },
+    {
+      "sha": "1f5abcef8b6d1373e987b7be3ab37124158c40ff",
+      "title": "Kusho: benches (no gain; VB -> v9 15:45 a trade-off), ranked v9 B, C03 C",
+      "committed_at": "2026-10-23T18:23:29Z"
+    },
+    {
+      "sha": "ea18c5f0116b3181e36859fed4cdb26ecab42683",
+      "title": "Kusho FAR / v9 / C03: rebuild from the code (fills and exits minute by minute), v9 flat-15:45 variant, bench script",
+      "committed_at": "2026-10-23T17:21:10Z"
+    },
+    {
+      "sha": "36ee46ab62206b4782b87616d6f67dfc030831a7",
+      "title": "Review: C03 is Kusho's intraday version (user)",
+      "committed_at": "2026-10-23T17:08:41Z"
+    },
+    {
+      "sha": "7f0b98f889615ca4eab5b40793bcb517bdceab7b",
+      "title": "Review Codex: Kusho / C03 source reviews (NEEDS DATA), OB v2 account test (B, plans unchanged)",
+      "committed_at": "2026-10-23T17:06:22Z"
+    },
+    {
+      "sha": "130020cc3797254b51492a700e86e2de4be78605",
+      "title": "S47 v2 fixed code (entry-bar backstop, stop-through fallback); combine days to pass with S47 / FC 2B",
+      "committed_at": "2026-10-23T16:40:14Z"
+    },
+    {
+      "sha": "0985ab55bd88565b6a9eef445007323c983a0a5e",
+      "title": "S47 v2: benches (adds nothing to Apex plans), NY-only control (London carries the edge, t 3.5), ranked B",
+      "committed_at": "2026-10-23T16:27:22Z"
+    },
+    {
+      "sha": "e7c394fe8924be690f3010e5b02d2f466b81c73b",
+      "title": "S47 v2: rebuild results (matches the author's years; t 4.1, random side $54 vs $346) and bench script",
+      "committed_at": "2026-10-23T15:37:16Z"
+    },
+    {
+      "sha": "3d74b9a7d1d61700c69def7ba8b764b2f1facd46",
+      "title": "S47: output (in progress)",
+      "committed_at": "2026-10-23T15:36:15Z"
+    },
+    {
+      "sha": "d80910b07ed50fbbd2151bb9e60800175733c230",
+      "title": "S47 / S47 v2: candidate files and Python rebuild (running)",
+      "committed_at": "2026-10-23T15:35:58Z"
+    },
+    {
+      "sha": "c4fc05d41e953c180744f0a6f3ee3080269ecfb5",
+      "title": "Funded plan: income target -> number of accounts table",
+      "committed_at": "2026-10-23T15:26:52Z"
+    },
+    {
+      "sha": "28cdaa2abd00f5f0fdedf6dc3380da65f4d19ed4",
+      "title": "Portfolio: correct which pieces are live (combine) vs funded plan",
+      "committed_at": "2026-10-23T15:06:48Z"
+    },
+    {
+      "sha": "982355edcffd80041b9eb66a621d7f83da21965b",
+      "title": "Personal portfolio: all tested pieces at 1 micro, sizing ladder and caveats",
+      "committed_at": "2026-10-23T15:06:27Z"
+    },
+    {
+      "sha": "4b6924bb25ac8290a56f37ae69321053676b4356",
+      "title": "Forward log: FC 2B frozen code commit",
+      "committed_at": "2026-10-23T13:52:59Z"
+    },
+    {
+      "sha": "13dbe8bcfb0b2468a920225b017a3e79bf67771a",
+      "title": "FC 2B: combine adds nothing; ranked A (not in plans), forward log with decision rule, personal-account idea",
+      "committed_at": "2026-10-23T13:52:49Z"
+    },
+    {
+      "sha": "6daaaa4dc4a93bc34842fd1934f2273da728b424",
+      "title": "Merge branch 'claude/nq-trading-strategy-params-5h9d20' of https://github.com/Dartdark/thebeginning into claude/nq-trading-strategy-params-5h9d20",
+      "committed_at": "2026-10-23T13:51:40Z"
+    },
+    {
+      "sha": "afd6bb71e4f8ba8638254dab7b9c4b8e23098285",
+      "title": "FC 2B funded bootstrap: neutral as an addition (+$10 2y) and as an RS-longs replacement",
+      "committed_at": "2026-10-23T13:51:39Z"
+    },
+    {
+      "sha": "3481c99845d7d543341e7d173b96818ad79cdd4a",
+      "title": "live trades + health 2026-10-23 (open)",
+      "committed_at": "2026-10-23T13:15:12Z"
+    },
+    {
+      "sha": "e82b4d3695d3e24553b4e91d70a805677be29af6",
+      "title": "FC 2B bench: parallel bootstrap workers + merge",
+      "committed_at": "2026-10-23T12:47:03Z"
+    },
+    {
+      "sha": "817dd3596e401651ff1f4513fa47996a7ffc4c41",
+      "title": "FC 2B bench output (in progress)",
+      "committed_at": "2026-10-23T10:46:05Z"
+    },
+    {
+      "sha": "e1d78d02d323bc12f3a724f05f1879deee7064e5",
+      "title": "FC 2B bench: fast plan builder (skips the CL bench's own scoring runs)",
+      "committed_at": "2026-10-23T10:45:53Z"
+    },
+    {
+      "sha": "a1828a36503a7eb96314709cb49ade8493ad9a8e",
+      "title": "FC 2B bench: unbuffered with stage timing, bootstrap only (rerun in progress)",
+      "committed_at": "2026-10-23T08:43:13Z"
+    },
+    {
+      "sha": "f3b1765af5c50b2d499adfafbd93595f2c664aca",
+      "title": "FC 2B: fix break-even-off bug in the exit ablation (edge is in the entry); record checker verdict",
+      "committed_at": "2026-10-23T07:57:03Z"
+    },
+    {
+      "sha": "8a72c84364b71343ae57bdeeacbe983c533dc0a5",
+      "title": "Checker: FC 2B v2 verdict PASS WITH CONCERNS (replica exact on 725 shared days with MC v2)",
+      "committed_at": "2026-10-23T07:54:27Z"
+    },
+    {
+      "sha": "d6bcd5f4fd70449ba7dfd84179dcecf8e4a428bc",
+      "title": "FC 2B bench output (run in progress, updated when done)",
+      "committed_at": "2026-10-23T07:42:56Z"
+    },
+    {
+      "sha": "53243dfcf75d1da6a7e6bf837298330cabd7a91c",
+      "title": "FC 2B: funded bench + combine script (add / replace RS longs)",
+      "committed_at": "2026-10-23T07:42:06Z"
+    },
+    {
+      "sha": "aa41668778ee3c2552045cb4d1d5a3adc4506682",
+      "title": "FC 2B v2 MultiCharts report: no holiday carry, entry-bar stops work, t 4.0",
+      "committed_at": "2026-10-23T07:39:42Z"
+    },
+    {
+      "sha": "848923daf2cf03d92bb7de5d8953737e501c2115",
+      "title": "FC 2B: Codex review folded in (volume definition, stop-through-market fallback in v2)",
+      "committed_at": "2026-10-23T07:31:44Z"
+    },
+    {
+      "sha": "1a665184bee889c3886de06b36a83a6639df58ed",
+      "title": "FC 2B: MultiCharts parity (side/entry 100%), holiday-halt bug found, v2 code with early flatten and entry-bar stop",
+      "committed_at": "2026-10-23T07:28:09Z"
+    },
+    {
+      "sha": "64608de56b8915324c6fa6600d42c16023b5a7fb",
+      "title": "FC 2B: rebuild, controls and review (C, pending parity / checker / bench)",
+      "committed_at": "2026-10-23T07:13:47Z"
+    },
+    {
+      "sha": "b2a688a63dc67823681e70269493533abd127242",
+      "title": "FC 2B: candidate files and Python rebuild (run in progress)",
+      "committed_at": "2026-10-23T06:54:51Z"
+    },
+    {
+      "sha": "25a33cf97ddfa0404db450f91b6792294bd43f31",
+      "title": "Overnight sentiment vote (user's MC code): filters hurt again, stays F",
+      "committed_at": "2026-10-23T06:46:25Z"
+    },
+    {
+      "sha": "8e0bbed32db4bc263e910d91b387c8fc3d25a0b1",
+      "title": "Donchian + LWTI v2: volatility filter makes it worse (stays D)",
+      "committed_at": "2026-10-23T06:43:25Z"
+    },
+    {
+      "sha": "87fd50c0582a5aab892b7ed64003321d5f960b4d",
+      "title": "Journal: 2026-10-22 trades (none logged)",
+      "committed_at": "2026-10-22T21:41:42Z"
+    },
+    {
+      "sha": "395861ddc118221a71dfb9e75e73f8a44387cdbb",
+      "title": "live trades + health 2026-10-22 (close)",
+      "committed_at": "2026-10-22T21:10:10Z"
+    },
+    {
+      "sha": "e9ba5200389b2c50711d618c98f808fb30e86e86",
+      "title": "Fold Codex's five process points into DEVELOPMENT_PROCESS and the forward log",
+      "committed_at": "2026-10-22T18:00:55Z"
+    },
+    {
+      "sha": "d8f2493706a4ba2c1c400d4e68f49d9b1515719f",
+      "title": "Correct Keltner review: the user asked Codex to fill in the settings",
+      "committed_at": "2026-10-22T17:59:14Z"
+    },
+    {
+      "sha": "2ec1b17f58b5d6957a6982665ac618700b868405",
+      "title": "Review Codex VB parity/stress (accepted) and ES Keltner guess (F)",
+      "committed_at": "2026-10-22T17:56:26Z"
+    },
+    {
+      "sha": "d82cbd39928e9d1cb63a883e66e3de019cb76dfe",
+      "title": "Save Davey ES Keltner stochastic idea for the personal account",
+      "committed_at": "2026-10-22T17:40:39Z"
+    },
+    {
+      "sha": "e78255f4ee26f211f68ddcee03c9849b62f4eb61",
+      "title": "Davey MACD video: add MC return/DD to montecarlo.py, lesson and personal-account idea",
+      "committed_at": "2026-10-22T17:38:13Z"
+    },
+    {
+      "sha": "1cc91e7dec7fd4fe4f966ac534aee26c1326883d",
+      "title": "Review Codex break test, execution diagnostics and two gold screens",
+      "committed_at": "2026-10-22T17:33:00Z"
+    },
+    {
+      "sha": "d927e7cdad90823faf9047ce6642f2315254917d",
+      "title": "Personal account ideas: all-weather structure details and the volatility-to-drawdown rule (Radge)",
+      "committed_at": "2026-10-22T17:24:21Z"
+    },
+    {
+      "sha": "dc886e4f22d721dac73ee096b2cbc68f1177002a",
+      "title": "Personal account ideas: sequence risk explained, two-bucket rule",
+      "committed_at": "2026-10-22T17:21:11Z"
+    },
+    {
+      "sha": "03e674a11a7c679a9ae5a6a0712ba6c492484fa9",
+      "title": "Personal account: one list of all ideas so far (tested, weak, untested from Radge / Davey), with sizing rules",
+      "committed_at": "2026-10-22T17:17:39Z"
+    },
+    {
+      "sha": "ece20f05bd8bac31424d10fc04e0e858f288c28e",
+      "title": "Codex task: try-to-break stress tests of Vault Break and ONB ADX30 (noise, indicator swaps, timing, jitter, slippage)",
+      "committed_at": "2026-10-22T17:13:03Z"
+    },
+    {
+      "sha": "24d2c0e0536e85c4adefe468bee7797d18925692",
+      "title": "Stack stress test of the funded plan's NQ lines (worst day -$1,275; worst 5 days -$3,333; theoretical Monday stack -$4,088)",
+      "committed_at": "2026-10-22T17:01:37Z"
+    },
+    {
+      "sha": "9f4284b7262763703767145fc9453a58fafe38ba",
+      "title": "Friday review: monthly live P&L percentile vs Monte Carlo (first Friday, from December)",
+      "committed_at": "2026-10-22T16:57:39Z"
+    },
+    {
+      "sha": "37bcba975609607435fd5d28fef6512c7f9620d0",
+      "title": "Codex task: read-only execution diagnostics (entry-window prices, fills, rejections; bid/ask logger proposal); weekly export to-do",
+      "committed_at": "2026-10-22T16:49:33Z"
+    },
+    {
+      "sha": "57ebec3a204a260bc2666c0804eeb8176403a7bc",
+      "title": "Journal block: note that logged trades are chart trades, to confirm on Apex (Codex live audit)",
+      "committed_at": "2026-10-22T15:45:29Z"
+    },
+    {
+      "sha": "d1c79206cb820802487fb8d82f3848fabb20f670",
+      "title": "live trades + health 2026-10-22 (open)",
+      "committed_at": "2026-10-22T13:15:10Z"
+    },
+    {
+      "sha": "b2c8d748b3d8ba1edd0a20974d6b9c5c68bccbea",
+      "title": "Paid data list, ranked by value for money (nothing to buy now)",
+      "committed_at": "2026-10-22T08:06:41Z"
+    },
+    {
+      "sha": "59de62a1c5668e5322320470ff669adeef90b9e7",
+      "title": "Health check: no false MISMATCH (only if still open at the last row) and stale / non-order rejection lines marked as noise; review of Codex live audit + free-data sheets",
+      "committed_at": "2026-10-22T06:12:36Z"
+    },
+    {
+      "sha": "60cf14182595540d4acd38c85f4266d43d396d59",
+      "title": "Pitfalls: step-by-step Symbol Mapping check / fix / roll guide (10/14-16 and 10/20 rejections)",
+      "committed_at": "2026-10-22T05:55:51Z"
+    },
+    {
+      "sha": "661362b5c56130e1fb5a339991d7245217ab9748",
+      "title": "Brief: user keeps account #01 at plan size near its trailing limit",
+      "committed_at": "2026-10-22T05:51:04Z"
+    },
+    {
+      "sha": "db65c3f4da9f39f6face5add5fa48c185145bb6f",
+      "title": "live: account mix-up was a false alarm (accounts -01/-02 both -$575.82); Apex balances and trailing cushions recorded",
+      "committed_at": "2026-10-22T05:49:07Z"
+    },
+    {
+      "sha": "11bb2e65e68f8cbcb23880f91f6268ce0de2ca27",
+      "title": "live: transcribed MultiCharts order tracker 10/20-10/21 (10/20 rejected as @MNQ; both chart sets on account APEX-681524)",
+      "committed_at": "2026-10-22T05:46:15Z"
+    },
+    {
+      "sha": "e097c0fd23ca35ae8dc2ad6cbfbc36d151c09f7a",
+      "title": "Codex tasks: live-trading audit (first) and free-data evidence sheets; journal 10/21: user reports both accounts -$575",
+      "committed_at": "2026-10-22T05:35:57Z"
+    },
+    {
+      "sha": "a15ebc7d52b23d336f2ace319301f3ba1bbebfc7",
+      "title": "TRIALS.csv: add Codex LDF flow sizing (F)",
+      "committed_at": "2026-10-22T05:27:24Z"
+    },
+    {
+      "sha": "d87f59ae86ed2186e161f822035e9ac48290aa76",
+      "title": "Codex LDF flow sizing: F (no incremental edge); review and status update",
+      "committed_at": "2026-10-22T05:27:07Z"
+    },
+    {
+      "sha": "3da4f3f179faadb23b974137608eba61672eb98a",
+      "title": "Merge branch 'claude/nq-trading-strategy-params-5h9d20' of https://github.com/Dartdark/thebeginning into claude/nq-trading-strategy-params-5h9d20",
+      "committed_at": "2026-10-22T05:16:36Z"
+    },
+    {
+      "sha": "35b92cf325cbdcb8c9df52bfb49d7b303ff2a92a",
+      "title": "NQ 2017 daytime data",
+      "committed_at": "2026-10-22T05:13:47Z"
+    },
+    {
+      "sha": "1d3adb4e8b8823c34ff2b04101382c0a790cc270",
+      "title": "TODO: 2017 export upload steps (sync.ps1 doesn't add data/)",
+      "committed_at": "2026-10-22T04:59:42Z"
+    },
+    {
+      "sha": "bc07bf1c4cfb7e1da48c8726d73555a344a92f87",
+      "title": "Codex status summary and the user's new to-dos (2017 NQ export, NYSE email, Codex message)",
+      "committed_at": "2026-10-22T04:59:29Z"
+    },
+    {
+      "sha": "075254bb6afc645c524e83296debaa5f56a4fe25",
+      "title": "Review LDF flow-sizing prereg: approve with changes (2017 warm-up data missing, momentum confound corr 0.38 with 63d return, passable data gate)",
+      "committed_at": "2026-10-22T04:52:21Z"
+    },
+    {
+      "sha": "a5f0e5894028c0dddff4e94628bb317dbef4be6b",
+      "title": "NYSE email: datasales@nyse.com; list prices ~$52k (Arca) / ~$58k (NYSE) for 2018-26 back history",
+      "committed_at": "2026-10-22T04:41:22Z"
+    },
+    {
+      "sha": "c23fc0288f2d46ed41bbff3bda79ed5147990b51",
+      "title": "LETF data checks (gaps = NYSE closures, AUM consistent, timing rule D-1) and NYSE quote/sample email draft",
+      "committed_at": "2026-10-22T04:38:52Z"
+    },
+    {
+      "sha": "22e48e901fd0705725200b3463492ce8d6cb0809",
+      "title": "LETF data feasibility: free ProShares daily AUM history (TQQQ/SQQQ/QLD/QID) in data/letf; reset demand grew ~8x since 2018",
+      "committed_at": "2026-10-22T04:37:43Z"
+    },
+    {
+      "sha": "94fa78062e829412fe6add26ea98fe99be735617",
+      "title": "Evidence comparison: Codex's corrections accepted (separate Arca/NYSE products, LDF design power)",
+      "committed_at": "2026-10-22T04:33:07Z"
+    },
+    {
+      "sha": "3976bfb392f8dc356e8e04ed09fd7a4287ad3380",
+      "title": "Claude evidence sheets (sealed until Codex pushed) and side-by-side comparison",
+      "committed_at": "2026-10-22T04:21:47Z"
+    },
+    {
+      "sha": "367b33e268622075971d51ba7f49ba46d26d32fb",
+      "title": "Codex brief: evidence sheet (step 0, with power check), forward log; evidence-sheet task",
+      "committed_at": "2026-10-22T04:00:38Z"
+    },
+    {
+      "sha": "2d1f279ce1db136f3f4840e657d9902803ff6c51",
+      "title": "TRIALS.csv: add Codex FOMC minutes screen (F)",
+      "committed_at": "2026-10-22T03:42:17Z"
+    },
+    {
+      "sha": "7243683a9c3665b446d6d1552ead7c642426368c",
+      "title": "Codex FOMC minutes screen: F; review (power check, no selection on roster positions)",
+      "committed_at": "2026-10-22T03:41:59Z"
+    },
+    {
+      "sha": "7bb539a7b134e1b41deb65ba0a1e76a9ac4c4a25",
+      "title": "TRIALS.csv: add Codex SGE delivery screen (F); review typo",
+      "committed_at": "2026-10-22T02:49:59Z"
+    },
+    {
+      "sha": "b48fe3092a6d7de0ddc6537110106e34f7084a77",
+      "title": "Codex SGE delivery screen: F (no gross edge); review, occupancy map noted",
+      "committed_at": "2026-10-22T02:49:31Z"
+    },
+    {
+      "sha": "ee0b4c2e8ac3a61d1ca86f4e7c4fbbfc9178605f",
+      "title": "TRIALS.csv: add Codex FX-fix reversal (F)",
+      "committed_at": "2026-10-22T02:27:41Z"
+    },
+    {
+      "sha": "72654d4efe6407049613a79949068868fcca8138",
+      "title": "Codex FX-fix reversal: F (no gross edge); review with process notes",
+      "committed_at": "2026-10-22T02:27:13Z"
+    },
+    {
+      "sha": "680f304a92989d2273efad78715fbbca5518da69",
+      "title": "Review Codex marginal-contribution and overlap-cap studies: roster kept; VB overlap sizing not justified",
+      "committed_at": "2026-10-22T02:03:54Z"
+    },
+    {
+      "sha": "0b0f1e664cd1fdfdacdeb92cf1772b6641a35cf9",
+      "title": "Codex tests graded: both PASS; Codex adopted as builder; summary line added to its report format",
+      "committed_at": "2026-10-22T00:14:39Z"
+    },
+    {
+      "sha": "f9fb99e95dd4386cef6e30160419723a315eeb69",
+      "title": "Codex builder brief, AGENTS.md and two known-answer test tasks",
+      "committed_at": "2026-10-21T23:27:39Z"
+    },
+    {
+      "sha": "130e13e38a945cdf4ed2eabfc2d6bb185b675080",
+      "title": "TRIALS.csv: add Vault Break Combined (D)",
+      "committed_at": "2026-10-21T23:13:10Z"
+    },
+    {
+      "sha": "9ab81a906d3026515f482b840056ca05a13c5dc7",
+      "title": "Review addendum: SundayReopenPush = WATCHLIST #22; post-open entries have no edge; VB Short F",
+      "committed_at": "2026-10-21T22:58:25Z"
+    },
+    {
+      "sha": "55f4e6b7b6b18796d820d8618ae4202e9293a05e",
+      "title": "Review of Antigravity's Vault Break Combined (HYP-025): D, not adopted",
+      "committed_at": "2026-10-21T22:54:35Z"
+    },
+    {
+      "sha": "0cda91bf39db2078ea0894882f733d1896db47e3",
+      "title": "Journal 2026-10-21: auto trades from the VPS log",
+      "committed_at": "2026-10-21T21:41:44Z"
+    },
+    {
+      "sha": "950329f423a64262f3067bcb622edfbb49aa02d1",
+      "title": "live trades + health 2026-10-21 (close)",
+      "committed_at": "2026-10-21T21:10:11Z"
+    },
+    {
+      "sha": "acf916581dcc472610efaf696e7059fa14aea9bc",
+      "title": "live trades + health 2026-10-21 (open)",
+      "committed_at": "2026-10-21T13:34:08Z"
+    },
+    {
+      "sha": "2be8374e398c953f2dc8f1a155bc233400635331",
+      "title": "MILESTONES.md: record of the beginnings and progress (Oct 9-21)",
+      "committed_at": "2026-10-21T01:19:32Z"
+    },
+    {
+      "sha": "5ac3ab25d95589491639e4419485d110d8bda83e",
+      "title": "push script: path fix",
+      "committed_at": "2026-10-21T01:01:28Z"
+    },
+    {
+      "sha": "dfcc49cf41f72c8625bfb9a064fb0c186dad7a41",
+      "title": "VPS watchdog: 5-minute live checks (MultiCharts up, network, heartbeats, mismatch, new rejections) with phone alerts via ntfy; self-installing",
+      "committed_at": "2026-10-21T01:01:11Z"
+    },
+    {
+      "sha": "d9705887e965d17813073d277f4b1c0239f52d94",
+      "title": "Health: flag rejected orders from MultiCharts' logs (symbol mapping hint) and contract-roll weeks",
+      "committed_at": "2026-10-21T00:57:04Z"
+    },
+    {
+      "sha": "5333073fd3c51f402da2fad362828657e696c5c6",
+      "title": "TODO: logger recompiled (user)",
+      "committed_at": "2026-10-21T00:53:38Z"
+    },
+    {
+      "sha": "f761687c060683900fd4b984b61a05917cf04c51",
+      "title": "Automatic health checks: logger POS / heartbeat rows, VPS health line + self-installing morning task, journal 'Health (auto)' section",
+      "committed_at": "2026-10-21T00:45:30Z"
+    },
+    {
+      "sha": "312a3aea8749fc05acdd00cee58b13662a3e01aa",
+      "title": "Reorganise the repo: mc_reports/, data/, analysis/outputs/, tools/exporters/, archive/; README map; pre-flight checklist; all paths updated (bench reproduces)",
+      "committed_at": "2026-10-21T00:18:29Z"
+    },
+    {
+      "sha": "521a97e08e3e05b4898fa00b5a2acc3444a48654",
+      "title": "RS aligned (ES-down shorts) on the bench: noise-level gain on 50K, none on 150K; stays WATCHLIST #25",
+      "committed_at": "2026-10-20T23:55:08Z"
+    },
+    {
+      "sha": "636a6e56e4f44116a2f1b07ab0f86b6e7f2de97c",
+      "title": "Antigravity NQESCrossFlow: D (holdout t 0.2; with RS, 2023+ Sharpe falls and DD rises)",
+      "committed_at": "2026-10-20T23:12:05Z"
+    },
+    {
+      "sha": "5c88960aa82932471f08adcf435fdc85cce92afb",
+      "title": "Relative Strength MultiCharts-confirmed (1,157 days, P&L corr 1.000)",
+      "committed_at": "2026-10-20T23:04:59Z"
+    },
+    {
+      "sha": "cb028cec7e99dbc8b84e12e727fccd42d9ea9ac4",
+      "title": "TODO: copier off and VPS setup items done (user)",
+      "committed_at": "2026-10-20T22:35:09Z"
+    },
+    {
+      "sha": "9ab433059f66d08c605a3065bfd37ab1c480b66e",
+      "title": "Journal 2026-10-20: note that the logged trades did not fill on the account",
+      "committed_at": "2026-10-20T22:31:40Z"
+    },
+    {
+      "sha": "ff81d62da52617f6e8d8cc6e1ce2f38fbba9ddfb",
+      "title": "NQAlignedWeaknessShort MultiCharts-confirmed (216/216, P&L corr 1.000)",
+      "committed_at": "2026-10-20T22:27:57Z"
+    },
+    {
+      "sha": "a59304b2150bc0f7ddc6f32f31f407e3f80cdff0",
+      "title": "NQAlignedWeaknessShort: MultiCharts backtest file + TODO",
+      "committed_at": "2026-10-20T22:16:22Z"
+    },
+    {
+      "sha": "8e960c68282514ce0a07d3127fa2a97fafa1c79c",
+      "title": "Journal 2026-10-20: auto trades from the VPS log",
+      "committed_at": "2026-10-20T21:41:09Z"
+    },
+    {
+      "sha": "d154caa0178f5b0bf0bda7dfc8c09689e911f304",
+      "title": "Antigravity NQAlignedWeaknessShort: reproduces, = RS shorts on ES-down days; C; WATCHLIST #25",
+      "committed_at": "2026-10-20T21:30:56Z"
+    },
+    {
+      "sha": "d0040bfe2220fc658d06ee7fe37bd1a20b4e3e57",
+      "title": "live trades 2026-10-20",
+      "committed_at": "2026-10-20T21:10:05Z"
+    },
+    {
+      "sha": "795b244ea71736db9424724906eca6c07da42704",
+      "title": "NQRelWeaknessShort audit: fills ~11 pts better than the market; real fills t 1.34: F; brief rule on fills",
+      "committed_at": "2026-10-20T20:42:05Z"
+    },
+    {
+      "sha": "21d746c1ed69adfe2349692206acf20a22dffa28",
+      "title": "Antigravity NQRelWeaknessShort: does not reproduce (rebuild t 0.24, placebo p 0.28); F pending its trade times",
+      "committed_at": "2026-10-20T20:20:51Z"
+    },
+    {
+      "sha": "b978d1d78fbf4e5f0d9cf62b0a254dba670ed6b9",
+      "title": "Antigravity: builder by default, blind checker on request (user decision)",
+      "committed_at": "2026-10-20T19:44:59Z"
+    },
+    {
+      "sha": "b4e84ed521f310719795af8c71b6841e552dcea8",
+      "title": "Antigravity brief: VB trade days corrected",
+      "committed_at": "2026-10-20T19:32:26Z"
+    },
+    {
+      "sha": "808a647c51eba7872828452b67fd13695370036c",
+      "title": "Antigravity brief: plan strategies' windows / directions + plan_daily_pnl.csv for overlap checks; ES MOC and Relative Strength added",
+      "committed_at": "2026-10-20T19:32:11Z"
+    },
+    {
+      "sha": "440398cb860c8f9662d3ba1c352ed17fe08beb5e",
+      "title": "Antigravity NQIBBreakout rebuilt: C (t 2.58, 2023+ t 0.85, corr 0.41 with VB)",
+      "committed_at": "2026-10-20T19:26:30Z"
+    },
+    {
+      "sha": "7f01bcc0fbd5cb21d5138638a6e99855013c4ade",
+      "title": "Antigravity NQIntradayMR: F on its own numbers (t 1.34, 5/9 years)",
+      "committed_at": "2026-10-20T18:43:20Z"
+    },
+    {
+      "sha": "c23f354c67383e567346cc83befa2d856044502b",
+      "title": "Relative Strength in the plans: 50K funded longs 1 MNQ, 150K funded both 1 MNQ, personal; not in evaluations; live file with stop guard",
+      "committed_at": "2026-10-20T18:31:26Z"
+    },
+    {
+      "sha": "686a37be021149b1b90f2192d77d866758305f93",
+      "title": "TODO: RS MultiCharts check postponed",
+      "committed_at": "2026-10-20T17:39:30Z"
+    },
+    {
+      "sha": "11dfad7a0447400e437258e2bb93156868c4e38f",
+      "title": "Relative Strength optimisation: keep the user's settings; VXN split to WATCHLIST #24",
+      "committed_at": "2026-10-20T17:39:17Z"
+    },
+    {
+      "sha": "6f8b94e74503235eae0cd0c2d0ee2a9750f74d6d",
+      "title": "Relative Strength optimisation: pre-registered plan (exits, sides, 5 filters; design 2018-22) before results",
+      "committed_at": "2026-10-20T17:36:00Z"
+    },
+    {
+      "sha": "10405248d3b1c3533d863eb4f4d0e2652ed3109e",
+      "title": "Antigravity NQBreakoutATR rebuilt 2018-26: F (t 1.5, 2025-26 loses, placebo p 0.11)",
+      "committed_at": "2026-10-20T17:12:15Z"
+    },
+    {
+      "sha": "5f96185ea500016c17ac365c45ad1a113db6a1b1",
+      "title": "Antigravity NQBreakoutATR: rebuild + 4 pre-registered variants and placebo (before results)",
+      "committed_at": "2026-10-20T17:08:57Z"
+    },
+    {
+      "sha": "3129ee4eff1df5a555fdc1538f36eff28b3ab2d9",
+      "title": "Performance report guide (PDF) + TODO: Relative Strength MultiCharts backtest",
+      "committed_at": "2026-10-20T16:35:19Z"
+    },
+    {
+      "sha": "034613ee089d6c17ded853b90356cf2960a26050",
+      "title": "Relative Strength: checker PASS WITH CONCERNS; ranked B; brief",
+      "committed_at": "2026-10-20T16:28:22Z"
+    },
+    {
+      "sha": "1e767d78f2b934d5e3c1e11199a27bd5bf8ee702",
+      "title": "Relative Strength checker: work in progress (replica, gates)",
+      "committed_at": "2026-10-20T16:26:31Z"
+    },
+    {
+      "sha": "02f941940c34513695f9043aa6fe117e2bd4970a",
+      "title": "Relative Strength on the bootstrapped funded bench: +1 MNQ faster to 6 payouts (278 -> 250 days), blown +1.3 pt; longs only +0.5 pt",
+      "committed_at": "2026-10-20T16:26:15Z"
+    },
+    {
+      "sha": "380d40e828834a32deaae012a9f77e05d954517e",
+      "title": "Relative Strength rebuild: keep grid row / entry / exit minutes for the funded bench",
+      "committed_at": "2026-10-20T16:16:49Z"
+    },
+    {
+      "sha": "8ecf4869f180e77d9b1c36fe63429159d9c9ea2e",
+      "title": "Relative Strength: rebuild results + checker candidate folder",
+      "committed_at": "2026-10-20T16:15:08Z"
+    },
+    {
+      "sha": "2929ee83d71897558a48c026eb9dc88961d2af60",
+      "title": "Relative Strength NQ/ES: user's code + note, rebuild with pre-registered controls (before results)",
+      "committed_at": "2026-10-20T16:13:13Z"
+    },
+    {
+      "sha": "8924e9de423daaa169b08b0b8e731e39469efa52",
+      "title": "Building blocks Step 1b results: 0/32 pass on daily bars; longs = bull drift",
+      "committed_at": "2026-10-20T15:54:35Z"
+    },
+    {
+      "sha": "81bd77a80a6cef8a5e1fe877009a8d223904e262",
+      "title": "Building blocks Step 1b (daily, multi-day, 7 markets): library + pre-registered plan (before results)",
+      "committed_at": "2026-10-20T15:53:12Z"
+    },
+    {
+      "sha": "e1fa1afaecc9df106caaf3a607c83e88114a9b58",
+      "title": "Trials log: building blocks Step 1 (64 variants)",
+      "committed_at": "2026-10-20T15:44:57Z"
+    },
+    {
+      "sha": "865ea41cc397e0744bc7ac8f58f071d626c6f881",
+      "title": "Building blocks Step 1 results: 62/64 F, E9 MA-cross short = C (to Step 2)",
+      "committed_at": "2026-10-20T15:43:59Z"
+    },
+    {
+      "sha": "cdc997582a0257431d93ecca02e749a82f82c14a",
+      "title": "Building blocks Step 1: entries library + pre-registered plan (before results)",
+      "committed_at": "2026-10-20T15:43:02Z"
+    },
+    {
+      "sha": "fc704d34427c636e5d9fd8901c813277daef39bf",
+      "title": "TODO: December MNQ roll reminder set (12/10 08:00 CT)",
+      "committed_at": "2026-10-20T15:27:13Z"
+    },
+    {
+      "sha": "05135895fc9c3ce05b3b7c9b03a0abe36a8d9214",
+      "title": "Pitfall: VPS mapping confirmed @MNQ -> @MNQ",
+      "committed_at": "2026-10-20T15:16:47Z"
+    },
+    {
+      "sha": "bc29713c9702b7b18a9112bc51213d00fff1013b",
+      "title": "Pitfall: VPS orders rejected as @MNQ.CME (Symbol Mapping not set on the new machine)",
+      "committed_at": "2026-10-20T15:11:45Z"
+    },
+    {
+      "sha": "d9efa51135fdc6e7434896f93216cee21faba27b",
+      "title": "TODO: export NG / ZC / ZS 1-min data for the storage-report and WASDE tests",
+      "committed_at": "2026-10-20T06:28:10Z"
+    },
+    {
+      "sha": "7fe88c60e3ec2dc87cf9ae91e38c9e9f82f1e183",
+      "title": "Review: Antigravity's market-behaviour profiles vs our tests",
+      "committed_at": "2026-10-20T06:25:45Z"
+    },
+    {
+      "sha": "a9fe3fcbb05e15f116681b10130de2c697c5c549",
+      "title": "Copier: not for evaluations; separate chart sets until several funded accounts",
+      "committed_at": "2026-10-20T04:58:11Z"
+    },
+    {
+      "sha": "a1ad7ffb6f934fd654aa952e2c1d20c98d8caf98",
+      "title": "Brief: Rithmic copier enabled (account #2 to follow #1), caveats",
+      "committed_at": "2026-10-20T04:54:19Z"
+    },
+    {
+      "sha": "a6a4642b0e518bba98f0b3904e1096c07041789e",
+      "title": "Pitfall: R|Trader Pro 'session count' logout = MultiCharts already holds the Rithmic login",
+      "committed_at": "2026-10-20T04:48:01Z"
+    },
+    {
+      "sha": "9aa1057eebdf4892993493d05cf73378f9f063ae",
+      "title": "TODO: reminders now run in the scheduled-jobs session",
+      "committed_at": "2026-10-20T04:33:01Z"
+    },
+    {
+      "sha": "5783c5d0362cb72f3e9c38e2ada19386d9c0edca",
+      "title": "Brief: scheduled jobs moved to their own session",
+      "committed_at": "2026-10-20T04:06:57Z"
+    },
+    {
+      "sha": "e3c08b80840eda7026f0c68b06f0995192e80b85",
+      "title": "Note: activate Chart Trading (side arrow) and set it to Rithmic on new charts",
+      "committed_at": "2026-10-20T02:55:36Z"
+    },
+    {
+      "sha": "417348e4cf487e441e2ce141d269f48cba91a05d",
+      "title": "Strategy settings PDF: evaluation and funded plans with every chart and input",
+      "committed_at": "2026-10-20T02:35:34Z"
+    },
+    {
+      "sha": "2d6bfabeb15b2086e22f2c1e66d640041bfcfb68",
+      "title": "Account #2 set up on the VPS (own chart set); pitfalls: account via gear icon, rejected-order stop 10",
+      "committed_at": "2026-10-20T01:45:21Z"
+    },
+    {
+      "sha": "1cbbf14de2ae96e28a661666caa2f59be15de394",
+      "title": "ONB ML header: funded RiskPerTrade 400 (plan), was 300",
+      "committed_at": "2026-10-20T01:17:54Z"
+    },
+    {
+      "sha": "4a8814b5c40a297ae6771233e7285a324a108ebd",
+      "title": "journal_trades: account suffix in logger tags (VB-2 -> Vault Break (acct 2))",
+      "committed_at": "2026-10-20T01:00:05Z"
+    },
+    {
+      "sha": "270fce17b24977f8bd731fd257ed7226238e30e2",
+      "title": "journal: notes 2026-10-19",
+      "committed_at": "2026-10-20T00:57:56Z"
+    },
+    {
+      "sha": "f64486b65d41ada2a9063327ccf99ea1a0665eb5",
+      "title": "journal: notes 2026-10-19",
+      "committed_at": "2026-10-20T00:57:03Z"
+    },
+    {
+      "sha": "11a84fc9af5ec246b7ce9954ddac8cb20da6838f",
+      "title": "journal: notes 2026-10-19",
+      "committed_at": "2026-10-20T00:54:10Z"
+    },
+    {
+      "sha": "7578de576636cbb47a33986bd106da0cfec9a819",
+      "title": "Combine VB size vs daily loss limit: 6 MNQ 49.2% vs 8 MNQ 50.1%, keep 8",
+      "committed_at": "2026-10-20T00:40:16Z"
+    },
+    {
+      "sha": "c7b9f8d25178b330410d4f18143ec8f9f4458fb9",
+      "title": "Pitfall: Apex daily loss limit lock + MultiCharts keeps its position; reset charts before the next open",
+      "committed_at": "2026-10-20T00:36:58Z"
+    },
+    {
+      "sha": "04ac8130e639d0514c34360b10a2a9c235e0dc86",
+      "title": "Cowork may edit the journal's auto-trades block (user, 2026-10-19)",
+      "committed_at": "2026-10-20T00:19:01Z"
+    },
+    {
+      "sha": "87a79d59254002e4f72ab6247ef79ac93a39f370",
+      "title": "Brief: VPS + trade log pipeline working",
+      "committed_at": "2026-10-20T00:13:47Z"
+    },
+    {
+      "sha": "4017918eab61a1237694afb3701aff8d510dbbed",
+      "title": "TODO: trade logger on every live chart",
+      "committed_at": "2026-10-20T00:03:30Z"
+    },
+    {
+      "sha": "804ae2d17414b65a592b7b067c891d83162ad4f6",
+      "title": "TODO: VPS push tested",
+      "committed_at": "2026-10-20T00:01:26Z"
+    },
+    {
+      "sha": "50e2cb087dd3eea362e39d00455f23e7a4f1b104",
+      "title": "Remove test trade log (VPS push test OK)",
+      "committed_at": "2026-10-20T00:01:26Z"
+    },
+    {
+      "sha": "f461318dfe554b4426b2973b37a085871dfa345a",
+      "title": "live trades 2026-10-19",
+      "committed_at": "2026-10-20T00:00:53Z"
+    },
+    {
+      "sha": "649c3537cdc24c565fc54f225fc5be5ac7a07390",
+      "title": "Trade logger (MultiCharts) + VPS push script + journal_trades.py (auto-fills the journal's trades)",
+      "committed_at": "2026-10-19T23:41:14Z"
+    },
+    {
+      "sha": "4989fc87183b40866ac8649831bfabf602936227",
+      "title": "TODO: VPS same-result check done (ONB 75/77 identical, 2 by 1 tick)",
+      "committed_at": "2026-10-19T23:28:23Z"
+    },
+    {
+      "sha": "6c3a817fc1cc1f493acaaac15b5fa00ea9426b94",
+      "title": "Pitfalls + lesson: Rithmic 'permission denied / contact FCM' was a wrong password",
+      "committed_at": "2026-10-19T23:03:50Z"
+    },
+    {
+      "sha": "ce1eea0520947e3bbe344f223a30a593967a6b4c",
+      "title": "TODO: QuantVPS tiers confirmed; buy VPS Lite",
+      "committed_at": "2026-10-19T19:24:27Z"
+    },
+    {
+      "sha": "68bf5756ddc9c02a435ffcf36696cf2237b0be99",
+      "title": "TODO: VPS memory check done (MultiCharts ~290 MB live)",
+      "committed_at": "2026-10-19T19:03:50Z"
+    },
+    {
+      "sha": "732010cfd64fb2048f3b61c728e63b58bd6cb556",
+      "title": "Cowork may click to navigate MultiCharts on the PC once live trading is on the VPS",
+      "committed_at": "2026-10-19T18:59:57Z"
+    },
+    {
+      "sha": "0b087539d39f95dc2d4f6e5819ccf984b4022f46",
+      "title": "TODO: move-live-trading-to-VPS checklist",
+      "committed_at": "2026-10-19T18:58:05Z"
+    },
+    {
+      "sha": "f88bb3ea5b7236cbd62dd177099ab75f6ff09791",
+      "title": "Cowork may look at MultiCharts read-only (screenshots, files on disk, no clicks)",
+      "committed_at": "2026-10-19T18:54:01Z"
+    },
+    {
+      "sha": "336c8ac2c187a62228efc0e4b71683cb6b81ffbc",
+      "title": "Brief: 2026-10-19 setup (private repo, local Claude Code chores, Friday review, LESSONS)",
+      "committed_at": "2026-10-19T18:44:19Z"
+    },
+    {
+      "sha": "108c11b2c34a850626ac43d92a44a1db2fd5c532",
+      "title": "Repo private: use git pull instead of raw-link downloads",
+      "committed_at": "2026-10-19T17:21:06Z"
+    },
+    {
+      "sha": "f582d7afaaf46995cdd256fcd371482b31572ecd",
+      "title": "Cowork writes the daily journal; research PDFs may be committed (papers/)",
+      "committed_at": "2026-10-19T15:18:50Z"
+    },
+    {
+      "sha": "a02ab8ac6261f16f32f28d6c43ece29de1fb9a86",
+      "title": "Cowork instructions (chores only, never touches live trading) + TODO",
+      "committed_at": "2026-10-19T15:10:13Z"
+    },
+    {
+      "sha": "db3f8ff31351d7b903d7106f4b6e7bf998155b81",
+      "title": "LESSONS.md (second-brain lessons note) + Friday review rule in CLAUDE.md",
+      "committed_at": "2026-10-19T15:02:36Z"
+    },
+    {
+      "sha": "811c9ed08e55038d10a21ffb867ee1e096eccb36",
+      "title": "Apex automation: confirmed allowed by the user; account #2 back on",
+      "committed_at": "2026-10-19T05:10:09Z"
+    },
+    {
+      "sha": "eddfe37b19c9fe8cb27916312e7532ed1821a90f",
+      "title": "URGENT: Apex may prohibit automated trading; ask Apex in writing, account #2 on hold",
+      "committed_at": "2026-10-19T05:07:56Z"
+    },
+    {
+      "sha": "d0b23f03310d25e1f278458feba4f3038fe0eedf",
+      "title": "Replacement sweep verdict: no swap beats the funded plan (all within noise)",
+      "committed_at": "2026-10-18T23:11:55Z"
+    },
+    {
+      "sha": "e8839c12da75912728168a3bed187eaa25f711dc",
+      "title": "TODO: test order filled, PC set (user 2026-10-18)",
+      "committed_at": "2026-10-18T23:09:29Z"
+    },
+    {
+      "sha": "a630172db5024265b21272a47db495b0f5181c39",
+      "title": "Replacement sweep stage 2b: output in progress",
+      "committed_at": "2026-10-18T23:06:04Z"
+    },
+    {
+      "sha": "31b162aaa18ced24ff16d6710710da1147f3e98e",
+      "title": "Replacement sweep: stage 1 + stage 2 results; stage 2b script",
+      "committed_at": "2026-10-18T23:05:41Z"
+    },
+    {
+      "sha": "132685e3e98d6eed8816aa77843c0017ea80cf36",
+      "title": "Replacement sweep: output in progress",
+      "committed_at": "2026-10-18T22:22:27Z"
+    },
+    {
+      "sha": "1d404d30d2214239e3e62679f1ea494782db9b18",
+      "title": "Replacement sweep scripts (harvest candidate lab entries; swap each into each plan slot vs empty-slot control)",
+      "committed_at": "2026-10-18T20:14:01Z"
+    },
+    {
+      "sha": "ce55811f424c298e774e320d41ad9f03c21a57ca",
+      "title": "Noise-band as a Vault Break replacement: no gain beyond cutting VB itself",
+      "committed_at": "2026-10-18T19:55:38Z"
+    },
+    {
+      "sha": "0418bf83ea8a887e2e8a6a92d11483561a8fd7aa",
+      "title": "CLAUDE.md: test candidates as replacements too, not only as additions",
+      "committed_at": "2026-10-18T19:47:49Z"
+    },
+    {
+      "sha": "28d19681425549d465313d35c5a857d0db63d57c",
+      "title": "Noise-band (Chuk 2026): C; funded bench shows no gain next to Vault Break",
+      "committed_at": "2026-10-18T19:46:04Z"
+    },
+    {
+      "sha": "611629dd7baffadcc89eaf5bd39c44b38a01aee3",
+      "title": "Chuk 2026 noise-band intraday momentum on NQ: replica + funded bench script (results pending)",
+      "committed_at": "2026-10-18T19:43:05Z"
+    },
+    {
+      "sha": "fd75ff89b31932ed0eb1419d75f8c85abd6068dc",
+      "title": "Antigravity's 3 papers read from the PDFs: FOMC paper misread by Antigravity; its real sign (short after high liquidity) D + WATCHLIST #23; YM paper F",
+      "committed_at": "2026-10-18T19:13:36Z"
+    },
+    {
+      "sha": "2b087b1f0b4264cc324ec011f3226a19df79596d",
+      "title": "Antigravity paper screen picks tested: FOMC liquidity premium F, YM opening reversal F; Treasury auctions already tested",
+      "committed_at": "2026-10-18T19:08:42Z"
+    },
+    {
+      "sha": "ae45b0edb1b8f8a2ab7b37e61a1931a2e63aae58",
+      "title": "Antigravity task: screen a folder of research papers; brief's tested list updated",
+      "committed_at": "2026-10-18T18:42:50Z"
+    },
+    {
+      "sha": "ad977776d41fa8bb8b7d80d0bf2ca5c6f2092d32",
+      "title": "Franz 2019 index rebalancing reversal: index-level analog tested (F)",
+      "committed_at": "2026-10-18T18:00:18Z"
+    },
+    {
+      "sha": "5ed4664f8595e6a311394b019947f612a373b42c",
+      "title": "Lead 1: leveraged-ETF closing push overnight reversal test (F; push sub-cut fails on YM)",
+      "committed_at": "2026-10-18T10:18:15Z"
+    },
+    {
+      "sha": "cf3830a554c65305e1158f667aa3854eabef6f5a",
+      "title": "Antigravity per-symbol 'proven edges': 4 untested ones tested (CL/ZN pit-open ORB, GC continuation, GC PM fix): all F; brief rule against 'proven' claims",
+      "committed_at": "2026-10-18T10:06:27Z"
+    },
+    {
+      "sha": "5ac5b866486c8f5027d1c746b9f85a86c93a2ce9",
+      "title": "Antigravity forced-flow list: 2 already tested, NQ-after-auction and trapped-inventory tested now: F",
+      "committed_at": "2026-10-18T10:01:41Z"
+    },
+    {
+      "sha": "168efd0879b05cba95a4cc6e70d89e01b971009b",
+      "title": "Limit vs market entries on 6 plan strategies: limits worse everywhere (missed trades are the winners); keep market entries",
+      "committed_at": "2026-10-18T09:49:44Z"
+    },
+    {
+      "sha": "1340749e41ce29c2e27244b20c89c085bafd4052",
+      "title": "Narang book (proper Antigravity reading): empty shortlist, confirms earlier F",
+      "committed_at": "2026-10-18T09:30:58Z"
+    },
+    {
+      "sha": "cb49062db7d1dfc48d1a8b65514861ea61f7f64c",
+      "title": "Antigravity readings Taulli / Pruitt / Covel: shortlists already tested or multi-week; nothing new",
+      "committed_at": "2026-10-18T09:19:02Z"
+    },
+    {
+      "sha": "487994ca41da83d8ff54ab7457bc40d83f781141",
+      "title": "Sunday reopen seconds exporter (1-second @NQ chart) to measure the live fill for WATCHLIST #22",
+      "committed_at": "2026-10-18T09:12:58Z"
+    },
+    {
+      "sha": "ca9a8e09d06dbeb290e7a95d90680516a4f0f67b",
+      "title": "Sunday reopen first-minute push (user): replicates on NQ 2023-26 (t 2.6) and YM (t 3.0); fill is the open question (C, WATCHLIST #22)",
+      "committed_at": "2026-10-18T09:09:43Z"
+    },
+    {
+      "sha": "cd66a579c3016c58c49a9708aaade060cb4c2026",
+      "title": "EMF (session CMF cross) rebuilt: $41 a trade, t 1.4 (D); MaxAI RL paper: black box, PF 1.07 (F)",
+      "committed_at": "2026-10-18T09:07:17Z"
+    },
+    {
+      "sha": "544cbf889eecfe1d1373f849dcc6b92148c9f4aa",
+      "title": "Midday Range Breakout (user's file) rebuilt: longs t 2.1, shorts lose, plain 12:31 long beats it; overlaps Late-Day Flow (D)",
+      "committed_at": "2026-10-18T09:04:55Z"
+    },
+    {
+      "sha": "e004292baf5274fe2dfd0baec5dbc2e0d0be559a",
+      "title": "NR7 family test: FAIL out of sample (NQ/YM/CL/GC pooled z 0.31); VB / ES NR7 results likely chance",
+      "committed_at": "2026-10-18T09:00:34Z"
+    },
+    {
+      "sha": "662243f923bd3953c0daa76e47fd133c80193117",
+      "title": "ES Core 3 (user's weekend finds) rebuilt: NR7 breakout t 1.7 (NR7 filter real), 2-bar NR t 1.4, Monday filter backwards; combined Sharpe 0.88 not 1.34",
+      "committed_at": "2026-10-18T08:55:53Z"
+    },
+    {
+      "sha": "8510be4f5cf901c2bdb328c5d0f52b8b7919320e",
+      "title": "Grimes book (Antigravity reading): failure test tested mechanically on NQ/ES, F",
+      "committed_at": "2026-10-18T08:49:31Z"
+    },
+    {
+      "sha": "ec01944dbf3cfc4684b61bd98fad309417295ad4",
+      "title": "Overnight round for a personal account: overnight long, turn of month, 6-market TSMOM (all D: real but weak alone)",
+      "committed_at": "2026-10-18T08:47:17Z"
+    },
+    {
+      "sha": "047cc64a6ac5ae61f7edcb129ece66436076257e",
+      "title": "Carver book (Antigravity reading): framework book, empty shortlist",
+      "committed_at": "2026-10-18T08:37:14Z"
+    },
+    {
+      "sha": "8efe050f4469c98dbb25f41825e9ed2fcd93c470",
+      "title": "Two 2023-25 papers tested: closing-auction heavy days on ES MOC (t 1.1, too few) and 0DTE gamma on ES MOC / VB (wrong sign / nothing): F",
+      "committed_at": "2026-10-18T08:36:18Z"
+    },
+    {
+      "sha": "aed3870104ca1e09b2f1e56b8dc30a428311147b",
+      "title": "Hilpisch book (Antigravity reading): coding book, empty shortlist, nothing to test",
+      "committed_at": "2026-10-18T08:30:41Z"
+    },
+    {
+      "sha": "37549df1e7c83494c82ed55715f03cb1b78a16bf",
+      "title": "Pedersen + Chan Machine Trading (Antigravity readings): shortlists already tested; ZN macro-release momentum tested, F",
+      "committed_at": "2026-10-18T08:29:01Z"
+    },
+    {
+      "sha": "0bbcf219d56a05fed9be930c7dc28a107fcccf85",
+      "title": "VB NR7 sizing: checker FAIL (5/7, t 2.81 < 3.53, regime 0.55; no leak) - not added to the plan; WATCHLIST #21",
+      "committed_at": "2026-10-18T08:25:49Z"
+    },
+    {
+      "sha": "1c152a6b7bb34873c48a35436ea5dd5767e55569",
+      "title": "Checker work in progress: VB NR7 sizing replica and robustness files",
+      "committed_at": "2026-10-18T08:23:39Z"
+    },
+    {
+      "sha": "533e4d8b347195cc59d960cf21adc457753cfeec",
+      "title": "VB NR7 sizing MultiCharts-confirmed (135/135 sessions, 1,743 trades identical); checker candidate folder",
+      "committed_at": "2026-10-18T08:21:54Z"
+    },
+    {
+      "sha": "0331d9c8feaa47ba8714861fd24df6f1f5cec3ca",
+      "title": "Vault Break SP: NR7 sizing input (NR7Contracts, off by default) + Python confirm script and expected sessions",
+      "committed_at": "2026-10-18T08:11:52Z"
+    },
+    {
+      "sha": "a33a65c103537fc2b82999f394e779d071117c70",
+      "title": "Kaufman book (Antigravity): ORB shortlist already tested; NR7 day filter on Vault Break is a real candidate (t 2.8, placebo p 0.005; bench VB 1/NR7 3 halves blown)",
+      "committed_at": "2026-10-18T08:06:34Z"
+    },
+    {
+      "sha": "78cfb462bf607e53897da4eead69216732686fe7",
+      "title": "Review of Antigravity's Prado AFML reading: no tradeable rule (methods book; auction flow already tested)",
+      "committed_at": "2026-10-18T07:39:25Z"
+    },
+    {
+      "sha": "9914af0ea583cf44844115dc809380af53c4f846",
+      "title": "Chan book (Antigravity reading): gap momentum and LETF close momentum tested on NQ/ES, both F",
+      "committed_at": "2026-10-18T07:30:55Z"
+    },
+    {
+      "sha": "6531254b10b1893fa4abe9972533f5337be089e9",
+      "title": "Antigravity push command: its repo remote is 'mine' (origin = Jesse template)",
+      "committed_at": "2026-10-18T06:30:34Z"
+    },
+    {
+      "sha": "2c14683f35469c6c23bbf3e118fe0e002ef3f352",
+      "title": "Antigravity book-reading task (quotes + pages, Apex fit, short list; no backtests)",
+      "committed_at": "2026-10-18T06:21:50Z"
+    },
+    {
+      "sha": "1fdcbf0e714ef63cb50d4bd1cd2650106a59c6d8",
+      "title": "NarangBlackBox (Antigravity, ES 1h): F; push + new-idea rules added to its brief",
+      "committed_at": "2026-10-18T06:20:13Z"
+    },
+    {
+      "sha": "fcee981a24ae60f9d96dbb4428e47f2ea6f4c5b3",
+      "title": "Review of Antigravity's academic-edge write-up; citation rule added to its brief",
+      "committed_at": "2026-10-18T05:56:07Z"
+    },
+    {
+      "sha": "c0f17cff49994c1b67fb7dd0917a404bef9cfd57",
+      "title": "Task 09 (ES MOC Follow) blind check: rule PASS; Antigravity's clock ran 1 minute early (proven), edge holds 1 min earlier",
+      "committed_at": "2026-10-17T21:08:45Z"
+    },
+    {
+      "sha": "89404aa5516e83fa388f2dab0e9eb29329ed3b4a",
+      "title": "Merge branch 'claude/nq-trading-strategy-params-5h9d20' of https://github.com/Dartdark/thebeginning into claude/nq-trading-strategy-params-5h9d20",
+      "committed_at": "2026-10-17T21:05:45Z"
+    },
+    {
+      "sha": "4e91f0ad1444b2466163b28392dcf547a974b04e",
+      "title": "journal: notes 2026-10-17",
+      "committed_at": "2026-10-17T21:05:43Z"
+    },
+    {
+      "sha": "da7a856830302a8cbc56195071c055f9f47886ce",
+      "title": "TODO: Obsidian journal set up (user, 2026-10-17)",
+      "committed_at": "2026-10-17T21:03:21Z"
+    },
+    {
+      "sha": "5377746b5d3b42c7264f351a2888730a3e1d38e4",
+      "title": "Antigravity Phase 2 verdict (no variant passes; LDF V1 bench wash) and ESEuroCloseTrend rebuilt (t 1.4, F)",
+      "committed_at": "2026-10-17T20:30:46Z"
+    },
+    {
+      "sha": "7bba4881411ec8fb99497df048ebef0ba61756b9",
+      "title": "Trading journal: Obsidian vault folder, Daily/Idea templates, sync script, process",
+      "committed_at": "2026-10-17T19:03:37Z"
+    },
+    {
+      "sha": "049fc99fcd6ee7af95843de1399c40850ef832fe",
+      "title": "Bridge Monday: no stop as shipped (StopPts 0), so Apex_Stop_Guard not needed",
+      "committed_at": "2026-10-17T18:35:30Z"
+    },
+    {
+      "sha": "19b595a307ff408817b39222df55cac651cf2c26",
+      "title": "TODO: stop-guard, Apex_Stop_Guard and Target Guard done on the charts (user, 2026-10-17)",
+      "committed_at": "2026-10-17T18:33:17Z"
+    },
+    {
+      "sha": "623ae54e55cf53afd1083e96b765f4e56a8c48bf",
+      "title": "Vault Break funded size 2 / 1 adopted (user, 2026-10-17)",
+      "committed_at": "2026-10-17T18:27:39Z"
+    },
+    {
+      "sha": "43ac10850943d79c8d22b3792238c5503e563443",
+      "title": "ES MOC Follow added to the funded plan (2 MES)",
+      "committed_at": "2026-10-17T18:18:58Z"
+    },
+    {
+      "sha": "46beb331c50ca223b85846b108bdc487101643b3",
+      "title": "ES MOC Follow MultiCharts-confirmed: 199/199 trades match ($171 per ES net, t 3.7, 8/9 years)",
+      "committed_at": "2026-10-17T18:10:11Z"
+    },
+    {
+      "sha": "a6abbb07c03b28898de493856ddf5c36b2078d51",
+      "title": "Month-end Treasury extension on ZN: F (tilt smaller than costs)",
+      "committed_at": "2026-10-17T17:08:02Z"
+    },
+    {
+      "sha": "345971bab8efd585f2040fc6262ae6fa39f27001",
+      "title": "Literature scan: VIX-ETP end-of-day rebalancing tested on ES / NQ (F: smaller than costs); MOC follow keeps its 15:00 exit",
+      "committed_at": "2026-10-17T16:39:52Z"
+    },
+    {
+      "sha": "98ea4aa86fc379ad811784b96d6d490d5bd04c31",
+      "title": "ES MOC Follow: MultiCharts code (funded candidate, 2 MES), Jesse port matches the Python test (202/202), Antigravity task 09",
+      "committed_at": "2026-10-17T16:28:54Z"
+    },
+    {
+      "sha": "d079ee94f866402ed416a5eaba16476b13f7546d",
+      "title": "Bootstrapped funded bench: realistic plan numbers (blown 12-16%), VB 2/1 + ES MOC 2 MES safer and as fast",
+      "committed_at": "2026-10-17T16:23:31Z"
+    },
+    {
+      "sha": "b18e37be8fcd7ea1a39c2fc86e24f4c7193cd569",
+      "title": "Antigravity tasks 02-08: all PASS (three engines agree within $50 on 99-100% of matched trades)",
+      "committed_at": "2026-10-17T16:05:49Z"
+    },
+    {
+      "sha": "025da76c1437f141c39e764877b60b9f8794da7f",
+      "title": "NFP replacement hunt: none passes; finding: the funded bench's single-history blown rate is path-fragile (2-16% on reshuffles)",
+      "committed_at": "2026-10-17T09:33:39Z"
+    },
+    {
+      "sha": "e281cfb0b9d46576de52f434dc1eccf0aff6d3f2",
+      "title": "Golden Cross on GC 1h (user's rule): profit is gold's bull run (buy-and-hold more, random entries equal), F",
+      "committed_at": "2026-10-17T09:10:14Z"
+    },
+    {
+      "sha": "59ff5969e2f87db9dad32cc089631497deb4bf85",
+      "title": "Brief: no paid data for now (user)",
+      "committed_at": "2026-10-17T09:06:06Z"
+    },
+    {
+      "sha": "74c718db1943ef4f0b3350ca7ac9f5d0360ef835",
+      "title": "SPX option OI free sample vs next ES session: range signal already in VIX, no direction or pinning (F)",
+      "committed_at": "2026-10-17T09:04:39Z"
+    },
+    {
+      "sha": "4b785f2025a692aa6ac8a722f2549c86512eb07d",
+      "title": "Meta-labeling Late-Day Flow: F; data sources for closing imbalances / option OI noted in the brief",
+      "committed_at": "2026-10-17T08:45:38Z"
+    },
+    {
+      "sha": "019c04630cc571274dcee2e1c83db46f77efd858",
+      "title": "Antigravity brief: Phase 2 improvement rules (pre-registered variants, design/holdout split, trial count)",
+      "committed_at": "2026-10-17T08:24:52Z"
+    },
+    {
+      "sha": "5a61a708d306d49b3a794257c35e96b7930b4306",
+      "title": "Briefing for Antigravity: project, plan, roles, strategy roster (no results, to keep checks blind), rules",
+      "committed_at": "2026-10-17T08:22:47Z"
+    },
+    {
+      "sha": "10a5e4923d35be04951f7ad8ef159773619d4c85",
+      "title": "Antigravity task 01 verdict: PASS (97 trades, identical to Claude's Jesse run on the correct time reading)",
+      "committed_at": "2026-10-17T08:14:33Z"
+    },
+    {
+      "sha": "735a42cd498a02e3a34b815d09c90aff6d348be0",
+      "title": "Meta-labeling on Vault Break (pre-registered walk-forward ridge): no edge, F",
+      "committed_at": "2026-10-17T08:06:49Z"
+    },
+    {
+      "sha": "9836810bd8cf5baca563b5f354534e915ac0a471",
+      "title": "Markov regime transitions on 6 symbols and the plan: no directional edge (F); only volatility persists",
+      "committed_at": "2026-10-17T07:48:43Z"
+    },
+    {
+      "sha": "e2f52a7a7d925b16928823d7d482d236d182b4de",
+      "title": "20-day regime filter (user's bull/sideways/bear) on every plan strategy: no usable filter (D)",
+      "committed_at": "2026-10-17T07:30:25Z"
+    },
+    {
+      "sha": "6a67da7fe988863c5df5e90ccaf33390d2e0cbc7",
+      "title": "Antigravity tasks 02-08: blind specs for every NQ plan strategy + common data / conventions sheet",
+      "committed_at": "2026-10-17T07:09:52Z"
+    },
+    {
+      "sha": "5313509fd23d6abe430c49821c2cf4879c878e00",
+      "title": "Antigravity task 01: blind rebuild of the CL Sunday rule in Jesse",
+      "committed_at": "2026-10-17T06:43:05Z"
+    }
+  ]
+}
