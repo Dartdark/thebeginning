@@ -56,10 +56,10 @@ def trade(g, side, sig_close, sl=100.0, trail=150.0, be=0.66):
                 return dict(entry=e, exit=o, kind="eod", minutes=i, gross=(o - e) * side * PV)
         # bar close: update and set the stop for the next bar
         if side > 0:
-            best = max(best, h); armed = armed or h >= e + be * sl
+            best = max(best, h); armed = armed or (be > 0 and h >= e + be * sl)
             stop = max(e - sl, best - trail if trail else -1e18, e + 4 * TICK if armed else -1e18)
         else:
-            best = min(best, l); armed = armed or l <= e - be * sl
+            best = min(best, l); armed = armed or (be > 0 and l <= e - be * sl)
             stop = min(e + sl, best + trail if trail else 1e18, e - 4 * TICK if armed else 1e18)
     c = a.close.iloc[-1]
     return dict(entry=e, exit=c, kind="close", minutes=len(a), gross=(c - e) * side * PV)

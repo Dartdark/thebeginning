@@ -25,9 +25,9 @@ return/DD 2.25, P(hit $2,000 trail, EOD) 4%; at 2 MNQ 29% (too big alone for a 5
   (t −3.3, 1/9 years). The direction call carries the edge.
 - Flow filter: every drive day (no filter) $119 (t 3.0); the filter doubles the per-trade edge.
 - Smooth in z: 0.5 / 0.75 / 1.0 / 1.25 / 1.5 → $208 / $243 / $261 / $332 / $244 (t 4.2 / 4.2 / 3.8 / 4.0 / 2.4).
-- Exits: the break-even step is what matters. No BE and no trail $29 (2023+ −$82); BE only $234; trail only $43
-  (2023+ −$46); BE at 0.5 / 0.66 / 0.8 R all $235-267; trail 100 / 150 / 200 $215-261; stop 75 / 100 / 150 $218-270.
-  Not knife-edge, but the edge depends on scratching drives that reverse after +66 points.
+- Exits (**corrected 2026-10-23** after the checker: my first run treated BreakEvenR 0 as 'break-even at once', not
+  'off'): stop 100 only $247 (t 3.2), break-even only $234, trail only $272, as coded $261; BE 0.5 / 0.8, trail 100 / 200,
+  stop 75 / 150 all $215-270. **The edge is in the entry, not the exits**; the exits change the shape, not the sign.
 - Tail: the top 9% of trades make $304k, the rest −$104k per NQ (the author's 'the strategy is its tail').
 
 ## Concerns
@@ -88,3 +88,16 @@ Also: 'flow' is a candle-and-volume proxy, not measured aggressor volume; the co
 - v2 under our costs, 2018-26: 773 trades, $275 per NQ, PF 1.51, **t 4.0**, 9/9 years; 2018-22 $292 (t 3.7), 2023+ $252
   (t 2.1); longs $305 (t 3.3, 9/9 years), shorts $246 (t 2.5; 2023+ t 0.9); Sharpe 1.32, Sortino 2.58, Calmar 1.53,
   Ulcer 2.7, max DD $15.3k per NQ. v2 is the version to test further.
+
+## Independent checker (2026-10-23): PASS WITH CONCERNS (`verdict.md`, `checker_report.md`)
+- Replica from `FC_2B_v2.txt` alone: identical side / entry / exit / net on all 725 shared days vs the MC v2 report;
+  mismatched days are near-threshold (volume definition) plus 3 after our data and 5 holidays. Reproduces my v1 trades
+  764 / 764. No look-ahead, no holiday carry in v2.
+- Gates 7/8 (MC list): G1 fails on DSR (0.89 < 0.95) but t 4.02 clears the 3.57 bar (3.61 even with the author's ~40
+  builds added to N); holdout, years, concentration (MC list), placebo (random side $31, random drive days $119 vs
+  $261-275, p < 0.003), resampling, MinTRL, regime pass; PBO 0.45 over 16 neighbouring variants.
+- Concerns: (1) my exit ablation was wrong (fixed above); (2) the z filter's lift over 'trade every drive' is t 2.66 in
+  2018-22 but only t 1.06 in 2023+ (2023 lost); (3) all the profit sits in the top 5% of trades, 31 of 39 from 2022+,
+  and full stop-outs rose from 3-8% (2018-19) to 20-37% (2022-26) as NQ quadrupled under fixed-point exits (price-scaled
+  exits keep t 3.0-3.8: drift, not a break); (4) MNQ only on Apex: one NQ stop = −$2,017; P(hit the EOD trail in a year,
+  2023+) 10% at 1 MNQ, 43% at 2 MNQ (checker's MNQ cost assumption $3 round trip).
