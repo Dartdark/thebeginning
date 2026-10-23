@@ -122,9 +122,13 @@ after 15:59 CT, never with a position open.
 - [ ] **Account #1 is ~$398 above its trailing line:** one full VB stop at 8 MNQ (~$1,200) would end it. Your call (plan size kept
       2026-10-22); check the Apex dashboard each morning.
 
-- [ ] **Automatic cushion sizing, step 1 (any day, ~5 minutes):** add the indicator `tools/checks/Apex_Account_Check.txt`
-      to one live chart with auto-trading on, open the Output window, and send Claude a screenshot of its line next to the
-      Apex dashboard balance. If MultiCharts sees the right balance, Claude builds the automatic sizing (FUNDED_PLAN.md).
+- [ ] **Automatic cushion sizing, step 1: Sun 10/25 after 17:00 CT (market open), ~5 minutes.** The indicator
+      `Apex Account Check` is already compiled (2026-10-23). (1) On the account -01 chart: right-click → Insert Study →
+      Indicator → Apex Account Check; Format Study → Inputs → `AccountName` = `APEX-681524-01`. (2) Same on the -02 chart
+      with `APEX-681524-02`. (3) Open the PowerLanguage Editor → Output tab (bottom; View → Output Bar if hidden) and leave it
+      open. (4) Within a minute: one line per chart with account and NetWorth. Send Claude a screenshot + both Apex dashboard
+      balances. NetWorth 0 / no line → fallback (one morning cushion input); same balance on both → wrong account binding.
+      Indicator only: places no orders; remove it once read.
 
 ## Codex and new research data (2026-10-22)
 
