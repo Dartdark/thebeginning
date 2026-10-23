@@ -154,7 +154,12 @@ Rules:
    (can the test ever reach t >= 2?), already tested? Verdict TEST / NEEDS DATA / DON'T TEST. Forced or scheduled flows
    stay the preferred search area for Apex. Personal-account research may also look at well-supported trend or risk-premium
    ideas, but each still needs a credible reason and the same validation.
-2. **Forward log with its decision rule written first** (`agents/codex/FORWARD_LOG.md`). Before tracking starts, each
+2. **Straight into the plan, or the forward log (user, 2026-10-23).** A candidate that clears everything goes straight into
+   the plan, monitored live like every plan strategy: MultiCharts-confirmed; t >= the multiple-testing bar AND deflated
+   Sharpe >= 0.95; positive in 2018-22 and 2023+ (2023+ t >= 2) with nothing chosen on the full sample or after seeing
+   2023+; clean placebos; checker PASS with no open concerns; and a gain on the bootstrapped bench (addition or replacement,
+   beating the empty slot). The forward log is a discretionary tool for promising candidates with open doubts about future
+   performance. **Forward log with its decision rule written first** (`agents/codex/FORWARD_LOG.md`). Before tracking starts, each
    entry fixes: review dates, minimum observations, costs, and what means CONTINUE / REJECT / EXTEND. Every eligible
    signal is recorded, including missed, rejected and skipped ones (with the reason), never only the filled trades.
 3. **Break tests: two kinds, reported separately.**

@@ -1,4 +1,9 @@
-# Forward log: rules frozen before they can trade
+# Forward log: paper tracking for promising candidates with open doubts
+
+Since 2026-10-23 (user) the forward log is discretionary: a candidate that clears every test, including a gain on the
+plan bench, goes straight into the plan and is monitored live (`DEVELOPMENT_PROCESS.md`, 'Straight into the plan, or the
+forward log'). The entries below were all logged for open doubts (fitted on the full sample or after seeing 2023+, DSR
+below 0.95, weekend / drift dependence) and none improved the Apex plans, so they stay as paper tracking.
 
 A rule that passes testing is frozen here (exact rule, code / script commit, date frozen). From then on its paper
 results are added at each Friday review. 2023+ has been reused by many ideas, so forward results are the clean test.
