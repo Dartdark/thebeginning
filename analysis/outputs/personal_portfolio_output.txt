@@ -44,3 +44,10 @@ portfolio   2081 52%  $87 $20,139   2.83    6.18          1.82 $4,663   4.32  0.
    B. 6 pieces: A + EOS                                 $8,825 a year, Sharpe 2.68, max DD $2,131, MC p5 / p50 $3,572 / $8,629, DD p95 $2,259 -> capital $11,297
    C. 7 pieces: B + Vault Break                         $10,548 a year, Sharpe 2.80, max DD $2,515, MC p5 / p50 $4,429 / $10,380, DD p95 $2,727 -> capital $13,635
    D. 9 pieces: C + RS + ES MOC                         $14,779 a year, Sharpe 2.74, max DD $4,787, MC p5 / p50 $6,261 / $14,520, DD p95 $4,078 -> capital $20,392
+
+6. + S30 IBS reversal (NQ + ES, 1 micro each; daily marked; checks/candidates/s30_ibs/), user's file 2026-10-23:
+   full 12            $20,139 a year, Sharpe 2.83, max DD $4,663, MC p50 $19,708, DD p95 $4,711, return/DD 7.1, capital at the 20% rule $23,556
+   full 12 + S30      $26,470 a year, Sharpe 2.67, max DD $5,773, MC p50 $25,851, DD p95 $6,574, return/DD 6.6, capital at the 20% rule $32,872
+   set D (9)          $14,779 a year, Sharpe 2.74, max DD $4,787, MC p50 $14,520, DD p95 $4,078, return/DD 6.7, capital at the 20% rule $20,392
+   set D (9) + S30    $21,111 a year, Sharpe 2.46, max DD $6,693, MC p50 $20,639, DD p95 $6,732, return/DD 5.5, capital at the 20% rule $33,658
+   S30 corr with the 12-piece portfolio: +0.04

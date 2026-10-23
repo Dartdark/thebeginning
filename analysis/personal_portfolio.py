@@ -77,3 +77,13 @@ if __name__ == "__main__":
         x = P[ks].sum(axis=1); d = MC.daily_mc(x.values, horizon=252, n=5000, block=20, trail=1e12); e = x.cumsum()
         print(f"   {nm:<52} ${x.sum() / yrs:,.0f} a year, Sharpe {x.mean() / x.std() * np.sqrt(252):.2f}, max DD ${-(e - e.cummax()).min():,.0f}, "
               f"MC p5 / p50 ${d['pnl_p5']:,.0f} / ${d['pnl_p50']:,.0f}, DD p95 ${d['dd_p95']:,.0f} -> capital ${d['dd_p95'] / 0.20:,.0f}")
+
+    print("\n6. + S30 IBS reversal (NQ + ES, 1 micro each; daily marked; checks/candidates/s30_ibs/), user's file 2026-10-23:")
+    s30 = pd.read_csv("checks/candidates/s30_ibs/daily_nq_es_per_micro.csv", index_col=0, parse_dates=True).iloc[:, 0].reindex(days, fill_value=0.0)
+    for nm, base in (("full 12", tot), ("set D (9)", P[["TwinContinuation", "OvernightBiasML", "BridgeMondayLong", "CLSundayFade_perMCL", "NFPFade",
+                                                         "ExpirationOpenShort", "VaultBreak", "RelativeStrength", "ESMOCFollow_perMES"]].sum(axis=1))):
+        for lab_, x in ((nm, base), (nm + " + S30", base + s30)):
+            d = MC.daily_mc(x.values, horizon=252, n=5000, block=20, trail=1e12); e = x.cumsum()
+            print(f"   {lab_:<18} ${x.sum() / yrs:,.0f} a year, Sharpe {x.mean() / x.std() * np.sqrt(252):.2f}, max DD ${-(e - e.cummax()).min():,.0f}, "
+                  f"MC p50 ${d['pnl_p50']:,.0f}, DD p95 ${d['dd_p95']:,.0f}, return/DD {d['ret_dd']:.1f}, capital at the 20% rule ${d['dd_p95'] / 0.20:,.0f}")
+    print(f"   S30 corr with the 12-piece portfolio: {np.corrcoef(s30, tot)[0, 1]:+.2f}")
