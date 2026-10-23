@@ -33,3 +33,12 @@ Plain S47: 1,421 trades, $229, PF 1.32, t 3.9, lost 2024.
 B now (rebuild only; A on its numbers once the MultiCharts reports confirm it). Not for the Apex plans; candidate for the
 personal account and the forward log after (1) both MC reports (.xlsx), (2) a fixed v2 code (entry-bar stop, fallback,
 explicit 15:00 / early-close exit).
+
+## Update 2026-10-23: fixed code and days to pass
+- **`S47_v2_fixed.txt`**: rule unchanged; [X] lines add an entry-bar backstop (`SetStopLoss` at the rule's stop + 1 tick),
+  a market exit when the rule's stop is already through the close, and a guard so the backstop is never armed at zero.
+  Exits stay the 15:00 `this bar on close` (a market order at the bar close live); holiday / early-close sessions are
+  skipped by the rule, so no session ends with a position open. Needs a MultiCharts run before any use.
+- **Days to pass the 50K evaluation** (`analysis/combine_days_test.py`): median 6 days with or without S47 v2 / FC 2B
+  (S47 3 MNQ: 5); mean 7.4 → 7.2 / 7.0 / 6.6 (S47 1-3 MNQ) and 7.1 / 6.7 / 6.3 (FC 2B 1-3); passes within 10 days
+  37.7% → up to 41.9% (FC 2B 3 MNQ), but pass rates fall (50.1% → 47.0-50.0%): faster passes, slightly more fails.

@@ -1,0 +1,290 @@
+{ S47 v2 FIXED - Europe-Open Impulse, London and New York agree (NQ / MNQ). PowerLanguage signal for MultiCharts.
+  RULE (CT clock, 1-minute bars stamped at the minute end)
+   - Trading date: bars from 17:01 CT belong to the next date. Overnight = 17:01-08:30, RTH = 08:31-15:00.
+   - ATR_ON = mean overnight range (high - low, 17:01-08:30) of the previous ATRLen trading dates,
+     at least ATRMinSessions usable.
+   - EU = 08:00 London in CT: 02:00, or 03:00 in the weeks when US and UK daylight saving differ.
+   - s = (Close at EU + SigEndMin - Close at EU + SigStartMin) / ATR_ON.
+     Long if s > SigThresh, short if s < -SigThresh, otherwise no trade.
+   - Entry: market at the bar after the EntryDecisionTime (09:30) bar.
+   - Stop: StopATR x ATR_ON from entry, working from the bar after the entry bar.
+   - Exit: Close of the first bar at or after ExitTimeCT (15:00). No target. One trade a day.
+   - Skipped: quarterly roll sessions, early-close / holiday sessions, unusable overnight sessions.
+   - v2 condition [A]: New York move = 09:30 CT close - last close at or before 08:30 CT. Long only if s
+     and the New York move are both up; short only if both are down. A zero New York move = no trade.
+   - No date limits: it trades every date the data allows.
+  CHART  @NQ continuous, UNADJUSTED, 1-minute, CME equity template Sun-Fri 17:00-16:00 CT (not the old
+         template that ends Friday 15:15), Exchange time zone. IOG OFF, Bar Magnifier OFF.
+         Load data from at least 3 months before the first trading date (ATR_ON needs 15+ usable days).
+         Costs used in testing: $2.50 commission per side + $5 slippage per order, per NQ contract.
+  LINE TAGS  Every executable line ends with a tag in braces:
+   S = the strategy rule.
+   P = platform bookkeeping that implements a rule (clock arithmetic, state resets, ring buffer).
+   D = rebuilds the back-adjusted overnight range on the quarterly roll Fridays (through 2022-03) from
+       unadjusted @NQ bars. Data handling, not trading logic. Delete these lines on an already-adjusted series.
+   N = (1) CME holiday / early-close calendar, so short sessions are skipped as the rule requires;
+       (2) safety flatten: if a session ends before ExitTimeCT, the position closes at the next
+           session's first bar.
+   A = the v2 condition (the New York move must agree with the London signal).
+   X = execution fixes (Claude, 2026-10-23; the trading rule is unchanged):
+       (1) entry-bar backstop: SetStopLoss at the rule's stop distance + 1 tick, so the entry minute is protected
+           (the rule's own stop starts one bar later, as before, and stays the binding stop from then on);
+       (2) if the rule's stop is already at / through the bar's close when it is (re)issued, exit at market next bar
+           instead (a stop on the wrong side of the market is rejected live);
+       (3) EntryATR guarded so the backstop is never armed with a zero distance. }
+
+[IntrabarOrderGeneration = false]
+
+Inputs:
+  SigStartMin(-15),        { [S] P0 time: minutes relative to 08:00 London converted to CT. Integer.
+                             Valid: EU + SigStartMin > -420 (after 17:00 CT the prior evening) and < SigEndMin.
+                             EU is 120 (02:00) or 180 (03:00) minutes after the tdate's midnight. }
+  SigEndMin(30),           { [S] P1 time: minutes relative to 08:00 London converted to CT. Integer.
+                             Valid: > SigStartMin, and EU + SigEndMin must fall before EntryDecisionTime. }
+  SigThresh(0.0625),       { [S] |s| threshold, in units of ATR_ON (fraction). Valid >= 0. }
+  ATRLen(20),              { [S] ATR_ON window, in trading-date ROWS (see header). Valid 1..500. }
+  ATRMinSessions(15),      { [S] minimum usable overnight ranges inside the window. Valid 1..ATRLen. }
+  EntryDecisionTime(930),  { [S] HHMM CT. Decision on this bar's close; fill at the next bar's Open.
+                             HHMM >= 1700 means the evening before the trading date.
+                             Valid: after EU + SigEndMin and before ExitTimeCT. }
+  StopATR(0.5),            { [S] stop distance, in units of ATR_ON (fraction). Valid > 0. }
+  ExitTimeCT(1500),        { [S] HHMM CT. Exit at the Close of the first bar stamped at/after this time on
+                             the entry's trading date. Spec name "ExitTime" is reserved. Valid: after
+                             EntryDecisionTime, <= 1600. }
+  ContractQty(1);         { [S] contracts per trade. The spec and reference use 1. Whole number >= 1. }
+Variables:
+  TickSz(0.25), TdJul(0), CurTdJul(0), TdDate(0), TdYYY(0), TdYear(0), TdMD(0), TdMon(0), TdDay(0),
+  TdDOW(0), BarMin(0), DecMin(0), ExitMin(0),
+  LastSunMar(0), LastSunOct(0), SecSunMar(0), FirstSunNov(0), UKOn(False), USOn(False), EUMin(120),
+  Tgt0Min(0), Tgt1Min(0), P0Px(0), P1Px(0), P0OK(False), P1OK(False), SigVal(0),
+  NY0Px(0), NY0OK(False),                                                   { [A] }
+  OnCount(0), OnFirstOK(False), OnHi(0), OnLo(0), OnRangeVal(0),
+  RowsPushed(0), RingIdx(0), RingN(0), KIdx(0), ATRSum(0), ATRCnt(0), ATROn(0), ATRValid(False),
+  HolidaySkip(False), RollSkip(False), FriRoll(False), Decided(False),
+  EntryTd(0), EntryATR(0), StopPx(0),
+  PreHi(0), PreLo(0), PostHi(0), PostLo(0), CandN(0), BestK(-1), BestAbs(-1), GapPx(0), AdjHi(0), AdjLo(0);
+
+Arrays:
+  OnrBuf[500](0), OnrOK[500](False),        { [P] ring buffer of overnight ranges, one slot per tdate row }
+  CandHi[9](0), CandLo[9](0), CandJump[9](0); { [D] bars 03:31..03:40 CT on a Friday roll session }
+
+{ ---------------- A. Clock: trading date and minute of the trading date ---------------- }
+TickSz = MinMove / PriceScale;                                              {P} { 0.25 on NQ }
+If Time >= 1700 then TdJul = DateToJulian(Date) + 1                         {S} { 17:01+ -> next day }
+else TdJul = DateToJulian(Date);                                            {S}
+BarMin = IntPortion(Time / 100) * 60 + Mod(Time, 100);                      {P}
+If Time >= 1700 then BarMin = BarMin - 1440;                                {P} { -419 = 17:01 prior evening }
+DecMin = IntPortion(EntryDecisionTime / 100) * 60 + Mod(EntryDecisionTime, 100);  {P}
+If EntryDecisionTime >= 1700 then DecMin = DecMin - 1440;                   {P}
+ExitMin = IntPortion(ExitTimeCT / 100) * 60 + Mod(ExitTimeCT, 100);         {P}
+If ExitTimeCT >= 1700 then ExitMin = ExitMin - 1440;                        {P}
+
+{ ---------------- B. First bar of a new trading date ---------------- }
+If TdJul <> CurTdJul then begin                                             {P}
+
+  { B1. Close the previous row: its overnight range goes into the ring buffer. }
+  If CurTdJul > 0 then begin                                                {P}
+    OnRangeVal = OnHi - OnLo;                                               {S}
+    If FriRoll and CandN > 0 then begin                                     {D}
+      { Splice = the 03:31..03:40 bar with the largest |Open - prior Close| (first on ties), as in
+        the back-adjustment. Bars before it are shifted by that gap, as on a back-adjusted series. }
+      BestK = -1;                                                           {D}
+      BestAbs = -1;                                                         {D}
+      For KIdx = 0 to CandN - 1 begin                                       {D}
+        If AbsValue(CandJump[KIdx]) > BestAbs then begin                    {D}
+          BestAbs = AbsValue(CandJump[KIdx]);                               {D}
+          BestK = KIdx;                                                     {D}
+        end;                                                                {D}
+      end;                                                                  {D}
+      GapPx = CandJump[BestK];                                              {D}
+      AdjHi = PreHi;                                                        {D}
+      AdjLo = PreLo;                                                        {D}
+      For KIdx = 0 to CandN - 1 begin                                       {D}
+        If KIdx < BestK then begin                                          {D}
+          AdjHi = MaxList(AdjHi, CandHi[KIdx]);                             {D}
+          AdjLo = MinList(AdjLo, CandLo[KIdx]);                             {D}
+        end else begin                                                      {D}
+          PostHi = MaxList(PostHi, CandHi[KIdx]);                           {D}
+          PostLo = MinList(PostLo, CandLo[KIdx]);                           {D}
+        end;                                                                {D}
+      end;                                                                  {D}
+      OnRangeVal = MaxList(AdjHi + GapPx, PostHi) - MinList(AdjLo + GapPx, PostLo);  {D}
+    end;                                                                    {D}
+    RingIdx = Mod(RowsPushed, ATRLen);                                      {P}
+    OnrBuf[RingIdx] = OnRangeVal;                                           {S}
+    OnrOK[RingIdx] = OnCount >= 700 and OnFirstOK;                          {S} { usable overnight }
+    RowsPushed = RowsPushed + 1;                                            {P}
+  end;                                                                      {P}
+  CurTdJul = TdJul;                                                         {P}
+
+  { B2. ATR_ON for this trading date: previous ATRLen rows, today excluded. }
+  ATRSum = 0;                                                               {P}
+  ATRCnt = 0;                                                               {P}
+  RingN = MinList(RowsPushed, ATRLen);                                      {P}
+  If RingN > 0 then begin                                                   {P}
+    For KIdx = 0 to RingN - 1 begin                                         {P}
+      If OnrOK[KIdx] then begin                                             {S}
+        ATRSum = ATRSum + OnrBuf[KIdx];                                     {S}
+        ATRCnt = ATRCnt + 1;                                                {S}
+      end;                                                                  {P}
+    end;                                                                    {P}
+  end;                                                                      {P}
+  ATRValid = ATRCnt >= ATRMinSessions and ATRCnt > 0;                       {S}
+  If ATRValid then ATROn = ATRSum / ATRCnt else ATROn = 0;                  {S}
+
+  { B3. Calendar fields of the trading date. }
+  TdDate = JulianToDate(TdJul);                                             {P} { YYYMMDD }
+  TdYYY = IntPortion(TdDate / 10000);                                       {P} { years since 1900 }
+  TdYear = TdYYY + 1900;                                                    {P}
+  TdMD = Mod(TdDate, 10000);                                                {P} { MMDD }
+  TdMon = IntPortion(TdMD / 100);                                           {P}
+  TdDay = Mod(TdMD, 100);                                                   {P}
+  TdDOW = DayOfWeek(TdDate);                                                {P} { 0 = Sunday }
+
+  { B4. EU = 08:00 London in CT minutes after the trading date's midnight. Explicit DST rules:
+        UK (BST, UTC+1): last Sunday of March .. day before the last Sunday of October.
+        US (CDT, UTC-5): second Sunday of March .. day before the first Sunday of November.
+        08:00 London = 08:00 UTC - UK offset; CT = UTC - 6 + US offset -> 02:00 + US - UK hours.
+        Exact for every non-Sunday date; checked against the IANA time-zone database for 2016-10..2026-12. }
+  LastSunMar = 31 - DayOfWeek(TdYYY * 10000 + 331);                         {S}
+  LastSunOct = 31 - DayOfWeek(TdYYY * 10000 + 1031);                        {S}
+  SecSunMar = 8 + Mod(7 - DayOfWeek(TdYYY * 10000 + 301), 7);               {S}
+  FirstSunNov = 1 + Mod(7 - DayOfWeek(TdYYY * 10000 + 1101), 7);            {S}
+  UKOn = TdMD >= 300 + LastSunMar and TdMD < 1000 + LastSunOct;             {S}
+  USOn = TdMD >= 300 + SecSunMar and TdMD < 1100 + FirstSunNov;             {S}
+  EUMin = 120;                                                              {S} { 08:00 GMT = 02:00 CST }
+  If USOn then EUMin = EUMin + 60;                                          {S}
+  If UKOn then EUMin = EUMin - 60;                                          {S}
+  Tgt0Min = EUMin + SigStartMin;                                            {S}
+  Tgt1Min = EUMin + SigEndMin;                                              {S}
+
+  { B5. Roll sessions (spec: one Friday per quarter through 2022-03 = the Friday one week before
+        the third Friday; from 2022-06 the Sunday-evening session, i.e. the Monday tdate of expiry week). }
+  RollSkip = False;                                                         {S}
+  FriRoll = False;                                                          {D}
+  If Mod(TdMon, 3) = 0 then begin                                           {S}
+    If TdYear * 100 + TdMon <= 202203 then begin                            {S}
+      If TdDOW = 5 and TdDay >= 8 and TdDay <= 14 then begin                {S}
+        RollSkip = True;                                                    {S}
+        FriRoll = True;                                                     {D}
+      end;                                                                  {S}
+    end else begin                                                          {S}
+      If TdDOW = 1 and TdDay >= 11 and TdDay <= 17 then RollSkip = True;    {S}
+    end;                                                                    {S}
+  end;                                                                      {S}
+
+  { B6. Early-close / holiday sessions with RTH bars at 09:30 but no full RTH to 15:00. }
+  HolidaySkip = False;                                                                              {N}
+  If TdMon = 1 and TdDOW = 1 and TdDay >= 15 and TdDay <= 21 then HolidaySkip = True;              {N} { MLK Day }
+  If TdMon = 2 and TdDOW = 1 and TdDay >= 15 and TdDay <= 21 then HolidaySkip = True;              {N} { Presidents Day }
+  If TdMon = 5 and TdDOW = 1 and TdDay >= 25 then HolidaySkip = True;                              {N} { Memorial Day }
+  If TdYear >= 2022 and TdMon = 6 and ((TdDay = 19 and TdDOW >= 1 and TdDOW <= 5)
+     or (TdDay = 18 and TdDOW = 5) or (TdDay = 20 and TdDOW = 1)) then HolidaySkip = True;       {N} { Juneteenth, observed }
+  If TdMon = 7 and ((TdDay = 4 and TdDOW >= 1 and TdDOW <= 5)
+     or (TdDay = 3 and TdDOW = 5) or (TdDay = 5 and TdDOW = 1)) then HolidaySkip = True;         {N} { Independence Day, observed }
+  If TdMon = 7 and TdDay = 3 and TdDOW >= 1 and TdDOW <= 4 then HolidaySkip = True;               {N} { July 3 early close }
+  If TdMon = 9 and TdDOW = 1 and TdDay <= 7 then HolidaySkip = True;                               {N} { Labor Day }
+  If TdMon = 11 and TdDOW = 4 and TdDay >= 22 and TdDay <= 28 then HolidaySkip = True;             {N} { Thanksgiving }
+  If TdMon = 11 and TdDOW = 5 and TdDay >= 23 and TdDay <= 29 then HolidaySkip = True;             {N} { day after Thanksgiving }
+  If TdMon = 12 and TdDay = 24 and TdDOW >= 1 and TdDOW <= 4 then HolidaySkip = True;              {N} { Christmas Eve early close }
+
+  { B7. Reset the per-trading-date state. }
+  OnCount = 0;                                                              {P}
+  OnFirstOK = False;                                                        {P}
+  OnHi = -999999999;                                                        {P}
+  OnLo = 999999999;                                                         {P}
+  PreHi = -999999999;                                                       {D}
+  PreLo = 999999999;                                                        {D}
+  PostHi = -999999999;                                                      {D}
+  PostLo = 999999999;                                                       {D}
+  CandN = 0;                                                                {D}
+  P0OK = False;                                                             {P}
+  NY0OK = False;                                                            {A}
+  P1OK = False;                                                             {P}
+  Decided = False;                                                          {P}
+end;                                                                        {P}
+
+{ ---------------- C. Overnight range, bars 17:01 .. 08:30 ---------------- }
+If BarMin > -420 and BarMin <= 510 then begin                               {S}
+  If OnCount = 0 then OnFirstOK = BarMin <= -410;                           {S} { first bar by 17:10 }
+  OnCount = OnCount + 1;                                                    {S}
+  OnHi = MaxList(OnHi, High);                                               {S}
+  OnLo = MinList(OnLo, Low);                                                {S}
+  If FriRoll then begin                                                     {D}
+    If BarMin < 211 then begin                                              {D} { before 03:31 }
+      PreHi = MaxList(PreHi, High);                                         {D}
+      PreLo = MinList(PreLo, Low);                                          {D}
+    end else if BarMin <= 220 then begin                                    {D} { 03:31 .. 03:40 }
+      If CandN <= 9 then begin                                              {D}
+        CandHi[CandN] = High;                                               {D}
+        CandLo[CandN] = Low;                                                {D}
+        CandJump[CandN] = Open - Close[1];                                  {D}
+        CandN = CandN + 1;                                                  {D}
+      end;                                                                  {D}
+    end else begin                                                          {D} { 03:41 .. 08:30 }
+      PostHi = MaxList(PostHi, High);                                       {D}
+      PostLo = MinList(PostLo, Low);                                        {D}
+    end;                                                                    {D}
+  end;                                                                      {D}
+end;                                                                        {S}
+
+{ ---------------- D. Signal prices: last Close at or before each target ---------------- }
+If BarMin <= Tgt0Min then begin                                             {S}
+  P0Px = Close;                                                             {S}
+  P0OK = True;                                                              {P}
+end;                                                                        {S}
+If BarMin <= Tgt1Min then begin                                             {S}
+  P1Px = Close;                                                             {S}
+  P1OK = True;                                                              {P}
+end;                                                                        {S}
+
+{ ---------------- D2. [A] New York open reference: last Close at or before 08:30 CT ---------------- }
+If BarMin <= 510 then begin                                                {A}
+  NY0Px = Close;                                                           {A}
+  NY0OK = True;                                                            {A}
+end;                                                                       {A}
+{ ---------------- E. Decision on the EntryDecisionTime bar; fill at the next bar's Open ---------------- }
+If Decided = False and BarMin >= DecMin then begin                          {P}
+  Decided = True;                                                           {S} { one decision, one trade a day }
+  If NY0OK                                                                   {A}
+     and OnCount >= 700 and OnFirstOK and ATRValid                          {S}
+     and RollSkip = False and HolidaySkip = False                           {S} { HolidaySkip encoding is [N] }
+     and MarketPosition = 0 and P0OK and P1OK then begin                    {S}
+    SigVal = (P1Px - P0Px) / ATROn;                                         {S}
+    If AbsValue(SigVal) > SigThresh then begin                              {S}
+      EntryTd = TdJul;                                                      {P}
+      EntryATR = ATROn;                                                     {P}
+      If SigVal > 0 and Close > NY0Px then Buy ("EOI.LE") ContractQty contracts next bar at market   {A} { New York up agrees }
+      else if SigVal < 0 and Close < NY0Px then SellShort ("EOI.SE") ContractQty contracts next bar at market;  {A} { New York down agrees }
+    end;                                                                    {S}
+  end;                                                                      {S}
+end;                                                                        {P}
+
+{ ---------------- F. Exits ---------------- }
+If MarketPosition <> 0 then begin                                           {S}
+  If TdJul <> EntryTd then begin                                            {N} { safety flatten, see header }
+    If MarketPosition = 1 then Sell ("EOI.LX.D") this bar on close          {N}
+    else BuyToCover ("EOI.SX.D") this bar on close;                         {N}
+  end else if BarMin >= ExitMin then begin                                  {S}
+    If MarketPosition = 1 then Sell ("EOI.LX.T") this bar on close          {S} { 15:00 Close }
+    else BuyToCover ("EOI.SX.T") this bar on close;                         {S}
+  end else begin                                                            {S}
+    { Stop from the entry fill, re-issued every bar from the entry bar's close onward. }
+    If MarketPosition = 1 then begin                                        {S}
+      StopPx = Floor((EntryPrice - StopATR * EntryATR) / TickSz) * TickSz;  {S} { round down }
+      If Close <= StopPx then Sell ("EOI.LX.M") next bar at market          {X} { stop already through: market }
+      else Sell ("EOI.LX.S") next bar at StopPx stop;                       {S}
+    end else begin                                                          {S}
+      StopPx = Ceiling((EntryPrice + StopATR * EntryATR) / TickSz) * TickSz; {S} { round up }
+      If Close >= StopPx then BuyToCover ("EOI.SX.M") next bar at market    {X}
+      else BuyToCover ("EOI.SX.S") next bar at StopPx stop;                 {S}
+    end;                                                                    {S}
+  end;                                                                      {S}
+end;                                                                        {S}
+
+{ ---------------- G. Entry-bar backstop [X] ---------------- }
+{ The rule's stop above is issued from the entry bar's close onward, so the entry minute itself had no stop.
+  This built-in stop protects that minute; 1 tick wider than the rule's stop, so the rule's stop stays the binding one. }
+SetStopContract;                                                            {X}
+If EntryATR > 0 then                                                        {X}
+  SetStopLoss((StopATR * EntryATR + TickSz) * BigPointValue);               {X}
