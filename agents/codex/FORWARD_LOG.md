@@ -50,3 +50,27 @@ results are added at each Friday review. 2023+ has been reused by many ideas, so
 - **CONTINUE** if the forward mean per trade is inside the backtest's 10-90% Monte Carlo band for that many trades;
   **REJECT** if below the 10% band, or forward mean <= 0 with t <= -1 at the first checkpoint; **EXTEND** once when in
   between. **PROMOTE** (personal account; S30 only once the account is ~$33k) only after the last checkpoint, by the user.
+
+### Frozen bands and exhaustive decisions (2026-10-23, before any forward observation; after Codex's review)
+Computed once by `analysis/forward_bands.py` (output `analysis/outputs/forward_bands_output.txt`; backtest ledgers as they
+are today, iid resampling of trades, 20,000 draws, seed 20261023). **Not recomputed later**, even if a backtest changes.
+Per full contract, after the repo's costs:
+
+| Rule | Checkpoint 1: p10 / p90 | Checkpoint 2: p10 / p90 | False rejection if the backtest is true |
+|---|---|---|---|
+| FC 2B v2 | 40: −$104 / $658 | 80: −$1 / $550 | 9.9% at 40, 15.0% by 80 |
+| S47 v2 | 40: −$102 / $809 | 80: $33 / $671 | 9.8%, 15.5% |
+| Kusho v9 (21:00) | 100: −$36 / $255 | 200: $6 / $213 | 9.9%, 15.5% |
+| Kusho v9 flat 15:45 | 100: −$41 / $230 | 200: −$4 / $188 | 10.0%, 15.0% |
+| S30 NQ | 20: −$381 / $3,057 | 40: $122 / $2,568 | 10.1%, 15.4% |
+| S30 ES | 20: −$192 / $1,818 | 40: $98 / $1,537 | 10.0%, 15.1% |
+
+- At each checkpoint: **REJECT** if the forward mean < p10 (checkpoint 1 also: mean <= 0 with t <= −1); **CONTINUE** if
+  p10 <= mean <= p90 (after checkpoint 2: 'passed', eligible for the user's decision, not automatic promotion); **CHECK** if
+  mean > p90: continue as above, but audit data and fills first. No extension beyond checkpoint 2 unless the user decides.
+- The joint false-rejection rate of the two checkpoints is ~15%, not 10% (accepted openly, not tuned later).
+- **Power is low:** a band whose p10 is near or below zero can only catch a clearly broken rule; a dead edge (mean about
+  −costs) still passes checkpoint 1 about half the time. These logs detect breakage, not prove an edge.
+- Records: each month's export / rebuild output is archived under `agents/codex/forward/<rule>/YYYY-MM-DD/` with the chart
+  inputs, session and data source; new signals are appended, old ones never rewritten; missing data is logged separately
+  from a no-signal day. Paper results can't establish spreads, fills or protective-order timing.
