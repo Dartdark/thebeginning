@@ -19,6 +19,11 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - **Holidays / early closes**: hard-coded times (e.g. last entry 14:30, flatten 15:55) trade into a 12:00 CT close.
   Fix: the `IsEarlyClose` date list + `UseHolidayTimes`, `EarlyLastEntry 1100`, `EarlyFlatten 1130` (as in Vault Break
   and Twin Continuation v2.1).
+- **A day-session chart doesn't stop a holiday trade at the 12:00 CT halt** (FC 2B, 2026-10-23): with ExitTime 14:58
+  and `SetExitOnClose`, MultiCharts held 26 holiday trades through the halt and exited them at the 17:00 reopen. Every
+  strategy needs the `IsEarlyClose` list and an early flatten, whatever the chart's session.
+- **The wrong code under the right name** (2026-10-23): "Study is missing Data 2" on FC 2B meant the Overnight Sentiment
+  code (4 data series) had been pasted into the FC 2B signal. Check the first comment lines after every paste.
 - **Old input values survive a code replace**: pasting new code into an existing signal keeps inputs with the same name
   (an old ExitTime 1100 broke a backtest). Check the report's Settings sheet after every change.
 - **Bar-time minutes vs HHMM**: when porting, 15:30 CT is minute 1350 / HHMM 1530, not 1290 (a Python port bug,

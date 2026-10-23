@@ -1,0 +1,60 @@
+FC 2B: MultiCharts report (user's export 2026-10-23, @NQ 1-minute, Bar Magnifier off) vs the Python rebuild
+
+MC trades 826 (2017-05-30 -> 2026-10-16), Python 818; same day 773, MC only 53, Python only 45
+same side 100.0%; entry price equal 100.0%; exit price equal 97.4%; gross within $20 97.7%; gross corr 0.9979
+total gross MC $233,930 vs Python $224,245 (per NQ, all dates)
+
+largest exit differences:
+      date  side_mc  entry_mc  exit_mc  exit_py xtime       sig  kind       d
+2022-02-21     -1.0  13829.00 13605.25 13735.50  1703 FT.SX.eod close  2605.0
+2025-06-19     -1.0  21685.50 21785.50 21703.00  1701 FT.SX.stp close -1650.0
+2026-05-25      1.0  29992.75 29926.25 29962.50  1702 FT.LX.eod close  -725.0
+2022-07-04     -1.0  11548.50 11588.25 11554.00  1703 FT.SX.eod close  -685.0
+2024-07-03      1.0  20275.25 20405.75 20419.50  1702 FT.LX.eod close  -275.0
+2025-05-26      1.0  21280.50 21272.00 21283.50  1702 FT.LX.eod close  -230.0
+2019-09-02     -1.0   7647.00  7622.75  7612.25  1703 FT.SX.eod close  -210.0
+2022-09-05      1.0  12131.50 12125.50 12136.00  1703 FT.LX.eod close  -210.0
+
+MC-only days: [datetime.date(2017, 7, 4), datetime.date(2017, 8, 7), datetime.date(2017, 8, 15), datetime.date(2017, 12, 26), datetime.date(2017, 12, 28), datetime.date(2018, 2, 8), datetime.date(2018, 7, 6), datetime.date(2018, 7, 13), datetime.date(2018, 8, 14), datetime.date(2018, 8, 21), datetime.date(2018, 10, 18), datetime.date(2019, 2, 18), datetime.date(2019, 4, 2), datetime.date(2019, 6, 6), datetime.date(2019, 10, 4), datetime.date(2019, 12, 23), datetime.date(2020, 1, 31), datetime.date(2020, 2, 17), datetime.date(2020, 3, 9), datetime.date(2020, 5, 25)]
+Python-only days: [datetime.date(2017, 7, 31), datetime.date(2017, 8, 14), datetime.date(2017, 8, 16), datetime.date(2017, 9, 19), datetime.date(2017, 10, 31), datetime.date(2017, 11, 7), datetime.date(2018, 3, 26), datetime.date(2018, 4, 4), datetime.date(2018, 4, 6), datetime.date(2018, 4, 24), datetime.date(2018, 5, 29), datetime.date(2018, 6, 6), datetime.date(2018, 6, 7), datetime.date(2018, 6, 28), datetime.date(2018, 7, 12), datetime.date(2018, 9, 13), datetime.date(2018, 10, 26), datetime.date(2019, 3, 5), datetime.date(2019, 6, 18), datetime.date(2019, 11, 12)]
+
+MC trades 2018-26 under our costs ($7.25 + 1 tick per fill):
+   all                                n= 773 win 61% $  272 PF 1.49 t  3.9 yrs+ 9/9 | 18-22 $ 290 (t 3.6) | 23+ $ 247 (t 2.1)
+   longs                              n= 376 win 62% $  297 PF 1.57 t  3.2 yrs+ 8/9 | 18-22 $ 261 (t 2.5) | 23+ $ 346 (t 2.1)
+   shorts                             n= 397 win 59% $  248 PF 1.43 t  2.5 yrs+ 6/9 | 18-22 $ 318 (t 2.6) | 23+ $ 156 (t 0.9)
+   by year: {2018: 20363, 2019: 9127, 2020: 10898, 2021: 34174, 2022: 53941, 2023: 4380, 2024: 27040, 2025: 36330, 2026: 13802}
+         trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+MC FC 2B    773 61% $272 $23,065   1.30    2.52          1.49 $15,201   1.52  2.79      16.55
+longs       376 62% $297 $12,246   1.04    1.97          1.57 $12,538   0.98  4.08       6.00
+shorts      397 59% $248 $10,819   0.81    1.61          1.43 $21,220   0.51  6.53       3.31
+   t 3.94; DSR at N=282: 0.8738910025106874
+
+MC trades exiting after 15:00 (held through an early close into the evening session): 26
+      date  side    entry     exit xtime       sig   gross
+2017-07-04     1  5612.50  5575.25  1702 FT.LX.eod  -745.0
+2018-02-19    -1  6791.25  6788.00  1703 FT.SX.eod    65.0
+2018-05-28     1  6981.25  6991.00  1703 FT.LX.eod   195.0
+2018-07-03    -1  7102.50  7016.25  1703 FT.SX.eod  1725.0
+2018-07-04    -1  7033.75  7041.50  1703 FT.SX.eod  -155.0
+2018-09-03     1  7675.00  7680.50  1703 FT.LX.eod   110.0
+2019-01-21    -1  6747.50  6756.50  1703 FT.SX.eod  -180.0
+2019-02-18     1  7072.00  7074.50  1703 FT.LX.eod    50.0
+2019-09-02    -1  7647.00  7622.75  1703 FT.SX.eod   485.0
+2020-02-17     1  9661.25  9594.00  1703 FT.LX.eod -1345.0
+2020-05-25     1  9523.50  9516.50  1703 FT.LX.eod  -140.0
+2021-09-06     1 15702.75 15697.25  1703 FT.LX.eod  -110.0
+2021-11-25     1 16414.25 16408.75  1703 FT.LX.eod  -110.0
+2022-02-21    -1 13829.00 13605.25  1703 FT.SX.eod  4475.0
+2022-07-04    -1 11548.50 11588.25  1703 FT.SX.eod  -795.0
+2022-09-05     1 12131.50 12125.50  1703 FT.LX.eod  -120.0
+2023-06-19    -1 15240.25 15249.50  1702 FT.SX.eod  -185.0
+2023-09-04     1 15575.50 15528.25  1702 FT.LX.eod  -945.0
+2024-05-27     1 18884.00 18937.25  1702 FT.LX.eod  1065.0
+2024-07-03     1 20275.25 20405.75  1702 FT.LX.eod  2610.0
+2024-07-04    -1 20384.75 20378.75  1702 FT.SX.eod   120.0
+2024-09-02     1 19619.50 19662.25  1702 FT.LX.eod   855.0
+2024-11-28     1 20889.00 20885.50  1702 FT.LX.eod   -70.0
+2025-05-26     1 21280.50 21272.00  1702 FT.LX.eod  -170.0
+2025-06-19    -1 21685.50 21785.50  1701 FT.SX.stp -2000.0
+2026-05-25     1 29992.75 29926.25  1702 FT.LX.eod -1330.0
+their gross total $3,355; worst $-2,000
