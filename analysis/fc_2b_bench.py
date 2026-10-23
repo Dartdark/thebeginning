@@ -15,14 +15,45 @@ from funded_lab import with_slippage
 from build_lab import REPORTS
 from bridge_monday_confirm import load_bridge_mc
 import funded_bootstrap as FB, combine_levers_test as CL
+from grid24 import jof
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 KIND = {"stop": 0, "target": 1, "flat": 2}
 REP = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute FC 2B v2.xlsx"
 
+
+def fast_plan_lab(sp):
+    """FB.plan_lab without the CL bench's own scoring runs (which take hours): lab.pkl + Bridge Monday + the CL Sunday fade
+    (same construction as analysis/cl_sunday_fade_bench.py) + VB split by the single-print flag."""
+    from cl_forced_flows_test import load
+    from bridge_monday_confirm import load_bridge_mc
+    PVc, TK, CM, STOP, EXIT_CT, ENTRY_T = 1000.0, 0.01, 7.25, 0.75, 900, 1706
+    cl = load("CL"); fr = pickle.load(open(sp + "s_rank_gap2.pkl", "rb"))["frames"]["CL"]
+    O, H, C = cl.o.ravel(), cl.h.ravel(), pd.Series(cl.c.ravel()).ffill().to_numpy(); rows = []
+    for r in fr.itertuples():
+        if not r.ok or not (r.gA >= 0.1): continue
+        e_i = int(r.sun) * 1440 + jof(ENTRY_T); x_i = int(r.mon) * 1440 + jof(EXIT_CT)
+        if np.isnan(O[e_i]): continue
+        e = O[e_i] - TK; px = C[x_i] + TK; spx = e + STOP * r.atr; jx = x_i
+        hit = np.where(H[e_i:x_i + 1] >= spx)[0]
+        if len(hit): jx = e_i + hit[0]; px = (spx if jx == e_i or np.isnan(O[jx]) else max(O[jx], spx)) + TK
+        rows.append(dict(date=pd.Timestamp(cl.ts[int(r.mon)]), net=(e - px) * PVc - CM, adv=min((e - np.nanmax(H[e_i:jx + 1])) * PVc - CM, (e - px) * PVc - CM)))
+    t = pd.DataFrame(rows).set_index("date")
+    lab = pickle.load(open(sp + "lab.pkl", "rb")); lab.add("MON_BR_MC", load_bridge_mc(lab.g), slippage=False)
+    dates = pd.DatetimeIndex(lab.g.ts[lab.tr]); pos = pd.Series(np.arange(len(dates)), index=dates)
+    Wd = np.zeros(len(dates)); Cd = np.zeros(len(dates))
+    for d, r in t.iterrows():
+        if d in pos.index: i = pos[d]; Wd[i] = min(r.adv, r.net); Cd[i] = r.net
+    lab.W["CLS"] = Wd[:, None] / 10 * np.ones((1, lab.W["VB"].shape[1])); lab.C["CLS"] = Cd / 10
+    S = pd.read_pickle(sp + "single_print_sessions.pkl"); flag = S.flag.reindex(dates).fillna(False).to_numpy().astype(bool)
+    lab.W["VB_F"] = lab.W["VB"] * flag[:, None]; lab.C["VB_F"] = lab.C["VB"] * flag
+    lab.W["VB_N"] = lab.W["VB"] * ~flag[:, None]; lab.C["VB_N"] = lab.C["VB"] * ~flag
+    print(f"[CL fade trades {len(t)}, avg ${t.net.mean():.0f} per CL]")
+    return lab
+
 if __name__ == "__main__":
     print(__doc__.split("\n")[0]); T0 = time.time()
-    lab = FB.plan_lab(SP); print(f"[plan lab {time.time() - T0:.0f}s]"); FB.add_moc_mes(lab, SP)
+    lab = fast_plan_lab(SP); print(f"[plan lab {time.time() - T0:.0f}s]"); FB.add_moc_mes(lab, SP)
     rs = pd.read_csv(SP + "rs_trades.csv"); rs["kind"] = rs.kind.map(KIND)
     lab.add("RS_L", rs[rs.side > 0].reset_index(drop=True))
     fc = load_mc(lab.g, REP); fc = fc[pd.DatetimeIndex(lab.g.ts[fc.day]) >= "2018-01-01"].reset_index(drop=True)
