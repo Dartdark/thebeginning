@@ -61,7 +61,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   but not filled (@MNQ symbol mapping, fixed). 10/22-23 no trades. No weekly MultiCharts reports in live/, so no
   live-vs-backtest / drift run (3 live VB days is too few to judge anyway). Research this week: FC 2B (A), S47 v2, OB v2,
   Kusho v9, S30 IBS (B), C03 (C) — none improves either Apex plan (cap-bound funded plan; combine drawdown vs target);
-  replacing the 'weak' diversifiers (ES MOC, NFP, EOS, LDF) with FC 2B is worse; S47 / Kusho replacement batch running.
+  replacing the 'weak' diversifiers (ES MOC, NFP, EOS, LDF) with FC 2B / S47 / Kusho is worse or a tie, and replacing EOS or
+  Bridge in the combine lowers the pass rate (50.1% → 45-49%) (`analysis/replace_weak_bench.py`): plans unchanged.
   Personal portfolio built (`personal_strategies/PORTFOLIO.md`); accounts → income table in `funded_strategies/FUNDED_PLAN.md`.
 - **FC 2B (user's opening-drive strategy, 2026-10-23):** MultiCharts-confirmed (v2 with holiday flatten + entry-bar stop),
   $275 per NQ, t 4.0, checker PASS WITH CONCERNS → A; but the 50K funded plan is near the payout cap and the combine gains
