@@ -6,7 +6,9 @@ Trades = the user's MultiCharts v2 report (holiday flatten 11:30, entry-bar stop
      + FC 2B 1 / 2 MNQ, longs only; and FC 2B in place of RS longs (next to that slot left empty).
   B. 50K evaluation: combine set (VB 8, ONB ADX30 $1,100, Bridge Monday 2, EOS $500) + FC 2B 1-3 MNQ
      (combine_levers_test.challenge: +$3,000 target, $2,000 EOD trail, $1,000 daily limit).
-  python3 analysis/fc_2b_bench.py [SCRATCH_DIR]     (needs single_print_sessions.pkl, rs_trades.csv, s_rank_gap2.pkl)
+  python3 analysis/fc_2b_bench.py SCRATCH_DIR [worker SEED N | merge | combine]
+  (needs single_print_sessions.pkl, rs_trades.csv, s_rank_gap2.pkl). The bootstrap takes ~2.5 s per history per plan,
+  so it runs as 4 workers (seeds 1-4, 250 histories each, every plan on the same histories) and 'merge' pools them.
 """
 import sys, time, pickle, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
 import numpy as np, pandas as pd
@@ -18,6 +20,7 @@ import funded_bootstrap as FB, combine_levers_test as CL
 from grid24 import jof
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
+MODE = sys.argv[2] if len(sys.argv) > 2 else "merge"
 KIND = {"stop": 0, "target": 1, "flat": 2}
 REP = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute FC 2B v2.xlsx"
 
@@ -65,11 +68,20 @@ if __name__ == "__main__":
              "+ FC 2B longs 1 MNQ": {**CUR, "FC_L": 1},
              "RS longs -> FC 2B 1": {**drop("RS_L"), "FC": 1}, "RS longs -> FC 2B longs 1": {**drop("RS_L"), "FC_L": 1},
              "  RS longs slot empty": drop("RS_L")}
-    print("\nA. 50K funded, bootstrapped (1,000 paired histories, 20-day blocks, 2 years; single-history bench skipped):")
-    B = FB.Boot(lab); df, s, _ = B.compare(plans, n=1000, L=20); print(s); print(f"[bootstrap {time.time() - T0:.0f}s]")
-    print("\n   Daily correlation of FC 2B with the plan pieces:")
-    print(lab.corr(["FC"] + list(CUR)).loc["FC"].round(2).to_string())
-
+    if MODE == "worker":
+        seed, n = int(sys.argv[3]), int(sys.argv[4])
+        res, y1, _ = FB.Boot(lab).run(plans, n=n, L=20, seed=seed)
+        pickle.dump((res, y1), open(SP + f"fc_boot_{seed}.pkl", "wb")); print(f"[worker {seed} done {time.time() - T0:.0f}s]"); sys.exit()
+    if MODE == "merge":
+        import glob
+        parts = [pickle.load(open(f, "rb")) for f in sorted(glob.glob(SP + "fc_boot_*.pkl"))]
+        res = {k: np.concatenate([p[0][k] for p in parts]) for k in plans}; y1 = {k: np.concatenate([p[1][k] for p in parts]) for k in plans}
+        B = FB.Boot(lab); B.run = lambda *a, **k: (res, y1, 0)
+        print(f"\nA. 50K funded, bootstrapped ({len(res['plan'])} paired histories from {len(parts)} workers, 20-day blocks, 2 years):")
+        df, s_, _ = B.compare(plans); print(s_)
+        print("\n   Daily correlation of FC 2B with the plan pieces:")
+        print(lab.corr(["FC"] + list(CUR)).loc["FC"].round(2).to_string())
+        sys.exit()
     print("\nB. 50K evaluation (combine set + FC 2B):")
     g = pickle.load(open(SP + "g24.pkl", "rb")); atr = g.daily_atr(15); trr = g.trading; D = len(trr)
     yr = pd.DatetimeIndex(g.ts[trr]).year
