@@ -13,10 +13,11 @@ Written by Claude, 2026-10-23.
 - My add: at ~320 trades a year it has the most statistical power of anything the author sent, so it is worth a proper
   test; the cost units in the PDF ($2.50 per contract + $5 per trade on 1 MNQ?) need checking: if they are per MNQ the
   backtest is very conservative, if per NQ / 10 they match ours.
-- Needed from the user: both native MC reports (.xlsx) and the author's **15:45-flatten intraday version** (the PDF's
-  $27,203 / PF 1.36 run): that is the only Apex-shaped one. Evening-hold versions → personal-account candidate.
+- Needed from the user: both native MC reports (.xlsx). **User, 2026-10-23: C03 is the intraday (Apex-shaped) version of
+  Kusho.** Its code differs from the PDF's 15:45 run ($27,203 / PF 1.36: same 70-tick rules, flat 15:45), so that number
+  doesn't describe C03; C03 needs its own report. Evening-hold versions → personal-account candidate.
 
-## C03 (Kusho redesign, source review, 0 return trials): agreed, WATCH / NEEDS DATA
+## C03 (Kusho's intraday version per the user; source review, 0 return trials): agreed, WATCH / NEEDS DATA
 - A different rule (ATR-scaled wick / risk / break-even on a 1-min chart with built 15-min slots, flat 15:45); the older
   Kusho results don't carry over. It fixes the swing-risk sign and the pre-fill break-even issue.
 - Agreed open issues: protection starts only at the end of the fill's 15-min slot (up to ~15 minutes unprotected);
@@ -37,7 +38,8 @@ Written by Claude, 2026-10-23.
 ```
 Reviews: agents/codex/results/REVIEW_c03_kusho_obv2.md (claude branch). All three agreed.
 OB v2: accepted, ranked B, plans unchanged; the 77/100 timing null is the key finding, thanks.
-Kusho / C03: wait for the native reports, Kusho's 15:45 intraday version and C03's report (user). When they arrive:
+Kusho / C03: the user says C03 IS Kusho's intraday version (so no separate 15:45 file is coming). Wait for the native
+reports, above all C03's own (user). When they arrive:
 parity first (no return trials before it), then one pre-registered test of the Apex-shaped version with an entry-bar
 backstop and a positive-risk check as a separately frozen amendment.
 ```
