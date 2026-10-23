@@ -1,0 +1,15 @@
+Donchian + LWTI, user's v2 paste (2026-10-23): adds a volatility filter, XAverageOrig(TrueRange, 288) > 20 points at the
+
+5-min bars: share of bars passing the filter by year: {2018: '0%', 2019: '0%', 2020: '17%', 2021: '8%', 2022: '35%', 2023: '2%', 2024: '14%', 2025: '40%', 2026: '79%'}
+no vol filter, as coded                      n= 2314 win 35% avg $   18 PF 1.03 t= 0.6 yrs+ 6/9 | 18-22 $ -45 | 23-26 $  89 | L $  88 S $ -69 | overnight 18%
+no vol filter, Apex (8:30-15:00, flat)       n= 2159 win 40% avg $   20 PF 1.04 t= 0.7 yrs+ 5/9 | 18-22 $   4 | 23-26 $  42 | L $  61 S $ -26 | overnight 0%
+vol > 20, as coded                           n=  675 win 34% avg $  -24 PF 0.97 t=-0.4 yrs+ 5/8 | 18-22 $-102 | 23-26 $  22 | L $ -12 S $ -36 | overnight 8%
+vol > 20, Apex (8:30-15:00, flat)            n=  558 win 34% avg $ -110 PF 0.84 t=-1.7 yrs+ 2/8 | 18-22 $ -41 | 23-26 $-153 | L $-115 S $-104 | overnight 0%
+   by year: {2018: -984, 2020: -11607, 2021: 5578, 2022: -1830, 2023: 2892, 2024: -1304, 2025: -34891, 2026: -19039}
+
+15-min bars: share of bars passing the filter by year: {2018: '9%', 2019: '1%', 2020: '59%', 2021: '43%', 2022: '96%', 2023: '48%', 2024: '75%', 2025: '95%', 2026: '100%'}
+no vol filter, as coded                      n= 1871 win 38% avg $   67 PF 1.10 t= 1.8 yrs+ 7/9 | 18-22 $  85 | 23-26 $  45 | L $  88 S $  38 | overnight 18%
+no vol filter, Apex (8:30-15:00, flat)       n= 1631 win 44% avg $   61 PF 1.11 t= 1.8 yrs+ 6/9 | 18-22 $ 113 | 23-26 $  -6 | L $  92 S $  21 | overnight 0%
+vol > 20, as coded                           n= 1204 win 37% avg $   28 PF 1.04 t= 0.6 yrs+ 6/9 | 18-22 $  98 | 23-26 $ -21 | L $  60 S $ -11 | overnight 8%
+vol > 20, Apex (8:30-15:00, flat)            n=  978 win 43% avg $   72 PF 1.12 t= 1.5 yrs+ 7/9 | 18-22 $ 230 | 23-26 $ -35 | L $ 120 S $  18 | overnight 0%
+   by year: {2018: 1974, 2019: 526, 2020: 2615, 2021: 23899, 2022: 61935, 2023: 10042, 2024: 8625, 2025: -20156, 2026: -18947}
