@@ -1,0 +1,104 @@
+[
+  {
+    "account": "funded",
+    "config": "REPLACE_OBV2",
+    "route_a": {
+      "year1_gain_250": false,
+      "year1_CI_lower_positive": false,
+      "year2_not_100_worse": false,
+      "blown_not_1pp_worse": false
+    },
+    "route_b": {
+      "year1_not_100_worse": false,
+      "year2_not_100_worse": false,
+      "blown_reduction_2pp": false,
+      "blown_CI_upper_negative": false,
+      "days6_not_10_slower": false
+    },
+    "replacement_beats_empty": true,
+    "stress_direction_route_a": false,
+    "stress_direction_route_b": false,
+    "pass_review": false
+  },
+  {
+    "account": "evaluation",
+    "config": "REPLACE_OBV2",
+    "checks": {
+      "pass_gain_2pp": false,
+      "paired_CI_lower_positive": false,
+      "recent_pass_not_worse": false,
+      "blown_not_1pp_worse": false,
+      "replacement_beats_empty": true,
+      "stress_direction": false
+    },
+    "pass_review": false
+  },
+  {
+    "account": "funded",
+    "config": "ADD_OBV2",
+    "route_a": {
+      "year1_gain_250": false,
+      "year1_CI_lower_positive": false,
+      "year2_not_100_worse": false,
+      "blown_not_1pp_worse": true
+    },
+    "route_b": {
+      "year1_not_100_worse": true,
+      "year2_not_100_worse": false,
+      "blown_reduction_2pp": false,
+      "blown_CI_upper_negative": false,
+      "days6_not_10_slower": true
+    },
+    "replacement_beats_empty": true,
+    "stress_direction_route_a": false,
+    "stress_direction_route_b": false,
+    "pass_review": false
+  },
+  {
+    "account": "evaluation",
+    "config": "ADD_OBV2",
+    "checks": {
+      "pass_gain_2pp": false,
+      "paired_CI_lower_positive": false,
+      "recent_pass_not_worse": false,
+      "blown_not_1pp_worse": false,
+      "replacement_beats_empty": true,
+      "stress_direction": false
+    },
+    "pass_review": false
+  },
+  {
+    "account": "funded",
+    "config": "REPLACE_BRIDGE100",
+    "route_a": {
+      "year1_gain_250": false,
+      "year1_CI_lower_positive": false,
+      "year2_not_100_worse": false,
+      "blown_not_1pp_worse": false
+    },
+    "route_b": {
+      "year1_not_100_worse": false,
+      "year2_not_100_worse": false,
+      "blown_reduction_2pp": false,
+      "blown_CI_upper_negative": false,
+      "days6_not_10_slower": false
+    },
+    "replacement_beats_empty": true,
+    "stress_direction_route_a": false,
+    "stress_direction_route_b": false,
+    "pass_review": false
+  },
+  {
+    "account": "evaluation",
+    "config": "REPLACE_BRIDGE100",
+    "checks": {
+      "pass_gain_2pp": false,
+      "paired_CI_lower_positive": false,
+      "recent_pass_not_worse": false,
+      "blown_not_1pp_worse": false,
+      "replacement_beats_empty": true,
+      "stress_direction": false
+    },
+    "pass_review": false
+  }
+]

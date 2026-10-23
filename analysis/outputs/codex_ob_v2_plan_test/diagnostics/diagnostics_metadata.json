@@ -1,0 +1,60 @@
+{
+  "elapsed_seconds": 4.04508435400021,
+  "date_min": "2018-01-02",
+  "date_max": "2026-10-09",
+  "trading_days": 2262,
+  "recent_released": true,
+  "fixed_rule_ledgers": 2,
+  "ledgers": [
+    "OBV2",
+    "BRIDGE100"
+  ],
+  "trials": {
+    "ranked_items": 274,
+    "ranked_variants": 1226,
+    "trial_csv_items": 274,
+    "trial_csv_variants": 1226,
+    "source": "current TIER_LIST.md parsed by analysis/trials.py; TRIALS.csv disclosed separately",
+    "tier_sha256": "79b3e83ec46105deaa1c21fa1bf2b1f566ef8dd397a3f28122071f62d7e66d63",
+    "trials_sha256": "c380af0bbaecf5f0b96ac03024a38610f6c089a911c5c310aa9abec8ff12a340",
+    "promotion_t_threshold": 3.5642029470176886,
+    "current_trial_two_fixed_ledgers": 2,
+    "ranked_count_includes_this_unranked_experiment": false
+  },
+  "standard_metrics_rows": 72,
+  "filter_metrics_rows": 108,
+  "matched_removal_samples": 6000,
+  "matched_removal_samples_per_family_period": 1000,
+  "random_removal_families": 2,
+  "random_removal_periods": 3,
+  "filter_exact_nested": true,
+  "kept_trades": 568,
+  "removed_trades": 210,
+  "statistical_evaluations": {
+    "bootstrap_series": 6,
+    "bootstrap_resamples_per_series": 5000,
+    "mc_evaluations": 16,
+    "mc_daily_resamples": 5000,
+    "mc_trade_resamples": 10000
+  },
+  "random_side_runs": 100,
+  "random_entry_time_runs": 100,
+  "random_control_period_evaluations": 600,
+  "controls_are_descriptive": true,
+  "no_best_control_selected": true,
+  "previous_selection_exposure": "2023+ already seen by original author; historical replication, not clean holdout",
+  "dd_definition": "metrics.perf standard max_dd plus resampling.max_dd with initial-zero peak; nulls use latter",
+  "micro_accounting_limitation": "One MNQ is 0.1 times NQ replay net, primary commission $0.725 RT; extra-cost sensitivity subtracts $1.275/MNQ RT. Neither verifies native actual MNQ fees.",
+  "standalone_mc_limitation": "Existing montecarlo.daily_mc checks end-of-day trailing only; not intraday mark-to-market/daily-loss enforcement or a substitute for the paired account bench.",
+  "trial_count_limitation": "Two frozen strategy ledgers. Null samples/side-time controls and metric/MC/bootstrap evaluations are disclosed diagnostic evaluations, not independently selected candidates; original author's prior optimization count unknown.",
+  "input_sha256": {
+    "analysis/outputs/codex_ob_v2_plan_test/replay/OBV2_design_trades.csv": "6d6cc904933420b139531e069f45096a52b0f920af304f4d806a47a63f8a549b",
+    "analysis/outputs/codex_ob_v2_plan_test/replay/OBV2_recent_trades.csv": "6375e4b16e0fd689d9ef15008f13d5325e09a71af26036682fec1e9983b9a642",
+    "analysis/outputs/codex_ob_v2_plan_test/replay/BRIDGE100_design_trades.csv": "92d90c3ad731d3dd349dd519e2cd4eeaa0618ab06823b3c62c91b15575aed453",
+    "analysis/outputs/codex_ob_v2_plan_test/replay/BRIDGE100_recent_trades.csv": "b7f9101f59414319c8a60e121f75c3e686c82733a2fbc6876de3ad0be52b85cc",
+    "analysis/outputs/codex_ob_v2_plan_test/replay/trading_days.csv": "8c28ac54528feed65dd1ccc9fdb4672a913eb6d0c6b39555c2f39f980b294160"
+  },
+  "script_sha256": "537efb351a9b76413341609b48356ce73d000166a435ac7c8d5a12461936130c",
+  "seed": 231023,
+  "audit_packaging": "Detailed replay per-day counts and control trade ledger gzip-compressed; no return calculation changed."
+}
