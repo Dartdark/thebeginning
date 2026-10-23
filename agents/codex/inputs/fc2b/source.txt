@@ -1,0 +1,135 @@
+{ FC 2B - Flow-Confirmed Opening Drive (NQ / MNQ). PowerLanguage signal for MultiCharts.
+  CHART  @NQ 1-minute, day session 08:30-15:00 CT, Exchange time zone. Bar Magnifier OFF, intra-bar
+         order generation OFF.
+  RULE   Opening range = bars stamped 08:31-09:00 CT. Direction = sign of the range's close minus its open.
+         Order-flow ratio = sum of Volume x (Close - Open) / (High - Low) over the range, divided by the
+         range's volume, scored as a z-score against the previous ZLookback days (at least MinWarmup).
+         Enter next bar at market when direction and z agree beyond ZMin.
+  EXITS  Stop SLpoints from entry; once price reaches BreakEvenR x SLpoints in favour the stop moves to
+         entry + 4 ticks; trail TrailPts behind the best price since entry; no target; market exit from
+         ExitTime.
+  Input defaults are the live values. }
+{ FC-ORB FIXED+TRAIL TEST v1 -- 2b entries, fixed SLpoints initial stop,
+  optional point-trail. Trail: stop = highest high since entry - TrailPts,
+  never below the fixed stop. TrailPts 0 = trail off (= pure SL100 ablation).
+  No target. EoD 14:58 + on-close. NQ 1-min RTH chart, Bar Magnifier OFF. }
+inputs:
+    ORStartTime( 830 ), ORMinutes( 30 ), ExitTime( 1458 ),
+    ZMin( 1.0 ), ZLookback( 60 ), MinWarmup( 20 ),
+    SLpoints( 100 ), TrailPts( 150 ), BreakEvenR( 0.66 ),
+    FixedContracts( 1 );
+variables:
+    OREnd( 0 ), tickPts( 0 ),
+    orOpen( 0 ), orHigh( 0 ), orLow( 0 ), orClose( 0 ), orCount( 0 ),
+    orDelta( 0 ), orVol( 0 ),
+    signalDone( false ), warmupOK( false ), okTrade( false ),
+    flowCount( 0 ),
+    barDelta( 0 ), ratio( 0 ), z( 0 ),
+    dir( 0 ), beArmed( false ), stopNow( 0 ),
+    hh( 0 ), ll( 0 ),
+    n( 0 ), mu( 0 ), ssq( 0 ), vr( 0 ), sd( 0 ),
+    k( 0 ), idx( 0 );
+arrays:
+    flowBuf[400]( 0 );
+
+OREnd   = CalcTime( ORStartTime, ORMinutes );
+tickPts = MinMove / PriceScale;
+
+if Date <> Date[1] then begin
+    orOpen = 0; orHigh = 0; orLow = 0; orClose = 0; orCount = 0;
+    orDelta = 0; orVol = 0;
+    signalDone = false;
+end;
+
+barDelta = Volume * ( Close - Open ) / MaxList( High - Low, tickPts );
+
+if Time > ORStartTime and Time <= OREnd then begin
+    if orCount = 0 then begin
+        orOpen = Open;  orHigh = High;  orLow = Low;
+    end
+    else begin
+        orHigh = MaxList( orHigh, High );
+        orLow  = MinList( orLow,  Low );
+    end;
+    orClose = Close;
+    orCount = orCount + 1;
+    orDelta = orDelta + barDelta;
+    orVol   = orVol + Volume;
+end;
+
+if signalDone = false and Time >= OREnd and orCount > 0 then begin
+    signalDone = true;
+    ratio    = orDelta / MaxList( orVol, 1 );
+    warmupOK = flowCount >= MinWarmup;
+    z = 0;
+    n = MinList( flowCount, ZLookback );
+    if n >= 2 then begin
+        mu = 0;  ssq = 0;
+        for k = 0 to n - 1 begin
+            idx = Mod( flowCount - 1 - k, 400 );
+            mu  = mu  + flowBuf[idx];
+            ssq = ssq + flowBuf[idx] * flowBuf[idx];
+        end;
+        mu = mu / n;
+        vr = ssq / n - mu * mu;
+        if vr > 0 then begin
+            sd = SquareRoot( vr );
+            z  = ( ratio - mu ) / sd;
+        end;
+    end;
+    flowBuf[ Mod( flowCount, 400 ) ] = ratio;
+    flowCount = flowCount + 1;
+    dir = 0;
+    if orClose > orOpen then dir = 1
+    else if orClose < orOpen then dir = -1;
+    okTrade = warmupOK and dir <> 0 and MarketPosition = 0
+              and ( ( dir = 1 and z >= ZMin ) or ( dir = -1 and z <= -ZMin ) );
+    if okTrade then begin
+        beArmed = false;
+        if dir = 1 then begin
+            hh = Close;
+            Buy ( "FT.LE" ) FixedContracts contracts next bar at market;
+        end
+        else begin
+            ll = Close;
+            SellShort ( "FT.SE" ) FixedContracts contracts next bar at market;
+        end;
+    end;
+end;
+
+if MarketPosition = 1 then begin
+    hh = MaxList( hh, High );
+    stopNow = EntryPrice - SLpoints;
+    if TrailPts > 0 then
+        stopNow = MaxList( stopNow, hh - TrailPts );
+    if BreakEvenR > 0 then begin
+        if beArmed = false and
+           High >= EntryPrice + BreakEvenR * SLpoints then
+            beArmed = true;
+        if beArmed then
+            stopNow = MaxList( stopNow, EntryPrice + 4 * tickPts );
+    end;
+    Sell ( "FT.LX.stp" ) next bar at stopNow stop;
+end;
+
+if MarketPosition = -1 then begin
+    ll = MinList( ll, Low );
+    stopNow = EntryPrice + SLpoints;
+    if TrailPts > 0 then
+        stopNow = MinList( stopNow, ll + TrailPts );
+    if BreakEvenR > 0 then begin
+        if beArmed = false and
+           Low <= EntryPrice - BreakEvenR * SLpoints then
+            beArmed = true;
+        if beArmed then
+            stopNow = MinList( stopNow, EntryPrice - 4 * tickPts );
+    end;
+    BuyToCover ( "FT.SX.stp" ) next bar at stopNow stop;
+end;
+
+if Time >= ExitTime then begin
+    if MarketPosition = 1 then Sell ( "FT.LX.eod" ) next bar at market;
+    if MarketPosition = -1 then BuyToCover ( "FT.SX.eod" ) next bar at market;
+end;
+
+SetExitOnClose;

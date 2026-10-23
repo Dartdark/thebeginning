@@ -1,0 +1,24 @@
+{
+  "python": "/workspace/venvs/thebeginning/bin/python",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "openpyxl": "3.1.5"
+  },
+  "input_sha256": {
+    "agents/codex/inputs/fc2b/overview.pdf": "1ae69fcba0ada68e68bcfcd2fd269365610184d07ca0917ef01c712fb9a54d92",
+    "agents/codex/inputs/fc2b/source.txt": "64a4ffbf1830c801b93968b028d11904b90fa7f9030fdd7d34492c1feaee5b8e",
+    "agents/codex/inputs/fc2b/overview_extracted.txt": "a4c33fccb705e31363ca3f0232f4784f00a102adf8a12b9fdc13a315960b439a",
+    "agents/codex/inputs/fc2b/report.xlsx": "927537a754f4bbed22aff399c49bbc3c1b09d9e9e8e9f4c764d68b4333799094"
+  },
+  "price_source_sha256": {
+    "data/NQ_1min_2020.csv": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+    "data/NQ_1min_2024.csv": "87a5db405d5bdc9aa0914018aed046dbdd50332f630700720ae40fa72ddd056a"
+  },
+  "code_sha256": {
+    "analysis/codex_fc2b_report_audit.py": "dfb71ec6777972ecf45506ed744d37ed405dc8c333f2c888aee7efeefe3660ed",
+    "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a"
+  },
+  "operation": "existing-export audit; one arithmetic cost rescore; no strategy backtest",
+  "new_strategy_trials": 0
+}
