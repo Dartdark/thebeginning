@@ -3,4 +3,26 @@ FC 2B v2 (user's MultiCharts strategy, 2026-10-23) in the Apex plans: add or rep
 [plan lab 2s]
 FC 2B trades loaded: 770
 
-A. 50K funded, bootstrapped (1,000 paired histories, 20-day blocks, 2 years; single-history bench skipped):
+A. 50K funded, bootstrapped (1000 paired histories from 4 workers, 20-day blocks, 2 years):
+                              y1  y1_p5      y2  y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan                      $9,354     $0 $12,088     $0 $13,000  7.0%   91.8%   259      50.0%      $0       0.0%
++ FC 2B 1 MNQ             $9,450     $0 $12,097 $1,500 $13,000  7.0%   92.0%   255      50.2%     $10       0.0%
++ FC 2B 2 MNQ             $9,211     $0 $11,456     $0 $13,000 12.1%   87.1%   258      47.5%   $-632       5.1%
++ FC 2B longs 1 MNQ       $9,151     $0 $11,916     $0 $13,000  8.5%   90.3%   264      49.0%   $-172       1.5%
+RS longs -> FC 2B 1       $9,256     $0 $12,122 $1,500 $13,000  6.7%   92.2%   265      50.2%     $35      -0.3%
+RS longs -> FC 2B longs 1 $9,148     $0 $12,078 $1,500 $13,000  6.9%   91.9%   268      49.8%    $-10      -0.1%
+  RS longs slot empty     $8,938 $1,500 $12,125 $1,500 $13,000  6.3%   91.7%   274      50.0%     $38      -0.7%
+
+   Daily correlation of FC 2B with the plan pieces:
+FC            1.00
+VB_N          0.15
+VB_F          0.07
+ONB_ML2_MC    0.19
+MON_MC        0.10
+EOS           0.11
+LDF_MC        0.06
+NFP_MC       -0.02
+MON_BR_MC     0.06
+CLS           0.03
+MOC_MES       0.00
+RS_L          0.23
