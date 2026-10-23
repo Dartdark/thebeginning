@@ -1,0 +1,69 @@
+S47 / S47 v2, Europe-Open Impulse (user's files, 2026-10-23; code + overview in checks/candidates/s47_v2/).
+
+1. Rebuild, per NQ after our costs:
+   S47 v2                         n= 714 win 51% $  346 PF 1.51 t  4.1 yrs+ 9/9 | 18-22 $ 366 (t 3.6) | 23+ $ 321 (t 2.3)
+     v2 longs                     n= 380 win 53% $  273 PF 1.41 t  2.5 yrs+ 8/9 | 18-22 $ 327 (t 2.3) | 23+ $ 208 (t 1.2)
+     v2 shorts                    n= 334 win 48% $  429 PF 1.61 t  3.3 yrs+ 8/9 | 18-22 $ 410 (t 2.7) | 23+ $ 452 (t 2.0)
+   S47 (no NY agreement)          n=1421 win 46% $  229 PF 1.32 t  3.9 yrs+ 8/9 | 18-22 $ 268 (t 3.8) | 23+ $ 175 (t 1.7)
+     disagreement days only       n= 707 win 40% $  110 PF 1.15 t  1.4 yrs+ 6/9 | 18-22 $ 178 (t 1.9) | 23+ $   8 (t 0.1)
+   v2 by year ($ per NQ): {2018: 19030, 2019: 8638, 2020: 29288, 2021: 26630, 2022: 59555, 2023: 19581, 2024: 4811, 2025: 58217, 2026: 21024}
+   S47 by year ($ per NQ): {2018: 45369, 2019: 2689, 2020: 47496, 2021: 40015, 2022: 83353, 2023: 22224, 2024: -23766, 2025: 42221, 2026: 65157}
+   v2 exits: {'time': 436, 'stop': 278}
+
+2. Controls on v2 (same days, same stop / exit):
+   random side (10 runs): $54 (max $178) vs $346
+   opposite side                  n= 714 win 33% $ -269 PF 0.72 t -3.2 yrs+ 2/9 | 18-22 $-212 (t -2.3) | 23+ $-338 (t -2.3)
+   stop 0.4 x ATR_ON              n= 714 win 46% $  321 PF 1.51 t  4.0 yrs+ 8/9 | 18-22 $ 366 (t 3.7) | 23+ $ 267 (t 2.1)
+   stop 0.6 x ATR_ON              n= 714 win 53% $  345 PF 1.48 t  3.9 yrs+ 9/9 | 18-22 $ 382 (t 3.6) | 23+ $ 300 (t 2.1)
+   threshold 0.03                 n= 890 win 49% $  275 PF 1.39 t  3.6 yrs+ 9/9 | 18-22 $ 272 (t 3.0) | 23+ $ 277 (t 2.2)
+   threshold 0.125                n= 419 win 51% $  344 PF 1.50 t  3.1 yrs+ 8/9 | 18-22 $ 343 (t 2.6) | 23+ $ 346 (t 1.8)
+
+3. Standard metrics per NQ (v2):
+       trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+S47 v2    714 51% $346 $27,203   1.35    2.69          1.51 $15,725   1.73  2.85      19.08
+longs     380 53% $273 $11,423   0.82    1.52          1.41 $12,742   0.90  3.51       6.52
+shorts    334 48% $429 $15,781   1.07    2.32          1.61 $23,542   0.67  5.83       5.42
+                             actual        p5       p50       p95
+name         metric                                              
+S47 v2 2023+ sharpe            1.16      0.53      1.22      1.89
+             sortino           2.17      0.90      2.29      3.96
+             pf_day            1.38      1.15      1.40      1.71
+             calmar            1.74      0.38      1.40      3.30
+             ulcer             6.28      3.46      6.96     17.08
+             max_dd       15,325.00 12,344.59 19,603.50 34,354.77
+             P(Sharpe<=0)       NaN       NaN      0.00       NaN
+longs 2023+  sharpe            0.62     -0.11      0.65      1.36
+             sortino           1.02     -0.16      1.09      2.57
+             pf_day            1.25      0.96      1.27      1.64
+             calmar            0.73     -0.05      0.52      1.85
+             ulcer             5.85      4.07      9.73     28.98
+             max_dd       12,741.75 10,489.34 18,297.75 35,970.86
+             P(Sharpe<=0)       NaN       NaN      0.08       NaN
+shorts 2023+ sharpe            1.00      0.22      1.05      1.72
+             sortino           2.12      0.40      2.22      4.40
+             pf_day            1.52      1.09      1.54      2.12
+             calmar            1.20      0.14      1.09      2.80
+             ulcer             7.71      3.45      7.33     20.20
+             max_dd       14,390.75 10,177.27 16,472.25 29,802.41
+             P(Sharpe<=0)       NaN       NaN      0.02       NaN
+             actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+S47 v2 2023+   $15,325       2% $24,223 $37,732 $45,029        100%        100%        100%
+longs 2023+    $12,742       2% $20,844 $33,509 $39,382        100%        100%        100%
+shorts 2023+   $14,391      22% $17,387 $28,235 $35,681        100%        100%        100%
+   Monte Carlo 1 MNQ (x0.1): trades 714 | total p5 $14,796 / p50 $24,602 / p95 $34,586, P(total <= 0) 0.0%
+      max DD actual $1,573 (rank 4%), shuffled p50 $2,389 / p95 $3,986 / p99 $5,007; losing streak actual 8, p95 12
+      252-day block bootstrap: P&L p5 $-232 / p50 $2,684 / p95 $6,101, P(loss) 6.6%, max DD p50 $1,022 / p95 $2,012, return/DD 2.63, P(hit $2,000 trailing, EOD check only) 4.5%
+
+4. Overlap (daily P&L correlation; days both trade):
+   VaultBreak               corr +0.14   days both trade 320
+   OvernightBiasML          corr +0.17   days both trade 129
+   MondayLong               corr +0.04   days both trade 126
+   ExpirationOpenShort      corr +0.05   days both trade 30
+   LateDayFlow              corr +0.07   days both trade 327
+   NFPFade                  corr +0.05   days both trade 38
+   BridgeMondayLong         corr -0.00   days both trade 67
+   CLSundayFade_perMCL      corr -0.03   days both trade 22
+   ESMOCFollow_perMES       corr -0.01   days both trade 68
+   RelativeStrength         corr +0.28   days both trade 370
+   FC2B                     corr +0.19   days both trade 252
+   plan total               corr +0.28
