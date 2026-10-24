@@ -1,0 +1,308 @@
+// ==========================================================================
+//  T_ONESIDE v2  |  1 NQ  |  RITHMIC  |  frozen rule + the research note's stop (Claude, 2026-10-24)
+//  File > New > Signal. Name: T_ONESIDE
+//
+//  Rithmic: Exchange time = Central. Session = GLOBEX 17:00-16:00 CT.
+//           NOT RTH. IOG OFF. Bar Magnifier OFF. 1-minute @NQ. BPV 20.
+//           Cash open must print Time = 830. If it prints 930, this is
+//           an Eastern chart — do not run this file on it.
+//
+//  Clocks in this file are CENTRAL (ET minus 1 hour). No ChartIsCentral.
+//    T   08:29 order -> 08:30 CT open (09:30 ET). Flat 08:44 -> 08:45 CT.
+//    OS  09:59 order -> 10:00 CT open (11:00 ET). VWAP close -> next bar.
+//        else 10:59 -> 11:00 CT (12:00 ET).
+//
+//  FatMult 1.4  OneSideMult 2  prior-20  min 30 night bars.
+//  Do not optimize. One ticket per day. Never both.
+//
+//  v2 (2026-10-24): the uploaded file had no stop, while the note's headline numbers use one. Added exactly the
+//  note's stop: 0.40 x ATRd on the fade, 0.30 x ATRd on the ONESIDE long, ATRd = mean 08:31-15:00 CT range of the
+//  last 20 full sessions (sessions without a 15:00 bar are skipped). SetStopLoss so it also covers the entry bar
+//  with IOG off. UseStop = false gives the original file. Rule, clocks and multiples unchanged.
+// ==========================================================================
+
+inputs:
+    Qty( 1 ),
+    UseT( true ),
+    UseOS( true ),
+    DebugPrint( true ),
+    UseStop( true ),
+    StopMultT( 0.40 ),
+    StopMultOS( 0.30 );
+
+variables:
+    tSess( 830 ),
+    tOR( 844 ),
+    tAm( 959 ),
+    tFlat( 1059 ),
+    tNight( 1700 ),
+    tLastNight( 829 ),
+    tVwEnd( 1100 ),
+    tKill( 1514 ),
+    rawT( 0 ),
+    hhmm( 0 ),
+    inNight( false ),
+    wasNight( false ),
+    onOpen( 0 ),
+    onVolAcc( 0 ),
+    onClose( 0 ),
+    onRet( 0 ),
+    volMed( 0 ),
+    isFat( false ),
+    validNight( false ),
+    nNightBars( 0 ),
+    nFill( 0 ),
+    ii( 0 ),
+    jj( 0 ),
+    swap( 0 ),
+    openedToday( false ),
+    tSent( false ),
+    pxSess( 0 ),
+    boxH( 0 ),
+    boxL( 0 ),
+    vwNum( 0 ),
+    vwDen( 0 ),
+    vwNow( 0 ),
+    oneUp( false ),
+    cellT( false ),
+    cellOS( false ),
+    liveQty( 0 ),
+    rthH( 0 ),
+    rthL( 0 ),
+    rthOn( false ),
+    nRng( 0 ),
+    atrD( 0 ),
+    rngSum( 0 ),
+    kk( 0 ),
+    stopUSD( 0 );
+
+array: vbuf[20]( 0 ), sbuf[20]( 0 ), rbuf[20]( 0 );
+
+liveQty = Qty;
+rawT = Time;
+if rawT > 2400 then
+    hhmm = IntPortion( rawT * 0.01 )
+else
+    hhmm = rawT;
+
+if DebugPrint and CurrentBar = 1 then begin
+    Print( "T_ONESIDE RITHMIC-CT Qty=", liveQty, " BPV=", BigPointValue,
+        " Time=", hhmm, " tSess=", tSess, " tNight=", tNight );
+    if BigPointValue < 10 then
+        Print( "T_ONESIDE: BPV < 10. This is MNQ. Production is 1 NQ (BPV 20)." );
+    if hhmm = 930 or hhmm = 1800 then
+        Print( "T_ONESIDE: Time looks Eastern. This file is Rithmic Central. Wrong chart." );
+end;
+
+// ---- v2: ATRd = mean 08:31-15:00 CT range of the last 20 full sessions ----
+if hhmm = 831 then begin
+    rthH = High;
+    rthL = Low;
+    rthOn = true;
+end
+else if rthOn and hhmm > 831 and hhmm <= 1500 then begin
+    if High > rthH then rthH = High;
+    if Low < rthL then rthL = Low;
+end;
+if rthOn and hhmm = 1500 then begin
+    if nRng < 20 then begin
+        nRng = nRng + 1;
+        rbuf[nRng] = rthH - rthL;
+    end
+    else begin
+        for kk = 1 to 19 begin
+            rbuf[kk] = rbuf[kk + 1];
+        end;
+        rbuf[20] = rthH - rthL;
+    end;
+    rthOn = false;
+end;
+if hhmm >= tNight or hhmm < 831 then
+    rthOn = false;                       // a session without a 15:00 bar (half day) is not counted
+atrD = 0;
+if nRng >= 20 then begin
+    rngSum = 0;
+    for kk = 1 to 20 begin
+        rngSum = rngSum + rbuf[kk];
+    end;
+    atrD = rngSum / 20;
+end;
+
+inNight = ( hhmm >= tNight ) or ( hhmm < tSess );
+
+if inNight and not wasNight then begin
+    onOpen = Open;
+    onVolAcc = Volume;
+    nNightBars = 1;
+    openedToday = false;
+    isFat = false;
+    validNight = false;
+    tSent = false;
+    cellT = false;
+    cellOS = false;
+    vwNum = 0;
+    vwDen = 0;
+    boxH = 0;
+    boxL = 0;
+    pxSess = 0;
+    onRet = 0;
+end
+else if inNight then begin
+    onVolAcc = onVolAcc + Volume;
+    nNightBars = nNightBars + 1;
+end;
+
+if inNight and ( hhmm = tLastNight )
+    and ( openedToday = false ) and ( tSent = false ) then begin
+    onClose = Close;
+    onRet = onClose - onOpen;
+    validNight = nNightBars >= 30;
+    volMed = 0;
+    isFat = false;
+    if nFill >= 20 then begin
+        for ii = 1 to 20 begin
+            sbuf[ii] = vbuf[ii];
+        end;
+        for ii = 1 to 19 begin
+            for jj = ii + 1 to 20 begin
+                if sbuf[jj] < sbuf[ii] then begin
+                    swap = sbuf[ii];
+                    sbuf[ii] = sbuf[jj];
+                    sbuf[jj] = swap;
+                end;
+            end;
+        end;
+        volMed = 0.5 * ( sbuf[10] + sbuf[11] );
+        if volMed > 0 and onVolAcc > 1.4 * volMed then
+            isFat = true;
+    end;
+    if UseT and isFat and validNight and ( nFill >= 20 )
+        and ( onRet <> 0 ) and ( MarketPosition = 0 ) then begin
+        if onRet > 0 then
+            SellShort( "OFsh" ) liveQty shares next bar at market;
+        if onRet < 0 then
+            Buy( "OFlg" ) liveQty shares next bar at market;
+        cellT = true;
+        cellOS = false;
+        tSent = true;
+        stopUSD = StopMultT * atrD * BigPointValue;
+    end;
+end;
+
+if ( not inNight ) and wasNight and ( openedToday = false ) then begin
+    if tSent = false then begin
+        if CurrentBar >= 2 then
+            onClose = Close[1]
+        else
+            onClose = Open;
+        onRet = onClose - onOpen;
+        validNight = nNightBars >= 30;
+        volMed = 0;
+        isFat = false;
+        if nFill >= 20 then begin
+            for ii = 1 to 20 begin
+                sbuf[ii] = vbuf[ii];
+            end;
+            for ii = 1 to 19 begin
+                for jj = ii + 1 to 20 begin
+                    if sbuf[jj] < sbuf[ii] then begin
+                        swap = sbuf[ii];
+                        sbuf[ii] = sbuf[jj];
+                        sbuf[jj] = swap;
+                    end;
+                end;
+            end;
+            volMed = 0.5 * ( sbuf[10] + sbuf[11] );
+            if volMed > 0 and onVolAcc > 1.4 * volMed then
+                isFat = true;
+        end;
+        if UseT and isFat and validNight and ( nFill >= 20 )
+            and ( onRet <> 0 ) and ( MarketPosition = 0 ) then begin
+            if onRet > 0 then
+                SellShort( "OFsh" ) liveQty shares next bar at market;
+            if onRet < 0 then
+                Buy( "OFlg" ) liveQty shares next bar at market;
+            cellT = true;
+            cellOS = false;
+            tSent = true;
+            stopUSD = StopMultT * atrD * BigPointValue;
+        end;
+    end;
+
+    if validNight then begin
+        if nFill < 20 then begin
+            nFill = nFill + 1;
+            vbuf[nFill] = onVolAcc;
+        end
+        else begin
+            for ii = 1 to 19 begin
+                vbuf[ii] = vbuf[ii + 1];
+            end;
+            vbuf[20] = onVolAcc;
+        end;
+    end;
+
+    openedToday = true;
+    onVolAcc = 0;
+    pxSess = Open;
+    boxH = High;
+    boxL = Low;
+    vwNum = ( High + Low + Close ) / 3 * Volume;
+    vwDen = Volume;
+end
+else if ( not inNight ) and ( hhmm >= tSess ) and ( hhmm < tVwEnd ) then begin
+    if High > boxH then
+        boxH = High;
+    if Low < boxL then
+        boxL = Low;
+    vwNum = vwNum + ( High + Low + Close ) / 3 * Volume;
+    vwDen = vwDen + Volume;
+end;
+
+if vwDen > 0 then
+    vwNow = vwNum / vwDen
+else
+    vwNow = Close;
+
+if UseOS
+    and ( cellOS = false )
+    and ( cellT = false )
+    and ( tSent = false )
+    and ( isFat = false )
+    and validNight
+    and ( hhmm = tAm )
+    and ( nFill >= 20 )
+    and ( pxSess > 0 )
+    and ( MarketPosition = 0 ) then begin
+    oneUp = ( boxH - pxSess ) > 2.0 * ( pxSess - boxL );
+    if oneUp and ( Close > vwNow ) then begin
+        Buy( "OSlg" ) liveQty shares next bar at market;
+        cellOS = true;
+        cellT = false;
+        stopUSD = StopMultOS * atrD * BigPointValue;
+    end;
+end;
+
+if cellT and MarketPosition > 0 and hhmm >= tOR then
+    Sell( "OFflat" ) liveQty shares next bar at market;
+if cellT and MarketPosition < 0 and hhmm >= tOR then
+    BuyToCover( "OFcvt" ) liveQty shares next bar at market;
+
+if cellOS and MarketPosition > 0 and Close < vwNow then
+    Sell( "OSvw" ) liveQty shares next bar at market;
+if cellOS and MarketPosition > 0 and hhmm >= tFlat then
+    Sell( "OSflat" ) liveQty shares next bar at market;
+
+if MarketPosition > 0 and hhmm >= tKill then
+    Sell( "Kill" ) liveQty shares next bar at market;
+if MarketPosition < 0 and hhmm >= tKill then
+    BuyToCover( "Killc" ) liveQty shares next bar at market;
+
+if UseStop and stopUSD > 0 then begin
+    SetStopContract;
+    SetStopLoss( stopUSD );
+end;
+if MarketPosition = 0 and cellT = false and cellOS = false then
+    stopUSD = 0;
+
+wasNight = inNight;
