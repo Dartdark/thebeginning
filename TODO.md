@@ -63,6 +63,15 @@ bottom). Times are Central (CT).
   on a 1-minute MNQ chart (Exchange time, CME 24h, IOG off), `NumContracts` 2 (1 while the cushion is below $3,000),
   Trade Logger tag `DT`. Not on 50K accounts or evaluations.
 
+## T_ONESIDE (your file, 2026-10-24: B, checker PASS WITH CONCERNS; fade leg = small funded gain at 1 MNQ)
+
+- [ ] Optional, before any plan use (outside market hours, not on the live VPS): MultiCharts backtest of
+  [T_ONESIDE_v2.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/t_oneside/T_ONESIDE_v2.txt)
+  on a **1-minute @NQ chart** (Rithmic, CME 24h session 17:00-16:00, Exchange time = CT, IOG off, Bar Magnifier off, from
+  Sep 2017), inputs **UseT true, UseOS false, UseStop true, Qty 1**, **commission and slippage 0** (Claude adds costs); save as
+  "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute T_ONESIDE v2.xlsx" and push / send it.
+  Claude checks it trade by trade (363 fades 2018-26, $239 per NQ after costs).
+
 ## GC_COMBO v2 (your gold files, 2026-10-24: C pending the MultiCharts report)
 
 - [ ] Optional, no deadline (outside market hours, not on the live VPS): run it in MultiCharts and export the report, step by

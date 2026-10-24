@@ -66,9 +66,20 @@ frozen and the stop chosen on 2016-20 by its author (pre-registered in spirit, n
 4. Holidays: both legs finish by 11:00 CT, before the 12:00 CT early close: no halt problem.
 5. `shares` in the orders is fine for futures; `Qty` 1 = 1 NQ; for MNQ use an @MNQ chart (the file prints a warning only).
 
+## Independent check (strategy-checker, `verdict.md`, `../t_oneside_replica/`): PASS WITH CONCERNS
+- Replica from the spec alone: all 874 trades identical (0 mismatches; +14 January 2018 trades from the December 2017 warm-up).
+- Gates: G1 DSR 0.926 < 0.95 (t 4.28 clears the 3.58 alternative); G2-G9 pass (2018-22 t 3.66, 2023+ t 2.56, 9/9 years,
+  random nights / days placebo $22 vs $148 p 0.000, P(Sharpe <= 0) 2023+ 0.003, PBO 0.19 over 9 neighbours).
+- No leaks: the night median excludes the decision night; VWAP exit uses the bar's own close; no stopped trade gapped.
+- T: works only on heavy nights; threshold 1.2 → 1.6 = $121 → $312 (monotonic); exit 08:40-09:00 all fine; both sides t 2.5+;
+  outside roll weeks still $194 (heavy nights cluster in roll weeks: $520 there). **The pre-bell minute matters:** entering
+  at 08:30:00 gives $180, 08:31:00 $161 vs $233 at 08:29:00 (with the stop).
+- OS: carried by its best 5% (without them −$8.9k), median trade −$27, and the light-night switch adds nothing ($81 on all
+  nights vs $87): a long-only morning-momentum filter. → run T only.
+- At 1 NQ a T stop costs $2.6-3.0k in 2025-26 (> the $2,000 trail): MNQ only.
+
 ## Verdict
-**B**, pending the independent checker and a MultiCharts report of v2. Book t 4.3 (above the 3.58 bar), DSR 0.93, 9/9
-years, both periods positive, the author's volume switch confirmed by his own falsification cells; the OS long is mostly
-Nasdaq drift (mirror short ~0). For the plans: the T fade at 1 MNQ is a small funded gain (+$268 year 1, fewer blown), no
-evaluation gain. Not straight into the plan (DSR < 0.95, no MC confirmation, checker pending). Personal portfolio: + book
-1 MNQ $21.9k → $23.3k a year, capital about the same.
+**B.** The T fade is the strategy: t 3.6 on its own (at the bar), volume switch real and monotonic, checker PASS WITH
+CONCERNS. For the plans: T only at 1 MNQ is a small funded gain (+$268 year 1, fewer blown), no evaluation gain. Before any
+plan use: a MultiCharts report of `T_ONESIDE_v2.txt` with `UseOS false` (the 08:29:00 fill is the key live risk; each
+minute later costs ~$50 a trade). Personal portfolio: + book 1 MNQ $21.9k → $23.3k a year.
