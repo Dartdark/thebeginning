@@ -1,0 +1,139 @@
+{
+  "preregistration_commit": "affb482",
+  "strategy_variants": 2,
+  "modes": [
+    "literal_delay",
+    "immediate_stop"
+  ],
+  "synthetic_checks": {
+    "entry_bar_unprotected_primary": true,
+    "entry_bar_protected_diagnostic": true,
+    "next_bar_market_exit": true,
+    "fill_price_stop_anchor": true,
+    "rth_first_bar_831": true,
+    "prior_only_night_median": true,
+    "current_night_os_validity_omission_preserved": true,
+    "adverse_tick_rounding": true,
+    "pending_market_priority": true,
+    "adverse_stop_gap": true,
+    "no_market_cache_loaded": true
+  },
+  "period_order": [
+    "2018_22",
+    "2023_plus"
+  ],
+  "no_parameter_selection": true,
+  "feature_cache": "agents/codex/runtime/night_volume_switch_features.pkl",
+  "account_failsafe_fills": 0,
+  "ledger_files": {
+    "literal_delay_trades.csv": {
+      "rows": 867,
+      "sha256": "3a98d56032becff1145a4bd3cd4a6de1a8406df72124deafc5cae7a4282ddefc"
+    },
+    "literal_delay_audit.csv": {
+      "rows": 3204,
+      "sha256": "dbb2109d1727d37a8998eea2f017d65225e2cf8f32b4713e19415b72f8bfc31f"
+    },
+    "literal_delay_features.csv": {
+      "rows": 3204,
+      "sha256": "009fb4c7731ecd17fc9dae68174656411fc25548583c22eca175937bb2a657cc"
+    },
+    "literal_delay_events.csv": {
+      "rows": 1734,
+      "sha256": "f1e1735195f281bcdd3ac65c7038d760debd9ae7bbf873c1b9018ce20135c24d"
+    },
+    "immediate_stop_trades.csv": {
+      "rows": 867,
+      "sha256": "715b0c290709036fadc9bf04e643ac55482e5ca99905bee1c75aaff0aa7d3757"
+    },
+    "immediate_stop_audit.csv": {
+      "rows": 3204,
+      "sha256": "dbb2109d1727d37a8998eea2f017d65225e2cf8f32b4713e19415b72f8bfc31f"
+    },
+    "immediate_stop_features.csv": {
+      "rows": 3204,
+      "sha256": "009fb4c7731ecd17fc9dae68174656411fc25548583c22eca175937bb2a657cc"
+    },
+    "immediate_stop_events.csv": {
+      "rows": 1734,
+      "sha256": "f1e1735195f281bcdd3ac65c7038d760debd9ae7bbf873c1b9018ce20135c24d"
+    }
+  },
+  "specs": {
+    "literal_delay": {
+      "source": "overnight volume switch.txt",
+      "timing_mode": "literal_delay",
+      "stop_activation": "first observed bar after entry bar",
+      "primary_mode": "literal_delay",
+      "bar_minutes": 1,
+      "bar_stamp": "close, Central",
+      "entry": "next observed bar open after source signal",
+      "market_exit": "next observed bar open; priority over stop at that open",
+      "stop": "entry fill price +/- source distance; adverse gap open, otherwise stop level",
+      "targets": false,
+      "volume": "Grid24.v as total Ticks under Build Volume On=Trade Volume",
+      "source_defaults": {
+        "vol_mult": 1.4,
+        "one_side_mult": 2.0,
+        "min_night_bars": 30,
+        "fade_stop_mult": 0.4,
+        "long_stop_mult": 0.3,
+        "night_start": 960,
+        "night_end": 509,
+        "rth_start": 510,
+        "rth_end": 900,
+        "exit_fade": 524,
+        "cash_start": 599,
+        "cash_end": 659
+      },
+      "atr": "mean prior 20 exact-15:00 completed RTH high-low ranges",
+      "source_history": "all observed finite OHLC bars, across dates, without account eligibility filtering",
+      "source_vwap_zero": "retain previous sessVWAP if current cumulative Ticks=0",
+      "current_night_os_guard": "none: classified only validates prior history; short current nights can select OS",
+      "account_coverage": "finite OHLC for each minute 08:29..11:00 inclusive; no missing held range or cross-date carry",
+      "costs": "raw price geometry only; fees and fill slippage applied by account/diagnostics caller",
+      "account_failsafe": "none invented: source carries and unclosed trades are audited/excluded",
+      "price_levels": "adverse .25-point rounding: sell stop down, buy stop up; disclosed source benchmark adapter"
+    },
+    "immediate_stop": {
+      "source": "overnight volume switch.txt",
+      "timing_mode": "immediate_stop",
+      "stop_activation": "entry bar; counterfactual diagnostic",
+      "primary_mode": "literal_delay",
+      "bar_minutes": 1,
+      "bar_stamp": "close, Central",
+      "entry": "next observed bar open after source signal",
+      "market_exit": "next observed bar open; priority over stop at that open",
+      "stop": "entry fill price +/- source distance; adverse gap open, otherwise stop level",
+      "targets": false,
+      "volume": "Grid24.v as total Ticks under Build Volume On=Trade Volume",
+      "source_defaults": {
+        "vol_mult": 1.4,
+        "one_side_mult": 2.0,
+        "min_night_bars": 30,
+        "fade_stop_mult": 0.4,
+        "long_stop_mult": 0.3,
+        "night_start": 960,
+        "night_end": 509,
+        "rth_start": 510,
+        "rth_end": 900,
+        "exit_fade": 524,
+        "cash_start": 599,
+        "cash_end": 659
+      },
+      "atr": "mean prior 20 exact-15:00 completed RTH high-low ranges",
+      "source_history": "all observed finite OHLC bars, across dates, without account eligibility filtering",
+      "source_vwap_zero": "retain previous sessVWAP if current cumulative Ticks=0",
+      "current_night_os_guard": "none: classified only validates prior history; short current nights can select OS",
+      "account_coverage": "finite OHLC for each minute 08:29..11:00 inclusive; no missing held range or cross-date carry",
+      "costs": "raw price geometry only; fees and fill slippage applied by account/diagnostics caller",
+      "account_failsafe": "none invented: source carries and unclosed trades are audited/excluded",
+      "price_levels": "adverse .25-point rounding: sell stop down, buy stop up; disclosed source benchmark adapter"
+    }
+  },
+  "inputs": {
+    "scratch_data/g24.pkl": "e35c222362b9fa6cbc97933b38a2f33eba7009200686790198bb53f383795ab5",
+    "agents/codex/inputs/night_volume_switch/source.txt": "83b8e3bd67848a743e2df84fabe6a29b72cb8a1eb34d36d9afa0575eac1ec629"
+  },
+  "script_sha256": "010312a7254433c3c0baa47e7e76e934919a959de55fa0a8f76c4f3ae9816385"
+}

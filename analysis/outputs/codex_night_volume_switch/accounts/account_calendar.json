@@ -1,0 +1,34 @@
+{
+  "eligible": 2254,
+  "total": 2262,
+  "excluded_dates": [
+    "2019-12-05",
+    "2020-03-09",
+    "2020-03-12",
+    "2020-03-13",
+    "2020-03-16",
+    "2020-03-18",
+    "2021-09-17",
+    "2025-11-14"
+  ],
+  "trade_counts": {
+    "literal_delay": {
+      "total_ledger_trades": 867,
+      "account_eligible_trades": 866,
+      "excluded_trades": 1
+    },
+    "immediate_stop": {
+      "total_ledger_trades": 867,
+      "account_eligible_trades": 866,
+      "excluded_trades": 1
+    }
+  },
+  "funded_policy": "identical common complete days, circular blocks after common restriction",
+  "evaluation_policy": "complete real 21-day windows; calendar never compressed",
+  "inputs": {
+    "analysis\\outputs\\codex_night_volume_switch\\replay\\literal_delay_trades.csv": "3a98d56032becff1145a4bd3cd4a6de1a8406df72124deafc5cae7a4282ddefc",
+    "analysis\\outputs\\codex_night_volume_switch\\replay\\literal_delay_audit.csv": "dbb2109d1727d37a8998eea2f017d65225e2cf8f32b4713e19415b72f8bfc31f",
+    "analysis\\outputs\\codex_night_volume_switch\\replay\\immediate_stop_trades.csv": "715b0c290709036fadc9bf04e643ac55482e5ca99905bee1c75aaff0aa7d3757",
+    "analysis\\outputs\\codex_night_volume_switch\\replay\\immediate_stop_audit.csv": "dbb2109d1727d37a8998eea2f017d65225e2cf8f32b4713e19415b72f8bfc31f"
+  }
+}
