@@ -1,0 +1,147 @@
+// =====================================================================================
+// SSRN Lab  S03  Noise-Area Intraday Momentum  v2 (protective sigma stop)   SIGNAL
+// Paper: Zarattini, Aziz, Barbon (2024) "Beat the Market: An Effective Intraday Momentum
+//        Strategy for S&P500 ETF (SPY)", SSRN 4824172
+//
+// v2 CHANGE (only change vs v1): protective stop at StopSigma x sigma(t) x signal close,
+//   measured from the entry fill, active from the entry bar (SetStopContract + SetStopLoss).
+//   StopSigma = 0 reproduces v1 exactly.
+//
+// Python replica, 1 NQ, 2017-05..2026-07, $5 RT + 1 tick/side, 1-min OHLC:
+//   v1 (StopSigma 0)  : 1,919 trades, +$260.8K, PF 1.30, Sharpe 1.12, max DD -$40.6K
+//   v2 (StopSigma 0.4): 2,497 trades, +$283.1K, PF 1.36, Sharpe 1.32, max DD -$22.2K
+//   StopSigma picked by anchored walk-forward (0.4 chosen from prior data in 7 of 8 years;
+//   0.35-0.6 is a plateau). Stop fills are intrabar -> confirm on tick data before live.
+//
+// CHART SETUP
+//   NQ (or MNQ) 1-minute bars, 24-hour session, back-adjusted continuous contract if you
+//   have it. MultiCharts stamps each bar with its CLOSE time (default) - keep it that way.
+//   TZOffsetHours: chart time + offset = New York time
+//     chart in New York time -> 0     chart in Exchange (Chicago) time -> 1
+//   Strategy Properties: leave "Enable Intra-Bar Order Generation" OFF.
+//
+// RULES (all times New York)
+//   sigma(t) = average over the last 14 FULL sessions of |Close(t) / Open(09:30) - 1|,
+//              measured at the same minute t
+//   UB(t) = max(Open, prevClose) * (1 + sigma(t))      LB(t) = min(Open, prevClose) * (1 - sigma(t))
+//   Only at 10:00, 10:30, 11:00 ... 15:30:
+//     long  : Close > UB and Close > VWAP        exit long : Close < max(UB, VWAP)
+//     short : Close < LB and Close < VWAP        exit short: Close > min(LB, VWAP)
+//   Orders go in at the bar close and fill at the next bar's open.
+//   Protective stop (v2): entry -/+ StopSigma * sigma(t) * Close(signal bar), live from the fill.
+//   Everything is closed at the 16:00 bar (fills ~16:00:00) -> flat long before 16:10.
+//   No trading on exchange holidays and early-close days (Black Friday, Christmas Eve,
+//   July 3) - the backtest skipped those sessions too.
+// All variables carry an "s3" prefix so they can't clash with functions in your library.
+// =====================================================================================
+Inputs: Lookback(14), BandMult(1.0), CheckEvery(30), VwapConfirm(true), Qty(1), TZOffsetHours(0),
+        StopSigma(0.4);                                                                  // v2
+
+Vars: s3EtMin(0), s3InRth(false), s3Idx(0), s3DayOpen(0), s3PrevClose(0), s3LastClose(0), s3HaveClose(false),
+      s3FullDays(0), s3Slot(0), s3i(0), s3SumM(0), s3Sigma(0), s3RefHi(0), s3RefLo(0), s3UB(0), s3LB(0),
+      s3CumPV(0), s3CumV(0), s3VWAP(0), s3TP(0), s3IsCheck(false), s3NoTrade(false),
+      s3Yr(0), s3Mo(0), s3Dy(0), s3Dw(0), s3Holiday(false), s3HalfDay(false),
+      s3Ea(0), s3Eb(0), s3Ec(0), s3Ed(0), s3Ee(0), s3Ef(0), s3Eg(0), s3Eh(0), s3Ei(0), s3Ek(0), s3El(0), s3Em(0),
+      s3EasterMo(0), s3EasterDy(0), s3GFMo(0), s3GFDy(0),
+      s3StopAmt(0);                                                                      // v2: $ per contract
+Arrays: s3Moves[389, 59](0);    // [RTH minute 0..389, day slot 0..59]; Lookback must be <= 59
+
+SetExitOnClose;                 // on a 09:30-16:00 session chart: flat at the close
+
+s3EtMin = Mod(TimeToMinutes(Time) + TZOffsetHours * 60 + 1440, 1440);
+s3InRth = s3EtMin > 570 and s3EtMin <= 960;            // bars closing 09:31 .. 16:00
+
+if s3InRth then begin
+    s3Idx = s3EtMin - 571;                              // 09:31 -> 0 ... 16:00 -> 389
+
+    // ---------------- first RTH bar of the day ----------------
+    if s3Idx = 0 or s3InRth[1] = false then begin
+        s3DayOpen = Open;                               // 09:30 price
+        s3PrevClose = s3LastClose;                      // last full session's 16:00 close
+        s3Slot = Mod(s3FullDays, 60);                   // today's row in the ring buffer
+        for s3i = 0 to 389 begin s3Moves[s3i, s3Slot] = 0; end;
+        s3CumPV = 0; s3CumV = 0;
+
+        // exchange holiday / early-close calendar (US equity index futures)
+        s3Yr = Year(Date) + 1900; s3Mo = Month(Date); s3Dy = DayOfMonth(Date); s3Dw = DayOfWeek(Date);  // 0=Sun..6=Sat
+        s3Ea = Mod(s3Yr, 19); s3Eb = IntPortion(s3Yr / 100); s3Ec = Mod(s3Yr, 100);           // Easter (Gregorian)
+        s3Ed = IntPortion(s3Eb / 4); s3Ee = Mod(s3Eb, 4); s3Ef = IntPortion((s3Eb + 8) / 25);
+        s3Eg = IntPortion((s3Eb - s3Ef + 1) / 3); s3Eh = Mod(19 * s3Ea + s3Eb - s3Ed - s3Eg + 15, 30);
+        s3Ei = IntPortion(s3Ec / 4); s3Ek = Mod(s3Ec, 4); s3El = Mod(32 + 2 * s3Ee + 2 * s3Ei - s3Eh - s3Ek, 7);
+        s3Em = IntPortion((s3Ea + 11 * s3Eh + 22 * s3El) / 451);
+        s3EasterMo = IntPortion((s3Eh + s3El - 7 * s3Em + 114) / 31);
+        s3EasterDy = Mod(s3Eh + s3El - 7 * s3Em + 114, 31) + 1;
+        s3GFMo = s3EasterMo; s3GFDy = s3EasterDy - 2;                                          // Good Friday
+        if s3GFDy < 1 then begin s3GFMo = 3; s3GFDy = s3GFDy + 31; end;
+
+        s3Holiday = (s3Mo = 1 and ((s3Dy = 1 and s3Dw >= 1 and s3Dw <= 5) or (s3Dy = 2 and s3Dw = 1)))  // New Year
+            or (s3Mo = 1 and s3Dw = 1 and s3Dy >= 15 and s3Dy <= 21)                                   // MLK Day
+            or (s3Mo = 2 and s3Dw = 1 and s3Dy >= 15 and s3Dy <= 21)                                   // Presidents Day
+            or (s3Mo = s3GFMo and s3Dy = s3GFDy)                                                        // Good Friday
+            or (s3Mo = 5 and s3Dw = 1 and s3Dy >= 25)                                                   // Memorial Day
+            or (s3Yr >= 2022 and s3Mo = 6 and ((s3Dy = 19 and s3Dw >= 1 and s3Dw <= 5)
+                or (s3Dy = 20 and s3Dw = 1) or (s3Dy = 18 and s3Dw = 5)))                               // Juneteenth
+            or (s3Mo = 7 and ((s3Dy = 4 and s3Dw >= 1 and s3Dw <= 5) or (s3Dy = 5 and s3Dw = 1)
+                or (s3Dy = 3 and s3Dw = 5)))                                                            // Independence Day
+            or (s3Mo = 9 and s3Dw = 1 and s3Dy <= 7)                                                    // Labor Day
+            or (s3Mo = 11 and s3Dw = 4 and s3Dy >= 22 and s3Dy <= 28)                                   // Thanksgiving
+            or (s3Mo = 12 and ((s3Dy = 25 and s3Dw >= 1 and s3Dw <= 5) or (s3Dy = 26 and s3Dw = 1)
+                or (s3Dy = 24 and s3Dw = 5)))                                                           // Christmas
+            or Date = 1181205 or Date = 1250109;                                                        // mourning days
+        s3HalfDay = (s3Mo = 11 and s3Dw = 5 and s3Dy >= 23 and s3Dy <= 29)                             // day after Thanksgiving
+            or (s3Mo = 12 and s3Dy = 24 and s3Dw >= 1 and s3Dw <= 4)                                    // Christmas Eve
+            or (s3Mo = 7 and s3Dy = 3 and s3Dw >= 1 and s3Dw <= 4);                                     // July 3
+        s3NoTrade = s3Holiday or s3HalfDay;
+    end;
+
+    // ---------------- session VWAP (typical price) and today's move from the open ----------------
+    s3TP = (High + Low + Close) / 3;
+    s3CumPV = s3CumPV + s3TP * Volume;
+    s3CumV = s3CumV + Volume;
+    if s3CumV > 0 then s3VWAP = s3CumPV / s3CumV else s3VWAP = s3TP;
+    s3Moves[s3Idx, s3Slot] = AbsValue(Close / s3DayOpen - 1);
+
+    // ---------------- signals ----------------
+    if s3NoTrade = false and s3HaveClose and s3FullDays >= Lookback then begin
+        s3SumM = 0;
+        for s3i = 1 to Lookback begin s3SumM = s3SumM + s3Moves[s3Idx, Mod(s3FullDays - s3i, 60)]; end;
+        s3Sigma = BandMult * s3SumM / Lookback;
+        s3RefHi = MaxList(s3DayOpen, s3PrevClose);
+        s3RefLo = MinList(s3DayOpen, s3PrevClose);
+        s3UB = s3RefHi * (1 + s3Sigma);
+        s3LB = s3RefLo * (1 - s3Sigma);
+
+        s3IsCheck = s3Idx >= 29 and s3Idx <= 359 and Mod(s3Idx - 29, CheckEvery) = 0;
+        if s3IsCheck then begin
+            // trailing stops first
+            if MarketPosition = 1 and Close < MaxList(s3UB, s3VWAP) then Sell ("S03 LX") next bar at market;
+            if MarketPosition = -1 and Close > MinList(s3LB, s3VWAP) then BuyToCover ("S03 SX") next bar at market;
+            // new entries (a SellShort while long / Buy while short reverses the position)
+            if Close > s3UB and (VwapConfirm = false or Close > s3VWAP) and MarketPosition <> 1 then begin
+                Buy ("S03 LE") Qty contracts next bar at market;
+                s3StopAmt = StopSigma * (s3SumM / Lookback) * Close * BigPointValue;        // v2: raw sigma, no BandMult
+            end
+            else if Close < s3LB and (VwapConfirm = false or Close < s3VWAP) and MarketPosition <> -1 then begin
+                SellShort ("S03 SE") Qty contracts next bar at market;
+                s3StopAmt = StopSigma * (s3SumM / Lookback) * Close * BigPointValue;        // v2
+            end;
+        end;
+    end;
+
+    // ---------------- end of day ----------------
+    if s3Idx = 389 then begin                           // the 16:00 bar
+        Sell ("S03 EOD L") next bar at market;          // fills at the 16:01 bar open (~16:00:00)
+        BuyToCover ("S03 EOD S") next bar at market;
+        if s3NoTrade = false then begin                 // a full session: keep it for sigma / prevClose
+            s3FullDays = s3FullDays + 1;
+            s3LastClose = Close;
+            s3HaveClose = true;
+        end;
+    end;
+end;
+
+// ---------------- v2: protective stop, every bar, live from the entry bar ----------------
+// Amount is set on the signal bar, so it applies to the position that fills at the next open.
+// On a reversal the old position is closed at that same open, so it never trades on the new amount.
+SetStopContract;
+if StopSigma > 0 and s3StopAmt > 0 then SetStopLoss(s3StopAmt);
