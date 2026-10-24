@@ -79,6 +79,15 @@ bottom). Times are Central (CT).
   (@GC 1-min + @CL Data2 + GCCOMBO Data3); save as "mc_reports/Backtesting Strategy Performance Report _ @GC - 1 Minute GC COMBO v2.xlsx"
   and push / send it. Expect ~1,204 trades, ~$226k for 2017-09-18 → 2026-08-07.
 
+## Overnight TickRSV / VIX (your spec, 2026-10-24: B, checker PASS WITH CONCERNS; promising for personal / 150K / 50K funded)
+
+- [ ] Find the VIX index symbol on dxFeed (Symbol Lookup "VIX", the Cboe index, not @VX futures; else import data/VIX_daily.csv).
+- [ ] MultiCharts backtest of [NQ_Overnight_Tick_VIX.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/overnight_tick/NQ_Overnight_Tick_VIX.txt)
+  ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/overnight_tick/NQ_Overnight_Tick_VIX.txt))
+  on a 5-minute @NQ chart (CME 24h, Exchange time = CT, IOG off) with VIX daily as Data2, from Sep 2017, default inputs,
+  **PrintDiag true**, commission / slippage 0; save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Overnight Tick VIX.xlsx"
+  and send the report + the PowerLanguage output (the printed lines). Claude checks trades and the UpTicks / DownTicks signs.
+
 ## Antigravity's NQAlignedWeaknessShort (2026-10-20, C)
 
 - [x] (2026-10-20, confirmed 216/216) MultiCharts backtest: [NQ_Aligned_Weakness_Short.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/aligned_weakness_short/NQ_Aligned_Weakness_Short.txt)
