@@ -79,6 +79,13 @@ bottom). Times are Central (CT).
   (@GC 1-min + @CL Data2 + GCCOMBO Data3); save as "mc_reports/Backtesting Strategy Performance Report _ @GC - 1 Minute GC COMBO v2.xlsx"
   and push / send it. Expect ~1,204 trades, ~$226k for 2017-09-18 → 2026-08-07.
 
+## Claude: recheck earlier "no gain" calls on speed, bad-case year and blow-ups (user, 2026-10-24)
+
+- [ ] FC 2B, S47 v2, Kusho v9 15:45 (and other recent Apex-plan rejections) judged on median days to the 6th payout,
+  the 5th-percentile first year and blown rate, not only 2-year payouts (the cap hides speed gains; Dual Thrust and
+  Overnight Tick got in on those). S03 v2 already fails on all of them (Codex: 50K +1 MNQ 1y −$348, 6th payout 274 vs 270
+  days, blown +1.7 pt; 150K 235 vs 233 days).
+
 ## Overnight TickRSV / VIX (your spec, 2026-10-24: A, MultiCharts-confirmed 97% of nights)
 
 **In the plans since 2026-10-24 (you):** 50K funded 1 MNQ in place of the Monday Long, 150K funded 2 MNQ, personal (in
