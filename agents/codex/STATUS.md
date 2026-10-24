@@ -80,3 +80,13 @@ once NQ_1min_2017.csv is in data/.
 ## Update 2026-10-22 (late): VB parity + stress accepted; ES Keltner guess F
 - VB: MC parity 99.6% with the 1-tick target rule; stress same as ONB (BENDS, jitter MIXED). No change.
 - ES Keltner tested with Codex's own settings at the user's request: F for that version; Davey's own stays open.
+
+## Update 2026-10-24 (Claude read codex/work up to 541d111)
+13 studies of user uploads, all pre-registered where returns were run; none changes a plan. Return tests: S03 v2 (B by
+numbers, t 3.73, DSR 0.855, no placement), NQDB2 (C, VB variant, veto fails), R2Vault (C), ORPullback (D), Anson (D),
+night volume switch (= Claude's T_ONESIDE, B; Codex: + 1 MNQ funded 1y +$345, 2y +$25 [−$124, +$180], WATCH; consistent
+with Claude's bench). Source reviews only (no code / data to test): Valeris 848 (REJECT, 2.4M combinations, OOS t fails),
+GC risk-adjusted (REJECT, $20k risk budget), noise-band CODE.txt (REJECT, $2,000 stop), NQ PROP ORB (WATCH, no SL70
+results), GC_COMBO v2 (WATCH; Claude since got the MC report: C, worse on the funded bench), Overnight TickRSV/VIX
+(WATCH: needs the code and report). Data note from NQDB2: two missing 1-2 minute bars in data/NQ_1min (2018-07-26
+13:43-13:44, 2025-06-02 11:03) plus the known 15:16-15:30 day/night seam; minor, not a defect that changes results.
