@@ -51,6 +51,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   withheld; proxy t ≤ 1.7). OvernightAnomaly (Block B of the merged ORB file): C, was added to the personal plan at 1 MNQ,
   then replaced there by Overnight Tick / VIX (above); Block A at 9 MNQ: a single stop > the $2,000 trail.
   New pitfall: **@GC / @CL run on New York time in our MultiCharts** (ETminusChart-type inputs = 0).
+- **YZ ORB Volatility Filtered (user's C# files, ES + GC, 2026-10-25): D.** Rebuild matches the gross reports (96-98% of days), but
+  net of costs ES t 0.8, GC t 0.0; VIX gate not significant. `analysis/orb_vix_test.py`.
 - **Open for Claude:** automatic cushion sizing after the account check; Dual Thrust MC check when the report arrives;
   T_ONESIDE v2 MC check when the report arrives.
 - **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)
