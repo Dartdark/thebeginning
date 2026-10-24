@@ -7,6 +7,11 @@
 - Runs in the Codex app (local project `C:\CodexRepo`, or cloud). `C:\TradingVault` stays the journal vault only.
 - Model (user's screenshot, 2026-10-24): **GPT-6.1 Sol**, effort setting 'Light', in the Codex app's cloud mode with the
   `thebeginning` environment. Mailbox thread for @codex mentions: PR #2 (do not merge).
+- **@codex mailbox attempt (2026-10-24): not working.** 7 test mentions on PR #2; each time the connector answered only
+  'create an environment for this repo', even with two GitHub-linked cloud environments for Dartdark/thebeginning listed
+  (Codex: mentions use the legacy Codex Cloud, environments were made in the newer system). Stopped retrying; next step
+  would be OpenAI Support (legacy environment ID + the latest failed connector reply). File relay used meanwhile
+  (`agents/codex/NOTE_mailbox_setup_2026-10-24.md`).
 
 ## Tests (blind, branch `codex/tests`): both PASS (`agents/codex/results/GRADES.md`)
 - Test 1, Antigravity's Vault Break Combined claim: REJECT with every key finding (worse on 2023+, removed trades
