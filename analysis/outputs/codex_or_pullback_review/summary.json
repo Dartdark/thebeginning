@@ -1,0 +1,192 @@
+{
+  "verdict": "WATCH as research; no current-plan addition or replacement justified yet",
+  "user_scope": "Against current plan overall; no compulsory ONB head-to-head",
+  "new_strategy_return_trials": 0,
+  "new_account_simulations": 0,
+  "inputs": {
+    "source.txt": {
+      "sha256": "13bffcb0ad93ca7667818c27cc680604b144996f9480c3e0391275643e79bf70",
+      "bytes": 4966
+    },
+    "report.pdf": {
+      "sha256": "a7f3d7a091075c60f3fb3f8b4aefc8c16697b5ebeca5d461ba9f6dde9c8def00",
+      "bytes": 254888
+    }
+  },
+  "pdf_pages": 5,
+  "source_lines": 112,
+  "literal_defaults": {
+    "ChartIsCentral": false,
+    "StopPts": 50.0,
+    "TargetPts": 100.0,
+    "PriceScaled": false,
+    "ScaleRef": 15000.0,
+    "MaxTradesPerDay": 2.0,
+    "MaxLossesPerDay": 2.0,
+    "NumContracts": 1.0
+  },
+  "reported_periods": [
+    {
+      "period": "2021-23 selection",
+      "trades": 902,
+      "win_percent": 45,
+      "pf": 1.25,
+      "mean": 13.35,
+      "net": 12046,
+      "dd": 1540,
+      "t": 3.04,
+      "pdf_page": 3,
+      "status": "author_reported_not_recomputed"
+    },
+    {
+      "period": "2024-Jul2025 test",
+      "trades": 477,
+      "win_percent": 40,
+      "pf": 1.17,
+      "mean": 9.58,
+      "net": 4568,
+      "dd": 1868,
+      "t": 1.54,
+      "pdf_page": 3,
+      "status": "author_reported_not_recomputed"
+    },
+    {
+      "period": "Aug2025-Jul2026 claimed sealed holdout",
+      "trades": 286,
+      "win_percent": 42,
+      "pf": 1.27,
+      "mean": 15.51,
+      "net": 4434,
+      "dd": 1428,
+      "t": 1.86,
+      "pdf_page": 3,
+      "status": "author_reported_not_recomputed"
+    },
+    {
+      "period": "2021-26 all",
+      "trades": 1665,
+      "win_percent": 43,
+      "pf": 1.23,
+      "mean": 12.64,
+      "net": 21048,
+      "dd": 1868,
+      "t": 3.83,
+      "pdf_page": 3,
+      "status": "author_reported_not_recomputed"
+    },
+    {
+      "period": "2021-26 longs",
+      "trades": 883,
+      "win_percent": 44,
+      "pf": 1.24,
+      "mean": 13.06,
+      "net": 11530,
+      "dd": 1344,
+      "t": 2.93,
+      "pdf_page": 3,
+      "status": "author_reported_not_recomputed"
+    },
+    {
+      "period": "2021-26 shorts",
+      "trades": 782,
+      "win_percent": 42,
+      "pf": 1.21,
+      "mean": 12.17,
+      "net": 9518,
+      "dd": 1876,
+      "t": 2.48,
+      "pdf_page": 3,
+      "status": "author_reported_not_recomputed"
+    }
+  ],
+  "reported_old_period": {
+    "period": "2010-20",
+    "trades": 2693,
+    "pf": 0.94,
+    "mean": -1.4,
+    "t": -1.1,
+    "status": "author_reported_not_recomputed",
+    "pdf_page": 4
+  },
+  "reported_exit_counts": {
+    "stop": 887,
+    "target": 495,
+    "time": 283
+  },
+  "source_line_anchors": {
+    "rth_reset": [
+      51
+    ],
+    "long_trigger": [
+      73
+    ],
+    "long_arm": [
+      79
+    ],
+    "close_entry": [
+      92
+    ],
+    "long_exit_branch": [
+      98
+    ],
+    "long_stop": [
+      101
+    ],
+    "time_exit": [
+      99
+    ],
+    "session_exit": [
+      112
+    ]
+  },
+  "arithmetic": {
+    "scope": "arithmetic on nominal inputs and rounded report facts, not return or account replay",
+    "one_mnq_stop": 100.0,
+    "one_mnq_target": 200.0,
+    "one_nq_stop": 1000.0,
+    "one_nq_target": 2000.0,
+    "two_mnq_stops": 200.0,
+    "two_nq_stops": 2000.0,
+    "reported_max_dd_fraction_of_nominal_2000_trail": 0.934,
+    "report_roundtrip_cost_mnq": 2.0,
+    "latest_assumed_fee_mnq": 1.04,
+    "two_market_stop_fill_slips_mnq": 1.0,
+    "fee_plus_two_slips_mnq": 2.04,
+    "two_extra_ticks_each_side_extra_mnq": 2.0,
+    "extra_slip_fraction_of_reported_mean": 0.1582278481012658,
+    "account_limit": "closed-equity DD is not breach probability; starting cushion, trail lock, other legs and intraday path matter"
+  },
+  "normalized_ct": {
+    "opening_range": "08:30-08:45",
+    "earliest_possible_trigger": "08:55 on full intended 5-minute bars",
+    "entry_cutoff": "14:30",
+    "normal_flatten": "14:55"
+  },
+  "current_plan_context": {
+    "commit": "a67035be4189b493098c80f1def979348520fd5d",
+    "path": "analysis/outputs/real_fee_bench_output.txt",
+    "funded_baseline_row": "plan @ $1.04                $9,180    $0 $11,982     $0 $13,000  7.6%   90.8%   263      50.0%      $0       0.0%",
+    "evaluation_baseline_row": "   fee $1.040 per MNQ: pass 49.8% (18-22 46.4%, 23-26 54.4%), blown 48.2%, median days 6",
+    "warning": "ORPullback is absent; these rows are not its incremental effect"
+  },
+  "distinct_prior_family": {
+    "commit": "a67035be4189b493098c80f1def979348520fd5d",
+    "row": "| VWAP pullback after a 30-min opening-range break (user's file VWAP_Pullback_NQ_Margin_Vol), swing stop / target | Strategy | Replica matches the author since 2021 ($74, PF 1.17, 57% win, original bracket-only) but 2018\u201320 lose \u2212$48k: 2018\u201326 $23, PF 1.06, t 0.8; Apex version (flat 15:55) \u2212$2, PF 0.99; random-side placebo $0; shorts lose every year but one; longs only $62, t 2.0 = NQ drift; funded + 1 MNQ $8,423 / $11,672 (worse) |",
+    "warning": "VWAP/30minOR/swing exits differ from this source"
+  },
+  "author_eval_claim": {
+    "model": "standalone LucidFlex-style, 2 MNQ, 60-day horizon",
+    "selection_pass_percent": 41,
+    "test_pass_percent": 35,
+    "holdout_pass_percent": 44,
+    "status": "author_reported_not_an_Apex_combined_plan_test"
+  },
+  "limits": [
+    "Original ledger, search registry, sealed-holdout provenance and exact MC parity export absent",
+    "First full post-entry bar lacks generated explicit brackets under ordinary declared IOG-off evaluation",
+    "Close fills are assumptions and holidays lack an explicit early-close rule",
+    "Switch-off rule in note is not present in supplied source",
+    "PriceScaled is a separate optional configuration, not an adopted repair",
+    "Latest real-micro-fee and Twin daily-mark checks are recorded as closed in current brief"
+  ]
+}
