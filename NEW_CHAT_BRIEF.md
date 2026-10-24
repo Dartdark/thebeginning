@@ -41,7 +41,18 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **FVB First Valid Breakout (user's file, 2026-10-25): B** ($166 per NQ, t 3.8, 9/9 years; checker PASS WITH CONCERNS, replica identical).
   Shorts carry it (longs PF 1.13); fat tail (cap 3R = loss); ~2/3 of it is momentum from the open. No Apex plan gain; personal return/DD
   8.3 -> 8.2 -> capital-expansion bench; shorts only 8.9 is post-hoc (pre-register first). `analysis/fvb_test.py`.
-- **Open for Claude:** automatic cushion sizing after the account check; Dual Thrust MC check when the report arrives.
+- **Uploads tested 2026-10-24 (this session, all in `TIER_LIST.md` + `checks/candidates/<name>/REVIEW.md`):**
+  **T_ONESIDE (night-volume switch): B**, checker PASS WITH CONCERNS (874/874 replicated). Heavy night (volume > 1.4 x 20-night
+  median) → fade the night 08:29 → 08:44 CT: $239 per NQ, t 3.6, volume switch confirmed by the author's own cells; the OS long
+  leg is drift (drop it). Fade alone at 1 MNQ = small funded gain (y1 $9,354 → $9,622, blown 7.0 → 6.7%), no evaluation gain.
+  The file had no stop: `T_ONESIDE_v2.txt` adds the note's. **Next: MC report of v2 with UseOS false (TODO), then plan decision.**
+  GC_COMBO v2: C (user's MC report = exact parity once ETminusChart 0; at our costs t 2.1, OOS weak, −$39k after the note's
+  cutoff, worse in both plans). MAGNET18: C (morning momentum, lowers the evaluation). Shock Reversal note: D (thresholds
+  withheld; proxy t ≤ 1.7). OvernightAnomaly (Block B of the merged ORB file): C, was added to the personal plan at 1 MNQ,
+  then replaced there by Overnight Tick / VIX (above); Block A at 9 MNQ: a single stop > the $2,000 trail.
+  New pitfall: **@GC / @CL run on New York time in our MultiCharts** (ETminusChart-type inputs = 0).
+- **Open for Claude:** automatic cushion sizing after the account check; Dual Thrust MC check when the report arrives;
+  T_ONESIDE v2 MC check when the report arrives.
 - **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)
   run in the session 'Scheduled jobs' (session_014DKffATms37kZigaa2xR2P), not in a new chat.
 
