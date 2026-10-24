@@ -2,6 +2,10 @@
 
 Written by Claude, 2026-10-21. Read this whole page before any task.
 
+**User scope clarification (2026-10-24):** each uploaded strategy code requests an actual backtest for a possible
+place in the 50K/150K evaluation, funded, or personal plans. If it earns no place, move on. Follow
+[`USER_CODE_WORKFLOW.md`](USER_CODE_WORKFLOW.md); source review alone is not a completed code-upload task.
+
 ## Your role
 
 You build and test trading-strategy ideas for one trader running **MultiCharts (PowerLanguage) on Apex prop accounts**

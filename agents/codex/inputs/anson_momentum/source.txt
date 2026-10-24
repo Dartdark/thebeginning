@@ -1,0 +1,115 @@
+Inputs:
+    LookbackBars(12),
+    RangeLookbackBars(20),
+    MomentumThreshold(3.00),
+    HoldBars(6),
+    TradeStartTime(830),
+    LastEntryTime(1430),
+    ExitTime(1455),
+    ContractsQty(1);
+
+Vars:
+    LoopIdx(0),
+    MomentumPoints(0),
+    RangeSum(0),
+    AverageRange(0),
+    MomentumStrength(0),
+    BarsHeld(0),
+    PriorMarketPosition(0);
+
+{ Input validation }
+If LookbackBars > 0 and
+   RangeLookbackBars > 0 and
+   HoldBars > 0 and
+   ContractsQty > 0 Then
+Begin
+
+    { Detect new position }
+    If MarketPosition <> 0 and
+       PriorMarketPosition = 0 Then
+        BarsHeld = 0;
+
+    { Count completed bars while position is open }
+    If MarketPosition <> 0 Then
+        BarsHeld = BarsHeld + 1
+    Else
+        BarsHeld = 0;
+
+    { Require enough history for both calculations }
+    If CurrentBar >
+       MaxList(LookbackBars, RangeLookbackBars) Then
+    Begin
+
+        MomentumPoints =
+            Close - Close[LookbackBars];
+
+        { Average completed-bar range }
+        RangeSum = 0;
+
+        For LoopIdx = 1 To RangeLookbackBars
+        Begin
+            RangeSum =
+                RangeSum +
+                (High[LoopIdx] - Low[LoopIdx]);
+        End;
+
+        AverageRange =
+            RangeSum / RangeLookbackBars;
+
+        MomentumStrength = 0;
+
+        If AverageRange > 0 Then
+            MomentumStrength =
+                AbsValue(MomentumPoints) /
+                AverageRange;
+
+        { Entry }
+        If MarketPosition = 0 and
+           Time >= TradeStartTime and
+           Time <= LastEntryTime and
+           AverageRange > 0 and
+           MomentumStrength >= MomentumThreshold Then
+        Begin
+
+            If MomentumPoints > 0 Then
+                Buy ("MomVol-L")
+                    ContractsQty Contracts
+                    Next Bar At Market;
+
+            If MomentumPoints < 0 Then
+                SellShort ("MomVol-S")
+                    ContractsQty Contracts
+                    Next Bar At Market;
+
+        End;
+
+    End;
+
+    { Holding-period exits }
+    If MarketPosition = 1 and
+       BarsHeld >= HoldBars Then
+        Sell ("MomVol-LX")
+            Next Bar At Market;
+
+    If MarketPosition = -1 and
+       BarsHeld >= HoldBars Then
+        BuyToCover ("MomVol-SX")
+            Next Bar At Market;
+
+    { End-of-day exit }
+    If Time >= ExitTime Then
+    Begin
+
+        If MarketPosition = 1 Then
+            Sell ("MomVol-L-EOD")
+                Next Bar At Market;
+
+        If MarketPosition = -1 Then
+            BuyToCover ("MomVol-S-EOD")
+                Next Bar At Market;
+
+    End;
+
+End;
+
+PriorMarketPosition = MarketPosition;
