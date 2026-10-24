@@ -1,0 +1,71 @@
+{
+  "stage": "recent",
+  "prereg_sha": "eb7b8b07fd54e8083a13b04f25d1c5b59c68a00b",
+  "years": [
+    2023,
+    2026
+  ],
+  "cache_path": "scratch_data/g24.pkl",
+  "cache_sha256": "69868d1cbc5ca6acdbbba0899eb01ca1ad7d036e00160f33c3f1992d5a385595",
+  "cache_first_date": "2017-12-01 00:00:00",
+  "cache_last_date": "2026-10-09 00:00:00",
+  "source_sha256": "648e15c16cad8c4eae5f10cea7cd78fe01e1cf37be1c63f33df2abcc4a1fabdf",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "feature_seconds": 1.3963854419998825,
+  "feature_rows": 104136,
+  "elapsed_seconds": 4.045318097996642,
+  "synthetic_checks": [
+    "prior15_positive_Date_ranges_Sunday_midnight",
+    "zero_range_Date_not_counted",
+    "30m_TP_volume_VWAP_zero_volume_reset",
+    "Close4_across_weekend_exact_veto_threshold",
+    "inclusive_entry_window_two_submissions_costs",
+    "prearmed_entry_brackets_shared_path_target_touch",
+    "next_bar_market_across_halfday_halt",
+    "midnight_carry_vs_declared_session_end_no_inferred_close",
+    "Apex_early_calendar_1130_observed_close_no_fabricated_price",
+    "entry_minute_stop_and_two_fill_slippage",
+    "post2022_gate"
+  ],
+  "gate_path": "analysis/outputs/codex_nqdb2_test/design_gate.json",
+  "gate_sha256": "7c018480de277bd9dc3a54608652cc94c1d4aa3e68d26b31436e998cd8cc852f",
+  "profiles": {
+    "S0": {
+      "trades": 735,
+      "total_net": 41686.25,
+      "trade_t": 1.5075281124959805,
+      "positive_years": 3,
+      "censored_positions": 0
+    },
+    "S1": {
+      "trades": 726,
+      "total_net": 46706.5,
+      "trade_t": 1.709489713214281,
+      "positive_years": 3,
+      "censored_positions": 0
+    },
+    "A0": {
+      "trades": 730,
+      "total_net": 44397.5,
+      "trade_t": 1.6099074083050193,
+      "positive_years": 3,
+      "censored_positions": 0
+    },
+    "A1": {
+      "trades": 721,
+      "total_net": 47112.75,
+      "trade_t": 1.7268609581095935,
+      "positive_years": 3,
+      "censored_positions": 0
+    },
+    "E1": {
+      "trades": 721,
+      "total_net": 37222.75,
+      "trade_t": 1.3583722171754133,
+      "positive_years": 3,
+      "censored_positions": 0
+    }
+  }
+}
