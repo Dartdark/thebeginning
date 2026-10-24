@@ -5,6 +5,8 @@
 - Brief: `agents/codex/BUILDER_BRIEF.md` (entry point `AGENTS.md`). Works on branch **`codex/work`**, writes only under
   `agents/codex/`, `analysis/codex_*`, `analysis/outputs/codex_*`; never touches live trading, the VPS or `claude/*`.
 - Runs in the Codex app (local project `C:\CodexRepo`, or cloud). `C:\TradingVault` stays the journal vault only.
+- Model (user's screenshot, 2026-10-24): **GPT-6.1 Sol**, effort setting 'Light', in the Codex app's cloud mode with the
+  `thebeginning` environment. Mailbox thread for @codex mentions: PR #2 (do not merge).
 
 ## Tests (blind, branch `codex/tests`): both PASS (`agents/codex/results/GRADES.md`)
 - Test 1, Antigravity's Vault Break Combined claim: REJECT with every key finding (worse on 2023+, removed trades
