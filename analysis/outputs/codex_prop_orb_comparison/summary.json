@@ -1,0 +1,277 @@
+{
+  "verdict": "Do not replace current ONB/ORB on source/header evidence",
+  "baseline_assumption": "Current plan ONB ADX30/evaluation and ONB ML/funded; Valeris separate; clarification pending when recorded",
+  "new_strategy_return_trials": 0,
+  "new_account_simulations": 0,
+  "source_sha256": "5304f8caa1ddfe24246ce4f0649d54bf98c42b565a341aefe052d5ce37334e66",
+  "source_lines": 389,
+  "literal_defaults": {
+    "OREndTime": 945.0,
+    "EntryMode": 2.0,
+    "MaxChasePts": 0.0,
+    "LatestEntry": 1300.0,
+    "FlattenTime": 1530.0,
+    "MaxTradesPerDay": 4.0,
+    "OnePerSide": false,
+    "UseGaoBias": 0.0,
+    "ExtraBias": 3.0,
+    "TrendMALen": 200.0,
+    "UseVWAPGate": 1.0,
+    "UseADXGate": 1.0,
+    "ADXLen": 16.0,
+    "ADXMin": 20.0,
+    "UseBreakVolSkip": 1.0,
+    "BreakSkipMult": 2.5,
+    "BarAvgLen": 20.0,
+    "RegimeMode": 2.0,
+    "VIXLow": 20.0,
+    "VIXHigh": 25.0,
+    "MinORx": 0.0,
+    "MaxORx": 2.0,
+    "ORMedianDays": 20.0,
+    "SLPoints": 70.0,
+    "TakeProfitRR": 1.0,
+    "NumContracts": 1.0,
+    "UseHolidayFilter": true,
+    "PrintORB": false
+  },
+  "baselines": {
+    "evaluation_onb": {
+      "path": "apex_strategies/NQ_Overnight_Bias_ADX30.txt",
+      "commit": "8f6b75cc1c6044f712c3ad5f1a774de60dd14859",
+      "defaults": {
+        "EntryBufTicks": 2.0,
+        "ONStart": 2300.0,
+        "ONEnd": 830.0,
+        "OREnd": 845.0,
+        "BiasFraction": 0.3333,
+        "ADXLength": 14.0,
+        "ADXMin": 30.0,
+        "AtrDays": 15.0,
+        "StopAtrPct": 0.25,
+        "RewardRisk": 3.0,
+        "LastEntryTime": 1400.0,
+        "ExitTime": 1430.0,
+        "RiskPerTrade": 0.0,
+        "UseHolidayTimes": true,
+        "EarlyLastEntry": 1100.0,
+        "EarlyExitTime": 1130.0,
+        "NumContracts": 1.0
+      },
+      "git_blob": "ed7120325912fa9b06b26b529c02e236df72b9db"
+    },
+    "funded_onb": {
+      "path": "funded_strategies/NQ_Overnight_Bias_ML.txt",
+      "commit": "8f6b75cc1c6044f712c3ad5f1a774de60dd14859",
+      "defaults": {
+        "EntryBufTicks": 2.0,
+        "ONStart": 2300.0,
+        "ONEnd": 830.0,
+        "OREnd": 845.0,
+        "BiasFraction": 0.3333,
+        "ADXLength": 14.0,
+        "ADXMin": 20.0,
+        "AtrDays": 15.0,
+        "StopAtrPct": 0.3,
+        "RewardRisk": 3.0,
+        "LastEntryTime": 1400.0,
+        "ExitTime": 1430.0,
+        "RiskPerTrade": 0.0,
+        "UseHolidayTimes": true,
+        "EarlyLastEntry": 1100.0,
+        "EarlyExitTime": 1130.0,
+        "NumContracts": 1.0,
+        "UseMLFilter": true,
+        "LongMinScore": 0.03,
+        "ShortMinScore": 0.0,
+        "EnableLongs": true,
+        "EnableShorts": true
+      },
+      "git_blob": "d587479d42e83d8dc162cbdb003d1a85ca907f9d"
+    },
+    "merged_orb_anomaly": {
+      "path": "checks/candidates/overnight_anomaly/Overnight_Anomaly_BiaisORB.txt",
+      "commit": "8f6b75cc1c6044f712c3ad5f1a774de60dd14859",
+      "defaults": {
+        "SessStart": 830.0,
+        "OREnd": 845.0,
+        "LastEntry": 1200.0,
+        "FlatTime": 1430.0,
+        "SessEnd": 1500.0,
+        "MaxTradesPerDay": 4.0,
+        "BiasLongMin": 0.67,
+        "BiasShortMax": 0.33,
+        "ADXLen": 16.0,
+        "ADXMin": 20.0,
+        "BreakSkipMult": 2.5,
+        "BarAvgLen": 20.0,
+        "MinORx": 0.0,
+        "MaxORx": 2.0,
+        "ORMedianDays": 20.0,
+        "ATR_k": 0.3,
+        "ATR_Days": 15.0,
+        "TakeProfitRR": 3.0,
+        "NumContracts": 1.0,
+        "Entry_H_CT": 17.0,
+        "Entry_M_CT": 30.0,
+        "Exit_H_CT": 2.0,
+        "Exit_M_CT": 30.0,
+        "RTH_Open_H_CT": 8.0,
+        "RTH_Open_M_CT": 30.0,
+        "RTH_Close_H_CT": 15.0,
+        "RTH_Close_M_CT": 0.0,
+        "UseDisasterStop": true,
+        "Stop_Vol_Mult": 4.0,
+        "Num_Contracts_B": 1.0,
+        "UseVolTargetSizing": true,
+        "Risk_Per_Trade_USD": 2200.0,
+        "Max_Contracts": 20.0,
+        "VolAvgLen": 20.0,
+        "UsePriorRTHFilter": true,
+        "SkipAfterEarlyClose": true,
+        "HalfDay_RTH_Cutoff": 1400.0,
+        "ShowLog": false
+      },
+      "git_blob": "7c722bb84ec4ce30ee9bff04124ed007efff4f33"
+    },
+    "valeris_848": {
+      "path": "agents\\codex\\inputs\\valeris_848\\source.txt",
+      "source_sha256": "bcd1a054d01d8da42c7a70485ffe9293088d6a5e7a45d43eafa1658fdd1051d2",
+      "defaults": {
+        "NumContracts": 1.0,
+        "TagliaDinamica": 1.0,
+        "Lato": 0.0,
+        "OraBase": 830.0,
+        "OraEntrata": 835.0,
+        "OraUscita": 1500.0,
+        "VersoRegola": 1.0,
+        "SogliaAtr": 0.0,
+        "StPeriodo": 10.0,
+        "StMolt": 2.0,
+        "AtrBarre": 14.0,
+        "FiltroMin": 1.5,
+        "FiltroMax": 99.0,
+        "KAtr": -0.25,
+        "NMax": 4.0,
+        "Pausa": 4.0,
+        "Oltre": 6.0,
+        "OraCap": 1540.0,
+        "StopAdr": 0.1,
+        "TargetAdr": 5.0,
+        "PareggioAdr": 0.5,
+        "AdrGiorni": 14.0,
+        "AtrGiorni": 14.0,
+        "TagliaE": 0.5,
+        "TagliaTetto": 4.0,
+        "TagliaSedute": 250.0,
+        "TagliaMin": 125.0,
+        "ArrotondaStop": 0.0,
+        "TickPunti": 0.25,
+        "OraChiusuraLucid": 0.0
+      }
+    }
+  },
+  "source_line_anchors": {
+    "predecessor_claim": [
+      6
+    ],
+    "date_reset": [
+      148
+    ],
+    "overnight_reset": [
+      185
+    ],
+    "vwap_date_reset": [
+      254
+    ],
+    "vwap_weight": [
+      257
+    ],
+    "or_reference_update": [
+      285
+    ],
+    "canwork": [
+      309
+    ],
+    "long_bracket_anchor": [
+      329
+    ],
+    "long_entry": [
+      332
+    ],
+    "long_exit_branch": [
+      366
+    ],
+    "long_stop_order": [
+      370
+    ],
+    "session_exit": [
+      361
+    ]
+  },
+  "normalized_ct": {
+    "opening_range": "08:30-08:45",
+    "first_default_15min_decision": "09:00",
+    "last_decision": "12:00",
+    "flatten_signal": "14:30",
+    "claimed_overnight_start": "17:00",
+    "actual_date_reset": "23:00, including close-stamped bar ending then",
+    "chart_timezone": "ET per supplied header"
+  },
+  "nominal_fixed_size_risk": {
+    "one_nq": 1400,
+    "one_mnq": 140,
+    "four_stops_nq": 5600,
+    "four_stops_mnq": 560,
+    "limit": "nominal signal-anchored brackets only, not a loss bound"
+  },
+  "entry_examples": [
+    {
+      "kind": "invented adverse entry, not a historical trade",
+      "adverse_points": 0,
+      "stop_distance_points": 70.0,
+      "target_distance_points": 70.0,
+      "reward_to_risk": 1.0,
+      "stop_dollars_one_nq": 1400.0,
+      "stop_dollars_one_mnq": 140.0
+    },
+    {
+      "kind": "invented adverse entry, not a historical trade",
+      "adverse_points": 10,
+      "stop_distance_points": 80.0,
+      "target_distance_points": 60.0,
+      "reward_to_risk": 0.75,
+      "stop_dollars_one_nq": 1600.0,
+      "stop_dollars_one_mnq": 160.0
+    }
+  ],
+  "or_reference_example": {
+    "kind": "invented ranges, no historical returns",
+    "last_20_median": 10.0,
+    "ema_after_large_range": 18.57142857142857,
+    "detail": "EMA and rolling median differ even with same nominal lookback"
+  },
+  "predecessor_claim": {
+    "stop_points": 75,
+    "trades": 1179,
+    "win_percent": 59.03,
+    "net_nq_approx": 241000,
+    "max_drawdown_nq_approx": 13600,
+    "status": "unverified header claim for predecessor, not delivered SL70"
+  },
+  "implementation_limits": [
+    "Declared ordinary IOG-off setup does not pre-generate entry-bar explicit brackets",
+    "Bar Magnifier does not generate exits absent from main-bar calculation",
+    "Date reset is not the header's 18:00 ET session anchor",
+    "Volume and total-volume Ticks differ on MultiCharts intraday bars",
+    "No exact SL70 report, fill trace or matched account evidence supplied",
+    "Header production/trading directions are not user instructions"
+  ],
+  "primary_sources": [
+    "https://www.multicharts.com/trading-software/index.php?title=How_Scripts_Work",
+    "https://www.multicharts.com/trading-software/index.php?title=Why_is_Data_Playback_strategy_performance_different_from_Backtesting_results%3F",
+    "https://www.multicharts.com/trading-software/index.php?title=SetExitOnClose",
+    "https://www.multicharts.com/trading-software/index.php?title=Volume",
+    "https://www.multicharts.com/trading-software/index.php?title=Ticks"
+  ]
+}

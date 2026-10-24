@@ -1,0 +1,389 @@
+{=============================================================================
+ NQ — FINAL NQ PROP ORB MODEL — OFFICIAL LOCK 2026-08-07
+ Frozen production config. The defaults below ARE the config — insert
+ fresh on a chart and trade; no dialog overrides needed or allowed.
+=============================================================================
+ VALIDATION (predecessor config SL75: 1,179 tr | 59.03% | $241k | 13.6k DD
+   after holiday filter. THIS exact config (SL70/ADX16-20): restamp the
+   four headline numbers here from its first full run.)
+   Prior full-sample audit (SL75 lineage):
+   NO losing year (10/10 green) | top-10 winners = 12.0% of net (pass)
+   Exit mix 37% TP / 26% SL / 36% EOD-flat | green days 53.6% of traded
+   Worst day -$4,450 (3 stops; a 4-stop day never occurred)
+   Re-entries (OnePerSide off): 57.3% win — verified real, ~20% of net
+   Backward exam 2007-16 (scaled stop): ~breakeven grind, no blowup —
+   the edge is MODERN-REGIME. Kill signal: falling realized vol
+   (20d session-range median toward pre-2020 levels -> size down).
+=============================================================================
+ WHAT THIS IS
+   15-min opening range (0930-0945 ET). EntryMode 2 first alignment:
+   enter on first bar beyond the OR with all gates agreeing, 10:00-13:00
+   only. Gates: overnight-range position (ExtraBias 3: top third longs /
+   bottom third shorts), session VWAP side, ADX(16) >= 20, break-candle
+   vol skip 2.5x, OR-size regime band [0, 2] x 20d median. Fixed 70-pt
+   stop, 1R target, max 4/day (DLL: cap forces 2-3 on small accounts),
+   flat 15:30. HOLIDAY FILTER blocks entries on CME half-days (early
+   13:00 close would defeat the flatten -> overnight hold, firm breach).
+   SetExitOnClose backstops any surprise early session end.
+=============================================================================
+ CHART / SETTINGS (part of the strategy)
+   NQ 15-MIN | GLOBEX 18:00->17:00 five rows | EASTERN | bar-CLOSE stamps
+   Bar Magnifier 1-min ON | IOG OFF | MaxBarsBack >= 200
+   Commission $3.51/contract/side | Slippage 1 tick | limit fills need
+   1-tick trade-through | Big Point Value 20 (VERIFY on custom symbols)
+ SIZING (external ladder, not in code): per MNQ 70pts = $140 risk;
+   hold contracts x $1,800 (95th-pct DD est.) <= account cushion;
+   ratchet DOWN when cushion shrinks. 1 micro on fresh 50K.
+=============================================================================}
+
+Inputs:
+    OREndTime(0945),
+    EntryMode(2),                   // 1 = break candle ONLY (strict ORB: gates get
+                                    //     one vote on the break bar, no chasing)
+                                    // 2 = FIRST ALIGNMENT (the "bug", formalized):
+                                    //     enter on the first bar where price is
+                                    //     beyond the range AND every gate agrees —
+                                    //     delayed confirmation, worse price, proven
+                                    //     acceptance. Fully causal.
+    MaxChasePts(0),                 // EntryMode 2 guard: skip if Close is more than
+                                    // this many pts beyond the level (0 = no cap)
+    LatestEntry(1300),
+    FlattenTime(1530),
+    MaxTradesPerDay(4),
+    OnePerSide(false),
+    UseGaoBias(0),
+    ExtraBias(3),                   // second bias gate, stacks with Gao:
+                                    // 0 = off
+                                    // 1 = EMA-200 side (load-bearing in VaultBreak)
+                                    // 2 = overnight gap direction (0930 open vs
+                                    //     prior RTH close — the "accidental filter")
+                                    // 3 = open position in overnight range:
+                                    //     top third = longs, bottom third = shorts,
+                                    //     middle = no trade
+                                    // 4 = prior-day settle location (top/bottom
+                                    //     quartile of its range, continuation read)
+    TrendMALen(200),
+    UseVWAPGate(1),                 // 1 = longs only above session VWAP, shorts only
+                                    //     below (load-bearing in VaultBreak) | 0 = off
+    UseADXGate(1),                  // 1 = only trade when ADX >= ADXMin (trend regime)
+    ADXLen(16), ADXMin(20),
+    UseBreakVolSkip(1),             // 1 = SKIP breaks whose signal candle range is
+                                    //     > BreakSkipMult x the 20-bar avg range —
+                                    //     the StopSkipPoints mechanism (exhaustion
+                                    //     prints are not entries). Load-bearing
+                                    //     pedigree from the locked model.
+    BreakSkipMult(2.5),
+    BarAvgLen(20),
+    RegimeMode(2),                  // 0 = off
+                                    // 1 = VIX band skip: NO trading when prior-day
+                                    //     VIX close is in [VIXLow, VIXHigh) — the
+                                    //     composite's validated 20-25 dead zone.
+                                    //     REQUIRES $VIX daily as DATA2 on the chart.
+                                    // 2 = OR-size band: skip if today's OR range is
+                                    //     outside [MinORx, MaxORx] x trailing median
+    VIXLow(20), VIXHigh(25),
+    MinORx(0), MaxORx(2),           // band = [MinORx, MaxORx] x 20d OR median.
+                                    // WAS 3/3 = zero-width band -> ~no trades ever.
+                                    // 0/2 per the exam-era optimizer decode.
+    ORMedianDays(20),
+    SLPoints(70),                   // fixed stop, points
+    TakeProfitRR(1),                // target = SLPoints x this
+    NumContracts(1),                // fixed size
+    UseHolidayFilter(true),         // block entries on CME half-days/holidays:
+                                    // early 13:00 close defeats the 1530 flatten
+                                    // -> overnight hold -> prop-firm breach.
+                                    // 23 trades in 9.4y, ~zero net: costs nothing.
+    PrintORB(false);
+
+Variables:
+    intrabarpersist ORHigh(0),
+    intrabarpersist ORLow(999999),
+    intrabarpersist ORDone(false),
+    intrabarpersist DTrades(0),
+    intrabarpersist HolidayBlock(false),
+    Mo(0), Dy(0), Dw(0),
+    intrabarpersist TookLong(false),
+    intrabarpersist TookShort(false),
+    intrabarpersist BrokeUp(false),     // first close-through latches; no chasing
+    intrabarpersist BrokeDn(false),
+    intrabarpersist SessH(0),
+    intrabarpersist SessL(999999),
+    intrabarpersist RngEMA(0),          // ~20-session avg session range (causal)
+    intrabarpersist RngMed(0),          // slow expanding reference (median proxy)
+    intrabarpersist RngCount(0),
+    intrabarpersist StopPx(0),
+    intrabarpersist TgtPx(0),
+    intrabarpersist RiskPts(0),
+    intrabarpersist PrevRTHClose(0),
+    intrabarpersist ThisRTHClose(0),
+    intrabarpersist GaoBias(0),
+    intrabarpersist GaoSet(false),
+    intrabarpersist ONHigh(0),      // overnight (18:00->09:30) range
+    intrabarpersist ONLow(999999),
+    intrabarpersist SessOpenPx(0),
+    intrabarpersist PrevDayHi(0),
+    intrabarpersist PrevDayLo(0),
+    intrabarpersist PrevDayCl(0),
+    intrabarpersist CurDayHi(0),
+    intrabarpersist CurDayLo(999999),
+    intrabarpersist XBias(0),       // +1 longs, -1 shorts, 0 = both/none per mode
+    intrabarpersist XBias3(0),      // the ON-range-position read, always computed
+    TrendMA(0), ONPos(0), PDLoc(0),
+    intrabarpersist ORHist1(0), intrabarpersist ORHist2(0),
+    intrabarpersist ORHist3(0), intrabarpersist ORMedApprox(0),
+    intrabarpersist ORCount(0),
+    intrabarpersist RegimeOK(true),
+    VixPrev(0),
+    intrabarpersist cTPV(0),
+    intrabarpersist cVol(0),
+    intrabarpersist SessVWAP(0),
+    intrabarpersist vwDate(0),
+    VWgt(0),
+    GaoOKL(false), GaoOKS(false), CanWork(false),
+    ADXOK(true), BarRngOK(true), AvgRng(0);
+
+// ── session reset ───────────────────────────────────────────────
+TrendMA = XAverage(Close, TrendMALen);
+
+If Date <> Date[1] then begin
+
+    // ── holiday / half-day filter (once per calendar day) ──────────
+    HolidayBlock = false;
+    If UseHolidayFilter then begin
+        Mo = Month(Date); Dy = DayOfMonth(Date); Dw = DayOfWeek(Date);
+        If (Mo = 1  and Dw = 1 and Dy >= 15 and Dy <= 21)                  // MLK (3rd Mon)
+        or (Mo = 2  and Dw = 1 and Dy >= 15 and Dy <= 21)                  // Presidents (3rd Mon)
+        or (Mo = 5  and Dw = 1 and Dy >= 25)                               // Memorial (last Mon)
+        or (Mo = 6  and (Dy = 19 or (Dw = 1 and Dy = 20)
+                                 or (Dw = 5 and Dy = 18)))                 // Juneteenth + observed
+        or (Mo = 7  and (Dy = 3 or Dy = 4 or (Dw = 1 and Dy = 5)))         // July 3/4 + observed
+        or (Mo = 9  and Dw = 1 and Dy <= 7)                                // Labor (1st Mon)
+        or (Mo = 11 and ((Dw = 4 and Dy >= 22 and Dy <= 28)
+                      or (Dw = 5 and Dy >= 23 and Dy <= 29)))              // Thanksgiving Thu+Fri
+        or (Mo = 12 and (Dy = 24 or Dy = 25 or (Dw = 1 and Dy = 26)))      // Christmas Eve + observed
+        then HolidayBlock = true;
+    end;
+
+    // ══ Harvey vol-target: update the range stats with the COMPLETED session ══
+    If SessH > 0 and SessL < 999999 and SessH > SessL then begin
+        If RngEMA = 0 then RngEMA = SessH - SessL
+        else RngEMA = RngEMA + (2.0 / 21.0) * ((SessH - SessL) - RngEMA);
+        If RngMed = 0 then RngMed = RngEMA
+        else RngMed = RngMed + (2.0 / 201.0) * (RngEMA - RngMed);   // slow anchor
+        RngCount = RngCount + 1;
+    end;
+    SessH = 0;  SessL = 999999;
+
+    ORHigh = 0;  ORLow = 999999;  ORDone = false;
+    DTrades = 0;  TookLong = false;  TookShort = false;
+    BrokeUp = false;  BrokeDn = false;
+    PrevRTHClose = ThisRTHClose;
+    ThisRTHClose = 0;
+    GaoBias = 0;  GaoSet = false;
+    PrevDayHi = CurDayHi;  PrevDayLo = CurDayLo;  PrevDayCl = Close[1];
+    CurDayHi = High;  CurDayLo = Low;
+    ONHigh = High;  ONLow = Low;
+    SessOpenPx = 0;  XBias = 0;
+end
+else begin
+    If High > CurDayHi then CurDayHi = High;
+    If Low  < CurDayLo then CurDayLo = Low;
+    If High > SessH then SessH = High;
+    If Low  < SessL then SessL = Low;
+    // overnight range builds until the 09:30 bar
+    If Time <= 0930 or Time >= 1801 then begin
+        If High > ONHigh then ONHigh = High;
+        If Low  < ONLow  then ONLow  = Low;
+    end;
+end;
+
+// capture the 09:30 open and freeze the extra bias once per session
+If SessOpenPx = 0 and Time > 0930 and Time <= 0945 then begin
+    SessOpenPx = Open;
+    If ExtraBias = 1 then begin
+        If SessOpenPx >= TrendMA then XBias = 1 else XBias = -1;
+    end
+    else If ExtraBias = 2 then begin
+        If PrevRTHClose > 0 then begin
+            If SessOpenPx > PrevRTHClose then XBias = 1
+            else If SessOpenPx < PrevRTHClose then XBias = -1;
+        end;
+    end
+    else If ExtraBias = 3 then begin
+        If ONHigh > ONLow then begin
+            ONPos = (SessOpenPx - ONLow) / (ONHigh - ONLow);
+            If ONPos >= 0.67 then XBias = 1
+            else If ONPos <= 0.33 then XBias = -1
+            else XBias = 9;                       // middle third: NO trades
+        end;
+    end;
+
+    // the bias-3 read is ALWAYS computed for conviction sizing
+    XBias3 = 0;
+    If ONHigh > ONLow then begin
+        ONPos = (SessOpenPx - ONLow) / (ONHigh - ONLow);
+        If ONPos >= 0.67 then XBias3 = 1
+        else If ONPos <= 0.33 then XBias3 = -1;
+    end;
+    If 1 = 2 then begin Value1 = Value1; end
+    else If ExtraBias = 4 then begin
+        If PrevDayHi > PrevDayLo and PrevDayCl > 0 then begin
+            PDLoc = (PrevDayCl - PrevDayLo) / (PrevDayHi - PrevDayLo);
+            If PDLoc >= 0.75 then XBias = 1
+            else If PDLoc <= 0.25 then XBias = -1
+            else XBias = 9;                       // middle: no trade
+        end;
+    end;
+    If PrintORB and ExtraBias > 0 then
+        Print("XBIAS ", ELDateToString(Date), " mode=", ExtraBias:0:0, " bias=", XBias:0:0);
+end;
+
+// ══ GAO bias — corrected v2 form (time-bounded, locks at 10:00) ══
+If Time >= 0930 and Time <= 1600 then
+    ThisRTHClose = Close;
+If GaoSet = false and Time >= 1000 and Time <= 1600 then begin
+    If PrevRTHClose > 0 then begin
+        If Close > PrevRTHClose then GaoBias = 1 else GaoBias = -1;
+        GaoSet = true;
+        If PrintORB then
+            Print("GAO ", ELDateToString(Date), " t=", Time:0:0, " bias=", GaoBias:0:0);
+    end;
+end;
+
+// ── session VWAP (18:00-anchored, zero-volume guarded) ──────────
+If Date <> vwDate then begin
+    cTPV = 0;  cVol = 0;  vwDate = Date;
+end;
+VWgt = Volume;
+If VWgt <= 0 then VWgt = 1;
+cTPV = cTPV + ((High + Low + Close) / 3.0) * VWgt;
+cVol = cVol + VWgt;
+If cVol > 0 then SessVWAP = cTPV / cVol else SessVWAP = Close;
+
+// ── opening range ───────────────────────────────────────────────
+If Time > 0930 and Time <= OREndTime then begin
+    If High > ORHigh then ORHigh = High;
+    If Low  < ORLow  then ORLow  = Low;
+end;
+If ORDone = false and Time > OREndTime and ORHigh > 0 then begin
+    ORDone = true;
+
+    // ── regime check, evaluated once per session at OR completion ──
+    RegimeOK = true;
+    If RegimeMode = 1 then begin
+        VixPrev = Close[1] of data2;             // prior COMPLETED VIX daily close
+        RegimeOK = VixPrev < VIXLow or VixPrev >= VIXHigh;
+        If PrintORB and RegimeOK = false then
+            Print("SKIP-VIX ", ELDateToString(Date), " vix=", VixPrev:0:2);
+    end
+    else If RegimeMode = 2 then begin
+        // running median approximation: EMA of recent OR ranges
+        If ORMedApprox > 0 then
+            RegimeOK = (ORHigh - ORLow) >= MinORx * ORMedApprox
+                   and (ORHigh - ORLow) <= MaxORx * ORMedApprox;
+        If ORMedApprox = 0 then ORMedApprox = ORHigh - ORLow
+        else ORMedApprox = ORMedApprox + (2 / (ORMedianDays + 1)) * ((ORHigh - ORLow) - ORMedApprox);
+        ORCount = ORCount + 1;
+        If ORCount < ORMedianDays then RegimeOK = true;   // warmup: no filtering
+        If PrintORB and RegimeOK = false then
+            Print("SKIP-OR ", ELDateToString(Date), " rng=", (ORHigh-ORLow):0:2,
+                  " ref=", ORMedApprox:0:2);
+    end;
+
+    If PrintORB then
+        Print("OR ", ELDateToString(Date), " H=", ORHigh:0:2, " L=", ORLow:0:2);
+end;
+
+GaoOKL = (UseGaoBias = 0)
+         or (UseGaoBias = 2 and Time < 1000)
+         or (GaoSet and GaoBias = 1);
+GaoOKS = (UseGaoBias = 0)
+         or (UseGaoBias = 2 and Time < 1000)
+         or (GaoSet and GaoBias = -1);
+
+ADXOK = UseADXGate = 0 or ADX(ADXLen) >= ADXMin;
+AvgRng = Average(High - Low, BarAvgLen)[1];
+BarRngOK = UseBreakVolSkip = 0 or AvgRng = 0
+           or (High - Low) <= BreakSkipMult * AvgRng;
+
+CanWork = ORDone and RegimeOK and ADXOK and HolidayBlock = false
+          and Time > OREndTime and Time <= LatestEntry
+          and MarketPosition = 0 and DTrades < MaxTradesPerDay;
+
+// ── entries ─────────────────────────────────────────────────────
+// EntryMode 1: only the break candle may enter; a gate rejection kills
+//              the side for the day (latched, no chasing).
+// EntryMode 2: any bar beyond the level with ALL gates agreeing may
+//              enter (first alignment), optionally capped by MaxChasePts.
+If CanWork then begin
+
+    If Close > ORHigh and (OnePerSide = false or TookLong = false)
+       and (EntryMode = 2 or BrokeUp = false)
+       and (EntryMode = 1 or MaxChasePts = 0 or Close - ORHigh <= MaxChasePts) then begin
+
+        If BrokeUp = false then BrokeUp = true;    // mark the break either way
+
+        If GaoOKL and BarRngOK
+           and (ExtraBias = 0 or XBias = 1)
+           and (UseVWAPGate = 0 or Close > SessVWAP) then begin
+            StopPx = Close - SLPoints;
+            RiskPts = SLPoints;
+            TgtPx = Close + SLPoints * TakeProfitRR;
+            Buy ("ORB_L") NumContracts contracts next bar at market;
+            DTrades = DTrades + 1;  TookLong = true;
+        end
+        else If EntryMode = 1 then TookLong = true   // strict: rejected = dead side
+        else If PrintORB then
+            Print("WAIT-L ", ELDateToString(Date), " t=", Time:0:0);
+    end
+    else If Close < ORLow and (OnePerSide = false or TookShort = false)
+       and (EntryMode = 2 or BrokeDn = false)
+       and (EntryMode = 1 or MaxChasePts = 0 or ORLow - Close <= MaxChasePts) then begin
+
+        If BrokeDn = false then BrokeDn = true;
+
+        If GaoOKS and BarRngOK
+           and (ExtraBias = 0 or XBias = -1)
+           and (UseVWAPGate = 0 or Close < SessVWAP) then begin
+            StopPx = Close + SLPoints;
+            RiskPts = SLPoints;
+            TgtPx = Close - SLPoints * TakeProfitRR;
+            SellShort ("ORB_S") NumContracts contracts next bar at market;
+            DTrades = DTrades + 1;  TookShort = true;
+        end
+        else If EntryMode = 1 then TookShort = true
+        else If PrintORB then
+            Print("WAIT-S ", ELDateToString(Date), " t=", Time:0:0);
+    end;
+end;
+
+// ── exits ───────────────────────────────────────────────────────
+SetExitOnClose;   // backstop: flatten on last bar of any session
+
+// Explicit PRICE orders (not dollar Set* stops): immune to Big Point
+// Value, visible as named signals in the trade list, and the stop/
+// target land exactly on StopPx / TgtPx from the signal bar.
+If MarketPosition = 1 then begin
+    If Time >= FlattenTime then
+        Sell ("XL") next bar at market
+    else begin
+        Sell ("L-SL") next bar at StopPx stop;
+        Sell ("L-TP") next bar at TgtPx limit;
+        If PrintORB then
+            Print("POS-L ", ELDateToString(Date), " t=", Time:0:0,
+                  " C=", Close:0:2, " Stop=", StopPx:0:2, " Tgt=", TgtPx:0:2,
+                  " RiskPts=", RiskPts:0:2, " BPV=", BigPointValue:0:2);
+    end;
+end;
+If MarketPosition = -1 then begin
+    If Time >= FlattenTime then
+        BuyToCover ("XS") next bar at market
+    else begin
+        BuyToCover ("S-SL") next bar at StopPx stop;
+        BuyToCover ("S-TP") next bar at TgtPx limit;
+        If PrintORB then
+            Print("POS-S ", ELDateToString(Date), " t=", Time:0:0,
+                  " C=", Close:0:2, " Stop=", StopPx:0:2, " Tgt=", TgtPx:0:2,
+                  " RiskPts=", RiskPts:0:2, " BPV=", BigPointValue:0:2);
+    end;
+end;
