@@ -149,6 +149,11 @@ Do it after 15:59 CT or on a weekend, with every account flat. Each line is an e
   through. MultiCharts' "point" is the symbol's smallest price unit. Our Python tests require 1 full point through, so
   Python is slightly stricter than MC (conservative); to reproduce an MC report trade-for-trade, use 1 tick through.
 - Data: Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close conversion unchecked.
+- **COMEX / NYMEX symbols (@GC, @CL) run on NEW YORK time in our MultiCharts** (2026-10-24, GC_COMBO): "Exchange" time zone on
+  a gold chart = Eastern, unlike @NQ / @ES (Central). Found from the GC_COMBO report: every 'chart 09:01' entry was our 08:01 CT
+  price, so its ETminusChart had to be 0, not the author's 1. A chart mixing CME and COMEX symbols (or an ASCII file mapped as
+  CME) on Exchange time gives "Instruments from different time zones cannot be mixed": map the ASCII symbol with the same
+  exchange as Data1 (COMEX), or put every instrument on Local time.
 - Auto trading: Format Signals > Properties > Auto Trading (broker, account), mode AA, initial position Flat, no automatic
   position sync, intra-bar order generation off. Tracker: Ctrl+Shift+O.
 - The ACCOUNT is behind the gear icon next to the broker plug-in (Strategy Properties > Auto Trading > Rithmic > gear).
