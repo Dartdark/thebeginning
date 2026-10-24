@@ -4,6 +4,8 @@ Pieces (daily $ per 1 micro, 2018-01 -> 2026-10, after costs):
   - the 10 funded-plan strategies (agents/tasks/plan_daily_pnl.csv; RS both sides; CL fade per MCL, ES MOC per MES)
   - FC 2B v2 (checks/candidates/fc_2b/trades.csv = MultiCharts v2 trades after $7.25 + 1 tick, per NQ / 10)
   - Twin Continuation v2.1 (checks/candidates/twin_continuation/trades.csv, per NQ / 10; holds overnight, uncapped stop)
+  - OvernightAnomaly v4.1 = Block B of the user's merged file (checks/candidates/overnight_anomaly/trades.csv, rebuild
+    analysis/overnight_anomaly_test.py, per NQ / 10; long 17:30 -> 02:30 CT after a down RTH day; added 2026-10-24, user)
 Micro costs: the repo's per-NQ costs / 10 give $0.725 commission per round trip; real micro commissions are ~$1.25, so
 $0.55 more is charged per micro trade (plan pieces: per day with a trade, a slight underestimate for VB's re-entries).
 Portfolio = every piece at 1 micro. Sizing: Davey (size for half the drawdown you think you can take) and Radge
@@ -69,10 +71,12 @@ if __name__ == "__main__":
     tw_mc, _ = from_trades(None, "TwinContinuation", tmc)
     tw_exit = tw.copy()
     tw = twin_marked(days)          # main since 2026-10-24: overnight holds marked at each 16:00 CT close (was booked at exit)
-    P = pd.concat([p, fc, tw], axis=1)
+    oa, noa = from_trades("checks/candidates/overnight_anomaly/trades.csv", "OvernightAnomaly")
+    P = pd.concat([p, fc, tw, oa], axis=1)
     names = {"VaultBreak": "Vault Break", "OvernightBiasML": "ONB ML", "MondayLong": "Monday Long", "ExpirationOpenShort": "EOS",
              "LateDayFlow": "Late-Day Flow", "NFPFade": "NFP Fade", "BridgeMondayLong": "Bridge Monday", "CLSundayFade_perMCL": "CL Sunday (MCL)",
-             "ESMOCFollow_perMES": "ES MOC (MES)", "RelativeStrength": "Relative Strength", "FC2B": "FC 2B", "TwinContinuation": "Twin Continuation"}
+             "ESMOCFollow_perMES": "ES MOC (MES)", "RelativeStrength": "Relative Strength", "FC2B": "FC 2B", "TwinContinuation": "Twin Continuation",
+             "OvernightAnomaly": "Overnight Anomaly"}
     yrs = len(P) / 252
     print(f"\n1. Pieces at 1 micro each, {days.min().date()} -> {days.max().date()} ({yrs:.1f} years), after micro costs:")
     rows = []
@@ -104,13 +108,18 @@ if __name__ == "__main__":
     need = dm["dd_p95"] / 0.20
     print(f"   capital for 1x at the 20% rule: ${need:,.0f}")
 
+    t12 = tot - P["OvernightAnomaly"]; d12 = MC.daily_mc(t12.values, horizon=252, n=5000, block=20, trail=1e12); e12 = t12.cumsum()
+    print(f"   before Overnight Anomaly (12 pieces): ${t12.sum() / yrs:,.0f} a year, Sharpe {t12.mean() / t12.std() * np.sqrt(252):.2f}, "
+          f"max DD ${-(e12 - e12.cummax()).min():,.0f}, MC p50 ${d12['pnl_p50']:,.0f}, DD p95 ${d12['dd_p95']:,.0f}, return/DD {d12['ret_dd']:.1f}, "
+          f"capital at the 20% rule ${d12['dd_p95'] / 0.20:,.0f}")
+
     print("\n4. Without Twin Continuation (its uncapped swing stop is the biggest single-trade risk):")
     t2 = tot - P["TwinContinuation"]; d2 = MC.daily_mc(t2.values, horizon=252, n=5000, block=20, trail=1e12); e2 = t2.cumsum()
     print(f"   ${t2.sum() / yrs:,.0f} a year, max DD ${-(e2 - e2.cummax()).min():,.0f}, MC p50 ${d2['pnl_p50']:,.0f}, DD p95 ${d2['dd_p95']:,.0f}, "
           f"return/DD {d2['ret_dd']:.1f}, capital at the 20% rule ${d2['dd_p95'] / 0.20:,.0f}")
     for nm_, twx in (("Twin = MultiCharts v2 report", tw_mc), ("Twin booked at exit (before 2026-10-24)", tw_exit)):
         alt = tot - P["TwinContinuation"] + twx; da = MC.daily_mc(alt.values, horizon=252, n=5000, block=20, trail=1e12); ea = alt.cumsum()
-        print(f"   full 12 with {nm_}: ${alt.sum() / yrs:,.0f} a year, max DD ${-(ea - ea.cummax()).min():,.0f}, MC p50 ${da['pnl_p50']:,.0f}, "
+        print(f"   full 13 with {nm_}: ${alt.sum() / yrs:,.0f} a year, max DD ${-(ea - ea.cummax()).min():,.0f}, MC p50 ${da['pnl_p50']:,.0f}, "
               f"DD p95 ${da['dd_p95']:,.0f}, capital at the 20% rule ${da['dd_p95'] / 0.20:,.0f} (Twin alone ${twx.sum() / yrs:,.0f} a year vs port ${P['TwinContinuation'].sum() / yrs:,.0f})")
     print(f"   worst single Twin trade per MNQ ${pd.read_csv('checks/candidates/twin_continuation/trades.csv').net.min() / 10:,.0f}; "
           f"worst portfolio day ${tot.min():,.0f}")
@@ -127,10 +136,10 @@ if __name__ == "__main__":
 
     print("\n6. + S30 IBS reversal (NQ + ES, 1 micro each; daily marked; checks/candidates/s30_ibs/), user's file 2026-10-23:")
     s30 = pd.read_csv("checks/candidates/s30_ibs/daily_nq_es_per_micro.csv", index_col=0, parse_dates=True).iloc[:, 0].reindex(days, fill_value=0.0)
-    for nm, base in (("full 12", tot), ("set D (9)", P[["TwinContinuation", "OvernightBiasML", "BridgeMondayLong", "CLSundayFade_perMCL", "NFPFade",
+    for nm, base in (("full 13", tot), ("set D (9)", P[["TwinContinuation", "OvernightBiasML", "BridgeMondayLong", "CLSundayFade_perMCL", "NFPFade",
                                                          "ExpirationOpenShort", "VaultBreak", "RelativeStrength", "ESMOCFollow_perMES"]].sum(axis=1))):
         for lab_, x in ((nm, base), (nm + " + S30", base + s30)):
             d = MC.daily_mc(x.values, horizon=252, n=5000, block=20, trail=1e12); e = x.cumsum()
             print(f"   {lab_:<18} ${x.sum() / yrs:,.0f} a year, Sharpe {x.mean() / x.std() * np.sqrt(252):.2f}, max DD ${-(e - e.cummax()).min():,.0f}, "
                   f"MC p50 ${d['pnl_p50']:,.0f}, DD p95 ${d['dd_p95']:,.0f}, return/DD {d['ret_dd']:.1f}, capital at the 20% rule ${d['dd_p95'] / 0.20:,.0f}")
-    print(f"   S30 corr with the 12-piece portfolio: {np.corrcoef(s30, tot)[0, 1]:+.2f}")
+    print(f"   S30 corr with the 13-piece portfolio: {np.corrcoef(s30, tot)[0, 1]:+.2f}")
