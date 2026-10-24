@@ -88,13 +88,17 @@ if __name__ == "__main__":
     if MODE == "combine": combine(); sys.exit()
     lab, total = lab_with_fees()
     if MODE == "worker":
-        seed, n = int(sys.argv[3]), int(sys.argv[4])
-        res, y1, _ = FB.Boot(lab).run(plans(), n=n, L=20, seed=seed)
-        pickle.dump((res, y1), open(SP + f"rf_boot_{seed}.pkl", "wb")); print(f"[worker {seed} done {time.time() - T0:.0f}s]"); sys.exit()
+        seed, n = int(sys.argv[3]), int(sys.argv[4]); only = sys.argv[5].split(",") if len(sys.argv) > 5 else None
+        pl = {k: v for k, v in plans().items() if only is None or any(o in k for o in only)}
+        res, y1, _ = FB.Boot(lab).run(pl, n=n, L=20, seed=seed)       # a plan's result depends only on its own pieces
+        pickle.dump((res, y1), open(SP + f"rf_boot_{seed}{'_redo' if only else ''}.pkl", "wb")); print(f"[worker {seed} done {time.time() - T0:.0f}s]"); sys.exit()
     yrs = len(lab.tr) / 252
     print("\nExtra fees at $1.04 per micro, $ per 1 micro per year (2018-2026):",
           {k.split("|")[0]: round(v / yrs) for k, v in total.items() if k.endswith("|0")})
-    parts = [pickle.load(open(f, "rb")) for f in sorted(glob.glob(SP + "rf_boot_*.pkl"))]
+    parts = [pickle.load(open(f, "rb")) for f in sorted(glob.glob(SP + "rf_boot_[0-9].pkl"))]
+    for s_ in range(len(parts)):              # plans rerun after the 2026-10-24 S47 / Kusho grid-row fix replace the old rows
+        f = SP + f"rf_boot_{s_ + 1}_redo.pkl"
+        if glob.glob(f): r2 = pickle.load(open(f, "rb")); parts[s_][0].update(r2[0]); parts[s_][1].update(r2[1])
     res = {k: np.concatenate([p[0][k] for p in parts]) for k in plans()}; y1 = {k: np.concatenate([p[1][k] for p in parts]) for k in plans()}
     B = FB.Boot(lab); B.run = lambda *a, **k: (res, y1, 0)
     for i, fee in enumerate(FEES):

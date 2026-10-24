@@ -18,10 +18,12 @@ MODE = sys.argv[2] if len(sys.argv) > 2 else "merge"
 KIND = {"stop": 0, "target": 1, "flat": 2, "eod": 2}
 
 
-def trades(name):
+def trades(name, g=None):
     t = pd.read_csv(f"checks/candidates/kusho/python_trades_{name}.csv", parse_dates=["date"])
     t["day"] = t.fm // 1440; t["j0"] = t.fm % 1440; t["j1"] = t.xm % 1440; t["kind"] = t.kind.map(KIND)
     assert (t.xm // 1440 == t.day).all()
+    if g is not None:        # fm / xm count minutes on the grid they were made on (2016-09-29 start); place trades by date
+        t["day"] = pd.Series(np.arange(len(g.ts)), index=pd.DatetimeIndex(g.ts)).reindex(t.date).to_numpy().astype(int)
     return t
 
 
@@ -31,8 +33,8 @@ if __name__ == "__main__":
     lab = fast_plan_lab(SP); FB.add_moc_mes(lab, SP)
     rs = pd.read_csv(SP + "rs_trades.csv"); rs["kind"] = rs.kind.map({"stop": 0, "target": 1, "flat": 2})
     lab.add("RS_L", rs[rs.side > 0].reset_index(drop=True))
-    for nm in ("v9_RTH", "C03"): lab.add(nm, trades(nm), slippage=False)
-    print("per NQ from the lab: " + ", ".join(f"{nm} ${lab.C[nm].sum() * 10 / len(trades(nm)):.0f}" for nm in ("v9_RTH", "C03")))
+    for nm in ("v9_RTH", "C03"): lab.add(nm, trades(nm, lab.g), slippage=False)
+    print("per NQ from the lab: " + ", ".join(f"{nm} ${lab.C[nm].sum() * 10 / len(trades(nm, lab.g)):.0f}" for nm in ("v9_RTH", "C03")))
     CUR = {**FB.PLAN, "VB_N": 2, "MOC_MES": 2, "RS_L": 1}
     drop = lambda *ks: {k: v for k, v in CUR.items() if k not in ks}
     plans = {"plan": CUR, "+ Kusho v9 15:45 1 MNQ": {**CUR, "v9_RTH": 1}, "+ Kusho v9 15:45 2 MNQ": {**CUR, "v9_RTH": 2},
@@ -56,7 +58,7 @@ if __name__ == "__main__":
     P = {}
     for nm, t in (("VB", with_slippage(load_mc(g, REPORTS["VB"][0]))), ("ONB30", with_slippage(load_mc(g, CL.ONB30))),
                   ("MON_BR", load_bridge_mc(g)), ("EOS", with_slippage(load_mc(g, REPORTS["EOS"][0]))),
-                  ("K9", trades("v9_RTH")), ("C03", trades("C03"))):
+                  ("K9", trades("v9_RTH", g)), ("C03", trades("C03", g))):
         w, r = paths(g, t); P[nm] = (w[trr] / 10, r[trr] / 10)
     risk = lambda dollars, m: np.floor(dollars / (np.nan_to_num(m * atr[trr], nan=1e12) * 2))[:, None]
     q = {"VB": 8.0, "ONB30": risk(1100, 0.25), "MON_BR": 2.0, "EOS": risk(500, REPORTS["EOS"][1])}

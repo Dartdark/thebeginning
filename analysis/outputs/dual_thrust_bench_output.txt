@@ -1,0 +1,28 @@
+Dual Thrust v4 (user's file, 2026-10-24; rebuild analysis/dual_thrust_test.py) in the Apex plans: add or replace.
+[CL fade trades 96, avg $653 per CL]
+[DT trades 1611, $140 per NQ in the lab]
+
+A. 50K funded, bootstrapped (1000 paired histories from 4 workers, 20-day blocks, 2 years):
+                         y1 y1_p5      y2  y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan                 $9,349    $0 $12,078     $0 $13,000  7.2%   91.8%   258      50.0%      $0       0.0%
++ DT 1 MNQ           $9,558    $0 $11,954     $0 $13,000  7.9%   91.1%   252      49.4%   $-124       0.7%
++ DT longs 1         $9,254    $0 $12,026     $0 $13,000  7.4%   91.4%   262      49.5%    $-52       0.2%
++ DT shorts 1        $9,642    $0 $11,951     $0 $13,000  8.4%   90.9%   250      49.6%   $-127       1.2%
+RS longs -> DT 1     $9,504    $0 $12,168 $1,500 $13,000  6.4%   92.5%   256      50.2%     $90      -0.8%
+VB 2/1 -> 1/1 + DT 1 $9,232    $0 $12,184     $0 $13,000  5.8%   92.4%   261      50.2%    $106      -1.4%
+EOS -> DT 1          $8,749    $0 $12,006     $0 $13,000  7.0%   90.8%   274      49.6%    $-72      -0.2%
+LDF -> DT 1          $8,679    $0 $11,744     $0 $13,000  9.2%   88.8%   272      48.0%   $-334       2.0%
+
+   Daily correlation of DT with the plan pieces:
+DT            1.00
+VB_N          0.14
+VB_F          0.09
+ONB_ML2_MC    0.15
+MON_MC        0.07
+EOS           0.09
+LDF_MC        0.03
+NFP_MC        0.02
+MON_BR_MC     0.06
+CLS           0.03
+MOC_MES      -0.02
+RS_L          0.14

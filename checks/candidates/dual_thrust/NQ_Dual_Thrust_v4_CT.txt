@@ -1,0 +1,237 @@
+{=============================================================================
+ NQ DUAL THRUST — OFFICIAL LOCK v4, CENTRAL-TIME BUILD (2026-09-06)
+ *** ALL FIVE CLOCK INPUTS ARE CHICAGO/CENTRAL TIME ***
+ For a chart whose session rows read 17:00->16:00 (CME/Rithmic default).
+ DO NOT run this file on an Eastern chart — verify the session rows.
+=============================================================================
+ v4 CHANGE (2026-09-06): EntryBarStop(true). ONE input. Everything else = v3.
+   THIS IS A PROTECTION FIX, NOT A MODEL CHANGE. Same triggers, same
+   band, same cap, same 50/100 bracket, same flatten.
+ THE GAP (Astra's finding, confirmed in the v3 source): the trigger bar
+   issues "Buy next bar at market"; the fill lands at the next bar's open;
+   but v3 generated the stop only inside "If MarketPosition = 1", which
+   is evaluated at bar CLOSE — so the entry bar ran for one full minute
+   with NO stop working. The backtest simulated that same gap, so every
+   v3 number already includes it; this was LIVE tail risk (a 1-minute
+   air-pocket on the fill bar), not an evidence problem.
+ THE FIX: the trigger bar now also issues an explicit stop order
+   ("DT_SL0" / "DT_SL0s") at trigger-bar CLOSE -/+ SLPoints, active
+   during the entry bar. From the entry bar's close onward the normal
+   EntryPrice-anchored stop ("DT_SL" / "DT_SLs") takes over. The entry-
+   bar stop is referenced to the trigger close because the fill price is
+   not known when the order is written; on a gapped open it is up to a
+   few points wider or tighter than 50 for that one bar, then re-anchors.
+ WHY NOT SetStopLoss / SetProfitTarget (Astra's OEA_DT_PROTECTION file):
+   dollar Set* exits were proven NOT to fire in this MultiCharts install
+   (ORB postmortem 2026-08-07: trades ignored SL/TP and flattened at EOD).
+   House rule: explicit price orders only. That file is not a lock.
+ CONFIRMATION RUN (pre-registered, one look): run v4 vs v3 on the same
+   chart/dates at "$10 per contract". PASS = net/DD within ±0.3 of v3 in
+   all three eras (2017-19 / 2020-24 / 2025-26) and worst single-day
+   loss no larger. A larger change means the trigger-close reference is
+   stopping trades v3 kept — report it, don't adopt on win rate.
+ LINEAGE: v3 (2026-09-04) BandMax 1.9 -> 1.2. v2 (2026-09-04)
+   MaxTradesPerDay(1). v1 = CT port of the Aug-30 lock. Set
+   EntryBarStop(false) to reproduce v3 byte-for-byte.
+=============================================================================
+ *** COST — set slippage as "$10 per contract", NOT "2 ticks" (symbol
+   tick-size bug charges $0.40/fill). Commission $3.50/side. MC slippage
+   is PER SIDE.
+ v3 EVIDENCE at $10/contract (operator's MC, 2017-01 -> 2026-09):
+   net $208k, NO red years. Pre-fix: $238k / DD $19k / net/DD ~12.5 /
+   win 45.75% / avg $135. Sep-6 re-run 2017-04 -> 2026-06: $217k / DD
+   $19.4k / net/DD 11.23 / era 8.01 / 6.41 / 4.14.
+ THE SEARCH IS CLOSED (Sep 4-6, 2026; ~33 looks, era-split): fast-alpha,
+   limit/retrace entry, ADR-scaled stop, 3R bracket (30/90), breakeven,
+   time stop, re-entry, volume regime, volume profile, prior value, IB,
+   POC shape, 12 order-flow features, realized-vol sizing, VIX sizing
+   both directions, VIX band skips all three bands. Adopted: two
+   REMOVALS (1TPD, band 1.2) and this protection. Pending one look:
+   TPPoints 150 / 0 — if it fails, the bracket is closed for good.
+=============================================================================
+ WHAT THIS IS
+   Chalek's Dual Thrust, house build. RR = max(prior-day RTH high -
+   prior-day RTH close, prior-day RTH close - prior-day RTH low). Long
+   when a 1-min close > today's open + 0.5 x RR; short when close 
+   open - 0.5 x RR. ONE entry per day. Fixed 50-pt stop, 100-pt target,
+   flat 14:55 CT, entries stop at 14:30 CT. Skip the day if RR > 1.2 x
+   ADR20. Stop is live from the fill bar onward (v4).
+=============================================================================
+ *** TIME-ZONE PRESETS — SET THESE TO MATCH THE CHART, NOT THE CODE ***
+     EASTERN chart (18:00->17:00): 930 | 1600 | 1800 | 1530 | 1555
+     CENTRAL chart (17:00->16:00): 830 | 1500 | 1700 | 1430 | 1455
+ CHART: NQ 1-MIN | GLOBEX five rows | bar-CLOSE stamps | IOG OFF
+        MaxBarsBack >= 60 | Bar Magnifier N/A on 1-min
+ SIZING: 150K-tier model. FORWARD TRIPWIRE: rolling 6-month net/DD below
+   half the backtest figure -> size to zero and reassess.
+=============================================================================}
+
+Inputs:
+    NDays(1),                   // RR lookback in RTH days
+    KMult(0.5),                 // trigger band = open +/- K x RR
+    SLPoints(50),
+    TPPoints(100),
+    AllowReverse(true),         // moot at MaxTradesPerDay(1); kept for v1 parity
+    MaxTradesPerDay(1),         // v2: ONE entry per day. 0 = unlimited (= v1)
+    EntryBarStop(true),         // v4: stop active DURING the entry bar (false = LOCK v3)
+    RTHStartTime(830),          // CENTRAL (ET 930)
+    RTHEndTime(1500),           // CENTRAL (ET 1600)
+    SessionRollTime(1700),      // CENTRAL (ET 1800)
+    EntryEndTime(1430),         // CENTRAL (ET 1530)
+    FlattenTime(1455),          // CENTRAL (ET 1555)
+    BandMax(1.2),               // v3: skip day if RR / ADR20 exceeds this (was 1.9)
+    NumContracts(1),
+    UseHolidayFilter(true),
+    PrintDT(false);
+
+Variables:
+    intrabarpersist RTH_H(0), intrabarpersist RTH_L(999999),
+    intrabarpersist RTH_C(0), intrabarpersist RTH_O(0),
+    intrabarpersist DayOpen(0),
+    intrabarpersist RR(0), intrabarpersist UpTrig(0), intrabarpersist DnTrig(0),
+    intrabarpersist Armed(false), intrabarpersist DayBlocked(false),
+    intrabarpersist ADR20(0), intrabarpersist DayCt(0),
+    intrabarpersist BlockL(false), intrabarpersist BlockS(false),
+    intrabarpersist PrevPos(0),
+    intrabarpersist HolidayBlock(false),
+    intrabarpersist DayTrades(0),
+    CapOK(false),
+    Mo(0), Dy(0), Dw(0),
+    hh(0), lc(0), hc(0), ll(0), kk(0);
+
+Arrays:
+    DH[6](0), DL[6](0), DC[6](0), DRng[21](0);
+
+// ── session roll: bank the completed RTH day ────────────────────
+If Time > SessionRollTime and Time[1] <= SessionRollTime then begin
+    If RTH_H > 0 and RTH_L < 999999 and RTH_H > RTH_L then begin
+        For kk = 5 downto 1 begin
+            DH[kk] = DH[kk-1];  DL[kk] = DL[kk-1];  DC[kk] = DC[kk-1];
+        end;
+        DH[0] = RTH_H;  DL[0] = RTH_L;  DC[0] = RTH_C;
+        For kk = 20 downto 1 begin DRng[kk] = DRng[kk-1]; end;
+        DRng[0] = RTH_H - RTH_L;
+        DayCt = DayCt + 1;
+        If DayCt >= 20 then begin
+            ADR20 = 0;
+            For kk = 0 to 19 begin ADR20 = ADR20 + DRng[kk]; end;
+            ADR20 = ADR20 / 20;
+        end;
+    end;
+    RTH_H = 0;  RTH_L = 999999;  RTH_C = 0;  RTH_O = 0;
+    DayOpen = 0;  Armed = false;  DayBlocked = false;
+    BlockL = false;  BlockS = false;  PrevPos = 0;
+    DayTrades = 0;
+end;
+
+// ── holiday / half-day filter ───────────────────────────────────
+If Date <> Date[1] then begin
+    HolidayBlock = false;
+    If UseHolidayFilter then begin
+        Mo = Month(Date); Dy = DayOfMonth(Date); Dw = DayOfWeek(Date);
+        If (Mo = 1  and Dw = 1 and Dy >= 15 and Dy <= 21)
+        or (Mo = 2  and Dw = 1 and Dy >= 15 and Dy <= 21)
+        or (Mo = 5  and Dw = 1 and Dy >= 25)
+        or (Mo = 6  and (Dy = 19 or (Dw = 1 and Dy = 20)
+                                 or (Dw = 5 and Dy = 18)))
+        or (Mo = 7  and (Dy = 3 or Dy = 4 or (Dw = 1 and Dy = 5)))
+        or (Mo = 9  and Dw = 1 and Dy <= 7)
+        or (Mo = 11 and ((Dw = 4 and Dy >= 22 and Dy <= 28)
+                      or (Dw = 5 and Dy >= 23 and Dy <= 29)))
+        or (Mo = 12 and (Dy = 24 or Dy = 25 or (Dw = 1 and Dy = 26)))
+        then HolidayBlock = true;
+    end;
+end;
+
+// ── RTH tracking + arm the day's triggers at the open ───────────
+If Time > RTHStartTime and Time <= RTHEndTime then begin
+    If RTH_O = 0 then RTH_O = Open;
+    If High > RTH_H then RTH_H = High;
+    If Low  < RTH_L then RTH_L = Low;
+    RTH_C = Close;
+
+    If DayOpen = 0 then begin
+        DayOpen = Open;
+        If NDays >= 1 and NDays <= 5 and DC[NDays-1] > 0 and ADR20 > 0 then begin
+            hh = DH[0];  lc = DC[0];  hc = DC[0];  ll = DL[0];
+            For kk = 0 to NDays - 1 begin
+                If DH[kk] > hh then hh = DH[kk];
+                If DC[kk] < lc then lc = DC[kk];
+                If DC[kk] > hc then hc = DC[kk];
+                If DL[kk] < ll then ll = DL[kk];
+            end;
+            RR = MaxList(hh - lc, hc - ll);
+            If RR > 0 then begin
+                UpTrig = DayOpen + KMult * RR;
+                DnTrig = DayOpen - KMult * RR;
+                Armed = true;
+                DayBlocked = BandMax > 0 and RR / ADR20 > BandMax;
+                If PrintDT then
+                    Print("DT ", ELDateToString(Date), " O=", DayOpen:0:2,
+                          " RR=", RR:0:2, " band=", (RR/ADR20):0:2,
+                          " up=", UpTrig:0:2, " dn=", DnTrig:0:2,
+                          " blocked=", DayBlocked);
+            end;
+        end;
+    end;
+end;
+
+// ── side blocking after a bracket exit ──────────────────────────
+If MarketPosition = 0 and PrevPos = 1 and Time < FlattenTime then BlockL = true;
+If MarketPosition = 0 and PrevPos = -1 and Time < FlattenTime then BlockS = true;
+PrevPos = MarketPosition;
+
+// ── daily trade cap (v2) ────────────────────────────────────────
+If MaxTradesPerDay <= 0 then CapOK = true
+else CapOK = DayTrades < MaxTradesPerDay;
+
+// ── entries / stop-and-reverse ──────────────────────────────────
+If Armed and DayBlocked = false and HolidayBlock = false and CapOK
+   and Time > RTHStartTime and Time <= EntryEndTime then begin
+
+    If Close > UpTrig and MarketPosition <> 1 and BlockL = false then begin
+        If MarketPosition = -1 and AllowReverse = false then Value1 = 0
+        else begin
+            Buy ("DT_L") NumContracts contracts next bar at market;
+            If EntryBarStop and SLPoints > 0 then
+                Sell ("DT_SL0") next bar at Close - SLPoints stop;   // entry-bar protection
+            BlockS = false;
+            DayTrades = DayTrades + 1;
+        end;
+    end
+    else If Close < DnTrig and MarketPosition <> -1 and BlockS = false then begin
+        If MarketPosition = 1 and AllowReverse = false then Value1 = 0
+        else begin
+            SellShort ("DT_S") NumContracts contracts next bar at market;
+            If EntryBarStop and SLPoints > 0 then
+                BuyToCover ("DT_SL0s") next bar at Close + SLPoints stop;   // entry-bar protection
+            BlockL = false;
+            DayTrades = DayTrades + 1;
+        end;
+    end;
+end;
+
+// ── exits: explicit price orders (never dollar Set* — house bug) ─
+SetExitOnClose;
+
+If MarketPosition = 1 then begin
+    If Time >= FlattenTime then
+        Sell ("DT_XL") next bar at market
+    else begin
+        If SLPoints > 0 then
+            Sell ("DT_SL") next bar at EntryPrice - SLPoints stop;
+        If TPPoints > 0 then
+            Sell ("DT_TP") next bar at EntryPrice + TPPoints limit;
+    end;
+end;
+
+If MarketPosition = -1 then begin
+    If Time >= FlattenTime then
+        BuyToCover ("DT_XS") next bar at market
+    else begin
+        If SLPoints > 0 then
+            BuyToCover ("DT_SLs") next bar at EntryPrice + SLPoints stop;
+        If TPPoints > 0 then
+            BuyToCover ("DT_TPs") next bar at EntryPrice - TPPoints limit;
+    end;
+end;
