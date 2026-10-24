@@ -4,6 +4,8 @@ Pieces (daily $ per 1 micro, 2018-01 -> 2026-10, after costs):
   - the 10 funded-plan strategies (agents/tasks/plan_daily_pnl.csv; RS both sides; CL fade per MCL, ES MOC per MES)
   - FC 2B v2 (checks/candidates/fc_2b/trades.csv = MultiCharts v2 trades after $7.25 + 1 tick, per NQ / 10)
   - Twin Continuation v2.1 (checks/candidates/twin_continuation/trades.csv, per NQ / 10; holds overnight, uncapped stop)
+  - Kusho v9 21:00 (roll-adjusted, checks/candidates/kusho/python_trades_v9_rolladj.csv, booked on the exit day) and S47 v2
+    (checks/candidates/s47_v2/python_trades_v2.csv), per NQ / 10; added 2026-10-24 (user), still forward-logged
   - Dual Thrust v4 (checks/candidates/dual_thrust/trades.csv = rebuild analysis/dual_thrust_test.py, per NQ / 10; added
     2026-10-24, user)
   - OvernightAnomaly v4.1 = Block B of the user's merged file (checks/candidates/overnight_anomaly/trades.csv, rebuild
@@ -75,11 +77,17 @@ if __name__ == "__main__":
     tw = twin_marked(days)          # main since 2026-10-24: overnight holds marked at each 16:00 CT close (was booked at exit)
     oa, noa = from_trades("checks/candidates/overnight_anomaly/trades.csv", "OvernightAnomaly")
     dth, ndt = from_trades("checks/candidates/dual_thrust/trades.csv", "DualThrust")    # added 2026-10-24 (user)
-    P = pd.concat([p, fc, tw, oa, dth], axis=1)
+    # Kusho v9 (21:00 exit, weekend holds; roll-adjusted rule, booked on its exit day) and S47 v2: added 2026-10-24 (user),
+    # both still on the forward log (agents/codex/FORWARD_LOG.md)
+    k21 = pd.read_csv("checks/candidates/kusho/python_trades_v9_rolladj.csv", parse_dates=["date", "exit_date"])
+    ku, nku = from_trades(None, "Kusho", k21.assign(date=k21.exit_date))
+    s47, ns47 = from_trades("checks/candidates/s47_v2/python_trades_v2.csv", "S47")
+    P = pd.concat([p, fc, tw, oa, dth, ku, s47], axis=1)
     names = {"VaultBreak": "Vault Break", "OvernightBiasML": "ONB ML", "MondayLong": "Monday Long", "ExpirationOpenShort": "EOS",
              "LateDayFlow": "Late-Day Flow", "NFPFade": "NFP Fade", "BridgeMondayLong": "Bridge Monday", "CLSundayFade_perMCL": "CL Sunday (MCL)",
              "ESMOCFollow_perMES": "ES MOC (MES)", "RelativeStrength": "Relative Strength", "FC2B": "FC 2B", "TwinContinuation": "Twin Continuation",
-             "OvernightAnomaly": "Overnight Anomaly", "DualThrust": "Dual Thrust"}
+             "OvernightAnomaly": "Overnight Anomaly", "DualThrust": "Dual Thrust",
+             "Kusho": "Kusho v9", "S47": "S47 v2"}
     yrs = len(P) / 252
     print(f"\n1. Pieces at 1 micro each, {days.min().date()} -> {days.max().date()} ({yrs:.1f} years), after micro costs:")
     rows = []
@@ -111,11 +119,15 @@ if __name__ == "__main__":
     need = dm["dd_p95"] / 0.20
     print(f"   capital for 1x at the 20% rule: ${need:,.0f}")
 
-    t13 = tot - P["DualThrust"]; d13 = MC.daily_mc(t13.values, horizon=252, n=5000, block=20, trail=1e12); e13 = t13.cumsum()
+    t14 = tot - P["Kusho"] - P["S47"]; d14 = MC.daily_mc(t14.values, horizon=252, n=5000, block=20, trail=1e12); e14 = t14.cumsum()
+    print(f"   before Kusho + S47 (14 pieces): ${t14.sum() / yrs:,.0f} a year, Sharpe {t14.mean() / t14.std() * np.sqrt(252):.2f}, "
+          f"max DD ${-(e14 - e14.cummax()).min():,.0f}, MC p50 ${d14['pnl_p50']:,.0f}, DD p95 ${d14['dd_p95']:,.0f}, return/DD {d14['ret_dd']:.1f}, "
+          f"capital at the 20% rule ${d14['dd_p95'] / 0.20:,.0f}")
+    t13 = t14 - P["DualThrust"]; d13 = MC.daily_mc(t13.values, horizon=252, n=5000, block=20, trail=1e12); e13 = t13.cumsum()
     print(f"   before Dual Thrust (13 pieces): ${t13.sum() / yrs:,.0f} a year, Sharpe {t13.mean() / t13.std() * np.sqrt(252):.2f}, "
           f"max DD ${-(e13 - e13.cummax()).min():,.0f}, MC p50 ${d13['pnl_p50']:,.0f}, DD p95 ${d13['dd_p95']:,.0f}, return/DD {d13['ret_dd']:.1f}, "
           f"capital at the 20% rule ${d13['dd_p95'] / 0.20:,.0f}")
-    t12 = tot - P["OvernightAnomaly"] - P["DualThrust"]; d12 = MC.daily_mc(t12.values, horizon=252, n=5000, block=20, trail=1e12); e12 = t12.cumsum()
+    t12 = t13 - P["OvernightAnomaly"]; d12 = MC.daily_mc(t12.values, horizon=252, n=5000, block=20, trail=1e12); e12 = t12.cumsum()
     print(f"   before Overnight Anomaly (12 pieces): ${t12.sum() / yrs:,.0f} a year, Sharpe {t12.mean() / t12.std() * np.sqrt(252):.2f}, "
           f"max DD ${-(e12 - e12.cummax()).min():,.0f}, MC p50 ${d12['pnl_p50']:,.0f}, DD p95 ${d12['dd_p95']:,.0f}, return/DD {d12['ret_dd']:.1f}, "
           f"capital at the 20% rule ${d12['dd_p95'] / 0.20:,.0f}")
@@ -126,7 +138,7 @@ if __name__ == "__main__":
           f"return/DD {d2['ret_dd']:.1f}, capital at the 20% rule ${d2['dd_p95'] / 0.20:,.0f}")
     for nm_, twx in (("Twin = MultiCharts v2 report", tw_mc), ("Twin booked at exit (before 2026-10-24)", tw_exit)):
         alt = tot - P["TwinContinuation"] + twx; da = MC.daily_mc(alt.values, horizon=252, n=5000, block=20, trail=1e12); ea = alt.cumsum()
-        print(f"   full 14 with {nm_}: ${alt.sum() / yrs:,.0f} a year, max DD ${-(ea - ea.cummax()).min():,.0f}, MC p50 ${da['pnl_p50']:,.0f}, "
+        print(f"   full 16 with {nm_}: ${alt.sum() / yrs:,.0f} a year, max DD ${-(ea - ea.cummax()).min():,.0f}, MC p50 ${da['pnl_p50']:,.0f}, "
               f"DD p95 ${da['dd_p95']:,.0f}, capital at the 20% rule ${da['dd_p95'] / 0.20:,.0f} (Twin alone ${twx.sum() / yrs:,.0f} a year vs port ${P['TwinContinuation'].sum() / yrs:,.0f})")
     print(f"   worst single Twin trade per MNQ ${pd.read_csv('checks/candidates/twin_continuation/trades.csv').net.min() / 10:,.0f}; "
           f"worst portfolio day ${tot.min():,.0f}")
@@ -143,7 +155,7 @@ if __name__ == "__main__":
 
     print("\n6. + S30 IBS reversal (NQ + ES, 1 micro each; daily marked; checks/candidates/s30_ibs/), user's file 2026-10-23:")
     s30 = pd.read_csv("checks/candidates/s30_ibs/daily_nq_es_per_micro.csv", index_col=0, parse_dates=True).iloc[:, 0].reindex(days, fill_value=0.0)
-    for nm, base in (("full 14", tot), ("set D (9)", P[["TwinContinuation", "OvernightBiasML", "BridgeMondayLong", "CLSundayFade_perMCL", "NFPFade",
+    for nm, base in (("full 16", tot), ("set D (9)", P[["TwinContinuation", "OvernightBiasML", "BridgeMondayLong", "CLSundayFade_perMCL", "NFPFade",
                                                          "ExpirationOpenShort", "VaultBreak", "RelativeStrength", "ESMOCFollow_perMES"]].sum(axis=1))):
         for lab_, x in ((nm, base), (nm + " + S30", base + s30)):
             d = MC.daily_mc(x.values, horizon=252, n=5000, block=20, trail=1e12); e = x.cumsum()

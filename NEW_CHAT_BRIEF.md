@@ -27,6 +27,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   funded bootstrap 6 payouts by day 226 vs 250, 1y +$1,400, blown 1.8% -> 2.2%; not on 50K (ties) or evaluations (worse);
   personal (14 pieces) $24.4k a year, return/DD 8.2, capital $25k. MultiCharts check needed before a 150K account trades it. MultiCharts export optional (`TODO.md`). S47 / Kusho loaders
   now place trades by date (old CSV rows were on a 2016-09-29 grid).
+- **Personal plan (user, 2026-10-24): + Kusho v9 21:00 and S47 v2 (16 pieces, $30.6k a year, return/DD 9.2, capital
+  ~$26.2k); both still on the forward log.** Apex plans unchanged (`analysis/forward_log_plans_test.py`).
 - **Codex 2026-10-24 (codex/work 541d111):** 13 studies of uploads, none changes a plan: S03 v2 B (no placement), NQDB2 /
   R2Vault C, ORPullback / Anson D, night volume switch = T_ONESIDE (WATCH); 6 source-only reviews need code / data
   (Valeris 848, GC risk-adjusted, noise-band CODE.txt, PROP ORB, GC_COMBO v2, Overnight TickRSV). `agents/codex/STATUS.md`.

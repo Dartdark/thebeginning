@@ -25,7 +25,7 @@ results are added at each Friday review. 2023+ has been reused by many ideas, so
 | Rule | Frozen (date, commit) | Source report | Forward trades | Forward net (per NQ) | Status |
 |---|---|---|---|---|---|
 | **FC 2B v2** (Flow-Confirmed Opening Drive, NQ 1-min; `checks/candidates/fc_2b/FC_2B_v2.txt`) | 2026-10-23, code commit 848923d (v2 report aa41668) | `checks/candidates/fc_2b/REVIEW.md`, `verdict.md` | 0 | $0 | Tracking from 2026-10-26 |
-| **S47 v2** (Europe-Open Impulse, NQ; rule = `checks/candidates/s47_v2/S47_v2.txt`, fixed code `S47_v2_fixed.txt`) | 2026-10-23, rule script commit 130020c | `checks/candidates/s47_v2/REVIEW.md` | 0 | $0 | Tracking from 2026-10-26 |
+| **S47 v2** (Europe-Open Impulse, NQ; rule = `checks/candidates/s47_v2/S47_v2.txt`, fixed code `S47_v2_fixed.txt`) | 2026-10-23, rule script commit 130020c | `checks/candidates/s47_v2/REVIEW.md` | 0 | $0 | Tracking from 2026-10-26; **in the personal plan since 2026-10-24 (user)** |
 | ~~Kusho v9 (raw-price indicators)~~ superseded 2026-10-24 before any observation by the roll-adjusted entry below (Codex's cross-review finding 2); kept for the record: |
 | **Kusho v9** (both exits: 21:00 with weekend holds, and flat 15:45; NQ; `checks/candidates/kusho/Kusho_v9.txt`) | 2026-10-23, rule script commit ea18c5f | `checks/candidates/kusho/REVIEW.md` | 0 | $0 | Tracking from 2026-10-26 |
 | **S30 IBS reversal** (NQ + ES, long only; `checks/candidates/s30_ibs/S30_IBS.txt`) | 2026-10-23, rule script commit 28be7ae | `checks/candidates/s30_ibs/REVIEW.md` | 0 | $0 | Tracking from 2026-10-26 |
@@ -86,3 +86,5 @@ Bands (`analysis/forward_bands.py`, appended at the end so the earlier frozen dr
 | Kusho v9 (21:00), roll-adjusted | −$36 / $257 | $5 / $213 | 9.7% at 100, ~15% by 200 |
 | Kusho v9 flat 15:45, roll-adjusted | −$41 / $231 | −$3 / $188 | 10.3% at 100, 15.3% by 200 |
 Decision rule, records and costs as above. The raw-indicator bands stay in the table above, marked superseded.
+**Kusho v9 (21:00) is in the personal plan since 2026-10-24 (user); paper tracking continues as frozen. The 15:45 version is
+tracked for the record only (it adds nothing to any plan).**
