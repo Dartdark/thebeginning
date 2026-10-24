@@ -1,0 +1,122 @@
+{
+  "source_sha256": "05a176b0c4f6804d48d427ad484175076d125a61b62122736c34c6797c0d2b52",
+  "expected_source_sha256": "05a176b0c4f6804d48d427ad484175076d125a61b62122736c34c6797c0d2b52",
+  "replay_sha256": "d51a65e34e877a173b4d07e73a5792c317164a7fe11770c6d817326e9361ca00",
+  "checker_sha256": "778099f2fe10c2c70cc3c1c7c0019a3d6a35fb0be50cb67ae94bf8bdbafba23a",
+  "exact_source_parity": false,
+  "tick_validation": false,
+  "implementation_review": "PASS",
+  "source_tick_data_causal_timing_review": "WITH_CONCERNS",
+  "time_comparator_policy": {
+    "causal_policy": false,
+    "retrospective_only": true,
+    "future_information": "The same-date permutation can move directions from later raw signals to earlier checks, using a proposal count and direction mixture only known later that date.",
+    "comparison_scope": "Future-informed retrospective comparator; not a causal random-entry strategy.",
+    "standalone_entry_edge_falsifier": false,
+    "causal_entry_timing_test": "OPEN",
+    "interpretation": "Its p-values cannot establish that causal entry timing fails or that the strategy has zero edge."
+  },
+  "side_comparator_policy": {
+    "causal_policy": true,
+    "retrospective_only": false,
+    "isolated_direction_test": false,
+    "comparison_scope": "Joint direction, reversal, occupancy, turnover and execution-cost policy comparison.",
+    "interpretation": "Random opposite proposals create additional reversals and much higher filled trade counts; the result does not isolate direction prediction at matched turnover or costs."
+  },
+  "clean_causal_entry_timing_test": "OPEN",
+  "independent_review_path": "agents/codex/results/s03_noisearea_independent_review.md",
+  "independent_review_sha256": "62ab87e9ba35eb61181b7b0aa11ba95ba35394b051e8e424ac4df20c7a78bac7",
+  "source_review": "Source text and prior audit read; original code/data absent",
+  "rows": [
+    {
+      "item": "Original signal/engine/data",
+      "source": "HTML references PL SIGNAL, s03_engine.py, ofb_bars_NQ.csv; absent",
+      "reconstruction": "Bounded OHLC reconstruction; exact author parity unavailable",
+      "status": "open source concern"
+    },
+    {
+      "item": "Cash-open anchor",
+      "source": "open(09:30 ET) wording with close-stamped bars",
+      "reconstruction": "V2/V1/E2 open of 09:31 ET bar; C2 includes 09:30 bar",
+      "status": "frozen assumption"
+    },
+    {
+      "item": "Noise",
+      "source": "Previous14 full sessions at same minute",
+      "reconstruction": "Prior14 completed normal sessions with all anchor..15:00 OHLCV; current day excluded",
+      "status": "independent synthetic and data audit"
+    },
+    {
+      "item": "Prior cash close",
+      "source": "Prior close; early-day meaning unspecified",
+      "reconstruction": "Immediately preceding normal/early cash-session exact close; absent endpoint unavailable",
+      "status": "frozen assumption"
+    },
+    {
+      "item": "VWAP",
+      "source": "Confirmation specified; formula unspecified",
+      "reconstruction": "Cumulative typical price * total native volume from anchor; nonpositive cumulative volume unavailable",
+      "status": "frozen assumption"
+    },
+    {
+      "item": "Current gaps",
+      "source": "Two source dates SetExitOnClose, missing session-template code",
+      "reconstruction": "No future whole-day filter; held gaps retained; next observed pending market; censor unresolved holds",
+      "status": "independent synthetic and audit; account block"
+    },
+    {
+      "item": "Fixed stop",
+      "source": "0.4 * sigma(signal) * close(signal), active fill bar; rounding toward entry",
+      "reconstruction": "Raw next-open anchor; long ceil / short floor at0.25; adverse opening gap before pending market",
+      "status": "independent symmetric synthetic and data audit"
+    },
+    {
+      "item": "Market decisions",
+      "source": "Half-hour10:00..15:30 ET; trailing exits same checks",
+      "reconstruction": "09:00..14:30 CT strict comparisons, next native open; opposite reversal closes/opens separately",
+      "status": "independent synthetic and order audit"
+    },
+    {
+      "item": "Flatten",
+      "source": "16:00 ET decision /16:01 open",
+      "reconstruction": "15:00 CT close schedules next open; catchup real later close then open by15:59; missing held paths block",
+      "status": "independent synthetic and audit"
+    },
+    {
+      "item": "Costs",
+      "source": "5USD RT +1tick each side (15USD)",
+      "reconstruction": "7.25USD RT +1tick each side (17.25USD); E2 3ticks each side (37.25USD)",
+      "status": "independent raw/slipped/net reconciliation"
+    },
+    {
+      "item": "Intrabar path",
+      "source": "Source provisional minute-OHLC replica, not tick validated",
+      "reconstruction": "Shared grid._walk convention, entry-bar stop active; source/tick validation still open",
+      "status": "promotion concern"
+    },
+    {
+      "item": "Trial history",
+      "source": "At least12 author StopSigma values and chosen2017-26 history",
+      "reconstruction": "One local idea/four fixed return profiles;2023+ historical replication",
+      "status": "selection limitation"
+    },
+    {
+      "item": "Accounts",
+      "source": "Third-party Lucid examples",
+      "reconstruction": "Current documented Apex/personal engines; exact MNQ costs/counts; no second slippage",
+      "status": "separate gated accounting check"
+    },
+    {
+      "item": "Timing comparator",
+      "source": "Registered same-date permutation of raw proposed directions",
+      "reconstruction": "Later raw directions can move earlier: future-informed retrospective comparator; clean causal entry-timing test remains OPEN",
+      "status": "WITH CONCERNS; no standalone entry-edge falsification"
+    },
+    {
+      "item": "Side comparator",
+      "source": "Registered random directions at raw proposal check bars",
+      "reconstruction": "Opposite signals change reversals, occupancy, filled counts, turnover and costs jointly",
+      "status": "joint policy/cost comparison; not isolated direction prediction"
+    }
+  ]
+}
