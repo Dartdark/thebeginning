@@ -1,0 +1,145 @@
+{
+  "verdict": "REJECT plan promotion on supplied evidence; profitability unknown",
+  "source_sha256": "434b104393103158d8dc9ae18010632674709d5c1aca1ca39bb7f59af9c677c2",
+  "source_lines": 446,
+  "literal_defaults": {
+    "LookbackDays": 20.0,
+    "VolatilityMultiplier": 1.0,
+    "EMALength": 20.0,
+    "StopLossPoints": 50.0,
+    "FixedRiskDollars": 2000.0,
+    "DollarPerPoint": 20.0,
+    "RewardRisk": 0.5,
+    "LongTrade": true,
+    "ShortTrade": true,
+    "MaxTradesPerDay": 10.0,
+    "MaxStopsPerDay": 3.0,
+    "FirstEvalTime": 900.0,
+    "LastEntryTime": 1400.0,
+    "FlatSignalTime": 1430.0
+  },
+  "new_strategy_return_trials": 0,
+  "new_account_simulations": 0,
+  "instrument_arithmetic": [
+    {
+      "symbol": "NQ",
+      "assumed_actual_big_point_value": 20,
+      "contracts_with_unchanged_inputs": 2,
+      "position_stop_usd": 2000.0,
+      "position_target_usd": 1000.0,
+      "actual_stop_points": 50.0,
+      "actual_target_points": 25.0
+    },
+    {
+      "symbol": "MNQ",
+      "assumed_actual_big_point_value": 2,
+      "contracts_with_unchanged_inputs": 2,
+      "position_stop_usd": 2000.0,
+      "position_target_usd": 1000.0,
+      "actual_stop_points": 500.0,
+      "actual_target_points": 250.0
+    }
+  ],
+  "nominal_stop_multiple_of_2000_trail": 1.0,
+  "three_full_nominal_stops_usd": 6000.0,
+  "target_stop_only_gross_breakeven_win_rate": 0.6666666666666666,
+  "target_stop_example_limit": "EMA/reversal/time exits mean this is not a required overall win rate",
+  "history_sampling_example": {
+    "scope": "toy observations only, not strategy returns",
+    "interval_minutes": 5,
+    "slot_labels": [
+      900,
+      905,
+      910
+    ],
+    "records_per_day_in_bucket": 3,
+    "prior_records": 20,
+    "average_before_0900_update": 0.01,
+    "new_0900_move": 0.03,
+    "average_seen_at_0905": 0.011,
+    "reason": "current-day earlier bar is included after append; no future price required"
+  },
+  "missing_flat_bar_example": {
+    "bar_labels": [
+      1425,
+      1435,
+      1440,
+      1555
+    ],
+    "any_exact_1430_trigger": false,
+    "market_prices_used": false
+  },
+  "source_line_anchors": {
+    "date_reset": [
+      120
+    ],
+    "today_open": [
+      123
+    ],
+    "previous_close": [
+      126
+    ],
+    "stop_count": [
+      139
+    ],
+    "slot_assignment": [
+      184
+    ],
+    "slot_read": [
+      202
+    ],
+    "history_shift": [
+      402
+    ],
+    "history_append": [
+      422
+    ],
+    "flat_rule": [
+      434
+    ],
+    "position_stop": [
+      99
+    ]
+  },
+  "prior_family_context": {
+    "TIER_LIST.md": {
+      "commit": "8f6b75cc1c6044f712c3ad5f1a774de60dd14859",
+      "published_rows": [
+        "| Noise-area momentum, long only (\"Beat the Market\") | Strategy | PF 1.38\u20131.45, 9/9 years | Wins only 43%; replaces VB poorly ($4,100 vs $5,387) |",
+        "| Noise-band intraday momentum on NQ (Chuk 2026, SSRN 7609644; Antigravity paper screen 2026_10_18_b, read from the PDF; `analysis/noise_band_chuk_test.py`, `analysis/noise_band_bench.py`): Zarattini et al. noise band (14-session \u03c3 by minute, max/min of open and prior close), 5-min bars, entries at :00 / :30 9:00\u201314:30 CT with VWAP side, trailing stop = band or VWAP, flat 14:55 | Strategy (NQ, Python, rule from the paper's Table 1) | Partly replicates: paper $10.26/day per MNQ 2020\u2013Jul 2026 at $2 costs, ours $7.51 (t 2.4); our costs per NQ 2018\u201326 $72 a trade (t 2.6), 2018\u201319 t 1.6, 2023\u201326 t 1.1, 2026 \u2212$16k; shorts uncorrelated with VB (\u22120.01) but $0 since 2023; on days both trade corr with VB 0.39. Funded bench (1,000 paired histories): +1 MNQ 2y \u2212$224, blown 7.2% \u2192 8.7%; +2 MNQ \u2212$1,718, 20.7%; shorts only 1 MNQ \u2212$12. As a REPLACEMENT for VB: VB 0 + NB 1 MNQ \u2212$44, blown 5.0%, 328 days vs 278; but VB 0 with nothing in its place gives the same (\u2212$22, 4.8%, 340 days), so the lower blow-up rate is from cutting VB, not from the noise band | Real but weak, fading since 2023, a near-twin of Vault Break; the author's 1 of 144. Doesn't add to the plan |"
+      ]
+    },
+    "analysis/outputs/noise_band_bench_output.txt": {
+      "commit": "8f6b75cc1c6044f712c3ad5f1a774de60dd14859",
+      "published_rows": [
+        "current plan           $8,810    $0 $12,035    $0 $13,000  7.2%   91.0%   278      50.0%      $0       0.0%",
+        "+ noise-band 1 MNQ     $8,622    $0 $11,812    $0 $13,000  8.7%   88.5%   281      48.5%   $-224       1.5%",
+        "+ noise-band 2 MNQ     $7,458    $0 $10,317    $0 $13,000 20.7%   77.1%   308      42.8% $-1,718      13.5%",
+        "current plan                     $8,810    $0 $12,035     $0 $13,000  7.2%   91.0%   278      50.0%      $0       0.0%",
+        "VB 0 / 0, NB 1 MNQ               $7,324    $0 $11,990 $2,925 $13,000  5.0%   87.1%   328      48.0%    $-44      -2.2%",
+        "current plan          $8,810    $0 $12,035     $0 $13,000  7.2%   91.0%   278      50.0%      $0       0.0%",
+        "VB 0 / 0, nothing     $7,082    $0 $12,013 $3,000 $13,000  4.8%   86.9%   340      48.1%    $-22      -2.4%",
+        "VB 0 / 0, NB 1 MNQ    $7,324    $0 $11,990 $2,925 $13,000  5.0%   87.1%   328      48.0%    $-44      -2.2%"
+      ]
+    }
+  },
+  "cost_context": {
+    "prior_noise_nq_roundtrip": 24.5,
+    "repo_commission": 7.25,
+    "two_market_stop_fill_ticks_nq": 10,
+    "repo_two_market_stop_fills_nq_roundtrip": 17.25
+  },
+  "limits": [
+    "No declared instrument, timeframe, session or performance report supplied",
+    "Actual chart settings determine anchor and sampling behavior",
+    "Dollar stop is nominal; fees, slippage, gaps and external liquidation are not included",
+    "PositionProfit is total realized currency P&L on MultiCharts; no units mismatch is alleged",
+    "No same-bar reversal double sizing or lack of built-in entry protection is established"
+  ],
+  "primary_sources": [
+    "https://www.multicharts.com/trading-software/index.php?title=PositionProfit",
+    "https://www.multicharts.com/trading-software/index.php?title=SetStopPosition",
+    "https://www.multicharts.com/trading-software/index.php?title=BigPointValue",
+    "https://www.multicharts.com/trading-software/index.php?title=How_Scripts_Work"
+  ]
+}
