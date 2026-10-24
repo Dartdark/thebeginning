@@ -63,6 +63,13 @@ bottom). Times are Central (CT).
   on a 1-minute MNQ chart (Exchange time, CME 24h, IOG off), `NumContracts` 2 (1 while the cushion is below $3,000),
   Trade Logger tag `DT`. Not on 50K accounts or evaluations.
 
+## GC_COMBO v2 (your gold files, 2026-10-24: C pending the MultiCharts report)
+
+- [ ] Optional, no deadline (outside market hours, not on the live VPS): run it in MultiCharts and export the report, step by
+  step in [MC_SETUP.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/gc_combo/MC_SETUP.md)
+  (@GC 1-min + @CL Data2 + GCCOMBO Data3); save as "mc_reports/Backtesting Strategy Performance Report _ @GC - 1 Minute GC COMBO v2.xlsx"
+  and push / send it. Expect ~1,204 trades, ~$226k for 2017-09-18 → 2026-08-07.
+
 ## Antigravity's NQAlignedWeaknessShort (2026-10-20, C)
 
 - [x] (2026-10-20, confirmed 216/216) MultiCharts backtest: [NQ_Aligned_Weakness_Short.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/aligned_weakness_short/NQ_Aligned_Weakness_Short.txt)
