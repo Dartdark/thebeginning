@@ -1,0 +1,279 @@
+{=======================================================================
+  Strategy: Gold (GC) Asian-Range Breakout — ADR exits + Drift Filter + Sizing
+  -----------------------------------------------------------------------
+  data1: GC 5 min
+  data2: GC 1 day
+  Session: CME: Equity Index Futures [E-mini] (GLOBEX) - Central Time
+  Stop e target = percentuale dell'ADR daily (data2), cioè la media
+  semplice di (High - Low) delle ultime ADRLen sessioni. Il valore viene
+  congelato alla chiusura della finestra del range e resta costante per
+  tutta la sessione.
+
+  Drift filter: regressione lineare dei Close della finestra asiatica.
+  driftRatio = |slope| * (nBars - 1) / range
+  La sessione viene armata solo se driftRatio >= MinDriftRatio.
+
+  SizingMode = 0 --> contratti fissi (TradeQtyLong / TradeQtyShort)
+  SizingMode = 1 --> contratti dinamici:
+                     qty = floor( RiskPerTradeUSD / (stop in punti * BigPointValue) )
+                     => perdita a stop <= RiskPerTradeUSD (slippage/commissioni esclusi)
+=======================================================================}
+
+inputs:
+    RangeStart( 2000 ),
+    RangeEnd( 000 ),
+    ExitTime( 1000 ),
+    TimeZoneShift( 0 ),
+
+    { --- Sizing --- }
+    SizingMode( 1 ),               { 0 = fixed, 1 = dynamic (rischio fisso in USD) }
+    RiskPerTradeUSD( 20000 ),      { perdita massima accettata se colpisce lo stop }
+    MaxContracts( 20 ),            { tetto di sicurezza sui contratti dinamici }
+    ForceMinOneContract( false ),  { true  = se 1 contratto rischia > RiskPerTradeUSD
+                                              entra comunque con 1 (rischio superato!)
+                                      false = salta il trade }
+
+    TradeQtyLong( 1 ),             { usati solo con SizingMode = 0 }
+    TradeQtyShort( 1 ),
+
+    AllowLongTrades( true ),
+    AllowShortTrades( true ),
+    TotalMaxTradesPerDay( 1 ),
+
+    StrictFirstBreakLong( true ),
+    StrictFirstBreakShort( true ),
+
+    { --- Filtro drift (regressione sulla finestra) --- }
+    UseFilter( true ),
+    MinDriftRatio( 0.50 ),         { soglia MINIMA: arma se driftRatio >= soglia }
+    MinBars( 8 ),                  { barre minime nella finestra (sempre richieste) }
+
+    { --- Ancora di volatilità --- }
+    ADRLen( 21 ),
+
+    { --- Target in % dell'ADR daily --- }
+    UseLongTarget( true ),
+    LongTargetADRPct( 100 ),
+    UseShortTarget( true ),
+    ShortTargetADRPct( 110 ),
+
+    { --- Stop in % dell'ADR daily --- }
+    UseLongStopLoss( true ),
+    LongStopADRPct( 140 ),
+    UseShortStopLoss( true ),
+    ShortStopADRPct( 140 ),
+
+    { --- Stop originale sul range (usato solo se lo stop ADR è disattivato) --- }
+    UseRangeStop( false ),
+    StopFrac( 1.0 );
+
+variables:
+    adjRangeStart( 0 ), adjRangeEnd( 0 ), adjExitTime( 0 ),
+    timesAdjusted( false ),
+
+    rHi( 0 ), rLo( 0 ), rng( 0 ), sd( 0 ),
+    inWindow( false ), armed( false ),
+    armed_Long( false ), armed_Short( false ),
+
+    SessionStartTrades( 0 ), TradesThisSession( 0 ), ActiveTrades( 0 ),
+
+    adrD( 0 ),
+    adrLock( 0 ),
+    stopPtsL( 0 ), stopPtsS( 0 ),
+    tgtPtsL( 0 ), tgtPtsS( 0 ),
+
+    { --- Drift filter --- }
+    nBars( 0 ), sX( 0 ), sY( 0 ), sXY( 0 ), sXX( 0 ),
+    denom( 0 ), slope( 0 ), driftRatio( 0 ),
+    filterOK( false ),
+
+    { --- Sizing --- }
+    stopDistL( 0 ), stopDistS( 0 ),      { distanza stop effettiva in punti }
+    riskPerCtrL( 0 ), riskPerCtrS( 0 ),  { rischio USD per 1 contratto }
+    qtyL( 0 ), qtyS( 0 );                { contratti per la sessione }
+
+{ --- Importi Set* riferiti all'intera posizione --- }
+SetStopPosition;
+
+{ --- ADR daily da data2: media semplice di (High - Low)
+      (ultima barra daily chiusa: niente look-ahead) --- }
+adrD = Average( High - Low, ADRLen ) of data2;
+
+{ --- Time shift --- }
+if timesAdjusted = false then begin
+    adjRangeStart = CalcTime( RangeStart, TimeZoneShift * 60 );
+    adjRangeEnd   = CalcTime( RangeEnd,   TimeZoneShift * 60 );
+    adjExitTime   = CalcTime( ExitTime,   TimeZoneShift * 60 );
+    timesAdjusted = true;
+end;
+
+{ --- Range window (midnight wrap) --- }
+if adjRangeStart < adjRangeEnd then
+    inWindow = (Time >= adjRangeStart) and (Time < adjRangeEnd)
+else
+    inWindow = (Time >= adjRangeStart) or (Time < adjRangeEnd);
+
+{ --- Reset a inizio finestra --- }
+if inWindow = true and inWindow[1] = false then begin
+    rHi = 0; rLo = 999999; rng = 0; sd = 0;
+    armed = false; armed_Long = false; armed_Short = false;
+    adrLock = 0;
+    stopPtsL = 0; stopPtsS = 0; tgtPtsL = 0; tgtPtsS = 0;
+
+    nBars = 0; sX = 0; sY = 0; sXY = 0; sXX = 0;
+    denom = 0; slope = 0; driftRatio = 0;
+    filterOK = false;
+
+    stopDistL = 0; stopDistS = 0;
+    riskPerCtrL = 0; riskPerCtrS = 0;
+    qtyL = 0; qtyS = 0;
+
+    if MarketPosition <> 0 then
+        SessionStartTrades = TotalTrades + 1
+    else
+        SessionStartTrades = TotalTrades;
+
+    TradesThisSession = 0;
+end;
+
+{ --- Trade counter --- }
+ActiveTrades = 0;
+if MarketPosition <> 0 then ActiveTrades = 1;
+TradesThisSession = (TotalTrades - SessionStartTrades) + ActiveTrades;
+
+if TradesThisSession >= TotalMaxTradesPerDay then begin
+    armed_Long = false; armed_Short = false; armed = false;
+end;
+
+{ --- Costruzione range + somme per la regressione --- }
+if inWindow then begin
+    if High > rHi then rHi = High;
+    if Low  < rLo then rLo = Low;
+
+    sX  = sX  + nBars;
+    sY  = sY  + Close;
+    sXY = sXY + nBars * Close;
+    sXX = sXX + nBars * nBars;
+    nBars = nBars + 1;
+end;
+
+{ --- Chiusura finestra: lock range + ADR + filtro + sizing --- }
+if inWindow = false and inWindow[1] = true and rng = 0 and rHi > 0 then begin
+    rng = rHi - rLo;
+    sd  = StopFrac * rng;
+
+    adrLock  = adrD;
+    stopPtsL = LongStopADRPct    * 0.01 * adrLock;
+    stopPtsS = ShortStopADRPct   * 0.01 * adrLock;
+    tgtPtsL  = LongTargetADRPct  * 0.01 * adrLock;
+    tgtPtsS  = ShortTargetADRPct * 0.01 * adrLock;
+
+    { --- Regressione lineare Close vs indice barra --- }
+    denom = nBars * sXX - sX * sX;
+    if nBars >= MinBars and denom <> 0 then
+        slope = (nBars * sXY - sX * sY) / denom
+    else
+        slope = 0;
+
+    if rng > 0 then
+        driftRatio = AbsValue( slope ) * (nBars - 1) / rng
+    else
+        driftRatio = 999;
+
+    if UseFilter then
+        filterOK = driftRatio >= MinDriftRatio
+    else
+        filterOK = true;
+
+    { --- Distanza stop effettiva (stessa usata dalle uscite) --- }
+    if UseLongStopLoss and stopPtsL > 0 then
+        stopDistL = stopPtsL
+    else if UseRangeStop and sd > 0 then
+        stopDistL = sd
+    else
+        stopDistL = 0;
+
+    if UseShortStopLoss and stopPtsS > 0 then
+        stopDistS = stopPtsS
+    else if UseRangeStop and sd > 0 then
+        stopDistS = sd
+    else
+        stopDistS = 0;
+
+    riskPerCtrL = stopDistL * BigPointValue;
+    riskPerCtrS = stopDistS * BigPointValue;
+
+    { --- Calcolo contratti --- }
+    if SizingMode = 1 then begin
+        { Long }
+        if riskPerCtrL > 0 then
+            qtyL = IntPortion( RiskPerTradeUSD / riskPerCtrL )
+        else
+            qtyL = 0;      { nessuno stop attivo: rischio non definibile -> niente trade }
+        if qtyL < 1 and ForceMinOneContract and riskPerCtrL > 0 then qtyL = 1;
+        qtyL = MinList( qtyL, MaxContracts );
+
+        { Short }
+        if riskPerCtrS > 0 then
+            qtyS = IntPortion( RiskPerTradeUSD / riskPerCtrS )
+        else
+            qtyS = 0;
+        if qtyS < 1 and ForceMinOneContract and riskPerCtrS > 0 then qtyS = 1;
+        qtyS = MinList( qtyS, MaxContracts );
+    end
+    else begin
+        qtyL = TradeQtyLong;
+        qtyS = TradeQtyShort;
+    end;
+
+    { --- Armamento --- }
+    if rng > 0 and adrLock > 0 and nBars >= MinBars and filterOK then begin
+        armed = true;
+        if TradesThisSession < TotalMaxTradesPerDay then begin
+            armed_Long  = qtyL >= 1;
+            armed_Short = qtyS >= 1;
+        end;
+    end;
+end;
+
+{ --- Strict first break --- }
+if armed then begin
+    if StrictFirstBreakShort and High >= rHi then armed_Short = false;
+    if StrictFirstBreakLong  and Low  <= rLo then armed_Long  = false;
+end;
+
+{ --- Ordini di breakout --- }
+if armed and MarketPosition = 0 and Time < adjExitTime then begin
+    if AllowLongTrades and armed_Long and qtyL >= 1
+       and TradesThisSession < TotalMaxTradesPerDay then
+        Buy       ( "Asia_long"  ) qtyL contracts next bar at rHi stop;
+
+    if AllowShortTrades and armed_Short and qtyS >= 1
+       and TradesThisSession < TotalMaxTradesPerDay then
+        SellShort ( "Asia_short" ) qtyS contracts next bar at rLo stop;
+end;
+
+{ --- Uscite long: punti -> dollari sull'intera posizione --- }
+if MarketPosition = 1 then begin
+    if stopDistL > 0 then
+        SetStopLoss( stopDistL * BigPointValue * CurrentContracts );
+
+    if UseLongTarget and tgtPtsL > 0 then
+        SetProfitTarget( tgtPtsL * BigPointValue * CurrentContracts );
+end;
+
+{ --- Uscite short --- }
+if MarketPosition = -1 then begin
+    if stopDistS > 0 then
+        SetStopLoss( stopDistS * BigPointValue * CurrentContracts );
+
+    if UseShortTarget and tgtPtsS > 0 then
+        SetProfitTarget( tgtPtsS * BigPointValue * CurrentContracts );
+end;
+
+{ --- Time exit --- }
+if Time >= adjExitTime then begin
+    if MarketPosition = 1  then Sell       ( "ExitL" ) next bar at market;
+    if MarketPosition = -1 then BuyToCover ( "ExitS" ) next bar at market;
+    armed = false; armed_Long = false; armed_Short = false;
+end;
