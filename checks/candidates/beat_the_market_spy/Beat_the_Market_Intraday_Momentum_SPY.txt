@@ -1,0 +1,316 @@
+{=============================================================================
+ Strategy : Beat the Market - Intraday Momentum (SPY)
+ Version  : 2.1 - Optimized VWAP calculation with dynamic arrays
+ Source   : Zarattini, Aziz, Barbon - "Beat the Market: An Effective Intraday
+            Momentum Strategy for S&P500 ETF (SPY)" (SSRN 4824172, Sep 2025)
+
+ Chart setup (IMPORTANT)
+ -----------------------
+   Data1 : SPY, 30-minute bars, regular session 09:30-16:00 ET.
+   The strategy is designed to work on 30-minute bars (or any multiple of
+   TradeFreq minutes). With IntrabarOrderGeneration = False, all evaluations
+   occur at bar close (i.e., HH:00 / HH:30 if using 30-min bars).
+
+ Replication notes
+ -----------------
+ Signals   : evaluated only at bar close (semi-hourly intervals).
+ NoiseArea : for each time slot, sigma = average |Close/Open - 1| of the
+             same slot over the previous LookBack trading days.
+ Bounds    : Upper = max(today Open, yesterday Close) * (1 + VM * sigma)
+             Lower = min(today Open, yesterday Close) * (1 - VM * sigma)
+             (verbatim the paper's revised equations incl. gap adjustment)
+ Entry     : close above Upper -> long ; close below Lower -> short.
+ Stop      : StopMode 1 = current band + VWAP (paper final model)
+                        long stop  = max(Upper, VWAP)
+                        short stop = min(Lower, VWAP)
+             StopMode 2 = VWAP only
+             StopMode 3 = opposite band (paper base model)
+ Sizing    : shares = AUM(t-1) * min(MaxLev, TargetVol/dailyVol) / Open
+             dailyVol = VolLookBack-day sample stdev of daily returns.
+             (paper ALWAYS uses 14 days here, independent of the Noise
+             Area LookBack -> separate input VolLookBack, default 14)
+ Exit      : all positions closed at session close (SetExitOnClose).
+ Costs     : set in Strategy Properties -> commission 0.0035/share,
+             slippage 0.001/share equivalent (paper assumptions).
+
+ Array Allocation Notes
+ ----------------------
+   HistClose is dynamically allocated at runtime with dimensions:
+   (LookBack + 2) rows × MaxSlots columns.
+   - Rows (Days)   : Index 0 is an unused placeholder (safety margin);
+                     Index 1 = yesterday, ... Index LookBack = N-days ago.
+                     +2 provides an extra guard band against boundary overflows.
+   - Columns (Slots): MaxSlots = IntPortion(390 / TradeFreq).
+                     Index 0 = 09:30, ... Index (MaxSlots-1) = 15:30.
+                     16:00 (Slot = MaxSlots) is deliberately excluded from storage.
+
+ Warm-up Periods
+ ---------------
+   Signal entries (Long/Short) begin as soon as DayCount >= LookBack + 1.
+   Dynamic position sizing (volatility targeting) becomes active only after
+   DayCount >= VolLookBack + 2. Until then, the leverage factor defaults
+   to 1.0 (no scaling), preventing unrealistic early volatility estimates.
+=============================================================================}
+
+[IntrabarOrderGeneration = False]   { Signals evaluated only at bar close; this ensures semi-hourly checks when using 30-min bars }
+
+{ ============================ Input Parameters ============================= }
+inputs:
+    LookBack       (14),      { Noise Area sigma lookback (paper base=14, optimal ~90 from sensitivity) }
+    VolLookBack    (14),      { Realized volatility lookback for dynamic sizing (paper ALWAYS 14) }
+    VolMult        (1.0),     { Volatility multiplier (VM) – paper uses 1.0, optimal ~1.5 }
+    StopMode       (1),       { Stop loss mode: 1=Band+VWAP (paper final), 2=VWAP only, 3=Opposite band (base) }
+    UseDynSizing   (true),    { Enable volatility-targeted position sizing (paper final model) }
+    TargetVol      (0.02),    { Target daily volatility (2%) }
+    MaxLev         (4.0),     { Maximum leverage cap (brokerage compliance) }
+    TradeLong      (true),    { Allow long entries }
+    TradeShort     (true),    { Allow short entries }
+    TradeFreq      (30),      { Signal check frequency in minutes (paper uses 30) }
+    MinFromOpen    (30),      { Earliest entry: minutes after 09:30 (30 = 10:00) }
+    MaxFromOpen    (360),     { Latest entry: minutes after 09:30 (360 = 15:30) }
+    ShowDebug      (false);   { Print debug information to the Print Log }
+
+{ ============================ Variable Declarations =========================== }
+vars:
+    DayCount       (0),       { Number of trading days processed }
+    DayOpen        (0),       { Today's opening price }
+    NumShares      (0),       { Number of shares to trade for the current day }
+    AUM            (0),       { Current assets under management (equity) }
+    DailyVol       (0),       { Realized daily volatility (sample std dev) }
+    LevFactor      (1),       { Leverage factor from volatility targeting }
+    Slot           (0),       { Index of the current time slot (0 = 09:30, 1 = 10:00, ...) }
+    Minutes        (0),       { Absolute minutes from midnight }
+    MinFromOpn     (0),       { Minutes elapsed since 09:30 }
+
+    { Session VWAP (calculated bar-by-bar on Data1) }
+    CumPV          (0),       { Cumulative sum of (Typical Price * Volume) }
+    CumVol         (0),       { Cumulative volume }
+    SessionVWAP    (0),       { Current session VWAP value }
+
+    TP             (0),       { Typical price = (H+L+C)/3 }
+    LongStop       (0),       { Trailing stop level for long positions }
+    ShortStop      (0),       { Trailing stop level for short positions }
+    HiBase         (0),       { Upper base for Noise Area (gap-adjusted) }
+    LoBase         (0),       { Lower base for Noise Area (gap-adjusted) }
+    LastValid      (0),       { Last known price for filling missing slots on early-close days }
+    MeanRet        (0),       { Mean of daily returns for volatility calculation }
+    VarRet         (0),       { Variance of daily returns }
+    CanEnter       (false),   { Flag indicating whether a new entry is allowed }
+    Ready          (false),   { Sufficient historical data available? }
+    idxD           (0),       { Loop index for days }
+    idxS           (0),       { Loop index for slots }
+    MaxSlots       (0),       { Total number of slots in the trading session }
+    HistSize       (0);       { Total elements in HistClose array }
+
+{ Dynamic arrays – sized at runtime based on inputs }
+Array:
+    HistOpen[]     (0),       { Opening prices of past days (1 = yesterday) }
+    HistClose[]    (0),       { Dynamic 1D array simulating 2D [day, slot] }
+    DailyCl[]      (0),       { Daily closing prices (1 = yesterday) }
+    CurClose[]     (0),       { Closing prices for each slot of the current day }
+    Sig[]          (0),       { Average absolute move from open for each slot }
+    UB[]           (0),       { Upper Noise Area boundary for each slot }
+    LB[]           (0);       { Lower Noise Area boundary for each slot }
+
+    
+{ Determine how many slots exist in the session (regular hours: 390 minutes) }
+MaxSlots = IntPortion(390 / TradeFreq);
+if MaxSlots < 1 then MaxSlots = 1;
+
+{ Resize dynamic arrays to fit the required dimensions }
+Array_SetMaxIndex(HistOpen, LookBack+2);
+Array_SetMaxIndex(DailyCl, VolLookBack+2);
+Array_SetMaxIndex(CurClose, MaxSlots);                             { Index 0 is valid (09:30), no +1 needed }
+Array_SetMaxIndex(Sig, MaxSlots);
+Array_SetMaxIndex(UB, MaxSlots);
+Array_SetMaxIndex(LB, MaxSlots);
+
+{ HistClose: simulate 2D with row-major indexing.
+  Rows needed = LookBack + 2 (days), columns = MaxSlots.
+  Total elements = (LookBack + 2) * MaxSlots, indices 0 .. HistSize-1. }
+HistSize = (LookBack+2) * MaxSlots;
+Array_SetMaxIndex(HistClose, HistSize-1);
+
+{ ========================== New Trading Day Housekeeping ========================== }
+if Date <> Date[1] then begin
+    DayCount = DayCount + 1;    
+    { Shift historical data only if we have valid price data for the day }
+    if DayCount > 1 and DayOpen > 0 and Close[1] > 0 then begin    
+        { ----------------------------------------------------------------------
+          Fill missing slots on early-close days with the last known price.
+          CRITICAL: LastValid must be initialised to -1 (a sentinel meaning "no
+          valid price yet").  NEVER set it to Close[1] (yesterday's close) or
+          DayOpen (today's open) because:
+            - Close[1] would incorrectly use the final settlement price for a
+              missing early slot – while rarely triggered, it is logically flawed.
+            - DayOpen would introduce a severe look-ahead bias: you would be
+              using today's opening price to fill yesterday's historical gap,
+              which invalidates any backtest results.
+          The only correct approach is to forward-fill using only prices that
+          were actually printed during yesterday's session.
+          ---------------------------------------------------------------------- }
+        LastValid = -1;        { Sentinel: no valid price encountered yet }
+        for idxS = 0 to MaxSlots - 1 begin
+            if CurClose[idxS] > 0 then
+                LastValid = CurClose[idxS]   { Valid price: update cache }
+            else
+                CurClose[idxS] = LastValid;  { Invalid (-1): fill with last valid }
+        end;
+        
+        { Shift historical slot data: index 1 becomes yesterday }
+        for idxD = LookBack downto 2 begin
+            HistOpen[idxD] = HistOpen[idxD-1];
+            for idxS = 0 to MaxSlots-1 begin
+                HistClose[idxD * MaxSlots + idxS] = HistClose[(idxD-1) * MaxSlots + idxS];
+            end;
+        end;
+        HistOpen[1] = DayOpen;                                     { Today's open becomes the most recent }
+        for idxS = 0 to MaxSlots-1 begin
+            HistClose[1 * MaxSlots + idxS] = CurClose[idxS];     { Store yesterday's slot closes }
+        end;
+        
+        { Shift daily closing prices for volatility calculation }
+        for idxD = VolLookBack + 1 downto 2 begin
+            DailyCl[idxD] = DailyCl[idxD-1];
+        end;
+        DailyCl[1] = Close[1];                                     { Yesterday's close }
+    end;
+
+    DayOpen = Open;                                                { Store today's open }
+    { Reset the slot buffer and VWAP accumulators for the new day }
+    for idxS = 0 to MaxSlots-1 begin
+        CurClose[idxS] = -1;                                       { -1 indicates no data yet }
+    end;
+    CumPV       = 0;
+    CumVol      = 0;
+    SessionVWAP = Open;                                            { Initialise VWAP with today's open }
+
+    { ----- Compute Noise Area (Sigma, UB, LB) for each slot ----- }
+    { Requires at least LookBack days of historical data }
+    if DayCount >= LookBack + 1 then begin
+        for idxS = 0 to MaxSlots-1 begin
+            Sig[idxS] = 0;
+            for idxD = 1 to LookBack begin
+                if HistOpen[idxD] > 0 then
+                    Sig[idxS] = Sig[idxS] + AbsValue(HistClose[idxD * MaxSlots + idxS] / HistOpen[idxD] - 1);
+            end;
+            Sig[idxS] = Sig[idxS] / LookBack;                      { Average absolute move from open }
+        end;
+
+        { Apply overnight gap adjustment: use the higher of today's open and yesterday's close as the base }
+        HiBase = MaxList(Open, Close[1]);
+        LoBase = MinList(Open, Close[1]);
+
+        for idxS = 0 to MaxSlots-1 begin
+            UB[idxS] = HiBase * (1 + VolMult * Sig[idxS]);         { Upper boundary }
+            LB[idxS] = LoBase * (1 - VolMult * Sig[idxS]);         { Lower boundary }
+        end;
+    end;
+
+    { ----- Dynamic Position Sizing (Volatility Targeting) ----- }
+    { Compute the sample standard deviation of daily returns over VolLookBack days }
+    DailyVol  = 0;
+    LevFactor = 1;
+    if DayCount >= VolLookBack + 2 then begin
+        { Mean return }
+        MeanRet = 0;
+        for idxD = 1 to VolLookBack begin
+            MeanRet = MeanRet + (DailyCl[idxD] / DailyCl[idxD+1] - 1);
+        end;
+        MeanRet = MeanRet / VolLookBack;
+
+        { Variance (sample, using n-1 denominator) }
+        VarRet = 0;
+        for idxD = 1 to VolLookBack begin
+            VarRet = VarRet + Square(DailyCl[idxD] / DailyCl[idxD+1] - 1 - MeanRet);
+        end;
+        if VolLookBack > 1 then
+            DailyVol = SquareRoot(VarRet / (VolLookBack - 1));     { Sample std dev }
+    end;
+
+    { Compute leverage: target volatility (2%) divided by current daily volatility, capped at MaxLev }
+    if UseDynSizing and DailyVol > 0 then
+        LevFactor = MinList(MaxLev, TargetVol / DailyVol);
+
+    { Calculate the number of shares to trade for the day }
+    AUM = InitialCapital + NetProfit;                              { Current equity }
+    NumShares = IntPortion(AUM * LevFactor / Open);                { Shares = equity * leverage / price }
+    if NumShares < 0 then NumShares = 0;                           { Safety: never negative }
+end;
+
+{ ============================ Per-Bar Update (Executed on Every Bar of Data1) ============================ }
+{ Convert Time (HHMM) to absolute minutes from midnight }
+Minutes = IntPortion(Time / 100) * 60 + Mod(Time, 100);
+MinFromOpn = Minutes - 570;                                        { Minutes since 09:30 }
+
+{ Determine the slot index for this bar }
+if MinFromOpn >= 0 then
+    Slot = IntPortion(MinFromOpn / TradeFreq)                      { Slot 0 = 09:30, Slot 1 = 10:00, … }
+else
+    Slot = -1;                                                     { Before market open }
+
+if Slot >= 0 and Slot < MaxSlots then begin
+    CurClose[Slot] = Close;                                        { Store this bar's close for the slot }
+
+    { ----- Update Session VWAP using the typical price of this bar ----- }
+    TP = (High + Low + Close) / 3.0;
+    CumPV  = CumPV  + TP * Volume;
+    CumVol = CumVol + Volume;
+	if CumVol > 0 then SessionVWAP = CumPV / CumVol;               { Current VWAP for the day }
+
+    Ready = DayCount >= LookBack + 1;                              { Only trade after enough history }
+
+    { ----- Signal Evaluation (only within allowed time window) ----- }
+    if Ready and MinFromOpn >= MinFromOpen and MinFromOpn <= MaxFromOpen then begin
+        { Determine the trailing stop levels based on StopMode }
+        if StopMode = 1 then begin
+            LongStop = MaxList(UB[Slot], SessionVWAP);            { Long stop = max(UB, VWAP) }
+            ShortStop = MinList(LB[Slot], SessionVWAP);            { Short stop = min(LB, VWAP) }
+        end
+        else if StopMode = 2 then begin
+            LongStop = SessionVWAP;                               { VWAP only }
+            ShortStop = SessionVWAP;
+        end
+        else begin
+            LongStop = LB[Slot];                                  { Opposite band (paper base model) }
+            ShortStop = UB[Slot];
+        end;
+
+        CanEnter = (MarketPosition = 0);                           { Entry allowed only if flat }
+
+        { ----- Check for Stop Loss Triggers ----- }
+        if MarketPosition = 1 and Close <= LongStop then begin
+            Sell ("LX-BandVWAP") this bar at close;
+            CanEnter = true;                                       { After exit, allow re-entry }
+        end;
+        if MarketPosition = -1 and Close >= ShortStop then begin
+            BuyToCover ("SX-BandVWAP") this bar at close;
+            CanEnter = true;
+        end;
+		
+        { ----- ENTRY SIGNALS (PYTHON-ALIGNED: requires Close > VWAP for Long, Close < VWAP for Short) ----- }
+        if CanEnter and NumShares > 0 then begin
+            if TradeLong and Close > LongStop then
+                Buy ("LE-Break") NumShares shares this bar at close;
+            
+            if TradeShort and Close < ShortStop then
+                SellShort ("SE-Break") NumShares shares this bar at close;
+        end;
+    end;
+end;
+
+{ ============================ End of Day Exit ============================ }
+SetExitOnClose;    { Close all positions at the end of the session (16:00) }
+
+{ ============================ Debug Output ============================ }
+if ShowDebug and Ready then begin
+    Print(ELDateToString(Date), " ", NumToStr(Time, 0),
+          " | Slot=", NumToStr(Slot, 0),
+          " | Close=", NumToStr(Close, 2),
+          " | UB=", NumToStr(UB[Slot], 2),
+          " | LB=", NumToStr(LB[Slot], 2),
+          " | VWAP=", NumToStr(SessionVWAP, 2),
+          " | LongStop=", NumToStr(LongStop, 2),
+          " | ShortStop=", NumToStr(ShortStop, 2),
+          " | Pos=", NumToStr(MarketPosition, 0));
+end;
