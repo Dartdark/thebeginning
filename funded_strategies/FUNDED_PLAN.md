@@ -34,6 +34,28 @@ Cushion sizing: RS is 1 MNQ, so it is off (0) while f < 1 (cushion under $1,500 
 confirmation skipped by the user (no backtests while trading live); the user's own MultiCharts run in the research note
 matches the rebuild (PF 1.37 vs 1.38 before costs, longs PF 1.46 both). Live: the drift alarm decides (`../live/README.md`).
 
+## Dual Thrust added to the 150K funded plan (user, 2026-10-24)
+
+The user's Dual Thrust v4 (`NQ_Dual_Thrust.txt`; research `../analysis/dual_thrust_test.py`, checker PASS WITH CONCERNS,
+TIER_LIST A): prior RTH day RR = max(high - close, close - low); the first 1-minute close beyond today's 08:31 open
+± 0.5 RR (08:31-14:30) enters at the next bar, one trade a day, stop 50 / target 100 points, out 14:56, day skipped if
+RR / ADR20 > 1.2. Per NQ 2018-26: $140 a trade, PF 1.28, t 4.4, 9/9 years, max DD $19.6k.
+
+| Plan | DT setting | Effect | Decision |
+|---|---|---|---|
+| **150K funded** (plan x 1.5 + RS 1 MNQ, full size from $3,000; bootstrapped, 500 paired 2-year histories) | **2 MNQ, both sides** | 1y $17,024 vs $15,620 (bad case p5 $8,350 vs $5,500), all 6 payouts by day 226 vs 250, blown 2.2% vs 1.8%; 2y $20,077 vs $20,126 (both at the $20,500 cap) | **in the plan** |
+| 150K funded, single history (every start day from 2018) | 2 MNQ | 1y $17,363 vs $16,707, 2y $20,285 vs $20,038, blown 0%, 6th payout day 216 vs 228 | |
+| 150K funded, other sizes | 1 / 3 / 4 MNQ | 1 MNQ: 6th payout day 241, blown 1.4%; 3 MNQ blown 3.6%; 4 MNQ blown 7.6% | not used |
+| 50K funded (1,000 histories) | - | + 1 MNQ −$124; best swap VB 2/1 -> 1/1 + DT 1 +$106 (t 1.1, a tie) | not used |
+| 50K / 150K evaluation | - | 50K 50.1% -> 48.5-48.9%; 150K 41.6% -> 41.2% (2-3 MNQ) | not used |
+| Personal account | 1 micro per portfolio unit | +$2,400 a year, Sharpe 2.97 -> 3.00, return/DD 7.8 -> 8.2, capital $23.0k -> $25.0k | in the personal plan |
+
+Why it helps only the 150K: the 150K plan reaches its $20,500 cap within 2 years in nearly every history, so DT can only
+make it faster; its ~$5,000-a-year at 2 MNQ fits the 150K's $4,000 drawdown but not the 50K's $2,000. Cushion sizing:
+1 MNQ while the cushion is below $3,000 (f = 0.5), 2 MNQ from there. **Before the first 150K funded account starts:**
+the user's MultiCharts report of v4 for the trade-by-trade check (`../TODO.md`); live, the drift alarm decides.
+Code `../analysis/dual_thrust_150k_test.py`, output `../analysis/outputs/dual_thrust_150k_output.txt`.
+
 ## Current plan (updated 2026-10-13): seven strategies (Vol-Control Sell dropped), faster to $13k
 
 Priority: collect all 6 payouts ($13,000) sooner. **New: the Bridge's Monday Long NQ** (it ships with The Bridge,
