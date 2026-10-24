@@ -31,7 +31,10 @@ Parity: 2025-01 -> 2026-09 205 trades, $409 a trade = ~$84k (report $85.3k). Dis
 ## Apex benches (`analysis/overnight_anomaly_bench.py`)
 - Evaluation (combine set VB 8 + ONB ADX30 $1,100 + Bridge Monday 2 + EOS $500): pass 50.1% -> + Block B 1 MNQ 49.9%,
   2 MNQ 50.2%, 3 MNQ 47.6%; in place of Bridge Monday 49.1% / 48.7%. Median days to pass 6 in every case. No gain.
-- Funded: see the bench output (added below when the bootstrap finishes).
+- Funded (bootstrapped, 1,000 paired 2-year histories; year 1 / year 2 / blown):
+  plan $9,354 / $12,088 / 7.0%; + Block B 1 MNQ $9,262 / $11,774 / 9.6%; 2 MNQ $7,738 / $9,361 / 29.8%;
+  in place of the Monday Long 1 MNQ $9,511 / $12,006 / 8.1% (beats the plan in 49.8% of histories); 2 MNQ $8,172 / $9,804 / 26.7%.
+  Daily correlation with every plan piece within ±0.08. No gain: the plan stays.
 
 ## Block A at 9 MNQ (the user's challenge idea)
 Stop = 0.30 x 15-day RTH ATR. At 9 MNQ one stop-out costs (median per year): 2018 $623, 2022 $1,743, 2024 $1,398,
@@ -50,6 +53,6 @@ ADX30 does at $1,100) is the minimum, and as an ONB replacement the OB v2 family
 6. Shared position: the `MarketPosition = 0` / `OnrbPos` guards keep the blocks apart (no hedge possible).
 
 ## Verdict
-Block B: a real but modest effect (the overnight drift, stronger after down days), t below the bar; C. It does not help
-the evaluation and (pending the funded bootstrap) is not a plan change. Block A at 9 MNQ: no (a single stop can end the
-account). Personal-account candidate for Block B at 1 MNQ; Apex use only if the funded bootstrap shows a gain.
+Block B: a real but modest effect (the overnight drift, stronger after down days), t below the bar; C. It helps neither
+the evaluation nor the funded plan (as an addition or in place of the Monday Long). Block A at 9 MNQ: no (a single stop can end the
+account). Personal-account candidate for Block B at 1 MNQ.
