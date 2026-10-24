@@ -1,0 +1,81 @@
+{
+  "preregistration": "928c0eacf65627aea059c8961e8957c976f550ed",
+  "pin": "e34d71cd3537a9f019d2521e280fc92f3ffdb4c6",
+  "prepared_cache_sha256": "f5856163feab7b28315be7a3564c455d8dc8ec42429bf4cd66521817ce3fcf99",
+  "prepared_manifest_sha256": "5e6dc2cace37bbce885c9cc74dcee536922784d2b979fdcf852bcd1f6d847f5c",
+  "scripts": {
+    "codex_anson_accounts.py": "a1d47a3a7cf03fd039163e95c115fc128e9da40bbc898a2b5b109e9e8193eda7",
+    "codex_anson_plan.py": "8dc3e05d2bbc033716847b0a656af66f1952be29e0f16abc41de21b827de81ae",
+    "codex_ob_v2_accounts.py": "75378fa2876b6405434d9d2fbbb221adeba422ecae96df38e1f9ae29b04469a2"
+  },
+  "funded": {
+    "contexts": 2,
+    "allocations": {
+      "50K": 5,
+      "150K": 6
+    },
+    "fees": [
+      1.04,
+      1.24
+    ],
+    "horizons": [
+      250,
+      500
+    ],
+    "paired_histories": 1000,
+    "seeds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "circular_block": 20,
+    "production_parity_expected": 220,
+    "fixed_history_indices": [
+      0,
+      1,
+      17,
+      333,
+      999
+    ]
+  },
+  "evaluation": {
+    "real_full_windows": 21,
+    "chronological_CI_block": 20,
+    "resamples": 5000,
+    "tie_handling": {
+      "50K": "pass first",
+      "150K": "breach first"
+    }
+  },
+  "sensitivity_extra_fee_totals_per_micro": {
+    "VB_F": 106.8,
+    "MON_MC": 90.0,
+    "CLS": 19.200000000000003,
+    "EOS": 21.000000000000004,
+    "LDF_MC": 179.00000000000003,
+    "RS_L": 119.6,
+    "VB_N": 241.8,
+    "NFP_MC": 15.600000000000003,
+    "DT": 322.19999999999993,
+    "RS": 232.2,
+    "ONB_ML2_MC": 68.6,
+    "MOC_MES": 40.400000000000006,
+    "MON_BR_MC": 43.400000000000006
+  },
+  "seconds": 188.15599999998813,
+  "limits": [
+    "CLS retains fast_plan_lab's whole-Monday constant adverse-path approximation.",
+    "MOC_MES retains add_moc_mes's close-based intraday path approximation.",
+    "Real-fee increments follow Lab.real_fees: each day's total fee is present from its first entry.",
+    "RS uses the unchanged pinned Python baseline, independently reconciled with its committed ledger.",
+    "Prior50Kpreparedcache has a small unresolved gap against the published funded reference.",
+    "150Kbaseline retains fractional pre-cushion sizes from the published bench.",
+    "Corrected150Kevaluation uses actual integer quantities after dollar-risk scaling; old41.6% is not the same input baseline.",
+    "Shared eligibility omits missing/stress days; funded resampling changes adjacency.",
+    "No candidate protective stop exists; open-position risks use observed minute extremes.",
+    "Daily overlap cannot establish an offset before breach.",
+    "Candidate reserves entry slippage while open and pays RTcommission at exit; inherited Apex baseline reserves full RTcommission from entry. Closed totals match but fee-mark timing is asymmetric."
+  ],
+  "post_run_metadata_amendment": "Clarified fee-mark timing limitation only; no return, input or account algorithm changed and no additional backtest run."
+}

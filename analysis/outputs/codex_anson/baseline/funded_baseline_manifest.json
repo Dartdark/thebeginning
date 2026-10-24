@@ -1,0 +1,90 @@
+{
+  "ref": "e34d71cd3537a9f019d2521e280fc92f3ffdb4c6",
+  "prepared_base_sha256": "699057ea248172f91ee64f7f3c4aad72347434063e64fab836576da53877067b",
+  "additions_signature": {
+    "ref": "e34d71cd3537a9f019d2521e280fc92f3ffdb4c6",
+    "prepared_cache": "699057ea248172f91ee64f7f3c4aad72347434063e64fab836576da53877067b",
+    "rs_replay": "9bd7f69fc4b1b0cf748bbec97dd8bfab81a0e13e5f83c3ecbbc2fcb4b977a6ec",
+    "dt_reference": "90142c79a4f90b7588aab15dbe03843870bdee3691bd2fb65b0fb1ae4e8004d1",
+    "dt_timed_ledger": "bc9265593ea2972b7dcc743c354f6e832ea082d9e3cfe293165d30fb4b1f74e0",
+    "fee": 1.04
+  },
+  "additions_cache_sha256": "6652ef731528a31bdce004cc8979782e1ef31cc18c2c3ea48f68cd9925fb9710",
+  "reused_additions": true,
+  "fee": 1.04,
+  "dt_reconciliation": {
+    "replay_rows": 1611,
+    "reference_rows": 1611,
+    "exact_rows": 1611,
+    "mismatch_rows": 0,
+    "tolerance": 1e-07,
+    "source": "committed timed replica, no signal rerun or price matching",
+    "daily_real_fee_C_matches_committed_ledger": true
+  },
+  "plan": {
+    "50K_funded": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "MON_MC": 1,
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1
+    },
+    "150K_funded": {
+      "VB_N": 3.0,
+      "VB_F": 1.5,
+      "ONB_ML2_MC": [
+        "risk",
+        600.0
+      ],
+      "MON_MC": 1.5,
+      "EOS": [
+        "risk",
+        1050.0
+      ],
+      "LDF_MC": 3.0,
+      "NFP_MC": [
+        "risk",
+        750.0
+      ],
+      "MON_BR_MC": 1.5,
+      "CLS": 3.0,
+      "MOC_MES": 3.0,
+      "RS": 1,
+      "DT": 2
+    }
+  },
+  "cushion": {
+    "50K_funded": {
+      "fmin": 0.5,
+      "fmax": 1.0,
+      "ref": 1500.0
+    },
+    "150K_funded": {
+      "fmin": 0.5,
+      "fmax": 1.0,
+      "ref": 3000.0
+    }
+  },
+  "baseline_limits": [
+    "CLS retains fast_plan_lab's whole-Monday constant adverse-path approximation.",
+    "MOC_MES retains add_moc_mes's close-based intraday path approximation.",
+    "Real-fee increments follow Lab.real_fees: each day's total fee is present from its first entry.",
+    "RS uses the unchanged pinned Python baseline, independently reconciled with its committed ledger."
+  ],
+  "integer_rule": "floor(base_quantity*cushion_multiplier+1e-9)"
+}

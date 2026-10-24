@@ -1,0 +1,176 @@
+{
+  "preregistration_commit": "928c0ea",
+  "return_models": 3,
+  "models": [
+    "intended_raw",
+    "intended_apex",
+    "defaults_raw"
+  ],
+  "synthetic_checks": {
+    "user_intended_4_5_20": true,
+    "defaults_3_6_diagnostic": true,
+    "prior_only_range_denominator": true,
+    "six_completed_held_bars_not_seven": true,
+    "twenty_completed_held_bars": true,
+    "observed_next_chart_open": true,
+    "no_instant_reentry_after_exit": true,
+    "ordinary_flat_wall1455": true,
+    "explicit_early_adapter": true,
+    "fixed_event_walker_parity": true,
+    "raw_late_reopen_order_preserved": true,
+    "no_market_cache_loaded": true
+  },
+  "period_order": [
+    "2018_22",
+    "2023_plus"
+  ],
+  "no_parameter_selection": true,
+  "feature_cache": "agents/codex/runtime/anson_bars.pkl",
+  "no_rescue_fills": true,
+  "ledger_files": {
+    "intended_raw_trades.csv": {
+      "rows": 2059,
+      "sha256": "46cfee543e8f39ca79de023cc2e0f8fbf8a0622708ff904e64466fd911e3ea35"
+    },
+    "intended_raw_audit.csv": {
+      "rows": 3204,
+      "sha256": "2a43749655a07058d8bf3310d9973e9f7f97fa9f96964b6d92cc93ecf6c20b92"
+    },
+    "intended_raw_events.csv": {
+      "rows": 2059,
+      "sha256": "cbee8027f0b9c181cdc75ca5ba1ec4443c91e261ef3f79e7bac631aefaaa557d"
+    },
+    "intended_raw_gaps.csv": {
+      "rows": 19,
+      "sha256": "74aa716384a8285ee35b1b7f05919229ae01496c2c25e09d9abffb91abe369e9"
+    },
+    "intended_apex_trades.csv": {
+      "rows": 2056,
+      "sha256": "d90d1b9e44f19d27a185167bfae54065db47550d3705be43014c0ea8e18d66af"
+    },
+    "intended_apex_audit.csv": {
+      "rows": 3204,
+      "sha256": "8ec10fd8c3c5661b8f243ea491625b237622d6be0f259f477539a3f5d81def1c"
+    },
+    "intended_apex_events.csv": {
+      "rows": 2056,
+      "sha256": "52eb1ed3cf41b7aa47d59d50e73975143d021a5a00787fa84757f4530084077b"
+    },
+    "intended_apex_gaps.csv": {
+      "rows": 1,
+      "sha256": "5a7d26381eb593a535c8e5e52d2edb89f16b48021b2f97267320355fdd8d92e0"
+    },
+    "defaults_raw_trades.csv": {
+      "rows": 8086,
+      "sha256": "16cf68f62345583c476c8e73dda8e4774beec50497bac0bc75ca52818e7ae491"
+    },
+    "defaults_raw_audit.csv": {
+      "rows": 3204,
+      "sha256": "45ed52fa819e55ce79382228535afd52a018d31f9233df3b2bb1d73b3424f78b"
+    },
+    "defaults_raw_events.csv": {
+      "rows": 8086,
+      "sha256": "ecb4bac5380857ab9333050b9656ecc6d7f7dc36ff725d17a3ede3c0d71ebb7f"
+    },
+    "defaults_raw_gaps.csv": {
+      "rows": 37,
+      "sha256": "5181fe1fa428bb0122eaf5c410264cf5f9cf24ccc853bc567a1c6d31b7c89c7d"
+    }
+  },
+  "specs": {
+    "intended_raw": {
+      "model": "intended_raw",
+      "threshold": 4.5,
+      "hold_bars": 20,
+      "early_adapter": false,
+      "instrument": "NQ raw geometry / MNQ monetary scaling by caller",
+      "timezone": "Central",
+      "bar_minutes": 5,
+      "session": "Default/Globex proxy from observed Grid24 bars",
+      "iog": false,
+      "lookback_bars": 12,
+      "range_lookback_bars": 20,
+      "denominator": "mean High-Low of preceding 20 observed chart bars, excluding current",
+      "momentum": "current chart close minus chart close 12 observed bars ago",
+      "current_bar_guard": "observed index + 1 - assumed MaxBarsBack20 > 20; all pre-start history retained",
+      "entry": "signal close 08:30..14:30 inclusive, next observed chart-bar open",
+      "hold": "entry chart bar counts as completed held bar1; queue exit when held count reaches HoldBars",
+      "ordinary_flat": "queue market exit on chart close>=14:55; next observed chart open, wall14:55 when contiguous",
+      "early_policy": "raw source; no early-close intervention",
+      "stop": false,
+      "target": false,
+      "costs": "raw geometry only; caller charges two market fill slips and round-trip fee",
+      "quantity": "one raw NQ unit; account quantities applied externally",
+      "source_state": "whole observed chart chronology before eligibility filtering; no date reset",
+      "coverage": "Apex requires finite OHLC08:26..14:56 regular /08:26..11:31 early, plus known timely fills",
+      "gap_policy": "retain raw known exits; audit missing held spans; never invent an exit or fill an absent bar",
+      "known_closure_proxy": "daily16:01..17:00; weekendFri16:01..Sun17:00; repo early dates12:01..17:00",
+      "closure_caveat": "early NQ closing clock is an explicit proxy, not independently verified calendar parity"
+    },
+    "intended_apex": {
+      "model": "intended_apex",
+      "threshold": 4.5,
+      "hold_bars": 20,
+      "early_adapter": true,
+      "instrument": "NQ raw geometry / MNQ monetary scaling by caller",
+      "timezone": "Central",
+      "bar_minutes": 5,
+      "session": "Default/Globex proxy from observed Grid24 bars",
+      "iog": false,
+      "lookback_bars": 12,
+      "range_lookback_bars": 20,
+      "denominator": "mean High-Low of preceding 20 observed chart bars, excluding current",
+      "momentum": "current chart close minus chart close 12 observed bars ago",
+      "current_bar_guard": "observed index + 1 - assumed MaxBarsBack20 > 20; all pre-start history retained",
+      "entry": "signal close 08:30..14:30 inclusive, next observed chart-bar open",
+      "hold": "entry chart bar counts as completed held bar1; queue exit when held count reaches HoldBars",
+      "ordinary_flat": "queue market exit on chart close>=14:55; next observed chart open, wall14:55 when contiguous",
+      "early_policy": "repository early-close dates: no entry signals at/after11:30; queue exit at11:30",
+      "stop": false,
+      "target": false,
+      "costs": "raw geometry only; caller charges two market fill slips and round-trip fee",
+      "quantity": "one raw NQ unit; account quantities applied externally",
+      "source_state": "whole observed chart chronology before eligibility filtering; no date reset",
+      "coverage": "Apex requires finite OHLC08:26..14:56 regular /08:26..11:31 early, plus known timely fills",
+      "gap_policy": "retain raw known exits; audit missing held spans; never invent an exit or fill an absent bar",
+      "known_closure_proxy": "daily16:01..17:00; weekendFri16:01..Sun17:00; repo early dates12:01..17:00",
+      "closure_caveat": "early NQ closing clock is an explicit proxy, not independently verified calendar parity"
+    },
+    "defaults_raw": {
+      "model": "defaults_raw",
+      "threshold": 3.0,
+      "hold_bars": 6,
+      "early_adapter": false,
+      "instrument": "NQ raw geometry / MNQ monetary scaling by caller",
+      "timezone": "Central",
+      "bar_minutes": 5,
+      "session": "Default/Globex proxy from observed Grid24 bars",
+      "iog": false,
+      "lookback_bars": 12,
+      "range_lookback_bars": 20,
+      "denominator": "mean High-Low of preceding 20 observed chart bars, excluding current",
+      "momentum": "current chart close minus chart close 12 observed bars ago",
+      "current_bar_guard": "observed index + 1 - assumed MaxBarsBack20 > 20; all pre-start history retained",
+      "entry": "signal close 08:30..14:30 inclusive, next observed chart-bar open",
+      "hold": "entry chart bar counts as completed held bar1; queue exit when held count reaches HoldBars",
+      "ordinary_flat": "queue market exit on chart close>=14:55; next observed chart open, wall14:55 when contiguous",
+      "early_policy": "raw source; no early-close intervention",
+      "stop": false,
+      "target": false,
+      "costs": "raw geometry only; caller charges two market fill slips and round-trip fee",
+      "quantity": "one raw NQ unit; account quantities applied externally",
+      "source_state": "whole observed chart chronology before eligibility filtering; no date reset",
+      "coverage": "Apex requires finite OHLC08:26..14:56 regular /08:26..11:31 early, plus known timely fills",
+      "gap_policy": "retain raw known exits; audit missing held spans; never invent an exit or fill an absent bar",
+      "known_closure_proxy": "daily16:01..17:00; weekendFri16:01..Sun17:00; repo early dates12:01..17:00",
+      "closure_caveat": "early NQ closing clock is an explicit proxy, not independently verified calendar parity"
+    }
+  },
+  "inputs": {
+    "scratch_data/g24.pkl": "e35c222362b9fa6cbc97933b38a2f33eba7009200686790198bb53f383795ab5",
+    "agents/codex/inputs/anson_momentum/source.txt": "7df878638c2e4ee3119854204b709c720536ebce366a8d17b2137f03d0c40458",
+    "agents/codex/inputs/anson_momentum/user_spec.md": "b7d8749e0e727c741fa7ef161344a0b13408409d4f4fd95d02021298c4f02e65"
+  },
+  "script_sha256": "4bb78bf6bbef0c97c5c08a6e465424aad1a7589aec40baa22e06280ecc7722fe",
+  "gap_reference_metadata_correction": "Split-local gap IDs offset in combined ledger; raw return fields unchanged"
+}
