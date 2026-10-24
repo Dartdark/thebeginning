@@ -76,6 +76,7 @@ not into the plan, for later when the account is large enough or sizes can be we
 | Strategy | Tier | Effect when added | Why it waits | Source |
 |---|---|---|---|---|
 | S30 IBS reversal (NQ + ES) | B | +$6k a year, return/DD 9.6 → 8.3, capital +$7.4k | in the ladder only from ~$33.6k, at reduced weight above ~$54k | `analysis/forward_log_plans_test.py` |
+| FVB First Valid Breakout (whole rule) | B | +$3.8k a year, Sharpe 3.04 → 3.01, return/DD 8.3 → 8.2, capital +$3.9k (shorts only: return/DD 8.9, but a post-hoc split) | fat tail, longs weak (PF 1.13) | `analysis/fvb_bench.py` |
 | S03 Noise Area v2 | B | personal gains need more capital (Codex); Apex plans worse | thinned since mid-2024 | `agents/codex/results/s03_v2.md` (codex/work) |
 | Anson momentum (4.5 / 20) | D | full + 1 MNQ: median year $23.7k → $25.6k, p95 DD $5.0k → $6.1k, capital $25.0k → $30.4k | weak standalone (2025+ t 0.97) | `agents/codex/results/anson_personal.md` |
 | R2Vault | C | personal CT gains small at equal drawdown | weak standalone (t 2.9, DSR 0.5) | `agents/codex/results/r2vault.md` |

@@ -38,6 +38,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **PAPERTREND v2 (user's description + report, 2026-10-24): B** ($373 per NQ, t 4.1; checker FAIL narrow, DSR 0.865; replica
   identical). Skip filter adds nothing, gap filter halves risk not edge; ES / YM null; exit at 14:55 is the peak. No Apex plan helps; personal +
   1 micro return/DD 8.3 -> 8.7 (user's call, after the MC trade list explains 582 vs 535 trades). `analysis/papertrend_test.py`.
+- **FVB First Valid Breakout (user's file, 2026-10-25): B** ($166 per NQ, t 3.8, 9/9 years; checker PASS WITH CONCERNS, replica identical).
+  Shorts carry it (longs PF 1.13); fat tail (cap 3R = loss); ~2/3 of it is momentum from the open. No Apex plan gain; personal return/DD
+  8.3 -> 8.2 -> capital-expansion bench; shorts only 8.9 is post-hoc (pre-register first). `analysis/fvb_test.py`.
 - **Open for Claude:** automatic cushion sizing after the account check; Dual Thrust MC check when the report arrives.
 - **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)
   run in the session 'Scheduled jobs' (session_014DKffATms37kZigaa2xR2P), not in a new chat.
