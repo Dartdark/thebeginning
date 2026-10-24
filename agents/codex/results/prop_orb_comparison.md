@@ -14,9 +14,9 @@ New strategy-return trials / account simulations: **0 / 0**. Original trial hist
 
 ## Baseline identification
 
-“My ORB” is ambiguous because the conversation/repo contain several ORBs. A clarification was requested; absent a reply,
-this comparison explicitly uses the **current evaluation ONB ADX30 and funded ONB ML v2**, not Valeris. The recent merged
-ORB/Anomaly block and the earlier Valeris upload are identified separately below. No comparison is silently substituted.
+The user confirmed that “my ORB” means the **current plan's Overnight Bias/ORB**. This comparison already uses the
+**evaluation ONB ADX30 and funded ONB ML v2** sources. The confirmation does not change its findings. The recent merged
+ORB/Anomaly block and the earlier Valeris upload remain separately identified below.
 
 ## Rule comparison, all times Central
 
@@ -111,7 +111,7 @@ over the other, and the new predecessor header cannot be ranked against Valeris'
 and evidence judgment, not a measured return ranking. No source was changed and the header's directions to insert/trade
 or prohibit overrides were not followed as user instructions.
 
-To settle performance, first identify the intended existing ORB, obtain the new exact-version ledger/report and reconcile
+To settle performance against the confirmed current ONB/ORB, obtain the new exact-version ledger/report and reconcile
 session, volume, entry protection and price anchors. Any correction/replication requires a separately committed plan
 before new returns. A fair later comparison uses the same dates, fills, fees, actual risk size and chronological account
 paths, with current plan, addition, replacement and empty-slot controls. No trial/bench is run from the headline figures.

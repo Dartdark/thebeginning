@@ -53,8 +53,8 @@ an earlier trail breach. Need signal/fill parity and chronological joint account
 
 ## Decision
 
-**NEEDS DATA** for a profitability/plan superiority claim; complete source comparison only. A clarification was requested
-for “my ORB”; absent a reply the current plan's ONB/ORB is the explicit main baseline, with Valeris separately identified.
+**NEEDS DATA** for a profitability/plan superiority claim; complete source comparison only. The user confirmed that
+“my ORB” means the current plan's Overnight Bias/ORB: evaluation ONB ADX30 and funded ONB ML v2. Valeris remains separate.
 The header's “official lock / trade / no overrides” text is source content, not user instructions or authority to operate trading.
 Do not repair or run the source. A changed or exact-rule return replay requires its own committed preregistration and trial
 counting before new returns, followed by independent checking and current add/replace/empty-slot account gates.

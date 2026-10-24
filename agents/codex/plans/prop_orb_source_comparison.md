@@ -10,7 +10,8 @@ This is a source-review record after inspection, not a preregistration of unseen
 
 Main baselines: current `apex_strategies/NQ_Overnight_Bias_ADX30.txt` and
 `funded_strategies/NQ_Overnight_Bias_ML.txt`; also identify the recent merged ORB/Anomaly relative and
-Valeris 848 as separate comparators. Update the baseline if the user's pending clarification specifies another source.
+Valeris 848 as separate comparators. The user subsequently confirmed the current plan's Overnight Bias/ORB baseline;
+the comparison already used those evaluation/funded sources and requires no change of findings.
 
 Allowed: unchanged source/hash, literal rule/default comparison, normalized clock arithmetic, synthetic signal/fill-risk
 examples, primary MultiCharts documentation, existing published context and independent read-only checks.

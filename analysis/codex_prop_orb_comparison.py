@@ -76,7 +76,7 @@ def main():
     updated_ema = prior_ema + (2/(new["ORMedianDays"]+1)) * (100-prior_ema)
     result = dict(
         verdict="Do not replace current ONB/ORB on source/header evidence",
-        baseline_assumption="Current plan ONB ADX30/evaluation and ONB ML/funded; Valeris separate; clarification pending when recorded",
+        baseline_selection="User confirmed current plan Overnight Bias/ORB: ONB ADX30/evaluation and ONB ML v2/funded; Valeris separate",
         new_strategy_return_trials=0, new_account_simulations=0,
         source_sha256=hashlib.sha256(INPUT.read_bytes()).hexdigest(), source_lines=len(code.splitlines()),
         literal_defaults=new, baselines=baseline, source_line_anchors=anchors,
