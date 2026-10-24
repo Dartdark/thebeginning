@@ -6,6 +6,9 @@ One-MNQ closed-equity drawdown is $1,868; the code's first post-entry bar lacks 
 There is no exact-source parity export or paired current-plan addition/replacement result; its LucidFlex simulation is a different comparison.
 Keep the current plan unchanged; original ledgers and source execution reconciliation are the next evidence, not a forced ONB contest.
 
+Follow-up: the requested actual portfolio test is now complete in [or_pullback_portfolio.md](or_pullback_portfolio.md).
+This earlier report records only the source-review stage; its statement that no paired test exists is historical.
+
 User scope: **put it against the current plan overall**. ONB is not a compulsory competitor or replacement.
 Scope record: `agents/codex/plans/or_pullback_source_review.md`; evidence: `agents/codex/evidence/or_pullback.md`.
 Input archive: `agents/codex/inputs/or_pullback/{source.txt,report.pdf,report_extracted.txt}` (unchanged originals, hashes in output).

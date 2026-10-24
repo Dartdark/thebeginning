@@ -1,0 +1,117 @@
+{
+  "current_plan_ref": "a67035be4189b493098c80f1def979348520fd5d",
+  "preregistration_commit": "1ad4306",
+  "scope": "Descriptive full-size NQ/MNQ occupancy only; not an account-performance result",
+  "excluded_instruments": {
+    "CLS": "MCL is not MNQ",
+    "MOC_MES": "MES is not MNQ"
+  },
+  "sizing": "Plan fixed sizes or floor(risk dollars / (stop points * $2)); no cushion multiplier",
+  "candidate_minutes": "entry+1 through exit, excluding exit minute when filled at open",
+  "current_minutes": "Pinned MC inferred entry/exit minutes inclusive; RS frozen open entry inclusive",
+  "timestamp_limits": [
+    "MC reports resolve chart bars, not exact ticks; load_mc infers the first matching minute",
+    "Inclusive MC endpoints can count same-minute reversal directions together",
+    "Bridge keeps pinned Monday booking; Sunday-night exits are booked at Monday minute zero",
+    "Fractions use candidate held price-minutes, not all market minutes or trade counts",
+    "Same and opposite side exposures can coexist; gross quantities never net them",
+    "Each maximum may occur on a different minute; MNQ exposures exclude CL and ES legs"
+  ],
+  "no_candidate_variants_changed": true,
+  "no_signals_or_returns_replayed": true,
+  "fixtures": {
+    "candidate_close_entry_excluded": true,
+    "candidate_open_exit_range_excluded": true,
+    "gross_does_not_cancel_opposite_positions": true
+  },
+  "ledgers": {
+    "VB_N": {
+      "trades_on_lab_calendar": 1209,
+      "trades_outside_lab_calendar": 0,
+      "ledger_rows": 1209,
+      "full_size_min": 2,
+      "full_size_max": 2,
+      "daily_trade_count_matches_cached_lab": true
+    },
+    "VB_F": {
+      "trades_on_lab_calendar": 534,
+      "trades_outside_lab_calendar": 0,
+      "ledger_rows": 534,
+      "full_size_min": 1,
+      "full_size_max": 1,
+      "daily_trade_count_matches_cached_lab": true
+    },
+    "ONB_ML2_MC": {
+      "trades_on_lab_calendar": 343,
+      "trades_outside_lab_calendar": 0,
+      "ledger_rows": 343,
+      "full_size_min": 0,
+      "full_size_max": 17,
+      "daily_trade_count_matches_cached_lab": true
+    },
+    "MON_MC": {
+      "trades_on_lab_calendar": 450,
+      "trades_outside_lab_calendar": 0,
+      "ledger_rows": 450,
+      "full_size_min": 1,
+      "full_size_max": 1,
+      "daily_trade_count_matches_cached_lab": true
+    },
+    "EOS": {
+      "trades_on_lab_calendar": 105,
+      "trades_outside_lab_calendar": 0,
+      "ledger_rows": 105,
+      "full_size_min": 1,
+      "full_size_max": 30,
+      "daily_trade_count_matches_cached_lab": true
+    },
+    "LDF_MC": {
+      "trades_on_lab_calendar": 895,
+      "trades_outside_lab_calendar": 2,
+      "ledger_rows": 897,
+      "full_size_min": 2,
+      "full_size_max": 2,
+      "daily_trade_count_matches_cached_lab": true
+    },
+    "NFP_MC": {
+      "trades_on_lab_calendar": 78,
+      "trades_outside_lab_calendar": 1,
+      "ledger_rows": 79,
+      "full_size_min": 0,
+      "full_size_max": 12,
+      "daily_trade_count_matches_cached_lab": true
+    },
+    "MON_BR_MC": {
+      "trades_on_lab_calendar": 217,
+      "trades_outside_lab_calendar": 0,
+      "ledger_rows": 217,
+      "full_size_min": 1,
+      "full_size_max": 1,
+      "daily_trade_count_matches_cached_lab": true
+    },
+    "RS_L": {
+      "trades_on_lab_calendar": 598,
+      "trades_outside_lab_calendar": 0,
+      "ledger_rows": 598,
+      "full_size_min": 1,
+      "full_size_max": 1,
+      "daily_trade_count_matches_cached_lab": true
+    }
+  },
+  "inputs": {
+    "agents\\codex\\runtime\\or_pullback_current_lab.pkl": "699057ea248172f91ee64f7f3c4aad72347434063e64fab836576da53877067b",
+    "scratch_data\\single_print_sessions.pkl": "cf0d7545a09954d98a9aaeafe817b3b7540df2f235208baa9fd0dfa4cca1974a",
+    "mc_reports\\Backtesting Strategy Performance Report VB v1.xlsx": "7169ba79c9f23cb55a8f8324b950c6e956aefdd130ca581fd52d9fdd203f3ccf",
+    "mc_reports\\Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx": "f5d9beee8f4e0a2a94870e6101526a7ee79c1874bdbe96145de3aa73d03b00fc",
+    "mc_reports\\Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx": "cf1bc66f4cf459a2d1adc94e434be3176937ddd147d0906c6c91e037f12f5814",
+    "mc_reports\\Backtesting Strategy Performance Report EOS v1.xlsx": "2a1c7dd88a261ad0b0df67f310e3c0c33b17d3faf85f7a94c53e9d910f63bc8f",
+    "mc_reports\\Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx": "d67673c0485d2c780b1f2d810d2929aac5360e4409cf767ef772ca980fff4085",
+    "mc_reports\\Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx": "7ed08ee978faa0bc4364d38b4863c11cf1d285610501a2dcf24cc19532fb2fe8",
+    "mc_reports\\Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx": "1c5bd433c0af727659262bcf3f65c61e87b2f53bf542572332ff8e5225b5f436",
+    "analysis\\outputs\\codex_or_pullback\\baseline\\baseline_rs_replay.csv": "9bd7f69fc4b1b0cf748bbec97dd8bfab81a0e13e5f83c3ecbbc2fcb4b977a6ec",
+    "analysis\\outputs\\codex_or_pullback_portfolio\\replay\\reported_rule_trades.csv": "dee7d3839e2fff8e7605596db641799e7051ccee327efe9241d1b8898b0feeb2",
+    "analysis\\outputs\\codex_or_pullback_portfolio\\replay\\literal_mc_delay_trades.csv": "acd0ba454f5f6706e0ee020942a56f0a1c918e07dd7649e66417908cb9b9fad7"
+  },
+  "pinned_module_manifest_sha256": "113d67bba542c273e99865963d8cbd0596486ffd373d3bf30e8a9f52f92bbcfc",
+  "script_sha256": "fa348d6d23b91cecd01b621df0f4c2c8e16e85c2b484f45e5955cb9c49b1da44"
+}
