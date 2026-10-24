@@ -1,3 +1,5 @@
+# NOT MULTICHARTS CODE: this is a Windows PowerShell script. Save it as C:\TradingData\VIX\vix_update.ps1 and run it in
+# PowerShell / Task Scheduler. Pasted into the PowerLanguage Editor it fails with 'unrecognized token: #'.
 # Daily VIX file for the Overnight Tick / VIX strategy (2026-10-24). dxFeed has no VIX index, so MultiCharts reads
 # C:\TradingData\VIX\VIX_daily.csv through Map ASCII (symbol VIX_CBOE, daily). This script rewrites that file from Cboe's
 # official history (https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv); if Cboe has not added

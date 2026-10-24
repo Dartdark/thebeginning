@@ -4,6 +4,9 @@ Read before writing or changing any MultiCharts code. **After every compile erro
 MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → fix), so it is not repeated.
 
 ## Compile errors
+- **"unrecognized token: #" at line 1** (2026-10-24, 'Overnight Ticks Auto VIX Updater' signal): a PowerShell script
+  (`tools/vix_update.ps1`) was pasted into a MultiCharts signal. `.ps1` files run in Windows PowerShell / Task Scheduler,
+  never in MultiCharts; only `.txt` PowerLanguage files go into the editor. Delete the signal and run the script in PowerShell.
 - **"Unknown Function" on `IIFString`** (NQ_Vault_Break_SP, line 199): not a built-in in our MultiCharts.
   Use an if / else with two `Print` statements (or `IFF` for numbers only).
 - **"unverified function"**: every OFB_* function must be compiled once before a signal that calls it.
