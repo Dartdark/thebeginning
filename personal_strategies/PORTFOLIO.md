@@ -46,7 +46,9 @@ with ~$11.5k. Add the next set only when the account reaches its line, and drop 
   of the backtest (`DEVELOPMENT_PROCESS.md`). At 60% of the backtest the full portfolio is ~$12k a year at 1 micro.
 - **FC 2B is not cleared yet:** forward log until 40-80 signals. Without it the full set is ~$17.7k a year.
 - **Twin Continuation holds overnight with a wide swing stop** (worst trade −$1,172 per MNQ); needs overnight margin
-  (check the broker). Without Twin the full set is $16.6k a year, DD p95 $4.5k.
+  (check the broker). Without Twin the full set is $16.6k a year, DD p95 $4.5k. Since 2026-10-24 its overnight holds are
+  marked at each 16:00 CT close instead of booked at exit (cross-review item): no material change (max DD $4,663, MC p95
+  DD $4,687, capital $23.4k, all as before; only 50 of 1,074 trades hold overnight).
 - RS and FC 2B overlap (both enter at 09:01 in the opening drive's direction, corr +0.36): they can lose together.
 - When to start (`DEVELOPMENT_PROCESS.md` lifecycle): from Apex payouts, after the live record matches the backtest
   (early start from ~month 3 at small size if ≥ 100 live trades, live ≥ 75% of backtest, no drift alarm).

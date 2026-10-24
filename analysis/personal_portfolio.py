@@ -16,6 +16,32 @@ import metrics as M, montecarlo as MC
 
 EXTRA = 0.55
 
+
+def twin_marked(days, path="checks/candidates/twin_continuation/trades.csv", sp="scratch_data/"):
+    """Twin v1 ledger with open overnight positions marked at each session's 16:00 CT close (2026-10-24, cross-review
+    2026-10-23 open item). A trade's session = its date, or the next date when it is after 16:00 CT. Each mark books the
+    price change since the last mark; costs and slippage (net - gross) go on the exit day, so the sum equals the ledger."""
+    import pickle
+    from grid24 import jof
+    g = pickle.load(open(sp + "g24.pkl", "rb")); cf = pd.Series(g.c.ravel()).ffill().to_numpy()
+    row = pd.Series(np.arange(len(g.ts)), index=pd.DatetimeIndex(g.ts))
+    has = ~np.isnan(g.c[:, jof(1530):jof(1600) + 1]).all(axis=1)          # a session with an afternoon close
+    t = pd.read_csv(path, parse_dates=["date", "entry_date"]); t = t[t.date <= days[-1]]
+    sess = lambda d, hm: d + pd.to_timedelta((hm > 1600).astype(int), unit="D")
+    s0, s1 = sess(t.entry_date, t.entry_time_ct), sess(t.date, t.exit_time_ct)
+    book = []
+    for r, a, b in zip(t.itertuples(), s0, s1):
+        last, gross = r.entry, 0.0
+        for d in pd.date_range(a, b - pd.Timedelta(days=1)):
+            i = row.get(d)
+            if i is None or not has[i]: continue
+            m = cf[i * 1440 + jof(1600)]; x = (m - last) * r.side * 20 / 10; book.append((d, x)); gross += x; last = m
+        book.append((b, r.net / 10 - gross - EXTRA))
+    k = days.searchsorted(pd.DatetimeIndex([d for d, _ in book])); k = np.minimum(k, len(days) - 1)
+    out = pd.Series([x for _, x in book], index=days[k]).groupby(level=0).sum().reindex(days, fill_value=0.0)
+    assert abs(out.sum() - (t.net / 10 - EXTRA).sum()) < 1e-6
+    return out.rename("TwinContinuation")
+
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
     p = pd.read_csv("agents/tasks/plan_daily_pnl.csv", parse_dates=["date"]).set_index("date")
@@ -41,6 +67,8 @@ if __name__ == "__main__":
     tmc = pd.DataFrame(dict(date=pd.to_datetime(ex.Date).dt.normalize(), net=(ex.Price.astype(float) - en.Price.astype(float)) * sd * 20 - 7.25 - 2 * 0.25 * 20))
     tmc = tmc[tmc.date >= "2018-01-01"]
     tw_mc, _ = from_trades(None, "TwinContinuation", tmc)
+    tw_exit = tw.copy()
+    tw = twin_marked(days)          # main since 2026-10-24: overnight holds marked at each 16:00 CT close (was booked at exit)
     P = pd.concat([p, fc, tw], axis=1)
     names = {"VaultBreak": "Vault Break", "OvernightBiasML": "ONB ML", "MondayLong": "Monday Long", "ExpirationOpenShort": "EOS",
              "LateDayFlow": "Late-Day Flow", "NFPFade": "NFP Fade", "BridgeMondayLong": "Bridge Monday", "CLSundayFade_perMCL": "CL Sunday (MCL)",
@@ -80,7 +108,7 @@ if __name__ == "__main__":
     t2 = tot - P["TwinContinuation"]; d2 = MC.daily_mc(t2.values, horizon=252, n=5000, block=20, trail=1e12); e2 = t2.cumsum()
     print(f"   ${t2.sum() / yrs:,.0f} a year, max DD ${-(e2 - e2.cummax()).min():,.0f}, MC p50 ${d2['pnl_p50']:,.0f}, DD p95 ${d2['dd_p95']:,.0f}, "
           f"return/DD {d2['ret_dd']:.1f}, capital at the 20% rule ${d2['dd_p95'] / 0.20:,.0f}")
-    for nm_, twx in (("Twin = MultiCharts v2 report", tw_mc),):
+    for nm_, twx in (("Twin = MultiCharts v2 report", tw_mc), ("Twin booked at exit (before 2026-10-24)", tw_exit)):
         alt = tot - P["TwinContinuation"] + twx; da = MC.daily_mc(alt.values, horizon=252, n=5000, block=20, trail=1e12); ea = alt.cumsum()
         print(f"   full 12 with {nm_}: ${alt.sum() / yrs:,.0f} a year, max DD ${-(ea - ea.cummax()).min():,.0f}, MC p50 ${da['pnl_p50']:,.0f}, "
               f"DD p95 ${da['dd_p95']:,.0f}, capital at the 20% rule ${da['dd_p95'] / 0.20:,.0f} (Twin alone ${twx.sum() / yrs:,.0f} a year vs port ${P['TwinContinuation'].sum() / yrs:,.0f})")
