@@ -20,8 +20,13 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   2026-10-24 (PR #2, closed unmerged): connector can't see the environment; stopped (`agents/codex/STATUS.md`).
 - **Open for the user:** Sun 10/25 after 17:00 CT the `Apex Account Check` indicator on both charts (`TODO.md`); Friday
   exports into `live/` (MC reports, order tracker CSV, 1-min data); 11/06 FC 2B re-export; optionally turn off Codex's automatic / security reviews for the repo.
-- **Open for Claude:** real-micro-fee rerun of the benches (routine); daily marks for Twin's overnight trades before the
-  personal account; automatic cushion sizing after the account check.
+- **2026-10-24 (Claude):** real micro fees ($1.04 per round trip, from the Apex fills) on the benches: combine 50.1% ->
+  49.8%, funded plan −$96 over 2 years, no past decision flips (`analysis/real_fee_bench.py`). Twin marked daily in the
+  personal ladder: no change. **Dual Thrust v4 (user's file): A** (rebuild $140 per NQ, t 4.4, 9/9 years; checker PASS
+  WITH CONCERNS, replica identical) but not in the Apex plans (combine worse, funded swaps +$90 / +$106 = ties, t ~1);
+  personal account + 1 micro lifts return/DD 7.2 -> 7.8. MultiCharts export optional (`TODO.md`). S47 / Kusho loaders
+  now place trades by date (old CSV rows were on a 2016-09-29 grid).
+- **Open for Claude:** automatic cushion sizing after the account check; Dual Thrust MC check when the report arrives.
 - **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)
   run in the session 'Scheduled jobs' (session_014DKffATms37kZigaa2xR2P), not in a new chat.
 
