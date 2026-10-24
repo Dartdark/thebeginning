@@ -1,0 +1,45 @@
+{
+  "total": 2262,
+  "common_eligible": 2243,
+  "excluded_dates": [
+    "2018-03-09",
+    "2018-04-30",
+    "2018-06-07",
+    "2018-07-26",
+    "2018-08-28",
+    "2019-12-05",
+    "2020-01-20",
+    "2020-03-09",
+    "2020-03-12",
+    "2020-03-16",
+    "2020-03-18",
+    "2021-09-17",
+    "2022-03-08",
+    "2024-10-09",
+    "2024-10-24",
+    "2025-04-02",
+    "2025-06-02",
+    "2025-11-14",
+    "2026-08-06"
+  ],
+  "trades": {
+    "v2_apex": {
+      "raw": 2369,
+      "shared_eligible": 2350,
+      "excluded": 19
+    },
+    "v1_apex": {
+      "raw": 1844,
+      "shared_eligible": 1829,
+      "excluded": 15
+    }
+  },
+  "inputs": {
+    "analysis\\outputs\\codex_s03_v2\\replay\\v2_apex_trades.csv": "4ae4b8f2001a4008685b017e7792dc24caa8e83a7562f47638f5a56b26bb5c83",
+    "analysis\\outputs\\codex_s03_v2\\replay\\v2_apex_audit.csv": "4461c6ae59de8dda7fdec85ff3edc6c3bc00ad9bd9ca05e74f52e21290a40581",
+    "analysis\\outputs\\codex_s03_v2\\replay\\v1_apex_trades.csv": "5c031e684bce16de1ed3b8cc806a6ad560454c8b06108096c1e7b8e9fc6d9844",
+    "analysis\\outputs\\codex_s03_v2\\replay\\v1_apex_audit.csv": "462342d78f9008207a2b9ad8430d33e1818acdeb9960522bb70b76ad36080869"
+  },
+  "funded_policy": "both clocks and all allocations use the same complete-day universe; block adjacency changes",
+  "evaluation_policy": "same full real21day windows wholly inside each cohort; missing days omitted without calendar compression"
+}
