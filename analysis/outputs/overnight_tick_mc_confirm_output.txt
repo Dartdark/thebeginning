@@ -1,0 +1,20 @@
+Overnight TickRSV / VIX: the user's MultiCharts report (5-min @NQ, VIX daily as Data2, 2026-10-24) vs the Python rebuild
+
+MC report: 594 trades 2017-07-18 -> 2026-10-13, exits {'OTV_X': 594}
+common span 2018-01-02 -> 2026-07-07: MC 538, Python 536, same nights 529 (97% of all), only MC 9, only Python 7
+same nights: P&L corr 1.000, mean |diff| $0
+
+Per NQ after our costs:
+   MC report, all (2017-07 -> 2026-10)      n= 562 avg $ 345.8 PF 1.81 t  4.6 SR  3.1 yrs+ 9/9 | 18-22 $ 265.5 23-26 $ 454.3
+   MC, common span                          n= 538 avg $ 373.7 PF 1.97 t  5.2 SR  3.6 yrs+ 9/9 | 18-22 $ 265.5 23-26 $ 536.3
+   Python, common span                      n= 536 avg $ 374.1 PF 1.98 t  5.2 SR  3.6 yrs+ 9/9 | 18-22 $ 278.8 23-26 $ 517.5
+   MC after the order-flow data ends        n=  24 avg $-280.2 PF 0.81 t -0.4 SR -1.2 yrs+ 0/1 | 18-22 $   nan 23-26 $-280.2
+   by year MC / Python: {2018: '4,022 / 3,331', 2019: '9,368 / 9,290', 2020: '30,631 / 33,224', 2021: '14,558 / 14,148', 2022: '27,185 / 29,792', 2023: '14,226 / 14,129', 2024: '25,362 / 22,829', 2025: '33,608 / 32,172', 2026: '42,115 / 41,618'}
+
+nights only in MC: {'down': 9, 'not_down': 0, 'rsv_sign_differs_from_bar_proxy': 4, 'n': 9}
+nights only in Python: {'down': 7, 'not_down': 0, 'rsv_sign_differs_from_bar_proxy': 1, 'n': 7}
+   MC-only nights P&L (MC): $1,595 | Python-only nights P&L (Py): $1,054
+
+Standard metrics, MC report after our costs:
+       trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+MC all    594 59% $325 $20,203   1.45    2.46          1.79 $12,801   1.58  2.67      15.11
