@@ -1,0 +1,117 @@
+{
+  "trades": 1534,
+  "censored_positions": 0,
+  "unknown_account_days": 2,
+  "apex_carry_violations": 0,
+  "early_close_trades": 9,
+  "early_close_timing_violations": 0,
+  "chronology_violations": 0,
+  "raw_fill_price_violations": 0,
+  "all_rows_retained": true,
+  "source_ledgers": {
+    "design": {
+      "ledger": "e9cbadb372146d5bed6e0586b581e0620f9a15bd5927efc53b17eff688a8cba5",
+      "audit": "0fa2813bbea342c16035ed9d1934848a605d33a36486e18e5d7bd4fa312637b3",
+      "features": "00f33d03870adccb1a059c74a75202149a942b6d8a3df982d0a3c4827af22747"
+    },
+    "recent": {
+      "ledger": "d0444cd834fa5e5c66e3a28e52088074b7b7c3cb7b335ea6e4ce561f511c7985",
+      "audit": "675ad2cd6813d705b3569162acedb6a4b710a1e70d20f6f289cbfcf37a8b0874",
+      "features": "1436973413122ed9dd8b17ccb0959171eb8b1b68bcf0525eb12569bf8e4ba980"
+    }
+  },
+  "full_native_calendar_coverage": {
+    "design": {
+      "native_bars": 58972,
+      "canonical_days": 1289,
+      "missing_account_days": []
+    },
+    "recent": {
+      "native_bars": 44558,
+      "canonical_days": 973,
+      "missing_account_days": []
+    }
+  },
+  "grid_sha256": "69868d1cbc5ca6acdbbba0899eb01ca1ad7d036e00160f33c3f1992d5a385595",
+  "independent_parity": {
+    "design": {
+      "path": "analysis/outputs/codex_nqdb2_test/diagnostics_design/summary.json",
+      "sha256": "cfd54adfce5a0f5a75bad693ec83f292108f0e2c9df950bf1f988aa433a4d33a",
+      "all_five_profiles_exact": true,
+      "selected_null_parity": 12
+    },
+    "recent": {
+      "path": "analysis/outputs/codex_nqdb2_test/diagnostics_recent/summary.json",
+      "sha256": "308826da99e8212c650abf1807fbdffa02e83dcf80df1ab501aea199fa412f55",
+      "all_five_profiles_exact": true,
+      "selected_null_parity": 12
+    }
+  },
+  "held_gap_spans": 224,
+  "held_gap_trades": 224,
+  "recurring_halt_pattern_trades": 222,
+  "unexplained_gaps": [
+    {
+      "ledger_row": 82,
+      "date": "2018-07-26",
+      "period": "design",
+      "first_missing_j": 823,
+      "last_missing_j": 824,
+      "missing_minutes": 2,
+      "first_missing_time": "13:43",
+      "last_missing_time": "13:44",
+      "classification": "unexplained_intraday_data_gap",
+      "entry_j": 631,
+      "exit_j": 901,
+      "entry_time": "10:31",
+      "exit_time": "15:01",
+      "exit_why": "DB2.VwapX",
+      "side": 1,
+      "raw_entry": 7436.0,
+      "raw_exit": 7410.0,
+      "stop_points": 75.0,
+      "target_points": 40.0,
+      "raw_stop": 7361.0,
+      "raw_target": 7476.0,
+      "previous_observed_j": 822,
+      "previous_observed_close": 7415.5,
+      "next_observed_j": 825,
+      "next_observed_open": 7413.75,
+      "net_NQ_observed_proxy": -537.25,
+      "cross_date": false
+    },
+    {
+      "ledger_row": 1254,
+      "date": "2025-06-02",
+      "period": "recent",
+      "first_missing_j": 663,
+      "last_missing_j": 663,
+      "missing_minutes": 1,
+      "first_missing_time": "11:03",
+      "last_missing_time": "11:03",
+      "classification": "unexplained_intraday_data_gap",
+      "entry_j": 661,
+      "exit_j": 796,
+      "entry_time": "11:01",
+      "exit_time": "13:16",
+      "exit_why": "DB2.Target",
+      "side": 1,
+      "raw_entry": 21434.0,
+      "raw_exit": 21474.0,
+      "stop_points": 75.0,
+      "target_points": 40.0,
+      "raw_stop": 21359.0,
+      "raw_target": 21474.0,
+      "previous_observed_j": 662,
+      "previous_observed_close": 21436.75,
+      "next_observed_j": 664,
+      "next_observed_open": 21417.75,
+      "net_NQ_observed_proxy": 787.75,
+      "cross_date": false
+    }
+  ],
+  "account_path_completeness": false,
+  "raw_gap_evidence_sha256": "22e85eefaeaea35a12332743a75fd5b476afdaa30d8ea98ad5d7a30f82ad79c4",
+  "action": "STOP account scoring; no imputation, trade removal, bounds simulation, or alternative variant",
+  "proxy_concern": "Standalone frozen research replay skips absent one-minute bars; an intervening stop/target or account breach is unobserved."
+}
