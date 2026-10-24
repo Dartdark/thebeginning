@@ -42,6 +42,9 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
 - **Folders:** `apex_strategies/` = challenge-only strategies (Vault Break, Overnight Bias);
   `funded_strategies/` = funded strategies. Comparing them is fine; the challenge ones are not
   meant for making money in funded accounts.
+- **Capital-expansion bench (user, 2026-10-24):** a strategy that only gains by needing more capital (lower return per
+  drawdown at the current size) goes into the 'Capital-expansion bench' table in `personal_strategies/PORTFOLIO.md`, not
+  into a plan; re-test the bench when the account steps up a ladder row.
 - **Add or replace (user, 2026-10-18):** a candidate doesn't have to add to the plan. Always also test it as a
   replacement (in place of, or in part of, the plan strategy it overlaps most) and adopt whichever serves the plan overall.
 - **Preferences:** low-correlation strategies preferred; regime-dependent ones welcome but not

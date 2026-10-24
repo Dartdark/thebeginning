@@ -70,6 +70,17 @@ So it runs at full weight only between ~$33.6k and ~$54.1k, then at half, then a
 A $10k start sits just under set B's line (p95 DD ~22% of $10k): acceptable if you're comfortable with that, or start
 with ~$11.5k. Add the next set only when the account reaches its line, and drop back a step after a 20% drawdown.
 
+## Capital-expansion bench (user, 2026-10-24)
+Strategies that add money only by needing more capital (lower return per unit of drawdown at the current size) go here,
+not into the plan, for later when the account is large enough or sizes can be weighted finely (minis / many micros).
+| Strategy | Tier | Effect when added | Why it waits | Source |
+|---|---|---|---|---|
+| S30 IBS reversal (NQ + ES) | B | +$6k a year, return/DD 9.6 → 8.3, capital +$7.4k | in the ladder only from ~$33.6k, at reduced weight above ~$54k | `analysis/forward_log_plans_test.py` |
+| S03 Noise Area v2 | B | personal gains need more capital (Codex); Apex plans worse | thinned since mid-2024 | `agents/codex/results/s03_v2.md` (codex/work) |
+| Anson momentum (4.5 / 20) | D | full + 1 MNQ: median year $23.7k → $25.6k, p95 DD $5.0k → $6.1k, capital $25.0k → $30.4k | weak standalone (2025+ t 0.97) | `agents/codex/results/anson_personal.md` |
+| R2Vault | C | personal CT gains small at equal drawdown | weak standalone (t 2.9, DSR 0.5) | `agents/codex/results/r2vault.md` |
+Review this list whenever the account steps up a ladder row: re-test each at that size before adding.
+
 ## Read this before trusting the numbers
 - **These are backtests on the years the strategies were chosen on.** Expect live results lower; our rule is live ≥ 75%
   of the backtest (`DEVELOPMENT_PROCESS.md`). At 60% of the backtest the full portfolio is ~$13k a year at 1 micro.
