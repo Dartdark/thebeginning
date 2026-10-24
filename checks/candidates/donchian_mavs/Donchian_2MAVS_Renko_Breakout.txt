@@ -1,0 +1,140 @@
+{ Donchian Channel Breakout Signal - RENKO VERSION
+  Donchian: Length = 10, Offset = 5
+  MA Exit: Length = 5
+  Trend filter: MA5 vs MA50 relative position
+  Protective stop: opposite offset Donchian band
+  Daily profit/loss caps
+  Position size: NumContracts
+  Entry window: StartTradeTime to StopTradeTime, overnight-capable
+  No plots }
+
+Inputs:
+    Length(10),
+    Offset(5),
+    MALength(5),
+    TrendMALength(50),
+    DailyLossLimit(500),
+    DailyProfitTarget(1000),
+    NumContracts(1),
+    StartTradeTime(1800),  { HHmm - market open, can be evening for overnight sessions }
+    StopTradeTime(1600);   { HHmm - no NEW entries after this time }
+
+Vars:
+    UpperBand(0),
+    LowerBand(0),
+    MAValue(0),
+    TrendMA(0),
+    MAsBullish(false),
+    MAsBearish(false),
+    CurrentUpper(0),
+    CurrentLower(0),
+    InsideChannel(false),
+    StartOfDayNetProfit(0),
+    DailyPnL(0),
+    DailyLimitHit(false),
+    WithinTradeWindow(false);
+
+{ --------------------------------------------------------------------
+  DAILY P&L CONTROL
+  -------------------------------------------------------------------- }
+
+If CurrentBar = 1 then
+    StartOfDayNetProfit = NetProfit;
+
+If Date <> Date[1] then
+    StartOfDayNetProfit = NetProfit;
+
+DailyPnL = NetProfit + OpenPositionProfit - StartOfDayNetProfit;
+
+DailyLimitHit = (DailyPnL <= -DailyLossLimit) or
+                (DailyPnL >= DailyProfitTarget);
+
+{ --------------------------------------------------------------------
+  ENTRY WINDOW - OVERNIGHT CAPABLE
+
+  If StartTradeTime < StopTradeTime, this is a normal same-day window
+  (e.g., 830 to 1500).
+
+  If StartTradeTime > StopTradeTime, the window wraps midnight
+  (e.g., 1800 to 1600 next day) - entries are permitted from the
+  evening open through the following afternoon cutoff.
+  -------------------------------------------------------------------- }
+
+If StartTradeTime < StopTradeTime then
+    WithinTradeWindow = Time >= StartTradeTime and Time < StopTradeTime
+else
+    WithinTradeWindow = Time >= StartTradeTime or Time < StopTradeTime;
+
+{ --------------------------------------------------------------------
+  INDICATORS
+  -------------------------------------------------------------------- }
+
+UpperBand = Highest(Close[Offset], Length);
+LowerBand = Lowest(Close[Offset], Length);
+
+MAValue = Average(Close, MALength);
+TrendMA = Average(Close, TrendMALength);
+
+MAsBullish = MAValue > TrendMA;
+MAsBearish = MAValue < TrendMA;
+
+CurrentUpper = Highest(Close, Length);
+CurrentLower = Lowest(Close, Length);
+
+InsideChannel = (Close < CurrentUpper) and
+                (Close > CurrentLower);
+
+{ --------------------------------------------------------------------
+  DAILY CAP EXIT
+  -------------------------------------------------------------------- }
+
+If DailyLimitHit then begin
+
+    If MarketPosition = 1 then
+        Sell ("DailyCap_LX") next bar at market;
+
+    If MarketPosition = -1 then
+        BuyToCover ("DailyCap_SX") next bar at market;
+
+end;
+
+{ --------------------------------------------------------------------
+  ENTRIES
+  -------------------------------------------------------------------- }
+
+If DailyLimitHit = false and WithinTradeWindow then begin
+
+    If MarketPosition <= 0 and
+       Close > UpperBand and
+       InsideChannel = false and
+       MAsBullish then
+        Buy ("DC_LE") NumContracts Contracts next bar at market;
+
+    If MarketPosition >= 0 and
+       Close < LowerBand and
+       InsideChannel = false and
+       MAsBearish then
+        SellShort ("DC_SE") NumContracts Contracts next bar at market;
+
+end;
+
+{ --------------------------------------------------------------------
+  NORMAL EXITS
+  Remain active regardless of WithinTradeWindow.
+  -------------------------------------------------------------------- }
+
+If MarketPosition = 1 and DailyLimitHit = false then
+    Sell ("DC_L_Stop") next bar at LowerBand stop;
+
+If MarketPosition = -1 and DailyLimitHit = false then
+    BuyToCover ("DC_S_Stop") next bar at UpperBand stop;
+
+If MarketPosition = 1 and
+   DailyLimitHit = false and
+   Close crosses under MAValue then
+    Sell ("MA_ExitLE") next bar at market;
+
+If MarketPosition = -1 and
+   DailyLimitHit = false and
+   Close crosses over MAValue then
+    BuyToCover ("MA_ExitSE") next bar at market;
