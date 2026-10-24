@@ -1,4 +1,4 @@
-# Personal-account portfolio (2026-10-23; Overnight Anomaly, Dual Thrust, Kusho v9 and S47 v2 added 2026-10-24)
+# Personal-account portfolio (2026-10-23; Overnight Anomaly, Dual Thrust, Kusho v9, S47 v2 and S30 IBS added 2026-10-24)
 
 From everything tested so far; numbers from `analysis/personal_portfolio.py` (output in
 `analysis/outputs/personal_portfolio_output.txt`). Backtest 2018-01 → 2026-10, after costs, micro commissions charged at
@@ -7,6 +7,7 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 ## The pieces (1 micro each)
 | Piece | Market | $ a year | 2023+ a year | Max DD | Sharpe | Status |
 |---|---|---|---|---|---|---|
+| S30 IBS reversal (NQ + ES, long only, holds days, no stop) | MNQ + MES | $5,966 | $5,815 | $8,704 | 0.90 | B; personal only (user 2026-10-24); **still on the forward log**; `checks/candidates/s30_ibs/S30_IBS.txt` |
 | Relative Strength (both sides) | MNQ | $3,889 | $4,900 | $2,871 | 1.30 | B, MC-confirmed; funded plan (longs) |
 | Kusho v9 (21:00 exit, weekend holds) | MNQ | $3,573 | $3,398 | $1,757 | 1.68 | B; personal only (user 2026-10-24); **still on the forward log**; roll-adjusted rule `checks/candidates/kusho/Kusho_v9.txt` |
 | Twin Continuation v2.1 | MNQ | $3,673 | $5,711 | $1,629 | 1.77 | A, MC-confirmed, personal only (overnight, wide stop) |
@@ -25,11 +26,13 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | NFP Fade | MNQ | $291 | $467 | $826 | 0.60 | funded plan |
 
 ## Whole portfolio, every piece at 1 micro
-- **$30,600 a year** (2023+: $38,200), every year positive (2018 $11.3k, 2019 $6.4k, then $26.4-47.7k).
-- Sharpe 3.17, Sortino 7.03, PF 1.86, Calmar 6.7, Ulcer 0.80; max DD $4,590; worst month −$2,012; 14% losing months.
-- Monte Carlo, 1 year: p5 $16,400 / p50 $29,900 / p95 $46,300; P(losing year) 0.0%; max DD p50 $3,260 / p95 $5,240;
-  return / DD 9.2.
-- **Needs about $26,200** to keep the 1-year p95 drawdown at 20% of the account.
+- **$36,600 a year** (2023+: $44,000), every year positive (2018 $8.5k, 2019 $9.7k, then $31.4-56.0k).
+- Sharpe 2.96, Sortino 6.22, PF 1.83, Calmar 5.9, Ulcer 0.99; max DD $6,182; worst month −$1,987; 13% losing months.
+- Monte Carlo, 1 year: p5 $19,400 / p50 $35,700 / p95 $54,800; P(losing year) 0.0%; max DD p50 $4,640 / p95 $7,120;
+  return / DD 7.7.
+- **Needs about $35,600** to keep the 1-year p95 drawdown at 20% of the account (without S30: $26,200).
+- S30's effect (16 → 17 pieces, user 2026-10-24): +$6,000 a year, but Sharpe 3.17 → 2.96, return/DD 9.2 → 7.7, max DD
+  $4,590 → $6,182, capital $26.2k → $35.6k: more money, less per unit of risk. Below ~$35.6k run the 16 without S30.
 - Kusho v9 + S47 v2's effect (14 → 16 pieces, user 2026-10-24): +$6,300 a year, Sharpe 3.00 → 3.17, return/DD 8.2 → 9.2,
   max DD $5,001 → $4,590, capital $25.0k → $26.2k (`analysis/forward_log_plans_test.py`). Both stay on the forward log;
   Kusho's overnight / weekend holds are booked on the exit day (not marked daily), so its drawdown may be understated.
@@ -47,9 +50,9 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | ~$20,400 | **D**: C + Relative Strength + ES MOC | $14,500 | $6,300 | $4,080 |
 | ~$23,000 | Full without Dual Thrust (13) | $21,300 | $10,500 | $4,610 |
 | ~$25,000 | Full without Kusho / S47 (14) | $23,700 | $12,500 | $5,000 |
-| ~$26,200 | **Full**: all 16 | $29,900 | $16,400 | $5,240 |
-| ~$35,600 | **Full + S30 IBS** (NQ + ES, 1 micro each; holds days, no stop) | $35,700 | | $7,120 |
-| ~$52,400 | Full x 2 | $59,800 | $32,800 | $10,480 |
+| ~$26,200 | Full without S30 (16) | $29,900 | $16,400 | $5,240 |
+| ~$35,600 | **Full**: all 17 (with S30 IBS) | $35,700 | $19,400 | $7,120 |
+| ~$71,200 | Full x 2 | $71,500 | $38,800 | $14,230 |
 
 A $10k start sits just under set B's line (p95 DD ~22% of $10k): acceptable if you're comfortable with that, or start
 with ~$11.5k. Add the next set only when the account reaches its line, and drop back a step after a 20% drawdown.

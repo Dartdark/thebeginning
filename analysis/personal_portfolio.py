@@ -82,12 +82,14 @@ if __name__ == "__main__":
     k21 = pd.read_csv("checks/candidates/kusho/python_trades_v9_rolladj.csv", parse_dates=["date", "exit_date"])
     ku, nku = from_trades(None, "Kusho", k21.assign(date=k21.exit_date))
     s47, ns47 = from_trades("checks/candidates/s47_v2/python_trades_v2.csv", "S47")
-    P = pd.concat([p, fc, tw, oa, dth, ku, s47], axis=1)
+    # S30 IBS reversal (NQ + ES long, holds days, daily marked): added 2026-10-24 (user), still on the forward log
+    s30 = pd.read_csv("checks/candidates/s30_ibs/daily_nq_es_per_micro.csv", index_col=0, parse_dates=True).iloc[:, 0].reindex(days, fill_value=0.0).rename("S30")
+    P = pd.concat([p, fc, tw, oa, dth, ku, s47, s30], axis=1)
     names = {"VaultBreak": "Vault Break", "OvernightBiasML": "ONB ML", "MondayLong": "Monday Long", "ExpirationOpenShort": "EOS",
              "LateDayFlow": "Late-Day Flow", "NFPFade": "NFP Fade", "BridgeMondayLong": "Bridge Monday", "CLSundayFade_perMCL": "CL Sunday (MCL)",
              "ESMOCFollow_perMES": "ES MOC (MES)", "RelativeStrength": "Relative Strength", "FC2B": "FC 2B", "TwinContinuation": "Twin Continuation",
              "OvernightAnomaly": "Overnight Anomaly", "DualThrust": "Dual Thrust",
-             "Kusho": "Kusho v9", "S47": "S47 v2"}
+             "Kusho": "Kusho v9", "S47": "S47 v2", "S30": "S30 IBS (NQ + ES)"}
     yrs = len(P) / 252
     print(f"\n1. Pieces at 1 micro each, {days.min().date()} -> {days.max().date()} ({yrs:.1f} years), after micro costs:")
     rows = []
@@ -119,7 +121,11 @@ if __name__ == "__main__":
     need = dm["dd_p95"] / 0.20
     print(f"   capital for 1x at the 20% rule: ${need:,.0f}")
 
-    t14 = tot - P["Kusho"] - P["S47"]; d14 = MC.daily_mc(t14.values, horizon=252, n=5000, block=20, trail=1e12); e14 = t14.cumsum()
+    t16 = tot - P["S30"]; d16 = MC.daily_mc(t16.values, horizon=252, n=5000, block=20, trail=1e12); e16 = t16.cumsum()
+    print(f"   before S30 (16 pieces): ${t16.sum() / yrs:,.0f} a year, Sharpe {t16.mean() / t16.std() * np.sqrt(252):.2f}, "
+          f"max DD ${-(e16 - e16.cummax()).min():,.0f}, MC p50 ${d16['pnl_p50']:,.0f}, DD p95 ${d16['dd_p95']:,.0f}, return/DD {d16['ret_dd']:.1f}, "
+          f"capital at the 20% rule ${d16['dd_p95'] / 0.20:,.0f}")
+    t14 = t16 - P["Kusho"] - P["S47"]; d14 = MC.daily_mc(t14.values, horizon=252, n=5000, block=20, trail=1e12); e14 = t14.cumsum()
     print(f"   before Kusho + S47 (14 pieces): ${t14.sum() / yrs:,.0f} a year, Sharpe {t14.mean() / t14.std() * np.sqrt(252):.2f}, "
           f"max DD ${-(e14 - e14.cummax()).min():,.0f}, MC p50 ${d14['pnl_p50']:,.0f}, DD p95 ${d14['dd_p95']:,.0f}, return/DD {d14['ret_dd']:.1f}, "
           f"capital at the 20% rule ${d14['dd_p95'] / 0.20:,.0f}")
@@ -153,12 +159,11 @@ if __name__ == "__main__":
         print(f"   {nm:<52} ${x.sum() / yrs:,.0f} a year, Sharpe {x.mean() / x.std() * np.sqrt(252):.2f}, max DD ${-(e - e.cummax()).min():,.0f}, "
               f"MC p5 / p50 ${d['pnl_p5']:,.0f} / ${d['pnl_p50']:,.0f}, DD p95 ${d['dd_p95']:,.0f} -> capital ${d['dd_p95'] / 0.20:,.0f}")
 
-    print("\n6. + S30 IBS reversal (NQ + ES, 1 micro each; daily marked; checks/candidates/s30_ibs/), user's file 2026-10-23:")
-    s30 = pd.read_csv("checks/candidates/s30_ibs/daily_nq_es_per_micro.csv", index_col=0, parse_dates=True).iloc[:, 0].reindex(days, fill_value=0.0)
-    for nm, base in (("full 16", tot), ("set D (9)", P[["TwinContinuation", "OvernightBiasML", "BridgeMondayLong", "CLSundayFade_perMCL", "NFPFade",
+    print("\n6. S30 IBS reversal (NQ + ES, 1 micro each; daily marked; in the plan since 2026-10-24): with and without it")
+    for nm, base in (("full 16 (no S30)", tot - s30), ("set D (9)", P[["TwinContinuation", "OvernightBiasML", "BridgeMondayLong", "CLSundayFade_perMCL", "NFPFade",
                                                          "ExpirationOpenShort", "VaultBreak", "RelativeStrength", "ESMOCFollow_perMES"]].sum(axis=1))):
         for lab_, x in ((nm, base), (nm + " + S30", base + s30)):
             d = MC.daily_mc(x.values, horizon=252, n=5000, block=20, trail=1e12); e = x.cumsum()
             print(f"   {lab_:<18} ${x.sum() / yrs:,.0f} a year, Sharpe {x.mean() / x.std() * np.sqrt(252):.2f}, max DD ${-(e - e.cummax()).min():,.0f}, "
                   f"MC p50 ${d['pnl_p50']:,.0f}, DD p95 ${d['dd_p95']:,.0f}, return/DD {d['ret_dd']:.1f}, capital at the 20% rule ${d['dd_p95'] / 0.20:,.0f}")
-    print(f"   S30 corr with the full portfolio: {np.corrcoef(s30, tot)[0, 1]:+.2f}")
+    print(f"   S30 corr with the rest of the portfolio: {np.corrcoef(s30, tot - s30)[0, 1]:+.2f}")

@@ -19,34 +19,36 @@ Overnight Anomaly   $1,706 $2,426 $2,044   0.94  1001
 Dual Thrust         $2,422 $2,879 $2,010   1.41  1611
 Kusho v9            $3,573 $3,398 $1,757   1.68  1704
 S47 v2              $2,705 $2,638 $1,583   1.33   714
+S30 IBS (NQ + ES)   $5,966 $5,815 $8,704   0.90   975
 
 2. Whole portfolio, every piece at 1 micro:
-   $30,629 a year | max DD $4,590 | worst month $-2,012 | losing months 14% | annual volatility $9,670
-   by year: {2018: '$11,333', 2019: '$6,384', 2020: '$30,831', 2021: '$31,086', 2022: '$47,742', 2023: '$26,378', 2024: '$31,427', 2025: '$47,380', 2026: '$42,370'}
+   $36,595 a year | max DD $6,182 | worst month $-1,987 | losing months 13% | annual volatility $12,344
+   by year: {2018: '$8,484', 2019: '$9,684', 2020: '$45,087', 2021: '$39,268', 2022: '$55,951', 2023: '$34,728', 2024: '$31,374', 2025: '$55,645', 2026: '$48,262'}
           trades win  avg  annual sharpe sortino profit_factor max_dd calmar ulcer ulcer_perf
-portfolio   2255 51% $122 $30,629   3.17    7.03          1.86 $4,590   6.67  0.80      76.95
-  2023+      969 51% $152 $38,216   3.34    7.49          1.89 $4,590   8.33  1.22      62.52
-   Monte Carlo, 1 year (20-day blocks): P&L p5 $16,385 / p50 $29,889 / p95 $46,335, P(losing year) 0.0%, max DD p50 $3,258 / p95 $5,242, return/DD 9.2
+portfolio   2256 52% $146 $36,595   2.96    6.22          1.83 $6,182   5.92  0.99      73.87
+  2023+      969 53% $175 $44,031   2.99    6.27          1.82 $5,523   7.97  1.40      62.95
+   Monte Carlo, 1 year (20-day blocks): P&L p5 $19,415 / p50 $35,740 / p95 $54,807, P(losing year) 0.0%, max DD p50 $4,637 / p95 $7,116, return/DD 7.7
 
    Correlation of daily P&L (pieces with the rest of the portfolio):
-   Vault Break +0.33, ONB ML +0.31, Monday Long +0.18, EOS +0.07, Late-Day Flow +0.14, NFP Fade -0.01, Bridge Monday +0.15, CL Sunday (MCL) -0.02, ES MOC (MES) +0.00, Relative Strength +0.36, FC 2B +0.44, Twin Continuation +0.36, Overnight Anomaly +0.03, Dual Thrust +0.34, Kusho v9 +0.24, S47 v2 +0.30
+   Vault Break +0.38, ONB ML +0.23, Monday Long +0.20, EOS +0.01, Late-Day Flow +0.16, NFP Fade -0.02, Bridge Monday +0.14, CL Sunday (MCL) -0.01, ES MOC (MES) -0.00, Relative Strength +0.23, FC 2B +0.30, Twin Continuation +0.24, Overnight Anomaly +0.20, Dual Thrust +0.26, Kusho v9 +0.28, S47 v2 +0.21, S30 IBS (NQ + ES) +0.11
 
 3. Sizing (capital so the 1-year MC p95 drawdown <= 20%; historical max DD shown as % of it):
-   $10,000: 1 x the 1-micro portfolio -> $29,889 a year (p50, 299%), p5 $16,385, DD p95 $5,242 (52%), worst historical DD 46%
-   $15,000: 1 x the 1-micro portfolio -> $29,889 a year (p50, 199%), p5 $16,385, DD p95 $5,242 (35%), worst historical DD 31%
-   $20,000: 1 x the 1-micro portfolio -> $29,889 a year (p50, 149%), p5 $16,385, DD p95 $5,242 (26%), worst historical DD 23%
-   $25,000: 1 x the 1-micro portfolio -> $29,889 a year (p50, 120%), p5 $16,385, DD p95 $5,242 (21%), worst historical DD 18%
-   $50,000: 1 x the 1-micro portfolio -> $29,889 a year (p50, 60%), p5 $16,385, DD p95 $5,242 (10%), worst historical DD 9%
-   capital for 1x at the 20% rule: $26,208
+   $10,000: 1 x the 1-micro portfolio -> $35,740 a year (p50, 357%), p5 $19,415, DD p95 $7,116 (71%), worst historical DD 62%
+   $15,000: 1 x the 1-micro portfolio -> $35,740 a year (p50, 238%), p5 $19,415, DD p95 $7,116 (47%), worst historical DD 41%
+   $20,000: 1 x the 1-micro portfolio -> $35,740 a year (p50, 179%), p5 $19,415, DD p95 $7,116 (36%), worst historical DD 31%
+   $25,000: 1 x the 1-micro portfolio -> $35,740 a year (p50, 143%), p5 $19,415, DD p95 $7,116 (28%), worst historical DD 25%
+   $50,000: 1 x the 1-micro portfolio -> $35,740 a year (p50, 71%), p5 $19,415, DD p95 $7,116 (14%), worst historical DD 12%
+   capital for 1x at the 20% rule: $35,578
+   before S30 (16 pieces): $30,629 a year, Sharpe 3.17, max DD $4,590, MC p50 $29,889, DD p95 $5,242, return/DD 9.2, capital at the 20% rule $26,208
    before Kusho + S47 (14 pieces): $24,351 a year, Sharpe 3.00, max DD $5,001, MC p50 $23,698, DD p95 $5,001, return/DD 8.2, capital at the 20% rule $25,004
    before Dual Thrust (13 pieces): $21,929 a year, Sharpe 2.97, max DD $4,331, MC p50 $21,318, DD p95 $4,607, return/DD 7.8, capital at the 20% rule $23,037
    before Overnight Anomaly (12 pieces): $20,222 a year, Sharpe 2.84, max DD $4,663, MC p50 $19,802, DD p95 $4,687, return/DD 7.2, capital at the 20% rule $23,437
 
 4. Without Twin Continuation (its uncapped swing stop is the biggest single-trade risk):
-   $26,956 a year, max DD $4,849, MC p50 $26,374, DD p95 $5,072, return/DD 8.5, capital at the 20% rule $25,361
-   full 16 with Twin = MultiCharts v2 report: $30,404 a year, max DD $4,591, MC p50 $29,619, DD p95 $5,265, capital at the 20% rule $26,323 (Twin alone $3,448 a year vs port $3,673)
-   full 16 with Twin booked at exit (before 2026-10-24): $30,629 a year, max DD $4,590, MC p50 $29,862, DD p95 $5,242, capital at the 20% rule $26,208 (Twin alone $3,673 a year vs port $3,673)
-   worst single Twin trade per MNQ $-1,172; worst portfolio day $-2,170
+   $32,922 a year, max DD $6,564, MC p50 $32,287, DD p95 $7,615, return/DD 6.5, capital at the 20% rule $38,075
+   full 16 with Twin = MultiCharts v2 report: $36,370 a year, max DD $6,182, MC p50 $35,453, DD p95 $7,219, capital at the 20% rule $36,093 (Twin alone $3,448 a year vs port $3,673)
+   full 16 with Twin booked at exit (before 2026-10-24): $36,595 a year, max DD $6,182, MC p50 $35,736, DD p95 $7,115, capital at the 20% rule $35,575 (Twin alone $3,673 a year vs port $3,673)
+   worst single Twin trade per MNQ $-1,172; worst portfolio day $-4,460
 
 5. Starter sets for a smaller account (1 micro each; capital at the 20% rule), then add pieces as it grows:
    A. 5 pieces: Twin, ONB ML, Bridge, CL Sunday, NFP    $8,361 a year, Sharpe 2.61, max DD $2,228, MC p5 / p50 $3,160 / $8,180, DD p95 $2,284 -> capital $11,418
@@ -54,9 +56,9 @@ portfolio   2255 51% $122 $30,629   3.17    7.03          1.86 $4,590   6.67  0.
    C. 7 pieces: B + Vault Break                         $10,632 a year, Sharpe 2.82, max DD $2,515, MC p5 / p50 $4,470 / $10,468, DD p95 $2,717 -> capital $13,587
    D. 9 pieces: C + RS + ES MOC                         $14,863 a year, Sharpe 2.76, max DD $4,787, MC p5 / p50 $6,336 / $14,591, DD p95 $4,077 -> capital $20,383
 
-6. + S30 IBS reversal (NQ + ES, 1 micro each; daily marked; checks/candidates/s30_ibs/), user's file 2026-10-23:
-   full 16            $30,629 a year, Sharpe 3.17, max DD $4,590, MC p50 $29,889, DD p95 $5,242, return/DD 9.2, capital at the 20% rule $26,208
-   full 16 + S30      $36,595 a year, Sharpe 2.96, max DD $6,182, MC p50 $35,740, DD p95 $7,116, return/DD 7.7, capital at the 20% rule $35,578
+6. S30 IBS reversal (NQ + ES, 1 micro each; daily marked; in the plan since 2026-10-24): with and without it
+   full 16 (no S30)   $30,629 a year, Sharpe 3.17, max DD $4,590, MC p50 $29,889, DD p95 $5,242, return/DD 9.2, capital at the 20% rule $26,208
+   full 16 (no S30) + S30 $36,595 a year, Sharpe 2.96, max DD $6,182, MC p50 $35,740, DD p95 $7,116, return/DD 7.7, capital at the 20% rule $35,578
    set D (9)          $14,863 a year, Sharpe 2.76, max DD $4,787, MC p50 $14,591, DD p95 $4,077, return/DD 6.9, capital at the 20% rule $20,383
    set D (9) + S30    $20,829 a year, Sharpe 2.43, max DD $6,702, MC p50 $20,329, DD p95 $6,702, return/DD 5.4, capital at the 20% rule $33,512
-   S30 corr with the full portfolio: +0.11
+   S30 corr with the rest of the portfolio: +0.11
