@@ -1,0 +1,205 @@
+// ==========================================================================
+//  MAGNET18  |  RITHMIC Central  |  1-minute Globex 17:00-16:00 CT
+//  File > New > Signal. Name: MAGNET18
+//  IOG OFF. Bar Magnifier OFF. Cash open Time = 830 (not 930).
+//
+//  Gate frozen: 10:30 CT close > VWAP+2 OR cash-open+2.
+//  Buy next bar (10:31 CT). Flatten 14:29 -> 14:30 CT. Long only.
+//
+//  INPUTS (Format -> Strategy Properties -> Inputs)
+//    nLots       contracts. @NQ authorship = 1. @MNQ Flex = 4.
+//    UseVolSize  true = Moreira-Muir 22d RV. RV > prior median -> nLotsLo.
+//                false = always nLots. Default false for the 60.1% NQ book.
+//    nLotsLo     size when vol is high (only if UseVolSize = true)
+//    UseEarlyCls true = skip CME early-close days. Default false (skip cut WR).
+//    DebugPrint  first-bar clock check
+// ==========================================================================
+
+inputs:
+    nLots( 1 ),
+    UseVolSize( false ),
+    nLotsLo( 2 ),
+    UseEarlyCls( false ),
+    DebugPrint( true );
+
+variables:
+    tSess( 830 ),
+    tDec( 1030 ),
+    tFlat( 1429 ),
+    tEnd( 1514 ),
+    tEarly( 1058 ),
+    rawT( 0 ),
+    hhmm( 0 ),
+    pxSess( 0 ),
+    vwNum( 0 ),
+    vwDen( 0 ),
+    vwPx( 0 ),
+    sent( false ),
+    didRV( false ),
+    gotPx( false ),
+    fillLots( 1 ),
+    nPx( 0 ),
+    nRV( 0 ),
+    ii( 0 ),
+    jj( 0 ),
+    tmpv( 0 ),
+    rAcc( 0 ),
+    rAvg( 0 ),
+    rvCur( 0 ),
+    rvMid( 0 ),
+    earlyCls( false );
+
+array: pxBuf[23]( 0 ), rtBuf[22]( 0 ), rvBuf[22]( 0 ), magSrt[22]( 0 );
+
+rawT = Time;
+if rawT > 2400 then
+    hhmm = IntPortion( rawT * 0.01 )
+else
+    hhmm = rawT;
+
+earlyCls = false;
+if UseEarlyCls then begin
+    if Month( Date ) = 11 and DayOfWeek( Date ) = 4 and DayofMonth( Date ) >= 22 then
+        earlyCls = true;
+    if Month( Date ) = 11 and DayOfWeek( Date ) = 5 and DayofMonth( Date ) >= 23 then
+        earlyCls = true;
+    if Month( Date ) = 1 and DayOfWeek( Date ) = 1 and DayofMonth( Date ) >= 15 and DayofMonth( Date ) <= 21 then
+        earlyCls = true;
+    if Month( Date ) = 2 and DayOfWeek( Date ) = 1 and DayofMonth( Date ) >= 15 and DayofMonth( Date ) <= 21 then
+        earlyCls = true;
+    if Month( Date ) = 5 and DayOfWeek( Date ) = 1 and DayofMonth( Date ) >= 25 then
+        earlyCls = true;
+    if Month( Date ) = 9 and DayOfWeek( Date ) = 1 and DayofMonth( Date ) <= 7 then
+        earlyCls = true;
+    if Month( Date ) = 7 and ( DayofMonth( Date ) = 3 or DayofMonth( Date ) = 4 ) then
+        earlyCls = true;
+    if Month( Date ) = 12 and ( DayofMonth( Date ) = 24 or DayofMonth( Date ) = 31 ) then
+        earlyCls = true;
+end;
+
+if Date <> Date[1] then begin
+    sent = false;
+    didRV = false;
+    pxSess = 0;
+    vwNum = 0;
+    vwDen = 0;
+    if gotPx = false and CurrentBar >= 2 then
+        if Close[1] > 0 then begin
+            if nPx < 23 then begin
+                nPx = nPx + 1;
+                pxBuf[nPx] = Close[1];
+            end
+            else begin
+                for ii = 1 to 22 begin
+                    pxBuf[ii] = pxBuf[ii + 1];
+                end;
+                pxBuf[23] = Close[1];
+            end;
+        end;
+    gotPx = false;
+end;
+
+if hhmm = tSess then begin
+    sent = false;
+    didRV = false;
+    pxSess = Open;
+    vwNum = 0;
+    vwDen = 0;
+end;
+
+if hhmm = tEnd and gotPx = false and Close > 0 then begin
+    if nPx < 23 then begin
+        nPx = nPx + 1;
+        pxBuf[nPx] = Close;
+    end
+    else begin
+        for ii = 1 to 22 begin
+            pxBuf[ii] = pxBuf[ii + 1];
+        end;
+        pxBuf[23] = Close;
+    end;
+    gotPx = true;
+end;
+
+if DebugPrint and CurrentBar = 1 then begin
+    Print( "M18 RITHMIC-CT nLots=", nLots, " BPV=", BigPointValue, " Time=", hhmm );
+    if hhmm = 930 or hhmm = 1130 then
+        Print( "M18: Time looks Eastern. Chart must be Central." );
+end;
+
+if hhmm >= tSess and hhmm <= tDec and pxSess > 0 then begin
+    vwNum = vwNum + ( High + Low + Close ) / 3 * Volume;
+    vwDen = vwDen + Volume;
+end;
+
+if vwDen > 0 then
+    vwPx = vwNum / vwDen
+else
+    vwPx = Close;
+
+fillLots = nLots;
+if hhmm = tDec and didRV = false then begin
+    fillLots = nLots;
+    if UseVolSize and nPx >= 23 and pxBuf[1] > 0 then begin
+        rAcc = 0;
+        for ii = 1 to 22 begin
+            rtBuf[ii] = ( pxBuf[ii + 1] - pxBuf[ii] ) / pxBuf[ii];
+            rAcc = rAcc + rtBuf[ii];
+        end;
+        rAvg = rAcc / 22;
+        rvCur = 0;
+        for ii = 1 to 22 begin
+            rvCur = rvCur + ( rtBuf[ii] - rAvg ) * ( rtBuf[ii] - rAvg );
+        end;
+        if nRV >= 22 then begin
+            for ii = 1 to 22 begin
+                magSrt[ii] = rvBuf[ii];
+            end;
+            for ii = 1 to 21 begin
+                for jj = ii + 1 to 22 begin
+                    if magSrt[jj] < magSrt[ii] then begin
+                        tmpv = magSrt[ii];
+                        magSrt[ii] = magSrt[jj];
+                        magSrt[jj] = tmpv;
+                    end;
+                end;
+            end;
+            rvMid = 0.5 * ( magSrt[11] + magSrt[12] );
+            if rvCur > rvMid then
+                fillLots = nLotsLo;
+        end;
+        if nRV < 22 then begin
+            nRV = nRV + 1;
+            rvBuf[nRV] = rvCur;
+        end
+        else begin
+            for ii = 1 to 21 begin
+                rvBuf[ii] = rvBuf[ii + 1];
+            end;
+            rvBuf[22] = rvCur;
+        end;
+        if DebugPrint then
+            Print( "M18 Date=", Date, " fillLots=", fillLots, " nPx=", nPx, " nRV=", nRV );
+    end;
+    didRV = true;
+end;
+
+if hhmm = tDec
+    and sent = false
+    and earlyCls = false
+    and MarketPosition = 0
+    and pxSess > 0 then begin
+    if ( Close > vwPx + 2 ) or ( Close > pxSess + 2 ) then begin
+        Buy( "MagLg" ) fillLots shares next bar at market;
+        sent = true;
+    end;
+end;
+
+if MarketPosition > 0 and earlyCls and hhmm >= tEarly then
+    Sell( "MagE" ) fillLots shares next bar at market;
+
+if MarketPosition > 0 and hhmm >= tFlat then
+    Sell( "MagFl" ) fillLots shares next bar at market;
+
+if MarketPosition > 0 and hhmm >= tEnd then
+    Sell( "MagX" ) fillLots shares next bar at market;
