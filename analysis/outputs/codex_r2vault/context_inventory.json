@@ -412,5 +412,345 @@
     "MOC_MES retains add_moc_mes's close-based intraday path approximation.",
     "Real-fee increments follow Lab.real_fees: each day's total fee is present from its first entry.",
     "RS uses the unchanged pinned Python baseline, independently reconciled with its committed ledger."
+  ],
+  "freshness_checks": [
+    {
+      "latest_reference": "1f2d1ffa39fcf59d45b72d92adebecd0153a9151",
+      "preregistered_context": "172322e5151f45e2cbf1da4dbd9efb20ba12d1a9",
+      "compared_blobs": 47,
+      "changed": [],
+      "comparisons": [
+        {
+          "group": "apex_modules",
+          "path": "analysis/cl_forced_flows_test.py",
+          "frozen_blob": "4728dbadee13b7f70a66261abd6e976d3e356508",
+          "latest_blob": "4728dbadee13b7f70a66261abd6e976d3e356508",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/resampling.py",
+          "frozen_blob": "06153a6f273901262f656321774939dbbbbe7a9d",
+          "latest_blob": "06153a6f273901262f656321774939dbbbbe7a9d",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/metrics.py",
+          "frozen_blob": "ccc35928f509fb8f1d7ecdb8d3835cb7edd42942",
+          "latest_blob": "ccc35928f509fb8f1d7ecdb8d3835cb7edd42942",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/grid24.py",
+          "frozen_blob": "25bba47db128ca79f09015e4ef3a6be5ed0dd2a7",
+          "latest_blob": "25bba47db128ca79f09015e4ef3a6be5ed0dd2a7",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/s_rank_es_round1_test.py",
+          "frozen_blob": "baea05f39116208f59c2ac8ec27e62afda490b87",
+          "latest_blob": "baea05f39116208f59c2ac8ec27e62afda490b87",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/option_income_etf_test.py",
+          "frozen_blob": "a029d7a9ce0e3d7b47ed10f8e2b9d583256d29e1",
+          "latest_blob": "a029d7a9ce0e3d7b47ed10f8e2b9d583256d29e1",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/gex_flows.py",
+          "frozen_blob": "cc5008eaafcca8bb5a22f83ec83c22b1a6d016e0",
+          "latest_blob": "cc5008eaafcca8bb5a22f83ec83c22b1a6d016e0",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/candidates24.py",
+          "frozen_blob": "ac9d7e1eb4072040ba290f62a9646c21e85b24a6",
+          "latest_blob": "ac9d7e1eb4072040ba290f62a9646c21e85b24a6",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/replica.py",
+          "frozen_blob": "aa3f6cc3e0367f85885b7ba5f9c305fce18ca3ec",
+          "latest_blob": "aa3f6cc3e0367f85885b7ba5f9c305fce18ca3ec",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/grid.py",
+          "frozen_blob": "161570157b5302e869a760474660fe8eddec5bcb",
+          "latest_blob": "161570157b5302e869a760474660fe8eddec5bcb",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/candidates.py",
+          "frozen_blob": "bc2165937a7edf907db4104322f55082bbb42703",
+          "latest_blob": "bc2165937a7edf907db4104322f55082bbb42703",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/relative_strength_test.py",
+          "frozen_blob": "474c4a869673fd7416b422423b83b7506dac1c6a",
+          "latest_blob": "474c4a869673fd7416b422423b83b7506dac1c6a",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/montecarlo.py",
+          "frozen_blob": "dcec81d67d3a57f1143ec18e7ec00de3cfdaa457",
+          "latest_blob": "dcec81d67d3a57f1143ec18e7ec00de3cfdaa457",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/portfolio.py",
+          "frozen_blob": "234e927d4734002201ee11da03798061319c50d9",
+          "latest_blob": "234e927d4734002201ee11da03798061319c50d9",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/funded_sim.py",
+          "frozen_blob": "e186429bfd95e9f827d3ef6de28c210cacf00361",
+          "latest_blob": "e186429bfd95e9f827d3ef6de28c210cacf00361",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/funded_lab.py",
+          "frozen_blob": "645f608db95756e1840b4bde4890a122aa895775",
+          "latest_blob": "645f608db95756e1840b4bde4890a122aa895775",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/funded_bootstrap.py",
+          "frozen_blob": "62dadf15e8cdc549b9ddc96d9647ab11ebb46aaf",
+          "latest_blob": "62dadf15e8cdc549b9ddc96d9647ab11ebb46aaf",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/fc_2b_bench.py",
+          "frozen_blob": "aaab267b4d48ce73e42685af56c9ab450982c59a",
+          "latest_blob": "aaab267b4d48ce73e42685af56c9ab450982c59a",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/combine_levers_test.py",
+          "frozen_blob": "d15909bf3f0db0b639dd97b32162277a47a219e6",
+          "latest_blob": "d15909bf3f0db0b639dd97b32162277a47a219e6",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/build_lab.py",
+          "frozen_blob": "4d7e6e32493657906cda18ce343d9566505b7682",
+          "latest_blob": "4d7e6e32493657906cda18ce343d9566505b7682",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/bridge_monday_confirm.py",
+          "frozen_blob": "2586482a4a61ed03af352d48c6331ecd4ad4de73",
+          "latest_blob": "2586482a4a61ed03af352d48c6331ecd4ad4de73",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/speed_to_13k.py",
+          "frozen_blob": "9add64cc7a2a8f57a8eb9b390e855bc10817b9d0",
+          "latest_blob": "9add64cc7a2a8f57a8eb9b390e855bc10817b9d0",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/addon_combo_test.py",
+          "frozen_blob": "2be03efbbf6bc1a772ade45ed959b5a42ce4227d",
+          "latest_blob": "2be03efbbf6bc1a772ade45ed959b5a42ce4227d",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/news_meanrev_test.py",
+          "frozen_blob": "48b7b13d20c964c14c4665a5f17b134a5b75dba5",
+          "latest_blob": "48b7b13d20c964c14c4665a5f17b134a5b75dba5",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/event_days.py",
+          "frozen_blob": "c6513834d80bb6532a74ba86a1cb733f322f3cf2",
+          "latest_blob": "c6513834d80bb6532a74ba86a1cb733f322f3cf2",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/cta_volcontrol_test.py",
+          "frozen_blob": "090f5a0fe3990a2ccd720af2fa5278385d6ee66d",
+          "latest_blob": "090f5a0fe3990a2ccd720af2fa5278385d6ee66d",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/bridge_monday_long_test.py",
+          "frozen_blob": "3292b9e75ecb31ed7ea9b0bf6907caf3cefb8ec7",
+          "latest_blob": "3292b9e75ecb31ed7ea9b0bf6907caf3cefb8ec7",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/dual_thrust_bench.py",
+          "frozen_blob": "9c129c232de18a66b66670b3af48cea26ec45366",
+          "latest_blob": "9c129c232de18a66b66670b3af48cea26ec45366",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/dual_thrust_test.py",
+          "frozen_blob": "53fb2f2a909c36a88424a5e3677530e85d4fca98",
+          "latest_blob": "53fb2f2a909c36a88424a5e3677530e85d4fca98",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/plan_150k_test.py",
+          "frozen_blob": "c44a07d7d10ed9078285bdd47f5aea674c9d9fd7",
+          "latest_blob": "c44a07d7d10ed9078285bdd47f5aea674c9d9fd7",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/twin_continuation_test.py",
+          "frozen_blob": "c48be680c9b6a81a3ffed857dea9eab76ab99e53",
+          "latest_blob": "c48be680c9b6a81a3ffed857dea9eab76ab99e53",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/twin_continuation_bench.py",
+          "frozen_blob": "91a4354fa009fcc3f11d6677507dd58593d399f1",
+          "latest_blob": "91a4354fa009fcc3f11d6677507dd58593d399f1",
+          "unchanged": true
+        },
+        {
+          "group": "apex_modules",
+          "path": "analysis/funded_sim150.py",
+          "frozen_blob": "23842e99e48349e062bc540c65effd328fcd1a04",
+          "latest_blob": "23842e99e48349e062bc540c65effd328fcd1a04",
+          "unchanged": true
+        },
+        {
+          "group": "apex_inputs",
+          "path": "checks/candidates/relative_strength/RelStrength_v3.txt",
+          "frozen_blob": "c8249d5135855682e5ea3a0f19ef71a3709cc8ca",
+          "latest_blob": "c8249d5135855682e5ea3a0f19ef71a3709cc8ca",
+          "unchanged": true
+        },
+        {
+          "group": "apex_inputs",
+          "path": "checks/candidates/relative_strength/trades.csv",
+          "frozen_blob": "f3ea79b05cdfe9bbfb79a545f21d90708e77a355",
+          "latest_blob": "f3ea79b05cdfe9bbfb79a545f21d90708e77a355",
+          "unchanged": true
+        },
+        {
+          "group": "apex_inputs",
+          "path": "checks/candidates/dual_thrust/trades.csv",
+          "frozen_blob": "8afe762e4fa8508c0a6084f7b7b63e95ba5ac335",
+          "latest_blob": "8afe762e4fa8508c0a6084f7b7b63e95ba5ac335",
+          "unchanged": true
+        },
+        {
+          "group": "apex_inputs",
+          "path": "checks/candidates/dual_thrust/trades_replica.csv",
+          "frozen_blob": "7f06ab4eb981c229464813729d79890fca9d106a",
+          "latest_blob": "7f06ab4eb981c229464813729d79890fca9d106a",
+          "unchanged": true
+        },
+        {
+          "group": "apex_inputs",
+          "path": "funded_strategies/FUNDED_PLAN.md",
+          "frozen_blob": "8a5f4c7cc59b8449e273dcd2f1df8135f0979d74",
+          "latest_blob": "8a5f4c7cc59b8449e273dcd2f1df8135f0979d74",
+          "unchanged": true
+        },
+        {
+          "group": "personal_inputs",
+          "path": "analysis/personal_portfolio.py",
+          "frozen_blob": "70a13c204111baa242f926a0c949082aff13220f",
+          "latest_blob": "70a13c204111baa242f926a0c949082aff13220f",
+          "unchanged": true
+        },
+        {
+          "group": "personal_inputs",
+          "path": "analysis/montecarlo.py",
+          "frozen_blob": "dcec81d67d3a57f1143ec18e7ec00de3cfdaa457",
+          "latest_blob": "dcec81d67d3a57f1143ec18e7ec00de3cfdaa457",
+          "unchanged": true
+        },
+        {
+          "group": "personal_inputs",
+          "path": "personal_strategies/PORTFOLIO.md",
+          "frozen_blob": "86472f31e50f194b7bd3e472ebb4840e2563389a",
+          "latest_blob": "86472f31e50f194b7bd3e472ebb4840e2563389a",
+          "unchanged": true
+        },
+        {
+          "group": "personal_inputs",
+          "path": "agents/tasks/plan_daily_pnl.csv",
+          "frozen_blob": "2b70b3d75bf2b648d461afd737c8b80894ed5775",
+          "latest_blob": "2b70b3d75bf2b648d461afd737c8b80894ed5775",
+          "unchanged": true
+        },
+        {
+          "group": "personal_inputs",
+          "path": "checks/candidates/fc_2b/trades.csv",
+          "frozen_blob": "4ea406914a4547060f557fe8561fa9b2f856a3ae",
+          "latest_blob": "4ea406914a4547060f557fe8561fa9b2f856a3ae",
+          "unchanged": true
+        },
+        {
+          "group": "personal_inputs",
+          "path": "checks/candidates/twin_continuation/trades.csv",
+          "frozen_blob": "b9ccbb29c0d3369b93717b8f409e0f7eb206a2d6",
+          "latest_blob": "b9ccbb29c0d3369b93717b8f409e0f7eb206a2d6",
+          "unchanged": true
+        },
+        {
+          "group": "personal_inputs",
+          "path": "checks/candidates/overnight_anomaly/trades.csv",
+          "frozen_blob": "a010b469ec59a7570adcc87e19f981a2c19d5920",
+          "latest_blob": "a010b469ec59a7570adcc87e19f981a2c19d5920",
+          "unchanged": true
+        },
+        {
+          "group": "personal_inputs",
+          "path": "checks/candidates/dual_thrust/trades.csv",
+          "frozen_blob": "8afe762e4fa8508c0a6084f7b7b63e95ba5ac335",
+          "latest_blob": "8afe762e4fa8508c0a6084f7b7b63e95ba5ac335",
+          "unchanged": true
+        },
+        {
+          "group": "personal_inputs",
+          "path": "analysis/outputs/personal_portfolio_output.txt",
+          "frozen_blob": "6126f17ee2bc5de3eca643d2f917def18dd59058",
+          "latest_blob": "6126f17ee2bc5de3eca643d2f917def18dd59058",
+          "unchanged": true
+        }
+      ],
+      "new_candidate_returns": false
+    }
   ]
 }

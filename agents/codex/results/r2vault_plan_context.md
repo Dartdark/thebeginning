@@ -8,6 +8,10 @@ No prior exact R2Vault strategy was found, and no new R2Vault returns were calcu
 Source evidence: `analysis/outputs/codex_r2vault/context_inventory.json`.
 Previous source pin: `e34d71c`; current context: `172322e5151f45e2cbf1da4dbd9efb20ba12d1a9`.
 
+Freshness check after the next successful fetch: latest Claude
+`1f2d1ffa39fcf59d45b72d92adebecd0153a9151` also matches all 47 baseline blobs.
+The preregistered context remains `172322e`; this metadata check ran no candidate returns.
+
 | Context | Current baseline and adapter |
 |---|---|
 | 50K evaluation | VB8, ONB ADX30 risk1100, Bridge2, EOS risk500; `codex_anson_plan.evaluation_parts` |
