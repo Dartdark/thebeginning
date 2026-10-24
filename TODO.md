@@ -85,7 +85,8 @@ bottom). Times are Central (CT).
 place of Overnight Anomaly). Nothing to do until a funded account starts; the VIX feed (step 1) is worth setting up early.
 
 - [ ] **1. Daily VIX file on the VPS** (once, outside market hours). 2026-10-24: script in place, first run OK (log 'OK');
-  still to do: the scheduled task, Map ASCII of `VIX_CBOE`, and Monday's log check (`last date 2026-10-26`):
+  scheduled task (VIXUpdate, weekdays 15:30 / 16:30) and Map ASCII done (symbol **VIX_daily**, folder C:\TradingData\VIX).
+  Still to do: Monday 10/26 after 16:30 CT, the log shows `last date 2026-10-26` and the chart's VIX has a 10/26 bar:
   - copy [tools/vix_update.ps1](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/tools/vix_update.ps1)
     ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/tools/vix_update.ps1))
     to `C:\TradingData\VIX\vix_update.ps1` on the VPS;
