@@ -53,6 +53,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   New pitfall: **@GC / @CL run on New York time in our MultiCharts** (ETminusChart-type inputs = 0).
 - **YZ ORB Volatility Filtered (user's C# files, ES + GC, 2026-10-25): D.** Rebuild matches the gross reports (96-98% of days), but
   net of costs ES t 0.8, GC t 0.0; VIX gate not significant. `analysis/orb_vix_test.py`.
+- **Brooks price-action bot v201 (user's file, 2026-10-25): F.** Gross ~0R, net −0.05R a trade; longs win only by drift (random-time
+  longs with the same bracket do as well). `analysis/brooks_bot_test.py`.
 - **Open for Claude:** automatic cushion sizing after the account check; Dual Thrust MC check when the report arrives;
   T_ONESIDE v2 MC check when the report arrives.
 - **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)
