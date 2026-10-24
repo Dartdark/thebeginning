@@ -1,0 +1,180 @@
+{
+  "verdict": "WATCH as a Vault Break variant; NEEDS DATA for exact-source validation",
+  "new_strategy_return_trials": 0,
+  "account_simulations": 0,
+  "context": {
+    "claude_ref": "febc65f1573040abf9a697d1d3468e1bce48c4c0",
+    "codex_parent": "73a5f242cd4dfb549507e24eea1a6bdae0663e65",
+    "current_vb_path": "apex_strategies/NQ_Vault_Break_SP.txt",
+    "current_vb_blob": "c27ca4c4ea32d01e1366efce1bfe06ce68b9770f",
+    "tier_blob": "45fa08797cb1585a7379d7edd691f2a7f681334b",
+    "prior_v8_tier_line": 101,
+    "prior_v8_row": "| VaultBreak v8 (the Bridge's version): noise band from the 15-session high \u2212 low average incl. Sunday sessions, + 7-bar VWAP exit, next-bar time exit | Variant of Vault Break | 1,880 trades, $82, PF 1.23, t 3.9, 9/9 years vs v1 (MC) $92, PF 1.26, t 4.3; Sharpe 1.25 vs 1.35, Calmar 1.02 vs 1.31; only the band matters (VWAP exit never fires); funded at 3 MNQ $8,750 / $12,259 blown 5% / 4% vs $9,313 / $12,436; combine pass 43.1% vs 46.9% | Same strategy, slightly worse band; keep v1 |",
+    "exact_veto_tier_hits": []
+  },
+  "input_sha256": {
+    ".gitattributes": "5fdb3431fcf9a0febb490015021ce675c66bc067c66990527ccd703ca165334f",
+    "context.json": "c90d79582a70c0f0bd1cb3c30aa55a2e3ab0d9de6bdfb65bc0f775e6630df654",
+    "source.txt": "648e15c16cad8c4eae5f10cea7cd78fe01e1cf37be1c63f33df2abcc4a1fabdf",
+    "vault_break_sp_reference.txt": "8f3f83208308b34963d2190af7dc5191082ca27689172e60dacafbba58215b37"
+  },
+  "script_sha256": "8c89347f36f4f3bcb6c89be420d8d3c12eb1491763398eeba40432c229104e11",
+  "upload_defaults": {
+    "NoiseMult": "0.3",
+    "BoundaryATRLen": "15",
+    "EarliestEntry": "1000",
+    "LatestEntry": "1400",
+    "MaxTradesPerDay": "2",
+    "VWAPExitBars": "7",
+    "TakeProfitDollars": "800",
+    "StopLossDollars": "1500",
+    "VetoMode": "1",
+    "CtxDriftLen": "4",
+    "CtxDriftThreshPct": "0.10",
+    "FlattenTime": "1530",
+    "ExitOnBarClose": "false",
+    "NumContracts": "1",
+    "CutoffDate": "1991231"
+  },
+  "current_vb_source_defaults": {
+    "NoiseMult": "0.30",
+    "AtrDays": "15",
+    "FirstDecision": "1000",
+    "LastEntryTime": "1430",
+    "FlattenTime": "1430",
+    "TargetPts": "40",
+    "StopPts": "75",
+    "MaxTradesPerDay": "3",
+    "UseHolidayTimes": "true",
+    "EarlyLastEntry": "1100",
+    "EarlyFlattenTime": "1130",
+    "NumContracts": "1",
+    "FlaggedContracts": "-1"
+  },
+  "source_flags": {
+    "supplied_header_names_driftbreak_v2": true,
+    "uploaded_uses_calendar_date": true,
+    "uploaded_uses_hl_range": true,
+    "uploaded_vwap_uses_volume": true,
+    "current_vb_uses_total_intraday_ticks": true,
+    "current_vb_excludes_sunday": true,
+    "current_vb_true_range": true,
+    "latest_entry_active": true,
+    "drift_gate_present": true,
+    "brackets_unconditional": true,
+    "exit_on_close_present": true,
+    "uploaded_has_early_close_calendar": false,
+    "iog_forced_off": false,
+    "counter_counts_submissions": true,
+    "current_vb_counts_completed_trades": true,
+    "vwap_prev_only_guarded": true,
+    "exact_veto_already_named_in_tier": false
+  },
+  "drift_window_minutes": 120,
+  "vwap_exit_consecutive_minutes": 210,
+  "window_minutes_are_nominal_bar_durations": true,
+  "regular_half_hour_grid": {
+    "upload_decisions": [
+      1000,
+      1030,
+      1100,
+      1130,
+      1200,
+      1230,
+      1300,
+      1330,
+      1400
+    ],
+    "current_vb_decisions": [
+      1000,
+      1030,
+      1100,
+      1130,
+      1200,
+      1230,
+      1300,
+      1330,
+      1400
+    ],
+    "same_normal_entry_times": true
+  },
+  "cutoff_calendar_yyyymmdd": 20991231,
+  "unit_examples": [
+    {
+      "symbol": "NQ",
+      "contracts": 1,
+      "point_value": "20",
+      "target_points": "40",
+      "stop_points": "75",
+      "nominal_position_target_usd": "800",
+      "nominal_position_stop_usd": "1500"
+    },
+    {
+      "symbol": "NQ",
+      "contracts": 2,
+      "point_value": "20",
+      "target_points": "40",
+      "stop_points": "75",
+      "nominal_position_target_usd": "1600",
+      "nominal_position_stop_usd": "3000"
+    },
+    {
+      "symbol": "MNQ",
+      "contracts": 1,
+      "point_value": "2",
+      "target_points": "400",
+      "stop_points": "750",
+      "nominal_position_target_usd": "800",
+      "nominal_position_stop_usd": "1500"
+    },
+    {
+      "symbol": "MNQ",
+      "contracts": 2,
+      "point_value": "2",
+      "target_points": "400",
+      "stop_points": "750",
+      "nominal_position_target_usd": "1600",
+      "nominal_position_stop_usd": "3000"
+    }
+  ],
+  "static_veto_examples": [
+    {
+      "previous_close": "10000",
+      "current_close": "9980",
+      "drift_percent": "-0.200",
+      "default_veto": true
+    },
+    {
+      "previous_close": "10000",
+      "current_close": "9995",
+      "drift_percent": "-0.0500",
+      "default_veto": false
+    },
+    {
+      "previous_close": "10000",
+      "current_close": "10020",
+      "drift_percent": "0.200",
+      "default_veto": false
+    }
+  ],
+  "illustrations_are_not_measured_returns": true,
+  "prior_variant_reported": {
+    "name": "Bridge VaultBreak v8",
+    "mean_per_nq": "82",
+    "old_v1_mean_per_nq": "92",
+    "pf": "1.23",
+    "old_v1_pf": "1.26",
+    "not_results_for_this_upload": true
+  },
+  "performance_report_and_selection_registry_supplied": false,
+  "required_next_evidence": [
+    "Original untrimmed header and chart session/template, IOG, volume and fill settings",
+    "Existing exact-version MultiCharts report and timestamped trade export",
+    "Frozen veto/selection history; price data already exists, split-volume or MC parity resolves VWAP"
+  ],
+  "references": [
+    "https://www.multicharts.com/trading-software/index.php?title=Volume",
+    "https://www.multicharts.com/trading-software/index.php?title=SetExitOnClose",
+    "https://www.multicharts.com/trading-software/index.php?title=SetStopLoss"
+  ]
+}
