@@ -42,8 +42,24 @@ Daily metrics (1-2 GC): Sharpe 0.93, Sortino 1.72, PF 1.37, Calmar 0.86, Ulcer 4
 4. Stretch `sigCount` counts signals even when not taken (as tested).
 5. Gold at $4,000+: 1 GC is too big for a 50K account (the note says so); MGC only.
 
+## The user's MultiCharts report (2026-10-24, `mc_reports/... @GC - 1 Minute GC COMBO v2.xlsx`, `analysis/gc_combo_mc_check.py`,
+`analysis/gc_combo_mc_eval.py`, trades `mc_trades.csv`)
+- First run was an hour early: on our MultiCharts **@GC runs on New York time**, so `ETminusChart` must be **0** (the author's
+  'exchange chart = 1' assumes a Chicago chart). Second run (ETminusChart 0): **1,204 trades in the author's window, and every
+  year's count and bp equal the note** (2018 122 / 3.5 ... 2025 157 / 1.6). Parity: exact.
+- At our costs ($7.25 + 1 tick per market / stop fill, per contract), 2018 → 2026-09-23, 1,188 trades:
+  **$104 per contract, PF 1.24, t 2.1**, 9/9 years; IS 2018-24 $109 (t 3.5), **OOS 2025-26 $83 (t 0.4)**; blend $87 (OOS $93,
+  t 0.4; score 2 $41, score >= 3 $146), stretch $141 (OOS $57, t 0.1); blend longs $95 / shorts $77.
+- **After the note's cutoff (2026-08-08 → 09-23, 14 trades): −$39.2k** at 1-2 GC (Aug −$38.2k, Sep −$8.6k). 2026 total $3.5k.
+- Daily (as traded): Sharpe 0.76, Sortino 1.18, PF 1.27, Calmar 0.31, Ulcer 4.6, **max DD $62.5k**; longs Sharpe 0.44, shorts 0.62.
+  2023+ Sharpe 0.51 (5-95% −0.43 to 1.42, P(≤ 0) 18%). MC at 1-2 MGC: P(hit the $2,000 trail in a year) 29%.
+  DSR 0.27 at our 296 items, 0.06 at the author's 10,831.
+- **13 trades are held over a holiday halt** (Presidents / Memorial / Labor / MLK / July 4 / Thanksgiving / Christmas): the 13:30
+  ET exit bar does not exist, so the position rides to the next session (worst −$3,960). Not Apex-legal; needs a holiday flatten.
+- Evaluation with these trades (holiday holds left out): 50.1% → 50.0 / 48.7 / 46.3% at 1 / 2 / 3x MGC. Funded: with the
+  proxy-B rebuild + 1x MGC $9,418 / $11,872, blown 9.0% (plan 7.0%), in place of CL Sunday $9,044 / $12,040: no gain; the
+  MultiCharts-trade bootstrap is running.
+
 ## Verdict
-C pending a MultiCharts report: what we can rebuild matches the note, but the rebuilt combo is t 2.3 (bar 3.58), the author's
-own multiple-testing count is 10,831, and the one vote we cannot rebuild (B) is the note's strongest. Next step if wanted:
-the user runs the community file in MultiCharts (setup on the note's page 5) and exports the Performance Report to
-`mc_reports/`; then the MC trades replace the proxy and the benches are re-run.
+**C.** Rebuilt exactly in MultiCharts, but at our costs it is t 2.1 with nothing left out of sample (2025-26 t 0.4, and −$39k in
+the six weeks after the author's cutoff), a $62.5k drawdown per 1-2 GC and holiday holds. No gain in either Apex plan.

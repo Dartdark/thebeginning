@@ -74,7 +74,7 @@ bottom). Times are Central (CT).
 
 ## GC_COMBO v2 (your gold files, 2026-10-24: C pending the MultiCharts report)
 
-- [ ] Optional, no deadline (outside market hours, not on the live VPS): run it in MultiCharts and export the report, step by
+- [x] (2026-10-24, done: exact parity after ETminusChart 0; ranked C) Optional, no deadline (outside market hours, not on the live VPS): run it in MultiCharts and export the report, step by
   step in [MC_SETUP.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/gc_combo/MC_SETUP.md)
   (@GC 1-min + @CL Data2 + GCCOMBO Data3); save as "mc_reports/Backtesting Strategy Performance Report _ @GC - 1 Minute GC COMBO v2.xlsx"
   and push / send it. Expect ~1,204 trades, ~$226k for 2017-09-18 → 2026-08-07.

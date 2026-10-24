@@ -4,7 +4,8 @@ booked on its NQ trading day with its own minute path (worst point from the GC l
   A. 50K funded, bootstrapped bench (1,000 paired 2-year histories): plan + COMBO 1 / 2 x; in place of CL Sunday (the other
      non-NQ piece).
   B. 50K evaluation: combine set + COMBO 1 / 2 / 3 x.
-  python3 analysis/gc_combo_bench.py SCRATCH_DIR [worker SEED N | merge | combine]   (needs gc_combo_trades.csv, gc.pkl)
+  [GCC_SRC=gc_combo_trades_mc.csv] python3 analysis/gc_combo_bench.py SCRATCH_DIR [worker SEED N | merge | combine]
+  (needs gc_combo_trades.csv from the rebuild, or gc_combo_trades_mc.csv from analysis/gc_combo_mc_eval.py; gc.pkl)
 """
 import sys, time, pickle, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
 import numpy as np, pandas as pd
@@ -17,12 +18,15 @@ from fc_2b_bench import fast_plan_lab, KIND
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 MODE = sys.argv[2] if len(sys.argv) > 2 else "merge"
+import os
+SRC = os.environ.get("GCC_SRC", "gc_combo_trades.csv")      # gc_combo_trades_mc.csv = the user's MultiCharts trades (2026-10-24)
 PV, TICK, COMM = 100.0, 0.10, 7.25
 
 
 def gc_paths(sp, dates):
     """(worst, real) per NQ trading day x minute, $ per MGC unit (contracts as traded / 10)."""
-    gc = pickle.load(open(sp + "gc.pkl", "rb")); T = pd.read_csv(sp + "gc_combo_trades.csv", parse_dates=["date"])
+    gc = pickle.load(open(sp + "gc.pkl", "rb")); T = pd.read_csv(sp + SRC, parse_dates=["date"])
+    if "same_day" in T: T = T[T.same_day]     # MC trades held over a holiday halt (13 of 1,188) are not Apex-legal: left out
     pos = pd.Series(np.arange(len(dates)), index=dates); W = np.zeros((len(dates), 1440)); Rr = np.zeros((len(dates), 1440)); miss = 0
     for t in T.itertuples():
         if t.date not in pos.index: miss += 1; continue
@@ -50,9 +54,9 @@ if __name__ == "__main__":
         if MODE == "worker":
             seed, n = int(sys.argv[3]), int(sys.argv[4])
             res, y1, _ = FB.Boot(lab).run(plans, n=n, L=20, seed=seed)
-            pickle.dump((res, y1), open(SP + f"gcc_boot_{seed}.pkl", "wb")); print(f"[worker {seed} done {time.time() - T0:.0f}s]"); sys.exit()
+            pickle.dump((res, y1), open(SP + f"gcc_boot_{SRC[:-4]}_{seed}.pkl", "wb")); print(f"[worker {seed} done {time.time() - T0:.0f}s]"); sys.exit()
         import glob
-        parts = [pickle.load(open(f, "rb")) for f in sorted(glob.glob(SP + "gcc_boot_*.pkl"))]
+        parts = [pickle.load(open(f, "rb")) for f in sorted(glob.glob(SP + f"gcc_boot_{SRC[:-4]}_*.pkl"))]
         res = {kk: np.concatenate([p[0][kk] for p in parts]) for kk in plans}; y1 = {kk: np.concatenate([p[1][kk] for p in parts]) for kk in plans}
         B = FB.Boot(lab); B.run = lambda *a, **k_: (res, y1, 0)
         print(f"\nA. 50K funded, bootstrapped ({len(res['plan'])} paired histories, 20-day blocks, 2 years):")
