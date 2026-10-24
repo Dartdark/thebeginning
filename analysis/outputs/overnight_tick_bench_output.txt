@@ -1,0 +1,36 @@
+Overnight TickRSV / VIX (rebuild analysis/overnight_tick_test.py, rule with VIX SMA 25; trades end 2026-07-07 with the
+
+C. 50K funded, bootstrapped (500 paired 2-year histories):
+                        y1 y1_p5      y2  y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+50K plan            $9,152    $0 $11,994     $0 $13,000  8.0%   90.6%   262      50.0%      $0       0.0%
++ OT 1 MNQ          $9,478    $0 $11,940     $0 $13,000  8.2%   91.0%   244      50.2%    $-54       0.2%
++ OT 2 MNQ          $9,397    $0 $11,031     $0 $13,000 15.6%   84.2%   241      46.1%   $-963       7.6%
+Monday Long -> OT 1 $9,818    $0 $12,182 $1,500 $13,000  6.4%   93.0%   244      51.1%    $188      -1.6%
+
+D. 150K funded, bootstrapped (500 paired 2-year histories):
+                y1  y1_p5      y2   y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+150K plan  $16,879 $5,500 $19,957 $20,500 $20,500  2.6%   96.8%   228      50.0%      $0       0.0%
++ OT 1 MNQ $17,352 $8,350 $19,912 $20,500 $20,500  3.0%   96.8%   216      49.9%    $-45       0.4%
++ OT 2 MNQ $17,817 $8,500 $20,095 $20,500 $20,500  2.0%   97.6%   214      50.5%    $138      -0.6%
++ OT 3 MNQ $17,303 $2,500 $19,408  $2,500 $20,500  5.4%   94.2%   214      48.8%   $-549       2.8%
+A. 50K evaluation (every start day; OT trades stop 2026-07-07):
+   combine set + OT 0 MNQ         pass 50.1% (18-22 46.7%, 23-26 54.5%), fail 48.1%
+   combine set + OT 1 MNQ         pass 50.2% (18-22 47.6%, 23-26 53.7%), fail 48.0%
+   combine set + OT 2 MNQ         pass 50.7% (18-22 48.0%, 23-26 54.3%), fail 47.9%
+   combine set + OT 3 MNQ         pass 48.9% (18-22 46.2%, 23-26 52.4%), fail 49.8%
+   Bridge Monday -> OT 1 MNQ      pass 48.9% (18-22 46.6%, 23-26 51.9%), fail 48.9%
+   Bridge Monday -> OT 2 MNQ      pass 49.5% (18-22 47.2%, 23-26 52.5%), fail 48.4%
+   Bridge Monday -> OT 3 MNQ      pass 47.8% (18-22 45.8%, 23-26 50.4%), fail 50.7%
+
+B. 150K evaluation (combine set x 2.5):
+   x 2.5 + OT 0 MNQ               pass 41.6% (18-22 38.8%, 23-26 45.4%), fail 55.8%
+   x 2.5 + OT 2 MNQ               pass 42.0% (18-22 39.4%, 23-26 45.6%), fail 55.3%
+   x 2.5 + OT 3 MNQ               pass 42.4% (18-22 40.5%, 23-26 44.9%), fail 55.0%
+   x 2.5 + OT 5 MNQ               pass 41.3% (18-22 39.0%, 23-26 44.3%), fail 56.2%
+   x 2.5 + OT 8 MNQ               pass 40.3% (18-22 37.2%, 23-26 44.5%), fail 57.5%
+E. Personal portfolio (1 micro each; OT alone $2,192 a year to 2026-07, corr with the rest +0.30, with Overnight Anomaly +0.61):
+   17 pieces (now)            $ 36,595 a year, Sharpe 2.96, max DD $ 6,182, MC p50 $ 35,740, DD p95 $ 7,116, return/DD 7.7, capital $ 35,578
+   + OT                       $ 38,786 a year, Sharpe 3.03, max DD $ 5,887, MC p50 $ 37,699, DD p95 $ 6,973, return/DD 8.1, capital $ 34,866
+   Overnight Anomaly -> OT    $ 37,080 a year, Sharpe 3.04, max DD $ 5,903, MC p50 $ 36,356, DD p95 $ 6,727, return/DD 8.3, capital $ 33,636
+   core 16 (no S30)           $ 30,629 a year, Sharpe 3.17, max DD $ 4,590, MC p50 $ 29,889, DD p95 $ 5,242, return/DD 9.2, capital $ 26,208
+   core 16, OA -> OT          $ 31,114 a year, Sharpe 3.24, max DD $ 4,534, MC p50 $ 30,451, DD p95 $ 5,235, return/DD 9.6, capital $ 26,176
