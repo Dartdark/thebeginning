@@ -35,6 +35,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **Codex 2026-10-24 (codex/work 541d111):** 13 studies of uploads, none changes a plan: S03 v2 B (no placement), NQDB2 /
   R2Vault C, ORPullback / Anson D, night volume switch = T_ONESIDE (WATCH); 6 source-only reviews need code / data
   (Valeris 848, GC risk-adjusted, noise-band CODE.txt, PROP ORB, GC_COMBO v2, Overnight TickRSV). `agents/codex/STATUS.md`.
+- **PAPERTREND v2 (user's description + report, 2026-10-24): B** ($373 per NQ, t 4.1; checker FAIL narrow, DSR 0.865; replica
+  identical). Skip filter adds nothing, gap filter halves risk not edge; ES / YM null; exit at 14:55 is the peak. No Apex plan helps; personal +
+  1 micro return/DD 8.3 -> 8.7 (user's call, after the MC trade list explains 582 vs 535 trades). `analysis/papertrend_test.py`.
 - **Open for Claude:** automatic cushion sizing after the account check; Dual Thrust MC check when the report arrives.
 - **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)
   run in the session 'Scheduled jobs' (session_014DKffATms37kZigaa2xR2P), not in a new chat.
