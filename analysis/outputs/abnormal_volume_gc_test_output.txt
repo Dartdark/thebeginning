@@ -1,0 +1,53 @@
+Abnormal trading volume on gold (user's 3 MultiCharts files + slides, 2026-10-24; Bajo 2010, SSRN 675587; the NQ test
+GC sessions 2288 (2017-12-01 -> 2026-10-13), roll sessions dropped 42
+   every session long, open -> 15:59: $34 a day (gold's drift + costs)
+
+A. AbnormalVolumeStrategy.txt (paper NAV, close-to-close > 1%, 30-day cool-down), per GC, 2018-26:
+   VolFilter 1 = high volume (paper)                    n=  13 $ -193 PF 0.87 t -0.2 win 54% yrs+ 5/8 | <24 $  177 t  0.2 | 24+ n 4 $-1027 t -0.3 | L 6 $-129 S 7 $-249
+   VolFilter 0 = no volume filter (cool-down 0)         n= 572 $ -162 PF 0.88 t -0.9 win 45% yrs+ 3/9 | <24 $   46 t  0.5 | 24+ n 266 $ -400 t -1.1 | L 319 $   9 S 253 $-377
+   VolFilter 2 = low volume                             n=4
+   VolFilter 3 = high or low                            n=   5 $-3731 PF 0.00 t -3.5 win 0% yrs+ 0/4 | <24 $  -37 t  nan | 24+ n 4 $-4655 t -6.8 | L 2 $-3217 S 3 $-4074
+   VolFilter 1, no cool-down                            n=  22 $  300 PF 1.17 t  0.3 win 50% yrs+ 6/9 | <24 $  -16 t -0.0 | 24+ n 11 $  617 t  0.3 | L 7 $-276 S 15 $ 569
+   VolFilter 1, NAV 1.64, no cool-down                  n=  65 $   96 PF 1.08 t  0.2 win 45% yrs+ 5/9 | <24 $ -216 t -0.7 | 24+ n 21 $  749 t  0.5 | L 31 $ 184 S 34 $  16
+   VolFilter 1 faded, no cool-down                      n=  22 $ -355 PF 0.83 t -0.3 win 45% yrs+ 3/9 | <24 $  -38 t -0.1 | 24+ n 11 $ -672 t -0.3 | L 15 $-624 S 7 $ 221
+
+B. The_Abnormal_Trading v1 (NAV incl. today, (C - O) / O), per GC:
+   paper 66 / 2.33 / 1%, as coded (lag 2)               n=  18 $  489 PF 1.31 t  0.3 win 44% yrs+ 5/8 | <24 $ -229 t -0.4 | 24+ n 8 $ 1387 t  0.4 | L 6 $ 798 S 12 $ 334
+   paper 66 / 2.33 / 1%, lag 1 (intended)               n=  18 $ -261 PF 0.85 t -0.2 win 50% yrs+ 4/8 | <24 $ -432 t -0.6 | 24+ n 8 $  -46 t -0.0 | L 6 $-1012 S 12 $ 115
+   slides 160 / 1.5 / 0.3%, as coded (lag 2)            n= 105 $  542 PF 1.48 t  1.1 win 58% yrs+ 5/9 | <24 $   68 t  0.3 | 24+ n 43 $ 1226 t  1.1 | L 56 $1114 S 49 $-111
+   slides 160 / 1.5 / 0.3%, lag 1                       n= 106 $  212 PF 1.13 t  0.3 win 51% yrs+ 3/9 | <24 $   -9 t -0.0 | 24+ n 43 $  536 t  0.3 | L 56 $  97 S 50 $ 341
+   slides as coded, their in-sample 2019-23: n 61 $54 PF 1.08 t 0.2 (slides: 273 trades, PF 1.33 at 1 contract); out of sample 2024+: n 43 $1226 PF 1.67 t 1.1
+   by year (slides, as coded): {2018: 893, 2019: 14357, 2020: -8771, 2021: -5866, 2022: 4733, 2023: -1145, 2024: 7739, 2025: 48332, 2026: -3343}
+   neighbours of the tuned point (as coded):
+      look  66 NAV 1.0 move 0.3%: n 297 $  174 t  0.8 |      look  66 NAV 1.0 move 0.5%: n 265 $  237 t  1.0
+      look  66 NAV 1.5 move 0.3%: n 118 $  413 t  0.9 |      look  66 NAV 1.5 move 0.5%: n 106 $  486 t  0.9
+      look  66 NAV 2.0 move 0.3%: n  39 $  374 t  0.3 |      look  66 NAV 2.0 move 0.5%: n  36 $  352 t  0.3
+      look 120 NAV 1.0 move 0.3%: n 269 $  112 t  0.5 |      look 120 NAV 1.0 move 0.5%: n 239 $  148 t  0.5
+      look 120 NAV 1.5 move 0.3%: n 103 $  580 t  1.1 |      look 120 NAV 1.5 move 0.5%: n  94 $  607 t  1.1
+      look 120 NAV 2.0 move 0.3%: n  39 $  422 t  0.3 |      look 120 NAV 2.0 move 0.5%: n  35 $  362 t  0.3
+      look 160 NAV 1.0 move 0.3%: n 253 $   11 t  0.0 |      look 160 NAV 1.0 move 0.5%: n 218 $   46 t  0.2
+      look 160 NAV 1.5 move 0.3%: n 105 $  542 t  1.1 |      look 160 NAV 1.5 move 0.5%: n  96 $  565 t  1.0
+      look 160 NAV 2.0 move 0.3%: n  38 $  657 t  0.5 |      look 160 NAV 2.0 move 0.5%: n  34 $  658 t  0.5
+      look 200 NAV 1.0 move 0.3%: n 251 $  -38 t -0.1 |      look 200 NAV 1.0 move 0.5%: n 218 $  -22 t -0.1
+      look 200 NAV 1.5 move 0.3%: n 111 $  191 t  0.4 |      look 200 NAV 1.5 move 0.5%: n 100 $  216 t  0.4
+      look 200 NAV 2.0 move 0.3%: n  41 $  873 t  0.8 |      look 200 NAV 2.0 move 0.5%: n  36 $  938 t  0.7
+
+   placebos for the slides' rule (as coded): random side on the same sessions, 500 seeds; all sessions with a > 0.3% (C-O)/O move two sessions earlier (no volume)
+      random side: $-43 (95th pct $864); rule $542 beats 89%
+         no volume filter, same move rule, lag 2        n=1531 $  -68 PF 0.94 t -0.7 win 47% yrs+ 3/9 | <24 $  -72 t -1.3 | 24+ n 540 $  -60 t -0.2 | L 823 $ -15 S 708 $-129
+
+C. v2 sizing ($500 per 2 x ATR14, min 1), slides' settings, as coded:
+   GC: n 105, contracts median 1 max 1; $56,929 total, $542 a trade, PF 1.48, t 1.1; 2024+ $52,728
+   MGC: n 105, contracts median 1 max 2; $5,775 total, $55 a trade, PF 1.49, t 1.1; 2024+ $5,273
+
+D. Metrics per GC (daily), the best two lines:
+                        trades win   avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+paper A 2018-26             13 54% $-193   $-279  -0.06   -0.09          0.87  $9,184  -0.03  6.59      -0.08
+paper A 2023+                7 43%   $43     $77   0.01    0.02          1.02  $7,725   0.01  6.66       0.02
+slides as coded 2018-26    105 58%  $542  $6,325   0.36    0.54          1.48 $30,054   0.21 14.45       0.88
+slides as coded 2023+       52 52%  $992 $13,305   0.52    0.78          1.59 $30,054   0.44 12.13       2.19
+   Monte Carlo slides as coded 1 MGC (x0.1): trades 105 | total p5 $-2,838 / p50 $5,765 / p95 $14,054, P(total <= 0) 13.1%
+      max DD actual $3,005 (rank 38%), shuffled p50 $3,440 / p95 $7,678 / p99 $10,229; losing streak actual 4, p95 7
+      252-day block bootstrap: P&L p5 $-1,491 / p50 $303 / p95 $4,104, P(loss) 35.6%, max DD p50 $655 / p95 $3,091, return/DD 0.46, P(hit $2,000 trailing, EOD check only) 10.1%
+
+   trials 36; t threshold 2.99; deflated Sharpe (slides as coded) 0.15
