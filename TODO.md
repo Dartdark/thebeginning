@@ -124,6 +124,16 @@ place of Overnight Anomaly). Nothing to do until a funded account starts; the VI
 - [ ] Your call: add it to the personal plan at 1 micro (+$2.3k a year, return/DD 8.3 -> 8.7) once the trade lists agree. Not for Apex (benches worse).
   If you trade it: add a 2 x ATR disaster stop (costs nothing in the backtest) and keep the 14:55 CT flatten exact.
 
+## BB_MRM (your file, 2026-10-25: B pending checker; IN THE PERSONAL PLAN at 1 MNQ since 2026-10-25, forward log from 10/26)
+
+- [ ] **MultiCharts backtest 2018-01 -> today** (outside market hours, not on the live VPS): [BB_MRM_Pre-market_user.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/bb_mrm/BB_MRM_Pre-market_user.txt)
+  on a 1-minute **@NQ** chart, **Time Zone = Exchange (CT)**, 24-hour session, IntrabarOrderGeneration off, no Bar Magnifier needed (1-min bars),
+  your input screen (AlphaReductionPct 10, Session_Open 08:05, Offset 1h15), 1 contract, no costs. Export the report with its **List of Trades** into
+  `mc_reports/` (name: `Backtesting Strategy Performance Report _ @NQ - 1 Minute BB_MRM.xlsx`) and tell Claude. The Python rebuild matches your
+  2020-23 report (802 vs 801 trades); this checks 2018-19 and 2024-26 (the −$24k stretch 2024 Q4 - 2025 Q2, +$44.7k in 2026).
+- [ ] Live (personal account): MNQ 1 contract, chart on the **Exchange** clock (on Italian time it trades 01:05-02:20 CT, which loses).
+- [ ] Claude: run the strategy-checker on BB_MRM (`checks/candidates/bb_mrm/`).
+
 ## Antigravity's NQAlignedWeaknessShort (2026-10-20, C)
 
 - [x] (2026-10-20, confirmed 216/216) MultiCharts backtest: [NQ_Aligned_Weakness_Short.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/aligned_weakness_short/NQ_Aligned_Weakness_Short.txt)

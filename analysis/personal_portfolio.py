@@ -88,12 +88,15 @@ if __name__ == "__main__":
     # Overnight TickRSV / VIX replaced Overnight Anomaly 2026-10-24 (user; MultiCharts-confirmed; checks/candidates/overnight_tick/).
     # Its order-flow input ends 2026-07-07, so no trades after that in this backtest.
     otv, notv = from_trades("checks/candidates/overnight_tick/trades.csv", "OvernightTick")
-    P = pd.concat([p, fc, tw, otv, dth, ku, s47, s30], axis=1)
+    # BB_MRM (Bollinger(50, 3) mean reversion 08:05-09:20 CT, NQ 1-min; rebuild analysis/bb_mrm_test.py, per NQ / 10): added
+    # 2026-10-25 (user), on the forward log (agents/codex/FORWARD_LOG.md)
+    bbm, nbbm = from_trades("checks/candidates/bb_mrm/python_trades.csv", "BB_MRM")
+    P = pd.concat([p, fc, tw, otv, dth, ku, s47, s30, bbm], axis=1)
     names = {"VaultBreak": "Vault Break", "OvernightBiasML": "ONB ML", "MondayLong": "Monday Long", "ExpirationOpenShort": "EOS",
              "LateDayFlow": "Late-Day Flow", "NFPFade": "NFP Fade", "BridgeMondayLong": "Bridge Monday", "CLSundayFade_perMCL": "CL Sunday (MCL)",
              "ESMOCFollow_perMES": "ES MOC (MES)", "RelativeStrength": "Relative Strength", "FC2B": "FC 2B", "TwinContinuation": "Twin Continuation",
              "OvernightTick": "Overnight Tick / VIX", "DualThrust": "Dual Thrust",
-             "Kusho": "Kusho v9", "S47": "S47 v2", "S30": "S30 IBS (NQ + ES)"}
+             "Kusho": "Kusho v9", "S47": "S47 v2", "S30": "S30 IBS (NQ + ES)", "BB_MRM": "BB_MRM (open mean reversion)"}
     yrs = len(P) / 252
     print(f"\n1. Pieces at 1 micro each, {days.min().date()} -> {days.max().date()} ({yrs:.1f} years), after micro costs:")
     rows = []
@@ -125,7 +128,11 @@ if __name__ == "__main__":
     need = dm["dd_p95"] / 0.20
     print(f"   capital for 1x at the 20% rule: ${need:,.0f}")
 
-    t16 = tot - P["S30"]; d16 = MC.daily_mc(t16.values, horizon=252, n=5000, block=20, trail=1e12); e16 = t16.cumsum()
+    t17 = tot - P["BB_MRM"]; d17 = MC.daily_mc(t17.values, horizon=252, n=5000, block=20, trail=1e12); e17 = t17.cumsum()
+    print(f"   before BB_MRM (17 pieces): ${t17.sum() / yrs:,.0f} a year, Sharpe {t17.mean() / t17.std() * np.sqrt(252):.2f}, "
+          f"max DD ${-(e17 - e17.cummax()).min():,.0f}, MC p50 ${d17['pnl_p50']:,.0f}, DD p95 ${d17['dd_p95']:,.0f}, return/DD {d17['ret_dd']:.1f}, "
+          f"capital at the 20% rule ${d17['dd_p95'] / 0.20:,.0f}")
+    t16 = t17 - P["S30"]; d16 = MC.daily_mc(t16.values, horizon=252, n=5000, block=20, trail=1e12); e16 = t16.cumsum()
     print(f"   before S30 (16 pieces): ${t16.sum() / yrs:,.0f} a year, Sharpe {t16.mean() / t16.std() * np.sqrt(252):.2f}, "
           f"max DD ${-(e16 - e16.cummax()).min():,.0f}, MC p50 ${d16['pnl_p50']:,.0f}, DD p95 ${d16['dd_p95']:,.0f}, return/DD {d16['ret_dd']:.1f}, "
           f"capital at the 20% rule ${d16['dd_p95'] / 0.20:,.0f}")
@@ -137,7 +144,7 @@ if __name__ == "__main__":
     print(f"   before Dual Thrust (13 pieces): ${t13.sum() / yrs:,.0f} a year, Sharpe {t13.mean() / t13.std() * np.sqrt(252):.2f}, "
           f"max DD ${-(e13 - e13.cummax()).min():,.0f}, MC p50 ${d13['pnl_p50']:,.0f}, DD p95 ${d13['dd_p95']:,.0f}, return/DD {d13['ret_dd']:.1f}, "
           f"capital at the 20% rule ${d13['dd_p95'] / 0.20:,.0f}")
-    alt = tot - P["OvernightTick"] + oa; da = MC.daily_mc(alt.values, horizon=252, n=5000, block=20, trail=1e12); ea = alt.cumsum()
+    alt = t17 - P["OvernightTick"] + oa; da = MC.daily_mc(alt.values, horizon=252, n=5000, block=20, trail=1e12); ea = alt.cumsum()
     print(f"   with Overnight Anomaly instead (before 2026-10-24): ${alt.sum() / yrs:,.0f} a year, Sharpe {alt.mean() / alt.std() * np.sqrt(252):.2f}, "
           f"max DD ${-(ea - ea.cummax()).min():,.0f}, DD p95 ${da['dd_p95']:,.0f}, return/DD {da['ret_dd']:.1f}, capital ${da['dd_p95'] / 0.20:,.0f}")
     t12 = t13 - P["OvernightTick"]; d12 = MC.daily_mc(t12.values, horizon=252, n=5000, block=20, trail=1e12); e12 = t12.cumsum()
