@@ -81,6 +81,26 @@ bottom). Times are Central (CT).
 
 ## Overnight TickRSV / VIX (your spec, 2026-10-24: A, MultiCharts-confirmed 97% of nights)
 
+**In the plans since 2026-10-24 (you):** 50K funded 1 MNQ in place of the Monday Long, 150K funded 2 MNQ, personal (in
+place of Overnight Anomaly). Nothing to do until a funded account starts; the VIX feed (step 1) is worth setting up early.
+
+- [ ] **1. Daily VIX file on the VPS** (once, outside market hours):
+  - copy [tools/vix_update.ps1](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/tools/vix_update.ps1)
+    ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/tools/vix_update.ps1))
+    to `C:\TradingData\VIX\vix_update.ps1` on the VPS;
+  - run it once: `powershell -ExecutionPolicy Bypass -File C:\TradingData\VIX\vix_update.ps1`; check
+    `C:\TradingData\VIX\vix_update.log` says `OK, last date` (the last trading day);
+  - register the scheduled task with the 4 lines at the top of the script (PowerShell as Administrator): weekdays 15:30
+    and 16:30 CT;
+  - in QuoteManager on the VPS: Map ASCII the file as `VIX_CBOE` (same settings as on your PC).
+- [ ] **2. Live check (first evening it runs):** with `PrintDiag` true, the evening line's `VIXdate` must be that day. If it
+  shows yesterday, MultiCharts did not reload the mapped file: tell Claude (it still trades, with the previous day's VIX).
+- [ ] **3. When a 50K account is funded:** remove the Monday Long chart; add
+  [NQ_Overnight_Tick_VIX.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Overnight_Tick_VIX.txt)
+  ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Overnight_Tick_VIX.txt))
+  on a 5-min MNQ chart (CME 24h, Exchange time, IOG off) with `VIX_CBOE` daily as Data2, `NumContracts` 1 (0 below a
+  $1,500 cushion), Trade Logger tag `OTV`. **150K funded:** keep the Monday Long and add it with `NumContracts` 2 (1 below $3,000).
+
 - [x] (2026-10-24) VIX: dxFeed has no VIX index; mapped data/VIX_daily.csv with Map ASCII (live needs a daily update or the previous-day VIX).
 - [x] (2026-10-24, matched 529 nights, P&L corr 1.000) MultiCharts backtest of [NQ_Overnight_Tick_VIX.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/overnight_tick/NQ_Overnight_Tick_VIX.txt)
   ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/overnight_tick/NQ_Overnight_Tick_VIX.txt))

@@ -97,8 +97,10 @@ s.append(tbl([
      "15-min MNQ, CME 24h, Exchange time, Bar Magnifier 1 min, 90+ trading days loaded",
      "RiskPerTrade <b>400</b>, ADXMin 20, StopAtrPct 0.30, UseMLFilter true, LongMinScore 0.03, ShortMinScore 0",
      "Overnight Bias on days the frozen ML score allows (~40% of days)"],
-    ["Monday Long", "funded_strategies/NQ_Monday_Long.txt", "5-min MNQ, CME 24h, Exchange time, Bar Magnifier 1 min",
-     "NumContracts <b>1</b>, RiskPerTrade 0, StopAtrPct 0.50, ExitTime 1500", "Mondays: buy the 8:30 open, out 15:00"],
+    ["Overnight Tick / VIX (added 2026-10-24; replaces the Monday Long on 50K)", "funded_strategies/NQ_Overnight_Tick_VIX.txt",
+     "5-min MNQ, CME 24h, Exchange time, IOG off; <b>Data2 = VIX_CBOE daily</b> (Map ASCII C:\\TradingData\\VIX\\VIX_daily.csv)",
+     "NumContracts <b>1</b>, VIXLen 25, EntryTime 1705, ExitTime 300, PrintDiag false",
+     "After a down RTH day: long 17:05 -> 03:00 CT when order flow x VIX regime agree (~60 a year)"],
     ["Expiration Open Short", "funded_strategies/NQ_Expiration_Open_Short.txt", "5-min MNQ (as evaluation)",
      "RiskPerTrade <b>700</b>", "Third Fridays, 8:30 -> 10:00"],
     ["Late-Day Flow", "funded_strategies/NQ_Late_Day_Flow.txt", "5-min MNQ, CME 24h, Exchange time, Bar Magnifier 1 min",
@@ -126,15 +128,17 @@ s.append(Paragraph("<b>Cushion sizing (funded):</b> each morning cushion = Apex 
                    "Sunday's cushion (Friday's close).", B))
 s.append(Spacer(1, 4))
 s.append(tbl([
-    ["Cushion", "f", "VB (Num / Flagged)", "ONB ML risk", "Monday", "EOS risk", "LDF", "NFP risk", "Bridge", "CL fade (MCL)", "ES MOC (MES)", "Rel. Strength"],
+    ["Cushion", "f", "VB (Num / Flagged)", "ONB ML risk", "OT / VIX", "EOS risk", "LDF", "NFP risk", "Bridge", "CL fade (MCL)", "ES MOC (MES)", "Rel. Strength"],
     ["$1,500 or more", "1.0", "2 / 1", "$400", "1", "$700", "2", "$500", "1", "2", "2", "1 (longs)"],
     ["$1,125", "0.75", "1 / 0", "$300", "0 (off)", "$525", "1", "$375", "0 (off)", "1", "1", "0 (off)"],
     ["$750 or less", "0.5", "1 / 0", "$200", "0 (off)", "$350", "1", "$250", "0 (off)", "1", "1", "0 (off)"],
 ], [1.0, 0.35, 1.0, 0.75, 0.6, 0.7, 0.45, 0.7, 0.6, 0.9, 0.9, 0.85]))
 
 s.append(Paragraph("2b. Funded plan on an Apex 150K Performance Account (account #3 and the scale-up)", H2))
-s.append(Paragraph("Every funded input above x 1.5, rounded down (VB 3 / 1, ONB ML $600, Monday 1, EOS $1,050, LDF 3, NFP $750, "
-                   "Bridge 1, CL fade 3, ES MOC 3), full size from a $3,000 cushion; plus <b>Relative Strength both sides</b> "
+s.append(Paragraph("Every funded input above x 1.5, rounded down (VB 3 / 1, ONB ML $600, EOS $1,050, LDF 3, NFP $750, "
+                   "Bridge 1, CL fade 3, ES MOC 3), full size from a $3,000 cushion; the 150K keeps the <b>Monday Long 1</b> "
+                   "(funded_strategies/NQ_Monday_Long.txt, NumContracts 1) and runs <b>Overnight Tick / VIX at 2</b> and "
+                   "<b>Dual Thrust at 2</b> (NQ_Dual_Thrust.txt; both 1 below the $3,000 cushion); plus <b>Relative Strength both sides</b> "
                    "(TradeDir <b>0</b>, NumContracts <b>1</b>): single-history bench 1y $16,705 vs $16,067, 2y $20,038 vs $19,808, "
                    "blown 0%, all 6 payouts 95% vs 93% (2 MNQ about the same, 4 MNQ blows 20%). Not used in any evaluation "
                    "(50K or 150K): it lowers the pass rate at every size.", B))

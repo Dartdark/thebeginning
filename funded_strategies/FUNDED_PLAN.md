@@ -34,6 +34,25 @@ Cushion sizing: RS is 1 MNQ, so it is off (0) while f < 1 (cushion under $1,500 
 confirmation skipped by the user (no backtests while trading live); the user's own MultiCharts run in the research note
 matches the rebuild (PF 1.37 vs 1.38 before costs, longs PF 1.46 both). Live: the drift alarm decides (`../live/README.md`).
 
+## Overnight Tick / VIX added to the funded plans (user, 2026-10-24)
+
+The user's 'NQ Overnight Anomaly Strategy Optimized' (`NQ_Overnight_Tick_VIX.txt`; research `../analysis/overnight_tick_test.py`,
+checker PASS WITH CONCERNS, **MultiCharts-confirmed**: 529 same nights, P&L corr 1.000; TIER_LIST A): after a down RTH
+session (no early close), long 17:05 → 03:00 CT when (order-flow imbalance 14:15-15:15 CT < 0 and VIX > SMA 25) or (≥ 0 and
+VIX ≤ SMA 25). Per NQ 2018 → 2026-07: $374 a trade, PF 1.98, t 5.2, 9/9 years, max DD $12.8k. Inside one Apex trading day.
+
+| Plan | Setting | Effect (`../analysis/overnight_tick_bench.py`, bootstrapped 500 paired 2-year histories) | Decision |
+|---|---|---|---|
+| **50K funded** | **1 MNQ in place of the Monday Long** | 1y $9,818 vs $9,152, 2y $12,182 vs $11,994 (+$188, t 1.7), blown 6.4% vs 8.0%, 6th payout day 244 vs 262 | **in the plan** |
+| **150K funded** (x 1.5 + RS 1 + DT 2) | **+ 2 MNQ** (Monday Long stays) | 1y $17,817 vs $16,879 (bad case $8,500 vs $5,500), 6th payout day 214 vs 228, blown 2.0% vs 2.6%, 2y +$138 (cap-bound) | **in the plan** |
+| 50K / 150K evaluations | - | 50.7% vs 50.1% (2 MNQ) / 42.4% vs 41.6% (3 MNQ): a tie | not used |
+| Personal | in place of Overnight Anomaly | core 16 return/DD 9.2 → 9.6 | in the personal plan |
+
+Cushion sizing: 50K 1 MNQ, off while f < 1 (like RS); 150K 2 MNQ, 1 below a $3,000 cushion. **VIX:** dxFeed has no VIX
+index: Data2 = `VIX_CBOE`, Map ASCII of `C:\TradingData\VIX\VIX_daily.csv`, refreshed each weekday by `../tools/vix_update.ps1`
+(Cboe, Yahoo for the same day's close). If the day's VIX is missing the signal uses the previous day's (backtest $309 vs $374
+per NQ). Watch: the 24 MultiCharts trades after 2026-07-07 (no order-flow data in our rebuild) averaged −$280 per NQ.
+
 ## Dual Thrust added to the 150K funded plan (user, 2026-10-24)
 
 The user's Dual Thrust v4 (`NQ_Dual_Thrust.txt`; research `../analysis/dual_thrust_test.py`, checker PASS WITH CONCERNS,
@@ -71,7 +90,8 @@ Flow are MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`); full size sta
 |---|---|---|---|---|
 | Vault Break | `../apex_strategies/NQ_Vault_Break_SP.txt` | 30 min MNQ | **`NumContracts` 2**, `FlaggedContracts` 1 (was 3 / 1 until 2026-10-17) | ~107 a year |
 | Overnight Bias ML (v2) | `NQ_Overnight_Bias_ML.txt` | 15 min MNQ | `RiskPerTrade` 400 | ~38 a year |
-| Monday Long | `NQ_Monday_Long.txt` | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 | every Monday |
+| ~~Monday Long~~ **50K: replaced 2026-10-24** by Overnight Tick / VIX (150K keeps it at 1) | `NQ_Monday_Long.txt` | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 | every Monday |
+| **Overnight Tick / VIX (2026-10-24)** | `NQ_Overnight_Tick_VIX.txt` | 5 min MNQ + VIX daily (Data2, Map ASCII) | `NumContracts` 1 | ~60 a year (17:05 → 03:00 CT after down days) |
 | Expiration Open Short | `NQ_Expiration_Open_Short.txt` | 5 min MNQ | `RiskPerTrade` 700 | 12 a year |
 | Late-Day Flow | `NQ_Late_Day_Flow.txt` | 5 min MNQ | `NumContracts` 2, `RiskPerTrade` 0 | ~100 a year |
 | NFP Fade | `NQ_NFP_Fade.txt` | 5 min MNQ | `RiskPerTrade` 500 | ~9 a year (payroll Fridays, 7:45–9:00 CT) |
@@ -88,7 +108,7 @@ MNQ (blown 11–12%), EOS $500 (slower, 269 days), dropping our Monday Long (274
 **Cushion sizing:** cushion = balance − trailing threshold, each morning. f = cushion / **$1,500**,
 kept between 0.5 and 1; multiply each full-size input by f and round down:
 
-| Cushion | f | VB normal / flagged | ONB ML risk | Monday | EOS risk | LDF | NFP risk | Bridge Monday | CL Sunday | ES MOC | RS longs |
+| Cushion | f | VB normal / flagged | ONB ML risk | OT / VIX | EOS risk | LDF | NFP risk | Bridge Monday | CL Sunday | ES MOC | RS longs |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | $1,500 or more | 1.0 | 2 / 1 | 400 | 1 | 700 | 2 | 500 | 1 | 2 MCL | 2 MES | 1 |
 | $1,125 | 0.75 | 1 / 0 | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) | 1 MCL | 1 MES | 0 (off) |

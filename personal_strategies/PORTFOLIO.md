@@ -1,4 +1,4 @@
-# Personal-account portfolio (2026-10-23; Overnight Anomaly, Dual Thrust, Kusho v9, S47 v2 and S30 IBS added 2026-10-24)
+# Personal-account portfolio (2026-10-23; Dual Thrust, Kusho v9, S47 v2, S30 IBS and Overnight Tick / VIX added 2026-10-24; Overnight Anomaly replaced)
 
 From everything tested so far; numbers from `analysis/personal_portfolio.py` (output in
 `analysis/outputs/personal_portfolio_output.txt`). Backtest 2018-01 → 2026-10, after costs, micro commissions charged at
@@ -17,7 +17,7 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | FC 2B v2 | MNQ | $2,366 | $2,213 | $1,534 | 1.33 | A, MC-confirmed, **forward log first** |
 | Monday Long | MNQ | $2,104 | $3,912 | $2,086 | 1.09 | funded plan |
 | Vault Break | MNQ | $1,723 | $2,237 | $1,385 | 1.30 | live on Apex (combine) |
-| Overnight Anomaly (Block B) | MNQ | $1,706 | $2,426 | $2,044 | 0.94 | C, personal only (user 2026-10-24); long 17:30 → 02:30 CT after a down day; corr +0.02 |
+| Overnight Tick / VIX (long 17:05 → 03:00 CT after a down day, order-flow × VIX filter) | MNQ | $2,201 | $2,838 | $1,283 | 1.68 | A, MC-confirmed; personal + funded (50K 1, 150K 2) since 2026-10-24 (user); replaced Overnight Anomaly (C); data to 2026-07-07 |
 | Bridge Monday | MNQ | $1,295 | $1,478 | $1,689 | 1.39 | live on Apex (combine) |
 | Late-Day Flow | MNQ | $889 | $1,171 | $1,590 | 1.10 | funded plan |
 | CL Sunday fade | MCL | $692 | $1,042 | $518 | 1.01 | funded plan |
@@ -26,11 +26,13 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | NFP Fade | MNQ | $291 | $467 | $826 | 0.60 | funded plan |
 
 ## Whole portfolio, every piece at 1 micro
-- **$36,600 a year** (2023+: $44,000), every year positive (2018 $8.5k, 2019 $9.7k, then $31.4-56.0k).
-- Sharpe 2.96, Sortino 6.22, PF 1.83, Calmar 5.9, Ulcer 0.99; max DD $6,182; worst month −$1,987; 13% losing months.
-- Monte Carlo, 1 year: p5 $19,400 / p50 $35,700 / p95 $54,800; P(losing year) 0.0%; max DD p50 $4,640 / p95 $7,120;
-  return / DD 7.7.
-- **Needs about $35,600** to keep the 1-year p95 drawdown at 20% of the account (without S30: $26,200).
+- **$37,100 a year** (2023+: $44,400), every year positive (2018 $9.1k, 2019 $9.5k, then $34.2-58.2k).
+- Sharpe 3.04, Sortino 6.53, PF 1.86, Calmar 6.3, Ulcer 0.94; max DD $5,903; worst month −$1,951; 12% losing months.
+- Monte Carlo, 1 year: p5 $20,200 / p50 $36,400 / p95 $54,900; P(losing year) 0.0%; max DD p50 $4,360 / p95 $6,730;
+  return / DD 8.3.
+- **Needs about $33,600** to keep the 1-year p95 drawdown at 20% of the account (without S30: $26,200).
+- Overnight Tick / VIX in place of Overnight Anomaly (user, 2026-10-24): 17 pieces $36.6k → $37.1k a year, Sharpe 2.96 → 3.04,
+  return/DD 7.7 → 8.3, capital $35.6k → $33.6k; core 16: Sharpe 3.17 → 3.24, return/DD 9.2 → 9.6 (`analysis/overnight_tick_bench.py`).
 - S30's effect (16 → 17 pieces, user 2026-10-24): +$6,000 a year, but Sharpe 3.17 → 2.96, return/DD 9.2 → 7.7, max DD
   $4,590 → $6,182, capital $26.2k → $35.6k: more money, less per unit of risk. Below ~$35.6k run the 16 without S30.
 - Kusho v9 + S47 v2's effect (14 → 16 pieces, user 2026-10-24): +$6,300 a year, Sharpe 3.00 → 3.17, return/DD 8.2 → 9.2,
@@ -38,7 +40,7 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
   Kusho's overnight / weekend holds are booked on the exit day (not marked daily), so its drawdown may be understated.
 - Dual Thrust's effect (13 → 14 pieces, user 2026-10-24): +$2,400 a year, Sharpe 2.97 → 3.00, return/DD 7.8 → 8.2, max DD
   $4,331 → $5,001, capital $23.0k → $25.0k (corr +0.33 with the rest: it trades the same RTH hours as VB / RS / FC 2B).
-- Overnight Anomaly's effect (12 → 13 pieces): +$1,700 a year, max DD $4,663 → $4,331, Sharpe 2.84 → 2.97, capital
+- (History) Overnight Anomaly's effect (12 → 13 pieces), replaced 2026-10-24: +$1,700 a year, max DD $4,663 → $4,331, Sharpe 2.84 → 2.97, capital
   $23.4k → $23.0k. It barely moves with the rest (corr +0.02), so it adds profit without adding drawdown.
 
 ## Growing into it (capital at the 20% rule)
@@ -50,17 +52,17 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | ~$20,400 | **D**: C + Relative Strength + ES MOC | $14,500 | $6,300 | $4,080 |
 | ~$23,000 | Full without Dual Thrust (13) | $21,300 | $10,500 | $4,610 |
 | ~$25,000 | Full without Kusho / S47 (14) | $23,700 | $12,500 | $5,000 |
-| ~$26,200 | **Core**: the 16 without S30, 1 micro each | $29,900 | $16,400 | $5,240 |
-| ~$35,600 | Core + S30 at 1 micro (same weight: puts spare capital to work, return/DD 9.2 -> 7.7) | $35,700 | $19,400 | $7,120 |
-| ~$55,700 | Core x 2 + S30 at 1 micro (half weight) | $65,700 | $36,700 | $11,140 |
-| ~$105,400 | **Core x 4 + S30 at 1 micro (quarter weight: the best mix, return/DD 9.4)** | $125,800 | $69,700 | $21,080 |
-| ~$265,400 | Core x 10 = **1 mini (NQ / ES / CL) per piece** + S30 at 3 MNQ + 3 MES | $317,200 | $176,800 | $53,070 |
+| ~$26,200 | **Core**: the 16 without S30, 1 micro each | $30,500 | $17,000 | $5,240 |
+| ~$33,600 | Core + S30 at 1 micro (same weight: puts spare capital to work, return/DD 9.6 -> 8.3) | $36,400 | $20,200 | $6,730 |
+| ~$54,100 | Core x 2 + S30 at 1 micro (half weight) | $66,800 | $38,200 | $10,830 |
+| ~$104,100 | **Core x 4 + S30 at 1 micro (quarter weight: the best mix, return/DD 9.9)** | $127,800 | $72,800 | $20,830 |
+| ~$260,900 | Core x 10 = **1 mini (NQ / ES / CL) per piece** + S30 at 3 MNQ + 3 MES | $322,400 | $185,500 | $52,180 |
 
 **Units:** every '$ a year' is the backtest at the sizes in its row; '1 micro' = 1 MNQ / MES / MCL per piece, so the core
 at 1 micro is ~$2,500 a month and at 1 mini per piece ~$25,000 a month (not $300k a month), with drawdowns 10x as large.
 **S30's weight (2026-10-24):** at full weight it lowers return per risk (Sharpe 3.17 -> 2.96); at a quarter to half of the
 other pieces' size it raises it (quarter: Sharpe 3.21, return/DD 9.44), because it barely moves with them (corr +0.11).
-So it runs at full weight only between ~$35.6k and ~$55.7k, then at half, then a quarter. **Minis** change costs only:
+So it runs at full weight only between ~$33.6k and ~$54.1k, then at half, then a quarter. **Minis** change costs only:
 1 NQ ~$4-5 commission vs ~$10-12 for 10 MNQ (very roughly +3% at 1 NQ per piece); mix them freely (1 NQ + 3 MNQ = 13).
 **Live expectation:** these are in-sample backtests; our rule expects live >= 75% of them (the 1-mini row ~$240k a year at
 75%, ~$190k at 60%).
@@ -76,10 +78,11 @@ with ~$11.5k. Add the next set only when the account reaches its line, and drop 
   (check the broker). Without Twin the full set is $18.3k a year, DD p95 $4.4k. Since 2026-10-24 its overnight holds are
   marked at each 16:00 CT close instead of booked at exit (cross-review item): no material change (max DD $4,663, MC p95
   DD $4,687, capital $23.4k, all as before; only 50 of 1,074 trades hold overnight).
-- **Overnight Anomaly holds 17:30 → 02:30 CT with a wide disaster stop** (4 x the window range EMA): worst night −$1,263
-  per MNQ (2026-06-23), it is behind the worst portfolio day (−$2,064). Ranked C (t 2.9, below the multiple-testing bar):
-  in only because it fills the empty overnight hours. Code: `personal_strategies/Overnight_Anomaly.txt` (Block B on its own,
-  `Max_Contracts 1`, @MNQ 15-min 24-hour chart; review `checks/candidates/overnight_anomaly/REVIEW.md`).
+- **Overnight Tick / VIX holds 17:05 → 03:00 CT with no stop** (A, MultiCharts-confirmed; replaced Overnight Anomaly, C, on
+  2026-10-24). Code: `funded_strategies/NQ_Overnight_Tick_VIX.txt` (5-min MNQ, VIX daily as Data2: `C:\TradingData\VIX\VIX_daily.csv`
+  via Map ASCII, refreshed daily by `tools/vix_update.ps1`; if the day's VIX is missing it uses the previous day's, which
+  earned $309 vs $374 per NQ). Its backtest ends 2026-07-07 (order-flow data); the 24 MultiCharts trades after that
+  averaged −$280 per NQ (watch).
 - RS and FC 2B overlap (both enter at 09:01 in the opening drive's direction, corr +0.36): they can lose together.
 - When to start (`DEVELOPMENT_PROCESS.md` lifecycle): from Apex payouts, after the live record matches the backtest
   (early start from ~month 3 at small size if ≥ 100 live trades, live ≥ 75% of backtest, no drift alarm).

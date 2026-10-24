@@ -29,6 +29,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   now place trades by date (old CSV rows were on a 2016-09-29 grid).
 - **Personal plan (user, 2026-10-24): + Kusho v9 21:00, S47 v2 and S30 IBS (17 pieces, $36.6k a year, return/DD 7.7,
   capital ~$35.6k; without S30 $30.6k, 9.2, $26.2k); all three still on the forward log, with FC 2B; Kusho 15:45 dropped.** Apex plans unchanged (`analysis/forward_log_plans_test.py`).
+- **Overnight Tick / VIX (user's spec, 2026-10-24): A, MultiCharts-confirmed** ($374 per NQ, t 5.2). In the plans (user): 50K
+  funded 1 MNQ in place of the Monday Long, 150K funded + 2 MNQ, personal in place of Overnight Anomaly (17 pieces $37.1k,
+  capital ~$33.6k). VIX via Map ASCII + `tools/vix_update.ps1` on the VPS (TODO). Watch the trades after 2026-07-07.
 - **Codex 2026-10-24 (codex/work 541d111):** 13 studies of uploads, none changes a plan: S03 v2 B (no placement), NQDB2 /
   R2Vault C, ORPullback / Anson D, night volume switch = T_ONESIDE (WATCH); 6 source-only reviews need code / data
   (Valeris 848, GC risk-adjusted, noise-band CODE.txt, PROP ORB, GC_COMBO v2, Overnight TickRSV). `agents/codex/STATUS.md`.

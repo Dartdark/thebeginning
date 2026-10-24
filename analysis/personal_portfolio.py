@@ -8,7 +8,8 @@ Pieces (daily $ per 1 micro, 2018-01 -> 2026-10, after costs):
     (checks/candidates/s47_v2/python_trades_v2.csv), per NQ / 10; added 2026-10-24 (user), still forward-logged
   - Dual Thrust v4 (checks/candidates/dual_thrust/trades.csv = rebuild analysis/dual_thrust_test.py, per NQ / 10; added
     2026-10-24, user)
-  - OvernightAnomaly v4.1 = Block B of the user's merged file (checks/candidates/overnight_anomaly/trades.csv, rebuild
+  - Overnight TickRSV / VIX (checks/candidates/overnight_tick/trades.csv, per NQ / 10; replaced Overnight Anomaly 2026-10-24, user)
+  - (until 2026-10-24) OvernightAnomaly v4.1 = Block B of the user's merged file (checks/candidates/overnight_anomaly/trades.csv, rebuild
     analysis/overnight_anomaly_test.py, per NQ / 10; long 17:30 -> 02:30 CT after a down RTH day; added 2026-10-24, user)
 Micro costs: the repo's per-NQ costs / 10 give $0.725 commission per round trip; real micro commissions are ~$1.25, so
 $0.55 more is charged per micro trade (plan pieces: per day with a trade, a slight underestimate for VB's re-entries).
@@ -84,11 +85,14 @@ if __name__ == "__main__":
     s47, ns47 = from_trades("checks/candidates/s47_v2/python_trades_v2.csv", "S47")
     # S30 IBS reversal (NQ + ES long, holds days, daily marked): added 2026-10-24 (user), still on the forward log
     s30 = pd.read_csv("checks/candidates/s30_ibs/daily_nq_es_per_micro.csv", index_col=0, parse_dates=True).iloc[:, 0].reindex(days, fill_value=0.0).rename("S30")
-    P = pd.concat([p, fc, tw, oa, dth, ku, s47, s30], axis=1)
+    # Overnight TickRSV / VIX replaced Overnight Anomaly 2026-10-24 (user; MultiCharts-confirmed; checks/candidates/overnight_tick/).
+    # Its order-flow input ends 2026-07-07, so no trades after that in this backtest.
+    otv, notv = from_trades("checks/candidates/overnight_tick/trades.csv", "OvernightTick")
+    P = pd.concat([p, fc, tw, otv, dth, ku, s47, s30], axis=1)
     names = {"VaultBreak": "Vault Break", "OvernightBiasML": "ONB ML", "MondayLong": "Monday Long", "ExpirationOpenShort": "EOS",
              "LateDayFlow": "Late-Day Flow", "NFPFade": "NFP Fade", "BridgeMondayLong": "Bridge Monday", "CLSundayFade_perMCL": "CL Sunday (MCL)",
              "ESMOCFollow_perMES": "ES MOC (MES)", "RelativeStrength": "Relative Strength", "FC2B": "FC 2B", "TwinContinuation": "Twin Continuation",
-             "OvernightAnomaly": "Overnight Anomaly", "DualThrust": "Dual Thrust",
+             "OvernightTick": "Overnight Tick / VIX", "DualThrust": "Dual Thrust",
              "Kusho": "Kusho v9", "S47": "S47 v2", "S30": "S30 IBS (NQ + ES)"}
     yrs = len(P) / 252
     print(f"\n1. Pieces at 1 micro each, {days.min().date()} -> {days.max().date()} ({yrs:.1f} years), after micro costs:")
@@ -133,8 +137,11 @@ if __name__ == "__main__":
     print(f"   before Dual Thrust (13 pieces): ${t13.sum() / yrs:,.0f} a year, Sharpe {t13.mean() / t13.std() * np.sqrt(252):.2f}, "
           f"max DD ${-(e13 - e13.cummax()).min():,.0f}, MC p50 ${d13['pnl_p50']:,.0f}, DD p95 ${d13['dd_p95']:,.0f}, return/DD {d13['ret_dd']:.1f}, "
           f"capital at the 20% rule ${d13['dd_p95'] / 0.20:,.0f}")
-    t12 = t13 - P["OvernightAnomaly"]; d12 = MC.daily_mc(t12.values, horizon=252, n=5000, block=20, trail=1e12); e12 = t12.cumsum()
-    print(f"   before Overnight Anomaly (12 pieces): ${t12.sum() / yrs:,.0f} a year, Sharpe {t12.mean() / t12.std() * np.sqrt(252):.2f}, "
+    alt = tot - P["OvernightTick"] + oa; da = MC.daily_mc(alt.values, horizon=252, n=5000, block=20, trail=1e12); ea = alt.cumsum()
+    print(f"   with Overnight Anomaly instead (before 2026-10-24): ${alt.sum() / yrs:,.0f} a year, Sharpe {alt.mean() / alt.std() * np.sqrt(252):.2f}, "
+          f"max DD ${-(ea - ea.cummax()).min():,.0f}, DD p95 ${da['dd_p95']:,.0f}, return/DD {da['ret_dd']:.1f}, capital ${da['dd_p95'] / 0.20:,.0f}")
+    t12 = t13 - P["OvernightTick"]; d12 = MC.daily_mc(t12.values, horizon=252, n=5000, block=20, trail=1e12); e12 = t12.cumsum()
+    print(f"   without the overnight-anomaly piece (12 pieces): ${t12.sum() / yrs:,.0f} a year, Sharpe {t12.mean() / t12.std() * np.sqrt(252):.2f}, "
           f"max DD ${-(e12 - e12.cummax()).min():,.0f}, MC p50 ${d12['pnl_p50']:,.0f}, DD p95 ${d12['dd_p95']:,.0f}, return/DD {d12['ret_dd']:.1f}, "
           f"capital at the 20% rule ${d12['dd_p95'] / 0.20:,.0f}")
 

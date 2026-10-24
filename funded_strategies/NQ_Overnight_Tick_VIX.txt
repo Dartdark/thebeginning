@@ -1,0 +1,116 @@
+{ REPO COPY (2026-10-24): Overnight Tick / VIX, A, MultiCharts-confirmed (checks/candidates/overnight_tick/). In the 50K FUNDED
+  plan at 1 MNQ in place of the Monday Long, the 150K FUNDED plan at 2 MNQ (next to the Monday Long), and the personal
+  portfolio (in place of Overnight Anomaly). Not in evaluations. Chart: 5-min MNQ, CME 24h, Exchange time (CT), IOG off;
+  Data2 = VIX daily from C:\TradingData\VIX\VIX_daily.csv (Map ASCII, symbol VIX_CBOE), refreshed each weekday by
+  tools/vix_update.ps1. Trade Logger tag OTV. }
+
+{=============================================================================
+ NQ OVERNIGHT TICK-RSV / VIX  (long only)  - assembled by Claude 2026-10-24 from the user's specification
+ 'NQ Overnight Anomaly Strategy Optimized' (IS 2017-05-21 .. 2024-02-12, OOS 2024-02-13 .. 2026-07-09).
+ Rebuild / tests: analysis/overnight_tick_test.py, analysis/overnight_tick_bench.py.
+
+ RULE
+   After a NEGATIVE regular session (RTH close < RTH open, 09:30-16:00 ET = 08:30-15:00 CT) that was not an
+   early close (last RTH bar before 15:00 ET / 14:00 CT), go long 1 NQ at the evening reopen when
+       (TickRSV <  0 and VIX close >  SMA(VIX, VIXLen))   or
+       (TickRSV >= 0 and VIX close <= SMA(VIX, VIXLen))
+   TickRSV = (UpTicks - DownTicks) / (UpTicks + DownTicks) summed over 15:15-16:15 ET (14:15-15:15 CT).
+   Exit at 04:00 ET (03:00 CT) at market. No stop, no target (optional disaster stop below, off).
+   One trade per regular session: Sunday evening uses Friday's session; a holiday evening without a new
+   session does not trade again.
+
+ CHART
+   Data1: @NQ (or MNQ), 5-minute bars, CME 24-hour session, bar-close time stamps, IOG off.
+          'Build Volume On' = Tick Count or Trade Volume: TickRSV uses UpTicks / DownTicks. NOTE: the test used
+          aggressor buy / sell volume (The Bridge); a bar-direction proxy was much weaker (t 3.2 vs 5.2), so check
+          that this chart's UpTicks / DownTicks give the same signs before trusting it (PrintDiag true).
+   Data2: VIX, DAILY bars. The rule uses that day's VIX close (VIX closes 15:15 CT, before the 17:05 CT entry);
+          if MultiCharts still shows yesterday's daily bar at 17:05, the result changes: check with PrintDiag.
+   TIME PRESETS (set them to the chart's clock, not the code's):
+     CENTRAL chart (Exchange time, our setup):  RTH 830 / 1500, RSV 1415 / 1515, Entry 1705, Exit 300, Early 1400
+     EASTERN chart (the author's):               RTH 930 / 1600, RSV 1515 / 1615, Entry 1805, Exit 400, Early 1500
+   Apex: the 17:05 -> 03:00 CT hold sits inside one Apex trading day (it starts 17:00 CT).
+=============================================================================}
+
+Inputs:
+    NumContracts(1),
+    VIXLen(25),                     // author's pick 25; their code default was 20
+    RTHStart(830), RTHEnd(1500),    // CT
+    RSVStart(1415), RSVEnd(1515),   // CT, bars stamped > start and <= end
+    EntryTime(1705), ExitTime(300), // CT; entry decision at the first bar stamped >= EntryTime in the evening
+    EarlyCloseBefore(1400),         // RTH session whose last bar is before this = early close: no trade
+    UseDisasterStop(false), DisasterMult(3), RangeLen(20),
+    PrintDiag(false);
+
+Variables:
+    RTHOpen(0), RTHClose(0), RTHLast(0), InRTH(false),
+    UpSum(0), DnSum(0),
+    StateReady(false), StateDown(false), StateEarly(false), StateRSV(0), StateHasRSV(false), StateUsed(true),
+    VIXc(0), VIXma(0), Pass(false),
+    NightHi(0), NightLo(0), InNight(false), AvgRange(0), NRanges(0), kk(0),
+    StopPx(0);
+
+Arrays: Rng[100](0);
+
+// ---- regular session: open, close, last bar, TickRSV window ----
+If Time > RTHStart and Time <= RTHEnd then begin
+    If InRTH = false then begin
+        InRTH = true; RTHOpen = Open; UpSum = 0; DnSum = 0;
+    end;
+    RTHClose = Close; RTHLast = Time;
+end;
+If Time > RSVStart and Time <= RSVEnd then begin
+    UpSum = UpSum + UpTicks; DnSum = DnSum + DownTicks;
+end;
+// session state is frozen once the TickRSV window has ended (15:15 CT), or at the first bar after the RTH ends
+If InRTH and (Time > RSVEnd or Time < RTHStart or Date <> Date[1]) then begin
+    InRTH = false;
+    StateDown = RTHClose < RTHOpen;
+    StateEarly = RTHLast < EarlyCloseBefore;
+    StateHasRSV = UpSum + DnSum > 0;
+    If StateHasRSV then StateRSV = (UpSum - DnSum) / (UpSum + DnSum);
+    StateReady = true; StateUsed = false;
+    If PrintDiag then
+        Print("OTV ", ELDateToString(Date), " RTH o ", RTHOpen:0:2, " c ", RTHClose:0:2, " last ", RTHLast:0:0,
+              " up ", UpSum:0:0, " dn ", DnSum:0:0, " rsv ", StateRSV:0:4);
+end;
+
+// ---- overnight range for the optional disaster stop (EntryTime -> ExitTime window) ----
+If Time >= EntryTime or Time <= ExitTime then begin
+    If InNight = false then begin InNight = true; NightHi = High; NightLo = Low; end
+    else begin NightHi = MaxList(NightHi, High); NightLo = MinList(NightLo, Low); end;
+end
+else if InNight then begin
+    InNight = false;
+    For kk = RangeLen - 1 downto 1 begin Rng[kk] = Rng[kk - 1]; end;
+    Rng[0] = NightHi - NightLo;
+    If NRanges < RangeLen then NRanges = NRanges + 1;
+    AvgRange = 0;
+    For kk = 0 to NRanges - 1 begin AvgRange = AvgRange + Rng[kk]; end;
+    AvgRange = AvgRange / MaxList(1, NRanges);
+end;
+
+// ---- entry: first evening bar stamped >= EntryTime, flat, state not used yet ----
+If MarketPosition = 0 and StateReady and StateUsed = false and Time >= EntryTime and Time < 2359 then begin
+    StateUsed = true;                                   // one decision per regular session
+    VIXc = Close of data2;
+    VIXma = Average(Close, VIXLen) of data2;          // computed on Data2's daily bars, not on Data1's 5-min bars
+    Pass = StateDown and StateEarly = false and StateHasRSV
+           and ((StateRSV < 0 and VIXc > VIXma) or (StateRSV >= 0 and VIXc <= VIXma));
+    If PrintDiag then
+        Print("OTV ", ELDateToString(Date), " ", Time:0:0, " down ", IFF(StateDown, 1, 0):0:0, " early ", IFF(StateEarly, 1, 0):0:0,
+              " rsv ", StateRSV:0:4, " vix ", VIXc:0:2, " ma ", VIXma:0:2, " VIXdate ", ELDateToString(Date of data2),
+              " enter ", IFF(Pass, 1, 0):0:0);
+    If Pass then begin
+        Buy ("OTV_L") NumContracts contracts next bar at market;
+        If UseDisasterStop and AvgRange > 0 then StopPx = Close - DisasterMult * AvgRange;
+    end;
+end;
+
+// ---- exits ----
+If MarketPosition > 0 then begin
+    If Time >= ExitTime and Time < EntryTime then
+        Sell ("OTV_X") next bar at market
+    else if UseDisasterStop and StopPx > 0 then
+        Sell ("OTV_DS") next bar at StopPx stop;
+end;
