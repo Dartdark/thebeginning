@@ -1,0 +1,61 @@
+BB_MRM Pre-market (user's MultiCharts file BB_MRM_Pre-market.txt + 2 reports + input screen, 2026-10-24): Bollinger(50, 3)
+
+1. The rule as in the input screen (alpha 10%, window 08:05-09:20 CT), per NQ, 2018-01 -> 2026-10-08:
+   rebuild                                        n=1704 $  54 PF 1.23 t  3.4 win 53% yrs+ 6/9 | <24 $  50 t  3.3 | 24+ n 552 $  61 t  1.7 | L $  39 S $  69
+   report 1 period 2020-01-06 -> 2023-12-29: 802 trades (report 801), $59,032 (report $61,751), PF 1.33 (1.35), win 54.5% (54.6%)
+   2024-01-01 -> 2025-02-27: 228 trades, $-13,281, PF 0.82, win 47.4%  (report 2: 236, $43,870, 1.62, 56.4%)
+   2024-09-01 -> 2025-10-28: 224 trades, $-24,513, PF 0.73, win 45.1%  (report 2: 236, $43,870, 1.62, 56.4%)
+   2025-08-12 -> 2026-10-09: 238 trades, $53,984, PF 1.73, win 57.1%  (report 2: 236, $43,870, 1.62, 56.4%)
+   by year $: {2018: 2237, 2019: -3277, 2020: 21114, 2021: 9558, 2022: 25344, 2023: 3016, 2024: -10374, 2025: -872, 2026: 44708}
+   by year n: {2018: 171, 2019: 179, 2020: 198, 2021: 194, 2022: 210, 2023: 200, 2024: 200, 2025: 199, 2026: 153}
+   exits: {'target': 849, 'soft stop': 696, 'BE': 43, 'window close': 41, 'hard stop': 40, 'time': 28, 'BE mkt': 6, 'hard mkt': 1} | bars held median 6.0
+   the same on the Rome clock (01:05-02:20 CT, what the comments say): 1006 trades $-13 t -1.4; report 1 period 522 trades $-7,720
+
+2. Robustness (one change at a time):
+   file default alpha 15%, window to 09:10        n=1679 $  52 PF 1.23 t  3.4 win 54% yrs+ 6/9 | <24 $  44 t  2.9 | 24+ n 542 $  70 t  2.0 | L $  37 S $  69
+   alpha 0 (target = SMA)                         n=1691 $  56 PF 1.23 t  3.4 win 50% yrs+ 7/9 | <24 $  48 t  3.0 | 24+ n 550 $  71 t  1.9 | L $  40 S $  73
+   alpha 30%                                      n=1728 $  43 PF 1.19 t  3.0 win 59% yrs+ 5/9 | <24 $  44 t  3.2 | 24+ n 559 $  39 t  1.2 | L $  29 S $  57
+   BB 2.5 sd                                      n=3891 $  17 PF 1.07 t  1.6 win 52% yrs+ 5/9 | <24 $  25 t  2.5 | 24+ n 1280 $   1 t  0.0 | L $  24 S $   9
+   BB 3.5 sd                                      n= 476 $   3 PF 1.01 t  0.1 win 49% yrs+ 6/9 | <24 $  33 t  1.2 | 24+ n 154 $ -60 t -0.9 | L $  -2 S $   8
+   BB length 30                                   n= 472 $  -8 PF 0.97 t -0.3 win 56% yrs+ 6/9 | <24 $ -22 t -0.9 | 24+ n 141 $  26 t  0.4 | L $ -10 S $  -6
+   BB length 100                                  n=2592 $  12 PF 1.04 t  0.9 win 46% yrs+ 7/9 | <24 $  21 t  1.5 | 24+ n 838 $  -6 t -0.2 | L $   6 S $  19
+   no band-expansion filter                       n=2622 $  21 PF 1.09 t  1.7 win 50% yrs+ 5/9 | <24 $  28 t  2.3 | 24+ n 848 $   8 t  0.3 | L $  14 S $  30
+   no stop tightening                             n=1700 $  57 PF 1.23 t  3.5 win 57% yrs+ 7/9 | <24 $  57 t  3.5 | 24+ n 549 $  56 t  1.5 | L $  43 S $  72
+   no pullback (limit at the close)               n=1808 $  50 PF 1.22 t  3.4 win 53% yrs+ 7/9 | <24 $  42 t  2.9 | 24+ n 568 $  68 t  1.9 | L $  45 S $  56
+   pullback 6 ticks                               n=1590 $  54 PF 1.22 t  3.3 win 52% yrs+ 7/9 | <24 $  51 t  3.1 | 24+ n 530 $  60 t  1.6 | L $  37 S $  72
+   max 10 bars                                    n=1708 $  45 PF 1.20 t  3.0 win 53% yrs+ 6/9 | <24 $  36 t  2.5 | 24+ n 554 $  62 t  1.8 | L $  33 S $  58
+   max 40 bars                                    n=1704 $  52 PF 1.22 t  3.3 win 52% yrs+ 6/9 | <24 $  50 t  3.2 | 24+ n 552 $  58 t  1.6 | L $  40 S $  66
+   window 08:30-09:45 CT (from the cash open)     n=1626 $  42 PF 1.17 t  2.5 win 51% yrs+ 5/9 | <24 $  46 t  2.8 | 24+ n 529 $  32 t  0.9 | L $  26 S $  58
+   window 08:05-10:30 CT                          n=2027 $  37 PF 1.15 t  2.6 win 51% yrs+ 7/9 | <24 $  34 t  2.5 | 24+ n 662 $  42 t  1.3 | L $  26 S $  49
+   window 09:20-10:35 CT (the next 75 min)        n= 360 $ -44 PF 0.80 t -1.6 win 44% yrs+ 3/9 | <24 $ -54 t -2.0 | 24+ n 123 $ -24 t -0.4 | L $ -22 S $ -89
+   window 12:00-13:15 CT (midday)                 n= 633 $  24 PF 1.16 t  1.4 win 48% yrs+ 7/9 | <24 $  16 t  0.9 | 24+ n 194 $  42 t  1.1 | L $   7 S $  47
+   longs only                                     n= 883 $  40 PF 1.16 t  1.8 win 52% yrs+ 7/9 | <24 $  31 t  1.5 | 24+ n 288 $  58 t  1.1 | L $  40 S $ nan
+   shorts only                                    n= 821 $  69 PF 1.31 t  3.1 win 53% yrs+ 6/9 | <24 $  73 t  3.2 | 24+ n 264 $  61 t  1.2 | L $ nan S $  69
+   placebo: random bars in the same window (band filter on), random side, same orders and exits, 40 seeds: 1470 trades, $-11 a trade (95th pct $4); the rule $54 beats 100%
+   daily correlation with the plan pieces (agents/tasks/plan_daily_pnl.csv): {'VaultBreak': -0.01, 'OvernightBiasML': -0.03, 'MondayLong': -0.04, 'ExpirationOpenShort': 0.02, 'LateDayFlow': -0.0, 'NFPFade': -0.06, 'BridgeMondayLong': 0.02, 'CLSundayFade_perMCL': 0.0, 'ESMOCFollow_perMES': 0.02, 'RelativeStrength': -0.06}
+   corr with Dual Thrust v4: -0.12
+
+3. Metrics per NQ (daily) and Monte Carlo at 1 MNQ:
+               trades win avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+whole 2018-26    1704 53% $54 $10,189   1.11    1.79          1.23 $30,285   0.34  8.55       2.38
+whole 2023+       752 52% $49  $9,447   0.85    1.32          1.16 $30,285   0.31 22.92       0.82
+longs 2018-26     883 52% $39  $3,871   0.59    0.89          1.16 $16,602   0.23  7.57       1.02
+longs 2023+       385 53% $42  $4,237   0.51    0.76          1.13 $16,602   0.26 14.88       0.57
+shorts 2018-26    821 53% $69  $6,318   1.02    1.64          1.31 $23,053   0.27  7.50       1.68
+shorts 2023+      367 51% $55  $5,211   0.71    1.10          1.19 $23,053   0.23 16.24       0.64
+                            actual       p5       p50       p95
+name        metric                                             
+whole 2023+ sharpe            0.85    -0.09      0.80      1.68
+            sortino           1.32    -0.14      1.24      2.77
+            pf_day            1.18     0.98      1.17      1.39
+            calmar            0.31    -0.04      0.52      1.77
+            ulcer            22.92     3.83      8.93     25.38
+            max_dd       30,284.56 9,673.75 16,751.34 32,257.45
+            P(Sharpe<=0)       NaN      NaN      0.07       NaN
+            actual_dd pct_rank    dd50    dd95    dd99 P(dd>=5000) P(dd>=10000) P(dd>=20000)
+whole 2023+   $30,285     100% $14,303 $22,859 $28,177        100%          93%          11%
+   Monte Carlo BB_MRM 1 MNQ (x0.1): trades 1704 | total p5 $4,725 / p50 $9,161 / p95 $13,632, P(total <= 0) 0.0%
+      max DD actual $3,028 (rank 99%), shuffled p50 $1,346 / p95 $2,276 / p99 $2,887; losing streak actual 10, p95 12
+      252-day block bootstrap: P&L p5 $-607 / p50 $986 / p95 $2,640, P(loss) 14.9%, max DD p50 $694 / p95 $1,461, return/DD 1.42, P(hit $2,000 trailing, EOD check only) 1.0%
+
+   trials 20; t threshold 2.81; deflated Sharpe 0.93
