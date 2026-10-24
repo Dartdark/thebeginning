@@ -16,7 +16,10 @@ LEDGERS = {"FC 2B v2 (MC v2 report)": ("checks/candidates/fc_2b/trades.csv", Non
            "Kusho v9 (21:00)": ("checks/candidates/kusho/python_trades_v9.csv", None, (100, 200)),
            "Kusho v9 flat 15:45": ("checks/candidates/kusho/python_trades_v9_RTH.csv", None, (100, 200)),
            "S30 NQ": ("checks/candidates/s30_ibs/python_trades_NQ.csv", None, (20, 40)),
-           "S30 ES": ("checks/candidates/s30_ibs/python_trades_ES.csv", None, (20, 40))}
+           "S30 ES": ("checks/candidates/s30_ibs/python_trades_ES.csv", None, (20, 40)),
+           # added 2026-10-24 at the end (so the earlier frozen draws are unchanged): Kusho's corrected, roll-adjusted rule
+           "Kusho v9 (21:00), roll-adjusted": ("checks/candidates/kusho/python_trades_v9_rolladj.csv", None, (100, 200)),
+           "Kusho v9 15:45, roll-adjusted": ("checks/candidates/kusho/python_trades_v9_RTH_rolladj.csv", None, (100, 200))}
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0]); rng = np.random.default_rng(20261023)
