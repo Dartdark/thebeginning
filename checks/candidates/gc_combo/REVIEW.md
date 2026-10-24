@@ -32,7 +32,7 @@ Daily metrics (1-2 GC): Sharpe 0.93, Sortino 1.72, PF 1.37, Calmar 0.86, Ulcer 4
 
 ## Apex (`analysis/gc_combo_bench.py`, MGC = GC / 10)
 - Evaluation (combine set 50.1%): + 1x / 2x / 3x MGC 50.4 / 49.8 / 48.3%. No gain.
-- Funded: queued after the T_ONESIDE bootstrap (2026-10-24).
+- Funded: see the MultiCharts section below.
 
 ## Code notes
 1. Vote B uses `UpTicks` / `DownTicks` with "Build volume on: Trade volume": correct for the file; our exports cannot rebuild it.
@@ -56,9 +56,9 @@ Daily metrics (1-2 GC): Sharpe 0.93, Sortino 1.72, PF 1.37, Calmar 0.86, Ulcer 4
   DSR 0.27 at our 296 items, 0.06 at the author's 10,831.
 - **13 trades are held over a holiday halt** (Presidents / Memorial / Labor / MLK / July 4 / Thanksgiving / Christmas): the 13:30
   ET exit bar does not exist, so the position rides to the next session (worst −$3,960). Not Apex-legal; needs a holiday flatten.
-- Evaluation with these trades (holiday holds left out): 50.1% → 50.0 / 48.7 / 46.3% at 1 / 2 / 3x MGC. Funded: with the
-  proxy-B rebuild + 1x MGC $9,418 / $11,872, blown 9.0% (plan 7.0%), in place of CL Sunday $9,044 / $12,040: no gain; the
-  MultiCharts-trade bootstrap is running.
+- Evaluation with these trades (holiday holds left out): 50.1% → 50.0 / 48.7 / 46.3% at 1 / 2 / 3x MGC. Funded (bootstrap on the
+  MultiCharts trades, year 1 / year 2 / blown): plan $9,354 / $12,088 / 7.0%; + 1x MGC $9,278 / $11,604 / 11.5%; + 2x MGC $7,474 /
+  $8,488 / 38.2%; in place of CL Sunday $8,800 / $11,838 / 8.8%. Worse in every case (the proxy-B rebuild said the same).
 
 ## Verdict
 **C.** Rebuilt exactly in MultiCharts, but at our costs it is t 2.1 with nothing left out of sample (2025-26 t 0.4, and −$39k in
