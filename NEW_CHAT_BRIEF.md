@@ -23,8 +23,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 - **2026-10-24 (Claude):** real micro fees ($1.04 per round trip, from the Apex fills) on the benches: combine 50.1% ->
   49.8%, funded plan −$96 over 2 years, no past decision flips (`analysis/real_fee_bench.py`). Twin marked daily in the
   personal ladder: no change. **Dual Thrust v4 (user's file): A** (rebuild $140 per NQ, t 4.4, 9/9 years; checker PASS
-  WITH CONCERNS, replica identical) but not in the Apex plans (combine worse, funded swaps +$90 / +$106 = ties, t ~1);
-  personal account + 1 micro lifts return/DD 7.2 -> 7.8. MultiCharts export optional (`TODO.md`). S47 / Kusho loaders
+  WITH CONCERNS, replica identical) **in the 150K funded plan at 2 MNQ and the personal plan (user)**: 150K
+  funded bootstrap 6 payouts by day 226 vs 250, 1y +$1,400, blown 1.8% -> 2.2%; not on 50K (ties) or evaluations (worse);
+  personal (14 pieces) $24.4k a year, return/DD 8.2, capital $25k. MultiCharts check needed before a 150K account trades it. MultiCharts export optional (`TODO.md`). S47 / Kusho loaders
   now place trades by date (old CSV rows were on a 2016-09-29 grid).
 - **Open for Claude:** automatic cushion sizing after the account check; Dual Thrust MC check when the report arrives.
 - **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)

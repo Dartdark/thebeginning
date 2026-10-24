@@ -50,13 +50,18 @@ bottom). Times are Central (CT).
   as a NEW signal on a **1-minute MNQ chart with 1-minute @ES added as Data2** (same feed, Exchange time, first RTH bar 08:31,
   IOG off), 50K: `TradeDir` 1, `NumContracts` 1; 150K: `TradeDir` 0, `NumContracts` 1; Trade Logger tag `RS`.
 
-## Dual Thrust v4 (your file, 2026-10-24: A on its numbers, checker PASS WITH CONCERNS, not in the Apex plans)
+## Dual Thrust v4 (your file, 2026-10-24: A, checker PASS WITH CONCERNS; in the 150K funded plan at 2 MNQ and the personal plan)
 
 - [ ] Optional, no deadline (outside market hours, not on the live VPS): export the MultiCharts backtest of
   [NQ_Dual_Thrust_v4_CT.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/dual_thrust/NQ_Dual_Thrust_v4_CT.txt)
   on a 1-minute @NQ chart (Exchange time = CT, CME 24h session, IOG off, default inputs, from Jan 2017, **commission and
   slippage 0**, Claude adds costs); save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Dual Thrust v4.xlsx"
   and push it. Claude then checks it trade by trade against the rebuild (1,611 trades, $140 per NQ after costs).
+  **Needed before the first 150K funded account trades it.**
+- [ ] When a 150K account is funded: add [NQ_Dual_Thrust.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Dual_Thrust.txt)
+  ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Dual_Thrust.txt))
+  on a 1-minute MNQ chart (Exchange time, CME 24h, IOG off), `NumContracts` 2 (1 while the cushion is below $3,000),
+  Trade Logger tag `DT`. Not on 50K accounts or evaluations.
 
 ## Antigravity's NQAlignedWeaknessShort (2026-10-20, C)
 
