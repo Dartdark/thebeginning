@@ -1,0 +1,143 @@
+The strategy is a systematic, long-only Nasdaq-100 futures overnight strategy implemented in MultiCharts PowerLanguage.
+It attempts to capture the overnight return anomaly by combining:
+- A negative previous Regular Trading Hours session
+- A Tick-RSV order-flow proxy
+- The current VIX volatility regime
+- An interaction between Tick-RSV and VIX
+- Early-close protection
+- Instrument: NQ futures
+- Resolution: 5-minute bars
+- Session: 24-hour Globex
+- Chart timezone: Eastern Time
+- Historical UpTicks and DownTicks required
+- Intrabar Order Generation: Off
+- Instrument: VIX
+- Resolution: Daily
+- Used to compare the latest completed VIX close with its daily moving average
+- Entry decision: 18:00 ET
+- Exit: 04:00 ET
+- Direction: Long only
+- Position size: One NQ contract
+- Exit type: Time exit
+- Profit target: None
+- Active stop loss: None
+On an end-stamped five-minute chart, the actual entry may appear on the first completed bar after 18:00, normally the 18:05 bar.
+The previous Nasdaq regular trading session is measured between:
+```
+09:30–16:00 ET
+```
+The first required condition is:
+```
+Prior RTH Close < Prior RTH Open
+```
+Therefore, the strategy considers an overnight long position only after a negative cash-market session.
+The return threshold is fixed at zero rather than optimized.
+The strategy does not trade after shortened RTH sessions.
+A session is considered an early-close session when its final recorded RTH bar occurs before:
+```
+15:00 ET
+```
+The strategy calculates a tick-direction RSV proxy during:
+```
+15:15–16:15 ET
+```
+During this window, it accumulates:
+```
+UpTicks
+DownTicks
+```
+The proxy is:
+```
+TickRSV =
+(UpTicks − DownTicks) /
+(UpTicks + DownTicks)
+```
+Interpretation:
+- TickRSV < 0: downtick activity exceeds uptick activity
+- TickRSV >= 0: uptick activity is equal to or greater than downtick activity
+The selected threshold is:
+```
+TickRSV threshold = 0
+```
+If no valid tick observations exist, the entry is blocked.
+This is a tick-direction proxy, not true buyer-initiated versus seller-initiated volume RSV.
+Although MultiCharts Volume Profile can display Ask-versus-Bid traded volume, those historical values were not confirmed as directly accessible to the PowerLanguage signal. The strategy therefore uses UpTicks and DownTicks.
+The strategy compares the latest completed daily VIX close with a simple moving average of daily VIX closes:
+```
+VIX_MA =
+Average of the latest L daily VIX closes
+```
+The regimes are:
+```
+High-VIX regime: VIX Close > VIX MA
+
+Low-VIX regime: VIX Close <= VIX MA
+```
+The current PowerLanguage code has a default moving-average length of 20 sessions.
+Testing indicated that 25 sessions produced the best result. If 25 is the selected production value, it must either be set manually in MultiCharts or changed in the code’s default input.
+The Tick-RSV proxy is not used as an independent bullish or bearish filter. Its meaning depends on the current VIX regime.
+An entry passes when:
+```
+(TickRSV < 0 AND VIX Close > VIX MA)
+
+OR
+
+(TickRSV >= 0 AND VIX Close <= VIX MA)
+```
+Tick-RSV stateVIX regimeEntry allowedNegativeAbove VIX MAYesNegativeAt or below VIX MANoNon-negativeAbove VIX MANoNon-negativeAt or below VIX MAYes
+The complete trading signal is:
+```
+Enter long when:
+
+Prior RTH Close < Prior RTH Open
+
+AND
+
+The previous session was not an early-close session
+
+AND
+
+(
+    TickRSV < 0 and VIX Close > VIX MA
+
+    OR
+
+    TickRSV >= 0 and VIX Close <= VIX MA
+)
+```
+The position is then held until 04:00 ET.
+The interaction assumes that order-flow imbalance has different implications under different volatility conditions:
+- Negative Tick-RSV during elevated volatility may represent inventory pressure or forced risk transfer that can subsequently reverse overnight.
+- Non-negative Tick-RSV during a calm regime may represent orderly continuation.
+- The two remaining combinations are excluded because the order-flow state and volatility regime do not form the historically favourable pairing.
+This is an empirical relationship and should not be interpreted as proven causality.
+The production strategy uses:
+```
+Fixed position size = 1 NQ contract
+```
+There is no active stop loss, so the maximum loss per contract is not predetermined. The strategy remains exposed until the 04:00 ET exit.
+Optional disaster-stop code remains available but is disabled:
+```
+UseDisasterStop = false
+```
+If enabled, the stop is:
+```
+Entry Price −
+3 × average range of the latest 20 overnight sessions
+```
+The range calculation is a true rolling average containing exactly the latest 20 valid overnight sessions.
+There is no volatility-targeted or regime-based position sizing in the current production version.
+-In the original strategy, the negative prior-RTH condition was optional. In the current strategy, a negative prior-RTH return is mandatory for every entry.
+-The original strategy did not contain an order-flow filter. The current strategy calculates a Tick-RSV proxy from UpTicks and DownTicks collected between 15:15 and 16:15 ET.
+-The original strategy did not contain an interaction between order flow and volatility. The current strategy allows an entry when Tick-RSV is negative and VIX is above its moving average, or when Tick-RSV is non-negative and VIX is at or below its moving average.
+-The current strategy retains the disaster-stop logic but it was never used in the backtests from 2017-2026
+-The original strategy included optional volatility-based position sizing. This has been removed from the current production logic because the tested volatility-targeting approaches did not improve performance.
+-The current strategy uses a fixed position size of one NQ contract.
+After many tests i could not get the 2017-2019 2nd quarter to not be stragnant so i concluded that maybe the drift may have been weaker at that period, if anyone has any other explanation it would be appreciated
+
+
+No matter what i tested the strategy was not benefited by volatility targeting because when the VIX is high , the overnight reversals were bigger so i sticked to fixed 1 contract sizing but i believe it can be improved
+
+Any Stop loss optimization increased the MaxDD and decreased performance
+
+  
