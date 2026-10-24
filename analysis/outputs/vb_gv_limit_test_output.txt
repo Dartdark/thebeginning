@@ -1,0 +1,62 @@
+VaultBreak NQ 'CircuitBreaker ApexLimit GVReader' + 'DailyATR GVWriter' (user's files, 2026-10-24) vs our Vault Break v1.
+
+1. Per 1 NQ, 2018 -> 2026-10:
+   our VB v1 (MultiCharts list, live)           n=1743 $   99 PF 1.28 t  4.6 win 66% yrs+ 9/9 | 18-22 $  91 t  3.2 | 23+ $ 107 t  3.3 | worst $-1,507
+   new file as written (CT clock, touch fills)  n=1526 $  100 PF 1.23 t  3.7 win 59% yrs+ 8/9 | 18-22 $ 130 t  3.7 | 23+ $  70 t  1.7 | worst $-4,482
+   exits: {'target': 771, 'limit_exit': 755} | trades below -$1,500: 159, worst open $-9,782
+   by year new : {2018: 5903, 2019: 4881, 2020: 39548, 2021: 25874, 2022: 23544, 2023: 32336, 2024: 4792, 2025: -2324, 2026: 18023}
+   by year VB v1: {2018: 3793, 2019: 4056, 2020: 23928, 2021: 28310, 2022: 17782, 2023: 27917, 2024: 14467, 2025: 39939, 2026: 12572}
+
+2. Variants:
+   ET clock (chart on New York time)            n=1641 $   52 PF 1.11 t  1.8 win 58% yrs+ 7/9 | 18-22 $  53 t  1.5 | 23+ $  51 t  1.1 | worst $-9,937
+   fills 1 tick through                         n=1516 $   94 PF 1.21 t  3.4 win 59% yrs+ 8/9 | 18-22 $ 122 t  3.4 | 23+ $  65 t  1.5 | worst $-4,482
+   ET + through                                 n=1630 $   46 PF 1.09 t  1.6 win 58% yrs+ 7/9 | 18-22 $  46 t  1.3 | 23+ $  46 t  1.0 | worst $-9,937
+   14-date ATR (not all-time)                   n= 918 $   80 PF 1.18 t  2.3 win 61% yrs+ 8/9 | 18-22 $  56 t  1.2 | 23+ $ 101 t  2.0 | worst $-4,482
+   14-date ATR, ET                              n= 900 $  102 PF 1.23 t  2.5 win 60% yrs+ 8/9 | 18-22 $  61 t  1.3 | 23+ $ 139 t  2.2 | worst $-10,412
+   no circuit breaker                           n=1544 $   96 PF 1.22 t  3.6 win 59% yrs+ 9/9 | 18-22 $ 124 t  3.5 | 23+ $  68 t  1.6 | worst $-4,482
+   no blackout                                  n=1590 $   89 PF 1.20 t  3.3 win 59% yrs+ 9/9 | 18-22 $ 110 t  3.2 | 23+ $  68 t  1.7 | worst $-4,482
+   VWAP exit off                                n=1471 $   96 PF 1.20 t  3.3 win 63% yrs+ 7/9 | 18-22 $ 119 t  3.0 | 23+ $  73 t  1.7 | worst $-4,482
+   MNQ as coded (target 500 / 'stop' 750 pts)   n= 969 $  129 PF 1.20 t  2.0 win 47% yrs+ 9/9 | 18-22 $ 119 t  1.7 | 23+ $ 141 t  1.3 | worst $-9,132
+   noise 0.30                                   n=2249 $   80 PF 1.19 t  3.7 win 56% yrs+ 9/9 | 18-22 $  99 t  3.7 | 23+ $  59 t  1.8 | worst $-4,847
+   noise 0.45                                   n=1849 $   78 PF 1.18 t  3.2 win 57% yrs+ 8/9 | 18-22 $  98 t  3.1 | 23+ $  57 t  1.5 | worst $-4,847
+   noise 0.75                                   n=1233 $  129 PF 1.30 t  4.2 win 62% yrs+ 9/9 | 18-22 $ 136 t  3.4 | 23+ $ 121 t  2.6 | worst $-4,482
+
+3. Overlap with VB v1: new trades on 827 days, VB v1 on 942, both 761; daily corr +0.61
+
+4. Metrics per 1 NQ (daily):
+               trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+VB v1 2018-26    1743 66%  $99 $19,247   1.46    2.26          1.28 $12,993   1.48  2.94      13.07
+VB v1 2023+       889 68% $107 $24,577   1.56    2.42          1.28 $12,993   1.89  4.75      10.34
+new 2018-26      1526 59% $100 $16,998   1.15    1.79          1.23 $24,473   0.69  5.10       6.67
+new 2023+         759 60%  $70 $13,682   0.80    1.20          1.14 $24,473   0.56 10.08       2.71
+new ET 2018-26   1641 58%  $52  $9,490   0.62    0.94          1.11 $15,890   0.60  6.72       2.82
+new ET 2023+      790 59%  $51 $10,345   0.59    0.89          1.09 $15,021   0.69  7.87       2.63
+                            actual        p5       p50       p95
+name        metric                                              
+new 2023+   sharpe            0.80     -0.07      0.82      1.67
+            sortino           1.20     -0.10      1.24      2.72
+            pf_day            1.21      0.98      1.22      1.50
+            calmar            0.56     -0.03      0.57      1.87
+            ulcer            10.08      4.30     11.05     33.96
+            max_dd       24,473.00 13,102.36 24,342.25 47,040.55
+            P(Sharpe<=0)       NaN       NaN      0.07       NaN
+VB v1 2023+ sharpe            1.56      0.77      1.57      2.38
+            sortino           2.42      1.14      2.45      3.95
+            pf_day            1.45      1.20      1.46      1.77
+            calmar            1.89      0.56      1.66      3.57
+            ulcer             4.75      2.70      5.15     12.29
+            max_dd       12,992.75  9,407.42 14,610.50 25,177.12
+            P(Sharpe<=0)       NaN       NaN      0.00       NaN
+            actual_dd pct_rank    dd50    dd95    dd99 P(dd>=5000) P(dd>=10000) P(dd>=20000)
+new 2023+     $24,473      61% $22,588 $36,280 $43,360        100%         100%          68%
+VB v1 2023+   $12,993      23% $15,484 $24,649 $29,960        100%          98%          17%
+
+   Monte Carlo at 1 MNQ:
+   Monte Carlo new VB 1 MNQ (x0.1): trades 1526 | total p5 $8,171 / p50 $15,245 / p95 $22,038, P(total <= 0) 0.0%
+      max DD actual $2,646 (rank 78%), shuffled p50 $2,090 / p95 $3,512 / p99 $4,444; losing streak actual 8, p95 10
+      252-day block bootstrap: P&L p5 $-729 / p50 $1,726 / p95 $3,937, P(loss) 11.7%, max DD p50 $991 / p95 $2,301, return/DD 1.74, P(hit $2,000 trailing, EOD check only) 8.5%
+   Monte Carlo VB v1 1 MNQ (x0.1): trades 1743 | total p5 $11,117 / p50 $17,296 / p95 $23,405, P(total <= 0) 0.0%
+      max DD actual $1,486 (rank 30%), shuffled p50 $1,693 / p95 $2,726 / p99 $3,412; losing streak actual 7, p95 9
+      252-day block bootstrap: P&L p5 $-89 / p50 $1,915 / p95 $3,900, P(loss) 5.9%, max DD p50 $795 / p95 $1,548, return/DD 2.41, P(hit $2,000 trailing, EOD check only) 1.1%
+
+   trials 13; t threshold 2.67; deflated Sharpe (new) 0.96
