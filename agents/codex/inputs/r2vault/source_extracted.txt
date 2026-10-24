@@ -1,0 +1,247 @@
+--- PAGE 1 ---
+R2VAULT VOLATILITY BREAKOUT  /  RESEARCH NOTE
+01  /  OVERVIEW
+R2VAULT  |  NQ FUTURES  |  5 MINUTES
+LUCA FRANCESCHETTI
+//  STRATEGY RESEARCH NOTE
+R2VAULT
+VOLATILITY
+BREAKOUT
+A long-only NQ futures strategy on 5-minute bars. It defines a vault during
+weak linear structure and trades a filtered breakout in the direction of positive
+slope.
+INSTRUMENT
+@NQ# futures
+TIMEFRAME
+5 minutes
+SAMPLE
+2,518 trades
+PERIOD
+2017 / 2026
+
+
+--- PAGE 2 ---
+R2VAULT VOLATILITY BREAKOUT  /  RESEARCH NOTE
+02  /  METHOD
+R2VAULT  |  NQ FUTURES  |  5 MINUTES
+LUCA FRANCESCHETTI
+//  CORE HYPOTHESIS
+FROM NOISE
+TO BREAKOUT.
+R2Vault uses a rolling linear regression to
+separate two different questions: how well a line
+describes recent prices, and which direction that
+line points. Low R2 creates the reference
+structure; positive slope selects the long side.
+The development deliberately remained limited to
+two strategy versions. No dedicated parameter
+optimization was performed on the out-of-sample
+segment, reducing opportunities to fit historical
+noise.
+//  IMPORTANT SCOPE
+This is a systematic research model based on
+closing prices. It does not use order flow, volume
+profile, or a forward-looking volatility forecast.
+//  WORKFLOW
+R2 near zero stores the candle range. Positive
+slope enables a buy stop above that range plus a
+proportional noise buffer.
+
+
+--- PAGE 3 ---
+R2VAULT VOLATILITY BREAKOUT  /  RESEARCH NOTE
+03  /  R2 AND SLOPE
+R2VAULT  |  NQ FUTURES  |  5 MINUTES
+LUCA FRANCESCHETTI
+//  REGRESSION MECHANICS
+R2 AND SLOPE.
+//  LOW R2: WEAK EXPLANATORY FIT
+R2 is the coefficient of determination over the
+last 576 closes. It measures the fraction of
+price variance explained by the regression line:
+0 means no linear explanatory power, while 1 is
+a perfect linear fit. R2 has no direction because
+it is squared.
+Slope is the direction of the fitted line. In this
+implementation the most recent bars receive
+higher X values, so Slope > 0 means the fitted
+relationship rises toward the present. R2
+answers fit quality; Slope answers direction.
+//  OFFICIAL THRESHOLD
+R2ZeroThreshold = 0.030. A vault is created when the line explains no more than 3% of observed variation: an
+extremely weak linear structure.
+
+
+--- PAGE 4 ---
+R2VAULT VOLATILITY BREAKOUT  /  RESEARCH NOTE
+04  /  VAULT
+R2VAULT  |  NQ FUTURES  |  5 MINUTES
+LUCA FRANCESCHETTI
+//  STRUCTURE AND ENTRY
+THE VAULT.
+//  ENTRYLEVEL = VAULTHIGH + (VAULTRANGE X 0.20)
+//  VAULT
+If R2 <= 0.030, the current High and Low replace
+the stored vault. VaultRange is High minus Low.
+//  FILTERED BREAKOUT
+The buy stop is placed above VaultHigh plus 20%
+of VaultRange, only in-session, with Slope > 0, and
+at most three entries per day.
+
+
+--- PAGE 5 ---
+R2VAULT VOLATILITY BREAKOUT  /  RESEARCH NOTE
+05  /  PARAMETERS
+R2VAULT  |  NQ FUTURES  |  5 MINUTES
+LUCA FRANCESCHETTI
+//  OFFICIAL LIVE INPUTS
+PARAMETERS USED.
+PRICE
+Close
+R2LENGTH
+576
+R2ZEROTHRESHOLD
+0.030
+R2TAKEPROFITTHRESHOLD
+2.00
+SESSION
+09:30 - 15:30
+MAXTRADESPERDAY
+3
+STOP LOSS
+$1,500
+PROFIT TARGET
+$800
+USEBREAKEVEN
+false
+BREAKEVEN TRIGGER
+$400
+NOISE FILTER
+0.20
+//  VERIFIED IMPLEMENTATION NOTE
+The code computes standard R2 in the [0, 1] range. With R2TakeProfitThreshold = 2.00, the R2 exit cannot trigger.
+Monetary target and stop remain active; break-even is disabled in the official inputs.
+
+
+--- PAGE 6 ---
+R2VAULT VOLATILITY BREAKOUT  /  RESEARCH NOTE
+06  /  PERFORMANCE
+R2VAULT  |  NQ FUTURES  |  5 MINUTES
+LUCA FRANCESCHETTI
+//  FULL SAMPLE: 13/01/2017 - 31/08/2026
+KEY RESULTS.
+NET PROFIT
+$265,780
+PROFIT FACTOR
+1.23
+WINNING TRADES
+69.54%
+MAX DRAWDOWN
+-$17,420
+TRADES
+2,518
+AVERAGE TRADE
+$105.55
+SHARPE RATIO
+0.44
+TIME IN MARKET
+28.99%
+//  ADJUSTED RESULT
+The platform reports adjusted net profit of $190,300.45. This should be read alongside its commission and slippage
+assumptions.
+
+
+--- PAGE 7 ---
+R2VAULT VOLATILITY BREAKOUT  /  RESEARCH NOTE
+07  /  ROBUSTNESS
+R2VAULT  |  NQ FUTURES  |  5 MINUTES
+LUCA FRANCESCHETTI
+//  EQUITY AND RESAMPLED PATHS
+EVIDENCE.
+//  OUT-OF-SAMPLE SEGMENT
+15/01/2025 - 31/08/2026: 564 trades, $88,675 net
+profit, 1.37 profit factor and 71.45% profitable. No
+dedicated optimization was run on this segment.
+//  MONTE CARLO: 10,000 SIMULATIONS
+The report shows -$12,915 smallest drawdown,
+-$63,225 largest drawdown, and -$16,500 base
+equity drawdown. It reshuffles historical trade order;
+it is not a future-risk forecast.
+
+
+--- PAGE 8 ---
+R2VAULT VOLATILITY BREAKOUT  /  RESEARCH NOTE
+08  /  IN-SAMPLE
+R2VAULT  |  NQ FUTURES  |  5 MINUTES
+LUCA FRANCESCHETTI
+//  DEVELOPMENT SAMPLE: 19/01/2017 - 31/12/2024
+IN-SAMPLE TEST.
+NET PROFIT
+$180,635
+PROFIT FACTOR
+1.20
+WINNING TRADES
+69.08%
+MAX DRAWDOWN
+-$17,420
+TRADES
+1,947
+AVERAGE TRADE
+$92.78
+//  PURPOSE OF THE SAMPLE
+Historical development interval. The 2025-2026 segment is treated separately, without dedicated optimization, to limit
+the risk of overfitting.
+
+
+--- PAGE 9 ---
+R2VAULT VOLATILITY BREAKOUT  /  RESEARCH NOTE
+09  /  ANNUAL RETURNS
+R2VAULT  |  NQ FUTURES  |  5 MINUTES
+LUCA FRANCESCHETTI
+//  FULL SAMPLE: 2017 - 2026
+ANNUAL RETURNS.
+2026
+$55,500
+2025
+$29,645
+2024
+$32,525
+2023
+$28,015
+2022
+$13,085
+2021
+$37,000
+2020
+$32,580
+2019
+$11,980
+2018
+$5,145
+2017
+$20,305
+//  READING THE SERIES
+Every calendar year in the full sample is positive. This is a historical observation, not evidence that future years will be
+profitable or that annual outcomes are independent.
+
+
+--- PAGE 10 ---
+R2VAULT VOLATILITY BREAKOUT  /  RESEARCH NOTE
+10  /  VERDICT
+R2VAULT  |  NQ FUTURES  |  5 MINUTES
+LUCA FRANCESCHETTI
+//  LIMITS AND NEXT STEPS
+VERDICT.
+R2Vault is a compact and testable proposition:
+weak linearity defines a local range, positive slope
+selects direction, and the proportional noise filter
+requires a more meaningful breakout.
+The limited two-version development and
+absence of out-of-sample optimization are
+deliberate anti-overfitting choices. They reduce,
+but do not eliminate, model risk or regime risk.
+//  NEXT STEPS
+Validate costs and fills, stress R2Length and noise sensitivity, formally preserve the in-sample/out-of-sample split, and
+observe forward simulation without ad hoc changes.
+//  DISCLAIMER
+This document is descriptive, not financial advice. Historical and simulated results are not indicative of future results.
