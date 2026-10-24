@@ -18,8 +18,10 @@ KIND = {"stop": 0, "target": 1, "flat": 2}
 FCREP = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute FC 2B v2.xlsx"
 
 
-def s47_trades():
+def s47_trades(g=None):
     t = pd.read_csv("checks/candidates/s47_v2/python_trades_v2.csv", parse_dates=["date"])
+    if g is not None:        # the CSV's 'day' is a row of the grid it was made on (2016-09-29 start); place trades by date
+        t["day"] = pd.Series(np.arange(len(g.ts)), index=pd.DatetimeIndex(g.ts)).reindex(t.date).to_numpy().astype(int)
     t["kind"] = np.where(t.kind == "stop", 0, 2)
     t["exit"] = t.exit - t.side * 0.5            # paths() charges $7.25; the 2 ticks of slippage go into the exit price
     return t
@@ -30,7 +32,7 @@ if __name__ == "__main__":
     fast_plan_lab = runpy.run_path("analysis/fc_2b_bench.py", run_name="lib")["fast_plan_lab"]
     lab = fast_plan_lab(SP); FB.add_moc_mes(lab, SP)
     rs = pd.read_csv(SP + "rs_trades.csv"); rs["kind"] = rs.kind.map(KIND); lab.add("RS_L", rs[rs.side > 0].reset_index(drop=True))
-    s = s47_trades(); lab.add("S47", s, slippage=False)
+    s = s47_trades(lab.g); lab.add("S47", s, slippage=False)
     fc = load_mc(lab.g, FCREP); fc = fc[pd.DatetimeIndex(lab.g.ts[fc.day]) >= "2018-01-01"].reset_index(drop=True); lab.add("FC", fc)
     print(f"S47 v2 trades {len(s)}; per NQ from the lab ${lab.C['S47'].sum() * 10 / len(s):.0f} a trade (rebuild ${s.net.mean():.0f})")
     CUR = {**FB.PLAN, "VB_N": 2, "MOC_MES": 2, "RS_L": 1}
