@@ -1,0 +1,289 @@
+GC_COMBO_v2        /   RESEARCH NOTE                                                                                                                                    01    /    05
+
+GC_COMBO_v2        ·   10:00 BLEND + STRETCH SHORT                ·    @GC FUTURES
+
+
+
+Hypothesis:
+Tested rule: at 10:00 ET, add five fixed-sign votes (morning price, against morning taker flow, GLD creations, big crude move,
+price again on dollar-decoupled days). Sum ≥ +2 buy, ≤ −2 sell, next bar; exit the 13:30 settlement bar, no stop. Separately,
+short when price closes 0.5 ATR under session VWAP; stop 0.505 ATR, target 2R. One position at a time. It passed a sealed out-
+of-sample read. The mechanism is still an open case.
+
+Why it should exist: no single gold flow pays the round turn on its own. Each vote is a small, sourced edge — the New York morning move continues, aggressive
+morning takers get faded, GLD authorised participants must buy or sell bullion after creations and redemptions, a large crude shock moves inflation hedges, and
+on days gold ignores the dollar its own flow dominates. Stacked, the cost is paid once. The stretch short is different: a downside break of VWAP in gold is
+liquidation, a cascade, not an overreaction.
+
+What this note proves: the frozen rule survived a sealed 2025–26 read on three pre-declared marks, and MultiCharts reconciles trade-for-trade with an independent
+Python replay. What it does not prove: that each story behind each vote is the true cause, or why 10:00 New York and not the London auction. Treat the votes as
+the hypothesis and the frozen rule as the result.
+
+
+   PROVED                                                         PROVED                                                     OPEN CASE
+   Sealed OOS 2025-01 → 2026-08: 230 trades,                      No single vote carries it: drop any one of five and        230 OOS trades alone are thin (t 0.9 in bp). 10:00
+   +$289/trade, 2.77/wk. All three pre-declared                   the blend still holds (t 3.1–4.5). Every IS year           is a peak, not a plateau. The stretch short lost in
+   marks passed on one read.                                      positive. MC reconciles to Python on 884/884               2025’s +65% gold year.
+                                                                  same-minute directions.
+
+
+
+   Who loses                                                       Who is forced                                             Who wins
+
+   Morning takers                                                  ETF APs & liquidating                                     The patient holder
+   Chased the tape 08:21–10:00 with aggressive                     longs                                                     Holds the agreed direction 10:01 → 13:30. Blend
+   orders. Following their net flow to 13:30 wins                                                                            2016–24: 715 days, 58.7% WR, +7.9 bp, t 4.6. One
+   45.6% of 2,088 days, −3.1 bp, t −3.2.                           GLD creations are hedged in bullion (vote alone           round turn for five edges.
+                                                                   +2.6 bp, t 1.9). Longs liquidate through VWAP
+                                                                   (stretch IS +9.4 bp, 314 trades). Neither can wait.
+
+
+THREE REAL DAYS        ·    @GC 1-MINUTE ET         ·   EACH THE MEDIAN DAY OF ITS TYPE, 2016–24                ·   DOTTED = SESSION VWAP
+
+
+
+
+BLEND    ·   THE CELL                                           STRETCH    ·   THE CASCADE                                SPLIT VOTES      ·   NO TRADE
+2019-07-24: score 3+, short 2 lots at 10:01, out 13:30, +4.0    2021-11-30: close 0.5 ATR under VWAP, short 11:02, stop   2020-12-23: votes +1 −1 −1 0 +1, score 0, flat. Quiet
+pt a contract. The drift is spread across the path; stops cut   12.7 pt, target 25.4 pt; flat 16:00 at +5.9 pt.           regimes live here: ~$0/day in the quietest 40%.
+it.
+
+IN-SAMPLE vs OUT-OF-SAMPLE             ·   MULTICHARTS @GC         ·   SPLIT 2025-01-01        ·   INIT $50,000
+
+
+
+
+HYPOTHESIS · METHOD · RESULTS · CONCLUSION · FEEDBACK · SETUP                                                                                      GC · 1 MIN · LONG + SHORT
+GC_COMBO_v2      /    RESEARCH NOTE                                                                                                                            02    /     05
+
+HYPOTHESIS · METHOD · RESULTS · CONCLUSION · FEEDBACK · SETUP
+
+
+
+Method:
+GC futures on 1-minute full-session bars. Blend: at 10:00 ET sum five fixed-sign votes; |score| ≥ 2 trades next bar, exit on the 13:30 ET bar close, no stop. Stretch:
+short a close 0.5 ATR below session VWAP (anchor 18:01 ET) between 08:20 and 15:00; stop 0.505 ATR, target 2R, flat 16:00. One position at a time, first signal wins.
+Frozen once. Not optimised on the vault.
+
+                                                                                         Why 10:00
+  INSTRUMENT                                  BARS
+                                                                                         27 neighbouring cells, 2016–24, every one profitable. Decision 10:00 = $49–
+  GC futures. Research size 1 GC, 2 at        1-minute, full Globex session, trade
+                                                                                         112k, 09:45 = $28–77k, 10:15 = $19–73k. 10:00 is the peak. Exit 13:30 ≈ 14:00 >
+  |score| ≥ 3. Prop ticket @MGC, same         volume with up/down split. Next-bar
+                                                                                         13:00; stretch 0.5 ≈ 0.6 > 0.4. Averaging the 27 kept only 58% of the profit, so
+  contract counts.                            only. IOG off.
+                                                                                         the frozen cell stays.
+
+                                                                                         Not the London auction
+  LIVE CLOCK                                  EXTRA DATA
+                                                                                         10:00 ET = 15:00 London = the LBMA PM auction. In US/UK DST-mismatch
+  Logic in ET. Chart on Central,              Data2 @CL 1-min (17:00 ET crude
+                                                                                         weeks the auction moves to 11:00 ET. The edge stayed at 10:00 (18.1 vs 12.5 bp
+  ETminusChart = 1. Decision 10:00 ET         move). Data3 GCCOMBO daily file:
+                                                                                         per trade, n ≈ 50). This is a New York morning drift.
+  = 09:00 CT. Exit 13:30 ET.                  GLD vote + dollar-decoupled flag.
+
+                                                                                         Stops tax the drift
+  IN-SAMPLE                                   OUT-OF-SAMPLE                              30 exit cells: RoMaD flat at 8.6–11.2 vs baseline 10.98. Tight 0.35U stops cost
+  Research 2016-10 → 2024-12. This            Sealed until read. 2025-01-01 →            edge monotonically. NQ-style brackets (RR 0.5–1): 0 of 9 beat the time exit.
+  export 2017-09-18 → 2024-12-31:             2026-08-07: 230 trades. Read once,         Drawdown is handled by size, not exits.
+  974 trades.                                 against pre-declared marks.
+                                                                                         Conviction
+                                                                                         MC per contract: score 2 $32 IS → $248 OOS; score ≥ 3 $176 → $261. The gap
+  COST                                        FROZEN RULE                                shrank out of sample. Both kept; dropping score 2 passed in-sample and was
+  $2.30/side GC commission + 1 tick           k = 2, 10:00 decision, 13:30 exit,         not adopted.
+  slippage per side. Research used            stretch 0.5 / 0.505 / 2R. Named once.
+  $19.20–$29 RT.                              Hold-out spent → no more tuning.           Prop fit
+                                                                                         Lucid Flex 50K at 1 MGC (2 on conviction), 2016–24 bootstrap: 90% pass, 4.9%
+                                                                                         bust, median 181 trading days. Slow, not fragile. With NQ DriftBreak v2 at 2
+  SIZE OVERLAY                                MULTIPLICITY                               MNQ in the same account: 89% pass in 99 days (daily corr −0.02).
+  Conviction only: 1 lot at |score| = 2, 2    Every test logged. GC programme
+  lots at ≥ 3. The one lever that             ledger N = 10,831. Deflated Sharpe         A volatility harvester
+  survived the maximise round.                fails at that N; the sealed read is the    By causal regime (prior 20-session range): ~$0/day in the quietest two fifths,
+                                              counter-evidence.                          $80–118/day otherwise. 2018–19 went flat for a year. In basis points 2025 was
+                                                                                         the weak year (1.6 bp), 2026 above average (10.4 bp); z −0.6 vs IS: noise, not
+                                                                                         decay.
+  NAMED KILLS                                 NOT THIS
+  Stops/targets, ADX, RVOL, NQ-style          Not a London-fix trade. Not a round-
+  brackets, 27-cell averaging, release-       number stop run. Not minute-scale
+  day skip, stacking, conviction-only.        mean reversion (8–40× too small on
+                                              gold).
+
+
+
+
+HYPOTHESIS · METHOD · RESULTS · CONCLUSION · FEEDBACK · SETUP                                                                             GC · 1 MIN · LONG + SHORT
+GC_COMBO_v2            /     RESEARCH NOTE                                                                                                                                   03     /       05
+
+HYPOTHESIS · METHOD · RESULTS · CONCLUSION · FEEDBACK · SETUP
+
+
+
+Results:
+   WIN RATE                                         AVG TRADE                                        PROFIT FACTOR                               NET PROFIT
+
+
+   52.5%                                            $187.64                                          1.37                                        $225,916
+
+   TRADES                                           MAX DD                                           IS AVG                                      OOS AVG
+
+
+   1,204                                            −$43,747                                         $163.71                                     $288.98
+EVERY YEAR         ·        MULTICHARTS @GC    ·   GROSS BASIS POINTS PER TRADE (SCALE-FREE) AND NET $
+
+   Year                                2017*             2018             2019            2020         2021        2022           2023            2024          2025              2026*
+
+   Trades                                 29              122               136            123          133          156           119             156              157              73
+   WR                                    69%              51%               51%            54%          51%          58%           50%             56%              47%             45%
+
+   bp / trade                           17.5              3.5               5.9           15.7          4.1          6.3           5.9             8.8              1.6            10.4
+   Net $                                7.6k             4.7k             9.3k           48.1k        12.6k       30.6k          13.3k           33.2k         23.0k              43.4k
+   Gold avg                            1,278         1,271             1,397             1,746        1,795       1,809          1,954           2,443         3,450              4,638
+
+
+* part years (2017 from 09-18; 2026 to 08-07). Amber = sealed out-of-sample. Dollars scale with the gold price; basis points do not. OOS mean 4.4 bp vs IS 7.5 bp
+(z −0.6): inside noise, 2025 thin, 2026 above average.
+
+THE VOTES      ·           RESEARCH PANEL 2016-10 → 2024-12           ·     GROSS, 10:01 OPEN → 13:30 CLOSE, 1 GC
+
+   Vote                                        alone: days             WR          bp            t    blend WITHOUT it: n                   WR                bp                        t
+   A    Price 08:20→10:00                            2,072          51.6%          1.3      1.36                       625               56.2%                6.3                  3.53
+   B    Against taker flow                           2,088          53.5%          3.1      3.20                       769               54.6%                5.4                  3.12
+
+   C    GLD creations                                1,212          51.1%          2.6      1.93                       692               58.8%                7.2                  4.10
+   D    Big crude move                                    482       52.7%          3.8      1.80                       665               58.8%                7.0                  4.02
+
+   E    Price, $-decoupled                                446       56.1%          6.4      2.49                       599               59.8%                8.4                  4.51
+   ALL FIVE, |score| ≥ 2                                       —                                                       715               58.7%                7.9                  4.62
+       score = 2 / score ≥ 3                                   —                                               421 / 294         55.1 / 63.9%        5.3 / 11.8           2.41 / 4.26
+
+   FOLLOW the taker flow                             2,088          45.6%         −3.1     −3.20
+
+
+B is the strongest alone (t 3.2); A, C and D are weak alone and matter in the stack. Dropping A or B costs the most. Dropping E raises bp per trade but cuts 116
+trades: E buys frequency, not edge.
+
+MULTICHARTS            ·     $2.30/SIDE + 1 TICK     ·     1–2 GC     ·     SINGLE SOURCE, 2017-09-18 → 2026-08-07
+
+   Cell                                                    n              /wk               WR        bp             $ / trade                                       avg win / loss
+   IS < 2025       blend                                 660          1.74               55.2%        6.6             $166.74
+
+   IS < 2025       stretch                               314          0.84               51.3%        9.4             $157.34
+   IS total                                              974          2.56               53.9%        7.5             $163.71                                 $932 / −$734 (1.27)
+
+   OOS    blend                                          163          1.96               51.5%        6.8             $386.03
+   OOS    stretch                                         67          0.83               34.3%       −1.4               $52.86
+   OOS total                                             230          2.77               46.5%        4.4             $288.98                             $3,238 / −$2,276 (1.42)
+
+
+OOS win rate fell (46.5%) but the win/loss ratio rose (1.42): a fat-tailed payoff, not a broken one. The blend held its bp exactly (6.6 → 6.8); the weakness is the short-
+only stretch in a record bull year. Run with limit fills “1 tick beyond” (vs Classic it changes one trade, −$150).
+
+
+
+
+HYPOTHESIS · METHOD · RESULTS · CONCLUSION · FEEDBACK · SETUP                                                                                            GC · 1 MIN · LONG + SHORT
+GC_COMBO_v2      /   RESEARCH NOTE                                                                                                                                04    /   05
+
+HYPOTHESIS · METHOD · RESULTS · CONCLUSION · FEEDBACK · SETUP
+
+
+
+Conclusion:
+The frozen COMBO is the result. IS 974 trades, 53.9% WR, +$164. OOS                      One version. No vault optimisation. The hold-out is now spent, so the
+230 trades, 46.5% WR, +$289. All three pre-declared marks passed on                      rule is frozen. That reduces, but does not eliminate, regime risk. It is a
+one read. No single vote carries it, following the morning takers loses,                 volatility harvester with a fat-tailed payoff (~50% WR, win/loss 1.4). 230
+and alternative exits, filters and clocks fail. That is the proof.                       OOS trades are thin on their own (t 0.9 in bp). Do not send this as proof
+                                                                                         of any single flow; the forward record decides.
+
+NAMED KILLS     ·    SAME DATA, THESE DO NOT GET TO CHANGE THE RULE
+
+
+  Stops & targets                                            NQ-style brackets                                          ADX / RVOL
+  30 exit cells, RoMaD 8.6–11.2 vs 10.98 baseline.           RR 0.5–1, 9 cells: WR up to 61.7% but net falls to         ADX ≥ 20 $118 vs random-filter p95 $137. RVOL
+  Tight stops cut the drift monotonically.                   0.89× RT. Best only ties the time exit.                    ≥ 1 $86 vs $155. Both dropped.
+
+
+
+  27-cell averaging                                          Release-day skip                                           Conviction-only
+  All 27 profitable, but the average keeps 58% of            ISM days −0.3 bp vs 8.8 (t −1.48). Declared check          |score| ≥ 3 passes in-sample (Flex 95% vs 90%)
+  the profit and lowers RoMaD in both halves.                on Conference Board days: +13.8 bp. Noise.                 but OOS score-2 trades earned $248/ct. Not
+                                                                                                                        adopted.
+
+
+What I will not do: add a stop, move the 10:00 clock, drop score-2 trades, stack same-side signals, or change anything after watching 2025–26.
+
+What I want feedback on:
+ 1. Per-vote forward table. In-sample no vote carries it and E adds frequency, not edge. Log each vote on data after 2026-09-25: if one vote starts carrying it, the
+   blend story is wrong.
+ 2. Run the same frozen rule on silver (SI), unchanged. Same macro flows, a different ETF (SLV). If SI lives, this is a precious-metals flow story; if it is dead, it is gold-
+   specific.
+ 3. If you have bid/ask data: rebuild vote B from true order-flow imbalance instead of the tick rule. Report forward results only; anything tuned on 2016–26 is
+   snooping.
+
+Attached:
+GC_COMBO_v2_community.txt (every vote, sleeve, time and filter is an input; defaults = the tested rule) · GCCOMBO.txt (the data3 file) · setup steps on page 5 ·
+markdown table:
+
+  | Cell | Source | n | WR | bp | $/trade |
+  |---|---|---|---|---|---|
+  | Blend, all five votes, abs score >= 2 | research 2016-24 | 715 | 58.7% | 7.9 (t 4.62) | - |
+  | Follow the morning taker flow | research 2016-24 | 2088 | 45.6% | -3.1 (t -3.20) | - |
+  | Blend without vote A/B/C/D/E | research 2016-24 | 625-769 | 54.6-59.8% | 5.4-8.4 (t 3.1-4.5) | - |
+  | MC IS < 2025-01-01 | MultiCharts | 974 | 53.9% | 7.5 | $163.71 |
+  | MC OOS >= 2025-01-01 | MultiCharts | 230 | 46.5% | 4.4 | $288.98 |
+  | MC all 2017-09 -> 2026-08 | MultiCharts | 1204 | 52.5% | - | $187.64 |
+
+
+
+
+HYPOTHESIS · METHOD · RESULTS · CONCLUSION · FEEDBACK · SETUP                                                                                 GC · 1 MIN · LONG + SHORT
+GC_COMBO_v2     /   RESEARCH NOTE                                                                                                                         05    /    05
+
+HYPOTHESIS · METHOD · RESULTS · CONCLUSION · FEEDBACK · SETUP
+
+
+
+Setup:
+Two files: GC_COMBO_v2_community.txt (the strategy) and GCCOMBO.txt (one bar a day: the GLD vote and the dollar-decoupled
+flag). About 15 minutes in MultiCharts. Do the steps in order.
+
+  STEP 1    ·   THE STRATEGY                                                       STEP 5    ·     INSERT + SETTINGS
+  Open the PowerLanguage Editor → File → New → Signal. Name it                     Insert → Strategy → GC_COMBO_v2_community. Leave every input at default
+  GC_COMBO_v2_community. Delete the template text, paste the whole .txt file       except ETminusChart = hours to ADD to your chart clock to get New York
+  in, press F3 to compile. It must say “compiled successfully”.                    time: exchange/Central chart = 1, New York chart = 0, London chart = −5.
+                                                                                   Strategy Properties: commission (tested at $2.30/side GC), slippage 1 tick,
+                                                                                   Backtesting → fill limit orders when price goes beyond by 1 tick (not Classic).
+  STEP 2    ·   THE DATA FILE
+  Put GCCOMBO.txt in a folder on its own (e.g. C:\MCData\GCCOMBO\). Keep
+  the name exactly GCCOMBO.txt: the file name becomes the symbol name.             STEP 6    ·     CHECK IT MATCHES
+                                                                                   Backtest 2017-09-18 → 2026-08-07 on @GC: about 1,204 trades, ~$226k
+                                                                                   net, 52.5% WR. Small differences are your data vendor (tested on Rithmic
+  STEP 3    ·   MAP IT IN QUOTEMANAGER                                             GC). A big difference means a step above is off.
+  QuoteManager → File → Map ASCII… → Browse to that folder. Click the blue
+  GCCOMBO file link and check: fields Date, Time, Open, High, Low, Close,
+  Volume · Start at Row 2 · Resolution 1 Minute (type the 1 in the small box) ·    IF THE GCCOMBO PANE SAYS “NO DATA”
+  Time Zone Exchange. OK, then OK. It should say “mapped 1 file successfully”.     1. Chart resolution must be 1 Minute, not 1 Day.
+                                                                                   2. Session must be 24/5 (the bar is stamped 05:00; a 09:30–16:00 session
+                                                                                   hides it).
+  STEP 4    ·   THE CHART (ORDER MATTERS)                                          3. In Map ASCII the resolution must read 1 Minute. If it says 1 Day, click the
+  Data 1: @GC, 1 Minute, full Globex session, Build Volume on Trade Volume.        file link and fix it.
+  Data 2: @CL, 1 Minute.                                                           4. Click the chart, press Ctrl+R to reload.
+  Data 3: Insert Instrument → data source ASCII Mapping → GCCOMBO, 1
+  Minute. Then Format Instrument → Settings → Sessions = 24/5.
+  Data range for all three: from 2017 (the ATR and crude votes need ~20            KEEPING IT UPDATED
+  sessions to warm up).                                                            GCCOMBO.txt ends on the date I posted it. I will post updated files: overwrite
+                                                                                   the old one in the same folder and press Ctrl+R. No crude or GCCOMBO feed?
+                                                                                   Put any symbol in that slot and switch the votes it feeds off (UseVoteOil for
+                                                                                   data 2; UseVoteGLD + UseVoteDecouple for data 3). The strategy still needs
+                                                                                   three data series on the chart.
+
+
+File → Save Workspace when it works. MultiCharts does not keep an unsaved chart through a crash.
+
+
+
+
+HYPOTHESIS · METHOD · RESULTS · CONCLUSION · FEEDBACK · SETUP                                                                         GC · 1 MIN · LONG + SHORT
+
