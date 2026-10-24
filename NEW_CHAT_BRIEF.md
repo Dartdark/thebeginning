@@ -17,10 +17,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   (roll-adjusted entry), S30 (`agents/codex/FORWARD_LOG.md`, frozen bands). Weekly Claude-Codex cross-review every
   Friday (`agents/codex/TASK_weekly_cross_review.md`, `agents/cross_review/`); first round 2026-10-23 closed 6 items.
 - **Codex:** GPT-6.1 Sol ('Light'), builder on `codex/work`; reads / writes files only. @codex PR-mention mailbox tried
-  2026-10-24 (PR #2, draft, do not merge): connector can't see the environment; stopped (`agents/codex/STATUS.md`).
+  2026-10-24 (PR #2, closed unmerged): connector can't see the environment; stopped (`agents/codex/STATUS.md`).
 - **Open for the user:** Sun 10/25 after 17:00 CT the `Apex Account Check` indicator on both charts (`TODO.md`); Friday
-  exports into `live/` (MC reports, order tracker CSV, 1-min data); 11/06 FC 2B re-export; optionally close PR #2 and
-  turn off Codex's automatic / security reviews for the repo.
+  exports into `live/` (MC reports, order tracker CSV, 1-min data); 11/06 FC 2B re-export; optionally turn off Codex's automatic / security reviews for the repo.
 - **Open for Claude:** real-micro-fee rerun of the benches (routine); daily marks for Twin's overnight trades before the
   personal account; automatic cushion sizing after the account check.
 - **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)
