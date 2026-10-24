@@ -79,6 +79,7 @@ not into the plan, for later when the account is large enough or sizes can be we
 | S03 Noise Area v2 | B | personal gains need more capital (Codex); Apex plans worse | thinned since mid-2024 | `agents/codex/results/s03_v2.md` (codex/work) |
 | Anson momentum (4.5 / 20) | D | full + 1 MNQ: median year $23.7k → $25.6k, p95 DD $5.0k → $6.1k, capital $25.0k → $30.4k | weak standalone (2025+ t 0.97) | `agents/codex/results/anson_personal.md` |
 | R2Vault | C | personal CT gains small at equal drawdown | weak standalone (t 2.9, DSR 0.5) | `agents/codex/results/r2vault.md` |
+| DriftPullBack (user's simplified v3 of DriftPullback v2.1) | C | + all: +$2.9k a year, return/DD 8.3 → 8.0, capital $33.6k → $38.8k; shorts only 8.3 → 8.5 (+$1k) but shorts earn $9 a trade since 2023 | funded: blow-ups 3% → 13% (v2.1, 10/13) | `analysis/drift_pullback_v3_test.py` |
 Review this list whenever the account steps up a ladder row: re-test each at that size before adding.
 
 ## Read this before trusting the numbers
