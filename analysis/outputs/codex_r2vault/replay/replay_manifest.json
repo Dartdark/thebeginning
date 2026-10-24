@@ -1,0 +1,273 @@
+{
+  "preregistration_commit": "a973f077",
+  "calendar_clarification_commit": "dab01a8",
+  "return_models": 5,
+  "models": [
+    "et_raw",
+    "et_apex",
+    "ct_raw",
+    "ct_apex",
+    "et_daily_reset_raw"
+  ],
+  "checks": {
+    "regression_direct_checks": 244,
+    "regression_max_slope_error": 8.36143854501814e-09,
+    "regression_max_r2_error": 8.219286308785989e-07,
+    "regression_tolerance_at_1e8": 1e-06,
+    "constant_window": true,
+    "low_before_entry_excluded": true,
+    "target_before_later_stop": true,
+    "stop_after_entry_only": true,
+    "opening_gap_priority": true,
+    "target_trade_through": true,
+    "mirrored_entry_cursor": true,
+    "max3_actual_entries_per_day": true,
+    "one_entry_per_issued_chart_order": true,
+    "same_minute_boundary_extrema": true,
+    "queued_market_priority": true,
+    "historical_pause_metadata_only": true,
+    "no_market_cache_loaded": true
+  },
+  "phase_order": [
+    "2018_22",
+    "2023_plus"
+  ],
+  "no_selection": true,
+  "feature_cache": "agents/codex/runtime/r2vault_features.pkl",
+  "model_files": {
+    "et_raw": {
+      "trades": {
+        "rows": 3037,
+        "sha256": "417944b86b42cd3876b0a0d5f18ea817326b43aef29d3fbc701467d85f998ca1"
+      },
+      "audit": {
+        "rows": 3204,
+        "sha256": "f8325a666d32c067c4ac5ab806015ba99817bbe6cb305afb430e87e607f7bbe2"
+      },
+      "events": {
+        "rows": 6074,
+        "sha256": "b703ae514390570e1351374efccf912f8c0806578e1475d7fa217ae1d9bed79c"
+      },
+      "gaps": {
+        "rows": 1733,
+        "sha256": "2cad86dda3c6f45e23b6372bde4d65d8975890d669aca1535622ab8bf629a293"
+      },
+      "open_positions": {
+        "rows": 0,
+        "sha256": "b2261a9403d11a463ecebf59cee4ef3d8f50cad7f45ef31dd95259a2e75ef093"
+      }
+    },
+    "et_apex": {
+      "trades": {
+        "rows": 3148,
+        "sha256": "7eae1cc0db41b96cf95caedc631c134581592065a9e3333d6b68f201850d9792"
+      },
+      "audit": {
+        "rows": 3204,
+        "sha256": "cba2747f93446e18089f3b8ba7cc14761a617b42ff166b1f87810ce85637f6b9"
+      },
+      "events": {
+        "rows": 6296,
+        "sha256": "3bb14b8166897d6b093993b02774ca8d3dcca8f02d095522f40219fb9a34c09f"
+      },
+      "gaps": {
+        "rows": 329,
+        "sha256": "07ec3343c7bf19fb06ebb150a4075d0a5f17bf6c018e576d0ba5a2cac522349e"
+      },
+      "open_positions": {
+        "rows": 0,
+        "sha256": "b2261a9403d11a463ecebf59cee4ef3d8f50cad7f45ef31dd95259a2e75ef093"
+      }
+    },
+    "ct_raw": {
+      "trades": {
+        "rows": 2760,
+        "sha256": "5a5030ede096d2352c7edfee7eaff9abe0d58acdcd012af494cc3d926db55402"
+      },
+      "audit": {
+        "rows": 3204,
+        "sha256": "4862edc0322f6793faebded772a9e1c9fa976623cea9bb46fb6d9c43ddd84d5f"
+      },
+      "events": {
+        "rows": 5520,
+        "sha256": "ee4ac86168464e4cf90cb3c2d91167e27ba920874363ef827ac140f201cdcb32"
+      },
+      "gaps": {
+        "rows": 2197,
+        "sha256": "292fbd3f2b0c0b4ca8a639f77866e53dbf52c467178324f59e5a080edd99ce80"
+      },
+      "open_positions": {
+        "rows": 0,
+        "sha256": "b2261a9403d11a463ecebf59cee4ef3d8f50cad7f45ef31dd95259a2e75ef093"
+      }
+    },
+    "ct_apex": {
+      "trades": {
+        "rows": 2856,
+        "sha256": "faebe91623c2248c2d6e63a2d81262cb10b2ee08a6ec4bf1de41c1cce3d06379"
+      },
+      "audit": {
+        "rows": 3204,
+        "sha256": "f205adb5a31bc3add79b83dcfff834a6ac677591b64c129a7973f4e8761a2200"
+      },
+      "events": {
+        "rows": 5712,
+        "sha256": "ef93e54e4b98873809b8090eca142d7dd9a76cbb2f17bbe7a8a677ea16266730"
+      },
+      "gaps": {
+        "rows": 409,
+        "sha256": "24cbefb83e504ff2f0062af1935805f169067e451955caf2d82a68160ed4c589"
+      },
+      "open_positions": {
+        "rows": 0,
+        "sha256": "b2261a9403d11a463ecebf59cee4ef3d8f50cad7f45ef31dd95259a2e75ef093"
+      }
+    },
+    "et_daily_reset_raw": {
+      "trades": {
+        "rows": 987,
+        "sha256": "f50cbefa25dd150b65d6050faf961617e9eaa60941e467737b76bc3baff07875"
+      },
+      "audit": {
+        "rows": 3204,
+        "sha256": "e85e0aa56448ed2377ec9f29bf88a3eff18f586b26702e5a5fc65f80d8177af7"
+      },
+      "events": {
+        "rows": 1974,
+        "sha256": "75b09bc9bca40d12b9c7e780a3fd6cf2743af5c859c4a4526aaaa244c64f4b1f"
+      },
+      "gaps": {
+        "rows": 653,
+        "sha256": "e6c347d54f32a3b1d7a24956f59ab4330d4d9c7c2ee91d0f00f5c601b9502e43"
+      },
+      "open_positions": {
+        "rows": 0,
+        "sha256": "b2261a9403d11a463ecebf59cee4ef3d8f50cad7f45ef31dd95259a2e75ef093"
+      }
+    }
+  },
+  "source_inputs": {
+    "scratch_data/g24.pkl": "e35c222362b9fa6cbc97933b38a2f33eba7009200686790198bb53f383795ab5",
+    "agents/codex/inputs/r2vault/source.pdf": "60742409a30d91902d26bdd0c15b39cb229db13f26394fc4ee86a316872da107",
+    "agents/codex/inputs/r2vault/calendar_metadata.md": "578813d3060a6e6b2e8cad90f888a0d1a49e90be78dfa5bbbad28663866c51a1"
+  },
+  "scripts": {
+    "codex_r2vault_replay.py": "d1bd58c33e89c6b1b84d4efae2c2d87bc2949bdcbbbab53cfa851530bf4b20ac",
+    "codex_anson_replay.py": "4bb78bf6bbef0c97c5c08a6e465424aad1a7589aec40baa22e06280ecc7722fe",
+    "grid24.py": "dd6368feae62d6c7b1c231dcc9bb21eb38962cfb942ef172e4316bea7182409a",
+    "replica.py": "4b065e6e21bc8fd9b189ce71376a9b35afd01d21efe2a9c088750d05068e5fa8"
+  },
+  "known_closed_sha256": "0bfcfb4515775dc6d86117cefe2b10e2c4cb14555ef1d6f87aff8c98069af9d3",
+  "specs": {
+    "et_raw": {
+      "model": "et_raw",
+      "start": 510,
+      "end": 870,
+      "apex": false,
+      "daily_reset": false,
+      "bar_minutes": 5,
+      "history": "all observed24h bars",
+      "r2_length": 576,
+      "threshold": 0.03,
+      "noise": 0.2,
+      "max_entries_per_CT_date": 3,
+      "stop_points": 75.0,
+      "target_points": 40.0,
+      "break_even": false,
+      "r2_exit_disabled": true,
+      "path": "OHLC if H-O<=O-L, else OLHC; opening orders before segments",
+      "target": "one-point trade-through, fill at target; favorable qualifying gap at open",
+      "forced_exit_priority": "queued market before resting protective opening gaps",
+      "costs": "raw geometry; monetary commission and fill slips applied by caller",
+      "author_parity": false
+    },
+    "et_apex": {
+      "model": "et_apex",
+      "start": 510,
+      "end": 870,
+      "apex": true,
+      "daily_reset": false,
+      "bar_minutes": 5,
+      "history": "all observed24h bars",
+      "r2_length": 576,
+      "threshold": 0.03,
+      "noise": 0.2,
+      "max_entries_per_CT_date": 3,
+      "stop_points": 75.0,
+      "target_points": 40.0,
+      "break_even": false,
+      "r2_exit_disabled": true,
+      "path": "OHLC if H-O<=O-L, else OLHC; opening orders before segments",
+      "target": "one-point trade-through, fill at target; favorable qualifying gap at open",
+      "forced_exit_priority": "queued market before resting protective opening gaps",
+      "costs": "raw geometry; monetary commission and fill slips applied by caller",
+      "author_parity": false
+    },
+    "ct_raw": {
+      "model": "ct_raw",
+      "start": 570,
+      "end": 930,
+      "apex": false,
+      "daily_reset": false,
+      "bar_minutes": 5,
+      "history": "all observed24h bars",
+      "r2_length": 576,
+      "threshold": 0.03,
+      "noise": 0.2,
+      "max_entries_per_CT_date": 3,
+      "stop_points": 75.0,
+      "target_points": 40.0,
+      "break_even": false,
+      "r2_exit_disabled": true,
+      "path": "OHLC if H-O<=O-L, else OLHC; opening orders before segments",
+      "target": "one-point trade-through, fill at target; favorable qualifying gap at open",
+      "forced_exit_priority": "queued market before resting protective opening gaps",
+      "costs": "raw geometry; monetary commission and fill slips applied by caller",
+      "author_parity": false
+    },
+    "ct_apex": {
+      "model": "ct_apex",
+      "start": 570,
+      "end": 930,
+      "apex": true,
+      "daily_reset": false,
+      "bar_minutes": 5,
+      "history": "all observed24h bars",
+      "r2_length": 576,
+      "threshold": 0.03,
+      "noise": 0.2,
+      "max_entries_per_CT_date": 3,
+      "stop_points": 75.0,
+      "target_points": 40.0,
+      "break_even": false,
+      "r2_exit_disabled": true,
+      "path": "OHLC if H-O<=O-L, else OLHC; opening orders before segments",
+      "target": "one-point trade-through, fill at target; favorable qualifying gap at open",
+      "forced_exit_priority": "queued market before resting protective opening gaps",
+      "costs": "raw geometry; monetary commission and fill slips applied by caller",
+      "author_parity": false
+    },
+    "et_daily_reset_raw": {
+      "model": "et_daily_reset_raw",
+      "start": 510,
+      "end": 870,
+      "apex": false,
+      "daily_reset": true,
+      "bar_minutes": 5,
+      "history": "all observed24h bars",
+      "r2_length": 576,
+      "threshold": 0.03,
+      "noise": 0.2,
+      "max_entries_per_CT_date": 3,
+      "stop_points": 75.0,
+      "target_points": 40.0,
+      "break_even": false,
+      "r2_exit_disabled": true,
+      "path": "OHLC if H-O<=O-L, else OLHC; opening orders before segments",
+      "target": "one-point trade-through, fill at target; favorable qualifying gap at open",
+      "forced_exit_priority": "queued market before resting protective opening gaps",
+      "costs": "raw geometry; monetary commission and fill slips applied by caller",
+      "author_parity": false
+    }
+  }
+}

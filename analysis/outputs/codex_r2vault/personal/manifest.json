@@ -1,0 +1,156 @@
+{
+  "preregistration": "a973f0779b6e10d9c3c29adc6748ed5eba0d5f92",
+  "baseline_reference": {
+    "actual": {
+      "annual": 24350.696001627533,
+      "max_dd": 5000.702576101205,
+      "mc_p5": 12507.240866724425,
+      "mc_p50": 23697.888661515317,
+      "mc_p95": 37330.52185190322,
+      "mc_dd_p50": 2873.015,
+      "mc_dd_p95": 5000.702576101179
+    },
+    "published_rounded": {
+      "annual": 24351.0,
+      "max_dd": 5001.0,
+      "mc_p5": 12507.0,
+      "mc_p50": 23698.0,
+      "mc_p95": 37331.0,
+      "mc_dd_p50": 2873.0,
+      "mc_dd_p95": 5001.0
+    },
+    "delta": {
+      "annual": -0.30399837246659445,
+      "max_dd": -0.2974238987953868,
+      "mc_p5": 0.24086672442535928,
+      "mc_p50": -0.11133848468307406,
+      "mc_p95": -0.4781480967794778,
+      "mc_dd_p50": 0.01499999999987267,
+      "mc_dd_p95": -0.29742389882085263
+    },
+    "exact_pinned_MC_statistic_parity": true,
+    "rounding_match": true,
+    "note": "Published values are rounded; inspect any non-rounding baseline difference before comparison"
+  },
+  "fixtures": {
+    "no_future_price_mark": true,
+    "closure_carry": true,
+    "stop_vs_limit_cost": true,
+    "phase_aware16boundary": true,
+    "terminal_unrealized_reconciles": true,
+    "fee_reserved_at_entry": true
+  },
+  "baseline_cache_sha256": "635d2f4752d1e117778b2335ff2111d084c41a93c9317f032eb7acdeaff3bb88",
+  "context_inventory_sha256": "2f687474d31c78801402d4ca24ce6efa4af410701b214e030739d43f9045caa6",
+  "script_sha256": "c59a94aae0a2cd432dd110405fb6847f76d754cc8e328bb11be8afee2cdd6e26",
+  "benchmark_helper_sha256": "6315d0436fee0fb92c8c0272512f87f6936d94143888af94eb41dfb42e648448",
+  "benchmark": {
+    "configurations_per_clock": 21,
+    "clocks": [
+      "et_raw",
+      "ct_raw"
+    ],
+    "cohorts": [
+      "2018_plus",
+      "2025_plus_replication"
+    ],
+    "histories": 5000,
+    "horizon_days": 252,
+    "block_days": 20,
+    "seed": 1,
+    "paired_CI_samples": 5000,
+    "paired_CI_seed": 902,
+    "historical_annual_effect_CI_seed": 903,
+    "MC_mean_CI_scope": "sampling precision conditional on observed history, not future edge"
+  },
+  "inherited_limitations": [
+    "Published personal fee convention is preserved: +$0.55 per nonzero plan day, not exact trade counts; VB reentries are undercharged.",
+    "Published MOC starts at $0.50/MES rather than $0.725, so its inherited total commission is $1.05 rather than $1.275.",
+    "Twin baseline is the committed v1 checker ledger with published16:00 marks; no exact v2.1 ledger exists.",
+    "Twin published marking skips dates without a15:30..16:00 observation; candidate uses the last available same-date price at/before16:00.",
+    "Candidate observed-bar gaps can reflect closures or feed loss; marks can be stale and no future price fills the gap.",
+    "Daily marked drawdown omits intraday margin/liquidation exposure; personal MC has no Apex trail or payout caps."
+  ],
+  "models": {
+    "et_raw": {
+      "closed_trades": 3037,
+      "terminal_valuations": 0,
+      "entries_after_calendar": 0,
+      "net_sum": 3930.3249999999844,
+      "expected_net": 3930.3250000004355,
+      "roundtrip_fee_reserved_at_entry": 1.275,
+      "entry_slippage": 0.5,
+      "target_exit_slippage": 0.0,
+      "other_exit_slippage": 0.5,
+      "terminal_calendar_cutoff": "2026-10-09 16:00:00",
+      "mark_rule": "last observed close<=16CT; no later price substitution",
+      "boundary_rule": "openj961 belongs oldsession; intraminutej961 belongs nextsession",
+      "ledger_sha256": "417944b86b42cd3876b0a0d5f18ea817326b43aef29d3fbc701467d85f998ca1",
+      "model": "et_raw"
+    },
+    "ct_raw": {
+      "closed_trades": 2760,
+      "terminal_valuations": 0,
+      "entries_after_calendar": 0,
+      "net_sum": 16125.499999999985,
+      "expected_net": 16125.500000000588,
+      "roundtrip_fee_reserved_at_entry": 1.275,
+      "entry_slippage": 0.5,
+      "target_exit_slippage": 0.0,
+      "other_exit_slippage": 0.5,
+      "terminal_calendar_cutoff": "2026-10-09 16:00:00",
+      "mark_rule": "last observed close<=16CT; no later price substitution",
+      "boundary_rule": "openj961 belongs oldsession; intraminutej961 belongs nextsession",
+      "ledger_sha256": "5a5030ede096d2352c7edfee7eaff9abe0d58acdcd012af494cc3d926db55402",
+      "model": "ct_raw"
+    },
+    "et_apex": {
+      "closed_trades": 3148,
+      "terminal_valuations": 0,
+      "entries_after_calendar": 0,
+      "net_sum": -284.7000000000166,
+      "expected_net": -284.6999999998495,
+      "roundtrip_fee_reserved_at_entry": 1.275,
+      "entry_slippage": 0.5,
+      "target_exit_slippage": 0.0,
+      "other_exit_slippage": 0.5,
+      "terminal_calendar_cutoff": "2026-10-09 16:00:00",
+      "mark_rule": "last observed close<=16CT; no later price substitution",
+      "boundary_rule": "openj961 belongs oldsession; intraminutej961 belongs nextsession",
+      "ledger_sha256": "7eae1cc0db41b96cf95caedc631c134581592065a9e3333d6b68f201850d9792",
+      "model": "et_apex"
+    },
+    "ct_apex": {
+      "closed_trades": 2856,
+      "terminal_valuations": 0,
+      "entries_after_calendar": 0,
+      "net_sum": 8483.099999999986,
+      "expected_net": 8483.10000000037,
+      "roundtrip_fee_reserved_at_entry": 1.275,
+      "entry_slippage": 0.5,
+      "target_exit_slippage": 0.0,
+      "other_exit_slippage": 0.5,
+      "terminal_calendar_cutoff": "2026-10-09 16:00:00",
+      "mark_rule": "last observed close<=16CT; no later price substitution",
+      "boundary_rule": "openj961 belongs oldsession; intraminutej961 belongs nextsession",
+      "ledger_sha256": "faebe91623c2248c2d6e63a2d81262cb10b2ee08a6ec4bf1de41c1cce3d06379",
+      "model": "ct_apex"
+    },
+    "et_daily_reset_raw": {
+      "closed_trades": 987,
+      "terminal_valuations": 0,
+      "entries_after_calendar": 0,
+      "net_sum": 2276.0749999999944,
+      "expected_net": 2276.0749999999325,
+      "roundtrip_fee_reserved_at_entry": 1.275,
+      "entry_slippage": 0.5,
+      "target_exit_slippage": 0.0,
+      "other_exit_slippage": 0.5,
+      "terminal_calendar_cutoff": "2026-10-09 16:00:00",
+      "mark_rule": "last observed close<=16CT; no later price substitution",
+      "boundary_rule": "openj961 belongs oldsession; intraminutej961 belongs nextsession",
+      "ledger_sha256": "f50cbefa25dd150b65d6050faf961617e9eaa60941e467737b76bc3baff07875",
+      "model": "et_daily_reset_raw"
+    }
+  }
+}

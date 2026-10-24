@@ -88,6 +88,8 @@ def target_mask(t):
 def money_trades(t,fee):
     t=t.copy()
     t["date"]=pd.to_datetime(t.get("entry_date",t.date))
+    if "exit_date" in t:
+        t["exit_date"]=pd.to_datetime(t.exit_date)
     t["slips"]=1+(~target_mask(t)).astype(int)
     t["net_nq"]=(t.exit-t.entry)*t.side*20-float(fee)*10-t.slips*5
     t["net_mnq"]=t.net_nq/10
@@ -109,6 +111,7 @@ def standard_stats(t,daily,days,trials,universe="all_source_events"):
                    dsr_preregistered=M.deflated_sharpe(sub.net_nq,trials["preregistered_n"]) if len(sub)>=10 else np.nan,
                    dsr_conservative_latest=M.deflated_sharpe(sub.net_nq,trials["effective_n"]) if len(sub)>=10 else np.nan,
                    trade_period="entry date; closed trades only",daily_period="marked session date; includes terminal unrealized")
+        row["n_exits_after_period_end"]=int((sub.exit_date>=pd.Timestamp(hi)).sum()) if "exit_date" in sub else np.nan
         rows.append(row)
     return pd.DataFrame(rows)
 
@@ -191,6 +194,29 @@ def run_standalone(g,replays,open_positions,out=OUT,days=None):
     pd.DataFrame(monte).to_csv(out/"standalone_mc.csv",index=False)
     (out/"trial_counts.json").write_text(json.dumps(trials,indent=2)+"\n")
     return stats
+
+
+def staged_design_trade_stats(replay_dir,out=OUT):
+    """Audit only exits known at the actual design cutoff, before recent prices."""
+    rows=[]
+    trials=trial_counts()
+    for model in ALL_MODELS:
+        t=pd.read_csv(Path(replay_dir)/f"{model}_2018_22_trades.csv")
+        op=pd.read_csv(Path(replay_dir)/f"{model}_2018_22_open_positions.csv")
+        fees=(1.04,1.24) if model.endswith("apex") else (1.04,1.24,1.275)
+        for fee in fees:
+            net=money_trades(t,fee)
+            x=net.net_nq
+            gain=x[x>0].sum()
+            loss=-x[x<0].sum()
+            rows.append(dict(model=model,fee_micro=fee,closed_at_design_cutoff=len(net),
+                             open_at_design_cutoff=len(op),total_nq=x.sum(),avg_nq=x.mean(),t=tstat(x),
+                             profit_factor=gain/loss if loss else np.nan,win=np.mean(x>0),
+                             dsr311=M.deflated_sharpe(x,trials["effective_n"]) if len(x)>=10 else np.nan,
+                             scope="Only closes executed before design stage ended; may exclude an older entry later closed in2023"))
+    table=pd.DataFrame(rows)
+    table.to_csv(Path(out)/"staged_design_closed_trade_stats.csv",index=False)
+    return table
 
 
 @njit(cache=True)
@@ -477,6 +503,7 @@ if __name__=="__main__":
     (out/"control_fixtures.json").write_text(json.dumps(fixture,indent=2)+"\n")
     if args.phase in ("all","standalone"):
         run_standalone(grid,replays,opens,out)
+        staged_design_trade_stats(replay_dir,out)
     if args.phase in ("all","controls"):
         run_controls(grid,prepared,replays,out)
     files={}

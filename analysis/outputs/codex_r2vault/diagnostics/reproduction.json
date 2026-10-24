@@ -1,0 +1,89 @@
+{
+  "preregistration": "a973f0779b6e10d9c3c29adc6748ed5eba0d5f92",
+  "calendar_clarification": "dab01a8",
+  "models": [
+    "et_raw",
+    "et_apex",
+    "ct_raw",
+    "ct_apex",
+    "et_daily_reset_raw"
+  ],
+  "controlled_models": [
+    "et_raw",
+    "et_apex",
+    "ct_raw",
+    "ct_apex"
+  ],
+  "null_draws_per_family": 1000,
+  "side_seed": 848,
+  "time_seed": 849,
+  "bootstrap_n": 5000,
+  "bootstrap_block": 20,
+  "bootstrap_interval": 0.95,
+  "no_control_time_cap_or_terminal_executed_close": true,
+  "null_DD": "closed-trade equity only; open unrealized separate; main metrics use MTM",
+  "random_time": "coverage-only calendar; fixed five-minute slots; missing decision/nextminuteOpen skips; no future rescue",
+  "script_sha256": "a537ba85ec3900b1c604ebcf9a25d170813948ed96c505a6f159028e7b540141",
+  "inputs": {
+    "analysis\\outputs\\codex_r2vault\\replay\\et_raw_trades.csv": "417944b86b42cd3876b0a0d5f18ea817326b43aef29d3fbc701467d85f998ca1",
+    "analysis\\outputs\\codex_r2vault\\replay\\et_raw_audit.csv": "f8325a666d32c067c4ac5ab806015ba99817bbe6cb305afb430e87e607f7bbe2",
+    "analysis\\outputs\\codex_r2vault\\replay\\et_raw_open_positions.csv": "b2261a9403d11a463ecebf59cee4ef3d8f50cad7f45ef31dd95259a2e75ef093",
+    "analysis\\outputs\\codex_r2vault\\replay\\et_apex_trades.csv": "7eae1cc0db41b96cf95caedc631c134581592065a9e3333d6b68f201850d9792",
+    "analysis\\outputs\\codex_r2vault\\replay\\et_apex_audit.csv": "cba2747f93446e18089f3b8ba7cc14761a617b42ff166b1f87810ce85637f6b9",
+    "analysis\\outputs\\codex_r2vault\\replay\\et_apex_open_positions.csv": "b2261a9403d11a463ecebf59cee4ef3d8f50cad7f45ef31dd95259a2e75ef093",
+    "analysis\\outputs\\codex_r2vault\\replay\\ct_raw_trades.csv": "5a5030ede096d2352c7edfee7eaff9abe0d58acdcd012af494cc3d926db55402",
+    "analysis\\outputs\\codex_r2vault\\replay\\ct_raw_audit.csv": "4862edc0322f6793faebded772a9e1c9fa976623cea9bb46fb6d9c43ddd84d5f",
+    "analysis\\outputs\\codex_r2vault\\replay\\ct_raw_open_positions.csv": "b2261a9403d11a463ecebf59cee4ef3d8f50cad7f45ef31dd95259a2e75ef093",
+    "analysis\\outputs\\codex_r2vault\\replay\\ct_apex_trades.csv": "faebe91623c2248c2d6e63a2d81262cb10b2ee08a6ec4bf1de41c1cce3d06379",
+    "analysis\\outputs\\codex_r2vault\\replay\\ct_apex_audit.csv": "f205adb5a31bc3add79b83dcfff834a6ac677591b64c129a7973f4e8761a2200",
+    "analysis\\outputs\\codex_r2vault\\replay\\ct_apex_open_positions.csv": "b2261a9403d11a463ecebf59cee4ef3d8f50cad7f45ef31dd95259a2e75ef093",
+    "analysis\\outputs\\codex_r2vault\\replay\\et_daily_reset_raw_trades.csv": "f50cbefa25dd150b65d6050faf961617e9eaa60941e467737b76bc3baff07875",
+    "analysis\\outputs\\codex_r2vault\\replay\\et_daily_reset_raw_audit.csv": "e85e0aa56448ed2377ec9f29bf88a3eff18f586b26702e5a5fc65f80d8177af7",
+    "analysis\\outputs\\codex_r2vault\\replay\\et_daily_reset_raw_open_positions.csv": "b2261a9403d11a463ecebf59cee4ef3d8f50cad7f45ef31dd95259a2e75ef093"
+  },
+  "trial_counts": {
+    "snapshots": {
+      "preregistered": {
+        "ref": "172322e5151f45e2cbf1da4dbd9efb20ba12d1a9",
+        "ranked_tier_items": 294,
+        "trial_csv_items": 291,
+        "n_known_lower_bound": 306,
+        "tier_sha256": "b26554b72b3fadc8146a7f5e9b2668cb795cfc49133ea063bde735b2fdd82317"
+      },
+      "latest_sensitivity": {
+        "ref": "1f2d1ffa39fcf59d45b72d92adebecd0153a9151",
+        "ranked_tier_items": 294,
+        "trial_csv_items": 291,
+        "n_known_lower_bound": 306,
+        "tier_sha256": "7ffc0a36f37d4660a872e951672f0fdf8a376c41603466c95cdc0d3c87b580da"
+      }
+    },
+    "preregistered_unranked_models": 12,
+    "known_unranked_models": 17,
+    "known_unranked_breakdown": {
+      "ORPullback": 2,
+      "NightSwitch": 2,
+      "Anson": 3,
+      "R2Vault": 5,
+      "NQDB2": 5
+    },
+    "effective_n": 311,
+    "preregistered_n": 306,
+    "t_threshold": 3.5972952654724284,
+    "author_search": "PDF claims2versions; full registry unknown",
+    "concurrent_research": {
+      "ref": "e8f76b6",
+      "path": "analysis/outputs/codex_nqdb2_test/trial_ledger.csv",
+      "profiles": [
+        "A0",
+        "A1",
+        "E1",
+        "S0",
+        "S1"
+      ],
+      "count": 5,
+      "sha256": "1279b529404d9011df8c6b989ee72272d0a5e6cd7f25f1ca949797af7078e14c",
+      "note": "Count distinct profiles once; design/recent periods are not separate strategy trials"
+    }
+  }
+}

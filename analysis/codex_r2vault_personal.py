@@ -223,6 +223,12 @@ def run(args):
     manifest=dict(preregistration=PREREG,baseline_reference=reference,fixtures=fixture,
                   baseline_cache_sha256=sha(ROOT/"agents/codex/runtime/anson_personal_baseline.pkl"),
                   context_inventory_sha256=sha(ROOT/"analysis/outputs/codex_r2vault/context_inventory.json"),
+                  script_sha256=sha(__file__),benchmark_helper_sha256=sha(P.__file__),
+                  benchmark=dict(configurations_per_clock=21,clocks=["et_raw","ct_raw"],
+                                 cohorts=["2018_plus","2025_plus_replication"],histories=5000,
+                                 horizon_days=252,block_days=20,seed=1,paired_CI_samples=5000,
+                                 paired_CI_seed=902,historical_annual_effect_CI_seed=903,
+                                 MC_mean_CI_scope="sampling precision conditional on observed history, not future edge"),
                   inherited_limitations=P.LIMITATIONS,models={})
     for name in args.models.split(","):
         ledger=ROOT/"analysis/outputs/codex_r2vault/replay"/(name+"_trades.csv")

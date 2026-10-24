@@ -1,0 +1,99 @@
+{
+  "preregistration": "a973f0779b6e10d9c3c29adc6748ed5eba0d5f92",
+  "plan_path": "agents/codex/plans/r2vault.md",
+  "pre_return_calendar_clarification": {
+    "commit": "dab01a8eab5dad576474d28e4a03280a98e69af6",
+    "sha256": "578813d3060a6e6b2e8cad90f888a0d1a49e90be78dfa5bbbad28663866c51a1"
+  },
+  "current_context": "172322e5151f45e2cbf1da4dbd9efb20ba12d1a9",
+  "reused_source_pin": "e34d71cd3537a9f019d2521e280fc92f3ffdb4c6",
+  "reused_baseline_sha256": "f5856163feab7b28315be7a3564c455d8dc8ec42429bf4cd66521817ce3fcf99",
+  "current_context_inventory_sha256": "2f687474d31c78801402d4ca24ce6efa4af410701b214e030739d43f9045caa6",
+  "replay_inputs": {
+    "analysis\\outputs\\codex_r2vault\\replay\\et_apex_trades.csv": "7eae1cc0db41b96cf95caedc631c134581592065a9e3333d6b68f201850d9792",
+    "analysis\\outputs\\codex_r2vault\\replay\\et_apex_audit.csv": "cba2747f93446e18089f3b8ba7cc14761a617b42ff166b1f87810ce85637f6b9",
+    "analysis\\outputs\\codex_r2vault\\replay\\ct_apex_trades.csv": "faebe91623c2248c2d6e63a2d81262cb10b2ee08a6ec4bf1de41c1cce3d06379",
+    "analysis\\outputs\\codex_r2vault\\replay\\ct_apex_audit.csv": "f205adb5a31bc3add79b83dcfff834a6ac677591b64c129a7973f4e8761a2200",
+    "analysis\\outputs\\codex_r2vault\\replay\\known_closed.npy": "0bfcfb4515775dc6d86117cefe2b10e2c4cb14555ef1d6f87aff8c98069af9d3"
+  },
+  "scripts": {
+    "codex_r2vault_accounts.py": "7de6e38e2cc181765e58632af2adc4856742bd624c373e79c3b2db0e1ff60e8d",
+    "codex_anson_accounts.py": "a1d47a3a7cf03fd039163e95c115fc128e9da40bbc898a2b5b109e9e8193eda7",
+    "codex_anson_plan.py": "8dc3e05d2bbc033716847b0a656af66f1952be29e0f16abc41de21b827de81ae",
+    "codex_ob_v2_accounts.py": "75378fa2876b6405434d9d2fbbb221adeba422ecae96df38e1f9ae29b04469a2",
+    "codex_or_pullback_exposure.py": "fa348d6d23b91cecd01b621df0f4c2c8e16e85c2b484f45e5955cb9c49b1da44"
+  },
+  "models": [
+    "et_apex",
+    "ct_apex"
+  ],
+  "unique_allocations": {
+    "50K": 8,
+    "150K": 10
+  },
+  "fees": [
+    1.04,
+    1.24
+  ],
+  "funded": {
+    "histories": 1000,
+    "horizons": [
+      250,
+      500
+    ],
+    "circular_block": 20,
+    "seeds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "cohorts": [
+      "2018_plus",
+      "2018_22",
+      "2018_24",
+      "2023_plus",
+      "2025_plus"
+    ],
+    "expected_production_parity_records": 360
+  },
+  "evaluation": {
+    "real_full_windows": 21,
+    "CI_block": 20,
+    "CI_resamples": 5000,
+    "cohort_rule": "entire21session window must lie inside the cohort; date[start+20] precedes its exclusive end",
+    "tie_policy": {
+      "50K": "pass first",
+      "150K": "breach first"
+    }
+  },
+  "candidate_cost_timing": "RTfee and0.50entry slip reserved from entry; exit target0,stop/market0.50",
+  "sensitivity_extra_fee_totals": {
+    "NFP_MC": 15.600000000000003,
+    "MON_BR_MC": 43.400000000000006,
+    "MOC_MES": 40.400000000000006,
+    "DT": 322.19999999999993,
+    "VB_N": 241.8,
+    "MON_MC": 90.0,
+    "RS_L": 119.6,
+    "LDF_MC": 179.00000000000003,
+    "RS": 232.2,
+    "EOS": 21.000000000000004,
+    "CLS": 19.200000000000003,
+    "ONB_ML2_MC": 68.6,
+    "VB_F": 106.8
+  },
+  "seconds": 176.60999999998603,
+  "limits": [
+    "CLS retains fast_plan_lab's whole-Monday constant adverse-path approximation.",
+    "MOC_MES retains add_moc_mes's close-based intraday path approximation.",
+    "Real-fee increments follow Lab.real_fees: each day's total fee is present from its first entry.",
+    "RS uses the unchanged pinned Python baseline, independently reconciled with its committed ledger.",
+    "The prior50Kprepared cache has a small unresolved difference from the published funded reference.",
+    "150Kfunded fractional full-size bases precede cushion rounding; evaluation risk sizes floor after dollar scaling.",
+    "Missing-day exclusions are shared; funded block adjacency changes and omitted stress dates remain a limitation.",
+    "Minute boundary marks rely on the replay's declared intraminute path rather than verified tick order.",
+    "Candidate marks stale at prior observed Close during verified closures; inherited baseline portfolio.paths missing-price substitutions are preserved and audited by position ledger.",
+    "Closed daily P&L correlation does not establish protection before an account breach."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "inputs": {
+    "VB": {
+      "path": "C:\\CodexRepo\\mc_reports\\Backtesting Strategy Performance Report VB v1.xlsx",
+      "sha256": "7169ba79c9f23cb55a8f8324b950c6e956aefdd130ca581fd52d9fdd203f3ccf"
+    },
+    "ONB_ML2_MC": {
+      "path": "C:\\CodexRepo\\mc_reports\\Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+      "sha256": "f5d9beee8f4e0a2a94870e6101526a7ee79c1874bdbe96145de3aa73d03b00fc"
+    },
+    "MON_MC": {
+      "path": "C:\\CodexRepo\\mc_reports\\Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+      "sha256": "cf1bc66f4cf459a2d1adc94e434be3176937ddd147d0906c6c91e037f12f5814"
+    },
+    "EOS": {
+      "path": "C:\\CodexRepo\\mc_reports\\Backtesting Strategy Performance Report EOS v1.xlsx",
+      "sha256": "2a1c7dd88a261ad0b0df67f310e3c0c33b17d3faf85f7a94c53e9d910f63bc8f"
+    },
+    "LDF_MC": {
+      "path": "C:\\CodexRepo\\mc_reports\\Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+      "sha256": "d67673c0485d2c780b1f2d810d2929aac5360e4409cf767ef772ca980fff4085"
+    },
+    "NFP_MC": {
+      "path": "C:\\CodexRepo\\mc_reports\\Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
+      "sha256": "7ed08ee978faa0bc4364d38b4863c11cf1d285610501a2dcf24cc19532fb2fe8"
+    },
+    "MON_BR_MC": {
+      "path": "C:\\CodexRepo\\mc_reports\\Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx",
+      "sha256": "1c5bd433c0af727659262bcf3f65c61e87b2f53bf542572332ff8e5225b5f436"
+    },
+    "RS": {
+      "path": "C:\\CodexRepo\\analysis\\outputs\\codex_or_pullback\\baseline\\baseline_rs_replay.csv",
+      "sha256": "9bd7f69fc4b1b0cf748bbec97dd8bfab81a0e13e5f83c3ecbbc2fcb4b977a6ec"
+    },
+    "DT": {
+      "path": "C:\\CodexRepo\\agents\\codex\\runtime\\anson_plan_analysis\\DT_timed.csv",
+      "sha256": "bc9265593ea2972b7dcc743c354f6e832ea082d9e3cfe293165d30fb4b1f74e0"
+    }
+  },
+  "fee": 1.04,
+  "scope": "NQ only; baseline full-size integer quantities, not per-bootstrap cushion quantities",
+  "timing": "MC endpoints inclusive; R2 causal held minutes include entry and exclude open exit minute",
+  "interpretation": "minute occupancy is conservative; opposite NQ shorts do not cancel gross longs",
+  "account_breach_limit": "actual account breach minute/cushion was not retained; VB adverse-minute timing is descriptive and is not an account-breach claim"
+}

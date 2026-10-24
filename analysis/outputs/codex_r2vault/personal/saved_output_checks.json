@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "baseline_legs": 14,
+  "models": [
+    {
+      "model": "et_raw",
+      "trades_booked": 3037,
+      "daily_mark_reconciliation": true,
+      "configurations": 21,
+      "mc_summary_rows": 42,
+      "paired_effect_rows": 72,
+      "historical_rows": 294,
+      "net_micro": 3930.3249999999935
+    },
+    {
+      "model": "ct_raw",
+      "trades_booked": 2760,
+      "daily_mark_reconciliation": true,
+      "configurations": 21,
+      "mc_summary_rows": 42,
+      "paired_effect_rows": 72,
+      "historical_rows": 294,
+      "net_micro": 16125.499999999993
+    }
+  ],
+  "method": "Independently recomputed saved daily booking and all saved paths; no new variant, history draw, or candidate price replay.",
+  "limitations": "Does not certify author source parity or live stop residency; CI generation reviewed, not redrawn."
+}
