@@ -1,0 +1,440 @@
+{=============================================================================
+ BTC REOPEN MR V4 (H1B_z_lb60_abs1.5) - MultiCharts PowerLanguage port (2026-10-24)
+ Port of the NinjaTrader 8 strategy BTCFuturesReopenResidualFairValueV4 (@ElementOfFear; concept from
+ Matteo's BTC reopen video). Source: checks/candidates/btc_reopen_mr_v4/NinjaTrader/. Logic kept as coded;
+ differences are listed under PORT NOTES.
+
+ WHAT IT DOES
+   CME BTC futures close 16:00-17:00 CT (Mon-Thu) and Fri 16:00 -> Sun 17:00 CT; spot BTCUSD keeps trading.
+   At the FIRST futures bar after a scheduled 17:00 CT reopen:
+     residual (bps) = 10000 x [ (futures reopen close / futures last pre-close close - 1)
+                              - (spot now / spot at the futures pre-close bar - 1) ]
+   Z = (residual - mean) / sd of the previous 60 eligible residuals (sample sd).
+   |Z| >= 1.5 -> FADE it: Z > 0 short, Z < 0 long, market order next bar. Exit 60 clock minutes after
+   the entry fill (market order next bar). No stop, no target. One position.
+
+ CHART (both series must be in CENTRAL time)
+   Data1: CME BTC futures 1-minute (continuous, NOT back-adjusted), Exchange time (CT), CME session with the
+          16:00-17:00 CT break. 1-minute only (the reopen detector needs gaps >= 30 min).
+   Data2: spot BTCUSD 1-minute (Coinbase), 24/7 session, time zone set to the SAME Central time as Data1
+          (Format Instrument > Settings > Time Zone). Spot older than 5 minutes = no signal.
+   IOG off. Costs are not in the code: set commission / slippage in the strategy properties.
+
+ EVENT GATE (as the source): a scheduled reopen R (Mon-Thu 17:00 CT after a 16:00 close; Sun 17:00 CT after
+   Fri 16:00) between the previous and the current futures bar; once per R; not a special-session date
+   (weekend: Sunday or Friday date); futures gap >= 30 min; current bar <= R + 15 min; previous bar <=
+   close + 15 min; not in the post-roll warm-up (60 bars with spot after each roll date).
+
+ PORT NOTES
+   - Special-session dates: the author's list 2018-07-04 .. 2024-07-04 exactly, then CME holidays / early
+     closes 2024-09 .. 2027 added here (extend each year, like the other strategies' 2027 lists).
+   - Roll dates: the author's NinjaTrader ledger 2018-06-28 .. 2024-08-23 exactly, then "Thursday before the
+     last Friday of the month" (the ledger's usual rule) to 2030. Your MultiCharts continuous series may roll
+     on other days: a roll that falls on a reopen makes a fake residual. Check QuoteManager's roll dates.
+   - StartDateEL / EndDateEL = the author's research window (2018-06-11 .. 2024-09-01) when set; defaults
+     0 = no limit. A position open past EndDateEL is closed (as the source's terminal exit).
+   - Sizing: NumContracts on Data1's contract (BTC = 5 coins; MBT = 0.1 coin). The author reports the
+     micro (MBT) version failed after spread and commission, and realistic bid/ask fills cut the native
+     result by ~64% (PF 2.0 -> 1.27). Untested here (no spot BTCUSD data in the repo).
+   - Trades run ~17:01 -> 18:02 CT: inside Apex's hours (flat by 15:59 does not apply to them).
+=============================================================================}
+
+Inputs:
+    NumContracts(1),
+    MaximumSpotAgeMinutes(5),
+    MinimumFuturesClosedMinutes(30),
+    ResidualLookbackEvents(60),
+    AbsResidualZThreshold(1.5),
+    ExecutableExitHoldMinutes(60),
+    UseRollGuard(true),
+    StartDateEL(0),                 // e.g. 1180611 = 2018-06-11; 0 = no limit
+    EndDateEL(0),                   // e.g. 1240901 = 2024-09-01; 0 = no limit
+    PrintDiag(false);
+
+Variables:
+    NEx(0), NRo(0), RollIdx(0), kk(0),
+    CurDT(0), PrevDT(0), HasPrev(false), LastDoneDT(0),
+    FutPrev(0), SpotPrev(0), HasSpotPrev(false),
+    SpotNow(0), SpotDT(0), SpotAge(0), HasSpot(false),
+    GapMin(0), WarmupActive(false), PostRollSamples(0),
+    ForcedPending(false), HasFill(false), FillDT(0),
+    RBest(0), RBestEL(0), CloseBest(0), WkBest(false), RCand(0), DCand(0), Dow(0),
+    LastR(0), Eligible(false), Excl(false), FriEL(0), LagMin(0), AfterClose(0),
+    SpotGap(0), FutRet(0), ResidBps(0), RMean(0), RStd(0), Sse(0), Zv(0), ReadyZ(false),
+    NRes(0), ResHead(0);
+
+Arrays:
+    ExD[200](0), RoD[300](0), Res[500](0);
+
+Once begin
+    ExD[0] = 1180704;
+    ExD[1] = 1180903;
+    ExD[2] = 1181122;
+    ExD[3] = 1181123;
+    ExD[4] = 1181224;
+    ExD[5] = 1181225;
+    ExD[6] = 1190101;
+    ExD[7] = 1190121;
+    ExD[8] = 1190218;
+    ExD[9] = 1190419;
+    ExD[10] = 1190527;
+    ExD[11] = 1190704;
+    ExD[12] = 1190902;
+    ExD[13] = 1191224;
+    ExD[14] = 1191225;
+    ExD[15] = 1200101;
+    ExD[16] = 1200120;
+    ExD[17] = 1200217;
+    ExD[18] = 1200410;
+    ExD[19] = 1200525;
+    ExD[20] = 1200703;
+    ExD[21] = 1200907;
+    ExD[22] = 1201224;
+    ExD[23] = 1201225;
+    ExD[24] = 1210101;
+    ExD[25] = 1210118;
+    ExD[26] = 1210215;
+    ExD[27] = 1210402;
+    ExD[28] = 1210531;
+    ExD[29] = 1210705;
+    ExD[30] = 1210906;
+    ExD[31] = 1211224;
+    ExD[32] = 1220101;
+    ExD[33] = 1220117;
+    ExD[34] = 1220221;
+    ExD[35] = 1220415;
+    ExD[36] = 1220530;
+    ExD[37] = 1220704;
+    ExD[38] = 1220905;
+    ExD[39] = 1221224;
+    ExD[40] = 1221226;
+    ExD[41] = 1230102;
+    ExD[42] = 1230116;
+    ExD[43] = 1230220;
+    ExD[44] = 1230407;
+    ExD[45] = 1230529;
+    ExD[46] = 1230904;
+    ExD[47] = 1231124;
+    ExD[48] = 1231224;
+    ExD[49] = 1231225;
+    ExD[50] = 1240101;
+    ExD[51] = 1240329;
+    ExD[52] = 1240619;
+    ExD[53] = 1240704;
+    ExD[54] = 1240902;
+    ExD[55] = 1241128;
+    ExD[56] = 1241129;
+    ExD[57] = 1241224;
+    ExD[58] = 1241225;
+    ExD[59] = 1250101;
+    ExD[60] = 1250109;
+    ExD[61] = 1250120;
+    ExD[62] = 1250217;
+    ExD[63] = 1250418;
+    ExD[64] = 1250526;
+    ExD[65] = 1250619;
+    ExD[66] = 1250703;
+    ExD[67] = 1250704;
+    ExD[68] = 1250901;
+    ExD[69] = 1251127;
+    ExD[70] = 1251128;
+    ExD[71] = 1251224;
+    ExD[72] = 1251225;
+    ExD[73] = 1260101;
+    ExD[74] = 1260119;
+    ExD[75] = 1260216;
+    ExD[76] = 1260403;
+    ExD[77] = 1260525;
+    ExD[78] = 1260619;
+    ExD[79] = 1260703;
+    ExD[80] = 1260907;
+    ExD[81] = 1261126;
+    ExD[82] = 1261127;
+    ExD[83] = 1261224;
+    ExD[84] = 1261225;
+    ExD[85] = 1270101;
+    ExD[86] = 1270118;
+    ExD[87] = 1270215;
+    ExD[88] = 1270326;
+    ExD[89] = 1270531;
+    ExD[90] = 1270618;
+    ExD[91] = 1270705;
+    ExD[92] = 1270906;
+    ExD[93] = 1271125;
+    ExD[94] = 1271126;
+    ExD[95] = 1271224;
+    NEx = 96;
+    RoD[0] = 1180628;
+    RoD[1] = 1180726;
+    RoD[2] = 1180830;
+    RoD[3] = 1180927;
+    RoD[4] = 1181025;
+    RoD[5] = 1181129;
+    RoD[6] = 1181227;
+    RoD[7] = 1190124;
+    RoD[8] = 1190221;
+    RoD[9] = 1190328;
+    RoD[10] = 1190425;
+    RoD[11] = 1190530;
+    RoD[12] = 1190627;
+    RoD[13] = 1190725;
+    RoD[14] = 1190829;
+    RoD[15] = 1190926;
+    RoD[16] = 1191024;
+    RoD[17] = 1191128;
+    RoD[18] = 1191226;
+    RoD[19] = 1200130;
+    RoD[20] = 1200227;
+    RoD[21] = 1200326;
+    RoD[22] = 1200423;
+    RoD[23] = 1200528;
+    RoD[24] = 1200625;
+    RoD[25] = 1200730;
+    RoD[26] = 1200827;
+    RoD[27] = 1200924;
+    RoD[28] = 1201029;
+    RoD[29] = 1201125;
+    RoD[30] = 1201224;
+    RoD[31] = 1210128;
+    RoD[32] = 1210225;
+    RoD[33] = 1210325;
+    RoD[34] = 1210429;
+    RoD[35] = 1210527;
+    RoD[36] = 1210624;
+    RoD[37] = 1210729;
+    RoD[38] = 1210826;
+    RoD[39] = 1210923;
+    RoD[40] = 1211028;
+    RoD[41] = 1211125;
+    RoD[42] = 1211229;
+    RoD[43] = 1220126;
+    RoD[44] = 1220223;
+    RoD[45] = 1220323;
+    RoD[46] = 1220427;
+    RoD[47] = 1220525;
+    RoD[48] = 1220622;
+    RoD[49] = 1220727;
+    RoD[50] = 1220824;
+    RoD[51] = 1220928;
+    RoD[52] = 1221026;
+    RoD[53] = 1221124;
+    RoD[54] = 1221228;
+    RoD[55] = 1230125;
+    RoD[56] = 1230223;
+    RoD[57] = 1230329;
+    RoD[58] = 1230426;
+    RoD[59] = 1230525;
+    RoD[60] = 1230628;
+    RoD[61] = 1230726;
+    RoD[62] = 1230824;
+    RoD[63] = 1230927;
+    RoD[64] = 1231025;
+    RoD[65] = 1231124;
+    RoD[66] = 1231227;
+    RoD[67] = 1240124;
+    RoD[68] = 1240223;
+    RoD[69] = 1240326;
+    RoD[70] = 1240424;
+    RoD[71] = 1240524;
+    RoD[72] = 1240626;
+    RoD[73] = 1240724;
+    RoD[74] = 1240823;
+    RoD[75] = 1240926;
+    RoD[76] = 1241024;
+    RoD[77] = 1241128;
+    RoD[78] = 1241226;
+    RoD[79] = 1250130;
+    RoD[80] = 1250227;
+    RoD[81] = 1250327;
+    RoD[82] = 1250424;
+    RoD[83] = 1250529;
+    RoD[84] = 1250626;
+    RoD[85] = 1250724;
+    RoD[86] = 1250828;
+    RoD[87] = 1250925;
+    RoD[88] = 1251030;
+    RoD[89] = 1251127;
+    RoD[90] = 1251225;
+    RoD[91] = 1260129;
+    RoD[92] = 1260226;
+    RoD[93] = 1260326;
+    RoD[94] = 1260423;
+    RoD[95] = 1260528;
+    RoD[96] = 1260625;
+    RoD[97] = 1260730;
+    RoD[98] = 1260827;
+    RoD[99] = 1260924;
+    RoD[100] = 1261029;
+    RoD[101] = 1261126;
+    RoD[102] = 1261224;
+    RoD[103] = 1270128;
+    RoD[104] = 1270225;
+    RoD[105] = 1270325;
+    RoD[106] = 1270429;
+    RoD[107] = 1270527;
+    RoD[108] = 1270624;
+    RoD[109] = 1270729;
+    RoD[110] = 1270826;
+    RoD[111] = 1270923;
+    RoD[112] = 1271028;
+    RoD[113] = 1271125;
+    RoD[114] = 1271230;
+    RoD[115] = 1280127;
+    RoD[116] = 1280224;
+    RoD[117] = 1280330;
+    RoD[118] = 1280427;
+    RoD[119] = 1280525;
+    RoD[120] = 1280629;
+    RoD[121] = 1280727;
+    RoD[122] = 1280824;
+    RoD[123] = 1280928;
+    RoD[124] = 1281026;
+    RoD[125] = 1281123;
+    RoD[126] = 1281228;
+    RoD[127] = 1290125;
+    RoD[128] = 1290222;
+    RoD[129] = 1290329;
+    RoD[130] = 1290426;
+    RoD[131] = 1290524;
+    RoD[132] = 1290628;
+    RoD[133] = 1290726;
+    RoD[134] = 1290830;
+    RoD[135] = 1290927;
+    RoD[136] = 1291025;
+    RoD[137] = 1291129;
+    RoD[138] = 1291227;
+    RoD[139] = 1300124;
+    RoD[140] = 1300221;
+    RoD[141] = 1300328;
+    RoD[142] = 1300425;
+    RoD[143] = 1300530;
+    RoD[144] = 1300627;
+    RoD[145] = 1300725;
+    RoD[146] = 1300829;
+    RoD[147] = 1300926;
+    RoD[148] = 1301024;
+    RoD[149] = 1301128;
+    RoD[150] = 1301226;
+    NRo = 151;
+end;
+
+CurDT = ELDateToDateTime(Date) + ELTimeToDateTime(Time);
+
+If CurDT > LastDoneDT then begin              // once per Data1 bar (guards calculations on Data2 bars)
+    LastDoneDT = CurDT;
+
+    // ---- spot at or before this futures bar, fresh within MaximumSpotAgeMinutes ----
+    SpotNow = Close of data2;
+    SpotDT = ELDateToDateTime(Date of data2) + ELTimeToDateTime(Time of data2);
+    SpotAge = (CurDT - SpotDT) * 1440;
+    HasSpot = SpotNow > 0 and SpotAge >= -0.001 and SpotAge <= MaximumSpotAgeMinutes + 0.001;
+
+    // ---- position bookkeeping ----
+    If MarketPosition = 0 then begin
+        HasFill = false;
+        ForcedPending = false;
+    end
+    else if HasFill = false then begin
+        FillDT = CurDT;                         // the entry filled at this bar (next-bar market order)
+        HasFill = true;
+    end;
+
+    // ---- roll dates: arm the post-roll warm-up, force an exit if a position is open ----
+    If UseRollGuard and RollIdx < NRo and Date >= RoD[RollIdx] then begin
+        While RollIdx < NRo and Date >= RoD[RollIdx] begin
+            RollIdx = RollIdx + 1;
+        end;
+        WarmupActive = true;
+        PostRollSamples = 0;
+        If MarketPosition <> 0 and ForcedPending = false then ForcedPending = true;
+        If PrintDiag then Print("BTCMR ROLLOVER ", ELDateToString(Date), " ", Time:0:0);
+    end;
+    If EndDateEL > 0 and Date > EndDateEL and MarketPosition <> 0 then ForcedPending = true;
+
+    // ---- exits: forced (roll / window end) or 60 clock minutes from the fill ----
+    If MarketPosition <> 0 and (ForcedPending
+       or (HasFill and CurDT >= FillDT + ExecutableExitHoldMinutes / 1440 - 0.0000001)) then begin
+        If MarketPosition > 0 then Sell ("ExitL") next bar at market
+        else BuyToCover ("ExitS") next bar at market;
+    end;
+
+    // ---- reopen event gate ----
+    If HasPrev and MarketPosition = 0 then begin
+        GapMin = (CurDT - PrevDT) * 1440;
+        Eligible = (StartDateEL = 0 or Date >= StartDateEL) and (EndDateEL = 0 or Date <= EndDateEL);
+        RBest = 0;
+        If Eligible then begin
+            For kk = 0 to 1 begin                // candidate reopens on the previous and the current date
+                If kk = 0 then DCand = Date[1] else DCand = Date;
+                If kk = 0 or Date <> Date[1] then begin
+                    Dow = DayOfWeek(DCand);
+                    If Dow >= 0 and Dow <= 4 then begin
+                        RCand = ELDateToDateTime(DCand) + 17 / 24;
+                        If RCand > PrevDT + 0.0000001 and RCand <= CurDT + 0.0000001
+                           and (RBest = 0 or RCand < RBest) then begin
+                            RBest = RCand;
+                            RBestEL = DCand;
+                            WkBest = (Dow = 0);
+                            If WkBest then begin
+                                CloseBest = ELDateToDateTime(DCand) - 2 + 16 / 24;
+                                FriEL = JulianToDate(DateToJulian(DCand) - 2);
+                            end
+                            else CloseBest = ELDateToDateTime(DCand) + 16 / 24;
+                        end;
+                    end;
+                end;
+            end;
+            Eligible = RBest > 0 and AbsValue(RBest - LastR) > 0.0000001;
+        end;
+        If Eligible then begin
+            LastR = RBest;                       // processed once, whatever the later checks say
+            Excl = false;
+            For kk = 0 to NEx - 1 begin
+                If ExD[kk] = RBestEL or (WkBest and ExD[kk] = FriEL) then Excl = true;
+            end;
+            LagMin = (CurDT - RBest) * 1440;
+            AfterClose = (PrevDT - CloseBest) * 1440;
+            Eligible = (Excl = false) and GapMin >= MinimumFuturesClosedMinutes
+                       and LagMin >= -0.001 and LagMin <= 15.001 and AfterClose <= 15.001;
+            If Eligible and WarmupActive then begin
+                If PostRollSamples >= ResidualLookbackEvents then WarmupActive = false
+                else Eligible = false;
+            end;
+        end;
+
+        // ---- residual, Z, entry ----
+        If Eligible and HasSpotPrev and HasSpot and SpotPrev > 0 and SpotNow > 0 and FutPrev > 0 and Close > 0 then begin
+            SpotGap = SpotNow / SpotPrev - 1;
+            FutRet = Close / FutPrev - 1;
+            ResidBps = 10000 * (FutRet - SpotGap);
+            ReadyZ = NRes >= ResidualLookbackEvents;
+            Zv = 0;
+            If ReadyZ then begin
+                RMean = 0;
+                For kk = 0 to ResidualLookbackEvents - 1 begin RMean = RMean + Res[kk]; end;
+                RMean = RMean / ResidualLookbackEvents;
+                Sse = 0;
+                For kk = 0 to ResidualLookbackEvents - 1 begin Sse = Sse + Square(Res[kk] - RMean); end;
+                RStd = SquareRoot(Sse / (ResidualLookbackEvents - 1));
+                If RStd > 0.000000000001 then Zv = (ResidBps - RMean) / RStd else ReadyZ = false;
+            end;
+            Res[ResHead] = ResidBps;                    // add AFTER the baseline read (current excluded)
+            ResHead = Mod(ResHead + 1, ResidualLookbackEvents);
+            If NRes < ResidualLookbackEvents then NRes = NRes + 1;
+            If PrintDiag then
+                Print("BTCMR ", ELDateToString(Date), " ", Time:0:0, " resid ", ResidBps:0:2, " z ", Zv:0:3, " ready ", IFF(ReadyZ, 1, 0):0:0);
+            If ReadyZ and AbsValue(Zv) >= AbsResidualZThreshold then begin
+                If Zv > 0 then SellShort ("H1_S") NumContracts contracts next bar at market
+                else Buy ("H1_L") NumContracts contracts next bar at market;
+            end;
+        end;
+    end;
+
+    // ---- post-roll warm-up samples; anchors for the next bar ----
+    If HasSpot and SpotNow > 0 and Close > 0 and WarmupActive then PostRollSamples = PostRollSamples + 1;
+    FutPrev = Close;
+    SpotPrev = SpotNow;
+    HasSpotPrev = HasSpot;
+    PrevDT = CurDT;
+    HasPrev = true;
+end;
