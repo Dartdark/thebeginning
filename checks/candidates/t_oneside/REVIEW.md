@@ -50,7 +50,12 @@ frozen and the stop chosen on 2016-20 by its author (pre-registered in spirit, n
 - Evaluation (combine set 50.1%): + book 1-4 MNQ 49.9 / 50.5 / 50.9 / 50.2%; + T only 1-4 MNQ 50.6 / 50.6 / 50.3 / 50.2%;
   in place of EOS 49.3-49.5%; in place of ONB ADX30 41-43%. Median days to pass 6 throughout. No material gain (+0.8 pt
   at best, within noise).
-- Funded: pending (bootstrap running, 2026-10-24).
+- Funded (bootstrapped, 1,000 paired 2-year histories; year 1 / year 2 / blown / days to the 6th payout):
+  plan $9,354 / $12,088 / 7.0% / 259; **+ T only 1 MNQ $9,622 / $12,098 / 6.7% / 251**; + T only 2 MNQ $9,975 / $11,941 /
+  8.4%; + book 1 MNQ $9,550 / $11,974 / 7.8%; + book 2 MNQ $9,954 / $11,804 / 9.6%; book 2 MNQ in place of ONB ML $8,267 /
+  $11,192 / 14.2%. Daily correlation with the plan pieces ≤ 0.13. The fade alone at 1 MNQ is the only version that improves
+  everything (+$268 year 1, payouts ~8 days sooner, blown −0.3 pt), a small gain on a cap-bound plan (beats the plan in 50%
+  of histories: not decisive).
 
 ## Code notes
 1. No stop in the file (headline numbers need one): v2 adds it (`SetStopContract` + `SetStopLoss`, entry bar covered).
@@ -62,4 +67,8 @@ frozen and the stop chosen on 2016-20 by its author (pre-registered in spirit, n
 5. `shares` in the orders is fine for futures; `Qty` 1 = 1 NQ; for MNQ use an @MNQ chart (the file prints a warning only).
 
 ## Verdict
-Pending the funded bench (rank after it). Rebuild: book t 4.3, 9/9 years, the volume switch confirmed by the author's own cells.
+**B**, pending the independent checker and a MultiCharts report of v2. Book t 4.3 (above the 3.58 bar), DSR 0.93, 9/9
+years, both periods positive, the author's volume switch confirmed by his own falsification cells; the OS long is mostly
+Nasdaq drift (mirror short ~0). For the plans: the T fade at 1 MNQ is a small funded gain (+$268 year 1, fewer blown), no
+evaluation gain. Not straight into the plan (DSR < 0.95, no MC confirmation, checker pending). Personal portfolio: + book
+1 MNQ $21.9k → $23.3k a year, capital about the same.
