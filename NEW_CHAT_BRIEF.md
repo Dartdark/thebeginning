@@ -1,7 +1,30 @@
-# New-chat brief (updated 2026-10-19): read this first
+# New-chat brief (updated 2026-10-24): read this first
 
 Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in github.com/Dartdark/thebeginning (branch
 `claude/nq-trading-strategy-params-5h9d20`) and continue from there."*
+
+## State on 2026-10-24 (read this block first; the rest of the file is background)
+
+- **Live (Apex, combine set VB 8 / ONB ADX30 $1,100 / EOS $500 / Bridge 2):** #1 APEX-681524-01 $49,899.44 (~$398 above
+  its trailing line; user keeps plan size), #2 -02 $49,424.18. #3 150K No-Activation planned ~10/27. Gate ~mid-December
+  (live >= 75% of backtest, no drift alarm) before scaling +2 x 150K a week to 20. Funded plan unchanged (10 strategies,
+  cushion sizing table in `funded_strategies/FUNDED_PLAN.md`).
+- **Research this week:** FC 2B (A), S47 v2, OB v2, Kusho v9, S30 IBS (B), C03 (C). None improves either Apex plan
+  (funded plan near the payout cap; combine limited by drawdown vs target); replacing the 'weak' diversifiers (ES MOC,
+  NFP, EOS, LDF) or EOS / Bridge in the combine is worse. Personal-account ladder: `personal_strategies/PORTFOLIO.md`.
+- **Process changes (user):** forward log is discretionary; a candidate that clears every test incl. a plan-bench gain
+  goes straight into the plan (`DEVELOPMENT_PROCESS.md`). Forward logs (paper) from 10/26: FC 2B, S47 v2, Kusho v9
+  (roll-adjusted entry), S30 (`agents/codex/FORWARD_LOG.md`, frozen bands). Weekly Claude-Codex cross-review every
+  Friday (`agents/codex/TASK_weekly_cross_review.md`, `agents/cross_review/`); first round 2026-10-23 closed 6 items.
+- **Codex:** GPT-6.1 Sol ('Light'), builder on `codex/work`; reads / writes files only. @codex PR-mention mailbox tried
+  2026-10-24 (PR #2, draft, do not merge): connector can't see the environment; stopped (`agents/codex/STATUS.md`).
+- **Open for the user:** Sun 10/25 after 17:00 CT the `Apex Account Check` indicator on both charts (`TODO.md`); Friday
+  exports into `live/` (MC reports, order tracker CSV, 1-min data); 11/06 FC 2B re-export; optionally close PR #2 and
+  turn off Codex's automatic / security reviews for the repo.
+- **Open for Claude:** real-micro-fee rerun of the benches (routine); daily marks for Twin's overnight trades before the
+  personal account; automatic cushion sizing after the account check.
+- **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)
+  run in the session 'Scheduled jobs' (session_014DKffATms37kZigaa2xR2P), not in a new chat.
 
 ## Who / what
 
