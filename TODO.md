@@ -69,7 +69,7 @@ bottom). Times are Central (CT).
 
 ## T_ONESIDE (your file, 2026-10-24: B, checker PASS WITH CONCERNS; fade leg = small funded gain at 1 MNQ)
 
-- [ ] Optional, before any plan use (outside market hours, not on the live VPS): MultiCharts backtest of
+- [x] (2026-10-25, done: 348 / 358 fades identical, net t 3.5) Optional, before any plan use (outside market hours, not on the live VPS): MultiCharts backtest of
   [T_ONESIDE_v2.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/t_oneside/T_ONESIDE_v2.txt)
   on a **1-minute @NQ chart** (Rithmic, CME 24h session 17:00-16:00, Exchange time = CT, IOG off, Bar Magnifier off, from
   Sep 2017), inputs **UseT true, UseOS false, UseStop true, Qty 1**, **commission and slippage 0** (Claude adds costs); save as
@@ -205,7 +205,7 @@ after 15:59 CT, never with a position open.
 ## New strategies (2026-10-23)
 - [ ] **First Friday of each month (next: 11/06): re-export the FC 2B v2 MultiCharts report** (same chart and inputs) into
       `mc_reports/` for the forward log (`agents/codex/FORWARD_LOG.md`). Paper only, not traded.
-- [ ] Optional, only if you want them on the shelf: MultiCharts runs of `checks/candidates/s47_v2/S47_v2_fixed.txt` (new signal,
+- [x] (2026-10-25, done: S47 v2 710 / 714 trades, Kusho v9 3,086 / 3,152, C03 3,439 / 3,490 match; `analysis/outputs/mc_parity_2026-10-25.txt`) Optional, only if you want them on the shelf: MultiCharts runs of `checks/candidates/s47_v2/S47_v2_fixed.txt` (new signal,
       not over FC 2B) and of Kusho v9 / C03 (reports .xlsx into `mc_reports/`).
 - [ ] **Account #1 is ~$398 above its trailing line:** one full VB stop at 8 MNQ (~$1,200) would end it. Your call (plan size kept
       2026-10-22); check the Apex dashboard each morning.
