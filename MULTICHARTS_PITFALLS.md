@@ -181,3 +181,12 @@ Do it after 15:59 CT or on a weekend, with every account flat. Each line is an e
 ## "this word has already been defined" on a variable name (2026-10-25, Swing Target v3)
 `Short` is a reserved word in PowerLanguage (like `Buy`, `Sell`, `Long`): a variable named `Short` fails to compile.
 Renamed to `IsHol`. Avoid market-direction words as variable names.
+
+## Half-day sessions that a holiday list misses (2026-10-25, Codex's NQ Day Flow Six review)
+A fixed-time exit (`Time >= ExitTime`) never fires when the session ends early, so the position rides the halt and exits at
+the next session's first bar. Found in our own MC trade lists: **Monday Long 2023-07-03** (Monday before a Tuesday July 4,
+early close 12:15 CT) held 08:31 -> 17:05; **NFP Fade 2023-04-07** (payroll on Good Friday, shortened equity session) held to
+Sunday 17:05. Both are Apex violations live. Fix: Monday Long's early-close list now has July 3 and Dec 24; NFP Fade skips
+Good Friday (Easter computed in the code). Rule for every new strategy: list the early-close days it can trade (Jul 3,
+Nov Fri after Thanksgiving, Dec 24, Good Friday, Monday holidays) and skip them or exit before the early close; check the MC
+trade list for exits after 15:59 CT or on a later date.

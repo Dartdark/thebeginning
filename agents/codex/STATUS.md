@@ -90,3 +90,13 @@ GC risk-adjusted (REJECT, $20k risk budget), noise-band CODE.txt (REJECT, $2,000
 results), GC_COMBO v2 (WATCH; Claude since got the MC report: C, worse on the funded bench), Overnight TickRSV/VIX
 (WATCH: needs the code and report). Data note from NQDB2: two missing 1-2 minute bars in data/NQ_1min (2018-07-26
 13:43-13:44, 2025-06-02 11:03) plus the known 15:16-15:30 day/night seam; minor, not a defect that changes results.
+
+## Codex 2026-10-25 (codex/work db1c88b), read by Claude 2026-10-25
+- **NQ Day Flow Six (WATCH):** the plan's six intraday NQ legs (VB, ONB ML v2, Monday Long, EOS, LDF, NFP) at 1 MNQ each from
+  their MC tickets: 3,615 trades, $7.9k a year, Sharpe 2.37, adjusted t 6.77, closed-EOD DD $2.6k; 2018 −$342, 4-tick stress
+  t 5.89. Not new alpha: a recombination of legs already in the funded plan (personal REPLACE = −$67 a year, i.e. the same
+  thing). **Useful by-product:** two MC tickets held through a session halt: Monday Long 2023-07-03 (early close, out 17:05)
+  and NFP Fade 2023-04-07 (Good Friday, out Sunday 17:05). Claude confirmed both in the MC lists (only these two across all
+  nine plan lists) and fixed the code (Monday Long skips Jul 3 / Dec 24 Mondays, NFP Fade skips Good Friday); paste in
+  `TODO.md`; `MULTICHARTS_PITFALLS.md` entry added.
+- Swing Target and Overnight Rebound: already handled on the Claude branch (TIER_LIST rows; Swing Target v3 in the plans).
