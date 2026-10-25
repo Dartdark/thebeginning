@@ -27,6 +27,7 @@ bottom). Times are Central (CT).
 - [ ] When account #1 passes ($53,000): turn auto-trading off on that account.
 - [x] (2026-10-20, user: done) **Now: Rithmic copier off (or #2 removed as follower)** while set 2 auto-trades, or #2 trades double size. Copier
   waits until several funded accounts (2026-10-20).
+- [ ] **Thu 12/10 (roll): Symbol Mapping MNQZ6 -> MNQH7** on the VPS (all @MNQ lines, Rithmic + dxFeed, and the MNQZ6 line; MESZ6 -> MESH7 if ES MOC is live). Reminder scheduled for 12/10 07:00 CT.
 - [ ] **Account #3 (150K No-Activation, $249) trades from Sun 10/25 evening (user, 2026-10-25; the 17:00 CT reopen starts Monday's Apex day).** 150K evaluation stack = the
   combine set x 2.5: Vault Break 20 MNQ, Overnight Bias ADX30 `RiskPerTrade` 2750, Bridge Monday Long 5 MNQ (enters
   **Sunday 19:00 CT**, so it must be on the account by then to trade this week), EOS `RiskPerTrade` 1250 (next 11/20).
