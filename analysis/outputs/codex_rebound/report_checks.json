@@ -1,0 +1,44 @@
+{
+  "primary_hashes_match": true,
+  "price_quantity_cost_daily_sums_match": true,
+  "all_null_signal_counts_reconciled": true,
+  "all_requested_plan_contexts_recorded": true,
+  "new_economic_models": 3,
+  "prior_author_versions": 336,
+  "personal_fee_sensitivity": [
+    {
+      "cohort": "2023_plus",
+      "config": "FULL__ADD",
+      "reference": "FULL__BASE",
+      "mean_profit_delta": 2424.063779999999,
+      "simulation_profit_lo": 2293.2534197499976,
+      "simulation_profit_hi": 2548.1427095000004,
+      "mean_dd_delta": 587.9418768453475,
+      "simulation_dd_lo": 553.6976070874128,
+      "simulation_dd_hi": 623.7708505380069,
+      "historical_annual_mean_lo": 293.0881079136709,
+      "historical_annual_mean_hi": 4636.303964028778,
+      "dd95_delta": 847.7896050267746,
+      "model": "UNIFORM",
+      "fee": 1.04
+    },
+    {
+      "cohort": "2023_plus",
+      "config": "FULL__ADD",
+      "reference": "FULL__BASE",
+      "mean_profit_delta": 3873.074519999999,
+      "simulation_profit_lo": 3701.310085749999,
+      "simulation_profit_hi": 4036.9029057499993,
+      "mean_dd_delta": 642.6742032843248,
+      "simulation_dd_lo": 604.511384296017,
+      "simulation_dd_hi": 681.7224216265106,
+      "historical_annual_mean_lo": 1154.8462661870512,
+      "historical_annual_mean_hi": 6869.025064748201,
+      "dd95_delta": 880.2898298002738,
+      "model": "SUNDAY2",
+      "fee": 1.04
+    }
+  ],
+  "report_script_sha256": "dbcead884d95631675215838589f95ba25e9b1d0d06cdd7fd7a6f2d600fe86c8",
+  "final_adapter_fixed_case_rerun_financial_csv_matches": 28
+}

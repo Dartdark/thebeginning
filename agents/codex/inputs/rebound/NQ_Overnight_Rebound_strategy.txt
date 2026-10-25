@@ -1,0 +1,57 @@
+{ NQ OVERNIGHT REBOUND
+  If today's NQ cash session (8:30-15:00 CT) closed BELOW its open -> buy right after the 17:00 CT reopen,
+  sell at 03:00 CT (= 04:00 New York). Stop = StopMult x the cash session's high-low range. One trade per night.
+  Chart: NQ 1 minute, 24-HOUR session.
+  ClockShiftMin: -60 for the PC (OFB_BARS_NQ is New York time)  |  set 0 on the VPS (Chicago time).
+  With the wrong ClockShiftMin the strategy takes NO trades (it never sees the 17:01 CT reopen bar).
+  v1.1: SundayQty = contracts on Sunday-evening entries (after a down Friday). Walk-forward: Sunday trades PF ~2.0 in 2018-21 and 2023-26;
+        2x size on Sunday -> Sharpe 1.47/1.40 -> 1.55/1.45 (2018-21 / 2023-26), profit +37%, max DD -$2.4k -> -$3.5k per MNQ.
+        Set SundayQty = Qty to switch it off. }
+
+Inputs:
+    Qty(1),
+    SundayQty(2),
+    StopMult(0.5),
+    RTHOpenCT(831),
+    RTHCloseCT(1500),
+    EntryCT(1701),
+    ExitCT(300),
+    ClockShiftMin(-60);
+
+Variables:
+    RawMin(0), CTt(0), RTHo(0), RTHh(0), RTHl(0), InRTH(false),
+    DownDay(false), DayRange(0), Armed(false), LastEntryJul(0);
+
+RawMin = IntPortion(Time / 100) * 60 + Mod(Time, 100) + ClockShiftMin;
+If RawMin < 0 then RawMin = RawMin + 1440;
+If RawMin >= 1440 then RawMin = RawMin - 1440;
+CTt = IntPortion(RawMin / 60) * 100 + Mod(RawMin, 60);
+
+If CTt = RTHOpenCT then begin
+    RTHo = Open; RTHh = High; RTHl = Low; InRTH = true; Armed = false;
+end
+else if InRTH and CTt > RTHOpenCT and CTt <= RTHCloseCT then begin
+    If High > RTHh then RTHh = High;
+    If Low < RTHl then RTHl = Low;
+end;
+
+If InRTH and CTt = RTHCloseCT then begin
+    DownDay = Close < RTHo;
+    DayRange = RTHh - RTHl;
+    Armed = DownDay;
+    InRTH = false;
+end;
+
+If Armed and MarketPosition = 0 and CTt >= EntryCT and DateToJulian(Date) <> LastEntryJul then begin
+    If DayOfWeek(Date) = 0 then Buy ("ON.Sun") SundayQty contracts next bar at market
+    else Buy ("ON.L") Qty contracts next bar at market;
+    LastEntryJul = DateToJulian(Date);
+    Armed = false;
+end;
+
+SetStopContract;
+If StopMult > 0 and DayRange > 0 then SetStopLoss(StopMult * DayRange * BigPointValue);
+
+If MarketPosition = 1 and CTt >= ExitCT and CTt < RTHOpenCT then Sell ("ON.LX") all contracts next bar at market;
+
+If MarketPosition = 1 and CTt >= RTHOpenCT and CTt <= RTHCloseCT then Sell ("ON.Safety") all contracts next bar at market;

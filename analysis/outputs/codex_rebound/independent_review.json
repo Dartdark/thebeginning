@@ -1,0 +1,49 @@
+{
+  "status": "PASS WITH LIMITS: source/engine/synthetic review",
+  "source_path": "C:\\CodexRepo\\agents\\codex\\inputs\\rebound\\NQ_Overnight_Rebound_strategy.txt",
+  "source_sha256": "68b90e130b7298a98daf70933f860dd96130ab5dede66d01e86aea2d31214e41",
+  "engine_sha256": "231c5e60a09c75713a5f8f059da9db5d88db5d46fc4262f56f26b84e5f12d5db",
+  "review_script_sha256": "2857b8e64abd53e587a6356435f27f1a337d4fa82184645cbaf5caf0f3c2b128",
+  "provided_synthetic_suite": {
+    "friday_signal_enters_sunday": true,
+    "source_sunday_qty_separate_from_unit_pnl": true,
+    "source_market_entry_and_exit_next_bar": true,
+    "up_cash_day_skipped": true,
+    "entry_bar_stop_causal": true,
+    "worse_open_stop_gap": true,
+    "missing_clock_exit_uses_safety": true,
+    "next_available_bar_order": true,
+    "unclosed_position_disclosed": true,
+    "null_signal_ids_and_unclosed_ids": true,
+    "short_stop_gap": true,
+    "intended_overnight_does_not_violate_daily_flat_checkpoint": true,
+    "late_et_calendar_controls_sunday_quantity": true,
+    "delayed_safety_flags_flat_checkpoint": true
+  },
+  "independent_fixtures": {
+    "friday_signal_waits_until_sunday": true,
+    "sunday_qty_kept_separate_from_unit_pnl": true,
+    "market_entry_and_exit_use_next_native_open": true,
+    "pre_entry_low_excluded_from_mae": true,
+    "short_null_gap_stop_uses_worse_open": true,
+    "short_gap_mae_reconciles": true,
+    "ordinary_overnight_not_misclassified_as_flat_violation": true,
+    "actual_next_day_flat_crossing_detected": true,
+    "unclosed_null_has_explicit_signal_id": true
+  },
+  "research_history_loaded": false,
+  "return_outputs_inspected": false,
+  "independent_full_raw_data_replication": false,
+  "multicharts_parity_established": false,
+  "account_permission_or_promotion_verified": false,
+  "new_economic_trials": 0,
+  "assumptions": [
+    "Declared ET chart normalized to CT cache; ET calendar Date retained",
+    "Unrounded half-range stop; next available native-bar fills",
+    "Simultaneous pending time exit/stop gap priced at same open, with market label retained"
+  ],
+  "literature_verified": [
+    "Primary abstracts or first-page abstracts; not every original full paper",
+    "NY Fed July2026 follow-up flags 2021-25 European-hour drift fade including NQ/YM"
+  ]
+}
