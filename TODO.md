@@ -241,8 +241,9 @@ after 15:59 CT, never with a position open.
 
 ## Swing Target NQ v2 (your file + Codex's test, 2026-10-25: B, personal candidate; not Apex-legal as written)
 
-- [ ] Claude (on your OK): fix the holiday / early-close flat (exit and day reset also on the session's last bar, not only an exact 15:00 bar).
-- [ ] You, then: MultiCharts **List of Trades** export of the fixed code (same chart as your report, commission and slippage 0) into `mc_reports/`, for trade-by-trade parity.
+- [x] (2026-10-25) Claude: v3 = v2 + break-even + holiday skip: [NQ_Swing_Target_v3.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Swing_Target_v3.txt) ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Swing_Target_v3.txt)).
+- [ ] You: MultiCharts backtest of v3 (1-min @NQ / OFB_BARS_NQ, Exchange CT, ClockShiftMin 0, IOG off, from Dec 2017, commission and slippage 0) with **List of Trades** into `mc_reports/` (`Backtesting Strategy Performance Report _ @NQ - 1 Minute Swing Target v3.xlsx`). Expect ~600 trades 2018-26, ~36 break-even exits, no trade on holiday sessions.
+- [ ] After parity: your call on the swaps that bench better: 50K funded VB 2/1 -> 1/1 + ST 1 MNQ; 150K funded Dual Thrust 2 -> ST 2 MNQ. Not in the evaluations.
 
 ## Later
 

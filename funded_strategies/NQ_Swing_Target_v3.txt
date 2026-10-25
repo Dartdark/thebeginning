@@ -1,0 +1,123 @@
+{ =====================================================================================================
+  SWING TARGET NQ v3  -  user's v2 + break-even + holiday guard (Claude, 2026-10-25). Apex: flat by 14:59 CT every day.
+  Rule (unchanged from v2): today's RTH open inside the prior 2 days' RTH high/low -> stop orders at both levels from the
+        08:45 CT bar close; if a level broke 08:31-08:45, skip the day. First break: target 0.35 x 20-day avg RTH range,
+        stop 0.7 x avg range, flat at the close. One trade per day. Last entry 14:29 CT.
+  [BE]  New: stop to entry once the trade is 0.30 x avg range in profit (Codex's CODE_BE test, 2026-10-25: 2018-26 t 5.0 vs
+        4.65 without, 2023+ PF 1.80 vs 1.62, max DD per NQ $14.4k vs $19.5k).
+  [HOL] New: no trade on CME holiday / early-close sessions (they have no 15:00 bar, so v2 held 3 trades overnight:
+        2018-05-28, 2022-06-20, 2023-07-03). Calendar: MLK, Presidents, Good Friday, Memorial, Juneteenth (2022+),
+        July 3 / 4, Labor, Thanksgiving + the Friday after, Dec 24 / 25 / 31 and Jan 1 (and their observed weekdays).
+        Backstop: a position still open on a new date is closed at market on its first bar, and the day reset also runs on
+        the first bar of a new date, so a missing 15:00 bar can't leave the levels stale.
+  SETUP  1-minute @NQ (backtest) / MNQ (live), Exchange time (CT), CME 24h session, IOG off. ClockShiftMin 0 on CT data
+         (-60 on a New York-time chart). Load 40+ trading days before the start. Backtest with commission and slippage 0.
+  ===================================================================================================== }
+
+Inputs:
+    Qty(1),
+    Lookback(2),           { days for the swing high/low }
+    TargetMult(0.35),
+    StopMult(0.7),
+    BEMult(0.30),          { [BE] break-even trigger, x avg range; 0 = off (= v2) }
+    RangeDays(20),
+    RTHOpenCT(831),        { first RTH bar (bar close time, CT) }
+    RTHCloseCT(1500),      { last RTH bar }
+    StartCT(845),
+    LastEntryCT(1429),
+    ExitCT(1459),          { exit next bar at market = at the close }
+    SkipHolidays(true),    { [HOL] }
+    ClockShiftMin(0);
+
+Variables:
+    RawMin(0), CTt(0), InRTH(false), Armed(false), Traded(false),
+    DayH(0), DayL(0), HiRef(0), LoRef(0), AvgRng(0), nD(0), k(0), sm(0), TT0(0),
+    Yr(0), Mo(0), Dy(0), Dw(0), Short(false), EntryDt(0);
+Arrays:
+    DH[60](0), DL[60](0);
+
+RawMin = IntPortion(Time / 100) * 60 + Mod(Time, 100) + ClockShiftMin;
+If RawMin < 0 then RawMin = RawMin + 1440;
+If RawMin >= 1440 then RawMin = RawMin - 1440;
+CTt = IntPortion(RawMin / 60) * 100 + Mod(RawMin, 60);
+
+{ [HOL] backstop: a position carried onto a new date goes out at market now }
+If MarketPosition <> 0 and Date <> EntryDt and EntryDt > 0 then begin
+    Sell ("ST.LX.hol") all contracts next bar at market;
+    BuyToCover ("ST.SX.hol") all contracts next bar at market;
+end;
+
+{ [HOL] a new date that starts with RTH still marked open = the 15:00 bar was missing: store that day now }
+If InRTH and Date <> Date[1] and CTt < RTHOpenCT then begin
+    For k = 59 downto 1 begin DH[k] = DH[k - 1]; DL[k] = DL[k - 1]; end;
+    DH[0] = DayH; DL[0] = DayL; nD = nD + 1;
+    InRTH = false; Armed = false;
+end;
+
+{ ---- session start: build levels ---- }
+If CTt = RTHOpenCT then begin
+    InRTH = true; Traded = false; TT0 = TotalTrades;
+    DayH = High; DayL = Low;
+    Armed = false;
+    { [HOL] CME holiday / early-close calendar }
+    Yr = Year(Date) + 1900; Mo = Month(Date); Dy = DayOfMonth(Date); Dw = DayOfWeek(Date);
+    Short = (Mo = 1 and Dw = 1 and Dy >= 15 and Dy <= 21)                       { MLK }
+         or (Mo = 2 and Dw = 1 and Dy >= 15 and Dy <= 21)                       { Presidents }
+         or (Mo = 5 and Dw = 1 and Dy >= 25)                                    { Memorial }
+         or (Yr >= 2022 and Mo = 6 and (Dy = 19 or (Dy = 20 and Dw = 1) or (Dy = 18 and Dw = 5)))  { Juneteenth }
+         or (Mo = 7 and (Dy = 3 or Dy = 4 or (Dy = 5 and Dw = 1)))              { July 3 / 4 }
+         or (Mo = 9 and Dw = 1 and Dy <= 7)                                     { Labor }
+         or (Mo = 11 and Dw = 4 and Dy >= 22 and Dy <= 28)                      { Thanksgiving }
+         or (Mo = 11 and Dw = 5 and Dy >= 23 and Dy <= 29)                      { day after }
+         or (Mo = 12 and (Dy = 24 or Dy = 25 or Dy = 31 or (Dy = 26 and Dw = 1) or (Dy = 23 and Dw = 5)))
+         or (Mo = 1 and (Dy = 1 or (Dy = 2 and Dw = 1)));
+    If nD >= RangeDays and nD >= Lookback then begin
+        HiRef = DH[0]; LoRef = DL[0];
+        For k = 1 to Lookback - 1 begin
+            If DH[k] > HiRef then HiRef = DH[k];
+            If DL[k] < LoRef then LoRef = DL[k];
+        end;
+        sm = 0;
+        For k = 0 to RangeDays - 1 begin sm = sm + (DH[k] - DL[k]); end;
+        AvgRng = sm / RangeDays;
+        Armed = Open <= HiRef and Open >= LoRef and High <= HiRef and Low >= LoRef;
+        If SkipHolidays and Short then Armed = false;                          { [HOL] }
+    end;
+end
+else if InRTH and CTt > RTHOpenCT and CTt <= RTHCloseCT then begin   { [HOL] RTH bars only }
+    If High > DayH then DayH = High;
+    If Low < DayL then DayL = Low;
+end;
+
+If TotalTrades > TT0 or MarketPosition <> 0 then Traded = true;
+If MarketPosition <> 0 and MarketPosition[1] = 0 then EntryDt = Date;
+
+{ a level broken before StartCT cancels the day }
+If InRTH and Armed and StartCT > 0 and CTt <= StartCT and (High > HiRef or Low < LoRef) then Armed = false;
+
+{ ---- entries: stop orders at both levels ---- }
+If InRTH and Armed and Traded = false and MarketPosition = 0 and CTt >= MaxList(RTHOpenCT, StartCT) and CTt <= LastEntryCT then begin
+    Buy ("ST.L") Qty contracts next bar at HiRef stop;
+    SellShort ("ST.S") Qty contracts next bar at LoRef stop;
+end;
+
+{ ---- target, stop and break-even (work intrabar, also on the entry bar) ---- }
+SetStopContract;
+If AvgRng > 0 then begin
+    SetProfitTarget(TargetMult * AvgRng * BigPointValue);
+    SetStopLoss(StopMult * AvgRng * BigPointValue);
+    If BEMult > 0 then SetBreakEven(BEMult * AvgRng * BigPointValue);   { [BE] }
+end;
+
+{ ---- flat at the close ---- }
+If MarketPosition <> 0 and CTt >= ExitCT and CTt <= RTHCloseCT then begin
+    Sell ("ST.LX") all contracts next bar at market;
+    BuyToCover ("ST.SX") all contracts next bar at market;
+end;
+
+{ ---- end of RTH: store today's high/low ---- }
+If InRTH and CTt = RTHCloseCT then begin
+    For k = 59 downto 1 begin DH[k] = DH[k - 1]; DL[k] = DL[k - 1]; end;
+    DH[0] = DayH; DL[0] = DayL; nD = nD + 1;
+    InRTH = false; Armed = false;
+end;
