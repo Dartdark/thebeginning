@@ -1,4 +1,4 @@
-# Personal-account portfolio (2026-10-23; Dual Thrust, Kusho v9, S47 v2, S30 IBS and Overnight Tick / VIX added 2026-10-24; Overnight Anomaly replaced; BB_MRM added and removed 2026-10-25; Swing Target v3 added 2026-10-25)
+# Personal-account portfolio (2026-10-23; Dual Thrust, Kusho v9, S47 v2, S30 IBS and Overnight Tick / VIX added 2026-10-24; Overnight Anomaly replaced; BB_MRM added and removed 2026-10-25; Swing Target v3 and PAPERTREND v2 added 2026-10-25)
 
 From everything tested so far; numbers from `analysis/personal_portfolio.py` (output in
 `analysis/outputs/personal_portfolio_output.txt`). Backtest 2018-01 → 2026-10, after costs, micro commissions charged at
@@ -24,14 +24,18 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | EOS | MNQ | $548 | $798 | $746 | 0.83 | live on Apex (combine) |
 | ES MOC | MES | $342 | $172 | $701 | 1.09 | funded plan |
 | Swing Target v3 (prior 2-day RTH level break, target 0.35 / stop 0.7 x range, BE, flat 14:59) | MNQ | $1,932 | $2,642 | $1,446 | 1.43 | B, MC-confirmed (t 4.55); personal (user 2026-10-25) + funded swaps; `funded_strategies/NQ_Swing_Target_v3.txt` |
+| PAPERTREND v2 (RTH open ± 0.5 ATR break at 15-min marks, gap side only, flat 14:55, 2 x ATR disaster stop) | MNQ | $2,453 | $2,528 | $2,647 | 1.42 | B, MC-confirmed (Claude's code, t 4.35); personal only (user 2026-10-25); `checks/candidates/papertrend/PAPERTREND_v2_claude.txt` |
 | NFP Fade | MNQ | $291 | $467 | $826 | 0.60 | funded plan |
 
-## Whole portfolio, every piece at 1 micro (18 pieces since 2026-10-25: Swing Target in, BB_MRM out)
-- **$39,000 a year**, every year positive.
-- Sharpe 3.12, Sortino 6.71, PF 1.89, Calmar 6.2, Ulcer 0.92; max DD $6,256; worst month −$2,230; 10% losing months.
-- Monte Carlo, 1 year: p5 $21,600 / p50 $38,200 / p95 $57,500; P(losing year) 0.0%; max DD p50 $4,490 / p95 $6,890;
-  return / DD 8.5.
-- **Needs about $34,400** to keep the 1-year p95 drawdown at 20% of the account.
+## Whole portfolio, every piece at 1 micro (19 pieces since 2026-10-25: Swing Target and PAPERTREND in, BB_MRM out)
+- **$41,500 a year**, every year positive.
+- Sharpe 3.15, Sortino 6.88, PF 1.90, Calmar 6.3, Ulcer 0.90; max DD $6,592; worst month −$2,739; 13% losing months.
+- Monte Carlo, 1 year: p5 $22,800 / p50 $40,500 / p95 $61,100; P(losing year) 0.0%; max DD p50 $4,490 / p95 $7,280;
+  return / DD 9.0.
+- **Needs about $36,400** to keep the 1-year p95 drawdown at 20% of the account.
+- **PAPERTREND's effect (18 → 19 pieces, user 2026-10-25, `analysis/papertrend_personal18.py`):** +$2,450 a year, Sharpe 3.12 → 3.15,
+  return/DD 8.5 → 9.0, capital $34.4k → $36.4k; corr with the book +0.31 (Swing Target +0.12, Dual Thrust +0.18). In place of
+  Dual Thrust 8.3, of Swing Target 8.75: an addition, not a swap.
 - **Swing Target's effect (17 → 18 pieces, user 2026-10-25):** +$1,900 a year, Sharpe 3.04 → 3.12, return/DD 8.3 → 8.5, max DD
   $5,903 → $6,256, capital $33.6k → $34.4k (MultiCharts trades; Codex's ledger gave 8.6). Corr with the rest +0.20 but it loses
   on the book's bad days (Codex): return, not protection.
@@ -115,9 +119,9 @@ Review this list whenever the account steps up a ladder row: re-test each at tha
 ## Conservative / current / aggressive versions (user, 2026-10-25; `analysis/personal_variants.py`)
 | Version | Pieces / micros | $ a year | Sharpe | Max DD | MC DD p95 | Return/DD | Capital (DD p95 / 0.2) |
 |---|---|---|---|---|---|---|---|
-| Conservative: proven pieces only (no forward-log pieces S30, Kusho, S47, FC 2B; Dual Thrust kept out here; Swing Target in) | 13 / 13 | $22.0k | 3.21 | $5.7k | $4.5k | 8.9 | ~$23k |
-| Current (Swing Target in, BB_MRM out, 2026-10-25) | 18 / 18 | $39.0k | 3.12 | $6.3k | $6.9k | 8.5 | ~$34k |
-| Aggressive: 2 micros on the five pieces with Sharpe >= 1.4 (Twin, Overnight Tick, Kusho, Overnight Bias ML, Dual Thrust) | 18 / 23 | $53.3k | 3.27 | $6.6k | $8.0k | 9.7 | ~$40k |
+| Conservative: proven pieces only (no forward-log pieces S30, Kusho, S47, FC 2B; Dual Thrust kept out here; Swing Target and PAPERTREND in) | 14 / 14 | $24.4k | 3.20 | $5.4k | $4.6k | 9.0 | ~$23k |
+| Current (Swing Target, PAPERTREND in, BB_MRM out, 2026-10-25) | 19 / 19 | $41.5k | 3.15 | $6.6k | $7.3k | 9.0 | ~$36k |
+| Aggressive: 2 micros on the five pieces with Sharpe >= 1.4 (Twin, Overnight Tick, Kusho, Overnight Bias ML, Dual Thrust) | 19 / 24 | $55.8k | 3.29 | $7.3k | $8.3k | 10.0 | ~$41k |
 **User 2026-10-25: Swing Target stays at 1 MNQ; plans to switch to the aggressive version eventually.** Keep the aggressive row current whenever the book changes, and before the switch re-check its five 2-micro pieces on live and forward-log results, not only backtest Sharpe.
 The aggressive weights pick pieces by their backtest Sharpe, so part of its edge over 'current' is hindsight; two of the five
 (Kusho, Dual Thrust) are not live-proven yet. Pieces promote from conservative to current as they clear the forward log.

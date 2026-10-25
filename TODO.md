@@ -125,7 +125,7 @@ place of Overnight Anomaly). Nothing to do until a funded account starts; the VI
 
 - [x] (2026-10-25, done: 556 / 558 rebuild trades identical, +13 roll days the code can't see; t 4.35) (2026-10-25: Claude wrote the code from the spec, `checks/candidates/papertrend/PAPERTREND_v2_claude.txt`; backtest it on @NQ 5-min, Exchange CT, commission / slippage 0, and export the List of Trades as `...@NQ - 5 Minutes PAPERTREND v2 claude.xlsx`) Optional (outside market hours, not on the live VPS): export the PAPERTREND v2 **List of Trades** from MultiCharts (the report you sent) into
   `mc_reports/` and send the code. The Python rebuild trades 582 times to 2026-08-14 vs the report's 535; the trade list shows where they differ.
-- [ ] Your call: add it to the personal plan at 1 micro (+$2.3k a year, return/DD 8.3 -> 8.7) once the trade lists agree. Not for Apex (benches worse).
+- [x] (2026-10-25, user: yes; added at 1 MNQ with Claude's code, return/DD 8.5 -> 9.0) Your call: add it to the personal plan at 1 micro (+$2.3k a year, return/DD 8.3 -> 8.7) once the trade lists agree. Not for Apex (benches worse).
   If you trade it: add a 2 x ATR disaster stop (costs nothing in the backtest) and keep the 14:55 CT flatten exact.
 
 ## BB_MRM (your file, 2026-10-25: C after the MultiCharts report; OUT of the personal plan (user 2026-10-25), paper forward log from 10/26)
@@ -243,6 +243,7 @@ after 15:59 CT, never with a position open.
 
 - [x] (2026-10-25) Claude: v3 = v2 + break-even + holiday skip: [NQ_Swing_Target_v3.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Swing_Target_v3.txt) ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Swing_Target_v3.txt)).
 - [x] (2026-10-25, done: t 4.55, 0 overnight holds, matches Codex's ledger) You: MultiCharts backtest of v3 (1-min @NQ / OFB_BARS_NQ, Exchange CT, ClockShiftMin 0, IOG off, from Dec 2017, commission and slippage 0) with **List of Trades** into `mc_reports/` (`Backtesting Strategy Performance Report _ @NQ - 1 Minute Swing Target v3.xlsx`). Expect ~600 trades 2018-26, ~36 break-even exits, no trade on holiday sessions.
+- [ ] **Personal account (when it starts): PAPERTREND v2 at `Qty` 1** ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/papertrend/PAPERTREND_v2_claude.txt)), 5-min MNQ, Exchange time, IOG off, `StopATRMult` 2, logger tag `PT`.
 - [ ] **Personal account (when it starts): Swing Target v3 at `Qty` 1**, 1-min MNQ, Exchange time, IOG off, ClockShiftMin 0, logger tag `ST` (user 2026-10-25).
 - [ ] **When a 50K account is funded:** Vault Break `NumContracts` 1 (was 2), `FlaggedContracts` 1, + Swing Target v3 `Qty` 1. **150K funded:** Swing Target `Qty` 2 instead of Dual Thrust (`FUNDED_PLAN.md`).
 - [x] (2026-10-25, user: yes) After parity: your call on the swaps that bench better: 50K funded VB 2/1 -> 1/1 + ST 1 MNQ; 150K funded Dual Thrust 2 -> ST 2 MNQ. Not in the evaluations.

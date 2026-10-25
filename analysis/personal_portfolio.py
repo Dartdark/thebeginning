@@ -93,12 +93,14 @@ if __name__ == "__main__":
     # overstated it by 49 extra trades. Forward log only (agents/codex/FORWARD_LOG.md).
     # Swing Target v3 (MultiCharts List of Trades, per NQ after $17.25): added 2026-10-25 (user)
     stg, nstg = from_trades("checks/candidates/swing_target/mc_trades_v3.csv", "SwingTarget")
-    P = pd.concat([p, fc, tw, otv, dth, ku, s47, s30, stg], axis=1)
+    # PAPERTREND v2 (MultiCharts List of Trades of Claude's PowerLanguage, per NQ after $17.25): added 2026-10-25 (user)
+    ptr, nptr = from_trades("checks/candidates/papertrend/mc_trades_claude.csv", "PaperTrend")
+    P = pd.concat([p, fc, tw, otv, dth, ku, s47, s30, stg, ptr], axis=1)
     names = {"VaultBreak": "Vault Break", "OvernightBiasML": "ONB ML", "MondayLong": "Monday Long", "ExpirationOpenShort": "EOS",
              "LateDayFlow": "Late-Day Flow", "NFPFade": "NFP Fade", "BridgeMondayLong": "Bridge Monday", "CLSundayFade_perMCL": "CL Sunday (MCL)",
              "ESMOCFollow_perMES": "ES MOC (MES)", "RelativeStrength": "Relative Strength", "FC2B": "FC 2B", "TwinContinuation": "Twin Continuation",
              "OvernightTick": "Overnight Tick / VIX", "DualThrust": "Dual Thrust",
-             "Kusho": "Kusho v9", "S47": "S47 v2", "S30": "S30 IBS (NQ + ES)", "BB_MRM": "BB_MRM (open mean reversion)", "SwingTarget": "Swing Target v3"}
+             "Kusho": "Kusho v9", "S47": "S47 v2", "S30": "S30 IBS (NQ + ES)", "BB_MRM": "BB_MRM (open mean reversion)", "SwingTarget": "Swing Target v3", "PaperTrend": "PAPERTREND v2"}
     yrs = len(P) / 252
     print(f"\n1. Pieces at 1 micro each, {days.min().date()} -> {days.max().date()} ({yrs:.1f} years), after micro costs:")
     rows = []
@@ -130,8 +132,8 @@ if __name__ == "__main__":
     need = dm["dd_p95"] / 0.20
     print(f"   capital for 1x at the 20% rule: ${need:,.0f}")
 
-    t17 = tot - P["SwingTarget"]; d17 = MC.daily_mc(t17.values, horizon=252, n=5000, block=20, trail=1e12); e17 = t17.cumsum()   # BB_MRM removed 2026-10-25
-    print(f"   before Swing Target (17 pieces): ${t17.sum() / yrs:,.0f} a year, Sharpe {t17.mean() / t17.std() * np.sqrt(252):.2f}, "
+    t17 = tot - P["SwingTarget"] - P["PaperTrend"]; d17 = MC.daily_mc(t17.values, horizon=252, n=5000, block=20, trail=1e12); e17 = t17.cumsum()   # BB_MRM removed 2026-10-25
+    print(f"   before Swing Target + PAPERTREND (17 pieces): ${t17.sum() / yrs:,.0f} a year, Sharpe {t17.mean() / t17.std() * np.sqrt(252):.2f}, "
           f"max DD ${-(e17 - e17.cummax()).min():,.0f}, MC p50 ${d17['pnl_p50']:,.0f}, DD p95 ${d17['dd_p95']:,.0f}, return/DD {d17['ret_dd']:.1f}, "
           f"capital at the 20% rule ${d17['dd_p95'] / 0.20:,.0f}")
     t16 = t17 - P["S30"]; d16 = MC.daily_mc(t16.values, horizon=252, n=5000, block=20, trail=1e12); e16 = t16.cumsum()
