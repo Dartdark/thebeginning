@@ -24,6 +24,13 @@ SOURCES = {
     'databento_arca_schema.html': 'https://databento.com/docs/datasets/arcx-pillar',
     'bmll_sample_index.html': 'https://www.bmlltech.com/products/bmll-data-feed/documentation',
     'massive_noi_schema.html': 'https://massive.com/docs/websocket/stocks/imbalances',
+    'databento_pricing_20261025.html': 'https://databento.com/pricing',
+    'databento_cost_docs_20261025.html': 'https://databento.com/docs/api-reference-historical/metadata/metadata-get-cost',
+    'databento_range_docs_20261025.html': 'https://databento.com/docs/api-reference-historical/metadata/metadata-get-dataset-range',
+    'databento_auction_example_20261025.html': 'https://databento.com/docs/examples/equities/auction-imbalance',
+    'databento_clock_issue_20261025.html': 'https://issues.databento.com/roadmap/arcxpillarxnyspillarxasepillar-imbalance-auction-timestamp-reported-in-localtime-instead-of-utc-prior-to-2025-11-02',
+    'bmll_coverage_20261025.html': 'https://www.bmlltech.com/bmll-data-and-analytics',
+    'nyse_historical_pricing_oct2026.pdf': 'https://www.nyse.com/publicdocs/nyse/data/NYSE_Historical_Market_Data_Pricing.pdf',
 }
 FIXTURE_HASHES = {
     'databento_test_data.imbalance.dbn': 'bbdec3ce93e1aea8f2c971aa55dcccd765fd82579c782d5650bfa99cfff7fc8e',

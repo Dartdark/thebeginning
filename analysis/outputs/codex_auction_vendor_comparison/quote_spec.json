@@ -1,0 +1,104 @@
+{
+  "status": "NEEDS DATA",
+  "return_trials": 0,
+  "api_calls_executed": 0,
+  "credentials_read": false,
+  "accounts_created": false,
+  "purchases": false,
+  "scope": "unexecuted metadata request specifications only",
+  "requests": [
+    {
+      "method": "metadata.get_dataset_range",
+      "parameters": {
+        "dataset": "ARCX.PILLAR"
+      },
+      "purpose": "Inspect schema.imbalance start/end; not proof of SPY completeness"
+    },
+    {
+      "method": "metadata.get_dataset_condition",
+      "parameters": {
+        "dataset": "ARCX.PILLAR",
+        "start_date": "2018-01-01",
+        "end_date": "2022-12-31"
+      },
+      "purpose": "Dataset-level quality calendar; not a SPY event census"
+    },
+    {
+      "method": "metadata.get_record_count",
+      "parameters": {
+        "dataset": "ARCX.PILLAR",
+        "symbols": [
+          "SPY"
+        ],
+        "schema": "imbalance",
+        "stype_in": "raw_symbol",
+        "start": "2018-01-01T00:00:00Z",
+        "end": "2023-01-01T00:00:00Z"
+      },
+      "scope": "design_all_day",
+      "purpose": "Estimate only, not a download or paid batch job"
+    },
+    {
+      "method": "metadata.get_cost",
+      "parameters": {
+        "dataset": "ARCX.PILLAR",
+        "symbols": [
+          "SPY"
+        ],
+        "schema": "imbalance",
+        "stype_in": "raw_symbol",
+        "start": "2018-01-01T00:00:00Z",
+        "end": "2023-01-01T00:00:00Z"
+      },
+      "scope": "design_all_day",
+      "purpose": "Estimate only, not a download or paid batch job"
+    },
+    {
+      "method": "metadata.get_record_count",
+      "parameters": {
+        "dataset": "ARCX.PILLAR",
+        "symbols": [
+          "SPY"
+        ],
+        "schema": "imbalance",
+        "stype_in": "raw_symbol",
+        "start": "2026-07-01T00:00:00Z",
+        "end": "2026-07-03T00:00:00Z"
+      },
+      "scope": "matched_public_sample_days",
+      "purpose": "Estimate only, not a download or paid batch job"
+    },
+    {
+      "method": "metadata.get_cost",
+      "parameters": {
+        "dataset": "ARCX.PILLAR",
+        "symbols": [
+          "SPY"
+        ],
+        "schema": "imbalance",
+        "stype_in": "raw_symbol",
+        "start": "2026-07-01T00:00:00Z",
+        "end": "2026-07-03T00:00:00Z"
+      },
+      "scope": "matched_public_sample_days",
+      "purpose": "Estimate only, not a download or paid batch job"
+    }
+  ],
+  "periods_are_acquisition_scopes_not_strategy_parameters": true,
+  "time_scope": "All-day SPY for simple estimates; intraday cuts need calendar/DST-aware requests",
+  "price_scope": "No verified Databento, BMLL or SpiderRock SPY quote",
+  "nyse_commercial_reference": {
+    "per_content_month": 500,
+    "design_months": 60,
+    "design_2018_2022": 30000
+  },
+  "quote_requirements": [
+    "SPY listing on Arca; original disseminated closing updates, not final snapshots",
+    "History beginning 2018-01-01; enumerate unavailable months before any purchase",
+    "All-in one-time price, minimum spend, subscription, licence, retention and research-use rights",
+    "Exchange and vendor capture timestamps; customer receipt is a different clock",
+    "Sequence fields, historical mappings, quantity basis and auction-time timezone corrections",
+    "Separate cost for SPY auction results/corrections, SPY NBBO and ES executable quotes",
+    "Free comparison sample if offered; no automatic sample purchase or trial"
+  ]
+}
