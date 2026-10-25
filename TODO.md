@@ -239,6 +239,11 @@ after 15:59 CT, never with a position open.
   commit · push (sync.ps1 only adds journal/ and live/).
 - [ ] **Send Codex the review message** for the LDF flow-sizing plan (in `agents/codex/STATUS.md`, 'Next message for Codex').
 
+## Swing Target NQ v2 (your file + Codex's test, 2026-10-25: B, personal candidate; not Apex-legal as written)
+
+- [ ] Claude (on your OK): fix the holiday / early-close flat (exit and day reset also on the session's last bar, not only an exact 15:00 bar).
+- [ ] You, then: MultiCharts **List of Trades** export of the fixed code (same chart as your report, commission and slippage 0) into `mc_reports/`, for trade-by-trade parity.
+
 ## Later
 
 - [ ] **Export 1-minute data for NG, ZC and ZS** (natural gas, corn, soybeans), Jan 2018 to now, same way as the CL / ZN files
