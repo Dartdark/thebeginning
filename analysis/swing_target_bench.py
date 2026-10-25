@@ -88,7 +88,7 @@ if __name__ == "__main__":
         P, days, ft = gg["P"], gg["days"], gg["from_trades"]
         g = pickle.load(open(SP + "g24.pkl", "rb")); t = pt_trades(g)
         o, _ = ft(None, "ST", t[["date", "net"]]); tot = P.sum(axis=1); yrs = len(days) / 252; dt = P["DualThrust"]
-        print(f"\nE. Personal portfolio (1 micro each; PT alone ${o.sum() / yrs:,.0f} a year, corr with the rest {np.corrcoef(o, tot)[0, 1]:+.2f}, "
+        print(f"\nE. Personal portfolio (1 micro each; ST alone ${o.sum() / yrs:,.0f} a year, corr with the rest {np.corrcoef(o, tot)[0, 1]:+.2f}, "
               f"with Dual Thrust {np.corrcoef(o, dt)[0, 1]:+.2f}):")
         for nm, x in (("17 pieces (now)", tot), ("+ ST", tot + o), ("Dual Thrust -> ST", tot - dt + o), ("+ ST x 2", tot + 2 * o)):
             d = MC.daily_mc(x.values, horizon=252, n=5000, block=20, trail=1e12); e = x.cumsum()
