@@ -163,3 +163,16 @@ the trades converted to MNQ-equivalent dollars, and a MultiCharts version only f
 goes in `TIER_LIST.md`.
 
 Round 1 scripts: `analysis/s_rank_<symbol>_round1_test.py` (+ `_output.txt`).
+
+## Idea-to-strategy process (user, 2026-10-25: "an actual process", not testing ideas that will most likely fail)
+Target trade count for S: 100-200 a year (150 aim). Reason: t >= 4.5 over ~9 years needs ~900 trades at a per-trade
+mean/sd of 0.15, ~1,400 at 0.12; and ~$20k a year per NQ at 150 trades = ~$130 a trade, well above the $17 cost.
+| Stage | What | Gate |
+|---|---|---|
+| 0 Idea card (user + Claude) | who is forced, when, direction, why not arbitraged, what would kill it | no clear cause -> time -> direction sentence: drop |
+| 1 Look first | average price path around the time on event vs normal days; no trading rule | no visible push, or normal days the same: drop |
+| 2 Rule from the shape | one entry, one exit, <= 3 variants, pre-registered, built on 2018-22 only | best t < 2.5 on 2018-22: drop |
+| 3 One holdout look | 2023-26, costs, placebos, longs / shorts | holdout fails: drop, no re-tuning |
+| 4 Independent check | strategy-checker, Monte Carlo, plan benches | as DEVELOPMENT_PROCESS |
+| 5 Live path | MultiCharts match -> forward log -> incubation | as DEVELOPMENT_PROCESS |
+Every idea, pass or fail, gets a TIER_LIST row with what was learned. Idea cards live in `checks/ideas/`.
