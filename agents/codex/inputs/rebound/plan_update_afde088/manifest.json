@@ -1,0 +1,107 @@
+{
+  "reference": "afde088b8b64cf939ff1b325a27eea041cf62c70",
+  "previous_reference": "e1a94f7108d12e33cb27fdcc57a4b0722d1950e9",
+  "files": {
+    "personal_strategies/PORTFOLIO.md": {
+      "git_blob": "d175bfe07f183f05c05c3d56c88eb384c85821ee",
+      "sha256": "3c206c6748ed2f2f103e504e4f2a1cb005bb2b76691f69e3e2eb04e63b61a578"
+    },
+    "analysis/personal_portfolio.py": {
+      "git_blob": "80d90aca24b413957ea32721334bf08191d8f162",
+      "sha256": "58af6a2338b0a3b819d30351911197bc5e498879169d41e5839b17fca8c08c97"
+    },
+    "analysis/personal_variants.py": {
+      "git_blob": "32a6d57deffc17dbef03c95acdde558834cd8aa2",
+      "sha256": "57e037746b13471d3f3d18b5472b62dbdd21cc86e877a7cf9ec084278e2d92fa"
+    },
+    "analysis/outputs/personal_portfolio_output.txt": {
+      "git_blob": "33e8b20b0b5a5813d7ab704371b2ef5d5ff8f821",
+      "sha256": "60dc29c21c81e383a9ac6ea51882cc041d75369df73c30204b3b65dd8ba08a8d"
+    },
+    "analysis/outputs/personal_variants_output.txt": {
+      "git_blob": "d56a87bc2754cb545b8fb9b2ee18cb589084f5d2",
+      "sha256": "125b748e9ed10c8b341f9be1003e5180aa49e29eb92dbb2918ac0c3f6fd71927"
+    },
+    "funded_strategies/FUNDED_PLAN.md": {
+      "git_blob": "5004629c7913bf92591cf14ef3e2a42337fa9831",
+      "sha256": "d636f636d373f4c8eb48b99b34d747c6a0b593709f4ea17d1b0d09964aa47f88"
+    },
+    "checks/candidates/swing_target/mc_trades_v3.csv": {
+      "git_blob": "99f2ecd2be24d8f5523c1deb31d9a0638f036de6",
+      "sha256": "ee4776e1fe7abc32ff42074579836bfe42301b24e986cf7f85f1e9231f75eb34"
+    },
+    "checks/candidates/papertrend/mc_trades_claude.csv": {
+      "git_blob": "52ebfaa15fe121476ea9a0536c59af8152725dea",
+      "sha256": "2d4053c53630e2b6f13846e96a25488f359cea30f5bc9236120e8441eee60039"
+    }
+  },
+  "unchanged_personal_inputs": [
+    {
+      "path": "analysis/overnight_tick_bench.py",
+      "git_blob": "8b467ca7625354cb03d0b84a8f3b6f6eff0d1402"
+    },
+    {
+      "path": "agents/tasks/plan_daily_pnl.csv",
+      "git_blob": "2b70b3d75bf2b648d461afd737c8b80894ed5775"
+    },
+    {
+      "path": "checks/candidates/fc_2b/trades.csv",
+      "git_blob": "4ea406914a4547060f557fe8561fa9b2f856a3ae"
+    },
+    {
+      "path": "checks/candidates/twin_continuation/trades.csv",
+      "git_blob": "b9ccbb29c0d3369b93717b8f409e0f7eb206a2d6"
+    },
+    {
+      "path": "checks/candidates/dual_thrust/trades.csv",
+      "git_blob": "8afe762e4fa8508c0a6084f7b7b63e95ba5ac335"
+    },
+    {
+      "path": "checks/candidates/kusho/python_trades_v9_rolladj.csv",
+      "git_blob": "ebd56eb99bac40bacff99105bf93251bee722e25"
+    },
+    {
+      "path": "checks/candidates/s47_v2/python_trades_v2.csv",
+      "git_blob": "553df091a3ffb9b8b55d48b42125e8215f862d1b"
+    },
+    {
+      "path": "checks/candidates/s30_ibs/daily_nq_es_per_micro.csv",
+      "git_blob": "5da22ddd51b9455ac26ec2cfb3a52d84ac30d045"
+    },
+    {
+      "path": "checks/candidates/overnight_tick/trades.csv",
+      "git_blob": "c6ae105a9c549242bb7fa5e06a62a3744bced321"
+    },
+    {
+      "path": "checks/candidates/overnight_tick/python_trades.csv",
+      "git_blob": "12dfc58fb9747a035255ea7f85980e5332f440ca"
+    },
+    {
+      "path": "checks/candidates/bb_mrm/python_trades.csv",
+      "git_blob": "50643c93a6ee12ab30ead8894e8fff56b3a50bfd"
+    }
+  ],
+  "returns_computed": false,
+  "starter_sets_unchanged": true,
+  "published_booking_helpers_unchanged": true,
+  "roster_change": "Existing17 unchanged; add SwingTarget v3 and PAPERTREND v2 at1MNQ each",
+  "new_candidate_replays": 0,
+  "limitations": [
+    "Crossing calendar midnight is not crossing the16:00\u201317:00 CME session break. Intended17\u219203 nights are within one account day.",
+    "Old builder overnight wording is interpreted through the currently adopted OT17\u219203 plan; this is a fixed research-policy assumption, not fresh broker-rule verification.",
+    "Prepared Bridge Monday starts at Monday00:00 and omits Sunday19\u2192midnight adverse exposure. It cannot certify Sunday2 joint risk.",
+    "Prepared CLS/OT use whole-day constant adverse proxies that can invent simultaneous positions. No material Apex benefit is claimed from them.",
+    "OT order-flow history ends2026-07-07; later zeros are incomplete baseline evidence, not verified no-trade days.",
+    "Personal preserves published19-leg fees/marks: per-nonzero-day plan commissions undercount some reentries, MOC/S30 retain inherited approximations, Twin is the marked v1 checker ledger.",
+    "Personal daily drawdown does not certify intraday margin/liquidation safety or hedge delivery before an account breach.",
+    "SwingTarget/PaperTrend preserve the published from_trades convention: exits before the first personal date book to the first date, not dropped. Those early trades are disclosed separately.",
+    "Published added MC ledgers already subtract17.25/NQ:7.25 commission plus two adverse ticks. Micro repricing adds only native commission minus.725; no second slippage charge.",
+    "Current19 common-scale roster is fixed as of afde088. A planned future aggressive allocation is not adopted by this comparison."
+  ],
+  "funded_roster_changes": {
+    "50K_funded": "VB2/1 becomes1/1 plus SwingTarget1MNQ",
+    "150K_funded": "DualThrust2MNQ replaced by SwingTarget2MNQ",
+    "evaluations": "unchanged"
+  },
+  "funded_evaluation_status": "LIMITED_BASELINE_CHRONOLOGY; no joint account simulation or pass/payout claim"
+}

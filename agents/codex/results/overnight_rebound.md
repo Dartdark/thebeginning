@@ -2,15 +2,15 @@
 
 Summary: 1,004 source tickets; full PF 1.27 UNIFORM / 1.33 SUNDAY2, materially weaker than supplied claims.
 Full t 2.59/2.90 fails the 3.61 ranked-item bar and 3.79 sensitivity for 336 author versions; direction is stronger than random, filter benefit unproven.
-Current 17-leg personal ADD raises 2023+ mean annual profit by $2,402/$3,847, but DD95 by $842/$861; portfolio return/DD does not improve.
+Current 19-leg personal ADD raises 2023+ mean annual profit by $2,402/$3,847, but DD95 by $630/$730; both reduce median profit/DD95.
 All 50K/150K evaluation/funded comparisons are LIMITED by missing causal joint overnight baseline paths, not by legal calendar-date crossings.
 821 unobserved held minutes, cache timing differences and absent original MC trades prevent exact parity. No live/ranking/allocation change.
 
 Plan: [`overnight_rebound.md`](../plans/overnight_rebound.md), **d94d815** committed before new returns.
 Models: UNIFORM down-day Qty1, source-default SUNDAY2, ALLNIGHTS unfiltered control (not selectable).
 Prior search: author336 versions plus unknown filters. No new parameter grid or rescue optimization.
-Scripts: `analysis/codex_rebound_run.py`, `codex_rebound_engine.py`, `codex_rebound_diagnostics.py`, `codex_rebound_accounts.py`, `codex_rebound_report.py`.
-Source/snapshots: `agents/codex/inputs/rebound/`; outputs: `analysis/outputs/codex_rebound/`. Current17-leg baseline pinned toe1a94f7.
+Scripts: `analysis/codex_rebound_run.py`, `codex_rebound_engine.py`, `codex_rebound_diagnostics.py`, `codex_rebound_accounts.py`, `codex_rebound_personal_update.py`, `codex_rebound_report.py`.
+Source/snapshots: `agents/codex/inputs/rebound/`; outputs: `analysis/outputs/codex_rebound/`. Current19-leg baseline pinned toafde088 under committed refresh80fff8a; initial17-leg results ate1a94f7 are preserved.
 
 ## Rule and clock as replayed
 
@@ -167,8 +167,11 @@ This is not an independent end-to-end raw-data replica or exact MC confirmation.
 
 ## Current personal portfolio and Apex placement
 
-Current17-leg book andA–D starters pinned toe1a94f7; no BB_MRM. Model/base fees consistent at$1.24, with$1.04 sensitivity.
+Current19-leg book andA–D starters pinned toafde088; no BB_MRM, with adopted SwingTargetv3 and PAPERTRENDv2. Model/base fees consistent at$1.24, with$1.04 sensitivity.
 20fixed configurations: BASE/ADD/EMPTY/REPLACE for eachstarter andFULL. FULL replaces currentOvernightTick; starters replaceONBML.
+The refreshed published19-leg baseline reconciles to about$41,475/year/$6,592 historicalDD at its own fee convention. A future intended aggressive
+weighting is not silently assumed adopted. Existing OT excludes its roll-switch nights; in-hold continuous-contract-switch execution was not independently
+verified for this literal Rebound source. No after-the-fact roll filter was selected.
 All1004source nights are retained. Sundayqty multiplies raw unit-price P&L and contract fees exactly once.
 1,000 paired252-session10-day bootstrap paths; historical annual-mean95%intervals below are different from90%standalone intervals.
 
@@ -178,28 +181,47 @@ All1004source nights are retained. Sundayqty multiplies raw unit-price P&L and c
 | UNIFORM | B__ADD | $2,401.93 | [$269.49, $4,614.54] | $328.77 |
 | UNIFORM | C__ADD | $2,401.93 | [$269.49, $4,614.54] | $250.27 |
 | UNIFORM | D__ADD | $2,401.93 | [$269.49, $4,614.54] | $96.94 |
-| UNIFORM | FULL__ADD | $2,401.93 | [$269.49, $4,614.54] | $842.07 |
+| UNIFORM | FULL__ADD | $2,401.93 | [$269.49, $4,614.54] | $629.97 |
 | SUNDAY2 | A__ADD | $3,846.68 | [$1,128.26, $6,842.76] | $655.26 |
 | SUNDAY2 | B__ADD | $3,846.68 | [$1,128.26, $6,842.76] | $636.38 |
 | SUNDAY2 | C__ADD | $3,846.68 | [$1,128.26, $6,842.76] | $554.51 |
 | SUNDAY2 | D__ADD | $3,846.68 | [$1,128.26, $6,842.76] | $216.70 |
-| SUNDAY2 | FULL__ADD | $3,846.68 | [$1,128.26, $6,842.76] | $860.96 |
+| SUNDAY2 | FULL__ADD | $3,846.68 | [$1,128.26, $6,842.76] | $730.29 |
 
-For2023+FULL, baseline median-profit/DD95 is5.620; ADD gives5.370 UNIFORM /5.553 SUNDAY2. Thus higher modeled income buys more drawdown,
-with no clear risk-efficiency improvement. FULL OvernightTick replacement is-$450/+$994 mean annually, with historical intervals including0;
-DD95 increases$783/$765. Empty-slot controls are retained; no reliable replacement superiority is established.
+The refreshed2023+FULL outcomes at the common leg scale are:
+
+| Model | Allocation | Mean annual profit | DD95 | Median profit/DD95 |
+| --- | --- | --- | --- | --- |
+| UNIFORM | FULL__BASE | $49,113.53 | $7,963.34 | 6.16 |
+| UNIFORM | FULL__ADD | $51,515.46 | $8,593.31 | 5.96 |
+| UNIFORM | FULL__EMPTY | $46,261.19 | $7,982.07 | 5.74 |
+| UNIFORM | FULL__REPLACE | $48,663.12 | $8,485.62 | 5.71 |
+| SUNDAY2 | FULL__BASE | $49,113.53 | $7,963.34 | 6.16 |
+| SUNDAY2 | FULL__ADD | $52,960.21 | $8,693.64 | 6.05 |
+| SUNDAY2 | FULL__EMPTY | $46,261.19 | $7,982.07 | 5.74 |
+| SUNDAY2 | FULL__REPLACE | $50,107.87 | $8,557.03 | 5.85 |
+
+| Model | OT-replacement annual increment | 95%historical mean CI | Change in DD95 |
+| --- | --- | --- | --- |
+| UNIFORM | -$450.41 | [-$2,201.99, $1,188.43] | $522.27 |
+| SUNDAY2 | $994.34 | [-$1,237.20, $3,076.99] | $593.69 |
+
+Higher modeled income buys more drawdown; there is no new statistical/promotion pass. Empty-slot controls are retained; replacement intervals
+and risk tradeoffs must be read against both BASE and EMPTY, not interpreted as a proven new allocation. Original17-leg outputs remain under `personal/`.
 
 | Model | All-history full-book daily corr | Joint losing days | Candidate net on book-loss days |
 | --- | --- | --- | --- |
-| UNIFORM | 0.28 | 265 | -$13,129.89 |
-| SUNDAY2 | 0.27 | 265 | -$14,345.80 |
+| UNIFORM | 0.25 | 253 | -$11,538.29 |
+| SUNDAY2 | 0.25 | 253 | -$13,124.98 |
 
 This is another NQ overnight long exposure, not a hedge. Its rebound arrives after the signal cash loss; it cannot rescue an account already breached
 before entry. Existing personal booking/fee/day/Twin/MOC/S30 approximations remain, and OT data endsJuly7,2026. Source zeros afterward are not verified
 no-trade activity. One legal Dec4→Dec5,2018night lacks a published personal-calendar row and is booked to the next published Dec6session by the inherited
 helper; all money is retained and this mapping is logged. Daily portfolio risk/correlation is conditional on that published calendar.
-After metadata/calendar review, all four fixed model/fee cases were repeated under the frozen final adapter:28 financial CSVs hash-match
-the preserved primary results. Earlier first-run full-file hashes were unavailable; contemporaneous rerun hashes and equality proofs are saved.
+After metadata/calendar review, all four original17-leg cases were repeated under the frozen adapter:28 financial CSVs hash-match.
+The separate19-leg refresh freezes its wrapper/input hashes before all four new baseline-comparison runs; candidate daily paths remain unchanged.
+The published new MC loader maps any pre-2018 exits to its first2018book row. That convention is preserved/logged for baseline parity;
+the primary2023+comparison excludes that row. No new candidate strategy or market-return trial was introduced by either verification or refresh.
 
 | Requested context | Result |
 | --- | --- |
@@ -207,7 +229,7 @@ the preserved primary results. Earlier first-run full-file hashes were unavailab
 | 150K evaluation | Same concrete chronology limit; no pass-rate claim inferred from50K |
 | 50K funded | LIMITED: OT/CLS whole-day adverse proxies and omittedBridge night path cannot identify simultaneous overnight risk |
 | 150K funded | Same joint-path limit; no payout/blown claim inferred from50K |
-| PersonalA–D/FULL17 | Positive added dollars, higher DD; no allocation recommendation under significance/risk-efficiency/parity limits |
+| PersonalA–D/FULL19 | Positive added dollars, higher DD; no allocation recommendation under significance/risk/parity limits |
 
 Normal17→03 crosses calendar midnight inside one CME trading day under the current adopted OT-plan convention. It is **not** rejected merely for
 crossing a date. Current-plan accounting is a simulation assumption, not new verification of broker rules. All eight model/Apex-context limits are saved;
@@ -236,6 +258,7 @@ $reboundPython = 'C:\Users\dmoto\.cache\codex-runtimes\codex-primary-runtime\dep
 foreach ($reboundModel in 'UNIFORM','SUNDAY2') {
   foreach ($reboundFee in '1.24','1.04') {
     & $reboundPython -B analysis/codex_rebound_accounts.py --personal --ledger "analysis/outputs/codex_rebound/${reboundModel}_trades.csv" --model $reboundModel --prereg d94d815 --fee $reboundFee
+    & $reboundPython -B analysis/codex_rebound_personal_update.py --model $reboundModel --fee $reboundFee --amendment 80fff8a
   }
 }
 & $reboundPython -B analysis/codex_rebound_report.py

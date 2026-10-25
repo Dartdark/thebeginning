@@ -27,8 +27,8 @@ def main():
     risk=pd.read_csv(OUT/'native_daily_mc.csv');stress=pd.read_csv(OUT/'execution_stress.csv')
     assert nulls.unclosed.sum()==0 and (nulls.requested==nulls.closed).all()
     assert (nulls.runs==500).all() and fil.comparison_identifiable.all()
-    personal=[];joint=[];contexts=[];author=[];sensitivity=[]
-    personalroot=OUT/'personal';personalroot.mkdir(exist_ok=True)
+    personal=[];joint=[];contexts=[];author=[];sensitivity=[];portfolio_mc=[];replacements=[]
+    personalroot=OUT/'personal19';personalroot.mkdir(exist_ok=True)
     (personalroot/'.gitignore').write_text('*.npy\n*.npz\nverification/\n',encoding='utf-8')
     for model in ['UNIFORM','SUNDAY2']:
         t=pd.read_csv(OUT/(model+'_trades.csv'),parse_dates=['date','exit_date','account_date'])
@@ -56,12 +56,16 @@ def main():
                 personal.extend(z.to_dict('records'))
                 j=pd.read_csv(path/'joint_losses.csv');j['model']=model;joint.extend(j.to_dict('records'))
                 contexts.extend(json.loads((path/'account_context_limits.json').read_text())['contexts'])
+                mc=pd.read_csv(path/'mc_summary.csv');mc=mc[(mc.cohort=='2023_plus')&mc.config.str.startswith('FULL__')].copy();mc['model']=model
+                portfolio_mc.extend(mc.to_dict('records'))
+                rep=effects[(effects.cohort=='2023_plus')&(effects.config=='FULL__REPLACE')&(effects.reference=='FULL__BASE')].copy();rep['model']=model
+                replacements.extend(rep.to_dict('records'))
             else:sensitivity.extend(z[z.config=='FULL__ADD'].to_dict('records'))
             checks=json.loads((path/'saved_output_checks.json').read_text())
             assert checks['configurations']==20
-            proof=json.loads((path/'provenance_recheck.json').read_text())
-            assert proof['contemporaneous_script_sha256']==H.sha(ROOT/'analysis/codex_rebound_accounts.py')
-            assert len(proof['financial_csv_comparison'])==7 and all(v['exact_equal'] for v in proof['financial_csv_comparison'].values())
+            proof=json.loads((path/'manifest_update.json').read_text())
+            assert proof['wrapper_sha256']==H.sha(ROOT/'analysis/codex_rebound_personal_update.py')
+            assert proof['new_strategy_replays']==0
     a=pd.DataFrame(author);p=pd.DataFrame(personal);j=pd.DataFrame(joint)
     p['historical_ci']=p.apply(lambda r:f'[{money(r.historical_annual_mean_lo)}, {money(r.historical_annual_mean_hi)}]',axis=1)
     a.to_csv(OUT/'author_comparison.csv',index=False);p.to_csv(OUT/'personal_additions_compact.csv',index=False)
@@ -69,7 +73,7 @@ def main():
     H.dump('report_checks.json',dict(primary_hashes_match=True,price_quantity_cost_daily_sums_match=True,
         all_null_signal_counts_reconciled=True,all_requested_plan_contexts_recorded=True,new_economic_models=3,
         prior_author_versions=336,personal_fee_sensitivity=sensitivity,report_script_sha256=H.sha(Path(__file__)),
-        final_adapter_fixed_case_rerun_financial_csv_matches=28))
+        current_personal_snapshot='afde088',current_personal_legs=19,previous_17leg_outputs_preserved=True))
     g=m[(m.period.isin(['2018-22','2023+','all']))]
     yearly=m[m.period.str.fullmatch(r'20\d\d')]
     ci=boot[(boot.period=='2023+')&boot.metric.isin(['sharpe','max_dd','annual'])].copy()
@@ -77,6 +81,12 @@ def main():
     sc=sig[(sig.period=='all')]
     fullp=p[p.config=='FULL__ADD'];u=fullp[fullp.model=='UNIFORM'].iloc[0];s=fullp[fullp.model=='SUNDAY2'].iloc[0]
     jf=j[j.group=='FULL']
+    portfolio_mc=pd.DataFrame(portfolio_mc);replacements=pd.DataFrame(replacements)
+    for model in ['UNIFORM','SUNDAY2']:
+        b=portfolio_mc[(portfolio_mc.model==model)&(portfolio_mc.config=='FULL__BASE')].iloc[0]
+        ad=portfolio_mc[(portfolio_mc.model==model)&(portfolio_mc.config=='FULL__ADD')].iloc[0]
+        assert ad.median_profit_over_dd95<b.median_profit_over_dd95
+    replacements['historical_ci']=replacements.apply(lambda r:f'[{money(r.historical_annual_mean_lo)}, {money(r.historical_annual_mean_hi)}]',axis=1)
     rr=risk[(risk.period=='2023+')&(risk.base_mnq==1)]
     columns=[('model','Model',str),('period','Period',str),('trades','Tickets',integer),('contracts','Contracts',integer),('win','Win',pct),
       ('avg','Net/ticket NQ',money),('t','t',num),('sharpe','Sharpe',num),('sortino','Sortino',num),('profit_factor','PF',num),
@@ -85,15 +95,15 @@ def main():
 
 Summary: 1,004 source tickets; full PF 1.27 UNIFORM / 1.33 SUNDAY2, materially weaker than supplied claims.
 Full t 2.59/2.90 fails the 3.61 ranked-item bar and 3.79 sensitivity for 336 author versions; direction is stronger than random, filter benefit unproven.
-Current 17-leg personal ADD raises 2023+ mean annual profit by ${u.mean_profit_delta:,.0f}/${s.mean_profit_delta:,.0f}, but DD95 by ${u.dd95_delta:,.0f}/${s.dd95_delta:,.0f}; portfolio return/DD does not improve.
+Current 19-leg personal ADD raises 2023+ mean annual profit by ${u.mean_profit_delta:,.0f}/${s.mean_profit_delta:,.0f}, but DD95 by ${u.dd95_delta:,.0f}/${s.dd95_delta:,.0f}; both reduce median profit/DD95.
 All 50K/150K evaluation/funded comparisons are LIMITED by missing causal joint overnight baseline paths, not by legal calendar-date crossings.
 821 unobserved held minutes, cache timing differences and absent original MC trades prevent exact parity. No live/ranking/allocation change.
 
 Plan: [`overnight_rebound.md`](../plans/overnight_rebound.md), **{pc[:7]}** committed before new returns.
 Models: UNIFORM down-day Qty1, source-default SUNDAY2, ALLNIGHTS unfiltered control (not selectable).
 Prior search: author336 versions plus unknown filters. No new parameter grid or rescue optimization.
-Scripts: `analysis/codex_rebound_run.py`, `codex_rebound_engine.py`, `codex_rebound_diagnostics.py`, `codex_rebound_accounts.py`, `codex_rebound_report.py`.
-Source/snapshots: `agents/codex/inputs/rebound/`; outputs: `analysis/outputs/codex_rebound/`. Current17-leg baseline pinned toe1a94f7.
+Scripts: `analysis/codex_rebound_run.py`, `codex_rebound_engine.py`, `codex_rebound_diagnostics.py`, `codex_rebound_accounts.py`, `codex_rebound_personal_update.py`, `codex_rebound_report.py`.
+Source/snapshots: `agents/codex/inputs/rebound/`; outputs: `analysis/outputs/codex_rebound/`. Current19-leg baseline pinned toafde088 under committed refresh80fff8a; initial17-leg results ate1a94f7 are preserved.
 
 ## Rule and clock as replayed
 
@@ -183,16 +193,24 @@ This is not an independent end-to-end raw-data replica or exact MC confirmation.
 
 ## Current personal portfolio and Apex placement
 
-Current17-leg book andA–D starters pinned toe1a94f7; no BB_MRM. Model/base fees consistent at$1.24, with$1.04 sensitivity.
+Current19-leg book andA–D starters pinned toafde088; no BB_MRM, with adopted SwingTargetv3 and PAPERTRENDv2. Model/base fees consistent at$1.24, with$1.04 sensitivity.
 20fixed configurations: BASE/ADD/EMPTY/REPLACE for eachstarter andFULL. FULL replaces currentOvernightTick; starters replaceONBML.
+The refreshed published19-leg baseline reconciles to about$41,475/year/$6,592 historicalDD at its own fee convention. A future intended aggressive
+weighting is not silently assumed adopted. Existing OT excludes its roll-switch nights; in-hold continuous-contract-switch execution was not independently
+verified for this literal Rebound source. No after-the-fact roll filter was selected.
 All1004source nights are retained. Sundayqty multiplies raw unit-price P&L and contract fees exactly once.
 1,000 paired252-session10-day bootstrap paths; historical annual-mean95%intervals below are different from90%standalone intervals.
 
 {table(p,[('model','Model',str),('config','Addition',str),('mean_profit_delta','Mean annual increment',money),('historical_ci','95%historical mean CI',str),('dd95_delta','Change in DD95',money)])}
 
-For2023+FULL, baseline median-profit/DD95 is5.620; ADD gives5.370 UNIFORM /5.553 SUNDAY2. Thus higher modeled income buys more drawdown,
-with no clear risk-efficiency improvement. FULL OvernightTick replacement is-$450/+$994 mean annually, with historical intervals including0;
-DD95 increases$783/$765. Empty-slot controls are retained; no reliable replacement superiority is established.
+The refreshed2023+FULL outcomes at the common leg scale are:
+
+{table(portfolio_mc,[('model','Model',str),('config','Allocation',str),('profit_mean','Mean annual profit',money),('dd_p95','DD95',money),('median_profit_over_dd95','Median profit/DD95',num)])}
+
+{table(replacements,[('model','Model',str),('mean_profit_delta','OT-replacement annual increment',money),('historical_ci','95%historical mean CI',str),('dd95_delta','Change in DD95',money)])}
+
+Higher modeled income buys more drawdown; there is no new statistical/promotion pass. Empty-slot controls are retained; replacement intervals
+and risk tradeoffs must be read against both BASE and EMPTY, not interpreted as a proven new allocation. Original17-leg outputs remain under `personal/`.
 
 {table(jf,[('model','Model',str),('correlation','All-history full-book daily corr',num),('joint_loss_days','Joint losing days',integer),('candidate_net_on_baseline_loss_days','Candidate net on book-loss days',money)])}
 
@@ -200,8 +218,10 @@ This is another NQ overnight long exposure, not a hedge. Its rebound arrives aft
 before entry. Existing personal booking/fee/day/Twin/MOC/S30 approximations remain, and OT data endsJuly7,2026. Source zeros afterward are not verified
 no-trade activity. One legal Dec4→Dec5,2018night lacks a published personal-calendar row and is booked to the next published Dec6session by the inherited
 helper; all money is retained and this mapping is logged. Daily portfolio risk/correlation is conditional on that published calendar.
-After metadata/calendar review, all four fixed model/fee cases were repeated under the frozen final adapter:28 financial CSVs hash-match
-the preserved primary results. Earlier first-run full-file hashes were unavailable; contemporaneous rerun hashes and equality proofs are saved.
+After metadata/calendar review, all four original17-leg cases were repeated under the frozen adapter:28 financial CSVs hash-match.
+The separate19-leg refresh freezes its wrapper/input hashes before all four new baseline-comparison runs; candidate daily paths remain unchanged.
+The published new MC loader maps any pre-2018 exits to its first2018book row. That convention is preserved/logged for baseline parity;
+the primary2023+comparison excludes that row. No new candidate strategy or market-return trial was introduced by either verification or refresh.
 
 | Requested context | Result |
 | --- | --- |
@@ -209,7 +229,7 @@ the preserved primary results. Earlier first-run full-file hashes were unavailab
 | 150K evaluation | Same concrete chronology limit; no pass-rate claim inferred from50K |
 | 50K funded | LIMITED: OT/CLS whole-day adverse proxies and omittedBridge night path cannot identify simultaneous overnight risk |
 | 150K funded | Same joint-path limit; no payout/blown claim inferred from50K |
-| PersonalA–D/FULL17 | Positive added dollars, higher DD; no allocation recommendation under significance/risk-efficiency/parity limits |
+| PersonalA–D/FULL19 | Positive added dollars, higher DD; no allocation recommendation under significance/risk/parity limits |
 
 Normal17→03 crosses calendar midnight inside one CME trading day under the current adopted OT-plan convention. It is **not** rejected merely for
 crossing a date. Current-plan accounting is a simulation assumption, not new verification of broker rules. All eight model/Apex-context limits are saved;
@@ -238,6 +258,7 @@ $reboundPython = '{sys.executable}'
 foreach ($reboundModel in 'UNIFORM','SUNDAY2') {{
   foreach ($reboundFee in '1.24','1.04') {{
     & $reboundPython -B analysis/codex_rebound_accounts.py --personal --ledger "analysis/outputs/codex_rebound/${{reboundModel}}_trades.csv" --model $reboundModel --prereg d94d815 --fee $reboundFee
+    & $reboundPython -B analysis/codex_rebound_personal_update.py --model $reboundModel --fee $reboundFee --amendment 80fff8a
   }}
 }}
 & $reboundPython -B analysis/codex_rebound_report.py

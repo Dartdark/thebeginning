@@ -1,0 +1,76 @@
+{
+  "contexts": [
+    {
+      "model": "UNIFORM",
+      "context": "50K_evaluation",
+      "status": "LIMITED_BASELINE_CHRONOLOGY",
+      "source_invalid_windows": 0,
+      "calendar_crossings": 896,
+      "same_account_session": 1004,
+      "candidate_quantity": 1,
+      "unobserved_held_minutes": 821,
+      "comparison_run": false,
+      "overlap_slot": "ONB30",
+      "limitation": "Bridge Monday Sunday-night exposure is omitted by prepared Monday00:00 paths"
+    },
+    {
+      "model": "UNIFORM",
+      "context": "150K_evaluation",
+      "status": "LIMITED_BASELINE_CHRONOLOGY",
+      "source_invalid_windows": 0,
+      "calendar_crossings": 896,
+      "same_account_session": 1004,
+      "candidate_quantity": 2,
+      "unobserved_held_minutes": 821,
+      "comparison_run": false,
+      "overlap_slot": "ONB30",
+      "limitation": "Bridge Monday Sunday-night exposure is omitted by prepared Monday00:00 paths"
+    },
+    {
+      "model": "UNIFORM",
+      "context": "50K_funded",
+      "status": "LIMITED_BASELINE_CHRONOLOGY",
+      "source_invalid_windows": 0,
+      "calendar_crossings": 896,
+      "same_account_session": 1004,
+      "candidate_quantity": 1,
+      "unobserved_held_minutes": 821,
+      "comparison_run": false,
+      "overlap_slot": "OT",
+      "limitation": "OT/CLS whole-day adverse proxies and omitted Bridge Sunday-night path cannot certify causal joint risk; OT data also ends2026-07-07"
+    },
+    {
+      "model": "UNIFORM",
+      "context": "150K_funded",
+      "status": "LIMITED_BASELINE_CHRONOLOGY",
+      "source_invalid_windows": 0,
+      "calendar_crossings": 896,
+      "same_account_session": 1004,
+      "candidate_quantity": 1,
+      "unobserved_held_minutes": 821,
+      "comparison_run": false,
+      "overlap_slot": "OT",
+      "limitation": "OT/CLS whole-day adverse proxies and omitted Bridge Sunday-night path cannot certify causal joint risk; OT data also ends2026-07-07"
+    }
+  ],
+  "policy": "17\u2192next16 account day, flat before15:59; mere midnight crossing allowed",
+  "no_trade_deletions": true,
+  "no_material_Apex_benefit_claim": true,
+  "gap_interpretation": "Unobserved bars can be no-print minutes, closures or feed gaps; no feed-loss cause or illegal hold is inferred from their count alone.",
+  "limitations": [
+    "Crossing calendar midnight is not crossing the16:00\u201317:00 CME session break. Intended17\u219203 nights are within one account day.",
+    "Old builder overnight wording is interpreted through the currently adopted OT17\u219203 plan; this is a fixed research-policy assumption, not fresh broker-rule verification.",
+    "Prepared Bridge Monday starts at Monday00:00 and omits Sunday19\u2192midnight adverse exposure. It cannot certify Sunday2 joint risk.",
+    "Prepared CLS/OT use whole-day constant adverse proxies that can invent simultaneous positions. No material Apex benefit is claimed from them.",
+    "OT order-flow history ends2026-07-07; later zeros are incomplete baseline evidence, not verified no-trade days.",
+    "Personal preserves published17-leg fees/marks: per-nonzero-day plan commissions undercount some reentries, MOC/S30 retain inherited approximations, Twin is the marked v1 checker ledger.",
+    "Personal daily drawdown does not certify intraday margin/liquidation safety or hedge delivery before an account breach."
+  ],
+  "reference": "afde088b8b64cf939ff1b325a27eea041cf62c70",
+  "funded_roster_changes": {
+    "50K_funded": "VaultBreak1/1 plus SwingTarget1MNQ (previously VB2/1)",
+    "150K_funded": "SwingTarget2MNQ replaces DualThrust2MNQ"
+  },
+  "roster_refresh_repairs_joint_chronology": false,
+  "no_pass_payout_fee_benefit_claim": true
+}
