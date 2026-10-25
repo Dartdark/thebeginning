@@ -32,7 +32,7 @@ Inputs:
 Variables:
     RawMin(0), CTt(0), InRTH(false), Armed(false), Traded(false),
     DayH(0), DayL(0), HiRef(0), LoRef(0), AvgRng(0), nD(0), k(0), sm(0), TT0(0),
-    Yr(0), Mo(0), Dy(0), Dw(0), Short(false), EntryDt(0);
+    Yr(0), Mo(0), Dy(0), Dw(0), IsHol(false), EntryDt(0);
 Arrays:
     DH[60](0), DL[60](0);
 
@@ -61,7 +61,7 @@ If CTt = RTHOpenCT then begin
     Armed = false;
     { [HOL] CME holiday / early-close calendar }
     Yr = Year(Date) + 1900; Mo = Month(Date); Dy = DayOfMonth(Date); Dw = DayOfWeek(Date);
-    Short = (Mo = 1 and Dw = 1 and Dy >= 15 and Dy <= 21)                       { MLK }
+    IsHol = (Mo = 1 and Dw = 1 and Dy >= 15 and Dy <= 21)                       { MLK }
          or (Mo = 2 and Dw = 1 and Dy >= 15 and Dy <= 21)                       { Presidents }
          or (Mo = 5 and Dw = 1 and Dy >= 25)                                    { Memorial }
          or (Yr >= 2022 and Mo = 6 and (Dy = 19 or (Dy = 20 and Dw = 1) or (Dy = 18 and Dw = 5)))  { Juneteenth }
@@ -81,7 +81,7 @@ If CTt = RTHOpenCT then begin
         For k = 0 to RangeDays - 1 begin sm = sm + (DH[k] - DL[k]); end;
         AvgRng = sm / RangeDays;
         Armed = Open <= HiRef and Open >= LoRef and High <= HiRef and Low >= LoRef;
-        If SkipHolidays and Short then Armed = false;                          { [HOL] }
+        If SkipHolidays and IsHol then Armed = false;                          { [HOL] }
     end;
 end
 else if InRTH and CTt > RTHOpenCT and CTt <= RTHCloseCT then begin   { [HOL] RTH bars only }

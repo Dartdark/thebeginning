@@ -177,3 +177,7 @@ Do it after 15:59 CT or on a weekend, with every account flat. Each line is an e
 `VolLogFilePath` (default `C:\Users\Alessandro\...\MRM_BB\`, the author's PC) is written every session, whatever
 `LogToFile` says. Fix: in Format Signal set `VolLogFilePath` (and `LogFilePath`) to a folder that exists, e.g.
 `C:\MC_logs\BB_MRM_vol.txt` after creating `C:\MC_logs`. Check every imported strategy for hard-coded file paths.
+
+## "this word has already been defined" on a variable name (2026-10-25, Swing Target v3)
+`Short` is a reserved word in PowerLanguage (like `Buy`, `Sell`, `Long`): a variable named `Short` fails to compile.
+Renamed to `IsHol`. Avoid market-direction words as variable names.
