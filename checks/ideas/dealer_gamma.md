@@ -17,3 +17,12 @@ Status: stage 0 drafted; waiting on the user: (1) is The Bridge's gamma flip ava
   2026-07 untouched holdout. Caveat: 2023 partly seen in the LDF filter test.
 - Stage 1 (look only): persistence / reversal of 15 / 30-minute NQ moves above vs below the flip by hour; drift toward
   maj_pos in the afternoon; after big moves, continuation below vs reversal above.
+
+## Stage 0 verdict (2026-10-25): CLOSED - already tested as a strategy (missed in the first evidence check)
+`analysis/gamma_regime_test.py` / `gamma_momentum_test.py` (2026-10-13/14, outputs in analysis/outputs/): 30-minute
+autocorrelation above / below the flip -0.007 / -0.004; the bigger moves below the flip are explained by realized vol;
+regime rule (fade above, follow below) -$105 a trade (632 trades); afternoon pin toward maj_pos -$161; last-30 momentum by
+regime = shuffled-label placebo (p 0.67). Gamma sizes moves, it doesn't direct them.
+Live feed (for the record): The Bridge's OFB_Gex* PowerLanguage functions on its NQ bar feed would give the levels live in
+MultiCharts, if that feed updates in real time (manual section 4.3).
+Process fix: the stage-0 evidence check searches TIER_LIST, HANDOFF.md, NEW_CHAT_BRIEF.md and analysis/outputs/*.

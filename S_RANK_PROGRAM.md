@@ -176,3 +176,5 @@ mean/sd of 0.15, ~1,400 at 0.12; and ~$20k a year per NQ at 150 trades = ~$130 a
 | 4 Independent check | strategy-checker, Monte Carlo, plan benches | as DEVELOPMENT_PROCESS |
 | 5 Live path | MultiCharts match -> forward log -> incubation | as DEVELOPMENT_PROCESS |
 Every idea, pass or fail, gets a TIER_LIST row with what was learned. Idea cards live in `checks/ideas/`.
+Stage-0 evidence check searches TIER_LIST.md, HANDOFF.md, NEW_CHAT_BRIEF.md and analysis/outputs/* (grep the mechanism
+and its keywords) before a card is shown to the user (lesson 2026-10-25: two cards turned out to be already mined).
