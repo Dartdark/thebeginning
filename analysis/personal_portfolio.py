@@ -89,9 +89,9 @@ if __name__ == "__main__":
     # Its order-flow input ends 2026-07-07, so no trades after that in this backtest.
     otv, notv = from_trades("checks/candidates/overnight_tick/trades.csv", "OvernightTick")
     # BB_MRM (Bollinger(50, 3) mean reversion 08:05-09:20 CT, NQ 1-min; rebuild analysis/bb_mrm_test.py, per NQ / 10): added
-    # 2026-10-25 (user), on the forward log (agents/codex/FORWARD_LOG.md)
-    bbm, nbbm = from_trades("checks/candidates/bb_mrm/python_trades.csv", "BB_MRM")
-    P = pd.concat([p, fc, tw, otv, dth, ku, s47, s30, bbm], axis=1)
+    # 2026-10-25 (user), REMOVED the same day (user): the MultiCharts trade list has net t 2.5 (2023+ t 1.2), the rebuild
+    # overstated it by 49 extra trades. Forward log only (agents/codex/FORWARD_LOG.md).
+    P = pd.concat([p, fc, tw, otv, dth, ku, s47, s30], axis=1)
     names = {"VaultBreak": "Vault Break", "OvernightBiasML": "ONB ML", "MondayLong": "Monday Long", "ExpirationOpenShort": "EOS",
              "LateDayFlow": "Late-Day Flow", "NFPFade": "NFP Fade", "BridgeMondayLong": "Bridge Monday", "CLSundayFade_perMCL": "CL Sunday (MCL)",
              "ESMOCFollow_perMES": "ES MOC (MES)", "RelativeStrength": "Relative Strength", "FC2B": "FC 2B", "TwinContinuation": "Twin Continuation",
@@ -128,8 +128,8 @@ if __name__ == "__main__":
     need = dm["dd_p95"] / 0.20
     print(f"   capital for 1x at the 20% rule: ${need:,.0f}")
 
-    t17 = tot - P["BB_MRM"]; d17 = MC.daily_mc(t17.values, horizon=252, n=5000, block=20, trail=1e12); e17 = t17.cumsum()
-    print(f"   before BB_MRM (17 pieces): ${t17.sum() / yrs:,.0f} a year, Sharpe {t17.mean() / t17.std() * np.sqrt(252):.2f}, "
+    t17 = tot; d17 = MC.daily_mc(t17.values, horizon=252, n=5000, block=20, trail=1e12); e17 = t17.cumsum()   # BB_MRM removed 2026-10-25
+    print(f"   17 pieces (BB_MRM removed): ${t17.sum() / yrs:,.0f} a year, Sharpe {t17.mean() / t17.std() * np.sqrt(252):.2f}, "
           f"max DD ${-(e17 - e17.cummax()).min():,.0f}, MC p50 ${d17['pnl_p50']:,.0f}, DD p95 ${d17['dd_p95']:,.0f}, return/DD {d17['ret_dd']:.1f}, "
           f"capital at the 20% rule ${d17['dd_p95'] / 0.20:,.0f}")
     t16 = t17 - P["S30"]; d16 = MC.daily_mc(t16.values, horizon=252, n=5000, block=20, trail=1e12); e16 = t16.cumsum()

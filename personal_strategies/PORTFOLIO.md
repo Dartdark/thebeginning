@@ -1,4 +1,4 @@
-# Personal-account portfolio (2026-10-23; Dual Thrust, Kusho v9, S47 v2, S30 IBS and Overnight Tick / VIX added 2026-10-24; Overnight Anomaly replaced; BB_MRM added 2026-10-25)
+# Personal-account portfolio (2026-10-23; Dual Thrust, Kusho v9, S47 v2, S30 IBS and Overnight Tick / VIX added 2026-10-24; Overnight Anomaly replaced; BB_MRM added and removed 2026-10-25)
 
 From everything tested so far; numbers from `analysis/personal_portfolio.py` (output in
 `analysis/outputs/personal_portfolio_output.txt`). Backtest 2018-01 → 2026-10, after costs, micro commissions charged at
@@ -23,20 +23,19 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | CL Sunday fade | MCL | $692 | $1,042 | $518 | 1.01 | funded plan |
 | EOS | MNQ | $548 | $798 | $746 | 0.83 | live on Apex (combine) |
 | ES MOC | MES | $342 | $172 | $701 | 1.09 | funded plan |
-| BB_MRM (Bollinger(50, 3) mean reversion 08:05-09:20 CT, both sides) | MNQ | $914 | $838 | $3,093 | 1.00 | B (pending checker); personal only (user 2026-10-25); **on the forward log**; `checks/candidates/bb_mrm/BB_MRM_Pre-market_user.txt`, chart on **Exchange (CT)** time |
 | NFP Fade | MNQ | $291 | $467 | $826 | 0.60 | funded plan |
 
-## Whole portfolio, every piece at 1 micro (18 pieces since 2026-10-25)
-- **$38,000 a year** (2023+: $45,300), every year positive (2018 $9.2k, 2019 $9.1k, then $33.0-60.6k).
-- Sharpe 3.13, Sortino 6.72, PF 1.89, Calmar 6.6, Ulcer 0.91; max DD $5,803; worst month −$1,843; 14% losing months.
-- Monte Carlo, 1 year: p5 $21,100 / p50 $37,200 / p95 $56,100; P(losing year) 0.0%; max DD p50 $4,260 / p95 $6,790;
-  return / DD 8.7.
-- **Needs about $33,900** to keep the 1-year p95 drawdown at 20% of the account (core without S30: $26,400).
-- **BB_MRM's effect (17 → 18 pieces, user 2026-10-25; log note):** +$900 a year, Sharpe 3.04 → 3.13, return/DD 8.3 → 8.7, max DD
-  $5,903 → $5,803, capital $33.6k → $33.9k; core (no S30) 16 → 17: $31.1k → $32.0k, Sharpe 3.24 → 3.34, return/DD 9.6 → 9.7,
-  capital $26.2k → $26.4k. Corr with the rest −0.09. At 1 MNQ only: the edge is real against random entries (t 3.4) but
-  knife-edge on the band settings and it lost ~$2.4k per MNQ from 2024 Q4 to 2025 Q2. On the forward log; MultiCharts
-  backtest 2018-26 on the Exchange clock to do (`TODO.md`). Rebuild `analysis/bb_mrm_test.py`, benches `analysis/bb_mrm_bench.py`.
+## Whole portfolio, every piece at 1 micro (17 pieces; BB_MRM out 2026-10-25)
+- **$37,100 a year**, every year positive (2018 $9.1k, 2019 $9.5k, then $34.2-58.2k).
+- Sharpe 3.04, Sortino 6.53, PF 1.86, Calmar 6.3, Ulcer 0.94; max DD $5,903; worst month −$1,951; 12% losing months.
+- Monte Carlo, 1 year: p5 $20,200 / p50 $36,400 / p95 $54,900; P(losing year) 0.0%; max DD p50 $4,360 / p95 $6,730;
+  return / DD 8.3.
+- **Needs about $33,600** to keep the 1-year p95 drawdown at 20% of the account (core without S30: $26,200).
+- **BB_MRM removed (user, 2026-10-25), forward log only.** It went in the same morning on the Python rebuild (t 3.4, +$900 a year,
+  return/DD 8.3 → 8.7). The MultiCharts report 2018-26 (user's run, Exchange clock) showed the rebuild overstated it: 1,657 trades vs
+  1,704, the rebuild's 49 extra trades were mostly winners (+$13.9k gross per NQ). On the real trade list: $40.6 a trade per NQ net,
+  PF 1.17, t 2.5 (below the 3.58 bar), 2023+ t 1.2 carried by 2026 alone (2024 −$11.0k, 2025 −$4.8k, 2026 +$41.1k per NQ), max DD
+  $32.7k per NQ, 5/9 years up, and fragile to the band settings. Back in only if the forward log clears its checkpoint (TIER_LIST C).
 - Overnight Tick / VIX in place of Overnight Anomaly (user, 2026-10-24): 17 pieces $36.6k → $37.1k a year, Sharpe 2.96 → 3.04,
   return/DD 7.7 → 8.3, capital $35.6k → $33.6k; core 16: Sharpe 3.17 → 3.24, return/DD 9.2 → 9.6 (`analysis/overnight_tick_bench.py`).
 - S30's effect (16 → 17 pieces, user 2026-10-24): +$6,000 a year, but Sharpe 3.17 → 2.96, return/DD 9.2 → 7.7, max DD
@@ -111,8 +110,8 @@ Review this list whenever the account steps up a ladder row: re-test each at tha
 ## Conservative / current / aggressive versions (user, 2026-10-25; `analysis/personal_variants.py`)
 | Version | Pieces / micros | $ a year | Sharpe | Max DD | MC DD p95 | Return/DD | Capital (DD p95 / 0.2) |
 |---|---|---|---|---|---|---|---|
-| Conservative: proven pieces only (no forward-log pieces S30, Kusho, S47, FC 2B, BB_MRM; no Dual Thrust until its MC check) | 12 / 12 | $20.1k | 3.13 | $5.2k | $4.3k | 8.3 | ~$21k |
-| Current | 18 / 18 | $38.0k | 3.13 | $5.8k | $6.8k | 8.7 | ~$34k |
-| Aggressive: 2 micros on the five pieces with Sharpe >= 1.4 (Twin, Overnight Tick, Kusho, Overnight Bias ML, Dual Thrust) | 18 / 23 | $52.3k | 3.29 | $7.0k | $7.9k | 9.7 | ~$39k |
+| Conservative: proven pieces only (no forward-log pieces S30, Kusho, S47, FC 2B; Dual Thrust kept out here) | 12 / 12 | $20.1k | 3.13 | $5.2k | $4.3k | 8.3 | ~$21k |
+| Current (BB_MRM out 2026-10-25) | 17 / 17 | $37.1k | 3.04 | $5.9k | $6.7k | 8.3 | ~$34k |
+| Aggressive: 2 micros on the five pieces with Sharpe >= 1.4 (Twin, Overnight Tick, Kusho, Overnight Bias ML, Dual Thrust) | 17 / 22 | $51.4k | 3.22 | $6.6k | $7.8k | 9.5 | ~$39k |
 The aggressive weights pick pieces by their backtest Sharpe, so part of its edge over 'current' is hindsight; two of the five
 (Kusho, Dual Thrust) are not live-proven yet. Pieces promote from conservative to current as they clear the forward log.

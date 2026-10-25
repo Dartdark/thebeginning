@@ -10,7 +10,7 @@ import sys, io, contextlib, runpy; sys.path.insert(0, "analysis")
 import numpy as np, montecarlo as MC
 with contextlib.redirect_stdout(io.StringIO()):
     P = runpy.run_path("analysis/personal_portfolio.py", run_name="__main__")["P"]
-FWD = ["S30", "Kusho", "S47", "FC2B", "BB_MRM", "DualThrust"]
+FWD = ["S30", "Kusho", "S47", "FC2B", "DualThrust"]   # BB_MRM left the plan 2026-10-25
 TOP = ["TwinContinuation", "OvernightTick", "Kusho", "OvernightBiasML", "DualThrust"]
 W = {"conservative": {c: (0 if c in FWD else 1) for c in P}, "current": {c: 1 for c in P},
      "aggressive": {c: (2 if c in TOP else 1) for c in P}}
