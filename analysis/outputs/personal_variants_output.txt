@@ -1,0 +1,19 @@
+Conservative and aggressive versions of the personal stack (user, 2026-10-25), from analysis/personal_portfolio.py (1 micro
+
+conservative: 12 pieces, 12 micros
+   $20,058 a year, Sharpe 3.13, max DD $5,194, worst day $-1,539, worst month $-2,889
+   Monte Carlo 1 year: p5 $9,663 / p50 $19,557 / p95 $31,561, P(loss) 0.0%, DD p95 $4,250, return/DD 8.3, capital $21,251
+   by year: {2018: 3236, 2019: 3057, 2020: 22289, 2021: 20210, 2022: 25072, 2023: 20253, 2024: 21512, 2025: 29350, 2026: 35062}
+   sizes: {'VaultBreak': 1, 'OvernightBiasML': 1, 'MondayLong': 1, 'ExpirationOpenShort': 1, 'LateDayFlow': 1, 'NFPFade': 1, 'BridgeMondayLong': 1, 'CLSundayFade_perMCL': 1, 'ESMOCFollow_perMES': 1, 'RelativeStrength': 1, 'TwinContinuation': 1, 'OvernightTick': 1}
+
+current: 18 pieces, 18 micros
+   $38,004 a year, Sharpe 3.13, max DD $5,803, worst day $-4,831, worst month $-1,843
+   Monte Carlo 1 year: p5 $21,102 / p50 $37,182 / p95 $56,096, P(loss) 0.0%, DD p95 $6,789, return/DD 8.7, capital $33,947
+   by year: {2018: 9233, 2019: 9116, 2020: 48285, 2021: 39076, 2022: 60591, 2023: 34990, 2024: 33008, 2025: 54718, 2026: 52117}
+   sizes: {'VaultBreak': 1, 'OvernightBiasML': 1, 'MondayLong': 1, 'ExpirationOpenShort': 1, 'LateDayFlow': 1, 'NFPFade': 1, 'BridgeMondayLong': 1, 'CLSundayFade_perMCL': 1, 'ESMOCFollow_perMES': 1, 'RelativeStrength': 1, 'FC2B': 1, 'TwinContinuation': 1, 'OvernightTick': 1, 'DualThrust': 1, 'Kusho': 1, 'S47': 1, 'S30': 1, 'BB_MRM': 1}
+
+aggressive: 18 pieces, 23 micros
+   $52,283 a year, Sharpe 3.29, max DD $7,047, worst day $-4,843, worst month $-2,778
+   Monte Carlo 1 year: p5 $29,589 / p50 $50,789 / p95 $76,771, P(loss) 0.0%, DD p95 $7,860, return/DD 9.7, capital $39,300
+   by year: {2018: 14584, 2019: 12227, 2020: 61969, 2021: 51229, 2022: 86507, 2023: 45764, 2024: 52971, 2025: 72092, 2026: 71957}
+   sizes: {'VaultBreak': 1, 'OvernightBiasML': 2, 'MondayLong': 1, 'ExpirationOpenShort': 1, 'LateDayFlow': 1, 'NFPFade': 1, 'BridgeMondayLong': 1, 'CLSundayFade_perMCL': 1, 'ESMOCFollow_perMES': 1, 'RelativeStrength': 1, 'FC2B': 1, 'TwinContinuation': 2, 'OvernightTick': 2, 'DualThrust': 2, 'Kusho': 2, 'S47': 1, 'S30': 1, 'BB_MRM': 1}

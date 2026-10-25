@@ -107,3 +107,12 @@ Review this list whenever the account steps up a ladder row: re-test each at tha
   (early start from ~month 3 at small size if ≥ 100 live trades, live ≥ 75% of backtest, no drift alarm).
 - Not included (too weak or untested): Gold Breakout (C), plain every-night overnight long, turn of month, trend portfolio, the untested
   ideas in `IDEAS.md` (all-weather ETFs, Weekend Trend Trader, Davey's ES Keltner).
+
+## Conservative / current / aggressive versions (user, 2026-10-25; `analysis/personal_variants.py`)
+| Version | Pieces / micros | $ a year | Sharpe | Max DD | MC DD p95 | Return/DD | Capital (DD p95 / 0.2) |
+|---|---|---|---|---|---|---|---|
+| Conservative: proven pieces only (no forward-log pieces S30, Kusho, S47, FC 2B, BB_MRM; no Dual Thrust until its MC check) | 12 / 12 | $20.1k | 3.13 | $5.2k | $4.3k | 8.3 | ~$21k |
+| Current | 18 / 18 | $38.0k | 3.13 | $5.8k | $6.8k | 8.7 | ~$34k |
+| Aggressive: 2 micros on the five pieces with Sharpe >= 1.4 (Twin, Overnight Tick, Kusho, Overnight Bias ML, Dual Thrust) | 18 / 23 | $52.3k | 3.29 | $7.0k | $7.9k | 9.7 | ~$39k |
+The aggressive weights pick pieces by their backtest Sharpe, so part of its edge over 'current' is hindsight; two of the five
+(Kusho, Dual Thrust) are not live-proven yet. Pieces promote from conservative to current as they clear the forward log.
