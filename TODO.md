@@ -56,7 +56,7 @@ bottom). Times are Central (CT).
 
 ## Dual Thrust v4 (your file, 2026-10-24: A, checker PASS WITH CONCERNS; in the 150K funded plan at 2 MNQ and the personal plan)
 
-- [ ] Optional, no deadline (outside market hours, not on the live VPS): export the MultiCharts backtest of
+- [x] (2026-10-25, done: 1,609 / 1,611 trades identical) Optional, no deadline (outside market hours, not on the live VPS): export the MultiCharts backtest of
   [NQ_Dual_Thrust_v4_CT.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/dual_thrust/NQ_Dual_Thrust_v4_CT.txt)
   on a 1-minute @NQ chart (Exchange time = CT, CME 24h session, IOG off, default inputs, from Jan 2017, **commission and
   slippage 0**, Claude adds costs); save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Dual Thrust v4.xlsx"
@@ -130,7 +130,7 @@ place of Overnight Anomaly). Nothing to do until a funded account starts; the VI
 
 ## BB_MRM (your file, 2026-10-25: B pending checker; IN THE PERSONAL PLAN at 1 MNQ since 2026-10-25, forward log from 10/26)
 
-- [ ] **MultiCharts backtest 2018-01 -> today** (outside market hours, not on the live VPS): [BB_MRM_Pre-market_user.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/bb_mrm/BB_MRM_Pre-market_user.txt)
+- [x] (2026-10-25, done: 1,657 trades, net t 2.5 vs the rebuild's 3.4 -> C; decide whether BB_MRM stays live) **MultiCharts backtest 2018-01 -> today** (outside market hours, not on the live VPS): [BB_MRM_Pre-market_user.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/bb_mrm/BB_MRM_Pre-market_user.txt)
   on a 1-minute **@NQ** chart, **Time Zone = Exchange (CT)**, 24-hour session, IntrabarOrderGeneration off, no Bar Magnifier needed (1-min bars),
   your input screen (AlphaReductionPct 10, Session_Open 08:05, Offset 1h15), 1 contract, no costs. Export the report with its **List of Trades** into
   `mc_reports/` (name: `Backtesting Strategy Performance Report _ @NQ - 1 Minute BB_MRM.xlsx`) and tell Claude. The Python rebuild matches your
