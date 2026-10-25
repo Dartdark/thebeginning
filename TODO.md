@@ -123,7 +123,7 @@ place of Overnight Anomaly). Nothing to do until a funded account starts; the VI
 
 ## PAPERTREND v2 (your description + report, 2026-10-24: B, checker FAIL narrow on deflated Sharpe; personal-plan candidate)
 
-- [ ] Optional (outside market hours, not on the live VPS): export the PAPERTREND v2 **List of Trades** from MultiCharts (the report you sent) into
+- [ ] (2026-10-25: Claude wrote the code from the spec, `checks/candidates/papertrend/PAPERTREND_v2_claude.txt`; backtest it on @NQ 5-min, Exchange CT, commission / slippage 0, and export the List of Trades as `...@NQ - 5 Minutes PAPERTREND v2 claude.xlsx`) Optional (outside market hours, not on the live VPS): export the PAPERTREND v2 **List of Trades** from MultiCharts (the report you sent) into
   `mc_reports/` and send the code. The Python rebuild trades 582 times to 2026-08-14 vs the report's 535; the trade list shows where they differ.
 - [ ] Your call: add it to the personal plan at 1 micro (+$2.3k a year, return/DD 8.3 -> 8.7) once the trade lists agree. Not for Apex (benches worse).
   If you trade it: add a 2 x ATR disaster stop (costs nothing in the backtest) and keep the 14:55 CT flatten exact.
