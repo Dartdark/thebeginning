@@ -19,3 +19,9 @@ Design 2018-2022, holdout 2023-2026.
 Pass (S-rank track): t >= 3.58 over 2018-2026 (t_threshold of the program's N_items), holdout same sign with t >= 1.5,
 at our costs, and >= 300 trades a year (V2 / V3 may fall short of 300: then they are reported but cannot meet the goal).
 Script: analysis/post_settlement_test.py
+
+## Verdict (2026-10-25, after the run; `analysis/outputs/post_settlement_test_output.txt`)
+FAIL. NQ gross $29 (t 2.5) but 2023-26 only $7.50 (t 0.4); V0 $12 (t 1.0), V1 $11 (t 0.9; 98% fill, and the 2% it misses
+were $324 winners), V3 0.3 ATR $34 (t 0.7, 28 a year). One trade a day caps it at ~248 a year, so 300 is out of reach
+with this window alone. Lead for later: YM is the one market where the reversal holds in both halves (gross t 4.6, 18-22
+t 3.4, 23-26 t 3.0) but costs take it; V3 0.2 ATR on YM $27.5, t 2.8, 64 a year.
