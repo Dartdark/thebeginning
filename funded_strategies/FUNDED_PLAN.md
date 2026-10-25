@@ -53,6 +53,21 @@ index: Data2 = `VIX_CBOE`, Map ASCII of `C:\TradingData\VIX\VIX_daily.csv`, refr
 (Cboe, Yahoo for the same day's close). If the day's VIX is missing the signal uses the previous day's (backtest $309 vs $374
 per NQ). Watch: the 24 MultiCharts trades after 2026-07-07 (no order-flow data in our rebuild) averaged −$280 per NQ.
 
+## Swing Target v3 in the funded plans (user, 2026-10-25)
+
+`NQ_Swing_Target_v3.txt` (user's Swing Target v2 + break-even at 0.30 x range + CME holiday skip; Codex test + MultiCharts
+report: 595 trades 2018-26, $305 per NQ, PF 1.63, t 4.55, 9/9 years, 0 overnight holds; TIER_LIST B). Benches
+`../analysis/swing_target_bench.py`, 500 paired 2-year histories:
+
+| Plan | Change | Effect | Decision |
+|---|---|---|---|
+| **50K funded** | **Vault Break 2/1 -> 1/1 + Swing Target 1 MNQ** | y1 $10,159 vs $9,940, y2 $12,347 vs $12,163, blown 5.0% vs 6.8%, y2 p5 $7,500 vs $1,500 | **in the plan** |
+| **150K funded** | **Dual Thrust 2 MNQ -> Swing Target 2 MNQ** | y1 $18,083 vs $17,870, y2 $20,296 vs $20,137, blown 1.0% vs 1.8%, 6th payout day 204 vs 209 | **in the plan** (DT stays personal) |
+| Evaluations (50K / 150K) | add, or replace VB | add: 50.0% vs 50.1%; VB -> ST 42.6-44.8% | not used |
+
+Chart: 1-minute MNQ, Exchange time (CT), CME 24h session, IOG off, `ClockShiftMin` 0, `Qty` 1 (50K) / 2 (150K), defaults
+otherwise; Trade Logger tag `ST`. Small gains (beats the base in ~50% of histories): a better downside, not more money.
+
 ## Dual Thrust added to the 150K funded plan (user, 2026-10-24)
 
 The user's Dual Thrust v4 (`NQ_Dual_Thrust.txt`; research `../analysis/dual_thrust_test.py`, checker PASS WITH CONCERNS,
@@ -88,7 +103,8 @@ Flow are MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`); full size sta
 
 | Strategy | File | Chart | Funded inputs (full size) | Trades |
 |---|---|---|---|---|
-| Vault Break | `../apex_strategies/NQ_Vault_Break_SP.txt` | 30 min MNQ | **`NumContracts` 2**, `FlaggedContracts` 1 (was 3 / 1 until 2026-10-17) | ~107 a year |
+| Vault Break | `../apex_strategies/NQ_Vault_Break_SP.txt` | 30 min MNQ | **`NumContracts` 1**, `FlaggedContracts` 1 (2 / 1 until 2026-10-25, Swing Target took one contract; 3 / 1 until 2026-10-17) | ~107 a year |
+| **Swing Target v3 (2026-10-25)** | `NQ_Swing_Target_v3.txt` | 1 min MNQ | `Qty` 1 (150K: 2, in place of Dual Thrust) | ~70 a year |
 | Overnight Bias ML (v2) | `NQ_Overnight_Bias_ML.txt` | 15 min MNQ | `RiskPerTrade` 400 | ~38 a year |
 | ~~Monday Long~~ **50K: replaced 2026-10-24** by Overnight Tick / VIX (150K keeps it at 1) | `NQ_Monday_Long.txt` | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 | every Monday |
 | **Overnight Tick / VIX (2026-10-24)** | `NQ_Overnight_Tick_VIX.txt` | 5 min MNQ + VIX daily (Data2, Map ASCII) | `NumContracts` 1 | ~60 a year (17:05 → 03:00 CT after down days) |

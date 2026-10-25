@@ -1,4 +1,4 @@
-# Personal-account portfolio (2026-10-23; Dual Thrust, Kusho v9, S47 v2, S30 IBS and Overnight Tick / VIX added 2026-10-24; Overnight Anomaly replaced; BB_MRM added and removed 2026-10-25)
+# Personal-account portfolio (2026-10-23; Dual Thrust, Kusho v9, S47 v2, S30 IBS and Overnight Tick / VIX added 2026-10-24; Overnight Anomaly replaced; BB_MRM added and removed 2026-10-25; Swing Target v3 added 2026-10-25)
 
 From everything tested so far; numbers from `analysis/personal_portfolio.py` (output in
 `analysis/outputs/personal_portfolio_output.txt`). Backtest 2018-01 → 2026-10, after costs, micro commissions charged at
@@ -23,14 +23,18 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | CL Sunday fade | MCL | $692 | $1,042 | $518 | 1.01 | funded plan |
 | EOS | MNQ | $548 | $798 | $746 | 0.83 | live on Apex (combine) |
 | ES MOC | MES | $342 | $172 | $701 | 1.09 | funded plan |
+| Swing Target v3 (prior 2-day RTH level break, target 0.35 / stop 0.7 x range, BE, flat 14:59) | MNQ | $1,932 | $2,642 | $1,446 | 1.43 | B, MC-confirmed (t 4.55); personal (user 2026-10-25) + funded swaps; `funded_strategies/NQ_Swing_Target_v3.txt` |
 | NFP Fade | MNQ | $291 | $467 | $826 | 0.60 | funded plan |
 
-## Whole portfolio, every piece at 1 micro (17 pieces; BB_MRM out 2026-10-25)
-- **$37,100 a year**, every year positive (2018 $9.1k, 2019 $9.5k, then $34.2-58.2k).
-- Sharpe 3.04, Sortino 6.53, PF 1.86, Calmar 6.3, Ulcer 0.94; max DD $5,903; worst month −$1,951; 12% losing months.
-- Monte Carlo, 1 year: p5 $20,200 / p50 $36,400 / p95 $54,900; P(losing year) 0.0%; max DD p50 $4,360 / p95 $6,730;
-  return / DD 8.3.
-- **Needs about $33,600** to keep the 1-year p95 drawdown at 20% of the account (core without S30: $26,200).
+## Whole portfolio, every piece at 1 micro (18 pieces since 2026-10-25: Swing Target in, BB_MRM out)
+- **$39,000 a year**, every year positive.
+- Sharpe 3.12, Sortino 6.71, PF 1.89, Calmar 6.2, Ulcer 0.92; max DD $6,256; worst month −$2,230; 10% losing months.
+- Monte Carlo, 1 year: p5 $21,600 / p50 $38,200 / p95 $57,500; P(losing year) 0.0%; max DD p50 $4,490 / p95 $6,890;
+  return / DD 8.5.
+- **Needs about $34,400** to keep the 1-year p95 drawdown at 20% of the account.
+- **Swing Target's effect (17 → 18 pieces, user 2026-10-25):** +$1,900 a year, Sharpe 3.04 → 3.12, return/DD 8.3 → 8.5, max DD
+  $5,903 → $6,256, capital $33.6k → $34.4k (MultiCharts trades; Codex's ledger gave 8.6). Corr with the rest +0.20 but it loses
+  on the book's bad days (Codex): return, not protection.
 - **BB_MRM removed (user, 2026-10-25), forward log only.** It went in the same morning on the Python rebuild (t 3.4, +$900 a year,
   return/DD 8.3 → 8.7). The MultiCharts report 2018-26 (user's run, Exchange clock) showed the rebuild overstated it: 1,657 trades vs
   1,704, the rebuild's 49 extra trades were mostly winners (+$13.9k gross per NQ). On the real trade list: $40.6 a trade per NQ net,
@@ -110,8 +114,8 @@ Review this list whenever the account steps up a ladder row: re-test each at tha
 ## Conservative / current / aggressive versions (user, 2026-10-25; `analysis/personal_variants.py`)
 | Version | Pieces / micros | $ a year | Sharpe | Max DD | MC DD p95 | Return/DD | Capital (DD p95 / 0.2) |
 |---|---|---|---|---|---|---|---|
-| Conservative: proven pieces only (no forward-log pieces S30, Kusho, S47, FC 2B; Dual Thrust kept out here) | 12 / 12 | $20.1k | 3.13 | $5.2k | $4.3k | 8.3 | ~$21k |
-| Current (BB_MRM out 2026-10-25) | 17 / 17 | $37.1k | 3.04 | $5.9k | $6.7k | 8.3 | ~$34k |
-| Aggressive: 2 micros on the five pieces with Sharpe >= 1.4 (Twin, Overnight Tick, Kusho, Overnight Bias ML, Dual Thrust) | 17 / 22 | $51.4k | 3.22 | $6.6k | $7.8k | 9.5 | ~$39k |
+| Conservative: proven pieces only (no forward-log pieces S30, Kusho, S47, FC 2B; Dual Thrust kept out here; Swing Target in) | 13 / 13 | $22.0k | 3.21 | $5.7k | $4.5k | 8.9 | ~$23k |
+| Current (Swing Target in, BB_MRM out, 2026-10-25) | 18 / 18 | $39.0k | 3.12 | $6.3k | $6.9k | 8.5 | ~$34k |
+| Aggressive: 2 micros on the five pieces with Sharpe >= 1.4 (Twin, Overnight Tick, Kusho, Overnight Bias ML, Dual Thrust) | 18 / 23 | $53.3k | 3.27 | $6.6k | $8.0k | 9.7 | ~$40k |
 The aggressive weights pick pieces by their backtest Sharpe, so part of its edge over 'current' is hindsight; two of the five
 (Kusho, Dual Thrust) are not live-proven yet. Pieces promote from conservative to current as they clear the forward log.

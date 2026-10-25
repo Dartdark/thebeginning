@@ -54,7 +54,7 @@ bottom). Times are Central (CT).
   as a NEW signal on a **1-minute MNQ chart with 1-minute @ES added as Data2** (same feed, Exchange time, first RTH bar 08:31,
   IOG off), 50K: `TradeDir` 1, `NumContracts` 1; 150K: `TradeDir` 0, `NumContracts` 1; Trade Logger tag `RS`.
 
-## Dual Thrust v4 (your file, 2026-10-24: A, checker PASS WITH CONCERNS; in the 150K funded plan at 2 MNQ and the personal plan)
+## Dual Thrust v4 (your file, 2026-10-24: A, checker PASS WITH CONCERNS; personal plan; 150K funded slot given to Swing Target 2026-10-25)
 
 - [x] (2026-10-25, done: 1,609 / 1,611 trades identical) Optional, no deadline (outside market hours, not on the live VPS): export the MultiCharts backtest of
   [NQ_Dual_Thrust_v4_CT.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/dual_thrust/NQ_Dual_Thrust_v4_CT.txt)
@@ -62,7 +62,7 @@ bottom). Times are Central (CT).
   slippage 0**, Claude adds costs); save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Dual Thrust v4.xlsx"
   and push it. Claude then checks it trade by trade against the rebuild (1,611 trades, $140 per NQ after costs).
   **Needed before the first 150K funded account trades it.**
-- [ ] When a 150K account is funded: add [NQ_Dual_Thrust.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Dual_Thrust.txt)
+- [x] (2026-10-25: replaced by Swing Target v3 Qty 2 on 150K funded) When a 150K account is funded: add [NQ_Dual_Thrust.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Dual_Thrust.txt)
   ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Dual_Thrust.txt))
   on a 1-minute MNQ chart (Exchange time, CME 24h, IOG off), `NumContracts` 2 (1 while the cushion is below $3,000),
   Trade Logger tag `DT`. Not on 50K accounts or evaluations.
@@ -243,7 +243,9 @@ after 15:59 CT, never with a position open.
 
 - [x] (2026-10-25) Claude: v3 = v2 + break-even + holiday skip: [NQ_Swing_Target_v3.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Swing_Target_v3.txt) ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Swing_Target_v3.txt)).
 - [x] (2026-10-25, done: t 4.55, 0 overnight holds, matches Codex's ledger) You: MultiCharts backtest of v3 (1-min @NQ / OFB_BARS_NQ, Exchange CT, ClockShiftMin 0, IOG off, from Dec 2017, commission and slippage 0) with **List of Trades** into `mc_reports/` (`Backtesting Strategy Performance Report _ @NQ - 1 Minute Swing Target v3.xlsx`). Expect ~600 trades 2018-26, ~36 break-even exits, no trade on holiday sessions.
-- [ ] After parity: your call on the swaps that bench better: 50K funded VB 2/1 -> 1/1 + ST 1 MNQ; 150K funded Dual Thrust 2 -> ST 2 MNQ. Not in the evaluations.
+- [ ] **Personal account (when it starts): Swing Target v3 at `Qty` 1**, 1-min MNQ, Exchange time, IOG off, ClockShiftMin 0, logger tag `ST` (user 2026-10-25).
+- [ ] **When a 50K account is funded:** Vault Break `NumContracts` 1 (was 2), `FlaggedContracts` 1, + Swing Target v3 `Qty` 1. **150K funded:** Swing Target `Qty` 2 instead of Dual Thrust (`FUNDED_PLAN.md`).
+- [x] (2026-10-25, user: yes) After parity: your call on the swaps that bench better: 50K funded VB 2/1 -> 1/1 + ST 1 MNQ; 150K funded Dual Thrust 2 -> ST 2 MNQ. Not in the evaluations.
 
 ## Later
 
