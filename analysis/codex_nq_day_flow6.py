@@ -221,6 +221,7 @@ def prepare_window(g, lo, hi, phase):
         t["source_entry_stamp"] = pd.to_datetime(ens.Date).to_numpy()
         t["source_exit_stamp"] = pd.to_datetime(exs.Date).to_numpy()
         t["date"] = pd.to_datetime(exs.Date).dt.normalize().to_numpy()
+        t["exit_day"] = np.searchsorted(g.dates, pd.to_datetime(exs.Date).dt.strftime("%Y%m%d").astype(int).to_numpy())
         t["sleeve"] = name
         t["source_contracts"] = ens.Contracts.to_numpy(float)
         t["slips"] = 1 + (t.kind != 1).astype(int)
@@ -228,14 +229,31 @@ def prepare_window(g, lo, hi, phase):
         t["cost_micro"] = 1.24 + .5 * t.slips
         t["net_micro"] = t.gross_micro - t.cost_micro
         np.testing.assert_allclose(t.pnl / 10., t.gross_micro, rtol=0., atol=1e-7)
-        assert (pd.to_datetime(ens.Date).dt.normalize().to_numpy() == t.date.to_numpy()).all(), "Cross-date MC trade"
-        assert (t.j1 >= t.j0).all()
+        cross_date = pd.to_datetime(ens.Date).dt.normalize().to_numpy() != t.date.to_numpy()
+        # The shared loader assumes same-date trades. Preserve genuine report
+        # carries, extending only their exit-day mapping; never omit them.
+        for i in np.where(cross_date)[0]:
+            stamp = pd.Timestamp(t.loc[i, "source_exit_stamp"])
+            end_j = int(stamp.hour*60+stamp.minute)
+            actual_j = end_j
+            if t.loc[i,"kind"] != 2:
+                row, price = int(t.loc[i,"exit_day"]), t.loc[i,"exit"]
+                for j in range(max(0,end_j-report_bar+1),end_j+1):
+                    if g.l[row,j] <= price <= g.h[row,j]:
+                        actual_j = j
+                        break
+            t.loc[i,"j1"] = actual_j
+        assert ((t.exit_day*1440+t.j1) >= (t.day*1440+t.j0)).all()
         held_missing = entry_unmapped = exit_unmapped = ambiguous_bar = 0
         for r in t.itertuples():
-            held_missing += int(np.isnan(g.c[r.day, r.j0:r.j1+1]).sum())
+            held_missing += int(np.isnan(g.c.ravel()[r.day*1440+r.j0:r.exit_day*1440+r.j1+1]).sum())
             entry_unmapped += not (g.l[r.day, r.j0] <= r.entry <= g.h[r.day, r.j0])
-            exit_unmapped += not (g.l[r.day, r.j1] <= r.exit <= g.h[r.day, r.j1])
-            ambiguous_bar += (r.j1 < r.j0 + report_bar and r.kind != 2)
+            exit_unmapped += not (g.l[r.exit_day, r.j1] <= r.exit <= g.h[r.exit_day, r.j1])
+            ambiguous_bar += (r.exit_day == r.day and r.j1 < r.j0 + report_bar and r.kind != 2)
+        # A Sunday 17:00+ exit is in Monday's CME/account session. Preserve
+        # its actual price date separately in exit_day/source_exit_stamp.
+        after_reopen = pd.to_datetime(t.source_exit_stamp).dt.hour >= 17
+        t.loc[after_reopen, "date"] += pd.Timedelta(days=1)
         t["date"] = pd.to_datetime(t.date)
         rows.append(t)
         for i in np.where((et <= pd.Timestamp("2026-10-09 23:59:59")) & ~keep)[0]:
@@ -247,6 +265,7 @@ def prepare_window(g, lo, hi, phase):
             first_stamp=str(et.min()), last_stamp=str(xt.max()), bar_minutes=report_bar,
             source_start=setting_map.get("Start Date"), source_end=setting_map.get("End Date"),
             bar_magnifier=setting_map.get("Bar Magnifier"),
+            cross_date_carries=[dict(entry=str(t.loc[i,"source_entry_stamp"]),exit=str(t.loc[i,"source_exit_stamp"])) for i in np.where(cross_date)[0]],
             limit_policy={k:v for k,v in setting_map.items() if "limit" in k.lower() or "time zone" in k.lower()},
             observed_held_missing_minutes=held_missing, entry_price_unmapped=int(entry_unmapped),
             exit_price_unmapped=int(exit_unmapped), same_chart_bar_entries_exits=int(ambiguous_bar)))
@@ -258,9 +277,17 @@ def prepare_window(g, lo, hi, phase):
     daily["total"] = daily.sum(axis=1)
     daily.index.name = "date"
     np.testing.assert_allclose(daily.total.sum(), trades.net_micro.sum(), atol=1e-6)
-    save_csv(OUT / f"{phase}_trades.csv", trades)
+    # Preserve the already committed pre-validation design ledger byte format.
+    # Its rows are all same-date, so exit_day is exactly redundant with day.
+    exported_trades = trades.drop(columns=["exit_day"]) if phase == "design" else trades
+    save_csv(OUT / f"{phase}_trades.csv", exported_trades)
     save_csv(OUT / f"{phase}_daily.csv", daily, index=True)
-    save_json(OUT / f"{phase}_audit.json", audit)
+    if phase == "design":
+        save_json(OUT / "design_calendar_audit.json", audit)
+        original_schema = [{k:v for k,v in row.items() if k != "cross_date_carries"} for row in audit]
+        save_json(OUT / "design_audit.json", original_schema)
+    else:
+        save_json(OUT / f"{phase}_audit.json", audit)
     save_csv(OUT / f"{phase}_outside_dates.csv", pd.DataFrame(exclusions))
     return trades, daily
 
@@ -287,8 +314,10 @@ def run_design():
 
 
 def read_phase(phase):
-    return pd.read_csv(OUT / f"{phase}_trades.csv", parse_dates=["date", "source_entry_stamp", "source_exit_stamp"]), \
-        pd.read_csv(OUT / f"{phase}_daily.csv", index_col=0, parse_dates=True)
+    t = pd.read_csv(OUT / f"{phase}_trades.csv", parse_dates=["date", "source_entry_stamp", "source_exit_stamp"])
+    if "exit_day" not in t:
+        t["exit_day"] = t.day  # Original design had no cross-date positions.
+    return t, pd.read_csv(OUT / f"{phase}_daily.csv", index_col=0, parse_dates=True)
 
 
 def run_validation():
@@ -383,19 +412,24 @@ def diagnostics():
     save_json(OUT / "placebo.json", placebo)
     save_csv(OUT / "significance.csv", pd.DataFrame(significance))
     personal_comparison(t, d)
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore", RuntimeWarning)
-        g = Grid24()
-    exposure, daily_exposure = [], []
-    for date, tx in t.groupby("date"):
-        net = np.zeros(1441); gross = np.zeros(1441)
-        for r in tx.itertuples():
-            net[int(r.j0)] += r.side; net[int(r.j1)+1] -= r.side
-            gross[int(r.j0)] += 1; gross[int(r.j1)+1] -= 1
-        net, gross = net.cumsum(), gross.cumsum()
-        daily_exposure.append(dict(date=str(date.date()), max_net=float(abs(net).max()), max_gross=float(gross.max()),
-                                   offset_minutes=int(np.sum(gross > abs(net)))))
-        assert net[-1] == gross[-1] == 0
+    daily_exposure = []
+    origins = t.source_entry_stamp.dt.normalize() - pd.to_timedelta(t.day, unit="D")
+    assert origins.nunique() == 1
+    origin = origins.iloc[0]
+    ncal = int(t.exit_day.max())+1
+    net = np.zeros(ncal*1440+1); gross = np.zeros(ncal*1440+1)
+    for r in t.itertuples():
+        a, b = int(r.day*1440+r.j0), int(r.exit_day*1440+r.j1+1)
+        net[a] += r.side; net[b] -= r.side
+        gross[a] += 1; gross[b] -= 1
+    net, gross = net.cumsum(), gross.cumsum()
+    assert net[-1] == gross[-1] == 0
+    for i in range(ncal):
+        ns, gs = net[i*1440:(i+1)*1440], gross[i*1440:(i+1)*1440]
+        if not gs.any():
+            continue
+        daily_exposure.append(dict(date=str((origin+pd.Timedelta(days=i)).date()),
+            max_net=float(abs(ns).max()), max_gross=float(gs.max()), offset_minutes=int(np.sum(gs > abs(ns)))))
     exposure = dict(max_virtual_gross=max(r["max_gross"] for r in daily_exposure),
                     max_net=max(r["max_net"] for r in daily_exposure),
                     sessions_with_opposing_sleeves=sum(r["offset_minutes"]>0 for r in daily_exposure),
