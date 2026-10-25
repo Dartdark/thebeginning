@@ -1,0 +1,52 @@
+{
+  "primary_input_hashes_match": true,
+  "all_trade_price_cost_daily_totals_reconcile": true,
+  "all_500_null_runs_closed": true,
+  "initial_zero_bootstrap_matches_point_dd": true,
+  "requested_contexts": [
+    "50K evaluation",
+    "150K evaluation",
+    "50K funded",
+    "150K funded",
+    "personal A-D",
+    "personal FULL18"
+  ],
+  "no_trade_deletions": true,
+  "personal_fee_sensitivity": [
+    {
+      "cohort": "2023_plus",
+      "config": "FULL__ADD",
+      "reference": "FULL__BASE",
+      "mean_profit_delta": 2497.5173975000034,
+      "simulation_mean_profit_lo": 2376.167300406254,
+      "simulation_mean_profit_hi": 2620.303805500003,
+      "mean_dd_delta": 158.37788791913044,
+      "simulation_mean_dd_lo": 124.91043125690008,
+      "simulation_mean_dd_hi": 191.006348592255,
+      "historical_annual_mean_lo": 690.9129388489334,
+      "historical_annual_mean_hi": 4508.042819244612,
+      "dd95_delta": 443.6534394566943,
+      "model": "CODE",
+      "fee": 1.04
+    },
+    {
+      "cohort": "2023_plus",
+      "config": "FULL__ADD",
+      "reference": "FULL__BASE",
+      "mean_profit_delta": 2756.105185000003,
+      "simulation_mean_profit_lo": 2651.118941875004,
+      "simulation_mean_profit_hi": 2867.086925875002,
+      "mean_dd_delta": 65.49326617428281,
+      "simulation_mean_dd_lo": 35.91825061784443,
+      "simulation_mean_dd_hi": 94.69857615118342,
+      "historical_annual_mean_lo": 1170.3413848920798,
+      "historical_annual_mean_hi": 4552.278919964044,
+      "dd95_delta": 153.5994607079365,
+      "model": "CODE_BE",
+      "fee": 1.04
+    }
+  ],
+  "report_script_sha256": "809f1be7d44846f827d56a8ec24f341c8f0d1ab24a8e9960a832626cf210fb7c",
+  "latest_tier_source": "62e82a0:TIER_LIST.md",
+  "latest_tier_sha256": "3285100efa3631dbcf0712a39fabb143e5432b671336147039f96772f52a87c3"
+}
