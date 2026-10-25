@@ -21,6 +21,10 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
+- [ ] (2026-10-25, user requested) **Vault Break: rerun the August 27–October 23 research backtest** with one-minute Bar Magnifier,
+  the documented reference limit-through assumption, and explicit actual commission/slippage; preserve the same rule and quantity.
+  Export the report/settings and matching NQ day/overnight minute data. Reconcile broker fills/fees separately.
+  See `agents/codex/results/vb_aug_oct_report.md`. Research chart only; no live/VPS changes.
 - [x] (2026-10-20) Account #2 bought and set up on the VPS: second chart set (VB, ONB ADX30, EOS, Bridge) on the new account, logger tags `-2`, StartBalance 50000.
 - [ ] **Fri 10/23 (and every Friday): export the weekly MultiCharts reports into `live/`** and tell Claude (it runs
   `analysis/live_vs_backtest.py --all live/` and the drift alarm).
