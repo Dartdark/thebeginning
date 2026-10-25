@@ -2,7 +2,8 @@
 
 Stage-0 check (S_RANK_PROGRAM.md): before proposing an idea, find its family and market here, then read the full
 TIER_LIST row (search the item name) and its script / output. Also grep HANDOFF.md, NEW_CHAT_BRIEF.md and
-analysis/outputs/ for the mechanism. Tiers: A/B work, C weak, D below costs, F fails. Rebuild after new TIER_LIST rows.
+analysis/outputs/ for the mechanism. Tiers: A/B work, C weak, D below costs, F fails. Markets '-' = not named in the row,
+almost always NQ (the repo's default market). Rebuild after new TIER_LIST rows.
 
 324 items. Families by count: Close / auction / settlement flows 51, Options / dealer flow / volatility products 38, Mean reversion / fades 34, Overnight / session handoffs 33, Opening range / breakouts 31, Other 31, Calendar / rebalancing 26, Momentum / trend 24, News / scheduled releases 19, Order flow / microstructure 17, ML / signal search / filters / sizing 12, Cross-asset / pairs / relative value 8
 

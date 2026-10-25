@@ -45,7 +45,8 @@ for r in rows: G[r[0]].append(r)
 out = ["# Mined index: what has already been tested (auto-built from TIER_LIST.md by `tools/build_mined_index.py`)", "",
        "Stage-0 check (S_RANK_PROGRAM.md): before proposing an idea, find its family and market here, then read the full",
        "TIER_LIST row (search the item name) and its script / output. Also grep HANDOFF.md, NEW_CHAT_BRIEF.md and",
-       "analysis/outputs/ for the mechanism. Tiers: A/B work, C weak, D below costs, F fails. Rebuild after new TIER_LIST rows.", "",
+       "analysis/outputs/ for the mechanism. Tiers: A/B work, C weak, D below costs, F fails. Markets '-' = not named in the row,",
+       "almost always NQ (the repo's default market). Rebuild after new TIER_LIST rows.", "",
        f"{len(rows)} items. Families by count: " + ", ".join(f"{f} {len(v)}" for f, v in sorted(G.items(), key=lambda kv: -len(kv[1]))), ""]
 for f, _ in FAM + [("Other", "")]:
     if f not in G: continue
