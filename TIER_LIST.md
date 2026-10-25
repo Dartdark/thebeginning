@@ -53,6 +53,8 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 
 ## B
 
+> **PAPERTREND v2 MultiCharts (Claude's PowerLanguage, `checks/candidates/papertrend/PAPERTREND_v2_claude.txt`, 2026-10-25):** 2018 → 08/14 569 trades vs the rebuild's 558, 556 identical (entries 100%, exits 99.5%); the 13 extra are contract-roll Mondays the code doesn't skip; net $392 per NQ, PF 1.72, t 4.35, max DD $26.4k, 2023+ t 2.5, 2019 −$3.6k. Rebuild confirmed; the user's original 535-trade report came from different code. Rank B unchanged.
+>
 > **MultiCharts parity 2026-10-25** (`analysis/outputs/mc_parity_2026-10-25.txt`, per NQ after $17.25): Kusho v9 3,211 trades, 3,086 identical to the rebuild, $117 a trade, PF 1.41, t 5.7 (MC fills limits on touch: +$48k gross over the rebuild's 1-tick-through fills, so the rebuild's $108 is the honest number); C03 $72, t 3.7 (2018-19 lose); S47 v2 710 / 714 entries identical, $342, t 4.0; T_ONESIDE fades 348 / 358, $237, t 3.5. All confirm their rebuilds; ranks unchanged.
 
 | Item | Type | Key numbers | Notes |
