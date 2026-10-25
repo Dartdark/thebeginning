@@ -1,7 +1,11 @@
 # SPY closing-imbalance data acceptance: no-return checklist
 
 Date: 2026-10-25. Parent: `spy_close_imbalance.md` (NEEDS DATA).
-This is an intake specification, not a return-test plan. No message sample has been obtained or parsed.
+This is an intake specification, not a return-test plan. Two free Arca samples have now been obtained and parsed.
+See `agents/codex/results/auction_sample_intake_20261025.md` and
+`analysis/outputs/codex_auction_sample_intake/sample_audit.json`.
+Limited format checks pass for SPY on 2026-07-01/02; the study remains NEEDS DATA, with zero return trials.
+Neither sample supplies 2018-22 history, receipt timestamps, auction prints or synchronized quotes.
 
 ## Obtain / verify before accepting files
 

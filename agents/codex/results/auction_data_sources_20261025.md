@@ -7,6 +7,8 @@ NYSE sample downloads fail with the cloud proxy's 403; a bounded local-PC downlo
 No purchases, account creation, vendor messages, return tests or live-system changes.
 
 Date: 2026-10-25. Scope: current auction-imbalance need and supporting prices/timestamps.
+**Later local-PC update:** both named NYSE samples were downloaded and parsed successfully.
+See `auction_sample_intake_20261025.md`; the cloud-access findings below remain a record of that earlier environment.
 Evidence parent: `agents/codex/evidence/spy_close_imbalance.md`.
 A web page, advertised start date, public example and an acquired multi-year dataset are different levels of evidence.
 

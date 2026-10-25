@@ -45,18 +45,22 @@ def main():
         name = f'EQY_US_ARCA_REF_IMBALANCES_{day}.gz'
         url = BASE + name
         if not args.download_nyse:
-            print(json.dumps(dict(url=url, listed_bytes=EXPECTED[day], status='not downloaded')))
+            print(json.dumps(dict(url=url, listed_bytes=EXPECTED[day],
+                                  status='dry listing; no download requested',
+                                  local_file_exists=(root / name).exists())))
             continue
         root.mkdir(parents=True, exist_ok=True)
         dest = root / name
         partial = root / (name + '.part')
         if not dest.exists():
+            if partial.exists():
+                raise FileExistsError('Existing partial file preserved: ' + str(partial))
             try:
                 with urllib.request.urlopen(url, timeout=30) as response:
                     length = response.headers.get('Content-Length')
                     if length and int(length) > MAX_BYTES:
                         raise ValueError('File exceeds 200MB download limit')
-                    with partial.open('wb') as f:
+                    with partial.open('xb') as f:
                         count = 0
                         for chunk in iter(lambda: response.read(1024 * 1024), b''):
                             count += len(chunk)
@@ -68,16 +72,22 @@ def main():
                 expanded = check_gzip(partial)
                 partial.replace(dest)
             except Exception:
-                partial.unlink(missing_ok=True)
+                # Python 3.7 is still the default interpreter on the research PC.
+                try:
+                    partial.unlink()
+                except FileNotFoundError:
+                    pass
                 raise
         else:
             if dest.stat().st_size != EXPECTED[day]:
                 raise ValueError('Existing file size mismatch; original preserved')
             expanded = check_gzip(dest)
+        dest.chmod(0o444)
         record = dict(url=url, bytes=dest.stat().st_size, sha256=sha256(dest),
                       checked_at_utc=datetime.now(timezone.utc).isoformat(),
                       gzip_integrity='passed', uncompressed_bytes=expanded,
-                      symbol_and_schema_validation='not performed', return_trials=0)
+                      original_read_only=True,
+                      symbol_and_schema_validation='not performed; see separate intake audit', return_trials=0)
         manifest = dest.with_suffix('.manifest.json')
         manifest.write_text(json.dumps(record, indent=2) + '\n')
         print(json.dumps(record))

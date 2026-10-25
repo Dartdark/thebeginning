@@ -2,11 +2,12 @@
 
 Summary: Test whether published SPY closing demand adds information beyond existing late-day momentum.
 Scheduled matching is documented; persistent executable ES pressure is a hypothesis.
-No original auction-message sample, symbol-level quote or verified historical receipt clock is available.
+Two public Arca samples now contain parsed SPY updates; multi-year history, quotes and receipt timing remain missing.
 Inspect SPY/Arca data first; no return test, purchase, strategy code or plan change.
 Return trials: 0 for this candidate; related price-proxy auction studies were already tested.
 
-Prepared 2026-10-25. This is an evidence sheet, not a strategy preregistration.
+Prepared 2026-10-25; sample-intake update the same day. This is an evidence sheet, not a strategy preregistration.
+Current acquisition: `agents/codex/results/auction_sample_intake_20261025.md` (two sessions; no returns).
 Source pin: Claude `c95951783557ca9e5dd1bbb85d6c9412ded2020b`; earlier Codex sheets read from codex/work `96c568d1c2a9b70bf947fae6a1d6dbb37955d59d`.
 
 ## 1. Who trades, and what causes the trade?
@@ -120,6 +121,7 @@ At account stage: base, addition, ES-MOC replacement and empty-slot control, act
 
 **NEEDS DATA.** Finish the no-return acceptance checklist in `agents/codex/evidence/spy_close_imbalance_data_gate.md`.
 A schema or sample alone can pass format checks but cannot establish multi-year feasibility.
+Both public July 2026 samples pass the limited physical-format checks; the complete data gate remains open.
 If data/timing/cost/power are viable, write and commit one primary follow-pressure rule, explicit risk/execution, at most five total variants including robustness tests, and a numerical cheap-screen stop rule before any returns.
 Use 2018–22 design first. Already-seen 2023+ is historical validation, not fresh evidence. No full bench until the cheap screen passes.
 No order-flow logger, VPS change, vendor contact, subscription, trial account or purchase is authorized by this document.
