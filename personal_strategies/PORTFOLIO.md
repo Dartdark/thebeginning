@@ -118,5 +118,6 @@ Review this list whenever the account steps up a ladder row: re-test each at tha
 | Conservative: proven pieces only (no forward-log pieces S30, Kusho, S47, FC 2B; Dual Thrust kept out here; Swing Target in) | 13 / 13 | $22.0k | 3.21 | $5.7k | $4.5k | 8.9 | ~$23k |
 | Current (Swing Target in, BB_MRM out, 2026-10-25) | 18 / 18 | $39.0k | 3.12 | $6.3k | $6.9k | 8.5 | ~$34k |
 | Aggressive: 2 micros on the five pieces with Sharpe >= 1.4 (Twin, Overnight Tick, Kusho, Overnight Bias ML, Dual Thrust) | 18 / 23 | $53.3k | 3.27 | $6.6k | $8.0k | 9.7 | ~$40k |
+**User 2026-10-25: Swing Target stays at 1 MNQ; plans to switch to the aggressive version eventually.** Keep the aggressive row current whenever the book changes, and before the switch re-check its five 2-micro pieces on live and forward-log results, not only backtest Sharpe.
 The aggressive weights pick pieces by their backtest Sharpe, so part of its edge over 'current' is hindsight; two of the five
 (Kusho, Dual Thrust) are not live-proven yet. Pieces promote from conservative to current as they clear the forward log.
