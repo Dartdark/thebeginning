@@ -33,6 +33,7 @@ def main():
     assert len(placebo)==12
     author=[];timing=[];personal=[];joint=[];fee_sensitivity=[]
     (OUT/'personal/.gitignore').write_text('*.npy\n*.npz\n',encoding='utf-8')
+    (OUT/'personal17/.gitignore').write_text('*.npy\n*.npz\n',encoding='utf-8')
     for model in ['CODE','CODE_BE']:
         t=pd.read_csv(OUT/(model+'_trades.csv'),parse_dates=['date','exit_date'])
         a=t[t.date.between('2018-02-01','2026-07-31')]
@@ -54,7 +55,11 @@ def main():
         assert len(t)==totals.trades and np.isclose(t.net.sum(),totals.total)
         assert np.isclose(H.daily(t,days).sum(),t.net.sum())
         for fee in ['1.24','1.04']:
-            p=OUT/'personal'/model/('fee_'+fee)
+            p=OUT/'personal17'/model/('fee_'+fee)
+            baseline=json.loads((p/'baseline_reconciliation.json').read_text())
+            update=json.loads((p/'manifest_update.json').read_text())
+            assert baseline['columns']==17 and update['reference'].startswith('e08c353')
+            assert update['new_strategy_replays']==0
             effect=pd.read_csv(p/'paired_effects.csv')
             selected=effect[(effect.cohort=='2023_plus')&effect.config.str.endswith('__ADD')&effect.reference.str.endswith('__BASE')].copy()
             selected['model']=model
@@ -80,9 +85,9 @@ def main():
     H.dump('diagnostic_checks.json',checks)
     H.dump('report_checks.json',dict(primary_input_hashes_match=True,all_trade_price_cost_daily_totals_reconcile=True,
         all_500_null_runs_closed=True,initial_zero_bootstrap_matches_point_dd=True,
-        requested_contexts=['50K evaluation','150K evaluation','50K funded','150K funded','personal A-D','personal FULL18'],
+        requested_contexts=['50K evaluation','150K evaluation','50K funded','150K funded','personal A-D','personal FULL17'],
         no_trade_deletions=True,personal_fee_sensitivity=fee_sensitivity,report_script_sha256=H.sha(Path(__file__)),
-        latest_tier_source='62e82a0:TIER_LIST.md',latest_tier_sha256=H.sha(ROOT/'agents/codex/inputs/swing_target/tier_list_latest.md')))
+        latest_tier_source='e08c353:TIER_LIST.md',latest_tier_sha256=H.sha(ROOT/'agents/codex/inputs/swing_target/tier_list_e08c353.md')))
     mainrows=m[m.period.isin(['2018-22','2023+','all'])]
     combined=mainrows[mainrows.side=='all']
     yearly=m[(m.side=='all')&m.period.str.fullmatch(r'20\d\d')]
@@ -95,6 +100,8 @@ def main():
     be_sig=whole_sig[whole_sig.model=='CODE_BE'].iloc[0]
     selectedstress=stress[(stress.period=='2023+')&stress.scenario.isin(['opposite_minute_path','extra_tick'])]
     fulljoint=joint[joint.group=='FULL']
+    add_code=personal[(personal.model=='CODE')&(personal.config=='FULL__ADD')].iloc[0]
+    add_be=personal[(personal.model=='CODE_BE')&(personal.config=='FULL__ADD')].iloc[0]
     personal['historical_ci']=personal.apply(lambda r:f'[{money(r.historical_annual_mean_lo)}, {money(r.historical_annual_mean_hi)}]',axis=1)
     losses=table(fulljoint,[('model','Model',str),('correlation','Full-book daily corr',number),('joint_loss_days','Joint losing days',integer),('candidate_net_on_baseline_loss_days','Candidate net on full-book loss days',money)])
     corecols=[('model','Model',str),('period','Period',str),('side','Side',str),('trades','Trades',integer),('win','Win',pct),
@@ -102,16 +109,16 @@ def main():
        ('calmar','Calmar',number),('ulcer','Ulcer',number),('max_dd','EOD DD/NQ',money)]
     text=f'''# Swing Target NQ: WATCH for personal research; REJECT as supplied for Apex
 
-Summary: Broad economics reproduce:602 trades, PF1.62 CODE /1.70 CODE_BE; both eras and all9 years positive after repo costs.
-The author's matching window gives591 trades rather than584; exact MultiCharts parity is unverified.
-At1MNQ,2023+ personal-full addition adds mean annual $2,484/$2,743, with DD95 increases $461/$170; replacement evidence is inconclusive.
-Both source versions carry3 holiday trades across dates, so neither belongs on50K/150K evaluation/funded as supplied.
+Summary: Broad economics reproduce: 602 trades, PF 1.62 CODE / 1.70 CODE_BE; both eras and all 9 years positive after repo costs.
+The author's matching window gives 591 trades rather than 584; exact MultiCharts parity is unverified.
+At 1 MNQ, 2023+ personal-full addition adds mean annual ${add_code.mean_profit_delta:,.0f}/${add_be.mean_profit_delta:,.0f}, with DD95 increases ${add_code.dd95_delta:,.0f}/${add_be.dd95_delta:,.0f}; replacement evidence is inconclusive.
+Both source versions carry 3 holiday trades across dates, so neither belongs on 50K/150K evaluation/funded as supplied.
 It diversifies the existing book but loses on book-loss days. No new filter, ranking, live change or deployment follows.
 
 Plan: [`swing_target.md`](../plans/swing_target.md), **{pc[:7]}**, committed before real returns. Two fixed economic models; no optimization.
 Source: `agents/codex/inputs/swing_target/Swing_Target_NQ.txt`, preserved byte-for-byte. User authorized both BE/no-BE and unknown-template full-session proxy.
-Scripts: `analysis/codex_swing_target.py`, `codex_swing_engine.py`, `codex_swing_diagnostics.py`, `codex_swing_accounts.py`, `codex_swing_report.py`.
-Outputs: `analysis/outputs/codex_swing_target/`. Current plan source pinned at **62e82a0**; existing caches reused without rebuilding.
+Scripts: `analysis/codex_swing_target.py`, `codex_swing_engine.py`, `codex_swing_diagnostics.py`, `codex_swing_accounts.py`, `codex_swing_personal_update.py`, `codex_swing_report.py`.
+Outputs: `analysis/outputs/codex_swing_target/`. Current personal plan pinned at **e08c353**, refreshed under committed amendment **145c3ed**; existing caches reused without rebuilding.
 
 ## Rule, source/prose differences and execution
 
@@ -175,7 +182,7 @@ The initial-zero wrapper reuses repo block paths/statistics and prepends the boo
 Permutation and10,000-trade-bootstrap outputs are saved, plus full/validation and all/long/short statistics.
 The latest pinned ranked-item count is{int(code_sig.ranked_item_plus_two)-2}; plus2 gives{int(code_sig.ranked_item_plus_two)},
 t bar{code_sig.t_threshold:.2f}. CODE full t{code_sig.t:.2f}/DSR{code_sig.dsr:.3f}; CODE_BE t{be_sig.t:.2f}/DSR{be_sig.dsr:.3f}.
-The local older tier list had274 items; significance was refreshed from the pinned62e82a0 list before publication, without changing returns or selecting parameters.
+The local older tier list had274 items; significance was refreshed from the pinnede08c353 list before publication, without changing returns or selecting parameters.
 This ranked-item count is a lower bound on all historical searches; previous VB bracket trials and unknown author filters/timing searches remain disclosed.
 No side is promoted or dropped from its isolated result; short-side strength does not authorize a newly selected short-only strategy.
 
@@ -206,14 +213,16 @@ has an unobserved held minute. We retain these trades; deleting them or repairin
 | 150K evaluation | Same concrete source violation; cannot infer legality/survivability from larger drawdown limit |
 | 50K funded | REJECT as supplied; no payout recommendation |
 | 150K funded | REJECT as supplied; no payout recommendation |
-| Personal A–D / full18 | Positive historical addition, higher drawdown; WATCH pending parity, independent replication and forward evidence |
+| Personal A–D / full17 | Positive historical addition, higher drawdown; WATCH pending parity, independent replication and forward evidence |
 
 All eight model/Apex-context limits are saved in `apex_operational_limits.json`. No hypothetical holiday-safe strategy was fitted.
 
 ## Current personal portfolio: addition, VB replacement and empty slot
 
-Current18 legs/starter ladders are pinned to62e82a0, including OT and newer Kusho/S47/S30/BB_MRM. The baseline separately reproduces
-the published1.275-fee annual$38,004 and$5,803 DD before the frozen native-fee repricing. Candidate is1MNQ at the book's common leg scale.
+Current17 legs/starter ladders are pinned toe08c353, including OT and newer Kusho/S47/S30. The latest user decision removed BB_MRM
+after MC confirmation weakened its evidence. Initial18-leg results/snapshots at62e82a0 are preserved under `personal/` but superseded here.
+The refreshed comparison under `personal17/` drops only BB_MRM, retains identical candidate paths/seeds/fees and verifies the new
+published baseline (about$37,100/year and$5,903 DD at the published1.275 fee). Candidate is1MNQ at the book's common leg scale.
 Retain all trades, including observed16:00 marks across carries; no equity is backdated to entry day. Use1,000 paired252-session paths,
 10-day blocks. Below is **2023+ source pool**, mean annual addition and **95% historical annual-mean interval** (different from90% above):
 
@@ -258,6 +267,7 @@ $swingPython = '{sys.executable}'
 foreach ($swingModel in 'CODE','CODE_BE') {{
   foreach ($swingFee in '1.24','1.04') {{
     & $swingPython -B analysis/codex_swing_accounts.py --personal --ledger "analysis/outputs/codex_swing_target/${{swingModel}}_trades.csv" --prereg a4064ac --fee $swingFee
+    & $swingPython -B analysis/codex_swing_personal_update.py --model $swingModel --fee $swingFee --amendment 145c3ed
   }}
 }}
 & $swingPython -B analysis/codex_swing_report.py

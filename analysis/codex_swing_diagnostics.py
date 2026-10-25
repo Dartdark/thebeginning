@@ -17,7 +17,7 @@ from codex_swing_bootstrap import bootstrap as initial_zero_bootstrap
 from trials import parse_tier_list
 
 OUT=H.OUT
-TRIALS_PATH=ROOT/'agents/codex/inputs/swing_target/tier_list_latest.md'
+TRIALS_PATH=ROOT/'agents/codex/inputs/swing_target/tier_list_e08c353.md'
 
 def significance_only():
     _,days,_=H.setup()
