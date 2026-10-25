@@ -27,7 +27,11 @@ bottom). Times are Central (CT).
 - [ ] When account #1 passes ($53,000): turn auto-trading off on that account.
 - [x] (2026-10-20, user: done) **Now: Rithmic copier off (or #2 removed as follower)** while set 2 auto-trades, or #2 trades double size. Copier
   waits until several funded accounts (2026-10-20).
-- [ ] **~Mon 10/27: account #3** (150K No-Activation, $249).
+- [ ] **Account #3 (150K No-Activation, $249) trades from Mon 10/26 (user, 2026-10-25).** 150K evaluation stack = the
+  combine set x 2.5: Vault Break 20 MNQ, Overnight Bias ADX30 `RiskPerTrade` 2750, Bridge Monday Long 5 MNQ (enters
+  **Sunday 19:00 CT**, so it must be on the account by then to trade this week), EOS `RiskPerTrade` 1250 (next 11/20).
+  Backtest pass 41.6%. Rules: +$9,000 in 30 days, $4,000 EOD trailing, $2,000 daily loss pause. On pass: switch to the
+  150K funded stack (FUNDED_PLAN.md). Add its account number to the logger / live reports.
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
 ## ES MOC Follow (funded candidate, 2026-10-17)
