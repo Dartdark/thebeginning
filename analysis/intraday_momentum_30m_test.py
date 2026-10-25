@@ -74,7 +74,7 @@ def run(look=14, vm=1.0, maxtr=1, sl=50.0, tp=25.0, pat=0, start="2018-01-01", c
             # ---- bar b closes: decisions only at 09:00 .. 14:30 (b = 1 .. 12) for entries; trailing exit every close ----
             c = C30[d, b]; ub, lb, vw = UB[d, b], LB[d, b], VW[d, b]
             ls, ss = max(ub, vw), min(lb, vw)
-            can = 1 <= b <= 12 and (maxtr <= 0 or ent < maxtr)
+            can = 0 <= b <= 11 and (maxtr <= 0 or ent < maxtr)                # bar closes 09:00 (b 0) .. 14:30 (b 11); fix 2026-10-25 (Codex review: 09:00 was skipped)
             longsig, shortsig = c > ub and c > ls, c < lb and c < ss
             if pos == 1:
                 if shortsig and can: pend = ("rev", -1); ent += 1

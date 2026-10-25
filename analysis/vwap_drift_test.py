@@ -163,7 +163,7 @@ def line(T, nm, w=40):
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
-    T = run("g24")
+    T = run("g24"); T = T[T.index >= "2018-01-01"]      # one evaluation window for trade AND daily stats (fix 2026-10-25, Codex review finding 4)
     a = win(T, "2020-07-02", "2026-07-24")
     print(f"\n1. NQ data, per 1 MNQ, our costs. The author's window 2020-07-02 .. 2026-07-24: {len(a)} trades (author 1,677), "
           f"PF {pf(a.net):.2f} (author 1.22), win {np.mean(a.net > 0):.1%} (59.7%); author's costs: PF {pf(win(run('g24', side_cost=4.5, count=False), '2020-07-02', '2026-07-24').net):.2f}")

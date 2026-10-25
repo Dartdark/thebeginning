@@ -79,31 +79,32 @@ def realize(events, d, cost_per_fill, cap=None):
         if capped: break
         px_m = C[d, min(m, 389)] if m < 390 else C1501[d]
         mtm = cash + pos * px_m * PV - fills * cost_per_fill
-        if cap is not None and pos != 0 and mtm <= -cap:
-            cash += pos * px_m * PV; fills += abs(pos); pos = 0; capped = True
+        if cap is not None and mtm <= -cap:           # latch even when flat (fix 2026-10-25, Codex review finding 2)
+            if pos: cash += pos * px_m * PV; fills += abs(pos); pos = 0
+            capped = True
     if pos: cash += pos * C1501[d] * PV; fills += abs(pos)
     return cash - fills * cost_per_fill, fills
 
 
 def netted(ev):
     """MultiCharts one-position netting: an entry against an open opposite position first closes ALL of it; an exit for a
-    leg whose contracts MultiCharts no longer holds does nothing. Legs' own exits reduce only what is still held for them."""
+    leg whose contracts MultiCharts no longer holds does nothing. Legs' own exits reduce only what is still held for them.
+    Fix 2026-10-25 (Codex review finding 1): events are classified by the leg's OWN intended position, so an exit order of a
+    leg that another leg's entry already closed is ignored instead of opening a new position (was: held == 0 -> entry)."""
     allev = sorted([(m, leg, dq, px) for leg, L in ev.items() for (m, dq, px) in L], key=lambda e: (e[0], e[1]))
-    net = 0; held = {"NA": 0, "ON": 0, "TOTM": 0}; out = []
-    entries = {"NA": None, "ON": None, "TOTM": None}
+    net = 0; held = {k: 0 for k in ev}; own = {k: 0 for k in ev}; out = []
     for m, leg, dq, px in allev:
-        is_entry = (held[leg] == 0) or (np.sign(dq) == np.sign(held[leg]))
-        if leg == "NA" and abs(dq) == 4: is_entry = True                      # NA reversal = entry
-        if is_entry:
-            q = dq if abs(dq) != 4 else int(np.sign(dq) * 2)
+        new_own = own[leg] + dq
+        if own[leg] == 0 or np.sign(new_own) == -np.sign(own[leg]) or np.sign(dq) == np.sign(own[leg]):
+            q = new_own if own[leg] != 0 and np.sign(new_own) == -np.sign(own[leg]) else dq      # entry (a reversal = entry of new_own)
             if net != 0 and np.sign(net) != np.sign(q):                       # opposite position held: closed in full
                 out.append((m, -net, px)); held = {k: 0 for k in held}; net = 0
             out.append((m, q, px)); net += q; held[leg] += q
         else:                                                                 # exit order for this leg
             q = -held[leg]
             if q != 0: out.append((m, q, px)); net += q; held[leg] = 0
+        own[leg] = new_own
     return out
-
 
 def run(cost=0.725 + 0.5, cap=750.0, start="2018-01-01", **kw):
     rows = []

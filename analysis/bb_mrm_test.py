@@ -35,7 +35,7 @@ def load():
 
 
 def run(B, bbl=50, bba=3.0, alpha=10.0, stopm=2.8, t0=2, t1=20, maxbars=20, expk=3, expa=1.25, hard=300, be=170, pb=3,
-        win=(485, 560), tighten=True, longs=True, shorts=True, start="2018-01-01", count=True, rand=None):
+        win=(485, 560), tighten=True, longs=True, shorts=True, start="2018-01-01", count=True, rand=None, thr_e=0.0, thr_t=0.0, comm=COMM):
     if count: NTRIAL["n"] += 1
     o, h, l, c, rm = B["o"], B["h"], B["l"], B["c"], B["rm"]
     cs = pd.Series(c); ma = cs.rolling(bbl).mean().values; sd = cs.rolling(bbl).std(ddof=0).values
@@ -56,8 +56,8 @@ def run(B, bbl=50, bba=3.0, alpha=10.0, stopm=2.8, t0=2, t1=20, maxbars=20, expk
         # ---------------- orders working in bar i ----------------
         if mp == 0 and ent is not None:
             side, lim = ent
-            if side > 0 and l[i] <= lim: E = min(o[i], lim); mp = 1; eb = i
-            elif side < 0 and h[i] >= lim: E = max(o[i], lim); mp = -1; eb = i
+            if side > 0 and l[i] <= lim - thr_e: E = min(o[i], lim); mp = 1; eb = i
+            elif side < 0 and h[i] >= lim + thr_e: E = max(o[i], lim); mp = -1; eb = i
             ent = None
         elif mp != 0 and i > eb:
             x = None
@@ -68,7 +68,7 @@ def run(B, bbl=50, bba=3.0, alpha=10.0, stopm=2.8, t0=2, t1=20, maxbars=20, expk
                     if o[i] <= stp: x, xkind = o[i], "stop gap"
                     elif tp > 0 and o[i] >= tp: x, xkind = o[i], "target"
                     else:
-                        hit_s, hit_t = l[i] <= stp, tp > 0 and h[i] >= tp
+                        hit_s, hit_t = l[i] <= stp, tp > 0 and h[i] >= tp + thr_t
                         high_first = (h[i] - o[i]) < (o[i] - l[i])
                         if hit_t and (not hit_s or high_first): x, xkind = tp, "target"
                         elif hit_s: x, xkind = stp, ("BE" if arm and stp == E else "hard stop")
@@ -76,12 +76,12 @@ def run(B, bbl=50, bba=3.0, alpha=10.0, stopm=2.8, t0=2, t1=20, maxbars=20, expk
                     if o[i] >= stp: x, xkind = o[i], "stop gap"
                     elif tp > 0 and o[i] <= tp: x, xkind = o[i], "target"
                     else:
-                        hit_s, hit_t = h[i] >= stp, tp > 0 and l[i] <= tp
+                        hit_s, hit_t = h[i] >= stp, tp > 0 and l[i] <= tp - thr_t
                         low_first = (o[i] - l[i]) < (h[i] - o[i])
                         if hit_t and (not hit_s or low_first): x, xkind = tp, "target"
                         elif hit_s: x, xkind = stp, ("BE" if arm and stp == E else "hard stop")
             if x is not None:
-                net = (x - E) * mp * PV - COMM
+                net = (x - E) * mp * PV - comm
                 trades.append(dict(t=B["ts"][eb], side=mp, entry=E, exit=x, bars=i - eb, kind=xkind, net=net)); mp = 0
         mkt = False
         # ---------------- bar i close ----------------
@@ -154,6 +154,11 @@ if __name__ == "__main__":
          "longs only": dict(shorts=False), "shorts only": dict(longs=False)}
     for nm, kw in V.items(): print(line(run(B, **kw), nm))
 
+    print("   fill policy (Codex review 2026-10-25; the base accepts limit touches, as MultiCharts' default did in the user's report):")
+    for nm, kw in (("entry limits 1 tick through", dict(thr_e=TICK)), ("targets 1 tick through", dict(thr_t=TICK)),
+                   ("both 1 tick through", dict(thr_e=TICK, thr_t=TICK)), ("targets 1 point through (repo's strict rule)", dict(thr_t=1.0)),
+                   ("both through + real micro fee ($1.04 x 10 per NQ)", dict(thr_e=TICK, thr_t=TICK, comm=10.4))):
+        print(line(run(B, count=False, **kw), nm))
     rs = [run(B, rand=np.random.default_rng(k), count=False) for k in range(40)]
     m = np.array([x.net.mean() for x in rs]); n_ = np.array([len(x) for x in rs])
     print(f"   placebo: random bars in the same window (band filter on), random side, same orders and exits, 40 seeds: {n_.mean():.0f} trades, "

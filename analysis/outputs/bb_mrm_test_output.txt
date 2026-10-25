@@ -31,6 +31,12 @@ BB_MRM Pre-market (user's MultiCharts file BB_MRM_Pre-market.txt + 2 reports + i
    window 12:00-13:15 CT (midday)                 n= 633 $  24 PF 1.16 t  1.4 win 48% yrs+ 7/9 | <24 $  16 t  0.9 | 24+ n 194 $  42 t  1.1 | L $   7 S $  47
    longs only                                     n= 883 $  40 PF 1.16 t  1.8 win 52% yrs+ 7/9 | <24 $  31 t  1.5 | 24+ n 288 $  58 t  1.1 | L $  40 S $ nan
    shorts only                                    n= 821 $  69 PF 1.31 t  3.1 win 53% yrs+ 6/9 | <24 $  73 t  3.2 | 24+ n 264 $  61 t  1.2 | L $ nan S $  69
+   fill policy (Codex review 2026-10-25; the base accepts limit touches, as MultiCharts' default did in the user's report):
+   entry limits 1 tick through                    n=1661 $  48 PF 1.20 t  3.0 win 52% yrs+ 6/9 | <24 $  46 t  2.9 | 24+ n 543 $  53 t  1.4 | L $  30 S $  67
+   targets 1 tick through                         n=1700 $  51 PF 1.22 t  3.2 win 52% yrs+ 6/9 | <24 $  48 t  3.1 | 24+ n 551 $  57 t  1.6 | L $  35 S $  68
+   both 1 tick through                            n=1657 $  45 PF 1.19 t  2.8 win 52% yrs+ 6/9 | <24 $  43 t  2.7 | 24+ n 542 $  49 t  1.3 | L $  26 S $  65
+   targets 1 point through (repo's strict rule)   n=1696 $  45 PF 1.19 t  2.9 win 52% yrs+ 6/9 | <24 $  41 t  2.7 | 24+ n 551 $  55 t  1.5 | L $  31 S $  61
+   both through + real micro fee ($1.04 x 10 per NQ) n=1657 $  42 PF 1.17 t  2.6 win 52% yrs+ 5/9 | <24 $  40 t  2.5 | 24+ n 542 $  46 t  1.2 | L $  23 S $  62
    placebo: random bars in the same window (band filter on), random side, same orders and exits, 40 seeds: 1470 trades, $-11 a trade (95th pct $4); the rule $54 beats 100%
    daily correlation with the plan pieces (agents/tasks/plan_daily_pnl.csv): {'VaultBreak': -0.01, 'OvernightBiasML': -0.03, 'MondayLong': -0.04, 'ExpirationOpenShort': 0.02, 'LateDayFlow': -0.0, 'NFPFade': -0.06, 'BridgeMondayLong': 0.02, 'CLSundayFade_perMCL': 0.0, 'ESMOCFollow_perMES': 0.02, 'RelativeStrength': -0.06}
    corr with Dual Thrust v4: -0.12

@@ -74,7 +74,8 @@ if __name__ == "__main__":
             rep(nm, [CL.challenge(Ws, Rs, np.arange(s0, min(s0 + CL.MAXD, D)), one) for s0 in range(D)])
         print("\nB. 150K evaluation (combine set x 2.5):")
         for k in (0, 1, 2, 3, 5):
-            qq = {**{a: b * 2.5 for a, b in q.items()}, "PT": float(k)}
+            # whole contracts at 150K size: ONB / EOS sized from their own 150K dollar risk (fix 2026-10-25, Codex review: flooring at 50K then x 2.5 gave fractional contracts)
+            qq = {"VB": 20.0, "ONB30": risk(2750, 0.25), "MON_BR": 5.0, "EOS": risk(1250, REPORTS["EOS"][1]), "PT": float(k)}
             Ws = sum(P[x][0] * qq[x] for x in qq); Rs = sum(P[x][1] * qq[x] for x in qq)
             rep(f"x 2.5 + PT {k} MNQ", [P150.evaluation(Ws, Rs, s0, D, P150.R150) for s0 in range(D)])
         sys.exit()
