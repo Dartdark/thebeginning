@@ -71,15 +71,16 @@ if __name__ == "__main__":
         print("\nA. 50K evaluation (every start day):")
         for nm, qq in [(f"combine set + ST {k} MNQ", {**q, "ST": float(k)}) for k in (0, 1, 2, 3)] + \
                       [(f"Bridge Monday -> ST {k} MNQ", {**q, "MON_BR": 0.0, "ST": float(k)}) for k in (1, 2)] + \
-                      [(f"VB 8 -> 6 + ST {k} MNQ", {**q, "VB": 6.0, "ST": float(k)}) for k in (1, 2)]:
+                      [(f"VB 8 -> 6 + ST {k} MNQ", {**q, "VB": 6.0, "ST": float(k)}) for k in (1, 2)] + \
+                      [(f"VB 8 -> ST {k} MNQ (no VB)", {**q, "VB": 0.0, "ST": float(k)}) for k in (2, 4, 6, 8)]:
             Ws = sum(P[x][0] * qq[x] for x in qq); Rs = sum(P[x][1] * qq[x] for x in qq)
             rep(nm, [CL.challenge(Ws, Rs, np.arange(s0, min(s0 + CL.MAXD, D)), one) for s0 in range(D)])
         print("\nB. 150K evaluation (combine set x 2.5):")
-        for k in (0, 1, 2, 3, 5):
+        for k in [0, 1, 2, 3, 5] + [-5, -10, -15, -20]:   # negative = VB 20 -> 0 and ST |k| (2026-10-25, user: replace VB)
             # whole contracts at 150K size: ONB / EOS sized from their own 150K dollar risk (fix 2026-10-25, Codex review: flooring at 50K then x 2.5 gave fractional contracts)
-            qq = {"VB": 20.0, "ONB30": risk(2750, 0.25), "MON_BR": 5.0, "EOS": risk(1250, REPORTS["EOS"][1]), "ST": float(k)}
+            qq = {"VB": 20.0 if k >= 0 else 0.0, "ONB30": risk(2750, 0.25), "MON_BR": 5.0, "EOS": risk(1250, REPORTS["EOS"][1]), "ST": float(abs(k))}
             Ws = sum(P[x][0] * qq[x] for x in qq); Rs = sum(P[x][1] * qq[x] for x in qq)
-            rep(f"x 2.5 + ST {k} MNQ", [P150.evaluation(Ws, Rs, s0, D, P150.R150) for s0 in range(D)])
+            rep(f"x 2.5 + ST {k} MNQ" if k >= 0 else f"x 2.5, VB 20 -> ST {-k} MNQ", [P150.evaluation(Ws, Rs, s0, D, P150.R150) for s0 in range(D)])
         sys.exit()
     if MODE == "personal":
         with contextlib.redirect_stdout(io.StringIO()):
