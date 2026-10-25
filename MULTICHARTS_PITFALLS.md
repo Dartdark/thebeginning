@@ -171,3 +171,9 @@ Do it after 15:59 CT or on a weekend, with every account flat. Each line is an e
 ## Reading MultiCharts reports
 - No CSV conversion is needed: `analysis/portfolio.load_mc(g, "<report>.xlsx")` reads the "List of Trades" sheet
   directly (entry rows + exit rows), and `analysis/resampling.py` does the Monte Carlo / bootstrap.
+
+## "Can't open/create file" on a third-party strategy (2026-10-25, BB_MRM)
+`Print(File(path), ...)` fails and stops the study when the folder in `path` doesn't exist on this PC. BB_MRM's
+`VolLogFilePath` (default `C:\Users\Alessandro\...\MRM_BB\`, the author's PC) is written every session, whatever
+`LogToFile` says. Fix: in Format Signal set `VolLogFilePath` (and `LogFilePath`) to a folder that exists, e.g.
+`C:\MC_logs\BB_MRM_vol.txt` after creating `C:\MC_logs`. Check every imported strategy for hard-coded file paths.
