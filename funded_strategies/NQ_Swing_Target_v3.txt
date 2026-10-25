@@ -32,7 +32,7 @@ Inputs:
 Variables:
     RawMin(0), CTt(0), InRTH(false), Armed(false), Traded(false),
     DayH(0), DayL(0), HiRef(0), LoRef(0), AvgRng(0), nD(0), k(0), sm(0), TT0(0),
-    Yr(0), Mo(0), Dy(0), Dw(0), IsHol(false), EntryDt(0);
+    hYear(0), hMonth(0), hDay(0), hDow(0), IsHol(false), EntDate(0);
 Arrays:
     DH[60](0), DL[60](0);
 
@@ -42,7 +42,7 @@ If RawMin >= 1440 then RawMin = RawMin - 1440;
 CTt = IntPortion(RawMin / 60) * 100 + Mod(RawMin, 60);
 
 { [HOL] backstop: a position carried onto a new date goes out at market now }
-If MarketPosition <> 0 and Date <> EntryDt and EntryDt > 0 then begin
+If MarketPosition <> 0 and Date <> EntDate and EntDate > 0 then begin
     Sell ("ST.LX.hol") all contracts next bar at market;
     BuyToCover ("ST.SX.hol") all contracts next bar at market;
 end;
@@ -60,17 +60,17 @@ If CTt = RTHOpenCT then begin
     DayH = High; DayL = Low;
     Armed = false;
     { [HOL] CME holiday / early-close calendar }
-    Yr = Year(Date) + 1900; Mo = Month(Date); Dy = DayOfMonth(Date); Dw = DayOfWeek(Date);
-    IsHol = (Mo = 1 and Dw = 1 and Dy >= 15 and Dy <= 21)                       { MLK }
-         or (Mo = 2 and Dw = 1 and Dy >= 15 and Dy <= 21)                       { Presidents }
-         or (Mo = 5 and Dw = 1 and Dy >= 25)                                    { Memorial }
-         or (Yr >= 2022 and Mo = 6 and (Dy = 19 or (Dy = 20 and Dw = 1) or (Dy = 18 and Dw = 5)))  { Juneteenth }
-         or (Mo = 7 and (Dy = 3 or Dy = 4 or (Dy = 5 and Dw = 1)))              { July 3 / 4 }
-         or (Mo = 9 and Dw = 1 and Dy <= 7)                                     { Labor }
-         or (Mo = 11 and Dw = 4 and Dy >= 22 and Dy <= 28)                      { Thanksgiving }
-         or (Mo = 11 and Dw = 5 and Dy >= 23 and Dy <= 29)                      { day after }
-         or (Mo = 12 and (Dy = 24 or Dy = 25 or Dy = 31 or (Dy = 26 and Dw = 1) or (Dy = 23 and Dw = 5)))
-         or (Mo = 1 and (Dy = 1 or (Dy = 2 and Dw = 1)));
+    hYear = Year(Date) + 1900; hMonth = Month(Date); hDay = DayOfMonth(Date); hDow = DayOfWeek(Date);
+    IsHol = (hMonth = 1 and hDow = 1 and hDay >= 15 and hDay <= 21)                       { MLK }
+         or (hMonth = 2 and hDow = 1 and hDay >= 15 and hDay <= 21)                       { Presidents }
+         or (hMonth = 5 and hDow = 1 and hDay >= 25)                                    { Memorial }
+         or (hYear >= 2022 and hMonth = 6 and (hDay = 19 or (hDay = 20 and hDow = 1) or (hDay = 18 and hDow = 5)))  { Juneteenth }
+         or (hMonth = 7 and (hDay = 3 or hDay = 4 or (hDay = 5 and hDow = 1)))              { July 3 / 4 }
+         or (hMonth = 9 and hDow = 1 and hDay <= 7)                                     { Labor }
+         or (hMonth = 11 and hDow = 4 and hDay >= 22 and hDay <= 28)                      { Thanksgiving }
+         or (hMonth = 11 and hDow = 5 and hDay >= 23 and hDay <= 29)                      { day after }
+         or (hMonth = 12 and (hDay = 24 or hDay = 25 or hDay = 31 or (hDay = 26 and hDow = 1) or (hDay = 23 and hDow = 5)))
+         or (hMonth = 1 and (hDay = 1 or (hDay = 2 and hDow = 1)));
     If nD >= RangeDays and nD >= Lookback then begin
         HiRef = DH[0]; LoRef = DL[0];
         For k = 1 to Lookback - 1 begin
@@ -90,7 +90,7 @@ else if InRTH and CTt > RTHOpenCT and CTt <= RTHCloseCT then begin   { [HOL] RTH
 end;
 
 If TotalTrades > TT0 or MarketPosition <> 0 then Traded = true;
-If MarketPosition <> 0 and MarketPosition[1] = 0 then EntryDt = Date;
+If MarketPosition <> 0 and MarketPosition[1] = 0 then EntDate = Date;
 
 { a level broken before StartCT cancels the day }
 If InRTH and Armed and StartCT > 0 and CTt <= StartCT and (High > HiRef or Low < LoRef) then Armed = false;
