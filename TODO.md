@@ -21,6 +21,9 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
+- [ ] **Account #3 (2026-10-26):** gear account = APEX-681524-03 on all four #3 charts (ONB, VB, EOS, Bridge), 150K sizes (VB 20, Bridge 5,
+  ONB $2,750, EOS $1,250), AA on starting Flat outside a trade window; confirm the first order shows -03 in the Orders tab.
+
 - [x] (2026-10-20) Account #2 bought and set up on the VPS: second chart set (VB, ONB ADX30, EOS, Bridge) on the new account, logger tags `-2`, StartBalance 50000.
 - [ ] **Fri 10/23 (and every Friday): export the weekly MultiCharts reports into `live/`** and tell Claude (it runs
   `analysis/live_vs_backtest.py --all live/` and the drift alarm).

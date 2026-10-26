@@ -44,6 +44,8 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
   crediting the pattern (Kusho: 40-44% from weekend holds; S30: about half index drift) (2026-10-23).
 
 ## Live operations
+- After copying a chart set to a new account, check the strategy's Auto Trading account on every chart: account #3's
+  copies sent 150K-size orders to #2 (28 MNQ on a 50K, 2026-10-26). The chart-trading panel's account is not the one used.
 - A dropped connection costs real trades (missed winner 2026-10-12): reliability (VPS, screen sleep off) beats speed.
 - Rithmic rejects stops already through the market: every strategy needs the stop guard (ONB rejection 2026-10-14).
 - A copier sends every account the same size; cushion sizing needs per-account groups or multipliers (2026-10-19).

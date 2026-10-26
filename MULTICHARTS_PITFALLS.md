@@ -190,3 +190,11 @@ Sunday 17:05. Both are Apex violations live. Fix: Monday Long's early-close list
 Good Friday (Easter computed in the code). Rule for every new strategy: list the early-close days it can trade (Jul 3,
 Nov Fri after Thanksgiving, Dec 24, Good Friday, Monday holidays) and skip them or exit before the early close; check the MC
 trade list for exits after 15:59 CT or on a later date.
+
+## A copied chart keeps the strategy's ACCOUNT (2026-10-26, live incident, account #3)
+Account #3's (150K, APEX-681524-03) chart set was copied from #2's: the chart-trading panel showed -03, but the strategies'
+Auto Trading gear still said **APEX-681524-02**. Result: #3 never traded, and its 150K-sized orders (VB 20) went to #2, which
+held 28 MNQ instead of 8 (a 75-pt stop = ~$4,200 vs a ~$400 cushion). Fixed live: AA off on #3's VB chart (its 20-lot closed,
+#2 back to 8), gear typed as APEX-681524-03 (the drop-down was empty; typing works). Rule: after copying a chart, open
+Format Signals > Properties > Auto Trading > Rithmic > gear on EVERY strategy and check the account; then check the Orders
+tab's Account column (widen it) on the first orders.
