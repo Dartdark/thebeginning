@@ -1,0 +1,221 @@
+// ============================================================================
+// IFT_NQ5_Flow_Signal  -  Institutional Flow Tracker (open rebuild v4.1 rules) as a MultiCharts strategy,
+//                         tuned for NQ 5-minute bars, LONG and SHORT.
+//
+//   Flow layer (IFT): volume ratio = Volume / SMA(Volume, VolLen); an AGGRESSIVE bar closes in its
+//   direction with ratio >= sensitivity and volume above the prior bar; intensity rank = percent rank of the ratio
+//   over NormLen bars (the bubbles: rank >= 90 small, 95 normal, 98 large, 99.5 huge).  Ribbon = EMA fast / slow.
+//
+//   LONG side (cash morning):  System B continuation bar with rank >= RankMin (95 = large bubble), ribbon 9/21 up,
+//     close above the fast EMA, body >= BodyMin; entries WindowStart-WindowEnd CT (08:35-11:00).
+//   SHORT side (Globex / European session, 23:00-08:00 CT):  System B sell bar with ratio >= S_Sens (2.5) AND
+//     aggressor delta (DownTicks-UpTicks)/Volume >= S_DeltaMin (0.25), rank >= S_RankMin (80), ribbon 9/13 down.
+//     The day-session short of this pattern has no edge on NQ; the heavy-delta overnight sell does.
+//   Both: Qty 2, stop beyond the last two bars +/- StopBuf x ATR (capped at MaxStopB x ATR), one contract exits at
+//     TP1 (R), stop to break-even, second at TP2 (R) or on a close through the slow EMA after two bars; everything
+//     flat at FlatTime 14:55 CT.  DirMode 0 both | 2 long only | 3 short only.
+//   System A (reversal bars) and the exhaustion / zone-bounce mechanics are implemented (UseSystemA, A_*) but off:
+//     they lose on NQ in every configuration tested.
+//
+//   CHART  @NQ 5-minute, Exchange time (Central), CME Globex session template, trade volume with Up/Down volume.
+//          Bar Magnifier 1 minute recommended (two exits in one bar).  No look-back beyond 2 bars (ring buffers).
+//
+//   ROUND 5 defaults (native dxFeed 5-min Apr 2025-Oct 2026, 2 contracts, exit legs): 127 legs PF 2.73 win 70.1% net $112k DD $7.3k
+//   + DIRECTIONAL LOCK (DirLock 1, default since 24 Oct): an overnight short locks out the morning long of the same session and vice versa:
+//     123 legs PF 2.94 win 70.7% net $116k DD $7.3k (2025 2.53, 2026 3.34).  DirLock 0 reproduces the 127-leg result exactly.
+//     (NormLen 500, short window to 08:30 CT, short delta 0.35; with L_DeltaMin 0.10 as well: 73 legs PF 3.47 win 72.6%).
+//   RESEARCH  long side: OFB 2020-2026 295 trades PF 1.48 win 58.6% (2023 weak); round-4 native 76 legs PF 2.58 win 68.4%.   short side (6,000-configuration search, dir 3): OFB 2020-2026 119 trades
+//             PF 1.58 win 61.3% (IS 1.84 | OOS 1.48), dxFeed window 23 trades PF 2.56 win 69.6%; without the delta
+//             filter the same bars are PF 0.98 -> the short needs true aggressor volume (dxFeed Up/Down volume).
+//   Strategy inputs passed through the automation bridge ignore boolean overrides: switches live in the defaults.
+//   DEFAULT DirLock 1 (session lock).  Switch with the DirLock input; DirLockMin applies to mode 2 only.
+//   OnePos 1 (default): one position at a time across all charts of the set in live trading (no entry while the account holds a position); 0 = independent.
+//   RISK: DirLock 0 off | 1 session lock (the first position of the day fixes the direction: long today = no short today) | 2 flip lock (no opposite
+//   entry within DirLockMin minutes of an exit) | 3 lock after a losing position for the rest of the session.  No signal ever reverses in-position.
+// ============================================================================
+
+inputs:
+    Qty( 2 ), DirMode( 0 ),
+    VolLen( 20 ), NormLen( 500 ), AtrLen( 14 ), BodyMin( 0.4 ),
+    // ---- long side ----
+    Sens( 1.5 ), RankMin( 95 ), RibbonFast( 9 ), RibbonSlow( 21 ), StopBuf( 0.1 ), TP1_R( 1.5 ), TP2_R( 3.0 ), MaxStopB( 2.5 ), CooldownB( 6 ),
+    WindowStart( 0835 ), WindowEnd( 1100 ), L_Window2Start( 0 ), L_Window2End( 0 ),
+    L_VwapFilter( 0 ), L_RibbonAge( 0 ), L_DeltaMin( 0 ), L_TrendFilter( 0 ), L_MaxBarsHeld( 0 ),
+    // ---- short side ----
+    S_UseB( true ), S_Sens( 2.5 ), S_DeltaMin( 0.35 ), S_RankMin( 80 ), S_RibbonFast( 9 ), S_RibbonSlow( 13 ), S_StopBuf( 0.3 ),
+    S_TP1_R( 1.5 ), S_TP2_R( 3.0 ), S_MaxStopB( 2.5 ), S_WindowStart( 2300 ), S_WindowEnd( 0830 ), S_VwapFilter( 0 ), S_TrendFilter( 0 ), S_MaxBarsHeld( 0 ),
+    // ---- System A (off) ----
+    UseSystemA( false ), A_RangeMin( 0.8 ), A_BodyMin( 0.5 ), A_Target( 3.0 ), A_MaxStop( 2.0 ), A_Cooldown( 12 ), A_RankMin( 0 ),
+    A_NeedExhaustion( false ), ExhMult( 3.0 ), ExhATR( 2.0 ),
+    FlatTime( 1455 ), DirLock( 1 ), DirLockMin( 60 ), OnePos( 1 );
+
+arrays:
+    VrBuf[1000]( 0 );
+
+variables:
+    tr( 0 ), atrW( 0 ), rf( 0 ), rs( 0 ), rfS( 0 ), rsS( 0 ), vbase( 0 ), vratio( 0 ), vrank( 0 ), k( 0 ), cnt( 0 ),
+    rng( 0 ), body( 0 ), bodyf( 0 ), volup( false ), dr( 0 ), aggBuy( false ), aggSellS( false ), aggSellA( false ),
+    ribUp( false ), sinceUp( 9999 ), sinceDn( 9999 ), flipUp( false ), flipDn( false ), strong( false ),
+    rawBuyA( false ), rawSellA( false ), rawBuyB( false ), rawSellB( false ),
+    stopL( 0 ), stopS( 0 ), risk( 0 ), lastA( -9999 ), lastB( -9999 ), pv( 0 ), vv( 0 ), vwap( 0 ), tema( 0 ), ribAge( 0 ), inWin2( false ),
+    lockDir( 0 ), lossDir( 0 ), lastExitBar( -99999 ), lastExitDir( 0 ), prevMP( 0 ), okL( true ), okS( true ), lockBars( 1 ),
+    setup( 0 ), stopPx( 0 ), tp1Px( 0 ), tp2Px( 0 ), tp1Done( false ), entryBar( 0 ), inWinL( false ), inWinS( false ), rsExit( 0 );
+
+// ---------------- indicators ----------------
+tr = TrueRange;
+if CurrentBar <= 1 then atrW = tr else atrW = atrW[1] + ( tr - atrW[1] ) / AtrLen;
+rf = XAverage( Close, RibbonFast );  rs = XAverage( Close, RibbonSlow );
+rfS = XAverage( Close, S_RibbonFast );  rsS = XAverage( Close, S_RibbonSlow );
+vbase = Average( Volume, VolLen );
+if vbase > 0 then vratio = Volume / vbase else vratio = 0;
+cnt = 0;
+if CurrentBar > NormLen then begin
+    for k = 0 to NormLen - 1 begin
+        if VrBuf[k] <= vratio then cnt = cnt + 1;
+    end;
+    vrank = 100 * cnt / NormLen;
+end
+else vrank = 0;
+VrBuf[ Mod( CurrentBar, NormLen ) ] = vratio;
+
+rng = High - Low;  body = AbsValue( Close - Open );
+if rng > 0 then bodyf = body / rng else bodyf = 0;
+volup = Volume > Volume[1];
+if Volume > 0 then dr = ( UpTicks - DownTicks ) / Volume else dr = 0;
+aggBuy   = Close > Open and vratio >= Sens and volup;
+aggSellA = Close < Open and vratio >= Sens and volup;
+aggSellS = Close < Open and vratio >= S_Sens and volup and ( S_DeltaMin <= 0 or dr <= -S_DeltaMin );
+ribUp = rf > rs;
+if ribUp and ribUp[1] = false then sinceUp = 0 else if ribUp then sinceUp = sinceUp + 1;
+if ribUp = false and ribUp[1] then sinceDn = 0 else if ribUp = false then sinceDn = sinceDn + 1;
+flipUp = ribUp and sinceUp <= 2;  flipDn = ribUp = false and sinceDn <= 2;
+strong = rng >= A_RangeMin * atrW and bodyf >= A_BodyMin;
+
+if Date <> Date[1] then begin lastA = -9999; lastB = -9999; end;
+if Time > 1700 and Time[1] <= 1700 then begin pv = 0; vv = 0; end;
+pv = pv + ( High + Low + Close ) / 3 * Volume;  vv = vv + Volume;
+if vv > 0 then vwap = pv / vv;
+tema = XAverage( Close, 200 );
+if ribUp then ribAge = ribAge + 1 else ribAge = 0;
+inWinL = Time >= WindowStart and Time <= WindowEnd;
+inWin2 = L_Window2End > 0 and Time >= L_Window2Start and Time <= L_Window2End;
+inWinL = inWinL or inWin2;
+if S_WindowStart <= S_WindowEnd then inWinS = Time >= S_WindowStart and Time <= S_WindowEnd
+else inWinS = Time >= S_WindowStart or Time <= S_WindowEnd;
+
+// ---------------- signals (completed bar, orders for the next bar) ----------------
+rawSellA = UseSystemA and aggSellA and strong and Close < rf and ( ribUp[1] or flipDn ) and vrank >= A_RankMin and inWinL;
+rawBuyA  = UseSystemA and aggBuy  and strong and Close > rf and ( ribUp[1] = false or flipUp ) and vrank >= A_RankMin and inWinL;
+if A_NeedExhaustion then begin
+    rawSellA = rawSellA and vratio >= ExhMult and High - rs >= ExhATR * atrW;
+    rawBuyA  = rawBuyA  and vratio >= ExhMult and rs - Low >= ExhATR * atrW;
+end;
+rawBuyB  = aggBuy and vrank >= RankMin and ribUp and Close > rf and bodyf >= BodyMin and inWinL;
+if L_VwapFilter = 1 and Close < vwap then rawBuyB = false;
+if L_RibbonAge > 0 and ribAge < L_RibbonAge then rawBuyB = false;
+if L_DeltaMin > 0 and dr < L_DeltaMin then rawBuyB = false;
+if L_TrendFilter = 1 and Close < tema then rawBuyB = false;
+rawSellB = S_UseB and aggSellS and vrank >= S_RankMin and rfS < rsS and Close < rfS and bodyf >= BodyMin and inWinS;
+if S_VwapFilter = 1 and Close > vwap then rawSellB = false;
+if S_TrendFilter = 1 and Close > tema then rawSellB = false;
+if DirMode = 2 then begin rawSellA = false; rawSellB = false; end
+else if DirMode = 3 then begin rawBuyA = false; rawBuyB = false; end;
+
+// ---------------- directional lock (risk management): DirLock 1 session | 2 flip (DirLockMin minutes) | 3 after a loss ----------------
+if Time > 1700 and Time[1] <= 1700 then begin lockDir = 0; lossDir = 0; end;
+if MarketPosition <> 0 and lockDir = 0 then lockDir = MarketPosition;
+if prevMP <> 0 and MarketPosition = 0 then begin
+    lastExitBar = CurrentBar; lastExitDir = prevMP;
+    if PositionProfit( 1 ) < 0 then lossDir = prevMP;
+end;
+prevMP = MarketPosition;
+lockBars = MaxList( Round( DirLockMin / MaxList( BarInterval, 1 ), 0 ), 1 );
+okL = true; okS = true;
+if DirLock = 1 and lockDir = -1 then okL = false;
+if DirLock = 1 and lockDir = 1 then okS = false;
+if DirLock = 2 and lastExitDir = -1 and CurrentBar - lastExitBar < lockBars then okL = false;
+if DirLock = 2 and lastExitDir = 1 and CurrentBar - lastExitBar < lockBars then okS = false;
+if DirLock = 3 and lossDir = -1 then okL = false;
+if DirLock = 3 and lossDir = 1 then okS = false;
+// ---------------- ONE POSITION AT A TIME across the charts of the set (OnePos 1): in live / auto-trading no new entry while the account already holds a position
+//                  (MarketPosition_at_Broker); backtests are per chart and unchanged (the one-book numbers come from the merged fills, see 01_Daily_Portfolio) ----------------
+if OnePos = 1 and MarketPosition = 0 and GetAppInfo( aiRealTimeCalc ) = 1 and MarketPosition_at_Broker <> 0 then begin okL = false; okS = false; end;
+
+if okL = false then begin rawBuyA = false; rawBuyB = false; end;
+if okS = false then begin rawSellA = false; rawSellB = false; end;
+
+stopL = MinList( Low, Low[1] ) - StopBuf * atrW;
+stopS = MaxList( High, High[1] ) + S_StopBuf * atrW;
+
+if MarketPosition = 0 and atrW > 0 and CurrentBar > NormLen and ( Time < FlatTime or Time > 1600 ) then begin
+    if CurrentBar - lastA > A_Cooldown and ( rawSellA or rawBuyA ) and not ( rawSellA and rawBuyA ) then begin
+        if rawBuyA then begin
+            risk = Close - stopL;
+            if risk > 0 and risk <= A_MaxStop * atrW then begin
+                setup = 1; stopPx = Round( stopL * 4, 0 ) / 4; tp1Px = Round( ( Close + A_Target * atrW ) * 4, 0 ) / 4; tp2Px = 0; tp1Done = false; rsExit = 0;
+                Buy ( "IFT.A" ) Qty contracts next bar at market;  lastA = CurrentBar;  entryBar = CurrentBar + 1;
+            end;
+        end
+        else begin
+            risk = MaxList( High, High[1] ) + StopBuf * atrW - Close;
+            if risk > 0 and risk <= A_MaxStop * atrW then begin
+                setup = 1; stopPx = Round( ( Close + risk ) * 4, 0 ) / 4; tp1Px = Round( ( Close - A_Target * atrW ) * 4, 0 ) / 4; tp2Px = 0; tp1Done = false; rsExit = 0;
+                SellShort ( "IFT.As" ) Qty contracts next bar at market;  lastA = CurrentBar;  entryBar = CurrentBar + 1;
+            end;
+        end;
+    end
+    else if CurrentBar - lastB > CooldownB and ( rawBuyB or rawSellB ) and not ( rawBuyB and rawSellB ) then begin
+        if rawBuyB then begin
+            risk = Close - stopL;
+            if risk > 0 and risk <= MaxStopB * atrW then begin
+                setup = 2; stopPx = Round( stopL * 4, 0 ) / 4; tp1Px = Round( ( Close + TP1_R * risk ) * 4, 0 ) / 4; tp2Px = Round( ( Close + TP2_R * risk ) * 4, 0 ) / 4; tp1Done = false; rsExit = 1;
+                Buy ( "IFT.B" ) Qty contracts next bar at market;  lastB = CurrentBar;  entryBar = CurrentBar + 1;
+            end;
+        end
+        else begin
+            risk = stopS - Close;
+            if risk > 0 and risk <= S_MaxStopB * atrW then begin
+                setup = 2; stopPx = Round( stopS * 4, 0 ) / 4; tp1Px = Round( ( Close - S_TP1_R * risk ) * 4, 0 ) / 4; tp2Px = Round( ( Close - S_TP2_R * risk ) * 4, 0 ) / 4; tp1Done = false; rsExit = 2;
+                SellShort ( "IFT.Bs" ) Qty contracts next bar at market;  lastB = CurrentBar;  entryBar = CurrentBar + 1;
+            end;
+        end;
+    end;
+end;
+
+// ---------------- exits ----------------
+if MarketPosition = 1 then begin
+    if setup = 2 and tp1Done = false and CurrentContracts < Qty then begin tp1Done = true; stopPx = EntryPrice; end;
+    if ( Time >= FlatTime and Time <= 1600 ) or ( L_MaxBarsHeld > 0 and CurrentBar - entryBar >= L_MaxBarsHeld ) then Sell ( "IFT.FlatL" ) next bar at market
+    else begin
+        Sell ( "IFT.SL" ) next bar at stopPx stop;
+        if setup = 1 then begin
+            Sell ( "IFT.TPA" ) next bar at tp1Px limit;
+            if CurrentBar - entryBar >= 2 and Close < rs then Sell ( "IFT.RibA" ) next bar at market;
+        end
+        else begin
+            if tp1Done = false then Sell ( "IFT.TP1" ) 1 contracts next bar at tp1Px limit;
+            if tp1Done then begin
+                Sell ( "IFT.TP2" ) next bar at tp2Px limit;
+                if CurrentBar - entryBar >= 2 and Close < rs then Sell ( "IFT.RibB" ) next bar at market;
+            end;
+        end;
+    end;
+end;
+if MarketPosition = -1 then begin
+    if setup = 2 and tp1Done = false and CurrentContracts < Qty then begin tp1Done = true; stopPx = EntryPrice; end;
+    if ( Time >= FlatTime and Time <= 1600 ) or ( S_MaxBarsHeld > 0 and CurrentBar - entryBar >= S_MaxBarsHeld ) then BuyToCover ( "IFT.FlatS" ) next bar at market
+    else begin
+        BuyToCover ( "IFT.SLs" ) next bar at stopPx stop;
+        if setup = 1 then begin
+            BuyToCover ( "IFT.TPAs" ) next bar at tp1Px limit;
+            if CurrentBar - entryBar >= 2 and Close > rs then BuyToCover ( "IFT.RibAs" ) next bar at market;
+        end
+        else begin
+            if tp1Done = false then BuyToCover ( "IFT.TP1s" ) 1 contracts next bar at tp1Px limit;
+            if tp1Done then begin
+                BuyToCover ( "IFT.TP2s" ) next bar at tp2Px limit;
+                if CurrentBar - entryBar >= 2 and Close > rsS then BuyToCover ( "IFT.RibBs" ) next bar at market;
+            end;
+        end;
+    end;
+end;
