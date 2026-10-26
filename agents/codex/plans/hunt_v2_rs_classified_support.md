@@ -13,6 +13,14 @@ d819039cd0aedb33aa730f4b3b723adcc3169d10f4e9fa57c351e4652dc79b61. Archive both w
 No source strategy file is changed. Current personal19 is both sides1MNQ; funded50K long1,
 150K both1 with source cushion rules; evaluations do not adopt RS. Native NQ prices proxy MNQ fills.
 
+Pre-data state clarification: literal source DayOK governs EWMA and stored-range history. Additional
+shared calendar exclusions affect entry eligibility only, uniformly, and do not rewrite past state.
+EWMA has unbounded recursive memory: an unresolved eligible historical NQ/ES return pair or stale
+anchor remains an EWMA lineage issue at every later decision. It does not expire after20days or
+1950updates and is not repaired by normalization/reset. Stored-range uncertainty leaves only when the
+actual affected slot is overwritten in the20slot buffer. Missing ES at a primary timestamp cannot
+silently become an admitted synchronized price through forward-fill.
+
 Replay literal observed-bar parent signal: RTH close labels511..900, NewRTH anchors to immediately
 previous observed Data1/Data2 closes, normally08:30. Store eligible prior RTH ranges, mean of up to20
 stored ranges; no true-range ATR substitute. EWMA alpha2/(20*390+1), first admissible pair initialization,
@@ -81,6 +89,12 @@ gross/net, commissions or trade P&L. Compare first event/date against parent dat
 one tick, require >=90% each direction in fixed jointly observed eligible calendar, retain every
 unmatched record/reason. Do not use an outcome-dependent universe, timestamp offset search or tolerance
 relaxation. A missing necessary field is unresolved, not invented parity. Archive parser conventions.
+Required MC fields are date, entry type/side and entry price. MC time is optional as stated above:
+when an explicit time/date-clock is present it must parse and match native label541 exactly, with
+no offset search. A missing optional time is recorded MC_CLOCK_NOT_VERIFIED, never fabricated09:01;
+date/side/price admission may still proceed without claiming independent MC clock parity. The native
+source/decision/fill clock remains fully audited. A malformed present clock is unresolved. Read XLSX
+through selected raw XML cells so excluded price/exit/P&L/future cells are not implicitly converted.
 
 After entry/source PASS, attach only fixed raw no-stop endpoints OPEN541 through CLOSE900 (15:00CT).
 Require every endpoint and held minute observed/valid, known flow on>=90%parent entry days, at least
