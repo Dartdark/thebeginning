@@ -1,11 +1,21 @@
 {
   "program": "new_standalone_t6",
-  "status": "researching",
+  "status": "design_pass_validation_pending",
   "goal_met": false,
-  "notification_event": null,
-  "latest_completed_hypothesis": "NQ Opening Pressure Consensus",
-  "latest_result": "Basic CP5 design pass t2.52/NW5 2.65 vetoed by failed confirmation filter. NQ-only control t4.19/NW5 4.29 is a result-informed lead, not a selectable candidate or goal success.",
-  "new_standalone_economic_configurations_tested": 20,
+  "notification_event": {
+    "id": "opp-design-b2875a3",
+    "kind": "design_pass_candidate",
+    "symbol": "NQ / MNQ",
+    "timeframe_minutes": 5,
+    "trade_t": 4.187172,
+    "daily_nw5_t": 4.293518,
+    "period": "2018-22 design only",
+    "limitations": "Result-informed nomination; not t6; historical validation,placebos,selection/dependence checks and independent review pending.",
+    "result_url": "https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/opening_path_persistence.md"
+  },
+  "latest_completed_hypothesis": "NQ Opening Path Persistence design",
+  "latest_result": "Frozen result-informed nomination passed all design and matched-control checks:418trades,trade t4.187,dailyNW5 4.294. Not t6;2023+validation and review pending.",
+  "new_standalone_economic_configurations_tested": 25,
   "excluded_from_goal": "NQ Day Flow Six is an existing-signal composite, not a new standalone strategy.",
   "allowed_timeframes_minutes": [
     1,
@@ -13,6 +23,7 @@
     15,
     30
   ],
-  "next_action": "Freeze a result-informed opening-path follow-up before 2023+ returns, with nearby settings and full search disclosure.",
-  "last_report": "agents/codex/results/opening_pressure.md"
+  "next_action": "Run only frozen OPP and ALL5control on2023--2026-10-09 historical validation.",
+  "last_report": "agents/codex/results/opening_path_persistence.md",
+  "unique_economic_configurations": 24
 }

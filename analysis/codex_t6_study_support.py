@@ -18,7 +18,7 @@ def bind(out,plan,prereg,models,symbols,prior,modules):
     paths=[]
     for symbol in symbols:paths+=sorted((ROOT/'data').glob(f'{symbol}_1min_*.csv'))
     paths+=[ROOT/plan]+[ROOT/'analysis'/p for p in ['grid.py','grid24.py','metrics.py','resampling.py','codex_cash_open_repair.py','codex_flow_absorption.py','codex_s03_calendar.py','codex_t6_study_support.py']+modules]
-    C.dump(out/'input_binding.json',dict(prereg=prereg,source={str(p.relative_to(ROOT)):C.sha(p) for p in paths},models=models,new_economic_models=len(models),prior_program_models=prior))
+    C.dump(out/'input_binding.json',dict(prereg=prereg,source={str(p.relative_to(ROOT)):C.sha(p) for p in paths},models=models,configuration_evaluations=len(models),prior_program_model_evaluations=prior))
     C.write(out/'.gitignore','numba_cache/\n')
 
 
@@ -63,7 +63,9 @@ def evaluate(out,g,sigs,days,phase,prereg,candidates,base_map,prior,independent=
                 tt=tx if '-' in period or '+' in period else tx[tx.date.dt.year==int(period)]
                 metrics.append(dict(model=name,period=period,side=label,**C.stats(tt,ds)))
         for col in ('net_mnq','stress_four_ticks'):
-            metrics.append(dict(model=name,period='2018-22' if phase=='design' else '2023+',side=col,**C.stats(t,days,column=col)))
+            normalized=t.copy()
+            if col=='net_mnq':normalized['pnl']=normalized.pnl/10.
+            metrics.append(dict(model=name,period='2018-22' if phase=='design' else '2023+',side=col,**C.stats(normalized,days,column=col)))
     df=pd.DataFrame(metrics);C.csv(out/f'{phase}_metrics.csv',df)
     C.csv(out/f'{phase}_daily.csv',pd.DataFrame(daily).rename_axis('date'),index=True);C.dump(out/f'{phase}_counts.json',cts)
     controls={};cache={}
