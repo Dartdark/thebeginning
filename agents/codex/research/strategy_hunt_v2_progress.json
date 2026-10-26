@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H01_gross_pass_design_pending",
+  "status": "H01_closed_continue_next_hypothesis",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -14,7 +14,7 @@
   "budget": {
     "max_counted_evaluations": 60,
     "max_hypotheses": 10,
-    "counted_evaluations": 0,
+    "counted_evaluations": 3,
     "hypotheses_started": 1,
     "gross_screens_run": 1,
     "stop_on_either_limit": true,
@@ -74,7 +74,7 @@
       "id": "H01",
       "name": "LDF long-side delta confirmation against current book",
       "kind": "disclosed existing-lead confirmation plus strict/causal data correction",
-      "stage": "gross_pass_design_pending",
+      "stage": "closed_design_rejected",
       "evidence": "agents/codex/evidence/hunt_v2_ldf_delta_confirmation.md",
       "plan": "agents/codex/plans/hunt_v2_ldf_delta_confirmation.md",
       "planned_models": [
@@ -83,7 +83,7 @@
         "STRICT30_primary"
       ],
       "planned_counted_evaluations_after_gross_pass": 3,
-      "actual_counted_evaluations": 0,
+      "actual_counted_evaluations": 3,
       "gross_screen_runs": 1,
       "data_or_returns_read_for_hypothesis": true,
       "prior_selection_and_failed_old_bench_disclosed": true,
@@ -119,10 +119,88 @@
         "downstream_requires_verified_execution_marker_and_all_artifact_hashes": true,
         "decisions": "Proceed only if passed; otherwise stop H01 before all counted designs/validation/benches."
       },
-      "gross_verified_execution": "analysis/outputs/codex_hunt_v2_ldf_delta/gross_verified_execution.json"
+      "gross_verified_execution": "analysis/outputs/codex_hunt_v2_ldf_delta/gross_verified_execution.json",
+      "design_implementation_commit": "45e005ce1e88ca3b041310b2434e6675839a83b9",
+      "design_verified_execution": "analysis/outputs/codex_hunt_v2_ldf_delta/design_verified_execution.json",
+      "selected": null,
+      "validation_run": false,
+      "book_bench_run": false,
+      "final_result": "STRICT30 failed year stability and total-profit/removed-profit/matched-subset gates. Close H01; do not nominate LEGACY or retune.",
+      "report": "agents/codex/results/hunt_v2_ldf_delta_confirmation.md",
+      "design_primary_metrics": {
+        "model": "STRICT30",
+        "period": "2018-22",
+        "side": "all",
+        "basis": "MNQ",
+        "gross": 4204.5,
+        "cost": 857.9200000000003,
+        "trades": 383,
+        "win": 0.5430809399477807,
+        "avg": 8.737806788511751,
+        "annual": 676.8364044943818,
+        "sharpe": 1.152324136160548,
+        "sortino": 1.9732280673065385,
+        "profit_factor": 1.4763475909187955,
+        "max_dd": 1402.440000000001,
+        "calmar": 0.48261344834316,
+        "ulcer": 1.0426324635173478,
+        "ulcer_perf": 1.2983221378146168,
+        "total": 3346.5800000000004,
+        "t_trade": 2.5753470594501318,
+        "t_nw5": 2.276980683631377,
+        "sessions": 1246
+      },
+      "design_filter_diagnostics": {
+        "model": "STRICT30",
+        "seed": 20261027,
+        "samples": 1000,
+        "strata": "year x side x completed-signal hour",
+        "paths_are_nonexecutable_diagnostics": true,
+        "base_trades": 485,
+        "kept_trades": 383,
+        "removed_trades": 102,
+        "base_net": 3504.5999999999995,
+        "kept_net": 3346.579999999999,
+        "removed_net": 158.0199999999999,
+        "removed_average": 1.5492156862745088,
+        "removed_t": 0.32864445900130507,
+        "actual_kept_max_dd": 1402.440000000001,
+        "jointly_beaten_fraction": 0.329,
+        "joint_comparison": "strictly higher profit AND strictly lower max drawdown",
+        "random_profit_at_least_actual_p": 0.17582417582417584,
+        "random_dd_at_most_actual_p": 0.6563436563436563
+      }
     }
   ],
-  "counted_evaluations": [],
+  "counted_evaluations": [
+    {
+      "hypothesis": "H01",
+      "model": "BASE",
+      "period": "2018-22",
+      "counted": true,
+      "role": "reference/unselectable",
+      "marker": "analysis/outputs/codex_hunt_v2_ldf_delta/design_verified_execution.json",
+      "native_cost_unit": "USD per1MNQ"
+    },
+    {
+      "hypothesis": "H01",
+      "model": "LEGACY",
+      "period": "2018-22",
+      "counted": true,
+      "role": "reference/unselectable",
+      "marker": "analysis/outputs/codex_hunt_v2_ldf_delta/design_verified_execution.json",
+      "native_cost_unit": "USD per1MNQ"
+    },
+    {
+      "hypothesis": "H01",
+      "model": "STRICT30",
+      "period": "2018-22",
+      "counted": true,
+      "role": "selectable primary",
+      "marker": "analysis/outputs/codex_hunt_v2_ldf_delta/design_verified_execution.json",
+      "native_cost_unit": "USD per1MNQ"
+    }
+  ],
   "gross_screens": [
     {
       "hypothesis": "H01",
@@ -142,7 +220,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "Implement/freeze/commit and run ONLY the three H01 stopped design models under aa726e2; raw gross already passed and MUST NOT be rerun. On design pass run current personal19 design-period BASE/ADD/REPLACE/EMPTY immediately; stopH01 if no verified plan improvement. No2023candidate prices until selection/early-bench disposition committed. Templates remain reference-only. Continue within60evaluations or10hypotheses, preserving all failures.",
+  "next_action": "H01 is CLOSED: gross passed but stopped STRICT30 design failed3/5positiveyears,totalkept<BASE,removedprofitpositive,andonly32.9%matchedjointbeats. Do NOT rerun or nominateLEGACY. No2023,bench/MC/PL warranted. Start a different v2 hypothesis following priority/novelty search, mechanism BEFORE data and committed<=5configuration prereg, retaining current book/empty-slot requirements. Useruploads remainREFERENCEONLY,notrunnablecandidates. Remaining budget57countedevaluations or9hypotheses; stop at either cap and summarize.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -164,5 +242,32 @@
     "code_execution": false,
     "hypotheses_or_evaluations_added": 0,
     "H01_frozen_rule_changed": false
-  }
+  },
+  "last_verified_execution": {
+    "kind": "counted_design",
+    "hypothesis": "H01",
+    "started_utc": "2026-10-26T15:02:55.594574+00:00",
+    "completed_utc": "2026-10-26T15:03:01.245975+00:00",
+    "implementation_commit": "45e005ce1e88ca3b041310b2434e6675839a83b9",
+    "prereg": "aa726e2",
+    "models": [
+      "BASE",
+      "LEGACY",
+      "STRICT30"
+    ],
+    "base_path_replays": 1,
+    "configurations_evaluated": 3,
+    "v2_cumulative_evaluations": 3,
+    "v2_hypotheses_started": 1,
+    "retained_gross_screens": 1,
+    "passed": false,
+    "net_trade_t_mnq": 2.5753470594501318,
+    "daily_nw5_t_mnq": 2.276980683631377,
+    "net_mnq": 3346.5800000000004,
+    "validation_run": false,
+    "book_bench_run": false,
+    "powerlanguage_written": false,
+    "marker": "analysis/outputs/codex_hunt_v2_ldf_delta/design_verified_execution.json"
+  },
+  "last_report": "agents/codex/results/hunt_v2_ldf_delta_confirmation.md"
 }

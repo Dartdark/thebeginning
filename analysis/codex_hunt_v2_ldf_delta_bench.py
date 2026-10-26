@@ -195,7 +195,7 @@ def authorize(args) -> tuple[dict, dict, dict]:
         if path != marker_path.parent / name or artifacts.get(name) != sha(path):
             raise PermissionError("Bench input is not the exact marker-bound " + name)
     schema = marker.get("daily_schema", {})
-    if schema.get("net_unit") != "USD per1MNQ" or schema.get("commission_rt") != FEE or schema.get("slippage_per_market_stop_fill") != SLIP:
+    if schema.get("net_unit") != "USD per 1 MNQ" or schema.get("commission_rt") != FEE or schema.get("slippage_per_market_stop_fill") != SLIP:
         raise PermissionError("Design daily unit/cost metadata is missing or different")
     start, end = date.fromisoformat(marker["warmup_first_eligible_date"]), date.fromisoformat(marker["design_last_date"])
     if not date(2018, 1, 1) <= start <= end <= END:

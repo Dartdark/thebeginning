@@ -1,0 +1,42 @@
+{
+  "LEGACY": {
+    "model": "LEGACY",
+    "seed": 20261026,
+    "samples": 1000,
+    "strata": "year x side x completed-signal hour",
+    "paths_are_nonexecutable_diagnostics": true,
+    "base_trades": 485,
+    "kept_trades": 376,
+    "removed_trades": 109,
+    "base_net": 3504.5999999999995,
+    "kept_net": 3627.7599999999993,
+    "removed_net": -123.16000000000025,
+    "removed_average": -1.1299082568807362,
+    "removed_t": -0.22460425761392735,
+    "actual_kept_max_dd": 1103.7400000000007,
+    "jointly_beaten_fraction": 0.744,
+    "joint_comparison": "strictly higher profit AND strictly lower max drawdown",
+    "random_profit_at_least_actual_p": 0.058941058941058944,
+    "random_dd_at_most_actual_p": 0.23176823176823177
+  },
+  "STRICT30": {
+    "model": "STRICT30",
+    "seed": 20261027,
+    "samples": 1000,
+    "strata": "year x side x completed-signal hour",
+    "paths_are_nonexecutable_diagnostics": true,
+    "base_trades": 485,
+    "kept_trades": 383,
+    "removed_trades": 102,
+    "base_net": 3504.5999999999995,
+    "kept_net": 3346.579999999999,
+    "removed_net": 158.0199999999999,
+    "removed_average": 1.5492156862745088,
+    "removed_t": 0.32864445900130507,
+    "actual_kept_max_dd": 1402.440000000001,
+    "jointly_beaten_fraction": 0.329,
+    "joint_comparison": "strictly higher profit AND strictly lower max drawdown",
+    "random_profit_at_least_actual_p": 0.17582417582417584,
+    "random_dd_at_most_actual_p": 0.6563436563436563
+  }
+}
