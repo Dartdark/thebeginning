@@ -62,10 +62,22 @@ def header_url(text, title):
 
 
 def pdf_identity(text, expected_url, expected_week):
-    url = header_url(text, 'Weekly Petroleum Status Report')
+    try:
+        url = header_url(text, 'Weekly Petroleum Status Report')
+    except SourceGateError:
+        # One observed source has a blank PDF metadata title. Its internal official
+        # title must independently agree before accepting the exact URL header.
+        first = text.splitlines()[0] if text else ''
+        blank = re.fullmatch(r' \((https://www\.eia\.gov/[^\s)]+)\)', first)
+        internal = re.search(r'^L0@P0:\s*(?:[ivxlcdm]+\s+)?Weekly Petroleum Status Report/Energy Information Administration\s*$',
+                             text, flags=re.M | re.I)
+        if not blank or not internal:
+            raise
+        url = blank[1]
     if url != expected_url:
         raise SourceGateError('wrong_highlights_url', f'Actual{url}; expected{expected_url}')
-    if len(re.findall(r'^Weekly Petroleum Status Report \(', text, flags=re.M)) != 1:
+    pdf_headers = re.findall(r'^(?:Weekly Petroleum Status Report)? \((https://www\.eia\.gov/[^\s)]+)\)$', text, flags=re.M)
+    if pdf_headers != [expected_url]:
         raise SourceGateError('multiple_pdf_document_blocks', 'Expected one converted Highlights document')
     meta = text.split('L0@P', 1)[0]
     pages = re.search(r'Content type:\s*application/pdf;\s*Number of pages:\s*(\d+)\b', meta)
@@ -127,7 +139,10 @@ def source_identity(record, row):
     pdf_week = pdf_identity(highlights, expected_highlights, week)
     return dict(observed_issue_url=actual_issue, observed_highlights_url=expected_highlights,
                 observed_html_week_ending=parsed_html_week, observed_pdf_week_ending=pdf_week,
-                issue_header_warning=warning, identity_verified=True)
+                issue_header_warning=warning,
+                pdf_metadata_title_warning=('Blank metadata title; internal official title/URL/page/week verified'
+                                            if highlights.startswith(' (') else ''),
+                identity_verified=True)
 
 
 def sha(path):
@@ -190,28 +205,44 @@ def index_records(lines):
     return frame
 
 
-def prose_changes(text):
-    """Fail closed: use change sentences rather than subtract rounded levels."""
+def prose_change_details(text):
+    """Normalize explicit weekly source quantities; retain their amounts and units."""
     text = clean_document(text)
     starts = {
         'crude_ex_spr_change_mb': r'U\.S\. commercial crude oil inventories\s*\(excluding[^)]*Strategic Petroleum Reserve\)',
         'gasoline_change_mb': r'Total motor gasoline inventories',
         'distillate_change_mb': r'Distillate fuel inventories',
     }
-    values = {}
+    subjects = {**starts, 'crude_ex_spr_change_mb': r'U\.S\. commercial crude oil inventories'}
+    details = {}
+    number = r'(?:\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?|\.\d+)'
     for name, start in starts.items():
+        if len(re.findall(subjects[name], text, flags=re.I)) != 1:
+            raise ValueError(f'Missing/duplicate inventory subject: {name}')
         weekly = r'(?:from\s+(?:the\s+)?(?:previous|prior|last)\s+week|last\s+week)\b'
-        pattern = (start + r'\s+(increased|decreased)\s+by\s+(\d+(?:\.\d+)?)\s+million barrels\s+'
-                   + weekly)
-        matches = re.findall(pattern, text, flags=re.I)
+        pattern = (start + r'\s+(increased|decreased)\s+by\s+(' + number +
+                   r')\s+((?:(?:million|thousand)\s+)?barrels)\s+(' + weekly + ')' +
+                   r'(?=$|[.;]|\s*,?\s+(?:and|but)\s+are\b)')
+        matches = list(re.finditer(pattern, text, flags=re.I))
         if len(matches) != 1:
             raise ValueError(f'Missing/ambiguous published inventory-change sentence: {name}')
-        direction, amount = matches[0]
-        amount = float(amount)
+        direction, reported, unit, scope = matches[0].groups()
+        amount = float(reported.replace(',', ''))
         if not math.isfinite(amount):
             raise ValueError(f'Nonfinite published inventory change:{name}')
-        values[name] = amount * (1 if direction.lower() == 'increased' else -1)
-    return values
+        unit = unit.lower()
+        denominator = {'million barrels': 1., 'thousand barrels': 1000., 'barrels': 1000000.}[unit]
+        scale = 1. / denominator
+        value = amount / denominator * (1 if direction.lower() == 'increased' else -1)
+        details[name] = dict(value_mb=value, reported_amount=reported, reported_unit=unit,
+                             factor_to_million_barrels=scale, direction=direction.lower(),
+                             weekly_scope=scope, matched_source_text=matches[0][0])
+    return details
+
+
+def prose_changes(text):
+    """Fail closed: no stock-level subtraction or ambiguous unchanged-to-zero fill."""
+    return {name: value['value_mb'] for name, value in prose_change_details(text).items()}
 
 
 def sample_parity():
@@ -253,7 +284,7 @@ def component_ingestion(frame):
                      calendar_lag_days=int(row.calendar_lag_days), source_filename=relative,
                      source_exists=path.exists(), converted_source_sha256='', identity_verified=False,
                      published_changes_parsed=False, retained_component_triple=False,
-                     reason='missing_serial_source', detail='', issue_header_warning='',
+                     reason='missing_serial_source', detail='', issue_header_warning='', pdf_metadata_title_warning='',
                      actual_release_clock_verified=False, immutable_first_publication_verified=False)
         if not path.exists():
             audits.append(audit)
@@ -277,7 +308,8 @@ def component_ingestion(frame):
             audits.append(audit)
             continue
         try:
-            values = prose_changes(record['highlights_document_text'])
+            quantity_details = prose_change_details(record['highlights_document_text'])
+            values = {name: value['value_mb'] for name, value in quantity_details.items()}
         except ValueError as error:
             audit.update(reason='published_weekly_change_parse_failure', detail=str(error))
             audits.append(audit)
@@ -290,6 +322,7 @@ def component_ingestion(frame):
                                canonical_issue_url=audit['observed_issue_url'],
                                canonical_highlights_url=audit['observed_highlights_url'],
                                captured_utc=record.get('captured_utc', record.get('captureUTC', '')),
+                               source_quantity_trace=json.dumps(quantity_details, sort_keys=True),
                                raw_pdf_downloaded=bool(record.get('raw_pdf_downloaded', False)),
                                actual_release_clock_verified=False,
                                immutable_first_publication_verified=False))
@@ -297,7 +330,7 @@ def component_ingestion(frame):
     audit_frame = pd.DataFrame(audits)
     columns = ['source_key', 'release_date', 'week_ending'] + FIELDS + [
         'source_filename', 'converted_source_sha256', 'canonical_issue_url', 'canonical_highlights_url',
-        'captured_utc', 'raw_pdf_downloaded', 'actual_release_clock_verified', 'immutable_first_publication_verified']
+        'captured_utc', 'source_quantity_trace', 'raw_pdf_downloaded', 'actual_release_clock_verified', 'immutable_first_publication_verified']
     component_frame = pd.DataFrame(components, columns=columns)
     excluded = audit_frame[~audit_frame.retained_component_triple]
     available = audit_frame[audit_frame.source_exists]
@@ -311,6 +344,7 @@ def component_ingestion(frame):
         exclusion_reasons={str(k): int(v) for k, v in excluded.reason.value_counts().items()},
         retained_by_release_year={str(k): int(v) for k, v in component_frame.groupby(component_frame.release_date.str[:4]).size().items()},
         html_header_warning_keys=audit_frame.loc[audit_frame.issue_header_warning.ne(''), 'source_key'].tolist(),
+        pdf_metadata_title_warning_keys=audit_frame.loc[audit_frame.pdf_metadata_title_warning.ne(''), 'source_key'].tolist(),
         extra_serial_source_filenames=sorted(path.name for path in directory.glob('*.json') if path.name not in expected_files),
         ignored_diagnostic_directories=['acquired', 'verified_sources'],
         no_backfill_from_samples_or_diagnostic_attempts=True,
@@ -322,7 +356,7 @@ def component_ingestion(frame):
             'Holiday/disruption clocks and multiple-edition dates require independent handling before strategy tests.',
             'Archived dated files may contain later corrections; original first-publication bytes are not established.',
             '2018June27updated production statistic does not itself prove an inventory-field correction.',
-            '2026August26summary sign correction demonstrates mutability; it is source-review evidence, not a design observation.'])
+            '2026August26summary-text sign correction does not specifically identify Highlights PDF; it is source-review evidence, not a design observation.'])
     if len(audit_frame) != len(frame) or audit_frame.source_key.duplicated().any():
         raise ValueError('Every calendar edition must have exactly one component audit row')
     return component_frame, audit_frame, coverage
@@ -333,8 +367,17 @@ def engineering():
             'decreased by 7.4 million barrels from the previous week.\nL18@P0: Total motor gasoline inventories increased by 4.8 million '
             'barrels last week.\nL21@P0: Distillate fuel inventories increased by 8.9 million barrels last week.')
     assert prose_changes(text) == dict(crude_ex_spr_change_mb=-7.4, gasoline_change_mb=4.8, distillate_change_mb=8.9)
-    for broken in (text.replace('million barrels', 'thousand barrels'), text + text,
+    assert prose_changes(text.replace('7.4 million', '.8 million'))['crude_ex_spr_change_mb'] == -.8
+    assert prose_changes(text.replace('7.4 million', '400 thousand'))['crude_ex_spr_change_mb'] == -.4
+    assert prose_changes(text.replace('7.4 million', '249,000'))['crude_ex_spr_change_mb'] == -.249
+    for broken in (text.replace('million barrels', 'billion barrels'), text + text,
+                   text.replace('7.4 million', '24,90'),
+                   text.replace('million barrels', 'barrels per day'),
                    text.replace('decreased by 7.4', 'were unchanged'),
+                   text.replace('from the previous week', 'last week from a year ago'),
+                   text.replace('from the previous week', 'from the previous week per day'),
+                   text + ' Total motor gasoline inventories were virtually unchanged last week.',
+                   text + ' Total motor gasoline inventories decreased by an unspecified amount last week.',
                    text.replace('from the previous week', 'from the previous year').replace('last week', 'last year'),
                    text.replace(' from the previous week', '').replace(' last week', '')):
         try:
@@ -375,15 +418,75 @@ def engineering():
             raise AssertionError('Edition/date/URL/page mismatches must fail before numeric parsing')
     malformed = {**record, 'issue_document_text': issue.replace('week ending January 5, 2018', 'week ending January, 2018')}
     assert source_identity(malformed, row)['issue_header_warning']
+    blank_title = (f' ({pdf_url})\nContent type: application/pdf; Number of pages: 1;\n'
+                   'L0@P0: v Weekly Petroleum Status Report/Energy Information Administration\n'
+                   'L1@P0: During the week ending January 5, 2018.\n' + text)
+    assert source_identity({**record, 'highlights_document_text': blank_title}, row)['pdf_metadata_title_warning']
+    try:
+        source_identity({**record, 'highlights_document_text': blank_title.replace(
+            'Weekly Petroleum Status Report/Energy Information Administration', 'Unrelated source')}, row)
+    except SourceGateError:
+        pass
+    else:
+        raise AssertionError('Blank metadata title requires independently matching internal official title')
     assert '2022_06_17_data' in expected_urls('2022-06-29__2022-06-17', '2022-06-29')[0]
     return dict(passed=True, checks=['published signed weekly changes and exact units',
+        'leading decimals/thousands/comma-barrels normalized with literal quantity trace',
         'annual/missing scope and missing/unchanged/duplicate prose fail closed',
+        'weekly scope termination and contradictory nonnumeric duplicate subjects fail closed',
         'release versus data-ending year rollover', 'two same-day editions remain distinct',
         'calendar IDs/canonical URLs/one-page PDF/first-week-ending identity before numbers',
         'malformed HTML week header flagged; PDF/index agreement still required',
+        'blank PDF metadata title requires matching internal title/URL/page/week',
         'ordinary5,403 data is not an HTTP403 error',
         'five actual saved sample PDFs match canonical identity/week-ending/numeric changes',
         'no price or strategy-return inputs'], five_sample_parity=sample_parity())
+
+
+def offline_review():
+    """Reconcile this dated offline repair against its preserved156-row baseline."""
+    directory = OUT / 'offline_review_20261026'
+    manifest = json.loads((directory / 'baseline_manifest.json').read_text())
+    for name, expected_hash in manifest['files'].items():
+        if sha(directory / ('baseline_' + name)) != expected_hash:
+            raise ValueError(f'Preserved baseline hash mismatch:{name}')
+    baseline = pd.read_csv(directory / 'baseline_design_components.csv')
+    current = pd.read_csv(OUT / 'design_components.csv')
+    before_audit = pd.read_csv(directory / 'baseline_design_component_audit.csv').fillna('')
+    after_audit = pd.read_csv(OUT / 'design_component_audit.csv').fillna('')
+    fields = ['source_key', 'source_exists', 'converted_source_sha256']
+    pd.testing.assert_frame_equal(before_audit[fields], after_audit[fields], check_exact=True)
+    common = ['source_key'] + FIELDS + ['converted_source_sha256']
+    old = baseline[common].sort_values('source_key').reset_index(drop=True)
+    now = current[current.source_key.isin(baseline.source_key)][common].sort_values('source_key').reset_index(drop=True)
+    pd.testing.assert_frame_equal(old, now, check_exact=True)
+    expected = json.loads((directory / 'expected_recoveries.json').read_text())['expected']
+    added = current[~current.source_key.isin(baseline.source_key)]
+    if set(added.source_key) != set(expected):
+        raise ValueError('Offline recovery must match every independently reviewed source, with no other admissions')
+    qualitative_keys = {'2018-06-27__2018-06-22', '2018-12-28__2018-12-21',
+                        '2019-01-04__2018-12-28', '2021-02-03__2021-01-29', '2021-02-24__2021-02-19'}
+    qualitative = after_audit[after_audit.source_key.isin(qualitative_keys)]
+    if (len(qualitative) != 5 or qualitative.retained_component_triple.any() or
+            not qualitative.reason.eq('published_weekly_change_parse_failure').all()):
+        raise ValueError('All five qualitative unchanged reports must retain their explicit parse exclusion')
+    records = []
+    for row in added.itertuples():
+        target = expected[row.source_key]
+        actual = [getattr(row, field) for field in FIELDS]
+        if actual != target['values_mb'] or row.converted_source_sha256 != target['unchanged_raw_source_sha256']:
+            raise ValueError(f'Independent offline source/value parity failed:{row.source_key}')
+        records.append(dict(source_key=row.source_key, values_mb=actual,
+                            unchanged_raw_source_sha256=row.converted_source_sha256,
+                            quantity_trace=json.loads(row.source_quantity_trace)))
+    result = dict(baseline_commit=manifest['baseline_commit'], preserved_baseline_hashes_verified=True,
+                  baseline_triples=len(baseline), current_triples=len(current), recovered_triples=len(added),
+                  every_original_value_unchanged=True, all_captured_source_hashes_and_presence_unchanged=True,
+                  recovered_source_keys=sorted(expected), ambiguous_unchanged_still_excluded=True,
+                  network_requests=0, futures_price_files_opened=False, new_strategy_return_trials=0,
+                  details=records)
+    (directory / 'recovery_audit.json').write_text(json.dumps(result, indent=2) + '\n')
+    print(json.dumps({k: v for k, v in result.items() if k != 'details'}, indent=2))
 
 
 def run():
@@ -422,8 +525,11 @@ def run():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--self-check', action='store_true')
+    parser.add_argument('--offline-review', action='store_true')
     args = parser.parse_args()
     if args.self_check:
         print(engineering())
+    elif args.offline_review:
+        offline_review()
     else:
         run()

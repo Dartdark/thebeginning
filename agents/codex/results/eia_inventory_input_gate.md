@@ -1,8 +1,9 @@
 # CL inventory components: NEEDS DATA; source intake only
 
-Summary: Acquired and audited a new EIA fundamentals input; no strategy returns were calculated.
-The design calendar has 261 editions on 260 dates; 156 component triples pass source/text checks.
-105 editions remain excluded; historical exception clocks, revisions and native execution inputs need review.
+Summary: Audited a new EIA fundamentals input; this iteration recovered nine reports offline without new acquisition.
+No strategy returns were calculated.
+The design calendar has 261 editions on 260 dates; 165 component triples pass source/text checks.
+96 editions remain excluded; historical exception clocks, revisions and native execution inputs need review.
 Program remains 60 evaluations/58 unique rules. No design-pass or t4/4.5/5/6 milestone; continue research.
 
 Plan: agents/codex/plans/eia_inventory_input_gate.md, source-intake commit5723c95. This is not an economic preregistration.
@@ -36,13 +37,24 @@ Before extracting values, the script checks calendar sourcekey/release/week iden
 document header URLs, exact same-issue Highlights path, one-page PDF metadata and first PDF week-ending.
 The delayed June2022 edition has its own source path. A malformed2019-01-09HTML week header is flagged;
 PDF/index agreement remains mandatory. Missing, mismatched and ambiguous sources have explicit audit rows.
+The2020-03-18PDF has a blank metadata title: only an exact official URL, internal official title, one-page
+metadata and matching week-ending allow that narrow exception, with a retained warning.
 
-The parser uses signed weekly change sentences, with exact inventory subjects, million-barrel units and
-last-week/previous-week scope. It rejects annual wording, missing/duplicate amounts and ambiguous unchanged
+The parser uses signed weekly change sentences, with exact inventory subjects and last-week/previous-week
+scope. Explicit million-barrel, thousand-barrel and barrel quantities are normalized to million barrels;
+leading decimals and strictly grouped comma amounts are supported. Each row retains the literal matched
+source phrase, original amount/unit, conversion factor and direction in source_quantity_trace.
+It rejects annual/per-day scope suffixes, missing/duplicate subjects or amounts and ambiguous unchanged
 language. It does not subtract rounded stock levels: the2022-12-29crude change is+0.7, even though rounded
 levels419.0−418.2give+0.8. Five actual saved sample responses across2018–22 reconcile numerically. Synthetic
 tests include units, weekly scope, wrong URLs/weeks, duplicate editions and distinguishing ordinary5,403data
 from an actualHTTP403 error.
+
+The dated offline_review_20261026/ audit preserves the prior156-row panel and all261audit rows. Independent
+literal-source review identified eight quantity-format recoveries and the one blank-title recovery. The panel
+now has165triples; all156original values and all218captured source hashes/presence are unchanged. Five
+qualitative unchanged reports remain excluded; none was assigned zero. No network request or futures-price
+file was used. See agents/codex/research/eia_offline_recovery_review.md and the reproducible recovery_audit.json.
 
 ```json
 {
@@ -50,8 +62,8 @@ from an actualHTTP403 error.
   "strategy_return_trials": 0,
   "expected_editions": 261,
   "serial_source_files_present": 218,
-  "identities_verified": 169,
-  "complete_triples": 156,
+  "identities_verified": 170,
+  "complete_triples": 165,
   "all_expected_identities_verified": false,
   "complete_component_panel": false,
   "missing_source_keys": [
@@ -104,17 +116,8 @@ from an actualHTTP403 error.
     "2018-12-28__2018-12-21",
     "2019-01-04__2018-12-28",
     "2019-04-10__2019-04-05",
-    "2019-12-11__2019-12-06",
-    "2020-02-20__2020-02-14",
-    "2020-02-26__2020-02-21",
-    "2020-03-04__2020-02-28",
     "2020-03-11__2020-03-06",
-    "2020-03-18__2020-03-13",
-    "2020-04-08__2020-04-03",
     "2020-05-06__2020-05-01",
-    "2020-06-24__2020-06-19",
-    "2020-07-15__2020-07-10",
-    "2020-08-05__2020-07-31",
     "2020-10-15__2020-10-09",
     "2021-02-03__2021-01-29",
     "2021-02-24__2021-02-19",
@@ -209,17 +212,19 @@ from an actualHTTP403 error.
   "exclusion_reasons": {
     "missing_document_text": 48,
     "missing_serial_source": 43,
-    "published_weekly_change_parse_failure": 13,
-    "invalid_document_header": 1
+    "published_weekly_change_parse_failure": 5
   },
   "retained_by_release_year": {
     "2018": 50,
-    "2019": 49,
-    "2020": 42,
+    "2019": 50,
+    "2020": 50,
     "2021": 15
   },
   "html_header_warning_keys": [
     "2019-01-09__2019-01-04"
+  ],
+  "pdf_metadata_title_warning_keys": [
+    "2020-03-18__2020-03-13"
   ],
   "extra_serial_source_filenames": [],
   "ignored_diagnostic_directories": [
@@ -236,7 +241,7 @@ from an actualHTTP403 error.
     "Holiday/disruption clocks and multiple-edition dates require independent handling before strategy tests.",
     "Archived dated files may contain later corrections; original first-publication bytes are not established.",
     "2018June27updated production statistic does not itself prove an inventory-field correction.",
-    "2026August26summary sign correction demonstrates mutability; it is source-review evidence, not a design observation."
+    "2026August26summary-text sign correction does not specifically identify Highlights PDF; it is source-review evidence, not a design observation."
   ],
   "five_sample_parity": {
     "2018-01-04": {
@@ -283,8 +288,11 @@ notices is retained in design_issue_notice_scan.csv; it is not proof that every 
 The original2018/2022AppendixB describes normal Highlights publication at10:30Eastern, earlier than the
 full report. Actual historical receipt, holiday/disruption clocks and field-specific corrections require their
 own handling. The2018June27issue documents an updated production statistic; that alone does not establish
-an inventory-field correction. A2026notice records an inventory-summary sign corrected after initial release.
-That2026example is source-review evidence, not a design observation. Archived dated files are not established
+an inventory-field correction. A2026notice records a distillate sign correction in “summary text”; it does
+not specifically identify the Highlights PDF as affected. That example is source-review evidence, not proof
+of a Highlights revision or a design observation. The June2022 issue says delayed June17data would originally
+have appeared June23, then accompanied June24data on June29; it supplies no intraday clock.
+Archived dated files are not established
 as immutable first vintages. No retrospective timestamp or corrected value has been called an observed live input.
 
 CL/MCL execution also needs explicit instrument parameters. Shared grid._walk is reusable, but NQ-specific
@@ -317,4 +325,6 @@ PowerLanguage was produced here. Input work does not complete t6 or create an in
 The separate source-access blocker requires the action above; the research continuation remains enabled.
 Last completed strategy-return experiment remains the rejected
 Correlation Risk Budget study; its execution marker and all prior performance/milestone history are preserved.
+A separate bounded offline input screen is saved in agents/codex/research/distinct_input_feasibility_20261026.md.
+It identifies no new TEST candidate; it is not an exhaustive search or evidence that no distinct edge exists.
 Claude review path: agents/codex/results/eia_inventory_input_gate.md.

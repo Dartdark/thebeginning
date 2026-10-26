@@ -41,6 +41,12 @@ strategy ticket would determine its entry. Native MCL costs/parity and listing h
 | Availability | Original2018/2022AppendixB documents normal10:30ETHighlights policy | Historical exception clocks/receipt and field-specific correction timing |
 | Vintage | Dated archived editions are accessible | First-publication bytes not verified; archives can be updated |
 
+Source-intake update2026-10-26: the parsed official calendar has261editions/260distinct release dates and
+an exact complete weekly sequence. Offline representation review now admits165triples from218captured
+serial sources, with96explicit exclusions. The original156values/source hashes are unchanged. See
+agents/codex/research/eia_offline_recovery_review.md and the current result. This is still NEEDS DATA;
+the five-sample facts above describe the initial evidence rather than full source coverage.
+
 Use the published change sentence. Rounded stock-level subtraction can differ:2022-12-29crude reports+0.7,
 although rounded levels419.0−418.2give+0.8. No current time series or later-edition backfill substitutes for an
 unavailable archived observation. UnsupportedCSV400 is a tool-format limitation, not a403.

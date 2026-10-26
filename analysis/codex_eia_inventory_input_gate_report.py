@@ -25,6 +25,12 @@ def main(update_program=False):
     access = json.loads((OUT / 'access_gate.json').read_text())
     audit = pd.read_csv(OUT / 'design_component_audit.csv')
     panel = pd.read_csv(OUT / 'design_components.csv')
+    recovery_path = OUT / 'offline_review_20261026/recovery_audit.json'
+    recovery = json.loads(recovery_path.read_text())
+    if (recovery['current_triples'] != coverage['complete_triples'] or
+            not recovery['every_original_value_unchanged'] or
+            not recovery['all_captured_source_hashes_and_presence_unchanged']):
+        raise ValueError('Dated offline recovery audit must reconcile before reporting this iteration')
     dates = pd.to_datetime(panel.release_date)
     columns = ['crude_ex_spr_change_mb', 'gasoline_change_mb', 'distillate_change_mb']
     frequency = []
@@ -57,13 +63,20 @@ def main(update_program=False):
         serial_sources_present=coverage['serial_source_files_present'],
         identities_verified=coverage['identities_verified'], complete_component_triples=coverage['complete_triples'],
         unresolved_component_rows=len(coverage['excluded_source_keys']),
+        offline_representation_recoveries=recovery['recovered_triples'],
+        unchanged_captured_source_files=True,
+        offline_recovery_audit=str(recovery_path.relative_to(ROOT)),
+        offline_recovery_audit_sha256=digest(recovery_path),
+        distinct_input_screen='agents/codex/research/distinct_input_feasibility_20261026.md',
+        distinct_input_screen_sha256=digest(ROOT / 'agents/codex/research/distinct_input_feasibility_20261026.md'),
         parser='analysis/codex_eia_inventory_input_gate.py', parser_sha256=digest(ROOT / 'analysis/codex_eia_inventory_input_gate.py'),
         source_calendar_sha256=digest(OUT / 'design_archive_calendar.csv'),
         coverage='analysis/outputs/codex_eia_inventory_input_gate/coverage.json', report=REPORT)
     (OUT / 'research_activity.json').write_text(json.dumps(activity, indent=2) + '\n')
     report = f'''# CL inventory components: NEEDS DATA; source intake only
 
-Summary: Acquired and audited a new EIA fundamentals input; no strategy returns were calculated.
+Summary: Audited a new EIA fundamentals input; this iteration recovered nine reports offline without new acquisition.
+No strategy returns were calculated.
 The design calendar has {calendar['editions']} editions on {calendar['distinct_release_dates']} dates; {coverage['complete_triples']} component triples pass source/text checks.
 {len(coverage['excluded_source_keys'])} editions remain excluded; historical exception clocks, revisions and native execution inputs need review.
 Program remains 60 evaluations/58 unique rules. No design-pass or t4/4.5/5/6 milestone; continue research.
@@ -99,13 +112,24 @@ Before extracting values, the script checks calendar sourcekey/release/week iden
 document header URLs, exact same-issue Highlights path, one-page PDF metadata and first PDF week-ending.
 The delayed June2022 edition has its own source path. A malformed2019-01-09HTML week header is flagged;
 PDF/index agreement remains mandatory. Missing, mismatched and ambiguous sources have explicit audit rows.
+The2020-03-18PDF has a blank metadata title: only an exact official URL, internal official title, one-page
+metadata and matching week-ending allow that narrow exception, with a retained warning.
 
-The parser uses signed weekly change sentences, with exact inventory subjects, million-barrel units and
-last-week/previous-week scope. It rejects annual wording, missing/duplicate amounts and ambiguous unchanged
+The parser uses signed weekly change sentences, with exact inventory subjects and last-week/previous-week
+scope. Explicit million-barrel, thousand-barrel and barrel quantities are normalized to million barrels;
+leading decimals and strictly grouped comma amounts are supported. Each row retains the literal matched
+source phrase, original amount/unit, conversion factor and direction in source_quantity_trace.
+It rejects annual/per-day scope suffixes, missing/duplicate subjects or amounts and ambiguous unchanged
 language. It does not subtract rounded stock levels: the2022-12-29crude change is+0.7, even though rounded
 levels419.0−418.2give+0.8. Five actual saved sample responses across2018–22 reconcile numerically. Synthetic
 tests include units, weekly scope, wrong URLs/weeks, duplicate editions and distinguishing ordinary5,403data
 from an actualHTTP403 error.
+
+The dated offline_review_20261026/ audit preserves the prior156-row panel and all261audit rows. Independent
+literal-source review identified eight quantity-format recoveries and the one blank-title recovery. The panel
+now has165triples; all156original values and all218captured source hashes/presence are unchanged. Five
+qualitative unchanged reports remain excluded; none was assigned zero. No network request or futures-price
+file was used. See agents/codex/research/eia_offline_recovery_review.md and the reproducible recovery_audit.json.
 
 ```json
 '''+json.dumps(coverage, indent=2)+'''
@@ -121,8 +145,11 @@ notices is retained in design_issue_notice_scan.csv; it is not proof that every 
 The original2018/2022AppendixB describes normal Highlights publication at10:30Eastern, earlier than the
 full report. Actual historical receipt, holiday/disruption clocks and field-specific corrections require their
 own handling. The2018June27issue documents an updated production statistic; that alone does not establish
-an inventory-field correction. A2026notice records an inventory-summary sign corrected after initial release.
-That2026example is source-review evidence, not a design observation. Archived dated files are not established
+an inventory-field correction. A2026notice records a distillate sign correction in “summary text”; it does
+not specifically identify the Highlights PDF as affected. That example is source-review evidence, not proof
+of a Highlights revision or a design observation. The June2022 issue says delayed June17data would originally
+have appeared June23, then accompanied June24data on June29; it supplies no intraday clock.
+Archived dated files are not established
 as immutable first vintages. No retrospective timestamp or corrected value has been called an observed live input.
 
 CL/MCL execution also needs explicit instrument parameters. Shared grid._walk is reusable, but NQ-specific
@@ -155,6 +182,8 @@ PowerLanguage was produced here. Input work does not complete t6 or create an in
 The separate source-access blocker requires the action above; the research continuation remains enabled.
 Last completed strategy-return experiment remains the rejected
 Correlation Risk Budget study; its execution marker and all prior performance/milestone history are preserved.
+A separate bounded offline input screen is saved in agents/codex/research/distinct_input_feasibility_20261026.md.
+It identifies no new TEST candidate; it is not an exhaustive search or evidence that no distinct edge exists.
 Claude review path: '''+REPORT+'''.
 '''
     (ROOT / REPORT).write_text(report)
@@ -189,7 +218,10 @@ Claude review path: '''+REPORT+'''.
         current = progress.get('notification_event')
         if current is not None and (not isinstance(current, dict) or current.get('id') != event['id']):
             raise ValueError('Preserve another pending notification; program update refused')
-        progress['notification_event'] = event
+        # An already delivered blocker is an immutable notification snapshot. Source
+        # representation repairs are routine research, not a reason to emit it again.
+        if current is None:
+            progress['notification_event'] = event
         history = progress.setdefault('notification_event_history', [])
         if not any(item.get('id') == event['id'] for item in history):
             history.append(event)

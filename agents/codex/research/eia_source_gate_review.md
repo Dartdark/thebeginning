@@ -4,6 +4,10 @@ This is a source/data gate, not a strategy preregistration or performance result
 price response, sign-agreement counts, candidate selection, account tests or forward execution were run.
 Five sampled archived issues establish a concrete free source route, not complete 2018–22 coverage.
 
+This note records the initial five-sample review. Later acquisition, offline repairs and the separately
+reported access blocker are documented in agents/codex/results/eia_inventory_input_gate.md and
+agents/codex/research/eia_offline_recovery_review.md; the initial conclusion below is historical.
+
 ## Files and provenance
 
 Actual returned web-tool responses are preserved in
@@ -62,7 +66,8 @@ documents a production-statistic correction in its PDF/CSV. That does not establ
 on that date, but demonstrates mutable archives. An official
 [2026 correction notice](https://www.eia.gov/petroleum/supply/weekly/includes/revision-notice.php) records
 an initially wrong distillate-summary direction corrected at12:13ET, while tables were correct. It is source
-review evidence only and was not used as a strategy input or return observation.
+review evidence only and was not used as a strategy input or return observation. The notice says
+“summary text”; it does not specifically identify the Highlights PDF as affected.
 
 Call this input archived-issue changes until field-specific vintage/correction checks justify more. Retain
 issue notices and known corrections, distinguish publication policy from actual receipt, and freeze handling

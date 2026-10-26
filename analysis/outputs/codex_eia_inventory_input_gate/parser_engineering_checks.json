@@ -2,11 +2,14 @@
   "passed": true,
   "checks": [
     "published signed weekly changes and exact units",
+    "leading decimals/thousands/comma-barrels normalized with literal quantity trace",
     "annual/missing scope and missing/unchanged/duplicate prose fail closed",
+    "weekly scope termination and contradictory nonnumeric duplicate subjects fail closed",
     "release versus data-ending year rollover",
     "two same-day editions remain distinct",
     "calendar IDs/canonical URLs/one-page PDF/first-week-ending identity before numbers",
     "malformed HTML week header flagged; PDF/index agreement still required",
+    "blank PDF metadata title requires matching internal title/URL/page/week",
     "ordinary5,403 data is not an HTTP403 error",
     "five actual saved sample PDFs match canonical identity/week-ending/numeric changes",
     "no price or strategy-return inputs"
