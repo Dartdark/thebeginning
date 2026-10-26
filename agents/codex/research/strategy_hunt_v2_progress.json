@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "I04_preregistered_margin_metadata_archive_before_acquisition",
+  "status": "I04_source_pass_ready_for_committed_pinned_archive_metadata_execution",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -590,7 +590,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-26T20:34:15.303936+00:00",
+  "updated_utc": "2026-10-26T20:38:53.768943+00:00",
   "current_adopted_source_commit": "7f0800ffc04d56bd878750369a4abc2316ee01d8",
   "current_adopted_source_reconciliation": "7f0800f source adds lessons/docs/exporter; adoptedbook/ranking sources are unchanged from615485f; no operational file or other-branch writes. CurrentSTv3parent source archived exactly forH03.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -701,7 +701,7 @@
     {
       "id": "I04",
       "name": "CME collector poll-time and product identity coverage",
-      "stage": "preregistered_nonreturn_metadata_only_before_archive_acquisition",
+      "stage": "source_synthetic_pass_ready_for_single_acquisition_metadata_intake",
       "mechanism": "agents/codex/evidence/hunt_v2_new_primary_nomination.md",
       "source_note": "agents/codex/research/hunt_v2_new_primary_nomination.md",
       "mechanism_decision": "NEEDS DATA / primary clock; not H05 or TEST",
@@ -717,7 +717,12 @@
       "hypotheses_added": 0,
       "economic_evaluations_added": 0,
       "gross_screens_added": 0,
-      "boundary": "One immutable file, timestamp/identity/period/currency metadata ONLY. Poll time is not release/effective time. No maintenance numbers, change events, filled daily state or strategies; raw cache ignored; no old-study rescue."
+      "boundary": "One immutable file, timestamp/identity/period/currency metadata ONLY. Poll time is not release/effective time. No maintenance numbers, change events, filled daily state or strategies; raw cache ignored; no old-study rescue.",
+      "initial_plan_commit": "7ff1d6a",
+      "script": "analysis/codex_hunt_v2_cme_margin_metadata.py",
+      "reviewed_script_sha256": "29e7b12936bf3f11426abdab056265c8110edd84be372f989473cd4a7ff5d136",
+      "preexecution_review": "agents/codex/reviews/hunt_v2_cme_margin_metadata_preexecution.md",
+      "raw_cache_ignored": true
     }
   ],
   "last_source_quality_execution": {
