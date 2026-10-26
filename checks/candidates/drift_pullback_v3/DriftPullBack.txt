@@ -1,0 +1,191 @@
+Inputs:
+    TradeContracts(1),
+    MinHourlyMovePercent(0.10),
+    MaxTradesPerDay(4),
+    MaxDailyLossTrades(2),
+    NoNewTradesBeforeTime(1000),
+    NoNewTradesAfterTime(1530),
+    ForceFlatTime(1555),
+    SessionStartTime(0930),
+    SessionEndTime(1600),
+    LongStopPoints(80),
+    LongTargetPoints(40),
+    ShortStopPoints(80),
+    ShortTargetPoints(50);
+
+Vars:
+    InSession1(false),
+    InSession2(false),
+    SessionDate1(0),
+    SessionDate2(0),
+
+    VWAP2Numerator(0),
+    VWAP2Denominator(0),
+    VWAP2Value(0),
+    VWAP2Previous(0),
+    TypicalPrice2(0),
+    VWAP2Ready(false),
+    VWAP2HasPrevious(false),
+
+    HourMovePercent(0),
+    TrendLong(false),
+    TrendShort(false),
+
+    VWAPRising(false),
+    VWAPFalling(false),
+
+    CanEnter(false),
+    LongSignal(false),
+    ShortSignal(false),
+
+    TradesToday(0),
+    LosingTradesToday(0),
+    LastClosedNetProfit(0);
+
+{ Data2: tendencia y VWAP de 15 minutos }
+If BarStatus(2) = 2 Then
+Begin
+    InSession2 = Time of Data2 >= SessionStartTime and Time of Data2 <= SessionEndTime;
+
+    If InSession2 and Date of Data2 <> SessionDate2 Then
+    Begin
+        SessionDate2 = Date of Data2;
+
+        VWAP2Numerator = 0;
+        VWAP2Denominator = 0;
+        VWAP2Value = 0;
+        VWAP2Previous = 0;
+        VWAP2Ready = false;
+        VWAP2HasPrevious = false;
+
+        TrendLong = false;
+        TrendShort = false;
+        VWAPRising = false;
+        VWAPFalling = false;
+    End;
+
+    If InSession2 Then
+    Begin
+        If VWAP2Ready Then
+        Begin
+            VWAP2Previous = VWAP2Value;
+            VWAP2HasPrevious = true;
+        End;
+
+        TypicalPrice2 = (High of Data2 + Low of Data2 + Close of Data2) / 3;
+
+        VWAP2Numerator = VWAP2Numerator + TypicalPrice2 * Volume of Data2;
+        VWAP2Denominator = VWAP2Denominator + Volume of Data2;
+
+        If VWAP2Denominator > 0 Then
+        Begin
+            VWAP2Value = VWAP2Numerator / VWAP2Denominator;
+            VWAP2Ready = true;
+
+            If VWAP2HasPrevious Then
+            Begin
+                VWAPRising = VWAP2Value > VWAP2Previous;
+                VWAPFalling = VWAP2Value < VWAP2Previous;
+            End
+            Else
+            Begin
+                VWAPRising = false;
+                VWAPFalling = false;
+            End;
+        End;
+    End;
+
+    If CurrentBar of Data2 > 4 Then
+    Begin
+        If Close[4] of Data2 > 0 Then
+            HourMovePercent = 100 * (Close of Data2 / Close[4] of Data2 - 1)
+        Else
+            HourMovePercent = 0;
+
+        TrendLong = HourMovePercent >= MinHourlyMovePercent;
+        TrendShort = HourMovePercent <= -MinHourlyMovePercent;
+    End;
+End;
+
+{ Data1: trigger de 5 minutos, entradas y salidas }
+If BarStatus(1) = 2 Then
+Begin
+    InSession1 = Time >= SessionStartTime and Time <= SessionEndTime;
+
+    If InSession1 and Date <> SessionDate1 Then
+    Begin
+        SessionDate1 = Date;
+
+        TradesToday = 0;
+        LosingTradesToday = 0;
+        LastClosedNetProfit = NetProfit;
+    End;
+
+    If NetProfit <> LastClosedNetProfit Then
+    Begin
+        If NetProfit < LastClosedNetProfit Then
+            LosingTradesToday = LosingTradesToday + 1;
+
+        LastClosedNetProfit = NetProfit;
+    End;
+
+    SetStopContract;
+
+    If MarketPosition = 1 Then
+    Begin
+        SetStopLoss(LongStopPoints * BigPointValue);
+        SetProfitTarget(LongTargetPoints * BigPointValue);
+    End;
+
+    If MarketPosition = -1 Then
+    Begin
+        SetStopLoss(ShortStopPoints * BigPointValue);
+        SetProfitTarget(ShortTargetPoints * BigPointValue);
+    End;
+
+    If MarketPosition = 1 and Time >= ForceFlatTime Then
+        Sell ("L-TimeExit") next bar at market;
+
+    If MarketPosition = -1 and Time >= ForceFlatTime Then
+        BuyToCover ("S-TimeExit") next bar at market;
+
+    CanEnter =
+        InSession1 and
+        MarketPosition = 0 and
+        Time >= NoNewTradesBeforeTime and
+        Time <= NoNewTradesAfterTime and
+        TradesToday < MaxTradesPerDay and
+        LosingTradesToday < MaxDailyLossTrades and
+        VWAP2Ready and
+        VWAP2HasPrevious;
+
+    LongSignal =
+        CanEnter and
+        TrendLong and
+        VWAPRising and
+        Close > VWAP2Value and
+        Close < Open;
+
+    ShortSignal =
+        CanEnter and
+        TrendShort and
+        VWAPFalling and
+        Close < VWAP2Value and
+        Close > Open;
+
+    If LongSignal Then
+    Begin
+        SetStopLoss(LongStopPoints * BigPointValue);
+        SetProfitTarget(LongTargetPoints * BigPointValue);
+        TradesToday = TradesToday + 1;
+        Buy ("DPVWAP-L") TradeContracts contracts next bar at market;
+    End;
+
+    If ShortSignal Then
+    Begin
+        SetStopLoss(ShortStopPoints * BigPointValue);
+        SetProfitTarget(ShortTargetPoints * BigPointValue);
+        TradesToday = TradesToday + 1;
+        SellShort ("DPVWAP-S") TradeContracts contracts next bar at market;
+    End;
+End;

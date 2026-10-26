@@ -27,11 +27,25 @@ PV, TICK, COST = 20.0, 0.25, 7.25
 
 
 class Data:
-    def __init__(self, g):
+    def __init__(self, g, adjust=False):
+        """adjust=True (registered 2026-10-23, Codex's cross-review): indicators, regime, swing levels and the signal bar's
+        open come from roll-adjusted 1-minute prices (raw minus the cumulative contract-switch jumps up to each minute, as
+        the code's RawRollHandling does); order prices are converted back to raw (+ self.cum of the bar)."""
         self.g = g; self.o, self.h, self.l, self.c = (getattr(g, x).ravel() for x in ("o", "h", "l", "c"))
-        B = g.bars(15); bc = B["c"].ravel(); keep = np.flatnonzero(np.isfinite(bc))
+        rolls = np.sort(roll_minutes(g, "NQ")); cum_min = np.zeros(len(self.c))
+        if adjust:
+            for j in rolls:
+                p = j - 1
+                while not np.isfinite(self.c[p]): p -= 1
+                cum_min[j:] += self.c[j] - self.c[p]
+        class _G: pass
+        ga = _G(); ga.D = g.D
+        for x in ("o", "h", "l", "c", "v"):
+            setattr(ga, x, (getattr(g, x).ravel() - (cum_min if x != "v" else 0)).reshape(g.D, -1))
+        B = type(g).bars(ga, 15); bc = B["c"].ravel(); keep = np.flatnonzero(np.isfinite(bc))
         self.e = keep * 15                                                        # flat index of each bar's last minute
         self.O, self.H, self.L, self.C = (B[x].ravel()[keep] for x in ("o", "h", "l", "c"))
+        self.cum = cum_min[self.e]                                                # adjusted + cum = raw at the bar's end
         self.row = self.e // 1440; col = self.e % 1440; self.hhmm = (col // 60) * 100 + col % 60
         n = len(self.C); a = 2 / 51; ema = np.empty(n); ema[0] = self.C[0]
         for i in range(1, n): ema[i] = ema[i - 1] + a * (self.C[i] - ema[i - 1])
@@ -83,7 +97,7 @@ def run(D, mode="FAR", conv="ours", rand_p=None, seed=1, wick_on=True, ema_on=Tr
                         fill = min(o[m], lim) if side > 0 else max(o[m], lim)
                         pos = side; ent = fill; fm = m; kf = k; be_done = False; eod_pending = False
                         if c03:
-                            sw = D.L[sk - 9:sk].min() if side > 0 else D.H[sk - 9:sk].max()
+                            sw = (D.L[sk - 9:sk].min() if side > 0 else D.H[sk - 9:sk].max()) + D.cum[sk]
                             Rr = (fill - sw) * side
                             if 0 < Rr <= 3 * atr_s: stop, tgt, swing = sw, fill + side * 3 * Rr, True
                             else: stop, tgt, swing, Rr = fill - side * atr_s, fill + side * atr_s, False, atr_s
@@ -94,7 +108,7 @@ def run(D, mode="FAR", conv="ours", rand_p=None, seed=1, wick_on=True, ema_on=Tr
                             for L_ in range(2, 11):
                                 a, b_, cc = (D.L if side > 0 else -D.H)[[k - L_, k - L_ + 1, k - L_ - 1]]
                                 if a < b_ and a < cc:
-                                    sw = D.L[k - L_] if side > 0 else D.H[k - L_]; rk = (fill - sw) * side / TICK
+                                    sw = (D.L[k - L_] if side > 0 else D.H[k - L_]) + D.cum[k]; rk = (fill - sw) * side / TICK
                                     if rk <= 500: stop, tgt, swing, Rr = sw, fill + side * (fill - sw) * side * 3, True, (fill - sw) * side
                                     break
                         break
@@ -137,7 +151,7 @@ def run(D, mode="FAR", conv="ours", rand_p=None, seed=1, wick_on=True, ema_on=Tr
         if pos != 0:
             if k == kf: eod_pending = False
             if swing and not be_done:
-                fav = (mfe if c03 else ((D.H[k] - ent) if pos > 0 else (ent - D.L[k])))
+                fav = (mfe if c03 else ((D.H[k] + D.cum[k] - ent) if pos > 0 else (ent - D.L[k] - D.cum[k])))
                 if fav >= 0.5 * Rr:
                     stop = ent + pos * (beoff if c03 else 5 * TICK); be_done = True
             if not c03 and not flat_rth and D.hhmm[k] >= 2100: eod_pending = True
@@ -151,12 +165,12 @@ def run(D, mode="FAR", conv="ours", rand_p=None, seed=1, wick_on=True, ema_on=Tr
         if rand_p is not None:
             if rng.random() < rand_p:
                 sd = int(rng.choice([-1, 1])) if shorts else 1
-                armed = (sd, D.O[k], k, D.atr[k])
+                armed = (sd, D.O[k] + D.cum[k], k, D.atr[k])
             continue
         if D.C[k] > D.O[k] and (D.C[k] > D.ema[k] or not ema_on) and ((D.O[k] - D.L[k]) <= tol or not wick_on):
-            armed = (1, D.O[k], k, D.atr[k])
+            armed = (1, D.O[k] + D.cum[k], k, D.atr[k])
         elif dn and D.C[k] < D.O[k] and (D.C[k] < D.ema[k] or not ema_on) and ((D.H[k] - D.O[k]) <= tol or not wick_on):
-            armed = (-1, D.O[k], k, D.atr[k])
+            armed = (-1, D.O[k] + D.cum[k], k, D.atr[k])
     t = pd.DataFrame(out)
     wk = t.exit_date.dt.dayofweek
     t["weekend"] = wk >= 5

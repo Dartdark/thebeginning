@@ -42,7 +42,9 @@ def fast_plan_lab(sp):
         if len(hit): jx = e_i + hit[0]; px = (spx if jx == e_i or np.isnan(O[jx]) else max(O[jx], spx)) + TK
         rows.append(dict(date=pd.Timestamp(cl.ts[int(r.mon)]), net=(e - px) * PVc - CM, adv=min((e - np.nanmax(H[e_i:jx + 1])) * PVc - CM, (e - px) * PVc - CM)))
     t = pd.DataFrame(rows).set_index("date")
-    lab = pickle.load(open(sp + "lab.pkl", "rb")); lab.add("MON_BR_MC", load_bridge_mc(lab.g), slippage=False)
+    lab = pickle.load(open(sp + "lab.pkl", "rb"))
+    if not hasattr(lab, "N"): lab.N, lab.J0 = {}, {}        # lab.pkl saved before funded_lab's real-fee option
+    lab.add("MON_BR_MC", load_bridge_mc(lab.g), slippage=False)
     dates = pd.DatetimeIndex(lab.g.ts[lab.tr]); pos = pd.Series(np.arange(len(dates)), index=dates)
     Wd = np.zeros(len(dates)); Cd = np.zeros(len(dates))
     for d, r in t.iterrows():

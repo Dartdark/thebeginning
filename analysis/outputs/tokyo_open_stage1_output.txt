@@ -1,0 +1,14 @@
+Stage 1 (look only) for the Tokyo-open idea card (checks/ideas/tokyo_open.md, 2026-10-25). NQ 2018-2022 ONLY (2023-26 is
+
+1. NQ 2018-2022, 1180 Tokyo opens (evenings Sun-Thu). Reversal = sign(first 15-min push) x the next move, in ATR:
+   Tokyo open                                     next 60 min +0.0031 ATR (t +1.1, $-18.5 a fade gross per NQ) | next 120 min +0.0017 (t +0.4)
+   placebo: same evenings, the other clock hour   next 60 min -0.0027 ATR (t -0.9, $+6.9 a fade gross per NQ) | next 120 min +0.0003 (t +0.1)
+   by push size (Tokyo): {'small': '+0.0012 ATR (t +0.3, n 394, fade $-20)', 'mid': '+0.0062 ATR (t +1.3, n 393, fade $-26)', 'big': '+0.0020 ATR (t +0.3, n 393, fade $-10)'}
+   by push size (placebo): {'small': '-0.0013 ATR (t -0.3, fade $+5)', 'mid': '-0.0099 ATR (t -1.9, fade $+32)', 'big': '+0.0031 ATR (t +0.5, fade $-16)'}
+   by year (Tokyo, 60 min): {2018: '-0.0022 (t -0.4)', 2019: '+0.0000 (t +0.0)', 2020: '+0.0118 (t +1.7)', 2021: '-0.0013 (t -0.2)', 2022: '+0.0074 (t +1.4)'}
+   by season (Tokyo at 18:00 vs 19:00 CT): {18: '+0.0143', 19: '-0.0014'}
+
+2. Gotobi: NQ from the Tokyo open to the 09:55 JST fix, in ATR: gotobi -0.0019 (t -0.4, n 354), ordinary +0.0012 (t +0.4, n 946); difference t -0.6
+   USD/JPY sanity (Yahoo 60-min, 2024-01-08 .. 2026-10-23): 00:00-01:00 UTC bar gotobi -2.0 bp (t -2.1, n 199) vs ordinary -0.1 bp (t -0.2)
+
+   figure: analysis/outputs/tokyo_open_stage1.png

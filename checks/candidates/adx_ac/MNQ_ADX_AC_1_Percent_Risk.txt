@@ -1,0 +1,337 @@
+Inputs:
+    InitialCapital(25000),
+    RiskPercent(1.0),
+    MaximumContracts(100),
+
+    CommissionRoundTurnPerContract(2.00),
+    SlippageTicksPerSide(1),
+
+    ADXPeriod(14),
+    MinimumADX(20),
+    ConfirmationBars(40),
+
+    ACFastPeriod(8),
+    ACSlowPeriod(39),
+    ACThresholdATRMultiplier(0.10),
+
+    ATRPeriod(14),
+    StopATRMultiplier(1.0),
+    TargetATRMultiplier(2.0),
+    BreakEvenATRMultiplier(0.20),
+
+    SessionStartTime(930),
+    LastEntryTime(1551);
+
+Variables:
+    ADXValue(0),
+    DIPlusValue(0),
+
+    MedianValue(0),
+    AOValue(0),
+    AOSmoothed(0),
+    ACValue(0),
+    ACThreshold(0),
+
+    ATRValue(0),
+    EntryATR(0),
+
+    StopAmount(0),
+    TargetAmount(0),
+    BreakEvenAmount(0),
+
+    TickSizeValue(0),
+    TickDollarValue(0),
+    SlippageRoundTurnAmount(0),
+    TotalEstimatedCost(0),
+
+    CurrentCapital(0),
+    RiskBudget(0),
+    RiskPerContract(0),
+    ContractQty(0),
+
+    LongCross(False),
+    ShortCross(False),
+    LongSignal(False),
+    ShortSignal(False),
+
+    LongSetupAge(999),
+    ShortSetupAge(999),
+
+    ADXFilter(False),
+    TradingTime(False),
+    EnoughData(False);
+
+
+{ Current capital }
+
+CurrentCapital =
+    InitialCapital + NetProfit;
+
+If CurrentCapital < 0 then
+    CurrentCapital = 0;
+
+
+{ Maximum risk budget }
+
+RiskBudget =
+    CurrentCapital * RiskPercent / 100;
+
+
+{ Tick value for the current instrument }
+
+If PriceScale > 0 then
+    TickSizeValue = MinMove / PriceScale
+else
+    TickSizeValue = 0;
+
+TickDollarValue =
+    TickSizeValue * BigPointValue;
+
+
+{ Round-turn slippage:
+  number of ticks per side multiplied by two
+}
+
+SlippageRoundTurnAmount =
+    SlippageTicksPerSide
+    * 2
+    * TickDollarValue;
+
+
+{ Round-turn commission plus slippage per contract }
+
+TotalEstimatedCost =
+    CommissionRoundTurnPerContract
+    + SlippageRoundTurnAmount;
+
+
+{ ADX and DI Plus calculation }
+
+ADXValue = ADX(ADXPeriod);
+DIPlusValue = DMIPlus(ADXPeriod);
+
+
+{ Acceleration/Deceleration Oscillator calculation }
+
+MedianValue =
+    (High + Low) / 2;
+
+AOValue =
+    AverageFC(MedianValue, ACFastPeriod)
+    - AverageFC(MedianValue, ACSlowPeriod);
+
+AOSmoothed =
+    AverageFC(AOValue, ACFastPeriod);
+
+ACValue =
+    AOValue - AOSmoothed;
+
+
+{ ATR calculation }
+
+ATRValue =
+    AvgTrueRange(ATRPeriod);
+
+
+{ Volatility-adjusted AC threshold }
+
+ACThreshold =
+    ATRValue * ACThresholdATRMultiplier;
+
+
+{ Check for sufficient data }
+
+EnoughData =
+    CurrentBar > ACSlowPeriod + ACFastPeriod;
+
+
+{ Allowed entry window }
+
+TradingTime =
+    Time >= SessionStartTime
+    and Time <= LastEntryTime;
+
+
+{ ADX filter }
+
+ADXFilter =
+    ADXValue >= MinimumADX
+    and ADXValue > ADXValue[1];
+
+
+{ Long when DI Plus crosses above ADX }
+
+LongCross =
+    DIPlusValue > ADXValue
+    and DIPlusValue[1] <= ADXValue[1];
+
+
+{ Short when ADX crosses above DI Plus }
+
+ShortCross =
+    ADXValue > DIPlusValue
+    and ADXValue[1] <= DIPlusValue[1];
+
+
+{ Reset setups at the beginning of the day }
+
+If Date <> Date[1] then
+begin
+    LongSetupAge = 999;
+    ShortSetupAge = 999;
+end;
+
+
+{ Activate Long setup }
+
+If LongCross then
+begin
+    LongSetupAge = 0;
+    ShortSetupAge = 999;
+end
+else
+begin
+    If LongSetupAge < 999 then
+        LongSetupAge = LongSetupAge + 1;
+end;
+
+
+{ Activate Short setup }
+
+If ShortCross then
+begin
+    ShortSetupAge = 0;
+    LongSetupAge = 999;
+end
+else
+begin
+    If ShortSetupAge < 999 then
+        ShortSetupAge = ShortSetupAge + 1;
+end;
+
+
+{ Long signal }
+
+LongSignal =
+    LongSetupAge <= ConfirmationBars
+    and DIPlusValue > ADXValue
+    and ADXFilter
+    and ACValue >= ACThreshold;
+
+
+{ Short signal }
+
+ShortSignal =
+    ShortSetupAge <= ConfirmationBars
+    and ADXValue > DIPlusValue
+    and ADXFilter
+    and ACValue <= -ACThreshold;
+
+
+{ Entries }
+
+If MarketPosition = 0
+    and TradingTime
+    and EnoughData then
+begin
+
+    If LongSignal or ShortSignal then
+    begin
+
+        EntryATR = ATRValue;
+
+
+        { Stop per contract expressed in dollars }
+
+        StopAmount =
+            EntryATR
+            * StopATRMultiplier
+            * BigPointValue;
+
+
+        { Target per contract expressed in dollars }
+
+        TargetAmount =
+            EntryATR
+            * TargetATRMultiplier
+            * BigPointValue;
+
+
+        { Break-even threshold per contract expressed in dollars }
+
+        BreakEvenAmount =
+            EntryATR
+            * BreakEvenATRMultiplier
+            * BigPointValue;
+
+
+        { Risk includes the stop, commission, and slippage }
+
+        RiskPerContract =
+            StopAmount + TotalEstimatedCost;
+
+
+        { Calculate the number of contracts }
+
+        If RiskPerContract > 0 then
+            ContractQty =
+                IntPortion(
+                    RiskBudget / RiskPerContract
+                )
+        else
+            ContractQty = 0;
+
+
+        { Maximum safety limit }
+
+        If ContractQty > MaximumContracts then
+            ContractQty = MaximumContracts;
+
+
+        { Do not enter if one contract exceeds the risk budget }
+
+        If ContractQty >= 1 then
+        begin
+
+            If LongSignal then
+            begin
+                Buy ("ADX-AC-L")
+                    ContractQty contracts
+                    next bar at market;
+
+                LongSetupAge = 999;
+            end
+
+            else if ShortSignal then
+            begin
+                SellShort ("ADX-AC-S")
+                    ContractQty contracts
+                    next bar at market;
+
+                ShortSetupAge = 999;
+            end;
+
+        end;
+
+    end;
+
+end;
+
+
+{ Stop, target, and break-even per contract }
+
+SetStopContract;
+
+If StopAmount > 0 then
+    SetStopLoss(StopAmount);
+
+If TargetAmount > 0 then
+    SetProfitTarget(TargetAmount);
+
+If BreakEvenAmount > 0 then
+    SetBreakEven(BreakEvenAmount);
+
+
+{ Mandatory exit at the end of the session }
+
+SetExitOnClose;

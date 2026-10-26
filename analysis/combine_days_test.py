@@ -18,7 +18,7 @@ FCREP = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute FC 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
     g = pickle.load(open(SP + "g24.pkl", "rb")); atr = g.daily_atr(15); trr = g.trading; D = len(trr); yr = pd.DatetimeIndex(g.ts[trr]).year
-    s47 = runpy.run_path("analysis/s47_bench.py", run_name="lib")["s47_trades"]()
+    s47 = runpy.run_path("analysis/s47_bench.py", run_name="lib")["s47_trades"](g)
     P = {}
     for nm, t in (("VB", with_slippage(load_mc(g, REPORTS["VB"][0]))), ("ONB30", with_slippage(load_mc(g, CL.ONB30))),
                   ("MON_BR", load_bridge_mc(g)), ("EOS", with_slippage(load_mc(g, REPORTS["EOS"][0]))),

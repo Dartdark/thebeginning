@@ -4,6 +4,9 @@ Read before writing or changing any MultiCharts code. **After every compile erro
 MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → fix), so it is not repeated.
 
 ## Compile errors
+- **"unrecognized token: #" at line 1** (2026-10-24, 'Overnight Ticks Auto VIX Updater' signal): a PowerShell script
+  (`tools/vix_update.ps1`) was pasted into a MultiCharts signal. `.ps1` files run in Windows PowerShell / Task Scheduler,
+  never in MultiCharts; only `.txt` PowerLanguage files go into the editor. Delete the signal and run the script in PowerShell.
 - **"Unknown Function" on `IIFString`** (NQ_Vault_Break_SP, line 199): not a built-in in our MultiCharts.
   Use an if / else with two `Print` statements (or `IFF` for numbers only).
 - **"unverified function"**: every OFB_* function must be compiled once before a signal that calls it.
@@ -149,6 +152,11 @@ Do it after 15:59 CT or on a weekend, with every account flat. Each line is an e
   through. MultiCharts' "point" is the symbol's smallest price unit. Our Python tests require 1 full point through, so
   Python is slightly stricter than MC (conservative); to reproduce an MC report trade-for-trade, use 1 tick through.
 - Data: Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close conversion unchecked.
+- **COMEX / NYMEX symbols (@GC, @CL) run on NEW YORK time in our MultiCharts** (2026-10-24, GC_COMBO): "Exchange" time zone on
+  a gold chart = Eastern, unlike @NQ / @ES (Central). Found from the GC_COMBO report: every 'chart 09:01' entry was our 08:01 CT
+  price, so its ETminusChart had to be 0, not the author's 1. A chart mixing CME and COMEX symbols (or an ASCII file mapped as
+  CME) on Exchange time gives "Instruments from different time zones cannot be mixed": map the ASCII symbol with the same
+  exchange as Data1 (COMEX), or put every instrument on Local time.
 - Auto trading: Format Signals > Properties > Auto Trading (broker, account), mode AA, initial position Flat, no automatic
   position sync, intra-bar order generation off. Tracker: Ctrl+Shift+O.
 - The ACCOUNT is behind the gear icon next to the broker plug-in (Strategy Properties > Auto Trading > Rithmic > gear).
@@ -163,3 +171,30 @@ Do it after 15:59 CT or on a weekend, with every account flat. Each line is an e
 ## Reading MultiCharts reports
 - No CSV conversion is needed: `analysis/portfolio.load_mc(g, "<report>.xlsx")` reads the "List of Trades" sheet
   directly (entry rows + exit rows), and `analysis/resampling.py` does the Monte Carlo / bootstrap.
+
+## "Can't open/create file" on a third-party strategy (2026-10-25, BB_MRM)
+`Print(File(path), ...)` fails and stops the study when the folder in `path` doesn't exist on this PC. BB_MRM's
+`VolLogFilePath` (default `C:\Users\Alessandro\...\MRM_BB\`, the author's PC) is written every session, whatever
+`LogToFile` says. Fix: in Format Signal set `VolLogFilePath` (and `LogFilePath`) to a folder that exists, e.g.
+`C:\MC_logs\BB_MRM_vol.txt` after creating `C:\MC_logs`. Check every imported strategy for hard-coded file paths.
+
+## "this word has already been defined" on a variable name (2026-10-25, Swing Target v3)
+`Short` is a reserved word in PowerLanguage (like `Buy`, `Sell`, `Long`): a variable named `Short` fails to compile.
+Renamed to `IsHol`. Avoid market-direction words as variable names.
+
+## Half-day sessions that a holiday list misses (2026-10-25, Codex's NQ Day Flow Six review)
+A fixed-time exit (`Time >= ExitTime`) never fires when the session ends early, so the position rides the halt and exits at
+the next session's first bar. Found in our own MC trade lists: **Monday Long 2023-07-03** (Monday before a Tuesday July 4,
+early close 12:15 CT) held 08:31 -> 17:05; **NFP Fade 2023-04-07** (payroll on Good Friday, shortened equity session) held to
+Sunday 17:05. Both are Apex violations live. Fix: Monday Long's early-close list now has July 3 and Dec 24; NFP Fade skips
+Good Friday (Easter computed in the code). Rule for every new strategy: list the early-close days it can trade (Jul 3,
+Nov Fri after Thanksgiving, Dec 24, Good Friday, Monday holidays) and skip them or exit before the early close; check the MC
+trade list for exits after 15:59 CT or on a later date.
+
+## A copied chart keeps the strategy's ACCOUNT (2026-10-26, live incident, account #3)
+Account #3's (150K, APEX-681524-03) chart set was copied from #2's: the chart-trading panel showed -03, but the strategies'
+Auto Trading gear still said **APEX-681524-02**. Result: #3 never traded, and its 150K-sized orders (VB 20) went to #2, which
+held 28 MNQ instead of 8 (a 75-pt stop = ~$4,200 vs a ~$400 cushion). Fixed live: AA off on #3's VB chart (its 20-lot closed,
+#2 back to 8), gear typed as APEX-681524-03 (the drop-down was empty; typing works). Rule: after copying a chart, open
+Format Signals > Properties > Auto Trading > Rithmic > gear on EVERY strategy and check the account; then check the Orders
+tab's Account column (widen it) on the first orders.

@@ -22,8 +22,8 @@ CANDS = {"FC 2B": "FC", "S47 v2": "S47", "Kusho v9 15:45": "K9"}
 
 
 def candidates(g):
-    s47 = runpy.run_path("analysis/s47_bench.py", run_name="lib")["s47_trades"]()
-    k9 = runpy.run_path("analysis/kusho_bench.py", run_name="lib")["trades"]("v9_RTH")
+    s47 = runpy.run_path("analysis/s47_bench.py", run_name="lib")["s47_trades"](g)
+    k9 = runpy.run_path("analysis/kusho_bench.py", run_name="lib")["trades"]("v9_RTH", g)
     fc = with_slippage(load_mc(g, FCREP)); fc = fc[pd.DatetimeIndex(g.ts[fc.day]) >= "2018-01-01"].reset_index(drop=True)
     return {"FC": fc, "S47": s47, "K9": k9}
 

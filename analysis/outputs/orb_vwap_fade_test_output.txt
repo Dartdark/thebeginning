@@ -1,0 +1,37 @@
+ORB -> VWAP Fade v1.1 (user's PDF with PowerLanguage, 2026-10-25; Kusho ORB / AMT family; checks/candidates/orb_vwap_fade/).
+
+1. Which session start matches the author (2020-2026, their costs, touch fills; author: net ~$29.5k, PF ~1.30, win ~76%, IS $23.1 / OOS $49.9 a trade):
+   SessStart 930 CT = 10:30 ET    net $  22,590  PF 1.24  win 75.9%  trades 852  IS $16.0  OOS $38.4
+   SessStart 830 CT = the 09:30 ET open net $  -2,799  PF 0.99  win 73.8%  trades 1321  IS $11.8  OOS $-16.2
+
+2. 2018-2026 (2018-19 = before the author's data):
+   930 CT, their costs, touch fills                   n=1045 $  22.4 PF 1.21 t  2.2 win 75% maxDD $ 5,097 | pre 18-19 $   4.5 t  0.3 | IS 20-22 $  16.0 win 77% | OOS 23-26 $  38.4 win 75% t  2.0
+   930 CT, fills only 1 tick through                  n=1045 $  -0.6 PF 1.00 t -0.1 win 72% maxDD $10,906 | pre 18-19 $ -33.7 t -2.2 | IS 20-22 $   1.4 win 74% | OOS 23-26 $  13.2 win 73% t  0.7
+   930 CT, our costs ($5 + 1 tick a fill)             n=1045 $   7.9 PF 1.07 t  0.8 win 73% maxDD $ 6,367 | pre 18-19 $ -10.0 t -0.7 | IS 20-22 $   1.5 win 74% | OOS 23-26 $  23.9 win 74% t  1.2
+   930 CT, our costs + 1 tick through                 n=1045 $ -15.1 PF 0.88 t -1.4 win 70% maxDD $22,760 | pre 18-19 $ -48.2 t -3.2 | IS 20-22 $ -13.1 win 71% | OOS 23-26 $  -1.3 win 72% t -0.1
+   830 CT (true open), their costs                    n=1661 $   1.3 PF 1.01 t  0.1 win 75% maxDD $20,888 | pre 18-19 $  14.8 t  1.3 | IS 20-22 $  11.8 win 73% | OOS 23-26 $ -16.2 win 74% t -0.8
+   930 CT, no width filter                            n=2184 $  10.2 PF 1.13 t  1.9 win 74% maxDD $ 6,005 | pre 18-19 $   3.9 t  0.6 | IS 20-22 $   5.7 win 75% | OOS 23-26 $  17.2 win 75% t  1.8
+   930 CT, width >= 0.1%                              n=1622 $  13.0 PF 1.14 t  1.8 win 74% maxDD $ 6,455 | pre 18-19 $   3.4 t  0.4 | IS 20-22 $   6.2 win 74% | OOS 23-26 $  24.1 win 75% t  1.9
+   930 CT, width >= 0.2%                              n= 659 $  34.8 PF 1.31 t  2.4 win 75% maxDD $ 5,576 | pre 18-19 $  13.8 t  0.7 | IS 20-22 $  16.6 win 76% | OOS 23-26 $  72.0 win 76% t  2.4
+   930 CT, width >= 0.25%                             n= 421 $  49.9 PF 1.42 t  2.5 win 76% maxDD $ 3,810 | pre 18-19 $  35.9 t  1.3 | IS 20-22 $  21.4 win 76% | OOS 23-26 $ 113.2 win 75% t  2.5
+   930 CT, OR 5 bars                                  n= 838 $  14.5 PF 1.14 t  1.4 win 74% maxDD $ 6,300 | pre 18-19 $  12.5 t  1.0 | IS 20-22 $  16.5 win 75% | OOS 23-26 $  12.7 win 72% t  0.6
+   930 CT, OR 10 bars                                 n=1289 $  13.7 PF 1.11 t  1.3 win 75% maxDD $13,704 | pre 18-19 $   0.2 t  0.0 | IS 20-22 $   6.5 win 76% | OOS 23-26 $  27.5 win 76% t  1.5
+   930 CT, OR 15 bars                                 n=1540 $  16.0 PF 1.12 t  1.5 win 75% maxDD $12,328 | pre 18-19 $ -17.1 t -1.2 | IS 20-22 $  11.9 win 75% | OOS 23-26 $  35.9 win 76% t  1.9
+   930 CT, stop 0.75 x range                          n=1045 $  20.0 PF 1.19 t  2.2 win 72% maxDD $ 5,510 | pre 18-19 $   5.0 t  0.4 | IS 20-22 $   7.4 win 73% | OOS 23-26 $  41.4 win 73% t  2.5
+   930 CT, stop 2.0 x range                           n=1045 $  21.5 PF 1.20 t  1.9 win 75% maxDD $ 7,477 | pre 18-19 $   3.6 t  0.2 | IS 20-22 $  14.5 win 77% | OOS 23-26 $  37.9 win 75% t  1.8
+   start 900 CT                                       n=1304 $  10.1 PF 1.08 t  0.9 win 75% maxDD $ 9,565 | pre 18-19 $  19.7 t  1.5 | IS 20-22 $   2.1 win 74% | OOS 23-26 $  14.2 win 74% t  0.8
+   start 1000 CT                                      n= 919 $ -18.7 PF 0.85 t -1.5 win 70% maxDD $18,271 | pre 18-19 $ -21.4 t -1.2 | IS 20-22 $  -4.5 win 73% | OOS 23-26 $ -37.3 win 67% t -1.4
+   start 1030 CT                                      n= 790 $  -8.8 PF 0.92 t -0.8 win 74% maxDD $ 9,895 | pre 18-19 $ -17.1 t -1.1 | IS 20-22 $  -1.3 win 75% | OOS 23-26 $ -15.0 win 74% t -0.6
+   by year (930, their costs): {2018: 1140, 2019: -277, 2020: 1164, 2021: 1241, 2022: 4841, 2023: 2367, 2024: 1600, 2025: 6285, 2026: 5092}
+   exits: {'tp': 888, 'stop': 157} | longs $27.5 (550) shorts $16.8 (495)
+   by width bucket ($ a trade / win): {'0.15-0.2%': (np.float64(1.3), np.float64(0.75), 386), '0.2-0.3%': (np.float64(9.3), np.float64(0.74), 383), '0.3-0.5%': (np.float64(51.4), np.float64(0.75), 226), '0.5-9%': (np.float64(155.6), np.float64(0.82), 50)}
+
+3. Metrics (930 CT, our costs + 1 tick through, per ES) and Monte Carlo at 1 MES:
+        trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+2018-26   1045 70% $-15 $-1,743  -0.47   -0.54          0.88 $22,760  -0.08 29.20      -0.12
+2023+      400 72%  $-1   $-132  -0.03   -0.04          0.99  $6,667  -0.02  6.63      -0.04
+   Monte Carlo ORB VWAP fade 1 MES (x0.1): trades 1045 | total p5 $-3,400 / p50 $-1,569 / p95 $191, P(total <= 0) 92.8%
+      max DD actual $2,276 (rank 56%), shuffled p50 $2,136 / p95 $3,751 / p99 $4,497; losing streak actual 6, p95 7
+      252-day block bootstrap: P&L p5 $-793 / p50 $-157 / p95 $434, P(loss) 66.6%, max DD p50 $453 / p95 $953, return/DD -0.35, P(hit $2,000 trailing, EOD check only) 0.0%
+
+   variants run here: 20; t threshold 2.81

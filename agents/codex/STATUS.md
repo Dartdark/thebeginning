@@ -5,6 +5,13 @@
 - Brief: `agents/codex/BUILDER_BRIEF.md` (entry point `AGENTS.md`). Works on branch **`codex/work`**, writes only under
   `agents/codex/`, `analysis/codex_*`, `analysis/outputs/codex_*`; never touches live trading, the VPS or `claude/*`.
 - Runs in the Codex app (local project `C:\CodexRepo`, or cloud). `C:\TradingVault` stays the journal vault only.
+- Model (user's screenshot, 2026-10-24): **GPT-6.1 Sol**, effort setting 'Light', in the Codex app's cloud mode with the
+  `thebeginning` environment. Mailbox thread for @codex mentions was PR #2 (closed unmerged 2026-10-24).
+- **@codex mailbox attempt (2026-10-24): not working.** 7 test mentions on PR #2; each time the connector answered only
+  'create an environment for this repo', even with two GitHub-linked cloud environments for Dartdark/thebeginning listed
+  (Codex: mentions use the legacy Codex Cloud, environments were made in the newer system). Stopped retrying; next step
+  would be OpenAI Support (legacy environment ID + the latest failed connector reply). File relay used meanwhile
+  (`agents/codex/NOTE_mailbox_setup_2026-10-24.md`).
 
 ## Tests (blind, branch `codex/tests`): both PASS (`agents/codex/results/GRADES.md`)
 - Test 1, Antigravity's Vault Break Combined claim: REJECT with every key finding (worse on 2023+, removed trades
@@ -73,3 +80,33 @@ once NQ_1min_2017.csv is in data/.
 ## Update 2026-10-22 (late): VB parity + stress accepted; ES Keltner guess F
 - VB: MC parity 99.6% with the 1-tick target rule; stress same as ONB (BENDS, jitter MIXED). No change.
 - ES Keltner tested with Codex's own settings at the user's request: F for that version; Davey's own stays open.
+
+## Update 2026-10-24 (Claude read codex/work up to 541d111)
+13 studies of user uploads, all pre-registered where returns were run; none changes a plan. Return tests: S03 v2 (B by
+numbers, t 3.73, DSR 0.855, no placement), NQDB2 (C, VB variant, veto fails), R2Vault (C), ORPullback (D), Anson (D),
+night volume switch (= Claude's T_ONESIDE, B; Codex: + 1 MNQ funded 1y +$345, 2y +$25 [−$124, +$180], WATCH; consistent
+with Claude's bench). Source reviews only (no code / data to test): Valeris 848 (REJECT, 2.4M combinations, OOS t fails),
+GC risk-adjusted (REJECT, $20k risk budget), noise-band CODE.txt (REJECT, $2,000 stop), NQ PROP ORB (WATCH, no SL70
+results), GC_COMBO v2 (WATCH; Claude since got the MC report: C, worse on the funded bench), Overnight TickRSV/VIX
+(WATCH: needs the code and report). Data note from NQDB2: two missing 1-2 minute bars in data/NQ_1min (2018-07-26
+13:43-13:44, 2025-06-02 11:03) plus the known 15:16-15:30 day/night seam; minor, not a defect that changes results.
+
+## Codex 2026-10-25 (codex/work db1c88b), read by Claude 2026-10-25
+- **NQ Day Flow Six (WATCH):** the plan's six intraday NQ legs (VB, ONB ML v2, Monday Long, EOS, LDF, NFP) at 1 MNQ each from
+  their MC tickets: 3,615 trades, $7.9k a year, Sharpe 2.37, adjusted t 6.77, closed-EOD DD $2.6k; 2018 −$342, 4-tick stress
+  t 5.89. Not new alpha: a recombination of legs already in the funded plan (personal REPLACE = −$67 a year, i.e. the same
+  thing). **Useful by-product:** two MC tickets held through a session halt: Monday Long 2023-07-03 (early close, out 17:05)
+  and NFP Fade 2023-04-07 (Good Friday, out Sunday 17:05). Claude confirmed both in the MC lists (only these two across all
+  nine plan lists) and fixed the code (Monday Long skips Jul 3 / Dec 24 Mondays, NFP Fade skips Good Friday); paste in
+  `TODO.md`; `MULTICHARTS_PITFALLS.md` entry added.
+- Swing Target and Overnight Rebound: already handled on the Claude branch (TIER_LIST rows; Swing Target v3 in the plans).
+
+## Codex 2026-10-26 overnight (codex/work 63f557d), read by Claude 2026-10-26: the standalone t6 program
+User mandate to Codex (2026-10-25): keep researching until a NEW standalone strategy reaches trade t and daily NW(5) t >= 6.
+14 pre-registered hypotheses, 65 counted evaluations (63 unique), **none passes**; every rejection stopped at the 2018-22
+design screen except two: Opening Path Persistence (design t 4.19 -> 2023+ t 1.27, full 3.67: decayed, not retuned) and
+Opening Pressure (CP5 t 2.52; its OWN5 control t 4.19 is result-informed, a lead only). Two data gates blocked: EIA
+inventory components (eia.gov not reachable from Codex's environment) and forward-guidance revisions (no clean source).
+Claude's view: process is clean (pre-registration, design-first stop rules, trial ledger). A standalone t >= 6 is about
+2x the best strategy in the book (VB t 4.6; whole 6-leg plan t 6.8); each failed trial raises the multiple-testing bar
+for the next. Suggested to the user: cap the program or redirect it (e.g. data the book lacks, or confirmation of B items).

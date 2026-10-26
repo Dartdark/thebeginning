@@ -33,3 +33,10 @@ Thank you,
 - At list price this is far too expensive for an untested idea. Ask about a symbol-filtered (SPY-only) extract, a
   research licence, and the free sample directory before anything else; otherwise check cheaper vendors that resell
   exchange imbalance messages (coverage start dates and timestamps must be verified the same way).
+
+## 2026-10-25 update: why, and a cheaper route to try first
+NQ's stocks close in Nasdaq's closing cross, so Nasdaq's NOII (Net Order Imbalance Indicator) matters more than NYSE's
+for NQ; NYSE / Arca (SPY) matters for ES. Before paying exchange list prices, try Databento (self-serve): dataset
+XNAS.ITCH has an 'imbalance' schema with NOII for the opening / closing crosses (databento.com/catalog/us-equities);
+check its history start and usage price for QQQ + top NDX names, 14:50-15:00 CT only. The idea card is
+checks/ideas/closing_imbalance.md.

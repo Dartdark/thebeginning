@@ -79,8 +79,13 @@ committed in the repo that reproduces it.
    (what result means adopt / reject), and which existing plan strategy it overlaps most.
 2. **Design 2018-2022, holdout 2023 onward.** Choose on 2018-22 only. Run the chosen version(s) on 2023+ once. If you
    change anything after seeing 2023+, it is a new trial: say so. 2023+ has been looked at by ~275 ranked ideas, so it is
-   no longer clean: anything that passes also goes into the **forward log** (`agents/codex/FORWARD_LOG.md`: rule frozen,
-   date frozen, then paper results added at each Friday review) before it can trade.
+   no longer clean. a candidate goes **straight into the plan** (with live monitoring: Friday reviews and the drift alarm, like every plan
+   strategy) only when it clears everything: MultiCharts-confirmed; t >= `metrics.t_threshold(N_items)` AND deflated Sharpe
+   >= 0.95; positive in both 2018-22 and 2023+ (2023+ t >= 2) with no parameter chosen on the full sample or after seeing
+   2023+; clean placebos; checker PASS (no open concerns); and it improves the plan on the bootstrapped bench (addition or
+   replacement, beating the empty slot). Otherwise the **forward log** (`agents/codex/FORWARD_LOG.md`) is a tool used at
+   discretion for promising candidates with open doubts about future performance (rule frozen, decision rule written
+   first, paper results at each Friday review) (user, 2026-10-23).
 3. **Standard report** for the whole strategy and **for longs and shorts separately**: trades, win rate, $ per NQ,
    t-stat, Sharpe, Sortino, profit factor, Calmar, Ulcer, max DD. Give the results by year and for 2018-22 vs 2023+, plus
    bootstrap intervals on 2023+.

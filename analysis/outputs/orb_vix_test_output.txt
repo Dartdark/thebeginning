@@ -1,0 +1,133 @@
+YZ_ORB_Volatility_Filtered (user's MultiCharts .NET files + ES / GC reports, 2026-10-25; checks/candidates/orb_vix/).
+
+1. The reports' settings ($5,000 risk, cap 50, longs only, $0 costs), 2020-01 -> 2026-03, vs the MultiCharts reports:
+   ES: report 746 trade days, net $179,350, PF 1.19, contracts avg 4.0 | rebuild 747 days, net $201,275, PF 1.21, contracts avg 5.9; same days 719 (96% of the report's)
+      by year report: {2020: -9512, 2021: 49250, 2022: -32425, 2023: 47950, 2024: 34838, 2025: 78762, 2026: 10488}
+      by year rebuild: {2020: -11425, 2021: 68950, 2022: -19650, 2023: 48688, 2024: 46600, 2025: 51988, 2026: 16125}
+      on the shared days: report $187,062, rebuild $183,800, daily P&L corr +0.98
+      exit mix report {'ORB_Stop_LX': 0.38, 'ORB_LX': 0.37, 'ORB_T1_LX': 0.25}; rebuild {'noon': 0.44, 't1+stop': 0.28, 'stop': 0.22, 't1+close': 0.05}
+   GC: report 712 trade days, net $232,540, PF 1.26, contracts avg 4.4 | rebuild 720 days, net $221,550, PF 1.24, contracts avg 6.5; same days 696 (98% of the report's)
+      by year report: {2020: -7870, 2021: 46540, 2022: 94370, 2023: 45550, 2024: -25910, 2025: 67210, 2026: 12650}
+      by year rebuild: {2020: -3450, 2021: 40740, 2022: 78750, 2023: 60520, 2024: -30040, 2025: 64510, 2026: 10520}
+      on the shared days: report $220,930, rebuild $225,770, daily P&L corr +0.99
+      exit mix report {'ORB_Stop_LX': 0.38, 'ORB_LX': 0.33, 'ORB_T1_LX': 0.3, 'open': 0.0}; rebuild {'noon': 0.37, 't1+stop': 0.31, 'stop': 0.22, 't1+close': 0.09, 't1': 0.01}
+
+2. ES, 2018-2026 (2018-19 = before the reports' window):
+   per contract, $0 costs (the reports)           n= 987 avg $    46 R +0.061 PF 1.17 t  1.9 win 58% yrs+ 7/9 | 18-22 t  0.1 | 23+ $    98 t  2.4
+   per contract, reviewer $4 + 1 tick             n= 987 avg $    19 R +0.025 PF 1.07 t  0.8 win 56% yrs+ 6/9 | 18-22 t -0.9 | 23+ $    71 t  1.8
+   per contract, ours $5.00 + 1 tick              n= 987 avg $    18 R +0.024 PF 1.07 t  0.8 win 56% yrs+ 6/9 | 18-22 t -0.9 | 23+ $    70 t  1.7
+   per contract by year, ours: {2018: -1738, 2019: 4088, 2020: -8475, 2021: 6905, 2022: -14416, 2023: 7616, 2024: 8505, 2025: 8116, 2026: 7320}
+   cost share: gross $46 a contract -> net $18
+   risk-sized $5,000 / cap 50, ours               n= 987 avg $   119 R +0.024 PF 1.09 t  1.1 win 56% yrs+ 7/9 | 18-22 t -0.2 | 23+ $   291 t  1.8
+      risk-sized: max contracts 39, median 6; margin at the max (~$15k ES / ~$12k GC per contract): $585,000
+   no VIX filter                                  n=1457 avg $    -1 R +0.005 PF 1.00 t -0.0 win 55% yrs+ 5/9 | 18-22 t -1.2 | 23+ $    35 t  1.0
+   VIX 0-15                                       n= 348 avg $   -27 R -0.036 PF 0.84 t -1.2 win 54% yrs+ 1/7 | 18-22 t -1.2 | 23+ $   -27 t -0.7
+   VIX 15-20                                      n= 550 avg $    27 R +0.039 PF 1.12 t  1.0 win 58% yrs+ 6/9 | 18-22 t  0.2 | 23+ $    40 t  1.0
+   VIX 20-25                                      n= 304 avg $    34 R +0.010 PF 1.11 t  0.7 win 56% yrs+ 5/9 | 18-22 t -0.3 | 23+ $   130 t  1.2
+   VIX 25-30                                      n= 133 avg $   -56 R -0.010 PF 0.86 t -0.7 win 52% yrs+ 5/9 | 18-22 t -1.3 | 23+ $   345 t  0.9
+   VIX 30-99                                      n= 106 avg $   -80 R -0.014 PF 0.86 t -0.6 win 50% yrs+ 1/7 | 18-22 t -0.3 | 23+ $  -476 t -0.6
+   VIX 16-25                                      n= 727 avg $    37 R +0.040 PF 1.14 t  1.4 win 57% yrs+ 6/9 | 18-22 t  0.1 | 23+ $    75 t  1.6
+   VIX 12-35                                      n=1372 avg $    -6 R -0.002 PF 0.98 t -0.3 win 55% yrs+ 5/9 | 18-22 t -1.7 | 23+ $    37 t  1.1
+   shorts only                                    n= 930 avg $    -9 R +0.004 PF 0.97 t -0.3 win 54% yrs+ 4/9 | 18-22 t  0.1 | 23+ $   -23 t -0.5
+   longs + shorts                                 n=1525 avg $    17 R +0.032 PF 1.05 t  0.8 win 56% yrs+ 5/9 | 18-22 t  0.2 | 23+ $    32 t  0.9
+   longs + shorts, no VIX filter                  n=2218 avg $   -10 R -0.007 PF 0.97 t -0.6 win 54% yrs+ 4/9 | 18-22 t -0.8 | 23+ $     0 t  0.0
+   trail 2.0 ATR                                  n= 987 avg $     7 R +0.007 PF 1.02 t  0.3 win 56% yrs+ 6/9 | 18-22 t -1.6 | 23+ $    63 t  1.6
+   trail 3.0 ATR                                  n= 987 avg $    17 R +0.022 PF 1.06 t  0.7 win 56% yrs+ 6/9 | 18-22 t -1.1 | 23+ $    73 t  1.8
+   trail 6.0 ATR                                  n= 987 avg $    15 R +0.023 PF 1.05 t  0.6 win 56% yrs+ 6/9 | 18-22 t -1.0 | 23+ $    65 t  1.6
+   no break-even                                  n= 987 avg $    18 R +0.024 PF 1.07 t  0.8 win 56% yrs+ 6/9 | 18-22 t -0.9 | 23+ $    70 t  1.7
+   no T1 scale (all to noon / stop)               n= 987 avg $    21 R +0.025 PF 1.07 t  0.8 win 50% yrs+ 6/9 | 18-22 t -1.0 | 23+ $    80 t  1.8
+   no noon exit (hold to 15:30 CT)                n= 987 avg $    24 R +0.024 PF 1.07 t  0.8 win 58% yrs+ 6/9 | 18-22 t -0.5 | 23+ $    74 t  1.5
+   longest stretch without a trade (trading days): VIX 15-30 64 (2018-26), 64 (the reports' window); no VIX filter 10; trade days a year 110 of 252
+   longest time below a previous equity high (per contract, 2018-26): 1344 trading days
+   VIX gate vs random days: band days $18 a contract; random same-size subsets $-0 (95th pct $23); share >= band 10.2%
+
+2. GC, 2018-2026 (2018-19 = before the reports' window):
+   per contract, $0 costs (the reports)           n= 972 avg $    25 R +0.050 PF 1.09 t  0.9 win 56% yrs+ 6/9 | 18-22 t  2.3 | 23+ $     2 t  0.0
+   per contract, reviewer $4 + 1 tick             n= 972 avg $     4 R +0.014 PF 1.01 t  0.1 win 55% yrs+ 5/9 | 18-22 t  1.2 | 23+ $   -20 t -0.3
+   per contract, ours $7.25 + 1 tick              n= 972 avg $     0 R +0.009 PF 1.00 t  0.0 win 55% yrs+ 5/9 | 18-22 t  1.0 | 23+ $   -23 t -0.4
+   per contract by year, ours: {2018: -2245, 2019: 3838, 2020: -1503, 2021: 2985, 2022: 7497, 2023: 4637, 2024: -5960, 2025: 17029, 2026: -26029}
+   cost share: gross $25 a contract -> net $0
+   risk-sized $5,000 / cap 50, ours               n= 964 avg $    54 R +0.011 PF 1.04 t  0.5 win 55% yrs+ 5/9 | 18-22 t  0.6 | 23+ $    -4 t -0.0
+      risk-sized: max contracts 37, median 6; margin at the max (~$15k ES / ~$12k GC per contract): $444,000
+   no VIX filter                                  n=1415 avg $    11 R +0.003 PF 1.04 t  0.5 win 54% yrs+ 6/9 | 18-22 t  1.9 | 23+ $   -16 t -0.4
+   VIX 0-15                                       n= 337 avg $    -4 R -0.055 PF 0.98 t -0.1 win 52% yrs+ 2/7 | 18-22 t -0.4 | 23+ $     1 t  0.0
+   VIX 15-20                                      n= 569 avg $   -18 R -0.005 PF 0.94 t -0.5 win 55% yrs+ 4/9 | 18-22 t -0.0 | 23+ $   -29 t -0.5
+   VIX 20-25                                      n= 279 avg $   -20 R +0.035 PF 0.93 t -0.4 win 54% yrs+ 6/9 | 18-22 t  1.6 | 23+ $  -192 t -1.4
+   VIX 25-30                                      n= 124 avg $   130 R +0.013 PF 1.64 t  1.6 win 56% yrs+ 4/9 | 18-22 t -0.0 | 23+ $  1247 t  2.2
+   VIX 30-99                                      n=  94 avg $   161 R +0.192 PF 1.63 t  1.8 win 57% yrs+ 3/6 | 18-22 t  2.4 | 23+ $   -70 t -0.1
+   VIX 16-25                                      n= 720 avg $   -27 R -0.009 PF 0.91 t -0.8 win 54% yrs+ 6/9 | 18-22 t  0.9 | 23+ $   -77 t -1.2
+   VIX 12-35                                      n=1341 avg $    11 R +0.004 PF 1.04 t  0.5 win 55% yrs+ 6/9 | 18-22 t  1.7 | 23+ $    -9 t -0.2
+   shorts only                                    n= 936 avg $   -29 R -0.059 PF 0.91 t -0.9 win 49% yrs+ 1/9 | 18-22 t -2.2 | 23+ $    -6 t -0.1
+   longs + shorts                                 n=1522 avg $    -5 R -0.010 PF 0.99 t -0.2 win 54% yrs+ 5/9 | 18-22 t -0.1 | 23+ $    -8 t -0.2
+   longs + shorts, no VIX filter                  n=2217 avg $    -4 R -0.016 PF 0.99 t -0.2 win 54% yrs+ 4/9 | 18-22 t  0.8 | 23+ $   -23 t -0.6
+   trail 2.0 ATR                                  n= 972 avg $    -2 R -0.001 PF 0.99 t -0.1 win 55% yrs+ 5/9 | 18-22 t  0.8 | 23+ $   -23 t -0.4
+   trail 3.0 ATR                                  n= 972 avg $    -3 R +0.003 PF 0.99 t -0.1 win 55% yrs+ 5/9 | 18-22 t  1.0 | 23+ $   -29 t -0.5
+   trail 6.0 ATR                                  n= 972 avg $     6 R +0.012 PF 1.02 t  0.2 win 55% yrs+ 5/9 | 18-22 t  1.0 | 23+ $   -12 t -0.2
+   no break-even                                  n= 972 avg $     0 R +0.009 PF 1.00 t  0.0 win 55% yrs+ 5/9 | 18-22 t  1.0 | 23+ $   -23 t -0.4
+   no T1 scale (all to noon / stop)               n= 972 avg $    -0 R +0.005 PF 1.00 t -0.0 win 45% yrs+ 5/9 | 18-22 t  1.0 | 23+ $   -26 t -0.4
+   no noon exit (hold to 15:30 CT)                n= 972 avg $   -39 R -0.002 PF 0.90 t -1.1 win 58% yrs+ 5/9 | 18-22 t  0.2 | 23+ $   -91 t -1.3
+   longest stretch without a trade (trading days): VIX 15-30 64 (2018-26), 64 (the reports' window); no VIX filter 7; trade days a year 108 of 252
+   longest time below a previous equity high (per contract, 2018-26): 384 trading days
+   VIX gate vs random days: band days $0 a contract; random same-size subsets $10 (95th pct $34); share >= band 75.8%
+
+3. Metrics, per 1 contract (ours, fixed 2 / 2), daily:
+           trades win avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+ES 2018-26    987 56% $18 $1,997   0.25    0.36          1.07 $20,184   0.10 15.01       0.27
+ES 2023+      451 59% $70 $8,182   0.88    1.29          1.23 $12,165   0.67  4.13       3.96
+                         actual       p5       p50       p95
+name     metric                                             
+ES 2023+ sharpe            0.88     0.00      0.87      1.70
+         sortino           1.29     0.01      1.28      2.68
+         pf_day            1.23     1.00      1.23      1.50
+         calmar            0.67     0.00      0.62      2.08
+         ulcer             4.13     2.72      6.66     19.11
+         max_dd       12,165.00 6,651.00 12,786.88 24,742.56
+         P(Sharpe<=0)       NaN      NaN      0.05       NaN
+         actual_dd pct_rank    dd50    dd95    dd99 P(dd>=2000) P(dd>=5000) P(dd>=10000)
+ES 2023+   $12,165      55% $11,720 $18,784 $22,765        100%        100%          74%
+   Monte Carlo ES ORB 1 micro (x0.1): trades 987 | total p5 $-2,111 / p50 $1,775 / p95 $5,647, P(total <= 0) 22.1%
+      max DD actual $2,018 (rank 49%), shuffled p50 $2,043 / p95 $4,009 / p99 $5,146; losing streak actual 7, p95 11
+      252-day block bootstrap: P&L p5 $-1,097 / p50 $217 / p95 $1,382, P(loss) 38.6%, max DD p50 $689 / p95 $1,591, return/DD 0.31, P(hit $2,000 trailing, EOD check only) 1.4%
+           trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+GC 2018-26    972 55%   $0     $28   0.00    0.00          1.00 $38,628   0.00  8.09       0.01
+GC 2023+      446 53% $-23 $-2,665  -0.21   -0.29          0.95 $38,628  -0.07 13.09      -0.41
+                         actual        p5       p50       p95
+name     metric                                              
+GC 2023+ sharpe           -0.21     -1.17     -0.23      0.73
+         sortino          -0.29     -1.51     -0.32      1.13
+         pf_day            0.95      0.75      0.94      1.21
+         calmar           -0.07     -0.24     -0.08      0.49
+         ulcer            13.09      9.24     29.09     75.11
+         max_dd       38,627.75 16,870.59 35,702.75 70,436.40
+         P(Sharpe<=0)       NaN       NaN      0.65       NaN
+         actual_dd pct_rank    dd50    dd95    dd99 P(dd>=2000) P(dd>=5000) P(dd>=10000)
+GC 2023+   $38,628      83% $31,035 $44,738 $51,614        100%        100%         100%
+   Monte Carlo GC ORB 1 micro (x0.1): trades 972 | total p5 $-4,508 / p50 $30 / p95 $4,475, P(total <= 0) 49.6%
+      max DD actual $3,863 (rank 71%), shuffled p50 $3,027 / p95 $6,008 / p99 $7,507; losing streak actual 10, p95 11
+      252-day block bootstrap: P&L p5 $-1,694 / p50 $30 / p95 $1,614, P(loss) 48.8%, max DD p50 $948 / p95 $2,239, return/DD 0.03, P(hit $2,000 trailing, EOD check only) 7.8%
+
+   ES / GC daily corr +0.11
+
+4. Our personal-portfolio pieces (1 micro each) on the days the VIX gate blocks vs passes (VIX open):
+   average $ a day per piece:
+OPEN                 VIX<15  VIX 15-30  VIX>30  n<15  n15-30
+VaultBreak              2.2        7.6    16.1   529    1545
+OvernightBiasML         6.4       10.2    15.0   529    1545
+MondayLong              7.8        8.2    14.9   529    1545
+ExpirationOpenShort     2.7        2.3    -0.7   529    1545
+LateDayFlow             1.4        4.3     3.5   529    1545
+NFPFade                 0.9        1.4    -0.2   529    1545
+BridgeMondayLong        4.5        5.5     4.5   529    1545
+CLSundayFade_perMCL     0.6        2.5    11.9   529    1545
+ESMOCFollow_perMES      0.2        1.3     6.3   529    1545
+RelativeStrength        4.4       19.4    16.0   529    1545
+FC2B                    5.4       10.5    12.6   529    1545
+TwinContinuation        8.2       19.2    -6.6   529    1545
+OvernightTick           3.4        8.7    27.9   529    1545
+DualThrust              8.5        9.5    16.2   529    1545
+Kusho                   6.1       15.5    26.3   529    1545
+S47                     5.6       12.7    10.7   529    1545
+S30                    13.9       19.9    95.8   529    1545
+   ES ORB (1 MES) daily corr with the 17-piece book +0.23; book $ a day on VIX<15 days 82, on 15-30 days 158
+
+   trials counted here: 44; t threshold 3.05

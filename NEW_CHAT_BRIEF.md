@@ -1,7 +1,64 @@
-# New-chat brief (updated 2026-10-19): read this first
+# New-chat brief (updated 2026-10-24): read this first
 
 Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in github.com/Dartdark/thebeginning (branch
 `claude/nq-trading-strategy-params-5h9d20`) and continue from there."*
+
+## State on 2026-10-24 (read this block first; the rest of the file is background)
+
+- **Live (Apex, combine set VB 8 / ONB ADX30 $1,100 / EOS $500 / Bridge 2):** #1 APEX-681524-01 $49,899.44 (~$398 above
+  its trailing line; user keeps plan size), #2 -02 $49,424.18. #3 150K No-Activation planned ~10/27. Gate ~mid-December
+  (live >= 75% of backtest, no drift alarm) before scaling +2 x 150K a week to 20. Funded plan unchanged (10 strategies,
+  cushion sizing table in `funded_strategies/FUNDED_PLAN.md`).
+- **Research this week:** FC 2B (A), S47 v2, OB v2, Kusho v9, S30 IBS (B), C03 (C). None improves either Apex plan
+  (funded plan near the payout cap; combine limited by drawdown vs target); replacing the 'weak' diversifiers (ES MOC,
+  NFP, EOS, LDF) or EOS / Bridge in the combine is worse. Personal-account ladder: `personal_strategies/PORTFOLIO.md`.
+- **Process changes (user):** forward log is discretionary; a candidate that clears every test incl. a plan-bench gain
+  goes straight into the plan (`DEVELOPMENT_PROCESS.md`). Forward logs (paper) from 10/26: FC 2B, S47 v2, Kusho v9
+  (roll-adjusted entry), S30 (`agents/codex/FORWARD_LOG.md`, frozen bands). Weekly Claude-Codex cross-review every
+  Friday (`agents/codex/TASK_weekly_cross_review.md`, `agents/cross_review/`); first round 2026-10-23 closed 6 items.
+- **Codex:** GPT-6.1 Sol ('Light'), builder on `codex/work`; reads / writes files only. @codex PR-mention mailbox tried
+  2026-10-24 (PR #2, closed unmerged): connector can't see the environment; stopped (`agents/codex/STATUS.md`).
+- **Open for the user:** Sun 10/25 after 17:00 CT the `Apex Account Check` indicator on both charts (`TODO.md`); Friday
+  exports into `live/` (MC reports, order tracker CSV, 1-min data); 11/06 FC 2B re-export; optionally turn off Codex's automatic / security reviews for the repo.
+- **2026-10-24 (Claude):** real micro fees ($1.04 per round trip, from the Apex fills) on the benches: combine 50.1% ->
+  49.8%, funded plan −$96 over 2 years, no past decision flips (`analysis/real_fee_bench.py`). Twin marked daily in the
+  personal ladder: no change. **Dual Thrust v4 (user's file): A** (rebuild $140 per NQ, t 4.4, 9/9 years; checker PASS
+  WITH CONCERNS, replica identical) **in the 150K funded plan at 2 MNQ and the personal plan (user)**: 150K
+  funded bootstrap 6 payouts by day 226 vs 250, 1y +$1,400, blown 1.8% -> 2.2%; not on 50K (ties) or evaluations (worse);
+  personal (14 pieces) $24.4k a year, return/DD 8.2, capital $25k. MultiCharts check needed before a 150K account trades it. MultiCharts export optional (`TODO.md`). S47 / Kusho loaders
+  now place trades by date (old CSV rows were on a 2016-09-29 grid).
+- **Personal plan (user, 2026-10-24): + Kusho v9 21:00, S47 v2 and S30 IBS (17 pieces, $36.6k a year, return/DD 7.7,
+  capital ~$35.6k; without S30 $30.6k, 9.2, $26.2k); all three still on the forward log, with FC 2B; Kusho 15:45 dropped.** Apex plans unchanged (`analysis/forward_log_plans_test.py`).
+- **Overnight Tick / VIX (user's spec, 2026-10-24): A, MultiCharts-confirmed** ($374 per NQ, t 5.2). In the plans (user): 50K
+  funded 1 MNQ in place of the Monday Long, 150K funded + 2 MNQ, personal in place of Overnight Anomaly (17 pieces $37.1k,
+  capital ~$33.6k). VIX via Map ASCII + `tools/vix_update.ps1` on the VPS (TODO). Watch the trades after 2026-07-07.
+- **Codex 2026-10-24 (codex/work 541d111):** 13 studies of uploads, none changes a plan: S03 v2 B (no placement), NQDB2 /
+  R2Vault C, ORPullback / Anson D, night volume switch = T_ONESIDE (WATCH); 6 source-only reviews need code / data
+  (Valeris 848, GC risk-adjusted, noise-band CODE.txt, PROP ORB, GC_COMBO v2, Overnight TickRSV). `agents/codex/STATUS.md`.
+- **PAPERTREND v2 (user's description + report, 2026-10-24): B** ($373 per NQ, t 4.1; checker FAIL narrow, DSR 0.865; replica
+  identical). Skip filter adds nothing, gap filter halves risk not edge; ES / YM null; exit at 14:55 is the peak. No Apex plan helps; personal +
+  1 micro return/DD 8.3 -> 8.7 (user's call, after the MC trade list explains 582 vs 535 trades). `analysis/papertrend_test.py`.
+- **FVB First Valid Breakout (user's file, 2026-10-25): B** ($166 per NQ, t 3.8, 9/9 years; checker PASS WITH CONCERNS, replica identical).
+  Shorts carry it (longs PF 1.13); fat tail (cap 3R = loss); ~2/3 of it is momentum from the open. No Apex plan gain; personal return/DD
+  8.3 -> 8.2 -> capital-expansion bench; shorts only 8.9 is post-hoc (pre-register first). `analysis/fvb_test.py`.
+- **Uploads tested 2026-10-24 (this session, all in `TIER_LIST.md` + `checks/candidates/<name>/REVIEW.md`):**
+  **T_ONESIDE (night-volume switch): B**, checker PASS WITH CONCERNS (874/874 replicated). Heavy night (volume > 1.4 x 20-night
+  median) → fade the night 08:29 → 08:44 CT: $239 per NQ, t 3.6, volume switch confirmed by the author's own cells; the OS long
+  leg is drift (drop it). Fade alone at 1 MNQ = small funded gain (y1 $9,354 → $9,622, blown 7.0 → 6.7%), no evaluation gain.
+  The file had no stop: `T_ONESIDE_v2.txt` adds the note's. **Next: MC report of v2 with UseOS false (TODO), then plan decision.**
+  GC_COMBO v2: C (user's MC report = exact parity once ETminusChart 0; at our costs t 2.1, OOS weak, −$39k after the note's
+  cutoff, worse in both plans). MAGNET18: C (morning momentum, lowers the evaluation). Shock Reversal note: D (thresholds
+  withheld; proxy t ≤ 1.7). OvernightAnomaly (Block B of the merged ORB file): C, was added to the personal plan at 1 MNQ,
+  then replaced there by Overnight Tick / VIX (above); Block A at 9 MNQ: a single stop > the $2,000 trail.
+  New pitfall: **@GC / @CL run on New York time in our MultiCharts** (ETminusChart-type inputs = 0).
+- **YZ ORB Volatility Filtered (user's C# files, ES + GC, 2026-10-25): D.** Rebuild matches the gross reports (96-98% of days), but
+  net of costs ES t 0.8, GC t 0.0; VIX gate not significant. `analysis/orb_vix_test.py`.
+- **Brooks price-action bot v201 (user's file, 2026-10-25): F.** Gross ~0R, net −0.05R a trade; longs win only by drift (random-time
+  longs with the same bracket do as well). `analysis/brooks_bot_test.py`.
+- **Open for Claude:** automatic cushion sizing after the account check; Dual Thrust MC check when the report arrives;
+  T_ONESIDE v2 MC check when the report arrives.
+- **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)
+  run in the session 'Scheduled jobs' (session_014DKffATms37kZigaa2xR2P), not in a new chat.
 
 ## Who / what
 
@@ -9,6 +66,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   (ignore Topstep). Flat by 15:59 CT; $2,000 end-of-day trailing drawdown (locks at $50,100); combine: $3,000 target,
   $1,000 daily loss limit.
 - Goal: **funded payouts** (6 payouts = $13,000 per account), reached as fast as possible.
+- **Business plan v2 (2026-10-24): `reports/Trading_Business_Plan_2026-10-24.pdf`** (`reports/build_business_plan_2026-10-24.py`;
+  'what changed since v1', current rosters, the personal capital ladder). Versions are kept side by side to show progress;
+  make a new dated file for each update (user).
 - **Business plan (2026-10-16): `reports/Trading_Business_Plan.pdf`** (rebuild: `python3 reports/build_business_plan.py`): account
   choice (test on single 50K EOD $59 -- 5-pack evals all start at purchase, so they'd share one outcome; scale with 150K no-activation), projections, roadmap, risks, settings per account type.
 - Long-term path (user, 2026-10-15): Apex = live test bench and funding source; proven strategies and Apex payouts move to a
@@ -56,6 +116,14 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## Latest (2026-10-17)
 
+- **Friday review 2026-10-23 (week of 10/19):** live = Vault Break only. #1: 10/19 −$1,025.66 (Apex daily-loss lock), 10/21
+  −$575.82 → $49,899.44 (~$398 above its trailing line; user keeps plan size). #2: 10/21 −$575.82 → $49,424.18. 10/20 logged
+  but not filled (@MNQ symbol mapping, fixed). 10/22-23 no trades. No weekly MultiCharts reports in live/, so no
+  live-vs-backtest / drift run (3 live VB days is too few to judge anyway). Research this week: FC 2B (A), S47 v2, OB v2,
+  Kusho v9, S30 IBS (B), C03 (C) — none improves either Apex plan (cap-bound funded plan; combine drawdown vs target);
+  replacing the 'weak' diversifiers (ES MOC, NFP, EOS, LDF) with FC 2B / S47 / Kusho is worse or a tie, and replacing EOS or
+  Bridge in the combine lowers the pass rate (50.1% → 45-49%) (`analysis/replace_weak_bench.py`): plans unchanged.
+  Personal portfolio built (`personal_strategies/PORTFOLIO.md`); accounts → income table in `funded_strategies/FUNDED_PLAN.md`.
 - **FC 2B (user's opening-drive strategy, 2026-10-23):** MultiCharts-confirmed (v2 with holiday flatten + entry-bar stop),
   $275 per NQ, t 4.0, checker PASS WITH CONCERNS → A; but the 50K funded plan is near the payout cap and the combine gains
   nothing, so it is NOT added; forward-logged (`agents/codex/FORWARD_LOG.md`), personal-account candidate.

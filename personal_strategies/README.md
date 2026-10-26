@@ -8,6 +8,7 @@ account. Each file says why it is here and what the Python test found.
 | Strategy | File | Chart | Notes |
 |---|---|---|---|
 | **Relative Strength NQ / ES** (user's, 2026-10-20; also in the Apex funded plans) | `../funded_strategies/NQ_Relative_Strength.txt` | 1 min NQ / MNQ + 1 min ES as Data2, Exchange time (CT) | Both sides (`TradeDir` 0). $306 per NQ, PF 1.36, t 4.0, 9/9 years; 1 NQ max DD $28.5k, Monte Carlo 95% $66k: about 1 MNQ per $25,000 of account. Tier B (TIER_LIST) |
+| **Overnight Anomaly v4.1** (Block B of the user's merged OvernightBiasORB + Anomaly file, added 2026-10-24) | `Overnight_Anomaly.txt` | 15 min @MNQ, 24-hour session, Exchange time (CT), Bar Magnifier 1 min | 1 MNQ (`Max_Contracts 1`). Long 17:30 → 02:30 CT after a down RTH day. $158 per NQ, PF 1.34, t 2.9, 7/9 years; per MNQ ~$1,700 a year, max DD $2,044, worst night −$1,263. Tier C; no gain on either Apex bench; in the personal portfolio because it barely moves with the rest (corr +0.02). |
 | Gold Breakout 15M (user's TradingView idea) | `Gold_Breakout_15M.txt` | 15 min MGC / GC, Exchange time (CT), 24-hour session | $138 per GC, PF 1.23, t 3.1, 7/9 years (2018–26); max DD ~$4.3k per MGC; risk-based sizing (1% of equity, 1% stop), out 12:00 CT. Tier C: worse on the Apex funded bench (`analysis/gold_breakout_15m_bench.py`). |
 
 ## Twin_Continuation.txt (v2, 2026-10-15)

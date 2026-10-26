@@ -6,6 +6,10 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
 ## Working rules
 
 - **Apex only** (ignore Topstep). Positions flat by 15:59 CT; $2,000 end-of-day trailing drawdown.
+- **Notifications (user, 2026-10-23):** send one PushNotification (under 200 characters, the reply's headline) at the end of
+  every reply to the user, so each new message reaches the phone. The tool is often deferred: load it first with
+  ToolSearch `select:PushNotification` (2026-10-24: a session wrongly reported it missing all day). (A hook can't do this from the cloud container: ntfy.sh
+  answers 429 from the shared proxy.)
 - **Branches:** work on `claude/nq-trading-strategy-params-5h9d20`; keep
   `claude/quirky-noether-4dla64` and the session's designated branch identical; push every
   commit to all of them.
@@ -25,12 +29,22 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   actual P&L (Apex dashboard, fees included) in the Monte Carlo range for one month of the live strategy set at live size
   (`analysis/montecarlo.py`, 21-day block bootstrap of the backtest daily P&L, 2023 onward) and report its percentile;
   below the 10th two months running → review with the drift alarm. Count the same signal on two accounts as one event.
+  **Also every Friday (user, 2026-10-23): the Claude-Codex cross-review** (`agents/codex/TASK_weekly_cross_review.md`):
+  review Codex's week independently into `agents/cross_review/YYYY-MM-DD_claude.md` (max 5 material disagreements, each with
+  evidence and the smallest settling check), then read Codex's file when the user has run its side, and write the joint
+  `..._summary.md` (agreed / disputed / user decisions). Remind the user to send Codex "do the weekly cross-review" One response
+  each, then a deciding check; open items stay 'unresolved' and carry forward. Routine checks run at once; new backtests keep
+  the pre-registration gates. A confirmed accounting / execution defect goes to the user immediately, not on Friday;
+  judgement calls go to the user with both views, the uncertainty and a recommendation.
 - **Papers in git (user, 2026-10-19):** research-paper PDFs may be committed (folder `papers/`). Books stay out.
 - **Repo map:** `README.md` (reorganised 2026-10-21): MultiCharts reports in `mc_reports/`, all price data in `data/`,
   script results in `analysis/outputs/`, exporters in `tools/exporters/`, old material in `archive/`. Put new files there.
 - **Folders:** `apex_strategies/` = challenge-only strategies (Vault Break, Overnight Bias);
   `funded_strategies/` = funded strategies. Comparing them is fine; the challenge ones are not
   meant for making money in funded accounts.
+- **Capital-expansion bench (user, 2026-10-24):** a strategy that only gains by needing more capital (lower return per
+  drawdown at the current size) goes into the 'Capital-expansion bench' table in `personal_strategies/PORTFOLIO.md`, not
+  into a plan; re-test the bench when the account steps up a ladder row.
 - **Add or replace (user, 2026-10-18):** a candidate doesn't have to add to the plan. Always also test it as a
   replacement (in place of, or in part of, the plan strategy it overlaps most) and adopt whichever serves the plan overall.
 - **Preferences:** low-correlation strategies preferred; regime-dependent ones welcome but not

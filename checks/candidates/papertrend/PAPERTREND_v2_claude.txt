@@ -1,0 +1,109 @@
+{ PAPERTREND v2 (NQ / MNQ) - written by Claude 2026-10-25 from the user's description (checks/candidates/papertrend/spec.md)
+  and the Python rebuild (analysis/papertrend_test.py). The user's own code was never supplied.
+  RULE (CT clock, bars stamped at their close; RTH = 08:31-15:00)
+   - O = RTH open (open of the first RTH bar). ATR = mean of the previous 14 full sessions' RTH ranges (high - low).
+   - Up = O + BandMult x ATR, Dn = O - BandMult x ATR.
+   - Skip the day if yesterday's range was the widest of the last 7 sessions (yesterday included).
+   - Gap = O - previous session's 15:00 close. Long only if gap > 0, short only if gap < 0.
+   - At the FIRST 15-minute mark (bar closing 08:45, 09:00 ... 14:00) whose close is beyond the band on the gap's side:
+     enter at market next bar. One trade a day.
+   - Exit at the close of the 14:55 bar. Disaster stop StopATRMult x ATR (2.0 = the bench's v2: same P&L, bounded risk;
+     0 = no stop, as the report).
+   - Half days / holidays: no trade (CME calendar below); a position still open on a new date exits at market.
+   - NOT in the code: the rebuild also drops days with a contract roll between the prior close and the open (~14 trades,
+     the 'gap' there is the roll spread on an unadjusted chart). On a back-adjusted chart that is not needed.
+  CHART  @NQ 5-minute (the report's chart; 1-minute also works), Exchange time zone (CT), CME 24h session, IOG off.
+         Load 1+ month before the first trade (ATR needs 14 sessions). Backtest with commission and slippage 0. }
+
+[IntrabarOrderGeneration = false]
+
+Inputs:
+    Qty(1),
+    BandMult(0.5),
+    ATRLen(14),
+    SkipLen(7),
+    StopATRMult(2.0),
+    RTHFirstBar(835),      { close time of the first RTH bar: 835 on 5-min, 831 on 1-min }
+    FirstMark(845),
+    LastMark(1400),
+    ExitBar(1455),
+    RTHCloseCT(1500),
+    SkipHolidays(true);
+
+Variables:
+    InRTH(false), Traded(false), DayO(0), DayH(0), DayL(0), PrevClose(0), nD(0), k(0), sm(0), mx(0),
+    ATRv(0), UpB(0), DnB(0), GapV(0), SkipDay(false), OK(false), MinOfDay(0),
+    hYear(0), hMonth(0), hDay(0), hDow(0), IsHol(false), EntDate(0);
+Arrays:
+    RG[60](0);
+
+MinOfDay = IntPortion(Time / 100) * 60 + Mod(Time, 100);
+
+{ backstop: a position carried onto a new date goes out at market }
+If MarketPosition <> 0 and Date <> EntDate and EntDate > 0 then begin
+    Sell ("PT.LX.hol") all contracts next bar at market;
+    BuyToCover ("PT.SX.hol") all contracts next bar at market;
+end;
+
+{ a half day never reaches the 15:00 bar: close the RTH window on the new date, nothing banked }
+If InRTH and Date <> Date[1] then begin InRTH = false; OK = false; end;
+
+{ ---- session start ---- }
+If Time = RTHFirstBar then begin
+    InRTH = true; Traded = false; OK = false;
+    DayO = Open; DayH = High; DayL = Low;
+    hYear = Year(Date) + 1900; hMonth = Month(Date); hDay = DayOfMonth(Date); hDow = DayOfWeek(Date);
+    IsHol = (hMonth = 1 and hDow = 1 and hDay >= 15 and hDay <= 21)
+         or (hMonth = 2 and hDow = 1 and hDay >= 15 and hDay <= 21)
+         or (hMonth = 5 and hDow = 1 and hDay >= 25)
+         or (hYear >= 2022 and hMonth = 6 and (hDay = 19 or (hDay = 20 and hDow = 1) or (hDay = 18 and hDow = 5)))
+         or (hMonth = 7 and (hDay = 3 or hDay = 4 or (hDay = 5 and hDow = 1)))
+         or (hMonth = 9 and hDow = 1 and hDay <= 7)
+         or (hMonth = 11 and hDow = 4 and hDay >= 22 and hDay <= 28)
+         or (hMonth = 11 and hDow = 5 and hDay >= 23 and hDay <= 29)
+         or (hMonth = 12 and (hDay = 24 or hDay = 25 or hDay = 31 or (hDay = 26 and hDow = 1) or (hDay = 23 and hDow = 5)))
+         or (hMonth = 1 and (hDay = 1 or (hDay = 2 and hDow = 1)));
+    If nD >= ATRLen and nD >= SkipLen and PrevClose > 0 then begin
+        sm = 0;
+        For k = 0 to ATRLen - 1 begin sm = sm + RG[k]; end;
+        ATRv = sm / ATRLen;
+        mx = RG[0];
+        For k = 1 to SkipLen - 1 begin If RG[k] > mx then mx = RG[k]; end;
+        SkipDay = RG[0] >= mx;
+        GapV = DayO - PrevClose;
+        UpB = DayO + BandMult * ATRv; DnB = DayO - BandMult * ATRv;
+        OK = ATRv > 0 and SkipDay = false and GapV <> 0;
+        If SkipHolidays and IsHol then OK = false;
+    end;
+end
+else if InRTH and Time > RTHFirstBar and Time <= RTHCloseCT then begin
+    If High > DayH then DayH = High;
+    If Low < DayL then DayL = Low;
+end;
+
+If MarketPosition <> 0 then Traded = true;
+If MarketPosition <> 0 and MarketPosition[1] = 0 then EntDate = Date;
+
+{ ---- entries at the 15-minute marks ---- }
+If InRTH and OK and Traded = false and MarketPosition = 0 and Time >= FirstMark and Time <= LastMark
+   and Mod(MinOfDay, 15) = 0 then begin
+    If GapV > 0 and Close > UpB then begin Buy ("PT.L") Qty contracts next bar at market; Traded = true; end
+    else if GapV < 0 and Close < DnB then begin SellShort ("PT.S") Qty contracts next bar at market; Traded = true; end;
+end;
+
+{ ---- disaster stop ---- }
+SetStopContract;
+If StopATRMult > 0 and ATRv > 0 then SetStopLoss(StopATRMult * ATRv * BigPointValue);
+
+{ ---- flat at the 14:55 close ---- }
+If MarketPosition <> 0 and Time = ExitBar then begin
+    Sell ("PT.LX") all contracts this bar at close;
+    BuyToCover ("PT.SX") all contracts this bar at close;
+end;
+
+{ ---- end of RTH: bank today's range and close (full sessions only) ---- }
+If InRTH and Time = RTHCloseCT then begin
+    For k = 59 downto 1 begin RG[k] = RG[k - 1]; end;
+    RG[0] = DayH - DayL; nD = nD + 1; PrevClose = Close;
+    InRTH = false; OK = false;
+end;

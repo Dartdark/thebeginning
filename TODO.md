@@ -21,14 +21,31 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
+- [ ] **Account #3 (2026-10-26):** gear account = APEX-681524-03 on all four #3 charts (ONB, VB, EOS, Bridge), 150K sizes (VB 20, Bridge 5,
+  ONB $2,750, EOS $1,250), AA on starting Flat outside a trade window; confirm the first order shows -03 in the Orders tab.
+
 - [x] (2026-10-20) Account #2 bought and set up on the VPS: second chart set (VB, ONB ADX30, EOS, Bridge) on the new account, logger tags `-2`, StartBalance 50000.
 - [ ] **Fri 10/23 (and every Friday): export the weekly MultiCharts reports into `live/`** and tell Claude (it runs
   `analysis/live_vs_backtest.py --all live/` and the drift alarm).
 - [ ] When account #1 passes ($53,000): turn auto-trading off on that account.
 - [x] (2026-10-20, user: done) **Now: Rithmic copier off (or #2 removed as follower)** while set 2 auto-trades, or #2 trades double size. Copier
   waits until several funded accounts (2026-10-20).
-- [ ] **~Mon 10/27: account #3** (150K No-Activation, $249).
+- [ ] **Account #3 (150K No-Activation, $249) trades from Sun 10/25 evening (user, 2026-10-25; the 17:00 CT reopen starts Monday's Apex day).** 150K evaluation stack = the
+  combine set x 2.5: Vault Break 20 MNQ, Overnight Bias ADX30 `RiskPerTrade` 2750, Bridge Monday Long 5 MNQ (enters
+  **Sunday 19:00 CT**, so it must be on the account by then to trade this week), EOS `RiskPerTrade` 1250 (next 11/20).
+  Backtest pass 41.6%. Rules: +$9,000 in 30 days, $4,000 EOD trailing, $2,000 daily loss pause. On pass: switch to the
+  150K funded stack (FUNDED_PLAN.md). Add its account number to the logger / live reports.
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
+
+## Half-day fixes for two funded strategies (2026-10-25, from Codex's Day Flow Six review; not live yet)
+
+- [ ] **Before the funded accounts trade them:** paste and compile the updated
+  [NQ_Monday_Long.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Monday_Long.txt)
+  (skips Monday July 3 / Dec 24 early closes) and
+  [NQ_NFP_Fade.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_NFP_Fade.txt)
+  (skips Good Friday). In 2023 each held a trade through a session halt (Monday Long to 17:05, NFP Fade over the weekend).
+  Backtests: one small losing trade removed from each (−$170 / −$85 per NQ). If 'this word has already been defined' appears
+  on one of the new Easter variable names, tell Claude.
 
 ## ES MOC Follow (funded candidate, 2026-10-17)
 
@@ -49,6 +66,90 @@ bottom). Times are Central (CT).
 - [ ] When an account is funded: add [NQ_Relative_Strength.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Relative_Strength.txt)
   as a NEW signal on a **1-minute MNQ chart with 1-minute @ES added as Data2** (same feed, Exchange time, first RTH bar 08:31,
   IOG off), 50K: `TradeDir` 1, `NumContracts` 1; 150K: `TradeDir` 0, `NumContracts` 1; Trade Logger tag `RS`.
+
+## Dual Thrust v4 (your file, 2026-10-24: A, checker PASS WITH CONCERNS; personal plan; 150K funded slot given to Swing Target 2026-10-25)
+
+- [x] (2026-10-25, done: 1,609 / 1,611 trades identical) Optional, no deadline (outside market hours, not on the live VPS): export the MultiCharts backtest of
+  [NQ_Dual_Thrust_v4_CT.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/dual_thrust/NQ_Dual_Thrust_v4_CT.txt)
+  on a 1-minute @NQ chart (Exchange time = CT, CME 24h session, IOG off, default inputs, from Jan 2017, **commission and
+  slippage 0**, Claude adds costs); save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Dual Thrust v4.xlsx"
+  and push it. Claude then checks it trade by trade against the rebuild (1,611 trades, $140 per NQ after costs).
+  **Needed before the first 150K funded account trades it.**
+- [x] (2026-10-25: replaced by Swing Target v3 Qty 2 on 150K funded) When a 150K account is funded: add [NQ_Dual_Thrust.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Dual_Thrust.txt)
+  ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Dual_Thrust.txt))
+  on a 1-minute MNQ chart (Exchange time, CME 24h, IOG off), `NumContracts` 2 (1 while the cushion is below $3,000),
+  Trade Logger tag `DT`. Not on 50K accounts or evaluations.
+
+## T_ONESIDE (your file, 2026-10-24: B, checker PASS WITH CONCERNS; fade leg = small funded gain at 1 MNQ)
+
+- [x] (2026-10-25, done: 348 / 358 fades identical, net t 3.5) Optional, before any plan use (outside market hours, not on the live VPS): MultiCharts backtest of
+  [T_ONESIDE_v2.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/t_oneside/T_ONESIDE_v2.txt)
+  on a **1-minute @NQ chart** (Rithmic, CME 24h session 17:00-16:00, Exchange time = CT, IOG off, Bar Magnifier off, from
+  Sep 2017), inputs **UseT true, UseOS false, UseStop true, Qty 1**, **commission and slippage 0** (Claude adds costs); save as
+  "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute T_ONESIDE v2.xlsx" and push / send it.
+  Claude checks it trade by trade (363 fades 2018-26, $239 per NQ after costs).
+
+## GC_COMBO v2 (your gold files, 2026-10-24: C pending the MultiCharts report)
+
+- [x] (2026-10-24, done: exact parity after ETminusChart 0; ranked C) Optional, no deadline (outside market hours, not on the live VPS): run it in MultiCharts and export the report, step by
+  step in [MC_SETUP.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/gc_combo/MC_SETUP.md)
+  (@GC 1-min + @CL Data2 + GCCOMBO Data3); save as "mc_reports/Backtesting Strategy Performance Report _ @GC - 1 Minute GC COMBO v2.xlsx"
+  and push / send it. Expect ~1,204 trades, ~$226k for 2017-09-18 → 2026-08-07.
+
+## Claude: recheck earlier "no gain" calls on speed, bad-case year and blow-ups (user, 2026-10-24)
+
+- [ ] FC 2B, S47 v2, Kusho v9 15:45 (and other recent Apex-plan rejections) judged on median days to the 6th payout,
+  the 5th-percentile first year and blown rate, not only 2-year payouts (the cap hides speed gains; Dual Thrust and
+  Overnight Tick got in on those). S03 v2 already fails on all of them (Codex: 50K +1 MNQ 1y −$348, 6th payout 274 vs 270
+  days, blown +1.7 pt; 150K 235 vs 233 days).
+
+## Overnight TickRSV / VIX (your spec, 2026-10-24: A, MultiCharts-confirmed 97% of nights)
+
+**In the plans since 2026-10-24 (you):** 50K funded 1 MNQ in place of the Monday Long, 150K funded 2 MNQ, personal (in
+place of Overnight Anomaly). Nothing to do until a funded account starts; the VIX feed (step 1) is worth setting up early.
+
+- [ ] **1. Daily VIX file on the VPS** (once, outside market hours). 2026-10-24: script in place, first run OK (log 'OK');
+  scheduled task (VIXUpdate, weekdays 15:30 / 16:30) and Map ASCII done (symbol **VIX_daily**, folder C:\TradingData\VIX).
+  Still to do: Monday 10/26 after 16:30 CT, the log shows `last date 2026-10-26` and the chart's VIX has a 10/26 bar:
+  - copy [tools/vix_update.ps1](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/tools/vix_update.ps1)
+    ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/tools/vix_update.ps1))
+    to `C:\TradingData\VIX\vix_update.ps1` on the VPS;
+  - run it once: `powershell -ExecutionPolicy Bypass -File C:\TradingData\VIX\vix_update.ps1`; check
+    `C:\TradingData\VIX\vix_update.log` says `OK, last date` (the last trading day);
+  - register the scheduled task with the 4 lines at the top of the script (PowerShell as Administrator): weekdays 15:30
+    and 16:30 CT;
+  - in QuoteManager on the VPS: Map ASCII the file as `VIX_CBOE` (same settings as on your PC).
+- [ ] **2. Live check (first evening it runs):** with `PrintDiag` true, the evening line's `VIXdate` must be that day. If it
+  shows yesterday, MultiCharts did not reload the mapped file: tell Claude (it still trades, with the previous day's VIX).
+- [ ] **3. When a 50K account is funded:** remove the Monday Long chart; add
+  [NQ_Overnight_Tick_VIX.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Overnight_Tick_VIX.txt)
+  ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Overnight_Tick_VIX.txt))
+  on a 5-min MNQ chart (CME 24h, Exchange time, IOG off) with `VIX_CBOE` daily as Data2, `NumContracts` 1 (0 below a
+  $1,500 cushion), Trade Logger tag `OTV`. **150K funded:** keep the Monday Long and add it with `NumContracts` 2 (1 below $3,000).
+
+- [x] (2026-10-24) VIX: dxFeed has no VIX index; mapped data/VIX_daily.csv with Map ASCII (live needs a daily update or the previous-day VIX).
+- [x] (2026-10-24, matched 529 nights, P&L corr 1.000) MultiCharts backtest of [NQ_Overnight_Tick_VIX.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/overnight_tick/NQ_Overnight_Tick_VIX.txt)
+  ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/overnight_tick/NQ_Overnight_Tick_VIX.txt))
+  on a 5-minute @NQ chart (CME 24h, Exchange time = CT, IOG off) with VIX daily as Data2, from Sep 2017, default inputs,
+  **PrintDiag true**, commission / slippage 0; save as "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Overnight Tick VIX.xlsx"
+  and send the report + the PowerLanguage output (the printed lines). Claude checks trades and the UpTicks / DownTicks signs.
+
+## PAPERTREND v2 (your description + report, 2026-10-24: B, checker FAIL narrow on deflated Sharpe; personal-plan candidate)
+
+- [x] (2026-10-25, done: 556 / 558 rebuild trades identical, +13 roll days the code can't see; t 4.35) (2026-10-25: Claude wrote the code from the spec, `checks/candidates/papertrend/PAPERTREND_v2_claude.txt`; backtest it on @NQ 5-min, Exchange CT, commission / slippage 0, and export the List of Trades as `...@NQ - 5 Minutes PAPERTREND v2 claude.xlsx`) Optional (outside market hours, not on the live VPS): export the PAPERTREND v2 **List of Trades** from MultiCharts (the report you sent) into
+  `mc_reports/` and send the code. The Python rebuild trades 582 times to 2026-08-14 vs the report's 535; the trade list shows where they differ.
+- [x] (2026-10-25, user: yes; added at 1 MNQ with Claude's code, return/DD 8.5 -> 9.0) Your call: add it to the personal plan at 1 micro (+$2.3k a year, return/DD 8.3 -> 8.7) once the trade lists agree. Not for Apex (benches worse).
+  If you trade it: add a 2 x ATR disaster stop (costs nothing in the backtest) and keep the 14:55 CT flatten exact.
+
+## BB_MRM (your file, 2026-10-25: C after the MultiCharts report; OUT of the personal plan (user 2026-10-25), paper forward log from 10/26)
+
+- [x] (2026-10-25, done: 1,657 trades, net t 2.5 vs the rebuild's 3.4 -> C; decide whether BB_MRM stays live) **MultiCharts backtest 2018-01 -> today** (outside market hours, not on the live VPS): [BB_MRM_Pre-market_user.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/bb_mrm/BB_MRM_Pre-market_user.txt)
+  on a 1-minute **@NQ** chart, **Time Zone = Exchange (CT)**, 24-hour session, IntrabarOrderGeneration off, no Bar Magnifier needed (1-min bars),
+  your input screen (AlphaReductionPct 10, Session_Open 08:05, Offset 1h15), 1 contract, no costs. Export the report with its **List of Trades** into
+  `mc_reports/` (name: `Backtesting Strategy Performance Report _ @NQ - 1 Minute BB_MRM.xlsx`) and tell Claude. The Python rebuild matches your
+  2020-23 report (802 vs 801 trades); this checks 2018-19 and 2024-26 (the −$24k stretch 2024 Q4 - 2025 Q2, +$44.7k in 2026).
+- [x] (2026-10-25: cancelled, out of the plan; don't put it on the personal account) Live (personal account): MNQ 1 contract, chart on the **Exchange** clock (on Italian time it trades 01:05-02:20 CT, which loses).
+- [x] (2026-10-25: not needed now, it's C) Claude: run the strategy-checker on BB_MRM (`checks/candidates/bb_mrm/`).
 
 ## Antigravity's NQAlignedWeaknessShort (2026-10-20, C)
 
@@ -114,6 +215,22 @@ after 15:59 CT, never with a position open.
 - [x] (2026-10-21, user: done) **One time, outside market hours:** paste the updated [Apex_Trade_Logger.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Trade_Logger.txt)
   (Raw button) into the existing "Apex Trade Logger" signal on the VPS and compile. Everything else runs by itself.
 
+## New strategies (2026-10-23)
+- [ ] **First Friday of each month (next: 11/06): re-export the FC 2B v2 MultiCharts report** (same chart and inputs) into
+      `mc_reports/` for the forward log (`agents/codex/FORWARD_LOG.md`). Paper only, not traded.
+- [x] (2026-10-25, done: S47 v2 710 / 714 trades, Kusho v9 3,086 / 3,152, C03 3,439 / 3,490 match; `analysis/outputs/mc_parity_2026-10-25.txt`) Optional, only if you want them on the shelf: MultiCharts runs of `checks/candidates/s47_v2/S47_v2_fixed.txt` (new signal,
+      not over FC 2B) and of Kusho v9 / C03 (reports .xlsx into `mc_reports/`).
+- [ ] **Account #1 is ~$398 above its trailing line:** one full VB stop at 8 MNQ (~$1,200) would end it. Your call (plan size kept
+      2026-10-22); check the Apex dashboard each morning.
+
+- [ ] **Automatic cushion sizing, step 1: Sun 10/25 after 17:00 CT (market open), ~5 minutes.** The indicator
+      `Apex Account Check` is already compiled (2026-10-23). (1) On the account -01 chart: right-click → Insert Study →
+      Indicator → Apex Account Check; Format Study → Inputs → `AccountName` = `APEX-681524-01`. (2) Same on the -02 chart
+      with `APEX-681524-02`. (3) Open the PowerLanguage Editor → Output tab (bottom; View → Output Bar if hidden) and leave it
+      open. (4) Within a minute: one line per chart with account and NetWorth. Send Claude a screenshot + both Apex dashboard
+      balances. NetWorth 0 / no line → fallback (one morning cushion input); same balance on both → wrong account binding.
+      Indicator only: places no orders; remove it once read.
+
 ## Codex and new research data (2026-10-22)
 
 - [ ] **Export NQ 2017 daytime 1-minute data** (warm-up for the LDF flow-sizing test), on the **home PC** (not the VPS):
@@ -135,6 +252,17 @@ after 15:59 CT, never with a position open.
   commit · push (sync.ps1 only adds journal/ and live/).
 - [ ] **Send Codex the review message** for the LDF flow-sizing plan (in `agents/codex/STATUS.md`, 'Next message for Codex').
 
+## Swing Target NQ v2 (your file + Codex's test, 2026-10-25: B, personal candidate; not Apex-legal as written)
+
+- [x] (2026-10-25) Claude: v3 = v2 + break-even + holiday skip: [NQ_Swing_Target_v3.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Swing_Target_v3.txt) ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Swing_Target_v3.txt)).
+- [x] (2026-10-25, done: t 4.55, 0 overnight holds, matches Codex's ledger) You: MultiCharts backtest of v3 (1-min @NQ / OFB_BARS_NQ, Exchange CT, ClockShiftMin 0, IOG off, from Dec 2017, commission and slippage 0) with **List of Trades** into `mc_reports/` (`Backtesting Strategy Performance Report _ @NQ - 1 Minute Swing Target v3.xlsx`). Expect ~600 trades 2018-26, ~36 break-even exits, no trade on holiday sessions.
+- [ ] **Personal account (when it starts): PAPERTREND v2 at `Qty` 1** ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/papertrend/PAPERTREND_v2_claude.txt)), 5-min MNQ, Exchange time, IOG off, `StopATRMult` 2, logger tag `PT`.
+- [ ] **Personal account (when it starts): Swing Target v3 at `Qty` 1**, 1-min MNQ, Exchange time, IOG off, ClockShiftMin 0, logger tag `ST` (user 2026-10-25).
+- [ ] **When a 50K account is funded:** Vault Break `NumContracts` 1 (was 2), `FlaggedContracts` 1, + Swing Target v3 `Qty` 1. **150K funded:** Swing Target `Qty` 2 instead of Dual Thrust (`FUNDED_PLAN.md`).
+- [x] (2026-10-25, user: yes) After parity: your call on the swaps that bench better: 50K funded VB 2/1 -> 1/1 + ST 1 MNQ; 150K funded Dual Thrust 2 -> ST 2 MNQ. Not in the evaluations.
+
+- [ ] **Optional (for Codex's IFT_NQ5 test): export full-Globex up / down volume** with [NQ_UpDown_Exporter.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/tools/exporters/NQ_UpDown_Exporter.txt) on a 5-min @NQ chart (Exchange CT, 24h session, from 06/2017, home PC), files into `data/`; plus the IFT MultiCharts report with its List of Trades.
+
 ## Later
 
 - [ ] **Export 1-minute data for NG, ZC and ZS** (natural gas, corn, soybeans), Jan 2018 to now, same way as the CL / ZN files
@@ -150,7 +278,7 @@ after 15:59 CT, never with a position open.
   [NFP Fade](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_NFP_Fade.txt),
   [CL Sunday Fade](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/CL_Sunday_Gap_Fade.txt),
   VB SP, EOS.
-- [ ] **Thu 12/10 (after the close): roll Symbol Mapping on the VPS** `@MNQ (dxFeed) -> MNQH7` (was MNQZ6; before the
+- [ ] **Thu 12/10 (after the close): roll Symbol Mapping on the VPS** (phone reminder set for 12/10 07:00 CT; all three @MNQ / MNQZ6 lines) `@MNQ (dxFeed) -> MNQH7` (was MNQZ6; before the
   December roll ~12/11), then auto-trading off / on and a 1-MNQ test order per account. Reminder set: 12/10 08:00 CT
   (scheduled-jobs session).
 - [ ] **Mid-December gate:** ~40–70 live trades at ≥ 75% of backtest and no ALARM → start scaling (FUNDED_PLAN.md).

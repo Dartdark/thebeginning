@@ -1,0 +1,36 @@
+Forward-log strategies in the plans they could join (user, 2026-10-24: 'what would the plan look like with them').
+
+A. Personal portfolio, every piece at 1 micro (2018-01 -> 2026-10):
+   S47 v2           alone $2,705 a year, corr with the 14 +0.30
+   Kusho v9 21:00   alone $3,573 a year, corr with the 14 +0.24
+   Kusho v9 15:45   alone $3,004 a year, corr with the 14 +0.27
+   S30 IBS          alone $5,966 a year, corr with the 14 +0.10
+   full 14 (now)                  $ 24,351 a year, Sharpe 3.00, max DD $ 5,001, MC p50 $ 23,698 / p5 $ 12,507, DD p95 $ 5,001, return/DD 8.2, capital $ 25,004
+     without FC 2B                $ 21,985 a year, Sharpe 3.06, max DD $ 5,171, MC p50 $ 21,384 / p5 $ 11,109, DD p95 $ 4,880, return/DD 8.3, capital $ 24,402
+     + S47 v2                     $ 27,056 a year, Sharpe 3.03, max DD $ 5,118, MC p50 $ 26,447 / p5 $ 14,075, DD p95 $ 5,261, return/DD 8.5, capital $ 26,307
+     + Kusho v9 21:00             $ 27,924 a year, Sharpe 3.15, max DD $ 4,398, MC p50 $ 27,179 / p5 $ 14,906, DD p95 $ 4,919, return/DD 9.0, capital $ 24,594
+     + Kusho v9 15:45             $ 27,354 a year, Sharpe 3.09, max DD $ 4,402, MC p50 $ 26,657 / p5 $ 14,367, DD p95 $ 5,103, return/DD 8.6, capital $ 25,514
+     + S30 IBS                    $ 30,317 a year, Sharpe 2.76, max DD $ 5,562, MC p50 $ 29,476 / p5 $ 15,141, DD p95 $ 6,888, return/DD 6.5, capital $ 34,440
+   + S47 + Kusho 21:00 + S30      $ 36,595 a year, Sharpe 2.96, max DD $ 6,182, MC p50 $ 35,740 / p5 $ 19,415, DD p95 $ 7,116, return/DD 7.7, capital $ 35,578
+   + S47 + Kusho 15:45 + S30      $ 36,026 a year, Sharpe 2.91, max DD $ 6,162, MC p50 $ 35,273 / p5 $ 18,972, DD p95 $ 7,194, return/DD 7.5, capital $ 35,971
+   + S47 + Kusho 21:00 (no S30)   $ 30,629 a year, Sharpe 3.17, max DD $ 4,590, MC p50 $ 29,889 / p5 $ 16,385, DD p95 $ 5,242, return/DD 9.2, capital $ 26,208
+B1. 150K funded, single history (start days from 2018, full size from a $3,000 cushion):
+   150K plan (now, with DT 2)   1y $ 17,363 | 2y $ 20,285 blown 0.0% | 6th payout day 216
+   + FC 2B 1 MNQ                1y $ 17,184 | 2y $ 20,327 blown 0.0% | 6th payout day 213
+   + FC 2B 2 MNQ                1y $ 17,039 | 2y $ 20,343 blown 0.0% | 6th payout day 218
+   + S47 v2 1 MNQ               1y $ 17,670 | 2y $ 20,334 blown 0.0% | 6th payout day 207
+   + S47 v2 2 MNQ               1y $ 17,926 | 2y $ 20,474 blown 0.0% | 6th payout day 206
+   + Kusho v9 15:45 1 MNQ       1y $ 17,515 | 2y $ 20,347 blown 0.0% | 6th payout day 204
+   + Kusho v9 15:45 2 MNQ       1y $ 17,619 | 2y $ 20,356 blown 0.0% | 6th payout day 198
+   + all three at 1 MNQ         1y $ 17,485 | 2y $ 20,420 blown 0.0% | 6th payout day 202
+B2. 150K funded, bootstrapped (500 paired 2-year histories, 20-day blocks, full size from $3,000):
+                                y1  y1_p5      y2   y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+150K plan (now, with DT 2) $16,879 $5,500 $19,957 $20,500 $20,500  2.6%   96.8%   228      50.0%      $0       0.0%
++ FC 2B 1 MNQ              $16,764 $5,500 $19,911 $20,500 $20,500  2.8%   96.8%   228      49.8%    $-46       0.2%
++ FC 2B 2 MNQ              $16,522 $5,500 $19,801 $20,500 $20,500  3.4%   96.2%   234      49.7%   $-156       0.8%
++ S47 v2 1 MNQ             $17,061 $5,500 $20,017 $20,500 $20,500  2.4%   97.4%   224      50.2%     $60      -0.2%
++ S47 v2 2 MNQ             $16,719 $5,500 $19,813 $20,500 $20,500  3.4%   96.2%   226      49.8%   $-144       0.8%
++ Kusho v9 15:45 1 MNQ     $17,075 $5,500 $19,913 $20,500 $20,500  3.0%   96.8%   225      50.1%    $-44       0.4%
++ Kusho v9 15:45 2 MNQ     $17,456 $2,500 $19,400  $5,350 $20,500  5.8%   94.0%   218      48.8%   $-557       3.2%
++ all three at 1 MNQ       $17,071 $5,350 $19,825 $20,500 $20,500  3.2%   96.6%   221      49.8%   $-132       0.6%
+   (the 150K ladder pays at most $20,500 per account)
