@@ -119,3 +119,7 @@ Ideas that have worked here are **forced or scheduled flows**: expiration opens,
 rebalancing, payroll reactions, Monday and Sunday-reopen flows. Price-pattern ideas (breakouts, indicators,
 mean reversion) have mostly failed. Aim at the plan's gaps: `agents/tasks/plan_daily_pnl.csv` shows which days and
 hours the plan is already exposed. Low correlation with the plan matters more than a high Sharpe.
+
+## Adopted research controls (user, 2026-10-26)
+
+Read and apply [RESEARCH_CONTROLS.md](RESEARCH_CONTROLS.md) before new research. It adds information/label clocks, fold-local fitting, baseline and run/cost records; existing gates and live boundaries remain binding.
