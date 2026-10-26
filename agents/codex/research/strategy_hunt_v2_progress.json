@@ -1,0 +1,109 @@
+{
+  "program": "strategy_hunt_v2",
+  "status": "hypothesis_preregistered_before_data",
+  "started_utc": "2026-10-26T14:21:58.337703+00:00",
+  "user_local_date": "2026-10-26",
+  "timezone": "America/Los_Angeles",
+  "task": "agents/codex/TASK_strategy_hunt_v2.md",
+  "task_source_repository": "Dartdark/thebeginning",
+  "task_source_ref": "claude/nq-trading-strategy-params-5h9d20",
+  "task_source_commit": "92b1d4c",
+  "execution_branch": "codex/work",
+  "branch_basis": "The user pointed to the task on the Claude branch; the invoked task explicitly requires codex/work and prohibits Claude writes.",
+  "goal": "Find native-cost pieces or filters/sizing that clear promotion/placebos and improve at least one adopted plan versus BASE and EMPTY.",
+  "budget": {
+    "max_counted_evaluations": 60,
+    "max_hypotheses": 10,
+    "counted_evaluations": 0,
+    "hypotheses_started": 1,
+    "gross_screens_run": 0,
+    "stop_on_either_limit": true,
+    "prior_t6_evaluations": 65,
+    "prior_t6_unique_rules": 63,
+    "failed_gross_screen_counts_as_evaluation": false,
+    "all_gross_screens_and_selection_history_retained": true
+  },
+  "gates": {
+    "mechanism_sheet_before_data": true,
+    "gross_mean_at_least_twice_round_trip_cost": true,
+    "max_configs_per_preregistration": 5,
+    "design_period": "2018-22",
+    "historical_validation_period": "2023+ once after committed selection; previously seen history",
+    "full_period": "2018-26",
+    "native_micro_costs_required": true,
+    "promotion": "net trade t >= metrics.t_threshold(N_items) OR DSR >=0.95; positive design and validation",
+    "random_side_and_time_placebo_p_max": 0.05,
+    "bench_order": "Immediately after design pass; stop if no plan improvement versus BASE and EMPTY before additional robustness",
+    "bench_choices": [
+      "personal return/drawdown with one-year block MC",
+      "50K/150K funded paired bootstrap",
+      "50K evaluation pass rate"
+    ],
+    "bench_rows": [
+      "BASE",
+      "ADD",
+      "REPLACE",
+      "EMPTY"
+    ],
+    "five_metrics": [
+      "Sharpe",
+      "Sortino",
+      "profit_factor",
+      "Calmar",
+      "Ulcer"
+    ],
+    "half_day_holiday_and_1559CT_exit_check_required": true,
+    "independent_checker_before_promotion": true
+  },
+  "definition_screening": [
+    {
+      "scope": "priority1 forced/scheduled flows",
+      "decision": "already-tested proxies skipped; genuine expiry/WI-tail inputs missing",
+      "report": "agents/codex/research/hunt_v2_flow_novelty.md",
+      "new_returns": false
+    },
+    {
+      "scope": "priority4 B confirmations",
+      "decision": "most adopted/rejected; remaining MC prerequisites incomplete",
+      "report": "agents/codex/research/hunt_v2_confirmation_readiness.md",
+      "new_returns": false
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H01",
+      "name": "LDF long-side delta confirmation against current book",
+      "kind": "disclosed existing-lead confirmation plus strict/causal data correction",
+      "stage": "preregistered_gross_not_run",
+      "evidence": "agents/codex/evidence/hunt_v2_ldf_delta_confirmation.md",
+      "plan": "agents/codex/plans/hunt_v2_ldf_delta_confirmation.md",
+      "planned_models": [
+        "BASE",
+        "LEGACY_diagnostic_unselectable",
+        "STRICT30_primary"
+      ],
+      "planned_counted_evaluations_after_gross_pass": 3,
+      "actual_counted_evaluations": 0,
+      "gross_screen_runs": 0,
+      "data_or_returns_read_for_hypothesis": false,
+      "prior_selection_and_failed_old_bench_disclosed": true
+    }
+  ],
+  "counted_evaluations": [],
+  "gross_screens": [],
+  "qualifying_candidates": [],
+  "next_action": "Run frozen H01 RAW_NO_STOP gross screen on2018-22 after committed mechanism/prereg. If under$4.48perMNQ mean or fails quality/count gate, stopH01 with0economic evaluations; otherwise run all3frozen design models and immediate2018-22currentpersonal19book bench. Never expose2023candidate returns before committed selection. Track60evaluation/10hypothesis limits and all failures.",
+  "boundaries": [
+    "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
+    "no shared rankings/plans/live/VPS/broker/API changes",
+    "no other-branch writes or PR2 actions",
+    "no paid data/accounts/purchases/external messages"
+  ],
+  "automation": {
+    "old_t6_research_paused": true,
+    "old_t6_alerts_paused": true,
+    "v2_continuation_enabled": false,
+    "note": "Enable bounded replacement continuation only after concrete v2 checkpoint is saved; keep existing hourly cadence if resumed."
+  },
+  "bench_source_map": "agents/codex/research/hunt_v2_bench_source_map.md"
+}

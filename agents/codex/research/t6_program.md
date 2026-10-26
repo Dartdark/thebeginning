@@ -1,4 +1,10 @@
-# Standalone t6 research program
+# Standalone t6 research program — stopped by user
+
+User replacement,2026-10-26 America/Los_Angeles: the current Issuer Forward-Guidance Revision hypothesis
+ended at NEEDS DATA; its source work is saved in63f557d. No additional t6 hypothesis is authorized.
+Both old t6 schedules were paused successfully. The archived65 evaluations/63unique rules and all
+metric/notification history are preserved; t6 was not achieved. Start TASK_strategy_hunt_v2.md instead.
+The historical continuation instructions below are superseded by this stop and the new task.
 
 User instruction, 2026-10-25 America/Los_Angeles: keep researching until the standalone goal is met;
 a rejected hypothesis ends that hypothesis, not the program. Send meaningful progress notifications.
