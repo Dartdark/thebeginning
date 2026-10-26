@@ -60,3 +60,6 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
   pasted under the FC 2B name (2026-10-23).
 - A day-session chart doesn't stop a trade at a holiday's 12:00 halt: FC 2B v1 held 26 holiday trades to the 17:00 reopen;
   every strategy needs the early-close list and an explicit early flatten (2026-10-23).
+- (2026-10-26) On a live-account incident, read the evidence (Order Tracker, Logs, the bench's rule file, TODO) BEFORE
+  answering. Three wrong guesses in a row (Target Guard, a manual exit, a 'missed' daily loss limit that the 150K bench
+  already models) cost the user's trust. Say 'I don't know yet, send X' instead of guessing a cause.
