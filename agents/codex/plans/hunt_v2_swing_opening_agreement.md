@@ -57,7 +57,8 @@ P = native C525 - O511. D = sum(OF volume - downvol) over511..525. Known require
 source/native bars, finite nonnegative classified quantities, volume==upvol, upvol+downvol==native total
 volume, source/native closes within.25point, and positive aggregate classified total. No partial sums,
 whole-day future availability flag or later revisions chosen from returns. Keep if P*D>=0. Drop ONLY strict
-P*D<0. Zero/invalid/missing/mismatched flow => KEEP_UNKNOWN, never a favorable deletion. Preserve raw source
+P*D<0. Observed P/D zero with valid positive-total source is KEEP_KNOWN_NEUTRAL; invalid/missing/mismatched
+flow or zero aggregate classified quantity => KEEP_UNKNOWN, never a favorable deletion. Preserve raw source
 availability/alias/price/total audits. The price prefix itself must be complete to determine parent geometry.
 
 Keep/drop applies to ALL parent orders and tickets that day. Kept day: both original orders/state/cap remain
@@ -88,6 +89,12 @@ No current-day final membership or late-bar fallback. For20 stored references us
 normal sessions require all390 bars511..900. Known short sessions require observed contiguous511..last valid
 RTH bar<=900, with extent/short-calendar status retained; no closed-market prints demanded. Internal gaps,
 normal missing ends or mixed references remain flagged on retained entries and veto gross admission.
+An unexplained NORMAL-session missing900 that literal next-date511 overwrites is also retained as a
+lineage fault for the next20 actual stored-session updates (the maximum parent lookback), including the
+current feature. This diagnostic does not insert, delete or reorder source history or remove events.
+Known short-calendar missing900 alone is not such a fault. Literal trading skips such as a NORMAL Dec31
+do not prove a short session; weekend references cannot qualify as scheduled short sessions. Invalid
+nonpositive average range or coincident/reversed two-day levels also remain unresolved protective geometry.
 
 An invalid otherwise-eligible native scan prefix stops search and remains unresolved, never skipped into
 a next-observed entry. A first entry before later missing bars stays in the ledger; relevant held-path
