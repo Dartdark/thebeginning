@@ -42,3 +42,14 @@ eligibility eventually supports TEST, first write an eligible evidence sheet and
 at-most-five-configuration economic preregistration, then design2018-22 before any selected2023+ test.
 All cumulative economic trials, t milestones, prior notification snapshots and schedules stay unchanged
 by this intake. A negative source result ends no continuing research program and creates no new alert.
+
+## Allocation correction before primary-document sampling
+
+The delegated reviewer reported reading three individual ECTSum transcript files plus one derivative
+summary before receiving the one-sample allocation. That discovery exceeded the coordinated original
+three-document total. Preserve all four actual reads and their provenance; do not relabel them as one
+sample or as primary issuer releases. No return labels, price paths or financial tests were involved.
+The delegated sample intake is now stopped. This correction authorizes at most two additional individual
+SEC/issuer-document samples for root, separately retained, and no other corpus sample reads in this
+extension. This updates a source-only work budget before those further reads, not an economic design
+after returns. All scope, data and no-return gates above remain unchanged.
