@@ -3,7 +3,7 @@
 ## Account and growth plan (agreed 2026-10-16)
 
 Priority order (details in the sections below and in `../reports/Trading_Business_Plan.pdf`):
-1. **Prove the edge live** on 3 accounts: #1 50K EOD (since 2026-10-12), #2 50K EOD (Tue 10/20), #3 150K No-Activation
+1. **Prove the edge live** on 3 accounts: #1 50K EOD (since 2026-10-12, **blown 2026-10-26**), #2 50K EOD (Tue 10/20), #3 150K No-Activation
    (~10/27, tests the 150K settings). Single evaluations 5–10 trading days apart (5-pack evaluations all start at purchase).
    Gate ~mid-December: ~40–70 live plan trades at ≥ 75% of backtest, no ALARM.
 2. **Scale Apex with 150K No-Activation** ($249): ~$20k evaluation budget, +2 accounts a week to 20; 50K slots switch to 150K

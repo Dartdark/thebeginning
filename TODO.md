@@ -27,7 +27,7 @@ bottom). Times are Central (CT).
 - [x] (2026-10-20) Account #2 bought and set up on the VPS: second chart set (VB, ONB ADX30, EOS, Bridge) on the new account, logger tags `-2`, StartBalance 50000.
 - [ ] **Fri 10/23 (and every Friday): export the weekly MultiCharts reports into `live/`** and tell Claude (it runs
   `analysis/live_vs_backtest.py --all live/` and the drift alarm).
-- [ ] When account #1 passes ($53,000): turn auto-trading off on that account.
+- [x] (2026-10-26: account #1 BLOWN, user) When account #1 passes ($53,000): turn auto-trading off on that account.
 - [x] (2026-10-20, user: done) **Now: Rithmic copier off (or #2 removed as follower)** while set 2 auto-trades, or #2 trades double size. Copier
   waits until several funded accounts (2026-10-20).
 - [ ] **Account #3 (150K No-Activation, $249) trades from Sun 10/25 evening (user, 2026-10-25; the 17:00 CT reopen starts Monday's Apex day).** 150K evaluation stack = the
@@ -220,11 +220,11 @@ after 15:59 CT, never with a position open.
       `mc_reports/` for the forward log (`agents/codex/FORWARD_LOG.md`). Paper only, not traded.
 - [x] (2026-10-25, done: S47 v2 710 / 714 trades, Kusho v9 3,086 / 3,152, C03 3,439 / 3,490 match; `analysis/outputs/mc_parity_2026-10-25.txt`) Optional, only if you want them on the shelf: MultiCharts runs of `checks/candidates/s47_v2/S47_v2_fixed.txt` (new signal,
       not over FC 2B) and of Kusho v9 / C03 (reports .xlsx into `mc_reports/`).
-- [ ] **Account #1 is ~$398 above its trailing line:** one full VB stop at 8 MNQ (~$1,200) would end it. Your call (plan size kept
+- [x] (2026-10-26: #1 BLOWN; turn off its auto-trading / remove its charts on the VPS) **Account #1 is ~$398 above its trailing line:** one full VB stop at 8 MNQ (~$1,200) would end it. Your call (plan size kept
       2026-10-22); check the Apex dashboard each morning.
 
 - [ ] **Automatic cushion sizing, step 1: Sun 10/25 after 17:00 CT (market open), ~5 minutes.** The indicator
-      `Apex Account Check` is already compiled (2026-10-23). (1) On the account -01 chart: right-click → Insert Study →
+      `Apex Account Check` is already compiled (2026-10-23). (1) [#1 blown 2026-10-26: skip -01] On the account -01 chart: right-click → Insert Study →
       Indicator → Apex Account Check; Format Study → Inputs → `AccountName` = `APEX-681524-01`. (2) Same on the -02 chart
       with `APEX-681524-02`. (3) Open the PowerLanguage Editor → Output tab (bottom; View → Output Bar if hidden) and leave it
       open. (4) Within a minute: one line per chart with account and NetWorth. Send Claude a screenshot + both Apex dashboard

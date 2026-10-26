@@ -5,7 +5,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 
 ## State on 2026-10-24 (read this block first; the rest of the file is background)
 
-- **Live (Apex, combine set VB 8 / ONB ADX30 $1,100 / EOS $500 / Bridge 2):** #1 APEX-681524-01 $49,899.44 (~$398 above
+- **Live (Apex, combine set VB 8 / ONB ADX30 $1,100 / EOS $500 / Bridge 2):** #1 APEX-681524-01 **BLOWN 2026-10-26** (was $49,899.44, ~$398 above
   its trailing line; user keeps plan size), #2 -02 $49,424.18. #3 150K No-Activation planned ~10/27. Gate ~mid-December
   (live >= 75% of backtest, no drift alarm) before scaling +2 x 150K a week to 20. Funded plan unchanged (10 strategies,
   cushion sizing table in `funded_strategies/FUNDED_PLAN.md`).
