@@ -48,10 +48,20 @@ Do not review/merge PR#2 or push another agent's branch. Use current adopted pla
 
 Machine-readable status: `agents/codex/research/t6_progress.json` on codex/work.
 Set `notification_event` only for a material milestone: design-pass candidate ready for review,
-qualifying standalone candidate, a meaningful independent-review result, or a genuine user-action blocker.
+first full-history standalone t4.5/t5 crossing, qualifying standalone t6 candidate,
+a meaningful independent-review result, or a genuine user-action blocker.
 Do not notify for every failed test, unchanged status, ordinary engineering retry or a composite t statistic.
 Notifications are app notifications; actual phone delivery depends on the user's mobile push permissions.
 Keep in-chat progress updates while actively researching. A notification watcher is not a substitute for research.
+
+User-requested intermediate alerts: t >= 4.5 and t >= 5, on the way to the unchanged t6 goal.
+For each threshold, BOTH full-history net trade t and daily Newey-West(5) t must reach it,
+with positive 2018-22 design and 2023+ historical validation, realistic contract-specific costs,
+and no known fatal leakage/data/execution error. Design-only, yearly, side-only and unadjusted
+selected statistics do not count. Record the evidence, dates, cost basis and remaining review/selection
+limits in progress and the result; label lower thresholds research milestones, not trading approval.
+Combine simultaneous new crossings in one alert and do not repeat a threshold already delivered.
+Preserve milestone history and keep researching after 4.5 and 5. All existing quiet/read-only limits remain.
 
 Recommended continuation: explore independently defined cash-liquidity/price-volume acceptance mechanisms,
 with exact new signals from raw data and no whole-book return combination. Recheck prior research before each plan.

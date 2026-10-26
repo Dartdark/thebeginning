@@ -39,5 +39,40 @@
     "limitations": "Nominated after design-control results;2023+weaker,one unobserved held minute;no independent promotion/accountcheck.",
     "report": "agents/codex/results/opening_path_persistence.md"
   },
-  "trial_count_note": "40 conservative configuration evaluations include one repeated source-control nomination;39 unique economic rules. Unknown older searches remain relevant."
+  "trial_count_note": "40 conservative configuration evaluations include one repeated source-control nomination;39 unique economic rules. Unknown older searches remain relevant.",
+  "notification_thresholds": [
+    4.5,
+    5.0,
+    6.0
+  ],
+  "notification_threshold_basis": {
+    "metrics": [
+      "full-history net trade t",
+      "full-history daily Newey-West(5) t"
+    ],
+    "both_metrics_required": true,
+    "design_and_historical_validation_net_positive": true,
+    "contract_specific_fees_and_slippage_required": true,
+    "exclude_design_year_side_only_and_unadjusted_selected_statistics": true,
+    "lower_thresholds_do_not_complete_t6_or_authorize_trading": true,
+    "deduplication": "First crossing per program threshold; combine simultaneous new crossings; preserve history."
+  },
+  "notification_milestones": {
+    "4.5": {
+      "threshold": 4.5,
+      "achieved": false,
+      "evidence_event_id": null
+    },
+    "5.0": {
+      "threshold": 5.0,
+      "achieved": false,
+      "evidence_event_id": null
+    },
+    "6.0": {
+      "threshold": 6.0,
+      "achieved": false,
+      "evidence_event_id": null
+    }
+  },
+  "notification_milestone_history": []
 }
