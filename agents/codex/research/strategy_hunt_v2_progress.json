@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H05_statistical_design_pass_source_limited_immediate_book_bench_pending",
+  "status": "H05_closed_book_risk_gate_failed_continue_distinct_research",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -468,7 +468,7 @@
     {
       "id": "H05",
       "name": "Selected High-win Morning Momentum E1 native-execution confirmation",
-      "stage": "statistical_design_pass_SOURCE_LIMIT_immediate_personal_bench_pending",
+      "stage": "closed_frozen_personal_book_gate_rejected_SOURCE_LIMIT",
       "mechanism": "agents/codex/research/hunt_v2_next_executable_nomination.md",
       "mechanism_decision": "TEST: unfinished selected B-rule execution and current personal placement, not new alpha or old funded-failure rescue",
       "plan": "agents/codex/plans/hunt_v2_highwin_confirmation.md",
@@ -490,7 +490,7 @@
       "counted_evaluations": 2,
       "new_returns_calculated": true,
       "validation_run": false,
-      "book_bench_run": false,
+      "book_bench_run": true,
       "report": "agents/codex/results/hunt_v2_highwin_confirmation.md",
       "preregistration_commit": "16635fc",
       "effective_predata_plan_code_commit": "16635fcc3890252886cd82f60aac143161685814",
@@ -509,7 +509,14 @@
       "design_daily_NW5_t": 2.72005549576983,
       "design_positive_years": 4,
       "ATR_source_limit_events": 28,
-      "source_limits_resolved": false
+      "source_limits_resolved": false,
+      "book_nominal_gate_pass": false,
+      "book_certified_gate_pass": false,
+      "book_implementation_commit": "5c011f33b984239cb5daa937d6ff9c72782c6569",
+      "book_marker": "analysis/outputs/codex_hunt_v2_highwin_confirmation/personal19_design/bench_verified_execution.json",
+      "book_verdict": "ADD nominalReturnDD7.717->7.921 beatsEMPTY7.821 but DD95+13.966USDvsBASE fails frozen nonworse riskgate; REPLACEpairedprofit-1519.654 andDD95+179.932vsBASE. BothfeesfailBOTHreferencegate; no2023/retuning/PL.",
+      "independent_saved_result_audit": "agents/codex/reviews/hunt_v2_highwin_result_audit.md",
+      "powerlanguage_written": false
     }
   ],
   "counted_evaluations": [
@@ -609,7 +616,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "H05frozenprotecteddesignstatPASS216trades,net2587.16USD/MNQ,t2.920989/NW5t2.720055,4/5positiveyears. IMMEDIATELYreview/COMMITthenrunONLYcurrentpersonal19designBASE/ADD/entireTwinREPLACE/EMPTYpairedMCbeforefurtherrobustness. All28ATRsource-limit eventsretained; nofullfeed/MC/promotionclaim. RequireexactdesignPASSmarkerhash and2018-22financialfloatfilter; unsupportedinheritedfee/reentry/mark/coverageboundsremainLIMITED,notcertifiedgain. No2023+untilfrozenbookselectionandclaimssupported. IfbookfailscloseH05andcontinuepriority1ECBsource-gatednewquestionthenRSopen-lossLDFinteraction, each ownprereg; neverpausehuntforfamilyfailure. Budget5/60economic,5/10hypotheses,3grossscreens plus65t6; allpriorhistorypreserved; no t6/watchers/automationchanges.",
+  "next_action": "H05CLOSED:protecteddesignstatPASS216net2587.16MNQt2.921/NW5t2.720but immediatepersonal19frozenbookgateFAIL. PreserveADDnominalReturnDDgain7.717->7.921vsEMPTY7.821; narrowDD95+13.97vsBASEfailsriskgate, notproofzeroedge. REPLACEpairedprofit-1519.65/DD95+179.93;bothfeesfail. NOH05futurevalidation/sidecut/target/stop/seed/size rescue,newrobustness,MCdraft orPL. ContinueDISTINCTpriority1ECBscheduledrelease5min-follow/preconferencequestion in research/hunt_v2_ecb_release_source.md: concrete pinnedcalendar+primaryclockera evidence found, ACTUALcalendar/6Erowsnotread; requires owncommitted<=5configprereg/source/date/clockadmissionbeforegross. Source-calendaracquisition/networkchoicesmustrespectpolicy/403, noforeigncodeexecution. ThenownedRSopen-lossLDFinteraction sourceTEST isavailable, separateprereg; neverrerunH04/H01. Budget5/60economic,5/10hypotheses,3grossscreens plusarchived65t6; allhistoryretained, noqualifier/event orreasonpausehunt. ActualworkspacebrieflyunavailablethenrestoredsameHEAD/files; notanongoinguseractionblocker. No t6/watchers/automationchanges.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -620,7 +627,7 @@
     "old_t6_research_paused": true,
     "old_t6_alerts_paused": true,
     "v2_continuation_enabled": true,
-    "note": "V2continuationunchanged;H05protectedstatisticaldesignPASSonly,SOURCE_LIMIT andimmediatepersonal19benchpending. Budget5/60economic,5/10hypotheses,3grossscreens plus65t6. Noqualifyingfullhistoryevent orbudgetlimit; nophoneverification.",
+    "note": "Continuationunchanged;H05closedunderfrozenbookriskgateafteractualgross/design/bench. Budget5/60economic,5/10hypotheses,3grossscreens plus65t6. No qualifyingmaterialevent orbudgetlimit; continueDISTINCTquestion. No phoneverification.",
     "automation_id": "6adea9fee9c88191a45399d233743746",
     "title": "Strategy hunt v2",
     "timezone": "America/Los_Angeles",
@@ -647,45 +654,118 @@
     "H01_frozen_rule_changed": false
   },
   "last_verified_execution": {
-    "kind": "frozen_two_model_native_cost_design",
-    "started_utc": "2026-10-26T22:54:14.309484+00:00",
-    "completed_utc": "2026-10-26T22:54:15.293333+00:00",
-    "phase": "frozen_two_model_native_cost_design",
-    "prereg": "HEAD",
-    "implementation_commit": "9d75a733bcd2a3e6f237654a8a63c26619844390",
-    "script_sha256": "86f90eac4a219559ba2840114ce54d26ccd6987494fd684f02cc07471d9c6502",
-    "admission_marker_sha256": "0e4425ba46ffab1ea5b98d4a4ab4ef6ea9047d848a5d8fb00e92e02a1e804581",
-    "artifacts_sha256": {
-      "design_PROTECTED_HW_trades.csv": "a9fb012f3bca3f3e8e1761d05201dad6263cf9f590f423ee4cce2e18fab223b6",
-      "design_TIME_CONTROL_trades.csv": "1f41e5bf028143b9fb8dfc108e623b350f64555580ab5179dfc505d57a49a511",
-      "design_metrics_side_year.csv": "f97684a1cc4eea0748da1bcdee163b4a75427823d500e36e3a1fb71f42b15ec9",
-      "design_daily.csv": "e5adaf75e84afb69df247befb01bdfb0084782e3d969f434eb993a85918f266f",
-      "design_cost_bridge.json": "6d3ef0e63812dee13b32091fba4189caaacf9a9f9bc83c14df7257f6ed8e5334",
-      "design_gate.json": "23be9842603b9ad0de003450eeba1ff6b826c7ad50bdcb64c3ec7f165a1fd702",
-      "design_input_binding.json": "f5fb2cc3c9c0fbb0e3c4d338bce777028feed7884b1880bf46ad56008f409198",
-      "design_attempt.json": "1d4b0aebbc7eb2a308a6da5486d16555598bb097872b2accebfe3baa9a96a2a4"
+    "kind": "immediate_frozen_personal19_design_bench",
+    "completed_utc": "2026-10-26T23:00:07.149721+00:00",
+    "phase": "immediate_personal19_design_bench",
+    "prereg": "5c011f33b984239cb5daa937d6ff9c72782c6569",
+    "implementation_commit": "5c011f33b984239cb5daa937d6ff9c72782c6569",
+    "design_marker_sha256": "6dfd31227c7182cd6bbdee2f8615c06dd672940468a371b0fc6358dfe0c666e9",
+    "hashes": {
+      "analysis/codex_hunt_v2_highwin_bench.py": "e176a2dae837c84796582779351d3971f1b5f6adab4f35f0f2da2caaddb90721",
+      "agents/codex/plans/hunt_v2_highwin_confirmation.md": "e09611907c55f96669647e5559ec38f0d4650f7de2b291e5c1c9cbe5e5f94a9e",
+      "agents/codex/research/hunt_v2_highwin_bench_adjudication.md": "0e721f965ff519da1f5de7acc39edc69fd62adff99fdfa0a8effeb52c45ef2f5",
+      "agents/codex/research/hunt_v2_bench_source_map.md": "669ff349870f77de80a73430140ca86236b404523574215d7c0d36589953ca91",
+      "analysis/codex_anson_personal.py": "6315d0436fee0fb92c8c0272512f87f6936d94143888af94eb41dfb42e648448",
+      "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+      "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a",
+      "analysis/codex_hunt_v2_ldf_delta.py": "8fb312196af06691ee27ca34e532df7c536f107332c865d9794bff70260dd494",
+      "agents/codex/RESEARCH_CONTROLS.md": "2537562f9f14acfa58eaf609771c14c0c92e9df8f058180748d877749c99e12f",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_PROTECTED_HW_trades.csv": "a9fb012f3bca3f3e8e1761d05201dad6263cf9f590f423ee4cce2e18fab223b6",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_TIME_CONTROL_trades.csv": "1f41e5bf028143b9fb8dfc108e623b350f64555580ab5179dfc505d57a49a511",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_metrics_side_year.csv": "f97684a1cc4eea0748da1bcdee163b4a75427823d500e36e3a1fb71f42b15ec9",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_daily.csv": "e5adaf75e84afb69df247befb01bdfb0084782e3d969f434eb993a85918f266f",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_cost_bridge.json": "6d3ef0e63812dee13b32091fba4189caaacf9a9f9bc83c14df7257f6ed8e5334",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_gate.json": "23be9842603b9ad0de003450eeba1ff6b826c7ad50bdcb64c3ec7f165a1fd702",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_input_binding.json": "f5fb2cc3c9c0fbb0e3c4d338bce777028feed7884b1880bf46ad56008f409198",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_attempt.json": "1d4b0aebbc7eb2a308a6da5486d16555598bb097872b2accebfe3baa9a96a2a4",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_verified_execution.json": "6dfd31227c7182cd6bbdee2f8615c06dd672940468a371b0fc6358dfe0c666e9",
+      "analysis/outputs/codex_rebound/personal19/UNIFORM/fee_1.24/baseline_daily19.csv": "d724c7d02b6db71e63ba705079dbea7fefaa42c6b4f436308a28993ca1908803",
+      "analysis/outputs/codex_rebound/personal19/SUNDAY2/fee_1.24/baseline_daily19.csv": "d724c7d02b6db71e63ba705079dbea7fefaa42c6b4f436308a28993ca1908803",
+      "analysis/outputs/codex_rebound/personal19/UNIFORM/fee_1.04/baseline_daily19.csv": "a52649b1e7301ebafe474a781a0cb25c5a1d24204ccb9716a382d0405056b24f",
+      "analysis/outputs/codex_rebound/personal19/SUNDAY2/fee_1.04/baseline_daily19.csv": "a52649b1e7301ebafe474a781a0cb25c5a1d24204ccb9716a382d0405056b24f"
     },
-    "statistical_design_pass": true,
-    "source_status": "OBSERVED_DEFINITION_WITH_SOURCE_LIMITS",
-    "source_limits_resolved": false,
-    "economic_evaluations_added": 2,
-    "models": [
-      "PROTECTED_HW",
-      "TIME_CONTROL"
+    "runtime": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3"
+    },
+    "source_pin": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
+    "bootstrap": {
+      "n": 5000,
+      "horizon": 252,
+      "block": 20,
+      "seed": 2026102605,
+      "paired": true,
+      "convention": "shared noncircular starts0..T-block exclusive"
+    },
+    "nominal_design_book_improvement": false,
+    "nominal_survivors": [],
+    "paired_tests_by_fee": {
+      "1.24": {
+        "ADD": false,
+        "REPLACE": false
+      },
+      "1.04": {
+        "ADD": false,
+        "REPLACE": false
+      }
+    },
+    "certified_book_pass": false,
+    "status": "FAIL_NO_FROZEN_BOOK_IMPROVEMENT",
+    "uncertainty_bound_supported": false,
+    "next_action": "CloseH05before further robustness/2023+.",
+    "full_Twin_slot_removed_in_EMPTY_REPLACE": true,
+    "economic_strategy_evaluations_added": 0,
+    "limitations": [
+      "Daily published-book booking only; no joint intraday margin/liquidation, funded, evaluation, pass or payout claim.",
+      "Core native-fee correction uses nonzero daily activity and undercounts some reentries; exact per-leg trade-count bounds are unsupported here.",
+      "Twin is marked v1 checker history, not an exact v2.1 ledger. EMPTY/REPLACE remove BOTH BO and MO, not an isolated MO slot.",
+      "Kusho is exit-booked; S30/MOC retain inherited fee/mark approximations. An exact current alternate daily-mark envelope is unsupported here.",
+      "Baseline input endsOT evidence2026-07-07; only2018--22 is inspected now. Later book zeros are never assumed known no-trade.",
+      "Fee1.04 is the fixed published-research diagnostic, not a verified broker quote or complete fee/mark/coverage uncertainty bound.",
+      "Nominal statistical book improvement can be reported; unsupported implementation bounds prevent a certified book PASS."
     ],
-    "validation_or_account_or_robustness_run": false,
-    "immediate_book_bench_required_if_pass": true,
-    "marker": "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_verified_execution.json",
-    "symbolic_prereg_HEAD_resolved_at_runtime": "9d75a733bcd2a3e6f237654a8a63c26619844390",
-    "no_new_commit_between_admission_and_design": true,
+    "artifacts_sha256": {
+      "paired_histories.npy": "4d24c25272b668e0ff6ae142baab19120c7b3fd5d92b6354b2584b014da43353",
+      "bench_attempt.json": "1910b217657eef2ffb7e7eeefd09b9783ee375f00aa32290651faa3996462142",
+      "bench_pre_rows_binding.json": "4bcf3cfba3a99ed9c64d0eedcca45904761cd0caec31c948bdc7ffbab3f573f3",
+      "fee_1.24/candidate_daily.csv": "6ec8aa8993d46ef785f3379139795accd1772a8bb27b0b4e755665a214c079b8",
+      "fee_1.24/paired_effects.csv": "ad7ee4ff2ee5fcd5615dacea144dd30dad71a3a53691ea35d1f1224560b7f10b",
+      "fee_1.24/paired_paths.npz": "06751160696fd46b89076eed6e91037e063a8c7eaa1757747ba472f11abb4ee8",
+      "fee_1.24/historical_metrics_by_year.csv": "ef9fdd363ceb22a1efc6f492c67fb8a5550835019c07c2f24a9704afdf2ca11e",
+      "fee_1.24/baseline_design19.csv": "8c442713c925b75cf03bb0b26e78c83e34905e0eb5ad124da71a5fc7a48c54b4",
+      "fee_1.24/joint_losses.csv": "d87ca715d449f95c1b968a74d01f38dde8984a9f263ece50ab9ab79d191ee9b9",
+      "fee_1.24/daily_portfolios.csv": "57e80c2c0cc2c6432bc7c3e5423b943996993e2b3579da405a41f4e669f7fd6f",
+      "fee_1.24/mc_summary.csv": "e845edafdf10c67d95a9a13fa564a9dc490854729ed49c5d3c9841e40b247d5a",
+      "fee_1.04/candidate_daily.csv": "a3d2f58b003ec6559a62a969b3767994aa8c3411b70e1138ea6fc082d2e12d42",
+      "fee_1.04/paired_effects.csv": "28e32d204d362f03b898763a31deb895cc33fe8c80ffdc0331caa52a6ba46a40",
+      "fee_1.04/paired_paths.npz": "90b10ca64e60201e431c4f2e9956b2c6a168e11f7f51be6cd3a6756d2d93ad42",
+      "fee_1.04/historical_metrics_by_year.csv": "39d7f5227af40eb444265e5f93c8550821e01096ec38c16db0d596b34aae3bb1",
+      "fee_1.04/baseline_design19.csv": "33c6ab0a4909d52b2232103ea6775fb88229318067ca20835b607c47e77a91ec",
+      "fee_1.04/joint_losses.csv": "50cc54455bb84db089692b97a60464450f4714b5c403c042b690a2bbb726658a",
+      "fee_1.04/daily_portfolios.csv": "fcd82f300eca46784c0372588b54df73224568bef976212f31339bf8c139167d",
+      "fee_1.04/mc_summary.csv": "230c79f1aec159d8aac25535492c1210a7289735683d1e0b27a06d28f1baedd6",
+      "bench_gate.json": "f637b85fc7ef94724d4174da28da8fd471240c12190cc9a10a4b4314754d0f07",
+      "bench_source_calendar_audit.json": "874230bd707f639bcbcb87ccd9bed8d526e5f6565d6c4eb88467fec72dfc5f2f"
+    },
+    "future_candidate_or_book_financial_values_converted": 0,
+    "random_histories_shared_across_all_models_and_fees": true,
+    "native_candidate_fee_exact": true,
+    "book_rows": 4,
+    "unselectable_time_context_rows": 2,
+    "funded_or_evaluation_or_live_action": false,
+    "marker": "analysis/outputs/codex_hunt_v2_highwin_confirmation/personal19_design/bench_verified_execution.json",
+    "only_design_financial_values_converted": true,
+    "fees_tested": [
+      1.24,
+      1.04
+    ],
+    "economic_evaluations_added": 0,
+    "scope": "personal daily-book benchmark, not valid funded/evaluation joint intraday paths",
     "v2_cumulative_evaluations": 5,
     "v2_hypotheses_started": 5,
     "retained_gross_screens": 3,
-    "design_trade_t": 2.9209892020035393,
-    "design_daily_NW5_t": 2.72005549576983,
-    "full_qualification_or_trading_approval": false,
     "validation_run": false,
-    "book_bench_run": false,
     "powerlanguage_written": false
   },
   "last_report": "agents/codex/results/hunt_v2_highwin_confirmation.md",
@@ -735,7 +815,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-26T22:56:09.304831+00:00",
+  "updated_utc": "2026-10-26T23:09:07.191298+00:00",
   "current_adopted_source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
   "current_adopted_source_reconciliation": "d14dc9a TIER/MINED/research/data/executableallocations identical073e27c. Documentationstatusupdatesdo notchangeadoptedallocations; no operationalaction or otherbranchwrite. Personal19 alreadycontainsFC2B/Twin but not separateHighwinE1bracket.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -1033,11 +1113,10 @@
     "material_notification": false
   },
   "active_research_reservation": {
-    "hypothesis": "H05",
     "owner": "Codex current research turn",
-    "stage": "Immediate frozen personal19 design bench; source/synthetic review pending, no bench returns yet",
-    "started_utc": "2026-10-26T22:36:53.398812+00:00",
-    "no_competing_writer_found": true
+    "stage": "Distinct priority1 ECB preregistration/source preparation; not yet registered",
+    "no_competing_writer_found": true,
+    "updated_utc": "2026-10-26T23:09:07.191286+00:00"
   },
   "last_design_execution": {
     "started_utc": "2026-10-26T22:54:14.309484+00:00",
@@ -1100,5 +1179,114 @@
     "original_parent_entries_preserved": true,
     "marker": "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_atr_admission_verified.json",
     "no_stopped_outcomes_during_admission": true
+  },
+  "last_book_bench": {
+    "completed_utc": "2026-10-26T23:00:07.149721+00:00",
+    "phase": "immediate_personal19_design_bench",
+    "prereg": "5c011f33b984239cb5daa937d6ff9c72782c6569",
+    "implementation_commit": "5c011f33b984239cb5daa937d6ff9c72782c6569",
+    "design_marker_sha256": "6dfd31227c7182cd6bbdee2f8615c06dd672940468a371b0fc6358dfe0c666e9",
+    "hashes": {
+      "analysis/codex_hunt_v2_highwin_bench.py": "e176a2dae837c84796582779351d3971f1b5f6adab4f35f0f2da2caaddb90721",
+      "agents/codex/plans/hunt_v2_highwin_confirmation.md": "e09611907c55f96669647e5559ec38f0d4650f7de2b291e5c1c9cbe5e5f94a9e",
+      "agents/codex/research/hunt_v2_highwin_bench_adjudication.md": "0e721f965ff519da1f5de7acc39edc69fd62adff99fdfa0a8effeb52c45ef2f5",
+      "agents/codex/research/hunt_v2_bench_source_map.md": "669ff349870f77de80a73430140ca86236b404523574215d7c0d36589953ca91",
+      "analysis/codex_anson_personal.py": "6315d0436fee0fb92c8c0272512f87f6936d94143888af94eb41dfb42e648448",
+      "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+      "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a",
+      "analysis/codex_hunt_v2_ldf_delta.py": "8fb312196af06691ee27ca34e532df7c536f107332c865d9794bff70260dd494",
+      "agents/codex/RESEARCH_CONTROLS.md": "2537562f9f14acfa58eaf609771c14c0c92e9df8f058180748d877749c99e12f",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_PROTECTED_HW_trades.csv": "a9fb012f3bca3f3e8e1761d05201dad6263cf9f590f423ee4cce2e18fab223b6",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_TIME_CONTROL_trades.csv": "1f41e5bf028143b9fb8dfc108e623b350f64555580ab5179dfc505d57a49a511",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_metrics_side_year.csv": "f97684a1cc4eea0748da1bcdee163b4a75427823d500e36e3a1fb71f42b15ec9",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_daily.csv": "e5adaf75e84afb69df247befb01bdfb0084782e3d969f434eb993a85918f266f",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_cost_bridge.json": "6d3ef0e63812dee13b32091fba4189caaacf9a9f9bc83c14df7257f6ed8e5334",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_gate.json": "23be9842603b9ad0de003450eeba1ff6b826c7ad50bdcb64c3ec7f165a1fd702",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_input_binding.json": "f5fb2cc3c9c0fbb0e3c4d338bce777028feed7884b1880bf46ad56008f409198",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_attempt.json": "1d4b0aebbc7eb2a308a6da5486d16555598bb097872b2accebfe3baa9a96a2a4",
+      "analysis/outputs/codex_hunt_v2_highwin_confirmation/design_verified_execution.json": "6dfd31227c7182cd6bbdee2f8615c06dd672940468a371b0fc6358dfe0c666e9",
+      "analysis/outputs/codex_rebound/personal19/UNIFORM/fee_1.24/baseline_daily19.csv": "d724c7d02b6db71e63ba705079dbea7fefaa42c6b4f436308a28993ca1908803",
+      "analysis/outputs/codex_rebound/personal19/SUNDAY2/fee_1.24/baseline_daily19.csv": "d724c7d02b6db71e63ba705079dbea7fefaa42c6b4f436308a28993ca1908803",
+      "analysis/outputs/codex_rebound/personal19/UNIFORM/fee_1.04/baseline_daily19.csv": "a52649b1e7301ebafe474a781a0cb25c5a1d24204ccb9716a382d0405056b24f",
+      "analysis/outputs/codex_rebound/personal19/SUNDAY2/fee_1.04/baseline_daily19.csv": "a52649b1e7301ebafe474a781a0cb25c5a1d24204ccb9716a382d0405056b24f"
+    },
+    "runtime": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3"
+    },
+    "source_pin": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
+    "bootstrap": {
+      "n": 5000,
+      "horizon": 252,
+      "block": 20,
+      "seed": 2026102605,
+      "paired": true,
+      "convention": "shared noncircular starts0..T-block exclusive"
+    },
+    "nominal_design_book_improvement": false,
+    "nominal_survivors": [],
+    "paired_tests_by_fee": {
+      "1.24": {
+        "ADD": false,
+        "REPLACE": false
+      },
+      "1.04": {
+        "ADD": false,
+        "REPLACE": false
+      }
+    },
+    "certified_book_pass": false,
+    "status": "FAIL_NO_FROZEN_BOOK_IMPROVEMENT",
+    "uncertainty_bound_supported": false,
+    "next_action": "CloseH05before further robustness/2023+.",
+    "full_Twin_slot_removed_in_EMPTY_REPLACE": true,
+    "economic_strategy_evaluations_added": 0,
+    "limitations": [
+      "Daily published-book booking only; no joint intraday margin/liquidation, funded, evaluation, pass or payout claim.",
+      "Core native-fee correction uses nonzero daily activity and undercounts some reentries; exact per-leg trade-count bounds are unsupported here.",
+      "Twin is marked v1 checker history, not an exact v2.1 ledger. EMPTY/REPLACE remove BOTH BO and MO, not an isolated MO slot.",
+      "Kusho is exit-booked; S30/MOC retain inherited fee/mark approximations. An exact current alternate daily-mark envelope is unsupported here.",
+      "Baseline input endsOT evidence2026-07-07; only2018--22 is inspected now. Later book zeros are never assumed known no-trade.",
+      "Fee1.04 is the fixed published-research diagnostic, not a verified broker quote or complete fee/mark/coverage uncertainty bound.",
+      "Nominal statistical book improvement can be reported; unsupported implementation bounds prevent a certified book PASS."
+    ],
+    "artifacts_sha256": {
+      "paired_histories.npy": "4d24c25272b668e0ff6ae142baab19120c7b3fd5d92b6354b2584b014da43353",
+      "bench_attempt.json": "1910b217657eef2ffb7e7eeefd09b9783ee375f00aa32290651faa3996462142",
+      "bench_pre_rows_binding.json": "4bcf3cfba3a99ed9c64d0eedcca45904761cd0caec31c948bdc7ffbab3f573f3",
+      "fee_1.24/candidate_daily.csv": "6ec8aa8993d46ef785f3379139795accd1772a8bb27b0b4e755665a214c079b8",
+      "fee_1.24/paired_effects.csv": "ad7ee4ff2ee5fcd5615dacea144dd30dad71a3a53691ea35d1f1224560b7f10b",
+      "fee_1.24/paired_paths.npz": "06751160696fd46b89076eed6e91037e063a8c7eaa1757747ba472f11abb4ee8",
+      "fee_1.24/historical_metrics_by_year.csv": "ef9fdd363ceb22a1efc6f492c67fb8a5550835019c07c2f24a9704afdf2ca11e",
+      "fee_1.24/baseline_design19.csv": "8c442713c925b75cf03bb0b26e78c83e34905e0eb5ad124da71a5fc7a48c54b4",
+      "fee_1.24/joint_losses.csv": "d87ca715d449f95c1b968a74d01f38dde8984a9f263ece50ab9ab79d191ee9b9",
+      "fee_1.24/daily_portfolios.csv": "57e80c2c0cc2c6432bc7c3e5423b943996993e2b3579da405a41f4e669f7fd6f",
+      "fee_1.24/mc_summary.csv": "e845edafdf10c67d95a9a13fa564a9dc490854729ed49c5d3c9841e40b247d5a",
+      "fee_1.04/candidate_daily.csv": "a3d2f58b003ec6559a62a969b3767994aa8c3411b70e1138ea6fc082d2e12d42",
+      "fee_1.04/paired_effects.csv": "28e32d204d362f03b898763a31deb895cc33fe8c80ffdc0331caa52a6ba46a40",
+      "fee_1.04/paired_paths.npz": "90b10ca64e60201e431c4f2e9956b2c6a168e11f7f51be6cd3a6756d2d93ad42",
+      "fee_1.04/historical_metrics_by_year.csv": "39d7f5227af40eb444265e5f93c8550821e01096ec38c16db0d596b34aae3bb1",
+      "fee_1.04/baseline_design19.csv": "33c6ab0a4909d52b2232103ea6775fb88229318067ca20835b607c47e77a91ec",
+      "fee_1.04/joint_losses.csv": "50cc54455bb84db089692b97a60464450f4714b5c403c042b690a2bbb726658a",
+      "fee_1.04/daily_portfolios.csv": "fcd82f300eca46784c0372588b54df73224568bef976212f31339bf8c139167d",
+      "fee_1.04/mc_summary.csv": "230c79f1aec159d8aac25535492c1210a7289735683d1e0b27a06d28f1baedd6",
+      "bench_gate.json": "f637b85fc7ef94724d4174da28da8fd471240c12190cc9a10a4b4314754d0f07",
+      "bench_source_calendar_audit.json": "874230bd707f639bcbcb87ccd9bed8d526e5f6565d6c4eb88467fec72dfc5f2f"
+    },
+    "future_candidate_or_book_financial_values_converted": 0,
+    "random_histories_shared_across_all_models_and_fees": true,
+    "native_candidate_fee_exact": true,
+    "book_rows": 4,
+    "unselectable_time_context_rows": 2,
+    "funded_or_evaluation_or_live_action": false,
+    "marker": "analysis/outputs/codex_hunt_v2_highwin_confirmation/personal19_design/bench_verified_execution.json",
+    "only_design_financial_values_converted": true,
+    "fees_tested": [
+      1.24,
+      1.04
+    ],
+    "economic_evaluations_added": 0,
+    "scope": "personal daily-book benchmark, not valid funded/evaluation joint intraday paths"
   }
 }
