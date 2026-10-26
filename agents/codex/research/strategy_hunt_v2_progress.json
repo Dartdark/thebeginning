@@ -230,8 +230,19 @@
   "automation": {
     "old_t6_research_paused": true,
     "old_t6_alerts_paused": true,
-    "v2_continuation_enabled": false,
-    "note": "Enable bounded replacement continuation only after concrete v2 checkpoint is saved; keep existing hourly cadence if resumed."
+    "v2_continuation_enabled": true,
+    "note": "Existing hourly schedule repurposed to bounded v2; first H01 is closed at3/60 evaluations,1/10 hypotheses. Future execution/delivery not guaranteed.",
+    "automation_id": "6adea9fee9c88191a45399d233743746",
+    "title": "Strategy hunt v2",
+    "timezone": "America/Los_Angeles",
+    "schedule": "BEGIN:VEVENT\nDTSTART:20261026T011646Z\nRRULE:FREQ=HOURLY\nEND:VEVENT",
+    "timing_mode": "flexible_schedule",
+    "verified_updated_at": "2026-10-26T15:15:21.781984+00:00",
+    "state_evidence": "agents/codex/research/strategy_hunt_v2_automation.json",
+    "prompt_file": "agents/codex/research/strategy_hunt_v2_continuation_prompt.txt",
+    "prompt_sha256": "071de3a4f85b9d6a90822852b316c66cf584712b2cfdf4203e68a79769dccaab",
+    "old_t6_objective_stopped": true,
+    "old_t6_alert_watcher_paused": true
   },
   "bench_source_map": "agents/codex/research/hunt_v2_bench_source_map.md",
   "template_references": {
