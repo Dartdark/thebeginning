@@ -3,9 +3,9 @@
   "status": "researching",
   "goal_met": false,
   "notification_event": null,
-  "latest_completed_hypothesis": "NQ Opening Value Rejection",
-  "latest_result": "All five candidate/control design models negative; primary1307trades net-$75795.75/NQ,t-4.181,NW5 -4.072. No2023+tested. Goal remains unmet; continue distinct mechanisms.",
-  "new_standalone_economic_configurations_tested": 40,
+  "latest_completed_hypothesis": "NQ Implied Variance Budget Breach",
+  "latest_result": "All3candidates failed2018-22;primary223trades net$-24,896.75/NQ,trade t-1.365,NW5 -1.480. No2023+tested. Continue distinct research.",
+  "new_standalone_economic_configurations_tested": 45,
   "excluded_from_goal": "NQ Day Flow Six is an existing-signal composite, not a new standalone strategy.",
   "allowed_timeframes_minutes": [
     1,
@@ -13,15 +13,36 @@
     15,
     30
   ],
-  "next_action": "Choose a DISTINCT mechanism after checking prior research; evidence sheet and <=5-model committed preregistration before new returns. Do not retune failed families on2023+.",
-  "last_report": "agents/codex/results/opening_value_rejection.md",
-  "unique_economic_configurations": 39,
+  "next_action": "Check prior research, formulate a DISTINCT mechanism, write evidence and commit <=5-model preregistration before new returns; do not retune failed families or select their controls.",
+  "last_report": "agents/codex/results/implied_variance_breach.md",
+  "unique_economic_configurations": 44,
   "research_continuation": {
     "title": "Continue standalone t6 research",
     "schedule": "hourly",
     "enabled_at_creation": true,
     "purpose": "Perform research between messages; separate from read-only milestone alert watcher.",
-    "future_execution_status": "Scheduled; creation confirmed. Each run must verify workspace/data access and actual progress."
+    "future_execution_status": "Scheduled; creation confirmed. Each run must verify workspace/data access and actual progress.",
+    "last_verified_execution": {
+      "started_utc": "2026-10-26T02:30:18.587023+00:00",
+      "completed_utc": "2026-10-26T02:30:44.365473+00:00",
+      "workspace": "/workspace/thebeginning",
+      "interpreter": "/workspace/venvs/thebeginning/bin/python",
+      "actual_raw_data_execution": true,
+      "models": [
+        "IVB5_2",
+        "IVB5_3",
+        "IVB15_2",
+        "BASE5",
+        "BASE15"
+      ],
+      "selected": null,
+      "prereg": "ea36af6",
+      "hypothesis": "NQ Implied Variance Budget Breach",
+      "phase": "design",
+      "models_tested": 5,
+      "report": "agents/codex/results/implied_variance_breach.md",
+      "execution_marker": "analysis/outputs/codex_implied_variance_breach/design_verified_execution.json"
+    }
   },
   "best_completed_standalone": {
     "name": "NQ Opening Path Persistence",
@@ -39,7 +60,7 @@
     "limitations": "Nominated after design-control results;2023+weaker,one unobserved held minute;no independent promotion/accountcheck.",
     "report": "agents/codex/results/opening_path_persistence.md"
   },
-  "trial_count_note": "40 conservative configuration evaluations include one repeated source-control nomination;39 unique economic rules. Unknown older searches remain relevant.",
+  "trial_count_note": "45conservative configuration evaluations include one repeated source-control nomination;44unique economic rules. Unknown older searches and diagnostic paths remain relevant.",
   "notification_thresholds": [
     4.5,
     5.0,

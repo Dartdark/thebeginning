@@ -33,6 +33,7 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 | NQ Liquidity Vacuum Refill | Rejected |5models;primary15trades,t0.866,NW5 1.035;no2023+tested |
 | NQ Closing Auction Curvature | Rejected |5models;primary69trades,t-2.58;allcandidatesnegative;no2023+tested |
 | NQ Opening Value Rejection | Rejected |5models;primary1307trades,t-4.18;allnegative;no2023+tested |
+| NQ Implied Variance Budget Breach | Rejected |5models;primary223trades,t-1.365,NW5 -1.480;no2023+tested;program45/44unique |
 
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.
 
