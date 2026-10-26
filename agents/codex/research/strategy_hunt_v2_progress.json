@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "I01_new_source_intake_prepared_before_data",
+  "status": "I01_input_not_admitted_continue_distinct_source_search",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -341,7 +341,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "H01/H02closed, neverretry/retune. NEWI01 dataadmission: commit mechanismNEEDSDATA + bounded2JSONplan + strictnonreturnauditor before newpriceacquisition; run only dates/schema/2018-22OHLCquality with immutablehashes, neverfuturepriceconversion orreturns. Sourcegatecannotbeoverriddenbynumericquality. Onlya laterTEST+separateeconomicpreregistrationcouldregisterH03andrunGROSS. Current3/60evals2/10hyp2screens remain; prior65t6archived. Continueactualboundedv2 and keepautomationactive; no materialnotificationevent.",
+  "next_action": "H01/H02CLOSED; I01NEWpublicinputauditcompletedNEEDS_DATA with2exactsourceblobs and2018-22OHLCquality, noPNL. Do not rerunI01unchanged/admitSPX338-344datesperyear or2024-26missingdata. Continue distinctcredibleinput/mechanism search; anyNEWproviderI02requiresseparateboundedsourceplan, noextraI01sampleexpansion. OnlyTEST+committed<=5economicpreregcanregisterH03/runGROSS. Budget3/60evals2/10hyp2screensunchanged; do notinflatecounterswithsourcechecks or resetprior65t6. Currentbooksource615485funchanged; useboundedfee/markuncertaintynote. No t6/watchers/templateexecution; automationactiveuntiluserstop/budgetcap.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -352,7 +352,7 @@
     "old_t6_research_paused": true,
     "old_t6_alerts_paused": true,
     "v2_continuation_enabled": true,
-    "note": "Existing hourly schedule repurposed to bounded v2; first H01 is closed at3/60 evaluations,1/10 hypotheses. Future execution/delivery not guaranteed.",
+    "note": "Bounded v2 continuation retained; current3/60economic evaluations,2/10registered hypotheses,2gross screens. I01nonreturn source admission completedNEEDSDATA and adds0economic evaluations/hypotheses. No new qualifying milestone. Future execution/delivery is not guaranteed.",
     "automation_id": "6adea9fee9c88191a45399d233743746",
     "title": "Strategy hunt v2",
     "timezone": "America/Los_Angeles",
@@ -396,7 +396,7 @@
     "powerlanguage_written": false,
     "marker": "analysis/outputs/codex_hunt_v2_fvb_short/gross_verified_execution.json"
   },
-  "last_report": "agents/codex/results/hunt_v2_fvb_short_execution.md",
+  "last_report": "agents/codex/results/hunt_v2_prefix_equity_intake.md",
   "parallel_work_observed": [
     {
       "commit": "24dce9a",
@@ -434,7 +434,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-26T16:36:57.387058+00:00",
+  "updated_utc": "2026-10-26T16:46:25.804904+00:00",
   "current_adopted_source_commit": "615485fca3160a4c48761f44b0d1972e7b623ef4",
   "current_adopted_source_reconciliation": "Connected GitHub personal/funded source text matched fetched615485f, TIER branch matched explicitpin; adopted books/interfaces unchanged since92b1d4c. New VB cushion experiment and lessons are prior-source context, not new adoption or v2 trials.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -442,17 +442,52 @@
     {
       "id": "I01",
       "name": "new public pairwise relative-equity source admission",
-      "stage": "mechanism_and_bounded_nonreturn_plan_before_data",
+      "stage": "completed_NEEDS_DATA_not_admitted",
       "mechanism": "agents/codex/evidence/hunt_v2_prefix_equity.md",
       "mechanism_decision": "NEEDS DATA; not a TEST or faithful paper replication",
       "plan": "agents/codex/plans/hunt_v2_prefix_equity_intake.md",
       "manifest": "agents/codex/inputs/hunt_v2_prefix_equity_intake/intake_manifest.json",
       "source_note": "agents/codex/research/hunt_v2_prefix_equity_source.md",
-      "price_files_acquired": 0,
+      "price_files_acquired": 2,
       "financial_return_tests": 0,
       "hypotheses_added": 0,
       "economic_evaluations_added": 0,
-      "reason": "NEWpublicrelativeequitydataset found; admit atmost2pinnedJSONs only after committed mechanism/plan/code and source-only check, datesfullfile/OHLConly2018-22/no returns. Unknownprovenance blocksadmission regardlessnumericquality."
+      "reason": "NEWpublicrelativeequitydataset found; admit atmost2pinnedJSONs only after committed mechanism/plan/code and source-only check, datesfullfile/OHLConly2018-22/no returns. Unknownprovenance blocksadmission regardlessnumericquality.",
+      "initial_plan_commit": "b9ae149",
+      "effective_predata_plan_code_commit": "a70ded0",
+      "source_blob_hashes_verified": true,
+      "numerical_quality_pass": true,
+      "provenance_pass": false,
+      "report": "agents/codex/results/hunt_v2_prefix_equity_intake.md",
+      "report_url": "https://github.com/Dartdark/thebeginning/blob/codex/work/agents/codex/results/hunt_v2_prefix_equity_intake.md",
+      "marker": "analysis/outputs/codex_hunt_v2_prefix_equity_intake/intake_verified_execution.json",
+      "key_limits": [
+        "Both files endDecember2023, no2024-26coverage.",
+        "PurportedSPX has338-344uniquedates/year, notverifiedcashcalendar.",
+        "Allfiveprovenancecategoriesunverified forbothfiles."
+      ],
+      "next_source_note": "agents/codex/research/hunt_v2_prefix_equity_next_source.md",
+      "next_source_decision": "Three bounded new metadata queries found no verified replacement; no additional price sample. Owned SPX source claims Yahoo origin but exact source/event identity remains to verify; do not conflate with older SPY filename problem."
     }
-  ]
+  ],
+  "last_source_quality_execution": {
+    "started_utc": "2026-10-26T16:40:39.058303+00:00",
+    "completed_utc": "2026-10-26T16:40:39.102863+00:00",
+    "phase": "owned_data_quality_intake",
+    "status": "NEEDS_DATA",
+    "preregistration_commit": "a70ded0",
+    "implementation_commit": "a70ded0901fbc036b21e7946e53eefe745c0d0cc",
+    "script_sha256": "c104d9c51b7aac190133c5506ffcdaef824a39eb475e2a4eea4c619cef3fbbdd",
+    "artifacts_sha256": {
+      "intake_source_binding.json": "53b85f25549230201c22a771b8db4798e66102e4cca0964010a46d458751310a",
+      "intake_quality_audit.json": "b2586a25fec356b01842e737542e0b2485d67a8f2469e8c621dc6c2722edfcbe"
+    },
+    "financial_experiment_run": false,
+    "economic_evaluations_added": 0,
+    "hypotheses_added": 0,
+    "downstream_requires_all_bound_hashes": true
+  },
+  "last_source_quality_report": "agents/codex/results/hunt_v2_prefix_equity_intake.md",
+  "last_financial_report": "agents/codex/results/hunt_v2_fvb_short_execution.md",
+  "source_quality_runs": 1
 }
