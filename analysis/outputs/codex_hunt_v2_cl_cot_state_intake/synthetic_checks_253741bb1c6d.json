@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "checks": [
+    "129-field exact selected header schema",
+    "strict nonnegative ASCII integer grammar; no float/commas/rounding/missing repair",
+    "strict real ASCII as-of dates, never release timestamps",
+    "2017 metadata-only poison positions never converted",
+    "other-market poisonous dates/counts never converted",
+    "declared code AND exact name required; absent/otheryear identity blocked before numeric stage",
+    "positive OI and long/short bounds; unresolved integers block support",
+    "fixed19vs20 week boundary; support never grants publication/TEST/H04",
+    "exact selected duplicates collapse once with all IDs; contradictory counts fatal",
+    "multiple as-of dates in a week retained; conflicting weekly signs block support",
+    "holiday weekdays and in-range cross-file dates retained; nondesign positions never converted",
+    "exact six ZIP constants; no future source wildcard"
+  ],
+  "real_source_rows_read": false,
+  "prices_trades_returns_signals_metrics_accounts_calculated": false,
+  "economic_evaluations_added": 0,
+  "hypotheses_added": 0,
+  "gross_screens_added": 0,
+  "script_sha256": "253741bb1c6d6eab66fe3d5a995f577165a9f8afe223f991cb392b44d73a9eb5",
+  "runtime": {
+    "python": "3.12.14"
+  }
+}
