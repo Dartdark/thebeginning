@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H06_preregistered_calendar_quality_then_source_admission_pending",
+  "status": "H06_calendar_research_admitted_frozen_native_gross_pending",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -527,7 +527,7 @@
     {
       "id": "H06",
       "name": "ECB first5minute EURUSD direction before press conference",
-      "stage": "preregistered_calendar_source_admission_pending",
+      "stage": "calendar_quality_and_source_limited_research_admission_pass_gross_pending",
       "mechanism": "agents/codex/research/hunt_v2_ecb_release_source.md",
       "mechanism_decision": "TEST for finite source-gated economic preregistration; not authenticated calendar or guaranteed forced hedge",
       "plan": "agents/codex/plans/hunt_v2_ecb_preconference.md",
@@ -547,14 +547,21 @@
       "min_nonflat_design_events": 35,
       "min_each_primary_side": 5,
       "calendar_phase_no_prices": true,
-      "calendar_rows_read": false,
+      "calendar_rows_read": true,
       "new_returns_calculated": false,
       "gross_screens_run": 0,
       "counted_evaluations": 0,
       "validation_run": false,
       "book_bench_run": false,
       "external_selection_history": "RelatedUSmacro/FXfamilies plus externaldifferent105minute/4hourECBscan preview retained. First5/preconference question proposedbeforepreview. No externalresultborrowed.",
-      "report": "agents/codex/results/hunt_v2_ecb_preconference.md"
+      "report": "agents/codex/results/hunt_v2_ecb_preconference.md",
+      "preregistration_commit": "3b995614ea4a38e53ad3d7cc33cf28b87b0df49d",
+      "calendar_source_quality_pass": true,
+      "calendar_admitted_for_frozen_research": true,
+      "calendar_marker": "analysis/outputs/codex_hunt_v2_ecb_preconference/calendar_verified_execution.json",
+      "calendar_marker_sha256": "12f2dc97cfb60ef542888bf39d0ef7ea10025ea2821c7e91b01c45b7731a82bb",
+      "calendar_independent_review": "agents/codex/reviews/hunt_v2_ecb_calendar_source_admission.md",
+      "primary_date_authentication_claimed": false
     }
   ],
   "counted_evaluations": [
@@ -654,7 +661,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "ResumeCOMMITTEDH06first: calendarONLYphase singlepinnedrawGitHubfile3650bytes/blob68c...; no6Ebytes. Reviewactualheader/provenance/all40dates/fixedBerlinclockUTCCT beforeROOTadmissionJSON; qualitycountPASSaloneNEVERsourceavailabilitypass. Defensiblepub/scheduledidentityknowledgebeforeR+10neededperRESEARCH_CONTROLS; otherwisecloseatNEEDSDATA noquotes. OnlyacceptedcommittedROOTreviewandexactcalendarSHApermitfrozengross2018-22once,min35/min5side,alleligiblewindowscomplete,meanFOLLOW5>=9.98USD/M6E. Nativecostupper1.24+2.50slip+1.25maxmicroquant,notold7.48nominationhurdle. Thenfrozenstoppeddesignonlyaftergross/sourcePASS, immediatebookbeforeextra robustness, nofuturebeforeselection. H05closedwithnarrowriskgatefailureandnominalratioimprovementretained; norescue. OPPnoteligiblecurrentnativebar/source, no t6restart. IfH06failscontinueDISTINCTownedRS-open-lossLDFinteraction ownprereg, notH04/H01rerun. Budget5/60economic,6/10hypotheses,3grossscreens +65t6; noqualifier/event orbudgetlimit/automationchange.",
+  "next_action": "RunCOMMITTEDH06frozengrossONLY2018-22, originalprereg3b995614ea4a38e53ad3d7cc33cf28b87b0df49d andexactcalendarSHA12f2dc97cfb60ef542888bf39d0ef7ea10025ea2821c7e91b01c45b7731a82bb AFTERROOTreviewJSONcommit. Calendar40dates8/yearpassed; independentsemanticreviewacceptedpublicevent-roster knowledgeatR pluspricefeatureR+5/entryR+10, provenance/receiptlimitsretained, notprimarydatecertification. Min35/min5side/alleligibleprefix-held-endpoints sourcegate thenFOLLOW5rawmean>=9.98USD/M6E. No price/returnrowsreadbeforethiscommit; no oldmaker/future/offsetselection. IfgrossfailscloseH06andcontinueDISTINCTRS-open-lossLDFinteraction ownprereg; notH01/H04rerun. H05closednarrowfrozenriskgate, OPPineligiblenativebar. Budget5/60economic,6/10hypotheses,3grossscreens +65t6; noqualifier/event orbudgetpause.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -853,7 +860,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-26T23:49:43.230101+00:00",
+  "updated_utc": "2026-10-26T23:56:13.243568+00:00",
   "current_adopted_source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
   "current_adopted_source_reconciliation": "d14dc9a TIER/MINED/research/data/executableallocations identical073e27c. Documentationstatusupdatesdo notchangeadoptedallocations; no operationalaction or otherbranchwrite. Personal19 alreadycontainsFC2B/Twin but not separateHighwinE1bracket.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -1153,7 +1160,7 @@
   "active_research_reservation": {
     "owner": "Codex current research turn",
     "hypothesis": "H06",
-    "stage": "committed calendar-only acquisition pending; no calendar/6Erows yet",
+    "stage": "H06 calendar+semantic source admission passed; committed ROOT review then one gross-only native run pending",
     "updated_utc": "2026-10-26T23:49:43.230060+00:00",
     "no_competing_writer_found": true
   },
@@ -1348,5 +1355,17 @@
     "calendar_or_price_data_read": false,
     "financial_returns_calculated": false,
     "source_scope_correction_retained": true
+  },
+  "last_calendar_source_admission": {
+    "hypothesis": "H06",
+    "economic_preregistration": "3b995614ea4a38e53ad3d7cc33cf28b87b0df49d",
+    "marker_sha256": "12f2dc97cfb60ef542888bf39d0ef7ea10025ea2821c7e91b01c45b7731a82bb",
+    "source_review": "agents/codex/research/hunt_v2_ecb_calendar_admission.json",
+    "independent_review": "agents/codex/reviews/hunt_v2_ecb_calendar_source_admission.md",
+    "accepted_for_frozen_research": true,
+    "primary_authentication_or_receipt_verified": false,
+    "no_price_bytes_before_source_admission": true,
+    "counted_evaluations_added": 0,
+    "gross_screens_added": 0
   }
 }
