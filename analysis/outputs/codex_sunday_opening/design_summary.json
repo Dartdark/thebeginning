@@ -1,0 +1,353 @@
+{
+  "preregistration_commit": "2378ca37c244fcc7bc68dd0ccd8901555bc6c567",
+  "source_sha256": "e1d51b7fc4013e6af03002a48d1b47e9dffb93f87c86fb934857425b9f4bcff5",
+  "design_start": "2018-01-01",
+  "design_end": "2022-12-31",
+  "return_configurations": 5,
+  "placebo_draws": 1000,
+  "holdout_returns_computed": false,
+  "inventory_design": {
+    "sundays": 260,
+    "entry_window_has_bar": 254,
+    "missing_entry_window": 6,
+    "warmup_available": 254,
+    "source_down_week_eligible": 112,
+    "source_up_week_eligible": 142,
+    "missing_exact_1717": 2,
+    "missing_exact_1912": 2,
+    "down_week_missing_exact_1912": 1,
+    "down_week_incomplete_entry_to_exit_window": 8
+  },
+  "metrics": {
+    "V0_source_close": {
+      "trades": 112,
+      "win": 0.5803571428571429,
+      "avg": 31.901785714285715,
+      "annual": 698.5228859581072,
+      "sharpe": 0.21310298978374365,
+      "sortino": 0.2801252540993814,
+      "profit_factor": 1.1319874772586649,
+      "max_dd": 8968.75,
+      "calmar": 0.07788408484550324,
+      "ulcer": 4.763427797367735,
+      "ulcer_perf": 0.2932858083181654,
+      "total": 3573.0,
+      "gross_mean": 48.392857142857146,
+      "costs_mean": 16.491071428571427,
+      "t": 0.48045053603800125,
+      "years": {
+        "2018": {
+          "trades": 25,
+          "total": 1948.75,
+          "mean": 77.95
+        },
+        "2019": {
+          "trades": 16,
+          "total": -851.0,
+          "mean": -53.1875
+        },
+        "2020": {
+          "trades": 23,
+          "total": 5638.25,
+          "mean": 245.1413043478261
+        },
+        "2021": {
+          "trades": 20,
+          "total": 1225.0,
+          "mean": 61.25
+        },
+        "2022": {
+          "trades": 28,
+          "total": -4388.0,
+          "mean": -156.71428571428572
+        }
+      },
+      "exit_kinds": {
+        "time": 85,
+        "target": 17,
+        "stop": 10
+      },
+      "ambiguous_minutes": 0,
+      "missing_holding_trades": 8,
+      "first_date": "2018-02-04",
+      "last_date": "2022-12-18"
+    },
+    "V1_primary": {
+      "trades": 112,
+      "win": 0.5803571428571429,
+      "avg": 29.242857142857137,
+      "annual": 640.302870442203,
+      "sharpe": 0.1955109379055604,
+      "sortino": 0.2565208154111752,
+      "profit_factor": 1.1209507068260034,
+      "max_dd": 8951.0,
+      "calmar": 0.07153422751002156,
+      "ulcer": 4.792576568822085,
+      "ulcer_perf": 0.2672061098022587,
+      "total": 3275.1999999999994,
+      "gross_mean": 48.88392857142857,
+      "costs_mean": 19.64107142857143,
+      "t": 0.4407222129080798,
+      "years": {
+        "2018": {
+          "trades": 25,
+          "total": 1840.0000000000005,
+          "mean": 73.60000000000002
+        },
+        "2019": {
+          "trades": 16,
+          "total": -911.3999999999996,
+          "mean": -56.96249999999998
+        },
+        "2020": {
+          "trades": 23,
+          "total": 5555.800000000001,
+          "mean": 241.5565217391305
+        },
+        "2021": {
+          "trades": 20,
+          "total": 1226.9999999999993,
+          "mean": 61.349999999999966
+        },
+        "2022": {
+          "trades": 28,
+          "total": -4436.199999999999,
+          "mean": -158.43571428571425
+        }
+      },
+      "exit_kinds": {
+        "time": 85,
+        "target": 17,
+        "stop": 10
+      },
+      "ambiguous_minutes": 0,
+      "missing_holding_trades": 8,
+      "first_date": "2018-02-04",
+      "last_date": "2022-12-18"
+    },
+    "V2_extra_tick": {
+      "trades": 112,
+      "win": 0.5803571428571429,
+      "avg": 21.207142857142852,
+      "annual": 464.35252133436745,
+      "sharpe": 0.14162836842045362,
+      "sortino": 0.18492016927619429,
+      "profit_factor": 1.0863746781677739,
+      "max_dd": 9051.0,
+      "calmar": 0.051304001915188094,
+      "ulcer": 4.934198526735925,
+      "ulcer_perf": 0.18821801304437835,
+      "total": 2375.1999999999994,
+      "gross_mean": 50.089285714285715,
+      "costs_mean": 28.88214285714285,
+      "t": 0.31913857624939856,
+      "years": {
+        "2018": {
+          "trades": 25,
+          "total": 1590.0000000000002,
+          "mean": 63.60000000000001
+        },
+        "2019": {
+          "trades": 16,
+          "total": -1071.3999999999996,
+          "mean": -66.96249999999998
+        },
+        "2020": {
+          "trades": 23,
+          "total": 5380.800000000001,
+          "mean": 233.94782608695658
+        },
+        "2021": {
+          "trades": 20,
+          "total": 1076.9999999999993,
+          "mean": 53.849999999999966
+        },
+        "2022": {
+          "trades": 28,
+          "total": -4601.199999999999,
+          "mean": -164.3285714285714
+        }
+      },
+      "exit_kinds": {
+        "time": 85,
+        "target": 17,
+        "stop": 10
+      },
+      "ambiguous_minutes": 0,
+      "missing_holding_trades": 8,
+      "first_date": "2018-02-04",
+      "last_date": "2022-12-18"
+    },
+    "V3_all_sundays": {
+      "trades": 253,
+      "win": 0.5217391304347826,
+      "avg": 5.9438735177865425,
+      "annual": 293.9934833204028,
+      "sharpe": 0.07098799402969136,
+      "sortino": 0.09443156186689512,
+      "profit_factor": 1.0284738342920545,
+      "max_dd": 13870.999999999993,
+      "calmar": 0.02119482973977384,
+      "ulcer": 6.866624905076269,
+      "ulcer_perf": 0.08562969068051557,
+      "total": 1503.7999999999952,
+      "gross_mean": 25.8300395256917,
+      "costs_mean": 19.886166007905143,
+      "t": 0.16030144055125023,
+      "years": {
+        "2018": {
+          "trades": 49,
+          "total": 2990.4000000000005,
+          "mean": 61.02857142857144
+        },
+        "2019": {
+          "trades": 52,
+          "total": -1490.7999999999993,
+          "mean": -28.669230769230754
+        },
+        "2020": {
+          "trades": 50,
+          "total": 10740.0,
+          "mean": 214.8
+        },
+        "2021": {
+          "trades": 52,
+          "total": -1365.8000000000006,
+          "mean": -26.265384615384626
+        },
+        "2022": {
+          "trades": 50,
+          "total": -9370.0,
+          "mean": -187.4
+        }
+      },
+      "exit_kinds": {
+        "time": 216,
+        "target": 26,
+        "stop": 11
+      },
+      "ambiguous_minutes": 0,
+      "missing_holding_trades": 24,
+      "first_date": "2018-01-07",
+      "last_date": "2022-12-18"
+    },
+    "V4_removed_up_weeks": {
+      "trades": 141,
+      "win": 0.475177304964539,
+      "avg": -12.563120567375899,
+      "annual": -346.3093871218002,
+      "sharpe": -0.13663379834199105,
+      "sortino": -0.18612121339150525,
+      "profit_factor": 0.9311666006077416,
+      "max_dd": 8238.799999999996,
+      "calmar": -0.042033959693377726,
+      "ulcer": 4.950038826943788,
+      "ulcer_perf": -0.13992188717259646,
+      "total": -1771.4000000000017,
+      "gross_mean": 7.5177304964539005,
+      "costs_mean": 20.08085106382979,
+      "t": -0.30813315888065507,
+      "years": {
+        "2018": {
+          "trades": 24,
+          "total": 1150.4000000000003,
+          "mean": 47.933333333333344
+        },
+        "2019": {
+          "trades": 36,
+          "total": -579.3999999999992,
+          "mean": -16.09444444444442
+        },
+        "2020": {
+          "trades": 27,
+          "total": 5184.200000000001,
+          "mean": 192.00740740740744
+        },
+        "2021": {
+          "trades": 32,
+          "total": -2592.8000000000006,
+          "mean": -81.02500000000002
+        },
+        "2022": {
+          "trades": 22,
+          "total": -4933.8,
+          "mean": -224.26363636363638
+        }
+      },
+      "exit_kinds": {
+        "time": 131,
+        "target": 9,
+        "stop": 1
+      },
+      "ambiguous_minutes": 0,
+      "missing_holding_trades": 16,
+      "first_date": "2018-01-07",
+      "last_date": "2022-12-04"
+    }
+  },
+  "unresolved": {
+    "V0_source_close": [],
+    "V1_primary": [],
+    "V2_extra_tick": [],
+    "V3_all_sundays": [
+      {
+        "date": "2020-11-29",
+        "status": "unresolved_no_exit_decision_or_fill"
+      }
+    ],
+    "V4_removed_up_weeks": [
+      {
+        "date": "2020-11-29",
+        "status": "unresolved_no_exit_decision_or_fill"
+      }
+    ]
+  },
+  "primary_subperiod_total": {
+    "2018_20": 6484.4,
+    "2021_22": -3209.2000000000003
+  },
+  "random_removals": {
+    "draws": 1000,
+    "seed": 261026,
+    "profit_fraction_beaten": 0.791,
+    "drawdown_fraction_beaten": 0.502,
+    "profit_plus_one_p": 0.2097902097902098,
+    "drawdown_plus_one_p": 0.4985014985014985,
+    "actual_total": 3275.1999999999994,
+    "actual_maxdd": 8950.999999999998,
+    "random_total_p5_p50_p95": [
+      -7001.299999999999,
+      -174.80000000000143,
+      7115.449999999999
+    ],
+    "random_maxdd_p5_p50_p95": [
+      4813.769999999992,
+      8960.49999999999,
+      13675.049999999997
+    ]
+  },
+  "gates": {
+    "minimum_80_trades": true,
+    "positive_net": true,
+    "t_at_least_2": false,
+    "pf_at_least_1_20": false,
+    "both_subperiods_positive": false,
+    "extra_tick_positive": true,
+    "removed_mean_negative": true,
+    "beats_95pct_random_drops_profit": false,
+    "beats_95pct_random_drops_drawdown": false
+  },
+  "design_pass": false,
+  "promotion_blockers": [
+    "No MultiCharts parity or parameter-search provenance supplied",
+    "Minute OHLC cannot establish fills during unobserved intervals; any actual holding gaps require audit"
+  ],
+  "short_side": "N/A: submitted defaults are long-only",
+  "account_status": {
+    "50K evaluation": "NOT RUN: preregistered design gate failed",
+    "150K evaluation": "NOT RUN: preregistered design gate failed",
+    "50K funded": "NOT RUN: preregistered design gate failed",
+    "150K funded": "NOT RUN: preregistered design gate failed",
+    "personal ladder/full": "NOT RUN: preregistered design gate failed"
+  }
+}
