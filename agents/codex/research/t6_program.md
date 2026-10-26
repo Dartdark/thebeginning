@@ -49,6 +49,11 @@ Current report: agents/codex/results/eia_inventory_input_gate.md. Source-only re
 no economic preregistration or new strategy returns. Counts remain60/58unique. Scoped EIA source-access
 blocker recorded once; all t milestones unchanged. Network host www.eia.gov needs reviewed access.
 Resume this source intake before new return experiments; continue the program without pausing it.
+Offline quarantine forensics inspected59captures:18quantified PDF editions and17complete issue/PDF pairs
+are already admitted; no additional eligible editions. See agents/codex/results/eia_quarantine_inventory.md.
+Do not repeat that audit on unchanged captures. Separate exchange-mechanics feasibility remains NEEDS DATA.
+The retained2022-12-29sample has actual Highlights text but no observed same-edition issue document;
+declared sample metadata alone cannot satisfy issue/release identity or justify admission.
 <!-- EIA_INPUT_WORK_END -->
 
 ## Operating boundaries
