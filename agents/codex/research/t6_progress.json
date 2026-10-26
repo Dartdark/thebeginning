@@ -3,9 +3,9 @@
   "status": "researching",
   "goal_met": false,
   "notification_event": null,
-  "latest_completed_hypothesis": "NQ Auction Demand Confirmation",
-  "latest_result": "All three candidates failed 2018\u201322; primary 199 trades, net $-3,677.75/NQ, trade t -0.378, NW5 -0.344. No 2023+ tested; continue DISTINCT research.",
-  "new_standalone_economic_configurations_tested": 55,
+  "latest_completed_hypothesis": "NQ Correlation Risk Budget",
+  "latest_result": "All three frozen candidates failed 2018\u201322; primary44trades, net$-7,239.00/NQ, trade t-1.524, NW5-1.669. No2023+tested; continue DISTINCT research. One redundant threshold retained in all60evaluations.",
+  "new_standalone_economic_configurations_tested": 60,
   "excluded_from_goal": "NQ Day Flow Six is an existing-signal composite, not a new standalone strategy.",
   "allowed_timeframes_minutes": [
     1,
@@ -13,9 +13,9 @@
     15,
     30
   ],
-  "next_action": "Formulate a DISTINCT mechanism, checking available inputs and previous studies. Commit evidence and <=5-model preregistration before returns. Do not invert auction direction, promote its sides/controls, or tune failed-family exits/thresholds.",
-  "last_report": "agents/codex/results/auction_demand_confirmation.md",
-  "unique_economic_configurations": 54,
+  "next_action": "Formulate a DISTINCT mechanism after checking prior studies and actual input feasibility. Commit evidence and <=5 configurations before new returns. Do not rescue covariance risk-budget thresholds/clock/guards/direction or nominate its controls/sides.",
+  "last_report": "agents/codex/results/correlation_risk_budget.md",
+  "unique_economic_configurations": 58,
   "research_continuation": {
     "title": "Continue standalone t6 research",
     "schedule": "hourly",
@@ -23,25 +23,25 @@
     "purpose": "Perform research between messages; separate from read-only milestone alert watcher.",
     "future_execution_status": "Scheduled; creation confirmed. Each run must verify workspace/data access and actual progress.",
     "last_verified_execution": {
-      "started_utc": "2026-10-26T04:31:48.751202+00:00",
-      "completed_utc": "2026-10-26T04:32:03.576830+00:00",
+      "started_utc": "2026-10-26T05:34:23.401961+00:00",
+      "completed_utc": "2026-10-26T05:34:52.874109+00:00",
       "workspace": "/workspace/thebeginning",
       "interpreter": "/workspace/venvs/thebeginning/bin/python",
       "actual_raw_data_execution": true,
       "models": [
-        "ADC15",
-        "ADC5",
-        "ADC15_D05",
-        "ZN15",
-        "ZN5"
+        "CRB005",
+        "CRB0025",
+        "CRB010",
+        "RP30",
+        "VOL30"
       ],
       "selected": null,
-      "prereg": "3db3857",
-      "hypothesis": "NQ Auction Demand Confirmation",
+      "prereg": "5678dde",
+      "hypothesis": "NQ Correlation Risk Budget",
       "phase": "design",
       "models_tested": 5,
-      "report": "agents/codex/results/auction_demand_confirmation.md",
-      "execution_marker": "analysis/outputs/codex_auction_demand_confirmation/design_verified_execution.json"
+      "report": "agents/codex/results/correlation_risk_budget.md",
+      "execution_marker": "analysis/outputs/codex_correlation_risk_budget/design_verified_execution.json"
     }
   },
   "best_completed_standalone": {
@@ -60,7 +60,7 @@
     "limitations": "Nominated after design-control results;2023+weaker,one unobserved held minute;no independent promotion/accountcheck.",
     "report": "agents/codex/results/opening_path_persistence.md"
   },
-  "trial_count_note": "55 conservative configuration evaluations include one repeated source-control nomination; 54 unique economic rules. Unknown older searches and diagnostic paths remain relevant.",
+  "trial_count_note": "60 conservative evaluations include one repeated source-control nomination and one algebraically redundant covariance threshold;58 unique economic rules. All failures/evaluations retained;larger unknown older searches remain relevant.",
   "notification_thresholds": [
     4.5,
     5.0,
@@ -95,5 +95,23 @@
       "evidence_event_id": null
     }
   },
-  "notification_milestone_history": []
+  "notification_milestone_history": [],
+  "configuration_count_corrections": [
+    {
+      "id": "crb_0025_equivalent_005",
+      "prereg": "5678dde",
+      "prior_evaluations": 55,
+      "prior_unique": 54,
+      "new_evaluations": 5,
+      "new_unique": 4,
+      "cumulative_evaluations": 60,
+      "corrected_cumulative_unique": 58,
+      "original_prereg_and_gate_projected_unique": 59,
+      "reason": "abs(F)>=0.01 and abs(K)>=0.5*abs(F) already imply abs(K)>=0.005; the 0.0025 threshold is algebraically redundant with 0.005, not merely empirically equal.",
+      "all_failed_evaluations_retained": true,
+      "original_artifacts_unchanged": true,
+      "evidence": "analysis/outputs/codex_correlation_risk_budget/design_trial_count_audit.json",
+      "report": "agents/codex/results/correlation_risk_budget.md"
+    }
+  ]
 }

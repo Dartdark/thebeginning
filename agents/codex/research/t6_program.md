@@ -36,6 +36,7 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 | NQ Implied Variance Budget Breach | Rejected |5models;primary223trades,t-1.365,NW5 -1.480;no2023+tested;program45/44unique |
 | NQ Relative Turnover Switch | Rejected |5models;primary192trades,t-0.365,NW5 -0.371;no2023+tested;program50/49unique |
 | NQ Auction Demand Confirmation | Rejected | 5 models; primary 199 trades, t-0.378, NW5 -0.344; no 2023+ tested; program55/54 unique |
+| NQ Correlation Risk Budget | Rejected |5evaluations/4newunique;primary44trades,t-1.524,NW5-1.669;no2023+tested;program60/58unique;redundant threshold disclosed |
 
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.
 

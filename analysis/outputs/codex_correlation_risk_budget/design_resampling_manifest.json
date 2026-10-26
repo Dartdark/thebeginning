@@ -1,0 +1,20 @@
+{
+  "uniform_seed": 20261025,
+  "stratified_seed": 20261026,
+  "paths_per_model": 1000,
+  "uniform_file": "design_uniform_draws.json",
+  "stratified_file": "design_stratified_drops.json",
+  "strata": [
+    "year",
+    "equity_sign",
+    "equity_magnitude_bin",
+    "vol_sign"
+  ],
+  "magnitude_bin_edges": [
+    0,
+    1,
+    2,
+    "infinity"
+  ],
+  "original_runner_and_draws_unchanged": true
+}
