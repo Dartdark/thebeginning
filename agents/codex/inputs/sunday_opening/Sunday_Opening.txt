@@ -1,0 +1,80 @@
+{ ==========================================================================
+  Sunday_Opening  --  NQ / MNQ futures, Sunday evening reopen long
+
+  Rules
+    - Trades only the Monday session, which opens Sunday 17:00 CT.
+    - Only after a DOWN week: the last close before the weekend is at or
+      below the close 6 sessions back (last Friday vs the Friday before).
+    - Buy at the close of the 17:17 CT bar.
+    - Take profit +50 points, stop loss -80 points from the entry price.
+    - If neither is hit, exit at the close of the 19:12 CT bar.
+    - One trade per week at most, long only.
+
+  Chart
+    NQ or MNQ, 1 MINUTE bars, Exchange time zone (Central Time).
+    The session must include Sunday evening bars (a 24-hour futures session,
+    or CME: Equity Index Futures [E-mini] (GLOBEX)).
+    The week filter needs 6 sessions of history before the first trade.
+
+  Inputs
+    NumContracts = contracts per trade.
+    StopPts / TargetPts are in index points (0 = off).
+    WeekFilter: -1 = only after a down week, 1 = only after an up week,
+                0 = every week.
+  ========================================================================== }
+Inputs:
+    SessionDay( 1 ),         { 1 = Monday session (starts Sunday 17:00 CT) }
+    StartHHMM( 1717 ),       { CT, close time of the entry bar }
+    EndHHMM( 1912 ),         { CT, close time of the exit bar }
+    Direction( 1 ),          { 1 = long, -1 = short }
+    WeekFilter( -1 ),
+    NumContracts( 1 ),
+    StopPts( 80 ),           { stop loss in points from the entry price, 0 = off }
+    TargetPts( 50 );         { take profit in points from the entry price, 0 = off }
+
+Variables:
+    SM( 0 ), SMPrev( -1 ), SDay( 0 ), StartM( 0 ), EndM( 0 ), Done( false ), NewSess( false ),
+    NumSess( 0 ), WkChg( 0 ), WkOK( false ), jj( 0 );
+Arrays:
+    SC[6]( 0 );              { last close of the previous sessions, SC[0] = most recent }
+
+Once begin
+    StartM = Mod( TimeToMinutes( StartHHMM ) - 1020 + 1440, 1440 );
+    EndM   = Mod( TimeToMinutes( EndHHMM ) - 1020 + 1440, 1440 );
+end;
+
+SM = Mod( TimeToMinutes( Time ) - 1020 + 1440, 1440 );      { minutes since 17:00 CT }
+NewSess = SMPrev < 0 or SM < SMPrev;
+if NewSess then begin
+    Done = false;
+    if SMPrev >= 0 then begin
+        for jj = 5 downto 1 begin SC[jj] = SC[jj - 1]; end;
+        SC[0] = Close[1];
+        NumSess = NumSess + 1;
+    end;
+end;
+SMPrev = SM;
+if Time > 1600 then SDay = DayOfWeek( Date ) + 1 else SDay = DayOfWeek( Date );
+
+{ prior week: last session close vs the close 6 sessions back }
+WkOK = ( WeekFilter = 0 );
+if WeekFilter <> 0 and NumSess >= 6 and SC[5] > 0 then begin
+    WkChg = ( SC[0] - SC[5] ) / SC[5] * 100;
+    if WeekFilter = -1 and WkChg <= 0 then WkOK = true;
+    if WeekFilter = 1 and WkChg > 0 then WkOK = true;
+end;
+
+if MarketPosition <> 0 and ( SM >= EndM or NewSess ) then begin
+    if MarketPosition = 1 then Sell ( "SO_LX" ) this bar on close
+    else BuyToCover ( "SO_SX" ) this bar on close;
+end
+else if MarketPosition = 0 and Done = false and SDay = SessionDay and WkOK
+    and SM >= StartM and SM <= StartM + 5 and SM < EndM then begin
+    if Direction = 1 then Buy ( "SO_L" ) NumContracts contracts this bar on close
+    else SellShort ( "SO_S" ) NumContracts contracts this bar on close;
+    Done = true;
+end;
+
+SetStopContract;
+if StopPts > 0 then SetStopLoss( StopPts * BigPointValue );
+if TargetPts > 0 then SetProfitTarget( TargetPts * BigPointValue );
