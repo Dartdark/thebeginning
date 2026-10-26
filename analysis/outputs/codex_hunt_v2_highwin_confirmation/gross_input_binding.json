@@ -1,0 +1,213 @@
+{
+  "prereg": "16635fc",
+  "implementation_commit": "16635fcc3890252886cd82f60aac143161685814",
+  "source_ref": "d14dc9a",
+  "hashes": {
+    "agents/codex/plans/hunt_v2_highwin_confirmation.md": "e09611907c55f96669647e5559ec38f0d4650f7de2b291e5c1c9cbe5e5f94a9e",
+    "agents/codex/research/hunt_v2_next_executable_nomination.md": "bdecd4b608b85dc2b889e42a185d1183fd335e2dc130142b76111004ea7f2097",
+    "agents/codex/inputs/hunt_v2_highwin_confirmation/source_manifest.json": "09adf6a32dce25534f3afbaa6e2f44e1729a4f6061ee0e204108bac95948138b",
+    "agents/codex/inputs/hunt_v2_highwin_confirmation/high_winrate_test.source.py": "41304fa844161acfa83049b11e4b8f36d3a11aca4c3283d73f0d5b7db5c0b752",
+    "agents/codex/inputs/hunt_v2_highwin_confirmation/twin_continuation_test.source.py": "5804929930f5defc151ee70f43f6024de8b9046f1771741ca7a70461a12a0f02",
+    "agents/codex/inputs/hunt_v2_highwin_confirmation/high_winrate_bench.source.py": "7a1fc7859bb8452de157770fe638c0338fe574f08b38858666fb99836966fe92",
+    "analysis/codex_hunt_v2_highwin_gross.py": "c1358e141d549be37839c7b22b0b305c3f283b3597bc297ed3cbd59b9083c659",
+    "analysis/codex_hunt_v2_highwin_signal.py": "1e94260caf7d9420653de57a1fc565e3ad8fe72460f33a735a0d9f3ddf2c8ff3",
+    "analysis/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "analysis/codex_s03_calendar.py": "705713195b1be61cd648d1b72718442b6cec7581587ca8c537d491cf1312bceb",
+    "analysis/replica.py": "c0ae001152c75395748b0f3fdb4bdcbc589d0a124befce0170ef454c3da6f58f",
+    "analysis/codex_hunt_v2_ldf_delta.py": "8fb312196af06691ee27ca34e532df7c536f107332c865d9794bff70260dd494",
+    "agents/codex/RESEARCH_CONTROLS.md": "2537562f9f14acfa58eaf609771c14c0c92e9df8f058180748d877749c99e12f",
+    "agents/codex/inputs/ob_v2_bench/NQ_1min_2017.csv": "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d",
+    "data/NQ_1min_2018.csv": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+    "data/NQ_1min_2019.csv": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+    "data/NQ_1min_2020.csv": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+    "data/NQ_1min_2021.csv": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+    "data/NQ_1min_2022.csv": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+    "data/NQ_1min_ON_2017.csv": "34096eaeeefe9b8a7330d9df7d6e0d2cb93ce8dfc2a796bdbb43c6c0ce6b451a",
+    "data/NQ_1min_ON_2018.csv": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2",
+    "data/NQ_1min_ON_2019.csv": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d",
+    "data/NQ_1min_ON_2020.csv": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9",
+    "data/NQ_1min_ON_2021.csv": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e",
+    "data/NQ_1min_ON_2022.csv": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0"
+  },
+  "inventory": [
+    {
+      "path": "agents/codex/inputs/ob_v2_bench/NQ_1min_2017.csv",
+      "bytes": 3720003,
+      "sha256": "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_2018.csv",
+      "bytes": 5630086,
+      "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_2019.csv",
+      "bytes": 5643031,
+      "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_2020.csv",
+      "bytes": 5890101,
+      "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_2021.csv",
+      "bytes": 6118786,
+      "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_2022.csv",
+      "bytes": 6122385,
+      "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_ON_2017.csv",
+      "bytes": 872961,
+      "sha256": "34096eaeeefe9b8a7330d9df7d6e0d2cb93ce8dfc2a796bdbb43c6c0ce6b451a",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_ON_2018.csv",
+      "bytes": 11729558,
+      "sha256": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_ON_2019.csv",
+      "bytes": 11858009,
+      "sha256": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_ON_2020.csv",
+      "bytes": 12324066,
+      "sha256": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_ON_2021.csv",
+      "bytes": 12996633,
+      "sha256": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_ON_2022.csv",
+      "bytes": 13079168,
+      "sha256": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0",
+      "header": "date,time,open,high,low,close,volume"
+    }
+  ],
+  "native_paths": [
+    "/workspace/thebeginning/agents/codex/inputs/ob_v2_bench/NQ_1min_2017.csv",
+    "/workspace/thebeginning/data/NQ_1min_2018.csv",
+    "/workspace/thebeginning/data/NQ_1min_2019.csv",
+    "/workspace/thebeginning/data/NQ_1min_2020.csv",
+    "/workspace/thebeginning/data/NQ_1min_2021.csv",
+    "/workspace/thebeginning/data/NQ_1min_2022.csv",
+    "/workspace/thebeginning/data/NQ_1min_ON_2017.csv",
+    "/workspace/thebeginning/data/NQ_1min_ON_2018.csv",
+    "/workspace/thebeginning/data/NQ_1min_ON_2019.csv",
+    "/workspace/thebeginning/data/NQ_1min_ON_2020.csv",
+    "/workspace/thebeginning/data/NQ_1min_ON_2021.csv",
+    "/workspace/thebeginning/data/NQ_1min_ON_2022.csv"
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  },
+  "all_source_definitions_archival_only_not_imported": true,
+  "no2023plus_OR_MC_input": true,
+  "metadata": [
+    {
+      "path": "agents/codex/inputs/ob_v2_bench/NQ_1min_2017.csv",
+      "rows": 74717,
+      "first_date": 20170501,
+      "last_date": 20171229,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_2018.csv",
+      "rows": 110366,
+      "first_date": 20180102,
+      "last_date": 20181231,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_2019.csv",
+      "rows": 110776,
+      "first_date": 20190102,
+      "last_date": 20191231,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_2020.csv",
+      "rows": 110789,
+      "first_date": 20200102,
+      "last_date": 20201231,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_2021.csv",
+      "rows": 111152,
+      "first_date": 20210104,
+      "last_date": 20211231,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_2022.csv",
+      "rows": 110941,
+      "first_date": 20220103,
+      "last_date": 20221230,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_ON_2017.csv",
+      "rows": 17749,
+      "first_date": 20171201,
+      "last_date": 20171229,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_ON_2018.csv",
+      "rows": 236717,
+      "first_date": 20180101,
+      "last_date": 20181231,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_ON_2019.csv",
+      "rows": 238810,
+      "first_date": 20190101,
+      "last_date": 20191231,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_ON_2020.csv",
+      "rows": 237240,
+      "first_date": 20200101,
+      "last_date": 20201231,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_ON_2021.csv",
+      "rows": 241986,
+      "first_date": 20210103,
+      "last_date": 20211231,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_ON_2022.csv",
+      "rows": 242831,
+      "first_date": 20220102,
+      "last_date": 20221230,
+      "duplicate_keys": 0
+    }
+  ]
+}

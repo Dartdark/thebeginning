@@ -1,0 +1,18 @@
+{
+  "actual_market_data_read": false,
+  "financial_returns_calculated": false,
+  "attempts": [
+    {
+      "attempt": 1,
+      "passed": false,
+      "issue": "Synthetic date-cap fixture used a large upward jump from a low baseline; its subsequent positive-price reversal did not cross the negative oscillator threshold within the fixed morning window.",
+      "mechanics_changed": false
+    },
+    {
+      "attempt": 2,
+      "passed": true,
+      "fix": "Changed only the artificial date-cap input: baseline1000, initial jump1100, then1. This supplies two actual opposite crosses in the same morning and verifies only the first is emitted.",
+      "mechanics_changed": false
+    }
+  ]
+}

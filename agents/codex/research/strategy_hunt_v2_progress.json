@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H05_preregistered_pending_reviewed_gross_execution",
+  "status": "H05_gross_pass_frozen_protected_design_pending",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -16,7 +16,7 @@
     "max_hypotheses": 10,
     "counted_evaluations": 3,
     "hypotheses_started": 5,
-    "gross_screens_run": 2,
+    "gross_screens_run": 3,
     "stop_on_either_limit": true,
     "prior_t6_evaluations": 65,
     "prior_t6_unique_rules": 63,
@@ -468,7 +468,7 @@
     {
       "id": "H05",
       "name": "Selected High-win Morning Momentum E1 native-execution confirmation",
-      "stage": "preregistered_gross_pending",
+      "stage": "gross_pass_frozen_protected_design_pending",
       "mechanism": "agents/codex/research/hunt_v2_next_executable_nomination.md",
       "mechanism_decision": "TEST: unfinished selected B-rule execution and current personal placement, not new alpha or old funded-failure rescue",
       "plan": "agents/codex/plans/hunt_v2_highwin_confirmation.md",
@@ -486,12 +486,20 @@
       "gross_hurdle_MNQ": 4.48,
       "minimum_design_events_before_endpoints": 100,
       "original_selection_history": "High-win9 configs, combinedMO12, full-history selected exits, longs-onlycut, oldApexplacementfailures and Twin ancestry retained",
-      "gross_screens_run": 0,
+      "gross_screens_run": 1,
       "counted_evaluations": 0,
-      "new_returns_calculated": false,
+      "new_returns_calculated": true,
       "validation_run": false,
       "book_bench_run": false,
-      "report": "agents/codex/results/hunt_v2_highwin_confirmation.md"
+      "report": "agents/codex/results/hunt_v2_highwin_confirmation.md",
+      "preregistration_commit": "16635fc",
+      "effective_predata_plan_code_commit": "16635fcc3890252886cd82f60aac143161685814",
+      "gross_mean_MNQ": 48.585648148148145,
+      "gross_t": 2.990782066992589,
+      "gross_events": 216,
+      "source_held_unresolved_events": 0,
+      "source_missing_normal_RTH_days": 1,
+      "source_definition": "Literal observed Python E1, not ideal full-feed/PL/MC parity; noATR used by raw screen"
     }
   ],
   "counted_evaluations": [
@@ -555,10 +563,25 @@
       "counted_economic_evaluations": 0,
       "not_net_significance_or_book_improvement": true,
       "source_marker": "analysis/outputs/codex_hunt_v2_fvb_short/gross_verified_execution.json"
+    },
+    {
+      "hypothesis": "H05",
+      "phase": "2018-22 selected observed-E1 RAW_NO_STOP",
+      "completed_utc": "2026-10-26T22:38:15.782421+00:00",
+      "events": 216,
+      "primary_mean_gross_per_MNQ": 48.585648148148145,
+      "primary_gross_trade_t": 2.990782066992589,
+      "gross_hurdle_per_MNQ": 4.48,
+      "passed": true,
+      "missing_held_events": 0,
+      "source_missing_normal_RTH_days": 1,
+      "counted_economic_evaluations": 0,
+      "not_net_significance_or_book_improvement": true,
+      "source_marker": "analysis/outputs/codex_hunt_v2_highwin_confirmation/gross_verified_execution.json"
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "Resume H05 committed frozen observed-E1 source/entry/held admission then RAWgross2018-22 once, min100 before endpoints and mean>=4.48USD/MNQ. Exactcode/sourcebindings, noATRrawveto or oldmaker execution, noMCprofits/2023+. Ifraw/sourcefails closeH05 and continue next DISTINCT eligible question: priority1 ECB actualcalendar/clock source-gated TEST (research/hunt_v2_ecb_release_source.md), then owned RS-open-loss LDF interaction (research/hunt_v2_portfolio_input_nomination.md), each separate8Q+committed<=5configs before rows/returns. Neither reservednextquestion registered yet. Preserve allH01-H04/I01-I04 gates/counters and OTunverifiedclock; no old-study/codec/source reruns or hiddenretuning. Budget3/60economic,5/10hypotheses,2grossscreens plus archived65t6; stoponlyatbudget/userstop, no t6/watcherchanges.",
+  "next_action": "RESUME committedH05first: rawgrossPASS216events,48.585648USD/MNQ,rawt2.990782,4.48hurdle. Implement/review/COMMITfrozenPROTECTED_HW .20ATRstop/.10ATRtarget andTIMEcontrol before any stopped outcomes; exactsharedobservedATR15 referenceaudit and source/held/entrybar/worsegap/targetthrough/timeOPEN891 implementation. NoATRdenominator repair orsource-gap deletion torescue. DesignPASS -> immediatelycurrentpersonal19BASE/ADD/entireTwinREPLACE/EMPTYpairedMC, noadditionalrobustnessfirst; iffailcloseH05andcontinueotherdistinctquestion. ECBcalendar/clock source-gatedTEST andRSopen-lossLDFinteraction sourcequestionssaved, notregistered. No2023+beforecommittedselection, noMCprofitinput ornewPLbeforepass. Budget3/60economic,5/10hypotheses,3grossscreens +65t6; preserveallhistory. Noqualifyingevent, no t6/watchers/automationchanges.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -569,7 +592,7 @@
     "old_t6_research_paused": true,
     "old_t6_alerts_paused": true,
     "v2_continuation_enabled": true,
-    "note": "V2 remainsenabled; pendingH05frozenconfirmation. Budget3/60economic,5/10registeredhypotheses,2grossscreens plus65t6. No qualifyingevent orbudgetlimit, automationunchanged; lastappcheckevidenceretained,nodeliveryclaim.",
+    "note": "V2continuationunchanged;H05rawgrossPASSonly, frozenprotecteddesignpending. Budget3/60economic,5/10hypotheses,3grossscreens plus65t6. No qualifyingcandidate/event orbudgetlimit; no verifiedphoneclaim.",
     "automation_id": "6adea9fee9c88191a45399d233743746",
     "title": "Strategy hunt v2",
     "timezone": "America/Los_Angeles",
@@ -597,26 +620,48 @@
   },
   "last_verified_execution": {
     "kind": "raw_gross_screen",
-    "hypothesis": "H02",
-    "started_utc": "2026-10-26T15:37:49.916148+00:00",
-    "completed_utc": "2026-10-26T15:37:54.579010+00:00",
-    "implementation_commit": "b4ed0f6c0f36d3c929065ac1aa1d9bb1234daa98",
-    "prereg": "b4ed0f6",
-    "counted_evaluations": 0,
+    "hypothesis": "H05",
+    "started_utc": "2026-10-26T22:37:30.998197+00:00",
+    "completed_utc": "2026-10-26T22:38:15.782421+00:00",
+    "phase": "raw_gross",
+    "passed": true,
+    "prereg": "16635fc",
+    "implementation_commit": "16635fcc3890252886cd82f60aac143161685814",
+    "script_sha256": "c1358e141d549be37839c7b22b0b305c3f283b3597bc297ed3cbd59b9083c659",
+    "artifacts_sha256": {
+      "gross_attempt.json": "b6ee2597adb4d86a0a4363ae83627bf4d90febfdece548946bf32cf572c70a4f",
+      "gross_pre_rows_binding.json": "2ecfb585501be9f0a10e5a985cc741d01b5bf9ec511893f7d8b415bab0a96537",
+      "parent_entries.csv": "98d1ac77a01562e4d74c600465d0bbb4ec7d0145b6522cbf43b4395fbe33aba6",
+      "gross_calendar_audit.csv": "ed408b355a644f793040ff2eaa30856b14638ac5561a24d9f4705732f42a4816",
+      "gross_observed_bucket_audit.csv.gz": "7a97045b4fe8db35a34ae90041251d1aa9f5a80681aa43bf3501ebc0f82e1cba",
+      "gross_unresolved_events.csv": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "gross_source_signals_feature_only.csv": "2b01126eeae60abc4d8bfe12cc47349f393e222d664aedeb26cc1cd65e930527",
+      "gross_duplicate_source_rows.csv": "69c39d5902c7a1bbaf6ecab4706dd145fbe471bf21337624ff9deb7a35fa88e9",
+      "gross_invalid_source_rows.csv": "42964bd8af6fe9e9f06999a17f00e565b7b75c2899b925b122197a11385a4a46",
+      "gross_events.csv": "477e0cd19b16ddf68646886b11a46a34a96c4937186927c14be85456e7ec677d",
+      "gross_summary.csv": "9306584590f9e5480ab3f31b2220b9cbcd567c5e8387a381c5f70647bc46a7bf",
+      "gross_gate.json": "07e4673a9133daa95abb4b314c6b2afe9cb4502330ecf2a17072e98575c36d85",
+      "gross_input_binding.json": "e30468f32237580311c432a78830a2c6318da292d9538f2018a1f05c379ecf95",
+      "gross_data_audit.json": "5fb2ac9eeb4b287e816baa4406dcd72a28b264df395998b442e10c2c6afc59e3"
+    },
+    "raw_returns_calculated": true,
+    "gross_screen_runs": 1,
+    "economic_evaluations": 0,
+    "new_hypotheses": 1,
+    "stopped_design_or_accounts_or_validation_run": false,
+    "MC_outcomes_read": false,
+    "retry_authorized": false,
+    "marker": "analysis/outputs/codex_hunt_v2_highwin_confirmation/gross_verified_execution.json",
     "v2_cumulative_evaluations": 3,
-    "v2_hypotheses_started": 2,
-    "retained_gross_screens": 2,
-    "passed": false,
-    "raw_gross_t": 1.551963893765676,
-    "raw_gross_mean_mnq": 21.397727272727273,
-    "unresolved_held_events": 1,
-    "unresolved_causal_scan_days": 2,
+    "v2_hypotheses_started": 5,
+    "retained_gross_screens": 3,
+    "raw_gross_t": 2.990782066992589,
+    "raw_gross_mean_mnq": 48.585648148148145,
     "validation_run": false,
     "book_bench_run": false,
-    "powerlanguage_written": false,
-    "marker": "analysis/outputs/codex_hunt_v2_fvb_short/gross_verified_execution.json"
+    "powerlanguage_written": false
   },
-  "last_report": "agents/codex/results/hunt_v2_ot_curve_source_gate.md",
+  "last_report": "agents/codex/results/hunt_v2_highwin_confirmation.md",
   "parallel_work_observed": [
     {
       "commit": "24dce9a",
@@ -663,7 +708,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-26T22:36:53.398823+00:00",
+  "updated_utc": "2026-10-26T22:41:32.128855+00:00",
   "current_adopted_source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
   "current_adopted_source_reconciliation": "d14dc9a TIER/MINED/research/data/executableallocations identical073e27c. Documentationstatusupdatesdo notchangeadoptedallocations; no operationalaction or otherbranchwrite. Personal19 alreadycontainsFC2B/Twin but not separateHighwinE1bracket.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -857,7 +902,7 @@
     "retry_authorized": false
   },
   "last_source_quality_report": "agents/codex/results/hunt_v2_cme_margin_metadata.md",
-  "last_financial_report": "agents/codex/results/hunt_v2_fvb_short_execution.md",
+  "last_financial_report": "agents/codex/results/hunt_v2_highwin_confirmation.md",
   "source_quality_runs": 4,
   "entry_admission_audits": [
     {
@@ -963,7 +1008,7 @@
   "active_research_reservation": {
     "hypothesis": "H05",
     "owner": "Codex current research turn",
-    "stage": "preregistration and reviewed gross execution",
+    "stage": "Protected design source/synthetic implementation review; no stopped returns yet",
     "started_utc": "2026-10-26T22:36:53.398812+00:00",
     "no_competing_writer_found": true
   }
