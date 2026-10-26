@@ -26,6 +26,7 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 |---|---|---|
 | NQ Day Flow Six | Does not meet the corrected request | Existing6-leg composite; adjusted daily t6.77 is not a new standalone edge |
 | NQ Cash-Open Repair | Rejected | 3 candidates +2controls; all failed2018-22 design; no2023+ tested |
+| NQ Flow Absorption | Rejected | 3 candidates +2controls; primary4trades net-$454/NQ; no2023+ tested |
 
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.
 
