@@ -3,9 +3,9 @@
   "status": "researching",
   "goal_met": false,
   "notification_event": null,
-  "latest_completed_hypothesis": "NQ Relative Turnover Switch",
-  "latest_result": "All3candidates failed2018-22;primary192trades net$-2,047.00/NQ,trade t-0.365,NW5 -0.371;others25/20tickets. No2023+tested; continue DISTINCT research.",
-  "new_standalone_economic_configurations_tested": 50,
+  "latest_completed_hypothesis": "NQ Auction Demand Confirmation",
+  "latest_result": "All three candidates failed 2018\u201322; primary 199 trades, net $-3,677.75/NQ, trade t -0.378, NW5 -0.344. No 2023+ tested; continue DISTINCT research.",
+  "new_standalone_economic_configurations_tested": 55,
   "excluded_from_goal": "NQ Day Flow Six is an existing-signal composite, not a new standalone strategy.",
   "allowed_timeframes_minutes": [
     1,
@@ -13,9 +13,9 @@
     15,
     30
   ],
-  "next_action": "Formulate a DISTINCT mechanism after reviewing prior research. Commit evidence and <=5-model preregistration before returns. Do not lower failed peer-turnover thresholds, flip direction, tune exits or nominate their controls.",
-  "last_report": "agents/codex/results/relative_turnover_switch.md",
-  "unique_economic_configurations": 49,
+  "next_action": "Formulate a DISTINCT mechanism, checking available inputs and previous studies. Commit evidence and <=5-model preregistration before returns. Do not invert auction direction, promote its sides/controls, or tune failed-family exits/thresholds.",
+  "last_report": "agents/codex/results/auction_demand_confirmation.md",
+  "unique_economic_configurations": 54,
   "research_continuation": {
     "title": "Continue standalone t6 research",
     "schedule": "hourly",
@@ -23,25 +23,25 @@
     "purpose": "Perform research between messages; separate from read-only milestone alert watcher.",
     "future_execution_status": "Scheduled; creation confirmed. Each run must verify workspace/data access and actual progress.",
     "last_verified_execution": {
-      "started_utc": "2026-10-26T03:36:38.674269+00:00",
-      "completed_utc": "2026-10-26T03:37:04.180423+00:00",
+      "started_utc": "2026-10-26T04:31:48.751202+00:00",
+      "completed_utc": "2026-10-26T04:32:03.576830+00:00",
       "workspace": "/workspace/thebeginning",
       "interpreter": "/workspace/venvs/thebeginning/bin/python",
       "actual_raw_data_execution": true,
       "models": [
-        "CTS5_15",
-        "CTS5_20",
-        "CTS15_15",
-        "OWN5",
-        "OWN15"
+        "ADC15",
+        "ADC5",
+        "ADC15_D05",
+        "ZN15",
+        "ZN5"
       ],
       "selected": null,
-      "prereg": "9d82548",
-      "hypothesis": "NQ Relative Turnover Switch",
+      "prereg": "3db3857",
+      "hypothesis": "NQ Auction Demand Confirmation",
       "phase": "design",
       "models_tested": 5,
-      "report": "agents/codex/results/relative_turnover_switch.md",
-      "execution_marker": "analysis/outputs/codex_relative_turnover_switch/design_verified_execution.json"
+      "report": "agents/codex/results/auction_demand_confirmation.md",
+      "execution_marker": "analysis/outputs/codex_auction_demand_confirmation/design_verified_execution.json"
     }
   },
   "best_completed_standalone": {
@@ -60,7 +60,7 @@
     "limitations": "Nominated after design-control results;2023+weaker,one unobserved held minute;no independent promotion/accountcheck.",
     "report": "agents/codex/results/opening_path_persistence.md"
   },
-  "trial_count_note": "50conservative configuration evaluations include one repeated source-control nomination;49unique economic rules. Unknown older searches and diagnostic paths remain relevant.",
+  "trial_count_note": "55 conservative configuration evaluations include one repeated source-control nomination; 54 unique economic rules. Unknown older searches and diagnostic paths remain relevant.",
   "notification_thresholds": [
     4.5,
     5.0,
