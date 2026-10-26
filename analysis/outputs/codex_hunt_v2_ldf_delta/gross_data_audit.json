@@ -1,0 +1,39 @@
+{
+  "native": {
+    "source": "native",
+    "identical_duplicate_rows": 0,
+    "conflicting_duplicate_keys": 0,
+    "unique_rows": 1751608
+  },
+  "flow": {
+    "source": "OF",
+    "identical_duplicate_rows": 0,
+    "conflicting_duplicate_keys": 0,
+    "unique_rows": 515156,
+    "source_timezone": "Eastern bar-close labels",
+    "native_timezone": "Central bar-close labels",
+    "conversion": "source ET wall label minus60minutes; common US DST transition dates",
+    "rows_outside_design_grid_after_conversion": 0
+  },
+  "calendar_reasons": {
+    "known_calendar_skip": 576,
+    "prior15_stored_weekday_atr_warmup_or_unavailable": 13,
+    "below_frozen_ldf_move_threshold": 741,
+    "incomplete_or_invalid_known_feature_window": 10
+  },
+  "no_2017_warmup": true,
+  "no_2023_or_later_files": true,
+  "no_g_trading_eligibility": true,
+  "atr_basis": "shifted prior15 STORED weekday true ranges from shared Grid24; missing dates dropped; source starts2018",
+  "completed_flow_labels_ct": "13:31 through14:00 inclusive",
+  "raw_entry_label_ct": "14:01 native minute open (14:00 wall)",
+  "raw_exit_label_ct": "14:30 native minute close",
+  "stops_or_targets_simulated": false,
+  "native_micro_prices_verified": false,
+  "fees_are_repository_native_MNQ_assumptions": true,
+  "actual_receipt_spread_and_roll_fidelity_verified": false,
+  "invalid_held_paths_retained_and_block_pass": true,
+  "strict_unknown_retains_original_trade": true,
+  "strict_flow_known_events": 456,
+  "volume_upvol_mismatch_minutes_on_event_windows": 0
+}

@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "hypothesis_preregistered_before_data",
+  "status": "H01_gross_pass_design_pending",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -16,7 +16,7 @@
     "max_hypotheses": 10,
     "counted_evaluations": 0,
     "hypotheses_started": 1,
-    "gross_screens_run": 0,
+    "gross_screens_run": 1,
     "stop_on_either_limit": true,
     "prior_t6_evaluations": 65,
     "prior_t6_unique_rules": 63,
@@ -74,7 +74,7 @@
       "id": "H01",
       "name": "LDF long-side delta confirmation against current book",
       "kind": "disclosed existing-lead confirmation plus strict/causal data correction",
-      "stage": "preregistered_gross_not_run",
+      "stage": "gross_pass_design_pending",
       "evidence": "agents/codex/evidence/hunt_v2_ldf_delta_confirmation.md",
       "plan": "agents/codex/plans/hunt_v2_ldf_delta_confirmation.md",
       "planned_models": [
@@ -84,15 +84,65 @@
       ],
       "planned_counted_evaluations_after_gross_pass": 3,
       "actual_counted_evaluations": 0,
-      "gross_screen_runs": 0,
-      "data_or_returns_read_for_hypothesis": false,
-      "prior_selection_and_failed_old_bench_disclosed": true
+      "gross_screen_runs": 1,
+      "data_or_returns_read_for_hypothesis": true,
+      "prior_selection_and_failed_old_bench_disclosed": true,
+      "preregistration_commit": "aa726e2",
+      "gross_implementation_commit": "0a0ac5f",
+      "gross_gate": {
+        "primary_model": "STRICT30",
+        "gross_kind": "RAW_NO_STOP",
+        "gross_hurdle_mnq": 4.48,
+        "native_roundtrip_cost_mnq": 2.24,
+        "min_kept": 100,
+        "kept_events": 383,
+        "base_events": 485,
+        "removed_events": 102,
+        "observed_primary_endpoint_returns": 383,
+        "primary_gross_mean_mnq": 11.748041775456919,
+        "primary_gross_t": 3.4931711627586597,
+        "economic_pass": true,
+        "all_primary_endpoints_observed": true,
+        "all_base_held_paths_complete": true,
+        "unresolved_base_held_events": 0,
+        "passed": true,
+        "counted_evaluations_this_gross_screen": 0,
+        "gross_hypotheses_this_screen": 1,
+        "frozen_later_counted_models": [
+          "BASE",
+          "LEGACY",
+          "STRICT30"
+        ],
+        "validation_run": false,
+        "account_tests_run": false,
+        "mean_and_totals_basis": "Observed finite endpoints; missing endpoints/held paths remain counted and block promotion.",
+        "downstream_requires_verified_execution_marker_and_all_artifact_hashes": true,
+        "decisions": "Proceed only if passed; otherwise stop H01 before all counted designs/validation/benches."
+      },
+      "gross_verified_execution": "analysis/outputs/codex_hunt_v2_ldf_delta/gross_verified_execution.json"
     }
   ],
   "counted_evaluations": [],
-  "gross_screens": [],
+  "gross_screens": [
+    {
+      "hypothesis": "H01",
+      "phase": "2018-22 RAW_NO_STOP",
+      "completed_utc": "2026-10-26T14:46:13.260845+00:00",
+      "base_events": 485,
+      "kept_events": 383,
+      "removed_events": 102,
+      "primary_mean_gross_per_MNQ": 11.748041775456919,
+      "primary_gross_trade_t": 3.4931711627586597,
+      "gross_hurdle_per_MNQ": 4.48,
+      "passed": true,
+      "missing_held_events": 0,
+      "counted_economic_evaluations": 0,
+      "not_net_significance_or_book_improvement": true,
+      "source_marker": "analysis/outputs/codex_hunt_v2_ldf_delta/gross_verified_execution.json"
+    }
+  ],
   "qualifying_candidates": [],
-  "next_action": "Run frozen H01 RAW_NO_STOP gross screen on2018-22 after committed mechanism/prereg. If under$4.48perMNQ mean or fails quality/count gate, stopH01 with0economic evaluations; otherwise run all3frozen design models and immediate2018-22currentpersonal19book bench. Never expose2023candidate returns before committed selection. Track60evaluation/10hypothesis limits and all failures.",
+  "next_action": "Implement/freeze/commit and run ONLY the three H01 stopped design models under aa726e2; raw gross already passed and MUST NOT be rerun. On design pass run current personal19 design-period BASE/ADD/REPLACE/EMPTY immediately; stopH01 if no verified plan improvement. No2023candidate prices until selection/early-bench disposition committed. Templates remain reference-only. Continue within60evaluations or10hypotheses, preserving all failures.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -105,5 +155,14 @@
     "v2_continuation_enabled": false,
     "note": "Enable bounded replacement continuation only after concrete v2 checkpoint is saved; keep existing hourly cadence if resumed."
   },
-  "bench_source_map": "agents/codex/research/hunt_v2_bench_source_map.md"
+  "bench_source_map": "agents/codex/research/hunt_v2_bench_source_map.md",
+  "template_references": {
+    "user_instruction": "Strategy templates for idea generation only; do not run as supplied.",
+    "input_archive": "agents/codex/inputs/hunt_v2_templates_20261026/",
+    "notes": "agents/codex/research/hunt_v2_template_idea_notes.md",
+    "original_uploads": 9,
+    "code_execution": false,
+    "hypotheses_or_evaluations_added": 0,
+    "H01_frozen_rule_changed": false
+  }
 }

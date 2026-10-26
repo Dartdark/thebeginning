@@ -1,0 +1,287 @@
+{ GoldSilverReversion_NoEOD_FINAL
+  Data1 = Gold QGC#C (traded), Data2 = Silver QSI#C (reference), same 5-min
+  resolution and session template, chart timezone Exchange (Chicago).
+  MaxBarsBack >= max(WinBars, RallyBars, ExtBars) + 5.
+
+  rel = Log(Close/Close[winLen]) - HedgeRatio * Log(Close data2/Close[winLen] data2)
+        winLen = WinBars, restarting on the exit bar after a trade
+  sdW = sd of the last VolSamples non-overlapping WinBars rel samples
+  z   = rel / sdW
+  Entry: |z| >= ZEntry inside StartCT..NoEntryAfterCT, flat, MaxEntriesDay
+         per session. z > 0 short gold, z < 0 long gold.
+         ShortNeedsGoldUp: short only if gold's own window move > 0.
+         SkipBlocksDay: a dropped signal consumes the session's entry.
+  Exits: GoldStopSd / GoldTpSd on gold's move since the signal-bar close, in
+         units of sdRally (sd of RallySamples non-overlapping RallyBars gold
+         returns); optional trail (GoldTrailMode 1/2/3, armed at GoldArmSd).
+         No end-of-day flatten. -1 switches an exit or filter off.
+}
+
+Inputs:
+    WinBars(36),           { rolling window in bars; 36 on 5-min = 3 h }
+    ZEntry(2.0),           { entry threshold in sdW units }
+    HedgeRatio(5.0),       { fixed weight of silver's return in rel; 5 = silver-dominated object }
+    BetaDays(0),           { 0 = fixed; >0 = rolling OLS on session returns, max 400 }
+    VolSamples(300),       { non-overlapping WinBars samples for sdW, max 2000 }
+    RallyBars(288),        { context lookback in bars for gold's own move; 288 on 5-min = 1 session }
+    RallySamples(100),     { non-overlapping RallyBars samples for sdRally, max 2000 }
+    RallyFlipSd(-1),       { flip a long to a short when rz >= RallyFlipSd; -1 = off }
+    ShortNeedsGoldUp(true),  { short only if gold itself rose over the window }
+    LongNeedsGoldDown(false),{ long only if gold itself fell over the window }
+    SkipBlocksDay(true),     { a dropped signal uses up the session's entry }
+    LongMaxRallySd(-1),      { drop a long when rz >= this; -1 = off }
+    GoldStopSd(2.0),         { gold-leg stop in sdRally units; -1 = off }
+    GoldTpSd(4.0),           { gold-leg target in sdRally units; -1 = off }
+    GoldTrailMode(3),        { 1 = fixed distance, 2 = breakeven step, 3 = fraction of best }
+    GoldArmSd(-1),           { trail armed once gBest >= this; -1 = trail off }
+    GoldTrailSd(1.0),        { mode 1: give-back distance in sdRally units }
+    GoldTrailFrac(0.5),      { mode 3: fraction of gBest given back before exit }
+    GoldExtSd(-1),           { gold must be extended >= this many sdE against the trade; -1 = off }
+    ExtBars(36),             { window in bars for gold's own extension; 36 = same as WinBars }
+    MaxEntriesDay(1),      { entries per session; useless above 1 without an intraday exit }
+    Dir(1),                { +1 fade, -1 continuation control }
+    AnchorCT(1700),        { session boundary for beta and the daily counter }
+    StartCT(1700),         { first entry time HHMM; window wraps midnight }
+    NoEntryAfterCT(1530),  { no entries at/after this time }
+    PrintEvents(false),
+    NumContracts(1);
+
+Arrays:
+    gRet[400](0), sRet[400](0), relS[2000](0), gRS[2000](0), gWS[2000](0), gES[2000](0);
+
+Variables:
+    gcOpen(0), siOpen(0), newSess(false), nSess(0), idx(0), j(0), k(0),
+    gSess(0), sSess(0),
+    hr(0), rel(0), sdW(0), z(0),
+    sumX(0), sumY(0), sumXY(0), sumXX(0), varX(0),
+    nSamp(0), sampCount(0), sumR(0), sumRR(0), meanR(0), varR(0),
+    inWindow(false), entriesToday(0),
+    side(0), z0(0), gcSig(0), siSig(0), relSig(0), fav(0), bestFav(0), worstFav(0),
+    prevMP(0), lastExitBar(0), winLen(0), gMove(0),
+    gAdv(0), gBest(0), gWorst(0),
+    sdG(0), gz(0), sumW(0), sumWW(0), meanW(0), varW(0),
+    gExt(0), sdE(0), nES(0), esCount(0), sumE(0), sumEE(0), meanE(0), varE(0),
+    gRally(0), sdRally(0), rz(0), nRS(0), rsCount(0), sumG(0), sumGG(0), meanG(0), varG(0);
+
+{ ---- session boundary: beta update, daily counter ---- }
+newSess = false;
+if CurrentBar > 1 and Time >= AnchorCT and Time[1] < AnchorCT then
+    newSess = true;
+
+if newSess then begin
+    if gcOpen > 0 and siOpen > 0 then begin
+        gSess = Log(Close[1] / gcOpen);
+        sSess = Log(Close[1] data2 / siOpen);
+        idx = Mod(nSess, 400);
+        gRet[idx] = gSess;
+        sRet[idx] = sSess;
+        nSess = nSess + 1;
+        hr = HedgeRatio;
+        if BetaDays > 1 and nSess >= BetaDays then begin
+            sumX = 0; sumY = 0; sumXY = 0; sumXX = 0;
+            for k = 1 to BetaDays begin
+                j = Mod(nSess - k, 400);
+                sumX  = sumX  + sRet[j];
+                sumY  = sumY  + gRet[j];
+                sumXY = sumXY + sRet[j] * gRet[j];
+                sumXX = sumXX + sRet[j] * sRet[j];
+            end;
+            varX = sumXX - sumX * sumX / BetaDays;
+            if varX > 0 then
+                hr = (sumXY - sumX * sumY / BetaDays) / varX;
+        end;
+    end;
+    gcOpen = Open;
+    siOpen = Open data2;
+    entriesToday = 0;
+end;
+
+if gcOpen = 0 and CurrentBar = 1 then begin
+    gcOpen = Open;
+    siOpen = Open data2;
+    hr = HedgeRatio;
+end;
+
+{ ---- window reset on trade end ---- }
+if prevMP <> 0 and MarketPosition = 0 then
+    lastExitBar = CurrentBar;
+prevMP = MarketPosition;
+
+{ ---- rolling relative move, window grows from the last exit ---- }
+rel = 0;
+winLen = WinBars;
+if lastExitBar > 0 and CurrentBar - lastExitBar < WinBars then
+    winLen = CurrentBar - lastExitBar;
+gMove = 0;
+if winLen >= 1 and CurrentBar > WinBars and Close[winLen] > 0 and Close[winLen] data2 > 0 then begin
+    gMove = Log(Close / Close[winLen]);
+    rel   = gMove - hr * Log(Close data2 / Close[winLen] data2);
+end;
+
+{ ---- sdW from non-overlapping samples, one every WinBars bars ---- }
+if CurrentBar > WinBars then begin
+    sampCount = sampCount + 1;
+    if sampCount >= WinBars then begin
+        sampCount = 0;
+        idx = Mod(nSamp, 2000);
+        relS[idx] = rel;
+        gWS[idx]  = gMove;
+        nSamp = nSamp + 1;
+        if nSamp >= VolSamples then begin
+            sumR = 0; sumRR = 0; sumW = 0; sumWW = 0;
+            for k = 1 to VolSamples begin
+                j = Mod(nSamp - k, 2000);
+                sumR  = sumR  + relS[j];
+                sumRR = sumRR + relS[j] * relS[j];
+                sumW  = sumW  + gWS[j];
+                sumWW = sumWW + gWS[j] * gWS[j];
+            end;
+            meanR = sumR / VolSamples;
+            varR  = sumRR / VolSamples - meanR * meanR;
+            if varR > 0 then sdW = SquareRoot(varR) else sdW = 0;
+            meanW = sumW / VolSamples;
+            varW  = sumWW / VolSamples - meanW * meanW;
+            if varW > 0 then sdG = SquareRoot(varW) else sdG = 0;
+        end;
+    end;
+end;
+
+if sdW > 0 then z = rel / sdW else z = 0;
+{ ---- gold's own extension over ExtBars, own sampler ---- }
+gExt = 0;
+if CurrentBar > ExtBars and Close[ExtBars] > 0 then begin
+    gExt = Log(Close / Close[ExtBars]);
+    esCount = esCount + 1;
+    if esCount >= ExtBars then begin
+        esCount = 0;
+        idx = Mod(nES, 2000);
+        gES[idx] = gExt;
+        nES = nES + 1;
+        if nES >= VolSamples then begin
+            sumE = 0; sumEE = 0;
+            for k = 1 to VolSamples begin
+                j = Mod(nES - k, 2000);
+                sumE  = sumE  + gES[j];
+                sumEE = sumEE + gES[j] * gES[j];
+            end;
+            meanE = sumE / VolSamples;
+            varE  = sumEE / VolSamples - meanE * meanE;
+            if varE > 0 then sdE = SquareRoot(varE) else sdE = 0;
+        end;
+    end;
+end;
+if sdE > 0 then gz = gExt / sdE else gz = 0;
+
+{ ---- rally context: gold's own move over RallyBars ---- }
+gRally = 0;
+if CurrentBar > RallyBars and Close[RallyBars] > 0 then begin
+    gRally = Log(Close / Close[RallyBars]);
+    rsCount = rsCount + 1;
+    if rsCount >= RallyBars then begin
+        rsCount = 0;
+        idx = Mod(nRS, 2000);
+        gRS[idx] = gRally;
+        nRS = nRS + 1;
+        if nRS >= RallySamples then begin
+            sumG = 0; sumGG = 0;
+            for k = 1 to RallySamples begin
+                j = Mod(nRS - k, 2000);
+                sumG  = sumG  + gRS[j];
+                sumGG = sumGG + gRS[j] * gRS[j];
+            end;
+            meanG = sumG / RallySamples;
+            varG  = sumGG / RallySamples - meanG * meanG;
+            if varG > 0 then sdRally = SquareRoot(varG) else sdRally = 0;
+        end;
+    end;
+end;
+if sdRally > 0 then rz = gRally / sdRally else rz = 0;
+
+{ ---- entry window, wrap-aware ---- }
+if StartCT <= NoEntryAfterCT then
+    inWindow = Time >= StartCT and Time < NoEntryAfterCT
+else
+    inWindow = Time >= StartCT or Time < NoEntryAfterCT;
+
+{ ---- entries (Gold, Data1) ---- }
+if inWindow and sdW > 0 and MarketPosition = 0 and entriesToday < MaxEntriesDay then begin
+    side = 0;
+    if z >= ZEntry then side = -1 * Dir;
+    if z <= -ZEntry then side = 1 * Dir;
+    if side > 0 and RallyFlipSd >= 0 and sdRally > 0 and rz >= RallyFlipSd then
+        side = -1;
+    if side > 0 and GoldExtSd >= 0 and (sdE = 0 or gz > -GoldExtSd) then begin
+        side = 0;
+        if SkipBlocksDay then entriesToday = entriesToday + 1;
+    end;
+    if side < 0 and GoldExtSd >= 0 and (sdE = 0 or gz < GoldExtSd) then begin
+        side = 0;
+        if SkipBlocksDay then entriesToday = entriesToday + 1;
+    end;
+    if side < 0 and ShortNeedsGoldUp and gMove <= 0 then begin
+        side = 0;
+        if SkipBlocksDay then entriesToday = entriesToday + 1;
+    end;
+    if side > 0 and LongNeedsGoldDown and gMove >= 0 then begin
+        side = 0;
+        if SkipBlocksDay then entriesToday = entriesToday + 1;
+    end;
+    if side > 0 and LongMaxRallySd >= 0 and sdRally > 0 and rz >= LongMaxRallySd then begin
+        side = 0;
+        if SkipBlocksDay then entriesToday = entriesToday + 1;
+    end;
+    if side <> 0 then begin
+        z0 = z; gcSig = Close; siSig = Close data2;
+        bestFav = 0; worstFav = 0; gBest = 0; gWorst = 0;
+        entriesToday = entriesToday + 1;
+        if side > 0 then
+            Buy ("GS.L") NumContracts contracts next bar at market
+        else
+            SellShort ("GS.S") NumContracts contracts next bar at market;
+        if PrintEvents then
+            Print("ENTRY,", Date:8:0, ",", Time:4:0, ",", side:2:0, ",",
+                  rel:0:6, ",", sdW:0:6, ",", z:0:2, ",", hr:0:3, ",", gMove:0:6, ",", rz:0:2, ",", gz:0:2);
+    end;
+end;
+
+{ ---- track retrace since the signal bar ---- }
+gAdv = 0;
+if MarketPosition <> 0 and sdW > 0 and gcSig > 0 and siSig > 0 then begin
+    relSig = Log(Close / gcSig) - hr * Log(Close data2 / siSig);
+    fav = side * relSig;
+    if fav > bestFav  then bestFav  = fav;
+    if fav < worstFav then worstFav = fav;
+    if sdRally > 0 then begin
+        gAdv = side * Log(Close / gcSig) / sdRally;
+        if gAdv > gBest  then gBest  = gAdv;
+        if gAdv < gWorst then gWorst = gAdv;
+    end;
+end;
+
+{ ---- exit: gold-leg stop in gold vol units ---- }
+if MarketPosition <> 0 and GoldStopSd >= 0 and sdRally > 0 and gAdv <= -GoldStopSd then begin
+    if MarketPosition > 0 then Sell ("GS.GSL") next bar at market;
+    if MarketPosition < 0 then BuyToCover ("GS.GSS") next bar at market;
+end;
+
+{ ---- exit: trail on the gold leg in gold vol units ---- }
+if MarketPosition <> 0 and sdRally > 0 and GoldArmSd >= 0 and gBest >= GoldArmSd then begin
+    if GoldTrailMode = 1 and gAdv <= gBest - GoldTrailSd then begin
+        if MarketPosition > 0 then Sell ("GS.GRL") next bar at market;
+        if MarketPosition < 0 then BuyToCover ("GS.GRS") next bar at market;
+    end;
+    if GoldTrailMode = 2 and gAdv <= 0 then begin
+        if MarketPosition > 0 then Sell ("GS.BEL") next bar at market;
+        if MarketPosition < 0 then BuyToCover ("GS.BES") next bar at market;
+    end;
+    if GoldTrailMode = 3 and GoldTrailFrac > 0 and gAdv <= gBest * (1 - GoldTrailFrac) then begin
+        if MarketPosition > 0 then Sell ("GS.FRL") next bar at market;
+        if MarketPosition < 0 then BuyToCover ("GS.FRS") next bar at market;
+    end;
+end;
+
+{ ---- exit: gold-leg target in gold vol units ---- }
+if MarketPosition <> 0 and GoldTpSd >= 0 and sdRally > 0 and gAdv >= GoldTpSd then begin
+    if MarketPosition > 0 then Sell ("GS.GTL") next bar at market;
+    if MarketPosition < 0 then BuyToCover ("GS.GTS") next bar at market;
+end;

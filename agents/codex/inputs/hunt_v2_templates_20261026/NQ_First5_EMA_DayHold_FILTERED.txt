@@ -1,0 +1,115 @@
+{ NQ_First5_EMA_DayHold_FILTERED
+  Data1 = NQ continuous (traded), 5-min bars, 24-hour Globex session,
+  chart timezone Exchange (Chicago). Single data series.
+  MaxBarsBack: auto-detect is fine; nothing looks back further than EMALength.
+
+  Same entry and exit as the BASE build:
+    reference bar = the first NY session bar (closes at SignalTime)
+    Close > EMA(EMALength) -> long, Close < EMA -> short, this bar at close
+    flat at ExitTime this bar at close, SetExitOnClose backstop
+    no stop, no target, no trail
+
+  Two entry filters, both measured in average day-session ranges (ADR):
+    ADR      = mean High-Low of the last ADRLength day sessions
+               (SessionOpen < Time <= ExitTime), stored at the first bar
+               after each session; ADRLong = same over VolRegimeLongLen sessions
+    Filter 1 = the reference bar's High-Low >= RefBarMinRange * ADR
+    Filter 2 = ADR >= VolRegimeRatio * ADRLong
+  Both must pass on the reference bar. A refused signal uses up the day.
+  No trades until VolRegimeLongLen sessions of history exist.
+}
+
+Inputs:
+    EMALength(12),         { EMA on 5-min closes; entry compares the reference bar close to it }
+    SignalTime(0835),      { CT close time of the reference bar; 0835 = the 08:30-08:35 bar }
+    ExitTime(1500),        { CT; the first bar closing at or after this exits at its close }
+    SessionOpen(0830),     { CT day-session open; bars with Time > this and <= ExitTime build the ADR }
+    AllowLongs(true),      { false = no long entries }
+    AllowShorts(true),     { false = no short entries }
+    NumContracts(1),       { contracts per entry }
+    RefBarMinRange(0.15),  { reference bar range must be >= this fraction of ADR; 0 = off }
+    VolRegimeRatio(1.10),  { ADR must be >= this multiple of ADRLong }
+    ADRLength(20),         { sessions in ADR, max 30 }
+    VolRegimeLongLen(100); { sessions in ADRLong, max 120 }
+
+Arrays:
+    sessRange[120](0);
+
+Variables:
+    ema(0), dayHigh(0), dayLow(0), inSession(false),
+    rIdx(0), rN(0), rSum(0), adr(0), adrLong(0),
+    k(0), refRangeOK(false), regimeOK(false), signalDone(false);
+
+once begin
+    if RefBarMinRange < 0 or VolRegimeRatio <= 0 then
+        RaiseRunTimeError("RefBarMinRange must be >= 0 and VolRegimeRatio > 0.");
+    if ADRLength < 1 or ADRLength > 30 or ADRLength <> IntPortion(ADRLength) then
+        RaiseRunTimeError("ADRLength must be an integer from 1 to 30.");
+    if VolRegimeLongLen < 1 or VolRegimeLongLen > 120 or
+       VolRegimeLongLen <> IntPortion(VolRegimeLongLen) then
+        RaiseRunTimeError("VolRegimeLongLen must be an integer from 1 to 120.");
+    if SessionOpen >= SignalTime or SignalTime >= ExitTime then
+        RaiseRunTimeError("Need SessionOpen < SignalTime < ExitTime.");
+end;
+
+ema = XAverage(Close, EMALength);
+
+{ ---- day-session range into a 120-slot ring buffer; newest entry at rIdx - 1 ---- }
+if Time > SessionOpen and Time <= ExitTime then begin
+    if inSession = false then begin
+        dayHigh = High;
+        dayLow = Low;
+        inSession = true;
+    end
+    else begin
+        dayHigh = MaxList(dayHigh, High);
+        dayLow = MinList(dayLow, Low);
+    end;
+end
+else if inSession then begin
+    sessRange[rIdx] = dayHigh - dayLow;
+    rIdx = Mod(rIdx + 1, 120);
+    rN = MinList(rN + 1, 120);
+
+    rSum = 0;
+    for k = 1 to MinList(ADRLength, rN) begin
+        rSum = rSum + sessRange[Mod(rIdx - k + 120, 120)];
+    end;
+    adr = rSum / MinList(ADRLength, rN);
+
+    rSum = 0;
+    for k = 1 to MinList(VolRegimeLongLen, rN) begin
+        rSum = rSum + sessRange[Mod(rIdx - k + 120, 120)];
+    end;
+    adrLong = rSum / MinList(VolRegimeLongLen, rN);
+    inSession = false;
+end;
+
+{ ---- one signal per calendar day ---- }
+if Date <> Date[1] then
+    signalDone = false;
+
+{ ---- entry on the reference bar, filters first ---- }
+if MarketPosition = 0 and signalDone = false and Time = SignalTime then begin
+    refRangeOK = true;
+    if RefBarMinRange > 0 then
+        refRangeOK = rN > 0 and (High - Low) >= RefBarMinRange * adr;
+    regimeOK = rN >= VolRegimeLongLen and adr >= VolRegimeRatio * adrLong;
+
+    if refRangeOK and regimeOK then begin
+        if Close > ema and AllowLongs then
+            Buy ("F5.L") NumContracts contracts this bar at close
+        else if Close < ema and AllowShorts then
+            SellShort ("F5.S") NumContracts contracts this bar at close;
+    end;
+    signalDone = true;
+end;
+
+{ ---- timed exit at the cash close ---- }
+if MarketPosition > 0 and Time >= ExitTime then
+    Sell ("F5.LX") this bar at close;
+if MarketPosition < 0 and Time >= ExitTime then
+    BuyToCover ("F5.SX") this bar at close;
+
+{ ---- session backstop: catches half days where the ExitTime bar never prints ---- }
+SetExitOnClose;

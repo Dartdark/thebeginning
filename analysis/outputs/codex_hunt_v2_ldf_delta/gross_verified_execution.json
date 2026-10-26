@@ -1,0 +1,29 @@
+{
+  "started_utc": "2026-10-26T14:46:05.876810+00:00",
+  "completed_utc": "2026-10-26T14:46:13.260845+00:00",
+  "phase": "gross",
+  "passed": true,
+  "prereg": "aa726e2",
+  "implementation_commit": "0a0ac5f45fcbae3bc063491ab2c642d91071ac90",
+  "script_sha256": "8fb312196af06691ee27ca34e532df7c536f107332c865d9794bff70260dd494",
+  "artifacts_sha256": {
+    "gross_events.csv": "7ce45229c3994a67c94bd0d357ccbbf83bef8501355032e4b2f041b75f2b1151",
+    "gross_summary.csv": "0e93024877e9a9e5b93a69361e248e91613949bab86b9fa920aa3d95a7cf84cc",
+    "gross_calendar_audit.csv": "92e39cd449753b57ece291894861384a6a916051eade0cf32b7a7e762c2e7190",
+    "gross_input_binding.json": "09a649bb5029b53f748d94dfb841415bdde4a7e1bc81dd22ea4008c764ceef46",
+    "gross_gate.json": "1069770557bec87d0836fd8554dcb11996387dcd1ed4651b2005a740032f2205",
+    "gross_data_audit.json": "43e9a8dba2ae8aa2e08dc33cb1decec0aca49f670ea1355314904c1068eaeaa6"
+  },
+  "strategy_execution_run": false,
+  "raw_window_source_returns_calculated": true,
+  "counted_evaluations": 0,
+  "new_hypotheses": 1,
+  "runtime_versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  },
+  "validation_run": false,
+  "account_tests_run": false,
+  "downstream_requirement": "Require this success marker AND every artifact hash; gross_gate.json alone cannot authorize design."
+}

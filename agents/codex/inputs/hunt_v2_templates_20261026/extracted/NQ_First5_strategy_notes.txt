@@ -1,0 +1,97 @@
+1 What the strategies do
+Two builds of the same NQ day-hold entry. The BASE build is the entry and the timed exit alone. The FILTERED build
+is the same entry and exit with two conditions on the day that must hold before the signal is allowed to fire. Neither
+build has a stop, a target or a trail.
+
+1.1 The signal
+The reference bar is the first five-minute bar of the New York session, the one that closes at 08:35 Chicago time. At
+that bar's close the signal compares the close to a 12-bar EMA of five-minute closes. Close above the EMA buys,
+close below sells short, at that bar's close. One signal per calendar day.
+
+The trade is a bet that the direction of the opening five minutes persists into the close. It is held for the whole
+session whatever happens in between.
+
+1.2 The exit
+The position is closed at the close of the first bar at or after 15:00 Chicago time, the 16:00 New York cash close.
+SetExitOnClose is set as a backstop, so on a half day where the 15:00 bar never prints the session end closes the
+trade instead.
+
+1.3 The filters (FILTERED build only)
+Both conditions are measured in units of the average day-session range, the mean high-low of the last ADRLength
+day sessions from 08:30 to 15:00. A range unit is used instead of points so that a setting means the same at NQ
+7,000 as at NQ 25,000.
+
+  Reference bar strength. The first five-minute bar's own range must be at least RefBarMinRange of the average
+  day range. The filter asks for a real opening move before the direction of that move is trusted.
+  Volatility regime. The 20-session average day range must be at least VolRegimeRatio times the 100-session
+  average. The entry only trades when intraday ranges are expanding against their own recent history.
+
+A day that fails either test takes no trade, and there is no second attempt that day.
+
+ The regime filter needs history. No trade is taken until VolRegimeLongLen sessions (100 by default, about five
+ months) have been stored. Backtests of the FILTERED build start later than the BASE build on the same data;
+ compare the two from the same date.
+2 Setting it up
+Both signals run on one data series and need nothing beyond the inputs. The chart they expect:
+
+Group          NQ opening-direction day hold
+
+Instrument     NQ continuous contract (@NQ)
+
+Data 1         5 Min, 24-hour Globex session
+
+Data 2         none
+
+Time zone      CT. Defaults are set for an Exchange (Chicago) chart.
+
+Step 1. Build the chart. NQ, five-minute bars, full Globex session, chart time zone Exchange (Chicago). The
+signal reads clock times, so a chart in another time zone shifts the reference bar and the exit without any error.
+
+Step 2. Bars back. Auto-detect is enough; nothing looks back further than the EMA.
+Step 3. Load the signal. Compile NQ_First5_EMA_DayHold_BASE or NQ_First5_EMA_DayHold_FILTERED, add one of
+them to the chart, and check that the input list matches section 3.
+Step 4. Costs and fills. Set commission and slippage in the strategy properties. Bar Magnifier is not needed,
+since every order fills at a bar close.
+
+ Changing the bar size changes the reference bar. The signal is defined on the first five-minute bar. On
+ one-minute bars SignalTime 0835 is the fifth bar of the session and the EMA is a different average; on fifteen-
+ minute bars the reference bar does not exist. Keep the chart at five minutes.
+3 The inputs
+These are the defaults in both builds. The BASE build has the first six; the FILTERED build adds the rest.
+
+3.1 Entry and exit (both builds)
+INPUT                DEFAULT    WHAT IT DOES
+
+EMALength            12         Length of the EMA the reference bar close is compared to.
+
+SignalTime           0835       Close time of the reference bar, Chicago time.
+
+ExitTime             1500       The first bar closing at or after this time exits at its close. 1500 CT is the 16:00 ET cash
+                                close.
+
+AllowLongs           true       false disables long entries.
+
+AllowShorts          true       false disables short entries.
+
+NumContracts         1          Contracts per entry.
+
+
+3.2 Filters (FILTERED build)
+INPUT                DEFAULT    WHAT IT DOES
+
+SessionOpen          0830       Day-session open, Chicago time. Bars after this and up to ExitTime build the day range.
+
+RefBarMinRange       0.15       Minimum range of the reference bar as a fraction of the average day range. 0 switches
+                                the filter off.
+
+VolRegimeRatio       1.10       The 20-session average day range must be at least this multiple of the 100-session
+                                average.
+
+ADRLength            20         Sessions in the short average day range.
+
+VolRegimeLongLen     100        Sessions in the long average day range. Also the warm-up length.
+
+VolRegimeRatio is the input that decides how many days trade: raising it admits fewer days, all of them in higher-
+volatility stretches. RefBarMinRange removes the days where the opening bar itself was too small to carry a
+direction.
+

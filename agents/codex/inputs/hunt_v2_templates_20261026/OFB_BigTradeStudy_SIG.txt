@@ -1,0 +1,90 @@
+// ============================================================================
+// OFB_BigTradeStudy_SIG — master signal for The Institutional Protocol study.
+// Fixed-length exits: every trade is exactly HoldBars bars, re-entry allowed.
+//
+//   TestMode 1  = candle only (baseline)
+//   TestMode 2  = whale only (biggest print >= MinSize)
+//   TestMode 3  = book imbalance only (|imb| >= Threshold)
+//   TestMode 4  = whale AGAINST candle
+//   TestMode 5  = whale into ALIGNED book     (print dir = book lean)
+//   TestMode 6  = whale into OPPOSING book    (print dir <> book lean)
+//   TestMode 7  = whale into FLAT book        (|imb| < Threshold)
+//   TestMode 8  = whale printed in candle BODY (acceptance)
+//   TestMode 9  = whale printed in candle WICK (rejection)
+//   TestMode 10 = whale in WICK into FLAT book (modes 7 + 9 stacked)
+//
+// Requires OFB_Functions compiled. Run gross unless the run says otherwise.
+// ============================================================================
+inputs:
+	TestMode( 10 ),
+	MinSize( 100 ),        // whale threshold, contracts
+	Levels( 50 ),          // book depth per side: 5 | 10 | 20 | 50
+	Threshold( 10 ),       // book imbalance % trigger
+	HoldBars( 15 ),
+	UseRTH( true ),       // true = entries only StartTime-EndTime
+	StartTime( 930 ),
+	EndTime( 1600 ),
+	Qty( 1 );
+
+variables:
+	Blk( 0 ), Sz( 0 ), PrintDir( 0 ), Px( 0 ),
+	BodyHi( 0 ), BodyLo( 0 ), InBody( false ),
+	BidSz( 0 ), AskSz( 0 ), Imb( 0 ), LiqDir( 0 ),
+	ColorDir( 0 ), Dir( 0 );
+
+// ---- features ----------------------------------------------------------------
+Blk = OFB_BigTrade;
+Sz  = AbsValue( Blk );
+PrintDir = 0;
+if Sz >= MinSize then begin
+	if Blk > 0 then PrintDir = 1 else PrintDir = -1;
+end;
+
+Px = OFB_BigTradePx;                       // print's price (fallback: slot 47)
+BodyHi = MaxList( Open, Close );
+BodyLo = MinList( Open, Close );
+InBody = Px >= BodyLo and Px <= BodyHi;
+
+BidSz = OFB_BidDepth( Levels );
+AskSz = OFB_AskDepth( Levels );
+Imb = 0;
+if BidSz + AskSz > 0 then
+	Imb = ( BidSz - AskSz ) / ( BidSz + AskSz ) * 100;
+LiqDir = 0;
+if Imb >=  Threshold then LiqDir =  1;
+if Imb <= -Threshold then LiqDir = -1;
+
+ColorDir = 0;
+if Close > Open then ColorDir =  1;
+if Close < Open then ColorDir = -1;
+
+// ---- desired position, reset every bar -----------------------------------------
+Dir = 0;
+if TestMode = 1 and ColorDir <> 0 then Dir = ColorDir;
+if TestMode = 2 and PrintDir <> 0 then Dir = PrintDir;
+if TestMode = 3 and LiqDir <> 0 then Dir = LiqDir;
+if TestMode = 4 and PrintDir <> 0 and ColorDir <> 0 and PrintDir <> ColorDir then
+	Dir = PrintDir;
+if TestMode = 5 and PrintDir <> 0 and PrintDir = LiqDir then Dir = PrintDir;
+if TestMode = 6 and PrintDir <> 0 and LiqDir <> 0 and PrintDir <> LiqDir then
+	Dir = PrintDir;
+if TestMode = 7 and PrintDir <> 0 and LiqDir = 0 then Dir = PrintDir;
+if TestMode = 8 and PrintDir <> 0 and Px > 0 and InBody then Dir = PrintDir;
+if TestMode = 9 and PrintDir <> 0 and Px > 0 and InBody = false then Dir = PrintDir;
+if TestMode = 10 and PrintDir <> 0 and LiqDir = 0 and Px > 0 and InBody = false then
+	Dir = PrintDir;
+
+if UseRTH and ( Time < StartTime or Time >= EndTime ) then
+	Dir = 0;
+
+// ---- orders --------------------------------------------------------------------
+if Dir = 1 then
+	Buy ( "StudyLE" ) Qty contracts next bar at market;
+if Dir = -1 then
+	SellShort ( "StudySE" ) Qty contracts next bar at market;
+
+// ---- fixed-length time exit ------------------------------------------------------
+if MarketPosition = 1 and BarsSinceEntry >= HoldBars - 1 then
+	Sell ( "TimeX.L" ) next bar at market;
+if MarketPosition = -1 and BarsSinceEntry >= HoldBars - 1 then
+	BuyToCover ( "TimeX.S" ) next bar at market;
