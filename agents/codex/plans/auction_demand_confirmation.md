@@ -7,10 +7,12 @@ No old trade lists, rescaling, return regression, price-residual signal or faile
 ## Event and historical result feature
 
 Use data/treasury_auctions.csv rows with security_type Note/Bond, inflation_index_security No, floating_rate No,
-closing_time_comp exactly01:00PM, positive finite BTC, validauctiondate/CUSIP/reopening Yes/No. Normalize
+closing_time_comp exactly01:00PM, validauctiondate/CUSIP/reopening Yes/No. Trading requires positive finiteBTC,
+but structurally eligible rows with invalidBTC remain NaN history slots. Normalize
 security_term to nearest tenor in[2,3,5,7,10,20,30] if years+months/12 lies within0.5year, otherwise exclude.
-Nonpositive/missing BTC is not silently removed from an eligible history: it leaves NaN. Conflicting duplicate
-CUSIP/date/result keys block intake; exact duplicates may collapse, counted. Multiple distinct eligible auctions
+Nonpositive/missing BTC is not silently removed from an eligible history: it leaves NaN. The duplicate key is
+(CUSIP,auction_date); compare result/tenor/reopening/deadline fields for conflicts. Exact duplicates may collapse,
+counted. Sort by(date,CUSIP) to order earlier same-date events; reject equidistant tenor ties. Multiple distinct eligible auctions
 at12:00CT on a date=>no trade that date, not a choice based on their results. Their valid results can enter later
 same-group history. Design intake had no such simultaneous date. Store all exclusions and event counts.
 
