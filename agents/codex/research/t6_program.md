@@ -40,6 +40,17 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.
 
+<!-- EIA_INPUT_WORK_START -->
+## Work in progress: EIA component input gate
+
+Committed source-intake plan5723c95: agents/codex/plans/eia_inventory_input_gate.md.
+Current report: agents/codex/results/eia_inventory_input_gate.md. Source-only research:261editions,
+156verified component triples,105excluded editions. NEEDS DATA for clocks/revisions/execution inputs;
+no economic preregistration or new strategy returns. Counts remain60/58unique. Scoped EIA source-access
+blocker recorded once; all t milestones unchanged. Network host www.eia.gov needs reviewed access.
+Resume this source intake before new return experiments; continue the program without pausing it.
+<!-- EIA_INPUT_WORK_END -->
+
 ## Operating boundaries
 
 Only codex/work. Preserve existing/untracked work, fetch before updates, pull before push; no resets/force pushes.

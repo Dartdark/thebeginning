@@ -1,0 +1,50 @@
+{
+  "purpose": "Read-only source feasibility samples; no strategy return testing.",
+  "sample_count": 5,
+  "records": [
+    "2018-01-04_record.json",
+    "2019-01-09_record.json",
+    "2020-07-08_record.json",
+    "2021-04-07_record.json",
+    "2022-12-29_record.json"
+  ],
+  "converted_response_hash_basis": "SHA256 of UTF-8 JSON serialization of actual returned web-tool response, not original HTTP/PDF bytes.",
+  "source_proofs_response_file": "source_proofs_web_response.json",
+  "source_proofs_response_sha256": "169f35e2d2ec5951cd25ebbe7e352b5f5e7ed0d81c21749dfc2afc98ddee1fad",
+  "proofs": [
+    {
+      "kind": "early_availability_2018",
+      "url": "https://www.eia.gov/petroleum/supply/weekly/archive/2018/2018_01_04/pdf/appendixb.pdf",
+      "source_edition_date": "2018-01-04",
+      "location": "PDF page5, printed page37, Dissemination",
+      "finding": "Highlights PDF and CSV/XLS tables are described as released10:30 a.m.; entire WPSR PDF/HTML1p.m.; holiday/disruption delays occur.",
+      "historical_event_receipt_verified": false
+    },
+    {
+      "kind": "archive_update_2018",
+      "url": "https://www.eia.gov/petroleum/supply/weekly/archive/2018/2018_06_27/wpsr_2018_06_27.php",
+      "source_edition_date": "2018-06-27",
+      "finding": "Issue page says production cumulative percent-change calculation was corrected in PDF and CSV. This is not evidence sampled inventory fields were changed."
+    },
+    {
+      "kind": "inventory_summary_correction_2026",
+      "url": "https://www.eia.gov/petroleum/supply/weekly/includes/revision-notice.php",
+      "notice_date": "2026-08-28",
+      "affected_release_date": "2026-08-26",
+      "finding": "Official notice records initially wrong distillate summary direction corrected12:13ET; underlying tables were correct. Demonstrates summary archive need not be initial text.",
+      "used_as_strategy_input": false
+    },
+    {
+      "kind": "delayed_multiple_release_2022",
+      "url": "https://www.eia.gov/petroleum/supply/weekly/archive/2022/2022_06_29/wpsr_2022_06_29.php",
+      "source_edition_date": "2022-06-29",
+      "finding": "Release contains both weekendingJune17 andJune24; cannot assign delayedJune17 data to a mechanically generated earlier Wednesday.",
+      "actual_intraday_receipt_verified": false
+    }
+  ],
+  "all2018_22_coverage_verified": false,
+  "counts_or_sign_agreement_computed": false,
+  "forward_strategy_returns_calculated": false,
+  "artifact_saved_utc": "2026-10-26T06:25:57.189325+00:00",
+  "historical_receipt_timestamp": "Unverified; artifact capture time is not historical publication time."
+}

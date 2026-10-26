@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "checks": [
+    "published signed weekly changes and exact units",
+    "annual/missing scope and missing/unchanged/duplicate prose fail closed",
+    "release versus data-ending year rollover",
+    "two same-day editions remain distinct",
+    "calendar IDs/canonical URLs/one-page PDF/first-week-ending identity before numbers",
+    "malformed HTML week header flagged; PDF/index agreement still required",
+    "ordinary5,403 data is not an HTTP403 error",
+    "five actual saved sample PDFs match canonical identity/week-ending/numeric changes",
+    "no price or strategy-return inputs"
+  ],
+  "five_sample_parity": {
+    "2018-01-04": {
+      "week_ending": "2017-12-29",
+      "crude_ex_spr_change_mb": -7.4,
+      "gasoline_change_mb": 4.8,
+      "distillate_change_mb": 8.9
+    },
+    "2019-01-09": {
+      "week_ending": "2019-01-04",
+      "crude_ex_spr_change_mb": -1.7,
+      "gasoline_change_mb": 8.1,
+      "distillate_change_mb": 10.6
+    },
+    "2020-07-08": {
+      "week_ending": "2020-07-03",
+      "crude_ex_spr_change_mb": 5.7,
+      "gasoline_change_mb": -4.8,
+      "distillate_change_mb": 3.1
+    },
+    "2021-04-07": {
+      "week_ending": "2021-04-02",
+      "crude_ex_spr_change_mb": -3.5,
+      "gasoline_change_mb": 4.0,
+      "distillate_change_mb": 1.5
+    },
+    "2022-12-29": {
+      "week_ending": "2022-12-23",
+      "crude_ex_spr_change_mb": 0.7,
+      "gasoline_change_mb": -3.1,
+      "distillate_change_mb": 0.3
+    }
+  }
+}

@@ -78,4 +78,8 @@ clocks and an insufficient source panel. Performance falsifiers belong in a late
 
 **NEEDS DATA** — complete reproducible source acquisition and audit. No strategy return test, economic
 configuration count, t statistic, design-pass alert, account comparison orPowerLanguage is justified yet.
-This family-level intake gate does not stop the continuing research program or require user action now.
+The data-quality gate does not stop the continuing research program. Source acquisition now has a separate
+documented access blocker: the connected web tool reached its capacity limit, and the executor's restricted
+host policy excludes www.eia.gov. Reviewed access to that public host is needed to run the prepared bounded
+fetcher and complete acquisition. See agents/codex/results/eia_inventory_input_gate.md and its access_gate.json
+evidence. No policy, proxy, broker or API setting was changed; no new strategy returns were tested.
