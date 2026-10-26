@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "I02_closed_identity_before_counts_continue_distinct_RS_flow_question",
+  "status": "H04_preregistered_RS_classified_support_before_market_rows",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -15,7 +15,7 @@
     "max_counted_evaluations": 60,
     "max_hypotheses": 10,
     "counted_evaluations": 3,
-    "hypotheses_started": 3,
+    "hypotheses_started": 4,
     "gross_screens_run": 2,
     "stop_on_either_limit": true,
     "prior_t6_evaluations": 65,
@@ -343,6 +343,33 @@
         "authorizes_further_H03_returns": false
       },
       "final_result": "Entry codec corrected only in separate saved-metadata diagnostic:100%/99.10%entrymatches. Frozenreference/prefixcoverage remains failed(34events,5days), no raw/stop/2023/book/MC-PnL returns. CLOSE,noalpha verdict/noavailabilityrescue."
+    },
+    {
+      "id": "H04",
+      "name": "Relative Strength classified support",
+      "kind": "new conditional input on adopted RS leg, within selected generic OF family",
+      "stage": "preregistered_before_market_rows",
+      "registered_utc": "2026-10-26T18:34:38.892299+00:00",
+      "evidence": "agents/codex/evidence/hunt_v2_next_new_input.md",
+      "source_review": "agents/codex/research/hunt_v2_next_new_input.md",
+      "plan": "agents/codex/plans/hunt_v2_rs_classified_support.md",
+      "planned_models": [
+        "REPLAY_BASE_reference",
+        "FLOW15_primary",
+        "PRICE15_reference",
+        "DELAY_BASE_conditional_stress",
+        "DELAY_FLOW15_conditional_stress"
+      ],
+      "planned_counted_evaluations_after_gross_pass": 3,
+      "planned_additional_counted_delay_evaluations_only_after_design_and_bench_pass": 2,
+      "actual_counted_evaluations": 0,
+      "gross_screen_runs": 0,
+      "data_or_returns_read_for_hypothesis": false,
+      "raw_returns_calculated": false,
+      "prior_RS_OF_H01_H03_selection_and_seen_2023_disclosed": true,
+      "selected": null,
+      "validation_run": false,
+      "book_bench_run": false
     }
   ],
   "counted_evaluations": [
@@ -409,7 +436,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "H01/H02/H03/I01/I02closed. I02 exact name gate failed47of52target2022rows; allsixmetadata audited, no position count conversion, support frequency unmeasured. No alias/calendar/numeric rerun or H03 rescue. Continue new RS-specific classified-flow conditional-input source nomination; preserve all generic OF/RS selection history and price controls. Only TEST plus separate committed <=5configuration economic prereg can registerH04. Counters3/60economic,3/10hypotheses,2grossscreens; prior65t6retained, notification_eventnull, continuationenabled.",
+  "next_action": "Freeze H04 exact source-only implementation/review before new rows. Run one entry/source-first gross command: zero unresolved own references/prefix/held paths, fixed ENTRY-only parity, no MC financial values. Failure retains pre_gross0returns/0screens/0eval; PASS rawOPEN541->CLOSE900fixed15OFfilter/PRICEcontrol gates. No stopped/2023/bench before gross PASS. H01/H02/H03/I01/I02closed; norescue. Counts3/60economic,4/10hypotheses,2grossscreens, archived65t6; no alert milestone.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -420,7 +447,7 @@
     "old_t6_research_paused": true,
     "old_t6_alerts_paused": true,
     "v2_continuation_enabled": true,
-    "note": "Bounded v2 continuation retained: 3/60 economic evaluations, 3/10 registered hypotheses and 2 gross screens. H03 closed at source coverage before returns. Source intakes add no economic evaluations or hypotheses. No qualifying milestone; future execution/delivery is not guaranteed.",
+    "note": "Bounded v2 continues:3/60economic evaluations,4/10registeredhypotheses,2grossscreens. H04preregisteredbeforemarketrows; priorclosedfailures/intakesretained. No qualifying milestone or verified phone delivery.",
     "automation_id": "6adea9fee9c88191a45399d233743746",
     "title": "Strategy hunt v2",
     "timezone": "America/Los_Angeles",
@@ -502,7 +529,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-26T18:24:56.447199+00:00",
+  "updated_utc": "2026-10-26T18:34:38.892316+00:00",
   "current_adopted_source_commit": "7f0800ffc04d56bd878750369a4abc2316ee01d8",
   "current_adopted_source_reconciliation": "7f0800f source adds lessons/docs/exporter; adoptedbook/ranking sources are unchanged from615485f; no operational file or other-branch writes. CurrentSTv3parent source archived exactly forH03.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
