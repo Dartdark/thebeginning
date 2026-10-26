@@ -1,0 +1,61 @@
+{
+  "authorization_commit": "91f776b",
+  "original_preregistration_commit": "16ed951",
+  "original_implementation_commit": "16ed9512695823aab4ef5bb5a9c7c0912288380e",
+  "implementation_commit": "91f776b772de10c5af9340346194fb1305d8aabb",
+  "source_hashes": {
+    "analysis/codex_hunt_v2_swing_mc_codec_diagnostic.py": "de436b84914b446f66e83538c468f88756f949b5e932072f48430a6b2ad771ee",
+    "agents/codex/plans/hunt_v2_swing_mc_codec_diagnostic.md": "aed7419eac48b70d13a195accdf51ffd436c84b4def18b01e76002e0d9684a3f",
+    "analysis/codex_hunt_v2_swing_opening_gross.py": "ab2efb88a1b492eacf01cec032b57f2a27aa1fde166dfee9d1cb5d8ac8377a56",
+    "analysis/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "analysis/portfolio.py": "7e8830f889854e2452a683c2eecdb44e9743d7f1c9bdcf2cc426f750f4f357c8",
+    "analysis/outputs/codex_hunt_v2_swing_opening/pre_gross_verified_execution.json": "6a976e933a0ccf9b68f4d3f10fe30b82ed5402dc17e0c633ac70fab9d9764b45",
+    "analysis/outputs/codex_hunt_v2_swing_opening/parent_entries.csv": "94327711e4af4caa1ccb44f2ba39c2f3c9ecbec2e6101e4a16d9c0e3270160b5",
+    "analysis/outputs/codex_hunt_v2_swing_opening/gross_calendar_audit.csv": "03148d887121f98a03ad5c8ad8ab2702ad60508c86e3927dcc14d19c526987d2",
+    "analysis/outputs/codex_hunt_v2_swing_opening/gross_input_binding.json": "672ff4dae6292f9576e67ed8fb78372a34796e5b0b8a3a19eb5a3acfe1e10782",
+    "agents/codex/inputs/rebound/plan_update_afde088/checks/candidates/swing_target/mc_trades_v3.csv": "ee4776e1fe7abc32ff42074579836bfe42301b24e986cf7f85f1e9231f75eb34"
+  },
+  "original_marker_sha256": "6a976e933a0ccf9b68f4d3f10fe30b82ed5402dc17e0c633ac70fab9d9764b45",
+  "original_artifacts_sha256": {
+    "parent_entries.csv": "94327711e4af4caa1ccb44f2ba39c2f3c9ecbec2e6101e4a16d9c0e3270160b5",
+    "gross_calendar_audit.csv": "03148d887121f98a03ad5c8ad8ab2702ad60508c86e3927dcc14d19c526987d2",
+    "gross_stored_reference_audit.csv": "ea5d20a023e9849da0025a3101b3dd447e51914c3cedb93ae9a06bf45496300b",
+    "gross_mc_entry_matches.csv": "15f198cf2dd6fd94e0631730b53b586c14da9f35d0911738bee81d8e78f84619",
+    "gross_mc_entries_design_only.csv": "ed21e9d52d3f8ec9b3b4ccac66e70d0a8c8013ff3cc139660de3389209901244",
+    "gross_summary_status.json": "8a451720bd5024e4dfeab996c3df9219bcc32a1fbc686179e6289eb2901a75ce",
+    "gross_input_binding.json": "672ff4dae6292f9576e67ed8fb78372a34796e5b0b8a3a19eb5a3acfe1e10782",
+    "pre_gross_gate.json": "42d163e72b8cf357aa1629e2bf30e67d4fc99b4a5d4a637d31e269b490d1cb69",
+    "gross_entry_parity.json": "32221f6653aa7849e25f5128c17b35626c04033a77c1ad371f698017a6156336",
+    "gross_data_audit.json": "7248b5becc347a55b857972c4994b038b11d902ef631b77fca2c5d08db5e9ed7",
+    "gross_cost_bridge.json": "d55359332152c19a38acdae515987c1e95d5aa791884d1d542bc855d49d8f32a",
+    "gross_run_manifest.json": "523b35879601da3ee72c0bcbe3fa7033012be89e9621e7dbeb9a80492ea8c9d9"
+  },
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  },
+  "source_contract": [
+    {
+      "path": "analysis/grid24.py",
+      "function": "jof",
+      "statement": "(hhmm//100)*60+hhmm%100"
+    },
+    {
+      "path": "analysis/portfolio.py",
+      "function": "load_mc",
+      "statement": "entry datetime hour*100+minute passed to sharedjof"
+    },
+    {
+      "git_ref": "7f0800ffc04d56bd878750369a4abc2316ee01d8",
+      "path": "checks/candidates/fc_2b/mc_to_trades.py",
+      "line": 10,
+      "statement": "genericMCproducer:t_in=entryDate.strftime('%H%M').astype(int)",
+      "sha256": "d04d6874888ca466e2748f17ead976d4449a6a6eb9c474b3eb94dc011c5fa118"
+    }
+  ],
+  "dedicated_mc_v3_CSV_producer_located": false,
+  "chart_timezone_receipt_verified": false,
+  "no_native_data_read": true,
+  "original_source_or_marker_mutated": false
+}
