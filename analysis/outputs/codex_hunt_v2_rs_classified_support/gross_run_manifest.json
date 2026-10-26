@@ -1,0 +1,32 @@
+{
+  "candidate_id": "hunt_v2_H04_RS_CLASSIFIED_SUPPORT",
+  "prereg": "7784493",
+  "implementation_commit": "7784493258b793f98fd39a010d2fa6459e465bdf",
+  "script_sha256": "e352e718a1706ad47e0d7065bd83c08d18ab8596ba521f911ad1d0d09e4bbef0",
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  },
+  "information_clock": "OFclose539+1assumedminuteavailable540;decision540;nativeOPEN541wall540;actualreceiptunverified",
+  "models": [
+    "REPLAY_BASE",
+    "FLOW15",
+    "PRICE15_unselectable",
+    "DELAY_BASE_conditional",
+    "DELAY_FLOW15_conditional"
+  ],
+  "raw_window": "OPEN541->CLOSE900;nostop/notarget;onlyafterALLsourceandENTRYadmission",
+  "economic_evaluations": 0,
+  "raw_returns_calculated": false,
+  "native_MNQ_cost_assumption": {
+    "commission_RT": 1.24,
+    "adverse_market_stop_per_fill": 0.5,
+    "raw_RT": 2.24,
+    "gross_hurdle": 4.48
+  },
+  "raw_costs_subtracted": false,
+  "stopped_or_delay_or_cost_stress_run": false,
+  "historical_validation_or_book_bench_or_placebos_or_MC_run": false,
+  "phase": "pre_gross"
+}
