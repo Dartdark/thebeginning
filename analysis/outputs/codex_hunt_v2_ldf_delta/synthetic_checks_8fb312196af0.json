@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "checks": [
+    "negative complete flow removes only eligible longs",
+    "partial legacy removes while strict retains",
+    "zero/unknown retained",
+    "close/quantity mismatch invalidates strict",
+    "OHLCV integrity",
+    "exact close-label clock",
+    "holiday skip",
+    "independent native micro cost arithmetic",
+    "actual-date/integer/clock validation before price fields",
+    "exact past15 stored-weekday ATR source IDs"
+  ],
+  "prices_or_strategy_returns_read": false,
+  "runtime_versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  },
+  "script_sha256": "8fb312196af06691ee27ca34e532df7c536f107332c865d9794bff70260dd494"
+}

@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "checks": [
+    "negative complete flow removes only eligible longs",
+    "partial legacy removes while strict retains",
+    "zero/unknown retained",
+    "close/quantity mismatch invalidates strict",
+    "OHLCV integrity",
+    "exact close-label clock",
+    "holiday skip",
+    "independent native micro cost arithmetic"
+  ],
+  "prices_or_strategy_returns_read": false,
+  "script_sha256": "ce14a68671903fe171d97db07b2bfe3c45f803583867a065588644a12942eadc"
+}

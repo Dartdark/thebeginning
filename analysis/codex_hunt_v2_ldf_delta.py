@@ -16,6 +16,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from types import SimpleNamespace
 import warnings
 
 import numpy as np
@@ -84,6 +85,90 @@ def valid_ohlcv(o, h, l, c, v) -> np.ndarray:
             & (l <= np.minimum(o, c)) & (h >= np.maximum(o, c)) & (h >= l))
 
 
+def runtime_versions() -> dict:
+    return dict(python=sys.version.split()[0], numpy=np.__version__, pandas=pd.__version__)
+
+
+def validate_metadata_keys(frame: pd.DataFrame, year: int, source: str) -> None:
+    """Validate every date/clock BEFORE opening any of that file's prices."""
+    if frame.empty:
+        raise ValueError("Empty source metadata: " + source)
+    date_values = pd.to_numeric(frame["date"], errors="coerce").to_numpy(dtype=float)
+    clock_values = pd.to_numeric(frame["time"], errors="coerce").to_numpy(dtype=float)
+    if not (np.isfinite(date_values).all() and np.equal(date_values, np.floor(date_values)).all()):
+        raise ValueError("Nonfinite/noninteger source date: " + source)
+    if not ((date_values >= year * 10000 + 101) & (date_values <= year * 10000 + 1231)).all():
+        raise ValueError("Mislabeled source year: " + source)
+    date_ids = date_values.astype(np.int64)
+    labels = date_ids.astype(str)
+    try:
+        actual_dates = pd.to_datetime(labels, format="%Y%m%d", exact=True, errors="raise")
+    except (ValueError, TypeError) as exc:
+        raise ValueError("Impossible source calendar date: " + source) from exc
+    roundtrip = actual_dates.strftime("%Y%m%d").astype(np.int64).to_numpy()
+    if not np.array_equal(roundtrip, date_ids):
+        raise ValueError("Source date failed exact calendar roundtrip: " + source)
+    if not (np.isfinite(clock_values).all()
+            and np.equal(clock_values, np.floor(clock_values)).all()
+            and ((clock_values >= 0) & (clock_values <= 2359) & (clock_values % 100 < 60)).all()):
+        raise ValueError("Nonfinite/noninteger or impossible source clock: " + source)
+
+
+def audit_atr_references(grid: Grid24, shared_atr: np.ndarray) -> list[dict]:
+    """Bind the shared ATR to its actual past stored-day identities.
+
+    This duplicates only Grid24.daily_atr's source-membership bookkeeping and
+    checks its shifted rolling values. The trading feature remains shared_atr.
+    Missing stored dates are not stretched into fictitious calendar slots.
+    """
+    hi = np.nanmax(grid.h, axis=1)
+    lo = np.nanmin(grid.l, axis=1)
+    has = ~np.isnan(grid.c).all(axis=1)
+    last = np.array([row[~np.isnan(row)][-1] if ok else np.nan
+                     for row, ok in zip(grid.c, has)])
+    previous = pd.Series(last).where(has).ffill().shift(1).to_numpy()
+    true_range = np.nanmax(np.c_[hi - lo, np.abs(hi - previous), np.abs(lo - previous)], axis=1)
+    weekdays = pd.DatetimeIndex(grid.ts).dayofweek < 5
+    stored = pd.Series(np.where(has & weekdays, true_range, np.nan)).dropna()
+    rolling = stored.rolling(ATR_DAYS).mean()
+    eligible_rows = stored.index.to_numpy(dtype=int)
+    row_position = {int(row): i for i, row in enumerate(eligible_rows)}
+    latest_references: list[int] = []
+    latest_value = np.nan
+    output = []
+    for decision_day, decision_ts in enumerate(pd.DatetimeIndex(grid.ts)):
+        prior_day = decision_day - 1
+        # Equivalent to known.shift(1).ffill(): only a finite/not-NaN
+        # completed rolling observation before today replaces the last one.
+        if prior_day in row_position:
+            position = row_position[prior_day]
+            value = rolling.iloc[position]
+            if pd.notna(value):
+                latest_references = eligible_rows[position - ATR_DAYS + 1:position + 1].tolist()
+                latest_value = float(value)
+        expected = float(shared_atr[decision_day])
+        if not np.isclose(latest_value, expected, equal_nan=True):
+            raise ValueError("ATR source-reference audit disagrees with shared Grid24 value.")
+        if latest_references:
+            if len(latest_references) != ATR_DAYS or max(latest_references) >= decision_day:
+                raise ValueError("ATR includes a non-past or incomplete reference set.")
+            reference_ids = [int(grid.dates[row]) for row in latest_references]
+            reference_max = max(reference_ids)
+            if reference_max >= int(grid.dates[decision_day]):
+                raise ValueError("ATR reference calendar date is not before decision date.")
+        else:
+            reference_ids, reference_max = [], None
+        available_before = int(np.searchsorted(eligible_rows, decision_day))
+        output.append(dict(
+            atr_reference_date_ids=json.dumps(reference_ids, separators=(",", ":")),
+            atr_reference_count=len(reference_ids),
+            atr_reference_max_date_id=reference_max,
+            atr_reference_max_date=(pd.Timestamp(str(reference_max)).date().isoformat() if reference_max else ""),
+            atr_available_prior_stored_count=available_before,
+        ))
+    return output
+
+
 def filter_states(native, source) -> dict:
     """One causal 30-minute input window; no future rows or return targets."""
     native_ok = valid_ohlcv(*(native[name] for name in NATIVE_FIELDS))
@@ -143,10 +228,37 @@ def synthetic_checks() -> dict:
     assert jof(1401) == ENTRY_J and jof(1430) == EXIT_J and SIGNAL_J - FLOW_FIRST_J + 1 == 30
     assert calendar_status("2023-07-03")["kind"] != "normal" or is_early_close(pd.Timestamp("2023-07-03"))
     assert RT_COST == 2.24 and abs(GROSS_HURDLE - 4.48) < 1e-12
+    validate_metadata_keys(pd.DataFrame({"date": [20180228, 20180102], "time": [2359, 0]}), 2018, "valid fixture")
+    validate_metadata_keys(pd.DataFrame({"date": [20200229], "time": [1400]}), 2020, "leap fixture")
+    invalid = [(20180230, 1400), (20180229, 1400), (20180102.5, 1400),
+               (np.nan, 1400), (np.inf, 1400), (20190102, 1400),
+               (20180102, 1260), (20180102, 1400.5), (20180102, np.nan),
+               (20180102, np.inf), (20180102, -1), (20180102, 2400)]
+    for bad_date, bad_clock in invalid:
+        try:
+            validate_metadata_keys(pd.DataFrame({"date": [bad_date], "time": [bad_clock]}), 2018, "invalid fixture")
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Invalid metadata fixture was accepted.")
+    dates = pd.date_range("2018-01-01", periods=35, freq="D")
+    close = (100 + np.arange(len(dates), dtype=float))[:, None]
+    fake = SimpleNamespace(ts=dates.to_numpy(), dates=dates.strftime("%Y%m%d").astype(int).to_numpy(),
+                           h=close + 1, l=close - 1, c=close.copy(), D=len(dates))
+    for name in ("h", "l", "c"):
+        getattr(fake, name)[10] = np.nan
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", RuntimeWarning)
+        references = audit_atr_references(fake, Grid24.daily_atr(fake, ATR_DAYS))
+    assert references[-1]["atr_reference_count"] == ATR_DAYS
+    assert 20180111 not in json.loads(references[-1]["atr_reference_date_ids"])
+    assert references[-1]["atr_reference_max_date_id"] < int(fake.dates[-1])
+    assert references[0]["atr_reference_count"] == 0
     return dict(passed=True, checks=["negative complete flow removes only eligible longs",
         "partial legacy removes while strict retains", "zero/unknown retained", "close/quantity mismatch invalidates strict",
-        "OHLCV integrity", "exact close-label clock", "holiday skip", "independent native micro cost arithmetic"],
-        prices_or_strategy_returns_read=False)
+        "OHLCV integrity", "exact close-label clock", "holiday skip", "independent native micro cost arithmetic",
+        "actual-date/integer/clock validation before price fields", "exact past15 stored-weekday ATR source IDs"],
+        prices_or_strategy_returns_read=False, runtime_versions=runtime_versions())
 
 
 def committed_bytes(ref: str, path: str) -> bytes:
@@ -182,16 +294,13 @@ def verify_before_prices(prereg: str) -> dict:
     for path in paths + of_paths:
         key = pd.read_csv(path, usecols=["date", "time"])
         year = int(path.name.split("_")[-2] if path.name.startswith("OF_") else path.stem[-4:])
-        if key.empty or not key["date"].between(year * 10000 + 101, year * 10000 + 1231).all():
-            raise ValueError("Mislabeled source year; do not open price fields: " + path.name)
-        hhmm = key["time"].to_numpy()
-        if not ((hhmm >= 0) & (hhmm <= 2359) & (hhmm % 100 < 60) & (hhmm == np.floor(hhmm))).all():
-            raise ValueError("Malformed native clock: " + path.name)
+        validate_metadata_keys(key, year, path.name)
         metadata.append(dict(path=str(path.relative_to(ROOT)), rows=len(key),
                              min_date=int(key.date.min()), max_date=int(key.date.max()),
                              duplicate_metadata_keys=int(key.duplicated(["date", "time"]).sum())))
     return dict(prereg=prereg, implementation_commit=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-                hashes=hashes, metadata=metadata, native_paths=[str(p) for p in paths], of_paths=[str(p) for p in of_paths])
+                hashes=hashes, metadata=metadata, runtime_versions=runtime_versions(),
+                native_paths=[str(p) for p in paths], of_paths=[str(p) for p in of_paths])
 
 
 def audited_frame(paths: list[str], columns: tuple[str, ...], source: str) -> tuple[pd.DataFrame, dict]:
@@ -281,9 +390,9 @@ def summarize_events(events: pd.DataFrame) -> pd.DataFrame:
                     output.append(dict(model=model, population=population, period=period, side=side,
                         events=len(rows), observed_endpoint_returns=len(finite),
                         unresolved_held_events=int(rows.unresolved_held_path.sum()),
-                        gross_total_mnq=float(finite.sum()) if len(finite) else 0.0,
+                        gross_observed_total_mnq=float(finite.sum()) if len(finite) else 0.0,
                         gross_mean_mnq=float(finite.mean()) if len(finite) else None,
-                        gross_t=tstat(finite), gross_total_nq=float(finite.sum() * 10) if len(finite) else 0.0,
+                        gross_t=tstat(finite), gross_observed_total_nq=float(finite.sum() * 10) if len(finite) else 0.0,
                         cost_hurdle_mnq=GROSS_HURDLE))
     return pd.DataFrame(output)
 
@@ -307,6 +416,7 @@ def gross(prereg: str) -> dict:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", RuntimeWarning)
             atr = grid.daily_atr(ATR_DAYS)
+            atr_reference_rows = audit_atr_references(grid, atr)
         valid = valid_ohlcv(grid.o, grid.h, grid.l, grid.c, grid.v)
         records, calendar_rows = [], []
         reasons = {}
@@ -314,7 +424,8 @@ def gross(prereg: str) -> dict:
             status = calendar_status(ts)
             skip_pl = is_early_close(ts)
             calendar_rows.append(dict(date=ts.date().isoformat(), cash_kind=status["kind"],
-                                      cash_close_j=status["cash_close_j"], pl_early_skip=bool(skip_pl)))
+                                      cash_close_j=status["cash_close_j"], pl_early_skip=bool(skip_pl),
+                                      atr=atr[day], **atr_reference_rows[day]))
             reason = None
             if status["kind"] != "normal" or skip_pl:
                 reason = "known_calendar_skip"
@@ -349,7 +460,8 @@ def gross(prereg: str) -> dict:
                 gross_mnq=float(points * MNQ_POINT_VALUE), gross_nq=float(points * 20),
                 invalid_or_missing_held_minutes=int((~held_valid).sum()),
                 unresolved_held_path=not bool(held_valid.all()),
-                asof_has_any_of=asof_has_flow, keep_LEGACY=not (side > 0 and states["legacy_remove_long"]),
+                asof_has_any_of=asof_has_flow, **atr_reference_rows[day],
+                keep_LEGACY=not (side > 0 and states["legacy_remove_long"]),
                 keep_STRICT30=not (side > 0 and states["strict_remove_long"]), **states))
         events = pd.DataFrame(records)
         if events.empty:
@@ -377,6 +489,8 @@ def gross(prereg: str) -> dict:
             unresolved_base_held_events=int(events.unresolved_held_path.sum()), passed=passed,
             counted_evaluations_this_gross_screen=0, gross_hypotheses_this_screen=1,
             frozen_later_counted_models=list(MODELS), validation_run=False, account_tests_run=False,
+            mean_and_totals_basis="Observed finite endpoints; missing endpoints/held paths remain counted and block promotion.",
+            downstream_requires_verified_execution_marker_and_all_artifact_hashes=True,
             decisions="Proceed only if passed; otherwise stop H01 before all counted designs/validation/benches.")
         dump_once(OUT / "gross_gate.json", gate)
         audit = dict(native=native_audit, flow=flow_audit, calendar_reasons=reasons,
@@ -395,7 +509,8 @@ def gross(prereg: str) -> dict:
             prereg=prereg, implementation_commit=binding["implementation_commit"], script_sha256=sha(ROOT / SCRIPT),
             artifacts_sha256={name: sha(OUT / name) for name in artifacts}, strategy_execution_run=False,
             raw_window_source_returns_calculated=True, counted_evaluations=0, new_hypotheses=1,
-            validation_run=False, account_tests_run=False)
+            runtime_versions=runtime_versions(), validation_run=False, account_tests_run=False,
+            downstream_requirement="Require this success marker AND every artifact hash; gross_gate.json alone cannot authorize design.")
         dump_once(OUT / "gross_verified_execution.json", marker)
         with (OUT / "attempts.jsonl").open("a") as log:
             log.write(json.dumps(dict(completed_utc=marker["completed_utc"], phase="gross", completed=True, passed=passed)) + "\n")
