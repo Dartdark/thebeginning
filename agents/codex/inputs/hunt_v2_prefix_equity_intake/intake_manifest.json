@@ -1,0 +1,99 @@
+{
+  "scope": "NEW source-quality admission only, no trading protocol or return calculation",
+  "source_repository": "MohammadrezaAmani/Global-Stock-Market-Indices-Historical-Dataset",
+  "source_ref": "0e7218912d08aa5bfd9ff67123d44359b1e44eb4",
+  "mechanism_path": "agents/codex/evidence/hunt_v2_prefix_equity.md",
+  "intake_plan_path": "agents/codex/plans/hunt_v2_prefix_equity_intake.md",
+  "inputs": [
+    {
+      "name": "SPX",
+      "path": "agents/codex/inputs/hunt_v2_prefix_equity_intake/bourse_sp-500.json",
+      "source_git_blob_sha": "9229a31229152c23b463c6f1ab706d74acdde0ea",
+      "source_bytes": 805312,
+      "source_repository": "MohammadrezaAmani/Global-Stock-Market-Indices-Historical-Dataset",
+      "source_ref": "0e7218912d08aa5bfd9ff67123d44359b1e44eb4",
+      "source_path": "data/global-stocks/bourse_sp-500.json",
+      "provenance": {
+        "vendor": {
+          "verified": false,
+          "evidence": "README names dataset author, not verified originating quote vendor."
+        },
+        "index_identity": {
+          "verified": false,
+          "evidence": "Instrument labels alone are not verified identity."
+        },
+        "close_clock_timezone": {
+          "verified": false,
+          "evidence": "No verified event/close timezone or receipt clock supplied."
+        },
+        "adjustment_revision": {
+          "verified": false,
+          "evidence": "No verified index adjustment/revision or vintage policy."
+        },
+        "available_at_receipt": {
+          "verified": false,
+          "evidence": "No historical publication/receipt evidence supplied."
+        }
+      }
+    },
+    {
+      "name": "EUROSTOXX50",
+      "path": "agents/codex/inputs/hunt_v2_prefix_equity_intake/euro-stoxx-50.json",
+      "source_git_blob_sha": "4f8e9955282171ea0825985f49f8da22e3cde46b",
+      "source_bytes": 885971,
+      "source_repository": "MohammadrezaAmani/Global-Stock-Market-Indices-Historical-Dataset",
+      "source_ref": "0e7218912d08aa5bfd9ff67123d44359b1e44eb4",
+      "source_path": "data/global-stocks/euro-stoxx-50.json",
+      "provenance": {
+        "vendor": {
+          "verified": false,
+          "evidence": "README names dataset author, not verified originating quote vendor."
+        },
+        "index_identity": {
+          "verified": false,
+          "evidence": "Instrument labels alone are not verified identity."
+        },
+        "close_clock_timezone": {
+          "verified": false,
+          "evidence": "No verified event/close timezone or receipt clock supplied."
+        },
+        "adjustment_revision": {
+          "verified": false,
+          "evidence": "No verified index adjustment/revision or vintage policy."
+        },
+        "available_at_receipt": {
+          "verified": false,
+          "evidence": "No historical publication/receipt evidence supplied."
+        }
+      }
+    }
+  ],
+  "expected_schema": {
+    "wrapper": "data",
+    "row_width": 8,
+    "columns": [
+      "Open",
+      "Low",
+      "High",
+      "Close",
+      "Abs_Change",
+      "Pct_Change",
+      "Gregorian_Date",
+      "Jalali_Date"
+    ]
+  },
+  "design_price_conversion_years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "other_years": "Gregorian date/row metadata only; never convert price/return fields",
+  "minimum_unique_design_dates_per_year": 240,
+  "unverified_provenance_blocks_admission": true,
+  "prices_fetched": false,
+  "hypotheses_added": 0,
+  "economic_evaluations_added": 0
+}
+
