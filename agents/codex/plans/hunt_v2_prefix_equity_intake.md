@@ -51,6 +51,9 @@ Convert ONLY2018-22 OHLC fields numerically for finite/positive/high-low/open-cl
 conflict checks. Never convert prices of2017-or-earlier or2023+, derive any price return, month-to-date signal,
 correlation, trade, t-stat, placebo or book performance. Archiving future raw bytes and counting future dates
 does not admit them as historical validation or permit inspecting their financial content.
+The source README explicitly advertises comma-grouped thousands: accept only correctly grouped English
+thousands separators in design OHLC, remove those separators before Decimal conversion, and reject malformed
+grouping such as12,34. This format support is frozen before acquisition; it is not a later data rescue.
 
 Report date range/counts by year, unique design dates, source ordering, missing/invalid dates/schema/OHLC and
 duplicate/conflicting design keys. Each design year2018..2022 must have>=240 unique dates per series as a

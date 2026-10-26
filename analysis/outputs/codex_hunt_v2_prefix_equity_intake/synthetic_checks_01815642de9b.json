@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "real_source_inputs_read": false,
+  "returns_signals_trades_metrics_calculated": false,
+  "checks": [
+    "strict data wrapper/eight fields",
+    "metadata names only",
+    "actual calendar/date format",
+    "240 unique dates in each of five design years required",
+    "design-only OHLC conversion; poison pre/post-design untouched",
+    "JSON numeric tokens retained as strings",
+    "OHLC integrity/nonfinite/bool/null rejection",
+    "duplicate date counts and design OHLC conflicts retained",
+    "provenance independent of numerical quality",
+    "Git blob SHA separate from SHA256",
+    "owned-path escape rejection"
+  ],
+  "runtime": {
+    "python": "3.12.14"
+  },
+  "script_sha256": "01815642de9baf870569fd0eb9ab43b9d866203dcd4f23103f78daf453585fa4"
+}
