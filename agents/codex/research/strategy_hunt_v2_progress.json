@@ -194,11 +194,15 @@
       "gross_screen_runs": 0,
       "data_or_returns_read_for_hypothesis": false,
       "prior_selection_and_seen_2023_disclosed": true,
-      "preregistration_commit": null,
+      "preregistration_commit": "2421d7e",
       "validation_run": false,
       "book_bench_run": false,
       "selected": null,
-      "registered_utc": "2026-10-26T15:33:42.411660+00:00"
+      "registered_utc": "2026-10-26T15:33:42.411660+00:00",
+      "predata_clarifications": [
+        "Known missing prior/PM features skip the day as registered in the plan; otherwise eligible scan/held gaps veto the screen. Evidence wording clarified before data.",
+        "Gross reporting adds SD and standard error; no economic rule or threshold change."
+      ]
     }
   ],
   "counted_evaluations": [
@@ -249,7 +253,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "H01 stays CLOSED. H02 registered before data: finish source-only gross implementation/checks, commit frozen implementation then run first-short/day2018-22 RAW_NO_STOP exactly once. Gross failure stops H02 before stopped/validation/bench returns; no retuning. Counts3/60 evaluations,2/10 hypotheses,1 prior gross screen. If pass, run only frozen SHORT_EXEC and unselectable BOTH_CAUSAL stopped designs, then immediate current19 personal BASE/ADD/REPLACE/EMPTY only after design pass. No t6/watchers/template runs.",
+  "next_action": "H02 gross source/fixtures completed without raw market reads. Final source-only checker then freeze/commit corrected evidence+implementation before the first2018-22 gross run. Effective preregistration is that pre-data clarification commit; original2421d7e retained. No stopped or2023/bench execution authorized unless prior gates PASS.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",

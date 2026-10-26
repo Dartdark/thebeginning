@@ -59,7 +59,9 @@ mechanistic prior. It does not justify describing this as a demonstrated forced-
 Root's announced protocol uses exactly 14 previous **normal cash-calendar slots**, each requiring all 405 RTH
 minutes 08:31–15:15, with no stretching farther back to replace a missing slot. Prior levels use the preceding
 normal slot, explicitly older across excluded holidays/early closes. Current PM requires all 330 minutes 03:01–08:30.
-Any missing prior/PM input is unresolved and vetoes a pass. The scan checks an observed prefix through its first
+Any missing prior/PM input causes a pre-entry known-input skip for that day, retained in the calendar audit;
+it does not globally veto the screen. This clarifies the root plan before any H02 data, not a changed gate.
+The scan checks an observed prefix through its first
 signal, or all 120 bars if no signal; its first missing minute makes that day unresolved. A first signal before
 a later gap is governed by the retained holding-path audit. These are substantive changes from old FVB.
 
@@ -95,7 +97,7 @@ not a claim that a measured outside cash flow maps dollar-for-dollar to futures 
 | Input | Source / fields | Coverage / warm-up | Point-in-time timing / revisions | Availability / cost |
 |---|---|---|---|---|
 | Native NQ one-minute OHLC | Existing owned day and overnight exports, loaded through the shared grid into allowed Codex runtime paths; open/high/low/close and native date/time | Initial root scope 2018–22 only; no 2017 source assumed. Exact usable coverage and duplicates/holes remain unmeasured here | Raw bar labels/source overlap/DST must be audited; current-day final membership may not be used | Existing repository/workspace input; no new purchase |
-| Prior RTH/PM statistics | Native bars under frozen normal-session calendar | Exactly 14 previous normal-calendar slots, each 405 complete RTH minutes; full 330 PM minutes today. No 2017 invented and no stretching over missing slots | Prior stats known after prior close; PM before first signal. Missing inputs remain unresolved and veto a pass | No independent paid input |
+| Prior RTH/PM statistics | Native bars under frozen normal-session calendar | Exactly 14 previous normal-calendar slots, each 405 complete RTH minutes; full 330 PM minutes today. No 2017 invented and no stretching over missing slots | Prior stats known after prior close; PM before first signal. Missing known inputs skip that day and remain audited; otherwise eligible scan/held holes veto the screen | No independent paid input |
 | Calendar / roll guard | Preknown normal/holiday/early-close calendar and conservative quarterly second-Thursday+0/1/4/5 proxy, frozen by root | Entire intended period; **not verified vendor-switch provenance** | Available before session. Do not call `rolls_index` or choose eligibility from later prices | Existing/public calendar; native continuous-contract splice uncertainty retained |
 | Current personal19 definitions | Adopted source pin `92b1d4c`, equal current plan source at `afde088`; retained baseline/replay adapters named in bench map | Design-period synchronized dates first; later 2023+ only after selection commit | ST/PT in, BB_MRM out. Preserve published booking/fee/coverage differences | Existing saved source/artifacts, not opened for this sheet |
 | Independent MC list for frozen short execution | None established in reviewed source tree | **Missing** | A BOTH ledger's short mask is not this executable state machine | Required later for confirmation; no user or live-system action taken |
