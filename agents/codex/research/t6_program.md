@@ -27,17 +27,11 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 | NQ Day Flow Six | Does not meet the corrected request | Existing6-leg composite; adjusted daily t6.77 is not a new standalone edge |
 | NQ Cash-Open Repair | Rejected | 3 candidates +2controls; all failed2018-22 design; no2023+ tested |
 | NQ Flow Absorption | Rejected | 3 candidates +2controls; primary4trades net-$454/NQ; no2023+ tested |
-
 | NQ Participation Resumption | Rejected | 3candidates+2controls; primary14trades,t0.385; no2023+ tested |
-
 | NQ Opening Pressure Consensus | Rejected confirmation | BasicCP5pass,t2.52; removes profitable controls; no2023+ tested. OWN5control t4.19 is a result-informed lead only |
-
 | NQ Opening Path Persistence | Below t6 after historical validation |25program evaluations/24unique; fulltrade t3.665,NW5 3.625;2023+t1.266. No retuning |
-
 | NQ Liquidity Vacuum Refill | Rejected |5models;primary15trades,t0.866,NW5 1.035;no2023+tested |
-
 | NQ Closing Auction Curvature | Rejected |5models;primary69trades,t-2.58;allcandidatesnegative;no2023+tested |
-
 | NQ Opening Value Rejection | Rejected |5models;primary1307trades,t-4.18;allnegative;no2023+tested |
 
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.

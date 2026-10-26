@@ -25,6 +25,15 @@ def main():
             x=t.copy()
             if col=='net_mnq':x['pnl']/=10.
             rows.append(dict(model=model,period='2018-26',side=col,**C.stats(x,days,column=col)))
+    gap_audit=[]
+    for row in models['OPP'][models['OPP'].unobserved_held_minutes>0].itertuples():
+        raw=pd.read_csv(ROOT/f'data/NQ_1min_{row.date.year}.csv',usecols=['date','time','close'])
+        raw=raw[(raw.date==int(row.date.strftime('%Y%m%d')))&raw.close.notna()]
+        minutes=set((raw.time//100*60+raw.time%100).astype(int))
+        missing=[j for j in range(row.j0,row.j1+1) if j not in minutes]
+        gap_audit.append(dict(date=str(row.date.date()),entry_j=int(row.j0),exit_j=int(row.j1),unobserved_minutes=missing,
+            observed_net_nq=float(row.net),treatment='Ticket and reported net retained; within-gap stop/target path unverifiable. Not a qualifying candidate.'))
+    C.dump(OUT/'validation_held_gap_audit.json',gap_audit)
     m=pd.DataFrame(rows);C.csv(OUT/'full_metrics.csv',m)
     filters['OPP']=C.filter_controls(models['OPP'],models['ALL5'],days);C.dump(OUT/'full_filter_diagnostics.json',filters)
     own=m[(m.model=='OPP')&(m.side=='all')].iloc[0]
