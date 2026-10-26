@@ -59,7 +59,8 @@ Full1000randomsubsets p(net>=kept)={filters['OPP']['p_random_net_ge_kept']:.3f};
 {filters['OPP']['p_kept_better_net_and_dd']:.1%}. See separate design/validation diagnostics for staged results.
 The previouslyrecorded designpass alert does not establish a qualifyingt6candidate. Validation is weaker,
 full dailydependenceadjustedt is below6. No threshold, side, sizing or exit substitution made aftervalidation.
-No missingheldminutes in primary. Intake audits no duplicateconflicts. SourceCTtime, completecashopen bars.
+Primary has {int(own.missing_held_minutes)} unobservedheldminute in historicalvalidation, retained rather than dropped;
+within-gap stop/targetpath unverified. See validation_held_gap_audit.json. Intake duplicateconflicts0; sourceCT, completecashopen.
 Target1pointthrough, protectedentrybar, worsestopgaps. Actualreceipt/spread/roll-splicefidelity unverified.
 
 No t6claim, promotion, independentchecker, fullaccountbench orPowerLanguage. Contingent expensiveplacebos/

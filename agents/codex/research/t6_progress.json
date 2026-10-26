@@ -3,9 +3,9 @@
   "status": "researching",
   "goal_met": false,
   "notification_event": null,
-  "latest_completed_hypothesis": "NQ Closing Auction Curvature",
-  "latest_result": "All three2018-22candidates lost;primary69trades,net-$5040.25/NQ,t-2.58,NW5 -2.51. No2023+tested; continue.",
-  "new_standalone_economic_configurations_tested": 35,
+  "latest_completed_hypothesis": "NQ Opening Value Rejection",
+  "latest_result": "All five candidate/control design models negative; primary1307trades net-$75795.75/NQ,t-4.181,NW5 -4.072. No2023+tested. Goal remains unmet; continue distinct mechanisms.",
+  "new_standalone_economic_configurations_tested": 40,
   "excluded_from_goal": "NQ Day Flow Six is an existing-signal composite, not a new standalone strategy.",
   "allowed_timeframes_minutes": [
     1,
@@ -13,7 +13,30 @@
     15,
     30
   ],
-  "next_action": "Preregister new opening time-occupancy value rejection rule; keep actual research distinct from read-only alerts.",
-  "last_report": "agents/codex/results/closing_auction_curvature.md",
-  "unique_economic_configurations": 34
+  "next_action": "Choose a DISTINCT mechanism after checking prior research; evidence sheet and <=5-model committed preregistration before new returns. Do not retune failed families on2023+.",
+  "last_report": "agents/codex/results/opening_value_rejection.md",
+  "unique_economic_configurations": 39,
+  "research_continuation": {
+    "title": "Continue standalone t6 research",
+    "schedule": "hourly",
+    "enabled_at_creation": true,
+    "purpose": "Perform research between messages; separate from read-only milestone alert watcher.",
+    "future_execution_status": "Scheduled; creation confirmed. Each run must verify workspace/data access and actual progress."
+  },
+  "best_completed_standalone": {
+    "name": "NQ Opening Path Persistence",
+    "symbol": "NQ / MNQ",
+    "timeframe_minutes": 5,
+    "period": "2018--2026-10-09",
+    "trades": 760,
+    "net_nq": 181485.0,
+    "net_mnq": 17757.1,
+    "t_trade_nq": 3.665394919153419,
+    "t_nw5_nq": 3.625031037142665,
+    "t_trade_mnq": 3.586344797,
+    "t_nw5_mnq": 3.547403,
+    "goal_met": false,
+    "limitations": "Nominated after design-control results;2023+weaker,one unobserved held minute;no independent promotion/accountcheck.",
+    "report": "agents/codex/results/opening_path_persistence.md"
+  }
 }

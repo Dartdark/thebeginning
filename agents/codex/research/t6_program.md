@@ -38,6 +38,8 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 
 | NQ Closing Auction Curvature | Rejected |5models;primary69trades,t-2.58;allcandidatesnegative;no2023+tested |
 
+| NQ Opening Value Rejection | Rejected |5models;primary1307trades,t-4.18;allnegative;no2023+tested |
+
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.
 
 ## Operating boundaries
@@ -59,3 +61,17 @@ Keep in-chat progress updates while actively researching. A notification watcher
 
 Recommended continuation: explore independently defined cash-liquidity/price-volume acceptance mechanisms,
 with exact new signals from raw data and no whole-book return combination. Recheck prior research before each plan.
+
+## Continuation between messages
+
+A separate app task, **Continue standalone t6 research**, was created successfully on2026-10-25LosAngeles
+with an hourly recurring schedule. It performs research; **Standalone t6 research alerts** stays read-only.
+Task creation is verified, not a claim that future executions or phone delivery have already happened.
+Each research run must verify actual workspace/raw-data access, resume committed unfinished work first,
+then progress to a distinct hypothesis after rejection. A read-only watcher message does not cancel the
+underlying research mandate. Avoid simultaneous writers. Preserve state on codex/work after concrete progress.
+If execution access is unavailable, say what is actually blocked; never count a GitHub status read as research.
+Stay quiet for ordinary failures/retries; notification_event only for material milestones or genuine user action.
+Pause the research continuation only after a concretely saved qualifying checked result, user cancellation,
+or a genuine execution blocker requiring user action. No unconditional promise that a t6edge must exist.
+The current best completed standalone point result is Opening Path Persistence,t3.665/NW5 3.625,NOTthegoal.
