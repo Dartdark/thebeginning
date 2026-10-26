@@ -28,6 +28,8 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 | NQ Cash-Open Repair | Rejected | 3 candidates +2controls; all failed2018-22 design; no2023+ tested |
 | NQ Flow Absorption | Rejected | 3 candidates +2controls; primary4trades net-$454/NQ; no2023+ tested |
 
+| NQ Participation Resumption | Rejected | 3candidates+2controls; primary14trades,t0.385; no2023+ tested |
+
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.
 
 ## Operating boundaries
