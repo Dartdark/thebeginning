@@ -41,20 +41,31 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.
 
 <!-- EIA_INPUT_WORK_START -->
-## Work in progress: EIA component input gate
+## Pending source work: EIA component input gate
 
 Committed source-intake plan5723c95: agents/codex/plans/eia_inventory_input_gate.md.
 Current report: agents/codex/results/eia_inventory_input_gate.md. Source-only research:261editions,
 165verified component triples,96excluded editions. NEEDS DATA for clocks/revisions/execution inputs;
 no economic preregistration or new strategy returns. Counts remain60/58unique. Scoped EIA source-access
 blocker recorded once; all t milestones unchanged. Network host www.eia.gov needs reviewed access.
-Resume this source intake before new return experiments; continue the program without pausing it.
+The source gate was resumed; access remains blocked. Preserve it while distinct research proceeds.
 Offline quarantine forensics inspected59captures:18quantified PDF editions and17complete issue/PDF pairs
 are already admitted; no additional eligible editions. See agents/codex/results/eia_quarantine_inventory.md.
 Do not repeat that audit on unchanged captures. Separate exchange-mechanics feasibility remains NEEDS DATA.
 The retained2022-12-29sample has actual Highlights text but no observed same-edition issue document;
 declared sample metadata alone cannot satisfy issue/release identity or justify admission.
 <!-- EIA_INPUT_WORK_END -->
+
+## Active economic preregistration: Flow Innovation Relaxation
+
+Plan: agents/codex/plans/flow_innovation_relaxation.md; evidence: agents/codex/evidence/flow_innovation_relaxation.md.
+One5-minute standalone signal fades conditional signed-FLOW surprises from a prior-only AR fit.
+Two selectable thresholds and three unselectable base/raw/change controls;5configurations frozen before returns.
+Implementation/design pending at preregistration; counts remain60/58 until actual execution.
+Weak economic prior: temporary impact may relax, but inventory/forced orders are unobserved and informed
+permanent impact may defeat the fade. No old tickets/return-target fitting, no failed-family retuning.
+Resume this committed design first; only2018-22 until design selection is separately committed.
+
 
 ## Operating boundaries
 
