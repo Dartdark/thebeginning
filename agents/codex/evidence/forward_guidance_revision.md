@@ -145,3 +145,13 @@ A later TEST sheet needs audited coverage, opportunity/power and transmission/co
 commit≤5configuration preregistration before2018–22 returns; selected-rule2023+ previously seen historical
 validation, dependence/selection/placebos, a fresh independent raw-spec checker and valid whole-contract
 account comparisons remain required. This document changes none of the user's boundaries or gates.
+
+## Public-source extension, 2026-10-26
+
+Source-only extension0e991ef/a7a551d inspected new public text without rerunning the local metadata census.
+See agents/codex/results/forward_guidance_public_sources.md and
+agents/codex/research/guidance_public_source_20261026.md. ECTSum supplies derivative guidance language,
+but generated training documents can use summary-conditioned line selection. Two filing candidates are
+a reduced Tesla2020fixture and an unrelated Oracle2024voting disclosure. No original comparable guidance
+pair, exact receipt clock or historical index transmission is admitted. Capture/coordination limits are
+retained in the result. NEEDS DATA, zero economic configurations/returns, no new alert.

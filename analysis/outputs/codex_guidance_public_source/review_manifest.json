@@ -1,0 +1,137 @@
+{
+  "audit": "guidance_public_source_discovery_20261026",
+  "source_only": true,
+  "discovery_calls": 4,
+  "transcript_files_read": 3,
+  "summary_files_read": 1,
+  "all_samples_are_pre_extension_discovery": true,
+  "source_extension_plan_commit": "0e991ef",
+  "extension_budget_exception": "Three transcript files and one associated summary were already read before parent allocated one ECTSum sample under0e991ef; stopped sample reads when notified. No budget-compliance or canonical intake claim.",
+  "admitted_original_guidance_pairs": 0,
+  "new_economic_configurations": 0,
+  "new_return_trials": 0,
+  "prices_read": false,
+  "strategy_returns_read": false,
+  "code_from_remote_executed": false,
+  "network_hosts_used": [
+    "GitHub via connected app"
+  ],
+  "captures": [
+    {
+      "capture": "earnings_guidance_corpus_search.json",
+      "sha256": "962036a1dd7d3dcf2122bc82725ad363d72690f3147d18a26f2cf7a8ecbb6726",
+      "source_git_blob_sha": null,
+      "source_url": null,
+      "error": null
+    },
+    {
+      "capture": "earnings_guidance_readme.json",
+      "sha256": "c48ae2351c6a2afa7bbbd1eab91c7ca0232925d86cd8cc2d56215dcc024c8b68",
+      "source_git_blob_sha": null,
+      "source_url": null,
+      "error": "GitHub API error 404: {\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#get-repository-content\",\"status\":\"404\"}"
+    },
+    {
+      "capture": "ectsum_commit.json",
+      "sha256": "580c0d81c25d9ba42adeebfb535a1e3c486a2768923b12de05677efb8bc14ef7",
+      "source_git_blob_sha": null,
+      "source_url": "https://api.github.com/repos/rajdeep345/ECTSum/commits/main",
+      "error": null
+    },
+    {
+      "capture": "ectsum_data_readme.json",
+      "sha256": "fe2e3ea0ae4e3d48c1bc3f94dff8375827abeb20bce58cd3c67ab5b30792a192",
+      "source_git_blob_sha": null,
+      "source_url": null,
+      "error": "GitHub API error 404: {\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#get-repository-content\",\"status\":\"404\"}"
+    },
+    {
+      "capture": "ectsum_license.json",
+      "sha256": "a26c0d9d8cede47eb5639a7376b8065922a779a2df4f93f5dbee92f32a7851f3",
+      "source_git_blob_sha": null,
+      "source_url": null,
+      "error": "GitHub API error 404: {\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#get-repository-content\",\"status\":\"404\"}"
+    },
+    {
+      "capture": "ectsum_license_txt.json",
+      "sha256": "78fcad1b64aa705e582984c96e5e9d6f69638502997e0e63b9f3332d8e1230d7",
+      "source_git_blob_sha": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "source_url": "https://github.com/rajdeep345/ECTSum/blob/6909f1fc543104c1c60cf9de63e799f6620d1b0a/LICENSE.txt",
+      "error": null
+    },
+    {
+      "capture": "ectsum_lyb_ect.json",
+      "sha256": "51b06748749558e8413eb68322844ca797a6d4689f1b00268fee31163785831f",
+      "source_git_blob_sha": "5ad307b1d3cb7a47ea8e09ca7d2af0e00515bea1",
+      "source_url": "https://github.com/rajdeep345/ECTSum/blob/main/data/final/train/ects/LYB_q1_2021.txt",
+      "error": null
+    },
+    {
+      "capture": "ectsum_lyb_summary.json",
+      "sha256": "a528639174e105b7f323dba8bec960bddf79ca45dba0d3192e85e5bee647229b",
+      "source_git_blob_sha": "5e52e98b96f755a78f88944663af1a43eea2e0ff",
+      "source_url": "https://github.com/rajdeep345/ECTSum/blob/main/data/final/train/gt_summaries/LYB_q1_2021.txt",
+      "error": null
+    },
+    {
+      "capture": "ectsum_noc_q2.json",
+      "sha256": "9ca005266465ef9fc8f032c6a2f7472774e8a25a07e8285b969a6972e74c863d",
+      "source_git_blob_sha": "4df31824acb337649fd7821a2c7fa6edcdf9ae75",
+      "source_url": "https://github.com/rajdeep345/ECTSum/blob/main/data/final/train/ects/NOC_q2_2021.txt",
+      "error": null
+    },
+    {
+      "capture": "ectsum_noc_q3.json",
+      "sha256": "e5258d933be3574ad62ab71ce3be9015e6be92cc4219ff59a150a4cb86f793c2",
+      "source_git_blob_sha": "1273b6068f8f893f4ae0d4bd1216593b92026205",
+      "source_url": "https://github.com/rajdeep345/ECTSum/blob/main/data/final/train/ects/NOC_q3_2021.txt",
+      "error": null
+    },
+    {
+      "capture": "ectsum_prepare.json",
+      "sha256": "56998b4d5167e5a9936bbd7493d334b2e37f2a9b99923d6f6c553932d220174d",
+      "source_git_blob_sha": "beab527916c391258114420d163602c22d769169",
+      "source_url": "https://github.com/rajdeep345/ECTSum/blob/main/prepare_data_ectbps_ext.py",
+      "error": null
+    },
+    {
+      "capture": "ectsum_readme.json",
+      "sha256": "e0379c8ee8b9231e80e572955d0876ce84b265417ad6fc04d97055b41b594848",
+      "source_git_blob_sha": "c1415924bac81b683ffb463418b9210f815af672",
+      "source_url": "https://github.com/rajdeep345/ECTSum/blob/main/README.md",
+      "error": null
+    },
+    {
+      "capture": "ectsum_repository_search.json",
+      "sha256": "4645f54aa2d0f8053b04965effabb81214889c4aad62e0ed852f8b2e28aa147e",
+      "source_git_blob_sha": null,
+      "source_url": null,
+      "error": null
+    },
+    {
+      "capture": "ectsum_train_files.json",
+      "sha256": "0cc095cb5f03da5ccdba19ddf66b272563318f5ff4f963a7894f7cde5e35fb5f",
+      "source_git_blob_sha": "a8afa0d8f9a4fc077cd32cd000bd258ae4cd36c6",
+      "source_url": "https://github.com/rajdeep345/ECTSum/blob/main/codes/ECT-BPS/ectbps_ext/data/train_files.txt",
+      "error": null
+    },
+    {
+      "capture": "guidance_dataset_search.json",
+      "sha256": "511cef5e64df55cb28fb45432709cab12fe7ac5933642bfad95ede1423c144ab",
+      "source_git_blob_sha": null,
+      "source_url": null,
+      "error": null
+    },
+    {
+      "capture": "guidance_small_search.json",
+      "sha256": "8f53e12989947efd920f92fc8b54110b40b187db8e8203507acd91b14a8e532f",
+      "source_git_blob_sha": null,
+      "source_url": null,
+      "error": null
+    }
+  ],
+  "decision": "NEEDS DATA; derivative guidance-text lead only",
+  "immutable_repo_head_observed": "6909f1fc543104c1c60cf9de63e799f6620d1b0a",
+  "branch_fetched": "main",
+  "pin_limit": "Sample paths were retrieved frommain with immutable Git blob IDs; observed current repository head separately. No original event-time version is established."
+}

@@ -90,6 +90,16 @@ distinct research without pausing the program or repeating routine-failure/block
 and existing raw futures data remain available. Economic counts65/63, last verified economic execution,
 best standalone result and all full-history milestones remain unchanged; the watcher is unchanged.
 
+Public guidance extension0e991ef/a7a551d completed: new ECTSum source reads found derivative guidance
+language, with summary-conditioned training preprocessing and unresolved original clocks/lineage. Three
+transcript files and one summary are retained; allocation/capture limitations are disclosed. Two further
+filing candidates are a reducedTesla2020fixture and unrelatedOracle2024Item5.07voting disclosure. No
+original guidance pair admitted, economic TEST or return trial; no t/milestone change. Result:
+agents/codex/results/forward_guidance_public_sources.md. Offline scripts verify retained source hashes;
+these are source-integrity checks, not a fresh raw-spec promotion checker. Do not repeat unchanged sample
+or corpus audits or use derived training text/old EPS-price rules as substitutes. Continue distinct evidence
+work and resume source gates only with genuinely new primary inputs. Execution/raw futures remain available.
+
 ## Operating boundaries
 
 Only codex/work. Preserve existing/untracked work, fetch before updates, pull before push; no resets/force pushes.
