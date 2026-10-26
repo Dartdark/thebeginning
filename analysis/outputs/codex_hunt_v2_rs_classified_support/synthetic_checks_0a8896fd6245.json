@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "checks": [
+    "literalHOLparsing;sharedentrycalendar;fixedEWMA1950andnativeclocks",
+    "independentRSside*Dgate;neutralKEEP;invalidaliasUNKNOWNKEEP;fixedsamewindowpricecontrol",
+    "featureevent/assumedavailability/decision/nextbarfillclockandDST",
+    "literalobservedRTHstate;2017featureonly;storedrangeatnextNewRTH;1950warmup",
+    "missingnativebarretainedinliteralstoredreference;noOHLCforwardfill",
+    "exactobservedNBA30/NEstcounts;oneESgapretainsEWMAlineageafter20rangebufferreplacements",
+    "ALLsource/ENTRY/heldgatesbeforeanyrawendpoint;failure0returns0screens",
+    "fixedtickparity;optionalclockunverified;presentclockmustbe541;zerooffsetsearch",
+    "grossBASEFLOWPRICEkeptremovedbyyearside;zeroandsingleeventSDSEt"
+  ],
+  "real_price_OF_MC_cache_rows_read": false,
+  "raw_or_stopped_or_account_returns_calculated": false,
+  "script_sha256": "0a8896fd6245c33df144710c6e1b9e46acea577da93fd4c8ec7a6550ee8aab99",
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  }
+}

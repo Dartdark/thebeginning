@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H04_preregistered_RS_classified_support_before_market_rows",
+  "status": "H04_source_pass_ready_for_committed_entry_first_execution",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -348,7 +348,7 @@
       "id": "H04",
       "name": "Relative Strength classified support",
       "kind": "new conditional input on adopted RS leg, within selected generic OF family",
-      "stage": "preregistered_before_market_rows",
+      "stage": "source_synthetic_pass_ready_for_single_frozen_entry_gross_run",
       "registered_utc": "2026-10-26T18:34:38.892299+00:00",
       "evidence": "agents/codex/evidence/hunt_v2_next_new_input.md",
       "source_review": "agents/codex/research/hunt_v2_next_new_input.md",
@@ -369,7 +369,20 @@
       "prior_RS_OF_H01_H03_selection_and_seen_2023_disclosed": true,
       "selected": null,
       "validation_run": false,
-      "book_bench_run": false
+      "book_bench_run": false,
+      "original_preregistration_commit": "164c954",
+      "gross_script": "analysis/codex_hunt_v2_rs_classified_support_gross.py",
+      "reviewed_gross_script_sha256": "e352e718a1706ad47e0d7065bd83c08d18ab8596ba521f911ad1d0d09e4bbef0",
+      "entry_XML_helper": "analysis/codex_hunt_v2_rs_mc_entry_xml.py",
+      "reviewed_XML_helper_sha256": "2aca3ed1d94ce67406ff5682277a49b42438ad72d22fc67358e2b2e6103a6c49",
+      "preexecution_source_review": "agents/codex/reviews/hunt_v2_rs_classified_support_preexecution.md",
+      "predata_clarifications": [
+        "Unbounded EWMA lineage remains unresolved indefinitely; bad stored range clears only by actual buffer replacement. Invalid830anchor propagates, and all eligible decision references gate admission including side0.",
+        "Literal source DayOK controls state; additional shared calendar excludes entries only.",
+        "MC time optional: absent is unverified without inventedclock; malformed/present mismatchingclock cannot pass. RequiredDate/Type/Price selected rawXML gates precede financialcell conversion.",
+        "Fullannual2017sourcequality parsing allowed, parentstate starts20170901 and no2017performance.",
+        "Pre-raw exceptions retain exact SOURCE_FORMAT_OR_IMPLEMENTATION_BLOCKED status; no automatic rerun and no false zero-return claim after raw boundary."
+      ]
     }
   ],
   "counted_evaluations": [
@@ -529,7 +542,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-26T18:34:38.892316+00:00",
+  "updated_utc": "2026-10-26T18:46:28.258565+00:00",
   "current_adopted_source_commit": "7f0800ffc04d56bd878750369a4abc2316ee01d8",
   "current_adopted_source_reconciliation": "7f0800f source adds lessons/docs/exporter; adoptedbook/ranking sources are unchanged from615485f; no operational file or other-branch writes. CurrentSTv3parent source archived exactly forH03.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",

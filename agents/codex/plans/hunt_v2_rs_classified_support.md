@@ -49,6 +49,9 @@ headers, size/SHA and source/dependency hashes bind before values. Native2017 is
 2017-09-01; no2017performance or2023+ prices/OF/MC outcomes. Use Grid24 in isolated Codex caches;
 deduplicate only identical source rows with IDs retained; conflicts veto admission. Do not load broad
 shared caches/pickles or silently forward-fill OHLC/ES/source quantities.
+Scope clarification before rows: full annual2017 numeric source-quality inspection is allowed by the
+bound annual files/Grid24, but parent state starts2017-09-01, with no earlier feature use and no2017
+return/performance evaluation. This is not a pre-September numeric-conversion embargo.
 
 ## Five definitions and budget
 
