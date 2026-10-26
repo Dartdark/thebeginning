@@ -30,6 +30,8 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 
 | NQ Participation Resumption | Rejected | 3candidates+2controls; primary14trades,t0.385; no2023+ tested |
 
+| NQ Opening Pressure Consensus | Rejected confirmation | BasicCP5pass,t2.52; removes profitable controls; no2023+ tested. OWN5control t4.19 is a result-informed lead only |
+
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.
 
 ## Operating boundaries
