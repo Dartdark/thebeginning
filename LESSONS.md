@@ -16,6 +16,8 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
   was sized to still work at 75% (2026-10-18).
 
 ## Testing
+- Cutting Vault Break when an evaluation's cushion is thin does not lower the fail rate per pass (0.95-1.02 vs 0.96 for
+  VB 8 always; pass 47.7-48.4% vs 50.1%): a thin-cushion evaluation needs the full size to get back up (account #1 fail, 2026-10-26).
 - The one-history funded bench overstates swaps: +$700 'gains' at 2 MNQ blew 17-22% on the bootstrapped bench. Decide plan
   changes only on the bootstrapped bench (replacement sweep, 2026-10-18).
 - Always test a candidate against the slot left EMPTY, not only against the plan: cutting Vault Break looked like a noise-band
