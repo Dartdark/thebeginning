@@ -16,9 +16,13 @@ conflicting duplicate keys block intake. Audit raw native duplicates too. Record
 
 Use C.normal_cash/codex_s03_calendar, excluding all weekdayJuly3/December24 and C.roll_guard dates.
 Do not use future-dependent g.trading membership. Five-minute bars align to midnight and contain j-4..j.
+For each complete bar sum buy and sell FIRST, then q_bar=(sum_buy-sum_sell)/(sum_buy+sum_sell);
+never take the unweighted mean of the five minute-level signed fractions.
 Construct q for closes08:55..14:00CT every5minutes. Decision closes09:00..14:00; previous q is exactly j-5,
 with both bars in the same session. Complete current and lag input bars are mandatory for EVERY model.
-Prior15-weekday ATR is the shared shifted daily_atr(15), finite positive; preserve its continuous-roll limits.
+ATR is the shared shifted daily_atr(15), finite positive: its actual implementation uses the prior15 STORED
+weekday true-range observations, dropping missing dates. Audit/report those semantics and its continuous-roll
+limits. This is distinct from the exact20normal-calendar-date FLOW training slots below.
 
 For each date, its training slots are the exact previous20 C.normal_cash calendar dates. Do not stretch
 the window for missing raw dates. Roll-guard training slots contribute zero pairs. Within other slots use
@@ -109,3 +113,7 @@ Only actual material milestones create a new notification_event. EIA access bloc
 Deliver analysis/codex_flow_innovation_relaxation*.py, analysis/outputs/codex_flow_innovation_relaxation/,
 agents/codex/results/flow_innovation_relaxation.md. Onlycodex/work and user-authorized research paths;
 no shared ranks/plans/rootTODO/live/VPS/broker/API/purchases/accounts/external messages/watcher edits.
+
+Pre-return clarification: the initial preregistration is a2a0cc7. Before any new strategy returns, the ratio-of-
+summed-quantities definition and actual shared-ATR stored-date semantics were made explicit; no economic
+parameters, direction, variants or observed outcomes changed. Bind execution to this clarified plan's commit.

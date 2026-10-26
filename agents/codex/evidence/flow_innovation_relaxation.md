@@ -47,7 +47,8 @@ and conservative roll handling limit mismatches but do not establish original fe
 | Calendar | codex_s03_calendar and codex_cash_open_repair helpers | Native CT labels, normal cash days, predeclared roll guard; missing bars are not certified closures |
 
 The exporter documents per-bar aggressor quantities. OF `volume` is BUY volume, not total: reconstruct
-total=upvol+downvol and signed fraction=(upvol-downvol)/total. Do not difference cum_delta or manufacture
+total=upvol+downvol; sum five-minute buy/sell quantities first, then signed fraction=(sum_buy-sum_sell)/sum_total.
+Do not average minute fractions, difference cum_delta or manufacture
 bars with NaN sums. The new study requires every input minute to have valid OHLCV, valid quantities,
 native/source close agreement within one tick and exact native volume=buy+sell. Conflicting duplicates
 block intake; failures remain audited. Data masks must be identical for candidates/controls.
