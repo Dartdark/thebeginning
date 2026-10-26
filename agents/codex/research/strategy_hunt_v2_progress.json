@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H03_preregistered_swing_opening_agreement_before_data",
+  "status": "H03_closed_input_gate_saved_entry_codec_diagnostic_pending",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -287,12 +287,12 @@
       "id": "H03",
       "name": "Swing Target v3 whole-day opening price/classified-flow agreement",
       "kind": "new independent-input whole-day filter on current adopted book leg; true parent subset",
-      "stage": "preregistered_before_data",
+      "stage": "closed_source_coverage_gate_codec_reporting_diagnostic_pending",
       "registered_utc": "2026-10-26T17:41:39.830570+00:00",
       "evidence": "agents/codex/evidence/hunt_v2_book_filter_nomination.md",
       "source_review": "agents/codex/research/hunt_v2_book_filter_nomination.md",
       "plan": "agents/codex/plans/hunt_v2_swing_opening_agreement.md",
-      "preregistration_commit": null,
+      "preregistration_commit": "16ed951",
       "planned_models": [
         "MC_PUBLISHED_reference",
         "REPLAY_BASE_reference",
@@ -304,7 +304,7 @@
       "planned_additional_counted_delay_evaluations_only_after_design_and_bench_pass": 2,
       "actual_counted_evaluations": 0,
       "gross_screen_runs": 0,
-      "data_or_returns_read_for_hypothesis": false,
+      "data_or_returns_read_for_hypothesis": true,
       "prior_parent_flow_selection_and_seen_2023_disclosed": true,
       "selected": null,
       "validation_run": false,
@@ -318,7 +318,17 @@
       ],
       "gross_script": "analysis/codex_hunt_v2_swing_opening_gross.py",
       "reviewed_gross_script_sha256": "ab2efb88a1b492eacf01cec032b57f2a27aa1fde166dfee9d1cb5d8ac8377a56",
-      "preexecution_source_review": "agents/codex/reviews/hunt_v2_swing_opening_preexecution.md"
+      "preexecution_source_review": "agents/codex/reviews/hunt_v2_swing_opening_preexecution.md",
+      "gross_implementation_commit": "16ed9512695823aab4ef5bb5a9c7c0912288380e",
+      "source_or_entry_metadata_read": true,
+      "raw_returns_calculated": false,
+      "entry_admission_marker": "analysis/outputs/codex_hunt_v2_swing_opening/pre_gross_verified_execution.json",
+      "source_coverage_limits": {
+        "parent_entries": 331,
+        "unresolved_reference_events": 34,
+        "unresolved_native_prefix_days": 5
+      },
+      "MC_codec_limitation": "Originalstudyparserexpectedclockstrings;retainedCSVt_inusesrepoHHMM848/1145/900. Zero initialmatchesareNOTparentstrategyfailure. Separatecommittedsaved-entrydiagnosticonly,nofinancialrerun."
     }
   ],
   "counted_evaluations": [
@@ -385,7 +395,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "H03source/syntheticsPASS19groups withoutrealdata. Freeze/commit exactcode+clarifiedplan/evidence/archive, thenrunone gross command. ItFIRSTaudits2018-22parentENTRYmetadata; ifparityFAILsavepre_gross0returns/0screens/0economicevalsandclose. IfPASScalculateONLYfirstparententry/day->OPEN900RAW_NO_STOP, strictwholeDAYflowfilter/gates. No stopped/MCexit-net/2023/benchreads beforegrossPASS.3/60eval3/10hyp2priorgrossscreens. H01/H02/I01closed; no t6/watchers/templateexec.",
+  "next_action": "H03CLOSEDatfrozenreference/prefixcoveragegate:34entryrefs unresolved and5nativeprefixdays; someMarch2020missingprintsconsistentwithhalts, notfeedcorruptionproof. Originalpre_gross has0raw/stopreturns and0newgrossscreens/evals. FixreportingONLYviaNEWprecommittedsaved-entryHHMMdiagnostic, nooldgross/grid/endpoint/net/benchrerun, noparitytolerance/offsetsearch. Evenifcodecparitypasses,H03staysclosed. ThencontinueDISTINCThypothesis/input, preserveH01/H02/I01. Counts3/60eval3/10hyp2screens, prior65t6archived, no t6/watchers/templates.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -478,7 +488,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-26T17:41:39.830591+00:00",
+  "updated_utc": "2026-10-26T18:05:58.707687+00:00",
   "current_adopted_source_commit": "7f0800ffc04d56bd878750369a4abc2316ee01d8",
   "current_adopted_source_reconciliation": "7f0800f source adds lessons/docs/exporter; adoptedbook/ranking sources are unchanged from615485f; no operational file or other-branch writes. CurrentSTv3parent source archived exactly forH03.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -533,5 +543,19 @@
   },
   "last_source_quality_report": "agents/codex/results/hunt_v2_prefix_equity_intake.md",
   "last_financial_report": "agents/codex/results/hunt_v2_fvb_short_execution.md",
-  "source_quality_runs": 1
+  "source_quality_runs": 1,
+  "entry_admission_audits": [
+    {
+      "hypothesis": "H03",
+      "marker": "analysis/outputs/codex_hunt_v2_swing_opening/pre_gross_verified_execution.json",
+      "phase": "pre_gross",
+      "completed_utc": "2026-10-26T17:53:47.414771+00:00",
+      "raw_returns_calculated": false,
+      "new_gross_screens": 0,
+      "new_economic_evaluations": 0,
+      "native_references_unresolved": 34,
+      "native_prefix_days_unresolved": 5,
+      "codec_reporting_diagnostic": "agents/codex/plans/hunt_v2_swing_mc_codec_diagnostic.md"
+    }
+  ]
 }
