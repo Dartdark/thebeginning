@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H01_closed_continue_next_hypothesis",
+  "status": "H02_preregistered_gross_screen_pending",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -15,7 +15,7 @@
     "max_counted_evaluations": 60,
     "max_hypotheses": 10,
     "counted_evaluations": 3,
-    "hypotheses_started": 1,
+    "hypotheses_started": 2,
     "gross_screens_run": 1,
     "stop_on_either_limit": true,
     "prior_t6_evaluations": 65,
@@ -66,6 +66,12 @@
       "scope": "priority4 B confirmations",
       "decision": "most adopted/rejected; remaining MC prerequisites incomplete",
       "report": "agents/codex/research/hunt_v2_confirmation_readiness.md",
+      "new_returns": false
+    },
+    {
+      "scope": "priority1-3 next-source eligibility and current occupancy correction",
+      "decision": "No new TEST justified by scoped prior-family/input review; current adopted OT can occupy01-03CT. Continue explicitly authorized FVB confirmation with own TEST evidence.",
+      "report": "agents/codex/research/hunt_v2_next_priority_source.md",
       "new_returns": false
     }
   ],
@@ -170,6 +176,29 @@
         "random_profit_at_least_actual_p": 0.17582417582417584,
         "random_dd_at_most_actual_p": 0.6563436563436563
       }
+    },
+    {
+      "id": "H02",
+      "name": "FVB independently executable shorts",
+      "kind": "result-informed B confirmation with independently executable short state and causal source corrections",
+      "stage": "preregistered_before_data",
+      "evidence": "agents/codex/evidence/hunt_v2_fvb_short_execution.md",
+      "plan": "agents/codex/plans/hunt_v2_fvb_short_execution.md",
+      "source_review": "agents/codex/research/hunt_v2_fvb_source_review.md",
+      "planned_models": [
+        "SHORT_EXEC",
+        "BOTH_CAUSAL_reference_unselectable"
+      ],
+      "planned_counted_evaluations_after_gross_pass": 2,
+      "actual_counted_evaluations": 0,
+      "gross_screen_runs": 0,
+      "data_or_returns_read_for_hypothesis": false,
+      "prior_selection_and_seen_2023_disclosed": true,
+      "preregistration_commit": null,
+      "validation_run": false,
+      "book_bench_run": false,
+      "selected": null,
+      "registered_utc": "2026-10-26T15:33:42.411660+00:00"
     }
   ],
   "counted_evaluations": [
@@ -220,7 +249,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "H01 is CLOSED: gross passed but stopped STRICT30 design failed3/5positiveyears,totalkept<BASE,removedprofitpositive,andonly32.9%matchedjointbeats. Do NOT rerun or nominateLEGACY. No2023,bench/MC/PL warranted. Start a different v2 hypothesis following priority/novelty search, mechanism BEFORE data and committed<=5configuration prereg, retaining current book/empty-slot requirements. Useruploads remainREFERENCEONLY,notrunnablecandidates. Remaining budget57countedevaluations or9hypotheses; stop at either cap and summarize. Also consult merged24dce9aSundayOpening rejection as prior research; it is a separate study, not a new template run or v2 hypothesis.",
+  "next_action": "H01 stays CLOSED. H02 registered before data: finish source-only gross implementation/checks, commit frozen implementation then run first-short/day2018-22 RAW_NO_STOP exactly once. Gross failure stops H02 before stopped/validation/bench returns; no retuning. Counts3/60 evaluations,2/10 hypotheses,1 prior gross screen. If pass, run only frozen SHORT_EXEC and unselectable BOTH_CAUSAL stopped designs, then immediate current19 personal BASE/ADD/REPLACE/EMPTY only after design pass. No t6/watchers/template runs.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -292,6 +321,20 @@
       "v2_budget_charge": 0,
       "selection_history_limit": "Additional prior/source research, not independent evidence; do not rediscover the rejected configuration.",
       "integration": "Merged intact without reset,force push or parameter changes."
+    },
+    {
+      "commit": "a883989",
+      "kind": "independent public repository/template reference review",
+      "run_or_modified_by_this_v2_hunt": false,
+      "v2_budget_charge": 0
+    },
+    {
+      "commit": "7d1e6a2",
+      "kind": "Jansen research-controls operating supplement",
+      "integration": "Safely fast-forwarded; applicable H02 clock/manifest/cost bridge requirements added before data.",
+      "run_or_modified_by_this_v2_hunt": false,
+      "v2_budget_charge": 0
     }
-  ]
+  ],
+  "notification_event": null
 }
