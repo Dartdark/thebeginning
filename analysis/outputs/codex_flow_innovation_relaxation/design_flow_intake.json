@@ -1,0 +1,23 @@
+{
+  "rows_before": 515156,
+  "exact_duplicate_rows": 0,
+  "duplicate_key_rows": 0,
+  "conflicting_keys": 0,
+  "first": 20180102,
+  "last": 20221230,
+  "cutoff": "2022-12-31",
+  "valid_input_minutes": 497083,
+  "unmapped_rows": 0,
+  "failed_rows": 18073,
+  "failures_by_flag": {
+    "native_date_mapped": 0,
+    "native_ohlc_valid": 418,
+    "native_volume_valid": 418,
+    "flow_quantities_valid": 0,
+    "close_within_one_tick": 17376,
+    "exact_total_volume_match": 18053
+  },
+  "source_clock": "ET minute-close minus60minutes -> CT minute-close; original receipt unverified",
+  "quantity_semantics": "upvol=buy,downvol=sell,total=sum; OF volume is NOT total",
+  "contract_mapping": "individual native contract IDs unavailable; strict observed close/total agreement is limited corroboration"
+}

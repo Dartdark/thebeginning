@@ -37,6 +37,7 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 | NQ Relative Turnover Switch | Rejected |5models;primary192trades,t-0.365,NW5 -0.371;no2023+tested;program50/49unique |
 | NQ Auction Demand Confirmation | Rejected | 5 models; primary 199 trades, t-0.378, NW5 -0.344; no 2023+ tested; program55/54 unique |
 | NQ Correlation Risk Budget | Rejected |5evaluations/4newunique;primary44trades,t-1.524,NW5-1.669;no2023+tested;program60/58unique;redundant threshold disclosed |
+| NQ Flow Innovation Relaxation | Rejected |5models;primary4167trades,net-$82,215.75,t-2.717,NW5-2.578;secondary2252,net-$87;allnegative;no2023+;program65/63unique |
 
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.
 
@@ -46,7 +47,7 @@ The repository has hundreds of older ranked ideas and unenumerated author search
 Committed source-intake plan5723c95: agents/codex/plans/eia_inventory_input_gate.md.
 Current report: agents/codex/results/eia_inventory_input_gate.md. Source-only research:261editions,
 165verified component triples,96excluded editions. NEEDS DATA for clocks/revisions/execution inputs;
-no economic preregistration or new strategy returns. Counts remain60/58unique. Scoped EIA source-access
+no EIA economic preregistration or strategy returns. Program counts65/63unique after the separate flow study. Scoped EIA source-access
 blocker recorded once; all t milestones unchanged. Network host www.eia.gov needs reviewed access.
 The source gate was resumed; access remains blocked. Preserve it while distinct research proceeds.
 Offline quarantine forensics inspected59captures:18quantified PDF editions and17complete issue/PDF pairs
@@ -56,16 +57,25 @@ The retained2022-12-29sample has actual Highlights text but no observed same-edi
 declared sample metadata alone cannot satisfy issue/release identity or justify admission.
 <!-- EIA_INPUT_WORK_END -->
 
-## Active economic preregistration: Flow Innovation Relaxation
+## Latest economic result: Flow Innovation Relaxation
 
-Plan: agents/codex/plans/flow_innovation_relaxation.md; evidence: agents/codex/evidence/flow_innovation_relaxation.md.
-One5-minute standalone signal fades conditional signed-FLOW surprises from a prior-only AR fit.
-Two selectable thresholds and three unselectable base/raw/change controls;5configurations frozen before returns.
-Implementation/design pending at preregistration; counts remain60/58 until actual execution.
-Weak economic prior: temporary impact may relax, but inventory/forced orders are unobserved and informed
-permanent impact may defeat the fade. No old tickets/return-target fitting, no failed-family retuning.
-Resume this committed design first; only2018-22 until design selection is separately committed.
+Report: agents/codex/results/flow_innovation_relaxation.md. Five frozen5-minute models ran2018-22 once;
+original preregistration a2a0cc7, clarified0f5e49c, implementation frozen518246c. Both candidates failed.
+Primary4167trades,net-$82,215.75/NQ,t-2.717,NW5-2.578; second2252,net-$87. All controls negative.
+No selected rule,2023+validation, accounts, raw-spec promotion check orPowerLanguage. All executable
+ledgers have zero invalid held OHLC;12BASE5 independent diagnostic paths contain45overlapping invalid
+OHLC observations (not45distinct minutes), retained. Nonexecutable subset paths4000; program65/63unique.
+This family is closed: no reversed fade, threshold/window retune or control nomination.
 
+## Next distinct evidence gate: MBS duration state
+
+Evidence: agents/codex/evidence/mbs_duration_state.md; source review:
+agents/codex/research/mbs_duration_state_feasibility.md. NEEDS DATA, zero returns, no economic plan.
+The genuine increment would be as-of mortgage risk/exposure changes and an evidenced hedge adjustment.
+Saved literature discusses swaps, not compulsoryZNorders. Primary states, timing and futures transmission
+are missing; a ZN-price-momentum substitute would recycle an existing family. Do not test it under a new label.
+Resume pending source gates only as new access/evidence permits, and continue distinct research without
+pausing the program or repeating delivered blocker/routine-failure alerts. All full-history milestones unchanged.
 
 ## Operating boundaries
 
