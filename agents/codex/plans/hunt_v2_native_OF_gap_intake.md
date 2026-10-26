@@ -51,6 +51,12 @@ states, duplicate conflicts and all mismatch IDs by frozen year/calendar/source 
 diagnostic is not an admission threshold. Retain every matching or mismatching original source ID.
 Only identical selected-field duplicate rows may collapse once with all IDs retained; contradictory
 duplicates remain unresolved and never pick a favorable observation.
+Pre-data codec clarification: selected numeric equality uses exact finite Decimal values without
+rounding/tolerance;100and100.0 are the same value. Retain their raw formats and original IDs and
+report format variation separately. Unequal numeric tuples are duplicate conflicts, never resolved
+by choosing a row. Dates use eight ASCII YYYYMMDD digits; clocks use1–4ASCII HHMM digits, after
+surrounding ASCII whitespace stripping. Validate actual dates and HH/MM ranges before the fixed
+ET-to-CT mapping; mapped outside-scope keys remain metadata only. No comma/NaN/missing repair.
 
 After common-key results are saved, inspect the prebound OF_ONLY list for OHLC/quantity validity,
 zero/unknown states and coverage. Retain its standalone raw observation ledger; do not insert it into
@@ -71,6 +77,9 @@ committed plan/code/source/dependencies, exclusive lock, fixed output directory,
 or partial attempt, write-once artifacts and verified marker binding every output/input. Retain actual
 exceptions/partial stages without economic claims or automatic retry. Nothing after any failure may
 be relabelled as a pass. Keep all runtime caches in that allowed directory.
+Large all-key, source-ID and mismatch ledgers may use deterministic gzip compression (mtime0),
+retaining every record. The marker binds compressed bytes; ordinary gzip decoding reproduces the
+full ledger. Compression is storage only, not sampling or a changed comparison universe.
 
 Synthetic checks: ET/CT rollover and invalid clocks, fixed-calendar key enumeration, all four presence
 states, duplicate IDs/conflicts, identical closes with different opens/highs/lows, invalid/zero fields,

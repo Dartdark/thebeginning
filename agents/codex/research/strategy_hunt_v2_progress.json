@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "I03_preregistered_nonreturn_native_OF_concordance_before_values",
+  "status": "I03_source_pass_ready_for_committed_nonreturn_concordance_execution",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -563,7 +563,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-26T19:00:46.540942+00:00",
+  "updated_utc": "2026-10-26T19:11:11.744046+00:00",
   "current_adopted_source_commit": "7f0800ffc04d56bd878750369a4abc2316ee01d8",
   "current_adopted_source_reconciliation": "7f0800f source adds lessons/docs/exporter; adoptedbook/ranking sources are unchanged from615485f; no operational file or other-branch writes. CurrentSTv3parent source archived exactly forH03.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -631,7 +631,7 @@
     {
       "id": "I03",
       "name": "Native versus OF OHLC missing-key and same-key concordance",
-      "stage": "preregistered_nonreturn_input_quality_before_new_joins",
+      "stage": "source_synthetic_pass_ready_for_single_nonreturn_intake",
       "plan": "agents/codex/plans/hunt_v2_native_OF_gap_intake.md",
       "source_note": "agents/codex/research/hunt_v2_native_OF_gap_source.md",
       "archival_exporter_manifest": "agents/codex/inputs/hunt_v2_native_OF_gap_intake/source_manifest.json",
@@ -641,7 +641,17 @@
       "financial_return_tests": 0,
       "hypotheses_added": 0,
       "economic_evaluations_added": 0,
-      "gross_screens_added": 0
+      "gross_screens_added": 0,
+      "initial_plan_commit": "41ef515",
+      "script": "analysis/codex_hunt_v2_native_OF_gap_intake.py",
+      "reviewed_script_sha256": "7006e9634004f95da3b9ad602592df001a41513a70411c6c719246c8a886e334",
+      "helper": "analysis/codex_hunt_v2_native_OF_gap_numeric.py",
+      "reviewed_helper_sha256": "b08e43b4d61bd1b38a2691bb145794f9f5cb4c1ca41e991695243ada3339b220",
+      "preexecution_review": "agents/codex/reviews/hunt_v2_native_OF_gap_preexecution.md",
+      "predata_clarifications": [
+        "Exact finite Decimal numeric duplicate equality retains all raw formats/IDs. No rounding/tolerance or favorable choice.",
+        "Large full ledgers deterministically gzip compressed, retaining every record; compressed bytes are hash-bound."
+      ]
     }
   ],
   "last_source_quality_execution": {
