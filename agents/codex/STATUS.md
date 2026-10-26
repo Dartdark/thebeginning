@@ -100,3 +100,13 @@ results), GC_COMBO v2 (WATCH; Claude since got the MC report: C, worse on the fu
   nine plan lists) and fixed the code (Monday Long skips Jul 3 / Dec 24 Mondays, NFP Fade skips Good Friday); paste in
   `TODO.md`; `MULTICHARTS_PITFALLS.md` entry added.
 - Swing Target and Overnight Rebound: already handled on the Claude branch (TIER_LIST rows; Swing Target v3 in the plans).
+
+## Codex 2026-10-26 overnight (codex/work 63f557d), read by Claude 2026-10-26: the standalone t6 program
+User mandate to Codex (2026-10-25): keep researching until a NEW standalone strategy reaches trade t and daily NW(5) t >= 6.
+14 pre-registered hypotheses, 65 counted evaluations (63 unique), **none passes**; every rejection stopped at the 2018-22
+design screen except two: Opening Path Persistence (design t 4.19 -> 2023+ t 1.27, full 3.67: decayed, not retuned) and
+Opening Pressure (CP5 t 2.52; its OWN5 control t 4.19 is result-informed, a lead only). Two data gates blocked: EIA
+inventory components (eia.gov not reachable from Codex's environment) and forward-guidance revisions (no clean source).
+Claude's view: process is clean (pre-registration, design-first stop rules, trial ledger). A standalone t >= 6 is about
+2x the best strategy in the book (VB t 4.6; whole 6-leg plan t 6.8); each failed trial raises the multiple-testing bar
+for the next. Suggested to the user: cap the program or redirect it (e.g. data the book lacks, or confirmation of B items).
