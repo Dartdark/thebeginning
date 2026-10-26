@@ -32,7 +32,7 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 
 | NQ Opening Pressure Consensus | Rejected confirmation | BasicCP5pass,t2.52; removes profitable controls; no2023+ tested. OWN5control t4.19 is a result-informed lead only |
 
-| NQ Opening Path Persistence | Design pass; validation pending |5evaluations(4new+1renomination);418trades,t4.19,NW5 4.29; result-informed selection disclosed |
+| NQ Opening Path Persistence | Below t6 after historical validation |25program evaluations/24unique; fulltrade t3.665,NW5 3.625;2023+t1.266. No retuning |
 
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.
 

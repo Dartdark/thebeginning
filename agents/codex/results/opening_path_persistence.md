@@ -1,16 +1,16 @@
-# NQ Opening Path Persistence: CANDIDATE, design only
+# NQ Opening Path Persistence: below t6; research continues
 
-Summary: A result-informed new standalone5minNQ entry passed the frozen follow-up design checks.
-2018-22:418trades,net$133,599.50/NQ,trade t4.187,dailyNW5 t4.294,PF1.778;5/5years positive.
-Three neighboring settings t3.70--4.35 and all positive. Filter beats matched random subsets.
-NOT t6:2023+historical validation, matched-exit placebos, dependence/selection checks and independent review remain.
+Summary: The frozen standalone5minNQ rule passed design but weakened in historical validation.
+2018-22:418trades,t4.187,NW5 4.294.2023+:342trades,t1.266,NW5 1.225,net$47,885.50/NQ.
+Full:760trades,net$181,485.00/NQ,trade t3.665,dailyNW5 t3.625,PF1.435.
+Goal notmet. Preserve the failedt6test; continue a different mechanism, without substituting a neighboring variant.
 
-Plan: agents/codex/plans/opening_path_persistence.md,b2875a3; source control31eeb11.
-Script: analysis/codex_opening_path_persistence.py, shared analysis/codex_t6_study_support.py.
+Plan: agents/codex/plans/opening_path_persistence.md,b2875a3. Design committed0275510beforevalidation.
+Scripts: analysis/codex_opening_path_persistence.py,analysis/codex_opening_path_persistence_summary.py.
 Outputs: analysis/outputs/codex_opening_path_persistence/.
-Trials:5follow-up evaluations,4unique new configurations plus1prior-control nomination; program25evaluations,
-24unique economic rules plus unknown older repository/author searches. Nomination chosen after source2018-22
-results; NOT an independently preregistered discovery or a five-trial universe. Primary preset before this follow-up.
+Trials:5follow-upevaluations,4uniquenewsettings+1prior-controlnomination; program25evaluations/24unique.
+Nomination selectedafter originalsource-control2018-22results; notindependentpreregistration. Unknown older
+repository/author searches remain;2023+ispreviouslyseenhistoricalreplication,nota freshholdout.
 
 ## How the trade works
 
@@ -22,9 +22,9 @@ ES/YMprice directions have no role. Normal cash days, noJuly3/December24. No old
 NQ$7.25RT+1tick($5)per market/stopfill; target1pointthrough. NativeMNQ$1.24RT+$0.50/fill, independently.
 Fourtickfillstress fixed, not a selected model. Same source control ledgers reproduced exactly before reporting.
 
-## Design results
+## Results
 
-Dollars/NQ except net_mnq rows in nativeMNQ. Daily cashsessionzeros,initialzeroDD; all/side/year metrics below.
+Dollars/NQ except net_mnq rows in nativeMNQ. Standardrepo metrics, initialzeroDD and cash-dayzeros.
 
 | model | period | side | trades | win | avg | total | t_trade | t_nw5 | t_nw20 | sharpe | sortino | profit_factor | calmar | ulcer | max_dd | cost | missing_held_minutes |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -128,18 +128,65 @@ Dollars/NQ except net_mnq rows in nativeMNQ. Daily cashsessionzeros,initialzeroD
 | ALL5 | 2022 | short | 115 | 0.33913 | 375.32 | 43161 | 1.7237 | 1.6533 | 1.6236 | 1.7192 | 4.2252 | 1.4956 | 3.0124 | 7.1088 | 14385 | 1883.8 | 0 |
 | ALL5 | 2018-22 | net_mnq | 1228 | 0.29642 | 5.4302 | 6668.3 | 1.3722 | 1.4555 | 1.4701 | 0.61393 | 1.3078 | 1.1122 | 0.43379 | 1.5907 | 3076.9 | 2674.2 | 4 |
 | ALL5 | 2018-22 | stress_four_ticks | 1228 | 0.29479 | 31.321 | 38462 | 0.78972 | 0.83784 | 0.84678 | 0.35332 | 0.73344 | 1.0625 | 0.23051 | 16.035 | 33398 | 54963 | 4 |
+| OPP | 2023+ | all | 342 | 0.30117 | 140.02 | 47886 | 1.2659 | 1.2252 | 1.1886 | 0.65301 | 1.4402 | 1.1954 | 0.50911 | 12.023 | 25055 | 5669.5 | 1 |
+| OPP | 2023 | all | 93 | 0.27957 | 123.18 | 11456 | 0.83471 | 0.87502 | 0.92471 | 0.8389 | 1.9474 | 1.2391 | 1.2669 | 6.4201 | 9114.5 | 1524.2 | 0 |
+| OPP | 2024 | all | 82 | 0.32927 | 299.4 | 24550 | 1.4381 | 1.3632 | 1.1118 | 1.4318 | 3.6725 | 1.5113 | 1.5969 | 12.732 | 15374 | 1344.5 | 0 |
+| OPP | 2025 | all | 96 | 0.26042 | -167.82 | -16111 | -0.83833 | -0.81865 | -0.99103 | -0.84249 | -1.5045 | 0.80926 | -0.87176 | 23.23 | 18629 | 1626 | 0 |
+| OPP | 2026 | all | 71 | 0.35211 | 394.23 | 27990 | 1.1629 | 1.1319 | 1.1578 | 1.3233 | 3.2006 | 1.4328 | 3.1329 | 6.3348 | 11605 | 1174.8 | 1 |
+| OPP | 2023+ | long | 184 | 0.30435 | 68.62 | 12626 | 0.48296 | 0.47616 | 0.52776 | 0.24969 | 0.52061 | 1.0961 | 0.16888 | 15.345 | 19916 | 3094 | 1 |
+| OPP | 2023 | long | 58 | 0.25862 | 85.25 | 4944.5 | 0.45616 | 0.46967 | 0.48359 | 0.46041 | 1.0465 | 1.1604 | 0.4305 | 8.3878 | 11578 | 955.5 | 0 |
+| OPP | 2024 | long | 40 | 0.325 | 46.25 | 1850 | 0.19022 | 0.20157 | 0.20314 | 0.19218 | 0.38944 | 1.0771 | 0.22968 | 6.7832 | 8054.8 | 675 | 0 |
+| OPP | 2025 | long | 46 | 0.28261 | -138.66 | -6378.5 | -0.45301 | -0.45526 | -0.53302 | -0.45807 | -0.84531 | 0.84486 | -0.5722 | 9.0437 | 11236 | 788.5 | 0 |
+| OPP | 2026 | long | 40 | 0.375 | 305.25 | 12210 | 0.72855 | 0.69842 | 0.83626 | 0.83426 | 1.89 | 1.3446 | 1.6597 | 6.2254 | 9556.2 | 675 | 1 |
+| OPP | 2023+ | short | 158 | 0.29747 | 223.16 | 35260 | 1.2878 | 1.2545 | 1.1146 | 0.66353 | 1.5501 | 1.3102 | 0.52435 | 10.758 | 17913 | 2575.5 | 0 |
+| OPP | 2023 | short | 35 | 0.31429 | 186.04 | 6511.2 | 0.76356 | 0.83706 | 0.71358 | 0.77058 | 1.858 | 1.3814 | 0.73756 | 8.3172 | 8898.8 | 568.75 | 0 |
+| OPP | 2024 | short | 42 | 0.33333 | 540.49 | 22700 | 1.6244 | 1.3807 | 1.1156 | 1.5985 | 4.8263 | 1.9451 | 2.2579 | 10.834 | 10054 | 669.5 | 0 |
+| OPP | 2025 | short | 50 | 0.24 | -194.65 | -9732.5 | -0.73579 | -0.73656 | -0.88153 | -0.74147 | -1.2809 | 0.77549 | -0.60987 | 21.006 | 16086 | 837.5 | 0 |
+| OPP | 2026 | short | 31 | 0.32258 | 509.04 | 15780 | 0.9014 | 0.96341 | 0.88532 | 1.03 | 2.6771 | 1.5396 | 1.9619 | 7.7071 | 10448 | 499.75 | 0 |
+| OPP | 2023+ | net_mnq | 342 | 0.30117 | 13.487 | 4612.4 | 1.2194 | 1.1801 | 1.1449 | 0.62906 | 1.3813 | 1.1873 | 0.47964 | 1.8777 | 2561.7 | 743.08 | 1 |
+| OPP | 2023+ | stress_four_ticks | 342 | 0.29532 | 112.03 | 38316 | 1.0111 | 0.97869 | 0.94923 | 0.52183 | 1.1242 | 1.1519 | 0.36149 | 14.144 | 28235 | 15240 | 1 |
+| ALL5 | 2023+ | all | 932 | 0.29292 | 34.177 | 31853 | 0.53849 | 0.54559 | 0.58153 | 0.27793 | 0.56014 | 1.0458 | 0.19387 | 16.906 | 43768 | 15507 | 3 |
+| ALL5 | 2023 | all | 248 | 0.2621 | 37.891 | 9397 | 0.43514 | 0.47048 | 0.44118 | 0.43688 | 0.94834 | 1.0707 | 0.60302 | 11.82 | 15708 | 4103 | 0 |
+| ALL5 | 2024 | all | 248 | 0.31855 | 219.48 | 54432 | 1.8956 | 2.0066 | 2.128 | 1.8954 | 4.4734 | 1.3575 | 3.0767 | 10.353 | 17692 | 4063 | 2 |
+| ALL5 | 2025 | all | 247 | 0.29555 | -91.359 | -22566 | -0.72591 | -0.70796 | -0.89647 | -0.72882 | -1.2971 | 0.89457 | -0.59504 | 49.026 | 38226 | 4160.8 | 0 |
+| ALL5 | 2026 | all | 189 | 0.2963 | -49.79 | -9410.2 | -0.26725 | -0.27199 | -0.28719 | -0.30461 | -0.60979 | 0.95196 | -0.27928 | 30.889 | 43768 | 3180.2 | 1 |
+| ALL5 | 2023+ | long | 491 | 0.32179 | 77.383 | 37995 | 0.91424 | 0.90023 | 0.98508 | 0.4719 | 0.95349 | 1.1087 | 0.46501 | 10.474 | 21766 | 8239.8 | 1 |
+| ALL5 | 2023 | long | 142 | 0.26056 | 33.349 | 4735.5 | 0.28724 | 0.33227 | 0.31104 | 0.28879 | 0.62187 | 1.0611 | 0.33021 | 10.242 | 14456 | 2354.5 | 0 |
+| ALL5 | 2024 | long | 114 | 0.37719 | 318.85 | 36348 | 1.932 | 1.9191 | 2.2543 | 1.9194 | 4.6741 | 1.5707 | 3.8345 | 4.3192 | 9479.2 | 1881.5 | 0 |
+| ALL5 | 2025 | long | 131 | 0.32061 | -106.45 | -13945 | -0.65855 | -0.66779 | -0.79353 | -0.66187 | -1.1348 | 0.87273 | -0.70709 | 18.409 | 19879 | 2239.8 | 0 |
+| ALL5 | 2026 | long | 104 | 0.34615 | 104.38 | 10856 | 0.42488 | 0.39577 | 0.4489 | 0.48514 | 1.004 | 1.11 | 0.68199 | 15.566 | 20677 | 1764 | 1 |
+| ALL5 | 2023+ | short | 441 | 0.26077 | -13.928 | -6142.2 | -0.14585 | -0.14253 | -0.1466 | -0.07532 | -0.1514 | 0.98222 | -0.048337 | 21.111 | 33850 | 7267.2 | 2 |
+| ALL5 | 2023 | short | 106 | 0.26415 | 43.976 | 4661.5 | 0.33258 | 0.35929 | 0.32222 | 0.33472 | 0.73521 | 1.0843 | 0.33942 | 10.046 | 13844 | 1748.5 | 0 |
+| ALL5 | 2024 | short | 134 | 0.26866 | 134.95 | 18084 | 0.83252 | 0.73516 | 0.75717 | 0.83297 | 1.9323 | 1.2042 | 0.92316 | 18.383 | 19589 | 2181.5 | 2 |
+| ALL5 | 2025 | short | 116 | 0.26724 | -74.319 | -8621 | -0.37736 | -0.33795 | -0.34272 | -0.37962 | -0.70009 | 0.91748 | -0.26329 | 39.08 | 33005 | 1921 | 0 |
+| ALL5 | 2026 | short | 85 | 0.23529 | -238.43 | -20266 | -0.83566 | -1.0077 | -1.1575 | -0.95338 | -1.8406 | 0.7915 | -0.7902 | 28.745 | 33314 | 1416.2 | 0 |
+| ALL5 | 2023+ | net_mnq | 932 | 0.29292 | 2.9027 | 2705.3 | 0.45735 | 0.46338 | 0.49389 | 0.23605 | 0.47376 | 1.0387 | 0.16204 | 3.3475 | 4447.4 | 2030.7 | 3 |
+| ALL5 | 2023+ | stress_four_ticks | 932 | 0.29077 | 6.0118 | 5603 | 0.094549 | 0.095804 | 0.10209 | 0.0488 | 0.096196 | 1.0078 | 0.027592 | 24.106 | 54094 | 41757 | 3 |
+| OPP | 2018-26 | all | 760 | 0.33553 | 238.8 | 1.8148e+05 | 3.6654 | 3.625 | 3.6116 | 1.2325 | 2.9228 | 1.4353 | 0.82782 | 3.7715 | 25055 | 12520 | 1 |
+| OPP | 2018-26 | long | 429 | 0.34732 | 154.17 | 66140 | 1.97 | 1.9562 | 2.1438 | 0.6642 | 1.4496 | 1.2889 | 0.37953 | 6.0988 | 19916 | 7165.2 | 1 |
+| OPP | 2018-26 | short | 331 | 0.32024 | 348.48 | 1.1535e+05 | 3.1739 | 3.0795 | 2.7395 | 1.0607 | 2.7387 | 1.6138 | 0.73592 | 4.4172 | 17913 | 5354.8 | 0 |
+| OPP | 2018-26 | net_mnq | 760 | 0.33553 | 23.365 | 17757 | 3.5863 | 3.5474 | 3.5343 | 1.2062 | 2.8459 | 1.4233 | 0.79221 | 1.036 | 2561.7 | 1643.4 | 1 |
+| OPP | 2018-26 | stress_four_ticks | 760 | 0.33158 | 211.12 | 1.6046e+05 | 3.2341 | 3.201 | 3.1892 | 1.0889 | 2.5125 | 1.3714 | 0.64946 | 4.5801 | 28235 | 33550 | 1 |
+| ALL5 | 2018-26 | all | 2160 | 0.29491 | 48.546 | 1.0486e+05 | 1.3701 | 1.4133 | 1.4739 | 0.46317 | 0.95575 | 1.0816 | 0.27381 | 9.4911 | 43768 | 35925 | 7 |
+| ALL5 | 2018-26 | long | 1149 | 0.31419 | 45.413 | 52180 | 0.98251 | 0.97035 | 1.0353 | 0.33215 | 0.66981 | 1.079 | 0.16975 | 12.906 | 35131 | 19320 | 1 |
+| ALL5 | 2018-26 | short | 1011 | 0.273 | 52.107 | 52680 | 0.95548 | 0.92835 | 0.93257 | 0.32302 | 0.68188 | 1.0844 | 0.17786 | 11.611 | 33850 | 16605 | 6 |
+| ALL5 | 2018-26 | net_mnq | 2160 | 0.29491 | 4.3396 | 9373.6 | 1.2247 | 1.2634 | 1.3177 | 0.41404 | 0.85027 | 1.0725 | 0.24088 | 2.3128 | 4447.4 | 4704.9 | 7 |
+| ALL5 | 2018-26 | stress_four_ticks | 2160 | 0.29306 | 20.4 | 44065 | 0.5746 | 0.59283 | 0.61837 | 0.19425 | 0.39065 | 1.0331 | 0.093096 | 16.742 | 54094 | 96720 | 7 |
 
 ## Controls and limits
 
-Actual ALL5base1228trades,net$73,007.00; kept418,net$133,599.50;
-removed810,net$-60,592.50,avg$-74.81,t-1.679.
-Among1000matched-size randomsubsets,p(net>=kept)=0.000; keptbetterprofit/DD
-than100.0%. NativeMNQcosts/gross are consistent units (priorhelpermicrocostfield fixed).
-See intake/source_reproduction/engineering_checks/design_nomination_gate. No duplicate conflicts; held missing0.
+Frozen nomination reproduced source OWN5economic ledger exactly. Allthree neighbors designpositive(t3.70--4.35),
+no neighboring validation evaluated. UnfilteredALL5fullnet$104,860.00; removednet
+$-76,625.00(avg$-54.73,t-1.321).
+Full1000randomsubsets p(net>=kept)=0.000; jointbetterprofit/DD
+84.9%. See separate design/validation diagnostics for staged results.
+The previouslyrecorded designpass alert does not establish a qualifyingt6candidate. Validation is weaker,
+full dailydependenceadjustedt is below6. No threshold, side, sizing or exit substitution made aftervalidation.
+No missingheldminutes in primary. Intake audits no duplicateconflicts. SourceCTtime, completecashopen bars.
+Target1pointthrough, protectedentrybar, worsestopgaps. Actualreceipt/spread/roll-splicefidelity unverified.
 
-No historical2023+returns accessed for this entry yet. Neighbor diagnostics were unselectable; no maxreturn pick.
-The entry is an inferred order-persistence mechanism, not observed forced orders. Related opening-drive/momentum
-research and original selection count. Lowwinrate, trend-loss clustering, gappedstops and shared NQplan exposure
-can defeat account utility even if the next sample is positive. Do not infer t6/adoption/liveauthorization.
-Next: commitdesign, run OPPandALL5only2023--2026-10-09once, labelled previouslyseenhistorical validation.
-Then contingent controls/review/account work. Claudehandoff: agents/codex/results/opening_path_persistence.md.
+No t6claim, promotion, independentchecker, fullaccountbench orPowerLanguage. Contingent expensiveplacebos/
+resampling/accounts are not warranted for the failedpointgoal. A positive fullhistory alone does not establish
+accountutility or independence from existingcashmomentum strategies. Keepresearching distinct preregistered
+mechanisms; nofavorable rescaling or postvalidationselection to force success.
+Claudehandoff: agents/codex/results/opening_path_persistence.md.
