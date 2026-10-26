@@ -36,6 +36,8 @@ needs executable whole-contract addition/replacement/empty-slot comparisons and 
 
 | NQ Liquidity Vacuum Refill | Rejected |5models;primary15trades,t0.866,NW5 1.035;no2023+tested |
 
+| NQ Closing Auction Curvature | Rejected |5models;primary69trades,t-2.58;allcandidatesnegative;no2023+tested |
+
 The repository has hundreds of older ranked ideas and unenumerated author searches. Keep these prior trials visible.
 
 ## Operating boundaries
