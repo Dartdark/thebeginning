@@ -67,15 +67,28 @@ ledgers have zero invalid held OHLC;12BASE5 independent diagnostic paths contain
 OHLC observations (not45distinct minutes), retained. Nonexecutable subset paths4000; program65/63unique.
 This family is closed: no reversed fade, threshold/window retune or control nomination.
 
-## Next distinct evidence gate: MBS duration state
+## Source continuation: MBS and forward guidance
 
-Evidence: agents/codex/evidence/mbs_duration_state.md; source review:
-agents/codex/research/mbs_duration_state_feasibility.md. NEEDS DATA, zero returns, no economic plan.
-The genuine increment would be as-of mortgage risk/exposure changes and an evidenced hedge adjustment.
-Saved literature discusses swaps, not compulsoryZNorders. Primary states, timing and futures transmission
-are missing; a ZN-price-momentum substitute would recycle an existing family. Do not test it under a new label.
-Resume pending source gates only as new access/evidence permits, and continue distinct research without
-pausing the program or repeating delivered blocker/routine-failure alerts. All full-history milestones unchanged.
+The committed MBS evidence gate was resumed first. Source-content audit:
+agents/codex/research/mbs_primary_input_gate_20261026.md; reproducer and saved manifest under
+analysis/codex_mbs_primary_input_gate.py and analysis/outputs/codex_mbs_primary_input_gate/.
+Four saved PDFs /79 text matches are not portfolio observations. The additional content check supplied
+no primary as-of risk/exposure/hedge-clock or ZN-transmission dataset. NEEDS DATA; no ZN-momentum proxy.
+Do not repeat the bounded audit on unchanged hashes.
+
+Distinct source-only plan ac88ccd: agents/codex/plans/forward_guidance_input_gate.md. Evidence:
+agents/codex/evidence/forward_guidance_revision.md; result: agents/codex/results/forward_guidance_input_gate.md.
+The issuer's new versus old SAME-horizon management guidance would differ from realized EPS surprise,
+which existing NQ research already trades. The census retained310 metadata rows/227 dates/16 collected
+issuers/58multi-issuer dates in2018-22. These are calendar counts, not guidance changes, trade sessions or
+independent samples. No original guidance pairs, exact receipt/vintage lineage or historical index weights
+were identified. NEEDS DATA; zero economic configurations/returns, no selected rule, symbol, clock or timeframe.
+The source plan is not an economic preregistration. Do not rerun unchanged or substitute EPS/price proxies.
+
+Both gates need genuinely new primary inputs before TEST. Preserve pending EIA source work and continue
+distinct research without pausing the program or repeating routine-failure/blocker alerts. Execution workspace
+and existing raw futures data remain available. Economic counts65/63, last verified economic execution,
+best standalone result and all full-history milestones remain unchanged; the watcher is unchanged.
 
 ## Operating boundaries
 
