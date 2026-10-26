@@ -41,7 +41,8 @@ def main():
     C.dump(OUT/'full_goal_check.json',result);print(m[['model','side','trades','total','avg','profit_factor','t_trade','t_nw5','max_dd']].to_string(index=False));print(result)
     p=ROOT/'agents/codex/results/opening_path_persistence.md';old=p.read_text()
     marker='## How the trade works';tail=old[old.index(marker):]
-    tail=tail[:tail.index('## Design results')]
+    end='## Design results' if '## Design results' in tail else '## Results'
+    tail=tail[:tail.index(end)]
     full=pd.concat([pd.read_csv(OUT/'design_metrics.csv'),pd.read_csv(OUT/'validation_metrics.csv'),m],ignore_index=True)
     p.write_text(f'''# NQ Opening Path Persistence: below t6; research continues
 
@@ -78,7 +79,6 @@ accountutility or independence from existingcashmomentum strategies. Keepresearc
 mechanisms; nofavorable rescaling or postvalidationselection to force success.
 Claudehandoff: agents/codex/results/opening_path_persistence.md.
 ''')
-    p=ROOT/'agents/codex/research/t6_progress.json';q=json.loads(p.read_text());q.update(status='researching',goal_met=False,notification_event=None,latest_completed_hypothesis='NQ Opening Path Persistence historical validation',latest_result=f"Designpass did not reach goal:fulltrade t{own.t_trade:.3f},dailyNW5 {own.t_nw5:.3f};2023+trade t1.266. No neighboring substitution; continue new mechanism.",next_action='Prepare the next distinct evidence sheet/preregistration, avoiding post-validation retuning.');p.write_text(json.dumps(q,indent=2)+'\n')
-    p=ROOT/'agents/codex/research/t6_program.md';q=p.read_text().replace('| NQ Opening Path Persistence | Design pass; validation pending |5evaluations(4new+1renomination);418trades,t4.19,NW5 4.29; result-informed selection disclosed |',f'| NQ Opening Path Persistence | Below t6 after historical validation |25program evaluations/24unique; fulltrade t{own.t_trade:.3f},NW5 {own.t_nw5:.3f};2023+t1.266. No retuning |');p.write_text(q)
+    # A report rerun must not rewind the current multi-hypothesis program state.
 
 if __name__=='__main__':main()

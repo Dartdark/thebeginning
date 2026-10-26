@@ -182,8 +182,8 @@ Full1000randomsubsets p(net>=kept)=0.000; jointbetterprofit/DD
 84.9%. See separate design/validation diagnostics for staged results.
 The previouslyrecorded designpass alert does not establish a qualifyingt6candidate. Validation is weaker,
 full dailydependenceadjustedt is below6. No threshold, side, sizing or exit substitution made aftervalidation.
-Primary has1unobservedheldminute in historicalvalidation, retained rather than dropped; within-gap stop/targetpath
-unverified. See validation_held_gap_audit.json. Intake duplicateconflicts0; sourceCT, completecashopen.
+Primary has 1 unobservedheldminute in historicalvalidation, retained rather than dropped;
+within-gap stop/targetpath unverified. See validation_held_gap_audit.json. Intake duplicateconflicts0; sourceCT, completecashopen.
 Target1pointthrough, protectedentrybar, worsestopgaps. Actualreceipt/spread/roll-splicefidelity unverified.
 
 No t6claim, promotion, independentchecker, fullaccountbench orPowerLanguage. Contingent expensiveplacebos/
