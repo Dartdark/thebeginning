@@ -133,6 +133,9 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   Verify signals, ADX/VWAP/ATR, integer risk sizing, entry-bar protection and IOG stop/partial behavior; reconcile native
   micro versus mini-volume/cost assumptions. Matched controls, independent review and portfolio/account contribution
   remain unverified; do not add it to a plan from this screen. [Results](agents/codex/results/primesync.md).
+  Account tests completed: none of the five plans clears the preregistered placement gates at1micro; closest personal
+  ES30 improves mean-profit/p95-DD only1.8%. Do not add or start a sizing rescue search. Keep MC parity pending for later review.
+  [Placement results](agents/codex/results/primesync_accounts.md) · [v2 code](agents/codex/code/PrimeSync_v2.txt).
 
 - [ ] **6E cross-asset package v4 — WATCH / NEEDS DATA; personal-account research.** Merit: a different market and multi-day
   horizon, with reported cross-asset and walk-forward evidence; potential diversification from the NQ-heavy book.
