@@ -134,3 +134,11 @@ Read and apply [RESEARCH_CONTROLS.md](RESEARCH_CONTROLS.md) before new research.
 Read the **Promising strategies awaiting verification** section in [TODO.md](../../TODO.md) before closing a source-only
 or data-blocked review. Add qualifying candidates there for later review instead of letting them disappear in chat.
 Apply the same rule to future uploads; mark the verification outcome when it is established and link the evidence.
+
+## Show results in chat (user, 2026-10-27)
+
+Always include the key results directly in the final chat reply as well as saving the report. Links supplement the
+answer; they do not replace its findings. For strategy tests, show a compact comparison table, the selected version,
+relevant design/recent dates, actual sizing/cost units and material verification limits. For account simulations, show
+the relevant payout/risk/timing results and horizon. Label source-only claims and missing results explicitly; never
+invent numbers to fill a table. Keep the full detail in the linked report.
