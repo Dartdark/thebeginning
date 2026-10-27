@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H06_closed_gross_cost_gate_failed_continuing_distinct_owned_position_question",
+  "status": "H07_preregistered_owned_position_source_admission_pending",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -15,7 +15,7 @@
     "max_counted_evaluations": 60,
     "max_hypotheses": 10,
     "counted_evaluations": 5,
-    "hypotheses_started": 6,
+    "hypotheses_started": 7,
     "gross_screens_run": 4,
     "stop_on_either_limit": true,
     "prior_t6_evaluations": 65,
@@ -186,6 +186,15 @@
       "decision": "DONTTESTcurrentreadiness:old3.665/NW3.625isNQfeebasis;nativeMNQ3.5863/NW3.5474belowcurrent326itembar3.609533. DSRpassunestablished and1heldvalidationminuteunresolved. Anewbookquestioncouldinprincipledifferfromt6restart,butONLYold6failurepremisefalse. No olddata/maker/newreturns or t6/watcherwrite.",
       "report": "agents/codex/research/hunt_v2_archived_piece_eligibility.md",
       "new_returns": false
+    },
+    {
+      "scope": "afterH06 bounded source-only next-input review",
+      "source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
+      "report": "agents/codex/research/hunt_v2_after_ecb_bounded_source_screen.md",
+      "decision": "6EFOMCfirst-reactionportDONOTTEST selectedsameH06architecture; FXfundingrollNEEDSDATA actualsigneddemand/basis absent. No manufacturedproxy or calendarblindness claim.",
+      "new_hypotheses": 0,
+      "new_gross_screens": 0,
+      "new_economic_evaluations": 0
     }
   ],
   "hypotheses": [
@@ -573,6 +582,31 @@
       "verified_execution": "analysis/outputs/codex_hunt_v2_ecb_preconference/gross_verified_execution.json",
       "result_audit": "agents/codex/reviews/hunt_v2_ecb_result_audit.md",
       "closed_reason": "Mean gross0.859375USD/M6E below frozen9.98USD hurdle; no stopped/economic/validation/account continuation or rule retune."
+    },
+    {
+      "id": "H07",
+      "name": "LDF after underwater same-side own RS position",
+      "stage": "registered_source_admission_pending",
+      "mechanism": "agents/codex/evidence/hunt_v2_ldf_rs_open_loss.md",
+      "mechanism_decision": "TEST finite owned risk-state interaction; no external compulsory flow claim",
+      "plan": "agents/codex/plans/hunt_v2_ldf_rs_open_loss.md",
+      "script": "analysis/codex_hunt_v2_ldf_rs_open_loss.py",
+      "nomination": "agents/codex/research/hunt_v2_portfolio_input_nomination.md",
+      "models": [
+        "BASE repeatedparent",
+        "RS_OPEN_LOSS soleprimary",
+        "SAME_SIDE_OPEN unselectablecontrol",
+        "PRICE_0901 unselectablecontrol"
+      ],
+      "new_returns_calculated": false,
+      "raw_RS_event_values_read": false,
+      "gross_screens_run": 0,
+      "counted_evaluations": 0,
+      "validation_run": false,
+      "book_bench_run": false,
+      "report": "agents/codex/results/hunt_v2_ldf_rs_open_loss.md",
+      "prior_closed_studies_reopened": false,
+      "preregistration_commit": "this_commit_resolve_before_execution"
     }
   ],
   "counted_evaluations": [
@@ -687,7 +721,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "Save/review/push H06 frozen gross rejection, then distinct H07 owned-position LDF filter from hunt_v2_portfolio_input_nomination.md: finalize source clocks/control/support gates and COMMIT <=4defs before new RS/LDF rows or returns. No H01retune/H04repair/H05rescue or t6restart. Actual cumulative4screens,5/60economic,6/10hypotheses +archived65t6; do not pause below limits. Unknown stateKEEP and no freedcap/reentry. Current personal19 BASE/ADD/REPLACE/EMPTY before robustness after any designpass; joint intraday limits remain.",
+  "next_action": "Execute only committed H07 own-position source/support admission after independent source/synthetic code review. Bind unchanged H01 selectedentrymetadata and protectedparent, fixed RS MC schema/Excelclock/source identity; as-of state atC840, unknownKEEP, no H04repair. Before endpoints require90%known,100kept,20removed>=3years,10kept eachside and>=1000possible masks per fixed matching scheme. Ifsource/supportfails closeH07 without outcomes and continue only a distinct credible input. Gross ifadmitted fixed4.48USD/MNQ; statisticalpass then immediate currentpersonal19bench with parent implementation controls. Budget5/60economic,7/10hypotheses,4gross +65t6; noqualifier/event/budgetpause.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -698,7 +732,7 @@
     "old_t6_research_paused": true,
     "old_t6_alerts_paused": true,
     "v2_continuation_enabled": true,
-    "note": "Continue distinct bounded v2 questions after H06gross failure. Budget5/60economic,6/10hypotheses,4grossscreens plusarchived65t6; no qualifying candidate or material notification; pause only at either program budget limit.",
+    "note": "Continue bounded v2; H07 own-position input admission pending. Budget5/60economic,7/10hypotheses,4gross plus65t6. No qualifying candidate/event; only pause at either budget limit; t6 and watcher remain stopped.",
     "automation_id": "6adea9fee9c88191a45399d233743746",
     "title": "Strategy hunt v2",
     "timezone": "America/Los_Angeles",
@@ -805,7 +839,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-27T00:11:54.423625+00:00",
+  "updated_utc": "2026-10-27T00:20:42.729614+00:00",
   "current_adopted_source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
   "current_adopted_source_reconciliation": "d14dc9a TIER/MINED/research/data/executableallocations identical073e27c. Documentationstatusupdatesdo notchangeadoptedallocations; no operationalaction or otherbranchwrite. Personal19 alreadycontainsFC2B/Twin but not separateHighwinE1bracket.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -1105,8 +1139,8 @@
   "active_research_reservation": {
     "owner": "Codex current research turn",
     "hypothesis": "H06",
-    "stage": "H06grossclosed; source-only H07 owned same-side RS open-loss interaction preparation; not registered",
-    "updated_utc": "2026-10-27T00:11:54.423625+00:00",
+    "stage": "H07 frozen own RS-position/LDF source admission; ROOT owns all actual data executions",
+    "updated_utc": "2026-10-27T00:20:42.729614+00:00",
     "no_competing_writer_found": true
   },
   "last_design_execution": {
