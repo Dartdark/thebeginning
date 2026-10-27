@@ -118,7 +118,7 @@ def features(daily):
     return x
 
 
-def targets(f):
+def targets(f, *, offline_boundaries=False):
     q = np.zeros((len(f),7),np.int64)
     rsi_pos=weekly_pos=0; rsi_age=weekly_age=0
     for i,row in enumerate(f.itertuples(index=False)):
@@ -150,7 +150,7 @@ def targets(f):
     # Offline source/sample boundary liquidation, explicitly not an executable
     # prediction of a future outage. It is a LIMIT on promotion, never a filter.
     ends = np.flatnonzero(f.ready.to_numpy() & ~np.r_[f.ready.to_numpy()[1:],False])
-    q[ends,:]=0
+    if offline_boundaries:q[ends,:]=0
     return q, ends
 
 
@@ -231,8 +231,10 @@ def selftest():
     np.testing.assert_allclose(f.iloc[:110].macro_score,features(future).iloc[:110].macro_score,equal_nan=True)
     at=int(np.flatnonzero(f.ready.to_numpy())[0]);f.iloc[at,f.columns.get_loc("ZN_z")]=3
     f.iloc[at,f.columns.get_loc("reaction_z")]=-3
-    q,ends=targets(f);assert q[at,3]==0 and (np.abs(q[:,0])<=3).all() and not q[ends].any()
-    return dict(passed=True,groups=11,market_inputs=False,integer_reversals=True,FIFO_cash_mark_parity=True,
+    q,ends=targets(f,offline_boundaries=True);assert q[at,3]==0 and (np.abs(q[:,0])<=3).all() and not q[ends].any()
+    fullq,_=targets(features(fixture));prefixq,_=targets(features(fixture.iloc[:110]))
+    np.testing.assert_array_equal(fullq[:110],prefixq)
+    return dict(passed=True,groups=12,market_inputs=False,integer_reversals=True,FIFO_cash_mark_parity=True,
                 adverse_native_grid=True,unknown_block_boundaries_explicit=True)
 
 
@@ -325,7 +327,7 @@ def run(prereg,public_prereg):
             source["eur_high"]=daily.high;source["eur_low"]=daily.low
             source["observed_range_minutes"]=daily.observed_range_minutes
     dump(dest/"source_audit.json",audits);csv(dest/"daily_inputs.csv",source.rename_axis("date").reset_index())
-    f=features(source);q,ends=targets(f)
+    f=features(source);q,ends=targets(f,offline_boundaries=True)
     # Design has no position in2017; warmup values remain causal inputs only.
     active=(f.index.year>=2018)&f.ready.to_numpy();q[~active]=0
     f["active_design"]=active
