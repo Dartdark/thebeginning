@@ -108,8 +108,13 @@ strong word.
 ## Git and boundaries
 
 - Work on branch **`codex/work`**. Pull before every push. Never push to `claude/*` or `antigravity/*`.
-- Write only under `agents/codex/`, `analysis/codex_*.py` and `analysis/outputs/codex_*`. Don't edit `TIER_LIST.md`,
-  `TODO.md`, the plan or any live strategy file: Claude ranks and merges after checking.
+- Write research under `agents/codex/`, `analysis/codex_*.py` and `analysis/outputs/codex_*`. Don't edit `TIER_LIST.md`,
+  the trading plan or any live strategy file: Claude ranks and merges after checking.
+- **User exception (2026-10-27):** maintain `TODO.md`'s **Promising strategies awaiting verification** research queue.
+  Add a strategy when review establishes useful merits but reproduction/implementation remains unverified; include its
+  merit, missing prerequisites, smallest next check, status and review link. Merge duplicates and distinguish author claims
+  from verified results. Check later evidence before reviving a rejected or already-verified item. This permission is for
+  research queue upkeep only; it does not authorize plan/live changes or automatic backtests.
 - **Never** touch live trading, the VPS, broker / Rithmic / Apex settings, or API keys.
 - When a task is done: commit, push, and say in one line what to tell Claude (the result file's path).
 
@@ -123,3 +128,9 @@ hours the plan is already exposed. Low correlation with the plan matters more th
 ## Adopted research controls (user, 2026-10-26)
 
 Read and apply [RESEARCH_CONTROLS.md](RESEARCH_CONTROLS.md) before new research. It adds information/label clocks, fold-local fitting, baseline and run/cost records; existing gates and live boundaries remain binding.
+
+## Pending strategy follow-up (user, 2026-10-27)
+
+Read the **Promising strategies awaiting verification** section in [TODO.md](../../TODO.md) before closing a source-only
+or data-blocked review. Add qualifying candidates there for later review instead of letting them disappear in chat.
+Apply the same rule to future uploads; mark the verification outcome when it is established and link the evidence.

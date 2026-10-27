@@ -118,6 +118,33 @@ after 15:59 CT, never with a position open.
 - [x] (2026-10-21, user: done) **One time, outside market hours:** paste the updated [Apex_Trade_Logger.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Trade_Logger.txt)
   (Raw button) into the existing "Apex Trade Logger" signal on the VPS and compile. Everything else runs by itself.
 
+## Promising strategies awaiting verification (user, 2026-10-27)
+
+**Standing rule:** when a reviewed strategy has documented merits but its results or implementation are not yet verified,
+add it here for later review. Record the merit, what is missing, the smallest next check and the source review; merge
+duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.
+A queue entry does not add it to a trading plan or start a backtest; review when prerequisites arrive or the user prioritizes it.
+
+- [ ] **6E cross-asset package v4 — WATCH / NEEDS DATA; personal-account research.** Merit: a different market and multi-day
+  horizon, with reported cross-asset and walk-forward evidence; potential diversification from the NQ-heavy book.
+  Obtain the original Python implementation, frozen settings, contract/roll map, trade/order ledger and daily marked P&L.
+  First verify as-of 16:00 ET inputs, later executable fills, integer M6E vol-target quantities, native fees/spread/slippage
+  and trade-to-daily/roll reconciliation. The 08:29–09:30 euro-reaction branch needs intraday data; daily bars alone cannot reproduce it.
+  Review **Macro Momentum, Macro-Shock and Gold-Shock first**, retaining the complete six-leg package as the reference
+  (RSI pullback, weekly breakout and Stock-Shock included); no unregistered hindsight deletion or optimization.
+  Then preregister a bounded replication and, if it passes, measure addition/replacement in the current personal portfolio.
+  [Review](agents/codex/results/six_e_cross_asset_review_20261027.md) · [Evidence](agents/codex/evidence/six_e_cross_asset_20261027.md).
+
+- [ ] **IFT_NQ5_Flow_Signal — WATCH / NEEDS DATA; account placement unverified.** Merit: a fully supplied rule with disclosed
+  walk-forward, sensitivity and transfer claims that justify a careful replication. Obtain native **full-Globex 5-minute
+  OHLC + Volume + UpTicks + DownTicks**, 500 prior ratio observations plus their indicator warm-up, and the matching detailed MultiCharts report/settings;
+  also request the author's Python/WF selection records. Existing cash-session-only directional-volume files cannot reproduce it.
+  Home-PC research export only: [Claude's NQ Up/Down exporter](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/tools/exporters/NQ_UpDown_Exporter.txt).
+  First reconcile volume classification, completed-bar/next-fill timing, staged scale-outs and position counting. Freeze source-parity
+  versus protected-entry protocols and the live/historical position-gate assumptions before returns. Then run the preregistered
+  cheap screen; account/personal comparisons follow only if it passes. Minimum two-contract scale-out and current risk limits need testing.
+  [Review](agents/codex/results/ift_nq5_flow_review.md) · [Evidence](agents/codex/evidence/ift_nq5_flow.md).
+
 ## Later
 
 - [ ] **Export 1-minute data for NG, ZC and ZS** (natural gas, corn, soybeans), Jan 2018 to now, same way as the CL / ZN files
