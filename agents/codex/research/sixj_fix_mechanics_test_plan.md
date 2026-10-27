@@ -80,3 +80,14 @@ data is forbidden. Keep the disposition NEEDS DATA / SOURCE CONFIRMATION.
 Write only the authorized Codex paths. Preserve existing untracked work. Commit
 this test contract and code before executing synthetic checks; retain results
 and independent review separately from the completed economic ledger.
+
+## Retained implementation review and revision
+
+The first synthetic run at code/plan commit `d143a80` passed its 19 bundled checks.
+An independent reviewer found the exact-open fixture insufficient: the helper
+could accept a later observed open when the intended next-minute open was absent.
+That output is retained as `synthetic_checks.json`, not a valid full mechanics
+clearance. Before the revised synthetic run, require an explicit scheduled open
+and add the missing-scheduled-open/later-open-present adversarial case. Save the
+revised output separately as `synthetic_checks_v2.json`. This is a disclosed
+synthetic implementation correction, not a new economic variant or trial.

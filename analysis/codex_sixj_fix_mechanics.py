@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 PLAN = ROOT / "agents/codex/research/sixj_fix_mechanics_test_plan.md"
-OUT = ROOT / "analysis/outputs/codex_sixj_fix_mechanics/synthetic_checks.json"
+OUT = ROOT / "analysis/outputs/codex_sixj_fix_mechanics/synthetic_checks_v2.json"
 D = Decimal
 
 
@@ -34,9 +34,11 @@ def shifted_fixture_event(nominal, known_open):
         cursor -= timedelta(days=1)
 
 
-def known_next_open(available_at, exact_opens):
-    """No fabricated price: require a supplied exact open after availability."""
-    return min((t for t in exact_opens if t > available_at), default=None)
+def known_exact_open(available_at, scheduled_open, exact_opens):
+    """Require the exact scheduled open; a later observation cannot replace it."""
+    if scheduled_open > available_at and scheduled_open in exact_opens:
+        return scheduled_open
+    return None
 
 
 def conditional_cost(fee, tick_value, adverse_ticks_per_fill):
@@ -118,10 +120,15 @@ def run_checks():
     observed_close = datetime(2030, 1, 4, 9, 5, tzinfo=ZoneInfo("Asia/Tokyo"))
     available = observed_close + timedelta(seconds=2)
     supplied_opens = [observed_close, observed_close + timedelta(minutes=1)]
-    check("receipt_before_fill", known_next_open(available, supplied_opens) == supplied_opens[1],
+    scheduled = observed_close + timedelta(minutes=1)
+    check("receipt_before_fill", known_exact_open(available, scheduled, supplied_opens) == scheduled
+          and known_exact_open(available, observed_close, supplied_opens) is None,
           "09:05:02 receipt cannot obtain the already elapsed09:05:00 open.")
-    check("missing_exact_open", known_next_open(available, [observed_close]) is None,
+    check("missing_exact_open", known_exact_open(available, scheduled, [observed_close]) is None,
           "Missing next open stays unavailable, no carry-forward/fabricated fill.")
+    check("later_open_not_schedule_repair", known_exact_open(available, scheduled,
+          [observed_close, observed_close + timedelta(minutes=5)]) is None,
+          "A supplied09:10 open cannot replace the absent scheduled09:06 open.")
 
     # ASSUMED standard-sized illustration; not verified product spec or current fees.
     multiplier, tick = D("12500000"), D("0.0000005")
@@ -147,6 +154,7 @@ def main():
     checks = run_checks()
     payload = {
         "task": "manual_post_budget_6j_mechanics_only",
+        "implementation_revision": "v2_exact_scheduled_open",
         "input_kind": "invented values and fictional calendar; no empirical financial inputs",
         "script_sha256": sha256(Path(__file__).read_bytes()).hexdigest(),
         "plan_sha256": sha256(PLAN.read_bytes()).hexdigest(),
