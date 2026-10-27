@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H10_registered_final_hypothesis_FEATURE_pending",
+  "status": "budget10_complete_H10_source_closed_summary_pause_pending",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -21,7 +21,10 @@
     "prior_t6_evaluations": 65,
     "prior_t6_unique_rules": 63,
     "failed_gross_screen_counts_as_evaluation": false,
-    "all_gross_screens_and_selection_history_retained": true
+    "all_gross_screens_and_selection_history_retained": true,
+    "limit_reached": "max_hypotheses",
+    "registered_hypotheses_completed": 10,
+    "new_hypotheses_authorized_remaining": 0
   },
   "gates": {
     "mechanism_sheet_before_data": true,
@@ -817,7 +820,7 @@
     {
       "id": "H10",
       "name": "VB extra-lot negative incremental shadow-book variance constraint",
-      "stage": "REGISTERED_final_frozen_hypothesis_FEATURE_pending",
+      "stage": "CLOSED_source_calendar_before_features",
       "mechanism": "agents/codex/research/hunt_v2_independent_book_constraint_gate.md",
       "plan": "agents/codex/plans/hunt_v2_vb_covariance.md",
       "source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
@@ -841,15 +844,44 @@
       "raw_gross_hurdle": 4.48,
       "predata_review": "agents/codex/reviews/hunt_v2_vb_covariance_predata.md",
       "published_book_clock_and_fee_mark_limits_retained": true,
-      "source_or_features_run": false,
-      "existing_2018_22_book_returns_interpreted": false,
+      "source_or_features_run": true,
+      "existing_2018_22_book_returns_interpreted": true,
       "new_candidate_returns_calculated": false,
       "gross_screens_run": 0,
       "counted_evaluations": 0,
       "validation_run": false,
       "book_bench_run": false,
       "preregistration_commit": "f7d70c64b5a55da9afeb216996081711102ae623",
-      "report": "agents/codex/results/hunt_v2_vb_covariance.md"
+      "report": "agents/codex/results/hunt_v2_vb_covariance.md",
+      "source_implementation_commit": "98d5fd54bb4bd38511dbbe113a26040e4e1d97dc",
+      "source_started_utc": "2026-10-27T04:41:51.924394+00:00",
+      "source_completed_utc": "2026-10-27T04:41:52.449520+00:00",
+      "source_marker": "analysis/outputs/codex_hunt_v2_vb_covariance/feature_verified_execution.json",
+      "source_marker_sha256": "a2dfc238c3cbac421e17df18320edb8fb2657ee78d0dbc077ccd09a6c8f75556",
+      "source_gate": {
+        "phase": "FEATURE_SUPPORT_upper_bound_only",
+        "passed": false,
+        "status": "SOURCE_REJECTED_BEFORE_FEATURES",
+        "stage": "bound_full_design_normal_and_early_cash_date_coverage",
+        "published_design_source_valid": true,
+        "minimum_cash_date_coverage_passed": false,
+        "missing_expected_normal_or_early_dates": [
+          "2020-11-30"
+        ],
+        "feature_mask_computed": false,
+        "feature_counts_computed": false,
+        "new_candidate_profit_t_or_account_returns_computed": false,
+        "raw_price_source_qualification_not_run": true,
+        "gross_screen_runs": 0,
+        "economic_evaluations": 0,
+        "next_action": "Close H10 at source rejection without feature masks or raw prices; no date deletion/zero insertion/rescue"
+      },
+      "covariance_mask_computed": false,
+      "active_feature_days_counted": false,
+      "raw_prices_read": false,
+      "source_review": "agents/codex/reviews/hunt_v2_vb_covariance_source_result.md",
+      "source_review_machine": "agents/codex/reviews/hunt_v2_vb_covariance_source_result.json",
+      "closed_reason": "Savedcurrent19bookomitsnormal2020-11-30, gatefailedbeforecompute_features; no covariance or selectedcount, no raw/gross/strategyreturn. Do notdelete/zero/repair orretune."
     }
   ],
   "counted_evaluations": [
@@ -964,7 +996,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "Commit H10plan/evidence BEFORE anynewbookheader/feature/Pnl. CommitreviewedFEATUREcode thenrootaloneexecute2018\u201322date-firstpublishedshadowbook countgate; no2023numericfields/rawprices/candidateoutcomes. IfFEATUREfailsclose0gross/econ; ifpassescontinueonlyfrozenSOURCEnative/gross/design/immediatebookprotocol. No11thhypothesis:10/10registeredbudgetnowreached, finishthisfinalfrozenquestionthencompleteprogramsummaryandpause6adea9fee9c88191a45399d233743746. Currenteconomic5/60,gross4,prior65t6retained. No status/headlinetcanimplycandidate.",
+  "next_action": "No furtherresearch underthisbudget. H10closedbeforesrollingcovariance because normal2020-11-30bookrowmissing. Savecomplete10hypothesis/5economic/4grosssummary, independentactualsource/reportreviewandpush; thenpauseONLYcontinuation6adea9fee9c88191a45399d233743746 asauthorizedforbudgetcompletion. Recordpauseconfirmation/push. No11thhypothesis, datarepair/datezero, unchangedretry, t6resume/watcherchange orqualificationclaim. Existing6Jquestionfutureinputonly, nobudgetextension inferred.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -1035,7 +1067,7 @@
     "v2_hypotheses_started": 6,
     "retained_gross_screens": 4
   },
-  "last_report": "agents/codex/results/hunt_v2_mes_moc_affordability.md",
+  "last_report": "agents/codex/results/hunt_v2_vb_covariance.md",
   "parallel_work_observed": [
     {
       "commit": "24dce9a",
@@ -1081,8 +1113,23 @@
       "integration": "Safely fast-forwarded intact. Same7f0800fadoption; canonicalCL/OTconstant-adverse,MOCclosebased chronology andfee-countlimitsremain. No new certifiedjointpaths or candidatealpha inferred."
     }
   ],
-  "notification_event": null,
-  "updated_utc": "2026-10-27T04:34:50.296684+00:00",
+  "notification_event": {
+    "event_id": "strategy_hunt_v2_budget10_complete_20261027",
+    "type": "bounded_program_complete_and_important_source_review",
+    "recorded_utc": "2026-10-27T04:46:41.205585+00:00",
+    "summary": "agents/codex/research/strategy_hunt_v2_final_summary.md",
+    "result": "agents/codex/results/hunt_v2_vb_covariance.md",
+    "candidate_qualified": false,
+    "new_trading_approval": false,
+    "counts": {
+      "hypotheses": 10,
+      "economic_models": 5,
+      "gross_screens": 4
+    },
+    "key_source_finding": "Savedcurrentpersonal19dailyhistorylacksnormal2020-11-30; H10stoppedbeforecovariance/gross/outcomes",
+    "delivery_state": "Prepared for final app response; phone delivery not verified"
+  },
+  "updated_utc": "2026-10-27T04:46:41.205585+00:00",
   "current_adopted_source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
   "current_adopted_source_reconciliation": "ConnectedGitHubbranch/source reread2026-10-27:codex/workfca9c12andadoptedd14dc9a unchanged. CurrentTIERandFUNDED_PLAN readthroughapp; samepersonal19/funded/evaluation definitions retained. Noallocation or operationalactions. Scopednative6Jlocal/trackedfilenameinventoryabsent; no newfinancialinput or returnrun.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -1380,10 +1427,10 @@
     "material_notification": false
   },
   "active_research_reservation": {
-    "owner": "Codex current continuation; root alone actual execution",
-    "hypothesis": "H10",
-    "stage": "final frozen variance hypothesis registered; feature code review before actual inputs",
-    "updated_utc": "2026-10-27T04:34:50.296684+00:00",
+    "owner": "Codex current continuation",
+    "hypothesis": "none; H10closed and10hypothesisbudgetcomplete",
+    "stage": "final evidence/summary independent review and authorized pause pending",
+    "updated_utc": "2026-10-27T04:44:40.395931+00:00",
     "no_competing_writer_found": true
   },
   "last_design_execution": {
@@ -1696,7 +1743,8 @@
       "status": "awaiting_optional_reply_no_answer_assumed",
       "does_not_guarantee_TEST": true,
       "not_a_global_workspace_access_blocker": true,
-      "no_purchase_or_account_requested": true
+      "no_purchase_or_account_requested": true,
+      "budget_relevance": "Future input only; no implied extension or11thtrial in completed budget"
     }
   ],
   "last_source_only_continuation": {
@@ -1725,5 +1773,15 @@
     "automation_changed": false,
     "workspace_and_owned_existing_inputs_accessible": true,
     "source_inputs_insufficient_for_new_TEST": true
+  },
+  "final_summary": "agents/codex/research/strategy_hunt_v2_final_summary.md",
+  "final_verdict": "NO_QUALIFYING_BOOK_IMPROVEMENT_PIECE_FOUND",
+  "program_budget_complete": true,
+  "continuation_pause": {
+    "automation_id": "6adea9fee9c88191a45399d233743746",
+    "reason": "max_hypotheses10completed",
+    "state": "pending_after_saved_reviewed_final_evidence",
+    "user_authorized": true,
+    "paused_verified": false
   }
 }
