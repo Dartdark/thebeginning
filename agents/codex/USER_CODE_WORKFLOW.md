@@ -23,3 +23,13 @@ the 50k/150k evaluation, funded, or personal plans. if it doesn't we move on."
   is automatically promoted, installed or traded. Work on codex/work and preserve concurrent/untracked work.
 
 Applies to subsequent uploads by default unless the user explicitly requests a narrower task.
+
+## Explicit placement verdict for every hypothesis or code (user, 2026-10-27)
+
+Always answer whether each hypothesis/code earns a place in the personal,
+50K/150K funded and 50K/150K evaluation plans, including when the user asks
+assuming backtest verification. Separate implementation verification from
+statistical merit and measured account contribution. State a verdict for all
+five homes, with tested/conditional/not-run limits; never invent account gains.
+A failed earlier gate can mean no eligible addition without having run an
+account bench; do not describe that as measured harm to every plan.
