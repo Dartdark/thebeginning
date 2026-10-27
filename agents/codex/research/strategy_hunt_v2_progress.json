@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H08_closed_predata_power_feasibility_continuing_bounded_v2",
+  "status": "H09_registered_source_support_pending_continuing_bounded_v2",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -15,7 +15,7 @@
     "max_counted_evaluations": 60,
     "max_hypotheses": 10,
     "counted_evaluations": 5,
-    "hypotheses_started": 8,
+    "hypotheses_started": 9,
     "gross_screens_run": 4,
     "stop_on_either_limit": true,
     "prior_t6_evaluations": 65,
@@ -686,6 +686,43 @@
       "counts_are_prior_selected_source_claims_not_new_independent_measurements": true,
       "new_parent_or_extra_counts_measured": false,
       "closed_reason": "Prior selected source history ~97total2018-26 gives no credible basis for frozen>=100parents2018-22/>=50extra. Keep minima and registry count; no parent/source/count rescue. No new inputs or financial outcomes."
+    },
+    {
+      "id": "H09",
+      "name": "MES MOC extra-lot affordability at fixed250USD research slice",
+      "stage": "REGISTERED_before_actual_source_inputs",
+      "mechanism": "agents/codex/research/hunt_v2_mes_moc_affordability_nomination.md",
+      "plan": "agents/codex/plans/hunt_v2_mes_moc_affordability.md",
+      "mechanism_decision": "TEST one bounded whole-contract allocation continuing H08family; parent alpha and sizing ancestry selected",
+      "source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
+      "source_path": "funded_strategies/ES_MOC_Follow.txt",
+      "source_blob": "33e4a6a1c57dc0867d6ee9b26c310879ebd08f18",
+      "models": [
+        "BASE_Q1",
+        "CONST_Q2 unselectable",
+        "EXTRA solecandidate",
+        "POLICY wholeallocation",
+        "STRESS_PARENT unselectable4tickfillprotocol"
+      ],
+      "risk_slice_USD": 250,
+      "quantity": "EXTRA1 iff2*(ceil(literalCT5minATR15)*.25*5+3.74)<=250;POLICY1+EXTRA",
+      "native_MES_point_value": 5,
+      "native_tick": 0.25,
+      "native_RT_allowance": 3.74,
+      "gross_EXTRA_hurdle": 7.48,
+      "min_design_parent_events": 100,
+      "min_design_extra_events": 50,
+      "min_extra_each_side": 10,
+      "raw_ES_data_or_schema_read": false,
+      "new_returns_calculated": false,
+      "gross_screens_run": 0,
+      "counted_evaluations": 0,
+      "validation_run": false,
+      "book_bench_run": false,
+      "preregistration_commit": "Resolve from first commit of plan; exact SHA populated before actual run",
+      "report": "agents/codex/results/hunt_v2_mes_moc_affordability.md",
+      "prelisting_MES_proxy_limit_retained": true,
+      "prior_fractional_MOC_ATR_pooling_and_generic_RiskPerTrade_retained": true
     }
   ],
   "counted_evaluations": [
@@ -800,7 +837,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "Save/push H08 predata power closure and independent adjudication; do not lower100parent/50extra or redefineCLparent. Continue source-first credible v2 question within remaining2hypotheses, verify known parent power before TEST. MES sizing feasibility is currently SOURCE-ONLY, not registered or admitted; check exact previous vol/sizing source and parent protection/frequency first, do not assume it is independent from sizing ancestry or manufacture stop/window inputs. No newprice/calendar/return value until mechanism and <=5config prereg committed. Counters5/60economic,8/10hypotheses,4gross plus65t6; not at budget, do not pause merely for family failure.",
+  "next_action": "Commit H09mechanism and five-definition prereg BEFORE actualESinputs. Independently review/commit shared-grid source/support adapter, bind explicit2017..22inputs, then run SOURCE/count only; no outcomes before allsupportgatesPASS. Frozen100parents/50EXTRA/10eachside/1000matchedsupport, literalcalendarport and native risk250 retained. If sourcepasses rawEXTRA7.48screen then stoppeddesign then immediatebook; preserve allfailures. Counts5/60economic,9/10hypotheses,4gross plus65t6, no pause merelyforfailure.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -918,7 +955,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-27T01:26:29.112884+00:00",
+  "updated_utc": "2026-10-27T02:05:54.128488+00:00",
   "current_adopted_source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
   "current_adopted_source_reconciliation": "d14dc9a TIER/MINED/research/data/executableallocations identical073e27c. Documentationstatusupdatesdo notchangeadoptedallocations; no operationalaction or otherbranchwrite. Personal19 alreadycontainsFC2B/Twin but not separateHighwinE1bracket.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -1217,9 +1254,9 @@
   },
   "active_research_reservation": {
     "owner": "Codex current research turn",
-    "hypothesis": "H06",
-    "stage": "H08closedbeforedata; source-only feasibility of next question with prior power checked before TEST",
-    "updated_utc": "2026-10-27T01:26:29.112884+00:00",
+    "hypothesis": "H09",
+    "stage": "registered pending reviewed source/support execution; root alone runs actual inputs",
+    "updated_utc": "2026-10-27T02:05:54.128488+00:00",
     "no_competing_writer_found": true
   },
   "last_design_execution": {
