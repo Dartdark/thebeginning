@@ -1,0 +1,27 @@
+# H07 LDF after a losing same-side RS position: source admitted, support pending
+
+Summary: one fixed book-risk interaction is registered: omit the unchanged LDF ticket if an earlier same-side RS position is still open and losing at14:00CT. The selected owned MC metadata passed its source protocol, but native mark/basis checks and feature support have **not run**. No gross, protected, validation or book result exists for this filter yet; this is not a candidate or promotion.
+
+Plan: `agents/codex/plans/hunt_v2_ldf_rs_open_loss.md`, preregistration **4c3612104c10f5e5eeb96e53d8cde6bc2a3f2b3d**. Mechanism: `agents/codex/evidence/hunt_v2_ldf_rs_open_loss.md`; source-protocol clarification: `agents/codex/research/hunt_v2_ldf_rs_predata_adjudication.md`. SOURCE implementation **7a9832725f1011ad554bd4da0efa92ca06ef70b2**. Output: `analysis/outputs/codex_hunt_v2_ldf_rs_open_loss/`. **Running count:5/60 economic evaluations,7/10 hypotheses,4 gross screens, plus archived65t6.** H07 has added one hypothesis,0 gross screens and0 economic evaluations.
+
+## Frozen mechanism and definitions
+
+This trader's finite book risk is the participant; no new compulsory outside flow is claimed. Adding NQ delta while an earlier same-side ticket remains underwater might concentrate failing exposure. A late flow might instead rescue that earlier loss, making the omission harmful. Omitted LDF tickets must lose money and the filter must improve the current book against BASE, EMPTY and matched parent implementation controls.
+
+Four definitions only: unchanged protected LDF BASE; sole primary RS_OPEN_LOSS; unselectable SAME_SIDE_OPEN overlap control; unselectable PRICE_0901 control based on LDFside*(C840−O541)<0 on every parent event irrespective of RS existence. The primary is exactly the overlap×adverse-price interaction on exact-basis states. One consumed LDF decision/day,1MNQ, no freed-cap reentry or altered RS exit. Unknowns and zero marks retain the parent. LDF entry is OPEN841 at wall14:00 after completed C840; inherited0.25ATR entry-bar-active stop and worse gaps, no target, C87014:30 time exit. Native cost assumption$1.24RT+$0.50 per market/stop fill; raw kept hurdle$4.48. Receipt/micro liquidity are unverified source assumptions.
+
+## Actual SOURCE-only execution
+
+Execution2026-10-27T00:34:58.097580Z through00:35:05.345990Z completed with PASS: **1,222 selected2018–22 event metadata records,611 paired positions,0 structural issues**, and all485 immutable parent decision dates within the declared exact report bounds. Source metadata covered both-side canonical RS settings and one-minute NQ identity under the frozen schema. Exact declared bounds are2017-09-12T09:01:00.00000048 to2026-10-20T18:01:00.00000048 Chicago civil time. These are report bounds, not independently authenticated live receipt or completeness.
+
+The exact report SHA is `6cc3bedab9b44a0598339c177eaa2933bf0c0e01de29af1fe3a6b4f1ade69977`. Source code SHA `ccd3e4e2e92c8a6f12138192a518178924e16e708857759722a60809803f8d77`; selected-metadata helper SHA `1b85ccfcbccb62ece192fb8c7d04049440b1242f0e09ae7c4c23edf4c3e7815f`. `source_verified_execution.json` binds code, original preregistration, addendum and four saved artifacts. Raw Date/Time serials and declared two-row Trade# merges were preserved; no offset search, arbitrary ID forward-fill or future outcome feature was used. Global structural defects would have stopped the whole source before features.
+
+SOURCE interpreted only selected position-event metadata and allowlisted Settings. Future-year event Time/Price/quantity, exit Price, realized P&L, MAE/MFE and nonallowlisted Settings were not interpreted. No native C840/O541 mark, filter mask, raw endpoint, stopped/net strategy return, resampling or account result was calculated. The source/synthetic review is `agents/codex/reviews/hunt_v2_ldf_rs_preexecution.md`, not an independent raw-spec promotion pass.
+
+## Next frozen gates and limits
+
+Before endpoints: separately commit/review native mark/entry-basis and causal feature code, then require90% known state,100 primary kept,20 removed spanning3years,10 kept each side and at least1,000 possible distinct masks in each conditional null. Future entries/exits cannot change an earlier feature selectively. The exact native O541 basis must agree; unresolved states KEEP. A support failure closes the hypothesis before gross/economic work.
+
+Only after support and raw gross pass may four stopped definitions be evaluated. A design pass goes immediately to current personal19 BASE/ADD/REPLACE/EMPTY paired one-year MC, including parent implementation controls, before further robustness. All five net metrics, yearly/side outcomes, removed-trade tests,2,000 matched subsets, book rows,2023+ historical validation, full-history promotion and same-exit placebos are currently **NOT RUN**. No funded/evaluation improvement, payout claim, PowerLanguage or trading approval.
+
+The owned stream is the adopted MC-book record under explicit coverage/completeness assumptions, not verified live fills or repaired raw-spec RS. Correcting RS entry-bar protection could change its open-state path and must remain a separate baseline implementation effect. H01's rejected OF filter and H04's failed raw-spec/reference study remain closed; this protocol does not clear them. Native fees, reentries, marks and common-book coverage still need bounded comparisons before any qualifying claim.
