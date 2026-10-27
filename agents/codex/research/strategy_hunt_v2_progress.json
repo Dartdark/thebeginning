@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H09_closed_new_native_flow_inputs_source_gated_one_slot_unspent",
+  "status": "H10_registered_final_hypothesis_FEATURE_pending",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -15,7 +15,7 @@
     "max_counted_evaluations": 60,
     "max_hypotheses": 10,
     "counted_evaluations": 5,
-    "hypotheses_started": 9,
+    "hypotheses_started": 10,
     "gross_screens_run": 4,
     "stop_on_either_limit": true,
     "prior_t6_evaluations": 65,
@@ -233,6 +233,15 @@
       "new_gross_screens": 0,
       "new_economic_evaluations": 0,
       "new_returns": false
+    },
+    {
+      "scope": "Exact BTC Reopen MRv4 confirmation readiness",
+      "source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
+      "report": "agents/codex/research/hunt_v2_btc_confirmation_readiness.md",
+      "decision": "NoTEST:exactv4alreadyF/rejectedforanyplan,TIER219/MINED187. NotunfinishedB; no stop/window orrenamedbasisrescue.",
+      "new_hypotheses": 0,
+      "new_gross_screens": 0,
+      "new_economic_evaluations": 0
     }
   ],
   "hypotheses": [
@@ -804,6 +813,43 @@
       "raw_screen_authorized": false,
       "source_partial_chart_and_MES_prelisting_limits_retained": true,
       "prospective_gross_code_NOT_RUN": true
+    },
+    {
+      "id": "H10",
+      "name": "VB extra-lot negative incremental shadow-book variance constraint",
+      "stage": "REGISTERED_final_frozen_hypothesis_FEATURE_pending",
+      "mechanism": "agents/codex/research/hunt_v2_independent_book_constraint_gate.md",
+      "plan": "agents/codex/plans/hunt_v2_vb_covariance.md",
+      "source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
+      "parent_source": "apex_strategies/NQ_Vault_Break.txt",
+      "parent_source_blob": "a2bfedd0605ad2026ff859aad2245e38dc5fc812",
+      "feature_source": "analysis/outputs/codex_rebound/personal19/UNIFORM/fee_1.24/baseline_daily19.csv",
+      "feature_shadow_book": "fixed published current19, includes baselineVB1micro, no POLICYfeedback",
+      "feature_window": 252,
+      "quantity": "EXTRA1 iff exactprevious252(2Cov(BASE19,VB1)+Var(VB1))<0 andVarVB>0;POLICY1+EXTRA",
+      "feature_support": "100knownpostwarmupdays/50activepotentialdays/3activeyears/95percentknown/nonconstant/globaldatecalendarvaluesvalid",
+      "models": [
+        "BASE_Q1",
+        "CONST_Q2 unselectable",
+        "COV_EXTRA solecandidate",
+        "COV_POLICY",
+        "STRESS_PARENT unselectable4ticks"
+      ],
+      "native_MNQ_point_value": 2,
+      "native_tick": 0.25,
+      "native_primary_market_RT_allowance": 2.24,
+      "raw_gross_hurdle": 4.48,
+      "predata_review": "agents/codex/reviews/hunt_v2_vb_covariance_predata.md",
+      "published_book_clock_and_fee_mark_limits_retained": true,
+      "source_or_features_run": false,
+      "existing_2018_22_book_returns_interpreted": false,
+      "new_candidate_returns_calculated": false,
+      "gross_screens_run": 0,
+      "counted_evaluations": 0,
+      "validation_run": false,
+      "book_bench_run": false,
+      "preregistration_commit": "Resolve exact first plan commit before actual input",
+      "report": "agents/codex/results/hunt_v2_vb_covariance.md"
     }
   ],
   "counted_evaluations": [
@@ -918,7 +964,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "No committed unfinishedfinancialexperiment. H09closed; prospectiveMESgrossremainsNOTRUN/unauthorized. New6JTokyo/BTCbasis/fundingnotesareNEEDSDATA, notH10TEST. Keeponeunspentslot; no manufacturedsignal, oldproxy/frozenfamilyrescue or unchangedsourceauditloop. Optionalquestionaboutalreadyavailable6Joriginalminuteexports/metadata ispending; do not assumeanswer/access. Evenifavailable, independentlyadmitbank/fixcalendar,mechanism/size/transmission andnativecontracts/costs before8QTEST+<=5configpreregcommit then2018-22source/gross. BTCneedsexpiringcontract/BRR/executablehedge orcausalfundingvintages+transmission, notcontinuous/clockproxy. Remainenabled at5/60econ9/10hyp4gross plus65t6; no budgetpause andno newcandidate/blockeralert fromroutineNEEDSDATA.",
+  "next_action": "Commit H10plan/evidence BEFORE anynewbookheader/feature/Pnl. CommitreviewedFEATUREcode thenrootaloneexecute2018\u201322date-firstpublishedshadowbook countgate; no2023numericfields/rawprices/candidateoutcomes. IfFEATUREfailsclose0gross/econ; ifpassescontinueonlyfrozenSOURCEnative/gross/design/immediatebookprotocol. No11thhypothesis:10/10registeredbudgetnowreached, finishthisfinalfrozenquestionthencompleteprogramsummaryandpause6adea9fee9c88191a45399d233743746. Currenteconomic5/60,gross4,prior65t6retained. No status/headlinetcanimplycandidate.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -1036,7 +1082,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-27T03:24:48.084423+00:00",
+  "updated_utc": "2026-10-27T04:34:50.296684+00:00",
   "current_adopted_source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
   "current_adopted_source_reconciliation": "ConnectedGitHubbranch/source reread2026-10-27:codex/workfca9c12andadoptedd14dc9a unchanged. CurrentTIERandFUNDED_PLAN readthroughapp; samepersonal19/funded/evaluation definitions retained. Noallocation or operationalactions. Scopednative6Jlocal/trackedfilenameinventoryabsent; no newfinancialinput or returnrun.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -1334,10 +1380,10 @@
     "material_notification": false
   },
   "active_research_reservation": {
-    "owner": "Codex current continuation",
-    "hypothesis": "none; H09closed and H10notregistered",
-    "stage": "new source-only eligibility work saved; no financial process running or source-admitted TEST",
-    "updated_utc": "2026-10-27T03:24:48.084423+00:00",
+    "owner": "Codex current continuation; root alone actual execution",
+    "hypothesis": "H10",
+    "stage": "final frozen variance hypothesis registered; feature code review before actual inputs",
+    "updated_utc": "2026-10-27T04:34:50.296684+00:00",
     "no_competing_writer_found": true
   },
   "last_design_execution": {
