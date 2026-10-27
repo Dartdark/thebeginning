@@ -34,7 +34,7 @@ def dump(name,x):
 
 @njit(cache=False)
 def simulate(o,h,l,c,hi,lo,allow,rr,start,finish,mode=0,path_mode=0,side=1):
-    """mode0 resting breakout; mode1 control market. side-1 mirrored control.
+    """mode0 resting breakout; mode1 control market; mode2 matched upward trigger.
     Controls use OR width from their actual fill; candidate stop stays OR low.
     Returns tickets and a minute-path equity ledger in risk units before costs.
     """
@@ -51,7 +51,7 @@ def simulate(o,h,l,c,hi,lo,allow,rr,start,finish,mode=0,path_mode=0,side=1):
             # At flatten timestamp, order is cancelled BEFORE entry processing.
             if j==finish:
                 if active:
-                    out[n]=np.array([d,ei,j,entry,oo,risk,0,(oo-entry)*side*20,worst,best,missing,0])
+                    out[n]=np.array([d,ei,j,entry,oo,risk,0,(oo-entry)*side*20,max(worst,(entry-oo)*side),max(best,(oo-entry)*side),missing,0])
                     marks[d,j-541]=(oo-entry)*side/risk;n+=1;active=False
                 break
             points=np.empty(4);points[0]=oo;points[3]=cc
@@ -80,10 +80,11 @@ def simulate(o,h,l,c,hi,lo,allow,rr,start,finish,mode=0,path_mode=0,side=1):
             for k in range(1,4):
                 dest=points[k]
                 if not active:
-                    if mode==0 and dest>=hi[d] and px<hi[d]:
+                    if mode!=1 and dest>=hi[d] and px<hi[d]:
                         entry=hi[d];risk=entry-lo[d]
                         if risk<=0:break
-                        stop=lo[d];target=np.ceil((entry+rr*risk)*4)/4 if rr>0 else 1e100
+                        stop=entry-side*risk
+                        target=(np.ceil((entry+rr*risk)*4)/4 if side>0 else np.floor((entry-rr*risk)*4)/4) if rr>0 else side*1e100
                         active=True;ei=j;px=entry
                     else:px=dest;continue
                 hitstop=(dest-stop)*side<=0 and (dest-px)*side<0
@@ -331,7 +332,10 @@ def diagnostics():
                 for side in [-1,1]:
                     selected=actual[sd==side];sa=np.zeros(g.D,bool);sa[selected.day.to_numpy(int)]=True
                     st=np.full(g.D,541,np.int64);st[selected.day.to_numpy(int)]=selected.j0.to_numpy(int)
-                    q,_=replay(g,ts,hi,lo,sa,1.85,mode=1,start=st,side=side)
+                    mh=hi.copy();ml=lo.copy()
+                    mh[selected.day.to_numpy(int)]=selected.entry.to_numpy()
+                    ml[selected.day.to_numpy(int)]=(selected.entry-selected.risk).to_numpy()
+                    q,_=replay(g,ts,mh,ml,sa,1.85,mode=2,start=st,side=side)
                     total+=q.net_r.sum()
                 side_r.append(float(total))
         nullrows.extend(dict(period=period,run=i,random_time_total_r=null_r[i],random_time_total_dollars=null_d[i],random_side_total_r=side_r[i]) for i in range(1000))
@@ -348,7 +352,26 @@ def diagnostics():
     dump('diagnostics.json',summaries)
     print(json.dumps(summaries,indent=2,default=float),flush=True)
 
+def recheck():
+    """Implementation correction only: original results remain immutable.
+    Fix flatten excursion columns and matched side-null phase. Prove candidate
+    ticket/return identity for every already executed period before controls.
+    """
+    b=json.loads((OUT/'design_gate.json').read_text());g,ts,hi,lo,gates,cal=load();checks=[]
+    specs=dict(b['specs']);specs['NOEMA185']=['NONE',1.85]
+    for name,(key,rr) in specs.items():
+        for period in ['design','validation']:
+            p=OUT/(name+'_'+period+'_trades.csv')
+            if not p.exists():continue
+            old=pd.read_csv(p,parse_dates=['date'])
+            t,_=replay(g,ts,hi,lo,gates[key]&ts.isin(days_for(ts,gates,period)),rr)
+            cols=['day','j0','j1','entry','exit','risk','kind','gross','net','net_r','mnq_net','unknown_held_minutes','unclosed']
+            np.testing.assert_allclose(old[cols].to_numpy(float),t[cols].to_numpy(float),rtol=1e-12,atol=1e-10,equal_nan=True)
+            checks.append(dict(model=name,period=period,tickets=len(t),candidate_returns_identical=True,excursion_rows_changed=int((np.abs(old.mae_points-t.mae_points)>1e-10).sum()+(np.abs(old.mfe_points-t.mfe_points)>1e-10).sum())))
+    dump('implementation_correction.json',dict(original_code_sha=b['code_sha'],corrected_code_sha=sha(__file__),candidate_checks=checks,reason='Independent review: preserve actual breakout phase in side controls; include flatten-open MAE/MFE. No parameter or economic model change.',interrupted_initial_diagnostic_run=True))
+    print('Return identity verified for',len(checks),'model/period ledgers')
+
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--stage',choices=['checks','design','validation','diagnostics'],required=True);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--stage',choices=['checks','design','validation','diagnostics','recheck'],required=True);args=parser.parse_args()
     OUT.mkdir(parents=True,exist_ok=True)
-    {'checks':checks,'design':run_design,'validation':validate,'diagnostics':diagnostics}[args.stage]()
+    {'checks':checks,'design':run_design,'validation':validate,'diagnostics':diagnostics,'recheck':recheck}[args.stage]()

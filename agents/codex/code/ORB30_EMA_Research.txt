@@ -1,0 +1,242 @@
+{ ORB30 EMA — RESEARCH PROTOTYPE; NOT COMPILED OR MC-CONFIRMED.
+  NQ/MNQ, ONE-MINUTE chart, full Globex session, Exchange time CENTRAL.
+  Enable Intrabar Order Generation and use one-minute/tick Bar Magnifier.
+  Native tick fills can differ from Python minute nearer-extreme paths.
+  EMA mode1 = all complete M30 bars; mode2 = cash M30 bars only.
+  RR0 disables target. Default1.85 retains the stated rule;4 is an experiment.
+  No short entries. No re-entry. Calendar blocks at actual OR date.
+  Calendar dates supported2018-2027; extend/review before later use.
+  Default UsePercentRisk=true enables INTEGER futures1%; false uses FixedContracts1.
+  InitialBalance+NetProfit is THIS STRATEGY'S backtest balance, not a broker
+  or shared account balance. Margin and portfolio netting are not modeled.
+  Pending quantity uses planned high-low risk; gap fills can exceed budget.
+  Author timer flatten is approximated by a15:55 CT completed-minute decision
+  and next-tick market exit; no SetExitOnClose/session rollover dependence.
+  Built-in stop/target are active on entry bar; actual fill reanchors the stop
+  amount on first observed fill tick. Broker acknowledgment is unverified.
+  Commission/slippage set in research chart settings, not subtracted twice.
+}
+[IntrabarOrderGeneration = true]
+Inputs: EMAMode(1), EMALength(20), RR(1.85), FlatTime(1555),
+        UsePercentRisk(true), RiskPct(1), InitialBalance(100000),
+        FixedContracts(1), MaxContracts(100);
+Vars: IntrabarPersist StateDate(0), IntrabarPersist ORHigh(0),
+      IntrabarPersist ORLow(0), IntrabarPersist ORCount(0),
+      IntrabarPersist EMAValue(0), IntrabarPersist EMACount(0),
+      IntrabarPersist M30Count(0), IntrabarPersist LastMinute(-1),
+      IntrabarPersist LastMinuteDate(0), IntrabarPersist LastBar(-1),
+      IntrabarPersist PreviousDate(0), IntrabarPersist DecisionClock(0),
+      IntrabarPersist Armed(false), IntrabarPersist Attempted(false),
+      IntrabarPersist CarryPosition(false),
+      IntrabarPersist TTStart(0), IntrabarPersist DayQty(0),
+      IntrabarPersist Blocked(false), IntrabarPersist SignalRisk(0),
+      mins(0), prevmins(0), alpha(0), balance(0), ticksize(0),
+      stopdistance(0), targetprice(0), targetdistance(0);
+
+if Date <> StateDate then begin
+    StateDate=Date; ORCount=0;
+    CarryPosition=(MarketPosition<>0);
+    { Preserve protective anchors if a missing-bar outage carried a trade. }
+    if not CarryPosition then begin ORHigh=0;ORLow=0;end;
+    Armed=false; Attempted=false; TTStart=TotalTrades; DayQty=0;
+    DecisionClock=0;
+    Blocked=(CarryPosition or DayOfWeek(Date)=0 or DayOfWeek(Date)=6
+             or Date<1180101 or Date>1271231);
+    if Date=1180101 then Blocked=true; { 2018-01-01 cash exchange holiday }
+    if Date=1180115 then Blocked=true; { 2018-01-15 cash exchange holiday }
+    if Date=1180219 then Blocked=true; { 2018-02-19 cash exchange holiday }
+    if Date=1180330 then Blocked=true; { 2018-03-30 cash exchange holiday }
+    if Date=1180528 then Blocked=true; { 2018-05-28 cash exchange holiday }
+    if Date=1180703 then Blocked=true; { 2018-07-03 existing repo early-close calendar }
+    if Date=1180704 then Blocked=true; { 2018-07-04 cash exchange holiday }
+    if Date=1180903 then Blocked=true; { 2018-09-03 cash exchange holiday }
+    if Date=1181122 then Blocked=true; { 2018-11-22 cash exchange holiday }
+    if Date=1181123 then Blocked=true; { 2018-11-23 existing repo early-close calendar }
+    if Date=1181205 then Blocked=true; { 2018-12-05 national mourning }
+    if Date=1181224 then Blocked=true; { 2018-12-24 existing repo early-close calendar }
+    if Date=1181225 then Blocked=true; { 2018-12-25 cash exchange holiday }
+    if Date=1190101 then Blocked=true; { 2019-01-01 cash exchange holiday }
+    if Date=1190121 then Blocked=true; { 2019-01-21 cash exchange holiday }
+    if Date=1190218 then Blocked=true; { 2019-02-18 cash exchange holiday }
+    if Date=1190419 then Blocked=true; { 2019-04-19 cash exchange holiday }
+    if Date=1190527 then Blocked=true; { 2019-05-27 cash exchange holiday }
+    if Date=1190703 then Blocked=true; { 2019-07-03 existing repo early-close calendar }
+    if Date=1190704 then Blocked=true; { 2019-07-04 cash exchange holiday }
+    if Date=1190902 then Blocked=true; { 2019-09-02 cash exchange holiday }
+    if Date=1191128 then Blocked=true; { 2019-11-28 cash exchange holiday }
+    if Date=1191129 then Blocked=true; { 2019-11-29 existing repo early-close calendar }
+    if Date=1191224 then Blocked=true; { 2019-12-24 existing repo early-close calendar }
+    if Date=1191225 then Blocked=true; { 2019-12-25 cash exchange holiday }
+    if Date=1200101 then Blocked=true; { 2020-01-01 cash exchange holiday }
+    if Date=1200120 then Blocked=true; { 2020-01-20 cash exchange holiday }
+    if Date=1200217 then Blocked=true; { 2020-02-17 cash exchange holiday }
+    if Date=1200410 then Blocked=true; { 2020-04-10 cash exchange holiday }
+    if Date=1200525 then Blocked=true; { 2020-05-25 cash exchange holiday }
+    if Date=1200703 then Blocked=true; { 2020-07-03 cash exchange holiday }
+    if Date=1200907 then Blocked=true; { 2020-09-07 cash exchange holiday }
+    if Date=1201126 then Blocked=true; { 2020-11-26 cash exchange holiday }
+    if Date=1201127 then Blocked=true; { 2020-11-27 existing repo early-close calendar }
+    if Date=1201224 then Blocked=true; { 2020-12-24 existing repo early-close calendar }
+    if Date=1201225 then Blocked=true; { 2020-12-25 cash exchange holiday }
+    if Date=1210101 then Blocked=true; { 2021-01-01 cash exchange holiday }
+    if Date=1210118 then Blocked=true; { 2021-01-18 cash exchange holiday }
+    if Date=1210215 then Blocked=true; { 2021-02-15 cash exchange holiday }
+    if Date=1210402 then Blocked=true; { 2021-04-02 cash exchange holiday }
+    if Date=1210531 then Blocked=true; { 2021-05-31 cash exchange holiday }
+    if Date=1210705 then Blocked=true; { 2021-07-05 cash exchange holiday }
+    if Date=1210906 then Blocked=true; { 2021-09-06 cash exchange holiday }
+    if Date=1211125 then Blocked=true; { 2021-11-25 cash exchange holiday }
+    if Date=1211126 then Blocked=true; { 2021-11-26 existing repo early-close calendar }
+    if Date=1211224 then Blocked=true; { 2021-12-24 cash exchange holiday }
+    if Date=1220117 then Blocked=true; { 2022-01-17 cash exchange holiday }
+    if Date=1220221 then Blocked=true; { 2022-02-21 cash exchange holiday }
+    if Date=1220415 then Blocked=true; { 2022-04-15 cash exchange holiday }
+    if Date=1220530 then Blocked=true; { 2022-05-30 cash exchange holiday }
+    if Date=1220620 then Blocked=true; { 2022-06-20 cash exchange holiday }
+    if Date=1220704 then Blocked=true; { 2022-07-04 cash exchange holiday }
+    if Date=1220905 then Blocked=true; { 2022-09-05 cash exchange holiday }
+    if Date=1221124 then Blocked=true; { 2022-11-24 cash exchange holiday }
+    if Date=1221125 then Blocked=true; { 2022-11-25 existing repo early-close calendar }
+    if Date=1221226 then Blocked=true; { 2022-12-26 cash exchange holiday }
+    if Date=1230102 then Blocked=true; { 2023-01-02 cash exchange holiday }
+    if Date=1230116 then Blocked=true; { 2023-01-16 cash exchange holiday }
+    if Date=1230220 then Blocked=true; { 2023-02-20 cash exchange holiday }
+    if Date=1230407 then Blocked=true; { 2023-04-07 cash exchange holiday }
+    if Date=1230529 then Blocked=true; { 2023-05-29 cash exchange holiday }
+    if Date=1230619 then Blocked=true; { 2023-06-19 cash exchange holiday }
+    if Date=1230703 then Blocked=true; { 2023-07-03 existing repo early-close calendar }
+    if Date=1230704 then Blocked=true; { 2023-07-04 cash exchange holiday }
+    if Date=1230904 then Blocked=true; { 2023-09-04 cash exchange holiday }
+    if Date=1231123 then Blocked=true; { 2023-11-23 cash exchange holiday }
+    if Date=1231124 then Blocked=true; { 2023-11-24 existing repo early-close calendar }
+    if Date=1231225 then Blocked=true; { 2023-12-25 cash exchange holiday }
+    if Date=1240101 then Blocked=true; { 2024-01-01 cash exchange holiday }
+    if Date=1240115 then Blocked=true; { 2024-01-15 cash exchange holiday }
+    if Date=1240219 then Blocked=true; { 2024-02-19 cash exchange holiday }
+    if Date=1240329 then Blocked=true; { 2024-03-29 cash exchange holiday }
+    if Date=1240527 then Blocked=true; { 2024-05-27 cash exchange holiday }
+    if Date=1240619 then Blocked=true; { 2024-06-19 cash exchange holiday }
+    if Date=1240703 then Blocked=true; { 2024-07-03 existing repo early-close calendar }
+    if Date=1240704 then Blocked=true; { 2024-07-04 cash exchange holiday }
+    if Date=1240902 then Blocked=true; { 2024-09-02 cash exchange holiday }
+    if Date=1241128 then Blocked=true; { 2024-11-28 cash exchange holiday }
+    if Date=1241129 then Blocked=true; { 2024-11-29 existing repo early-close calendar }
+    if Date=1241224 then Blocked=true; { 2024-12-24 existing repo early-close calendar }
+    if Date=1241225 then Blocked=true; { 2024-12-25 cash exchange holiday }
+    if Date=1250101 then Blocked=true; { 2025-01-01 cash exchange holiday }
+    if Date=1250109 then Blocked=true; { 2025-01-09 national mourning }
+    if Date=1250120 then Blocked=true; { 2025-01-20 cash exchange holiday }
+    if Date=1250217 then Blocked=true; { 2025-02-17 cash exchange holiday }
+    if Date=1250418 then Blocked=true; { 2025-04-18 cash exchange holiday }
+    if Date=1250526 then Blocked=true; { 2025-05-26 cash exchange holiday }
+    if Date=1250619 then Blocked=true; { 2025-06-19 cash exchange holiday }
+    if Date=1250703 then Blocked=true; { 2025-07-03 existing repo early-close calendar }
+    if Date=1250704 then Blocked=true; { 2025-07-04 cash exchange holiday }
+    if Date=1250901 then Blocked=true; { 2025-09-01 cash exchange holiday }
+    if Date=1251127 then Blocked=true; { 2025-11-27 cash exchange holiday }
+    if Date=1251128 then Blocked=true; { 2025-11-28 existing repo early-close calendar }
+    if Date=1251224 then Blocked=true; { 2025-12-24 existing repo early-close calendar }
+    if Date=1251225 then Blocked=true; { 2025-12-25 cash exchange holiday }
+    if Date=1260101 then Blocked=true; { 2026-01-01 cash exchange holiday }
+    if Date=1260119 then Blocked=true; { 2026-01-19 cash exchange holiday }
+    if Date=1260216 then Blocked=true; { 2026-02-16 cash exchange holiday }
+    if Date=1260403 then Blocked=true; { 2026-04-03 cash exchange holiday }
+    if Date=1260525 then Blocked=true; { 2026-05-25 cash exchange holiday }
+    if Date=1260619 then Blocked=true; { 2026-06-19 cash exchange holiday }
+    if Date=1260703 then Blocked=true; { 2026-07-03 cash exchange holiday }
+    if Date=1260907 then Blocked=true; { 2026-09-07 cash exchange holiday }
+    if Date=1261126 then Blocked=true; { 2026-11-26 cash exchange holiday }
+    if Date=1261127 then Blocked=true; { 2026-11-27 existing repo early-close calendar }
+    if Date=1261224 then Blocked=true; { 2026-12-24 existing repo early-close calendar }
+    if Date=1261225 then Blocked=true; { 2026-12-25 cash exchange holiday }
+    if Date=1270101 then Blocked=true; { 2027-01-01 cash exchange holiday }
+    if Date=1270118 then Blocked=true; { 2027-01-18 cash exchange holiday }
+    if Date=1270215 then Blocked=true; { 2027-02-15 cash exchange holiday }
+    if Date=1270326 then Blocked=true; { 2027-03-26 cash exchange holiday }
+    if Date=1270531 then Blocked=true; { 2027-05-31 cash exchange holiday }
+    if Date=1270618 then Blocked=true; { 2027-06-18 cash exchange holiday }
+    if Date=1270705 then Blocked=true; { 2027-07-05 cash exchange holiday }
+    if Date=1270906 then Blocked=true; { 2027-09-06 cash exchange holiday }
+    if Date=1271125 then Blocked=true; { 2027-11-25 cash exchange holiday }
+    if Date=1271126 then Blocked=true; { 2027-11-26 existing repo early-close calendar }
+    if Date=1271224 then Blocked=true; { 2027-12-24 cash exchange holiday }
+end;
+
+if MarketPosition<>0 or TotalTrades>TTStart then Attempted=true;
+
+if BarStatus(1)=2 and CurrentBar<>LastBar then begin
+    LastBar=CurrentBar;
+    DecisionClock=Time;
+    mins=IntPortion(Time/100)*60+Mod(Time,100);
+    { Require successive native minute labels within each M30 bucket. }
+    if LastMinuteDate=0 then M30Count=0
+    else if not ((LastMinuteDate=Date and mins=LastMinute+1) or
+            (DateToJulian(Date)=DateToJulian(LastMinuteDate)+1 and
+             LastMinute=1439 and mins=0)) then M30Count=0;
+    if Mod(mins,30)=1 then M30Count=0;
+    M30Count=M30Count+1;
+    if Mod(mins,30)=0 then begin
+        if M30Count=30 and
+           (EMAMode=1 or (Time>=900 and Time<=1500)) then begin
+            if EMACount=0 then EMAValue=Close
+            else begin
+                alpha=2.0/(EMALength+1);
+                EMAValue=alpha*Close+(1-alpha)*EMAValue;
+            end;
+            EMACount=EMACount+1;
+        end;
+        M30Count=0;
+    end;
+    LastMinute=mins;LastMinuteDate=Date;
+
+    if Time>830 and Time<=900 and not CarryPosition then begin
+        if ORCount=0 then begin ORHigh=High;ORLow=Low;end
+        else begin ORHigh=MaxList(ORHigh,High);ORLow=MinList(ORLow,Low);end;
+        ORCount=ORCount+1;
+    end;
+    if Time=900 and not Blocked and ORCount=30
+       and EMACount>=EMALength and Close>EMAValue and ORHigh>ORLow then begin
+        SignalRisk=ORHigh-ORLow;
+        if UsePercentRisk then begin
+            balance=InitialBalance+NetProfit;
+            DayQty=IntPortion(MaxList(0,balance)*RiskPct/100/
+                            (SignalRisk*BigPointValue));
+        end else DayQty=FixedContracts;
+        DayQty=MinList(MaxContracts,MaxList(0,DayQty));
+        Armed=(DayQty>=1);
+    end;
+end;
+
+ticksize=MinMove/PriceScale;
+if Armed or MarketPosition=1 then begin
+    SetStopContract;
+    stopdistance=SignalRisk;
+    if MarketPosition=1 then stopdistance=EntryPrice-ORLow;
+    if stopdistance>0 then begin
+        SetStopLoss(stopdistance*BigPointValue);
+        if RR>0 then begin
+            targetprice=ORHigh+RR*SignalRisk;
+            if MarketPosition=1 then targetprice=EntryPrice+RR*stopdistance;
+            targetprice=-IntPortion(-targetprice/ticksize)*ticksize;
+            { IntPortion truncates toward zero: explicitly round UP. }
+            if targetprice < (ORHigh+RR*SignalRisk) and MarketPosition=0
+                then targetprice=targetprice+ticksize;
+            if MarketPosition=1 and targetprice<EntryPrice+RR*stopdistance
+                then targetprice=targetprice+ticksize;
+            targetdistance=targetprice-ORHigh;
+            if MarketPosition=1 then targetdistance=targetprice-EntryPrice;
+            SetProfitTarget(targetdistance*BigPointValue);
+        end;
+    end;
+end;
+
+if Armed and not Attempted and MarketPosition=0
+   and DecisionClock>=900 and DecisionClock<FlatTime then
+    Buy ("ORB30L") DayQty contracts next bar at ORHigh stop;
+
+if DecisionClock>=FlatTime then begin
+    Armed=false;
+    if MarketPosition=1 then Sell ("ORB30Time") next bar at market;
+end;
+if CarryPosition and MarketPosition=1 then
+    Sell ("ORB30Carry") next bar at market;

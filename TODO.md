@@ -125,6 +125,16 @@ add it here for later review. Record the merit, what is missing, the smallest ne
 duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.
 A queue entry does not add it to a trading plan or start a backtest; review when prerequisites arrive or the user prioritizes it.
 
+- [ ] **ORB30 + M30 EMA20, long-only NQ — WATCH; proxy tested, native implementation unverified.**
+  Verified proxy merit: 994 trades, PF 1.25 after NQ costs; full-session EMA outperformed cash-only EMA in the frozen
+  2018–22 design comparison. Later PF weakens to 1.21; 4R/no-target improvements remain statistically unproven.
+  Current personal19 additions lower profit/DD95; no allocation recommendation, and full Apex comparisons remain limited.
+  Smallest next check: compile the research PowerLanguage prototype on a home-PC research chart, confirm full-session
+  M30 EMA / 15:55 CT proxy settings, export exact fills/settings and reconcile with saved Python trades. Original author
+  EA/flatten settings, native ticks, roll handling and 18 unclassified held minutes still need verification.
+  No new parameter search or live/VPS changes. [Report](agents/codex/results/orb30_ema.md) ·
+  [Research code](agents/codex/code/ORB30_EMA_Research.txt).
+
 - [ ] **6E cross-asset package v4 — WATCH / NEEDS DATA; personal-account research.** Merit: a different market and multi-day
   horizon, with reported cross-asset and walk-forward evidence; potential diversification from the NQ-heavy book.
   Obtain the original Python implementation, frozen settings, contract/roll map, trade/order ledger and daily marked P&L.
