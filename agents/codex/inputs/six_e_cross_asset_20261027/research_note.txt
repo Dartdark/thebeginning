@@ -1,0 +1,81 @@
+6E Cross-Asset Package (6 strategies) – Request for Feedback
+HYPOTHESIS
+The euro is one of the most efficient markets in the world. On its own chart (calendar effects, breakouts, mean reversion, volume) I couldn’t find anything that survives costs. But the euro absorbs information from other markets slowly: US bonds, oil, US stocks and gold. Over weeks it follows the trend in those markets, and after a big shock day in them it keeps adjusting the next day. Every strategy in this package trades the euro on what other markets did, not on what the euro did.
+RESEARCH COMBINED (signal / timing / condition)
+- Economic momentum: trends in macro fundamentals predict currencies (Dahlquist & Hasseltoft, “Economic Momentum and Currency Returns”).
+- Cross-asset time-series momentum: one market’s trend predicts another’s (Pitkäjärvi, Suominen & Vaittinen 2020).
+- Bonds lead other markets (Hong, Torous & Valkanov 2007).
+- Order-flow shocks have persistent price impact in FX (Evans & Lyons 2002). This gives the next-day timing for the shock strategies.
+- Risk-on / risk-off spillover into safe-haven currencies (Ranaldo & Söderlind 2010).
+- Volatility-managed positions (Moreira & Muir 2017).
+- Connors RSI(2) pullbacks and weekly breakouts, used only as entry timing inside the macro direction.
+THE 6 STRATEGIES
+Daily bars, decisions at the 16:00 ET close, 6E / M6E, multi-day holds. Personal account, not prop rules.
+1. Macro Momentum + vol target. The position is the average of three trend signs, each a blend of 10/21/63-day trends:
+Scaled to 5% annual volatility, capped at 1.5×.
+- + ZN trend: bonds up = US yields down = euro up.
+- − crude oil trend: Europe imports energy.
+- − ES trend: money flows into US assets.
+
+
+1. RSI(2) pullback in the macro direction. Buy RSI(2) < 10 only when Macro is long; sell RSI(2) > 90 only when Macro is short. Exit at the 5-day average or after 10 days.
+2. Weekly breakout in the macro direction. Close beyond last week’s high or low, only in the Macro direction. Exit at the opposite level or after 10 days.
+3. Macro-Shock Follow. If ZN moves more than 2 standard deviations vs its last 60 days, or the euro’s 8:29–9:30 ET data reaction does, hold the euro in the shock direction for 1 day. About 27 per year.
+4. Stock-Shock Follow. If ES moves more than 2.5 standard deviations, hold the euro in the same direction as stocks for 1 day. About 8 per year.
+5. Gold-Shock Follow. If gold moves more than 2.25 standard deviations, hold the euro in gold’s direction for 1 day. About 12 per year.
+RESULTS
+Python backtest on 1-minute 6E data, stitched from individual contracts and back-adjusted, Jan 2018 – Oct 2026. Costs: $1.20 per M6E position change.
+Per 1 M6E:
+- Macro Momentum + vol target: Sharpe 0.98 (2018–22 1.03 / 2023+ 0.91), ~$440/yr, max drawdown −$1,220.
+- RSI(2) in macro direction: Sharpe 0.36 (0.55 / 0.05), ~$170/yr, ~14 trades/yr.
+- Weekly breakout in macro direction: Sharpe 0.40 (0.25 / 0.56), ~$270/yr, ~14 trades/yr.
+- Macro-Shock Follow: Sharpe 0.91 (1.14 / 0.50), ~$310/yr, max drawdown −$480.
+- Stock-Shock Follow: Sharpe 0.87 (1.09 / 0.56), ~$210/yr.
+- Gold-Shock Follow: Sharpe 0.95 (1.02 / 0.86), ~$260/yr.
+Combined package (M6E: Macro 2, RSI2 1, Weekly 1, Macro-Shock 2, Stock-Shock 1, Gold-Shock 2):
+- Sharpe 1.63 (2018–22 1.88 / 2023+ 1.30).
+- ~$2,680/yr, max drawdown −$1,840, worst month −$814.
+- By year: 2018 +$3,266, 2019 +$1,559, 2020 −$18, 2021 +$4,022, 2022 +$6,901, 2023 +$3,341, 2024 +$1,206, 2025 +$2,469, 2026 (to Oct) +$849.
+- About 110 trades and position changes per year in total.
+ROBUSTNESS
+- In-sample vs out-of-sample: every strategy is positive in both 2018–22 and 2023+.
+- Placebo:
+  - Each shock strategy beats 1,000 runs of random days with random directions; actual Sharpe is above the 99th percentile.
+  - Macro Momentum beats 300 runs of its signals shifted randomly by 60–250 days (actual 0.90 vs 99th percentile 0.72).
+- Plateau:
+  - Gold-Shock is positive in both periods for every threshold 1.75–3.0 × hold 1–2 days (20 of 20 versions).
+  - Macro-Shock thresholds 2.0–2.5 are all positive.
+  - Macro Momentum lookback sets score 0.56–0.89.
+- Walk-forward: parameters chosen on 2018–21 only, then tested out of sample on 2022–26:
+  - Macro weights 0.99
+  - Macro-Shock 0.82
+  - Gold-Shock 0.57
+  - Stock-Shock 0.31 (weakest leg, kept small)
+- Acting one day late: Macro Momentum still scores 0.79.
+- Control test: a walk-forward machine-learning model on 28 cross-asset features (retrained yearly, 2020–26 out of sample) scored Sharpe −0.14 / 0.04. The simple economic rules beat it, which I take as evidence the package isn’t just data mining.
+WHAT FAILED ON 6E (so nobody repeats it)
+- Trend following on the euro’s own chart: TSMOM 1–12 months, Donchian/Turtle, 50/200 MA.
+- Retail setups on their own: RSI(2), Bollinger, inside bar, weekly breakout, Turnaround Tuesday, Sunday gap fill.
+- Intraday:
+  - London/Frankfurt/NY opening-range breakouts.
+  - Asian-session mean reversion.
+  - The ECB-fix pattern: real, but about 1 bp, too small after costs.
+- Calendar effects:
+  - FOMC days and the FOMC cycle.
+  - Month-end and quarter-end dollar flows.
+  - Day-of-week and month-of-year seasonality.
+- Other: volume-conditioned reversal, macro fair-value reversion, 52-week-high anchoring, residual reversal and residual momentum.
+PORTFOLIO FIT
+- Correlation with my intraday NQ book: about 0.06.
+- Correlation between the six strategies: −0.11 to 0.18, excluding the Macro legs.
+- Different market, holding period (days to weeks) and drivers, so it’s real diversification for a personal account.
+WEAK SPOTS
+- Not verified in MultiCharts yet; Python only. The next step is one MultiCharts strategy with Data1 = M6E and Data2–5 = ZN, CL, ES, GC on daily bars.
+- 2020 was flat (COVID whipsaw across bonds, oil and stocks).
+- Three of the six are one-day shock follows. Different triggers and low correlation, but the same mechanism: slow absorption of big news. If markets start pricing news faster, they’d weaken together.
+- The weaker legs: RSI2-in-macro has faded since 2023 (0.05), and Stock-Shock had the weakest walk-forward (0.31).
+- One currency only. Carry and cross-currency momentum aren’t possible without more pairs.
+FEEDBACK WANTED
+1. Has anyone traded cross-asset signals on currency futures live? How did fills on M6E at the 16:00 ET close compare with backtests?
+2. Does anyone have experience with Bund (FGBL) or Euro Stoxx data as a signal for 6E? I only have US rates, so I can’t measure the US–Europe rate gap directly.
+3. Is anyone running a basket across 6E / 6J / 6B / 6A? I’d like to know whether the shock-follow idea transfers to other currencies before exporting the data.
