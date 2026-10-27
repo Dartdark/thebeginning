@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H09_registered_source_support_pending_continuing_bounded_v2",
+  "status": "H09_closed_source_gate_continuing_bounded_v2_one_slot_remains",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -201,6 +201,15 @@
       "source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
       "report": "agents/codex/research/hunt_v2_megacap_earnings_source_gate.md",
       "decision": "DONOTTEST already tested weighted vendorEPSsurprise/calendar and opening reaction families. Stopped before earningsCSVheader/schema/row; no numeric vintage or clock authentication claim.",
+      "new_hypotheses": 0,
+      "new_gross_screens": 0,
+      "new_economic_evaluations": 0
+    },
+    {
+      "scope": "Final-slot prior-definition and sizing feasibility source-only gate",
+      "source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
+      "report": "agents/codex/research/hunt_v2_final_question_source_gate.md",
+      "decision": "No H10TEST nominated. DIX/vol/planstate/MOCflow/WMR/LBMAownprice families alreadytested or unsupported. NativeR250onotherlegsdoesnotestablishnovelty/support. Keep1unspentslot, no manufacturedmechanism or H09repair.",
       "new_hypotheses": 0,
       "new_gross_screens": 0,
       "new_economic_evaluations": 0
@@ -690,7 +699,7 @@
     {
       "id": "H09",
       "name": "MES MOC extra-lot affordability at fixed250USD research slice",
-      "stage": "REGISTERED_before_actual_source_inputs",
+      "stage": "CLOSED_source_expected_normal_date_missing_before_gross",
       "mechanism": "agents/codex/research/hunt_v2_mes_moc_affordability_nomination.md",
       "plan": "agents/codex/plans/hunt_v2_mes_moc_affordability.md",
       "mechanism_decision": "TEST one bounded whole-contract allocation continuing H08family; parent alpha and sizing ancestry selected",
@@ -713,7 +722,7 @@
       "min_design_parent_events": 100,
       "min_design_extra_events": 50,
       "min_extra_each_side": 10,
-      "raw_ES_data_or_schema_read": false,
+      "raw_ES_data_or_schema_read": true,
       "new_returns_calculated": false,
       "gross_screens_run": 0,
       "counted_evaluations": 0,
@@ -722,7 +731,59 @@
       "preregistration_commit": "1a8087f7358901e08fa7e284ded7a6913b58568b",
       "report": "agents/codex/results/hunt_v2_mes_moc_affordability.md",
       "prelisting_MES_proxy_limit_retained": true,
-      "prior_fractional_MOC_ATR_pooling_and_generic_RiskPerTrade_retained": true
+      "prior_fractional_MOC_ATR_pooling_and_generic_RiskPerTrade_retained": true,
+      "source_implementation_commit": "2c2391039dc774dfc4cb9511e63920c229a8e6c8",
+      "source_started_utc": "2026-10-27T02:10:01.015192+00:00",
+      "source_completed_utc": "2026-10-27T02:10:52.155366+00:00",
+      "source_marker": "analysis/outputs/codex_hunt_v2_mes_affordability/source_verified_execution.json",
+      "source_marker_sha256": "65664717db0542fbad4bc19abdf226507293e814ae88cd0a87dd23ccdf9d307c",
+      "source_gate_sha256": "42d02d746d72f202dc8e96e1966ffe992d815e155600dca7a10ce893d085c9f7",
+      "independent_review": "agents/codex/reviews/hunt_v2_mes_source_admission.md",
+      "independent_review_machine": "agents/codex/reviews/hunt_v2_mes_source_admission.json",
+      "source_support_gate": {
+        "phase": "SOURCE_SUPPORT_only",
+        "passed": false,
+        "checks": {
+          "native_global_valid": true,
+          "expected_and_held_source_paths_complete": false,
+          "min_100_design_parents": true,
+          "min_50_extra": true,
+          "min_10_extra_each_side": true,
+          "min_3_extra_years": true,
+          "min_95percent_known": true,
+          "min_1000_distinct_matched_masks_and_variable_cell": true
+        },
+        "parent_events": 131,
+        "extra_events": 118,
+        "known_affordability_events": 131,
+        "known_fraction": 1.0,
+        "extra_by_side": {
+          "-1": 69,
+          "1": 49
+        },
+        "extra_years": [
+          2018,
+          2019,
+          2020,
+          2021,
+          2022
+        ],
+        "unresolved_expected_dates": [
+          "2020-11-30"
+        ],
+        "unresolved_held_event_ids": [],
+        "raw_stopped_or_account_returns_computed": false,
+        "gross_screen_runs": 0,
+        "economic_evaluations": 0,
+        "whole_source_veto_not_selective_future_path_deletion": true,
+        "observed_chart_and_conservative_calendar_port_only": true,
+        "source_MC_parity_certified": false,
+        "next_action": "Close H09 before raw/economic returns; no count/calendar/threshold/null rescue"
+      },
+      "closed_reason": "Expected normal2020-11-30 has no C1400/C1450 source bars; unknownparent decision globallyvetoes.131observedparents/118EXTRA supportotherwisePASS, no terminal outcomes. Do not discarddate/changeparent/retry.",
+      "raw_screen_authorized": false,
+      "source_partial_chart_and_MES_prelisting_limits_retained": true,
+      "prospective_gross_code_NOT_RUN": true
     }
   ],
   "counted_evaluations": [
@@ -837,7 +898,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "Commit H09mechanism and five-definition prereg BEFORE actualESinputs. Independently review/commit shared-grid source/support adapter, bind explicit2017..22inputs, then run SOURCE/count only; no outcomes before allsupportgatesPASS. Frozen100parents/50EXTRA/10eachside/1000matchedsupport, literalcalendarport and native risk250 retained. If sourcepasses rawEXTRA7.48screen then stoppeddesign then immediatebook; preserve allfailures. Counts5/60economic,9/10hypotheses,4gross plus65t6, no pause merelyforfailure.",
+  "next_action": "H09CLOSED beforegross: missingnormal2020-11-30C1400/C1450 source, allsupportotherwisePASS. Do notrerun/repair/dropdate/changeparent orpriceprospectivegross. Save/push immutableledgers/report/review. OneunspentH10slotrequiresa genuinelydistinctmechanism withcredibleinput+prior-definition novelty; latestfiniteDIX/vol/portfolio/MOCflow/WMR/LBMA/sizing screennominatesnone. Continueonlywithnewconcretesource/evidence, no unchangedauditloop or manufacturedtrial; mechanism8Q+<=5configcommitbeforeinputs. Budget5/60econ9/10hyp4gross plus65t6, NOTatlimit; doNOTpauseautomationmerelyforfailure. No newcandidatealert.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -908,7 +969,7 @@
     "v2_hypotheses_started": 6,
     "retained_gross_screens": 4
   },
-  "last_report": "agents/codex/results/hunt_v2_mcl_affordability.md",
+  "last_report": "agents/codex/results/hunt_v2_mes_moc_affordability.md",
   "parallel_work_observed": [
     {
       "commit": "24dce9a",
@@ -955,7 +1016,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-27T02:05:54.128488+00:00",
+  "updated_utc": "2026-10-27T02:17:05.120189+00:00",
   "current_adopted_source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
   "current_adopted_source_reconciliation": "d14dc9a TIER/MINED/research/data/executableallocations identical073e27c. Documentationstatusupdatesdo notchangeadoptedallocations; no operationalaction or otherbranchwrite. Personal19 alreadycontainsFC2B/Twin but not separateHighwinE1bracket.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -1254,9 +1315,9 @@
   },
   "active_research_reservation": {
     "owner": "Codex current research turn",
-    "hypothesis": "H09",
-    "stage": "registered pending reviewed source/support execution; root alone runs actual inputs",
-    "updated_utc": "2026-10-27T02:05:54.128488+00:00",
+    "hypothesis": "none; H09closed, H10notregistered",
+    "stage": "save concrete source rejection; one unspent bounded slot requires a distinct credible nomination",
+    "updated_utc": "2026-10-27T02:17:05.120189+00:00",
     "no_competing_writer_found": true
   },
   "last_design_execution": {
@@ -1553,5 +1614,7 @@
       "H01_H04_rawspec_source_limitations_cleared": false,
       "next_action": "CloseH07beforegross/economicoutcomes; no threshold/clock/null rescue"
     }
-  }
+  },
+  "last_source_admission_report": "agents/codex/results/hunt_v2_mes_moc_affordability.md",
+  "last_source_admission_review": "agents/codex/reviews/hunt_v2_mes_source_admission.json"
 }
