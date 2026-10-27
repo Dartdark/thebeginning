@@ -1,6 +1,6 @@
 {
   "program": "strategy_hunt_v2",
-  "status": "H07_source_only_reviewed_pending_actual_admission",
+  "status": "H07_SOURCE_pass_frozen_FEATURES_support_pending",
   "started_utc": "2026-10-26T14:21:58.337703+00:00",
   "user_local_date": "2026-10-26",
   "timezone": "America/Los_Angeles",
@@ -586,7 +586,7 @@
     {
       "id": "H07",
       "name": "LDF after underwater same-side own RS position",
-      "stage": "source_only_implementation_reviewed_pending_execution",
+      "stage": "SOURCE_metadata_pass_FEATURES_support_pending",
       "mechanism": "agents/codex/evidence/hunt_v2_ldf_rs_open_loss.md",
       "mechanism_decision": "TEST finite owned risk-state interaction; no external compulsory flow claim",
       "plan": "agents/codex/plans/hunt_v2_ldf_rs_open_loss.md",
@@ -599,7 +599,7 @@
         "PRICE_0901 unselectablecontrol"
       ],
       "new_returns_calculated": false,
-      "raw_RS_event_values_read": false,
+      "raw_RS_event_values_read": true,
       "gross_screens_run": 0,
       "counted_evaluations": 0,
       "validation_run": false,
@@ -608,7 +608,14 @@
       "prior_closed_studies_reopened": false,
       "preregistration_commit": "4c3612104c10f5e5eeb96e53d8cde6bc2a3f2b3d",
       "preexecution_review": "agents/codex/reviews/hunt_v2_ldf_rs_preexecution.md",
-      "predata_adjudication": "agents/codex/research/hunt_v2_ldf_rs_predata_adjudication.md"
+      "predata_adjudication": "agents/codex/research/hunt_v2_ldf_rs_predata_adjudication.md",
+      "source_metadata_passed": true,
+      "source_selected_events": 1222,
+      "source_structural_issues": 0,
+      "source_parent_decisions_covered": 485,
+      "source_marker": "analysis/outputs/codex_hunt_v2_ldf_rs_open_loss/source_verified_execution.json",
+      "source_marker_sha256": "35034d3e71e4c183d6267c23bd3f9904f1d4c80d18019ebde3d469586fb0882a",
+      "native_marks_or_feature_masks_read": false
     }
   ],
   "counted_evaluations": [
@@ -723,7 +730,7 @@
     }
   ],
   "qualifying_candidates": [],
-  "next_action": "Execute committed H07 SOURCE-only phase with originalprereg4c36121. Settings/canonical RS identity and selected2018-22position metadata/coverage first; no native marks, feature masks, gross/stopped outcomes or book tests in this code. IfSOURCEfailscloseH07, do not swap MCfile/clock or rerun. SOURCEPASSonlypermits separately committed/reviewed FEATURES/support phase. Budget5/60economic,7/10hypotheses,4grossscreens plus65t6; no qualifying candidate/event/budgetpause.",
+  "next_action": "Commit SOURCE PASS evidence, then review/commit only fixed H07 FEATURES/support implementation before actual nativeC840/O541 marks and masks. Source1,222selected2018-22events/0structuralissues/all485parentdecisionscovered; not feature/economic pass. Fixed90%known/100kept/20removed>=3years/min10keptside and two>=1000mask feasibility gates before raw endpoints. Source state/prefix/nativebasis and unknownKEEP frozen. No H01/H04repair or tuning; budget5/60economic,7/10hypotheses,4gross +65t6; notificationnull.",
   "boundaries": [
     "write only agents/codex/,analysis/codex_*.py,analysis/outputs/codex_*",
     "no shared rankings/plans/live/VPS/broker/API changes",
@@ -734,7 +741,7 @@
     "old_t6_research_paused": true,
     "old_t6_alerts_paused": true,
     "v2_continuation_enabled": true,
-    "note": "Continue bounded v2; H07 own-position input admission pending. Budget5/60economic,7/10hypotheses,4gross plus65t6. No qualifying candidate/event; only pause at either budget limit; t6 and watcher remain stopped.",
+    "note": "H07SOURCEpassed; FEATURES/support pending at frozen prereg. Budget5/60economic,7/10hypotheses,4gross plus65t6. No qualifying candidate/event; continue until budget, t6/watcher remain stopped.",
     "automation_id": "6adea9fee9c88191a45399d233743746",
     "title": "Strategy hunt v2",
     "timezone": "America/Los_Angeles",
@@ -841,7 +848,7 @@
     }
   ],
   "notification_event": null,
-  "updated_utc": "2026-10-27T00:34:57.641591+00:00",
+  "updated_utc": "2026-10-27T00:35:40.913050+00:00",
   "current_adopted_source_commit": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
   "current_adopted_source_reconciliation": "d14dc9a TIER/MINED/research/data/executableallocations identical073e27c. Documentationstatusupdatesdo notchangeadoptedallocations; no operationalaction or otherbranchwrite. Personal19 alreadycontainsFC2B/Twin but not separateHighwinE1bracket.",
   "bench_uncertainty_update": "agents/codex/research/hunt_v2_current_bench_delta_615485f.md",
@@ -1141,8 +1148,8 @@
   "active_research_reservation": {
     "owner": "Codex current research turn",
     "hypothesis": "H06",
-    "stage": "H07 frozen own RS-position/LDF source admission; ROOT owns all actual data executions",
-    "updated_utc": "2026-10-27T00:20:42.729614+00:00",
+    "stage": "ROOT sourceadmitted; fixed feature/support code being implemented without actual marks/outcomes",
+    "updated_utc": "2026-10-27T00:35:40.913035+00:00",
     "no_competing_writer_found": true
   },
   "last_design_execution": {
@@ -1348,5 +1355,34 @@
     "no_price_bytes_before_source_admission": true,
     "counted_evaluations_added": 0,
     "gross_screens_added": 0
+  },
+  "last_position_metadata_admission": {
+    "started_utc": "2026-10-27T00:34:58.097580+00:00",
+    "completed_utc": "2026-10-27T00:35:05.345990+00:00",
+    "phase": "SOURCE_only",
+    "passed": true,
+    "prereg": "4c3612104c10f5e5eeb96e53d8cde6bc2a3f2b3d",
+    "implementation_commit": "7a9832725f1011ad554bd4da0efa92ca06ef70b2",
+    "code_sha256": {
+      "analysis/codex_hunt_v2_ldf_rs_open_loss.py": "ccd3e4e2e92c8a6f12138192a518178924e16e708857759722a60809803f8d77",
+      "analysis/codex_hunt_v2_ldf_rs_metadata.py": "1b85ccfcbccb62ece192fb8c7d04049440b1242f0e09ae7c4c23edf4c3e7815f",
+      "agents/codex/research/hunt_v2_ldf_rs_predata_adjudication.md": "245dcdfc18ed6bd9878379a6e30a80c511f5687df106a2e532e40a733d61102d"
+    },
+    "artifacts_sha256": {
+      "source_attempt.json": "a364021c22284259a192c28db47fa15863991902fc6577d043a5400561557ceb",
+      "source_parent_dates_only.json": "6f3f8f8712d411ed0954ad1bb1dbed80af8811b74b2ab8228bceb09ea2031ca1",
+      "source_gate.json": "52e9bcb105ca9ace97c47733d6f3c6f82018ed60f83ce5d5654f28b07470643d",
+      "source_input_binding.json": "cbb889854831bd3f2e0cfdd9291bde139159eb1edd56db4e4c84a25810a1219b"
+    },
+    "actual_RS_selected_metadata_values_read": true,
+    "new_native_marks_or_features_or_returns_calculated": false,
+    "future_year_RS_Time_Price_Qty_or_exit_Price_PNL_interpreted": false,
+    "gross_screen_runs": 0,
+    "economic_evaluations": 0,
+    "source_PASS_is_not_feature_or_economic_admission": true,
+    "marker": "analysis/outputs/codex_hunt_v2_ldf_rs_open_loss/source_verified_execution.json",
+    "selected_events": 1222,
+    "parent_decisions_covered": 485,
+    "source_limit": "Report coverage/completeness and current MC own-book state assumptions, not external completeness/live fills/corrected RS raw-spec parity."
   }
 }
