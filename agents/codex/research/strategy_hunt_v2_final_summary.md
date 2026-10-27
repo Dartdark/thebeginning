@@ -2,7 +2,7 @@
 
 The authorized **10-hypothesis limit is exhausted**. No piece completed all native-cost significance,
 positive design/previously seen validation, placebo, independent-review and BASE/EMPTY book-improvement
-gates. No strategy is promoted or approved for trading. The continuation automation is to be paused
+gates. No strategy is promoted or approved for trading. The continuation automation has been paused
 for budget completion; this is separate from the already stopped t6 program and its paused watcher.
 
 Final counters: **10/10 registered hypotheses,5/60 economic model evaluations,4 gross screens**.
@@ -97,8 +97,10 @@ No failed-gate PowerLanguage draft or deployment was produced; phone delivery is
 
 ## Stop record
 
-The summary and final evidence are saved before the authorized pause of continuation
-`6adea9fee9c88191a45399d233743746`. The machine progress record stores the actual pause confirmation
-separately; a pending pause is never called verified. Pause reason: **max_hypotheses=10 completed**,
+The summary and final evidence were saved and pushed in`0a249e4` before pausing continuation
+`6adea9fee9c88191a45399d233743746`. The app tool confirmed `is_enabled:false` at
+`2026-10-27T04:51:35.619966+00:00`; see the [saved pause confirmation](strategy_hunt_v2_automation_pause.json)
+and machine progress record. Only its enabled flag was changed. This confirms automation state, not
+phone delivery. Pause reason: **max_hypotheses=10 completed**,
 not any individual failed hypothesis. No further automatic research, repaired variant or extra trial
 belongs to this completed budget. The final verdict is **NO QUALIFYING PIECE FOUND**.

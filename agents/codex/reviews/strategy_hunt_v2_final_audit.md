@@ -107,3 +107,42 @@ verdict and must not be represented as having been independently verified by thi
 
 **Verdict: PASS for final evidence/report/budget consistency. Hypotheses remain closed; no qualifying
 book-improvement piece was found. Complete the explicitly authorized pause and record its real result.**
+
+
+## Post-pause administrative verification — PASS
+
+At2026-10-27T04:53:55.492953+00:00 the reviewer examined ONLY the administrative changes after the reviewed evidence commit
+`0a249e41490c4e135be57c6ca00bc53879f7a2e1` (commit timestamp2026-10-27T04:51:12Z). The final summary
+now uses completed-pause tense and links the saved confirmation. Progress now records budget-complete/
+paused state, no active researcher, and stop instructions. All10 hypothesis objects, budget counters,
+qualifying-candidate list, final verdict and result/summary paths are unchanged from the evidence commit.
+Counters remain **10 registered hypotheses,5 economic models,4 gross screens**, with no qualifying piece.
+No source/strategy code, artifact, financial number or economic conclusion was changed by this delta.
+
+The saved pause confirmation records `automations_update` with exactly:
+
+```json
+{"jawbone_id":"6adea9fee9c88191a45399d233743746","is_enabled":false}
+```
+
+Its returned state is `success:true,is_enabled:false`, update timestamp
+`2026-10-27T04:51:35.619966+00:00`, after the evidence commit. This reviewer then independently called
+**read-only** `automations_peek` for that exact ID. It returned the single `Strategy hunt v2` automation
+with **`is_enabled:false`**, observed `updated_at:2026-10-27T04:52:39.709042+00:00`. The reviewer did
+not call any automation mutation, inspect/change another automation or resume a watcher. The independent
+peek confirms disabled state; it is not confirmation of phone delivery. Root's remote push receipt is
+not independently reverified by this narrow administrative addendum.
+
+The pause reason remains completion of `max_hypotheses=10`, not H10's individual source failure.
+The new confirmation link resolves. No raw data/P&L, real calendar, research script, tests, source audit
+or financial computation was rerun. The earlier pre-pause audit snapshot remains an honest historical
+record; this addendum independently verifies the subsequent disabled state.
+
+|Administrative file|Post-pause SHA256 at this check|
+|---|---|
+|`agents/codex/research/strategy_hunt_v2_final_summary.md`|`af45ab4395ad33dcdcbc5ed8f32fcf491a987e6b89934cfc7f80db41f049894a`|
+|`agents/codex/research/strategy_hunt_v2_progress.json`|`a58a6c5edafe677f1bec487c1fa6df4eac976db7acb63ada031cea8e63115183`|
+|`agents/codex/research/strategy_hunt_v2_automation_pause.json`|`8e87cc920795d9ffcc39e6a6080566f8f1d208c1288baf896c7d91938b1fee9a`|
+
+**Administrative verdict: PASS.** The exact authorized continuation is disabled, counters/results
+remain unchanged, and no further hypothesis is authorized under the completed budget.
