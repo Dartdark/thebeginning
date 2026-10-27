@@ -125,6 +125,15 @@ add it here for later review. Record the merit, what is missing, the smallest ne
 duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.
 A queue entry does not add it to a trading plan or start a backtest; review when prerequisites arrive or the user prioritizes it.
 
+- [ ] **PrimeSync ES/NQ, 15m/30m — WATCH; research prototype, not MC-verified (2026-10-27).** Merit: in the frozen
+  reconstruction, full exit at4.5R beat thirds in all four2018-22 contexts and the selected style stayed net positive
+  in all four2023+ checks. Recent significance is weak; parameters are assumed, not the author's verified settings.
+  Compile [PrimeSync_v1](agents/codex/code/PrimeSync_v1.txt) on a separate research chart using the
+  [setup notes](agents/codex/code/PrimeSync_SETUP.md); export Settings, List of Trades and matching minute/total-volume data.
+  Verify signals, ADX/VWAP/ATR, integer risk sizing, entry-bar protection and IOG stop/partial behavior; reconcile native
+  micro versus mini-volume/cost assumptions. Matched controls, independent review and portfolio/account contribution
+  remain unverified; do not add it to a plan from this screen. [Results](agents/codex/results/primesync.md).
+
 - [ ] **6E cross-asset package v4 — WATCH / NEEDS DATA; personal-account research.** Merit: a different market and multi-day
   horizon, with reported cross-asset and walk-forward evidence; potential diversification from the NQ-heavy book.
   Obtain the original Python implementation, frozen settings, contract/roll map, trade/order ledger and daily marked P&L.
