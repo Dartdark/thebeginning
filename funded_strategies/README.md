@@ -60,7 +60,8 @@ Tier list of everything tested: `../TIER_LIST.md`.
 | **Late-Day Flow** (added 2026-10-12) | 5 min MNQ | `NumContracts` 2, `RiskPerTrade` 0 |
 | **CL Sunday Gap Fade** (added 2026-10-14) | 5 min MCL (Eastern exchange time) | `NumContracts` 2, `RiskPerTrade` 0, `ExitTime` 1000 |
 | **ES MOC Follow** (added 2026-10-17, `ES_MOC_Follow.txt`) | 5 min **MES**, Exchange time (Central) | `NumContracts` 2, `RiskPerTrade` 0; Symbol Mapping `@MES -> MESZ6` |
-| **Relative Strength** (added 2026-10-20, `NQ_Relative_Strength.txt`) | **1 min MNQ + 1 min @ES as Data2**, Exchange time | 50K: `TradeDir` 1 (longs), `NumContracts` 1; 150K: `TradeDir` 0, `NumContracts` 1; off while the cushion is below full size |
+| **Relative Strength** (added 2026-10-20, `NQ_Relative_Strength.txt`) | **1 min MNQ + 1 min @ES as Data2**, Exchange time | **50K: replaced 2026-10-28 by the T fade (below)**; 150K: `TradeDir` 0, `NumContracts` 1; off while the cushion is below full size |
+| **T_ONESIDE fade** (added 2026-10-28, `NQ_T_Oneside_Fade.txt`) | **1 min MNQ**, Exchange time, CME 24h session, IOG off, Bar Magnifier off | **50K funded only:** `Qty` 1, `UseT` true, `UseOS` false, `UseStop` true (file defaults); off while the cushion is below $1,500; Trade Logger tag `TOS` |
 | **Dual Thrust** (added 2026-10-24, `NQ_Dual_Thrust.txt`) | **1 min MNQ**, Exchange time, CME 24h session, IOG off | **150K funded only:** `NumContracts` 2 (1 while the cushion is below $3,000, the 150K half-size rule); inputs as in the file (CT presets); Trade Logger tag `DT` |
 | **Overnight Tick / VIX** (added 2026-10-24, `NQ_Overnight_Tick_VIX.txt`) | 5 min MNQ, Exchange time, IOG off; **Data2 VIX_CBOE daily** (Map ASCII) | 50K: `NumContracts` 1 (off below full size); 150K: `NumContracts` 2 (1 below the $3,000 cushion); Trade Logger tag `OTV` |
 

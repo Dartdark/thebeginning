@@ -15,6 +15,21 @@ Priority order (details in the sections below and in `../reports/Trading_Busines
    (~$25k = 1/4, ~$50k = 1/2, ~$100k = full 1 NQ). Per dollar, Apex evaluations earn far more in year 1, so the personal
    account is funded from payouts, not savings.
 
+## T_ONESIDE fade in place of Relative Strength longs on 50K funded (user, 2026-10-28)
+
+`NQ_T_Oneside_Fade.txt` (T_ONESIDE v2, fade only: heavy night (volume > 1.4 x 20-night median) -> fade the night 08:29 -> 08:44 CT,
+stop 0.40 x ATRd; TIER_LIST B, checker PASS WITH CONCERNS, MultiCharts-confirmed 348 / 358 fades, net t 3.5). Re-bench on the
+current plans (`../analysis/t_oneside_bench2.py`, two independent runs of 1,000 paired 2-year histories):
+
+| Plan | Change | Effect (run 1 / run 2) | Decision |
+|---|---|---|---|
+| **50K funded** | **Relative Strength longs 1 MNQ -> T fade 1 MNQ** | y2 +$194 / +$182, blown 5.9 -> 4.3% / 5.6 -> 4.2%, all 6 payouts in 2y 93 -> 95%, y2 p5 $2,925 -> $10,000 / $1,500 -> $13,000; y1 −$55 / −$70, 6th payout +5 / +8 days | **in the plan** |
+| 50K funded | + T 1 / 2 MNQ, OT -> T, ONB ML -> T | noise or worse | not used |
+| 150K funded | + T 1-3 MNQ, OT 2 -> T 2 | within $80 of the plan (cap-bound) | not used (RS stays both sides) |
+
+Best of 5 variants, so part of the gain may be luck; it repeated on new histories. Relative Strength stays in the 150K funded
+and personal plans.
+
 ## Relative Strength NQ / ES added (2026-10-20)
 
 The user's RelStrength_v3 (`NQ_Relative_Strength.txt`; research `../analysis/relative_strength_test.py`, checker PASS WITH
@@ -124,13 +139,13 @@ MNQ (blown 11–12%), EOS $500 (slower, 269 days), dropping our Monday Long (274
 **Cushion sizing:** cushion = balance − trailing threshold, each morning. f = cushion / **$1,500**,
 kept between 0.5 and 1; multiply each full-size input by f and round down:
 
-| Cushion | f | VB normal / flagged | ONB ML risk | OT / VIX | EOS risk | LDF | NFP risk | Bridge Monday | CL Sunday | ES MOC | RS longs |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| $1,500 or more | 1.0 | 2 / 1 | 400 | 1 | 700 | 2 | 500 | 1 | 2 MCL | 2 MES | 1 |
-| $1,125 | 0.75 | 1 / 0 | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
-| $750 or less | 0.5 | 1 / 0 | 200 | 0 (off) | 350 | 1 | 250 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
+| Cushion | f | VB normal / flagged | Swing Target | ONB ML risk | OT / VIX | EOS risk | LDF | NFP risk | Bridge Monday | CL Sunday | ES MOC | T fade (was RS longs) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| $1,500 or more | 1.0 | 1 / 1 | 1 | 400 | 1 | 700 | 2 | 500 | 1 | 2 MCL | 2 MES | 1 |
+| $1,125 | 0.75 | 0 / 0 (off) | 0 (off) | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
+| $750 or less | 0.5 | 0 / 0 (off) | 0 (off) | 200 | 0 (off) | 350 | 1 | 250 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
 
-(Table updated 2026-10-23 to the current 10-strategy plan; the old one still listed VB 3 and VCS.) Any cushion in between:
+(Table updated 2026-10-28: VB 1/1 + Swing Target 1 since 2026-10-25, T fade in place of RS longs since 2026-10-28; 1-lot pieces round down to 0 below full size, as benched.) Any cushion in between:
 f = cushion / 1,500, multiply, round DOWN to whole contracts (risk inputs: multiply, no rounding). Evaluations (combines)
 are NOT cushion-sized: they run the combine set at fixed size.
 
