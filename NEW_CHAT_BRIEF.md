@@ -55,6 +55,9 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   net of costs ES t 0.8, GC t 0.0; VIX gate not significant. `analysis/orb_vix_test.py`.
 - **Brooks price-action bot v201 (user's file, 2026-10-25): F.** Gross ~0R, net −0.05R a trade; longs win only by drift (random-time
   longs with the same bracket do as well). `analysis/brooks_bot_test.py`.
+- **2026-10-28 (user): 50K funded plan, Relative Strength longs -> T_ONESIDE fade 1 MNQ** (`funded_strategies/NQ_T_Oneside_Fade.txt`;
+  re-bench `analysis/t_oneside_bench2.py`: blown 5.9 -> 4.3%, all 6 payouts in 2y 93 -> 95%, y2 +$190, y1 −$60). 150K unchanged.
+  IFT_NQ5 (Codex upload, user's MC report incl. Bar Magnifier rerun): C.
 - **Open for Claude:** automatic cushion sizing after the account check. (Dual Thrust and T_ONESIDE v2 MC checks done
   2026-10-25: 1,609 / 1,611 and 348 / 358 trades identical.)
 - **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)
@@ -308,7 +311,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
 | Bridge Monday Long | as shipped | 1 MNQ |
 | **CL Sunday Gap Fade** (new, `CL_Sunday_Gap_Fade.txt`) | 5 min **MCL**, Eastern exchange time | `NumContracts` 2, `ExitTime` 1000 (= 9:00 CT) |
 | **ES MOC Follow** (added 2026-10-17, `ES_MOC_Follow.txt`) | 5 min **MES**, Central | `NumContracts` 2; mapping `@MES -> MESZ6` |
-| **Relative Strength** (added 2026-10-20, `NQ_Relative_Strength.txt`) | 1 min MNQ + @ES Data2, Central | 50K: longs only 1 MNQ (`TradeDir` 1); 150K: both sides 1 MNQ; not in evaluations |
+| **Relative Strength** (added 2026-10-20, `NQ_Relative_Strength.txt`) | 1 min MNQ + @ES Data2, Central | 50K: **replaced 2026-10-28 by the T_ONESIDE fade** (`NQ_T_Oneside_Fade.txt`, 1 MNQ); 150K: both sides 1 MNQ; not in evaluations |
 
 - **Cushion sizing:** f = cushion / ref, kept in 0.5–1.
   - **Funded phase: full size from a $1,500 cushion (user's decision, 2026-10-14).** The $1,000 setting blows 17–18%
