@@ -10,6 +10,13 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   every reply to the user, so each new message reaches the phone. The tool is often deferred: load it first with
   ToolSearch `select:PushNotification` (2026-10-24: a session wrongly reported it missing all day). (A hook can't do this from the cloud container: ntfy.sh
   answers 429 from the shared proxy.)
+- **Master session (user, 2026-10-28):** `session_01Wk1fPXwvHF5qTjW7bUhYx9` (desktop app, pinned) is the user's master session: it
+  tracks the other sessions, collects the decisions waiting on the user and starts new sessions. Other sessions: put a
+  decision for the user in your reply as usual; the master session reads it from there.
+- **Live dashboard (2026-10-28):** 'Apex Live Desk' https://claude.ai/artifact/3oqbHWqBFTrUQd95wMmuL8 (accounts, trades,
+  VPS health). Refresh after each close: `python3 analysis/dashboard_data.py`, upload the three JSON files in
+  `analysis/outputs/dashboard/` as assets and update each dataset's url / name / updated. New Apex balance from the
+  user -> `ACCOUNTS` in that script.
 - **Branches:** work on `claude/nq-trading-strategy-params-5h9d20`; keep
   `claude/quirky-noether-4dla64` and the session's designated branch identical; push every
   commit to all of them.

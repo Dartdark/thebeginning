@@ -1,0 +1,76 @@
+"""Data files for the 'Apex Live Desk' dashboard (https://claude.ai/artifact/3oqbHWqBFTrUQd95wMmuL8).
+Reads live/trades/*.csv (VPS trade logger) and live/health/*.csv, plus the account facts in ACCOUNTS below, and writes
+analysis/outputs/dashboard/{accounts,trades,health}.json. After a run, upload the three files to the dashboard
+(Artifact asset upload, then update each dataset's url / name / updated).
+  python3 analysis/dashboard_data.py
+P&L is MultiCharts' gross per the logger (no fees); balances are 'last Apex balance the user reported + logged P&L since'.
+"""
+import glob, json, os, datetime as dt
+import pandas as pd
+
+COLS = ["event", "tag", "symbol", "side", "contracts", "entry_date", "entry_time", "entry_price", "exit_date",
+        "exit_time", "exit_price", "profit_usd", "bar_date", "bar_time"]
+NAMES = {"VB": "Vault Break", "ONB": "ONB ADX30", "EOS": "EOS", "MON_BR": "Bridge Monday", "ONB_ML": "ONB ML",
+         "MON": "Monday Long", "LDF": "Late-Day Flow", "NFP": "NFP Fade", "MOC_MES": "ES MOC", "RS": "Relative Strength"}
+# tag suffix -> account. "" = #1 (50K, -01), "-2" = #2 (50K, -02), "150" = #3 (150K No-Activation, -03)
+ACCOUNTS = [
+    # update last_balance / last_date whenever the user reports an Apex end-of-day balance
+    dict(account="#1", id="APEX-681524-01", size="50K evaluation", status="Blown", start=50000, floor=None,
+         last_balance=None, last_date="2026-10-26", note="Blown 2026-10-26; trades after that are not counted."),
+    dict(account="#2", id="APEX-681524-02", size="50K evaluation", status="Trading", start=50000, floor=48000,
+         last_balance=49424.18, last_date="2026-10-21",
+         note="Floor approx. (brief: ~$1,424 room at $49,424). 10/26 #3's 150K-size orders hit this account: logged P&L that day may not match fills."),
+    dict(account="#3", id="APEX-681524-03", size="150K No-Activation", status="Trading", start=150000, floor=146000,
+         last_balance=150000.0, last_date="2026-10-25", note="$4,000 EOD trailing; target +$9,000. Started 10/26."),
+]
+CLOSED_AFTER = {"#1": "20261026"}
+OUT = "analysis/outputs/dashboard"
+
+
+def split(tag):
+    tag = str(tag)
+    if tag.endswith("150"): return tag[:-3], "#3"
+    base, _, acct = tag.partition("-")
+    return base, {"": "#1", "2": "#2"}.get(acct, "#" + acct)
+
+
+def main():
+    df = pd.concat([pd.read_csv(f, header=None, names=COLS, dtype=str) for f in sorted(glob.glob("live/trades/*.csv"))])
+    df = df[df.event == "CLOSE"].drop_duplicates()
+    rows = []
+    for r in df.itertuples():
+        strat, acct = split(r.tag)
+        if acct in CLOSED_AFTER and r.exit_date > CLOSED_AFTER[acct]: continue
+        d = f"{r.exit_date[:4]}-{r.exit_date[4:6]}-{r.exit_date[6:]}"
+        rows.append(dict(trade_id=f"{acct}-{r.tag}-{r.entry_date}-{r.entry_time}", date=d, account=acct,
+                         strategy=NAMES.get(strat, strat), side=r.side, contracts=int(r.contracts),
+                         entry_time=f"{int(r.entry_time) // 100:02d}:{int(r.entry_time) % 100:02d}",
+                         exit_time=f"{int(r.exit_time) // 100:02d}:{int(r.exit_time) % 100:02d}",
+                         entry=float(r.entry_price), exit=float(r.exit_price), pnl=float(r.profit_usd)))
+    trades = sorted(rows, key=lambda x: (x["date"], x["entry_time"], x["account"]))
+    accts = []
+    for a in ACCOUNTS:
+        since = sum(t["pnl"] for t in trades if t["account"] == a["account"] and t["date"] > a["last_date"])
+        est = None if a["last_balance"] is None else round(a["last_balance"] + since, 2)
+        accts.append(dict(a, logged_since=round(since, 2), est_balance=est,
+                          room=None if est is None or a["floor"] is None else round(est - a["floor"], 2),
+                          trades=sum(t["account"] == a["account"] for t in trades),
+                          net_logged=round(sum(t["pnl"] for t in trades if t["account"] == a["account"]), 2)))
+    health = []
+    for f in sorted(glob.glob("live/health/*.csv")):
+        for line in open(f):
+            p = line.strip().split(",")
+            kv = dict(x.split("=", 1) for x in p[2:] if "=" in x and not x.startswith("last_reject"))
+            health.append(dict(check=f"{p[1]} {p[0]}", time=p[1], mode=p[0], mc_processes=int(kv.get("mc_processes", 0)),
+                               disk_free_gb=float(kv.get("disk_free_gb", 0)), log_rows=int(kv.get("log_rows_today", 0)),
+                               push_errors=int(kv.get("push_errors", 0)),
+                               rejected=int(kv["rejected_today"]) if "rejected_today" in kv else None))
+    os.makedirs(OUT, exist_ok=True)
+    for name, data in (("accounts", accts), ("trades", trades), ("health", health)):
+        json.dump(data, open(f"{OUT}/{name}.json", "w"), indent=1)
+    print(f"{len(trades)} trades, {len(health)} health rows; written {OUT}/ at {dt.datetime.now():%Y-%m-%d %H:%M}")
+    for a in accts: print(a["account"], a["status"], a["est_balance"], a["room"], a["trades"], a["net_logged"])
+
+
+if __name__ == "__main__":
+    main()
