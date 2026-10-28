@@ -1,0 +1,25 @@
+{
+  "kind": "synthetic mechanics only",
+  "upstream_commit": "bee959dc464749f7cce66e766249ccdbb2d4869a",
+  "preregistration": "4b01fec",
+  "code_commit": "5709c27a7521b655b26baa993f6611d183627f76",
+  "assertions_completed": 14,
+  "safety_gap_demonstrations": 3,
+  "new_economic_evaluations": 0,
+  "market_returns_examined": false,
+  "gateway_connected": false,
+  "source_sha256": {
+    "LICENSE": "615aaf3da6f2cb32abcb76fd1614a915b76b0a539c382b260e5a330a16cba7bb",
+    "base.py": "503e589162cedb9d6b041ebb7729224878636cd2c40a578b7f934b2a1b9947ed",
+    "engine.py": "f827d4e3456b013518abbab69a1c62b0a67fea9b19075c428624c7b0557d302d",
+    "sniper_algo.py": "1a5915c43efa0c3b1658d0fdd52c8c8744cb024475e6101b22dd7060ab703de7",
+    "template.py": "cac160d9eeff0bde50beb07ca2f6dd069619ba0eea012bd7cee01dddd9c9cb7b"
+  },
+  "limits": [
+    "No installed vn.py integration test",
+    "Fake gateway and simplified data objects",
+    "Integer volume rounding helper only",
+    "No queue, latency, fills, costs or P&L model",
+    "Stress cases are constructed, not observed historical events"
+  ]
+}
