@@ -82,6 +82,8 @@ bottom). Times are Central (CT).
 
 ## T_ONESIDE (your file, 2026-10-24: B, checker PASS WITH CONCERNS; fade leg = small funded gain at 1 MNQ)
 
+- [ ] **Your call (2026-10-28 re-bench):** 50K funded, Relative Strength longs 1 MNQ -> T_ONESIDE v2 fade 1 MNQ (UseT true, UseOS false, UseStop true)? Fewer blown accounts (5.9 -> 4.3%), same 2-year money (+$190), year 1 −$60, 6th payout ~6 days later. Adding it on top, or on 150K, does nothing.
+
 - [x] (2026-10-25, done: 348 / 358 fades identical, net t 3.5) Optional, before any plan use (outside market hours, not on the live VPS): MultiCharts backtest of
   [T_ONESIDE_v2.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/checks/candidates/t_oneside/T_ONESIDE_v2.txt)
   on a **1-minute @NQ chart** (Rithmic, CME 24h session 17:00-16:00, Exchange time = CT, IOG off, Bar Magnifier off, from
