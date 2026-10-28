@@ -45,7 +45,7 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   **T_ONESIDE (night-volume switch): B**, checker PASS WITH CONCERNS (874/874 replicated). Heavy night (volume > 1.4 x 20-night
   median) → fade the night 08:29 → 08:44 CT: $239 per NQ, t 3.6, volume switch confirmed by the author's own cells; the OS long
   leg is drift (drop it). Fade alone at 1 MNQ = small funded gain (y1 $9,354 → $9,622, blown 7.0 → 6.7%), no evaluation gain.
-  The file had no stop: `T_ONESIDE_v2.txt` adds the note's. **Next: MC report of v2 with UseOS false (TODO), then plan decision.**
+  The file had no stop: `T_ONESIDE_v2.txt` adds the note's. MC report of v2 done 2026-10-25 (348 / 358 fades identical, net t 3.5).
   GC_COMBO v2: C (user's MC report = exact parity once ETminusChart 0; at our costs t 2.1, OOS weak, −$39k after the note's
   cutoff, worse in both plans). MAGNET18: C (morning momentum, lowers the evaluation). Shock Reversal note: D (thresholds
   withheld; proxy t ≤ 1.7). OvernightAnomaly (Block B of the merged ORB file): C, was added to the personal plan at 1 MNQ,
@@ -55,8 +55,8 @@ Paste this into a new chat: *"Read `NEW_CHAT_BRIEF.md`, then `CLAUDE.md`, in git
   net of costs ES t 0.8, GC t 0.0; VIX gate not significant. `analysis/orb_vix_test.py`.
 - **Brooks price-action bot v201 (user's file, 2026-10-25): F.** Gross ~0R, net −0.05R a trade; longs win only by drift (random-time
   longs with the same bracket do as well). `analysis/brooks_bot_test.py`.
-- **Open for Claude:** automatic cushion sizing after the account check; Dual Thrust MC check when the report arrives;
-  T_ONESIDE v2 MC check when the report arrives.
+- **Open for Claude:** automatic cushion sizing after the account check. (Dual Thrust and T_ONESIDE v2 MC checks done
+  2026-10-25: 1,609 / 1,611 and 348 / 358 trades identical.)
 - **Every reply ends with a PushNotification** (CLAUDE.md). Scheduled jobs (journal 16:40 CT, Friday review, reminders)
   run in the session 'Scheduled jobs' (session_014DKffATms37kZigaa2xR2P), not in a new chat.
 
