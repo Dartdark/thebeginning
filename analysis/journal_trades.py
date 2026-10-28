@@ -14,6 +14,9 @@ NAMES = {"VB": "Vault Break", "ONB": "ONB ADX30", "EOS": "EOS", "MON_BR": "Bridg
 START, END = "<!-- auto-trades:start -->", "<!-- auto-trades:end -->"
 
 
+CLOSED = {"VB": "20261026"}     # tag -> last live day; account #1 (APEX-681524-01, tag VB) blown 2026-10-26 (user)
+
+
 def name(tag):
     """VB -> Vault Break; VB-2 -> Vault Break (acct 2): tags may carry an account suffix."""
     base, _, acct = str(tag).partition("-")
@@ -30,7 +33,10 @@ def load(day):
     files = [f for f in files if lo <= os.path.basename(f)[:8] <= hi]
     if not files: return pd.DataFrame(columns=COLS)
     df = pd.concat([pd.read_csv(f, header=None, names=COLS, dtype=str) for f in files], ignore_index=True)
-    return df.drop_duplicates()
+    df = df.drop_duplicates()
+    for tag, last in CLOSED.items():          # accounts closed: their chart may still log trades, which never fill
+        df = df[~((df.tag == tag) & (df.bar_date > last))]
+    return df
 
 
 def block(day, df):
