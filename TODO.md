@@ -261,8 +261,8 @@ after 15:59 CT, never with a position open.
 - [ ] **When a 50K account is funded:** Vault Break `NumContracts` 1 (was 2), `FlaggedContracts` 1, + Swing Target v3 `Qty` 1. **150K funded:** Swing Target `Qty` 2 instead of Dual Thrust (`FUNDED_PLAN.md`).
 - [x] (2026-10-25, user: yes) After parity: your call on the swaps that bench better: 50K funded VB 2/1 -> 1/1 + ST 1 MNQ; 150K funded Dual Thrust 2 -> ST 2 MNQ. Not in the evaluations.
 
-- [ ] **Optional (for Codex's IFT_NQ5 test): export full-Globex up / down volume** with [NQ_UpDown_Exporter.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/tools/exporters/NQ_UpDown_Exporter.txt) on a 5-min @NQ chart (Exchange CT, 24h session, from 06/2017, home PC), files into `data/`; plus the IFT MultiCharts report with its List of Trades.
-  (2026-10-28: IFT report received, C provisional. Rerun once with **Bar Magnifier 1 minute** on and say which volume mode the chart uses.)
+- [x] **Optional (for Codex's IFT_NQ5 test): export full-Globex up / down volume** with [NQ_UpDown_Exporter.txt](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/tools/exporters/NQ_UpDown_Exporter.txt) on a 5-min @NQ chart (Exchange CT, 24h session, from 06/2017, home PC), files into `data/`; plus the IFT MultiCharts report with its List of Trades.
+  (2026-10-28: done. Bar Magnifier rerun identical, trade volume confirmed: IFT = C, not for any plan.)
 
 ## Later
 

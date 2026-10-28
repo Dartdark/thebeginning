@@ -3,7 +3,7 @@ Legs grouped into positions by entry time; cost per contract $7.25 + 1 tick ($5)
 (TP limit exits no slippage). By year, longs / shorts, 2023 onward, t on positions."""
 import sys, collections, math, openpyxl
 sys.path.insert(0, 'analysis')
-F = 'mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes IFT NQ5.xlsx'
+F = sys.argv[1] if len(sys.argv) > 1 else 'mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes IFT NQ5.xlsx'
 rows = list(openpyxl.load_workbook(F, read_only=True, data_only=True)['List of Trades'].iter_rows(values_only=True))[3:]
 pos = collections.OrderedDict()
 i = 0
