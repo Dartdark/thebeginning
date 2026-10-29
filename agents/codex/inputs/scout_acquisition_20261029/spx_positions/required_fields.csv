@@ -1,0 +1,16 @@
+field,requirement,status,note
+series_id,Native C1 option series identifier,required_not_acquired,C1 SPXW PM-expiring European cash-settled series; instrument identity cannot be inferred from NDX.
+listing_inception,Listing/inception date and initial inventory,required_not_acquired,A six-month sample alone may omit the initial book.
+expiry_settlement,Expiry date/time and AM/PM settlement flags,required_not_acquired,Use dated PM-expiry calendar and early closes.
+mm_buy_vol,Market-maker buy contract volume,required_not_acquired,Participant-capacity contract volume; not customer-only flow or trade count.
+mm_sell_vol,Market-maker sell contract volume,required_not_acquired,MM net flow equals buy minus sell; this alone is not starting inventory.
+daily_eod_prior_flow,Complete prior daily net flows from inception,required_not_acquired,"EOD comes after midnight Eastern; prior book only, not same-day pre-close feature."
+intraday_cumulative,Latest received cumulative MM buy/sell record,required_not_acquired,Difference cumulative snapshots when incremental flow is needed; do not sum cumulative levels.
+event_time,Exchange event time and interval end,required_not_acquired,Minute label and minute-end quote convention require reconciliation.
+published_at,Original provider publication timestamp,required_not_acquired,Current one-minute SLA2–5minutes after interval end is not proof of historical availability.
+received_at,Actual file/stream receipt and processing times,required_not_acquired,First executable fill follows decision after receipt.
+correction_version,Original/corrected/broken/cancelled-trade version identifiers,required_not_acquired,Do not backfill later corrections into pre-entry historical information.
+session,RTH/GTH/Curb and dated coverage,required_not_acquired,Product page says C1 GTH history starts2023-12-11; earlier completeness unresolved.
+option_quotes_delta,Same-time bid/ask/IV/delta and units,required_not_acquired,Separate quote/Greek input needed; Open-Close flow alone cannot give dollar delta.
+underlying_inputs,SPX underlying and dated model inputs,required_not_acquired,Need coherent option Greek clocks and source settings.
+raw_licence,Internal/cloud/party-use entitlement,required_not_acquired,Raw external redistribution prohibited; do not commit licensed raw data by default.

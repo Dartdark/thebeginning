@@ -138,6 +138,8 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   author/institution/replication searches. Three isolated forecast examples do not form a point-in-time panel.
   Timestamp-only census confirms60 observed monthly endpoints, not60 authoritative events; November2020 demonstrates
   that selecting the last available data date can select the wrong day. No returns or rescue protocol opened.
+  [Acquisition](agents/codex/results/scout_duration_acquisition_20261029.md) saved4 provider rows (only3/60 design months)
+  and3 separate institutional references; original availability remains unknown. Missing months were retained, not filled.
 
 - [ ] **Treasury auctions × next-day macro-announcement FX — WATCH / NEEDS FULL TEXT (2026-10-29), SSRN5207418.**
   Merit: a specific scheduled interaction with direct FX transmission; authors claim roughly8bp foreign-currency
@@ -152,6 +154,12 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   [Review](agents/codex/results/scout_fx_auctions_20261029.md) · [Evidence](agents/codex/evidence/scout_fx_auctions_20261029.md).
   [Testability follow-up](agents/codex/results/scout_5207418_testability_20261029.md): new author/BoC/conference and
   replication searches did not recover the source rule. Exact-window, flat-time and overnight constraints remain unresolved.
+  [Calendar acquisition](agents/codex/results/scout_fx_calendar_acquisition_20261029.md) now saves943 primary BLS/BEA/Fed
+  calendar facts for2018–22, with secondary inventory separate, shutdown revisions and unusual clocks explicit.
+  Full paper/event universe and original schedule/receipt evidence still precede TEST; this is data progress, not validation.
+  [Claims acquisition](agents/codex/results/scout_claims_calendar_acquisition_20261029.md) adds261 officially corroborated
+  release dates and249 printed clocks, retaining12 unknown times. Two omitted2019dates were restored from actual
+  official evidence; failed download URLs were not treated as absent releases.
 
 - [ ] **Signed SPX dealer delta at PM expiry — WATCH / NEEDS DATA (2026-10-29), SSRN7330098.**
   Full source now read: a direct ES hedge-unwinding channel with reported extreme-group gross differences of17bp
@@ -165,6 +173,10 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   Merge input acquisition with existing flow evidence-sheetD; retain the distinction between terminal book-level
   hedge removal and time-decay position-change hedging. Existing failed gamma/OI/max-pain results remain in force.
   [Full-source review and testability](agents/codex/results/scout_7330098_testability_20261029.md).
+  [Acquisition/intake packet](agents/codex/results/scout_spx_positions_acquisition_20261029.md): no raw signed book obtained.
+  Current Cboe terms identify a fixed2022H2 free sample for eligible first-time users; enrollment/licensing is unactivated.
+  The one-minute product was introduced in2025 and arrives2–5minutes after interval end; historical timestamps alone
+  do not certify a tradable2018–22 signal. Do not buy/activate access or substitute OI under this queue entry.
 
 - [ ] **U.S. factor-beta stock baskets — PARTIAL SCREEN FAIL; exact replication unverified (2026-10-29).**
   Authorized restricted S&P500/SPY-beta screen is completed under a committed plan:2018–22 covered-day overnight +3.93bp gross/−0.66bp net, intraday +0.89/−3.52bp under4bp RT plus borrow.

@@ -1,0 +1,70 @@
+{
+  "observed_date": "2026-10-29",
+  "new_public_sources": [
+    {
+      "url": "https://www.cboe.com/insights/posts/volatility-insights-evaluating-the-market-impact-of-spx-0-dte-options",
+      "method": "connected public web reader",
+      "status": "accessed",
+      "version": "September8 2023 MandyXu article",
+      "extraction": "One rounded, retrospectively published EOD MM example only; no raw trade/series history."
+    },
+    {
+      "url": "https://cdn.cboe.com/resources/membership/Cboe_FeeSchedule.pdf",
+      "method": "connected PDF reader; p12 and13 inspected",
+      "status": "accessed; no local source bytes/hash",
+      "version": "October1 2026",
+      "extraction": "Current fixed2022H2 free-sample eligibility and published fees."
+    },
+    {
+      "url": "https://www.govinfo.gov/content/pkg/FR-2026-02-13/html/2026-02892.htm",
+      "method": "connected official GPO reader",
+      "status": "accessed",
+      "version": "FR91/30 pp6931–6935; SR-CBOE-2026-011",
+      "extraction": "One-minute2–5minute delivery expectation and2025product introduction; generaltrialfiling is superseded by more specific current sample dates."
+    },
+    {
+      "url": "https://datashop.cboe.com/cboe-options-open-close-volume-summary",
+      "method": "connected product-page reader, not blocked sample URL",
+      "status": "accessed",
+      "extraction": "Participant fields, historical starts, GTH date, delivery and rawredistribution restrictions."
+    },
+    {
+      "url": "https://firmtape.com/research/signing-the-tape",
+      "method": "delegated public-source search/read",
+      "status": "accessed as discovery/comparison only",
+      "extraction": "Its own book is quote-inferred; not a signed Cboe participant panel."
+    },
+    {
+      "url": "https://firmtape.com/features/dataset",
+      "method": "delegated public-source read",
+      "status": "licence identified; no bulk files fetched",
+      "extraction": "Bulkdayfiles require paidlicence/bearertoken; individual replay is not permission to collect licensed bulk snapshots."
+    },
+    {
+      "url": "https://julianterstegge.com/data.html",
+      "method": "delegated public-author-site inspection",
+      "status": "accessed; Carbon VIX dataset only",
+      "extraction": "No SPX signed-position dataset linked. Author homepage identifies Intermediary Option Pricing, SSRN5877762."
+    },
+    {
+      "url": "https://www.fma.org/assets/docs/Derivatives2025/Terstegge.pdf",
+      "method": "delegated connected public PDF reader",
+      "status": "accessible40-page November7 2025 version",
+      "extraction": "pp5–6 describe daily2011–2023SPX/SPXW positions reconstructed from commercialCboeOpenClose. No public replication panel found; this is not an intraday expiry-book sample."
+    }
+  ],
+  "bounded_searches": [
+    "\"SPXW\" \"mm_buy_vol\" sample csv",
+    "\"Cboe\" \"Open-Close\" \"sample\" \"csv\"",
+    "site.github.com SPX market maker open close volume data",
+    "Participant-capacity/signing searches on GitHub, Dataverse, Zenodo and Mendeley",
+    "JulianTerstegge IntermediaryOptionPricing SPX/SPXW positions replication data GitHub; author homepage/data and FMApaper checked"
+  ],
+  "negative_result_limit": "No attributable free signed SPXW book/raw panel found; this does not prove none exists.",
+  "blocked_routes_not_retried": [
+    "https://datashop.cboe.com/download/sample/218",
+    "https://datashop.cboe.com/download/sample/289"
+  ],
+  "no_bypass_or_contacts": true,
+  "no_return_calculations": true
+}

@@ -152,6 +152,13 @@ Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
   an authoritative rebalance calendar. Missing2020-11-30 daytime records makes a last-observed-date rule select
   November27. Holiday/early-close flags are not automatically missing expected bars. Audit provider events against
   native dated sessions; do not forward-fill a missing session or infer that event eligibility from the remaining rows.
+- [Calendar acquisition](results/scout_fx_calendar_acquisition_20261029.md) retained943 primary calendar/header facts.
+  Scheduled archive copies, release headers and first-announced calendars are different evidence. The2019 BEA shutdown
+  canceled planned releases and changed estimate labels; do not use a later revised calendar to assume knowledge before
+  a canceled event. Fed statement documents include unscheduled actions and cannot all select a pre-announcement trade.
+- [Weekly claims intake](results/scout_claims_calendar_acquisition_20261029.md) recovered two official2019 releases
+  omitted by a secondary calendar after old URLs failed. Retrieval failure is not proof that an event did not occur:
+  keep unresolved events visible and distinguish corroborated dates, printed embargo clocks and actual feed receipt.
 
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
@@ -351,6 +358,10 @@ printed pp.6–7 and13–15. [Full-source review](results/scout_7330098_testabil
 - Next check: obtain a lawful sample and audit one series' initial inventory, signed contracts, complete sessions,
   corrections, cumulative snapshot differences, option delta units and actual data receipt before any proposed fill.
 - Status: retained execution/input-method reference and specific TODO lead; no return test or execution saving established.
+- [Data acquisition](results/scout_spx_positions_acquisition_20261029.md): the official2026 Cboe filing describes
+  one-minute intervals delivered2–5minutes after their end and a product introduced in2025, despite earlier backfilled
+  trade timestamps. A historical timestamp is not proof of contemporaneous subscriber access. The published2022H2
+  sample offer does not itself provide starting inventory, Greeks, receipt history or an activated data entitlement.
 
 ## Minimum record for any later execution comparison
 

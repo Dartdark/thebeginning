@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "acquired_on": "2026-10-29",
+  "primary_rows": 943,
+  "secondary_rows": 591,
+  "primary_counts_by_agency": {
+    "BLS": 783,
+    "BEA": 118,
+    "FED": 42
+  },
+  "primary_counts_by_family": {
+    "BLS_OTHER_TIMED": 408,
+    "EMPLOYMENT_SITUATION": 60,
+    "JOLTS": 60,
+    "IMPORT_EXPORT_PRICES": 60,
+    "PPI": 60,
+    "CPI": 60,
+    "GDP_NATIONAL_ESTIMATE": 59,
+    "PERSONAL_INCOME_OUTLAYS": 59,
+    "EMPLOYMENT_COST_INDEX": 20,
+    "FOMC_STATEMENT": 42,
+    "PRODUCTIVITY_COSTS": 55
+  },
+  "secondary_counts_by_family": {
+    "CPI": 60,
+    "EMPLOYMENT_SITUATION": 60,
+    "PPI": 60,
+    "GDP_ADVANCE": 19,
+    "GDP_LATER_ESTIMATE": 38,
+    "INITIAL_CLAIMS": 259,
+    "RETAIL_SALES": 56,
+    "FOMC_SCHEDULED_SUBSET": 39
+  },
+  "primary_by_year_agency": {
+    "2018": {
+      "BLS": 154,
+      "BEA": 24,
+      "FED": 8
+    },
+    "2019": {
+      "BLS": 153,
+      "FED": 8,
+      "BEA": 22
+    },
+    "2020": {
+      "BLS": 155,
+      "FED": 10,
+      "BEA": 24
+    },
+    "2021": {
+      "BLS": 155,
+      "FED": 8,
+      "BEA": 24
+    },
+    "2022": {
+      "BLS": 166,
+      "FED": 8,
+      "BEA": 24
+    }
+  },
+  "BEA_nonstandard_10am_events": [
+    {
+      "release_date": "2018-12-21",
+      "release_family": "PERSONAL_INCOME_OUTLAYS",
+      "local_time": "10:00",
+      "source_url": "https://www.bea.gov/sites/default/files/2017-12/2018rd.pdf"
+    },
+    {
+      "release_date": "2019-11-27",
+      "release_family": "PERSONAL_INCOME_OUTLAYS",
+      "local_time": "10:00",
+      "source_url": "https://apps.bea.gov/scb/issues/2018/12-december/1218-news-releases-2019.htm"
+    },
+    {
+      "release_date": "2019-12-20",
+      "release_family": "PERSONAL_INCOME_OUTLAYS",
+      "local_time": "10:00",
+      "source_url": "https://apps.bea.gov/scb/issues/2018/12-december/1218-news-releases-2019.htm"
+    },
+    {
+      "release_date": "2020-11-25",
+      "release_family": "PERSONAL_INCOME_OUTLAYS",
+      "local_time": "10:00",
+      "source_url": "https://apps.bea.gov/scb/issues/2019/12-december/1219-news-releases-2020.htm"
+    },
+    {
+      "release_date": "2021-11-24",
+      "release_family": "PERSONAL_INCOME_OUTLAYS",
+      "local_time": "10:00",
+      "source_url": "https://apps.bea.gov/scb/issues/2020/12-december/1220-news-releases-2021.htm"
+    }
+  ],
+  "secondary_crosscheck": [
+    {
+      "family": "CPI",
+      "official_schedule_dates": 60,
+      "secondary_dates": 60,
+      "common": 60,
+      "official_only": [],
+      "secondary_only": []
+    },
+    {
+      "family": "EMPLOYMENT_SITUATION",
+      "official_schedule_dates": 60,
+      "secondary_dates": 60,
+      "common": 60,
+      "official_only": [],
+      "secondary_only": []
+    },
+    {
+      "family": "PPI",
+      "official_schedule_dates": 60,
+      "secondary_dates": 60,
+      "common": 60,
+      "official_only": [],
+      "secondary_only": []
+    }
+  ],
+  "hashes": {
+    "bls_annual_schedule_facts.json": "39d3624d6467163535d2f9e9c0400e146b60a13d55dbc73ef50f5fc72a41f885",
+    "bea_release_header_crosschecks.json": "7cf19db1fc640062f67a87513c48b2f3756934b422897f1cac65cfe1d48e74e9",
+    "midas_calendar_date_facts.json": "70c63ea407fbf5c09de092c4c27ab111bb259c709eb99fdf42309346974d60e3",
+    "secondary_calendar_inventory_2018_2022.csv": "233a88b9285bfa430c883053aa24d877654cef4b0a6b976bd7b8edacf5a43aea",
+    "primary_release_calendar_2018_2022.csv": "5db0d4ccc1e56c1c3a3c691886c116cd67d8640b009b45209bb226ad3a506771",
+    "bea_shutdown_schedule_history.json": "4606f4e357727df0650d35ad3b1e59c280bfb7f1add8d6614de6566e6a08c704",
+    "fomc_facts.json": "97763ee17e3657b743f92d8079214200dfc49f90f39f929edf059049ff43d319",
+    "fomc_access.json": "82166faaff8fd636c37f2a61fe200a30f6e68859f08a6a5b223d7aae6dd99932",
+    "bea_calendar_source_evidence.json": "a88c8863d0e7ba5feabf1e86bfa4fdad08245702874f080674bf81cc920d2399"
+  },
+  "script_sha256": "64fbc0289c5048ce0a0e34c65723b10d75691664cf67e6123091e7ec7922e2d1",
+  "return_trials": 0,
+  "ready_for_exact_paper_test": false,
+  "limits": [
+    "Paper5207418 full specification/event universe remains unverified.",
+    "Schedules retrieved now are not original historical vintages or actual feed receipt logs.",
+    "BEA2019page incorporates shutdown changes; source issue date is not edit availability.",
+    "Secondary curated dates remain separate; exclusions are not inherited as our event-selection rule.",
+    "FOMC rows are42 publishedstatementdocuments, not42 scheduledmeetings.",
+    "ADP/ISMmanufacturing/ConferenceBoard source calendars not acquired; no series assumed a paper requirement.",
+    "The separate claims-calendar acquisition belongs to the parent task; secondary claims here are not primary-verified history.",
+    "No prices, missing returns, trading rule, PnL or account inference."
+  ]
+}

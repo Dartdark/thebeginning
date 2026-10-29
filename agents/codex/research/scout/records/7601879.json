@@ -17,8 +17,8 @@
   "verdict": "needs_full_text",
   "full_text_read": false,
   "evidence_level": "metadata_only",
-  "summary": "Still needs full text/exact rule and as-published forecast history. Three isolated forecast examples are insufficient; a timestamp-only census confirms observed data dates cannot define the provider event calendar. Zero return tests.",
-  "report_path": "agents/codex/results/scout_7601879_testability_20261029.md",
+  "summary": "Saved4 provider rows and3 separate institutional references. Original provider tables cover3/60designmonths;0 original available-at clocks verified. Full source and complete historical vintages remain missing; no returns.",
+  "report_path": "agents/codex/results/scout_duration_acquisition_20261029.md",
   "evidence_path": "agents/codex/evidence/scout_buying_duration_20261029.md",
   "about": "Benchmark-duration demand and government-bond futures at month-end.",
   "findings": "Authors' abstract reports1.19bp on last trading days versus0.07bp otherwise and47% of average monthly returns. Not independently reproduced; exact source window/costs unknown.",
@@ -45,9 +45,19 @@
     }
   ],
   "new_economic_trials": 0,
-  "updated_at": "2026-10-29T18:40:16.406270+00:00",
+  "updated_at": "2026-10-29T20:38:56.600548+00:00",
   "notification_key": "ssrn:7601879:written2026-10-12:needs_full_text:clock-gap-v1",
   "initial_report_path": "agents/codex/results/scout_buying_duration_20261029.md",
   "testability_receipt": "agents/codex/research/scout/runs/7601879_testability_20261029.json",
-  "return_eligibility": "NEEDS DATA"
+  "return_eligibility": "NEEDS DATA",
+  "testability_report_path": "agents/codex/results/scout_7601879_testability_20261029.md",
+  "acquisition": {
+    "provider_forecast_csv": "agents/codex/inputs/scout_acquisition_20261029/duration/provider_forecasts.csv",
+    "institutional_reference_csv": "agents/codex/inputs/scout_acquisition_20261029/duration/institutional_quotes.csv",
+    "provider_rows": 4,
+    "provider_design_months": 3,
+    "design_months": 60,
+    "verified_original_available_at_rows": 0,
+    "status": "partial_needs_data"
+  }
 }
