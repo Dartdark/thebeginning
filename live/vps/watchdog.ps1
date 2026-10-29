@@ -4,10 +4,24 @@
 # Checks: MultiCharts running; MultiCharts has live network connections (broker / data); every chart's logger heartbeat
 # is < 45 min old (frozen chart / feed); a chart's position differs from the broker's (MISMATCH); NEW rejected-order lines
 # in MultiCharts' logs (Symbol Mapping, wrong account, Apex lock). Each problem alerts at most once an hour.
+param([switch]$Test)
 $ErrorActionPreference = "SilentlyContinue"
 $Topic = "apex-alarm-6e531eb6db8e"            # subscribe to this topic in the ntfy app (iPhone / Android)
 $Logs = "C:\TradingLogs"
 $StateFile = "$Logs\watchdog_state.json"
+# -Test (2026-10-29): send one sample of every alert type to the phone, then stop (checks the ntfy path end to end)
+if ($Test) {
+    $samples = @("MultiCharts is not running on the VPS", "MultiCharts has no live internet connections (Rithmic / data feed down?)",
+        "Chart VB-2: no heartbeat for 50 min (frozen chart or feed?)", "Chart VB-2 thinks 8 contracts, broker has 0. Check the account now.",
+        "Chart ONB-2: auto-trading is OFF (account APEX-681524-02). Turn it on if this chart should trade.",
+        "Chart EOS150: last bar is 12 min old. Data feed / Rithmic quiet? Check the connection status.",
+        "Strategy on chart ONB150 wrote no heartbeat today: not compiled / removed? It cannot trade.",
+        "1 new rejected order(s). Last: Invalid Market order parameters @MNQ. Likely Symbol Mapping.")
+    $i = 0
+    foreach ($m in $samples) { $i++; try { Invoke-RestMethod -Method Post -Uri "https://ntfy.sh/$Topic" -Body "TEST $i/8 VPS: $m" -Headers @{ Title = "Trading alarm (TEST)"; Priority = "high" } | Out-Null } catch { "ntfy failed: $_" }; Start-Sleep -Seconds 2 }
+    "Sent $i test alerts to ntfy topic $Topic"
+    exit
+}
 $now = Get-Date; $day = $now.ToString("yyyyMMdd"); $hhmm = [int]$now.ToString("HHmm")
 $state = @{}; if (Test-Path $StateFile) { (Get-Content $StateFile -Raw | ConvertFrom-Json).PSObject.Properties | ForEach-Object { $state[$_.Name] = $_.Value } }
 $problems = @()
