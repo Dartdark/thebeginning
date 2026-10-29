@@ -69,6 +69,9 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `funded_strategies/
   Apex incubation → personal live account). Every strategy is checked as a
   whole first, then its **longs and shorts are analysed and improved separately** and
   recombined.
+- **Execution references (user, 2026-10-29):** every execution idea, fill / slippage measurement or verified market-behavior
+  finding (ours, papers, Codex) goes into `agents/codex/EXECUTION_REFERENCES.md` (E-numbered, Codex's template); check it
+  before any fill / execution work.
 - **Papers / articles:** summarize (what it's about, findings, why it should make money), say
   whether a strategy can be built on top of it as a foundation, test it when there's a fit,
   and **rank every tested item in `TIER_LIST.md`** (S–F).
