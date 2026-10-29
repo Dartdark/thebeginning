@@ -403,6 +403,22 @@ Sections3.2–3.4 and AppendixD.2. [Cycle review](results/scout_closing_auctions
 - Status: existing SPY/QQQ research-family refinement; NEEDS DATA. Price-only proxies and index-rebalance
   reversal failures remain failures. No logger, live-system or allocation change.
 
+### E32 — Currency fixing clocks and dealer versus client returns
+
+Source: Krohn/Mueller/Whelan, [SSRN3521370](https://ssrn.com/abstract=3521370), published2024,
+SectionsI,V.C,VI.E/TableX; [review and completed screen](results/scout_3521370_20261029.md).
+- Use: separate benchmark calculation, publication, customer execution and hedge clocks. The source distinguishes
+  ECB14:15calculation/16:00publication after2016 from the new WMR14:00Frankfurt turning point. Convert civil
+  timezones by date; publication delay does not require waiting if no published rate enters the signal.
+- Evidence: source says dealer liquidity provision can earn positive returns while client marketable reversal
+  trades lose after costs. Do not assign a dealer's customer spread to our futures market orders.
+  Our single2018–22standard6E reference screen found$17.52gross versus$19.75cost, net−$2.23(t−0.21).
+- Limits: a reference-price rejection is not a quote/fill replay, M6E result, causal reproduction or measured saving.
+  Reader text was captured; original author data and figure pixels were not reproduced.
+- Prerequisites/next check if a distinct future execution task warrants it: native contract/quote/fill clocks,
+  contemporary benchmark rules and actual fee/venue role; no retuning this failed definition.
+- Status: rejected directional screen, retained execution method; no account/allocation change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

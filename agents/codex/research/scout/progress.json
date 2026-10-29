@@ -1,14 +1,8 @@
 {
   "schema_version": 1,
   "program": "paper-scout-20261029",
-  "status": "running",
-  "lease": {
-    "run_id": "scout-europe-fix-20261029",
-    "owner": "codex-root",
-    "claimed_at": "2026-10-29T22:11:14.757054+00:00",
-    "expires_at": "2026-10-30T00:11:14.757054+00:00",
-    "checked_parent": "7c8f3a9bfb55b441a87614769873bbefa756b22c"
-  },
+  "status": "ready",
+  "lease": null,
   "hypotheses_started": 1,
   "economic_definitions": 1,
   "max_hypotheses": 10,
@@ -29,8 +23,14 @@
       "definition_ids": [
         "europe_fix_gross_6e_1"
       ],
-      "status": "reserved",
-      "proposal_sha256": "9762a7ebeb2e8fa19ff94469302b12e38d39c6da5da2a0551da32aa4840ae156"
+      "status": "design_reject",
+      "proposal_sha256": "9762a7ebeb2e8fa19ff94469302b12e38d39c6da5da2a0551da32aa4840ae156",
+      "executed_definition_ids": [
+        "europe_fix_gross_6e_1"
+      ],
+      "unused_definition_ids": [],
+      "result_path": "analysis/outputs/codex_scout_europe_fix/result.json",
+      "closed_at": "2026-10-29T22:12:52.597628+00:00"
     }
   ],
   "seen": [
@@ -105,22 +105,115 @@
       "revision": "Current author abstract;older Information Content title is related-version lead",
       "disposition": "needs_full_text",
       "record_path": "agents/codex/research/scout/records/3732955.json"
+    },
+    {
+      "ssrn_id": "5136393",
+      "revision": "Indexed public metadata inspected2026-10-29; full text not read",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/5136393.json"
+    },
+    {
+      "ssrn_id": "3822093",
+      "revision": "Indexed public metadata inspected2026-10-29; full text not read",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/3822093.json"
+    },
+    {
+      "ssrn_id": "3164757",
+      "revision": "Indexed public metadata inspected2026-10-29; full text not read",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/3164757.json"
+    },
+    {
+      "ssrn_id": "7257240",
+      "revision": "Indexed public metadata inspected2026-10-29; full text not read",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/7257240.json"
+    },
+    {
+      "ssrn_id": "6750442",
+      "revision": "Indexed public metadata inspected2026-10-29; full text not read",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/6750442.json"
+    },
+    {
+      "ssrn_id": "3521370",
+      "revision": "Published2024online2023-12-18",
+      "disposition": "design_reject",
+      "record_path": "agents/codex/research/scout/records/3521370.json"
     }
   ],
   "last_run": {
-    "run_id": "basis-reversal-signal-build-20261029",
-    "recorded_at": "2026-10-29T21:58:22Z",
-    "status": "signal_prototype_built_real_data_test_blocked",
-    "checked_remote_head": "234996e57cee02457757e40f696aa07151a88dab",
-    "full_source_reviews": 0,
-    "new_hypotheses": 0,
-    "new_economic_definitions": 0,
-    "return_tests_executed": false,
-    "reservation": null,
-    "lease_action": "No return outcomes; synthetic engineering only. Existing counters/history retained.",
-    "engineering_checks_passed": 14,
-    "report_path": "agents/codex/results/weekly_basis_reversal_build_20261029.md",
-    "access_receipt": "agents/codex/research/scout/runs/20261029_basis_reversal_build.json"
+    "run_id": "scout-europe-fix-20261029",
+    "finished_at": "2026-10-29T22:12:52.597628+00:00",
+    "checked_start_head": "7c8f3a9bfb55b441a87614769873bbefa756b22c",
+    "preregistration_commit": "ae338c3ef04403e862e173bd31fe7ba2a68decac",
+    "focus": "Owned-data-first academic market hypotheses; forced benchmark demand in underused6E",
+    "metadata_only_papers": [
+      "5136393",
+      "3822093",
+      "3164757",
+      "7257240",
+      "6750442"
+    ],
+    "full_reviews": 1,
+    "new_hypotheses": 1,
+    "economic_definitions": 1,
+    "status": "design_reject",
+    "source_method": "Connected public indexed search/publisher reader. Crossref prior network restriction known; no new API request made.",
+    "search_groups": [
+      "futures settlement price pressure2024-26",
+      "futures overnight reversal gold/treasury",
+      "Informative Price Pressure nextday",
+      "Ready orderflows commodity index",
+      "futures daylight savings and holidays",
+      "currency fix reversal",
+      "gold intraday momentum",
+      "futures margin calls",
+      "Treasury intraday momentum",
+      "Foreign Exchange Fixings author/fulltext/replication",
+      "LSEG14:00benchmark and CME contract specs"
+    ],
+    "access": [
+      {
+        "url": "https://www.bankofcanada.ca/wp-content/uploads/2021/10/swp2021-48.pdf",
+        "method": "configured Python urllib normal managed network",
+        "outcome": "Proxy tunnel403; no bypass"
+      },
+      {
+        "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jofi.13306",
+        "method": "connected publisher reader",
+        "outcome": "All article body/reference/footnote lines104-744 captured; figures are captions, not original pixels"
+      },
+      {
+        "url": "https://www3.nd.edu/~zda/FOMC.pdf",
+        "method": "connected reader",
+        "outcome": "Nonretryable redirected-destination failure"
+      },
+      {
+        "url": "https://ssrn.com/abstract=7257240",
+        "method": "connected reader",
+        "outcome": "403; moved on"
+      },
+      {
+        "url": "https://ssrn.com/abstract=6750442",
+        "method": "connected reader",
+        "outcome": "403; moved on"
+      }
+    ],
+    "admission_attempts": [
+      "Wrong transcribed claim SHA rejected before returns",
+      "Correct fetched claim admitted before returns and rechecked by run process"
+    ],
+    "engineering_checks": [
+      "Clock fixtures winter/summer/both mismatch eras PASS",
+      "Endpoint census before returns1288/1305",
+      "Ledger uniqueness,360minute clocks,design dates,year/gross/cost/net reconciliation PASS"
+    ],
+    "no_2023_plus_or_accounts": true,
+    "execution_reference": "E32",
+    "report_path": "agents/codex/results/scout_3521370_20261029.md",
+    "terminal_visibility": "Committed records after pull/refresh; no live synchronization"
   },
   "last_notification_key": "ssrn:5250499:prototype-v1:real-data-blocked",
   "note": "New paper-discovery program authorized 2026-10-29. Existing repository multiplicity remains in every significance decision. Paused t6 and Hunt v2 are not resumed or reset.",
@@ -175,16 +268,17 @@
     "ssrn:5250499:abstract2026-secondarycode:needs_data-v1",
     "ssrn:3357455:wp2018:source_no_protocol-v1",
     "scout:closing-auctions:20261029:source-testability-v1",
-    "ssrn:5250499:prototype-v1:real-data-blocked"
+    "ssrn:5250499:prototype-v1:real-data-blocked",
+    "ssrn:3521370:published2024:europe-prefix-design-reject-v1"
   ],
   "last_notification": {
     "keys": [
-      "ssrn:5250499:prototype-v1:real-data-blocked"
+      "ssrn:3521370:published2024:europe-prefix-design-reject-v1"
     ],
-    "status": "prepared_for_direct_user_build_request",
-    "at": "2026-10-29T21:58:22Z",
-    "reason": "User-requested implementation delivered; no financial result and material source/data blocker remains.",
-    "delivery": "In-app only; no external message."
+    "status": "prepared_for_direct_cycle_request",
+    "at": "2026-10-29T22:12:52.597628+00:00",
+    "reason": "New completed preregistered design rejection with actual execution evidence; no portfolio benefit.",
+    "delivery": "In-app final only; no external message"
   },
   "budget_cap_notified": false,
   "run_history": [
@@ -301,6 +395,78 @@
       "access_receipt": "analysis/outputs/codex_scout_closing_auctions_20261029/acquisition_receipts.json",
       "publication_merge_parent": "10933c7f6d9f5321e4efc370685c206e4a9dd2df",
       "user_scope": "Academic hypotheses -> testable evaluation/funded/personal strategies; current and subsequent research cycles authorized without repeated permission prompts, within existing budgets/gates."
+    },
+    {
+      "run_id": "scout-europe-fix-20261029",
+      "finished_at": "2026-10-29T22:12:52.597628+00:00",
+      "checked_start_head": "7c8f3a9bfb55b441a87614769873bbefa756b22c",
+      "preregistration_commit": "ae338c3ef04403e862e173bd31fe7ba2a68decac",
+      "focus": "Owned-data-first academic market hypotheses; forced benchmark demand in underused6E",
+      "metadata_only_papers": [
+        "5136393",
+        "3822093",
+        "3164757",
+        "7257240",
+        "6750442"
+      ],
+      "full_reviews": 1,
+      "new_hypotheses": 1,
+      "economic_definitions": 1,
+      "status": "design_reject",
+      "source_method": "Connected public indexed search/publisher reader. Crossref prior network restriction known; no new API request made.",
+      "search_groups": [
+        "futures settlement price pressure2024-26",
+        "futures overnight reversal gold/treasury",
+        "Informative Price Pressure nextday",
+        "Ready orderflows commodity index",
+        "futures daylight savings and holidays",
+        "currency fix reversal",
+        "gold intraday momentum",
+        "futures margin calls",
+        "Treasury intraday momentum",
+        "Foreign Exchange Fixings author/fulltext/replication",
+        "LSEG14:00benchmark and CME contract specs"
+      ],
+      "access": [
+        {
+          "url": "https://www.bankofcanada.ca/wp-content/uploads/2021/10/swp2021-48.pdf",
+          "method": "configured Python urllib normal managed network",
+          "outcome": "Proxy tunnel403; no bypass"
+        },
+        {
+          "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jofi.13306",
+          "method": "connected publisher reader",
+          "outcome": "All article body/reference/footnote lines104-744 captured; figures are captions, not original pixels"
+        },
+        {
+          "url": "https://www3.nd.edu/~zda/FOMC.pdf",
+          "method": "connected reader",
+          "outcome": "Nonretryable redirected-destination failure"
+        },
+        {
+          "url": "https://ssrn.com/abstract=7257240",
+          "method": "connected reader",
+          "outcome": "403; moved on"
+        },
+        {
+          "url": "https://ssrn.com/abstract=6750442",
+          "method": "connected reader",
+          "outcome": "403; moved on"
+        }
+      ],
+      "admission_attempts": [
+        "Wrong transcribed claim SHA rejected before returns",
+        "Correct fetched claim admitted before returns and rechecked by run process"
+      ],
+      "engineering_checks": [
+        "Clock fixtures winter/summer/both mismatch eras PASS",
+        "Endpoint census before returns1288/1305",
+        "Ledger uniqueness,360minute clocks,design dates,year/gross/cost/net reconciliation PASS"
+      ],
+      "no_2023_plus_or_accounts": true,
+      "execution_reference": "E32",
+      "report_path": "agents/codex/results/scout_3521370_20261029.md",
+      "terminal_visibility": "Committed records after pull/refresh; no live synchronization"
     }
   ],
   "data_access_blockers": {
