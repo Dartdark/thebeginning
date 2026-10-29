@@ -373,8 +373,64 @@ def synthetic():
     return dict(passed=True,checks=count,market_data=False)
 
 
+def endpoint_diagnostic(events, dest, manifest):
+    """Terminal monthly diagnostic; never manufactures missing daily marks."""
+    assert PRIMARY_ONLY and list(NAMES)==['P','B']
+    evidence='agents/codex/research/vrp_monthly_proxy_endpoint_scope.md'
+    assert subprocess.check_output(['git','show','HEAD:'+evidence],cwd=ROOT)==(ROOT/evidence).read_bytes()
+    events.to_csv(dest/'monthly_ledger.csv',index=False)
+    rows=[]
+    years=pd.to_datetime(events.entry_date).dt.year
+    for name in NAMES:
+        for year in ['all',*sorted(years.unique())]:
+            mask=np.ones(len(events),bool) if year=='all' else years==year
+            opportunities_=events.loc[mask]
+            selected=opportunities_.loc[opportunities_[name]]
+            for side in ['all','long','short']:
+                chosen=selected if side!='short' else selected.iloc[:0]
+                months=opportunities_.net.where(opportunities_[name],0).to_numpy() if side!='short' else np.zeros(len(opportunities_))
+                duration=5 if year=='all' else 1
+                rate=len(months)/duration
+                eq=np.r_[0,months.cumsum()]
+                peak=np.maximum.accumulate(eq);dd=eq-peak
+                annual=float(months.sum()/duration)
+                sd=months.std(ddof=1) if len(months)>1 else np.nan
+                down=np.sqrt(np.mean(np.minimum(months,0)**2)) if len(months) else np.nan
+                gp=chosen.net.clip(lower=0).sum();gl=-chosen.net.clip(upper=0).sum()
+                maxdd=float(-dd.min())
+                rows.append(dict(name=name,year=year,side=side,opportunities=len(months),trades=len(chosen),
+                                 win=float((chosen.net>0).mean()),avg=float(chosen.net.mean()),
+                                 gross=float(chosen.gross.sum()),commission=len(chosen)*1.24,slippage=len(chosen)*2.50,
+                                 net=float(chosen.net.sum()),stress_net=float(chosen.stress_net.sum()),
+                                 t=tstat(chosen.net),annual_observed_net=annual,
+                                 opportunity_sharpe=float(months.mean()/sd*np.sqrt(rate)) if sd>0 else np.nan,
+                                 opportunity_sortino=float(months.mean()/down*np.sqrt(rate)) if down>0 else np.nan,
+                                 profit_factor=float(gp/gl) if gl>0 else np.nan,
+                                 endpoint_max_dd=maxdd,endpoint_calmar=annual/maxdd if maxdd else np.nan,
+                                 endpoint_ulcer=float(np.sqrt(np.mean((100*dd/(50000+peak))**2))),
+                                 full_daily_risk_verified=False))
+    pd.DataFrame(rows).to_csv(dest/'endpoint_metrics.csv',index=False)
+    keep=events.P.to_numpy(bool);removed=events.loc[~keep,'net'];rng=np.random.default_rng(SEED)
+    totals=[float(events.iloc[rng.choice(len(events),int(keep.sum()),replace=False)].net.sum()) for _ in range(1000)]
+    actual=float(events.loc[keep,'net'].sum());difference=events.net.where(keep,0)-events.net
+    controls=dict(selected=int(keep.sum()),removed=int((~keep).sum()),candidate_net=actual,
+                  base_net=float(events.net.sum()),difference=float(difference.sum()),
+                  removed_avg=float(removed.mean()),removed_t=tstat(removed),paired_month_nw3_t=nw_t(difference.to_numpy(),lag=3),
+                  random_draws=1000,p_random_total_ge_candidate=float(np.mean(np.array(totals)>=actual)),
+                  joint_profit_daily_dd_dominance=None,daily_mark_gate_passed=False,
+                  candidate_monthly_t=tstat(events.loc[keep,'net']),gross_mean=float(events.loc[keep,'gross'].mean()),
+                  gross_hurdle=2*COST,validation_authorized=False)
+    dump(dest/'endpoint_controls.json',controls)
+    manifest.update(return_ledgers_evaluated=2,verdict='TERMINAL_ENDPOINT_DIAGNOSTIC',
+                    endpoint_scope=evidence,full_screen_passed=False,validation_authorized=False,
+                    finished_utc=datetime.now(timezone.utc).isoformat())
+    dump(dest/'manifest.json',manifest)
+    print(pd.DataFrame(rows).query('year=="all" and side=="all"').to_string(index=False))
+    print(json.dumps(safe(controls)))
+
+
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('mode',choices=['synthetic','audit','design','validation'])
+    parser=argparse.ArgumentParser();parser.add_argument('mode',choices=['synthetic','audit','design','validation','endpoints'])
     parser.add_argument('--primary-only',action='store_true')
     args=parser.parse_args()
     if args.mode=='synthetic': print(json.dumps(synthetic()));return
@@ -405,6 +461,14 @@ def main():
                   primary_only_amendment=AMENDMENT if PRIMARY_ONLY else None,
                   vix_values_used_through='2022-12-31' if phase=='design' else str(pd.Timestamp(g.ts[-1]).date()),
                   target_quarterly_roll_months_excluded=True)
+    if args.mode=='endpoints':
+        assert PRIMARY_ONLY and gate['common_known']>=30
+        holes=pd.read_csv(dest/'holding_endpoint_holes.csv')
+        assert set(holes.kind)=={'daily_mark'} and len(holes)==1
+        assert str(holes.iloc[0]['date'])=='2020-11-30'
+        events,_,_=opportunities(g,f,phase,dest,returns=True)
+        endpoint_diagnostic(events,dest,manifest)
+        return
     if args.mode=='audit' or not gate['passed']:
         manifest['return_ledgers_evaluated']=0
         manifest['verdict']='AUDIT_ONLY' if args.mode=='audit' else 'STOP_DATA_GATE'
