@@ -1,0 +1,45 @@
+{
+  "plan": "f9f53157241d41725c93666c1930874b85be7f01",
+  "script_sha256": "212bf99e47fa7e0055b182757d450c288b65d620adf02b679d00da94d4af94ec",
+  "input_hashes": {
+    "ff5_daily_mirror.csv": "8928fbaba309c8a0d3a66ac3277fd81a8fb9203f3f91bdf6be4ee7fada6957ba",
+    "prices.parquet": "e1c518c398c9ebd63b7ead13871343d2a575090513885a42db75406bd6004833",
+    "exit_gaps.csv": "7fd978df63316793d0b9c7497ba13aa48789f71c02b2db919e884fb0f215364a",
+    "recycled_tickers.csv": "58cf35bc54c5c7d93c5ea60039965bc4293cf8fdfb29bedef0b8aac369c16375",
+    "no_trade_days.csv": "e6ce9efaeea91b3e3e8198a6a3b20bf56d217e82fe83c83b133fab27492de2f1",
+    "membership_intervals.parquet": "1e22ffca5e15d52872912413c55e64ead85bbb835e2148f5bbaaf84f33ea7cd0"
+  },
+  "versions": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0"
+  },
+  "data_read_end": "2022-12-31",
+  "recent_opened": false,
+  "variants": 2,
+  "random_seed": 4138715,
+  "bootstrap_seed": 4138716,
+  "sources": {
+    "yahoo": 1111272,
+    "tiingo": 117142,
+    "crsp": 36198,
+    "wiki": 5160,
+    "kaggle": 2127,
+    "nasdaq-patch": 9,
+    "wiki-patch": 4,
+    "tiingo-patch": 2
+  },
+  "rows": 1271914,
+  "tickers": 939,
+  "monthly_selections": 2480,
+  "decision": "DESIGN FAIL; stop before recent",
+  "limitations": [
+    "restricted S&P500/SPY-beta proxy",
+    "revised third-party mixed-source prices",
+    "conditional complete-day diagnostics",
+    "no borrow locates or actual auction fills",
+    "integer sizes use idealized recorded fill/reference price",
+    "not an executable cash ledger"
+  ]
+}
