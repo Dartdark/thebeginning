@@ -198,3 +198,10 @@ held 28 MNQ instead of 8 (a 75-pt stop = ~$4,200 vs a ~$400 cushion). Fixed live
 #2 back to 8), gear typed as APEX-681524-03 (the drop-down was empty; typing works). Rule: after copying a chart, open
 Format Signals > Properties > Auto Trading > Rithmic > gear on EVERY strategy and check the account; then check the Orders
 tab's Account column (widen it) on the first orders.
+
+## "Your session has been terminated ... started on a different machine" (2026-10-29, VPS)
+The MultiCharts license runs on one machine at a time: opening MultiCharts on the PC signed out the VPS's MultiCharts, and
+live trading stopped until it was restarted. Fix: on the PC File > Exit and end every MultiCharts64 / TradingServer /
+tsServer / ATCenterServer process in Task Manager; on the VPS click OK, restart MultiCharts, wait for the Rithmic connection,
+then auto-trading on per chart (Flat, positions checked in the Order and Position Tracker first). Rule: never open
+MultiCharts on the PC while the VPS trades (Cowork's rule changed the same day).
