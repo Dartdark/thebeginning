@@ -56,7 +56,9 @@ Inputs:
 	UseHolidayTimes(true),
 	EarlyLastEntry(1100),
 	EarlyExitTime(1130),
-	NumContracts(1);
+	NumContracts(1),
+	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
+Variables: HB_Last(-1), HB_Key(0), HB_Day("");
 
 Variables:
 	EntryBuf(0),
@@ -223,4 +225,18 @@ if MarketPosition < 0 and StopPts > 0 and High >= EntryPrice + StopPts then
 if MarketPosition <> 0 and Time >= DayExit then begin
 	Sell ("ON Bias LX") this bar on close;
 	BuyToCover ("ON Bias SX") this bar on close;
+end;
+
+// ---------- strategy heartbeat (2026-10-29; live guard, LIVE_GUARD_PLAN.md) ----------
+// Writes a SIG row to the trade log every bar in real time, only while THIS strategy is compiled and running. If the
+// code fails to compile or the signal is removed, the heartbeat stops and the 08:21 pre-market check / watchdog alert.
+// Log only: no orders. Set HeartbeatTag to the chart's logger tag (VB-2, ONB150, ...); empty = off.
+if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
+	HB_Key = CurrentDate * 10000 + CurrentTime;
+	if HB_Key <> HB_Last then begin
+		HB_Day = NumToStr(CurrentDate + 19000000, 0);
+		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + ",,"
+			+ NumToStr(MarketPosition * CurrentContracts, 0) + ",,,,,,,," + HB_Day + "," + NumToStr(CurrentTime, 0) + NewLine);
+		HB_Last = HB_Key;
+	end;
 end;

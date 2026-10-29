@@ -1,0 +1,20 @@
+// Strategy heartbeat snippet (2026-10-29, live guard) - for strategies whose full code isn't in the repo (the Bridge's
+// Monday Long). Our own live strategies (NQ_Vault_Break, NQ_Overnight_Bias(_ADX30), NQ_Expiration_Open_Short) already
+// have it. Log only: places no orders. Paste outside market hours, compile, and look for 'compiled successfully'.
+//
+// 1. Add this line to the END of the strategy's Inputs list (put a comma after the last existing input first):
+//        HeartbeatTag("")
+// 2. Add this line right after the Inputs statement:
+//        Variables: HB_Last(-1), HB_Key(0), HB_Day("");
+// 3. Paste the block below at the very END of the code.
+// 4. On each chart: Format Signals > the strategy > Inputs > HeartbeatTag = the chart's logger tag (MON_BR-2 / MON_BR150).
+
+if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
+	HB_Key = CurrentDate * 10000 + CurrentTime;
+	if HB_Key <> HB_Last then begin
+		HB_Day = NumToStr(CurrentDate + 19000000, 0);
+		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + ",,"
+			+ NumToStr(MarketPosition * CurrentContracts, 0) + ",,,,,,,," + HB_Day + "," + NumToStr(CurrentTime, 0) + NewLine);
+		HB_Last = HB_Key;
+	end;
+end;

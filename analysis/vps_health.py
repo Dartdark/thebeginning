@@ -47,7 +47,21 @@ def setup_check(df, day, path="live/expected_setup.json"):
 def monitor_check(df, day, cfg):
     """ACCT rows from the Apex Chart Monitor signal (2026-10-29): account binding typed, auto-trading on, feed alive,
     Rithmic reporting the balance. Only during RTH 08:30-15:00 CT on weekdays; silent until the monitor is installed."""
-    a = df[df.event == "ACCT"].copy(); out = []
+    out = []
+    if day.weekday() < 5:
+        import glob
+        ever = {l.split(",")[1] for f in glob.glob("live/trades/*.csv") for l in open(f) if l.startswith("SIG,")}
+        sig = df[df.event == "SIG"].copy(); sig["m"] = sig.bar_time.map(mins)
+        for tag in cfg["charts"]:
+            if tag not in ever: continue
+            g = sig[(sig.tag == tag) & (sig.m >= mins(830)) & (sig.m <= mins(1500))]
+            if g.empty:
+                out.append(f"- **STRATEGY {tag}**: no heartbeat from the strategy during RTH: not compiled / removed / stopped. It could not trade.")
+            else:
+                edges = [mins(830)] + sorted(g.m) + [mins(1500)]
+                gap = max(b - a for a, b in zip(edges, edges[1:]))
+                if gap > 70: out.append(f"- **STRATEGY {tag}**: a {gap}-minute gap in the strategy's heartbeat during RTH.")
+    a = df[df.event == "ACCT"].copy()
     if a.empty or day.weekday() >= 5: return out
     a["m"] = a.bar_time.map(mins); a = a[(a.m >= mins(830)) & (a.m <= mins(1500))]
     ids = {v["id"] for v in cfg["accounts"].values() if v.get("status") == "live"}

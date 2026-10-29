@@ -48,6 +48,21 @@ if ($hhmm -ge 830 -and $hhmm -le 1500) {
     }
 }
 
+# 2c. strategy heartbeat (SIG rows, 2026-10-29): a strategy that stopped writing for > 45 min in RTH is not running
+#     (failed compile, removed, error) even if the chart and its AA button look normal
+$sigTags = @{}
+Get-ChildItem "$Logs\2*.csv" | Sort-Object Name -Descending | Select-Object -First 6 | ForEach-Object {
+    Get-Content $_.FullName | Where-Object { $_ -like "SIG,*" } | ForEach-Object { $sigTags[$_.Split(",")[1]] = $true } }
+$sigLast = @{}
+if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "SIG,*" } | ForEach-Object { $c = $_.Split(","); $sigLast[$c[1]] = [int]$c[13] } }
+if ($hhmm -ge 900 -and $hhmm -le 1500) {
+    foreach ($t in $sigTags.Keys) {
+        if (-not $sigLast.ContainsKey($t)) { $problems += "NOSTRAT_$t|Strategy on chart $t wrote no heartbeat today: not compiled / removed? It cannot trade."; continue }
+        $bt = $sigLast[$t]; $age = ([int]($hhmm / 100) * 60 + $hhmm % 100) - ([int]($bt / 100) * 60 + $bt % 100)
+        if ($age -gt 45) { $problems += "NOSTRAT_$t|Strategy on chart $t: no heartbeat for $age min. Check the strategy is running." }
+    }
+}
+
 # 3. new rejected-order lines in MultiCharts' own logs
 $rej = 0; $msg = ""
 foreach ($r in @("$env:LOCALAPPDATA\TS Support", "$env:APPDATA\TS Support", "C:\ProgramData\TS Support") | Where-Object { Test-Path $_ }) {

@@ -5,6 +5,18 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
+- [ ] **Strategy heartbeat (2026-10-29; outside market hours, ~15 min):** paste the updated code into each live strategy and
+  compile; read the Output tab for 'compiled successfully' every time (the 10/27 ONB miss). Files (raw):
+  [NQ_Vault_Break](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Vault_Break.txt),
+  [NQ_Overnight_Bias_ADX30](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Overnight_Bias_ADX30.txt)
+  (or [NQ_Overnight_Bias](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Overnight_Bias.txt) if that is the one on the chart),
+  [NQ_Expiration_Open_Short](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Expiration_Open_Short.txt);
+  Bridge Monday Long: add the 3 parts of
+  [Strategy_Heartbeat_Snippet](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Strategy_Heartbeat_Snippet.txt)
+  to its code. The only change is a new input `HeartbeatTag` and a log-only block at the end. Then on each of the 8 charts set
+  `HeartbeatTag` = the chart's tag (VB-2, ONB-2, EOS-2, MON_BR-2, VB150, ONB150, EOS150, MON_BR150), check the other inputs
+  are unchanged (MULTICHARTS_PITFALLS.md: old inputs survive a paste), auto-trading off / on (Flat).
+
 - [x] (2026-10-29, user: added to all charts) **Apex Chart Monitor (new signal, 2026-10-29; outside market hours, ~10 min):** paste
   [Apex_Chart_Monitor.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Chart_Monitor.txt)
   ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Chart_Monitor.txt))
