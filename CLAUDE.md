@@ -25,6 +25,9 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `funded_strategies/
 - **Links:** always give direct GitHub links (and the raw link for code to paste into MultiCharts). The repo is PRIVATE since
   2026-10-19: raw links only open while logged in to GitHub, and scripted downloads (Invoke-WebRequest) fail; on the PC use
   `git pull` in the clone instead.
+- **Code in chat (user, 2026-10-29):** don't paste whole files into the reply. Give each file as one line: name, what it
+  is / what changed, GitHub link + raw link (copy from the raw page: Ctrl+A, Ctrl+C). Paste code only when it's a few lines
+  (a snippet to add) or the user asks for the full text.
 - **Journal (Obsidian, 2026-10-17):** `journal/daily/` and `journal/ideas/` are the user's notes, pushed to the work branch by
   `journal/sync.ps1` (with `live/` reports). On "read my journal": `git pull` the work branch, read the new notes, compare
   with the backtest trades of those days, act on problems (fix / `MULTICHARTS_PITFALLS.md` / `TODO.md`), test ideas and set
