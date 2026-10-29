@@ -180,3 +180,11 @@ Consult relevant entries before execution work. Sources with both alpha and exec
 Show the key finding and library link in chat. Keep execution-only references here rather than TODO's promising-strategy
 queue. This does not waive requested strategy backtests, evidence/preregistration gates or trial limits and authorizes
 no live/VPS/broker/logger changes. Historical source claims and synthetic checks are not verified execution savings.
+
+## Retained liquidity-risk reference (user, 2026-10-29)
+
+Consult [Swan equity-premium/liquidity review](results/equity_premium_liquidity_review_20261029.md)
+(SSRN 251399, 2002) when interpreting liquidity compensation, turnover, trading costs or liquidity stress.
+Distinguish turnover from spread/depth/impact and risk compensation from predictive alpha. The fitted historical
+asset-pricing model is background, not proof of a current ES/NQ signal or permission to assume its historical
+cost estimates. Use selectively when relevant; no automatic backtest or allocation change follows.
