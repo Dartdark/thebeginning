@@ -72,6 +72,11 @@ The first two papers' full source rules and matching complete/as-of inputs remai
 SPX acquisition request is prepared and unsent. The existing user contract explicitly prohibits new accounts,
 subscriptions, purchases and external messages; this task did not waive those restrictions or confirm existing access.
 
+**User access update,2026-10-29:** The user answered **Neither** to existing Cboe Open-Close or Bloomberg
+historical index-forecast access. The access question is resolved; neither existing licence is available according
+to the user. Continue permitted public/owned acquisition. This answer does not establish vendor sample eligibility
+or authorize a new account, licence, purchase or external contact; all three return-eligibility decisions remain NEEDS DATA.
+
 The execution environment also blocks ordinary public byte downloads from the data hosts. The connected reader
 provided the retained facts but cannot deliver ZIP bytes; the manuscript fetch remains unavailable. The exact public
 read destinations/resources are in [NETWORK_PUBLIC_DOWNLOADS.md](../inputs/scout_acquisition_20261029/NETWORK_PUBLIC_DOWNLOADS.md).
