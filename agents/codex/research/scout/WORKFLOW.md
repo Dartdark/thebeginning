@@ -60,6 +60,12 @@ real-time synchronization or verified push-delivery claim.
 
 ## Discover and deduplicate
 
+- **Owned-data-first (user2026-10-29):** follow [SEARCH_PROFILE.md](SEARCH_PROFILE.md). Before a full review or trial,
+  map the hypothesis to owned instruments/fields, verified dates and information clocks. Prioritize what can be
+  tested now, using the user's query/quality/skip lists. Missing material data means record a specific worthwhile
+  lead once and move on; do not repeatedly acquire unchanged blocked inputs. Parked source/data tasks do not
+  preempt compatible new discovery. A bounded free check may establish new availability, not justify a detour.
+
 - Search public SSRN records and DOI metadata, using focused groups: index/futures scheduled flows and hedging;
   auctions/rebalancing/dealer constraints; execution/tail-risk/data methodology. Mix recent papers with older
   high-merit sources. Prefer new independent information, realistic costs and potential book diversification.

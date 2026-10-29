@@ -204,6 +204,13 @@ not a background schedule, authorization to spend money on subscriptions, or per
 
 ## Autonomous SSRN scout (user, 2026-10-29)
 
+**Owned-data-first search (user2026-10-29):** use [SEARCH_PROFILE.md](research/scout/SEARCH_PROFILE.md), including
+the user's query families/quality filters/skip list. Screen exact required fields, usable dates and clocks against
+owned data before spending a full review or trial. Prefer hypotheses executable on our current data. Record
+specific worthwhile data-blocked leads and move on; no repeated unchanged acquisition loops. Weekly basis reversal
+and other paired-contract/auction/signed-book leads remain parked until matching inputs arrive. Never substitute
+proxies, relax data gates or revisit failed definitions just to produce a backtest.
+
 **Purpose of every cycle (user clarification2026-10-29):** academic market hypotheses should lead toward specific,
 testable strategies for the evaluation, funded or personal portfolios. Pursue source/data feasibility and eligible
 tests autonomously. Execution-reference collection is supporting work, not the research objective. Note blocked
