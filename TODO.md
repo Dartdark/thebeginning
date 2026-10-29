@@ -136,6 +136,9 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   Weekly holding is ineligible for Apex as described; personal research only pending evidence, preregistration and tests.
   [Source/strategy audit](agents/codex/results/scout_spread_strategy_feasibility_20261029.md) ·
   [Evidence](agents/codex/evidence/scout_basis_reversal_20261029.md). No return trial started.
+  [Build checkpoint](agents/codex/results/weekly_basis_reversal_build_20261029.md): Python signal prototype created;
+  14 synthetic engineering checks pass. Real-data rules/sizing/costs remain unresolved; no profitability or portfolio
+  test. Source/data blockers stay visible; the draft is not an admitted preregistration.
 
 - [ ] **Clock-aware Treasury index-duration demand — WATCH / NEEDS FULL TEXT (2026-10-29), SSRN7601879.**
   Specific merit: Bloomberg independently documents the U.S. index snapshot moving14:00→15:00CT effective2021-01-14;

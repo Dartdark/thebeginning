@@ -19,7 +19,7 @@
   "report_path": "agents/codex/results/scout_spread_strategy_feasibility_20261029.md",
   "evidence_path": "agents/codex/evidence/scout_basis_reversal_20261029.md",
   "access_receipt": "agents/codex/research/scout/runs/20261029_spread_strategy_access.json",
-  "updated_at": "2026-10-29T21:48:32.037536+00:00",
+  "updated_at": "2026-10-29T21:58:22Z",
   "cycle_id": "scout-spread-strategy-feasibility-20261029",
   "new_economic_trials": 0,
   "return_eligibility": "NEEDS DATA",
@@ -27,7 +27,7 @@
   "about": "Prior-week front/deferred return spread and next-week relative-value reversal.",
   "findings": "Authors claim negative autocorrelation independent of outright reversal. No independently verified net performance. Secondary notebook saved curves are gross and use a private engine/data interface.",
   "mechanism": "Differential information sensitivity and limits to arbitrage; not a measured forced order.",
-  "build_on": "Specific merits justify TODO verification, not TEST. Need primary rules, identified paired histories, settlement availability, mapping, integer sizing, both-leg costs and actual fills. Weekly holding not Apex-eligible as described; possible personal research only.",
+  "build_on": "Signal core now implemented with synthetic engineering checks. Full source, paired identified histories, clocks, universe, integer sizing and native costs remain prerequisite to TEST/preregistration. Weekly holding remains personal-only as described; no financial results.",
   "economic_family": "commodity-adjacent-maturity-weekly-basis-reversal",
   "account_fit": {
     "evaluation_50K_150K": "ineligible_as_described_weekly_overnight",
@@ -48,5 +48,14 @@
       "Discusses one-day execution delay; exact primary timing not certified",
       "No data rights or complete input coverage established"
     ]
+  },
+  "implementation_checkpoint": {
+    "report_path": "agents/codex/results/weekly_basis_reversal_build_20261029.md",
+    "code_path": "analysis/codex_weekly_basis_reversal.py",
+    "test_path": "analysis/codex_weekly_basis_reversal_test.py",
+    "design_draft": "agents/codex/research/scout/drafts/weekly_basis_reversal_design.md",
+    "engineering_checks_passed": 14,
+    "status": "signal_prototype_only; no real-data outcomes",
+    "receipt": "agents/codex/research/scout/runs/20261029_basis_reversal_build.json"
   }
 }
