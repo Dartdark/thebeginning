@@ -329,6 +329,15 @@ Source: Ahn, Fan, Noh & Park, SSRN 4752520 (paper, user upload 2026-10-29); `ana
 - Next check: none unless intraday retail flow data (e.g. small-lot aggressor volume by minute) is added.
 - Status: negative reference for futures.
 
+### E29 — ES order-flow shocks are absorbed within one second; macro releases raise price impact
+
+Source: Takahashi, arXiv 2508.06788 (paper, scout 2026-10-29); papers/SCOUT_LOG.md.
+- Use: one-second structural VAR on ES returns and order-flow imbalance per 15-minute interval: impulse responses die out almost entirely within a second; around macro announcements price impact per unit of flow rises, flow impact falls, return volatility spikes. Spreads / liquidity drive intraday variation of impact.
+- Evidence (author claim): ES E-mini, one-second data, heteroskedasticity-identified SVAR.
+- Limits: no trading test; confirms E25 (order flow doesn't predict NQ at 5-30 min) at the 1-second end; release-time fills pay more impact.
+- Next check: none; relevant when sizing orders at 07:30 / 09:00 CT releases.
+- Status: market-behavior reference.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
