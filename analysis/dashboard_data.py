@@ -100,3 +100,4 @@ if __name__ == "__main__":
     # the three backtest panels (Monte Carlo range, edge per strategy, missed-trade alarm) need accounts.json first
     import runpy
     runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "live_panels.py"), run_name="__main__")
+    runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "account_tools.py"), run_name="__main__")
