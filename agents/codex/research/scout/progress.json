@@ -1,10 +1,16 @@
 {
   "schema_version": 1,
   "program": "paper-scout-20261029",
-  "status": "ready",
-  "lease": null,
-  "hypotheses_started": 2,
-  "economic_definitions": 4,
+  "status": "running",
+  "lease": {
+    "run_id": "scout-treasury-close-20261029-design",
+    "owner": "codex-root-treasury-close",
+    "claimed_at": "2026-10-29T22:23:21.000Z",
+    "expires_at": "2026-10-30T00:23:21.000Z",
+    "checked_parent": "b257edce5cbc10df8602822e1602566fdf6de9a7"
+  },
+  "hypotheses_started": 3,
+  "economic_definitions": 7,
   "max_hypotheses": 10,
   "max_economic_definitions": 30,
   "max_new_hypotheses_per_cycle": 1,
@@ -48,6 +54,22 @@
       "status": "design_reject",
       "proposal_sha256": "73126cfa86d7529352657551e097ec3eaf5c438515b13d2255e2cb6254254474",
       "result_path": "agents/codex/results/scout_pre_nfp_20261029.md"
+    },
+    {
+      "hypothesis_id": "treasury_month_end_benchmark_clock_correction",
+      "run_id": "scout-treasury-close-20261029-design",
+      "source_id": "ssrn:3440417",
+      "proposal_path": "agents/codex/research/scout/proposals/treasury_close_20261029.json",
+      "candidate_variants": 1,
+      "control_variants": 2,
+      "economic_definitions": 3,
+      "definition_ids": [
+        "ZN_INDEX_CLOCK_LONG",
+        "ZN_INDEX_CLOCK_CALENDAR_NULL",
+        "ZN_INDEX_CLOCK_COST_STRESS"
+      ],
+      "status": "reserved",
+      "proposal_sha256": "dc8ebb4ff3ea8a7ca0a7d363de8bd8c027a534c865f485d5c7b629b5da159c0e"
     }
   ],
   "seen": [
