@@ -1,7 +1,7 @@
 # Project notes for Claude
 
 NQ/ES futures strategies in MultiCharts PowerLanguage for Apex 50K prop accounts (challenge and
-funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `funded_strategies/README.md`, `TIER_LIST.md`, `TODO.md` (user's open to-dos; tick off what they say is done), `WATCHLIST.md` (items to recheck), `MULTICHARTS_PITFALLS.md` (error log: read before writing MultiCharts code, add every solved error), `LESSONS.md` (short rules learned the hard way; add to it in the Friday review) and `S_RANK_PROGRAM.md` (current goal: one S-rank strategy per symbol).
+funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `funded_strategies/README.md`, `TIER_LIST.md`, `TODO.md` (user's open to-dos; tick off what they say is done), `WATCHLIST.md` (items to recheck), `MULTICHARTS_PITFALLS.md` (error log: read before writing MultiCharts code, add every solved error), `LESSONS.md` (short rules learned the hard way; add to it in the Friday review) and `S_RANK_PROGRAM.md` (current goal: one S-rank strategy per symbol). `HANDOFF.md` is the old 2026-10-14 handoff: background only.
 
 ## Working rules
 
@@ -29,20 +29,9 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `HANDOFF.md`, `fund
   their `Status:` line. Since 2026-10-19 Claude (Cowork on the user's PC) writes the daily notes from the user's answers;
   keep the user's own words, never invent fills or numbers. Trades come from the VPS trade log (`apex_strategies/Apex_Trade_Logger.txt` ->
   `live/trades/YYYYMMDD.csv`); `analysis/journal_trades.py` writes them into the note (weekday task 16:40 CT). The user also pushes now: always pull before pushing.
-- **Friday review (scheduled, 2026-10-19):** each Friday after the close: pull, read the week's journal notes and `live/`
-  reports, run `analysis/live_vs_backtest.py --all live/`, update `TIER_LIST.md` / `WATCHLIST.md` / `TODO.md` /
-  `NEW_CHAT_BRIEF.md`, add new lines to `LESSONS.md`, and condense the brief on the first Friday of each month. **Also on the
-  first Friday of each month (from December 2026, user 2026-10-22, after Kevin Davey):** per account, place last month's
-  actual P&L (Apex dashboard, fees included) in the Monte Carlo range for one month of the live strategy set at live size
-  (`analysis/montecarlo.py`, 21-day block bootstrap of the backtest daily P&L, 2023 onward) and report its percentile;
-  below the 10th two months running → review with the drift alarm. Count the same signal on two accounts as one event.
-  **Also every Friday (user, 2026-10-23): the Claude-Codex cross-review** (`agents/codex/TASK_weekly_cross_review.md`):
-  review Codex's week independently into `agents/cross_review/YYYY-MM-DD_claude.md` (max 5 material disagreements, each with
-  evidence and the smallest settling check), then read Codex's file when the user has run its side, and write the joint
-  `..._summary.md` (agreed / disputed / user decisions). Remind the user to send Codex "do the weekly cross-review" One response
-  each, then a deciding check; open items stay 'unresolved' and carry forward. Routine checks run at once; new backtests keep
-  the pre-registration gates. A confirmed accounting / execution defect goes to the user immediately, not on Friday;
-  judgement calls go to the user with both views, the uncertainty and a recommendation.
+- **Friday review (scheduled, 2026-10-19):** each Friday after the close, follow `FRIDAY_REVIEW.md` (weekly review,
+  first-Friday Monte Carlo check, Claude-Codex cross-review). A confirmed accounting / execution defect goes to the user
+  immediately, not on Friday.
 - **Papers in git (user, 2026-10-19):** research-paper PDFs may be committed (folder `papers/`). Books stay out.
 - **Repo map:** `README.md` (reorganised 2026-10-21): MultiCharts reports in `mc_reports/`, all price data in `data/`,
   script results in `analysis/outputs/`, exporters in `tools/exporters/`, old material in `archive/`. Put new files there.

@@ -6,7 +6,9 @@ analysis/outputs/dashboard/{accounts,trades,health}.json. After a run, upload th
 P&L is MultiCharts' gross per the logger (no fees); balances are 'last Apex balance the user reported + logged P&L since'.
 """
 import glob, json, os, datetime as dt
+import sys
 import pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 COLS = ["event", "tag", "symbol", "side", "contracts", "entry_date", "entry_time", "entry_price", "exit_date",
         "exit_time", "exit_price", "profit_usd", "bar_date", "bar_time"]
@@ -65,8 +67,18 @@ def main():
                                disk_free_gb=float(kv.get("disk_free_gb", 0)), log_rows=int(kv.get("log_rows_today", 0)),
                                push_errors=int(kv.get("push_errors", 0)),
                                rejected=int(kv["rejected_today"]) if "rejected_today" in kv else None))
+    import re, vps_health
+    checks = []
+    for day in sorted({os.path.basename(f)[:8] for f in glob.glob("live/trades/*.csv") + glob.glob("live/health/*.csv")})[-10:]:
+        d = dt.date(int(day[:4]), int(day[4:6]), int(day[6:]))
+        for i, line in enumerate(vps_health.check(d)):
+            text = line.lstrip("- ").strip()
+            alert = text.startswith("**")
+            checks.append(dict(check_id=f"{d} {i + 1:02d}", date=str(d), level="Alert" if alert else "Note",
+                               item=re.sub(r"\*\*|`", "", text)))
+    checks.sort(key=lambda c: c["check_id"], reverse=True)
     os.makedirs(OUT, exist_ok=True)
-    for name, data in (("accounts", accts), ("trades", trades), ("health", health)):
+    for name, data in (("accounts", accts), ("trades", trades), ("health", health), ("checks", checks)):
         json.dump(data, open(f"{OUT}/{name}.json", "w"), indent=1)
     print(f"{len(trades)} trades, {len(health)} health rows; written {OUT}/ at {dt.datetime.now():%Y-%m-%d %H:%M}")
     for a in accts: print(a["account"], a["status"], a["est_balance"], a["room"], a["trades"], a["net_logged"])

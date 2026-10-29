@@ -41,6 +41,9 @@ foreach ($r in $roots) {
     Get-ChildItem $r -Recurse -File -Include *.log, *.txt -ErrorAction SilentlyContinue |
         Where-Object { $_.LastWriteTime.Date -eq (Get-Date).Date -and $_.Length -lt 200MB } | ForEach-Object {
             $hits = Select-String -Path $_.FullName -Pattern "Rejected|Invalid .* order|not found|done for day" -SimpleMatch:$false -ErrorAction SilentlyContinue
+            # count only lines stamped today (MultiCharts writes dd.MM.yyyy/HH:mm:ss): a log file touched today still
+            # holds older days' lines (10/28 counted 3,228, the last from 10/26) (2026-10-29)
+            $hits = @($hits | Where-Object { $_.Line -like ("*" + (Get-Date).ToString("dd.MM.yyyy") + "/*") })
             if ($hits) { $rej += @($hits).Count; $rejmsg = ($hits[-1].Line -replace ',', ';' -replace '\s+', ' ').Substring(0, [math]::Min(160, $hits[-1].Line.Length)) }
         }
 }

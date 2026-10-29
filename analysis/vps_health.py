@@ -17,6 +17,32 @@ COLS = ["event", "tag", "symbol", "side", "contracts", "entry_date", "entry_time
 def mins(t): t = int(t); return t // 100 * 60 + t % 100
 
 
+def setup_check(df, day, path="live/expected_setup.json"):
+    """Compare the day's log with live/expected_setup.json: every live chart heartbeats, no unknown chart, entry sizes
+    as planned (catches a chart left on, a copied chart with old inputs, a size typo) (2026-10-29)."""
+    import json
+    if not os.path.exists(path): return []
+    cfg = json.load(open(path)); charts = cfg["charts"]; retired = set(cfg.get("retired_tags", [])); out = []
+    seen = set(df[df.event == "POS"].tag)
+    if day.weekday() < 5:
+        for t in charts:
+            if t not in seen: out.append(f"- **SETUP {t}**: no heartbeat today: chart closed, logger missing, or auto-trading off?")
+    for t in sorted(seen - set(charts)):
+        if t in retired:
+            out.append(f"- **RETIRED {t}**: chart of a closed account is still running (orders get rejected, rejection alarms drown real ones): turn its auto-trading off / close it on the VPS.")
+        else:
+            out.append(f"- **SETUP {t}**: unknown chart tag (not in live/expected_setup.json): typo in the logger Tag, or a new chart?")
+    for r in df[df.event == "OPEN"].itertuples():
+        c = charts.get(r.tag)
+        if c is None: continue
+        q = int(float(r.contracts))
+        if c.get("qty") is not None and q != c["qty"]:
+            out.append(f"- **SIZE {r.tag}**: entered {q} contracts at {int(r.entry_time):04d}, plan is {c['qty']}. Check the strategy inputs.")
+        elif c.get("qty") is None and q > c.get("max_qty", 1e9):
+            out.append(f"- **SIZE {r.tag}**: entered {q} contracts, above the {c['max_qty']} ceiling. Check the risk input.")
+    return out
+
+
 def check(day):
     d = day.strftime("%Y%m%d"); out = []
     f = f"live/trades/{d}.csv"
@@ -45,6 +71,7 @@ def check(day):
                 gap = max(b - a for a, b in zip(edges, edges[1:]))
                 if day.weekday() < 5 and gap > 70:
                     out.append(f"- **STALE {tag}**: a {gap}-minute gap in its heartbeat between 08:30 and 15:00 CT (frozen chart or feed?).")
+        out += setup_check(df, day)
     elif day.weekday() < 5:
         out.append("- No trade-log file for today on the VPS push (logger, C:\\TradingLogs or the 16:10 push task?).")
     # contract roll weeks: the mapping must move to the next contract (MULTICHARTS_PITFALLS.md roll checklist)
