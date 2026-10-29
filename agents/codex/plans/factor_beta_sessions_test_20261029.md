@@ -38,7 +38,7 @@ Use source adj_close for total daily returns; intraday = close/open-1.
 Overnight = (1+total_daily)/(1+intraday)-1, preserving dividends/splits/spinoffs encoded in source.
 Reconcile (1+overnight)*(1+intraday) to (1+total).
 Ratio convention is a total-return attribution, not a fully observable raw overnight cash flow.
-For integer sizing, express previous close on current share basis using prev_close*(adj_today/close_today)/(adj_prev/prev_close);
+For integer sizing, express previous close on current share basis using prev_close*(adj_prev/prev_close)/(adj_today/close_today);
 entry overnight uses this reference; this includes source total-return adjustments and is not exact native historical shares.
 Separate optimistic dollar diagnostics from true executable cash ledger.
 Use only records on consecutive SPY session dates; no forward fills; flag no_trade_days and nonpositive/bad OHLC.
