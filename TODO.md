@@ -5,7 +5,7 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
-- [ ] **Strategy heartbeat (2026-10-29; outside market hours, ~15 min):** paste the updated code into each live strategy and
+- [x] (2026-10-29, user: all done) **Strategy heartbeat (2026-10-29; outside market hours, ~15 min):** paste the updated code into each live strategy and
   compile; read the Output tab for 'compiled successfully' every time (the 10/27 ONB miss). Files (raw):
   [NQ_Vault_Break](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Vault_Break.txt),
   [NQ_Overnight_Bias_ADX30](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Overnight_Bias_ADX30.txt)
