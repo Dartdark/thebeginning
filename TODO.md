@@ -125,6 +125,12 @@ add it here for later review. Record the merit, what is missing, the smallest ne
 duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.
 A queue entry does not add it to a trading plan or start a backtest; review when prerequisites arrive or the user prioritizes it.
 
+- [ ] **U.S. factor-beta overnight/intraday stock baskets — WATCH / NEEDS DATA (2026-10-29).** Later personal-account stock research, outside current futures allocations.
+  Source merit: prior-month betas predict next-month session returns; U.S. market-beta conditional slopes +5.198 bp overnight / −8.892 bp intraday per unit beta, with cross-market evidence. These are gross regression coefficients, not net portfolio returns.
+  Smallest next check: no-return audit of historical universe/adjusted prices, factor clocks, auctions, borrow/financing and attainable basket costs/exposures; then effective design-session count and cost/power gate.
+  Start with market-beta baskets as the simple reference; do not substitute NQ/ES or select factor combinations after seeing returns. No return test starts from this queue entry.
+  [Review](agents/codex/results/factor_beta_sessions_review_20261029.md) · [Evidence](agents/codex/evidence/factor_beta_sessions_20261029.md).
+
 - [ ] **ORB30 + M30 EMA20, long-only NQ — WATCH; proxy tested, native implementation unverified.**
   Verified proxy merit: 994 trades, PF 1.25 after NQ costs; full-session EMA outperformed cash-only EMA in the frozen
   2018–22 design comparison. Later PF weakens to 1.21; 4R/no-target improvements remain statistically unproven.
