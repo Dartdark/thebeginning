@@ -1,0 +1,359 @@
+// ==========================================================================
+//  L644NQ  |  NQ  |  Data1 = NQ 5m  (signal AND execution, no Data2)
+//  Monday Long - NQ  (idea 644, slipped version)
+//  v2.1  community release (mini only, defaults = tested settings)
+//  + strategy heartbeat (2026-10-29, Claude; live guard): new input HeartbeatTag and a log-only block at the end.
+//    Trading logic unchanged. Set HeartbeatTag to the chart's logger tag (MON_BR-2 / MON_BR150); empty = off.
+// ==========================================================================
+//  v2.1 CHANGES (vs v2.0)
+//  The holiday calendar is now COMPUTED BY RULE on the first bar of every
+//  calendar year, for this year and next. Nothing is hard-coded, so the same
+//  code runs live in any year without editing. The trading logic is
+//  unchanged. The old HolidayEves list is replaced by a check of the
+//  calendar date the current bar's session belongs to. The v2.0 list also
+//  held two national days of mourning (5 Dec 2018, 9 Jan 2025) that no rule
+//  can produce; they are dropped. This does not change the 2017-2026 results:
+//  neither was a Monday, and on both days the CME closed equity futures at
+//  08:30 CT, so there was no 12:00 or 15:00 bar and the daily bookkeeping
+//  skipped the day with or without the list.
+// ==========================================================================
+//  !!! CAUTION - DO NOT RUN THIS STRATEGY BY ITSELF !!!
+//  This strategy trades rarely: at most one trade per week (Monday session
+//  only), and only when its filter allows it, so there can be long stretches
+//  with no trades at all. In our bootstrap this led to a HIGH probability of
+//  losing a funded prop-firm account to the INACTIVITY rule, not to drawdown.
+//  None of these strategies passed a strict out-of-sample threshold on its
+//  own. Use it only as an ADDITION to a set of other strategies that trade on
+//  other days, never as a standalone system.
+//  Defaults = the backtested settings: 1 mini, NO stop loss.
+//  Funded (Apex 50K PA): only 2 contracts are allowed until +$1,500 profit,
+//  and the PA daily loss limit ($1,000) can liquidate a trade before its
+//  time exit - neither is modelled in the backtest.
+// ==========================================================================
+//  STRATEGY
+//  On Monday, buy at the close of Sunday's 19:00 bar and exit at the close of
+//  Monday's 15:55 bar. Only if yesterday's ADX 7 (daily, regular sessions)
+//  is between 10 and 50 and DI+ is above DI-.
+//  Target 100 points, no stop. Monday holidays excluded.
+//  The paper (daylight-saving change) called for a short in the week after
+//  the clock change; the selected zone turned into 'Monday long'.
+//  Paper: Kamstra, Kramer, Levi (2000), daylight-saving time change.
+// ==========================================================================
+//  SETUP IN MULTICHARTS
+//    Study type: Signal (strategy) - one file, no functions to create.
+//    Data1 = NQ 5 minute   (signal AND execution - orders are sent here)
+//    No Data2 and no micro contract needed.
+//    Session = FULL CME Globex session 17:00-16:00, bars time-stamped at close.
+//    Costs in Properties: the real NQ commission and slippage per contract.
+//    Automated trading stays OFF until you switch it on yourself.
+//
+//  >>> TIMEZONE - READ THIS BEFORE THE FIRST RUN <<<
+//  Everything is in EXCHANGE time (Chicago / CENTRAL). Set the chart's
+//  time zone to Exchange. Unlike the entry/exit inputs, the session
+//  boundaries (08:30 RTH open, 12:00, 15:00, 16:30 session roll) are
+//  HARD-CODED in Central time, so shifting the inputs alone is NOT enough.
+//  The Bridge's own bars (C:\OFB\ofb_bars_*.csv) are keyed EASTERN - if you
+//  chart those, switch the chart to Exchange time first. Nothing will error
+//  if you get it wrong; it will simply trade a different hour than the one
+//  that was validated.
+//
+//  >>> HOLIDAY CALENDAR <<<
+//  Computed from the NYSE rules below, no maintenance needed from year to
+//  year. What the rules CANNOT know are ad-hoc closures announced during the
+//  year (national days of mourning, weather). These are rare (two in the ten
+//  test years, neither on a Monday) and are deliberately NOT handled in the
+//  code. If one is ever announced for a Monday, do not run the strategy that
+//  week: the Sunday entry would otherwise be held through the closure until
+//  the next regular 15:55 exit. If the NYSE ever changes its holiday
+//  schedule, the rule block below is the one place to edit.
+// ==========================================================================
+
+inputs:
+    EntryTime( 1900 ),        // Sunday evening: already the Monday session
+    ExitTime( 1555 ),
+    SessionWeekday( 1 ),      // 1 = Monday
+    AdxLen( 7 ),              // filter: yesterday's daily ADX
+    AdxMin( 10 ),             // trade when AdxMin <= ADX < AdxMax
+    AdxMax( 50 ),
+    StopPts( 0 ),             // 0 = off, as in the test
+    TargetPts( 100 ),         // 100 points = $2,000 per NQ (per contract)
+    NumContracts( 1 ),        // NQ minis
+    HeartbeatTag( "" );       // live guard: the chart's logger tag (MON_BR-2 / MON_BR150); empty = no heartbeat
+
+variables:
+    HB_Last( -1 ), HB_Key( 0 ), HB_Day( "" ),
+    NewSession( false ), SessionDay( 0 ), SessionDate( 0 ),
+    Has830( false ), Has1200( false ), Has1500( false ), IsHoliday( false ), FirstRTHBar( true ),
+    Open830( 0 ), Close1200( 0 ), Close1500( 0 ), RTHHigh( 0 ), RTHLow( 0 ), TodayClose( 0 ),
+    PrevClose( 0 ), HasPrevDay( false ), TRHigh( 0 ), TRLow( 0 ), DayTR( 0 ),
+    AtrWilder( 0 ), AtrCount( 0 ), PrevATR( 0 ), jj( 0 ), NoTradeDay( false ),
+    PrevRTHHigh( 0 ), PrevRTHLow( 0 ), upMv( 0 ), dnMv( 0 ), dmUp( 0 ), dmDown( 0 ),
+    trSm( 0 ), dmUpSm( 0 ), dmDownSm( 0 ), dirCount( 0 ), diUp( 0 ), diDown( 0 ),
+    dxVal( 0 ), adxSm( 0 ), dxCount( 0 ),
+    PrevADX( -1 ), PrevDIDiff( 0 ), dxValid( false ),
+    // holiday calendar
+    CalYear( 0 ), NumClosures( 0 ), NumEarly( 0 ), yy( 0 ), Yr4( 0 ), HolDate( 0 ), Wd( 0 ), ThanksDay( 0 ),
+    EaA( 0 ), EaB( 0 ), EaC( 0 ), EaD( 0 ), EaE( 0 ), EaF( 0 ), EaG( 0 ), EaH( 0 ), EaI( 0 ), EaK( 0 ),
+    EaL( 0 ), EaM( 0 ), EasterMo( 0 ), EasterDy( 0 );
+
+arrays:
+    Closures[30]( 0 ), EarlyCloses[10]( 0 );
+
+// ==========================================================================
+//  HOLIDAY CALENDAR (MultiCharts date format: YYYMMDD with YYY = year - 1900)
+//  Rebuilt on the first bar of every calendar year for THIS year and NEXT
+//  year, so that a Sunday 31 Dec already knows about Monday 1 Jan.
+//  NYSE full closures:
+//    New Year's Day (Sunday -> Monday 2 Jan; Saturday -> not observed),
+//    Martin Luther King Day (3rd Monday Jan), Presidents' Day (3rd Monday Feb),
+//    Good Friday, Memorial Day (last Monday May), Juneteenth (from 2022),
+//    Independence Day, Labor Day (1st Monday Sep), Thanksgiving (4th Thursday
+//    Nov), Christmas. Fixed-date holidays: Saturday -> Friday, Sunday -> Monday.
+//  NYSE early closes (13:00 ET): 3 Jul when Mon-Thu, day after Thanksgiving,
+//    24 Dec when Mon-Thu.
+//  Verified against the hard-coded 2017-2026 lists of v2.0: identical, apart
+//  from the two national days of mourning explained in the header.
+// ==========================================================================
+if IntPortion( Date / 10000 ) <> CalYear then begin
+    CalYear = IntPortion( Date / 10000 );                                    // 126 = 2026
+    NumClosures = 0;
+    NumEarly = 0;
+    for yy = CalYear to CalYear + 1 begin
+        Yr4 = 1900 + yy;
+
+        // New Year's Day
+        HolDate = yy * 10000 + 101;  Wd = DayOfWeek( HolDate );
+        if Wd = 0 then HolDate = HolDate + 1;                                // Sunday -> Monday 2 Jan
+        if Wd = 6 then HolDate = 0;                                          // Saturday -> no weekday closure
+        if HolDate > 0 then begin  Closures[NumClosures] = HolDate;  NumClosures = NumClosures + 1;  end;
+
+        // Martin Luther King Day: 3rd Monday of January
+        HolDate = yy * 10000 + 101;
+        HolDate = HolDate + Mod( 1 - DayOfWeek( HolDate ) + 7, 7 ) + 14;
+        Closures[NumClosures] = HolDate;  NumClosures = NumClosures + 1;
+
+        // Presidents' Day: 3rd Monday of February
+        HolDate = yy * 10000 + 201;
+        HolDate = HolDate + Mod( 1 - DayOfWeek( HolDate ) + 7, 7 ) + 14;
+        Closures[NumClosures] = HolDate;  NumClosures = NumClosures + 1;
+
+        // Good Friday: Easter Sunday (Gregorian computus, anonymous algorithm) minus 2 days
+        EaA = Mod( Yr4, 19 );  EaB = IntPortion( Yr4 / 100 );  EaC = Mod( Yr4, 100 );
+        EaD = IntPortion( EaB / 4 );  EaE = Mod( EaB, 4 );  EaF = IntPortion( ( EaB + 8 ) / 25 );
+        EaG = IntPortion( ( EaB - EaF + 1 ) / 3 );
+        EaH = Mod( 19 * EaA + EaB - EaD - EaG + 15, 30 );
+        EaI = IntPortion( EaC / 4 );  EaK = Mod( EaC, 4 );
+        EaL = Mod( 32 + 2 * EaE + 2 * EaI - EaH - EaK, 7 );
+        EaM = IntPortion( ( EaA + 11 * EaH + 22 * EaL ) / 451 );
+        EasterMo = IntPortion( ( EaH + EaL - 7 * EaM + 114 ) / 31 );
+        EasterDy = Mod( EaH + EaL - 7 * EaM + 114, 31 ) + 1;
+        HolDate = JulianToDate( DateToJulian( yy * 10000 + EasterMo * 100 + EasterDy ) - 2 );
+        Closures[NumClosures] = HolDate;  NumClosures = NumClosures + 1;
+
+        // Memorial Day: last Monday of May
+        HolDate = yy * 10000 + 531;
+        HolDate = HolDate - Mod( DayOfWeek( HolDate ) - 1 + 7, 7 );
+        Closures[NumClosures] = HolDate;  NumClosures = NumClosures + 1;
+
+        // Juneteenth: NYSE holiday since 2022
+        if yy >= 122 then begin
+            HolDate = yy * 10000 + 619;  Wd = DayOfWeek( HolDate );
+            if Wd = 6 then HolDate = HolDate - 1;
+            if Wd = 0 then HolDate = HolDate + 1;
+            Closures[NumClosures] = HolDate;  NumClosures = NumClosures + 1;
+        end;
+
+        // Independence Day
+        HolDate = yy * 10000 + 704;  Wd = DayOfWeek( HolDate );
+        if Wd = 6 then HolDate = HolDate - 1;
+        if Wd = 0 then HolDate = HolDate + 1;
+        Closures[NumClosures] = HolDate;  NumClosures = NumClosures + 1;
+
+        // Labor Day: 1st Monday of September
+        HolDate = yy * 10000 + 901;
+        HolDate = HolDate + Mod( 1 - DayOfWeek( HolDate ) + 7, 7 );
+        Closures[NumClosures] = HolDate;  NumClosures = NumClosures + 1;
+
+        // Thanksgiving: 4th Thursday of November
+        ThanksDay = yy * 10000 + 1101;
+        ThanksDay = ThanksDay + Mod( 4 - DayOfWeek( ThanksDay ) + 7, 7 ) + 21;
+        Closures[NumClosures] = ThanksDay;  NumClosures = NumClosures + 1;
+
+        // Christmas
+        HolDate = yy * 10000 + 1225;  Wd = DayOfWeek( HolDate );
+        if Wd = 6 then HolDate = HolDate - 1;
+        if Wd = 0 then HolDate = HolDate + 1;
+        Closures[NumClosures] = HolDate;  NumClosures = NumClosures + 1;
+
+        // Early closes: 3 Jul (Mon-Thu), day after Thanksgiving, 24 Dec (Mon-Thu)
+        Wd = DayOfWeek( yy * 10000 + 703 );
+        if Wd >= 1 and Wd <= 4 then begin  EarlyCloses[NumEarly] = yy * 10000 + 703;  NumEarly = NumEarly + 1;  end;
+        EarlyCloses[NumEarly] = ThanksDay + 1;  NumEarly = NumEarly + 1;
+        Wd = DayOfWeek( yy * 10000 + 1224 );
+        if Wd >= 1 and Wd <= 4 then begin  EarlyCloses[NumEarly] = yy * 10000 + 1224;  NumEarly = NumEarly + 1;  end;
+    end;
+
+    // Uncomment to list the computed calendar in the PowerLanguage Editor output window:
+    // for jj = 0 to NumClosures - 1 begin  Print( "L644NQ closure     ", NumToStr( Closures[jj], 0 ) );  end;
+    // for jj = 0 to NumEarly - 1 begin  Print( "L644NQ early close ", NumToStr( EarlyCloses[jj], 0 ) );  end;
+end;
+
+// ==========================================================================
+//  SESSION: a bar after 16:30 belongs to the next day's session. The regular
+//  session that just ended (with the 08:30 bar and the 12:00 or 15:00 bar,
+//  not a holiday) updates "yesterday's" data: close and Wilder ATR 14,
+//  computed on the 08:35-15:00 regular session of the chart series.
+// ==========================================================================
+if Time > 1630 then
+    NewSession = CurrentBar > 1 and ( Time[1] <= 1630 or Date[1] <> Date )
+else
+    NewSession = CurrentBar > 1 and Time[1] <= 1630 and Date[1] <> Date;
+
+if NewSession then begin
+    if Has830 and ( Has1200 or Has1500 ) and IsHoliday = false and FirstRTHBar = false then begin
+        if Has1500 then TodayClose = Close1500 else TodayClose = Close1200;
+        TRHigh = RTHHigh;
+        TRLow = RTHLow;
+        if HasPrevDay then begin
+            if PrevClose > TRHigh then TRHigh = PrevClose;
+            if PrevClose < TRLow then TRLow = PrevClose;
+        end;
+        DayTR = TRHigh - TRLow;
+        if AtrCount = 0 then AtrWilder = DayTR else AtrWilder = AtrWilder + ( DayTR - AtrWilder ) / 14;
+        AtrCount = AtrCount + 1;
+        // ------------------- Wilder ADX on the regular sessions (as in the test) -------------------
+        dmUp = 0;
+        dmDown = 0;
+        if HasPrevDay then begin
+            upMv = RTHHigh - PrevRTHHigh;
+            dnMv = PrevRTHLow - RTHLow;
+            if upMv > dnMv and upMv > 0 then dmUp = upMv;
+            if dnMv > upMv and dnMv > 0 then dmDown = dnMv;
+        end;
+        if dirCount = 0 then begin
+            trSm = DayTR;
+            dmUpSm = dmUp;
+            dmDownSm = dmDown;
+        end
+        else begin
+            trSm = trSm + ( DayTR - trSm ) / AdxLen;
+            dmUpSm = dmUpSm + ( dmUp - dmUpSm ) / AdxLen;
+            dmDownSm = dmDownSm + ( dmDown - dmDownSm ) / AdxLen;
+        end;
+        dirCount = dirCount + 1;
+        dxValid = false;
+        if dirCount >= AdxLen and trSm > 0 then begin
+            diUp = 100 * dmUpSm / trSm;
+            diDown = 100 * dmDownSm / trSm;
+            if diUp + diDown > 0 then begin
+                dxVal = diUp - diDown;
+                if dxVal < 0 then dxVal = -dxVal;
+                dxVal = 100 * dxVal / ( diUp + diDown );
+                dxValid = true;
+            end;
+        end;
+        if dxValid then begin
+            if dxCount = 0 then adxSm = dxVal else adxSm = adxSm + ( dxVal - adxSm ) / AdxLen;
+            dxCount = dxCount + 1;
+        end;
+        if dxCount >= AdxLen then begin
+            PrevADX = adxSm;
+            PrevDIDiff = diUp - diDown;
+        end
+        else
+            PrevADX = -1;
+        PrevRTHHigh = RTHHigh;
+        PrevRTHLow = RTHLow;
+        PrevClose = TodayClose;
+        HasPrevDay = true;
+        if AtrCount >= 14 then PrevATR = AtrWilder else PrevATR = 0;
+    end;
+    Has830 = false;
+    Has1200 = false;
+    Has1500 = false;
+    IsHoliday = false;
+    FirstRTHBar = true;
+end;
+
+// ------------------- today's session, on the chart series (Data1) -------------------
+if Time = 830 then begin
+    Has830 = true;
+    Open830 = Close;
+    for jj = 0 to NumClosures - 1 begin
+        if Closures[jj] = Date then IsHoliday = true;       // full closure: day excluded from the daily bookkeeping
+    end;
+end;
+if Time > 830 and Time <= 1500 then begin
+    if FirstRTHBar then begin
+        RTHHigh = High;
+        RTHLow = Low;
+        FirstRTHBar = false;
+    end
+    else begin
+        if High > RTHHigh then RTHHigh = High;
+        if Low < RTHLow then RTHLow = Low;
+    end;
+end;
+if Time = 1200 then begin
+    Has1200 = true;
+    Close1200 = Close;
+end;
+if Time = 1500 then begin
+    Has1500 = true;
+    Close1500 = Close;
+end;
+
+// ------------------- session weekday and session date (a bar after 16:30 belongs to tomorrow's session) -------------------
+if Time > 1630 then begin
+    SessionDay = DayOfWeek( Date ) + 1;                    // 1 = Monday (Sunday evening counts as Monday)
+    SessionDate = JulianToDate( DateToJulian( Date ) + 1 );
+end
+else begin
+    SessionDay = DayOfWeek( Date );
+    SessionDate = Date;
+end;
+NoTradeDay = false;                                        // the session's date is a full closure or an early close
+for jj = 0 to NumClosures - 1 begin
+    if Closures[jj] = SessionDate then NoTradeDay = true;
+end;
+for jj = 0 to NumEarly - 1 begin
+    if EarlyCloses[jj] = SessionDate then NoTradeDay = true;
+end;
+
+// ==========================================================================
+//  ENTRY: on Monday, at the close of the Sunday evening bar
+// ==========================================================================
+if Time = EntryTime and SessionDay = SessionWeekday and MarketPosition = 0
+   and NoTradeDay = false and PrevADX >= 0 then begin
+    if PrevADX >= AdxMin and PrevADX < AdxMax and PrevDIDiff > 0 then
+        Buy ( "MonLong" ) NumContracts contracts this bar on close;
+end;
+
+// ==========================================================================
+//  EXITS: stop and target in POINTS from the entry price, per contract
+//  (StopPts x BigPointValue: $20 per point on NQ). Then the time exit.
+// ==========================================================================
+SetStopContract;
+if StopPts > 0 then SetStopLoss( StopPts * BigPointValue );
+if TargetPts > 0 then SetProfitTarget( TargetPts * BigPointValue );
+if MarketPosition <> 0 and Time >= ExitTime and Time <= 1630 then begin
+    if MarketPosition > 0 then Sell ( "Time.LX" ) this bar on close;
+    if MarketPosition < 0 then BuyToCover ( "Time.SX" ) this bar on close;
+end;
+
+// ==========================================================================
+//  STRATEGY HEARTBEAT (2026-10-29, live guard; log only, no orders)
+//  Writes a SIG row to the trade log every bar in real time, only while THIS
+//  strategy is compiled and running. If the code fails to compile or the
+//  signal is removed, the heartbeat stops and the 08:21 pre-market check /
+//  watchdog alert.
+// ==========================================================================
+if HeartbeatTag <> "" and GetAppInfo( aiRealTimeCalc ) = 1 and LastBarOnChart then begin
+    HB_Key = CurrentDate * 10000 + CurrentTime;
+    if HB_Key <> HB_Last then begin
+        HB_Day = NumToStr( CurrentDate + 19000000, 0 );
+        FileAppend( "C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + ",,"
+            + NumToStr( MarketPosition * CurrentContracts, 0 ) + ",,,,,,,," + HB_Day + "," + NumToStr( CurrentTime, 0 ) + NewLine );
+        HB_Last = HB_Key;
+    end;
+end;

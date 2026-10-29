@@ -11,9 +11,8 @@ bottom). Times are Central (CT).
   [NQ_Overnight_Bias_ADX30](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Overnight_Bias_ADX30.txt)
   (or [NQ_Overnight_Bias](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Overnight_Bias.txt) if that is the one on the chart),
   [NQ_Expiration_Open_Short](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Expiration_Open_Short.txt);
-  Bridge Monday Long: add the 3 parts of
-  [Strategy_Heartbeat_Snippet](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Strategy_Heartbeat_Snippet.txt)
-  to its code. The only change is a new input `HeartbeatTag` and a log-only block at the end. Then on each of the 8 charts set
+  [Bridge_Monday_Long_L644NQ](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Bridge_Monday_Long_L644NQ.txt)
+  (the Bridge's v2.1 with the heartbeat). The only change is a new input `HeartbeatTag` and a log-only block at the end. Then on each of the 8 charts set
   `HeartbeatTag` = the chart's tag (VB-2, ONB-2, EOS-2, MON_BR-2, VB150, ONB150, EOS150, MON_BR150), check the other inputs
   are unchanged (MULTICHARTS_PITFALLS.md: old inputs survive a paste), auto-trading off / on (Flat).
 
