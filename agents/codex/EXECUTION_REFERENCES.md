@@ -160,6 +160,12 @@ Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
   omitted by a secondary calendar after old URLs failed. Retrieval failure is not proof that an event did not occur:
   keep unresolved events visible and distinguish corroborated dates, printed embargo clocks and actual feed receipt.
 
+- Added2026-10-29: [spread-strategy feasibility](results/scout_spread_strategy_feasibility_20261029.md)
+  distinguishes a contemporaneous monthly position/curve regression from a forecast available before entry.
+  A public weekly basis-reversal notebook discusses settlement availability and delays execution one day;
+  that is a secondary implementation assumption, not verified primary timing or our replicated savings.
+  Freeze publication/receipt and first executable prices before using final settlements to select a position.
+
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
 Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5 and Figure 1 p.27.

@@ -4,6 +4,18 @@ User authorization2026-10-29: discover useful papers, analyze, backtest justifie
 or report worthwhile leads with the user as overseer. This covers research, not trading or live deployment.
 This document and progress.json define a bounded first research batch, not an unlimited parameter search.
 
+## Purpose of every cycle — user clarification2026-10-29
+
+Read academic articles for specific market hypotheses that can become trading strategies for the evaluation,
+funded or personal portfolios. Source review and execution references support that objective; they are not
+substitutes for seeking an actionable hypothesis and pursuing an eligible test. Extract a concrete signal,
+participant/mechanism, information clock, instrument, holding period and plausible net edge, then assess fit
+to each account type. Autonomous research includes source/data acquisition and testing through existing gates.
+An explicit risk premium or market friction can justify research without inventing a forced order.
+Record missing material inputs and move to the next lead within cycle/trial limits. Report an honest no-candidate
+cycle when warranted; never manufacture a strategy, rescue a failed family or count an execution-only reference
+as strategy success. Retain useful supporting methods in EXECUTION_REFERENCES.md as already required.
+
 ## Execution model
 
 The terminal's Research scout button performs public SSRN DOI metadata discovery via Crossref and local dedup.

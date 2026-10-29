@@ -125,6 +125,18 @@ add it here for later review. Record the merit, what is missing, the smallest ne
 duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.
 A queue entry does not add it to a trading plan or start a backtest; review when prerequisites arrive or the user prioritizes it.
 
+- [ ] **Weekly commodity basis reversal — NEEDS FULL TEXT / PAIRED DATA (2026-10-29), SSRN5250499.**
+  Merit: specific adjacent-maturity relative-return reversal claimed in the primary abstract, distinct from an
+  outright price reversal; public secondary code defines a delayed weekly two-leg implementation. No net return
+  or account benefit independently verified. Source mechanism is differential information sensitivity/limited arbitrage,
+  not a verified forced order. Primary full rules and version remain unread; secondary curves are gross and depend on
+  a private engine/data service. Smallest next check: obtain lawful primary text and one identified front/deferred
+  contract sample, verify expiry/settlement availability and integer versus equal-dollar exposure before2018–22 census.
+  Need complete paired history, native both-leg costs, rolls and executable prices; no imputed second month.
+  Weekly holding is ineligible for Apex as described; personal research only pending evidence, preregistration and tests.
+  [Source/strategy audit](agents/codex/results/scout_spread_strategy_feasibility_20261029.md) ·
+  [Evidence](agents/codex/evidence/scout_basis_reversal_20261029.md). No return trial started.
+
 - [ ] **Clock-aware Treasury index-duration demand — WATCH / NEEDS FULL TEXT (2026-10-29), SSRN7601879.**
   Specific merit: Bloomberg independently documents the U.S. index snapshot moving14:00→15:00CT effective2021-01-14;
   the earlier failed ZN month-end A/B/C protocols exit13:59CT. Authors claim snapshot-centered price pressure,

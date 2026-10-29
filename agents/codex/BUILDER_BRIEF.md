@@ -192,6 +192,12 @@ not a background schedule, authorization to spend money on subscriptions, or per
 
 ## Autonomous SSRN scout (user, 2026-10-29)
 
+**Purpose of every cycle (user clarification2026-10-29):** academic market hypotheses should lead toward specific,
+testable strategies for the evaluation, funded or personal portfolios. Pursue source/data feasibility and eligible
+tests autonomously. Execution-reference collection is supporting work, not the research objective. Note blocked
+leads and continue within the limits; do not invent evidence, force a strategy from a methods paper or report
+execution-only findings as a successful strategy search. An honest no-candidate outcome is acceptable.
+
 The separately configured daily **SSRN research scout** follows [WORKFLOW.md](research/scout/WORKFLOW.md),
 [progress.json](research/scout/progress.json) and [config.json](research/scout/config.json). Resume its unfinished
 committed work first; never resume/reset paused t6 or Strategy Hunt v2. Preserve earlier selection/trial history.

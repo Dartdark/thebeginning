@@ -51,8 +51,8 @@
     },
     {
       "ssrn_id": "3357455",
-      "revision": "Indexed SSRN/institutional metadata only; full version not obtained",
-      "disposition": "needs_full_text",
+      "revision": "SOAS July2018 working paper211 full-source review",
+      "disposition": "dont_test",
       "record_path": "agents/codex/research/scout/records/3357455.json"
     },
     {
@@ -60,25 +60,30 @@
       "revision": "Indexed2009/2010 source; SSRN2693084 duplicate-title version parity unresolved",
       "disposition": "metadata_only",
       "record_path": "agents/codex/research/scout/records/1478195.json"
+    },
+    {
+      "ssrn_id": "5250499",
+      "revision": "SSRN2026-05-12advertised; abstract and secondary code only",
+      "disposition": "needs_full_text",
+      "record_path": "agents/codex/research/scout/records/5250499.json"
     }
   ],
   "last_run": {
-    "run_id": "scout-underused-20261029",
-    "recorded_at": "2026-10-29T21:40:01Z",
-    "status": "source_reviews_completed_no_eligible_strategy",
-    "checked_remote_head": "926ba72f8e82f8e111a32180dab26167aee732aa",
-    "full_source_reviews": 2,
-    "metadata_only_records": 3,
+    "run_id": "scout-spread-strategy-feasibility-20261029",
+    "recorded_at": "2026-10-29T21:48:32.037536+00:00",
+    "status": "concrete_strategy_lead_needs_data",
+    "checked_remote_head": "d256a04e07e51060ee13b03e2cd8806615c53ce1",
+    "full_source_reviews": 1,
+    "metadata_source_and_secondary_code_reviews": 1,
     "new_hypotheses": 0,
     "new_economic_definitions": 0,
     "return_tests_executed": false,
     "reservation": null,
-    "lease_action": "No return work; no lease or reservation claimed. Existing counters/history preserved.",
-    "report_path": "agents/codex/results/scout_underused_futures_cycle_20261029.md",
-    "access_receipt": "agents/codex/research/scout/runs/20261029_underused_access.json",
-    "focus": "Forced flows in underused futures; record missing data and move on."
+    "lease_action": "Source/schema feasibility only; no lease claimed or economic outcomes computed.",
+    "report_path": "agents/codex/results/scout_spread_strategy_feasibility_20261029.md",
+    "access_receipt": "agents/codex/research/scout/runs/20261029_spread_strategy_access.json"
   },
-  "last_notification_key": "ssrn:1716841:2011-07-15:source_reject-v1|ssrn:7425358:conference2026:execution_reference-v1",
+  "last_notification_key": "ssrn:5250499:abstract2026-secondarycode:needs_data-v1|ssrn:3357455:wp2018:source_no_protocol-v1",
   "note": "New paper-discovery program authorized 2026-10-29. Existing repository multiplicity remains in every significance decision. Paused t6 and Hunt v2 are not resumed or reset.",
   "prior_trial_history": {
     "path": "TRIALS.csv",
@@ -103,8 +108,8 @@
       "status": "needs_full_text; recorded_and_moved_on"
     },
     {
-      "ssrn_id": "3357455",
-      "status": "needs_full_text; recorded_and_moved_on"
+      "ssrn_id": "5250499",
+      "status": "needs_primary_full_text_identified_paired_contract_data_clocks_costs; recorded_and_moved_on"
     }
   ],
   "notification_keys": [
@@ -115,17 +120,19 @@
     "ssrn:7601879:public-acquisition20261029-v1:needs_data",
     "ssrn:7330098:public-acquisition20261029-v1:needs_data",
     "ssrn:1716841:2011-07-15:source_reject-v1",
-    "ssrn:7425358:conference2026:execution_reference-v1"
+    "ssrn:7425358:conference2026:execution_reference-v1",
+    "ssrn:5250499:abstract2026-secondarycode:needs_data-v1",
+    "ssrn:3357455:wp2018:source_no_protocol-v1"
   ],
   "last_notification": {
     "keys": [
-      "ssrn:1716841:2011-07-15:source_reject-v1",
-      "ssrn:7425358:conference2026:execution_reference-v1"
+      "ssrn:5250499:abstract2026-secondarycode:needs_data-v1",
+      "ssrn:3357455:wp2018:source_no_protocol-v1"
     ],
     "status": "prepared_for_user_requested_app_reply",
-    "at": "2026-10-29T21:40:01Z",
-    "reason": "Material source rejection and useful execution reference; no alpha or independent replication claimed.",
-    "delivery": "In-app reply only; no external message or verified phone-delivery claim."
+    "at": "2026-10-29T21:48:32.037536+00:00",
+    "reason": "Concrete strategy lead with explicit account limits and completed source/feasibility result; standing cycle purpose clarified.",
+    "delivery": "In-app only; no external contacts or verified delivery claim."
   },
   "budget_cap_notified": false,
   "run_history": [
@@ -192,6 +199,22 @@
       "report_path": "agents/codex/results/scout_data_acquisition_20261029.md",
       "input_bundle": "agents/codex/inputs/scout_acquisition_20261029",
       "bundle_manifest": "analysis/outputs/codex_scout_acquisition_package_20261029.json"
+    },
+    {
+      "run_id": "scout-underused-20261029",
+      "recorded_at": "2026-10-29T21:40:01Z",
+      "status": "source_reviews_completed_no_eligible_strategy",
+      "checked_remote_head": "926ba72f8e82f8e111a32180dab26167aee732aa",
+      "full_source_reviews": 2,
+      "metadata_only_records": 3,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "reservation": null,
+      "lease_action": "No return work; no lease or reservation claimed. Existing counters/history preserved.",
+      "report_path": "agents/codex/results/scout_underused_futures_cycle_20261029.md",
+      "access_receipt": "agents/codex/research/scout/runs/20261029_underused_access.json",
+      "focus": "Forced flows in underused futures; record missing data and move on."
     }
   ],
   "data_access_blockers": {
@@ -210,5 +233,6 @@
     "new_account_or_purchase_authorized": false,
     "public_download_capability_request": "agents/codex/inputs/scout_acquisition_20261029/NETWORK_PUBLIC_DOWNLOADS.md",
     "vendor_intake": "agents/codex/inputs/scout_acquisition_20261029/spx_positions/REQUEST_SPEC.md"
-  }
+  },
+  "research_objective": "Academic market hypotheses -> executable strategies -> applicable evaluation/funded/personal account tests. Supporting execution references are not the cycle objective."
 }
