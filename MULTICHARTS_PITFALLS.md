@@ -199,7 +199,9 @@ held 28 MNQ instead of 8 (a 75-pt stop = ~$4,200 vs a ~$400 cushion). Fixed live
 Format Signals > Properties > Auto Trading > Rithmic > gear on EVERY strategy and check the account; then check the Orders
 tab's Account column (widen it) on the first orders.
 
-## "Your session has been terminated ... started on a different machine" (2026-10-29, VPS; cause not found yet)
-The MultiCharts license runs on one machine at a time; this message on the VPS means another machine logged in with the
-same MultiCharts account. Closing MultiCharts on the PC did NOT fix it (user, 2026-10-29), so the PC was not the cause.
-Open: find the other session (see the live incident notes / TODO). Fix steps tried: PC MultiCharts exited.
+## "Your session has been terminated ... started on a different machine" (2026-10-29, VPS)
+Cause: a half-closed copy of MultiCharts was still running on the VPS itself, so the new start counted as a second session
+(the PC was not the cause; closing MultiCharts there changed nothing). Fix: restart the VPS (Start > Restart), start only
+MultiCharts64, wait for Rithmic to connect, check positions in the Order and Position Tracker, then auto-trading on per chart
+(Flat). Faster check next time: Task Manager > Details on the VPS for a leftover MultiCharts64 / TradingServer / tsServer
+process before restarting the whole machine.
