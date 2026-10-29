@@ -40,6 +40,10 @@ $f = "$Logs\$day.csv"
 $tags = @{}
 Get-ChildItem "$Logs\2*.csv" | Sort-Object Name -Descending | Select-Object -First 6 | ForEach-Object {
     Get-Content $_.FullName | Where-Object { $_ -like "POS,*" } | ForEach-Object { $tags[$_.Split(",")[1]] = $true } }
+# only the charts that should be live (live/expected_setup.json): a closed account's tags (VB, ONB, EOS, MON_BR = #1)
+# stay in the last days' files and gave false 'no heartbeat today' alarms on 2026-10-29
+$cfg = Get-Content "C:\TradingRepo\live\expected_setup.json" -Raw | ConvertFrom-Json
+if ($cfg) { $live = @($cfg.charts.PSObject.Properties.Name); foreach ($t in @($tags.Keys)) { if ($live -notcontains $t) { $tags.Remove($t) } } }
 $last = @{}
 if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "POS,*" } | ForEach-Object { $c = $_.Split(","); $last[$c[1]] = $c } }
 if ($hhmm -ge 845 -and $hhmm -le 1500) {
