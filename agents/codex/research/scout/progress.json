@@ -66,24 +66,46 @@
       "revision": "SSRN2026-05-12advertised; abstract and secondary code only",
       "disposition": "needs_full_text",
       "record_path": "agents/codex/research/scout/records/5250499.json"
+    },
+    {
+      "ssrn_id": "3119537",
+      "revision": "arXiv1802.01921v2;2018-10-05",
+      "disposition": "needs_data",
+      "record_path": "agents/codex/research/scout/records/3119537.json"
+    },
+    {
+      "ssrn_id": "3485840",
+      "revision": "AEA December3 2020,67-pagePDF;2023 published parity not established",
+      "disposition": "needs_data",
+      "record_path": "agents/codex/research/scout/records/3485840.json"
+    },
+    {
+      "ssrn_id": "3732955",
+      "revision": "Current author abstract;older Information Content title is related-version lead",
+      "disposition": "needs_full_text",
+      "record_path": "agents/codex/research/scout/records/3732955.json"
     }
   ],
   "last_run": {
-    "run_id": "scout-spread-strategy-feasibility-20261029",
-    "recorded_at": "2026-10-29T21:48:32.037536+00:00",
-    "status": "concrete_strategy_lead_needs_data",
+    "run_id": "scout-closing-auctions-20261029",
+    "recorded_at": "2026-10-29T21:50:33Z",
+    "status": "source_reviews_completed_no_eligible_strategy",
+    "focus": "Closing-auction market hypotheses for evaluation/funded/personal strategy development",
     "checked_remote_head": "d256a04e07e51060ee13b03e2cd8806615c53ce1",
-    "full_source_reviews": 1,
-    "metadata_source_and_secondary_code_reviews": 1,
+    "full_source_reviews": 2,
+    "metadata_only_records": 1,
+    "additional_data_routes_inspected": 7,
     "new_hypotheses": 0,
     "new_economic_definitions": 0,
     "return_tests_executed": false,
     "reservation": null,
-    "lease_action": "Source/schema feasibility only; no lease claimed or economic outcomes computed.",
-    "report_path": "agents/codex/results/scout_spread_strategy_feasibility_20261029.md",
-    "access_receipt": "agents/codex/research/scout/runs/20261029_spread_strategy_access.json"
+    "lease_action": "No return-eligible candidate; no lease or economic reservation claimed.",
+    "report_path": "agents/codex/results/scout_closing_auctions_cycle_20261029.md",
+    "access_receipt": "analysis/outputs/codex_scout_closing_auctions_20261029/acquisition_receipts.json",
+    "publication_merge_parent": "10933c7f6d9f5321e4efc370685c206e4a9dd2df",
+    "user_scope": "Academic hypotheses -> testable evaluation/funded/personal strategies; current and subsequent research cycles authorized without repeated permission prompts, within existing budgets/gates."
   },
-  "last_notification_key": "ssrn:5250499:abstract2026-secondarycode:needs_data-v1|ssrn:3357455:wp2018:source_no_protocol-v1",
+  "last_notification_key": "scout:closing-auctions:20261029:source-testability-v1",
   "note": "New paper-discovery program authorized 2026-10-29. Existing repository multiplicity remains in every significance decision. Paused t6 and Hunt v2 are not resumed or reset.",
   "prior_trial_history": {
     "path": "TRIALS.csv",
@@ -110,6 +132,18 @@
     {
       "ssrn_id": "5250499",
       "status": "needs_primary_full_text_identified_paired_contract_data_clocks_costs; recorded_and_moved_on"
+    },
+    {
+      "ssrn_id": "3119537",
+      "status": "needs_data; existing real-auction family, source/feature/quote blockers recorded; moved on"
+    },
+    {
+      "ssrn_id": "3485840",
+      "status": "needs_data; existing real-auction family, source/feature/quote blockers recorded; moved on"
+    },
+    {
+      "ssrn_id": "3732955",
+      "status": "needs_full_text; existing real-auction family, source/feature/quote blockers recorded; moved on"
     }
   ],
   "notification_keys": [
@@ -122,17 +156,17 @@
     "ssrn:1716841:2011-07-15:source_reject-v1",
     "ssrn:7425358:conference2026:execution_reference-v1",
     "ssrn:5250499:abstract2026-secondarycode:needs_data-v1",
-    "ssrn:3357455:wp2018:source_no_protocol-v1"
+    "ssrn:3357455:wp2018:source_no_protocol-v1",
+    "scout:closing-auctions:20261029:source-testability-v1"
   ],
   "last_notification": {
     "keys": [
-      "ssrn:5250499:abstract2026-secondarycode:needs_data-v1",
-      "ssrn:3357455:wp2018:source_no_protocol-v1"
+      "scout:closing-auctions:20261029:source-testability-v1"
     ],
     "status": "prepared_for_user_requested_app_reply",
-    "at": "2026-10-29T21:48:32.037536+00:00",
-    "reason": "Concrete strategy lead with explicit account limits and completed source/feasibility result; standing cycle purpose clarified.",
-    "delivery": "In-app only; no external contacts or verified delivery claim."
+    "at": "2026-10-29T21:50:33Z",
+    "reason": "Completed focused cycle and data eligibility checks; no return-tested candidate.",
+    "delivery": "In-app requested reply only; no external message."
   },
   "budget_cap_notified": false,
   "run_history": [
@@ -215,6 +249,21 @@
       "report_path": "agents/codex/results/scout_underused_futures_cycle_20261029.md",
       "access_receipt": "agents/codex/research/scout/runs/20261029_underused_access.json",
       "focus": "Forced flows in underused futures; record missing data and move on."
+    },
+    {
+      "run_id": "scout-spread-strategy-feasibility-20261029",
+      "recorded_at": "2026-10-29T21:48:32.037536+00:00",
+      "status": "concrete_strategy_lead_needs_data",
+      "checked_remote_head": "d256a04e07e51060ee13b03e2cd8806615c53ce1",
+      "full_source_reviews": 1,
+      "metadata_source_and_secondary_code_reviews": 1,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "reservation": null,
+      "lease_action": "Source/schema feasibility only; no lease claimed or economic outcomes computed.",
+      "report_path": "agents/codex/results/scout_spread_strategy_feasibility_20261029.md",
+      "access_receipt": "agents/codex/research/scout/runs/20261029_spread_strategy_access.json"
     }
   ],
   "data_access_blockers": {

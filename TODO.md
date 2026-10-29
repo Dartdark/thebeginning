@@ -257,6 +257,18 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   [Evidence](agents/codex/evidence/variance_risk_premium_20261029.md).
 
 
+- [ ] **Actual closing-auction imbalances — shared SPY/ES and QQQ/NQ family; NEEDS DATA (2026-10-29).**
+  Academic merit: source auction-state reversion and temporary stock/ETF pressure support checking real signed
+  updates. No net futures edge or portfolio placement verified. Consolidates existing SPY/QQQ evidence rather
+  than counting another clock/ticker as a new family. This cycle moved past blocked leads: two Arca sample
+  sessions, one Nasdaq sample day and advertised2010–2018 author aggregates do not supply the design panel.
+  Smallest later check: permitted original source bytes plus venue-specific signed updates, reference/indicative
+  definitions, synchronized quotes and publication/receipt clocks; audit before a bounded preregistered screen.
+  Keep pre-auction pressure and post-auction reversal distinct. Personal stock/ETF implementation is a separate
+  possibility; do not transfer stock alpha to NQ/ES or reuse a final auction print as a hindsight fill.
+  [Cycle/source reviews](agents/codex/results/scout_closing_auctions_cycle_20261029.md) ·
+  [Evidence/data gates](agents/codex/evidence/scout_closing_auction_imbalances_20261029.md).
+
 ## Later
 
 - [ ] **Export 1-minute data for NG, ZC and ZS** (natural gas, corn, soybeans), Jan 2018 to now, same way as the CL / ZN files

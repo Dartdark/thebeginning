@@ -384,6 +384,25 @@ Source: Ma, Serra, Peterson and Irwin, [SSRN7425358](https://ssrn.com/abstract=7
 - Status: execution reference, not a directional strategy or allocation. Official sample download was blocked;
   record the gap and continue research on other leads.
 
+### E31 — Closing-auction state, final print and executable entry are different clocks
+
+Sources: Challet/Gourianov [arXiv1802.01921v2](https://arxiv.org/html/1802.01921v2), Sections2/4;
+Bogousslavsky/Muravyev [2020 primary PDF](https://www.aeaweb.org/conference/2021/preliminary/paper/H9T4hef7),
+Sections3.2–3.4 and AppendixD.2. [Cycle review](results/scout_closing_auctions_cycle_20261029.md).
+- Use: distinguish indicative-price changes, continuous-book quotes, published final auction prints and later
+  executable quotes. A signal defined using the final print cannot enter retrospectively at that same print.
+  Freeze a pre-auction order protocol or a post-auction later-fill protocol before returns.
+- Evidence: primary-source inspection only; no own net returns or measured execution benefit.
+  The sources document asset-dependent indicative dynamics, throttled updates and temporary auction deviations.
+- Limits: an indicative price is not a standing executable quote. After-hours interval VWAPs and regression
+  reversals are not guaranteed fills. Daily closes/returns cannot reconstruct all auction states.
+  Historical rule/cutoff claims and malformed rendered equations need primary venue/formula validation.
+- Data/next check: original messages, revision/quantity semantics, actual dissemination and receipt evidence,
+  auction prints, eligibility rules and synchronized executable quotes. Missing states stay unknown, not zero.
+  Cluster by auction/day; do not count thousands of correlated updates as thousands of events.
+- Status: existing SPY/QQQ research-family refinement; NEEDS DATA. Price-only proxies and index-rebalance
+  reversal failures remain failures. No logger, live-system or allocation change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
