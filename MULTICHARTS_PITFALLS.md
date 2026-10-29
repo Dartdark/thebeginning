@@ -217,4 +217,5 @@ with no warning; after any code change, compare the chart's trade arrows with th
 ## PowerShell: "$t:" inside a string breaks the whole script (2026-10-29, VPS watchdog)
 `"Chart $t: ..."` is read as a drive-scoped variable (`$t:`), a PARSE error, so PowerShell runs none of the file. The
 watchdog had this since 2026-10-21: it never ran and no ntfy alarm was ever sent. Fix: `${t}:` (braces) before a colon.
-Test every .ps1 change once by hand on the VPS (`-Test` on the watchdog) before trusting it.
+Test every .ps1 change once by hand on the VPS (`-Test` on the watchdog) before trusting it. Verified 2026-10-29:
+after the fix, `watchdog.ps1 -Test` delivered all 8 test alerts to the phone (ntfy).
