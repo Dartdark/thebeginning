@@ -135,9 +135,81 @@ Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
 - Next check: record publication/receipt, measurement-window end, decision and first executable fill; fit any forecast transformation on past data only. Reconcile the same events and controls across attribution windows.
 - Status: timing/measurement reference; no FOMC strategy reopening or automatic experiment.
 
-<!-- E12-E22 added by Claude (master session) 2026-10-29 from live incidents and past repository findings -->
+- Added2026-10-29: **benchmark clocks change by era.** Bloomberg's [October15 2024 methodology](https://data.bloomberglp.com/professional/sites/27/Fixed-Income-Index-Methodology.pdf),
+  printed p.80, moves ordinary U.S. Treasury index pricing15:00→16:00 NewYork (14:00→15:00CT), effective2021-01-14.
+  Early-close pricing has separate dated exceptions, including January14–November25 2021. Use named timezones and
+  an explicit event calendar; a provider snapshot is not an executable futures fill. The old ZN month-end test's13:59CT
+  endpoint omits the later deadline, without invalidating its reported losses. [Source/clock audit](results/scout_buying_duration_20261029.md).
+  Evidence: provider rule independently checked; [NYFed September22 2026](https://libertystreeteconomics.newyorkfed.org/2026/09/treasury-trading-at-the-close/)
+  describes volume moving with the clock. No market-data reproduction, net alpha or execution saving established.
+  Next check: pin source version, map ordinary/early-close regimes and audit bar labels, available-at forecasts and
+  first executable fills before any deadline-based research. Full source paper remains inaccessible; no rule is selected.
+- The [FX auction/source audit](results/scout_fx_auctions_20261029.md) also found that the repository's general macro-day
+  proxy uses realized07:30–07:35CT ranges. This can support retrospective diagnostics, not a pre-release calendar
+  signal. Use independently published schedules with available-at times; do not select a pre-news trade from the
+  news-window price spike. This is a code/timing observation, not verified FX alpha or a changed execution rule.
 
-### E12 — Vault Break live exit slippage: stops worse than the 1-tick assumption, targets better
+### E12 — Realized-variance measurement: microstructure noise, units and availability
+
+Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5 and Figure 1 p.27.
+[Review](results/variance_risk_premium_review_20261029.md), 2026-10-29.
+- Use: high-frequency squared returns can be contaminated by microstructure frictions; a noisier variance estimate is not necessarily more accurate just because sampling is faster.
+- Evidence: source methodological discussion, not a newly reproduced estimator comparison or execution-cost study.
+- Limits: IV minus RV needs variance units and matched horizons/sessions; volatility differences, daily futures proxies and retrospective realized variance are different quantities. Do not subtract next month's realized variance to construct a signal supposedly known today.
+- Next check when using variance inputs: document return sampling, overnight handling, price source, percentage/decimal scaling, annualization and available-at timestamps before testing. Audit candidate estimators without choosing on strategy P&L.
+- Status: measurement reference for execution/risk inputs; no spread, slippage saving or standalone intraday alpha established.
+
+- Later check2026-10-29: [monthly VRP proxy diagnostic](results/vrp_monthly_proxy_20261029.md) preserves a failed
+  daily-risk gate despite known monthly entry/exit prices. Endpoint profitability and endpoint drawdown do not
+  certify daily paths, margin or execution savings. The existing file named SPY_daily.csv was not treated as SPY
+  or used to repair missing native ES marks; its scale and timestamp convention require independent verification.
+  The positive-VRP filter underperformed matched constant exposure; no execution change is supported.
+
+### E13 — Buybacks: all-in execution costs versus terminal market outcomes
+
+Source: Gumport, *The Buyback Monitor – July 2009*, [SSRN 1433183](https://ssrn.com/abstract=1433183).
+[Saved review](results/buyback_monitor_review_20261029.md), 2026-10-29.
+- Use: reconcile executed quantities/prices, fees and financing/hedging legs; distinguish implementation shortfall from a subsequent change in market value. Freeze benchmark and measurement horizon before comparing policies.
+- Evidence: retrospective corporate repurchase accounting and appendix summaries of other case studies; not independently reproduced and not an executable strategy test.
+- Limits: a July 2009 terminal mark does not prove bad execution, causal value destruction or future returns. Authorizations, ASR deliveries, dealer hedges and actual market purchases are not interchangeable. Historical fee/regulatory claims are not current CME facts.
+- Next check when relevant: inspect original program/contract disclosures and actual executions, costs, benchmark definitions and publication clocks before estimating an execution saving or a directional flow.
+- Status: execution/accounting reference; original ASR/commission publications are leads only. No automatic backtest, data purchase or strategy-queue promotion.
+
+### E14 — Overnight/intraday attribution and causal price-impact claims
+
+Source: Knuteson, [SSRN 3705017](https://ssrn.com/abstract=3705017).
+[Saved review](results/overnight_intraday_knuteson_review_20261029.md), 2026-10-29.
+- Use: split frozen strategy P&L into non-overlapping overnight/intraday components and reconcile costs, rolls and inventory to the total; do not assign overnight equity exposure to an intraday signal.
+- Evidence: source-only review of cumulative index/ETF charts through 2020; manipulation is the author's explanation, not established causal evidence.
+- Limits: differing histories, adjusted/raw prices, dividends, official opens and actual auction fills require separate checks. Stock-index components are not executable futures cash flows; the paper notes the U.S. index divergence stopped after 2008.
+- Next check when relevant: audit session clocks and price adjustments, then attribute an existing fixed ledger. Own-order price impact requires actual order/quote records and a credible benchmark; a subsequent market move alone is insufficient.
+- Status: measurement reference, not a new overnight strategy, verified execution saving or reopening of prior tests.
+
+- Factor-aware extension: Ye, Jiang and Luo, [SSRN 4138715](https://ssrn.com/abstract=4138715), [review](results/factor_beta_sessions_review_20261029.md), 2026-10-29. Stock-factor beta premiums can reverse by session and country. Compare like-for-like exposures, calendar periods and price/dividend adjustments before attributing timing gains.
+- The source's prior-month ranking betas are trading-time candidates; full-sample post-ranking chart betas are descriptive only. Statistical factor slopes are not net execution savings. T+1, short availability, suspensions and auction fills require explicit local-market treatment.
+
+- Follow-up [restricted S&P500 screen](results/factor_beta_sessions_test_20261029.md): both design baskets fail assumed net-cost gates; acquisition-related missing selected days prevent a continuous executable ledger. Raw versus split-adjusted price conventions affect nominal filters and integer quantities. Preserve unresolved executions and settlement/cash treatment; do not zero-fill or relabel a conditional series as verified trading P&L.
+
+### E15 — Overnight tail risk versus ordinary volatility
+
+Source: Riedel and Wagner (2015), [SSRN2494387](https://ssrn.com/abstract=2494387).
+[Saved review](results/overnight_tail_risk_review_20261029.md), retained2026-10-29.
+- Use: low overnight volatility does not establish small extreme-loss exposure, reliable stop fills or adequate margin.
+  Keep cash-session closure, futures maintenance breaks, halts and Sunday reopens distinct.
+- Evidence: source TGARCH/GPD estimates on historical cash indices, not independently reproduced. In the NASDAQ
+  illustration,99.9% VaR is4.951% overnight versus4.586% intraday; overnight VaR is LOWER at the other displayed levels.
+- Limits: standardized tail shape, total VaR, expected shortfall and executable account losses are different quantities.
+  Failing to reject a zero tail shape does not establish Gaussian innovations or absence of intraday extreme risk.
+  NASDAQ Composite is not NQ; historical index openings are not executable futures fills. Illiquidity is a proposed
+  mechanism, not causally identified by the return distributions alone.
+- Next check when reviewing a fixed overnight candidate: preserve chronological native-contract marks and losses,
+  session/weekend exposure, gap-through-stop fills and liquidation/margin timing. Compare volatility and empirical
+  tail losses; fit any EVT model using a separately preregistered past-only/calibration protocol.
+- Status: risk/execution reference; no demonstrated alpha, sizing change, trading allocation or new return test.
+
+<!-- E16-E26 added by Claude (master session) and E27-E28 by the Papers session, 2026-10-29; renumbered from E12-E24 after Codex's E12-E15 -->
+
+### E16 — Vault Break live exit slippage: stops worse than the 1-tick assumption, targets better
 
 Source: live trade logger (`live/trades/*.csv`), [account_tools.slippage](../../analysis/account_tools.py), dashboard panel. Claude, 2026-10-29.
 - Use: compare live exit prices with the backtest's fill convention per exit type, not one blended slippage number.
@@ -146,16 +218,16 @@ Source: live trade logger (`live/trades/*.csv`), [account_tools.slippage](../../
 - Next check: when ~30 stop fills exist, rerun the VB funded / evaluation benches with the measured stop slippage (or 2 ticks) as a sensitivity; reconcile a few rows with the Rithmic fill export.
 - Status: watch item on the dashboard ('WORSE than backtest'); no plan change.
 
-### E13 — Fast-market protective stops: Rithmic rejects stops already through the market
+### E17 — Fast-market protective stops: Rithmic rejects stops already through the market
 
 Sources: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) 'Live order rejections', [LESSONS.md](../../LESSONS.md). Live incidents 2026-10-14 (ONB entry stop) and 2026-10-16 (EOS protective stop, 8:34 CT).
 - Use: after a fill at the 8:30 open or after a fast move, a stop sent at the bar close can sit on the wrong side of the market; Rithmic rejects it ('Invalid StopMarket order parameters') and the position is left naked. MultiCharts retried 20 times in one second.
 - Evidence: native rejections in the Order tracker. Fix in all live strategies: bar-close stop guard (exit at market when the bar's High/Low trades at or through the stop level); raised break-even/trail stops exit at market when at or beyond the close.
 - Limits: the guard acts at bar close, so on a 30-min chart (VB) an unprotected position can run up to one bar. Backtests are unchanged (the stop fills inside the bar).
-- Next check: count guard exits vs normal stop fills in the logger; compare their slippage with E12.
+- Next check: count guard exits vs normal stop fills in the logger; compare their slippage with E16.
 - Status: implemented guard; execution caveat for every new stop-based strategy.
 
-### E14 — MultiCharts fill conventions vs research rebuilds (touch fills, tick units, Volume vs Ticks)
+### E18 — MultiCharts fill conventions vs research rebuilds (touch fills, tick units, Volume vs Ticks)
 
 Sources: [TIER_LIST.md](../../TIER_LIST.md) 'MultiCharts parity 2026-10-25', [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md). Related: E08.
 - Use: know which side is optimistic before comparing a MC report with Python.
@@ -166,7 +238,7 @@ Sources: [TIER_LIST.md](../../TIER_LIST.md) 'MultiCharts parity 2026-10-25', [MU
 - Next check: when a new MC report arrives, state its limit-fill setting and rebuild with trade-through fills.
 - Status: standing convention: research uses trade-through fills; MC touch fills are treated as optimistic.
 
-### E15 — Session clocks: early closes, halts, SetExitOnClose and time zones
+### E19 — Session clocks: early closes, halts, SetExitOnClose and time zones
 
 Source: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) (2026-10-17 to 10-25).
 - Use: a fixed-time exit never fires when the session ends early; the position rides the halt and exits at the next session's first bar (an Apex violation live).
@@ -175,7 +247,7 @@ Source: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) (2026-10-17 to 
 - Next check: for every new strategy, scan the MC trade list for exits after 15:59 CT or on a later date; list early-close days (Jul 3, Black Friday, Dec 24, Good Friday, Monday holidays).
 - Status: standing check; `IsEarlyClose` list + early flatten in the live strategies.
 
-### E16 — Order routing and account binding (symbol mapping, copied charts, broker profile)
+### E20 — Order routing and account binding (symbol mapping, copied charts, broker profile)
 
 Source: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md); live incidents 10/16, 10/20, 10/26.
 - Use: an order can be sent correctly by the strategy and still never reach the right account.
@@ -186,7 +258,7 @@ Source: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md); live incidents
 - Next check: after every copy, roll or new machine: check each strategy's Auto Trading account and one manual 1-MNQ test order after the close (pre-flight checklist).
 - Status: checklist items + watchdog rejection alerts.
 
-### E17 — Broker-side liquidation vs chart state (Apex daily loss limit, chart thinks it is still in)
+### E21 — Broker-side liquidation vs chart state (Apex daily loss limit, chart thinks it is still in)
 
 Source: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) 'Apex daily loss limit vs the strategy', 2026-10-19.
 - Use: when Apex liquidates (daily loss limit), MC does not see the exit, keeps its position and re-sends exits ('Account is done for day', price 0.00 in the tracker). Next day those exits would be accepted and open an unplanned position.
@@ -194,7 +266,7 @@ Source: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) 'Apex daily los
 - Next check: after any Apex lock, AA off/on (Flat) on every affected chart; the watchdog's MISMATCH alarm (chart vs broker position) covers it during RTH.
 - Status: procedure + alarm.
 
-### E18 — 'Running' is not 'trading': compile failures, half-closed MultiCharts, heartbeat
+### E22 — 'Running' is not 'trading': compile failures, half-closed MultiCharts, heartbeat
 
 Sources: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) (10/27 ONB, 10/29 VPS session), [LESSONS.md](../../LESSONS.md), [watchdog.ps1](../../live/vps/watchdog.ps1), [Strategy_Heartbeat_Snippet.txt](../../apex_strategies/Strategy_Heartbeat_Snippet.txt).
 - Use: an opportunity cost that no fill report shows. 10/27 Overnight Bias ADX30 signalled long 10:00 → 14:30 (+135 pts, ~$1,080 on #2, ~$3,240 on #3 gross) but sent nothing: the code had not compiled, while the chart, AA button and logger looked normal. 10/29 a half-closed MC copy on the VPS blocked the restart ('session terminated').
@@ -203,7 +275,7 @@ Sources: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) (10/27 ONB, 10
 - Next check: when the heartbeat alarm first fires for real, confirm it caught the stopped strategy within one check.
 - Status: monitoring in place; counts as 'genuinely missed orders' in the minimum record below.
 
-### E19 — Logger and account fields: what each number really is
+### E23 — Logger and account fields: what each number really is
 
 Source: [Apex_Chart_Monitor.txt](../../apex_strategies/Apex_Chart_Monitor.txt), [dashboard_data.py](../../analysis/dashboard_data.py), ACCT rows 2026-10-29.
 - Use: interpret live records correctly before computing costs.
@@ -213,7 +285,7 @@ Source: [Apex_Chart_Monitor.txt](../../apex_strategies/Apex_Chart_Monitor.txt), 
 - Next check: read ACCT rows during the next open trade: does Equity move with open P&L?
 - Status: open measurement; Target Guard v2 not installed until answered.
 
-### E20 — Opening-print fills: the Sunday reopen push
+### E24 — Opening-print fills: the Sunday reopen push
 
 Source: [WATCHLIST.md](../../WATCHLIST.md) item 22, `analysis/sunday_reopen_test.py`, 2026-10-18 / 10-21.
 - Use: a backtest that fills at the first print of a session can't be traded by an order sent after the print.
@@ -222,7 +294,7 @@ Source: [WATCHLIST.md](../../WATCHLIST.md) item 22, `analysis/sunday_reopen_test
 - Next check: ~20 forward paper reopens logging first print vs fill; keep only if ≥ ~$80 per NQ after real slippage.
 - Status: C, on the watchlist.
 
-### E21 — Order-book / order-flow features do not predict NQ at 5–30 min
+### E25 — Order-book / order-flow features do not predict NQ at 5–30 min
 
 Source: [TIER_LIST.md](../../TIER_LIST.md) 'Order-flow prediction (The Bridge MBO, 2018–2026)'.
 - Use: a negative reference for any 'read the book to time the entry' idea.
@@ -231,7 +303,7 @@ Source: [TIER_LIST.md](../../TIER_LIST.md) 'Order-flow prediction (The Bridge MB
 - Next check: none unless a new mechanism (e.g. timing an existing entry inside its minute) is pre-registered.
 - Status: F as alpha; do not repeat under a new name.
 
-### E22 — Placebo levels: 'price reacts at level X' often isn't about X
+### E26 — Placebo levels: 'price reacts at level X' often isn't about X
 
 Source: Prior VWAP Trap review, [checks/candidates/prior_vwap_trap/REVIEW.md](../../checks/candidates/prior_vwap_trap/REVIEW.md), `analysis/prior_vwap_trap_test.py`, 2026-10-29.
 - Use: before believing a level-based behavior (prior VWAP, ORB high, pivot), run the same rule at nearby random levels.
@@ -239,16 +311,16 @@ Source: Prior VWAP Trap review, [checks/candidates/prior_vwap_trap/REVIEW.md](..
 - Next check: apply the placebo-level control to every level strategy (standing in DEVELOPMENT_PROCESS stresses).
 - Status: market-behavior reference; strategy ranked B, not in a plan (50K evaluation pass rate falls with it).
 
-### E23 — Opening imbalance: market orders at the stock open sit on the exploited side
+### E27 — Opening imbalance: market orders at the stock open sit on the exploited side
 
 Source: Branch & Ma, SSRN 3259614 (paper, user upload 2026-10-29); `analysis/on_id_reversal_quartiles.py`, TIER_LIST F row.
 - Use: in single stocks the open is set by the market maker against the overnight order imbalance and overshoots; the paper advises against market orders at the open. For NQ / ES futures (continuous Globex trading, no specialist open) the mechanism is absent.
 - Evidence (author claim + historical test): stocks 2011-17 reverse overnight moves intraday, but SPY's overnight / intraday correlation is now slightly positive. NQ / ES 2018-26 (15:00 -> 08:30 vs 08:30 -> 15:00 CT): corr +0.00 / −0.03, no monotonic quartile pattern; fading top / bottom quartiles 2018-22 −$95 / −$60, 2023+ +$184 / +$167 (t 0.9 / 1.3).
-- Limits: says nothing about the 08:30 fill itself (see E20 for opening-print fills).
+- Limits: says nothing about the 08:30 fill itself (see E24 for opening-print fills).
 - Next check: none; do not re-test overnight -> intraday reversal on index futures (also SSRN 2730304, F).
 - Status: negative reference for futures; stock-only lesson.
 
-### E24 — Retail open-buy / close-sell flow (Korea) does not show up in NQ / ES
+### E28 — Retail open-buy / close-sell flow (Korea) does not show up in NQ / ES
 
 Source: Ahn, Fan, Noh & Park, SSRN 4752520 (paper, user upload 2026-10-29); `analysis/retail_gap_cot_test.py`, TIER_LIST F row.
 - Use: the paper verifies with trade-level investor IDs that Korean retail (mobile, young, male day traders) net buys at the open auction and net sells at the close; institutions do the reverse. It widens the overnight − intraday gap in high-retail stocks / months.
