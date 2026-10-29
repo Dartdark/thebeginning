@@ -110,3 +110,15 @@ inventory components (eia.gov not reachable from Codex's environment) and forwar
 Claude's view: process is clean (pre-registration, design-first stop rules, trial ledger). A standalone t >= 6 is about
 2x the best strategy in the book (VB t 4.6; whole 6-leg plan t 6.8); each failed trial raises the multiple-testing bar
 for the next. Suggested to the user: cap the program or redirect it (e.g. data the book lacks, or confirmation of B items).
+
+## Update 2026-10-29 (Claude read codex/work up to 72d5ecf, ~60 commits since 10/25): nothing passes, plans unchanged
+- **Strategy Hunt v2:** 10 hypotheses (H01-H10), final audit PASS = no qualifying strategy.
+- **User uploads tested:** NQ gap-down long REJECT (t 1.19, random-side p 0.13; author's $602k not reproduced);
+  ORB30 EMA WATCH (PF 1.31 design / 1.21 validation, no plan gain, no MC parity); PrimeSync WATCH (no plan clears the
+  placement gates); six-leg euro package fails the frozen design gate (t 2.2, Weekly Breakout loses); hourly CHoCH
+  rejected (t 1.22; random-side p 0.11, random-delay p 0.21); FOMC monthly-coefficient paper DON'T TEST.
+- **Built, not installed:** Shared Target Guard v1 (one balance entry per account for all its charts; monitor-first).
+  Worth a look with the Chart Monitor's Rithmic balances.
+- **In progress:** Evening Repair (preregistered 10/29 07:09; source-only scope frozen 07:40; no returns yet).
+- **Conflict:** Codex recorded (10/28) a preference to paste complete code in chat; the user's rule since 10/29 is links
+  only (CLAUDE.md 'Code in chat'). Tell Codex.
