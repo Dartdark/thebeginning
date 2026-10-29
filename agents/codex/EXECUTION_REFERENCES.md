@@ -145,6 +145,12 @@ Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5
 - Next check when using variance inputs: document return sampling, overnight handling, price source, percentage/decimal scaling, annualization and available-at timestamps before testing. Audit candidate estimators without choosing on strategy P&L.
 - Status: measurement reference for execution/risk inputs; no spread, slippage saving or standalone intraday alpha established.
 
+- Later check2026-10-29: [monthly VRP proxy diagnostic](results/vrp_monthly_proxy_20261029.md) preserves a failed
+  daily-risk gate despite known monthly entry/exit prices. Endpoint profitability and endpoint drawdown do not
+  certify daily paths, margin or execution savings. The existing file named SPY_daily.csv was not treated as SPY
+  or used to repair missing native ES marks; its scale and timestamp convention require independent verification.
+  The positive-VRP filter underperformed matched constant exposure; no execution change is supported.
+
 ### E13 — Buybacks: all-in execution costs versus terminal market outcomes
 
 Source: Gumport, *The Buyback Monitor – July 2009*, [SSRN 1433183](https://ssrn.com/abstract=1433183).

@@ -1,0 +1,65 @@
+{
+  "preregistration_commit": "1f444c660ced79409834dbe8187b4589409ab910",
+  "code_commit": "3ff03f09d5cddc2f007a7b1d2c5e60d2229efc1f",
+  "script_sha256": "3423c3458af63b1dfb33144ca924e938d29d0390efd1ae307027d6f1e6596205",
+  "started_utc": "2026-10-29T17:06:33.512282+00:00",
+  "phase": "design",
+  "mode": "audit",
+  "files": {
+    "data/ES_1min_2017.csv": {
+      "sha256": "9ddc201359c70d1adb174141d0614dbf48e08f3324f63b6f91b97350a0aac442",
+      "bytes": 17310586
+    },
+    "data/ES_1min_2018.csv": {
+      "sha256": "ad4027b8230de0a91f83d1b6f3b798933f92cedebc39e56fe9223447c4b9d751",
+      "bytes": 17506050
+    },
+    "data/ES_1min_2019.csv": {
+      "sha256": "b9c09d6c9a702e560119bd33770cc71e05423fc0a7a227fcc046e73bf22f22c5",
+      "bytes": 17631102
+    },
+    "data/ES_1min_2020.csv": {
+      "sha256": "c22514904bd19b8ee9e3611bcd8af4017290730550b4799b9d92da73f8e7d550",
+      "bytes": 17667404
+    },
+    "data/ES_1min_2021.csv": {
+      "sha256": "67cd2dee366b86f555d09d45fb4cb9f6163347531b4f3f230f73704a1fff8096",
+      "bytes": 17835299
+    },
+    "data/ES_1min_2022.csv": {
+      "sha256": "00db614dd10674f7fe2f14940ae43f523b57ac48db1b0619b0eb084c5f50f601",
+      "bytes": 17909640
+    },
+    "data/VIX_daily.csv": {
+      "sha256": "155eacd1de1513dfd4d70f04727b66100980b424b55dbc2e3dcdd6a4a7d49563",
+      "bytes": 321423
+    }
+  },
+  "dependencies": {
+    "analysis/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "analysis/roll_adjust.py": "93321b91c237c177eff1760984480070a95aaffc598a0c4c3993e6d6ca33f87e",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/codex_s03_calendar.py": "705713195b1be61cd648d1b72718442b6cec7581587ca8c537d491cf1312bceb",
+    "analysis/codex_hunt_v2_ldf_delta.py": "8fb312196af06691ee27ca34e532df7c536f107332c865d9794bff70260dd494",
+    "analysis/codex_hunt_v2_ldf_delta_design.py": "7db93a50bde92107d8cb6cb437d706d4a3c7bf86bbad769ca6fef446e1aa45be"
+  },
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0"
+  },
+  "source_parity": false,
+  "actual_native_mes_fills": false,
+  "mes_size": 1,
+  "point_value": 5,
+  "rt_cost": 3.74,
+  "stress_rt_cost": 11.24,
+  "candidate_definitions": 1,
+  "nonselectable_controls": 1,
+  "seed": 1783624,
+  "primary_only_amendment": "agents/codex/research/vrp_monthly_proxy_pre_return_amendment.md",
+  "vix_values_used_through": "2022-12-31",
+  "target_quarterly_roll_months_excluded": true,
+  "return_ledgers_evaluated": 0,
+  "verdict": "AUDIT_ONLY"
+}

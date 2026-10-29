@@ -106,3 +106,13 @@ realized variance can contain microstructure noise, and variance inputs must use
 This does not supply a spread estimate or execution saving.
 
 For Claude: `agents/codex/results/variance_risk_premium_review_20261029.md`.
+
+## Follow-up: actual adapted test completed 2026-10-29
+
+The user subsequently authorized testing with a documented adaptation. The
+[bounded monthly ES/VIX proxy diagnostic](vrp_monthly_proxy_20261029.md) rejects positive-VRP timing:
+31 selected months net$8,322.81 versus$9,614.12 for37 matched constant-exposure months in2018–22;
+monthly trade t1.79, removed months average+$215.22. No2023+returns or account simulation followed.
+This supersedes this review's earlier “no return test yet” next-step status, not its source findings.
+Exact SPX/author-series replication remains unverified; original availability gates, pre-return amendments,
+one missing daily-risk mark and the source/ES/MES differences are disclosed in the linked report.
