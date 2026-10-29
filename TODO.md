@@ -5,6 +5,10 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
+- [ ] **Claude: re-run the backtests on the extended NQ data (daily feed, data now to 10/28; 2026-10-29).** Rebuild
+  scratch_data (`analysis/build_lab.py`), refresh `analysis/live_panels.py` (bt_cache.json) and the plan benches, and compare
+  each live strategy's trades on 10/12-10/28 with what its backtest would have done (first real missed-trade check).
+
 - [ ] **Target Guard v2 (2026-10-29, after one check):** reads the balance from Rithmic, so StartBalance no longer needs
   typing each evening, and it guards the whole account's target. [Apex_Target_Guard_v2](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Target_Guard_v2.txt)
   ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Target_Guard_v2.txt)).
