@@ -30,33 +30,55 @@
       "revision": "SSRN record written2026-10-12; full paper not obtained",
       "disposition": "needs_full_text",
       "record_path": "agents/codex/research/scout/records/7601879.json"
+    },
+    {
+      "ssrn_id": "1716841",
+      "revision": "2011-07-15 CFTC-hosted46-page source; parity with other SSRN revisions unknown",
+      "disposition": "dont_test",
+      "record_path": "agents/codex/research/scout/records/1716841.json"
+    },
+    {
+      "ssrn_id": "7425358",
+      "revision": "57-page2026 NCCC conference version linked by author/Illinois; September13 SSRN59-page version not verified",
+      "disposition": "dont_test",
+      "record_path": "agents/codex/research/scout/records/7425358.json"
+    },
+    {
+      "ssrn_id": "2682698",
+      "revision": "Written2016-09-25; SSRN last revised2016-10-06; abstract only",
+      "disposition": "needs_full_text",
+      "record_path": "agents/codex/research/scout/records/2682698.json"
+    },
+    {
+      "ssrn_id": "3357455",
+      "revision": "Indexed SSRN/institutional metadata only; full version not obtained",
+      "disposition": "needs_full_text",
+      "record_path": "agents/codex/research/scout/records/3357455.json"
+    },
+    {
+      "ssrn_id": "1478195",
+      "revision": "Indexed2009/2010 source; SSRN2693084 duplicate-title version parity unresolved",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/1478195.json"
     }
   ],
   "last_run": {
-    "run_id": "scout-data-acquisition-20261029",
-    "recorded_at": "2026-10-29T20:42:09.824444+00:00",
-    "status": "public_inputs_acquired_partial_needs_data",
-    "checked_remote_head": "1c3aaa51ba7c1663c59570d37220c3a9193374ef",
-    "primary_macro_records": 943,
-    "claims_date_records": 261,
-    "claims_printed_clock_records": 249,
-    "claims_unknown_clock_records": 12,
-    "provider_forecast_rows": 4,
-    "provider_design_months": 3,
-    "design_months": 60,
-    "institutional_reference_rows": 3,
-    "signed_spx_book_rows": 0,
-    "full_source_reviews": 0,
+    "run_id": "scout-underused-20261029",
+    "recorded_at": "2026-10-29T21:40:01Z",
+    "status": "source_reviews_completed_no_eligible_strategy",
+    "checked_remote_head": "926ba72f8e82f8e111a32180dab26167aee732aa",
+    "full_source_reviews": 2,
+    "metadata_only_records": 3,
     "new_hypotheses": 0,
     "new_economic_definitions": 0,
     "return_tests_executed": false,
     "reservation": null,
-    "lease_action": "No return work or active lease; source/data acquisition only.",
-    "report_path": "agents/codex/results/scout_data_acquisition_20261029.md",
-    "input_bundle": "agents/codex/inputs/scout_acquisition_20261029",
-    "bundle_manifest": "analysis/outputs/codex_scout_acquisition_package_20261029.json"
+    "lease_action": "No return work; no lease or reservation claimed. Existing counters/history preserved.",
+    "report_path": "agents/codex/results/scout_underused_futures_cycle_20261029.md",
+    "access_receipt": "agents/codex/research/scout/runs/20261029_underused_access.json",
+    "focus": "Forced flows in underused futures; record missing data and move on."
   },
-  "last_notification_key": "ssrn:5207418:public-acquisition20261029-v1:needs_data|ssrn:7601879:public-acquisition20261029-v1:needs_data|ssrn:7330098:public-acquisition20261029-v1:needs_data",
+  "last_notification_key": "ssrn:1716841:2011-07-15:source_reject-v1|ssrn:7425358:conference2026:execution_reference-v1",
   "note": "New paper-discovery program authorized 2026-10-29. Existing repository multiplicity remains in every significance decision. Paused t6 and Hunt v2 are not resumed or reset.",
   "prior_trial_history": {
     "path": "TRIALS.csv",
@@ -75,6 +97,14 @@
     {
       "ssrn_id": "7330098",
       "status": "vendor_intake_prepared; needs_approved_signed_sample_inception_book_and_actual_availability"
+    },
+    {
+      "ssrn_id": "2682698",
+      "status": "needs_full_text; recorded_and_moved_on"
+    },
+    {
+      "ssrn_id": "3357455",
+      "status": "needs_full_text; recorded_and_moved_on"
     }
   ],
   "notification_keys": [
@@ -83,18 +113,19 @@
     "ssrn:7330098:pdf2026-08-13:needs_data:full-source-v1",
     "ssrn:5207418:public-acquisition20261029-v1:needs_data",
     "ssrn:7601879:public-acquisition20261029-v1:needs_data",
-    "ssrn:7330098:public-acquisition20261029-v1:needs_data"
+    "ssrn:7330098:public-acquisition20261029-v1:needs_data",
+    "ssrn:1716841:2011-07-15:source_reject-v1",
+    "ssrn:7425358:conference2026:execution_reference-v1"
   ],
   "last_notification": {
     "keys": [
-      "ssrn:5207418:public-acquisition20261029-v1:needs_data",
-      "ssrn:7601879:public-acquisition20261029-v1:needs_data",
-      "ssrn:7330098:public-acquisition20261029-v1:needs_data"
+      "ssrn:1716841:2011-07-15:source_reject-v1",
+      "ssrn:7425358:conference2026:execution_reference-v1"
     ],
     "status": "prepared_for_user_requested_app_reply",
-    "at": "2026-10-29T20:42:09.824444+00:00",
-    "reason": "Material completed input acquisition with concrete saved data; licensed signed SPX access and source/asof gates remain open.",
-    "delivery": "In-app reply only; no vendor/author/external messages or verified phone-delivery claim."
+    "at": "2026-10-29T21:40:01Z",
+    "reason": "Material source rejection and useful execution reference; no alpha or independent replication claimed.",
+    "delivery": "In-app reply only; no external message or verified phone-delivery claim."
   },
   "budget_cap_notified": false,
   "run_history": [
@@ -137,6 +168,30 @@
         "agents/codex/research/scout/runs/5207418_testability_20261029.json",
         "agents/codex/research/scout/runs/7330098_testability_20261029.json"
       ]
+    },
+    {
+      "run_id": "scout-data-acquisition-20261029",
+      "recorded_at": "2026-10-29T20:42:09.824444+00:00",
+      "status": "public_inputs_acquired_partial_needs_data",
+      "checked_remote_head": "1c3aaa51ba7c1663c59570d37220c3a9193374ef",
+      "primary_macro_records": 943,
+      "claims_date_records": 261,
+      "claims_printed_clock_records": 249,
+      "claims_unknown_clock_records": 12,
+      "provider_forecast_rows": 4,
+      "provider_design_months": 3,
+      "design_months": 60,
+      "institutional_reference_rows": 3,
+      "signed_spx_book_rows": 0,
+      "full_source_reviews": 0,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "reservation": null,
+      "lease_action": "No return work or active lease; source/data acquisition only.",
+      "report_path": "agents/codex/results/scout_data_acquisition_20261029.md",
+      "input_bundle": "agents/codex/inputs/scout_acquisition_20261029",
+      "bundle_manifest": "analysis/outputs/codex_scout_acquisition_package_20261029.json"
     }
   ],
   "data_access_blockers": {

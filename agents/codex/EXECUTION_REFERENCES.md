@@ -363,6 +363,21 @@ printed pp.6–7 and13–15. [Full-source review](results/scout_7330098_testabil
   trade timestamps. A historical timestamp is not proof of contemporaneous subscriber access. The published2022H2
   sample offer does not itself provide starting inventory, Greeks, receipt history or an activated data entitlement.
 
+### E30 — Listed calendar spreads versus separate-leg execution
+
+Source: Ma, Serra, Peterson and Irwin, [SSRN7425358](https://ssrn.com/abstract=7425358),
+[conference-version review](results/scout_7425358_20261029.md), retained2026-10-29.
+- Use: compare a listed two-month spread with executable synchronized leg quotes; account for fees, delay,
+  partial fills, shared implied liquidity and contract identity. Continuous prices cannot supply either book.
+- Evidence: full conference-source review only. Authors report lower quoted execution costs in grains/livestock;
+  no independent quote replay, actual savings, net strategy returns or causal verification here.
+- Limits: quoted tightness and common-price contribution do not certify actual fills or a tradable lead.
+  Design counterfactuals and price-limit exclusions require care; ES/NQ/micro transfer is unverified.
+- Next check: obtain a lawful synchronized sample of listed-spread and both leg books plus security definitions,
+  audit clocks/size/rights, then preregister any economic execution comparison before outcomes.
+- Status: execution reference, not a directional strategy or allocation. Official sample download was blocked;
+  record the gap and continue research on other leads.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

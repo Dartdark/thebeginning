@@ -61,6 +61,8 @@ real-time synchronization or verified push-delivery claim.
   merits, missing prerequisites and smallest check. Lack of data alone is not promising. Negative evidence stays.
 - No credible novel strategy means DON'T TEST. Worthwhile hypothesis with a missing material input means
   NEEDS DATA: first attempt owned/free acquisition and record actual attempts. Do not manufacture settings.
+- User refinement2026-10-29: record source/data-blocked leads and move to the next lead within the current cycle's
+  limits. An unchanged access gap must not monopolize discovery or repeatedly trigger the same notification.
 - For TEST, write evidence sheet first using the full template; finish information clocks, source/data hashes,
   power, costs, actor/flow or an explicitly justified risk-premium mechanism and failure/diversification analysis.
   Do not choose events based on whether the current book has an open position. Missing features stay unknown.
