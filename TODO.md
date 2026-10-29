@@ -5,7 +5,7 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
-- [ ] **Apex Chart Monitor (new signal, 2026-10-29; outside market hours, ~10 min):** paste
+- [x] (2026-10-29, user: added to all charts) **Apex Chart Monitor (new signal, 2026-10-29; outside market hours, ~10 min):** paste
   [Apex_Chart_Monitor.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Chart_Monitor.txt)
   ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Chart_Monitor.txt))
   as a new Signal "Apex Chart Monitor", compile. Add it to each of the 8 live charts: `Tag` = the logger tag (VB-2, ONB-2, EOS-2,
