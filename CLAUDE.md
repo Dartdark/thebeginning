@@ -10,6 +10,9 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `funded_strategies/
   every reply to the user, so each new message reaches the phone. The tool is often deferred: load it first with
   ToolSearch `select:PushNotification` (2026-10-24: a session wrongly reported it missing all day). (A hook can't do this from the cloud container: ntfy.sh
   answers 429 from the shared proxy.)
+- **Alerts reach the phone through ntfy (2026-10-29):** Claude's PushNotification did NOT reach the user's phone in tests.
+  Every alarm or reminder from a scheduled check goes through `python3 analysis/send_alert.py "text"` (VPS relay -> ntfy,
+  ~1-2 min) as well as the PushNotification. Keep alert lines short (under 200 characters).
 - **Master session (user, 2026-10-28):** `session_01Wk1fPXwvHF5qTjW7bUhYx9` (desktop app, pinned) is the user's master session: it
   tracks the other sessions, collects the decisions waiting on the user and starts new sessions. Other sessions: put a
   decision for the user in your reply as usual; the master session reads it from there.
