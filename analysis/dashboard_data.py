@@ -56,7 +56,8 @@ def main():
     acct_rows = allrows[allrows.event == "ACCT"]
     live_bal = {}
     for r in acct_rows.itertuples():
-        nw = float(r.entry_date or 0)
+        # Rithmic sends NetWorth 0 for Apex accounts; Equity = the balance (matches the Order and Position Tracker, 2026-10-29)
+        nw = float(r.entry_date or 0) or float(r.entry_time or 0)
         if nw > 0: live_bal[r.side] = (f"{r.bar_date[:4]}-{r.bar_date[4:6]}-{r.bar_date[6:]}", nw)
     accts = []
     for a in ACCOUNTS:

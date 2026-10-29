@@ -76,7 +76,7 @@ def monitor_check(df, day, cfg):
         if len(off): out.append(f"- **AUTO-TRADING OFF {tag}** at {', '.join(f'{int(t):04d}' for t in off.bar_time.unique()[:6])} CT: the strategy could not trade.")
         old = g[g.entry_price.astype(float) > 600]
         if len(old): out.append(f"- **FEED {tag}**: the chart's last bar was over 10 min old at {', '.join(f'{int(t):04d}' for t in old.bar_time.unique()[:6])} CT (data feed / Rithmic quiet).")
-        if (g.entry_date.astype(float) == 0).all(): out.append(f"- {tag}: Rithmic reports no balance for {acct} (NetWorth 0): the dashboard keeps the reported balance.")
+        if ((g.entry_date.astype(float) == 0) & (g.entry_time.astype(float) == 0)).all(): out.append(f"- {tag}: Rithmic reports no balance for {acct} (NetWorth and Equity 0): the dashboard keeps the reported balance.")
     return out
 
 

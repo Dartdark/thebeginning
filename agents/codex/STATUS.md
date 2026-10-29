@@ -122,3 +122,9 @@ for the next. Suggested to the user: cap the program or redirect it (e.g. data t
 - **In progress:** Evening Repair (preregistered 10/29 07:09; source-only scope frozen 07:40; no returns yet).
 - **Conflict:** Codex recorded (10/28) a preference to paste complete code in chat; the user's rule since 10/29 is links
   only (CLAUDE.md 'Code in chat'). Tell Codex.
+- **Target Guard review (Claude, 2026-10-29):** Codex's Shared Target Guard v1 (Python writer + INI per account, one manual
+  balance a session) is sound but needs a daily manual entry and an untested INI read in PowerLanguage. Superseded by
+  `apex_strategies/Apex_Target_Guard_v2.txt`: Rithmic reports the account balance as Equity (NetWorth is 0 for Apex), so
+  the guard reads it itself, no typing, and with open P&L included it guards the account's target, not one chart's.
+  Not installed until the next live trade shows whether Equity includes open P&L. Codex's 14 checks remain a useful
+  reference (tick rounding, already-met target).
