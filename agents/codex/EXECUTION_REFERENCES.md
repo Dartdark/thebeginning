@@ -174,6 +174,23 @@ Source: Knuteson, [SSRN 3705017](https://ssrn.com/abstract=3705017).
 - Factor-aware extension: Ye, Jiang and Luo, [SSRN 4138715](https://ssrn.com/abstract=4138715), [review](results/factor_beta_sessions_review_20261029.md), 2026-10-29. Stock-factor beta premiums can reverse by session and country. Compare like-for-like exposures, calendar periods and price/dividend adjustments before attributing timing gains.
 - The source's prior-month ranking betas are trading-time candidates; full-sample post-ranking chart betas are descriptive only. Statistical factor slopes are not net execution savings. T+1, short availability, suspensions and auction fills require explicit local-market treatment.
 
+### E15 — Overnight tail risk versus ordinary volatility
+
+Source: Riedel and Wagner (2015), [SSRN2494387](https://ssrn.com/abstract=2494387).
+[Saved review](results/overnight_tail_risk_review_20261029.md), retained2026-10-29.
+- Use: low overnight volatility does not establish small extreme-loss exposure, reliable stop fills or adequate margin.
+  Keep cash-session closure, futures maintenance breaks, halts and Sunday reopens distinct.
+- Evidence: source TGARCH/GPD estimates on historical cash indices, not independently reproduced. In the NASDAQ
+  illustration,99.9% VaR is4.951% overnight versus4.586% intraday; overnight VaR is LOWER at the other displayed levels.
+- Limits: standardized tail shape, total VaR, expected shortfall and executable account losses are different quantities.
+  Failing to reject a zero tail shape does not establish Gaussian innovations or absence of intraday extreme risk.
+  NASDAQ Composite is not NQ; historical index openings are not executable futures fills. Illiquidity is a proposed
+  mechanism, not causally identified by the return distributions alone.
+- Next check when reviewing a fixed overnight candidate: preserve chronological native-contract marks and losses,
+  session/weekend exposure, gap-through-stop fills and liquidation/margin timing. Compare volatility and empirical
+  tail losses; fit any EVT model using a separately preregistered past-only/calibration protocol.
+- Status: risk/execution reference; no demonstrated alpha, sizing change, trading allocation or new return test.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
