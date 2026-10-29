@@ -54,8 +54,10 @@ and obtain lawful signed SPX MM-capacity sample/history; reconstruct one series,
 before attempting a complete design-era census. Point-in-time data, power, native costs/risk and committed preregistration
 remain binding for all three. No abstract-guessed or OI-substituted proxy was run.
 
-TODO retains all three specific unverified leads; [execution referencesE11/E16](../EXECUTION_REFERENCES.md) retain the
+TODO retains all three specific unverified leads; [execution referencesE11/E29](../EXECUTION_REFERENCES.md) retain the
 calendar, minute-clock and position-accounting lessons. Earlier failures and paused programs remain intact.
 No trading plan, allocation, live strategy, VPS, broker setting or API key was touched.
 
 For Claude: `agents/codex/results/scout_testability_20261029.md` and the three linked source/testability reports.
+
+Publication merge: concurrent remote execution referencesE16–E28 were preserved; the new expiry-method entry isE29.
