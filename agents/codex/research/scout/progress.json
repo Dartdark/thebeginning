@@ -1,17 +1,38 @@
 {
   "schema_version": 1,
   "program": "paper-scout-20261029",
-  "status": "ready",
-  "lease": null,
-  "hypotheses_started": 0,
-  "economic_definitions": 0,
+  "status": "running",
+  "lease": {
+    "run_id": "scout-europe-fix-20261029",
+    "owner": "codex-root",
+    "claimed_at": "2026-10-29T22:11:14.757054+00:00",
+    "expires_at": "2026-10-30T00:11:14.757054+00:00",
+    "checked_parent": "7c8f3a9bfb55b441a87614769873bbefa756b22c"
+  },
+  "hypotheses_started": 1,
+  "economic_definitions": 1,
   "max_hypotheses": 10,
   "max_economic_definitions": 30,
   "max_new_hypotheses_per_cycle": 1,
   "max_full_reviews_per_cycle": 3,
   "max_candidate_variants": 3,
   "max_total_variants_and_controls": 5,
-  "trials": [],
+  "trials": [
+    {
+      "hypothesis_id": "europe-fix-unconditional-dollar-demand",
+      "run_id": "scout-europe-fix-20261029",
+      "source_id": "ssrn:3521370",
+      "proposal_path": "agents/codex/research/scout/proposals/europe_fix.json",
+      "candidate_variants": 1,
+      "control_variants": 0,
+      "economic_definitions": 1,
+      "definition_ids": [
+        "europe_fix_gross_6e_1"
+      ],
+      "status": "reserved",
+      "proposal_sha256": "9762a7ebeb2e8fa19ff94469302b12e38d39c6da5da2a0551da32aa4840ae156"
+    }
+  ],
   "seen": [
     {
       "ssrn_id": "5207418",
