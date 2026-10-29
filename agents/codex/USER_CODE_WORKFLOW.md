@@ -33,3 +33,11 @@ statistical merit and measured account contribution. State a verdict for all
 five homes, with tested/conditional/not-run limits; never invent account gains.
 A failed earlier gate can mean no eligible addition without having run an
 account bench; do not describe that as measured harm to every plan.
+
+## Retain execution findings (user, 2026-10-29)
+
+For every future code upload, preserve useful order-handling, fill, slippage, timing and execution-tool findings in
+[EXECUTION_REFERENCES.md](EXECUTION_REFERENCES.md), including execution helpers without standalone alpha.
+Use the library's evidence/prerequisite/next-check format, merge duplicates and link the entry in chat.
+Consult relevant prior entries before execution analysis. A code with both strategy and execution content still follows
+the strategy backtest/placement workflow above; recording a reference does not replace it or relax its gates.

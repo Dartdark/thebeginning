@@ -23,6 +23,7 @@ report that makes noise look like an edge costs the user money and costs you tru
 4. `TIER_LIST.md`: every idea already tested (S-F). Check it before starting anything; don't rediscover a ranked item.
 5. `WATCHLIST.md`, `MULTICHARTS_PITFALLS.md` (before writing any PowerLanguage), `LESSONS.md`.
 6. `CLAUDE.md`: written for Claude, but its testing standard is the standard for you too.
+7. [EXECUTION_REFERENCES.md](EXECUTION_REFERENCES.md): standing execution-reference retention rule; consult relevant entries for fills, slippage, timing, order lifecycle and replay work.
 
 ## Hard limits (Apex)
 
@@ -168,3 +169,14 @@ priority from OHLC/trade prints alone. Preserve timestamp alignment and disclose
 Its historical stock-market findings and nearest-cent price-improvement proxy do not establish current CME
 rules, an ES/NQ edge, or a specific futures trade-through parameter. Existing preregistration and live boundaries
 remain unchanged; this reference does not authorize new tests, logger deployment or live modifications.
+
+## Execution-reference library (user, 2026-10-29)
+
+Maintain [EXECUTION_REFERENCES.md](EXECUTION_REFERENCES.md) for useful execution-analysis findings from all future
+papers, code uploads, articles, repository reviews and research tasks, even when no standalone strategy qualifies.
+Record the source/review, useful lesson, evidence status, market/platform limits, missing prerequisites and smallest
+justified next check. Merge duplicates, retain negative evidence and update later verification outcomes.
+Consult relevant entries before execution work. Sources with both alpha and execution value belong in both workflows.
+Show the key finding and library link in chat. Keep execution-only references here rather than TODO's promising-strategy
+queue. This does not waive requested strategy backtests, evidence/preregistration gates or trial limits and authorizes
+no live/VPS/broker/logger changes. Historical source claims and synthetic checks are not verified execution savings.
