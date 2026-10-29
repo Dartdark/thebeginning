@@ -40,6 +40,29 @@ def setup_check(df, day, path="live/expected_setup.json"):
             out.append(f"- **SIZE {r.tag}**: entered {q} contracts at {int(r.entry_time):04d}, plan is {c['qty']}. Check the strategy inputs.")
         elif c.get("qty") is None and q > c.get("max_qty", 1e9):
             out.append(f"- **SIZE {r.tag}**: entered {q} contracts, above the {c['max_qty']} ceiling. Check the risk input.")
+    out += monitor_check(df, day, cfg)
+    return out
+
+
+def monitor_check(df, day, cfg):
+    """ACCT rows from the Apex Chart Monitor signal (2026-10-29): account binding typed, auto-trading on, feed alive,
+    Rithmic reporting the balance. Only during RTH 08:30-15:00 CT on weekdays; silent until the monitor is installed."""
+    a = df[df.event == "ACCT"].copy(); out = []
+    if a.empty or day.weekday() >= 5: return out
+    a["m"] = a.bar_time.map(mins); a = a[(a.m >= mins(830)) & (a.m <= mins(1500))]
+    ids = {v["id"] for v in cfg["accounts"].values() if v.get("status") == "live"}
+    for tag, g in a.groupby("tag", sort=False):
+        if tag not in cfg["charts"]: continue
+        acct = str(g.side.iloc[-1])
+        want = [v["id"] for v in cfg["accounts"].values() if v.get("status") == "live" and v["suffix"] and tag.endswith(v["suffix"])]
+        if acct not in ids or (want and acct != want[0]):
+            out.append(f"- **ACCOUNT {tag}**: monitor AccountName is '{acct}', this chart belongs to {want[0] if want else 'a live account'}. "
+                       "Check the strategy's Auto Trading gear account too (MULTICHARTS_PITFALLS.md, copied charts).")
+        off = g[g.contracts.astype(float) == 0]
+        if len(off): out.append(f"- **AUTO-TRADING OFF {tag}** at {', '.join(f'{int(t):04d}' for t in off.bar_time.unique()[:6])} CT: the strategy could not trade.")
+        old = g[g.entry_price.astype(float) > 600]
+        if len(old): out.append(f"- **FEED {tag}**: the chart's last bar was over 10 min old at {', '.join(f'{int(t):04d}' for t in old.bar_time.unique()[:6])} CT (data feed / Rithmic quiet).")
+        if (g.entry_date.astype(float) == 0).all(): out.append(f"- {tag}: Rithmic reports no balance for {acct} (NetWorth 0): the dashboard keeps the reported balance.")
     return out
 
 

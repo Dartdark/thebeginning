@@ -50,8 +50,18 @@ def main():
                          exit_time=f"{int(r.exit_time) // 100:02d}:{int(r.exit_time) % 100:02d}",
                          entry=float(r.entry_price), exit=float(r.exit_price), pnl=float(r.profit_usd)))
     trades = sorted(rows, key=lambda x: (x["date"], x["entry_time"], x["account"]))
+    # real balances from the Apex Chart Monitor's ACCT rows (net worth as Rithmic reports it), when installed
+    allrows = pd.concat([pd.read_csv(f, header=None, names=COLS, dtype=str) for f in sorted(glob.glob("live/trades/*.csv"))])
+    acct_rows = allrows[allrows.event == "ACCT"]
+    live_bal = {}
+    for r in acct_rows.itertuples():
+        nw = float(r.entry_date or 0)
+        if nw > 0: live_bal[r.side] = (f"{r.bar_date[:4]}-{r.bar_date[4:6]}-{r.bar_date[6:]}", nw)
     accts = []
     for a in ACCOUNTS:
+        if a["id"] in live_bal and a["status"] != "Blown":
+            a = dict(a, last_date=live_bal[a["id"]][0], last_balance=live_bal[a["id"]][1],
+                     note=a["note"] + " Balance from Rithmic (Apex Chart Monitor).")
         since = sum(t["pnl"] for t in trades if t["account"] == a["account"] and t["date"] > a["last_date"])
         est = None if a["last_balance"] is None else round(a["last_balance"] + since, 2)
         accts.append(dict(a, logged_since=round(since, 2), est_balance=est,

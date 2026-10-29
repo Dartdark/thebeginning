@@ -37,6 +37,17 @@ if ($hhmm -ge 845 -and $hhmm -le 1500) {
     }
 }
 
+# 2b. Apex Chart Monitor rows (2026-10-29): auto-trading off, or the chart's last bar > 10 min old (feed quiet)
+$acct = @{}
+if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "ACCT,*" } | ForEach-Object { $c = $_.Split(","); $acct[$c[1]] = $c } }
+if ($hhmm -ge 830 -and $hhmm -le 1500) {
+    foreach ($t in $acct.Keys) {
+        $c = $acct[$t]
+        if ($c[4] -eq "0") { $problems += "AUTOOFF_$t|Chart $t: auto-trading is OFF (account $($c[3])). Turn it on if this chart should trade." }
+        if ([double]$c[7] -gt 600) { $problems += "FEED_$t|Chart $t: last bar is $([int]([double]$c[7] / 60)) min old. Data feed / Rithmic quiet? Check the connection status." }
+    }
+}
+
 # 3. new rejected-order lines in MultiCharts' own logs
 $rej = 0; $msg = ""
 foreach ($r in @("$env:LOCALAPPDATA\TS Support", "$env:APPDATA\TS Support", "C:\ProgramData\TS Support") | Where-Object { Test-Path $_ }) {

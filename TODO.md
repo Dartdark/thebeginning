@@ -5,6 +5,14 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
+- [ ] **Apex Chart Monitor (new signal, 2026-10-29; outside market hours, ~10 min):** paste
+  [Apex_Chart_Monitor.txt](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Chart_Monitor.txt)
+  ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Chart_Monitor.txt))
+  as a new Signal "Apex Chart Monitor", compile. Add it to each of the 8 live charts: `Tag` = the logger tag (VB-2, ONB-2, EOS-2,
+  MON_BR-2, VB150, ONB150, EOS150, MON_BR150), `AccountName` = APEX-681524-02 (the -2 charts) or APEX-681524-03 (the 150
+  charts). Auto-trading off / on (Flat). It places no orders. Replaces the Apex Account Check step. Tell Claude about any
+  compile error (unsure words: `aiStrategyAuto`, `RecalcLastBarAfter`, `DateTime`, `ComputerDateTime`).
+
 - [ ] **Now (found 2026-10-29 by the new live guard): account #1's four charts (VB / ONB / EOS / MON_BR, account -01, blown
   10/26) are still running on the VPS** (VB sent orders on 10/27; thousands of rejection lines). Auto-trading off on each, or
   close them. Details: `live/vps/LIVE_GUARD_PLAN.md`.
