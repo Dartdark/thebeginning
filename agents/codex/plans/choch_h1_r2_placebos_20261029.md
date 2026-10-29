@@ -24,6 +24,8 @@ The full source baseline has an unknown path. For an interpretable finite null c
 
 Take all causal raw eligible events on these audited sessions; rerun the actual baseline. Do not select events on realized profitability, exit or random result. No random draw is retried or deleted. Unexpected unknown controls stay unknown; print counts and invalidate a complete-result claim.
 
+Pre-execution clarification: covered daily metrics and paths use exactly the audited complete cash-session dates, including complete no-event dates, rather than inserting zero-return observations for excluded sessions. Full-source reference retains its original full weekday clock. Singleton intraday outcome catalogs may use a one-session view of the same shared execution engine for efficiency, with absolute index offsets restored; synthetic sliced/full engine parity is required. This changes no feature, stop, fill, null or economic gate.
+
 ## Four inspected definitions, three fixed nulls /1,000 paths each
 
 BASE is reused unchanged. For each event define original potential fill P at its usual signal+2, original swing stop S, original side b, original risk r=b*(P−S). This value is known at original fill, not earlier. Controls keep this risk distance and2R/time-exit/cost method; they do not retain an exit chosen by the original path. They rerun the actual minute path. A randomized bracket can be reflected/translated and is therefore not itself a previous-swing strategy. If r<=0, original and matched brackets pay an immediate zero-gross round trip; missing P remains unknown.
