@@ -142,3 +142,15 @@ answer; they do not replace its findings. For strategy tests, show a compact com
 relevant design/recent dates, actual sizing/cost units and material verification limits. For account simulations, show
 the relevant payout/risk/timing results and horizon. Label source-only claims and missing results explicitly; never
 invent numbers to fill a table. Keep the full detail in the linked report.
+
+## Paper-review questions (user, 2026-10-29)
+
+For every paper review, answer these four questions explicitly in the saved review and in chat:
+1. What is it about?
+2. What does it find?
+3. Why does it make money, if it does? Distinguish a demonstrated return from a proposed mechanism or a cited study.
+4. Can we build on it? Explain fit to our markets/plans, missing prerequisites and the smallest justified next step.
+
+Use the answers to decide whether a deeper look is warranted. Negative findings and methodological value count;
+do not force a trading hypothesis from a paper that does not support one. Retain the five-line Summary limit,
+source attribution, evidence/preregistration gates and the requirement to show key findings directly in chat.
