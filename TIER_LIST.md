@@ -173,6 +173,7 @@ Tiers rank how good an item is, not whether it's in the plan; the Type column sa
 | Release fade (8:00–8:30 CT after 7:30 data) | Strategy | +$63, t = 2.9, 485 days; Found after ~24 variants; loses with a stop in the funded bench |
 | Last-30-minute momentum (Baltussen et al. 2021) | Paper / strategy | Regression t 1.0 NQ vs 7.3 in the paper; ~$0 per trade since 2018 |
 | Gamma last-30 trade (follow after GEX<0, fade high GEX) | Strategy | t = 1.4; funded $3,835–5,006 |
+| **ORB Statistics [Dots3Red]** (TradingView Pine indicator, user upload 2026-10-29; `analysis/orb_stats_d3r_test.py`): 30-min OR from 08:30 CT, first 1-min close beyond it, target 1x range, stop opposite side or midpoint, else flat 15:15 | Indicator (stats), tested as a trade on NQ 2018-26 | 2,234 breakouts (99% of days break). Opposite stop: target 42% / stop 31% / time 27%, net $32 per NQ, t 0.8 (longs $80 t 1.5 = index drift, shorts -$22); midpoint stop: -$22, t -0.7; years mixed, 2026 negative | D: no edge net of costs; same family as the ORB rows above (QQQ ORB, YZ ORB D). Its hit-rate table is fine as a chart aid, not a strategy |
 | QQQ 5-minute ORB (Zarattini & Aziz 2023) | Paper / strategy | Replicates before costs (+0.13R); $42 a trade, t = 1.1 after |
 | ORB + opening-volume filter (Zarattini et al. 2024) | Paper / strategy | 15-min, 0.2 ATR: t = 2.6 but best of 18; funded worse; overlaps ONB |
 | Month-end rebalancing fade | Strategy | NQ t ≤ 1.7, ES nothing |
