@@ -66,3 +66,13 @@ Compare addition/replacement/empty slots only after a passing cheap design scree
 ## Decision
 **NEEDS DATA** — no-return data/cost audit first. All new return tests require a committed plan with at most
 five variants; already-seen recent history is not fresh holdout. A queue entry is not authorization to trade.
+
+## Authorized bounded screen (2026-10-29)
+
+User explicitly requested testing and authorized future worthwhile-paper investigations without renewed permission.
+No-return data audit obtained public S&P membership/prices; release hashes and missing-open/no-trade flags are recorded in the plan.
+The exact full-CRSP/FF5 replication remains NEEDS DATA. **TEST for a restricted single-market-beta S&P500 screen only**,
+under [factor_beta_sessions_test_20261029.md](../plans/factor_beta_sessions_test_20261029.md).
+It uses two frozen session variants, actual prior information, explicit cost/power/data gates and stops on design failure.
+Third-party revisions, unavailable borrow/auction execution and any unresolved selected observations bar promotion.
+The opportunity and occupancy questions remain unmeasured; this is a standalone personal-stock feasibility screen, not an Apex addition.
