@@ -207,6 +207,128 @@ Source: Riedel and Wagner (2015), [SSRN2494387](https://ssrn.com/abstract=249438
   tail losses; fit any EVT model using a separately preregistered past-only/calibration protocol.
 - Status: risk/execution reference; no demonstrated alpha, sizing change, trading allocation or new return test.
 
+<!-- E16-E26 added by Claude (master session) and E27-E28 by the Papers session, 2026-10-29; renumbered from E12-E24 after Codex's E12-E15 -->
+
+### E16 — Vault Break live exit slippage: stops worse than the 1-tick assumption, targets better
+
+Source: live trade logger (`live/trades/*.csv`), [account_tools.slippage](../../analysis/account_tools.py), dashboard panel. Claude, 2026-10-29.
+- Use: compare live exit prices with the backtest's fill convention per exit type, not one blended slippage number.
+- Evidence (native fills, small sample): through 10/28, 11 VB target exits averaged 1.45 ticks *better* than the 40-pt target (worst 0); 9 stop exits averaged 1.78 ticks *worse* than the 75-pt stop (worst 8 ticks, 10/27), against 1 tick assumed.
+- Limits: prices are MultiCharts' position prices in AA mode as logged at bar close, not reconciled with Rithmic's fill report; exit type is classified by distance (±3 / ±6 pts); 20 fills from two accounts on the same signals are fewer independent events.
+- Next check: when ~30 stop fills exist, rerun the VB funded / evaluation benches with the measured stop slippage (or 2 ticks) as a sensitivity; reconcile a few rows with the Rithmic fill export.
+- Status: watch item on the dashboard ('WORSE than backtest'); no plan change.
+
+### E17 — Fast-market protective stops: Rithmic rejects stops already through the market
+
+Sources: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) 'Live order rejections', [LESSONS.md](../../LESSONS.md). Live incidents 2026-10-14 (ONB entry stop) and 2026-10-16 (EOS protective stop, 8:34 CT).
+- Use: after a fill at the 8:30 open or after a fast move, a stop sent at the bar close can sit on the wrong side of the market; Rithmic rejects it ('Invalid StopMarket order parameters') and the position is left naked. MultiCharts retried 20 times in one second.
+- Evidence: native rejections in the Order tracker. Fix in all live strategies: bar-close stop guard (exit at market when the bar's High/Low trades at or through the stop level); raised break-even/trail stops exit at market when at or beyond the close.
+- Limits: the guard acts at bar close, so on a 30-min chart (VB) an unprotected position can run up to one bar. Backtests are unchanged (the stop fills inside the bar).
+- Next check: count guard exits vs normal stop fills in the logger; compare their slippage with E16.
+- Status: implemented guard; execution caveat for every new stop-based strategy.
+
+### E18 — MultiCharts fill conventions vs research rebuilds (touch fills, tick units, Volume vs Ticks)
+
+Sources: [TIER_LIST.md](../../TIER_LIST.md) 'MultiCharts parity 2026-10-25', [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md). Related: E08.
+- Use: know which side is optimistic before comparing a MC report with Python.
+  - MC fills limits on a touch by default: Kusho v9 got +$48k gross over the rebuild's 1-tick-through fills (3,086/3,211 trades identical); the rebuild's $108 a trade is the honest number, not MC's $117.
+  - "Fill limit price exceeded by 1 points" means 1 *tick* (MC's 'point' = smallest price unit). Of 896 VB target fills, none was touch-only, but 43 had only 0.25–0.75 pt through: our 1-full-point Python rule is stricter than MC.
+  - Intraday `Volume` in MC is up-tick volume; `Ticks` is the total. A Python replay of a Volume-based rule is approximate.
+- Limits: parity of bars / P&L is not broker fill evidence (see E04, E08).
+- Next check: when a new MC report arrives, state its limit-fill setting and rebuild with trade-through fills.
+- Status: standing convention: research uses trade-through fills; MC touch fills are treated as optimistic.
+
+### E19 — Session clocks: early closes, halts, SetExitOnClose and time zones
+
+Source: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) (2026-10-17 to 10-25).
+- Use: a fixed-time exit never fires when the session ends early; the position rides the halt and exits at the next session's first bar (an Apex violation live).
+- Evidence (MC trade lists): Monday Long 2023-07-03 held 08:31 → 17:05; NFP Fade 2023-04-07 (Good Friday) held to Sunday 17:05; FC 2B held 26 holiday trades to the 17:00 reopen; `SetExitOnClose` on a 24-h chart closed 47 Twin Continuation trades at midnight, not 15:59.
+- Also: COMEX/NYMEX symbols (@GC, @CL) run on New York time in our MC while @NQ/@ES are Central; mixing them on Exchange time misplaces entries by one hour.
+- Next check: for every new strategy, scan the MC trade list for exits after 15:59 CT or on a later date; list early-close days (Jul 3, Black Friday, Dec 24, Good Friday, Monday holidays).
+- Status: standing check; `IsEarlyClose` list + early flatten in the live strategies.
+
+### E20 — Order routing and account binding (symbol mapping, copied charts, broker profile)
+
+Source: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md); live incidents 10/16, 10/20, 10/26.
+- Use: an order can be sent correctly by the strategy and still never reach the right account.
+  - `@MNQ` (dxFeed continuous) must map to the real contract for Rithmic (MNQZ6); the mapping is stored per MC installation (the VPS had the default and VB was rejected on both accounts 10/20). Change it at every roll (next ~12/11: MNQZ6 → MNQH7).
+  - A copied chart keeps the strategy's account: 10/26 account #3's 150K-sized VB (20 MNQ) went to #2, which held 28 MNQ instead of 8.
+  - A chart left on MC's default Interactive Brokers profile sends nothing to Apex.
+- Evidence: native rejections and Order tracker rows.
+- Next check: after every copy, roll or new machine: check each strategy's Auto Trading account and one manual 1-MNQ test order after the close (pre-flight checklist).
+- Status: checklist items + watchdog rejection alerts.
+
+### E21 — Broker-side liquidation vs chart state (Apex daily loss limit, chart thinks it is still in)
+
+Source: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) 'Apex daily loss limit vs the strategy', 2026-10-19.
+- Use: when Apex liquidates (daily loss limit), MC does not see the exit, keeps its position and re-sends exits ('Account is done for day', price 0.00 in the tracker). Next day those exits would be accepted and open an unplanned position.
+- Evidence: live 10/19, VB long 8 closed at −$1,017 mid-bar by Apex. VB's $1,200 stop exceeds the $1,000 daily limit, so a full VB loss is cut at about −$1,000 (the evaluation simulator models this).
+- Next check: after any Apex lock, AA off/on (Flat) on every affected chart; the watchdog's MISMATCH alarm (chart vs broker position) covers it during RTH.
+- Status: procedure + alarm.
+
+### E22 — 'Running' is not 'trading': compile failures, half-closed MultiCharts, heartbeat
+
+Sources: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) (10/27 ONB, 10/29 VPS session), [LESSONS.md](../../LESSONS.md), [watchdog.ps1](../../live/vps/watchdog.ps1), [Strategy_Heartbeat_Snippet.txt](../../apex_strategies/Strategy_Heartbeat_Snippet.txt).
+- Use: an opportunity cost that no fill report shows. 10/27 Overnight Bias ADX30 signalled long 10:00 → 14:30 (+135 pts, ~$1,080 on #2, ~$3,240 on #3 gross) but sent nothing: the code had not compiled, while the chart, AA button and logger looked normal. 10/29 a half-closed MC copy on the VPS blocked the restart ('session terminated').
+- Evidence: missed-trade panel (7 quiet days, backtest chance ~5%) and the chart's trade list.
+- Fix: strategy heartbeat (SIG rows) checked by the watchdog every 5 min; missed-trade (silence) panel on the dashboard.
+- Next check: when the heartbeat alarm first fires for real, confirm it caught the stopped strategy within one check.
+- Status: monitoring in place; counts as 'genuinely missed orders' in the minimum record below.
+
+### E23 — Logger and account fields: what each number really is
+
+Source: [Apex_Chart_Monitor.txt](../../apex_strategies/Apex_Chart_Monitor.txt), [dashboard_data.py](../../analysis/dashboard_data.py), ACCT rows 2026-10-29.
+- Use: interpret live records correctly before computing costs.
+  - Rithmic reports NetWorth 0 for Apex accounts; Equity = the account balance (matched the Order and Position Tracker: −02 $50,764.42, −03 $147,822.60).
+  - Whether Equity includes open P&L is unverified (decides Target Guard v2's `EquityHasOpenPL`).
+  - Logger POS rows are chart state at bar close (bar_time = bar-close label), not fill clocks; CLOSE rows carry MC's prices, not the broker's fill report (see E04).
+- Next check: read ACCT rows during the next open trade: does Equity move with open P&L?
+- Status: open measurement; Target Guard v2 not installed until answered.
+
+### E24 — Opening-print fills: the Sunday reopen push
+
+Source: [WATCHLIST.md](../../WATCHLIST.md) item 22, `analysis/sunday_reopen_test.py`, 2026-10-18 / 10-21.
+- Use: a backtest that fills at the first print of a session can't be traded by an order sent after the print.
+- Evidence (historical test): NQ 2023–26 $182 a trade (t 2.6) filled at the first print, $162 at 4 ticks worse; entering one minute late loses; 17:01 → 17:15 entry +$10 (t 0.2).
+- Limits: only a pre-open order on the indicative price could capture it; no live fills yet.
+- Next check: ~20 forward paper reopens logging first print vs fill; keep only if ≥ ~$80 per NQ after real slippage.
+- Status: C, on the watchlist.
+
+### E25 — Order-book / order-flow features do not predict NQ at 5–30 min
+
+Source: [TIER_LIST.md](../../TIER_LIST.md) 'Order-flow prediction (The Bridge MBO, 2018–2026)'.
+- Use: a negative reference for any 'read the book to time the entry' idea.
+- Evidence (historical test): 39 features (delta 5–30 min, book/count imbalance, depth 10/50, pulled orders, queue depletion, icebergs, big prints, walls) vs the next 5/15/30 min: correlations −0.008 to +0.013, costs need ~0.05; the best (50-level depth) as a 15-min trade: 2018–22 $4, 2023–26 −$24.
+- Limits: tested as predictors of direction, not as fill-timing tools for an existing signal.
+- Next check: none unless a new mechanism (e.g. timing an existing entry inside its minute) is pre-registered.
+- Status: F as alpha; do not repeat under a new name.
+
+### E26 — Placebo levels: 'price reacts at level X' often isn't about X
+
+Source: Prior VWAP Trap review, [checks/candidates/prior_vwap_trap/REVIEW.md](../../checks/candidates/prior_vwap_trap/REVIEW.md), `analysis/prior_vwap_trap_test.py`, 2026-10-29.
+- Use: before believing a level-based behavior (prior VWAP, ORB high, pivot), run the same rule at nearby random levels.
+- Evidence (historical test): 1,804 trades, $153 per NQ, t 3.2 at the prior-day VWAP, but placebo levels nearby performed nearly as well: the edge is mostly momentum + the trailing exit, not the level.
+- Next check: apply the placebo-level control to every level strategy (standing in DEVELOPMENT_PROCESS stresses).
+- Status: market-behavior reference; strategy ranked B, not in a plan (50K evaluation pass rate falls with it).
+
+### E27 — Opening imbalance: market orders at the stock open sit on the exploited side
+
+Source: Branch & Ma, SSRN 3259614 (paper, user upload 2026-10-29); `analysis/on_id_reversal_quartiles.py`, TIER_LIST F row.
+- Use: in single stocks the open is set by the market maker against the overnight order imbalance and overshoots; the paper advises against market orders at the open. For NQ / ES futures (continuous Globex trading, no specialist open) the mechanism is absent.
+- Evidence (author claim + historical test): stocks 2011-17 reverse overnight moves intraday, but SPY's overnight / intraday correlation is now slightly positive. NQ / ES 2018-26 (15:00 -> 08:30 vs 08:30 -> 15:00 CT): corr +0.00 / −0.03, no monotonic quartile pattern; fading top / bottom quartiles 2018-22 −$95 / −$60, 2023+ +$184 / +$167 (t 0.9 / 1.3).
+- Limits: says nothing about the 08:30 fill itself (see E24 for opening-print fills).
+- Next check: none; do not re-test overnight -> intraday reversal on index futures (also SSRN 2730304, F).
+- Status: negative reference for futures; stock-only lesson.
+
+### E28 — Retail open-buy / close-sell flow (Korea) does not show up in NQ / ES
+
+Source: Ahn, Fan, Noh & Park, SSRN 4752520 (paper, user upload 2026-10-29); `analysis/retail_gap_cot_test.py`, TIER_LIST F row.
+- Use: the paper verifies with trade-level investor IDs that Korean retail (mobile, young, male day traders) net buys at the open auction and net sells at the close; institutions do the reverse. It widens the overnight − intraday gap in high-retail stocks / months.
+- Evidence (historical test): on CME index futures with CFTC small-trader and micro-share proxies, high-retail weeks show a smaller NQ gap (t −1.8), ES none.
+- Limits: COT proxies are weekly positions, not intraday flow; the micro series starts 2020-08.
+- Next check: none unless intraday retail flow data (e.g. small-lot aggressor volume by minute) is added.
+- Status: negative reference for futures.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
