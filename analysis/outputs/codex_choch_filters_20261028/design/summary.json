@@ -1,0 +1,3207 @@
+{
+  "preregistration_commit": "1898b1f597a3ef526ced52778e9a48d12b900fbf",
+  "design_only": true,
+  "validation_run": false,
+  "implementation_commit": "898070dc845f282efd86bb102e379220ab4ef96a",
+  "code_hashes": {
+    "codex_choch_filters.py": "174daf7bf0cc1be4085515b5a88e9dc9d3f861777c2e135289eb75554d7e3620",
+    "codex_choch_filters_execution.py": "27d8abcfa586d15aac4985dec5c63d859004f9f36540e2c745e74cfa87872c59",
+    "codex_choch_filters_report.py": "d64a47fa6a6cb71be18b430821030491b73a2992fedcf0b2b2563ef34c3f41ba",
+    "codex_choch_filters_subsets.py": "45acd6ada42803d4e81799272f552676bbe31d79567c3b570e91900a6a94488a"
+  },
+  "input_hashes": {
+    "data/NQ_1min_DAY_2018.csv": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+    "data/NQ_1min_DAY_2019.csv": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+    "data/NQ_1min_DAY_2020.csv": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+    "data/NQ_1min_DAY_2021.csv": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+    "data/NQ_1min_DAY_2022.csv": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+    "data/NQ_1min_ON_2017.csv": "1d783a7ee533bf0db8641a93c4fb529f46674eaa24397d66cda63e8c1df11c86",
+    "data/NQ_1min_ON_2018.csv": "7b47273122b7cdd478bec9214ed88f036820699d80c22d8a514b1c7b99f20016",
+    "data/NQ_1min_ON_2019.csv": "3475cad66628a84ffc8cd2fc40b56d22fd8810e6cbc2ed93cee12d22805edfb8",
+    "data/NQ_1min_ON_2020.csv": "83f62aed8465291ee7e0490a2fbf3b2791c0e48646d15b79a699ad76ba1fb378",
+    "data/NQ_1min_ON_2021.csv": "ca1ce725e031993e1d3d63a6dba1c402f30d2f44a07bc13615fcb56b09a48f9f",
+    "data/NQ_1min_ON_2022.csv": "c6906ea8223d44b18aed0440ede1606fc84155a47f561a1da2caa6f7b611fa71"
+  },
+  "source_audit": {
+    "input_rows": 1983470,
+    "unique_rows": 1983470,
+    "duplicate_rows": 0,
+    "conflicting_keys": 0,
+    "invalid_or_conflicting_observations": 0,
+    "no_forward_fill": true,
+    "exporter_timestamp_contract": "existing repo close-labelled CT; original author parity unavailable",
+    "continuous_contract_roll_identity": "unverified; no price adjustment or outcome-selected roll filter"
+  },
+  "baseline_reproduced": true,
+  "configurations": 5,
+  "new_active_filters": 4,
+  "prior_structural_configurations": 6,
+  "prior_economic_definitions": 12,
+  "cumulative_economic_definitions": 16,
+  "accounting_note": "BASE reused, four active filters; coverage controls, execution correction and stresses retained separately; prior12 definitions include ideal-close benchmarks.",
+  "raw_signals": 1104,
+  "eligible_signals": 412,
+  "common_signals": 235,
+  "range_unknown": 35,
+  "alignment_unknown": 162,
+  "costs": {
+    "commission_roundtrip": 1.24,
+    "slippage_roundtrip": 1.0,
+    "total_roundtrip": 2.24,
+    "native_contract": "MNQ"
+  },
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  },
+  "seed": 20261028,
+  "models": [
+    {
+      "trades": 233,
+      "win": 0.5150214592274678,
+      "avg": 24.569012875536473,
+      "annual": 1105.436137931034,
+      "sharpe": 0.7578809877202817,
+      "sortino": 1.1939899255686175,
+      "profit_factor": 1.3881565921622554,
+      "max_dd": 1873.3600000000006,
+      "calmar": 0.590082065343038,
+      "ulcer": 0.9263618470228184,
+      "ulcer_perf": 2.3866184504116443,
+      "model": "BASE",
+      "raw_signals": 1104,
+      "eligible_signals": 235,
+      "net_total": 5724.579999999998,
+      "gross_total": 6246.5,
+      "gross_mean": 26.80901287553648,
+      "trade_t": 1.784548334514207,
+      "daily_NW5": 1.8645941046824643,
+      "state_counts": {
+        "resolved": 233
+      },
+      "unresolved": 0,
+      "censored": 0,
+      "gross_pass": true,
+      "years": [
+        {
+          "year": 2018,
+          "net_mnq": 549.1199999999999
+        },
+        {
+          "year": 2019,
+          "net_mnq": 608.8399999999999
+        },
+        {
+          "year": 2020,
+          "net_mnq": 1680.1199999999994
+        },
+        {
+          "year": 2021,
+          "net_mnq": 1362.6199999999994
+        },
+        {
+          "year": 2022,
+          "net_mnq": 1523.8799999999994
+        }
+      ],
+      "sides": [
+        {
+          "side": -1,
+          "trades": 116,
+          "win": 0.49137931034482757,
+          "avg": 34.385,
+          "annual": 770.2239999999997,
+          "sharpe": 0.6761904471494279,
+          "sortino": 1.2474148339330116,
+          "profit_factor": 1.4977636787484587,
+          "max_dd": 1092.6800000000003,
+          "calmar": 0.7048943881099677,
+          "ulcer": 0.8355402656988705,
+          "ulcer_perf": 1.8436550136952685,
+          "net_total": 3988.66,
+          "trade_t": 1.5471771489498043
+        },
+        {
+          "side": 1,
+          "trades": 117,
+          "win": 0.5384615384615384,
+          "avg": 14.83692307692307,
+          "annual": 335.21213793103436,
+          "sharpe": 0.3986652942636573,
+          "sortino": 0.5891937805393939,
+          "profit_factor": 1.2577476332450381,
+          "max_dd": 1884.8199999999997,
+          "calmar": 0.17784835577457497,
+          "ulcer": 1.171348461730439,
+          "ulcer_perf": 0.5723525473125628,
+          "net_total": 1735.9199999999992,
+          "trade_t": 0.9065924145442327
+        }
+      ],
+      "risk_points_quantiles": {
+        "0.0": 6.5,
+        "0.5": 125.75,
+        "0.95": 325.3999999999998,
+        "1.0": 518.25
+      },
+      "economic_gate": false,
+      "complete_data_gate": true,
+      "design_pass": false,
+      "stop_first": {
+        "trades": 233,
+        "win": 0.5150214592274678,
+        "avg": 24.569012875536473,
+        "annual": 1105.436137931034,
+        "sharpe": 0.7578809877202817,
+        "sortino": 1.1939899255686175,
+        "profit_factor": 1.3881565921622554,
+        "max_dd": 1873.3600000000006,
+        "calmar": 0.590082065343038,
+        "ulcer": 0.9263618470228184,
+        "ulcer_perf": 2.3866184504116443,
+        "model": "BASE_stop_first",
+        "raw_signals": 1104,
+        "eligible_signals": 235,
+        "net_total": 5724.579999999998,
+        "gross_total": 6246.5,
+        "gross_mean": 26.80901287553648,
+        "trade_t": 1.784548334514207,
+        "daily_NW5": 1.8645941046824643,
+        "state_counts": {
+          "resolved": 233
+        },
+        "unresolved": 0,
+        "censored": 0,
+        "gross_pass": true,
+        "years": [
+          {
+            "year": 2018,
+            "net_mnq": 549.1199999999999
+          },
+          {
+            "year": 2019,
+            "net_mnq": 608.8399999999999
+          },
+          {
+            "year": 2020,
+            "net_mnq": 1680.1199999999994
+          },
+          {
+            "year": 2021,
+            "net_mnq": 1362.6199999999994
+          },
+          {
+            "year": 2022,
+            "net_mnq": 1523.8799999999994
+          }
+        ],
+        "sides": [
+          {
+            "side": -1,
+            "trades": 116,
+            "win": 0.49137931034482757,
+            "avg": 34.385,
+            "annual": 770.2239999999997,
+            "sharpe": 0.6761904471494279,
+            "sortino": 1.2474148339330116,
+            "profit_factor": 1.4977636787484587,
+            "max_dd": 1092.6800000000003,
+            "calmar": 0.7048943881099677,
+            "ulcer": 0.8355402656988705,
+            "ulcer_perf": 1.8436550136952685,
+            "net_total": 3988.66,
+            "trade_t": 1.5471771489498043
+          },
+          {
+            "side": 1,
+            "trades": 117,
+            "win": 0.5384615384615384,
+            "avg": 14.83692307692307,
+            "annual": 335.21213793103436,
+            "sharpe": 0.3986652942636573,
+            "sortino": 0.5891937805393939,
+            "profit_factor": 1.2577476332450381,
+            "max_dd": 1884.8199999999997,
+            "calmar": 0.17784835577457497,
+            "ulcer": 1.171348461730439,
+            "ulcer_perf": 0.5723525473125628,
+            "net_total": 1735.9199999999992,
+            "trade_t": 0.9065924145442327
+          }
+        ],
+        "risk_points_quantiles": {
+          "0.0": 6.5,
+          "0.5": 125.75,
+          "0.95": 325.3999999999998,
+          "1.0": 518.25
+        },
+        "economic_gate": false,
+        "complete_data_gate": true,
+        "design_pass": false
+      },
+      "extra_cost_net": 5202.659999999998,
+      "breakeven_extra_cost_per_trade": 24.569012875536473,
+      "collision_count": 0,
+      "entry_gap_stop_count": 0,
+      "filter_design_pass": false
+    },
+    {
+      "trades": 41,
+      "win": 0.36585365853658536,
+      "avg": -12.727804878048786,
+      "annual": -100.76910344827593,
+      "sharpe": -0.2418340050047766,
+      "sortino": -0.34395210862398445,
+      "profit_factor": 0.8085159472193274,
+      "max_dd": 1237.5800000000017,
+      "calmar": -0.0814243147499764,
+      "ulcer": 1.0840680870808226,
+      "ulcer_perf": -0.18590917793664946,
+      "model": "F1",
+      "raw_signals": 1104,
+      "eligible_signals": 41,
+      "net_total": -521.8400000000003,
+      "gross_total": -430.0,
+      "gross_mean": -10.487804878048781,
+      "trade_t": -0.529157631339945,
+      "daily_NW5": -0.5650530369945557,
+      "state_counts": {
+        "resolved": 41
+      },
+      "unresolved": 0,
+      "censored": 0,
+      "gross_pass": false,
+      "years": [
+        {
+          "year": 2018,
+          "net_mnq": -150.48000000000002
+        },
+        {
+          "year": 2019,
+          "net_mnq": 39.83999999999996
+        },
+        {
+          "year": 2020,
+          "net_mnq": 99.11999999999989
+        },
+        {
+          "year": 2021,
+          "net_mnq": -618.9000000000001
+        },
+        {
+          "year": 2022,
+          "net_mnq": 108.57999999999993
+        }
+      ],
+      "sides": [
+        {
+          "side": -1,
+          "trades": 22,
+          "win": 0.3181818181818182,
+          "avg": -16.467272727272736,
+          "annual": -69.95751724137935,
+          "sharpe": -0.2012810246590036,
+          "sortino": -0.30226238642210823,
+          "profit_factor": 0.7723799949736113,
+          "max_dd": 1383.3799999999974,
+          "calmar": -0.05056999323496037,
+          "ulcer": 1.0950604112177844,
+          "ulcer_perf": -0.1277692381620876,
+          "net_total": -362.2800000000002,
+          "trade_t": -0.44980025810279467
+        },
+        {
+          "side": 1,
+          "trades": 19,
+          "win": 0.42105263157894735,
+          "avg": -8.397894736842108,
+          "annual": -30.81158620689658,
+          "sharpe": -0.12196414198293888,
+          "sortino": -0.16302018384082628,
+          "profit_factor": 0.8592498500405771,
+          "max_dd": 542.4400000000023,
+          "calmar": -0.05680183284215111,
+          "ulcer": 0.38386332848743226,
+          "ulcer_perf": -0.1605341480693452,
+          "net_total": -159.56000000000006,
+          "trade_t": -0.27079026056539557
+        }
+      ],
+      "risk_points_quantiles": {
+        "0.0": 6.5,
+        "0.5": 62.25,
+        "0.95": 137.0,
+        "1.0": 182.75
+      },
+      "economic_gate": false,
+      "complete_data_gate": true,
+      "design_pass": false,
+      "stop_first": {
+        "trades": 41,
+        "win": 0.36585365853658536,
+        "avg": -12.727804878048786,
+        "annual": -100.76910344827593,
+        "sharpe": -0.2418340050047766,
+        "sortino": -0.34395210862398445,
+        "profit_factor": 0.8085159472193274,
+        "max_dd": 1237.5800000000017,
+        "calmar": -0.0814243147499764,
+        "ulcer": 1.0840680870808226,
+        "ulcer_perf": -0.18590917793664946,
+        "model": "F1_stop_first",
+        "raw_signals": 1104,
+        "eligible_signals": 41,
+        "net_total": -521.8400000000003,
+        "gross_total": -430.0,
+        "gross_mean": -10.487804878048781,
+        "trade_t": -0.529157631339945,
+        "daily_NW5": -0.5650530369945557,
+        "state_counts": {
+          "resolved": 41
+        },
+        "unresolved": 0,
+        "censored": 0,
+        "gross_pass": false,
+        "years": [
+          {
+            "year": 2018,
+            "net_mnq": -150.48000000000002
+          },
+          {
+            "year": 2019,
+            "net_mnq": 39.83999999999996
+          },
+          {
+            "year": 2020,
+            "net_mnq": 99.11999999999989
+          },
+          {
+            "year": 2021,
+            "net_mnq": -618.9000000000001
+          },
+          {
+            "year": 2022,
+            "net_mnq": 108.57999999999993
+          }
+        ],
+        "sides": [
+          {
+            "side": -1,
+            "trades": 22,
+            "win": 0.3181818181818182,
+            "avg": -16.467272727272736,
+            "annual": -69.95751724137935,
+            "sharpe": -0.2012810246590036,
+            "sortino": -0.30226238642210823,
+            "profit_factor": 0.7723799949736113,
+            "max_dd": 1383.3799999999974,
+            "calmar": -0.05056999323496037,
+            "ulcer": 1.0950604112177844,
+            "ulcer_perf": -0.1277692381620876,
+            "net_total": -362.2800000000002,
+            "trade_t": -0.44980025810279467
+          },
+          {
+            "side": 1,
+            "trades": 19,
+            "win": 0.42105263157894735,
+            "avg": -8.397894736842108,
+            "annual": -30.81158620689658,
+            "sharpe": -0.12196414198293888,
+            "sortino": -0.16302018384082628,
+            "profit_factor": 0.8592498500405771,
+            "max_dd": 542.4400000000023,
+            "calmar": -0.05680183284215111,
+            "ulcer": 0.38386332848743226,
+            "ulcer_perf": -0.1605341480693452,
+            "net_total": -159.56000000000006,
+            "trade_t": -0.27079026056539557
+          }
+        ],
+        "risk_points_quantiles": {
+          "0.0": 6.5,
+          "0.5": 62.25,
+          "0.95": 137.0,
+          "1.0": 182.75
+        },
+        "economic_gate": false,
+        "complete_data_gate": true,
+        "design_pass": false
+      },
+      "extra_cost_net": -613.6800000000003,
+      "breakeven_extra_cost_per_trade": -12.727804878048786,
+      "collision_count": 0,
+      "entry_gap_stop_count": 0,
+      "filter_design_pass": false
+    },
+    {
+      "trades": 79,
+      "win": 0.379746835443038,
+      "avg": -8.03746835443039,
+      "annual": -122.6129655172415,
+      "sharpe": -0.16839906802185195,
+      "sortino": -0.2499389767477871,
+      "profit_factor": 0.8948438788657661,
+      "max_dd": 1670.5999999999985,
+      "calmar": -0.0733945681295592,
+      "ulcer": 1.1226348801814263,
+      "ulcer_perf": -0.21843783349654397,
+      "model": "F1_5",
+      "raw_signals": 1104,
+      "eligible_signals": 79,
+      "net_total": -634.9600000000007,
+      "gross_total": -458.0,
+      "gross_mean": -5.7974683544303796,
+      "trade_t": -0.3828111337234269,
+      "daily_NW5": -0.3739341859456179,
+      "state_counts": {
+        "resolved": 79
+      },
+      "unresolved": 0,
+      "censored": 0,
+      "gross_pass": false,
+      "years": [
+        {
+          "year": 2018,
+          "net_mnq": 162.53999999999996
+        },
+        {
+          "year": 2019,
+          "net_mnq": 136.61999999999992
+        },
+        {
+          "year": 2020,
+          "net_mnq": -17.2800000000002
+        },
+        {
+          "year": 2021,
+          "net_mnq": -120.80000000000018
+        },
+        {
+          "year": 2022,
+          "net_mnq": -796.0400000000002
+        }
+      ],
+      "sides": [
+        {
+          "side": -1,
+          "trades": 40,
+          "win": 0.25,
+          "avg": -40.62750000000001,
+          "annual": -313.81241379310353,
+          "sharpe": -0.5835313887553747,
+          "sortino": -0.8162166870572845,
+          "profit_factor": 0.5712929010473001,
+          "max_dd": 2198.519999999997,
+          "calmar": -0.1427380300352528,
+          "ulcer": 1.926627244982568,
+          "ulcer_perf": -0.32576349640061575,
+          "net_total": -1625.1000000000004,
+          "trade_t": -1.3406911888103061
+        },
+        {
+          "side": 1,
+          "trades": 39,
+          "win": 0.5128205128205128,
+          "avg": 25.38820512820512,
+          "annual": 191.19944827586198,
+          "sharpe": 0.3934225631862974,
+          "sortino": 0.6761382007054189,
+          "profit_factor": 1.44053996333802,
+          "max_dd": 883.6800000000003,
+          "calmar": 0.21636729163935126,
+          "ulcer": 0.4948807191971011,
+          "ulcer_perf": 0.7727092240977408,
+          "net_total": 990.1399999999996,
+          "trade_t": 0.8930316936638483
+        }
+      ],
+      "risk_points_quantiles": {
+        "0.0": 6.5,
+        "0.5": 78.75,
+        "0.95": 184.3249999999999,
+        "1.0": 217.25
+      },
+      "economic_gate": false,
+      "complete_data_gate": true,
+      "design_pass": false,
+      "stop_first": {
+        "trades": 79,
+        "win": 0.379746835443038,
+        "avg": -8.03746835443039,
+        "annual": -122.6129655172415,
+        "sharpe": -0.16839906802185195,
+        "sortino": -0.2499389767477871,
+        "profit_factor": 0.8948438788657661,
+        "max_dd": 1670.5999999999985,
+        "calmar": -0.0733945681295592,
+        "ulcer": 1.1226348801814263,
+        "ulcer_perf": -0.21843783349654397,
+        "model": "F1_5_stop_first",
+        "raw_signals": 1104,
+        "eligible_signals": 79,
+        "net_total": -634.9600000000007,
+        "gross_total": -458.0,
+        "gross_mean": -5.7974683544303796,
+        "trade_t": -0.3828111337234269,
+        "daily_NW5": -0.3739341859456179,
+        "state_counts": {
+          "resolved": 79
+        },
+        "unresolved": 0,
+        "censored": 0,
+        "gross_pass": false,
+        "years": [
+          {
+            "year": 2018,
+            "net_mnq": 162.53999999999996
+          },
+          {
+            "year": 2019,
+            "net_mnq": 136.61999999999992
+          },
+          {
+            "year": 2020,
+            "net_mnq": -17.2800000000002
+          },
+          {
+            "year": 2021,
+            "net_mnq": -120.80000000000018
+          },
+          {
+            "year": 2022,
+            "net_mnq": -796.0400000000002
+          }
+        ],
+        "sides": [
+          {
+            "side": -1,
+            "trades": 40,
+            "win": 0.25,
+            "avg": -40.62750000000001,
+            "annual": -313.81241379310353,
+            "sharpe": -0.5835313887553747,
+            "sortino": -0.8162166870572845,
+            "profit_factor": 0.5712929010473001,
+            "max_dd": 2198.519999999997,
+            "calmar": -0.1427380300352528,
+            "ulcer": 1.926627244982568,
+            "ulcer_perf": -0.32576349640061575,
+            "net_total": -1625.1000000000004,
+            "trade_t": -1.3406911888103061
+          },
+          {
+            "side": 1,
+            "trades": 39,
+            "win": 0.5128205128205128,
+            "avg": 25.38820512820512,
+            "annual": 191.19944827586198,
+            "sharpe": 0.3934225631862974,
+            "sortino": 0.6761382007054189,
+            "profit_factor": 1.44053996333802,
+            "max_dd": 883.6800000000003,
+            "calmar": 0.21636729163935126,
+            "ulcer": 0.4948807191971011,
+            "ulcer_perf": 0.7727092240977408,
+            "net_total": 990.1399999999996,
+            "trade_t": 0.8930316936638483
+          }
+        ],
+        "risk_points_quantiles": {
+          "0.0": 6.5,
+          "0.5": 78.75,
+          "0.95": 184.3249999999999,
+          "1.0": 217.25
+        },
+        "economic_gate": false,
+        "complete_data_gate": true,
+        "design_pass": false
+      },
+      "extra_cost_net": -811.9200000000008,
+      "breakeven_extra_cost_per_trade": -8.03746835443039,
+      "collision_count": 0,
+      "entry_gap_stop_count": 0,
+      "filter_design_pass": false
+    },
+    {
+      "trades": 118,
+      "win": 0.4745762711864407,
+      "avg": 8.882881355932197,
+      "annual": 202.40717241379292,
+      "sharpe": 0.21704196768877013,
+      "sortino": 0.35686558653299405,
+      "profit_factor": 1.1393415381833942,
+      "max_dd": 1512.300000000003,
+      "calmar": 0.13384062184341236,
+      "ulcer": 1.2407808430194347,
+      "ulcer_perf": 0.3262577328664037,
+      "model": "A4",
+      "raw_signals": 1104,
+      "eligible_signals": 119,
+      "net_total": 1048.1799999999992,
+      "gross_total": 1312.5,
+      "gross_mean": 11.122881355932204,
+      "trade_t": 0.4924658476594188,
+      "daily_NW5": 0.4674481589053264,
+      "state_counts": {
+        "resolved": 118
+      },
+      "unresolved": 0,
+      "censored": 0,
+      "gross_pass": true,
+      "years": [
+        {
+          "year": 2018,
+          "net_mnq": 307.81999999999994
+        },
+        {
+          "year": 2019,
+          "net_mnq": 546.4399999999999
+        },
+        {
+          "year": 2020,
+          "net_mnq": 230.3199999999997
+        },
+        {
+          "year": 2021,
+          "net_mnq": -240.2200000000002
+        },
+        {
+          "year": 2022,
+          "net_mnq": 203.8199999999997
+        }
+      ],
+      "sides": [
+        {
+          "side": -1,
+          "trades": 58,
+          "win": 0.46551724137931033,
+          "avg": 8.803103448275852,
+          "annual": 98.59475862068955,
+          "sharpe": 0.1233778890236251,
+          "sortino": 0.20442781217167602,
+          "profit_factor": 1.1082439038868424,
+          "max_dd": 1627.020000000004,
+          "calmar": 0.060598369178430075,
+          "ulcer": 1.2034227458476918,
+          "ulcer_perf": 0.1638572296574623,
+          "net_total": 510.5799999999995,
+          "trade_t": 0.27862149827243665
+        },
+        {
+          "side": 1,
+          "trades": 60,
+          "win": 0.48333333333333334,
+          "avg": 8.959999999999999,
+          "annual": 103.81241379310333,
+          "sharpe": 0.2159176671039437,
+          "sortino": 0.34781591440598836,
+          "profit_factor": 1.1916276947644584,
+          "max_dd": 709.6000000000058,
+          "calmar": 0.14629708820899448,
+          "ulcer": 0.3615441203715807,
+          "ulcer_perf": 0.5742724494394159,
+          "net_total": 537.5999999999999,
+          "trade_t": 0.48836646358668123
+        }
+      ],
+      "risk_points_quantiles": {
+        "0.0": 6.5,
+        "0.5": 128.75,
+        "0.95": 306.0624999999998,
+        "1.0": 518.25
+      },
+      "economic_gate": false,
+      "complete_data_gate": true,
+      "design_pass": false,
+      "stop_first": {
+        "trades": 118,
+        "win": 0.4745762711864407,
+        "avg": 8.882881355932197,
+        "annual": 202.40717241379292,
+        "sharpe": 0.21704196768877013,
+        "sortino": 0.35686558653299405,
+        "profit_factor": 1.1393415381833942,
+        "max_dd": 1512.300000000003,
+        "calmar": 0.13384062184341236,
+        "ulcer": 1.2407808430194347,
+        "ulcer_perf": 0.3262577328664037,
+        "model": "A4_stop_first",
+        "raw_signals": 1104,
+        "eligible_signals": 119,
+        "net_total": 1048.1799999999992,
+        "gross_total": 1312.5,
+        "gross_mean": 11.122881355932204,
+        "trade_t": 0.4924658476594188,
+        "daily_NW5": 0.4674481589053264,
+        "state_counts": {
+          "resolved": 118
+        },
+        "unresolved": 0,
+        "censored": 0,
+        "gross_pass": true,
+        "years": [
+          {
+            "year": 2018,
+            "net_mnq": 307.81999999999994
+          },
+          {
+            "year": 2019,
+            "net_mnq": 546.4399999999999
+          },
+          {
+            "year": 2020,
+            "net_mnq": 230.3199999999997
+          },
+          {
+            "year": 2021,
+            "net_mnq": -240.2200000000002
+          },
+          {
+            "year": 2022,
+            "net_mnq": 203.8199999999997
+          }
+        ],
+        "sides": [
+          {
+            "side": -1,
+            "trades": 58,
+            "win": 0.46551724137931033,
+            "avg": 8.803103448275852,
+            "annual": 98.59475862068955,
+            "sharpe": 0.1233778890236251,
+            "sortino": 0.20442781217167602,
+            "profit_factor": 1.1082439038868424,
+            "max_dd": 1627.020000000004,
+            "calmar": 0.060598369178430075,
+            "ulcer": 1.2034227458476918,
+            "ulcer_perf": 0.1638572296574623,
+            "net_total": 510.5799999999995,
+            "trade_t": 0.27862149827243665
+          },
+          {
+            "side": 1,
+            "trades": 60,
+            "win": 0.48333333333333334,
+            "avg": 8.959999999999999,
+            "annual": 103.81241379310333,
+            "sharpe": 0.2159176671039437,
+            "sortino": 0.34781591440598836,
+            "profit_factor": 1.1916276947644584,
+            "max_dd": 709.6000000000058,
+            "calmar": 0.14629708820899448,
+            "ulcer": 0.3615441203715807,
+            "ulcer_perf": 0.5742724494394159,
+            "net_total": 537.5999999999999,
+            "trade_t": 0.48836646358668123
+          }
+        ],
+        "risk_points_quantiles": {
+          "0.0": 6.5,
+          "0.5": 128.75,
+          "0.95": 306.0624999999998,
+          "1.0": 518.25
+        },
+        "economic_gate": false,
+        "complete_data_gate": true,
+        "design_pass": false
+      },
+      "extra_cost_net": 783.8599999999991,
+      "breakeven_extra_cost_per_trade": 8.882881355932197,
+      "collision_count": 0,
+      "entry_gap_stop_count": 0,
+      "filter_design_pass": false
+    },
+    {
+      "trades": 21,
+      "win": 0.38095238095238093,
+      "avg": -3.930476190476194,
+      "annual": -15.938758620689681,
+      "sharpe": -0.05320378134035226,
+      "sortino": -0.08526204469294726,
+      "profit_factor": 0.9324616240631033,
+      "max_dd": 707.9199999999983,
+      "calmar": -0.022514914991368686,
+      "ulcer": 0.6568694058670425,
+      "ulcer_perf": -0.04852945951912962,
+      "model": "F1_A4",
+      "raw_signals": 1104,
+      "eligible_signals": 21,
+      "net_total": -82.54000000000008,
+      "gross_total": -35.5,
+      "gross_mean": -1.6904761904761905,
+      "trade_t": -0.1182411373022618,
+      "daily_NW5": -0.11587244216858197,
+      "state_counts": {
+        "resolved": 21
+      },
+      "unresolved": 0,
+      "censored": 0,
+      "gross_pass": false,
+      "years": [
+        {
+          "year": 2018,
+          "net_mnq": -42.739999999999995
+        },
+        {
+          "year": 2019,
+          "net_mnq": 63.059999999999974
+        },
+        {
+          "year": 2020,
+          "net_mnq": -256.94000000000005
+        },
+        {
+          "year": 2021,
+          "net_mnq": -147.20000000000005
+        },
+        {
+          "year": 2022,
+          "net_mnq": 301.28
+        }
+      ],
+      "sides": [
+        {
+          "side": -1,
+          "trades": 8,
+          "win": 0.25,
+          "avg": -17.115000000000006,
+          "annual": -26.439724137931048,
+          "sharpe": -0.11552117834847456,
+          "sortino": -0.21484673390811718,
+          "profit_factor": 0.7669208770257387,
+          "max_dd": 587.4400000000023,
+          "calmar": -0.04500838236744339,
+          "ulcer": 0.5381427108122394,
+          "ulcer_perf": -0.0982628719360504,
+          "net_total": -136.92000000000004,
+          "trade_t": -0.2470648268050395
+        },
+        {
+          "side": 1,
+          "trades": 13,
+          "win": 0.46153846153846156,
+          "avg": 4.183076923076919,
+          "annual": 10.500965517241367,
+          "sharpe": 0.05432636941122624,
+          "sortino": 0.0746243726762223,
+          "profit_factor": 1.0856809730888004,
+          "max_dd": 281.4599999999991,
+          "calmar": 0.03730890896483124,
+          "ulcer": 0.19176988034023387,
+          "ulcer_perf": 0.10951631714647563,
+          "net_total": 54.37999999999994,
+          "trade_t": 0.11889242026927972
+        }
+      ],
+      "risk_points_quantiles": {
+        "0.0": 6.5,
+        "0.5": 64.0,
+        "0.95": 115.75,
+        "1.0": 137.0
+      },
+      "economic_gate": false,
+      "complete_data_gate": true,
+      "design_pass": false,
+      "stop_first": {
+        "trades": 21,
+        "win": 0.38095238095238093,
+        "avg": -3.930476190476194,
+        "annual": -15.938758620689681,
+        "sharpe": -0.05320378134035226,
+        "sortino": -0.08526204469294726,
+        "profit_factor": 0.9324616240631033,
+        "max_dd": 707.9199999999983,
+        "calmar": -0.022514914991368686,
+        "ulcer": 0.6568694058670425,
+        "ulcer_perf": -0.04852945951912962,
+        "model": "F1_A4_stop_first",
+        "raw_signals": 1104,
+        "eligible_signals": 21,
+        "net_total": -82.54000000000008,
+        "gross_total": -35.5,
+        "gross_mean": -1.6904761904761905,
+        "trade_t": -0.1182411373022618,
+        "daily_NW5": -0.11587244216858197,
+        "state_counts": {
+          "resolved": 21
+        },
+        "unresolved": 0,
+        "censored": 0,
+        "gross_pass": false,
+        "years": [
+          {
+            "year": 2018,
+            "net_mnq": -42.739999999999995
+          },
+          {
+            "year": 2019,
+            "net_mnq": 63.059999999999974
+          },
+          {
+            "year": 2020,
+            "net_mnq": -256.94000000000005
+          },
+          {
+            "year": 2021,
+            "net_mnq": -147.20000000000005
+          },
+          {
+            "year": 2022,
+            "net_mnq": 301.28
+          }
+        ],
+        "sides": [
+          {
+            "side": -1,
+            "trades": 8,
+            "win": 0.25,
+            "avg": -17.115000000000006,
+            "annual": -26.439724137931048,
+            "sharpe": -0.11552117834847456,
+            "sortino": -0.21484673390811718,
+            "profit_factor": 0.7669208770257387,
+            "max_dd": 587.4400000000023,
+            "calmar": -0.04500838236744339,
+            "ulcer": 0.5381427108122394,
+            "ulcer_perf": -0.0982628719360504,
+            "net_total": -136.92000000000004,
+            "trade_t": -0.2470648268050395
+          },
+          {
+            "side": 1,
+            "trades": 13,
+            "win": 0.46153846153846156,
+            "avg": 4.183076923076919,
+            "annual": 10.500965517241367,
+            "sharpe": 0.05432636941122624,
+            "sortino": 0.0746243726762223,
+            "profit_factor": 1.0856809730888004,
+            "max_dd": 281.4599999999991,
+            "calmar": 0.03730890896483124,
+            "ulcer": 0.19176988034023387,
+            "ulcer_perf": 0.10951631714647563,
+            "net_total": 54.37999999999994,
+            "trade_t": 0.11889242026927972
+          }
+        ],
+        "risk_points_quantiles": {
+          "0.0": 6.5,
+          "0.5": 64.0,
+          "0.95": 115.75,
+          "1.0": 137.0
+        },
+        "economic_gate": false,
+        "complete_data_gate": true,
+        "design_pass": false
+      },
+      "extra_cost_net": -129.5800000000001,
+      "breakeven_extra_cost_per_trade": -3.930476190476194,
+      "collision_count": 0,
+      "entry_gap_stop_count": 0,
+      "filter_design_pass": false
+    }
+  ],
+  "references": [
+    {
+      "trades": 408,
+      "win": 0.48284313725490197,
+      "avg": 12.000196078431365,
+      "annual": 945.4499310344821,
+      "sharpe": 0.5240603225465927,
+      "sortino": 0.8354168346472873,
+      "profit_factor": 1.1911624721713998,
+      "max_dd": 2406.600000000006,
+      "calmar": 0.3928571142003157,
+      "ulcer": 1.9217149044717285,
+      "ulcer_perf": 0.9839648210402805,
+      "model": "original_full_baseline",
+      "raw_signals": 1104,
+      "eligible_signals": 412,
+      "net_total": 4896.079999999997,
+      "gross_total": 5810.0,
+      "gross_mean": 14.240196078431373,
+      "trade_t": 1.2179408013675908,
+      "daily_NW5": 1.1940374487526253,
+      "state_counts": {
+        "resolved": 408,
+        "unresolved_missing": 1
+      },
+      "unresolved": 1,
+      "censored": 0,
+      "gross_pass": true,
+      "years": [
+        {
+          "year": 2018,
+          "net_mnq": -612.7600000000004
+        },
+        {
+          "year": 2019,
+          "net_mnq": 499.8399999999998
+        },
+        {
+          "year": 2020,
+          "net_mnq": 650.0199999999991
+        },
+        {
+          "year": 2021,
+          "net_mnq": 1406.3199999999993
+        },
+        {
+          "year": 2022,
+          "net_mnq": 2952.659999999999
+        }
+      ],
+      "sides": [
+        {
+          "side": -1,
+          "trades": 204,
+          "win": 0.46568627450980393,
+          "avg": 14.796764705882351,
+          "annual": 582.8904827586204,
+          "sharpe": 0.44032947263874905,
+          "sortino": 0.7629802209033331,
+          "profit_factor": 1.221769489154488,
+          "max_dd": 1820.8199999999997,
+          "calmar": 0.32012526375952616,
+          "ulcer": 1.7248035392318455,
+          "ulcer_perf": 0.6758920300200857,
+          "net_total": 3018.5399999999995,
+          "trade_t": 1.0020431344446759
+        },
+        {
+          "side": 1,
+          "trades": 204,
+          "win": 0.5,
+          "avg": 9.203627450980385,
+          "annual": 362.5594482758619,
+          "sharpe": 0.3094780589803186,
+          "sortino": 0.501165620569188,
+          "profit_factor": 1.1564488900073162,
+          "max_dd": 1599.9199999999983,
+          "calmar": 0.22661098572170002,
+          "ulcer": 1.0526115037726265,
+          "ulcer_perf": 0.6888760895666175,
+          "net_total": 1877.5399999999986,
+          "trade_t": 0.7035265081941625
+        }
+      ],
+      "risk_points_quantiles": {
+        "0.0": 6.5,
+        "0.5": 110.25,
+        "0.95": 301.13749999999993,
+        "1.0": 776.25
+      },
+      "economic_gate": false,
+      "complete_data_gate": false,
+      "design_pass": false
+    },
+    {
+      "trades": 408,
+      "win": 0.48284313725490197,
+      "avg": 12.000196078431365,
+      "annual": 945.4499310344821,
+      "sharpe": 0.5240603225465927,
+      "sortino": 0.8354168346472873,
+      "profit_factor": 1.1911624721713998,
+      "max_dd": 2406.600000000006,
+      "calmar": 0.3928571142003157,
+      "ulcer": 1.9217149044717285,
+      "ulcer_perf": 0.9839648210402805,
+      "model": "corrected_full_baseline",
+      "raw_signals": 1104,
+      "eligible_signals": 412,
+      "net_total": 4896.079999999997,
+      "gross_total": 5810.0,
+      "gross_mean": 14.240196078431373,
+      "trade_t": 1.2179408013675908,
+      "daily_NW5": 1.1940374487526253,
+      "state_counts": {
+        "resolved": 408,
+        "unresolved_missing": 1
+      },
+      "unresolved": 1,
+      "censored": 0,
+      "gross_pass": true,
+      "years": [
+        {
+          "year": 2018,
+          "net_mnq": -612.7600000000004
+        },
+        {
+          "year": 2019,
+          "net_mnq": 499.8399999999998
+        },
+        {
+          "year": 2020,
+          "net_mnq": 650.0199999999991
+        },
+        {
+          "year": 2021,
+          "net_mnq": 1406.3199999999993
+        },
+        {
+          "year": 2022,
+          "net_mnq": 2952.659999999999
+        }
+      ],
+      "sides": [
+        {
+          "side": -1,
+          "trades": 204,
+          "win": 0.46568627450980393,
+          "avg": 14.796764705882351,
+          "annual": 582.8904827586204,
+          "sharpe": 0.44032947263874905,
+          "sortino": 0.7629802209033331,
+          "profit_factor": 1.221769489154488,
+          "max_dd": 1820.8199999999997,
+          "calmar": 0.32012526375952616,
+          "ulcer": 1.7248035392318455,
+          "ulcer_perf": 0.6758920300200857,
+          "net_total": 3018.5399999999995,
+          "trade_t": 1.0020431344446759
+        },
+        {
+          "side": 1,
+          "trades": 204,
+          "win": 0.5,
+          "avg": 9.203627450980385,
+          "annual": 362.5594482758619,
+          "sharpe": 0.3094780589803186,
+          "sortino": 0.501165620569188,
+          "profit_factor": 1.1564488900073162,
+          "max_dd": 1599.9199999999983,
+          "calmar": 0.22661098572170002,
+          "ulcer": 1.0526115037726265,
+          "ulcer_perf": 0.6888760895666175,
+          "net_total": 1877.5399999999986,
+          "trade_t": 0.7035265081941625
+        }
+      ],
+      "risk_points_quantiles": {
+        "0.0": 6.5,
+        "0.5": 110.25,
+        "0.95": 301.13749999999993,
+        "1.0": 776.25
+      },
+      "economic_gate": false,
+      "complete_data_gate": false,
+      "design_pass": false
+    }
+  ],
+  "coverage_exclusions": {
+    "full_baseline_states": {
+      "resolved": 175,
+      "unresolved_missing": 1
+    },
+    "resolved_net": -828.5000000000011,
+    "note": "Coverage/warmup exclusion, not predictive filter alpha; rerun opportunity sets may differ."
+  },
+  "filter_diagnostics": {
+    "F1": {
+      "kept": {
+        "count": 41,
+        "net_total": -521.8400000000003,
+        "net_mean": -12.727804878048786,
+        "trade_t": -0.529157631339945,
+        "max_dd": 1237.5800000000002,
+        "metrics": {
+          "trades": 41,
+          "win": 0.36585365853658536,
+          "avg": -12.727804878048786,
+          "annual": -100.76910344827589,
+          "sharpe": -0.24183400500477648,
+          "sortino": -0.3439521086239844,
+          "profit_factor": 0.8085159472193274,
+          "max_dd": 1237.5800000000017,
+          "calmar": -0.08142431474997636,
+          "ulcer": 1.084068087080821,
+          "ulcer_perf": -0.18590917793664966
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "removed": {
+        "count": 192,
+        "net_total": 6246.419999999998,
+        "net_mean": 32.53343749999999,
+        "trade_t": 2.050876106583293,
+        "max_dd": 1573.8999999999983,
+        "metrics": {
+          "trades": 192,
+          "win": 0.546875,
+          "avg": 32.53343749999999,
+          "annual": 1206.20524137931,
+          "sharpe": 0.8668489276022643,
+          "sortino": 1.3918575641343227,
+          "profit_factor": 1.5195444020068403,
+          "max_dd": 1573.8999999999942,
+          "calmar": 0.7663798471181871,
+          "ulcer": 0.7031842724020798,
+          "ulcer_perf": 3.430694595198806
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "strata": [
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 3,
+          "kept_count": 1,
+          "removed_count": 2
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 7,
+          "kept_count": 4,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 3,
+          "removed_count": 4
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 10,
+          "kept_count": 4,
+          "removed_count": 6
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 3,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 1,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 3,
+          "removed_count": 8
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 1,
+          "removed_count": 7
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 6,
+          "removed_count": 5
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 0,
+          "removed_count": 7
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 8,
+          "kept_count": 0,
+          "removed_count": 8
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 12,
+          "kept_count": 4,
+          "removed_count": 8
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 9,
+          "kept_count": 0,
+          "removed_count": 9
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 2,
+          "removed_count": 9
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 15,
+          "kept_count": 2,
+          "removed_count": 13
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 1,
+          "removed_count": 4
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 8,
+          "kept_count": 2,
+          "removed_count": 6
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 4,
+          "kept_count": 1,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 0,
+          "removed_count": 6
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        }
+      ],
+      "kept_net": -521.8400000000003,
+      "base_net": 5724.579999999998,
+      "removed_net": 6246.419999999998,
+      "p_profit": 0.8771228771228772,
+      "p_dd": 0.6443556443556444,
+      "p_joint": 0.6353646353646354,
+      "profit_p_plus_one": 0.8771228771228772,
+      "dd_p_plus_one": 0.6443556443556444,
+      "joint_p_plus_one": 0.6353646353646354,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "unique_memberships": 1000,
+      "unique_daily_paths": 1000,
+      "unique_profit_dd_pairs": 1000,
+      "strata_with_random_choice": 16,
+      "artifacts": {
+        "strata.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/strata.csv",
+        "observed_membership.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/observed_membership.csv",
+        "observed_daily.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/observed_daily.csv",
+        "random_selected_ids.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/random_selected_ids.csv",
+        "random_summary.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/random_summary.csv",
+        "random_daily_paths.npz": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/random_daily_paths.npz"
+      }
+    },
+    "F1_5": {
+      "kept": {
+        "count": 79,
+        "net_total": -634.9600000000007,
+        "net_mean": -8.03746835443039,
+        "trade_t": -0.3828111337234269,
+        "max_dd": 1670.6000000000001,
+        "metrics": {
+          "trades": 79,
+          "win": 0.379746835443038,
+          "avg": -8.03746835443039,
+          "annual": -122.61296551724149,
+          "sharpe": -0.16839906802185195,
+          "sortino": -0.24993897674778703,
+          "profit_factor": 0.8948438788657661,
+          "max_dd": 1670.5999999999985,
+          "calmar": -0.0733945681295592,
+          "ulcer": 1.1226348801814263,
+          "ulcer_perf": -0.21843783349654397
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "removed": {
+        "count": 154,
+        "net_total": 6359.539999999999,
+        "net_mean": 41.29571428571428,
+        "trade_t": 2.3297802278146422,
+        "max_dd": 1238.98,
+        "metrics": {
+          "trades": 154,
+          "win": 0.5844155844155844,
+          "avg": 41.29571428571428,
+          "annual": 1228.0491034482754,
+          "sharpe": 0.9611234137361342,
+          "sortino": 1.541977538673982,
+          "profit_factor": 1.730154101214026,
+          "max_dd": 1238.979999999996,
+          "calmar": 0.9911775036306313,
+          "ulcer": 0.556860900323247,
+          "ulcer_perf": 4.410613504145889
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "strata": [
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 3,
+          "kept_count": 2,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 7,
+          "kept_count": 4,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 5,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 10,
+          "kept_count": 8,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 3,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 2,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 6,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 2,
+          "removed_count": 6
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 1,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 9,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 0,
+          "removed_count": 7
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 8,
+          "kept_count": 0,
+          "removed_count": 8
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 12,
+          "kept_count": 6,
+          "removed_count": 6
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 9,
+          "kept_count": 3,
+          "removed_count": 6
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 3,
+          "removed_count": 8
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 15,
+          "kept_count": 8,
+          "removed_count": 7
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 8,
+          "kept_count": 5,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 4,
+          "kept_count": 1,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 2,
+          "removed_count": 4
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        }
+      ],
+      "kept_net": -634.9600000000007,
+      "base_net": 5724.579999999998,
+      "removed_net": 6359.539999999999,
+      "p_profit": 0.975024975024975,
+      "p_dd": 0.8411588411588412,
+      "p_joint": 0.8391608391608392,
+      "profit_p_plus_one": 0.975024975024975,
+      "dd_p_plus_one": 0.8411588411588412,
+      "joint_p_plus_one": 0.8391608391608392,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "unique_memberships": 1000,
+      "unique_daily_paths": 1000,
+      "unique_profit_dd_pairs": 1000,
+      "strata_with_random_choice": 20,
+      "artifacts": {
+        "strata.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/strata.csv",
+        "observed_membership.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/observed_membership.csv",
+        "observed_daily.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/observed_daily.csv",
+        "random_selected_ids.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/random_selected_ids.csv",
+        "random_summary.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/random_summary.csv",
+        "random_daily_paths.npz": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/random_daily_paths.npz"
+      }
+    },
+    "A4": {
+      "kept": {
+        "count": 117,
+        "net_total": 1038.9199999999992,
+        "net_mean": 8.879658119658112,
+        "trade_t": 0.4880974055500506,
+        "max_dd": 1512.3000000000002,
+        "metrics": {
+          "trades": 117,
+          "win": 0.4700854700854701,
+          "avg": 8.879658119658112,
+          "annual": 200.61903448275845,
+          "sharpe": 0.21512623621880586,
+          "sortino": 0.3537129072877351,
+          "profit_factor": 1.1381105448009807,
+          "max_dd": 1512.2999999999956,
+          "calmar": 0.13265822553908552,
+          "ulcer": 1.2466318368433869,
+          "ulcer_perf": 0.3218577105984211
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "removed": {
+        "count": 116,
+        "net_total": 4685.66,
+        "net_mean": 40.39362068965517,
+        "trade_t": 1.9547263754261166,
+        "max_dd": 1263.699999999999,
+        "metrics": {
+          "trades": 116,
+          "win": 0.5603448275862069,
+          "avg": 40.39362068965517,
+          "annual": 904.8171034482756,
+          "sharpe": 0.8496079932442316,
+          "sortino": 1.4615818715764237,
+          "profit_factor": 1.6484678385881584,
+          "max_dd": 1263.699999999997,
+          "calmar": 0.7160062542124537,
+          "ulcer": 0.5306818740776706,
+          "ulcer_perf": 3.410016990012538
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "strata": [
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 3,
+          "kept_count": 1,
+          "removed_count": 2
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 2,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 2,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 5,
+          "kept_count": 1,
+          "removed_count": 4
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 7,
+          "kept_count": 6,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 7,
+          "removed_count": 0
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 2,
+          "removed_count": 0
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 10,
+          "kept_count": 5,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 4,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 4,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 5,
+          "removed_count": 6
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 4,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 1,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 4,
+          "kept_count": 3,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 2,
+          "removed_count": 0
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 6,
+          "removed_count": 5
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 2,
+          "removed_count": 5
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 8,
+          "kept_count": 2,
+          "removed_count": 6
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 2,
+          "removed_count": 0
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 12,
+          "kept_count": 8,
+          "removed_count": 4
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 9,
+          "kept_count": 1,
+          "removed_count": 8
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 1,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 6,
+          "removed_count": 5
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 15,
+          "kept_count": 10,
+          "removed_count": 5
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 2,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 8,
+          "kept_count": 2,
+          "removed_count": 6
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 4,
+          "kept_count": 2,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 1,
+          "removed_count": 5
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 2,
+          "removed_count": 0
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 4,
+          "kept_count": 2,
+          "removed_count": 2
+        }
+      ],
+      "kept_net": 1038.9199999999992,
+      "base_net": 5724.579999999998,
+      "removed_net": 4685.66,
+      "p_profit": 0.7892107892107892,
+      "p_dd": 0.5374625374625375,
+      "p_joint": 0.5084915084915085,
+      "profit_p_plus_one": 0.7892107892107892,
+      "dd_p_plus_one": 0.5374625374625375,
+      "joint_p_plus_one": 0.5084915084915085,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "unique_memberships": 1000,
+      "unique_daily_paths": 1000,
+      "unique_profit_dd_pairs": 1000,
+      "strata_with_random_choice": 34,
+      "artifacts": {
+        "strata.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/strata.csv",
+        "observed_membership.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/observed_membership.csv",
+        "observed_daily.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/observed_daily.csv",
+        "random_selected_ids.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/random_selected_ids.csv",
+        "random_summary.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/random_summary.csv",
+        "random_daily_paths.npz": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/random_daily_paths.npz"
+      }
+    },
+    "F1_A4": {
+      "kept": {
+        "count": 21,
+        "net_total": -82.54000000000008,
+        "net_mean": -3.930476190476194,
+        "trade_t": -0.1182411373022618,
+        "max_dd": 707.9200000000001,
+        "metrics": {
+          "trades": 21,
+          "win": 0.38095238095238093,
+          "avg": -3.930476190476194,
+          "annual": -15.938758620689683,
+          "sharpe": -0.05320378134035227,
+          "sortino": -0.08526204469294728,
+          "profit_factor": 0.9324616240631033,
+          "max_dd": 707.9199999999983,
+          "calmar": -0.02251491499136869,
+          "ulcer": 0.6568694058670425,
+          "ulcer_perf": -0.04852945951912963
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "removed": {
+        "count": 212,
+        "net_total": 5807.119999999999,
+        "net_mean": 27.39207547169811,
+        "trade_t": 1.8541054880956536,
+        "max_dd": 1873.3599999999997,
+        "metrics": {
+          "trades": 212,
+          "win": 0.5283018867924528,
+          "avg": 27.39207547169811,
+          "annual": 1121.3748965517239,
+          "sharpe": 0.7825612307154304,
+          "sortino": 1.231621010072177,
+          "profit_factor": 1.429330178914683,
+          "max_dd": 1873.3600000000006,
+          "calmar": 0.5985901783702671,
+          "ulcer": 0.8161452427345646,
+          "ulcer_perf": 2.7479787612177
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "strata": [
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 7,
+          "kept_count": 3,
+          "removed_count": 4
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 3,
+          "removed_count": 4
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 10,
+          "kept_count": 2,
+          "removed_count": 8
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 2,
+          "removed_count": 6
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 1,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 1,
+          "removed_count": 10
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 0,
+          "removed_count": 8
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 2,
+          "removed_count": 9
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 0,
+          "removed_count": 7
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 8,
+          "kept_count": 0,
+          "removed_count": 8
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 12,
+          "kept_count": 3,
+          "removed_count": 9
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 9,
+          "kept_count": 0,
+          "removed_count": 9
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 0,
+          "removed_count": 11
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 15,
+          "kept_count": 1,
+          "removed_count": 14
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 8,
+          "kept_count": 1,
+          "removed_count": 7
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 4,
+          "kept_count": 1,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 0,
+          "removed_count": 6
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        }
+      ],
+      "kept_net": -82.54000000000008,
+      "base_net": 5724.579999999998,
+      "removed_net": 5807.119999999999,
+      "p_profit": 0.6233766233766234,
+      "p_dd": 0.4985014985014985,
+      "p_joint": 0.45054945054945056,
+      "profit_p_plus_one": 0.6233766233766234,
+      "dd_p_plus_one": 0.4985014985014985,
+      "joint_p_plus_one": 0.45054945054945056,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "unique_memberships": 1000,
+      "unique_daily_paths": 1000,
+      "unique_profit_dd_pairs": 1000,
+      "strata_with_random_choice": 11,
+      "artifacts": {
+        "strata.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/strata.csv",
+        "observed_membership.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/observed_membership.csv",
+        "observed_daily.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/observed_daily.csv",
+        "random_selected_ids.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/random_selected_ids.csv",
+        "random_summary.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/random_summary.csv",
+        "random_daily_paths.npz": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/random_daily_paths.npz"
+      }
+    }
+  },
+  "subset_base": {
+    "count": 233,
+    "net_total": 5724.579999999998,
+    "net_mean": 24.569012875536473,
+    "trade_t": 1.784548334514207,
+    "max_dd": 1873.3599999999997,
+    "metrics": {
+      "trades": 233,
+      "win": 0.5150214592274678,
+      "avg": 24.569012875536473,
+      "annual": 1105.4361379310342,
+      "sharpe": 0.7578809877202819,
+      "sortino": 1.1939899255686177,
+      "profit_factor": 1.3881565921622554,
+      "max_dd": 1873.3600000000006,
+      "calmar": 0.5900820653430381,
+      "ulcer": 0.9263618470228189,
+      "ulcer_perf": 2.386618450411644
+    },
+    "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+  },
+  "subset_daily_verified": true,
+  "survivors": [],
+  "design_dates": {
+    "start": "2018-01-01",
+    "end": "2022-12-30"
+  }
+}
