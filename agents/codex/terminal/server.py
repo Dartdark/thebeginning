@@ -10,6 +10,7 @@ from pathlib import Path
 import subprocess
 import threading
 import webbrowser
+import scout
 from urllib.parse import unquote, urlsplit, parse_qs
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -19,6 +20,24 @@ LOCK = threading.Lock()
 DOC_DIRS = ('agents/codex/results', 'agents/codex/evidence', 'agents/codex/plans')
 SINGLE = ('TODO.md', 'agents/codex/EXECUTION_REFERENCES.md', 'agents/codex/RESEARCH_CONTROLS.md')
 CSV_NAMES = {'endpoint_metrics.csv', 'personal.csv', 'funded.csv', 'evaluations.csv'}
+SCOUT_RUNNING = threading.Lock()
+
+
+def scout_state():
+    result=scout.list_state(ROOT,RUNTIME)
+    directory=ROOT/'agents/codex/research/scout'
+    config_path=directory/'config.json'
+    if config_path.exists():result['config'].update(json.loads(config_path.read_text(encoding='utf-8')))
+    reviews=[]
+    for p in sorted((directory/'records').glob('*.json')):
+        try:
+            record=json.loads(p.read_text(encoding='utf-8'))
+            if isinstance(record,dict):reviews.append(record)
+        except (ValueError,OSError):continue
+    result['reviews']=reviews
+    progress=directory/'progress.json'
+    if progress.exists():result['progress']=json.loads(progress.read_text(encoding='utf-8'))
+    return result
 
 
 def relative(p): return str(p.relative_to(ROOT)).replace(os.sep, '/')
@@ -42,20 +61,20 @@ def result_paths():
 
 def state():
     p=RUNTIME/'state.json'
-    return json.loads(p.read_text()) if p.exists() else {'revision':0,'notes':[],'inbox':[]}
+    return json.loads(p.read_text(encoding='utf-8')) if p.exists() else {'revision':0,'notes':[],'inbox':[]}
 
 
 def save(value):
     RUNTIME.mkdir(parents=True,exist_ok=True)
     temp=RUNTIME/'state.tmp'
-    temp.write_text(json.dumps(value,indent=2))
+    temp.write_text(json.dumps(value,indent=2),encoding='utf-8')
     temp.replace(RUNTIME/'state.json')
 
 
 def catalog():
     docs=[]
     for p in document_paths():
-        content=p.read_text(errors='replace')
+        content=p.read_text(encoding='utf-8',errors='replace')
         lines=content.splitlines()
         title=next((s.lstrip('# ').strip() for s in lines if s.startswith('# ')),p.stem)
         summary=content.split('Summary:',1)[1].split('\n\n',1)[0].strip() if 'Summary:' in content else ''
@@ -67,8 +86,8 @@ def catalog():
     except (OSError,subprocess.CalledProcessError): commit='unavailable'
     return dict(documents=docs,commit=commit,branch='codex/work',
                 results=[dict(path=relative(p),name=relative(p).replace('analysis/outputs/','')) for p in result_paths()],
-                queue=(ROOT/'TODO.md').read_text().split('## Promising strategies awaiting verification',1)[-1].split('\n## Later',1)[0],
-                execution=(ROOT/'agents/codex/EXECUTION_REFERENCES.md').read_text())
+                queue=(ROOT/'TODO.md').read_text(encoding='utf-8').split('## Promising strategies awaiting verification',1)[-1].split('\n## Later',1)[0],
+                execution=(ROOT/'agents/codex/EXECUTION_REFERENCES.md').read_text(encoding='utf-8'))
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -96,8 +115,9 @@ class Handler(BaseHTTPRequestHandler):
         try:
             if u.path=='/api/catalog': return self.respond(catalog())
             if u.path=='/api/state': return self.respond(state())
+            if u.path=='/api/scout': return self.respond(scout_state())
             if u.path=='/api/document':
-                p=resolve_document(q.get('path',[''])[0]);return self.respond({'content':p.read_text()})
+                p=resolve_document(q.get('path',[''])[0]);return self.respond({'content':p.read_text(encoding='utf-8')})
             if u.path=='/api/result':
                 p=(ROOT/q.get('path',[''])[0]).resolve()
                 if p not in [v.resolve() for v in result_paths()]:raise ValueError('Unknown result')
@@ -121,6 +141,12 @@ class Handler(BaseHTTPRequestHandler):
             size=int(self.headers.get('Content-Length','0'))
             if not 0<size<=20*1024*1024:raise ValueError('Choose a file or request under 20 MB')
             body=self.rfile.read(size)
+            if self.path=='/api/scout/run':
+                if not SCOUT_RUNNING.acquire(blocking=False):return self.respond({'error':'Discovery is already running'},409)
+                try:
+                    scout.discover(ROOT,RUNTIME,max_results=20)
+                    return self.respond(scout_state())
+                finally:SCOUT_RUNNING.release()
             with LOCK:
                 s=state()
                 if self.path=='/api/upload':

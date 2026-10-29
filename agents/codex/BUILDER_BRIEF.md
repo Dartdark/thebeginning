@@ -189,3 +189,18 @@ provide an honest blocked result; distinguish labeled partial replications from 
 Existing trial budgets, stop rules, point-in-time controls, cost accounting and live boundaries remain binding.
 No repeated permission question is needed for these research steps. This is a workflow instruction while tasks run,
 not a background schedule, authorization to spend money on subscriptions, or permission to trade/change live systems.
+
+## Autonomous SSRN scout (user, 2026-10-29)
+
+The separately configured daily **SSRN research scout** follows [WORKFLOW.md](research/scout/WORKFLOW.md),
+[progress.json](research/scout/progress.json) and [config.json](research/scout/config.json). Resume its unfinished
+committed work first; never resume/reset paused t6 or Strategy Hunt v2. Preserve earlier selection/trial history.
+First-batch caps:10 hypotheses/30 economic definitions INCLUDING gross screens and controls; max1 new hypothesis
+and3 full-source reviews per cycle; max3 candidates/5 total definitions per hypothesis. Checked-head lease,
+committed reservation, evidence and preregistered exact code precede returns. Run the scout artifact-admission
+check before first design outcomes; admission is not independent economic verification. All existing research
+gates still apply. At a cap stop returns and notify once; metadata/source triage may continue.
+Keep per-paper JSON records and access/run receipts; release the lease and deduplicate actionable notifications.
+Use permitted connected search when Crossref is blocked; respect access controls and never inspect credentials.
+Source-only claims remain unverified. Alert through this app only for new concrete merit, material results or a
+genuine user-action blocker; otherwise stay quiet. Terminal records appear after pull/refresh, not live sync.

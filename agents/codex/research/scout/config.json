@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "scheduled_agent_configured": true,
+  "automation_id": "6ae3863373308191b6f40c63f610a800",
+  "cadence": "daily",
+  "timezone": "America/Los_Angeles",
+  "schedule": "BEGIN:VEVENT\nDTSTART:20261029T174623Z\nRRULE:FREQ=DAILY\nEND:VEVENT",
+  "schedule_status": "created_enabled",
+  "status_verified_at": "2026-10-29T17:45:44.867Z",
+  "status_note": "Enabled when created. This local view does not query live scheduler status; app automation settings are authoritative.",
+  "local_discovery_only": true,
+  "automatic_backtests": false,
+  "scheduled_research": "gated_agent",
+  "workflow_path": "agents/codex/research/scout/WORKFLOW.md",
+  "budget": {
+    "max_hypotheses": 10,
+    "max_economic_definitions": 30,
+    "max_full_reviews_per_cycle": 3,
+    "max_new_hypotheses_per_cycle": 1
+  },
+  "notifications": "Only new worthwhile findings, material results or user-action blockers; quiet otherwise."
+}

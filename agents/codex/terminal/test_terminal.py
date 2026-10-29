@@ -5,6 +5,7 @@ from pathlib import Path
 import tempfile
 import threading
 import unittest
+from unittest.mock import patch
 import server
 
 
@@ -80,6 +81,20 @@ class TerminalTests(unittest.TestCase):
         self.assertEqual(status,400)
         status,_=self.request('/api/upload','POST',headers={'Content-Length':str(21*1024*1024)})
         self.assertEqual(status,400)
+
+    def test_scout_routes_and_busy_scan(self):
+        status,s=self.request('/api/scout');self.assertEqual(status,200)
+        self.assertIn('papers',s);self.assertIn('reviews',s)
+        def offline_discovery(root,runtime,max_results=20):
+            return server.scout.import_candidates(root,runtime,[dict(ssrn_id='9999999',title='Synthetic futures execution fixture')],source='offline test fixture')
+        with patch.object(server.scout,'discover',side_effect=offline_discovery):
+            status,s=self.request('/api/scout/run','POST','{}')
+            self.assertEqual(status,200);self.assertEqual(s['papers'][0]['evidence_level'],'metadata_only')
+            self.assertEqual(s['runs'][-1]['return_trials'],0)
+            server.SCOUT_RUNNING.acquire()
+            try:
+                status,_=self.request('/api/scout/run','POST','{}');self.assertEqual(status,409)
+            finally:server.SCOUT_RUNNING.release()
 
 
 if __name__=='__main__':unittest.main()

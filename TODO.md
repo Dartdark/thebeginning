@@ -125,6 +125,28 @@ add it here for later review. Record the merit, what is missing, the smallest ne
 duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.
 A queue entry does not add it to a trading plan or start a backtest; review when prerequisites arrive or the user prioritizes it.
 
+- [ ] **Clock-aware Treasury index-duration demand — WATCH / NEEDS FULL TEXT (2026-10-29), SSRN7601879.**
+  Specific merit: Bloomberg independently documents the U.S. index snapshot moving14:00→15:00CT effective2021-01-14;
+  the earlier failed ZN month-end A/B/C protocols exit13:59CT. Authors claim snapshot-centered price pressure,
+  stronger with forecast duration extensions; their1.19bp versus0.07bp abstract figures are not verified net returns.
+  Preserve the old negative A result (−$31/ZN net, t−1.4;2023+−$79.7); do not repeat unconditional month-end longs or tune its exit.
+  Smallest next check: obtain/pin lawful full text, extract exact source clocks and perform a no-return event/data census.
+  Need dated holiday/early-close regimes, contracts/rolls, pre-entry duration-forecast vintages and reconciled native costs.
+  Complete source/clock/data/power gates before TEST and any new bounded preregistration. No return trial started.
+  [Review](agents/codex/results/scout_buying_duration_20261029.md) · [Evidence](agents/codex/evidence/scout_buying_duration_20261029.md).
+
+- [ ] **Treasury auctions × next-day macro-announcement FX — WATCH / NEEDS FULL TEXT (2026-10-29), SSRN5207418.**
+  Merit: a specific scheduled interaction with direct FX transmission; authors claim roughly8bp foreign-currency
+  appreciation on release days following auctions, versus near zero on other release days. Not independently
+  verified, euro-specific or established net of costs. Different from the already weak same-day6E auction short;
+  retain that negative/weak cost evidence and audit overlap with the existing personal6E package.
+  Smallest next check: obtain/pin the full April2025 or March2026 version and extract exact currencies, clocks,
+  auction/release definitions and costs before selecting rules. Owned6E minutes/auction records and free Fed/BEA
+  calendar sources establish partial feasibility; complete as-of releases and contract/roll provenance remain missing.
+  No realized price-spike event proxy, silently truncated overnight window or return trial is authorized by this entry.
+  Apex15:59CT fit is unknown; personal overnight research is conditional on the verified source window.
+  [Review](agents/codex/results/scout_fx_auctions_20261029.md) · [Evidence](agents/codex/evidence/scout_fx_auctions_20261029.md).
+
 - [ ] **U.S. factor-beta stock baskets — PARTIAL SCREEN FAIL; exact replication unverified (2026-10-29).**
   Authorized restricted S&P500/SPY-beta screen is completed under a committed plan:2018–22 covered-day overnight +3.93bp gross/−0.66bp net, intraday +0.89/−3.52bp under4bp RT plus borrow.
   120/114 of1,259 selected days are unresolved after acquisitions; quoted returns are conditional diagnostics, not a complete native cash ledger. Rounded shares do not rescue it. No2023+ or funded bench opened.

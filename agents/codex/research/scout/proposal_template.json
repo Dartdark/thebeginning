@@ -1,0 +1,86 @@
+{
+  "_instructions": "Copy proposal_body below into proposals/NAME.json and commit it with review/evidence/plan/code/reservation. Pass envelope_template separately after substituting the real committed SHA. Do not pass this entire instructional wrapper to the CLI.",
+  "envelope_template": {
+    "preregistration_commit": "FULL_SHA_OF_COMMITTED_PROPOSAL_AND_ARTIFACTS",
+    "proposal_path": "agents/codex/research/scout/proposals/NAME.json"
+  },
+  "proposal_body": {
+    "hypothesis_id": "REPLACE_WITH_RESERVED_FAMILY",
+    "run_id": "REPLACE_WITH_LEASE_RUN_ID",
+    "lease_owner": "REPLACE_WITH_LEASE_OWNER",
+    "source_id": "ssrn:REPLACE",
+    "phase": "design",
+    "design_start": "2018-01-01",
+    "design_end": "2022-12-31",
+    "candidate_variants": 1,
+    "control_variants": 1,
+    "definition_ids": [
+      "FAMILY_candidate_1",
+      "FAMILY_control_1"
+    ],
+    "review_record": "agents/codex/research/scout/records/SSRN_ID.json",
+    "evidence_path": "agents/codex/evidence/scout_FAMILY.md",
+    "plan_path": "agents/codex/plans/scout_FAMILY.md",
+    "code_paths": [
+      "analysis/codex_scout_FAMILY.py"
+    ],
+    "inputs": [
+      {
+        "path": "data/REPLACE",
+        "sha256": "REPLACE_WITH_ACTUAL_INPUT_HASH",
+        "permission": "permitted_access",
+        "provenance": "REPLACE_WITH_SOURCE_AND_ACCESS_BASIS"
+      }
+    ],
+    "information_clock": "",
+    "native_costs": "",
+    "entry_exit_rule": "",
+    "gross_stop_rule": "",
+    "data_failure_stop_rule": "",
+    "artifact_sha256": {
+      "agents/codex/research/scout/records/SSRN_ID.json": "SHA256_OF_EXACT_REVIEW_RECORD_BYTES",
+      "agents/codex/evidence/scout_FAMILY.md": "SHA256_OF_EXACT_EVIDENCE_BYTES",
+      "agents/codex/plans/scout_FAMILY.md": "SHA256_OF_EXACT_PLAN_BYTES",
+      "analysis/codex_scout_FAMILY.py": "SHA256_OF_EXACT_CODE_BYTES"
+    }
+  },
+  "reservation_template": {
+    "hypothesis_id": "REPLACE_WITH_RESERVED_FAMILY",
+    "run_id": "REPLACE_WITH_LEASE_RUN_ID",
+    "source_id": "ssrn:REPLACE",
+    "proposal_path": "agents/codex/research/scout/proposals/NAME.json",
+    "candidate_variants": 1,
+    "control_variants": 1,
+    "economic_definitions": 2,
+    "definition_ids": [
+      "FAMILY_candidate_1",
+      "FAMILY_control_1"
+    ],
+    "status": "reserved",
+    "proposal_sha256": "SHA256_OF_EXACT_COMMITTED_PROPOSAL_BODY_BYTES"
+  },
+  "lease_template": {
+    "run_id": "REPLACE_WITH_LEASE_RUN_ID",
+    "owner": "REPLACE_WITH_LEASE_OWNER",
+    "claimed_at": "REPLACE_WITH_UTC_ISO8601",
+    "expires_at": "REPLACE_WITH_UTC_ISO8601_NO_MORE_THAN_TWO_HOURS_LATER",
+    "checked_parent": "FULL_SHA_OF_REMOTE_HEAD_CHECKED_BEFORE_CLAIM_COMMIT"
+  },
+  "source_review_additions": {
+    "id": "ssrn:REPLACE",
+    "hypothesis_id": "REPLACE_WITH_RESERVED_FAMILY",
+    "evidence_path": "agents/codex/evidence/scout_FAMILY.md",
+    "plan_path": "agents/codex/plans/scout_FAMILY.md",
+    "return_eligibility": "TEST_ONLY_AFTER_REAL_SOURCE_AND_EVIDENCE_GATES",
+    "source_artifact": {
+      "path": "agents/codex/inputs/REPLACE.pdf",
+      "sha256": "REPLACE_WITH_ACTUAL_SOURCE_HASH",
+      "permission": "open_access",
+      "provenance": "REPLACE_WITH_PRIMARY_SOURCE_URL_OR_OWNED_UPLOAD",
+      "version": "REPLACE_WITH_SOURCE_REVISION",
+      "access_method": "REPLACE_WITH_ACTUAL_RETRIEVAL_METHOD"
+    }
+  },
+  "cli_template": "python agents/codex/terminal/scout_gates.py check ENVELOPE.json --confirmed-claim FETCHED_CLAIM_SHA",
+  "limits": "Fetch origin refs/heads/codex/work:refs/remotes/origin/codex/work outside the read-only gate. Admission verifies a local fetched snapshot only; reread the remote claim before returns. It does not certify source truth, economic merit or implementation parity."
+}

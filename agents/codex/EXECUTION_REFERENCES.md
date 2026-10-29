@@ -135,6 +135,20 @@ Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
 - Next check: record publication/receipt, measurement-window end, decision and first executable fill; fit any forecast transformation on past data only. Reconcile the same events and controls across attribution windows.
 - Status: timing/measurement reference; no FOMC strategy reopening or automatic experiment.
 
+- Added2026-10-29: **benchmark clocks change by era.** Bloomberg's [October15 2024 methodology](https://data.bloomberglp.com/professional/sites/27/Fixed-Income-Index-Methodology.pdf),
+  printed p.80, moves ordinary U.S. Treasury index pricing15:00→16:00 NewYork (14:00→15:00CT), effective2021-01-14.
+  Early-close pricing has separate dated exceptions, including January14–November25 2021. Use named timezones and
+  an explicit event calendar; a provider snapshot is not an executable futures fill. The old ZN month-end test's13:59CT
+  endpoint omits the later deadline, without invalidating its reported losses. [Source/clock audit](results/scout_buying_duration_20261029.md).
+  Evidence: provider rule independently checked; [NYFed September22 2026](https://libertystreeteconomics.newyorkfed.org/2026/09/treasury-trading-at-the-close/)
+  describes volume moving with the clock. No market-data reproduction, net alpha or execution saving established.
+  Next check: pin source version, map ordinary/early-close regimes and audit bar labels, available-at forecasts and
+  first executable fills before any deadline-based research. Full source paper remains inaccessible; no rule is selected.
+- The [FX auction/source audit](results/scout_fx_auctions_20261029.md) also found that the repository's general macro-day
+  proxy uses realized07:30–07:35CT ranges. This can support retrospective diagnostics, not a pre-release calendar
+  signal. Use independently published schedules with available-at times; do not select a pre-news trade from the
+  news-window price spike. This is a code/timing observation, not verified FX alpha or a changed execution rule.
+
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
 Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5 and Figure 1 p.27.

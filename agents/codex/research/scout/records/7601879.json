@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:7601879",
+  "ssrn_id": "7601879",
+  "title": "Buying Duration: Index Rebalancing and Price Pressure in Government Bond Markets",
+  "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7601879",
+  "doi": "10.2139/ssrn.7601879",
+  "authors": [
+    "Amar Soebhag",
+    "Patrick Verwijmeren",
+    "Fabio Martinetti"
+  ],
+  "written": "2026-10-12",
+  "posted": "2026-10-14",
+  "source_revision": "SSRN record written2026-10-12; full paper not obtained",
+  "source_sha256": null,
+  "verdict": "needs_full_text",
+  "full_text_read": false,
+  "evidence_level": "metadata_only",
+  "summary": "Worthwhile clock-aware source audit: provider confirms a2021 index-snapshot change missing from the old failed ZN protocol. Paper return claims remain unverified; no new return trial.",
+  "report_path": "agents/codex/results/scout_buying_duration_20261029.md",
+  "evidence_path": "agents/codex/evidence/scout_buying_duration_20261029.md",
+  "about": "Benchmark-duration demand and government-bond futures at month-end.",
+  "findings": "Authors' abstract reports1.19bp on last trading days versus0.07bp otherwise and47% of average monthly returns. Not independently reproduced; exact source window/costs unknown.",
+  "mechanism": "Benchmark tracking deadlines may concentrate demand for duration and leave temporary price pressure. Net executable profit remains unestablished.",
+  "build_on": "Yes, a bounded source/clock/data audit is worthwhile: Bloomberg independently documents the US snapshot shift14:00→15:00CT effective2021-01-14. The old fixed13:59CT ZN exit lost$31/ZN net,t−1.4;2023+−$79.7. Obtain lawful full text, exact rules and as-of forecasts before TEST; do not retune the negative unconditional family.",
+  "economic_family": "treasury-month-end-index-duration",
+  "deduplication": [
+    "TIER_LIST.md:323",
+    "analysis/zn_month_end_test.py"
+  ],
+  "verified_facts": [
+    "Provider methodology printedp80 documents dated US snapshot rule change; this is a clock fact, not verified alpha."
+  ],
+  "access": [
+    {
+      "url": "https://papers.ssrn.com/sol3/Delivery.cfm/7601879.pdf?abstractid=7601879&mirid=1",
+      "method": "connected web reader",
+      "status": "403 Forbidden",
+      "paper_obtained": false
+    },
+    {
+      "method": "author/institution exact-title search",
+      "status": "no accessible manuscript found; profiles inspected"
+    }
+  ],
+  "new_economic_trials": 0,
+  "updated_at": "2026-10-29T17:54:16.115837+00:00",
+  "notification_key": "ssrn:7601879:written2026-10-12:needs_full_text:clock-gap-v1"
+}
