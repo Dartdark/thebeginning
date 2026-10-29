@@ -19,11 +19,12 @@ ACCOUNTS = [
     # update last_balance / last_date whenever the user reports an Apex end-of-day balance
     dict(account="#1", id="APEX-681524-01", size="50K evaluation", status="Blown", start=50000, floor=None,
          last_balance=None, last_date="2026-10-26", note="Blown 2026-10-26; trades after that are not counted."),
-    dict(account="#2", id="APEX-681524-02", size="50K evaluation", status="Trading", start=50000, floor=48000,
-         last_balance=49424.18, last_date="2026-10-21",
-         note="Floor approx. (brief: ~$1,424 room at $49,424). 10/26 #3's 150K-size orders hit this account: logged P&L that day may not match fills."),
+    dict(account="#2", id="APEX-681524-02", size="50K evaluation", status="Trading", start=50000, floor=48764.42,
+         last_balance=50764.42, last_date="2026-10-28",
+         note="Balance from the Order and Position Tracker 10/28 evening. Floor assumes 10/28 is its highest end-of-day balance (peak - $2,000). 10/26 #3's 150K-size orders hit this account: logged P&L that day may not match fills."),
     dict(account="#3", id="APEX-681524-03", size="150K No-Activation", status="Trading", start=150000, floor=146000,
-         last_balance=150000.0, last_date="2026-10-25", note="$4,000 EOD trailing; target +$9,000. Started 10/26."),
+         last_balance=147822.60, last_date="2026-10-28",
+         note="$4,000 EOD trailing; target +$9,000. Started 10/26. Balance from the Order and Position Tracker 10/28 evening (user screenshot)."),
 ]
 CLOSED_AFTER = {"#1": "20261026"}
 OUT = "analysis/outputs/dashboard"
