@@ -170,3 +170,15 @@ no live/VPS/broker/logger changes. Historical source claims and synthetic checks
 Retained execution and liquidity ideas are centralized there, including subpenny fills (E01), entry-timing diagnostics
 (E04), liquidity compensation/turnover (E10) and event-information clocks (E11). Keep detailed lessons in that library;
 this brief is the pointer. Original reports remain the evidence record.
+
+## Automatic worthwhile-paper investigation (user, 2026-10-29)
+
+When a reviewed paper warrants deeper investigation, proceed without asking the user again: inspect owned/free data,
+complete evidence and feasibility checks, commit a bounded preregistration, run the cheap design screen, then advance
+only through passing gates to historical validation, independent review and relevant account comparisons.
+This also authorizes the current SSRN4138715 factor-beta screen. Do not stop at offering to test or listing missing data
+without first attempting authorized data acquisition. If a material input cannot be obtained, record actual attempts and
+provide an honest blocked result; distinguish labeled partial replications from exact reproductions.
+Existing trial budgets, stop rules, point-in-time controls, cost accounting and live boundaries remain binding.
+No repeated permission question is needed for these research steps. This is a workflow instruction while tasks run,
+not a background schedule, authorization to spend money on subscriptions, or permission to trade/change live systems.
