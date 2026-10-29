@@ -148,6 +148,10 @@ Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
   proxy uses realized07:30–07:35CT ranges. This can support retrospective diagnostics, not a pre-release calendar
   signal. Use independently published schedules with available-at times; do not select a pre-news trade from the
   news-window price spike. This is a code/timing observation, not verified FX alpha or a changed execution rule.
+- [ZN timestamp-only follow-up](results/scout_7601879_testability_20261029.md): an observed last data date is not
+  an authoritative rebalance calendar. Missing2020-11-30 daytime records makes a last-observed-date rule select
+  November27. Holiday/early-close flags are not automatically missing expected bars. Audit provider events against
+  native dated sessions; do not forward-fill a missing session or infer that event eligibility from the remaining rows.
 
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
@@ -206,6 +210,25 @@ Source: Riedel and Wagner (2015), [SSRN2494387](https://ssrn.com/abstract=249438
   session/weekend exposure, gap-through-stop fills and liquidation/margin timing. Compare volatility and empirical
   tail losses; fit any EVT model using a separately preregistered past-only/calibration protocol.
 - Status: risk/execution reference; no demonstrated alpha, sizing change, trading allocation or new return test.
+
+### E16 — Expiry hedge removal, signed inventory and cumulative snapshots
+
+Source: Amaya/Garcia-Ares/Pearson/Vasquez, *The Price Impact of Hedging Expiring Index Options*, August13 2026,
+[public paper](https://algoseek.com/wp-content/uploads/2026/10/ssrn-7330098.pdf), Sections2.1 and3.3–3.4,
+printed pp.6–7 and13–15. [Full-source review](results/scout_7330098_testability_20261029.md).
+- Use: cash-settled option expiry removes option delta while its hedge can remain; hedge liquidation and gamma
+  rebalancing are different flows. Signed option inventory determines the estimated unwind sign; unsigned OI,
+  aggregate gamma and futures aggressor flow do not identify that inventory.
+- Evidence: source method and published return-group claims inspected, not independently reproduced. No net alpha,
+  measured fill benefit or account contribution verified. Local paper bytes/hash and a complete signed book remain unavailable.
+- Clock/accounting: the source labels minutes at their start and uses end-minute quotes. A15:30ET label may need
+  data through15:31ET, then publication/receipt/processing lag. Never fill at the label time with later information.
+  Reconstruct positions from series inception; the latest cumulative snapshot is not an incremental flow to sum repeatedly.
+- Limits: SPXW dealer delta is not NDX GEX/OI or NQ tape delta. Cboe T+1 trade detail cannot be a same-day forecast.
+  Later data specifications, corrections and GTH coverage must not be imposed on earlier history without reconciliation.
+- Next check: obtain a lawful sample and audit one series' initial inventory, signed contracts, complete sessions,
+  corrections, cumulative snapshot differences, option delta units and actual data receipt before any proposed fill.
+- Status: retained execution/input-method reference and specific TODO lead; no return test or execution saving established.
 
 ## Minimum record for any later execution comparison
 

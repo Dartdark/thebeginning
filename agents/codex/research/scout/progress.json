@@ -21,8 +21,8 @@
     },
     {
       "ssrn_id": "7330098",
-      "revision": "2026-08-22",
-      "disposition": "metadata_only",
+      "revision": "Public76-page PDF title date2026-08-13; SSRN advertises last revision2026-08-22; byte/version parity not established.",
+      "disposition": "needs_data",
       "record_path": "agents/codex/research/scout/records/7330098.json"
     },
     {
@@ -33,27 +33,25 @@
     }
   ],
   "last_run": {
-    "run_id": "scout-20261029-initial",
-    "started_at": "2026-10-29T17:49:48.201804+00:00",
-    "finished_at": "2026-10-29T18:02:42.098959+00:00",
-    "checked_remote_head": "49b48b8064a57a13fd114ee9d527c69cc7c58f0a",
-    "status": "source_triage_completed",
-    "metadata_leads": 3,
-    "full_source_reviews": 0,
+    "run_id": "scout-testability-20261029",
+    "recorded_at": "2026-10-29T18:40:16.406270+00:00",
+    "status": "testability_checks_completed_needs_data",
+    "checked_remote_head": "bdad3b4c285572e92ca201557f7093f9ec07a528",
+    "metadata_leads_rechecked": 2,
+    "full_source_reviews": 1,
     "new_hypotheses": 0,
     "new_economic_definitions": 0,
     "return_tests_executed": false,
     "reservation": null,
-    "lease_action": "No lease claimed: all work was engineering, metadata/source access or no-return input inventory. No dependent return work occurred.",
-    "access_receipt": "agents/codex/research/scout/runs/20261029_initial_access.json",
-    "source_access_reports": [
-      "agents/codex/results/scout_buying_duration_20261029.md",
-      "agents/codex/results/scout_fx_auctions_20261029.md"
-    ],
-    "report_path": "agents/codex/results/scout_cycle_20261029.md",
-    "engineering_receipt": "agents/codex/research/scout/runs/20261029_engineering_checks.json"
+    "lease_action": "No return work; no lease claimed or reservation required. Prior counters and all trial history retained.",
+    "report_path": "agents/codex/results/scout_testability_20261029.md",
+    "receipts": [
+      "agents/codex/research/scout/runs/7601879_testability_20261029.json",
+      "agents/codex/research/scout/runs/5207418_testability_20261029.json",
+      "agents/codex/research/scout/runs/7330098_testability_20261029.json"
+    ]
   },
-  "last_notification_key": "ssrn:5207418:revised2026-03-20:needs_full_text:interaction-v1|ssrn:7601879:written2026-10-12:needs_full_text:clock-gap-v1",
+  "last_notification_key": "ssrn:7330098:pdf2026-08-13:needs_data:full-source-v1",
   "note": "New paper-discovery program authorized 2026-10-29. Existing repository multiplicity remains in every significance decision. Paused t6 and Hunt v2 are not resumed or reset.",
   "prior_trial_history": {
     "path": "TRIALS.csv",
@@ -71,22 +69,45 @@
     },
     {
       "ssrn_id": "7330098",
-      "status": "metadata_only_source_triage_next_cycle_if_warranted"
+      "status": "needs_signed_spx_position_sample_inception_book_and_receipt_clock_audit"
     }
   ],
   "notification_keys": [
     "ssrn:5207418:revised2026-03-20:needs_full_text:interaction-v1",
-    "ssrn:7601879:written2026-10-12:needs_full_text:clock-gap-v1"
+    "ssrn:7601879:written2026-10-12:needs_full_text:clock-gap-v1",
+    "ssrn:7330098:pdf2026-08-13:needs_data:full-source-v1"
   ],
   "last_notification": {
     "keys": [
-      "ssrn:5207418:revised2026-03-20:needs_full_text:interaction-v1",
-      "ssrn:7601879:written2026-10-12:needs_full_text:clock-gap-v1"
+      "ssrn:7330098:pdf2026-08-13:needs_data:full-source-v1"
     ],
-    "status": "prepared_for_combined_app_reply",
-    "at": "2026-10-29T17:58:20.662777+00:00",
-    "reason": "Two specific worthwhile scheduled-flow source leads; claims unverified, zero new returns.",
-    "delivery": "No external message or independently verified phone delivery"
+    "status": "prepared_for_user_requested_app_reply",
+    "at": "2026-10-29T18:40:16.406270+00:00",
+    "reason": "Newfull-source expiry-paper review plus direct user-requested testability result for all3 leads. None TEST-eligible.",
+    "delivery": "In-app response only; no external messages or verified phone-delivery claim"
   },
-  "budget_cap_notified": false
+  "budget_cap_notified": false,
+  "run_history": [
+    {
+      "run_id": "scout-20261029-initial",
+      "started_at": "2026-10-29T17:49:48.201804+00:00",
+      "finished_at": "2026-10-29T18:02:42.098959+00:00",
+      "checked_remote_head": "49b48b8064a57a13fd114ee9d527c69cc7c58f0a",
+      "status": "source_triage_completed",
+      "metadata_leads": 3,
+      "full_source_reviews": 0,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "reservation": null,
+      "lease_action": "No lease claimed: all work was engineering, metadata/source access or no-return input inventory. No dependent return work occurred.",
+      "access_receipt": "agents/codex/research/scout/runs/20261029_initial_access.json",
+      "source_access_reports": [
+        "agents/codex/results/scout_buying_duration_20261029.md",
+        "agents/codex/results/scout_fx_auctions_20261029.md"
+      ],
+      "report_path": "agents/codex/results/scout_cycle_20261029.md",
+      "engineering_receipt": "agents/codex/research/scout/runs/20261029_engineering_checks.json"
+    }
+  ]
 }

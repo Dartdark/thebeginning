@@ -134,6 +134,10 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   Need dated holiday/early-close regimes, contracts/rolls, pre-entry duration-forecast vintages and reconciled native costs.
   Complete source/clock/data/power gates before TEST and any new bounded preregistration. No return trial started.
   [Review](agents/codex/results/scout_buying_duration_20261029.md) · [Evidence](agents/codex/evidence/scout_buying_duration_20261029.md).
+  [Testability follow-up](agents/codex/results/scout_7601879_testability_20261029.md): source still unavailable after
+  author/institution/replication searches. Three isolated forecast examples do not form a point-in-time panel.
+  Timestamp-only census confirms60 observed monthly endpoints, not60 authoritative events; November2020 demonstrates
+  that selecting the last available data date can select the wrong day. No returns or rescue protocol opened.
 
 - [ ] **Treasury auctions × next-day macro-announcement FX — WATCH / NEEDS FULL TEXT (2026-10-29), SSRN5207418.**
   Merit: a specific scheduled interaction with direct FX transmission; authors claim roughly8bp foreign-currency
@@ -146,6 +150,21 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   No realized price-spike event proxy, silently truncated overnight window or return trial is authorized by this entry.
   Apex15:59CT fit is unknown; personal overnight research is conditional on the verified source window.
   [Review](agents/codex/results/scout_fx_auctions_20261029.md) · [Evidence](agents/codex/evidence/scout_fx_auctions_20261029.md).
+  [Testability follow-up](agents/codex/results/scout_5207418_testability_20261029.md): new author/BoC/conference and
+  replication searches did not recover the source rule. Exact-window, flat-time and overnight constraints remain unresolved.
+
+- [ ] **Signed SPX dealer delta at PM expiry — WATCH / NEEDS DATA (2026-10-29), SSRN7330098.**
+  Full source now read: a direct ES hedge-unwinding channel with reported extreme-group gross differences of17bp
+  over30minutes and12.5bp over15minutes, July2020–June2023. These are author evidence, not our net strategy results.
+  Need signed C1 SPXW dealer positions reconstructed from series inception plus matching option deltas, prior inventory,
+  session coverage, corrections and actual receipt clocks. Owned NDX GEX/OI and NQ tape delta cannot supply the signal.
+  Minute-start labels with end-minute quotes must be lagged correctly; retrospective T+1 records cannot become same-day signals.
+  Smallest next check: retain/hash the public paper and obtain a lawful sample; reconcile one expiring series from
+  inception and available-at data before any design returns. Public ZIP samples were unreadable via connector and
+  a network-enabled proxy download returned403. No complete historical book obtained and no return trial started.
+  Merge input acquisition with existing flow evidence-sheetD; retain the distinction between terminal book-level
+  hedge removal and time-decay position-change hedging. Existing failed gamma/OI/max-pain results remain in force.
+  [Full-source review and testability](agents/codex/results/scout_7330098_testability_20261029.md).
 
 - [ ] **U.S. factor-beta stock baskets — PARTIAL SCREEN FAIL; exact replication unverified (2026-10-29).**
   Authorized restricted S&P500/SPY-beta screen is completed under a committed plan:2018–22 covered-day overnight +3.93bp gross/−0.66bp net, intraday +0.89/−3.52bp under4bp RT plus borrow.
