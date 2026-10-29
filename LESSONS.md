@@ -63,5 +63,3 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - (2026-10-26) On a live-account incident, read the evidence (Order Tracker, Logs, the bench's rule file, TODO) BEFORE
   answering. Three wrong guesses in a row (Target Guard, a manual exit, a 'missed' daily loss limit that the 150K bench
   already models) cost the user's trust. Say 'I don't know yet, send X' instead of guessing a cause.
-- (2026-10-29) The MultiCharts license is one machine at a time: opening it on the PC stops the VPS. MultiCharts lives on
-  the VPS only; read its files, never open it elsewhere while trading.

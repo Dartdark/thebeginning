@@ -8,11 +8,14 @@ local chores.
 1. **Never touch live trading.** Do not click, type in or change MultiCharts, R|Trader Pro, Rithmic, Apex, The
    Bridge, or any broker / copier window. No orders, no strategy inputs, no auto-trading switches, no connections, no
    symbol mappings, no compiling. If a task seems to need one of these, stop and ask the user to do it.
-   **Never open or start MultiCharts on this PC (user, 2026-10-29).** The MultiCharts license allows one machine at a
-   time: starting it here signs out the VPS ("Your session has been terminated because a session with the same MultiCharts
-   account has been started on a different machine") and live trading stops. If MultiCharts is already open on this PC,
-   don't touch it: tell the user. You may still read files MultiCharts or the VPS wrote to disk (exported reports,
-   `live/trades/`, `live/health/`) to check fills, rejections and positions. (Replaces the 2026-10-19 viewing / clicking rule.)
+   **MultiCharts viewing (user, 2026-10-19):** you may look at MultiCharts (screenshots of charts, Order and Position
+   Tracker, logs, strategy reports) and read files it writes to disk, to check fills, rejections and positions yourself.
+   - **Clicking to navigate is allowed on this PC's MultiCharts once live trading runs on the VPS** (user, 2026-10-19):
+     switch windows / tabs / workspaces, scroll, open the Order and Position Tracker, logs and reports, run a backtest
+     report with the inputs already on the chart. Still never: orders, the auto-trading switch, strategy inputs or
+     settings, compiling, broker / data connections, symbol mapping, closing or saving over workspaces.
+   - **Before any click, check:** if this PC's MultiCharts shows a broker connection or auto-trading on (green AT
+     button / live account in the Order and Position Tracker), it is still live: look only and tell the user.
    - The VPS's MultiCharts, R|Trader Pro, Rithmic, Apex, The Bridge and the copier stay off-limits, even for looking.
 2. Never enter, read aloud or store passwords, API keys or tokens. Never put them in files or chat.
 3. Ask before deleting anything.
