@@ -239,6 +239,15 @@ Source: Prior VWAP Trap review, [checks/candidates/prior_vwap_trap/REVIEW.md](..
 - Next check: apply the placebo-level control to every level strategy (standing in DEVELOPMENT_PROCESS stresses).
 - Status: market-behavior reference; strategy ranked B, not in a plan (50K evaluation pass rate falls with it).
 
+### E23 — Opening imbalance: market orders at the stock open sit on the exploited side
+
+Source: Branch & Ma, SSRN 3259614 (paper, user upload 2026-10-29); `analysis/on_id_reversal_quartiles.py`, TIER_LIST F row.
+- Use: in single stocks the open is set by the market maker against the overnight order imbalance and overshoots; the paper advises against market orders at the open. For NQ / ES futures (continuous Globex trading, no specialist open) the mechanism is absent.
+- Evidence (author claim + historical test): stocks 2011-17 reverse overnight moves intraday, but SPY's overnight / intraday correlation is now slightly positive. NQ / ES 2018-26 (15:00 -> 08:30 vs 08:30 -> 15:00 CT): corr +0.00 / −0.03, no monotonic quartile pattern; fading top / bottom quartiles 2018-22 −$95 / −$60, 2023+ +$184 / +$167 (t 0.9 / 1.3).
+- Limits: says nothing about the 08:30 fill itself (see E20 for opening-print fills).
+- Next check: none; do not re-test overnight -> intraday reversal on index futures (also SSRN 2730304, F).
+- Status: negative reference for futures; stock-only lesson.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
