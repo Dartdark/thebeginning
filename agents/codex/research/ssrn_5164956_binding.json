@@ -1,0 +1,57 @@
+{
+  "claim_id": "ssrn5164956_source_review",
+  "claim_text": "Four-question source review, zero economic replication or plan result.",
+  "target_kind": "source_review",
+  "provenance": "User-uploaded PDF; paper result provenance not independently verified.",
+  "limitations": [
+    "Paper-reported statistics only.",
+    "Equation denominator and prose differ; table/prose t discrepancy preserved.",
+    "NQ transfer is an untested hypothesis."
+  ],
+  "artifacts": [
+    {
+      "id": "checker",
+      "role": "code",
+      "path": "analysis/codex_evidence_binding.py",
+      "sha256": "0d74ed75a44046cf835f91e047af89ddf5dcd418a203978b51893c70d66e0c15",
+      "bytes": 3885
+    },
+    {
+      "id": "preferences",
+      "role": "config",
+      "path": "agents/codex/USER_COLLABORATION_PREFERENCES.md",
+      "sha256": "db432180f49e0479d7915bac9f2b1e091b646a9880432dd1d097d2949c3954fb",
+      "bytes": 1372
+    },
+    {
+      "id": "paper",
+      "role": "data",
+      "path": "/workspace/attachments/193e4d29-3c5c-41e6-95cf-27815ec7c009/ssrn-5164956.pdf",
+      "sha256": "9f161561953f940cd4bdb7ada2c3c46c5b89d4d1bd17d86c0cb6493d69ddf138",
+      "bytes": 1347462
+    },
+    {
+      "id": "review",
+      "role": "output",
+      "path": "agents/codex/results/ssrn_5164956_review.md",
+      "sha256": "5e4b057bd0fd60da30a5c4e81ecb83b2c9008ec997caa74104ca3f83dd6e0887",
+      "bytes": 5743
+    }
+  ],
+  "bindings": {
+    "code": [
+      "checker"
+    ],
+    "config": [
+      "preferences"
+    ],
+    "data": [
+      "paper"
+    ],
+    "output": [
+      "review"
+    ]
+  },
+  "schema_version": 1,
+  "evidence_boundary": "Local byte identity only; historical provenance and economic validity are not verified."
+}
