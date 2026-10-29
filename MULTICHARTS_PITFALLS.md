@@ -205,3 +205,11 @@ Cause: a half-closed copy of MultiCharts was still running on the VPS itself, so
 MultiCharts64, wait for Rithmic to connect, check positions in the Order and Position Tracker, then auto-trading on per chart
 (Flat). Faster check next time: Task Manager > Details on the VPS for a leftover MultiCharts64 / TradingServer / tsServer
 process before restarting the whole machine.
+
+## A signal that silently failed to compile keeps the chart 'on' (2026-10-27, live: missed ONB trade)
+Overnight Bias ADX30 signalled long 10/27 10:00 -> 14:30 CT (+135 pts; ~4 MNQ on #2 = ~$1,080, ~12 MNQ on #3 = ~$3,240 gross)
+but no order was sent: the ONB code had not compiled, so the strategy was not running, while the chart, the logger
+(POS rows: strategy 0, broker 0) and the AA button looked normal. Caught by the missed-trade panel (ONB 7 quiet days,
+backtest chance ~5%), confirmed by the chart's trade list. Rule: after every paste, read the PowerLanguage Editor's Output
+for 'compiled successfully' (no red errors) before leaving it, then check the chart's Format Signals list shows the signal
+with no warning; after any code change, compare the chart's trade arrows with the Orders tab on the next signal day.

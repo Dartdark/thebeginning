@@ -63,3 +63,5 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - (2026-10-26) On a live-account incident, read the evidence (Order Tracker, Logs, the bench's rule file, TODO) BEFORE
   answering. Three wrong guesses in a row (Target Guard, a manual exit, a 'missed' daily loss limit that the 150K bench
   already models) cost the user's trust. Say 'I don't know yet, send X' instead of guessing a cause.
+- (2026-10-27) A green AA button doesn't mean the strategy runs: ONB's code hadn't compiled and a +135-pt trade was missed
+  (~$4,300 across #2 and #3). Confirm 'compiled successfully' after every paste; trust the missed-trade panel.
