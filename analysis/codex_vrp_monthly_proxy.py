@@ -32,6 +32,8 @@ NAMES = ['P', 'H', 'B', 'I', 'R']
 COST, STRESS = 3.74, 11.24
 SEED = 1783624
 TARGET_MONTHS = (1, 2, 4, 5, 7, 8, 10, 11)
+PRIMARY_ONLY = False
+AMENDMENT = 'agents/codex/research/vrp_monthly_proxy_pre_return_amendment.md'
 
 
 def sha(path):
@@ -64,6 +66,8 @@ def verify():
     assert subprocess.check_output(['git', 'show', PREREG + ':' + PLAN], cwd=ROOT) == (ROOT / PLAN).read_bytes()
     rel = str(Path(__file__).relative_to(ROOT))
     assert subprocess.check_output(['git', 'show', 'HEAD:' + rel], cwd=ROOT) == Path(__file__).read_bytes()
+    if PRIMARY_ONLY:
+        assert subprocess.check_output(['git', 'show', 'HEAD:' + AMENDMENT], cwd=ROOT) == (ROOT/AMENDMENT).read_bytes()
 
 
 def first_cash(month):
@@ -198,7 +202,7 @@ def opportunities(g, f, phase, dest, returns=False):
             continue
         z = f.loc[signal_month]
         standalone = bool(np.isfinite(z.vrp))
-        common = bool(z.common_known)
+        common = bool(np.isfinite([z.iv,z.rv]).all()) if PRIMARY_ONLY else bool(z.common_known)
         disposition = dict(month=str(month), signal_month=signal_month, p_standalone_known=standalone,
                            state='common_known' if common else 'unknown_history',
                            entry_time=str(entry_day.date())+' 08:30 America/Chicago',
@@ -294,7 +298,7 @@ def filter_tests(events, daily):
     rng=np.random.default_rng(SEED)
     # Month-level accounting includes opening marks in the next month; random ledgers reconstruct those overlaps.
     # Preserve the event daily paths by allocating a baseline book per original monthly event.
-    for name in ['P','H','I','R']:
+    for name in [x for x in ['P','H','I','R'] if x in NAMES]:
         keep=events[name].to_numpy(bool)
         removed=events.loc[~keep,'net']
         n=int(keep.sum())
@@ -371,17 +375,21 @@ def synthetic():
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('mode',choices=['synthetic','audit','design','validation'])
+    parser.add_argument('--primary-only',action='store_true')
     args=parser.parse_args()
     if args.mode=='synthetic': print(json.dumps(synthetic()));return
+    global PRIMARY_ONLY,NAMES
+    PRIMARY_ONLY=args.primary_only
+    if PRIMARY_ONLY: NAMES=['P','B']
     verify()
     phase='validation' if args.mode=='validation' else 'design'
     if phase=='validation':
-        gate=json.loads((OUT/'design/economic_gate.json').read_text())
+        gate=json.loads((OUT/('primary_design' if PRIMARY_ONLY else 'design')/'economic_gate.json').read_text())
         assert gate['passed_candidates'], 'Frozen design gate did not authorize validation'
         authorization=ROOT/'agents/codex/research/vrp_monthly_proxy_validation_authorization.md'
         assert authorization.exists()
         assert subprocess.check_output(['git','show','HEAD:'+str(authorization.relative_to(ROOT))],cwd=ROOT)==authorization.read_bytes()
-    dest=OUT/args.mode
+    dest=OUT/(('primary_' if PRIMARY_ONLY else '')+args.mode)
     dest.mkdir(parents=True,exist_ok=False)
     started=datetime.now(timezone.utc).isoformat()
     g,paths=feature_grid(phase)
@@ -393,7 +401,8 @@ def main():
                   dependencies={p:sha(ROOT/p) for p in ['analysis/grid24.py','analysis/roll_adjust.py','analysis/metrics.py','analysis/codex_s03_calendar.py','analysis/codex_hunt_v2_ldf_delta.py','analysis/codex_hunt_v2_ldf_delta_design.py']},
                   versions={k:importlib.metadata.version(k) for k in ['numpy','pandas','scipy']},
                   source_parity=False,actual_native_mes_fills=False,mes_size=1,point_value=5,rt_cost=COST,stress_rt_cost=STRESS,
-                  candidate_definitions=2,nonselectable_controls=3,seed=SEED,
+                  candidate_definitions=1 if PRIMARY_ONLY else 2,nonselectable_controls=1 if PRIMARY_ONLY else 3,seed=SEED,
+                  primary_only_amendment=AMENDMENT if PRIMARY_ONLY else None,
                   vix_values_used_through='2022-12-31' if phase=='design' else str(pd.Timestamp(g.ts[-1]).date()),
                   target_quarterly_roll_months_excluded=True)
     if args.mode=='audit' or not gate['passed']:
@@ -416,11 +425,11 @@ def main():
     filters.to_csv(dest/'filter_controls.csv',index=False)
     passed=filters.loc[filters.name.isin(['P','H']) & filters.passed,'name'].tolist()
     if phase=='validation':
-        allowed=json.loads((OUT/'design/economic_gate.json').read_text())['passed_candidates']
+        allowed=json.loads((OUT/('primary_design' if PRIMARY_ONLY else 'design')/'economic_gate.json').read_text())['passed_candidates']
         passed=[x for x in passed if x in allowed]
     dump(dest/'economic_gate.json',dict(passed_candidates=passed,verdict='PASS_SCREEN' if passed else 'REJECT_PROXY',
                                       validation_authorized=bool(passed) if phase=='design' else False))
-    manifest.update(return_ledgers_evaluated=5,verdict='PASS_SCREEN' if passed else 'REJECT_PROXY',
+    manifest.update(return_ledgers_evaluated=len(NAMES),verdict='PASS_SCREEN' if passed else 'REJECT_PROXY',
                     reconciliation=True,finished_utc=datetime.now(timezone.utc).isoformat())
     dump(dest/'manifest.json',manifest)
     print(filters.to_string(index=False));print(json.dumps(dict(verdict=manifest['verdict'],passed=passed)))
