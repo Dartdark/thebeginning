@@ -419,6 +419,23 @@ SectionsI,V.C,VI.E/TableX; [review and completed screen](results/scout_3521370_2
   contemporary benchmark rules and actual fee/venue role; no retuning this failed definition.
 - Status: rejected directional screen, retained execution method; no account/allocation change.
 
+### E33 — Treasury benchmark pricing clocks changed in2021
+
+Source: Dyer/Fleming/Shachar, [NYFed September22 2026](https://libertystreeteconomics.newyorkfed.org/2026/09/treasury-trading-at-the-close/);
+[completed clock-aligned screen](results/scout_treasury_close_20261029.md).
+- Use: distinguish CME settlement, cash-bond index valuation and futures order/fill timestamps.
+  Bloomberg moved its USD bond-index strike from15:00ET to16:00ET on January14 2021.
+  Civil-time conversion and historical effective dates must be frozen before outcomes.
+- Evidence: official research documents volume migrating to the new clock, especially at month-end.
+  This establishes timing, not guaranteed directional demand or execution savings.
+  Our175-event2018–22intraday ZN adaptation earns$15.89gross but loses$29.86net at$45.75RT cost;
+  the clock correction does not rescue the rejected month-end family.
+- Limits: original multi-day paper and cash-bond volumes are not one-hour executable ZN returns.
+  Continuous prices, one-minute stops, early-close calendars and native costs remain relevant.
+- Next check: use current primary index/venue timing for any independently warranted execution study;
+  require native quotes/fills before claiming savings. No retuning this failed definition.
+- Status: retained clock reference; directional adaptation rejected. No live/system changes.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

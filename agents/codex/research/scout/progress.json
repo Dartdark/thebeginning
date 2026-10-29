@@ -1,14 +1,8 @@
 {
   "schema_version": 1,
   "program": "paper-scout-20261029",
-  "status": "running",
-  "lease": {
-    "run_id": "scout-treasury-close-20261029-design",
-    "owner": "codex-root-treasury-close",
-    "claimed_at": "2026-10-29T22:23:21.000Z",
-    "expires_at": "2026-10-30T00:23:21.000Z",
-    "checked_parent": "b257edce5cbc10df8602822e1602566fdf6de9a7"
-  },
+  "status": "ready",
+  "lease": null,
   "hypotheses_started": 3,
   "economic_definitions": 7,
   "max_hypotheses": 10,
@@ -68,8 +62,9 @@
         "ZN_INDEX_CLOCK_CALENDAR_NULL",
         "ZN_INDEX_CLOCK_COST_STRESS"
       ],
-      "status": "reserved",
-      "proposal_sha256": "dc8ebb4ff3ea8a7ca0a7d363de8bd8c027a534c865f485d5c7b629b5da159c0e"
+      "status": "design_reject",
+      "proposal_sha256": "dc8ebb4ff3ea8a7ca0a7d363de8bd8c027a534c865f485d5c7b629b5da159c0e",
+      "result_path": "agents/codex/results/scout_treasury_close_20261029.md"
     }
   ],
   "seen": [
@@ -186,20 +181,27 @@
       "revision": "November1 2021primary in-press; complete extracted text",
       "disposition": "design_reject",
       "record_path": "agents/codex/research/scout/records/3290649.json"
+    },
+    {
+      "ssrn_id": "3440417",
+      "revision": "November22 2019Wharton41-page primary,plus external2026NYFedclockevidence",
+      "disposition": "design_reject",
+      "record_path": "agents/codex/research/scout/records/3440417.json"
     }
   ],
   "last_run": {
-    "run_id": "scout-pre-nfp-20261029-design",
-    "recorded_at": "2026-10-29 22:18:07 UTC",
+    "run_id": "scout-treasury-close-20261029-design",
+    "recorded_at": "2026-10-29 22:28:22 UTC",
     "status": "design_reject_continue_discovery",
-    "checked_remote_head": "a63d7bc11720b99eb67c69c36812a61216361058",
-    "preregistration_commit": "a63d7bc11720b99eb67c69c36812a61216361058",
+    "checked_remote_head": "352bbf8d075efca6375f50a5d37b9280198a7500",
+    "preregistration_commit": "352bbf8d075efca6375f50a5d37b9280198a7500",
     "full_source_reviews": 1,
+    "additional_primary_timing_article": 1,
     "new_hypotheses": 1,
     "new_economic_definitions": 3,
     "return_tests_executed": true,
-    "report_path": "agents/codex/results/scout_pre_nfp_20261029.md",
-    "next_work": "Continue distinct owned-data-compatible families. Check Hartley/Schwarz3440417 multi-day Treasury month-end against prior intraday-only ZN test and2021 index strike-time change before any new return."
+    "report_path": "agents/codex/results/scout_treasury_close_20261029.md",
+    "next_work": "Continue SEARCH_PROFILE forced-flow families. Reject pre-NFP and ZN clock definitions permanently; no clock/stop/size rescue. Source/data triage must precede another reservation; no pending eligible candidate is claimed."
   },
   "last_notification_key": "ssrn:5250499:prototype-v1:real-data-blocked",
   "note": "New paper-discovery program authorized 2026-10-29. Existing repository multiplicity remains in every significance decision. Paused t6 and Hunt v2 are not resumed or reset.",
@@ -466,6 +468,20 @@
       "return_tests_executed": true,
       "report_path": "agents/codex/results/scout_pre_nfp_20261029.md",
       "next_work": "Continue distinct owned-data-compatible families. Check Hartley/Schwarz3440417 multi-day Treasury month-end against prior intraday-only ZN test and2021 index strike-time change before any new return."
+    },
+    {
+      "run_id": "scout-treasury-close-20261029-design",
+      "recorded_at": "2026-10-29 22:28:22 UTC",
+      "status": "design_reject_continue_discovery",
+      "checked_remote_head": "352bbf8d075efca6375f50a5d37b9280198a7500",
+      "preregistration_commit": "352bbf8d075efca6375f50a5d37b9280198a7500",
+      "full_source_reviews": 1,
+      "additional_primary_timing_article": 1,
+      "new_hypotheses": 1,
+      "new_economic_definitions": 3,
+      "return_tests_executed": true,
+      "report_path": "agents/codex/results/scout_treasury_close_20261029.md",
+      "next_work": "Continue SEARCH_PROFILE forced-flow families. Reject pre-NFP and ZN clock definitions permanently; no clock/stop/size rescue. Source/data triage must precede another reservation; no pending eligible candidate is claimed."
     }
   ],
   "data_access_blockers": {
@@ -502,6 +518,8 @@
     "data_blocked_action": "record_and_park_then_move_on",
     "existing_blocked_leads": "Do not resume merely because source work is pending; require genuinely new matching source/data availability.",
     "receipt": "agents/codex/research/scout/runs/20261029_data_first_policy.json",
-    "checkpoint_batches": "3 full reviews /1new hypothesis are batch checkpoints. Continue distinct families across batches; preserve10hypotheses/30definitions, nofailed-familyrescue."
+    "checkpoint_batches": "3 full reviews /1new hypothesis are batch checkpoints. Continue distinct families across batches; preserve10hypotheses/30definitions, nofailed-familyrescue.",
+    "automation_prompt_updated_at": "2026-10-29 22:28:22 UTC",
+    "continuation_receipt": "agents/codex/research/scout/runs/20261029_persistent_search.json"
   }
 }
