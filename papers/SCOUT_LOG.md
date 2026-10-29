@@ -16,3 +16,14 @@ READ (-> TIER_LIST grade) / NEED PDF (user downloads from SSRN and drops it in t
 | 2026-10-29 | arXiv 2601.17247 | Learning Optimal Liquidation with Closing Auctions | SKIP: stock execution theory, no futures fit |
 | 2026-10-29 | arXiv 2504.20116 | Compounding Effects in Leveraged ETFs: Beyond the Volatility Drag Paradigm | SKIP: LETF holder returns, no flow timing |
 | 2026-10-29 | arXiv 2505.17388 | Stochastic Price Dynamics in Response to Order Flow Imbalance: CSI 300 Index Futures | SKIP: China futures OFI; OFI already F on NQ (E25) |
+| 2026-10-29 | arXiv 2610.35887 https://arxiv.org/abs/2610.35887 | Evaluating ICT's Accumulation-Manipulation-Distribution (AMD) Model on NQ (Taylor 2026) | READ -> TIER_LIST F (rebuilt on NQ 2018-26) |
+| 2026-10-29 | arXiv 2605.11423 https://arxiv.org/abs/2605.11423 | A Validated Volatility-Volume-Gap Classifier for Regime Identification in MNQ (Mesfin 2026) | READ -> TIER_LIST F (rebuilt on NQ 2018-26) |
+| 2026-10-29 | arXiv 2607.01550 https://arxiv.org/abs/2607.01550 | Is Trend Still Your Friend? The Demise of Short-Term Trend-Following | READ -> TIER_LIST F (multi-day CTA trends; no test; tick-size finding noted) |
+| 2026-10-29 | arXiv 2605.17724 | Sequential Structure in Intraday Futures Data: LSTM vs Gradient Boosting on MNQ | SKIP: negative ML result (OOS accuracy = base rate), nothing to test |
+| 2026-10-29 | arXiv 2510.01542 | Equity Market Price Changes Are Predictable: A Natural Science Approach (ESM) | SKIP: unfalsifiable claims, no costs / OOS |
+| 2026-10-29 | arXiv 2610.34787 | Do Round Numbers Hold Prices? (5 Nasdaq stocks, LOB) | SKIP: stocks; round levels attract depth but don't hold price (cf. E26 placebo levels) |
+| 2026-10-29 | arXiv 2610.31141 | Intraday Forecasting Ability and Liquidity Provision of Institutional Traders | SKIP: needs exchange account-level flow |
+| 2026-10-29 | arXiv 2408.05659 | A GCN-LSTM Approach for ES-mini and VX Futures Forecasting | SKIP: vol / volume forecasting ML, no trading test |
+| 2026-10-29 | Kurov, Wolfe & Gilbert 2020 FRL (skidmore.edu PDF) | The Disappearing Pre-FOMC Announcement Drift | SKIP: pre-FOMC drift already tested (gone since 2018); paper agrees (weak since 2016) |
+| 2026-10-29 | Harvey, Mazzoleni & Melone (SSRN, no free copy) | The Unintended Consequences of Rebalancing | SKIP: stock-vs-bond month-end rebalancing signal already tested (forced_flows_round5_test.py, t 1.2 / quarter-end −0.2) |
+| 2026-10-29 | Princeton ORFE thesis 2026 | 0DTE Options and Intraday Volatility | SKIP: thesis; 0DTE gamma needs paid dealer data (TIER_LIST) |
