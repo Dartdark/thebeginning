@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/thebeginning/analysis/codex_choch4h_corrected_data.py", line 71, in <module>
+    run(args.overnight_dir)
+  File "/workspace/thebeginning/analysis/codex_choch4h_corrected_data.py", line 64, in run
+    core.run_design()
+  File "/workspace/thebeginning/analysis/codex_choch4h.py", line 181, in run_design
+    assert np.isclose(d.sum(),resolved.net_mnq.sum())
+                              ^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas/core/generic.py", line 6299, in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DataFrame' object has no attribute 'net_mnq'

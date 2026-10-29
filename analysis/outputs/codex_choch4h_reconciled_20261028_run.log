@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/thebeginning/analysis/codex_choch4h_corrected_data.py", line 111, in <module>
+    run(args.overnight_dir)
+  File "/workspace/thebeginning/analysis/codex_choch4h_corrected_data.py", line 104, in run
+    core.run_design()
+  File "/workspace/thebeginning/analysis/codex_choch4h.py", line 162, in run_design
+    g, valid, audit = loader.load_grid(paths, 'design', dest)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/thebeginning/analysis/codex_nq_rth_gap_down.py", line 149, in load_grid
+    if link.resolve() != path.resolve(): raise ValueError("Unexpected cached source symlink")
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unexpected cached source symlink
