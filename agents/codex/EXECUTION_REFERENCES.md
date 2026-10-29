@@ -165,6 +165,9 @@ Source: Knuteson, [SSRN 3705017](https://ssrn.com/abstract=3705017).
 - Next check when relevant: audit session clocks and price adjustments, then attribute an existing fixed ledger. Own-order price impact requires actual order/quote records and a credible benchmark; a subsequent market move alone is insufficient.
 - Status: measurement reference, not a new overnight strategy, verified execution saving or reopening of prior tests.
 
+- Factor-aware extension: Ye, Jiang and Luo, [SSRN 4138715](https://ssrn.com/abstract=4138715), [review](results/factor_beta_sessions_review_20261029.md), 2026-10-29. Stock-factor beta premiums can reverse by session and country. Compare like-for-like exposures, calendar periods and price/dividend adjustments before attributing timing gains.
+- The source's prior-month ranking betas are trading-time candidates; full-sample post-ranking chart betas are descriptive only. Statistical factor slopes are not net execution savings. T+1, short availability, suspensions and auction fills require explicit local-market treatment.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
