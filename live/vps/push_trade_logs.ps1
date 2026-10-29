@@ -17,6 +17,12 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 New-Item -ItemType Directory -Force "live\health" | Out-Null
+# one-time (2026-10-29): intraday push every 30 min in RTH (-Mode intraday: logs + alerts only, no health line), so
+# Claude's master session can see a problem during the day, not only at 16:10
+schtasks /Query /TN "VpsIntradayPush" 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    schtasks /Create /TN "VpsIntradayPush" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 08:45 /RI 30 /DU 06:30 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\push_trade_logs.ps1 -Mode intraday" /F | Out-Null
+}
 schtasks /Query /TN "VpsWatchdog" 2>$null | Out-Null
 if ($LASTEXITCODE -ne 0) {
     schtasks /Create /TN "VpsWatchdog" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 08:15 /RI 5 /DU 07:00 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\watchdog.ps1" /F | Out-Null
@@ -49,7 +55,7 @@ foreach ($r in $roots) {
 }
 New-Item -ItemType Directory -Force "live\health" | Out-Null
 $line = "$Mode,$(Get-Date -Format 'yyyy-MM-dd HH:mm'),mc_processes=$mc,disk_free_gb=$disk,last_boot=$boot,tz=$tz,log_rows_today=$rows,push_errors=$errs,rejected_today=$rej,last_reject=$rejmsg"
-Add-Content "live\health\$day.csv" $line
+if ($Mode -ne "intraday") { Add-Content "live\health\$day.csv" $line }
 
 New-Item -ItemType Directory -Force "live\trades" | Out-Null
 Copy-Item "$Logs\*.csv" "live\trades\" -Force -ErrorAction SilentlyContinue

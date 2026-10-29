@@ -13,7 +13,9 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
     $1,100, EOS $500, Bridge Monday 2.
   - #3 APEX-681524-03 150K No-Activation from 10/26: combine set x 2.5 (VB 20, ONB $2,750, EOS $1,250, Bridge 5);
     +$9,000 target in 30 days, $4,000 EOD trailing, $2,000 daily loss pause. 10/26: #3's copied charts first sent 150K-size
-    orders to #2 (account field on the strategy, see `MULTICHARTS_PITFALLS.md`).
+    orders to #2 (account field on the strategy, see `MULTICHARTS_PITFALLS.md`). 10/28 evening (Order and Position Tracker):
+    #2 $50,764.42, #3 $147,822.60 (~$1,823 above its $146,000 floor; one VB 20 stop ~ $3,000). **User 2026-10-29: keep full
+    size on #3** (thin-cushion lesson: cutting VB doesn't lower fails per pass).
   - Gate ~mid-December: ~40-70 live trades at >= 75% of backtest, no drift alarm -> then +2 x 150K No-Activation a week to 20.
 - **Master session (user, 2026-10-28):** `session_01Wk1fPXwvHF5qTjW7bUhYx9` ('★ Master session'). Scheduled jobs run in
   'Scheduled jobs' `session_014DKffATms37kZigaa2xR2P`: journal + dashboard weekdays 16:40 CT, Friday review 16:47 CT,
@@ -28,6 +30,9 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   - Personal (from the first payouts, ~Feb 2027): 19 pieces at 1 micro incl. Dual Thrust, Swing Target, PAPERTREND, Kusho v9,
     S47 v2, S30 IBS; capital ladder in `PORTFOLIO.md`; 'Capital-expansion bench' table there.
 - **Forward logs (paper, from 10/26):** FC 2B, S47 v2, Kusho v9, S30, BB_MRM (`agents/codex/FORWARD_LOG.md`, frozen bands).
+- **Live guard (2026-10-29):** Apex Chart Monitor on all 8 charts (ACCT rows: balance, auto-trading, feed age); watchdog
+  ntfy alerts; VPS intraday push every 30 min (task VpsIntradayPush, installs itself); pre-market check 08:21 CT into the
+  master session (`analysis/premarket_check.py`); 16:40 check `analysis/vps_health.py` vs `live/expected_setup.json`.
 - **Open for Claude:** automatic cushion sizing after the user's Apex Account Check; live-monitoring plan
   (`live/vps/LIVE_GUARD_PLAN.md`); the VPS 'rejected_today' count looks like whole-file counts (10/28: 3,228, last reject
   dated 10/26) and 10/28 had no 08:15 open check-in.
