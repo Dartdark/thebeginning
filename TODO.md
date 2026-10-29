@@ -5,6 +5,12 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
+- [ ] **NQ Daily Bar Feed (2026-10-29; VPS, outside market hours, ~5 min):** create `C:\TradingLogs\bars\`; new 1-minute @NQ
+  chart (or @MNQ), Exchange time, CME 24h, loaded from 10/05, no strategy; add the indicator
+  [NQ_Daily_Bar_Feed](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/tools/exporters/NQ_Daily_Bar_Feed.txt)
+  ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/tools/exporters/NQ_Daily_Bar_Feed.txt))
+  with `KeepDays` **25** once (fills the gap since the 10/09 export), then set it to 4. Leave the chart open.
+
 - [x] (2026-10-29, user: all done) **Strategy heartbeat (2026-10-29; outside market hours, ~15 min):** paste the updated code into each live strategy and
   compile; read the Output tab for 'compiled successfully' every time (the 10/27 ONB miss). Files (raw):
   [NQ_Vault_Break](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/NQ_Vault_Break.txt),

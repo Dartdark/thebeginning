@@ -59,7 +59,11 @@ if ($Mode -ne "intraday") { Add-Content "live\health\$day.csv" $line }
 
 New-Item -ItemType Directory -Force "live\trades" | Out-Null
 Copy-Item "$Logs\*.csv" "live\trades\" -Force -ErrorAction SilentlyContinue
-git add live/trades live/health
+# daily 1-minute bars from the NQ Daily Bar Feed indicator (2026-10-29) -> data/live_bars/
+New-Item -ItemType Directory -Force "$Logs\bars" | Out-Null
+New-Item -ItemType Directory -Force "data\live_bars" | Out-Null
+Copy-Item "$Logs\bars\*.csv" "data\live_bars\" -Force -ErrorAction SilentlyContinue
+git add live/trades live/health data/live_bars
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {
     git commit -m "live trades + health $(Get-Date -Format yyyy-MM-dd) ($Mode)"
