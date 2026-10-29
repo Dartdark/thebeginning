@@ -154,3 +154,17 @@ For every paper review, answer these four questions explicitly in the saved revi
 Use the answers to decide whether a deeper look is warranted. Negative findings and methodological value count;
 do not force a trading hypothesis from a paper that does not support one. Retain the five-line Summary limit,
 source attribution, evidence/preregistration gates and the requirement to show key findings directly in chat.
+
+## Retained execution reference (user, 2026-10-29)
+
+Consult [Subpenny trading in US equity markets — review](results/subpenny_equity_paper_review_20261029.md)
+(Delassus and Tyč, SSRN 1651201, 2010) when it can help with fill reconciliation, passive-order assumptions,
+queue priority, spread/slippage estimates or execution diagnostics. Use it selectively, not as a required detour
+for unrelated strategy work.
+
+Practical prompts: compare arrival bid/ask with actual fills and subsequent midquote markouts; distinguish
+execution savings from directional alpha; do not assume a price touch guarantees a passive fill or infer queue
+priority from OHLC/trade prints alone. Preserve timestamp alignment and disclose missing quote/queue data.
+Its historical stock-market findings and nearest-cent price-improvement proxy do not establish current CME
+rules, an ES/NQ edge, or a specific futures trade-through parameter. Existing preregistration and live boundaries
+remain unchanged; this reference does not authorize new tests, logger deployment or live modifications.
