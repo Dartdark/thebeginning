@@ -125,11 +125,12 @@ add it here for later review. Record the merit, what is missing, the smallest ne
 duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.
 A queue entry does not add it to a trading plan or start a backtest; review when prerequisites arrive or the user prioritizes it.
 
-- [ ] **U.S. factor-beta overnight/intraday stock baskets — WATCH / NEEDS DATA (2026-10-29).** Later personal-account stock research, outside current futures allocations.
-  Source merit: prior-month betas predict next-month session returns; U.S. market-beta conditional slopes +5.198 bp overnight / −8.892 bp intraday per unit beta, with cross-market evidence. These are gross regression coefficients, not net portfolio returns.
-  Smallest next check: no-return audit of historical universe/adjusted prices, factor clocks, auctions, borrow/financing and attainable basket costs/exposures; then effective design-session count and cost/power gate.
-  Start with market-beta baskets as the simple reference; do not substitute NQ/ES or select factor combinations after seeing returns. No return test starts from this queue entry.
-  [Review](agents/codex/results/factor_beta_sessions_review_20261029.md) · [Evidence](agents/codex/evidence/factor_beta_sessions_20261029.md).
+- [ ] **U.S. factor-beta stock baskets — PARTIAL SCREEN FAIL; exact replication unverified (2026-10-29).**
+  Authorized restricted S&P500/SPY-beta screen is completed under a committed plan:2018–22 covered-day overnight +3.93bp gross/−0.66bp net, intraday +0.89/−3.52bp under4bp RT plus borrow.
+  120/114 of1,259 selected days are unresolved after acquisitions; quoted returns are conditional diagnostics, not a complete native cash ledger. Rounded shares do not rescue it. No2023+ or funded bench opened.
+  Stop this protocol; no timing/filter/sizing rescue search. Full CRSP/FF5 study still needs exact factor data, historical raw share basis, acquisition/settlement treatment and borrow/auction evidence before a separately justified preregistration.
+  Source's gross conditional coefficients remain author evidence, not validated portfolio returns. Outside current futures allocations.
+  [Screen/code/manifest](agents/codex/results/factor_beta_sessions_test_20261029.md) · [Original review](agents/codex/results/factor_beta_sessions_review_20261029.md).
 
 - [ ] **ORB30 + M30 EMA20, long-only NQ — WATCH; proxy tested, native implementation unverified.**
   Verified proxy merit: 994 trades, PF 1.25 after NQ costs; full-session EMA outperformed cash-only EMA in the frozen

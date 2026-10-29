@@ -76,3 +76,6 @@ under [factor_beta_sessions_test_20261029.md](../plans/factor_beta_sessions_test
 It uses two frozen session variants, actual prior information, explicit cost/power/data gates and stops on design failure.
 Third-party revisions, unavailable borrow/auction execution and any unresolved selected observations bar promotion.
 The opportunity and occupancy questions remain unmeasured; this is a standalone personal-stock feasibility screen, not an Apex addition.
+
+## Screen outcome
+Restricted preregistered S&P500 single-market-beta screen completed: design FAIL, costs consume the covered-day gross means and selected acquisition days are unresolved. Exact full-CRSP/FF5 replication remains NEEDS DATA. No2023+ opened and no rescue variants authorized by a failed screen. See [results](../results/factor_beta_sessions_test_20261029.md).
