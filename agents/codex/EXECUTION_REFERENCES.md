@@ -61,6 +61,10 @@ Source pinned vn.py class; reviewed 2026-10-27.
 - Limits: platform generation/status times are not verified broker latency. Chart labels and bar-derived trade times are not actual fill clocks; a chart quote snapshot may occur after the fill.
 - Next check: obtain/review complete account-attributed native order/execution exports, same-contract quotes, timezone mapping and signal coverage; keep unavailable quantities unknown.
 - Status: diagnostic infrastructure and partial observations; no demonstrated spread cost, delayed-entry benefit or execution saving. The logger proposal remains uncompiled/uninstalled in this evidence.
+- Retained entry-timing idea (user-supplied Davey webinar discussion): record prices at −5/−2/−1/0/+1/+2/+5 minutes around verified signal/fill anchors for VB, evaluation ONB_ADX30 and Bridge Monday. Two accounts on one signal count as one market event; preserve separate account fills. Before Sunday's reopen there is no current-session quote; do not substitute Friday observations.
+- This is descriptive: a better later price does not establish that delaying the entry improves the strategy. Any timing experiment must include missed trades, changed exits and costs under a separately frozen plan.
+- [Bid/ask logger proposal](proposals/Apex_Trade_Logger_bidask.txt): chart snapshots do not establish broker submission/fill-time quotes or verified freshness. Separate research-chart validation and responsible review remain prerequisites; no deployment follows from retention.
+- Related operational reference: [stateful watchdog proposal](proposals/watchdog_stateful_proposal.md). Fresh persistent mismatches and today-only rejection evidence concern monitoring, not alpha or execution savings; the draft's integration/deployment status must be checked separately.
 
 ### E05 — Limit-for-market substitution: opportunity cost can exceed the tick saved
 
@@ -110,6 +114,26 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 - Limits: mini-price histories and back-adjusted signals are not a native micro fill/cash ledger. Avoid double-counting spread inside slippage.
 - Next check: reconcile actual contract IDs, as-of rolls, orders/fills/fees and marked daily P&L before portfolio claims.
 - Status: execution/accounting reference; the strategy's separate verification status remains in its report and TODO.
+
+### E10 — Liquidity compensation, turnover and costs
+
+Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
+[Saved review](results/equity_premium_liquidity_review_20261029.md). Retained by user 2026-10-29.
+- Use: distinguish turnover from spread, depth, impact and resilience; distinguish compensation for illiquidity from predictive alpha. Large trading volume need not imply cheap executable liquidity.
+- Evidence: historical asset-pricing model and fits, not independently reproduced. Model-implied trading benefits are not cash trading profit.
+- Limits: historical equity-versus-Treasury estimates do not establish current futures costs, a directional signal or a benefit from increasing turnover.
+- Next check when relevant: measure actual same-contract spreads, depth/impact where available, fees and adverse fills in the relevant market state; never import the paper's historical cost percentages into ES/NQ tests.
+- Status: retained contextual liquidity-risk reference; no strategy trial or allocation.
+
+### E11 — Event-information clocks and attribution
+
+Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
+[Saved review](results/fomc_monthly_coefficients_review_20261029.md), 2026-10-29.
+- Use: separate returns before the event, statement, press conference and later windows; a feature measured over an event window is unavailable at that window's start.
+- Evidence: source-only review of monthly FOMC coefficient decomposition and predictor overlap; no execution savings independently measured.
+- Limits: regression-coefficient shares are not trade returns; covariance with a future surprise is not a signal available beforehand.
+- Next check: record publication/receipt, measurement-window end, decision and first executable fill; fit any forecast transformation on past data only. Reconcile the same events and controls across attribution windows.
+- Status: timing/measurement reference; no FOMC strategy reopening or automatic experiment.
 
 ## Minimum record for any later execution comparison
 

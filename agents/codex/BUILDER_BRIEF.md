@@ -156,20 +156,6 @@ Use the answers to decide whether a deeper look is warranted. Negative findings 
 do not force a trading hypothesis from a paper that does not support one. Retain the five-line Summary limit,
 source attribution, evidence/preregistration gates and the requirement to show key findings directly in chat.
 
-## Retained execution reference (user, 2026-10-29)
-
-Consult [Subpenny trading in US equity markets — review](results/subpenny_equity_paper_review_20261029.md)
-(Delassus and Tyč, SSRN 1651201, 2010) when it can help with fill reconciliation, passive-order assumptions,
-queue priority, spread/slippage estimates or execution diagnostics. Use it selectively, not as a required detour
-for unrelated strategy work.
-
-Practical prompts: compare arrival bid/ask with actual fills and subsequent midquote markouts; distinguish
-execution savings from directional alpha; do not assume a price touch guarantees a passive fill or infer queue
-priority from OHLC/trade prints alone. Preserve timestamp alignment and disclose missing quote/queue data.
-Its historical stock-market findings and nearest-cent price-improvement proxy do not establish current CME
-rules, an ES/NQ edge, or a specific futures trade-through parameter. Existing preregistration and live boundaries
-remain unchanged; this reference does not authorize new tests, logger deployment or live modifications.
-
 ## Execution-reference library (user, 2026-10-29)
 
 Maintain [EXECUTION_REFERENCES.md](EXECUTION_REFERENCES.md) for useful execution-analysis findings from all future
@@ -181,10 +167,6 @@ Show the key finding and library link in chat. Keep execution-only references he
 queue. This does not waive requested strategy backtests, evidence/preregistration gates or trial limits and authorizes
 no live/VPS/broker/logger changes. Historical source claims and synthetic checks are not verified execution savings.
 
-## Retained liquidity-risk reference (user, 2026-10-29)
-
-Consult [Swan equity-premium/liquidity review](results/equity_premium_liquidity_review_20261029.md)
-(SSRN 251399, 2002) when interpreting liquidity compensation, turnover, trading costs or liquidity stress.
-Distinguish turnover from spread/depth/impact and risk compensation from predictive alpha. The fitted historical
-asset-pricing model is background, not proof of a current ES/NQ signal or permission to assume its historical
-cost estimates. Use selectively when relevant; no automatic backtest or allocation change follows.
+Retained execution and liquidity ideas are centralized there, including subpenny fills (E01), entry-timing diagnostics
+(E04), liquidity compensation/turnover (E10) and event-information clocks (E11). Keep detailed lessons in that library;
+this brief is the pointer. Original reports remain the evidence record.
