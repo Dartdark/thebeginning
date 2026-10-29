@@ -155,6 +155,16 @@ Source: Gumport, *The Buyback Monitor – July 2009*, [SSRN 1433183](https://ssr
 - Next check when relevant: inspect original program/contract disclosures and actual executions, costs, benchmark definitions and publication clocks before estimating an execution saving or a directional flow.
 - Status: execution/accounting reference; original ASR/commission publications are leads only. No automatic backtest, data purchase or strategy-queue promotion.
 
+### E14 — Overnight/intraday attribution and causal price-impact claims
+
+Source: Knuteson, [SSRN 3705017](https://ssrn.com/abstract=3705017).
+[Saved review](results/overnight_intraday_knuteson_review_20261029.md), 2026-10-29.
+- Use: split frozen strategy P&L into non-overlapping overnight/intraday components and reconcile costs, rolls and inventory to the total; do not assign overnight equity exposure to an intraday signal.
+- Evidence: source-only review of cumulative index/ETF charts through 2020; manipulation is the author's explanation, not established causal evidence.
+- Limits: differing histories, adjusted/raw prices, dividends, official opens and actual auction fills require separate checks. Stock-index components are not executable futures cash flows; the paper notes the U.S. index divergence stopped after 2008.
+- Next check when relevant: audit session clocks and price adjustments, then attribute an existing fixed ledger. Own-order price impact requires actual order/quote records and a credible benchmark; a subsequent market move alone is insufficient.
+- Status: measurement reference, not a new overnight strategy, verified execution saving or reopening of prior tests.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
