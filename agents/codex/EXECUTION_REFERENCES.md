@@ -135,6 +135,16 @@ Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
 - Next check: record publication/receipt, measurement-window end, decision and first executable fill; fit any forecast transformation on past data only. Reconcile the same events and controls across attribution windows.
 - Status: timing/measurement reference; no FOMC strategy reopening or automatic experiment.
 
+### E12 — Realized-variance measurement: microstructure noise, units and availability
+
+Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5 and Figure 1 p.27.
+[Review](results/variance_risk_premium_review_20261029.md), 2026-10-29.
+- Use: high-frequency squared returns can be contaminated by microstructure frictions; a noisier variance estimate is not necessarily more accurate just because sampling is faster.
+- Evidence: source methodological discussion, not a newly reproduced estimator comparison or execution-cost study.
+- Limits: IV minus RV needs variance units and matched horizons/sessions; volatility differences, daily futures proxies and retrospective realized variance are different quantities. Do not subtract next month's realized variance to construct a signal supposedly known today.
+- Next check when using variance inputs: document return sampling, overnight handling, price source, percentage/decimal scaling, annualization and available-at timestamps before testing. Audit candidate estimators without choosing on strategy P&L.
+- Status: measurement reference for execution/risk inputs; no spread, slippage saving or standalone intraday alpha established.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

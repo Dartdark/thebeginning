@@ -167,6 +167,19 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   cheap screen; account/personal comparisons follow only if it passes. Minimum two-contract scale-out and current risk limits need testing.
   [Review](agents/codex/results/ift_nq5_flow_review.md) · [Evidence](agents/codex/evidence/ift_nq5_flow.md).
 
+- [ ] **Monthly S&P 500 VRP-conditioned equity exposure — WATCH / NEEDS DATA; personal research (2026-10-29).**
+  Merit: Zhou's SSRN 1783624 reports positive three-month equity-return predictability, adjusted R² 9.61% and
+  overlap-robust t 7.22 over 1990–2016; these are in-sample source claims, not verified net strategy returns.
+  This is monthly equity allocation, not an options-selling rule or a new intraday Apex filter.
+  Obtain/pin original monthly IV/RV series and construction code, historical availability, SPX five-minute/overnight
+  conventions and return units. Audit against related VIX/VRP work; daily SPY/futures substitutions are proxy adaptations.
+  Smallest next check: source-parity and point-in-time input audit without returns. Only then freeze a bounded exposure
+  mapping, costs and chronological replication against constant equity, VIX-only and RV-only baselines.
+  No return test or allocation yet; personal contribution, crisis loss timing and diversification remain unverified.
+  [Review](agents/codex/results/variance_risk_premium_review_20261029.md) ·
+  [Evidence](agents/codex/evidence/variance_risk_premium_20261029.md).
+
+
 ## Later
 
 - [ ] **Export 1-minute data for NG, ZC and ZS** (natural gas, corn, soybeans), Jan 2018 to now, same way as the CL / ZN files
