@@ -230,3 +230,9 @@ file). Verified: test alerts arrived on their own.
 `[int](855 / 100)` is 9, not 8 (banker's rounding), so HHMM -> minutes was wrong whenever the minutes were 30-59: at 08:55 a
 09:00 heartbeat looked 55 minutes old and every live chart alarmed. Fix: `[math]::Floor(x / 100)`. Same trap in any
 HHMM arithmetic in PowerShell.
+
+## Watchdog 'MultiCharts has no live internet connections' while trading was fine (2026-10-29, false alarm)
+The NO_NET check looked for internet sockets owned by processes named MultiCharts* / TradingServer* / *Rithmic*; the
+broker and data sockets belong to another MultiCharts helper process, so it alarmed every hour (08:15-11:25) while every
+chart's ACCT row showed bars 0-1 s old. Fix: NO_NET now fires only if no chart wrote a fresh bar in the last 10 minutes.
+Check before acting on that alarm: the Chart Monitor's ACCT rows (bar age) or the chart itself ticking.

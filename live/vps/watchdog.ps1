@@ -32,7 +32,17 @@ if ($mc.Count -eq 0) { $problems += "MC_DOWN|MultiCharts is not running on the V
 else {
     $ids = $mc.Id
     $conn = @(Get-NetTCPConnection -State Established | Where-Object { $ids -contains $_.OwningProcess -and $_.RemoteAddress -notmatch '^(127\.|::1)' })
-    if ($conn.Count -eq 0) { $problems += "NO_NET|MultiCharts has no live internet connections (Rithmic / data feed down?)" }
+    # 2026-10-29: the Rithmic / dxFeed sockets belong to a MultiCharts helper process this name filter misses, so the
+    # check fired all morning while every chart had 0-1 s old bars. Alarm only if no chart wrote a fresh bar (ACCT row,
+    # bar age < 10 min) in the last 10 minutes; a really dead feed is also caught by the FEED_ check below.
+    $fresh = $false
+    if (Test-Path "$Logs\$day.csv") {
+        $m = [math]::Floor($hhmm / 100) * 60 + $hhmm % 100
+        Get-Content "$Logs\$day.csv" -Tail 400 | Where-Object { $_ -like "ACCT,*" } | ForEach-Object {
+            $c = $_.Split(","); $bt = [int]$c[13]
+            if ([double]$c[7] -lt 600 -and ($m - ([math]::Floor($bt / 100) * 60 + $bt % 100)) -le 10) { $fresh = $true } }
+    }
+    if ($conn.Count -eq 0 -and -not $fresh) { $problems += "NO_NET|MultiCharts has no live internet connections and no chart has a fresh bar (Rithmic / data feed down?)" }
 }
 
 # 2. logger rows: heartbeats and position vs broker
