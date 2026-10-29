@@ -180,6 +180,18 @@ testing gates. Do not add broker/VPS/live controls or a way to bypass preregistr
 
 ## Automatic worthwhile-paper investigation (user, 2026-10-29)
 
+**Finish before handoff (user clarification2026-10-29):** finding a worthwhile paper is a work trigger, not a
+reason to stop and ask whether to build/test. Continue through evidence, permitted data acquisition, committed
+bounded strategy/code preregistration, cheap design gates and every earned validation/account stage. Present
+completed results against the then-current applicable portfolios, including BASE/ADD/REPLACE/EMPTY at actual
+integer size, with code/inputs/ledgers and unresolved limits ready for the user to send to Claude for verification.
+Do not send Claude or anyone else an external message. Mark independent verification pending until it occurs.
+A failed gate stops dependent tests; report that completed negative outcome without a rescue search. Missing
+material inputs stop dependent tests, not discovery: record them and move on within the limits. Do not issue
+standalone worthwhile-lead/execution-reference alerts. Nonblocking progress updates may continue; escalate only
+a genuine user-action blocker or exhausted authorized budget once. Never invent returns or run later account
+stages after an earlier failure merely to fill a report.
+
 When a reviewed paper warrants deeper investigation, proceed without asking the user again: inspect owned/free data,
 complete evidence and feasibility checks, commit a bounded preregistration, run the cheap design screen, then advance
 only through passing gates to historical validation, independent review and relevant account comparisons.
@@ -208,5 +220,6 @@ check before first design outcomes; admission is not independent economic verifi
 gates still apply. At a cap stop returns and notify once; metadata/source triage may continue.
 Keep per-paper JSON records and access/run receipts; release the lease and deduplicate actionable notifications.
 Use permitted connected search when Crossref is blocked; respect access controls and never inspect credentials.
-Source-only claims remain unverified. Alert through this app only for new concrete merit, material results or a
-genuine user-action blocker; otherwise stay quiet. Terminal records appear after pull/refresh, not live sync.
+Source-only claims remain unverified. Alert through this app for completed material test/portfolio outcomes or a
+genuine user-action blocker; a promising finding alone triggers continued work, not a standalone alert.
+Terminal records appear after pull/refresh, not live sync.

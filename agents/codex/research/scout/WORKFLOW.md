@@ -1,7 +1,7 @@
 # Autonomous paper scout — operating contract
 
-User authorization2026-10-29: discover useful papers, analyze, backtest justified strategies automatically,
-or report worthwhile leads with the user as overseer. This covers research, not trading or live deployment.
+User authorization2026-10-29: discover useful papers, analyze and develop/test justified strategies automatically,
+then deliver completed results for the user's verification handoff. This covers research, not trading or deployment.
 This document and progress.json define a bounded first research batch, not an unlimited parameter search.
 
 ## Purpose of every cycle — user clarification2026-10-29
@@ -17,6 +17,17 @@ cycle when warranted; never manufacture a strategy, rescue a failed family or co
 as strategy success. Retain useful supporting methods in EXECUTION_REFERENCES.md as already required.
 
 ## Execution model
+
+**Finish before handoff — user clarification2026-10-29:** do not stop at a worthwhile discovery or ask again
+whether to create/test a strategy. Continue autonomously through permitted acquisition, evidence, preregistered
+exact rules/code, cheap design and every earned historical-validation/account stage. Refresh current plan sources
+read-only before comparing BASE/ADD/REPLACE/EMPTY at actual integer size in each eligible evaluation, funded and
+personal home. Show actual costs, payout/risk/timing and statistical limits in the completed report, with a
+reproducible code/input/ledger package for the user to send to Claude. Independent verification stays pending until
+actually completed; no promotion, allocation or external message follows automatically. Failed gates stop dependent
+work; report completed rejections honestly without later-stage invented comparisons. Data-blocked leads are saved
+and passed over within existing limits. If cycle limits interrupt eligible work, checkpoint it for the next cycle
+instead of treating the unfinished lead as a result. Nonblocking progress messages do not require a decision.
 
 The terminal's Research scout button performs public SSRN DOI metadata discovery via Crossref and local dedup.
 Its scores measure relevance ONLY. It never calls an LLM, reads arbitrary network URLs or executes code.
@@ -143,9 +154,10 @@ certify independent economic verification, or automate the later design/validati
 Update progress counters, trial IDs, last_run, lease release, discovery/failure counts and one actionable
 notification key. Always commit/push concrete artifacts to codex/work with a checked parent/non-force update.
 
-Notify in the app only for a NEW specific worthwhile source finding with clear economic merit, a material
-completed test/review result or a genuine blocker requiring the user. Metadata keyword matches alone do not
-justify an alpha alert. Include <=5line summary, 4questions, relevant numbers/costs/dates and direct report links.
+Notify in the app for a NEW material completed test/portfolio outcome or a genuine blocker requiring the user.
+A worthwhile discovery, source-only review or execution reference alone triggers continued research, not an alert
+or permission question. Keep its four answers/source evidence in the saved records for the eventual report.
+For the completed handoff include <=5line summary, 4questions, actual numbers/costs/dates and direct report links.
 Combine findings; deduplicate notifications by ID+revision+disposition. Stay quiet on unchanged/non-actionable
 runs, routine rejections/retries and unchanged access limitations. Do not send external email/Slack/phone
 messages or claim verified phone delivery. Automation notifications remain subject to app settings.
