@@ -1,0 +1,5 @@
+# CHoCH implementation audit
+
+Initial committed design run `3fa9c3b` was completed and retained unchanged under `design_initial_implementation/`. It incorrectly omitted the Sunday 21:00 open-session window while including the fully closed Friday 21:00 window. Correct these calendar enumeration conditions to implement the already frozen plan; do not change pivot radius, structure rule, clock anchor, risk or target. Preserve all four initial economic ledgers and their statistics as implementation history. This is an implementation correction, not a search for favorable parameters.
+
+The initial design exposed incomplete 17:01–21:00 windows on nearly all dates, leaving only three signals per radius. Do not promote the resulting high trade t from two resolved trades; it is far below the preregistered sample gate and does not measure the intended full strategy. Audit timestamp availability without reading 2023+ prices. Corrected-run coverage remains a limitation unless source data resolve it. Add synthetic prefix/future perturbation and mirror tests before the corrected run; keep the closed research programs unchanged.
