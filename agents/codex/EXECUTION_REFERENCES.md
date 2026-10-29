@@ -248,6 +248,15 @@ Source: Branch & Ma, SSRN 3259614 (paper, user upload 2026-10-29); `analysis/on_
 - Next check: none; do not re-test overnight -> intraday reversal on index futures (also SSRN 2730304, F).
 - Status: negative reference for futures; stock-only lesson.
 
+### E24 — Retail open-buy / close-sell flow (Korea) does not show up in NQ / ES
+
+Source: Ahn, Fan, Noh & Park, SSRN 4752520 (paper, user upload 2026-10-29); `analysis/retail_gap_cot_test.py`, TIER_LIST F row.
+- Use: the paper verifies with trade-level investor IDs that Korean retail (mobile, young, male day traders) net buys at the open auction and net sells at the close; institutions do the reverse. It widens the overnight − intraday gap in high-retail stocks / months.
+- Evidence (historical test): on CME index futures with CFTC small-trader and micro-share proxies, high-retail weeks show a smaller NQ gap (t −1.8), ES none.
+- Limits: COT proxies are weekly positions, not intraday flow; the micro series starts 2020-08.
+- Next check: none unless intraday retail flow data (e.g. small-lot aggressor volume by minute) is added.
+- Status: negative reference for futures.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
