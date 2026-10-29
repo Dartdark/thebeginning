@@ -219,3 +219,9 @@ with no warning; after any code change, compare the chart's trade arrows with th
 watchdog had this since 2026-10-21: it never ran and no ntfy alarm was ever sent. Fix: `${t}:` (braces) before a colon.
 Test every .ps1 change once by hand on the VPS (`-Test` on the watchdog) before trusting it. Verified 2026-10-29:
 after the fix, `watchdog.ps1 -Test` delivered all 8 test alerts to the phone (ntfy).
+
+## Scheduled task runs but fails with Last Result 1 (2026-10-29, ClaudeAlertRelay on the VPS)
+A task that called `powershell ... -File script.ps1` directly ran every minute but failed before the script logged anything,
+while the same script worked by hand; a long /TR string pasted over several lines broke the next attempt. Fix: point the
+task at a short .cmd launcher in the repo (`live/vps/run_relay.cmd`: `cd /d`, `powershell -NoProfile ...`, output to a log
+file). Verified: test alerts arrived on their own.

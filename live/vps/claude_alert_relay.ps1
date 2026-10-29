@@ -2,7 +2,8 @@
 # VPS does. Every minute (task 'ClaudeAlertRelay'): fetch the work branch (only new changes), read live/claude_alerts.txt
 # from it WITHOUT touching the working copy, and send each line not sent before to ntfy. Lines come from
 # analysis/send_alert.py. Never touches MultiCharts, Rithmic or orders.
-#   Install once:  schtasks /Create /TN "ClaudeAlertRelay" /SC MINUTE /MO 1 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\claude_alert_relay.ps1" /F
+#   Install once:  schtasks /Create /TN "ClaudeAlertRelay" /SC MINUTE /MO 1 /TR "C:\TradingRepo\live\vps\run_relay.cmd" /F
+#   (via run_relay.cmd: the direct powershell task failed with Last Result 1 and no log, 2026-10-29; verified working)
 param([switch]$Diag, [int]$Resend = 0)   # -Diag: print every step; -Resend N: send the last N lines again
 $ErrorActionPreference = "SilentlyContinue"
 $Topic = "apex-alarm-6e531eb6db8e"
