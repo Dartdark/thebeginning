@@ -7,7 +7,7 @@ description: Paper scout - search arXiv, NBER, SSRN abstracts and free author co
 
 Goal: bring in strategy hypotheses for NQ / ES (Apex intraday, flat by 15:59 CT) without the user searching by hand.
 
-## 1. Search (15-25 queries, newest first; the user may add a topic after "/scout")
+## 1. Search (30-50 queries, newest first, enough to find ~10 readable papers; the user may add a topic after "/scout")
 - arXiv API (works from the cloud): `https://export.arxiv.org/api/query?search_query=cat:q-fin.TR+OR+cat:q-fin.ST+OR+cat:q-fin.PM&sortBy=submittedDate&max_results=50`, plus keyword queries.
 - NBER new working papers (`https://www.nber.org/api/v1/working_page_listing/contentType/working_paper/_/_/search?page=1&perPage=50`).
 - SSRN through WebSearch (site:papers.ssrn.com ...). SSRN pages / PDFs answer 403 from the cloud: look for a free copy
@@ -27,7 +27,8 @@ One row: date, source id + link, title, verdict: SKIP (why, 5-10 words) / READ /
 READ only when: a mechanism that forces trading at a known time or a measurable market behaviour, transferable to
 NQ / ES intraday (or a funded-safe overnight hold), with data we have (`data/`, 1-min NQ / ES / YM / CL / GC / BTC / 6E).
 
-## 4. Read and test (max 3 full reads and 1 new backtest per run: multiple testing, LESSONS.md)
+## 4. Read and test (user, 2026-10-29: up to 10 full reads per run; test every one that fits, each test counted in
+##    `analysis/trials.py` so the multiple-testing bar rises with the search)
 - Free full text: download to `papers/` (PDF, research papers only), answer the four questions (about / finds / why it
   should make money / can we build on it), test per CLAUDE.md 'Testing standard' (costs, by year, 2023+, placebo,
   longs / shorts), rank in `TIER_LIST.md`, add execution lessons to `EXECUTION_REFERENCES.md` (next free E number).
