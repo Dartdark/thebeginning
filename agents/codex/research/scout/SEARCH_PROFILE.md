@@ -73,3 +73,14 @@ require new independent information or genuinely new evidence, not a parameter r
 Moving-average/indicator papers (MACD, RSI, Hurst), surveys/behavioral questionnaires, single-country emerging
 market studies, regulation/policy-only papers and crypto pump-and-dump. Do not force an index-futures strategy
 from those subjects. Explicit later user requests still take precedence.
+
+## Persistent discovery — user correction 2026-10-29
+
+The three-full-paper/one-new-hypothesis cycle limits are checkpoint batches, not a reason to end an active
+user-authorized search after blocked leads or a rejection. Save each batch and continue to the next distinct
+source-supported family using SEARCH_PROFILE.md. A failed candidate stops its dependent tests, not discovery.
+A worthwhile eligible candidate must continue through all earned design, validation and actual current-book
+comparisons before handoff. Never change thresholds, rename a failed family or force a positive result.
+Preserve the overall 10-hypothesis/30-definition budget, all prior multiplicity, per-family variant limits,
+checked-head leases and admission gates. At a genuine runtime/context boundary, checkpoint the exact next
+work for the existing scheduled scout; do not create duplicate automation or claim work runs invisibly.

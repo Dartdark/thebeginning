@@ -171,3 +171,14 @@ messages or claim verified phone delivery. Automation notifications remain subje
 If there is no executable workspace but GitHub/search are available, complete discovery and source analysis,
 save an honest data/workspace-blocked disposition; do not claim a backtest ran. Notify once if access requires
 user action. A saved prompt or configured task is not proof that every future source or test can succeed.
+
+## Persistent discovery — user correction 2026-10-29
+
+The three-full-paper/one-new-hypothesis cycle limits are checkpoint batches, not a reason to end an active
+user-authorized search after blocked leads or a rejection. Save each batch and continue to the next distinct
+source-supported family using SEARCH_PROFILE.md. A failed candidate stops its dependent tests, not discovery.
+A worthwhile eligible candidate must continue through all earned design, validation and actual current-book
+comparisons before handoff. Never change thresholds, rename a failed family or force a positive result.
+Preserve the overall 10-hypothesis/30-definition budget, all prior multiplicity, per-family variant limits,
+checked-head leases and admission gates. At a genuine runtime/context boundary, checkpoint the exact next
+work for the existing scheduled scout; do not create duplicate automation or claim work runs invisibly.

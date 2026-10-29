@@ -230,3 +230,14 @@ Use permitted connected search when Crossref is blocked; respect access controls
 Source-only claims remain unverified. Alert through this app for completed material test/portfolio outcomes or a
 genuine user-action blocker; a promising finding alone triggers continued work, not a standalone alert.
 Terminal records appear after pull/refresh, not live sync.
+
+## Persistent discovery — user correction 2026-10-29
+
+The three-full-paper/one-new-hypothesis cycle limits are checkpoint batches, not a reason to end an active
+user-authorized search after blocked leads or a rejection. Save each batch and continue to the next distinct
+source-supported family using SEARCH_PROFILE.md. A failed candidate stops its dependent tests, not discovery.
+A worthwhile eligible candidate must continue through all earned design, validation and actual current-book
+comparisons before handoff. Never change thresholds, rename a failed family or force a positive result.
+Preserve the overall 10-hypothesis/30-definition budget, all prior multiplicity, per-family variant limits,
+checked-head leases and admission gates. At a genuine runtime/context boundary, checkpoint the exact next
+work for the existing scheduled scout; do not create duplicate automation or claim work runs invisibly.

@@ -1,14 +1,8 @@
 {
   "schema_version": 1,
   "program": "paper-scout-20261029",
-  "status": "running",
-  "lease": {
-    "run_id": "scout-pre-nfp-20261029-design",
-    "owner": "codex-root-pre-nfp",
-    "claimed_at": "2026-10-29T22:13:58.000Z",
-    "expires_at": "2026-10-30T00:13:58.000Z",
-    "checked_parent": "831c1af9f0bce12db2bd75019e87b5dc9cbe446b"
-  },
+  "status": "ready",
+  "lease": null,
   "hypotheses_started": 2,
   "economic_definitions": 4,
   "max_hypotheses": 10,
@@ -51,8 +45,9 @@
         "PRE_NFP_ES_CALENDAR_NULL",
         "PRE_NFP_ES_COST_STRESS"
       ],
-      "status": "reserved",
-      "proposal_sha256": "73126cfa86d7529352657551e097ec3eaf5c438515b13d2255e2cb6254254474"
+      "status": "design_reject",
+      "proposal_sha256": "73126cfa86d7529352657551e097ec3eaf5c438515b13d2255e2cb6254254474",
+      "result_path": "agents/codex/results/scout_pre_nfp_20261029.md"
     }
   ],
   "seen": [
@@ -163,79 +158,26 @@
       "revision": "Published2024online2023-12-18",
       "disposition": "design_reject",
       "record_path": "agents/codex/research/scout/records/3521370.json"
+    },
+    {
+      "ssrn_id": "3290649",
+      "revision": "November1 2021primary in-press; complete extracted text",
+      "disposition": "design_reject",
+      "record_path": "agents/codex/research/scout/records/3290649.json"
     }
   ],
   "last_run": {
-    "run_id": "scout-europe-fix-20261029",
-    "finished_at": "2026-10-29T22:12:52.597628+00:00",
-    "checked_start_head": "7c8f3a9bfb55b441a87614769873bbefa756b22c",
-    "preregistration_commit": "ae338c3ef04403e862e173bd31fe7ba2a68decac",
-    "focus": "Owned-data-first academic market hypotheses; forced benchmark demand in underused6E",
-    "metadata_only_papers": [
-      "5136393",
-      "3822093",
-      "3164757",
-      "7257240",
-      "6750442"
-    ],
-    "full_reviews": 1,
+    "run_id": "scout-pre-nfp-20261029-design",
+    "recorded_at": "2026-10-29 22:18:07 UTC",
+    "status": "design_reject_continue_discovery",
+    "checked_remote_head": "a63d7bc11720b99eb67c69c36812a61216361058",
+    "preregistration_commit": "a63d7bc11720b99eb67c69c36812a61216361058",
+    "full_source_reviews": 1,
     "new_hypotheses": 1,
-    "economic_definitions": 1,
-    "status": "design_reject",
-    "source_method": "Connected public indexed search/publisher reader. Crossref prior network restriction known; no new API request made.",
-    "search_groups": [
-      "futures settlement price pressure2024-26",
-      "futures overnight reversal gold/treasury",
-      "Informative Price Pressure nextday",
-      "Ready orderflows commodity index",
-      "futures daylight savings and holidays",
-      "currency fix reversal",
-      "gold intraday momentum",
-      "futures margin calls",
-      "Treasury intraday momentum",
-      "Foreign Exchange Fixings author/fulltext/replication",
-      "LSEG14:00benchmark and CME contract specs"
-    ],
-    "access": [
-      {
-        "url": "https://www.bankofcanada.ca/wp-content/uploads/2021/10/swp2021-48.pdf",
-        "method": "configured Python urllib normal managed network",
-        "outcome": "Proxy tunnel403; no bypass"
-      },
-      {
-        "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jofi.13306",
-        "method": "connected publisher reader",
-        "outcome": "All article body/reference/footnote lines104-744 captured; figures are captions, not original pixels"
-      },
-      {
-        "url": "https://www3.nd.edu/~zda/FOMC.pdf",
-        "method": "connected reader",
-        "outcome": "Nonretryable redirected-destination failure"
-      },
-      {
-        "url": "https://ssrn.com/abstract=7257240",
-        "method": "connected reader",
-        "outcome": "403; moved on"
-      },
-      {
-        "url": "https://ssrn.com/abstract=6750442",
-        "method": "connected reader",
-        "outcome": "403; moved on"
-      }
-    ],
-    "admission_attempts": [
-      "Wrong transcribed claim SHA rejected before returns",
-      "Correct fetched claim admitted before returns and rechecked by run process"
-    ],
-    "engineering_checks": [
-      "Clock fixtures winter/summer/both mismatch eras PASS",
-      "Endpoint census before returns1288/1305",
-      "Ledger uniqueness,360minute clocks,design dates,year/gross/cost/net reconciliation PASS"
-    ],
-    "no_2023_plus_or_accounts": true,
-    "execution_reference": "E32",
-    "report_path": "agents/codex/results/scout_3521370_20261029.md",
-    "terminal_visibility": "Committed records after pull/refresh; no live synchronization"
+    "new_economic_definitions": 3,
+    "return_tests_executed": true,
+    "report_path": "agents/codex/results/scout_pre_nfp_20261029.md",
+    "next_work": "Continue distinct owned-data-compatible families. Check Hartley/Schwarz3440417 multi-day Treasury month-end against prior intraday-only ZN test and2021 index strike-time change before any new return."
   },
   "last_notification_key": "ssrn:5250499:prototype-v1:real-data-blocked",
   "note": "New paper-discovery program authorized 2026-10-29. Existing repository multiplicity remains in every significance decision. Paused t6 and Hunt v2 are not resumed or reset.",
@@ -489,6 +431,19 @@
       "execution_reference": "E32",
       "report_path": "agents/codex/results/scout_3521370_20261029.md",
       "terminal_visibility": "Committed records after pull/refresh; no live synchronization"
+    },
+    {
+      "run_id": "scout-pre-nfp-20261029-design",
+      "recorded_at": "2026-10-29 22:18:07 UTC",
+      "status": "design_reject_continue_discovery",
+      "checked_remote_head": "a63d7bc11720b99eb67c69c36812a61216361058",
+      "preregistration_commit": "a63d7bc11720b99eb67c69c36812a61216361058",
+      "full_source_reviews": 1,
+      "new_hypotheses": 1,
+      "new_economic_definitions": 3,
+      "return_tests_executed": true,
+      "report_path": "agents/codex/results/scout_pre_nfp_20261029.md",
+      "next_work": "Continue distinct owned-data-compatible families. Check Hartley/Schwarz3440417 multi-day Treasury month-end against prior intraday-only ZN test and2021 index strike-time change before any new return."
     }
   ],
   "data_access_blockers": {
@@ -524,6 +479,7 @@
     "search_profile": "agents/codex/research/scout/SEARCH_PROFILE.md",
     "data_blocked_action": "record_and_park_then_move_on",
     "existing_blocked_leads": "Do not resume merely because source work is pending; require genuinely new matching source/data availability.",
-    "receipt": "agents/codex/research/scout/runs/20261029_data_first_policy.json"
+    "receipt": "agents/codex/research/scout/runs/20261029_data_first_policy.json",
+    "checkpoint_batches": "3 full reviews /1new hypothesis are batch checkpoints. Continue distinct families across batches; preserve10hypotheses/30definitions, nofailed-familyrescue."
   }
 }
