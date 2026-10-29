@@ -1,0 +1,82 @@
+{
+  "hypothesis_id": "non_FOMC_preannouncement_reopen",
+  "run_id": "scout-pre-nfp-20261029-design",
+  "lease_owner": "codex-root-pre-nfp",
+  "source_id": "ssrn:3290649",
+  "phase": "design",
+  "design_start": "2018-01-01",
+  "design_end": "2022-12-31",
+  "candidate_variants": 1,
+  "control_variants": 2,
+  "definition_ids": [
+    "PRE_NFP_ES_REOPEN",
+    "PRE_NFP_ES_CALENDAR_NULL",
+    "PRE_NFP_ES_COST_STRESS"
+  ],
+  "review_record": "agents/codex/research/scout/records/3290649.json",
+  "evidence_path": "agents/codex/evidence/scout_pre_nfp_20261029.md",
+  "plan_path": "agents/codex/plans/scout_pre_nfp_20261029.md",
+  "code_paths": [
+    "analysis/codex_scout_pre_nfp_20261029.py"
+  ],
+  "inputs": [
+    {
+      "path": "agents/codex/inputs/scout_preannouncement_20261029/prospective_schedules.json",
+      "sha256": "0e232d346cd465b16e9464fbe71d4a85f8820c1945630f1032caaad8de90327d",
+      "permission": "permitted_access",
+      "provenance": "BLS archived previous-month notices captured with connected primary-source reader"
+    },
+    {
+      "path": "data/ES_1min_2017.csv",
+      "sha256": "9ddc201359c70d1adb174141d0614dbf48e08f3324f63b6f91b97350a0aac442",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ES export"
+    },
+    {
+      "path": "data/ES_1min_2018.csv",
+      "sha256": "ad4027b8230de0a91f83d1b6f3b798933f92cedebc39e56fe9223447c4b9d751",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ES export"
+    },
+    {
+      "path": "data/ES_1min_2019.csv",
+      "sha256": "b9c09d6c9a702e560119bd33770cc71e05423fc0a7a227fcc046e73bf22f22c5",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ES export"
+    },
+    {
+      "path": "data/ES_1min_2020.csv",
+      "sha256": "c22514904bd19b8ee9e3611bcd8af4017290730550b4799b9d92da73f8e7d550",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ES export"
+    },
+    {
+      "path": "data/ES_1min_2021.csv",
+      "sha256": "67cd2dee366b86f555d09d45fb4cb9f6163347531b4f3f230f73704a1fff8096",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ES export"
+    },
+    {
+      "path": "data/ES_1min_2022.csv",
+      "sha256": "00db614dd10674f7fe2f14940ae43f523b57ac48db1b0619b0eb084c5f50f601",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ES export"
+    }
+  ],
+  "information_clock": "NFP calendar corroborated in previous-month official notice, available_by +one full calendar day. ATR lagged before entry date. No surprise inputs.",
+  "native_costs": "1MES gross $5/point minus$1.24RT fees and2x$1.25slippage; stress2ticks/fill. ESunit bridge $50/point minus$5RT and2x$12.50.",
+  "entry_exit_rule": "Long17:06-labelled minute open previous date (17:05CT),1ATR15lagged stop,no target/reentry,exit07:25minuteclose before08:30ETNFP.",
+  "gross_stop_rule": "All frozen design gates required including native net>0,t>=2,4positiveyears,bootstrap lower>0,matchedp<=.05,stress>0; failure stopsrecent/accounts.",
+  "data_failure_stop_rule": "55/60pre-return eligible after>=99%minute coverage,maxgap<=5,endpoint and quarterlyroll exclusions;minimum40/90%. No2023files. Inputs/source hashes must match.",
+  "artifact_sha256": {
+    "agents/codex/research/scout/records/3290649.json": "ee952099a85175c626431ea87b7c9615247b9173a4a59d53e4c835348aa8409b",
+    "agents/codex/evidence/scout_pre_nfp_20261029.md": "ac517145a1e119d2ea61d181745c3ceeecd21954f814fc2f758a59db26220b23",
+    "agents/codex/plans/scout_pre_nfp_20261029.md": "32cd603251de8f29bf3f882224b67b44cadc24eb677472e14e665b7978780734",
+    "analysis/codex_scout_pre_nfp_20261029.py": "95f925e2a48138fdfd532738734b7b973c97bbd0105c17355add17d4a8e65a58"
+  },
+  "shared_engine_sha256": {
+    "analysis/grid.py": "a30ddd4533c9b9d9bdd50f161deded3a2864605f1b81bf4605f74b1d23bc7405",
+    "analysis/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791"
+  }
+}
