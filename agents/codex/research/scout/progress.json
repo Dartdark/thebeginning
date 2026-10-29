@@ -1,10 +1,16 @@
 {
   "schema_version": 1,
   "program": "paper-scout-20261029",
-  "status": "ready",
-  "lease": null,
-  "hypotheses_started": 1,
-  "economic_definitions": 1,
+  "status": "running",
+  "lease": {
+    "run_id": "scout-pre-nfp-20261029-design",
+    "owner": "codex-root-pre-nfp",
+    "claimed_at": "2026-10-29T22:13:58.000Z",
+    "expires_at": "2026-10-30T00:13:58.000Z",
+    "checked_parent": "831c1af9f0bce12db2bd75019e87b5dc9cbe446b"
+  },
+  "hypotheses_started": 2,
+  "economic_definitions": 4,
   "max_hypotheses": 10,
   "max_economic_definitions": 30,
   "max_new_hypotheses_per_cycle": 1,
@@ -31,6 +37,22 @@
       "unused_definition_ids": [],
       "result_path": "analysis/outputs/codex_scout_europe_fix/result.json",
       "closed_at": "2026-10-29T22:12:52.597628+00:00"
+    },
+    {
+      "hypothesis_id": "non_FOMC_preannouncement_reopen",
+      "run_id": "scout-pre-nfp-20261029-design",
+      "source_id": "ssrn:3290649",
+      "proposal_path": "agents/codex/research/scout/proposals/pre_nfp_es_20261029.json",
+      "candidate_variants": 1,
+      "control_variants": 2,
+      "economic_definitions": 3,
+      "definition_ids": [
+        "PRE_NFP_ES_REOPEN",
+        "PRE_NFP_ES_CALENDAR_NULL",
+        "PRE_NFP_ES_COST_STRESS"
+      ],
+      "status": "reserved",
+      "proposal_sha256": "73126cfa86d7529352657551e097ec3eaf5c438515b13d2255e2cb6254254474"
     }
   ],
   "seen": [
