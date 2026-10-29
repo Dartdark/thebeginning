@@ -171,6 +171,13 @@ Retained execution and liquidity ideas are centralized there, including subpenny
 (E04), liquidity compensation/turnover (E10) and event-information clocks (E11). Keep detailed lessons in that library;
 this brief is the pointer. Original reports remain the evidence record.
 
+## Local research terminal (user, 2026-10-29)
+
+[Research terminal](terminal/README.md) provides a local browser workspace over our existing reports, evidence,
+plans, verification queue, execution references and saved CSV results. PDF imports and user notes are local,
+Git-ignored runtime data; importing is not a source review or a return test. Preserve repository evidence and
+testing gates. Do not add broker/VPS/live controls or a way to bypass preregistration with an arbitrary runner.
+
 ## Automatic worthwhile-paper investigation (user, 2026-10-29)
 
 When a reviewed paper warrants deeper investigation, proceed without asking the user again: inspect owned/free data,
