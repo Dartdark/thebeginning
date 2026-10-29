@@ -66,6 +66,10 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
 - Lessons that keep repeating: a plan near Apex's payout cap can't use a better strategy; judge on the bootstrapped bench
   (`analysis/funded_bootstrap.py`), always against the empty slot and as a replacement too (`LESSONS.md`).
 
+- Origins (user, 2026-10-29): the user's own designs are Vault Break and Overnight Bias only; every other 'user's' upload
+  (Relative Strength, Dual Thrust, Overnight Tick / VIX, Swing Target, T_ONESIDE, Kusho, S47, FC 2B, ...) was found
+  outside. Our own research found EOS, Monday Long, Late-Day Flow, NFP Fade, ES MOC, CL gap fade, Overnight Drift.
+
 ## Rebuilding the data (not in git)
 
 - `pip install numba`, then `python3 analysis/build_lab.py scratch_data` builds g24 / ge / lab; gc / cl pickles build on first
