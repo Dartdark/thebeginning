@@ -62,7 +62,7 @@ def run(I, col="pv"):
           stop = max(stop, best - dist) if sig > 0 else min(stop, best + dist)
       if ex is None: ex = cl[-1]
       pts = (ex - ent) * sig - 0.5                                        # 1 tick entry + 1 tick exit
-      tr.append(dict(date=r.date, side=sig, entry=ent, exit=ex, kind=kind, pnl=pts * 20 - 7.25))
+      tr.append(dict(date=r.date, side=sig, entry=ent, exit=ex, kind=kind, pnl=pts * 20 - 7.25, t0=int(t[k]), t1=int(t[i]) if i > k else int(t[-1])))
   return pd.DataFrame(tr)
 
 
