@@ -49,7 +49,7 @@ if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "POS,*" } | ForEach
 if ($hhmm -ge 845 -and $hhmm -le 1500) {
     foreach ($t in $tags.Keys) {
         if (-not $last.ContainsKey($t)) { $problems += "STALE_$t|Chart $t has written no heartbeat today"; continue }
-        $c = $last[$t]; $bt = [int]$c[13]; $age = ([int]($hhmm / 100) * 60 + $hhmm % 100) - ([int]($bt / 100) * 60 + $bt % 100)
+        $c = $last[$t]; $bt = [int]$c[13]; $age = ([math]::Floor($hhmm / 100) * 60 + $hhmm % 100) - ([math]::Floor($bt / 100) * 60 + $bt % 100)
         if ($age -gt 45) { $problems += "STALE_$t|Chart ${t}: no heartbeat for $age min (frozen chart or feed?)" }
         if ($c[4] -ne $c[11] -and $age -ge 3) { $problems += "MISMATCH_$t|Chart $t thinks $($c[4]) contracts, broker has $($c[11]). Check the account now." }
     }
@@ -76,7 +76,7 @@ if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "SIG,*" } | ForEach
 if ($hhmm -ge 900 -and $hhmm -le 1500) {
     foreach ($t in $sigTags.Keys) {
         if (-not $sigLast.ContainsKey($t)) { $problems += "NOSTRAT_$t|Strategy on chart $t wrote no heartbeat today: not compiled / removed? It cannot trade."; continue }
-        $bt = $sigLast[$t]; $age = ([int]($hhmm / 100) * 60 + $hhmm % 100) - ([int]($bt / 100) * 60 + $bt % 100)
+        $bt = $sigLast[$t]; $age = ([math]::Floor($hhmm / 100) * 60 + $hhmm % 100) - ([math]::Floor($bt / 100) * 60 + $bt % 100)
         if ($age -gt 45) { $problems += "NOSTRAT_$t|Strategy on chart ${t}: no heartbeat for $age min. Check the strategy is running." }
     }
 }

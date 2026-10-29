@@ -225,3 +225,8 @@ A task that called `powershell ... -File script.ps1` directly ran every minute b
 while the same script worked by hand; a long /TR string pasted over several lines broke the next attempt. Fix: point the
 task at a short .cmd launcher in the repo (`live/vps/run_relay.cmd`: `cd /d`, `powershell -NoProfile ...`, output to a log
 file). Verified: test alerts arrived on their own.
+
+## PowerShell [int] ROUNDS, it doesn't truncate (2026-10-29, watchdog false 'no heartbeat' alarms)
+`[int](855 / 100)` is 9, not 8 (banker's rounding), so HHMM -> minutes was wrong whenever the minutes were 30-59: at 08:55 a
+09:00 heartbeat looked 55 minutes old and every live chart alarmed. Fix: `[math]::Floor(x / 100)`. Same trap in any
+HHMM arithmetic in PowerShell.
