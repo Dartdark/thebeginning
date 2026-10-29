@@ -213,3 +213,8 @@ but no order was sent: the ONB code had not compiled, so the strategy was not ru
 backtest chance ~5%), confirmed by the chart's trade list. Rule: after every paste, read the PowerLanguage Editor's Output
 for 'compiled successfully' (no red errors) before leaving it, then check the chart's Format Signals list shows the signal
 with no warning; after any code change, compare the chart's trade arrows with the Orders tab on the next signal day.
+
+## PowerShell: "$t:" inside a string breaks the whole script (2026-10-29, VPS watchdog)
+`"Chart $t: ..."` is read as a drive-scoped variable (`$t:`), a PARSE error, so PowerShell runs none of the file. The
+watchdog had this since 2026-10-21: it never ran and no ntfy alarm was ever sent. Fix: `${t}:` (braces) before a colon.
+Test every .ps1 change once by hand on the VPS (`-Test` on the watchdog) before trusting it.

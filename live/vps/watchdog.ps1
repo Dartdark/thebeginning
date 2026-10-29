@@ -46,7 +46,7 @@ if ($hhmm -ge 845 -and $hhmm -le 1500) {
     foreach ($t in $tags.Keys) {
         if (-not $last.ContainsKey($t)) { $problems += "STALE_$t|Chart $t has written no heartbeat today"; continue }
         $c = $last[$t]; $bt = [int]$c[13]; $age = ([int]($hhmm / 100) * 60 + $hhmm % 100) - ([int]($bt / 100) * 60 + $bt % 100)
-        if ($age -gt 45) { $problems += "STALE_$t|Chart $t: no heartbeat for $age min (frozen chart or feed?)" }
+        if ($age -gt 45) { $problems += "STALE_$t|Chart ${t}: no heartbeat for $age min (frozen chart or feed?)" }
         if ($c[4] -ne $c[11] -and $age -ge 3) { $problems += "MISMATCH_$t|Chart $t thinks $($c[4]) contracts, broker has $($c[11]). Check the account now." }
     }
 }
@@ -57,8 +57,8 @@ if (Test-Path $f) { Get-Content $f | Where-Object { $_ -like "ACCT,*" } | ForEac
 if ($hhmm -ge 830 -and $hhmm -le 1500) {
     foreach ($t in $acct.Keys) {
         $c = $acct[$t]
-        if ($c[4] -eq "0") { $problems += "AUTOOFF_$t|Chart $t: auto-trading is OFF (account $($c[3])). Turn it on if this chart should trade." }
-        if ([double]$c[7] -gt 600) { $problems += "FEED_$t|Chart $t: last bar is $([int]([double]$c[7] / 60)) min old. Data feed / Rithmic quiet? Check the connection status." }
+        if ($c[4] -eq "0") { $problems += "AUTOOFF_$t|Chart ${t}: auto-trading is OFF (account $($c[3])). Turn it on if this chart should trade." }
+        if ([double]$c[7] -gt 600) { $problems += "FEED_$t|Chart ${t}: last bar is $([int]([double]$c[7] / 60)) min old. Data feed / Rithmic quiet? Check the connection status." }
     }
 }
 
@@ -73,7 +73,7 @@ if ($hhmm -ge 900 -and $hhmm -le 1500) {
     foreach ($t in $sigTags.Keys) {
         if (-not $sigLast.ContainsKey($t)) { $problems += "NOSTRAT_$t|Strategy on chart $t wrote no heartbeat today: not compiled / removed? It cannot trade."; continue }
         $bt = $sigLast[$t]; $age = ([int]($hhmm / 100) * 60 + $hhmm % 100) - ([int]($bt / 100) * 60 + $bt % 100)
-        if ($age -gt 45) { $problems += "NOSTRAT_$t|Strategy on chart $t: no heartbeat for $age min. Check the strategy is running." }
+        if ($age -gt 45) { $problems += "NOSTRAT_$t|Strategy on chart ${t}: no heartbeat for $age min. Check the strategy is running." }
     }
 }
 
