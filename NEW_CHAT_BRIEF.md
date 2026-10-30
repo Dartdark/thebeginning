@@ -46,7 +46,7 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
 - Algo trader on **Apex** (ignore Topstep): flat by 15:59 CT; 50K: $2,000 EOD trailing (locks at $50,100), combine $3,000
   target, $1,000 daily loss limit. Goal: funded payouts (6 = $13,000 per 50K account), as fast as possible.
 - Path: Apex = live test bench and funding source; proven strategies and payouts move to a personal account
-  (`DEVELOPMENT_PROCESS.md` 'Strategy lifecycle'). Business plan v2: `reports/Trading_Business_Plan_2026-10-24.pdf`
+  (`DEVELOPMENT_PROCESS.md` 'Strategy lifecycle'). Business plan v3: `reports/Trading_Business_Plan_2026-10-30.pdf` (2027 outlook; v2 2026-10-24)
   (new dated file per update).
 - Preferences: forced / scheduled flows (price patterns fail here), low correlation, longs and shorts analysed separately.
   Always give direct GitHub links + raw links for code to paste into MultiCharts (repo PRIVATE: links need a login).
