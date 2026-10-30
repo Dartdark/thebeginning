@@ -128,6 +128,19 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   assumptions, not native broker fees/fills or measured execution savings. Future parity work needs actual quotes,
   contract IDs, source counter settings and fees; no live change follows.
 
+- QuantJourney Donchian example, 2026-10-30 ([source/data-gate audit](results/qj_donchian_20261030.md)):
+  reconcile contract multipliers consistently across fills, open notional, realized/open P&L, weights and NAV.
+  The published packet's open-position value is quantity×price without multipliers, while its separate exposure
+  table includes them. Arithmetic verifies that reporting discrepancy; it does **not** establish that headline NAV
+  is wrong. Daily resizing can split FIFO lots, so fill count need not equal twice the lot count; validate actual
+  quantity/cash reconciliation instead. Source statistics remain unreconciled;17 synthetic/arithmetic checks are
+  not a historical alpha or native-fill replication.
+  A 25% per-market notional cap plus whole contracts can zero all positions at small capital. ATR-sized volatility
+  without a stop is not a maximum-loss cap. A reference margin cap and full-notional cash bookkeeping do not model
+  futures variation margin, current buying power or executable dated rolls. For multiweek carry, removing a splice
+  bar from an unadjusted continuous series does not supply roll trades/cashflows. Needed next: contract IDs, actual
+  roll schedule/fills/fees and a daily NAV-to-lot ledger reconciliation; no strategy/account/live change is authorized.
+
 ### E10 — Liquidity compensation, turnover and costs
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
