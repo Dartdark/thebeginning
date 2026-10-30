@@ -125,6 +125,16 @@ add it here for later review. Record the merit, what is missing, the smallest ne
 duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.
 A queue entry does not add it to a trading plan or start a backtest; review when prerequisites arrive or the user prioritizes it.
 
+- [ ] **Nocturne — verify archived assumed replay only; NOT ADMITTED (2026-10-30).**
+  Merit: user-authorized R²/target/reentry assumptions produce1085design trades,+$8.75/MNQ,PF1.38,
+  all5years positive, compared with+$4.32withoutR². These are conditional2018–22screen results, not independent
+  reproduction or portfolio contribution. Advancement FAILS: skipped nights t−0.95and matched random-keep joint
+  win89.9%miss preregistered−2/95%requirements. No2023+or accounts opened; no stop/threshold rescue project.
+  Source PDF also reports millions of configurations, weak finalOOSand fragile nearby settings; full author rules
+  remain withheld. Smallest next check: Claude independently verifies the archived assumed implementation,
+  cost/night accounting and failed gates. No place in personal,50K/150Kevaluation or50K/150Kfunded plans is earned.
+  [Results](agents/codex/results/nocturne_20261030.md) · [Frozen assumptions](agents/codex/plans/nocturne_20261030.md).
+
 - [ ] **Weekly commodity basis reversal — NEEDS FULL TEXT / PAIRED DATA (2026-10-29), SSRN5250499.**
   Merit: specific adjacent-maturity relative-return reversal claimed in the primary abstract, distinct from an
   outright price reversal; public secondary code defines a delayed weekly two-leg implementation. No net return

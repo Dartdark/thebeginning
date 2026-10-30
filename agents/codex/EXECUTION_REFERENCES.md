@@ -115,6 +115,11 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 - Next check: reconcile actual contract IDs, as-of rolls, orders/fills/fees and marked daily P&L before portfolio claims.
 - Status: execution/accounting reference; the strategy's separate verification status remains in its report and TODO.
 
+- Nocturne follow-up2026-10-30 ([assumed replay](results/nocturne_20261030.md)): native MNQ fees must be
+  recomputed rather than dividing NQ net by10. Distinguish market-entry/time-exit slippage from limit-target
+  execution; charge each reentry separately. Our$1.24RT fee assumption is not a verified broker statement.
+  Positive source-cost results do not establish native funded-account performance.
+
 ### E10 — Liquidity compensation, turnover and costs
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
@@ -224,6 +229,15 @@ Source: Riedel and Wagner (2015), [SSRN2494387](https://ssrn.com/abstract=249438
   tail losses; fit any EVT model using a separately preregistered past-only/calibration protocol.
 - Status: risk/execution reference; no demonstrated alpha, sizing change, trading allocation or new return test.
 
+- Nocturne follow-up2026-10-30 ([review and assumed replay](results/nocturne_20261030.md)): group initial entry
+  and reentry into one night before resampling; trade-level bootstrap can break the dependence that creates
+  account losses. A fixed small target with no stop can show high win rates while rare nights exceed the loss
+  allowance. Conditional arithmetic on the user's reported568pointnight is$4544/$5680at4/5MNQbefore costs,
+  not a verified native fill or breach probability. Simulate intranight liquidation, fees, current cushion and
+  post-payout floor before interpreting a first-payout probability. EOD trail updates do not establish that an
+  intranight breach may be ignored. Evidence: source claims plus one assumed2018–22replay/self-audit, no independent
+  replication or measured execution saving. The candidate fails its filter-value gates; no account test is earned.
+
 <!-- E16-E26 added by Claude (master session) and E27-E28 by the Papers session, 2026-10-29; renumbered from E12-E24 after Codex's E12-E15 -->
 
 ### E16 — Vault Break live exit slippage: stops worse than the 1-tick assumption, targets better
@@ -254,6 +268,12 @@ Sources: [TIER_LIST.md](../../TIER_LIST.md) 'MultiCharts parity 2026-10-25', [MU
 - Limits: parity of bars / P&L is not broker fill evidence (see E04, E08).
 - Next check: when a new MC report arrives, state its limit-fill setting and rebuild with trade-through fills.
 - Status: standing convention: research uses trade-through fills; MC touch fills are treated as optimistic.
+
+- Nocturne2026-10-30: a discretionary next-bar reentry must wait for the target's5minute bar to complete;
+  an intrabar target fill does not authorize another fill earlier in that same bar. Freeze target-reference
+  versus actual-fill anchoring and the trade-through rule; a replay convention is not source-code parity.
+  [Frozen assumed implementation and limits](results/nocturne_20261030.md); synthetic lifecycle checks only,
+  not evidence of queue execution or live fill improvements.
 
 ### E19 — Session clocks: early closes, halts, SetExitOnClose and time zones
 
