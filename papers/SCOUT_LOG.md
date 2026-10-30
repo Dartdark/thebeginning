@@ -27,3 +27,10 @@ READ (-> TIER_LIST grade) / NEED PDF (user downloads from SSRN and drops it in t
 | 2026-10-29 | Kurov, Wolfe & Gilbert 2020 FRL (skidmore.edu PDF) | The Disappearing Pre-FOMC Announcement Drift | SKIP: pre-FOMC drift already tested (gone since 2018); paper agrees (weak since 2016) |
 | 2026-10-29 | Harvey, Mazzoleni & Melone (SSRN, no free copy) | The Unintended Consequences of Rebalancing | SKIP: stock-vs-bond month-end rebalancing signal already tested (forced_flows_round5_test.py, t 1.2 / quarter-end −0.2) |
 | 2026-10-29 | Princeton ORFE thesis 2026 | 0DTE Options and Intraday Volatility | SKIP: thesis; 0DTE gamma needs paid dealer data (TIER_LIST) |
+| 2026-10-30 | NY Fed SR 917 https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr917.pdf | The Overnight Drift (Boyarchenko, Larsen & Whelan; RFS 2023) + Liberty Street 2026 'The Disappearing Overnight Drift' | READ -> TIER_LIST F (hourly test on NQ / ES 2018-26) |
+| 2026-10-30 | JFQA 2023 (no free PDF; Alpha Architect summary) | Market Return Around the Clock: A Puzzle (Bondarenko & Muravyev) | SKIP: claim (4 h around the European open = the whole ES return) covered by the same hourly test, 23:00-03:00 CT window |
+| 2026-10-30 | arXiv 2507.04481 https://arxiv.org/abs/2507.04481 | Does Overnight News Explain Overnight Returns? (Glasserman, Krstovski, Laliberte & Mamaysky 2025) | READ -> TIER_LIST F (stock cross-section, NLP on 2.4M articles; no futures analogue) |
+| 2026-10-30 | arXiv 2607.03669 | Split-Session Cluster GARCH for Overnight and Intraday Returns | SKIP: volatility model, no return timing |
+| 2026-10-30 | arXiv 2610.06948 | Opening-Price Shortcut in Stock Prediction | SKIP: ML stock prediction methodology |
+| 2026-10-30 | arXiv 2107.12516 / 2201.00223 / 1811.04994 | Knuteson follow-ups (They Chose to Not Tell You, They Still Haven't Told You, How to Increase Global Wealth Inequality) | SKIP: same thesis as SSRN 3705017 (F) |
+| 2026-10-30 | arXiv 1410.5513 | 4-Factor Model for Overnight Returns | SKIP: stock factor model |
