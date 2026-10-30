@@ -109,5 +109,15 @@ def main():
     out=dict(reviewed_ref='16145ab15c09fa9489a58ef651f5711c1ef2599f',passed=all(x['defect_reproduced'] for x in results.values()),
         meaning='All five reported defects reproduced; this does not mean the reviewed implementations passed',
         new_strategy_return_trials=0,live_access=False,findings=results)
-    (OUT/'checks.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out,indent=2))
+    (OUT/'checks.json').write_text(json.dumps(out,indent=2)+'\n')
+    watched=sorted(p for p in INPUT.rglob('*') if p.is_file())
+    watched+=sorted(p for p in OUT.rglob('*') if p.is_file() and p.name!='artifact_manifest.json')
+    watched += [Path(__file__),ROOT/'analysis/codex_weekly_st_kind_audit_20261030.py',
+        ROOT/'agents/cross_review/2026-10-30_codex.md',ROOT/'agents/cross_review/2026-10-30_codex_response.md',
+        ROOT/'agents/codex/proposals/weekly_cross_review_20261030.md']
+    manifest={'reviewed_claude_head':out['reviewed_ref'],'independent_assessment_commit':'bb260776d72a3dff6bd569f6bcddf9c458fb6c51',
+        'new_strategy_return_trials':0,'live_access':False,
+        'files':[{'path':p.relative_to(ROOT).as_posix(),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in watched if p.exists()]}
+    (OUT/'artifact_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+    print(json.dumps(out,indent=2))
 if __name__=='__main__':main()
