@@ -34,3 +34,9 @@ READ (-> TIER_LIST grade) / NEED PDF (user downloads from SSRN and drops it in t
 | 2026-10-30 | arXiv 2610.06948 | Opening-Price Shortcut in Stock Prediction | SKIP: ML stock prediction methodology |
 | 2026-10-30 | arXiv 2107.12516 / 2201.00223 / 1811.04994 | Knuteson follow-ups (They Chose to Not Tell You, They Still Haven't Told You, How to Increase Global Wealth Inequality) | SKIP: same thesis as SSRN 3705017 (F) |
 | 2026-10-30 | arXiv 1410.5513 | 4-Factor Model for Overnight Returns | SKIP: stock factor model |
+| 2026-10-30 | arXiv 2610.21846 https://arxiv.org/abs/2610.21846 | Where Backtests and Live Trading Part Ways: Six Defects from One Intraday System (Vidovich & Zerjal 2026) | READ -> execution note E30 (no strategy; backtest-live parity checklist mapped to our setup) |
+| 2026-10-30 | practitioner pages (SpotGamma, NexusFi, LuxAlgo) | OPEX-week drift / pinning / dealer gamma | SKIP: no paper; OPEX open covered by Expiration Open Short (A), 0DTE gamma needs paid data, pinning F (NDX 0DTE study) |
+| 2026-10-30 | Maberly & Waggoner, Atlanta Fed WP 2000-11 | Turn-of-the-month in S&P 500 futures | SKIP: turn of the month already tested on NQ / ES (overnight round, t 1.0-1.4); paper itself finds it gone after 1990 |
+| 2026-10-30 | arXiv 2604.26063 | A Volume-Price-Adjusted MACD Trading Strategy for U.S. Equity Indices | SKIP: indicator paper (user's skip list) |
+| 2026-10-30 | arXiv 2606.08586 | Cross-sectional topological anomaly scores and intraday return predictability in the S&P 500 | SKIP: stock cross-section, ML |
+| 2026-10-30 | arXiv 2608.05373 | Detection of Intraday Options Market Manipulation | SKIP: surveillance, options |

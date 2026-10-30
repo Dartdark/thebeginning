@@ -348,6 +348,25 @@ Source: Nocturne research note (L. Franceschetti, user upload 2026-10-30), rebui
 - Next check: size no-stop overnight pieces so the worst historical night stays below half the account's trailing room.
 - Status: market-behavior reference; Nocturne C, watchlist.
 
+### E30 — Backtest-live parity: six implementation defects and a ten-point checklist
+
+Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SCOUT_LOG.md.
+- Use: one live intraday stock system, six defects that summary statistics never showed: (1) default data feed carried
+  0.1-2% of the real opening-minute volume, (2) dividend-adjusted history vs unadjusted live fills, (3) a field only the
+  backtest had, (4) UTC timestamps read as New York time, (5) the replay requested different inputs than live, (6) settings
+  switched on that never reached the order code. None was found from results; each by one concrete look (one live trade
+  against the cache, one bar from several sources). Matching decisions on 7 of 8 live days did not catch a broken harness.
+- Our equivalents: (1) MultiCharts `Volume` = up-ticks vs our CSV totals (FC 2B near-threshold mismatches); (2)
+  unadjusted continuous futures, roll jumps at 03:32 / 17:01 CT (drop roll bars); (4) the CL Sunday report runs on Eastern
+  time (found by `analysis/leak_checks.py` L1 at −60 min, 2026-10-30); (6) the account field on copied charts sent #3's
+  150K-size orders to #2 (MULTICHARTS_PITFALLS, 10/26). Their checks we already run: replay live trades and match prices
+  (`analysis/live_vs_backtest.py`, Apex Trade Logger), daily live-behaviour checks (`analysis/vps_health.py` vs
+  `live/expected_setup.json`), fill-in-bar check (leak_checks L1).
+- Gaps to close (smallest next checks): test every timestamp helper on a winter and a summer day (DST weeks where London /
+  Chicago offsets differ); after any data rebuild, match one live fill to the tick; for each MultiCharts input, confirm in
+  the trade log that changing it changes an order (e.g. size inputs after cushion sizing).
+- Status: process reference; no strategy.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
