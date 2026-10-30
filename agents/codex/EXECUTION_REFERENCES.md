@@ -120,6 +120,14 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   execution; charge each reentry separately. Our$1.24RT fee assumption is not a verified broker statement.
   Positive source-cost results do not establish native funded-account performance.
 
+- Video Drift follow-up 2026-10-30 ([frozen reconstruction](results/drift_video_20261030.md)):
+  when a daily circuit breaker counts **net losing trades**, altered fees/slippage can change later eligibility.
+  Replay the counter under the stressed cost view; recosting an unchanged ledger is only a fixed-ledger sensitivity.
+  Report stressed fee/slippage subtotals consistently with stressed net. The nominal-bracket replay found $4.35 per
+  MNQ after assumed $1.04 RT fees and one tick per market/stop fill; it failed advancement gates. These are research
+  assumptions, not native broker fees/fills or measured execution savings. Future parity work needs actual quotes,
+  contract IDs, source counter settings and fees; no live change follows.
+
 ### E10 — Liquidity compensation, turnover and costs
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
@@ -274,6 +282,13 @@ Sources: [TIER_LIST.md](../../TIER_LIST.md) 'MultiCharts parity 2026-10-25', [MU
   versus actual-fill anchoring and the trade-through rule; a replay convention is not source-code parity.
   [Frozen assumed implementation and limits](results/nocturne_20261030.md); synthetic lifecycle checks only,
   not evidence of queue execution or live fill improvements.
+
+- Video Drift 2026-10-30: freeze whether “first counterbar” means a color transition or the first opposing
+  bar after an arm, whether trend state updates every 5 or 15 minutes, and whether two losses means total or
+  consecutive. A close-stamped minute at decision+1 opens at the decision's civil-clock boundary. A related
+  strategy name does not establish source-engine parity. [Second-agent implementation audit](results/drift_video_20261030.md)
+  checked trailing signals and saved paths; author-code/MC/native-fill parity remains unverified. Its half-day
+  cutoff repair retained the first failed run and followed the original committed rule, without a rescue search.
 
 ### E19 — Session clocks: early closes, halts, SetExitOnClose and time zones
 

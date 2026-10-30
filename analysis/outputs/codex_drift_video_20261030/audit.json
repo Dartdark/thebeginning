@@ -1,0 +1,6082 @@
+{
+  "review": "Independent implementation/accounting review by a second agent; not blind economic replication, native fill validation, or Monte Carlo verification",
+  "passed": true,
+  "failing_checks": [],
+  "checked_head": "3f200933cb032c0cfa5b73b1b178dcd00774a687",
+  "plan_sha256": "bea47f2bb2a494af740591546b8aaaab080d1ea720c052bdc687929b0844db0c",
+  "implementation_sha256": "0062f6460161cdf0be0384ee5ba0810ebdba74d805ec8c2d9403211c51d26def",
+  "audit_code_sha256": "de022acea6a683521fad4a8b0c49ffffc4e8e2b8092debfda3773e4b2870086d",
+  "ledger_sha256": {
+    "design_trades.csv": "48239c1cc32113d93e2fa56a713194bd01745c2cb11f9e9b8fa869e32b6f2e49",
+    "design_total_losses_trades.csv": "b415344ea8cda2babd8de1157769c3784bb0ba8f57468baf69618c1465002efa",
+    "design_stress_trades.csv": "48239c1cc32113d93e2fa56a713194bd01745c2cb11f9e9b8fa869e32b6f2e49",
+    "design_daily.csv": "7353ab23a9cefb57bedd421506420fcf3e0e36cb2a3b9c1316f9fa991b507e01",
+    "design_signals.csv": "744d00605cb24f1999f1c6609d5921bb08ae6585a3090e11df8b6255b9990c14",
+    "design_metrics.csv": "0014b91b28a4ce6ecd958524728235d5d21b5450fb4510c065b5a43e607e8afd",
+    "design_coverage.csv": "4faaa31ea4b928969848af603d6ba516bdfdff3666efeaba728e944095a6ebe3",
+    "design_inventory.json": "578aa6b2ea233942bec24688dbc77e253933c948b351774bd45bed152491e57d"
+  },
+  "raw_design_years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "sampled_signal_days": [
+    "2018-02-08",
+    "2018-04-09",
+    "2018-07-03",
+    "2018-07-11",
+    "2018-07-18",
+    "2018-09-17",
+    "2018-10-09",
+    "2018-11-23",
+    "2018-12-24",
+    "2019-01-14",
+    "2019-04-11",
+    "2019-07-03",
+    "2019-07-31",
+    "2019-08-07",
+    "2019-08-14",
+    "2019-11-29",
+    "2019-12-02",
+    "2019-12-24",
+    "2020-05-18",
+    "2020-05-21",
+    "2020-11-06",
+    "2020-11-27",
+    "2020-12-01",
+    "2020-12-07",
+    "2020-12-15",
+    "2020-12-24",
+    "2021-05-06",
+    "2021-05-27",
+    "2021-06-11",
+    "2021-07-13",
+    "2021-07-20",
+    "2021-10-18",
+    "2021-11-26",
+    "2022-04-14",
+    "2022-05-12",
+    "2022-07-06",
+    "2022-09-07",
+    "2022-09-21",
+    "2022-11-25",
+    "2022-12-22"
+  ],
+  "trailing_feature_decisions_checked": 2080,
+  "minute_path_checks": {
+    "unique_saved_trades": 2808,
+    "entry_bar_exits": 4,
+    "target_exits": 1409,
+    "stop_exits": 599,
+    "time_exits": 800,
+    "simultaneous_exit_bars": 0
+  },
+  "accounting": {
+    "primary": {
+      "trades": 2808,
+      "by_year": {
+        "2018": {
+          "trades": 427,
+          "net": 2438.419999999999
+        },
+        "2019": {
+          "trades": 335,
+          "net": 750.0999999999998
+        },
+        "2020": {
+          "trades": 623,
+          "net": 3251.08
+        },
+        "2021": {
+          "trades": 600,
+          "net": 2000.4999999999982
+        },
+        "2022": {
+          "trades": 823,
+          "net": 3779.58
+        }
+      },
+      "by_side": {
+        "-1": {
+          "trades": 1321,
+          "net": 6799.159999999996
+        },
+        "1": {
+          "trades": 1487,
+          "net": 5420.519999999998
+        }
+      }
+    },
+    "total_losses": {
+      "trades": 2789,
+      "by_year": {
+        "2018": {
+          "trades": 426,
+          "net": 2600.459999999999
+        },
+        "2019": {
+          "trades": 335,
+          "net": 750.0999999999998
+        },
+        "2020": {
+          "trades": 620,
+          "net": 3340.7
+        },
+        "2021": {
+          "trades": 596,
+          "net": 2262.6599999999985
+        },
+        "2022": {
+          "trades": 812,
+          "net": 3935.0199999999986
+        }
+      },
+      "by_side": {
+        "-1": {
+          "trades": 1312,
+          "net": 6994.019999999999
+        },
+        "1": {
+          "trades": 1477,
+          "net": 5894.919999999997
+        }
+      }
+    },
+    "stress": {
+      "trades": 2808,
+      "by_year": {
+        "2018": {
+          "trades": 427,
+          "net": 2008.5199999999995
+        },
+        "2019": {
+          "trades": 335,
+          "net": 388.09999999999957
+        },
+        "2020": {
+          "trades": 623,
+          "net": 2677.479999999999
+        },
+        "2021": {
+          "trades": 600,
+          "net": 1434.4999999999986
+        },
+        "2022": {
+          "trades": 823,
+          "net": 3045.979999999998
+        }
+      },
+      "by_side": {
+        "-1": {
+          "trades": 1321,
+          "net": 5549.459999999997
+        },
+        "1": {
+          "trades": 1487,
+          "net": 4005.119999999997
+        }
+      }
+    }
+  },
+  "excluded_missing_paths": [
+    {
+      "date": "2018-04-30",
+      "missing_close_stamps_ct": [
+        "14:42"
+      ],
+      "missing_minutes": 1
+    },
+    {
+      "date": "2018-07-26",
+      "missing_close_stamps_ct": [
+        "13:43",
+        "13:44"
+      ],
+      "missing_minutes": 2
+    },
+    {
+      "date": "2018-08-28",
+      "missing_close_stamps_ct": [
+        "13:01",
+        "13:02",
+        "13:03",
+        "13:04"
+      ],
+      "missing_minutes": 4
+    },
+    {
+      "date": "2019-12-05",
+      "missing_close_stamps_ct": [
+        "08:43",
+        "08:44"
+      ],
+      "missing_minutes": 2
+    },
+    {
+      "date": "2020-03-09",
+      "missing_close_stamps_ct": [
+        "08:30",
+        "08:34",
+        "08:37",
+        "08:38",
+        "08:39",
+        "08:40",
+        "08:41",
+        "08:42",
+        "08:43",
+        "08:44",
+        "08:45",
+        "08:46",
+        "08:47",
+        "08:48",
+        "08:49"
+      ],
+      "missing_minutes": 15
+    },
+    {
+      "date": "2020-03-12",
+      "missing_close_stamps_ct": [
+        "08:30",
+        "08:38",
+        "08:39",
+        "08:40",
+        "08:41",
+        "08:42",
+        "08:43",
+        "08:44",
+        "08:45",
+        "08:46",
+        "08:47",
+        "08:48",
+        "08:49",
+        "08:50"
+      ],
+      "missing_minutes": 14
+    },
+    {
+      "date": "2020-03-13",
+      "missing_close_stamps_ct": [
+        "08:30"
+      ],
+      "missing_minutes": 1
+    },
+    {
+      "date": "2020-03-16",
+      "missing_close_stamps_ct": [
+        "08:30",
+        "08:32",
+        "08:33",
+        "08:34",
+        "08:35",
+        "08:36",
+        "08:37",
+        "08:38",
+        "08:39",
+        "08:40",
+        "08:41",
+        "08:42",
+        "08:43",
+        "08:44",
+        "08:45"
+      ],
+      "missing_minutes": 15
+    },
+    {
+      "date": "2020-03-18",
+      "missing_close_stamps_ct": [
+        "08:30",
+        "11:59",
+        "12:00",
+        "12:01",
+        "12:02",
+        "12:03",
+        "12:04",
+        "12:05",
+        "12:06",
+        "12:07",
+        "12:08",
+        "12:09",
+        "12:10",
+        "12:11"
+      ],
+      "missing_minutes": 14
+    },
+    {
+      "date": "2020-11-30",
+      "missing_close_stamps_ct": [
+        "08:30",
+        "08:31",
+        "08:32",
+        "08:33",
+        "08:34",
+        "08:35",
+        "08:36",
+        "08:37",
+        "08:38",
+        "08:39",
+        "08:40",
+        "08:41",
+        "08:42",
+        "08:43",
+        "08:44",
+        "08:45",
+        "08:46",
+        "08:47",
+        "08:48",
+        "08:49",
+        "08:50",
+        "08:51",
+        "08:52",
+        "08:53",
+        "08:54",
+        "08:55",
+        "08:56",
+        "08:57",
+        "08:58",
+        "08:59",
+        "09:00",
+        "09:01",
+        "09:02",
+        "09:03",
+        "09:04",
+        "09:05",
+        "09:06",
+        "09:07",
+        "09:08",
+        "09:09",
+        "09:10",
+        "09:11",
+        "09:12",
+        "09:13",
+        "09:14",
+        "09:15",
+        "09:16",
+        "09:17",
+        "09:18",
+        "09:19",
+        "09:20",
+        "09:21",
+        "09:22",
+        "09:23",
+        "09:24",
+        "09:25",
+        "09:26",
+        "09:27",
+        "09:28",
+        "09:29",
+        "09:30",
+        "09:31",
+        "09:32",
+        "09:33",
+        "09:34",
+        "09:35",
+        "09:36",
+        "09:37",
+        "09:38",
+        "09:39",
+        "09:40",
+        "09:41",
+        "09:42",
+        "09:43",
+        "09:44",
+        "09:45",
+        "09:46",
+        "09:47",
+        "09:48",
+        "09:49",
+        "09:50",
+        "09:51",
+        "09:52",
+        "09:53",
+        "09:54",
+        "09:55",
+        "09:56",
+        "09:57",
+        "09:58",
+        "09:59",
+        "10:00",
+        "10:01",
+        "10:02",
+        "10:03",
+        "10:04",
+        "10:05",
+        "10:06",
+        "10:07",
+        "10:08",
+        "10:09",
+        "10:10",
+        "10:11",
+        "10:12",
+        "10:13",
+        "10:14",
+        "10:15",
+        "10:16",
+        "10:17",
+        "10:18",
+        "10:19",
+        "10:20",
+        "10:21",
+        "10:22",
+        "10:23",
+        "10:24",
+        "10:25",
+        "10:26",
+        "10:27",
+        "10:28",
+        "10:29",
+        "10:30",
+        "10:31",
+        "10:32",
+        "10:33",
+        "10:34",
+        "10:35",
+        "10:36",
+        "10:37",
+        "10:38",
+        "10:39",
+        "10:40",
+        "10:41",
+        "10:42",
+        "10:43",
+        "10:44",
+        "10:45",
+        "10:46",
+        "10:47",
+        "10:48",
+        "10:49",
+        "10:50",
+        "10:51",
+        "10:52",
+        "10:53",
+        "10:54",
+        "10:55",
+        "10:56",
+        "10:57",
+        "10:58",
+        "10:59",
+        "11:00",
+        "11:01",
+        "11:02",
+        "11:03",
+        "11:04",
+        "11:05",
+        "11:06",
+        "11:07",
+        "11:08",
+        "11:09",
+        "11:10",
+        "11:11",
+        "11:12",
+        "11:13",
+        "11:14",
+        "11:15",
+        "11:16",
+        "11:17",
+        "11:18",
+        "11:19",
+        "11:20",
+        "11:21",
+        "11:22",
+        "11:23",
+        "11:24",
+        "11:25",
+        "11:26",
+        "11:27",
+        "11:28",
+        "11:29",
+        "11:30",
+        "11:31",
+        "11:32",
+        "11:33",
+        "11:34",
+        "11:35",
+        "11:36",
+        "11:37",
+        "11:38",
+        "11:39",
+        "11:40",
+        "11:41",
+        "11:42",
+        "11:43",
+        "11:44",
+        "11:45",
+        "11:46",
+        "11:47",
+        "11:48",
+        "11:49",
+        "11:50",
+        "11:51",
+        "11:52",
+        "11:53",
+        "11:54",
+        "11:55",
+        "11:56",
+        "11:57",
+        "11:58",
+        "11:59",
+        "12:00",
+        "12:01",
+        "12:02",
+        "12:03",
+        "12:04",
+        "12:05",
+        "12:06",
+        "12:07",
+        "12:08",
+        "12:09",
+        "12:10",
+        "12:11",
+        "12:12",
+        "12:13",
+        "12:14",
+        "12:15",
+        "12:16",
+        "12:17",
+        "12:18",
+        "12:19",
+        "12:20",
+        "12:21",
+        "12:22",
+        "12:23",
+        "12:24",
+        "12:25",
+        "12:26",
+        "12:27",
+        "12:28",
+        "12:29",
+        "12:30",
+        "12:31",
+        "12:32",
+        "12:33",
+        "12:34",
+        "12:35",
+        "12:36",
+        "12:37",
+        "12:38",
+        "12:39",
+        "12:40",
+        "12:41",
+        "12:42",
+        "12:43",
+        "12:44",
+        "12:45",
+        "12:46",
+        "12:47",
+        "12:48",
+        "12:49",
+        "12:50",
+        "12:51",
+        "12:52",
+        "12:53",
+        "12:54",
+        "12:55",
+        "12:56",
+        "12:57",
+        "12:58",
+        "12:59",
+        "13:00",
+        "13:01",
+        "13:02",
+        "13:03",
+        "13:04",
+        "13:05",
+        "13:06",
+        "13:07",
+        "13:08",
+        "13:09",
+        "13:10",
+        "13:11",
+        "13:12",
+        "13:13",
+        "13:14",
+        "13:15",
+        "13:16",
+        "13:17",
+        "13:18",
+        "13:19",
+        "13:20",
+        "13:21",
+        "13:22",
+        "13:23",
+        "13:24",
+        "13:25",
+        "13:26",
+        "13:27",
+        "13:28",
+        "13:29",
+        "13:30",
+        "13:31",
+        "13:32",
+        "13:33",
+        "13:34",
+        "13:35",
+        "13:36",
+        "13:37",
+        "13:38",
+        "13:39",
+        "13:40",
+        "13:41",
+        "13:42",
+        "13:43",
+        "13:44",
+        "13:45",
+        "13:46",
+        "13:47",
+        "13:48",
+        "13:49",
+        "13:50",
+        "13:51",
+        "13:52",
+        "13:53",
+        "13:54",
+        "13:55",
+        "13:56",
+        "13:57",
+        "13:58",
+        "13:59",
+        "14:00",
+        "14:01",
+        "14:02",
+        "14:03",
+        "14:04",
+        "14:05",
+        "14:06",
+        "14:07",
+        "14:08",
+        "14:09",
+        "14:10",
+        "14:11",
+        "14:12",
+        "14:13",
+        "14:14",
+        "14:15",
+        "14:16",
+        "14:17",
+        "14:18",
+        "14:19",
+        "14:20",
+        "14:21",
+        "14:22",
+        "14:23",
+        "14:24",
+        "14:25",
+        "14:26",
+        "14:27",
+        "14:28",
+        "14:29",
+        "14:30",
+        "14:31",
+        "14:32",
+        "14:33",
+        "14:34",
+        "14:35",
+        "14:36",
+        "14:37",
+        "14:38",
+        "14:39",
+        "14:40",
+        "14:41",
+        "14:42",
+        "14:43",
+        "14:44",
+        "14:45",
+        "14:46",
+        "14:47",
+        "14:48",
+        "14:49",
+        "14:50",
+        "14:51",
+        "14:52",
+        "14:53",
+        "14:54",
+        "14:55"
+      ],
+      "missing_minutes": 386
+    },
+    {
+      "date": "2021-09-17",
+      "missing_close_stamps_ct": [
+        "08:32"
+      ],
+      "missing_minutes": 1
+    },
+    {
+      "date": "2022-03-08",
+      "missing_close_stamps_ct": [
+        "11:21",
+        "11:23"
+      ],
+      "missing_minutes": 2
+    }
+  ],
+  "checks": {
+    "design_input_names_only_2018_2022": {
+      "passed": true,
+      "detail": null
+    },
+    "raw_input_hashes_match_inventory": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-01-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-02-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-03-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-04-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-05-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-06-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-07-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-08-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-09-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-10-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-11-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2018-12-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-01-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-02-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-03-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-04-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-05-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-06-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-07-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-08-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-09-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-10-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-11-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2019-12-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-01-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-02-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-03-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-04-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-05-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-06-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-07-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-08-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-09-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-10-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-11-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2020-12-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-01-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-02-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-03-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-04-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-05-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-06-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-07-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-08-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-09-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-10-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-11-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2021-12-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-01-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-02-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-03-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-04-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-05-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-06-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-07-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-08-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-09-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-24": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-26": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-10-31": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-03": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-04": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-10": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-11": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-17": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-18": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-25": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-11-30": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-01": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-02": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-05": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-06": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-07": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-08": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-09": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-12": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-13": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-14": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-15": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-16": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-19": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-20": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-21": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-22": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-23": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-27": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-28": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-29": {
+      "passed": true,
+      "detail": null
+    },
+    "coverage_2022-12-30": {
+      "passed": true,
+      "detail": null
+    },
+    "twelve_missing_paths_retained": {
+      "passed": true,
+      "detail": null
+    },
+    "daily_eligible_dates_exact": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2018-02-08": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2018-04-09": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2018-07-03": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2018-07-11": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2018-07-18": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2018-09-17": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2018-10-09": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2018-11-23": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2018-12-24": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2019-01-14": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2019-04-11": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2019-07-03": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2019-07-31": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2019-08-07": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2019-08-14": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2019-11-29": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2019-12-02": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2019-12-24": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2020-05-18": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2020-05-21": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2020-11-06": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2020-11-27": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2020-12-01": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2020-12-07": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2020-12-15": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2020-12-24": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2021-05-06": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2021-05-27": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2021-06-11": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2021-07-13": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2021-07-20": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2021-10-18": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2021-11-26": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2022-04-14": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2022-05-12": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2022-07-06": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2022-09-07": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2022-09-21": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2022-11-25": {
+      "passed": true,
+      "detail": null
+    },
+    "independent_trailing_signals_2022-12-22": {
+      "passed": true,
+      "detail": null
+    },
+    "primary_gross_cost_bridge": {
+      "passed": true,
+      "detail": null
+    },
+    "primary_timing_and_halfday_cutoff": {
+      "passed": true,
+      "detail": null
+    },
+    "primary_one_position_and_net_loss_caps": {
+      "passed": true,
+      "detail": null
+    },
+    "primary_entries_are_saved_source_signals": {
+      "passed": true,
+      "detail": null
+    },
+    "all_primary_daily_columns_reconcile": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_all_all": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_all_2018": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_all_2019": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_all_2020": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_all_2021": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_all_2022": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_long_all": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_long_2018": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_long_2019": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_long_2020": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_long_2021": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_long_2022": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_short_all": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_short_2018": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_short_2019": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_short_2020": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_short_2021": {
+      "passed": true,
+      "detail": null
+    },
+    "metric_accounting_short_2022": {
+      "passed": true,
+      "detail": null
+    },
+    "total_losses_gross_cost_bridge": {
+      "passed": true,
+      "detail": null
+    },
+    "total_losses_timing_and_halfday_cutoff": {
+      "passed": true,
+      "detail": null
+    },
+    "total_losses_one_position_and_net_loss_caps": {
+      "passed": true,
+      "detail": null
+    },
+    "total_losses_entries_are_saved_source_signals": {
+      "passed": true,
+      "detail": null
+    },
+    "stress_gross_cost_bridge": {
+      "passed": true,
+      "detail": null
+    },
+    "stress_timing_and_halfday_cutoff": {
+      "passed": true,
+      "detail": null
+    },
+    "stress_one_position_and_net_loss_caps": {
+      "passed": true,
+      "detail": null
+    },
+    "stress_entries_are_saved_source_signals": {
+      "passed": true,
+      "detail": null
+    },
+    "all_saved_minute_paths_and_bracket_prices": {
+      "passed": true,
+      "detail": null
+    },
+    "shared_engine_requires_one_point_target_through": {
+      "passed": true,
+      "detail": null
+    },
+    "shared_engine_entry_bar_stop_active": {
+      "passed": true,
+      "detail": null
+    },
+    "shared_engine_gap_stop_at_open": {
+      "passed": true,
+      "detail": null
+    },
+    "frozen_plan_and_script_match_HEAD": {
+      "passed": true,
+      "detail": null
+    }
+  },
+  "limits": [
+    "No new candidate definition or parameter selection",
+    "Signals independently reconstructed only on listed sampled days",
+    "All saved trade paths/costs/caps/accounting checked; not a separate full-universe economic replication",
+    "Shared one-minute tie-break and NQ-price-to-MNQ proxy remain assumptions",
+    "No 2023+ or account/MC tests performed",
+    "Random-time control conditions on the complete-day source signal count and side order: retrospective null, not an executable alternative strategy",
+    "Stress column in primary daily.csv is a fixed-primary-ledger cost bridge; executable stress is separately saved stress_trades.csv"
+  ]
+}
