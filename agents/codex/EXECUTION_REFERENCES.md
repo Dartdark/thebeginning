@@ -523,6 +523,26 @@ Related: E09 native micro accounting, E18 fill/volume conventions, E19 session c
   and target price. Do not retune this failed strategy or install the supplied class to resolve a research question.
 - Status: execution reference retained; failed strategy test remains a separate negative evidence record.
 
+### E36 — Stop-limit protection: price control is not a loss cap
+
+Source: user-pasted QuantJourney O08 daily-SPY/QQQ/IWM example and screenshot, 2026-10-30.
+[Saved review](results/qj_stop_limit_20261030.md), [pretest plan](plans/qj_stop_limit_mechanics_20261030.md).
+Related: E03 order-state reconciliation, E05 missed fills/opportunity costs, E18 bar-fill conventions.
+- Use: a sell stop-limit can activate after a gap yet remain unfilled below its limit. A hypothetical entry $100,
+  stop $96/limit $95.50 remained held through prices $90 then $80 in our fixture. Price control on completed fills does
+  not cap the open-position loss; commission also reduces net proceeds below the gross fill-price floor.
+- Evidence: eight predeclared synthetic scenario groups executed the archived strategy class and unchanged public
+  execution modules at QuantJourneyOrg/quantjourney-bt commit4f403d8. The source's separate daily protection branch left
+  the entry day unprotected, consumed a simultaneous bearish crossover, and kept its protection flag set after
+  an injected order rejection. Ordinary cancellation/exit and a partial-fill remainder case behaved as recorded.
+- Limits: public engine 0.12.5 is not certified as the packet's 0.10.0+private engine. These constructed mechanics
+  are not observed failure rates, native fills, execution savings or an independently reproduced return test.
+  The educational source's reported 1.99% CAGR/0.02 Sharpe provides no demonstrated current-account contribution.
+- Prerequisites/next check for a separately justified execution project: actual parent/child order IDs and states,
+  entry-fill/protection clocks, post-trigger quotes/prints, partials, cancellations and explicit fallback/deadline
+  policy. A boolean set at submission is not proof of accepted protection. Bar high/low alone cannot establish queue fills.
+- Status: execution reference retained; zero economic return trials, no plan placement or execution-policy change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

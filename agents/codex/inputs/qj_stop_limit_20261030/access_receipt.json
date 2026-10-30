@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-30",
+  "owned_inventory": {
+    "spy_daily": "DATE,CLOSE only;2017-01-03=2252.50, index/futures-scale, not verified SPY ETF OHLC; unsuitable, unchanged.",
+    "qqq_iwm": "No matching owned ETF OHLC files found."
+  },
+  "free_attempts": [
+    {
+      "route": "Yahoo public daily-chart API/SPY;2016-2022;no login",
+      "outcome": "urllib proxy tunnel403 Forbidden; no data obtained; stopped this endpoint"
+    },
+    {
+      "route": "Public Github vivek-v-rao/GetPriceData",
+      "revision": "8b7fdf124009bf1b984d848ea3161b7166974573",
+      "outcome": "Repository has downloader scripts/README but no CSV files; not a data source for this test"
+    },
+    {
+      "route": "QuantJourney sample_data.py",
+      "outcome": "Deterministic generated demo data, not observed market history; not used for return claims"
+    }
+  ],
+  "source_discovery": {
+    "search": "Connected public indexed search used to locate original engine/report; code pinned via GitHub",
+    "report": "https://backtester.quantjourney.cloud/strategies/example-orders-08-stop-limit-protection",
+    "structured_report": "https://backtester.quantjourney.cloud/strategies/example-orders-08-stop-limit-protection/performance_report.json",
+    "public_report_generated_at": "2026-07-11T09:59:08.563461+00:00"
+  },
+  "purchases_or_accounts": false,
+  "keys_or_passwords_read": false,
+  "dependent_return_work": "not authorized past DONT_TEST evidence gate; do not manufacture futures proxy"
+}
