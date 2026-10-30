@@ -70,3 +70,7 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
   (~$4,300 across #2 and #3). Confirm 'compiled successfully' after every paste; trust the missed-trade panel.
 - (2026-10-29) An alarm that has never fired is not proven: the VPS watchdog failed to parse for 8 days and sent
   nothing. Test every alert path end to end (watchdog.ps1 -Test, test pushes) when it's built.
+- (2026-10-30) Apex enforces the trailing floor intraday: #3 was liquidated mid-trade on a touch of $146,000 even though the
+  trail only moves at end of day. Cushion = balance minus floor must cover the worst open loss, not just the day's close.
+- (2026-10-30, Friday review) A chart left running for a closed account keeps logging trades and rejections: retire the
+  account in `journal_trades.CLOSED` and `live/expected_setup.json` the day it closes, and turn its charts off.

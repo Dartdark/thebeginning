@@ -14,7 +14,8 @@ NAMES = {"VB": "Vault Break", "ONB": "ONB ADX30", "EOS": "EOS", "MON_BR": "Bridg
 START, END = "<!-- auto-trades:start -->", "<!-- auto-trades:end -->"
 
 
-CLOSED = {"VB": "20261026"}     # tag -> last live day; account #1 (APEX-681524-01, tag VB) blown 2026-10-26 (user)
+CLOSED = {"VB": "20261026",     # tag -> last live day; account #1 (APEX-681524-01, tag VB) blown 2026-10-26 (user)
+          **{t: "20261030" for t in ("VB150", "ONB150", "EOS150", "MON_BR150")}}   # #3 (150K) blown 2026-10-30
 
 
 def name(tag):
