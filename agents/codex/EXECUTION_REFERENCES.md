@@ -366,6 +366,10 @@ Sources: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) (10/27 ONB, 10
   for a21-minute effective feed age and for fresh ACCT alongside stale POS/SIG. Add elapsed time to captured
   bar age; age each record type independently; fixed UTC−5 is wrong after the DST change. Source correction,
   PowerShell runtime and installed behavior remain separate evidence states. No live-system change was made here.
+- [Latest reply checked](results/weekly_fix_reply_20261030.md), Claude724d1bb: timezone-aware clocks and separate
+  POS/SIG ages now work in the named fixtures. Effective feed tolerance was also raised from15to45minutes;
+  the21-minute case remains green under that changed policy. Archived ACCT cadence is mixed, not universally30minutes.
+  Preserve per-chart capture/feed-clock justification and installed acceptance as separate requirements.
 
 ### E23 — Logger and account fields: what each number really is
 
