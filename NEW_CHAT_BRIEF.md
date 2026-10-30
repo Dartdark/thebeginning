@@ -11,7 +11,8 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   - #1 APEX-681524-01 50K evaluation: **blown 2026-10-26** (was ~$398 above its trailing line; plan size kept).
   - #2 APEX-681524-02 50K evaluation: last reported $49,424.18 (10/21), floor ~$48,000. Combine set: VB 8, ONB ADX30
     $1,100, EOS $500, Bridge Monday 2.
-  - #3 APEX-681524-03 150K No-Activation from 10/26: combine set x 2.5 (VB 20, ONB $2,750, EOS $1,250, Bridge 5);
+  - #3 APEX-681524-03 150K No-Activation from 10/26: **blown 2026-10-30** (Apex liquidated the ONB short at 09:38 CT on an
+    intraday touch of the $146,000 floor; see MULTICHARTS_PITFALLS). Was: combine set x 2.5 (VB 20, ONB $2,750, EOS $1,250, Bridge 5);
     +$9,000 target in 30 days, $4,000 EOD trailing, $2,000 daily loss pause. 10/26: #3's copied charts first sent 150K-size
     orders to #2 (account field on the strategy, see `MULTICHARTS_PITFALLS.md`). 10/28 evening (Order and Position Tracker):
     #2 $50,764.42, #3 $147,822.60 (~$1,823 above its $146,000 floor; one VB 20 stop ~ $3,000). **User 2026-10-29: keep full

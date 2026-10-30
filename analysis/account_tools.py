@@ -19,9 +19,7 @@ import numpy as np, pandas as pd
 OUT = "analysis/outputs/dashboard"
 # evaluation rules per live account (keep in step with dashboard_data.ACCOUNTS / live_panels.ACCTS)
 EVALS = {"#2": dict(mult=1.0, target=53000.0, trail=2000.0, start_bal=50000.0, deadline=None,
-                    max_loss={"Vault Break (8 MNQ, 75 pts)": 1200.0, "Overnight Bias (risk)": 1100.0}),
-         "#3": dict(mult=2.5, target=159000.0, trail=4000.0, start_bal=150000.0, deadline="2026-11-25",
-                    max_loss={"Vault Break (20 MNQ, 75 pts)": 3000.0, "Overnight Bias (risk)": 2750.0})}
+                    max_loss={"Vault Break (8 MNQ, 75 pts)": 1200.0, "Overnight Bias (risk)": 1100.0})}   # #3 blown 2026-10-30
 HALF_DAYS = {"2026-11-26": "Thanksgiving: CME closed for equities RTH", "2026-11-27": "Day after Thanksgiving: early close 12:15 CT",
              "2026-12-24": "Christmas Eve: early close 12:15 CT", "2026-12-25": "Christmas: closed",
              "2027-01-01": "New Year: closed", "2027-01-18": "MLK Day: early close", "2027-02-15": "Presidents' Day: early close"}

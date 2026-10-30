@@ -1,19 +1,50 @@
 {
  "_about": "What every live chart should look like (Claude, 2026-10-29). analysis/vps_health.py compares the day's trade log with it in the 16:40 CT job: a missing chart heartbeat, an unexpected chart, or an entry with the wrong size is flagged in the journal and the dashboard. Update it whenever a chart, size or account changes. qty = fixed contracts (null = risk-sized: max_qty is the ceiling).",
  "accounts": {
-  "#2": {"id": "APEX-681524-02", "suffix": "-2", "status": "live"},
-  "#3": {"id": "APEX-681524-03", "suffix": "150", "status": "live"},
-  "#1": {"id": "APEX-681524-01", "suffix": "", "status": "closed 2026-10-26"}
+  "#2": {
+   "id": "APEX-681524-02",
+   "suffix": "-2",
+   "status": "live"
+  },
+  "#3": {
+   "id": "APEX-681524-03",
+   "suffix": "150",
+   "status": "closed 2026-10-30"
+  },
+  "#1": {
+   "id": "APEX-681524-01",
+   "suffix": "",
+   "status": "closed 2026-10-26"
+  }
  },
  "charts": {
-  "VB-2":       {"strategy": "Vault Break", "qty": 8},
-  "ONB-2":      {"strategy": "Overnight Bias ADX30", "qty": null, "max_qty": 10},
-  "EOS-2":      {"strategy": "EOS", "qty": null, "max_qty": 6},
-  "MON_BR-2":   {"strategy": "Bridge Monday Long", "qty": 2},
-  "VB150":      {"strategy": "Vault Break", "qty": 20},
-  "ONB150":     {"strategy": "Overnight Bias ADX30", "qty": null, "max_qty": 25},
-  "EOS150":     {"strategy": "EOS", "qty": null, "max_qty": 15},
-  "MON_BR150":  {"strategy": "Bridge Monday Long", "qty": 5}
+  "VB-2": {
+   "strategy": "Vault Break",
+   "qty": 8
+  },
+  "ONB-2": {
+   "strategy": "Overnight Bias ADX30",
+   "qty": null,
+   "max_qty": 10
+  },
+  "EOS-2": {
+   "strategy": "EOS",
+   "qty": null,
+   "max_qty": 6
+  },
+  "MON_BR-2": {
+   "strategy": "Bridge Monday Long",
+   "qty": 2
+  }
  },
- "retired_tags": ["VB", "ONB", "EOS", "MON_BR"]
+ "retired_tags": [
+  "VB",
+  "ONB",
+  "EOS",
+  "MON_BR",
+  "VB150",
+  "ONB150",
+  "EOS150",
+  "MON_BR150"
+ ]
 }

@@ -22,11 +22,11 @@ ACCOUNTS = [
     dict(account="#2", id="APEX-681524-02", size="50K evaluation", status="Trading", start=50000, floor=48764.42,
          last_balance=50764.42, last_date="2026-10-28",
          note="Balance from the Order and Position Tracker 10/28 evening. Floor assumes 10/28 is its highest end-of-day balance (peak - $2,000). 10/26 #3's 150K-size orders hit this account: logged P&L that day may not match fills."),
-    dict(account="#3", id="APEX-681524-03", size="150K No-Activation", status="Trading", start=150000, floor=146000,
+    dict(account="#3", id="APEX-681524-03", size="150K No-Activation", status="Blown", start=150000, floor=None,
          last_balance=147822.60, last_date="2026-10-28",
-         note="$4,000 EOD trailing; target +$9,000. Started 10/26. Balance from the Order and Position Tracker 10/28 evening (user screenshot)."),
+         note="Blown 2026-10-30: Apex liquidated the Overnight Bias short at 28,780 (09:38 CT) when equity touched the $146,000 floor intraday. $4,000 EOD trailing; target +$9,000. Started 10/26. Balance from the Order and Position Tracker 10/28 evening (user screenshot)."),
 ]
-CLOSED_AFTER = {"#1": "20261026"}
+CLOSED_AFTER = {"#1": "20261026", "#3": "20261030"}
 OUT = "analysis/outputs/dashboard"
 
 

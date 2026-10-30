@@ -236,3 +236,12 @@ The NO_NET check looked for internet sockets owned by processes named MultiChart
 broker and data sockets belong to another MultiCharts helper process, so it alarmed every hour (08:15-11:25) while every
 chart's ACCT row showed bars 0-1 s old. Fix: NO_NET now fires only if no chart wrote a fresh bar in the last 10 minutes.
 Check before acting on that alarm: the Chart Monitor's ACCT rows (bar age) or the chart itself ticking.
+
+## Apex liquidation shows as a 'Manual Trading' market order, then 2,000+ price-0 exit rejections (2026-10-30, #3 blown)
+#3 (150K, ~$1,823 above its $146,000 floor) went short 8 MNQ (ONB150) at 28,664.5 at 09:30. At 09:38:50 Apex's risk
+system flattened it when equity touched the floor INTRADAY: in the Orders tab a 'Manual Trading' Market Buy 8 filled at
+28,780 (the ONB stop was 28,818, not hit). MultiCharts still believed it was short and re-sent 'Stop Loss' / 'Profit Target'
+with price 0 several times a second: all Rejected (the watchdog counted 2,301). Same family as the 10/19 daily-loss lock.
+Read it this way: a 'Manual Trading' fill you didn't make = Apex closed the position; price-0 exit orders = the chart is out
+of sync. Fix: auto-trading OFF / ON (initial position Flat) on that chart, check Strategy Positions = Flat; if the account
+failed, auto-trading off on all its charts. EOD-trailing accounts still fail on an INTRADAY touch of the floor.
