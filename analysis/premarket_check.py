@@ -5,6 +5,7 @@ position = broker position). Prints one line per problem, or 'ALL GREEN'. Run by
   python3 analysis/premarket_check.py [YYYY-MM-DD]
 """
 import sys, os, json, datetime as dt
+from zoneinfo import ZoneInfo
 import pandas as pd
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -18,8 +19,21 @@ def has_sig(tag):
     return any(f",{tag}," in l and l.startswith("SIG,") for f in glob.glob("live/trades/*.csv") for l in open(f))
 
 
+CT = ZoneInfo("America/Chicago")                              # Codex 2026-10-30: fixed UTC-5 was wrong after the DST change
+
+
+def age_min(r, asof):
+    """Minutes from a row's capture (bar_date + bar_time, CT) to asof (aware datetime); None if unparseable or in the future."""
+    try:
+        t = dt.datetime.strptime(f"{int(float(r.bar_date))}{int(float(r.bar_time)):04d}", "%Y%m%d%H%M").replace(tzinfo=CT)
+    except (TypeError, ValueError):
+        return None
+    m = (asof - t).total_seconds() / 60
+    return m if m >= -2 else None
+
+
 def check(day, asof=None):
-    """asof = HHMM CT of the check (today's run); the age of each chart's last monitor line is checked against it."""
+    """asof = aware datetime of the check (today's run): each chart's last ACCT / POS / SIG line is aged against it."""
     cfg = json.load(open("live/expected_setup.json")); out = []
     d = day.strftime("%Y%m%d"); f = f"live/trades/{d}.csv"; h = f"live/health/{d}.csv"
     if not os.path.exists(h) or not any(l.startswith("open,") for l in open(h)):
@@ -37,13 +51,20 @@ def check(day, asof=None):
         if a.empty:
             out.append(f"{tag}: no monitor line today (chart closed or monitor missing)."); continue
         r = a.iloc[-1]
-        if asof is not None:                                  # 2026-10-30 (Codex review): a line from after midnight is not 'fresh'
-            bt = int(r.bar_time); line_age = (asof // 100 * 60 + asof % 100) - (bt // 100 * 60 + bt % 100)
-            if line_age > 45:
-                out.append(f"{tag}: the chart monitor's last line is {bt:04d} CT, {line_age} min old: chart frozen or closed? Check it.")
+        if asof is not None:                                  # 2026-10-30 (Codex review): each row type aged on the CT clock
+            # cadence on the VPS log (checked 10/27-29): ACCT and POS every 30 min (08:00, 08:30), SIG every bar: limit = cadence + 15
+            for ev, lim in (("ACCT", 45), ("POS", 45), ("SIG", 15)):
+                q = df[(df.event == ev) & (df.tag == tag)]
+                if q.empty: continue
+                m = age_min(q.iloc[-1], asof)
+                if m is None: out.append(f"{tag}: last {ev} line has a bad or future time: VPS clock? Check it.")
+                elif m > lim: out.append(f"{tag}: last {ev} line {int(float(q.iloc[-1].bar_time)):04d} CT is {m:.0f} min old: chart frozen or closed? Check it.")
+            m = age_min(r, asof); bar_age = float(r.entry_price or 0) / 60
+            if m is not None and bar_age + m > 45:            # feed age = bar age at capture + time since capture (30-min rows)
+                out.append(f"{tag}: chart's last bar is {bar_age + m:.0f} min old at check time (feed?).")
+        elif float(r.entry_price or 0) > 900: out.append(f"{tag}: chart's last bar {float(r.entry_price) / 60:.0f} min old (feed?).")
         if str(r.contracts) != "1": out.append(f"{tag}: auto-trading OFF (last line {int(r.bar_time):04d}).")
         if want[tag] and r.side != want[tag][0]: out.append(f"{tag}: monitor account {r.side}, expected {want[tag][0]}.")
-        if float(r.entry_price or 0) > 900: out.append(f"{tag}: chart's last bar {float(r.entry_price) / 60:.0f} min old (feed?).")
         p = df[(df.event == "POS") & (df.tag == tag)]
         if len(p) and p.iloc[-1].contracts != p.iloc[-1].profit_usd:
             out.append(f"{tag}: strategy position {p.iloc[-1].contracts} vs broker {p.iloc[-1].profit_usd}.")
@@ -60,7 +81,7 @@ def check(day, asof=None):
 
 
 if __name__ == "__main__":
-    day = dt.date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1 else (dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=5)).date()
-    now = dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=5)
-    o = check(day, int(now.strftime("%H%M")) if day == now.date() else None)
+    now = dt.datetime.now(CT)
+    day = dt.date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1 else now.date()
+    o = check(day, now if day == now.date() else None)
     print("\n".join(o) if o else "ALL GREEN: every live chart has auto-trading on, the right account, a fresh feed and a matching position.")

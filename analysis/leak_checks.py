@@ -93,6 +93,10 @@ def report(name, F, sym, bar, cost=None):
     off, R = fs_
     bad = R[~R.ok]; l1 = R.ok.mean() >= 0.98
     D = delay(F[F.exit_time > F.entry_time], sym, bar, off)   # L2 (one-bar delay) needs a trade that outlives its entry bar
+    if len(D) == 0 or "orig" not in D:                        # Codex 2026-10-30: all same-bar trades -> L2 untestable, not PASS
+        return (f"### {name} ({sym}, {bar}-min chart, {len(F)} trades 2018+)\n- L1 fill sanity: {R.ok.mean():.1%} of {len(R)} fills "
+                f"-> **{'PASS' if l1 else 'FAIL'}**\n- L2 one-bar delay: no multi-bar trades -> **UNAVAILABLE**",
+                dict(name=name, l1=R.ok.mean(), off=off, n=0, orig=np.nan, delayed=np.nan, t0=np.nan, t1=np.nan, keep=np.nan, l1_ok=l1, l2_ok=False))
     o, dl = D.orig * pv - cost, D.delayed * pv - cost
     keep = sharpe(dl) / sharpe(o) if sharpe(o) and sharpe(o) > 0 else np.nan
     l2 = bool(keep >= 0.5) if not np.isnan(keep) else False
