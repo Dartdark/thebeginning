@@ -64,6 +64,11 @@ bottom). Times are Central (CT).
 - [ ] Stop buying if the drift alarm fires (live clearly below backtest). No more new 50Ks; #2 runs to the end.
 - Expected funded 150Ks: after tax ~6 (5 d) / ~8 (6 d) by Dec 31; no tax ~8 (5 d) / ~10 (6 d); +~4-5 more by late January.
 - From January: refill slots up to ~20 from payouts.
+- 2027 outlook (Claude, 2026-10-30): first payouts ~late Feb-March (each 150K needs +$5,600 and 5 days of $350+; January
+  at the earliest); per 150K slot ~$14k in the first 12 months (backtest), ~$10k at 75% edge. ~10 slots: ~$140k backtest /
+  ~$100k at 75% / ~$60-70k bad year, nearly all March-December. Plan Jan-Feb with no trading income.
+  If the job continues through 2027 (~$850/wk after tax): reach 20 slots by ~February from pay, then switch pay to the
+  personal account from ~March: ~$250k backtest / ~$180k at 75% from Apex, + personal account ~$30k by autumn.
 
 ## Half-day fixes for two funded strategies (2026-10-25, from Codex's Day Flow Six review; not live yet)
 
