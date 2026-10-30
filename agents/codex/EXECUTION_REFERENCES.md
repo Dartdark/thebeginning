@@ -450,6 +450,31 @@ Source: Cieslak/Morse/Vissing-Jorgensen, [SSRN2687614](https://ssrn.com/abstract
 - Next check for a distinct future study: explicit clock/session census before outcomes. Do not retune this family.
 - Status: execution/input-design reference; no claimed saving or allocation.
 
+### E35 — GreenORB: fill-anchored targets, engine callbacks and source parity
+
+Source: user-uploaded GreenORB PDF/post and Liqport class, 2026-10-30.
+[Saved test/review](results/greenorb_20261030.md), [frozen plan](plans/greenorb_20261030.md).
+Related: E09 native micro accounting, E18 fill/volume conventions, E19 session clocks.
+- Use: when a target is R times the actual fill-to-stop distance, changing entry slippage changes its price and
+  potentially its exit. Rebuild the target in an execution stress; subtracting extra fees from an unchanged ledger
+  answers a different question. For this declared source, adverse two-tick fills and four-tick fills were tested
+  separately, retaining both exact and fixed-ledger sensitivities.
+- Timing: at the OR-end instant, base-bar and five-minute callback ordering can determine which three candles
+  sit in a rolling buffer. The indicator class and callback scheduler were not supplied. Implementing prose's
+  intended opening bars does not establish exact engine parity. Count limit validity in the callback's actual
+  units (here one-minute ticks), and distinguish marking a direction as traded on order placement from an actual fill.
+- Evidence: source inspection, pre-return synthetic path/gap/trade-through tests and a maker-audited historical
+  NQ-data proxy. One-MNQ design net was $5,828.40 at two ticks and $5,623.40 at four ticks; no current-account,
+  native MNQ, Liqport trade-match or independent verification result. Strategy controls failed; no allocation earned.
+- Limits: observed-bar NQ VWAP with missing overnight prefix minutes is not full native MNQ VWAP. Missing day
+  paths, including circuit-breaker/stress dates, remain unknown; do not book them as zero or infer risk from their
+  absence. Intraday flatness does not eliminate overnight VWAP roll-splice effects. A median drawdown rank among
+  shuffled days tests sequence luck, not source selection or the existence of an edge.
+- Prerequisites/next check when a future parity task needs them: native contract/volume and trade ledger,
+  indicator/session settings and callback trace; align signal, submission, next-open fill, protection activation
+  and target price. Do not retune this failed strategy or install the supplied class to resolve a research question.
+- Status: execution reference retained; failed strategy test remains a separate negative evidence record.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
