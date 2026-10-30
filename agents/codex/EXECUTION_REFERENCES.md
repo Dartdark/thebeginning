@@ -348,7 +348,7 @@ Source: Nocturne research note (L. Franceschetti, user upload 2026-10-30), rebui
 - Next check: size no-stop overnight pieces so the worst historical night stays below half the account's trailing room.
 - Status: market-behavior reference; Nocturne C, watchlist.
 
-### E30 — Backtest-live parity: six implementation defects and a ten-point checklist
+### E31 — Backtest-live parity: six implementation defects and a ten-point checklist
 
 Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SCOUT_LOG.md.
 - Use: one live intraday stock system, six defects that summary statistics never showed: (1) default data feed carried
