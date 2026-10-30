@@ -1,0 +1,19 @@
+Budget-driven 150K ramp (user, 2026-10-30): the plan as agreed, not the 10/16 schedule. Day 0 = Mon 2026-11-02 (#4 bought
+
+=== backtest edge  (150K evaluation pass 38.1%)
+scenario                                 evals to Dec 31   funded by Dec 31 (p10-p50-p90)  first payout    2027 payouts p10 / p50 / p90  P(0 funded Dec31)
+5 d/wk, job ends 12/24, all on payday                 23                       0 - 7 - 16        Mar 02             $0k / $269k / $414k                16%
+5 d/wk, job ends, 1 a day                             23                       0 - 7 - 15        Mar 01             $0k / $252k / $403k                14%
+6 d/wk, job ends, 1 a day                             28                       0 - 8 - 17        Feb 26             $0k / $264k / $410k                13%
+5 d/wk, job kept*, all on payday                      23                       0 - 7 - 16        Mar 02             $8k / $328k / $419k                16%
+5 d/wk, job kept*, 1 a day                            23                       0 - 7 - 15        Mar 02             $8k / $321k / $415k                14%
+6 d/wk, job kept*, 1 a day                            28                       0 - 8 - 17        Mar 02            $10k / $329k / $418k                13%
+
+=== 75% of the edge  (150K evaluation pass 28.9%)
+scenario                                 evals to Dec 31   funded by Dec 31 (p10-p50-p90)  first payout    2027 payouts p10 / p50 / p90  P(0 funded Dec31)
+5 d/wk, job ends 12/24, all on payday                 23                       0 - 3 - 12        Mar 30             $0k / $102k / $316k                34%
+5 d/wk, job ends, 1 a day                             23                       0 - 3 - 12        Mar 24              $0k / $89k / $289k                31%
+6 d/wk, job ends, 1 a day                             28                       0 - 4 - 14        Mar 22             $0k / $116k / $315k                29%
+5 d/wk, job kept*, all on payday                      23                       0 - 3 - 12        Apr 02             $0k / $179k / $325k                34%
+5 d/wk, job kept*, 1 a day                            23                       0 - 3 - 12        Mar 31             $0k / $176k / $321k                31%
+6 d/wk, job kept*, 1 a day                            28                       0 - 4 - 14        Mar 26             $0k / $182k / $326k                29%

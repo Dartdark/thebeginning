@@ -361,6 +361,11 @@ Sources: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) (10/27 ONB, 10
   Offline byte/path and fake-file checks reproduce these source defects. The installed VPS copy and PowerShell
   runtime were not inspected; correction/deployment is not performed or certified here. Use an injected timezone-aware
   as-of clock and disconnected temporary-log fixtures before relying on monitoring coverage.
+- [Post-fix acceptance follow-up](results/weekly_fix_followup_20261030.md), Claude302abe2: the malformed log path
+  is repaired and the exact midnight-snapshot fixture now alerts. Remaining fake-log cases still return ALL GREEN
+  for a21-minute effective feed age and for fresh ACCT alongside stale POS/SIG. Add elapsed time to captured
+  bar age; age each record type independently; fixed UTC−5 is wrong after the DST change. Source correction,
+  PowerShell runtime and installed behavior remain separate evidence states. No live-system change was made here.
 
 ### E23 — Logger and account fields: what each number really is
 
