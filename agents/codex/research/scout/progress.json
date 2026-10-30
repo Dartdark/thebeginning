@@ -1,10 +1,16 @@
 {
   "schema_version": 1,
   "program": "paper-scout-20261029",
-  "status": "ready",
-  "lease": null,
-  "hypotheses_started": 3,
-  "economic_definitions": 7,
+  "status": "running",
+  "lease": {
+    "run_id": "scout-fomc-cycle-20261030",
+    "owner": "codex-root",
+    "claimed_at": "2026-10-30T17:37:57.205917+00:00",
+    "expires_at": "2026-10-30T19:37:57.205917+00:00",
+    "checked_parent": "f74e9870d98ad2af784622b2579368efa898a64d"
+  },
+  "hypotheses_started": 4,
+  "economic_definitions": 10,
   "max_hypotheses": 10,
   "max_economic_definitions": 30,
   "max_new_hypotheses_per_cycle": 1,
@@ -65,6 +71,22 @@
       "status": "design_reject",
       "proposal_sha256": "dc8ebb4ff3ea8a7ca0a7d363de8bd8c027a534c865f485d5c7b629b5da159c0e",
       "result_path": "agents/codex/results/scout_treasury_close_20261029.md"
+    },
+    {
+      "hypothesis_id": "intermeeting-fomc-cycle-equity-repricing",
+      "run_id": "scout-fomc-cycle-20261030",
+      "source_id": "ssrn:2687614",
+      "proposal_path": "agents/codex/research/scout/proposals/fomc_cycle.json",
+      "candidate_variants": 1,
+      "control_variants": 2,
+      "economic_definitions": 3,
+      "definition_ids": [
+        "FOMC246_ES_RTH",
+        "FOMC246_CALENDAR_NULL",
+        "FOMC246_COST_STRESS"
+      ],
+      "status": "reserved",
+      "proposal_sha256": "261251e4a67758fa433560294a42562134991ae52b5f466ddcc261eb7d61f5fb"
     }
   ],
   "seen": [
