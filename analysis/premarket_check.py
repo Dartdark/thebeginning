@@ -52,16 +52,21 @@ def check(day, asof=None):
             out.append(f"{tag}: no monitor line today (chart closed or monitor missing)."); continue
         r = a.iloc[-1]
         if asof is not None:                                  # 2026-10-30 (Codex review): each row type aged on the CT clock
-            # cadence on the VPS log (checked 10/27-29): ACCT and POS every 30 min (08:00, 08:30), SIG every bar: limit = cadence + 15
-            for ev, lim in (("ACCT", 45), ("POS", 45), ("SIG", 15)):
+            # limit = this chart's own write interval today (median gap: ACCT/POS per chart bar 5/15/30 min, SIG every bar) + 15 min
+            # (Codex 2026-10-30: ACCT cadence differs by chart, one 45-min limit was too loose for 5-min charts)
+            def lim(q):
+                t = pd.to_datetime(q.bar_date.astype(str) + q.bar_time.astype(str).str.zfill(4), format="%Y%m%d%H%M", errors="coerce")
+                g = t.drop_duplicates().sort_values().diff().dt.total_seconds().div(60).dropna()
+                return (g.median() if len(g) else 30) + 15
+            for ev in ("ACCT", "POS", "SIG"):
                 q = df[(df.event == ev) & (df.tag == tag)]
                 if q.empty: continue
-                m = age_min(q.iloc[-1], asof)
+                m, L = age_min(q.iloc[-1], asof), lim(q)
                 if m is None: out.append(f"{tag}: last {ev} line has a bad or future time: VPS clock? Check it.")
-                elif m > lim: out.append(f"{tag}: last {ev} line {int(float(q.iloc[-1].bar_time)):04d} CT is {m:.0f} min old: chart frozen or closed? Check it.")
-            m = age_min(r, asof); bar_age = float(r.entry_price or 0) / 60
-            if m is not None and bar_age + m > 45:            # feed age = bar age at capture + time since capture (30-min rows)
-                out.append(f"{tag}: chart's last bar is {bar_age + m:.0f} min old at check time (feed?).")
+                elif m > L: out.append(f"{tag}: last {ev} line {int(float(q.iloc[-1].bar_time)):04d} CT is {m:.0f} min old (limit {L:.0f}): chart frozen or closed? Check it.")
+            m, bar_age = age_min(r, asof), float(r.entry_price or 0) / 60
+            if m is not None and bar_age + m > lim(a):        # feed age = bar age at capture + time since capture
+                out.append(f"{tag}: chart's last bar is {bar_age + m:.0f} min old at check time (limit {lim(a):.0f}; feed?).")
         elif float(r.entry_price or 0) > 900: out.append(f"{tag}: chart's last bar {float(r.entry_price) / 60:.0f} min old (feed?).")
         if str(r.contracts) != "1": out.append(f"{tag}: auto-trading OFF (last line {int(r.bar_time):04d}).")
         if want[tag] and r.side != want[tag][0]: out.append(f"{tag}: monitor account {r.side}, expected {want[tag][0]}.")
