@@ -98,7 +98,7 @@ story += [p("What changed since the October 24 version (v3)", H1),
                  ["150K funded plan", "x 1.5 + RS 1 + Dual Thrust 2", "x 1.5 + RS 1 + Overnight Tick 2 + Swing Target 2 (in Dual Thrust's slot)"],
                  ["Personal account", "17 pieces", "19 pieces (+ Swing Target, PAPERTREND); ~$41.5k a year at 1 micro, needs ~$36k"],
                  ["Live guard", "Trade logger + VPS push", "Watchdog alarms to the phone, strategy heartbeat, chart monitor, pre-market check, live dashboard"],
-                 ["Outlook", "-", "<b>2027 outlook (section 4):</b> ~$100k from Apex at 75% edge; ~$180k if the job continues*"]],
+                 ["Outlook", "-", "<b>2027 outlook (section 4):</b> ~$100k from Apex at 75% edge (median); ~$170k if the job continues*; nothing funded by Dec 31 in 14-28% of histories"]],
                 [1.3 * inch, 2.1 * inch, 3.6 * inch], bold_first_col=True),
           p("* see the footnote under '2027 outlook' in section 4. The rest of the report is version 2, carried over.", SM),
           PageBreak()]
@@ -216,14 +216,14 @@ story += [PageBreak(), p("3. Funding model: Apex Trader Funding", H1),
 story += [PageBreak(), p("4. Financial projections", H1),
           p("Simulated on real market history (start dates 2018-2023, three-year windows), with every account running the plan "
             "through the exact Apex rules. These are backtest-based; Section 7 shows a weaker-edge case."),
-          p("Single funded account", H2),
+          p("Single funded account (10/16 plan; the current 150K plan: ~$18.1k year 1 / ~$20.3k in 2 years, bootstrapped)", H2),
           table([["", "50K (current sizing)", "150K (plan x 1.5)"],
                  ["Payouts within 1 year", "$10,184", "$15,731"],
                  ["Payouts within 2 years", "$12,450 (cap $13,000)", "$19,743 (cap $20,500)"],
                  ["Accounts blown", "3%", "0%"],
                  ["All 6 payouts within 2 years", "94%", "91%"]],
                 [2.4 * inch, 2.3 * inch, 2.3 * inch]),
-          p("Three accounts: the first year month by month", H2),
+          p("Three accounts: the first year month by month (10/16 plan, for reference)", H2),
           table([["After", "Typical (median)", "Bad case (10th pct)", "Good case (90th pct)", "Any payout received"],
                  ["1 month", "-$400", "-$520", "-$250", "1%"],
                  ["3 months", "-$455", "-$755", "+$5,595", "36%"],
@@ -232,18 +232,24 @@ story += [PageBreak(), p("4. Financial projections", H1),
                 [1.0 * inch, 1.5 * inch, 1.5 * inch, 1.5 * inch, 1.5 * inch]),
           p("Month 1 is fees only: evaluations pass in about 6 trading days, but Apex payouts need the balance built up first, so "
             "the first payout usually arrives in month 2-4.", SM),
-          p("Scaling to 20 accounts (cash after fees, median; real Apex prices)", H2),
-          table([["Schedule", "6 months", "12 months", "24 months", "36 months", "Bad case 12 m", "Most cash outlay (bad case)"],
-                 ["Agreed plan: #1-#2 50K (switch to 150K after their first funded account closes), #3 150K; +2 x 150K per week from month 2", "$4k", "$182k", "$576k", "$1.03M", "-$11k", "-$20.0k"],
-                 ["Same, +3 x 150K per week", "$7k", "$188k", "$588k", "$1.05M", "-$9k", "-$20.8k"],
-                 ["All 20 slots 150K from the start", "$5k", "$194k", "$591k", "$1.04M", "-$16k", "-$22.6k"],
-                 ["All 20 slots 50K", "$11k", "$152k", "$390k", "$672k", "+$9k", "-$5.7k"],
-                 ["Agreed plan, if live keeps 75% of the edge", "-$9k", "$99k", "$403k", "$747k", "-$32k", "-$36.8k"]],
-                [2.45 * inch, 0.6 * inch, 0.7 * inch, 0.7 * inch, 0.7 * inch, 0.8 * inch, 1.05 * inch], highlight=[1]),
-          p("150K accounts roughly double the 3-year total, but evaluation fees ($249 a try, ~2.4 tries per funded account) come "
-            "before the payouts: set aside ~$20k, and pause new accounts if cumulative cash falls below -$20k. Adding 3 a week instead "
-            "of 2 changes little (+$6k in year 1, nothing at 75% of the edge), so the plan keeps 2 a week. Cumulative cash "
-            "reaches $100k after ~10 months (backtest edge) or ~12 months (75% edge).", SM),
+          p("Scaling: the agreed plan of October 30 (budget-driven, new in v3)", H2),
+          p("Simulated (analysis/ramp_budget_test.py): from Mon Nov 2, every paycheck ($25 x 8 h, 5 or 6 days, after tax) and every "
+            "payout buys 150K No-Activation evaluations ($249), up to 20 open accounts; failed evaluations and finished funded "
+            "accounts free their place. Every 10th start day 2018-2023 in real day order. Funded payouts use the 10/16 plan x 1.5, "
+            "~15% below the current 150K plan, so payouts are on the low side. #2 (50K) is not included."),
+          table([["Scenario", "Evaluations to Dec 31", "Funded Dec 31 (p10-median-p90)", "No funded at all by Dec 31", "First payout (median)", "2027 payouts (p10 / median / p90)"],
+                 ["Job to Dec 24, 5 days, 1 buy a day (backtest edge)", "23", "0 - 6 - 14", "14%", "late Feb", "$0 / $246k / $405k"],
+                 ["Job to Dec 24, 6 days, 1 buy a day", "28", "0 - 8 - 17", "13%", "late Feb", "$0 / $264k / $410k"],
+                 ["Job kept in 2027*, 5 days, 1 buy a day", "23", "0 - 6 - 14", "14%", "early Mar", "$8k / $307k / $414k"],
+                 ["Job to Dec 24, 5 days, <b>75% of the edge</b>", "23", "0 - 3 - 12", "28%", "late Mar", "$0 / $96k / $289k"],
+                 ["Job kept in 2027*, 5 days, <b>75% of the edge</b>", "23", "0 - 3 - 12", "28%", "late Mar", "$0 / $171k / $320k"]],
+                [2.1 * inch, 0.75 * inch, 1.0 * inch, 0.8 * inch, 0.75 * inch, 1.3 * inch], highlight=[4]),
+          bullets(["<b>Same-day buys are one bet:</b> every account trades the same signals, so evaluations started the same day pass or "
+                   "fail together. Buying one a day instead of all on payday cut the chance of no funded account by Dec 31 from 16% to "
+                   "14% (backtest) and 33% to 28% (75% edge) for a small cost in the median.",
+                   "<b>The main risk:</b> a bad 2-month stretch fails every evaluation (14-28% of histories). If the job has ended, the "
+                   "money is gone and 2027 pays $0; with the job, buying continues. Keep a small reserve and stop at the drift alarm.",
+                   "The October 16 schedule (+2 x 150K a week from month 2; 12 months $182k backtest / $99k at 75%) is superseded."]),
           PageBreak(),
           p("Personal account (Phase 3 onward): the capital ladder (new in v2)", H2),
           p("No Apex rules: overnight holds allowed, no trailing limit, no payout cap. The portfolio has 17 pieces: the 10 funded "
@@ -279,21 +285,21 @@ story += [p("2027 outlook (new in v3, 2026-10-30)", H2),
             "~50% / ~56% evaluation fail rates; skipping trades on a thin cushion tested worse). #2 (50K) is live with ~$1,070 "
             "of room. No new 50Ks; every new account is a 150K No-Activation ($249)."),
           table([["Funding", "Buying Nov 1 - Dec 24", "Funded 150Ks Dec 31", "Late Jan", "2027 from Apex (backtest / 75% edge)"],
-                 ["Job pay to Dec 24 only", "3-4 per weekly payday (~21-27 evaluations)", "~6-8", "~10-13", "~$140k / ~$100k"],
-                 ["Job kept through 2027*", "same, then 3-4 a week to the ~20-account cap by ~Feb", "~6-8", "~12", "~$250k / ~$180k"]],
+                 ["Job pay to Dec 24 only", "pay + payouts -> evaluations, 1 a day (~23-28 by Dec 31)", "~6-8", "~10-13", "~$250k / ~$100k"],
+                 ["Job kept through 2027*", "same, and the job keeps buying in 2027 (20-account cap)", "~6-8", "~12", "~$310k / ~$170k"]],
                 [1.25 * inch, 1.9 * inch, 0.95 * inch, 0.65 * inch, 1.55 * inch], highlight=[2]),
           Spacer(1, 4),
           bullets(["<b>First payouts ~late February - March 2027</b> (each 150K needs +$5,600 and 5 days of $350+ before payout 1; "
                    "January at the earliest). Budget January - February with no trading income.",
-                   "Per 150K slot ~$14k of payouts in the first 12 months (backtest, evaluation time and failures included). Every "
-                   "account trades the same plan: a bad year hits all of them (~$60-70k for 10 slots, ~$110-130k for 20).",
+                   "Medians from the budget simulation above (payouts re-invested into evaluations). Every account trades the same plan: "
+                   "in 14-28% of histories nothing is funded by Dec 31, and without the job 2027 can then pay $0.",
                    "<b>Personal account:</b> opened once Apex reaches its account cap and pays for its own replacements (~March "
                    "with the job, later without it), funded from the job and part of the payouts; starter set A at ~$11.5k "
                    "(~April - May), core 16 at ~$26k (~summer), contributing ~$5-10k in 2027.",
                    "Stop buying if the drift alarm fires; the mid-December gate (~40-70 live trades at >= 75% of backtest) decides the ramp."]),
           p("* Assumes the $25 / hour job (8 hours, 5-6 days a week, ~$850-1,000 a week after tax) continues through 2027 and all "
             "of it goes to evaluations until ~February, then to the personal account. With the job's ~$44k after tax, 2027 is "
-            "~$225-230k all-in at 75% of the backtest edge. Not a promise: backtest-based, live edge not yet confirmed.", SM)]
+            "~$215k all-in at 75% of the backtest edge (Apex median ~$170k). Not a promise: backtest-based, live edge not yet confirmed.", SM)]
 
 # 5 Roadmap
 story += [PageBreak(), p("5. Roadmap", H1),

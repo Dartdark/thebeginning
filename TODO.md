@@ -57,7 +57,7 @@ bottom). Times are Central (CT).
 
 ## 150K buying plan, Nov-Dec 2026 (user, 2026-10-30; job Nov 10 - Dec 24, $25 x 8 h, paid weekly, all pay to evaluations)
 - [ ] Sun Nov 1: buy 150K No-Activation #4 (afternoon, before ~18:00 CT), set up its 4 charts, send Claude the account number.
-- [ ] Each payday (Fri Nov 14, 21, 28, Dec 5, 12, 19): buy as many $249 150Ks as the pay covers, spread over 2-3 days:
+- [ ] Each payday (Fri Nov 14, 21, 28, Dec 5, 12, 19): buy as many $249 150Ks as the pay covers, ONE a day (same-day buys pass/fail together):
       after tax ~3 (5 days/wk) / ~4 (6 days/wk); without tax 4 (5 days) / 4-5 (6 days). Dec 26 pay (3 days): ~2, January starts.
 - [ ] Each new account: 4 charts, account number typed in every strategy's Auto Trading gear, rejected-orders limit 10,
       initial position Flat; send Claude the number (watchdog / dashboard / expected_setup.json).
@@ -68,7 +68,10 @@ bottom). Times are Central (CT).
   at the earliest); per 150K slot ~$14k in the first 12 months (backtest), ~$10k at 75% edge. ~10 slots: ~$140k backtest /
   ~$100k at 75% / ~$60-70k bad year, nearly all March-December. Plan Jan-Feb with no trading income.
   If the job continues through 2027 (~$850/wk after tax): reach 20 slots by ~February from pay, then switch pay to the
-  personal account from ~March: ~$250k backtest / ~$180k at 75% from Apex, + personal account ~$30k by autumn.
+  personal account from ~March: ~$310k backtest / ~$170k at 75% from Apex (median), + personal account ~$30k by autumn.
+  Budget simulation (analysis/ramp_budget_test.py, 10/30): job to Dec 24 -> 2027 median $246k backtest / $96k at 75%;
+  14-28% of histories have NO funded account by Dec 31 (then $0 in 2027 without the job). Buy ONE evaluation a day,
+  not all on payday (same-day accounts pass or fail together).
 
 ## Half-day fixes for two funded strategies (2026-10-25, from Codex's Day Flow Six review; not live yet)
 
