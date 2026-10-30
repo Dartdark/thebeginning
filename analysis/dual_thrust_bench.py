@@ -21,7 +21,8 @@ MODE = sys.argv[2] if len(sys.argv) > 2 else "merge"
 
 def dt_trades(g):
     days = DT.load(); t = DT.run(days, DT.setups(days)); x = DT.lab_trades(g, t)
-    assert x.day.notna().all(); x["day"] = x.day.astype(int)
+    x = x[x.day.notna()].reset_index(drop=True)   # trades after the cached grid's last day (data extended 10/28) can't be placed
+    x["day"] = x.day.astype(int)
     return with_slippage(x)
 
 

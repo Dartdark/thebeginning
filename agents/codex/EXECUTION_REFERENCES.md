@@ -338,6 +338,16 @@ Source: Takahashi, arXiv 2508.06788 (paper, scout 2026-10-29); papers/SCOUT_LOG.
 - Next check: none; relevant when sizing orders at 07:30 / 09:00 CT releases.
 - Status: market-behavior reference.
 
+### E30 — No-stop overnight edges: a protective stop can delete the whole edge
+
+Source: Nocturne research note (L. Franceschetti, user upload 2026-10-30), rebuild [nocturne_test.py](../../analysis/nocturne_test.py). Claude, 2026-10-30.
+- Use: before bolting a stop onto a strategy that was found without one, test it: the profit may come from holding through the drops.
+- Evidence (historical test): NQ long 17:05 -> 07:20 with an R^2 filter, 1,449 nights 2017-26: no stop $90 a night (t 2.56), worst night -$11,402;
+  with a 0.5 x 15-day ATR stop $39 a night (t 1.35), 2024-26 negative. Overnight Tick / VIX (plan, no stop either) shares 338 of its nights.
+- Limits: one rule, one stop width; Apex evaluations can't carry an unbounded night (floor touched intraday = failed, see E21).
+- Next check: size no-stop overnight pieces so the worst historical night stays below half the account's trailing room.
+- Status: market-behavior reference; Nocturne C, watchlist.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
