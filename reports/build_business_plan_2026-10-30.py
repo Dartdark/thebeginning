@@ -70,7 +70,7 @@ def cover(c, d):
     c.drawString(0.8 * inch, 8.5 * inch, "Trading Plan")
     c.setFont("Helvetica", 14); c.drawString(0.8 * inch, 7.9 * inch, "Business report: strategy, funding model, roadmap and risk")
     c.setFont("Helvetica", 11); c.drawString(0.8 * inch, 7.3 * inch, "NQ / MNQ and MCL futures  |  MultiCharts automation  |  Apex Trader Funding")
-    c.drawString(0.8 * inch, 6.9 * inch, "October 24, 2026  (version 2; version 1: October 16, 2026)")
+    c.drawString(0.8 * inch, 6.9 * inch, "October 30, 2026  (version 3; v2: October 24, v1: October 16)")
     c.setFillColor(NAVY); c.setFont("Helvetica-Bold", 12); c.drawString(0.8 * inch, 5.4 * inch, "In one sentence")
     c.setFont("Helvetica", 11); c.setFillColor(colors.black)
     lines = ["Use prop-firm accounts as a low-cost live test bench and funding source for a",
@@ -84,6 +84,24 @@ def cover(c, d):
 
 
 story = [PageBreak()]
+
+# 0a Changes since version 2 (v3)
+story += [p("What changed since the October 24 version (v3)", H1),
+          table([["Area", "October 24 (v2)", "October 30 (v3)"],
+                 ["Live accounts", "#1 and #2 50K live; #3 150K planned",
+                  "#1 blew 10/26 and #3 (150K) blew 10/30, each on one full stop at a thin cushion; #2 (50K) live with ~$1,070 of room. "
+                  "Thin-cushion test: skipping trades never beat the full set"],
+                 ["Account buying", "Ramp +2 150Ks a week after the mid-December gate",
+                  "No new 50Ks. Job-funded buying from Nov 1: 3-4 150K No-Activation a week to Dec 24 (~6-8 funded by Dec 31)"],
+                 ["50K funded plan", "10 strategies", "11: VB 1/1 + Swing Target 1 (10/25); Overnight Tick 1 for the Monday Long (10/24); "
+                  "T_ONESIDE fade 1 for the Relative Strength longs (10/28)"],
+                 ["150K funded plan", "x 1.5 + RS 1 + Dual Thrust 2", "x 1.5 + RS 1 + Overnight Tick 2 + Swing Target 2 (in Dual Thrust's slot)"],
+                 ["Personal account", "17 pieces", "19 pieces (+ Swing Target, PAPERTREND); ~$41.5k a year at 1 micro, needs ~$36k"],
+                 ["Live guard", "Trade logger + VPS push", "Watchdog alarms to the phone, strategy heartbeat, chart monitor, pre-market check, live dashboard"],
+                 ["Outlook", "-", "<b>2027 outlook (section 4):</b> ~$100k from Apex at 75% edge; ~$180k if the job continues*"]],
+                [1.3 * inch, 2.1 * inch, 3.6 * inch], bold_first_col=True),
+          p("* see the footnote under '2027 outlook' in section 4. The rest of the report is version 2, carried over.", SM),
+          PageBreak()]
 
 # 0 Changes since version 1
 story += [p("What changed since the October 16 version", H1),
