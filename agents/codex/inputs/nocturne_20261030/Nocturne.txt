@@ -1,0 +1,274 @@
+RESEARCH NOTE · NOCTURNE                  01 / 09
+
+
+
+NASDAQ-100 FUTURES · OVERNIGHT
+
+
+
+
+Nocturne.
+A gold anomaly, moved to the
+Nasdaq-100 future, passed its first
+out-of-sample test. The second said no.
+
+AUTHOR                     DATE
+Luca Franceschetti         October 2026
+
+VERDICT
+Passed the first out-of-sample
+test, not the second
+
+
+
+
+Hypothetical results, simulated on
+historical data. Not investment advice.
+RESEARCH NOTE · NOCTURNE                                   02 / 09
+
+
+
+THE IDEA
+
+
+Gold earns at night.
+Blose, Gondhalekar and Kort (2018) find it across
+COMEX gold futures, spot gold, mining stocks and
+gold funds. Their reading: opening prices are set
+too high and drift lower during the session.
+
+
+
+    Night                               Day
+    significantly positive              significantly negative
+
+
+
+THE QUESTION
+
+Does the paper’s overnight rule
+hold up on the Nasdaq-100 future?
+Blose, Gondhalekar and Kort (2018), Journal of
+Economics and Finance.
+
+
+LUCA FRANCESCHETTI                       SIMULATED RESULTS
+RESEARCH NOTE · NOCTURNE                         03 / 09
+
+
+
+THE MOVE
+
+
+From gold
+to equities.
+The paper’s rule, long overnight and flat
+by the New York morning, was run
+unchanged across liquid futures markets.
+
+IT HELD UP ON THREE EQUITY-INDEX FUTURES
+
+
+  Nasdaq-100            S&P 500          Dow
+  followed here, on 5-minute bars
+
+
+On the Nasdaq-100, the gold
+explanation does not carry over.
+Equities have their own documented
+overnight premium (Lou, Polk and Skouras,
+2019): the rule may simply be harvesting that.
+
+
+LUCA FRANCESCHETTI                    SIMULATED RESULTS
+RESEARCH NOTE · NOCTURNE                                    04 / 09
+
+
+
+THE RULE
+
+
+In at night,
+out by day.
+Long only, one contract. A filter, re-entries and
+exit management were then selected on
+development data only; they are not shown here.
+
+
+
+
+ IN long overnight                        OUT flat by day
+
+EVENING                  NEW YORK MORNING               EVENING
+
+
+DEVELOPMENT SESSIONS, 2019
+
+
+
+JAN                                                           DEC
+
+  in the market that night (161 of 258)     no trade
+
+
+
+LUCA FRANCESCHETTI                        SIMULATED RESULTS
+RESEARCH NOTE · NOCTURNE                                    05 / 09
+
+
+
+THE EVIDENCE
+
+
+One window said yes.
+The next said no.
+t-statistic of daily net results
+
+
+DEVELOPMENT
+Jan 2017 – Oct 2022
+                            5.10
+1,161 trades                       rules chosen here
+
+OOS 1
+Oct 2022 – Dec 2023
+                           3.09                        passed
+
+256 trades                            threshold 1.96
+
+OOS 2
+Jan 2024 – Sep 2026
+                           1.58             not passed
+
+604 trades                                    protocol threshold 4.15
+
+Each out-of-sample window was opened once, with rules
+and thresholds fixed in advance. Of seven variants of the
+idea tested together, this was the only one to pass the
+first. With costs doubled, the development t is 4.70.
+
+
+LUCA FRANCESCHETTI                        SIMULATED RESULTS
+RESEARCH NOTE · NOCTURNE                                     06 / 09
+
+
+
+A CLOSER LOOK
+
+
+Thinner in the second window.
+Average net profit per trade
+
+DEVELOPMENT                                         $111.6
+OOS 1                                                    $142.1
+OOS 2                                       $78.5
+Net profit per year, $ thousands
+
+                                            OOS 1               OOS 2
+                                     45.1
+               33.3   35.7
+                                                         28.7    25.5
+                                             22.2
+ 10.7   10.1                   8.8
+
+
+                                   −6.8
+2017 2018 2019 2020 2021 2022 2023 2024 2025 2026
+
+Still positive, but 2024 lost money, and two of the
+three worst nights fell in the August 2024 and
+April 2025 sell-offs. The last year runs to September.
+
+
+LUCA FRANCESCHETTI                          SIMULATED RESULTS
+RESEARCH NOTE · NOCTURNE                                  07 / 09
+
+
+
+WHAT I TAKE AWAY
+
+
+Four lessons.
+1   Count every trial.
+    About 7.3 million configurations were counted.
+    Corrected for them, the development t of 5.10 is not
+    significant, so both windows were exploratory tests.
+
+
+
+2   One pass is not validation.
+    Seven variants went through both windows: one
+    cleared the first threshold, none the second.
+
+
+
+3   Know what you are harvesting.
+    On the Nasdaq-100 the edge may simply be the
+    equity overnight premium, not the gold anomaly.
+
+
+
+4   Test the edges.
+    Sensitivity checks rated it fragile: one small step
+    away from the chosen settings, it loses money.
+
+
+LUCA FRANCESCHETTI                      SIMULATED RESULTS
+RESEARCH NOTE · NOCTURNE                                       08 / 09
+
+
+
+THE VERDICT
+
+
+Not confirmed.
+It cleared the first out-of-sample threshold, not the
+second. It stays positive, with thinner margins.
+
+After millions of trials, a t of 5 is a reason to verify the result,
+not a reason to believe it.
+
+
+The next clean test: data after
+23 September 2026, rules frozen, pass
+criteria written down before it starts.
+
+IMPORTANT INFORMATION
+Hypothetical results, simulated on historical data with estimated
+costs. No actual trading took place. Simulated results have inherent
+limitations and are not indicative of future results. Not investment
+advice. The author trades equity index futures for his own account;
+nothing here is a recommendation to buy or sell any instrument.
+
+
+
+LUCA FRANCESCHETTI                         SIMULATED RESULTS
+RESEARCH NOTE · NOCTURNE                                   09 / 09
+
+
+
+
+                        WRITTEN BY
+
+
+
+       Luca Franceschetti
+               Research note · October 2026
+
+
+
+                          SOURCES
+
+    Blose, L. E., Gondhalekar, V. & Kort, A. (2018). Overnight
+      versus Day Returns in Gold and Gold Related Assets.
+       Journal of Economics and Finance, 42(3), 526–549.
+
+        Lou, D., Polk, C. & Skouras, S. (2019). A Tug of
+       War: Overnight versus Intraday Expected Returns.
+       Journal of Financial Economics, 134(1), 192–213.
+
+
+
+
+   Simulated results on historical data. Not investment advice.
+
