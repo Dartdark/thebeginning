@@ -72,7 +72,7 @@ def signals(g,coverage):
         d=dates[r.date]
         for k,j in enumerate(b5['j']):
             # First complete RTH hour known at09:30CT; last fill14:30CT.
-            if not 570<=j<=min(870,r.exit_j-5):continue
+            if not 570<=j<=min(870,r.exit_j-25):continue
             s=int(bias[d,j//15])
             if s and color[d,k]==-s and last[d,k]!=-s:
                 out.append(dict(day=d,dj=int(j),side=s,stop=80.,target=40. if s>0 else 50.,exit_j=int(r.exit_j)))
@@ -101,9 +101,11 @@ def daily(t,days,col='net_mnq'):
     return t.groupby('date')[col].sum().reindex(days,fill_value=0.)
 def metric(t,days,col='net_mnq'):
     d=daily(t,days,col);r=M.perf(d,t[col]);x=t[col]
+    fee=1.24*len(t) if col=='stress_mnq' else float(t.fees_mnq.sum())
+    slip=float(t.market_fills.sum()) if col=='stress_mnq' else float(t.slippage_mnq.sum())
     r.update(total=float(d.sum()),trade_t=float(x.mean()/x.std()*np.sqrt(len(x))),
         daily_t=float(d.mean()/d.std()*np.sqrt(len(d))),max_dd=R.max_dd(d),days=len(days),
-        gross=float(t.gross_mnq.sum()),fees=float(t.fees_mnq.sum()),slippage=float(t.slippage_mnq.sum()))
+        gross=float(t.gross_mnq.sum()),fees=fee,slippage=slip)
     return r
 def run(data,period):
     committed()
@@ -146,7 +148,7 @@ def run(data,period):
                 # Same date and number/direction of prospective signals, uniformly
                 # random allowed5m decision slots; identical caps/exits remain.
                 for _,ix in s.groupby('day').groups.items():
-                    end=min(870,int(s.loc[ix,'exit_j'].iloc[0])-5)
+                    end=min(870,int(s.loc[ix,'exit_j'].iloc[0])-25)
                     s.loc[ix,'dj']=np.sort(rng.choice(np.arange(570,end+1,5),len(ix),replace=False))
             z=replay(g,s)
             null.append(dict(family=family,draw=i,total=float(z.net_mnq.sum()),trades=len(z)))
