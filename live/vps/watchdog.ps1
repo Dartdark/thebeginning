@@ -97,7 +97,10 @@ foreach ($r in @("$env:LOCALAPPDATA\TS Support", "$env:APPDATA\TS Support", "C:\
     Get-ChildItem $r -Recurse -File -Include *.log, *.txt | Where-Object { $_.LastWriteTime.Date -eq $now.Date -and $_.Length -lt 200MB } | ForEach-Object {
         $h = Select-String -Path $_.FullName -Pattern "Rejected|Invalid .* order|done for day"
         $h = @($h | Where-Object { $_.Line -like ("*" + $now.ToString("dd.MM.yyyy") + "/*") })   # today's lines only (2026-10-29)
-        if ($h) { $rej += @($h).Count; $msg = $h[-1].Line } }
+        # count ORDERS, not log lines: one rejected order writes many lines; keep lines that name an order (2026-10-30:
+        # '2,301 rejected' was ~100 orders, MultiCharts' own 'stop after N rejected orders' had already stopped it)
+        $o = @($h | Where-Object { $_.Line -match "OrderName=" }); if ($o.Count -eq 0) { $o = $h }
+        if ($h) { $rej += $o.Count; $msg = $h[-1].Line } }
 }
 $prev = 0; if ($state["rej_day"] -eq $day) { $prev = [int]$state["rej_count"] }
 if ($rej -gt $prev) {
