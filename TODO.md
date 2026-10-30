@@ -56,8 +56,8 @@ bottom). Times are Central (CT).
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
 ## Live guard additions (2026-10-30) - this weekend
-- [ ] VPS: follow `live/vps/VPS_MAINTENANCE.md` (updates only on Saturdays, weekly Saturday restart, Sunday pre-open routine).
-- [ ] Repaste the live strategies once (VB, Overnight Bias, EOS, Bridge) from the repo: their heartbeat now stamps a code
+- [x] VPS: follow `live/vps/VPS_MAINTENANCE.md` (updates only on Saturdays, weekly Saturday restart, Sunday pre-open routine).
+- [x] Repaste the live strategies once (VB, Overnight Bias, EOS, Bridge) from the repo: their heartbeat now stamps a code
       version, and the pre-market check flags any chart running old code. Compile, look for 'compiled successfully'.
 - [ ] On the VPS: `cd C:\TradingRepo; git pull` (watchdog: account-floor alarm and Apex-lock hint).
 - Claude: a new funded account -> `FUNDED` in analysis/account_tools.py (payout tracker); each payout you request -> its list.
