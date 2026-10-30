@@ -436,6 +436,20 @@ Source: Dyer/Fleming/Shachar, [NYFed September22 2026](https://libertystreetecon
   require native quotes/fills before claiming savings. No retuning this failed definition.
 - Status: retained clock reference; directional adaptation rejected. No live/system changes.
 
+### E34 — Calendar counting, closed sessions and intraday adaptations
+
+Source: Cieslak/Morse/Vissing-Jorgensen, [SSRN2687614](https://ssrn.com/abstract=2687614),
+2018-02-12manuscript/Table1 and [completed RTH adaptation](results/scout_2687614_20261030.md).
+- Use: keep the paper's weekday clock separate from tradable sessions. Holidays can occupy a cycle slot while
+  closed/short sessions generate no full-session order. Determine closures independently of returns; an otherwise
+  expected missing session stays unknown. Our484candidate endpoints are observed; non-event2020-11-30is unknown.
+- Evidence: source review plus self-audited reference screen, not native fills or independent economic verification.
+  Full-day cash-equity findings did not yield a profitable RTH adaptation here:−$95.53gross/−$125.53net per ES.
+- Limits: omitting overnight exposure changes the economic rule. A failed intraday adaptation does not reject the
+  original full-day result; a positive one would still require contract/path, protection and native account-cost checks.
+- Next check for a distinct future study: explicit clock/session census before outcomes. Do not retune this family.
+- Status: execution/input-design reference; no claimed saving or allocation.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

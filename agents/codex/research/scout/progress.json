@@ -1,14 +1,8 @@
 {
   "schema_version": 1,
   "program": "paper-scout-20261029",
-  "status": "running",
-  "lease": {
-    "run_id": "scout-fomc-cycle-20261030",
-    "owner": "codex-root",
-    "claimed_at": "2026-10-30T17:37:57.205917+00:00",
-    "expires_at": "2026-10-30T19:37:57.205917+00:00",
-    "checked_parent": "f74e9870d98ad2af784622b2579368efa898a64d"
-  },
+  "status": "ready",
+  "lease": null,
   "hypotheses_started": 4,
   "economic_definitions": 10,
   "max_hypotheses": 10,
@@ -85,8 +79,17 @@
         "FOMC246_CALENDAR_NULL",
         "FOMC246_COST_STRESS"
       ],
-      "status": "reserved",
-      "proposal_sha256": "261251e4a67758fa433560294a42562134991ae52b5f466ddcc261eb7d61f5fb"
+      "status": "design_reject",
+      "proposal_sha256": "261251e4a67758fa433560294a42562134991ae52b5f466ddcc261eb7d61f5fb",
+      "executed_definition_ids": [
+        "FOMC246_ES_RTH",
+        "FOMC246_CALENDAR_NULL",
+        "FOMC246_COST_STRESS"
+      ],
+      "result_path": "analysis/outputs/codex_scout_fomc_cycle/result.json",
+      "engineering_attempts": 2,
+      "engineering_replay_new_definitions": 0,
+      "closed_at": "2026-10-30T17:41:54.490593+00:00"
     }
   ],
   "seen": [
@@ -209,21 +212,26 @@
       "revision": "November22 2019Wharton41-page primary,plus external2026NYFedclockevidence",
       "disposition": "design_reject",
       "record_path": "agents/codex/research/scout/records/3440417.json"
+    },
+    {
+      "ssrn_id": "2687614",
+      "revision": "Working paper2018-02-12",
+      "disposition": "design_reject",
+      "record_path": "agents/codex/research/scout/records/2687614.json"
     }
   ],
   "last_run": {
-    "run_id": "scout-treasury-close-20261029-design",
-    "recorded_at": "2026-10-29 22:28:22 UTC",
+    "run_id": "scout-fomc-cycle-20261030",
+    "recorded_at": "2026-10-30T17:41:54.490593+00:00",
     "status": "design_reject_continue_discovery",
-    "checked_remote_head": "352bbf8d075efca6375f50a5d37b9280198a7500",
-    "preregistration_commit": "352bbf8d075efca6375f50a5d37b9280198a7500",
+    "checked_remote_head": "e4ea3211bc06d9295ad54c8185233a8e2eb0bed5",
+    "preregistration_commit": "f0ea358635e6e8b4dd5460671cf9ae4989396503",
     "full_source_reviews": 1,
-    "additional_primary_timing_article": 1,
     "new_hypotheses": 1,
     "new_economic_definitions": 3,
     "return_tests_executed": true,
-    "report_path": "agents/codex/results/scout_treasury_close_20261029.md",
-    "next_work": "Continue SEARCH_PROFILE forced-flow families. Reject pre-NFP and ZN clock definitions permanently; no clock/stop/size rescue. Source/data triage must precede another reservation; no pending eligible candidate is claimed."
+    "report_path": "agents/codex/results/scout_2687614_20261030.md",
+    "next_work": "Continue distinct owned-data-compatible source families. FOMC-cycleRTH nowclosed; no direction/phase/decline-filter rescue. VRP familydedup;5230768sourcegapparked."
   },
   "last_notification_key": "ssrn:5250499:prototype-v1:real-data-blocked",
   "note": "New paper-discovery program authorized 2026-10-29. Existing repository multiplicity remains in every significance decision. Paused t6 and Hunt v2 are not resumed or reset.",
@@ -504,6 +512,19 @@
       "return_tests_executed": true,
       "report_path": "agents/codex/results/scout_treasury_close_20261029.md",
       "next_work": "Continue SEARCH_PROFILE forced-flow families. Reject pre-NFP and ZN clock definitions permanently; no clock/stop/size rescue. Source/data triage must precede another reservation; no pending eligible candidate is claimed."
+    },
+    {
+      "run_id": "scout-fomc-cycle-20261030",
+      "recorded_at": "2026-10-30T17:41:54.490593+00:00",
+      "status": "design_reject_continue_discovery",
+      "checked_remote_head": "e4ea3211bc06d9295ad54c8185233a8e2eb0bed5",
+      "preregistration_commit": "f0ea358635e6e8b4dd5460671cf9ae4989396503",
+      "full_source_reviews": 1,
+      "new_hypotheses": 1,
+      "new_economic_definitions": 3,
+      "return_tests_executed": true,
+      "report_path": "agents/codex/results/scout_2687614_20261030.md",
+      "next_work": "Continue distinct owned-data-compatible source families. FOMC-cycleRTH nowclosed; no direction/phase/decline-filter rescue. VRP familydedup;5230768sourcegapparked."
     }
   ],
   "data_access_blockers": {
