@@ -141,6 +141,14 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   bar from an unadjusted continuous series does not supply roll trades/cashflows. Needed next: contract IDs, actual
   roll schedule/fills/fees and a daily NAV-to-lot ledger reconciliation; no strategy/account/live change is authorized.
 
+- Weekly cross-review2026-10-30 ([independent findings](../cross_review/2026-10-30_codex.md),
+  [correction proposals](proposals/weekly_cross_review_20261030.md)): numeric exit kinds are part of the accounting
+  interface. Swing Target's text `reason` replaced numeric `kind`, so target cost handling and protective-stop
+  exit-minute capping differed from its recorded fills. A fixed-ledger check, retaining holiday repairs, changes
+  closing cashflow by$132/MNQ total and48daily minima; corrected payout/risk comparisons remain unrun.
+  Preserve schemas, assert numeric enum sets, and reconcile closed cash and marked paths before account claims.
+  This is existing-ledger accounting evidence, not a new strategy, native-fill result or plan change.
+
 ### E10 — Liquidity compensation, turnover and costs
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
@@ -303,6 +311,12 @@ Sources: [TIER_LIST.md](../../TIER_LIST.md) 'MultiCharts parity 2026-10-25', [MU
   checked trailing signals and saved paths; author-code/MC/native-fill parity remains unverified. Its half-day
   cutoff repair retained the first failed run and followed the original committed rule, without a rescue search.
 
+- Weekly cross-review2026-10-30: a fill-sanity gate must retain legitimate closed same-chart-bar trades;
+  separate delay-eligible trades and open-position sentinels. The new L1/G10 wrapper omitted572of1756closed
+  Vault Break rows. A synthetic impossible same-bar fixture passed the wrapper despite failing direct fill sanity.
+  This establishes incomplete gate coverage, not invalid historical fills. Publish expected/checked/missing counts
+  before claiming every fill passed. [Evidence and proposed deciding check](../cross_review/2026-10-30_codex.md).
+
 ### E19 — Session clocks: early closes, halts, SetExitOnClose and time zones
 
 Source: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) (2026-10-17 to 10-25).
@@ -339,6 +353,14 @@ Sources: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) (10/27 ONB, 10
 - Fix: strategy heartbeat (SIG rows) checked by the watchdog every 5 min; missed-trade (silence) panel on the dashboard.
 - Next check: when the heartbeat alarm first fires for real, confirm it caught the stopped strategy within one check.
 - Status: monitoring in place; counts as 'genuinely missed orders' in the minimum record below.
+
+- Weekly cross-review2026-10-30 ([findings](../cross_review/2026-10-30_codex.md)):
+  liveness requires a recent capture, not merely a row that was fresh when written. Pinned premarket code accepts
+  stale00:05ACCT/POS/SIG snapshots as ALL GREEN; a healthy process line does not establish chart activity.
+  The account-floor watchdog scan also contains a literal U+0002 path byte and cannot enumerate normal daily logs.
+  Offline byte/path and fake-file checks reproduce these source defects. The installed VPS copy and PowerShell
+  runtime were not inspected; correction/deployment is not performed or certified here. Use an injected timezone-aware
+  as-of clock and disconnected temporary-log fixtures before relying on monitoring coverage.
 
 ### E23 — Logger and account fields: what each number really is
 
