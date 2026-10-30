@@ -574,6 +574,25 @@ Related: E03 order-state reconciliation, E05 missed fills/opportunity costs, E18
   policy. A boolean set at submission is not proof of accepted protection. Bar high/low alone cannot establish queue fills.
 - Status: execution reference retained; zero economic return trials, no plan placement or execution-policy change.
 
+### E37 — Realized payoff expectancy, costs and account survival
+
+Source: user screenshots of Veles, *Wrong 80% of the Time and Still Winning: Paul Tudor Jones and the Payoff Equation*,
+reviewed 2026-10-30. [Saved review](results/payoff_equation_review_20261030.md). Original PDF/version not authenticated.
+Related: E09 cash/cost reconciliation, E15 tail risk, E35 fill-anchored exits and E36 nonguaranteed protection.
+- Use: for nonzero closed outcomes, expectancy is `pW-(1-p)L`, with realized net winner/loser magnitudes.
+  A target-to-stop setting is not the realized average-win/loss ratio. Do not subtract fees twice when outcomes
+  already include them; when using gross outcomes, include all execution costs explicitly. Track zero outcomes separately.
+- Evidence: deterministic arithmetic independently checked, including 20% wins/5x payoff -> +0.20 average-loss units.
+  Higher payoff with a lower win fraction need not improve expectancy. Celebrity fund statistics remain unverified;
+  Odean's primary table supports the cited disposition effect, not a futures alpha rule.
+- Limits: average realized loss is not necessarily initial stop risk or margin. Closed trades alone can omit open
+  losses; positive expectancy can coexist with long losing streaks and an account breach before the next winner.
+  A last 50 trades snapshot does not establish stable after-cost edge or valid current-account placement.
+- Prerequisites/next check when a separately justified strategy is tested: reconcile quantities, closed/open cash,
+  protective fills, costs, timing and full daily marks; evaluate actual integer-size account paths. Any target/stop
+  change alters outcomes and must pass the existing preregistration/trial/account gates.
+- Status: risk/execution diagnostic reference; no standalone candidate, new return test or plan/exit change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
