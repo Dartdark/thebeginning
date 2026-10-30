@@ -84,13 +84,15 @@ def tstat(x): return sharpe(x) * np.sqrt(len(x)) if len(x) > 2 else np.nan
 
 def report(name, F, sym, bar, cost=None):
     F = F[F.entry_time >= "2018-01-01"].copy()
-    F = F[F.exit_time > F.entry_time]                          # MultiCharts lists a position still open at report end with exit 00:00
+    # a position still open at report end is listed with exit 00:00 (before its entry): drop only those sentinels; trades
+    # opening and closing in the same bar stay in L1 (Codex 2026-10-30: they were excluded, so G10 could pass impossible fills)
+    F = F[F.exit_time >= F.entry_time]
     pv = PV[sym]; cost = cost if cost is not None else {"NQ": 17.25, "ES": 30.0, "CL": 27.25, "GC": 27.25}.get(sym, 0)
     fs_ = fill_sanity(F, sym, bar)
     if fs_ is None: return f"### {name}: no bar data covers its fills", dict(name=name, l1=np.nan, off=0, n=0, orig=np.nan, delayed=np.nan, t0=np.nan, t1=np.nan, keep=np.nan, l1_ok=False, l2_ok=False)
     off, R = fs_
     bad = R[~R.ok]; l1 = R.ok.mean() >= 0.98
-    D = delay(F, sym, bar, off)
+    D = delay(F[F.exit_time > F.entry_time], sym, bar, off)   # L2 (one-bar delay) needs a trade that outlives its entry bar
     o, dl = D.orig * pv - cost, D.delayed * pv - cost
     keep = sharpe(dl) / sharpe(o) if sharpe(o) and sharpe(o) > 0 else np.nan
     l2 = bool(keep >= 0.5) if not np.isnan(keep) else False

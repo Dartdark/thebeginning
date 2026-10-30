@@ -74,3 +74,6 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
   trail only moves at end of day. Cushion = balance minus floor must cover the worst open loss, not just the day's close.
 - (2026-10-30, Friday review) A chart left running for a closed account keeps logging trades and rejections: retire the
   account in `journal_trades.CLOSED` and `live/expected_setup.json` the day it closes, and turn its charts off.
+- Never write PowerShell or Windows paths through a Python string: "\2" became an invisible control character and silenced
+  the new floor alarm (2026-10-30, Codex cross-review). Use raw strings or write the file directly.
+- The weekly review must check Claude's own week of code, not only Codex's: five defects this week were all in new Claude code (2026-10-30).

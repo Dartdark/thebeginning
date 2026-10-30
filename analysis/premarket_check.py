@@ -18,7 +18,8 @@ def has_sig(tag):
     return any(f",{tag}," in l and l.startswith("SIG,") for f in glob.glob("live/trades/*.csv") for l in open(f))
 
 
-def check(day):
+def check(day, asof=None):
+    """asof = HHMM CT of the check (today's run); the age of each chart's last monitor line is checked against it."""
     cfg = json.load(open("live/expected_setup.json")); out = []
     d = day.strftime("%Y%m%d"); f = f"live/trades/{d}.csv"; h = f"live/health/{d}.csv"
     if not os.path.exists(h) or not any(l.startswith("open,") for l in open(h)):
@@ -36,6 +37,10 @@ def check(day):
         if a.empty:
             out.append(f"{tag}: no monitor line today (chart closed or monitor missing)."); continue
         r = a.iloc[-1]
+        if asof is not None:                                  # 2026-10-30 (Codex review): a line from after midnight is not 'fresh'
+            bt = int(r.bar_time); line_age = (asof // 100 * 60 + asof % 100) - (bt // 100 * 60 + bt % 100)
+            if line_age > 45:
+                out.append(f"{tag}: the chart monitor's last line is {bt:04d} CT, {line_age} min old: chart frozen or closed? Check it.")
         if str(r.contracts) != "1": out.append(f"{tag}: auto-trading OFF (last line {int(r.bar_time):04d}).")
         if want[tag] and r.side != want[tag][0]: out.append(f"{tag}: monitor account {r.side}, expected {want[tag][0]}.")
         if float(r.entry_price or 0) > 900: out.append(f"{tag}: chart's last bar {float(r.entry_price) / 60:.0f} min old (feed?).")
@@ -56,5 +61,6 @@ def check(day):
 
 if __name__ == "__main__":
     day = dt.date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1 else (dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=5)).date()
-    o = check(day)
+    now = dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=5)
+    o = check(day, int(now.strftime("%H%M")) if day == now.date() else None)
     print("\n".join(o) if o else "ALL GREEN: every live chart has auto-trading on, the right account, a fresh feed and a matching position.")

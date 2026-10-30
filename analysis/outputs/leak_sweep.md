@@ -2,20 +2,20 @@
 
 `python3 analysis/leak_checks.py --sweep`; L1 fill sanity / L2 one-bar delay as defined in `analysis/leak_checks.py`. Costs: repo standard per round trip; delay keeps the same exit.
 
-### Vault Break (SP) (NQ, 30-min chart, 1184 trades 2018+)
-- L1 fill sanity: 100.0% of 2368 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
+### Vault Break (SP) (NQ, 30-min chart, 1756 trades 2018+)
+- L1 fill sanity: 100.0% of 3512 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
 - L2 one-bar delay: 1184 trades; net $32 (t 1.2) -> $61 (t 2.7); Sharpe kept 213% -> **BEND**
 
-### Swing Target v3 (NQ, 1-min chart, 597 trades 2018+)
-- L1 fill sanity: 100.0% of 1194 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
+### Swing Target v3 (NQ, 1-min chart, 598 trades 2018+)
+- L1 fill sanity: 100.0% of 1196 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
 - L2 one-bar delay: 594 trades; net $312 (t 4.6) -> $292 (t 4.3); Sharpe kept 93% -> **BEND**
 
-### Overnight Bias ML v2 (funded) (NQ, 15-min chart, 337 trades 2018+)
-- L1 fill sanity: 100.0% of 674 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
+### Overnight Bias ML v2 (funded) (NQ, 15-min chart, 343 trades 2018+)
+- L1 fill sanity: 100.0% of 686 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
 - L2 one-bar delay: 337 trades; net $678 (t 5.3) -> $608 (t 5.2); Sharpe kept 97% -> **BEND**
 
-### Overnight Bias v2 (combine, ADX30) (NQ, 15-min chart, 405 trades 2018+)
-- L1 fill sanity: 100.0% of 810 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
+### Overnight Bias v2 (combine, ADX30) (NQ, 15-min chart, 411 trades 2018+)
+- L1 fill sanity: 100.0% of 822 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
 - L2 one-bar delay: 405 trades; net $581 (t 5.1) -> $532 (t 5.0); Sharpe kept 98% -> **BEND**
 
 ### Overnight Tick / VIX (NQ, 5-min chart, 562 trades 2018+)
@@ -26,8 +26,8 @@
 - L1 fill sanity: 100.0% of 210 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
 - L2 one-bar delay: 105 trades; net $474 (t 2.6) -> $309 (t 1.8); Sharpe kept 71% -> **BEND**
 
-### Late-Day Flow (NQ, 5-min chart, 892 trades 2018+)
-- L1 fill sanity: 100.0% of 1784 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
+### Late-Day Flow (NQ, 5-min chart, 896 trades 2018+)
+- L1 fill sanity: 100.0% of 1792 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
 - L2 one-bar delay: 892 trades; net $100 (t 3.7) -> $60 (t 2.6); Sharpe kept 70% -> **BEND**
 
 ### NFP Fade (NQ, 5-min chart, 79 trades 2018+)
@@ -50,16 +50,16 @@
 - L1 fill sanity: 100.0% of 2348 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
 - L2 one-bar delay: 1173 trades; net $297 (t 3.9) -> $266 (t 3.5); Sharpe kept 91% -> **BEND**
 
-### Dual Thrust v4 (NQ, 1-min chart, 1611 trades 2018+)
-- L1 fill sanity: 100.0% of 3222 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
+### Dual Thrust v4 (NQ, 1-min chart, 1616 trades 2018+)
+- L1 fill sanity: 100.0% of 3232 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
 - L2 one-bar delay: 1591 trades; net $151 (t 4.7) -> $136 (t 4.2); Sharpe kept 90% -> **BEND**
 
-### ES MOC follow (ES, 5-min chart, 189 trades 2018+)
-- L1 fill sanity: 100.0% of 378 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
+### ES MOC follow (ES, 5-min chart, 199 trades 2018+)
+- L1 fill sanity: 100.0% of 398 fills inside their bar (+/- 2 ticks), clock offset +0 min -> **PASS**
 - L2 one-bar delay: 189 trades; net $214 (t 4.9) -> $100 (t 3.6); Sharpe kept 72% -> **BEND**
 
-### CL Sunday gap fade (CL, 5-min chart, 96 trades 2018+)
-- L1 fill sanity: 100.0% of 192 fills inside their bar (+/- 2 ticks), clock offset -60 min -> **PASS**
+### CL Sunday gap fade (CL, 5-min chart, 97 trades 2018+)
+- L1 fill sanity: 100.0% of 194 fills inside their bar (+/- 2 ticks), clock offset -60 min -> **PASS**
 - L2 one-bar delay: 96 trades; net $688 (t 3.4) -> $699 (t 3.6); Sharpe kept 105% -> **BEND**
 
 ## Summary
@@ -81,11 +81,3 @@
 | Dual Thrust v4 | 100.0% | +0 min | $151 -> $136 | 4.7 -> 4.2 | 90% | PASS / BEND |
 | ES MOC follow | 100.0% | +0 min | $214 -> $100 | 4.9 -> 3.6 | 72% | PASS / BEND |
 | CL Sunday gap fade | 100.0% | -60 min | $688 -> $699 | 3.4 -> 3.6 | 105% | PASS / BEND |
-
-Notes (2026-10-30):
-- All 15 pass L1 (100% of fills inside their bar; CL's report runs on Eastern time, found automatically at −60 min) and bend under L2.
-- L2 compares only trades still open one bar after entry: Vault Break keeps 1,184 of 1,756 (its fast 30-min target hits drop out),
-  so its $32 -> $61 is on that subset, not the whole strategy (paired P&L matches the report exactly: $210,590).
-- Biggest delay cost: Expiration Open Short (−35% a trade, Sharpe 71%), Late-Day Flow (70%), ES MOC (72%): timing-sensitive
-  forced flows, as expected; none breaks.
-- The one fill outside its bar (Overnight Bias ML 2026-10-12) was the position still open at report end; such rows are now dropped.

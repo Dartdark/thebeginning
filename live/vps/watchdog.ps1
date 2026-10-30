@@ -82,7 +82,7 @@ if ($cfg -and $hhmm -ge 815 -and $hhmm -le 1600) {
     foreach ($ap in $cfg.accounts.PSObject.Properties) {
         $v = $ap.Value; if ($v.status -ne "live" -or -not $v.start) { continue }
         $peak = [double]$v.start; $eqNow = $null
-        Get-ChildItem "$Logs*.csv" | Where-Object { $_.BaseName -ge $v.started } | Sort-Object Name | ForEach-Object {
+        Get-ChildItem "$Logs\2*.csv" | Where-Object { $_.BaseName -ge $v.started } | Sort-Object Name | ForEach-Object {
             $last = $null
             Get-Content $_.FullName | Where-Object { $_ -like ("ACCT,*," + $v.id + ",*") } | ForEach-Object { $e = [double]($_.Split(",")[6]); if ($e -gt 0) { $last = $e } }
             if ($null -ne $last) { if ($_.BaseName -eq $day) { $eqNow = $last } else { $peak = [math]::Max($peak, $last) } }

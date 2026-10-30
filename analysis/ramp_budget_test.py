@@ -3,7 +3,7 @@ Sun 11/01 from savings). Job Tue 11/10 - Thu 12/24, $25 x 8 h, paid each Friday 
 all pay goes to 150K No-Activation evaluations ($249); payouts are spent on evaluations too; at most 20 open accounts
 (evaluations + funded). An account frees its place when its evaluation fails or its funded account ends (6 payouts or
 blown). Scenarios: 5 or 6 days a week, after tax (x 0.85); job ends 12/24 or continues through 2027. #2 (50K) left out
-(a bonus if it passes). Engine and plan as analysis/ramp150_speed_test.py (evaluation = combine set x 2.5; funded =
+(a bonus if it passes). Engine and plan as analysis/ramp150_speed_test.py (evaluation = combine set at 150K whole-contract sizes: VB 20, ONB $2,750, Bridge 5, EOS $1,250; funded =
 the 10/16 funded plan x 1.5 -- the current 150K plan earned ~15% more on the funded bench, so funded payouts here are
 on the low side). Every 10th start day 2018-01 .. 2023-09, real day order; also at 75% of the edge.
   python3 analysis/ramp_budget_test.py [SCRATCH_DIR] > analysis/outputs/ramp_budget_test_output.txt
@@ -71,7 +71,8 @@ if __name__ == "__main__":
                   ("MON_BR", load_bridge_mc(g)), ("EOS", with_slippage(load_mc(g, REPORTS["EOS"][0])))):
         w, r_ = paths(g, t); P[nm] = (w[tr] / 10, r_[tr] / 10)
     rk = lambda dl_, m: np.floor(dl_ / (np.nan_to_num(m * atr[tr], nan=1e12) * 2))[:, None]
-    q = {"VB": 8.0, "ONB30": rk(1100, 0.25), "MON_BR": 2.0, "EOS": rk(500, REPORTS["EOS"][1])}
+    # 150K evaluation at whole contracts, sized as the PowerLanguage code does at 150K risk (Codex cross-review 2026-10-30)
+    q = {"VB": 20.0, "ONB30": rk(2750, 0.25), "MON_BR": 5.0, "EOS": rk(1250, REPORTS["EOS"][1])}
     s_lo, s_hi = int(np.argmax(dates >= "2018-01-01")), int(np.argmax(dates >= "2023-09-01"))
     starts = list(range(s_lo, min(s_hi, D - H - 60), 10))
     for alpha in (0.0, 0.25):
@@ -79,7 +80,7 @@ if __name__ == "__main__":
         for k in P:
             cl = P[k][1][:, -1]; wh, ch = haircut(P[k][0], cl, alpha); rh = P[k][1] - (cl - ch)[:, None]
             Wc = Wc + wh * q[k]; Rc = Rc + rh * q[k]
-        chal = [evaluation(Wc * 2.5, Rc * 2.5, s, D, R150) for s in range(D)]
+        chal = [evaluation(Wc, Rc, s, D, R150) for s in range(D)]
         names, b = lab._base(P150)
         Wf = np.stack([lab.W[k] for k in names]); Cf = np.stack([lab.C[k] for k in names]); b = np.ascontiguousarray(b)
         for i in range(Wf.shape[0]): Wf[i], Cf[i] = haircut(Wf[i], Cf[i], alpha)

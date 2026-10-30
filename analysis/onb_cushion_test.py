@@ -19,12 +19,14 @@ ACC = {"50K": dict(st=50_000.0, dd=2_000.0, dll=1_000.0, lock=50_100.0, tgt=3_00
 
 
 def challenge(P, days, a, rule):
-    """P: dict of (worst path, running path) per piece at its base size; rule(cushion) -> (vb_mult, onb_mult)."""
+    """P: per-contract (worst path, running path) for VB / ONB and REST at its whole-contract size for this account;
+    rule(cushion) -> (VB contracts, ONB risk dollars). ONB contracts = floor(risk dollars / its stop in $ per MNQ), whole
+    contracts as the PowerLanguage code sizes them (Codex cross-review 2026-10-30: no fractional 50K quantities x 2.5)."""
     bal = a["st"]; floor = a["st"] - a["dd"]
     for n, d in enumerate(days[:a["maxd"]], 1):
-        kv, ko = rule(bal - floor)
-        w = (P["VB"][0][d] * kv + P["ONB"][0][d] * ko + P["REST"][0][d]) * a["k"]
-        r = (P["VB"][1][d] * kv + P["ONB"][1][d] * ko + P["REST"][1][d]) * a["k"]
+        kv, dollars = rule(bal - floor); ko = np.floor(dollars / P["ONB_STOP"][d]) if P["ONB_STOP"][d] > 0 else 0.0
+        w = P["VB"][0][d] * kv + P["ONB"][0][d] * ko + P["REST"][0][d]
+        r = P["VB"][1][d] * kv + P["ONB"][1][d] * ko + P["REST"][1][d]
         lim = max(floor, bal - a["dll"])
         hit = np.nonzero(bal + w <= lim)[0]; jb = hit[0] if len(hit) else len(w)
         win = np.nonzero(bal + r - a["st"] >= a["tgt"])[0]; jp = win[0] if len(win) else len(w)
@@ -46,16 +48,16 @@ if __name__ == "__main__":
                   ("MON_BR", load_bridge_mc(g)), ("EOS", with_slippage(load_mc(g, REPORTS["EOS"][0])))):
         w, r = paths(g, t); raw[nm] = (w[trr] / 10, r[trr] / 10)
     risk = lambda dollars, m: np.floor(dollars / (np.nan_to_num(m * atr[trr], nan=1e12) * 2))[:, None]
-    qo = risk(1100, 0.25); qe = risk(500, REPORTS["EOS"][1])
-    P = {"VB": (raw["VB"][0] * 8, raw["VB"][1] * 8), "ONB": (raw["ONB30"][0] * qo, raw["ONB30"][1] * qo),
-         "REST": (raw["MON_BR"][0] * 2 + raw["EOS"][0] * qe, raw["MON_BR"][1] * 2 + raw["EOS"][1] * qe)}
     for name, a in ACC.items():
-        k = a["k"]; onb, vb = 1100 * k, 1200 * k
-        rules = {"plan (everything always)": lambda c: (1.0, 1.0),
-                 f"ONB off when cushion < ${onb:,.0f}": lambda c, x=onb: (1.0, 0.0 if c < x else 1.0),
-                 f"ONB off when cushion < ${1.5 * onb:,.0f}": lambda c, x=1.5 * onb: (1.0, 0.0 if c < x else 1.0),
-                 "ONB risk <= 50% of cushion": lambda c, x=onb: (1.0, min(1.0, 0.5 * c / x)),
-                 f"ONB + VB off when cushion < ${vb:,.0f}": lambda c, x=vb: (0.0, 0.0) if c < x else (1.0, 1.0)}
+        k = a["k"]; onb, vb, nvb = 1100 * k, 1200 * k, round(8 * k)
+        qe = risk(500 * k, REPORTS["EOS"][1]); nbr = round(2 * k)
+        P = {"VB": raw["VB"], "ONB": raw["ONB30"], "ONB_STOP": np.nan_to_num(0.25 * atr[trr] * 2, nan=1e12),
+             "REST": (raw["MON_BR"][0] * nbr + raw["EOS"][0] * qe, raw["MON_BR"][1] * nbr + raw["EOS"][1] * qe)}
+        rules = {"plan (everything always)": lambda c, x=onb, n=nvb: (n, x),
+                 f"ONB off when cushion < ${onb:,.0f}": lambda c, x=onb, n=nvb: (n, 0.0 if c < x else x),
+                 f"ONB off when cushion < ${1.5 * onb:,.0f}": lambda c, x=onb, n=nvb: (n, 0.0 if c < 1.5 * x else x),
+                 "ONB risk <= 50% of cushion": lambda c, x=onb, n=nvb: (n, min(x, 0.5 * c)),
+                 f"ONB + VB off when cushion < ${vb:,.0f}": lambda c, x=onb, y=vb, n=nvb: (0, 0.0) if c < y else (n, x)}
         print(f"\n{name} evaluation (x{k}), every start day 2018-26:")
         for nm, rule in rules.items():
             res = [challenge(P, np.arange(s, min(s + a["maxd"], D)), a, rule) for s in range(D)]

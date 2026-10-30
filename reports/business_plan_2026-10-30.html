@@ -117,13 +117,13 @@ ul{margin:4px 0 8px 0;padding-left:17px} li{margin:2px 0}
     <div class="tile"><div class="k">Live accounts</div><div class="v amber">1 of 3</div><div class="d">#1 (50K) and #3 (150K) failed; #2 (50K) live, $1,064 above its floor</div></div>
     <div class="tile"><div class="k">Live trades</div><div class="v red">23 · −$6.2k</div><div class="d">Gross, all accounts since 10/12. Too few trades to judge the edge</div></div>
     <div class="tile"><div class="k">Funded by Dec 31</div><div class="v blue">~3–6</div><div class="d">Typical, 150Ks bought from job pay (75% edge / full backtest)</div></div>
-    <div class="tile"><div class="k">2027 from Apex</div><div class="v green">~$100k</div><div class="d">Typical at 75% of the edge; ~$170k if the job continues*</div></div>
+    <div class="tile"><div class="k">2027 from Apex</div><div class="v green">~$100k</div><div class="d">Typical at 75% of the edge; ~$175k if the job continues*</div></div>
   </div>
 
   <div class="callout c-amber"><div class="t">The honest picture</div>
     The strategies are well tested on 2018–2026 data, but nothing is proven live yet. Two of three evaluations failed, both on one
     ordinary full stop at a thin cushion, which happens in about half of all evaluations even in the backtest. The bigger risk in the
-    plan is timing: in 14–28% of simulated histories, a bad November–December fails every evaluation and nothing is funded by year end.</div>
+    plan is timing: in 13–31% of simulated histories, a bad November–December fails every evaluation and nothing is funded by year end.</div>
 
   <h2>What we decided on October 30</h2>
   <div class="cols">
@@ -316,16 +316,16 @@ ul{margin:4px 0 8px 0;padding-left:17px} li{margin:2px 0}
   <p class="lead">Budget simulation: every paycheck and every payout buys 150K evaluations (up to 20 open), tested on every start day 2018–23 in real day order.</p>
   <table>
     <tr><th>Scenario</th><th class="num">Evaluations by Dec 31</th><th class="num">Funded Dec 31<br>bad · typical · good</th><th class="num">Nothing funded<br>by Dec 31</th><th class="num">First payout</th><th class="num">2027 payouts<br>bad · typical · good</th></tr>
-    <tr><td>Job ends · full edge</td><td class="num">23–28</td><td class="num">0 · 6–8 · 14–17</td><td class="num">13–14%</td><td class="num">late Feb</td><td class="num">$0 · $246–264k · $405k</td></tr>
-    <tr><td>Job kept* · full edge</td><td class="num">23–28</td><td class="num">0 · 6–8 · 14–17</td><td class="num">13–14%</td><td class="num">early Mar</td><td class="num">$8k · $307–329k · $414k</td></tr>
-    <tr class="hl"><td><b>Job ends · 75% edge</b></td><td class="num">23–28</td><td class="num">0 · 3–4 · 12–14</td><td class="num">27–28%</td><td class="num">late Mar</td><td class="num"><b>$0 · $96–121k · $289k</b></td></tr>
-    <tr class="hl"><td><b>Job kept* · 75% edge</b></td><td class="num">23–28</td><td class="num">0 · 3–4 · 12–14</td><td class="num">27–28%</td><td class="num">late Mar</td><td class="num"><b>$0 · $171–182k · $320k</b></td></tr>
+    <tr><td>Job ends · full edge</td><td class="num">23–28</td><td class="num">0 · 7–8 · 15–17</td><td class="num">13–14%</td><td class="num">late Feb</td><td class="num">$0 · $252–264k · $403–410k</td></tr>
+    <tr><td>Job kept* · full edge</td><td class="num">23–28</td><td class="num">0 · 6–8 · 14–17</td><td class="num">13–14%</td><td class="num">early Mar</td><td class="num">$8k · $321–329k · $415k</td></tr>
+    <tr class="hl"><td><b>Job ends · 75% edge</b></td><td class="num">23–28</td><td class="num">0 · 3–4 · 12–14</td><td class="num">29–31%</td><td class="num">late Mar</td><td class="num"><b>$0 · $89–116k · $289–315k</b></td></tr>
+    <tr class="hl"><td><b>Job kept* · 75% edge</b></td><td class="num">23–28</td><td class="num">0 · 3–4 · 12–14</td><td class="num">29–31%</td><td class="num">late Mar</td><td class="num"><b>$0 · $176–182k · $321–326k</b></td></tr>
   </table>
   <p class="small muted">Ranges cover 5 vs 6 workdays a week. Funded payouts are modelled with the October plan, ~15% below the current 150K plan, so payouts lean low. #2 (50K) is not included: a bonus if it passes.</p>
 
   <div class="tiles three">
     <div class="tile"><div class="k">Plan on (75% edge)</div><div class="v blue">~$100k</div><div class="d">2027 from Apex if the job ends Dec 24</div></div>
-    <div class="tile"><div class="k">With the job*</div><div class="v green">~$170k</div><div class="d">From Apex; ~$215k all-in with ~$44k of pay after tax</div></div>
+    <div class="tile"><div class="k">With the job*</div><div class="v green">~$175k</div><div class="d">From Apex; ~$220k all-in with ~$44k of pay after tax</div></div>
     <div class="tile"><div class="k">Bad case</div><div class="v red">$0</div><div class="d">If nothing passes by year end and the money is gone</div></div>
   </div>
 
@@ -379,7 +379,7 @@ ul{margin:4px 0 8px 0;padding-left:17px} li{margin:2px 0}
   <h1>What could go wrong</h1>
   <table>
     <tr><th>Risk</th><th>How likely / how big</th><th>What we do</th></tr>
-    <tr><td><b>Nothing funded by Dec 31</b></td><td>14–28% of histories; then 2027 can pay $0 without the job</td><td>One buy a day; keep the job into 2027 if possible; review if nothing is funded by mid-January</td></tr>
+    <tr><td><b>Nothing funded by Dec 31</b></td><td>13–31% of histories; then 2027 can pay $0 without the job</td><td>One buy a day; keep the job into 2027 if possible; review if nothing is funded by mid-January</td></tr>
     <tr><td><b>Live edge below backtest</b></td><td>Expected (~75%); first 3 weeks are below, on few trades</td><td>Drift alarm per strategy; mid-December gate; stop buying on an alarm</td></tr>
     <tr><td><b>All accounts are one bet</b></td><td>Same signals everywhere: a bad month hits every account</td><td>Stagger starts; budget for several failures in a row</td></tr>
     <tr><td><b>Evaluation failures</b></td><td>~50–60% of evaluations fail, even in the backtest</td><td>Treated as the cost of a pass: ~$600 per funded 150K</td></tr>

@@ -24,15 +24,21 @@ import montecarlo as MC
 import overnight_tick_bench as OTB
 
 
+# numeric exit kinds the lab expects (funded_lab.with_slippage: 1 = target limit, no slippage; portfolio.paths: 0 = stop
+# order, marked at the stop): text kinds charged targets an extra tick and marked stops past the stop (Codex 2026-10-30)
+ST_KIND = {"target": 1, "stop": 0, "breakeven": 0, "time": 2}
+
+
 def pt_trades(g):
     """Lab-format Swing Target BE trades on grid g, raw entry / exit (with_slippage adds the 2 ticks); holiday fix applied."""
     t = pd.read_csv(SP + "swing_be.csv", parse_dates=["date"])
     row = pd.Series(np.arange(len(g.ts)), index=pd.DatetimeIndex(g.ts))
     x = pd.DataFrame(dict(day=row.reindex(t.date).to_numpy().astype(int), j0=t.j0, j1=t.j1, side=t.side, entry=t.entry, exit=t.exit,
-                          kind=t.reason, date=t.date, net=t.net))
+                          kind=t.reason.map(ST_KIND).to_numpy(), date=t.date, net=t.net))
+    assert x.kind.notna().all(), "unknown Swing Target exit reason"
     for i in np.where(t.apex_flat_violation)[0]:          # held past an early close: out at the entry session's last bar
         d = x.day[i]; last = np.where(np.isfinite(g.c[d, :jof(1500) + 1]))[0].max()
-        x.loc[i, ["j1", "exit", "kind"]] = [last, g.c[d, last], "holiday flat"]
+        x.loc[i, ["j1", "exit", "kind"]] = [last, g.c[d, last], 2]
         x.loc[i, "net"] = (x.exit[i] - x.entry[i]) * x.side[i] * 20 - 7.25 - 10
     return x[x.date >= "2018-01-01"].reset_index(drop=True)
 

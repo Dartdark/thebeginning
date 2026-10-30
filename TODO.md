@@ -60,6 +60,9 @@ bottom). Times are Central (CT).
 - [x] Repaste the live strategies once (VB, Overnight Bias, EOS, Bridge) from the repo: their heartbeat now stamps a code
       version, and the pre-market check flags any chart running old code. Compile, look for 'compiled successfully'.
 - [ ] On the VPS: `cd C:\TradingRepo; git pull` (watchdog: account-floor alarm and Apex-lock hint).
+- [ ] On the VPS after `git pull` (2026-10-30 fix): PowerShell `powershell -ExecutionPolicy Bypass -File C:\TradingRepo\live\vps\watchdog.ps1`
+      once, then `Get-Content C:\TradingLogs\alerts.txt -Tail 5`: no errors = the floor alarm can read the logs.
+- [ ] Claude: replay the Swing Target account benches with the corrected exit kinds (expected: ST adoption only stronger).
 - Claude: a new funded account -> `FUNDED` in analysis/account_tools.py (payout tracker); each payout you request -> its list.
 - [ ] Claude, once ~20 evaluations have finished: Brier-score the dashboard's pass odds (account_tools.pass_odds at each start)
       against actual pass / fail, to check they aren't too optimistic (idea from the 'Simulate like a quant desk' X article, 10/30).
@@ -80,9 +83,9 @@ bottom). Times are Central (CT).
   at the earliest); per 150K slot ~$14k in the first 12 months (backtest), ~$10k at 75% edge. ~10 slots: ~$140k backtest /
   ~$100k at 75% / ~$60-70k bad year, nearly all March-December. Plan Jan-Feb with no trading income.
   If the job continues through 2027 (~$850/wk after tax): reach 20 slots by ~February from pay, then switch pay to the
-  personal account from ~March: ~$310k backtest / ~$170k at 75% from Apex (median), + personal account ~$30k by autumn.
-  Budget simulation (analysis/ramp_budget_test.py, 10/30): job to Dec 24 -> 2027 median $246k backtest / $96k at 75%;
-  14-28% of histories have NO funded account by Dec 31 (then $0 in 2027 without the job). Buy ONE evaluation a day,
+  personal account from ~March: ~$320k backtest / ~$175k at 75% from Apex (median), + personal account ~$30k by autumn.
+  Budget simulation (analysis/ramp_budget_test.py, 10/30): job to Dec 24 -> 2027 median ~$252k backtest / ~$89k at 75% (whole contracts, rerun 10/30);
+  13-31% of histories have NO funded account by Dec 31 (then $0 in 2027 without the job). Buy ONE evaluation a day,
   not all on payday (same-day accounts pass or fail together).
 
 ## Half-day fixes for two funded strategies (2026-10-25, from Codex's Day Flow Six review; not live yet)
