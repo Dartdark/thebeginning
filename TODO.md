@@ -55,6 +55,13 @@ bottom). Times are Central (CT).
   150K funded stack (FUNDED_PLAN.md). Add its account number to the logger / live reports.
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
+## Live guard additions (2026-10-30) - this weekend
+- [ ] VPS: follow `live/vps/VPS_MAINTENANCE.md` (updates only on Saturdays, weekly Saturday restart, Sunday pre-open routine).
+- [ ] Repaste the live strategies once (VB, Overnight Bias, EOS, Bridge) from the repo: their heartbeat now stamps a code
+      version, and the pre-market check flags any chart running old code. Compile, look for 'compiled successfully'.
+- [ ] On the VPS: `cd C:\TradingRepo; git pull` (watchdog: account-floor alarm and Apex-lock hint).
+- Claude: a new funded account -> `FUNDED` in analysis/account_tools.py (payout tracker); each payout you request -> its list.
+
 ## 150K buying plan, Nov-Dec 2026 (user, 2026-10-30; job Nov 10 - Dec 24, $25 x 8 h, paid weekly, all pay to evaluations)
 - [ ] Sun Nov 1: buy 150K No-Activation #4 (afternoon, before ~18:00 CT), set up its 4 charts, send Claude the account number.
 - [ ] Each payday (Fri Nov 13, 20, 27, Dec 4, 11, 18; last pay ~Dec 24): buy as many $249 150Ks as the pay covers, ONE a day (same-day buys pass/fail together):
@@ -64,7 +71,7 @@ bottom). Times are Central (CT).
 - [ ] Stop buying if the drift alarm fires (live clearly below backtest). No more new 50Ks; #2 runs to the end.
 - Expected funded 150Ks: after tax ~6 (5 d) / ~8 (6 d) by Dec 31; no tax ~8 (5 d) / ~10 (6 d); +~4-5 more by late January.
 - From January: refill slots up to ~20 from payouts.
-- 2027 outlook (Claude, 2026-10-30): first payouts ~late Feb-March (each 150K needs +$5,600 and 5 days of $350+; January
+- 2027 outlook (Claude, 2026-10-30): first payouts ~late Feb-March (each 150K needs +$6,600 and 5 days of $350+; January
   at the earliest); per 150K slot ~$14k in the first 12 months (backtest), ~$10k at 75% edge. ~10 slots: ~$140k backtest /
   ~$100k at 75% / ~$60-70k bad year, nearly all March-December. Plan Jan-Feb with no trading income.
   If the job continues through 2027 (~$850/wk after tax): reach 20 slots by ~February from pay, then switch pay to the

@@ -81,7 +81,7 @@ inputs:
     HeartbeatTag( "" );       // live guard: the chart's logger tag (MON_BR-2 / MON_BR150); empty = no heartbeat
 
 variables:
-    HB_Last( -1 ), HB_Key( 0 ), HB_Day( "" ),
+    HB_Last( -1 ), HB_Key( 0 ), HB_Day( "" ), HB_Ver( "Bridge_Monday_Long_L644NQ 2026-10-30" ),   { code version: bump the date on every change }
     NewSession( false ), SessionDay( 0 ), SessionDate( 0 ),
     Has830( false ), Has1200( false ), Has1500( false ), IsHoliday( false ), FirstRTHBar( true ),
     Open830( 0 ), Close1200( 0 ), Close1500( 0 ), RTHHigh( 0 ), RTHLow( 0 ), TodayClose( 0 ),
@@ -352,7 +352,7 @@ if HeartbeatTag <> "" and GetAppInfo( aiRealTimeCalc ) = 1 and LastBarOnChart th
     HB_Key = CurrentDate * 10000 + CurrentTime;
     if HB_Key <> HB_Last then begin
         HB_Day = NumToStr( CurrentDate + 19000000, 0 );
-        FileAppend( "C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + ",,"
+        FileAppend( "C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
             + NumToStr( MarketPosition * CurrentContracts, 0 ) + ",,,,,,,," + HB_Day + "," + NumToStr( CurrentTime, 0 ) + NewLine );
         HB_Last = HB_Key;
     end;

@@ -76,6 +76,24 @@ if ($hhmm -ge 830 -and $hhmm -le 1500) {
     }
 }
 
+# 2d. Apex trailing floor (2026-10-30, after #3 failed on an intraday touch): equity from the Chart Monitor's ACCT rows vs the
+#     EOD trailing floor = min(peak end-of-day equity - trail, lock) since the account started (expected_setup.json)
+if ($cfg -and $hhmm -ge 815 -and $hhmm -le 1600) {
+    foreach ($ap in $cfg.accounts.PSObject.Properties) {
+        $v = $ap.Value; if ($v.status -ne "live" -or -not $v.start) { continue }
+        $peak = [double]$v.start; $eqNow = $null
+        Get-ChildItem "$Logs*.csv" | Where-Object { $_.BaseName -ge $v.started } | Sort-Object Name | ForEach-Object {
+            $last = $null
+            Get-Content $_.FullName | Where-Object { $_ -like ("ACCT,*," + $v.id + ",*") } | ForEach-Object { $e = [double]($_.Split(",")[6]); if ($e -gt 0) { $last = $e } }
+            if ($null -ne $last) { if ($_.BaseName -eq $day) { $eqNow = $last } else { $peak = [math]::Max($peak, $last) } }
+        }
+        if ($null -eq $eqNow) { continue }
+        $floor = [math]::Min($peak - [double]$v.trail, [double]$v.lock); $room = $eqNow - $floor; $n = $ap.Name
+        if ($room -le 0) { $problems += "ACCTFAIL_$($v.id)|Account $n ($($v.id)): equity $([math]::Round($eqNow)) is at or below its floor $([math]::Round($floor)). Apex has likely failed it: turn auto-trading OFF on its charts, check Apex." }
+        elseif ($room -lt 0.5 * [double]$v.max_stop) { $problems += "NEARFLOOR_$($v.id)|Account ${n}: only $([math]::Round($room)) above its floor (half a stop is $([math]::Round(0.5 * [double]$v.max_stop)))." }
+    }
+}
+
 # 2c. strategy heartbeat (SIG rows, 2026-10-29): a strategy that stopped writing for > 45 min in RTH is not running
 #     (failed compile, removed, error) even if the chart and its AA button look normal
 $sigTags = @{}
@@ -105,6 +123,7 @@ foreach ($r in @("$env:LOCALAPPDATA\TS Support", "$env:APPDATA\TS Support", "C:\
 $prev = 0; if ($state["rej_day"] -eq $day) { $prev = [int]$state["rej_count"] }
 if ($rej -gt $prev) {
     $hint = ""; if ($msg -match "@MNQ|@MES|Invalid") { $hint = " Likely Symbol Mapping: File > Broker Profiles > Symbol Mapping." }
+    if ($msg -match "done for day|liquidat|[Ff]ailed|disabled") { $hint = " Apex locked or failed the account: after the close turn auto-trading off/on (Flat) on its charts." }
     $problems += "REJECT_$rej|$($rej - $prev) new rejected order(s). Last: $($msg.Substring(0, [math]::Min(140, $msg.Length))).$hint"
 }
 $state["rej_day"] = $day; $state["rej_count"] = $rej

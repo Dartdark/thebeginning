@@ -25,7 +25,8 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `funded_strategies/
   live guard, VPS health, live-vs-backtest range, edge per strategy, missed-trade alarm). Refresh after each close:
   `python3 analysis/dashboard_data.py` (also runs `analysis/live_panels.py` and `analysis/account_tools.py`; account rules in `account_tools.EVALS`), upload every JSON in
   `analysis/outputs/dashboard/` except `bt_cache.json` as an asset and update the dataset with the same id (url / name /
-  updated). New Apex balance from the user -> `ACCOUNTS` in dashboard_data.py; new account -> `ACCTS` in live_panels.py.
+  updated). New Apex balance from the user -> `ACCOUNTS` in dashboard_data.py; new account -> `ACCTS` in live_panels.py and
+  `live/expected_setup.json` (charts + account rules for the floor alarm); funded account -> `FUNDED` in account_tools.py (payouts).
   After a backtest report changes, rebuild scratch_data and rerun live_panels.py to refresh `bt_cache.json`.
 - **Branches:** work on `claude/nq-trading-strategy-params-5h9d20`; keep
   `claude/quirky-noether-4dla64` and the session's designated branch identical; push every

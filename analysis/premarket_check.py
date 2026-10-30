@@ -6,6 +6,7 @@ position = broker position). Prints one line per problem, or 'ALL GREEN'. Run by
 """
 import sys, os, json, datetime as dt
 import pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 COLS = ["event", "tag", "symbol", "side", "contracts", "entry_date", "entry_time", "entry_price", "exit_date",
         "exit_time", "exit_price", "profit_usd", "bar_date", "bar_time"]
@@ -43,6 +44,13 @@ def check(day):
             out.append(f"{tag}: strategy position {p.iloc[-1].contracts} vs broker {p.iloc[-1].profit_usd}.")
     for t in sorted(set(df[df.event.isin(["POS", "ACCT", "SIG"])].tag) - set(cfg["charts"])):
         out.append(f"{t}: unexpected chart running (retired account or wrong tag).")
+    import live_guard as L                                    # 2026-10-30: failed accounts and code versions
+    for n, a in L.floors(d, cfg).items():
+        if a["room"] <= 0:
+            out.append(f"Account {n} ({a['id']}): equity ${a['equity']:,.0f} is at or below its floor ${a['floor']:,.0f}: "
+                       "likely FAILED. Auto-trading off on its charts, check Apex, then tell Claude.")
+    out += L.chart_versions(df, cfg["charts"])
+    out += L.stale_versions()
     return out
 
 

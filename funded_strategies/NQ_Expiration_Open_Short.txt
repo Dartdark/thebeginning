@@ -50,7 +50,7 @@ Inputs:
 	ClosedFriday5(0),
 	ClosedFriday6(0),
 	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
-Variables: HB_Last(-1), HB_Key(0), HB_Day("");
+Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Expiration_Open_Short 2026-10-30");   { code version (live guard 2026-10-30): bump the date on every change }
 
 Variables:
 	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
@@ -137,7 +137,7 @@ if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then
 	HB_Key = CurrentDate * 10000 + CurrentTime;
 	if HB_Key <> HB_Last then begin
 		HB_Day = NumToStr(CurrentDate + 19000000, 0);
-		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + ",,"
+		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
 			+ NumToStr(MarketPosition * CurrentContracts, 0) + ",,,,,,,," + HB_Day + "," + NumToStr(CurrentTime, 0) + NewLine);
 		HB_Last = HB_Key;
 	end;
