@@ -61,6 +61,9 @@ bottom). Times are Central (CT).
       version, and the pre-market check flags any chart running old code. Compile, look for 'compiled successfully'.
 - [ ] On the VPS: `cd C:\TradingRepo; git pull` (watchdog: account-floor alarm and Apex-lock hint).
 - Claude: a new funded account -> `FUNDED` in analysis/account_tools.py (payout tracker); each payout you request -> its list.
+- [ ] Claude, before the first funded account (~late Nov): heartbeat + HB_Ver stamp in every funded strategy file that lacks
+      them (ONB ML, LDF, NFP, ES MOC, CL fade, Overnight Tick, Swing Target, T_ONESIDE, Monday Long); funded floor rules in
+      expected_setup.json (150K: trail 4,000, lock 150,100); rejected-orders limit 10 on every funded chart.
 
 ## 150K buying plan, Nov-Dec 2026 (user, 2026-10-30; job Nov 10 - Dec 24, $25 x 8 h, paid weekly, all pay to evaluations)
 - [ ] Sun Nov 1: buy 150K No-Activation #4 (afternoon, before ~18:00 CT), set up its 4 charts, send Claude the account number.
