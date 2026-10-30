@@ -20,6 +20,11 @@ Gates (all from the repo's testing standard; N = ranked items in TRIALS.csv):
   G7 MinTRL        trades >= the minimum track record length for the per-trade Sharpe (Minerva / Bailey & Lopez de Prado)
   G8 regime        regime composite over calendar years >= 0.60 (Minerva eq. 3)
   G9 PBO           only when variant trade lists are supplied (trades_replica_*.csv or variants/*.csv): CSCV PBO <= 0.50
+  G10 fill sanity  only when fills.csv is supplied (entry_time, exit_time, side, entry, exit; meta.json "symbol",
+                   "bar_minutes"): >= 98% of entry / exit prices traded inside their bar (analysis/leak_checks.py L1)
+  G11 delay        same file: entries one chart bar later keep >= half the per-trade Sharpe (BEND; leak_checks L2)
+  G12 look-ahead   only when trades_fullsample.csv is supplied (the rule's fitted parts fitted on all data):
+                   full-sample mean per trade <= 1.3x the past-only mean (leak_checks L3)
 Also printed: Sharpe, Sortino, profit factor, Calmar, Ulcer for all / longs / shorts (filter: kept trades and all trades),
 2023+ bootstrap and drawdown permutation.
   python3 analysis/checker.py checks/candidates/<name>
@@ -109,6 +114,20 @@ def check(cdir):
             cols[os.path.basename(f)] = daily(v.net)
         Rm = pd.DataFrame(cols).fillna(0.0); pb = M.pbo(Rm)
         G["G9 PBO"] = pb <= 0.50, f"CSCV over {Rm.shape[1]} variants, 16 blocks: PBO {pb:.2f}"
+    # ---- leak checks (2026-10-30, analysis/leak_checks.py)
+    ff = os.path.join(cdir, "fills.csv")
+    if os.path.exists(ff):
+        import leak_checks as LC
+        Fl = pd.read_csv(ff, parse_dates=["entry_time", "exit_time"])
+        sym, bar = meta.get("symbol", "NQ"), int(meta.get("bar_minutes", 1))
+        _, row = LC.report(os.path.basename(cdir.rstrip("/")), Fl, sym, bar)
+        G["G10 fill sanity"] = bool(row["l1_ok"]), f"{row['l1']:.1%} of fills inside their {bar}-min bar (+/- {LC.TOL} ticks), clock {row['off']:+d} min"
+        G["G11 one-bar delay"] = bool(row["l2_ok"]), f"net ${row['orig']:.0f} (t {row['t0']:.1f}) -> ${row['delayed']:.0f} (t {row['t1']:.1f}), Sharpe kept {row['keep']:.0%}"
+    fsf = os.path.join(cdir, "trades_fullsample.csv")
+    if os.path.exists(fsf):
+        Fs = pd.read_csv(fsf, parse_dates=["date"]); Fs = Fs[Fs.date >= "2018-01-01"]
+        base = xs.mean(); full = Fs.net.mean()
+        G["G12 look-ahead"] = not (full > 1.3 * base and full > 0), f"past-only ${base:.1f} a trade vs full-sample fit ${full:.1f} ({full / base if base else float('nan'):.2f}x)"
     out.append("| Gate | Result | Detail |\n|---|---|---|")
     for g, (ok, txt) in G.items(): out.append(f"| {g} | {'PASS' if ok else 'FAIL'} | {txt} |")
     n_fail = sum(not ok for ok, _ in G.values())

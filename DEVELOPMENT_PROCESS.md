@@ -166,6 +166,11 @@ Rules:
    - *Implementation stresses* (price noise of a few ticks, nearby indicator settings, ±1-2 ticks of extra slippage,
      2-point target trade-through, a few minutes of delay): a live strategy must BEND (stay profitable and keep at least
      half its Sharpe). A BREAK here is a reason to cut or stop it.
+   - *Leak checks* (2026-10-30, `analysis/leak_checks.py`, gates G10-G12 in `checker.py`): every candidate ranked above C
+     supplies `fills.csv` (entry / exit times and prices) and, if any part is fitted (thresholds, percentiles, models),
+     `trades_fullsample.csv`. Fills must have traded inside their bar; a one-bar entry delay must BEND; a full-sample fit
+     must not earn > 1.3x the past-only version. `--selftest` proves planted leaks are caught; `--sweep` reruns the plan.
+     The delay check only sees look-ahead into the entry bar; hindsight over the holding period stays the checker's job.
    - *Premise shifts* (moves that change what the strategy is, e.g. ONB's overnight range ending after the 08:30 open,
      VB's first decision at 09:00 or 11:00, broad joint jitter of session clocks): kept and reported as information on
      where the edge lives, not as a pass / fail verdict.
