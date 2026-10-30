@@ -61,6 +61,8 @@ bottom). Times are Central (CT).
       version, and the pre-market check flags any chart running old code. Compile, look for 'compiled successfully'.
 - [ ] On the VPS: `cd C:\TradingRepo; git pull` (watchdog: account-floor alarm and Apex-lock hint).
 - Claude: a new funded account -> `FUNDED` in analysis/account_tools.py (payout tracker); each payout you request -> its list.
+- [ ] Claude, once ~20 evaluations have finished: Brier-score the dashboard's pass odds (account_tools.pass_odds at each start)
+      against actual pass / fail, to check they aren't too optimistic (idea from the 'Simulate like a quant desk' X article, 10/30).
 - [ ] Claude, before the first funded account (~late Nov): heartbeat + HB_Ver stamp in every funded strategy file that lacks
       them (ONB ML, LDF, NFP, ES MOC, CL fade, Overnight Tick, Swing Target, T_ONESIDE, Monday Long); funded floor rules in
       expected_setup.json (150K: trail 4,000, lock 150,100); rejected-orders limit 10 on every funded chart.
