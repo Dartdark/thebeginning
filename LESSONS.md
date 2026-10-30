@@ -16,6 +16,9 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
   was sized to still work at 75% (2026-10-18).
 
 ## Testing
+- Skipping Overnight Bias (or ONB + VB) on a thin cushion doesn't help either: counting unfinished evaluations as lost,
+  every rule is worse than trading the full set (50K 1.00 losses per pass vs 1.08-1.76; 150K 1.40 vs 1.54-2.89). Thin
+  cushions fail sometimes; the full set is still the best way out (`analysis/onb_cushion_test.py`, after #3 failed 2026-10-30).
 - Cutting Vault Break when an evaluation's cushion is thin does not lower the fail rate per pass (0.95-1.02 vs 0.96 for
   VB 8 always; pass 47.7-48.4% vs 50.1%): a thin-cushion evaluation needs the full size to get back up (account #1 fail, 2026-10-26).
 - The one-history funded bench overstates swaps: +$700 'gains' at 2 MNQ blew 17-22% on the bootstrapped bench. Decide plan
