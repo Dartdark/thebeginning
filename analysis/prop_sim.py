@@ -46,6 +46,8 @@ def load_trades(path):
     raw = pd.read_excel(path, sheet_name="List of Trades", header=2)
     ent = raw[raw["Type"].astype(str).str.startswith("Entry")].reset_index(drop=True)
     ex = raw[raw["Type"].astype(str).str.startswith("Exit")].reset_index(drop=True)
+    closed = (ex["Signal"].astype(str).str.strip().str.lower() != "open").to_numpy()   # 'open' = unfinished at report end
+    ent, ex = ent[closed].reset_index(drop=True), ex[closed].reset_index(drop=True)
     t = pd.DataFrame({
         "entry": pd.to_datetime(ent["Date"]),
         "exit": pd.to_datetime(ex["Date"]),

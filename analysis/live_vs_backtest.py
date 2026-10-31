@@ -49,6 +49,8 @@ def read_trades(path):
     t = raw["Type"].astype(str)
     ent = raw[t.str.startswith("Entry")].reset_index(drop=True); ex = raw[t.str.startswith("Exit")].reset_index(drop=True)
     n = min(len(ent), len(ex)); ent, ex = ent.iloc[:n], ex.iloc[:n]
+    closed = (ex["Signal"].astype(str).str.strip().str.lower() != "open").to_numpy()   # 'open' = unfinished at report end
+    ent, ex = ent[closed].reset_index(drop=True), ex[closed].reset_index(drop=True)
     et = pd.to_datetime(ent["Date"]); xt = pd.to_datetime(ex["Date"])
     side = np.where(ent["Type"].astype(str).str.contains("Long"), 1, -1)
     q = ent["Contracts"].astype(float).to_numpy()
