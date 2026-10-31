@@ -1110,6 +1110,22 @@ Source: Liu, Chuang and Xu, SSRN4494963, uploaded15-page preprint;
   dividend/FX cash, per-leg fees and fill clocks. Do not import the paper's ambiguous Sharpe-percent row or cost rate
   as current CME evidence. No new backtest, measured saving or portfolio allocation.
 
+### E56 — Algorithmic-activity proxies and signed spread/markout accounting
+
+Source: Viljoen, Westerholm and Zheng, [SSRN 1913693](https://ssrn.com/abstract=1913693),
+[full-PDF review](results/ssrn_1913693_review_20261030.md), retained 2026-10-30; printed pp. 4–8, 11–19, Table 2.
+- Use: distinguish negative dollar-volume/message intensity from algorithm identities or a directional forecast.
+  Decompose trade-signed effective half-spread into realized half-spread plus five-minute signed midpoint impact.
+- Evidence: source inspection only, SPI 200 day-session nearest contracts, January–December 2009. No replicated
+  strategy returns, execution savings or modern CME transfer. Relates to E01/E04 and prior failed order-flow alpha E25.
+- Source caveat: rendered Equation 5 omits trade side D; Equations 3–4 and Table 2's signed definition require it
+  for the accounting identity. Resolve explicitly; this is not proof the author's unavailable code was wrong.
+- Limits: five-minute midpoint is a posttrade label; aggressor side differs from a passive parent's side. Half versus
+  full spreads, basis points versus native dollars, stale quotes and fees must not be mixed. Realized spread is not net P&L.
+- Next check when relevant native data arrive: one verified buy and sell with pretrade and five-minute same-contract
+  midpoints, event/receipt and quote-age records, side and fee reconciliation; preserve missing horizons as unknown.
+- Status: execution diagnostic reference. No new alpha trial, plan placement, order-timing change or live logger.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
