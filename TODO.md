@@ -64,7 +64,7 @@ bottom). Times are Central (CT).
       once, then `Get-Content C:\TradingLogs\alerts.txt -Tail 5`: no errors = the floor alarm can read the logs.
 - [x] Claude: 150K funded whole-number inputs (Codex audit): round the 1.5s down to 1, results unchanged (`FUNDED_PLAN.md`).
 - [x] Claude: opposing-position overlap measured (Codex audit step 2): benches overstate risk slightly on 4-17% of days; conservative, no decision changes (`FUNDED_PLAN.md`).
-- [ ] Claude: update the personal ladder (`PORTFOLIO.md` still says 16-piece core; full book needs ~$35k; tested subsets for smaller starts).
+- [x] Claude: personal ladder rebuilt on the 19-piece book (`PORTFOLIO.md`, `analysis/personal_ladder.py`): ~$10.9k = 4 pieces, ~$14.9k = 12 (best ratio), ~$24.3k = all 15 cleared, ~$36k = full 19.
 - [x] Claude: replay the Swing Target account benches with the corrected exit kinds -> ties; user reverted both funded swaps 2026-10-31.
 - Claude: a new funded account -> `FUNDED` in analysis/account_tools.py (payout tracker); each payout you request -> its list.
 - [ ] Claude, once ~20 evaluations have finished: Brier-score the dashboard's pass odds (account_tools.pass_odds at each start)

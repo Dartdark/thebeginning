@@ -56,20 +56,34 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 - (History) Overnight Anomaly's effect (12 → 13 pieces), replaced 2026-10-24: +$1,700 a year, max DD $4,663 → $4,331, Sharpe 2.84 → 2.97, capital
   $23.4k → $23.0k. It barely moves with the rest (corr +0.02), so it adds profit without adding drawdown.
 
-## Growing into it (capital at the 20% rule)
-| Account | Set (1 micro each) | $ a year (MC p50) | Bad year (p5) | DD p95 |
-|---|---|---|---|---|
-| ~$11,500 | **A**: Twin, ONB ML, Bridge, CL Sunday, NFP | $8,100 | $3,000 | $2,300 |
-| ~$11,300 | **B**: A + EOS (same risk, a bit more profit) | $8,600 | $3,600 | $2,260 |
-| ~$13,600 | **C**: B + Vault Break | $10,400 | $4,400 | $2,730 |
-| ~$20,400 | **D**: C + Relative Strength + ES MOC | $14,500 | $6,300 | $4,080 |
-| ~$23,000 | Full without Dual Thrust (13) | $21,300 | $10,500 | $4,610 |
-| ~$25,000 | Full without Kusho / S47 (14) | $23,700 | $12,500 | $5,000 |
-| ~$26,200 | **Core**: the 16 without S30, 1 micro each | $30,500 | $17,000 | $5,240 |
-| ~$33,600 | Core + S30 at 1 micro (same weight: puts spare capital to work, return/DD 9.6 -> 8.3) | $36,400 | $20,200 | $6,730 |
-| ~$54,100 | Core x 2 + S30 at 1 micro (half weight) | $66,800 | $38,200 | $10,830 |
-| ~$104,100 | **Core x 4 + S30 at 1 micro (quarter weight: the best mix, return/DD 9.9)** | $127,800 | $72,800 | $20,830 |
-| ~$260,900 | Core x 10 = **1 mini (NQ / ES / CL) per piece** + S30 at 3 MNQ + 3 MES | $322,400 | $185,500 | $52,180 |
+## Growing into it (capital at the 20% rule; rebuilt 2026-10-31 on the 19-piece book)
+`analysis/personal_ladder.py` (output `analysis/outputs/personal_ladder_output.txt`): greedy, each step adds the piece that keeps
+1-year MC median $ / DD p95 highest; capital = DD p95 / 0.20. Cleared pieces first; the four forward-log pieces only once they
+clear. (Codex audit 2026-10-31: the old table's '16-piece core' predated Swing Target and PAPERTREND, and its rows were not
+re-ranked.) ret/DD here = median year / DD p95 (stricter than the old median / median-DD figure: the full book is 5.6 here, 9.0 there).
+
+| Account | Set (1 micro each) | $ a year (MC p50) | Bad year (p5) | DD p95 | ret/DD |
+|---|---|---|---|---|---|
+| ~$10,200 | **1**: Overnight Tick / VIX + Twin Continuation | $5,600 | $1,900 | $2,040 | 2.75 |
+| ~$10,900 | **2**: 1 + ONB ML + Late-Day Flow | $8,800 | $3,800 | $2,190 | 4.01 |
+| ~$12,600 | **3**: 2 + Dual Thrust + Bridge Monday | $12,500 | $6,500 | $2,520 | 4.95 |
+| ~$13,300 | **4**: 3 + Swing Target, CL Sunday fade, EOS, NFP fade, ES MOC (11 pieces) | $16,300 | $9,000 | $2,640 | 6.18 |
+| ~$14,900 | **5 (best ratio)**: 4 + PAPERTREND (12 pieces) | $18,700 | $10,200 | $2,980 | 6.29 |
+| ~$16,600 | 5 + Monday Long (13) | $20,800 | $11,400 | $3,320 | 6.27 |
+| ~$18,900 | + Vault Break (14) | $22,500 | $12,400 | $3,780 | 5.94 |
+| ~$24,300 | **All 15 cleared pieces** (+ Relative Strength) | $26,300 | $14,300 | $4,860 | 5.42 |
+| ~$25,200 | + Kusho v9 once its forward log clears (16) | $29,800 | $16,200 | $5,040 | 5.91 |
+| ~$26,600 | + S47 v2 once cleared (17) | $32,700 | $17,600 | $5,310 | 6.16 |
+| ~$28,800 | + FC 2B v2 once cleared (18) | $35,000 | $19,100 | $5,770 | 6.07 |
+| ~$36,100 | + S30 IBS once cleared (19 = full book) | $40,500 | $22,600 | $7,220 | 5.61 |
+
+Above ~$36k: scale the whole book (x 2 at ~$72k, x 4 at ~$144k, 1 mini per piece ~x 10 at ~$361k), re-running the ladder and the
+'Capital-expansion bench' at each step (S30 at half / quarter weight was better per risk in the 10/24 test).
+**Reading it:** with ~$10-11k start at row 2 (4 pieces); ~$13.3k already carries 11 pieces, because the small pieces add profit
+without adding drawdown. Monday Long, Vault Break and Relative Strength are the last cleared pieces in: in a personal book they
+add money at lower return per risk (they overlap the RTH NQ pieces). Twin holds overnight with a wide stop (check overnight
+margin). Add a row only at its line; drop back one after a 20% drawdown. Live expectation: >= 75% of these backtests.
+Old table (2026-10-24, 16-piece core, before Swing Target / PAPERTREND): in git history.
 
 **Units:** every '$ a year' is the backtest at the sizes in its row; '1 micro' = 1 MNQ / MES / MCL per piece, so the core
 at 1 micro is ~$2,500 a month and at 1 mini per piece ~$25,000 a month (not $300k a month), with drawdowns 10x as large.
@@ -80,8 +94,6 @@ So it runs at full weight only between ~$33.6k and ~$54.1k, then at half, then a
 **Live expectation:** these are in-sample backtests; our rule expects live >= 75% of them (the 1-mini row ~$240k a year at
 75%, ~$190k at 60%).
 
-A $10k start sits just under set B's line (p95 DD ~22% of $10k): acceptable if you're comfortable with that, or start
-with ~$11.5k. Add the next set only when the account reaches its line, and drop back a step after a 20% drawdown.
 
 ## Capital-expansion bench (user, 2026-10-24)
 Strategies that add money only by needing more capital (lower return per unit of drawdown at the current size) go here,
