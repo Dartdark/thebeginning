@@ -894,6 +894,30 @@ measurement, E15 overnight tails, E19 session clocks, E30 paired-leg execution.
 - Status: execution/accounting reference retained; naked component rejected, preferred hedge unverified. No execution
   saving, plan placement, trading, broker or live-policy change is claimed.
 
+### E52 — Strategic futures demand, welfare and executable basis
+
+Source: Hugues Dastarac, *Strategic Trading, Welfare and Prices with Futures Contracts*, Banque de France WP 841,
+October 2021, SSRN 3947960, supplied 82-page PDF. [Review](results/strategic_futures_3947960_20261030.md),
+[evidence](evidence/strategic_futures_3947960_20261030.md). Related: E07 slicing risk/impact, E11 information
+clocks, E46 spot market power, E47 replenishing depth and E50 Treasury contract/liquidity measurement.
+- Use: distinguish an individual incentive to affect settlement from net equilibrium price pressure. Under the source's
+  symmetric-information/identical-risk-preference setup, opposing traders' effects cancel, despite changed execution
+  timing and worse certainty-equivalent welfare. Slicing impact against future-price exposure is a trade-off, not alpha.
+- Evidence: theoretical source inspection, no return replication. The negative hedge ratio is defined against expected
+  future spot transactions net of the customer shock, not simply current holdings. The welfare result is conditional on
+  its modeled equilibrium; the counterfactual non-influenceable contract improves welfare. No universal claim that
+  futures or hedging lose money follows.
+- Basis lesson: the model's spread depends on the expectation of future customer flow, not a later observed shock.
+  Outside arbitrageurs and their endogenous price effects are left unmodeled. A displayed spread does not establish
+  that both legs can execute at those prices/quantities or that a cash-and-carry trade earns the apparent spread.
+- Limits: CARA preferences, Gaussian shocks, linear demand-schedule equilibrium, zero interest/storage costs and
+  ignored margins. No tested contemporary futures strategy, estimated execution savings or calibrated source dataset.
+- Next check only for a separately justified proposal: predecision flow/inventory availability, matched cash/futures
+  instruments and payoffs, synchronized bid/ask, financing/borrow/carry, both-leg quantities, fees, fills and settlement;
+  Treasury implementations also require deliverables, CTD, conversion factors and accrued-interest/repo accounting.
+  Futures OHLCV, COT and auction dates alone do not supply these states.
+- Status: market-structure/execution reference; zero return trials, portfolio comparisons, queue entries or live changes.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
