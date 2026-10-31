@@ -108,6 +108,15 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 
 ### E09 — Native micro costs, turnover and roll reconciliation
 
+- [Leveraged Fibonacci paper review](results/ssrn2011743.md), SSRN2011743, retained
+  2026-10-30: distinguish margin allocation, notional leverage and loss-at-stop.
+  A 60% equity margin commitment at 10x implies 6x equity notional under a simple
+  fixed-exposure illustration, not 60% notional or a 60% loss cap. Reserves and
+  maintenance margin do not guarantee maximum loss; suggested option hedges require
+  explicit expiry/strike/premium and marked cash accounting. Confirming a signal
+  at a daily close does not establish a fill at that same close. Source review and
+  conditional arithmetic only: no verified return, fill, savings or new strategy test.
+
 - Replay readiness 2026-10-31 ([report](results/swing_replay_readiness_20261031.md)):
   a MultiCharts exit row labeled `open` is a valuation mark, not a closed fill.
   ONB ML's final export mark maps to an exit before entry and crashes a clean
@@ -186,6 +195,15 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   Limits/next check: no owned dated VX/spot curve panel; a separate justified project would first reconcile
   one timestamped curve, physical/pricing calibration and a cash ledger. No current NQ/ES/Apex allocation earned.
 
+E09 source follow-up — Dogs of the Dow conceptual review, SSRN2697334 (2026-10-31):
+[review](results/dogs_dow_2697334_20261031.md). The source describes mixed cited evidence and cases where
+apparent outperformance disappears after risk, costs and taxes; it performs no original execution/return test.
+For any separately justified equity replication, reconcile actual price P&L, dividend cash, corporate actions,
+fees and taxes. Do not double-count distributions through adjusted prices plus cash credits. That cash-accounting
+check is our implementation lesson, not an execution saving measured by this paper. Historical yield ranks need
+as-of dividends and membership; yield alone does not establish safe recovery or current net alpha.
+No strategy trial, promising-queue entry, plan placement or execution-policy change is earned from this source.
+
 ### E10 — Liquidity compensation, turnover and costs
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
@@ -246,6 +264,24 @@ Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
   A public weekly basis-reversal notebook discusses settlement availability and delays execution one day;
   that is a secondary implementation assumption, not verified primary timing or our replicated savings.
   Freeze publication/receipt and first executable prices before using final settlements to select a position.
+
+### E11 follow-up — Speed competition depends on information and repeat participation
+
+Source: He and Kang, *Speed Competition and Strategic Trading*, [SSRN 4940960](https://ssrn.com/abstract=4940960),
+uploaded manuscript; [review and formula audit](results/speed_competition_4940960.md), 2026-10-30.
+- Useful lesson: distinguish signal arrival/quality, execution speed and the ability of fast traders to participate
+  again later. In the benchmark, fast traders trade early only and speed competition has a hump-shaped effect on
+  final price informativeness. Allowing them to trade both rounds improves informativeness in the reported numerical
+  extension. Neither conclusion determines an outside trader's return or optimal delay.
+- Evidence: analytical results and source numerical illustrations, with a scoped independent precision-formula
+  check. The source's institutional-ownership/future-earnings empirical section is proposed, not estimated.
+- Limits: private fundamental knowledge or private signals, strategic risk-neutral traders, random liquidity noise;
+  no calibrated NQ/ES participant panel, native latency/fills or measured cost savings. Minute event rates do not
+  identify the number of informed fast traders. Future earnings used for evaluation must not become trade features.
+- Next check only for a separately justified execution problem: timestamped native orders/quotes, information
+  events and identifiable participation, then fixed-parent-signal delay comparisons including noncompletion,
+  adverse selection and costs at actual size. No infrastructure, protective-order or live-policy change follows.
+- Status: execution/identification reference; DON'T TEST as source-defined alpha, zero economic return trials.
 
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
@@ -1080,6 +1116,36 @@ Source: Panigrahi, Vachhani and Sisodia, SSRN4013524,2021;
 - Next check only for separately justified research: reconcile a real signal through native entry, gap/stop/target
   paths, exit and fees. No adaptation or protective-order change is warranted from this paper.
 - Status: accounting/timing reference; no return trial, execution saving or portfolio placement.
+
+### E10 follow-up — Bubble detection frequency and cost compounding
+
+Source: Liu, Chuang and Xu, SSRN4494963, uploaded15-page preprint;
+[review](results/bubble_riding_4494963_review_20261031.md),2026-10-31.
+- Use: gross signal performance can disappear as decision frequency and turnover increase. Authors' daily
+  DPSYI wealth7.90 before costs falls to1.37 after their assumed costs; these are unverified Chinese index results.
+- Evidence: printed-table audit only. Multiplying gross wealth by0.995 for each reported trading period roughly
+  reconciles daily endpoints. This does not verify that actual turnover or round-trip fees were charged correctly.
+- Clock lesson: Tuesday detection followed by Wednesday execution separates measurement from trading. Historical
+  bubble labels, bootstrapped critical values and interpolated CPI still require independent availability audits.
+- Limits/next check: for a separately justified strategy, freeze causal inputs, tradable vehicles, position changes,
+  dividend/FX cash, per-leg fees and fill clocks. Do not import the paper's ambiguous Sharpe-percent row or cost rate
+  as current CME evidence. No new backtest, measured saving or portfolio allocation.
+
+### E56 — Algorithmic-activity proxies and signed spread/markout accounting
+
+Source: Viljoen, Westerholm and Zheng, [SSRN 1913693](https://ssrn.com/abstract=1913693),
+[full-PDF review](results/ssrn_1913693_review_20261030.md), retained 2026-10-30; printed pp. 4–8, 11–19, Table 2.
+- Use: distinguish negative dollar-volume/message intensity from algorithm identities or a directional forecast.
+  Decompose trade-signed effective half-spread into realized half-spread plus five-minute signed midpoint impact.
+- Evidence: source inspection only, SPI 200 day-session nearest contracts, January–December 2009. No replicated
+  strategy returns, execution savings or modern CME transfer. Relates to E01/E04 and prior failed order-flow alpha E25.
+- Source caveat: rendered Equation 5 omits trade side D; Equations 3–4 and Table 2's signed definition require it
+  for the accounting identity. Resolve explicitly; this is not proof the author's unavailable code was wrong.
+- Limits: five-minute midpoint is a posttrade label; aggressor side differs from a passive parent's side. Half versus
+  full spreads, basis points versus native dollars, stale quotes and fees must not be mixed. Realized spread is not net P&L.
+- Next check when relevant native data arrive: one verified buy and sell with pretrade and five-minute same-contract
+  midpoints, event/receipt and quote-age records, side and fee reconciliation; preserve missing horizons as unknown.
+- Status: execution diagnostic reference. No new alpha trial, plan placement, order-timing change or live logger.
 
 ## Minimum record for any later execution comparison
 
