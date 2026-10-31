@@ -248,7 +248,10 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   +28.68%total/Sharpe1.085/0.7%DD, not independently reproduced. Need individual-contract intradayVXprices/quotes,
   event-clock eras, source11:00timezone and the chart-only`min-Maturity=5`units/contract-selection rule. Printed Eq3
   negative leverage reverses the sign; screenshotpositive3.5matches the short17example. Cboe/FirstRate/Portara products
-  found, but public sample attempts yielded no admitted panel; final cost unverified, no purchase. Smallest next check
+  found, but public sample attempts yielded no admitted panel. Follow-up2026-10-31: direct sample download proxy-blocked;
+  advertised FinzData$49/market and Portara$220 special verified on pricing pages, delivered quality unverified/no purchase.
+  User chose **free sources only**; no matching free panel acquired, paid paths excluded.
+  [Acquisition receipt](agents/codex/results/fomc_vx_data_acquisition.md). Smallest next check
   when matching inputs/clarification arrive: reconcile one dated event/contract/clock/stop, then committed design/cost/power
   screen. No daily/spotVIXorESproxy, parameter rescue, plan placement or return trial. This is separate from the failed
   naked Calvados component. [Review](agents/codex/results/fomc_vx_2544445_review.md) ·
