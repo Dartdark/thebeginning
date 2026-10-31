@@ -347,6 +347,14 @@ supports NewYork labels; verify configuration before mapping an EIA10:30ETreleas
 between clocks on P&L. Evidence: raw-file counts, user settings screenshots and winter/summer conversion fixtures;
 not measured fills, strategy profit or execution savings. Full native contract/roll/event/cost admission remains open.
 
+E11 follow-up — full NG announcement source supplied, retained2026-10-30:
+[Review](results/ng_3575861_full_review_20261030.md), SSRN3575861, pp19–20 Table8. Use executable sides:
+the paper's later-panel gross2.91% becomes−0.90%atbid/ask before funding. Its positive-surprise pre-announcement
+subsample uses a value known only after entry, so it cannot supply a causal pre-entry filter. Evidence is source
+inspection/Table8extraction, not verified fills or savings. Full-source reading closes the calendar-short nomination;
+no native return or account stage is earned. Preserve individual contracts, actual release calendars, source
+annualization and time-zone mapping for any separately justified future comparison. No live changes.
+
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
 Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5 and Figure 1 p.27.

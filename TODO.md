@@ -232,17 +232,15 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 data-blocked leads, exact missing inputs, partial acquisitions, next checks and superseded requests. Maintain it for future
 worthwhile NEEDS DATA leads. Acquisition preference: **free sources only**; a listing does not authorize a return test.
 
-- [ ] **NG storage announcement short — SOURCE/DATA GATE, SSRN3575861 (2026-10-30).**
-  Specific merit: indexed primary summary reports shorting 90 minutes before the release and covering 30 minutes
-  after, with author Sharpe 1.76 after costs; authors also warn the effect weakened. No result reproduced here.
-  Merge the existing NG export task and [D12](agents/codex/DATA_NEEDED.md); no duplicate data request.
-  Need full executable source, native NG/micro contract/roll history, release exceptions and native fees/slippage.
-  **NG corrected exports RECEIVED (2026-10-31):** ten replacement files archived, 2,959,522 bars with actual
-  0.001 prices and overnight coverage; no further precision export needed. Initial rounded delivery retained.
-  Need configured exchange timezone/symbol/roll metadata, full primary paper and historical event/cost admission.
-  [Corrected intake](agents/codex/results/ng_corrected_intake_20261031.md); no strategy returns computed.
-  Next: resolve source/clock/calendar inputs, then evidence/power/cost review before a committed return test. No current portfolio place or measured diversification benefit.
-  [Targeted feasibility report](agents/codex/results/targeted_diversification_20261030.md).
+- [x] **NG storage announcement short — CLOSED: DON'T TEST at source gate (SSRN3575861).**
+  Full paper received/read. Table8's After2011 panel reports −0.90% after bid/ask costs (Sharpe−0.16),
+  −0.97% including funding (−0.17), versus the full-sample headline +12.01%/1.76. Author results, not reproduced.
+  This replaces the earlier summary-only promising/data-blocked status. No calendar/side/filter rescue or new
+  return trial; no portfolio place earned. The corrected2,959,522-bar NG exports remain archived for distinct
+  justified research; no further export/PDF/metadata request for this rule. Generic market inventory remains D12.
+  [Full-source review](agents/codex/results/ng_3575861_full_review_20261030.md) ·
+  [Evidence gate](agents/codex/evidence/ng_3575861_20261030.md) ·
+  [Corrected data intake](agents/codex/results/ng_corrected_intake_20261031.md).
 
 - [ ] **Bitcoin spot/inverse-futures utility allocation — CODE BUILT / NEEDS MATCHING DATA AND SPECIFICATION (SSRN3441913).**
   Conditional personal-account research: explicit utility-allocation formulas; authors report Sharpe4.86–5.07
