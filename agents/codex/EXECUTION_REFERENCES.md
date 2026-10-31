@@ -1089,6 +1089,28 @@ undertaking activity-risk research; this source does not earn a new return test.
 Status: methodological reference only; no demonstrated executable edge, zero
 return trials, no promising-candidate queue entry or plan/live change.
 
+### E54 follow-up — Post-news activity predicts later volume, not execution costs
+
+Source: uploaded anonymized preprint *Trading Intensity, Forecast Disagreement, and Post-Announcement Volume
+Persistence in European Index Futures*, [SSRN 7446599](https://ssrn.com/abstract=7446599),
+[review / diagnostic-kernel scope](results/volume_persistence_7446599.md), 2026-10-30.
+- Useful lesson: distinguish elevated volume, normalized one-sidedness, price direction and executable liquidity.
+  Initial activity explains later excess volume in the reported FTSE/DAX/CAC sample; the R² rise 0.130 -> 0.395
+  is historical fit for a volume outcome, not a return forecast. Directional concentration adds about 0.06 pp.
+- Evidence: source historical associations, not independently re-estimated. NFP forecast dispersion is negatively
+  associated with later volume. Matched non-announcement windows also show activity persistence. No uniform
+  quote/book history, native fills, execution savings or trading profits are supplied.
+- Timing: primary same-day contract selection uses end-of-day volume; next-day activation is the causal alternative
+  tested by the author. Full-sample average-path boundaries require past-only fitting for a forecast. Initial activity
+  arrives after the observation interval; AUC120, fitted decay and confirmed baseline duration are later labels.
+- Code: a fixed-five-minute numeric measurement kernel plus synthetic arithmetic checks is retained in
+  `analysis/codex_volume_persistence_7446599.py`; it does not validate upstream event clocks/contracts, fit a forecast,
+  classify trade directions, route orders or measure costs. It reports baseline onset separately from confirmation.
+- Next check only for a justified execution study: reconcile one dated event using prior seasonal days and actual
+  quotes/fills, then test incremental spread/depth/markout/cost evidence at native size. Tick-rule concentration is
+  not participant identity, and high activity can coexist with improving liquidity.
+- Status: supporting measurement reference; no source-defined directional strategy or new economic return trial.
+
 ### E55 — Strategic futures demand, welfare and executable basis
 
 Source: Hugues Dastarac, *Strategic Trading, Welfare and Prices with Futures Contracts*, Banque de France WP 841,
