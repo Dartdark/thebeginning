@@ -725,6 +725,27 @@ Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, sha
 Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
 Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E40-E42 during this handoff merge; existing Codex E29-E38 identifiers are retained.
 
+### E44 — Spot market power: endogenous supply incentives and hidden participant identity
+
+Source: Muermann and Shore, *Spot Market Power and Futures Market Trading*, March 2005, SSRN 681202;
+uploaded 36-page full text. [Review](results/spot_market_power_681202_20261030.md),
+[evidence decision](evidence/spot_market_power_681202_20261030.md). Related: E09 complete leg/cash accounting,
+E10 liquidity compensation, E11 information clocks and E29 signed participant positions.
+- Use: distinguish profits earned by controlling physical supply from profits available to an outside observer.
+  Futures positions can change the supplier's subsequent optimal spot action; market makers anticipate that incentive.
+  Hidden participant identity matters, so aggregate volume or commercial positioning is not an identified producer signal.
+- Evidence: analytical equilibria and source inspection only. In the concealed-position model, the producer randomizes
+  direction; the separate non-producer model earns on an earlier derivative while accepting losses on later price-moving
+  trades. Retain both legs and exact contract payoffs. No empirical return, measured price impact or execution saving.
+- Limits: stylized linear demand, competitive risk-neutral market makers, specified inference/beliefs and no effective
+  storage; Section 4's initial contract pays on an intermediate futures price. No calibrated contemporary NQ/ES/CL rule.
+  The complete-hedging impossibility concerns price-contingent contracts in the model; demand-contingent contracts
+  provide an explicit complete-hedging exception. Historical oil-liquidity remarks are not current CL observations.
+- Data/next check only for a separately justified event: legally observable, as-of actor-linked positions, physical
+  supply/inventory decisions, contract-stage payoffs, contemporaneous quotes and native costs; audit availability and
+  directional identification before returns. Our aggregate COT and continuous OHLCV do not supply these states.
+- Status: execution/market-structure reference; no new return trial, strategy queue entry, allocation or live change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
