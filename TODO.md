@@ -262,6 +262,16 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   all four Apex homes. No spot-only/subset/intraday proxy, return trial or allocation admitted.
   [Review](agents/codex/results/fx_low_frequency_1259661_review.md) · [Evidence](agents/codex/evidence/fx_low_frequency_1259661.md).
 
+- [ ] **Daily Dow-stock RL selector — WATCH METHOD / ORIGINAL ENGINE FAILS REPRODUCTION GATE (SSRN 3690996; 2026-10-30).**
+  Low-priority personal-account method lead: authors report 13.0% annual return, Sharpe 1.30 and -9.7% drawdown
+  in 2016–2020; not independently reproduced. Recovered exact paper-era source and verified public stock/benchmark
+  data. Five synthetic groups expose same-close observation/fills, fee-inclusive negative cash, fractional shares,
+  misleading fee counters and a paper/code turbulence mismatch. Stop before historical agent training or portfolio tests.
+  Resume only with a clarified frozen source/protocol: reconcile one causal feature → later executable fill and
+  fee-inclusive integer-share ledger, then universe/corporate-action, fold-local turbulence and seed/checkpoint audit.
+  No unbounded training, proxy futures conversion or allocation; correcting this engine would be a new protocol.
+  [Review](agents/codex/results/rl_ensemble_3690996_20261030.md) · [Five-group checks](analysis/outputs/codex_rl_ensemble_3690996_audit/mechanics.json).
+
 - [ ] **WASDE pre-release futures/options volume — NEEDS DATA AND SPECIFICATION (SSRN 4841490; 2026-10-30).**
   Lower-priority personal-account lead: author reports positive futures-volume and negative options-volume
   associations with subsequent 5–20-day agricultural futures returns (1995–2018); no net strategy independently
