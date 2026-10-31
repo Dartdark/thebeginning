@@ -228,6 +228,16 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **Monthly low-frequency FX momentum — NEEDS DATA / SOURCE CONVENTIONS (SSRN 1259661; 2026-10-30).**
+  Lower-priority personal lead: recursively fitted HP trend (monthly penalty 14,400), then MA(1,2) on the trend.
+  Author's 1993–2008 basket Sharpe 0.76 versus raw MA 0.41; carry included, costs ignored, not independently
+  reproduced. Public Fed-mirror daily FX panel and metadata acquired; euro starts 1999, source carry/pre-euro
+  history and exact basket/quote/endpoint conventions missing. Kernel bandwidth units also unresolved.
+  Resume only on genuinely new matching inputs or author clarification: reconcile one dated month and signal
+  vintage, then coverage/power/cost gate before a committed bounded HP/raw-MA design test. Monthly holds fail
+  all four Apex homes. No spot-only/subset/intraday proxy, return trial or allocation admitted.
+  [Review](agents/codex/results/fx_low_frequency_1259661_review.md) · [Evidence](agents/codex/evidence/fx_low_frequency_1259661.md).
+
 - [ ] **WASDE pre-release futures/options volume — NEEDS DATA AND SPECIFICATION (SSRN 4841490; 2026-10-30).**
   Lower-priority personal-account lead: author reports positive futures-volume and negative options-volume
   associations with subsequent 5–20-day agricultural futures returns (1995–2018); no net strategy independently

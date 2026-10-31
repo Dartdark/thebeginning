@@ -216,6 +216,16 @@ Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 
 ### E11 — Event-information clocks and attribution
 
+- Recursive-smoother follow-up, retained 2026-10-30: Harris and Yilmaz,
+  [SSRN 1259661](https://ssrn.com/abstract=1259661), [full review](results/fx_low_frequency_1259661_review.md).
+  A full-history smooth trend is not a historical signal vintage. Their illustrative decomposition is explicitly
+  full-sample; their trading evaluation is described as recursive. Do not conflate those or diagnose a leak merely
+  from the use of HP/kernel smoothing. Freeze each signal's available-at data and specify whether the prior
+  endpoint is refitted at today's decision or retained from its earlier vintage. Their returns include carry and
+  ignore trading costs; neither smoothing accuracy nor low turnover establishes executable net savings.
+  Monthly spot/forward carry and dated-futures collateral/roll accounting are different implementations.
+  Evidence: source inspection plus public FX data intake only, no strategy or execution-return replication.
+
 - WASDE follow-up, retained 2026-10-30: Zhang, [SSRN 4841490](https://ssrn.com/abstract=4841490),
   [full-source review](results/wasde_volume_4841490_review.md). An announcement-day-inclusive return is not
   necessarily executable using a forecast revealed that day. Monthly USDA forecast revisions are not consensus
@@ -1134,6 +1144,25 @@ Source: Viljoen, Westerholm and Zheng, [SSRN 1913693](https://ssrn.com/abstract=
 - Next check when relevant native data arrive: one verified buy and sell with pretrade and five-minute same-contract
   midpoints, event/receipt and quote-age records, side and fee reconciliation; preserve missing horizons as unknown.
 - Status: execution diagnostic reference. No new alpha trial, plan placement, order-timing change or live logger.
+
+### E09/E11 follow-up — ANANTA rate/FX snapshots, signal direction and netted exposure
+
+Source: Nicolas Georges, April 2014, SSRN2419243;
+[full-source review](results/ananta_2419243_review.md), retained October 30, 2026.
+- Use: separate rate observation, availability, decision and executable FX fill clocks. London 18:00 and
+  New York 17:00 are distinct snapshots; London/US DST mismatch changes their spacing. Same-fix execution
+  cannot be assumed from a historical closing observation.
+- Evidence: source review and deterministic synthetic checks only. Literal pair attribution sells the
+  currency whose relative rate rises, opposite the prose. Under declared global-median/ten-leg normalization,
+  a synthetic score panel assigns 10/36 = 27.78% to one currency, exceeding the stated 20% bound.
+  Missing sign/normalization rules do not establish the behavior of unavailable author code.
+- Accounting: bp per dollar traded uses gross turnover, not account NAV. Netted xxxUSD exposures can retain
+  residual USD risk; constant gross requires explicit normalization, and zero mean differentials are undefined.
+  Full/half spreads, financing, benchmark eras, spot/futures basis and integer quantities remain unresolved.
+- Limits/next check: author 3.5/5 bp net claims are unreplicated OTC-FX backtests, not current CME savings.
+  Need matching two-clock swap/FX quotes and source clarification; reconcile one day before returns.
+  Public daily UK curves and swap transaction tapes do not supply the exact eleven-currency panel.
+- Status: execution/accounting reference and separate data-blocked personal lead; zero return trials or live changes.
 
 ### E57 — Autocorrelated order flow can coexist with unforecastable price changes
 
