@@ -29,3 +29,7 @@ Adapted from Jansen third-edition public chapter guides, inspected 2026-10-26:
 https://github.com/stefan-jansen/machine-learning-for-trading/tree/main/06_strategy_definition
 https://github.com/stefan-jansen/machine-learning-for-trading/tree/main/11_ml_pipeline
 Our explicit timestamp fields, manifest checklist and auction application are local implementation choices, not verbatim Jansen requirements.
+
+## Retained comparison lesson — user, 2026-10-30
+
+From [SSRN6656198 review](results/ssrn6656198_review.md): at an already-authorized comparison, record incumbent and eligible frozen alternative code/rule versions, each evidence cutoff, common-date coverage and live-versus-paper status. Execution health does not establish comparative superiority; missing observations are not no-trade days. Preserve enough specification and provenance to revisit a serious alternative under its existing checkpoint/retirement rule. This is a local process adaptation of an untested organizational theory, not demonstrated trading benefit. It does not revive rejected definitions, add monitoring/agents/schedules, or alter trading and research gates. The user explicitly asked to retain the lesson after the review.

@@ -111,7 +111,7 @@ header contains volume and book features but not daily near-month OI. No proxy
 return test or external acquisition was attempted: the earlier specification,
 forecast-evidence and economic gates fail independently of missing inputs.
 
-Retain the lesson in EXECUTION_REFERENCES, E50: unexpected activity measured
+Retain the lesson in EXECUTION_REFERENCES, E54: unexpected activity measured
 afterward is not automatically a forecast, and open interest is not book depth.
 No live strategy input, sizing rule, trading plan, rank or PowerLanguage changed.
 

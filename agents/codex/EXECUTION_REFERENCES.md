@@ -859,7 +859,17 @@ SSRN 3322717; [uploaded-paper review](results/fx_multistrategy_3322717.md).
   yield availability reconciled. Owned 6E alone does not supply the eight-currency panel.
 - Status: methodological/accounting reference; personal research lead parked, no return test or live change.
 
-### E48 — Dated volatility futures: maturity clocks, RMS units and signed hedges
+### E50 — Treasury volume/OI proxies, contract construction and liquidity measures
+
+Source/review: Wenchao Liao, 2008 CUNY dissertation, SSRN1028432; [review](results/ssrn1028432_review.md), archived uploaded PDF and source manifest.
+- Execution question/useful lesson: distinguish active-contract liquidity from aggregate activity, and volume from spread/depth/resilience. Volume is not identified speculative flow; total OI is neither identified hedging nor signed demand.
+- Evidence status: author-reported daily 1991–2006 Treasury VAR associations, not our replication. Positive volume/volatility association and volume persistence; OI effects depend on contract construction and risk estimator. Chapter2 depth/squeeze material reviews other sources, not new native fill evidence.
+- Timing/platform limits: daily data and old Treasury market structure; no demonstrated NQ/ES transfer, execution improvement, price-direction strategy or modern broker fills. Daily finalized OI requires a verified availability clock; adjacent-day interpolation would introduce future information in a live predictor.
+- Data/prerequisites: contract-specific daily settlement/high/low/volume/OI, delivery/roll metadata and release/revision clocks. Inspected owned ZN minute schema lacks OI and contract ID; weekly COT is not a daily substitute.
+- Smallest justified next check: when a separately specified risk/execution hypothesis exists, establish these fields and compare past-only forecasts against volatility/calendar/roll controls before costed account tests. No acquisition or return study is triggered by this source alone.
+- Status: retained methods/execution reference; zero new return trials or measured savings. Related E10 (liquidity/turnover), E12 (risk measurement), E25 (predictive horizon limits).
+
+### E51 — Dated volatility futures: maturity clocks, RMS units and signed hedges
 
 Source: Donninger, *VIX Futures Basis Trading: The Calvados-Strategy 2.0*, January 2014 Rev.1, SSRN2379985.
 [Review and completed component test](results/calvados_2379985_20261030.md),
@@ -884,7 +894,46 @@ measurement, E15 overnight tails, E19 session clocks, E30 paired-leg execution.
 - Status: execution/accounting reference retained; naked component rejected, preferred hedge unverified. No execution
   saving, plan placement, trading, broker or live-policy change is claimed.
 
-### E50 — Unexpected activity is not automatically a forecast or executable depth
+### E52 — Dynamic pair models are not self-financing contract ledgers
+
+Source: Yang, Huang and Chen, unreviewed 38-page preprint SSRN 5017127, indexed posting 2024-11-11;
+owned full PDF reviewed 2026-10-31. [Saved review](results/hierarchical_pairs_review_20261031.md).
+Related: E09 cash/multiplier reconciliation, E19 information clocks, E38 return/NAV accounting.
+- Use: changing an estimated hedge ratio changes the definition of a model spread. That movement is not
+  necessarily P&L on the positions previously held. With constant prices 100/100, changing beta 1→0.9 moves
+  `Y-beta*X` from 0→10 while held-book price P&L stays 0 before costs. Rebalancing requires actual signed quantities,
+  executable leg prices, multipliers, margin/FX cash, fees and daily open-position marks.
+- Evidence: source inspection and a constructed accounting identity, not a finding that the authors' unavailable
+  implementation committed this error. Their validation Sharpe 4.19/return 13.318% remain unverified source claims.
+  The paper acknowledges its continuous/weighted series cannot be directly traded; signals need identified
+  contracts and an explicit roll/conversion ledger. Its stated uniform 0.1% commission is not a native all-in cost.
+- Timing/coverage: a delayed entry crossing back through a threshold differs from the first outward breach.
+  Freeze initialization, half-life fit, filtering versus smoothing, decision time and first executable fill.
+  Interpolated prices cannot establish two executable legs; missing or suspended legs remain unknown.
+- Limits: dynamic beta and cointegration do not guarantee neutrality or convergence; shared contracts across
+  many pairs must be netted without removing actual gross turnover/leg costs. Printed SD/covariance errors and
+  unspecified source settings cannot be silently repaired and called exact replication.
+- Prerequisites/next check for an independently justified future project: one dated-contract trade/rebalance/roll
+  example reconciled from signal through fills and cash/NAV, with causal model fitting and both-leg cost records.
+  Do not restart failed CME index-pair variants from this method citation alone.
+- Status: methodology/execution reference; no new return test, measured saving, portfolio place or trading change.
+
+### E53 — Commodity skew ranks require clean returns, native sizing and delivery-safe rolls
+
+Source: Vojtko and Padyšák, [SSRN 3507947](https://ssrn.com/abstract=3507947), PDF pp. 4–9;
+[full review](results/ssrn_3507947_review_20261030.md), retained 2026-10-30.
+- Use: a monthly long-four/short-four commodity ranking needs the full universe and a specified return construction;
+  splice jumps can distort measured skew, while reduced-universe ranks define a different strategy.
+- Evidence: source/model inspection only. Author cost assumptions and 6.67% modeled annual return are not measured
+  native costs, executable micro performance or a replication. No new returns were run.
+- Limits: the text combines most-liquid-contract holding with a first-day-of-delivery-month roll. Actual notice,
+  delivery and broker deadlines require instrument-specific checks before execution. $1m/$5m capital figures are
+  modeling assumptions, not universal account minimums; smaller native contracts do not cover every exposure automatically.
+- Next check: identified full panel, formation/fill clocks, contract-specific rolls, native integer positions and
+  fees under a frozen replication plan. A bootstrap percentile is not a maximum-loss guarantee.
+- Status: retained personal-account research lead, NEEDS DATA/details; ineligible for current Apex intraday use as written.
+
+### E54 — Unexpected activity is not automatically a forecast or executable depth
 
 Source/review + date: Sakthivel & Kamaiah, [SSRN1589962](https://ssrn.com/abstract=1589962),
 user full-text upload; [review](results/nifty_activity_volatility_ssrn1589962.md), 2026-10-30.

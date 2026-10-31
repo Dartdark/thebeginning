@@ -1,0 +1,69 @@
+{
+  "title": "Research on Hierarchical Futures Pair Trading Strategy Based on Machine Learning and Kalman Filtering",
+  "authors": [
+    "Shuo Yang",
+    "Ke Huang",
+    "Yao-wen Chen"
+  ],
+  "ssrn_id": "5017127",
+  "source_status": "38-page user-uploaded unreviewed preprint; indexed SSRN posting 2024-11-11",
+  "evidence": "Source claims only; no independent return replication",
+  "data_start": "2016-01-04",
+  "data_end": "2023-11-20",
+  "experimental_end": "2022-05-20",
+  "experimental_start": "Not unambiguously specified; narrative calls this a five-year backtest",
+  "validation_boundary": "2022-05-20",
+  "validation_end": "2023-11-20",
+  "selected_pairs": 25,
+  "selected_distinct_futures_claimed": 30,
+  "clusters": 3,
+  "silhouette": 0.54,
+  "entry_z": 1.25,
+  "exit_parameter_z": -0.08,
+  "cointegration_significance": 0.05,
+  "commission_claimed_fraction": 0.001,
+  "commission_basis_and_per_side_application": "Not reproducibly specified",
+  "experimental": {
+    "annual_return_pct": 12.964,
+    "cumulative_return_pct": 67.068,
+    "sharpe": 4.35,
+    "max_drawdown_pct": -2.396,
+    "volatility_pct": 2.812,
+    "alpha": 0.13,
+    "beta": 0.01,
+    "pdf_page": 23
+  },
+  "validation": {
+    "annual_return_pct": 13.318,
+    "cumulative_return_pct": 19.556,
+    "sharpe": 4.19,
+    "max_drawdown_pct": -1.359,
+    "volatility_pct": 2.998,
+    "alpha": 0.14,
+    "beta": 0.02,
+    "pdf_pages": [
+      25,
+      26
+    ]
+  },
+  "classical_validation": {
+    "annual_return_pct": 6.326,
+    "cumulative_return_pct": 9.237,
+    "sharpe": 1.4,
+    "max_drawdown_pct": -3.234,
+    "volatility_pct": 4.466,
+    "alpha": 0.07,
+    "beta": 0.03,
+    "pdf_page": 26
+  },
+  "source_issues": [
+    "Eq11 square root of mean unsquared deviations is not standard deviation (PDF19 visually checked).",
+    "PDF20 defines Vm as delta/(delta-1)R, R identity; negative for 0<delta<1, delta value not supplied.",
+    "Unresolved clustering/selection fit intervals, half-life estimator and Kalman initialization/noise parameters.",
+    "Daily close signal -> tradable contract fill clocks, integer sizing, rolls/margin/weights and two-leg cost ledger not supplied.",
+    "Paper acknowledges nontradable position-weighted continuous series (PDF7); selected symbols use 8888.",
+    "Data cleaning allows interpolation/forward fill; amounts and causes not reported.",
+    "Conclusion validation return13.314% differs from main text/Table5 13.318%.",
+    "PDF23 drawdown prose reverses dates; Table4 gives 2021-10-19 to 2021-12-27."
+  ]
+}
