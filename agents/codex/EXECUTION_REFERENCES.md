@@ -725,6 +725,24 @@ Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, sha
 Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
 Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E40-E42 during this handoff merge; existing Codex E29-E38 identifiers are retained.
 
+### E39 — Obizhaeva–Wang: replenishing depth and large-order execution
+
+Source: [SSRN 666541](https://ssrn.com/abstract=666541), uploaded June 8, 2005 draft,
+[review and data gate](results/ssrn666541.md), [model arithmetic](../../analysis/outputs/codex_ssrn666541/model_arithmetic.json).
+- Use: distinguish standing depth from replenishment. Under the paper's risk-neutral
+  constant-depth/exponential-recovery model, an optimal fixed-parent-order schedule
+  combines initial/final blocks with continuous middle trading; risk aversion changes it.
+- Evidence: source's analytical result. Our arithmetic reproduces Table 2's rho T=2
+  savings of 4.32% and 11.92% under two permanent-impact assumptions. These are modeled
+  impact-cost reductions, excluding spread/commissions, not returns or measured CME savings.
+- Limits: given parent direction/quantity, simplified exogenous book dynamics, no new
+  empirical alpha test or NQ calibration. Owned one-minute OF summaries do not identify
+  event-level replenishment, parent orders or queue outcomes. Small integer micro orders
+  can lose signal value by waiting; protective stops are not discretionary parent orders.
+- Next check: establish material self-impact using native fills and synchronized quotes/depth
+  before testing any slicing schedule; then include latency, noncompletion and opportunity cost.
+- Status: execution reference only. Zero strategy-return trials; no plan or live changes.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
