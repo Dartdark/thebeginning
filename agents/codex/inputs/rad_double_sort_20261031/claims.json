@@ -1,0 +1,139 @@
+{
+  "evidence_status": "Author claims transcribed from the uploaded thesis; not our return replication",
+  "title": "Double-sort trading strategy on commodity futures: performance evaluation and stop-loss implementation",
+  "author": "Hossein Rad",
+  "source_version": "EDHEC MSc Financial Markets master thesis, December 2012, 56 PDF pages",
+  "ssrn_id": "2614241",
+  "uploaded_file": "ssrn-2614241.pdf",
+  "data_start": "1979-01-01",
+  "first_reported_portfolio_day": "1979-02-01",
+  "data_end": "2011-10-31",
+  "universe_total": 37,
+  "universe_initial": 22,
+  "universe_peak": 35,
+  "ranking_months": 1,
+  "holding_months": 1,
+  "first_sort_each_tail": 8,
+  "positions_each_side": 4,
+  "gross_exposure_per_collateral": 2,
+  "costs_included": false,
+  "raw_returns_or_code_supplied": false,
+  "baseline": {
+    "annual_excess_return_pct": 20.22,
+    "annual_vol_pct": 24.91,
+    "downside_vol_pct": 17.13,
+    "reward_risk": 0.81,
+    "sortino": 1.18,
+    "var_30day_99_pct": 20.27,
+    "t": 4.58,
+    "daily_observations": 8543,
+    "sum_reported_returns_pct": 663.66,
+    "reported_dollar_one_endpoint": 7.63,
+    "long_annual_return_pct": 12.28,
+    "short_selected_underlying_annual_return_pct": -7.94,
+    "positive_months_pct": 51.27,
+    "pdf_pages": [
+      22,
+      26,
+      27,
+      28
+    ]
+  },
+  "subperiods": {
+    "before_feb_2007_annual_excess_pct": 17.12,
+    "feb_2007_through_oct_2011_annual_excess_pct": 34.5,
+    "pdf_pages": [
+      29,
+      30,
+      31,
+      50
+    ]
+  },
+  "overlays": [
+    {
+      "name": "individual cumulative 13%",
+      "annual_excess_return_pct": 20.97,
+      "annual_vol_pct": 25.07,
+      "var_30day_99_pct": 20.88,
+      "reward_risk": 0.84,
+      "sortino": 1.22,
+      "reported_paired_daily_return_p": 0.0362,
+      "pdf_pages": [
+        39,
+        40
+      ]
+    },
+    {
+      "name": "individual cumulative 5%",
+      "annual_excess_return_pct": 15.65,
+      "annual_vol_pct": 27.56,
+      "var_30day_99_pct": 22.47,
+      "reward_risk": 0.57,
+      "sortino": 0.81,
+      "reported_paired_daily_return_p": 0.6475,
+      "pdf_pages": [
+        39,
+        40
+      ]
+    },
+    {
+      "name": "individual exponential lambda 0.6 / 5%",
+      "annual_excess_return_pct": 18.6,
+      "annual_vol_pct": 24.92,
+      "downside_vol_pct": 17.26,
+      "var_30day_99_pct": 21.42,
+      "reward_risk": 0.75,
+      "sortino": 1.08,
+      "reported_paired_daily_return_p": 0.1472,
+      "pdf_pages": [
+        42,
+        43
+      ]
+    },
+    {
+      "name": "individual consecutive loss threshold 5 days",
+      "annual_excess_return_pct": 20.99,
+      "annual_vol_pct": 25.72,
+      "downside_vol_pct": 17.7,
+      "var_30day_99_pct": 18.88,
+      "reward_risk": 0.82,
+      "sortino": 1.19,
+      "reported_paired_daily_return_p": 0.0362,
+      "pdf_pages": [
+        44,
+        45
+      ]
+    },
+    {
+      "name": "whole portfolio cumulative 5%",
+      "annual_excess_return_pct": 19.93,
+      "annual_vol_pct": 22.47,
+      "downside_vol_pct": 15.2,
+      "var_30day_99_pct": 13.76,
+      "reward_risk": 0.89,
+      "sortino": 1.31,
+      "reported_paired_daily_return_p": 0.079,
+      "positive_months_pct": 43.17,
+      "pdf_pages": [
+        46,
+        47,
+        48
+      ]
+    }
+  ],
+  "carry_example": {
+    "front": 40.95,
+    "deferred": 36.65,
+    "reported_log_ratio_pct": 13.8,
+    "pdf_page": 21
+  },
+  "ambiguity_notes": [
+    "Equation 4 sums purported daily log returns; Figure 3 presents an additive dollar-one path as investment evolution.",
+    "No exact self-financing long/short weight, collateral and futures variation-margin ledger supplied.",
+    "Consecutive-loss method says strictly more than the threshold, while summary language says reaches it.",
+    "Whole-portfolio cumulative trigger is described without an unambiguous cumulative formula.",
+    "Missing selected returns cause equal redistribution rather than an executable missing-data policy.",
+    "Page 48 says whole-portfolio return is higher despite Table 7 reporting 19.93% versus 20.22%.",
+    "Conclusion says October 2010; data/method/results use October 2011."
+  ]
+}

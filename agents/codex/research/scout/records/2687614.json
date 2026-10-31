@@ -1,0 +1,31 @@
+{
+  "id": "ssrn:2687614",
+  "ssrn_id": "2687614",
+  "title": "Stock Returns over the FOMC Cycle",
+  "url": "https://ssrn.com/abstract=2687614",
+  "verdict": "design_reject",
+  "full_text_read": true,
+  "summary": "2018-22RTH adaptation fails:484ESlong references,-95.53gross,-125.53net,t-1.57,nullp.973. No2023+/accounts. Continued discovery; no rescue.",
+  "report_path": "agents/codex/results/scout_2687614_20261030.md",
+  "about": "Biweekly equity returns following scheduled FOMC meetings.",
+  "findings": "Authors report10.9bp/day incremental weeks2/4/6 in1994-2016,17.6bp in2014-16; strongest after declines. Not independently reproduced; working paper2018-02-12 differs from published2019version.",
+  "mechanism": "Proposed Fed information processing and unexpectedly accommodating policy reduce downside-risk premia; not guaranteed forced orders.",
+  "build_on": "Owned ES RTH calendar-only adaptation, no week0/private news/future schedule/price-decline feature. Test fixed gross/cost gate and matched-calendar control, then advance only earned stages.",
+  "evidence_level": "source_review",
+  "new_economic_trials": 3,
+  "updated_at": "2026-10-30T17:41:54.490593+00:00",
+  "hypothesis_id": "intermeeting-fomc-cycle-equity-repricing",
+  "evidence_path": "agents/codex/evidence/scout_fomc_cycle.md",
+  "plan_path": "agents/codex/plans/scout_fomc_cycle.md",
+  "return_eligibility": "DONT_TEST",
+  "source_artifact": {
+    "path": "agents/codex/inputs/scout_fomc_cycle_20261030/paper_20180212.pdf",
+    "sha256": "07c3577a5ebea277c3f12a25622e9bf1122bde342c5a2f104f869205db67df1c",
+    "permission": "permitted_access",
+    "provenance": "Public university teaching repository finm-32800, pinned4339e823a86d6206ca71c8e89bf8ec117576fd0d download8a74c5b64a5ff4bcd755107d09f0d3e6; author working manuscript, no published-version parity claim",
+    "version": "Working manuscript2018-02-12; firstdraft2014-04-23",
+    "access_method": "Normal public raw.githubusercontent download200;496036PDFbytes; local pdftotext reading"
+  },
+  "result_path": "analysis/outputs/codex_scout_fomc_cycle/result.json",
+  "independent_verification": "pending"
+}

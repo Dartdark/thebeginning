@@ -1,0 +1,2445 @@
+{
+  "passed": true,
+  "input_header": [
+    "date",
+    "VaultBreak",
+    "OvernightBiasML",
+    "MondayLong",
+    "ExpirationOpenShort",
+    "LateDayFlow",
+    "NFPFade",
+    "BridgeMondayLong",
+    "CLSundayFade_perMCL",
+    "ESMOCFollow_perMES",
+    "RelativeStrength",
+    "FC2B",
+    "TwinContinuation",
+    "OvernightTick",
+    "DualThrust",
+    "Kusho",
+    "S47",
+    "S30",
+    "SwingTarget",
+    "PaperTrend"
+  ],
+  "exact_current19_roster_order": true,
+  "all_csv_date_records": 2262,
+  "design_rows": 1289,
+  "known_design_rows": 1289,
+  "unknown_design_rows": 0,
+  "first_design_date": "2018-01-02",
+  "last_design_date": "2022-12-30",
+  "design_years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "issues": [],
+  "excluded_date_metadata_rows_by_year": {
+    "2023": 257,
+    "2024": 259,
+    "2025": 257,
+    "2026": 200
+  },
+  "excluded_financial_cells_numerically_converted": 0,
+  "stored_date_gaps": [
+    {
+      "previous_stored_date": "2018-01-05",
+      "next_stored_date": "2018-01-08",
+      "unrepresented_civil_dates": [
+        "2018-01-06",
+        "2018-01-07"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-01-12",
+      "next_stored_date": "2018-01-15",
+      "unrepresented_civil_dates": [
+        "2018-01-13",
+        "2018-01-14"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-01-19",
+      "next_stored_date": "2018-01-22",
+      "unrepresented_civil_dates": [
+        "2018-01-20",
+        "2018-01-21"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-01-26",
+      "next_stored_date": "2018-01-29",
+      "unrepresented_civil_dates": [
+        "2018-01-27",
+        "2018-01-28"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-02-02",
+      "next_stored_date": "2018-02-05",
+      "unrepresented_civil_dates": [
+        "2018-02-03",
+        "2018-02-04"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-02-09",
+      "next_stored_date": "2018-02-12",
+      "unrepresented_civil_dates": [
+        "2018-02-10",
+        "2018-02-11"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-02-16",
+      "next_stored_date": "2018-02-19",
+      "unrepresented_civil_dates": [
+        "2018-02-17",
+        "2018-02-18"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-02-23",
+      "next_stored_date": "2018-02-26",
+      "unrepresented_civil_dates": [
+        "2018-02-24",
+        "2018-02-25"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-03-02",
+      "next_stored_date": "2018-03-05",
+      "unrepresented_civil_dates": [
+        "2018-03-03",
+        "2018-03-04"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-03-09",
+      "next_stored_date": "2018-03-12",
+      "unrepresented_civil_dates": [
+        "2018-03-10",
+        "2018-03-11"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-03-16",
+      "next_stored_date": "2018-03-19",
+      "unrepresented_civil_dates": [
+        "2018-03-17",
+        "2018-03-18"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-03-23",
+      "next_stored_date": "2018-03-26",
+      "unrepresented_civil_dates": [
+        "2018-03-24",
+        "2018-03-25"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-03-29",
+      "next_stored_date": "2018-04-02",
+      "unrepresented_civil_dates": [
+        "2018-03-30",
+        "2018-03-31",
+        "2018-04-01"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-04-06",
+      "next_stored_date": "2018-04-09",
+      "unrepresented_civil_dates": [
+        "2018-04-07",
+        "2018-04-08"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-04-13",
+      "next_stored_date": "2018-04-16",
+      "unrepresented_civil_dates": [
+        "2018-04-14",
+        "2018-04-15"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-04-20",
+      "next_stored_date": "2018-04-23",
+      "unrepresented_civil_dates": [
+        "2018-04-21",
+        "2018-04-22"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-04-27",
+      "next_stored_date": "2018-04-30",
+      "unrepresented_civil_dates": [
+        "2018-04-28",
+        "2018-04-29"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-05-04",
+      "next_stored_date": "2018-05-07",
+      "unrepresented_civil_dates": [
+        "2018-05-05",
+        "2018-05-06"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-05-11",
+      "next_stored_date": "2018-05-14",
+      "unrepresented_civil_dates": [
+        "2018-05-12",
+        "2018-05-13"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-05-18",
+      "next_stored_date": "2018-05-21",
+      "unrepresented_civil_dates": [
+        "2018-05-19",
+        "2018-05-20"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-05-25",
+      "next_stored_date": "2018-05-28",
+      "unrepresented_civil_dates": [
+        "2018-05-26",
+        "2018-05-27"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-06-01",
+      "next_stored_date": "2018-06-04",
+      "unrepresented_civil_dates": [
+        "2018-06-02",
+        "2018-06-03"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-06-08",
+      "next_stored_date": "2018-06-11",
+      "unrepresented_civil_dates": [
+        "2018-06-09",
+        "2018-06-10"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-06-15",
+      "next_stored_date": "2018-06-18",
+      "unrepresented_civil_dates": [
+        "2018-06-16",
+        "2018-06-17"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-06-22",
+      "next_stored_date": "2018-06-25",
+      "unrepresented_civil_dates": [
+        "2018-06-23",
+        "2018-06-24"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-06-29",
+      "next_stored_date": "2018-07-02",
+      "unrepresented_civil_dates": [
+        "2018-06-30",
+        "2018-07-01"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-07-06",
+      "next_stored_date": "2018-07-09",
+      "unrepresented_civil_dates": [
+        "2018-07-07",
+        "2018-07-08"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-07-13",
+      "next_stored_date": "2018-07-16",
+      "unrepresented_civil_dates": [
+        "2018-07-14",
+        "2018-07-15"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-07-20",
+      "next_stored_date": "2018-07-23",
+      "unrepresented_civil_dates": [
+        "2018-07-21",
+        "2018-07-22"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-07-27",
+      "next_stored_date": "2018-07-30",
+      "unrepresented_civil_dates": [
+        "2018-07-28",
+        "2018-07-29"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-08-03",
+      "next_stored_date": "2018-08-06",
+      "unrepresented_civil_dates": [
+        "2018-08-04",
+        "2018-08-05"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-08-10",
+      "next_stored_date": "2018-08-13",
+      "unrepresented_civil_dates": [
+        "2018-08-11",
+        "2018-08-12"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-08-17",
+      "next_stored_date": "2018-08-20",
+      "unrepresented_civil_dates": [
+        "2018-08-18",
+        "2018-08-19"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-08-24",
+      "next_stored_date": "2018-08-27",
+      "unrepresented_civil_dates": [
+        "2018-08-25",
+        "2018-08-26"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-08-31",
+      "next_stored_date": "2018-09-03",
+      "unrepresented_civil_dates": [
+        "2018-09-01",
+        "2018-09-02"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-09-07",
+      "next_stored_date": "2018-09-10",
+      "unrepresented_civil_dates": [
+        "2018-09-08",
+        "2018-09-09"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-09-14",
+      "next_stored_date": "2018-09-17",
+      "unrepresented_civil_dates": [
+        "2018-09-15",
+        "2018-09-16"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-09-21",
+      "next_stored_date": "2018-09-24",
+      "unrepresented_civil_dates": [
+        "2018-09-22",
+        "2018-09-23"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-09-28",
+      "next_stored_date": "2018-10-01",
+      "unrepresented_civil_dates": [
+        "2018-09-29",
+        "2018-09-30"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-10-05",
+      "next_stored_date": "2018-10-08",
+      "unrepresented_civil_dates": [
+        "2018-10-06",
+        "2018-10-07"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-10-12",
+      "next_stored_date": "2018-10-15",
+      "unrepresented_civil_dates": [
+        "2018-10-13",
+        "2018-10-14"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-10-19",
+      "next_stored_date": "2018-10-22",
+      "unrepresented_civil_dates": [
+        "2018-10-20",
+        "2018-10-21"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-10-26",
+      "next_stored_date": "2018-10-29",
+      "unrepresented_civil_dates": [
+        "2018-10-27",
+        "2018-10-28"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-11-02",
+      "next_stored_date": "2018-11-05",
+      "unrepresented_civil_dates": [
+        "2018-11-03",
+        "2018-11-04"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-11-09",
+      "next_stored_date": "2018-11-12",
+      "unrepresented_civil_dates": [
+        "2018-11-10",
+        "2018-11-11"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-11-16",
+      "next_stored_date": "2018-11-19",
+      "unrepresented_civil_dates": [
+        "2018-11-17",
+        "2018-11-18"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-11-23",
+      "next_stored_date": "2018-11-26",
+      "unrepresented_civil_dates": [
+        "2018-11-24",
+        "2018-11-25"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-11-30",
+      "next_stored_date": "2018-12-03",
+      "unrepresented_civil_dates": [
+        "2018-12-01",
+        "2018-12-02"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-12-04",
+      "next_stored_date": "2018-12-06",
+      "unrepresented_civil_dates": [
+        "2018-12-05"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-12-07",
+      "next_stored_date": "2018-12-10",
+      "unrepresented_civil_dates": [
+        "2018-12-08",
+        "2018-12-09"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-12-14",
+      "next_stored_date": "2018-12-17",
+      "unrepresented_civil_dates": [
+        "2018-12-15",
+        "2018-12-16"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-12-21",
+      "next_stored_date": "2018-12-24",
+      "unrepresented_civil_dates": [
+        "2018-12-22",
+        "2018-12-23"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-12-24",
+      "next_stored_date": "2018-12-26",
+      "unrepresented_civil_dates": [
+        "2018-12-25"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-12-28",
+      "next_stored_date": "2018-12-31",
+      "unrepresented_civil_dates": [
+        "2018-12-29",
+        "2018-12-30"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2018-12-31",
+      "next_stored_date": "2019-01-02",
+      "unrepresented_civil_dates": [
+        "2019-01-01"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-01-04",
+      "next_stored_date": "2019-01-07",
+      "unrepresented_civil_dates": [
+        "2019-01-05",
+        "2019-01-06"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-01-11",
+      "next_stored_date": "2019-01-14",
+      "unrepresented_civil_dates": [
+        "2019-01-12",
+        "2019-01-13"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-01-18",
+      "next_stored_date": "2019-01-21",
+      "unrepresented_civil_dates": [
+        "2019-01-19",
+        "2019-01-20"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-01-25",
+      "next_stored_date": "2019-01-28",
+      "unrepresented_civil_dates": [
+        "2019-01-26",
+        "2019-01-27"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-02-01",
+      "next_stored_date": "2019-02-04",
+      "unrepresented_civil_dates": [
+        "2019-02-02",
+        "2019-02-03"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-02-08",
+      "next_stored_date": "2019-02-11",
+      "unrepresented_civil_dates": [
+        "2019-02-09",
+        "2019-02-10"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-02-15",
+      "next_stored_date": "2019-02-18",
+      "unrepresented_civil_dates": [
+        "2019-02-16",
+        "2019-02-17"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-02-22",
+      "next_stored_date": "2019-02-25",
+      "unrepresented_civil_dates": [
+        "2019-02-23",
+        "2019-02-24"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-03-01",
+      "next_stored_date": "2019-03-04",
+      "unrepresented_civil_dates": [
+        "2019-03-02",
+        "2019-03-03"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-03-08",
+      "next_stored_date": "2019-03-11",
+      "unrepresented_civil_dates": [
+        "2019-03-09",
+        "2019-03-10"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-03-15",
+      "next_stored_date": "2019-03-18",
+      "unrepresented_civil_dates": [
+        "2019-03-16",
+        "2019-03-17"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-03-22",
+      "next_stored_date": "2019-03-25",
+      "unrepresented_civil_dates": [
+        "2019-03-23",
+        "2019-03-24"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-03-29",
+      "next_stored_date": "2019-04-01",
+      "unrepresented_civil_dates": [
+        "2019-03-30",
+        "2019-03-31"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-04-05",
+      "next_stored_date": "2019-04-08",
+      "unrepresented_civil_dates": [
+        "2019-04-06",
+        "2019-04-07"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-04-12",
+      "next_stored_date": "2019-04-15",
+      "unrepresented_civil_dates": [
+        "2019-04-13",
+        "2019-04-14"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-04-18",
+      "next_stored_date": "2019-04-22",
+      "unrepresented_civil_dates": [
+        "2019-04-19",
+        "2019-04-20",
+        "2019-04-21"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-04-26",
+      "next_stored_date": "2019-04-29",
+      "unrepresented_civil_dates": [
+        "2019-04-27",
+        "2019-04-28"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-05-03",
+      "next_stored_date": "2019-05-06",
+      "unrepresented_civil_dates": [
+        "2019-05-04",
+        "2019-05-05"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-05-10",
+      "next_stored_date": "2019-05-13",
+      "unrepresented_civil_dates": [
+        "2019-05-11",
+        "2019-05-12"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-05-17",
+      "next_stored_date": "2019-05-20",
+      "unrepresented_civil_dates": [
+        "2019-05-18",
+        "2019-05-19"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-05-24",
+      "next_stored_date": "2019-05-27",
+      "unrepresented_civil_dates": [
+        "2019-05-25",
+        "2019-05-26"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-05-31",
+      "next_stored_date": "2019-06-03",
+      "unrepresented_civil_dates": [
+        "2019-06-01",
+        "2019-06-02"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-06-07",
+      "next_stored_date": "2019-06-10",
+      "unrepresented_civil_dates": [
+        "2019-06-08",
+        "2019-06-09"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-06-14",
+      "next_stored_date": "2019-06-17",
+      "unrepresented_civil_dates": [
+        "2019-06-15",
+        "2019-06-16"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-06-21",
+      "next_stored_date": "2019-06-24",
+      "unrepresented_civil_dates": [
+        "2019-06-22",
+        "2019-06-23"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-06-28",
+      "next_stored_date": "2019-07-01",
+      "unrepresented_civil_dates": [
+        "2019-06-29",
+        "2019-06-30"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-07-05",
+      "next_stored_date": "2019-07-08",
+      "unrepresented_civil_dates": [
+        "2019-07-06",
+        "2019-07-07"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-07-12",
+      "next_stored_date": "2019-07-15",
+      "unrepresented_civil_dates": [
+        "2019-07-13",
+        "2019-07-14"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-07-19",
+      "next_stored_date": "2019-07-22",
+      "unrepresented_civil_dates": [
+        "2019-07-20",
+        "2019-07-21"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-07-26",
+      "next_stored_date": "2019-07-29",
+      "unrepresented_civil_dates": [
+        "2019-07-27",
+        "2019-07-28"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-08-02",
+      "next_stored_date": "2019-08-05",
+      "unrepresented_civil_dates": [
+        "2019-08-03",
+        "2019-08-04"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-08-09",
+      "next_stored_date": "2019-08-12",
+      "unrepresented_civil_dates": [
+        "2019-08-10",
+        "2019-08-11"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-08-16",
+      "next_stored_date": "2019-08-19",
+      "unrepresented_civil_dates": [
+        "2019-08-17",
+        "2019-08-18"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-08-23",
+      "next_stored_date": "2019-08-26",
+      "unrepresented_civil_dates": [
+        "2019-08-24",
+        "2019-08-25"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-08-30",
+      "next_stored_date": "2019-09-02",
+      "unrepresented_civil_dates": [
+        "2019-08-31",
+        "2019-09-01"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-09-06",
+      "next_stored_date": "2019-09-09",
+      "unrepresented_civil_dates": [
+        "2019-09-07",
+        "2019-09-08"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-09-13",
+      "next_stored_date": "2019-09-16",
+      "unrepresented_civil_dates": [
+        "2019-09-14",
+        "2019-09-15"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-09-20",
+      "next_stored_date": "2019-09-23",
+      "unrepresented_civil_dates": [
+        "2019-09-21",
+        "2019-09-22"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-09-27",
+      "next_stored_date": "2019-09-30",
+      "unrepresented_civil_dates": [
+        "2019-09-28",
+        "2019-09-29"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-10-04",
+      "next_stored_date": "2019-10-07",
+      "unrepresented_civil_dates": [
+        "2019-10-05",
+        "2019-10-06"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-10-11",
+      "next_stored_date": "2019-10-14",
+      "unrepresented_civil_dates": [
+        "2019-10-12",
+        "2019-10-13"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-10-18",
+      "next_stored_date": "2019-10-21",
+      "unrepresented_civil_dates": [
+        "2019-10-19",
+        "2019-10-20"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-10-25",
+      "next_stored_date": "2019-10-28",
+      "unrepresented_civil_dates": [
+        "2019-10-26",
+        "2019-10-27"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-11-01",
+      "next_stored_date": "2019-11-04",
+      "unrepresented_civil_dates": [
+        "2019-11-02",
+        "2019-11-03"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-11-08",
+      "next_stored_date": "2019-11-11",
+      "unrepresented_civil_dates": [
+        "2019-11-09",
+        "2019-11-10"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-11-15",
+      "next_stored_date": "2019-11-18",
+      "unrepresented_civil_dates": [
+        "2019-11-16",
+        "2019-11-17"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-11-22",
+      "next_stored_date": "2019-11-25",
+      "unrepresented_civil_dates": [
+        "2019-11-23",
+        "2019-11-24"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-11-29",
+      "next_stored_date": "2019-12-02",
+      "unrepresented_civil_dates": [
+        "2019-11-30",
+        "2019-12-01"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-12-06",
+      "next_stored_date": "2019-12-09",
+      "unrepresented_civil_dates": [
+        "2019-12-07",
+        "2019-12-08"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-12-13",
+      "next_stored_date": "2019-12-16",
+      "unrepresented_civil_dates": [
+        "2019-12-14",
+        "2019-12-15"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-12-20",
+      "next_stored_date": "2019-12-23",
+      "unrepresented_civil_dates": [
+        "2019-12-21",
+        "2019-12-22"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-12-24",
+      "next_stored_date": "2019-12-26",
+      "unrepresented_civil_dates": [
+        "2019-12-25"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-12-27",
+      "next_stored_date": "2019-12-30",
+      "unrepresented_civil_dates": [
+        "2019-12-28",
+        "2019-12-29"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2019-12-31",
+      "next_stored_date": "2020-01-02",
+      "unrepresented_civil_dates": [
+        "2020-01-01"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-01-03",
+      "next_stored_date": "2020-01-06",
+      "unrepresented_civil_dates": [
+        "2020-01-04",
+        "2020-01-05"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-01-10",
+      "next_stored_date": "2020-01-13",
+      "unrepresented_civil_dates": [
+        "2020-01-11",
+        "2020-01-12"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-01-17",
+      "next_stored_date": "2020-01-20",
+      "unrepresented_civil_dates": [
+        "2020-01-18",
+        "2020-01-19"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-01-24",
+      "next_stored_date": "2020-01-27",
+      "unrepresented_civil_dates": [
+        "2020-01-25",
+        "2020-01-26"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-01-31",
+      "next_stored_date": "2020-02-03",
+      "unrepresented_civil_dates": [
+        "2020-02-01",
+        "2020-02-02"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-02-07",
+      "next_stored_date": "2020-02-10",
+      "unrepresented_civil_dates": [
+        "2020-02-08",
+        "2020-02-09"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-02-14",
+      "next_stored_date": "2020-02-17",
+      "unrepresented_civil_dates": [
+        "2020-02-15",
+        "2020-02-16"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-02-21",
+      "next_stored_date": "2020-02-24",
+      "unrepresented_civil_dates": [
+        "2020-02-22",
+        "2020-02-23"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-02-28",
+      "next_stored_date": "2020-03-02",
+      "unrepresented_civil_dates": [
+        "2020-02-29",
+        "2020-03-01"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-03-06",
+      "next_stored_date": "2020-03-09",
+      "unrepresented_civil_dates": [
+        "2020-03-07",
+        "2020-03-08"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-03-13",
+      "next_stored_date": "2020-03-16",
+      "unrepresented_civil_dates": [
+        "2020-03-14",
+        "2020-03-15"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-03-20",
+      "next_stored_date": "2020-03-23",
+      "unrepresented_civil_dates": [
+        "2020-03-21",
+        "2020-03-22"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-03-27",
+      "next_stored_date": "2020-03-30",
+      "unrepresented_civil_dates": [
+        "2020-03-28",
+        "2020-03-29"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-04-03",
+      "next_stored_date": "2020-04-06",
+      "unrepresented_civil_dates": [
+        "2020-04-04",
+        "2020-04-05"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-04-09",
+      "next_stored_date": "2020-04-13",
+      "unrepresented_civil_dates": [
+        "2020-04-10",
+        "2020-04-11",
+        "2020-04-12"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-04-17",
+      "next_stored_date": "2020-04-20",
+      "unrepresented_civil_dates": [
+        "2020-04-18",
+        "2020-04-19"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-04-24",
+      "next_stored_date": "2020-04-27",
+      "unrepresented_civil_dates": [
+        "2020-04-25",
+        "2020-04-26"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-05-01",
+      "next_stored_date": "2020-05-04",
+      "unrepresented_civil_dates": [
+        "2020-05-02",
+        "2020-05-03"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-05-08",
+      "next_stored_date": "2020-05-11",
+      "unrepresented_civil_dates": [
+        "2020-05-09",
+        "2020-05-10"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-05-15",
+      "next_stored_date": "2020-05-18",
+      "unrepresented_civil_dates": [
+        "2020-05-16",
+        "2020-05-17"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-05-22",
+      "next_stored_date": "2020-05-25",
+      "unrepresented_civil_dates": [
+        "2020-05-23",
+        "2020-05-24"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-05-29",
+      "next_stored_date": "2020-06-01",
+      "unrepresented_civil_dates": [
+        "2020-05-30",
+        "2020-05-31"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-06-05",
+      "next_stored_date": "2020-06-08",
+      "unrepresented_civil_dates": [
+        "2020-06-06",
+        "2020-06-07"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-06-12",
+      "next_stored_date": "2020-06-15",
+      "unrepresented_civil_dates": [
+        "2020-06-13",
+        "2020-06-14"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-06-19",
+      "next_stored_date": "2020-06-22",
+      "unrepresented_civil_dates": [
+        "2020-06-20",
+        "2020-06-21"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-06-26",
+      "next_stored_date": "2020-06-29",
+      "unrepresented_civil_dates": [
+        "2020-06-27",
+        "2020-06-28"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-07-03",
+      "next_stored_date": "2020-07-06",
+      "unrepresented_civil_dates": [
+        "2020-07-04",
+        "2020-07-05"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-07-10",
+      "next_stored_date": "2020-07-13",
+      "unrepresented_civil_dates": [
+        "2020-07-11",
+        "2020-07-12"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-07-17",
+      "next_stored_date": "2020-07-20",
+      "unrepresented_civil_dates": [
+        "2020-07-18",
+        "2020-07-19"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-07-24",
+      "next_stored_date": "2020-07-27",
+      "unrepresented_civil_dates": [
+        "2020-07-25",
+        "2020-07-26"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-07-31",
+      "next_stored_date": "2020-08-03",
+      "unrepresented_civil_dates": [
+        "2020-08-01",
+        "2020-08-02"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-08-07",
+      "next_stored_date": "2020-08-10",
+      "unrepresented_civil_dates": [
+        "2020-08-08",
+        "2020-08-09"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-08-14",
+      "next_stored_date": "2020-08-17",
+      "unrepresented_civil_dates": [
+        "2020-08-15",
+        "2020-08-16"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-08-21",
+      "next_stored_date": "2020-08-24",
+      "unrepresented_civil_dates": [
+        "2020-08-22",
+        "2020-08-23"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-08-28",
+      "next_stored_date": "2020-08-31",
+      "unrepresented_civil_dates": [
+        "2020-08-29",
+        "2020-08-30"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-09-04",
+      "next_stored_date": "2020-09-07",
+      "unrepresented_civil_dates": [
+        "2020-09-05",
+        "2020-09-06"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-09-11",
+      "next_stored_date": "2020-09-14",
+      "unrepresented_civil_dates": [
+        "2020-09-12",
+        "2020-09-13"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-09-18",
+      "next_stored_date": "2020-09-21",
+      "unrepresented_civil_dates": [
+        "2020-09-19",
+        "2020-09-20"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-09-25",
+      "next_stored_date": "2020-09-28",
+      "unrepresented_civil_dates": [
+        "2020-09-26",
+        "2020-09-27"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-10-02",
+      "next_stored_date": "2020-10-05",
+      "unrepresented_civil_dates": [
+        "2020-10-03",
+        "2020-10-04"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-10-09",
+      "next_stored_date": "2020-10-12",
+      "unrepresented_civil_dates": [
+        "2020-10-10",
+        "2020-10-11"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-10-16",
+      "next_stored_date": "2020-10-19",
+      "unrepresented_civil_dates": [
+        "2020-10-17",
+        "2020-10-18"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-10-23",
+      "next_stored_date": "2020-10-26",
+      "unrepresented_civil_dates": [
+        "2020-10-24",
+        "2020-10-25"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-10-30",
+      "next_stored_date": "2020-11-02",
+      "unrepresented_civil_dates": [
+        "2020-10-31",
+        "2020-11-01"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-11-06",
+      "next_stored_date": "2020-11-09",
+      "unrepresented_civil_dates": [
+        "2020-11-07",
+        "2020-11-08"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-11-13",
+      "next_stored_date": "2020-11-16",
+      "unrepresented_civil_dates": [
+        "2020-11-14",
+        "2020-11-15"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-11-20",
+      "next_stored_date": "2020-11-23",
+      "unrepresented_civil_dates": [
+        "2020-11-21",
+        "2020-11-22"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-11-27",
+      "next_stored_date": "2020-12-01",
+      "unrepresented_civil_dates": [
+        "2020-11-28",
+        "2020-11-29",
+        "2020-11-30"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-12-04",
+      "next_stored_date": "2020-12-07",
+      "unrepresented_civil_dates": [
+        "2020-12-05",
+        "2020-12-06"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-12-11",
+      "next_stored_date": "2020-12-14",
+      "unrepresented_civil_dates": [
+        "2020-12-12",
+        "2020-12-13"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-12-18",
+      "next_stored_date": "2020-12-21",
+      "unrepresented_civil_dates": [
+        "2020-12-19",
+        "2020-12-20"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-12-24",
+      "next_stored_date": "2020-12-28",
+      "unrepresented_civil_dates": [
+        "2020-12-25",
+        "2020-12-26",
+        "2020-12-27"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2020-12-31",
+      "next_stored_date": "2021-01-04",
+      "unrepresented_civil_dates": [
+        "2021-01-01",
+        "2021-01-02",
+        "2021-01-03"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-01-08",
+      "next_stored_date": "2021-01-11",
+      "unrepresented_civil_dates": [
+        "2021-01-09",
+        "2021-01-10"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-01-15",
+      "next_stored_date": "2021-01-18",
+      "unrepresented_civil_dates": [
+        "2021-01-16",
+        "2021-01-17"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-01-22",
+      "next_stored_date": "2021-01-25",
+      "unrepresented_civil_dates": [
+        "2021-01-23",
+        "2021-01-24"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-01-29",
+      "next_stored_date": "2021-02-01",
+      "unrepresented_civil_dates": [
+        "2021-01-30",
+        "2021-01-31"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-02-05",
+      "next_stored_date": "2021-02-08",
+      "unrepresented_civil_dates": [
+        "2021-02-06",
+        "2021-02-07"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-02-12",
+      "next_stored_date": "2021-02-15",
+      "unrepresented_civil_dates": [
+        "2021-02-13",
+        "2021-02-14"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-02-19",
+      "next_stored_date": "2021-02-22",
+      "unrepresented_civil_dates": [
+        "2021-02-20",
+        "2021-02-21"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-02-26",
+      "next_stored_date": "2021-03-01",
+      "unrepresented_civil_dates": [
+        "2021-02-27",
+        "2021-02-28"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-03-05",
+      "next_stored_date": "2021-03-08",
+      "unrepresented_civil_dates": [
+        "2021-03-06",
+        "2021-03-07"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-03-12",
+      "next_stored_date": "2021-03-15",
+      "unrepresented_civil_dates": [
+        "2021-03-13",
+        "2021-03-14"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-03-19",
+      "next_stored_date": "2021-03-22",
+      "unrepresented_civil_dates": [
+        "2021-03-20",
+        "2021-03-21"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-03-26",
+      "next_stored_date": "2021-03-29",
+      "unrepresented_civil_dates": [
+        "2021-03-27",
+        "2021-03-28"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-04-01",
+      "next_stored_date": "2021-04-05",
+      "unrepresented_civil_dates": [
+        "2021-04-02",
+        "2021-04-03",
+        "2021-04-04"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-04-09",
+      "next_stored_date": "2021-04-12",
+      "unrepresented_civil_dates": [
+        "2021-04-10",
+        "2021-04-11"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-04-16",
+      "next_stored_date": "2021-04-19",
+      "unrepresented_civil_dates": [
+        "2021-04-17",
+        "2021-04-18"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-04-23",
+      "next_stored_date": "2021-04-26",
+      "unrepresented_civil_dates": [
+        "2021-04-24",
+        "2021-04-25"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-04-30",
+      "next_stored_date": "2021-05-03",
+      "unrepresented_civil_dates": [
+        "2021-05-01",
+        "2021-05-02"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-05-07",
+      "next_stored_date": "2021-05-10",
+      "unrepresented_civil_dates": [
+        "2021-05-08",
+        "2021-05-09"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-05-14",
+      "next_stored_date": "2021-05-17",
+      "unrepresented_civil_dates": [
+        "2021-05-15",
+        "2021-05-16"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-05-21",
+      "next_stored_date": "2021-05-24",
+      "unrepresented_civil_dates": [
+        "2021-05-22",
+        "2021-05-23"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-05-28",
+      "next_stored_date": "2021-05-31",
+      "unrepresented_civil_dates": [
+        "2021-05-29",
+        "2021-05-30"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-06-04",
+      "next_stored_date": "2021-06-07",
+      "unrepresented_civil_dates": [
+        "2021-06-05",
+        "2021-06-06"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-06-11",
+      "next_stored_date": "2021-06-14",
+      "unrepresented_civil_dates": [
+        "2021-06-12",
+        "2021-06-13"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-06-18",
+      "next_stored_date": "2021-06-21",
+      "unrepresented_civil_dates": [
+        "2021-06-19",
+        "2021-06-20"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-06-25",
+      "next_stored_date": "2021-06-28",
+      "unrepresented_civil_dates": [
+        "2021-06-26",
+        "2021-06-27"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-07-02",
+      "next_stored_date": "2021-07-05",
+      "unrepresented_civil_dates": [
+        "2021-07-03",
+        "2021-07-04"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-07-09",
+      "next_stored_date": "2021-07-12",
+      "unrepresented_civil_dates": [
+        "2021-07-10",
+        "2021-07-11"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-07-16",
+      "next_stored_date": "2021-07-19",
+      "unrepresented_civil_dates": [
+        "2021-07-17",
+        "2021-07-18"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-07-23",
+      "next_stored_date": "2021-07-26",
+      "unrepresented_civil_dates": [
+        "2021-07-24",
+        "2021-07-25"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-07-30",
+      "next_stored_date": "2021-08-02",
+      "unrepresented_civil_dates": [
+        "2021-07-31",
+        "2021-08-01"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-08-06",
+      "next_stored_date": "2021-08-09",
+      "unrepresented_civil_dates": [
+        "2021-08-07",
+        "2021-08-08"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-08-13",
+      "next_stored_date": "2021-08-16",
+      "unrepresented_civil_dates": [
+        "2021-08-14",
+        "2021-08-15"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-08-20",
+      "next_stored_date": "2021-08-23",
+      "unrepresented_civil_dates": [
+        "2021-08-21",
+        "2021-08-22"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-08-27",
+      "next_stored_date": "2021-08-30",
+      "unrepresented_civil_dates": [
+        "2021-08-28",
+        "2021-08-29"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-09-03",
+      "next_stored_date": "2021-09-06",
+      "unrepresented_civil_dates": [
+        "2021-09-04",
+        "2021-09-05"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-09-10",
+      "next_stored_date": "2021-09-13",
+      "unrepresented_civil_dates": [
+        "2021-09-11",
+        "2021-09-12"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-09-17",
+      "next_stored_date": "2021-09-20",
+      "unrepresented_civil_dates": [
+        "2021-09-18",
+        "2021-09-19"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-09-24",
+      "next_stored_date": "2021-09-27",
+      "unrepresented_civil_dates": [
+        "2021-09-25",
+        "2021-09-26"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-10-01",
+      "next_stored_date": "2021-10-04",
+      "unrepresented_civil_dates": [
+        "2021-10-02",
+        "2021-10-03"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-10-08",
+      "next_stored_date": "2021-10-11",
+      "unrepresented_civil_dates": [
+        "2021-10-09",
+        "2021-10-10"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-10-15",
+      "next_stored_date": "2021-10-18",
+      "unrepresented_civil_dates": [
+        "2021-10-16",
+        "2021-10-17"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-10-22",
+      "next_stored_date": "2021-10-25",
+      "unrepresented_civil_dates": [
+        "2021-10-23",
+        "2021-10-24"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-10-29",
+      "next_stored_date": "2021-11-01",
+      "unrepresented_civil_dates": [
+        "2021-10-30",
+        "2021-10-31"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-11-05",
+      "next_stored_date": "2021-11-08",
+      "unrepresented_civil_dates": [
+        "2021-11-06",
+        "2021-11-07"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-11-12",
+      "next_stored_date": "2021-11-15",
+      "unrepresented_civil_dates": [
+        "2021-11-13",
+        "2021-11-14"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-11-19",
+      "next_stored_date": "2021-11-22",
+      "unrepresented_civil_dates": [
+        "2021-11-20",
+        "2021-11-21"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-11-26",
+      "next_stored_date": "2021-11-29",
+      "unrepresented_civil_dates": [
+        "2021-11-27",
+        "2021-11-28"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-12-03",
+      "next_stored_date": "2021-12-06",
+      "unrepresented_civil_dates": [
+        "2021-12-04",
+        "2021-12-05"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-12-10",
+      "next_stored_date": "2021-12-13",
+      "unrepresented_civil_dates": [
+        "2021-12-11",
+        "2021-12-12"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-12-17",
+      "next_stored_date": "2021-12-20",
+      "unrepresented_civil_dates": [
+        "2021-12-18",
+        "2021-12-19"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-12-23",
+      "next_stored_date": "2021-12-27",
+      "unrepresented_civil_dates": [
+        "2021-12-24",
+        "2021-12-25",
+        "2021-12-26"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2021-12-31",
+      "next_stored_date": "2022-01-03",
+      "unrepresented_civil_dates": [
+        "2022-01-01",
+        "2022-01-02"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-01-07",
+      "next_stored_date": "2022-01-10",
+      "unrepresented_civil_dates": [
+        "2022-01-08",
+        "2022-01-09"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-01-14",
+      "next_stored_date": "2022-01-17",
+      "unrepresented_civil_dates": [
+        "2022-01-15",
+        "2022-01-16"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-01-21",
+      "next_stored_date": "2022-01-24",
+      "unrepresented_civil_dates": [
+        "2022-01-22",
+        "2022-01-23"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-01-28",
+      "next_stored_date": "2022-01-31",
+      "unrepresented_civil_dates": [
+        "2022-01-29",
+        "2022-01-30"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-02-04",
+      "next_stored_date": "2022-02-07",
+      "unrepresented_civil_dates": [
+        "2022-02-05",
+        "2022-02-06"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-02-11",
+      "next_stored_date": "2022-02-14",
+      "unrepresented_civil_dates": [
+        "2022-02-12",
+        "2022-02-13"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-02-18",
+      "next_stored_date": "2022-02-21",
+      "unrepresented_civil_dates": [
+        "2022-02-19",
+        "2022-02-20"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-02-25",
+      "next_stored_date": "2022-02-28",
+      "unrepresented_civil_dates": [
+        "2022-02-26",
+        "2022-02-27"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-03-04",
+      "next_stored_date": "2022-03-07",
+      "unrepresented_civil_dates": [
+        "2022-03-05",
+        "2022-03-06"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-03-11",
+      "next_stored_date": "2022-03-14",
+      "unrepresented_civil_dates": [
+        "2022-03-12",
+        "2022-03-13"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-03-18",
+      "next_stored_date": "2022-03-21",
+      "unrepresented_civil_dates": [
+        "2022-03-19",
+        "2022-03-20"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-03-25",
+      "next_stored_date": "2022-03-28",
+      "unrepresented_civil_dates": [
+        "2022-03-26",
+        "2022-03-27"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-04-01",
+      "next_stored_date": "2022-04-04",
+      "unrepresented_civil_dates": [
+        "2022-04-02",
+        "2022-04-03"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-04-08",
+      "next_stored_date": "2022-04-11",
+      "unrepresented_civil_dates": [
+        "2022-04-09",
+        "2022-04-10"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-04-14",
+      "next_stored_date": "2022-04-18",
+      "unrepresented_civil_dates": [
+        "2022-04-15",
+        "2022-04-16",
+        "2022-04-17"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-04-22",
+      "next_stored_date": "2022-04-25",
+      "unrepresented_civil_dates": [
+        "2022-04-23",
+        "2022-04-24"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-04-29",
+      "next_stored_date": "2022-05-02",
+      "unrepresented_civil_dates": [
+        "2022-04-30",
+        "2022-05-01"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-05-06",
+      "next_stored_date": "2022-05-09",
+      "unrepresented_civil_dates": [
+        "2022-05-07",
+        "2022-05-08"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-05-13",
+      "next_stored_date": "2022-05-16",
+      "unrepresented_civil_dates": [
+        "2022-05-14",
+        "2022-05-15"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-05-20",
+      "next_stored_date": "2022-05-23",
+      "unrepresented_civil_dates": [
+        "2022-05-21",
+        "2022-05-22"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-05-27",
+      "next_stored_date": "2022-05-30",
+      "unrepresented_civil_dates": [
+        "2022-05-28",
+        "2022-05-29"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-06-03",
+      "next_stored_date": "2022-06-06",
+      "unrepresented_civil_dates": [
+        "2022-06-04",
+        "2022-06-05"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-06-10",
+      "next_stored_date": "2022-06-13",
+      "unrepresented_civil_dates": [
+        "2022-06-11",
+        "2022-06-12"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-06-17",
+      "next_stored_date": "2022-06-20",
+      "unrepresented_civil_dates": [
+        "2022-06-18",
+        "2022-06-19"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-06-24",
+      "next_stored_date": "2022-06-27",
+      "unrepresented_civil_dates": [
+        "2022-06-25",
+        "2022-06-26"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-07-01",
+      "next_stored_date": "2022-07-04",
+      "unrepresented_civil_dates": [
+        "2022-07-02",
+        "2022-07-03"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-07-08",
+      "next_stored_date": "2022-07-11",
+      "unrepresented_civil_dates": [
+        "2022-07-09",
+        "2022-07-10"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-07-15",
+      "next_stored_date": "2022-07-18",
+      "unrepresented_civil_dates": [
+        "2022-07-16",
+        "2022-07-17"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-07-22",
+      "next_stored_date": "2022-07-25",
+      "unrepresented_civil_dates": [
+        "2022-07-23",
+        "2022-07-24"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-07-29",
+      "next_stored_date": "2022-08-01",
+      "unrepresented_civil_dates": [
+        "2022-07-30",
+        "2022-07-31"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-08-05",
+      "next_stored_date": "2022-08-08",
+      "unrepresented_civil_dates": [
+        "2022-08-06",
+        "2022-08-07"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-08-12",
+      "next_stored_date": "2022-08-15",
+      "unrepresented_civil_dates": [
+        "2022-08-13",
+        "2022-08-14"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-08-19",
+      "next_stored_date": "2022-08-22",
+      "unrepresented_civil_dates": [
+        "2022-08-20",
+        "2022-08-21"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-08-26",
+      "next_stored_date": "2022-08-29",
+      "unrepresented_civil_dates": [
+        "2022-08-27",
+        "2022-08-28"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-09-02",
+      "next_stored_date": "2022-09-05",
+      "unrepresented_civil_dates": [
+        "2022-09-03",
+        "2022-09-04"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-09-09",
+      "next_stored_date": "2022-09-12",
+      "unrepresented_civil_dates": [
+        "2022-09-10",
+        "2022-09-11"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-09-16",
+      "next_stored_date": "2022-09-19",
+      "unrepresented_civil_dates": [
+        "2022-09-17",
+        "2022-09-18"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-09-23",
+      "next_stored_date": "2022-09-26",
+      "unrepresented_civil_dates": [
+        "2022-09-24",
+        "2022-09-25"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-09-30",
+      "next_stored_date": "2022-10-03",
+      "unrepresented_civil_dates": [
+        "2022-10-01",
+        "2022-10-02"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-10-07",
+      "next_stored_date": "2022-10-10",
+      "unrepresented_civil_dates": [
+        "2022-10-08",
+        "2022-10-09"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-10-14",
+      "next_stored_date": "2022-10-17",
+      "unrepresented_civil_dates": [
+        "2022-10-15",
+        "2022-10-16"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-10-21",
+      "next_stored_date": "2022-10-24",
+      "unrepresented_civil_dates": [
+        "2022-10-22",
+        "2022-10-23"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-10-28",
+      "next_stored_date": "2022-10-31",
+      "unrepresented_civil_dates": [
+        "2022-10-29",
+        "2022-10-30"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-11-04",
+      "next_stored_date": "2022-11-07",
+      "unrepresented_civil_dates": [
+        "2022-11-05",
+        "2022-11-06"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-11-11",
+      "next_stored_date": "2022-11-14",
+      "unrepresented_civil_dates": [
+        "2022-11-12",
+        "2022-11-13"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-11-18",
+      "next_stored_date": "2022-11-21",
+      "unrepresented_civil_dates": [
+        "2022-11-19",
+        "2022-11-20"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-11-25",
+      "next_stored_date": "2022-11-28",
+      "unrepresented_civil_dates": [
+        "2022-11-26",
+        "2022-11-27"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-12-02",
+      "next_stored_date": "2022-12-05",
+      "unrepresented_civil_dates": [
+        "2022-12-03",
+        "2022-12-04"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-12-09",
+      "next_stored_date": "2022-12-12",
+      "unrepresented_civil_dates": [
+        "2022-12-10",
+        "2022-12-11"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-12-16",
+      "next_stored_date": "2022-12-19",
+      "unrepresented_civil_dates": [
+        "2022-12-17",
+        "2022-12-18"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    },
+    {
+      "previous_stored_date": "2022-12-23",
+      "next_stored_date": "2022-12-27",
+      "unrepresented_civil_dates": [
+        "2022-12-24",
+        "2022-12-25",
+        "2022-12-26"
+      ],
+      "disposition": "Observed stored-date gap only; no assumed closure/no-trade or inserted zero"
+    }
+  ],
+  "observed_dated_book_rows_only": true,
+  "complete_exchange_calendar_verified": false,
+  "dropped_unknown_rows": 0,
+  "forward_filled_rows": 0,
+  "invented_2017_or_zero_warmup_rows": 0,
+  "raw_prices_or_strategy_execution_read": false
+}

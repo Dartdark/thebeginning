@@ -1,0 +1,548 @@
+{
+  "stage": "recent",
+  "prereg_sha": "eb7b8b07fd54e8083a13b04f25d1c5b59c68a00b",
+  "years": [
+    2023,
+    2026
+  ],
+  "seed_offsets": {
+    "trade_drop": 0,
+    "signal_drop": 10000,
+    "random_side": 20000,
+    "random_time": 30000
+  },
+  "base_seed": 20261024,
+  "profile_parity": {
+    "S0": {
+      "trades": 735,
+      "exact_event_match": true,
+      "net_tolerance": 1e-08
+    },
+    "S1": {
+      "trades": 726,
+      "exact_event_match": true,
+      "net_tolerance": 1e-08
+    },
+    "A0": {
+      "trades": 730,
+      "exact_event_match": true,
+      "net_tolerance": 1e-08
+    },
+    "A1": {
+      "trades": 721,
+      "exact_event_match": true,
+      "net_tolerance": 1e-08
+    },
+    "E1": {
+      "trades": 721,
+      "exact_event_match": true,
+      "net_tolerance": 1e-08
+    }
+  },
+  "selected_null_parity": [
+    {
+      "type": "signal_drop",
+      "family": "A",
+      "seed": 20271024,
+      "trades": 719
+    },
+    {
+      "type": "signal_drop",
+      "family": "A",
+      "seed": 20271025,
+      "trades": 719
+    },
+    {
+      "type": "signal_drop",
+      "family": "A",
+      "seed": 20272023,
+      "trades": 717
+    },
+    {
+      "type": "signal_drop",
+      "family": "S",
+      "seed": 20271024,
+      "trades": 723
+    },
+    {
+      "type": "signal_drop",
+      "family": "S",
+      "seed": 20271025,
+      "trades": 729
+    },
+    {
+      "type": "signal_drop",
+      "family": "S",
+      "seed": 20272023,
+      "trades": 726
+    },
+    {
+      "type": "random_side",
+      "seed": 20281024,
+      "trades": 642
+    },
+    {
+      "type": "random_side",
+      "seed": 20281025,
+      "trades": 643
+    },
+    {
+      "type": "random_side",
+      "seed": 20281123,
+      "trades": 648
+    },
+    {
+      "type": "random_time",
+      "seed": 20291024,
+      "trades": 721
+    },
+    {
+      "type": "random_time",
+      "seed": 20291025,
+      "trades": 721
+    },
+    {
+      "type": "random_time",
+      "seed": 20291123,
+      "trades": 721
+    }
+  ],
+  "synthetic_checks": [
+    "cached_shared_walk_exact_synthetic_replay",
+    "random_side_draw_consumption",
+    "random_time_same_window",
+    "dropped_decision_new_reentry",
+    "signal_null_counts",
+    "carry_vs_EOC_phase",
+    "early_close_phase",
+    "endpoint_censoring",
+    "time_null_actual_submissions_preserved"
+  ],
+  "daily_dd_definition": "realized exit-date net, zero initial equity included; not account MTM",
+  "time_null_definition": "exact actual primary submitted count per Date; uniform feasible same-Date decision sets from warmed-up clock bars; cross-Date blocking histories rejected",
+  "side_null_definition": "actual primary decision set, randomized submitted sides; no added decisions",
+  "time_null_implementation_correction": {
+    "issue": "first design implementation preserved proposed count, but occupancy blocked later decisions",
+    "resolution": "uniform sampling among feasible same-Date decision sets preserving actual submissions",
+    "strategy_rules_changed": false,
+    "prior_invalid_design_count_range": [
+      691,
+      720
+    ],
+    "prior_invalid_design_count_median": 704,
+    "primary_design_count": 813,
+    "prior_invalid_draws": 100,
+    "retained_invalid_samples": "diagnostics_design/placebos_random_time_samples_before_count_fix.csv",
+    "prior_design_time_null_valid": false
+  },
+  "A_filter": {
+    "base": {
+      "trades": 730,
+      "total": 44397.5,
+      "avg": 60.81849315068493,
+      "t": 1.6099074083050193,
+      "max_daily_dd": 22829.5
+    },
+    "filtered": {
+      "trades": 721,
+      "total": 47112.75,
+      "avg": 65.34361997226075,
+      "t": 1.7268609581095933,
+      "max_daily_dd": 23708.5
+    },
+    "removed": {
+      "trades": 35,
+      "total": 6456.25,
+      "avg": 184.46428571428572,
+      "t": 1.101457322618084,
+      "max_daily_dd": 5281.25
+    },
+    "new_reentries": {
+      "trades": 26,
+      "total": 9171.5,
+      "avg": 352.75,
+      "t": 2.283157725595661,
+      "max_daily_dd": 1684.5
+    },
+    "removed_trades": {
+      "csv": "A_filter_removed_trades.csv",
+      "rows": 35,
+      "sha256": "e54136996b93f3f7a8f8708d22f64d8e627956376eb518b50b9d0402d6aff18f"
+    },
+    "new_reentry_trades": {
+      "csv": "A_filter_new_reentry_trades.csv",
+      "rows": 26,
+      "sha256": "e51f31183f8c23c4c42a43398906bea6e6e5e43d3ad306d1eb201d5e0524213b"
+    },
+    "matched_net_count": {
+      "drop_count": 9,
+      "summary": {
+        "replicates": 1000,
+        "observed": {
+          "trades": 721,
+          "total": 47112.75,
+          "avg": 65.34361997226075,
+          "t": 1.7268609581095933,
+          "max_daily_dd": 23708.5
+        },
+        "fraction_observed_beats_profit": 0.862,
+        "fraction_observed_beats_dd": 0.176,
+        "fraction_observed_beats_both": 0.171,
+        "p_profit_ge": 0.13886113886113885,
+        "p_dd_le": 0.8241758241758241,
+        "quantiles": {
+          "total": {
+            "0.025": 38396.75,
+            "0.5": 43722.75,
+            "0.975": 50046.75
+          },
+          "max_daily_dd": {
+            "0.025": 19795.0,
+            "0.5": 22853.75,
+            "0.975": 25192.75
+          },
+          "trades": {
+            "0.025": 721.0,
+            "0.5": 721.0,
+            "0.975": 721.0
+          }
+        }
+      },
+      "samples": {
+        "csv": "A_filter_matched_net_count_samples.csv",
+        "rows": 1000,
+        "sha256": "e7826ac01a11736603ced64d1afe52c3c87fb9ff492cea49958674d841d2f4d9"
+      }
+    },
+    "gross_removed_count": {
+      "drop_count": 35,
+      "summary": {
+        "replicates": 1000,
+        "observed": {
+          "trades": 721,
+          "total": 47112.75,
+          "avg": 65.34361997226075,
+          "t": 1.7268609581095933,
+          "max_daily_dd": 23708.5
+        },
+        "fraction_observed_beats_profit": 0.802,
+        "fraction_observed_beats_dd": 0.321,
+        "fraction_observed_beats_both": 0.295,
+        "p_profit_ge": 0.19880119880119881,
+        "p_dd_le": 0.6793206793206793,
+        "quantiles": {
+          "total": {
+            "0.025": 31835.75,
+            "0.5": 42086.25,
+            "0.975": 54150.125
+          },
+          "max_daily_dd": {
+            "0.025": 17656.10625,
+            "0.5": 22725.75,
+            "0.975": 27417.4875
+          },
+          "trades": {
+            "0.025": 695.0,
+            "0.5": 695.0,
+            "0.975": 695.0
+          }
+        }
+      },
+      "samples": {
+        "csv": "A_filter_gross_removed_count_samples.csv",
+        "rows": 1000,
+        "sha256": "e58a15a024522b119c4ffa3ca9a8e53f544b0d241f26e9b0a1bf01acc2e98df4"
+      }
+    }
+  },
+  "A_signal_null": {
+    "drop_signal_decisions": 198,
+    "base_signal_decisions": 2573,
+    "summary": {
+      "replicates": 1000,
+      "observed": {
+        "total": 47112.75,
+        "max_daily_dd": 23708.5,
+        "trades": 721,
+        "avg": 65.34361997226075,
+        "t": 1.7268609581095933
+      },
+      "fraction_observed_beats_profit": 0.609,
+      "fraction_observed_beats_dd": 0.258,
+      "fraction_observed_beats_both": 0.216,
+      "p_profit_ge": 0.3916083916083916,
+      "p_dd_le": 0.7422577422577422,
+      "quantiles": {
+        "total": {
+          "0.025": 31439.76875,
+          "0.5": 45126.25,
+          "0.975": 57707.66249999999
+        },
+        "max_daily_dd": {
+          "0.025": 16925.95625,
+          "0.5": 22070.5,
+          "0.975": 27531.7375
+        },
+        "trades": {
+          "0.025": 714.0,
+          "0.5": 720.0,
+          "0.975": 725.0
+        }
+      }
+    },
+    "samples": {
+      "csv": "A_signal_null_samples.csv",
+      "rows": 1000,
+      "sha256": "4e4848b24d1a118b76e60f0964f88257e99c5579a894ee57e4782c8bcc14a140"
+    }
+  },
+  "S_filter": {
+    "base": {
+      "trades": 735,
+      "total": 41686.25,
+      "avg": 56.715986394557824,
+      "t": 1.5075281124959807,
+      "max_daily_dd": 22829.5
+    },
+    "filtered": {
+      "trades": 726,
+      "total": 46706.5,
+      "avg": 64.3340220385675,
+      "t": 1.709489713214281,
+      "max_daily_dd": 23708.5
+    },
+    "removed": {
+      "trades": 36,
+      "total": 4939.0,
+      "avg": 137.19444444444446,
+      "t": 0.8095026465505369,
+      "max_daily_dd": 6798.5
+    },
+    "new_reentries": {
+      "trades": 27,
+      "total": 9959.25,
+      "avg": 368.8611111111111,
+      "t": 2.4666546065767863,
+      "max_daily_dd": 1684.5
+    },
+    "removed_trades": {
+      "csv": "S_filter_removed_trades.csv",
+      "rows": 36,
+      "sha256": "5d079caa02b1e49a0eb4abb9e8ab5db2ea3081eb7fbf5419648745429e70c870"
+    },
+    "new_reentry_trades": {
+      "csv": "S_filter_new_reentry_trades.csv",
+      "rows": 27,
+      "sha256": "23710f9bfd7e812d4d8f83e29c4805956e99e016d92e4002e647b18ffee3703f"
+    },
+    "matched_net_count": {
+      "drop_count": 9,
+      "summary": {
+        "replicates": 1000,
+        "observed": {
+          "trades": 726,
+          "total": 46706.5,
+          "avg": 64.3340220385675,
+          "t": 1.709489713214281,
+          "max_daily_dd": 23708.5
+        },
+        "fraction_observed_beats_profit": 0.97,
+        "fraction_observed_beats_dd": 0.206,
+        "fraction_observed_beats_both": 0.206,
+        "p_profit_ge": 0.030969030969030968,
+        "p_dd_le": 0.7942057942057942,
+        "quantiles": {
+          "total": {
+            "0.025": 35433.375,
+            "0.5": 41479.0,
+            "0.975": 47028.5
+          },
+          "max_daily_dd": {
+            "0.025": 19863.25,
+            "0.5": 22853.75,
+            "0.975": 25192.75
+          },
+          "trades": {
+            "0.025": 726.0,
+            "0.5": 726.0,
+            "0.975": 726.0
+          }
+        }
+      },
+      "samples": {
+        "csv": "S_filter_matched_net_count_samples.csv",
+        "rows": 1000,
+        "sha256": "d09468314d888fe9dd53252c0d0b923966ea79e1bbda6a50eab35e9717e21e26"
+      }
+    },
+    "gross_removed_count": {
+      "drop_count": 36,
+      "summary": {
+        "replicates": 1000,
+        "observed": {
+          "trades": 726,
+          "total": 46706.5,
+          "avg": 64.3340220385675,
+          "t": 1.709489713214281,
+          "max_daily_dd": 23708.5
+        },
+        "fraction_observed_beats_profit": 0.876,
+        "fraction_observed_beats_dd": 0.335,
+        "fraction_observed_beats_both": 0.325,
+        "p_profit_ge": 0.12487512487512488,
+        "p_dd_le": 0.6653346653346653,
+        "quantiles": {
+          "total": {
+            "0.025": 28506.125,
+            "0.5": 39532.25,
+            "0.975": 51859.625
+          },
+          "max_daily_dd": {
+            "0.025": 17948.6875,
+            "0.5": 22740.375,
+            "0.975": 27778.7625
+          },
+          "trades": {
+            "0.025": 699.0,
+            "0.5": 699.0,
+            "0.975": 699.0
+          }
+        }
+      },
+      "samples": {
+        "csv": "S_filter_gross_removed_count_samples.csv",
+        "rows": 1000,
+        "sha256": "dfa11d0226628ca88bb19587483e927a38c47eedded64a52df2bec7f09b69d66"
+      }
+    }
+  },
+  "S_signal_null": {
+    "drop_signal_decisions": 199,
+    "base_signal_decisions": 2591,
+    "summary": {
+      "replicates": 1000,
+      "observed": {
+        "total": 46706.5,
+        "max_daily_dd": 23708.5,
+        "trades": 726,
+        "avg": 64.3340220385675,
+        "t": 1.709489713214281
+      },
+      "fraction_observed_beats_profit": 0.722,
+      "fraction_observed_beats_dd": 0.291,
+      "fraction_observed_beats_both": 0.258,
+      "p_profit_ge": 0.2787212787212787,
+      "p_dd_le": 0.7092907092907093,
+      "quantiles": {
+        "total": {
+          "0.025": 29850.625,
+          "0.5": 42615.125,
+          "0.975": 56222.237499999996
+        },
+        "max_daily_dd": {
+          "0.025": 16939.33125,
+          "0.5": 22324.5,
+          "0.975": 27745.39375
+        },
+        "trades": {
+          "0.025": 719.0,
+          "0.5": 725.0,
+          "0.975": 731.0
+        }
+      }
+    },
+    "samples": {
+      "csv": "S_signal_null_samples.csv",
+      "rows": 1000,
+      "sha256": "d3179759e79066d8ad17fdf16d438abf379436db3c61c143c2b79bbe87bd4e79"
+    }
+  },
+  "placebos": {
+    "random_side": {
+      "summary": {
+        "replicates": 100,
+        "observed": {
+          "total": 47112.75,
+          "max_daily_dd": 23708.5,
+          "trades": 721,
+          "avg": 65.34361997226075,
+          "t": 1.7268609581095933
+        },
+        "fraction_observed_beats_profit": 1.0,
+        "fraction_observed_beats_dd": 0.95,
+        "fraction_observed_beats_both": 0.95,
+        "p_profit_ge": 0.009900990099009901,
+        "p_dd_le": 0.0594059405940594,
+        "quantiles": {
+          "total": {
+            "0.025": -84274.0875,
+            "0.5": -38016.5,
+            "0.975": 5582.6562499999645
+          },
+          "max_daily_dd": {
+            "0.025": 22616.28125,
+            "0.5": 49253.625,
+            "0.975": 87501.5875
+          },
+          "trades": {
+            "0.025": 632.475,
+            "0.5": 640.5,
+            "0.975": 654.0999999999999
+          }
+        }
+      },
+      "samples": {
+        "csv": "placebos_random_side_samples.csv",
+        "rows": 100,
+        "sha256": "3c109d42b8476e641d5fcd38de93aaf05377117876aea67a4d68412595c52ac5"
+      }
+    },
+    "random_time": {
+      "summary": {
+        "replicates": 100,
+        "observed": {
+          "total": 47112.75,
+          "max_daily_dd": 23708.5,
+          "trades": 721,
+          "avg": 65.34361997226075,
+          "t": 1.7268609581095933
+        },
+        "fraction_observed_beats_profit": 0.0,
+        "fraction_observed_beats_dd": 0.0,
+        "fraction_observed_beats_both": 0.0,
+        "p_profit_ge": 1.0,
+        "p_dd_le": 1.0,
+        "quantiles": {
+          "total": {
+            "0.025": 104102.5,
+            "0.5": 135435.25,
+            "0.975": 166956.99999999997
+          },
+          "max_daily_dd": {
+            "0.025": 7173.9125,
+            "0.5": 10858.625,
+            "0.975": 16490.937499999996
+          },
+          "trades": {
+            "0.025": 721.0,
+            "0.5": 721.0,
+            "0.975": 721.0
+          }
+        }
+      },
+      "samples": {
+        "csv": "placebos_random_time_samples.csv",
+        "rows": 100,
+        "sha256": "324e29bbd1405c96703272fe70641a02de5c38a11fadc1342d38ad8dd7806ad6"
+      },
+      "count_check": {
+        "target_submissions": 721,
+        "min_actual_submissions": 721,
+        "max_actual_submissions": 721,
+        "all_dates_preserved": true
+      },
+      "conditioning": "Primary active Dates and submitted counts are fixed; feasible decision sets also condition on the realized future path through position occupancy. This is a constrained timing diagnostic, not an unconditional entry-time null."
+    }
+  },
+  "elapsed_seconds": 11.266027663994464
+}

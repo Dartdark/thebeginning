@@ -1,0 +1,156 @@
+{
+  "preregistration": "a4064ace6aa510abbfbea75833c3043f8f5b0a98",
+  "contexts": [
+    {
+      "model": "CODE",
+      "context": "50K_evaluation",
+      "status": "REJECT_AS_SUPPLIED",
+      "account_bench_run": false,
+      "source_flat_or_closure_violations": 3,
+      "missing_held_minutes": 1201,
+      "missing_minutes_outside_crossdate": 0,
+      "reason": "Positions cross holiday/session closures and the Apex flat boundary. No deletion, cutoff repair or hypothetical valid benchmark."
+    },
+    {
+      "model": "CODE",
+      "context": "150K_evaluation",
+      "status": "REJECT_AS_SUPPLIED",
+      "account_bench_run": false,
+      "source_flat_or_closure_violations": 3,
+      "missing_held_minutes": 1201,
+      "missing_minutes_outside_crossdate": 0,
+      "reason": "Positions cross holiday/session closures and the Apex flat boundary. No deletion, cutoff repair or hypothetical valid benchmark."
+    },
+    {
+      "model": "CODE",
+      "context": "50K_funded",
+      "status": "REJECT_AS_SUPPLIED",
+      "account_bench_run": false,
+      "source_flat_or_closure_violations": 3,
+      "missing_held_minutes": 1201,
+      "missing_minutes_outside_crossdate": 0,
+      "reason": "Positions cross holiday/session closures and the Apex flat boundary. No deletion, cutoff repair or hypothetical valid benchmark."
+    },
+    {
+      "model": "CODE",
+      "context": "150K_funded",
+      "status": "REJECT_AS_SUPPLIED",
+      "account_bench_run": false,
+      "source_flat_or_closure_violations": 3,
+      "missing_held_minutes": 1201,
+      "missing_minutes_outside_crossdate": 0,
+      "reason": "Positions cross holiday/session closures and the Apex flat boundary. No deletion, cutoff repair or hypothetical valid benchmark."
+    },
+    {
+      "model": "CODE_BE",
+      "context": "50K_evaluation",
+      "status": "REJECT_AS_SUPPLIED",
+      "account_bench_run": false,
+      "source_flat_or_closure_violations": 3,
+      "missing_held_minutes": 1201,
+      "missing_minutes_outside_crossdate": 0,
+      "reason": "Positions cross holiday/session closures and the Apex flat boundary. No deletion, cutoff repair or hypothetical valid benchmark."
+    },
+    {
+      "model": "CODE_BE",
+      "context": "150K_evaluation",
+      "status": "REJECT_AS_SUPPLIED",
+      "account_bench_run": false,
+      "source_flat_or_closure_violations": 3,
+      "missing_held_minutes": 1201,
+      "missing_minutes_outside_crossdate": 0,
+      "reason": "Positions cross holiday/session closures and the Apex flat boundary. No deletion, cutoff repair or hypothetical valid benchmark."
+    },
+    {
+      "model": "CODE_BE",
+      "context": "50K_funded",
+      "status": "REJECT_AS_SUPPLIED",
+      "account_bench_run": false,
+      "source_flat_or_closure_violations": 3,
+      "missing_held_minutes": 1201,
+      "missing_minutes_outside_crossdate": 0,
+      "reason": "Positions cross holiday/session closures and the Apex flat boundary. No deletion, cutoff repair or hypothetical valid benchmark."
+    },
+    {
+      "model": "CODE_BE",
+      "context": "150K_funded",
+      "status": "REJECT_AS_SUPPLIED",
+      "account_bench_run": false,
+      "source_flat_or_closure_violations": 3,
+      "missing_held_minutes": 1201,
+      "missing_minutes_outside_crossdate": 0,
+      "reason": "Positions cross holiday/session closures and the Apex flat boundary. No deletion, cutoff repair or hypothetical valid benchmark."
+    }
+  ],
+  "violating_trades": [
+    {
+      "date": "2018-05-28",
+      "exit_date": "2018-05-29",
+      "j0": 573,
+      "j1": 167,
+      "entry_phase": "intrabar",
+      "exit_phase": "intrabar",
+      "reason": "stop",
+      "unknown_held_minutes": 312,
+      "model": "CODE"
+    },
+    {
+      "date": "2022-06-20",
+      "exit_date": "2022-06-21",
+      "j0": 627,
+      "j1": 152,
+      "entry_phase": "intrabar",
+      "exit_phase": "intrabar",
+      "reason": "target",
+      "unknown_held_minutes": 301,
+      "model": "CODE"
+    },
+    {
+      "date": "2023-07-03",
+      "exit_date": "2023-07-05",
+      "j0": 528,
+      "j1": 900,
+      "entry_phase": "intrabar",
+      "exit_phase": "open",
+      "reason": "time",
+      "unknown_held_minutes": 588,
+      "model": "CODE"
+    },
+    {
+      "date": "2018-05-28",
+      "exit_date": "2018-05-29",
+      "j0": 573,
+      "j1": 167,
+      "entry_phase": "intrabar",
+      "exit_phase": "intrabar",
+      "reason": "stop",
+      "unknown_held_minutes": 312,
+      "model": "CODE_BE"
+    },
+    {
+      "date": "2022-06-20",
+      "exit_date": "2022-06-21",
+      "j0": 627,
+      "j1": 152,
+      "entry_phase": "intrabar",
+      "exit_phase": "intrabar",
+      "reason": "target",
+      "unknown_held_minutes": 301,
+      "model": "CODE_BE"
+    },
+    {
+      "date": "2023-07-03",
+      "exit_date": "2023-07-05",
+      "j0": 528,
+      "j1": 900,
+      "entry_phase": "intrabar",
+      "exit_phase": "open",
+      "reason": "time",
+      "unknown_held_minutes": 588,
+      "model": "CODE_BE"
+    }
+  ],
+  "gap_interpretation": "All unobserved held-minute spans are inside holiday carries; their closure/feed partition is not independently certified. They are not1201 independently established feed-loss minutes.",
+  "fixed_calendar_policy": "Neither invalid trades nor their source dates were removed to obtain a passing Apex result.",
+  "shared_caches_written": false
+}

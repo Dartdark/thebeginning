@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "actual_RS_or_Date_Time_price_exit_PNL_values_read": false,
+  "checks": [
+    "Settingsidentity/canonicalparams/coverageonlyallowlistedBvalues",
+    "DateDAYbeforefutureTime/Type/Signal/IDs/Price/Qtypoison",
+    "numericDate7fmt14/Time8fmt21/Excel1900",
+    "wholeTimeinteger/datefractionconsistency/nooffset/exactminute",
+    "explicit2rowTradeIDinheritance/noarbitraryffill",
+    "exitPrice/PNLpoisonneverdecoded",
+    "globalmalformedexit/pair/orderpresencefaultblocksourcebeforefeatures;Orderopaque/noguessedrelation",
+    "noncanonicalvalidclockretainedUNKNOWNday",
+    "futurevalidexitmutationdoesnotchangeasofprefix"
+  ],
+  "script_sha256": "f9d559225f30bc3eaf878fda4c7ba8ab801a9a478cf3e0392df1df73b85171ee"
+}

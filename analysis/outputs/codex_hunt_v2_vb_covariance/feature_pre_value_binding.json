@@ -1,0 +1,62 @@
+{
+  "prereg": "f7d70c64b5a55da9afeb216996081711102ae623",
+  "implementation_commit": "98d5fd54bb4bd38511dbbe113a26040e4e1d97dc",
+  "code_sha256": {
+    "analysis/codex_hunt_v2_vb_cov_features.py": "6a08bd063da1251c3921c1cedf8fbae39ccf4d92338661ff94ae012c4d6b6952",
+    "analysis/codex_hunt_v2_highwin_bench.py": "e176a2dae837c84796582779351d3971f1b5f6adab4f35f0f2da2caaddb90721",
+    "analysis/codex_rebound_personal_update.py": "546f598cbd6b557e503f2c86c7c21a26023ce573099c1c884b6dbc3be329728c",
+    "agents/codex/RESEARCH_CONTROLS.md": "2537562f9f14acfa58eaf609771c14c0c92e9df8f058180748d877749c99e12f",
+    "agents/codex/research/hunt_v2_bench_source_map.md": "669ff349870f77de80a73430140ca86236b404523574215d7c0d36589953ca91",
+    "analysis/codex_s03_calendar.py": "705713195b1be61cd648d1b72718442b6cec7581587ca8c537d491cf1312bceb",
+    "analysis/replica.py": "c0ae001152c75395748b0f3fdb4bdcbc589d0a124befce0170ef454c3da6f58f",
+    "analysis/grid.py": "a30ddd4533c9b9d9bdd50f161deded3a2864605f1b81bf4605f74b1d23bc7405",
+    "agents/codex/plans/hunt_v2_vb_covariance.md": "8cc27b3126de97fa7260ac37938d2a6148dd7e37d82183f37f7d314e88b0825e",
+    "agents/codex/research/hunt_v2_independent_book_constraint_gate.md": "969c2f628b6b23a4053001e9211ed4bac0952dfd23f33f9754f8a0d6273b41c1"
+  },
+  "adopted_source_pin": "d14dc9a153df128aafd3f48d4fea2aa78b88bb28",
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "pandas": "2.2.3",
+    "numpy": "2.3.5",
+    "numba": "0.68.0",
+    "financial_numeric_core": "stdlib Decimal/Fraction; exact stored decimals"
+  },
+  "source_identity": {
+    "primary_path": "analysis/outputs/codex_rebound/personal19/UNIFORM/fee_1.24/baseline_daily19.csv",
+    "same_case_copy_path": "analysis/outputs/codex_rebound/personal19/SUNDAY2/fee_1.24/baseline_daily19.csv",
+    "expected_sha256_each": "d724c7d02b6db71e63ba705079dbea7fefaa42c6b4f436308a28993ca1908803",
+    "fee_view": "published native research1.24RT"
+  },
+  "row_completion_contract": "Prior completed dated published-book rows before nextVB10:00; conditional source assumption, not account receipt certification",
+  "limitations": [
+    "Feature is a fixed selected published personal19 shadow-book daily proxy, not actual native account equity or receipt.",
+    "Prior dated rows are assumed completed before the next VB10:00 decision under the frozen exit/next-book-day/Twin16:00 booking contract.",
+    "Core fees use nonzero-day activity and can undercount reentries; marks, source/version and OT coverage are not certified by fee repricing.",
+    "BASE19 includes its existing one-MNQ VB; X is that same saved VB column. Actual protected replay may differ and needs implementation controls.",
+    "The current roster and parent were selected on this historical data. 2023+ can only be previously seen historical validation.",
+    "Negative historical sample delta variance is a forecast/proxy condition, not realized variance reduction, alpha, promotion or account approval.",
+    "FEATURE counts are an upper bound on selected qualifying first-signal dates; no parent execution/trade membership or profit is established."
+  ],
+  "input_inventory": [
+    {
+      "path": "analysis/outputs/codex_rebound/personal19/UNIFORM/fee_1.24/baseline_daily19.csv",
+      "bytes": 267640,
+      "sha256": "d724c7d02b6db71e63ba705079dbea7fefaa42c6b4f436308a28993ca1908803"
+    },
+    {
+      "path": "analysis/outputs/codex_rebound/personal19/SUNDAY2/fee_1.24/baseline_daily19.csv",
+      "bytes": 267640,
+      "sha256": "d724c7d02b6db71e63ba705079dbea7fefaa42c6b4f436308a28993ca1908803"
+    }
+  ],
+  "input_header_or_financial_rows_interpreted": false,
+  "design_financial_years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "future_financial_values_authorized": false,
+  "raw_prices_or_execution_authorized": false
+}

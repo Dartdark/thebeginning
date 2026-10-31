@@ -1,0 +1,194 @@
+{ T_ONESIDE - Night-Volume Switch - @NQ 1 min, orario Exchange (CT)
+  IOG off, Bar Magnifier off. Volume da Ticks (Build Volume On: Trade Volume).
+
+  MODIFICA: SetStopContract / SetStopLoss rimossi e sostituiti da ordini stop
+  espliciti a prezzo assoluto. Vedi il blocco "STOP ESPLICITI" in fondo.
+  Differenze dichiarate rispetto alla versione con stop incorporati:
+
+    1) Il livello di stop viene congelato UNA SOLA VOLTA, al riempimento,
+       come EntryPrice -/+ stopPts. Prima la distanza veniva riapplicata a
+       ogni barra dal motore.
+    2) stopPts e stopLevel vengono AZZERATI alla chiusura di ogni posizione.
+       Prima stopPts restava impostato all'infinito e veniva riusato dal
+       trade successivo.
+    3) Gli ingressi sono bloccati se atrD <= 0. Prima, nei primi 20 giorni,
+       stopPts valeva 0 e le posizioni giravano SENZA alcuno stop.
+    4) LIMITE NOTO: le entrate sono "next bar at market", quindi il
+       riempimento avviene all'apertura della barra successiva, ma con IOG
+       spento lo script viene calcolato solo a chiusura barra. Di conseguenza
+       lo stop esplicito e' sul book dalla barra SUCCESSIVA a quella di
+       riempimento: la barra di ingresso resta scoperta. SetStopLoss invece
+       copriva anche quella barra. Per eliminare questa finestra servono
+       IOG e Bar Magnifier accesi.
+    5) Gli ordini stop sono ordini veri inviati al mercato, non stop gestiti
+       internamente dalla piattaforma: restano sul book anche se MultiCharts
+       perde la connessione. Era il motivo principale della modifica.
+}
+
+Inputs:
+    VolMult(1.4),
+    OneSideMult(2.0),
+    MinNightBars(30),
+    FadeStopMult(0.40),
+    LongStopMult(0.30),
+    NightStart(1600),
+    NightEnd(829),
+    RTHStart(830),
+    RTHEnd(1500),
+    ExitFade(844),
+    CashSessStart(959),
+    CashSessEnd(1059);
+
+Vars:
+    barTime(0), isNight(false), isRTH(false),
+    nightVol(0), nightBars(0), nightOpen(0), nightMove(0),
+    heavy(false), classified(false), medianVol(0),
+    nHist(0), iHist(0), nRange(0), iRange(0), atrD(0),
+    dayHi(0), dayLo(0), rthOn(false),
+    mOpen(0), mHi(0), mLo(0),
+    sumPV(0), sumV(0), sessVWAP(0),
+    stopPts(0), k(0),
+    pendStop(0),       { distanza di stop del segnale in attesa di riempimento }
+    stopLevel(0);      { prezzo assoluto di stop della posizione aperta }
+
+Arrays:
+    NightHist[20](0), RangeHist[20](0), Tmp[20](0);
+
+barTime = Time;
+isNight = barTime > NightStart or barTime <= NightEnd;
+isRTH   = barTime > RTHStart and barTime <= RTHEnd;
+
+{ nuova notte }
+if isNight and isNight[1] = false then begin
+    nightVol   = 0;
+    nightBars  = 0;
+    nightOpen  = Open;
+    heavy      = false;
+    classified = false;
+    rthOn      = false;
+end;
+
+if isNight then begin
+    nightVol  = nightVol + Ticks;
+    nightBars = nightBars + 1;
+end;
+
+{ 08:29 CT: classificazione notte e fade }
+if barTime = NightEnd then begin
+    nightMove = Close - nightOpen;
+
+    atrD = 0;
+    if nRange >= 20 then begin
+        for k = 0 to 19 begin
+            atrD = atrD + RangeHist[k];
+        end;
+        atrD = atrD / 20;
+    end;
+
+    medianVol = 0;
+    if nHist >= 20 then begin
+        for k = 0 to 19 begin
+            Tmp[k] = NightHist[k];
+        end;
+        Array_Sort(Tmp, 0, 19, true);
+        medianVol = (Tmp[9] + Tmp[10]) / 2;
+    end;
+
+    classified = nHist >= 20 and nRange >= 20;
+    heavy = classified and nightBars >= MinNightBars and nightVol > VolMult * medianVol;
+
+    if nightBars >= MinNightBars then begin
+        NightHist[iHist] = nightVol;
+        iHist = Mod(iHist + 1, 20);
+        if nHist < 20 then nHist = nHist + 1;
+    end;
+
+    { atrD > 0 obbligatorio: senza ATR non esiste distanza di stop -> niente trade }
+    if heavy and MarketPosition = 0 and nightMove <> 0 and atrD > 0 then begin
+        stopPts  = FadeStopMult * atrD;
+        pendStop = stopPts;
+        if nightMove > 0 then
+            SellShort ("Fade_S") next bar at market
+        else
+            Buy ("Fade_L") next bar at market;
+    end;
+end;
+
+{ sessione cash: range, mattina, VWAP }
+if isRTH then begin
+    if isRTH[1] = false then begin
+        rthOn = true;
+        dayHi = High;  dayLo = Low;
+        mOpen = Open;  mHi = High;  mLo = Low;
+        sumPV = 0;     sumV = 0;
+    end;
+    if High > dayHi then dayHi = High;
+    if Low  < dayLo then dayLo = Low;
+    if barTime <= CashSessStart then begin
+        if High > mHi then mHi = High;
+        if Low  < mLo then mLo = Low;
+    end;
+    sumPV = sumPV + (High + Low + Close) / 3 * Ticks;
+    sumV  = sumV + Ticks;
+    if sumV > 0 then sessVWAP = sumPV / sumV;
+end;
+
+{ 15:00 CT: range della sessione nello storico ATRd }
+if barTime = RTHEnd and rthOn then begin
+    RangeHist[iRange] = dayHi - dayLo;
+    iRange = Mod(iRange + 1, 20);
+    if nRange < 20 then nRange = nRange + 1;
+    rthOn = false;
+end;
+
+{ uscita fade }
+if barTime >= ExitFade and barTime < RTHEnd then begin
+    Sell ("Fade_LX") from entry ("Fade_L") next bar at market;
+    BuyToCover ("Fade_SX") from entry ("Fade_S") next bar at market;
+end;
+
+{ 09:59 CT: ONESIDE long }
+if barTime = CashSessStart and classified and heavy = false
+   and MarketPosition = 0 and rthOn and atrD > 0 then begin
+    if (mHi - mOpen) > OneSideMult * (mOpen - mLo) and Close > sessVWAP then begin
+        stopPts  = LongStopMult * atrD;
+        pendStop = stopPts;
+        Buy ("OS_L") next bar at market;
+    end;
+end;
+
+{ uscite long }
+if MarketPosition = 1 and barTime > CashSessStart and barTime < RTHEnd then begin
+    if barTime >= CashSessEnd then
+        Sell ("OS_TX") from entry ("OS_L") next bar at market
+    else if Close < sessVWAP then
+        Sell ("OS_VX") from entry ("OS_L") next bar at market;
+end;
+
+{ ==========================================================================
+  STOP ESPLICITI  (sostituisce SetStopContract / SetStopLoss)
+  ========================================================================== }
+
+{ a) posizione chiusa -> azzera lo stato, cosi' non viene ereditato dal trade dopo }
+if MarketPosition = 0 then begin
+    stopLevel = 0;
+    stopPts   = 0;
+end;
+
+{ b) posizione appena aperta -> congela il livello assoluto dal prezzo di riempimento }
+if MarketPosition <> 0 and stopLevel = 0 and pendStop > 0 then begin
+    if MarketPosition > 0 then
+        stopLevel = EntryPrice - pendStop
+    else
+        stopLevel = EntryPrice + pendStop;
+    pendStop = 0;
+end;
+
+{ c) ordine stop reale, rinnovato a ogni barra finche' la posizione e' aperta.
+     Le uscite "from entry" non pertinenti vengono semplicemente ignorate. }
+if MarketPosition > 0 and stopLevel > 0 then begin
+    Sell ("Fade_L_Stop") from entry ("Fade_L") next bar at stopLevel stop;
+    Sell ("OS_L_Stop")   from entry ("OS_L")   next bar at stopLevel stop;
+end
+else if MarketPosition < 0 and stopLevel > 0 then
+    BuyToCover ("Fade_S_Stop") from entry ("Fade_S") next bar at stopLevel stop;

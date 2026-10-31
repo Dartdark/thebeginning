@@ -1,0 +1,171 @@
+{
+  "audit": "forward_guidance_metadata_input_gate",
+  "decision": "NEEDS DATA",
+  "completed_utc": "2026-10-26T11:32:21.513915+00:00",
+  "plan": "agents/codex/plans/forward_guidance_input_gate.md",
+  "source_plan_commit": "ac88ccd",
+  "economic_preregistration": false,
+  "new_economic_configurations": 0,
+  "new_return_trials": 0,
+  "execution_workspace": "/workspace/thebeginning",
+  "interpreter": "/workspace/venvs/thebeginning/bin/python",
+  "git_head": "ac88ccdd344c868f24630f6b5b176f4bc54c5bdd",
+  "script": "analysis/codex_forward_guidance_input_gate.py",
+  "script_sha256": "2ef65d3f536486f519046814d63c2ebbac2885f7c1fa48e851be030146abcb87",
+  "input_sha256": {
+    "data/ndx_megacap_earnings.csv": "97d87d8de9470143d14c6513cd9c0a5eaead5b6867af03f15acfb57cde2ec5b2",
+    "data/dow_heavy_earnings.csv": "3e8ae8677c7024377b09139ce3b8296c4da2dd77fc17cbb90221309579a00e00",
+    "analysis/megacap_earnings_nq_test.py": "e8665de46140c989f537a955bb16f8545fd9ae2b0d6c778a74b06eb35a159b43",
+    "analysis/ym_dow_events_test.py": "af1f4969ade0384cadbbcadcaecab255b5f2b13183af2b8e84cac55fd421957f",
+    "agents/codex/plans/forward_guidance_input_gate.md": "07778bd1de05a90e28b15659aafeb6a5cbab8b2acebc855b726403f983790eac"
+  },
+  "schemas": {
+    "data/ndx_megacap_earnings.csv": {
+      "header": [
+        "ticker",
+        "fiscalDateEnding",
+        "reportedDate",
+        "reportedEPS",
+        "estimatedEPS",
+        "surprise",
+        "surprisePercentage",
+        "reportTime"
+      ],
+      "required_literal_fields": {
+        "same_future_horizon": {
+          "guidanceFiscalPeriod": false,
+          "priorGuidanceFiscalPeriod": false
+        },
+        "comparable_interval": {
+          "guidanceLow": false,
+          "guidanceHigh": false,
+          "priorGuidanceLow": false,
+          "priorGuidanceHigh": false
+        },
+        "metric_units_basis": {
+          "guidanceMetric": false,
+          "guidanceUnits": false,
+          "guidanceAccountingBasis": false
+        },
+        "original_documents": {
+          "guidanceDocumentURL": false,
+          "priorGuidanceDocumentURL": false,
+          "originalDocumentHash": false
+        },
+        "before_entry_timing": {
+          "publicationTimestamp": false,
+          "receiptTimestamp": false,
+          "priorPublicationTimestamp": false
+        },
+        "vintage_and_normalization": {
+          "dataVintage": false,
+          "guidanceStatus": false,
+          "currency": false,
+          "shareCountBasis": false
+        },
+        "index_transmission": {
+          "indexMembershipAsOf": false,
+          "indexWeightAsOf": false
+        }
+      },
+      "literal_field_limit": "No alias inference; absence is schema-only, not an exhaustive external-source finding."
+    },
+    "data/dow_heavy_earnings.csv": {
+      "header": [
+        "ticker",
+        "fiscalDateEnding",
+        "reportedDate",
+        "reportedEPS",
+        "estimatedEPS",
+        "surprise",
+        "surprisePercentage",
+        "reportTime"
+      ],
+      "required_literal_fields": {
+        "same_future_horizon": {
+          "guidanceFiscalPeriod": false,
+          "priorGuidanceFiscalPeriod": false
+        },
+        "comparable_interval": {
+          "guidanceLow": false,
+          "guidanceHigh": false,
+          "priorGuidanceLow": false,
+          "priorGuidanceHigh": false
+        },
+        "metric_units_basis": {
+          "guidanceMetric": false,
+          "guidanceUnits": false,
+          "guidanceAccountingBasis": false
+        },
+        "original_documents": {
+          "guidanceDocumentURL": false,
+          "priorGuidanceDocumentURL": false,
+          "originalDocumentHash": false
+        },
+        "before_entry_timing": {
+          "publicationTimestamp": false,
+          "receiptTimestamp": false,
+          "priorPublicationTimestamp": false
+        },
+        "vintage_and_normalization": {
+          "dataVintage": false,
+          "guidanceStatus": false,
+          "currency": false,
+          "shareCountBasis": false
+        },
+        "index_transmission": {
+          "indexMembershipAsOf": false,
+          "indexWeightAsOf": false
+        }
+      },
+      "literal_field_limit": "No alias inference; absence is schema-only, not an exhaustive external-source finding."
+    }
+  },
+  "metadata_fields_used": [
+    "ticker",
+    "fiscalDateEnding",
+    "reportedDate",
+    "reportTime"
+  ],
+  "source_metadata_rows": {
+    "data/ndx_megacap_earnings.csv": 898,
+    "data/dow_heavy_earnings.csv": 722
+  },
+  "outside_design_or_invalid_report_date_rows": {
+    "data/ndx_megacap_earnings.csv": 708,
+    "data/dow_heavy_earnings.csv": 602
+  },
+  "design_window": "2018-01-01 through 2022-12-31, by reportedDate only",
+  "selected_metadata_rows": 310,
+  "distinct_design_report_dates": 227,
+  "distinct_design_issuers": 16,
+  "simultaneous_multi_issuer_report_dates": 58,
+  "repeated_same_source_issuer_fiscal_groups": 0,
+  "repeated_identity_rows": 0,
+  "exceptions": 0,
+  "economic_events_observed": false,
+  "original_guidance_documents_observed": false,
+  "exact_receipt_timestamps_observed": false,
+  "original_data_vintages_established": false,
+  "historical_index_membership_and_weights_observed": false,
+  "prices_read": false,
+  "eps_or_surprise_values_used": false,
+  "financial_outputs_read": false,
+  "strategy_signals_generated": false,
+  "strategy_paths_replayed": false,
+  "network_requests": 0,
+  "limits": [
+    "Report dates are a local metadata opportunity ceiling, not guidance events, trading dates or independent samples.",
+    "A metadata key repetition is retained without assuming duplicate error or original release identity.",
+    "Pre/post-market labels do not establish exact release/receipt or DST clocks.",
+    "Current collected issuer sets do not establish historical membership; selection/survivorship remains unresolved.",
+    "No price-only or EPS-derived substitute, threshold, clock or economic rule is authorized."
+  ],
+  "artifacts_sha256": {
+    "design_report_metadata.csv": "b0bc268eaee923ecd56d0a014f8e729bbf73e70e83689646dc615f7de8a8bbd6",
+    "metadata_exceptions.csv": "78769724f099c521d0e2b083f226966822b80eb34551e790b6bb8f8d4f4f2c35",
+    "repeated_identity_groups.csv": "930d86aef56f6ba32bf753ffa387742242977d9eeb8d85afdf70850d4f3fdad0",
+    "yearly_census.csv": "a9cbab9866282b0886126d81f0858abb4e7a370c9a0f3e0afe266ade73edd48a",
+    "combined_report_dates.csv": "e7c0aee04272ec4fa42e1cc6372ff82efc3512fb20f3fc441212cbcc95af7133"
+  }
+}

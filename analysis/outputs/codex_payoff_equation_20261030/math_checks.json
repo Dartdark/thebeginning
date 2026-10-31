@@ -1,0 +1,91 @@
+{
+  "scope": "deterministic arithmetic and illustrative sampling check only",
+  "new_strategy_return_trials": 0,
+  "source_rows": [
+    {
+      "label": "Typical retail pattern, illustrative",
+      "p": 0.6,
+      "R": 0.5,
+      "claimed_normalized_expectancy": -0.1,
+      "verified_normalized_expectancy": -0.10000000000000003,
+      "break_even_p": 0.6666666666666666
+    },
+    {
+      "label": "Medallion reported hit rate, assumed equal payoffs",
+      "p": 0.5075,
+      "R": 1.0,
+      "claimed_normalized_expectancy": 0.015,
+      "verified_normalized_expectancy": 0.014999999999999902,
+      "break_even_p": 0.5
+    },
+    {
+      "label": "Paul Tudor Jones risk-reward illustration",
+      "p": 0.2,
+      "R": 5.0,
+      "claimed_normalized_expectancy": 0.2,
+      "verified_normalized_expectancy": 0.19999999999999996,
+      "break_even_p": 0.16666666666666666
+    }
+  ],
+  "breakeven_table": [
+    {
+      "realized_payoff_ratio": 0.5,
+      "break_even_win_fraction": 0.6666666666666666
+    },
+    {
+      "realized_payoff_ratio": 1,
+      "break_even_win_fraction": 0.5
+    },
+    {
+      "realized_payoff_ratio": 2,
+      "break_even_win_fraction": 0.3333333333333333
+    },
+    {
+      "realized_payoff_ratio": 3,
+      "break_even_win_fraction": 0.25
+    },
+    {
+      "realized_payoff_ratio": 5,
+      "break_even_win_fraction": 0.16666666666666666
+    }
+  ],
+  "cost_example": {
+    "gross_p": 0.2,
+    "gross_average_win": 500,
+    "gross_average_loss": 100,
+    "cost_per_trade": 5,
+    "gross_expectancy": 20.0,
+    "net_expectancy": 15.0,
+    "cost_adjusted_break_even_win_fraction": 0.175
+  },
+  "higher_R_counterexample": {
+    "before_p": 0.6,
+    "before_R": 1,
+    "before_expectancy": 0.19999999999999996,
+    "after_p": 0.55,
+    "after_R": 1.1,
+    "after_expectancy": 0.15500000000000014
+  },
+  "profitable_R_below_one_example": {
+    "p": 0.75,
+    "R": 0.5,
+    "normalized_expectancy": 0.125
+  },
+  "last50_IID_illustration": {
+    "wins": 10,
+    "n": 50,
+    "win_fraction": 0.2,
+    "Wilson95": [
+      0.1124375001577611,
+      0.33037105932225413
+    ],
+    "assumed_known_R": 5,
+    "breakeven_win_fraction": 0.16666666666666666,
+    "interval_clears_breakeven": false,
+    "limit": "Illustrative probability interval, not actual trades or a test of estimated payoff stability"
+  },
+  "five_losses_in_a_preselected_block_probability": 0.3276800000000001,
+  "Odean_published_proportion_ratio": 1.510204081632653,
+  "cases_are_constructed_not_observed": true,
+  "no_account_or_plan_change": true
+}

@@ -1,0 +1,955 @@
+{
+  "ref": "e4399c8e235ee26674c88a439d4c9926b5731af4",
+  "source_audits": {
+    "analysis/outputs/codex_s03_noisearea/design_V2_day_audit.csv": "1b0de735f1fff6c77dd79af887a1032ef032cc0c11aef3ea1d8f347de91202a6",
+    "analysis/outputs/codex_s03_noisearea/recent_V2_day_audit.csv": "ca9a73e2ba5035eb3b2ef984bc89bc1b7675072c47e0f93a218ba4d99c8050b9"
+  },
+  "source_orders": {
+    "analysis/outputs/codex_s03_noisearea/design_V2_orders.csv": "0b8f16a61a78ba39c841395fca804f1baa810e30edec0ed1ba9a29231068ae89",
+    "analysis/outputs/codex_s03_noisearea/recent_V2_orders.csv": "d5dcbcc0ec65e336b44a33791cdb551b695a52694e8655b3262468583b37fa40"
+  },
+  "calendar_rows": 2290,
+  "normal_cash_dates": 2187,
+  "expected_weekday_rows": 2290,
+  "omitted_weekday_dates": [],
+  "grid_sha256": "69868d1cbc5ca6acdbbba0899eb01ca1ad7d036e00160f33c3f1992d5a385595",
+  "raw_versions": [
+    {
+      "path": "data/NQ_1min_2018.csv",
+      "sha": "76eb73b44b4b67a08131dc1a4241fd4452b39673",
+      "size": 5630086,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_2018.csv",
+      "local_git_blob": "76eb73b44b4b67a08131dc1a4241fd4452b39673",
+      "local_sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+      "local_bytes": 5630086,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_ON_2018.csv",
+      "sha": "bf8386738439cb25cbdd160d23a6d3b3f39c5f3b",
+      "size": 11729558,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_ON_2018.csv",
+      "local_git_blob": "bf8386738439cb25cbdd160d23a6d3b3f39c5f3b",
+      "local_sha256": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2",
+      "local_bytes": 11729558,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_2019.csv",
+      "sha": "db1c597e7dcac738d2a336fc90ba5a6d132aa535",
+      "size": 5643031,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_2019.csv",
+      "local_git_blob": "db1c597e7dcac738d2a336fc90ba5a6d132aa535",
+      "local_sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+      "local_bytes": 5643031,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_ON_2019.csv",
+      "sha": "2a0dc8d66e208b526621d246d79e7a08699b1562",
+      "size": 11858009,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_ON_2019.csv",
+      "local_git_blob": "2a0dc8d66e208b526621d246d79e7a08699b1562",
+      "local_sha256": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d",
+      "local_bytes": 11858009,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_2020.csv",
+      "sha": "fc22a2151cf8794527756f75048d89a7adfca1d1",
+      "size": 5890101,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_2020.csv",
+      "local_git_blob": "fc22a2151cf8794527756f75048d89a7adfca1d1",
+      "local_sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+      "local_bytes": 5890101,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_ON_2020.csv",
+      "sha": "cd0eaccf6dcc1956dd1f7ef5fd417b6041f74cb8",
+      "size": 12324066,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_ON_2020.csv",
+      "local_git_blob": "cd0eaccf6dcc1956dd1f7ef5fd417b6041f74cb8",
+      "local_sha256": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9",
+      "local_bytes": 12324066,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_2021.csv",
+      "sha": "c978b68c5092abceaba934228970a401b03b65b4",
+      "size": 6118786,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_2021.csv",
+      "local_git_blob": "c978b68c5092abceaba934228970a401b03b65b4",
+      "local_sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+      "local_bytes": 6118786,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_ON_2021.csv",
+      "sha": "26a8f20c87383ea421cb7efca5bfc2b03ed6a7a1",
+      "size": 12996633,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_ON_2021.csv",
+      "local_git_blob": "26a8f20c87383ea421cb7efca5bfc2b03ed6a7a1",
+      "local_sha256": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e",
+      "local_bytes": 12996633,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_2022.csv",
+      "sha": "8651c6244bbd46b32e952062d91373348e0c3c9e",
+      "size": 6122385,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_2022.csv",
+      "local_git_blob": "8651c6244bbd46b32e952062d91373348e0c3c9e",
+      "local_sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+      "local_bytes": 6122385,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_ON_2022.csv",
+      "sha": "2b0510fa786cfcb9f23b285735097258e77383ce",
+      "size": 13079168,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_ON_2022.csv",
+      "local_git_blob": "2b0510fa786cfcb9f23b285735097258e77383ce",
+      "local_sha256": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0",
+      "local_bytes": 13079168,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_2024.csv",
+      "sha": "ccc5cdbca04f150251433ec945d13c24c43b50c7",
+      "size": 6118945,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_2024.csv",
+      "local_git_blob": "ccc5cdbca04f150251433ec945d13c24c43b50c7",
+      "local_sha256": "87a5db405d5bdc9aa0914018aed046dbdd50332f630700720ae40fa72ddd056a",
+      "local_bytes": 6118945,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_ON_2024.csv",
+      "sha": "cee683a5192e7be2f0a8cea350c8afad529093fe",
+      "size": 13108186,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_ON_2024.csv",
+      "local_git_blob": "cee683a5192e7be2f0a8cea350c8afad529093fe",
+      "local_sha256": "82e02ddf7e775f01b566f584f4f7245f7c021b6062437b9e2cf14be9e9852607",
+      "local_bytes": 13108186,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_2025.csv",
+      "sha": "31c3ee1fb91d71c2361a306e23665df34cbf2008",
+      "size": 6068360,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_2025.csv",
+      "local_git_blob": "31c3ee1fb91d71c2361a306e23665df34cbf2008",
+      "local_sha256": "5a454139b43adfe59dabca59a777b8373457dcf024ce806aecb939d3fbd1785f",
+      "local_bytes": 6068360,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_ON_2025.csv",
+      "sha": "0661049247467fc24e5b9370818e1fc94d83c601",
+      "size": 13027728,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_ON_2025.csv",
+      "local_git_blob": "0661049247467fc24e5b9370818e1fc94d83c601",
+      "local_sha256": "d9401a7321314ff4f8b098950d439687a018c486d8d2d8dcb001da166eb828dd",
+      "local_bytes": 13027728,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_2026.csv",
+      "sha": "8ffc256a0ce3fc8c3bef9a825b0a1d7de8a016b8",
+      "size": 4736476,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_2026.csv",
+      "local_git_blob": "8ffc256a0ce3fc8c3bef9a825b0a1d7de8a016b8",
+      "local_sha256": "0aea92af1a45e4fc1b4e99bda6217d30e14a34b40fb3f55de7d2fbe53fe81c4a",
+      "local_bytes": 4736476,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_ON_2026.csv",
+      "sha": "3cb334fc15550b102f94c3f2381457db4fe4f9f9",
+      "size": 10199446,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_ON_2026.csv",
+      "local_git_blob": "3cb334fc15550b102f94c3f2381457db4fe4f9f9",
+      "local_sha256": "6c646e92f7786d98485740867d4a461f5fcbd4782aee8dbd87536bd9d348eed5",
+      "local_bytes": 10199446,
+      "exact_github_match": true
+    }
+  ],
+  "days": [
+    {
+      "date": "2018-04-30",
+      "day": 150,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "14:42",
+          "last": "14:42",
+          "minutes": 1
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 389,
+      "cached_native_cash_minutes": 389,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2018.csv": {
+          "rows": 435,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 389
+        },
+        "data/NQ_1min_ON_2018.csv": {
+          "rows": 924,
+          "first_time": "00:00",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    },
+    {
+      "date": "2018-07-26",
+      "day": 237,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "13:43",
+          "last": "13:44",
+          "minutes": 2
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 388,
+      "cached_native_cash_minutes": 388,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2018.csv": {
+          "rows": 434,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 388
+        },
+        "data/NQ_1min_ON_2018.csv": {
+          "rows": 927,
+          "first_time": "00:00",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    },
+    {
+      "date": "2018-08-28",
+      "day": 270,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "13:01",
+          "last": "13:04",
+          "minutes": 4
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [
+        "13:01"
+      ],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 386,
+      "cached_native_cash_minutes": 386,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2018.csv": {
+          "rows": 432,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 386
+        },
+        "data/NQ_1min_ON_2018.csv": {
+          "rows": 927,
+          "first_time": "00:00",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    },
+    {
+      "date": "2019-12-05",
+      "day": 734,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "08:43",
+          "last": "08:44",
+          "minutes": 2
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 388,
+      "cached_native_cash_minutes": 388,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2019.csv": {
+          "rows": 434,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 388
+        },
+        "data/NQ_1min_ON_2019.csv": {
+          "rows": 929,
+          "first_time": "00:00",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    },
+    {
+      "date": "2020-03-09",
+      "day": 829,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "08:34",
+          "last": "08:34",
+          "minutes": 1
+        },
+        {
+          "first": "08:37",
+          "last": "08:49",
+          "minutes": 13
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 376,
+      "cached_native_cash_minutes": 376,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2020.csv": {
+          "rows": 405,
+          "first_time": "08:01",
+          "last_time": "15:15",
+          "cash_rows": 376
+        },
+        "data/NQ_1min_ON_2020.csv": {
+          "rows": 718,
+          "first_time": "00:01",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": true
+    },
+    {
+      "date": "2020-03-12",
+      "day": 832,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "08:38",
+          "last": "08:50",
+          "minutes": 13
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 377,
+      "cached_native_cash_minutes": 377,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2020.csv": {
+          "rows": 405,
+          "first_time": "08:02",
+          "last_time": "15:15",
+          "cash_rows": 377
+        },
+        "data/NQ_1min_ON_2020.csv": {
+          "rows": 909,
+          "first_time": "00:00",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": true
+    },
+    {
+      "date": "2020-03-16",
+      "day": 836,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "08:32",
+          "last": "08:45",
+          "minutes": 14
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 376,
+      "cached_native_cash_minutes": 376,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2020.csv": {
+          "rows": 394,
+          "first_time": "08:06",
+          "last_time": "15:15",
+          "cash_rows": 376
+        },
+        "data/NQ_1min_ON_2020.csv": {
+          "rows": 335,
+          "first_time": "00:00",
+          "last_time": "23:46",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": true
+    },
+    {
+      "date": "2020-03-18",
+      "day": 838,
+      "classification": "missing_scheduled_decision_unclassified_closure",
+      "missing_intervals": [
+        {
+          "first": "11:59",
+          "last": "12:11",
+          "minutes": 13
+        }
+      ],
+      "missing_scheduled_decisions": [
+        "12:00"
+      ],
+      "missing_next_minute_entry_slots": [
+        "12:01"
+      ],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 377,
+      "cached_native_cash_minutes": 377,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2020.csv": {
+          "rows": 396,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 377
+        },
+        "data/NQ_1min_ON_2020.csv": {
+          "rows": 558,
+          "first_time": "00:00",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": true
+    },
+    {
+      "date": "2020-11-30",
+      "day": 1095,
+      "classification": "missing_entire_normal_cash_session",
+      "missing_intervals": [
+        {
+          "first": "08:31",
+          "last": "15:00",
+          "minutes": 390
+        }
+      ],
+      "missing_scheduled_decisions": [
+        "09:00",
+        "09:30",
+        "10:00",
+        "10:30",
+        "11:00",
+        "11:30",
+        "12:00",
+        "12:30",
+        "13:00",
+        "13:30",
+        "14:00",
+        "14:30"
+      ],
+      "missing_next_minute_entry_slots": [
+        "09:01",
+        "09:31",
+        "10:01",
+        "10:31",
+        "11:01",
+        "11:31",
+        "12:01",
+        "12:31",
+        "13:01",
+        "13:31",
+        "14:01",
+        "14:31"
+      ],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": true,
+      "missing_1500_close": true,
+      "raw_native_cash_minutes": 0,
+      "cached_native_cash_minutes": 0,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": false,
+      "raw_exports": {
+        "data/NQ_1min_2020.csv": {
+          "rows": 0,
+          "first_time": null,
+          "last_time": null,
+          "cash_rows": 0
+        },
+        "data/NQ_1min_ON_2020.csv": {
+          "rows": 359,
+          "first_time": "18:01",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    },
+    {
+      "date": "2021-09-17",
+      "day": 1386,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "08:32",
+          "last": "08:32",
+          "minutes": 1
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 389,
+      "cached_native_cash_minutes": 389,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2021.csv": {
+          "rows": 435,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 389
+        },
+        "data/NQ_1min_ON_2021.csv": {
+          "rows": 525,
+          "first_time": "00:00",
+          "last_time": "16:00",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    },
+    {
+      "date": "2022-03-08",
+      "day": 1558,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "11:21",
+          "last": "11:21",
+          "minutes": 1
+        },
+        {
+          "first": "11:23",
+          "last": "11:23",
+          "minutes": 1
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 388,
+      "cached_native_cash_minutes": 388,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2022.csv": {
+          "rows": 434,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 388
+        },
+        "data/NQ_1min_ON_2022.csv": {
+          "rows": 943,
+          "first_time": "00:00",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    },
+    {
+      "date": "2024-10-09",
+      "day": 2504,
+      "classification": "incomplete_execution_path",
+      "missing_intervals": [
+        {
+          "first": "14:47",
+          "last": "14:48",
+          "minutes": 2
+        },
+        {
+          "first": "14:55",
+          "last": "14:55",
+          "minutes": 1
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 387,
+      "cached_native_cash_minutes": 387,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2024.csv": {
+          "rows": 433,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 387
+        },
+        "data/NQ_1min_ON_2024.csv": {
+          "rows": 944,
+          "first_time": "00:00",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 3,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    },
+    {
+      "date": "2024-10-24",
+      "day": 2519,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "11:41",
+          "last": "11:42",
+          "minutes": 2
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 388,
+      "cached_native_cash_minutes": 388,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2024.csv": {
+          "rows": 434,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 388
+        },
+        "data/NQ_1min_ON_2024.csv": {
+          "rows": 944,
+          "first_time": "00:00",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    },
+    {
+      "date": "2025-06-02",
+      "day": 2740,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "11:03",
+          "last": "11:03",
+          "minutes": 1
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 389,
+      "cached_native_cash_minutes": 389,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2025.csv": {
+          "rows": 435,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 389
+        },
+        "data/NQ_1min_ON_2025.csv": {
+          "rows": 944,
+          "first_time": "00:00",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    },
+    {
+      "date": "2025-11-14",
+      "day": 2905,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "09:35",
+          "last": "09:37",
+          "minutes": 3
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 387,
+      "cached_native_cash_minutes": 387,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2025.csv": {
+          "rows": 433,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 387
+        },
+        "data/NQ_1min_ON_2025.csv": {
+          "rows": 525,
+          "first_time": "00:00",
+          "last_time": "16:00",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    },
+    {
+      "date": "2026-08-06",
+      "day": 3170,
+      "classification": "flat_nondecision_gap_observed_only_VWAP_allowed",
+      "missing_intervals": [
+        {
+          "first": "13:55",
+          "last": "13:55",
+          "minutes": 1
+        }
+      ],
+      "missing_scheduled_decisions": [],
+      "missing_next_minute_entry_slots": [],
+      "market_orders_activating_inside_missing": [],
+      "missing_anchor_open": false,
+      "missing_1500_close": false,
+      "raw_native_cash_minutes": 389,
+      "cached_native_cash_minutes": 389,
+      "raw_only_cash_minutes": [],
+      "cache_only_cash_minutes": [],
+      "raw_cache_observed_masks_match": true,
+      "is_canonical_baseline_trading_row": true,
+      "raw_exports": {
+        "data/NQ_1min_2026.csv": {
+          "rows": 435,
+          "first_time": "08:00",
+          "last_time": "15:15",
+          "cash_rows": 389
+        },
+        "data/NQ_1min_ON_2026.csv": {
+          "rows": 944,
+          "first_time": "00:00",
+          "last_time": "23:59",
+          "cash_rows": 0
+        }
+      },
+      "unknown_held_minutes": 0,
+      "delayed_orders": 0,
+      "censored_positions": 0,
+      "unmatched_orders": 0,
+      "verified_R2_known_closure_overlap_minutes": 0,
+      "march2020_halt_candidate_unverified_in_R2_mask": false
+    }
+  ],
+  "classification_counts": {
+    "flat_nondecision_gap_observed_only_VWAP_allowed": 13,
+    "missing_scheduled_decision_unclassified_closure": 1,
+    "missing_entire_normal_cash_session": 1,
+    "incomplete_execution_path": 1
+  },
+  "structural_audit_only": true,
+  "historical_account_or_baseline_returns_computed": false,
+  "account_gate_clear": false,
+  "known_closure_sources": {
+    "ref": "541d1117683294cc3949d13e7260272eba5a20b8",
+    "sources": [
+      {
+        "staged": "published/r2vault_calendar_metadata.md",
+        "git_blob": "3aad3228eab11787a19fa18fd912a312bd7e97c1",
+        "url": "https://github.com/Dartdark/thebeginning/blob/541d1117683294cc3949d13e7260272eba5a20b8/agents/codex/inputs/r2vault/calendar_metadata.md",
+        "sha256": "578813d3060a6e6b2e8cad90f888a0d1a49e90be78dfa5bbbad28663866c51a1"
+      },
+      {
+        "staged": "published/codex_r2vault_replay.py",
+        "git_blob": "1076b3aee4854c924df392564639963811637e83",
+        "url": "https://github.com/Dartdark/thebeginning/blob/541d1117683294cc3949d13e7260272eba5a20b8/analysis/codex_r2vault_replay.py",
+        "sha256": "d1bd58c33e89c6b1b84d4efae2c2d87bc2949bdcbbbab53cfa851530bf4b20ac"
+      },
+      {
+        "staged": "published/codex_anson_replay.py",
+        "git_blob": "c3369bd756393059bac6fda4485a8e072c712130",
+        "url": "https://github.com/Dartdark/thebeginning/blob/541d1117683294cc3949d13e7260272eba5a20b8/analysis/codex_anson_replay.py",
+        "sha256": "4bb78bf6bbef0c97c5c08a6e465424aad1a7589aec40baa22e06280ecc7722fe"
+      }
+    ]
+  },
+  "no_cache_rebuild_or_price_imputation": true,
+  "criteria": [
+    "Flat gaps away from scheduled decisions are permitted by the frozen observed-only VWAP prefix when actual held/order paths remain complete.",
+    "A missing scheduled decision is unresolved unless an independently documented closure establishes there was no native bar.",
+    "An entirely absent normal cash session cannot silently become a zero-return date or be omitted from the baseline calendar.",
+    "A missing nominal next-minute slot is audited against actual queued market orders; next-observed execution is the registered rule.",
+    "Published R2 known_closed covers daily maintenance, weekends, early-close proxy and old15:16\u201315:30pause; it does not certify March2020 circuit breakers."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "recorded_utc": "2026-10-26T23:45:03.390412+00:00",
+  "actual_calendar_or_price_rows_read": false,
+  "economic_evaluations_added": 0,
+  "history": [
+    {
+      "stage": "source-only calendar disposition integration",
+      "result": "initial existing author count fixture failed AttributeError because its artificial event table lacked newly required eligible_calendar field",
+      "failure_script_sha256": "not recorded",
+      "correction": "added explicit artificial eligibility, then added strict marker/monotonic/holiday exclusion boundary fixtures",
+      "final_pass_script_sha256": "93f9f509054859db5790f09c5261dbffd2400e0b7a11d2cbeb2b52ccf8acc2a3",
+      "final_synthetic_groups": 9
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "preregistration": "928c0ea",
+  "plan_ref": "e34d71cd3537a9f019d2521e280fc92f3ffdb4c6",
+  "configurations": 21,
+  "cohorts": [
+    "2018_plus",
+    "2025_plus_replication"
+  ],
+  "mc_histories": 5000,
+  "horizon_days": 252,
+  "block_days": 20,
+  "mc_seed": 1,
+  "paired_mc_mean_ci_resamples": 5000,
+  "paired_mc_mean_ci_seed": 902,
+  "historical_effect_block_bootstrap_resamples": 5000,
+  "historical_effect_ci_seed": 903,
+  "historical_effect_interval": "95%; paired20-day blocks of observed full cohort length; annualized mean delta",
+  "mc_mean_interval": "95% simulation-precision interval only, conditional on the historical return distribution",
+  "no_Apex_limits": true,
+  "limitations": [
+    "Published personal fee convention is preserved: +$0.55 per nonzero plan day, not exact trade counts; VB reentries are undercharged.",
+    "Published MOC starts at $0.50/MES rather than $0.725, so its inherited total commission is $1.05 rather than $1.275.",
+    "Twin baseline is the committed v1 checker ledger with published16:00 marks; no exact v2.1 ledger exists.",
+    "Twin published marking skips dates without a15:30..16:00 observation; candidate uses the last available same-date price at/before16:00.",
+    "Candidate observed-bar gaps can reflect closures or feed loss; marks can be stale and no future price fills the gap.",
+    "Daily marked drawdown omits intraday margin/liquidation exposure; personal MC has no Apex trail or payout caps."
+  ],
+  "script_sha256": "6315d0436fee0fb92c8c0272512f87f6936d94143888af94eb41dfb42e648448",
+  "ledger_sha256": "46cfee543e8f39ca79de023cc2e0f8fbf8a0622708ff904e64466fd911e3ea35",
+  "baseline_input_manifest_sha256": "c5ad18b45c04c2835c4028733d20a9da308ea31792d04371eccd07382ae66804",
+  "candidate_wall_time_boundary_review": {
+    "actual_j961_fills": 0,
+    "all2262_daily_returns_unchanged": true
+  }
+}

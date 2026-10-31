@@ -1,0 +1,1857 @@
+=== PAGE 1 ===
+ORB 5 MINUTES ON NQ · 848
+VALERIS ALPHA · EXPLORATORY OUT-OF-SAMPLE
+CHOSEN AFTER SEEING THE OOS  >  FORWARD TEST FIRST
+OPEN FOR REVIEW
+!   CAUTION  —  CHOSEN AFTER LOOKING AT THE OUT-OF-SAMPLE
+Luca chose this strategy on 07/10/2026 looking at the Valeris Alpha board with both out-of-sample periods visible (registry event 1584197), and its
+long-only version on 08/10/2026 (event 1590549): every out-of-sample number in this document is optimistic. It is not validated: OOS 1 t 1.75
+against a gate of 1.96, OOS 2 t 2.25 against 3.92, and the anti data mining protocol did not admit it. The real test is the period from today on.
+// STRATEGY RESEARCH NOTE · PAPER 848
+ORB 5 MIN
+ON NQ
+An opening-range breakout on the Nasdaq-100 future. The first 5-minute
+candle of the New York session picks the side, a Supertrend filter checks
+that the market is already running that way, and a very tight stop keeps the
+wrong days small. From Zarattini and Aziz (2023), rebuilt and optimised by
+Valeris Alpha.
+INSTRUMENT
+MNQ (micro NQ)
+SAMPLE
+2,454 trades
+PERIOD
+2017 / 2026
+TIMEFRAME
+5 minutes
+DIRECTION
+long + short
+ORIGIN
+ORB, Zarattini & Aziz
+PLATFORM
+MultiCharts
+STATUS
+not admitted · 1 of 2
+
+
+=== PAGE 2 ===
+ORB 5 MINUTES ON NQ · 848
+00 / EXECUTIVE SUMMARY
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+// CONTENTS
+CONTENTS.
+01
+03
+The hypothesis
+THE PAPER, WHY AN ORB SHOULD WORK
+02
+04
+How it works
+THE RULE STEP BY STEP, AN EXAMPLE
+03
+06
+Chart setup
+MULTICHARTS, SESSION, INPUTS, CHECKS
+04
+08
+Results
+BY PERIOD, BY YEAR, BY TRADE TYPE
+05
+10
+Equity and distribution
+THREE PERIODS, DRAWDOWN, MONTHS
+06
+12
+Long only
+THE LATO = 1 VERSION, LONG VS SHORT
+07
+14
+The Alpha report
+CHAIN, TRIALS, PROTOCOL, ROBUSTNESS
+08
+19
+Bootstrap: evaluation
+LUCIDFLEX 50K AND 25K, APEX 50K
+09
+21
+Bootstrap: funded
+FIRST PAYOUT WITHIN 30 AND 60 DAYS
+10
+23
+The weak point
+2026 DRAWDOWN, TIGHT STOP, ROLL
+11
+24
+Limits and verdict
+WHAT IS NOT PROVEN, FORWARD TEST
+// ABSTRACT
+THE CASE.
+Every regular session the first 5-minute candle on NQ
+(08:30-08:35 Chicago) picks the side. The trade is taken only if
+price is already at least 1.5 bar-ATRs beyond the Supertrend
+line on that side. Stop at 0.1 × the 14-day average daily range
+(ADR), break-even after 0.5 ADR, exit at 15:00, up to three
+re-entries the same way. One trade in five wins; the winners are
+five times the losers.
+On 1 NQ mini with the Valeris size: development (2017 to
+October 2022) 1,446 trades, $201,362, t 5.16. OOS 1 (to
+December 2023) $45,027, t 1.75 against 1.96; OOS 2 (2024 to
+September 2026) $103,748, t 2.25 against 3.92. On 1 micro
+since 26/10/2022: $14,519, worst drawdown $2,030
+(30/06-17/09/2026).
+Prop bootstrap (Matteo's method, fixed size, last 30% of days):
+evaluation within 30 days 17.4% on LucidFlex 50K, 17.7% on
+25K, 36.2% on Apex 50K, far from the 60% target. Long only
+(Lato = 1): positive in all three periods, weaker on LucidFlex.
+// READ THIS FIRST
+Not validated. Chosen by looking at the out-of-sample, not
+admitted by the anti data mining protocol, and the best of
+three strategies from the same paper sent out of sample
+together. Trade it only as a forward test, on a rule fixed in
+advance.
+
+
+=== PAGE 3 ===
+THE IDEA
+01 / HYPOTHESIS
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+01
+// THE PAPER, IN FULL
+HYPOTHESIS.
+Zarattini, C., Aziz, A. (2023). Can Day Trading Really Be Profitable? Evidence of Sustainable Long-term Profits from Opening
+Range Breakout (ORB) Day Trading Strategy vs. Benchmark in the US Stock Market. SSRN working paper 4416622.
+// WHAT THE AUTHORS TEST
+The paper starts from a well-known fact: most people who day
+trade lose money. The authors ask whether a simple, fully
+mechanical rule can do better, and test the oldest intraday idea
+there is, the opening range breakout, on QQQ (the Nasdaq-100
+ETF) with 5-minute bars from January 2016 to February 2023, a
+period that includes the 2020 crash and the 2022 bear market.
+The rule. Look at the first 5-minute candle of the New York
+session (09:30-09:35). If it went up, buy at the start of the second
+candle; if it went down, sell short. The stop sits at the other end of
+the first candle (its low for a long, its high for a short). The target is
+ten times that risk (10R). Whatever is still open is closed at the end
+of the day. One trade a day at most, sized so that a stop costs 1%
+of the account, with leverage capped at four times (the US
+day-trading limit), commission included.
+// WHY IT SHOULD WORK
+The open concentrates information. Overnight news, earnings
+and the orders that piled up since the previous close all reach the
+market in the first minutes. The first candle is the market's first vote
+on that imbalance.
+The imbalance persists. Large investors cannot fill big orders at
+once: they work them through the day. If the first minutes show
+buyers in control, the same flow tends to keep coming, and the day
+keeps moving the same way more often than chance would say.
+This is intraday momentum.
+The payoff is asymmetric. A stop at the edge of the first candle is
+small; the 10R target, or the close, lets a trend day run. The rule
+can be wrong on most days and still make money, because a few
+trend days pay for many small losses. And it leaves nothing to
+judgement, which is where day traders usually fail.
+// WHAT THEY FOUND  ·  AS REPORTED BY THE AUTHORS, NOT REPRODUCED HERE
+// ANNUAL ALPHA
+33%
+QQQ, net of commissions
+// WITH TQQQ (3X)
++1,484%
+total return, 2016-2023
+// BUY AND HOLD
++169%
+QQQ over the same period
+// TRADES
+1 a day
+at most, every session
+// HOW VALERIS ALPHA ADAPTED IT
+NQ futures instead of QQQ, times in Chicago: the first candle
+is the 08:35 bar, measured from the close of the 08:30 bar (the
+last price before the open) to the close of the 08:35 bar. Entry
+at the close of the 08:35 bar, i.e. at the start of the second
+candle, as in the paper. The paper's candle-extreme stop and
+10R target were left to the optimisation, which found its own
+exits, a filter and re-entries (section 07).
+// THE RAW PAPER RULE ON NQ
+Side from the first candle, entry at 08:35, exit at 15:00 (the
+cash close), no stop: on NQ in 2017-10/2022 it made 1,424
+trades, $52,439 on 1 mini, 51% winners, t 0.57, worst
+drawdown $101,276. Positive, enough for step 1 of Alpha
+(average trade at least half the NQ threshold), but nowhere
+near significant on its own.
+The paper gives the idea and the side; the optimisation gave everything else. What carries the result is the
+asymmetry the authors describe: one trade in five wins, and the winners are five times the losers.
+CONCLUSION OF §01
+
+=== PAGE 4 ===
+ELEMENTS OF THE STRATEGY
+02 / HOW IT WORKS
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+02
+// THE RULE, STEP BY STEP
+HOW IT WORKS.
+Chicago (exchange) time, 5-minute bars stamped at their close: the 08:35 bar runs from 08:30 to 08:35. One position at a time, everything
+closed the same day. ADR = average high-low range of the last 14 regular sessions (08:35-15:00); ATR = average true range. Both are
+yesterday's values, fixed for the whole day.
+1 · FIRST CANDLE At 08:35, compare the close of the 08:35 bar with the close of the 08:30 bar. Up: the day is long. Down: the day
+is short. Unchanged: no trade today.
+2 · FILTER Supertrend with 10 bars and multiplier 2, on every 5-minute bar, night session included. Distance z = (close -
+Supertrend line) × side ÷ ATR(14) of the 5-minute bars. Trade only if z ≥ 1.5: price must already be running in
+the candle's direction, well clear of the line.
+3 · ENTRY Market order at the close of the 08:35 bar. Never on holidays or half-days; the first 14 regular sessions of the
+chart are skipped (ATR and ADR need them).
+4 · STOP 0.1 × ADR from the entry price, active from the next bar. In 2026 that is 21 to 70 NQ points, median 39 (about
+$78 per micro). If a bar opens beyond the stop, the exit is at the open.
+5 · BREAK-EVEN When price has moved 0.5 ADR in favour (using the highs or lows after the entry bar), from the next bar the
+stop moves to the entry price.
+6 · TIME EXIT A target at 5 ADR exists but was never touched in 2017-2026. Otherwise the base trade closes at the close of
+the 15:00 bar, the cash close.
+7 · RE-ENTRIES After any exit, wait 4 bars, then re-enter the same side at the close of the bar where the close crosses the
+level: for a long day, yesterday's close - 0.25 × daily ATR(14), crossed upwards; for a short day, yesterday's
+close + 0.25 ATR, crossed downwards. Same stop and break-even from the new price; re-entries close at
+15:30 (never after 15:40). At most 4 trades a day: the base and three re-entries.
+8 · SIZE Valeris sizes dynamically: weight = (median ADR of the last 250 sessions ÷ ADR)0.5, between 0.25 and 4, so
+more contracts when the market is quiet. The prop numbers here use a fixed size (input TagliaDinamica = 0):
+same trades, constant contracts.
+In MultiCharts the side can be restricted with the input Lato: 0 both sides (as optimised), 1 long only, -1 short only (section 06). The rule uses
+only open, high, low and close of NQ: no volume, no other market.
+FIG. 1   STOP DISTANCE IN NQ POINTS, 0.1 × ADR, EVERY TRADING DAY 2017-2026
+The stop follows volatility: median 4 points in 2017, 19 in 2020, 21 in 2023, 39 in 2026 (from 21 to 70). One NQ point is $2 on the micro and $20 on
+the mini. The worst single trade out of sample, −$162.55 on 1 micro (17/04/2025), came from an April 2025 ADR of about 810 points.
+
+
+=== PAGE 5 ===
+ELEMENTS OF THE STRATEGY
+02 / HOW IT WORKS
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+02
+// ONE DAY, AND THE SHAPE OF THE EDGE
+IN PRACTICE.
+// AN EXAMPLE · 15/05/2025
+08:35 the first candle is up and the filter passes: long at
+21,332.50.
+08:40 stopped out on the very next bar: -31 points.
+09:45 after the pause, the close crosses back above the
+re-entry level (yesterday's close - 0.25 ATR): long again at
+21,300.25.
+15:30 time exit of the re-entry at 21,405.50: +105.25 points.
+One small loss, one trend day: the whole strategy in a single
+session.
+// THE PROFILE, OUT OF SAMPLE
+Since 26/10/2022: 1,008 trades on 693 of 1,011 sessions. 758
+exit at the stop (233 already at 08:40, the first bar), 43 at
+break-even, 207 at the time exit, none at the target. Only
+19.6% win, but winners average +149 points against -27 for
+losers. Median time in a trade: 15 minutes.
+FIG. 2   TRADE RESULTS, 1 MICRO, LOG SCALE
+FIG. 3   ADVERSE EXCURSION VS RESULT, 1 MICRO
+Fig. 2: a tall spike of small stop-outs and a long right tail (development: skew 3.5, kurtosis 17); development in purple, out of sample in amber. Fig. 3: the
+tight stop caps the adverse move (the diagonal of stop-outs); the big winners rarely went far against the position first.
+A strategy of many small stops and a few long trend days. It does not need to be right often; it needs the trend
+days to keep coming, and the stops to be filled close to their level.
+CONCLUSION OF §02
+
+=== PAGE 6 ===
+ELEMENTS OF THE STRATEGY
+03 / CHART SETUP
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+03
+// MULTICHARTS, EVERYTHING ON THE MICRO
+CHART SETUP.
+// DATA SERIES
+SERIES
+SYMBOL
+BARS
+ROLE
+Data1
+@MNQ
+5 min
+signal + orders
+Data2
+none
+—
+not used
+// SESSION AND PROPERTIES
+SETTING
+VALUE
+Time zone
+Exchange (Chicago)
+Session
+CME Globex 17:00-16:00
+Bars
+stamped at the close
+Continuous
+not adjusted
+History from
+1 Oct 2021
+Max bars back
+5 (user specified)
+Intrabar orders
+off (fixed in code)
+Bar Magnifier
+off
+Position
+one at a time
+Automation
+off until Luca
+// SESSION FIRST
+Everything is in exchange time with the full CME session.
+With the "US Stocks" session MNQ becomes 09:30-16:00:
+the 08:35 bar and the night (needed by the Supertrend and
+the bar ATR) disappear, and the strategy trades something
+else without any error. History from 1 October 2021
+(10/01/2021 in a US-format MultiCharts) so that the size
+weight has its 250 sessions.
+// INPUTS OF THE MULTICHARTS SIGNAL
+INPUT
+DEFAULT
+WHAT IT DOES
+NumContracts
+1
+micro MNQ; Luca chooses the size
+TagliaDinamica
+1
+1 = Valeris dynamic size (with 1 micro it changes nothing); 0 = fixed, for prop
+Lato
+0
+0 both sides (as optimised) · 1 long only · -1 short only
+OraBase / OraEntrata
+830 / 835
+the first candle and the entry: leave as they are
+OraUscita
+1500
+time exit of the base trade
+VersoRegola / SogliaAtr
+1 / 0
+trade with the candle; any non-zero candle
+StPeriodo / StMolt / AtrBarre
+10 / 2 / 14
+Supertrend and the bar ATR of the filter
+FiltroMin / FiltroMax
+1.5 / 99
+enter when 1.5 ≤ z < 99
+KAtr
+-0.25
+re-entry level: yesterday's close - 0.25 daily ATR (long), + 0.25 (short)
+NMax / Pausa / Oltre / OraCap
+4 / 4 / 6 / 1540
+trades a day, pause bars, re-entry exit 15:30, cap 15:40
+StopAdr / TargetAdr / PareggioAdr
+0.1 / 5 / 0.5
+stop, target and break-even in ADR
+AdrGiorni / AtrGiorni
+14 / 14
+regular sessions for ADR and daily ATR
+TagliaE / TagliaTetto / TagliaSedute
+/ TagliaMin
+0.5 / 4 / 250 / 125
+the dynamic size: exponent, cap, sessions, minimum
+ArrotondaStop / TickPunti
+1 / 0.25
+stop distance rounded up to whole ticks
+OraChiusuraLucid
+1545
+LucidFlex: all flat at the 15:40 bar, no entries after
+
+
+=== PAGE 7 ===
+ELEMENTS OF THE STRATEGY
+03 / CHART SETUP
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+03
+// WHAT WAS CHECKED, WHAT IS STILL OPEN
+CHECKS.
+// THE LATO INPUT · 08/10/2026
+Luca: "add an input to switch the shorts off". Lato = 0 both
+sides, as Valeris; Lato = 1 long only: a session whose first
+candle points down does nothing, no base trade and no
+re-entries; Lato = -1 the mirror. One line in the base block;
+indicators, yesterday's values and size do not depend on it.
+Verified bar by bar since 2017: Lato 1 gives exactly the 1,267
+long trades of Valeris, Lato -1 exactly the 1,187 short ones,
+Lato 0 is unchanged. Not yet recompiled in MultiCharts.
+// VERIFIED IN MULTICHARTS
+On 08/10/2026 the verification copy of the signal (stop at the
+exact Valeris level, no LucidFlex close) on @NQ 5 minutes,
+history from 10 January 2022: in the common period
+31/01/2022 - 23/09/2026, 1,200 trades in each, 1,199 identical
+in entry time, side and exit time; the only different one is
+02/02/2022, in the first weeks of the chart. Since 26/10/2022:
+1,008 of 1,008 identical. Entry prices equal; exit prices within
+one tick, because MultiCharts fills the stop on a real tick
+(-110.6 points over 1,199 trades, about -0.09 per trade).
+// INDEPENDENT EMULATOR
+A bar-by-bar emulator that reads the raw price file and uses
+none of Valeris' signal code reproduces 2,454 of 2,454 trades
+since 2017: same session, time, side, entry and exit price. With
+the shipped inputs (stop rounded to the tick, LucidFlex close)
+the same entries and the same exit bars; only the 1,817 stop
+exits inside a bar fill 0.12 points worse on average. The signal
+text itself, run as it is, gives the same trades.
+// LUCIDFLEX AND COSTS
+No trade stays open past 15:45 or across 16:00: since
+26/10/2022 entries 08:35-15:25, exits 08:40-15:30.
+OraChiusuraLucid 1545 changes no trade. No trades on
+half-days (list in the code, to 2027: to be extended every year).
+Valeris counts $9 per mini trade (commission + 1 tick); the prop
+bootstrap counts $0.725 per micro (Matteo's $2.25 + $5 per
+mini, ÷ 10). Put the real micro costs in the strategy properties.
+// OPEN POINTS
+STILL TO DO IN MULTICHARTS
+STATUS
+Compile the account version (@MNQ, stop on the tick, LucidFlex close, Lato)
+not yet
+Compare its List of Trades since 26/10/2022 with the emulator
+after compiling
+With Lato = 1, compare with the emulator's long-only list
+after compiling
+Check the roll on @MNQ: jumps of +308 and +294.75 points at 17:00 on 15/06 and 14/09/2026
+once, on the chart
+Holiday and half-day lists for 2028
+before 2028
+
+
+=== PAGE 8 ===
+THE PROTOCOL
+04 / RESULTS
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+04
+// 1 NQ MINI WITH THE VALERIS SIZE, COSTS INSIDE
+RESULTS.
+// OUT OF SAMPLE
+$148,775
+1,008 trades since 26/10/2022
+// T OOS 1
+1.75
+gate 1.96: not passed
+// T OOS 2
+2.25
+threshold 3.92: not passed
+// MAX DRAWDOWN
+−$19,454
+30/06-17/09/2026, 1 mini
+// BY PERIOD · 1 NQ MINI, VALERIS DYNAMIC SIZE, $9 PER TRADE × WEIGHT
+PERIOD
+TRADES
+NET
+MEAN
+WIN
+PF
+MAX DD
+T
+THRESHOLD
+Development
+1,446
+$201,362
+$139
+20.9%
+1.67
+$9,343
+5.16
+—
+OOS 1 (gate)
+302
+$45,027
+$149
+19.5%
+1.42
+$8,856
+1.75
+1.96 · no
+OOS 2 (final)
+706
+$103,748
+$147
+19.7%
+1.34
+$19,454
+2.25
+3.92 · no
+OOS 1 + 2
+1,008
+$148,775
+$148
+19.6%
+1.36
+$19,454
+2.82
+—
+Total
+2,454
+$350,137
+$143
+20.4%
+1.49
+$19,454
+5.34
+—
+DEVELOPMENT 02/01/2017-25/10/2022 · OOS 1 26/10/2022-31/12/2023 · OOS 2 01/01/2024-23/09/2026
+// SAME TRADES, FIXED SIZE · 1 MNQ MICRO AT $0.725, AND 1 MINI AT $9
+PERIOD
+NET
+MEAN
+PF
+MAX DD
+T
+AS SHIPPED
+1 MINI FIXED
+Development
+$23,655
+$16.36
+1.69
+$959
+5.09
+$23,388
+$234,024
+OOS 1 (gate)
+$4,119
+$13.64
+1.41
+$832
+1.75
+$4,062
+$40,657
+OOS 2 (final)
+$10,401
+$14.73
+1.30
+$2,030
+2.06
+$10,272
+$102,770
+OOS 1 + 2
+$14,519
+$14.40
+1.33
+$2,030
+2.61
+$14,334
+$143,427
+Total
+$38,175
+$15.56
+1.49
+$2,030
+5.26
+$37,722
+$377,451
+AS SHIPPED = THE SIGNAL'S STOP ROUNDED TO THE TICK: SAME TRADES, STOP EXITS 0.12 POINTS WORSE
+// YEAR BY YEAR
+YEAR
+PERIOD
+1 MINI DYN.
+1 MICRO
+LONG ONLY
+2017
+development
+$3,250
+$383
+$136
+2018
+development
+$26,496
+$3,436
+$1,593
+2019
+development
+$25,271
+$2,466
+$1,932
+2020
+development
+$30,820
+$4,059
+$1,286
+2021
+development
+$50,540
+$5,235
+$3,027
+2022
+dev + OOS 1
+$74,184
+$8,931
+$5,428
+2023
+OOS 1
+$35,827
+$3,265
+$1,245
+2024
+OOS 2
+$48,031
+$5,119
+$2,302
+2025
+OOS 2
+$17,901
+$1,050
+$1,526
+2026
+OOS 2
+$37,816
+$4,232
+$4,135
+2026 TO 23/09 · LONG ONLY ON 1 MICRO, FIXED
+// FIXED OR DYNAMIC SIZE
+The Valeris weight ranges from 0.47 to 1.31; on
+average 0.93 in development, 1.10 in OOS 1, 0.93
+in OOS 2, and unrelated to the result of the trade
+(correlation −0.05 to 0.04). At a fixed mini:
+development t 5.03, OOS 1 1.73, OOS 2 2.03. The
+size adds little; the prop numbers use the fixed size.
+// HOW TO READ IT
+The average trade barely moves: $139 in
+development, $149 in OOS 1, $147 in OOS 2. What
+changes is the noise around it: profit factor from
+1.67 to 1.34, worst drawdown twice as large in
+2026. 2025 was the thin year.
+
+
+=== PAGE 9 ===
+THE PROTOCOL
+04 / RESULTS
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+04
+// WHERE THE MONEY COMES FROM
+TRADE TYPES.
+FIG. 1   NET PER YEAR, 1 MINI WITH THE VALERIS SIZE, COLOURED BY PERIOD
+FIG. 2   OUT OF SAMPLE ON 1 MICRO: BY EXIT, BY ENTRY TYPE, BY SIDE
+// OUT OF SAMPLE · 1 MICRO FIXED
+TRADES
+N
+NET
+MEAN
+WIN
+stop
+758
+−$44,208
+−$58
+0%
+break-even
+43
+−$31
+−$0.73
+0%
+time
+207
+$58,758
+$284
+96%
+target
+0
+—
+—
+—
+base (08:35)
+693
+$13,558
+$19.56
+18%
+re-entry
+315
+$962
+$3.05
+22%
+long
+509
+$9,538
+$18.74
+21%
+short
+499
+$4,981
+$9.98
+18%
+// EXITS BY PERIOD
+EXITS
+STOP
+B-E
+TIME
+TGT
+Development
+1070
+64
+312
+0
+OOS 1
+226
+13
+63
+0
+OOS 2
+532
+30
+144
+0
+Trades per session out of sample: one in 497 sessions, two in
+109, three in 55, four in 32. Exit times: 233 at 08:40 and 103 at
+08:45 (stops), 133 at 15:00 and 80 at 15:30 (almost all time
+exits).
+All the profit comes from the time exits ($58,758 on 1 micro out of sample); the stops (−$44,208) are the price
+of finding the trend days. Out of sample the re-entries add almost nothing ($962 on 315 trades).
+CONCLUSION OF §04
+
+=== PAGE 10 ===
+THE PROTOCOL
+05 / EQUITY AND DISTRIBUTION
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+05
+// DEVELOPMENT, OOS 1, OOS 2
+EQUITY / DD.
+FIG. 1   EQUITY, 1 NQ MINI, VALERIS SIZE · PURPLE DEV · BLUE OOS 1 · AMBER OOS 2 · GREY FIXED
+FIG. 2   DRAWDOWN FROM THE RUNNING PEAK, SAME EQUITY
+// MAX DD · DEV.
+−$9,343
+09/11/2020-29/12/2020
+// MAX DD · OOS 1
+−$8,856
+27/01/2023-17/02/2023
+// MAX DD · OOS 2
+−$19,454
+30/06/2026-17/09/2026
+// LOSING STREAK
+21 trades
+longest run of losers, 2017-2026
+The deepest drawdown of nine years is the most recent one, and it is outside what the development predicted: the Monte Carlo of 2017-2022 put
+the worst drawdown between $6,175 and $13,255 (5th-95th percentile); the summer of 2026 went to $19,454 on the same mini. Part of it is the
+size of the market (ADR 389 points in 2026 against 145 on average in 2017-2022), part may be a change in the edge: the data cannot yet tell
+which.
+
+
+=== PAGE 11 ===
+THE PROTOCOL
+05 / EQUITY AND DISTRIBUTION
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+05
+// ON THE MICRO, THE TRADES THE PROP NUMBERS USE
+OUT OF SAMPLE.
+FIG. 1   OOS ON 1 MNQ, FIXED SIZE · DOTTED: LAST 30% OF DAYS · RED: THE 2026 DRAWDOWN
+FIG. 2   MONTHLY NET ON 1 MICRO, YEAR TOTALS ON THE RIGHT
+// POSITIVE MONTHS
+81 / 117
+both sides, 1 micro, 2017-2026
+// BEST MONTH
+$2,318
+June 2026, 1 micro
+// WORST MONTH
+−$1,534
+July 2026, 1 micro
+// 2026 DRAWDOWN
+−$2,030
+30/06-17/09/2026
+The best and the worst month of nine years are back to back, in the summer of 2026. The year still closes at $4,232 on 1 micro to 23/09, thanks to
+the last days (best session $1,064, 21/09/2026).
+
+
+=== PAGE 12 ===
+THE PROTOCOL
+06 / LONG ONLY
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+06
+// LATO = 1, SAME STRATEGY WITHOUT THE SHORTS
+LONG ONLY.
+The long-only version is the same strategy in which sessions whose first candle points down do nothing, neither the base trade nor the
+re-entries. Nothing is re-optimised. Its trades are exactly the 1,267 long trades of the reference list (881 base trades and 386 re-entries),
+509 of them since 26/10/2022. Luca asked for it on 08/10/2026 after seeing the strategy and its out-of-sample (registry event 1590549).
+// OOS NET · MICRO
+$9,538
+509 trades · both $14,519
+// T OOS 1
+0.94
+both 1.75 · gate 1.96
+// T OOS 2
+2.38
+both 2.25 · threshold 3.92
+// MAX DD, 1 MICRO
+−$1,484
+29/10/2025-13/04/2026
+// LONG ONLY AGAINST SHORT ONLY · MINI WITH THE VALERIS SIZE, MICRO FIXED
+PERIOD
+TRADES
+LONG, MINI
+T
+LONG, MICRO
+T
+SHORT, MINI
+T
+BOTH T
+Development
+758
+$112,826
+4.13
+$13,072
+3.98
+$88,536
+3.17
+5.16
+OOS 1 (gate)
+167
+$17,461
+0.94
+$1,574
+0.95
+$27,566
+1.53
+1.75
+OOS 2 (final)
+342
+$76,592
+2.38
+$7,963
+2.24
+$27,156
+0.82
+2.25
+OOS 1 + 2
+509
+$94,052
+2.54
+$9,538
+2.44
+$54,722
+1.46
+2.82
+Total
+1,267
+$206,878
+4.50
+$22,610
+4.42
+$143,259
+3.06
+5.34
+MICRO = 1 MNQ, $0.725 PER TRADE · AS SHIPPED (STOP ON THE TICK): $12,934 / $1,542 / $7,902
+FIG. 1   LONG ONLY, 1 MINI, VALERIS SIZE · GREY: BOTH SIDES · RED: THE SHORTS ALONE
+// HOW TO READ IT
+Long and short both made money in development (t 4.13 and 3.17). Out of sample they took turns: in OOS 1 (late 2022-2023) the
+shorts carried the result ($27,566 against $17,461), in OOS 2 (2024-2026) the longs did ($76,592 against $27,156, t 2.38 against 0.82).
+The 2026 drawdown came from the shorts: from 30/06 to 17/09/2026 the long-only version closed at $2 on 1 micro while both sides lost
+$2,030.
+
+
+=== PAGE 13 ===
+THE PROTOCOL
+06 / LONG ONLY
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+06
+// THE TWO SIDES, PERIOD BY PERIOD
+LONG VS SHORT.
+FIG. 1   LONG TRADES AGAINST SHORT TRADES, 1 MINI, DOTTED: T = 1.96
+// WHY IT IS NOT THE BETTER VERSION
+Chosen after the results. The idea of dropping the shorts
+came from looking at 2024-2026; its OOS numbers are a
+description, not a test (event 1590549).
+NQ went up. From 2017 to 2026 the Nasdaq-100 rose many
+times over: on a rising market a long-only rule is favoured by
+the drift itself, with no skill needed. And the side that works
+changes: in OOS 1 (late 2022-2023, a strong rally) it was the
+shorts that carried the result.
+Weaker where it matters. OOS 1 t 0.94, total out-of-sample
+net $9,538 against $14,519 on 1 micro, and half the trades.
+The real test is from today on.
+// LONG ONLY ON THE PROP ACCOUNTS
+Same bootstrap, same accounts (section 08): evaluation within
+30 days 11.2% on LucidFlex 50K (5 micro) against 17.4%,
+11.1% on 25K, 40.2% on Apex 50K (10 micro) against 36.2%.
+First payout within 60 days on LucidFlex 50K: 37.8% against
+61.2%. Fewer trades means fewer chances in 30 days.
+Long only is the same strategy seen from one side. It avoided the 2026 drawdown, but only because we know
+how 2026 went. If it is chosen, it must be chosen now, for the whole forward test, and not switched after a bad
+week.
+CONCLUSION OF §06
+
+=== PAGE 14 ===
+DEVELOPMENT HISTORY
+07 / THE ALPHA REPORT
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+07
+// HOW VALERIS ALPHA FOUND IT
+ALPHA REPORT.
+Valeris Alpha is the automatic research line of Valeris, run as a separate version: it reads a paper, tests the author's rule as it is, optimises
+the markets where the raw rule is positive, and opens the out-of-sample under rules fixed in advance, in the same anti data mining registry
+as Valeris. For paper 848 the raw rule was positive on NQ (step 1, a YES), so step 2 ran on two paths: a recombination of the paper's
+own parameters, and an exploratory optimisation from the raw rule. Each path has a twin that must keep at least 800 trades at every
+step (OP800). This strategy is the raw path, OP800 twin: "848 NQ 5 grezzo OP800" (grezzo = raw), run 11, batch 709c6201, optimised
+on 06/10/2026 on the development period only (02/01/2017-25/10/2022).
+// THE OPTIMISATION CHAIN · T OF THE PLATEAU, DEVELOPMENT
+STEP
+CHOSEN
+PLATEAU T
+TRADES
+CANDIDATES
+raw paper rule
+first candle, 08:35 to 15:00, no stop
+ 0.57
+ 1,424
+ —
+1 · filter
+Supertrend distance (10 bars, ×2, z ≥ 1.5)
+ 3.41
+ 1,018
+ 24 families, 12 admitted
+2 · entry
+none survived: enter at 08:35
+ —
+ —
+ 12 families, all excluded
+3 · re-entries
+yesterday's close - 0.25 ATR, crossed
+ 4.69
+ 1,312
+ 10 families, all admitted
+3b · window
+no confirmation, re-entries until 15:30
+ 4.74
+ 1,327
+ window and confirmations
+4 · exits
+ADR stop 0.1, target 5, break-even 0.5
+ 5.03
+ 1,446
+ 14 families, 2 admitted
+5 · size
+size by ADR (exponent 0.5, cap 4)
+ 5.14 (5.16)
+ 1,446
+ 3 families, 2 admitted
+PLATEAU T = MEDIAN T OF THE ZONE AROUND THE CHOICE · SIZE: ZONE (CENTRE)
+FIG. 1   HOW THE DEVELOPMENT T GREW ALONG THE CHAIN
+Rule of the chain: a step is kept only if its plateau beats the previous step, with at least 800 trades, at least 88% of the neighbours positive, better in
+both halves of the development period, a smooth equity (R² ≥ 0.85) and, at every step but the exits, a t above the 95th percentile of random subsets
+of the same trades (chance).
+
+
+=== PAGE 15 ===
+DEVELOPMENT HISTORY
+07 / THE ALPHA REPORT
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+07
+// EVERY CANDIDATE, AND EVERY TRIAL COUNTED
+TRIALS.
+FIG. 1   EVERY FAMILY TRIED · AMBER CHOSEN · BLUE ADMITTED · DARK EXCLUDED
+// TRIALS, FROM THE REGISTRY
+RUNS ON PAPER 848
+RUNS
+TRIALS
+first pass on the paper grid (5, 15, 30, 60 min)
+4
+4,805
+raw paper rule (step 1)
+1
+1
+recombination path, and its OP800 twin
+2
+4,858,611
+raw path, and its OP800 twin (this strategy)
+2
+4,858,611
+walk-forward re-selection, 6 windows
+30
+28,830
+total on paper 848
+39
+9,750,858
+all research in the registry, to date
+—
+1,390,974,822
+// WHAT THE COUNT MEANS
+This strategy's own run tried 2,429,305 combinations
+within the 20-million budget. The paper as a whole
+cost 9,750,858, and three of its optimisations were
+sent out of sample together. Each trial is booked in
+the registry before it runs. Picking the best of millions
+is exactly what the protocol corrects for, and why it
+says no (next page).
+The chain made a significant development result out of a non-significant rule: from t 0.57 to t 5.16, with 2.4
+million trials. That is the definition of a result that must be confirmed on data it has never seen.
+CONCLUSION OF THE CHAIN
+
+=== PAGE 16 ===
+DEVELOPMENT HISTORY
+07 / THE ALPHA REPORT
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+07
+// THE ANTI DATA MINING GATE, AND THE OUT-OF-SAMPLE
+PROTOCOL.
+// ANTI DATA MINING GATE · NOT ADMITTED
+CRITERION
+VALUE
+LIMIT
+pre-registration (run booked before)
+run 8837
+—
+pass
+trial accounting
+2,429,305
+—
+pass
+sample (sessions)
+1,502
+≥ 252
+pass
+trades
+1,446
+≥ 100
+pass
+HAC test corrected for trials and reruns
+p 0.0024
+≤ 6.4e-10
+fail
+net with double costs
+$189,267
+> $0
+pass
+deflated Sharpe of the grid
+not computed
+≥ 0.95
+fail
+probability of backtest overfitting
+not computed
+≤ 0.2
+fail
+Reality Check on the whole grid
+not computed
+≤ 0.05
+fail
+walk-forward of the grid
+not computed
+≥ 0.6
+fail
+reconciled matrix
+not computed
+—
+fail
+base admitted by the protocol
+no
+—
+fail
+base on the same timeframe
+yes
+—
+pass
+base on the same period
+2017-10/2022
+—
+pass
+// WHY NOT ADMITTED
+The daily net of the development is strongly
+positive by itself: Newey-West t 6.00, p 9.7 ×
+10-10. Multiplied by the 2,429,306 trials of the
+run it becomes 0.0024, against the 6.4 × 10-10
+the registry allots to this run: one 5% error
+budget shared by every run ever booked (run
+8,837: 0.05 ÷ (8,837 × 8,838)). The grid
+checks (deflated Sharpe, PBO, Reality Check,
+walk-forward) are not run inside the
+optimisation grids since 01/10/2026, and a
+check that was not run is not a pass. The raw
+base itself was not admitted. Hence:
+exploratory out-of-sample only, no
+promotion.
+// DOUBLE OUT-OF-SAMPLE WITH GATE · 1 MINI, VALERIS SIZE
+OUT OF SAMPLE
+DATES
+TRADES
+NET
+MEAN
+T
+THRESHOLD
+PASS
+OOS 1 · gate
+26/10/2022-31/12/2023
+302
+$45,027
+$149
+1.75
+1.96 fixed
+no
+OOS 2 · final
+01/01/2024-23/09/2026
+706
+$103,748
+$147
+2.25
+3.92 (573 uses)
+no
+ES, same rule, OOS 1
+269
+$27,829
+$103
+1.72
+—
+—
+ES, same rule, OOS 2
+607
+−$12,855
+−$21
+−0.69
+—
+—
+// PAPER 848: THREE FINALISTS SENT OUT OF SAMPLE TOGETHER
+FINALIST
+T DEV
+T OOS 1
+T OOS 2
+NET OOS 1
+NET OOS 2
+LABEL
+recombination
+4.80
+−0.49
+1.59
+−$9,177
+$52,887
+0 of 2
+raw path
+5.93
+1.58
+1.75
+$17,543
+$30,942
+1 of 2
+raw path, OP800 · this
+5.16
+1.75
+2.25
+$45,027
+$103,748
+1 of 2
+// CANDIDATE STATUS: "1 OF 2"
+Luca's rule for prop candidates (registry events 239245 and 239460): net positive in OOS 1 and in OOS 2 and an average trade above
+the NQ threshold ($70 per mini) in both, with no t required. This strategy has it: $149 and $147 per trade. "1 of 2" means the t was not
+taken in either period but the averages and the nets were good. It is the best of the three: choosing it among them is one more look at
+the out-of-sample.
+
+
+=== PAGE 17 ===
+DEVELOPMENT HISTORY
+07 / THE ALPHA REPORT
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+07
+// STRESS, CHANCE, OTHER MARKETS, REGIMES
+ROBUSTNESS.
+// ROBUSTNESS
+PROMISING
+diagnostic level, not a gate
+// NEIGHBOURS
+100%
+of the plateau positive
+// TWO HALVES
+3.63 / 4.08
+t 2017-19 / 2020-22
+// DOUBLE COSTS
+$189,267
+t 4.85
+// EXECUTION AND COST STRESS · 1 MINI
+STRESS, DEVELOPMENT
+NET
+T
+MAX DD
+realistic fills (the reference)
+$201,362
+5.16
+$9,343
+exits at the level (old engine)
+$201,364
+5.16
+$9,343
+costs × 2
+$189,267
+4.85
+$9,701
+costs × 3
+$177,172
+4.53
+$10,059
++1 tick each side
+$187,923
+4.81
+$9,741
++2 ticks each side
+$174,484
+4.46
+$10,139
+entry one bar late
+$202,304
+5.18
+$9,332
+late + costs × 2 + 1 tick
+$176,751
+4.52
+$10,087
+// SAME RULE, OTHER MARKETS, DEV
+MARKET
+TRADES
+NET
+T
+ES
+1,376
+$32,634
+1.62
+RTY
+1,373
+$21,496
+1.37
+YM
+1,414
+$3,814
+0.25
+GC
+840
+$1,289
+0.10
+CL
+1,005
+$15,746
+1.07
+6E
+816
+−$8,032
+−1.80
+// THE ROBUSTNESS LEVEL, CHECK BY CHECK
+ROBUSTNESS CHECK
+VALUE
+net positive with exits at the level
+$201,364
+pass
+net positive with realistic fills
+$201,362
+pass
+at least 100 trades
+1,446
+pass
+t ≥ 2, realistic fills
+5.16
+pass
+positive with delay, costs × 2, +1 tick
+$176,751
+pass
+best 5 trades below 80% of the profit
+18%
+pass
+at least half the parameter variants hold
+98%
+pass
+no one-step variant in loss
+0/23
+pass
+Monte Carlo: P(loss) below 10%
+0%
+pass
+positive on half the other markets
+5/6
+pass
+anti data mining gate passed
+no
+fail
+// MONTE CARLO AND SENSITIVITY
+Monte Carlo of the development (2,000 block resamples,
+blocks of about 10 sessions): net $145,018 to $257,971
+(5th-95th percentile), worst drawdown $6,175 to $13,255,
+P(loss) 0%.
+Sensitivity: 23 one-step neighbours of the final
+parameters, none in loss; 98% of 44 variants hold. Only
+reversing the side (trading against the first candle) breaks
+it: t 0.51.
+Tail: without the best 5% of trades the development is
+negative.
+The level PROMISING means: it survives the main stresses, but the statistical checks of the protocol are not enough. It is a diagnostic and changes nothing
+in admission, gates or out-of-sample.
+FIG. 1   ONE-STEP SENSITIVITY · AMBER CHOSEN · BLUE HOLDS · RED BREAKS
+
+=== PAGE 18 ===
+DEVELOPMENT HISTORY
+07 / THE ALPHA REPORT
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+07
+// REGIMES AND WALK-FORWARD
+STABILITY.
+FIG. 1   DEVELOPMENT NET BY REGIME, 1 MINI, VALERIS SIZE
+Positive in every regime. Strongest on range and mixed days (t 4.11 and 3.29) and in high volatility; weakest on strong-trend days (t 1.06), on
+FOMC, CPI and payroll days (t 1.07) and in roll weeks (t 0.53). 78% of the profit comes from days without major news. Every weekday is positive;
+Friday is the weakest.
+FIG. 2   FROZEN DEFINITION OVER OOS 2, HALF-YEAR BY HALF-YEAR, 1 MINI
+Walk-forward at a fixed definition: 4 of 5 complete half-years of OOS 2 positive (the first half of 2025 lost −$11,765). Rolling re-selection (the
+whole chain re-run on 5-year windows, 6-month tests): no finalist in any window, so cash. The method that found this strategy would not have found
+it again, window by window.
+Sensitivity (previous page): a neighbour holds when its net is above zero and its t is at least half the original. Target, filter maximum and size cap are inert:
+changing them changes nothing, because the target is never reached and the cap never binds.
+
+
+=== PAGE 19 ===
+DEVELOPMENT HISTORY
+08 / BOOTSTRAP, EVALUATION
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+08
+// MATTEO'S METHOD, ON THE MICRO
+EVALUATION.
+The prop numbers follow Matteo's bootstrap, the rule for every prop calculation. The trades are the out-of-sample ones (1,008 trades from
+27/10/2022) on 1 micro, $0.725 per micro per trade. The days are split by date: on the first 70% (27/10/2022-22/07/2025, 714 trading days) the
+method chooses the size, the smallest one statistically tied with the best; the numbers are reported on the last 30% (23/07/2025-23/09/2026,
+306 days), which the choice never saw. For every purchase day, all sessions of the next 30 calendar days; days resampled with replacement,
+20,000 simulations, checked with blocks of 5 and 10 days and on the real days in a row. Inside each day the trades run in order, each with its
+adverse excursion first, then its close.
+// FIXED SIZE, DECLARED
+In Valeris the 848 has a dynamic size, and the Alpha prop
+packs declared it "not computable". Here it runs at a fixed
+number of micro (input TagliaDinamica = 0): the same trades,
+the same adverse excursions, constant contracts. One position
+at a time.
+// A STRONG FINAL 30%
+The last 30% is the strategy's best stretch: $6,631 on 1 micro
+in 306 days, against $7,888 in the first 714: about twice the
+daily rate. The reported numbers are favourable; the first-70%
+column shows the other side.
+// LUCIDFLEX 50K
+17.4%
+4 micro, pass within 30 days
+// LUCIDFLEX 25K
+17.7%
+2 micro, pass within 30 days
+// APEX 50K
+36.2%
+6 micro, pass within 30 days
+// TARGET
+60%
+Luca's goal: not reached
+// PASS WITHIN 30 DAYS · SIZE CHOSEN ON THE FIRST 70%
+ACCOUNT
+VERSION
+MICRO
+FIRST 70%
+LAST 30%
+IN A ROW
+BLOWN
+BLOCKS 5
+BLOCKS 10
+LF 50K
+both
+4
+13.9%
+17.4%
+18.6%
+55.4%
+13.7%
+14.1%
+LF 25K
+both
+2
+14.4%
+17.7%
+18.2%
+55.9%
+14.4%
+14.6%
+Apex 50K
+both
+6
+35.1%
+36.2%
+44.2%
+63.1%
+36.5%
+37.8%
+LF 50K
+long only
+5
+6.1%
+11.2%
+11.9%
+39.6%
+7.8%
+8.1%
+LF 25K
+long only
+2
+6.1%
+11.1%
+11.9%
+29.0%
+7.7%
+8.1%
+Apex 50K
+long only
+10
+33.3%
+40.2%
+48.4%
+56.6%
+36.6%
+37.9%
+LF = LUCIDFLEX · BLOWN = MAX LOSS TOUCHED, LAST 30% · BLOCKS OF 5 AND 10 DAYS, WHOLE WINDOW
+SIGNAL AS SHIPPED (STOP ON THE TICK), LAST 30%: 17.3% / 17.7% / 35.6%
+FIG. 1   BOTH SIDES · FIRST 70%, LAST 30% RESAMPLED, LAST 30% IN A ROW
+
+=== PAGE 20 ===
+DEVELOPMENT HISTORY
+08 / BOOTSTRAP, EVALUATION
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+08
+// THE ACCOUNTS, THE SIZES, THE EXACT RULES
+ACCOUNTS.
+// THE THREE ACCOUNTS
+MODELLED RULES
+LUCIDFLEX 50K
+LUCIDFLEX 25K
+APEX 50K
+Profit target
+$3,000
+$1,250
+$3,000
+Max loss (trailing, end of day)
+$2,000
+$1,000
+$2,000
+Daily loss limit (ends the day)
+$1,200
+$600
+$1,000
+Consistency in evaluation
+best day ≤ ~50%
+best day ≤ ~50%
+none
+Max size in evaluation
+40 micro
+20 micro
+60 micro
+Evaluation price used
+$90.20
+$50.30
+$100.00
+FIG. 1   SIZE GRID ON THE FIRST 70%, BOTH SIDES · CIRCLED: THE SIZE CHOSEN
+// INFORMATION ONLY · LUCIDFLEX WITH LUCA'S EXACT RULES AND THE $1,500 DAILY CAP
+ACCOUNT
+DAILY LIMIT
+NO CAP
+$1,500 CAP
+IN A ROW
+IN A ROW, CAP
+LF 50K · both · 4 mi
+DLL off
+17.2%
+22.6%
+17.5%
+30.2%
+LF 50K · both · 4 mi
+DLL on $1,200
+15.9%
+21.3%
+16.8%
+27.7%
+LF 25K · both · 2 mi
+DLL off
+17.5%
+19.0%
+17.9%
+18.2%
+LF 25K · both · 2 mi
+DLL on $600
+16.2%
+17.7%
+16.5%
+16.5%
+LF 50K · long · 5 mi
+DLL off
+10.6%
+16.8%
+15.4%
+22.8%
+LF 50K · long · 5 mi
+DLL on $1,200
+9.9%
+15.8%
+11.6%
+18.9%
+LF 25K · long · 2 mi
+DLL off
+10.9%
+12.0%
+15.4%
+15.4%
+LF 25K · long · 2 mi
+DLL on $600
+9.9%
+10.8%
+11.6%
+11.6%
+// THE EXACT-RULES SIMULATOR · LAST 30% OF DAYS
+A separate simulator with Lucid's rules as Luca gave them on 07/10 (events 1498353-54): consistency exactly 50%, promotion to a flat account in 30
+minutes, max loss locked at $50,100, cost inside the excursion; the daily loss limits of $1,200 and $600 are still to be confirmed. Cap: when the day's
+closed profit reaches $1,500 the session closes; on the 50K this keeps the best day inside the 50% rule (the 25K uses the same $1,500 until a
+proportional cap is decided). With the bootstrap's own rules it reproduces the 17.4% exactly. One position at a time, so the two readings of the
+excursion coincide. Last 30%; the reference stays the bootstrap until Luca decides.
+
+
+=== PAGE 21 ===
+DEVELOPMENT HISTORY
+09 / BOOTSTRAP, FUNDED
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+09
+// FIRST PAYOUT WITHIN 30 AND 60 DAYS
+FUNDED.
+Luca's rule for the funded phase: the probability of reaching the first payout within 30 and within 60 calendar days of a funded account,
+each with its own size, chosen on the first 70% like the evaluation. These numbers start from a funded account: the evaluation is not
+included. Modelled rules: LucidFlex 50K, 5 qualifying days of $150, 50% consistency, max loss locking at +$100, minimum payout $500, size
+scaling 20-30-40 micro; Apex 50K, 5 qualifying days of $250, 50% consistency, a safety net of $2,100 before the first payout and an inactivity
+rule; LucidFlex 25K as the 50K, with $100 days and 10-20 micro.
+// LF 50K · 60 D
+61.2%
+2 micro · first 70%: 51.0%
+// LF 50K · 30 D
+27.3%
+3 micro · first 70%: 16.5%
+// APEX · 60 D
+30.9%
+3 micro · first 70%: 23.2%
+// LONG · LF 60 D
+37.8%
+3 micro, LucidFlex 50K
+// FIRST PAYOUT OF A FUNDED ACCOUNT · SIZE CHOSEN ON THE FIRST 70%
+ACCOUNT
+VERSION
+WITHIN
+MICRO
+FIRST 70%
+LAST 30%
+IN A ROW
+BLOWN
+E[PAYOUT]
+DAYS
+LF 50K
+both
+30 days
+3
+16.5%
+27.3%
+34.4%
+38.2%
+$462
+17
+LF 50K
+both
+60 days
+2
+51.0%
+61.2%
+64.3%
+31.8%
+$726
+23
+LF 25K
+both
+30 days
+2
+15.2%
+22.0%
+26.7%
+56.1%
+$208
+17
+LF 25K
+both
+60 days
+1
+35.3%
+50.8%
+59.3%
+34.2%
+$369
+24
+Apex 50K
+both
+30 days
+3
+8.3%
+14.8%
+17.2%
+37.8%
+$212
+16
+Apex 50K
+both
+60 days
+3
+23.2%
+30.9%
+43.3%
+51.6%
+$447
+22
+LF 50K
+long only
+30 days
+4
+2.7%
+4.8%
+3.9%
+29.0%
+$94
+18
+LF 50K
+long only
+60 days
+3
+20.0%
+37.8%
+43.6%
+31.3%
+$640
+32
+LF 25K
+long only
+30 days
+2
+2.3%
+4.8%
+3.9%
+29.2%
+$47
+18
+LF 25K
+long only
+60 days
+2
+17.8%
+29.3%
+34.1%
+49.7%
+$276
+31
+Apex 50K
+long only
+30 days
+3
+1.5%
+3.9%
+3.9%
+12.0%
+$57
+18
+Apex 50K
+long only
+60 days
+3
+7.8%
+18.0%
+13.6%
+15.2%
+$258
+29
+E[PAYOUT] = EXPECTED FIRST PAYOUT PER FUNDED ACCOUNT, GROSS, LAST 30% · DAYS = MEDIAN TRADING DAYS
+LF = LUCIDFLEX · BLOWN = MAX LOSS TOUCHED FIRST · THE REST ARE STILL RUNNING AT THE DEADLINE
+Once funded, the first payout within 60 days comes 61% of the time on LucidFlex 50K at 2 micro, on the
+strong final 30% (51% on the first 70%). Within 30 days it is much less likely. The hard part is getting funded:
+one evaluation in six on LucidFlex 50K, one in three on Apex.
+CONCLUSION OF §09
+
+=== PAGE 22 ===
+DEVELOPMENT HISTORY
+09 / BOOTSTRAP, FUNDED
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+09
+// THE LONG-ONLY VERSION, AND ONE ATTEMPT IN DOLLARS
+VALUE.
+FIG. 1   LONG ONLY · FIRST 70%, LAST 30% RESAMPLED, LAST 30% IN A ROW
+// VALUE OF ONE EVALUATION ATTEMPT · NOT PART OF THE METHOD
+ACCOUNT
+PRICE
+PASS
+COST PER PASS
+EV 30 DAYS
+EV 60 DAYS
+LONG, 30 D
+LONG, 60 D
+LF 50K
+$90.20
+17.4%
+$520
+−$18
+$23
+−$81
+−$26
+LF 25K
+$50.30
+17.7%
+$284
+−$17
+$9
+−$46
+−$23
+Apex 50K
+$100.00
+36.2%
+$416
+−$74
+$11
+−$134
+−$52
+// HOW IT IS COMPUTED, AND WHAT IT LEAVES OUT
+EV = P(pass within 30 days, last 30%) × (trader share × expected first payout of a funded account − activation fee) − evaluation price. Cost per
+pass = price ÷ pass rate, plus the $140 activation fee on Apex. Only the first payout counts; later payouts, resets and discounts are ignored, and
+the trader share is 90% on LucidFlex. It is a sketch of the order of magnitude, with the favourable final 30%: around zero for the two-sided
+strategy, negative for the long-only version.
+On these accounts the strategy alone is roughly a break-even bet per attempt, and only on the strongest
+stretch of data. Its value, if any, is as one more independent leg of a pack.
+CONCLUSION OF §09
+
+=== PAGE 23 ===
+THE PROTOCOL
+10 / THE WEAK POINT
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+10
+// THE 2026 DRAWDOWN, THE TIGHT STOP, THE ROLL
+WEAK POINT.
+// 2026 DRAWDOWN
+−$2,030
+1 micro, 30/06-17/09/2026
+// AS SHIPPED
+−$2,041
+same period, stop on the tick
+// JULY 2026
+−$1,534
+the worst month since 2017
+// LF 50K MAX LOSS
+$2,000
+LucidFlex 50K, trailing
+One drawdown, one account. From 30 June to 17 September 2026
+the strategy alone lost about $2,000 on a single micro, about 1,000
+NQ points: as much as the maximum loss of a LucidFlex 50K. It is not
+an error in the MultiCharts version: it is the strategy itself. Alone on a
+LucidFlex 50K, even at 1 micro, that stretch would have blown the
+account. On 1 mini with the Valeris size the same stretch is
+−$19,454. The shorts did it: the long side closed the period flat.
+The stop is very tight. 0.1 ADR is 21-70 points in 2026; three trades
+in four end at the stop, 233 of 1,008 on the first bar. Entry and time
+exits are market orders at the bar close. Live, every tick of slippage
+weighs much more than on a strategy with wide stops: one extra tick
+on entry and exit costs $1.00 per micro per trade, about $1,008 over
+the 1,008 out-of-sample trades, 7% of their net.
+// THE ROLL
+Valeris' NQ data are not adjusted. At the roll the price jumps
+by about 1% at 17:00, and the jump enters the Supertrend,
+the bar ATR, ATR and ADR and yesterday's close. @MNQ
+must be unadjusted and roll on the same evening as @NQ
+(since 2025 the Monday evening of the expiry week: +308
+points on 15/06/2026, +294.75 on 14/09/2026). With the roll
+one session late or early, 20 to 25 of the 1,008 out-of-sample
+trades change (-358 to -677 points). Check it once on the
+chart.
+// MICRO AGAINST MINI
+MultiCharts computes the signal on MNQ prices, Valeris on
+NQ: they can differ by a tick. Out of sample, 5 first candles
+were one tick wide, 2 filters within 0.05 of the threshold, 14
+re-entry bars within a tick of the level. In a pessimistic test (a
+random tick on 30% of the prices) 1,005-1,007 of 1,008
+entries stay the same.
+// THE STOP BETWEEN TWO TICKS
+0.1 ADR is a number with decimals. The shipped signal
+rounds the distance up to whole ticks: same exit bars, fills on
+a real tick: 7,532.50 points out of sample instead of 7,624.96.
+The edge survives the stress test (+1 tick each side: t 4.81; +2 ticks: 4.46), but the account is not: one
+ordinary drawdown of this strategy is a whole LucidFlex 50K. It can only live inside a pack, or at a size that
+survives it.
+CONCLUSION OF §10
+
+=== PAGE 24 ===
+THE PROTOCOL
+11 / LIMITS AND VERDICT
+ORB 5 MINUTES ON NQ · 848
+V1.0 / EXPLORATORY OUT-OF-SAMPLE
+11
+// WHAT THIS DOCUMENT DOES NOT SHOW
+VERDICT.
+// ANALYSES
+ANALYSIS
+STATUS
+OOS 1 (gate)
+t 1.75 < 1.96
+OOS 2 (final)
+t 2.25 < 3.92
+Anti data mining
+not admitted
+No look-ahead
+ok, 3,240 checks
+Two engines, physical cut
+ok
+Robustness level
+promising
+Walk-forward, fixed
+4/5 half-years
+Walk-forward, re-selection
+no finalist
+MultiCharts, verification copy
+1,008 / 1,008
+Account version with Lato
+not compiled
+Forward or live trading
+none
+// 01, CHOSEN AFTER SEEING THE OOS
+Picked from the Alpha board with both out-of-sample periods visible
+(event 1584197), the long only too (1590549), and the best of the three
+848 finalists. Its out-of-sample numbers are optimistic by construction.
+// 02, MILLIONS OF TRIALS
+2,429,305 in its run, 9,750,858 on the paper. Corrected for them, the
+significance is gone.
+// 03, BELOW BOTH THRESHOLDS
+OOS 1 t 1.75, OOS 2 t 2.25. Only the development clears its bar.
+// 04, FAVOURABLE PROP NUMBERS
+Reported on a strong final 30%, at a fixed size that Valeris did not
+optimise.
+// 05, ONE MARKET, A THIN TAIL
+ES with the same rule: t −0.69 in OOS 2. Without the best 5% of trades
+the development is negative.
+NOT VALIDATED  /  FORWARD TEST ONLY
+A simple ORB on NQ that stayed positive in both out-of-sample periods with the same average trade as in development,
+but below both thresholds, chosen after looking, and with a recent drawdown as large as a LucidFlex 50K account. On
+the prop accounts it passes an evaluation 17% of the time on LucidFlex 50K and 36% on Apex 50K: far from 60%.
+// FORWARD TEST
+A proposal for Luca to fix and register
+before the first trade: the account signal
+as it is, side chosen now (Lato 0 or 1), 1
+micro fixed or simulation. After 120 trades
+(about six months with both sides, about a
+year long only) go on only if the net is
+positive and the average trade is at least
+$5 per micro, a third of the out-of-sample.
+Stop at once if the drawdown passes
+$2,500 per micro. Log every fill against the
+signal's price. No change of parameters on
+the way.
+// WHAT NOT TO DO
+Do not run it alone on a LucidFlex 50K: its
+2026 drawdown is the whole account. Do
+not size up to pass an evaluation faster.
+Do not switch Lato after a bad week. Do
+not use the dynamic size on a prop
+account.
+// WHERE TO START
+Compile the account signal with Lato in
+MultiCharts and compare its List of Trades
+with the emulator. Check the roll on
+@MNQ. Then the pack: the 848 added to
+Luca's seven strategies, recomputed with
+the same bootstrap.
+Not financial advice. Simulated results on historical data, hypothetical and with hindsight; they are not real trades. Costs and slippage are estimated. Prop rules are
+modelled, not guaranteed, and change. Past results do not indicate future ones.
+Luca Franceschetti · 08/10/2026

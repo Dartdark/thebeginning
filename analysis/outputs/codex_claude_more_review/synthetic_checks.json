@@ -1,0 +1,23 @@
+{
+  "source_commit": "b007bc42fdc991e3cc8fe8c3423f177eb10411d8",
+  "kind": "synthetic implementation checks; not a backtest",
+  "sharedcap_stale_exit": {
+    "actual_event": [
+      30,
+      3,
+      95
+    ],
+    "expected": "ignore ON exit after reversal closed ON"
+  },
+  "sharedcap_flat_breach": {
+    "actual_pnl": -24.0,
+    "actual_contract_fills": 4,
+    "expected_pnl": -22.0,
+    "expected_contract_fills": 2,
+    "cost_per_fill": 1.0
+  },
+  "intraday_first_signal_close": {
+    "code": 930,
+    "documentation": 900
+  }
+}

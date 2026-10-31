@@ -1,0 +1,31 @@
+{
+  "plan_commit": "b0b661d38a34d27878535c61129f2f330acc6088",
+  "current_reference": "7f0800ffc04d56bd878750369a4abc2316ee01d8",
+  "unchanged_since": "afde088",
+  "source_blobs": {
+    "personal_strategies/PORTFOLIO.md": "d175bfe07f183f05c05c3d56c88eb384c85821ee",
+    "analysis/personal_portfolio.py": "80d90aca24b413957ea32721334bf08191d8f162",
+    "analysis/personal_variants.py": "32a6d57deffc17dbef03c95acdde558834cd8aa2",
+    "analysis/outputs/personal_portfolio_output.txt": "33e8b20b0b5a5813d7ab704371b2ef5d5ff8f821",
+    "analysis/outputs/personal_variants_output.txt": "d56a87bc2754cb545b8fb9b2ee18cb589084f5d2"
+  },
+  "input_sha256": {
+    "analysis\\outputs\\codex_rebound\\personal19\\UNIFORM\\fee_1.24\\baseline_daily19.csv": "b82ad95a5df7e1650a607b7f3d588bae593d4d66dc66c5d304998ebd0f019534",
+    "analysis\\outputs\\codex_rebound\\personal19\\UNIFORM\\fee_1.04\\baseline_daily19.csv": "42c27a57837efb4ebfb67fc05755418afe4455ab67ad8694a015930313b8c38d"
+  },
+  "script_sha256": "d9ad978cf54a12629216f2355741f2c80203fb715093869b15722362552af25c",
+  "seed": 20261027,
+  "histories": 1000,
+  "block_days": 10,
+  "horizon": 252,
+  "limitations": [
+    "Published personal fee convention is preserved: +$0.55 per nonzero plan day, not exact trade counts; VB reentries are undercharged.",
+    "Published MOC starts at $0.50/MES rather than $0.725, so its inherited total commission is $1.05 rather than $1.275.",
+    "Twin baseline is the committed v1 checker ledger with published16:00 marks; no exact v2.1 ledger exists.",
+    "Twin published marking skips dates without a15:30..16:00 observation; candidate uses the last available same-date price at/before16:00.",
+    "Candidate observed-bar gaps can reflect closures or feed loss; marks can be stale and no future price fills the gap.",
+    "Daily marked drawdown omits intraday margin/liquidation exposure; personal MC has no Apex trail or payout caps."
+  ],
+  "full_apex_comparisons": "LIMITED: joint baseline overnight paths not causal; no payout/pass estimates",
+  "native_platform_parity": false
+}

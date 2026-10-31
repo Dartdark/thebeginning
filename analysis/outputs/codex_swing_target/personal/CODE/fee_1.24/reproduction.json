@@ -1,0 +1,42 @@
+{
+  "preregistration": "a4064ac",
+  "plan_path": "agents/codex/plans/swing_target.md",
+  "fee": 1.24,
+  "source_ledger": "analysis\\outputs\\codex_swing_target\\CODE_trades.csv",
+  "ledger_sha256": "f09927d504b3460b8d747b2aa8e3c1413f4c7a66b54647cdf70d2081ffb8ae60",
+  "script_sha256": "5bc7f34dcfb291de095485c3e196512ddd69c6bbf3beb70e357a02abf782a707",
+  "python": "C:\\Users\\dmoto\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "snapshot_manifest_sha256": "06dcdb0fa1c76916ba40ddf40d8e3534b9f67e5ee5c184940f0f41f28e06b837",
+  "cached_personal_Twin_sha256": "635d2f4752d1e117778b2335ff2111d084c41a93c9317f032eb7acdeaff3bb88",
+  "configurations": 16,
+  "bootstrap": {
+    "n": 1000,
+    "horizon": 252,
+    "block": 10,
+    "seed": 20261025
+  },
+  "historical_annual_interval": {
+    "level": 0.95,
+    "n": 5000,
+    "block": 10,
+    "seed": 20261025
+  },
+  "simulation_precision_interval": {
+    "level": 0.95,
+    "n": 5000,
+    "seed": 20261025
+  },
+  "no_Apex_limits": true,
+  "shared_caches_written": false,
+  "source_models": 2,
+  "no_candidate_trade_exclusions": true,
+  "limitations": [
+    "Inherited CLS whole-day adverse and MOC close-based path approximations remain.",
+    "Current OT funded path preserves published constant whole-night adverse value across the entire account day; it can invent simultaneous OT/RTH adverse exposure.",
+    "OT order-flow source ends 2026-07-07; post-cutoff zero P&L is missing current baseline evidence, not verified no-trade activity.",
+    "Inherited 150K fractional full-size bases are rounded only after cushion scaling; refs are 1500/3000.",
+    "Personal preserves published daily booking (Kusho at exit, S30 daily marks), not full intraday margin/liquidation modeling.",
+    "Personal plan10 commission adjustment is per nonzero P&L day and undercounts some reentries; MOC/S30 retain inherited fee approximations.",
+    "Personal Twin remains the existing v1 checker marked ledger rather than an exact v2.1 ledger."
+  ]
+}

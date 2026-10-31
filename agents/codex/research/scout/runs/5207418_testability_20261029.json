@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "kind": "source_testability_followup",
+  "paper_id": "ssrn:5207418",
+  "doi": "10.2139/ssrn.5207418",
+  "title": "Auctions, Announcements, and Abnormal Returns",
+  "authors": [
+    "Ingomar Krohn",
+    "Rishi Vala"
+  ],
+  "date": "2026-10-29",
+  "receipt_recorded_at": "2026-10-29T18:29:29Z",
+  "decision": "NEEDS DATA",
+  "evidence_level": "abstract_metadata_only",
+  "full_source_obtained": false,
+  "full_source_read": false,
+  "source_sha256": null,
+  "new_return_trials": 0,
+  "hypotheses_reserved": 0,
+  "plans_created": 0,
+  "price_returns_calculated": false,
+  "new_datasets_acquired": [],
+  "report_path": "agents/codex/results/scout_5207418_testability_20261029.md",
+  "previous_review_path": "agents/codex/results/scout_fx_auctions_20261029.md",
+  "previous_evidence_path": "agents/codex/evidence/scout_fx_auctions_20261029.md",
+  "source_versions": [
+    {
+      "url": "https://fina.hkust.edu.hk/sites/finance/files/paper/Auctions_Announcements_and_Abnormal_Returns.pdf",
+      "version_label": "April 2025",
+      "available_material": "indexed abstract and first-page text only",
+      "full_pdf_newly_retried": false,
+      "new_search_refs": [
+        "turn475601search27",
+        "turn373223search34",
+        "turn268829search36"
+      ],
+      "prior_open_refs": [
+        "turn802641view0",
+        "turn710764view0"
+      ],
+      "prior_open_result": "(400) Timeout fetching"
+    },
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5207418",
+      "version_label": "March 20, 2026",
+      "page_count_from_metadata": 40,
+      "available_material": "search-readable primary abstract and metadata only",
+      "new_search_refs": [
+        "turn475601search0",
+        "turn373223search0",
+        "turn268829search0"
+      ],
+      "new_open_ref": "turn307274view0",
+      "new_open_result": "(403) Forbidden",
+      "stopped_on_denial": true,
+      "delivery_or_alternate_host_attempted_after_denial": false
+    }
+  ],
+  "new_access_checks": [
+    {
+      "url": "https://sites.google.com/site/krohningomar/home",
+      "ref": "turn350195view0",
+      "result": "accessible",
+      "finding": "author homepage; no target fulltext obtained"
+    },
+    {
+      "url": "https://sites.google.com/site/krohningomar/research",
+      "ref": "turn316243view0",
+      "result": "accessible",
+      "finding": "visible page lists three older papers; no target paper or identifiable target code/data link"
+    },
+    {
+      "url": "https://www.bankofcanada.ca/profile/ingomar-krohn/",
+      "ref": "turn307274view1",
+      "result": "accessible",
+      "finding": "visible research includes separate four-author Demand-Driven Risk Premia paper; not substituted"
+    },
+    {
+      "url": "https://www.bankofcanada.ca/profile/rishi-vala/",
+      "ref": "turn350195view2",
+      "result": "accessible",
+      "finding": "no full target source obtained from visible listings"
+    },
+    {
+      "url": "https://fina.hkust.edu.hk/research/finance-symposium/hkustsymposium2026/program",
+      "search_refs": [
+        "turn475601search3",
+        "turn790808search5"
+      ],
+      "open_refs": [
+        "turn350195view1",
+        "turn316243view2"
+      ],
+      "result": "indexed program found; direct open timeout",
+      "finding": "target presentation identified; no new full paper obtained"
+    }
+  ],
+  "bounded_public_search": {
+    "queries": [
+      "\"Auctions, Announcements, and Abnormal Returns\" pdf Krohn Vala",
+      "\"Ingomar Krohn\" \"Auctions\" \"Vala\"",
+      "\"Rishi Vala\" \"Auctions\" paper",
+      "Ingomar Krohn research homepage auctions announcements",
+      "Rishi Vala research website announcements abnormal returns",
+      "\"Auctions, Announcements, and Abnormal Returns\" -site:papers.ssrn.com -site:quantpedia.com -site:vvv.quantpedia.com -site:ouci.dntb.gov.ua -site:fina.hkust.edu.hk",
+      "\"Ingomar Krohn\" economist website",
+      "\"Rishi Vala\" economist research",
+      "\"Krohn\" \"Auctions\" \"Announcements\" site:bankofcanada.ca",
+      "\"Auctions, Announcements\" filetype:pdf -site:fina.hkust.edu.hk",
+      "\"Auctions\" \"Announcements\" \"Abnormal Returns\" Krohn conference pdf",
+      "\"Auctions, Announcements\" \"Krohn\" -site:ssrn.com -site:fina.hkust.edu.hk -site:quantpedia.com -site:vvv.quantpedia.com -site:alphainacademia.com -site:quantseeker.com -site:trendswithfriends.com -site:ouci.dntb.gov.ua",
+      "\"5207418\" PDF Krohn -site:ssrn.com"
+    ],
+    "parallel_artifact_search_scope": [
+      "exact title and SSRN ID",
+      "author names plus GitHub",
+      "GitHub",
+      "Dataverse",
+      "Mendeley Data",
+      "Zenodo",
+      "OSF"
+    ],
+    "identifiable_target_replication_artifact_found": false,
+    "absence_proven": false,
+    "related_paper_not_substituted": {
+      "title": "Demand-Driven Risk Premia in Foreign Exchange and Bond Markets",
+      "ssrn_id": "5095671",
+      "bank_of_canada_working_paper": "2025-29"
+    }
+  },
+  "data_feasibility": {
+    "owned_inventory_from_prior_no_return_review": [
+      "data/6E_1min_2017.csv through data/6E_1min_2026.csv",
+      "data/treasury_auctions.csv"
+    ],
+    "minute_contract_identifier_present": false,
+    "complete_source_compatible_calendar_acquired": false,
+    "source_announcement_universe_known": false,
+    "calendar_acquisition_blocker": "Target source's event universe and exact timing definition remain unknown; cannot certify an arbitrary release subset as replication.",
+    "prior_free_calendar_access_receipts": [
+      {
+        "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+        "ref": "turn242827view1",
+        "result": "accessible, not a complete source-compatible acquired panel"
+      },
+      {
+        "url": "https://www.bea.gov/news/schedule",
+        "ref": "turn877403view1",
+        "result": "accessible, not a complete historical panel"
+      },
+      {
+        "url": "https://www.bls.gov/schedule/news_release/2026/empsit.htm",
+        "ref": "turn242827view0",
+        "result": "inaccessible via connected tool"
+      },
+      {
+        "url": "https://fiscaldata.treasury.gov/datasets/treasury-securities-auctions-data/",
+        "ref": "turn877403view0",
+        "result": "403 Forbidden; not bypassed"
+      }
+    ],
+    "price_spike_release_proxy_accepted_for_pre_entry_selection": false
+  },
+  "rule_feasibility": {
+    "exact_source_rule_recovered": false,
+    "native_instrument_known": false,
+    "currency_universe_known": false,
+    "source_entry_exit_clock_known": false,
+    "source_cost_treatment_known": false,
+    "six_e_only_is_exact_replication": false,
+    "apex_flat_deadline_timezone": "America/Chicago",
+    "apex_flat_deadline": "15:59",
+    "apex_compatibility": "unresolved; check actual source interval, not overnight terminology",
+    "illustrative_clock_examples_are_source_windows": false,
+    "personal_overnight_eligibility_resolves_source_gate": false
+  },
+  "next_gate": "Obtain lawful full pinned source; extract page-cited native currencies/instrument, complete event universe, auction-day convention, entry/exit/timezone, sample and costs; audit matching calendars and contract/session provenance before any TEST verdict.",
+  "access_control_bypass_attempted": false,
+  "live_broker_vps_or_key_changes": false,
+  "account_constraints_note": "Source window unknown. Both the15:59CT flat deadline and standing no-overnight restriction except the specified Sunday reopening remain binding. A flat-deadline check alone does not certify Apex fit."
+}

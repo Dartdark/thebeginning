@@ -1,0 +1,108 @@
+{
+  "stage": "design",
+  "profile": "E2",
+  "prereg_commit": "d9ef177df4f2a788dc4e9d108c4cdc1fbc4880ad",
+  "plan_sha256": "ec135137d244afc7d24ca53f62bc77936e07d5e64259757d85dcc20ce3d2d879",
+  "source_sha256": "05a176b0c4f6804d48d427ad484175076d125a61b62122736c34c6797c0d2b52",
+  "cache_path": "scratch_data/g24.pkl",
+  "cache_sha256": "69868d1cbc5ca6acdbbba0899eb01ca1ad7d036e00160f33c3f1992d5a385595",
+  "parameters": {
+    "stop_sigma": 0.4,
+    "anchor": 831,
+    "slip_ticks": 3.0
+  },
+  "years": [
+    2018,
+    2022
+  ],
+  "elapsed_seconds": 2.8322797830041964,
+  "raw_net_reconciliation_max_abs": 0.0,
+  "slipped_net_reconciliation_max_abs": 0.0,
+  "commission_per_NQ": 7.25,
+  "commission_total": 9903.5,
+  "slippage_total": 40980.0,
+  "first_entry": "2018-01-23 00:00:00",
+  "last_exit": "2022-12-29 00:00:00",
+  "cross_date_trades": 0,
+  "unknown_held_minutes_count": 0,
+  "delayed_order_count": 0,
+  "unmatched_order_count": 0,
+  "censored_position_count": 0,
+  "order_status_counts": {
+    "filled": 2732,
+    "cancelled_position_closed": 615
+  },
+  "feature_rows": 17238,
+  "feature_last_date": "2022-12-30 00:00:00",
+  "no_current_or_future_session_in_sigma": true,
+  "prices_exclusive_end": "2023-01-01T00:00:00",
+  "ledger_path": "analysis/outputs/codex_s03_noisearea/design_E2.csv",
+  "ledger_sha256": "92d7d4a659d653818df4097fce9b3f6e10a48c1175edac6a9745eed85906861b",
+  "replay_attrs": {
+    "execution_complete": true,
+    "net_includes_slippage": true,
+    "slip_ticks": 3.0,
+    "commission": 7.25,
+    "stop_sigma": 0.4,
+    "anchor": 831,
+    "years": [
+      2018,
+      2022
+    ],
+    "lookback": 14,
+    "stop_anchor": "raw fill",
+    "stop_rounding": "toward entry",
+    "quantity_geometry": "1 NQ; /10 for 1 MNQ",
+    "flatten_decision": 1500,
+    "first_check": 900,
+    "last_check": 1430,
+    "missing_flatten_policy": "first later observed close sends next-open exit by15:59; otherwise censor",
+    "pending_market_policy": "next observed native minute within date; audit delay",
+    "priority": "old-position gap stop, pending market exit, pending entry, intrabar stop, close decision",
+    "audit_tables": {
+      "orders": {
+        "path": "analysis/outputs/codex_s03_noisearea/design_E2_orders.csv",
+        "sha256": "0b8f16a61a78ba39c841395fca804f1baa810e30edec0ed1ba9a29231068ae89",
+        "rows": 3347
+      },
+      "censored": {
+        "path": "analysis/outputs/codex_s03_noisearea/design_E2_censored.json",
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "rows": 0
+      },
+      "unknown_held_minutes": {
+        "path": "analysis/outputs/codex_s03_noisearea/design_E2_unknown_held_minutes.csv",
+        "sha256": "ac9424316147b3138db1af53f4ba30aa2d72705a6ca2847c254afc715953dbfd",
+        "rows": 0
+      },
+      "delayed_orders": {
+        "path": "analysis/outputs/codex_s03_noisearea/design_E2_delayed_orders.csv",
+        "sha256": "703a519dcc8258bb6e357ed5b0a3edfe2a36ef7c6d30f3aef42b3ceabeb23fec",
+        "rows": 0
+      },
+      "unmatched_orders": {
+        "path": "analysis/outputs/codex_s03_noisearea/design_E2_unmatched_orders.csv",
+        "sha256": "6a1dc5dc25b3e12769cd182491be0bb8644a2abc376c2adec959d0b76dbd8553",
+        "rows": 0
+      },
+      "day_audit": {
+        "path": "analysis/outputs/codex_s03_noisearea/design_E2_day_audit.csv",
+        "sha256": "1b0de735f1fff6c77dd79af887a1032ef032cc0c11aef3ea1d8f347de91202a6",
+        "rows": 1305
+      }
+    }
+  },
+  "trades": 1366,
+  "total_net": 132326.5,
+  "mean_net": 96.87152269399706,
+  "win_rate": 0.2957540263543192,
+  "trade_t": 3.2643324996088254,
+  "positive_years": 4,
+  "annual_net": {
+    "2018": 39076.25,
+    "2019": -4160.5,
+    "2020": 26732.25,
+    "2021": 17907.75,
+    "2022": 52770.75
+  }
+}

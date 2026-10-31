@@ -1,0 +1,87 @@
+{
+  "plan_commit": "8d661f1",
+  "executable_matches_checked_source": true,
+  "configurations": {
+    "combined": {},
+    "breakout_alone": {
+      "UseMomentum": 0
+    },
+    "momentum_alone": {
+      "UseBreakout": 0
+    }
+  },
+  "replay_count": 3,
+  "new_optimized_rules": 0,
+  "previously_seen_holdout": true,
+  "primary_start": "2018-06-01",
+  "grid_first": "2017-12-01",
+  "grid_last": "2026-10-09",
+  "bar_count": 3105552,
+  "multiple_testing_n": 277,
+  "prior_replica_rows": 1075,
+  "fresh_combined_rows": 1075,
+  "matched_prior_entry_keys": 1075,
+  "matched_net_max_error": 4.547473508864641e-13,
+  "diagnostics": {
+    "combined": {
+      "primary_trades": 1030,
+      "excluded_short_warmup": 45,
+      "overnight_calendar_count": 48,
+      "session_break_count": 4,
+      "deadline_1559_count": 4,
+      "worst_trade": -11717.25,
+      "largest_initial_stop_risk": 39945.0,
+      "median_bo_initial_stop_risk": 6290.0,
+      "top_5pct_share": 0.7108965725997911,
+      "net_user_cost_mean": 338.65765051644155,
+      "extra_tick_each_fill_mean": 319.6843495455678,
+      "gross_total": 354997.3800319348
+    },
+    "breakout_alone": {
+      "primary_trades": 765,
+      "excluded_short_warmup": 35,
+      "overnight_calendar_count": 47,
+      "session_break_count": 3,
+      "deadline_1559_count": 3,
+      "worst_trade": -11717.25,
+      "largest_initial_stop_risk": 39945.0,
+      "median_bo_initial_stop_risk": 6300.0,
+      "top_5pct_share": 0.5184802112243412,
+      "net_user_cost_mean": 269.6971441187177,
+      "extra_tick_each_fill_mean": 251.83276503375035,
+      "gross_total": 210908.31525081903
+    },
+    "momentum_alone": {
+      "primary_trades": 365,
+      "excluded_short_warmup": 13,
+      "overnight_calendar_count": 1,
+      "session_break_count": 1,
+      "deadline_1559_count": 1,
+      "worst_trade": -1517.25,
+      "largest_initial_stop_risk": 1500.0,
+      "median_bo_initial_stop_risk": NaN,
+      "top_5pct_share": 0.6059250141177516,
+      "net_user_cost_mean": 550.986301369863,
+      "extra_tick_each_fill_mean": 529.736301369863,
+      "gross_total": 203300.0
+    }
+  },
+  "assumed_capital": 50000,
+  "monte_carlo_is_funded_payout_simulation": false,
+  "limitations": [
+    "No MultiCharts execution; SetExitOnClose interpreted at stated 16:00 session end, not verified chart template",
+    "Related MC v2 export includes holiday code absent from upload and is not exact parity proof",
+    "IOG off: protective orders are absent during entry bar; no repair applied",
+    "Primary June 2018 start gives six calendar months of observed warmup; full early 2018 is sensitivity only",
+    "Realized closed-trade daily PnL is not marked-to-market account equity",
+    "One-MNQ diagnostics proportionally scale NQ costs; broker micro fee schedule not known",
+    "Conditional randomized directions keep actual opportunities and can overlap; not a full-system placebo"
+  ],
+  "source_sha256": {
+    "agents/codex/inputs/twin_continuation_uploaded.txt": "117c47f364a11673c95272434a499fdc86163f8e0eec46ce88c010397d08ca53",
+    "checks/candidates/twin_continuation/Twin_Continuation.txt": "2aa16c8972c0229b3cd5634b68a0a557592cc080bd6cb4b293100d299583e327",
+    "checks/candidates/twin_continuation/replica.py": "74493a96de43e15c70f1a732024fd31e69c7c946dd18baf8a6f76c293cec65e0",
+    "scratch_data/g24.pkl": "69868d1cbc5ca6acdbbba0899eb01ca1ad7d036e00160f33c3f1992d5a385595",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Twin Continuation v2.xlsx": "555d636b0a2396983ed861db5296d8a4073868666919d71a796e236a975eedd7"
+  }
+}

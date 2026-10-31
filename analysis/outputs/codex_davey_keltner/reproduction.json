@@ -1,0 +1,44 @@
+{
+  "python": "/workspace/venvs/thebeginning/bin/python",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "numba": "0.68.0",
+    "openpyxl": "3.1.5",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0"
+  },
+  "hashes": {
+    "analysis/codex_davey_keltner.py": "dfcc98745deb7eb6f12c9196ac7ca8377efc86928a247ac968279581cbe9e1b5",
+    "analysis/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "analysis/grid.py": "a30ddd4533c9b9d9bdd50f161deded3a2864605f1b81bf4605f74b1d23bc7405",
+    "analysis/replica.py": "c0ae001152c75395748b0f3fdb4bdcbc589d0a124befce0170ef454c3da6f58f",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/param_clusters.py": "0ee7c32742319681a50a0818280a08a6154a28ed4e1dbd2220f638144439a810",
+    "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a",
+    "agents/codex/plans/davey_keltner_screen.md": "75e407c138d5d69431ff0b98eb93bc4fde2dffba69cd2c64c62ca1fbc962ac52",
+    "agents/codex/evidence/davey_keltner.md": "bbe21d43e22324935244e147e8ed21b49c4df0cd67579c7e305d80b63dfd19b1",
+    "agents/codex/inputs/davey_keltner/screenshot_transcription.txt": "2e4d9bb26c9a684d5c15c235451877c62c171cb617f23131a078e9b11468e40f",
+    "agents/codex/inputs/davey_keltner/transcript.txt": "d945e8edf4de1814f20d04f2d10db6654b1f616a38287a78ab588082f7335aa0",
+    "analysis/codex_davey_keltner_report.py": "839046a4cfe6fde7735333b80b73b4bd6e2f9f4d7df44fc0992e76293fcb990c"
+  },
+  "config": {
+    "market": "ES",
+    "bar_minutes": 30,
+    "momentum_long": 20,
+    "momentum_short": 20,
+    "channel_length": 5,
+    "channel_atr": 0.5,
+    "threshold": 50.0,
+    "stop_atr_length": 15,
+    "long_stop_atr": 4.0,
+    "short_stop_atr": 1.0,
+    "session_start": 830,
+    "session_end": 1500,
+    "early_end": 1130,
+    "quantity": 1,
+    "moving_atr_stop": true,
+    "pyramiding": false
+  },
+  "seed": 530251
+}

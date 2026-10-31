@@ -1,0 +1,43 @@
+{
+  "files": {
+    "data/ES_1min_2017.csv": "9ddc201359c70d1adb174141d0614dbf48e08f3324f63b6f91b97350a0aac442",
+    "data/ES_1min_2018.csv": "ad4027b8230de0a91f83d1b6f3b798933f92cedebc39e56fe9223447c4b9d751",
+    "data/ES_1min_2019.csv": "b9c09d6c9a702e560119bd33770cc71e05423fc0a7a227fcc046e73bf22f22c5",
+    "data/ES_1min_2020.csv": "c22514904bd19b8ee9e3611bcd8af4017290730550b4799b9d92da73f8e7d550",
+    "data/ES_1min_2021.csv": "67cd2dee366b86f555d09d45fb4cb9f6163347531b4f3f230f73704a1fff8096",
+    "data/ES_1min_2022.csv": "00db614dd10674f7fe2f14940ae43f523b57ac48db1b0619b0eb084c5f50f601"
+  },
+  "first": 20170102,
+  "last": 20221230,
+  "config": {
+    "market": "ES",
+    "bar_minutes": 30,
+    "momentum_long": 20,
+    "momentum_short": 20,
+    "channel_length": 5,
+    "channel_atr": 0.5,
+    "threshold": 50.0,
+    "stop_atr_length": 15,
+    "long_stop_atr": 4.0,
+    "short_stop_atr": 1.0,
+    "session_start": 830,
+    "session_end": 1500,
+    "early_end": 1130,
+    "quantity": 1,
+    "moving_atr_stop": true,
+    "pyramiding": false
+  },
+  "seed": 530251,
+  "plan_commit": "d8718f9544500a7541544c1c36a6134978e5f9fc",
+  "return_computed": true,
+  "variants": 2,
+  "analytic_double_cost_rescores": 1,
+  "conditional_random_side_controls": 1000,
+  "missing_entry": 0,
+  "late_flat": 0,
+  "placebo_p": 0.26173826173826176,
+  "net_if_double_total_cost": -219102.5,
+  "first_trade": "2018-01-02 00:00:00",
+  "last_trade": "2022-12-30 00:00:00",
+  "pre_return_counts_sha256": "38e59e7a8e26ed64730945d8732afc75cd825c808574e8b7426540dd1da0e782"
+}

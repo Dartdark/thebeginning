@@ -1,0 +1,825 @@
+{
+  "study": "Hourly R2 CHoCH placebo diagnostics",
+  "preregistration_commit": "2e781a6cb5dbe44eb3782cfe77480915c36648b3",
+  "implementation_commit": "51c0488d6b766260e84a4fe2de8d3a32d39fc6f1",
+  "code_hashes": {
+    "codex_choch_placebo_paths.py": "1a54005ec54dbffae6eb5cab2bcb8c5742c2416e3fe603a8fb57f5b182b18f88",
+    "codex_choch_placebos.py": "f430fe11baff1c2dce35955480b2ad7edbc2d3a2b9f0cad3e8ab7b743f3bec15"
+  },
+  "input_hashes": {
+    "data/NQ_1min_DAY_2018.csv": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+    "data/NQ_1min_DAY_2019.csv": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+    "data/NQ_1min_DAY_2020.csv": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+    "data/NQ_1min_DAY_2021.csv": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+    "data/NQ_1min_DAY_2022.csv": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+    "data/NQ_1min_ON_2017.csv": "1d783a7ee533bf0db8641a93c4fb529f46674eaa24397d66cda63e8c1df11c86",
+    "data/NQ_1min_ON_2018.csv": "7b47273122b7cdd478bec9214ed88f036820699d80c22d8a514b1c7b99f20016",
+    "data/NQ_1min_ON_2019.csv": "3475cad66628a84ffc8cd2fc40b56d22fd8810e6cbc2ed93cee12d22805edfb8",
+    "data/NQ_1min_ON_2020.csv": "83f62aed8465291ee7e0490a2fbf3b2791c0e48646d15b79a699ad76ba1fb378",
+    "data/NQ_1min_ON_2021.csv": "ca1ce725e031993e1d3d63a6dba1c402f30d2f44a07bc13615fcb56b09a48f9f",
+    "data/NQ_1min_ON_2022.csv": "c6906ea8223d44b18aed0440ede1606fc84155a47f561a1da2caa6f7b611fa71"
+  },
+  "source_audit": {
+    "input_rows": 1983470,
+    "unique_rows": 1983470,
+    "duplicate_rows": 0,
+    "conflicting_keys": 0,
+    "invalid_or_conflicting_observations": 0,
+    "no_forward_fill": true,
+    "exporter_timestamp_contract": "existing repo close-labelled CT; original author parity unavailable",
+    "continuous_contract_roll_identity": "unverified; no price adjustment or outcome-selected roll filter"
+  },
+  "full_source_baseline_reproduced": true,
+  "full_source_baseline": {
+    "trades": 408,
+    "win": 0.48284313725490197,
+    "avg": 12.000196078431365,
+    "annual": 945.4499310344821,
+    "sharpe": 0.5240603225465927,
+    "sortino": 0.8354168346472873,
+    "profit_factor": 1.1911624721713998,
+    "max_dd": 2406.600000000006,
+    "calmar": 0.3928571142003157,
+    "ulcer": 1.9217149044717285,
+    "ulcer_perf": 0.9839648210402805,
+    "model": "full_source_BASE",
+    "raw_signals": 1104,
+    "eligible_signals": 412,
+    "net_total": 4896.079999999997,
+    "gross_total": 5810.0,
+    "gross_mean": 14.240196078431373,
+    "trade_t": 1.2179408013675908,
+    "daily_NW5": 1.1940374487526253,
+    "state_counts": {
+      "resolved": 408,
+      "unresolved_missing": 1
+    },
+    "unresolved": 1,
+    "censored": 0,
+    "gross_pass": true,
+    "years": [
+      {
+        "year": 2018,
+        "net_mnq": -612.7600000000004
+      },
+      {
+        "year": 2019,
+        "net_mnq": 499.8399999999998
+      },
+      {
+        "year": 2020,
+        "net_mnq": 650.0199999999991
+      },
+      {
+        "year": 2021,
+        "net_mnq": 1406.3199999999993
+      },
+      {
+        "year": 2022,
+        "net_mnq": 2952.659999999999
+      }
+    ],
+    "sides": [
+      {
+        "side": -1,
+        "trades": 204,
+        "win": 0.46568627450980393,
+        "avg": 14.796764705882351,
+        "annual": 582.8904827586204,
+        "sharpe": 0.44032947263874905,
+        "sortino": 0.7629802209033331,
+        "profit_factor": 1.221769489154488,
+        "max_dd": 1820.8199999999997,
+        "calmar": 0.32012526375952616,
+        "ulcer": 1.7248035392318455,
+        "ulcer_perf": 0.6758920300200857,
+        "net_total": 3018.5399999999995,
+        "trade_t": 1.0020431344446759
+      },
+      {
+        "side": 1,
+        "trades": 204,
+        "win": 0.5,
+        "avg": 9.203627450980385,
+        "annual": 362.5594482758619,
+        "sharpe": 0.3094780589803186,
+        "sortino": 0.501165620569188,
+        "profit_factor": 1.1564488900073162,
+        "max_dd": 1599.9199999999983,
+        "calmar": 0.22661098572170002,
+        "ulcer": 1.0526115037726265,
+        "ulcer_perf": 0.6888760895666175,
+        "net_total": 1877.5399999999986,
+        "trade_t": 0.7035265081941625
+      }
+    ],
+    "risk_points_quantiles": {
+      "0.0": 6.5,
+      "0.5": 110.25,
+      "0.95": 301.13749999999993,
+      "1.0": 776.25
+    },
+    "economic_gate": false,
+    "complete_data_gate": false,
+    "design_pass": false
+  },
+  "covered_baseline": {
+    "trades": 408,
+    "win": 0.48284313725490197,
+    "avg": 12.000196078431365,
+    "annual": 986.2607194244597,
+    "sharpe": 0.5352552257053077,
+    "sortino": 0.8532569286902617,
+    "profit_factor": 1.1911624721713998,
+    "max_dd": 2406.600000000006,
+    "calmar": 0.40981497524493365,
+    "ulcer": 1.9231598152138447,
+    "ulcer_perf": 1.0256669379448249,
+    "model": "covered_BASE",
+    "raw_signals": 1104,
+    "eligible_signals": 411,
+    "net_total": 4896.079999999997,
+    "gross_total": 5810.0,
+    "gross_mean": 14.240196078431373,
+    "trade_t": 1.2179408013675908,
+    "daily_NW5": 1.1951533180949772,
+    "state_counts": {
+      "resolved": 408
+    },
+    "unresolved": 0,
+    "censored": 0,
+    "gross_pass": true,
+    "years": [
+      {
+        "year": 2018,
+        "net_mnq": -612.7600000000004
+      },
+      {
+        "year": 2019,
+        "net_mnq": 499.8399999999998
+      },
+      {
+        "year": 2020,
+        "net_mnq": 650.0199999999991
+      },
+      {
+        "year": 2021,
+        "net_mnq": 1406.3199999999993
+      },
+      {
+        "year": 2022,
+        "net_mnq": 2952.659999999999
+      }
+    ],
+    "sides": [
+      {
+        "side": -1,
+        "trades": 204,
+        "win": 0.46568627450980393,
+        "avg": 14.796764705882351,
+        "annual": 608.0512230215825,
+        "sharpe": 0.44973261632412687,
+        "sortino": 0.7792734512158297,
+        "profit_factor": 1.221769489154488,
+        "max_dd": 1820.8199999999997,
+        "calmar": 0.3339436204685705,
+        "ulcer": 1.7284878263793324,
+        "ulcer_perf": 0.703564368509634,
+        "net_total": 3018.5399999999995,
+        "trade_t": 1.0020431344446759
+      },
+      {
+        "side": 1,
+        "trades": 204,
+        "win": 0.5,
+        "avg": 9.203627450980385,
+        "annual": 378.2094964028774,
+        "sharpe": 0.3160842399581904,
+        "sortino": 0.5118678729433993,
+        "profit_factor": 1.1564488900073162,
+        "max_dd": 1599.9199999999983,
+        "calmar": 0.23639275488954312,
+        "ulcer": 1.0557924294851224,
+        "ulcer_perf": 0.7164466913014684,
+        "net_total": 1877.5399999999986,
+        "trade_t": 0.7035265081941625
+      }
+    ],
+    "risk_points_quantiles": {
+      "0.0": 6.5,
+      "0.5": 110.25,
+      "0.95": 301.13749999999993,
+      "1.0": 776.25
+    },
+    "economic_gate": false,
+    "complete_data_gate": true,
+    "design_pass": false,
+    "daily_clock": "Audited complete cash sessions only, including no-event sessions; not zero-filled incomplete days."
+  },
+  "coverage": {
+    "cash_sessions": 1259,
+    "complete_sessions": 1251,
+    "incomplete_sessions": 8,
+    "eligible_signals": 412,
+    "covered_signals": 411,
+    "excluded_trade_states": {
+      "unresolved_missing": 1
+    },
+    "excluded_resolved_net": 0.0,
+    "note": "Future data-completeness analysis restriction, not a live entry filter or new alpha rule."
+  },
+  "catalog_states": {
+    "resolved": 2873
+  },
+  "catalog_outcomes": 2873,
+  "nulls": {
+    "seed": 20261029,
+    "paths_per_null": 1000,
+    "event_count": 411,
+    "baseline_complete": true,
+    "baseline": {
+      "trades": 408,
+      "win": 0.48284313725490197,
+      "avg": 12.000196078431365,
+      "annual": 986.2607194244598,
+      "sharpe": 0.5352552257053079,
+      "sortino": 0.8532569286902619,
+      "profit_factor": 1.1911624721713998,
+      "max_dd": 2406.599999999998,
+      "calmar": 0.40981497524493493,
+      "ulcer": 1.9231598152138443,
+      "ulcer_perf": 1.0256669379448253,
+      "net_total": 4896.079999999997,
+      "trade_t": 1.2179408013675908,
+      "daily_NW5": 1.1951533180949774
+    },
+    "baseline_stop_first": {
+      "trades": 408,
+      "win": 0.48284313725490197,
+      "avg": 12.000196078431365,
+      "annual": 986.2607194244598,
+      "sharpe": 0.5352552257053079,
+      "sortino": 0.8532569286902619,
+      "profit_factor": 1.1911624721713998,
+      "max_dd": 2406.599999999998,
+      "calmar": 0.40981497524493493,
+      "ulcer": 1.9231598152138443,
+      "ulcer_perf": 1.0256669379448253,
+      "net_total": 4896.079999999997,
+      "trade_t": 1.2179408013675908,
+      "daily_NW5": 1.1951533180949774
+    },
+    "baseline_path": {
+      "attempted": 411,
+      "admitted": 408,
+      "blocked": 3,
+      "known_trades": 408,
+      "unknown_trades": 0,
+      "complete": true,
+      "unknown_states": "{}",
+      "known_net_subtotal": 4896.08,
+      "net_cents": 489608,
+      "dd_cents": 240660,
+      "long_trades": 204,
+      "short_trades": 204,
+      "exposure_minutes": 106878.0,
+      "known_exposure_minutes": 106878.0,
+      "long_minutes_known": 54052.0,
+      "short_minutes_known": 52826.0,
+      "earlier_attempts": 0,
+      "equal_attempts": 411,
+      "later_attempts": 0,
+      "earlier_admitted": 0,
+      "equal_admitted": 408,
+      "later_admitted": 0,
+      "collision_count": 0,
+      "commission_known": 505.92,
+      "slippage_known": 408.0,
+      "extra_cost_net": 3982.16,
+      "stop_first_net": 4896.08,
+      "stop_first_dd_cents": 240660,
+      "stop_first_net_cents": 489608,
+      "trades": 408,
+      "win": 0.48284313725490197,
+      "avg": 12.000196078431365,
+      "annual": 986.2607194244598,
+      "sharpe": 0.5352552257053079,
+      "sortino": 0.8532569286902619,
+      "profit_factor": 1.1911624721713998,
+      "max_dd": 2406.599999999998,
+      "calmar": 0.40981497524493493,
+      "ulcer": 1.9231598152138443,
+      "ulcer_perf": 1.0256669379448253,
+      "net_total": 4896.079999999997,
+      "trade_t": 1.2179408013675908,
+      "daily_NW5": 1.1951533180949774
+    },
+    "baseline_daily_verified": true,
+    "statistic_basis": "Native-cost total net; exact integer cents and ties; 19p is limited family context.",
+    "RT_scope": "Noncausal same-session risk/date-matched counterfactual; not a promotion placebo.",
+    "RS": {
+      "complete_paths": 1000,
+      "unknown_paths": 0,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "p_profit": 0.1068931068931069,
+      "p_profit_bounds": [
+        0.1068931068931069,
+        0.1068931068931069
+      ],
+      "p_profit_19": 1.0,
+      "p_profit_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_profit_rank_bounds": [
+        107,
+        107
+      ],
+      "p_dd": 0.1008991008991009,
+      "p_dd_bounds": [
+        0.1008991008991009,
+        0.1008991008991009
+      ],
+      "p_dd_19": 1.0,
+      "p_dd_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_dd_rank_bounds": [
+        101,
+        101
+      ],
+      "p_joint": 0.056943056943056944,
+      "p_joint_bounds": [
+        0.056943056943056944,
+        0.056943056943056944
+      ],
+      "p_joint_19": 1.0,
+      "p_joint_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_joint_rank_bounds": [
+        57,
+        57
+      ],
+      "quantiles": {
+        "net_total": {
+          "5": -6387.678000000003,
+          "50": 317.35999999999757,
+          "95": 6349.200999999996
+        },
+        "admitted": {
+          "5": 392.0,
+          "50": 396.0,
+          "95": 401.0
+        },
+        "known_exposure_minutes": {
+          "5": 102547.35,
+          "50": 104480.5,
+          "95": 106415.25
+        },
+        "exposure_minutes": {
+          "5": 102547.35,
+          "50": 104480.5,
+          "95": 106415.25
+        },
+        "long_trades": {
+          "5": 182.0,
+          "50": 198.0,
+          "95": 214.0
+        },
+        "short_trades": {
+          "5": 182.0,
+          "50": 198.0,
+          "95": 215.0
+        },
+        "earlier_admitted": {
+          "5": 0.0,
+          "50": 0.0,
+          "95": 0.0
+        },
+        "equal_admitted": {
+          "5": 392.0,
+          "50": 396.0,
+          "95": 401.0
+        },
+        "later_admitted": {
+          "5": 0.0,
+          "50": 0.0,
+          "95": 0.0
+        },
+        "extra_cost_net": {
+          "5": -7274.606,
+          "50": -576.03,
+          "95": 5455.776999999999
+        },
+        "stop_first_net": {
+          "5": -6387.678,
+          "50": 317.36,
+          "95": 6349.200999999999
+        }
+      },
+      "stop_first": {
+        "complete_paths": 1000,
+        "unknown_paths": 0,
+        "ties_profit": 0,
+        "ties_dd": 0,
+        "ties_joint": 0,
+        "p_profit": 0.1068931068931069,
+        "p_profit_bounds": [
+          0.1068931068931069,
+          0.1068931068931069
+        ],
+        "p_profit_19": 1.0,
+        "p_profit_19_bounds": [
+          1.0,
+          1.0
+        ],
+        "baseline_profit_rank_bounds": [
+          107,
+          107
+        ],
+        "p_dd": 0.1008991008991009,
+        "p_dd_bounds": [
+          0.1008991008991009,
+          0.1008991008991009
+        ],
+        "p_dd_19": 1.0,
+        "p_dd_19_bounds": [
+          1.0,
+          1.0
+        ],
+        "baseline_dd_rank_bounds": [
+          101,
+          101
+        ],
+        "p_joint": 0.056943056943056944,
+        "p_joint_bounds": [
+          0.056943056943056944,
+          0.056943056943056944
+        ],
+        "p_joint_19": 1.0,
+        "p_joint_19_bounds": [
+          1.0,
+          1.0
+        ],
+        "baseline_joint_rank_bounds": [
+          57,
+          57
+        ]
+      },
+      "unknown_admitted_states": {},
+      "artifacts": {
+        "path_summary": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RS/path_summary.csv",
+        "paths": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RS/paths.npz"
+      }
+    },
+    "RT": {
+      "complete_paths": 1000,
+      "unknown_paths": 0,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "p_profit": 1.0,
+      "p_profit_bounds": [
+        1.0,
+        1.0
+      ],
+      "p_profit_19": 1.0,
+      "p_profit_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_profit_rank_bounds": [
+        1001,
+        1001
+      ],
+      "p_dd": 0.999000999000999,
+      "p_dd_bounds": [
+        0.999000999000999,
+        0.999000999000999
+      ],
+      "p_dd_19": 1.0,
+      "p_dd_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_dd_rank_bounds": [
+        1000,
+        1000
+      ],
+      "p_joint": 0.999000999000999,
+      "p_joint_bounds": [
+        0.999000999000999,
+        0.999000999000999
+      ],
+      "p_joint_19": 1.0,
+      "p_joint_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_joint_rank_bounds": [
+        1000,
+        1000
+      ],
+      "quantiles": {
+        "net_total": {
+          "5": 16070.663999999999,
+          "50": 19723.759999999995,
+          "95": 23398.777
+        },
+        "admitted": {
+          "5": 384.0,
+          "50": 387.0,
+          "95": 390.0
+        },
+        "known_exposure_minutes": {
+          "5": 89837.95,
+          "50": 92697.5,
+          "95": 95796.15
+        },
+        "exposure_minutes": {
+          "5": 89837.95,
+          "50": 92697.5,
+          "95": 95796.15
+        },
+        "long_trades": {
+          "5": 190.0,
+          "50": 194.0,
+          "95": 198.0
+        },
+        "short_trades": {
+          "5": 188.0,
+          "50": 193.0,
+          "95": 197.0
+        },
+        "earlier_admitted": {
+          "5": 89.0,
+          "50": 101.0,
+          "95": 113.0
+        },
+        "equal_admitted": {
+          "5": 54.0,
+          "50": 67.0,
+          "95": 80.0
+        },
+        "later_admitted": {
+          "5": 204.0,
+          "50": 219.0,
+          "95": 232.04999999999995
+        },
+        "extra_cost_net": {
+          "5": 15199.528,
+          "50": 18853.519999999997,
+          "95": 22527.529
+        },
+        "stop_first_net": {
+          "5": 16070.663999999999,
+          "50": 19723.760000000002,
+          "95": 23398.777
+        }
+      },
+      "stop_first": {
+        "complete_paths": 1000,
+        "unknown_paths": 0,
+        "ties_profit": 0,
+        "ties_dd": 0,
+        "ties_joint": 0,
+        "p_profit": 1.0,
+        "p_profit_bounds": [
+          1.0,
+          1.0
+        ],
+        "p_profit_19": 1.0,
+        "p_profit_19_bounds": [
+          1.0,
+          1.0
+        ],
+        "baseline_profit_rank_bounds": [
+          1001,
+          1001
+        ],
+        "p_dd": 0.999000999000999,
+        "p_dd_bounds": [
+          0.999000999000999,
+          0.999000999000999
+        ],
+        "p_dd_19": 1.0,
+        "p_dd_19_bounds": [
+          1.0,
+          1.0
+        ],
+        "baseline_dd_rank_bounds": [
+          1000,
+          1000
+        ],
+        "p_joint": 0.999000999000999,
+        "p_joint_bounds": [
+          0.999000999000999,
+          0.999000999000999
+        ],
+        "p_joint_19": 1.0,
+        "p_joint_19_bounds": [
+          1.0,
+          1.0
+        ],
+        "baseline_joint_rank_bounds": [
+          1000,
+          1000
+        ]
+      },
+      "unknown_admitted_states": {},
+      "artifacts": {
+        "path_summary": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RT/path_summary.csv",
+        "paths": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RT/paths.npz"
+      }
+    },
+    "RD": {
+      "complete_paths": 1000,
+      "unknown_paths": 0,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "p_profit": 0.21178821178821178,
+      "p_profit_bounds": [
+        0.21178821178821178,
+        0.21178821178821178
+      ],
+      "p_profit_19": 1.0,
+      "p_profit_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_profit_rank_bounds": [
+        212,
+        212
+      ],
+      "p_dd": 0.5364635364635365,
+      "p_dd_bounds": [
+        0.5364635364635365,
+        0.5364635364635365
+      ],
+      "p_dd_19": 1.0,
+      "p_dd_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_dd_rank_bounds": [
+        537,
+        537
+      ],
+      "p_joint": 0.16983016983016982,
+      "p_joint_bounds": [
+        0.16983016983016982,
+        0.16983016983016982
+      ],
+      "p_joint_19": 1.0,
+      "p_joint_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_joint_rank_bounds": [
+        170,
+        170
+      ],
+      "quantiles": {
+        "net_total": {
+          "5": 417.4769999999979,
+          "50": 3465.4199999999973,
+          "95": 6415.4519999999975
+        },
+        "admitted": {
+          "5": 386.0,
+          "50": 390.0,
+          "95": 394.0
+        },
+        "known_exposure_minutes": {
+          "5": 73879.65,
+          "50": 76220.5,
+          "95": 78528.2
+        },
+        "exposure_minutes": {
+          "5": 73879.65,
+          "50": 76220.5,
+          "95": 78528.2
+        },
+        "long_trades": {
+          "5": 191.0,
+          "50": 195.0,
+          "95": 198.04999999999995
+        },
+        "short_trades": {
+          "5": 191.0,
+          "50": 195.0,
+          "95": 199.0
+        },
+        "earlier_admitted": {
+          "5": 0.0,
+          "50": 0.0,
+          "95": 0.0
+        },
+        "equal_admitted": {
+          "5": 103.0,
+          "50": 116.0,
+          "95": 129.0
+        },
+        "later_admitted": {
+          "5": 261.0,
+          "50": 274.0,
+          "95": 287.0
+        },
+        "extra_cost_net": {
+          "5": -462.17099999999994,
+          "50": 2588.3100000000004,
+          "95": 5548.897
+        },
+        "stop_first_net": {
+          "5": 417.4770000000001,
+          "50": 3465.42,
+          "95": 6415.452
+        }
+      },
+      "stop_first": {
+        "complete_paths": 1000,
+        "unknown_paths": 0,
+        "ties_profit": 0,
+        "ties_dd": 0,
+        "ties_joint": 0,
+        "p_profit": 0.21178821178821178,
+        "p_profit_bounds": [
+          0.21178821178821178,
+          0.21178821178821178
+        ],
+        "p_profit_19": 1.0,
+        "p_profit_19_bounds": [
+          1.0,
+          1.0
+        ],
+        "baseline_profit_rank_bounds": [
+          212,
+          212
+        ],
+        "p_dd": 0.5364635364635365,
+        "p_dd_bounds": [
+          0.5364635364635365,
+          0.5364635364635365
+        ],
+        "p_dd_19": 1.0,
+        "p_dd_19_bounds": [
+          1.0,
+          1.0
+        ],
+        "baseline_dd_rank_bounds": [
+          537,
+          537
+        ],
+        "p_joint": 0.16983016983016982,
+        "p_joint_bounds": [
+          0.16983016983016982,
+          0.16983016983016982
+        ],
+        "p_joint_19": 1.0,
+        "p_joint_19_bounds": [
+          1.0,
+          1.0
+        ],
+        "baseline_joint_rank_bounds": [
+          170,
+          170
+        ]
+      },
+      "unknown_admitted_states": {},
+      "artifacts": {
+        "path_summary": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RD/path_summary.csv",
+        "paths": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RD/paths.npz"
+      }
+    }
+  },
+  "design_only": true,
+  "validation_run": false,
+  "account_benches_run": false,
+  "definitions": {
+    "prior_inspected": 16,
+    "reused_baseline": 1,
+    "new_fixed_null_questions": 3,
+    "cumulative_inspected_context": 19,
+    "random_paths": 3000,
+    "note": "Nulls are diagnostics, not three promoted alpha strategies or3000 independent market histories."
+  },
+  "cost": {
+    "native_contract": "MNQ",
+    "point_value": 2.0,
+    "commission": 1.24,
+    "slippage": 1.0,
+    "round_trip": 2.24
+  },
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  },
+  "final_verdict": "Diagnostic only: prior full foundation economic/data gates remain failed; no advancement or new filters."
+}

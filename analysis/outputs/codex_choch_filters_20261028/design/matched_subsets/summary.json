@@ -1,0 +1,2014 @@
+{
+  "scope": "Fixed common-BASE trade IDs; original exits/costs; diagnostics, not executable returns.",
+  "seed": 20261028,
+  "random_subsets_per_filter": 1000,
+  "filter_order": [
+    "F1",
+    "F1_5",
+    "A4",
+    "F1_A4"
+  ],
+  "baseline_daily_verified": true,
+  "base": {
+    "count": 233,
+    "net_total": 5724.579999999998,
+    "net_mean": 24.569012875536473,
+    "trade_t": 1.784548334514207,
+    "max_dd": 1873.3599999999997,
+    "metrics": {
+      "trades": 233,
+      "win": 0.5150214592274678,
+      "avg": 24.569012875536473,
+      "annual": 1105.4361379310342,
+      "sharpe": 0.7578809877202819,
+      "sortino": 1.1939899255686177,
+      "profit_factor": 1.3881565921622554,
+      "max_dd": 1873.3600000000006,
+      "calmar": 0.5900820653430381,
+      "ulcer": 0.9263618470228189,
+      "ulcer_perf": 2.386618450411644
+    },
+    "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+  },
+  "first_date": "2018-01-01",
+  "last_date": "2022-12-30",
+  "daily_rows": 1305,
+  "filters": {
+    "F1": {
+      "kept": {
+        "count": 41,
+        "net_total": -521.8400000000003,
+        "net_mean": -12.727804878048786,
+        "trade_t": -0.529157631339945,
+        "max_dd": 1237.5800000000002,
+        "metrics": {
+          "trades": 41,
+          "win": 0.36585365853658536,
+          "avg": -12.727804878048786,
+          "annual": -100.76910344827589,
+          "sharpe": -0.24183400500477648,
+          "sortino": -0.3439521086239844,
+          "profit_factor": 0.8085159472193274,
+          "max_dd": 1237.5800000000017,
+          "calmar": -0.08142431474997636,
+          "ulcer": 1.084068087080821,
+          "ulcer_perf": -0.18590917793664966
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "removed": {
+        "count": 192,
+        "net_total": 6246.419999999998,
+        "net_mean": 32.53343749999999,
+        "trade_t": 2.050876106583293,
+        "max_dd": 1573.8999999999983,
+        "metrics": {
+          "trades": 192,
+          "win": 0.546875,
+          "avg": 32.53343749999999,
+          "annual": 1206.20524137931,
+          "sharpe": 0.8668489276022643,
+          "sortino": 1.3918575641343227,
+          "profit_factor": 1.5195444020068403,
+          "max_dd": 1573.8999999999942,
+          "calmar": 0.7663798471181871,
+          "ulcer": 0.7031842724020798,
+          "ulcer_perf": 3.430694595198806
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "strata": [
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 3,
+          "kept_count": 1,
+          "removed_count": 2
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 7,
+          "kept_count": 4,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 3,
+          "removed_count": 4
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 10,
+          "kept_count": 4,
+          "removed_count": 6
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 3,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 1,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 3,
+          "removed_count": 8
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 1,
+          "removed_count": 7
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 6,
+          "removed_count": 5
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 0,
+          "removed_count": 7
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 8,
+          "kept_count": 0,
+          "removed_count": 8
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 12,
+          "kept_count": 4,
+          "removed_count": 8
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 9,
+          "kept_count": 0,
+          "removed_count": 9
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 2,
+          "removed_count": 9
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 15,
+          "kept_count": 2,
+          "removed_count": 13
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 1,
+          "removed_count": 4
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 8,
+          "kept_count": 2,
+          "removed_count": 6
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 4,
+          "kept_count": 1,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 0,
+          "removed_count": 6
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        }
+      ],
+      "kept_net": -521.8400000000003,
+      "base_net": 5724.579999999998,
+      "removed_net": 6246.419999999998,
+      "p_profit": 0.8771228771228772,
+      "p_dd": 0.6443556443556444,
+      "p_joint": 0.6353646353646354,
+      "profit_p_plus_one": 0.8771228771228772,
+      "dd_p_plus_one": 0.6443556443556444,
+      "joint_p_plus_one": 0.6353646353646354,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "unique_memberships": 1000,
+      "unique_daily_paths": 1000,
+      "unique_profit_dd_pairs": 1000,
+      "strata_with_random_choice": 16,
+      "artifacts": {
+        "strata.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/strata.csv",
+        "observed_membership.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/observed_membership.csv",
+        "observed_daily.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/observed_daily.csv",
+        "random_selected_ids.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/random_selected_ids.csv",
+        "random_summary.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/random_summary.csv",
+        "random_daily_paths.npz": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1/random_daily_paths.npz"
+      }
+    },
+    "F1_5": {
+      "kept": {
+        "count": 79,
+        "net_total": -634.9600000000007,
+        "net_mean": -8.03746835443039,
+        "trade_t": -0.3828111337234269,
+        "max_dd": 1670.6000000000001,
+        "metrics": {
+          "trades": 79,
+          "win": 0.379746835443038,
+          "avg": -8.03746835443039,
+          "annual": -122.61296551724149,
+          "sharpe": -0.16839906802185195,
+          "sortino": -0.24993897674778703,
+          "profit_factor": 0.8948438788657661,
+          "max_dd": 1670.5999999999985,
+          "calmar": -0.0733945681295592,
+          "ulcer": 1.1226348801814263,
+          "ulcer_perf": -0.21843783349654397
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "removed": {
+        "count": 154,
+        "net_total": 6359.539999999999,
+        "net_mean": 41.29571428571428,
+        "trade_t": 2.3297802278146422,
+        "max_dd": 1238.98,
+        "metrics": {
+          "trades": 154,
+          "win": 0.5844155844155844,
+          "avg": 41.29571428571428,
+          "annual": 1228.0491034482754,
+          "sharpe": 0.9611234137361342,
+          "sortino": 1.541977538673982,
+          "profit_factor": 1.730154101214026,
+          "max_dd": 1238.979999999996,
+          "calmar": 0.9911775036306313,
+          "ulcer": 0.556860900323247,
+          "ulcer_perf": 4.410613504145889
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "strata": [
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 3,
+          "kept_count": 2,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 7,
+          "kept_count": 4,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 5,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 10,
+          "kept_count": 8,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 3,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 2,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 6,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 2,
+          "removed_count": 6
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 1,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 9,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 0,
+          "removed_count": 7
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 8,
+          "kept_count": 0,
+          "removed_count": 8
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 12,
+          "kept_count": 6,
+          "removed_count": 6
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 9,
+          "kept_count": 3,
+          "removed_count": 6
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 3,
+          "removed_count": 8
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 15,
+          "kept_count": 8,
+          "removed_count": 7
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 8,
+          "kept_count": 5,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 4,
+          "kept_count": 1,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 2,
+          "removed_count": 4
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        }
+      ],
+      "kept_net": -634.9600000000007,
+      "base_net": 5724.579999999998,
+      "removed_net": 6359.539999999999,
+      "p_profit": 0.975024975024975,
+      "p_dd": 0.8411588411588412,
+      "p_joint": 0.8391608391608392,
+      "profit_p_plus_one": 0.975024975024975,
+      "dd_p_plus_one": 0.8411588411588412,
+      "joint_p_plus_one": 0.8391608391608392,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "unique_memberships": 1000,
+      "unique_daily_paths": 1000,
+      "unique_profit_dd_pairs": 1000,
+      "strata_with_random_choice": 20,
+      "artifacts": {
+        "strata.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/strata.csv",
+        "observed_membership.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/observed_membership.csv",
+        "observed_daily.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/observed_daily.csv",
+        "random_selected_ids.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/random_selected_ids.csv",
+        "random_summary.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/random_summary.csv",
+        "random_daily_paths.npz": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_5/random_daily_paths.npz"
+      }
+    },
+    "A4": {
+      "kept": {
+        "count": 117,
+        "net_total": 1038.9199999999992,
+        "net_mean": 8.879658119658112,
+        "trade_t": 0.4880974055500506,
+        "max_dd": 1512.3000000000002,
+        "metrics": {
+          "trades": 117,
+          "win": 0.4700854700854701,
+          "avg": 8.879658119658112,
+          "annual": 200.61903448275845,
+          "sharpe": 0.21512623621880586,
+          "sortino": 0.3537129072877351,
+          "profit_factor": 1.1381105448009807,
+          "max_dd": 1512.2999999999956,
+          "calmar": 0.13265822553908552,
+          "ulcer": 1.2466318368433869,
+          "ulcer_perf": 0.3218577105984211
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "removed": {
+        "count": 116,
+        "net_total": 4685.66,
+        "net_mean": 40.39362068965517,
+        "trade_t": 1.9547263754261166,
+        "max_dd": 1263.699999999999,
+        "metrics": {
+          "trades": 116,
+          "win": 0.5603448275862069,
+          "avg": 40.39362068965517,
+          "annual": 904.8171034482756,
+          "sharpe": 0.8496079932442316,
+          "sortino": 1.4615818715764237,
+          "profit_factor": 1.6484678385881584,
+          "max_dd": 1263.699999999997,
+          "calmar": 0.7160062542124537,
+          "ulcer": 0.5306818740776706,
+          "ulcer_perf": 3.410016990012538
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "strata": [
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 3,
+          "kept_count": 1,
+          "removed_count": 2
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 2,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 2,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 5,
+          "kept_count": 1,
+          "removed_count": 4
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 7,
+          "kept_count": 6,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 7,
+          "removed_count": 0
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 2,
+          "removed_count": 0
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 10,
+          "kept_count": 5,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 4,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 4,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 5,
+          "removed_count": 6
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 4,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 1,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 4,
+          "kept_count": 3,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 2,
+          "removed_count": 0
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 6,
+          "removed_count": 5
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 2,
+          "removed_count": 5
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 8,
+          "kept_count": 2,
+          "removed_count": 6
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 2,
+          "removed_count": 0
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 12,
+          "kept_count": 8,
+          "removed_count": 4
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 9,
+          "kept_count": 1,
+          "removed_count": 8
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 1,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 6,
+          "removed_count": 5
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 15,
+          "kept_count": 10,
+          "removed_count": 5
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 2,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 2,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 8,
+          "kept_count": 2,
+          "removed_count": 6
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 4,
+          "kept_count": 2,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 1,
+          "removed_count": 5
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 2,
+          "removed_count": 0
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 1,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 4,
+          "kept_count": 2,
+          "removed_count": 2
+        }
+      ],
+      "kept_net": 1038.9199999999992,
+      "base_net": 5724.579999999998,
+      "removed_net": 4685.66,
+      "p_profit": 0.7892107892107892,
+      "p_dd": 0.5374625374625375,
+      "p_joint": 0.5084915084915085,
+      "profit_p_plus_one": 0.7892107892107892,
+      "dd_p_plus_one": 0.5374625374625375,
+      "joint_p_plus_one": 0.5084915084915085,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "unique_memberships": 1000,
+      "unique_daily_paths": 1000,
+      "unique_profit_dd_pairs": 1000,
+      "strata_with_random_choice": 34,
+      "artifacts": {
+        "strata.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/strata.csv",
+        "observed_membership.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/observed_membership.csv",
+        "observed_daily.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/observed_daily.csv",
+        "random_selected_ids.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/random_selected_ids.csv",
+        "random_summary.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/random_summary.csv",
+        "random_daily_paths.npz": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/A4/random_daily_paths.npz"
+      }
+    },
+    "F1_A4": {
+      "kept": {
+        "count": 21,
+        "net_total": -82.54000000000008,
+        "net_mean": -3.930476190476194,
+        "trade_t": -0.1182411373022618,
+        "max_dd": 707.9200000000001,
+        "metrics": {
+          "trades": 21,
+          "win": 0.38095238095238093,
+          "avg": -3.930476190476194,
+          "annual": -15.938758620689683,
+          "sharpe": -0.05320378134035227,
+          "sortino": -0.08526204469294728,
+          "profit_factor": 0.9324616240631033,
+          "max_dd": 707.9199999999983,
+          "calmar": -0.02251491499136869,
+          "ulcer": 0.6568694058670425,
+          "ulcer_perf": -0.04852945951912963
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "removed": {
+        "count": 212,
+        "net_total": 5807.119999999999,
+        "net_mean": 27.39207547169811,
+        "trade_t": 1.8541054880956536,
+        "max_dd": 1873.3599999999997,
+        "metrics": {
+          "trades": 212,
+          "win": 0.5283018867924528,
+          "avg": 27.39207547169811,
+          "annual": 1121.3748965517239,
+          "sharpe": 0.7825612307154304,
+          "sortino": 1.231621010072177,
+          "profit_factor": 1.429330178914683,
+          "max_dd": 1873.3600000000006,
+          "calmar": 0.5985901783702671,
+          "ulcer": 0.8161452427345646,
+          "ulcer_perf": 2.7479787612177
+        },
+        "metrics_basis": "Shared metrics.perf on supplied daily calendar; max_dd is shared resampling.max_dd from zero."
+      },
+      "strata": [
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2018,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 1,
+          "removed_count": 0
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2018,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 7,
+          "kept_count": 3,
+          "removed_count": 4
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 3,
+          "removed_count": 4
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2019,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 10,
+          "kept_count": 2,
+          "removed_count": 8
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 2,
+          "removed_count": 6
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 1,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2020,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 1,
+          "removed_count": 10
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 8,
+          "kept_count": 0,
+          "removed_count": 8
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        },
+        {
+          "year": 2020,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 2,
+          "removed_count": 9
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 7,
+          "kept_count": 0,
+          "removed_count": 7
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 8,
+          "kept_count": 0,
+          "removed_count": 8
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 12,
+          "kept_count": 3,
+          "removed_count": 9
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 9,
+          "kept_count": 0,
+          "removed_count": 9
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2021,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 9,
+          "base_count": 11,
+          "kept_count": 0,
+          "removed_count": 11
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 10,
+          "base_count": 15,
+          "kept_count": 1,
+          "removed_count": 14
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 11,
+          "base_count": 5,
+          "kept_count": 0,
+          "removed_count": 5
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 12,
+          "base_count": 3,
+          "kept_count": 0,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 13,
+          "base_count": 1,
+          "kept_count": 0,
+          "removed_count": 1
+        },
+        {
+          "year": 2022,
+          "side": -1,
+          "signal_hour": 14,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 9,
+          "base_count": 8,
+          "kept_count": 1,
+          "removed_count": 7
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 10,
+          "base_count": 4,
+          "kept_count": 1,
+          "removed_count": 3
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 11,
+          "base_count": 6,
+          "kept_count": 0,
+          "removed_count": 6
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 12,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 13,
+          "base_count": 2,
+          "kept_count": 0,
+          "removed_count": 2
+        },
+        {
+          "year": 2022,
+          "side": 1,
+          "signal_hour": 14,
+          "base_count": 4,
+          "kept_count": 0,
+          "removed_count": 4
+        }
+      ],
+      "kept_net": -82.54000000000008,
+      "base_net": 5724.579999999998,
+      "removed_net": 5807.119999999999,
+      "p_profit": 0.6233766233766234,
+      "p_dd": 0.4985014985014985,
+      "p_joint": 0.45054945054945056,
+      "profit_p_plus_one": 0.6233766233766234,
+      "dd_p_plus_one": 0.4985014985014985,
+      "joint_p_plus_one": 0.45054945054945056,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "unique_memberships": 1000,
+      "unique_daily_paths": 1000,
+      "unique_profit_dd_pairs": 1000,
+      "strata_with_random_choice": 11,
+      "artifacts": {
+        "strata.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/strata.csv",
+        "observed_membership.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/observed_membership.csv",
+        "observed_daily.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/observed_daily.csv",
+        "random_selected_ids.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/random_selected_ids.csv",
+        "random_summary.csv": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/random_summary.csv",
+        "random_daily_paths.npz": "/workspace/thebeginning/analysis/outputs/codex_choch_filters_20261028/design/matched_subsets/F1_A4/random_daily_paths.npz"
+      }
+    }
+  }
+}

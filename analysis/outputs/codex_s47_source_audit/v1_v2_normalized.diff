@@ -1,0 +1,85 @@
+--- source_v1.txt
++++ source_v2.txt
+@@ -1,4 +1,4 @@
+-{ S47 - Europe-Open Impulse (NQ / MNQ). PowerLanguage signal for MultiCharts.
++{ S47 v2 - Europe-Open Impulse, London and New York agree (NQ / MNQ). PowerLanguage signal for MultiCharts.
+   RULE (CT clock, 1-minute bars stamped at the minute end)
+    - Trading date: bars from 17:01 CT belong to the next date. Overnight = 17:01-08:30, RTH = 08:31-15:00.
+    - ATR_ON = mean overnight range (high - low, 17:01-08:30) of the previous ATRLen trading dates,
+@@ -10,8 +10,9 @@
+    - Stop: StopATR x ATR_ON from entry, working from the bar after the entry bar.
+    - Exit: Close of the first bar at or after ExitTimeCT (15:00). No target. One trade a day.
+    - Skipped: quarterly roll sessions, early-close / holiday sessions, unusable overnight sessions.
+-   - FirstTradeDate / LastTradeDate limit the dates that may enter (defaults 2017-01-01 to 2022-12-31;
+-     widen them to trade later dates).
++   - v2 condition [A]: New York move = 09:30 CT close - last close at or before 08:30 CT. Long only if s
++     and the New York move are both up; short only if both are down. A zero New York move = no trade.
++   - No date limits: it trades every date the data allows.
+   CHART  @NQ continuous, UNADJUSTED, 1-minute, CME equity template Sun-Fri 17:00-16:00 CT (not the old
+          template that ends Friday 15:15), Exchange time zone. IOG OFF, Bar Magnifier OFF.
+          Load data from at least 3 months before the first trading date (ATR_ON needs 15+ usable days).
+@@ -23,7 +24,8 @@
+        unadjusted @NQ bars. Data handling, not trading logic. Delete these lines on an already-adjusted series.
+    N = (1) CME holiday / early-close calendar, so short sessions are skipped as the rule requires;
+        (2) safety flatten: if a session ends before ExitTimeCT, the position closes at the next
+-           session's first bar. }
++           session's first bar.
++   A = the v2 condition (the New York move must agree with the London signal). }
+ 
+ [IntrabarOrderGeneration = false]
+ 
+@@ -43,16 +45,13 @@
+   ExitTimeCT(1500),        { [S] HHMM CT. Exit at the Close of the first bar stamped at/after this time on
+                              the entry's trading date. Spec name "ExitTime" is reserved. Valid: after
+                              EntryDecisionTime, <= 1600. }
+-  ContractQty(1),          { [S] contracts per trade. The spec and reference use 1. Whole number >= 1. }
+-  FirstTradeDate(1170101), { [S] first trading date allowed to enter, YYYMMDD (1170101 = 2017-01-01). }
+-  LastTradeDate(1221231);  { [S] last trading date allowed to enter, YYYMMDD (1221231 = 2022-12-31).
+-                             Development window. The 2023+ holdout is run once, deliberately. }
+-
++  ContractQty(1);         { [S] contracts per trade. The spec and reference use 1. Whole number >= 1. }
+ Variables:
+   TickSz(0.25), TdJul(0), CurTdJul(0), TdDate(0), TdYYY(0), TdYear(0), TdMD(0), TdMon(0), TdDay(0),
+   TdDOW(0), BarMin(0), DecMin(0), ExitMin(0),
+   LastSunMar(0), LastSunOct(0), SecSunMar(0), FirstSunNov(0), UKOn(False), USOn(False), EUMin(120),
+   Tgt0Min(0), Tgt1Min(0), P0Px(0), P1Px(0), P0OK(False), P1OK(False), SigVal(0),
++  NY0Px(0), NY0OK(False),                                                   { [A] }
+   OnCount(0), OnFirstOK(False), OnHi(0), OnLo(0), OnRangeVal(0),
+   RowsPushed(0), RingIdx(0), RingN(0), KIdx(0), ATRSum(0), ATRCnt(0), ATROn(0), ATRValid(False),
+   HolidaySkip(False), RollSkip(False), FriRoll(False), Decided(False),
+@@ -194,6 +193,7 @@
+   PostLo = 999999999;                                                       {D}
+   CandN = 0;                                                                {D}
+   P0OK = False;                                                             {P}
++  NY0OK = False;                                                            {A}
+   P1OK = False;                                                             {P}
+   Decided = False;                                                          {P}
+ end;                                                                        {P}
+@@ -232,10 +232,15 @@
+   P1OK = True;                                                              {P}
+ end;                                                                        {S}
+ 
++{ ---------------- D2. [A] New York open reference: last Close at or before 08:30 CT ---------------- }
++If BarMin <= 510 then begin                                                {A}
++  NY0Px = Close;                                                           {A}
++  NY0OK = True;                                                            {A}
++end;                                                                       {A}
+ { ---------------- E. Decision on the EntryDecisionTime bar; fill at the next bar's Open ---------------- }
+ If Decided = False and BarMin >= DecMin then begin                          {P}
+   Decided = True;                                                           {S} { one decision, one trade a day }
+-  If TdDate >= FirstTradeDate and TdDate <= LastTradeDate                   {S}
++  If NY0OK                                                                   {A}
+      and OnCount >= 700 and OnFirstOK and ATRValid                          {S}
+      and RollSkip = False and HolidaySkip = False                           {S} { HolidaySkip encoding is [N] }
+      and MarketPosition = 0 and P0OK and P1OK then begin                    {S}
+@@ -243,8 +248,8 @@
+     If AbsValue(SigVal) > SigThresh then begin                              {S}
+       EntryTd = TdJul;                                                      {P}
+       EntryATR = ATROn;                                                     {P}
+-      If SigVal > 0 then Buy ("EOI.LE") ContractQty contracts next bar at market          {S}
+-      else SellShort ("EOI.SE") ContractQty contracts next bar at market;                {S}
++      If SigVal > 0 and Close > NY0Px then Buy ("EOI.LE") ContractQty contracts next bar at market   {A} { New York up agrees }
++      else if SigVal < 0 and Close < NY0Px then SellShort ("EOI.SE") ContractQty contracts next bar at market;  {A} { New York down agrees }
+     end;                                                                    {S}
+   end;                                                                      {S}
+ end;                                                                        {P}

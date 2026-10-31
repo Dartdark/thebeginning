@@ -1,0 +1,277 @@
+// NQDB2 -- DriftBreak v2, logic unchanged (copy of DriftBreak_v2.txt, header trimmed). 2026-09-17
+// Chart: @NQ 30-minute, Exchange (Central) time, Bar Magnifier 1 minute. Remove other VaultBreak/DriftBreak signals first.
+// CutoffDate default 1991231 = seal off, runs the whole chart. Orders named DB2.*
+
+Inputs:
+    // -- Noise Boundary --------------------------------------
+    NoiseMult(0.3),
+    BoundaryATRLen(15),             // rolling window, completed sessions
+
+    // -- Entry Timing (CENTRAL time) -------------------------
+    EarliestEntry(1000),
+    LatestEntry(1400),              // inert, see v8 header
+
+    // -- Re-entry --------------------------------------------
+    MaxTradesPerDay(2),
+
+    // -- VWAP Exit -------------------------------------------
+    VWAPExitBars(7),
+
+    // -- Fixed Dollar Bracket --------------------------------
+    TakeProfitDollars(800),         // 40 NQ pts PER CONTRACT - see header
+    StopLossDollars(1500),          // 75 NQ pts PER CONTRACT
+
+    // -- Context Veto ----------------------------------------
+    VetoMode(1),                    // 0 = OFF, reproduces v8
+                                    // 1 = veto when drift <= -CtxDriftThreshPct
+                                    // 2 = veto when drift <  0 (any decay)
+                                    // 3 = require drift >= +CtxDriftThreshPct
+    CtxDriftLen(4),                 // 30m bars. 4 = 2 hours. SEE HEADER -
+                                    // run 2 / 4 / 6 and take a plateau.
+    CtxDriftThreshPct(0.10),        // same threshold DriftPullback uses
+
+    // -- Time Exit (CENTRAL time) ----------------------------
+    FlattenTime(1530),
+    ExitOnBarClose(false),          // testing only
+
+    // -- Position --------------------------------------------
+    NumContracts(1),
+    CutoffDate(1991231),            // seal OFF (2026-09-17, Luke). 1231231 = stop at 2023-12-31.
+
+    // -- Diagnostics -----------------------------------------
+    ShowATRPrint(false);
+
+
+Variables:
+    intrabarpersist SessOpen(0),
+    intrabarpersist SessHigh(0),
+    intrabarpersist SessLow(999999),
+    intrabarpersist SessCount(0),
+
+    intrabarpersist BoundaryATR(0),
+    intrabarpersist WinCnt(0),
+    intrabarpersist WinSum(0),
+    intrabarpersist ii(0),
+    intrabarpersist MaxLen(250),
+
+    intrabarpersist LegacyATR(0),   // diagnostic only, drives nothing
+    intrabarpersist RngSum(0),
+    intrabarpersist RngCnt(0),
+    intrabarpersist ATRRatio(0),
+
+    intrabarpersist NoiseUp(0),
+
+    intrabarpersist cTPV(0),
+    intrabarpersist cVol(0),
+    intrabarpersist VWAP(0),
+    intrabarpersist VWAPPrev(0),    // NEW - VWAP at the previous bar
+    intrabarpersist vwDate(0),
+
+    intrabarpersist BarsBelowVW(0),
+    intrabarpersist DTrades(0),
+
+    intrabarpersist CtxDrift(0),    // NEW
+    intrabarpersist VwapRising(false),
+    intrabarpersist DriftUp(false),
+    intrabarpersist DriftDown(false),
+    intrabarpersist CtxOK(true),
+    intrabarpersist LastCtxBar(-1);
+
+
+Arrays:
+    RngBuf[250](0);
+
+
+// ===============================================================
+// SESSION & BOUNDARY ATR
+// ===============================================================
+
+If Date <> Date[1] then begin
+
+    // ---- carry guard ----
+    If MarketPosition = 1 then
+        Sell("DB2.Carry") NumContracts contracts next bar at market;
+
+    If SessCount >= 1 then begin
+
+        Value1 = SessHigh - SessLow;
+
+        If Value1 > 0 then begin
+
+            // legacy expanding mean: DIAGNOSTIC ONLY
+            RngSum = RngSum + Value1;
+            RngCnt = RngCnt + 1;
+            LegacyATR = RngSum / RngCnt;
+
+            // rolling window: DRIVES THE BOUNDARY
+            If BoundaryATRLen >= 1 and BoundaryATRLen <= MaxLen then begin
+
+                For ii = MaxLen - 1 downto 1 begin
+                    RngBuf[ii] = RngBuf[ii - 1];
+                end;
+                RngBuf[0] = Value1;
+
+                If WinCnt < BoundaryATRLen then
+                    WinCnt = WinCnt + 1;
+
+                If WinCnt >= BoundaryATRLen then begin
+                    WinSum = 0;
+                    For ii = 0 to BoundaryATRLen - 1 begin
+                        WinSum = WinSum + RngBuf[ii];
+                    end;
+                    BoundaryATR = WinSum / BoundaryATRLen;
+                end;
+
+            end;
+
+            If BoundaryATR > 0 then
+                ATRRatio = LegacyATR / BoundaryATR;
+
+        end;
+
+    end;
+
+    SessOpen  = Open;
+    SessHigh  = High;
+    SessLow   = Low;
+    SessCount = SessCount + 1;
+    DTrades   = 0;
+
+    If BoundaryATR > 0 then
+        NoiseUp = SessOpen + (NoiseMult * BoundaryATR);
+
+    BarsBelowVW = 0;
+
+    If ShowATRPrint then
+        Print(Date:8:0, " ",
+              "WinCnt=",      WinCnt:4:0, " ",
+              "BoundaryATR=", BoundaryATR:8:2, " ",
+              "LegacyATR=",   LegacyATR:8:2, " ",
+              "Ratio=",       ATRRatio:6:3, " ",
+              "SessOpen=",    SessOpen:10:2, " ",
+              "NoiseUp=",     NoiseUp:10:2, " ",
+              "CtxDrift=",    CtxDrift:7:3, " ",
+              "VwapRising=",  VwapRising);
+
+end
+else begin
+    If High > SessHigh then SessHigh = High;
+    If Low  < SessLow  then SessLow  = Low;
+end;
+
+
+// ===============================================================
+// SESSION VWAP
+// ===============================================================
+
+// capture the previous bar's VWAP BEFORE this bar updates it.
+// guarded so it happens once per bar even if Intrabar Order Generation is on.
+If CurrentBar <> LastCtxBar then begin
+    VWAPPrev   = VWAP;
+    LastCtxBar = CurrentBar;
+end;
+
+If Date <> vwDate then begin
+    cTPV   = 0;
+    cVol   = 0;
+    vwDate = Date;
+    VWAPPrev = 0;                   // no slope on the session's first bar
+end;
+
+If Volume > 0 then begin
+    cTPV = cTPV + ((High + Low + Close) / 3.0) * Volume;
+    cVol = cVol + Volume;
+end;
+
+If cVol > 0 then VWAP = cTPV / cVol
+else VWAP = Close;
+
+
+// ===============================================================
+// CONTEXT - DRIFT OVER THE LAST CtxDriftLen BARS
+// The only thing DriftPullback tests that v8 does not. See header for why
+// VWAP slope is deliberately excluded.
+// ===============================================================
+
+If Close[CtxDriftLen] <> 0 then
+    CtxDrift = (Close - Close[CtxDriftLen]) / Close[CtxDriftLen] * 100
+else
+    CtxDrift = 0;
+
+// VwapRising is computed for the diagnostic print ONLY. It is deliberately
+// NOT in the gate: session VWAP is a cumulative average, so it rises whenever
+// the bar's typical price is above it - and the entry already requires
+// Close > VWAP. At an entry bar it is true almost by construction, so a
+// veto built on it would fire on close to nothing.
+VwapRising = (VWAPPrev > 0) and (VWAP > VWAPPrev);
+
+DriftUp    = CtxDrift >=  CtxDriftThreshPct;
+DriftDown  = CtxDrift <= -CtxDriftThreshPct;
+
+CtxOK = true;
+If VetoMode = 1 then begin
+    If DriftDown then CtxOK = false;
+end
+else if VetoMode = 2 then begin
+    If CtxDrift < 0 then CtxOK = false;
+end
+else if VetoMode = 3 then begin
+    CtxOK = DriftUp;
+end;
+
+
+// ===============================================================
+// VWAP CROSS TRACKING
+// ===============================================================
+
+If Close < VWAP then
+    BarsBelowVW = BarsBelowVW + 1
+else
+    BarsBelowVW = 0;
+
+
+// ===============================================================
+// ENTRY - LONG ONLY
+// ===============================================================
+
+If  (Close > NoiseUp)
+and (Close > VWAP)
+and (Time >= EarliestEntry)
+and (Time <= LatestEntry)
+and (Time <  FlattenTime)
+and (DTrades < MaxTradesPerDay)
+and (MarketPosition = 0)
+and (WinCnt >= BoundaryATRLen)
+and (BoundaryATR > 0)
+and (Date <= CutoffDate)
+and CtxOK
+then begin
+    Buy("DB2.Long") NumContracts contracts next bar at market;
+    DTrades = DTrades + 1;
+end;
+
+
+// ===============================================================
+// EXITS
+// ===============================================================
+
+// TakeProfitDollars / StopLossDollars are PER CONTRACT. SetStopPosition
+// applies its argument to the WHOLE position, so they must be multiplied by
+// NumContracts or the point geometry silently halves at 2 contracts,
+// thirds at 3, and so on. At NumContracts = 1 this is identical to v8.
+SetStopPosition;
+SetProfitTarget(TakeProfitDollars * NumContracts);
+SetStopLoss(StopLossDollars   * NumContracts);
+
+// v8.1 half-session backstop: only binds when the session closes before FlattenTime.
+SetExitOnClose;
+
+If MarketPosition = 1 and BarsBelowVW >= VWAPExitBars then
+    Sell("DB2.VwapX") NumContracts contracts next bar at market;
+
+If Time >= FlattenTime and MarketPosition = 1 then begin
+    If ExitOnBarClose then
+        Sell("DB2.TimeX") NumContracts contracts this bar on close
+    else
+        Sell("DB2.TimeX") NumContracts contracts next bar at market;
+end;

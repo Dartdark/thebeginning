@@ -1,0 +1,110 @@
+// RESEARCH DRAFT, 2026-10-28. Compile/paper review required. NOT installed.
+// Native Windows profile API; no custom DLL, network or account API.
+// This is the original per-chart target calculation with a shared manual snapshot.
+// NOT account-wide P&L, a kill switch, an entry blocker or a guaranteed pass.
+// PC AND chart must use Chicago Central time. No historical file consumption.
+// Leave EnableOrders=false for review. Read SHARED_TARGET_GUARD_SETUP.md first.
+
+DefineDLLFunc: "kernel32.dll", int, "GetPrivateProfileIntA", lpstr, lpstr, int, lpstr;
+
+inputs:
+    StateFile("C:\TradingResearch\TargetGuard\EXAMPLE.ini"),
+    ExpectedAccountToken(0), EvaluationSize(50000), BufferDollars(50),
+    ConfirmChicagoClock(false), EnableOrders(false);
+
+variables:
+    Rev1(0), Rev2(0), Sch(0), Tok(0), SD(0), AD(0), AT(0), Bal(0), Tgt(0), FC(0), CS(0),
+    WantTarget(0), WantSession(0), AsOfSession(0), TodayEL(0), TodayYMD(0), YesterdayYMD(0),
+    ClockHHMM(0), WD(0), StampHH(0), StampMM(0), CalcCS(0), StatusCode(0), LastStatus(-1),
+    LastRevision(-1), LastPx(-999999999), Tk(0), Need(0), RawPx(0), Px(0), EpochOK(false),
+    Valid(false), WindowOK(false);
+
+// Read only at real-time calculation events. Historical chart results are unchanged.
+Valid = false;
+StatusCode = 1; // historical calculations disabled
+if GetAppInfo(aiRealTimeCalc) = 1 then begin
+    StatusCode = 2; // Chicago clock and account configuration required
+    if ConfirmChicagoClock and ExpectedAccountToken > 0 and
+       (EvaluationSize = 50000 or EvaluationSize = 150000) and BufferDollars > 0 then begin
+        TodayEL = CurrentDate;
+        TodayYMD = TodayEL + 19000000;
+        YesterdayYMD = CalcDate(TodayEL, -1) + 19000000;
+        ClockHHMM = CurrentTime;
+        WD = DayOfWeek(TodayEL); // Sunday=0, Friday=5, Saturday=6
+        WindowOK = not (ClockHHMM >= 1600 and ClockHHMM < 1700) and
+            WD <> 6 and not (WD = 5 and ClockHHMM >= 1600) and
+            not (WD = 0 and ClockHHMM < 1700);
+        WantSession = TodayYMD;
+        if ClockHHMM >= 1700 then
+            WantSession = CalcDate(TodayEL, 1) + 19000000;
+        WantTarget = Round((EvaluationSize + BufferDollars) * 100, 0);
+        if EvaluationSize = 50000 then WantTarget = WantTarget + 300000
+        else WantTarget = WantTarget + 900000;
+
+        Rev1 = GetPrivateProfileIntA("Guard", "Revision", 0, StateFile);
+        Sch = GetPrivateProfileIntA("Guard", "Schema", 0, StateFile);
+        Tok = GetPrivateProfileIntA("Guard", "Token", 0, StateFile);
+        SD = GetPrivateProfileIntA("Guard", "SessionDate", 0, StateFile);
+        AD = GetPrivateProfileIntA("Guard", "AsOfDate", 0, StateFile);
+        AT = GetPrivateProfileIntA("Guard", "AsOfTime", 0, StateFile);
+        Bal = GetPrivateProfileIntA("Guard", "BalanceCents", 0, StateFile);
+        Tgt = GetPrivateProfileIntA("Guard", "TargetCents", 0, StateFile);
+        FC = GetPrivateProfileIntA("Guard", "FlatConfirmed", 0, StateFile);
+        CS = GetPrivateProfileIntA("Guard", "Checksum", 0, StateFile);
+        Rev2 = GetPrivateProfileIntA("Guard", "Revision", 0, StateFile);
+        CalcCS = 1 + Mod(Sch + 2*Tok + 3*Rev1 + 4*SD + 5*AD + 6*AT +
+                         7*Bal + 8*Tgt + 9*FC, 1000000006);
+        StampHH = IntPortion(AT / 100);
+        StampMM = Mod(AT, 100);
+        AsOfSession = AD;
+        if AD = TodayYMD and AT >= 1600 then
+            AsOfSession = CalcDate(TodayEL, 1) + 19000000;
+        if AD = YesterdayYMD and AT >= 1600 then AsOfSession = TodayYMD;
+        EpochOK = (AD = TodayYMD or AD = YesterdayYMD) and
+            AT >= 0 and StampHH < 24 and StampMM < 60 and
+            not (AD = TodayYMD and AT > ClockHHMM) and AsOfSession = SD;
+
+        StatusCode = 3; // closed window / stale chart
+        if WindowOK and Date = TodayEL then begin
+            StatusCode = 4; // missing, changed or invalid snapshot
+            if Sch = 1 and Tok = ExpectedAccountToken and Rev1 > 0 and Rev1 = Rev2 and
+               SD = WantSession and EpochOK and Bal > 0 and Tgt = WantTarget and
+               FC = 1 and CS = CalcCS then begin
+                Valid = true;
+                StatusCode = 5; // valid manual snapshot, MONITOR ONLY
+                if Bal >= Tgt then StatusCode = 6; // already met: review/stop externally
+                if EnableOrders and Bal < Tgt then StatusCode = 7; // order-capable draft
+            end;
+        end;
+    end;
+end;
+
+// No file fallback, cached-session fallback or inferred balance on invalid input.
+// Not issuing a new limit is NOT guaranteed immediate cancellation of an older order.
+// Native strategy protection remains responsible for stops, holidays and time exits.
+Px = 0;
+if Valid and Bal < Tgt and MarketPosition <> 0 and
+   CurrentContracts > 0 and CurrentContracts = IntPortion(CurrentContracts) and
+   BigPointValue > 0 and MinMove > 0 and PriceScale > 0 then begin
+    Tk = MinMove / PriceScale;
+    Need = (Tgt - Bal) / (100 * BigPointValue * CurrentContracts);
+    if MarketPosition > 0 then RawPx = AvgEntryPrice + Need
+    else RawPx = AvgEntryPrice - Need;
+    Px = IntPortion(RawPx / Tk) * Tk;
+    if MarketPosition > 0 then begin
+        if Px < RawPx then Px = Px + Tk;
+        if EnableOrders then Sell ("Shared TG LX") next bar at Px limit;
+    end
+    else begin
+        if Px > RawPx then Px = Px - Tk;
+        if EnableOrders then BuyToCover ("Shared TG SX") next bar at Px limit;
+    end;
+end;
+
+// Monitor computes/logs the same candidate limit without sending an order.
+if StatusCode <> LastStatus or Rev1 <> LastRevision or Px <> LastPx then begin
+    Print("Shared Target Guard: status=", StatusCode:0:0, " revision=", Rev1:0:0,
+          " session=", SD:0:0, " token=", Tok:0:0, " balance_cents=", Bal:0:0,
+          " target_cents=", Tgt:0:0, " candidate_limit=", Px:0:8);
+    LastStatus = StatusCode; LastRevision = Rev1; LastPx = Px;
+end;

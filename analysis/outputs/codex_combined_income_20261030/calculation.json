@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-30 America/Los_Angeles",
+  "source_claude_ref": "a01be1bfd0a3c33bc2c6745b24acbf5c14e924c1",
+  "user_confirmed_personal": "Current19-piece portfolio, one mini per leg; no aggressive doubling",
+  "scenario": "First modeled year after20fresh150Kfunded accounts are activated; personal already fully capitalized",
+  "funded": {
+    "accounts": 20,
+    "source_mean_one_year_per_account": 18056,
+    "source_mean_two_year_per_account": 20183,
+    "mean_year1_payouts": 361120,
+    "mean_year2_increment_without_replacement": 42540,
+    "cohort_lifetime_payout_cap": 410000.0,
+    "source_one_account_p5_year1": 8500
+  },
+  "personal": {
+    "one_micro_mean_annual": 41475,
+    "mini_equivalent_scale": 10,
+    "approx_annual_profit": 414750,
+    "approx_monthly_average": 34562.5,
+    "capital_at_published_20percent_rule": 363960,
+    "scaled_personal_dd95": 72790,
+    "scaled_historical_dd": 65920,
+    "method": "Linear scaling of published costed micro results; no native-mini fee/impact rerun"
+  },
+  "combined": {
+    "reference_year1_total": 775870,
+    "monthly_average": 64655.833333333336,
+    "year2_total_without_replacing_funded_accounts": 457290
+  },
+  "limitations": [
+    "Historical/bootstrap reference, not validated live income or a joint distribution",
+    "Current-funded SwingTarget account replay remains pending after exit-kind correction",
+    "Before taxes and future evaluation/replacement costs; existing funded activation is assumed completed",
+    "No compounding; mini-cost savings or size-dependent impact are not newly credited/modelled",
+    "Twenty copied accounts share risk; do not treat them as independent draws",
+    "Funded cohort pays at most6payouts/account then closes under the model; recurring income needs replacement slots"
+  ],
+  "new_strategy_trials": 0,
+  "new_account_simulations": 0
+}

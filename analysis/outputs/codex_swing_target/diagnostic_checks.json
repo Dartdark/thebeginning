@@ -1,0 +1,29 @@
+{
+  "source_plan_commit": "a4064ace6aa510abbfbea75833c3043f8f5b0a98",
+  "ledger_price_pnl_and_daily_sums_pass": true,
+  "one_trade_per_day_pass": true,
+  "coverage": [
+    {
+      "model": "CODE",
+      "cross_date": 3,
+      "unknown_minute_trades": 3,
+      "unknown_minutes": 1201,
+      "unrounded_target_distances": true
+    },
+    {
+      "model": "CODE_BE",
+      "cross_date": 3,
+      "unknown_minute_trades": 3,
+      "unknown_minutes": 1201,
+      "unrounded_target_distances": true
+    }
+  ],
+  "new_economic_models": 2,
+  "cache_unchanged": true,
+  "initial_zero_dd": true,
+  "diagnostic_script_sha256": "f5789ffcf78720b0518fadb997d030e759c4d59bee5c48230232c7d473b545a3",
+  "caveat": "Random-side per-side rows retain original side opportunity labels; combined is the eligible whole-strategy null.",
+  "initial_zero_bootstrap_wrapper": "analysis/codex_swing_bootstrap.py",
+  "null_requested_and_closed_per_family_per_model": 301000,
+  "random_time_null_conditions_on_later_revealed_side": true
+}

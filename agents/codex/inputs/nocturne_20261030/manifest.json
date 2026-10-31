@@ -1,0 +1,44 @@
+{
+  "return_tests_executed": false,
+  "research_scope": "direct user upload; five preregistered economic views; separate scout ledger preserved",
+  "implementation_status": "assumptions authorized; source exact replication unavailable",
+  "hashes": {
+    "agents/codex/evidence/nocturne_20261030.md": "d279b21f8a387bece0c373746a21bf9671fdcc7fbb0d0140edbeefe75325f6a3",
+    "agents/codex/plans/nocturne_20261030.md": "55f5e3d07cd2e7ca3646b419a3993f865448beed7c5fdec6f8559833edc0eddd",
+    "analysis/codex_nocturne_20261030.py": "e8023de28d94f305f2f37a58d503168b135fb474853e3d9a9c7795d9d523fbf2",
+    "analysis/grid.py": "a30ddd4533c9b9d9bdd50f161deded3a2864605f1b81bf4605f74b1d23bc7405",
+    "analysis/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a",
+    "TRIALS.csv": "c380af0bbaecf5f0b96ac03024a38610f6c089a911c5c310aa9abec8ff12a340",
+    "agents/codex/inputs/nocturne_20261030/Nocturne.pdf": "77e5dacd2a40d7baa1a7a8e46ec5e38fcf5920084fe1b3cc7e598a379bdc14be",
+    "agents/codex/inputs/nocturne_20261030/user_claims.json": "6c4e2446b758053996565c9aa2875a9d06210217d71ba10a83442695d3d88617",
+    "agents/codex/inputs/nocturne_20261030/Nocturne.txt": "3eca76ebbac3a0e5d30b25ebfe8bc2f281c174e2d7c579af0c7216cbc274cbb6"
+  },
+  "dependencies": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "numba": "0.68.0",
+    "openpyxl": "3.1.5",
+    "scipy": "1.17.0",
+    "sklearn": "1.8.0"
+  },
+  "synthetic_checks": [
+    "next5minute reentry",
+    "2trade cap",
+    "target-cost bridge",
+    "timed no-stop loss"
+  ],
+  "source_arithmetic": {
+    "total_nq": 213356,
+    "pooled_oos_mean_mnq": 9.74593023255814,
+    "claimed_mean_mnq": 9.92,
+    "worst_claimed_night_dollars_beforecost_by_mnq": {
+      "1": 1136,
+      "2": 2272,
+      "4": 4544,
+      "5": 5680
+    }
+  }
+}

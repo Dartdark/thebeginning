@@ -1,0 +1,82 @@
+{
+  "preregistration": "54bbba745006f1d20805ef9daab0d130abf4e6fe",
+  "baseline": {
+    "actual": {
+      "annual": 24350.696001627533,
+      "max_dd": 5000.702576101205,
+      "mc_p5": 12507.240866724425,
+      "mc_p50": 23697.888661515317,
+      "mc_p95": 37330.52185190322,
+      "mc_dd_p50": 2873.015,
+      "mc_dd_p95": 5000.702576101179
+    },
+    "published_rounded": {
+      "annual": 24351.0,
+      "max_dd": 5001.0,
+      "mc_p5": 12507.0,
+      "mc_p50": 23698.0,
+      "mc_p95": 37331.0,
+      "mc_dd_p50": 2873.0,
+      "mc_dd_p95": 5001.0
+    },
+    "delta": {
+      "annual": -0.30399837246659445,
+      "max_dd": -0.2974238987953868,
+      "mc_p5": 0.24086672442535928,
+      "mc_p50": -0.11133848468307406,
+      "mc_p95": -0.4781480967794778,
+      "mc_dd_p50": 0.01499999999987267,
+      "mc_dd_p95": -0.29742389882085263
+    },
+    "exact_pinned_MC_statistic_parity": true,
+    "rounding_match": true,
+    "note": "Published values are rounded; inspect any non-rounding baseline difference before comparison"
+  },
+  "models": {
+    "v2_raw": {
+      "closed_trades": 2369,
+      "terminal_valuations": 0,
+      "entries_after_calendar": 0,
+      "net_sum": 27124.025,
+      "expected_net": 27124.024999998976,
+      "roundtrip_fee_reserved_at_entry": 1.275,
+      "entry_slippage": 0.5,
+      "target_exit_slippage": 0.0,
+      "other_exit_slippage": 0.5,
+      "terminal_calendar_cutoff": "2026-10-09 16:00:00",
+      "mark_rule": "last observed close<=16CT; no later price substitution",
+      "boundary_rule": "openj961 belongs oldsession; intraminutej961 belongs nextsession",
+      "ledger_sha256": "0aa50b362c9eb303ab33184583159f00c308be346e8ef59438da5cf36ca6bb6c"
+    },
+    "v1_raw": {
+      "closed_trades": 1844,
+      "terminal_valuations": 0,
+      "entries_after_calendar": 0,
+      "net_sum": 25556.4,
+      "expected_net": 25556.399999999336,
+      "roundtrip_fee_reserved_at_entry": 1.275,
+      "entry_slippage": 0.5,
+      "target_exit_slippage": 0.0,
+      "other_exit_slippage": 0.5,
+      "terminal_calendar_cutoff": "2026-10-09 16:00:00",
+      "mark_rule": "last observed close<=16CT; no later price substitution",
+      "boundary_rule": "openj961 belongs oldsession; intraminutej961 belongs nextsession",
+      "ledger_sha256": "48992b53deda08a038946efee626c3678cb69d5fdb6e48ed1bbd64520682c85a"
+    }
+  },
+  "fees": 1.275,
+  "history_rule": "5000 paired252day20dayblocks seed1; full/2025+;21configs each",
+  "limits": [
+    "Published personal fee convention is preserved: +$0.55 per nonzero plan day, not exact trade counts; VB reentries are undercharged.",
+    "Published MOC starts at $0.50/MES rather than $0.725, so its inherited total commission is $1.05 rather than $1.275.",
+    "Twin baseline is the committed v1 checker ledger with published16:00 marks; no exact v2.1 ledger exists.",
+    "Twin published marking skips dates without a15:30..16:00 observation; candidate uses the last available same-date price at/before16:00.",
+    "Candidate observed-bar gaps can reflect closures or feed loss; marks can be stale and no future price fills the gap.",
+    "Daily marked drawdown omits intraday margin/liquidation exposure; personal MC has no Apex trail or payout caps."
+  ],
+  "scripts": {
+    "codex_s03_v2_portfolio.py": "3b8e3ace6dd480549780de440d2c403095a0d91ec0b066aac2285d9508245b01",
+    "codex_r2vault_personal.py": "c59a94aae0a2cd432dd110405fb6847f76d754cc8e328bb11be8afee2cdd6e26",
+    "codex_anson_personal.py": "6315d0436fee0fb92c8c0272512f87f6936d94143888af94eb41dfb42e648448"
+  }
+}

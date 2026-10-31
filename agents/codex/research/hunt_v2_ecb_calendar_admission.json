@@ -1,0 +1,45 @@
+{
+  "accepted_for_frozen_research": true,
+  "calendar_marker_sha256": "12f2dc97cfb60ef542888bf39d0ef7ea10025ea2821c7e91b01c45b7731a82bb",
+  "original_economic_preregistration": "3b995614ea4a38e53ad3d7cc33cf28b87b0df49d",
+  "decision_utc": "2026-10-26T23:55:18.086622+00:00",
+  "scope": "SOURCE_LIMITED_FROZEN_RESEARCH_ONLY, not primary-authenticated calendar/execution or trading approval",
+  "availability_finding": "The roster identifies objective public scheduled ECB policy-announcement days, with exact official archive/title/exclusion bindings. The attributed primary ECB clock-change text supports the regular release clock R; the event identity is public by that scheduled release, rather than first becoming information at the 2026 archive-download date. The only numeric predictor is completed native market prices R+1..R+5 under the ordinary disclosed close-bar convention, followed by the fixed five-minute processing interval to R+10. This distinguishes an event roster from a later-revised numerical index level. Personal historical receipt logs are not categorically required. Per-date latency and first-party date authentication remain unresolved and are not declared verified.",
+  "evidence": [
+    {
+      "kind": "byte-bound event-roster metadata",
+      "source_commit": "f9e756cbbca3a0576178412a48e1e374c9c76cfe",
+      "artifact": "analysis/outputs/codex_hunt_v2_ecb_preconference/calendar_quality.json",
+      "finding": "40 unique monotonic weekdays,8 each2018-22, source header says ECB Monetary policy decisions press-release dates collected from ecb.europa.eu only; explicit emergency/other-decision exclusions; official archive and calendar URLs retained.",
+      "economic_preregistration_commit": "3b995614ea4a38e53ad3d7cc33cf28b87b0df49d"
+    },
+    {
+      "kind": "previously inspected attributed primary methodology, independently confirmed metadata binding",
+      "source": "LorenzoAlessandro/BdF-Project@1a5e1072dc1f21b2d0d5570748ec64c0d03ae9b1",
+      "path": "Scraper/Main_FED_Scraoe/raw/other-gc-decisions/2022/2022-07-22-gc.txt",
+      "git_blob": "ce4f72bb142b4f0321445320eb164b56de1eb2bb",
+      "original_notice": "https://www.ecb.europa.eu/press/pr/date/2022/html/ecb.pr220627~73acedf868.en.html",
+      "finding": "ECB notice announced on27June2022 changes effective21July2022 from13:45/14:30 to14:15/14:45. Header explicitly uses Frankfurt civil CET/CEST; fixed zoneinfo conversion has independent winter/summer/DST/era fixtures."
+    },
+    {
+      "kind": "source claims distinguished from confirmed reading",
+      "finding": "Header also cites ECB Working Paper2281 and2010release clock examples. Those bodies were NOT read here; their quoted passages are secondary header claims, not newly authenticated primary facts."
+    },
+    {
+      "kind": "independent semantic source review",
+      "path": "agents/codex/reviews/hunt_v2_ecb_calendar_source_admission.md",
+      "finding": "Independent reviewer accepted frozen source-limited research before price access, without claiming primary date certification."
+    }
+  ],
+  "limitations": [
+    "Original calendar was compiled2026-10-10; no individual historical calendar/announcement receipt logs retained.",
+    "Target event dates were not independently authenticated against first-party HTTP. The primary mirror monetary-policy-decision subtree covers1999-2000only; it does not corroborate2018-22dates.",
+    "Actual per-date release/receipt latency is unverified. Scheduled-clock trading and first-five-minute price observation are the fixed research protocol; no actual-rate surprise or hindsight volatility event filter is used.",
+    "The reference roster and copied primary text are documentary research sources; before any qualifying promotion obtain fresh independent primary-calendar/raw-spec checks.",
+    "No6E prices, first5 features, held returns or later-period outcomes were opened to choose this decision. Native source-clock/contract/micro-fill limits must remain visible after price access."
+  ],
+  "primary_date_authentication_claimed": false,
+  "per_date_receipt_verified": false,
+  "actual_6E_price_bytes_read_before_decision": false,
+  "no_rule_clock_cost_or_sample_threshold_change": true
+}

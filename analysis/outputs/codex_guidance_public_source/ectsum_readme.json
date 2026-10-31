@@ -1,0 +1,19 @@
+{
+  "capture_id": "ectsum_readme",
+  "tool_response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "# ECTSum: A New Benchmark Dataset For Bullet Point Summarization of Long Earnings Call Transcripts\n\nLong Paper Accepted at the <b> EMNLP 2022 Main Conference! </b> <br /> \n<li> Paper: https://aclanthology.org/2022.emnlp-main.748/ </li>\n<li> Poster: https://rajdeep345.github.io/files/pdf/research/ECTSum_EMNLP2022_Poster.pdf </li>\n<li> Pre-recorded Video: https://drive.google.com/file/d/1DW2i2ApgiE6V7ViiayX5zdJSRXdAEbsy/view </li>\n\n## Dataset\nThe <b> <i> ECTSum </b> </i> dataset can be found under the `data` folder.\n\n## Codes\nCodes and instructions for our proposed model <b> <i> ECT-BPS </b> </i> can be found under `codes/ECT-BPS` <br />\nCodes and instructions for our baseline models can be found under `codes/baselines`\n\n\n\n## Data Preparation for ECT-BPS\n### Preparing the data for training the <i> Extractive Module </i>\n\n#### Imports\n`pip install sentence-transformers` </br>\n`pip install num2words` </br>\n`pip install word2number` </br>\n\n#### Prepare the data\n`python prepare_data_ectbps_ext.py`\n\n#### Data Location\nThe data is saved at `codes/ECT-BPS/ectbps_ext/data/`. </br>\nProcessed data is already uploaded at this location.\n\n\n### Preparing the data for training the <i> Paraphrasing Module </i>\n\n#### Imports\n`pip install sentence-transformers` </br>\n`pip install num2words` </br>\n`pip install word2number` </br>\n\n#### Prepare the data\n`python prepare_data_ectbps_para.py`\n\n#### Data Location\nThe data is saved at `codes/ECT-BPS/ectbps_para/data/para/`. </br>\nProcessed data is already uploaded at this location.\n\n#### Prepare the data with numericals masked\n`python prepare_data_ectbps_para_mask.py`\n\n#### Data Location\nThe data is saved at `codes/ECT-BPS/ectbps_para/data/para_mask/`. </br>\nProcessed data is already uploaded at this location.\n\n\n\n## Updates\n<li> 1st November 2022 - ECTSum Dataset released </li>\n<li> 30th November 2022 - Codes and Instructions released for training the Extractive Module of ECT-BPS </li>\n<li> 3rd March 2023 - Added the Prediction Pipeline for the Extractive module. </li>\n<li> 5th March 2023 - Codes released to prepare the data for training the Paraphrasing Module </li>\n<li> 7th March 2023 - Codes released to train the Paraphrasing Module of ECT-BPS</li>\n<li> 8th March 2023 - Google Colab Notebook released for training and testing the Paraphrasing Module </li>\n",
+      "encoding": "utf-8",
+      "sha": "c1415924bac81b683ffb463418b9210f815af672",
+      "display_url": "https://github.com/rajdeep345/ECTSum/blob/main/README.md",
+      "display_title": "README.md"
+    },
+    "isError": false
+  }
+}

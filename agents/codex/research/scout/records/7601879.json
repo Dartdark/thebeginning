@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:7601879",
+  "ssrn_id": "7601879",
+  "title": "Buying Duration: Index Rebalancing and Price Pressure in Government Bond Markets",
+  "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7601879",
+  "doi": "10.2139/ssrn.7601879",
+  "authors": [
+    "Amar Soebhag",
+    "Patrick Verwijmeren",
+    "Fabio Martinetti"
+  ],
+  "written": "2026-10-12",
+  "posted": "2026-10-14",
+  "source_revision": "SSRN record written2026-10-12; full paper not obtained",
+  "source_sha256": null,
+  "verdict": "needs_full_text",
+  "full_text_read": false,
+  "evidence_level": "metadata_only",
+  "summary": "Saved4 provider rows and3 separate institutional references. Original provider tables cover3/60designmonths;0 original available-at clocks verified. Full source and complete historical vintages remain missing; no returns.",
+  "report_path": "agents/codex/results/scout_duration_acquisition_20261029.md",
+  "evidence_path": "agents/codex/evidence/scout_buying_duration_20261029.md",
+  "about": "Benchmark-duration demand and government-bond futures at month-end.",
+  "findings": "Authors' abstract reports1.19bp on last trading days versus0.07bp otherwise and47% of average monthly returns. Not independently reproduced; exact source window/costs unknown.",
+  "mechanism": "Benchmark tracking deadlines may concentrate demand for duration and leave temporary price pressure. Net executable profit remains unestablished.",
+  "build_on": "Worth following up, but no source-compatible return rule is ready. Fresh author/institution and replication searches found no full manuscript. Three public forecast examples are not a complete point-in-time panel. Date/time-only ZN census found60 provisional endpoints; missing2020-11-30 daytime data makes last-observed-date selection incorrect. Preserve oldnegativeprotocol; obtain source, official dated calendar and forecast availability before TEST.",
+  "economic_family": "treasury-month-end-index-duration",
+  "deduplication": [
+    "TIER_LIST.md:323",
+    "analysis/zn_month_end_test.py"
+  ],
+  "verified_facts": [
+    "Provider methodology printedp80 documents dated US snapshot rule change; this is a clock fact, not verified alpha."
+  ],
+  "access": [
+    {
+      "url": "https://papers.ssrn.com/sol3/Delivery.cfm/7601879.pdf?abstractid=7601879&mirid=1",
+      "method": "connected web reader",
+      "status": "403 Forbidden",
+      "paper_obtained": false
+    },
+    {
+      "method": "author/institution exact-title search",
+      "status": "no accessible manuscript found; profiles inspected"
+    }
+  ],
+  "new_economic_trials": 0,
+  "updated_at": "2026-10-29T20:38:56.600548+00:00",
+  "notification_key": "ssrn:7601879:written2026-10-12:needs_full_text:clock-gap-v1",
+  "initial_report_path": "agents/codex/results/scout_buying_duration_20261029.md",
+  "testability_receipt": "agents/codex/research/scout/runs/7601879_testability_20261029.json",
+  "return_eligibility": "NEEDS DATA",
+  "testability_report_path": "agents/codex/results/scout_7601879_testability_20261029.md",
+  "acquisition": {
+    "provider_forecast_csv": "agents/codex/inputs/scout_acquisition_20261029/duration/provider_forecasts.csv",
+    "institutional_reference_csv": "agents/codex/inputs/scout_acquisition_20261029/duration/institutional_quotes.csv",
+    "provider_rows": 4,
+    "provider_design_months": 3,
+    "design_months": 60,
+    "verified_original_available_at_rows": 0,
+    "status": "partial_needs_data"
+  }
+}

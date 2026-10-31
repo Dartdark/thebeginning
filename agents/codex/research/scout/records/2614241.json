@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:2614241",
+  "ssrn_id": "2614241",
+  "doi": "10.2139/ssrn.2614241",
+  "title": "Double-Sort Trading Strategy on Commodity Futures: Performance Evaluation and Stop-Loss Implementation",
+  "authors": [
+    "Hossein Rad"
+  ],
+  "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2614241",
+  "verdict": "needs_data",
+  "full_text_read": true,
+  "evidence_level": "full_source_review_and_deterministic_arithmetic_only",
+  "source_sha256": "753021388cf5aad17909f4bf9def672e0c8cdaf30ff19a3a608fbdc2b84fcd90",
+  "source_revision": "December 2012 EDHEC MSc thesis; uploaded 56-page PDF; SSRN posting/revision date not verified",
+  "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2614241",
+  "source_artifact": {
+    "path": "agents/codex/inputs/rad_double_sort_20261031/ssrn-2614241.pdf",
+    "sha256": "753021388cf5aad17909f4bf9def672e0c8cdaf30ff19a3a608fbdc2b84fcd90",
+    "permission": "owned_upload",
+    "provenance": "sediment://file_00000000bba88230be98dccd0617e41f",
+    "source_version": "December 2012 title page; PDF created 2012-12-12",
+    "access_method": "User-upload download; pdftotext -layout plus visual page/table inspection"
+  },
+  "report_path": "agents/codex/results/rad_double_sort_review_20261031.md",
+  "evidence_path": "agents/codex/evidence/rad_double_sort_20261031.md",
+  "access_receipt": "agents/codex/inputs/rad_double_sort_20261031/source_access.json",
+  "updated_at": "2026-10-31T02:02:21Z",
+  "origin": "user_uploaded_paper_review",
+  "cycle_id": null,
+  "new_economic_trials": 0,
+  "new_economic_definitions": 0,
+  "return_eligibility": "NEEDS DATA",
+  "summary": "Explicit monthly four-long/four-short commodity momentum/carry rule; old pre-cost source claims and unreconciled NAV. Broad identified front/second panel unavailable; parked personal-only, no return test.",
+  "about": "Monthly commodity momentum/term-structure double sort and daily-monitored next-day stop overlays.",
+  "findings": "Author claims 20.22% annual excess return and 24.91% volatility over February1979–October2011, before costs. Whole-book 5% cutoff claims VaR20.27%→13.76%, return19.93%. Our arithmetic finds additive wealth/log-accounting and reporting inconsistencies; no historical result reproduced.",
+  "mechanism": "Potential price persistence and inventory/convenience-yield/hedging risk premia; not a verified scheduled forced flow or guaranteed carry.",
+  "build_on": "Conditional low-priority personal research. Need actual broad front/second maturity panel, executable clocks, integer sizes, costs and self-financing contract/cash/NAV ledger. Bounded owned/free check failed; no substitute strategy or later-stage account test. Reconcile one formation/roll month only if genuinely new matching inputs arrive.",
+  "economic_family": "commodity-cross-sectional-monthly-momentum-carry-double-sort",
+  "prior_family_context": [
+    "TIER_LIST commodity storage/momentum source reference",
+    "Weekly basis reversal is distinct but has same paired-data blocker",
+    "Prior CL/GC hedging-pressure rejection preserved"
+  ],
+  "account_fit": {
+    "evaluation_50K": "ineligible_as_described_monthly_overnight",
+    "evaluation_150K": "ineligible_as_described_monthly_overnight",
+    "funded_50K": "ineligible_as_described_monthly_overnight",
+    "funded_150K": "ineligible_as_described_monthly_overnight",
+    "personal": "conditional_research_needs_data_accounting_no_placement"
+  },
+  "execution_reference": "E38",
+  "independent_economic_verification": "not_performed",
+  "notification": {
+    "standalone_scout_alert_sent": false,
+    "key": null,
+    "reason": "Direct user upload review; no completed return/portfolio result and no user-action request"
+  }
+}

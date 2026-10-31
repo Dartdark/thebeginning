@@ -1,0 +1,131 @@
+Chapter 1: Introduction to algo trading
+0:000 secondsI'm champion trader Kevin Davey and today I'm going to give you a mini S&P ES ALGO that looks like this
+0:1010 secondsoriginally and with position sizing gets supercharged to look like this. So let's get started.
+0:1919 seconds[Music]
+0:2424 seconds[Music]
+Chapter 2: What is an algorithm
+0:2525 secondsOkay. So before I give you the algo, I want to tell you what an algo is because some of you might not know
+0:3434 secondsit. All an ALGO is when we talk about trading are buy and sell rules that can be programmed and tested with any kind
+0:4444 secondsof trading software. Whether it's trade station, Ninja Trader, multi- charts, pro real time, trade view, python, even
+0:5454 secondsit's just buy and sell rules and you program them and you can back test and you can also most software automate and
+1:041 minute, 4 secondsautomatically trade these. So when you boil it down, algos are pretty simple. I know a lot of people get get kind of uh
+1:111 minute, 11 secondsscared when they hear algo, you know, because you always hear about algorithms out there with social media.
+1:181 minute, 18 secondsThe algorithms do this, the algorithms do this. So, people get intimidated by it. But as far as trading goes, as long
+1:261 minute, 26 secondsas you can program your buy and sell rules, it's pretty simple. The key with building good algos
+Chapter 3: The strategy factory process
+1:331 minute, 33 secondsis to have a process. Now, I use something I call the strategy factory, which takes you from performance goals
+1:401 minute, 40 secondsand runs through a bunch of tests to ensure that you either have a robust trading strategy or you have
+1:481 minute, 48 secondsgarbage. A lot of times it's garbage and you won't trade that, but you do get good strategies from this. So, you want
+1:561 minute, 56 secondsto have a good process when you do this. So, that being said, here's
+Chapter 4: The mini S&P algorithm
+2:022 minutes, 2 secondstoday's algo. By the way, I'm going to be showing you the code, but if you want to download the actual code for Trade
+2:112 minutes, 11 secondsStation, also get plain English rules, get a workspace for Trade Station and some more info, all you have to do is
+2:192 minutes, 19 secondssign up. In the description, there's a link and you sign up for my email list and you'll automatically get all that
+2:272 minutes, 27 secondsfor you. So, you don't have to stop the video and write it down. But if you want to, you can do that, too. But here's
+2:342 minutes, 34 secondstoday's algo. And one of the things I like to do with most of my algos is I
+2:412 minutes, 41 secondslike to have them pretty simple. And my definition of simple is if you can write them on a cocktail napkin. So I I kind
+2:492 minutes, 49 secondsof virtually did that here. And this strategy to go long, you just have to have a long-term uptrend.
+2:582 minutes, 58 secondsAnd you also have to have a closing price that's in the lower to the mid-range of the of a Kelner channel. So
+3:063 minutes, 6 secondsthat uses the Kelner channel indicator in case you don't know about that. And obviously to go short, it's just the
+3:153 minutes, 15 secondsexact opposite. But that's the general idea. And then there's I also have a stop. You'll see
+Chapter 5: Defining the trading rules
+3:213 minutes, 21 secondsthat. Pretty simple. Okay. And what I found is a lot of times the simplest ideas work the best. So that's why I do
+3:303 minutes, 30 secondsit. So here are the rules defined. I'll go through this really pretty quickly, but you can kind of This is Trade
+3:393 minutes, 39 secondsStation code, and I think you'll be able to follow along no matter what trading language you you use because Trade
+3:463 minutes, 46 secondsStation uses easy language, which is just that it's pretty easy. So first what you do is you calculate the upper
+3:553 minutes, 55 secondsand lower Kelner channels. That's it's a five period Kelner channel with uh 0.5
+4:054 minutes, 5 secondsATR and it uses the closing price. So you calculate the upper and lower. Then you calculate something I call the where
+4:124 minutes, 12 secondsit's called the Kelner sto stochastic where it basically tells you where percentage-wise from 0 to 100
+4:214 minutes, 21 secondswhere the closing price is in that channel. So if the closing price is at the high this value is going to be 100.
+4:314 minutes, 31 secondsAnd if it's at the the closing price is at the low it's going to be zero. So it varies from zero to 100. Okay. I'm going to trade one contract just to start off.
+4:424 minutes, 42 secondsAnd now I get to my entries. And my entries are symmetric as you'll see. You either go long, the exact opposite, you
+4:504 minutes, 50 secondsgo short. If the close is above the close a certain number of bars ago and the
+4:584 minutes, 58 secondsKelner stochastic is below a certain threshold, then you buy the next bar at the market.
+5:065 minutes, 6 secondsAnd the exact opposite. If the short-term or long-term momentum is down
+5:135 minutes, 13 secondsby this bar or this condition and the stochastic is above a threshold, then
+5:205 minutes, 20 secondsyou sell short. Okay? So that's the entry. Then if you're long and the stochastic goes above a threshold, you
+5:285 minutes, 28 secondssell. And if you're short and the SC stochastic having trouble pronouncing
+5:345 minutes, 34 secondsstochastic if that's below a threshold you buy to cover that short and you get out. Then we also have a stop
+5:435 minutes, 43 secondsloss. For the short side we're going to use one times the ATR and for the long side we're going to have four times the
+5:505 minutes, 50 secondsATR. So we're giving long trades a little more leeway than the short trades. And this is nice
+5:585 minutes, 58 secondsbecause you don't want to get caught too long in a short trade, okay? Because then, you know, the price could keep
+6:056 minutes, 5 secondsgoing up and we know there's a long-term bias with stocks. So, that's basically the code. And again, if you want the code,
+6:146 minutes, 14 secondsthe workspace, and more, you can hit this QR code. You can also type this in, or you can go to the link in the description.
+6:266 minutes, 26 secondsOkay. So, with these rules, I've highlighted three different variables
+Chapter 6: Optimization and live examples
+6:326 minutes, 32 secondsthat I'm going to optimize or that I did optimize. The momentum length long, the
+6:406 minutes, 40 secondsmomentum length short, and also that threshold. Okay, so those were things I optimized. Here's some sample trades.
+6:496 minutes, 49 secondsYou could see um you know, it's not every trade wins. Look at this. There's a nice big stop loss here on a long
+6:576 minutes, 57 secondsside. And this is recent uh in April, March, and April of 2025. But this is always a good check
+7:067 minutes, 6 secondswhen you code up something just to make sure it's giving trades. It's giving long trades, it's giving short trades.
+7:127 minutes, 12 secondsThat's the important part. So here's where I show you the development test results. So originally I tested this
+Chapter 7: Backtest and real-time results
+7:207 minutes, 20 secondsfrom 2007 to June of 2021 and that's what the equity curve looks like pretty good up until about
+7:307 minutes, 30 secondswhat trade 350 and then it doesn't look that great although then towards the end it started making new highs
+7:387 minutes, 38 secondsbut in general it's a pretty good equity curve and then once it went live in
+7:467 minutes, 46 secondsstarting in July of 2021 one. That's what it looks like. So, it really took off once we went live. So,
+7:547 minutes, 54 secondsit had good back test performance and then good live performance, which is in the light blue. And that's probably the
+8:028 minutes, 2 secondsmost important part is to have that light blue area. That's after you've stopped development. So, you haven't made any changes to the
+8:108 minutes, 10 secondsstrategy. You're just going with what you've got and see how it does. So, that's a really good test. And that's
+8:178 minutes, 17 secondsthe one I like that a whole lot better than the back test itself. Little hard to see here, but um
+Chapter 8: Proper backtesting techniques
+8:268 minutes, 26 secondsit makes money from the long side and the short side, which is nice. It wins about 70% of its trades. Uh that's
+8:348 minutes, 34 secondsactually pretty good. And you can see I've included slippage and commission down at the bottom. So this just gives
+8:418 minutes, 41 secondsyou an overall idea of how this strategies performed.
+8:478 minutes, 47 secondsNow, the way I back tested here was I did an out of sample back test. There's four different ways, primary ways to
+8:558 minutes, 55 secondsback test. There's one where you just start trading live. You don't do any back test. Hey, that's great. If you don't want to optimize and worry about
+9:039 minutes, 3 secondscurve fitting, you just go live. But the problem is you don't know if a strategy is going to work or not when you do
+9:109 minutes, 10 secondsthat. So, that's the no back test. I don't really recommend that. You can do an optimized back test where you just take all your data and you optimize it.
+9:199 minutes, 19 secondsI would have in this case optimized from 2007 through 2025 of April of 2025, found the best parameters and just use those.
+9:309 minutes, 30 secondsThat's a terrible way to go. So what a lot of people do is they do an out of sample test where maybe the last couple
+9:389 minutes, 38 secondsyears are out of sample. And I did a a variation of that. Normally what I do,
+9:459 minutes, 45 secondsand I'm not showing you in this video, but I have a version of this strategy that uses walk forward testing. That's the best way I think to test a strategy.
+9:589 minutes, 58 secondsAnd check out my channel. There's other videos I have on walk forward testing. I think it's something you should do. So
+Chapter 9: Avoiding curve fitting
+10:0610 minutes, 6 secondsto me, that's the best way to test. Okay. So, I mentioned
+10:1310 minutes, 13 secondshow you should do back testing and how not to do. I'll tell you what most people do and where most people get into
+10:2010 minutes, 20 secondsproblems. They take all their inputs, all their entries, everything with all their historical data. Here, I'm just
+10:2810 minutes, 28 secondsshowing five years of data, but let's say it goes back to 2007. Could be 15 years of data. You run thousands of iterations.
+10:3710 minutes, 37 secondsyou get the best parameters and then you start trading. If this is something you're doing or something you're
+10:4410 minutes, 44 secondscontemplating doing, don't do it. Trust me, this will not work. It might work on
+10:5210 minutes, 52 secondsone strategy now and then, but you do it on enough strategies, you're going to have terrible results.
+Chapter 10: Position sizing for higher returns
+11:0011 minutesThis strategy I showed you for the mini S&P, but it also works for the micro mini S&P, the MEES, which is onetenth of
+11:0911 minutes, 9 secondsthe size. The only difference really, the price action is a little different. So sometimes you'll get some
+11:1611 minutes, 16 secondsdifferent entries and exits and the commissions are a little bit more and the slippage is a little bit more percentage- wise. You know, this should
+11:2411 minutes, 24 secondsbe on one/10enth of the ES for price movement, but the commissions are going to be a little bit more than one/10enth.
+11:3211 minutes, 32 secondsBut you can see here it works good on the MEES. So if you want to start with a limited amount of money, this would be a way to do it.
+11:4411 minutes, 44 secondsOkay, so that's the strategy, the baseline strategy. It's pretty good, but now let's supercharge it. And we're
+11:5311 minutes, 53 secondsgoing to do that with position sizing. Okay. So, what I have here, I have the the initial
+12:0212 minutes, 2 secondsrule and remember before I had this if statement and then I said buy next bar.
+12:0812 minutes, 8 secondsBut now I've put two extra lines of code in here. And this is for the ES. You'd have to adjust it for the MEES. But it
+12:1612 minutes, 16 secondsjust says, hey, if I have this use position sizing flag equal to one, then I'm going to base the number
+12:2412 minutes, 24 secondsof contracts I trade on my net equity, which I calculate up above. I don't show you that. I divide it by
+12:3212 minutes, 32 seconds15,000 and multiply it by.33, add one to it. So I'm always trading one contract at
+12:3912 minutes, 39 secondsleast. And let's say my net equity was 45,000. So, I've made money with this
+12:4612 minutes, 46 secondsalready. 45 / 15,000 is 3 *.33. That would round to one. So, then
+12:5412 minutes, 54 secondsI'd be trading two contracts. And using that, I can grow the number of contracts
+13:0013 minutesI trade as I gain profit. Now, I've also limited to show you a limiter. I said I'm not going to trade more than 15
+13:0813 minutes, 8 secondscontracts. You know, there's there's you've probably seen strategies out there that show, oh, trade 200 ES
+13:1613 minutes, 16 secondscontracts. Well, uh, you know, trading 200 is, uh, one, it takes a huge account
+13:2313 minutes, 23 secondsto do that, and two, it takes a lot of guts. And most retail traders aren't going to be trading that many, but 15's
+13:3113 minutes, 31 secondsprobably a reasonable number for the upper end because you're going to slowly grow with that. You're not going to start with it. That's where you're going
+13:3913 minutes, 39 secondsto end. So, that's the position sizing code I had. You can do a lot of different position sizing techniques. I
+13:4713 minutes, 47 secondsjust pick this one. I tried not to fool around with it or optimize it. This is just just something I think it's a comfortable position
+Chapter 11: Performance results and conclusion
+13:5613 minutes, 56 secondssizing. And here's the results. It ends up generating almost a million dollars in profit. Again, the long and short
+14:0514 minutes, 5 secondsside. It generates more long, which you'd expect with the mini S&P, but also does a good job on the short side. And
+14:1414 minutes, 14 secondshere's the equity curve. Now, there's some big draw downs here for sure because you're going to be trading bigger size. So, you're going to have to
+14:2214 minutes, 22 secondswithstand bigger draw downs. But, uh, over time, you can see a many of the
+14:2914 minutes, 29 secondsyears it does pretty well, especially in the later years as you're trading those 15 contracts.
+14:3614 minutes, 36 secondsAll right. So again, if you want to see this strategy, just get all this information where you don't have to
+14:4314 minutes, 43 secondsprogram it yourself and you have trade station. Just hit that QR code, sign up for my email list. If you're already on
+14:5114 minutes, 51 secondsmy email list, well, when I sent you the email about this video, you would have already gotten
+14:5914 minutes, 59 secondsthis package, so you don't have to sign up again. All right.
+Chapter 12: Wrap up and final thoughts
+15:0515 minutes, 5 secondsSo that's it. ES strategy. You can see when you s super supercharge it with position sizing, you do pretty
+15:1215 minutes, 12 secondswell. The point here is if you are serious about algo trading, make sure you get good education, you take the
+15:2015 minutes, 20 secondstime and effort to learn to do things the right way.
+15:2515 minutes, 25 secondsOveroptimizing and just picking the best set of parameters, like I said, that's not the right way. So you want to avoid
+15:3215 minutes, 32 secondsthat. If you like this video, give it a thumbs up. Hit the sub subscribe button.
+15:3815 minutes, 38 secondsLeave a comment. Let me know what you do. I'd be glad to hear it. And I reply to all comments. I'm Kevin Davey. 

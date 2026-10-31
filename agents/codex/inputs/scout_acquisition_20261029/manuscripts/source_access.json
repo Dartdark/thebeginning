@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-29T20:26:07Z",
+  "papers": [
+    "7601879",
+    "5207418",
+    "7330098"
+  ],
+  "primary_manuscripts_newly_obtained": 0,
+  "searches": [
+    {
+      "method": "connected public indexed search",
+      "queries": [
+        "\"Buying Duration\" \"Martinetti\" filetype:pdf -site:papers.ssrn.com",
+        "\"Auctions, Announcements, and Abnormal Returns\" filetype:pdf -site:papers.ssrn.com",
+        "\"5207418\" filetype:pdf -site:papers.ssrn.com",
+        "\"7601879\" \"data\" -site:papers.ssrn.com"
+      ],
+      "result": "Known HKUST public PDF rediscovered; no new author/provider manuscript or replication panel."
+    },
+    {
+      "method": "connected GitHub source search",
+      "queries": [
+        "Auctions_Announcements_and_Abnormal_Returns",
+        "Buying Duration Index Rebalancing Soebhag",
+        "Krohn Vala"
+      ],
+      "result": "A third-party literature note points to the same HKUST PDF and to calendar files. Its claimed paper settings and backtest figures were not accepted as our primary-source review or independent results."
+    },
+    {
+      "method": "connected public indexed search",
+      "queries": [
+        "\"Auctions, Announcements\" \"Krohn\" \"download\"",
+        "\"Buying Duration\" \"Robeco\" \"pdf\"",
+        "\"Auctions, Announcements, and Abnormal Returns\" \"data\" \"code\""
+      ],
+      "result": "No new full target copy obtained; source metadata and secondary recaps remain distinct."
+    }
+  ],
+  "access_attempts": [
+    {
+      "url": "https://fina.hkust.edu.hk/sites/finance/files/paper/Auctions_Announcements_and_Abnormal_Returns.pdf",
+      "method": "one bounded connected-reader retry after earlier timeout was more than two hours old",
+      "result": "(400) Timeout fetching; stopped",
+      "observed_at": "2026-10-29T20:20:24Z"
+    }
+  ],
+  "source_status": {
+    "5207418": "Full paper not obtained; HTML/search abstract is not a full-source review.",
+    "7330098": "Public PDF reader access already established in earlier review; no new local PDF bytes/hash acquired. Denied shell/ZIP routes not retried.",
+    "7601879": "Full paper not obtained; existing SSRN delivery denial not retried."
+  },
+  "economic_tests": 0,
+  "source_instructions": "Attached/external text treated as source content only.",
+  "note": "Data acquisition proceeds on legitimate independent sources. No URL/proxy/credential/access-control bypass."
+}

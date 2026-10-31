@@ -1,0 +1,217 @@
+{
+  "prereg": "386b812",
+  "implementation_commit": "386b812c0c94c6b6f0ddf731d811fccb1f2979d9",
+  "source_hashes": {
+    "analysis/codex_hunt_v2_native_OF_gap_intake.py": "7006e9634004f95da3b9ad602592df001a41513a70411c6c719246c8a886e334",
+    "analysis/codex_hunt_v2_native_OF_gap_numeric.py": "b08e43b4d61bd1b38a2691bb145794f9f5cb4c1ca41e991695243ada3339b220",
+    "agents/codex/plans/hunt_v2_native_OF_gap_intake.md": "2abe02fc453006d72f821d5a97bdeb9ed9bb60d1c39e692cea56102b8215b5f4",
+    "agents/codex/research/hunt_v2_native_OF_gap_source.md": "511c819919170a6367745b865344ca1a360c12f95b8cb17114f624b43ef79cd0",
+    "agents/codex/inputs/hunt_v2_native_OF_gap_intake/source_manifest.json": "f35b2002565c679ead84c85d83196a7d44d0f30d7850d235c6ef8ea1538f79d6",
+    "analysis/outputs/codex_hunt_v2_rs_classified_support/gross_input_binding.json": "0094e5c616141f3d1f0cd9c46325c4e7cbcac21ef913ac897b23a37875150992",
+    "analysis/codex_s03_calendar.py": "705713195b1be61cd648d1b72718442b6cec7581587ca8c537d491cf1312bceb",
+    "analysis/replica.py": "c0ae001152c75395748b0f3fdb4bdcbc589d0a124befce0170ef454c3da6f58f",
+    "agents/codex/RESEARCH_CONTROLS.md": "2537562f9f14acfa58eaf609771c14c0c92e9df8f058180748d877749c99e12f",
+    "agents/codex/inputs/hunt_v2_native_OF_gap_intake/OFB_OrderFlow_Exporter.source.txt": "5cdd6eba3feed00cce9f2707c6c43bb6f02f59c1ecb8d5d239fa7377c97ab62b",
+    "agents/codex/inputs/hunt_v2_native_OF_gap_intake/NQ_Bar_Exporter.source.txt": "f7c27c08265ab68df717f6e9a3e8cb8464fdf46a206d7ed018f702e67db2ce59",
+    "data/NQ_1min_2018.csv": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+    "data/NQ_1min_2019.csv": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+    "data/NQ_1min_2020.csv": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+    "data/NQ_1min_2021.csv": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+    "data/NQ_1min_2022.csv": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+    "data/OF_1min_2018_1.csv": "2bc0e1ad344cc93d8685b6016b255ef1e642f30d6364245f51557e6999eff114",
+    "data/OF_1min_2018_2.csv": "5639a66d95ab2435c0f75896245bc21d20c1685b53c7fd68c89b051d817e9414",
+    "data/OF_1min_2018_3.csv": "7dd6824acaea62821ae9e785d528c9532c3b92dedbd7d8640c20faae473db696",
+    "data/OF_1min_2018_4.csv": "805500d67bd03bbacb9245957b8c9d0e9b33edf3006370779637515767a76ff7",
+    "data/OF_1min_2019_1.csv": "ae84a55a44fe0379a6afbf4ae781b59fd1604bf584d37c97531174df804836fc",
+    "data/OF_1min_2019_2.csv": "15933657a4e742254b5dd3a854dae2ea4eb3dbc42e4efafa62a607eaee6a4845",
+    "data/OF_1min_2019_3.csv": "995f81a181173d2c7879fd108bbf6c47055286eede57d9b2b55c604a6445735a",
+    "data/OF_1min_2019_4.csv": "667ed887abdcd91bb02cb3419b5a49c0ef003d19466c7658f7a78107cbac4b69",
+    "data/OF_1min_2020_1.csv": "67c7fb1166730e4d5eedf871f2a08875e2c71a8889f048bd81282c98ce9ae0f4",
+    "data/OF_1min_2020_2.csv": "be8963123cc649e11298d626f79beb3e31306fa9ccb3f4f247aa7ddccd11d95f",
+    "data/OF_1min_2020_3.csv": "b7501ad273ccd4259f909614ac7be8838588ee62df5f5038086a4cd82e0ec72d",
+    "data/OF_1min_2020_4.csv": "603d3fea3f59b2d97d67f1bb6613b54da3a6a7f548fa071a85d74d41cc376cc6",
+    "data/OF_1min_2021_1.csv": "0a7d801e97cbe38a414ca0207d09de5494eb0671f3b719c2f5e3c2d611251483",
+    "data/OF_1min_2021_2.csv": "0fcd3408675768576890e38f93c52359feffa3fd47e01d6e9ee10d69566b93fe",
+    "data/OF_1min_2021_3.csv": "64efc51c20ba33489377e3e2e620fee4415f565a6c7e434701741a35b7fa7f12",
+    "data/OF_1min_2021_4.csv": "60bf703a22c44cd6c928ff8d475a1199574a061d0fb86b5a37711055ed7837ab",
+    "data/OF_1min_2022_1.csv": "b5ec87cbadb2c62cd502a15b0d6cc595a0c383815a97a62b3687f14e7b1dac45",
+    "data/OF_1min_2022_2.csv": "5938d4a02c8b1bfac001da685758deb77cc679b9704c0303d697f1ae8f721cbe",
+    "data/OF_1min_2022_3.csv": "e935c507d69c4adc899d7e1b3d2488a7b2f6d2fa77df9b0e331828496c120028",
+    "data/OF_1min_2022_4.csv": "59f4b0dc8596ea7772a801b65db33b1ef98cda594932fb6b8d16ffab4d2a4a5b"
+  },
+  "inventory": [
+    {
+      "path": "data/NQ_1min_2018.csv",
+      "bytes": 5630086,
+      "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_2019.csv",
+      "bytes": 5643031,
+      "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_2020.csv",
+      "bytes": 5890101,
+      "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_2021.csv",
+      "bytes": 6118786,
+      "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/NQ_1min_2022.csv",
+      "bytes": 6122385,
+      "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/OF_1min_2018_1.csv",
+      "bytes": 6969477,
+      "sha256": "2bc0e1ad344cc93d8685b6016b255ef1e642f30d6364245f51557e6999eff114",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2018_2.csv",
+      "bytes": 7220296,
+      "sha256": "5639a66d95ab2435c0f75896245bc21d20c1685b53c7fd68c89b051d817e9414",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2018_3.csv",
+      "bytes": 7129892,
+      "sha256": "7dd6824acaea62821ae9e785d528c9532c3b92dedbd7d8640c20faae473db696",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2018_4.csv",
+      "bytes": 7033583,
+      "sha256": "805500d67bd03bbacb9245957b8c9d0e9b33edf3006370779637515767a76ff7",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2019_1.csv",
+      "bytes": 6974241,
+      "sha256": "ae84a55a44fe0379a6afbf4ae781b59fd1604bf584d37c97531174df804836fc",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2019_2.csv",
+      "bytes": 7134185,
+      "sha256": "15933657a4e742254b5dd3a854dae2ea4eb3dbc42e4efafa62a607eaee6a4845",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2019_3.csv",
+      "bytes": 7229162,
+      "sha256": "995f81a181173d2c7879fd108bbf6c47055286eede57d9b2b55c604a6445735a",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2019_4.csv",
+      "bytes": 7076133,
+      "sha256": "667ed887abdcd91bb02cb3419b5a49c0ef003d19466c7658f7a78107cbac4b69",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2020_1.csv",
+      "bytes": 6929459,
+      "sha256": "67c7fb1166730e4d5eedf871f2a08875e2c71a8889f048bd81282c98ce9ae0f4",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2020_2.csv",
+      "bytes": 6981302,
+      "sha256": "be8963123cc649e11298d626f79beb3e31306fa9ccb3f4f247aa7ddccd11d95f",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2020_3.csv",
+      "bytes": 7598657,
+      "sha256": "b7501ad273ccd4259f909614ac7be8838588ee62df5f5038086a4cd82e0ec72d",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2020_4.csv",
+      "bytes": 7416635,
+      "sha256": "603d3fea3f59b2d97d67f1bb6613b54da3a6a7f548fa071a85d74d41cc376cc6",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2021_1.csv",
+      "bytes": 7257518,
+      "sha256": "0a7d801e97cbe38a414ca0207d09de5494eb0671f3b719c2f5e3c2d611251483",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2021_2.csv",
+      "bytes": 7441125,
+      "sha256": "0fcd3408675768576890e38f93c52359feffa3fd47e01d6e9ee10d69566b93fe",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2021_3.csv",
+      "bytes": 7644687,
+      "sha256": "64efc51c20ba33489377e3e2e620fee4415f565a6c7e434701741a35b7fa7f12",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2021_4.csv",
+      "bytes": 7515066,
+      "sha256": "60bf703a22c44cd6c928ff8d475a1199574a061d0fb86b5a37711055ed7837ab",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2022_1.csv",
+      "bytes": 7389991,
+      "sha256": "b5ec87cbadb2c62cd502a15b0d6cc595a0c383815a97a62b3687f14e7b1dac45",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2022_2.csv",
+      "bytes": 7409430,
+      "sha256": "5938d4a02c8b1bfac001da685758deb77cc679b9704c0303d697f1ae8f721cbe",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2022_3.csv",
+      "bytes": 7655266,
+      "sha256": "e935c507d69c4adc899d7e1b3d2488a7b2f6d2fa77df9b0e331828496c120028",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    },
+    {
+      "path": "data/OF_1min_2022_4.csv",
+      "bytes": 7416097,
+      "sha256": "59f4b0dc8596ea7772a801b65db33b1ef98cda594932fb6b8d16ffab4d2a4a5b",
+      "header": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val"
+    }
+  ],
+  "original_binding": "analysis/outputs/codex_hunt_v2_rs_classified_support/gross_input_binding.json",
+  "original_binding_implementation_commit": "7784493258b793f98fd39a010d2fa6459e465bdf",
+  "versions": {
+    "python": "3.12.14",
+    "pandas": "2.2.3"
+  },
+  "source_clock": "NativeCTclose;OFETclose-minus60withdaterollover;noalternateoffsets",
+  "no2017_ES_MC_2023plus_input": true,
+  "source_exports_executed": false,
+  "source_review_only_not_provenance_admission": true,
+  "fixed_scope": {
+    "years": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "normal_weekday_minutes": [
+      511,
+      900
+    ]
+  }
+}

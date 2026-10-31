@@ -1,0 +1,55 @@
+{
+  "preregistration": "54bbba745006f1d20805ef9daab0d130abf4e6fe",
+  "context": "760df4273f039beab7be62d789df97935f65c64c",
+  "prepared_sha256": "f5856163feab7b28315be7a3564c455d8dc8ec42429bf4cd66521817ce3fcf99",
+  "fees": [
+    1.04,
+    1.24
+  ],
+  "models": [
+    "v2_apex",
+    "v1_apex"
+  ],
+  "whole21sessionwindows": true,
+  "paired_histories": 1000,
+  "block": 20,
+  "horizons": [
+    250,
+    500
+  ],
+  "seeds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "all_five_cohorts": [
+    "2018_plus",
+    "2018_22",
+    "2018_24",
+    "2023_plus",
+    "2025_plus"
+  ],
+  "production_parity": 360,
+  "synthetic_parity": 100,
+  "inputs": {
+    "analysis\\outputs\\codex_s03_v2\\replay\\v2_apex_trades.csv": "4ae4b8f2001a4008685b017e7792dc24caa8e83a7562f47638f5a56b26bb5c83",
+    "analysis\\outputs\\codex_s03_v2\\replay\\v2_apex_audit.csv": "4461c6ae59de8dda7fdec85ff3edc6c3bc00ad9bd9ca05e74f52e21290a40581",
+    "analysis\\outputs\\codex_s03_v2\\replay\\v1_apex_trades.csv": "5c031e684bce16de1ed3b8cc806a6ad560454c8b06108096c1e7b8e9fc6d9844",
+    "analysis\\outputs\\codex_s03_v2\\replay\\v1_apex_audit.csv": "462342d78f9008207a2b9ad8430d33e1818acdeb9960522bb70b76ad36080869"
+  },
+  "seconds": 176.26600000000326,
+  "code_hashes": {
+    "codex_s03_v2_portfolio.py": "3b8e3ace6dd480549780de440d2c403095a0d91ec0b066aac2285d9508245b01",
+    "codex_r2vault_accounts.py": "7de6e38e2cc181765e58632af2adc4856742bd624c373e79c3b2db0e1ff60e8d",
+    "codex_anson_accounts.py": "a1d47a3a7cf03fd039163e95c115fc128e9da40bbc898a2b5b109e9e8193eda7"
+  },
+  "limitations": [
+    "CLS retains fast_plan_lab's whole-Monday constant adverse-path approximation.",
+    "MOC_MES retains add_moc_mes's close-based intraday path approximation.",
+    "Real-fee increments follow Lab.real_fees: each day's total fee is present from its first entry.",
+    "RS uses the unchanged pinned Python baseline, independently reconciled with its committed ledger.",
+    "Baseline prepared cache and inherited known-closure entry-price marks preserved.",
+    "Both50/150evaluation minute tie conventions preserved; personal daily marks do not measure margin liquidation."
+  ]
+}

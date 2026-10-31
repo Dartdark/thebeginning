@@ -1,0 +1,30 @@
+USER-SUPPLIED SCREENSHOT TRANSCRIPTION; archival source, not new deployable code.
+Missing Inputs/chart/session declarations are NOT present in this screenshot.
+
+//Momentum & Keltner Stochastic Combo
+//kjtradingsystems.com
+
+//prelim calcs
+UpperKeltner=keltnerChannel(C,5,+.5);
+LowerKeltner=keltnerChannel(C,5,-.5);
+KeltnerStochastic = 0;
+if UpperKeltner <> LowerKeltner then
+ KeltnerStochastic = 100*(Close - LowerKeltner)/(UpperKeltner - LowerKeltner);
+ncons=1; //baseline case (no position sizing)
+
+//entries
+if C > C[MomLengthL] and KeltnerStochastic < Threshold then
+ Buy ncons contracts next bar at market;
+if C < C[MomLengthS] and KeltnerStochastic > Threshold then
+ SellShort ncons contracts next bar at market;
+
+//exits
+if MarketPosition = 1 and KeltnerStochastic > Threshold then
+ Sell next bar at market;
+if MarketPosition = -1 and KeltnerStochastic < Threshold then
+ BuyToCover next bar at market;
+
+//stoploss
+setstopcontract;
+If MarketPosition=-1 then SetStopLoss(1.0*AvgTrueRange(15)*BigPointValue);
+If MarketPosition=1 then SetStopLoss(4.0*AvgTrueRange(15)*BigPointValue);

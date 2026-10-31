@@ -1,0 +1,82 @@
+{
+  "hypothesis_id": "treasury_month_end_benchmark_clock_correction",
+  "run_id": "scout-treasury-close-20261029-design",
+  "lease_owner": "codex-root-treasury-close",
+  "source_id": "ssrn:3440417",
+  "phase": "design",
+  "design_start": "2018-01-01",
+  "design_end": "2022-12-31",
+  "candidate_variants": 1,
+  "control_variants": 2,
+  "definition_ids": [
+    "ZN_INDEX_CLOCK_LONG",
+    "ZN_INDEX_CLOCK_CALENDAR_NULL",
+    "ZN_INDEX_CLOCK_COST_STRESS"
+  ],
+  "review_record": "agents/codex/research/scout/records/3440417.json",
+  "evidence_path": "agents/codex/evidence/scout_treasury_close_20261029.md",
+  "plan_path": "agents/codex/plans/scout_treasury_close_20261029.md",
+  "code_paths": [
+    "analysis/codex_scout_treasury_close_20261029.py"
+  ],
+  "inputs": [
+    {
+      "path": "data/ZN_1min_2017.csv",
+      "sha256": "b329fb3860c0c2c389b736f8ece1bf5c5e36872010459a534eb6659e3b2a5332",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ZN minute export"
+    },
+    {
+      "path": "data/ZN_1min_2018.csv",
+      "sha256": "db0571f4b128672e7d53008aeeeeae299587efda52413894a52fcd9f2a7599f6",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ZN minute export"
+    },
+    {
+      "path": "data/ZN_1min_2019.csv",
+      "sha256": "afc50608c0144af4b0fadd198c993551698063aacef14ec61ac030c0731cb824",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ZN minute export"
+    },
+    {
+      "path": "data/ZN_1min_2020.csv",
+      "sha256": "9007d755b51e5f94f18bdc6da0de8e65bdb57e555a3a0682c6d5b0e4ae889ee0",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ZN minute export"
+    },
+    {
+      "path": "data/ZN_1min_2021.csv",
+      "sha256": "aaf5c15358ae221e58b9c022bab4cec537bf9eb4fbdae06521b6aec255de7f2d",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ZN minute export"
+    },
+    {
+      "path": "data/ZN_1min_2022.csv",
+      "sha256": "fdad701e25ced9b99919fbeab2fe4b3122cd75227448f51731caaa87da3f3c71",
+      "permission": "permitted_access",
+      "provenance": "User-owned MultiCharts ZN minute export"
+    },
+    {
+      "path": "agents/codex/inputs/scout_treasury_close_20261029/clock_facts.json",
+      "sha256": "5bf39043ba488541a8a9a9ccabea8cfc3a2014978634616f7529cef5684bdda1",
+      "permission": "permitted_access",
+      "provenance": "NYFed official timing facts,2026-09-22; retrospective identification of exogenous public2021change"
+    }
+  ],
+  "information_clock": "Public bond calendar; Jan14 2021benchmarkchange anchored externally, not chosen on returns; prior-day ATR only",
+  "native_costs": "1ZN $1000/point,1/64tick=$15.625,fee$7.25/fill;1tick/fill total$45.75RT;stress2ticks/fill total$77",
+  "entry_exit_rule": "Final3cashbond dates,13:01open/14:00close beforeJan14 2021;14:01open/15:00close after;1ATR15laggedroundedstop,no target/reentry",
+  "gross_stop_rule": "Every frozen gate required:netpositive,t>=2.5,4positiveyears,yearclusterlowerpositive,matchedp<=.05,stresspositive;failurestopsrecent/accounts",
+  "data_failure_stop_rule": ">=150events and>=90percent of180calendar dates; endpoints>=98percent minute coverage,max1missing; preregistrationonly after timestamp-only feasibility; no2023data",
+  "artifact_sha256": {
+    "agents/codex/research/scout/records/3440417.json": "3e4b9044c759c46112981f8145151da48a3fc8a09af35489136fda5db7120c22",
+    "agents/codex/evidence/scout_treasury_close_20261029.md": "33126aa086258429e4dae0ca664a05abbd6f934e05f3599acd1d483c547d7047",
+    "agents/codex/plans/scout_treasury_close_20261029.md": "c27c938e68e654e0514d1631073510fbf0a168f8a4bf33b983a8e780c82cda73",
+    "analysis/codex_scout_treasury_close_20261029.py": "c408b6b23904916fed124def1d27953212c91563fd996fcfb35d222abde7b240"
+  },
+  "shared_engine_sha256": {
+    "analysis/grid.py": "a30ddd4533c9b9d9bdd50f161deded3a2864605f1b81bf4605f74b1d23bc7405",
+    "analysis/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791"
+  }
+}

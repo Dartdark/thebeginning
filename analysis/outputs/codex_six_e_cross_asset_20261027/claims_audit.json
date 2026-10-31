@@ -1,0 +1,263 @@
+{
+  "source_sha256": "3d169d561c6a816103e7d440703c80cd37256ae042a7a42236beeca6398bb7e3",
+  "author_reported_annual_pnl": {
+    "2018": 3266,
+    "2019": 1559,
+    "2020": -18,
+    "2021": 4022,
+    "2022": 6901,
+    "2023": 3341,
+    "2024": 1206,
+    "2025": 2469,
+    "2026": 849
+  },
+  "sum_reported_annual_pnl": 23595,
+  "author_2022_share": 0.292477219749947,
+  "weighted_sum_rounded_author_annual_leg_pnl": 2670,
+  "reported_package_annual": 2680,
+  "official_contract_math": {
+    "m6e_eur_size": 12500,
+    "m6e_tick_price": 0.0001,
+    "m6e_tick_dollars": 1.25,
+    "six_e_tick_price": 5e-05,
+    "six_e_tick_scaled_to_m6e_dollars": 0.625,
+    "one_native_m6e_tick_each_side_roundtrip_dollars": 2.5
+  },
+  "approximate_design_event_counts_and_t2_mean_hurdle_in_sd": {
+    "macro_shock": {
+      "assumed_events_per_year": 27,
+      "five_year_opportunities": 135,
+      "t2_mean_over_sd": 0.17213259316477408
+    },
+    "stock_shock": {
+      "assumed_events_per_year": 8,
+      "five_year_opportunities": 40,
+      "t2_mean_over_sd": 0.31622776601683794
+    },
+    "gold_shock": {
+      "assumed_events_per_year": 12,
+      "five_year_opportunities": 60,
+      "t2_mean_over_sd": 0.2581988897471611
+    }
+  },
+  "caveats": [
+    "Frequency counts are approximations before warm-up/overlap; effective n may be smaller.",
+    "The t=2 calculation is an iid planning illustration, not a promotion gate or measured t statistic.",
+    "Aggregate claims do not determine realized trade P&L, drawdown, margin, costs or account contribution."
+  ],
+  "local_6e_headers_and_edge_dates": [
+    {
+      "path": "data/6E_1min_2017.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "first_date_time": [
+        "20171201",
+        "2"
+      ],
+      "last_date_time": [
+        "20171229",
+        "1600"
+      ],
+      "note": "Time labels are native CSV values; timezone not independently inferred from headers."
+    },
+    {
+      "path": "data/6E_1min_2018.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "first_date_time": [
+        "20180101",
+        "1701"
+      ],
+      "last_date_time": [
+        "20181231",
+        "1600"
+      ],
+      "note": "Time labels are native CSV values; timezone not independently inferred from headers."
+    },
+    {
+      "path": "data/6E_1min_2019.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "first_date_time": [
+        "20190101",
+        "1701"
+      ],
+      "last_date_time": [
+        "20191231",
+        "1600"
+      ],
+      "note": "Time labels are native CSV values; timezone not independently inferred from headers."
+    },
+    {
+      "path": "data/6E_1min_2020.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "first_date_time": [
+        "20200101",
+        "1701"
+      ],
+      "last_date_time": [
+        "20201231",
+        "1600"
+      ],
+      "note": "Time labels are native CSV values; timezone not independently inferred from headers."
+    },
+    {
+      "path": "data/6E_1min_2021.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "first_date_time": [
+        "20210103",
+        "1701"
+      ],
+      "last_date_time": [
+        "20211231",
+        "1600"
+      ],
+      "note": "Time labels are native CSV values; timezone not independently inferred from headers."
+    },
+    {
+      "path": "data/6E_1min_2022.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "first_date_time": [
+        "20220102",
+        "1701"
+      ],
+      "last_date_time": [
+        "20221230",
+        "1600"
+      ],
+      "note": "Time labels are native CSV values; timezone not independently inferred from headers."
+    },
+    {
+      "path": "data/6E_1min_2023.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "first_date_time": [
+        "20230102",
+        "1701"
+      ],
+      "last_date_time": [
+        "20231229",
+        "1600"
+      ],
+      "note": "Time labels are native CSV values; timezone not independently inferred from headers."
+    },
+    {
+      "path": "data/6E_1min_2024.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "first_date_time": [
+        "20240101",
+        "1701"
+      ],
+      "last_date_time": [
+        "20241231",
+        "1600"
+      ],
+      "note": "Time labels are native CSV values; timezone not independently inferred from headers."
+    },
+    {
+      "path": "data/6E_1min_2025.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "first_date_time": [
+        "20250101",
+        "1701"
+      ],
+      "last_date_time": [
+        "20251231",
+        "1600"
+      ],
+      "note": "Time labels are native CSV values; timezone not independently inferred from headers."
+    },
+    {
+      "path": "data/6E_1min_2026.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "first_date_time": [
+        "20260101",
+        "1701"
+      ],
+      "last_date_time": [
+        "20261014",
+        "1131"
+      ],
+      "note": "Time labels are native CSV values; timezone not independently inferred from headers."
+    }
+  ],
+  "new_strategy_return_trials": 0,
+  "candidate_returns_computed": false,
+  "script_sha256": "78dbf29777d60083e9ce3c650c0961766396fec0e5018d5a43d51d58bb575dff"
+}

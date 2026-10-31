@@ -1,0 +1,556 @@
+TRIPLE      OPEN                                                                     COMMUNITY       RELEASE       ·    OUT-OF-SAMPLE
+
+
+
+
+     !   CAUTION       —   DO   NOT    RUN     ANY   OF   THESE   STRATEGIES    BY   ITSELF
+
+     At most one trade per strategy per week. The bootstrap shows a high probability of losing a funded account to the inactivity rule.
+     Use them only as an addition to a set of strategies that trade on other days.
+
+
+
+
+//   STRATEGY       RESEARCH      NOTE
+
+
+
+
+TRIPLE
+OPEN
+Three long-only micro-futures strategies on ES and NQ that all trade
+one window: the Globex session that opens Sunday evening and
+belongs to Monday. Published as a portfolio add-on, not as a
+standalone system.
+
+
+INSTRUMENT                            SAMPLE                           PERIOD                             TIMEFRAME
+
+MES + MNQ                             257 trades                       2024 / 2026                        5 Minutes
+
+DIRECTION                             ORIGIN                           PLATFORM                           STRATEGIES
+
+Long only                             Calendar effects                 MultiCharts                        3 (ES, ES, NQ)
+
+
+
+
+PORTFOLIO       ADD-ON      >    NOT    STANDALONE                                                                     OPEN   FOR   REVIEW
+TRIPLE      OPEN                                                                                               00   /   EXECUTIVE       SUMMARY
+
+
+
+
+//   CONTENTS                                                                //    ABSTRACT
+
+
+
+CONTENTS.                                                                    THE CASE.
+                                                                             Three rule sets, one shared window. Each buys micro
+01    Strategy Specification                                            03   futures at the close of Sunday's 19:00 CT bar, the first bar
+      THREE    RULE       SETS,    INPUTS       AS    TESTED                 of Monday's Globex session, and exits on Monday. Two
+                                                                             trade MES, one trades MNQ. Each has one simple filter
+02    Chart Setup                                                       04
+                                                                             (Friday up, price near its EMA, or a daily ADX/DI condition)
+      DATA1    /    DATA2,       SESSION,       TIMEZONE
+                                                                             and no stop loss in the tested settings.
+03    Headline Performance                                              05
+                                                                             All figures come from out-of-sample MultiCharts exports,
+      OUT-OF-SAMPLE,             PER    STRATEGY       AND   COMBINED
+                                                                             2024-01-07 to 2026-09-21: 257 trades, $77,399 net at 5
+                                                                             micros per strategy, profit factor 2.12, win rate 65.0%, max
+04    Equity and Distribution                                           06
+      CURVES,       DRAWDOWN,          EXCURSION
+                                                                             closed-trade drawdown ($11,093). Commission and
+                                                                             slippage are already inside every number. No in-sample
+05    Bootstrap: Evaluation                                             07   data was supplied, so nothing here compares in- and
+      APEX    50K    EOD,       20,000    SIMULATIONS                        out-of-sample.
+
+06    Bootstrap: Funded                                                 08   The three were then bootstrapped together as one
+      FIRST    PAYOUT,          LIFETIME,       ECONOMICS                    portfolio on the Apex 50K EOD rules. Evaluation: 46.9%
+                                                                             pass rate at 7/7/7 micros. Funded: 40.3% chance of a first
+07    The Inactivity Problem                                            09   payout at 2/2/2 micros, but 57.3% of funded accounts are
+      WHY    THIS    IS    AN    ADD-ON
+                                                                             closed for inactivity before that payout. Drawdown is not
+                                                                             the problem; trade frequency is.
+08    Limitations and Verdict                                           10
+      WHAT    WAS    NOT    TESTED,       HOW    TO    USE   IT
+
+
+                                                                                  //   READ   THIS    FIRST
+
+                                                                                  Do not run any of these strategies alone. They trade at
+                                                                                  most once a week, on the same day, and can go weeks
+                                                                                  without a trade. Their value is as an addition to a set of
+                                                                                  strategies that trade Tuesday to Friday.
+
+
+
+
+TRIPLE      OPEN                                                                                                    V1.0    /   OUT-OF-SAMPLE
+STRATEGY       ELEMENTS                                                                                           01   /       SPECIFICATION
+
+
+
+
+01
+                           //   AS   TESTED,     NOT     AS   WRITTEN     ELSEWHERE
+
+
+
+                           SPECIFICATION.
+
+All three share the same skeleton: enter at the close of Sunday's 19:00 CT bar (Globex reopen, already Monday's session),
+hold into Monday, exit on time or target. Monday holidays are skipped via a hard-coded holiday list. Signals are computed on
+the mini series (Data2), orders go to the micro series (Data1).
+
+
+  // MONDAY AFTER AN UP FRIDAY                   // MONDAY LONG, EMA FILTER                         // MONDAY LONG, ADX FILTER
+
+
+
+  L656ES                                         L644ES                                             L644NQ
+  MES / ES                                       MES / ES                                           MNQ / NQ
+
+  FILTER                                         FILTER                                             FILTER
+
+  Friday RTH close > 08:30 open                  (Close - EMA200) / ATR14 in [-0.75,                Daily ADX7 in [10, 50) and DI+ > DI-
+  ENTRY                                          0.75)                                              ENTRY
+                                                 ENTRY
+  Sun 19:00 CT, on close                                                                            Sun 19:00 CT, on close
+  EXIT                                           Sun 19:00 CT, on close                             EXIT
+                                                 EXIT
+  After 192 bars (Mon ~11:00)                                                                       Mon 15:55 CT
+  TARGET                                         Mon 15:55 CT                                       TARGET
+                                                 TARGET
+  100 pts (backstop)                                                                                100 pts
+  STOP                                           100 pts                                            STOP
+                                                 STOP
+  None                                                                                              None
+  SIZE TESTED                                    None                                               SIZE TESTED
+                                                 SIZE TESTED
+  5 MES                                                                                             5 MNQ
+                                                 5 MES
+  Brusa, Liu, Schulman (2005), weekend                                                              Kamstra, Kramer, Levi (2000),
+  effect.                                        Kamstra, Kramer, Levi (2000),                      daylight-saving change.
+  Tested file: ES1                               daylight-saving change.                            Tested file: NQ1
+                                                 Tested file: ES2
+
+
+
+
+  //     THE   SHARED   EDGE,    AND     THE   SHARED    RISK             //     NO   STOP   LOSS
+
+  All three are long the first hours of the week. That is one bet         The tested settings run with StopPts = 0. Risk is limited only
+  expressed three ways, not three independent bets: daily P&L             by the time exit. Worst adverse excursion in the sample was
+  correlation is +0.57 between the two ES strategies, +0.30 and           $8,208 on 5 MNQ and $5,118 on 5 MES. The code has a stop
+  +0.19 against NQ. On 95 of the 126 trading days in the                  input; any stop you add changes the results in this document.
+  sample, more than one of them was in the market.
+
+
+
+
+TRIPLE     OPEN                                                                                                 V1.0       /   OUT-OF-SAMPLE
+STRATEGY        ELEMENTS                                                                                             02       /    CHART    SETUP
+
+
+
+
+02
+                             //   MULTICHARTS
+
+
+
+                             CHART SETUP.
+
+//    DATA    SERIES
+
+SERIES          SYMBOL                 BARS                      ROLE          //   TIMEZONE    —   READ   BEFORE     THE         FIRST    RUN
+
+Data1           MES or MNQ             5 min                  orders           Everything is in Exchange time (Central). The session
+                                                                               boundaries (08:30 RTH open, 12:00, 15:00, 16:30 session
+Data2           ES or NQ               5 min                  signal
+                                                                               roll) are hard-coded, so shifting the entry and exit inputs
+                                                                               alone does not fix a wrong chart time zone. The Bridge's own
+Insert Data2 via Insert > Series, same timeframe. L656ES
+                                                                               bars are keyed Eastern: switch the chart to Exchange time
+and L644ES use MES + ES, L644NQ uses MNQ + NQ. One
+                                                                               before loading these. Nothing errors if you get it wrong; it
+study per chart, signal type, no functions to create.                          silently trades a different hour.
+
+//    SESSION       AND   TIME
+
+                                                                          //    COSTS
+Time zone                                Exchange (Chicago, CT)
+Session                            Full CME Globex 17:00-16:00            The exports that produced every number here were run with
+                                                                          $5 commission and $1 slippage per trade, already inside
+Bar stamp                                             Close of bar
+                                                                          Profit ($). Set the real micro costs in the strategy properties
+Automation                              Off until you enable it
+                                                                          when you run it yourself.
+
+
+//    INPUTS     AS   TESTED      (=   CODE    DEFAULTS,      V1.1)
+
+INPUT                                                    L656ES                                 L644ES                                      L644NQ
+
+EntryTime                                                   1900                                    1900                                      1900
+ExitTime                                                    1555                                    1555                                      1555
+SessionWeekday                                          1 (Mon)                                1 (Mon)                                     1 (Mon)
+StopPts                                                 0 (off)                                0 (off)                                     0 (off)
+TargetPts                                                    100                                     100                                         100
+MaxBarsInTrade                                               192                                      —                                            —
+Filter                                                          —                EMA 200, ±0.75 ATR                               ADX 7, 10 to 50
+NumContracts                                              5 MES                                  5 MES                                       5 MNQ
+
+
+
+     //   SIZING
+
+     5 micros per strategy is the size the backtests were exported at. The portfolio bootstrap in §05/§06 re-sizes the three together: 7/7/7
+     micros for the evaluation, 2/2/2 micros once funded.
+
+
+
+
+TRIPLE       OPEN                                                                                               V1.0      /   OUT-OF-SAMPLE
+THE       PROTOCOL                                                                                                        03   /   HEADLINE         PERFORMANCE
+
+
+
+
+03
+                                   //   OUT-OF-SAMPLE,             5    MICROS        EACH
+
+
+
+                                  PERFORMANCE.
+
+     //    NET    PROFIT                      //   PROFIT     FACTOR                      //    WIN    RATE                        //   MAX       DRAWDOWN
+
+
+
+     $77,399                                  2.12                                        65.0%                                    -$11,093
+     257 trades, costs included               all three combined                          avg win/loss 1.15                        closed-trade, combined
+
+
+
+
+STRATEGY                          TRADES                NET        PF           WIN   %          AVG    WIN         AVG   LOSS                CRV              MAX   DD
+
+L656ES                                  73      $21,818         2.80           67.1%                   $693           ($505)            1:1.37               ($2,049)
+
+L644ES                                 119      $32,046         1.89           59.7%                   $959           ($751)            1:1.28               ($6,452)
+
+L644NQ                                  65      $23,536         2.14           72.3%                   $939         ($1,145)            1:0.82               ($8,396)
+
+Combined                               257      $77,399         2.12           65.0%                  $875            ($765)               1:1.15            ($11,093)
+DERIVED FROM THE EXPORTED TRADE LOGS                    ·   2024-01-07 TO 2026-09-21             ·     CRV = RISK : REWARD FROM AVG LOSS / AVG WIN
+
+
+//     BY    YEAR,      COMBINED
+
+YEAR                                         TRADES                     NET   P&L          //    READING      THE    TABLE
+
+2024                                               99                    $3,699            Win rates are high (60-72%) and the average winner is only
+                                                                                           slightly larger than the average loser. L644NQ is the outlier:
+2025                                           100                      $32,777
+                                                                                           CRV 1:0.82, its 100-point target caps every winner at $989
+2026                                               58                   $40,923            while losers are uncapped, so it lives on a 72% hit rate. 2024
+22    OF    33    MONTHS        POSITIVE                                                   contributed only $3,699; almost all profit is 2025-2026.
+
+
+
+
+      Positive on every strategy, but the sample is 257 trades over 2.7 years, all long, all on Mondays. That is a
+      thin base, and the profit is concentrated in the last two years.
+      CONCLUSION           OF    §03
+
+
+
+
+TRIPLE           OPEN                                                                                                               V1.0      /    OUT-OF-SAMPLE
+THE   PROTOCOL                                                                                  04   /   EQUITY    AND    DISTRIBUTION
+
+
+
+
+04
+                           //   VISUAL     INSPECTION
+
+
+
+                           EQUITY / DD.
+
+
+
+
+FIG. 1     CUMULATIVE NET P&L PER STRATEGY AND COMBINED, 5 MICROS EACH
+
+
+
+
+FIG. 2     COMBINED CLOSED-TRADE DRAWDOWN
+
+
+
+
+FIG. 3     P&L PER TRADE                                                            FIG. 4      ADVERSE EXCURSION VS REALISED P&L
+
+
+Fig. 3: the flat line of L644NQ winners at $989 is the 100-point target. Fig. 4: without a stop, several trades sat $2,000-$8,000 under water
+intraday before resolving. That excursion is what a trailing-drawdown account actually feels.
+
+
+
+
+TRIPLE    OPEN                                                                                                V1.0    /   OUT-OF-SAMPLE
+DEVELOPMENT             HISTORY                                                                           05      /   BOOTSTRAP,        EVALUATION
+
+
+
+
+05
+                                  //   ALL   THREE     AS      ONE   PORTFOLIO
+
+
+
+                                  EVALUATION.
+
+The three trade logs were resampled together, day by day, as one book on the Apex 50K EOD rules: $3,000 target, $2,000
+EOD trailing drawdown, 30-day deadline, 20,000 simulations. Full out-of-sample range, costs inside. Mix and size were
+optimised by the notebook; it chose equal weight.
+
+
+     //   PASS   RATE                        //   TRADE-LEVEL                    //    DAYS   TO   PASS                 //    EVALS   PER   PASS
+
+
+
+     46.9%                                   54.4%                               8.9                                    2.1
+     7/7/7 micros, daily engine              same size, intraday engine          avg weekdays (~2 trading days)         expected attempts
+
+
+
+//     SIZE      SWEEP,       EQUAL    WEIGHT
+
+MICROS                              PASS            P95   DD              DAYS    //    HOW    THE    FAILURES        SPLIT
+
+3/3/3                             34.3%             $2,151                13.6    At 7/7/7 micros the #1 failure is drawdown (33.2%). At the
+                                                                                  live-like 5/5/5 size, time-outs are as common as drawdown
+5/5/5                             43.5%             $2,724                10.6
+                                                                                  failures: with one trading day a week, a 30-day evaluation
+7/7/7                             46.9%             $3,316                 9.0    holds only about four chances to trade.
+SIZES ABOVE 2.5 MINI TOTAL NOT SIMULATED (MODEL CAP)
+
+
+//     ROBUSTNESS,            7/7/7    MICROS
+                                                                                  //    STAGED       SIZING
+RESAMPLING                                                                PASS
+                                                                                  Starting smaller and scaling to 7/7/7 after +$1,000 lowered
+1-day blocks (iid)                                                    47.2%       the pass rate in every variant tested. Time spent trading
+5-day blocks                                                          50.8%       small costs more than the protection is worth under a
+                                                                                  deadline.
+10-day blocks                                                         46.6%
+Holdout (last 204 days)                                               46.9%
+
+                                                                                  //    TRADE-LEVEL       CAVEAT
+
+                                                                                  The intraday engine (54.4%) sees higher drawdowns (P95
+                                                                                  $3,884) because it checks excursions inside the trade. Both
+                                                                                  numbers are simulations of the same 252 trades, not two
+                                                                                  independent confirmations.
+
+
+
+
+      The basket can pass an evaluation roughly one time in two. Resampling scheme and holdout agree,
+      which is the most reassuring line in this document.
+      CONCLUSION         OF   §05
+
+
+
+
+TRIPLE        OPEN                                                                                                      V1.0    /     OUT-OF-SAMPLE
+DEVELOPMENT             HISTORY                                                                                      06   /     BOOTSTRAP,          FUNDED
+
+
+
+
+06
+                                       //    FIRST    PAYOUT       AND   LIFETIME
+
+
+
+                                      FUNDED.
+
+Funded rules as modelled: 5 qualifying days of at least $250, safety net before the first withdrawal, EOD trailing drawdown
+locking at +$100, and the inactivity rule (2 days of at least $50 profit per rolling 30 calendar days). No deadline: an account
+runs until it qualifies, blows, or is closed.
+
+
+     //   PAYOUT    CHANCE                       //   DAYS   TO    PAYOUT               //   AVG   PAYOUT                 //    CLOSED   INACTIVE
+
+
+
+     40.3%                                       30                                     $1,294                            57.3%
+     2/2/2 micros, first payout                  median, P90 43                         median $1,500, E[pay] $522        before the first payout
+
+
+
+//     FIRST      PAYOUT          BY     SIZE
+
+MICROS                                                QUALIFY                   BLOWN               INACTIVE              AVG   PAY                  E[PAY]
+
+2/2/2                                                   40.3%                    2.4%                  57.3%              $1,301                      $524
+3/3/3                                                   36.7%                    7.1%                  56.1%              $1,478                      $543
+4/4/4                                                   22.8%                   22.6%                  54.6%              $1,493                      $341
+5/5/5                                                   20.3%                   25.0%                  54.7%              $1,500                      $305
+6/6/6                                                   15.8%                   30.2%                  54.0%              $1,500                      $237
+
+
+//     LIFETIME,         6-PAYOUT             LADDER     ($13,000        MAX)       //       ACCOUNT    ECONOMICS,    2/2/2       MICROS
+
+MICROS                    E[TOTAL]              P(≥1)        BLOWN       INACT.     Eval attempts per pass                                             2.1
+2/2/2                         $1,005              41%             3%        97%     Acquisition ($100/eval)                                           $213
+3/3/3                                 $912        37%             7%        92%     E[net], lifetime plan                                             $652
+4/4/4                                 $485        24%             22%       78%     Multiple on cost                                                  2.8x
+5/5/5                                 $417        21%             24%       76%     E[net], monthly plan                                    $599 / 2.5x
+P(FULL LADDER) 0.4%               ·     AVG 0.68 PAYOUTS     ·     AVG LIFE 48 TRADING DAYS
+
+
+
+
+      Funded, the basket almost never blows up. It dies quietly: 97% of accounts end closed for inactivity,
+      most of them before the first payout.
+      CONCLUSION         OF    §06
+
+
+
+
+TRIPLE        OPEN                                                                                                        V1.0     /   OUT-OF-SAMPLE
+THE    PROTOCOL                                                                            07    /   THE    INACTIVITY       PROBLEM
+
+
+
+
+07
+                           //   WHY   THIS    IS     AN   ADD-ON
+
+
+
+                           INACTIVITY.
+
+  //   ACTIVE   DAYS                  //   TRADING     DAYS        //    INACTIVE,     EARLY               //   INACTIVE,   LIFETIME
+
+
+
+  122                                 ~4 / mo                      57.3%                                   96.7%
+  of 681 weekdays (18%)               all on Mondays               before 1st payout                       vs 2-3% blown
+
+
+
+
+Apex closes a funded account that does not produce 2 days
+                                                                    //    WHAT    FIXES    IT
+of at least $50 net profit within a rolling 30 calendar days.
+All three strategies trade the same day, so the whole basket        Not a better Monday strategy. The fix is more active days:
+has about four trading days a month. Two of those four have         combine the basket with strategies that trade Tuesday to
+to be winners above $50, every month, forever. With a 65%           Friday. Every extra independent trading day per week lowers
+                                                                    the inactivity closure rate far more than any change to these
+win rate that fails regularly, and each failure is permanent.
+                                                                    three rules could. Re-run the bootstrap with your full set
+                                                                    before trading it funded.
+Reducing size to protect the drawdown makes it worse: at 2
+micros each, a winning Monday is often below the $50
+activity threshold and far below the $250 qualifying-day
+threshold for payouts.                                              //    CHECK    THE    RULE
+
+                                                                    The inactivity rule is modelled from Apex support
+                                                                    documentation as 2 days of ≥$50 per 30 calendar days (22
+                                                                    trading days). Verify the current wording on your Apex
+                                                                    dashboard. It decides this result more than any other
+                                                                    assumption.
+
+
+
+
+   On its own this basket is an evaluation tool with a short funded life. Inside a portfolio that trades every
+   day, its Monday edge becomes useful.
+   CONCLUSION       OF    §07
+
+
+
+
+TRIPLE    OPEN                                                                                             V1.0   /   OUT-OF-SAMPLE
+THE       PROTOCOL                                                                                           08     /   LIMITATIONS         AND    VERDICT
+
+
+
+
+08
+                                   //   WHAT   THIS    DOCUMENT        DOES      NOT      SHOW
+
+
+
+                                  VERDICT.
+
+//    ANALYSES          NOT   PERFORMED
+                                                                                    //   01,   SMALL    SAMPLE
+
+In-sample vs out-of-sample                                     No IS data           257 trades in 2.7 years; 126 distinct trading days. Confidence
+Walk-forward                                               Not performed            intervals in §05/§06 are Monte Carlo noise only, not uncertainty
+                                                                                    about the edge.
+Parameter sensitivity                                      Not performed
+
+Stop-loss variants                                         Not performed            //   02,   NO    STOP
+
+                                                                                    Tested without a protective stop. Worst excursion $8,208 on 5
+Tick-level fills                                           Not performed
+                                                                                    MNQ. Gap risk on the Sunday reopen is real.
+Live track record                                                      None
+                                                                                    //   03,   ONE    BET
+
+                                                                                    All long, all Monday, correlated up to +0.57. A bad Monday regime
+                                                                                    hits all three at once.
+
+                                                                                    //   04,   SELECTION     BIAS
+
+                                                                                    The mix was chosen on the same history it is evaluated on. The
+                                                                                    holdout check helps; it does not remove this.
+
+                                                                                    //   05,   CALENDAR     ANOMALIES     DECAY
+
+                                                                                    Published weekend and DST effects have weakened after
+                                                                                    publication before. 2024 was nearly flat.
+
+
+
+
+U N F I N I S H E D           /     A D D - O N
+
+
+Three simple Monday rules with a positive out-of-sample record and a portfolio bootstrap that passes an
+Apex 50K evaluation about 47% of the time. Funded, they rarely blow up but are usually closed for
+inactivity. Not validated, not a standalone system.
+
+
+     //   HOW      TO   USE   IT                         //    WHAT    NOT     TO    DO                           //    WHERE   TO   START
+
+     Add the basket to a set of strategies               Do not run one of them alone. Do not                     Stop-loss variants, a Friday-evening
+     that trade on other days. Re-bootstrap              run the three alone on a funded                          or Tuesday twin, and a walk-forward
+     the full set. Eval 7/7/7, funded 2/2/2              account. Do not add a stop and                           on the filters are all open. The code is
+     micros is only the answer for the                   assume these statistics still apply.                     attached so it can be taken apart.
+     basket alone.
+
+
+
+
+Not financial advice. Backtested and simulated results are hypothetical, carry the benefit of hindsight and do not represent actual trading. All figures derive
+from out-of-sample MultiCharts exports ($5 commission, $1 slippage per trade) and one Monte Carlo notebook; no independent re-execution against raw
+market data was performed. Prop-firm rules are modelled, not guaranteed, and change. Past performance does not indicate future results.
+
+
+
+
+TRIPLE      OPEN                                                                                                              V1.0    /   OUT-OF-SAMPLE
+

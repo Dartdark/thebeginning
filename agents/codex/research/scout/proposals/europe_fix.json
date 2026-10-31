@@ -1,0 +1,63 @@
+{
+  "hypothesis_id": "europe-fix-unconditional-dollar-demand",
+  "run_id": "scout-europe-fix-20261029",
+  "lease_owner": "codex-root",
+  "source_id": "ssrn:3521370",
+  "phase": "design",
+  "design_start": "2018-01-01",
+  "design_end": "2022-12-31",
+  "candidate_variants": 1,
+  "control_variants": 0,
+  "definition_ids": [
+    "europe_fix_gross_6e_1"
+  ],
+  "review_record": "agents/codex/research/scout/records/3521370.json",
+  "evidence_path": "agents/codex/evidence/scout_europe_fix.md",
+  "plan_path": "agents/codex/plans/scout_europe_fix.md",
+  "code_paths": [
+    "analysis/codex_scout_europe_fix.py"
+  ],
+  "inputs": [
+    {
+      "path": "data/6E_1min_2018.csv",
+      "sha256": "bf59d9d0a7c81f1292146a5af6739875c196a1217f1a6f010f143830353782d7",
+      "permission": "owned_upload",
+      "provenance": "User-owned repository MultiCharts close-stamped Central minute OHLCV export; continuous front6E, no native contract IDs; first-stage reference screen only"
+    },
+    {
+      "path": "data/6E_1min_2019.csv",
+      "sha256": "c66d844e14fa0004e1f132062c5e0a447ad6f610385d24b7c5eba7881e6a2e06",
+      "permission": "owned_upload",
+      "provenance": "User-owned repository MultiCharts close-stamped Central minute OHLCV export; continuous front6E, no native contract IDs; first-stage reference screen only"
+    },
+    {
+      "path": "data/6E_1min_2020.csv",
+      "sha256": "8f8a564229bff845a6cdf2cfa9780304f9d5bcdb96e0db42c32d74b49ea90b91",
+      "permission": "owned_upload",
+      "provenance": "User-owned repository MultiCharts close-stamped Central minute OHLCV export; continuous front6E, no native contract IDs; first-stage reference screen only"
+    },
+    {
+      "path": "data/6E_1min_2021.csv",
+      "sha256": "063761aee2dcdc1057e542dfca1b9b2e177a03d151ba77d5dd2edd9672201c14",
+      "permission": "owned_upload",
+      "provenance": "User-owned repository MultiCharts close-stamped Central minute OHLCV export; continuous front6E, no native contract IDs; first-stage reference screen only"
+    },
+    {
+      "path": "data/6E_1min_2022.csv",
+      "sha256": "cfae6c8b4a26cb9cf39ec96a4279fe6b396f53e1cc1b3018ea92a12da9f9ea3f",
+      "permission": "owned_upload",
+      "provenance": "User-owned repository MultiCharts close-stamped Central minute OHLCV export; continuous front6E, no native contract IDs; first-stage reference screen only"
+    }
+  ],
+  "information_clock": "Predetermined08:00 Europe/Berlin schedule; no rate/news value consumed. Decision07:59:59;08:01close-stamped OPEN reference;14:00CLOSE exit; per-date civil conversion.",
+  "native_costs": "One standard6E,125000USD per price unit; tick0.00005=$6.25; commission7.25RT+one tick each side12.50=$19.75. Research benchmark, not broker quote or M6E costs.",
+  "entry_exit_rule": "Unconditional short08:01OPEN reference through14:00CLOSE Europe/Berlin, every2018-22weekday with exact endpoints; no stop/target in cheap screen.",
+  "gross_stop_rule": "Require>=1000resolved, gross mean>19.75 and net t>=2. Failure stops all later return stages, no rescue.",
+  "data_failure_stop_rule": "1305weekday universe,>=95%paired endpoints; finite positive prices, unique date/time. Missing endpoints unknown, no imputation. Positive advancement needs native-contract/roll/full-path and native executable cost audits.",
+  "artifact_sha256": {
+    "agents/codex/research/scout/records/3521370.json": "e9b7e6a3186ab4d1253a74a722e2be89a0f017d392101b1fd63a24411c47ba3e",
+    "agents/codex/evidence/scout_europe_fix.md": "cd9ba938f1c69724a0fd3729d75881bbdbafdacf9f928fa8aa83c51710fa3fb9",
+    "agents/codex/plans/scout_europe_fix.md": "db0de1c746576cdee6215955469418694cda181a63fe2e372e6664c4dc7c148b",
+    "analysis/codex_scout_europe_fix.py": "6affc5bc0271deef47b54ece2331a96bce912571856abf571458a9ac320fff06"
+  }
+}

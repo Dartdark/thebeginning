@@ -1,0 +1,43 @@
+{
+  "plan_commit": "aed463d",
+  "variants": 2,
+  "selected_hold": 30,
+  "design_pass": false,
+  "replacement_slot": "NFP Fade",
+  "design_correlations": {
+    "Vault Break": 0.004826233274894495,
+    "Overnight Bias ML v2": 0.001274330989992813,
+    "Monday Long": 0.019678125850945225,
+    "Expiration Open Short": 0.0025453789196589736,
+    "Late-Day Flow": 0.014114540472764862,
+    "NFP Fade": -0.06011612739650934,
+    "Bridge Monday Long": 0.036712460849616296,
+    "Relative Strength longs": -0.04459092122403422,
+    "ES MOC Follow": -0.02877685016325733,
+    "CL Sunday Gap Fade": 0.024438536983545176
+  },
+  "seeds": {
+    "side": 4101,
+    "time": 4102,
+    "design_account": 4201,
+    "holdout_account": 4202
+  },
+  "note": "Frozen before any selected-rule holdout trades or outputs are constructed.",
+  "holdout_statistical_pass": false,
+  "allocation_pass": {
+    "addition": false,
+    "replacement": false
+  },
+  "verdict": "REJECT",
+  "repository_items": 274,
+  "t_threshold": 3.5642029470176886,
+  "deflated_sharpe": 0.0,
+  "candidate_dates_on_zero_plan_days": 267,
+  "candidate_net_on_zero_plan_days": -4623.24999999996,
+  "gap_dates_total": 274,
+  "slot_intraday_overlap_dates": 0,
+  "fix_decision_minutes_CT": {
+    "603": 2108,
+    "663": 154
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "source_held_gap_audit": "analysis/outputs/codex_s03_noisearea/candidate_held_gaps.csv",
+  "held_gap_sha256": "ff7eef99e6f332dda79d2a3207ec18b57e9bcdb4d26f2a5d261df972630f55c3",
+  "current_claude_ref": "e4399c8e235ee26674c88a439d4c9926b5731af4",
+  "held_minutes": 3,
+  "held_dates": [
+    "2024-10-09"
+  ],
+  "rows": [
+    {
+      "date": "2024-10-09",
+      "day": 2504,
+      "j": 887,
+      "close_time": "14:47",
+      "entry_order_id": 1175,
+      "raw_rows_at_missing_minute": [],
+      "neighboring_raw_rows": [
+        {
+          "path": "data/NQ_1min_2024.csv",
+          "line": 86257,
+          "j": 885,
+          "close_time": "14:45",
+          "native_OHLC": true
+        },
+        {
+          "path": "data/NQ_1min_2024.csv",
+          "line": 86258,
+          "j": 886,
+          "close_time": "14:46",
+          "native_OHLC": true
+        },
+        {
+          "path": "data/NQ_1min_2024.csv",
+          "line": 86259,
+          "j": 889,
+          "close_time": "14:49",
+          "native_OHLC": true
+        }
+      ],
+      "raw_source_minute_absent": true,
+      "raw_cache_observed_masks_match": true,
+      "classification": "unknown_native_OHLC_while_candidate_held",
+      "account_effect": "Possible stop crossing inside an unobserved held minute cannot be determined."
+    },
+    {
+      "date": "2024-10-09",
+      "day": 2504,
+      "j": 888,
+      "close_time": "14:48",
+      "entry_order_id": 1175,
+      "raw_rows_at_missing_minute": [],
+      "neighboring_raw_rows": [
+        {
+          "path": "data/NQ_1min_2024.csv",
+          "line": 86258,
+          "j": 886,
+          "close_time": "14:46",
+          "native_OHLC": true
+        },
+        {
+          "path": "data/NQ_1min_2024.csv",
+          "line": 86259,
+          "j": 889,
+          "close_time": "14:49",
+          "native_OHLC": true
+        },
+        {
+          "path": "data/NQ_1min_2024.csv",
+          "line": 86260,
+          "j": 890,
+          "close_time": "14:50",
+          "native_OHLC": true
+        }
+      ],
+      "raw_source_minute_absent": true,
+      "raw_cache_observed_masks_match": true,
+      "classification": "unknown_native_OHLC_while_candidate_held",
+      "account_effect": "Possible stop crossing inside an unobserved held minute cannot be determined."
+    },
+    {
+      "date": "2024-10-09",
+      "day": 2504,
+      "j": 895,
+      "close_time": "14:55",
+      "entry_order_id": 1175,
+      "raw_rows_at_missing_minute": [],
+      "neighboring_raw_rows": [
+        {
+          "path": "data/NQ_1min_2024.csv",
+          "line": 86263,
+          "j": 893,
+          "close_time": "14:53",
+          "native_OHLC": true
+        },
+        {
+          "path": "data/NQ_1min_2024.csv",
+          "line": 86264,
+          "j": 894,
+          "close_time": "14:54",
+          "native_OHLC": true
+        },
+        {
+          "path": "data/NQ_1min_2024.csv",
+          "line": 86265,
+          "j": 896,
+          "close_time": "14:56",
+          "native_OHLC": true
+        },
+        {
+          "path": "data/NQ_1min_2024.csv",
+          "line": 86266,
+          "j": 897,
+          "close_time": "14:57",
+          "native_OHLC": true
+        }
+      ],
+      "raw_source_minute_absent": true,
+      "raw_cache_observed_masks_match": true,
+      "classification": "unknown_native_OHLC_while_candidate_held",
+      "account_effect": "Possible stop crossing inside an unobserved held minute cannot be determined."
+    }
+  ],
+  "raw_versions": [
+    {
+      "path": "data/NQ_1min_2024.csv",
+      "sha": "ccc5cdbca04f150251433ec945d13c24c43b50c7",
+      "size": 6118945,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_2024.csv",
+      "local_git_blob": "ccc5cdbca04f150251433ec945d13c24c43b50c7",
+      "local_sha256": "87a5db405d5bdc9aa0914018aed046dbdd50332f630700720ae40fa72ddd056a",
+      "local_bytes": 6118945,
+      "exact_github_match": true
+    },
+    {
+      "path": "data/NQ_1min_ON_2024.csv",
+      "sha": "cee683a5192e7be2f0a8cea350c8afad529093fe",
+      "size": 13108186,
+      "html_url": "https://github.com/Dartdark/thebeginning/blob/e4399c8e235ee26674c88a439d4c9926b5731af4/data/NQ_1min_ON_2024.csv",
+      "local_git_blob": "cee683a5192e7be2f0a8cea350c8afad529093fe",
+      "local_sha256": "82e02ddf7e775f01b566f584f4f7245f7c021b6062437b9e2cf14be9e9852607",
+      "local_bytes": 13108186,
+      "exact_github_match": true
+    }
+  ],
+  "raw_files_match_latest_pinned_repository": true,
+  "cache_omission_detected": false,
+  "no_imputation_no_exclusion_no_grid_rebuild": true,
+  "historical_account_or_baseline_returns_computed": false
+}

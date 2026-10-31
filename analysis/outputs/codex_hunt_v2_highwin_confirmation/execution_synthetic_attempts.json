@@ -1,0 +1,26 @@
+{
+  "actual_market_or_gross_data_read": false,
+  "financial_returns_calculated": false,
+  "attempts": [
+    {
+      "attempt": 1,
+      "passed": false,
+      "issue": "Artificial fixture exposed duplicate entry_j keyword when merging input metadata with execution output.",
+      "fix": "Copy source metadata then update explicit execution columns; no execution rule changed."
+    },
+    {
+      "attempt": 2,
+      "passed": true,
+      "synthetic_groups": 9,
+      "execution_rule_changed": false
+    },
+    {
+      "attempt": 3,
+      "passed": true,
+      "synthetic_groups": 10,
+      "predata_review_correction": "Include final exit price in worst excursion for every exit kind; explicit worse OPEN891 cases on both sides and both definitions.",
+      "profit_or_exit_rule_changed": false,
+      "actual_source_inputs_read": false
+    }
+  ]
+}

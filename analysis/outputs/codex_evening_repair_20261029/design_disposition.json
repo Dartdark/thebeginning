@@ -1,0 +1,61 @@
+{
+  "status": "DESIGN_CLOSED_NO_DERIVATIVE_NOMINEE",
+  "preregistration_public": "b8d17f646d04b486a5332e69042af7ef69a7786b",
+  "design_implementation_commit": "1b07e615fe69fb66069ac282acd3f2a8495d20a8",
+  "models": [
+    "SOURCE"
+  ],
+  "source_only_reproduction_exception": true,
+  "derivative_nominees": [],
+  "reason": "All four derivative trade t values are below2 and three definitions have unresolved paths. No derivative passes its frozen economic/complete-data gate.",
+  "design_models": [
+    {
+      "model": "SOURCE",
+      "trades": 545,
+      "net_total": 3416.699999999998,
+      "trade_t": 1.5974322643107723,
+      "unresolved": 49,
+      "design_pass": false
+    },
+    {
+      "model": "NATIVE5",
+      "trades": 548,
+      "net_total": 3420.4799999999977,
+      "trade_t": 1.6165812603692842,
+      "unresolved": 46,
+      "design_pass": false
+    },
+    {
+      "model": "FLAT1558",
+      "trades": 594,
+      "net_total": 920.4399999999987,
+      "trade_t": 0.5900819115150491,
+      "unresolved": 0,
+      "design_pass": false
+    },
+    {
+      "model": "CHECK1545",
+      "trades": 586,
+      "net_total": 1447.3599999999985,
+      "trade_t": 0.9185130384533124,
+      "unresolved": 8,
+      "design_pass": false
+    },
+    {
+      "model": "CHECK1545_FLAT1558",
+      "trades": 594,
+      "net_total": 1111.4399999999987,
+      "trade_t": 0.7331411542654365,
+      "unresolved": 0,
+      "design_pass": false
+    }
+  ],
+  "personal_bench": {
+    "status": "NOT_RUN",
+    "source_candidate_unknown_paths": 49,
+    "missing_normal_BASE_date": "2020-11-30",
+    "numeric_book_values_loaded": false,
+    "no_invented_calendar_or_zero_returns": true
+  },
+  "historical_scope": "Previously seen2023+ history, unchangedSOURCE only, through2026-10-09 common cash data endpoint; no retuning."
+}

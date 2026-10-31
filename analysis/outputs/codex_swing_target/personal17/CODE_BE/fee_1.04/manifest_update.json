@@ -1,0 +1,53 @@
+{
+  "reference": "e08c353809a78aedba4cec2122a6adbcb2448641",
+  "amendment_commit": "145c3ed",
+  "amendment_path": "agents/codex/plans/swing_target_personal_refresh.md",
+  "original_strategy_preregistration": "a4064ac",
+  "model": "CODE_BE",
+  "fee": 1.04,
+  "columns": [
+    "VaultBreak",
+    "OvernightBiasML",
+    "MondayLong",
+    "ExpirationOpenShort",
+    "LateDayFlow",
+    "NFPFade",
+    "BridgeMondayLong",
+    "CLSundayFade_perMCL",
+    "ESMOCFollow_perMES",
+    "RelativeStrength",
+    "FC2B",
+    "TwinContinuation",
+    "OvernightTick",
+    "DualThrust",
+    "Kusho",
+    "S47",
+    "S30"
+  ],
+  "new_strategy_replays": 0,
+  "original_adapter_sha256": "5bc7f34dcfb291de095485c3e196512ddd69c6bbf3beb70e357a02abf782a707",
+  "wrapper_sha256": "0ea16507cb2b2902664900b73414633087121c2a59850d13943bc42f674cabb3",
+  "original_inputs": {
+    "baseline_daily18.csv": "51fac27f43b5b3e5822ba503aee9830d0fdaccee82bbf91cab35f1a15a615928",
+    "candidate_daily.csv": "78cc0196cef3e79e1ce44a461e60c608d1198944ab0259a02491c97b4e340682",
+    "reproduction.json": "21a3a3bd52b46f9a1bb595090d1bb714f82bcb27eff346afa960b6dc374c3f99"
+  },
+  "snapshot_manifest_sha256": "9ff26253a054ca926cc175fc9b9db6ddb6584435fb4c8405362e249f59b1a2fe",
+  "bootstrap": {
+    "n": 1000,
+    "horizon": 252,
+    "block": 10,
+    "seed": 20261025
+  },
+  "intervals": "Historical annual-mean and simulation-precision intervals remain95%; source benchmark algorithms unchanged",
+  "preservation": "Original18-leg outputs, original62e82a0 snapshot and original adapter unchanged",
+  "limitations": [
+    "Inherited CLS whole-day adverse and MOC close-based path approximations remain.",
+    "Current OT funded path preserves published constant whole-night adverse value across the entire account day; it can invent simultaneous OT/RTH adverse exposure.",
+    "OT order-flow source ends 2026-07-07; post-cutoff zero P&L is missing current baseline evidence, not verified no-trade activity.",
+    "Inherited 150K fractional full-size bases are rounded only after cushion scaling; refs are 1500/3000.",
+    "Personal preserves published daily booking (Kusho at exit, S30 daily marks), not full intraday margin/liquidation modeling.",
+    "Personal plan10 commission adjustment is per nonzero P&L day and undercounts some reentries; MOC/S30 retain inherited fee approximations.",
+    "Personal Twin remains the existing v1 checker marked ledger rather than an exact v2.1 ledger."
+  ]
+}

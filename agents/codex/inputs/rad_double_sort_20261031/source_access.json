@@ -1,0 +1,92 @@
+{
+  "review_date_utc": "2026-10-31",
+  "initial_checked_head": "dac4c32c0fbaf60703e7f2fc5d89ff471b92f398",
+  "source": {
+    "permission": "owned_upload",
+    "pointer": "sediment://file_00000000bba88230be98dccd0617e41f",
+    "method": "download_file then pdftotext -layout; read all 56 pages and visually inspect PDF pages 22/26/28/47",
+    "version": "Title page December 2012; PDF creation December 12, 2012; SSRN posting/revision date not verified",
+    "canonical_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2614241"
+  },
+  "searches": {
+    "route": "Connected web search",
+    "queries": [
+      "\"2614241\" \"Rad\"",
+      "\"Double-sort trading strategy\" data replication",
+      "free historical commodity futures individual contracts term structure daily data download"
+    ],
+    "purpose": "Canonical identity, replication availability, one bounded free paired-data check",
+    "replication_result": "No author code/raw dated-contract panel identified in these returned results; this is not exhaustive absence proof"
+  },
+  "access": [
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2614241",
+      "method": "connected open",
+      "status": "403 Forbidden",
+      "action": "Not retried; full text read from owned upload"
+    },
+    {
+      "url": "https://www.turtletrader.com/hpd/",
+      "method": "connected open",
+      "status": "HTML obtained",
+      "result": "Advertised archive download links were not present in fetched current page; no suitable paired panel acquired"
+    },
+    {
+      "url": "https://dataset.aethereal.top/datasets/commodity-prices",
+      "method": "connected open",
+      "status": "HTML obtained",
+      "result": "Provider describes an 18-commodity front-month-only OHLCV panel, 2000 onward. Published schema lacks dated maturity IDs, second-contract price, expiry and available-at fields; not admitted. No market values used."
+    },
+    {
+      "url": "https://dataset.aethereal.top/files/commodity-prices.csv",
+      "method": "Configured Python urllib GET with Range bytes=0-2047, 20-second timeout",
+      "status": "Network tunnel 403; exact error in free_data_attempt.json",
+      "action": "No retry/bypass. Even advertised schema lacks paired contracts; no free-sample profitability test."
+    },
+    {
+      "url": "https://finzdata.com/datasets",
+      "method": "connected open",
+      "status": "HTML obtained",
+      "result": "Provider advertises individual contracts from 2007, but free daily history is last 30 days and access uses an API key; long history is paid. No account, key, subscription or purchase requested. Other search snippets advertised differing free limits; use inspected current product page, not snippet."
+    },
+    {
+      "url": "https://www.historicalfuturesdata.com/",
+      "method": "connected open",
+      "status": "HTML obtained; default localized page",
+      "result": "Search/provider navigation offers no-account latest-month samples, and longer free daily history behind account creation. No new account. No 2018–22 point-in-time paired panel downloaded."
+    },
+    {
+      "url": "https://www.historicalfuturesdata.com/?lang=en",
+      "method": "connected open",
+      "status": "Tool could not access this URL",
+      "action": "No retry or inferred download"
+    },
+    {
+      "url": "https://data.nasdaq.com/databases/MWIS",
+      "method": "connected open",
+      "status": "JavaScript-only shell",
+      "result": "Search snippet offers 2014/2015 contracts as free samples, outside the design interval; no modern panel acquired"
+    }
+  ],
+  "owned_check": {
+    "scope": [
+      "repo data/ all CSV headers",
+      "repo filenames matching contract/maturity/expiry/basis/second/deferred/roll",
+      "/workspace/shared",
+      "/workspace/library-files",
+      "/workspace/scratch"
+    ],
+    "result": "CL and GC are the only outright commodity symbols from the thesis universe in data/. Their ten yearly files each have date,time,open,high,low,close,volume, without contract identity or second-contract field. Other named roots have no matching data. No new matching paired universe found; prior weekly-basis block remains.",
+    "limitations": "Headers/filenames do not verify full history or information clocks; existing strategy trade logs are not raw paired prices. No credential directories searched."
+  },
+  "dedup": {
+    "exact_ssrn_or_title_prior_review": false,
+    "family_context": [
+      "TIER_LIST commodity storage/momentum (Gorton et al. 2008), source-only monthly commodity family",
+      "SSRN5250499 weekly basis reversal: distinct rule, same paired-data prerequisite; remains parked",
+      "Prior commodity hedging-pressure CL/GC test: preserve its rejection; no relabelled proxy/retest"
+    ],
+    "decision": "One exact source-defined monthly double-sort queue entry, linked to existing family/data history; zero new trial reservation or return definition"
+  },
+  "boundary": "Source arithmetic/header audit only. No scout cycle, lease, budget reservation, return test, account replay or independent economic verification. Continue owned-data-compatible discovery when the scout is separately invoked; this parked upload must not monopolize it."
+}

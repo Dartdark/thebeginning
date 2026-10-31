@@ -1,0 +1,205 @@
+STRATEGY OVERVIEW · NQ / MNQ
+
+
+Kusho FAR final, and Kusho v9 (long and short)
+E-mini Nasdaq-100 · 15-minute bars · Chicago time · one position at a time · signals 09:00–13:59 CT, exit from 21:00 CT ·
+v9 = Kusho FAR final plus a short side on down-trend days
+
+
+ 1 MNQ, whole backtest                    Net       PF      Trades / yr      Win rate      Average        Max DD        Closed DD       Grade
+
+ Kusho FAR final                     $31,448      1.40              321         58.4%        $10.01        $1,520            $1,426         S
+
+ Kusho v9                            $40,308      1.43              366         58.3%        $11.24        $1,556            $1,554         S
+
+MultiCharts backtests, 2017-01-04 → 2026-10-21: Kusho FAR final 3142 trades, Kusho v9 3586 trades; 15-minute chart with the 1-minute Bar
+Magnifier; $2.50 commission per contract and $5 slippage per trade; 1 MNQ (×10 = 1 NQ). Max DD counts closed equity plus each trade's worst open
+loss. Roll correction: on the raw continuous chart, 4 long trades in each run were open across a contract roll and booked the price gap between
+contracts ($1,592.50 per MNQ in total); every figure here has that gap removed.
+
+
+Equity path and drawdown
+
+
+
+
+The trade story
+The idea comes from auction reading: a bullish 15-minute bar that closes above its 50-bar average with only a small
+lower wick shows buyers in control. The strategy leaves a buy limit at that bar's open for one bar — the retest — and,
+if filled, rides it with a structure stop under the latest swing low, a 3R target and an early break-even. Trades still open
+run into the evening and are closed from 21:00 CT; a position open on Friday is held over the weekend. v9 adds the
+mirror-image short, taken only on down-trend days.
+
+Rules
+ Long signal                       15-minute bar stamped 09:00–13:59 CT: close > open, close > EMA(50) of closes, lower wick (open
+                                   − low) ≤ 70 ticks.
+
+ Entry                             Buy limit at the signal bar's open, valid for the next bar only. One position at a time.
+
+ Exits                             Stop at the most recent fractal swing low of bars 2–10 back if that risk is ≤ 500 ticks, target 3R, and
+                                   the stop moves to entry + 5 ticks once price has moved 0.5R in favour. Otherwise a 200-tick stop
+                                   and a 200-tick target. Market exit from the first bar at or after 21:00 CT.
+
+ v9 only: short                    The mirror (close < open, close < EMA(50), upper wick ≤ 70 ticks, sell limit at the open,
+                                   swing-high stop, 3R, break-even at entry − 5 ticks) on down-trend days only: the prior
+                                   session's 15:00 close is below the average of the last 50 15:00 closes and that average is
+                                   below its value 5 sessions earlier.
+Worst drawdowns (including open-trade loss)
+
+Kusho FAR final                                                               Kusho v9
+ Depth, 1 MNQ       Peak            Low              Recovered       Days       Depth, 1 MNQ       Peak            Low            Recovered     Days
+        $1,519.75 2026-08-12        2026-09-14       not yet          70+             $1,555.75    2024-07-22      2024-10-08     2025-01-05     167
+
+        $1,458.25 2025-04-09        2025-07-16       2025-10-01       175             $1,517.75    2024-03-18      2024-04-25     2024-05-02      45
+
+        $1,288.25 2023-08-29        2023-10-31       2024-01-21       144             $1,469.75    2025-04-09      2025-07-16     2025-10-01     175
+
+Now: Kusho FAR final −⁠$670.50 and Kusho v9 −⁠$544.50 from their peaks.
+
+
+By year, 1 MNQ
+ Year                                     Final trades                       Final net                     v9 trades                           v9 net
+
+ 2017                                              367                      $1,209.50                             367                    $1,070.00
+
+ 2018                                              323                      $1,960.50                             404                    $2,916.00
+
+ 2019                                              354                        $947.00                             376                         $491.50
+
+ 2020                                              322                      $5,208.50                             340                    $5,225.00
+
+ 2021                                              315                      $3,820.00                             326                    $3,385.50
+
+ 2022                                              267                      $4,435.50                             429                   $10,259.50
+
+ 2023                                              339                      $3,839.50                             375                    $3,904.00
+
+ 2024                                              336                      $4,770.50                             366                    $4,438.50
+
+ 2025                                              292                      $3,423.00                             333                    $5,257.00
+
+ 2026                                              227                      $1,834.00                             270                    $3,361.00
+
+2026 to the end of each backtest. Positive years: Kusho FAR final 10 of 10, Kusho v9 10 of 10. v9's shorts: 470 trades, $8,514.
+
+
+   Why it should work                                                            Risks and caveats
+   Origin: "Finished Auction Retest" by Kusho (version                               Tail-dependent: the best 10% of trades make
+   0.9), an auction-market read of a finished auction at                             232% of Kusho FAR final's net; the other 90% lose
+   the bar's low, coded as an OHLC proxy. There is no                                money together.
+   published effect size for this rule.                                              Overnight and weekend holds: 141 trades were
+        Signal vs random entries (2017–2026, 1-minute                                held over a weekend. The hold is part of the
+        Bar Magnifier): Kusho beat random longs at the                               design and adds gap risk.
+        same clock hours in 9 of 10 years, 2023–26                                   Fitted settings: the 70-tick wick limit and the 0.5R
+        included, by about $7.80 a trade per MNQ. In 2022                            break-even were chosen by optimisation on 2018–
+        the random longs lost $7.80 a trade while Kusho                              2022.
+        made $17.90.                                                                 Validation verdict: against the original code's
+        Validation 2023-01-04 → 2026-08-26 (one pre-                                 figures on the same window the redesign failed 2
+        registered run after the design freeze): average                             of its 4 pre-set checks (it earned less per trade and
+        trade rose from $10.54 in development to $13.23,                             in total) and won on risk (return ÷ drawdown 7.36
+        all four years positive, bootstrap 95% interval for                          vs 6.92, account needed $1,252 vs $3,092.50 per
+        the average trade $6.20–$21.80.                                              MNQ). The 2023+ window had also been seen by
+        v9: the shorts pay in falling years (2018, 2022,                             the original author and by replication runs.
+        2025, 2026 in the full run); its 2023+ run beat                              v9's 2023+ run was the second look at that
+        Kusho FAR final on the same window ($17,908 vs                               window for this family.
+        $15,168.50) and passed the three checks set before                           v9's down-trend filter removes roll gaps using
+        that run.                                                                    the Sunday-reopen roll; on dxFeed the roll moved
+                                                                                     to other times from mid-2024, so the 50-session
+                                                                                     average is off for some weeks after each roll since
+                                                                                     then.
+Robustness grade
+ Split at 2023-01-01, 1 MNQ                                                           Kusho FAR final      S                               Kusho v9         S
+
+ Trades in / out of sample                                                                       1948 / 1189                                  2242 / 1339
+
+ Expected value per trade, in → out                                                          $9.10 → $12.69                              $10.48 → $13.55
+
+ Kept out of sample · P(edge ≤ 0)                                                               139% · 0.0005                               129% · 0.0000
+
+ Out-of-sample net / max DD (closed)                                                       $15,086 / $1,426                              $18,150 / $1,554
+
+ Return ÷ drawdown, out of sample                                                                        10.58                                        11.68
+
+ Monte-Carlo max DD, median / 75th / 95th / 99th                        $2,007 / $2,392 / $3,184 / $3,864            $2,056 / $2,431 / $3,198 / $3,887
+
+Graded 2026-10-17 on exports to 2026-10-15 (before the roll correction above). Expected value from a 10,000-draw bootstrap; drawdowns from a
+20,000-path Monte Carlo of the trade sequence (closed equity). Grade scale S–D combines edge kept out of sample, confidence it is above zero, and
+return ÷ drawdown.
+
+
+Development and validation runs, 1 MNQ
+                                 Final · development                      Final · validation       v9 · development                             v9 · 2023+
+
+ Window                     2018-01-02 → 2022-12-30            2023-01-04 → 2026-08-26                  2017 → 2022          2023-01-04 → 2026-09-01
+
+ Trades                                            1,583                                1,150                     2,242                                     —
+
+ Net                                         $16,677.50                          $15,215.50                    $23,571                              $17,908
+
+ Profit factor                                      1.46                                 1.39                      1.48                                     —
+
+ Average trade                                   $10.54                               $13.23                     $10.51                                     —
+
+ Max drawdown                                 $1,281.50                            $2,068.50       $1,098.50 (closed)                                $1,802
+
+Earlier MultiCharts runs at the same costs, before the roll correction; not every run records its Bar Magnifier setting, so they differ slightly from the
+figures above. "—" = not recorded for that run. The 70-tick wick limit and the 0.5R break-even were frozen before the validation run.
+
+
+Tried and rejected — do not repeat
+ When               Tried                                               Result (1 MNQ)                                                   Verdict
+
+ 2026-08-21         The original code as received                       Its wick filter never worked (always true); a missing            Redesigned
+                                                                        Friday exit held weekend positions and made 45%
+                                                                        of its profit
+
+ 2026-08-26         Strict "no wick" bars, 30- and 15-minute            15-minute: 372 trades, $2.51 a trade                             Rejected
+                    signals with a 1-minute retest
+
+ 2026-08-26         1-minute execution of the same rule                 2023–26: $13,792.50, PF 1.28; without its best trades            Rejected
+                                                                        it lost money
+
+ 2026-08-26         Break-even at 1.5R instead of 0.5R                  0.5R cut the drawdown 36% for 2.8% less net                      0.5R kept
+
+ 2026-09-24         Flat at 15:45 CT every day (no overnight            2018–2026: $27,203 vs $32,562 carrying (84% kept),               Kept as a
+                    or weekend holds)                                   PF 1.36 vs 1.43                                                  separate prop
+                                                                                                                                         version
+
+ 2026-10-04         ATR-sized fallback stop and target                  2017–2022: $17,813.50 vs $17,804.50, worse in 5 of               Rejected
+                                                                        6 years
+
+ 2026-10-04         ATR-sized fallback target only                      $17,561                                                          Rejected
+
+ 2026-10-04         Everything in ATR units, no break-even              $14,847, PF 1.23, drawdown $3,343                                Rejected
+
+ 2026-10-04         Everything in ATR units, ATR break-even             $13,427, PF 1.28, drawdown $2,225                                Rejected
+
+ 2026-10-04         Second wick test: lower wick ≤ 0.5 × ATR            2017–2022: $15,610.50 vs $17,804.50                              Not adopted
+                    (long only)
+
+ 2026-10-04         v9 with that ATR wick test on both sides            2017–2022: $19,816 vs $23,571 without it                         Removed from
+                                                                                                                                         v9
+
+Development runs on 2017/2018–2022 unless noted.
+Kill test — what would prove it wrong
+ Watch                                 Kusho FAR final                         Kusho v9                                Warning sign
+
+ Drawdown                              Worst $1,520; Monte-Carlo               Worst $1,556; Monte-Carlo               Beyond the 75th percentile.
+                                       75th $2,392                             75th $2,431
+
+ Win rate vs the win rate it           58.4% vs 50.5% needed                   58.3% vs 49.7% needed                   Win rate sliding toward the
+ needs to make money                                                                                                   needed level.
+
+ Average trade, last 60 trades         Below $3.50 per MNQ (the 2019 pattern)                                          Stop trading it.
+
+ Big winners                           40 trades in a row without a $150 winner per MNQ                                The tail has dried up: halve or
+                                                                                                                       stop.
+
+ Trade count                           ≈ 321 a year                            ≈ 366 a year                            Materially different: setup drift.
+
+ Weekend gap                           A weekend gap loss larger than 1.5 × the structural stop                        Stop holding over weekends.
+
+Kusho FAR final: long 3142 $31,448, largest win $1,735.00, largest loss −⁠$383.50, positive months 84/118. Kusho v9: long 3116 $31,794, short 470 $8,514,
+largest loss −⁠$383.50, positive months 87/118. Source: MultiCharts backtests; rules from the strategy code. Backtests, not account results. Prepared 2026-10-
+23.
+

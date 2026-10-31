@@ -1,0 +1,125 @@
+GreenORB: MNQ opening-range breakout, only on one-directional opens
+
+
+Hi all! I've picked up a lot of useful ideas in this channel, so I want to share one of my own strategies back. I designed GreenORB myself. This exact strategy is traded on my prop accounts in a portfolio of 5 strategies, and its rules have been live for almost 9 months.
+
+
+Important before the numbers: it is not a standalone strategy. It trades only ~43 times a year, has long flat periods, and the profit is concentrated in a few days. It works as one piece of a portfolio, because it trades rarely and only enters in the morning. Fixed 1 contract has worked clearly better than risk sizing (comparison below).
+
+
+The full backtest is public, no sign-up needed. You can check every number below and go through every trade yourself (how to use it is further down):
+[https://app.liqport.com/runs/c3757286686143e399076ad5491a2e0e](https://app.liqport.com/runs/c3757286686143e399076ad5491a2e0e)
+
+
+I'm also attaching the strategy's Python code and this post as a PDF, so you can feed both to your own LLM. The code is written for my own engine and won't run as is outside it, but it is the exact logic behind the backtest. The rules below describe everything it does, so anyone can rebuild it on their own platform.
+
+
+Hypothesis:
+When the first 15 minutes of the New York session move one way with no counter candle (all three 5-minute candles green, or all three red), the opening order flow is one-sided. A break of that opening range in the same direction, on the right side of VWAP, tends to keep going. So I don't trade every ORB break, only these "opening drive" days. That's why it trades only about 43 times a year.
+
+
+Rules (all times New York):
+1. MNQ front month. 1-minute bars, with 5-minute bars built from them.
+2. Opening range = high and low from 09:30:00 to 09:45:00.
+3. Direction: if the 5-min candles at 09:30, 09:35 and 09:40 all close above their open, only longs are allowed today. If all three close below their open, only shorts. Anything else (including a doji) means no trade today.
+4. Entry window 09:45 to 12:00: a 5-min candle closes above the range high (long) or below the range low (short), AND that close is above VWAP (long) or below VWAP (short). Market order at the open of the next 1-min bar.
+5. VWAP = typical price (H+L+C)/3 weighted by volume on 1-min bars, reset at the CME daily close (17:00). It includes the overnight session. It is not anchored at 09:30.
+6. Stop = the other side of the opening range (long: range low, short: range high).
+7. Skip the trade if the stop distance (signal close to the other side of the range) is 1% of price or more. My reasoning: a normal day moves about 1%, so an opening range that wide is abnormal. I set this level from that reasoning, not by testing levels. It is also the most fragile rule (see below).
+8. Target = 1.5R, where R = entry fill minus stop.
+9. Anything still open is closed at market at 15:58.
+10. One trade a day at most (the colour rule allows only one direction, and only one trade per direction).
+11. Size: always 1 MNQ contract.
+
+
+Method:
+- Data: CME MNQ 1-minute bars (Databento), front month, not back-adjusted. Rolls don't matter here because the strategy is always flat by the close.
+- Period: January 2020 to October 2026 (1,752 sessions; first trade 6 Jan 2020, last trade 13 Oct 2026), including the 2020 crash and the 2022 bear market.
+- $50k account, 1 contract.
+- Costs: $0.52 commission per side, plus 2 ticks ($1) of slippage on every market and stop fill. The target is a limit order and only fills if price trades through it by at least 1 tick (a touch doesn't count). Stress test at 4 ticks.
+- Timing: decisions are made on the closed 5-min candle, and fills happen at the next 1-min open, so there are no same-bar fills. Inside a 1-min bar the engine assumes open, low, high, close for an up bar and open, high, low, close for a down bar.
+- In-sample vs out-of-sample, honestly: I designed the rules looking at this history, so the whole backtest is in-sample. What I have instead of a clean holdout: (a) every number moved one step each way, (b) each filter switched off one at a time, (c) the same rules, unchanged, on MES and MYM, (d) about 9 months live.
+
+
+Results (1 contract, 2 ticks + fees):
+```
+Net profit +$13,101 on $50k
+Trades 296 (~43/yr; 157 long, 139 short)
+Win rate 54.7% (longs 57.3%, shorts 51.8%)
+Avg win / avg loss +$213 / -$158
+Avg trade +0.19R (target is 1.5R)
+Max drawdown -$1,125 (Jul to Dec 2020)
+Max DD since 2024 -$935 (May to Jul 2026)
+Longest flat period 398 days without a new equity high (Aug 2023 to Sep 2024)
+Daily Sharpe 1.27 (2020-23: 1.03, 2024-26: 1.55)
+Worst losing streak 6 trades
+Net at 4 ticks +$12,576
+```
+
+
+By year. MNQ went from ~10,400 to ~28,000 over this period, so I also show the average trade as a % of the daily ATR(20), which doesn't grow with price:
+```
+Year Trades Net Win% Avg trade, % of ATR
+2020 38 +219 53% 7.9%
+2021 39 +2,961 72% 16.8%
+2022 25 +1,605 52% 10.4%
+2023 57 -68 42% -0.5%
+2024 39 +913 56% 4.8%
+2025 54 +3,325 56% 10.7%
+2026 44 +4,146 57% 12.7% (to Oct 13)
+```
+
+
+How the trades end:
+```
+Target hit (1.5R) 67 trades +$20,558
+Stopped out 90 trades -$17,780
+Closed at 15:58 139 trades +$10,477 (95 of them in profit)
+```
+(These are exit-side figures, as in the link's Breakdowns tab. The $0.52 entry commission on each trade, $154 in total, comes on top.)
+Almost half the trades reach neither the stop nor the target. Holding to the close is a real part of the result.
+
+
+**Why 1 contract and not risk %?** These are the same signals sized at 1% of the account ($500) risk per trade instead:
+```
+1 contract 1% risk/trade
+Net +$13,101 +$19,368
+Trades 296 288
+Max drawdown -$1,125 -$3,317
+Net / max DD 11.6 5.8
+Longest flat period 398 days 840 days
+2023 -$68 -$2,482
+Contracts per trade 1 1 to 25
+```
+Risk sizing makes more money, but the drawdown is 3x larger, and a narrow opening range means a big position (up to 25 micros). It also skips trades: when one contract's stop is worth more than $500, the size rounds down to zero. That happened on 8 trades in 2026, as the price went up. That's why the version I'm presenting is 1 contract. The risk-sized run is public too, if you want to compare:
+[https://app.liqport.com/runs/df999a177dd343c0a28fb7c3c573ec86](https://app.liqport.com/runs/df999a177dd343c0a28fb7c3c573ec86)
+
+
+How to use the link:
+- Results only: the code and logs are not in the share.
+- Overview: net P&L, max drawdown, win rate, equity curve and a daily P&L calendar. The Sharpe shown there (3.17) is calculated per trade, so it reads high. The daily Sharpe is the 1.27 above.
+- Trades: all 296 trades with entry, stop, target, exit, R, MAE and MFE. Chart shows the trades on MNQ candles. Breakdowns splits P&L by exit reason, month, weekday and half hour. Config lists every parameter.
+- Recorded / Rescaled (top of the page): Recorded is the backtest as it ran. Rescaled multiplies each trade's P&L by today's price / its entry price, so a 2020 trade counts at today's contract value (fees stay as recorded). At 30,792: net +$22,617, max drawdown -$3,048 (still the Jul to Dec 2020 stretch).
+- Monte Carlo, Luck: shuffles the trading days and shows where the real result sits among the shuffled ones. On Rescaled it is the 50th percentile, so the backtest wasn't a lucky path. It also gives the bad cases: a 1-in-20 drawdown of -$5,386 and a 1-in-100 of -$6,853.
+- Monte Carlo, Prop and Size: pass chance and payouts on the main prop firms' accounts, and what larger sizes would do to growth and drawdown.
+- All of these simulate GreenORB alone. In my portfolio it is one of 5 strategies.
+
+
+The ugly / weak spots:
+- Small sample: 296 trades in almost 7 years. Some months have no trades at all.
+- The profit comes from a few big days: without the 20 best days, only 24% of the net is left.
+- 2023 was flat (-$68 on 57 trades), and the curve went 398 days without a new high.
+- It makes its money in calm markets. Splitting days into thirds by volatility (ATR as % of price): calm days average 12.8% of ATR per trade (t 3.2), middle 7.1% (t 2.1), volatile only 3.9% (t 0.9, not significant).
+- The tests below were run in late September 2026 on data up to then. The baseline at that point was +$12,440 with a daily Sharpe of 1.23.
+- The 1% cap. Removing it drops net to $8,875 and Sharpe to 0.77. The 29 trades with stops wider than 1.25% of price lost $3,159, mostly in 2020 and 2022. But the exact level matters: the 2020-23 Sharpe is 0.03 with a 0.75% cap, 1.03 at 1% and 0.81 at 1.25%. From 2024 on, the neighbouring levels behave smoothly.
+- The other parameters are stable one step each way: 1.25R / 1.75R give Sharpe 1.17 / 1.13 against 1.23, and an entry cut-off at 11:30 / 12:30 gives 1.22 / 1.25.
+- The colour rule halves the dollars: without it the strategy trades on about 1,500 days instead of ~290 and made about $24.3k instead of $12.3k. In 2020-23 the version without it was even better risk-adjusted. In 2024-26 and on the Dow (MYM), the colour rule wins. I keep it as a risk filter, but it's a judgement call.
+- Same rules on other markets, no changes (2021-26): on MES it keeps about 40-50% of the MNQ Sharpe (0.52 with 1-tick costs, 0.65 without, against 1.33-1.41 on MNQ). On MYM (Dow) it's basically zero.
+- Price level: one MNQ point is worth about 3x more dollars now than in 2020, which is why the recorded drawdown (-$1,125) is much smaller than the Rescaled one (-$3,048).
+
+
+Conclusion:
+What I believe the tests show: on Nasdaq there is a modest edge on opens that move one way. It is positive in 6 of 7 years, survives doubled slippage, holds with neighbouring parameters (except the cap level) and partly carries over to the S&P.
+
+
+What I'm unsure about: the exact level of the 1% cap, whether the edge survives another 2020/2022-style volatility regime, and the intrabar fill assumption on 1-min bars.

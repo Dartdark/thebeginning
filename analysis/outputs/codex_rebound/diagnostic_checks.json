@@ -1,0 +1,97 @@
+{
+  "plan_commit": "d94d815eea2d7a173523b46ff393cfaa3a6c7c3f",
+  "model_count": 3,
+  "new_economic_models": 0,
+  "primary_hashes_match": true,
+  "all_price_pnl_cost_quantity_arithmetic_matches": true,
+  "calendar_checks": [
+    {
+      "model": "UNIFORM",
+      "tickets": 1004,
+      "contracts": 1004.0,
+      "sunday_tickets": 198,
+      "sunday_entry_net": 68467.0,
+      "raw_sunday_calendar_entries": 198,
+      "daily_net_reconciled": true,
+      "deadline_crossings": 0
+    },
+    {
+      "model": "SUNDAY2",
+      "tickets": 1004,
+      "contracts": 1202.0,
+      "sunday_tickets": 198,
+      "sunday_entry_net": 136934.0,
+      "raw_sunday_calendar_entries": 198,
+      "daily_net_reconciled": true,
+      "deadline_crossings": 0
+    },
+    {
+      "model": "ALLNIGHTS",
+      "tickets": 2183,
+      "contracts": 2183.0,
+      "sunday_tickets": 435,
+      "sunday_entry_net": 90441.25,
+      "raw_sunday_calendar_entries": 435,
+      "daily_net_reconciled": true,
+      "deadline_crossings": 0
+    }
+  ],
+  "initial_zero_bootstrap": true,
+  "source_engine_unchanged": true,
+  "shared_caches_rebuilt": false,
+  "diagnostic_script_sha256": "1b087a6f8d7b730e6a30b0ba107a5eb4aa2e83751a200e7661bcbb470a3e284e",
+  "shorts": "N/A: source long only; random-side null is a benchmark, not a promoted short strategy",
+  "null_information_set": "Cash down/up state and range are known before all random17:02\u201320:02 entry times",
+  "calendar": "Actual account exit date, including Sunday-stopped trades assigned to Monday; no weekday-entry deletion",
+  "coverage_inventory": [
+    {
+      "model": "UNIFORM",
+      "trades_with_unknown_held_minutes": 143,
+      "total_unknown_held_minutes": 821,
+      "longest_contiguous_gap": 54,
+      "nominal_daily_pause_minutes": 0,
+      "nominal_weekend_minutes": 0,
+      "other_unobserved_minutes": 821,
+      "entry_label_counts": {
+        "1023": 543,
+        "1022": 460,
+        "1052": 1
+      },
+      "cause": "Unverified: absent native bar can reflect no prints, source omission, feed gap or market restrictions; no classification is assumed"
+    },
+    {
+      "model": "SUNDAY2",
+      "trades_with_unknown_held_minutes": 143,
+      "total_unknown_held_minutes": 821,
+      "longest_contiguous_gap": 54,
+      "nominal_daily_pause_minutes": 0,
+      "nominal_weekend_minutes": 0,
+      "other_unobserved_minutes": 821,
+      "entry_label_counts": {
+        "1023": 543,
+        "1022": 460,
+        "1052": 1
+      },
+      "cause": "Unverified: absent native bar can reflect no prints, source omission, feed gap or market restrictions; no classification is assumed"
+    },
+    {
+      "model": "ALLNIGHTS",
+      "trades_with_unknown_held_minutes": 357,
+      "total_unknown_held_minutes": 2408,
+      "longest_contiguous_gap": 184,
+      "nominal_daily_pause_minutes": 0,
+      "nominal_weekend_minutes": 0,
+      "other_unobserved_minutes": 2408,
+      "entry_label_counts": {
+        "1023": 1191,
+        "1022": 987,
+        "1041": 1,
+        "1052": 1,
+        "1045": 1,
+        "1131": 1,
+        "1024": 1
+      },
+      "cause": "Unverified: absent native bar can reflect no prints, source omission, feed gap or market restrictions; no classification is assumed"
+    }
+  ]
+}

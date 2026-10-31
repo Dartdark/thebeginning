@@ -1,0 +1,901 @@
+THE    INSTITUTIONAL    PROTOCOL                                                      CONFIDENTIAL    ·   MEMBERS
+
+
+
+
+//     ORDER    FLOW   RESEARCH    SERIES     ·   N-01
+
+
+
+
+DO LARGE TRADES
+PREDICT PRICE.
+A statistical study of the relationship between the largest trade printed in each minute of
+the CME tape and the direction of NQ futures over the minutes that follow. Nine years of
+official Level 3 (MBO) data, three million one-minute bars, more than three million
+simulated trades. Executed end to end in MultiCharts through The Bridge.
+
+
+
+
+INSTRUMENT                           SAMPLE                                DATA
+
+NQ Futures                           May 2017 – Jul 2026                   CME MBO / Level 3
+
+BARS                                 METHOD                                PLATFORM
+
+~3.0M x 1-minute                     Fixed-horizon events                  MultiCharts + The Bridge
+
+PREPARED   BY                        ISSUE                                 STATUS
+
+Matteo Conti                         v1.0 / 2026                           Members Release
+
+
+
+
+PROCESS    >    PREDICTION
+
+
+
+
+THE    INSTITUTIONAL   PROTOCOL                    THEINSTITUTIONALPROTOCOL.COM                       @MATFINOG
+THE   INSTITUTIONAL        PROTOCOL                                                                         00   /   ABSTRACT
+
+
+
+
+//    ABSTRACT
+
+
+
+THE CASE.
+Retail trading culture treats the candle as the atom of
+information. This study asks whether the tape underneath the           //   HEADLINE      FINDINGS
+candle knows more: specifically, whether the single largest
+trade of each minute, read directly from the exchange order            Candle baseline, 1-min hold          $0.41 / trade
+book, predicts where price goes next.
+                                                                       Large trade (≥100), 1-min hold       $1.88 / trade
+We measure everything the same way. A signal on bar t
+                                                                       Information multiple                            4.6x
+opens a position at the open of bar t+1 and closes it exactly N
+bars later. Every strategy is therefore a stream of identical          Time to full expression                   ~15–20 min
+fixed-length bets, and average profit per trade becomes a
+direct measure of information content. All headline tests are          Share of prints in RTH                           79%
+
+gross of costs by design: this is a study of predictability first,
+                                                                       Final configuration, avg trade                 $26.85
+tradability second.
+                                                                       Final configuration, PF                         1.13
+The answer is layered. Large trades carry roughly five times
+the information of the candle itself. The information needs
+about a quarter of an hour to fully express. It lives almost
+entirely inside cash hours. It concentrates in prints of 70 to
+                                                                       The edge is not in the color of the candle. It is in
+190 contracts, in prints located in the candle's wick, and in
+prints that arrive when the resting book is balanced. Stacked
+                                                                       the size, the location, and the context of the print
+into one configuration, the result is a signal that clears             inside it.
+realistic costs across a wide parameter band.                          HEADLINE      COMMENTARY
+
+
+
+
+                                                                       //   CONTENTS
+
+
+                                                                       01 Data & Method                                  03
+
+                                                                       02 What We Did, Step By Step                      04
+
+                                                                       03 The Baseline                                   05
+
+                                                                       04 The Big Trade                                  06
+
+                                                                       05 Horizon                                        07
+
+                                                                       06 The Threshold Study                            08
+
+                                                                       07 Sessions                                       09
+
+                                                                       08 Wick Or Body                                   10
+
+                                                                       09 The Resting Book                               11
+
+                                                                       10 The Final Configuration                        12
+
+                                                                       11 Distribution & Excursion                       13
+
+                                                                       12 Shuffles, Significance, Costs                  14
+
+                                                                       13 Verdict & Limitations                          15
+
+                                                                       Appendix: Full Source Code                        16
+
+
+
+
+THE   INSTITUTIONAL       PROTOCOL                           THEINSTITUTIONALPROTOCOL.COM                            @MATFINOG
+                                                                                                                      01
+THE   INSTITUTIONAL        PROTOCOL                                                                          01   /   DATA   &    METHOD
+
+
+
+
+//    OFFICIAL       EXCHANGE         DATA
+
+
+
+DATA & METHOD.
+// The data
+Every number in this paper is computed from official CME
+Market-By-Order (MBO) Level 3 data: the complete order-by-
+order record of the NQ book, May 21, 2017 to July 6, 2026.
+This is the same data class institutional desks buy. From it,
+The Bridge reconstructs the full order book and serves
+condensed per-minute features into MultiCharts, where every
+test below is a plain PowerLanguage backtest.
+
+The feature at the center of this study is the largest single
+trade of each minute: its signed size (buyer- or seller-
+initiated, from the aggressor flag on the tape) and the exact        FIG. 1 · THE RAW MATERIAL: EVERY MINUTE'S LARGEST
+                                                                     PRINT, SIZED AND SIDED, ON THE NQ CHART
+price where it happened. No approximation from volume
+bars, no tick-rule guessing. The tape itself.
+                                                                        //   SAME-SOURCE        RULE
+
+// The measurement                                                      Chart candles and served features are built from the same
+                                                                        Databento MBO record, spliced per contract on the same
+Every test uses the same fixed-horizon design. A condition
+                                                                        roll. The Bridge ships an alignment verifier that scores the
+observed on bar t opens a position at the open of bar t+1 and           join bar by bar; the dataset used here verifies at the
+closes it exactly HoldBars later. Consecutive signals produce           expected ~95% match level. Features and candles
+separate, back-to-back trades. Every trade is therefore a bet           describe the same minute of the same contract, or the test
+of identical length, so average profit per trade is a clean             does not run.
+estimate of information content, comparable across
+strategies.
+
+Headline tests run gross of commission and slippage, with a             //   CONVENTIONS
+realistic round-trip friction of about $14 per trade drawn as a
+                                                                        All times Eastern. A "whale" is a print at or above the
+reference line wherever it matters. The final configuration is
+                                                                        MinSize threshold, 100 contracts unless stated. Dollar
+additionally assessed net of that friction in section 12.               figures are per single NQ contract ($20 per point). Percent
+                                                                        profitable is reported but the edge in this study is carried
+                                                                        by payoff asymmetry, not hit rate.
+
+
+
+
+THE   INSTITUTIONAL      PROTOCOL                             THEINSTITUTIONALPROTOCOL.COM                                   @MATFINOG
+                                                                                                        02
+THE   INSTITUTIONAL       PROTOCOL                                                                        02   /   PIPELINE
+
+
+
+
+//    REPRODUCIBLE          PIPELINE
+
+
+
+WHAT WE DID, STEP BY STEP.
+ 1. Built the dataset. Nine years of NQ MBO history fetched
+    contract by contract, roll-spliced into one continuous
+    feature file and one matching price series, both from the
+    same tape.
+
+ 2. Verified alignment. Confirmed served features line up
+    with chart candles before any strategy was trusted.
+
+ 3. Established the baseline. Long after every green candle,
+    short after every red one, hold exactly one minute.
+    2,991,516 trades: what the candle alone is worth.
+
+ 4. Measured the whale. Same one-minute bet, taken only
+    when the minute's biggest print reached 100 contracts, in
+    the print's direction. 6,780 trades.
+
+ 5. Swept the horizon. Holding period 1 to 30 minutes,
+    mapping how long the print's information keeps paying
+    before it decays.
+
+ 6. Swept the threshold. Minimum print size 10 to 300
+    contracts at three horizons: where size starts to mean
+    something, and where it stops.
+
+ 7. Split the sessions. Cash hours against the overnight,
+    same rules.
+
+ 8. Located the print. Wick against body: does it matter
+    where inside the candle the whale executed?
+
+ 9. Read the room. Classified every whale by the resting-
+    book imbalance it arrived into: aligned, opposed, or
+    balanced.
+
+10. Assembled and stressed the final configuration. Full
+    trade distribution, per-trade adverse excursion, 1,000
+                                                                   FIG. 2 · ANATOMY OF ONE BET: SIGNAL PRINT
+    shuffled equity paths, significance and an analytic cost       (TRIANGLE), ENTRY AT NEXT OPEN, TIME EXIT AT THE
+    overlay.                                                       HORIZON
+
+
+
+                                                                      Every result in this paper comes from the same
+                                                                      signal file with a different TestMode input. One
+                                                                      compiled source reproduces the entire study.
+                                                                      METHOD   NOTE
+
+
+
+
+THE   INSTITUTIONAL      PROTOCOL                           THEINSTITUTIONALPROTOCOL.COM                           @MATFINOG
+                                                                                                             03
+THE   INSTITUTIONAL       PROTOCOL                                                                             03      /   BASELINE
+
+
+
+
+//    WHAT    THE    CANDLE        IS   WORTH
+
+
+
+THE BASELINE.
+AVG   TRADE                        TRADES                          PROFIT   FACTOR                  NET   PROFIT
+
+
+$0.41                              2,991,516                       1.01                             $1.21M
+1-MIN HOLD, GROSS                  ONE PER SIGNAL CANDLE           ALL TRADES                       GROSS, 9.1 YEARS
+
+
+The control experiment: buy after every green one-minute            This number is the yardstick for everything that follows. Any
+candle, sell short after every red one, hold exactly one            order-flow feature claiming to carry information must beat it
+candle. Across almost three million bets there is a real,           under the identical bet: same instrument, same horizon, same
+measurable momentum effect at the one-minute scale, worth           fill convention. The comparison is the study.
+41 cents per contract per trade.
+
+Two properties matter. First, the magnitude: 41 cents is                Following the candle is not zero. It is 41 cents:
+roughly one fiftieth of a tick's dollar value beyond breakeven,         statistically real, economically nothing. The
+an edge that exists and is completely unharvestable, since              question is what the tape adds on top.
+round-trip friction is about 35 times larger. Second, the               SECTION    CONCLUSION
+shape: the effect was absent through the low-volatility 2017
+to 2019 era, where the strategy bled for roughly the first
+700,000 trades, and only emerged afterward. Candle
+momentum is regime-dependent even before costs.
+
+
+
+
+THE   INSTITUTIONAL      PROTOCOL                            THEINSTITUTIONALPROTOCOL.COM                                  @MATFINOG
+                                                                                                                  04
+THE   INSTITUTIONAL         PROTOCOL                                                                         04   /   THE    BIG   TRADE
+
+
+
+
+//    THE     FIRST      RESULT
+
+
+
+THE BIG TRADE.
+AVG   TRADE                        VS   BASELINE                    TRADES                              PROFIT     FACTOR
+
+
+$1.88                              4.6x                             6,780                               1.03
+WHALE ≥100, 1-MIN HOLD             IDENTICAL BET LENGTH             ~3 SIGNALS / DAY                    GROSS
+
+
+The core test. Take the identical one-minute bet, but only on
+minutes whose largest print reached 100 contracts, and take             //   READ      ON   THE   MECHANISM
+it in the direction of that print: long after a large aggressive
+                                                                        A 100-lot market order is not retail. Prints of that size are
+buy, short after a large aggressive sell.
+                                                                        overwhelmingly institutional executions, and the aggressor
+Per bet of identical length, the whale carries 4.6 times the            flag on MBO data tells us which side initiated. The
+information of the candle. And the comparison is                        hypothesis under test is simply that informed size leaves a
+                                                                        wake: that the market does not instantly and fully price
+conservative: the whale's first minute turns out to be its
+                                                                        what the print reveals. The 4.6 multiple says it does not.
+weakest, as the next section shows.
+
+Note what the hit rate does: nothing. Percent profitable sits
+between 48.7% and 50.9% across every configuration in this
+study. The edge is not "being right more often". It is winners           Same market, same decade, same one-minute
+running slightly further than losers over the same fixed                 bet. The candle: 41 cents. The whale: a dollar
+horizon: payoff asymmetry, the signature of genuine                      eighty-eight.
+directional information rather than of a lucky win-rate pocket.          SECTION       CONCLUSION
+
+
+
+
+THE   INSTITUTIONAL       PROTOCOL                            THEINSTITUTIONALPROTOCOL.COM                                   @MATFINOG
+                                                                                                           05
+THE   INSTITUTIONAL          PROTOCOL                                                                          05   /   HORIZON
+
+
+
+
+//    HOW   LONG       THE    INFORMATION        LASTS
+
+
+
+HORIZON.
+
+
+
+
+FIG. 3 · AVG GROSS PROFIT PER TRADE BY HOLDING PERIOD, PRINTS ≥100 LOTS. ORANGE BARS CLEAR THE ~$14
+FRICTION LINE
+
+
+Holding the whale bet from 1 to 30 minutes maps the life of       Two disciplined readings. The tradable claim is the plateau,
+the information. The edge builds slowly through the first eight   not the peak: ten consecutive holding periods clear
+minutes, steps up near minute nine, and forms a robust            estimated round-trip costs, which is the difference between
+plateau from 13 to 23 minutes at $15.47 to $25.32 per trade,      structure and a lucky parameter. And the market takes a
+peaking at $25.32 at minute 19. Past minute 23 it decays,         quarter of an hour to absorb a block trade, which contradicts
+reaching $9.58 by minute 30: the market has finished              the scalper's assumption that order-flow information lives
+digesting the print.                                              and dies in seconds.
+
+
+                                                                      The edge needs time to breathe. It is smaller
+                                                                      than the spread at one minute, and larger than
+                                                                      the spread for every holding period from 13 to
+                                                                      23.
+                                                                      SECTION    CONCLUSION
+
+
+
+
+THE   INSTITUTIONAL      PROTOCOL                         THEINSTITUTIONALPROTOCOL.COM                              @MATFINOG
+                                                                                                                06
+THE   INSTITUTIONAL        PROTOCOL                                                                              06   /   THRESHOLD
+
+
+
+
+//    WHICH     SIZE      CARRIES       THE     EDGE
+
+
+
+THE THRESHOLD STUDY.
+
+
+
+
+FIG. 4 · AVG GROSS PROFIT PER TRADE BY MINIMUM PRINT SIZE, THREE HOLDING PERIODS, SWEEP 10 TO 300
+CONTRACTS
+
+
+Information onset is near 50 to 60 lots. Below that, nothing:       Above roughly 200 contracts the edge dies, and at some
+thresholds of 10 to 40 contracts average $0.28 to $0.80 at          horizons inverts: at 5-minute holds, thresholds of 210 to 300
+every horizon, statistically indistinguishable from the candle      average between minus $7 and minus $34 per trade. Sample
+baseline. A "biggest print" of 20 lots is just the bar talking.     sizes out there are small (under 1,300 trades), so the
+                                                                    inversion is suggestive rather than proven, but the loss of
+The working band is roughly 70 to 190 contracts. Through
+                                                                    positive edge is consistent across all three horizons. The
+this zone both the per-trade edge and the hit rate rise with
+                                                                    reading: the mega-print is a different animal. Negotiated
+size: at 15-minute holds, $10.82 at 70 lots, $21.34 at 90,
+                                                                    blocks, stop cascades and climactic prints reprice the market
+peaking at $25.05 at 170, while percent profitable climbs from
+                                                                    instantly, then partially revert. Size is information up to a
+45% to almost 53%. A clean dose-response relationship:
+                                                                    point. Past it, size is exhaustion.
+more size, more information.
+                                                                    A note on discipline: this study's headline threshold of 100
+                                                                    contracts sits inside the band but below its optimum at every
+                                                                    horizon. It was fixed before this sweep was run, and it stays
+                                                                    fixed. Selecting the sweep's peak after seeing it would be
+                                                                    curve-fitting, which is the failure mode this document exists
+                                                                    to model against.
+
+
+
+
+THE   INSTITUTIONAL       PROTOCOL                           THEINSTITUTIONALPROTOCOL.COM                                 @MATFINOG
+                                                                                                                 07
+THE   INSTITUTIONAL            PROTOCOL                                                                           07   /    SESSIONS
+
+
+
+
+//    CASH       HOURS     VS    THE   OVERNIGHT
+
+
+
+SESSIONS.
+RTH   SHARE      OF   PRINTS        RTH   AVG,   1-MIN              RTH   AVG,   15-MIN               OVERNIGHT      AVG,    1-MIN
+
+
+79%                                 $4.16                           $24.31                            −$6.65
+5,348 OF 6,780                      VS $1.88 FULL SESSION           PF 1.11                           DERIVED BY SUBTRACTION
+
+
+Restricting entries to 09:30 to 16:00 Eastern concentrates the       The interpretation is one of the cleanest in the study.
+signal twice over. First, mechanically: 79% of all 100-lot           Overnight, a 100-lot print is proportionally enormous against
+prints occur inside the 6.5 cash hours. Second, qualitatively:       the thin tape, yet it predicts nothing. That is consistent with
+the per-trade edge more than doubles at the one-minute               mechanical flow: rolls, spread legs, forced hedging. Informed
+horizon, and the one-minute RTH equity curve carries a               size trades when it can hide inside volume, and that is the
+drawdown of only $7,215 against $22,250 of profit.                   cash session. The whale edge is a cash-hours phenomenon,
+                                                                     entirely.
+The overnight residual, derived by subtracting the RTH run
+from the full-session run, is slightly negative at both horizons:
+about minus $6.65 per trade at one minute and minus $2.20                 Overnight, the biggest print in the minute is
+at fifteen.                                                               usually plumbing. In cash hours, it is usually a
+                                                                          decision.
+                                                                          SECTION   CONCLUSION
+
+
+
+
+THE   INSTITUTIONAL        PROTOCOL                          THEINSTITUTIONALPROTOCOL.COM                                  @MATFINOG
+                                                                                                                  08
+THE    INSTITUTIONAL       PROTOCOL                                                                                 08    /   LOCATION
+
+
+
+
+//     WHERE    INSIDE       THE    CANDLE
+
+
+
+WICK OR BODY.
+BODY   PRINT,    1-MIN             BODY   PRINT,     15-MIN         WICK    PRINT,   1-MIN             WICK      PRINT,   15-MIN
+
+
+−$0.14                             $8.05                            $4.31                              $34.13
+3,705 TRADES                       BELOW FRICTION                   3,075 TRADES                       PF 1.16
+
+
+Every whale print falls either inside the candle's body or
+inside one of its wicks. The two subsets partition the 6,780            //    MECHANISM
+whale trades exactly, and they could not behave more
+                                                                        A large buy printed in the lower wick is size absorbing a
+differently.
+                                                                        flush at the extreme: the whale was filled at the low and
+The body print is dead: minus 14 cents at one minute, a                 the bar closed away from it. That is the signature of
+statistical zero across 3,705 trades, and only $8.05 even at            informed execution at favorable prices, sweeping liquidity
+                                                                        where it pooled. The body print, by contrast, is size paying
+fifteen minutes. The wick print carries everything: $4.31 at
+                                                                        market impact mid-range, chasing. Where the whale chose
+one minute and $34.13 at fifteen, with a profit factor of 1.16,
+                                                                        to execute tells you what kind of whale it was.
+the strongest fifteen-minute figure in this study.
+
+A popular retail hypothesis holds the opposite: that a print
+inside the wick is "rejection" to be faded, while a print inside
+the body is "acceptance" confirming direction. The data                    Location beats size refinement: at the same 100-
+inverts it. Follow the wick whale; ignore the body whale.                  lot threshold, the wick subset quadruples the
+                                                                           pooled fifteen-minute edge of the body subset.
+                                                                           SECTION   CONCLUSION
+
+
+
+
+THE    INSTITUTIONAL      PROTOCOL                            THEINSTITUTIONALPROTOCOL.COM                                    @MATFINOG
+                                                                                                                   09
+THE   INSTITUTIONAL        PROTOCOL                                                                                   09   /   THE     BOOK
+
+
+
+
+//    THE   CONTEXT        THE    PRINT      ARRIVES          INTO
+
+
+
+THE RESTING BOOK.
+Level 3 data lets us do one more thing no candle can: read
+the resting order book the whale traded into. For every whale
+minute we compute the depth imbalance across the top 50
+price levels per side, and classify the book as aligned
+(leaning the print's way, imbalance beyond 10%), opposed
+(leaning against it), or balanced (inside 10%).
+
+WHALE INTO//.               AVG / TRADE (1-MIN)             TRADES
+
+
+Aligned book                                    −$4.34         783
+
+Opposing book                                 −$11.21        1,170
+
+Balanced book                                   +$6.47       4,557
+
+
+The whale predicts only when the book is balanced. Into a
+leaning book, in either direction, the print's predictive power
+disappears; the opposed case, size slamming into a wall of
+resting orders that absorbs it, reads like classic failed
+aggression. The balanced-book subset is the study's best-
+                                                                     FIG. 5 · BALANCED-BOOK WHALE, HOLDING PERIOD
+behaved signal: profit factor 1.11 at one minute with a $7,440
+                                                                     SWEEP 1 TO 30 MINUTES. THE EDGE CLEARS COSTS FROM
+drawdown, and a holding-period sweep that clears the $14             MINUTE 9 ONWARD
+friction line continuously from minute 9 through minute 30,
+peaking at $34.97 at minute 19, with no decay back below                //   DISCLOSURE
+costs inside the tested range.
+                                                                        The wick filter and the balanced-book filter were both
+                                                                        discovered inside this sample, through this test sequence.
+                                                                        They are reported as findings, and the final configuration
+                                                                        that uses one of them should be read with that in mind.
+                                                                        They likely describe the same phenomenon from two
+                                                                        angles: the informative whale is the one executing at an
+                                                                        extreme, into a book that had not tipped its hand. Stacking
+                                                                        both filters is deliberately left as future work rather than
+                                                                        mined here.
+
+
+
+
+THE   INSTITUTIONAL       PROTOCOL                            THEINSTITUTIONALPROTOCOL.COM                                     @MATFINOG
+                                                                                                                   10
+THE     INSTITUTIONAL       PROTOCOL                                                                      10   /   FINAL   CONFIG
+
+
+
+
+//      EVERYTHING        THE     STUDY        LEARNED,        IN     ONE    SIGNAL
+
+
+
+THE FINAL CONFIGURATION.
+      //     SPECIFICATION
+
+
+      Signal                     Whale into balanced book
+
+      Print threshold                          ≥ 100 contracts
+
+      Book filter       |imbalance| < 10%, top 50 levels
+
+      Session                           RTH, 09:30–16:00 ET
+
+      Hold                                15 minutes, fixed
+
+      Direction                                 With the print
+
+      Size                     1 contract, no compounding
+
+      Stops / targets                 None. Time exit only
+
+
+
+
+AVG     TRADE                       TRADES
+
+
+$26.85                              3,171
+GROSS                               1,655 L / 1,516 S
+
+                                                                            FIG. 6 · EQUITY CURVE AND SUMMARY, 3,171 TRADES
+PROFIT        FACTOR                MAX   DD
+
+
+1.13                                $16,530
+NET PROFIT $85,145                  CLOSE TO CLOSE
+
+
+About 1.4 signals per trading day. Long and short contribute almost
+identically ($26.18 long, $27.58 short), which matters: the edge is
+not borrowed from the index's decade-long drift.
+
+
+
+
+             FIG. 7 · DETAILED EQUITY, $100K INITIAL, MAY 2017 TO JUL 2026. THE CURVE EARNS ITS SLOPE
+             ACROSS REGIMES, WITH THE STRONGEST STRETCH IN THE HIGH-VOLATILITY YEARS
+
+
+THE     INSTITUTIONAL      PROTOCOL                            THEINSTITUTIONALPROTOCOL.COM                           @MATFINOG
+                                                                                                               11
+THE   INSTITUTIONAL        PROTOCOL                                                                 11   /   DISTRIBUTION
+
+
+
+
+//    PER-TRADE        GEOMETRY
+
+
+
+DISTRIBUTION & EXCURSION.
+
+
+
+
+FIG. 8 · TOTAL TRADE ANALYSIS. WIN RATE 50.87%, AVG WIN $468 AGAINST AVG LOSS $436, LARGEST WIN $14,765
+AGAINST LARGEST LOSS $4,285
+
+
+The geometry is the healthy kind. A coin-flip hit rate
+(50.87%) paired with a payoff ratio of 1.07 and a right tail
+three times longer than the left: the largest winner is $14,765
+against a largest loser of $4,285, and the outlier population
+as a whole contributes positively (+$11,410 across 336
+outliers). No single trade carries the P&L; the edge is diffuse,
+which is what a structural effect should look like.
+
+Adverse excursion. The average trade endures a maximum
+adverse excursion of about $442 on its way to an average
+result of $27, and the worst single excursion is $5,200. That
+is the empirical case for the no-stop design: a stop tight
+                                                                      FIG. 9 · THE LOSS TAIL. LOSSES CLUSTER SHALLOW;
+enough to be felt would be hit inside the noise band of a             RED OUTLIERS THIN OUT SMOOTHLY TOWARD THE −$4K
+typical winner and would convert edge into churn. Risk here           WORST CASE, WITH NO CLIFF
+
+is managed by the horizon and by size, not by a stop placed
+inside the excursion cloud.
+
+
+
+
+THE   INSTITUTIONAL      PROTOCOL                              THEINSTITUTIONALPROTOCOL.COM                     @MATFINOG
+                                                                                                                      12
+THE   INSTITUTIONAL        PROTOCOL                                                                       12   /   STRESS     &   COSTS
+
+
+
+
+//    STRESS,       SIGNIFICANCE,             COSTS
+
+
+
+SHUFFLES, SIGNIFICANCE, COSTS.
+
+
+
+
+FIG. 10 · 1,000 SHUFFLED TRADE SEQUENCES. REALISED DRAWDOWN $16,530 SITS NEAR THE BOTTOM OF THE
+SHUFFLED RANGE ($14,080 TO $57,145)
+
+
+
+
+// Path vs set                                                      // Cost overlay
+Shuffling the 3,171 trades a thousand times and re-walking
+                                                                    Round-trip friction assumption                        $14 / trade
+the equity curve asks whether the realised drawdown was
+luck of the ordering. It partly was: the base curve's $16,530       Total drag, 3,171 trades                                      $44,394
+sits near the friendly end of the shuffled range, whose worst
+                                                                    Net profit after friction                                     $40,751
+ordering reaches $57,145. A deployer should budget for the
+tail of that distribution, not for the realised number. Terminal    Avg trade after friction                                      $12.85
+profit is invariant by construction; the path is not.
+                                                                    Profit factor after friction                                   ~1.06
+
+// Significance
+                                                                    Friction modelled as commission plus one tick of slippage per side,
+With a per-trade standard deviation of $745.20 across 3,171         applied analytically to every trade. The configuration survives
+trades, the $26.85 mean carries a t-statistic near 2.0:             costs with roughly half its gross edge intact. It survives because of
+significant at conventional levels, and honestly reported as        the fifteen-minute horizon: the identical signal harvested at one
+no stronger than that. Because the configuration's filters          minute would hand the entire edge to the spread.
+were found in this same sample, the true out-of-sample
+expectancy is plausibly lower. Walk-forward confirmation is             The information is real at every horizon. The
+listed as the first next check.                                         edge, net of the spread, exists only where the
+                                                                        study said it would: where the signal is given
+                                                                        time.
+                                                                        SECTION       CONCLUSION
+
+
+
+
+THE   INSTITUTIONAL       PROTOCOL                           THEINSTITUTIONALPROTOCOL.COM                                  @MATFINOG
+                                                                                                                       13
+THE   INSTITUTIONAL        PROTOCOL                                                                                    13   /   VERDICT
+
+
+
+
+//    WHAT      THE   EVIDENCE        SUPPORTS
+
+
+
+VERDICT.
+     INFORMATION      CONFIRMED              EDGE    SURVIVES    COSTS     AT   15   MIN             T   ≈   2.0
+
+
+
+
+// What the evidence shows                                         // Statement of limitations
+Large trades predict. 4.6 times the candle's information per       Not financial advice. This document is a statistical study prepared
+identical bet, built on payoff asymmetry rather than hit rate,     for the members of The Institutional Protocol and does not constitute
+expressed over 15 to 20 minutes.                                   an offer, solicitation, or recommendation to trade any instrument. All
+                                                                   headline results are gross of costs except where a cost overlay is
+The edge has structure. It lives in prints of 70 to 190            explicitly stated; the overlay is analytic, not a re-execution. The wick
+contracts, in cash hours, in wick executions, in balanced          and balanced-book filters were identified within the studied sample;
+books. Each slice was measured, not assumed, and the               out-of-sample performance may be materially lower. Fixed-horizon
+                                                                   results assume market-order fills at the next one-minute open on a
+slices agree with one economic story: the informative whale
+                                                                   per-contract basis; capacity, latency and queue effects at real size
+is the one the market did not see coming.
+                                                                   are untested. Shuffled-sequence analysis assumes exchangeable
+The final configuration clears costs across a wide holding-        trades; volatility clustering may understate tail drawdowns. The
+                                                                   sample begins where CME MBO history begins (May 2017) and
+period band, with a drawdown profile that survives 1,000
+                                                                   covers a single instrument. Every figure is reproduced from
+reorderings of its own trades.
+                                                                   MultiCharts or from the study's own render pipeline.
+
+// Next checks before capital
+                                                                       One dataset, one measurement, nine tests. The
+Walk-forward on rolling windows; split-half stability of the
+                                                                       candle is the shadow. The tape is the object
+balanced-book filter; slippage stress at two ticks per side;
+                                                                       casting it.
+regime decomposition by volatility bucket; and live paper
+                                                                       CLOSING       COMMENTARY
+confirmation that fills at the next-bar open are achievable at
+signal times.
+
+
+
+
+THE   INSTITUTIONAL      PROTOCOL                           THEINSTITUTIONALPROTOCOL.COM                                     @MATFINOG
+THE     INSTITUTIONAL         PROTOCOL                                                                        APPENDIX       A   /   SOURCE
+
+
+
+
+//     APPENDIX       A   ·    FULL    SOURCE,        PAGE     1   OF    2
+
+
+THE CODE.
+The complete PowerLanguage signal behind every table and chart in this paper. Copy it into your MultiCharts editor and run it against The
+Bridge, shared inside the extra classes of The Institutional Protocol. Each TestMode reproduces one section of this study.
+
+
+      // ============================================================================
+      // OFB_BigTradeStudy_SIG - master signal behind every test in this paper.
+      // Fixed-length exits: every trade is exactly HoldBars bars, re-entry allowed.
+      //
+      //   TestMode 1 = candle only (baseline)
+      //   TestMode 2 = whale only (biggest print /= MinSize)
+      //   TestMode 3 = book imbalance only (|imb| /= Threshold)
+      //   TestMode 4 = whale AGAINST candle
+      //   TestMode 5 = whale into ALIGNED book      (print dir = book lean)
+      //   TestMode 6 = whale into OPPOSING book     (print dir /> book lean)
+      //   TestMode 7 = whale into FLAT book         (|imb| < Threshold)
+      //   TestMode 8 = whale printed in candle BODY
+      //   TestMode 9 = whale printed in candle WICK
+      //
+      // Requires the OFB function library compiled (ships with The Bridge).
+      // ============================================================================
+      inputs:
+          TestMode( 7 ),
+          MinSize( 100 ),        // whale threshold, contracts
+          Levels( 50 ),          // book depth per side: 5 | 10 | 20 | 50
+          Threshold( 10 ),       // book imbalance % trigger
+          HoldBars( 15 ),
+          UseRTH( true ),        // true = entries only StartTime-EndTime
+          StartTime( 930 ),
+          EndTime( 1600 ),
+          Qty( 1 );
+
+      variables:
+          Blk( 0 ), Sz( 0 ), PrintDir( 0 ), Px( 0 ),
+          BodyHi( 0 ), BodyLo( 0 ), InBody( false ),
+          BidSz( 0 ), AskSz( 0 ), Imb( 0 ), LiqDir( 0 ),
+          ColorDir( 0 ), Dir( 0 );
+
+      // ---- features --------------------------------------------------------------
+      Blk = OFB_BigTrade;
+      Sz = AbsValue( Blk );
+      PrintDir = 0;
+      if Sz /= MinSize then begin
+           if Blk > 0 then PrintDir = 1 else PrintDir = -1;
+      end;
+
+      Px = OFB_BigTradePx;
+      BodyHi = MaxList( Open, Close );
+      BodyLo = MinList( Open, Close );
+      InBody = Px /= BodyLo and Px /= BodyHi;
+
+      BidSz = OFB_BidDepth( Levels );
+      AskSz = OFB_AskDepth( Levels );
+      Imb = 0;
+      if BidSz + AskSz > 0 then
+          Imb = ( BidSz - AskSz ) / ( BidSz + AskSz ) * 100;
+      LiqDir = 0;
+
+
+
+
+THE    INSTITUTIONAL      PROTOCOL                            THEINSTITUTIONALPROTOCOL.COM                                       @MATFINOG
+THE     INSTITUTIONAL           PROTOCOL                                                                         APPENDIX      B   /   SOURCE
+
+
+
+
+//     APPENDIX         B   ·    FULL    SOURCE,        PAGE      2   OF   2
+
+
+      if Imb /= Threshold then LiqDir = 1;
+      if Imb /= -Threshold then LiqDir = -1;
+
+      ColorDir = 0;
+      if Close > Open then ColorDir = 1;
+      if Close < Open then ColorDir = -1;
+
+      // ---- desired position, reset every bar -------------------------------------
+      Dir = 0;
+      if TestMode = 1 and ColorDir /> 0 then Dir = ColorDir;
+      if TestMode = 2 and PrintDir /> 0 then Dir = PrintDir;
+      if TestMode = 3 and LiqDir /> 0 then Dir = LiqDir;
+      if TestMode = 4 and PrintDir /> 0 and ColorDir /> 0
+         and PrintDir /> ColorDir then Dir = PrintDir;
+      if TestMode = 5 and PrintDir /> 0 and PrintDir = LiqDir then Dir = PrintDir;
+      if TestMode = 6 and PrintDir /> 0 and LiqDir /> 0
+         and PrintDir /> LiqDir then Dir = PrintDir;
+      if TestMode = 7 and PrintDir /> 0 and LiqDir = 0 then Dir = PrintDir;
+      if TestMode = 8 and PrintDir /> 0 and Px > 0 and InBody then Dir = PrintDir;
+      if TestMode = 9 and PrintDir /> 0 and Px > 0 and InBody = false then
+          Dir = PrintDir;
+
+      if UseRTH and ( Time < StartTime or Time /= EndTime ) then
+          Dir = 0;
+
+      // ---- orders ----------------------------------------------------------------
+      if Dir = 1 then
+          Buy ( "StudyLE" ) Qty contracts next bar at market;
+      if Dir = -1 then
+          SellShort ( "StudySE" ) Qty contracts next bar at market;
+
+      // ---- fixed-length time exit ------------------------------------------------
+      if MarketPosition = 1 and BarsSinceEntry /= HoldBars - 1 then
+          Sell ( "TimeX.L" ) next bar at market;
+      if MarketPosition = -1 and BarsSinceEntry /= HoldBars - 1 then
+          BuyToCover ( "TimeX.S" ) next bar at market;
+
+
+
+
+      //   HOW   TO   RUN   IT
+
+      Requires MultiCharts 64-bit and The Bridge with the OFB function library compiled (both provided, with setup instructions, inside
+      the extra classes of The Institutional Protocol). Chart the Bridge-exported NQ series at 1 minute, apply the signal, set commission
+      and slippage to zero for the gross tests, and select the TestMode for the section you want to reproduce. Optimize HoldBars or
+      MinSize to reproduce the sweeps. Access to The Bridge is available exclusively through an Institutional Protocol license, as a
+      member of The Institutional Protocol.
+
+
+
+
+THE    INSTITUTIONAL        PROTOCOL                            THEINSTITUTIONALPROTOCOL.COM                                       @MATFINOG
+THE   INSTITUTIONAL     PROTOCOL                                                                        MEMBERS
+
+
+
+
+//    A   NOTE   TO   MEMBERS
+
+
+
+
+THE BRIDGE.
+Every test in this paper ran on official CME Level 3 data: the order-by-order record that, until
+today, only institutional desks could realistically buy, store, rebuild and research. The Bridge
+changes that. It reconstructs the full order book, distills it into features you can read in plain
+PowerLanguage, and serves the same engine to your backtests and your live charts, so what
+you research is what you run. Years of testing on complex microstructure data, with no coding
+experience required. For retail, this simply was not possible until now.
+
+Congratulations to all the members of The Institutional Protocol, who have access to the
+complete set of order-flow features derived from MBO / Level 3 data: large trades, tape-exact
+VWAP and value areas, resting-book depth and imbalance, iceberg detection and more, ready to
+be used to develop, test and automate your own trading strategies.
+
+The Bridge is available exclusively with an Institutional Protocol license, inside the extra classes
+of the program.
+
+
+
+
+      THEINSTITUTIONALPROTOCOL.COM
+
+
+
+
+PROCESS     >   PREDICTION   ·   @MATFINOG
+
+
+
+
+THE   INSTITUTIONAL    PROTOCOL                     THEINSTITUTIONALPROTOCOL.COM                       @MATFINOG
+

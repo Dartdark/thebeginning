@@ -1,0 +1,27 @@
+{
+  "status": "PASS self-audit",
+  "independent_review": false,
+  "independent_Claude_review": "pending",
+  "direct_sigma_VWAP_checks": 2369,
+  "source_trades": 8426,
+  "personal": [
+    {
+      "model": "v2_raw",
+      "daily_reconciles": true,
+      "summary_rows": 42
+    },
+    {
+      "model": "v1_raw",
+      "daily_reconciles": true,
+      "summary_rows": 42
+    }
+  ],
+  "funded_rows": 180,
+  "evaluation_rows": 180,
+  "production_parity": 360,
+  "synthetic_parity": 100,
+  "statistics_rows": 450,
+  "new_variants": 0,
+  "new_history_draws": 0,
+  "limits": "Own maker checking alternate arithmetic and reused original simulators; not a blind checker or platform parity."
+}

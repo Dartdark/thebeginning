@@ -1,0 +1,164 @@
+{
+  "model_equality": {
+    "INNOV15__INNOV15": {
+      "exact_event_side_equality": true,
+      "intersection": 9201,
+      "first": 9201,
+      "second": 9201
+    },
+    "INNOV15__INNOV20": {
+      "exact_event_side_equality": false,
+      "intersection": 3066,
+      "first": 9201,
+      "second": 3066
+    },
+    "INNOV15__BASE5": {
+      "exact_event_side_equality": false,
+      "intersection": 9201,
+      "first": 9201,
+      "second": 69711
+    },
+    "INNOV15__RAW5": {
+      "exact_event_side_equality": false,
+      "intersection": 8865,
+      "first": 9201,
+      "second": 9183
+    },
+    "INNOV15__CHANGE5": {
+      "exact_event_side_equality": false,
+      "intersection": 4087,
+      "first": 9201,
+      "second": 9169
+    },
+    "INNOV20__INNOV15": {
+      "exact_event_side_equality": false,
+      "intersection": 3066,
+      "first": 3066,
+      "second": 9201
+    },
+    "INNOV20__INNOV20": {
+      "exact_event_side_equality": true,
+      "intersection": 3066,
+      "first": 3066,
+      "second": 3066
+    },
+    "INNOV20__BASE5": {
+      "exact_event_side_equality": false,
+      "intersection": 3066,
+      "first": 3066,
+      "second": 69711
+    },
+    "INNOV20__RAW5": {
+      "exact_event_side_equality": false,
+      "intersection": 3066,
+      "first": 3066,
+      "second": 9183
+    },
+    "INNOV20__CHANGE5": {
+      "exact_event_side_equality": false,
+      "intersection": 1862,
+      "first": 3066,
+      "second": 9169
+    },
+    "BASE5__INNOV15": {
+      "exact_event_side_equality": false,
+      "intersection": 9201,
+      "first": 69711,
+      "second": 9201
+    },
+    "BASE5__INNOV20": {
+      "exact_event_side_equality": false,
+      "intersection": 3066,
+      "first": 69711,
+      "second": 3066
+    },
+    "BASE5__BASE5": {
+      "exact_event_side_equality": true,
+      "intersection": 69711,
+      "first": 69711,
+      "second": 69711
+    },
+    "BASE5__RAW5": {
+      "exact_event_side_equality": false,
+      "intersection": 9183,
+      "first": 69711,
+      "second": 9183
+    },
+    "BASE5__CHANGE5": {
+      "exact_event_side_equality": false,
+      "intersection": 8921,
+      "first": 69711,
+      "second": 9169
+    },
+    "RAW5__INNOV15": {
+      "exact_event_side_equality": false,
+      "intersection": 8865,
+      "first": 9183,
+      "second": 9201
+    },
+    "RAW5__INNOV20": {
+      "exact_event_side_equality": false,
+      "intersection": 3066,
+      "first": 9183,
+      "second": 3066
+    },
+    "RAW5__BASE5": {
+      "exact_event_side_equality": false,
+      "intersection": 9183,
+      "first": 9183,
+      "second": 69711
+    },
+    "RAW5__RAW5": {
+      "exact_event_side_equality": true,
+      "intersection": 9183,
+      "first": 9183,
+      "second": 9183
+    },
+    "RAW5__CHANGE5": {
+      "exact_event_side_equality": false,
+      "intersection": 3950,
+      "first": 9183,
+      "second": 9169
+    },
+    "CHANGE5__INNOV15": {
+      "exact_event_side_equality": false,
+      "intersection": 4087,
+      "first": 9169,
+      "second": 9201
+    },
+    "CHANGE5__INNOV20": {
+      "exact_event_side_equality": false,
+      "intersection": 1862,
+      "first": 9169,
+      "second": 3066
+    },
+    "CHANGE5__BASE5": {
+      "exact_event_side_equality": false,
+      "intersection": 8921,
+      "first": 9169,
+      "second": 69711
+    },
+    "CHANGE5__RAW5": {
+      "exact_event_side_equality": false,
+      "intersection": 3950,
+      "first": 9169,
+      "second": 9183
+    },
+    "CHANGE5__CHANGE5": {
+      "exact_event_side_equality": true,
+      "intersection": 9169,
+      "first": 9169,
+      "second": 9169
+    }
+  },
+  "equality_is_not_algebraic_unique_rule_proof": true,
+  "fitted_dates": 1234,
+  "clipped_fits": 0,
+  "near_zero_fits": 796,
+  "near_difference_fits": 0,
+  "near_difference_boundary": "on projected domain b<=.95, abs(b-1)<=.05 iff b>=.95; avoid floating subtraction",
+  "eligible_current_vs_residual_side_disagreements": 1461,
+  "side_basis": "q_side=-sign(current q);residual_side=-sign(innovation);both are fade sides",
+  "eligible_events": 69711,
+  "input_price_direction_never_determines_side": true
+}

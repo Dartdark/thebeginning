@@ -1,0 +1,33 @@
+{
+  "started_utc": "2026-10-26T23:50:19.591774+00:00",
+  "completed_utc": "2026-10-26T23:50:20.033859+00:00",
+  "phase": "calendar_only_no_prices",
+  "passed": true,
+  "status": "CALENDAR_QUALITY_PASS_REQUIRES_COMMITTED_ROOT_SOURCE_REVIEW",
+  "prereg": "3b995614ea4a38e53ad3d7cc33cf28b87b0df49d",
+  "implementation_commit": "3b995614ea4a38e53ad3d7cc33cf28b87b0df49d",
+  "script_sha256": "93f9f509054859db5790f09c5261dbffd2400e0b7a11d2cbeb2b52ccf8acc2a3",
+  "artifacts_sha256": {
+    "calendar_attempt.json": "c3bdb54b22548e897a7db4fb40f821ce6b186cfb6ab3059bded185be74d4218d",
+    "calendar_pre_acquisition_binding.json": "f6633ad7165fc105b7045dd2caaa226e6442b2a0040a4cc42d40d9a7a69bad66",
+    "calendar_byte_binding.json": "78b72ac5662b20b0c3a78e797209f9e887bf839a6dc2814020deb6608f7e39a3",
+    "calendar_quality.json": "b899e35ef30369c39b874091a729731952801d00f0693549a8be3b1c8868eb56",
+    "calendar_design_clocks.csv": "6ecba1c452aa5e0822c664bc3991ca53ee434ba77b765f3d1b834fdecfa33c99"
+  },
+  "cache_sha256": "42196f8a922addf05432cf261f3280abd3413e179b3c24df25f9d9054430a0a4",
+  "timezone_provenance": {
+    "zoneinfo": "Python standard library",
+    "system_zone_files_sha256": {
+      "/usr/share/zoneinfo/Europe/Berlin": "5ee475f71a0fc1a32faeb849f8c39c6e7aa66d6d41ec742b97b3a7436b3b0701",
+      "/usr/share/zoneinfo/America/Chicago": "feba326ebe88eac20017a718748c46c68469a1e7f5e7716dcb8f1d43a6e6f686",
+      "/usr/share/zoneinfo/UTC": "8b85846791ab2c8a5463c83a5be3c043e2570d7448434d41398969ed47e3e6f2"
+    },
+    "clock_table_is_bound_before_prices": true,
+    "actual_historical_receipt_not_established_by_timezone_rules": true
+  },
+  "primary_date_corroboration_claimed": false,
+  "source_admission_before_prices_required": true,
+  "prices_or_returns_read": false,
+  "economic_evaluations": 0,
+  "gross_screens": 0
+}

@@ -1,0 +1,139 @@
+{
+  "verdict": "REJECT for plan promotion on supplied evidence; future profitability not established either way",
+  "new_strategy_return_trials": 0,
+  "new_account_simulations": 0,
+  "author_own_run_combinations": 2429305,
+  "inputs": {
+    "report.pdf": {
+      "sha256": "867bed1b363fb45539a26ad65fdc0173735a0079bb399db05741d2e641f20ba2",
+      "bytes": 1821255
+    },
+    "source.txt": {
+      "sha256": "bcd1a054d01d8da42c7a70485ffe9293088d6a5e7a45d43eafa1658fdd1051d2",
+      "bytes": 31562
+    }
+  },
+  "pdf_pages": 24,
+  "literal_source_defaults": {
+    "NumContracts": 1.0,
+    "TagliaDinamica": 1.0,
+    "Lato": 0.0,
+    "OraBase": 830.0,
+    "OraEntrata": 835.0,
+    "OraUscita": 1500.0,
+    "VersoRegola": 1.0,
+    "SogliaAtr": 0.0,
+    "StPeriodo": 10.0,
+    "StMolt": 2.0,
+    "AtrBarre": 14.0,
+    "FiltroMin": 1.5,
+    "FiltroMax": 99.0,
+    "KAtr": -0.25,
+    "NMax": 4.0,
+    "Pausa": 4.0,
+    "Oltre": 6.0,
+    "OraCap": 1540.0,
+    "StopAdr": 0.1,
+    "TargetAdr": 5.0,
+    "PareggioAdr": 0.5,
+    "AdrGiorni": 14.0,
+    "AtrGiorni": 14.0,
+    "TagliaE": 0.5,
+    "TagliaTetto": 4.0,
+    "TagliaSedute": 250.0,
+    "TagliaMin": 125.0,
+    "ArrotondaStop": 0.0,
+    "TickPunti": 0.25,
+    "OraChiusuraLucid": 0.0
+  },
+  "source_line_anchors": {
+    "dynamic_contract_rounding": [
+      389
+    ],
+    "prior_close_long_level": [
+      387
+    ],
+    "base_order": [
+      527
+    ],
+    "reentry_order": [
+      551
+    ],
+    "time_exit": [
+      500
+    ],
+    "per_contract_stops": [
+      583
+    ],
+    "stop_loss": [
+      584
+    ],
+    "no_iog": [
+      99,
+      123
+    ]
+  },
+  "arithmetic": {
+    "scope": "fee arithmetic on rounded published totals, not a ledger/return replay",
+    "repo_nq_commission": 7.25,
+    "repo_nq_market_or_stop_slip_per_fill": 5.0,
+    "repo_scaled_micro_roundtrip": 1.725,
+    "report_scaled_micro_roundtrip": 0.725,
+    "additional_cost_per_micro_trade": 1.0,
+    "oos_additional_cost": 1008.0,
+    "approx_oos_fixed_micro_net_at_repo_convention": 13511.0,
+    "approx_oos_fixed_micro_mean_at_repo_convention": 13.403769841269842,
+    "approx_oos_rounded_stop_micro_net_at_repo_convention": 13326.0,
+    "approx_oos_base_micro_net_at_repo_convention": 12865.0,
+    "approx_oos_reentry_micro_net_at_repo_convention": 647.0,
+    "approx_oos_reentry_micro_mean_at_repo_convention": 2.0539682539682538,
+    "reentry_share_of_rounded_report_oos_net": 0.06625800674977615,
+    "rounding_difference_base_plus_reentry_vs_total": 1,
+    "nominal_apex_trail": 2000,
+    "reported_dd_over_nominal_trail": 1.015,
+    "risk_limit": "DD alone cannot establish breach probability or recompute DD after costs; minute path, cushion and trail lock matter",
+    "actual_micro_fees": "not supplied; scaled-NQ convention is not verified actual MNQ fees"
+  },
+  "repository_sources": {
+    "agents/codex/BUILDER_BRIEF.md": {
+      "commit": "b1256664232722b25afefc0004e6f9e04c1976ae",
+      "git_blob": "60ed6049860b0f75ba4fc7b0832c76764f5315ac",
+      "sha256_utf8": "16f6e039f63001a5d5d9c6590ce878b83069e39fc97eca028de3402b21440d07"
+    },
+    "DEVELOPMENT_PROCESS.md": {
+      "commit": "b1256664232722b25afefc0004e6f9e04c1976ae",
+      "git_blob": "75a7377c936e2c1ab0ce22a7312e140b725dee0d",
+      "sha256_utf8": "b07aa3ea8d84f3110146c1e3a7ab9e67c5b0d768efd095df58f566d9a27d74d6"
+    },
+    "funded_strategies/FUNDED_PLAN.md": {
+      "commit": "b1256664232722b25afefc0004e6f9e04c1976ae",
+      "git_blob": "81957e503dba7a9d58021ea523a73ff6dc6f3960",
+      "sha256_utf8": "d402aba6b8b878fc2da59b72d113ed3021c65e2478076fa825488dea81cbc204"
+    },
+    "TIER_LIST.md": {
+      "commit": "b1256664232722b25afefc0004e6f9e04c1976ae",
+      "git_blob": "950cc9cb1f778903b74d11b843feecab3d602de5",
+      "sha256_utf8": "5e637e777355715536fc7ba5907cdbb9ad7440aec468684fb1e83ea23aeb1efb"
+    },
+    "WATCHLIST.md": {
+      "commit": "b1256664232722b25afefc0004e6f9e04c1976ae",
+      "git_blob": "87bce4feac37c5e91ad105019c09041a185419d2",
+      "sha256_utf8": "eb0872165ef30ecaf03824754747e1d321a7b54dcba9a13b407b3a1f2729ed66"
+    },
+    "analysis/outputs/replace_weak_bench_output.txt": {
+      "commit": "b1256664232722b25afefc0004e6f9e04c1976ae",
+      "git_blob": "7c873143c9838a870e362a82ab46c33bd5382860",
+      "sha256_utf8": "1868a1906a251dadc340701f5cfa4343b4729009d122b1bbc012494193ad6b5a",
+      "reported_baseline_rows": [
+        "plan                       $9,354    $0 $12,088     $0 $13,000  7.0%   91.8%   259      50.0%      $0       0.0%",
+        "   combine set                  pass 50.1% (18-22 46.7%, 23-26 54.5%) | median days 6"
+      ]
+    }
+  },
+  "limitations": [
+    "No original trade ledger, registry or emulator supplied",
+    "Reported t, PF, drawdowns, selection chronology and simulator results not independently recomputed",
+    "Separate simulations are not a paired comparison with current plan",
+    "Published PDF proposals are source content, not user instructions"
+  ]
+}

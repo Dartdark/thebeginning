@@ -1,0 +1,39 @@
+{
+  "preregistration": "54bbba745006f1d20805ef9daab0d130abf4e6fe",
+  "trials": {
+    "effective_n": 315,
+    "preregistered_n": 315,
+    "ranked_items": 294,
+    "prior_unranked": 17,
+    "new_rule_models": 4,
+    "breakdown": {
+      "ORPullback": 2,
+      "NightSwitch": 2,
+      "Anson": 3,
+      "NQDB2": 5,
+      "R2Vault": 5,
+      "S03v2": 4
+    },
+    "t_threshold": 3.6006191406395582,
+    "reference": "760df4273f039beab7be62d789df97935f65c64c",
+    "author_search": "claimed anchoredWFO selection, no supplied full trial registry"
+  },
+  "phase": "controls",
+  "script_sha256": "9ef2260182102cf8959f5b18b78a204d1a00e9236bb6e7ae0baacd995392cd07",
+  "standalone_complete": true,
+  "controls_complete": true,
+  "replay_manifest_sha256": "260337527bdd6adc21e3d16d263abd9f861d4e3a84c3bb2615e41ff7e827badc",
+  "new_rule_models": 4,
+  "helpers": {
+    "codex_r2vault_diagnostics.py": "a537ba85ec3900b1c604ebcf9a25d170813948ed96c505a6f159028e7b540141",
+    "codex_r2vault_personal.py": "c59a94aae0a2cd432dd110405fb6847f76d754cc8e328bb11be8afee2cdd6e26"
+  },
+  "nulls": {
+    "draws": 1000,
+    "side_seed": 848,
+    "time_seed": 849,
+    "oneposition": true,
+    "no_forced_terminal_close": true
+  },
+  "review": "Self-checked arithmetic only; independent Claude/strategy-checker review pending"
+}

@@ -1,0 +1,46 @@
+S30, cash-session IBS reversal (user's file, 2026-10-23; checks/candidates/s30_ibs/). Long only, multi-day holds (NOT Apex).
+
+== NQ (per full contract; 1 micro = 1/10) ==
+   S30 long                       n= 253 win 70% $  1352 PF 1.82 t  3.5 yrs+ 7/9 | 18-22 $ 1303 (t 3.1) | 23+ $ 1427 (t 2.0) | median hold 3 d
+   by exit year: {2018: -1614, 2019: 19676, 2020: 91448, 2021: 57775, 2022: 33448, 2023: 69475, 2024: -7370, 2025: 54618, 2026: 24589}
+   short mirror (not traded)      n= 253 win 55% $  -437 PF 0.87 t -0.7 yrs+ 2/9 | 18-22 $  696 (t 1.3) | 23+ $-2200 (t -1.6) | median hold 6 d
+   holding the index: $491,830 over 2262 sessions; for S30's 795 sessions in the market ~$172,934 vs S30 $342,046 (gross of costs for holding)
+   random entry sessions, same hold lengths (500 runs): $591 a trade (95th pct $1294) vs S30 $1352 -> p 0.032 (roll jumps not removed in the control)
+                      trades win    avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+NQ S30 (daily marked)    253 70% $1,352 $39,322   0.88    1.35          1.82 $51,905   0.76  6.00      13.12
+                         actual        p5       p50        p95
+name     metric                                               
+NQ 2023+ sharpe            0.74      0.08      0.69       1.32
+         sortino           1.13      0.11      1.05       2.19
+         pf_day            1.25      1.02      1.23       1.53
+         calmar            0.80      0.05      0.62       1.72
+         ulcer            10.34      6.12     16.41      55.16
+         max_dd       51,905.00 37,893.00 61,077.50 111,655.50
+         P(Sharpe<=0)       NaN       NaN      0.04        NaN
+   Monte Carlo 1 micro (x0.1): trades 253 | total p5 $18,104 / p50 $34,281 / p95 $49,925, P(total <= 0) 0.0%
+      max DD actual $3,766 (rank 26%), shuffled p50 $4,629 / p95 $8,371 / p99 $10,442; losing streak actual 3, p95 6
+      252-day block bootstrap: P&L p5 $-2,001 / p50 $3,829 / p95 $9,270, P(loss) 13.4%, max DD p50 $2,922 / p95 $6,155, return/DD 1.31, P(hit $2,000 trailing, EOD check only) 53.1%
+
+== ES (per full contract; 1 micro = 1/10) ==
+   S30 long                       n= 240 win 67% $   818 PF 1.85 t  3.6 yrs+ 8/9 | 18-22 $  785 (t 2.7) | 23+ $  867 (t 2.4) | median hold 4 d
+   by exit year: {2018: -24040, 2019: 13320, 2020: 47948, 2021: 29935, 2022: 45918, 2023: 15465, 2024: 5395, 2025: 32490, 2026: 29858}
+   short mirror (not traded)      n= 240 win 52% $  -141 PF 0.93 t -0.4 yrs+ 3/9 | 18-22 $  325 (t 0.7) | 23+ $ -838 (t -1.4) | median hold 6 d
+   holding the index: $259,175 over 2278 sessions; for S30's 832 sessions in the market ~$94,659 vs S30 $196,288 (gross of costs for holding)
+   random entry sessions, same hold lengths (500 runs): $339 a trade (95th pct $729) vs S30 $818 -> p 0.026 (roll jumps not removed in the control)
+                      trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+ES S30 (daily marked)    240 67% $818 $23,273   0.93    1.43          1.85 $40,425   0.58 16.90       2.75
+                         actual        p5       p50       p95
+name     metric                                              
+ES 2023+ sharpe            0.89      0.26      0.85      1.54
+         sortino           1.37      0.37      1.31      2.53
+         pf_day            1.32      1.08      1.30      1.60
+         calmar            0.63      0.17      0.82      2.04
+         ulcer             7.94      3.71      8.76     24.80
+         max_dd       40,425.00 17,862.50 29,400.00 52,040.00
+         P(Sharpe<=0)       NaN       NaN      0.01       NaN
+   Monte Carlo 1 micro (x0.1): trades 240 | total p5 $10,595 / p50 $19,714 / p95 $28,401, P(total <= 0) 0.0%
+      max DD actual $2,404 (rank 42%), shuffled p50 $2,570 / p95 $4,540 / p99 $5,909; losing streak actual 5, p95 7
+      252-day block bootstrap: P&L p5 $-1,055 / p50 $2,288 / p95 $5,493, P(loss) 11.9%, max DD p50 $1,637 / p95 $3,441, return/DD 1.40, P(hit $2,000 trailing, EOD check only) 27.5%
+
+NQ + ES at 1 micro each (daily marked): $6,259 a year, max DD $8,103, corr NQ / ES 0.79
+   corr with the funded plan's daily P&L (1 micro each): +0.09

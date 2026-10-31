@@ -1,0 +1,52 @@
+{
+  "files": {
+    "data/GC_1min_2017.csv": "2052cdeaa921ebd6450e79ab9be72ffb0436302ce6d890d0f9e6895cdeb55d32",
+    "data/GC_1min_2018.csv": "6ace4f1d2c8772beb6939d8263c22a7c36854315388ccc77d3930a0e22ec39e9",
+    "data/GC_1min_2019.csv": "771a307ae8147901e45f6f838b149910474047e2db9c54d0f67535fdccd26555",
+    "data/GC_1min_2020.csv": "0ca1eeaf8119e261325aaf1fd35f7bfbefea86190ed67ad7f9ced325fc5a226f",
+    "data/GC_1min_2021.csv": "ce1d6f1c85d2b8e2b53ac5ce8b29a3552a1c1f4d6f6a78dac375f35e9f18701a",
+    "data/GC_1min_2022.csv": "7a800cd77ec404766288b77c724c07ec08e81ac515cf63d075386738de3a663f"
+  },
+  "observed_minutes": 1792617,
+  "invalid_rows_removed": 0,
+  "duplicate_utc_removed": 0,
+  "first_utc": "2017-12-01 05:01:00+00:00",
+  "last_utc": "2022-12-30 21:59:00+00:00",
+  "source_sha256": "179fe4b717d7fa5b1c9fc93c66a3230ef6d9eb38c0cf6c57296e93d56f7bf098",
+  "params": {
+    "st_period": 24,
+    "st_factor": 4.0,
+    "ema4": 10,
+    "don_period": 85,
+    "atr_stop": 3.0,
+    "trail_atr": 6.5,
+    "exit_on_flip": 0,
+    "l_adx": 10,
+    "s_adx": 15,
+    "s_stop": 4.0,
+    "s_trail": 3.5,
+    "s_tp": 5.0
+  },
+  "checks": {
+    "entry_bar_stop": true,
+    "carried_gap_guard": true,
+    "source_long_trail": true,
+    "source_short_trail": true,
+    "future_prefix_invariance": true
+  },
+  "execution_trials": 2,
+  "parameter_searches": 0,
+  "conditional_side_p": 0.5834165834165834,
+  "gate": {
+    "completed_trades_ge_30": true,
+    "net_t_ge_2": false,
+    "gross_mean_ge_1_5_cost": false,
+    "positive_years_ge_3": false,
+    "delay_net_positive": false,
+    "double_cost_net_positive": false,
+    "pass": false,
+    "holdout_opened": false
+  },
+  "source_reference": "9a3ebe075d9d0af5f012f921f46c2286f234af68",
+  "rust_version": "1.3.1"
+}

@@ -1,0 +1,41 @@
+{
+  "native": {
+    "source": "native",
+    "identical_duplicate_rows": 0,
+    "conflicting_duplicate_keys": 0,
+    "unique_rows": 1751608
+  },
+  "calendar_reasons": {
+    "known_calendar_skip": 576,
+    "prior14_normal_calendar_slots_warmup_or_incomplete": 109,
+    "prior_range_above_1p5_atr": 140,
+    "first_short_event_retained": 352,
+    "prior_body_ratio_at_least_0p6_or_unavailable": 300,
+    "no_short_signal_in_frozen_window": 209,
+    "premarket_range_above_1p0_atr": 30,
+    "known_calendar_roll_guard": 100,
+    "incomplete_or_invalid_known_premarket_window": 7,
+    "incomplete_or_invalid_causal_scan_prefix": 2
+  },
+  "no2017_warmup": true,
+  "no2023_or_later_files": true,
+  "no_g_trading_or_last_j_eligibility": true,
+  "prior_reference_policy": "exact prior14 normal calendar slots; incomplete slot veto",
+  "prior_rth_labels_ct": "08:31..15:15 inclusive405minutes",
+  "premarket_labels_ct": "03:01..08:30 inclusive330minutes",
+  "atr_basis": "mean of previous14 complete expected RTH RANGES, never true range",
+  "signal_labels_ct": "08:31..10:30 inclusive; first close strictly below ordered short level",
+  "raw_entry": "exact signal_j+1 native open, no rounding",
+  "raw_exit": "15:11 native close, no fallback",
+  "stops_or_targets_simulated": false,
+  "current_full_session_coverage_never_controls_entry": true,
+  "incomplete_scan_prefix_stops_search": true,
+  "invalid_held_paths_retained_and_veto_pass": true,
+  "native_micro_prices_verified": false,
+  "costs_are_repository_MNQ_assumptions": true,
+  "old_both_ledger_short_subset_reused": false,
+  "actual_spread_receipt_and_vendor_roll_fidelity_verified": false,
+  "roll_guard": "conservative secondThursday quarter-month offsets0,1,4,5 on today OR immediate prior-reference date; not official vendor-roll proof",
+  "atr_may_include_roll_guard_slot_intraday_ranges": true,
+  "incomplete_eligible_causal_scans_veto_pass": true
+}

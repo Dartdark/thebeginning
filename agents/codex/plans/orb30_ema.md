@@ -1,0 +1,28 @@
+# ORB30 EMA — frozen two-stage design and code reconstruction
+
+Date 2026-10-27. Commit before returns. User explicitly requests code and results, authorizes 15:55 CT proxy, both full-session and cash-only M30 EMA, and choosing the better definition. Choose using DESIGN ONLY.
+
+## Protocol and variants
+2018-22 first, 2023-2026-10-09 historical validation only for eligible models. No 2016-17 performance claim. Warm up EMA from available pre-2018 bars. No fresh holdout or author replication claim.
+1. FULL185: full-session completed M30 EMA20, RR1.85.
+2. CASH185: cash-only completed M30 EMA20, RR1.85.
+Select EMA by 2018-22 daily net-R Sharpe (tie FULL), among models passing below gate. If neither passes, stop new variants and validation.
+3. SELECTED4: chosen EMA, RR4.
+4. SELECTED0: chosen EMA, no target.
+5. NOEMA185: unfiltered baseline control, not selectable; compare both EMA gates against removed trades and 1000 matched random drops.
+Each newly executed economic model counted. Random-time/side diagnostic runs are controls, never selectable strategies; retain their number and failed runs. The two untested alternate-EMA exit combinations are not silently searched.
+
+## Fixed specification, clocks, fills
+NQ minute OHLC on CT close-stamped grid. OR = 08:31..09:00 labels (08:30..09:00 wall time). At 09:00 close: compare that M30 close strictly above causal EMA20 including that completed close. EMA recurrence alpha2/21 over actual completed bars; no fill-forward bars across gaps; require 20 completed bars. FULL consumes all complete 30-minute bars; CASH only 09:00..15:00 close labels (13 bars/session), preserving EMA across dates, including partial-session available bars in its history.
+Use existing deterministic S03 cash calendar to exclude full holidays/half-days at OR date. Require all 30 OR bars. One order per day, no re-entry. At 09:00 wall time begin stop at OR high, first executable 09:01-labeled minute open; fill at worse of level/open, no entry on any prior OR bar. Stop is fixed OR low. Target is actual entry + RR*(actual entry-OR low), rounded UP to tick. Cancel unfilled at15:55 CT; flatten at15:55 wall time (open of15:56-labeled minute). One-point target trade-through; adverse one-tick stop/market slippage; same-bar protective stop and target. Follow shared nearer-extreme OHLC order, plus fixed opposite-path stress. No synthetic fill on missing bars: retain unknown-held-minute counts and flag absent planned flatten; no silent overnight forced liquidation.
+All source information available at09:00, assume zero order delay after that close (optimistic minute proxy); no claim exact native broker tick behavior. Cash close used only once completed. Separate costs gross/fee/slip and additional one-tick execution stress. Size-independent NQ and R ledgers; actual MNQ P&L cost separate. Fractional ideal1% compounding is diagnostic, not executable futures sizing. Optional integer100k MNQ1% reconstruction floors budget / planned dollar SL and logs zero-lot skips/gap overshoot. No balance sizing from future closes.
+
+## Design gate and selection
+For FULL185 and CASH185: design net total>0, PF>=1.15, daily net-R t>=2.0, positive in>=3 of5 years, extra-one-tick net total>0. Save results before selecting EMA. If neither qualifies, STOP: no SELECTED4/0, validation, full funded/account bench. NOEMA185 still runs as fixed design comparator.
+If selected: run target4/0 in design; each must pass same gate to enter validation (original selected185 remains fixed reference). No ranking by validation or changing EMA there. A higher target needs a positive paired design-R difference and positive validation difference for a recommendation; t<2 paired means improvement unproven. Global trials t/DSR and unknown author's search remain visible; no automatic promotion.
+
+## Diagnostics and account boundaries
+Eligible rule: fixed09:00 market and1000 uniform random-time long entries on same EMA-eligible dates, risk distance OR width for controls, identical targetR/stop distances relative to actual control entry, same flatten/costs. Compare R/day AND fixed-contract dollars, retain no-fill as zero. Also1000 random-side controls on matched actual entries with mirrored brackets. Same-day paired contrasts; don't confuse entry-conditioned matched days with prospective opportunity set. Trend filter: excluded unfiltered tickets and1000 random drops. 5000 10-day bootstrap and10000 no-replacement permutations, plus 20-day block10000 constant1%-R compound paths and equityDD. Include initial zero equity peak. Redraw risk sizing on each resampled R sequence; never shuffle original compounded dollars. Report median/95/99 drawdown, rank, probability10% threshold; call it drawdown exceedance, NOT ruin. Closed versus minute-path floating equity distinct. Tests validate scaling invariance and subset-relative-DD bound.
+Only after surviving standalone and source/implementation review, compare actual integer1MNQ ADD, replace ONB/EMPTY and personal cohorts using latest pinned adopted plans. 50K/150K eval/funded and personal each receive measured result or concrete gate limit; no invented account advantage after a failed screen. Current book concentrated in index risk; no hedge assumed. Cache/research prototype not broker validated. MC code explicitly requested before proof is permitted as research prototype only under agents/codex/code; no live files. User compilation/native tick test still required; independent review before promotion.
+
+Run identity: save prereg commit, script/cache/calendar SHA256, runtime/dependency versions, exclusions/clocks, seeds20261027 and settings. Preserve code/output ledgers and summary. No cache rebuild, paid input, external message or live action.

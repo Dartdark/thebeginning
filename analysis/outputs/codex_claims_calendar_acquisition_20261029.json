@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "secondary_dates": 259,
+  "sourced_date_union": 261,
+  "primary_release_date_rows": 261,
+  "primary_embargo_header_rows": 249,
+  "unknown_embargo_time_rows": 12,
+  "primary_evidence_methods": {
+    "indexed_primary_header": 26,
+    "direct_pdf_header": 223
+  },
+  "coverage": [
+    {
+      "year": 2018,
+      "sourced_dates": 52,
+      "primary_release_dates": 52,
+      "primary_embargo_headers": 40,
+      "unknown_embargo_times": 12,
+      "original_schedule_available_at_known": 0,
+      "return_eligible_rows": 0
+    },
+    {
+      "year": 2019,
+      "sourced_dates": 52,
+      "primary_release_dates": 52,
+      "primary_embargo_headers": 52,
+      "unknown_embargo_times": 0,
+      "original_schedule_available_at_known": 0,
+      "return_eligible_rows": 0
+    },
+    {
+      "year": 2020,
+      "sourced_dates": 53,
+      "primary_release_dates": 53,
+      "primary_embargo_headers": 53,
+      "unknown_embargo_times": 0,
+      "original_schedule_available_at_known": 0,
+      "return_eligible_rows": 0
+    },
+    {
+      "year": 2021,
+      "sourced_dates": 52,
+      "primary_release_dates": 52,
+      "primary_embargo_headers": 52,
+      "unknown_embargo_times": 0,
+      "original_schedule_available_at_known": 0,
+      "return_eligible_rows": 0
+    },
+    {
+      "year": 2022,
+      "sourced_dates": 52,
+      "primary_release_dates": 52,
+      "primary_embargo_headers": 52,
+      "unknown_embargo_times": 0,
+      "original_schedule_available_at_known": 0,
+      "return_eligible_rows": 0
+    }
+  ],
+  "restored_secondary_omissions": [
+    "2019-01-03",
+    "2019-10-17"
+  ],
+  "original_schedule_available_at_known": 0,
+  "actual_receipt_known": 0,
+  "return_eligible_rows": 0,
+  "return_trials": 0,
+  "script_sha256": "860cd0daeaab52625e2f0c78b6d16160452016e143b2be7f6b1f578d4b2e74c6",
+  "source_fact_artifacts": [
+    {
+      "path": "agents/codex/inputs/scout_acquisition_20261029/claims_calendar/primary_2018.json",
+      "sha256": "6bae897602968c2c249e23dc11590c6e923a5cca993aa0eaa16f6a1167da1ccb",
+      "header_rows": 26,
+      "date_only_rows": 0
+    },
+    {
+      "path": "agents/codex/inputs/scout_acquisition_20261029/claims_calendar/primary_2018_indexed.json",
+      "sha256": "38f349efddb8d7a79605bf81ad4691eaee03f5cb5510a38a8acd78a63bd936fa",
+      "header_rows": 13,
+      "date_only_rows": 0
+    },
+    {
+      "path": "agents/codex/inputs/scout_acquisition_20261029/claims_calendar/primary_2018_remaining.json",
+      "sha256": "5aaea157fba49c4c7bb64a24118c3582a3d12c31aa23b73411d0a9d0168e32e2",
+      "header_rows": 1,
+      "date_only_rows": 12
+    },
+    {
+      "path": "agents/codex/inputs/scout_acquisition_20261029/claims_calendar/primary_2019_2020.json",
+      "sha256": "11014b645e189c827da6374ace78685304ac8172e97a5ff533106b7e2858f4cf",
+      "header_rows": 103,
+      "date_only_rows": 0
+    },
+    {
+      "path": "agents/codex/inputs/scout_acquisition_20261029/claims_calendar/primary_2021_2022.json",
+      "sha256": "c3ae5cb59a46f31c761bc744000d09e3a556c8c143c616a76c0be01e9830cbbd",
+      "header_rows": 104,
+      "date_only_rows": 0
+    },
+    {
+      "path": "agents/codex/inputs/scout_acquisition_20261029/claims_calendar/primary_repairs.json",
+      "sha256": "73a51d48dd2b88426e642a188f179108b258550b2dd275e54013c97771ba990a",
+      "header_rows": 3,
+      "date_only_rows": 0
+    }
+  ],
+  "limits": [
+    "Source-date universe is a pinned secondary archive-date collection plus separately verified official repairs; no Thursdays generated.",
+    "A printed embargo timestamp is not a measured actual release/receipt or original advance schedule announcement.",
+    "Direct PDF parsing and indexed official headers remain distinguished; no local PDF bytes or PDF hashes claimed.",
+    "Calendar completeness beyond the sourced universe and pre-entry availability remain unverified. No source-paper trading universe or returns defined."
+  ],
+  "outputs": [
+    {
+      "path": "agents/codex/inputs/scout_acquisition_20261029/claims_calendar/primary_embargo_headers.csv",
+      "sha256": "60553a59b59f5bb6290805147ec9b05e67bc16302975f2a164d4b2002d35675c"
+    },
+    {
+      "path": "agents/codex/inputs/scout_acquisition_20261029/claims_calendar/claims_calendar_2018_2022.csv",
+      "sha256": "c485e085bcf1b2d2903be970f34fb1683b6a8cc3b0e24b93d84e8356a3df5cce"
+    },
+    {
+      "path": "agents/codex/inputs/scout_acquisition_20261029/claims_calendar/coverage_2018_2022.csv",
+      "sha256": "7aaef6a4a5880c8405657365fb7ddb89d525c1bd7c54e490845617ca40c28037"
+    }
+  ]
+}

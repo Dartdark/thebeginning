@@ -1,0 +1,140 @@
+{
+  "audit": "mbs_primary_input_gate_20261026",
+  "purpose": "Reproducibility of the existing bounded saved-PDF source-content audit",
+  "created_utc": "2026-10-26T11:29:35.686099+00:00",
+  "command": "/workspace/venvs/thebeginning/bin/python -B analysis/codex_mbs_primary_input_gate.py",
+  "script": "analysis/codex_mbs_primary_input_gate.py",
+  "script_sha256": "3b70e51cd74fcb0fed0320fee20633246fc5ad2dc8d554966aeaf60d5100f3b0",
+  "base_git_commit": "0909dc714c932ca0373b3dec08ba06335e800256",
+  "pdftotext_version": "pdftotext version 25.03.0",
+  "page_number_basis": "One-based PDF pages separated by pdftotext form-feed characters",
+  "search_regex": "\\bmortgage\\b|\\bMBS\\b|\\bprepayment\\b|\\bnegative\\ convexity\\b|\\bDV01\\b",
+  "search_flags": [
+    "IGNORECASE"
+  ],
+  "context_bounds_characters": {
+    "before": 150,
+    "after": 250
+  },
+  "sources": [
+    {
+      "source": "papers/ssrn-1405583.pdf",
+      "sha256": "107648166b70e3f991b17bcf48575801472129247cf724ed61e7eb8426176095",
+      "bytes": 928655,
+      "pdf_pages": 110,
+      "first_page_excerpt": "Stock Market Trading Volume Andrew W. Lo and Jiang Wang∗ First Draft: September 5, 2001 This Draft: May 16, 2009 To appear in Y. Aı̈t-Sahalia and L. Hansen, eds., 2009, The Handbook of Financial Econometrics. New York: North-Holland. Abstract If price and quantity are the fundamental building blocks of any theory of market interactions, the importance of trading volume in understanding the behavior of financial markets is clear. However, while many economic models of financial markets have been developed to explain the behavior of prices—predictability, variability, and information content—far less attention has been devoted to explaining the behavior of trading volume. In this chapter, we hope to expand our understanding of trading volume by developing well-articulated economic models of asset prices and volume and empirically estimating them using recently available daily volume data for individual securities from the University of Chicago’s Center for Research in Securities Prices. ",
+      "term_counts": {
+        "mortgage": 0,
+        "MBS": 0,
+        "prepayment": 0,
+        "negative convexity": 0,
+        "DV01": 0
+      },
+      "total_hits": 0,
+      "matched_pdf_pages": []
+    },
+    {
+      "source": "papers/ssrn-2679218.pdf",
+      "sha256": "fc1c13d5514f48b18aaef3a19efac4092a8fe8133c70b9904ce751714da1ab94",
+      "bytes": 1803304,
+      "pdf_pages": 41,
+      "first_page_excerpt": "A Two-Factor Cointegrated Commodity Price Model with an Application to Spread Option Pricing∗ Walter Farkas ◦k§ Elise Gourier ∗∗ First version: October 15, 2015 Robert Huitema ◦ Ciprian Necula ◦‡‡ This version: November 9, 2016 Abstract In this paper, we propose an easy-to-use yet comprehensive model for a system of cointegrated commodity prices. While retaining the exponential affine structure of previous approaches, our model allows for an arbitrary number of cointegration relationships. We show that the cointegration component allows capturing well-known features of commodity prices, i.e., upward sloping (contango) and downward sloping (backwardation) term-structures, smaller volatilities for longer maturities and an upward sloping correlation term structure. The model is calibrated to futures price data of ten commodities. The results provide compelling evidence of cointegration in the data. Implications for the prices of futures and options written on common commodity spreads (e.g",
+      "term_counts": {
+        "mortgage": 0,
+        "MBS": 0,
+        "prepayment": 0,
+        "negative convexity": 0,
+        "DV01": 0
+      },
+      "total_hits": 0,
+      "matched_pdf_pages": []
+    },
+    {
+      "source": "papers/ssrn-3247865.pdf",
+      "sha256": "1bc54915eb2778b1b6a8eacfa0b07fb8c568f2cd5caa3ded45fa28f47c83c73e",
+      "bytes": 1676809,
+      "pdf_pages": 361,
+      "first_page_excerpt": "151 Trading Strategies Zura Kakushadze§†1 and Juan Andrés Serur]2 § Quantigicr Solutions LLC 1127 High Ridge Road #135, Stamford, CT 06905 3 † Free University of Tbilisi, Business School & School of Physics 240, David Agmashenebeli Alley, Tbilisi, 0159, Georgia ] Universidad del CEMA Av. Córdoba 374, C1054AAP, Ciudad de Buenos Aires, Argentina (August 17, 2018) ZK: To my mother Mila and my children Mirabelle and Maximilien JAS: To my parents, Claudio and Andrea, and my brother Emiliano Abstract We provide detailed descriptions, including over 550 mathematical formulas, for over 150 trading strategies across a host of asset classes (and trading styles). This includes stocks, options, fixed income, futures, ETFs, indexes, commodities, foreign exchange, convertibles, structured assets, volatility (as an asset class), real estate, distressed assets, cash, cryptocurrencies, miscellany (such as weather, energy, inflation), global macro, infrastructure, and tax arbitrage. Some strategies ar",
+      "term_counts": {
+        "mortgage": 39,
+        "MBS": 25,
+        "prepayment": 13,
+        "negative convexity": 1,
+        "DV01": 0
+      },
+      "total_hits": 78,
+      "matched_pdf_pages": [
+        6,
+        16,
+        101,
+        102,
+        103,
+        138,
+        151,
+        155,
+        156,
+        157,
+        158,
+        163,
+        164,
+        168,
+        176,
+        177,
+        181,
+        184,
+        188,
+        194,
+        198,
+        211,
+        221,
+        230,
+        234,
+        239,
+        246,
+        249,
+        252,
+        254,
+        258,
+        259,
+        264,
+        267,
+        271,
+        313,
+        316,
+        318,
+        339,
+        352,
+        353,
+        354
+      ]
+    },
+    {
+      "source": "papers/ssrn-4501707.pdf",
+      "sha256": "e2068d89c2a7bfe38de36f695186991a16b6e5c87724751083d351993f119cce",
+      "bytes": 4923283,
+      "pdf_pages": 159,
+      "first_page_excerpt": "Financial Machine Learning Bryan Kelly Yale University and AQR Capital Management bryan.kelly@yale.edu Dacheng Xiu University of Chicago dacheng.xiu@chicagobooth.edu Electronic copy available at: https://ssrn.com/abstract=4501707",
+      "term_counts": {
+        "mortgage": 1,
+        "MBS": 0,
+        "prepayment": 0,
+        "negative convexity": 0,
+        "DV01": 0
+      },
+      "total_hits": 1,
+      "matched_pdf_pages": [
+        136
+      ]
+    }
+  ],
+  "page_hits_csv": "analysis/outputs/codex_mbs_primary_input_gate/page_hits.csv",
+  "page_hits_csv_sha256": "887b69254b7c9ad785497e41e9b3f80931a3a3bc5eb1a8ac3df6b9f720129a09",
+  "total_hits": 79,
+  "new_economic_configurations": 0,
+  "new_return_trials": 0,
+  "prices_or_financial_outputs_read": false,
+  "network_requests": 0,
+  "automated_finding_limit": "Term counts locate text for manual review; zero matches do not establish absence of every relevant exposure concept. General literature is not an as-of risk/exposure dataset.",
+  "human_decision_report": "agents/codex/research/mbs_primary_input_gate_20261026.md",
+  "economic_test_authorized_by_audit": false
+}

@@ -1,0 +1,107 @@
+{
+  "name": "NQ Day Flow Six",
+  "status": "historical_t6_pass_execution_not_cleared",
+  "prereg": "d27cda2",
+  "primary_fee_RT_MNQ": 1.24,
+  "slippage_per_market_stop_fill_ticks": 1,
+  "alternative_fee_RT_MNQ": 1.04,
+  "primary_price_source": "NQ continuous, not native MNQ quotes",
+  "selection": "One precommitted combination; no weight search. Constituents previously selected.",
+  "source_ref": "41a0ae6",
+  "current_plan_ref": "afde088 / 94a1627",
+  "sleeves": [
+    {
+      "sleeve": "VB",
+      "intended_micro_contracts": 1,
+      "source": "apex_strategies/NQ_Vault_Break.txt",
+      "source_sha256": "2b331ecf51168032d6052d9a729efa7bce4d064cc373318db1d7c4620075c48c",
+      "report": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+      "overrides": {
+        "NumContracts": 1
+      },
+      "remaining_inputs": "Source defaults; exact report/source parity still requires combined-platform check"
+    },
+    {
+      "sleeve": "ONB",
+      "intended_micro_contracts": 1,
+      "source": "funded_strategies/NQ_Overnight_Bias_ML.txt",
+      "source_sha256": "c894acf104a96fae16fac201e7c6f1a565ae3d42105535fc3b315c5a245b9b25",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+      "overrides": {
+        "NumContracts": 1,
+        "RiskPerTrade": 0
+      },
+      "remaining_inputs": "Source defaults; exact report/source parity still requires combined-platform check"
+    },
+    {
+      "sleeve": "MON",
+      "intended_micro_contracts": 1,
+      "source": "funded_strategies/NQ_Monday_Long.txt",
+      "source_sha256": "94b2c3b352f35bbaa2e17ecf4f899252fec220dd6548ebbb87266d9e903018cf",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+      "overrides": {
+        "NumContracts": 1,
+        "RiskPerTrade": 0
+      },
+      "remaining_inputs": "Source defaults; exact report/source parity still requires combined-platform check"
+    },
+    {
+      "sleeve": "EOS",
+      "intended_micro_contracts": 1,
+      "source": "funded_strategies/NQ_Expiration_Open_Short.txt",
+      "source_sha256": "1b71703ef81d5cdb79f851951f7bd8878bb256dce8a120c069189da53b9b7c88",
+      "report": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+      "overrides": {
+        "NumContracts": 1,
+        "RiskPerTrade": 0
+      },
+      "remaining_inputs": "Source defaults; exact report/source parity still requires combined-platform check"
+    },
+    {
+      "sleeve": "LDF",
+      "intended_micro_contracts": 1,
+      "source": "funded_strategies/NQ_Late_Day_Flow.txt",
+      "source_sha256": "b34d7eecd12a72132491bc1db4c6014f0a47355d15e7dadcf58a1d9a814a061a",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+      "overrides": {
+        "NumContracts": 1,
+        "RiskPerTrade": 0
+      },
+      "remaining_inputs": "Source defaults; exact report/source parity still requires combined-platform check"
+    },
+    {
+      "sleeve": "NFP",
+      "intended_micro_contracts": 1,
+      "source": "funded_strategies/NQ_NFP_Fade.txt",
+      "source_sha256": "7c73056c79c93d4239e05e3ac574f9874a6044c463572611c805f6a88387972d",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
+      "overrides": {
+        "NumContracts": 1,
+        "RiskPerTrade": 0
+      },
+      "remaining_inputs": "Source defaults; exact report/source parity still requires combined-platform check"
+    }
+  ],
+  "manager_policy": "Own each sleeve's virtual target separately; actual account target = sum. Exit only its sleeve; reconcile actual net delta.",
+  "allowed_virtual_targets": [
+    -1,
+    0,
+    1
+  ],
+  "theoretical_gross_cap": 6,
+  "observed_proxy_gross_max": 4.0,
+  "statistical_target": {
+    "t_trade": true,
+    "t_daily": true,
+    "t_nw5": true
+  },
+  "reference_manager": "analysis/codex_nq_day_flow6.py:VirtualSleeves",
+  "blockers": [
+    "MON 2023-07-03 holds to 17:05",
+    "NFP 2023-04-07 holds to Sunday 17:05",
+    "No combined native MC virtual-order/netting parity",
+    "No fresh holdout/forward evidence",
+    "Reference lacks ticket-generation IDs and actual broker fill state"
+  ],
+  "runnable_scope": "Offline MC-ledger composition and virtual-target accounting only; no broker or live adapter"
+}

@@ -1,0 +1,47 @@
+{ NQ_First5_EMA_DayHold_BASE
+  Data1 = NQ continuous (traded), 5-min bars, 24-hour Globex session,
+  chart timezone Exchange (Chicago). Single data series.
+
+  Reference bar = the first NY session bar, the one that closes at SignalTime.
+  Entry: at that bar's close, Close > EMA(EMALength) -> long, Close < EMA -> short.
+         One entry per calendar day, fills this bar at close, IOG off.
+  Exit:  this bar at close on the first bar with Time >= ExitTime (15:00 CT,
+         the 16:00 ET cash close), plus SetExitOnClose as a session backstop.
+  No stop, no target, no trail, no filter. This is the base case every
+  other version is measured against.
+}
+
+Inputs:
+    EMALength(12),         { EMA on 5-min closes; entry compares the reference bar close to it }
+    SignalTime(0835),      { CT close time of the reference bar; 0835 = the 08:30-08:35 bar }
+    ExitTime(1500),        { CT; the first bar closing at or after this exits at its close }
+    AllowLongs(true),      { false = no long entries }
+    AllowShorts(true),     { false = no short entries }
+    NumContracts(1);       { contracts per entry }
+
+Variables:
+    ema(0), signalDone(false);
+
+ema = XAverage(Close, EMALength);
+
+{ ---- one signal per calendar day ---- }
+if Date <> Date[1] then
+    signalDone = false;
+
+{ ---- entry on the reference bar ---- }
+if MarketPosition = 0 and signalDone = false and Time = SignalTime then begin
+    if Close > ema and AllowLongs then
+        Buy ("F5.L") NumContracts contracts this bar at close
+    else if Close < ema and AllowShorts then
+        SellShort ("F5.S") NumContracts contracts this bar at close;
+    signalDone = true;
+end;
+
+{ ---- timed exit at the cash close ---- }
+if MarketPosition > 0 and Time >= ExitTime then
+    Sell ("F5.LX") this bar at close;
+if MarketPosition < 0 and Time >= ExitTime then
+    BuyToCover ("F5.SX") this bar at close;
+
+{ ---- session backstop: catches half days where the ExitTime bar never prints ---- }
+SetExitOnClose;
