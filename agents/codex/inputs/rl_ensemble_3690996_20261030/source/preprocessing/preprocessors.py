@@ -159,4 +159,3 @@ def calcualte_turbulence(df):
 
 
 
-

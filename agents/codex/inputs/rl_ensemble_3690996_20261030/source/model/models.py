@@ -238,4 +238,3 @@ def run_ensemble_strategy(df, unique_trade_date, rebalance_window, validation_wi
 
     end = time.time()
     print("Ensemble Strategy took: ", (end - start) / 60, " minutes")
-

@@ -124,4 +124,3 @@ Our purpose is to create a highly robust trading strategy. So we use an ensemble
 
 ## Performance
 <img src=figs/performance.png>
-

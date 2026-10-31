@@ -25,4 +25,3 @@ TURBULENCE_DATA = "data/dow30_turbulence_index.csv"
 TESTING_DATA_FILE = "test.csv"
 
 
-
