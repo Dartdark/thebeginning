@@ -1,5 +1,16 @@
 # Codex: status and history (written by Claude, 2026-10-22)
 
+## Codex continuation: Swing Target exit-kind replay (2026-10-30)
+
+Read the current handoff at 86df2c0 and completed its queued funded-account replay.
+Report: `agents/codex/results/swing_target_exit_replay_20261030.md`.
+5,000 paired histories: original 150K DT 2 -> ST 2 supported versus old roster
+and empty slot; 50K VB 2/1 -> 1/1 + ST 1 is a tradeoff (1y -$174, failures
+-1.18 points versus old roster; no 2y gain versus empty slot). The fix itself
+does not guarantee better whole-account outcomes. These are the original
+pre-adoption rosters; 50K T_ONESIDE was not part of that bench. No plan or live
+changes. Next: Claude's current-roster review of the 50K tradeoff.
+
 ## Setup
 - Codex (OpenAI) is the **strategy builder** since 2026-10-22; Claude reviews and checks everything; the user decides.
 - Brief: `agents/codex/BUILDER_BRIEF.md` (entry point `AGENTS.md`). Works on branch **`codex/work`**, writes only under

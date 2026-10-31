@@ -154,7 +154,13 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   [correction proposals](proposals/weekly_cross_review_20261030.md)): numeric exit kinds are part of the accounting
   interface. Swing Target's text `reason` replaced numeric `kind`, so target cost handling and protective-stop
   exit-minute capping differed from its recorded fills. A fixed-ledger check, retaining holiday repairs, changes
-  closing cashflow by$132/MNQ total and48daily minima; corrected payout/risk comparisons remain unrun.
+  closing cashflow by$132/MNQ total and48daily minima. The [extended-grid paired replay](results/swing_kind_replay_extended_grid_20261031.md)
+  subsequently ran 500 two-year histories per account size: old/fixed swaps have identical two-year payouts and failure flags;
+  first-year average payouts change +$2 (50K) and -$8 (150K). Better isolated accounting does not establish
+  monotone account payouts. The 50K swap's earlier benefit was not reproduced on this frozen sample; the 150K
+  comparison was favorable, subject to the historical-roster and simulator limits in the report. Concurrent
+  [common-coverage results](results/swing_kind_replay_20261031.md) are inconclusive for both swaps; preserve
+  the different seeds/universes and do not select the most favorable run or pool overlapping samples.
   Preserve schemas, assert numeric enum sets, and reconcile closed cash and marked paths before account claims.
   This is existing-ledger accounting evidence, not a new strategy, native-fill result or plan change.
 
@@ -654,6 +660,15 @@ Claude source snapshot `86df2c0`, `analysis/codex_refresh_audit.py` and its save
 - Next check: fresh same-input reports, explicit cache coverage gate, then expected/chart/broker reconciliation;
   earlier unavailable chart logs remain unknown. Related: E04 (record semantics), E23 (account/logger fields).
 
+### E09 follow-up — common-coverage account-state replay (2026-10-30)
+
+[Fixed-ledger account replay](results/swing_kind_account_replay_20261030.md) adds 1,000 paired histories per
+account/cohort over a common-source window ending July 7. Numeric kinds restore $129/MNQ and change 48 daily
+minima; 160 exact canonical-simulator parity checks pass. This does not imply monotone payout improvement:
+150K recent-pool first-year payouts decrease $6 while two-year payouts and blown share are unchanged.
+The adopted replacements do not clear both base and empty-slot comparisons. Evidence is historical simulated
+accounting with inherited path approximations, not native fills or a plan change. The broader-window replay
+above uses a different pool and seed; the two reports consistently leave adoption unproven.
 
 ### E40 — ES order-flow shocks are absorbed within one second; macro releases raise price impact
 
@@ -695,6 +710,12 @@ Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SC
 
 
 ### E43 — Better trade accounting need not improve funded-account outcomes
+
+Additional replay: [5,000-history rebuilt bench](results/swing_target_exit_replay_20261030.md),
+source 86df2c0. Same $132/MNQ ledger correction; selected corrected-minus-legacy
+two-year payouts +$2 (50K) / -$2 (150K), with paired 90% intervals crossing zero.
+The rebuilt day universe extends to 10/30, unlike the other frozen 10/09 replays;
+do not pool them or attribute cross-run differences solely to the accounting fix.
 
 Source/review + date: [Swing Target exit-kind replay](results/swing_kind_replay_20261031.md), 2026-10-31; runner `analysis/codex_swing_kind_replay.py` and retained paired histories.
 Execution question and useful lesson: numeric exit types govern both fill costs and the final adverse mark. After correcting them, replay the account; payout timing and subsequent integer sizing can change the sign of the effect.
