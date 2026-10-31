@@ -69,3 +69,35 @@ frozen design gate. The other commits are the inverse Bitcoin packet, already re
    is about $1.73 ($0.725 plus a tick per fill). At our cost, the SELECTOR gains about $0.52 a trade x 3,538 trades, about
    +$1.8k over 2018-22: roughly $3.9k in five years, still below the passive long-RTH control ($5.4k) and nowhere near a
    pass (it averaged $0.59 a trade, NW t 0.35). The REJECT stands. Plan fit: none.
+
+## 2026-10-31 (4): RollZone 24h NQ Long v1 (RZL1), user upload (PowerLanguage + 11-page research note)
+
+1. **CONFIRMED (not our code, so not committed): Good Friday positions are held over the weekend.** In some years CME
+   equity futures open an abbreviated session on Good Friday that halts at 08:15 CT; in our data that happened on
+   2021-04-02, 2023-04-07 and 2026-04-03. The night exit fires on the bar ending 08:25, which never comes, so an open
+   night position rides to the Sunday 17:05 bar (`RZL1.CarryLX`).
+   - **Fixture:** the code's clock and exit block replayed on the real 2023-04-07 bar times. The last bar 08:15 has
+     SM 915, and the night exit needs SM >= 925.
+   - **Consequence:** an Apex violation, plus weekend gap risk. It is probably the note's "1 of 3,137 trades held past a
+     session close".
+   - **Fix:** no entries in the Good Friday session (Thursday 17:00 through Friday). Snippet given to the user; it uses
+     the Easter algorithm from `NQ_NFP_Fade.txt`.
+2. **Calendar checked against every early close in our NQ data, 2017-2026 (87 days).** The code's rules flag every
+   holiday early close, and they never flag a full day. Besides the three Good Fridays, two unscheduled 08:30 CT closures
+   (2018-12-05, 2025-01-09) aren't in the calendar, but the 08:25 night exit already fires before them.
+3. **No other defect found.**
+   - **Clocks:** Exchange CT, session clock 1..1440 from 17:00, and the first bar 1705 starts a new session (Sunday
+     included).
+   - **No look-ahead:** each slot's average uses earlier sessions only, the daily range comes from completed sessions,
+     and the stop entry is placed for the next bar only after a bar that didn't touch the line.
+   - **Exit times:** night exit 08:25, day exit 15:55 (before Apex's 15:59), half days 11:55.
+   - **Stops:** the stop and target are in currency for the whole position.
+   - **Loss budget:** the daily cap counts closed P&L only, so a gap through the stop can exceed it (the note's
+     March 2020 case, -$3,680).
+4. **Notes for any future test, not code defects:**
+   - The note's $14.50 per round turn is lighter than our standard: $7.25 plus one tick per stop or market fill comes
+     to about $17.25 per NQ.
+   - On 1 NQ the $1,500 cap is above Apex's 50K daily loss limit ($1,000). On MNQ the 0.8 x range stop (median about
+     $692) fits.
+   - The note's own caveats: the 01:00-07:00 entry block was chosen after the 2023+ trades were seen, there's no
+     walk-forward, and the night entries only pay since 2023.
