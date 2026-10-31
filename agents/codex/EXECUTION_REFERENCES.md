@@ -725,6 +725,30 @@ Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, sha
 Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
 Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E40-E42 during this handoff merge; existing Codex E29-E38 identifiers are retained.
 
+### E44 — Dynamic pair models are not self-financing contract ledgers
+
+Source: Yang, Huang and Chen, unreviewed 38-page preprint SSRN 5017127, indexed posting 2024-11-11;
+owned full PDF reviewed 2026-10-31. [Saved review](results/hierarchical_pairs_review_20261031.md).
+Related: E09 cash/multiplier reconciliation, E19 information clocks, E38 return/NAV accounting.
+- Use: changing an estimated hedge ratio changes the definition of a model spread. That movement is not
+  necessarily P&L on the positions previously held. With constant prices 100/100, changing beta 1→0.9 moves
+  `Y-beta*X` from 0→10 while held-book price P&L stays 0 before costs. Rebalancing requires actual signed quantities,
+  executable leg prices, multipliers, margin/FX cash, fees and daily open-position marks.
+- Evidence: source inspection and a constructed accounting identity, not a finding that the authors' unavailable
+  implementation committed this error. Their validation Sharpe 4.19/return 13.318% remain unverified source claims.
+  The paper acknowledges its continuous/weighted series cannot be directly traded; signals need identified
+  contracts and an explicit roll/conversion ledger. Its stated uniform 0.1% commission is not a native all-in cost.
+- Timing/coverage: a delayed entry crossing back through a threshold differs from the first outward breach.
+  Freeze initialization, half-life fit, filtering versus smoothing, decision time and first executable fill.
+  Interpolated prices cannot establish two executable legs; missing or suspended legs remain unknown.
+- Limits: dynamic beta and cointegration do not guarantee neutrality or convergence; shared contracts across
+  many pairs must be netted without removing actual gross turnover/leg costs. Printed SD/covariance errors and
+  unspecified source settings cannot be silently repaired and called exact replication.
+- Prerequisites/next check for an independently justified future project: one dated-contract trade/rebalance/roll
+  example reconciled from signal through fills and cash/NAV, with causal model fitting and both-leg cost records.
+  Do not restart failed CME index-pair variants from this method citation alone.
+- Status: methodology/execution reference; no new return test, measured saving, portfolio place or trading change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:5017127",
+  "ssrn_id": "5017127",
+  "doi": "10.2139/ssrn.5017127",
+  "title": "Research on Hierarchical Futures Pair Trading Strategy Based on Machine Learning and Kalman Filtering",
+  "authors": [
+    "Shuo Yang",
+    "Ke Huang",
+    "Yao-wen Chen"
+  ],
+  "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5017127",
+  "verdict": "dont_test",
+  "full_text_read": true,
+  "evidence_level": "full_source_review_and_deterministic_math_only",
+  "source_revision": "38-page unreviewed preprint; indexed posting2024-11-11; uploaded PDF modified same date; earlier37-page version not read",
+  "source_sha256": "1716905354f4057ccc28e5b6cc8302dd50c2f92e8ff61b5ed2a078b5702a9b79",
+  "source_artifact": {
+    "path": "agents/codex/inputs/hierarchical_pairs_20261031/ssrn-5017127.pdf",
+    "sha256": "1716905354f4057ccc28e5b6cc8302dd50c2f92e8ff61b5ed2a078b5702a9b79",
+    "permission": "owned_upload",
+    "provenance": "sediment://file_00000000ed1c823087e08340b9bd47e0",
+    "source_version": "38-page uploaded preprint, modified2024-11-11",
+    "access_method": "download_file; pdftotext -layout and visual equation/table inspection"
+  },
+  "report_path": "agents/codex/results/hierarchical_pairs_review_20261031.md",
+  "access_receipt": "agents/codex/inputs/hierarchical_pairs_20261031/source_access.json",
+  "updated_at": "2026-10-31T02:18:56Z",
+  "origin": "direct_user_upload_review",
+  "cycle_id": null,
+  "new_economic_trials": 0,
+  "new_economic_definitions": 0,
+  "return_eligibility": "DON'T TEST",
+  "summary": "Chinese daily futures DTW/cointegration/Kalman pairs; reported validation13.318% annual return/Sharpe4.19 remains unverified. Printed math, fit/contract/cash details and no distinct owned-market economic case prevent admission.",
+  "about": "Cluster futures via DTW/k-means, select cointegrated pairs and trade delayed mean-reversion signals with Kalman hedge ratios and half-life windows.",
+  "findings": "Authors claim experimental12.964%/Sharpe4.35/DD2.396% and validation13.318%/4.19/1.359%, with uniform0.1% commission. No independent return replication; source equations and annualization/clock/cash conventions require clarification.",
+  "mechanism": "Proposed convergence of stable relative-value relationships. Modeling and noise reduction do not prove economic convergence or forced flow.",
+  "build_on": "Retain accounting/causal-fit methodology as E44. No strategy/TODO candidate or new index-pair retest warranted. Requires genuinely new code/contract-ledger evidence or distinct economically justified owned-market pair before reconsideration.",
+  "economic_family": "cross-commodity-daily-clustered-cointegration-kalman-pairs",
+  "related_source_ids": [
+    "4863414"
+  ],
+  "prior_family_history": "TIER_LIST Kalman index pairs and signature-pairs failures preserved; not independently rerun here",
+  "account_fit": {
+    "evaluation_50K_150K": "no_eligible_intraday_owned_contract_protocol",
+    "funded_50K_150K": "no_eligible_strategy_no_account_test",
+    "personal": "dont_test_source_underdefined_no_new_owned_market_case"
+  },
+  "execution_reference": "E44",
+  "independent_economic_verification": "not_performed",
+  "notification": {
+    "standalone_scout_alert_sent": false,
+    "key": null,
+    "reason": "Direct uploaded-paper review reply only; no new material return result or user-action blocker"
+  }
+}
