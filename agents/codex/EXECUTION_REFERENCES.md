@@ -1157,6 +1157,25 @@ Source: Viljoen, Westerholm and Zheng, [SSRN 1913693](https://ssrn.com/abstract=
   midpoints, event/receipt and quote-age records, side and fee reconciliation; preserve missing horizons as unknown.
 - Status: execution diagnostic reference. No new alpha trial, plan placement, order-timing change or live logger.
 
+### E09/E11 follow-up — ANANTA rate/FX snapshots, signal direction and netted exposure
+
+Source: Nicolas Georges, April 2014, SSRN2419243;
+[full-source review](results/ananta_2419243_review.md), retained October 30, 2026.
+- Use: separate rate observation, availability, decision and executable FX fill clocks. London 18:00 and
+  New York 17:00 are distinct snapshots; London/US DST mismatch changes their spacing. Same-fix execution
+  cannot be assumed from a historical closing observation.
+- Evidence: source review and deterministic synthetic checks only. Literal pair attribution sells the
+  currency whose relative rate rises, opposite the prose. Under declared global-median/ten-leg normalization,
+  a synthetic score panel assigns 10/36 = 27.78% to one currency, exceeding the stated 20% bound.
+  Missing sign/normalization rules do not establish the behavior of unavailable author code.
+- Accounting: bp per dollar traded uses gross turnover, not account NAV. Netted xxxUSD exposures can retain
+  residual USD risk; constant gross requires explicit normalization, and zero mean differentials are undefined.
+  Full/half spreads, financing, benchmark eras, spot/futures basis and integer quantities remain unresolved.
+- Limits/next check: author 3.5/5 bp net claims are unreplicated OTC-FX backtests, not current CME savings.
+  Need matching two-clock swap/FX quotes and source clarification; reconcile one day before returns.
+  Public daily UK curves and swap transaction tapes do not supply the exact eleven-currency panel.
+- Status: execution/accounting reference and separate data-blocked personal lead; zero return trials or live changes.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
