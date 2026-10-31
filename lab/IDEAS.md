@@ -26,13 +26,16 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - result: skipped 2026-10-31, not tested: duplicate of the D-ranked 'Treasury auction price pressure' item
   (`analysis/treasury_auction_test.py`: 10-year both legs +$38 gross vs $77 cost; rebound absent).
 
-## Q003 · queued · priority 2
+## Q003 · done · priority 2
 - source: lab seed (non-equity, FX fixing flow)
 - market: 6E (euro FX)
 - mechanism: WM/Reuters 4 pm London fix (10:00 CT; 11:00 CT in DST-mismatch weeks): asset managers' FX hedging is
   executed at the fix, so 6E drifts into it and partly reverses after (Evans 2018; Melvin & Prins 2015 month-end).
 - rule sketch: V1 month-end days only: follow the 09:30->09:55 CT move to 10:00, V2 fade 10:01->10:30, V3 V1 on every day.
 - Apex: yes, 6E / M6E (user confirmed 2026-10-31). data: data/6E_1min_*.csv
+- result: FAIL stage 1 (2026-10-31). 2018-22: V1 month-end follow into the fix 58 trades +$14.6 net (gross $32, PF 1.34,
+  t 0.85, 3/5 yrs); V2 month-end post-fix fade -$6 (t -0.3); V3 every day -$15 (gross +$2, t -7.3). Month-end beats the
+  same clock on other days (placebo p 0.000) but too few trades for t 2. Holdout not opened. `analysis/lab_Q003.py`.
 
 ## Q004 · queued · priority 2
 - source: lab seed (positioning)
@@ -87,3 +90,14 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - rule sketch: release days found by the 09:31 volume spike (as Q007). V1 long 08:00 -> 09:29, V2 short, V3 follow the
   overnight 17:00 -> 07:59 move into 09:29. Stop 0.3 x 14-day ATR. Placebo: same window on non-release weekdays.
 - Apex: yes. data: data/NG_1min_*.csv (scratch ng.pkl)
+
+## Q010 · queued · priority 2
+- source: follow-up of Q003 (parent: Q003, depth 1)
+- market: 6E (M6E)
+- mechanism: month-end FX hedge rebalancing (Melvin & Prins 2015): foreign holders of US equities hedge the dollar; when
+  US stocks rose over the month their hedge is too small, so they sell USD (buy EUR) into the month-end fix. The direction
+  is known ex ante from the equity move, not from the 30-minute pre-fix price move Q003 used.
+- rule sketch: last 6E session of the month, side = sign(ES month-to-date return at 08:30 CT); V1 enter 08:30, out at the
+  fix (10:00 / 11:00 CT); V2 enter at fix-30, out at the fix; V3 V1 on the last 2 sessions. No stop. Placebo: same rule
+  mid-month (15th or next session).
+- Apex: yes. data: data/6E_1min_*.csv, ge.pkl (ES)

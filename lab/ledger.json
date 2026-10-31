@@ -45,5 +45,22 @@
    "Q009"
   ],
   "date": "2026-10-31T17:16-05:00"
+ },
+ {
+  "id": "Q003",
+  "title": "6E into/out of the London 4 pm fix (month-end, all days)",
+  "market": "6E",
+  "stage": 1,
+  "verdict": "FAIL",
+  "gate": "stage 1: best t 0.85 < 2.0",
+  "t_design": 0.85,
+  "t_holdout": null,
+  "looks": 0,
+  "tier": "F",
+  "lesson": "month-end pre-fix follow gross $32 beats other days (p 0.000) but 58 trades, t 0.85; every-day drift gone",
+  "follow_ups": [
+   "Q010"
+  ],
+  "date": "2026-10-31T17:50-05:00"
  }
 ]
