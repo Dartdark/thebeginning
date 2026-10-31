@@ -1,0 +1,1269 @@
+Trading Activity of Commodity Futures and
+  Options Around USDA Announcements
+
+                                   Tianyang Zhang
+
+
+
+                                           Abstract
+
+    The USDA announcement effects on commodity options have received limited atten-
+
+ tion in the literature. We find that the trading volumes of futures and options fluctuate
+
+ significantly before and after the release of the monthly World Agricultural Supply and
+
+ Demand Estimates (WASDE) reports for seven agricultural commodities. The effects
+
+ of the announcements on commodity options are less significant than those on futures.
+
+ Furthermore, we provide evidence that informed trading exists in commodity markets
+
+ before the release date. The information contained in the commodity futures and op-
+
+ tions has a longer predictive horizon for post-announcement futures returns than the
+
+ ending stocks forecasts in the reports.
+
+
+
+
+                                              1
+
+               Electronic copy available at: https://ssrn.com/abstract=4841490
+1     Introduction
+
+As a major public source of forecasts since the year 1973, the World Agricultural Supply
+and Demand Estimates (WASDE) reports from the U.S. Department of Agriculture (USDA)
+play an important role in agriculture markets. Not surprisingly, the announcement effects
+of USDA predictions on agricultural markets have been studied a lot. Most of these studies
+focus on how the commodity futures markets are affected and provide evidence to confirm
+whether the effects exist. For example, Adjemian and Irwin (2018) finds that the volatility
+of agriculture futures spikes right after the release of WASDE reports but declines in a few
+minutes. Adjemian (2012) analyzes the absolute value of overnight return before and after
+the announcement date and confirms that the USDA announcement effect persists across
+contract positions. There is also evidence that the co-movement of different commodity
+futures returns exists around the release date of USDA predictions (Karali, 2012). Other
+prominent examples of this line of work include Irwin et al. (2001), Indriawan et al. (2021),
+and Ying et al. (2019), among others.
+    However, as a critical part of commodity markets, whether commodity options markets
+are affected by USDA announcements has been ignored in most cases. One example is from
+Randall and Summer (1993), who use the daily data from year 1968 to 1989 and provide
+some evidence that there is a USDA report effect in commodity futures and options markets.
+In recent decades, the commodity options markets have developed rapidly and become an
+important derivative in commodity markets. A commodity option contract is written with
+a particular futures contract as the underlying security. Buying a call (put) option gives the
+owner the right to buy (sell) the underlying commodity futures at a fixed price or the strike
+price on or before the contract expiration date. The physical commodity option was first
+introduced on February 15, 1985, as the Commodity Futures Trading Commission (CFTC)
+approved Amex Commodity Corporation’s physical gold bullion option contract.
+    As an emerging market, how the commodity options market works has not been studied
+much in the previous literature. Recently, Zhang (2022) examines hedging pressure and
+
+                                                2
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+liquidity provision in commodity options markets. Cheng et al. (2021) also confirms the ex-
+istence of hedging premiums and demand effects in commodity options markets. In addition,
+empirical results find that the commodity options can have a large effect on the underlying
+asset commodity futures (Luo et al., 2021).
+   The present study focuses on the commodity options for two main reasons. First, pro-
+ducers would employ options to hedge production and other risks. Lapan et al. (1991) build
+a theoretical model and shows that when market prices are biased, commodity options must
+be included to construct optimal hedging strategies for the producers. Moschini and Lapan
+(1995) also shows that the options can be used to hedge the joint production and price
+risk for production firms. Therefore, after the WASDE reports are released every month,
+producers have an incentive to adjust their hedging strategies by trading commodity fu-
+tures and options. This will cause changes in trading behaviors of options and futures after
+the announcements. For example, Cao and Robe (2022) find that the corn and soybean
+option-implied volatilities are significantly lower for several trading days after the reports
+are released. In this study, we provide new evidence that there exists USDA announcement
+effects in commodity options markets, although these effects are less significant than those
+in commodity futures markets.
+   Second, commodity traders would use options to speculate and make profits. From the
+perspective view of informed trading, the trading activity in options markets also contains
+information about the future condition of agriculture markets. Empirical analysis shows that
+options lead futures in reflecting new information in most commodities and speculation is a
+key determinant of price discovery (Bohmann et al., 2019). Thus, an interesting topic is to
+explore and compare the predictability of information in commodity markets and WASDE
+reports before the announcements. In this study, we use ending stocks forecasts in the reports
+as benchmark forecasts.
+   Our study is also related to the literature on the forecasts from financial markets for
+agriculture information. This study not only investigates the USDA announcement effects in
+
+
+                                                3
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+commodity futures and options markets but also explores the information content in these
+two markets in the pre-announcement period. Informed market participants may possess
+information pertaining to WASDE reports and commodities markets that extends beyond
+the information contained within the reports. We found that the information in commodity
+options and futures markets has a longer predictive horizon than the ending stocks forecasts
+from WASDE reports.
+    We make three main contributions to the literature. First, we investigate the USDA an-
+nouncement effects on commodity options markets based on trading volumes, which has not
+been empirically studied in the previous literature. Second, our study finds that the USDA
+announcement effects in commodity futures are more significant than that in commodity
+options, while the options markets could be involved with more informed trading activities
+before the WASDE reports are released. Third, the ending stocks forecasts are observed
+to exhibit predictive efficacy within the five trading days following the release, with this
+predictive capability diminishing rapidly thereafter. More importantly, this study concludes
+that the information in commodity futures and options markets has longer predictive power
+than the ending stocks forecasts in the WASDE reports.
+    The remainder of this paper is organized as follows. Section 2 describes the data of
+commodity markets and WASDE reports used in this study. The empirical analysis of USDA
+announcement effects on commodity futures and options markets is in Section 3. Section
+4 presents the predictive power of trading volumes in commodity markets and the ending
+stocks forecasts from the reports. Section 5 concludes.
+
+
+
+2     Data
+
+The data of commodity markets used in this study are from Bloomberg and comprise in-
+dividual futures contracts for seven agricultural commodities including soybean oil, corn,
+cotton, soybeans, oats, sugar, soybean meal, and wheat. This study encompasses data span-
+
+
+
+                                                4
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+ning from January 1995 to December 2018. We follow Zhang (2022) and select a sample
+of each commodity according to the options expiration dates, which is presented in Figure
+1. Specifically, for each futures contract, we include the sample from the Tuesday of the
+week before the option expiration date to 65 calendar days before the expiration date of the
+option. To avoid the problems of outliers and the low liquidity in commodity futures and
+options markets, we drop the two-sided 1% data based on the value of options to futures
+trading volumes ratio. By applying the specified data constraints, the sample in our study
+comprises 42691 commodity-daily observations.
+   The summary statistics for commodities are in Table 1. The trading volumes of futures
+and options are larger in corn markets than the other commodities, while cotton and soybean
+meal have the smallest volumes in futures and options, respectively. Soybeans and wheat hold
+the second and third positions in terms of both futures and options trading volumes. There
+is an observable phenomenon that a commodity with substantial futures trading volumes
+typically exhibit corresponding high options trading volumes. However, this trend does not
+hold true for cotton, as it possesses the lowest futures trading volumes, yet its options trading
+volumes rank as the third lowest among all seven commodities. Thus, it is not surprising
+that the options-to-futures trading volumes ratio is largest in cotton, while the lowest ratio
+is observed in the soybean oil markets.
+   The forecasts of commodity markets are from USDA, an entity that publishes the monthly
+WASDE reports to announce current and expected market conditions for agricultural com-
+modities to participants in commodity markets. The number of USDA monthly forecasts
+including in this study is 288, since the the data covers the period from January 1995 to
+December 2018. A crucial forecast from WASDE reports is the expected ending stocks at
+the end of each marketing year. Ending stocks, also referred to as carryout, are the amount
+of a commodity left over after all demand has been satisfied and enters the supply side of
+the market in the following marketing year. According to Good and Irwin (2014), ending
+stocks may be the single most important factor that summarizes the price implications for
+
+
+                                                 5
+
+                   Electronic copy available at: https://ssrn.com/abstract=4841490
+a commodity. Therefore, in this study, we set the ending stock forecast as the target to
+compare the predictive power between the information in commodity markets and WASDE
+reports. To the best of our knowledge, this study is the first to investigate the predictive
+capacity of ending stocks forecasts in futures returns of agriculture commodities.
+
+
+
+3     USDA announcement effect
+
+3.1    Abnormal values of futures and options volumes
+
+Intuitively, the futures and options trading activities around the announcement date could
+be significantly different from the activities on other dates in the same month. In order
+to investigate the announcement effect, we conduct the analysis about whether there are
+significant abnormal values of futures and options trading volumes, just before and after the
+announcement date.
+    Following Adjemian (2012), an event window of eleven days, is established before and
+after report publication. First, we separate the trading days for commodity i in month m
+into two groups according to the announcement date Wm . One group consists of the ordinary
+trading days Wm that are in the interval [Wm − 5, Wm + 5], which covers the five trading
+days before and after the announcement. Another group is made of the trading days W−m
+that are outside of the days in interval [Wm − 5, Wm + 5] in the same month. Next, for
+commodity i in month m on day t, the measures for abnormal values of futures and options
+volumes are constructed as the following:
+
+
+                    ab F V OLi,m,t = |F V OLi,m,t − mean(F V OLi,W−m )|
+
+
+                    ab OV OLi,m,t = |OV OLi,m,t − mean(OV OLi,W−m )|
+
+Table 2 shows the abnormal trading volumes in futures and options during the five trading
+days both preceding and following the announcement date (Dw) for each commodity. There
+
+                                                6
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+exists a relatively stable pattern of abnormal futures trading volumes during the five trading
+days leading up to the release date (from Dw-5 to Dw-1) for all commodities. However,
+it is evident that abnormal futures volumes on the announcement date exhibit the highest
+values among all eleven trading days (from Dw-5 to Dw+5), across all commodities. A
+declining trend in abnormal futures volumes is observed following the announcement as the
+abnormal values in Dw+5 are lowest in the sample except for wheat and sugar. With respect
+to abnormal options volumes, the values in Dw remain the highest, with the exception of
+sugar. Different from the futures markets, abnormal options volumes exhibit higher volatility
+prior to the announcement. Following the announcement, there is a decrease in abnormal
+options volumes except for sugar, which is similar to the observed patterns in abnormal
+futures volumes. An interesting finding is that, on the announcement date, the abnormal
+options volumes of sugar are lower compared to those observed in Dw-5 and all five trading
+days following the announcement.
+   In ordr to estimate the USDA reports effects on commodity markets, we conduct an
+empirical analysis similar to Adjemian (2012). [Wm − 5, Wm + 5] are the set of trading days
+in the event window when the report is published in month m on day Wm . The dummy
+variable vector DWm equal to one if day t is the date Wm and zero otherwise:
+
+                                               
+                                               
+                                               1
+                                                       if t ∈ Wm
+                                    DWm ,t =
+                                               
+                                               0
+                                                       otherwise
+
+
+Next, regarding the five days before and after the date Wm , we construct the other dummy
+variable vectors as:
+
+                                    
+                                    
+                                    1
+                                           if t ∈ Wm − j
+                       DWm −j,t =                           , for j = 1,2,...,5
+                                    
+                                    0
+                                           otherwise
+
+
+
+
+                                                    7
+
+                   Electronic copy available at: https://ssrn.com/abstract=4841490
+                                 
+                                 
+                                 1
+                                          if t ∈ Wm + n
+                    DWm +n,t =                             , for n = 1,2,...,5
+                                 
+                                 0
+                                          otherwise
+
+
+
+   Let DUMEvent indicate the dummy variables matrix that makes up the event window of
+[Wm − 5, Wm + 5]. To account for the seasonality and time effects, we also add the dummy
+variables for months (DUMmonth ) and time trend (DUMtrend ). We construct the dummy
+matrix DUM, including DUMmonth and DUMtrend . The matrix of the control variables
+is X, which includes the trading volumes and return in the previous trading day of the
+announcement date. Thus, the cross-sectional regression in our study is:
+
+                                       ′            ′            ′
+                           y = DUMEvent β + X δ + DUM θ + ϵ
+
+
+where y are daily abnormal futures or options trading volumes and ϵ represents the error
+terms. All estimates are obtained using the OLS method, correcting for serial correlation by
+the Newey-West method.
+   Tables 3 to 6 and Figures 2 to 5 report the results of cross-sectional regressions and
+show the abnormal values of futures and options volumes associated with the event window
+and the marginal effect of the WASDE reports on the announcement day. In the futures
+markets, there are distinct spikes of abnormal futures volumes on the announcement date
+across all seven commodities, which indicates that the abnormal values reach their peak on
+the release date within the event window, which encompasses the five trading days before
+and after the announcement date. On and after the release date, when the traders gain new
+information from WASDE reports, whether it is good or bad news, they would adjust their
+trading positions in accordance with the new information they get. However, the reactions
+of different commodity markets are not the same. For corn, soybeans, and wheat, there is
+a sharp increase in abnormal futures volumes on the day of the announcement accompanied
+
+
+
+                                                8
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+by a rapid decrease in abnormal values just one day after the announcement, which indicates
+that the information from WASDE reports is reflected on the futures contracts shortly in
+these markets. In cases of the other four commodities including soybean oil, cotton, sugar,
+and soybean meal, the decreasing trend of abnormal futures volumes after the announcement
+also appears, but the decline rate is lower. Regarding the abnormal futures volumes in the
+pre-announcement period, there are also relatively significant abnormal futures volumes on
+days before announcement compared with that on announcement day in soybean oil, cotton,
+sugar, and soybean meal futures markets. A plausible explanation for this phenomenon lies
+in traders’ capacity to adapt their futures investments in accordance with their anticipations
+of commodity forecasts preceding the release date of these reports. This would result in
+greater fluctuations in trading volumes within the five days leading up to the release date
+compared to the trading volumes observed during the remaining days of the month. Based
+on the findings above, we can conclude that futures markets would react to the news from
+WASDE reports right away after the announcement. In most cases, such reactions tend to
+subside within five days following the release date.
+   In commodity options markets, the impact of announcements is comparatively less signif-
+icant than that observed in futures markets. In the cases of corn and soybeans, the behaviors
+of options are similar to futures, with abnormal options volumes peaking on the release date
+and subsequently diminishing within five trading days. However, it is important to highlight
+that in the soybean oil, cotton, sugar, soybean meal, and wheat options markets, there is an
+absence of distinct spikes in abnormal options volumes on the release date. Following the
+announcement date, it takes a longer time for options volumes back to normal in comparison
+to futures volumes across most commodity markets. This suggests that there is a prolonged
+period required for the news in WASDE reports to be fully incorporated in options markets.
+Interestingly, the abnormal options volumes are even higher after the announcement date in
+soybean oil, sugar, and sugar meal markets. One plausible hypothesis is that options traders
+may require a longer time to execute adjustments to their positions in options as compared
+
+
+                                                9
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+to futures. During the pre-announcement period, notably substantial abnormal options vol-
+umes are observed, particularly in soybean oil, cotton, sugar, and soybean meal. Compared
+with futures markets, this phenomenon is more notable in options markets. One possible
+explanation is that there are more informed trading activities involved in options markets
+and informed traders appear to leverage their private information regarding WASDE reports
+to adjust their positions in options to hedge risks or pursue profits.
+
+
+
+4     Post-announcement returns analysis
+
+In the previous section, results show that significant abnormal futures and options volumes
+exist in the pre-announcement period, which could be evidence that some market partici-
+pants make investments based on their private information before the WASDE reports are
+released. Therefore, in this section, we examine the predictive power of futures and op-
+tions trading volumes for futures returns following the announcement. We use four return
+windows: CUM(+0,+5), CUM(+0,+10), CUM(+0,+15), and CUM(+0,+20). CUM(X,Y)
+indicates the cumulative return for each commodity from X trading days to Y trading days
+after the announcement date.
+    In order to compare the predictive capability of futures and options volumes with the
+forecasts in WASDE reports, we set the ending stocks forecasts as the benchmark target.
+Ending stocks is the expected inventory of a particular commodity at the end of the marketing
+year. In every month, WASDE reports provide the prediction of ending stocks for each
+commodity. The forecast of ending stock for commodity i in month m is defined as ESi,m .
+To capture the new information released at the announcement, the surprise of the forecast
+in ending stocks in month m for commodity i is constructed as the difference between the
+forests in this and the previous month divided by the forecast in the previous month:
+
+                                               ESi,m − ESi,m−1
+                                  ∆ESi,m =
+                                                   ESi,m−1
+
+
+                                                 10
+
+                   Electronic copy available at: https://ssrn.com/abstract=4841490
+The pre-announcement returns may have substantial influence on the post-announcement
+returns since the informed traders could obtain private information before the announcement
+and start to trade in the same direction as the reactions from the announcement. Motivated
+by this rationale, we construct two more variables: pre-CUM and abs(pre-CUM) denote
+cumulative return and the absolute value of cumulative return over the pre-announcement
+window (days -5 to -1). Additional control variables include CAR and AM I, which are
+the average of daily futures basis and illiquidity measure for the commodity over the pre-
+announcement window (days -5 to -1) 1 . Referring to Petersen (2009), to correct for cross-
+sectional correlation, the standard errors are clustered (by time). The employed cross-
+sectional regression is as follows:
+
+                                                           ′
+                                        Ri,t+1 = at + bt Xi,t + ei,t+1 ,
+
+
+where Ri,t+1 is futures return at post-announcement period t + 1 for commodity i, Xi,t is a
+vector of characteristics known as of announcement date, and ei,t+1 is a residual.
+       Table 7 presents the results about the predictive power of futures, options volumes, and
+ending stock forecasts on the cumulative returns following the announcement. In the column
+of CUM(+0,+5), the coefficient on ∆ES is significantly negative (t-statstic = -3.759). The
+forecast of higher ending stocks for a commodity serves as a negative signal for futures
+prices. This is due to the fact that higher ending stocks means that there is an excess
+of supply over expectations, which in turn puts downward pressure on futures prices 2 .
+After the WASDE report is released, the participants in the commodity markets obtain new
+information about the predicted ending stocks and adjust their trading behaviors, which
+will move the futures price in the direction depending on whether the surprise of ending
+                                                                        (1)
+   1                                                                F               (0)        (1)
+       The daily futures basis is constructed as CARi,t = log( i,t
+                                                               (0) ), where Fi,t and Fi,t are front-month
+                                                                    Fi,t
+futures price and the next-maturity futures price on day t of commodity i. Following Amihud (2002), the
+                                                       |Ri,t |
+daily illiquidity measure is calculated as AM Ii,t = F V OL  i,t
+                                                                 , where |Ri,t | and F V OLi,t are the absolute value
+of daily futures return and futures volume on the day t for commodity i.
+   2
+     See Appendix A for details
+
+
+
+                                                         11
+
+                       Electronic copy available at: https://ssrn.com/abstract=4841490
+stock forecasts is positive or negative. Thus, the negative relation between the change
+in forecasts of ending stocks and post-announcement returns is not surprising. However,
+when the cumulative return horizons extend beyond CUM(+0, +5) to include CUM(+0,
++10), CUM(+0, +15), and CUM(+0, +20), the predictive power of ∆ES diminishes for
+cumulative post-announcement returns. This suggests that ending stocks forecasts from the
+WASDE reports do not demonstrate reliable predictive capabilities over longer time periods.
+Following the incorporation of information from ending stocks forecasts into futures prices,
+the predictive efficacy of ∆ES diminishes rapidly.
+   The coefficient of options volumes is strongly negative (t-statistics = -2.888) in the column
+of CUM(+0,+5). When informed traders in options markets obtain private information be-
+fore the announcement, they will make decisions about investment before the report becomes
+publicly available, which leads to fluctuations in trading volumes. Furthermore, options vol-
+umes have significant predictive power (t-statistics = -2.786, -3.502, -3.737) for the other
+three columns of CUM(+0,+10), CUM(+0,+15), and CUM(+0,+20). An important finding
+is that options volumes even have better performance when the predictive horizon is longer
+since t-statistics are larger in CUM(+0,+15) and CUM(+0,+20) than CUM(+0,+5). Fu-
+tures volumes also have predictive power for futures returns in post-announcement periods
+(t-statistics = 2.136, 1.792, 2.499, 2.433) in the four return windows within twenty days
+after the release date. The trading volume of options and futures in pre-announcement (day
+-5 to day -1) not only contains the information regarding the WASDE reports but also in-
+cludes news that is farther away than the post-announcement window (day +5 to day +20).
+Thus, trading volumes in commodity markets have a longer horizon in predictive power than
+the change of predictions in ending stocks ∆ES. Consistent with the findings presented
+in the previous section that more informed trading happens in options than futures, the
+information contained in options markets during the pre-announcement period exhibits su-
+perior predictive capabilities compared to that in futures markets. The variable pre-CUM is
+positive and significant (t-statistics = 2.142, 1.668, 1.731) in the columns of CUM(+0,+5),
+
+
+                                                12
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+CUM(+0,+10), and CUM(+0,+15), which indicates the momentum effects exist in before
+and after the announcement. However, the momentum effect diminishes as the time horizon
+extends over a longer period.
+
+
+
+5    Conclusion
+
+In this study, we examine the USDA announcement effects on commodity markets. In the
+previous literature, most related studies focus on the reactions in commodity futures markets
+from WASDE reports, whether commodity options markets are affected has received much
+less attention. However, as a critical part of commodity markets, it is of great importance to
+explore how commodity options markets react to WASDE reports. We analyze how the ab-
+normal futures and options volumes change before and after the released date and conclude
+that the USDA announcement effects exist in both futures and options markets. Specifically,
+the effects are more significant in futures than options. In most commodities, these effects
+fade away within five days in most futures and options markets, while the decline speed
+is slower in options. Furthermore, our study provides evidence that options markets are
+involved with more informed trading behaviors than futures since there are more options
+markets that exist significant abnormal options volumes during the pre-announcement pe-
+riod. Motivated by these findings, we conduct the analysis of post-announcement returns
+and compare the predictive power between the information in commodity markets and end-
+ing stocks forecasts from WASDE reports. The results show that commodity futures and
+options have a longer predictive horizon than ending stocks forecasts. Our work should
+provide guidance for further work in the area of commodity options markets and WASDE
+reports. For example, a detailed analysis to explore the reason why the signs of coefficients
+for futures and options volumes in predicting post-announcement returns are opposite is an
+interesting avenue for future work.
+
+
+
+
+                                                13
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+References
+
+Adjemian, M. K. (2012). Quantifying the wasde announcement effect. American Journal of
+  Agricultural Economics 94 (1), 238–256.
+
+Adjemian, M. K. and S. H. Irwin (2018). Usda announcement effects in real-time. American
+  Journal of Agricultural Economics 100 (4), 1151–1171.
+
+Amihud, Y. (2002). Illiquidity and stock returns: cross-section and time-series effects. Jour-
+  nal of financial markets 5 (1), 31–56.
+
+Bohmann, M. J., D. Michayluk, and V. Patel (2019). Price discovery in commodity deriva-
+  tives: Speculation or hedging? Journal of Futures Markets 39 (9), 1107–1121.
+
+Cao, A. N. and M. A. Robe (2022). Market uncertainty and sentiment around usda an-
+  nouncements. Journal of Futures Markets 42 (2), 250–275.
+
+Cheng, I.-H., K. Tang, and L. Yan (2021). Hedging pressure and commodity option prices.
+  Available at SSRN 3933070 .
+
+Good, D. and S. Irwin (2014). Accuracy of usda forecasts of corn ending stocks. farmdoc
+  daily 4 (94).
+
+Indriawan, I., V. Martinez, and Y. Tse (2021). The impact of the change in usda an-
+  nouncement release procedures on agricultural commodity futures. Journal of Commodity
+  Markets 23, 100149.
+
+Irwin, S. H., D. L. Good, and J. K. Gomez (2001). The value of usda outlook information:
+  An investigation using event study analysis. Technical report.
+
+Karali, B. (2012). Do usda announcements affect comovements across commodity futures
+  returns? Journal of Agricultural and Resource Economics, 77–97.
+
+
+
+
+                                                14
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+Lapan, H., G. Moschini, and S. D. Hanson (1991). Production, hedging, and specula-
+  tive decisions with options and futures markets. American Journal of Agricultural Eco-
+  nomics 73 (1), 66–74.
+
+Luo, X., Y. Lin, X. Yu, and F. He (2021). How trading in commodity futures option markets
+  impacts commodity futures prices. Journal of Futures Markets 41 (8), 1333–1347.
+
+Moschini, G. and H. Lapan (1995). The hedging role of options and futures under joint price,
+  basis, and production risk. International economic review , 1025–1049.
+
+Petersen, M. A. (2009). Estimating standard errors in finance panel data sets: Comparing
+  approaches. Review of Financial Studies 22 (1), 435–480.
+
+Randall, F. T. and D. A. Summer (1993). The effects of usda reports in futures and options
+  markets. The Journal of Futures Markets (1986-1998) 13 (2), 157.
+
+Ying, J., Y. Chen, and J. H. Dorfman (2019). Flexible tests for usda report announcement
+  effects in futures markets. American Journal of Agricultural Economics 101 (4), 1228–
+  1246.
+
+Zhang, T. (2022). Hedging pressure and liquidity provision in commodity options markets.
+  Journal of Futures Markets.
+
+Zhang, T. and Z. Li (2022). Can a rational expectation storage model explain the usda
+  ending grain stocks forecast errors? Journal of Futures Markets 42 (3), 313–337.
+
+Data Citation: [dataset] Bloomberg, futures prices, Data repository; retrieved from https:
+//www.bloomberg.com
+
+Data Citation: [dataset] World Agricultural Supply and Demand Estimates (WASDE) pub-
+lished by the World Agricultural Outlook Board (WAOB), Data repository; retrieved from
+https://www.usda.gov/oce/commodity/wasde
+
+
+                                                15
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+Figure 1: Procedure to select sample (source: Zhang (2022))
+
+
+
+
+                                16
+
+  Electronic copy available at: https://ssrn.com/abstract=4841490
+                                                                  Soybean Oil                                                                                                             Corn
+
+
+
+
+                                                                                                                                                  30
+                              4
+
+
+
+
+                                                                                                                                                  25
+Estimate and 95% Conf. Int.
+
+
+
+
+                                                                                                                    Estimate and 95% Conf. Int.
+
+                                                                                                                                                  20
+                              3
+
+
+
+
+                                                                                                                                                  15
+                              2
+
+
+
+
+                                                                                                                                                  10
+                                                                                                                                                  5
+                              1
+
+
+
+
+                                                                                                                                                  0
+                              0
+
+
+
+
+                                    Dw−5   Dw−4   Dw−3   Dw−2   Dw−1    Dw      Dw+1   Dw+2   Dw+3   Dw+4   Dw+5                                       Dw−5   Dw−4   Dw−3   Dw−2   Dw−1    Dw     Dw+1   Dw+2   Dw+3   Dw+4   Dw+5
+
+                                                                       Dates                                                                                                              Dates
+
+
+
+
+                                                                       Cotton                                                                                                         Soybeans
+                              1.5
+
+
+
+
+                                                                                                                                                  15
+Estimate and 95% Conf. Int.
+
+
+
+
+                                                                                                                    Estimate and 95% Conf. Int.
+                              1.0
+
+
+
+
+                                                                                                                                                  10
+                              0.5
+
+
+
+
+                                                                                                                                                  5
+                              0.0
+
+
+
+
+                                                                                                                                                  0
+
+
+
+
+                                    Dw−5   Dw−4   Dw−3   Dw−2   Dw−1    Dw      Dw+1   Dw+2   Dw+3   Dw+4   Dw+5                                       Dw−5   Dw−4   Dw−3   Dw−2   Dw−1    Dw     Dw+1   Dw+2   Dw+3   Dw+4   Dw+5
+
+                                                                       Dates                                                                                                              Dates
+
+
+
+Figure 2: The coefficient and 95% confidence interval of abnormal futures volumes around
+announcement date (1)
+
+
+
+
+                                                                                                                   17
+
+                                                            Electronic copy available at: https://ssrn.com/abstract=4841490
+                                                                     Sugar                                                                                                                                        Soybean Meal
+
+
+
+
+                                                                                                                                                                              4
+                              5
+Estimate and 95% Conf. Int.
+
+
+
+
+                                                                                                                                                Estimate and 95% Conf. Int.
+                              4
+
+
+
+
+                                                                                                                                                                              3
+                              3
+
+
+
+
+                                                                                                                                                                              2
+                              2
+
+
+
+
+                                                                                                                                                                              1
+                              1
+
+
+
+
+                                                                                                                                                                              0
+                              0
+
+
+
+
+                                  Dw−5   Dw−4   Dw−3   Dw−2   Dw−1       Dw                          Dw+1   Dw+2   Dw+3   Dw+4   Dw+5                                                Dw−5   Dw−4   Dw−3   Dw−2   Dw−1    Dw     Dw+1   Dw+2   Dw+3   Dw+4   Dw+5
+
+                                                                     Dates                                                                                                                                              Dates
+
+
+
+
+                                                                                                                                               Wheat
+                                                                                                    8
+                                                                      Estimate and 95% Conf. Int.
+
+                                                                                                    6
+                                                                                                    4
+                                                                                                    2
+                                                                                                    0
+                                                                                                    −2
+
+
+
+
+                                                                                                            Dw−5   Dw−4   Dw−3   Dw−2   Dw−1       Dw                         Dw+1   Dw+2   Dw+3   Dw+4   Dw+5
+
+                                                                                                                                               Dates
+
+
+
+Figure 3: The coefficient and 95% confidence interval of abnormal futures volumes around
+announcement date (2)
+
+
+
+
+                                                                                                                                           18
+
+                                                          Electronic copy available at: https://ssrn.com/abstract=4841490
+                                                                   Soybean Oil                                                                                                             Corn
+
+
+
+
+                                                                                                                                                   15
+                              0.5
+                              0.4
+Estimate and 95% Conf. Int.
+
+
+
+
+                                                                                                                     Estimate and 95% Conf. Int.
+
+                                                                                                                                                   10
+                              0.3
+                              0.2
+
+
+
+
+                                                                                                                                                   5
+                              0.1
+                              0.0
+                              −0.1
+
+
+
+
+                                                                                                                                                   0
+
+
+
+                                     Dw−5   Dw−4   Dw−3   Dw−2   Dw−1    Dw      Dw+1   Dw+2   Dw+3   Dw+4   Dw+5                                       Dw−5   Dw−4   Dw−3   Dw−2   Dw−1    Dw     Dw+1   Dw+2   Dw+3   Dw+4   Dw+5
+
+                                                                        Dates                                                                                                              Dates
+
+
+
+
+                                                                        Cotton                                                                                                         Soybeans
+                              1.0
+
+
+
+
+                                                                                                                                                   6
+Estimate and 95% Conf. Int.
+
+
+
+
+                                                                                                                     Estimate and 95% Conf. Int.
+                              0.8
+                              0.6
+
+
+
+
+                                                                                                                                                   4
+                              0.4
+
+
+
+
+                                                                                                                                                   2
+                              0.2
+                              0.0
+
+
+
+
+                                                                                                                                                   0
+
+
+
+
+                                     Dw−5   Dw−4   Dw−3   Dw−2   Dw−1    Dw      Dw+1   Dw+2   Dw+3   Dw+4   Dw+5                                       Dw−5   Dw−4   Dw−3   Dw−2   Dw−1    Dw     Dw+1   Dw+2   Dw+3   Dw+4   Dw+5
+
+                                                                        Dates                                                                                                              Dates
+
+
+
+Figure 4: The coefficient and 95% confidence interval of abnormal options volumes around
+announcement date (1)
+
+
+
+
+                                                                                                                    19
+
+                                                             Electronic copy available at: https://ssrn.com/abstract=4841490
+                                                                       Sugar                                                                                                                                             Soybean Meal
+                              2.0
+
+
+
+
+                                                                                                                                                                                  0.5
+Estimate and 95% Conf. Int.
+
+
+
+
+                                                                                                                                                    Estimate and 95% Conf. Int.
+
+                                                                                                                                                                                  0.4
+                              1.5
+
+
+
+
+                                                                                                                                                                                  0.3
+                              1.0
+
+
+
+
+                                                                                                                                                                                  0.2
+                                                                                                                                                                                  0.1
+                              0.5
+
+
+
+
+                                                                                                                                                                                  0.0
+                                                                                                                                                                                  −0.1
+                              0.0
+
+
+
+
+                                    Dw−5   Dw−4   Dw−3   Dw−2   Dw−1       Dw                            Dw+1   Dw+2   Dw+3   Dw+4   Dw+5                                                   Dw−5   Dw−4   Dw−3   Dw−2   Dw−1    Dw     Dw+1   Dw+2   Dw+3   Dw+4   Dw+5
+
+                                                                       Dates                                                                                                                                                   Dates
+
+
+
+
+                                                                                                                                                   Wheat
+                                                                                                      1.5
+                                                                        Estimate and 95% Conf. Int.
+
+                                                                                                      1.0
+                                                                                                      0.5
+                                                                                                      0.0
+                                                                                                      −0.5
+
+
+
+
+                                                                                                                Dw−5   Dw−4   Dw−3   Dw−2   Dw−1       Dw                            Dw+1   Dw+2   Dw+3   Dw+4   Dw+5
+
+                                                                                                                                                   Dates
+
+
+
+Figure 5: The coefficient and 95% confidence interval of abnormal options volumes around
+announcement date (2)
+
+
+
+
+                                                                                                                                               20
+
+                                                            Electronic copy available at: https://ssrn.com/abstract=4841490
+                Table 1: Summary statistics for commodities in the sample.
+This table shows the summary statistics of seven agricultural commodity futures and options.
+Columns F V OL and OV OL shows the average daily futures and options trading volumes.
+Columns E[R](%) and σ[R], are the average and standard deviation, respectively, of daily
+futures returns.
+  Commodity      Symbol F V OL (×103 ) OV OL (×103 )             E[R](%) SD[R]       Sharpe ratio
+    Wheat          W            37.962                9.552       -0.052     1.875      -0.028
+     Corn           C           93.736               27.781       -0.030     1.652      -0.018
+   Soybeans         S           58.429               19.102        0.007     1.448       0.005
+  Soybean oil      BO           25.287                2.216       -0.018     1.422      -0.013
+ Soybean meal      SM           21.490                2.171        0.039     1.605       0.024
+    Sugar          SB           36.997                8.296       -0.049     2.001      -0.024
+    Cotton         CT            9.515                3.460       -0.027     1.602      -0.017
+
+
+
+
+                                                21
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+                                                                                                                Table 2: Abnormal values of futures and commodity volumes
+                                                                  This table presents the abnormal values of trading volumes in commodity markets. Columns ab F V OL (×103 ) and ab OV OL (×103 ) show the abnormal values of futures and options
+                                                                  volumes. DW denotes the announcement date.
+
+                                                                                   Wheat                      Corn                Soybeans              Soybean oil           Soybean meal                   Sugar                      Cotton
+
+                                                                   Dates   ab F V OL   ab OV OL    ab F V OL    ab OV OL ab F V OL ab OV OL ab F V OL         ab OV OL    ab F V OL   ab OV OL    ab F V OL     ab OV OL      ab F V OL    ab OV OL
+                                                                   Dw-5      40.304      10.584      95.712          27.400   61.294    19.625      25.886       2.431      21.937      2.232       37.504           8.356      9.819            3.565
+                                                                   Dw-4      38.774        9.384     92.018          25.532   59.161    18.087      24.476       2.210      20.730      2.005       36.707           7.389      9.189            3.072
+Electronic copy available at: https://ssrn.com/abstract=4841490
+
+
+
+
+                                                                   Dw-3      38.857        8.980     95.132          26.361   59.277    17.883      24.892       2.164      20.993      2.117       38.314           7.511      9.627            3.383
+                                                                   Dw-2      40.839        9.087     98.155          26.351   58.559    17.539      25.636       2.109      21.363      2.149       40.330           7.519      9.961            3.448
+                                                                   Dw-1      42.260      10.007     101.197          33.949   58.484    20.666      25.967       2.174      21.687      2.447       40.878           6.942      9.931            3.576
+                                                                   Dw        49.931      10.998     129.645          42.023   76.552    26.756      29.847       2.497      26.584      2.642       42.757           7.550     11.623            4.009
+                                                                   Dw+1      42.367        9.338    107.192          30.268   62.732    20.190      26.215       2.122      22.340      2.447       41.006           8.162     10.145            3.710
+                                                                   Dw+2      39.500        8.986     98.632          25.957   61.223    18.827      25.900       2.074      22.368      2.214       36.198           9.041      9.540            3.628
+                                                                   Dw+3      37.179        9.088     93.592          25.719   57.677    17.697      25.086       2.168      21.393      2.133       34.988           8.667      9.694            3.517
+                                                                   Dw+4      34.056        8.846     87.793          24.614   55.528    17.820      24.086       2.058      20.584      1.965       37.482           9.965      9.588            3.628
+                                                                   Dw+5      34.503        9.507     83.761          24.820   54.421    17.528      23.168       1.930      20.087      1.983       36.871           10.273     9.490            3.587
+
+
+
+
+                                                                                                                                                      22
+           Table 3: Results of USDA announcement effect in futures volumes (1)
+This table presents the analysis of abnormal values of futures volumes using the ordinary least squares
+regression. Seasonal represents the monthly dummy variables. The time trend increases by one unit per
+calendar year. Control variables are the futures volumes and return in the previous day of the announcement
+date. The standard errors are estimated by Newey-West method to control serial correlation. The t-statistics
+are shown in parentheses. The notations ***, **, * indicate the coefficient is significant at the 1%, 5%, and
+10% level, respectively.
+
+ Dependent variable: ab F V OL
+                   Soybean Oil                   Corn                     Cotton                  Soybean
+
+                  (1)         (2)         (3)             (4)       (5)            (6)      (7)             (8)
+Dw-5            2.020∗∗∗   2.313∗∗∗     1.816           3.235∗    0.933∗∗∗    0.831∗∗∗   4.993∗∗∗      5.517∗∗∗
+                (3.637)    (4.395)     (1.098)          (1.945)   (3.889)     (3.643)    (4.404)       (5.180)
+
+Dw-4            2.418∗∗∗   2.656∗∗∗     2.071           3.007∗∗   0.929∗∗∗    0.862∗∗∗   3.910∗∗∗      4.378∗∗∗
+                (4.254)    (4.980)     (1.491)          (2.108)   (3.775)     (3.716)    (3.184)       (3.787)
+
+Dw-3            2.759∗∗∗   2.928∗∗∗    4.357∗∗∗     5.308∗∗∗      0.580∗∗∗    0.587∗∗∗   4.992∗∗∗      5.580∗∗∗
+                (5.067)    (5.649)     (2.954)      (3.555)       (2.769)     (2.948)    (4.679)       (5.545)
+
+Dw-2            2.987∗∗∗   2.911∗∗∗    5.346∗∗∗     5.969∗∗∗      0.698∗∗∗    0.662∗∗∗   3.625∗∗∗      4.117∗∗∗
+                (5.328)    (5.573)     (2.695)      (3.009)       (2.906)     (2.952)    (4.001)       (4.952)
+
+Dw-1            2.439∗∗∗   2.408∗∗∗    5.014∗∗∗     5.992∗∗∗      0.447∗∗     0.531∗∗∗   3.196∗∗∗      3.875∗∗∗
+                (4.345)    (4.529)     (2.831)      (3.380)       (2.151)     (2.693)    (3.387)       (4.312)
+
+Dw              3.420∗∗∗   3.494∗∗∗   25.875∗∗∗     27.013∗∗∗     1.136∗∗∗    1.188∗∗∗   13.778∗∗∗    14.119∗∗∗
+                (5.960)    (6.274)     (9.438)       (9.849)      (4.623)     (5.124)     (9.054)      (9.442)
+
+Dw+1            2.195∗∗∗   2.316∗∗∗    7.716∗∗∗     9.171∗∗∗      0.714∗∗∗    0.738∗∗∗   5.145∗∗∗      5.605∗∗∗
+                (4.219)    (4.634)     (4.381)      (5.227)       (3.042)     (3.182)    (4.792)       (5.443)
+
+Dw+2            1.425∗∗    1.982∗∗∗     −1.125           2.213     0.257      0.450∗∗    3.166∗∗∗      4.715∗∗∗
+                (2.541)    (3.554)     (−0.673)         (1.357)   (1.177)     (2.078)    (2.850)       (4.316)
+
+Dw+3            1.464∗∗∗   1.593∗∗∗    −2.683∗∗      −0.989       0.620∗      0.687∗∗     1.229        1.935∗∗
+                (2.721)    (3.098)     (−2.091)     (−0.785)      (1.934)     (2.130)    (1.337)       (2.173)
+
+Dw+4            1.584∗∗∗   1.635∗∗∗     −0.882           0.131    0.597∗∗     0.656∗∗∗   1.956∗∗       2.523∗∗∗
+                (3.255)    (3.569)     (−0.715)         (0.110)   (2.440)     (2.777)    (2.293)       (3.084)
+
+Dw+5            0.772∗      0.738∗      −0.771       −0.236        0.090       0.155      0.679         1.007
+                (1.838)     (1.941)    (−0.712)     (−0.217)      (0.382)     (0.664)    (0.910)       (1.411)
+
+Time Trend        No         Yes          No             Yes        No             Yes      No              Yes
+
+Seasonal          No         Yes          No             Yes        No             Yes      No              Yes
+
+Controls          Yes        Yes         Yes             Yes        Yes            Yes     Yes              Yes
+
+Observations     5,722       5,722      4,834           4,834      4,529       4,529      5,657         5,657
+R2               0.164       0.335      0.243           0.275      0.144       0.212      0.152         0.279
+
+
+
+
+                                                        23
+
+                  Electronic copy available at: https://ssrn.com/abstract=4841490
+Table 4: Results of USDA announcement effect in futures volumes (2)
+   This table presents the analysis of abnormal values of futures volumes using the ordinary
+   least squares regression. Seasonal represents the monthly dummy variables. The time
+   trend increases by one unit per calendar year. Control variables are the futures volumes
+   and return in the previous day of the announcement date. The standard errors are esti-
+   mated by Newey-West method to control serial correlation. The t-statistics are shown in
+   parentheses. The notations ***, **, * indicate the coefficient is significant at the 1%, 5%,
+   and 10% level, respectively.
+
+    Dependent variable: ab F V OL
+                              Sugar                Soybean Meal                  Wheat
+
+                       (1)             (2)         (3)         (4)        (5)             (6)
+                             ∗               ∗         ∗∗∗        ∗∗∗           ∗
+   Dw-5              1.378        1.272          1.866       1.948      1.499        1.531∗
+                     (1.948)      (1.767)        (4.283)     (4.899)    (1.894)      (1.946)
+
+   Dw-4              2.344∗∗∗    2.352∗∗∗        1.744∗∗∗    1.807∗∗∗    0.730        0.663
+                     (3.212)     (3.210)         (3.804)     (4.429)    (1.039)      (0.958)
+
+   Dw-3              1.765∗∗∗     1.694∗∗        2.074∗∗∗    2.149∗∗∗    0.362        0.248
+                     (2.595)      (2.421)        (4.567)     (5.483)    (0.513)      (0.368)
+
+   Dw-2              2.473∗∗∗    2.457∗∗∗        2.001∗∗∗    1.933∗∗∗   1.778∗∗      1.578∗∗
+                     (3.197)     (3.320)         (4.588)     (5.366)    (2.565)      (2.342)
+
+   Dw-1              2.226∗∗∗    2.312∗∗∗        1.672∗∗∗    1.660∗∗∗   2.599∗∗∗     2.435∗∗∗
+                     (2.854)     (3.110)         (3.582)     (4.060)    (3.395)      (3.376)
+
+   Dw                3.708∗∗∗    3.913∗∗∗        3.317∗∗∗    3.310∗∗∗   6.687∗∗∗     6.665∗∗∗
+                     (4.204)     (4.515)         (6.181)     (6.485)    (6.826)      (7.027)
+
+   Dw+1              2.079∗∗     2.333∗∗∗        2.262∗∗∗    2.283∗∗∗   2.921∗∗∗     3.008∗∗∗
+                     (2.432)     (2.696)         (4.589)     (5.412)    (4.003)      (4.136)
+
+   Dw+2               1.187       1.512∗∗        1.327∗∗     1.754∗∗∗    0.121        0.731
+                     (1.575)      (2.055)        (2.575)     (3.589)    (0.163)      (0.934)
+
+   Dw+3              2.356∗∗∗    2.556∗∗∗        0.917∗∗     1.034∗∗∗    −0.470      −0.351
+                     (3.490)     (3.983)         (2.128)     (2.826)    (−0.712)    (−0.541)
+
+   Dw+4              3.186∗∗∗    3.331∗∗∗        1.148∗∗∗    1.220∗∗∗    0.279        0.235
+                     (3.734)     (4.046)         (2.924)     (3.879)    (0.448)      (0.381)
+
+   Dw+5              2.931∗∗∗    2.975∗∗∗         0.419       0.428      −0.252      −0.419
+                     (3.162)     (3.216)         (1.261)     (1.481)    (−0.461)    (−0.769)
+
+   Time Trend          No             Yes          No          Yes        No             Yes
+
+   Seasonal            No             Yes          No          Yes        No             Yes
+
+   Controls            Yes            Yes          Yes         Yes        Yes            Yes
+
+   Observations       3,837           3,837       5,708       5,708      4,947           4,947
+   R2                 0.189           0.206       0.185       0.319      0.257           0.287
+
+
+
+
+                                                  24
+
+          Electronic copy available at: https://ssrn.com/abstract=4841490
+           Table 5: Results of USDA announcement effect in option volumes (1)
+This table presents the analysis of abnormal values of option volumes using the ordinary least squares regres-
+sion. Seasonal represents the monthly dummy variables. The time trend increases by one unit per calendar
+year. Controls variables are the options volumes and return in the previous day of the announcement date.
+The standard errors are estimated by Newey-West method to control serial correlation. The t-statistics are
+shown in parentheses. The notations ***, **, * indicate the coefficient is significant at the 1%, 5%, and 10%
+level, respectively.
+
+ Dependent variable: ab OV OL
+                     Soybean Oil                         Corn                     Cotton                Soybean
+
+                   (1)          (2)           (3)                 (4)       (5)            (6)       (7)          (8)
+                         ∗∗           ∗∗            ∗∗              ∗∗∗        ∗∗∗           ∗∗∗
+Dw-5             0.221        0.258        1.900            2.691         0.832       0.778         0.731     1.009∗∗
+                 (2.001)      (2.532)      (2.140)          (3.097)       (4.927)     (4.903)      (1.351)    (2.005)
+
+Dw-4             0.335∗∗∗     0.368∗∗∗     1.872∗∗          2.397∗∗∗      0.495∗∗∗    0.442∗∗∗     0.797∗     0.914∗∗
+                 (3.162)      (3.734)      (2.316)          (2.985)       (3.320)     (3.235)      (1.826)    (2.169)
+
+Dw-3             0.253∗∗      0.288∗∗∗     2.263∗∗∗         2.719∗∗∗      0.604∗∗∗    0.599∗∗∗     1.695∗∗∗   1.886∗∗∗
+                 (2.400)      (2.773)      (2.868)          (3.410)       (3.645)     (3.645)      (3.075)    (3.462)
+
+Dw-2             0.333∗∗∗     0.340∗∗∗     1.414∗∗              1.687∗∗   0.408∗∗∗    0.378∗∗∗     0.853∗     0.888∗∗
+                 (3.969)      (4.236)      (2.156)              (2.551)   (2.728)     (2.576)      (1.915)    (2.078)
+
+Dw-1             0.220∗∗      0.221∗∗∗     5.577∗∗∗         6.018∗∗∗      0.355∗∗     0.383∗∗∗     1.921∗∗∗   1.995∗∗∗
+                 (2.548)      (2.780)      (5.028)          (5.398)       (2.412)     (2.636)      (3.438)    (3.657)
+
+Dw               0.216∗∗∗     0.214∗∗∗     11.545∗∗∗        11.940∗∗∗     0.682∗∗∗    0.693∗∗∗     5.183∗∗∗   5.115∗∗∗
+                 (2.779)      (2.860)       (7.364)          (7.717)      (4.129)     (4.213)      (5.344)    (5.196)
+
+Dw+1             0.302∗∗∗     0.302∗∗∗     1.522∗           2.629∗∗∗      0.461∗∗∗    0.467∗∗∗     1.749∗∗∗   2.028∗∗∗
+                 (3.255)      (3.477)      (1.720)          (2.894)       (3.507)     (3.641)      (3.315)    (3.908)
+
+Dw+2              0.134        0.166        −0.907               0.835     0.283      0.325∗        −0.006    0.863∗
+                 (1.247)      (1.531)      (−1.070)             (1.004)   (1.590)     (1.882)      (−0.014)   (1.893)
+
+Dw+3             0.234∗∗      0.231∗∗       −0.706               0.008    0.335∗∗     0.345∗∗       0.088      0.355
+                 (2.321)      (2.346)      (−1.162)             (0.014)   (1.999)     (2.070)      (0.215)    (0.936)
+
+Dw+4             0.290∗∗∗     0.276∗∗∗      0.203                0.484    0.372∗∗     0.374∗∗∗      0.152      0.262
+                 (3.246)      (3.259)      (0.329)              (0.864)   (2.558)     (2.634)      (0.364)    (0.687)
+
+Dw+5             −0.027        −0.024       0.419                0.506     0.171       0.169       0.893∗∗    0.901∗∗
+                (−0.387)      (−0.373)     (0.722)              (0.909)   (1.324)     (1.324)      (2.295)    (2.390)
+
+Time Trend         No           Yes           No                 Yes        No             Yes       No           Yes
+
+Seasonal           No           Yes           No                 Yes        No             Yes       No           Yes
+
+Controls           Yes          Yes          Yes                 Yes        Yes            Yes       Yes          Yes
+
+Observations      5,722        5,722        4,834               4,834      4,529       4,529        5,657      5,657
+R2                0.147        0.228        0.225               0.277      0.152       0.217        0.192      0.264
+
+
+
+
+                                                            25
+
+                   Electronic copy available at: https://ssrn.com/abstract=4841490
+Table 6: Results of USDA announcement effect in option volumes (2)
+  This table presents the analysis of abnormal values of option volumes using the ordinary
+  least squares regression. Seasonal represents the monthly dummy variables. The time
+  trend increases by one unit per calendar year. Controls variables are the options volumes
+  and return in the previous day of the announcement date. The standard errors are esti-
+  mated by Newey-West method to control serial correlation. The t-statistics are shown in
+  parentheses. The notations ***, **, * indicate the coefficient is significant at the 1%, 5%,
+  and 10% level, respectively.
+
+   Dependent variable: ab OV OL
+                             Sugar              Soybean Meal                    Wheat
+
+                      (1)             (2)       (3)         (4)          (5)             (6)
+                         ∗∗∗            ∗∗∗           ∗           ∗∗           ∗∗
+  Dw-5              0.963       1.134         0.184       0.198        0.626        0.816∗∗∗
+                    (2.733)     (3.209)       (1.812)     (2.092)      (2.010)      (2.774)
+
+  Dw-4              1.258∗∗∗    1.430∗∗∗      0.170∗∗     0.174∗∗       −0.072       0.161
+                    (3.739)     (4.373)       (2.232)     (2.351)      (−0.235)     (0.522)
+
+  Dw-3               0.428       0.580∗       0.229∗∗     0.237∗∗∗      −0.263       −0.058
+                    (1.494)      (1.922)      (2.472)     (2.674)      (−0.925)     (−0.207)
+
+  Dw-2              0.981∗∗∗    1.097∗∗∗      0.319∗∗∗    0.312∗∗∗      0.283        0.373
+                    (3.253)     (3.203)       (4.411)     (4.189)      (1.087)      (1.334)
+
+  Dw-1              0.603∗∗      0.659∗∗      0.299∗∗∗    0.301∗∗∗      0.354        0.432
+                    (2.569)      (2.472)      (3.400)     (3.484)      (1.247)      (1.482)
+
+  Dw                1.124∗∗∗    1.118∗∗∗      0.315∗∗∗    0.315∗∗∗     0.762∗∗      0.855∗∗
+                    (3.849)     (3.881)       (3.717)     (3.507)      (2.220)      (2.440)
+
+  Dw+1              1.332∗∗∗    1.184∗∗∗      0.325∗∗∗    0.342∗∗∗      0.301       0.486∗
+                    (3.673)     (3.511)       (3.171)     (3.171)      (1.107)      (1.671)
+
+  Dw+2              1.171∗∗∗    1.068∗∗∗      0.179∗      0.206∗∗       0.216        0.489
+                    (3.273)     (2.797)       (1.903)     (2.121)      (0.664)      (1.491)
+
+  Dw+3              0.792∗∗      0.699∗∗       0.014       0.035        −0.126       −0.013
+                    (2.360)      (2.075)      (0.194)     (0.470)      (−0.510)     (−0.056)
+
+  Dw+4              1.315∗∗∗    1.274∗∗∗       0.116       0.120       0.746∗∗∗     0.820∗∗∗
+                    (3.199)     (3.588)       (1.577)     (1.487)      (2.961)      (3.283)
+
+  Dw+5              1.012∗∗      0.967∗∗       0.078       0.081        0.317        0.368
+                    (2.193)      (1.990)      (1.469)     (1.437)      (1.305)      (1.484)
+
+  Time Trend          No             Yes        No          Yes          No             Yes
+
+  Seasonal            No             Yes        No          Yes          No             Yes
+
+  Controls            Yes            Yes        Yes         Yes          Yes            Yes
+
+  Observations       3,837           3,837     5,708       5,708        4,947           4,947
+  R2                 0.148           0.199     0.206       0.248        0.207           0.252
+
+
+
+
+                                               26
+
+         Electronic copy available at: https://ssrn.com/abstract=4841490
+           Table 7: Results for post-announcement cumulative returns analysis
+This table presents the ordinary least squares regression (the standard errors are clus-
+tered by time) results of the predictive power of futures and options volumes on the
+cumulative returns following the announcement. ∆ES is the change of forecast in end-
+ing stock from last month to current month, scaled by the forecast in the last month.
+pre-CUM denotes cumulative return over the pre-announcement window (days -5 to -1);
+abs(pre-CUM) denotes absolute value ofcumulative return over the pre-announcement
+window (days -5 to -1). CAR and AM I are the average value of daily futures basis
+and measure for illiquidity for commodity over the pre-announcement window. The t-
+statistics are shown in parentheses. The notations ***, **, * indicate the coefficient is
+significant at the 1%, 5%, and 10% level, respectively.
+
+
+Dep. variable:    CUM(+0,+5)          CUM(+0,+10)          CUM(+0,+15)             CUM(+0,+20)
+
+∆ES                 −3.800∗∗∗              0.132                 0.045                0.022
+                    (−3.759)              (1.171)               (0.463)              (0.270)
+
+log(F VOL)           0.285∗∗              0.034∗                0.043∗∗              0.037∗∗
+                     (2.136)              (1.792)               (2.499)              (2.433)
+
+log(O VOL)          −0.275∗∗∗            −0.039∗∗∗            −0.044∗∗∗             −0.040∗∗∗
+                    (−2.888)             (−2.786)             (−3.502)              (−3.737)
+
+pre-CUM              0.080∗∗              0.008∗                0.009∗                0.007
+                     (2.142)              (1.668)               (1.731)              (1.592)
+
+abs(pre-CUM)         −0.064               −0.007                −0.002                −0.003
+                    (−1.254)             (−0.961)              (−0.225)              (−0.676)
+
+CAR                  7.052∗                0.695                0.973∗∗               0.565
+                     (1.952)              (1.474)               (2.130)              (1.579)
+
+AM I                −129.378              67.304                70.972               17.684
+                    (−0.225)              (0.809)               (1.134)              (0.244)
+
+Constant            −7.641∗∗              −0.773               −1.074∗∗              −0.637∗
+                    (−2.046)             (−1.581)              (−2.287)              (−1.744)
+
+Observations          2,173                2,074                 2,074                2,074
+R2                    0.023                0.011                 0.016                0.013
+
+
+
+                                               27
+
+                 Electronic copy available at: https://ssrn.com/abstract=4841490
+Appendices
+
+A      Model for ending stocks and futures prices
+
+Following the rational storage model in Zhang and Li (2022), the amount of crop to be stored
+to the following period shall be compensated by the carry in the futures markets:
+
+
+                                Et [pT (zT + cT )] − pt = g(cT |ct )
+
+
+where pT , cT , and zT are the commodity price, the level of ending stocks, and the new
+production of the crop at the end of marketing year T . The spot price and the carryout of
+commodity from the previous marketing year are pt and ct . What’s more, g(cT |ct ) is the cost
+function of storing cT , conditional on the initial carryout ct .
+    If we assume that there is the absence of a risk premium, the expected commodity prices
+equal to futures prices with the same maturity date T :
+
+
+                                     Et [pT (zT + cT )] = ft,T
+
+
+since the price function pT is decreasing in cT , there is a negative relationship between cT
+and ft,T .
+
+
+
+
+                                                 28
+
+                   Electronic copy available at: https://ssrn.com/abstract=4841490
+
