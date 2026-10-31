@@ -101,3 +101,15 @@ frozen design gate. The other commits are the inverse Bitcoin packet, already re
      $692) fits.
    - The note's own caveats: the 01:00-07:00 entry block was chosen after the 2023+ trades were seen, there's no
      walk-forward, and the night entries only pay since 2023.
+
+## 2026-10-31 (5): RollZone 24h full test (user: "test it")
+
+Ported to Python (`analysis/rollzone_24h_test.py`, Good Friday fix on); benches in `analysis/rollzone_bench.py`.
+Verdict **C**: not for any Apex plan; it goes on the capital-expansion bench (personal). Details in
+`checks/candidates/rollzone_24h/verdict.md`.
+
+Found on the way:
+- The `load_mc` open-trade fix (0928461) worked in a real `build_lab` run ("dropped 1 unfinished trade" on ONB ML funded v2).
+- Rebuilding `scratch_data` also needs `gy.pkl` (YM) and `btc.pkl` (BTC) grids before `s_rank_gap_round2_test.py`, which
+  writes `s_rank_gap2.pkl` for the bench lab. `build_lab` doesn't make those two grids; I built them with Grid24 on the
+  full-day files.

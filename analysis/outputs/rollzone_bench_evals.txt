@@ -1,0 +1,12 @@
+RollZone 24h NQ Long (rebuild analysis/rollzone_24h_test.py; trades in checks/candidates/rollzone_24h/) in every Apex plan:
+
+A. 50K evaluation (every start day; RZ worst point placed at the day's start):
+   combine set + RZ 0 MNQ         pass 50.0% (18-22 46.7%, 23-26 54.4%), fail 48.1%
+   combine set + RZ 1 MNQ         pass 44.1% (18-22 41.8%, 23-26 47.1%), fail 55.2%
+   combine set + RZ 2 MNQ         pass 38.8% (18-22 37.0%, 23-26 41.1%), fail 60.4%
+   combine set + RZ 3 MNQ         pass 32.7% (18-22 30.3%, 23-26 35.9%), fail 67.1%
+
+B. 150K evaluation (combine set x 2.5, whole contracts):
+   x 2.5 + RZ 0 MNQ               pass 41.0% (18-22 38.9%, 23-26 43.8%), fail 56.6%
+   x 2.5 + RZ 2 MNQ               pass 36.7% (18-22 33.6%, 23-26 40.9%), fail 62.4%
+   x 2.5 + RZ 5 MNQ               pass 26.9% (18-22 24.8%, 23-26 29.7%), fail 72.5%
