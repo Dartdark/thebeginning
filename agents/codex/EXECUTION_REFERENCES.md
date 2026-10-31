@@ -918,6 +918,21 @@ Related: E09 cash/multiplier reconciliation, E19 information clocks, E38 return/
   Do not restart failed CME index-pair variants from this method citation alone.
 - Status: methodology/execution reference; no new return test, measured saving, portfolio place or trading change.
 
+### E53 — Commodity skew ranks require clean returns, native sizing and delivery-safe rolls
+
+Source: Vojtko and Padyšák, [SSRN 3507947](https://ssrn.com/abstract=3507947), PDF pp. 4–9;
+[full review](results/ssrn_3507947_review_20261030.md), retained 2026-10-30.
+- Use: a monthly long-four/short-four commodity ranking needs the full universe and a specified return construction;
+  splice jumps can distort measured skew, while reduced-universe ranks define a different strategy.
+- Evidence: source/model inspection only. Author cost assumptions and 6.67% modeled annual return are not measured
+  native costs, executable micro performance or a replication. No new returns were run.
+- Limits: the text combines most-liquid-contract holding with a first-day-of-delivery-month roll. Actual notice,
+  delivery and broker deadlines require instrument-specific checks before execution. $1m/$5m capital figures are
+  modeling assumptions, not universal account minimums; smaller native contracts do not cover every exposure automatically.
+- Next check: identified full panel, formation/fill clocks, contract-specific rolls, native integer positions and
+  fees under a frozen replication plan. A bootstrap percentile is not a maximum-loss guarantee.
+- Status: retained personal-account research lead, NEEDS DATA/details; ineligible for current Apex intraday use as written.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
