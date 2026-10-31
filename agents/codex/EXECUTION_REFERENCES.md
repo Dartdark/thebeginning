@@ -247,6 +247,24 @@ Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
   that is a secondary implementation assumption, not verified primary timing or our replicated savings.
   Freeze publication/receipt and first executable prices before using final settlements to select a position.
 
+### E11 follow-up — Speed competition depends on information and repeat participation
+
+Source: He and Kang, *Speed Competition and Strategic Trading*, [SSRN 4940960](https://ssrn.com/abstract=4940960),
+uploaded manuscript; [review and formula audit](results/speed_competition_4940960.md), 2026-10-30.
+- Useful lesson: distinguish signal arrival/quality, execution speed and the ability of fast traders to participate
+  again later. In the benchmark, fast traders trade early only and speed competition has a hump-shaped effect on
+  final price informativeness. Allowing them to trade both rounds improves informativeness in the reported numerical
+  extension. Neither conclusion determines an outside trader's return or optimal delay.
+- Evidence: analytical results and source numerical illustrations, with a scoped independent precision-formula
+  check. The source's institutional-ownership/future-earnings empirical section is proposed, not estimated.
+- Limits: private fundamental knowledge or private signals, strategic risk-neutral traders, random liquidity noise;
+  no calibrated NQ/ES participant panel, native latency/fills or measured cost savings. Minute event rates do not
+  identify the number of informed fast traders. Future earnings used for evaluation must not become trade features.
+- Next check only for a separately justified execution problem: timestamped native orders/quotes, information
+  events and identifiable participation, then fixed-parent-signal delay comparisons including noncompletion,
+  adverse selection and costs at actual size. No infrastructure, protective-order or live-policy change follows.
+- Status: execution/identification reference; DON'T TEST as source-defined alpha, zero economic return trials.
+
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
 Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5 and Figure 1 p.27.
