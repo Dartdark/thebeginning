@@ -1,0 +1,1656 @@
+                 Optimal Bitcoin Trading with Inverse Futures
+
+                   Jun Deng∗         Huifeng Pan†         Shuyu Zhang‡          Bin Zou§
+
+
+                                             August 23, 2019
+
+
+
+                                                 Abstract
+
+         We consider an optimal trading problem for an investor who trades Bitcoin spot and Bitcoin
+      inverse futures, plus a risk-free asset. The investor seeks an optimal strategy to maximize
+      her expected utility of terminal wealth. We obtain explicit solutions to the investor’s optimal
+      strategies under both exponential and power utility functions. Empirical studies confirm that
+      optimal strategies perform well in terms of Sharpe ratio and Sortino ratio and beat the long-only
+      strategy in Bitcoin spot.
+
+Key words: Bitcoin; Inverse Futures; Optimal Investment; Utility Maximization
+
+
+
+1    Introduction
+
+We study optimal trading problems for an investor who trades in a financial market with one
+
+risk-free asset, Bitcoin spot and one Bitcoin inverse futures contract. We find optimal trading
+
+strategies in the Bitcoin spot and futures in closed forms when the investor seeks to maximize
+
+her expected exponential or power utility of terminal wealth. Economic analysis shows that such
+
+optimal strategies perform reasonably well in terms of Sharpe ratio and Sortino ratio.
+   ∗
+     School of Banking and Finance, University of International Business and Economics, Beijing, China. Email:
+jundeng@uibe.edu.cn.
+   †
+     School of Banking and Finance, University of International Business and Economics, Beijing, China. Email:
+panhf2@126.com.
+   ‡
+     Wenlan School of Business, Zhongnan University of Economics and Law, Wuhan, China. Email: onething1984@
+126.com.
+   §
+     Corresponding Author. Department of Mathematics, University of Connecticut, 341 Mansfield Road U1009,
+Storrs, Connecticut 06269-1009, USA. Email: bin.zou@uconn.edu. Phone: (+1)-860-486-3921.
+
+
+                                                      1
+
+
+
+                      Electronic copy available at: https://ssrn.com/abstract=3441913
+1.1       Bitcoin Futures
+
+Bitcoin (BTC) is a cryptocurrency created by Satoshi Nakamoto in 2008 (see Nakamoto (2008)),
+
+and has the largest market capitalization of over 203 billion US dollars (USD, with symbol $) among
+
+all cryptocurrencies (See Table A.1). There is an ongoing debate on whether Bitcoin should be
+
+regarded as a real currency (see Yermack (2015)). Nevertheless, Bitcoin is among the most traded
+
+assets in recent years,1 and is of great interest to both the industry and academia. Please refer to
+
+Narayanan et al. (2016) for a comprehensive introduction on Bitcoin.
+
+       The year of 2017 witnessed the biggest increase on the Bitcoin price, rising from as low as $800 in
+
+January to the staggering highest at $19,783.06 on December 17, converting to an unprecedented
+
+annual return of more than 2,300%. Given the strong market interest and demand on hedging
+
+and speculation, the Chicago Board Options Exchange (CBOE) introduced the Bitcoin futures
+
+contract and opened trading on December 10, 2017. The Chicago Mercantile Exchange (CME)
+
+soon listed its Bitcoin futures for trading on December 18, 2017. The Bitcoin futures contracts
+
+of regulated exchanges CBOE and CME are standard contracts, both denominated in USD; see
+
+Table A.3 for more information on these contracts. More importantly, the CBOE and CME Bitcoin
+
+futures are settled in USD, which contradicts the essential purpose of Bitcoin as a peer-to-peer and
+
+decentralized electronic settlement system.
+
+       In response, more and more Bitcoin exchanges (less regulated comparing to CBOE and CME),
+
+such as BitMEX, Binance and Kraken, have introduced inverse futures contracts,2 which have a
+
+face value (contract size) of certain USD and are settled in BTC, exactly the opposite to those
+
+standard contracts of CBOE and CME. In other words, an inverse futures contract treats USD as
+
+the underlying “commodity” and uses BTC as the currency for settlement, i.e., USD/BTC pair
+
+instead of BTC/USD pair. Let K be the face value of an inverse futures contract and F the
+
+reference futures price, both quoted in USD, then the equivalent value of the futures contract is
+
+K/F number of Bitcoins, with an inverse relation to the futures price F . Please refer to Table A.4
+   1
+    Table A.1 records a daily trading volume equivalent to nearly 7 billion US dollars on a give day.
+   2
+    To the best of our knowledge, Bragin (2015), co-founders of ICBIT, first proposed the Bitcoin inverse futures
+and the Russian ICBIT trading platform was the very first Bitcoin exchange to offer Bitcoin futures contracts, later
+acquired by Swedish-based Bitcoin exchange Safello. See news report on https://bravenewcoin.com/insights/
+safello-acquires-icbit-and-appoints-founder-as-new-cto.
+
+
+                                                         2
+
+
+
+                       Electronic copy available at: https://ssrn.com/abstract=3441913
+for information on the Bitcoin futures contracts traded on BitMEX. Let us use a toy example to
+
+illustrate how the profit and loss (P&L) of an inverse futures contract is calculated.
+
+Example 1.1. Consider an investor who trades a Bitcoin inverse futures contract, which has
+
+K = $1 per contract size. For simplicity, we ignore the margins on the futures contracts. Suppose
+
+the investor enters into one long position in the futures at t1 when Ft1 = $100 and closes the
+
+position at t2 when Ft2 = $200. The trading profit is then given by
+
+                                 K     K      1   1
+                                     −     =    −    = 0.005 BTC.
+                                 Ft1   Ft2   100 200
+
+If the spot price of Bitcoin at t2 is $205, then the investor can either keep the profit in BTC or sells
+
+0.005 BTC in the spot market to pocket $1.025.
+
+      Bitcoin inverse futures is dominating the markets and the top five exchanges by futures trading
+
+volumes are BitMEX, bitFlyer, Deribit, CoinFlex, and CryptoFacilities. BitMEX has the largest
+
+24h trading volume of 2.74 $bn, followed by bitFlyer with only 0.97 $bn (See Table A.2). Due to
+
+disappointing market shares, CBOE discontinued its Bitcoin futures contracts after June 19, 2019,
+
+leaving CME the only venue for trading standard Bitcoin futures contracts. In the meantime, even
+
+the most liquid Bitcoin futures contract at CME has a miserable trading volume.3 Recently, Bakkt
+
+announces that it will be launching its Bitcoin futures in the U.S. on September 23, 2019. The
+
+Bitcoin futures on Bakkt will be exchange-traded on the Intercontinental Exchange (ICE) Futures
+
+U.S. and cleared by ICE Clear U.S., which are federally regulated by the Commodity Futures
+
+Trading Commission (CFTC).4
+
+
+1.2      Literature Review and Summary
+
+Bitcoin, or cryptocurrency, is among the hottest areas in economics and finance over recent years,
+
+and the related literature is growing at a rapid scale into various directions. Given the length of the
+
+paper, we only give a brief review on works that focus on Bitcoin futures. The first line of research
+  3
+      See volume information on https://www.cmegroup.com/trading/equity-index/us-index/bitcoin.html.
+  4
+      See reports on https://www.bakkt.com/index.
+
+
+
+                                                    3
+
+
+
+                      Electronic copy available at: https://ssrn.com/abstract=3441913
+investigates the price discovery of Bitcoin spot and futures. Both Corbet et al. (2018) and Baur and
+
+Dimpfl (2019) find that the price discovery is dominantly driven by the Bitcoin spot market. But
+
+Kapar and Olmo (2019) arrive at the exactly opposite conclusion, i.e., the Bitcoin futures market
+
+dominates the price discovery. The second line of research concerns the impact of Bitcoin futures
+
+on the spot prices. Hale et al. (2018) argue that the inception of Bitcoin futures in December 2017
+
+contributed to the subsequent fall of Bitcoin spot price. Köchling et al. (2018) claim that Bitcoin
+
+futures helps improving the market efficiency of Bitcoin. The third line of research investigates the
+
+use of Bitcoin futures in risk management (mainly as a hedging tool). Corbet et al. (2018) argue
+
+that using Bitcoin futures in hedging may increase risk, but Sebastião and Godinho (2019) find
+
+Bitcoin futures to be an effective hedging tool for not only Bitcoin but other cryptocurrencies.
+
+       The optimal trading problem studied in this paper belongs to the family of optimal investment
+
+problems in finance, which are well studied in the literature; see the seminal works of Merton
+
+(1969, 1971) (hence often referred to as Merton’s problem). Duffie and Jackson (1990) is among
+
+the earliest to study the optimal hedging problem with standard futures. For further development
+
+along this line, please see Duffie and Richardson (1991), Dai et al. (2011), Leung et al. (2016),
+
+Angoshtari and Leung (2019) and the references therein. For Merton’s problem with derivatives
+
+(not necessarily futures), we refer to Carr et al. (2001) for an exponential Lévy price model and
+
+Liu and Pan (2003) for a jump-diffusion model with stochastic volatility. Recent generalizations
+
+include Yan and Li (2008) for incorporating stochastic exchange rate and Escobar et al. (2015) for
+
+considering ambiguity aversion in the analysis.
+
+       The contributions of this paper are threefold. First, we consider an optimal trading problem with
+
+both Bitcoin spot and inverse futures, which to our best knowledge has not been studied before.5
+
+Despite being popular derivatives contracts traded across global markets, Bitcoin inverse futures
+
+rarely attracts the spot light in academia. In fact, the majority of the literature on Bitcoin futures
+
+(including those reviewed above) is devoted to the studies of CBOE/CME standard contracts,
+
+which are illiquid and have much less market shares. Second, we solve the investor’s optimal
+
+trading problem using two different methods and obtain optimal trading strategies in closed forms
+   5
+    The only exception to our awareness is Deng et al. (2019), which studies an optimal hedging problem with Bitcoin
+inverse functions under the mean-variance criterion.
+
+
+                                                         4
+
+
+
+                       Electronic copy available at: https://ssrn.com/abstract=3441913
+when the investor wants to maximize her expected exponential or power utility of terminal wealth.
+
+Third, through empirical studies, we find that the optimal trading strategies yield good Sharpe
+
+ratio and Sortino ratio and outperform the long-only strategy in Bitcoin spot.
+
+        The rest of the paper is organized as follows. In Section 2, we introduce a continuous-time
+
+financial market and formulate an optimal trading problem with Bitcoin inverse futures. In Section
+
+3, we outline two fundamental methods to solve stochastic control problems. We then apply these
+
+two methods to solve the optimal trading problem under exponential and power utility functions
+
+in Section 4. In Section 5, we conduct empirical studies to investigate the performance of optimal
+
+trading strategies. We summarize our concluding remarks in Section 6. Finally, we place tables
+
+regarding Bitcoin and futures contracts, along with technical derivations and proofs, in Appendices
+
+A-C.
+
+
+
+2        Problem Setup
+
+Let us fix a complete probability space (Ω, F, P) over a finite time horizon [0, T ], with T > 0. A
+
+standard n-dimensional Brownian motion W = (W1 , W2 , . . . , Wn )> is defined on this space, where
+
+n ≥ 2, Wi and Wj are independent for all i 6= j and ·> denotes the usual transpose operation. We
+
+take the filtration F = (Ft )0≤t≤T to be the augmented filtration of W and set F0 = {∅, Ω}. In
+
+a continuous-time financial market, we consider a representative investor who trades three assets:
+
+a risk-free asset, Bitcoin spot currency, and a Bitcoin inverse futures contract. Here, the inverse
+
+futures contract either has an expiry date T 0 ≥ T or is a perpetual contract.6 We assume that
+
+the risk-free interest rate is zero, i.e., we take the risk-free asset as the numéraire and normalize it
+
+to 1. Denote by S = (St )t≥0 and F = (Ft )t≥0 the Bitcoin spot price and futures reference price,
+
+respectively. Note that both the spot price S and the futures price F are quoted in the fiat currency
+
+(USD). Following Duffie and Jackson (1990), we model the Bitcoin spot price S and futures price
+    6
+    Similar to traditional futures contract, perpetual futures contract is a derivative product, but does not have an
+expiry or settlement date. More details are available on https://www.bitmex.com/app/perpetualContractsGuide.
+
+
+
+
+                                                         5
+
+
+
+                       Electronic copy available at: https://ssrn.com/abstract=3441913
+F by
+
+                                          n
+                                                              !
+                                          X
+                                                                  = St µ1 dt + σ1> dWt ,
+                                                                                      
+                  dSt = St     µ1 dt +           σ1,i dWi,t                                       S0 > 0,       (2.1)
+                                           i=1
+                                            n
+                                                              !
+                                           X
+                                                                  = Ft µ2 dt + σ2> dWt ,
+                                                                                      
+                  dFt = Ft     µ2 dt +           σ2,i dWi,t                                       F0 > 0,       (2.2)
+                                           i=1
+
+
+where µi and σi,j are constant and σi := (σi,1 , σi,2 , . . . , σi,n )> for all i = 1, 2 and j = 1, . . . , n. Let
+
+σ > := (σ1 , σ2 ) and assume σσ > is non-singular, i.e.,
+
+
+                       det(σσ > ) = (σ1> σ1 ) × (σ2> σ2 ) − (σ1> σ2 )2 = ν1 ν2 − ν32 6= 0,                      (2.3)
+
+
+where we define constants νi by
+
+                                  n
+                                  X                                                        n
+                                                                                           X
+                 νi := σi> σi =          2
+                                        σi,j ,    i = 1, 2,       and     ν3 := σ1> σ2 =          σ1,j σ2,j .   (2.4)
+                                  j=1                                                      j=1
+
+
+Condition (2.3) is assumed throughout the paper.
+
+Remark 2.1. Linear algebra gives us
+
+                                                              X
+                           det(σσ > ) = ν1 ν2 − ν32 =                (σ1i σ2j − σ1j σ2i )2 ≥ 0,
+                                                              i6=j
+
+
+as matrix σσ > is non-negative definite. Condition (2.3) is equivalent to assume σσ > is positive
+
+definite, and hence, is invertible. ν1 , ν2 > 0 is obvious. In the markets, S and F are positively
+
+correlated, thus we anticipate ν3 > 0.
+
+    As discussed in the introduction, an inverse Bitcoin futures contract has a size (face value)
+
+fixed to K unit of the fiat currency (USD), and is settled in BTC. For instance, one Bitcoin futures
+
+contract traded on BitMEX (www.bitmex.com) is fixed to $1 USD worth of Bitcoins (i.e., K = 1).
+
+With a fixed face value K (in USD), the number of Bitcoins per contract is given by K/Ft at time
+
+t. Let Fb denote the value of a long position in one inverse contract, quoted in BTC. We obtain the
+
+
+
+                                                              6
+
+
+
+                      Electronic copy available at: https://ssrn.com/abstract=3441913
+value change of the inverse contract ∆Fb over (t, t + ∆t) by
+
+                                                                ∞ 
+                                                                     ∆Ft i
+                                                                         
+             K    K     K     ∆Ft     K ∆Ft      1        K ∆Ft X
+       ∆Ft =
+        b      −      =             =                   =          −       .
+             Ft Ft+∆t   Ft Ft + ∆Ft   Ft Ft 1 + ∆Ft /Ft   Ft Ft       Ft
+                                                                                      i=0
+
+
+By letting ∆t → 0 and using (2.2), we get the dynamics of Fb by
+
+                                          K
+                                             (µ2 − ν2 ) dt + σ2> dWt .
+                                                                    
+                                 dFbt =                                                         (2.5)
+                                          Ft
+
+Note that ∆Fb (or dFb) is expressed in units of Bitcoin (BTC), not the fiat currency (USD). Under
+
+the mark to market mechanism, the realized profit & loss (P&L) in the fiat currency (USD) at time
+
+t per futures contract is then given by St dFbt . Let us introduce the ratio process Z = (Zt )0≤t≤T ,
+
+where Zt := St /Ft . Using Itô’s formula, we have
+
+                                                                 >
+                        dZt = Zt µ1 − µ2 + ν2 − ν3 dt + Zt σ1 − σ2 dWt .                        (2.6)
+
+
+   The investor’s trading strategy is self-financing and consists of a pair of processes, denoted by
+
+u = (ut )0≤t≤T := (θ, N ) = (θt , Nt )0≤t≤T . Here, θt is the dollar amount of wealth invested in the
+
+Bitcoin spot currency and Nt is the number of the Bitcoin inverse futures contracts held at time t.
+
+N > 0 (resp. N < 0) denotes a long (resp. short) position in the futures contract. Recall that, with
+
+futures position N , the corresponding P&L in USD is given by N S dFb. Denote by X u = (Xtu )0≤t≤T
+
+the associated wealth process of the investor, if she follows a trading strategy u. We write X to
+
+replace X u , if there is no confusion, and only use X u if we want to emphasize the dependence on
+
+control u. By the above definition, we have
+
+                                  Z t           Z t
+                                      dSs
+                        Xt = x +   θs     +           Ns Ss dFbs ,   ∀ t ∈ [0, T ],
+                                 0     Ss         0
+
+
+where X0 = x > 0 is the investor’s initial wealth. Using (2.1), (2.5) and (2.6), we obtain
+
+
+                  dXt = (µ1 θt + K(µ2 − ν2 )Zt Nt ) dt + (θt σ1 + KZt Nt σ2 )> dWt ,            (2.7)
+
+
+
+                                                      7
+
+
+
+                    Electronic copy available at: https://ssrn.com/abstract=3441913
+where ν2 is defined by (2.4).
+
+   Let us define space L2 [t, T ], for all 0 ≤ t < T , by
+                      (                                                           Z T            )
+      L2 [t, T ] :=   ω = (ωs )t≤s≤T : ω is progressively measurable and Et              ωs2 ds < ∞ , (2.8)
+                                                                                     t
+
+
+where Et denotes conditional expectation operator given Ft . Denote by A(t, x, z) the admissible
+
+set of trading strategies over period [t, T ] with initial conditions Xt = x and Zt = z. At t = 0,
+
+we write the admissible set by A(x), since Z0 = S0 /F0 is known. We define the admissible set as
+
+follows (see, e.g., Duffie and Jackson (1990) and Angoshtari and Leung (2019)).
+
+Definition 2.2. A trading strategy u is called an admissible strategy (i.e., u ∈ A(t, x, z)) if (i)
+
+θ, ZN ∈ L2 [t, T ], where L2 [t, T ] is defined by (2.8), and (ii) the SDE of X in (2.7) has a unique
+
+strong solution.
+
+   Let U be a standard utility function, namely, U is strictly increasing and strictly concave over
+
+its domain. We define the objective functional J(x; u) for any u ∈ A(x) by
+
+                                                                
+                                             J(x; u) := E U (XT ) ,
+
+
+where E is the expectation operator under P (given X0 = x > 0).
+
+   The investor seeks an optimal trading strategy, denoted by u∗ , to maximize the expected utility
+
+of the terminal wealth over the set of all admissible strategies:
+
+                                                                     
+                                           V (x) = sup       E U (XT ) .                               (2.9)
+                                                    u∈A(x)
+
+
+We call V the investor’s value function and u∗ the investor’s optimal trading strategy or optimal
+
+control.
+
+
+
+
+                                                        8
+
+
+
+                          Electronic copy available at: https://ssrn.com/abstract=3441913
+3     Methodology
+
+In this section, we outline two methods for solving Problem (2.9): the Hamilton-Jacobi-Bellman
+
+(HJB) method in Section 3.1 and the martingale method in Section 3.2. We postpone technical
+
+details in Appendix B.
+
+
+3.1   The HJB Method
+
+The first method we apply is the famous HJB method, which is based on the dynamic programming
+
+principle (DPP). Please see Yong and Zhou (1999) and Fleming and Soner (2006) for general theory.
+
+    Let f = f (t, x, z) : [0, T ] × R × R+ → R and f ∈ C1,2,2 . Denote by f· the partial derivative of
+
+function f with respect to (w.r.t) the corresponding argument, e.g., fx = ∂f
+                                                                          ∂x . For any u ∈ A(t, x, z)
+
+and f ∈ C 1,2,2 , define the following operators
+
+                                                       1
+        L1 f (t, x, z) := (µ1 − µ2 + ν2 − ν3 ) z · fz + (σ1 − σ2 )> (σ1 − σ2 )z 2 · fzz ,
+                                                       2
+                                                        1
+        Lu2 f (t, x, z) := (µ1 θ + K(µ2 − ν2 )zN ) fx + (θσ1 + KzN σ2 )> (θσ1 + KzN σ2 ) fxx
+                                                        2
+                         + (σ1 − σ2 )> (θσ1 + KzN σ2 ) z · fxz .
+
+
+To use the DPP to derive the HJB, we consider the dynamic version of Problem (2.9):
+
+                                                                            
+                                  V (t, x, z) =      sup       Et,x,z U (XT ) ,                  (3.1)
+                                                  u∈A(t,x,z)
+
+
+where Et,x,z [·] = E[·|Xtu = x, Zt = z]. As standard in stochastic control theory, we provide a
+
+verification theorem to Problem (3.1) in a general setting. We refer readers to Section 4.3 of Yong
+
+and Zhou (1999) and Section III.8 of Fleming and Soner (2006) for related proofs.
+
+Theorem 3.1. Let v = v(t, x, z) : [0, T ] × R × R+ → R and v ∈ C1,2,2 . Suppose the function v
+
+satisfies the Hamilton-Jacobi-Bellman (HJB) equation
+
+
+                  vt + L1 v +     sup        Lu2 v = 0,                   v(T, x, z) = U (x).    (3.2)
+                                u∈A(t,x,z)
+
+
+
+
+                                                          9
+
+
+
+                    Electronic copy available at: https://ssrn.com/abstract=3441913
+Then v(t, x, z) = V (t, x, z) (resp. v(0, x, Z0 ) = V (x)) is the value function to Problem (3.1) (resp.
+
+Problem (2.9)). If strategy u∗ = (u∗s )t≤s≤T , defined by
+
+
+                            u∗s = arg max Lu2 v(s, Xs∗ , Zs ),   ∀ 0 ≤ t ≤ s ≤ T,                  (3.3)
+                                      u
+
+
+is admissible, then u∗ is an optimal trading strategy to Problem (3.1). Here X ∗ is the solution to
+
+(2.7) under strategy u∗ .
+
+   In general, there does not exist explicit solutions of the HJB equation (3.2) jointly with the
+
+optimization problem (3.3). We are able to obtain u∗ explicitly when the utility function takes
+
+certain forms (see the main results in the next section).
+
+
+3.2   The Martingale Method
+
+Next, we discuss how to use the martingale method to solve Problem (2.9). For works on the
+
+development of the martingale method, see for instance Cox and Huang (1989) and the monograph
+
+Karatzas and Shreve (1998). What we present in the sequel is based on Zou and Cadenillas (2014).
+
+We begin with a lemma that provides a sufficient condition for an optimal control to Problem (2.9).
+
+Lemma 3.2. Suppose there exists an admissible control u∗ (i.e., u∗ ∈ A(x)) such that
+
+
+                               E U 0 (XT∗ ) XTu = constant,
+                                              
+                                                                  ∀ u ∈ A(x),                      (3.4)
+
+
+then u∗ is an optimal trading strategy (an optimal control) to Problem (2.9). Here XT∗ is the
+
+terminal wealth under control u∗ .
+
+Proof. The assertion follows from the Taylor expansion
+
+                                                                      1 
+                E[U (XTu )] = E[U (XT∗ )] + E U 0 (XT∗ ) (XTu − XT∗ ) + E U 00 (XT∗ ) ξ u ,
+                                                                                        
+                                                                       2
+
+where ξ u is between XTu and XT∗ , and the fact that U 00 < 0.
+
+
+
+
+                                                       10
+
+
+
+                    Electronic copy available at: https://ssrn.com/abstract=3441913
+    The essential idea is to introduce a new probability measure Q by
+
+                                        dQ   U 0 (X ∗ )
+                                           =  0 T ∗  := HT
+                                        dP  E U (XT )
+
+and notice that the optimality condition (3.4) reduces to EQ [XTu ] is a constant for all admissible
+
+controls. We then pick two special admissible controls u1 = (θ1 , N1 ) and u2 = (θ2 , N2 ) to arrive at
+
+two equations for θ∗ and N ∗ , where
+
+                                                                              1
+               θ1,t = x · It≤τ ,   N1,t = 0,   and      θ2,t = 0,   N2,t =        · It≤τ ,
+                                                                             K Zt
+
+for any stopping time τ ∈ [0, T ]. We then solve these two equations to get an optimal control.
+
+
+
+4     Explicit Solutions for Exponential and Power Utility Functions
+
+We apply the two methods introduced in the previous section to obtain closed form solutions to
+
+Problem (2.9) for an exponential utility in Section 4.1 and a power utility in Section 4.2. Both
+
+exponential and power utility functions belong to the family of hyperbolic absolute risk aversion
+
+(HARA) utility, and are well adopted in the portfolio optimization literature (see Merton (1969,
+
+1971)).
+
+
+4.1   The Exponential Utility Case
+
+In this subsection, we consider an exponential utility function U given by
+
+                                    1
+                           U (x) = − e−γx ,                           γ > 0,                      (4.1)
+                                    γ
+
+and present the key result in Theorem 4.1.
+
+Theorem 4.1. Suppose U is given by (4.1). The optimal trading strategy u∗ = (θ∗ , N ∗ ) to Problem
+
+
+
+
+                                                  11
+
+
+
+                    Electronic copy available at: https://ssrn.com/abstract=3441913
+(2.9) is given by
+
+                                     C1                      C2
+                             θt∗ =         and      Nt∗ =        ,      ∀ t ∈ [0, T ],            (4.2)
+                                     γ                      γKZt
+
+where constants C1 and C2 are defined by
+
+                            µ1 ν2 − µ2 ν3 + ν2 ν3                      µ2 ν1 − µ1 ν3 − ν1 ν2
+                    C1 :=                            and       C2 :=                         .    (4.3)
+                                  ν1 ν2 − ν32                                ν1 ν2 − ν32
+
+Proof. We provide two proofs in Appendix C.
+
+   Let us interpret KN as the dollar amount “invested” in the futures and recall K is the size per
+
+futures contract in dollar amount. The optimal trading strategy u∗ in (4.2) suggests that optimal
+
+dollar amount invested in both spot and futures assets are inversely proportional to the absolute
+
+risk aversion γ. Namely, a more risk averse investor will reduce her holdings in both Bitcoin spot
+                                                                             ∂C1
+and futures and allocate larger amount to the risk-free asset. We easily see ∂µ 1
+                                                                                  > 0, and if ν3 > 0 as
+                         ∂C1
+explained in Remark 2.1, ∂µ 2
+                              < 0. Therefore, as the appreciation rate of Bitcoin spot (resp. futures)
+
+increases, the investor spends more (resp. less) amount in Bitcoin spot; the contrary qualitative
+
+conclusion holds true on the side of futures. We reorganize KNt∗ into KNt∗ = Cγ2 Z1t = Cγ2 FStt , and
+
+suppose C2 < 0 in the following analysis. If ∆Z > 0 (resp. ∆Z < 0), the investor should short
+
+less (resp. more) futures contracts. Notice that ∆Z > 0 ⇔ ∆S   ∆F        ∆S    ∆F
+                                                           S > F , where S and F are the
+
+return on Bitcoin spot and the nominal return on Bitcoin reference futures, respectively. However,
+
+the impact of volatilities (σi , i = 1, 2) on θ∗ and N ∗ is unclear, at least from the analytical point
+
+of view.
+
+Remark 4.2. Using (2.3) and (2.4), we have
+
+                                                                                      
+                     C1    > −1 
+                                     µ1                                     ν1 ν3 
+                                                                where σσ > = 
+                              
+                      = σσ               := πM ,                                 .           (4.4)
+                      C2           µ2 − ν2                                     ν3 ν2
+
+
+In (4.4), we follow the convention and denote the r.h.s. by πM , the so called Merton ratio, although
+
+in the context of exponential utility maximization, it is optimal amount not proportion invested in
+
+                                                      12
+
+
+
+                      Electronic copy available at: https://ssrn.com/abstract=3441913
+the risky assets that is a fixed constant (πM /γ). An important implication of (4.4) is that the
+
+optimal trading strategy u∗ under our setup is the same as the one in a financial market with the
+
+inverse contracts replaced by asset S̃, whose dynamics follow
+
+                                                                              KS0
+                           dS̃t = S̃t (µ2 − ν2 )dt + σ2> dWt ,          S̃0 =       .
+                                                                                F0
+
+
+4.2   The Power Utility Case
+
+In this subsection, we consider the case of a power utility U given by
+
+                                           1 α
+                                 U (x) =     x ,      α ∈ (−∞, 0) ∪ (0, 1).                         (4.5)
+                                           α
+
+   Notice that the effective domain of the power utility in (4.5) is R+ . Hence, we impose an extra
+
+solvency constraint Xtu ≥ 0 almost surely for all t ∈ [0, T ] and u ∈ A(x). Let τ u denote the
+
+bankruptcy time of process X = X u , i.e., τ u := inf{t > 0 : Xtu ≤ 0}. A standard treatment is to
+
+require Xtu ≡ 0 for all t ≥ τ u (see Sotomayor and Cadenillas (2009)). We still use the notation A(x)
+
+(or A(t, x, z)) to denote the set of admissible strategies when the solvency constraint is present.
+
+We summary the findings on the power utility case in Theorem 4.3.
+
+Theorem 4.3. Suppose U is given by (4.5). The optimal trading strategy u∗ = (θ∗ , N ∗ ) to Problem
+
+(2.9) is given by
+
+                        C1                                      C2
+               θt∗ =       · Xt∗       and         Nt∗ =              · Xt∗ ,      ∀ t ∈ [0, T ],   (4.6)
+                       1−α                                 (1 − α)KZt
+
+where constants C1 and C2 are defined in (4.3).
+
+Proof. We delay the proof to Appendix C.
+
+   In the setup, we choose both spot and futures strategies, θ and N , to be the amount of $USD
+
+and number of futures contracts. Under the exponential utility, such a choice leads to optimal
+
+investment strategy θ∗ being a fixed constant. According to Theorem 4.3, in the power utility case,
+
+the optimal proportion invested in the risky asset is a constant (see also Merton (1969, 1971)). To
+
+                                                      13
+
+
+
+                       Electronic copy available at: https://ssrn.com/abstract=3441913
+account for this fact, we introduce the proportional version of u, denoted by ũ = (π, ψ), where
+
+                          
+                                 θ                        KNt
+                          πt = t                                  for t ∈ [0, τ u ),
+                          
+                                        and      ψt =        ,
+                                Xt                        Xt                                     (4.7)
+                          
+                          πt = c1 ,     and      ψt = c2 ,        for t ∈ [τ u , T ],
+                          
+
+
+Here, c1 and c2 are two constants in the admissible region. We can interpret ψ as the ratio of the
+
+total USD amount of inverse contracts to the investor’s wealth. Using (4.6), we obtain the optimal
+
+trading strategy (π ∗ , ψ ∗ ) by
+
+                                 C1                          C2
+                        πt∗ =           and      ψt∗ =             ,      ∀ t ∈ [0, T ],         (4.8)
+                                1−α                      (1 − α)Zt
+
+    With U given by (4.5), the relative risk aversion (RRA) is (1 − α). The optimality condition
+
+(4.8) says that both π ∗ and ψ ∗ are still inversely proportional to the RRA. All the discussions from
+
+the previous exponential utility case apply in a parallel way to the power utility case here, with
+
+amount changing to proportion.
+
+
+
+5     Empirical Studies
+
+5.1    Data and Calibration
+
+To conduct empirical studies, we consider a variant of the market model (2.1)-(2.2) with dimension
+
+n = 2 as follows:
+
+                                                      
+                            dSt = St µ1 dt + σS dW̄1,t ,
+                                                          p                                    (5.1)
+                            dFt = Ft µ2 dt + σF (ρ dW̄1,t + 1 − ρ2 dW̄2,t ) ,
+
+
+where W̄1 and W̄2 are two independent Brownian motions. The parameters µi (i = 1, 2) and σi
+
+(i = S, F ) are the appreciate rates and volatilities of the spot S and futures F , respectively, and
+
+ρ ∈ [−1, 1] measures the correlation between the price processes S and F . The equivalence between
+
+
+
+
+                                                    14
+
+
+
+                      Electronic copy available at: https://ssrn.com/abstract=3441913
+                                            2 + σ 2 = √ν is indeed the volatility of (2.1), and
+                                          p
+these two models is obvious, e.g., σS =    σ11   12     1
+
+
+                                       σ11             σ12
+                              W̄1 = p 2     2
+                                               W1 + p 2     2
+                                                               W2
+                                     σ11 + σ12       σ11 + σ12
+
+is a standard Brownian motion under the same probability space.
+
+   Since BitMEX is the largest Bitcoin futures trading platform (see Table A.2), we use the trading
+
+data from BitMEX in the empirical studies. We access Bitcoin spot and futures prices data from
+
+BitMEX exchange through its provided API (application programming interface). In contrast to
+
+traditional regulated exchanges (e.g., CME and CBOE), BitMEX operates 24 hours a day and
+
+7 days a week without trading intermission. Currently, only semi-annual and perpetual futures
+
+contracts are listed on BitMEX, although quarterly futures contracts were available in the past.
+
+On BitMEX, the futures contracts settle on the BXBT30M index, which is a 30-minute TWAP
+
+(time-weighted average price) of the BXBT index ending at 12:00 UTC. The BXBT index is derived
+
+from the prices of three Bitcoin exchanges (Bitstamp, Coinbase, and Kraken) using equal weight
+
+(33.33%), and the composition is subject to changes due to unprecedented exchange instability. For
+
+our purpose, two semi-annual futures contracts (face value K = 1) are used in numerical studies,
+
+initiated on 2018/12/17 and 2019/3/15, respectively.
+
+   We use the first futures contract, spanning days from 2018/12/17 to 2019/3/14, as the in-sample
+
+data to calibrate model parameters in (5.1). Since BitMEX is an all-day exchange, we use 365 days
+
+per year to estimate annual volatility and return. We obtain
+
+
+                µ1 = 40.85%, µ2 = 60.02%, σS = 59.94%, σF = 47.00%, ρ = 0.59.                     (5.2)
+
+
+We use the second futures contract as the out-of-sample data, which span days from 2019/3/15
+
+to 2019/7/4 to test the performance of optimal trading strategies obtained under exponential and
+
+power utility functions.
+
+   We report summary statistics of in-sample and out-of-sample spot and futures daily returns in
+
+Table 1. The results show slight negative (positive) skewness for in-sample (out-of-sample) return.
+
+Both spot and futures prices are very volatile, in-sample daily volatility about 3% (annual volatility,
+
+
+                                                  15
+
+
+
+                    Electronic copy available at: https://ssrn.com/abstract=3441913
+57%) and out-of-sample daily volatility 4% (annual volatility, 76%). Daily spot returns range from
+
+-9.87% to 10.09% and futures returns from -8.32% to 7.44% for in-sample. For out-of-sample data,
+
+daily spot returns range from -14.76% to 16.95% and futures returns from -12.17% to 15.18%.
+
+Figure 1 plots the Bitcoin spot and futures prices of in-sample and out-of-sample data. In the
+
+upward market, from 2019/3/15 to 2019/7/4, the Bitcoin spot and futures prices display higher
+
+consistent co-movement with correlation 99.62%.
+
+            Table 1: In-sample and Out-of-sample Summary Statistics of Daily Returns
+                                     In-sample                  Out-of-sample
+                              2018/12/17 - 2019/3/14        2019/3/15 - 2019/7/4
+           Variables        Spot return Futures return Spot return Futures return
+           Min                -9.87%         -8.32%      -14.76%          -12.17%
+           25%-percentile     -0.84%         -0.65%       -0.64%           -0.76%
+           Median              0.06%         -0.05%        0.78%           0.58%
+           75%-percentile      1.03%         1.02%         2.58%           2.63%
+           Max                10.09%         7.44%        16.95%           15.18%
+           Skewness            -0.08          -0.11         0.34             0.50
+           Kurtosis             5.62           5.47         5.95             5.25
+           Daily Volatilty     3.14%         2.46%         4.37%           4.23%
+           Count                 87             87           111             111
+
+
+
+
+5.2   Economic Analysis
+
+We compute optimal trading strategy θ∗ in Bitcoin spot and N ∗ in inverse futures for exponential
+
+utility in the middle panels 3-4 of Figure 2 and for power utility in the bottom panels 5-6 of Figure
+
+2. In panels 1-2 of Figure 2, we plot the optimal wealth process X ∗ for different risk aversion levels.
+
+Results show that investors with higher risk aversion (larger γ or small α) achieve lower wealth
+
+level in both exponential and power utility cases. Furthermore, investors with higher risk aversion
+
+invest less amount in both Bitcoin spot and futures.
+
+   We obtain optimal trading strategies under the criterion of utility maximization, which is not
+
+well adopted by the industry as a performance measure for portfolios. As a result, to study the
+
+performance of obtained optimal strategies, we use well accepted Sharpe ratio and its variant Sortino
+
+
+
+
+                                                  16
+
+
+
+                    Electronic copy available at: https://ssrn.com/abstract=3441913
+ratio.7 As a comparison, we also consider a benchmark strategy, called “All-in-spot” or long-only
+
+in spot, which invests 100% in Bitcoin spot and 0% in the risk-free asset and Bitcoin futures. We
+
+report the result in Table 2. All strategies perform extraordinarily well (all Sharp ratios above 4.8
+
+and Sortino ratios above 1.8), which is not surprising at all, since the Bitcoin price nearly tripled
+
+from 2019/3/15 to 2019/7/4 (see Figure 1). In all cases, we see that optimal strategies outperform
+
+the All-in-spot strategy.
+
+                 Table 2: Sharp Ratio and Sortino Ratio of Optimal Trading Strategies
+
+                          Utility          γ, α           Sharpe Ratio       Sortino Ratio
+                                           γ = 0.5            5.07                2.28
+                          Exponential      γ = 1.0            4.96                2.09
+                                           γ = 1.5            4.86                1.99
+                                           α = −2             4.86                1.87
+                          Power            α = −0.5           4.91                1.89
+                                           α = 0.1            4.93                1.90
+                          All-in-spot                         4.40                1.59
+
+Note. We choose the initial wealth X0 = 4, the risk-free rate 4% and the user-specified target return 4% for calculating
+Sortino Ratio.
+
+
+    As noted in Table 1, both Bitcoin spot and futures have high volatility, and the correlation
+
+between these two assets can be high as well (see lower plot in Figure 1). In the remaining part, we
+
+conduct sensitivity analysis on the impacts of ρ (correlation coefficient) and σS (spot volatility) on
+
+the optimal wealth process X ∗ and optimal trading strategies u∗ . We report the results in Figures
+
+3-4, respectively. We summarize our main findings below.
+
+    • The optimal wealth process X ∗ under exponential utility is a decreasing function of the corre-
+
+      lation coefficient ρ, while in the case of power utility X ∗ is insensitive to ρ. If the correlation
+
+      between the Bitcoin spot and futures increases, investors should reduce long positions in
+
+      Bitcoin spot and simultaneously long more Bitcoin inverse futures.
+
+    • The impact of the spot volatility σS on the optimal wealth process X ∗ is unclear, we do
+
+      not find any monotone relation between X ∗ and σS . When it comes to optimal strategies,
+   7
+     The Sortino ratio is a modification of the Sharpe ratio but penalizes only those returns falling below a user-
+specified target or required rate of return, while the Sharpe ratio penalizes both upside and downside volatility
+equally, see https://en.wikipedia.org/wiki/Sortino_ratio.
+
+
+                                                          17
+
+
+
+                        Electronic copy available at: https://ssrn.com/abstract=3441913
+       we observe that, as σS increases, investors should allocate less amount in Bitcoin spot and
+
+       acquire more contracts in Bitcoin inverse futures.
+
+
+
+6     Conclusion
+
+We introduce a financial market where both Bitcoin spot and inverse futures are available risky
+
+assets to an investor who acts to maximize her expected utility of terminal wealth. We obtain
+
+optimal trading strategies in explicit forms under exponential and power utility functions, and use
+
+them to conduct empirical studies. We find that optimal strategies deliver excellent Sharpe ratio
+
+and Sortino ratio, and outperform a simply long-only strategy in Bitcoin spot. The results from
+
+sensitivity analysis show that, when Bitcoin spot becomes more volatile or the correlation between
+
+spot and futures increases, investors should long less Bitcoin spot but more inverse futures.
+
+
+
+Acknowledgment
+
+The research of Jun Deng is supported by the National Natural Science Foundation of China
+
+(11501105) and UIBE Research Funding (302/871703). The research of Bin Zou is supported by a
+
+start-up grant from the University of Connecticut.
+
+
+
+References
+
+Angoshtari, B. and Leung, T. (2019). Optimal dynamic basis trading. Annals of Finance, forth-
+
+    coming.
+
+Baur, D. G. and Dimpfl, T. (2019). Price discovery in bitcoin spot or futures? Journal of Futures
+
+    Markets, forthcoming.
+
+Bragin, A. (2015). Inverse futures in bitcoin economy. Available at SSRN 2713755.
+
+Carr, P., Jin, X., and Madan, D. B. (2001). Optimal investment in derivative securities. Finance
+
+    and Stochastics, 5(1):33–59.
+
+
+                                                   18
+
+
+
+                     Electronic copy available at: https://ssrn.com/abstract=3441913
+Corbet, S., Lucey, B., Peat, M., and Vigne, S. (2018). Bitcoin futures—what use are they? Eco-
+
+  nomics Letters, 172:23–27.
+
+Cox, J. C. and Huang, C.-f. (1989). Optimal consumption and portfolio policies when asset prices
+
+  follow a diffusion process. Journal of Economic Theory, 49(1):33–83.
+
+Dai, M., Zhong, Y., and Kwok, Y. K. (2011). Optimal arbitrage strategies on stock index futures
+
+  under position limits. Journal of Futures markets, 31(4):394–406.
+
+Deng, J., Pan, H., Zhang, S., and Zou, B. (2019). Risk structure of bitcoin inverse futures and
+
+  optimal hedging. Working paper.
+
+Duffie, D. and Jackson, M. O. (1990). Optimal hedging and equilibrium in a dynamic futures
+
+  market. Journal of Economic Dynamics and Control, 14(1):21–33.
+
+Duffie, D. and Richardson, H. R. (1991). Mean-variance hedging in continuous time. The Annals
+
+  of Applied Probability, 1(1):1–15.
+
+Escobar, M., Ferrando, S., and Rubtsov, A. (2015). Robust portfolio choice with derivative trading
+
+  under stochastic volatility. Journal of Banking & Finance, 61:142–157.
+
+Fleming, W. H. and Soner, H. M. (2006). Controlled Markov processes and viscosity solutions,
+
+  volume 25. Springer Science & Business Media.
+
+Hale, G., Krishnamurthy, A., Kudlyak, M., Shultz, P., et al. (2018). How futures trading changed
+
+  bitcoin prices. FRBSF Economic Letter, 12.
+
+Kapar, B. and Olmo, J. (2019). An analysis of price discovery between bitcoin futures and spot
+
+  markets. Economics Letters, 174:62–64.
+
+Karatzas, I. and Shreve, S. E. (1998). Methods of mathematical finance, volume 39. Springer.
+
+Köchling, G., Müller, J., and Posch, P. N. (2018). Does the introduction of futures improve the
+
+  efficiency of bitcoin? Finance Research Letters, forthcoming.
+
+
+
+                                                 19
+
+
+
+                   Electronic copy available at: https://ssrn.com/abstract=3441913
+Leung, T., Li, J., Li, X., and Wang, Z. (2016). Speculative futures trading under mean reversion.
+
+  Asia-Pacific Financial Markets, 23(4):281–304.
+
+Liu, J. and Pan, J. (2003). Dynamic derivative strategies. Journal of Financial Economics,
+
+  69(3):401–430.
+
+Merton, R. C. (1969). Lifetime portfolio selection under uncertainty: The continuous-time case.
+
+  Review of Economics and Statistics, 51(3):247–257.
+
+Merton, R. C. (1971). Optimum consumption and portfolio rules in a continuous-time model.
+
+  Journal of Economic Theory, 3(4):373–413.
+
+Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic cash system.
+
+Narayanan, A., Bonneau, J., Felten, E., Miller, A., and Goldfeder, S. (2016). Bitcoin and cryp-
+
+  tocurrency technologies: a comprehensive introduction. Princeton University Press.
+
+Sebastião, H. and Godinho, P. (2019). Bitcoin futures: An effective tool for hedging cryptocurren-
+
+  cies. Finance Research Letters.
+
+Sotomayor, L. R. and Cadenillas, A. (2009). Explicit solutions of consumption-investment problems
+
+  in financial markets with regime switching. Mathematical Finance, 19(2):251–279.
+
+Yan, W. and Li, S. (2008). A class of portfolio selection with a four-factor futures price model.
+
+  Annals of Operations Research, 164(1):139.
+
+Yermack, D. (2015). Is bitcoin a real currency? an economic appraisal. In Handbook of digital
+
+  currency, pages 31–43. Elsevier.
+
+Yong, J. and Zhou, X. Y. (1999). Stochastic controls: Hamiltonian systems and HJB equations,
+
+  volume 43. Springer Science & Business Media.
+
+Zou, B. and Cadenillas, A. (2014). Optimal investment and risk control policies for an insurer:
+
+  Expected utility maximization. Insurance: Mathematics and Economics, 58:57–67.
+
+
+
+                                                 20
+
+
+
+                   Electronic copy available at: https://ssrn.com/abstract=3441913
+               Figure 1: In-sample and out-of-sample Bitcoin Spot and Futures Prices
+
+
+
+
+Note. In-sample dates are from 2018/12/17 to 2019/3/14 and out-of-sample dates are from 2019/3/15 to 2019/7/4.
+
+
+
+
+                                                     21
+
+
+
+                      Electronic copy available at: https://ssrn.com/abstract=3441913
+                   Figure 2: Optimal Wealth Process and Optimal Trading Strategies
+
+
+
+
+Notes. We use model parameters from (5.2) and choose the initial wealth X0 = 4. Panels 1 and 2 report optimal
+wealth process X ∗ for exponential and power utility functions. Panels 3 and 4 (resp. 5 and 6) show optimal amount
+θ∗ in Bitcoin spot and inverse futures N ∗ under different risk aversion levels for exponential (resp. power) utility. In
+all panels, the x-axis is time from 2019/3/15 to 2019/7/4.
+
+
+
+
+                                                           22
+
+
+
+                        Electronic copy available at: https://ssrn.com/abstract=3441913
+         Figure 3: Impact of ρ on Optimal Wealth Process and Optimal Trading Strategies
+
+
+
+
+Notes. We use model parameters from (5.2) (except the correlation coefficient ρ) and choose the initial wealth X0 = 4.
+Panels 1 and 2 report optimal wealth process X ∗ under different levels of ρ for exponential and power utility functions.
+Panels 3 and 4 (resp. 5 and 6) show optimal amount θ∗ in Bitcoin spot and inverse futures N ∗ under different levels
+of ρ for exponential (resp. power) utility. In all panels, the x-axis is the simulated 100 days.
+
+
+
+
+                                                           23
+
+
+
+                        Electronic copy available at: https://ssrn.com/abstract=3441913
+        Figure 4: Impact of σS on Optimal Wealth Process and Optimal Trading Strategies
+
+
+
+
+Notes. We use model parameters from (5.2) (except the spot volatility σS ) and choose the initial wealth X0 = 4.
+Panels 1 and 2 report optimal wealth process X ∗ under different levels of σS for exponential and power utility
+functions. Panels 3 and 4 (resp. 5 and 6) show optimal amount θ∗ in Bitcoin spot and inverse futures N ∗ under
+different levels of σS for exponential (resp. power) utility. In all panels, the x-axis is the simulated 100 days.
+
+
+
+
+                                                           24
+
+
+
+                        Electronic copy available at: https://ssrn.com/abstract=3441913
+Appendix A                Information on Bitcoin and Bitcoin Futures
+
+
+                Table A.1: Ten Largest Cryptocurrencies by Market Capitalization
+      Name           Symbol       Price    24h Volume ($bn) Market Capitalization ($bn)
+      Bitcoin        BTC       $11,881.68        $6.84                  $203.17
+      Ethereum       ETH        $209.65          $2.87                  $22.65
+      Ripple         XRP          $0.29          $0.61                  $12.89
+      Bitcoin-Cash BCH          $313.39          $0.88                   $5.79
+      Litecoin       LTC         $84.69          $1.40                   $5.45
+      Binance-Coin BNB           $29.60          $0.19                   $4.60
+      EOS            EOS          $3.91          $1.10                   $3.85
+      Tether         USDT         $0.99         $0.037                   $3.57
+      Bitcoin SV     BSV        $143.41          $0.13                   $2.57
+      Algorand       ALGO         $0.84         $0.088                   $2.30
+
+Notes. Currency unit is USD. All the data are accessed at 22:00 CT on August 10, 2019 from www.barchart.com.
+
+
+
+                Table A.2: Top 5 Exchanges by 24h Bitcoin Futures Trading Volumes
+                                  Exchange      24h Volumes ($bn)
+                                  BitMEX               2.74
+                                   bitFlyer            0.97
+                                   Deribit             0.23
+                                  CoinFlex             0.17
+                               CryptoFacilities        0.05
+
+Notes. Currency unit is USD. All the data are accessed at 09:06 am UTC on August 20, 2019 from https://www.
+sk3w.co/bitcoin_futures.
+
+
+
+
+Appendix B             Technical Derivations of Methodology
+
+B.1     HJB Characterization
+
+Suppose a smooth value function V exists, and is concave w.r.t. the argument x. By Theorem
+
+3.1, we solve the optimization problem in (3.3) and obtain (the candidate of) an optimal strategy
+
+u∗ = (θ∗ , N ∗ ) by
+
+                          µ1 ν2 − µ2 ν3 + ν2 ν3 Vx       Vxz       Vx       Vxz
+                θs∗ = −                             − Zt     = −C1     − Zt     ,                       (B.1)
+                                det(σσ > )      Vxx      Vxx       Vxx      Vxx
+
+
+
+                                                     25
+
+
+
+                      Electronic copy available at: https://ssrn.com/abstract=3441913
+            Table A.3: Facts of Standard Bitcoin Futures Contracts at CBOE and CME
+
+ Exchange                                        CBOE                                   CME
+ Listing Date                              December 10, 2017                      December 18, 2017
+ Terminating Date                                  NA                               June 19, 2019
+ Ticker                                           XBT                                   BTC
+ Denomination                                      USD                                  USD
+ Contract Size                                  1 Bitcoin                             5 Bitcoins
+ Margin Rates                                      40%                                   35%
+ Minimum Price Change                       $10 per contract                       $25 per contract
+ Settlement Reference             Auction Price at the Gemini Exchange       CME CF Bitcoin Reference Rate
+
+Notes. Source: www.investopedia.com and www.cmegroup.com. See also Table 1 of Corbet et al. (2018).
+
+
+                Table A.4: Facts of Bitcoin Inverse Futures Contracts at BitMEX
+                      Ticker                    XBT+termination month code
+                  Initial Margin          1.00% + Entry Taker Fee + Exit Taker Fee
+                  Maint. Margin                     0.50% + Exit Taker Fee
+                    Risk Limit                              50 XBT
+                    Risk Step                               50 XBT
+                       Type                     Settled in XBT, quoted in USD
+                  Contract Size                               1 USD
+                    Settlement           BXBT30M Index Value (12:00:00 PM UTC)
+             Minimum Price Increment                        0.5 USD
+                    Max Price                                1000000
+               Max Order Quantity                           10000000
+                     Lot Size                                   1
+
+Notes. Source: https://www.bitmex.com
+
+
+                         µ2 ν1 − µ1 ν3 + ν1 ν2 1 Vx     1 Vxz     C2 V x   1 Vxz
+               Ns∗ = −                >
+                                                      +       =−         +       ,                    (B.2)
+                               det(σσ )       K Zt Vxx K Vxx     K Zt Vxx K Vxx
+
+where constants νi , i = 1, 2, 3, are given in (2.4) and Ci , i = 1, 2, are defined by (4.3). Both C1 and
+
+C2 are well defined due to assumption (2.3).
+
+   By plugging u∗ = (θ∗ , N ∗ ) in (B.1) and (B.2) into the HJB equation (3.2), we obtain
+
+                                       V2                                      V2
+                                                                    
+                                                                Vx Vxz
+                    Vt + 1       Vzz − xz        2
+                                                 z + 2 Vz − 3          z − 4 x = 0,                (B.3)
+                                       Vxx                       Vxx           Vxx
+
+
+
+
+                                                        26
+
+
+
+                      Electronic copy available at: https://ssrn.com/abstract=3441913
+where, to ease notations, we define i , i = 1, 2, 3, 4, by
+
+                                   1
+                              1 := (σ1 − σ2 )> (σ1 − σ2 ) > 0,
+                                   2
+                              2 := µ1 − µ2 + ν2 − ν3 ,      3 := 2 + ν3 ,                                    (B.4)
+                                      ((µ2 − ν2 )σ1 − µ1 σ2 )> ((µ2 − ν2 )σ1 − µ1 σ2 )
+                              4 :=                                                    > 0.
+                                                       2 det(σσ > )
+
+   We consider the following ansatz to the value function of Problem (3.1):
+
+
+                                          V (t, x, z) = f (t, z) · U (x) + g(t, z),
+
+
+where f is a positive function, f and g are smooth enough and satisfy the boundary conditions
+
+
+                                  f (T, z) = 1      and       g(T, z) = 0,        ∀ z > 0.                      (B.5)
+
+
+Immediately, we have
+
+                                  Vx   U 0 (x)                    Vxz   fz (t, z) U 0 (x)
+                                      = 00             and            =                   ,
+                                  Vxx  U (x)                      Vxx   f (t, z) U 00 (x)
+
+and reorganize the HJB (B.3) into
+
+                                       fz2 (U 0 )2                                fz (U 0 )2            (U 0 )2
+                                                                                          
+                                                       2
+                
+   U ft + g t       + 1 U fzz + gzz −               z   +  2 (U f z + gz ) − 3              z − 4 f         = 0,
+                                         f U 00                                      U 00                U 00
+
+where we have suppressed the arguments for functions f , g and U .
+
+
+B.2    Martingale Characterization
+
+Suppose there exists a control u∗ satisfying the conditions in Lemma 3.2. Since u∗ ∈ A(x), we have
+
+E |XT∗ |2 < ∞ and thus 0 < E [U 0 (XT∗ )] < ∞. Now we define a new probability measure Q by
+        
+
+
+                                                 dQ   U 0 (X ∗ )
+                                                    =  0 T ∗  := HT
+                                                 dP  E U (XT )
+
+
+
+                                                             27
+
+
+
+                           Electronic copy available at: https://ssrn.com/abstract=3441913
+and the Radon–Nikodym derivative process H = (Ht )0≤t≤T by Ht := Et [HT ]. By definition, H is
+
+a P-martingale, and by the martingale representation theorem, has the representation form of
+
+                                                                     Z t
+                                                                                   1 t >
+                                                                                    Z        
+            dHt = −Ht λ>
+                       t dWt                 or        Ht = H0 · exp −     >
+                                                                          λs dWs −    λ λs ds ,                           (B.6)
+                                                                       0           2 0 s
+
+where H0 = 1 and λ = (λ1 , λ2 , . . . , λn )> is an n-dimensional stochastic process in space L2 [0, T ].
+
+Using the Girsanov theorem, we assert that W Q , defined by
+
+                                                            Z t
+                                         WtQ = Wt +               λ>
+                                                                   s ds,          ∀ t ∈ [0, T ],
+                                                             0
+
+
+is a Q-Brownian motion. By a change of measure and (2.7), we rewrite the condition (3.4) as
+
+                      Z T                                                                            
+   EQ
+        [XTu ] = EQ          θt       µ1 dt + σ1> dWt       + KZt Nt           (µ2 − ν2 ) dt + σ2> dWt        = constant, (B.7)
+                        0
+
+
+for all u ∈ A(x), where EQ denotes taking expectation under Q.
+
+   We consider two special strategies u1 = (θ1 , N1 ) and u2 = (θ2 , N2 ), where
+
+                                                                                                    1
+                 θ1,t = x · It≤τ ,         N1,t = 0,              and       θ2,t = 0,     N2,t =        · It≤τ ,
+                                                                                                   K Zt
+
+where τ ∈ [0, T ] is an arbitrary stopping time and I is an indicator function. It is clear that both
+
+u1 and u2 are admissible strategies. By (B.7) and the arbitrariness of stopping time τ , we obtain
+
+                                                                                                
+                           σ1> Wt + µ1 t                     and               σ2> Wt + (µ2 − ν2 )t
+                                             0≤t≤T                                                     0≤t≤T
+
+
+
+are both Q-martingales. In consequence, this result leads to
+
+
+                                         σ1> λt = µ1          and          σ2> λt = µ2 − ν2 .                             (B.8)
+
+
+If the market is complete (n = 2), there exists a unique solution to (B.8); otherwise, we have
+
+infinitely many choices for λ.
+
+
+
+                                                                    28
+
+
+
+                        Electronic copy available at: https://ssrn.com/abstract=3441913
+   Given the dynamics of X in (2.7), we apply Itô formula to U 0 (XT∗ ) and get
+
+
+                   dU 0 (Xt∗ ) = −U 0 (Xt∗ ) [(diffusion term) dWt + (drift term) dt] .
+
+
+By matching the drift term in the above equation with the one in (B.6), we obtain an equality that
+
+allows us to express λ using θ∗ and N ∗ . We solve the two equations in (B.8) and find θ∗ and N ∗ .
+
+
+
+Appendix C           Technical Proofs
+
+Proofs of Theorem 4.1 using the HJB method. With U being an exponential utility, we reduce the
+
+HJB into
+                               
+                               
+                               f =  · f,
+                               
+                                   t      4       fz = 0,
+
+                                                  1 z 2 · gzz + 2 z · gz = 0.
+                               
+                               gt = 0,
+                               
+
+
+Given the boundary conditions (B.5), we obtain the value function to Problem (3.1) by
+
+                                                      1
+                                       V (t, x, z) = − e−4 (T −t)−γx ,
+                                                      γ
+
+which implies u∗ in (4.2).
+
+   Since V ∈ C 1,2,2 is a concave function of x and satisfies the HJB (3.2), V is the value function
+
+to Problem (3.1). From (4.2), we observe that both θ∗ and ZN ∗ are constants, hence in L2 [t, T ],
+
+and the optimal wealth process X ∗ is given by
+
+                        1                         1
+            Xt∗ = x +     µ1 C1 + (µ2 − ν2 )C2 t + (C1 σ1 + C2 σ2 )> Wt ,
+                                              
+                                                                                  ∀ t ∈ [0, T ],
+                        γ                         γ
+
+which together confirm u∗ is admissible. The proof is now complete.
+
+Proofs of Theorem 4.1 using the martingale method. Recall U 0 (x) = e−γx . By applying Itô for-
+
+
+
+
+                                                      29
+
+
+
+                    Electronic copy available at: https://ssrn.com/abstract=3441913
+mula, we derive
+
+             dU 0 (Xt∗ )
+               0    ∗    = −γ (θt∗ σ1 + KZt Nt∗ σ2 )> dWt − γ (µ1 θt∗ + (µ2 − ν2 )KZt Nt∗ ) dt
+             U (Xt )
+                            1
+                           + γ 2 (θt∗ σ1 + KZt Nt∗ σ2 )> (θt∗ σ1 + KZt Nt∗ σ2 ) dt.               (C.1)
+                            2
+
+By matching the diffusion term in (B.6), we obtain
+
+
+                                       λt = γ(θt∗ σ1 + KZt Nt∗ σ2 ),
+
+
+and, by plugging the above λt into (B.8), the system of equations for θ∗ and N ∗ as follows
+
+                                  
+                                                             µ1
+                                  ν1 · θt∗ + ν3 KZt · Nt∗ =    ,
+                                  
+                                  
+                                                             γ
+                                  ν3 · θt∗ + ν2 KZt · Nt∗ = µ2 − ν2 .
+                                  
+                                  
+                                                                 γ
+
+Due to (2.3), the above system bears a unique solution (θ∗ , N ∗ ), which is given by (4.2).
+
+   The proof is then complete once we verify u∗ is admissible (which is already done in the previous
+
+proof) and the two means of computing HT , (B.6) and (C.1), are consistent. The latter can be done
+
+via straightforward but tedious calculus, see proofs in Section 3.2 of Zou and Cadenillas (2014).
+
+Proof of Theorem 4.3. Let us work with proportional strategies ũ, as defined in (4.7). For any
+
+ũ ∈ A(x), the associated wealth process X = X ũ follows the stochastic differential equation (SDE):
+
+
+         dXt = Xt (µ1 πt + (µ2 − ν2 )Zt ψt ) dt + Xt (πt σ1 + Zt ψt σ2 )> dWt ,     X0 = x > 0.
+
+
+   (1) Using the HJB method, we try the ansatz and, after simplifications, obtain g ≡ 0 and
+
+                                  α
+                          ft +       4 · f = 0,      fz = 0,      f (T, z) = 1.
+                                 1−α
+
+
+
+
+                                                    30
+
+
+
+                    Electronic copy available at: https://ssrn.com/abstract=3441913
+Therefore, the value function V to Problem (2.9) is given by
+
+                                                     1 1−α
+                                                         α
+                                                           4 T α
+                                           V (x) =     e       x ,
+                                                     α
+
+where 4 is defined in (B.4). Plugging V into (B.1) and (B.2) and using the definition of proportional
+
+control ũ yield optimal control (π ∗ , ψ ∗ ) given in (4.8). The verification step is similar to that of the
+
+previous proof.
+
+   (2) Under the martingale method, we have
+
+
+                dU 0 (Xt∗ ) = −(1 − α)U 0 (Xt∗ ) (πt∗ σ1 + Zt ψt∗ σ2 )> dWt + (drift term) dt,
+
+
+and, as a result,
+
+
+                                      λt = (1 − α) (πt∗ σ1 + Zt ψt∗ σ2 ) .
+
+
+Recall (4.7), we obtain the linear system of (θ∗ , N ∗ ) by
+                                 
+                                   ν1        ν3 KZt           µ1
+                                  ∗ · θt∗ +         · Nt∗ =
+                                 
+                                 
+                                 
+                                   Xt          Xt∗           1−α
+                                   ν3        ν2 KZ t         µ2 − ν2
+                                  ∗ · θt∗ +         · Nt∗ =
+                                 
+                                 
+                                 
+                                   Xt          Xt∗            1−α
+
+which leads to (4.6).
+
+
+
+
+                                                      31
+
+
+
+                     Electronic copy available at: https://ssrn.com/abstract=3441913
+

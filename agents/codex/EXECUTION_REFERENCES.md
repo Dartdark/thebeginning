@@ -108,6 +108,19 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 
 ### E09 — Native micro costs, turnover and roll reconciliation
 
+- [Bitcoin inverse-futures allocation](results/bitcoin_inverse_3441913_review.md), Deng et al., SSRN3441913,
+  uploaded2019-08-23 version: a $K inverse contract earns `K*(1/Fentry−1/Fexit)` BTC when long; USD P&L needs
+  an explicit spot conversion/collateral ledger. Inverse is settlement convention, not short direction. Both
+  source-calibrated positions are long BTC. CME linear futures and index levels are not interchangeable executable inputs.
+  Continuous utility-optimal controls omit native rebalancing cost and liquidation; near-singular covariance can magnify
+  allocation estimates. Main formula agrees with the matrix solution; rendered AppendixB.2 has a contradictory sign.
+  Evidence: source inspection and synthetic formula/payoff checks only; source Sharpe4.86–5.07 over111days is unreplicated.
+  [User-requested strategy code](results/bitcoin_inverse_3441913_build.md) now has20 passing synthetic checks for reciprocal
+  entry basis, partial closes/reversals, native BTC fees and a reconciled quote-priced BTC/USD cost bridge. Pooled research
+  wallet transfers are not verified cross-venue settlement; ordered proposals are not actual fills. No return test added.
+  Four BitMEX API probes hit proxy403. Need identified dated contracts/spot clocks, native lots/marks/margin and conversion
+  before a return test; a perpetual adaptation also needs its own funding. No verified execution saving or current placement.
+
 - [Leveraged Fibonacci paper review](results/ssrn2011743.md), SSRN2011743, retained
   2026-10-30: distinguish margin allocation, notional leverage and loss-at-stop.
   A 60% equity margin commitment at 10x implies 6x equity notional under a simple
@@ -206,6 +219,17 @@ No strategy trial, promising-queue entry, plan placement or execution-policy cha
 
 ### E10 — Liquidity compensation, turnover and costs
 
+- [Ates–Wang floor/screen FX review](results/ssrn754946.md), SSRN754946, May 2005:
+  2003–04 electronic venues had tighter reversal-estimated spreads and an increasing
+  price-discovery role. This is historical venue evidence, not a profitable lead/lag
+  signal or our executable savings. Preserve quote-versus-trade estimator distinctions,
+  stale-price/receipt clocks, contract/tick regimes and Hasbrouck ordering bounds.
+  Daily fitted weights and full-contract-period volatility buckets are retrospective;
+  no entry can use them as contemporaneously known features without a past-only redesign.
+  Owned one-minute 6E OHLCV lacks the paired venue histories and executable quotes.
+  Source inspection and table-arithmetic checks only; no empirical replication or
+  strategy-return trial. Two visibly inconsistent source-table cells remain unresolved.
+
 - Event-time follow-up, retained 2026-10-30: Bowe, Hyde and McFarlane (2007),
   [SSRN 1025241](https://ssrn.com/abstract=1025241), [full review](results/mexder_duration_1025241_review.md).
   Historical MexDer TIIE28 duration/volume effects depend on structural specification and processed event clocks.
@@ -216,6 +240,7 @@ No strategy trial, promising-queue entry, plan placement or execution-policy cha
   Printed-table audit finds Table6's spread formula does not reproduce its headline using either Table4 panel;
   nearby duration/volume t-statistics are weak under two-sided inference. Source data and transformations remain
   unverified. Retain measurement/model-risk caution only; no alpha trial, cost calibration or live-order change.
+
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 [Saved review](results/equity_premium_liquidity_review_20261029.md). Retained by user 2026-10-29.
@@ -303,6 +328,15 @@ uploaded manuscript; [review and formula audit](results/speed_competition_494096
   events and identifiable participation, then fixed-parent-signal delay comparisons including noncompletion,
   adverse selection and costs at actual size. No infrastructure, protective-order or live-policy change follows.
 - Status: execution/identification reference; DON'T TEST as source-defined alpha, zero economic return trials.
+
+E11 follow-up — Song et al.2015, SSRN2631135, retained2026-10-31:
+[review/data gate](results/news_sentiment_2631135_20261031.md). Weekly news features must use available entity-level
+analytics and wait until all included articles/scores have arrived before a later fill. News source timestamps,
+analytics availability/receipt and subsequently corrected archive/model versions are separate clocks. Sample API
+messages are not historical entitlement or point-in-time coverage. Preserve missing news, duplicates and revisions.
+The source's weekly10%loss review is not an intraday protective stop; its reported strategy DD is49.09%/56.37%.
+Evidence: source/schema inspection plus two feature-arithmetic fixtures; no independent return, execution saving
+or live-policy change. Need actual dated article/entity/price ledgers and explicit loss-review execution first.
 
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
@@ -1262,6 +1296,10 @@ E11 information clocks, E18 research/platform fill conventions and E43 accountin
   universe, corporate actions, fold-local features, turbulence, seeds and benchmarks before economic replication.
 - Status at the original source-only review: original engine fails reproduction admission; broader personal-allocation method is a low-priority queue
   lead. Zero historical agent training, strategy-return trials, portfolio comparisons, native savings or live changes.
+- Related upload [SSRN 7013523 review](results/ssrn_7013523_review_20261030.md): all 30 performance-table cells
+  match the archived original; do not count the 2026 upload as independent confirmation. A separate constructed
+  check of its printed reward expansion disagrees with NAV accounting for a buy from zero holdings. This is a
+  source-equation finding, not a claim that an unavailable runtime used it; no new economic trial or method queue entry.
 
 - Follow-up2026-10-30: the user explicitly requested new corrected stock and intraday MNQ protocols. Both Python
   engines are now built and tested;12 synthetic mechanics groups pass. Independent CSV replay reconciles integer
@@ -1295,6 +1333,44 @@ Source: Bowe, Hyde and McFarlane, October 2007, SSRN1025241;
   initiator side, quote age, raw/filtered events, pretrade midpoint and posttrade fee-adjusted markout; then
   past-only seasonality/model fits versus simple spread/volume/time-of-day baselines. Minute OHLCV cannot supply this.
 - Status: execution-method reference; no market-return replication, alpha trial, strategy queue entry or live change.
+
+### E18 follow-up — Future-extreme buffers and partly observed targets
+
+Source: González-Maiz-Jiménez, López-Herrera and Reyes-Santiago, SSRN6401038, uploaded March2026 preprint;
+[review and mathematical audit](results/straddle_buffer_6401038_review_20261031.md).
+- Use: an order priced from the execution day's final high/low needs a causal estimator or as-of update policy.
+  A daily bar touching a hindsight level does not show that the order existed then; wider buffers and slippage
+  stress do not remove that information problem. Retain non-fills, cancellations, queue and trade-through evidence.
+- Evidence: source inspection and constructed identical-prefix/different-continuation counterexample only.
+  Paper's claimed Sharpe7.26–14.86 is not independently reproduced or demonstrated executable alpha.
+- Accounting: equal static long/short entries cancel before costs. Combined UP profit is close minus short-cover
+  price; DOWN profit is long-exit minus close. Inventory held before prediction creates no automatic advantage.
+- Target clock: predicting tomorrow's close relative to yesterday's open includes already-observed price movement.
+  In an explicit IID equal-variance Gaussian thought experiment, known-component sign predicts the combined sign
+  with75% accuracy while predicting the future component stays50%. High old-anchor accuracy is not tradable edge.
+- Next check only for separately evidenced research: prefix-only order levels, prediction/label maturity clocks,
+  genuine forward-return baseline, native net positions/cash/margin and executable fills. No current strategy,
+  sizing, protective-order or account-policy change; no new return trial or measured execution saving.
+
+### E09 follow-up — WTI genetic optimization still needs native contract and cost units
+
+Source: Aragón, Mejía & Zapata(2018), [SSRN3387570](https://ssrn.com/abstract=3387570);
+[source review](results/wti_genetic_ma_ssrn3387570.md), retained2026-10-30.
+- Lesson: optimizer fitness only measures the ledger it is given. A printed
+  quantity-times-price-change formula is not native futures dollar P&L without
+  specified signed units/multiplier, fills, turnover costs and roll cashflows.
+- Evidence: source/Table2 and deterministic rounded-table/unit audit, no price
+  replication. Article calls its example2,000WTI contracts on$2m while its equation
+  does not show the CL1,000-barrel multiplier. Literal-contract interpretation
+  changes dollar P&L by1,000×; this does not prove unavailable code used that error.
+- Limits: generic Bloomberg15-minute closes,2017–18; no disclosed all-in costs,
+  native fill ledger, complete intraday losses or session/roll convention. Ten
+  test months are not an account-risk limit. GA search cannot fix missing units.
+- Smallest next check if reopened: one identified contract trade reconciled from
+  signal time through signed fill quantities, cash P&L, fees and roll before
+  optimizing or mapping percentage returns into CL/MCL account sizes.
+- Status: accounting caution, NEEDS SOURCE SPECIFICATION; zero return trials,
+  no new optimizer/execution policy, promising-queue or plan/live change.
 
 ## Minimum record for any later execution comparison
 

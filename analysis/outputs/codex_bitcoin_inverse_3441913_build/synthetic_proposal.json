@@ -1,0 +1,85 @@
+{
+  "status": "OFFLINE_REVIEW_ONLY",
+  "contract_id": "TEST-XBT-203006",
+  "coefficients": {
+    "C1": 0.5255864213910321,
+    "C2": 1.3215951936521102,
+    "covariance_condition": 4.271941565124344
+  },
+  "raw_targets": {
+    "spot_total_usd": 35039.09475940214,
+    "futures_contracts": 88987.40970590877
+  },
+  "rounded_contract_target": 88987,
+  "starting_nav_usd": 100000.0,
+  "hypothetical_ending_nav_usd": 99883.51593598205,
+  "expected_fees_usd": 101.19170781214021,
+  "expected_execution_mark_difference_usd": 15.29235620579869,
+  "expected_gross_model_exposure": 1.232886180573312,
+  "required_collateral_btc": 0.2221894091514321,
+  "hypothetical_book": {
+    "contract_id": "TEST-XBT-203006",
+    "as_of": "2030-01-02T00:00:00Z",
+    "available_at": "2030-01-02T00:00:00.100000Z",
+    "usd_cash": 64844.45006549501,
+    "spot_btc": 0.6540598088908893,
+    "collateral_btc": 0.2221894091514321,
+    "contracts": 88987,
+    "entry_price": 40405
+  },
+  "actions": [
+    {
+      "kind": "spot",
+      "quantity_btc": 0.223842,
+      "reference_price": 40005,
+      "fee_usd": 8.954799210000001,
+      "purpose": "prefund_futures_collateral",
+      "sequence": 1,
+      "decision_time": "2030-01-02T00:00:01+00:00",
+      "earliest_eligible_fill": "2030-01-02T00:00:02+00:00",
+      "status": "HYPOTHETICAL_QUOTE_PROPOSAL"
+    },
+    {
+      "kind": "btc_wallet_transfer",
+      "spot_to_collateral_btc": 0.2238411911091106,
+      "sequence": 2,
+      "decision_time": "2030-01-02T00:00:01+00:00",
+      "earliest_eligible_fill": "2030-01-02T00:00:02+00:00",
+      "status": "HYPOTHETICAL_QUOTE_PROPOSAL"
+    },
+    {
+      "kind": "inverse_futures",
+      "quantity_contracts": 88987,
+      "reference_price": 40405,
+      "fee_btc": 0.0016517819576785052,
+      "realized_btc": 0.0,
+      "purpose": "rebalance",
+      "sequence": 3,
+      "decision_time": "2030-01-02T00:00:01+00:00",
+      "earliest_eligible_fill": "2030-01-02T00:00:02+00:00",
+      "status": "HYPOTHETICAL_QUOTE_PROPOSAL"
+    },
+    {
+      "kind": "spot",
+      "quantity_btc": 0.654059,
+      "reference_price": 40005,
+      "fee_usd": 26.165630295,
+      "purpose": "rebalance_total_btc_exposure",
+      "sequence": 4,
+      "decision_time": "2030-01-02T00:00:01+00:00",
+      "earliest_eligible_fill": "2030-01-02T00:00:02+00:00",
+      "status": "HYPOTHETICAL_QUOTE_PROPOSAL"
+    }
+  ],
+  "input_book_unchanged": true,
+  "empirical_return_trials": 0,
+  "limitations": [
+    "Quotes do not establish fills, liquidity, depth or atomic leg execution.",
+    "Margin reserve is a configured research check, not an exchange liquidation engine.",
+    "Fills and wallet transfers require chronological reconciliation before replanning.",
+    "No carry interest, spot borrowing, perpetual funding or expiry/roll implementation."
+  ],
+  "input_status": "synthetic",
+  "input_sha256": "f3a7f082519d57c7d9d0a1b112e147b66453560bddf37cf0519815c0590f58d6",
+  "script_sha256": "c2a2cdfd31e41964bc24771f3b7d764c6cfe070ffb92c94488080ff135681f7a"
+}

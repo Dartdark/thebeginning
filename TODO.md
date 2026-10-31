@@ -228,16 +228,50 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+**Data shopping/export register:** [Research leads awaiting data](agents/codex/DATA_NEEDED.md) consolidates previous
+data-blocked leads, exact missing inputs, partial acquisitions, next checks and superseded requests. Maintain it for future
+worthwhile NEEDS DATA leads. Acquisition preference: **free sources only**; a listing does not authorize a return test.
+
+- [ ] **Bitcoin spot/inverse-futures utility allocation — CODE BUILT / NEEDS MATCHING DATA AND SPECIFICATION (SSRN3441913).**
+  Conditional personal-account research: explicit utility-allocation formulas; authors report Sharpe4.86–5.07
+  versus spot4.40 on111days in2019, not independently reproduced net returns. Main formula/payoff audit passes;
+  AppendixB.2 has a confirmed sign discrepancy. Both calibrated legs are long BTC, not a neutral hedge.
+  Need exact source BitMEX contract IDs and spot/index clocks, executable spot, rebalancing, native lots,
+  collateral/mark liquidation and costs. Four public API probes hit network proxy403; owned CME/spot bars
+  are not matching inverse inputs. Next step only with new matching inputs: reconcile one native BTC/USD
+  contract/spot interval and availability clock, then committed coverage/cost/power gates before returns.
+  No new economic trial, Apex placement, modern perpetual substitution or allocation.
+  [Offline strategy/review packet](agents/codex/results/bitcoin_inverse_3441913_build.md) built at user request;20 synthetic tests
+  pass for native lots, reciprocal BTC accounting, costs and timing guards. Pooled-wallet execution assumptions remain;
+  independent Claude review and empirical verification pending.
+  [Review](agents/codex/results/bitcoin_inverse_3441913_review.md) ·
+  [Evidence](agents/codex/evidence/bitcoin_inverse_3441913.md).
+
 - [ ] **FOMC short nearby VX — NEEDS DATA AND SPECIFICATION (SSRN2544445).**
   Conditional personal-research lead: scheduled uncertainty-release mechanism; author claims34selected2010–14trades,
   +28.68%total/Sharpe1.085/0.7%DD, not independently reproduced. Need individual-contract intradayVXprices/quotes,
   event-clock eras, source11:00timezone and the chart-only`min-Maturity=5`units/contract-selection rule. Printed Eq3
   negative leverage reverses the sign; screenshotpositive3.5matches the short17example. Cboe/FirstRate/Portara products
-  found, but public sample attempts yielded no admitted panel; final cost unverified, no purchase. Smallest next check
+  found, but public sample attempts yielded no admitted panel. Follow-up2026-10-31: direct sample download proxy-blocked;
+  advertised FinzData$49/market and Portara$220 special verified on pricing pages, delivered quality unverified/no purchase.
+  User chose **free sources only**; no matching free panel acquired, paid paths excluded.
+  [Acquisition receipt](agents/codex/results/fomc_vx_data_acquisition.md). Smallest next check
   when matching inputs/clarification arrive: reconcile one dated event/contract/clock/stop, then committed design/cost/power
   screen. No daily/spotVIXorESproxy, parameter rescue, plan placement or return trial. This is separate from the failed
   naked Calvados component. [Review](agents/codex/results/fomc_vx_2544445_review.md) ·
   [Evidence](agents/codex/evidence/fomc_vx_2544445.md) · [Data gate](agents/codex/inputs/fomc_vx_2544445/data_gate.md).
+
+- [ ] **Extreme positive firm-news sentiment — low-priority personal-stock lead / NEEDS DATA AND RULES (SSRN2631135).**
+  Merit: nonprice company-information feature with reported2007–14long trend mean16.90%,Sharpe0.64;
+  source DD49.09%, unspecified costs and test-period cutoff scanning limit that claim. No independent net edge.
+  Need lawful TRNA probabilities/relevance with entity/receipt/model vintages, historical equity universe/sectors,
+  corporate-action cash ledgers, exact weights and position lifecycle. Actual owned/exact-title/GitHub/official
+  LSEG checks found documentation and manuscript records, not a full free admitted news panel.
+  Smallest next check when matching inputs arrive: audit an entitled historical sample and clocks, freeze a
+  training-only protocol, then cheap design screen. No NQ substitute, Apex placement or new return trial.
+  Python research code is feasible with those inputs; code feasibility is not profitability.
+  [Review](agents/codex/results/news_sentiment_2631135_20261031.md) · [Evidence](agents/codex/evidence/news_sentiment_2631135_20261031.md).
+
 
 - [ ] **ANANTA interest-rate differential momentum — NEEDS DATA AND SPECIFICATION (SSRN 2419243).**
   Low-priority personal FX lead: two-year swap-rate differential changes across eleven currencies, rebalanced
@@ -272,6 +306,9 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   on complete observed NQ sessions as MNQ proxies. No rescue tuning or live changes.
   [Build/results](agents/codex/results/rl3690996_build_20261030.md) · [Code guide](agents/codex/code/rl3690996/README.md) ·
   [Original-source review](agents/codex/results/rl_ensemble_3690996_20261030.md).
+  Related [SSRN 7013523 upload review](agents/codex/results/ssrn_7013523_review_20261030.md):30/30 table cells
+  match the original; that source review adds no independent return test. The corrected builds above are new protocols.
+
 
 - [ ] **WASDE pre-release futures/options volume — NEEDS DATA AND SPECIFICATION (SSRN 4841490; 2026-10-30).**
   Lower-priority personal-account lead: author reports positive futures-volume and negative options-volume

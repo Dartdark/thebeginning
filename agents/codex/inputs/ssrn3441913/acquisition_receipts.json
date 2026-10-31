@@ -1,0 +1,22 @@
+[
+  {
+    "name": "instrument_m19",
+    "url": "https://www.bitmex.com/api/v1/instrument?symbol=XBTM19&count=1",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "name": "instrument_u19",
+    "url": "https://www.bitmex.com/api/v1/instrument?symbol=XBTU19&count=1",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "name": "daily_m19",
+    "url": "https://www.bitmex.com/api/v1/trade/bucketed?binSize=1d&partial=false&symbol=XBTM19&count=3&startTime=2018-12-17T00%3A00%3A00Z&reverse=false",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "name": "index_bxbt",
+    "url": "https://www.bitmex.com/api/v1/trade/bucketed?binSize=1d&partial=false&symbol=.BXBT&count=3&startTime=2018-12-17T00%3A00%3A00Z&reverse=false",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  }
+]
