@@ -884,6 +884,29 @@ measurement, E15 overnight tails, E19 session clocks, E30 paired-leg execution.
 - Status: execution/accounting reference retained; naked component rejected, preferred hedge unverified. No execution
   saving, plan placement, trading, broker or live-policy change is claimed.
 
+### E50 — Unexpected activity is not automatically a forecast or executable depth
+
+Source/review + date: Sakthivel & Kamaiah, [SSRN1589962](https://ssrn.com/abstract=1589962),
+user full-text upload; [review](results/nifty_activity_volatility_ssrn1589962.md), 2026-10-30.
+Execution question and useful lesson: separate activity known before an order
+from same-day activity explained afterward. Daily futures OI is outstanding
+contracts, not signed pressure or available bid/ask depth. A volatility relation
+does not establish lower spread, fill costs, directional alpha or a useful filter.
+Evidence: author Nifty spot/futures variance regressions, 2000–08, with ARMA(5,5)
+expected/unexpected daily activity. Unexpected coefficients positive, expected
+negative. No future forecast or execution test. Printed GJR feedback arithmetic
+is 1.1235 under symmetric innovations; the source's 0.75 comparison omits its
+gamma term. Retained arithmetic script is not an empirical re-estimation.
+Market/platform limits: old Indian near-month daily series, not NQ/ES intraday
+quotes/fills; OI publication timing and model fitting clocks are unverified.
+Data/prerequisites: dated contract-level volume/OI and availability clocks,
+roll/expiry mapping, past-only estimation, variance-validity checks, lagged
+price-only forecast baseline, then paired net strategy/account outcomes.
+Smallest justified next check: apply these clock/model checks if independently
+undertaking activity-risk research; this source does not earn a new return test.
+Status: methodological reference only; no demonstrated executable edge, zero
+return trials, no promising-candidate queue entry or plan/live change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
