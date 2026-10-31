@@ -1,0 +1,113 @@
+{
+  "cash_budget": {
+    "train": {
+      "cash_after": -0.9999999999998863,
+      "shares": 100.0,
+      "nonnegative_balance_constraint_passed": false
+    },
+    "validation": {
+      "cash_after": -0.9999999999998863,
+      "shares": 100.0,
+      "nonnegative_balance_constraint_passed": false
+    },
+    "trade": {
+      "cash_after": -0.9999999999998863,
+      "shares": 100.0,
+      "nonnegative_balance_constraint_passed": false
+    }
+  },
+  "integer_shares": {
+    "train": {
+      "continuous_action": 0.12345,
+      "actual_shares": 12.345,
+      "integer_constraint_passed": false
+    },
+    "validation": {
+      "continuous_action": 0.12345,
+      "actual_shares": 12.345,
+      "integer_constraint_passed": false
+    },
+    "trade": {
+      "continuous_action": 0.12345,
+      "actual_shares": 12.345,
+      "integer_constraint_passed": false
+    }
+  },
+  "sale_fee_counter": {
+    "train": {
+      "cash_after": 99.9,
+      "actual_cash_fee": 0.1,
+      "reported_cost": 0.0,
+      "portfolio_cash_charges_fee": true
+    },
+    "validation": {
+      "cash_after": 99.9,
+      "actual_cash_fee": 0.1,
+      "reported_cost": 0.0,
+      "portfolio_cash_charges_fee": true
+    },
+    "validation_turbulence": {
+      "cash_after": 99.9,
+      "actual_cash_fee": 0.1,
+      "reported_cost": 0.0
+    },
+    "trade": {
+      "cash_after": 99.9,
+      "actual_cash_fee": 0.1,
+      "reported_cost": 0.0,
+      "portfolio_cash_charges_fee": true
+    },
+    "trade_turbulence": {
+      "cash_after": 99.9,
+      "actual_cash_fee": 0.1,
+      "reported_cost": 0.0
+    }
+  },
+  "decision_fill_clock": {
+    "train": {
+      "observation_close": 10.0,
+      "fill_price": 10.0,
+      "next_day_open": 99.0,
+      "next_day_close": 20.0,
+      "later_executable_quote_used": false,
+      "limit": "Same close supplies state and fill; no verified post-observation execution clock"
+    },
+    "validation": {
+      "observation_close": 10.0,
+      "fill_price": 10.0,
+      "next_day_open": 99.0,
+      "next_day_close": 20.0,
+      "later_executable_quote_used": false,
+      "limit": "Same close supplies state and fill; no verified post-observation execution clock"
+    },
+    "trade": {
+      "observation_close": 10.0,
+      "fill_price": 10.0,
+      "next_day_open": 99.0,
+      "next_day_close": 20.0,
+      "later_executable_quote_used": false,
+      "limit": "Same close supplies state and fill; no verified post-observation execution clock"
+    }
+  },
+  "source_specification": {
+    "synthetic_price_statistic": 54.70506738652544,
+    "independently_reconstructed_levels": 54.70506738652544,
+    "paper_return_based_counterfactual": 34.89804388643798,
+    "turbulence_uses_prices_not_paper_returns": true,
+    "preprocessing_backward_fill_present": true,
+    "backward_fill_limit": "Static occurrence only; not a measured holdout-leak incidence",
+    "source_validation_window_63_days": true,
+    "source_cutoff_july_7_2020": true,
+    "paper_validation_months": 3,
+    "readme_validation_months": 12,
+    "validation_sharpe_daily_scaling_uses_sqrt4": true,
+    "sharpe_limit": "Common positive scale preserves model ranking; not a valid annualized daily Sharpe"
+  },
+  "synthetic_groups": 5,
+  "source_methods_executed": true,
+  "source_git_blobs_verified": true,
+  "economic_reproduction_admitted": false,
+  "new_strategy_return_trials": 0,
+  "historical_training_runs": 0,
+  "account_simulations": 0
+}

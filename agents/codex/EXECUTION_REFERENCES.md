@@ -206,6 +206,17 @@ No strategy trial, promising-queue entry, plan placement or execution-policy cha
 
 ### E10 — Liquidity compensation, turnover and costs
 
+- Event-time follow-up, retained 2026-10-30: Bowe, Hyde and McFarlane (2007),
+  [SSRN 1025241](https://ssrn.com/abstract=1025241), [full review](results/mexder_duration_1025241_review.md).
+  Historical MexDer TIIE28 duration/volume effects depend on structural specification and processed event clocks.
+  Equal-price thinning, same-time aggregation, overnight compression and seasonal adjustment alter what duration
+  and volume measure. Preserve contract/event identity and available-at clocks before comparing fills or impact.
+  A current-trade explanatory coefficient is not a pre-order forecast, a negative signed-volume coefficient is
+  not a short signal, and a model-implied liquidity share is not achievable execution savings.
+  Printed-table audit finds Table6's spread formula does not reproduce its headline using either Table4 panel;
+  nearby duration/volume t-statistics are weak under two-sided inference. Source data and transformations remain
+  unverified. Retain measurement/model-risk caution only; no alpha trial, cost calibration or live-order change.
+
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 [Saved review](results/equity_premium_liquidity_review_20261029.md). Retained by user 2026-10-29.
 - Use: distinguish turnover from spread, depth, impact and resilience; distinguish compensation for illiquidity from predictive alpha. Large trading volume need not imply cheap executable liquidity.
@@ -1010,6 +1021,8 @@ measurement, E15 overnight tails, E19 session clocks, E30 paired-leg execution.
 - Status: execution/accounting reference retained; naked component rejected, preferred hedge unverified. No execution
   saving, plan placement, trading, broker or live-policy change is claimed.
 
+- FOMC-only follow-up, separate paper [SSRN2544445](results/fomc_vx_2544445_review.md): rendered source charts show an undefined`min-Maturity=5`which prose“nearest”does not capture. Printed Eq3 with negative3.5%leverage gives+18VXunder mathematical floor; screenshotpositive3.5gives intended−17. Preserve source sign/rounding and source-era monthly-contract universe before replication. Cboe legacy/current product documentation has a2018timestamp/schema transition; provider bar labels/timezones differ. A35-minute post-statement cover now crosses the usual press-conference start. Source0.7%sampleDDand zero triggered stops do not cap5%stop/gap risk. Product discovery and failed sample reads are recorded; no intraday panel or return test admitted. Retain a distinct conditional personal lead; the Calvados component failure does not falsify it.
+
 ETP lifecycle/clock follow-up, 2026-10-30: Bordonado, Molnár and Samdal (2016),
 [SSRN2753300](https://ssrn.com/abstract=2753300), [full uploaded-source review](results/vix_etp_2753300.md).
 The front-VX/spot basis XIV/VXX switching example reports 69% annualized return, Sharpe2.11 and −24.5% DD in
@@ -1097,6 +1110,28 @@ Smallest justified next check: apply these clock/model checks if independently
 undertaking activity-risk research; this source does not earn a new return test.
 Status: methodological reference only; no demonstrated executable edge, zero
 return trials, no promising-candidate queue entry or plan/live change.
+
+### E54 follow-up — Post-news activity predicts later volume, not execution costs
+
+Source: uploaded anonymized preprint *Trading Intensity, Forecast Disagreement, and Post-Announcement Volume
+Persistence in European Index Futures*, [SSRN 7446599](https://ssrn.com/abstract=7446599),
+[review / diagnostic-kernel scope](results/volume_persistence_7446599.md), 2026-10-30.
+- Useful lesson: distinguish elevated volume, normalized one-sidedness, price direction and executable liquidity.
+  Initial activity explains later excess volume in the reported FTSE/DAX/CAC sample; the R² rise 0.130 -> 0.395
+  is historical fit for a volume outcome, not a return forecast. Directional concentration adds about 0.06 pp.
+- Evidence: source historical associations, not independently re-estimated. NFP forecast dispersion is negatively
+  associated with later volume. Matched non-announcement windows also show activity persistence. No uniform
+  quote/book history, native fills, execution savings or trading profits are supplied.
+- Timing: primary same-day contract selection uses end-of-day volume; next-day activation is the causal alternative
+  tested by the author. Full-sample average-path boundaries require past-only fitting for a forecast. Initial activity
+  arrives after the observation interval; AUC120, fitted decay and confirmed baseline duration are later labels.
+- Code: a fixed-five-minute numeric measurement kernel plus synthetic arithmetic checks is retained in
+  `analysis/codex_volume_persistence_7446599.py`; it does not validate upstream event clocks/contracts, fit a forecast,
+  classify trade directions, route orders or measure costs. It reports baseline onset separately from confirmation.
+- Next check only for a justified execution study: reconcile one dated event using prior seasonal days and actual
+  quotes/fills, then test incremental spread/depth/markout/cost evidence at native size. Tick-rule concentration is
+  not participant identity, and high activity can coexist with improving liquidity.
+- Status: supporting measurement reference; no source-defined directional strategy or new economic return trial.
 
 ### E55 — Strategic futures demand, welfare and executable basis
 
@@ -1211,6 +1246,31 @@ tests or change trading from the theoretical impact result alone.
 Status: reference only, zero return trials, no execution policy or plan/live change.
 Related: E04 opportunity-complete diagnostics, E25 raw-flow negative evidence,
 E40 short-horizon price impact and E54 activity-availability clocks.
+
+### E58 — RL stock simulators: observation/fill clocks, cash and reported fee counters
+
+Source: Yang, Liu, Zhong and Walid, *Deep Reinforcement Learning for Automated Stock Trading: An Ensemble Strategy*,
+ICAIF 2020, SSRN 3690996; [paper/code review](results/rl_ensemble_3690996_20261030.md),
+[pretest plan](plans/rl_ensemble_3690996_mechanics_20261030.md). Pinned public FinRL-Trading source at
+5b9290ed706efa34aaff96e10761af428a154076, with original Git blobs verified. Related: E09 cash/cost reconciliation,
+E11 information clocks, E18 research/platform fill conventions and E43 accounting-to-account effects.
+- Use: a close-derived state followed by a fill at the same close needs an actual causal order/auction protocol.
+  Value and reward calculations cannot establish availability of that fill. Distinguish the actual cash charged from
+  a separately reported fee counter; a counter error alone does not prove costs were omitted from net cash.
+- Evidence: five predeclared synthetic groups executed original source class methods/function bodies via AST, not
+  trained agents. All three environments can spend $1,001 from $1,000 cash on 100 shares at $10 with a 0.1% fee,
+  retain 12.345 shares from a continuous action, and report $0 in the cost counter on a fully closed $100 sale even
+  though cash correctly receives $99.90. Same observation close is used as fill before advancing to the next close.
+- Specification lesson: source turbulence uses price levels instead of paper-defined returns; backward filling needs
+  fold/ticker availability checks. A common positive Sharpe annualization scale does not alter model ranking.
+  README/paper/code windows and end dates differ; a paper-era snapshot is not proof of the exact published run.
+- Limits: synthetic incidence is not a measured historical failure rate or Sharpe inflation. Public data acquisition
+  and panel shape were verified, but trained policy checkpoints, point-in-time universe/adjustment identity and
+  portfolio attribution remain unverified. Source daily cash-equity fees do not translate to native futures.
+- Next check only with clarified source/protocol: one causal observation/order/fill/cash/share trace, then verified
+  universe, corporate actions, fold-local features, turbulence, seeds and benchmarks before economic replication.
+- Status: original engine fails reproduction admission; broader personal-allocation method is a low-priority queue
+  lead. Zero historical agent training, strategy-return trials, portfolio comparisons, native savings or live changes.
 
 ## Minimum record for any later execution comparison
 
