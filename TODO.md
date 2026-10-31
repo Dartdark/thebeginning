@@ -247,6 +247,7 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   negative leverage reverses the sign; screenshotpositive3.5matches the short17example. Cboe/FirstRate/Portara products
   found, but public sample attempts yielded no admitted panel. Follow-up2026-10-31: direct sample download proxy-blocked;
   advertised FinzData$49/market and Portara$220 special verified on pricing pages, delivered quality unverified/no purchase.
+  User chose **free sources only**; no matching free panel acquired, paid paths excluded.
   [Acquisition receipt](agents/codex/results/fomc_vx_data_acquisition.md). Smallest next check
   when matching inputs/clarification arrive: reconcile one dated event/contract/clock/stop, then committed design/cost/power
   screen. No daily/spotVIXorESproxy, parameter rescue, plan placement or return trial. This is separate from the failed

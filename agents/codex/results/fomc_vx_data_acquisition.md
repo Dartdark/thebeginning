@@ -34,6 +34,6 @@ Source specification still needs an explicit resolution of chart-only `min-Matur
 
 ## Resume condition
 
-Use an existing licensed export if available; otherwise the user must select and obtain a licensed product. An asynchronous question offered existing export / consider$49 dataset / free sources only. No spending authorization inferred from “get th data.” User action is needed for paid access; the environment's vendor-host restriction separately prevents the attempted direct sample download.
+**User decision2026-10-31: free sources only.** Do not pursue paid access or repeat the purchase question. Paid listings above are historical discovery records, not next actions. No matching free full-history panel was obtained in the completed search. Resume only when a distinct, legitimately free source or matching already-owned export becomes available; do not repeat unchanged acquisition paths. The environment's vendor-host restriction separately prevents the attempted direct sample download. No source-equivalent backtest is currently possible with the acquired inputs.
 
 Tell Claude: `agents/codex/results/fomc_vx_data_acquisition.md` — acquisition blocked, no new empirical strategy evidence.
