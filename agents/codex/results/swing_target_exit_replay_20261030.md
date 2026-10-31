@@ -13,6 +13,23 @@ precision extension 875f4e5). Script: `analysis/codex_swing_target_exit_replay.p
 Outputs: `analysis/outputs/codex_swing_target_exit_replay/`.
 No new strategy variants, rankings, plan changes, or live changes.
 
+## Concurrent records retained during publication
+
+The first push found newer remote work, merged from `175e11d8`. Two other
+accounting replays are retained as `swing_kind_replay_20261031.md` and
+`swing_replay_20261031.md`. Both use 500 histories and freeze the resampling
+universe at 2026-10-09; their adoption comparisons are inconclusive.
+This run explicitly rebuilds through 2026-10-30, uses seed 20261030 and extends
+to 5,000 histories. The baseline report endpoints still differ, as noted below.
+These are different historical generators and overlapping evidence, not
+independent confirmations. Do not pool runs or interpret this report as
+superseding their fixed-cutoff records. Its 150K support is conditional on its
+declared rebuilt bench; validation at a common fully covered cutoff, exact v3
+and current rosters remains separate. The common accounting result is the
+$132/MNQ ledger correction and absence of guaranteed account improvement.
+See execution references E39 (unfinished/stale reports) and E43 (account
+non-monotonicity). Both existing records and this report are preserved.
+
 ## Results: 5,000 paired histories
 
 Means are payouts received, not trading P&L. Days to sixth payout include
