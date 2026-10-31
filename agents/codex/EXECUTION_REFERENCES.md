@@ -206,6 +206,17 @@ No strategy trial, promising-queue entry, plan placement or execution-policy cha
 
 ### E10 — Liquidity compensation, turnover and costs
 
+- [Ates–Wang floor/screen FX review](results/ssrn754946.md), SSRN754946, May 2005:
+  2003–04 electronic venues had tighter reversal-estimated spreads and an increasing
+  price-discovery role. This is historical venue evidence, not a profitable lead/lag
+  signal or our executable savings. Preserve quote-versus-trade estimator distinctions,
+  stale-price/receipt clocks, contract/tick regimes and Hasbrouck ordering bounds.
+  Daily fitted weights and full-contract-period volatility buckets are retrospective;
+  no entry can use them as contemporaneously known features without a past-only redesign.
+  Owned one-minute 6E OHLCV lacks the paired venue histories and executable quotes.
+  Source inspection and table-arithmetic checks only; no empirical replication or
+  strategy-return trial. Two visibly inconsistent source-table cells remain unresolved.
+
 - Event-time follow-up, retained 2026-10-30: Bowe, Hyde and McFarlane (2007),
   [SSRN 1025241](https://ssrn.com/abstract=1025241), [full review](results/mexder_duration_1025241_review.md).
   Historical MexDer TIIE28 duration/volume effects depend on structural specification and processed event clocks.
@@ -216,6 +227,7 @@ No strategy trial, promising-queue entry, plan placement or execution-policy cha
   Printed-table audit finds Table6's spread formula does not reproduce its headline using either Table4 panel;
   nearby duration/volume t-statistics are weak under two-sided inference. Source data and transformations remain
   unverified. Retain measurement/model-risk caution only; no alpha trial, cost calibration or live-order change.
+
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 [Saved review](results/equity_premium_liquidity_review_20261029.md). Retained by user 2026-10-29.
