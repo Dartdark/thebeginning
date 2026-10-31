@@ -83,6 +83,14 @@ def summary(L=None):
                 queued=sum(1 for i in I if i["status"] == "queued"), blocked=sum(1 for i in I if i["status"] == "blocked"),
                 next=next_idea(), t_bar=t, n_trials=n_items, alive=alive[-20:], recent=L[-15:][::-1])
     os.makedirs(os.path.dirname(OUT), exist_ok=True); json.dump(data, open(OUT, "w"), indent=1)
+    # dashboard tables (Apex Live Desk 'Strategy lab' panel): one stats row + one row per study, newest first
+    stats = {k: data[k] for k in ("state", "studies", "today", "cap", "queued", "blocked", "looks_quarter", "looks_budget",
+                                  "t_bar", "updated")}
+    stats.update(key="lab", next=data["next"] or "", **{f"stage{s}": n for s, n in data["passed_stage"].items()})
+    json.dump([stats], open(OUT.replace("lab.json", "lab_stats.json"), "w"), indent=1)
+    cols = ("id", "date", "title", "market", "stage", "verdict", "gate", "t_design", "t_holdout", "tier")
+    rows = [{c: r.get(c) for c in cols} | {"key": f"{r.get('id', '')} {r.get('date', '')}"} for r in L[::-1][:60]]
+    json.dump(rows, open(OUT.replace("lab.json", "lab_studies.json"), "w"), indent=1)
     return data
 
 

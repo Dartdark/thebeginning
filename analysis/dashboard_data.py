@@ -102,4 +102,5 @@ if __name__ == "__main__":
     import runpy
     runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "live_panels.py"), run_name="__main__")
     runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "account_tools.py"), run_name="__main__")
+    runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "lab_tools.py"), run_name="__main__")   # lab_stats / lab_studies
     runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "daily_bars_merge.py"), run_name="__main__")

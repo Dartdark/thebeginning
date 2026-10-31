@@ -20,7 +20,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   dealers pre-hedge, then recover after the result (Lou, Yan & Zhang 2013 'Anticipated and repeated shocks in liquid
   markets'). Test short ZN 08:30 -> 11:55 on 10-year auction days; long 12:05 -> 14:00.
 - rule sketch: V1 short 08:30->11:55, V2 long 12:05->14:00, V3 both. Stop 0.5 x 14-day ATR.
-- Apex: check ZN is on Apex's product list (it is a CME Globex rate future; confirm). data: data/ZN_*, data/treasury_auctions.csv
+- Apex: yes (user confirmed 2026-10-31). data: data/ZN_*, data/treasury_auctions.csv
 
 ## Q003 · queued · priority 2
 - source: lab seed (non-equity, FX fixing flow)
@@ -28,7 +28,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - mechanism: WM/Reuters 4 pm London fix (10:00 CT; 11:00 CT in DST-mismatch weeks): asset managers' FX hedging is
   executed at the fix, so 6E drifts into it and partly reverses after (Evans 2018; Melvin & Prins 2015 month-end).
 - rule sketch: V1 month-end days only: follow the 09:30->09:55 CT move to 10:00, V2 fade 10:01->10:30, V3 V1 on every day.
-- Apex: 6E/M6E on CME (confirm on the Apex list). data: data/6E_1min_*.csv
+- Apex: yes, 6E / M6E (user confirmed 2026-10-31). data: data/6E_1min_*.csv
 
 ## Q004 · queued · priority 2
 - source: lab seed (positioning)
@@ -65,7 +65,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - rule sketch: if |NG 09:30->09:35 move| >= 0.15 x 14-day ATR, enter at the 09:36 open: V1 fade, V2 follow, stop 0.3 ATR,
   out 10:30 CT; V3 V1 only in the heating season (Nov-Mar). Release days = Thursdays plus holiday shifts (infer from the
   09:31 volume spike when a Thursday is a holiday; never from returns).
-- Apex: check NG/QG/MNG on the Apex product list. data: data/NG_1min_*.csv (CT, bar-end stamps like CL)
+- Apex: yes (user confirmed 2026-10-31). data: data/NG_1min_*.csv (CT, bar-end stamps like CL)
 
 ## Q008 · blocked · priority 3
 - source: Codex audit 2026-10-31

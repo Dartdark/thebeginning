@@ -18,8 +18,8 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `funded_strategies/
 - **Code reviewer session (user, 2026-10-31):** `session_01Wk1fPW6LVWayRousRwL7mU` ("🔍 Code reviewer", nested under the master):
   on "review" it checks Claude's and Codex's new code for correctness bugs, fixes confirmed defects in Claude's code, logs in
   `agents/cross_review/CODE_REVIEW_LOG.md` and sends the master a short verdict.
-- **Strategy lab (user, 2026-10-31):** autonomous research loop, 5 runs a day (scheduled task 'Strategy lab', fresh session each
-  run, skill `.claude/skills/lab/SKILL.md`, rules `lab/README.md`): one queued idea per run from `lab/IDEAS.md`, staged gates,
+- **Strategy lab (user, 2026-10-31):** autonomous research loop, 5 runs a day (scheduled task 'Strategy lab' wakes the '🧪 Lab' session
+  `session_01Wk1fPZPJ3brXtvmkNxsoDD` at 01:13 / 07:13 / 12:13 / 17:13 / 21:13 CT, skill `.claude/skills/lab/SKILL.md`, rules `lab/README.md`): one queued idea per run from `lab/IDEAS.md`, staged gates,
   ledger `lab/ledger.json`, kill switch `lab/STOP`. It never changes plans, charts or the VPS; stage-4+ results go to the master.
 - **Paper scout (user, 2026-10-29):** `/scout` (skill `.claude/skills/scout/SKILL.md`) searches arXiv / NBER / SSRN for
   strategy hypotheses, reads and tests free full texts and lists SSRN-only PDFs for the user; log `papers/SCOUT_LOG.md`.
@@ -30,7 +30,7 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `funded_strategies/
 - **Live dashboard (2026-10-28):** 'Apex Live Desk' https://claude.ai/artifact/3oqbHWqBFTrUQd95wMmuL8 (accounts, trades,
   live guard, VPS health, live-vs-backtest range, edge per strategy, missed-trade alarm). Refresh after each close:
   `python3 analysis/dashboard_data.py` (also runs `analysis/live_panels.py` and `analysis/account_tools.py`; account rules in `account_tools.EVALS`), upload every JSON in
-  `analysis/outputs/dashboard/` except `bt_cache.json` as an asset and update the dataset with the same id (url / name /
+  `analysis/outputs/dashboard/` except `bt_cache.json` and `lab.json` as an asset and update the dataset with the same id (url / name /
   updated). New Apex balance from the user -> `ACCOUNTS` in dashboard_data.py; new account -> `ACCTS` in live_panels.py and
   `live/expected_setup.json` (charts + account rules for the floor alarm); funded account -> `FUNDED` in account_tools.py (payouts).
   After a backtest report changes, rebuild scratch_data and rerun live_panels.py to refresh `bt_cache.json`.
