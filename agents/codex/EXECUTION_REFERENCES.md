@@ -629,6 +629,21 @@ Related: E09 cash/contract accounting, E15 tail risk, E36 nonguaranteed protecti
   [Offline build checkpoint](results/rad_double_sort_build_20261031.md) adds strict missing-panel, contract/clock,
   integer reference-notional and delivery-action checks. Its23 synthetic cases do not verify historical fills or NAV.
 
+### E39 — Unfinished MC positions and stale report coverage during a data rebuild
+
+Source/review + date: [extended-data audit](results/extended_data_refresh_20261030.md), 2026-10-30;
+Claude source snapshot `86df2c0`, `analysis/codex_refresh_audit.py` and its saved coverage tables.
+- Use: distinguish a report's `open` sentinel from an actual exit, and price-history coverage from strategy-ticket coverage.
+- Evidence: reproduced standard-builder failure on a funded-ONB EntryShort at 10/12 09:15 paired with an `open` ExitShort
+  labeled midnight. It creates exit-before-entry indices and an empty path. A scoped adapter excludes the unfinished
+  position; the complete original rebuild succeeds with 343 closed ONB trades. Five regression checks pass.
+- Coverage: raw NQ through 10/30; dashboard cache through 10/09; the four live-strategy reports end 10/09–10/13.
+  Importing old tickets onto a longer grid does not regenerate signals; padded zero days are not verified no-trade days.
+- Limits: no current missed-trade count, native broker fill finding, strategy improvement or current-plan revalidation.
+  Production importer is unchanged; the adapter is an offline research artifact.
+- Next check: fresh same-input reports, explicit cache coverage gate, then expected/chart/broker reconciliation;
+  earlier unavailable chart logs remain unknown. Related: E04 (record semantics), E23 (account/logger fields).
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
