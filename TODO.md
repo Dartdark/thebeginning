@@ -228,6 +228,19 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **ANANTA interest-rate differential momentum — NEEDS DATA AND SPECIFICATION (SSRN 2419243).**
+  Low-priority personal FX lead: two-year swap-rate differential changes across eleven currencies, rebalanced
+  at London 18:00 and New York 17:00. Author reports net 3.5/5 bp per dollar traded in 2003–2013; unverified.
+  Literal pseudocode reverses its verbal rate-momentum direction; percentile, zero-divisor and gross-sizing
+  rules need clarification. A declared synthetic interpretation exceeds the stated 20% concentration bound.
+  Need synchronized original-vintage swap/FX snapshots, availability/fill clocks, financing and native costs.
+  Owned data and bounded BOE/ICE/CME checks did not provide the exact panel. Resume only with genuinely new
+  matching inputs/source clarification: reconcile one two-clock day and cashflows before a committed data/cost
+  gate. Continuous 6E, daily policy rates or OIS proxies are not an exact replication. No paid data or returns
+  attempted; no Apex adaptation, allocation or tier promotion.
+  [Review](agents/codex/results/ananta_2419243_review.md) · [Evidence](agents/codex/evidence/ananta_2419243.md).
+
+
 - [ ] **Monthly low-frequency FX momentum — NEEDS DATA / SOURCE CONVENTIONS (SSRN 1259661; 2026-10-30).**
   Lower-priority personal lead: recursively fitted HP trend (monthly penalty 14,400), then MA(1,2) on the trend.
   Author's 1993–2008 basket Sharpe 0.76 versus raw MA 0.41; carry included, costs ignored, not independently
