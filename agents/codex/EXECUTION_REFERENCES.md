@@ -772,6 +772,17 @@ Source: Kaul, Naranjo and Stefanescu, [SSRN 2311859](https://ssrn.com/abstract=2
   a prespecified executable window, with costs and ordinary momentum/reversal controls before return selection.
 - Status: source/measurement reference; no new economic trial, trading grade or plan change.
 
+Source-specific follow-up, 2026-10-30: Laubsch, Smales and Vo (2023),
+[SSRN 4534852](https://ssrn.com/abstract=4534852), [full uploaded-paper review](results/cot_52week_4534852.md).
+Across 12 commodities in 1992–2022, commercial position responses are contrarian and non-commercial responses
+follow momentum, moderated at 52-week highs and accentuated at lows. These explain positions, not an executable
+return signal; the source finds little timing ability. For CL, Table 4 position→return p-values are 0.280/0.566
+(commercial/non-commercial); gold 0.623/0.738. Tuesday-to-Tuesday returns partly elapse before normal Friday
+publication, so lagged regressors do not alone establish an available signal. CFTC classifications describe
+predominant business purpose, not each order's motive or liquidity role. No forced order/deadline, net strategy
+return or intraday transfer is established. Retain as a negative predictive/clock caution, not another COT sweep;
+zero new return trials. Any later causal rule needs actual release/receipt times and a price-only baseline.
+
 ### E45 — Cointegrated log prices do not specify an executable futures hedge
 
 Source/review + date: Ungever (2015), [SSRN2896370](https://ssrn.com/abstract=2896370),
@@ -965,6 +976,30 @@ Smallest justified next check: apply these clock/model checks if independently
 undertaking activity-risk research; this source does not earn a new return test.
 Status: methodological reference only; no demonstrated executable edge, zero
 return trials, no promising-candidate queue entry or plan/live change.
+
+### E55 — Strategic futures demand, welfare and executable basis
+
+Source: Hugues Dastarac, *Strategic Trading, Welfare and Prices with Futures Contracts*, Banque de France WP 841,
+October 2021, SSRN 3947960, supplied 82-page PDF. [Review](results/strategic_futures_3947960_20261030.md),
+[evidence](evidence/strategic_futures_3947960_20261030.md). Related: E07 slicing risk/impact, E11 information
+clocks, E46 spot market power, E47 replenishing depth and E50 Treasury contract/liquidity measurement.
+- Use: distinguish an individual incentive to affect settlement from net equilibrium price pressure. Under the source's
+  symmetric-information/identical-risk-preference setup, opposing traders' effects cancel, despite changed execution
+  timing and worse certainty-equivalent welfare. Slicing impact against future-price exposure is a trade-off, not alpha.
+- Evidence: theoretical source inspection, no return replication. The negative hedge ratio is defined against expected
+  future spot transactions net of the customer shock, not simply current holdings. The welfare result is conditional on
+  its modeled equilibrium; the counterfactual non-influenceable contract improves welfare. No universal claim that
+  futures or hedging lose money follows.
+- Basis lesson: the model's spread depends on the expectation of future customer flow, not a later observed shock.
+  Outside arbitrageurs and their endogenous price effects are left unmodeled. A displayed spread does not establish
+  that both legs can execute at those prices/quantities or that a cash-and-carry trade earns the apparent spread.
+- Limits: CARA preferences, Gaussian shocks, linear demand-schedule equilibrium, zero interest/storage costs and
+  ignored margins. No tested contemporary futures strategy, estimated execution savings or calibrated source dataset.
+- Next check only for a separately justified proposal: predecision flow/inventory availability, matched cash/futures
+  instruments and payoffs, synchronized bid/ask, financing/borrow/carry, both-leg quantities, fees, fills and settlement;
+  Treasury implementations also require deliverables, CTD, conversion factors and accrued-interest/repo accounting.
+  Futures OHLCV, COT and auction dates alone do not supply these states.
+- Status: market-structure/execution reference; zero return trials, portfolio comparisons, queue entries or live changes.
 
 ### E09 follow-up — Bank Nifty close marks versus protective execution
 
