@@ -1,0 +1,124 @@
+{
+  "scope": "Independent implementation/accounting audit of the existing frozen 2018\u20132022 outcome only; no new economic variant or later returns",
+  "all_checks_passed": true,
+  "checks_run": 21362,
+  "defects": [],
+  "preregistration_commit": "0ba35d11125bf8e3088796c1b4195ad262e96087",
+  "primary_sha256": "6480913fbaabe97717dabc2e561674e57e00d46188edcd068468283174662c71",
+  "checker_sha256": "a9c69c3e048ecea52464bd3794ce4175383f679fea65b62c0dc56fa4abf35aa4",
+  "design_output_sha256": {
+    "design_bootstrap.csv": "b3288b4bf70cfc832b1fb783fdf90958ebd5b081de9aca228ef1e5e4864131b0",
+    "design_daily.csv": "5b3cb3d5eed5cbb09babfc8d566682146b623e6093c73f5008c2a136535fab70",
+    "design_decisions.csv": "45e4ca8eaf12e09ea4621773ee971b40c6867a9084b9156714693ae688915912",
+    "design_marks.csv": "116657aacd9d2dbd3f526afbcf513f6eda95748912e3a7d6862b8c9477b74e37",
+    "design_random_side.csv": "1cebdda90440f8890fcc0b0c00be9fe972f203ac03cdd2b76da885af4f91eca2",
+    "design_result.json": "3f559430a0357afb505960b7760d10a8ab3375ac16550fbbece2b74e916be657",
+    "design_trades.csv": "61a6e4708c86c07eeba42cfdc603fd14b42b401cdc9638e033f76d2c83706216",
+    "design_years.csv": "cc6d84a4c8993c9f10e5d8cb0fb5896a1083225a2a99d92966916fc79a23158f"
+  },
+  "dates": 1260,
+  "decisions": 1259,
+  "closed_trades": 58,
+  "independently_reconstructed": {
+    "gross": -2980.000000000002,
+    "net": -9360.0,
+    "fees": 580.0,
+    "slippage": 5800.0,
+    "stress_net": -15160.0,
+    "maximum_marked_drawdown": 18385.0,
+    "drawdown_peak_date": "2020-08-18T00:00:00",
+    "drawdown_trough_date": "2022-07-14T00:00:00"
+  },
+  "worst_trade": {
+    "entry_date": "2021-01-20T00:00:00",
+    "expiry": "2021-03-17T00:00:00",
+    "entry_ref": 26.4,
+    "entry_decision": "2021-01-19T00:00:00",
+    "entry_score": 0.1388746046204172,
+    "side": -1,
+    "qty": 1,
+    "exit_date": "2021-01-28T00:00:00",
+    "exit_ref": 31.65,
+    "gross": -5250.0,
+    "fees": 10.0,
+    "slippage": 100.0,
+    "net": -5360.0,
+    "stress_net": -5460.0
+  },
+  "worst_daily_mark_date": "2021-02-25T00:00:00",
+  "worst_daily_mark_window": [
+    {
+      "date": "2021-02-24T00:00:00",
+      "net": 988.5000000000018,
+      "equity": -4224.500000000003,
+      "held_expiry": "2021-03-17T00:00:00",
+      "spot_available": true
+    },
+    {
+      "date": "2021-02-25T00:00:00",
+      "net": -4455.500000000001,
+      "equity": -8680.000000000004,
+      "held_expiry": "2021-03-17T00:00:00",
+      "spot_available": true
+    },
+    {
+      "date": "2021-02-26T00:00:00",
+      "net": -140.0,
+      "equity": -8820.000000000004,
+      "held_expiry": null,
+      "spot_available": true
+    }
+  ],
+  "december5_window": [
+    {
+      "date": "2018-12-04T00:00:00",
+      "net": 0.0,
+      "equity": -3490.000000000004,
+      "held_expiry": null,
+      "spot_available": true
+    },
+    {
+      "date": "2018-12-05T00:00:00",
+      "net": 0.0,
+      "equity": -3490.000000000004,
+      "held_expiry": null,
+      "spot_available": false
+    },
+    {
+      "date": "2018-12-06T00:00:00",
+      "net": 0.0,
+      "equity": -3490.000000000004,
+      "held_expiry": null,
+      "spot_available": true
+    }
+  ],
+  "terminal_window": [
+    {
+      "date": "2022-12-28T00:00:00",
+      "net": 41.29999999999927,
+      "equity": -9603.8,
+      "held_expiry": "2023-02-15T00:00:00",
+      "spot_available": true
+    },
+    {
+      "date": "2022-12-29T00:00:00",
+      "net": 258.89999999999964,
+      "equity": -9344.9,
+      "held_expiry": "2023-02-15T00:00:00",
+      "spot_available": true
+    },
+    {
+      "date": "2022-12-30T00:00:00",
+      "net": -15.100000000000364,
+      "equity": -9360.000000000002,
+      "held_expiry": null,
+      "spot_available": true
+    }
+  ],
+  "limitations": [
+    "Primary/source-data equality and executable fill quality remain unverified.",
+    "Daily settlement marks do not verify intraday margin or liquidation risk.",
+    "The preferred ES-hedged strategy and later/account outcomes were not tested.",
+    "This is a separate implementation audit by a collaborating agent, not external independent economic verification."
+  ]
+}

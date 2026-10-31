@@ -618,6 +618,31 @@ Related: E09 cash/contract accounting, E15 tail risk, E36 nonguaranteed protecti
   formation/roll month before any return study. Non-positive prices cannot silently disappear from a log-return test.
 - Status: execution/risk/accounting reference retained; no new return trial, account placement or exit-policy change.
 
+### E40 — Dated volatility futures: maturity clocks, RMS units and signed hedges
+
+Source: Donninger, *VIX Futures Basis Trading: The Calvados-Strategy 2.0*, January 2014 Rev.1, SSRN2379985.
+[Review and completed component test](results/calvados_2379985_20261030.md),
+[frozen protocol](plans/calvados_2379985_20261030.md). Related: E09 contract/cash accounting, E12 volatility
+measurement, E15 overnight tails, E19 session clocks, E30 paired-leg execution.
+- Use: preserve individual expiry identities and actual trading-day maturity. A generic NYSE calendar omits the
+  shortened December 5, 2018 VX session; Wednesday-only expiry rules miss holiday-shifted Tuesday contracts.
+  VX settlement reference moved 15:15 to 15:00 CT on October 26, 2020. A settlement-based feature becomes available
+  after confirmation, not at the start of its calculation interval; a next-session daily Open is only a fill reference.
+- Units: the source RMS10 is the root mean square of ten same-contract daily price changes, without demeaning.
+  It is not sample SD or return volatility. Basis convergence compensates short-volatility risk; it is not cash carry
+  arbitrage. VX outright tick is 0.05 points/$50 at the $1,000 multiplier, distinct from spread ticks or NQ costs.
+- Hedge: source Eq7 implies `b1+b2*TTS`; printed Eq8 multiplies the coefficients and contradicts its own sign
+  discussion. For n short VX, signed ES quantity is `n*1000*(b1+b2*TTS)/(0.01*SPX*50)`, ordinarily negative.
+  Integer rounding, contract rolls and adjustment clocks must be explicit; a linear hedge does not remove jump risk.
+- Evidence: full-source and PDF-image inspection, primary Cboe clock/holiday notices, signed-unit synthetic checks,
+  and an audited fixed-one-VX 2018–22 historical component test. That component LOST $9,360 net on 58 trades,
+  with $18,385 settlement-mark drawdown. This negative finding does not test the preferred ES hedge.
+- Limits/next check: raw dated-price provenance, executable opening quotes, intraday variation margin, actual hedge
+  contracts/rolls and native integer quantities remain necessary for a separate hedged implementation. Median smoothing
+  delayed entry/exit and worsened source results; do not assume smoother indicators create better fills.
+- Status: execution/accounting reference retained; naked component rejected, preferred hedge unverified. No execution
+  saving, plan placement, trading, broker or live-policy change is claimed.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
