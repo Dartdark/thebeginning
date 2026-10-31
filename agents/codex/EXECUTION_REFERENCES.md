@@ -928,6 +928,8 @@ measurement, E15 overnight tails, E19 session clocks, E30 paired-leg execution.
 - Status: execution/accounting reference retained; naked component rejected, preferred hedge unverified. No execution
   saving, plan placement, trading, broker or live-policy change is claimed.
 
+- FOMC-only follow-up, separate paper [SSRN2544445](results/fomc_vx_2544445_review.md): rendered source charts show an undefined`min-Maturity=5`which prose“nearest”does not capture. Printed Eq3 with negative3.5%leverage gives+18VXunder mathematical floor; screenshotpositive3.5gives intended−17. Preserve source sign/rounding and source-era monthly-contract universe before replication. Cboe legacy/current product documentation has a2018timestamp/schema transition; provider bar labels/timezones differ. A35-minute post-statement cover now crosses the usual press-conference start. Source0.7%sampleDDand zero triggered stops do not cap5%stop/gap risk. Product discovery and failed sample reads are recorded; no intraday panel or return test admitted. Retain a distinct conditional personal lead; the Calvados component failure does not falsify it.
+
 ### E52 — Dynamic pair models are not self-financing contract ledgers
 
 Source: Yang, Huang and Chen, unreviewed 38-page preprint SSRN 5017127, indexed posting 2024-11-11;
