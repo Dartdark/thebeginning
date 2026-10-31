@@ -108,6 +108,15 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 
 ### E09 — Native micro costs, turnover and roll reconciliation
 
+- [Leveraged Fibonacci paper review](results/ssrn2011743.md), SSRN2011743, retained
+  2026-10-30: distinguish margin allocation, notional leverage and loss-at-stop.
+  A 60% equity margin commitment at 10x implies 6x equity notional under a simple
+  fixed-exposure illustration, not 60% notional or a 60% loss cap. Reserves and
+  maintenance margin do not guarantee maximum loss; suggested option hedges require
+  explicit expiry/strike/premium and marked cash accounting. Confirming a signal
+  at a daily close does not establish a fill at that same close. Source review and
+  conditional arithmetic only: no verified return, fill, savings or new strategy test.
+
 - Replay readiness 2026-10-31 ([report](results/swing_replay_readiness_20261031.md)):
   a MultiCharts exit row labeled `open` is a valuation mark, not a closed fill.
   ONB ML's final export mark maps to an exit before entry and crashes a clean
@@ -756,6 +765,15 @@ Source: Nocturne research note (L. Franceschetti, user upload 2026-10-30), rebui
 
 ### E42 — Backtest-live parity: six implementation defects and a ten-point checklist
 
+- Source-version follow-up, retained 2026-10-30: Krishnamurthy, [SSRN 3124271](https://ssrn.com/abstract=3124271),
+  [full-PDF and figure review](results/mean_reversion_beta_zero_3124271_review.md). A reported year of paper trading
+  used a one-day liquidity lookback; the intended five-day version was subsequently backtested without reported
+  prospective validation. A forward record validates only the implemented frozen version, not its revised intent.
+  Preserve code/input hashes, ranked holdings and order clocks with each report, and keep old/new evidence separate.
+  A zero-beta target does not establish realized neutrality or protection from sector/news, borrow and funding losses.
+  Evidence: author screenshots and admitted code correction, not independently verified fills or execution savings.
+  No current strategy rerun, monitoring installation or portfolio change is warranted by this note alone.
+
 Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SCOUT_LOG.md.
 - Use: one live intraday stock system, six defects that summary statistics never showed: (1) default data feed carried
   0.1-2% of the real opening-minute volume, (2) dividend-adjusted history vs unadjusted live fills, (3) a field only the
@@ -969,6 +987,12 @@ states its XIV OHL endsAugust2017 and warns futures opens became asynchronous wi
 synthetic-OHLC package alone would not establish a next-open termination replay. Early VX scale, zero-price
 rows and original-versus-successor VXX identities remain unresolved; no raw reference file is a validated fill.
 
+Available-data replay follow-up: [frozen XIV/VIXY proxy result](results/vix_etp_available_period_2753300.md)
+now verifies next-open signals and retained overnight gaps over364sessions. It exited XIVJanuary30,2018,
+then entered VIXYFebruary5; thus the rule did not hold XIV through that collapse in this sample.
+Net+63.3%, DD−35.2%,29positions; one VIXY trade supplies75%of net. This is a secondary-price,
+fractional-share historical proxy, not verified fill savings, source replication or a current allocation.
+
 ### E52 — Dynamic pair models are not self-financing contract ledgers
 
 Source: Yang, Huang and Chen, unreviewed 38-page preprint SSRN 5017127, indexed posting 2024-11-11;
@@ -1071,6 +1095,20 @@ Source: Panigrahi, Vachhani and Sisodia, SSRN4013524,2021;
 - Next check only for separately justified research: reconcile a real signal through native entry, gap/stop/target
   paths, exit and fees. No adaptation or protective-order change is warranted from this paper.
 - Status: accounting/timing reference; no return trial, execution saving or portfolio placement.
+
+### E10 follow-up — Bubble detection frequency and cost compounding
+
+Source: Liu, Chuang and Xu, SSRN4494963, uploaded15-page preprint;
+[review](results/bubble_riding_4494963_review_20261031.md),2026-10-31.
+- Use: gross signal performance can disappear as decision frequency and turnover increase. Authors' daily
+  DPSYI wealth7.90 before costs falls to1.37 after their assumed costs; these are unverified Chinese index results.
+- Evidence: printed-table audit only. Multiplying gross wealth by0.995 for each reported trading period roughly
+  reconciles daily endpoints. This does not verify that actual turnover or round-trip fees were charged correctly.
+- Clock lesson: Tuesday detection followed by Wednesday execution separates measurement from trading. Historical
+  bubble labels, bootstrapped critical values and interpolated CPI still require independent availability audits.
+- Limits/next check: for a separately justified strategy, freeze causal inputs, tradable vehicles, position changes,
+  dividend/FX cash, per-leg fees and fill clocks. Do not import the paper's ambiguous Sharpe-percent row or cost rate
+  as current CME evidence. No new backtest, measured saving or portfolio allocation.
 
 ## Minimum record for any later execution comparison
 
