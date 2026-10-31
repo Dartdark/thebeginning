@@ -738,6 +738,15 @@ Source: Nocturne research note (L. Franceschetti, user upload 2026-10-30), rebui
 
 ### E42 — Backtest-live parity: six implementation defects and a ten-point checklist
 
+- Source-version follow-up, retained 2026-10-30: Krishnamurthy, [SSRN 3124271](https://ssrn.com/abstract=3124271),
+  [full-PDF and figure review](results/mean_reversion_beta_zero_3124271_review.md). A reported year of paper trading
+  used a one-day liquidity lookback; the intended five-day version was subsequently backtested without reported
+  prospective validation. A forward record validates only the implemented frozen version, not its revised intent.
+  Preserve code/input hashes, ranked holdings and order clocks with each report, and keep old/new evidence separate.
+  A zero-beta target does not establish realized neutrality or protection from sector/news, borrow and funding losses.
+  Evidence: author screenshots and admitted code correction, not independently verified fills or execution savings.
+  No current strategy rerun, monitoring installation or portfolio change is warranted by this note alone.
+
 Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SCOUT_LOG.md.
 - Use: one live intraday stock system, six defects that summary statistics never showed: (1) default data feed carried
   0.1-2% of the real opening-minute volume, (2) dividend-adjusted history vs unadjusted live fills, (3) a field only the
@@ -950,6 +959,12 @@ and a partial364-row actual XIV public-table snapshot through2018-02-15. The sou
 states its XIV OHL endsAugust2017 and warns futures opens became asynchronous with ETP opens. A purchased
 synthetic-OHLC package alone would not establish a next-open termination replay. Early VX scale, zero-price
 rows and original-versus-successor VXX identities remain unresolved; no raw reference file is a validated fill.
+
+Available-data replay follow-up: [frozen XIV/VIXY proxy result](results/vix_etp_available_period_2753300.md)
+now verifies next-open signals and retained overnight gaps over364sessions. It exited XIVJanuary30,2018,
+then entered VIXYFebruary5; thus the rule did not hold XIV through that collapse in this sample.
+Net+63.3%, DD−35.2%,29positions; one VIXY trade supplies75%of net. This is a secondary-price,
+fractional-share historical proxy, not verified fill savings, source replication or a current allocation.
 
 ### E52 — Dynamic pair models are not self-financing contract ledgers
 
