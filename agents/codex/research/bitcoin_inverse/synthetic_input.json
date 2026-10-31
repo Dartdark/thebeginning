@@ -1,0 +1,57 @@
+{
+  "input_status": "synthetic",
+  "decision_time": "2030-01-02T00:00:01Z",
+  "model": {
+    "mu_spot": 0.4085,
+    "mu_futures": 0.6002,
+    "sigma_spot": 0.5994,
+    "sigma_futures": 0.47,
+    "correlation": 0.59,
+    "calibration_end": "2030-01-01T00:00:00Z",
+    "available_at": "2030-01-01T00:01:00Z"
+  },
+  "instrument": {
+    "venue": "SYNTHETIC_POOLED_WALLET",
+    "contract_id": "TEST-XBT-203006",
+    "kind": "dated_inverse",
+    "settlement_currency": "BTC",
+    "face_usd": 1,
+    "expiry": "2030-06-28T12:00:00Z"
+  },
+  "quotes": {
+    "contract_id": "TEST-XBT-203006",
+    "observed_at": "2030-01-02T00:00:00Z",
+    "available_at": "2030-01-02T00:00:00.100000Z",
+    "spot_bid": 39995,
+    "spot_ask": 40005,
+    "spot_mark": 40000,
+    "futures_bid": 40395,
+    "futures_ask": 40405,
+    "futures_mark": 40400
+  },
+  "book": {
+    "contract_id": "TEST-XBT-203006",
+    "as_of": "2030-01-02T00:00:00Z",
+    "available_at": "2030-01-02T00:00:00.100000Z",
+    "usd_cash": 100000,
+    "spot_btc": 0,
+    "collateral_btc": 0,
+    "contracts": 0,
+    "entry_price": 0
+  },
+  "settings": {
+    "wallet_model": "pooled_btc_research",
+    "utility": "power",
+    "risk_parameter": -0.5,
+    "spot_lot_btc": 0.000001,
+    "spot_fee_rate": 0.001,
+    "futures_fee_rate": 0.00075,
+    "initial_margin_rate": 0.1,
+    "maintenance_margin_rate": 0.05,
+    "max_gross_model_exposure": 2,
+    "max_covariance_condition": 1000,
+    "max_quote_age_seconds": 60,
+    "max_book_age_seconds": 60,
+    "latency_seconds": 1
+  }
+}

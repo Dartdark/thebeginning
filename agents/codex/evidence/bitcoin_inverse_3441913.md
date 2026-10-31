@@ -72,3 +72,11 @@ No Gaussian utility/control solution supplies actual account survival probabilit
 With new matching inputs, reconcile one identified native contract interval and execution/availability clock without returns;
 then complete coverage/cost/power gates and commit a bounded causal protocol before any economic trial.
 No performance simulation, current allocation, BASE/ADD/REPLACE/EMPTY or Apex benchmark is earned now.
+
+
+## User-requested code build completed
+
+[Offline strategy implementation](../results/bitcoin_inverse_3441913_build.md) now implements both utility controls,
+native lots, reciprocal position accounting and a hypothetical BTC/USD funding/cost bridge.20 behavioral tests pass.
+User explicitly authorized this review build while the return-data gate remains. Pooled-wallet/discrete execution
+assumptions are documented; no broker adapter or empirical trials. Status remains NEEDS DATA AND SPECIFICATION for returns.

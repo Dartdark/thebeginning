@@ -232,7 +232,7 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 data-blocked leads, exact missing inputs, partial acquisitions, next checks and superseded requests. Maintain it for future
 worthwhile NEEDS DATA leads. Acquisition preference: **free sources only**; a listing does not authorize a return test.
 
-- [ ] **Bitcoin spot/inverse-futures utility allocation — NEEDS MATCHING DATA AND SPECIFICATION (SSRN3441913).**
+- [ ] **Bitcoin spot/inverse-futures utility allocation — CODE BUILT / NEEDS MATCHING DATA AND SPECIFICATION (SSRN3441913).**
   Conditional personal-account research: explicit utility-allocation formulas; authors report Sharpe4.86–5.07
   versus spot4.40 on111days in2019, not independently reproduced net returns. Main formula/payoff audit passes;
   AppendixB.2 has a confirmed sign discrepancy. Both calibrated legs are long BTC, not a neutral hedge.
@@ -241,6 +241,9 @@ worthwhile NEEDS DATA leads. Acquisition preference: **free sources only**; a li
   are not matching inverse inputs. Next step only with new matching inputs: reconcile one native BTC/USD
   contract/spot interval and availability clock, then committed coverage/cost/power gates before returns.
   No new economic trial, Apex placement, modern perpetual substitution or allocation.
+  [Offline strategy/review packet](agents/codex/results/bitcoin_inverse_3441913_build.md) built at user request;20 synthetic tests
+  pass for native lots, reciprocal BTC accounting, costs and timing guards. Pooled-wallet execution assumptions remain;
+  independent Claude review and empirical verification pending.
   [Review](agents/codex/results/bitcoin_inverse_3441913_review.md) ·
   [Evidence](agents/codex/evidence/bitcoin_inverse_3441913.md).
 
