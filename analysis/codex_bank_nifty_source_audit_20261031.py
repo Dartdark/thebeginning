@@ -36,7 +36,7 @@ def main():
          'code_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
     OUT.mkdir(parents=True,exist_ok=True)
     with (OUT/'printed_rows.csv').open('w') as f:
-        writer=csv.writer(f);writer.writerow(['date_as_printed','previous_index_close','index_close','points','pct_as_printed','rupees_20x_points']);writer.writerows(rows)
+        writer=csv.writer(f,lineterminator="\n");writer.writerow(['date_as_printed','previous_index_close','index_close','points','pct_as_printed','rupees_20x_points']);writer.writerows(rows)
     (OUT/'audit.json').write_text(json.dumps(out,indent=2)+'\n')
     print(json.dumps(out,indent=2))
 
