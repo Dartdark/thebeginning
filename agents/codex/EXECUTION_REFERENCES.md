@@ -945,6 +945,11 @@ Do not splice a terminated product into a perpetual synthetic series or substitu
 a separately specified protocol. The termination event alone does not prove this switching rule held XIV then.
 Next gate: one-day availability/fill/product-terms reconciliation plus source-era coverage; no new returns,
 modern adaptation, purchase, current allocation or Apex eligibility is established by this review.
+Acquisition follow-up: [actual intake](results/vix_etp_acquisition_2753300.md) restored240dated monthly VX files
+and a partial364-row actual XIV public-table snapshot through2018-02-15. The source vendor's OHLC documentation
+states its XIV OHL endsAugust2017 and warns futures opens became asynchronous with ETP opens. A purchased
+synthetic-OHLC package alone would not establish a next-open termination replay. Early VX scale, zero-price
+rows and original-versus-successor VXX identities remain unresolved; no raw reference file is a validated fill.
 
 ### E52 — Dynamic pair models are not self-financing contract ledgers
 

@@ -1,0 +1,57 @@
+{
+  "archive_sha256": "71dc39799b8290e608b1fca8c62b55e6c58fc1d9975ad4ba41a34f42d4fe330b",
+  "archive_bytes": 4240816,
+  "archive_url": "https://codeload.github.com/Pustak-007/ml_risk_overlay/zip/7a8df4089664c339de9a4c5900cecdbe9d5b954e",
+  "raw_monthly_VX_files": 240,
+  "rows": 43573,
+  "earliest_native_observation": "2005-05-23",
+  "latest_native_observation": "2025-10-01",
+  "zero_settles": 356,
+  "zero_opens": 2135,
+  "high_below_low": 407,
+  "preface_files": 6,
+  "snapshots": [
+    {
+      "file": "xiv_public_table_snapshot.csv",
+      "sha256": "b159db69c04e5d25b304af7a2eebe39591a54cb619bf9699540bf35065e9f2a0",
+      "rows": 364,
+      "first": "2016-09-07",
+      "last": "2018-02-15",
+      "duplicate_dates": 0,
+      "columns": [
+        "date",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ]
+    },
+    {
+      "file": "xjcarter_VXX.csv",
+      "sha256": "275c50ff7a4137c381802bebf13ae4f1c59250bd281e3f96b755e8c284a5971f",
+      "rows": 1215,
+      "first": "2018-01-25",
+      "last": "2022-11-18",
+      "duplicate_dates": 0,
+      "columns": [
+        "Date",
+        "Open",
+        "High",
+        "Low",
+        "Close",
+        "Adj Close",
+        "Volume"
+      ]
+    }
+  ],
+  "raw_redistributed": false,
+  "economic_trials": 0,
+  "admission": "PARTIAL ACQUISITION ONLY; not ready for economic replay",
+  "remaining": [
+    "complete original XIV and original VXX market-price histories and adjustments",
+    "source 2006-14 prelaunch indicative series for exact original replication",
+    "VX pre-2007 units, native expiries/rolls, source parity and publication clocks",
+    "causal fill protocol and product lifecycle/redemption treatment"
+  ]
+}
