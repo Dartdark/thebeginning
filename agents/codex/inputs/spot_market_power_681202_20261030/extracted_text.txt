@@ -1,0 +1,2288 @@
+                Spot Market Power and Futures Market Trading
+
+                               Alexander Muermann and Stephen H. Shore
+                            The Wharton School, University of Pennsylvania
+
+                                                    March 2005
+
+
+
+                                                       Abstract
+
+          When a spot market monopolist participates in the futures market, he has an incentive to adjust spot
+
+      prices to make his futures market position more pro…table. Rational futures market makers take this into
+
+      account when they set prices. Spot market power thus creates a moral hazard problem which parallels
+
+      the adverse selection problem in models with inside information. This moral hazard not only reduces the
+
+      optimal amount of hedging for those with and without market power, but also makes complete hedging
+
+      impossible. When market makers cannot distinguish orders placed by those with and without market
+
+      power, market power provides a venue for strategic trading and market manipulation. The monopolist
+
+      will strategically randomize his futures market position and then use his market power to make this
+
+      position pro…table. Furthermore, traders without market power can manipulate futures prices by hiding
+
+      their orders behind the monopolist’s strategic trades.
+
+
+
+1     Introduction
+
+For many goods, spot markets with market power coexist with competitive futures markets. When a spot
+
+market monopolist participates in a futures market, this participation leads to a moral hazard problem in the
+
+spot market. In particular, he has an incentive to deviate from the monopoly optimum in order to make his
+
+futures market position more pro…table. For example, if a monopolist producer of oil holds a short position
+
+in an oil futures contract, he will pro…t if the price of oil goes down. This gives him an incentive to produce
+
+more oil than he otherwise might in order to reduce spot market prices and make his futures position more
+
+pro…table. When rational futures market participants observe the monopolist’s position, they will take it
+     Muermann and Shore: The Wharton School of the University of Pennsylvania, 3620 Locust Walk, Philadelphia, PA 19104-
+6218, USA, email: muermann@wharton.upenn.edu - sshore@wharton.upenn.edu.          We wish to thank Glen Taksler whose
+collaboration on previous work lead to deeper insights. We received valuable comments from Christian Laux, Volker Nocke,
+Matt White, and seminar participants at the Financial Markets Group of the LSE, the University of Frankfurt, Wharton, and
+the NBER. Muermann and Shore gratefully acknowledge …nancial support from the Risk Management and Decision Processes
+Center at The Wharton School.
+
+
+                                                           1
+into account when setting futures prices.     When they cannot observe the monopolist’s position perfectly,
+
+they take his possible presence into account when setting prices.
+
+   In this paper, we explore the impact of goods market power on …nancial market participation, both for
+
+those with and without market power. We examine three rationales of trading in a futures market: hedging,
+
+strategic trading, and manipulation. We show that spot market power reduces the incentive of all agents
+
+to participate in futures markets to hedge risks. However, spot market power provides the monopolist with
+
+an incentive to trade strategically –randomly taking a position in the futures market and then moving spot
+
+prices to make that position pro…table. This allows the possibility that those without market power may
+
+engage in futures market manipulation – taking a position in a derivatives market and then mimicking the
+
+monopolist’s futures trading to move futures market prices to make the derivatives position pro…table.
+
+   The literature on market microstructure deals extensively with the e¤ects of adverse selection when some
+
+agents have inside information. This paper will argue that the moral hazard created by spot market power
+
+will have parallel e¤ects. As with inside information, market power deters …nancial market participation by
+
+those with hedging motives but provides a venue for strategic trading and market manipulation.
+
+   Section 2 relates to the hedging motive of the monopolist. We show that hedging is expensive for those
+
+with monopoly power.      Monopolists may have an incentive to participate in futures market to avoid the
+
+cost of …nancial distress or agency problems, or because an entire economy may depend on the pro…tability
+
+of the monopolist. If the monopolist reduces risk by selling future production forward or buying a futures
+
+contract, he now has an incentive to increase production in the future.       When he sells future production
+
+forward, he has an incentive to increase production since doing so does not reduce the price of previously
+
+sold units.   When he buys a futures contract which pays o¤ when prices are low, he has an incentive to
+
+increase production to make the futures contract more pro…table.          Taking this into account, futures or
+
+forward market participants will rationally set prices that are unfavorable to the monopolist.         In e¤ect,
+
+futures markets provide a venue for competition of the monopolist with his future self. Section 2 recasts
+
+the durable goods monopoly problem of Coase (1972) in terms of futures markets instead of durability.
+
+   Anderson and Sundaresan (1984) studied a similar question to the one considered in Section 2 by focusing
+
+on whether futures trading can exist in a rational expectations equilibrium under spot market power. We
+
+obtain a result equivalent to theirs: a risk-neutral monopolist does not participate in the futures market
+
+whereas a risk-averse monopolist participates in the futures market and his participation is increasing in the
+
+degree of risk aversion. While some of the results of Anderson and Sundaresan are based on second-order
+
+approximations and on futures contracts, we are able to prove these results more generally and for general
+
+derivatives contracts. A novel insight in this section is that it is impossible to completely eliminate all risk.
+
+This holds for any degree of risk aversion and for any price-contingent derivatives contract. In addition, we
+
+
+                                                       2
+show that large amounts of hedging are state-wise dominated. Just as “no trade” theorems (Milgrom and
+
+Stokey (1982)) show that there is no price at which informed agents can trade in …nancial markets, we prove
+
+a “no complete hedging”theorem that shows that there is no price at which agents with spot market power
+
+can eliminate all spot market price risk.
+
+   Anderson (1990) surveys the literature on futures trading when the underlying market is imperfectly
+
+competitive and suggests in his conclusion:
+
+
+         “The theoretical development that would be most interesting would be to reconsider some
+
+     of these models described above under conditions of asymmetric information. In particular, the
+
+     models reviewed have made the assumption (at least implicitly) that the futures positions of
+
+     powerful agents are observed so that forecasts of future cash prices can take this into account.
+
+     In practice, futures positions of agents are likely to be imperfectly observable.” (p. 246-247)
+
+
+   In Sections 3 and 4 of this paper, we follow exactly that route and explore strategic trading and manip-
+
+ulation in futures markets when market positions cannot be perfectly inferred. In Section 3, we show that
+
+the monopolist is able to strategically exploit his spot market power. If the spot market monopolist is able
+
+to hide within the futures market aggregate order ‡ow, he will randomly participate in the futures market
+
+and then set spot prices to make his futures market position more pro…table.        This makes hedging more
+
+expensive for those who may be the monopolist’s counterparty. Spot market power thus discourages futures
+
+market participation for agents without market power and provides a venue for a spot market monopolist
+
+to increase pro…ts by trading strategically.
+
+   This section shows that results similar to Kyle’s (1985) “noise trader” model are obtained when there
+
+is spot market power instead of inside information. In our model, there are no informed traders who have
+
+private information about future prices at the time of trading.       However, after taking a position in the
+
+futures market, the monopolist has the market power to set spot market prices, thereby making his futures
+
+market position more pro…table. Market power thus creates a moral hazard problem in our model, whereas
+
+private information leads to an adverse selection problem in the Kyle model. Note that the monopolist is
+
+only able to exploit his position strategically if it cannot be inferred perfectly from the aggregate order ‡ow.
+
+In our model, agents without market power respond optimally to the monopolist’s futures market presence
+
+by reducing their futures market participation (see Spiegel and Subrahmanyam (1992) for the analogous
+
+extension of the Kyle model).
+
+   Sections 2 and 3 integrate the durable goods monopoly problem of Coase from the industrial organization
+
+literature and the “noise trader”model of Kyle from the market microstructure literature to show that spot
+
+market power discourages futures market participation for participants with and without market power.
+
+
+                                                       3
+    In Section 4, we show that traders are able to move (i.e. “manipulate”) futures prices even when they
+
+do not have market power. If a futures market manipulator without market power takes a position in the
+
+derivatives market, he has an incentive to trade and thereby move future underlying prices to make his initial
+
+position pro…table. He will be successful in moving prices if the market believes that his subsequent trades
+
+could have been submitted by the monopolist. While these subsequent trades are unpro…table, this cost is
+
+outweighed by bene…t of moving prices to make the initial position more pro…table.
+
+    Section 4 relates to the literature on manipulation in capital markets (e.g. Hart (1977), Jarrow (1992),
+
+Allen and Gale (1992), Kumar and Seppi (1992)). Compared with this literature, the novelty of our model
+
+is that it does not require that agents have private information about prices; instead, we show that market
+
+power serves a similar function.         For example, Kumar and Seppi develop a model in which uninformed
+
+manipulators are able to pro…t in the futures market by manipulating spot market prices.                         While they
+
+have no inside information, they are able to move spot prices because spot market makers are unable to
+
+di¤erentiate the uniformed manipulator’s order ‡ow from the informed trader’s order ‡ow.                         This model
+
+requires the potential presence of informed traders, while our model relies on the presence of traders with
+
+market power to serve the same function.
+
+    In summary, spot market power reduces agents’incentive to participate in futures markets. For those
+
+with market power, hedging is expensive because its price takes into account the impact of the futures market
+
+position on spot market prices. For those without market power, the presence of market power makes futures
+
+market participation more expensive by introducing the possibility of strategic trading or manipulation. As
+
+a result, we would predict that futures markets with underlying monopoly spot markets would be relatively
+
+small and illiquid when compared to the spot market.1
+
+
+
+2     Hedging by Spot Market Monopolists
+
+In this section, we consider the impact of spot market power on a monopolist’s ability to hedge spot market
+
+price risk.    If a spot market monopolist is risk-averse, he has an incentive to hedge against ‡uctuations
+
+in pro…ts.    In a world with demand shocks - when high pro…ts coincide with high prices - the payo¤ of
+
+a hedging contract will be negatively related to the underlying spot market price. Entering into such a
+
+contract ex-ante creates moral hazard.           The monopolist has an incentive to increase production, thereby
+
+reducing spot market prices to make the hedging contract more pro…table.                     This moral hazard problem
+
+increases the cost of the hedging contract and reduces monopoly power. The monopolist faces a trade-o¤
+   1 Our model excludes the possibility that the good may be stored. Over time horizons short enough that storage is cost-
+
+e¤ective, substantial futures markets may exist as storage will limit the monopolist’s power to move prices. Of course, storage
+will also erode monopoly power.
+
+
+
+                                                              4
+between hedging risk and maintaining monopoly pro…ts. This section will show that this e¤ect reduces the
+
+optimal quantity of hedging; a risk-neutral monopolist will not want to hedge risk in the …nancial markets,
+
+while a risk-averse one will hedge less than he would if he had no market power. We will show that as the
+
+degree of risk-aversion increases, the optimal amount of hedging will increase. Relative to other research
+
+(e.g. Anderson and Sundaresan (1984)), this section is innovative because it shows that complete hedging is
+
+impossible and large amounts of hedging can be state-wise dominated.
+
+    The impact of futures market in reducing the amount of monopoly power can be interpreted in light of the
+
+durable goods monopoly of Coase (1972). In a Coasian setting, the durability of the good provides a venue
+
+for the monopolist e¤ectively to compete with his future self. The monopolist has an incentive to produce
+
+sooner rather than later if he has a positive discount rate or if consumers prefer to own the good sooner
+
+rather than later. If the monopolist cannot commit not to produce additional units in the next period, his
+
+production of the durable good today competes with his production of the good tomorrow. This reduces
+
+his monopoly power. In our setting, futures markets serve the same role as durability. The monopolist has
+
+an incentive to sell production forward or short a futures contract if he is risk-averse. If he cannot commit
+
+to condition production on realized demand, his participation in the forward market - selling tomorrow’s
+
+production today - creates competition with his sales in tomorrow’s spot market.
+
+
+2.1     Model Setup
+
+We envision a model with one good and two periods, t = 0; 1.                         A monopolist with utility function u is
+
+the sole producer of the good, and the good is produced only in the last period. The monopolist chooses
+
+quantity, Q, to maximize his pro…ts. Demand is uncertain and realizes in between the two periods. The
+
+demand curve is given by P = f (Q; D) where D is the realization of demand. The cost of production is
+
+normalized to zero. In the initial period, the monopolist can enter into a derivatives contract. The payo¤
+
+of this contract could be any function of the spot price, g (P )                   k, where k is the strike price.2           Given a
+
+competitive derivatives market with risk-neutral market makers, the price of the derivatives contract must
+
+be equal to the expected payo¤ of the contract, i.e. k = E [g (P )]. The monopolist’s pro…ts are then
+
+
+                                                  = C (g (P )      E [g (P )]) + QP ,                                               (1)
+   2 If the derivatives contract is a linear future, so that g (P ) = P , then this problem is equivalent to one in which the monopolist
+
+could sell t = 1 production forward at t = 0.
+
+
+
+
+                                                                   5
+where C is the number of derivatives contract bought by the monopolist in the …rst period.3                        In the last
+
+period, after demand is realized, the monopolist chooses a quantity, Q, to maximize pro…ts, i.e.
+
+
+                                         Q = arg max (C (g (P )          k) + QP ) .
+                                                      Q
+
+
+
+The spot market …rst-order condition (FOC) is given by
+
+                                  @            @
+                                         =       (C (g (f (Q; D))         k) + Qf (Q; D))
+                                  @Q          @Q
+                                         =    (Cg 0 + Q) f1 + f = 0,                                                             (2)
+
+
+where we assume that the second order condition is satis…ed. In the initial period, the monopolist will set
+
+C to satisfy the derivatives market FOC,
+
+                                             @E [u ( )]    @ 0
+                                                        =E    u ( ) = 0,                                                         (3)
+                                               @C          @C
+
+where
+                         d                        dQ                dQ                  dQ      dQ
+                            =g       E [g] + C       f1 g 0    E       f1 g 0       +      f +Q    f1 .                          (4)
+                         dC                       dC                dC                  dC      dC
+
+Substituting the spot market FOC (2) into (4) yields:
+
+                                             d                          dQ
+                                                =g     E [g]       CE      f1 g 0 .                                              (5)
+                                             dC                         dC
+
+Given that the spot market quantity, Q , is chosen optimally, the derivatives market FOC is found by
+
+substituting (5) into (3):
+
+                             @E [u ( )]                                 dQ
+                                        =E        g   E [g]        CE      f1 g 0        u0 ( ) = 0                              (6)
+                               @C                                       dC
+
+                                                                                                            h               i
+                                                                                                                dQ      0
+where we can set E [g (P )] = 0 without loss of generality. Market power introduces the E                       dC f1 g         term
+
+into this FOC. This has an important impact on the optimal amount of hedging, C . When setting C, the
+
+monopolist takes into account that hedging will induce him to deviate from the spot market optimum, dQ
+                                                                                                    dC ,
+
+that this deviation will change spot prices, f1 , and that this change in spot prices will change the payo¤ of
+
+the derivatives contract, g 0 . Importantly, he takes into account that market makers know this when setting
+
+prices.
+   3 In this section, we assume that C is perfectly observable by all market participants. In sections 3 and 4, we relax this
+
+assumption which gives room for strategic trading and manipulation in the derivatives market.
+
+
+
+
+                                                               6
+   In the following subsections, we will examine optimal monopolist behavior for varying degrees of risk
+
+aversion. Risk-neutral monopolists will not want to hedge price risk (Proposition 1). Risk-averse monop-
+
+olists will hedge completely only if derivatives contracts can be conditioned on the realization of demand
+
+(Proposition 2). Otherwise, risk-averse monopolists will hedge some but not all of their risk (Proposition
+
+3). Furthermore, the amount of hedging will be increasing in the degree of risk aversion (Proposition 4).
+
+However, even an in…nitely risk-averse monopolist will not …nd it optimal to eliminate risk completely as
+
+doing so is state-wise dominated (Proposition 5).
+
+
+2.2    Risk-Neutral Monopolists Don’t Hedge
+
+Proposition 1 A risk-neutral monopolist does not participate in the derivatives market, i.e. C = 0, and
+
+sells the monopoly quantity at the monopoly price in the spot market.
+
+
+Proof. See Appendix A.1.
+
+   The monopolist faces a trade-o¤ between reducing risk and maintaining monopoly pro…ts. A risk-neutral
+
+monopolist does not value risk reduction. It is therefore optimal for him to maintain full monopoly pro…ts
+
+by not participating in the derivatives market. Now we examine the behavior of a risk-averse monopolist.
+
+Risk aversion provides an incentive for the monopolist to reduce risk. If the monopolist can buy a derivatives
+
+contract with a payo¤ contingent on realized demand, all risk can be eliminated without giving up monopoly
+
+pro…ts. However, when demand-contingent derivatives contracts are not feasible, the monopolist will reduce
+
+but not completely eliminate his exposure to risk and will give up some but not all of his monopoly pro…ts.
+
+
+2.3    Risk-Averse Monopolists with Commitment
+
+Proposition 2 If a derivatives contract can be made contingent on realized demand and if any such contract
+
+can be written, then a risk-averse monopolist will eliminate all risk and maintain full monopoly pro…ts in the
+
+spot market.
+
+
+Proof. See Appendix A.2.
+
+   A demand-contingent contract is ideal for the monopolist as it allows him to completely eliminate risk
+
+while maintaining monopoly pro…ts. The optimal demand-contingent contract will pay o¤ most in states
+
+where demand is lowest. These are the states with the lowest equilibrium prices. Since contract payo¤s
+
+are contingent on realized demand and not prices, the monopolist has no incentive to change prices from
+
+the monopoly optimum since doing so has no impact on the derivative contract’s payo¤.            Note that the
+
+monopolist’s ability to eliminate all risk while maintaining market power depends critically on the veri…ability
+
+
+
+                                                       7
+of demand – on existence of a contractible proxy for risk that the monopolist cannot change. However, in
+
+the real world, demand may not be observable. Even when demand is observable, it is almost certainly not
+
+veri…able. One could get around that problem by writing a contract contingent on both price and quantity.
+
+However, if quantity is not veri…able, a price-contingent contract may be the only mechanism available for
+
+a monopolist to reduce risk. The next subsection will show that using this mechanism comes at the cost of
+
+reduced market power.4
+
+
+2.4     Risk Averse Monopolists without Commitment
+
+Buying a derivatives contract allows the monopolist to transfer wealth from high-price states to low-price
+
+states. For such a contract to be useful in reducing risk, spot prices must be correlated with good or bad
+
+states. However, doing so comes at the cost of reduced monopoly pro…ts. In the rest of this section, we
+
+assume for compactness that the monopolist faces demand shocks. Put another way, good states have both
+
+high prices and high pro…ts while bad states have both low prices and low pro…ts.5
+
+Proposition 3 A risk-averse monopolist will participate in the derivatives market and will give up monopoly
+
+pro…ts to do so.     If the payo¤ of the derivatives contract is increasing (decreasing) in the spot price, the
+
+monopolist will go short (long), i.e. C < 0 (i.e. C > 0). He will sell a larger total quantity in the spot
+
+market, receive a lower price, and make lower expected pro…ts than if he did not participate in the derivatives
+
+market.
+
+Proof. See Appendix A.3.
+
+    When the monopolist takes a position in the derivatives market, this gives him an incentive to deviate
+
+from the spot market optimum to make that position more pro…table.                      This reduces his expected spot
+
+market pro…ts. If the derivatives market is competitive and if the monopolist’s derivatives market position
+
+is perfectly observable, then market makers will set prices so that the monopolist earns zero expected pro…t
+
+in the derivatives market.       Using the derivatives market to reduce risk is costly since it reduces expected
+
+spot market pro…ts while expected derivatives market pro…ts are always zero. However, these costs are small
+
+when derivatives market participation is limited. As a result, a risk-averse monopolist will …nd it optimal
+
+to use the derivatives market to reduce some but not all risk, and will face reduced expected pro…ts.
+  4 The durable goods monopoly literature considers similar issues.     Bulow (1982) shows that a monopolistic producer of a
+durable good could avoid the durable goods monopoly problem by leasing the good. Stokey (1981), Gul, Sonnenschein, and
+Wilson (1986), and Ausubel and Deneckere, (1989) examine the durable goods monopoly problem in an in…nite-period setting.
+If the monopolist is not able to build up reputation, then the price of the durable good drops to marginal cost. However, by
+building up reputation the monopolist may be able to recover part of his monopoly power. Allaz and Vila (1993) show that
+the price in a Cournot duopoly without uncertainty but with access to a forward market converges to the competitive price as
+the number trading periods increases. In our setting, we consider a two-period model and therefore do not allow for multiple
+trading in the futures market.
+    5 Note that this assumption rules out supply shocks where increased prices correspond to lower quantity and lower monopoly
+
+pro…ts. Parallel results obtain when the monopolist faces supply shocks.
+
+
+                                                              8
+2.4.1   Hedging Increases with Risk Aversion
+
+Not only do risk-averse monopolists participate in the derivatives market, but the degree of futures market
+
+participation increases with the degree of risk aversion.
+
+Proposition 4 The more risk-averse a monopolist is, the more derivatives contracts he will go long (short)
+
+if the payo¤ of the derivatives contract is increasing (decreasing) in the spot price.
+
+Proof. See Appendix A.4.
+
+   The monopolist faces a trade-o¤ between reducing risk and maintaining monopoly pro…ts. As the mo-
+
+nopolist becomes more risk averse, risk reduction becomes relatively more important.         Since the cost of
+
+reducing risk –the deviation from the spot market monopoly optimum –is increasing in the amount of risk
+
+reduction, a more risk-averse monopolist will be willing to reduce risk to a degree that a less risk-averse
+
+monopolist would …nd too costly.
+
+
+2.4.2   Complete Hedging is Impossible
+
+We have shown that the amount of hedging increases with the degree of risk aversion. While one might think
+
+that an in…nitely risk-averse monopolist would eliminate all risk at any cost, this subsection will document
+
+that doing so is impossible. Complete hedging is impossible even when the monopolist can choose between
+
+any price-contingent derivatives contract. Furthermore, large amounts of hedging are state-wise dominated
+
+and therefore not optimal for any monopolist, regardless of their degree of risk aversion.
+
+Proposition 5 There exists no price-contingent derivatives contract which can eliminate all pro…t risk.
+
+Proof. See Appendix A.5.
+
+   Any price-contingent contract that eliminates all risk must pay out relatively more when prices indicate
+
+a “bad”state, exactly o¤setting any reduced spot market pro…ts in these states. As a result, the monopolist
+
+will always have an incentive to set prices as if a “bad” state had occurred, even in “good” states. Since
+
+spot market pro…ts are higher in better states –holding prices …xed –and derivatives contract payo¤s must
+
+be the same in all states with the same price, the monopolist will earn higher pro…ts in “good”states. There
+
+is no incentive compatible contract that eliminates all risk. This “no complete hedging” theorem draws an
+
+analog to the “no trade” theorems of Milgrom and Stokey (1982) and others. Just as our theorem shows
+
+that complete hedging is impossible at any price for spot market monopolists, these theorems show that
+
+agents with inside information will be unable to trade at any price.
+
+   As a simple illustration of this idea, we consider a linear demand function with a binomial demand
+
+shock. Since there are only two states of the world, a linear futures contract is su¢ cient to span the set of
+
+                                                       9
+price-contingent contracts. Demand is given by
+
+
+                                                              P =a         bQ,                                                    (7)
+
+
+where a takes values aH > aL with probabilities pH and pL = 1                                 pH respectively.     The payo¤ of each
+
+futures contract is g (P ) = P           E [P jC]. Plugging (7) into (1), the monopolist’s pro…ts are then
+
+
+                                           = C (a    bQ       E [a        bQjC]) + Q (a            bQ) .                          (8)
+
+
+Evaluating (2) with (7), the spot market FOC is
+
+                                                    @
+                                                       =      Cb + a            2bQ = 0,
+                                                    @Q
+
+which implies
+                                                          a     bC      a + bC
+                                                  Q =              ;P =        .                                                  (9)
+                                                              2b           2
+
+Therefore, lifetime pro…ts given optimal spot market production can be found by substituting (9) into (8):
+
+                                                        a          hai           a2     b2 C 2
+                                                 =C            E            +                  .                                 (10)
+                                                        2            2                 4b
+
+                 aL              L
+Note, that        b   < C < ab to obtain positive prices and quantities in both states.                          A quantity C can be
+
+chosen to maximize pro…ts in a given state of the world. An in…nitely risk-averse monopolist will maximize
+
+pro…ts in the worst state and thus set
+                                                                     aH         aL 6
+                                                       C=       pH                .
+                                                                            b
+
+An in…nitely risk-seeking monopolist will maximize pro…ts in the best state and therefore choose
+
+                                                                          aH        aL 7
+                                                    C= 1           pH                 ,
+                                                                                b
+
+                                                                                                            aL aL
+while, as shown above, a risk-neutral monopolist sets C = 0.                           While any C 2         b ; b    is feasible, any
+      h      H   L           H   L
+                                   i
+C 2
+  =      pH a b a ; 1 pH a b a       is state-wise dominated.                           Outside of this range the monopolist can
+
+increase pro…ts in both states of the world by bringing C closer to zero.
+                                                                                                                                  L
+   6 This value is only feasible if   1 + pH aL > pH aH . Otherwise, the monopolist will choose the lowest feasible level, ab .
+   7 This value is only feasible if   1 pH aH < 2 pH aL . Otherwise, the monopolist will choose the highest feasible level,
+aL
+ b
+   .
+
+
+
+
+                                                                     10
+   Figure 1 plots pro…ts in the “bad” L-state on the y-axis against pro…ts in the “good” H-state on the
+
+x-axis for the case when b = 1, aH = 2, aL = 1, and pH = pL = 0:5. Any point on the 45 line represents the
+
+total elimination of risk. The dashed line represents the wealth levels in the two states if the monopolist can
+
+write state-contingent contracts. The slope of this line is the rate at which he can transfer wealth form the
+                                                               pH
+bad state to the good state; it is constant and equal to      1 pH
+                                                                   .   When only price-contingent contracts are
+
+possible the rate at which wealth can be transferred depends upon the amount of wealth transferred between
+
+the two states. Put another way, the marginal cost of additional hedging increases with the amount being
+
+hedged; it becomes in…nite well before all risk is eliminated. This feature is represented by the curved line.
+
+Note that any hedging quantity between      1 and +1 is feasible. However, only hedging quantities between
+  1     1                                                                                                 1
+  2 and 2 are not state-wise dominated.   An in…nitely risk-averse monopolist would thus choose C =       2 , an
+
+in…nitely risk-seeking monopolist would choose C = 12 , and a risk-neutral monopolist would choose C = 0.
+
+
+
+
+                                                   Figure 1
+
+   In this section, we documented that a spot market monopolist faces a trade-o¤ between reducing risk
+
+through a futures market and maintaining monopoly pro…ts. Since reducing risk through the futures market
+
+creates a moral hazard problem in the spot market, the monopolist will …nd it optimal to hedge only some
+
+of his risk. Furthermore, eliminating all risk is impossible.
+
+                                                      11
+3     Strategic Trading by Spot Market Monopolists
+
+The last section documented that spot market power reduces the ability of a monopolist to hedge price
+
+risk. In this section, we show how spot market monopolists may trade strategically in the futures market
+
+to exploit their market power even when they are risk-neutral. This trade will discourage futures market
+
+participation by others. Agents who want to participate in the futures market fear that the monopolist may
+
+be their counterparty or the counterparty of someone with a similar position in the futures market. The
+
+monopolist will exert spot market power to make his futures position more pro…table, thereby reducing the
+
+pro…tability of his counterparties.8
+
+    This section builds on the work of Kyle (1985) who shows that agents with inside information can prof-
+
+itably exploit their informational advantage by hiding behind the order ‡ow of uninformed “noise traders”.
+
+In our model, the aggregate hedging demand of agents without market power is stochastic just as the number
+
+of “noise traders” is stochastic in the Kyle model.              Observing only aggregate order ‡ow, market makers
+
+cannot perfectly determine the monopolist’s futures market position –just as market makers cannot observe
+
+the orders placed by informed traders in the Kyle model.
+
+    The monopolist can increase his pro…ts because market makers cannot take the impact of the monopolist’s
+
+futures market position on expected spot prices fully into account when setting futures market prices. While
+
+the monopolist’s expected spot market pro…t is reduced by deviating from the monopoly optimum, his
+
+expected pro…t in the futures market more than makes up for it. Since market makers earn zero expected
+
+pro…ts, the monopolist’s expected futures market pro…ts imply expected futures market losses for other
+
+market participants. When other agents participate in the futures market, they receive unfavorable prices
+
+since market makers believe that the order ‡ow they generate could have come from the monopolist. This
+
+increased cost deters these agents from hedging price risk as much as they otherwise might.
+
+    Unlike the “noise traders” in the Kyle model who act mechanically, the agents in our model respond
+
+optimally to the presence of the monopolist in the futures market (see Spiegel and Subrahmanyam (1992)
+
+for the analogous extension of the Kyle model). It is also important to note that in our model, unlike in
+
+the Kyle model, there is no private information at the time of trading. In our model, spot market power
+
+serves the role performed by inside information in the Kyle model. In the Kyle model, informed agents hide
+
+behind aggregate order ‡ow to take …nancial market positions consistent with their inside information; in
+
+our model, monopolists hide behind aggregate order ‡ow by submitting random …nancial market positions
+   8 Storage may reduce the ability of the monopolist to trade strategically. When storage is inexpensive, agents without market
+
+power may purchase and store the good in anticipation of higher prices in the future. This limits the ability of the monopolist
+to raise prices, as excess capacity will prevent prices from increasing. In this sense, storage is like durability in Coase (1972)
+in that it provides competition for the monopolist. Here, we assume that storage costs are high enough that no storage takes
+place in equilibrium and that monopoly power is not eroded.
+
+
+
+
+                                                               12
+and then exert market power to make these positions pro…table.
+
+
+3.1      Model Setup
+
+There are three types of agents in this market. Two types of agents are identical to the ones described in
+
+Section 2. First, there is a spot market monopolist. The monopolist controls the spot price by setting the
+
+spot market quantity to maximize pro…ts. Here, we assume that the monopolist is risk-neutral. Because
+
+the monopolist is risk-neutral, he has no incentive to participate in the futures market unless he can increase
+
+expected pro…ts by doing so. Second, the price in the futures market is set by competitive risk-neutral market
+
+makers. These agents observe the aggregate demand for futures contracts and set prices accordingly. In
+
+addition, we introduce risk-averse agents whose payo¤ depends on the price realized in the spot market.
+
+They have an incentive to participate in the futures market because doing so allows them to reduce their
+
+exposure to spot price risk. We assume that the number of these agents is stochastic and unobservable.
+
+    The timing of events is as follows.           First, nature chooses a number of risk-averse agents.               Then the
+
+monopolist and these risk-averse agents simultaneously submit orders to the futures market. Observing the
+
+aggregate order ‡ow, the sum of the order ‡ows submitted by the monopolist and the risk-averse agents,
+
+market makers set the futures price equal to the spot market price they expect. Next, demand is realized
+
+and the monopolist chooses spot market quantity to maximize pro…ts.
+
+    We assume a linear demand curve, so that spot prices are given by (7), P = a                    bQ, where a is stochastic
+
+and b > 0.9 Again, the cost of production is assumed to be zero. The futures market is characterized by
+
+linear cash-settled contracts with payo¤ P             k per contract. The monopolist chooses a number of contracts
+
+C m . Given C m and demand realization, a, the monopolist sets spot market price and quantity to maximize
+
+pro…ts
+
+                                              = C m (a       bQ        k) + (a   bQ) Q.                                      (11)
+
+
+The spot market FOC is
+                                                @
+                                                   =      bC m + a         2bQ = 0.
+                                                @Q
+
+Note that the SOC is satis…ed, yielding an optimal quantity and price
+
+                                                              1
+                                                   Q     =       (a bC m )                                                   (12)
+                                                              2b
+                                                              1
+                                                   P     =      (a + bC m ) .
+                                                              2
+   9 The choice of a linear demand function is for analytic tractability. While a much broader class of functions will obtain
+
+similar results, not all demand functions will obtain the same results. In particular, convex demand curves will provide an
+even stronger incentive for the monopolist to strategically trade in the futures market as large changes in the spot price lead to
+relatively small changes in monopoly pro…ts. Concave demand curves provide a weaker incentive for strategic trading.
+
+
+
+                                                                  13
+   We assume that all risk-averse agents are identical and that the number of such agents, N , is stochastic
+
+and uniformly distributed on [0; 1]. Each agent chooses a number of contracts C n . This number will be
+
+determined optimally based on their preferences. The total number of contracts submitted by these agents,
+
+N C n , is therefore stochastic.   Market makers only observe the aggregate order ‡ow, N C n + C m .       They
+
+have beliefs about the order ‡ow submitted by the monopolist and the risk-averse agents and set the futures
+
+price, k, accordingly.
+
+   In this setup, we look for equilibria in the futures market given optimal subsequent behavior in the spot
+
+market. We assume a set of actions and beliefs for all agents and explore whether any agent has an incentive
+
+to deviate. This section explores equilibria in which the monopolist hides his futures market participation
+
+by randomizing the order ‡ow he submits. When the monopolist submits a positive (negative) order ‡ow
+
+– with plans to drive up (down) spot prices to make this position pro…table – market makers are unsure if
+
+it is the monopolist or other traders (without market power) who are submitting the order. This imperfect
+
+inference allows the monopolist to receive favorable futures market prices, at the expense of other agents in
+
+the market.
+
+   In this setting, a subgame perfect equilibrium consists of
+
+
+   1. beliefs held by market makers about C n and the distribution of C~ m , and a price schedule, k (:) for
+
+      which market makers earn zero expected pro…ts,
+
+   2. beliefs held by the monopolist about k (:) and C n , and a set of possible values for C m where each yields
+
+      the same expected pro…t given those beliefs, and no other values for C m yield higher expected pro…ts,
+
+   3. beliefs held by the risk-averse agents about k (:) and the distribution of C~ m , and a value of C n that
+
+      maximizes expected utility given those beliefs, and
+
+   4. o¤-equilibrium-path beliefs held by market makers about the monopolist’s order ‡ow when the observed
+
+      aggregate order ‡ow is inconsistent with their beliefs – given prices set competitively based on these
+
+      beliefs, the monopolist will not choose to submit an o¤-equilibrium-path order ‡ow quantity.
+
+
+   Here, the beliefs of all agents must be consistent with one another, and with the actions of other agents.
+
+
+3.2    Beliefs and Prices of Market Makers
+
+There are many sets of beliefs that market maker could hold about the monopolist’s futures market partic-
+
+ipation that imply that the monopolist’s order ‡ow cannot be perfectly inferred from the aggregate order
+
+‡ow. Here, we look for an equilibrium involving the simplest set of such beliefs. Suppose market makers
+
+
+
+                                                       14
+believe that each risk-averse agent submits an order C n and that the monopolist randomizes between +x
+
+and    x with equal probability where 0               x < 21 C n . Based on their beliefs, they set actuarially fair prices.
+
+O¤-equilibrium-path, we assume that market makers set prices based on the most punitive beliefs.
+
+   The aggregate order ‡ow,                    C m + C n N , can indicate that the monopolist has successfully hidden,
+
+that he has been caught for sure with +x or                 x given market maker beliefs, or that aggregate order ‡ow
+
+is inconsistent with market makers’beliefs. We categorize the aggregate order ‡ow into the following …ve
+
+groups and specify the price schedules for all possible values of .10
+
+                                                    1          1
+                                    A1: k( )    =     E [a] + b if       > x + Cn                                      (13)
+                                                    2          2
+                                                    1          1
+                                    A2: k( )    =     E [a] + bx if       x + Cn <           x + Cn
+                                                    2          2
+                                                    1
+                                    A3: k( )    =     E [a] if x           x + Cn
+                                                    2
+                                                    1          1
+                                    A4: k( )    =     E [a]      bx if    x         <x
+                                                    2          2
+                                                    1          1
+                                    A5: k( )    =     E [a] + b (        C n ) if   <    x
+                                                    2          2
+
+   In ranges A1 and A5, market makers know that the monopolist submitted an order ‡ow inconsistent
+
+with market makers’expectations. In range A1, it must have been the case that C m > x, and they assume
+
+that N = 0.       In range A5, it must have been the case that C m <                     x, and they assume N = 1.   Prices
+
+are set accordingly. In ranges A2 and A4, market makers believe that the monopolist submitted +x and
+
+ x , respectively.       Prices are set accordingly.        In range A3, the monopolist hides successfully within the
+
+aggregate order ‡ow. In this region, market makers believe that                     x and +x are equally likely.
+
+   Prices are set competitively. In other words, if the monopolist and risk-averse agents take actions that
+
+conform to the beliefs of market makers, then no market maker will have an incentive to deviate.                      Note
+
+that this equilibrium behavior on the part of market makers takes as given the order ‡ow of each risk-averse
+
+agent, C n . Next, we examine optimal behavior on the part of the monopolist given the beliefs and price
+
+schedule of market makers.
+ 1 0 If x = 0, prices are set as:
+
+                                                           1          1
+                                           A1: k( )    =     E [a] + b ( ) if > C n
+                                                           2          2
+                                                           1
+                                           A3: k( )    =     E [a] if 0      Cn
+                                                           2
+                                                           1          1
+                                           A5: k( )    =     E [a] + b (     C n ) if < 0
+                                                           2          2
+
+
+
+
+                                                                 15
+3.3       Beliefs and Actions of Monopolist
+
+The monopolist takes as given the order ‡ow of risk-averse agents, C n , as well as the futures price schedule,
+
+k ( ), set by market makers given the aggregate order ‡ow. As shown in Proposition 1, in any equilibrium
+
+in which the risk-neutral monopolist does not try to disguise his order ‡ow he will not participate in the
+
+futures market. In this case, his expected pro…ts are
+
+                                                                 1
+                                               E [ jC m = 0] =      E a2 .
+                                                                 4b
+
+On the other hand, if the monopolist …nds it optimal to randomize in a way consistent with market makers’
+
+beliefs, he must earn the same expected pro…ts whether he submits an order ‡ow +x or               x. Otherwise,
+
+he would only play one of the strategies and his actions would be incompatible with market makers’beliefs.
+
+Given the futures price schedule, k (:), we now …nd the optimal behavior on the part of the monopolist.
+
+
+Proposition 6 Given that market makers set k (:) as in (13), the monopolist will maximize expected pro…ts
+
+by submitting either C m = +x or          x, where 0   x < 41 C n . The monopolist’s expected pro…ts will be
+
+                                                              1        1         b 3
+                                E [ jx]    = E[ j      x] =      E a2 + bx2        x
+                                                              4b       4        Cn
+                                           >   E [ jC m = 0] for x > 0.
+
+
+Proof. See Appendix A.6.
+
+     When market makers set k (:) consistent with the belief that the monopolist randomizes between +x,
+
+and     x, the monopolist will …nd it optimal to act consistently with those beliefs. Note that there are many
+
+possible equilibria, one for each x. In an equilibrium in which x = 0, the monopolist does not participate in
+
+the futures market. For larger x, the monopolist pro…ts in the futures market at the expense of risk-averse
+
+agents.
+
+
+3.3.1        Beliefs and Actions of Risk-Averse Agents
+
+The risk-averse agents know that it is optimal for the monopolist to hide within the aggregate order ‡ow
+
+by randomizing C m . The monopolist will then set spot market prices optimally given his futures position,
+                                                                                                               n
+thereby increasing expected pro…ts. Risk-averse agents are risk-averse in the domain of their pro…ts,              =
+ n
+     (P ).    Their preferences are represented by a concave utility function, u.    To reduce their exposure to
+
+spot market price risk, a given risk-averse agent will participate in the futures market by purchasing C units
+
+of the futures contract. C n is the number of contracts purchased by the average risk-averse agent in the
+
+
+
+                                                          16
+market. C is then set optimally by each agent according to the following optimization problem:
+
+
+                                         C n = arg max E [u (C (P       k) +    n
+                                                                                    (P ))] .
+                                                     C
+
+
+
+Note that any given risk-averse agent is too small to a¤ect aggregate order-‡ow and thus takes prices as
+                                                                                          n
+given. We assume that pro…ts are linear in the spot market price, i.e.                         (P ) = c0 + c1 P , with c1 < 0, so
+
+that higher spot prices imply lower pro…ts. This implies that
+
+
+                   Cn     =    arg max E [u (C (P        k) + c0 + c1 P )]                                                  (14)
+                                     C
+                                                     1                                         1
+                          =    arg max E u C           (a + bC m )     k + c0 + c1               (a + bC m )
+                                     C               2                                         2
+
+where k (:) is set consistent with (13). As before, risk-averse agents believe that C m can take on two values,
+
++x and      x, with equal probability. We have shown above that for a given C n there exist equilibria with
+
+0   x < 41 C n .
+
+    When a risk-averse agent wants to hedge, this provides him with information that the expected aggregate
+
+hedging demand is high. He then acts rationally taking this information into account. Since risk-averse agents
+
+are identical, none is more or less likely to hedge than any other. Therefore, the distribution of the number
+
+of hedgers, conditional on a given agent wanting to hedge, is f (N ) = 2N .11
+
+    First, we examine optimal hedging in the absence of the monopolist, i.e. if x = 0. In this case,
+
+                                                             1       1                1
+                               C n = arg max E u C             a       E [a] + c0 + c1 a             .
+                                             C               2       2                2
+
+The FOC is then
+                                  1       1                 1      1                1
+                           E        a       E [a] u0 C        a      E [a] + c0 + c1 a              = 0.
+                                  2       2                 2      2                2
+
+Note that the SOC is satis…ed. For C n =             c1 , the FOC is satis…ed and it is a global maximum. Without
+
+the monopolist’s participation in the futures market, it is optimal for risk-averse agents to eliminate all risk.
+
+We now examine optimal hedging when the monopolist participates in the futures market, i.e. when x > 0.
+
+Proposition 7 In an equilibrium in which the monopolist participates in the futures market with order ‡ow
+
++x and      x with equal probability where 0 < x < 41 C n , risk-averse agents maximizing (14) will participate
+
+in the futures market, though will participate less than they would if the monopolist did not participate, i.e.
+  1 1 Similarly, agents without hedging needs would update their beliefs about the expected number of hedgers accordingly.
+
+These agents will participate in the futures market to exploit their information. This will mitigate but not eliminate the e¤ect
+we discuss. If all agents do not take into account the information contained in their own hedging demand, these agents will not
+believe that they face unfavorable prices on average, and will not reduce their hedging demand. However, their expected pro…ts
+will be lower if they hold these naïve beliefs.
+
+
+                                                              17
+0 < Cn <      c1 .
+
+
+Proof. See Appendix A.7.
+
+   If risk-averse agents believe that the monopolist trades strategically in the futures market, they are
+
+concerned that the monopolist will hold an opposite position and move spot prices against them. A given
+
+risk-averse agent knows that he is more likely to want to hedge precisely at the wrong times as he is more
+
+likely to hedge when aggregate order ‡ow from risk-averse agents is large. In this case, either the monopolist
+
+also submits a large order ‡ow and is spotted –in which case futures prices are set fairly –or the monopolist
+
+submits a small order ‡ow and hides successfully – in which case the monopolist gains at the risk-averse
+
+agents’expense. This makes hedging more expensive for agents without market power and thus discourages
+
+their participation in the futures market.
+
+   The following proposition shows that a subgame perfect equilibrium exists with the beliefs and actions
+
+as speci…ed above.
+
+
+Proposition 8 Given the market structure described in Subsection 3.1, there exists a subgame perfect equi-
+
+librium in which futures market prices are set as in (13), risk-averse agents each submit an order of C n ,
+
+where 0 < C n <      c1 , and the monopolist submits an order ‡ow of either +x or     x with equal probability,
+
+where 0 < x < 41 C n .
+
+Proof. Proposition 6 shows that the monopolist has no incentive to deviate from this equilibrium. Proposi-
+
+tion 7 shows that risk-averse agents have no incentive to deviate from this equilibrium. Market makers earn
+
+zero pro…ts and none has an incentive to o¤ er another price schedule.
+
+
+   Here, a spot market monopolist is able to increase pro…ts by trading strategically in the futures market.
+
+The monopolist takes a futures market position randomly, then deviates from the spot market monopoly
+
+optimum to move spot market prices and make this position more pro…table.           If the monopolists futures
+
+market position were perfectly observable, market makers would set futures market prices anticipating these
+
+actions.   In this case, the monopolist would not want to participate in the futures market since doing so
+
+would decrease expected spot market pro…ts without increasing expected futures market pro…ts. However,
+
+when there are other traders in the market, the futures market position submitted by the monopolist cannot
+
+be perfectly inferred by observing the aggregate order ‡ow. In this case, market makers set prices based
+
+on the rational belief that the orders they receive could have come from either the monopolist or from other
+
+agents without market power. As a result, trades submitted by the monopolist move prices less than they
+
+would had they been observable. Just as an informed trader in the Kyle model pro…ts at the expense of
+
+“noise traders”, the monopolist earns positive expected pro…ts in the futures market at the expense of the
+
+
+
+                                                     18
+ other market participants.         This makes futures market participation expensive, and reduces the optimal
+
+ hedging of risk-averse agents.
+
+
+
+ 4       Futures Market Manipulation under Spot Market Power
+
+ The last section showed that a spot market monopolist can pro…tably exploit spot market power in the
+
+ futures market.      This section documents that even those without market power can pro…t in the futures
+
+ market when another agent has spot market power. This section relies on the insight of Kumar and Seppi
+
+ (1992), that agents without inside information can manipulate a market if they are mistaken for agents with
+
+ inside information. Here, we show that the same can be said of market power: agents without market power
+
+ who hold futures market positions can use later trading to manipulate prices to make the original position
+
+ pro…table when market makers believe they might have market power.
+
+
+ 4.1      Model Setup with Manipulators
+
+ 4.1.1     Timing and Markets
+
+ While the models developed earlier in this paper have markets in only two periods, this model requires trade
+
+ in three periods. The last two periods mirror our earlier setup. In this section, we add an initial period in
+
+ which agents trade contracts whose payo¤s are contingent on futures prices in the next period. Presenting
+
+ the markets in reverse chronological order:
+
+
+t = 2 : There is a spot market at time t = 2. Production in this period is controlled by a monopolist, who
+
+         faces a linear demand curve, i.e. spot prices are given by (7), P = a               bQ, where a, b > 0.12 The cost
+
+         of production is zero.
+
+t = 1 : There is a futures market at time t = 1, characterized by linear cash-settled contracts based on the
+
+         spot price in the next period, with payo¤ P            k1 per contract.
+
+t = 0 : There is a futures market at time t = 0, characterized by linear cash-settled contracts based on the
+
+         futures strike price in the next period, with payo¤ k1             k0 per contract.13
+   1 2 While the assumption of linear demand is critical to obtain simple analytic results, the same intuition obtains with a convex
+
+ demand curve. While losing analytic tractability, these demand functions have the advantage that the monopolist has a strict
+ bene…t from participating in the futures market. When demand is linear, the increased pro…ts in the futures market that come
+ with futures market participation are exactly o¤set by lower spot market monopoly pro…ts.
+   1 3 Note that a futures contract whose payo¤ is based on the price of another futures contract is unusual.        However, there
+ are many options whose payo¤ is based on a futures contract. While we use a linear futures contract and not an options
+ contract at t = 0 for analytical tractability, our result that manipulative trading exists in equilibrium is robust to changes in
+ the contractual structure. Furthermore, many futures markets based on the spot price of a storable commodity are e¤ectively
+ a future on a future, as storability links current spot and forward prices.
+
+
+
+
+                                                                 19
+                                                          Figure 2
+
+
+4.1.2     Actors
+
+The model involves four types of actors:
+
+
+   1. Noise traders submit a stochastic order ‡ow, C0n , at t = 0 and they do not participate at t = 1. We
+
+        assume that C0n is uniformly distributed on [C n ; C n+ ]. The assumption that noise traders participate
+
+        only in the initial period is for expositional simplicity and is not necessary to obtain these results.14
+
+   2. Monopolist submits an order ‡ow, C1m , at t = 1, and then sets prices and quantities optimally at t = 2.
+
+        To simplify the problem, the monopolist is assumed not to participate in the futures market at t = 0:
+
+   3. Manipulator (denoted by the letter h to refer to “hiders”) submit an order ‡ow, C0h , at t = 0, and C1h ,
+
+        at t = 1. We impose the following liquidity constraint C0h               W < 21 (C n+      C n ).15
+
+   4. Market makers, as before, are risk-neutral and act competitively to set strike prices k0 and k1 . Market
+
+        makers observe aggregate order ‡ow           1     C1m + C1h at t = 1 and          0     C0h + C0n at t = 0, and
+
+        make rational inferences about the positions of various agents and their impact on contract payo¤s.
+
+        Therefore, k1 = E [P j 1 ] and k0 = E [k1 j 0 ].
+
+
+    Figure 2 provides a timeline showing which agents participate in each market.
+
+    The monopolist is willing to participate in the futures market for the same strategic reason outlined in
+
+Section 3.    He earns pro…ts by setting spot market prices to make his futures market position pro…table.
+
+While the monopolist’s spot market pro…t at t = 2 is lower than it would be had he not participated in the
+
+futures market, futures market pro…ts in t = 1 are high enough (at least weakly) to o¤set these reduced
+
+pro…ts.
+  1 4 Note that, for simplicity, we assume in this section that noise traders act mechanically as they do in the Kyle model.
+
+Introducing optimal behavior on their part as in Section 3 would not change our result that manipulative trading is possible in
+equilibrium.
+  1 5 We impose this wealth constraint as the manipulator will …nd it optimal to take an unbounded position otherwise.
+
+
+
+
+                                                              20
+   The manipulator is willing to accept expected losses in the futures market at t = 1 for the same reason
+
+that the monopolist is willing to accept lower expected pro…ts in the spot market at t = 2: Just as the
+
+monopolist sets spot prices at t = 2 to make his futures market position at t = 1 pro…table, the manipulator
+
+trades in the futures market at t = 1 in order to move futures prices, thereby making his futures market
+
+position at t = 0 pro…table. Just as the monopolist earns expected pro…ts at the expense of the manipulator
+
+at t = 1, the manipulator earns expected pro…ts at the expense of noise traders at t = 0.
+
+
+4.1.3   Spot Market Prices
+
+For a given futures market position, the monopolist’s pro…t is
+
+
+                                       = C1m (P     k1 ) + P Q
+
+                                       = C1m (a    bQ        k1 ) + (a   bQ) Q.
+
+
+Note that prices and quantities are optimally set at
+
+                                                   1
+                                         Q    =       (a bC1m ) and
+                                                   2b
+                                                   1
+                                         P    =      (a + bC1m ) ,
+                                                   2
+
+so that optimal pro…t will be
+                                                         1             2
+                                          =   C1m k1 +      (a + bC1m ) :
+                                                         4b
+
+As in Section 3, futures market participation causes the monopolist to deviate from the spot market monopoly
+
+optimum. He moves prices to make the futures market position pro…table.
+
+
+4.2     Equilibrium with Manipulation
+
+Here, we propose an equilibrium with manipulation:
+
+   At t = 0, the manipulator randomizes between +x and            x with equal probability where
+
+x = min W; 23 (C n+    Cn       W ) . Note that W is the liquidity constraint faced by the manipulator, the
+
+maximum order ‡ow in absolute value that the manipulator can submit. C n+ and C n             are the maximum
+
+and minimum order ‡ows that could be submitted by the noise traders. Market makers set
+
+                                                            1
+                                                   k0 =       a
+                                                            2
+
+regardless of the aggregate order ‡ow submitted.
+
+                                                       21
+                                                                                                            h    n
+     At t = 1, the equilibrium will take three di¤erent forms depending on aggregate order ‡ow         0 = C0 + C0
+
+                         n+
+at t = 0. If     0 > C          x then market makers know that the manipulator must have submitted C0h = +x.
+
+In this case, the monopolist will not participate in the futures market, i.e. C1m = 0. The manipulator submits
+
+the same order as in the previous period, i.e. C1h = C0h , and market makers set the futures price as
+
+                                                              1    1
+                                          k1 = E [P j 1 ] =     a + b( 1      x) .
+                                                              2    2
+
+If C n + x         0     C n+     x then the manipulator has successfully hidden his order ‡ow in the previous
+                                                         1    1
+period. The monopolist randomizes over C1m 2             2 x; 2 x   with equal probability, and the manipulator sets
+
+C1h = 12 C0h . Market makers set the futures price as
+
+                                                                 1    1
+                                             k1 = E [P j 1 ] =     a + b 1.
+                                                                 2    4
+
+             n
+If   0 < C       + x then market makers know that the manipulator must have submitted C0h =                x.   The
+
+monopolist will not participate, i.e. C1m = 0, and the manipulator submits the same order as in the previous
+
+period, i.e. C1h = C0h . The futures price is then set as
+
+                                                              1    1
+                                          k1 = E [P j 1 ] =     a + b ( 1 + x) :
+                                                              2    2
+
+     At t = 2 monopolists sets P = 21 (a + bC1m ) and Q = 2b
+                                                          1
+                                                             (a            bC1m ).
+
+
+Proposition 9 The actions and beliefs described above constitute a subgame perfect equilibrium.
+
+
+Proof. See Appendix A.8.
+
+     Financial market manipulation is possible when agents without market power can be mistaken for those
+
+with market power. An agent without market power can pro…t by taking a random position in the initial
+
+futures market at t = 0. When this random position is not spotted, he has an incentive to move subsequent
+
+futures prices at t = 1 to make this initial position more pro…table. For example, if he takes a long position
+
+in the initial futures market, this position becomes pro…table if subsequent futures market prices are high.
+
+As a result, he has an incentive to take a long position in the subsequent futures market to drive up prices.
+
+When market makers observe this long position, they believe it could have been submitted by the monopolist,
+
+who would then use his monopoly power to raise spot prices. Therefore, market makers rationally set higher
+
+futures prices in response to the long aggregate order ‡ow they observe. Since the manipulator’s trade at
+
+t = 1 moves prices without altering the underlying contract payo¤, this trade is unpro…table.            By taking
+
+a larger position in the initial futures market than in the subsequent one, the pro…ts he earns in the initial
+
+
+                                                          22
+futures market by moving subsequent prices exceed his losses from subsequent trading.
+
+    In Section 3, a monopolist’s trades could not be di¤erentiated from those submitted by risk-averse agents.
+
+He was able to pro…t because the futures market trades he submitted moved prices by less than they would
+
+have had they been observable. In this section, a manipulator’s trades cannot be di¤erentiated from those
+
+of the monopolist. The manipulator is able to pro…t because the futures market trades he submits move
+
+prices by more than they would have had they been observable.          As in Section 3, the monopolist pro…ts
+
+from the manipulator’s presence at t = 1 since this causes the trades he submits to move prices by less than
+
+they would otherwise.
+
+
+
+5     Conclusions
+
+In this paper, we have shown how spot market power impacts three rationales for trading in futures contracts.
+
+First, agents with and without spot market power will participate in futures market to hedge their risk.
+
+Second, agents with spot market power trade in the futures market and then strategically set spot prices to
+
+make their futures position more pro…table.      Last, agents without market power may manipulate futures
+
+prices to make their earlier futures market positions pro…table. In a rational expectations equilibrium, these
+
+three motives provide a reason for futures markets to exist even if the underlying spot market is monopolistic.
+
+    When futures market positions can be perfectly inferred by market participants, trades will only take
+
+place to satisfy hedging needs. If, however, the futures market positions of individual agents are not perfectly
+
+observable, strategic and manipulative motives for trade are also possible. In the case of strategic trading, the
+
+monopolist pro…ts by hiding behind the trades of agents without market power. In the case of manipulation,
+
+agents without market power pro…t from hiding behind the trades of the monopolist.
+
+    Rational market makers set futures prices taking into account the moral hazard problem created by
+
+the monopolist’s adjustment of spot market prices given his futures market position. This makes hedging
+
+expensive, and therefore reduces futures market participation for agents with and without market power.
+
+We have shown this makes it impossible for the monopolist to eliminate all risk.
+
+    Many existing futures market whose underlying spot markets are imperfectly competitive exhibit very low
+
+participation relative to the importance of those markets. In particular, markets for longer term contracts
+
+are very illiquid.   Given the moral hazard problems discussed in this paper, several markets – including
+
+weather and insurance derivatives –have emerged to avoid the ine¢ ciencies caused by market power. The
+
+trading activity in futures markets on oil, for example, is very low.     Our paper suggests that this can be
+
+explained by the imperfectly competitive structure of the oil spot market. Weather derivatives provide an
+
+index-hedge against extreme temperatures, and therefore against oil demand risk. However, these contracts
+
+
+                                                       23
+are not susceptible to the moral hazard issue discussed in this paper and thus improve market e¢ ciency.
+
+The market for insurance derivatives (e.g. catastrophe bonds) o¤ers investors the opportunity to trade on
+
+the impact of natural catastrophes. One common feature that almost all insurance derivatives share is the
+
+inclusion of an index trigger that, for example, relates to the strength of a hurricane or an industry index
+
+of insured property losses. These triggers contrast to indemnity triggers –which are based on the size of an
+
+insurer’s loss –which are prone to moral hazard. For example, the issuing insurance company could change
+
+the pro…le of risks it underwrites or its claim-settlement process. While these index-related contracts solve
+
+the moral hazard problem, they introduce basis risk, the potential mismatch between the underlying risk
+
+and the payo¤ of these index contracts.16
+
+  1 6 Doherty and Richter (2002) show that it is optimal to supplement an index hedge by “gap insurance” which provides
+
+insurance against basis risk.
+
+
+
+
+                                                          24
+A     Appendix: Proofs
+A.1    Proof of Proposition 1
+Risk neutrality implies that u0 ( ) is constant. The …rst derivative of expected utility with respect to the
+number of derivatives contracts can be written as
+                           @E [u ( )]                                     dQ
+                                         = E       g    E [g]      CE        f1 g 0    u0 ( )
+                             @C                                           dC
+                                                                                dQ
+                                         = u0 ( ) E       g       E [g]   CE        f1 g 0
+                                                                                dC
+
+Di¤erentiation the FOC for the last period
+
+                                                (Cg 0 + Q) f1 + f = 0
+
+with respect to C yields
+
+                                           dQ               dQ                 dQ
+                           0   =     g0 + C    f1 g 00 + 2     f1 + (Cg 0 + Q)    f11 = 0;
+                                           dC               dC                 dC
+                       dQ                            g 0 f1
+                               =                                      .
+                       dC            (2 + Cf1 g ) f1 + (Cg 0 + Q) f11
+                                               00
+
+
+@E[u( )]
+  @C     can then be rewritten as
+                                                 "                                     #
+                                                                           2
+                           @E [u ( )]    0                        (g 0 f1 )
+                                      = u ( ) CE                                         .
+                             @C                    (2 + Cf1 g 00 ) f1 + (Cg 0 + Q) f11
+
+For C = 0, the FOC is satis…ed. The SOC in the last period,
+
+                                        (Cf1 g 00 + 2) f1 + (Cg 0 + Q) f11 < 0,
+
+implies that
+                                                              2
+                                                     (g 0 f1 )
+                                                                         < 0.
+                                        (2 + Cf1 g ) f1 + (Cg 0 + Q) f11
+                                                  00
+
+
+Therefore @E[u(
+            @C
+                )]
+                   > 0 for all C < 0; and @E[u(
+                                            @C
+                                                )]
+                                                   < 0 for all C > 0. We conclude that C = 0 is a global
+maximum.
+
+A.2    Proof of Proposition 2
+In this proof, we assume without loss of generality that E [g (D)] = 0.                Pro…ts are then given by   =
+g (D) + QP . The FOC in the …nal period is
+
+                                                 @
+                                                    = Qf1 + f = 0.
+                                                 @Q
+Note, that this FOC is identical to the one without futures market participation. The monopolist therefore
+maintains full market power in the spot market. The FOC determines an optimal quantity, Q (D), and a
+price, f (Q (D) ; D). Assume the monopolist designs a futures contract with the following payo¤
+
+                           g (D) = E [Q (D) f (Q (D) ; D)]            Q (D) f (Q (D) ; D) .
+
+In this case, pro…ts are constant and risk is eliminated completely. Note, that any perturbation to g reduces
+expected utility for the risk-averse monopolist.
+
+
+
+                                                          25
+A.3     Proof of Proposition 3
+The FOC in the initial period is
+
+                         @E [u ( )]                                    dQ
+                                    =E       g      E [g]     CE          f1 g 0      u0 ( ) = 0.
+                           @C                                          dC
+
+The …rst derivative of expected utility evaluated at C = 0 is given by
+
+                                  @E [u ( )]
+                                             jC=0    = E [(g           E [g]) u0 (QP )]
+                                    @C
+                                                     = Cov (g; u0 (QP )) .
+
+Here, we make an assumption about the nature of demand shocks. In particular, we assume that a shock to
+demand that increases equilibrium prices will at least weakly increase equilibrium quantities. Put another
+way, any demand shock that increases prices will increase monopoly pro…ts. Formally, for any demand shock
+such that
+                                       @f (Q; D)        @Q
+                                                   = f1     + f2 > 0
+                                          @D            @D
+we have
+                                                  @Q
+                                                         0.
+                                                  @D
+This implies that
+                                   @      @Q              @Q
+                                       =      f + Q f1       + f2 > 0.
+                                  @D      @D              @D
+In this case, a shock to demand has the following impact on marginal utility
+
+                           @u0 (QP )       @Q          @Q
+                                     =        f + Q f1    + f2                     u00 (QP ) < 0.
+                             @D            @D          @D
+
+The impact on the payo¤ of the derivatives contract is
+
+                                           @g (P )          @Q
+                                                   =           f1 + f2 g 0 .
+                                            @D              @D
+
+Therefore, if the payo¤ of the derivatives contract is increasing in the spot price then Cov (g; u0 (QP )) < 0.
+This yields @E[u(
+                @C
+                   )]
+                      jC=0 < 0, which implies that C < 0. It is thus optimal for the monopolist to sell
+derivatives contracts. The e¤ect on quantity is
+
+                                  @Q                        g 0 f1
+                                     =                                         <0
+                                  @C       (2 + Cf1 g 00 ) f1 + (Cg 0 + Q) f11
+
+and the e¤ect on spot prices is
+                                                                   2
+                                  @f                     g 0 (f1 )
+                                     =                                        > 0.
+                                  @C      (2 + Cf1 g 00 ) f1 + (Cg 0 + Q) f11
+
+Note that the spot market SOC implies that the denominators in both fractions are negative. He thus
+increases quantity and sells at a lower price as C < 0. The derivative of expected pro…ts with respect to
+C is
+                                             @          dQ
+                                        E         = CE     f1 g 0 .
+                                            @C          dC
+                                   @
+In the situation above, we get E @C    > 0 for all C < 0. This implies that the monopolist’s expected pro…ts
+when optimally participating in the derivatives market with C < 0 are lower than if he did not participate.
+    If the payo¤ of the derivatives contract is decreasing in the spot price then Cov (g; u0 (QP )) > 0. This
+yields @E[u(
+          @C
+              )]
+                 jC=0 > 0, which implies that C > 0. It is thus optimal for the monopolist to buy strictly
+
+
+                                                            26
+positive number of derivatives contracts. The e¤ect on quantity is
+
+                                     @Q                          g 0 f1
+                                        =                                           >0
+                                     @C         (2 + Cf1 g 00 ) f1 + (Cg 0 + Q) f11
+
+and the e¤ect on spot prices is
+                                                                            2
+                                     @f                       g 0 (f1 )
+                                        =                                          < 0.
+                                     @C        (2 + Cf1 g 00 ) f1 + (Cg 0 + Q) f11
+                                                                                     @
+Again, the monopolist increases quantity and sells at a lower price. In this case, E @C < 0 for all C > 0.
+This implies that the monopolist’s expected pro…ts when optimally participating in the derivatives market
+with C > 0 are lower than if he did not participate.
+
+A.4       Proof of Proposition 4
+In this proof, we assume that the payo¤ of the derivatives contract is increasing in the spot price.17 Here, we
+compare two potential monopolists with utility functions u and v. If the monopolist with utility function v
+is more risk averse than the one with u, then there exist an increasing, concave function h such that v = h u.
+Let C u denote the optimal number of derivatives contracts bought by monopolist u. In this case, C u
+satis…es the FOC
+                                           @E [u ( (C))]
+                                                         jC=C u = 0.                                       (15)
+                                                @C
+The …rst derivative of expected utility of monopolist v with respect to C evaluated at C u is
+
+                      @E [v ( (C))]                                              @ (C u )
+                                    jC=C u         = E v 0 ( (C u ))
+                           @C                                                      @C
+                                                                                                @ (C u )
+                                                   = E h0 (u ( (C u ))) u0 ( (C u ))                     .
+                                                                                                  @C
+
+Recall that
+                                          @                                     dQ
+                                             =      g     E [g]        CE          f1 g 0   ;                (16)
+                                          dC                                    dC
+and let
+                                                                            dQ
+                                               P        E [g] + CE             f1 g 0 .                      (17)
+                                                                            dC
+          @
+Note that dC > 0 i¤ g < P . Recall that by assumption
+
+                                                         @f
+                                                               > 0 and                                       (18)
+                                                         @D
+                                                         @Q
+                                                                       0,
+                                                         @D
+which implies
+                                                              @
+                                                                 > 0.                                        (19)
+                                                              @D
+We have @g(P   )   @f 0
+           @D = @D g > 0. Let D be a level of demand for which g f Q D ; D          = P . As g is increasing
+                                                                @
+in the level of demand, there can be at most one such point. If dC could be either positive or negative, such
+                    @
+a point exists. If dC never switches sign, set D = 0 or 1. Together,
+
+                                            g (f (Q (D) ; D)) < P i¤ D < D:
+ 1 7 The proof for a contract whose payo¤ is decreasing in the spot price is equivalent.
+
+
+
+
+                                                                  27
+Therefore,
+                                                                   @
+                                                   D < D i¤           > 0.                                   (20)
+                                                                   dC
+In this case, we can split @E[v(@C
+                                 (C;D))]
+                                         into two parts,
+                                          Z D
+                    @E [v ( (C))]                                                @ (C; D)
+                                      =            h0 (u ( (C; D))) u0 ( (C; D))           dD
+                         @C                 D=0                                     @C
+                                             Z 1
+                                                                                    @ (C; D)
+                                          +           h0 (u ( (C; D))) u0 ( (C; D))          dD.
+                                              D=D                                     @C
+
+(19) implies that
+                            @h0 (u ( (C; D)))                                  @
+                                              = h00 (u ( (C; D))) u0 ( (C; D))    < 0,
+                                    @D                                         @D
+and therefore
+                                  h0 u      C; D      < h0 (u ( (Q0 ; D))) i¤ D < D.                         (21)
+This means that
+                                          Z D
+                    @E [v ( (C))]                                             @ (C; D)
+                                      =            h0 (u ( (C; D))) u0 ( (C; D))         dD
+                         @C               D=0                                     @C
+                                            Z 1
+                                                                                 @ (C; D)
+                                        +          h0 (u ( (C; D))) u0 ( (C; D))           dD
+                                             D=D                                    @C
+                                                          Z D
+                                                                              @ (C; D)
+                                      > g 0 (u ( (C; D)))       u0 ( (C; D))            dD
+                                                           D=0                    @C
+                                                            Z 1
+                                                                                 @ (C; D)
+                                        +g 0 (u ( (C; D)))         u0 ( (C; D))            dD.
+                                                             D=D                    @C
+
+The last inequality follows from (21) and (20). Rejoining the two parts of the integral,
+
+                           @E [v ( (C))]                                    @ (C; D)
+                                         > g 0 (u ( (C; D))) E u0 ( (C; D))          .
+                                @C                                            @C
+
+(15) implies that @E[v(@C(C))] jC=C u > 0. Therefore, at the optimal number of derivatives contracts for
+monopolist u, expected utility of monopolist v could be increased by increasing C. If expected utility is
+                    2
+concave, namely if @ E[v(
+                        @C 2
+                            (C))]
+                                  < 0, then C v > C u .
+
+A.5     Proof of Proposition 5
+Let g (P ) be the payo¤ of a price-contingent derivatives contract to the monopolist and let Q (P; D) be the
+inverse demand function. Suppose demand D is indexed such that Q (P; Di ) < Q (P; Dj ) if and only if
+Di < Dj and P > 0. For a demand realization Di pro…ts are given by
+
+                                                (Di ) = g (P ) + Q (P; Di ) P .
+
+Suppose there exists a price-contingent contract g (P ) that eliminates all risk and whose price is set compet-
+itively. Then the monopolist sets prices optimally contingent on realized demand. Therefore, for any two
+demand realization Di and Dj
+
+                    g (P (Di )) + Q (P (Di ) ; Di ) P (Di ) = g (P (Dj )) + Q (P (Dj ) ; Dj ) P (Dj ) .      (22)
+
+The contract must be incentive compatible in the sense that
+
+                    g (P (Dj )) + Q (P (Dj ) ; Dj ) P (Dj )        g (P (Di )) + Q (P (Di ) ; Dj ) P (Di )   (23)
+
+
+
+                                                              28
+for all Di and Dj . Now, assume that Dj is the realized level of demand but that the monopolist set prices
+equal to P (Di ) for some Di < Dj . Pro…ts are then
+
+                                         = g (P (Di )) + Q (P (Di ) ; Dj ) P (Di ) .
+
+Since Q (P (Di ) ; Di ) < Q (P (Di ) ; Dj )
+
+                    g (P (Di )) + Q (P (Di ) ; Dj ) P (Di ) > g (P (Di )) + Q (P (Di ) ; Di ) P (Di ) .
+
+(22) then implies
+
+                   g (P (Di )) + Q (P (Di ) ; Dj ) P (Di ) > g (P (Dj )) + Q (P (Dj ) ; Dj ) P (Dj ) .
+
+This violates the incentive compatibility constraint (23) as the monopolist gets a higher pro…t by pretending
+to be in demand state Di when realized demand is Dj . Therefore, no derivatives contracts exists that
+eliminates all risk.
+
+A.6     Proof of Proposition 6
+In this case, when submitting C m , there are 7 ranges the monopolists order ‡ow, C m , could be in. These
+are categorized according to which possible prices, A1 A5, the monopolist could face, depending upon the
+realization of N :
+
+ M1 C m > x + C n always A1 “caught up o¤-equilibrium”
+
+
+                                                  1 h           2
+                                                                  i
+                 E [ jC m ]    C m E [kjC m ] + E (a + bC m )
+                               =
+                                                 4b
+                                    Z 1
+                                         1          1                    1 h           2
+                                                                                         i
+                 E [ jC m ] =  Cm           E [a] + b (C m + C n N ) dN + E (a + bC m )
+                                      0  2          2                    4b
+                              1            1        1      1
+                            =    E a2        bC m     Cm + Cn
+                              4b           2        2      2
+                                        1
+                            < E [ j0] = E a2 if C n > C m
+                                        4b
+ M2     x + Cn < Cm           x + C n either A1 “caught up o¤-equilibrium” or A2 “caught up on-equilibrium”
+
+       (a) A1 if C n + x        C m < C nN     Cn
+       (b) A2 if 0      C nN       Cn + x     Cm
+
+
+                                  1 h              2
+                                                     i
+E [ jC m ]   =      C m E [kjC m ] + E (a + bC m )
+                                  4b
+                                   Z 1                                             Z 1+ x CCnm
+       m               1                     1                                                   1       1 h           2
+                                                                                                                         i
+E [ jC ]     =     C m E [a] C m               b (C m + C n N ) dN         C   m
+                                                                                                   bxdN + E (a + bC m )
+                       2               x Cm 2
+                                     1+ C n                                         0            2       4b
+                                                        !
+                                                    m 2
+                  1         1               (x    C   )
+             =       E a2     bC m C m +
+                  4b        4                   Cn
+                               1
+             <    E [ j0] =       E a2 if C m > 0
+                               4b
+ M3 x < C m           x + C n either A1 “caught up o¤-equilibrium”, A2 “caught up on-equilibrium”, or A3
+    “hidden”
+
+       (a) A1 if C n + x        C m < C nN     Cn
+
+                                                            29
+       (b) A2 if C n           x    Cm          C nN         Cn + x         Cm
+       (c) A3 if 0         C nN         Cn          x     Cm
+
+
+                                            1 h             2
+                                                              i
+E [ jC m ]   =        C m E [kjC m ] +         E (a + bC m )
+                                            4b
+                                             Z 1                                                       Z 1+ x CCnm
+       m                  m1               m          1                                                              1       1 h           2
+                                                                                                                                             i
+E [ jC ]     =        C        E [a]     C              b (C m + C n N ) dN                    C   m
+                                                                                                                       bxdN + E (a + bC m )
+                           2                     x Cm 2
+                                               1+ C n                                                   1    x+C m
+                                                                                                              Cn
+                                                                                                                     2       4b
+                     1                 1 m           1 m         1 x2 C m2                 x2
+             =          E a2             bC            C                             x+2
+                     4b                2             2           2   Cn                    Cn
+
+
+                                                          dE [ jC m ]                1                      3 x2   3 C m2
+                                                                            =          b Cm        x+            +
+                                                            dC m                     2                      2C n   2 Cn
+                        d
+                            E [ jx < C m                     x + C n] < 0 8 C m > x
+                       dC m
+ M4     x    Cm        x either A2 “caught up on-equilibrium”, A3 “hidden”, or A4 “caught down on-equilibrium”
+
+       (a) A2 if C n           x    Cm          C nN         Cn
+       (b) A3 if x         Cm          C nN          Cn      x       Cm
+       (c) A4 if 0         C nN < x             Cm
+
+                                                                     Z 1                           Z x CCnm
+                       m                    m1                   m               1                               1       1 h           2
+                                                                                                                                         i
+             E [ jC ]          =        C           E [a]    C                     bxdN + C m                      bxdN + E (a + bC m )
+                                                2                     1    x+C m 2
+                                                                            Cn                         0         2       4b
+                                       1                              1      1
+                               =          E a2 + bC m2                         x
+                                       4b                             4     Cn
+
+   For 0 < x < 14 C n –as in the proposed equilibrium — E [ jC m ] is maximized at C m = x and C m =                                      x:
+
+ M5 x C n       Cm <                x either A3 “hidden”, A4 “caught down on-equilibrium”, or A5 “caught down
+    o¤-equilibrium”
+
+       (a) A3 if x         Cm          C nN          Cn
+       (b) A4 if       x       Cm       C nN < x             Cm
+       (c) A5 if 0         C nN <        x          Cm
+
+   By analogy to M 3, dCdm E [ jx                       Cn       Cm <       x] > 0
+
+ M6     x Cn          C m < x C n either A4 “caught down on-equilibrium”or A5 “caught down o¤-equilibrium”
+
+       (a) A4 if       x       Cm       C nN < C n
+       (b) A5 if 0         C nN < 0             x       Cm
+
+   By analogy to M 2, E [ j                 x       Cn       Cm < x          C n ] < E [ j0]
+
+ M7 C m <        x     C n always A5 “caught up o¤-equilibrium”
+      By analogy to M 1,E [ jC m <                       x   C n ] < E [ j0].
+
+
+
+
+                                                                             30
+    Given the values of E [ jC m ] given above, E [ ] is maximized for C m = x and C m = x for 0 < x < 41 C n ,
+so that
+                                                  1           1        b 3
+                         E [ jx] = E [ j x] = E a2 + bx2                  x > E [ j0] .
+                                                  4b          4       Cn
+Therefore, the monopolist is indi¤erent between submitting C m = x and C m = x, and the market makers
+can rationally believe that the monopolist randomizes between these two values with equal probability.
+Given these beliefs, prices are set competitively and no market maker has an incentive to change k.
+
+A.7     Proof of Proposition 7
+Risk-averse agents maximize the following objective function:
+
+                        Cn       =    arg max E [u (C (P                 k) + c0 + c1 P )]
+                                             C
+                                                                   1                            1
+                                 =    arg max E u C                  (a + bC m )     k + c0 + c1 (a + bC m )
+                                             C                     2                            2
+
+where the risk averse agent takes as given the order ‡ow submitted by the average risk-averse agent, C n ,
+and by the monopolist, C m . The …rst and second derivative of expected utility are given by
+
+         @Eu                     1                                       1                            1
+                   = E             (a + bC m )           k u0 C            (a + bC m )     k + c0 + c1 (a + bC m )
+         @C                      2                                       2                            2
+                             "                                                                                             #
+                                                             2
+        @ 2 Eu                   1                                         1                             1
+                   = E             (a + bC m )           k       u00 C       (a + bC m )      k + c0 + c1 (a + bC m )          < 0.
+         @C 2                    2                                         2                             2
+
+Expected utility of risk averse agents is therefore a concave function in C.
+
+    @Eu
+     @C R
+         1       1
+         2R E    2 (a + bx)   k (x + N C n ) u0 C 12 (a + bx) k (x + N C n ) + c0 + c1 12 (a + bx) 2N dN
+  =
+      + 2 E 2 (a bx) k ( x + N C n ) u0 C 12 (a bx) k ( x + N C n ) + c0 + c1 12 (a bx) 2N dN
+        1       1
+
+    2                  2                                                                                                                         3
+      1
+      2 1     1 C2xn      E 12 (a + bx) 12 E [a] 12 bx u0 C 12 (a + bx) 12 E [a] 12 bx + c0 + c1 12 (a + bx)
+    6                       2                                                                                                                    7
+    6          + 12 1 C2xn E 12 (a + bx) 12 E [a] u0 C 12 (a + bx) 12 E [a] + c0 + c1 12 (a + bx)                                                7
+  = 6
+    6
+                                                                                                                                                 7
+                                                                                                                                                 7
+                         2x 2
+    4        + 12 1      Cn     E 12 (a bx) 21 E [a] u0 C 12 (a bx) 12 E [a] + c0 + c1 12 (a bx)                                                 5
+                        2x 2
+                 + 12   Cn   E        1
+                                      2 (a       bx)     1         1
+                                                         2 E [a] + 2 bx      u0 C   1
+                                                                                    2 (a      bx)   1         1
+                                                                                                    2 E [a] + 2 bx   + c0 + c1 12 (a   bx)
+
+If we set x = C n for 0 <             < 41 and C = C n , we can de…ne the function g (:) such that
+
+            @Eu
+g (C)           jC n =C
+             @C
+            2                                        2
+                                                                                                                                             3
+                             1                                   1     1                 1     1
+                             2   1     (1      2 )       E       2a    2 E [a]   u0 C    2a    2 E [a]   + c0 + c1 12 (a + b C)
+          6                                                                                                                                  7
+          6 + 1 (1 2 )2 E 1 (a + b C)                               1         0     1              1                 1                       7
+        = 6    2          2                                         2 E [a] u C 2 (a + b C)        2 E [a] + c0 + c1 2 (a + b C)             7
+          6 1         2                                                                                                                      7
+          4 + 2 1 (2 ) E 12 (a b C)                                   1         0
+                                                                      2 E [a] u C 2 (a
+                                                                                      1
+                                                                                             b C) 2 E [a] + c0 + c1 12 (a b C)
+                                                                                                     1
+                                                                                                                                             5
+                                                 2
+                                     + 12 (2 ) E         1
+                                                         2a
+                                                                  1         0
+                                                                  2 E [a] u C 2 a
+                                                                                  1     1                 1
+                                                                                        2 E [a] + c0 + c1 2 (a  b C)
+
+   First, we evaluate g (0)
+                                                                 1       1                 1
+                                             g (0) = E             a       E [a] u0 c0 + c1 a
+                                                                 2       2                 2
+Note that this expression is positive as c1 < 0. As a result, when other risk-averse agents do not hedge,
+any given risk-averse agent can increase utility by hedging. Therefore, there is no equilibrium in which
+
+
+                                                                           31
+no hedging occurs unless c1 = 0, in which case the agents have no incentive to hedge. Next, we evaluate
+g ( c1 ). In this case, we get
+
+                                                         1                         1
+                                  g ( c1 )    = 2 u0 c1 E [a] + c0                   b c1 (1   2 )
+                                                         2                         2
+                                              < 0 for c1 < 0.
+
+As expected, g ( c1 ) < 0.
+    This means that g switches signs between C = 0 and C = c1 . Furthermore, g is a smooth function.
+Therefore, there must exist a C between zero and c1 such that g (C ) = 0. As shown above, expected
+utility is a concave function in the amount of hedging, C, which implies that the …rst derivative of expected
+utility, g, is decreasing in C. The solution C to g (C ) = 0 is therefore unique. Note that this implies
+that in the proposed equilibria above there is some hedging by the risk averse agents but hedging is reduced
+relative to the case of no monopolist participation in the market.
+
+A.8      Proof of Proposition 9
+We …rst examine the optimal behavior given the beliefs about the manipulator’s behavior.
+
+A.8.1     Monopolist
+We showed that at t = 2 the monopolist maximizes his pro…ts by setting price and quantity as P =
+1         m             1
+2 (a + bC1 ) and Q = 2b (a      bC1m ). At t = 1, the monopolist maximizes expected pro…ts given the price
+schedule he faces and the beliefs he holds about the manipulator’s trading behavior. His objective function
+at t = 1 depends on the aggregate order ‡ow 0 = C0h + C0n at t = 0.
+    If 0 > C n+ x then his expected pro…ts are
+
+                                                    1    1                                1             2
+                          E[ ]=E          C1m         a + b C1m + C1h          x      +      (a + bC1m ) .
+                                                    2    2                                4b
+
+The FOC is
+                                          @E [ ]            1                      1 m
+                                                 =E           b C1h     x           bC .
+                                          @C1m              2                      2 1
+Note that given 0 > C n+ x and the beliefs about the manipulator’s trade at t = 0 we have C1h = x, which
+implies C1m = 0. The SOC is
+                                         @2E [ ]     1
+                                                 =     b < 0.
+                                          @C1m2      2
+    If C n + x        0    C n+     x then his expected pro…ts are
+
+                                                      1    1                            1             2
+                             E[ ]=E          C1m        a + b C1m + C1h             +      (a + bC1m )
+                                                      2    4                            4b
+
+The FOC is
+                                                     @E [ ]           1 h
+                                                            =E         bC .
+                                                     @C1m             4 1
+Note that the monopolist believes that the manipulator will randomize between + 21 x and 12 x with equal
+probability, so that E C1h = 0, and @E[ ]
+                                    @C m = 0. Therefore, the monopolist is indi¤erent between submitting
+                                                1
+                                                                    1    1
+an order ‡ow and therefore willing to submit C1m 2                  2 x; 2 x       with equal probability.18
+  1 8 Here the monopolist is indi¤erent between participating and not participating in the futures market. This result is obtained
+
+because we make the assumptions that there is no noise trading at t = 1 and demand is linear. If we either allow for noise
+trading at t = 1 or a convex demand function the monopolist would have a strict incentive to strategically randomize at t = 1.
+
+
+
+
+                                                               32
+               n
+   If   0 <C        + x then his expected pro…ts are
+
+                                                         1    1                                1             2
+                          E[ ]=E                C1m        a + b C1m + C1h + x             +      (a + bC1m )
+                                                         2    2                                4b
+
+In this case, the FOC is
+                                               @E [ ]           1                       1 m
+                                                      =E          b C1h + x              bC .
+                                               @C1m             2                       2 1
+                             n
+Note that given      0 < C           + x and the beliefs about the manipulator’s trade at t = 0 we have C1h =     x.
+This implies
+                                                          @E [ ]       1 m
+                                                                 =      bC = 0
+                                                          @C1m         2 1
+which implies C1m = 0. The SOC is
+                                                           @2E [ ]          1
+                                                                   =          b < 0.
+                                                            @C1m2           2
+We have thus shown that the monopolist has no incentive to deviate from the proposed equilibrium given
+the price schedule and his beliefs about the manipulator’s actions. Next, we examine the optimal behavior
+of the manipulator.
+
+A.8.2    Manipulator
+At t = 1 the manipulator submits an order ‡ow to maximize his expected pro…ts which depend on the
+aggregate order ‡ow at t = 0. His expected pro…ts are
+                                                    h
+                                           E            = E C0h (k1        k0 ) + C1h (P       k1 ) .
+               n+
+   If   0 >C          x his expected pro…ts are
+                                                h
+                                           E            = E C0h (k1          k0 ) + C1h (P       k1 )
+                                                               1
+                                                        = E      b C1h        x   C0h      C1h
+                                                               2
+
+The FOC is
+                                           @E h     1                              1
+                                              h
+                                                = E b C0h                    2C1h + bW = 0
+                                            @C1     2                              2
+and the SOC is satis…ed. This implies C1h = 21 x + C0h . Note that if the manipulator does randomize
+between +x and x at t = 0, then 0 > C n+ x is only true if C0h = x. Thus C1h = x: His pro…ts are then
+E h = 0.
+   If C n + x    0   C n+ x his expected pro…ts are
+                                       h
+                                 E             = E C0h (k1        k0 ) + C1h (P         k1 )
+                                                   1               1
+                                               = E bC0h C1m + C1h + bC1h C1m                            C1h   .
+                                                   4               4
+
+The FOC is
+                                               @E h  1
+                                                  h
+                                                    = b C0h + E [C1m ]                  2C1h = 0
+                                                @C1  4
+and the SOC is satis…ed. This implies C1h = 12 C0h + E [C1m ] . Note that if the manipulator believes that
+the monopolist randomizes between + 21 x and 12 x with equal probability at t = 0, then C1h = 12 C0h . His
+pro…ts are then
+                                                    1
+                                          E h =       bC h2 > 0
+                                                   16 0
+
+
+
+                                                                      33
+               n
+   If   0 <C       + x his expected pro…ts are
+                                             h
+                                     E                = E C0h (k1              k0 ) + C1h (P          k1 )
+                                                                  1
+                                                      = E           b C1h + x          C0h      C1h    .
+                                                                  2
+
+The FOC is
+                                      @E h     1                                              1
+                                         h
+                                           = E b C0h                           2C1h             bW = 0
+                                       @C1     2                                              2
+and the SOC is satis…ed. This implies C1h = 21  x + C0h . Again, if the manipulator randomizes between
++x and x at t = 0, then 0 < C + x is only true if C0h = x. Therefore, C1h = x and his pro…ts are
+                                n
+
+E h = 0.
+   At t = 0 the manipulator submits an order ‡ow C0h to maximize his expected pro…ts given optimal
+behavior in subsequent periods. His expected pro…ts are given as
+                                                 h
+                                      E               = E C0h (k1            k0 ) + C1h (P         k1 ) .
+
+   If C0h   0 then
+                                2                       R C n+                                                                 3
+                                             1
+                                                                      C0h
+                                                                             C0h (k1         k0 ) + C1h (P        k1 ) dC0n
+                   E   h
+                            = 4       C n+       Cn        C n+   x
+                                                        R C n+ x C0h                                                           5
+                                     + C n+ 1 C n          Cn
+                                                                              C0h (k1         k0 ) + C1h (P        k1 ) dC0n
+                                         1              1
+                            =                             bC h2 C n+           x       C0h      Cn     .
+                                C n+         Cn        16 0
+The FOC is
+                           @E h       1     1
+                                 = n+         bC h 2 C n+                                    Cn        2x     3C0h .
+                            @C0h  C     C n 16 0
+If the FOC is satis…ed, then C0h = 32 (C n+ C n              x). Recall the liquidity constraint, C0h           W <
+1    n+      n                                        h               h    2    n+      n
+2 (C       C    ). In an interior equilibrium, x  = C0  , so that   C0  =  5 (C       C    ).  The SOC is satis…ed in
+this case. Taking the liquidity constraint into account, it is optimal to set C0h = min W; 25 (C n+ C n ) .
+    If C0h < 0 then
+                               2             R C n+                                                 3
+                                        1                      h                 h               n
+                                               C n +x C h
+                                                             C0  (k1    k0 ) + C 1 (P    k1 ) dC 0
+                 E h = 4 C                                                                          5
+                                     n+ C n
+
+                                         1
+                                              R C n +x C0 0h
+                                  + C n+ C n C n              C0 (k1 k0 ) + C1 (P k1 ) dC0n
+                                                                 h                 h
+
+                                         1        1
+                            =                       bC h2 C n+                 Cn            x + C0h .
+                                C n+         C n 16 0
+The FOC is
+                           @E h      1    1
+                                = n+        bC h 2 C n+                                      Cn        2x + 3C0h .
+                              h
+                            @C0  C     C 16 0
+                                        n
+
+
+By logic parallel to the case where C0h 0, it is optimal to set C0h =                                 min W; 25 (C n+          Cn ) .
+   For an interior solution, expected pro…ts are
+
+                                h                    2                              1                         2
+                           E        jC0h =             C n+       Cn          =        b C n+         Cn          > 0;
+                                                     5                             100
+
+for a corner solution they are
+                                                       h1
+                                                 E         jC0h =
+                                                           bW 2 > 0.  W =
+                                                        16
+Note that the expected pro…ts are the same if the manipulator submits +x or                                         x; so he will be willing to
+randomize with equal probability.
+
+
+
+                                                                        34
+A.8.3   market makers
+Note that prices are set competitively when market makers beliefs are consistent with the actions of the noise
+traders, the monopolist, and the manipulator. As a result, no market maker has an incentive to change k.
+
+
+
+
+                                                     35
+References
+ [1] Allaz, Blaise and Jean-Luc Vila, 1993, “Cournot Competition, Forward Markets and E¢ ciency”, Journal
+        of Economic Theory, Vol. 59, pp. 1-16.
+ [2] Allen, Franklin and Douglas Gale, 1992, “Stock-Price Manipulation”, Review of Financial Studies, Vol.
+        5(3), pp. 503-529.
+ [3] Anderson, Ronald W. and Mahadevan Sundaresan, 1984, “Futures Markets and Monopoly”, in The
+       Industrial Organization of Futures Markets, ed. R. Anderson, Lexington Books, Lexington, MA.
+ [4] Anderson, Ronald W., 1990, “Futures Trading for Imperfect Cash Markets: A Survey”, in Commodity,
+       Futures and Financial Markets, ed. L. Phlips, Kluwer Academic Publishers, Dordrecht, Netherlands.
+ [5] Ausubel, Lawrence and Raymond Deneckere, 1989, “Reputation in Bargaining and Durable Goods
+       Monopoly”, Econometrica, Vol 57(3), pp. 511-531.
+ [6] Bulow, Jeremy I., 1982, “Durable-Goods Monopolists”, Journal of Political Economy, Vol. 90(2), pp.
+        314-332.
+ [7] Coase, Ronald H, 1972, “Durability and Monopoly”, Journal of Law & Economics, Vol. 15(1), pp.
+        143-49.
+ [8] Doherty, Neil A. and Andreas Richter, 2002, “Moral Hazard, Basis Risk, and Gap Insurance”, Journal
+       of Risk and Insurance, Vol. 69(1), pp. 9-24.
+ [9] Glosten, Lawrence R., 1989, “Insider Trading, Liquidity, and the Role of the Monopolist Specialist”,
+        Journal of Business, Vol. 62(2), pp. 211-235.
+[10] Gul, Faruk, 1987, “Noncooperative Collusion in Durable Goods Oligopoly”, RAND Journal of Eco-
+        nomics, Vol. 18(2), pp. 248-254.
+[11] Gul, Faruk, Hugo Sonnenschein, and Robert Wilson, 1986, “Foundations of Dynamic Monopoly and
+        the Coase Conjecture”, Journal of Economic Theory, Vol. 39(1), pp. 155-190.
+[12] Hart, Oliver D., 1977, “On the Pro…tability of Speculation”, Quarterly Journal of Economics, Vol.
+        91(4), pp. 579-597.
+[13] Jarrow, Robert A., 1992, “Market Manipulation, Bubbles, Corners, and Short Squeezes”, Journal of
+        Financial and Quantitative Analysis, Vol. 27(3), pp. 311-336.
+[14] Kumar, Praveen and Duane J. Seppi, 1992, “Futures Manipulation with “Cash Settlement””, Journal
+       of Finance, Vol. 47(4), pp. 1485-1502.
+[15] Kyle, Albert S., 1985, “Continuous Auctions and Insider Trading”, Econometrica, Vol. 53(6), pp. 1315-
+        1336.
+[16] Milgrom, Paul and Nancy Stokey, 1982, “Information, Trade and Common Knowledge”, Journal of
+        Economic Theory, Vol. 26(1), pp. 17-27.
+[17] Newbery, David M.G., 1984, “The Manipulation of Futures Market by a Dominant Producer”, in The
+       Industrial Organization of Futures Markets, ed. R. Anderson, Lexington Books, Lexington, MA.
+[18] Spiegel, Matthew and Avanidhar Subrahmanyam, 1992, “Informed Speculation and Hedging in a Non-
+        competitive Securities Market”, Review of Financial Studies, Vol. 5(2), pp. 307-329.
+[19] Stokey, Nancy, 1981, “Rational Expectations and Durable Goods Pricing”, Bell Journal of Economics,
+        Vol. 12(1), pp. 112-128.
+[20] Waldman, Michael, 2003, “Durable Goods Theory for Real World Markets”, Journal of Economic
+       Perspectives, Vol. 17(1), pp. 131-154.
+
+
+
+
+                                                   36
+
