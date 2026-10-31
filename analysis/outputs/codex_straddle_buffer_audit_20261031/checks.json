@@ -1,0 +1,60 @@
+{
+  "scope": "Synthetic math and source consistency only; no market data loaded",
+  "entry_cancellation_examples": [
+    {
+      "up": true,
+      "entry_prices": [
+        80,
+        100,
+        150
+      ],
+      "combined_dollar_pnl_each": [
+        "5",
+        "5",
+        "5"
+      ],
+      "meaning": "Equal opposite entries cancel; return denominator/capital and costs are separate."
+    },
+    {
+      "up": false,
+      "entry_prices": [
+        80,
+        100,
+        150
+      ],
+      "combined_dollar_pnl_each": [
+        "-5",
+        "-5",
+        "-5"
+      ],
+      "meaning": "Equal opposite entries cancel; return denominator/capital and costs are separate."
+    }
+  ],
+  "identical_prefix_future_extreme_counterexample": {
+    "common_prefix": [
+      "100",
+      "99",
+      "101"
+    ],
+    "future_a": [
+      "105",
+      "104"
+    ],
+    "future_b": [
+      "90",
+      "92"
+    ],
+    "paper_final_day_up_exit_a": "100.8",
+    "paper_final_day_up_exit_b": "93.3",
+    "conclusion": "One prefix-only decision cannot know which final-day order level to choose."
+  },
+  "analytic_partly_observed_target_example": {
+    "assumption": "Independent equal-variance zero-mean Gaussian day-t and future returns; not market evidence",
+    "known_component_sign_accuracy_for_total_two_component_sign": 0.75,
+    "future_component_direction_accuracy": 0.5,
+    "meaning": "High accuracy against an old anchor does not establish forecast skill on remaining tradable returns."
+  },
+  "table3_count_sum": 47,
+  "new_economic_return_definitions": 0,
+  "account_simulations": 0
+}

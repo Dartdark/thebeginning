@@ -1126,6 +1126,24 @@ Source: Viljoen, Westerholm and Zheng, [SSRN 1913693](https://ssrn.com/abstract=
   midpoints, event/receipt and quote-age records, side and fee reconciliation; preserve missing horizons as unknown.
 - Status: execution diagnostic reference. No new alpha trial, plan placement, order-timing change or live logger.
 
+### E18 follow-up — Future-extreme buffers and partly observed targets
+
+Source: González-Maiz-Jiménez, López-Herrera and Reyes-Santiago, SSRN6401038, uploaded March2026 preprint;
+[review and mathematical audit](results/straddle_buffer_6401038_review_20261031.md).
+- Use: an order priced from the execution day's final high/low needs a causal estimator or as-of update policy.
+  A daily bar touching a hindsight level does not show that the order existed then; wider buffers and slippage
+  stress do not remove that information problem. Retain non-fills, cancellations, queue and trade-through evidence.
+- Evidence: source inspection and constructed identical-prefix/different-continuation counterexample only.
+  Paper's claimed Sharpe7.26–14.86 is not independently reproduced or demonstrated executable alpha.
+- Accounting: equal static long/short entries cancel before costs. Combined UP profit is close minus short-cover
+  price; DOWN profit is long-exit minus close. Inventory held before prediction creates no automatic advantage.
+- Target clock: predicting tomorrow's close relative to yesterday's open includes already-observed price movement.
+  In an explicit IID equal-variance Gaussian thought experiment, known-component sign predicts the combined sign
+  with75% accuracy while predicting the future component stays50%. High old-anchor accuracy is not tradable edge.
+- Next check only for separately evidenced research: prefix-only order levels, prediction/label maturity clocks,
+  genuine forward-return baseline, native net positions/cash/margin and executable fills. No current strategy,
+  sizing, protective-order or account-policy change; no new return trial or measured execution saving.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

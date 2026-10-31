@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:6401038",
+  "ssrn_id": "6401038",
+  "title": "Machine Learning Straddle Strategy with Buffer-Based Execution: A Patient Trader Approach to Equity Trading",
+  "url": "https://ssrn.com/abstract=6401038",
+  "verdict": "dont_test",
+  "full_text_read": true,
+  "evidence_level": "full_main_manuscript_source_and_constructed_mathematical_audit",
+  "source_sha256": "f95ce6908e3edc22c80a50d8dab9d750d114468a8dd6ecd50fe338890b2e906d",
+  "source_revision": "Uploaded101-page preprint, PDF modified2026-03-12; indexed posting2026-03-13",
+  "source_artifact": {
+    "path": "agents/codex/inputs/straddle_buffer_6401038_20261031/source.pdf",
+    "sha256": "f95ce6908e3edc22c80a50d8dab9d750d114468a8dd6ecd50fe338890b2e906d",
+    "permission": "owned_upload",
+    "provenance": "sediment://file_00000000cd7481fd832056498f3df0a9",
+    "access_method": "Native main-text extraction plus embedded-figure OCR"
+  },
+  "report_path": "agents/codex/results/straddle_buffer_6401038_review_20261031.md",
+  "access_receipt": "agents/codex/inputs/straddle_buffer_6401038_20261031/source_access.json",
+  "updated_at": "2026-10-31T02:53:56.335054+00:00",
+  "new_economic_trials": 0,
+  "new_economic_definitions": 0,
+  "summary": "Published exits require execution-day final extrema without causal estimator. Offset entries cancel; old-anchor accuracy is not demonstrated forward edge. Reject as specified.",
+  "about": "Same-equity simultaneous long/short positions, old-open ML target and next-day buffered exits.",
+  "findings": "Author Table13 claims14,051%/583% cumulative returns and14.86/7.26 Sharpe over484 test days at10%/30% buffer. No independent market test; source execution/algebra audit only.",
+  "mechanism": "Claimed liquidity/range harvesting; causal fills and predictive value on remaining returns not established.",
+  "build_on": "Execution/target-design caution only; no TODO candidate or account test.",
+  "code_feasibility": "Hindsight simulator/audit can be coded; causal strategy needs specified as-of level estimator, order state, no-fill handling and economic evidence. No tradable strategy code built.",
+  "execution_reference": "E18 follow-up future extrema",
+  "origin": "direct_user_upload_review"
+}
