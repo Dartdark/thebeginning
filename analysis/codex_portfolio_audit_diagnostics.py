@@ -74,6 +74,24 @@ for market,x in groups.items():
         definition="Cov(group daily P&L,total)/Var(total); S30 cannot be falsely split into NQ/ES without its marked component ledgers"))
 pd.DataFrame(concentration).to_csv(OUT/"market_concentration.csv",index=False)
 
+# Correct only the descriptive daily-DD convention, retaining the exact source-bootstrap draws.
+risk=[]
+source_boot=pd.read_csv(OUT/"personal_bootstrap.csv").set_index("scenario")
+for scenario in SCENARIOS:
+    p=pd.read_csv(OUT/f"personal_{scenario}_components.csv",index_col=0,parse_dates=True)
+    x=p.loc[p.admitted].drop(columns="admitted").sum(axis=1).to_numpy()
+    rng=np.random.default_rng(20261031);st=rng.integers(0,len(x)-20,(5000,13))
+    ix=(st[:,:,None]+np.arange(20)).reshape(5000,-1)[:,:252]
+    cum=x[ix].cumsum(1);peak=np.maximum.accumulate(np.c_[np.zeros(5000),cum],axis=1)[:,1:]
+    dd=(peak-cum).max(1)
+    assert np.isclose(np.median(cum[:,-1]),source_boot.loc[scenario,"pnl_p50"])
+    pd.DataFrame(dict(net_252=cum[:,-1],max_daily_equity_DD=dd)).to_csv(OUT/f"personal_{scenario}_bootstrap_draws.csv",index=False)
+    risk.append(dict(scenario=scenario,pnl_p5=np.percentile(cum[:,-1],5),pnl_p50=np.median(cum[:,-1]),
+        pnl_p95=np.percentile(cum[:,-1],95),dd_p50=np.median(dd),dd_p95=np.percentile(dd,95),
+        capital_at20pct_rule=np.percentile(dd,95)/.2,p_loss=np.mean(cum[:,-1]<=0),
+        basis="same5000 source20-day draws; includes starting-equity peak; daily source-ledger risk only"))
+pd.DataFrame(risk).to_csv(OUT/"personal_bootstrap_corrected.csv",index=False)
+
 dump(OUT/"structural_findings.json",dict(
     current_source=SOURCE_COMMIT,
     source_plan_reversion="6082472: VB2/1 and T fade on50K; DT2 on150K; ST remains personal",
@@ -81,6 +99,9 @@ dump(OUT/"structural_findings.json",dict(
     evaluation_VB_risk_before_fees={"stop_points":75,"50K_8MNQ":1200,"150K_20MNQ":3000},
     latest_brief_50K_cushion=1064,
     fiftyK_full_size_VB_stop_exceeds_reported_cushion=True,
+    fiftyK_evaluation_DLL=1000,
+    fiftyK_brief_buffer_between_DLL_and_floor_before_cost_or_gaps=64,
+    DLL_qualification="On a continuous price path the1000 DLL should pause before the1064 cushion is exhausted; stop risk alone is not a predicted floor breach",
     personal_contract_legs={"NQ":17,"ES":2,"CL":1,"strategy_labels":19},
     personal_identity_limits=["Twin v1 ledger is not literal current v2.1","Kusho weekend/overnight P&L remains exit-day booked",
         "continuous-contract rolls/actual micro quotes and margin solvency not certified",
