@@ -237,8 +237,11 @@ worthwhile NEEDS DATA leads. Acquisition preference: **free sources only**; a li
   after, with author Sharpe 1.76 after costs; authors also warn the effect weakened. No result reproduced here.
   Merge the existing NG export task and [D12](agents/codex/DATA_NEEDED.md); no duplicate data request.
   Need full executable source, native NG/micro contract/roll history, release exceptions and native fees/slippage.
-  Smallest next check after matching inputs arrive: timestamp-only 2018–22 event census, then evidence/power/cost
-  review before any committed return test. No current portfolio place or measured diversification benefit.
+  **NG upload PARTIAL (2026-10-31):** ten files archived and audited; all OHLC have only two decimals. Need
+  `Decimals=3` re-export plus chart/session/timezone/roll metadata. Provisional2018–22Thursday census completed
+  without returns; full source and authoritative event calendar remain open.
+  [Upload audit and exact exporter settings](agents/codex/results/ng_upload_audit_20261031.md).
+  Next: repair precision and admit clocks/events, then evidence/power/cost review before a committed return test. No current portfolio place or measured diversification benefit.
   [Targeted feasibility report](agents/codex/results/targeted_diversification_20261030.md).
 
 - [ ] **Bitcoin spot/inverse-futures utility allocation — CODE BUILT / NEEDS MATCHING DATA AND SPECIFICATION (SSRN3441913).**

@@ -275,67 +275,24 @@
     }
   ],
   "last_run": {
-    "run_id": "targeted-diversification-20261030",
-    "recorded_at": "2026-10-31T05:00:39.741008+00:00",
-    "checked_research_parent": "8edc9ee65fc33b09d869f213723636a8865c46c5",
-    "checked_claude_head": "88b5e95",
-    "full_source_reviews": 0,
-    "selected_source_inspections": [
-      "4764295",
-      "3575861",
-      "5230768"
-    ],
+    "run_id": "ng-upload-intake-20261031",
+    "recorded_at": "2026-10-31T05:12:12.283210+00:00",
+    "status": "native_precision_and_metadata_blocked",
+    "files": 10,
+    "rows": 1086667,
+    "raw_manifest": "agents/codex/inputs/ng_upload_20261031/manifest.json",
+    "report_path": "agents/codex/results/ng_upload_audit_20261031.md",
     "new_hypotheses": 0,
     "new_economic_definitions": 0,
     "return_tests_executed": false,
-    "report_path": "agents/codex/results/targeted_diversification_20261030.md",
     "lease": null,
-    "searches": [
-      "gold ChineseNewYear physical demand",
-      "commodity inventory announcement premium",
-      "currency ECB/FOMC announcement drifts",
-      "gold/Treasury intraday risk premia",
-      "pre-refunding Treasury gains",
-      "Treasury intraday momentum",
-      "FXUIPhighfrequency",
-      "NGstorage announcement strategy",
-      "Treasury coupon reinvestment",
-      "commodity scheduledflows"
+    "source_access": [
+      "SAGE full text unavailable via connected reader",
+      "IAEE appendix404",
+      "Did not retry Reading denial or Liverpool embargo"
     ],
-    "dedup": [
-      "gold/CLclock families",
-      "COT hedging pressure",
-      "European fix",
-      "ZNauctions and monthend",
-      "NFP/FOMCcycle",
-      "couponreinvestment dateproxy",
-      "crossasset intradaymomentum"
-    ],
-    "access": [
-      {
-        "source": "https://chenwang.one/files/pretra.pdf",
-        "result": "Connected primary PDF reader exposes selected sections; ordinary download403, no bypass"
-      },
-      {
-        "source": "https://www.iaee.org/ej/ejexec/ej42-2-Wichmann-exsum.pdf",
-        "result": "Indexed primary summary; direct reader404"
-      },
-      {
-        "source": "https://centaur.reading.ac.uk/90003/1/NG_paper_final_round.pdf",
-        "result": "Explicit Anubis access denial; stopped"
-      },
-      {
-        "source": "https://livrepository.liverpool.ac.uk/3083246/",
-        "result": "Repository lists embargo to2026-11-30; did not bypass"
-      },
-      {
-        "source": "https://www.jbs.cam.ac.uk/wp-content/uploads/2024/11/uncovered-interest-parity-in-high-frequency.pdf",
-        "result": "Connected reader operational this turn; intro and settlement sections inspected"
-      }
-    ],
-    "no_return_code": "analysis/codex_diversification_feasibility_20261030.py",
-    "output": "analysis/outputs/codex_diversification_feasibility_20261030/summary.json",
-    "next_work": "Continue distinct owned-data-compatible source discovery;NGdata admission if exports arrive. No unfinished eligible return reservation."
+    "user_action": "Re-export actual NG prices with Decimals3or greater and confirm chart/feed/session/timezone/roll metadata; async metadata question pending.",
+    "next_work": "Admit corrected native precision and event/source clocks before any frozen economic test."
   },
   "last_notification_key": "ssrn:5250499:prototype-v1:real-data-blocked",
   "note": "New paper-discovery program authorized 2026-10-29. Existing repository multiplicity remains in every significance decision. Paused t6 and Hunt v2 are not resumed or reset.",
@@ -754,6 +711,26 @@
       "no_return_code": "analysis/codex_diversification_feasibility_20261030.py",
       "output": "analysis/outputs/codex_diversification_feasibility_20261030/summary.json",
       "next_work": "Continue distinct owned-data-compatible source discovery;NGdata admission if exports arrive. No unfinished eligible return reservation."
+    },
+    {
+      "run_id": "ng-upload-intake-20261031",
+      "recorded_at": "2026-10-31T05:12:12.283210+00:00",
+      "status": "native_precision_and_metadata_blocked",
+      "files": 10,
+      "rows": 1086667,
+      "raw_manifest": "agents/codex/inputs/ng_upload_20261031/manifest.json",
+      "report_path": "agents/codex/results/ng_upload_audit_20261031.md",
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "lease": null,
+      "source_access": [
+        "SAGE full text unavailable via connected reader",
+        "IAEE appendix404",
+        "Did not retry Reading denial or Liverpool embargo"
+      ],
+      "user_action": "Re-export actual NG prices with Decimals3or greater and confirm chart/feed/session/timezone/roll metadata; async metadata question pending.",
+      "next_work": "Admit corrected native precision and event/source clocks before any frozen economic test."
     }
   ],
   "data_access_blockers": {
