@@ -953,3 +953,15 @@ in place of each plan slot (whole, and in part for VB / LDF / ES MOC / CL), each
 - Removing Monday Long, Bridge Monday or the CL fade changes the 2-year payout by under $30: at bench level the plan is
   saturated; its drawdown budget, not missing edges, is the limit. Swaps only trade speed against blow-up risk.
 Decision: keep the plan. Live data (drift alarm, mid-December gate) decides the next change.
+
+## 150K funded: exact chart inputs (2026-10-31, Codex portfolio audit)
+
+The 150K benches used 'plan x 1.5', leaving three 1-lot pieces at 1.5 MNQ. Whole-number choices benched
+(`../analysis/plan150_integer_test.py`, 500 paired 2-year histories, `../analysis/outputs/plan150_integer_test_output.txt`):
+rounding them DOWN to 1 matches the old numbers (y2 $20,182 vs $20,137, blown 1.6% vs 1.8%), so the earlier 150K decisions
+stand; rounding UP to 2 is worse (blown 6.0%, y2 −$800). VB flagged 2 scored y2 +$122 / blown 1.2%: best of 4, within noise, not used.
+
+**Full-size 150K funded inputs (f = 1, cushion >= $3,000):** Vault Break `NumContracts` 3 / `FlaggedContracts` 1, ONB ML risk
+$600, Monday Long 1, EOS risk $1,050, Late-Day Flow 3, NFP risk $750, Bridge Monday 1, CL Sunday fade 3 MCL, ES MOC 3 MES,
+Relative Strength 1, Dual Thrust 2, Overnight Tick / VIX 2. Below full size each chart trades floor(input x f), f = cushion /
+3,000 (min 0.5); the bench now trades exactly these inputs.
