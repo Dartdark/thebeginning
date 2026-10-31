@@ -1,0 +1,467 @@
+                                 VIX Futures Basis Trading:
+                                  The Calvados-Strategy 2.0
+                                       Chrilly Donninger
+                                Chief Scientist, Sibyl-Project
+                               Sibyl-Working-Paper, Jan 2014
+                                      Rev. 1, 2014-01-21
+                                http://www.godotfinance.com/
+
+   Calvados is an apple brandy from the French region of Lower Normandy (Basse-
+Normandie). It is sometimes abbreviated to Calva. Calvados is distilled from cider made
+from specially grown and selected apples, of which there are over 200 named varieties.
+                 http://en.wikipedia.org/wiki/Calvados_%28brandy%29
+
+
+Abstract:
+In [1] I developed the Sidre and Most-Strategy. The strategy relies on the typical term-
+structure of VIX futures. The Calvados is a refined and condensed version of these
+strategies which was developed in [2]. The starting point was a paper of Simon and
+Campasano (see [3]). Simon&Campasano demonstrate that the VIX futures basis does not
+have significant forecast power for the change in the VIX spot index, but does have forecast
+power for subsequent VIX futures returns. It is especially profitable to short VIX futures
+contracts when the basis is in contango. The original Calvados working paper ([2]) presented
+improved metrics and parameter settings of the Simon&Campasano approach. The current
+working paper improves the original work in several points and extends the historic backtest.
+The overall patterns of the original results are reassured and improved upon. The Calvados is
+traded in the Sybil-Fund. It is so far the pick of the bunch. One gets a lot of fun for a medium
+dose of risk.
+
+Revision-1:
+In Revision-1 the volume for all futures is determined by the VIX and not by the
+individual futures price as before. The previous setting had the effect, that short-term
+futures were traded with higher volume than those with longer maturity. This makes the
+comparison of the different formulas more difficult. It is also against the intuition of
+traders.
+
+Acknowledgment:
+This work was inspired by personal communication with Euan Sinclair.
+
+Introduction:
+VIX futures are a different beast. The VIX can not be (practically) replicated.
+Additionally the VIX is mean-reverting. The VIX volatility is almost an order higher than
+the S&P-500 and explodes in a market-crash. Hence VIX futures (and options) behave
+very different to commodity- or stock-index futures.
+VIX futures trade in normal times in contango. If the VIX is currently at 17.0 and a VIX
+future is traded at 20.0, this does not mean that the VIX will tend towards 20.0 at expiry.
+The difference between the futures price and the underlying (the VIX) is called the basis.
+
+
+
+
+                 Electroniccopy
+               Electronic   copy available
+                                 available at:
+                                           at:https://ssrn.com/abstract=2379985
+                                               http://ssrn.com/abstract=2379985
+For most futures the basis is determined by the carry of the replication strategy. In case of
+stock-index futures the carry is easily determined by the risk-free-rate and the dividends.
+As VIX futures can not be replicated, there is no carry-relation. The basis has almost no
+predictive power (see [3] and the references herein). The basis does not reflect the
+statistical properties of the VIX. It is a risk premium which can be harvested.
+But the basis has predictive power for the subsequent futures-price. A (strong) positive
+basis predicts falling futures prices. It is hence profitable to go the VIX futures short.
+As with any risk-harvesting strategy, the goal is to find a good balance between risk and
+fun.
+
+The Daily-Roll:
+In [3] the daily-roll is defined as:
+
+R(t) = (VXF(t) – VIX(t))/TTS(t)                                (1)
+
+VXF … VIX Future Price.
+TTS … Trading Days till Settle (expiry).
+Note: TTS should be called TDS, but I follow the convention in [3].
+
+In other words, it is the basis divided by the number of trading days till expiry. The daily-
+roll is a (first-order) estimate of the daily expected win. It is first order, because it does
+not take the mean-reverting property of the VIX into account.
+The trading-strategy in [3] is based upon equation (1).
+
+The equation is for trading-purposes not without problems. A VXF at 33 and a VIX at 30
+is according (1) the same as a VXF at 18 and the VIX at 15. Obviously it is much more
+comfortable to trade the 18/15 than the 33/30 basis. The daily-roll in (1) does not
+differentiate between these two cases.
+
+Equation (2) addresses this problem. The basis is divided by the VIX level. This is in first
+order equal to the difference of the log-values. Hence one replaces also the TTS by
+log(TTS).
+
+R(t) = ((VXF(t)-VIX(t))/VIX(t))/log(TTS(t)                              (2)
+
+For a TTS of 30 trading days, equation (1) gives for the 33/30 and 18/15 a daily-roll of
+0.1. According to equation (2) the 33/30 basis gives a value of approx. 0.03. For 18/15
+the daily roll is about 0.06. This reflects certainly better the different circumstances. But
+one wants in fact something like a Roll-Sharpe-Ratio.
+
+R(t) = ((VXF(t) – VIX(t))/VXFVola(t))/TTS(t)                            (3)
+
+In (3) the basis is normalized by the volatility of the VIX future.
+
+VXFVola(t) = sqrt(sum(DeltaVXF(t-i)^2)/10) i=0...9                                 (4)
+
+
+
+
+                 Electroniccopy
+               Electronic   copy available
+                                 available at:
+                                           at:https://ssrn.com/abstract=2379985
+                                               http://ssrn.com/abstract=2379985
+If the futures price moved in the last 10 days a lot, the risk-adjusted-roll is smaller. If the
+movement is smooth, it is larger.
+Equations (1) to (4) were introduced in [2]. This study introduces two additional
+measures. They are variations of equation (3). One measures the volatility (normalization
+factor) in different ways.
+
+VXFVola(t) = sqrt(sum((Delta(logVXF(t-i))*100.0)^2))/10) (5)
+
+In (5) one sums up over the squared daily log-prices aka returns. Equation (4) adds the
+squared price differences. The returns are scaled up – as usual – with a factor of 100.0.
+An increase of the VXF from 30 to 31 is in (5) the same than a change from 15 to 15.5. In
+(4) the effect of the first increase is 4-times larger.
+
+VXFVola(t) = Daily-Realized-Volatility(t)        (6)
+
+Another possibility is to normalize with the daily realized volatility. The daily realized
+volatility is calculated with high-frequency data over the last 10 trading days. A whole
+gang of scientist has made up their career by writing about the realized HF-volatility. The
+classical one is the sum of 5-minutes intraday squared returns (see [4]). But there is the
+open question how to account for the overnight return (see [5]). The theoretical models
+assume a Brownian-motion. The Brownian is a diffusion model. But there are obviously
+also price jumps. For this paper the so called bi-power variation from [6] is used. Instead
+of squaring the 5-minutes returns, one multiplies the absolute value of the 5-minute return
+with the absolute return 5 minutes before. The effect of a single spike or the overnight
+return is damped but not completely filtered away. One has to scale the bivariate
+variation by PI/2 (1.570736). I have played around with the different realized volatility
+measures in the past. The bi-power variation looks best.
+
+Note: Realized Volatility is like the IQ. It is by definition what the measure measures.
+There is no clear-cut criterion which one is best (see also the title of [8]). This is the
+foundation of the academic Realized-Volatility business.
+
+In [3] the authors consider only the most nearby future. But according to the analysis in
+[1] and [2] it is sometimes advantageous to trade futures with longer maturity. These
+futures are less sensitive to sudden spikes of the VIX. With a similar daily roll (according
+to equation (1)) one would certainly prefer the longer maturity. The tail risk is much
+lower. Expression (1) favors short maturities. In expression (3) and its variants (5) and (6)
+the smoother behavior of longer maturities is taken into account.
+
+Graphic-1 shows the VIX and VIX futures prices from 2012-10-22 to 2013-01-14.
+Black is the VIX, yellow the Feb. 2013, green the March 2013 and blue the April 2013
+future. The peak at 2012-12-28 is the effect of the fiscal-cliff.
+
+
+
+
+                Electronic copy available at: https://ssrn.com/abstract=2379985
+         Graphic-1: VIX and VIX futures prices from 2012-10-12 to 2013-01-14
+             VIX (black), VXG13 (yellow) VXH13 (green), VXJ13 (blue).
+
+Graphic-2 shows the Daily-Roll for the same futures according equation (1).
+Graphic-3 for equation (2) and Graphic-4 for equation (3). The peak in Graphic-1 at
+2012-12-28 is the effect of the fiscal-cliff.
+
+Equation (1) favors short-term futures (the yellow line in Graphic-2). Equation (2)
+strongly favors long-term futures (blue line Graphic-3). Equation (3) is only slightly
+favorable to the long-term (Graphic-4). The same holds for equation (5). Equation (3)
+normalizes with the delta-Price, equation (5) with delta-log(Price). The most neutral
+measure is equation (6) in Graphics-6. Here one normalizes with the HF realized-
+volatility.
+
+Although the shapes are for the different measures quite similar, the values differ due to
+different normalization terms. The purpose of the different measures is: One wants to
+exploit the futures term-structure in the most efficient way.
+
+
+
+
+                Electronic copy available at: https://ssrn.com/abstract=2379985
+Graphic-2: Daily-Roll according equation (1) from 2012-10-12 to 2013-01-14
+
+
+
+
+Graphic-3: Daily-Roll according equation (2) from 2012-10-12 to 2013-01-14
+
+
+
+
+         Electronic copy available at: https://ssrn.com/abstract=2379985
+Graphic-4: Daily-Roll according equation (3) from 2012-10-12 to 2013-01-14
+
+
+
+
+Graphic-5: Daily-Roll according equation (5) from 2012-10-12 to 2013-01-14
+
+
+
+
+         Electronic copy available at: https://ssrn.com/abstract=2379985
+Graphic-6: Daily-Roll according equation (6) from 2012-10-12 to 2013-01-14
+
+
+
+
+         Electronic copy available at: https://ssrn.com/abstract=2379985
+The Trading Strategy:
+The trading-strategy in [3] is: One selects the most nearby future if the daily roll is above
+a given enter-threshold. The future is held a maximum of 5 trading days. It is sold back
+premature, if the daily-roll falls below the stop-threshold or if there are less than 10
+trading-days till maturity.
+The Calvados strategy modifies these rules. One selects from all the futures the best one
+(with the largest daily-roll). The maximum maturity is 93 trading days (about 4 months).
+For longer maturities volume is low and hence the bid-ask-spread increases. The best
+daily-roll must be as in the original paper larger than the enter-roll. But the position is
+hold as long as the daily-roll is above the stop-threshold. If the maturity is less than 10
+trading days, the future is sold back. The calculations assume an initial value of
+500.000$. This arbitrary value was used in previous working-papers. It is kept for
+comparison reasons. The calculation is for the last 4 years from 2010-01-12 to 2014-01-
+17.
+Note: In Revision-1 the calculation is simply extended to the most recent trading day.
+
+The volume is calculated by
+
+Volume = -(Index*Leverage*0.01)/(VIX*1000.0).
+
+The standard leverage is 60%. If the index is at 500.000, and the VIX is at 15, one would
+go 20 VIX Futures short.
+Note: In the original version, in place of the VIX the VIX futures price was used. This has
+the effect, that futures with shorter maturity are traded with higher volume than more
+distant ones. This makes the comparison of the strategies more difficult. It is also not very
+logical to trade more volatile futures with higher volume. The new formula generally
+increases the volume and hence also the profit and risk.
+
+There are 3 major adverse events in the considered time-range. The first is the flash crash
+at 2010-05-06. The next dangerous moment was the Japanese earthquake in March 2011.
+The third the crash in summer 2011.
+
+Graphic-7 shows the best result for equation (1). The best enter-roll is 0.07. One closes
+the position once the roll has fallen below 0.03. The final value is 2.968.300$ or
++496.7%. The VIX reaches its maximum in the summer 2011 crash at 2011-08-08 (red
+line in Graphic-7). The strategy performs during this crash well. It is since 2011-07-13 at
+the sideline. One watches also the flash-crash from this comfortable position. But one
+looses somewhat in the fore- and aftershocks. There is of course no premature warning
+for the Japanese earthquake. One looses the first day and closes the position. The largest
+relative drawdown is at 2012-05-18 with 29.7%. Nothing really dramatic happened at this
+time. The VIX just went up somewhat.
+
+
+
+
+                Electronic copy available at: https://ssrn.com/abstract=2379985
+        Graphic-7: Roll-Strategy with 0.07/0.03 Enter/Stop and Equation (1)
+
+
+
+
+Graphic-8: Hedged Roll-Strategy (yellow) with 0.07/0.03 Enter/Stop and Equation (1)
+
+
+
+
+             Electronic copy available at: https://ssrn.com/abstract=2379985
+Hedging the VIX futures with the SPX:
+The VIX and the SPX are highly negative correlated. The correlation is typically between
+-0.7 and -0.75. But the relation is non-linear. The VIX explodes in times of troubles.
+It is nevertheless tempting to hedge the VIX futures with SPX-eMinis. For this purpose
+the following equation is formulated in [3].
+
+DeltaVXF(t) = b0 + b1*SPXRet(t) + b2*SPXRet(t)*TTS(t)                               (7)
+
+DeltaVXF … Daily change of VIX future.
+SPXRet … Daily-Return of SPX.
+TTS      … Trading days till settlement.
+
+The daily-change of the VXF is according to equation (7) a linear function of the SPX
+return and the product of the SPX return and the trading days till settlement. One expects
+b1 to be negative. The parameter b2 should be positive. The parameter accounts for the
+smoother behavior of futures with longer maturity. The authors estimate b1 = -0.714 and
+b2 = 0.0127.
+From (7) they get the hedging-ratio HR as:
+
+HR(t) = (1000*(b1 * b2*TTS(t))/(0.01*SPX(t)*50)                                   (8)
+
+The factors 1000 and 50 are the $-multipliers for VIX- and the SPX-eMini futures. The
+factor 0.01 is necessary, because returns are usually calculated in percent. With the values
+estimated above, one typically hedges the most nearby future with one eMini-contract.
+
+The parameters b1 = -0.714 and b2 = 0.0127 make only sense if one restricts trading to
+short maturities. For maturities greater than 56 trading days the ratio gets positive. Hence
+one does not hedge anymore, but has double exposure to SPX crashes.
+For the Calvados the parameters were set in [2] to b1 = -0.6 and b2 = 0.006. Actually I
+calculated for each roll-threshold-pair and for equation (1) to (3) the optimal parameter
+setting for the win/max. drawdown ratio. The settings differed a lot. But such an
+optimization is cheating. One optimizes in hindsight. One can not estimate the parameters
+like in equation (6) because TTS() differs in a wide range and depends on the trading-
+path.
+Setting b1 = -0.6 and b2 = 0.006 is a reasonable and justifiable choice, which gives also
+acceptable results. The hedging ratio is for 17 trading days about equal to the original
+parameter setting. For shorter maturities the original parameter values have a (absolute)
+larger hedging ratio, for longer ones the adjusted values of -0.6/0.006.
+For this study I kept the original parameters from [2]. They worked reasonable in real
+trading-life. This study should also confirm (or reject) the original results. Graphic-8
+shows the performance of the hedged-strategy for equation (1) with the same enter- and
+stop-roll of 0.07/0.03 like in Graphic-7. The orange line is for comparison the
+performance of the naked strategy. The overall win reduces from 496.7% to 321.7%. But
+the max. relative drawdown at 2012-05-18 drops also from 29.7% to 18.0%. The hedged
+version has the same performance than the naked one with a leverage of 75%. The max.
+relative drawdown is with 22.3% still considerable smaller than the 29.7%.
+
+
+
+
+                Electronic copy available at: https://ssrn.com/abstract=2379985
+Graphics-9 and -10 show the result if one uses equation (2). The enter-roll is 0.06, the
+stop-roll 0.03. The performance is with 285.6% for the naked and 202.2% for the hedged
+strategy considerable lower. But the graph is also much smoother. The max. relative
+drawdown is 17.7% for the naked and 11.6% for the hedged version.
+
+Note: The results differed even more for the original volume calculation. Equation (1) favors
+the most nearby future, (2) the long maturities. One traded futures with lower volatility
+with lower volume. The volume effect is eliminated in the new setting. The different
+performance is now the sole result of the different volatility.
+
+The overall performance of (1) and (2) are the same, if one increases the leverage for the
+second case to 81%. The max. relative drawdown is for the 81% leverage 23.4%.
+Equation (2) has on a risk-adjusted basis an edge.
+
+
+
+
+           Graphic-9: Roll-Strategy with 0.06/0.03 Enter/Stop and Equation (2)
+
+
+
+
+                Electronic copy available at: https://ssrn.com/abstract=2379985
+ Graphic-10: Hedged Roll-Strategy (yellow) with 0.06/0.03 Enter/Stop and Equation (2)
+
+Graphic-11 and -12 show the result for equation (3) with an enter-roll of 0.12 and a stop-
+roll of 0.10. The thresholds are considerable larger than for equation (1) and (2). This
+reflects the simple fact, that the daily Delta-VXF is usually smaller than 1.0.
+
+The overall performance of the naked version is 460.3% with a max. relative drawdown
+of 16.7% at 2010-07-16. The strategy suffered somewhat in the aftershocks of the flash-
+crash. The performance is almost as good as for equation (1), with a much lower
+drawdown. For the hedged-version one gets a performance of 273.7% and a max. relative
+drawdown of 11.3% at 2010-07-16. Equation (3) has on a risk-adjusted base a clear edge
+over equation (1). One has only slightly to increase the leverage of equation (3) to get the
+same (or better) performance.
+
+The superior result can be relative easily explained. The basis decreases in times of
+(forthcoming) troubles. At the same time the volatility/swings of the futures go up. This
+decreases the measure further. It reacts faster than the first 2 measures. But this is also the
+reason for the problems in the flash-crash aftershocks. Equation (3) suffers somewhat
+from whipsaw effects.
+
+
+
+
+                Electronic copy available at: https://ssrn.com/abstract=2379985
+        Graphic-11: Roll-Strategy with 0.12/0.10 Enter/Stop and Equation (3)
+
+
+
+
+Graphic-12: Hedged Roll-Strategy (yellow) with 0.12/0.10 Enter/Stop and Equation (3)
+
+
+
+
+             Electronic copy available at: https://ssrn.com/abstract=2379985
+Graphic-13 shows the performance of equation (5). One normalizes with the daily-return.
+The enter-roll is 0.025, the stop-roll 0.01. The values are smaller than for equation (1),
+because the daily-return of VIX futures is usually larger than 1%. The overall
+performance is for the naked version 452.2% with a maximum relative drawdown of
+28.3% at 2012-06-01. For the hedged version (not shown) it is 267.2% with a max.
+relative drawdown of 16.3%. This is in both dimensions – return and drawdown - worse
+than equation (3).
+
+
+
+
+         Graphic-13: Roll-Strategy with 0.025/0.01 Enter/Stop and Equation (5)
+
+Graphic-14 shows the performance of equation (6). One normalizes with the realized
+volatility of the VIX future. The enter-roll is 0.06, the stop-roll 0.03. This is with an
+overall performance for the naked version of 334.7% and a max. relative drawdown of
+27.4% clearly the worst strategy. Using the additional intraday information does not pay
+off. This result is somewhat surprising. I expected at least the same result than with
+equation (6). But I noticed also in previous work, that using HF realized volatility does
+not improve trading performance. This is in strong contrast to claims of the HF realized
+volatility gang.
+
+
+
+
+               Electronic copy available at: https://ssrn.com/abstract=2379985
+          Graphic-14: Roll-Strategy with 0.06/0.03 Enter/Stop and Equation (6)
+
+Long-Roll-Trading:
+The basis is in times of troubles inverted. The spot is above the futures. This reflects the
+mean-reverting behavior of the VIX. One can turn the trading position around. If the
+daily-roll is below a given threshold one goes the futures long. The strategy is the same
+than above, only the sign of the volume and the thresholds are inverted. This reversal was
+proposed in [3]. The results in [2] were not really convincing. The reversal happens only
+in high VIX regimes. The strategy is risky and one sails against the wind. The long-roll
+was hence not traded in the past and was also in the current simulations clearly worse
+than the short strategy. It is best to stay in turbulent times on the sideline.
+
+Filtering the Basis:
+In recent working papers ([7], [8]) the implied volatility term structure IVTS was used as
+a trading signal. The performance is considerable improved by filtering the IVTS with a
+median-5 filter. The purpose is to filter out short spikes. I tried a median-3 and a median-
+5 filter here too. But it does not work. The sawtooth effect which hampers the strategies
+in [6] and [7] does not happen here in the same amount. Filtering has only a slight edge
+for equation (3) in the flash-crash aftershocks. But overall it is clearly worse. One is with
+the filter too late in and especially too late out of the market.
+
+
+
+
+                Electronic copy available at: https://ssrn.com/abstract=2379985
+Conclusion:
+The best strategy is Graphic-12. Using the normalized roll equation (3) for calculating
+the daily-roll and setting the enter- and stop-roll to 0.12/0.10. This is the same result
+than in [2]. Hedging does not eliminate the risk, but it considerable smooths the
+performance. One can either trade with reduced risk or increase the leverage to get the
+same performance (with still reduced risk) than the naked version. Hedging pays off.
+This is also inline with the previous results and trading experience. This strategy is
+dubbed the Calvados 2.0.
+
+Implementing the Calvados 2.0 is quite straightforward. The short eMinis are readjusted
+only infrequently. The adjustment is relative insensitive to the movement of the market. It
+depends primarily on the time-decay. The historic simulation does not account for
+trading-costs. But there are only a few transactions involved. Incorporating trading costs
+is usually a (complicated) guesswork. It would certainly not change the overall picture. In
+fact the major problem of any historic simulation is: One drives a car by looking in the
+rear mirror.
+
+The Calvados 2.0 is not a free lunch. But it is certainly an interesting extension of the
+trading toolbox.
+
+References:
+[1]: Ch. Donninger: Selling Volatility Insurance: The Sidre- and Most-Strategy.
+Sibyl-Working-Paper, April 2012, Revision-1: 2012-08-13
+[2]: Ch. Donninger: VIX-Futures Basis Trading: The Calvados-Strategy.
+Sibyl-Working-Paper, Feb 2013
+[3]: D. Simon, J. Campasano: The VIX Futures Basis: Evidence and Trading Strategies.
+June 27, 2012
+[4] T. Andersen, T. Bollerslev, F. Diebold, H. Ebens: The Distribution of Realized Stock
+Return Volatility. Journal of Financial Economics, 61, 43-76, 2001.
+[5] K. Ahoniemi, M. Lanne: Overnight Stock Returns and Realized Volatility. March 19,
+2013.
+[6] T. Andersen, T. Bollerslev, F. Diebold: Some Like it Smooth, and Some Like it
+Rough: Untangling Continuous and Jump Components in Measuring, Modeling, and
+Forecasting Asset Return Volatility. Sep. 2003.
+[7] Ch. Donninger: Improving the S&P Dynamic VIX Futures Index: The Mojito 3.0
+Strategy, Sibyl-Working-Paper, Dec 2013
+[8] Ch. Donninger: How to beat the market with the Implied Volatility Term Structure:
+The HeroRATs Strategy. Sibyl-Working-Paper, Dec. 2013
+
+
+
+
+                Electronic copy available at: https://ssrn.com/abstract=2379985
+

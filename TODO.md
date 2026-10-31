@@ -228,10 +228,35 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **FX carry/trend multi-strategy — NEEDS SOURCE CLARIFICATION / DATA (SSRN 3322717; reviewed 2026-10-30).**
+  Personal-account research only, low priority. Merit: author reports Sharpe 0.88 versus 0.55 for its best single
+  signal across eight FX futures; not independently reproduced or established after executable costs.
+  Source prose misidentifies the winning allocator; performance-pruning dates, exact signal/solver definitions,
+  execution clocks and roll/collateral accounting are unresolved. Only 6E of the source futures is owned.
+  Smallest next check when matching evidence arrives: author rules/code and one dated futures/yield/rebalance/roll
+  month reconciled before any design test. No invented NQ or daily-flat variant, return trial, Apex placement or allocation.
+  [Review](agents/codex/results/fx_multistrategy_3322717.md) · [Evidence](agents/codex/evidence/fx_multistrategy_3322717.md).
+
 **Standing rule:** when a reviewed strategy has documented merits but its results or implementation are not yet verified,
 add it here for later review. Record the merit, what is missing, the smallest next check and the source review; merge
 duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.
 A queue entry does not add it to a trading plan or start a backtest; review when prerequisites arrive or the user prioritizes it.
+
+- [ ] **Calvados 2.0 preferred VX + ES hedge — conditional personal research / unverified (2026-10-30).**
+  Merit: specific dated-volatility basis normalization and an equity hedge; author claims +273.7% gross with 11.3% DD
+  in selected 2010–14 leveraged simulations. These are not verified current returns. The separately registered naked
+  component FAILED 2018–22: one VX, 58 trades, gross −$2,980 / net −$9,360, marked DD $18,385; no later/account stages.
+  Do not revive that component or claim its failure falsifies the untested hedge. Preferred-source work needs a verified
+  dated ES chain/roll cashflows, additive hedge-equation correction, explicit adjustment clock and actual integer sizes;
+  one VX often maps to less than one ES, and prelaunch MES/VXM histories must not be invented. Smallest next check:
+  authenticate vendor/price type and clock in the newly found public quarterly ES archive, audit complete paired prices,
+  then freeze the hedge protocol before a separately committed test. Three full samples were inspected; this is an
+  actual data lead, not a claim that no free ES chain exists. [ES gate](agents/codex/inputs/calvados_2379985_20261030/es_hedge_gate/es_hedge_feasibility.md).
+  Multiday VX is ineligible
+  for all four Apex homes as written; any personal addition/replacement must earn historical validation and native
+  account/margin comparison. [Review/results](agents/codex/results/calvados_2379985_20261030.md) ·
+  [Evidence](agents/codex/evidence/calvados_2379985_20261030.md) ·
+  [Acquisition](agents/codex/inputs/calvados_2379985_20261030/acquisition.md).
 
 - [ ] **Nocturne — verify archived assumed replay only; NOT ADMITTED (2026-10-30).**
   Merit: user-authorized R²/target/reentry assumptions produce1085design trades,+$8.75/MNQ,PF1.38,

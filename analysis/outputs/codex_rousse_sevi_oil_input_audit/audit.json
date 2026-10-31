@@ -1,0 +1,226 @@
+{
+  "source_commit": "eac908f7685b0706a6d4491287106f43810e9ce9",
+  "paper_sha256": "c1ab7b57b5ec30d1fe5ecf14f38a92797951e3a5ec24fb4b70ce305ba0270544",
+  "price_schemas": [
+    {
+      "path": "data/CL_1min_2017.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "rows": 27124,
+      "first_date": 20171130,
+      "last_date": 20171229,
+      "has_trade_sequence": false,
+      "has_survey_panel": false
+    },
+    {
+      "path": "data/CL_1min_2018.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "rows": 351624,
+      "first_date": 20180101,
+      "last_date": 20181231,
+      "has_trade_sequence": false,
+      "has_survey_panel": false
+    },
+    {
+      "path": "data/CL_1min_2019.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "rows": 348690,
+      "first_date": 20190101,
+      "last_date": 20191231,
+      "has_trade_sequence": false,
+      "has_survey_panel": false
+    },
+    {
+      "path": "data/CL_1min_2020.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "rows": 352612,
+      "first_date": 20200101,
+      "last_date": 20201231,
+      "has_trade_sequence": false,
+      "has_survey_panel": false
+    },
+    {
+      "path": "data/CL_1min_2021.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "rows": 353101,
+      "first_date": 20210103,
+      "last_date": 20211231,
+      "has_trade_sequence": false,
+      "has_survey_panel": false
+    },
+    {
+      "path": "data/CL_1min_2022.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "rows": 353467,
+      "first_date": 20220102,
+      "last_date": 20221230,
+      "has_trade_sequence": false,
+      "has_survey_panel": false
+    },
+    {
+      "path": "data/CL_1min_2023.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "rows": 350050,
+      "first_date": 20230102,
+      "last_date": 20231229,
+      "has_trade_sequence": false,
+      "has_survey_panel": false
+    },
+    {
+      "path": "data/CL_1min_2024.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "rows": 349062,
+      "first_date": 20240101,
+      "last_date": 20241231,
+      "has_trade_sequence": false,
+      "has_survey_panel": false
+    },
+    {
+      "path": "data/CL_1min_2025.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "rows": 345585,
+      "first_date": 20250101,
+      "last_date": 20251231,
+      "has_trade_sequence": false,
+      "has_survey_panel": false
+    },
+    {
+      "path": "data/CL_1min_2026.csv",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "rows": 275618,
+      "first_date": 20260101,
+      "last_date": 20261013,
+      "has_trade_sequence": false,
+      "has_survey_panel": false
+    }
+  ],
+  "data_name_matches_for_survey": [],
+  "component_file": "analysis/outputs/codex_eia_inventory_input_gate/design_components.csv",
+  "component_columns": [
+    "source_key",
+    "release_date",
+    "week_ending",
+    "crude_ex_spr_change_mb",
+    "gasoline_change_mb",
+    "distillate_change_mb",
+    "source_filename",
+    "converted_source_sha256",
+    "canonical_issue_url",
+    "canonical_highlights_url",
+    "captured_utc",
+    "source_quantity_trace",
+    "raw_pdf_downloaded",
+    "actual_release_clock_verified",
+    "immutable_first_publication_verified"
+  ],
+  "component_rows": 165,
+  "verified_release_clock_rows": 0,
+  "verified_first_publication_rows": 0,
+  "author_sample": {
+    "announcements": 402,
+    "positive_3sigma": 43,
+    "negative_3sigma": 47,
+    "first": "2007-02-07",
+    "last": "2014-10-22"
+  },
+  "power_assumptions": {
+    "design_weeks": 260,
+    "unchanged_positive_frequency": 0.10696517412935323,
+    "expected_positive_events": 27.81094527363184,
+    "hypothetical_trade_sd_pct": 0.5,
+    "t2_required_net_mean_pct": 0.1896234853324459
+  },
+  "economic_trials": 0,
+  "price_returns_read": false,
+  "verdict": "NEEDS DATA for exact replication; DON'T TEST hindsight-conditioned pre-release rule",
+  "missing": [
+    "point-in-time Bloomberg individual forecasts/median and cross-sectional dispersion",
+    "first-publication matching actuals and exceptional release/receipt clocks",
+    "same-contract sequenced CL transactions for the source tick-rule OI",
+    "a causal, frozen trading rule with adequate power and native costs"
+  ],
+  "limitations": [
+    "Schema and date audit only; raw CL prices were not loaded or tested.",
+    "Filename discovery cannot establish the absence of differently named inputs.",
+    "Author event counts and assumed SD are not measured 2018-22 trade results."
+  ]
+}

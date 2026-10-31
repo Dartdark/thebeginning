@@ -174,6 +174,18 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   from completed-ticket paths rather than infer a next-date fill or drop all same-bar trades. The general
   builder still needs that upstream repair. No live/plan change or standalone strategy promotion follows.
 
+- Leung et al. (2015), SSRN 2695405 ([full-source review](results/leung_futures_2015_review.md)):
+  mean-reverting spot alone does not establish positive futures drift; separate historical P estimates from Q
+  curve calibration. The paper's Eq2.12 inequality reverses when mu_Q < mu_P; a deterministic Ito check using
+  its Figure4b parameters confirms the sign qualification. Its printed stopping generators also use Q drift
+  despite P-valued objectives; absent author code, the numerical implementation remains unverified.
+  Two fitted VIX curves and numerical stopping boundaries are not historical net trading returns. Its roll
+  yield is a price-difference decomposition, not automatically a percentage return or a roll-date cash payment.
+  Translate price-value objectives into actual futures margin/cash and native costs before account claims.
+  Evidence: full uploaded 2015 PDF and deterministic arithmetic only; no return test or live change.
+  Limits/next check: no owned dated VX/spot curve panel; a separate justified project would first reconcile
+  one timestamped curve, physical/pricing calibration and a cash ledger. No current NQ/ES/Apex allocation earned.
+
 ### E10 — Liquidity compensation, turnover and costs
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
@@ -618,6 +630,16 @@ Related: E09 cash/cost reconciliation, E15 tail risk, E35 fill-anchored exits an
   change alters outcomes and must pass the existing preregistration/trial/account gates.
 - Status: risk/execution diagnostic reference; no standalone candidate, new return test or plan/exit change.
 
+- Follow-up: Maymin and Maymin, [SSRN 1896146](https://ssrn.com/abstract=1896146),
+  [full-source review](results/optimal_indicator_framework_1896146_review.md), retained 2026-10-30.
+  A known conditional mean gives a maximum-gross-return direction rule under a notional cap; conditional
+  first/second moments give a different information-ratio sizing rule. These are theoretical benchmarks, not
+  estimated net execution savings. The source explicitly allows easier or cheaper execution to favor another rule.
+  Turnover costs depend on the previous position; bounded notional does not model Apex's intraday floor or payouts.
+  Before applying this to a separately justified predictor, freeze availability/label clocks, past-only estimates,
+  turnover, integer quantities and cost accounting; compare net account paths against the unchanged base.
+  No predictor, return trial, size change or implemented execution change follows from this review.
+
 ### E38 — Commodity stop overlays, exposure redistribution and return/NAV accounting
 
 Source: Hossein Rad, December 2012 EDHEC MSc thesis, SSRN 2614241; uploaded full 56-page PDF reviewed 2026-10-31.
@@ -725,7 +747,144 @@ Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, sha
 Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
 Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E40-E42 during this handoff merge; existing Codex E29-E38 identifiers are retained.
 
-### E44 — Dynamic pair models are not self-financing contract ledgers
+### E44 — Weekly COT inventory changes do not identify executable order flow
+
+Source: Kaul, Naranjo and Stefanescu, [SSRN 2311859](https://ssrn.com/abstract=2311859),
+[full-PDF review](results/ssrn_2311859_review_20261030.md), retained 2026-10-30, printed pp. 7–8, 13–18, 21, 29.
+- Use: distinguish changes in group long-minus-short inventories from signed transactions or actual liquidity demand.
+- Evidence: author regressions relate Tuesday-to-Tuesday commodity returns to same-period and lagged position changes.
+  Friday publication prevents treating same-week positioning as a pretrade signal; even the lagged week partly elapses
+  before publication. Historical semi-monthly observations before 1991 were backfilled, not necessarily then public.
+- Limits: no native orders, spread/fill measurement, causal identification or demonstrated net trading returns.
+  Energy is an exception to several pooled findings; the sample excludes NQ/ES. Price-impact coefficients are standardized,
+  not dollar savings or an instruction to follow/fade speculators.
+- Next check only for a separately justified proposal: exact publication/vintage clocks, native contract identity and
+  a prespecified executable window, with costs and ordinary momentum/reversal controls before return selection.
+- Status: source/measurement reference; no new economic trial, trading grade or plan change.
+
+### E45 — Cointegrated log prices do not specify an executable futures hedge
+
+Source/review + date: Ungever (2015), [SSRN2896370](https://ssrn.com/abstract=2896370),
+user-uploaded full text; [review](results/agri_cointegration_ssrn2896370.md), 2026-10-30.
+Execution question and useful lesson: translate a statistical log-price spread into
+explicit native-contract quantities, multipliers and roll/cash accounting. Equal
+dollar legs and cointegration coefficients do not automatically imply identical
+portfolios or market neutrality. Resolve trade direction before implementing it.
+Evidence: source inspection, not return replication. Upper-bound prose on p.30
+shorts cotton/buys coffee; the profit equation on p.31 is long cotton/short coffee.
+Costs are ignored (p.27); only two/three completed trading-period trades support
+the reported annualizations. No independently verified execution savings or alpha.
+Market/platform limits: Bloomberg daily rolled agricultural futures, 2004–15;
+trading holds average 159/142 days. Not intraday Apex or NQ/ES evidence.
+Data/prerequisites: timestamped native-contract prices, unambiguous leg direction,
+integer hedge and rebalance rule, both-leg and roll costs, capital/margin definition,
+and per-trade ledger. Matching local price histories were not found.
+Smallest justified next check: only reconsider with corrected source specification
+and stronger independent net evidence; no proxy or intraday conversion is earned.
+Status: retain accounting/implementation caution; source-defined strategy rejected
+at evidence gate, zero return trials, no promising-candidate or trading-plan change.
+
+### E46 — Spot market power: endogenous supply incentives and hidden participant identity
+
+Source: Muermann and Shore, *Spot Market Power and Futures Market Trading*, March 2005, SSRN 681202;
+uploaded 36-page full text. [Review](results/spot_market_power_681202_20261030.md),
+[evidence decision](evidence/spot_market_power_681202_20261030.md). Related: E09 complete leg/cash accounting,
+E10 liquidity compensation, E11 information clocks and E29 signed participant positions.
+- Use: distinguish profits earned by controlling physical supply from profits available to an outside observer.
+  Futures positions can change the supplier's subsequent optimal spot action; market makers anticipate that incentive.
+  Hidden participant identity matters, so aggregate volume or commercial positioning is not an identified producer signal.
+- Evidence: analytical equilibria and source inspection only. In the concealed-position model, the producer randomizes
+  direction; the separate non-producer model earns on an earlier derivative while accepting losses on later price-moving
+  trades. Retain both legs and exact contract payoffs. No empirical return, measured price impact or execution saving.
+- Limits: stylized linear demand, competitive risk-neutral market makers, specified inference/beliefs and no effective
+  storage; Section 4's initial contract pays on an intermediate futures price. No calibrated contemporary NQ/ES/CL rule.
+  The complete-hedging impossibility concerns price-contingent contracts in the model; demand-contingent contracts
+  provide an explicit complete-hedging exception. Historical oil-liquidity remarks are not current CL observations.
+- Data/next check only for a separately justified event: legally observable, as-of actor-linked positions, physical
+  supply/inventory decisions, contract-stage payoffs, contemporaneous quotes and native costs; audit availability and
+  directional identification before returns. Our aggregate COT and continuous OHLCV do not supply these states.
+- Status: execution/market-structure reference; no new return trial, strategy queue entry, allocation or live change.
+
+### E47 — Obizhaeva–Wang: replenishing depth and large-order execution
+
+Source: [SSRN 666541](https://ssrn.com/abstract=666541), uploaded June 8, 2005 draft,
+[review and data gate](results/ssrn666541.md), [model arithmetic](../../analysis/outputs/codex_ssrn666541/model_arithmetic.json).
+- Use: distinguish standing depth from replenishment. Under the paper's risk-neutral
+  constant-depth/exponential-recovery model, an optimal fixed-parent-order schedule
+  combines initial/final blocks with continuous middle trading; risk aversion changes it.
+- Evidence: source's analytical result. Our arithmetic reproduces Table 2's rho T=2
+  savings of 4.32% and 11.92% under two permanent-impact assumptions. These are modeled
+  impact-cost reductions, excluding spread/commissions, not returns or measured CME savings.
+- Limits: given parent direction/quantity, simplified exogenous book dynamics, no new
+  empirical alpha test or NQ calibration. Owned one-minute OF summaries do not identify
+  event-level replenishment, parent orders or queue outcomes. Small integer micro orders
+  can lose signal value by waiting; protective stops are not discretionary parent orders.
+- Next check: establish material self-impact using native fills and synchronized quotes/depth
+  before testing any slicing schedule; then include latency, noncompletion and opportunity cost.
+- Status: execution reference only. Zero strategy-return trials; no plan or live changes.
+
+
+### E49 — EIA surprise labels, tick-rule signs and announcement execution clocks
+
+Source/review + date: Rousse and Sévi, [SSRN 2874907](https://ssrn.com/abstract=2874907), uploaded 2016 working paper;
+[full review](results/rousse_sevi_oil_2874907.md), 2026-10-30.
+- Use: verify information availability and order-flow sign before deriving an event trade from a conditional chart.
+  A surprise classification using the released actual cannot select a pre-release entry. Window OI is known after
+  its tape arrives; a post-release strategy must enter after public data receipt and misses the initial jump.
+- Evidence: source claims 402 inventory announcements in 2007–14, with 43 positive 3σ surprises and about −0.25%
+  preceding drift. Table 3's positive-surprise OI coefficient is −3.529 (t=−3.154); this is not a strategy-return t.
+  Abstract/body buyer wording conflicts with OI=(B−S)/(B+S), negative coefficients and the selling conclusion.
+- Method limits: second-level volume-weighted transaction prices followed by tick-rule signs are not reproducible
+  from minute OHLCV. Normalized imbalance alone does not measure dollar demand or prove information leakage.
+  Forecast cross-sectional SD cannot be replaced by historical SD of inventory changes.
+- Prerequisites: survey vintages/median/dispersion, matching first-release actuals, exceptional event/receipt clocks,
+  sequenced same-contract tape, native CL/MCL costs and a causal rule. The strongest window is tied to the sample's
+  former pit opening; persistence after the source-noted 2015 pit closure is unverified.
+- Next check only with matching new inputs: one-event series/clock/tick-sign reconciliation, then no-return power
+  census. Old EIA price-only follow/fade studies are already negative; do not substitute them for a replication.
+- Status: execution/research reference; no new economic trials, net-return demonstration or allocation.
+
+### E48 — Slow FX signal diversification needs roll, cash and selection-clock reconciliation
+
+Source/review: Srivastava et al., *A Multi Strategy Approach to Trading Foreign Exchange Futures*, January 25, 2019,
+SSRN 3322717; [uploaded-paper review](results/fx_multistrategy_3322717.md).
+- Useful lesson: walk-forward allocation weights do not establish past-only selection of the strategies being weighted.
+  Risk targeting and more futures symbols also do not eliminate shared USD exposure or executable roll/collateral costs.
+- Evidence: author tables report single-signal Sharpe 0.55, shared-weight best 0.67, currency-specific best 0.88;
+  source-table audit only, no independent return replication. The narrative calls a different optimizer best despite
+  Table 4's 0.35 versus 0.67; source settings/pruning need clarification before implementing the claimed winner.
+- Limits: daily multi-day FX allocations, monthly combination rebalancing; no measured fill savings or NQ/ES edge.
+  No disclosed executable cost decomposition, native integer sizing or Apex daily-flat protocol.
+- Next check: source clarification and one dated formation/rebalance/roll month with futures cash/fees and
+  yield availability reconciled. Owned 6E alone does not supply the eight-currency panel.
+- Status: methodological/accounting reference; personal research lead parked, no return test or live change.
+
+### E48 — Dated volatility futures: maturity clocks, RMS units and signed hedges
+
+Source: Donninger, *VIX Futures Basis Trading: The Calvados-Strategy 2.0*, January 2014 Rev.1, SSRN2379985.
+[Review and completed component test](results/calvados_2379985_20261030.md),
+[frozen protocol](plans/calvados_2379985_20261030.md). Related: E09 contract/cash accounting, E12 volatility
+measurement, E15 overnight tails, E19 session clocks, E30 paired-leg execution.
+- Use: preserve individual expiry identities and actual trading-day maturity. A generic NYSE calendar omits the
+  shortened December 5, 2018 VX session; Wednesday-only expiry rules miss holiday-shifted Tuesday contracts.
+  VX settlement reference moved 15:15 to 15:00 CT on October 26, 2020. A settlement-based feature becomes available
+  after confirmation, not at the start of its calculation interval; a next-session daily Open is only a fill reference.
+- Units: the source RMS10 is the root mean square of ten same-contract daily price changes, without demeaning.
+  It is not sample SD or return volatility. Basis convergence compensates short-volatility risk; it is not cash carry
+  arbitrage. VX outright tick is 0.05 points/$50 at the $1,000 multiplier, distinct from spread ticks or NQ costs.
+- Hedge: source Eq7 implies `b1+b2*TTS`; printed Eq8 multiplies the coefficients and contradicts its own sign
+  discussion. For n short VX, signed ES quantity is `n*1000*(b1+b2*TTS)/(0.01*SPX*50)`, ordinarily negative.
+  Integer rounding, contract rolls and adjustment clocks must be explicit; a linear hedge does not remove jump risk.
+- Evidence: full-source and PDF-image inspection, primary Cboe clock/holiday notices, signed-unit synthetic checks,
+  and an audited fixed-one-VX 2018–22 historical component test. That component LOST $9,360 net on 58 trades,
+  with $18,385 settlement-mark drawdown. This negative finding does not test the preferred ES hedge.
+- Limits/next check: raw dated-price provenance, executable opening quotes, intraday variation margin, actual hedge
+  contracts/rolls and native integer quantities remain necessary for a separate hedged implementation. Median smoothing
+  delayed entry/exit and worsened source results; do not assume smoother indicators create better fills.
+- Status: execution/accounting reference retained; naked component rejected, preferred hedge unverified. No execution
+  saving, plan placement, trading, broker or live-policy change is claimed.
+
+### E50 — Dynamic pair models are not self-financing contract ledgers
 
 Source: Yang, Huang and Chen, unreviewed 38-page preprint SSRN 5017127, indexed posting 2024-11-11;
 owned full PDF reviewed 2026-10-31. [Saved review](results/hierarchical_pairs_review_20261031.md).

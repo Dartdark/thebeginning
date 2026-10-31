@@ -1,0 +1,1228 @@
+{
+  "scope": "Metadata only; no candidate signals or returns",
+  "calendar": "pandas_market_calendars CFE5.5.0 plus primary2018-12-05VXsession exception; other official historical verification still required; times ignored because its CFE hours are outdated",
+  "tts_convention": "Count valid CFE dates strictly after observation through expiry inclusive; this audit freezes a count convention, not source exactness",
+  "files": 66,
+  "design_calendar_days": 1260,
+  "first_design": "2018-01-02",
+  "last_design": "2022-12-30",
+  "design_days_missing_all_contracts": [],
+  "spot_missing_design_dates": [
+    "2018-12-05"
+  ],
+  "spot_extra_design_dates": [
+    "2022-05-30",
+    "2022-06-20",
+    "2022-07-04",
+    "2022-09-05",
+    "2022-11-24"
+  ],
+  "eligible_rows": 4740,
+  "eligible_nonpositive_open": 0,
+  "eligible_nonpositive_settle": 0,
+  "eligible_high_below_low": 0,
+  "eligible_zero_volume": 0,
+  "duplicate_contract_date_rows": 0,
+  "missing_expected_eligible": [],
+  "candidate_counts": {
+    "4": 960,
+    "3": 300
+  },
+  "rms10_warmup_missing": [],
+  "rms10_warmup_nonpositive": [],
+  "next_session_open_missing": [],
+  "next_session_open_nonpositive": [],
+  "lifecycle_missing_count": 0,
+  "files_with_lifecycle_gaps": [],
+  "files_with_off_calendar_rows": [],
+  "file_summaries": [
+    {
+      "file": "VX_2017-12-20.csv",
+      "records": 188,
+      "first": "2017-03-27",
+      "last": "2017-12-20",
+      "expiry": "2017-12-20",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 0,
+      "nonpositive_close": 0,
+      "high_below_low": 0,
+      "zero_volume": 0,
+      "futures_labels": [
+        "Z (Dec 2017)"
+      ]
+    },
+    {
+      "file": "VX_2018-01-17.csv",
+      "records": 186,
+      "first": "2017-04-24",
+      "last": "2018-01-17",
+      "expiry": "2018-01-17",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "F (Jan 2018)"
+      ]
+    },
+    {
+      "file": "VX_2018-02-14.csv",
+      "records": 186,
+      "first": "2017-05-22",
+      "last": "2018-02-14",
+      "expiry": "2018-02-14",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "G (Feb 2018)"
+      ]
+    },
+    {
+      "file": "VX_2018-03-21.csv",
+      "records": 186,
+      "first": "2017-06-26",
+      "last": "2018-03-21",
+      "expiry": "2018-03-21",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 0,
+      "zero_volume": 1,
+      "futures_labels": [
+        "H (Mar 2018)"
+      ]
+    },
+    {
+      "file": "VX_2018-04-18.csv",
+      "records": 186,
+      "first": "2017-07-24",
+      "last": "2018-04-18",
+      "expiry": "2018-04-18",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "J (Apr 2018)"
+      ]
+    },
+    {
+      "file": "VX_2018-05-16.csv",
+      "records": 186,
+      "first": "2017-08-21",
+      "last": "2018-05-16",
+      "expiry": "2018-05-16",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "K (May 2018)"
+      ]
+    },
+    {
+      "file": "VX_2018-06-20.csv",
+      "records": 186,
+      "first": "2017-09-25",
+      "last": "2018-06-20",
+      "expiry": "2018-06-20",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "M (Jun 2018)"
+      ]
+    },
+    {
+      "file": "VX_2018-07-18.csv",
+      "records": 185,
+      "first": "2017-10-23",
+      "last": "2018-07-18",
+      "expiry": "2018-07-18",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 0,
+      "zero_volume": 1,
+      "futures_labels": [
+        "N (Jul 2018)"
+      ]
+    },
+    {
+      "file": "VX_2018-08-22.csv",
+      "records": 190,
+      "first": "2017-11-20",
+      "last": "2018-08-22",
+      "expiry": "2018-08-22",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 0,
+      "nonpositive_close": 0,
+      "high_below_low": 0,
+      "zero_volume": 0,
+      "futures_labels": [
+        "Q (Aug 2018)"
+      ]
+    },
+    {
+      "file": "VX_2018-09-19.csv",
+      "records": 185,
+      "first": "2017-12-26",
+      "last": "2018-09-19",
+      "expiry": "2018-09-19",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 2,
+      "nonpositive_close": 2,
+      "high_below_low": 2,
+      "zero_volume": 2,
+      "futures_labels": [
+        "U (Sep 2018)"
+      ]
+    },
+    {
+      "file": "VX_2018-10-17.csv",
+      "records": 188,
+      "first": "2018-01-22",
+      "last": "2018-10-17",
+      "expiry": "2018-10-17",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 0,
+      "zero_volume": 1,
+      "futures_labels": [
+        "V (Oct 2018)"
+      ]
+    },
+    {
+      "file": "VX_2018-11-21.csv",
+      "records": 193,
+      "first": "2018-02-20",
+      "last": "2018-11-21",
+      "expiry": "2018-11-21",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 0,
+      "zero_volume": 1,
+      "futures_labels": [
+        "X (Nov 2018)"
+      ]
+    },
+    {
+      "file": "VX_2018-12-19.csv",
+      "records": 188,
+      "first": "2018-03-26",
+      "last": "2018-12-19",
+      "expiry": "2018-12-19",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "Z (Dec 2018)"
+      ]
+    },
+    {
+      "file": "VX_2019-01-16.csv",
+      "records": 187,
+      "first": "2018-04-23",
+      "last": "2019-01-16",
+      "expiry": "2019-01-16",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 3,
+      "nonpositive_close": 3,
+      "high_below_low": 2,
+      "zero_volume": 3,
+      "futures_labels": [
+        "F (Jan 2019)"
+      ]
+    },
+    {
+      "file": "VX_2019-02-13.csv",
+      "records": 186,
+      "first": "2018-05-21",
+      "last": "2019-02-13",
+      "expiry": "2019-02-13",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 0,
+      "nonpositive_close": 0,
+      "high_below_low": 0,
+      "zero_volume": 0,
+      "futures_labels": [
+        "G (Feb 2019)"
+      ]
+    },
+    {
+      "file": "VX_2019-03-19.csv",
+      "records": 185,
+      "first": "2018-06-25",
+      "last": "2019-03-19",
+      "expiry": "2019-03-19",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 0,
+      "nonpositive_close": 0,
+      "high_below_low": 0,
+      "zero_volume": 0,
+      "futures_labels": [
+        "H (Mar 2019)"
+      ]
+    },
+    {
+      "file": "VX_2019-04-17.csv",
+      "records": 187,
+      "first": "2018-07-23",
+      "last": "2019-04-17",
+      "expiry": "2019-04-17",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 0,
+      "nonpositive_close": 0,
+      "high_below_low": 0,
+      "zero_volume": 0,
+      "futures_labels": [
+        "J (Apr 2019)"
+      ]
+    },
+    {
+      "file": "VX_2019-05-22.csv",
+      "records": 186,
+      "first": "2018-08-27",
+      "last": "2019-05-22",
+      "expiry": "2019-05-22",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 0,
+      "nonpositive_close": 0,
+      "high_below_low": 0,
+      "zero_volume": 0,
+      "futures_labels": [
+        "K (May 2019)"
+      ]
+    },
+    {
+      "file": "VX_2019-06-19.csv",
+      "records": 186,
+      "first": "2018-09-24",
+      "last": "2019-06-19",
+      "expiry": "2019-06-19",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 2,
+      "nonpositive_close": 2,
+      "high_below_low": 2,
+      "zero_volume": 2,
+      "futures_labels": [
+        "M (Jun 2019)"
+      ]
+    },
+    {
+      "file": "VX_2019-07-17.csv",
+      "records": 185,
+      "first": "2018-10-22",
+      "last": "2019-07-17",
+      "expiry": "2019-07-17",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 3,
+      "nonpositive_close": 3,
+      "high_below_low": 3,
+      "zero_volume": 3,
+      "futures_labels": [
+        "N (Jul 2019)"
+      ]
+    },
+    {
+      "file": "VX_2019-08-21.csv",
+      "records": 186,
+      "first": "2018-11-26",
+      "last": "2019-08-21",
+      "expiry": "2019-08-21",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 3,
+      "nonpositive_close": 3,
+      "high_below_low": 2,
+      "zero_volume": 3,
+      "futures_labels": [
+        "Q (Aug 2019)"
+      ]
+    },
+    {
+      "file": "VX_2019-09-18.csv",
+      "records": 185,
+      "first": "2018-12-24",
+      "last": "2019-09-18",
+      "expiry": "2019-09-18",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 6,
+      "nonpositive_close": 6,
+      "high_below_low": 4,
+      "zero_volume": 6,
+      "futures_labels": [
+        "U (Sep 2019)"
+      ]
+    },
+    {
+      "file": "VX_2019-10-16.csv",
+      "records": 187,
+      "first": "2019-01-22",
+      "last": "2019-10-16",
+      "expiry": "2019-10-16",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 9,
+      "nonpositive_close": 9,
+      "high_below_low": 5,
+      "zero_volume": 9,
+      "futures_labels": [
+        "V (Oct 2019)"
+      ]
+    },
+    {
+      "file": "VX_2019-11-20.csv",
+      "records": 193,
+      "first": "2019-02-19",
+      "last": "2019-11-20",
+      "expiry": "2019-11-20",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 0,
+      "zero_volume": 1,
+      "futures_labels": [
+        "X (Nov 2019)"
+      ]
+    },
+    {
+      "file": "VX_2019-12-18.csv",
+      "records": 188,
+      "first": "2019-03-25",
+      "last": "2019-12-18",
+      "expiry": "2019-12-18",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 0,
+      "zero_volume": 1,
+      "futures_labels": [
+        "Z (Dec 2019)"
+      ]
+    },
+    {
+      "file": "VX_2020-01-22.csv",
+      "records": 191,
+      "first": "2019-04-22",
+      "last": "2020-01-22",
+      "expiry": "2020-01-22",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 2,
+      "nonpositive_close": 2,
+      "high_below_low": 1,
+      "zero_volume": 2,
+      "futures_labels": [
+        "F (Jan 2020)"
+      ]
+    },
+    {
+      "file": "VX_2020-02-19.csv",
+      "records": 185,
+      "first": "2019-05-28",
+      "last": "2020-02-19",
+      "expiry": "2020-02-19",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 7,
+      "nonpositive_close": 7,
+      "high_below_low": 5,
+      "zero_volume": 7,
+      "futures_labels": [
+        "G (Feb 2020)"
+      ]
+    },
+    {
+      "file": "VX_2020-03-18.csv",
+      "records": 186,
+      "first": "2019-06-24",
+      "last": "2020-03-18",
+      "expiry": "2020-03-18",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 9,
+      "nonpositive_close": 9,
+      "high_below_low": 8,
+      "zero_volume": 9,
+      "futures_labels": [
+        "H (Mar 2020)"
+      ]
+    },
+    {
+      "file": "VX_2020-04-15.csv",
+      "records": 186,
+      "first": "2019-07-22",
+      "last": "2020-04-15",
+      "expiry": "2020-04-15",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 3,
+      "nonpositive_close": 3,
+      "high_below_low": 2,
+      "zero_volume": 3,
+      "futures_labels": [
+        "J (Apr 2020)"
+      ]
+    },
+    {
+      "file": "VX_2020-05-20.csv",
+      "records": 186,
+      "first": "2019-08-26",
+      "last": "2020-05-20",
+      "expiry": "2020-05-20",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 2,
+      "nonpositive_close": 2,
+      "high_below_low": 2,
+      "zero_volume": 2,
+      "futures_labels": [
+        "K (May 2020)"
+      ]
+    },
+    {
+      "file": "VX_2020-06-17.csv",
+      "records": 186,
+      "first": "2019-09-23",
+      "last": "2020-06-17",
+      "expiry": "2020-06-17",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "M (Jun 2020)"
+      ]
+    },
+    {
+      "file": "VX_2020-07-22.csv",
+      "records": 190,
+      "first": "2019-10-21",
+      "last": "2020-07-22",
+      "expiry": "2020-07-22",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 6,
+      "nonpositive_close": 6,
+      "high_below_low": 5,
+      "zero_volume": 6,
+      "futures_labels": [
+        "N (Jul 2020)"
+      ]
+    },
+    {
+      "file": "VX_2020-08-19.csv",
+      "records": 185,
+      "first": "2019-11-25",
+      "last": "2020-08-19",
+      "expiry": "2020-08-19",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 0,
+      "nonpositive_close": 0,
+      "high_below_low": 0,
+      "zero_volume": 0,
+      "futures_labels": [
+        "Q (Aug 2020)"
+      ]
+    },
+    {
+      "file": "VX_2020-09-16.csv",
+      "records": 195,
+      "first": "2019-12-09",
+      "last": "2020-09-16",
+      "expiry": "2020-09-16",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 4,
+      "nonpositive_close": 4,
+      "high_below_low": 4,
+      "zero_volume": 4,
+      "futures_labels": [
+        "U (Sep 2020)"
+      ]
+    },
+    {
+      "file": "VX_2020-10-21.csv",
+      "records": 220,
+      "first": "2019-12-09",
+      "last": "2020-10-21",
+      "expiry": "2020-10-21",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "V (Oct 2020)"
+      ]
+    },
+    {
+      "file": "VX_2020-11-18.csv",
+      "records": 240,
+      "first": "2019-12-09",
+      "last": "2020-11-18",
+      "expiry": "2020-11-18",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 2,
+      "nonpositive_close": 2,
+      "high_below_low": 2,
+      "zero_volume": 2,
+      "futures_labels": [
+        "X (Nov 2020)"
+      ]
+    },
+    {
+      "file": "VX_2020-12-16.csv",
+      "records": 188,
+      "first": "2020-03-23",
+      "last": "2020-12-16",
+      "expiry": "2020-12-16",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 12,
+      "nonpositive_close": 12,
+      "high_below_low": 12,
+      "zero_volume": 12,
+      "futures_labels": [
+        "Z (Dec 2020)"
+      ]
+    },
+    {
+      "file": "VX_2021-01-20.csv",
+      "records": 191,
+      "first": "2020-04-20",
+      "last": "2021-01-20",
+      "expiry": "2021-01-20",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 18,
+      "nonpositive_close": 18,
+      "high_below_low": 18,
+      "zero_volume": 18,
+      "futures_labels": [
+        "F (Jan 2021)"
+      ]
+    },
+    {
+      "file": "VX_2021-02-17.csv",
+      "records": 185,
+      "first": "2020-05-26",
+      "last": "2021-02-17",
+      "expiry": "2021-02-17",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 11,
+      "nonpositive_close": 11,
+      "high_below_low": 9,
+      "zero_volume": 11,
+      "futures_labels": [
+        "G (Feb 2021)"
+      ]
+    },
+    {
+      "file": "VX_2021-03-17.csv",
+      "records": 186,
+      "first": "2020-06-22",
+      "last": "2021-03-17",
+      "expiry": "2021-03-17",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 20,
+      "nonpositive_close": 20,
+      "high_below_low": 20,
+      "zero_volume": 20,
+      "futures_labels": [
+        "H (Mar 2021)"
+      ]
+    },
+    {
+      "file": "VX_2021-04-21.csv",
+      "records": 186,
+      "first": "2020-07-27",
+      "last": "2021-04-21",
+      "expiry": "2021-04-21",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 15,
+      "nonpositive_close": 15,
+      "high_below_low": 14,
+      "zero_volume": 15,
+      "futures_labels": [
+        "J (Apr 2021)"
+      ]
+    },
+    {
+      "file": "VX_2021-05-19.csv",
+      "records": 186,
+      "first": "2020-08-24",
+      "last": "2021-05-19",
+      "expiry": "2021-05-19",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 6,
+      "nonpositive_close": 6,
+      "high_below_low": 6,
+      "zero_volume": 6,
+      "futures_labels": [
+        "K (May 2021)"
+      ]
+    },
+    {
+      "file": "VX_2021-06-16.csv",
+      "records": 186,
+      "first": "2020-09-21",
+      "last": "2021-06-16",
+      "expiry": "2021-06-16",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 20,
+      "nonpositive_close": 20,
+      "high_below_low": 20,
+      "zero_volume": 20,
+      "futures_labels": [
+        "M (Jun 2021)"
+      ]
+    },
+    {
+      "file": "VX_2021-07-21.csv",
+      "records": 185,
+      "first": "2020-10-26",
+      "last": "2021-07-21",
+      "expiry": "2021-07-21",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 7,
+      "nonpositive_close": 7,
+      "high_below_low": 7,
+      "zero_volume": 7,
+      "futures_labels": [
+        "N (Jul 2021)"
+      ]
+    },
+    {
+      "file": "VX_2021-08-18.csv",
+      "records": 185,
+      "first": "2020-11-23",
+      "last": "2021-08-18",
+      "expiry": "2021-08-18",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 21,
+      "nonpositive_close": 21,
+      "high_below_low": 20,
+      "zero_volume": 21,
+      "futures_labels": [
+        "Q (Aug 2021)"
+      ]
+    },
+    {
+      "file": "VX_2021-09-15.csv",
+      "records": 185,
+      "first": "2020-12-21",
+      "last": "2021-09-15",
+      "expiry": "2021-09-15",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 18,
+      "nonpositive_close": 18,
+      "high_below_low": 18,
+      "zero_volume": 18,
+      "futures_labels": [
+        "U (Sep 2021)"
+      ]
+    },
+    {
+      "file": "VX_2021-10-20.csv",
+      "records": 188,
+      "first": "2021-01-25",
+      "last": "2021-10-20",
+      "expiry": "2021-10-20",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 12,
+      "nonpositive_close": 12,
+      "high_below_low": 12,
+      "zero_volume": 12,
+      "futures_labels": [
+        "V (Oct 2021)"
+      ]
+    },
+    {
+      "file": "VX_2021-11-17.csv",
+      "records": 189,
+      "first": "2021-02-22",
+      "last": "2021-11-17",
+      "expiry": "2021-11-17",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 3,
+      "nonpositive_close": 3,
+      "high_below_low": 3,
+      "zero_volume": 3,
+      "futures_labels": [
+        "X (Nov 2021)"
+      ]
+    },
+    {
+      "file": "VX_2021-12-22.csv",
+      "records": 193,
+      "first": "2021-03-22",
+      "last": "2021-12-22",
+      "expiry": "2021-12-22",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 0,
+      "nonpositive_close": 0,
+      "high_below_low": 0,
+      "zero_volume": 0,
+      "futures_labels": [
+        "Z (Dec 2021)"
+      ]
+    },
+    {
+      "file": "VX_2022-01-19.csv",
+      "records": 187,
+      "first": "2021-04-26",
+      "last": "2022-01-19",
+      "expiry": "2022-01-19",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 3,
+      "nonpositive_close": 3,
+      "high_below_low": 3,
+      "zero_volume": 3,
+      "futures_labels": [
+        "F (Jan 2022)"
+      ]
+    },
+    {
+      "file": "VX_2022-02-16.csv",
+      "records": 187,
+      "first": "2021-05-24",
+      "last": "2022-02-16",
+      "expiry": "2022-02-16",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 0,
+      "nonpositive_close": 0,
+      "high_below_low": 0,
+      "zero_volume": 0,
+      "futures_labels": [
+        "G (Feb 2022)"
+      ]
+    },
+    {
+      "file": "VX_2022-03-15.csv",
+      "records": 186,
+      "first": "2021-06-21",
+      "last": "2022-03-15",
+      "expiry": "2022-03-15",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 3,
+      "nonpositive_close": 3,
+      "high_below_low": 2,
+      "zero_volume": 3,
+      "futures_labels": [
+        "H (Mar 2022)"
+      ]
+    },
+    {
+      "file": "VX_2022-04-20.csv",
+      "records": 187,
+      "first": "2021-07-26",
+      "last": "2022-04-20",
+      "expiry": "2022-04-20",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 4,
+      "nonpositive_close": 4,
+      "high_below_low": 4,
+      "zero_volume": 4,
+      "futures_labels": [
+        "J (Apr 2022)"
+      ]
+    },
+    {
+      "file": "VX_2022-05-18.csv",
+      "records": 187,
+      "first": "2021-08-23",
+      "last": "2022-05-18",
+      "expiry": "2022-05-18",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "K (May 2022)"
+      ]
+    },
+    {
+      "file": "VX_2022-06-15.csv",
+      "records": 187,
+      "first": "2021-09-20",
+      "last": "2022-06-15",
+      "expiry": "2022-06-15",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 3,
+      "nonpositive_close": 3,
+      "high_below_low": 1,
+      "zero_volume": 3,
+      "futures_labels": [
+        "M (Jun 2022)"
+      ]
+    },
+    {
+      "file": "VX_2022-07-20.csv",
+      "records": 185,
+      "first": "2021-10-25",
+      "last": "2022-07-20",
+      "expiry": "2022-07-20",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "N (Jul 2022)"
+      ]
+    },
+    {
+      "file": "VX_2022-08-17.csv",
+      "records": 185,
+      "first": "2021-11-22",
+      "last": "2022-08-17",
+      "expiry": "2022-08-17",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "Q (Aug 2022)"
+      ]
+    },
+    {
+      "file": "VX_2022-09-21.csv",
+      "records": 186,
+      "first": "2021-12-27",
+      "last": "2022-09-21",
+      "expiry": "2022-09-21",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 3,
+      "nonpositive_close": 3,
+      "high_below_low": 3,
+      "zero_volume": 3,
+      "futures_labels": [
+        "U (Sep 2022)"
+      ]
+    },
+    {
+      "file": "VX_2022-10-19.csv",
+      "records": 187,
+      "first": "2022-01-24",
+      "last": "2022-10-19",
+      "expiry": "2022-10-19",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 0,
+      "zero_volume": 1,
+      "futures_labels": [
+        "V (Oct 2022)"
+      ]
+    },
+    {
+      "file": "VX_2022-11-16.csv",
+      "records": 187,
+      "first": "2022-02-22",
+      "last": "2022-11-16",
+      "expiry": "2022-11-16",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 0,
+      "nonpositive_close": 0,
+      "high_below_low": 0,
+      "zero_volume": 0,
+      "futures_labels": [
+        "X (Nov 2022)"
+      ]
+    },
+    {
+      "file": "VX_2022-12-21.csv",
+      "records": 192,
+      "first": "2022-03-21",
+      "last": "2022-12-21",
+      "expiry": "2022-12-21",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "Z (Dec 2022)"
+      ]
+    },
+    {
+      "file": "VX_2023-01-18.csv",
+      "records": 185,
+      "first": "2022-04-25",
+      "last": "2023-01-18",
+      "expiry": "2023-01-18",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 5,
+      "nonpositive_close": 5,
+      "high_below_low": 4,
+      "zero_volume": 5,
+      "futures_labels": [
+        "F (Jan 2023)"
+      ]
+    },
+    {
+      "file": "VX_2023-02-15.csv",
+      "records": 185,
+      "first": "2022-05-23",
+      "last": "2023-02-15",
+      "expiry": "2023-02-15",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "G (Feb 2023)"
+      ]
+    },
+    {
+      "file": "VX_2023-03-22.csv",
+      "records": 190,
+      "first": "2022-06-21",
+      "last": "2023-03-22",
+      "expiry": "2023-03-22",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 1,
+      "nonpositive_close": 1,
+      "high_below_low": 1,
+      "zero_volume": 1,
+      "futures_labels": [
+        "H (Mar 2023)"
+      ]
+    },
+    {
+      "file": "VX_2023-04-19.csv",
+      "records": 186,
+      "first": "2022-07-25",
+      "last": "2023-04-19",
+      "expiry": "2023-04-19",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 2,
+      "nonpositive_close": 2,
+      "high_below_low": 2,
+      "zero_volume": 2,
+      "futures_labels": [
+        "J (Apr 2023)"
+      ]
+    },
+    {
+      "file": "VX_2023-05-17.csv",
+      "records": 186,
+      "first": "2022-08-22",
+      "last": "2023-05-17",
+      "expiry": "2023-05-17",
+      "duplicate_dates": 0,
+      "missing_lifecycle_dates": [],
+      "off_calendar_dates": [],
+      "nonpositive_settle": 0,
+      "nonpositive_open": 0,
+      "nonpositive_close": 0,
+      "high_below_low": 0,
+      "zero_volume": 0,
+      "futures_labels": [
+        "K (May 2023)"
+      ]
+    }
+  ]
+}
