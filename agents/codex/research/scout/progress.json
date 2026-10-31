@@ -275,24 +275,48 @@
     }
   ],
   "last_run": {
-    "run_id": "ng-upload-intake-20261031",
-    "recorded_at": "2026-10-31T05:12:12.283210+00:00",
-    "status": "native_precision_and_metadata_blocked",
+    "run_id": "ng-corrected-intake-20261031",
+    "recorded_at": "2026-10-31T05:19:53.464792+00:00",
+    "status": "precision_repaired_source_clock_admission_pending",
     "files": 10,
-    "rows": 1086667,
-    "raw_manifest": "agents/codex/inputs/ng_upload_20261031/manifest.json",
-    "report_path": "agents/codex/results/ng_upload_audit_20261031.md",
+    "rows": 2959522,
+    "report_path": "agents/codex/results/ng_corrected_intake_20261031.md",
+    "raw_manifest": "agents/codex/inputs/ng_corrected_20261031/manifest.json",
     "new_hypotheses": 0,
     "new_economic_definitions": 0,
     "return_tests_executed": false,
     "lease": null,
+    "user_metadata_question": "Pending: configured exchange zone and symbol/feed/continuous-roll settings; prior screenshots confirmed chart/export settings only.",
     "source_access": [
-      "SAGE full text unavailable via connected reader",
-      "IAEE appendix404",
-      "Did not retry Reading denial or Liverpool embargo"
+      {
+        "url": "https://centaur.reading.ac.uk/105084/17/24895312_Robert%20Wichmann_Thesis_Redacted.pdf",
+        "result": "Anubis explicit access denial; no bypass"
+      },
+      {
+        "url": "https://www.fcm.uni-hannover.de/prokopczuk/publikationen",
+        "result": "Author list links DOI, no newly obtained full source"
+      },
+      {
+        "url": "https://www.icmacentre.ac.uk/people/professor-marcel-prokopczuk",
+        "result": "Author list links Reading record"
+      },
+      {
+        "url": "https://ir.eia.gov/ngs/schedule.html",
+        "result": "Official regular clock and2025\u201326exceptions visible, not2018\u201322calendar certification"
+      },
+      {
+        "url": "https://ir.eia.gov/ngs/wngsrevaluation.pdf",
+        "result": "Official2017\u201319release-performance context; not complete historical exception dates"
+      }
     ],
-    "user_action": "Re-export actual NG prices with Decimals3or greater and confirm chart/feed/session/timezone/roll metadata; async metadata question pending.",
-    "next_work": "Admit corrected native precision and event/source clocks before any frozen economic test."
+    "source_searches": [
+      "AuthorWichmannthesis",
+      "Hannover/ICMApublicationlists",
+      "GitHubexacttitleandfilename",
+      "Freefulltextalternatives",
+      "HistoricalEIAholidayclocks"
+    ],
+    "next_work": "Acquire primaryfullpaper and configured clock; admit event/native cost conventions before any TEST reservation. No further precision export requested."
   },
   "last_notification_key": "ssrn:5250499:prototype-v1:real-data-blocked",
   "note": "New paper-discovery program authorized 2026-10-29. Existing repository multiplicity remains in every significance decision. Paused t6 and Hunt v2 are not resumed or reset.",
@@ -731,6 +755,50 @@
       ],
       "user_action": "Re-export actual NG prices with Decimals3or greater and confirm chart/feed/session/timezone/roll metadata; async metadata question pending.",
       "next_work": "Admit corrected native precision and event/source clocks before any frozen economic test."
+    },
+    {
+      "run_id": "ng-corrected-intake-20261031",
+      "recorded_at": "2026-10-31T05:19:53.464792+00:00",
+      "status": "precision_repaired_source_clock_admission_pending",
+      "files": 10,
+      "rows": 2959522,
+      "report_path": "agents/codex/results/ng_corrected_intake_20261031.md",
+      "raw_manifest": "agents/codex/inputs/ng_corrected_20261031/manifest.json",
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "lease": null,
+      "user_metadata_question": "Pending: configured exchange zone and symbol/feed/continuous-roll settings; prior screenshots confirmed chart/export settings only.",
+      "source_access": [
+        {
+          "url": "https://centaur.reading.ac.uk/105084/17/24895312_Robert%20Wichmann_Thesis_Redacted.pdf",
+          "result": "Anubis explicit access denial; no bypass"
+        },
+        {
+          "url": "https://www.fcm.uni-hannover.de/prokopczuk/publikationen",
+          "result": "Author list links DOI, no newly obtained full source"
+        },
+        {
+          "url": "https://www.icmacentre.ac.uk/people/professor-marcel-prokopczuk",
+          "result": "Author list links Reading record"
+        },
+        {
+          "url": "https://ir.eia.gov/ngs/schedule.html",
+          "result": "Official regular clock and2025\u201326exceptions visible, not2018\u201322calendar certification"
+        },
+        {
+          "url": "https://ir.eia.gov/ngs/wngsrevaluation.pdf",
+          "result": "Official2017\u201319release-performance context; not complete historical exception dates"
+        }
+      ],
+      "source_searches": [
+        "AuthorWichmannthesis",
+        "Hannover/ICMApublicationlists",
+        "GitHubexacttitleandfilename",
+        "Freefulltextalternatives",
+        "HistoricalEIAholidayclocks"
+      ],
+      "next_work": "Acquire primaryfullpaper and configured clock; admit event/native cost conventions before any TEST reservation. No further precision export requested."
     }
   ],
   "data_access_blockers": {

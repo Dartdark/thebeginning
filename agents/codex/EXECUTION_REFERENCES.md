@@ -338,6 +338,15 @@ The source's weekly10%loss review is not an intraday protective stop; its report
 Evidence: source/schema inspection plus two feature-arithmetic fixtures; no independent return, execution saving
 or live-policy change. Need actual dated article/entity/price ledgers and explicit loss-review execution first.
 
+E11 follow-up — NG export precision and exchange-clock audit, retained2026-10-31:
+[Corrected intake](results/ng_corrected_intake_20261031.md). A chart showing0.001ticks did not make a two-decimal
+CSV native precision: all4,346,668old OHLC cells lay on0.01; the replacement has10,624,829sub-cent cells on the
+proper0.001grid. Existing exporter Decimals3and full-window inputs repaired this without a code change.
+MultiCharts Exchange labels use QuoteManager's configured exchange timezone. Repaired NG's18:01reopen/17:00close
+supports NewYork labels; verify configuration before mapping an EIA10:30ETrelease to raw minutes. Do not choose
+between clocks on P&L. Evidence: raw-file counts, user settings screenshots and winter/summer conversion fixtures;
+not measured fills, strategy profit or execution savings. Full native contract/roll/event/cost admission remains open.
+
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
 Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5 and Figure 1 p.27.
