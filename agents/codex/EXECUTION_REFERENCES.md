@@ -617,6 +617,8 @@ Related: E09 cash/contract accounting, E15 tail risk, E36 nonguaranteed protecti
   availability clocks, exact trigger/weight/cash policy, executable next-day prices and native fees; reconcile one
   formation/roll month before any return study. Non-positive prices cannot silently disappear from a log-return test.
 - Status: execution/risk/accounting reference retained; no new return trial, account placement or exit-policy change.
+  [Offline build checkpoint](results/rad_double_sort_build_20261031.md) adds strict missing-panel, contract/clock,
+  integer reference-notional and delivery-action checks. Its23 synthetic cases do not verify historical fills or NAV.
 
 ## Minimum record for any later execution comparison
 

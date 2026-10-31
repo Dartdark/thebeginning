@@ -151,6 +151,9 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   below, sharing its paired-data prerequisite. Risk-method findings retained in execution reference E38.
   [Full-source review](agents/codex/results/rad_double_sort_review_20261031.md) ·
   [Evidence](agents/codex/evidence/rad_double_sort_20261031.md).
+  [Code-building checkpoint](agents/codex/results/rad_double_sort_build_20261031.md): offline monthly selector,
+  integer reference allocation and strict input checks built;23 synthetic mechanics cases pass. No real-data
+  return/account result; source/data/accounting prerequisites remain unchanged.
 
 - [ ] **Weekly commodity basis reversal — NEEDS FULL TEXT / PAIRED DATA (2026-10-29), SSRN5250499.**
   Merit: specific adjacent-maturity relative-return reversal claimed in the primary abstract, distinct from an
