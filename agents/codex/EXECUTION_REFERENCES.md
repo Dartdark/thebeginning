@@ -725,7 +725,44 @@ Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, sha
 Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
 Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E40-E42 during this handoff merge; existing Codex E29-E38 identifiers are retained.
 
-### E39 — Obizhaeva–Wang: replenishing depth and large-order execution
+### E44 — Weekly COT inventory changes do not identify executable order flow
+
+Source: Kaul, Naranjo and Stefanescu, [SSRN 2311859](https://ssrn.com/abstract=2311859),
+[full-PDF review](results/ssrn_2311859_review_20261030.md), retained 2026-10-30, printed pp. 7–8, 13–18, 21, 29.
+- Use: distinguish changes in group long-minus-short inventories from signed transactions or actual liquidity demand.
+- Evidence: author regressions relate Tuesday-to-Tuesday commodity returns to same-period and lagged position changes.
+  Friday publication prevents treating same-week positioning as a pretrade signal; even the lagged week partly elapses
+  before publication. Historical semi-monthly observations before 1991 were backfilled, not necessarily then public.
+- Limits: no native orders, spread/fill measurement, causal identification or demonstrated net trading returns.
+  Energy is an exception to several pooled findings; the sample excludes NQ/ES. Price-impact coefficients are standardized,
+  not dollar savings or an instruction to follow/fade speculators.
+- Next check only for a separately justified proposal: exact publication/vintage clocks, native contract identity and
+  a prespecified executable window, with costs and ordinary momentum/reversal controls before return selection.
+- Status: source/measurement reference; no new economic trial, trading grade or plan change.
+
+### E45 — Cointegrated log prices do not specify an executable futures hedge
+
+Source/review + date: Ungever (2015), [SSRN2896370](https://ssrn.com/abstract=2896370),
+user-uploaded full text; [review](results/agri_cointegration_ssrn2896370.md), 2026-10-30.
+Execution question and useful lesson: translate a statistical log-price spread into
+explicit native-contract quantities, multipliers and roll/cash accounting. Equal
+dollar legs and cointegration coefficients do not automatically imply identical
+portfolios or market neutrality. Resolve trade direction before implementing it.
+Evidence: source inspection, not return replication. Upper-bound prose on p.30
+shorts cotton/buys coffee; the profit equation on p.31 is long cotton/short coffee.
+Costs are ignored (p.27); only two/three completed trading-period trades support
+the reported annualizations. No independently verified execution savings or alpha.
+Market/platform limits: Bloomberg daily rolled agricultural futures, 2004–15;
+trading holds average 159/142 days. Not intraday Apex or NQ/ES evidence.
+Data/prerequisites: timestamped native-contract prices, unambiguous leg direction,
+integer hedge and rebalance rule, both-leg and roll costs, capital/margin definition,
+and per-trade ledger. Matching local price histories were not found.
+Smallest justified next check: only reconsider with corrected source specification
+and stronger independent net evidence; no proxy or intraday conversion is earned.
+Status: retain accounting/implementation caution; source-defined strategy rejected
+at evidence gate, zero return trials, no promising-candidate or trading-plan change.
+
+### E46 — Obizhaeva–Wang: replenishing depth and large-order execution
 
 Source: [SSRN 666541](https://ssrn.com/abstract=666541), uploaded June 8, 2005 draft,
 [review and data gate](results/ssrn666541.md), [model arithmetic](../../analysis/outputs/codex_ssrn666541/model_arithmetic.json).
@@ -742,6 +779,7 @@ Source: [SSRN 666541](https://ssrn.com/abstract=666541), uploaded June 8, 2005 d
 - Next check: establish material self-impact using native fills and synchronized quotes/depth
   before testing any slicing schedule; then include latency, noncompletion and opportunity cost.
 - Status: execution reference only. Zero strategy-return trials; no plan or live changes.
+
 
 ## Minimum record for any later execution comparison
 
