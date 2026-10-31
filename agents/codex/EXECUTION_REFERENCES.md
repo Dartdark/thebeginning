@@ -654,6 +654,15 @@ Claude source snapshot `86df2c0`, `analysis/codex_refresh_audit.py` and its save
 - Next check: fresh same-input reports, explicit cache coverage gate, then expected/chart/broker reconciliation;
   earlier unavailable chart logs remain unknown. Related: E04 (record semantics), E23 (account/logger fields).
 
+### E09 follow-up — common-coverage account-state replay (2026-10-30)
+
+[Fixed-ledger account replay](results/swing_kind_account_replay_20261030.md) adds 1,000 paired histories per
+account/cohort over a common-source window ending July 7. Numeric kinds restore $129/MNQ and change 48 daily
+minima; 160 exact canonical-simulator parity checks pass. This does not imply monotone payout improvement:
+150K recent-pool first-year payouts decrease $6 while two-year payouts and blown share are unchanged.
+The adopted replacements do not clear both base and empty-slot comparisons. Evidence is historical simulated
+accounting with inherited path approximations, not native fills or a plan change. The broader-window replay
+above uses a different pool and seed; the two reports consistently leave adoption unproven.
 
 ### E40 — ES order-flow shocks are absorbed within one second; macro releases raise price impact
 
