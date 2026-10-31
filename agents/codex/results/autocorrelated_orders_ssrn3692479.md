@@ -121,7 +121,7 @@ or justify relaunching the failed family under an “innovation” name.
 
 No external acquisition, proxy return screen or funded bench is warranted after
 this evidence gate. No promising-strategy queue item or tier change; no order,
-size, stop or account change. Retain the lesson as E56 in EXECUTION_REFERENCES.
+size, stop or account change. Retain the lesson as E57 in EXECUTION_REFERENCES.
 
 ## Verification boundary
 

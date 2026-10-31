@@ -1,0 +1,1135 @@
+                                                                                    ed
+                 Sector Trading and Bubble Riding Behavior: Construction
+                 and Evaluation of Trading Strategy Based on Bubble Test
+
+
+
+
+                                                                                 iew
+                                        Haoran Liu†, O-Chia Chuang†, and Jin Xu‡
+             † School of Economics and Management, Wuhan University, Hubei, 430072, China
+
+
+
+
+                                                        v
+             ‡ Department of Economics and Management, Wenhua College, Hubei, 430074,
+             China
+
+
+
+
+                                                     re
+             Abstract: In this paper, we investigate the profitability of "riding the bubble"
+                                                  er
+             trading strategies in the Chinese stock market. Using sector-level data from the
+                                                pe
+             CSI 300, we identify bubble episodes using the bubble test proposed by Phillips
+
+             et al. (2015). We then buy the sector-level indices whenever bubbles are
+
+             identified, and buy the market index otherwise. Empirical studies show that
+                                      ot
+
+
+             most riding strategies outperform the market in terms of annualized return and
+
+             Sharpe ratio. In particular, the optimal "riding bubble" trading strategy can
+                            tn
+
+
+
+
+             generate an average annualized return of 13.41% over the period 2006-2020,
+
+             while the buy-and-hold strategy yields 11.87%.
+                  rin
+
+
+
+
+             Keywords: Bubble test; Trading strategy; GSADF test; PSY method; Sector-level market
+
+             JEL Classification: C12, C22, G01, G11
+        ep
+Pr
+
+
+
+
+             Corresponding author. Email: occhuang@whu.edu.cn.
+             Postal address: School of Economics and Management, Wuhan University, Bayi Road 299,
+             Wuchang District, Wuhan 430072, People’s Republic of China.
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+                                                                                    ed
+               Sector Trading and Bubble Riding Behavior: Construction
+                 and Evaluation of Trading Strategy Based on Bubble Test
+
+
+
+
+                                                                                 iew
+             In this paper, we investigate the profitability of "riding the bubble" trading strategies
+
+             in the Chinese stock market. Using sector-level data from the CSI 300, we identify
+
+
+
+
+                                                        v
+                                                     re
+             bubble episodes using the bubble test proposed by Phillips et al. (2015). We then buy
+
+             the sector-level indices whenever bubbles are identified, and buy the market index
+
+             otherwise. Empirical studies show that most riding strategies outperform the market in
+                                                  er
+             terms of annualized return and Sharpe ratio. In particular, the optimal "riding bubble"
+                                                pe
+             trading strategy can generate an average annualized return of 13.41% over the period
+
+             2006-2020, while the buy-and-hold strategy yields 11.87%.
+
+             Keywords: Bubble test; Trading strategy; GSADF test; PSY method; Sector-level market
+                                      ot
+
+
+             JEL Classification: C12, C22, G01, G11
+                            tn
+
+
+
+
+             1     Introduction
+                  rin
+
+
+
+
+                 Stock market bubbles have provided a significant financial risk and resulted in heavy
+
+             losses to global investors in history, making the reaction of investors facing bubbles a
+        ep
+
+
+
+
+             focal point of attention for academics. Fama (2014) states that the studies on bubbles
+
+             (Shiller, 2000; Kindleberger et al., 2005) rely on beliefs that stock price declines are
+Pr
+
+
+
+
+             predictable and argues that stock prices are unpredictable and that rational investors
+
+             correct mispricing by arbitrage. However, Greenwood et al. (2019) report that sharp
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+             price increases predict heightened probabilities of crashes, and investors can identify
+
+
+
+
+                                                                                    ed
+             bubbles by some stock characteristics containing information relevant to forecasting
+
+             expected returns. Abreu and Brunnermeier (2003) even suggest that the optimal choice
+
+
+
+
+                                                                                 iew
+             for investors discovering a bubble is to ride it. This paper will address whether we can
+
+             predict price dynamics to bet against bubbles. We construct eﬀective bubble-riding
+
+             strategies based on advanced bubble detection techniques in the Chinese stock market.
+
+
+
+
+                                                        v
+             If the trading strategies consistently yield abnormal returns, it’s feasible for investors
+
+
+
+
+                                                     re
+             to identify bubbles and benefit from riding bubbles.
+
+                According to Temin and Voth (2004), Hoare’s Bank successfully rode the South Sea
+                                                  er
+             Bubble by trading the overvalued stocks of South Sea Company. Brown et al. (2000),
+                                                pe
+             Brunnermeier and Nagel (2004), and Fung and Hsieh (2000) report that hedge funds
+
+             profited from bubbles by holding portfolios heavily tilted toward highly-priced
+
+             technology stocks during the technology bubble period. Brooks and Katsaris (2005) use
+                                      ot
+
+
+             a three-regime model to study the bubble dynamics of the S&P 500 and form a bubble
+
+             trading rule based on this model. Guenster and Kole (2013) examined investors’
+                            tn
+
+
+
+
+             decisions in the face of bubbles, proving that even individual investors may profit from
+
+             investing in bubbles.
+                  rin
+
+
+
+
+                Our study begins with the bubble identification of the GSADF test on the 2006-2020
+
+             China Securities Index 300 (CSI300) market, including the most representative Chinese
+        ep
+
+
+
+
+             sample stocks. The GSADF test has been proven more effective than the SADF test of
+
+             Phillips et al. (2011) and the methods of Hall et al. (1999) and Guenster et al. (2009).
+Pr
+
+
+
+
+             Then we construct three bubble-riding strategies based on the GSADF test, Strategies
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+             1, 2, and 3, which buy bubble portfolios, sell them and invest in the market portfolio
+
+
+
+
+                                                                                    ed
+             when bubbles collapse according to their rules. To avoid daily price jumps, manage
+
+             portfolios in time, and reduce idiosyncratic noise, we will conduct the above strategies
+
+
+
+
+                                                                                 iew
+             in the sector markets at the weekly frequency and then explore their profitability against
+
+             the benchmark (Strategy 4). The results show that our riding strategies perform better
+
+             than the benchmark, indicating the possibility and profitability of riding bubbles in the
+
+
+
+
+                                                        v
+             Chinese market.
+
+
+
+
+                                                     re
+                 The paper contributes to the literature by examining the profitability of the “riding
+
+             bubble” strategies in the Chinese sector-level stock market. These trading strategies try
+                                                  er
+             to construct a portfolio of stocks in the bubble periods and sell the overpriced stocks as
+                                                pe
+             soon as the bubbles explode. The profitable strategies show that Fama (2014)’s view
+
+             doesn’t hold in the Chinese market, and bubble riding is the rational behavior for
+
+             Chinese investors facing bubbles. Additionally, the study unit of the paper is a sector
+                                      ot
+
+
+             rather than a firm. Compared with similar literature, this paper analyzes the industry
+
+             characteristics of Chinese bubbles.
+                            tn
+
+
+
+
+                 We organize the rest of the paper as follows. The next section introduces the
+
+             methodologies. Section 3 describes our dataset and reports the sector-level bubble
+                   rin
+
+
+
+
+             dynamics. Section 4 assesses the performance of all strategies. Section 5 provides the
+
+             robustness checks. Section 6 concludes.
+        ep
+
+
+
+
+             2     Methodology
+Pr
+
+
+
+
+             2.1      The GSADF procedure for explosiveness
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+                The recursive flexible window procedure for identifying and dating bubbles called
+
+
+
+
+                                                                                          ed
+             the GSADF test, is based on the following regression model.
+
+                                                                 𝑖
+                               ∆𝑦𝑡 = 𝛼𝑟1,𝑟2 + 𝛽𝑟1,𝑟2𝑦𝑡―1 + ∑𝐾
+                                                            𝑖=1 𝛿𝑟1,𝑟2∆𝑦𝑡―𝑖 + 𝜀𝑡                           (1)
+
+
+
+
+                                                                                       iew
+                                                     𝐻0:𝛽𝑟1,𝑟2 = 0
+                                                     𝐻𝐴:𝛽𝑟1,𝑟2 > 0
+
+                where yt is the industry price index of interest, K is the lag order (selected by BIC
+
+
+
+
+                                                        v
+             with a maximum lag order of six), and εt is the error term.
+
+
+
+
+                                                     re
+                GSADF test implements ADF regression (1) in a rolling window style, which
+
+             requires running subsample regressions. Here the fractional starting and ending points
+                                                  er
+             of a subsample regression are 𝑟1 and 𝑟2, and the size of the total sample equals T, where
+
+             the corresponding ADF statistic is 𝐴𝐷𝐹𝑟𝑟21. Accordingly, the window size 𝑟𝑤 = 𝑟2 - 𝑟1
+                                                pe
+             and the number of observations equals ⌊𝑟𝑤𝑇⌋.
+
+                We construct a sequence of subsamples by allowing 𝑟2 to vary from 𝑟0 to 1 and 𝑟1
+                                      ot
+
+
+             to vary from 0 to 𝑟2 ― 𝑟0 (𝑟0 is the minimum window size equaling 0.01 + 1.8/ 𝑇),
+
+             then calculates the ADF statistic repeatedly on these subsamples, and defines the
+                            tn
+
+
+
+             GSADF statistic as the largest one among the sequence of ADF statistics.
+
+                                        𝐺𝑆𝐴𝐷𝐹(𝑟0) =         sup       sup
+                                                       𝑟 ∈ [𝑟 ,1]𝑟 ∈ [0,𝑟 ― 𝑟 ]
+                                                                                { 𝐴𝐷𝐹𝑟𝑟 }
+                                                                                      2
+                                                                                      1
+                                                                                                                 (2)
+                  rin
+
+
+
+
+                                                        2     0   1     2    0
+
+
+
+                The backward sup ADF test (BSADF test) is used to time the origination and the
+
+             termination of bubbles, which implements the ADF test repeatedly on a sequence of
+        ep
+
+
+
+
+             backward expanding samples. Assuming 𝑟 is the observation of interest, we will fix
+
+             the ending point of each sample 𝑟2 on 𝑟 and vary the start point 𝑟1 from 0 to 𝑟 ― 𝑟0.
+Pr
+
+
+
+
+             Then 𝑀𝐴𝐷𝐹𝑟 is defined as the supremum of the sequence 𝐴𝐷𝐹𝑟𝑟21        {         }𝑟𝑟 =𝑟
+                                                                                              2
+
+                                                                                              1 ∈[0,𝑟 ―𝑟 ]
+                                                                                                   2   0
+                                                                                                           , which
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+             identifies explosiveness at r. Due to the heteroskedasticity of weekly data, we will
+
+
+
+
+                                                                                    ed
+             produce consistent critical values using a wild bootstrapping procedure of Harvey et
+
+             al. (2016) and Phillips and Shi (2020).
+
+
+
+
+                                                                                 iew
+                                                  {
+                                 𝑀𝐴𝐷𝐹𝑟 = max 𝐴𝐷𝐹𝑟𝑟21:𝑟 = 𝑟2,𝑟1 ∈ [0,𝑟 ― 𝑟0]        }            (3)
+
+
+             2.2     Construction of trading strategies
+
+
+
+
+                                                        v
+                We assume that an investor trades at a weekly frequency, observing the bubble signal
+
+
+
+
+                                                     re
+             at the end of Tuesdays and executing his trading decision on Wednesdays.
+
+                Referring to Milunovich et al. (2019), we propose three bubble-riding strategies,
+                                                  er
+             Strategy 1, Strategy 2, and Strategy 3, against our benchmark (Strategy 4, i.e., buy-and-
+
+             hold strategy). The indicators of Strategies 1, 2, and 3 are PSYI (PSY Indicator),
+                                                pe
+             MPSYI (Modified PSY Indicator), and DPSYI (Dual PSY Indicator).
+
+                                      𝑃𝑆𝑌𝐼𝑡 = 1(𝑀𝐴𝐷𝐹𝑡 > 𝑠𝑐𝑣𝑡)                                           (4)
+                                      𝑀𝑃𝑆𝑌𝐼𝑡 = 1(𝑀𝐴𝐷𝐹𝑡 > 𝑠𝑐𝑣𝑡&𝑅𝑡 > 0)                                  (5)
+                                      ot
+
+
+                                 𝐷𝑃𝑆𝑌𝐼𝑡 = 1(𝑀𝐴𝐷𝐹𝑡 > 𝑠𝑐𝑣𝑡&𝑀𝐴𝐷𝐹𝑡―1 > 𝑠𝑐𝑣𝑡―1)                       (6)
+                In the equations of the weekly indicators, t denotes time measured in weeks, 𝑀𝐴𝐷𝐹𝑡
+                            tn
+
+
+
+             is the statistic of the GSADF test for identifying bubbles in industry indexes, 𝑠𝑐𝑣𝑡 is the
+
+             critical value of 𝑀𝐴𝐷𝐹𝑡, and 𝑅𝑡 is the most recent return.
+                   rin
+
+
+
+
+             2.2.1   Rules of bubble-riding strategies
+
+                Strategy 1 buys any sector for which the GSADF test detects a bubble episode (the
+        ep
+
+
+
+
+             PSYI equals 1) and closes the positions when the bubble collapses (the PSYI
+
+             switches from 1 to 0).
+Pr
+
+
+
+
+                Strategy 2 uses the MPSYI instead of the PSYI. Specifically, Strategy 2 invests in
+
+             the sectors which experience bubbles and generate positive recent returns (the MPSYI
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+             equals 1) and sells those sectors’ stocks if the bubbles burst or the recent returns turn
+
+
+
+
+                                                                                    ed
+             negative (the MPSYI equals 0).
+
+                 Strategy 3 buys those sectors where the bubbles continuously exist at both the
+
+
+
+
+                                                                                 iew
+             previous and current periods (the DPSYI equals 1) and exits from the collapsing
+
+             bubbles (the DPSYI turns 0).
+
+                 If there are multiple sectors satisfying their conditions at the same time, these
+
+
+
+
+                                                        v
+             strategies will construct an equally-weighted portfolio. In the event of no bubbles, they
+
+
+
+
+                                                     re
+             hold the market index.
+
+
+             2.2.2    Analysis of trading strategies
+                                                  er
+                 All bubble riding strategies try allocating the funds to the bubble sectors. Strategy 1
+                                                pe
+             relies only on the PSY method (i.e., the GSADF test) to time bubble sectors. However,
+
+             the GSADF test can’t always keep bubble detection accurate. The false identification
+                                      ot
+
+
+             influences Strategy 1’s performance adversely. To reduce the impact of the test bias,
+
+             Strategy 2 exploits the MPSYI that introduces the recent return information. Strategy 3
+                            tn
+
+
+
+             raises the investment threshold to avoid entering a sector too early by observing
+
+             additionally the bubble signal at the previous period.
+                   rin
+        ep
+
+
+
+
+             3       Bubble dynamics in China’s industry market
+Pr
+
+
+
+
+             3.1      Data description
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+                The sector indexes of CSI 300 in the paper include energy, materials, industrials,
+
+
+
+
+                                                                                    ed
+             consumer discretionary, consumer staples, health care, financials, information
+
+             technology, communication services, and utilities. The dataset contains the following
+
+
+
+
+                                                                                 iew
+             weekly data series (the sample period from January 4th, 2006, to December 30th, 2020):
+
+             close prices of the sector indices on Tuesdays and Wednesdays; close prices of the
+
+             CSI300 market index on Wednesdays; weekly CPI by the Denton (1971) method. In
+
+
+
+
+                                                        v
+             addition, the daily price series of the same indexes are applied in the robustness analysis
+
+
+
+
+                                                     re
+             to test the superiority of the weekly data frequency.
+
+
+
+             3.2     Empirical bubble detection
+                                                  er
+                                                pe
+                This paper applies the GSADF test at the 95% confidence level to detect explosive
+
+             bubble dynamics. In Figure 1, the curves represent the industry prices, the horizontal
+
+             axis marks the year, and the shaded areas correspond to all bubble dynamics we detect.
+                                      ot
+                            tn
+                   rin
+
+
+
+
+                                (a) Energy                           (b) Materials
+        ep
+Pr
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+                                                                                           ed
+                                                                                        iew
+                                (c) Industrials                         (d) Consumer discretionary
+
+
+
+
+                                                          v
+                                                       re
+                                                    er
+                                (e) Consumer staples                    (f) Health care
+                                                  pe
+                                      ot
+                            tn
+
+
+
+                                (g) Financials                         (h) Information technology
+                  rin
+        ep
+
+
+
+
+                                (i) Telecom services                    (j) Utilities
+Pr
+
+
+
+
+                                      Figure 1 Bubble identification for each sector
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+                 First, all sectors experienced bubble episodes during the sample period, but there are
+
+
+
+
+                                                                                    ed
+             also some differences in the characteristics of these bubbles (frequency, duration, and
+
+             degree of expansion). Second, the order of the origination dates of bubbles in these
+
+
+
+
+                                                                                 iew
+             sectors suggests the contagion of bubble dynamics between them. The bubbles in
+
+             industries like financials formed early and spread to other sector-level markets,
+
+             providing a significant spillover risk. Third, there exists a covariation of the bubbles in
+
+
+
+
+                                                        v
+             ten sectors. The co-movement of bubble dynamics depicts the general trend of the
+
+
+
+
+                                                     re
+             aggregate market.
+
+
+             4     Performance evaluation of trading strategies
+                                                  er
+                 Table 1 displays the investment performance of four strategies on the following
+                                                pe
+             measures: final wealth accumulated over 2006-2020 with an initial wealth of $1, after
+
+             transaction cost returns, and Sharpe ratios. According to Brooks and Katsaris (2005)
+                                      ot
+
+
+             and the reality of the Chinese market, a round trip of buying and selling incurs a trading
+
+             cost of 0.5% of the total real return.
+                            tn
+
+
+
+                               Table 1 Performance evaluation of trading strategies
+                                            Strategy 1   Strategy 2      Strategy 3          Strategy 4
+              Performance Measure
+                                             (PSYI)       (MPSYI)         (DPSYI)               (BH)
+                  rin
+
+
+
+
+              Final wealth($)                  6.39          5.02            6.64               5.40
+              Annual return(%)                13.13         11.32           13.41              11.87
+              Sharpe ratio(%)                  6.55          5.80            6.66               6.13
+              Trading periods                  122           168              87                  2
+        ep
+
+
+
+
+                 Strategy 3 performs best according to all investment criteria. Strategy 1 produces the
+
+             second-highest wealth. The buy-and-hold benchmark is ranked third, which follows
+Pr
+
+
+
+
+             Strategies 1 and 3. Strategy 2 is ranked last and falls behind Strategies 1, 3, and 4. The
+
+             performance of Strategies 1 and 3 supports the idea of profiting from inflating Chinese
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+             sector bubbles. Our best strategy, Strategy 3, invests in the sectors which have
+
+
+
+
+                                                                                    ed
+             experienced a bubble for at least two periods (weeks), which prevents investors from
+
+             initiating their bubble trades prematurely.
+
+
+
+
+                                                                                 iew
+                 In conclusion, Strategy 3 can generate the highest return, beat the comparable
+
+             benchmark, and benefit more effectively from bubbles in weekly trading.
+
+
+             5       Robustness analysis
+
+
+
+
+                                                        v
+                                                     re
+             5.1      Subsample analysis
+
+                 By a rolling window subsample analysis, this section explores the consistency of
+                                                  er
+             these strategies’ returns over different holding periods. We assume an investor enters
+
+             the market at any time and invests for k periods (weeks). The investment horizon is
+                                                pe
+             represented by a window of width k periods (weeks), which is rolled by one week at a
+
+             time.
+                                      ot
+
+
+                 Focusing on Strategy 3, Strategy 1, and the benchmark, we assess their relative
+
+             performances over a range of short subsamples by varying the window width k between
+                            tn
+
+
+
+             1 and 6 years (𝑘 = 1 × 52, 2 × 52,⋯, 6 × 52 weeks). Now we will compare the annual
+
+             returns of any two strategies over every subsample. For instance, when comparing
+                   rin
+
+
+
+
+             Strategy 1 with Strategy 3, we calculate the fraction of k-weeks subsamples over which
+
+             Strategy 1 outperforms, underperforms, and performs equally to Strategy 3.
+        ep
+
+
+
+
+             5.1.1    Strategy 1 (PSYI) versus Strategy 3 (DPSYI)
+
+                 The outperformance percentage of Strategy 3 is higher than that of Strategy 1 across
+Pr
+
+
+
+
+             any rolling window. Because Strategy 3 can better reduce the impact of false detection
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+             on strategies’ returns over a long sub-sample period, it will generate an advantage over
+
+
+
+
+                                                                                    ed
+             Strategy 1 as the window size increases.
+
+
+                                 Table 2 The relative rolling window performance of
+                                        strategy 1(PSYI) and strategy 3(DPSYI)
+
+
+
+
+                                                                                 iew
+                     Case           DPSYI outperforms             PSYI outperforms              Equal
+                                  (PSYI underperforms)         (DPSYI underperforms)        Performance
+               Window Size     Percentage Av.return diﬀ.    Percentage Av.return diﬀ.       Percentage
+                 One year        38.03%          4.79%        26.68%          5.07%            35.29%
+                Two years        63.62%          1.79%        24.30%          2.50%            12.08%
+               Three years       71.13%          1.28%        25.68%          2.17%             3.19%
+                Four years       73.04%          1.07%        26.96%          1.44%              0%
+
+
+
+
+                                                        v
+                Five years       76.10%          0.90%        23.90%          1.09%              0%
+                Six years        77.71%          0.81%        22.29%          0.58%              0%
+
+
+
+
+                                                     re
+             5.1.2     Strategy 3 (DPSYI) versus Strategy 4 (BH)
+                                Table 3 The relative rolling window performance of
+                                                  er
+                                         strategy 3(DPSYI) and strategy 4(BH)
+                     Case           DPSYI outperforms             BH outperforms                Equal
+                                   (BH underperforms)          (DPSYI underperforms)        Performance
+               Window Size     Percentage Av.return diﬀ.    Percentage Av.return diﬀ.       Percentage
+                                                pe
+                 One year        36.39%          9.12%        28.32%         7.97%             35.29%
+                Two years        47.28%          5.42%        41.09%         3.35%             11.63%
+               Three years       53.91%          2.90%        43.22%         2.10%              2.87%
+                Four years       57.57%          2.03%        42.43%         1.77%               0%
+                Five years       61.76%          1.73%        38.24%         1.73%               0%
+                Six years        64.12%          1.54%        35.88%         1.61%               0%
+                                      ot
+
+
+                It is necessary to compare Strategy 3 with the benchmark. Across all window lengths,
+                             tn
+
+
+
+             Strategy 3 is more likely to outperform rather than underperform Strategy 4. As the
+
+             window size increases, the subsample contains more bubbles identified by the GSADF
+                   rin
+
+
+
+
+             test, and Strategy 3 can perform better by riding explosive bubbles.
+
+
+             5.2       Switching data frequency
+        ep
+
+
+
+
+                This paper will employ sensitive daily data instead to explore the feasibility of daily
+
+             data, assuming investors make trading decisions every day. Table 4 demonstrates that
+Pr
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+             the performance of the strategies is poor in daily sector trades. The volatile daily data can
+
+
+
+
+                                                                                    ed
+             reduce the accuracy of bubble detection and increase trading costs.
+                        Table 4 Performance evaluation of trading strategies with daily data
+              Performance                With transaction costs      Without transaction costs
+
+
+
+
+                                                                                 iew
+              Evaluation               PSYI     MPSYI DPSYI         PSYI     MPSYI DPSYI            BH
+              Final wealth ($)         0.70       0.02      1.37     7.81      9.68       7.90      5.40
+              Annual return (%)       -3.30% -29.76% 3.01% 21.15% 23.60% 21.28%                    11.87
+              Sharpe ratio (%)        -0.08% -5.12%         0.9%   3.41%      3.74%     3.42%       6.13
+              Trading periods           481      1207        348     481       1207       348         2
+
+
+
+
+                                                        v
+             5.3     Trading at diﬀerent confidence levels
+
+
+
+
+                                                     re
+                 Now we will explore the influence of diﬀerent confidence levels on Strategy 3’s
+
+             performance by using 90% and 99% alternative confidence levels. As the confidence
+                                                  er
+             level decreases from 99% to 90%, the returns of Strategy 3 will see an increase,
+
+             followed by an evident decrease. A high confidence level increases the accuracy of the
+                                                pe
+             bubble test and results in a high identification threshold. A low confidence level detects
+
+             more bubbles but leads to biases and high-frequency costs.
+                                      ot
+
+
+                        Table 5 Performance evaluation of Strategy 3 for alternative confidence levels
+              Performance Measure                    DPSYI-90%            DPSYI-95%           DPSYI-99%
+                            tn
+
+
+
+              Final wealth($)                            5.41                  6.64                6.47
+              Annual return(%)                          11.88                 13.41               13.22
+              Sharpe ratio(%)                            6.01                  6.66                6.64
+                   rin
+
+
+
+
+             6     Conclusion
+
+                 By employing the GSADF bubble test on ten CSI300 sector indexes, the paper
+        ep
+
+
+
+
+             identifies the existence of bubbles across ten sectors, demonstrates their differences in
+
+             frequency, duration, and expansion degree, and indicates the contagion of bubble
+Pr
+
+
+
+
+             dynamics in these sectors.
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+                Based on the GSADF test, this paper constructs three bubble-riding strategies,
+
+
+
+
+                                                                                    ed
+             Strategies 1, 2, and 3, and chooses the buy-and-hold strategy as the benchmark
+
+             (Strategy 4). Strategy 3 performs best with transaction costs, followed by Strategy 1,
+
+
+
+
+                                                                                 iew
+             Strategy 4, and Strategy 2. Then our subsample analysis verifies the consistency in
+
+             Strategy 3’s performance by assessing its return over different periods. To confirm the
+
+             robustness of our findings, we also take other measures like using daily data and
+
+
+
+
+                                                        v
+             changing the confidence of the bubble test.
+
+
+
+
+                                                     re
+                The profitability of Strategy 3 effectively demonstrates the rationality of riding
+
+             bubbles in the Chinese sector markets. The bubble-riding strategies based on the
+                                                  er
+             GSADF test can beat the benchmark and yield high abnormal returns, showing that
+                                                pe
+             rational investors may drive the expansion of bubbles.
+
+
+
+
+             Declaration of competing interest
+                                      ot
+
+
+             The authors declare that there is no potential conflict of interest.
+                            tn
+
+
+
+             References
+             Abreu, D., Brunnermeier, M.K., 2003. Bubbles and crashes. Econometrica. 71(1), 173-
+                 204.
+                  rin
+
+
+
+
+             Brooks, C., Katsaris, A., 2005. A Three-regime Model of Speculative Behaviour:
+                 Modelling the Evolution of the S&P 500 Composite Index. Economic Journal.
+                 115(505), 767–797.
+             Brown, S.J., Goetzmann, W.N., Park, J., 2000. Hedge Funds and the Asian Currency
+        ep
+
+
+
+
+                 Crisis of 1997. Journal of Portfolio Management. 26(4), 95–101.
+             Brunnermeier, M., Nagel, S., 2004. Hedge Funds and the Technology Bubble. Journal
+                 of Finance. 59(5), 2013-2040.
+             Campbell, J., Shiller, R., 1987. Co-integration and Tests of Present Value Models.
+Pr
+
+
+
+
+                 Journal of Political Economy. 95(5), 1062–1088.
+             Denton, F.T., 1971. Adjustment of Monthly or Quarterly Series to Annual Totals: An
+                 Approach Based on Quadratic Minimization. Journal of the American Statistical
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+                  Association. 66(333), 99-102.
+             Diba, B.T., Grossman, H.I., 1988. Explosive Rational Bubbles in Stock Prices?
+
+
+
+
+                                                                                    ed
+                  American Economic Review. 78(3), 520-530.
+             Evans, G.W., 1991. Pitfalls in Testing for Explosive Bubbles in Asset Prices. American
+                  Economic Review. 81(4), 922-930.
+             Fama, E.F., 2014. Two Pillars of Asset Pricing. American Economic Review. 104(6),
+
+
+
+
+                                                                                 iew
+                  1467-1485.
+             Fung, W., Hsieh, D.A., 1997. Empirical Characteristics of Dynamic Trading Strategies.
+                  Review of Financial Studies. 10(2), 275–302.
+             Greenwood, R.M., Shleifer, A., You, Y., 2019. Bubbles for Fama. Journal of Financial
+                  Economics. 131(1), 20-43.
+             Guenster, N., Kole, E., 2013. Bubbles and Long-term Investors. Working Paper.
+
+
+
+
+                                                        v
+             Guenster, N., Kole, E., Jacobsen, B., 2009. Riding bubbles. In Proceedings of the Paris
+
+
+
+
+                                                     re
+                  December 2007 Finance International Meeting AFFI-EUROFIDAI Paper.
+             Hall, S.G., Psaradakis, Z., Sola, M., 1999. Detecting periodically collapsing bubbles: a
+                  Markov-switching unit root test. Journal of Applied Econometrics. 14, 143–154.
+             Harvey, D.I., Leybourne, S.J., Sollis, R., Taylor, A.R., 2016. Tests for Explosive
+                  Financial Bubbles in the Presence of Non-Stationary Volatility. Journal of
+                                                  er
+                  Empirical Finance. 38(B), 548-574.
+             Homm, U., Breitung, J., 2012. Testing for Speculative Bubbles in Stock Markets: A
+                  Comparison of Alternative Methods. Journal of Financial Econometrics. 10(1),
+                                                pe
+                  198-231.
+             Kindleberger, C.P., Manias, P., Crashes, A., 2005. History of Financial Crises. John
+                  Wilej & Sons, New Jersey.
+             Milunovich, G., Shi, S., Tan, D., 2019. Bubble Detection and Sector Trading in Real
+                  Time. Quantitative Finance. 19(2), 247-263.
+                                      ot
+
+
+             Phillips, P.C., Shi, S., 2020. Real Time Monitoring of Asset Markets: Bubbles and
+                  Crises – ScienceDirect. Handbook of Statistics. 42, 61-80.
+             Phillips, P.C., Shi, S., Yu, J., 2015. Testing for Multiple Bubbles: Historical Episodes
+                            tn
+
+
+
+                  of Exuberance and Collapse in the S&P 500. International Economic Review.
+                  56(4), 1043-1078.
+             Phillips, P.C., Wu, Y., Yu, J., 2011. Explosive Behavior in the 1990s NASDAQ: When
+                  Did Exuberance Escalate Asset Values? International Economic Review. 52(1),
+                  rin
+
+
+
+
+                  201-226.
+             Psaradakis, Z., Sola, M., Spagnolo, F., 2001. A Simple Procedure for Detecting
+                  Periodically Collapsing Rational Bubbles. Economics Letters. 72(3), 317-323.
+             Shiller, R.C., 2000. Irrational exuberance. Philosophy and Public Policy Quarterly. 20,
+        ep
+
+
+
+
+                  18–23.
+             Temin, P., Voth, H.J., 2004. Riding the south sea bubble. American Economic Review.
+                  94(5), 1654-1668.
+Pr
+
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4494963
+
