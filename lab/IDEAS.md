@@ -4,7 +4,7 @@ Top `queued` idea runs next (priority 1 first, then order). One idea per line bl
 market, mechanism (why someone must trade at a bad price), rule sketch, Apex-legal?, data. Runner fills `result:`.
 New ideas: append with the next ID; follow-ups from a failure get `parent:` and go to the end.
 
-## Q001 · running · priority 1
+## Q001 · done · priority 1
 - source: Codex portfolio audit 2026-10-31 (diversify away from NQ: scheduled non-equity events)
 - market: CL (MCL)
 - mechanism: EIA weekly petroleum status report, Wed 09:30 CT. The first minutes overreact to the headline crude draw/build
@@ -12,8 +12,10 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - rule sketch: if |CL 09:30->09:35 move| >= 0.15 x 14-day ATR, enter at 09:36 open (V1 fade, V2 follow), stop 0.3 ATR,
   out 10:30 CT. V3: V1 only when the move is against the 08:30-09:30 drift.
 - Apex: yes (MCL, intraday). data: data/CL_1min_*.csv (dates: every Wednesday; holiday weeks shift to Thursday 10:00 CT)
+- result: skipped 2026-10-31, not tested: duplicate of the F-ranked 'CL forced flows' item in TIER_LIST.md
+  (`analysis/cl_forced_flows_test.py`: follow +$11..21, fade -$65, t -2.5). Rule: never re-queue a D/F item.
 
-## Q002 · queued · priority 1
+## Q002 · done · priority 1
 - source: Codex audit (non-equity); data/treasury_auctions.csv
 - market: ZN (10-year note)
 - mechanism: dealers must absorb 10-year auction supply; yields tend to rise (ZN falls) into the 12:00 CT auction as
@@ -21,6 +23,8 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   markets'). Test short ZN 08:30 -> 11:55 on 10-year auction days; long 12:05 -> 14:00.
 - rule sketch: V1 short 08:30->11:55, V2 long 12:05->14:00, V3 both. Stop 0.5 x 14-day ATR.
 - Apex: yes (user confirmed 2026-10-31). data: data/ZN_*, data/treasury_auctions.csv
+- result: skipped 2026-10-31, not tested: duplicate of the D-ranked 'Treasury auction price pressure' item
+  (`analysis/treasury_auction_test.py`: 10-year both legs +$38 gross vs $77 cost; rebound absent).
 
 ## Q003 · queued · priority 2
 - source: lab seed (non-equity, FX fixing flow)
@@ -56,7 +60,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   V2 opposite sign; V3 threshold 1.5.
 - Apex: yes (two legs, both intraday). data: g24.pkl, ge.pkl
 
-## Q007 · queued · priority 1
+## Q007 · running · priority 1
 - source: Codex audit 2026-10-31; data supplied by the user 2026-10-31 (NG 1-min 2017-2026, converted ET -> CT)
 - market: NG (QG / MNG micro: confirm which NG contract Apex lists)
 - mechanism: EIA weekly natural-gas storage report, Thursday 09:30 CT (moved to Wed/Fri in holiday weeks). The first
