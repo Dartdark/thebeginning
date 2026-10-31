@@ -177,6 +177,9 @@ def describe(daily, trades):
                   cagr=float((daily.nav.iloc[-1] / CAPITAL) ** (252 / len(daily)) - 1),
                   percent_max_dd=float((daily.nav / daily.nav.cummax() - 1).min()),
                   return_sharpe=float(returns.mean() / returns.std() * np.sqrt(252)) if returns.std() else None)
+    x = trades.net if len(trades) else pd.Series(dtype=float)
+    result["trade_t"] = float(x.mean() / x.std() * np.sqrt(len(x))) if len(x) > 1 and x.std() else None
+    result["daily_dollar_t"] = float(daily.pnl.mean() / daily.pnl.std() * np.sqrt(len(daily))) if daily.pnl.std() else None
     return result
 
 
@@ -185,7 +188,9 @@ def run():
     assert subprocess.check_output(["git", "status", "--porcelain", "--", str(PLAN), __file__], text=True) == "", "Commit plan and code before returns"
     OUT.mkdir(parents=True, exist_ok=True)
     d, hashes = inputs()
-    d.to_csv(OUT / "signal_inputs.csv", index_label="date")
+    # Preserve raw prices locally; publish transformed signals and derived trading ledgers.
+    d.to_csv(ROOT / "available_period_signal_inputs.csv", index_label="date")
+    d[["contract", "expiry", "basis"]].to_csv(OUT / "signal_inputs.csv", index_label="date")
     runs = {}
     specs = [("switch", .0015, .002, None), ("hold_XIV", .0015, .002, "XIV"),
              ("hold_VIXY", .0015, .002, "VIXY"), ("switch_double_cost", .003, .004, None),
@@ -208,6 +213,7 @@ def run():
             for asset in ["XIV", "VIXY"]:
                 selected = trades[trades.asset == asset]
                 m = metrics.perf(daily[asset + "_pnl"], selected.net, capital=CAPITAL)
+                m["trade_t"] = float(selected.net.mean() / selected.net.std() * np.sqrt(len(selected)))
                 legs.append(dict(asset=asset, net_pnl=float(selected.net.sum()), **m))
             resampling.bootstrap(daily.pnl, n=5000, block=10, seed=2753300, capital=CAPITAL).to_csv(OUT / "bootstrap.csv")
             mc = montecarlo.daily_mc(daily.pnl, n=5000, block=10, seed=2753300, trail=1e100)
@@ -219,6 +225,8 @@ def run():
                   plan_sha256=sha(PLAN), script_sha256=sha(__file__), input_sha256=hashes,
                   first=str(d.index.min().date()), last=str(d.index.max().date()), sessions=len(d),
                   economic_definitions=4, gross_accounting_counterpart=1, reference_capital=CAPITAL,
+                  dependencies=dict(numpy=np.__version__, pandas=pd.__version__),
+                  raw_signal_input_sha256=sha(ROOT / "available_period_signal_inputs.csv"),
                   runs=runs, classification="Limited historical proxy; no promotion/current-account claim")
     (OUT / "summary.json").write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps({k: v for k, v in result.items() if k != "input_sha256"}, indent=2))
