@@ -1,0 +1,1421 @@
+Constructing the Best Trading Strategy:
+A New General Framework
+Philip Z. Maymin and Zakhar G. Maymin
+
+
+
+Abstract: We introduce a new general framework for constructing the best trading
+strategy for a given historical indicator. We construct the unique trading strategy
+with the highest expected return. This optimal strategy may be implemented
+directly, or its expected return may be used as a benchmark to evaluate how far
+away from the optimal other proposed strategies for the given indicators are.
+Separately, we also construct the unique trading strategy with the highest
+information ratio. In the normal case, when the traded security return is near zero,
+and for reasonable correlations, the performance differences are economically
+insignificant. However, when the correlation approaches one, the trading strategy
+with the highest expected return approaches its maximum information ratio of 1.32
+while the trading strategy with the highest information ratio goes to infinity.
+
+
+Keywords: trading strategy, conditional, portfolio management, optimal, indicators
+
+JEL codes: G11, G14, G17
+
+
+Philip Z. Maymin (corresponding author)
+NYU-Polytechnic Institute
+Six MetroTech Center
+Brooklyn, NY 11201
+Telephone: 718-260-3175
+Email: phil@maymin.com
+
+Zakhar G. Maymin
+Quantitative Investment Services, Inc.
+Email: zak@maymin.com
+
+
+
+
+               Electronic
+               Electroniccopy
+                          copyavailable
+                              availableat:
+                                        at:https://ssrn.com/abstract=1896146
+                                           http://ssrn.com/abstract=1896146
+Introduction
+       There is a vast literature analyzing the performance of strategies formed
+
+from various historical indicators comparing different techniques, implementations,
+
+and sets of parameters, including momentum and mean-reversion strategies (cf.
+
+Jegadeesh and Titman 2002, Conrad and Kaul 1998), fundamentals (cf. Fama and
+
+French 2008, Pesaran and Timmermann 1995), technical analysis (cf. Brock,
+
+Lakonishok, and LeBaron 1992, Faber 2007), and machine learning (cf. Enke and
+
+Thawornwong 2005, Kim 2003). The portfolio construction literature, such as the
+
+view-centric approach of Black and Litterman (1992) and its progeny or the alpha-
+
+centric approach of Grinold and Kahn (1999), attempt to create optimal portfolios
+
+but do so as an asset allocation exercise conditional on multiple assets from which
+
+to choose, rather than examining the question for a given asset and a given historical
+
+indicator. Indeed, it has always been difficult to determine with any certainty
+
+whether a particular technique or a particular strategy could have performed better
+
+with different parameters or different implementations. Further, for the strategies
+
+that have been most successful, it is unclear how much they could have been further
+
+improved, if at all.
+
+       This paper aims to answer these questions. We develop a new general
+
+framework for analyzing strategies based on a given indicator, use that framework
+
+to find the greatest expected return with the best possible strategy, construct such a
+
+strategy explicitly, and derive the implications.
+
+       The best strategy could be interpreted as the one that has the highest
+
+expected return or the highest information ratio. (Considering the information
+
+
+                                             1
+
+                Electronic
+                Electroniccopy
+                           copyavailable
+                               availableat:
+                                         at:https://ssrn.com/abstract=1896146
+                                            http://ssrn.com/abstract=1896146
+instead of the Sharpe ratio does not conceptually make any difference but simplifies
+
+the presentation.) In this paper we will discuss and compare both.
+
+       The framework assumes that we know the conditional distribution of the
+
+future returns of the traded securities, given the historical indicator. As with the
+
+fields of mean-variance efficient portfolio allocation and option and derivatives
+
+pricing theory, such an assumption has its advantages and disadvantages. Among
+
+the advantages are the ability to quickly compare the potential profitability of
+
+trading for various indicators, markets, and securities and the ability to estimate
+
+how far from the best a particular trading strategy is. Thus, this approach helps
+
+better allocate resources in developing a trading strategy. The disadvantages of such
+
+an approach are that the true conditional distribution is unknown and often not
+
+stable in financial markets. This paper does not address time-varying estimation
+
+issues of the conditional distribution, though we do discuss simple ways to estimate
+
+the optimal strategy from the data.
+
+       Even if the conditional distribution is completely known, a trader may still
+
+prefer to use another, non-optimal strategy if, for example, the execution of the sub-
+
+optimal strategy is easier, or if it incurs less slippage, commissions, or other
+
+transactions costs. In such cases, our framework quantifies how far from optimal
+
+that strategy lies and gives the trader a quick tool to do performance analysis.
+
+       Any developer of a trading strategy could benefit from our new framework in
+
+three ways. First, our framework allows a more robust analysis and comparison of
+
+strategies across different indicators and different markets. Second, our framework
+
+
+
+
+                                            2
+
+               Electronic
+               Electroniccopy
+                          copyavailable
+                              availableat:
+                                        at:https://ssrn.com/abstract=1896146
+                                           http://ssrn.com/abstract=1896146
+provides a quick metric by which the distance to the optimal strategy can be
+
+measured. Third, our framework overcomes the problem of overfitting data because
+
+it requires only a handful of intuitively understandable parameters such as
+
+volatilities and correlation.
+
+
+
+Framework
+       Let us define a trading strategy as a pair of a historical indicator , and a
+
+notional function        ( ), a function on . Let’s also define          as the next period
+
+return of the traded security.
+
+       The historical indicator     could be a function of the historical prices of the
+
+traded security or a function of any historical information on any securities,
+
+markets, indices, factors, or anything else. The role of the indicator is to aggregate
+
+historical information before investing in the security. An example of an indicator in
+
+the case of momentum might be the 12-month trailing return on the security.
+
+       The notional function          ( ) tells us how much we should invest in the
+
+security after observing the indicator , or how many shares or contracts or other
+
+units of the security we should buy if              , or sell if        . To reflect capital
+
+constraints, we will assume that     is a bounded function.
+
+       Often, there are different amounts of money required to make a trade
+
+depending on whether we buy or sell the security. For example, typically there are
+
+different margin requirements for long and short positions in stock or long and
+
+short positions in options, or constraints or restrictions on borrowing that preclude
+
+selling short. Also, because of risk considerations, sometimes the margin depends on
+
+
+                                             3
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+the composition of the current portfolio to which we add this security. Yet all the
+
+results of this paper are trivially generalized for the case when ( ) is bounded
+
+above and below by different constants; thus, without loss of generality, we’ll
+
+assume that the magnitude of ( ) is bounded by 1, so that | |               . This means that
+
+we are investing a maximum of $1 for the next time period. Let us call such
+
+strategies notional-constrained.
+
+       Typically    is the return we get during the next time period, or excess return,
+
+but it could also be the profit and loss (i.e., the dollar amount we receive or pay), the
+
+volatility, or any other variable for which a market exists that we could buy or sell. It
+
+could be a discrete or even binary variable, such as binary bets. In addition, the time
+
+period of the future results need not be a fixed time period but could also be defined
+
+relative to other occurrences (e.g., stop losses). Here, without loss of generality, we
+
+consider     to be the next period return of the security.
+
+       Thus the return of our strategy on our investment during the next time
+
+period is:
+
+                                               ( )
+
+       Now we can formulate our main questions: investing not more than $1, what
+
+is the maximum expected return (or information ratio) of the optimal strategy and
+
+what notional function ( ) maximizes it? Maximizing the expected return without
+
+regard to risk is often the approach taken by practitioners while analyzing trading
+
+strategies, especially in early stages.
+
+
+
+
+                                              4
+
+                Electronic copy available at: https://ssrn.com/abstract=1896146
+         We first find and analyze the trading strategy with the highest expected
+
+return for a single indicator and a single security. We then generalize the results for
+
+multiple indicators and multiple securities and explore the implications. Finally, we
+
+compare the results with the trading strategy having the highest information ratio.
+
+
+
+The Trading Strategy with the Highest Expected Return
+Theorem
+         Let the historical indicator              and the return   be random variables with a
+
+known conditional expectation ( )                      ( | ). And let’s consider only notional
+
+functions ( ) such that | ( )|                 .
+
+         Then the maximum expected return
+
+                                              ( ( ) )       (| ( )|)
+                                  | |
+
+
+is achieved only by the optimal notional function
+
+                                              ( )          ( ( ))
+
+The optimal notional function is unique up to the set                      ( )       .
+
+
+Proof
+         The idea of the proof is to show that we cannot improve the optimal signal
+
+  ( ) on any infinitesimal interval.
+
+         Let         ( ) as above be the strategy return of an arbitrary notional ( ),
+
+| ( )|         , and let   ( )          for                    , and 0 elsewhere, for any real
+
+and            .
+
+         Then, for an         , and                ,
+
+
+                                                       5
+
+                   Electronic copy available at: https://ssrn.com/abstract=1896146
+                 [( ( )         ( )) ]            [ ( ) ( )                ( )   ( )]
+
+
+            [ ( ) ( )(          ( ))]            [ ( ) ( )        ( )]       [     ( )    ( )]
+
+
+                       [ ( ) ( )(                ( ))]        ( ( )      ) ( )
+
+with the first equality following from the fact that the unconditional expected value
+
+of a random variable is the unconditional expected value of the conditional expected
+
+value of that variable given any indicator.
+
+       Therefore, when ( )           , to be optimal, ( ) must be exactly , or else we
+
+would be able to improve it at the point                 by adding a small enough to keep
+
+ ( )     . Similarly, when ( )            , ( ) must be           . When ( )             , the value of
+
+ ( ) doesn’t affect the strategy expected return.
+
+
+
+The Normal Case
+       Let the historical indicator         and return            be bivariate normal random
+
+variables with            ,     ( )          ,            ,      ( )         , and         (     )    .
+
+Without loss of generality, we assume that                    . For negative correlations, we can
+
+redefine the indicator to have the opposite sign. The special case of zero correlation
+
+is treated in the next subsection.
+
+       Denote by ( ) the expectation of the absolute value of a normal distribution
+
+with mean    and variance 1:
+
+
+               ( )      (| |)         (      )            √            (     ( )     )
+
+       Then the maximum expected return of the optimal strategy is:
+
+
+
+                                                  6
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+             (        )              [ ( ) ]           (| ( | )|)                (   )            (   )
+                           | |
+
+
+
+where      ( ) is the CDF of the standard normal distribution and                            is the “m-ratio” to
+
+be discussed below:
+
+
+
+
+Note that the maximum expected return                           does not depend on the distribution
+
+parameters         and       of the indicator.
+
+         The maximum is achieved only by the optimal notional function:
+
+
+             ( )           ( ( | ))                (    (            )       )           (            )
+
+
+         Note that the optimal notional function will be unchanged if the historical
+
+indicator is standardized to              (             )        . Thus, without loss of generality, we
+
+can assume that                  and          .1
+
+         In the normal case, the optimal notional is equal to the sign of the regression
+
+of the return       on the indicator . This follows because the conditional expected
+
+value for normal variables is the regression value of one variable on the others.
+
+         With the simplifying assumptions that the historical indicator has been
+
+standardized, and that its correlation with the return is positive, we can rewrite the
+
+optimal notional function as follows:
+
+                                         ( )                (            )
+
+1 In a different context, the term      above may also be interpreted, as in Grinold (1994), as the
+alpha of a fund, if the correlation is interpreted as a measure of the manager’s skill and    is
+interpreted as a standardized score.
+
+
+                                                       7
+
+                   Electronic copy available at: https://ssrn.com/abstract=1896146
+       There are two cases. If          , then if the historical indicator is positive or
+
+zero, the optimal trading strategy buys, and continues buying until the indicator falls
+
+below a given threshold. If         , then if the historical indicator is negative or zero,
+
+the optimal trading strategy sells, and continues selling until the indicator exceeds a
+
+given threshold. In each case the threshold is –      , the opposite of the m-ratio.
+
+       What is the m-ratio? It is the security’s information ratio divided by its
+
+correlation with the indicator, and it can also be calculated as the ratio of the
+
+expected return to the expected product of the indicator and the return:
+
+                                                   ( )
+                                                  ( )
+
+
+       In practice, this may serve as a useful way to estimate –        , the threshold of
+
+optimal strategies.
+
+
+No Knowledge
+       In the normal case, if the historical indicator provides no knowledge about
+
+the future return, then the correlation between them is zero, and the conditional
+
+expected value of     given    is the same as the unconditional expected value of .
+
+Therefore, the optimal strategy in the case of zero knowledge is to buy the security if
+
+its expected return is positive, and to sell it otherwise.
+
+
+Perfect Knowledge
+       In the normal case, if the historical indicator provides perfect knowledge
+
+about the future return, then the correlation between them is one, and the best
+
+strategy is the one that buys when it is known that the return will be positive and
+
+
+
+
+                                             8
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+sells when it is known that the return will be negative. Hence the expected return of
+
+the optimal strategy will simply be the expected value of the absolute value of :
+
+
+                                                ( )
+
+
+       For the typical case in practice of       representing excess returns with
+
+expected value        , the optimal expected return is ( )            √             .
+
+
+Negligible Drift
+       As the security’s expected return approaches zero, the expected return of the
+
+optimal trading strategy approaches:
+
+                                    ( )         √
+
+       Thus in the case of negligible drift for the security, the best possible expected
+
+return is simply proportional in the correlation to the perfect knowledge case, and
+
+the optimal notional function is:
+
+                                          ( )         ( )
+
+       In this case, the return of the optimal strategy is more likely to be positive
+
+than negative. In fact, we can calculate an exact expression for the probability that
+
+the return of the optimal strategy exceeds zero. Let              ( ) be the return of
+
+the optimal strategy. Then:
+
+                                                            ( )
+                                (          )
+
+
+
+
+                                                9
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+       Figure 1 plots this probability as a function of the correlation                   . The
+
+probability equals one-half when        is zero, always exceeds one-half for positive ,
+
+and is equal to one when      is one.
+
+       Thus, any strategy on a security with negligible drift that is more likely to be
+
+negative than positive is not the optimal strategy.
+
+
+Figure 1: Probability of Positive Return of Optimal Strategy
+This figure plots the probability that the return of the optimal strategy is positive as
+a function of the correlation between the security and the historical indicator.
+
+
+
+
+Relation with the m-Ratio
+       In the general case, the optimal expected return is             (   ). If we fix    and
+
+let           vary, then we can compare different strategies on an equal footing, and
+
+for a single security, we can then evaluate the sensitivity of the strategy to changes
+
+in the security’s drift.
+
+
+
+
+                                              10
+
+                Electronic copy available at: https://ssrn.com/abstract=1896146
+        Thus, we can plot (     ), the optimal expected return as a proportion of              .
+
+Figure 2 graphs (    ) and |    | versus    . When           , we obtain the performance
+
+of the negligible drift, ( )        . As    moves away from zero, the performance
+
+improves. Once the absolute value of        exceeds one, the difference between (             )
+
+and |   | becomes negligible: ( )                ( )             ( )            .
+
+
+
+
+Figure 2: (    ) and |   |
+This figure plots ( ), the optimal expected return as a proportion of               , and |   |,
+the absolute value of , versus .
+
+
+
+
+                                            11
+
+              Electronic copy available at: https://ssrn.com/abstract=1896146
+Examples and Extensions
+Non-Linear Conditional Expected Value of            on
+       The main result above says that the best notional function is given by the
+
+sign of the conditional expected value of the return         on the historical indicator .
+
+In the case of the bivariate normal, and in many other bivariate distributions, the
+
+conditional expected value is linear in . In practice, however, when we plot
+
+against , we can sometimes see a non-linear relation.
+
+       To estimate conditional expected values we could use non-linear regressions
+
+of returns on indicators. Copulas are another possible approach.
+
+       Copulas are useful for such situations, because they provides examples of
+
+non-linear families of conditional expected values based only on a few parameters,
+
+often based only on one parameter. Crane and van der Hoek (2008) provide
+
+multiple examples of such copulas.
+
+       Based on the plot of      against , the appropriate family of copulas can be
+
+chosen for which the parameters can be estimated from the data to evaluate the
+
+conditional expected value of        given . Then the main result can be used to
+
+estimate the best notional.
+
+
+Multiple Indicators
+       If instead of a single historical indicator          we have multiple indicators
+
+             , then analogously the best notional function is:
+
+                       (               )          ( ( |              ))
+
+       The proof is similar to that of the main result.
+
+
+
+                                             12
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+        Having multiple indicators is effectively equivalent to having a single
+
+historical indicator             ( |              ). For normally distributed indicators and
+
+returns, the single indicator will simply be a linear combination of the other
+
+indicators, the result of the relevant regression.
+
+
+Multiple Securities
+Theorem
+        Let historical indicators                                  and returns           be
+
+random variables with a known joint distribution. And let’s consider only notional
+
+functions ( )          (                 ) that are bounded by 1.
+
+        Then the maximum expected return is achieved only by the following optimal
+
+notional function:
+
+
+                                       ( )            ( (       | ))
+
+where     is such that:
+
+                   (       ( (     | )       )              (      ( ( | ) )
+
+
+        In other words, the optimal trading strategy would in each instance invest
+
+only in the security with the highest absolute value of expected returns.
+
+        In practice, however, it may be beneficial to invest in several securities,
+
+especially if the expected returns of applying the optimal strategies to them are
+
+similar, to lower the portfolio volatility.
+
+
+
+
+                                                 13
+
+                Electronic copy available at: https://ssrn.com/abstract=1896146
+Optimal Strategy Information Ratio
+Derivation of General Formula
+        As above, denote by     the return of the optimal strategy:
+
+                                                 ( )
+
+        The main result for the bivariate normal distribution shows that:
+
+                                          ( )            ( )
+
+where         ( | )                 and          ( ) as above.
+
+        We can compute the variance of Q as:
+
+                      ( )       (    )               (     )
+
+with the last equality following because             ( )           .
+
+        Thus the information ratio of the optimal strategy is:
+
+                                            ⁄                          ⁄
+                                                (√         √                   )
+                √
+                      √ ⁄                                      √                   ⁄
+
+
+
+
+where           is the m-ratio as above and                (   )           (       )   .
+
+
+        Note that the information ratio depends only on the m-ratio and the
+
+correlation; equivalently, it is depends only on the correlation and the security’s
+
+information ratio           .
+
+        Thus we can view the strategy information ratio as:
+
+                                                 (       )
+
+
+
+
+                                                14
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+        The information ratio of the optimal strategy will always equal or exceed the
+
+information ratio of the security, even when the distribution is not normal, because,
+
+as we have shown earlier, the expected return of the optimal strategy will always
+
+equal or exceed the expected return of any particular strategy, for example the long-
+
+only strategy, and therefore it will always exceed the expected return of the
+
+security:
+
+                                 (   )     ( ( ) )          ( )
+
+and because the second moment of the security will always equal or exceed the
+
+second moment of the optimal strategy:
+
+                                 (   )      (    ( )    )     (     )
+
+with strict inequality holding if there exists at least one value of                 for which
+
+  ( )       , and so the variance of the optimal strategy will never exceed the variance
+
+of the security.
+
+
+Large Security Information Ratio
+        Figure 3 plots the information ratio of the optimal strategy for various values
+
+of the information ratio of the security and various levels of correlation between the
+
+security and the historical indicator. The optimal strategy information ratio
+
+approaches the security information ratio as the latter goes to infinity:
+
+
+
+
+        Asymptotically, the plot converges quickly to | |               |     |, as can be seen
+
+from the table at the bottom of Figure 3. Essentially, this means that the best
+
+
+
+
+                                                 15
+
+                   Electronic copy available at: https://ssrn.com/abstract=1896146
+strategy for securities with large information ratios cannot substantially outperform
+
+the long-only strategy.
+
+
+Figure 3: Optimal Strategy Information Ratio
+This figure shows the information ratio of the optimal strategy as a function of the
+security information ratio and the correlation between the security return and
+the historical indicator. The table beneath it selects a few points to illustrate the
+speed of convergence.
+
+
+
+
+                            (          )     (          )     (          )
+
+                  0.1     0.5              1.               2.
+
+                  0.25 0.505324            1.00001          2.
+
+                  0.5     0.611567         1.0172           2.00004
+
+                  0.75 0.85525             1.1411           2.00891
+
+                  1.      1.33818          1.45946          2.08951
+
+
+
+
+                                             16
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+Negligible Security Information Ratio
+       When the security information ratio                 is near zero, the optimal strategy
+
+information ratio   simplifies to:
+
+
+                                                       √
+                                      (    )
+                                                   √
+
+       Figure 4 plots this function, which increases from zero when the correlation
+
+is zero to a maximum of 1.324 when the correlation is one.
+
+       Another way of deriving this maximum is to note that it is the information
+
+ratio of a strategy with perfect knowledge trading one unit of the security. Such a
+
+strategy would earn the absolute value of the security return, | |, with mean
+
+                                  ( )          √
+
+and variance
+
+                                          (          ( ) )
+
+so its information ratio would be
+
+                                          ( )
+                                  √           ( )
+
+       Annualizing, the information ratio of the strategy with the highest expected
+
+return from monthly trading on an indicator with perfect knowledge cannot exceed
+
+     √          . Strategies purporting to exceed this limit must either have
+
+suboptimal expected return, or trade more than one unit of the security, or trade
+
+more than one security.
+
+
+
+
+                                                17
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+Figure 4: Optimal Strategy Information Ratio for a Zero-Drift Security
+This figure plots, for a security with zero drift, the information ratio of the optimal
+strategy ( ) as a function of the correlation between the security return and
+the historical indicator.
+
+
+
+
+Relation with Market Efficiency
+       Following cf. Fama (1976), market efficiency cannot be tested without a
+
+model of market equilibrium. One common approach to testing market efficiency is
+
+to compare the returns on a particular strategy with the returns from buying and
+
+holding the security itself. If the strategy returns statistically significantly exceed the
+
+security returns, inefficiency is claimed.
+
+       The implications from our approach are that there are cases where particular
+
+strategies no longer need to be developed and tested for the purpose of testing
+
+market efficiency. Once a historical indicator correlated with future returns is found,
+
+then we have shown there will exist an optimal strategy with expected returns in
+
+
+                                             18
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+excess of the security returns. Moreover, the information ratio of the optimal
+
+strategy will exceed the information ratio of the security.
+
+       Another way of seeing the relation with market efficiency is as follows. We
+
+have shown in full generality, assuming as usual that the security has positive
+
+expected return ( )        , that:
+
+                           ( )       (        ( ( | )) )              (| |)
+
+       The first inequality is an equality if and only if ( | )                         ( ). In the
+
+language of Fama (1976), this means the market is efficient. In other words, in the
+
+context of testing the market for inefficiency conditional on a given indicator, rather
+
+than attempting to continually develop and improve strategies to see if their
+
+expected return can outperform buy-and-hold, our approach is able to directly
+
+construct the optimal strategy. This removes the possibility that the failure to prove
+
+inefficiency was caused by a poor implementation of a strategy.
+
+
+
+The Trading Strategy with the Highest Information Ratio
+Theorem
+       Let the indicator    and the return              again be random variables with known
+
+first two conditional moments        ( )           ( | ) and          ( )     (   | ), and let:
+
+                                     ( )           ( )        ( )
+
+                                 (    )        (        ( )       ( ))
+
+                                          (         )         (   )
+
+where ( ) is the clipping function:
+
+
+                                               19
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+                                   ( )     {               | |
+
+
+        Finally, as before, a trading strategy is notional-constrained if | ( )|                 .
+
+Then:
+
+1. The maximum information ratio across all possible strategies is:
+
+
+                                                   √
+                                               √
+
+   and this maximum is achieved with the notional function                 ( )    ( ).
+
+2. If ( ) is bounded or         is bounded, | ( )|                 for all , then the maximum
+
+   information ratio across all notional-constrained strategies is
+
+
+                                                   √
+                                               √
+
+   and this maximum is achieved with the notional function                 ( )    ( )        .
+
+3. The maximum information ratio across all notional-constrained strategies is:
+
+                                           ( (         )    ( ))
+
+                         √ ( (       )    ( ))         ( ( (        )   ( )))
+
+
+   and the notional function (           ) achieves the greatest return among all
+
+   notional-constrained strategies with the same second moment as (                     ).
+
+
+Proof
+1. The information ratio of a strategy’s return ( ) for a notional function ( ) is
+
+
+
+
+                                               20
+
+                Electronic copy available at: https://ssrn.com/abstract=1896146
+                                  (       )                                          (    )
+
+                     √ (          )       ( (         ))           √ (               )   ( (     ))
+
+
+   Thus ( ) maximizes the information ratio if and only if it maximizes:
+
+
+                                                      ( (           ))
+                                                        (            )
+
+       Suppose a strategy with notional function ( ) has a greater information
+
+ratio than that of    ( ) and denote by                     the second moment of its strategy return:
+
+                                      (           )        (         )
+
+       Define
+
+
+                                                      √ (                )
+                                                               √
+
+       Then for any ,                                 is the particular                  that maximizes
+
+
+                                                                (            )
+
+       and
+
+
+                                                                                          (    √ )
+                (      )          ((          )       )                  (           )
+
+
+       So for any              ( ) and all :
+
+                                                  (        )                         (    )
+
+       and
+
+                           (      )               (        )         (           )        (     )
+
+
+
+
+                                                               21
+
+                Electronic copy available at: https://ssrn.com/abstract=1896146
+       So
+
+                                            (    )      (           )
+
+       Therefore the information ratio of              is greater than that of . But the
+
+information ratio of        equals the information ratio of                           because
+
+multiplying the notional by a positive constant does not change a strategy’s
+
+information ratio.
+
+       Thus            is the optimal trading strategy having the highest information
+
+ratio, and its information ratio is:
+
+                        (      )                                (          )              √
+
+            √ (                                 √ (                                   √
+                        )     ( (      ))                       )       ( (    ))
+
+
+   Furthermore,             because ( ( | ))                (       | ) and with equality holding if
+
+   and only in the case of perfect knowledge of                     on .
+
+2. The proof of this statement follows immediately from the preceding statement
+
+   because again multiplying a notional function by a constant does not affect the
+
+   strategy’s information ratio and we know that                                    has the greatest
+
+   information ratio among all possible strategies, including notional-constrained
+
+   strategies. Further, if         is bounded and ( ) is continuous, then ( ) must also
+
+   be bounded, and in practice,             is always bounded.
+
+3. The proof of this statement (3) is similar to the proof of statement (1). This
+
+   statement is useful in situations when                   is unbounded to find the notional-
+
+
+
+
+                                                  22
+
+                Electronic copy available at: https://ssrn.com/abstract=1896146
+   constrained strategy with the best information ratio by looking at notional-
+
+   constrained strategies having a fixed second moment.
+
+
+Normal Case
+          As before, let the historical indicator                       and return              be bivariate normal
+
+random variables with                             ,    ( )                  ,               ,       ( )       , and
+
+      (      )            .
+
+          Then:
+
+
+                                            ( )
+
+
+                                   (          )             (       (            )      (            )    )
+             ( )
+
+
+                                                  (             (               ) )
+             ( )
+                                  (           )            (        (             )     (           )     )
+
+          As above, only the standardized version of                                  enters these equations.
+
+Therefore, without loss of generality, we can assume in what follows that
+
+and              , or, equivalently, that the historical indicator                    is standardized.
+
+          Because      is positive, ( ) is obviously bounded and therefore the optimal
+
+information ratio notional function is
+
+                                            ( )       ( )           (       )
+
+where        and        are such that
+
+
+                                  (     )             ( )
+                                                                        √
+
+
+
+
+                                                      23
+
+                    Electronic copy available at: https://ssrn.com/abstract=1896146
+                           (       )               ( )
+                                                                    √
+
+and
+
+
+
+                                                            √
+
+
+where as above
+
+
+
+
+      So
+
+
+                                               √                (       )
+                     ( )
+                                           (        )
+
+and
+
+
+                                                    (               )
+                  ∫
+                       √       (           (        )                       )
+
+
+so the maximum information ratio is as above:
+
+
+                                                        √
+                                                   √
+
+and the expected return of the maximum information ratio strategy is:
+
+                                               (    )
+                               (       )                        √
+                                               (    )
+
+
+
+
+                                                   24
+
+              Electronic copy available at: https://ssrn.com/abstract=1896146
+Normal Case with Negligible Drift
+        Suppose now that         . Then:
+
+
+                                                 √
+                                   ( )
+
+
+
+                                      √              (    ( ))
+
+where
+
+
+                                                     √
+                                          ( )
+
+
+and the maximum information ratio is:
+
+
+                                                 √
+                                            √
+
+        Figure 5 plots the optimal notional function        for a variety of correlations. It
+
+is a symmetric function around zero, is equal to zero for              , and is bounded by
+
++1 and -1. As the correlation approaches one, the maximum occurs closer to
+
+and quickly approaches zero elsewhere. As the correlation approaches zero, the
+
+notional function approaches      ( )       .
+
+        Figure 6 plots the expected return of the optimal information ratio strategy.
+
+For a correlation of zero, the expected return approaches zero. For a correlation of
+
+one, the expected return is 100%.
+
+
+
+
+                                                25
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+Figure 5: Optimal Notional Function for Negligible Drift
+This figure plots the notional function with the highest information ratio in the
+normal case for a negligible drift for a variety of correlations, as well as  ( )
+which is the notional function with the highest expected return.
+
+
+
+
+Figure 6: Expected Return of Optimal Information Ratio Strategy
+This figure plots the expected return of the strategy with the highest information
+ratio as a function of the correlation    .
+
+
+
+
+                                             26
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+Figure 7: Maximum Information Ratio
+This figure plots the maximum information ratio of the optimal strategy as a
+function of the correlation . Also shown for reference is the identity function of .
+
+
+
+
+     Correlation Maximum Information Ratio Approximation for
+                          √ √                   ( (    ))
+     0.1         0.0995317                 0.771173
+     0.2         0.196865                  0.794219
+     0.3         0.291882                  0.821179
+     0.4         0.386508                  0.853443
+     0.5         0.484213                  0.893244
+     0.6         0.590425                  0.94449
+     0.7         0.714714                  1.01492
+     0.8         0.878467                  1.12319
+     0.9         1.15429                   1.33571
+     0.99        2.29156                   2.37527
+     0.999       4.17963                   4.22389
+     0.9999      7.48685                   7.51126
+     0.99999     13.3435                   13.3571
+
+
+
+
+                                             27
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+        Figure 7 plots the information ratio of the optimal strategy, equal to
+
+√   √         . The maximum information ratio grows as               until   exceeds about 0.7,
+
+and then as     goes to one, the maximum information ratio goes to infinity as:
+
+
+                                       ( (               ))
+
+        The table at the bottom of Figure 7 displays the maximum information ratio
+
+for several correlation values. It also displays the approximation formula above.
+
+
+Comparison with Highest Expected Return Strategy
+        Let’s compare the strategy with the highest information ratio to the strategy
+
+with the highest expected return. Table 1 summarizes the notional function,
+
+expected return, standard deviation, and information ratio for each of the two types.
+
+
+Table 1: Summary of Optimal Strategies
+This table summarizes the optimal notional function, the expected return of the
+strategy, its standard deviation, and its information ratio, for the maximum expected
+return strategy and the maximum information ratio strategy.
+                                 Maximum Expected Maximum Information
+                                   Return Strategy               Ratio Strategy
+        Optimal Notional                                                     √
+                                                     ( )
+
+
+        Expected Return
+                                                √
+              (   )
+
+     Standard Deviation
+                                        √                                    √ √
+            (    )
+        Information Ratio                       √
+                                                                         √       √
+          (   )    (   )                    √
+
+        where
+                                        √                 (   ( ))
+        and
+                                                √
+
+
+                                                    28
+
+                 Electronic copy available at: https://ssrn.com/abstract=1896146
+       Each optimal strategy’s expected return is proportional to the security
+
+volatility . Figure 8 plots the ratio of the expected return of the optimal expected
+
+return strategy to that of the optimal information ratio strategy. This ratio goes to
+
+infinity as the correlation goes either to zero or to one, and otherwise it always
+
+exceeds one, achieving a minimum of 1.15 when                          . This ratio can be
+
+expressed as:
+
+
+                                            √
+
+                √      √                    (        )(        (√           ))
+
+
+Figure 8: The Ratio of Expected Returns for the Optimal Strategies
+This figure plots the ratio of expected returns for the optimal expected return
+strategy to the optimal information ratio strategy.
+
+
+
+
+       Similarly, each optimal strategy’s information ratio is independent of . The
+
+excess of the optimal information ratio strategy’s information ratio to that of the
+
+
+
+
+                                                29
+
+                Electronic copy available at: https://ssrn.com/abstract=1896146
+optimal expected return strategy is shown in Figure 9. The difference is small unless
+
+the correlation approaches one, in which case the difference tends to infinity.
+
+
+Figure 9: The Difference between Information Ratios of Optimal Strategies
+This figure plots the difference between the information ratio of the optimal
+information ratio strategy and that of the optimal expected return strategy.
+
+
+
+
+Conclusion
+       How close to the best is a given trading strategy? The traditional approach in
+
+developing strategies has been to tinker and improve, never knowing how close to
+
+the optimal one is.
+
+       We answer this question instead by introducing a new general framework
+
+that explicitly constructs the optimal trading strategy for a given security and
+
+historical indicator and evaluates its expected return. We also compare the results
+
+
+
+
+                                             30
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+with those of the trading strategy with the highest information ratio and find that in
+
+most real-world situations the differences are small.
+
+       Thus, we can know both how far away a proposed strategy is from the
+
+optimal, and what the optimal trading strategy itself is. This approach helps
+
+compare different strategies using different parameters and implementations across
+
+different indicators and markets.
+
+       Future research could include exploring the results in the presence of stop-
+
+loss trading strategies, the trade-off between optimality and stability particularly in
+
+cases of negligible correlations, and empirical applications to compare with
+
+standard strategies. Extensions to account for estimation risks could also prove
+
+useful for practical applications, so that the distance from a given strategy to the
+
+optimal one would be measured on a relative rather than an absolute basis,
+
+incorporating the estimation risks of the given strategy.
+
+
+
+References
+Black, Fischer and Robert Litterman (1992), “Global portfolio optimization,”
+       Financial Analysts Journal, 48, 28–43
+Brock, William and Josef Lakonishok and Blake LeBaron (1992). “Simple technical
+       trading rules and the stochastic properties of stock returns.” The Journal of
+       Finance 47, 1731-1764.
+Conrad, Jennifer and Gautam Kaul (1998). “An anatomy of trading strategies.” The
+      Review of Financial Studies 11, 489-519.
+Crane, Glenis J. and John van der Hoek (2008). “Conditional expectation formulae for
+       copulas.” Aust. N. Z. J. Stat. 50, 53-67.
+Enke, David and Suraphan Thawornwong (2005). “The use of data mining and
+      neural networks for forecasting stock market returns.” Expert Systems with
+      Applications 29, 927-940.
+
+
+
+
+                                             31
+
+               Electronic copy available at: https://ssrn.com/abstract=1896146
+Faber, Mebane (2007). “A quantitative approach to tactical asset allocation.” The
+       Journal of Wealth Management 9, 69-79.
+Fama, Eugene F. (1976). Foundations of Finance: Portfolio Decisions and Securities
+      Prices. Basic Books, Inc.: New York.
+Fama, Eugene F. (1998). “Market efficiency, long-term returns, and behavioral
+      finance.” Journal of Financial Economics 49, 283-306.
+Fama, Eugene F. and Kenneth R. French (2008). “Dissecting anomalies.” The Journal
+      of Finance 63, 1653-1678.
+Grinold, Richard (1994). “Alpha is volatility times IC times score.” The Journal of
+       Portfolio Management 20, 9-16.
+Grinold, Richard and Ronald Kahn (1999). Active Portfolio Management: A
+       Quantitative Approach for Producing Superior Returns and Controlling Risk.
+       McGraw-Hill.
+Kim, Kyoung-jaw (2003). “Financial time series forecasting using support vector
+      machines.” Neurocomputing 55, 307-319.
+Pesaran, M. Hashem and Allan Timmermann (1995). “Predictability of stock returns:
+      Robustness and economic significance.” The Journal of Finance 50, 1201-
+      1228.
+Jegadeesh, Narasimhan and Sheridan Titman (2002). “Cross-sectional and time-
+      series determinants of momentum returns.” The Review of Financial Studies
+      15, 143-157.
+
+
+
+
+                                            32
+
+              Electronic copy available at: https://ssrn.com/abstract=1896146
+
