@@ -206,6 +206,17 @@ No strategy trial, promising-queue entry, plan placement or execution-policy cha
 
 ### E10 — Liquidity compensation, turnover and costs
 
+- [Ates–Wang floor/screen FX review](results/ssrn754946.md), SSRN754946, May 2005:
+  2003–04 electronic venues had tighter reversal-estimated spreads and an increasing
+  price-discovery role. This is historical venue evidence, not a profitable lead/lag
+  signal or our executable savings. Preserve quote-versus-trade estimator distinctions,
+  stale-price/receipt clocks, contract/tick regimes and Hasbrouck ordering bounds.
+  Daily fitted weights and full-contract-period volatility buckets are retrospective;
+  no entry can use them as contemporaneously known features without a past-only redesign.
+  Owned one-minute 6E OHLCV lacks the paired venue histories and executable quotes.
+  Source inspection and table-arithmetic checks only; no empirical replication or
+  strategy-return trial. Two visibly inconsistent source-table cells remain unresolved.
+
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 [Saved review](results/equity_premium_liquidity_review_20261029.md). Retained by user 2026-10-29.
 - Use: distinguish turnover from spread, depth, impact and resilience; distinguish compensation for illiquidity from predictive alpha. Large trading volume need not imply cheap executable liquidity.
