@@ -228,6 +228,18 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **Bitcoin spot/inverse-futures utility allocation — NEEDS MATCHING DATA AND SPECIFICATION (SSRN3441913).**
+  Conditional personal-account research: explicit utility-allocation formulas; authors report Sharpe4.86–5.07
+  versus spot4.40 on111days in2019, not independently reproduced net returns. Main formula/payoff audit passes;
+  AppendixB.2 has a confirmed sign discrepancy. Both calibrated legs are long BTC, not a neutral hedge.
+  Need exact source BitMEX contract IDs and spot/index clocks, executable spot, rebalancing, native lots,
+  collateral/mark liquidation and costs. Four public API probes hit network proxy403; owned CME/spot bars
+  are not matching inverse inputs. Next step only with new matching inputs: reconcile one native BTC/USD
+  contract/spot interval and availability clock, then committed coverage/cost/power gates before returns.
+  No new economic trial, Apex placement, modern perpetual substitution or allocation.
+  [Review](agents/codex/results/bitcoin_inverse_3441913_review.md) ·
+  [Evidence](agents/codex/evidence/bitcoin_inverse_3441913.md).
+
 - [ ] **FOMC short nearby VX — NEEDS DATA AND SPECIFICATION (SSRN2544445).**
   Conditional personal-research lead: scheduled uncertainty-release mechanism; author claims34selected2010–14trades,
   +28.68%total/Sharpe1.085/0.7%DD, not independently reproduced. Need individual-contract intradayVXprices/quotes,
@@ -240,6 +252,18 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   screen. No daily/spotVIXorESproxy, parameter rescue, plan placement or return trial. This is separate from the failed
   naked Calvados component. [Review](agents/codex/results/fomc_vx_2544445_review.md) ·
   [Evidence](agents/codex/evidence/fomc_vx_2544445.md) · [Data gate](agents/codex/inputs/fomc_vx_2544445/data_gate.md).
+
+- [ ] **Extreme positive firm-news sentiment — low-priority personal-stock lead / NEEDS DATA AND RULES (SSRN2631135).**
+  Merit: nonprice company-information feature with reported2007–14long trend mean16.90%,Sharpe0.64;
+  source DD49.09%, unspecified costs and test-period cutoff scanning limit that claim. No independent net edge.
+  Need lawful TRNA probabilities/relevance with entity/receipt/model vintages, historical equity universe/sectors,
+  corporate-action cash ledgers, exact weights and position lifecycle. Actual owned/exact-title/GitHub/official
+  LSEG checks found documentation and manuscript records, not a full free admitted news panel.
+  Smallest next check when matching inputs arrive: audit an entitled historical sample and clocks, freeze a
+  training-only protocol, then cheap design screen. No NQ substitute, Apex placement or new return trial.
+  Python research code is feasible with those inputs; code feasibility is not profitability.
+  [Review](agents/codex/results/news_sentiment_2631135_20261031.md) · [Evidence](agents/codex/evidence/news_sentiment_2631135_20261031.md).
+
 
 - [ ] **ANANTA interest-rate differential momentum — NEEDS DATA AND SPECIFICATION (SSRN 2419243).**
   Low-priority personal FX lead: two-year swap-rate differential changes across eleven currencies, rebalanced
@@ -273,6 +297,8 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   fee-inclusive integer-share ledger, then universe/corporate-action, fold-local turbulence and seed/checkpoint audit.
   No unbounded training, proxy futures conversion or allocation; correcting this engine would be a new protocol.
   [Review](agents/codex/results/rl_ensemble_3690996_20261030.md) · [Five-group checks](analysis/outputs/codex_rl_ensemble_3690996_audit/mechanics.json).
+  Related [SSRN 7013523 upload review](agents/codex/results/ssrn_7013523_review_20261030.md): 30/30 table cells
+  match the original; no newer test or corrected implementation established. Same method lead; no duplicate trial.
 
 - [ ] **WASDE pre-release futures/options volume — NEEDS DATA AND SPECIFICATION (SSRN 4841490; 2026-10-30).**
   Lower-priority personal-account lead: author reports positive futures-volume and negative options-volume

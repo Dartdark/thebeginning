@@ -1,0 +1,57 @@
+{
+  "source_sha256": "f4eb3ccfbc33c190231ca79ac2826c511f53c5fa0c101d813ccdfef1b54c6e9f",
+  "numeric_kernel_checks_pass": true,
+  "rejected_invalid_cases": 4,
+  "synthetic_examples": {
+    "baseline": {
+      "initial_activity": -8.881784197001252e-16,
+      "auc120": 0.0,
+      "log1p_auc120": 0.0,
+      "time_to_baseline": 0,
+      "censored": false,
+      "baseline_streak_start_release_minute": 5,
+      "baseline_confirmed_release_minute": 9,
+      "scope": "Numeric fixed-5 measurement only; outcome metrics use future observations"
+    },
+    "elevated": {
+      "initial_activity": 0.6971312495748192,
+      "auc120": 83.17766166719345,
+      "log1p_auc120": 4.432929585185095,
+      "time_to_baseline": 120,
+      "censored": true,
+      "baseline_streak_start_release_minute": null,
+      "baseline_confirmed_release_minute": null,
+      "scope": "Numeric fixed-5 measurement only; outcome metrics use future observations"
+    },
+    "future_only": {
+      "initial_activity": -8.881784197001252e-16,
+      "auc120": 83.17766166719345,
+      "log1p_auc120": 4.432929585185095,
+      "time_to_baseline": 120,
+      "censored": true,
+      "baseline_streak_start_release_minute": null,
+      "baseline_confirmed_release_minute": null,
+      "scope": "Numeric fixed-5 measurement only; outcome metrics use future observations"
+    },
+    "late_confirmation": {
+      "initial_activity": 0.6971312495748192,
+      "auc120": 79.71192576439373,
+      "log1p_auc120": 4.390886343346434,
+      "time_to_baseline": 115,
+      "censored": false,
+      "baseline_streak_start_release_minute": 120,
+      "baseline_confirmed_release_minute": 124,
+      "scope": "Numeric fixed-5 measurement only; outcome metrics use future observations"
+    }
+  },
+  "source_authors": "Not named in the uploaded anonymized title page",
+  "source_revision_date": "Not stated on the title page",
+  "no_return_forecast_or_execution_saving_verified": true,
+  "source_scope": "Activity associations in European index futures, not NQ/ES directional alpha",
+  "limitations": [
+    "No event loader or availability validation in numeric kernel",
+    "No turning-point estimator, tick-rule trade classifier, regression fit or cost model",
+    "Full source data commercially restricted; raw data not redistributed",
+    "Full-sample timing and same-day roll choice cannot become live settings"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "scope": "Source-transcribed claims plus synthetic feature algebra; not independent economic replication",
+  "source": "Song et al. 2015, SSRN2631135",
+  "input_sha256": {
+    "source_access.json": "f7eca4a1075e2e7063702d22f15ac888c529cd9860fc7192e9940eddc9a6e039",
+    "paper.txt": "2be4816f6ece634cfad6f4f2eee70ee1a4a85e00aaae6470e80c36ee5441d1e1",
+    "paper.pdf": "b683e9c28d176470f3416fd00b19e812dac78cc2fc0f85c992e950e73e4ced63"
+  },
+  "pdfinfo": "Title:           Microsoft Word - CIFErPaperV3.0-Final.docx\nKeywords:        \nCreator:         Word\nProducer:        Mac OS X 10.9.5 Quartz PDFContext\nCreationDate:    Tue Jul 14 19:35:44 2015 UTC\nModDate:         Tue Jul 14 19:35:44 2015 UTC\nCustom Metadata: yes\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           7\nEncrypted:       no\nPage size:       612 x 792 pts (letter)\nPage rot:        0\nFile size:       3372806 bytes\nOptimized:       no\nPDF version:     1.3\n",
+  "author_claims": [
+    {
+      "name": "Sentiment trend",
+      "annualized_mean_pct": 16.9,
+      "vol_pct": 26.5,
+      "sharpe": 0.64,
+      "max_dd_pct": 49.09,
+      "trades": 673,
+      "winners": 449,
+      "losers": 224,
+      "holding_weeks": 9.51
+    },
+    {
+      "name": "Sentiment shock",
+      "annualized_mean_pct": 12.24,
+      "vol_pct": 25.22,
+      "sharpe": 0.49,
+      "max_dd_pct": 56.37,
+      "trades": 896,
+      "winners": 576,
+      "losers": 320,
+      "holding_weeks": 6.96
+    },
+    {
+      "name": "SP500 benchmark",
+      "annualized_mean_pct": 6.3,
+      "vol_pct": 21.18,
+      "sharpe": 0.3
+    }
+  ],
+  "synthetic_checks": {
+    "telescoping_delta": 0.30000000000000004,
+    "relevance_article_mean": 0.32000000000000006,
+    "passed": 2
+  },
+  "economic_trials": 0,
+  "real_returns_computed": false
+}
