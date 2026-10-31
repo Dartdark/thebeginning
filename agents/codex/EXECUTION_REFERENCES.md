@@ -1263,6 +1263,26 @@ E11 information clocks, E18 research/platform fill conventions and E43 accountin
 - Status: original engine fails reproduction admission; broader personal-allocation method is a low-priority queue
   lead. Zero historical agent training, strategy-return trials, portfolio comparisons, native savings or live changes.
 
+### E09/E11 follow-up — Duration, signed price impact and constructed event clocks
+
+Source: Bowe, Hyde and McFarlane, October 2007, SSRN1025241;
+[full-source review](results/bowe_duration_1025241_review.md), retained October 30, 2026.
+- Use: distinguish raw intertrade duration from the paper's thinned price-changing event process. Equal-price
+  trades/volumes and simultaneous timestamps are combined; overnight time is removed. Event construction
+  changes the modeled process and must be frozen before claiming transfer to native CME events.
+- Evidence: author regressions on 69,981 TIIE28 information ticks, 2000–2006, not independently replicated.
+  Longer expected duration has larger signed effects in main models; the information parameter changes sign
+  after augmentation. Nearby duration/volume t-statistics are only 1.35/−1.27; robust generality is unproven.
+- Accounting check: Table6's 2.1014 spread and 73.74% liquidity share match absolute Table4A coefficient
+  magnitudes, not the displayed signed sum. This flags a convention/presentation ambiguity, not verified
+  author-code failure. Structural cost shares are not observed commissions, spreads or execution savings.
+- Clock/sign limits: current direction multiplies duration/volume; coefficients do not justify a buy-after-silence
+  or sell-high-volume rule. Completed durations and posttrade marks are not automatically predecision features.
+- Next check only for a separately justified native execution project: timestamped same-contract trades/quotes,
+  initiator side, quote age, raw/filtered events, pretrade midpoint and posttrade fee-adjusted markout; then
+  past-only seasonality/model fits versus simple spread/volume/time-of-day baselines. Minute OHLCV cannot supply this.
+- Status: execution-method reference; no market-return replication, alpha trial, strategy queue entry or live change.
+
 ### E18 follow-up — Future-extreme buffers and partly observed targets
 
 Source: González-Maiz-Jiménez, López-Herrera and Reyes-Santiago, SSRN6401038, uploaded March2026 preprint;
