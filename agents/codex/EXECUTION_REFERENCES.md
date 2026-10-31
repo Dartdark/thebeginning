@@ -1054,6 +1054,31 @@ Source: Panigrahi, Vachhani and Sisodia, SSRN4013524,2021;
   paths, exit and fees. No adaptation or protective-order change is warranted from this paper.
 - Status: accounting/timing reference; no return trial, execution saving or portfolio placement.
 
+### E56 — RL stock simulators: observation/fill clocks, cash and reported fee counters
+
+Source: Yang, Liu, Zhong and Walid, *Deep Reinforcement Learning for Automated Stock Trading: An Ensemble Strategy*,
+ICAIF 2020, SSRN 3690996; [paper/code review](results/rl_ensemble_3690996_20261030.md),
+[pretest plan](plans/rl_ensemble_3690996_mechanics_20261030.md). Pinned public FinRL-Trading source at
+5b9290ed706efa34aaff96e10761af428a154076, with original Git blobs verified. Related: E09 cash/cost reconciliation,
+E11 information clocks, E18 research/platform fill conventions and E43 accounting-to-account effects.
+- Use: a close-derived state followed by a fill at the same close needs an actual causal order/auction protocol.
+  Value and reward calculations cannot establish availability of that fill. Distinguish the actual cash charged from
+  a separately reported fee counter; a counter error alone does not prove costs were omitted from net cash.
+- Evidence: five predeclared synthetic groups executed original source class methods/function bodies via AST, not
+  trained agents. All three environments can spend $1,001 from $1,000 cash on 100 shares at $10 with a 0.1% fee,
+  retain 12.345 shares from a continuous action, and report $0 in the cost counter on a fully closed $100 sale even
+  though cash correctly receives $99.90. Same observation close is used as fill before advancing to the next close.
+- Specification lesson: source turbulence uses price levels instead of paper-defined returns; backward filling needs
+  fold/ticker availability checks. A common positive Sharpe annualization scale does not alter model ranking.
+  README/paper/code windows and end dates differ; a paper-era snapshot is not proof of the exact published run.
+- Limits: synthetic incidence is not a measured historical failure rate or Sharpe inflation. Public data acquisition
+  and panel shape were verified, but trained policy checkpoints, point-in-time universe/adjustment identity and
+  portfolio attribution remain unverified. Source daily cash-equity fees do not translate to native futures.
+- Next check only with clarified source/protocol: one causal observation/order/fill/cash/share trace, then verified
+  universe, corporate actions, fold-local features, turbulence, seeds and benchmarks before economic replication.
+- Status: original engine fails reproduction admission; broader personal-allocation method is a low-priority queue
+  lead. Zero historical agent training, strategy-return trials, portfolio comparisons, native savings or live changes.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
