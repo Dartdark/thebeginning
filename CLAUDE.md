@@ -15,6 +15,9 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `funded_strategies/
   ~1-2 min) as well as the PushNotification. Keep alert lines short (under 200 characters).
 - **Papers session (user, 2026-10-29):** `session_01Wk1fPYzv9RyXGytT4z6XbK` ("📄 Papers", nested under the master): the user
   uploads papers there; it reviews / tests / ranks them and sends the master a short verdict per paper (send_message).
+- **Code reviewer session (user, 2026-10-31):** `session_01Wk1fPW6LVWayRousRwL7mU` ("🔍 Code reviewer", nested under the master):
+  on "review" it checks Claude's and Codex's new code for correctness bugs, fixes confirmed defects in Claude's code, logs in
+  `agents/cross_review/CODE_REVIEW_LOG.md` and sends the master a short verdict.
 - **Paper scout (user, 2026-10-29):** `/scout` (skill `.claude/skills/scout/SKILL.md`) searches arXiv / NBER / SSRN for
   strategy hypotheses, reads and tests free full texts and lists SSRN-only PDFs for the user; log `papers/SCOUT_LOG.md`.
   Run it whenever the user says "scout" (any session; the Papers session by default), plus scheduled Mon/Wed/Fri runs there.
