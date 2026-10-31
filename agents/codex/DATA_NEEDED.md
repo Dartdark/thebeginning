@@ -119,7 +119,12 @@ for dated requests. No purchase, live/VPS export operation or arbitrary price in
 Follow-up: Claude `d654fda` specifies the150K intended integer chart inputs and refreshes the19-label personal
 ladder; those definition requests are addressed. The [update review](results/portfolio_audit_claude_updates_20261030.md)
 retains the separate underlying path/version/margin gaps and qualifies the historical greedy selection. Do not
-keep asking the user to specify already-documented intended integers or rebuild the same table.
+keep asking the user to specify already-documented intended integers or rebuild the same table. Latest source
+`88b5e95` also adds the current-roster overlap replay and chronological subset check; the
+[integer-aware independent follow-up](results/portfolio_audit_final_followup_20261030.md) closes those check-
+implementation requests with0/500 account outcomes changed per funded size. Keep only the actual original-
+observation, source-version, daily marking, margin and prospective-evidence needs open.
+
 
 
 ## Earlier source/mechanism leads: preserve, do not treat as test-ready

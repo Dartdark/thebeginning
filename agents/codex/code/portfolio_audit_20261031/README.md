@@ -46,3 +46,17 @@ its150K account results are invalid. Use verified root outputs; never mix an arc
 The final source-preset selection is an explicit account-name mapping. Independent checks enforce start balance,
 each cumulative payout ladder and all five canonical account outputs on fixed paired histories. This caught the
 runner's original ambiguous suffix bug; it does not claim every remaining simulator assumption is verified.
+
+## Latest-source closure
+
+[Final follow-up](../../results/portfolio_audit_final_followup_20261030.md) reviews Claude88b5e95 and independently
+checks the new overlap claim using exact reachable integer quantities. Run
+`python analysis/codex_portfolio_overlap_integer.py --mechanics` for synthetic checks, or omit the flag for the
+bounded two-home paired account sensitivity using this audit's prepared native unit paths/history-date files.
+The script expects a separate source checkout at88b5e95 in `/workspace/scratch/claude_audit_replay`.
+
+This is a constant-position NQ price-aggregation check with entry/exit/missing bars excluded from the credit,
+not a full tick/netting execution certificate.53/615 reachable daily minima change but0/500 account histories
+change any terminal account output or first-year payout per home. Current150K fixed inputs use whole lots1
+for flagged VB/Monday/Bridge. Inputs, synthetic fixtures, independent NumPy checks and canonical parity remain
+in `analysis/outputs/codex_portfolio_overlap_integer_20261030/`. No new signal or portfolio selection is introduced.

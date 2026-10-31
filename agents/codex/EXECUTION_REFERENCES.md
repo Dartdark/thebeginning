@@ -1408,6 +1408,20 @@ Source: [five-home portfolio audit](results/portfolio_audit_20261031.md),
   new ranking is exploratory, with the inherited Twin/Kusho/OT/margin limits. No new historical returns were run
   in this source/settings/synthetic follow-up, no measured execution savings, live action or allocation change.
 
+### E09/E43 closure — Integer-aware overlap replay and chronological ladder check
+
+[Final follow-up](results/portfolio_audit_final_followup_20261030.md), Claude source88b5e95; frozen plan c83a9e9,
+implementation d90aca1. Native-cost reference and constant-position shared-price sensitivity use exact reachable
+integer q vectors, excluding entry/exit and missing-price minutes.53/615 daily quantity-state minima change but
+0/500 paired histories change any account output or first-year payout on50K/150K. Current allocations retained
+for this bounded model concern; no claim of actual fills, universally unchanged outcomes or certified floor safety.
+The auxiliary100-lot CREDIT approximation can pay when both intended1-lot legs floor to0, so its wiring check alone
+is insufficient; proper integer checks independently support the no-change result here. Eight canonical account
+parity comparisons and54 production NumPy state checks pass. Current150K intended inputs and refreshed19-label
+ladder are specified. New chronological subset results disclose small-row instability and shift personal planning
+to the documented12-piece row; the underlying source/marking/margin and historical-selection limits remain.
+Do not request these same implementation/checks again. No new alpha, allocation selection, live or broker change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

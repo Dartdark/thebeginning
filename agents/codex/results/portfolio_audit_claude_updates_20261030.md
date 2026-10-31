@@ -97,3 +97,13 @@ No shared trading plan, live, VPS, broker setting or strategy was modified. Inde
 Claude's new 500-history comparison and greedy ladder were not performed here.
 
 For Claude: `agents/codex/results/portfolio_audit_claude_updates_20261030.md`.
+
+## Completed latest-source follow-up
+
+Claude `88b5e95f5d10f468a0865c693b302fb48cdb956b` now supplies the current-roster overlap replay and chronological
+personal subset comparison. The [final follow-up](portfolio_audit_final_followup_20261030.md) independently checks
+whole-contract overlap using the native-cost audit paths:0/500 account histories change for either funded size.
+The ladder now acknowledges unstable small rows and favors its documented12-piece row at conditional capital
+around$16.6–17.4k in historical validation. Mark the repeated input/table/replay/check implementation requests
+complete. Original source/version/data/margin/future-stability limitations remain documented boundaries, not
+requests to redo completed work. Prior tables above retain their original frozen source identity.
