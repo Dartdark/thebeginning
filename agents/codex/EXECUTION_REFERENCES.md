@@ -198,6 +198,16 @@ Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 
 ### E11 — Event-information clocks and attribution
 
+- WASDE follow-up, retained 2026-10-30: Zhang, [SSRN 4841490](https://ssrn.com/abstract=4841490),
+  [full-source review](results/wasde_volume_4841490_review.md). An announcement-day-inclusive return is not
+  necessarily executable using a forecast revealed that day. Monthly USDA forecast revisions are not consensus
+  surprises; unsigned futures/options volume is not signed informed flow. The source's same-month non-event
+  volume baseline can include future observations and cannot directly become a pre-event feature.
+  Source regressions are not net trade returns or measured execution savings. Confirm historical release/session
+  regimes, input publication/receipt, option-underlying mapping, pre-event aggregation and first executable price
+  before a separately registered test. More event volume does not establish lower spreads or price impact.
+  Matching agricultural/options data and exact specifications are missing; zero return trials and no live changes.
+
 Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
 [Saved review](results/fomc_monthly_coefficients_review_20261029.md), 2026-10-29.
 - Use: separate returns before the event, statement, press conference and later windows; a feature measured over an event window is unavailable at that window's start.
@@ -500,6 +510,13 @@ Source: Ma, Serra, Peterson and Irwin, [SSRN7425358](https://ssrn.com/abstract=7
 - Status: execution reference, not a directional strategy or allocation. Official sample download was blocked;
   record the gap and continue research on other leads.
 
+E30 source follow-up — Till/Eagleeye (2017), SSRN2942340, reviewed2026-10-31:
+[full review](results/till_2942340_20261031.md). A storage operator's buy-summer/sell-winter transaction includes
+physical delivery, storage capacity, financing and operating costs. Futures-only spread P&L is not the same locked
+margin. Index-roll anticipation needs actual two-maturity identities, both-leg cashflows and synchronized execution;
+price pressure can be anticipated and disappear. The article provides examples, not measured net returns or execution
+savings. Retain existing quote/sample gates; no continuous-price replacement or new economic trial is justified.
+
 ### E31 — Closing-auction state, final print and executable entry are different clocks
 
 Sources: Challet/Gourianov [arXiv1802.01921v2](https://arxiv.org/html/1802.01921v2), Sections2/4;
@@ -762,6 +779,17 @@ Source: Kaul, Naranjo and Stefanescu, [SSRN 2311859](https://ssrn.com/abstract=2
   a prespecified executable window, with costs and ordinary momentum/reversal controls before return selection.
 - Status: source/measurement reference; no new economic trial, trading grade or plan change.
 
+Source-specific follow-up, 2026-10-30: Laubsch, Smales and Vo (2023),
+[SSRN 4534852](https://ssrn.com/abstract=4534852), [full uploaded-paper review](results/cot_52week_4534852.md).
+Across 12 commodities in 1992–2022, commercial position responses are contrarian and non-commercial responses
+follow momentum, moderated at 52-week highs and accentuated at lows. These explain positions, not an executable
+return signal; the source finds little timing ability. For CL, Table 4 position→return p-values are 0.280/0.566
+(commercial/non-commercial); gold 0.623/0.738. Tuesday-to-Tuesday returns partly elapse before normal Friday
+publication, so lagged regressors do not alone establish an available signal. CFTC classifications describe
+predominant business purpose, not each order's motive or liquidity role. No forced order/deadline, net strategy
+return or intraday transfer is established. Retain as a negative predictive/clock caution, not another COT sweep;
+zero new return trials. Any later causal rule needs actual release/receipt times and a price-only baseline.
+
 ### E45 — Cointegrated log prices do not specify an executable futures hedge
 
 Source/review + date: Ungever (2015), [SSRN2896370](https://ssrn.com/abstract=2896370),
@@ -936,6 +964,67 @@ Source: Vojtko and Padyšák, [SSRN 3507947](https://ssrn.com/abstract=3507947),
 - Next check: identified full panel, formation/fill clocks, contract-specific rolls, native integer positions and
   fees under a frozen replication plan. A bootstrap percentile is not a maximum-loss guarantee.
 - Status: retained personal-account research lead, NEEDS DATA/details; ineligible for current Apex intraday use as written.
+
+### E54 — Unexpected activity is not automatically a forecast or executable depth
+
+Source/review + date: Sakthivel & Kamaiah, [SSRN1589962](https://ssrn.com/abstract=1589962),
+user full-text upload; [review](results/nifty_activity_volatility_ssrn1589962.md), 2026-10-30.
+Execution question and useful lesson: separate activity known before an order
+from same-day activity explained afterward. Daily futures OI is outstanding
+contracts, not signed pressure or available bid/ask depth. A volatility relation
+does not establish lower spread, fill costs, directional alpha or a useful filter.
+Evidence: author Nifty spot/futures variance regressions, 2000–08, with ARMA(5,5)
+expected/unexpected daily activity. Unexpected coefficients positive, expected
+negative. No future forecast or execution test. Printed GJR feedback arithmetic
+is 1.1235 under symmetric innovations; the source's 0.75 comparison omits its
+gamma term. Retained arithmetic script is not an empirical re-estimation.
+Market/platform limits: old Indian near-month daily series, not NQ/ES intraday
+quotes/fills; OI publication timing and model fitting clocks are unverified.
+Data/prerequisites: dated contract-level volume/OI and availability clocks,
+roll/expiry mapping, past-only estimation, variance-validity checks, lagged
+price-only forecast baseline, then paired net strategy/account outcomes.
+Smallest justified next check: apply these clock/model checks if independently
+undertaking activity-risk research; this source does not earn a new return test.
+Status: methodological reference only; no demonstrated executable edge, zero
+return trials, no promising-candidate queue entry or plan/live change.
+
+### E55 — Strategic futures demand, welfare and executable basis
+
+Source: Hugues Dastarac, *Strategic Trading, Welfare and Prices with Futures Contracts*, Banque de France WP 841,
+October 2021, SSRN 3947960, supplied 82-page PDF. [Review](results/strategic_futures_3947960_20261030.md),
+[evidence](evidence/strategic_futures_3947960_20261030.md). Related: E07 slicing risk/impact, E11 information
+clocks, E46 spot market power, E47 replenishing depth and E50 Treasury contract/liquidity measurement.
+- Use: distinguish an individual incentive to affect settlement from net equilibrium price pressure. Under the source's
+  symmetric-information/identical-risk-preference setup, opposing traders' effects cancel, despite changed execution
+  timing and worse certainty-equivalent welfare. Slicing impact against future-price exposure is a trade-off, not alpha.
+- Evidence: theoretical source inspection, no return replication. The negative hedge ratio is defined against expected
+  future spot transactions net of the customer shock, not simply current holdings. The welfare result is conditional on
+  its modeled equilibrium; the counterfactual non-influenceable contract improves welfare. No universal claim that
+  futures or hedging lose money follows.
+- Basis lesson: the model's spread depends on the expectation of future customer flow, not a later observed shock.
+  Outside arbitrageurs and their endogenous price effects are left unmodeled. A displayed spread does not establish
+  that both legs can execute at those prices/quantities or that a cash-and-carry trade earns the apparent spread.
+- Limits: CARA preferences, Gaussian shocks, linear demand-schedule equilibrium, zero interest/storage costs and
+  ignored margins. No tested contemporary futures strategy, estimated execution savings or calibrated source dataset.
+- Next check only for a separately justified proposal: predecision flow/inventory availability, matched cash/futures
+  instruments and payoffs, synchronized bid/ask, financing/borrow/carry, both-leg quantities, fees, fills and settlement;
+  Treasury implementations also require deliverables, CTD, conversion factors and accrued-interest/repo accounting.
+  Futures OHLCV, COT and auction dates alone do not supply these states.
+- Status: market-structure/execution reference; zero return trials, portfolio comparisons, queue entries or live changes.
+
+### E09 follow-up — Bank Nifty close marks versus protective execution
+
+Source: Panigrahi, Vachhani and Sisodia, SSRN4013524,2021;
+[full article review](results/bank_nifty_4013524_review_20261031.md), retained2026-10-31.
+- Use: a close-to-close index-point ledger does not demonstrate a stated gap-down exit, intraday stop or target.
+  Final daily candle color is unknown five minutes before its close; freeze the actual observation/fill clock.
+- Evidence: our audit confirms the136 printed rows equal20 times index-close changes, totaling₹358,346.40 gross.
+  This verifies source-table arithmetic only, not signal completeness, executable derivative P&L or net edge.
+- Limits: futures need basis, dated contracts, historical lot sizes, fills and costs; ITM calls additionally need
+  strike/expiry/premium paths. Excel forecasts and ANOVA against generated groups are not out-of-sample validation.
+- Next check only for separately justified research: reconcile a real signal through native entry, gap/stop/target
+  paths, exit and fees. No adaptation or protective-order change is warranted from this paper.
+- Status: accounting/timing reference; no return trial, execution saving or portfolio placement.
 
 ## Minimum record for any later execution comparison
 
