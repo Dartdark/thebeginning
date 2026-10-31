@@ -618,6 +618,16 @@ Related: E09 cash/cost reconciliation, E15 tail risk, E35 fill-anchored exits an
   change alters outcomes and must pass the existing preregistration/trial/account gates.
 - Status: risk/execution diagnostic reference; no standalone candidate, new return test or plan/exit change.
 
+- Follow-up: Maymin and Maymin, [SSRN 1896146](https://ssrn.com/abstract=1896146),
+  [full-source review](results/optimal_indicator_framework_1896146_review.md), retained 2026-10-30.
+  A known conditional mean gives a maximum-gross-return direction rule under a notional cap; conditional
+  first/second moments give a different information-ratio sizing rule. These are theoretical benchmarks, not
+  estimated net execution savings. The source explicitly allows easier or cheaper execution to favor another rule.
+  Turnover costs depend on the previous position; bounded notional does not model Apex's intraday floor or payouts.
+  Before applying this to a separately justified predictor, freeze availability/label clocks, past-only estimates,
+  turnover, integer quantities and cost accounting; compare net account paths against the unchanged base.
+  No predictor, return trial, size change or implemented execution change follows from this review.
+
 ### E38 — Commodity stop overlays, exposure redistribution and return/NAV accounting
 
 Source: Hossein Rad, December 2012 EDHEC MSc thesis, SSRN 2614241; uploaded full 56-page PDF reviewed 2026-10-31.
@@ -762,7 +772,48 @@ and stronger independent net evidence; no proxy or intraday conversion is earned
 Status: retain accounting/implementation caution; source-defined strategy rejected
 at evidence gate, zero return trials, no promising-candidate or trading-plan change.
 
-### E46 — Dated volatility futures: maturity clocks, RMS units and signed hedges
+### E46 — Spot market power: endogenous supply incentives and hidden participant identity
+
+Source: Muermann and Shore, *Spot Market Power and Futures Market Trading*, March 2005, SSRN 681202;
+uploaded 36-page full text. [Review](results/spot_market_power_681202_20261030.md),
+[evidence decision](evidence/spot_market_power_681202_20261030.md). Related: E09 complete leg/cash accounting,
+E10 liquidity compensation, E11 information clocks and E29 signed participant positions.
+- Use: distinguish profits earned by controlling physical supply from profits available to an outside observer.
+  Futures positions can change the supplier's subsequent optimal spot action; market makers anticipate that incentive.
+  Hidden participant identity matters, so aggregate volume or commercial positioning is not an identified producer signal.
+- Evidence: analytical equilibria and source inspection only. In the concealed-position model, the producer randomizes
+  direction; the separate non-producer model earns on an earlier derivative while accepting losses on later price-moving
+  trades. Retain both legs and exact contract payoffs. No empirical return, measured price impact or execution saving.
+- Limits: stylized linear demand, competitive risk-neutral market makers, specified inference/beliefs and no effective
+  storage; Section 4's initial contract pays on an intermediate futures price. No calibrated contemporary NQ/ES/CL rule.
+  The complete-hedging impossibility concerns price-contingent contracts in the model; demand-contingent contracts
+  provide an explicit complete-hedging exception. Historical oil-liquidity remarks are not current CL observations.
+- Data/next check only for a separately justified event: legally observable, as-of actor-linked positions, physical
+  supply/inventory decisions, contract-stage payoffs, contemporaneous quotes and native costs; audit availability and
+  directional identification before returns. Our aggregate COT and continuous OHLCV do not supply these states.
+- Status: execution/market-structure reference; no new return trial, strategy queue entry, allocation or live change.
+
+### E47 — Obizhaeva–Wang: replenishing depth and large-order execution
+
+Source: [SSRN 666541](https://ssrn.com/abstract=666541), uploaded June 8, 2005 draft,
+[review and data gate](results/ssrn666541.md), [model arithmetic](../../analysis/outputs/codex_ssrn666541/model_arithmetic.json).
+- Use: distinguish standing depth from replenishment. Under the paper's risk-neutral
+  constant-depth/exponential-recovery model, an optimal fixed-parent-order schedule
+  combines initial/final blocks with continuous middle trading; risk aversion changes it.
+- Evidence: source's analytical result. Our arithmetic reproduces Table 2's rho T=2
+  savings of 4.32% and 11.92% under two permanent-impact assumptions. These are modeled
+  impact-cost reductions, excluding spread/commissions, not returns or measured CME savings.
+- Limits: given parent direction/quantity, simplified exogenous book dynamics, no new
+  empirical alpha test or NQ calibration. Owned one-minute OF summaries do not identify
+  event-level replenishment, parent orders or queue outcomes. Small integer micro orders
+  can lose signal value by waiting; protective stops are not discretionary parent orders.
+- Next check: establish material self-impact using native fills and synchronized quotes/depth
+  before testing any slicing schedule; then include latency, noncompletion and opportunity cost.
+- Status: execution reference only. Zero strategy-return trials; no plan or live changes.
+
+
+
+### E48 — Dated volatility futures: maturity clocks, RMS units and signed hedges
 
 Source: Donninger, *VIX Futures Basis Trading: The Calvados-Strategy 2.0*, January 2014 Rev.1, SSRN2379985.
 [Review and completed component test](results/calvados_2379985_20261030.md),
