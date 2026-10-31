@@ -725,7 +725,22 @@ Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, sha
 Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
 Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E40-E42 during this handoff merge; existing Codex E29-E38 identifiers are retained.
 
-### E44 — Cointegrated log prices do not specify an executable futures hedge
+### E44 — Weekly COT inventory changes do not identify executable order flow
+
+Source: Kaul, Naranjo and Stefanescu, [SSRN 2311859](https://ssrn.com/abstract=2311859),
+[full-PDF review](results/ssrn_2311859_review_20261030.md), retained 2026-10-30, printed pp. 7–8, 13–18, 21, 29.
+- Use: distinguish changes in group long-minus-short inventories from signed transactions or actual liquidity demand.
+- Evidence: author regressions relate Tuesday-to-Tuesday commodity returns to same-period and lagged position changes.
+  Friday publication prevents treating same-week positioning as a pretrade signal; even the lagged week partly elapses
+  before publication. Historical semi-monthly observations before 1991 were backfilled, not necessarily then public.
+- Limits: no native orders, spread/fill measurement, causal identification or demonstrated net trading returns.
+  Energy is an exception to several pooled findings; the sample excludes NQ/ES. Price-impact coefficients are standardized,
+  not dollar savings or an instruction to follow/fade speculators.
+- Next check only for a separately justified proposal: exact publication/vintage clocks, native contract identity and
+  a prespecified executable window, with costs and ordinary momentum/reversal controls before return selection.
+- Status: source/measurement reference; no new economic trial, trading grade or plan change.
+
+### E45 — Cointegrated log prices do not specify an executable futures hedge
 
 Source/review + date: Ungever (2015), [SSRN2896370](https://ssrn.com/abstract=2896370),
 user-uploaded full text; [review](results/agri_cointegration_ssrn2896370.md), 2026-10-30.

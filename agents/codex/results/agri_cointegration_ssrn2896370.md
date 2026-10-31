@@ -105,7 +105,7 @@ If later supplied, a new bounded past-only protocol must precede any return test
 
 Useful retained lesson: turn fitted log-price coefficients into an explicit
 integer futures hedge and full two-leg execution ledger before calling a spread
-market neutral or interpreting its annualized return. See E44 in
+market neutral or interpreting its annualized return. See E45 in
 `agents/codex/EXECUTION_REFERENCES.md`.
 
 ## Work completed and verification boundary
