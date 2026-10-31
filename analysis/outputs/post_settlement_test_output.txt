@@ -1,0 +1,36 @@
+Post-settlement reversal with cheaper execution (pre-registered: checks/candidates/post_settlement/PREREG.md, 2026-10-25).
+
+NQ (2180 days with a 14:00 -> 15:00 move; per 1 NQ):
+   gross (no costs), market entry                 n= 2180 ( 248/yr) $ 29.20 PF 1.20 t   2.5 win 53% yrs+ 6/9 | 18-22 $ 45.56 t  3.5 | 23-26 $  7.50 t  0.4
+   V0 ours                                        n= 2180 ( 248/yr) $ 11.95 PF 1.08 t   1.0 win 51% yrs+ 4/9 | 18-22 $ 28.31 t  2.2 | 23-26 $ -9.75 t -0.5
+   V1 ours                                        n= 2140 ( 243/yr) $ 11.09 PF 1.07 t   0.9 win 51% yrs+ 4/9 | 18-22 $ 28.40 t  2.2 | 23-26 $-11.78 t -0.6
+   V2 ours, |M| >= 0.2 ATR                        n=  514 (  58/yr) $  8.75 PF 1.05 t   0.3 win 53% yrs+ 4/9 | 18-22 $ 34.49 t  1.3 | 23-26 $-35.14 t -0.5
+   V3 ours, |M| >= 0.2 ATR                        n=  503 (  57/yr) $  1.86 PF 1.01 t   0.1 win 53% yrs+ 4/9 | 18-22 $ 31.54 t  1.2 | 23-26 $-48.73 t -0.7
+   V2 ours, |M| >= 0.3 ATR                        n=  250 (  28/yr) $ 38.39 PF 1.19 t   0.8 win 55% yrs+ 6/9 | 18-22 $ 76.62 t  1.8 | 23-26 $-29.58 t -0.3
+   V3 ours, |M| >= 0.3 ATR                        n=  245 (  28/yr) $ 33.59 PF 1.16 t   0.7 win 54% yrs+ 7/9 | 18-22 $ 73.42 t  1.7 | 23-26 $-37.48 t -0.4
+   V0 Apex micro fees (x10)                       n= 2180 ( 248/yr) $  8.80 PF 1.06 t   0.8 win 50% yrs+ 4/9 | 18-22 $ 25.16 t  1.9 | 23-26 $-12.90 t -0.6
+   V1 Apex micro fees (x10)                       n= 2140 ( 243/yr) $  7.94 PF 1.05 t   0.7 win 50% yrs+ 4/9 | 18-22 $ 25.25 t  1.9 | 23-26 $-14.93 t -0.7
+   V3 Apex micro fees (x10)                       n=  245 (  28/yr) $ 30.44 PF 1.14 t   0.7 win 53% yrs+ 7/9 | 18-22 $ 70.27 t  1.6 | 23-26 $-40.63 t -0.4
+   V1 following instead of fading                 n= 2161 ( 246/yr) $-43.52 PF 0.76 t  -3.7 win 45% yrs+ 1/9 | 18-22 $-60.44 t -4.6 | 23-26 $-21.18 t -1.0
+   V1 random side, 200 runs: mean $-16.55, 95th pct $1.78
+   V1 fill rate 98%; on the days V1 misses, V0 makes $324.12 a trade (adverse selection check)
+   V1 by year: {2018: -5083, 2019: -2517, 2020: 12544, 2021: 9692, 2022: 19953, 2023: 12672, 2024: -5456, 2025: -15989, 2026: -2086}
+   pass bar: t >= 3.58 (N_items), holdout t >= 1.5 same sign, >= 300 trades a year; t_threshold(4 variants) 2.24
+
+ES (2161 days with a 14:00 -> 15:00 move; per 1 ES):
+   gross (no costs), market entry                 n= 2161 ( 246/yr) $ 20.25 PF 1.26 t   3.3 win 51% yrs+ 7/9 | 18-22 $ 24.25 t  3.2 | 23-26 $ 14.90 t  1.5
+   V0 ours                                        n= 2161 ( 246/yr) $ -9.75 PF 0.90 t  -1.6 win 46% yrs+ 1/9 | 18-22 $ -5.75 t -0.8 | 23-26 $-15.10 t -1.5
+   V1 ours                                        n= 2099 ( 239/yr) $ -0.07 PF 1.00 t  -0.0 win 47% yrs+ 5/9 | 18-22 $  3.63 t  0.5 | 23-26 $ -4.92 t -0.5
+   V2 ours, |M| >= 0.2 ATR                        n=  617 (  70/yr) $ 11.37 PF 1.11 t   0.8 win 47% yrs+ 5/9 | 18-22 $ 18.00 t  1.1 | 23-26 $  0.22 t  0.0
+   V3 ours, |M| >= 0.2 ATR                        n=  602 (  68/yr) $ 22.16 PF 1.22 t   1.6 win 50% yrs+ 5/9 | 18-22 $ 28.29 t  1.7 | 23-26 $ 12.11 t  0.5
+   V2 ours, |M| >= 0.3 ATR                        n=  317 (  36/yr) $ 23.31 PF 1.22 t   1.2 win 52% yrs+ 6/9 | 18-22 $ 24.94 t  1.1 | 23-26 $ 20.53 t  0.6
+   V3 ours, |M| >= 0.3 ATR                        n=  312 (  35/yr) $ 34.98 PF 1.35 t   1.7 win 54% yrs+ 7/9 | 18-22 $ 36.71 t  1.6 | 23-26 $ 32.07 t  0.9
+
+YM (2171 days with a 14:00 -> 15:00 move; per 1 YM):
+   gross (no costs), market entry                 n= 2171 ( 247/yr) $ 18.56 PF 1.34 t   4.6 win 54% yrs+ 8/9 | 18-22 $ 18.82 t  3.4 | 23-26 $ 18.21 t  3.0
+   V0 ours                                        n= 2171 ( 247/yr) $  3.56 PF 1.06 t   0.9 win 48% yrs+ 5/9 | 18-22 $  3.82 t  0.7 | 23-26 $  3.21 t  0.5
+   V1 ours                                        n= 2106 ( 239/yr) $  5.88 PF 1.10 t   1.4 win 49% yrs+ 5/9 | 18-22 $  7.41 t  1.3 | 23-26 $  3.85 t  0.6
+   V2 ours, |M| >= 0.2 ATR                        n=  582 (  66/yr) $ 25.21 PF 1.40 t   2.6 win 54% yrs+ 6/9 | 18-22 $ 27.74 t  2.2 | 23-26 $ 20.76 t  1.5
+   V3 ours, |M| >= 0.2 ATR                        n=  562 (  64/yr) $ 27.54 PF 1.45 t   2.8 win 55% yrs+ 6/9 | 18-22 $ 31.78 t  2.4 | 23-26 $ 20.05 t  1.5
+   V2 ours, |M| >= 0.3 ATR                        n=  283 (  32/yr) $ 35.76 PF 1.52 t   2.3 win 56% yrs+ 6/9 | 18-22 $ 38.93 t  1.9 | 23-26 $ 29.58 t  1.3
+   V3 ours, |M| >= 0.3 ATR                        n=  277 (  31/yr) $ 37.33 PF 1.55 t   2.3 win 57% yrs+ 6/9 | 18-22 $ 42.38 t  2.0 | 23-26 $ 27.50 t  1.2

@@ -27,7 +27,9 @@ Input: one folder, `checks/candidates/<name>/`, containing `spec.md`, `trades.cs
    mismatches. Below ~90% agreement, find out whether the spec is ambiguous or the trades are wrong, and say which.
 3. **Look for leaks and traps** a backtest can hide: anything known only after the entry (same-day data, closes used
    before they exist, levels computed with the whole day), entry and stop on the wrong side of the market, roll or holiday
-   artefacts, survivorship, costs left out, a few trades carrying the result.
+   artefacts, survivorship, costs left out, a few trades carrying the result. Make the leak gates runnable: write
+   `fills.csv` (entry_time, exit_time, side, entry, exit; add "symbol" and "bar_minutes" to meta.json) from your replica,
+   and if the rule has fitted parts also `trades_fullsample.csv` (fitted on all data); checker.py then runs G10-G12.
 4. **Run the gates:** `python3 analysis/checker.py checks/candidates/<name>` (writes `checker_report.md`). Also run them on
    YOUR replica's trades if they differ materially (save as `trades_replica.csv` and a copy of meta.json in a sibling
    folder `checks/candidates/<name>_replica/`).

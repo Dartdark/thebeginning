@@ -1,0 +1,38 @@
+{ NQ Daily Bar Feed - MultiCharts PowerLanguage INDICATOR (2026-10-29; places no orders)
+
+  Keeps the repo's NQ 1-minute data current without manual exports. Writes the last few days' 1-minute bars, one file per
+  bar date, to <Folder>YYYYMMDD.csv (date,time,open,high,low,close,volume = the NQ_Bar_Exporter format, full 24h session).
+  The VPS 16:10 push copies the folder to data/live_bars/ and analysis/daily_bars_merge.py appends the bars to
+  data/NQ_1min_2026.csv (08:00-15:15) and data/NQ_1min_ON_2026.csv (the rest), no duplicates.
+
+  Use (once, outside market hours, on the VPS):
+    1. Create the folder C:\TradingLogs\bars\  (FileAppend does not create folders).
+    2. Open a NEW 1-minute chart of @NQ (or @MNQ if @NQ isn't available: same prices), Exchange time zone, CME 24-hour
+       session, about 5 days back. No strategy on it.
+    3. Insert Study > Indicator > NQ Daily Bar Feed. Defaults are fine.
+  On every (re)load it deletes and rewrites the files of the last KeepDays dates, so no file holds duplicate rows. }
+
+Inputs:
+	Folder("C:\TradingLogs\bars\"),   { must already exist; keep the trailing backslash }
+	KeepDays(4),                       { rewrite the files of the last this many calendar days }
+	Decimals(2);
+
+Variables:
+	Y(0), DStr(""), Row(""), FirstJul(0);
+
+{ start clean for the recent dates on every (re)calculation }
+Once begin
+	FirstJul = DateToJulian(CurrentDate) - KeepDays;
+	for Y = 0 to KeepDays begin
+		FileDelete(Folder + NumToStr(JulianToDate(FirstJul + Y) + 19000000, 0) + ".csv");
+	end;
+end;
+
+if BarStatus(1) = 2 and DateToJulian(Date) >= DateToJulian(CurrentDate) - KeepDays then begin
+	DStr = NumToStr(Date + 19000000, 0);
+	Row = DStr + "," + NumToStr(Time, 0) + "," + NumToStr(Open, Decimals) + "," + NumToStr(High, Decimals) + ","
+		+ NumToStr(Low, Decimals) + "," + NumToStr(Close, Decimals) + "," + NumToStr(Ticks, 0);
+	FileAppend(Folder + DStr + ".csv", Row + NewLine);
+end;
+
+Plot1(Close, "Feed");

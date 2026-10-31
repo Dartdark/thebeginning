@@ -108,6 +108,15 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 
 ### E09 — Native micro costs, turnover and roll reconciliation
 
+- Replay readiness 2026-10-31 ([report](results/swing_replay_readiness_20261031.md)):
+  a MultiCharts exit row labeled `open` is a valuation mark, not a closed fill.
+  ONB ML's final export mark maps to an exit before entry and crashes a clean
+  funded-cache rebuild. Explicitly excluding this sentinel permits the 343 closed
+  ONB paths to build; other cross-date closed trades remain errors needing their
+  own handling. Never use a generic reversed-time filter that silently removes
+  real overnight/holiday holds. Verified report/parser behavior only; corrected
+  ST account replay and native-fill parity remain unverified.
+
 [6E package review](results/six_e_cross_asset_review_20261027.md), 2026-10-27.
 - Use: measure arrival-mid shortfall, spread, native-tick stresses, integer quantities and total turnover; a +2 to −2 reversal trades four contracts.
 - Evidence: methodological requirements from the source review, not verified M6E execution results.

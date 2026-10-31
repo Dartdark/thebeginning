@@ -102,6 +102,9 @@ if TrCount >= AtrDays then begin
 end;
 
 { ---------- CME early-close Mondays ---------- }
+{ 2026-10-25 fix (Codex's NQ Day Flow Six review): on Monday 2023-07-03 (early close 12:15 CT, July 4 on Tuesday) the old
+  list missed the day and the backtest held from 08:31 to 17:05, through the halt; Monday Dec 24 was missing too. Both are
+  now skipped like the other early-close Mondays (backtest: one -$170 per NQ trade removed). }
 CalMonth = Month(Date);
 CalDay = DayOfMonth(Date);
 CalDow = DayOfWeek(Date);
@@ -112,9 +115,9 @@ IsEarlyClose = UseHolidayTimes and CalDow = 1 and (
 	or (CalMonth = 2 and CalDay >= 15 and CalDay <= 21)
 	or (CalMonth = 5 and CalDay >= 25)
 	or (CalMonth = 6 and CalYear >= 2022 and (CalDay = 19 or CalDay = 20))
-	or (CalMonth = 7 and (CalDay = 4 or CalDay = 5))
+	or (CalMonth = 7 and (CalDay = 3 or CalDay = 4 or CalDay = 5))   { July 3: early close when July 4 is a Tuesday (2026-10-25 fix) }
 	or (CalMonth = 9 and CalDay <= 7)
-	or (CalMonth = 12 and (CalDay = 25 or CalDay = 26)));
+	or (CalMonth = 12 and (CalDay = 24 or CalDay = 25 or CalDay = 26)));   { Dec 24: early close (2026-10-25 fix) }
 if IsEarlyClose then DayExit = EarlyExitTime else DayExit = ExitTime;
 
 { ---------- Entry: long at the 8:30 open ---------- }

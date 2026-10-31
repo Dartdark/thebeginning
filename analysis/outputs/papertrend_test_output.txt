@@ -1,0 +1,119 @@
+PAPERTREND v2 (user's description and MultiCharts report, 2026-10-24; @NQ 5 min 2016-09-29 -> 2026-08-14: 535 trades,
+
+1. The report's period (2016-09-29 -> 2026-08-14), 1 NQ: 582 trades (report 535), net $209,236 (report $167,378), PF 1.68 (1.66), win 60.3% (58.9%), $360 a trade (~$313); max DD $27,768 (report $25,177). Data ends 2026-10-09.
+   by year, 1 NQ: {2017: 1928, 2018: 14868, 2019: -5001, 2020: 19242, 2021: 39292, 2022: 49002, 2023: 7412, 2024: 36641, 2025: 1028, 2026: 45376}
+   trades a year: {2017: 34, 2018: 63, 2019: 65, 2020: 57, 2021: 68, 2022: 70, 2023: 57, 2024: 73, 2025: 52, 2026: 53}
+
+2. Filter ablation (NQ; '<22' = the author's design years, '22+' their out-of-sample, 23+ ours):
+   naked (no filters)                             n=1417 ( 143/yr) $  214 PF 1.31 t  3.1 win 54% yrs+ 9/10 | <22 $   90 t  1.5 | 22+ $  326 t  2.8 | 23+ t  1.7 | L 728 $ 171 S 689 $ 259
+   skip filter only                               n=1208 ( 122/yr) $  253 PF 1.39 t  3.5 win 54% yrs+ 9/10 | <22 $  132 t  2.1 | 22+ $  360 t  2.9 | 23+ t  2.1 | L 616 $ 222 S 592 $ 286
+   gap filter only                                n= 707 (  71/yr) $  296 PF 1.50 t  3.6 win 60% yrs+ 8/10 | <22 $  179 t  2.2 | 22+ $  409 t  2.9 | 23+ t  1.8 | L 398 $ 283 S 309 $ 314
+   both filters (the rule)                        n= 592 (  60/yr) $  354 PF 1.66 t  4.1 win 60% yrs+ 9/10 | <22 $  245 t  2.9 | 22+ $  457 t  3.1 | 23+ t  2.3 | L 335 $ 321 S 257 $ 398
+   same four as daily books (1 NQ, 2018+): naked $34,017/yr Sharpe 1.06 max DD $35,276; skip $34,284/yr Sharpe 1.18 max DD $35,069; gap $23,554/yr Sharpe 1.21 max DD $21,727; both $23,755/yr Sharpe 1.38 max DD $27,768
+   what each filter removes (a filter adds edge if the removed trades lose, out of sample too):
+   gap filter, on the naked rule                  removes  710 trades, $  234 avg, t  2.2; pre-2022 $   70 (t  0.8), 2022+ $  373 (t  2.1)
+   gap filter, after skip                         removes  616 trades, $  244 avg, t  2.2; pre-2022 $   55 (t  0.6), 2022+ $  400 (t  2.1)
+   skip filter, on the naked rule                 removes  209 trades, $  -16 avg, t -0.1; pre-2022 $ -130 (t -0.7), 2022+ $  106 (t  0.3)
+   skip filter, after gap                         removes  115 trades, $   -3 avg, t -0.0; pre-2022 $ -138 (t -0.6), 2022+ $  144 (t  0.3)
+   naked, with the gap                            n= 691 (  70/yr) $  305 PF 1.52 t  3.6 win 60% yrs+ 8/10 | <22 $  205 t  2.5 | 22+ $  399 t  2.8 | 23+ t  1.7 | L 391 $ 270 S 300 $ 350
+   naked, against the gap                         n= 726 (  73/yr) $  127 PF 1.16 t  1.2 win 49% yrs+ 6/10 | <22 $  -24 t -0.3 | 22+ $  259 t  1.4 | 23+ t  0.9 | L 337 $  56 S 389 $ 189
+
+3. Robustness of the rule (both filters):
+   band 0.3 ATR                                   n= 896 (  91/yr) $  283 PF 1.38 t  3.4 win 59% yrs+ 7/10 | <22 $  235 t  2.9 | 22+ $  327 t  2.3 | 23+ t  1.8 | L 514 $ 291 S 382 $ 273
+   band 0.4 ATR                                   n= 724 (  73/yr) $  360 PF 1.58 t  4.3 win 61% yrs+ 8/10 | <22 $  259 t  3.0 | 22+ $  451 t  3.2 | 23+ t  2.7 | L 406 $ 382 S 318 $ 332
+   band 0.6 ATR                                   n= 447 (  45/yr) $  325 PF 1.60 t  3.3 win 59% yrs+ 8/10 | <22 $  305 t  3.5 | 22+ $  343 t  2.0 | 23+ t  1.6 | L 238 $ 321 S 209 $ 329
+   band 0.7 ATR                                   n= 344 (  35/yr) $  308 PF 1.59 t  2.9 win 58% yrs+ 8/10 | <22 $  246 t  2.7 | 22+ $  366 t  2.0 | 23+ t  1.9 | L 174 $ 347 S 170 $ 268
+   band 0.8 ATR                                   n= 264 (  27/yr) $  221 PF 1.38 t  1.7 win 61% yrs+ 8/10 | <22 $  230 t  2.2 | 22+ $  212 t  0.9 | 23+ t  1.2 | L 118 $ 329 S 146 $ 133
+   Wilder true-range ATR(14)                      n= 483 (  49/yr) $  396 PF 1.77 t  4.2 win 63% yrs+ 9/10 | <22 $  263 t  2.5 | 22+ $  517 t  3.4 | 23+ t  2.6 | L 260 $ 474 S 223 $ 306
+   every 5-minute close (not only 15-min marks)   n= 621 (  63/yr) $  334 PF 1.56 t  3.7 win 61% yrs+ 9/10 | <22 $  231 t  2.5 | 22+ $  430 t  2.8 | 23+ t  2.5 | L 345 $ 348 S 276 $ 317
+   every 1-minute close                           n= 651 (  66/yr) $  332 PF 1.54 t  3.7 win 61% yrs+ 9/10 | <22 $  225 t  2.5 | 22+ $  431 t  2.9 | 23+ t  2.8 | L 357 $ 342 S 294 $ 320
+   entries to 12:00 CT only                       n= 488 (  49/yr) $  339 PF 1.57 t  3.4 win 60% yrs+ 9/10 | <22 $  280 t  2.9 | 22+ $  394 t  2.3 | 23+ t  1.8 | L 260 $ 278 S 228 $ 408
+   exit 12:00 CT                                  n= 474 (  48/yr) $   91 PF 1.19 t  1.2 win 53% yrs+ 6/10 | <22 $  142 t  2.1 | 22+ $   43 t  0.3 | 23+ t  0.5 | L 253 $  17 S 221 $ 176
+   exit 13:00 CT                                  n= 524 (  53/yr) $  180 PF 1.35 t  2.3 win 57% yrs+ 7/10 | <22 $  202 t  2.8 | 22+ $  159 t  1.2 | 23+ t  1.2 | L 287 $ 150 S 237 $ 215
+   exit 14:00 CT                                  n= 580 (  59/yr) $  232 PF 1.46 t  3.0 win 59% yrs+ 8/10 | <22 $  219 t  3.4 | 22+ $  244 t  1.8 | 23+ t  1.4 | L 327 $ 200 S 253 $ 274
+   exit 14:59 CT                                  n= 592 (  60/yr) $  290 PF 1.50 t  3.2 win 58% yrs+ 8/10 | <22 $  174 t  2.1 | 22+ $  398 t  2.6 | 23+ t  1.9 | L 335 $ 269 S 257 $ 316
+   naked, band 0.3 ATR                            n=2010 ( 203/yr) $  135 PF 1.16 t  2.1 win 53% yrs+ 9/10 | <22 $   72 t  1.3 | 22+ $  193 t  1.8 | 23+ t  1.2 | L 1039 $ 175 S 971 $  92
+   naked, band 0.5 ATR                            n=1417 ( 143/yr) $  214 PF 1.31 t  3.1 win 54% yrs+ 9/10 | <22 $   90 t  1.5 | 22+ $  326 t  2.8 | 23+ t  1.7 | L 728 $ 171 S 689 $ 259
+   naked, band 0.7 ATR                            n= 874 (  88/yr) $  178 PF 1.26 t  2.2 win 53% yrs+ 7/10 | <22 $   15 t  0.2 | 22+ $  340 t  2.3 | 23+ t  1.5 | L 404 $ 205 S 470 $ 155
+   naked, every 5-minute close                    n=1497 ( 151/yr) $  205 PF 1.28 t  3.0 win 55% yrs+ 8/10 | <22 $   25 t  0.4 | 22+ $  369 t  3.2 | 23+ t  2.3 | L 754 $ 193 S 743 $ 218
+   disaster stop 1.0 ATR from entry               n= 592 (  60/yr) $  347 PF 1.65 t  4.1 win 60% yrs+ 9/10 | <22 $  255 t  3.4 | 22+ $  433 t  3.0 | 23+ t  1.9 | L 335 $ 357 S 257 $ 334
+   disaster stop 1.5 ATR from entry               n= 592 (  60/yr) $  359 PF 1.67 t  4.2 win 60% yrs+ 8/10 | <22 $  264 t  3.4 | 22+ $  449 t  3.0 | 23+ t  2.2 | L 335 $ 336 S 257 $ 389
+   disaster stop 2.0 ATR from entry               n= 592 (  60/yr) $  355 PF 1.66 t  4.1 win 60% yrs+ 9/10 | <22 $  251 t  3.1 | 22+ $  452 t  3.0 | 23+ t  2.2 | L 335 $ 321 S 257 $ 398
+   disaster stop 3.0 ATR from entry               n= 592 (  60/yr) $  354 PF 1.66 t  4.1 win 60% yrs+ 9/10 | <22 $  245 t  2.9 | 22+ $  457 t  3.1 | 23+ t  2.3 | L 335 $ 321 S 257 $ 398
+   roll-window days kept (gap = roll spread there) n= 606 (  61/yr) $  368 PF 1.70 t  4.3 win 61% yrs+ 9/10 | <22 $  257 t  3.1 | 22+ $  472 t  3.2 | 23+ t  2.5 | L 346 $ 339 S 260 $ 407
+   extra slippage: 2 / 4 / 8 more ticks per round trip -> $344 / $334 / $314 a trade; break-even at 71 extra ticks
+   entry 1 min late (latency): $337 a trade, t 3.9
+   entry 2 min late (latency): $332 a trade, t 3.8
+   entry 5 min late (latency): $317 a trade, t 3.7
+   overlap with Dual Thrust v4 (open +/- 0.5 x prior range breakout, also flat 14:55): daily corr +0.18, PT days on which DT also trades 88%, same-sign result on those 67%
+
+4. Placebos (same days, same exits):
+   random side, 200 seeds: avg $-15 (5-95% $-159 .. $127); share >= the rule's $354: 0.0%; t 95th pct 1.4
+   naked breakouts, side flipped (fade)           n=1208 ( 122/yr) $  -99 PF 0.88 t -1.4 win 44% yrs+ 2/10 | <22 $ -134 t -2.2 | 22+ $  -67 t -0.5 | 23+ t -0.4 | L 540 $-138 S 668 $ -67
+   no band: 08:45 -> 14:55 in the gap's direction n=1966 ( 199/yr) $    9 PF 1.01 t  0.1 win 50% yrs+ 5/10 | <22 $   64 t  1.1 | 22+ $  -45 t -0.4 | 23+ t -0.6 | L 1120 $  42 S 846 $ -36
+
+5. The same rule on YM and ES (the author's null is on YM):
+   YM rule                                        n= 520 (  53/yr) $  -60 PF 0.84 t -1.3 win 51% yrs+ 4/9 | <22 $  -70 t -1.2 | 22+ $  -53 t -0.8 | 23+ t -1.2 | L 259 $ -34 S 261 $ -86
+   YM naked                                       n=1251 ( 126/yr) $  -17 PF 0.96 t -0.5 win 51% yrs+ 4/10 | <22 $    1 t  0.0 | 22+ $  -31 t -0.6 | 23+ t -0.4 | L 619 $  13 S 632 $ -46
+   YM rule, band 0.3                              n= 836 (  84/yr) $  -62 PF 0.85 t -1.6 win 49% yrs+ 2/9 | <22 $  -51 t -1.0 | 22+ $  -71 t -1.2 | 23+ t -1.4 | L 434 $ -23 S 402 $-104
+   YM rule, band 0.7                              n= 297 (  30/yr) $  -43 PF 0.87 t -0.8 win 48% yrs+ 5/9 | <22 $  -50 t -0.6 | 22+ $  -38 t -0.5 | 23+ t -0.7 | L 135 $ -37 S 162 $ -48
+   YM: days both trade 245, daily correlation on those days +0.49; NQ / YM ATR ratio in $ per contract 2.2
+   in ATR units per trade: NQ +0.071 (t 3.4), YM -0.037 (t -1.6)
+   ES rule                                        n= 542 (  55/yr) $   28 PF 1.07 t  0.5 win 54% yrs+ 6/10 | <22 $   -7 t -0.1 | 22+ $   62 t  0.7 | 23+ t  0.2 | L 291 $  65 S 251 $ -15
+   ES naked                                       n=1364 ( 138/yr) $   22 PF 1.05 t  0.5 win 51% yrs+ 6/10 | <22 $   -3 t -0.1 | 22+ $   47 t  0.7 | 23+ t  0.2 | L 687 $  28 S 677 $  17
+   ES rule, band 0.3                              n= 863 (  87/yr) $   33 PF 1.07 t  0.7 win 54% yrs+ 7/10 | <22 $   23 t  0.5 | 22+ $   42 t  0.5 | 23+ t  0.1 | L 490 $  46 S 373 $  15
+   ES rule, band 0.7                              n= 317 (  32/yr) $   40 PF 1.10 t  0.5 win 54% yrs+ 7/10 | <22 $  -15 t -0.2 | 22+ $   94 t  0.8 | 23+ t  0.6 | L 155 $  67 S 162 $  14
+   ES: days both trade 376, daily correlation on those days +0.81; NQ / ES ATR ratio in $ per contract 1.8
+   in ATR units per trade: NQ +0.071 (t 3.4), ES +0.016 (t 0.6)
+
+6. Concentration (1 NQ, the rule):
+   without the best  5 trades: $  171,769 of $209,788, t 3.5
+   without the best 10 trades: $  140,230 of $209,788, t 3.0
+   without the best 20 trades: $   91,588 of $209,788, t 2.1
+   worst trade $-11,087, worst open (MAE) $-11,717; MAE < -$4,000 on 45 trades, < -$8,000 on 7
+   by year (rule): 2017: n 34 $1,928 t 0.6 2018: n 63 $14,868 t 1.9 2019: n 65 $-5,001 t -0.8 2020: n 57 $19,242 t 1.1 2021: n 68 $39,292 t 3.0 2022: n 70 $49,002 t 2.1 2023: n 57 $7,412 t 0.5 2024: n 73 $36,641 t 1.7 2025: n 52 $1,028 t 0.1 2026: n 53 $45,376 t 2.0
+
+7. Metrics, per 1 NQ (MNQ = /10):
+               trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+whole 2018-26     558 60% $373 $24,557   1.38    2.14          1.67 $27,768   0.88  5.34       9.20
+whole 2023+       235 60% $385 $24,940   1.20    1.90          1.51 $16,008   1.56  7.54       6.62
+longs 2018-26     315 63% $329 $12,253   0.99    1.47          1.67 $23,508   0.52  6.95       3.53
+longs 2023+       131 66% $370 $13,361   0.87    1.28          1.50 $23,508   0.57 17.32       1.54
+shorts 2018-26    243 56% $429 $12,304   0.96    1.57          1.66 $18,981   0.65  5.66       4.35
+shorts 2023+      104 53% $404 $11,579   0.83    1.46          1.51 $18,552   0.62  8.34       2.78
+
+   2023+ bootstrap / permutation (daily, 1 NQ):
+                             actual        p5       p50       p95
+name         metric                                              
+whole 2023+  sharpe            1.20      0.37      1.19      1.98
+             sortino           1.90      0.55      1.88      3.52
+             pf_day            1.51      1.14      1.50      2.00
+             calmar            1.56      0.25      1.24      3.13
+             ulcer             7.54      3.30      7.43     19.85
+             max_dd       16,007.50 11,924.26 19,607.12 35,355.61
+             P(Sharpe<=0)       NaN       NaN      0.01       NaN
+longs 2023+  sharpe            0.87      0.10      0.86      1.65
+             sortino           1.28      0.13      1.27      2.92
+             pf_day            1.50      1.05      1.50      2.26
+             calmar            0.57      0.05      0.82      2.41
+             ulcer            17.32      3.07      7.57     22.80
+             max_dd       23,507.75  9,216.51 16,218.50 31,797.84
+             P(Sharpe<=0)       NaN       NaN      0.03       NaN
+shorts 2023+ sharpe            0.83     -0.08      0.82      1.65
+             sortino           1.46     -0.11      1.45      3.58
+             pf_day            1.51      0.96      1.50      2.33
+             calmar            0.62     -0.04      0.71      2.39
+             ulcer             8.34      3.48      8.48     25.89
+             max_dd       18,552.50  8,817.21 16,089.75 32,059.84
+             P(Sharpe<=0)       NaN       NaN      0.07       NaN
+             actual_dd pct_rank    dd50    dd95    dd99 P(dd>=5000) P(dd>=10000) P(dd>=20000)
+whole 2023+    $16,008      11% $21,708 $34,722 $41,837        100%         100%          63%
+longs 2023+    $23,508      81% $18,147 $29,349 $35,811        100%          99%          37%
+shorts 2023+   $18,552      75% $15,403 $24,856 $29,538        100%          96%          18%
+
+   Monte Carlo at 1 MNQ (2018+, Apex $2,000 trailing):
+   Monte Carlo PAPERTREND 1 MNQ (x0.1): trades 558 | total p5 $12,298 / p50 $20,866 / p95 $29,342, P(total <= 0) 0.0%
+      max DD actual $2,777 (rank 73%), shuffled p50 $2,273 / p95 $3,937 / p99 $5,039; losing streak actual 10, p95 9
+      252-day block bootstrap: P&L p5 $-423 / p50 $2,430 / p95 $5,355, P(loss) 7.9%, max DD p50 $1,046 / p95 $2,190, return/DD 2.32, P(hit $2,000 trailing, EOD check only) 6.7%
+
+   trials counted here: 39; t threshold at that count 3.02; deflated Sharpe (daily 2018+, N=39) 0.96
