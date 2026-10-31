@@ -1,0 +1,83 @@
+{
+  "candidate": "H10 VB covariance extra-lot gate",
+  "reviewer": "independent /root/variance_gate_review",
+  "review_kind": "Saved failed FEATURE source/coverage artifacts plus focused original baseline DATECOLUMN-ONLY confirmation",
+  "prereg": "f7d70c64b5a55da9afeb216996081711102ae623",
+  "implementation_commit": "98d5fd54bb4bd38511dbbe113a26040e4e1d97dc",
+  "started_utc": "2026-10-27T04:41:51.924394+00:00",
+  "completed_utc": "2026-10-27T04:41:52.449520+00:00",
+  "feature_marker_sha256": "a2dfc238c3cbac421e17df18320edb8fb2657ee78d0dbc077ccd09a6c8f75556",
+  "feature_gate_sha256": "e18c0820437b2a1085b4c428be79523d6c32de2e7b5353517dc042c716c0f5a2",
+  "passed": false,
+  "raw_outcome_authorized": false,
+  "source_review_integrity_passed": true,
+  "verdict": "CLOSE_H10_SOURCE_REJECTION_BEFORE_COVARIANCE_MASKS",
+  "artifact_hashes_verified": 6,
+  "code_hashes_verified_current_and_implementation": 10,
+  "all_hashes_match": true,
+  "input_hashes_verified": 2,
+  "input_sha256_each": "d724c7d02b6db71e63ba705079dbea7fefaa42c6b4f436308a28993ca1908803",
+  "input_bytes_each": 267640,
+  "independent_csv_columns_selected": [
+    "date"
+  ],
+  "independent_PnL_columns_selected": false,
+  "independent_PnL_conversion_performed": false,
+  "counts": {
+    "all_date_rows": 2262,
+    "design_rows": 1289,
+    "known_numeric_design_rows": 1289,
+    "unknown_numeric_design_rows": 0,
+    "minimum_expected_normal_or_early_dates": 1259,
+    "expected_dates_present": 1258,
+    "extra_actual_non_normal_rows_retained": 31,
+    "full_calendar_days_audited_from_saved_records": 1826,
+    "excluded_future_date_rows": 973,
+    "excluded_future_rows_by_year": {
+      "2023": 257,
+      "2024": 259,
+      "2025": 257,
+      "2026": 200
+    },
+    "source_runner_future_financial_cells_converted": 0
+  },
+  "fatal_source_date": {
+    "date": "2020-11-30",
+    "weekday": "Monday",
+    "bound_calendar_kind": "normal",
+    "bound_cash_close_j": 900,
+    "stored_baseline_date_present": false,
+    "neighboring_date_keys": [
+      "2020-11-25",
+      "2020-11-26",
+      "2020-11-27",
+      "2020-12-01",
+      "2020-12-02"
+    ],
+    "disposition": "Missing required normal date; no zero insertion, row compression or closure relabeling"
+  },
+  "covariance_or_mask_computed": false,
+  "active_feature_count": null,
+  "feature_counts_computed": false,
+  "feature_output_files_absent": [
+    "feature_rows.json",
+    "feature_counts.csv"
+  ],
+  "new_raw_price_or_candidate_returns": false,
+  "full_source_or_raw_ES_NQ_audit_rerun": false,
+  "new_gross_screens": 0,
+  "new_economic_evaluations": 0,
+  "budget": {
+    "economic_evaluations": 5,
+    "registered_hypotheses": 10,
+    "gross_screens": 4
+  },
+  "next_action": "Close H10 unchanged; save final bounded evidence/summary and pause exact authorized continuation at hypothesis budget. No rescue/new hypothesis/t6 restart.",
+  "limitations": [
+    "Integrity PASS is not hypothesis/source admissibility PASS; top-level passed remains false.",
+    "The runner interpreted existing2018-22 published PnL only for numeric/source validation, but did not form252row covariances or masks. This reviewer selected DATE ONLY.",
+    "No activation count or financial conclusion about the covariance idea is established.",
+    "Minimum cash-calendar coverage is a bound-source research contract, not complete native-futures or actual-account receipt certification.",
+    "Published book fee/mark/version/coverage and selection limitations are unchanged; no funded/evaluation/pass/payout claim."
+  ]
+}

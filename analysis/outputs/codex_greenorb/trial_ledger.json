@@ -1,0 +1,47 @@
+{
+  "candidate": "GreenORB",
+  "family": "opening_drive_orb",
+  "task": "direct user upload",
+  "preregistration_commit": "c32fee6662f333f870321e621eeb81d38f885dd7",
+  "return_code_sha256": "db59f7f1737fcabd79f1ca55ccb43f071e3eb5a1cb17604b72eead5a48300be3",
+  "design_years": [
+    2018,
+    2022
+  ],
+  "definitions_reserved": [
+    "GO_PRIMARY",
+    "GO_NO_COLOUR",
+    "GO_NESTED_COLOUR",
+    "GO_RANDOM_SIDE",
+    "GO_RANDOM_TIME"
+  ],
+  "definitions_executed": [
+    "GO_PRIMARY",
+    "GO_NO_COLOUR",
+    "GO_NESTED_COLOUR",
+    "GO_RANDOM_SIDE",
+    "GO_RANDOM_TIME"
+  ],
+  "candidate_definitions_executed": 3,
+  "random_side_draws": 1000,
+  "random_time_draws": 1000,
+  "matched_random_drop_draws": 1000,
+  "uncertainty": {
+    "trade_MC": 10000,
+    "daily_MC": 5000,
+    "design_bootstrap": 5000
+  },
+  "cost_sensitivities": [
+    "author RT commission1.04 on frozen ledger",
+    "exact4ticks per market/stop fill with rebuilt target"
+  ],
+  "parameter_search": false,
+  "side_or_year_selection": false,
+  "implementation_return_reruns": 0,
+  "shared_prior_trial_rows": 274,
+  "shared_prior_trial_variants": 1226,
+  "shared_history_overwritten": false,
+  "scout_budget_changed": false,
+  "disposition": "REJECT for advancement: filter and random-time gates failed",
+  "recent_or_account_definitions_executed": 0
+}

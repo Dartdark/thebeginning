@@ -1,0 +1,42 @@
+{
+  "pinned_ref": "52a6543589941455b775d46dfc23dcfbf16ec188",
+  "operation": "static code + invented indicator arithmetic only",
+  "new_strategy_return_trials": 0,
+  "source_flags": {
+    "raw_grid_enters_python_indicators": true,
+    "python_indicator_block_uses_gap_adjustment": false,
+    "native_C03_adjusts_OHLC": true,
+    "native_C03_EMA_uses_adjusted_C15": true,
+    "native_v9_adjusts_regime_close": true,
+    "python_removes_jumps_only_in_terminal_net": true
+  },
+  "synthetic_C03": {
+    "previous_EMA50": 100.0,
+    "previous_ATR20": 2.0,
+    "gap_points": 20.0,
+    "raw_EMA50": 100.7843137254902,
+    "adjusted_EMA50": 100.0,
+    "raw_ATR20": 2.95,
+    "adjusted_ATR20": 2.0,
+    "raw_close_above_EMA": true,
+    "adjusted_close_above_EMA": false
+  },
+  "synthetic_v9_DOWN": {
+    "last_raw_close": 119.0,
+    "last_adjusted_close": 99.0,
+    "raw_SMA50": 100.38,
+    "adjusted_SMA50": 99.98,
+    "previous_5lag_SMA50": 100.0,
+    "raw_DOWN": false,
+    "adjusted_DOWN": true
+  },
+  "historical_effect_measured": false,
+  "consequence": "Published Kusho/C03 replays do not reproduce default native roll transformations; exact signals, risk and ranking need controlled parity.",
+  "input_sha256": {
+    "C03.txt": "27c196b2eeea5e6f2d7ea05c386a23b2d533d2355941c4a26935af86648b9d85",
+    "Kusho_v9.txt": "5072010ad3208ad62a2e106e5b484a95a245774a7681098bf0e32384173b18aa",
+    "REVIEW.md": "1ecc74b01dcd770d44430719f0cd74179c1edf571fcc61daceff76e0a641cbbe",
+    "kusho_test.py": "b676a7d9f392b2c386b06f7295ef155a1399f364c9d4c4d5917fe74004ffd266"
+  },
+  "script_sha256": "771d862b9acfbf90895c335f37325626a4884a70e382d2b6345b37027b48c35b"
+}

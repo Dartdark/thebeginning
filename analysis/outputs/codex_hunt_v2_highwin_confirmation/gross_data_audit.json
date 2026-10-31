@@ -1,0 +1,32 @@
+{
+  "native": {
+    "source_rows": 1844074,
+    "unique_rows": 1844074,
+    "all_duplicate_source_IDs_retained": true,
+    "identical_duplicate_excess_rows": 0,
+    "conflicting_duplicate_keys": 0,
+    "invalid_observed_OHLCV_rows": 0,
+    "invalid_observed_rows_after_state_start": 0,
+    "state_start": 20170901,
+    "missing_ideal_minutes_not_imputed": true,
+    "observed_bucket_definition_not_unbounded_ideal_lineage": true
+  },
+  "source_bucket": "LITERALrow*1000+((j-1)%1440)//10inclmidnightpartials;observedstateallhours",
+  "fixed_state_start": 20170901,
+  "no2017_performance": true,
+  "invalid_conflicts_fatal": true,
+  "missing_ideal_minutes_not_forward_filled_or_unbounded_lineage_veto": true,
+  "held_events_must_be_complete": true,
+  "ATR15_not_calculated_or_used_by_raw_phase": true,
+  "uniform_entry_calendar": "sharednormalweekday/fullholiday/earlycloseguard;indicatorhistoryunchanged",
+  "raw_window": "nativeOPENsignal_j+1throughOPEN891;noSL/TP/net",
+  "target_stop_future_frozen": [
+    0.1,
+    0.2
+  ],
+  "source_parent75ptstop_not_simulated_to_choose_first_signal": true,
+  "no_BO_no_MC_profit_no2023plus": true,
+  "exact_PL_or_MC_parity_claimed": false,
+  "continuous_contract_roll_and_MNQ_fill_receipt_uncertainty": "Disclosed; no retrospective jump exclusion or invented causal-roll fatal requirement",
+  "raw_returns_calculated": true
+}

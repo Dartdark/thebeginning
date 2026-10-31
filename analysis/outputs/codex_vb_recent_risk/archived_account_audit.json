@@ -1,0 +1,41 @@
+{
+  "raw_vb_chart_rows": 142,
+  "deduplicated_chart_rows": 98,
+  "close_rows": 6,
+  "observed_market_entry_labels": 3,
+  "copies_are_not_independent": true,
+  "chart_tags": [
+    {
+      "tag": "VB",
+      "observed_close_rows": 3,
+      "gross_chart_sum": -1760.0,
+      "verified_broker_pnl": null,
+      "coverage_complete": false
+    },
+    {
+      "tag": "VB-2",
+      "observed_close_rows": 3,
+      "gross_chart_sum": -1752.0,
+      "verified_broker_pnl": null,
+      "coverage_complete": false
+    }
+  ],
+  "sources": [
+    {
+      "path": "live/trades/20261020.csv",
+      "sha256": "e186239b04f692bdbc1a284c6dbeeaa6cfd2d744a168d4323afbb43af5b8e507"
+    },
+    {
+      "path": "live/trades/20261021.csv",
+      "sha256": "270d2c80ede18cff36df8b93d96f5959c97b92f83327e5b0879b91d3687eafe1"
+    }
+  ],
+  "complete_broker_fills": false,
+  "verdict": "Cannot diagnose actual account drawdown/edge ratio from incomplete chart logs",
+  "limitations": [
+    "Only October 20-21 chart files are present",
+    "No verified broker exit ledger or fees",
+    "Chart labels are not verified submission/fill clocks",
+    "Prior order audit includes a rejected event; do not classify its chart CLOSE as an executed loss"
+  ]
+}

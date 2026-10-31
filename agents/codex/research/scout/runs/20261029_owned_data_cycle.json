@@ -1,0 +1,72 @@
+{
+  "run_id": "scout-europe-fix-20261029",
+  "finished_at": "2026-10-29T22:12:52.597628+00:00",
+  "checked_start_head": "7c8f3a9bfb55b441a87614769873bbefa756b22c",
+  "preregistration_commit": "ae338c3ef04403e862e173bd31fe7ba2a68decac",
+  "focus": "Owned-data-first academic market hypotheses; forced benchmark demand in underused6E",
+  "metadata_only_papers": [
+    "5136393",
+    "3822093",
+    "3164757",
+    "7257240",
+    "6750442"
+  ],
+  "full_reviews": 1,
+  "new_hypotheses": 1,
+  "economic_definitions": 1,
+  "status": "design_reject",
+  "source_method": "Connected public indexed search/publisher reader. Crossref prior network restriction known; no new API request made.",
+  "search_groups": [
+    "futures settlement price pressure2024-26",
+    "futures overnight reversal gold/treasury",
+    "Informative Price Pressure nextday",
+    "Ready orderflows commodity index",
+    "futures daylight savings and holidays",
+    "currency fix reversal",
+    "gold intraday momentum",
+    "futures margin calls",
+    "Treasury intraday momentum",
+    "Foreign Exchange Fixings author/fulltext/replication",
+    "LSEG14:00benchmark and CME contract specs"
+  ],
+  "access": [
+    {
+      "url": "https://www.bankofcanada.ca/wp-content/uploads/2021/10/swp2021-48.pdf",
+      "method": "configured Python urllib normal managed network",
+      "outcome": "Proxy tunnel403; no bypass"
+    },
+    {
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jofi.13306",
+      "method": "connected publisher reader",
+      "outcome": "All article body/reference/footnote lines104-744 captured; figures are captions, not original pixels"
+    },
+    {
+      "url": "https://www3.nd.edu/~zda/FOMC.pdf",
+      "method": "connected reader",
+      "outcome": "Nonretryable redirected-destination failure"
+    },
+    {
+      "url": "https://ssrn.com/abstract=7257240",
+      "method": "connected reader",
+      "outcome": "403; moved on"
+    },
+    {
+      "url": "https://ssrn.com/abstract=6750442",
+      "method": "connected reader",
+      "outcome": "403; moved on"
+    }
+  ],
+  "admission_attempts": [
+    "Wrong transcribed claim SHA rejected before returns",
+    "Correct fetched claim admitted before returns and rechecked by run process"
+  ],
+  "engineering_checks": [
+    "Clock fixtures winter/summer/both mismatch eras PASS",
+    "Endpoint census before returns1288/1305",
+    "Ledger uniqueness,360minute clocks,design dates,year/gross/cost/net reconciliation PASS"
+  ],
+  "no_2023_plus_or_accounts": true,
+  "execution_reference": "E32",
+  "report_path": "agents/codex/results/scout_3521370_20261029.md",
+  "terminal_visibility": "Committed records after pull/refresh; no live synchronization"
+}

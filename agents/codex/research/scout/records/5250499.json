@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:5250499",
+  "ssrn_id": "5250499",
+  "doi": "10.2139/ssrn.5250499",
+  "title": "Short-Term Basis Reversal",
+  "authors": [
+    "Alberto G. Rossi",
+    "Yingguang Zhang",
+    "Yandi Zhu"
+  ],
+  "url": "https://ssrn.com/abstract=5250499",
+  "verdict": "needs_full_text",
+  "full_text_read": false,
+  "evidence_level": "metadata_only",
+  "source_sha256": null,
+  "source_revision": "Written2025-05-11; SSRN advertises68pages, revised2026-05-12; no full text obtained",
+  "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5250499",
+  "report_path": "agents/codex/results/scout_spread_strategy_feasibility_20261029.md",
+  "evidence_path": "agents/codex/evidence/scout_basis_reversal_20261029.md",
+  "access_receipt": "agents/codex/research/scout/runs/20261029_spread_strategy_access.json",
+  "updated_at": "2026-10-29T21:58:22Z",
+  "cycle_id": "scout-spread-strategy-feasibility-20261029",
+  "new_economic_trials": 0,
+  "return_eligibility": "NEEDS DATA",
+  "summary": "Specific weekly adjacent-maturity return-reversal lead; primary abstract plus secondary code, no full primary manuscript or paired input panel.",
+  "about": "Prior-week front/deferred return spread and next-week relative-value reversal.",
+  "findings": "Authors claim negative autocorrelation independent of outright reversal. No independently verified net performance. Secondary notebook saved curves are gross and use a private engine/data interface.",
+  "mechanism": "Differential information sensitivity and limits to arbitrage; not a measured forced order.",
+  "build_on": "Signal core now implemented with synthetic engineering checks. Full source, paired identified histories, clocks, universe, integer sizing and native costs remain prerequisite to TEST/preregistration. Weekly holding remains personal-only as described; no financial results.",
+  "economic_family": "commodity-adjacent-maturity-weekly-basis-reversal",
+  "account_fit": {
+    "evaluation_50K_150K": "ineligible_as_described_weekly_overnight",
+    "funded_50K_150K": "ineligible_as_described_weekly_overnight",
+    "personal": "research_possible_needs_source_and_data"
+  },
+  "secondary_code_inspection": {
+    "url": "https://github.com/rolling-panda-san/notebooks/blob/ce05661a5d4b3cdb439ece27dcccba88e2cb130a/commodity_basis_reversal.ipynb",
+    "commit": "ce05661a5d4b3cdb439ece27dcccba88e2cb130a",
+    "sha256": "b2c2ae82e7a3b2d39ee5d3ac415d22e73c17d428f872d5dbf7e43543e3a3ca5f",
+    "retrieval": "Configured Python urllib read public raw.githubusercontent.com text at checked repository commit; no authentication or execution",
+    "code_cells": 31,
+    "executed": false,
+    "raw_price_panel_obtained": false,
+    "limits": [
+      "Imports vivace private/not-defined-in-notebook engine/data/signal objects",
+      "Saved gross calculate_net=False curves are secondary output, not our replication",
+      "Discusses one-day execution delay; exact primary timing not certified",
+      "No data rights or complete input coverage established"
+    ]
+  },
+  "implementation_checkpoint": {
+    "report_path": "agents/codex/results/weekly_basis_reversal_build_20261029.md",
+    "code_path": "analysis/codex_weekly_basis_reversal.py",
+    "test_path": "analysis/codex_weekly_basis_reversal_test.py",
+    "design_draft": "agents/codex/research/scout/drafts/weekly_basis_reversal_design.md",
+    "engineering_checks_passed": 14,
+    "status": "signal_prototype_only; no real-data outcomes",
+    "receipt": "agents/codex/research/scout/runs/20261029_basis_reversal_build.json"
+  }
+}

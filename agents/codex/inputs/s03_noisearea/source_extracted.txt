@@ -1,0 +1,287 @@
+S03 Noise Area v2 · NQ backtest bulletin
+
+SSRN Lab S03 / NQ 1-min / 12 Jun 2017 → 07 Jul 2026 / 1 contract
+
+Noise Area v2Intraday momentum outside the 14-day noise band, with a 0.4σ protective stop
+
+Rebuilt bar-for-bar from the PowerLanguage signal and run on 3.21M one-minute NQ bars (NY time, close-stamped). Next-bar-open fills, on-tick intrabar stops, $5 round turn plus one tick of slippage per side.
+
+Provisional
+
+The protective stop is a genuine improvement and the edge survives walk-forward, but it has thinned since mid-2024 and leans on a handful of trend days. These are 1-minute OHLC replica numbers, not yet tick-validated.
+
+Net P&L$278,225CAGR 15.8% on $100K ref.
+
+Profit factor1.35payoff 3.20 · win 29.6%
+
+Sharpe (daily)1.33Sortino 1.79
+
+Max drawdown−$22,29513 May → 3 Oct 2025
+
+Positions2,493≈275 per year
+
+Expectancy$112+0.22R per trade
+
+  01 Calendar02 Equity03 Mechanism04 Monte Carlo05 Verdict
+  Theme
+
+01 / Monthly calendar system
+
+The helicorder
+
+Each row is one year of regular sessions laid on a rotating drum; each stroke is one day's net P&L, up for gains and down for losses. Select a stroke or a month to open the day-level ledger below.
+
+      Same $ scale
+      Per-year scale
+
+Strokes clip at the 98.5th percentile of |daily P&L| on the shared scale; a ring marks a clipped day. Dollar size grows with NQ's price (≈5,700 in 2017 → ≈29,000 in 2026), so early rows run quiet on the shared scale — switch to per-year scale to compare shape.
+
+Year × month ledger
+
+Net P&L per month, 1 NQ, after costs. 75 of 111 months green (68%); 9 of 10 calendar years green (2017 is a 7-month stub).
+
+02 / Equity curve
+
+Cumulative displacement
+
+Net P&L accumulated by session, one column per day, with the underwater depth hanging below. Sessions that set a new equity high are marked in green.
+
+Max drawdown−$22,295peak 13 May 2025 · recovered 5 Jun 2026
+
+Longest underwater388 dcalendar days, same episode
+
+Recovery factor12.5net ÷ max DD
+
+LR correlation0.989equity vs time
+
+Z-score0.41win/loss runs: random
+
+Max losing run15consecutive positions
+
+Year by year
+
+Sharpe from daily P&L within each year (all sessions, zero days included). 2017 starts 12 Jun after the 14-session warm-up; 2026 ends 7 Jul.
+
+Regime check. Since July 2024: 560 positions, +$65.4K, PF 1.22. Take out April 2025 — mostly the 9 April tariff-pause rally, the single best trade of the sample — and PF drops to 1.11. Yearly Sharpe ran 1.6–3.4 in five of six years from 2018–2023; it has been 0.6–1.0 since.
+
+03 / Mechanism
+
+How the noise floor trades
+
+What the signal does, where the money comes from, and whether the v2 stop is a finding or a fit.
+
+Rules as coded
+
+Noise bandσ(t) is the mean of |close(t) ÷ open(09:30) − 1| over the last 14 full sessions at the same minute. Upper = max(open, prior close) × (1 + σ); lower = min(open, prior close) × (1 − σ).
+
+Half-hour checksOnly on the bars stamped 10:00, 10:30 … 15:30. Long when close > upper and > VWAP; short when close < lower and < VWAP. An opposite signal reverses.
+
+TrailAt the same checks, exit a long when close < max(upper, VWAP) and a short when close > min(lower, VWAP).
+
+Protective stop (v2)Entry ∓ 0.4 × σ(t) × signal close, live from the fill bar and filled intrabar.
+
+Flat dailyMarket exit off the 16:00 bar (fills 16:01 open). Exchange holidays, early closes and two mourning days are skipped.
+
+Inputs and engine
+
+Lookback
+
+14 sessions
+
+BandMult
+
+1.0
+
+CheckEvery
+
+30 min
+
+VwapConfirm
+
+true
+
+StopSigma
+
+0.4 (raw σ)
+
+Qty
+
+1 NQ ($20/pt)
+
+Costs
+
+$5 RT + 1 tick/side = $15
+
+Fills
+
+next-bar open
+
+Stops
+
+on-tick, rounded toward entry
+
+Data
+
+1-min, unadjusted continuous
+
+Data-gap days
+
+28 Feb, 30 Jun 2020 → SetExitOnClose
+
+Stops round to the tick nearest the entry (the conservative side). Exact-price stops give 2,476 trades and +$285.5K — the rounding choice alone is worth $7K.
+
+The noise floor through the day
+
+Mean σ(t) by minute across all 2,271 full sessions (band) and the latest 250 (ticks). The band is what price has to clear, measured from the reference open, before a check can fire.
+
+full samplelast 250 sessionscheck times
+
+One session on the trace
+
+noise areaVWAP (dotted)entry ▲▼ / exit ×protective stop
+
+Replica against the header
+
+Header figures are the strategy author's Python replica; this engine is independent.
+
+v1 matches trade-for-trade (1,919). v2 lands within 4 trades and 2% of net; the residual is stop-price rounding.
+
+Walk-forward on StopSigma
+
+Anchored; each year picks the value with the best daily Sharpe on all prior data, then trades it blind.
+
+Chosen value sits in 0.4–0.5 in 7 of 8 years. Stitched out-of-sample 2019–2026: +$225.6K, Sharpe 1.20 against +$237.0K, 1.27 for fixed 0.4 — a 5% haircut, not a cliff.
+
+StopSigma sweep
+
+Full sample, everything else fixed. Bars above the axis are Sharpe; bars below are max drawdown.
+
+0.35–0.6 is a plateau (Sharpe 1.29–1.37, net $273K–$286K). Below 0.3 the stop cuts trend days before they run; above 0.6 the drawdown climbs back to v1 territory. 0.4 is inside the plateau, not on a spike.
+
+Long vs short, by year
+
+Longs +$167K at PF 1.49; shorts +$111K at PF 1.24.
+
+longshort
+
+Short profit is lumpy: 2018 and 2020 selloffs carry 60% of it, and three years are flat or negative. Longs have not had a losing year.
+
+By check time
+
+Net by the half-hour check that fired the entry.
+
+longshort
+
+The 10:00 check carries 28% of net (+$78.7K). 12:00 is the only red slot (−$11.4K, 171 trades) — too few to filter on.
+
+Exit reasons
+
+Count of positions by how they closed.
+
+1,395 stops (56%) cost −$699K; 628 held-to-close exits earn +$980K. The edge is holding trend days to 16:00.
+
+Holding time
+
+Positions and net by time in trade.
+
+132 positions (5.3%) close inside the entry minute — all protective stops, −$49.4K. Not scalps, but they look like it to firms that screen sub-minute trades.
+
+By weekday
+
+Net and PF by entry day.
+
+Monday and Tuesday are weaker (PF 1.21 / 1.18) on ≈450–500 trades each. Flag it; it is not enough to filter on.
+
+Tail dependence
+
+Share of total net from the largest winners, and PF with them removed.
+
+The top 10 positions (0.4% of trades) are 43.5% of net. Without them PF is 1.20; without the top 25, 1.08. A skipped trend day costs more than any parameter choice.
+
+Cost stress
+
+Net after extra slippage. Stops are the fills most likely to slip.
+
+Two ticks a side costs −$24.9K, three costs −$49.9K; stops slipping four extra ticks costs −$27.9K. PF stays at or above 1.27 in every case.
+
+04 / Monte Carlo
+
+Aftershock envelope
+
+Three resampling engines on the 2,493 position-level P&Ls, 10,000 paths each at the same trade count. They disagree on drawdown, and the conservative pair is the one to size from.
+
+      IID bootstrap
+      Block-50 bootstrap
+      Permutation
+
+P5–P95P25–P75medianrealized
+
+Terminal net
+
+Max drawdown
+
+Engines side by side
+
+1 NQ, fixed size. "Touch" = equity falls that far below the starting balance at any point. Ruin = −$50K (half of the $100K reference).
+
+IID and permutation put the median drawdown near −$24.8K and P95 at −$37.7K to −$40.2K. Block-50, which keeps the stop-stop-winner clustering of trend days intact, gives −$19.4K / −$29.9K. The realized −$22.3K beats 64% of IID paths but is worse than 74% of block paths — 2025's ordering was unlucky against its own structure. P(loss) over the full horizon is 0 in every engine; P(ruin) is 0.02%.
+
+v1 vs v2 at equal risk
+
+Each variant scaled so its block-MC P95 drawdown is $20K; median and P5 nine-year net at that size.
+
+The only difference between the two is StopSigma, so this is a clean comparison. At equal risk v2 earns +$184.8K vs +$122.3K (+51%). v2 is a better strategy, not a bigger bet.
+
+Fixed vs compounding
+
+Compounding = 1 NQ per $100K of equity, floored, from $100K.
+
+Compounding ends at +$664K with a −$146K drawdown at 7 contracts — 2.4× the profit for 6.6× the drawdown. Fixed contracts sidestep that tail.
+
+LucidFlex first passage on MNQ
+
+Rules from third-party summaries dated Aug–Sep 2026 — confirm on Lucid's site. 50K: $3,000 target, $2,000 EOD-trailing MLL locking at +$100, 50% evaluation consistency, no daily limit, 40 micros max. 150K: $9,000 / $4,500 / 100 micros. Funded: 5 qualifying days per cycle, payout 50% of profit capped at $2,000 / $3,000, 90% split. MNQ costs assumed $2 RT + 1 tick/side, which takes 24% of the gross edge per contract (12% on NQ). Breach is tested on the realized intraday path, not just the close. History = an evaluation started on every session with a year of runway; bootstrap = 4,000 block-resampled years.
+
+50K
+
+150K
+
+Highlighted rows are the recommended sizes. The evaluation wants 2× the funded size: at 1 MNQ a 50K eval takes most of a year; at 3+ MNQ the $2,000 trailing limit breaks it. Funded, only 1 MNQ (50K) or 2 MNQ (150K) survives a typical year, because payouts pull the balance back toward the locked limit. Every account on this signal breaches on the same days — more accounts is more of the same bet, not diversification.
+
+05 / Verdict
+
+Trade it small, after three checks
+
+What holds
+
+The edge and the stop are both real
+
+The replica reproduces the header within 2%. The v2 stop halves drawdown (−$40.6K → −$22.3K) while adding profit; it sits on a 0.35–0.6 plateau, survives walk-forward with a 5% haircut and wins by 51% at equal risk. No Monte Carlo engine produces a losing nine-year path.
+
+What worries
+
+Thin lately, and tail-driven
+
+PF is 1.22 since July 2024 and 1.11 without April 2025. 43.5% of all profit sits in 10 positions, so execution has to be perfect on exactly the days that are hardest to trade — fast opens and headline rallies. Shorts are lumpy and depend on crash years.
+
+Size
+
+1 NQ per $200K
+
+Plan on the IID P95 drawdown of about −$40K per NQ, not the backtest's −$22K, and keep it under 20% of risk capital: 1 MNQ per $20K. On LucidFlex: evaluate at 2 MNQ, trade funded at 1 MNQ on a 50K (≈$1.7K expected payouts in a year); on a 150K evaluate at 4 and fund at 2 (≈$3.9K).
+
+Before live
+
+Three checks
+
+Tick-validate the stop. Run it in MultiCharts on tick data or a 1-tick bar magnifier. 56% of positions exit on the stop and 132 inside the entry minute; this report is replica-only and the real number will differ.
+
+Back-adjusted series. This data is unadjusted, so prior close crosses a roll about four times a year, shifting one side of the band on those days.
+
+Correlation with the NQ quartet. Check daily P&L correlation against the strategies already on the Lucid engine before adding it; its value there is as a diversifier.
+
+Source: ofb_bars_NQ.csv — 3,210,351 one-minute bars, 21 May 2017 18:01 → 7 Jul 2026 20:00 ET, close-stamped. 2,354 RTH sessions: 2,271 full, 81 holiday/early-close skipped, 2 data-gap days. First position 12 Jun 2017 after the 14-session warm-up.
+
+Engine: s03_engine.py (Python, bar-for-bar port of the PowerLanguage SIGNAL; script at bar close, next-bar-open market fills, SetStopContract/SetStopLoss from the fill bar, MC-style cost deduction). Metrics on 1 NQ with a $100K reference account for percentages. Monte Carlo seed 20260922. Generated 22 Sep 2026.
+
+Provisional: 1-minute OHLC replica, not tick-validated. Not financial advice.

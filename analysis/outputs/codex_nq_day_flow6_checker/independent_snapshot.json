@@ -1,0 +1,157 @@
+{
+  "created_utc": "2026-10-25T23:31:31.723361+00:00",
+  "independence": "Before maker script or output access",
+  "scope": "Independent raw-workbook ledger/statistics reconstruction; not source-signal replication",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "sources": {
+    "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx": "7169ba79c9f23cb55a8f8324b950c6e956aefdd130ca581fd52d9fdd203f3ccf",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx": "f5d9beee8f4e0a2a94870e6101526a7ee79c1874bdbe96145de3aa73d03b00fc",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx": "cf1bc66f4cf459a2d1adc94e434be3176937ddd147d0906c6c91e037f12f5814",
+    "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx": "2a1c7dd88a261ad0b0df67f310e3c0c33b17d3faf85f7a94c53e9d910f63bc8f",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx": "d67673c0485d2c780b1f2d810d2929aac5360e4409cf767ef772ca980fff4085",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx": "7ed08ee978faa0bc4364d38b4863c11cf1d285610501a2dcf24cc19532fb2fe8"
+  },
+  "checker_sha256": "299c0cbc015d7482c661e68bc9fbef510e1e69b34c6d90652006f43240534af9",
+  "calendar_rule": "Raw NQ day files date/time only, max time >=1100 and Monday-Friday; realized exit timestamp +7h floor to date",
+  "calendar_sessions": 2262,
+  "omitted_early_raw_dates": {
+    "2018-12-05 00:00:00": 830,
+    "2021-04-02 00:00:00": 815,
+    "2023-04-07 00:00:00": 815,
+    "2025-01-09 00:00:00": 830,
+    "2026-04-03 00:00:00": 815
+  },
+  "max_stamped_gross": 4,
+  "max_abs_stamped_net": 4,
+  "full": {
+    "era": "full",
+    "side": "all",
+    "tickets": 3615,
+    "sessions": 2262,
+    "active_sessions": 1699,
+    "gross": 78799.5,
+    "commission": 4482.6,
+    "slippage": 3155.0,
+    "cost": 7637.600000000002,
+    "net": 71161.9,
+    "trade_t": 8.041586946023019,
+    "daily_iid_t": 7.110218141215138,
+    "nw5_t": 6.772805855270961,
+    "nw20_t": 7.200930650008158,
+    "win_rate": 0.6027662517289073,
+    "trade_pf": 1.4909879620086472,
+    "max_closed_dd": 2566.3200000000215
+  },
+  "source_summary": [
+    {
+      "sleeve": "VB",
+      "raw_tickets": 1743,
+      "kept": 1743,
+      "excluded_before": 0,
+      "excluded_after": 0,
+      "targets": 896,
+      "cross_date": 0,
+      "late_exit": 0,
+      "source_qty": [
+        1.0
+      ],
+      "gross": 18540.0,
+      "commission": 2161.32,
+      "slippage": 1295.0,
+      "cost": 3456.32,
+      "net": 15083.679999999997
+    },
+    {
+      "sleeve": "ONB",
+      "raw_tickets": 344,
+      "kept": 343,
+      "excluded_before": 0,
+      "excluded_after": 1,
+      "targets": 24,
+      "cross_date": 0,
+      "late_exit": 0,
+      "source_qty": [
+        1.0
+      ],
+      "gross": 22399.0,
+      "commission": 425.31999999999994,
+      "slippage": 331.0,
+      "cost": 756.3200000000003,
+      "net": 21642.68
+    },
+    {
+      "sleeve": "MON",
+      "raw_tickets": 451,
+      "kept": 450,
+      "excluded_before": 0,
+      "excluded_after": 1,
+      "targets": 0,
+      "cross_date": 0,
+      "late_exit": 1,
+      "source_qty": [
+        1.0
+      ],
+      "gross": 19912.0,
+      "commission": 558.0,
+      "slippage": 450.0,
+      "cost": 1008.0000000000005,
+      "net": 18904.0
+    },
+    {
+      "sleeve": "EOS",
+      "raw_tickets": 105,
+      "kept": 105,
+      "excluded_before": 0,
+      "excluded_after": 0,
+      "targets": 0,
+      "cross_date": 0,
+      "late_exit": 0,
+      "source_qty": [
+        1.0
+      ],
+      "gross": 5156.5,
+      "commission": 130.20000000000002,
+      "slippage": 105.0,
+      "cost": 235.2000000000001,
+      "net": 4921.299999999999
+    },
+    {
+      "sleeve": "LDF",
+      "raw_tickets": 898,
+      "kept": 895,
+      "excluded_before": 2,
+      "excluded_after": 1,
+      "targets": 0,
+      "cross_date": 0,
+      "late_exit": 0,
+      "source_qty": [
+        1.0
+      ],
+      "gross": 10013.0,
+      "commission": 1109.8000000000002,
+      "slippage": 895.0,
+      "cost": 2004.8000000000009,
+      "net": 8008.199999999999
+    },
+    {
+      "sleeve": "NFP",
+      "raw_tickets": 79,
+      "kept": 79,
+      "excluded_before": 0,
+      "excluded_after": 0,
+      "targets": 0,
+      "cross_date": 1,
+      "late_exit": 1,
+      "source_qty": [
+        1.0
+      ],
+      "gross": 2779.0,
+      "commission": 97.95999999999997,
+      "slippage": 79.0,
+      "cost": 176.9600000000001,
+      "net": 2602.040000000001
+    }
+  ]
+}

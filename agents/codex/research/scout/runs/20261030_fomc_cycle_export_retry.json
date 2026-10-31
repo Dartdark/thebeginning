@@ -1,0 +1,24 @@
+{
+  "original_code": "analysis/codex_scout_fomc_cycle.py",
+  "original_sha256": "edfc1ff63cfe6828b80f479a2226c52427e249ad743c3e69e3a2ef7c76b16e1d",
+  "retry_code": "analysis/codex_scout_fomc_cycle_retry.py",
+  "retry_sha256": "fc3df5d097e8332a3124309bff5e7c4d5670bba800ee049f21e879c4b0f71c0a",
+  "change": "Only export of t: match is added to c after t.copy, so it was never present in t. Remove invalid drop, retain exact t reference ledger. No signal, price, cost, control, gate or sample change.",
+  "first_attempt": "All3economic definitions computed; export then raised KeyError before financial result serialization. Preserve as first look. No result parameters selected or changed.",
+  "trials": "3original definitions, engineering replay; no new economic definition",
+  "preregistration_commit": "f0ea358635e6e8b4dd5460671cf9ae4989396503",
+  "original_frozen_artifacts_untouched": true,
+  "diff": [
+    "--- analysis/codex_scout_fomc_cycle.py\n",
+    "+++ analysis/codex_scout_fomc_cycle_retry.py\n",
+    "@@ -73,7 +73,7 @@\n",
+    "         source_replication=False,reference_screen=True,unknown_returns_imputed=False,",
+    "         historical_2023_plus_opened=False,account_results=None)",
+    "     OUT.mkdir(parents=True,exist_ok=True)",
+    "-    t.drop(columns='match').to_csv(OUT/'design_reference_ledger.csv',index=False)",
+    "+    t.to_csv(OUT/'design_reference_ledger.csv',index=False)",
+    "     pd.DataFrame(dict(draw=np.arange(1000),net_total=null)).to_csv(OUT/'calendar_null.csv',index=False)",
+    "     inventory().to_csv(OUT/'coverage.csv',index=False)",
+    "     (OUT/'result.json').write_text(json.dumps(r,indent=2)+'\\n')"
+  ]
+}

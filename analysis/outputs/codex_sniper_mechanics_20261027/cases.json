@@ -1,0 +1,340 @@
+[
+  {
+    "case": "01_paused",
+    "assertion_passed": true,
+    "category": "behavior",
+    "observation": "Template status gate blocks tick dispatch while paused.",
+    "traded": 0,
+    "target": 5,
+    "tracked_order": "",
+    "status": "暂停",
+    "active_order_ids": [],
+    "requests": [],
+    "cancels": []
+  },
+  {
+    "case": "02_unfavorable_buy",
+    "assertion_passed": true,
+    "category": "behavior",
+    "observation": "Ask above buy cap produces no order.",
+    "traded": 0,
+    "target": 5,
+    "tracked_order": "",
+    "status": "运行",
+    "active_order_ids": [],
+    "requests": [],
+    "cancels": []
+  },
+  {
+    "case": "03_buy_cap_and_size",
+    "assertion_passed": true,
+    "category": "behavior",
+    "observation": "Two requested at caller limit 100; observed ask 99.75 is not a simulated fill.",
+    "traded": 0,
+    "target": 5,
+    "tracked_order": "SIM.1",
+    "status": "运行",
+    "active_order_ids": [],
+    "requests": [
+      {
+        "id": "SIM.1",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 2.0,
+        "type": "limit"
+      }
+    ],
+    "cancels": []
+  },
+  {
+    "case": "04_sell_and_offset",
+    "assertion_passed": true,
+    "category": "behavior",
+    "observation": "Bid depth caps sell size; CLOSE offset passes through.",
+    "traded": 0,
+    "target": 5,
+    "tracked_order": "SIM.1",
+    "status": "运行",
+    "active_order_ids": [],
+    "requests": [
+      {
+        "id": "SIM.1",
+        "direction": "short",
+        "offset": "close",
+        "limit": 100,
+        "volume": 1.0,
+        "type": "limit"
+      }
+    ],
+    "cancels": []
+  },
+  {
+    "case": "05_partial_fill_remainder",
+    "assertion_passed": true,
+    "category": "behavior",
+    "observation": "After trade callback and terminal acknowledgement, remaining quantity is three.",
+    "traded": 2,
+    "target": 5,
+    "tracked_order": "SIM.2",
+    "status": "运行",
+    "active_order_ids": [],
+    "requests": [
+      {
+        "id": "SIM.1",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 5.0,
+        "type": "limit"
+      },
+      {
+        "id": "SIM.2",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 3.0,
+        "type": "limit"
+      }
+    ],
+    "cancels": [
+      "SIM.1"
+    ]
+  },
+  {
+    "case": "06_completion",
+    "assertion_passed": true,
+    "category": "behavior",
+    "observation": "Inherited trade accounting precedes callback; completion suppresses new tick orders.",
+    "traded": 2,
+    "target": 2,
+    "tracked_order": "SIM.1",
+    "status": "结束",
+    "active_order_ids": [
+      "SIM.1"
+    ],
+    "requests": [
+      {
+        "id": "SIM.1",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 2.0,
+        "type": "limit"
+      }
+    ],
+    "cancels": [
+      "SIM.1"
+    ]
+  },
+  {
+    "case": "07_cancel_next_tick",
+    "assertion_passed": true,
+    "category": "behavior",
+    "observation": "A favorable quote does not prevent the next-tick cancellation policy.",
+    "traded": 0,
+    "target": 5,
+    "tracked_order": "SIM.1",
+    "status": "运行",
+    "active_order_ids": [
+      "SIM.1"
+    ],
+    "requests": [
+      {
+        "id": "SIM.1",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 5.0,
+        "type": "limit"
+      }
+    ],
+    "cancels": [
+      "SIM.1"
+    ]
+  },
+  {
+    "case": "08_repeat_cancel",
+    "assertion_passed": true,
+    "category": "behavior",
+    "observation": "Each new tick repeats cancellation while terminal acknowledgement is pending.",
+    "traded": 0,
+    "target": 5,
+    "tracked_order": "SIM.1",
+    "status": "运行",
+    "active_order_ids": [
+      "SIM.1"
+    ],
+    "requests": [
+      {
+        "id": "SIM.1",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 5.0,
+        "type": "limit"
+      }
+    ],
+    "cancels": [
+      "SIM.1",
+      "SIM.1",
+      "SIM.1"
+    ]
+  },
+  {
+    "case": "09_wait_for_ack",
+    "assertion_passed": true,
+    "category": "behavior",
+    "observation": "Retained ID blocks resubmission; active_orders is empty until an order callback.",
+    "traded": 0,
+    "target": 5,
+    "tracked_order": "SIM.1",
+    "status": "运行",
+    "active_order_ids": [],
+    "requests": [
+      {
+        "id": "SIM.1",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 5.0,
+        "type": "limit"
+      }
+    ],
+    "cancels": []
+  },
+  {
+    "case": "10_invalid_zero_ask",
+    "assertion_passed": true,
+    "category": "safety_gap_demo",
+    "observation": "Zero ask with positive size triggers a gateway request at limit 100.",
+    "traded": 0,
+    "target": 5,
+    "tracked_order": "SIM.1",
+    "status": "运行",
+    "active_order_ids": [],
+    "requests": [
+      {
+        "id": "SIM.1",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 2.0,
+        "type": "limit"
+      }
+    ],
+    "cancels": []
+  },
+  {
+    "case": "11_zero_depth_guard",
+    "assertion_passed": true,
+    "category": "behavior",
+    "observation": "Upstream engine rejects rounded zero volume before fake-gateway send.",
+    "traded": 0,
+    "target": 5,
+    "tracked_order": "",
+    "status": "运行",
+    "active_order_ids": [],
+    "requests": [],
+    "cancels": []
+  },
+  {
+    "case": "12_delayed_old_terminal",
+    "assertion_passed": true,
+    "category": "safety_gap_demo",
+    "observation": "Old terminal event clears newer ID; two one-unit live children for target one.",
+    "traded": 0,
+    "target": 1,
+    "tracked_order": "SIM.3",
+    "status": "运行",
+    "active_order_ids": [
+      "SIM.2",
+      "SIM.3"
+    ],
+    "requests": [
+      {
+        "id": "SIM.1",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 1.0,
+        "type": "limit"
+      },
+      {
+        "id": "SIM.2",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 1.0,
+        "type": "limit"
+      },
+      {
+        "id": "SIM.3",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 1.0,
+        "type": "limit"
+      }
+    ],
+    "cancels": []
+  },
+  {
+    "case": "13_delayed_trade_overfill",
+    "assertion_passed": true,
+    "category": "safety_gap_demo",
+    "observation": "Delayed trade after known partial-fill cancellation permits seven filled against target five.",
+    "traded": 7,
+    "target": 5,
+    "tracked_order": "SIM.2",
+    "status": "结束",
+    "active_order_ids": [
+      "SIM.2"
+    ],
+    "requests": [
+      {
+        "id": "SIM.1",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 5.0,
+        "type": "limit"
+      },
+      {
+        "id": "SIM.2",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 5.0,
+        "type": "limit"
+      }
+    ],
+    "cancels": [
+      "SIM.2"
+    ]
+  },
+  {
+    "case": "14_no_timer_deadline",
+    "assertion_passed": true,
+    "category": "external_control_required",
+    "observation": "No timer-based expiry/flatten rule is supplied; an external controller is required.",
+    "traded": 0,
+    "target": 5,
+    "tracked_order": "SIM.1",
+    "status": "运行",
+    "active_order_ids": [
+      "SIM.1"
+    ],
+    "requests": [
+      {
+        "id": "SIM.1",
+        "direction": "long",
+        "offset": "open",
+        "limit": 100,
+        "volume": 5.0,
+        "type": "limit"
+      }
+    ],
+    "cancels": []
+  }
+]

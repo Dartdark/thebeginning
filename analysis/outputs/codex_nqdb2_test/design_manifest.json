@@ -1,0 +1,71 @@
+{
+  "stage": "design",
+  "prereg_sha": "eb7b8b07fd54e8083a13b04f25d1c5b59c68a00b",
+  "years": [
+    2018,
+    2022
+  ],
+  "cache_path": "scratch_data/g24.pkl",
+  "cache_sha256": "69868d1cbc5ca6acdbbba0899eb01ca1ad7d036e00160f33c3f1992d5a385595",
+  "cache_first_date": "2017-12-01 00:00:00",
+  "cache_last_date": "2026-10-09 00:00:00",
+  "source_sha256": "648e15c16cad8c4eae5f10cea7cd78fe01e1cf37be1c63f33df2abcc4a1fabdf",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "feature_seconds": 0.8186682749947067,
+  "feature_rows": 59578,
+  "elapsed_seconds": 2.692637972009834,
+  "synthetic_checks": [
+    "prior15_positive_Date_ranges_Sunday_midnight",
+    "zero_range_Date_not_counted",
+    "30m_TP_volume_VWAP_zero_volume_reset",
+    "Close4_across_weekend_exact_veto_threshold",
+    "inclusive_entry_window_two_submissions_costs",
+    "prearmed_entry_brackets_shared_path_target_touch",
+    "next_bar_market_across_halfday_halt",
+    "midnight_carry_vs_declared_session_end_no_inferred_close",
+    "Apex_early_calendar_1130_observed_close_no_fabricated_price",
+    "entry_minute_stop_and_two_fill_slippage",
+    "post2022_gate"
+  ],
+  "gate_path": null,
+  "gate_sha256": null,
+  "profiles": {
+    "S0": {
+      "trades": 824,
+      "total_net": 86201.0,
+      "trade_t": 3.420733132927722,
+      "positive_years": 5,
+      "censored_positions": 0
+    },
+    "S1": {
+      "trades": 814,
+      "total_net": 101748.5,
+      "trade_t": 4.128624764702153,
+      "positive_years": 5,
+      "censored_positions": 0
+    },
+    "A0": {
+      "trades": 823,
+      "total_net": 84253.25,
+      "trade_t": 3.3415854454976723,
+      "positive_years": 5,
+      "censored_positions": 0
+    },
+    "A1": {
+      "trades": 813,
+      "total_net": 99800.75,
+      "trade_t": 4.046993646178127,
+      "positive_years": 5,
+      "censored_positions": 0
+    },
+    "E1": {
+      "trades": 813,
+      "total_net": 87620.75,
+      "trade_t": 3.5372612027957806,
+      "positive_years": 5,
+      "censored_positions": 0
+    }
+  }
+}

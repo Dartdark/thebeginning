@@ -1,0 +1,29 @@
+{
+  "nominal_design_book_improvement": false,
+  "nominal_survivors": [],
+  "paired_tests_by_fee": {
+    "1.24": {
+      "ADD": false,
+      "REPLACE": false
+    },
+    "1.04": {
+      "ADD": false,
+      "REPLACE": false
+    }
+  },
+  "certified_book_pass": false,
+  "status": "FAIL_NO_FROZEN_BOOK_IMPROVEMENT",
+  "uncertainty_bound_supported": false,
+  "next_action": "CloseH05before further robustness/2023+.",
+  "full_Twin_slot_removed_in_EMPTY_REPLACE": true,
+  "economic_strategy_evaluations_added": 0,
+  "limitations": [
+    "Daily published-book booking only; no joint intraday margin/liquidation, funded, evaluation, pass or payout claim.",
+    "Core native-fee correction uses nonzero daily activity and undercounts some reentries; exact per-leg trade-count bounds are unsupported here.",
+    "Twin is marked v1 checker history, not an exact v2.1 ledger. EMPTY/REPLACE remove BOTH BO and MO, not an isolated MO slot.",
+    "Kusho is exit-booked; S30/MOC retain inherited fee/mark approximations. An exact current alternate daily-mark envelope is unsupported here.",
+    "Baseline input endsOT evidence2026-07-07; only2018--22 is inspected now. Later book zeros are never assumed known no-trade.",
+    "Fee1.04 is the fixed published-research diagnostic, not a verified broker quote or complete fee/mark/coverage uncertainty bound.",
+    "Nominal statistical book improvement can be reported; unsupported implementation bounds prevent a certified book PASS."
+  ]
+}

@@ -1,0 +1,96 @@
+{ =====================================================================================================
+  SWING TARGET NQ v2  -  Twin-formula leg 1 (structural level break + near target + wide stop), RTH only
+  v2 (25 Oct): StartCT 845 = only breaks from 9:46 NY; if NQ already broke a level in the first 15 minutes, skip the day.
+      Python 2018-26 per MNQ: 66 trades/yr, 66% win, PF 1.74 (2018-22 1.69 / 2023+ 1.79), ~$2,370/yr, max DD -$1.5k
+      (v1: 102/yr, PF 1.37, DD -$2.3k). Every start 9:36-10:31 beats v1 in both periods. Book Sharpe x2 2.79 -> 2.84; funded 92%/40d.
+      StartCT 0 = v1 behaviour.
+  Rule: today's RTH open inside the prior 2 days' RTH high/low -> stop orders at both levels.
+        First break: enter AT the level, target 0.35 x 20-day avg RTH range, stop 0.7 x avg range, flat at the close.
+        One trade per day. Last entry 14:29 CT (15:29 NY).
+  Python backtest 2018-01 to 2026-07 (per MNQ, $1 round-trip cost):
+        ~102 trades/yr, 63% winners, PF 1.37 (2018-22 1.25 / 2023+ 1.52), ~$2,300/yr per MNQ, max DD -$2.3k, every year positive.
+        Corr with book 0.15, with Twin's breakout leg 0.26. Book Sharpe 2.67 -> 2.75 (x1).
+  SETUP
+   - Chart: OFB_BARS_NQ (PC) or MNQZ6 (VPS), 1 minute, session must include 8:30-15:00 CT.
+   - ClockShiftMin: VPS (Chicago/exchange time) 0 ; PC with New York time data -60.
+   - Load at least 40 trading days of data before the test start (the 20-day range needs history).
+   - Commission/slippage in Properties as for the other NQ strategies. Qty = contracts (MNQ on the live account).
+   - Stop entries fill at the level or worse; MultiCharts will show some slippage on gap-through bars (Python assumed the level).
+  ===================================================================================================== }
+
+Inputs:
+    Qty(1),
+    Lookback(2),           { days for the swing high/low }
+    TargetMult(0.35),
+    StopMult(0.7),
+    RangeDays(20),
+    RTHOpenCT(831),        { first RTH bar (bar close time, CT) }
+    RTHCloseCT(1500),      { last RTH bar }
+    StartCT(845),          { v2: first order placed at the close of the 8:45 CT bar (= 9:45 NY); 0 = v1 }
+    LastEntryCT(1429),
+    ExitCT(1459),          { exit next bar at market = at the close }
+    ClockShiftMin(0);
+
+Variables:
+    RawMin(0), CTt(0), InRTH(false), Armed(false), Traded(false),
+    DayH(0), DayL(0), HiRef(0), LoRef(0), AvgRng(0), nD(0), k(0), sm(0), TT0(0);
+Arrays:
+    DH[60](0), DL[60](0);
+
+RawMin = IntPortion(Time / 100) * 60 + Mod(Time, 100) + ClockShiftMin;
+If RawMin < 0 then RawMin = RawMin + 1440;
+If RawMin >= 1440 then RawMin = RawMin - 1440;
+CTt = IntPortion(RawMin / 60) * 100 + Mod(RawMin, 60);
+
+{ ---- session start: build levels ---- }
+If CTt = RTHOpenCT then begin
+    InRTH = true; Traded = false; TT0 = TotalTrades;
+    DayH = High; DayL = Low;
+    Armed = false;
+    If nD >= RangeDays and nD >= Lookback then begin
+        HiRef = DH[0]; LoRef = DL[0];
+        For k = 1 to Lookback - 1 begin
+            If DH[k] > HiRef then HiRef = DH[k];
+            If DL[k] < LoRef then LoRef = DL[k];
+        end;
+        sm = 0;
+        For k = 0 to RangeDays - 1 begin sm = sm + (DH[k] - DL[k]); end;
+        AvgRng = sm / RangeDays;
+        Armed = Open <= HiRef and Open >= LoRef and High <= HiRef and Low >= LoRef;
+    end;
+end
+else if InRTH then begin
+    If High > DayH then DayH = High;
+    If Low < DayL then DayL = Low;
+end;
+
+If TotalTrades > TT0 or MarketPosition <> 0 then Traded = true;
+
+{ v2: a level broken before StartCT cancels the day }
+If InRTH and Armed and StartCT > 0 and CTt <= StartCT and (High > HiRef or Low < LoRef) then Armed = false;
+
+{ ---- entries: stop orders at both levels ---- }
+If InRTH and Armed and Traded = false and MarketPosition = 0 and CTt >= MaxList(RTHOpenCT, StartCT) and CTt <= LastEntryCT then begin
+    Buy ("ST.L") Qty contracts next bar at HiRef stop;
+    SellShort ("ST.S") Qty contracts next bar at LoRef stop;
+end;
+
+{ ---- target and stop (work intrabar, also on the entry bar) ---- }
+SetStopContract;
+If AvgRng > 0 then begin
+    SetProfitTarget(TargetMult * AvgRng * BigPointValue);
+    SetStopLoss(StopMult * AvgRng * BigPointValue);
+end;
+
+{ ---- flat at the close ---- }
+If MarketPosition <> 0 and CTt >= ExitCT and CTt <= RTHCloseCT then begin
+    Sell ("ST.LX") all contracts next bar at market;
+    BuyToCover ("ST.SX") all contracts next bar at market;
+end;
+
+{ ---- end of RTH: store today's high/low ---- }
+If InRTH and CTt = RTHCloseCT then begin
+    For k = 59 downto 1 begin DH[k] = DH[k - 1]; DL[k] = DL[k - 1]; end;
+    DH[0] = DayH; DL[0] = DayL; nD = nD + 1;
+    InRTH = false; Armed = false;
+end;

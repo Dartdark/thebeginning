@@ -1,0 +1,149 @@
+{
+  "task": "manual_post_budget_6j_mechanics_only",
+  "implementation_revision": "v2_exact_scheduled_open",
+  "input_kind": "invented values and fictional calendar; no empirical financial inputs",
+  "script_sha256": "b710005e5b6d95a90ab865e841604bd3f6753fa91eebd6c2591338dd46262872",
+  "plan_sha256": "b94136b75441bd26cf8d1bd3b8c9a2ee18c881c3f883c3ecfe94ffee7b6e08e3",
+  "checks_passed": 20,
+  "checks": [
+    {
+      "name": "quote_inversion",
+      "pass": true,
+      "detail": "Toy USDJPY rise means USD-per-JPY falls: pre-fix premise SHORT6J."
+    },
+    {
+      "name": "invalid_quote",
+      "pass": true,
+      "detail": "Nonpositive quotes rejected."
+    },
+    {
+      "name": "offsets_and_prehedging",
+      "pass": true,
+      "detail": "Commercial purchases can coexist with zero/opposite residual demand."
+    },
+    {
+      "name": "no_necessary_reversal",
+      "pass": true,
+      "detail": "Invented pressure index 100->110->110 has no reversal; 100->110->100 does."
+    },
+    {
+      "name": "clock_2024-01-08",
+      "pass": true,
+      "detail": {
+        "tokyo": "2024-01-08T09:55:00+09:00",
+        "chicago": "2024-01-07T18:55:00-06:00",
+        "utc": "2024-01-08T00:55:00+00:00"
+      }
+    },
+    {
+      "name": "clock_2024-07-08",
+      "pass": true,
+      "detail": {
+        "tokyo": "2024-07-08T09:55:00+09:00",
+        "chicago": "2024-07-07T19:55:00-05:00",
+        "utc": "2024-07-08T00:55:00+00:00"
+      }
+    },
+    {
+      "name": "clock_2024-03-08",
+      "pass": true,
+      "detail": {
+        "tokyo": "2024-03-08T09:55:00+09:00",
+        "chicago": "2024-03-07T18:55:00-06:00",
+        "utc": "2024-03-08T00:55:00+00:00"
+      }
+    },
+    {
+      "name": "clock_2024-03-11",
+      "pass": true,
+      "detail": {
+        "tokyo": "2024-03-11T09:55:00+09:00",
+        "chicago": "2024-03-10T19:55:00-05:00",
+        "utc": "2024-03-11T00:55:00+00:00"
+      }
+    },
+    {
+      "name": "clock_2024-11-01",
+      "pass": true,
+      "detail": {
+        "tokyo": "2024-11-01T09:55:00+09:00",
+        "chicago": "2024-10-31T19:55:00-05:00",
+        "utc": "2024-11-01T00:55:00+00:00"
+      }
+    },
+    {
+      "name": "clock_2024-11-04",
+      "pass": true,
+      "detail": {
+        "tokyo": "2024-11-04T09:55:00+09:00",
+        "chicago": "2024-11-03T18:55:00-06:00",
+        "utc": "2024-11-04T00:55:00+00:00"
+      }
+    },
+    {
+      "name": "clock_2024-01-01",
+      "pass": true,
+      "detail": {
+        "tokyo": "2024-01-01T09:55:00+09:00",
+        "chicago": "2023-12-31T18:55:00-06:00",
+        "utc": "2024-01-01T00:55:00+00:00"
+      }
+    },
+    {
+      "name": "evening_not_empty_overnight_slot",
+      "pass": true,
+      "detail": "09:55JST is not the 01:00-03:00CT book gap. Actual occupancy unmeasured."
+    },
+    {
+      "name": "fictional_shift_deduplicates",
+      "pass": true,
+      "detail": "Two nominal dates shifted to one synthetic open day are one event, not double size."
+    },
+    {
+      "name": "unknown_calendar_is_unknown",
+      "pass": true,
+      "detail": "Missing calendar does not silently become a weekday-only calendar."
+    },
+    {
+      "name": "invalid_nominal_date",
+      "pass": true,
+      "detail": "No fabricated February30/month-end event."
+    },
+    {
+      "name": "receipt_before_fill",
+      "pass": true,
+      "detail": "09:05:02 receipt cannot obtain the already elapsed09:05:00 open."
+    },
+    {
+      "name": "missing_exact_open",
+      "pass": true,
+      "detail": "Missing next open stays unavailable, no carry-forward/fabricated fill."
+    },
+    {
+      "name": "later_open_not_schedule_repair",
+      "pass": true,
+      "detail": "A supplied09:10 open cannot replace the absent scheduled09:06 open."
+    },
+    {
+      "name": "two_sided_conditional_cost",
+      "pass": true,
+      "detail": "ASSUMED $4RTfee + one adverse tick per fill=$16.50RT; two=$29.00RT."
+    },
+    {
+      "name": "conditional_gross_hurdle",
+      "pass": true,
+      "detail": {
+        "gross_2x_RT_USD": "33.0000000",
+        "approx_toy_spot_pips": "5.9423531718560549977791205317305653038603",
+        "assumptions_only": true,
+        "native_micro_rescaling_authorized": false
+      }
+    }
+  ],
+  "economic_evaluations_added": 0,
+  "gross_screens_added": 0,
+  "hypotheses_added": 0,
+  "strategy_edge_measured": false,
+  "new_market_data_or_native_spec_admitted": false,
+  "verdict": "MECHANICAL_CONSISTENCY_ONLY; NEEDS_DATA_AND_SOURCE_CONFIRMATION"
+}

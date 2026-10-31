@@ -1,0 +1,100 @@
+{
+  "status": "PASS",
+  "fixtures": [
+    {
+      "kind": 0,
+      "slips": 2,
+      "last_worst": -217.25,
+      "net": -217.25
+    },
+    {
+      "kind": "stop",
+      "slips": 2,
+      "last_worst": -407.25,
+      "net": -217.25
+    },
+    {
+      "kind": 1,
+      "slips": 1,
+      "last_worst": -407.25,
+      "net": 187.75
+    },
+    {
+      "kind": "target",
+      "slips": 2,
+      "last_worst": -407.25,
+      "net": 182.75
+    }
+  ],
+  "paired_changes": [
+    {
+      "account": 50,
+      "plan": "+ ST 1 MNQ",
+      "paid1_changed": 6,
+      "paid2_changed": 2,
+      "more_blown": 1,
+      "fewer_blown": 0
+    },
+    {
+      "account": 50,
+      "plan": "EOS -> ST 1",
+      "paid1_changed": 6,
+      "paid2_changed": 1,
+      "more_blown": 0,
+      "fewer_blown": 0
+    },
+    {
+      "account": 50,
+      "plan": "RS longs -> ST 1",
+      "paid1_changed": 7,
+      "paid2_changed": 0,
+      "more_blown": 0,
+      "fewer_blown": 0
+    },
+    {
+      "account": 50,
+      "plan": "VB 2/1 -> 1/1 + ST 1",
+      "paid1_changed": 4,
+      "paid2_changed": 0,
+      "more_blown": 0,
+      "fewer_blown": 0
+    },
+    {
+      "account": 150,
+      "plan": "+ ST 1 MNQ",
+      "paid1_changed": 1,
+      "paid2_changed": 0,
+      "more_blown": 0,
+      "fewer_blown": 0
+    },
+    {
+      "account": 150,
+      "plan": "+ ST 2 MNQ",
+      "paid1_changed": 3,
+      "paid2_changed": 0,
+      "more_blown": 0,
+      "fewer_blown": 0
+    },
+    {
+      "account": 150,
+      "plan": "DT 2 -> DT 1 + ST 1",
+      "paid1_changed": 2,
+      "paid2_changed": 0,
+      "more_blown": 0,
+      "fewer_blown": 0
+    },
+    {
+      "account": 150,
+      "plan": "DT 2 -> ST 2",
+      "paid1_changed": 3,
+      "paid2_changed": 0,
+      "more_blown": 0,
+      "fewer_blown": 0
+    }
+  ],
+  "baseline_and_empty_controls": "Shared verbatim across the two accounting arms",
+  "source_hashes_match": true,
+  "unique_complete_histories": true,
+  "script_sha256": "61457d1621fcc5967c9797b6f2b963bab0e98de23cb347f9e77e3d06b4e04374",
+  "code_change_after_run": "Verification-only command added; worker/prepare/summarize unchanged"
+}

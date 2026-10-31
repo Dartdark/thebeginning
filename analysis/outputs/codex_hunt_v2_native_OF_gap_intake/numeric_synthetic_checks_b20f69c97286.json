@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "real_input_or_CSV_rows_read": false,
+  "temporal_or_return_operations": false,
+  "checks": [
+    "same-key exactOHLC and nativevolume vs OFauxiliarysum",
+    "sameclose/differenthigh retainedperfield",
+    "quarterpointabsdiff and <=1tickdiagnostic",
+    "exactDecimalduplicates collapseonce allrawformats/IDs",
+    "numericformatequivalents collapse; contradictory/invalidduplicates unresolved",
+    "strictfiniteASCII decimal/exponent andwhitespace",
+    "zero/invalid/geometry/tickstates retained",
+    "OFvolumealias distinct fromauxiliarytotal",
+    "quantitynegative/mismatch and allmismatchIDs",
+    "sourceIDambiguityfatal/JSONsafevalues"
+  ],
+  "script_sha256": "b20f69c97286e034332a48de0a67574b1957463634791b508ec9fd3147400964"
+}

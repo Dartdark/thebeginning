@@ -1,0 +1,734 @@
+{
+  "schema_version": 1,
+  "program": "paper-scout-20261029",
+  "status": "ready",
+  "lease": null,
+  "hypotheses_started": 4,
+  "economic_definitions": 10,
+  "max_hypotheses": 10,
+  "max_economic_definitions": 30,
+  "max_new_hypotheses_per_cycle": 1,
+  "max_full_reviews_per_cycle": 3,
+  "max_candidate_variants": 3,
+  "max_total_variants_and_controls": 5,
+  "trials": [
+    {
+      "hypothesis_id": "europe-fix-unconditional-dollar-demand",
+      "run_id": "scout-europe-fix-20261029",
+      "source_id": "ssrn:3521370",
+      "proposal_path": "agents/codex/research/scout/proposals/europe_fix.json",
+      "candidate_variants": 1,
+      "control_variants": 0,
+      "economic_definitions": 1,
+      "definition_ids": [
+        "europe_fix_gross_6e_1"
+      ],
+      "status": "design_reject",
+      "proposal_sha256": "9762a7ebeb2e8fa19ff94469302b12e38d39c6da5da2a0551da32aa4840ae156",
+      "executed_definition_ids": [
+        "europe_fix_gross_6e_1"
+      ],
+      "unused_definition_ids": [],
+      "result_path": "analysis/outputs/codex_scout_europe_fix/result.json",
+      "closed_at": "2026-10-29T22:12:52.597628+00:00"
+    },
+    {
+      "hypothesis_id": "non_FOMC_preannouncement_reopen",
+      "run_id": "scout-pre-nfp-20261029-design",
+      "source_id": "ssrn:3290649",
+      "proposal_path": "agents/codex/research/scout/proposals/pre_nfp_es_20261029.json",
+      "candidate_variants": 1,
+      "control_variants": 2,
+      "economic_definitions": 3,
+      "definition_ids": [
+        "PRE_NFP_ES_REOPEN",
+        "PRE_NFP_ES_CALENDAR_NULL",
+        "PRE_NFP_ES_COST_STRESS"
+      ],
+      "status": "design_reject",
+      "proposal_sha256": "73126cfa86d7529352657551e097ec3eaf5c438515b13d2255e2cb6254254474",
+      "result_path": "agents/codex/results/scout_pre_nfp_20261029.md"
+    },
+    {
+      "hypothesis_id": "treasury_month_end_benchmark_clock_correction",
+      "run_id": "scout-treasury-close-20261029-design",
+      "source_id": "ssrn:3440417",
+      "proposal_path": "agents/codex/research/scout/proposals/treasury_close_20261029.json",
+      "candidate_variants": 1,
+      "control_variants": 2,
+      "economic_definitions": 3,
+      "definition_ids": [
+        "ZN_INDEX_CLOCK_LONG",
+        "ZN_INDEX_CLOCK_CALENDAR_NULL",
+        "ZN_INDEX_CLOCK_COST_STRESS"
+      ],
+      "status": "design_reject",
+      "proposal_sha256": "dc8ebb4ff3ea8a7ca0a7d363de8bd8c027a534c865f485d5c7b629b5da159c0e",
+      "result_path": "agents/codex/results/scout_treasury_close_20261029.md"
+    },
+    {
+      "hypothesis_id": "intermeeting-fomc-cycle-equity-repricing",
+      "run_id": "scout-fomc-cycle-20261030",
+      "source_id": "ssrn:2687614",
+      "proposal_path": "agents/codex/research/scout/proposals/fomc_cycle.json",
+      "candidate_variants": 1,
+      "control_variants": 2,
+      "economic_definitions": 3,
+      "definition_ids": [
+        "FOMC246_ES_RTH",
+        "FOMC246_CALENDAR_NULL",
+        "FOMC246_COST_STRESS"
+      ],
+      "status": "design_reject",
+      "proposal_sha256": "261251e4a67758fa433560294a42562134991ae52b5f466ddcc261eb7d61f5fb",
+      "executed_definition_ids": [
+        "FOMC246_ES_RTH",
+        "FOMC246_CALENDAR_NULL",
+        "FOMC246_COST_STRESS"
+      ],
+      "result_path": "analysis/outputs/codex_scout_fomc_cycle/result.json",
+      "engineering_attempts": 2,
+      "engineering_replay_new_definitions": 0,
+      "closed_at": "2026-10-30T17:41:54.490593+00:00"
+    }
+  ],
+  "seen": [
+    {
+      "ssrn_id": "5207418",
+      "revision": "March2026 SSRN abstract; April2025 HKUST indexed first page/abstract. Version parity not established.",
+      "disposition": "needs_full_text",
+      "record_path": "agents/codex/research/scout/records/5207418.json"
+    },
+    {
+      "ssrn_id": "7330098",
+      "revision": "Public76-page PDF title date2026-08-13; SSRN advertises last revision2026-08-22; byte/version parity not established.",
+      "disposition": "needs_data",
+      "record_path": "agents/codex/research/scout/records/7330098.json"
+    },
+    {
+      "ssrn_id": "7601879",
+      "revision": "SSRN record written2026-10-12; full paper not obtained",
+      "disposition": "needs_full_text",
+      "record_path": "agents/codex/research/scout/records/7601879.json"
+    },
+    {
+      "ssrn_id": "1716841",
+      "revision": "2011-07-15 CFTC-hosted46-page source; parity with other SSRN revisions unknown",
+      "disposition": "dont_test",
+      "record_path": "agents/codex/research/scout/records/1716841.json"
+    },
+    {
+      "ssrn_id": "7425358",
+      "revision": "57-page2026 NCCC conference version linked by author/Illinois; September13 SSRN59-page version not verified",
+      "disposition": "dont_test",
+      "record_path": "agents/codex/research/scout/records/7425358.json"
+    },
+    {
+      "ssrn_id": "2682698",
+      "revision": "Written2016-09-25; SSRN last revised2016-10-06; abstract only",
+      "disposition": "needs_full_text",
+      "record_path": "agents/codex/research/scout/records/2682698.json"
+    },
+    {
+      "ssrn_id": "3357455",
+      "revision": "SOAS July2018 working paper211 full-source review",
+      "disposition": "dont_test",
+      "record_path": "agents/codex/research/scout/records/3357455.json"
+    },
+    {
+      "ssrn_id": "1478195",
+      "revision": "Indexed2009/2010 source; SSRN2693084 duplicate-title version parity unresolved",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/1478195.json"
+    },
+    {
+      "ssrn_id": "5250499",
+      "revision": "SSRN2026-05-12advertised; abstract and secondary code only",
+      "disposition": "needs_full_text",
+      "record_path": "agents/codex/research/scout/records/5250499.json"
+    },
+    {
+      "ssrn_id": "3119537",
+      "revision": "arXiv1802.01921v2;2018-10-05",
+      "disposition": "needs_data",
+      "record_path": "agents/codex/research/scout/records/3119537.json"
+    },
+    {
+      "ssrn_id": "3485840",
+      "revision": "AEA December3 2020,67-pagePDF;2023 published parity not established",
+      "disposition": "needs_data",
+      "record_path": "agents/codex/research/scout/records/3485840.json"
+    },
+    {
+      "ssrn_id": "3732955",
+      "revision": "Current author abstract;older Information Content title is related-version lead",
+      "disposition": "needs_full_text",
+      "record_path": "agents/codex/research/scout/records/3732955.json"
+    },
+    {
+      "ssrn_id": "5136393",
+      "revision": "Indexed public metadata inspected2026-10-29; full text not read",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/5136393.json"
+    },
+    {
+      "ssrn_id": "3822093",
+      "revision": "Indexed public metadata inspected2026-10-29; full text not read",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/3822093.json"
+    },
+    {
+      "ssrn_id": "3164757",
+      "revision": "Indexed public metadata inspected2026-10-29; full text not read",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/3164757.json"
+    },
+    {
+      "ssrn_id": "7257240",
+      "revision": "Indexed public metadata inspected2026-10-29; full text not read",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/7257240.json"
+    },
+    {
+      "ssrn_id": "6750442",
+      "revision": "Indexed public metadata inspected2026-10-29; full text not read",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/6750442.json"
+    },
+    {
+      "ssrn_id": "3521370",
+      "revision": "Published2024online2023-12-18",
+      "disposition": "design_reject",
+      "record_path": "agents/codex/research/scout/records/3521370.json"
+    },
+    {
+      "ssrn_id": "3290649",
+      "revision": "November1 2021primary in-press; complete extracted text",
+      "disposition": "design_reject",
+      "record_path": "agents/codex/research/scout/records/3290649.json"
+    },
+    {
+      "ssrn_id": "3440417",
+      "revision": "November22 2019Wharton41-page primary,plus external2026NYFedclockevidence",
+      "disposition": "design_reject",
+      "record_path": "agents/codex/research/scout/records/3440417.json"
+    },
+    {
+      "ssrn_id": "2687614",
+      "revision": "Working paper2018-02-12",
+      "disposition": "design_reject",
+      "record_path": "agents/codex/research/scout/records/2687614.json"
+    },
+    {
+      "ssrn_id": "5230768",
+      "revision": "Secondary indexed metadata only2026-10-30",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/5230768.json"
+    },
+    {
+      "ssrn_id": "4764451",
+      "revision": "Secondary indexed metadata only2026-10-30",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/4764451.json"
+    },
+    {
+      "ssrn_id": "3760365",
+      "revision": "Secondary indexed metadata only2026-10-30",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/3760365.json"
+    },
+    {
+      "ssrn_id": "2671165",
+      "revision": "Secondary indexed metadata only2026-10-30",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/2671165.json"
+    },
+    {
+      "ssrn_id": "3918896",
+      "revision": "Secondary indexed metadata only2026-10-30",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/3918896.json"
+    },
+    {
+      "ssrn_id": "1786986",
+      "revision": "Secondary indexed metadata only2026-10-30",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/1786986.json"
+    },
+    {
+      "ssrn_id": "3925725",
+      "revision": "Secondary indexed metadata only2026-10-30",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/3925725.json"
+    },
+    {
+      "ssrn_id": "1393995",
+      "revision": "Secondary indexed metadata only2026-10-30",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/1393995.json"
+    },
+    {
+      "ssrn_id": "6380118",
+      "revision": "Secondary indexed metadata only2026-10-30",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/6380118.json"
+    }
+  ],
+  "last_run": {
+    "run_id": "scout-20261030-continuation-triage",
+    "recorded_at": "2026-10-30T17:45:31.786924+00:00",
+    "status": "discovery_checkpoint_no_eligible_new_candidate",
+    "previous_completed_return_batch": "scout-fomc-cycle-20261030",
+    "new_full_reviews": 0,
+    "new_hypotheses": 0,
+    "new_economic_definitions": 0,
+    "metadata_records": [
+      "5230768",
+      "4764451",
+      "3760365",
+      "2671165",
+      "3918896",
+      "1786986",
+      "3925725",
+      "1393995",
+      "6380118"
+    ],
+    "searches": [
+      "site.ssrn.com futures forced flows intraday",
+      "futures scheduled flows intraday academic research transaction costs2025/2026",
+      "GitHub FOMCcycle SSRN",
+      "GitHub futures SSRN rebalancing",
+      "GitHub futures SSRN hedgingpressure",
+      "GitHub Expected Stock Returns and Variance Risk Premia PDF",
+      "GitHub Uncovered Interest Parity in High Frequency",
+      "GitHub futures SSRN intraday2025",
+      "GitHub Hedging Demand and Market Intraday Momentum PDF",
+      "GitHub futures SSRN forcedflows",
+      "GitHub futures SSRN auctions2025",
+      "GitHub futures SSRN month-end2025",
+      "GitHub4764451",
+      "GitHub2607.01550"
+    ],
+    "source_boundary": "Connected general web search/open repeatedly returned empty content with isError=true, including a later fresh-query check; no useful detailed cause. GitHub fallback remained available and was used for discovery/source retrieval, but current additional leads are secondary-only, incompatible or duplicate families.",
+    "access_receipts": [
+      {
+        "url": "https://jbs.cam.ac.uk/wp-content/uploads/2024/11/uncovered-interest-parity-in-high-frequency.pdf",
+        "method": "normal permitted Python urllib network request",
+        "outcome": "Tunnel403; no bypass; no unchanged retry"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/finm-32800/finm-32800.github.io/4339e823a86d6206ca71c8e89bf8ec117576fd0d/_downloads/8a74c5b64a5ff4bcd755107d09f0d3e6/CieslakMorseVissingJorgensen2019FOMCCycle.pdf",
+        "outcome": "200;496036PDFbytes; full-source review and completed trial in preceding batch"
+      }
+    ],
+    "automation": {
+      "id": "6ae3863373308191b6f40c63f610a800",
+      "peek_is_enabled": true,
+      "prompt_contains_persistent_correction": true,
+      "schedule_changed": false,
+      "duplicate_created": false,
+      "next_run_time_from_peek": null,
+      "delivery_claim": "No invisible running or verified future execution claim"
+    },
+    "report_path": "agents/codex/results/scout_persistent_search_20261030.md",
+    "next_work": "Resume exact continuation.json in same existing automation; no pending eligible return work.",
+    "title_only_family_dedup": [
+      "Expected Stock Returns and Variance Risk Premia; SSRN ID not authenticated; no ID assigned"
+    ]
+  },
+  "last_notification_key": "ssrn:5250499:prototype-v1:real-data-blocked",
+  "note": "New paper-discovery program authorized 2026-10-29. Existing repository multiplicity remains in every significance decision. Paused t6 and Hunt v2 are not resumed or reset.",
+  "prior_trial_history": {
+    "path": "TRIALS.csv",
+    "sha256_at_cycle": "c380af0bbaecf5f0b96ac03024a38610f6c089a911c5c310aa9abec8ff12a340",
+    "action": "preserved; no reset or new economic look"
+  },
+  "pending_source_work": [
+    {
+      "ssrn_id": "7601879",
+      "status": "partial_forecast_facts_acquired; needs_full_text_complete_asof_forecast_panel"
+    },
+    {
+      "ssrn_id": "5207418",
+      "status": "calendar_facts_acquired; needs_full_source_universe_and_original_schedule_receipt_evidence"
+    },
+    {
+      "ssrn_id": "7330098",
+      "status": "vendor_intake_prepared; needs_approved_signed_sample_inception_book_and_actual_availability"
+    },
+    {
+      "ssrn_id": "2682698",
+      "status": "needs_full_text; recorded_and_moved_on"
+    },
+    {
+      "ssrn_id": "5250499",
+      "status": "needs_primary_full_text_identified_paired_contract_data_clocks_costs; recorded_and_moved_on"
+    },
+    {
+      "ssrn_id": "3119537",
+      "status": "needs_data; existing real-auction family, source/feature/quote blockers recorded; moved on"
+    },
+    {
+      "ssrn_id": "3485840",
+      "status": "needs_data; existing real-auction family, source/feature/quote blockers recorded; moved on"
+    },
+    {
+      "ssrn_id": "3732955",
+      "status": "needs_full_text; existing real-auction family, source/feature/quote blockers recorded; moved on"
+    }
+  ],
+  "notification_keys": [
+    "ssrn:5207418:revised2026-03-20:needs_full_text:interaction-v1",
+    "ssrn:7601879:written2026-10-12:needs_full_text:clock-gap-v1",
+    "ssrn:7330098:pdf2026-08-13:needs_data:full-source-v1",
+    "ssrn:5207418:public-acquisition20261029-v1:needs_data",
+    "ssrn:7601879:public-acquisition20261029-v1:needs_data",
+    "ssrn:7330098:public-acquisition20261029-v1:needs_data",
+    "ssrn:1716841:2011-07-15:source_reject-v1",
+    "ssrn:7425358:conference2026:execution_reference-v1",
+    "ssrn:5250499:abstract2026-secondarycode:needs_data-v1",
+    "ssrn:3357455:wp2018:source_no_protocol-v1",
+    "scout:closing-auctions:20261029:source-testability-v1",
+    "ssrn:5250499:prototype-v1:real-data-blocked",
+    "ssrn:3521370:published2024:europe-prefix-design-reject-v1"
+  ],
+  "last_notification": {
+    "keys": [
+      "ssrn:3521370:published2024:europe-prefix-design-reject-v1"
+    ],
+    "status": "prepared_for_direct_cycle_request",
+    "at": "2026-10-29T22:12:52.597628+00:00",
+    "reason": "New completed preregistered design rejection with actual execution evidence; no portfolio benefit.",
+    "delivery": "In-app final only; no external message"
+  },
+  "budget_cap_notified": false,
+  "run_history": [
+    {
+      "run_id": "scout-20261029-initial",
+      "started_at": "2026-10-29T17:49:48.201804+00:00",
+      "finished_at": "2026-10-29T18:02:42.098959+00:00",
+      "checked_remote_head": "49b48b8064a57a13fd114ee9d527c69cc7c58f0a",
+      "status": "source_triage_completed",
+      "metadata_leads": 3,
+      "full_source_reviews": 0,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "reservation": null,
+      "lease_action": "No lease claimed: all work was engineering, metadata/source access or no-return input inventory. No dependent return work occurred.",
+      "access_receipt": "agents/codex/research/scout/runs/20261029_initial_access.json",
+      "source_access_reports": [
+        "agents/codex/results/scout_buying_duration_20261029.md",
+        "agents/codex/results/scout_fx_auctions_20261029.md"
+      ],
+      "report_path": "agents/codex/results/scout_cycle_20261029.md",
+      "engineering_receipt": "agents/codex/research/scout/runs/20261029_engineering_checks.json"
+    },
+    {
+      "run_id": "scout-testability-20261029",
+      "recorded_at": "2026-10-29T18:40:16.406270+00:00",
+      "status": "testability_checks_completed_needs_data",
+      "checked_remote_head": "bdad3b4c285572e92ca201557f7093f9ec07a528",
+      "metadata_leads_rechecked": 2,
+      "full_source_reviews": 1,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "reservation": null,
+      "lease_action": "No return work; no lease claimed or reservation required. Prior counters and all trial history retained.",
+      "report_path": "agents/codex/results/scout_testability_20261029.md",
+      "receipts": [
+        "agents/codex/research/scout/runs/7601879_testability_20261029.json",
+        "agents/codex/research/scout/runs/5207418_testability_20261029.json",
+        "agents/codex/research/scout/runs/7330098_testability_20261029.json"
+      ]
+    },
+    {
+      "run_id": "scout-data-acquisition-20261029",
+      "recorded_at": "2026-10-29T20:42:09.824444+00:00",
+      "status": "public_inputs_acquired_partial_needs_data",
+      "checked_remote_head": "1c3aaa51ba7c1663c59570d37220c3a9193374ef",
+      "primary_macro_records": 943,
+      "claims_date_records": 261,
+      "claims_printed_clock_records": 249,
+      "claims_unknown_clock_records": 12,
+      "provider_forecast_rows": 4,
+      "provider_design_months": 3,
+      "design_months": 60,
+      "institutional_reference_rows": 3,
+      "signed_spx_book_rows": 0,
+      "full_source_reviews": 0,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "reservation": null,
+      "lease_action": "No return work or active lease; source/data acquisition only.",
+      "report_path": "agents/codex/results/scout_data_acquisition_20261029.md",
+      "input_bundle": "agents/codex/inputs/scout_acquisition_20261029",
+      "bundle_manifest": "analysis/outputs/codex_scout_acquisition_package_20261029.json"
+    },
+    {
+      "run_id": "scout-underused-20261029",
+      "recorded_at": "2026-10-29T21:40:01Z",
+      "status": "source_reviews_completed_no_eligible_strategy",
+      "checked_remote_head": "926ba72f8e82f8e111a32180dab26167aee732aa",
+      "full_source_reviews": 2,
+      "metadata_only_records": 3,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "reservation": null,
+      "lease_action": "No return work; no lease or reservation claimed. Existing counters/history preserved.",
+      "report_path": "agents/codex/results/scout_underused_futures_cycle_20261029.md",
+      "access_receipt": "agents/codex/research/scout/runs/20261029_underused_access.json",
+      "focus": "Forced flows in underused futures; record missing data and move on."
+    },
+    {
+      "run_id": "scout-spread-strategy-feasibility-20261029",
+      "recorded_at": "2026-10-29T21:48:32.037536+00:00",
+      "status": "concrete_strategy_lead_needs_data",
+      "checked_remote_head": "d256a04e07e51060ee13b03e2cd8806615c53ce1",
+      "full_source_reviews": 1,
+      "metadata_source_and_secondary_code_reviews": 1,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "reservation": null,
+      "lease_action": "Source/schema feasibility only; no lease claimed or economic outcomes computed.",
+      "report_path": "agents/codex/results/scout_spread_strategy_feasibility_20261029.md",
+      "access_receipt": "agents/codex/research/scout/runs/20261029_spread_strategy_access.json"
+    },
+    {
+      "run_id": "scout-closing-auctions-20261029",
+      "recorded_at": "2026-10-29T21:50:33Z",
+      "status": "source_reviews_completed_no_eligible_strategy",
+      "focus": "Closing-auction market hypotheses for evaluation/funded/personal strategy development",
+      "checked_remote_head": "d256a04e07e51060ee13b03e2cd8806615c53ce1",
+      "full_source_reviews": 2,
+      "metadata_only_records": 1,
+      "additional_data_routes_inspected": 7,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "reservation": null,
+      "lease_action": "No return-eligible candidate; no lease or economic reservation claimed.",
+      "report_path": "agents/codex/results/scout_closing_auctions_cycle_20261029.md",
+      "access_receipt": "analysis/outputs/codex_scout_closing_auctions_20261029/acquisition_receipts.json",
+      "publication_merge_parent": "10933c7f6d9f5321e4efc370685c206e4a9dd2df",
+      "user_scope": "Academic hypotheses -> testable evaluation/funded/personal strategies; current and subsequent research cycles authorized without repeated permission prompts, within existing budgets/gates."
+    },
+    {
+      "run_id": "scout-europe-fix-20261029",
+      "finished_at": "2026-10-29T22:12:52.597628+00:00",
+      "checked_start_head": "7c8f3a9bfb55b441a87614769873bbefa756b22c",
+      "preregistration_commit": "ae338c3ef04403e862e173bd31fe7ba2a68decac",
+      "focus": "Owned-data-first academic market hypotheses; forced benchmark demand in underused6E",
+      "metadata_only_papers": [
+        "5136393",
+        "3822093",
+        "3164757",
+        "7257240",
+        "6750442"
+      ],
+      "full_reviews": 1,
+      "new_hypotheses": 1,
+      "economic_definitions": 1,
+      "status": "design_reject",
+      "source_method": "Connected public indexed search/publisher reader. Crossref prior network restriction known; no new API request made.",
+      "search_groups": [
+        "futures settlement price pressure2024-26",
+        "futures overnight reversal gold/treasury",
+        "Informative Price Pressure nextday",
+        "Ready orderflows commodity index",
+        "futures daylight savings and holidays",
+        "currency fix reversal",
+        "gold intraday momentum",
+        "futures margin calls",
+        "Treasury intraday momentum",
+        "Foreign Exchange Fixings author/fulltext/replication",
+        "LSEG14:00benchmark and CME contract specs"
+      ],
+      "access": [
+        {
+          "url": "https://www.bankofcanada.ca/wp-content/uploads/2021/10/swp2021-48.pdf",
+          "method": "configured Python urllib normal managed network",
+          "outcome": "Proxy tunnel403; no bypass"
+        },
+        {
+          "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jofi.13306",
+          "method": "connected publisher reader",
+          "outcome": "All article body/reference/footnote lines104-744 captured; figures are captions, not original pixels"
+        },
+        {
+          "url": "https://www3.nd.edu/~zda/FOMC.pdf",
+          "method": "connected reader",
+          "outcome": "Nonretryable redirected-destination failure"
+        },
+        {
+          "url": "https://ssrn.com/abstract=7257240",
+          "method": "connected reader",
+          "outcome": "403; moved on"
+        },
+        {
+          "url": "https://ssrn.com/abstract=6750442",
+          "method": "connected reader",
+          "outcome": "403; moved on"
+        }
+      ],
+      "admission_attempts": [
+        "Wrong transcribed claim SHA rejected before returns",
+        "Correct fetched claim admitted before returns and rechecked by run process"
+      ],
+      "engineering_checks": [
+        "Clock fixtures winter/summer/both mismatch eras PASS",
+        "Endpoint census before returns1288/1305",
+        "Ledger uniqueness,360minute clocks,design dates,year/gross/cost/net reconciliation PASS"
+      ],
+      "no_2023_plus_or_accounts": true,
+      "execution_reference": "E32",
+      "report_path": "agents/codex/results/scout_3521370_20261029.md",
+      "terminal_visibility": "Committed records after pull/refresh; no live synchronization"
+    },
+    {
+      "run_id": "scout-pre-nfp-20261029-design",
+      "recorded_at": "2026-10-29 22:18:07 UTC",
+      "status": "design_reject_continue_discovery",
+      "checked_remote_head": "a63d7bc11720b99eb67c69c36812a61216361058",
+      "preregistration_commit": "a63d7bc11720b99eb67c69c36812a61216361058",
+      "full_source_reviews": 1,
+      "new_hypotheses": 1,
+      "new_economic_definitions": 3,
+      "return_tests_executed": true,
+      "report_path": "agents/codex/results/scout_pre_nfp_20261029.md",
+      "next_work": "Continue distinct owned-data-compatible families. Check Hartley/Schwarz3440417 multi-day Treasury month-end against prior intraday-only ZN test and2021 index strike-time change before any new return."
+    },
+    {
+      "run_id": "scout-treasury-close-20261029-design",
+      "recorded_at": "2026-10-29 22:28:22 UTC",
+      "status": "design_reject_continue_discovery",
+      "checked_remote_head": "352bbf8d075efca6375f50a5d37b9280198a7500",
+      "preregistration_commit": "352bbf8d075efca6375f50a5d37b9280198a7500",
+      "full_source_reviews": 1,
+      "additional_primary_timing_article": 1,
+      "new_hypotheses": 1,
+      "new_economic_definitions": 3,
+      "return_tests_executed": true,
+      "report_path": "agents/codex/results/scout_treasury_close_20261029.md",
+      "next_work": "Continue SEARCH_PROFILE forced-flow families. Reject pre-NFP and ZN clock definitions permanently; no clock/stop/size rescue. Source/data triage must precede another reservation; no pending eligible candidate is claimed."
+    },
+    {
+      "run_id": "scout-fomc-cycle-20261030",
+      "recorded_at": "2026-10-30T17:41:54.490593+00:00",
+      "status": "design_reject_continue_discovery",
+      "checked_remote_head": "e4ea3211bc06d9295ad54c8185233a8e2eb0bed5",
+      "preregistration_commit": "f0ea358635e6e8b4dd5460671cf9ae4989396503",
+      "full_source_reviews": 1,
+      "new_hypotheses": 1,
+      "new_economic_definitions": 3,
+      "return_tests_executed": true,
+      "report_path": "agents/codex/results/scout_2687614_20261030.md",
+      "next_work": "Continue distinct owned-data-compatible source families. FOMC-cycleRTH nowclosed; no direction/phase/decline-filter rescue. VRP familydedup;5230768sourcegapparked."
+    },
+    {
+      "run_id": "scout-20261030-continuation-triage",
+      "recorded_at": "2026-10-30T17:45:31.786924+00:00",
+      "status": "discovery_checkpoint_no_eligible_new_candidate",
+      "previous_completed_return_batch": "scout-fomc-cycle-20261030",
+      "new_full_reviews": 0,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "metadata_records": [
+        "5230768",
+        "4764451",
+        "3760365",
+        "2671165",
+        "3918896",
+        "1786986",
+        "3925725",
+        "1393995",
+        "6380118"
+      ],
+      "searches": [
+        "site.ssrn.com futures forced flows intraday",
+        "futures scheduled flows intraday academic research transaction costs2025/2026",
+        "GitHub FOMCcycle SSRN",
+        "GitHub futures SSRN rebalancing",
+        "GitHub futures SSRN hedgingpressure",
+        "GitHub Expected Stock Returns and Variance Risk Premia PDF",
+        "GitHub Uncovered Interest Parity in High Frequency",
+        "GitHub futures SSRN intraday2025",
+        "GitHub Hedging Demand and Market Intraday Momentum PDF",
+        "GitHub futures SSRN forcedflows",
+        "GitHub futures SSRN auctions2025",
+        "GitHub futures SSRN month-end2025",
+        "GitHub4764451",
+        "GitHub2607.01550"
+      ],
+      "source_boundary": "Connected general web search/open repeatedly returned empty content with isError=true, including a later fresh-query check; no useful detailed cause. GitHub fallback remained available and was used for discovery/source retrieval, but current additional leads are secondary-only, incompatible or duplicate families.",
+      "access_receipts": [
+        {
+          "url": "https://jbs.cam.ac.uk/wp-content/uploads/2024/11/uncovered-interest-parity-in-high-frequency.pdf",
+          "method": "normal permitted Python urllib network request",
+          "outcome": "Tunnel403; no bypass; no unchanged retry"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/finm-32800/finm-32800.github.io/4339e823a86d6206ca71c8e89bf8ec117576fd0d/_downloads/8a74c5b64a5ff4bcd755107d09f0d3e6/CieslakMorseVissingJorgensen2019FOMCCycle.pdf",
+          "outcome": "200;496036PDFbytes; full-source review and completed trial in preceding batch"
+        }
+      ],
+      "automation": {
+        "id": "6ae3863373308191b6f40c63f610a800",
+        "peek_is_enabled": true,
+        "prompt_contains_persistent_correction": true,
+        "schedule_changed": false,
+        "duplicate_created": false,
+        "next_run_time_from_peek": null,
+        "delivery_claim": "No invisible running or verified future execution claim"
+      },
+      "report_path": "agents/codex/results/scout_persistent_search_20261030.md",
+      "next_work": "Resume exact continuation.json in same existing automation; no pending eligible return work.",
+      "title_only_family_dedup": [
+        "Expected Stock Returns and Variance Risk Premia; SSRN ID not authenticated; no ID assigned"
+      ]
+    }
+  ],
+  "data_access_blockers": {
+    "existing_licensed_access_confirmed": false,
+    "existing_access_question_pending": false,
+    "existing_access_response": {
+      "answer": "Neither",
+      "source": "Direct user reply to the existing Cboe Open-Close / Bloomberg historical index-forecast access question",
+      "recorded_at": "2026-10-29T21:21:17Z",
+      "cboe_open_close": "user_reports_no_existing_access",
+      "bloomberg_historical_index_forecasts": "user_reports_no_existing_access",
+      "vendor_eligibility_verified": false,
+      "scope": "Existing access only; no new account, licence, purchase or external contact authorized. Continue permitted public/owned acquisition."
+    },
+    "spx_sample_activated": false,
+    "new_account_or_purchase_authorized": false,
+    "public_download_capability_request": "agents/codex/inputs/scout_acquisition_20261029/NETWORK_PUBLIC_DOWNLOADS.md",
+    "vendor_intake": "agents/codex/inputs/scout_acquisition_20261029/spx_positions/REQUEST_SPEC.md"
+  },
+  "research_objective": "Academic market hypotheses -> executable strategies -> applicable evaluation/funded/personal account tests. Supporting execution references are not the cycle objective.",
+  "completion_policy": {
+    "updated_at": "2026-10-29T21:53:49.752414+00:00",
+    "worthwhile_lead_action": "continue_development_and_earned_tests_without_asking",
+    "notification_stage": "completed_material_test_portfolio_outcome_or_genuine_user_action_blocker",
+    "verification_handoff": "user_sends_completed_reproducible_package_to_Claude; independent_verification_pending_until_done",
+    "missing_material_data_action": "record_and_move_on_within_limits",
+    "failed_gate_action": "stop_dependent_stages_no_rescue",
+    "receipt": "agents/codex/research/scout/runs/20261029_completion_policy_update.json"
+  },
+  "discovery_policy": {
+    "updated_at": "2026-10-29T22:03:12.631969+00:00",
+    "priority": "owned-data-first",
+    "search_profile": "agents/codex/research/scout/SEARCH_PROFILE.md",
+    "data_blocked_action": "record_and_park_then_move_on",
+    "existing_blocked_leads": "Do not resume merely because source work is pending; require genuinely new matching source/data availability.",
+    "receipt": "agents/codex/research/scout/runs/20261029_data_first_policy.json",
+    "checkpoint_batches": "3 full reviews /1new hypothesis are batch checkpoints. Continue distinct families across batches; preserve10hypotheses/30definitions, nofailed-familyrescue.",
+    "automation_prompt_updated_at": "2026-10-29 22:28:22 UTC",
+    "continuation_receipt": "agents/codex/research/scout/runs/20261029_persistent_search.json"
+  },
+  "continuation_checkpoint": "agents/codex/research/scout/continuation.json"
+}

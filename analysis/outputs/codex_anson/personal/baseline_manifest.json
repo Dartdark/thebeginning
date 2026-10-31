@@ -1,0 +1,86 @@
+{
+  "reference": "e34d71cd3537a9f019d2521e280fc92f3ffdb4c6",
+  "files": {
+    "analysis/personal_portfolio.py": {
+      "sha256": "54c9f4d0aecfb03add0a8f1b7c62597bf82beaadf11061a250281eddaf5655b5",
+      "bytes": 13506,
+      "git_blob": "70a13c204111baa242f926a0c949082aff13220f"
+    },
+    "analysis/montecarlo.py": {
+      "sha256": "751f8f4d1bbf39cead435020b6da1862f407d356dd7f7501727ea4c094961cd4",
+      "bytes": 5031,
+      "git_blob": "dcec81d67d3a57f1143ec18e7ec00de3cfdaa457"
+    },
+    "personal_strategies/PORTFOLIO.md": {
+      "sha256": "5d38f7dd9a8b31d8b4f46fc50b977fe18a92f8f4e0fd318107a3973f0b909dfb",
+      "bytes": 5701,
+      "git_blob": "86472f31e50f194b7bd3e472ebb4840e2563389a"
+    },
+    "agents/tasks/plan_daily_pnl.csv": {
+      "sha256": "631e3c3b558a3279e804c233566371f7e0051e85996bf8ac1c7ee5a9f4db1dfb",
+      "bytes": 127925,
+      "git_blob": "2b70b3d75bf2b648d461afd737c8b80894ed5775"
+    },
+    "checks/candidates/fc_2b/trades.csv": {
+      "sha256": "5e2f46eaf0c4015bdb8bccb2cd6298068f8fb8e1628a08aef2ad02cce1e1eac1",
+      "bytes": 36656,
+      "git_blob": "4ea406914a4547060f557fe8561fa9b2f856a3ae"
+    },
+    "checks/candidates/twin_continuation/trades.csv": {
+      "sha256": "2e0fe7f717a711bd2416ccee377886287da0c6ed5a0dfd5653dcccd1c30c549e",
+      "bytes": 75389,
+      "git_blob": "b9ccbb29c0d3369b93717b8f409e0f7eb206a2d6"
+    },
+    "checks/candidates/overnight_anomaly/trades.csv": {
+      "sha256": "59b9dc8a252a41ea7b4c05db4179e8ae2b5cdd9cc3d810d658bd5243bb3f7c39",
+      "bytes": 59631,
+      "git_blob": "a010b469ec59a7570adcc87e19f981a2c19d5920"
+    },
+    "checks/candidates/dual_thrust/trades.csv": {
+      "sha256": "90142c79a4f90b7588aab15dbe03843870bdee3691bd2fb65b0fb1ae4e8004d1",
+      "bytes": 70483,
+      "git_blob": "8afe762e4fa8508c0a6084f7b7b63e95ba5ac335"
+    },
+    "analysis/outputs/personal_portfolio_output.txt": {
+      "sha256": "798b5674be55aceaa015bb4d80c6bd6273d0899a755d5a6b52fa4cf49ae2d0b9",
+      "bytes": 5381,
+      "git_blob": "6126f17ee2bc5de3eca643d2f917def18dd59058"
+    }
+  },
+  "columns": [
+    "VaultBreak",
+    "OvernightBiasML",
+    "MondayLong",
+    "ExpirationOpenShort",
+    "LateDayFlow",
+    "NFPFade",
+    "BridgeMondayLong",
+    "CLSundayFade_perMCL",
+    "ESMOCFollow_perMES",
+    "RelativeStrength",
+    "FC2B",
+    "TwinContinuation",
+    "OvernightAnomaly",
+    "DualThrust"
+  ],
+  "dates": {
+    "first": "2018-01-02",
+    "last": "2026-10-09",
+    "days": 2262
+  },
+  "trade_counts": {
+    "FC2B": 770,
+    "TwinContinuation": 1074,
+    "OvernightAnomaly": 1002,
+    "DualThrust": 1611
+  },
+  "limitations": [
+    "Published personal fee convention is preserved: +$0.55 per nonzero plan day, not exact trade counts; VB reentries are undercharged.",
+    "Published MOC starts at $0.50/MES rather than $0.725, so its inherited total commission is $1.05 rather than $1.275.",
+    "Twin baseline is the committed v1 checker ledger with published16:00 marks; no exact v2.1 ledger exists.",
+    "Twin published marking skips dates without a15:30..16:00 observation; candidate uses the last available same-date price at/before16:00.",
+    "Candidate observed-bar gaps can reflect closures or feed loss; marks can be stale and no future price fills the gap.",
+    "Daily marked drawdown omits intraday margin/liquidation exposure; personal MC has no Apex trail or payout caps."
+  ],
+  "preregistration": "928c0ea"
+}

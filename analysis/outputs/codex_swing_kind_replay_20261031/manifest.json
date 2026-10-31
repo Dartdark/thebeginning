@@ -1,0 +1,780 @@
+{
+  "commit": "66bf4eee9c61b92783374f08d5357a42f699f14f",
+  "python": "3.12.14",
+  "numpy": "2.5.4",
+  "pandas": "2.2.3",
+  "hashes": {
+    "analysis/outputs/codex_swing_target/CODE_BE_trades.csv": "ae64cf4ca453050281994d7d2e1578c11d010bfadb8b7c3e3f924d3a1ee8e4a2",
+    "analysis/codex_swing_kind_replay.py": "993e41cfc950d2f3439181a2d0d707f10170c18b3c2ca234654a4e4908d8cb4b",
+    "analysis/swing_target_bench.py": "f4956d2be529846da5a5d7f006a32e924bcd693d2694a4459c7ec291a6088b27",
+    "analysis/funded_bootstrap.py": "a6cea07b536cafa7d297f1f22e25e256f9c4cefe53f68f438bb02dd188b0bfe2",
+    "analysis/funded_sim.py": "6ee40aadf1ead47958a4637e63248221b871acd74881738368a401950d84707f",
+    "analysis/funded_sim150.py": "15dbc97f349a0e29ec9cbfb8068f15d5fe50246dc904ea453c7bd891aada0302",
+    "data/6E_1min_2017.csv": "fd26dd73dc77460e166f4bdd1961218fdf7b401a879423f99cdfe8265612d69d",
+    "data/6E_1min_2018.csv": "bf59d9d0a7c81f1292146a5af6739875c196a1217f1a6f010f143830353782d7",
+    "data/6E_1min_2019.csv": "c66d844e14fa0004e1f132062c5e0a447ad6f610385d24b7c5eba7881e6a2e06",
+    "data/6E_1min_2020.csv": "8f8a564229bff845a6cdf2cfa9780304f9d5bcdb96e0db42c32d74b49ea90b91",
+    "data/6E_1min_2021.csv": "063761aee2dcdc1057e542dfca1b9b2e177a03d151ba77d5dd2edd9672201c14",
+    "data/6E_1min_2022.csv": "cfae6c8b4a26cb9cf39ec96a4279fe6b396f53e1cc1b3018ea92a12da9f9ea3f",
+    "data/6E_1min_2023.csv": "c107d0a7343c97723b1438f1807339f1929e29ce46db75ffe94fe2785a90c422",
+    "data/6E_1min_2024.csv": "8d47f2889e949d596fd4e31a948acdd60beedc12360daa109ce8db866a6a6525",
+    "data/6E_1min_2025.csv": "e6db53b72f358382ac5d036233d606be1f2d61c4ee948aa05a9f4e357c65c1aa",
+    "data/6E_1min_2026.csv": "6e0db0ce600e35e200e5aa7e75f58125aaad1fd82c65e83d056aa0c784a7fa34",
+    "data/BTCUSD_spot_1min_2018.csv": "8f5dbbc04081f28ceb242d864948bff100feadf760a1d11e990afdda5ae0e76f",
+    "data/BTCUSD_spot_1min_2019.csv": "e2eeb01e7d12f511cbb1c5b936e86e0ec2f14addd90799fdc585eed569096f59",
+    "data/BTCUSD_spot_1min_2020.csv": "e494a8b1ce71cf06742bf85c519b5c5e45afd246e7ac174c9636f2d96d258915",
+    "data/BTCUSD_spot_1min_2021.csv": "22f29437b6532560636772041c782723f80905911c789e96326ad73637de268b",
+    "data/BTCUSD_spot_1min_2022.csv": "5b59df8fa7ea489c532981b526e706802fad3273f126ce831c0571d3d98db069",
+    "data/BTCUSD_spot_1min_2023.csv": "a1d813025ac7777b040b62a34d7c845d1d86b11fe1f7e1a6a114583a6f8e8ccd",
+    "data/BTCUSD_spot_1min_2024.csv": "ca0dd28cf7753ebae4054c12458b9bbcb13567ace2e25571166ce1cb3eee4c90",
+    "data/BTCUSD_spot_1min_2025.csv": "febff50730ead21ab29cea8e7bf178acd5a0a7261d64147976ba4167998e8426",
+    "data/BTCUSD_spot_1min_2026.csv": "8574c9d378075e2ddc4fa0ae628abe6ce25fdb2ea916eac35e3009bddec060a4",
+    "data/BTC_1min_2018.csv": "0512b621ae746e8114ca48d3745a47d9c37ea6dca0fdcac96af6f73291103dd6",
+    "data/BTC_1min_2019.csv": "67094a19d27a1201e8ed7cd9ac82f49d811d89ccf20820215d695a740ec4d641",
+    "data/BTC_1min_2020.csv": "7c0f3ac59fe6c649f0d9856241e82bda29b33de5f9b413ab24ee0c02d4343934",
+    "data/BTC_1min_2021.csv": "4cf5339a7ecc29a253c9f90f6f1811692d3ace9363f98f3a3308273f173d902a",
+    "data/BTC_1min_2022.csv": "0fc3e1dede36398cfcd6e4f95ad69da2afa2379a2515a70e0ee7d90f50adc005",
+    "data/BTC_1min_2023.csv": "02995367a2ffb6c52bae832570d9c12be7b4d694ea70efc0f4984b1acb756749",
+    "data/BTC_1min_2024.csv": "2ef7fb735fbd74d166c0c29db7ddb2dbc4da7c701023143ce04a00f2b8e076f3",
+    "data/BTC_1min_2025.csv": "a9238823b02d3f100611791bebc6275361b86db15f82de9eda0122aa4b0afc55",
+    "data/BTC_1min_2026.csv": "31de5a767030eff46561a5b4760d57a5e74b33a81fc275ff327ece927ae9c863",
+    "data/CL_1min_2017.csv": "1c92250cd6bb12fd34958af01b5a54871d59f7419cb092524d626be16b0d8f91",
+    "data/CL_1min_2018.csv": "8a932d5cee6e9caa2026436d0d5c86c65b9014e2bdb0dcdcffa2ccb2dc217198",
+    "data/CL_1min_2019.csv": "d6a49a30b4f5a1ac039a7c6db2253dff9dadc2955d2db52548840b5be2f575e3",
+    "data/CL_1min_2020.csv": "966d94e0454e9382adaaad6ff4d2955eebdea6113a8b7b75071afe895978497b",
+    "data/CL_1min_2021.csv": "5f032d4260084867b9ecc027e8e13238e116edbc40b298334b69f457a0e12f3b",
+    "data/CL_1min_2022.csv": "102b1e4d88b8396425f257f79090360817b28324f22340e3f3c603e50a660823",
+    "data/CL_1min_2023.csv": "282c034468bc679bc41b9a0e5840944a0a0f3b3bd4f958ac87b3f1b0da78c296",
+    "data/CL_1min_2024.csv": "a100afbee685ec21133d2444a4890023cc1e21227e0490aded109f14cc8e18ef",
+    "data/CL_1min_2025.csv": "0b7cfee6941c57e2fcea1e915d383ae905dabb989d86ba9cdf30568dbb724797",
+    "data/CL_1min_2026.csv": "845336bd40af8e201203d45d31bf50a3b3909ff27fc16209edda5f48693f78c9",
+    "data/ES_1min_2017.csv": "9ddc201359c70d1adb174141d0614dbf48e08f3324f63b6f91b97350a0aac442",
+    "data/ES_1min_2018.csv": "ad4027b8230de0a91f83d1b6f3b798933f92cedebc39e56fe9223447c4b9d751",
+    "data/ES_1min_2019.csv": "b9c09d6c9a702e560119bd33770cc71e05423fc0a7a227fcc046e73bf22f22c5",
+    "data/ES_1min_2020.csv": "c22514904bd19b8ee9e3611bcd8af4017290730550b4799b9d92da73f8e7d550",
+    "data/ES_1min_2021.csv": "67cd2dee366b86f555d09d45fb4cb9f6163347531b4f3f230f73704a1fff8096",
+    "data/ES_1min_2022.csv": "00db614dd10674f7fe2f14940ae43f523b57ac48db1b0619b0eb084c5f50f601",
+    "data/ES_1min_2023.csv": "100c49f1a6ab1fba6fc9dfc3d9b3cb14dafcd95185aca11d9fee8d79b3835981",
+    "data/ES_1min_2024.csv": "d615176f77e20e7b659509db4dd86cb60a37332dccf7e53dd72a51d4a503275d",
+    "data/ES_1min_2025.csv": "aaf8efa63b24345e334d3e89c072751db80155246dd1d92f53e6089541e0ca52",
+    "data/ES_1min_2026.csv": "c150c935a19dd526231c84c6c2c0342b2e3aeecffe3ba240e6c11aea4670ef16",
+    "data/GC_1min_2017.csv": "2052cdeaa921ebd6450e79ab9be72ffb0436302ce6d890d0f9e6895cdeb55d32",
+    "data/GC_1min_2018.csv": "6ace4f1d2c8772beb6939d8263c22a7c36854315388ccc77d3930a0e22ec39e9",
+    "data/GC_1min_2019.csv": "771a307ae8147901e45f6f838b149910474047e2db9c54d0f67535fdccd26555",
+    "data/GC_1min_2020.csv": "0ca1eeaf8119e261325aaf1fd35f7bfbefea86190ed67ad7f9ced325fc5a226f",
+    "data/GC_1min_2021.csv": "ce1d6f1c85d2b8e2b53ac5ce8b29a3552a1c1f4d6f6a78dac375f35e9f18701a",
+    "data/GC_1min_2022.csv": "7a800cd77ec404766288b77c724c07ec08e81ac515cf63d075386738de3a663f",
+    "data/GC_1min_2023.csv": "eef41b6310435a977aadeae7e14b4d2b69db5300915fe253348affd0d57df368",
+    "data/GC_1min_2024.csv": "54c2c512f1fd69c1e62fdb22881f59926bd6e0bf34d48e14d5f1d045210acfb5",
+    "data/GC_1min_2025.csv": "fb8cb7996d3a0a82f0d464f2e4f1e2bb5c0d96b8663b3dc1370a3f8aee1f1b81",
+    "data/GC_1min_2026.csv": "ecc8e2e1971d12cf616aaa3efe444c7969167b4f59b11b02c8e0e4aacb46533a",
+    "data/GEX_1min_2022.csv": "1f7382346b31f56e9fe3ddeed27e23d68c9a9d78f8a7f48dba3e7219968f7cf6",
+    "data/GEX_1min_2023.csv": "bdcc49b0885cfb7dd17beaccba63b7acff900b91cf0b796b6b48583fcc0abf3f",
+    "data/GEX_1min_2024.csv": "a04f98aaf0ce5e145f4c77805f786834c0fdea1d74cfff1bc0f1284187607928",
+    "data/GEX_1min_2025.csv": "367202584253fba9ec787ed0b15231b8b0fe3bd56e69682cf0f92ea3c71281cb",
+    "data/GEX_1min_2026.csv": "5637bb830a10c4276542e0c885e8a0f1cef40acbcb45e392b2e885386acb6d13",
+    "data/NQ_1min_2017.csv": "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d",
+    "data/NQ_1min_2018.csv": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+    "data/NQ_1min_2019.csv": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+    "data/NQ_1min_2020.csv": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+    "data/NQ_1min_2021.csv": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+    "data/NQ_1min_2022.csv": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+    "data/NQ_1min_2023.csv": "902a88f50c773c4cd7c0499ac43d2cb7b7147da6d760c5d32ece4be2107fc03a",
+    "data/NQ_1min_2024.csv": "87a5db405d5bdc9aa0914018aed046dbdd50332f630700720ae40fa72ddd056a",
+    "data/NQ_1min_2025.csv": "5a454139b43adfe59dabca59a777b8373457dcf024ce806aecb939d3fbd1785f",
+    "data/NQ_1min_2026.csv": "ebeb172aea591b00939909d5041848bd74f19b9f7085d5be38002c33db0beeec",
+    "data/NQ_1min_ON_2017.csv": "34096eaeeefe9b8a7330d9df7d6e0d2cb93ce8dfc2a796bdbb43c6c0ce6b451a",
+    "data/NQ_1min_ON_2018.csv": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2",
+    "data/NQ_1min_ON_2019.csv": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d",
+    "data/NQ_1min_ON_2020.csv": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9",
+    "data/NQ_1min_ON_2021.csv": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e",
+    "data/NQ_1min_ON_2022.csv": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0",
+    "data/NQ_1min_ON_2023.csv": "df8363f41bfd052ac1af29d646b4901bd2b16de3cd71b12812cdda6598cda3f7",
+    "data/NQ_1min_ON_2024.csv": "82e02ddf7e775f01b566f584f4f7245f7c021b6062437b9e2cf14be9e9852607",
+    "data/NQ_1min_ON_2025.csv": "d9401a7321314ff4f8b098950d439687a018c486d8d2d8dcb001da166eb828dd",
+    "data/NQ_1min_ON_2026.csv": "3e45b76f0b25740d8f0b6b2056efcf782f67c165dae045f3e7852a066a5165e9",
+    "data/OF_1min_2018_1.csv": "2bc0e1ad344cc93d8685b6016b255ef1e642f30d6364245f51557e6999eff114",
+    "data/OF_1min_2018_2.csv": "5639a66d95ab2435c0f75896245bc21d20c1685b53c7fd68c89b051d817e9414",
+    "data/OF_1min_2018_3.csv": "7dd6824acaea62821ae9e785d528c9532c3b92dedbd7d8640c20faae473db696",
+    "data/OF_1min_2018_4.csv": "805500d67bd03bbacb9245957b8c9d0e9b33edf3006370779637515767a76ff7",
+    "data/OF_1min_2019_1.csv": "ae84a55a44fe0379a6afbf4ae781b59fd1604bf584d37c97531174df804836fc",
+    "data/OF_1min_2019_2.csv": "15933657a4e742254b5dd3a854dae2ea4eb3dbc42e4efafa62a607eaee6a4845",
+    "data/OF_1min_2019_3.csv": "995f81a181173d2c7879fd108bbf6c47055286eede57d9b2b55c604a6445735a",
+    "data/OF_1min_2019_4.csv": "667ed887abdcd91bb02cb3419b5a49c0ef003d19466c7658f7a78107cbac4b69",
+    "data/OF_1min_2020_1.csv": "67c7fb1166730e4d5eedf871f2a08875e2c71a8889f048bd81282c98ce9ae0f4",
+    "data/OF_1min_2020_2.csv": "be8963123cc649e11298d626f79beb3e31306fa9ccb3f4f247aa7ddccd11d95f",
+    "data/OF_1min_2020_3.csv": "b7501ad273ccd4259f909614ac7be8838588ee62df5f5038086a4cd82e0ec72d",
+    "data/OF_1min_2020_4.csv": "603d3fea3f59b2d97d67f1bb6613b54da3a6a7f548fa071a85d74d41cc376cc6",
+    "data/OF_1min_2021_1.csv": "0a7d801e97cbe38a414ca0207d09de5494eb0671f3b719c2f5e3c2d611251483",
+    "data/OF_1min_2021_2.csv": "0fcd3408675768576890e38f93c52359feffa3fd47e01d6e9ee10d69566b93fe",
+    "data/OF_1min_2021_3.csv": "64efc51c20ba33489377e3e2e620fee4415f565a6c7e434701741a35b7fa7f12",
+    "data/OF_1min_2021_4.csv": "60bf703a22c44cd6c928ff8d475a1199574a061d0fb86b5a37711055ed7837ab",
+    "data/OF_1min_2022_1.csv": "b5ec87cbadb2c62cd502a15b0d6cc595a0c383815a97a62b3687f14e7b1dac45",
+    "data/OF_1min_2022_2.csv": "5938d4a02c8b1bfac001da685758deb77cc679b9704c0303d697f1ae8f721cbe",
+    "data/OF_1min_2022_3.csv": "e935c507d69c4adc899d7e1b3d2488a7b2f6d2fa77df9b0e331828496c120028",
+    "data/OF_1min_2022_4.csv": "59f4b0dc8596ea7772a801b65db33b1ef98cda594932fb6b8d16ffab4d2a4a5b",
+    "data/OF_1min_2023_1.csv": "5a9724eadb70a5be4ad02bcb843aa8fecbfecbd0045bfc9248bf2157cd08695a",
+    "data/OF_1min_2023_2.csv": "2fcce3f14a709f07c0d94509354b796b07f897a6d5d9c805241a47d1a9e33991",
+    "data/OF_1min_2023_3.csv": "8d01e0f2c3c06d821b2930dd9c955c2da926003efaa5375b5060e644a452e2ed",
+    "data/OF_1min_2023_4.csv": "50686dc0dc91251473e86d0a10320e54108b56d4b890f8a423b1574505607f0f",
+    "data/OF_1min_2024_1.csv": "f22ca5fc7366873b3905b2cb53c84b1884ddbf1a5c57e91e9833b4efc266847d",
+    "data/OF_1min_2024_2.csv": "078df2e5af51b4d876811ee164a4fd22ed6103903b584bfaed7f87ab590b8b50",
+    "data/OF_1min_2024_3.csv": "977d7da66b8c7e42f8f178e084d875703ecc9d7e1c7e23f54e70922d54b4dc3e",
+    "data/OF_1min_2024_4.csv": "e67224dd4964974059e77e57eb2014297bc2d36282ddf76a0ab3842db71e0498",
+    "data/OF_1min_2025_1.csv": "273133cc7c6d80d3bd609e48bc1f362d11f68041079188494ae2349ce76588e8",
+    "data/OF_1min_2025_2.csv": "4ed6097883732695917e8619afc37decbe779552eaa914d48d356a92d1cfdd37",
+    "data/OF_1min_2025_3.csv": "09d15eb46092f2875a9e27fa3edbdf39c8e97ef8e2dad551a306743f3ef0b61b",
+    "data/OF_1min_2025_4.csv": "4e2d49497121ee4025f9ef6df7687a325dc13a1c0c18313f342b39328db7c73b",
+    "data/OF_1min_2026_1.csv": "b896e291bbb25980370d577735a6bd39dfaa2d437563d3994ef9e87fce9cd6e4",
+    "data/OF_1min_2026_2.csv": "47800253091c0416860617c43763a2f8783026e5d7ccfc982ea808b115efdfb9",
+    "data/OF_1min_2026_3.csv": "1bdb61d725ceddfa4d81a2cc168fa81ba0be513e952bceaa84c639bfe6b1d123",
+    "data/YM_1min_2017.csv": "174e0f212b6e6d1721e4d78741075025bf6730e751065708de3cdbadd4282abd",
+    "data/YM_1min_2018.csv": "024fbf9eac70551be479ee2ab53c36b5ec99538fc10c9ead5bee3bb6e5279446",
+    "data/YM_1min_2019.csv": "49ac095dfbe9fb53c2e3978ff60ae58c584436d3c378b0e468a47301c407c7b4",
+    "data/YM_1min_2020.csv": "67acac091f531d9d0ba2f332aea266ce0539f7d6d4c9f260eef7936e246a6928",
+    "data/YM_1min_2021.csv": "c65836e2f9e0bac9b8b6d8bfdbd796369a0b3cdc23341722496f5e0071389cdc",
+    "data/YM_1min_2022.csv": "71f4e65a3a11d8a1f4ef94a0de6767c93ee9df6cb6f108537a858545a1d89779",
+    "data/YM_1min_2023.csv": "17f761f43f7a8028f51417523532ff228d33d8248297cec5f9681d21c9099548",
+    "data/YM_1min_2024.csv": "17ca6c6595caa592581b1af9a8cf986f0584d6a57ad1cb541d826b2840afeba1",
+    "data/YM_1min_2025.csv": "0947b116560afbff893625bad346765d090dc35544afbffb10f47feee914f5b9",
+    "data/YM_1min_2026.csv": "f50ecc40b6584e02bb74a011117eff32275ecbfb1eb6f7113949ebcd637d0d71",
+    "data/ZN_1min_2017.csv": "b329fb3860c0c2c389b736f8ece1bf5c5e36872010459a534eb6659e3b2a5332",
+    "data/ZN_1min_2018.csv": "db0571f4b128672e7d53008aeeeeae299587efda52413894a52fcd9f2a7599f6",
+    "data/ZN_1min_2019.csv": "afc50608c0144af4b0fadd198c993551698063aacef14ec61ac030c0731cb824",
+    "data/ZN_1min_2020.csv": "9007d755b51e5f94f18bdc6da0de8e65bdb57e555a3a0682c6d5b0e4ae889ee0",
+    "data/ZN_1min_2021.csv": "aaf5c15358ae221e58b9c022bab4cec537bf9eb4fbdae06521b6aec255de7f2d",
+    "data/ZN_1min_2022.csv": "fdad701e25ced9b99919fbeab2fe4b3122cd75227448f51731caaa87da3f3c71",
+    "data/ZN_1min_2023.csv": "b065114cb8e2f3b79354d0efb0eeb306c039124487c67e9b8e108c893deab6de",
+    "data/ZN_1min_2024.csv": "5b7b5476cf1c46e5c5fc2c22feef802ef28bf1d0959c398f2e0674770c161403",
+    "data/ZN_1min_2025.csv": "9e9df0d00094ea9bd5e43ff50e86671044ba2dc82aec812b155dfd0d2a9669ce",
+    "data/ZN_1min_2026.csv": "47da17bffde296c3cc368af1d45e67a44814a011ba29b9e73cdf78852d3e51c5",
+    "mc_reports/BSPReport _ @NQ - 5 Minutes NQ VWAP Fuck Em v2longs only.xlsx": "ee44893735d4c249419745ac11dfdeea32ab56f43c4fcdba47e00a8b0cdf534b",
+    "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx": "2a1c7dd88a261ad0b0df67f310e3c0c33b17d3faf85f7a94c53e9d910f63bc8f",
+    "mc_reports/Backtesting Strategy Performance Report OD v1.xlsx": "7e3e6e40eb447c65ffde4a625501ce5fb8ed431410fd90ec387bf3664268e748",
+    "mc_reports/Backtesting Strategy Performance Report ONB v2.xlsx": "bceebb5e7162d888e1581ee18057f1ab20f24efbf0b0a0be74fbc2ae08e32336",
+    "mc_reports/Backtesting Strategy Performance Report ONB.xlsx": "b70305443820b5d0722050a137c56ac271ea7a599eb7e8a6411496de8993c954",
+    "mc_reports/Backtesting Strategy Performance Report OND v1.xlsx": "b52ae7ca46ebdf33fb48c1a69e4d0db5593de268989ea5756f3eba57b7ab3e85",
+    "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx": "7169ba79c9f23cb55a8f8324b950c6e956aefdd130ca581fd52d9fdd203f3ccf",
+    "mc_reports/Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx": "57d7f12cb2da4871407c84584cc08587aeb6151bd7c48bb4cefe5d20608b79fb",
+    "mc_reports/Backtesting Strategy Performance Report _ @GC - 1 Minute GC COMBO v2.xlsx": "b40ae688ca70fa8bb2882001ac99f149611d32551276abe372f864f6e32f1b91",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Aligned Weakness Short.xlsx": "b07accbcae1418b8dcfe1aa632c994acc14a43b7729b72bc91bf43c93d3902ad",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute BB_MRM.xlsx": "a8cc8b0c654f1189d3696c51589ddc9d481e54bcb9ec2ab950a60f8b001b28d9",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute C03.xlsx": "8ebcb98017714dc9be71229c7eba08097b5cabd4696e8b087175cf62bcbb39b8",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Dual Thrust v4.xlsx": "f4de61df9522a6429e1b410675fe506bef35a7d95575a6702bc30279df829740",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute FC 2B v2.xlsx": "1c0048fa1f08bfbbdbc7392876cb2a08f6877536c2d2aaa100b57e3e786ab388",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute FC 2B.xlsx": "927537a754f4bbed22aff399c49bbc3c1b09d9e9e8e9f4c764d68b4333799094",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute NQ Overnight Bias.xlsx": "e2c922623b89b81a262e6eca31c58d93014c333817f46cbef9ab9d56a44ea025",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Relative Strength.xlsx": "6cc3bedab9b44a0598339c177eaa2933bf0c0e01de29af1fe3a6b4f1ade69977",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute S47 v2.xlsx": "7336a1826c83c5088b682d7f1a4e5b375d5212b457e1577117a50ec9fc0b65f7",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Swing Target v3.xlsx": "78b00bb70d45eabf95c7ad98574c8af67ae38d698bc401f59fc055cc6192e4bf",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute T_ONESIDE v2.xlsx": "400948d9ce7c5c0de2fba144f616fe6cc5776946fcababbff496c865a90df5d3",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 1 Minute Twin Continuation v2.xlsx": "555d636b0a2396983ed861db5296d8a4073868666919d71a796e236a975eedd7",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Kusho v9.xlsx": "af57de9e69274ef813cf155e57c3eb37609ce083d9d0ab9d91a48f6e31c6ef69",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias bs.xlsx": "c08aef685a51d3cf9795fa8052426f0b8d3842980a85e77ab307eb61d1a0815f",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias v2.xlsx": "3c4314968c82a6ddb9799fdcc9fdc186433bca1bbff5accfaafed798d4d8b94f",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx": "c01e8985f6327884528d9bdb78e93bc3fc6cd0bb28acab7c80c0af81fc46fdfe",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx": "f5d9beee8f4e0a2a94870e6101526a7ee79c1874bdbe96145de3aa73d03b00fc",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 30 Minutes NQ Vault Break SP flagged0.xlsx": "3ca910f446a1a5ed439f909f0090a69094472a65a062dd0f3d04c070c15e4f00",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 30 Minutes NQ Vault Break SP.xlsx": "1ce183ed0e62592eb62329071cb75db4f36620f9e3a93d46877c57497230062d",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 30 Minutes NQ Vault Break v2 (with vwap exits) use target false.xlsx": "da803ba674396667cc81fced3fb41e651f1270915d1c644f224a95cba617bf19",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 30 Minutes NQ Vault Break v2 (with vwap exits) use target true.xlsx": "dbc671132c5e357b6f9a18e37a8afadf667fec103ef90192bccaaa38eb5d6925",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 30 Minutes VB NR7.xlsx": "4aead3a3ae317a65d81b8c604bfebbb680be3093d35bd5043c34649495903dfa",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx": "1c5bd433c0af727659262bcf3f65c61e87b2f53bf542572332ff8e5225b5f436",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes IFT NQ5 BarMag.xlsx": "d215ae16db350552fa5cdc87a68e1302a381867e8d4143242f7d4f25a9728937",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes IFT NQ5.xlsx": "333d0c0e9f1b79363811542a09a61676907634f7dbd1461569108c83f459b526",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx": "d67673c0485d2c780b1f2d810d2929aac5360e4409cf767ef772ca980fff4085",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx": "7ed08ee978faa0bc4364d38b4863c11cf1d285610501a2dcf24cc19532fb2fe8",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx": "cf1bc66f4cf459a2d1adc94e434be3176937ddd147d0906c6c91e037f12f5814",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ VWAP Fuck Em v2.1.xlsx": "5edb48190d1de510b7d0b8438262fbf56de30e36285f5f11561df4e025b0e57b",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ VWAP Fuck Em.xlsx": "c083bd7c309cb11beb9b7bcd97f3cb86548f6331ece924f87fd48b1134b0e58e",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Overnight Tick VIX.xlsx": "5f547ad14fe4a98dcd5e4f1ef769e0e6c06d4bc8575a498529bd2bc4bc66b308",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes PAPERTREND v2 claude.xlsx": "74ba93f19d1ff30bed2b7d40bb48e7f08b6bfa596cf9548a1f6866628fc79d55",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx": "c6147c1d54df1bf6c43296fc1ff3493c1fe12bc7dda641cb1288d6517ace45c2",
+    "mc_reports/Backtesting Strategy Performance Report _ CL - 5 Minutes CL Sunday Gap.xlsx": "1353b4b9e0f2d4c7955fcb9dfd47e953acb91df49a9c279e23e657bbfa1d395b",
+    "mc_reports/Backtesting Strategy Performance Report v2 filtered up test.xlsx": "c3057593614c9a4743a0566d1ea822f4b099d165b7169cd0ebc14a62c457d5c1",
+    "mc_reports/Backtesting Strategy Performance Report v2 filtered.xlsx": "f9cd17262f2ca29a08615437389781a0adac68b6a7353322e63a21142941f65e",
+    "mc_reports/Backtesting Strategy Performance Report v2 run 1.xlsx": "0fca12f016dadbd3a79b590df26cd2044d6684407e1ed3af0a4ab75a504f249d",
+    "mc_reports/Backtesting Strategy Performance Report v2 run 2.xlsx": "5d714ec533db85e4c34ae42f80d4fff92b2943691d5413b52cfb2cb10d083ae4",
+    "mc_reports/Backtesting Strategy Performance Report v2 run 3.xlsx": "2c2a213a5b30c4e094fdabb749986b906a96098d5f5e265992bb13b15e2af0cc",
+    "mc_reports/Backtesting Strategy Performance Report v2 run 4.xlsx": "4a9a2d9c832a7e9a2fd5e6c0f4cde5f50b2ad2ce654353095ba92a4c0b485e79",
+    "mc_reports/MNQ_Portfolio_SharedCap_v2.xlsx": "6f2f18c315e8af8a1999aee3d9ac7c83e9d26581c308995fad90fa04dd0d104c",
+    "mc_reports/ORB_Volatility_Filtered_ES_gross.xlsx": "00058d6c058c1c543317b74db910923b43651e1e3a0aa14665ac3963756d13b9",
+    "mc_reports/ORB_Volatility_Filtered_GC_gross.xlsx": "5f5fb3e9c78e6942992b01a15c7dd970247b512813787d52e67e620e82cabf66"
+  },
+  "audits": {
+    "50": {
+      "days": 2262,
+      "first": "2018-01-02 00:00:00",
+      "last": "2026-10-09 00:00:00",
+      "trades": 602,
+      "kinds": {
+        "1": 264,
+        "2": 256,
+        "0": 82
+      },
+      "corrected_net_per_NQ": 198478.35000000003,
+      "corrected_minus_legacy_net_per_MNQ": 132.0,
+      "holiday_repairs": [
+        "2018-05-28",
+        "2022-06-20",
+        "2023-07-03"
+      ],
+      "plans": {
+        "50K plan": {
+          "VB_N": 2,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "EOS": [
+            "risk",
+            700
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "RS_L": 1,
+          "OT": 1
+        },
+        "+ ST 1 MNQ": {
+          "VB_N": 2,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "EOS": [
+            "risk",
+            700
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "RS_L": 1,
+          "OT": 1,
+          "ST": 1
+        },
+        "RS longs -> ST 1": {
+          "VB_N": 2,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "EOS": [
+            "risk",
+            700
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "OT": 1,
+          "ST": 1
+        },
+        "EOS -> ST 1": {
+          "VB_N": 2,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "RS_L": 1,
+          "OT": 1,
+          "ST": 1
+        },
+        "VB 2/1 -> 1/1 + ST 1": {
+          "VB_N": 1,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "EOS": [
+            "risk",
+            700
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "RS_L": 1,
+          "OT": 1,
+          "ST": 1
+        },
+        "EMPTY RS longs": {
+          "VB_N": 2,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "EOS": [
+            "risk",
+            700
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "OT": 1
+        },
+        "EMPTY EOS": {
+          "VB_N": 2,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "RS_L": 1,
+          "OT": 1
+        },
+        "EMPTY VB normal 1": {
+          "VB_N": 1,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "EOS": [
+            "risk",
+            700
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "RS_L": 1,
+          "OT": 1
+        },
+        "legacy: + ST 1 MNQ": {
+          "VB_N": 2,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "EOS": [
+            "risk",
+            700
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "RS_L": 1,
+          "OT": 1,
+          "ST_OLD": 1
+        },
+        "legacy: RS longs -> ST 1": {
+          "VB_N": 2,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "EOS": [
+            "risk",
+            700
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "OT": 1,
+          "ST_OLD": 1
+        },
+        "legacy: EOS -> ST 1": {
+          "VB_N": 2,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "RS_L": 1,
+          "OT": 1,
+          "ST_OLD": 1
+        },
+        "legacy: VB 2/1 -> 1/1 + ST 1": {
+          "VB_N": 1,
+          "VB_F": 1,
+          "ONB_ML2_MC": [
+            "risk",
+            400
+          ],
+          "EOS": [
+            "risk",
+            700
+          ],
+          "LDF_MC": 2,
+          "NFP_MC": [
+            "risk",
+            500
+          ],
+          "MON_BR_MC": 1,
+          "CLS": 2,
+          "MOC_MES": 2,
+          "RS_L": 1,
+          "OT": 1,
+          "ST_OLD": 1
+        }
+      }
+    },
+    "150": {
+      "days": 2262,
+      "first": "2018-01-02 00:00:00",
+      "last": "2026-10-09 00:00:00",
+      "trades": 602,
+      "kinds": {
+        "1": 264,
+        "2": 256,
+        "0": 82
+      },
+      "corrected_net_per_NQ": 198478.35000000003,
+      "corrected_minus_legacy_net_per_MNQ": 132.0,
+      "holiday_repairs": [
+        "2018-05-28",
+        "2022-06-20",
+        "2023-07-03"
+      ],
+      "plans": {
+        "150K plan": {
+          "VB_N": 3.0,
+          "VB_F": 1.5,
+          "ONB_ML2_MC": [
+            "risk",
+            600.0
+          ],
+          "MON_MC": 1.5,
+          "EOS": [
+            "risk",
+            1050.0
+          ],
+          "LDF_MC": 3.0,
+          "NFP_MC": [
+            "risk",
+            750.0
+          ],
+          "MON_BR_MC": 1.5,
+          "CLS": 3.0,
+          "MOC_MES": 3.0,
+          "RS": 1,
+          "DT": 2,
+          "OT": 2
+        },
+        "+ ST 1 MNQ": {
+          "VB_N": 3.0,
+          "VB_F": 1.5,
+          "ONB_ML2_MC": [
+            "risk",
+            600.0
+          ],
+          "MON_MC": 1.5,
+          "EOS": [
+            "risk",
+            1050.0
+          ],
+          "LDF_MC": 3.0,
+          "NFP_MC": [
+            "risk",
+            750.0
+          ],
+          "MON_BR_MC": 1.5,
+          "CLS": 3.0,
+          "MOC_MES": 3.0,
+          "RS": 1,
+          "DT": 2,
+          "OT": 2,
+          "ST": 1
+        },
+        "+ ST 2 MNQ": {
+          "VB_N": 3.0,
+          "VB_F": 1.5,
+          "ONB_ML2_MC": [
+            "risk",
+            600.0
+          ],
+          "MON_MC": 1.5,
+          "EOS": [
+            "risk",
+            1050.0
+          ],
+          "LDF_MC": 3.0,
+          "NFP_MC": [
+            "risk",
+            750.0
+          ],
+          "MON_BR_MC": 1.5,
+          "CLS": 3.0,
+          "MOC_MES": 3.0,
+          "RS": 1,
+          "DT": 2,
+          "OT": 2,
+          "ST": 2
+        },
+        "DT 2 -> ST 2": {
+          "VB_N": 3.0,
+          "VB_F": 1.5,
+          "ONB_ML2_MC": [
+            "risk",
+            600.0
+          ],
+          "MON_MC": 1.5,
+          "EOS": [
+            "risk",
+            1050.0
+          ],
+          "LDF_MC": 3.0,
+          "NFP_MC": [
+            "risk",
+            750.0
+          ],
+          "MON_BR_MC": 1.5,
+          "CLS": 3.0,
+          "MOC_MES": 3.0,
+          "RS": 1,
+          "OT": 2,
+          "ST": 2
+        },
+        "DT 2 -> DT 1 + ST 1": {
+          "VB_N": 3.0,
+          "VB_F": 1.5,
+          "ONB_ML2_MC": [
+            "risk",
+            600.0
+          ],
+          "MON_MC": 1.5,
+          "EOS": [
+            "risk",
+            1050.0
+          ],
+          "LDF_MC": 3.0,
+          "NFP_MC": [
+            "risk",
+            750.0
+          ],
+          "MON_BR_MC": 1.5,
+          "CLS": 3.0,
+          "MOC_MES": 3.0,
+          "RS": 1,
+          "DT": 1,
+          "OT": 2,
+          "ST": 1
+        },
+        "EMPTY DT": {
+          "VB_N": 3.0,
+          "VB_F": 1.5,
+          "ONB_ML2_MC": [
+            "risk",
+            600.0
+          ],
+          "MON_MC": 1.5,
+          "EOS": [
+            "risk",
+            1050.0
+          ],
+          "LDF_MC": 3.0,
+          "NFP_MC": [
+            "risk",
+            750.0
+          ],
+          "MON_BR_MC": 1.5,
+          "CLS": 3.0,
+          "MOC_MES": 3.0,
+          "RS": 1,
+          "OT": 2
+        },
+        "EMPTY DT 1": {
+          "VB_N": 3.0,
+          "VB_F": 1.5,
+          "ONB_ML2_MC": [
+            "risk",
+            600.0
+          ],
+          "MON_MC": 1.5,
+          "EOS": [
+            "risk",
+            1050.0
+          ],
+          "LDF_MC": 3.0,
+          "NFP_MC": [
+            "risk",
+            750.0
+          ],
+          "MON_BR_MC": 1.5,
+          "CLS": 3.0,
+          "MOC_MES": 3.0,
+          "RS": 1,
+          "DT": 1,
+          "OT": 2
+        },
+        "legacy: + ST 1 MNQ": {
+          "VB_N": 3.0,
+          "VB_F": 1.5,
+          "ONB_ML2_MC": [
+            "risk",
+            600.0
+          ],
+          "MON_MC": 1.5,
+          "EOS": [
+            "risk",
+            1050.0
+          ],
+          "LDF_MC": 3.0,
+          "NFP_MC": [
+            "risk",
+            750.0
+          ],
+          "MON_BR_MC": 1.5,
+          "CLS": 3.0,
+          "MOC_MES": 3.0,
+          "RS": 1,
+          "DT": 2,
+          "OT": 2,
+          "ST_OLD": 1
+        },
+        "legacy: + ST 2 MNQ": {
+          "VB_N": 3.0,
+          "VB_F": 1.5,
+          "ONB_ML2_MC": [
+            "risk",
+            600.0
+          ],
+          "MON_MC": 1.5,
+          "EOS": [
+            "risk",
+            1050.0
+          ],
+          "LDF_MC": 3.0,
+          "NFP_MC": [
+            "risk",
+            750.0
+          ],
+          "MON_BR_MC": 1.5,
+          "CLS": 3.0,
+          "MOC_MES": 3.0,
+          "RS": 1,
+          "DT": 2,
+          "OT": 2,
+          "ST_OLD": 2
+        },
+        "legacy: DT 2 -> ST 2": {
+          "VB_N": 3.0,
+          "VB_F": 1.5,
+          "ONB_ML2_MC": [
+            "risk",
+            600.0
+          ],
+          "MON_MC": 1.5,
+          "EOS": [
+            "risk",
+            1050.0
+          ],
+          "LDF_MC": 3.0,
+          "NFP_MC": [
+            "risk",
+            750.0
+          ],
+          "MON_BR_MC": 1.5,
+          "CLS": 3.0,
+          "MOC_MES": 3.0,
+          "RS": 1,
+          "OT": 2,
+          "ST_OLD": 2
+        },
+        "legacy: DT 2 -> DT 1 + ST 1": {
+          "VB_N": 3.0,
+          "VB_F": 1.5,
+          "ONB_ML2_MC": [
+            "risk",
+            600.0
+          ],
+          "MON_MC": 1.5,
+          "EOS": [
+            "risk",
+            1050.0
+          ],
+          "LDF_MC": 3.0,
+          "NFP_MC": [
+            "risk",
+            750.0
+          ],
+          "MON_BR_MC": 1.5,
+          "CLS": 3.0,
+          "MOC_MES": 3.0,
+          "RS": 1,
+          "DT": 1,
+          "OT": 2,
+          "ST_OLD": 1
+        }
+      }
+    }
+  },
+  "seeds": [
+    1,
+    2
+  ],
+  "histories_per_seed": 250,
+  "block": 20,
+  "horizon": 500,
+  "fees": "Inherited $7.25/NQ divided by 10; $.50/MNQ per non-limit fill; not native micro fees"
+}

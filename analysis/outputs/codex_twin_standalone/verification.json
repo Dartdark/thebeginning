@@ -1,0 +1,67 @@
+{
+  "checks": [
+    {
+      "variant": "combined",
+      "trade_count_matches": true,
+      "daily_sum_matches": true,
+      "costs_match": true,
+      "unique_entry_keys": true,
+      "conditional_same_side_matches": true
+    },
+    {
+      "variant": "breakout_alone",
+      "trade_count_matches": true,
+      "daily_sum_matches": true,
+      "costs_match": true,
+      "unique_entry_keys": true,
+      "conditional_same_side_matches": true
+    },
+    {
+      "variant": "momentum_alone",
+      "trade_count_matches": true,
+      "daily_sum_matches": true,
+      "costs_match": true,
+      "unique_entry_keys": true,
+      "conditional_same_side_matches": true
+    }
+  ],
+  "prior_replica_all_entries_match": true,
+  "all_2018_sensitivity": [
+    {
+      "variant": "combined",
+      "all_2018_rows": 1075,
+      "all_2018_total": 334963.2264902637,
+      "primary_rows": 1030,
+      "excluded_early_rows": 45
+    },
+    {
+      "variant": "breakout_alone",
+      "all_2018_rows": 800,
+      "all_2018_total": 195867.9117091479,
+      "primary_rows": 765,
+      "excluded_early_rows": 35
+    },
+    {
+      "variant": "momentum_alone",
+      "all_2018_rows": 378,
+      "all_2018_total": 196404.5,
+      "primary_rows": 365,
+      "excluded_early_rows": 13
+    }
+  ],
+  "primary_combined_attribution": [
+    {
+      "setup": "BO",
+      "trades": 692,
+      "mean": 222.16095380337399,
+      "total": 153735.3800319348
+    },
+    {
+      "setup": "MO",
+      "trades": 338,
+      "mean": 549.8210059171597,
+      "total": 185839.5
+    }
+  ],
+  "performance_optimization": false
+}

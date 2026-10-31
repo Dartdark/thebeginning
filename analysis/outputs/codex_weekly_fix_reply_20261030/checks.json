@@ -1,0 +1,105 @@
+{
+  "claude_response_commit": "724d1bb128c47a465d35a3f4467d0f7057a376b0",
+  "scope": "post-read source/fake-log acceptance; no new strategy or account returns",
+  "premarket_cases": [
+    {
+      "case": "fresh",
+      "alerts": [],
+      "all_green": true
+    },
+    {
+      "case": "midnight",
+      "alerts": [
+        "VB-2: last ACCT line 0005 CT is 497 min old: chart frozen or closed? Check it.",
+        "VB-2: last POS line 0005 CT is 497 min old: chart frozen or closed? Check it.",
+        "VB-2: last SIG line 0005 CT is 497 min old: chart frozen or closed? Check it.",
+        "VB-2: chart's last bar is 497 min old at check time (feed?)."
+      ],
+      "all_green": false
+    },
+    {
+      "case": "effective_feed21min",
+      "alerts": [],
+      "all_green": true
+    },
+    {
+      "case": "stale_POS_SIG",
+      "alerts": [
+        "VB-2: last POS line 0005 CT is 497 min old: chart frozen or closed? Check it.",
+        "VB-2: last SIG line 0005 CT is 497 min old: chart frozen or closed? Check it."
+      ],
+      "all_green": false
+    },
+    {
+      "case": "effective_feed50min",
+      "alerts": [
+        "VB-2: chart's last bar is 50 min old at check time (feed?)."
+      ],
+      "all_green": false
+    }
+  ],
+  "Chicago_post_DST": "2026-11-02T08:22:00-06:00",
+  "all_same_bar_delay_status": "UNAVAILABLE; L1 failure retained; no crash",
+  "limits": {
+    "ACCT_capture_minutes": 45,
+    "POS_capture_minutes": 45,
+    "SIG_capture_minutes": 15,
+    "effective_feed_minutes": 45
+  },
+  "prior_effective_feed_minutes": 15,
+  "threshold_change": "21minute case now passes by changed45minute policy, not under former15minute policy",
+  "archived_RTH_log_cadence": {
+    "ACCT": {
+      "unique_tag_records": 428,
+      "consecutive_gap_minutes": {
+        "5": 336,
+        "15": 56,
+        "30": 28
+      }
+    },
+    "POS": {
+      "unique_tag_records": 487,
+      "consecutive_gap_minutes": {
+        "5": 2,
+        "10": 4,
+        "15": 3,
+        "20": 3,
+        "25": 1,
+        "30": 442
+      }
+    },
+    "SIG": {
+      "unique_tag_records": 3368,
+      "consecutive_gap_minutes": {
+        "1": 3360
+      }
+    }
+  },
+  "log_sources": [
+    {
+      "path": "live/trades/20261027.csv",
+      "sha256": "929d0ad3ac078fbee1fb5bd40118f9f706163d3cf71c2a270f3009721acf0ccf"
+    },
+    {
+      "path": "live/trades/20261028.csv",
+      "sha256": "a99805fbd1c0cbbd304ce36eae64d017f8afbde265a31373a61764c9941a1bef"
+    },
+    {
+      "path": "live/trades/20261029.csv",
+      "sha256": "941fc16daee72104f840d574334a4358a5683f5803a14df476e8c8884990b016"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "agents/codex/inputs/weekly_cross_review_20261030/fix_reply_724d1bb/analysis/premarket_check.py",
+      "sha256": "e354334a281ad1e51e3d232677b0bab0af1156e29d769777e1330c3be39c4c2a"
+    },
+    {
+      "path": "agents/codex/inputs/weekly_cross_review_20261030/fix_reply_724d1bb/analysis/leak_checks.py",
+      "sha256": "213c05bc1bdb9a7c7d997f1fb72ff607a863ba91e72f3875a000e1d8f9bf5e5c"
+    }
+  ],
+  "installed_system_accessed": false,
+  "account_replay_run": false,
+  "new_economic_trials": 0
+}

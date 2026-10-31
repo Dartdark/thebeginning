@@ -1,0 +1,45 @@
+{
+  "manifest": {
+    "files": {
+      "data/GC_1min_2018.csv": "6ace4f1d2c8772beb6939d8263c22a7c36854315388ccc77d3930a0e22ec39e9",
+      "data/GC_1min_2019.csv": "771a307ae8147901e45f6f838b149910474047e2db9c54d0f67535fdccd26555",
+      "data/GC_1min_2020.csv": "0ca1eeaf8119e261325aaf1fd35f7bfbefea86190ed67ad7f9ced325fc5a226f",
+      "data/GC_1min_2021.csv": "ce1d6f1c85d2b8e2b53ac5ce8b29a3552a1c1f4d6f6a78dac375f35e9f18701a",
+      "data/GC_1min_2022.csv": "7a800cd77ec404766288b77c724c07ec08e81ac515cf63d075386738de3a663f"
+    },
+    "observed_minutes": 1765438,
+    "invalid_removed": 0,
+    "duplicate_utc_removed": 0,
+    "first_warm_decision_utc": "2018-02-23 13:00:00+00:00",
+    "source_sha": "69e9775af161aee09679e9f8a98feff8a53c6789d593b4f147c8aa6a097ea3e1"
+  },
+  "eligibility": [
+    {
+      "signal_hours": 1203,
+      "missing_activation": 107,
+      "unfilled": 1078,
+      "invalid_bracket": 0,
+      "market": "GC",
+      "variant": "primary"
+    },
+    {
+      "signal_hours": 1203,
+      "missing_activation": 56,
+      "unfilled": 1130,
+      "invalid_bracket": 0,
+      "market": "GC",
+      "variant": "stress"
+    }
+  ],
+  "checks": {
+    "source_signals": true,
+    "source_fill_brackets": true,
+    "strict_limit": true,
+    "pre_entry_target_excluded": true,
+    "entry_stop_active": true,
+    "gap_stop_at_open": true,
+    "gap_target_precedes_later_extreme": true,
+    "expiry": true,
+    "GC_future_prefix": true
+  }
+}

@@ -108,12 +108,65 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 
 ### E09 — Native micro costs, turnover and roll reconciliation
 
+- Replay readiness 2026-10-31 ([report](results/swing_replay_readiness_20261031.md)):
+  a MultiCharts exit row labeled `open` is a valuation mark, not a closed fill.
+  ONB ML's final export mark maps to an exit before entry and crashes a clean
+  funded-cache rebuild. Explicitly excluding this sentinel permits the 343 closed
+  ONB paths to build; other cross-date closed trades remain errors needing their
+  own handling. Never use a generic reversed-time filter that silently removes
+  real overnight/holiday holds. Verified report/parser behavior only; corrected
+  ST account replay and native-fill parity remain unverified.
+
 [6E package review](results/six_e_cross_asset_review_20261027.md), 2026-10-27.
 - Use: measure arrival-mid shortfall, spread, native-tick stresses, integer quantities and total turnover; a +2 to −2 reversal trades four contracts.
 - Evidence: methodological requirements from the source review, not verified M6E execution results.
 - Limits: mini-price histories and back-adjusted signals are not a native micro fill/cash ledger. Avoid double-counting spread inside slippage.
 - Next check: reconcile actual contract IDs, as-of rolls, orders/fills/fees and marked daily P&L before portfolio claims.
 - Status: execution/accounting reference; the strategy's separate verification status remains in its report and TODO.
+
+- Nocturne follow-up2026-10-30 ([assumed replay](results/nocturne_20261030.md)): native MNQ fees must be
+  recomputed rather than dividing NQ net by10. Distinguish market-entry/time-exit slippage from limit-target
+  execution; charge each reentry separately. Our$1.24RT fee assumption is not a verified broker statement.
+  Positive source-cost results do not establish native funded-account performance.
+
+- Video Drift follow-up 2026-10-30 ([frozen reconstruction](results/drift_video_20261030.md)):
+  when a daily circuit breaker counts **net losing trades**, altered fees/slippage can change later eligibility.
+  Replay the counter under the stressed cost view; recosting an unchanged ledger is only a fixed-ledger sensitivity.
+  Report stressed fee/slippage subtotals consistently with stressed net. The nominal-bracket replay found $4.35 per
+  MNQ after assumed $1.04 RT fees and one tick per market/stop fill; it failed advancement gates. These are research
+  assumptions, not native broker fees/fills or measured execution savings. Future parity work needs actual quotes,
+  contract IDs, source counter settings and fees; no live change follows.
+
+- QuantJourney Donchian example, 2026-10-30 ([source/data-gate audit](results/qj_donchian_20261030.md)):
+  reconcile contract multipliers consistently across fills, open notional, realized/open P&L, weights and NAV.
+  The published packet's open-position value is quantity×price without multipliers, while its separate exposure
+  table includes them. Arithmetic verifies that reporting discrepancy; it does **not** establish that headline NAV
+  is wrong. Daily resizing can split FIFO lots, so fill count need not equal twice the lot count; validate actual
+  quantity/cash reconciliation instead. Source statistics remain unreconciled;17 synthetic/arithmetic checks are
+  not a historical alpha or native-fill replication.
+  A 25% per-market notional cap plus whole contracts can zero all positions at small capital. ATR-sized volatility
+  without a stop is not a maximum-loss cap. A reference margin cap and full-notional cash bookkeeping do not model
+  futures variation margin, current buying power or executable dated rolls. For multiweek carry, removing a splice
+  bar from an unadjusted continuous series does not supply roll trades/cashflows. Needed next: contract IDs, actual
+  roll schedule/fills/fees and a daily NAV-to-lot ledger reconciliation; no strategy/account/live change is authorized.
+
+- Weekly cross-review2026-10-30 ([independent findings](../cross_review/2026-10-30_codex.md),
+  [correction proposals](proposals/weekly_cross_review_20261030.md)): numeric exit kinds are part of the accounting
+  interface. Swing Target's text `reason` replaced numeric `kind`, so target cost handling and protective-stop
+  exit-minute capping differed from its recorded fills. A fixed-ledger check, retaining holiday repairs, changes
+  closing cashflow by$132/MNQ total and48daily minima; corrected payout/risk comparisons remain unrun.
+  Preserve schemas, assert numeric enum sets, and reconcile closed cash and marked paths before account claims.
+  This is existing-ledger accounting evidence, not a new strategy, native-fill result or plan change.
+
+- Swing Target account replay 2026-10-31 ([results](results/swing_replay_20261031.md)): 500 paired two-year histories
+  per account, fixed empirical pool through 2026-10-09. The $132/MNQ fixed-ledger improvement changes neither
+  selected replacement's two-year payouts nor failures in this sample; year-one mean changes are +$7 (50K)
+  and +$20 (150K), with intervals spanning zero. An accounting correction is necessary but does not establish
+  portfolio superiority. Against base, 50K VB replacement has two-year −$83 and failures +0.6 pp; 150K DT replacement
+  +$43 and −0.4 pp; both inconclusive. These are legacy NQ-equivalent bench costs, not native fee/fill evidence.
+  Rebuild also exposes an unfinished MC `Signal=open` valuation with a 00:00 exit sentinel: exclude it explicitly
+  from completed-ticket paths rather than infer a next-date fill or drop all same-bar trades. The general
+  builder still needs that upstream repair. No live/plan change or standalone strategy promotion follows.
 
 ### E10 — Liquidity compensation, turnover and costs
 
@@ -148,6 +201,23 @@ Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
   proxy uses realized07:30–07:35CT ranges. This can support retrospective diagnostics, not a pre-release calendar
   signal. Use independently published schedules with available-at times; do not select a pre-news trade from the
   news-window price spike. This is a code/timing observation, not verified FX alpha or a changed execution rule.
+- [ZN timestamp-only follow-up](results/scout_7601879_testability_20261029.md): an observed last data date is not
+  an authoritative rebalance calendar. Missing2020-11-30 daytime records makes a last-observed-date rule select
+  November27. Holiday/early-close flags are not automatically missing expected bars. Audit provider events against
+  native dated sessions; do not forward-fill a missing session or infer that event eligibility from the remaining rows.
+- [Calendar acquisition](results/scout_fx_calendar_acquisition_20261029.md) retained943 primary calendar/header facts.
+  Scheduled archive copies, release headers and first-announced calendars are different evidence. The2019 BEA shutdown
+  canceled planned releases and changed estimate labels; do not use a later revised calendar to assume knowledge before
+  a canceled event. Fed statement documents include unscheduled actions and cannot all select a pre-announcement trade.
+- [Weekly claims intake](results/scout_claims_calendar_acquisition_20261029.md) recovered two official2019 releases
+  omitted by a secondary calendar after old URLs failed. Retrieval failure is not proof that an event did not occur:
+  keep unresolved events visible and distinguish corroborated dates, printed embargo clocks and actual feed receipt.
+
+- Added2026-10-29: [spread-strategy feasibility](results/scout_spread_strategy_feasibility_20261029.md)
+  distinguishes a contemporaneous monthly position/curve regression from a forecast available before entry.
+  A public weekly basis-reversal notebook discusses settlement availability and delays execution one day;
+  that is a secondary implementation assumption, not verified primary timing or our replicated savings.
+  Freeze publication/receipt and first executable prices before using final settlements to select a position.
 
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
@@ -207,6 +277,15 @@ Source: Riedel and Wagner (2015), [SSRN2494387](https://ssrn.com/abstract=249438
   tail losses; fit any EVT model using a separately preregistered past-only/calibration protocol.
 - Status: risk/execution reference; no demonstrated alpha, sizing change, trading allocation or new return test.
 
+- Nocturne follow-up2026-10-30 ([review and assumed replay](results/nocturne_20261030.md)): group initial entry
+  and reentry into one night before resampling; trade-level bootstrap can break the dependence that creates
+  account losses. A fixed small target with no stop can show high win rates while rare nights exceed the loss
+  allowance. Conditional arithmetic on the user's reported568pointnight is$4544/$5680at4/5MNQbefore costs,
+  not a verified native fill or breach probability. Simulate intranight liquidation, fees, current cushion and
+  post-payout floor before interpreting a first-payout probability. EOD trail updates do not establish that an
+  intranight breach may be ignored. Evidence: source claims plus one assumed2018–22replay/self-audit, no independent
+  replication or measured execution saving. The candidate fails its filter-value gates; no account test is earned.
+
 <!-- E16-E26 added by Claude (master session) and E27-E28 by the Papers session, 2026-10-29; renumbered from E12-E24 after Codex's E12-E15 -->
 
 ### E16 — Vault Break live exit slippage: stops worse than the 1-tick assumption, targets better
@@ -237,6 +316,25 @@ Sources: [TIER_LIST.md](../../TIER_LIST.md) 'MultiCharts parity 2026-10-25', [MU
 - Limits: parity of bars / P&L is not broker fill evidence (see E04, E08).
 - Next check: when a new MC report arrives, state its limit-fill setting and rebuild with trade-through fills.
 - Status: standing convention: research uses trade-through fills; MC touch fills are treated as optimistic.
+
+- Nocturne2026-10-30: a discretionary next-bar reentry must wait for the target's5minute bar to complete;
+  an intrabar target fill does not authorize another fill earlier in that same bar. Freeze target-reference
+  versus actual-fill anchoring and the trade-through rule; a replay convention is not source-code parity.
+  [Frozen assumed implementation and limits](results/nocturne_20261030.md); synthetic lifecycle checks only,
+  not evidence of queue execution or live fill improvements.
+
+- Video Drift 2026-10-30: freeze whether “first counterbar” means a color transition or the first opposing
+  bar after an arm, whether trend state updates every 5 or 15 minutes, and whether two losses means total or
+  consecutive. A close-stamped minute at decision+1 opens at the decision's civil-clock boundary. A related
+  strategy name does not establish source-engine parity. [Second-agent implementation audit](results/drift_video_20261030.md)
+  checked trailing signals and saved paths; author-code/MC/native-fill parity remains unverified. Its half-day
+  cutoff repair retained the first failed run and followed the original committed rule, without a rescue search.
+
+- Weekly cross-review2026-10-30: a fill-sanity gate must retain legitimate closed same-chart-bar trades;
+  separate delay-eligible trades and open-position sentinels. The new L1/G10 wrapper omitted572of1756closed
+  Vault Break rows. A synthetic impossible same-bar fixture passed the wrapper despite failing direct fill sanity.
+  This establishes incomplete gate coverage, not invalid historical fills. Publish expected/checked/missing counts
+  before claiming every fill passed. [Evidence and proposed deciding check](../cross_review/2026-10-30_codex.md).
 
 ### E19 — Session clocks: early closes, halts, SetExitOnClose and time zones
 
@@ -274,6 +372,23 @@ Sources: [MULTICHARTS_PITFALLS.md](../../MULTICHARTS_PITFALLS.md) (10/27 ONB, 10
 - Fix: strategy heartbeat (SIG rows) checked by the watchdog every 5 min; missed-trade (silence) panel on the dashboard.
 - Next check: when the heartbeat alarm first fires for real, confirm it caught the stopped strategy within one check.
 - Status: monitoring in place; counts as 'genuinely missed orders' in the minimum record below.
+
+- Weekly cross-review2026-10-30 ([findings](../cross_review/2026-10-30_codex.md)):
+  liveness requires a recent capture, not merely a row that was fresh when written. Pinned premarket code accepts
+  stale00:05ACCT/POS/SIG snapshots as ALL GREEN; a healthy process line does not establish chart activity.
+  The account-floor watchdog scan also contains a literal U+0002 path byte and cannot enumerate normal daily logs.
+  Offline byte/path and fake-file checks reproduce these source defects. The installed VPS copy and PowerShell
+  runtime were not inspected; correction/deployment is not performed or certified here. Use an injected timezone-aware
+  as-of clock and disconnected temporary-log fixtures before relying on monitoring coverage.
+- [Post-fix acceptance follow-up](results/weekly_fix_followup_20261030.md), Claude302abe2: the malformed log path
+  is repaired and the exact midnight-snapshot fixture now alerts. Remaining fake-log cases still return ALL GREEN
+  for a21-minute effective feed age and for fresh ACCT alongside stale POS/SIG. Add elapsed time to captured
+  bar age; age each record type independently; fixed UTC−5 is wrong after the DST change. Source correction,
+  PowerShell runtime and installed behavior remain separate evidence states. No live-system change was made here.
+- [Latest reply checked](results/weekly_fix_reply_20261030.md), Claude724d1bb: timezone-aware clocks and separate
+  POS/SIG ages now work in the named fixtures. Effective feed tolerance was also raised from15to45minutes;
+  the21-minute case remains green under that changed policy. Archived ACCT cadence is mixed, not universally30minutes.
+  Preserve per-chart capture/feed-clock justification and installed acceptance as separate requirements.
 
 ### E23 — Logger and account fields: what each number really is
 
@@ -329,7 +444,218 @@ Source: Ahn, Fan, Noh & Park, SSRN 4752520 (paper, user upload 2026-10-29); `ana
 - Next check: none unless intraday retail flow data (e.g. small-lot aggressor volume by minute) is added.
 - Status: negative reference for futures.
 
-### E29 — ES order-flow shocks are absorbed within one second; macro releases raise price impact
+### E29 — Expiry hedge removal, signed inventory and cumulative snapshots
+
+Source: Amaya/Garcia-Ares/Pearson/Vasquez, *The Price Impact of Hedging Expiring Index Options*, August13 2026,
+[public paper](https://algoseek.com/wp-content/uploads/2026/10/ssrn-7330098.pdf), Sections2.1 and3.3–3.4,
+printed pp.6–7 and13–15. [Full-source review](results/scout_7330098_testability_20261029.md).
+- Use: cash-settled option expiry removes option delta while its hedge can remain; hedge liquidation and gamma
+  rebalancing are different flows. Signed option inventory determines the estimated unwind sign; unsigned OI,
+  aggregate gamma and futures aggressor flow do not identify that inventory.
+- Evidence: source method and published return-group claims inspected, not independently reproduced. No net alpha,
+  measured fill benefit or account contribution verified. Local paper bytes/hash and a complete signed book remain unavailable.
+- Clock/accounting: the source labels minutes at their start and uses end-minute quotes. A15:30ET label may need
+  data through15:31ET, then publication/receipt/processing lag. Never fill at the label time with later information.
+  Reconstruct positions from series inception; the latest cumulative snapshot is not an incremental flow to sum repeatedly.
+- Limits: SPXW dealer delta is not NDX GEX/OI or NQ tape delta. Cboe T+1 trade detail cannot be a same-day forecast.
+  Later data specifications, corrections and GTH coverage must not be imposed on earlier history without reconciliation.
+- Next check: obtain a lawful sample and audit one series' initial inventory, signed contracts, complete sessions,
+  corrections, cumulative snapshot differences, option delta units and actual data receipt before any proposed fill.
+- Status: retained execution/input-method reference and specific TODO lead; no return test or execution saving established.
+- [Data acquisition](results/scout_spx_positions_acquisition_20261029.md): the official2026 Cboe filing describes
+  one-minute intervals delivered2–5minutes after their end and a product introduced in2025, despite earlier backfilled
+  trade timestamps. A historical timestamp is not proof of contemporaneous subscriber access. The published2022H2
+  sample offer does not itself provide starting inventory, Greeks, receipt history or an activated data entitlement.
+
+### E30 — Listed calendar spreads versus separate-leg execution
+
+Source: Ma, Serra, Peterson and Irwin, [SSRN7425358](https://ssrn.com/abstract=7425358),
+[conference-version review](results/scout_7425358_20261029.md), retained2026-10-29.
+- Use: compare a listed two-month spread with executable synchronized leg quotes; account for fees, delay,
+  partial fills, shared implied liquidity and contract identity. Continuous prices cannot supply either book.
+- Evidence: full conference-source review only. Authors report lower quoted execution costs in grains/livestock;
+  no independent quote replay, actual savings, net strategy returns or causal verification here.
+- Limits: quoted tightness and common-price contribution do not certify actual fills or a tradable lead.
+  Design counterfactuals and price-limit exclusions require care; ES/NQ/micro transfer is unverified.
+- Next check: obtain a lawful synchronized sample of listed-spread and both leg books plus security definitions,
+  audit clocks/size/rights, then preregister any economic execution comparison before outcomes.
+- Status: execution reference, not a directional strategy or allocation. Official sample download was blocked;
+  record the gap and continue research on other leads.
+
+### E31 — Closing-auction state, final print and executable entry are different clocks
+
+Sources: Challet/Gourianov [arXiv1802.01921v2](https://arxiv.org/html/1802.01921v2), Sections2/4;
+Bogousslavsky/Muravyev [2020 primary PDF](https://www.aeaweb.org/conference/2021/preliminary/paper/H9T4hef7),
+Sections3.2–3.4 and AppendixD.2. [Cycle review](results/scout_closing_auctions_cycle_20261029.md).
+- Use: distinguish indicative-price changes, continuous-book quotes, published final auction prints and later
+  executable quotes. A signal defined using the final print cannot enter retrospectively at that same print.
+  Freeze a pre-auction order protocol or a post-auction later-fill protocol before returns.
+- Evidence: primary-source inspection only; no own net returns or measured execution benefit.
+  The sources document asset-dependent indicative dynamics, throttled updates and temporary auction deviations.
+- Limits: an indicative price is not a standing executable quote. After-hours interval VWAPs and regression
+  reversals are not guaranteed fills. Daily closes/returns cannot reconstruct all auction states.
+  Historical rule/cutoff claims and malformed rendered equations need primary venue/formula validation.
+- Data/next check: original messages, revision/quantity semantics, actual dissemination and receipt evidence,
+  auction prints, eligibility rules and synchronized executable quotes. Missing states stay unknown, not zero.
+  Cluster by auction/day; do not count thousands of correlated updates as thousands of events.
+- Status: existing SPY/QQQ research-family refinement; NEEDS DATA. Price-only proxies and index-rebalance
+  reversal failures remain failures. No logger, live-system or allocation change.
+
+### E32 — Currency fixing clocks and dealer versus client returns
+
+Source: Krohn/Mueller/Whelan, [SSRN3521370](https://ssrn.com/abstract=3521370), published2024,
+SectionsI,V.C,VI.E/TableX; [review and completed screen](results/scout_3521370_20261029.md).
+- Use: separate benchmark calculation, publication, customer execution and hedge clocks. The source distinguishes
+  ECB14:15calculation/16:00publication after2016 from the new WMR14:00Frankfurt turning point. Convert civil
+  timezones by date; publication delay does not require waiting if no published rate enters the signal.
+- Evidence: source says dealer liquidity provision can earn positive returns while client marketable reversal
+  trades lose after costs. Do not assign a dealer's customer spread to our futures market orders.
+  Our single2018–22standard6E reference screen found$17.52gross versus$19.75cost, net−$2.23(t−0.21).
+- Limits: a reference-price rejection is not a quote/fill replay, M6E result, causal reproduction or measured saving.
+  Reader text was captured; original author data and figure pixels were not reproduced.
+- Prerequisites/next check if a distinct future execution task warrants it: native contract/quote/fill clocks,
+  contemporary benchmark rules and actual fee/venue role; no retuning this failed definition.
+- Status: rejected directional screen, retained execution method; no account/allocation change.
+
+### E33 — Treasury benchmark pricing clocks changed in2021
+
+Source: Dyer/Fleming/Shachar, [NYFed September22 2026](https://libertystreeteconomics.newyorkfed.org/2026/09/treasury-trading-at-the-close/);
+[completed clock-aligned screen](results/scout_treasury_close_20261029.md).
+- Use: distinguish CME settlement, cash-bond index valuation and futures order/fill timestamps.
+  Bloomberg moved its USD bond-index strike from15:00ET to16:00ET on January14 2021.
+  Civil-time conversion and historical effective dates must be frozen before outcomes.
+- Evidence: official research documents volume migrating to the new clock, especially at month-end.
+  This establishes timing, not guaranteed directional demand or execution savings.
+  Our175-event2018–22intraday ZN adaptation earns$15.89gross but loses$29.86net at$45.75RT cost;
+  the clock correction does not rescue the rejected month-end family.
+- Limits: original multi-day paper and cash-bond volumes are not one-hour executable ZN returns.
+  Continuous prices, one-minute stops, early-close calendars and native costs remain relevant.
+- Next check: use current primary index/venue timing for any independently warranted execution study;
+  require native quotes/fills before claiming savings. No retuning this failed definition.
+- Status: retained clock reference; directional adaptation rejected. No live/system changes.
+
+### E34 — Calendar counting, closed sessions and intraday adaptations
+
+Source: Cieslak/Morse/Vissing-Jorgensen, [SSRN2687614](https://ssrn.com/abstract=2687614),
+2018-02-12manuscript/Table1 and [completed RTH adaptation](results/scout_2687614_20261030.md).
+- Use: keep the paper's weekday clock separate from tradable sessions. Holidays can occupy a cycle slot while
+  closed/short sessions generate no full-session order. Determine closures independently of returns; an otherwise
+  expected missing session stays unknown. Our484candidate endpoints are observed; non-event2020-11-30is unknown.
+- Evidence: source review plus self-audited reference screen, not native fills or independent economic verification.
+  Full-day cash-equity findings did not yield a profitable RTH adaptation here:−$95.53gross/−$125.53net per ES.
+- Limits: omitting overnight exposure changes the economic rule. A failed intraday adaptation does not reject the
+  original full-day result; a positive one would still require contract/path, protection and native account-cost checks.
+- Next check for a distinct future study: explicit clock/session census before outcomes. Do not retune this family.
+- Status: execution/input-design reference; no claimed saving or allocation.
+
+### E35 — GreenORB: fill-anchored targets, engine callbacks and source parity
+
+Source: user-uploaded GreenORB PDF/post and Liqport class, 2026-10-30.
+[Saved test/review](results/greenorb_20261030.md), [frozen plan](plans/greenorb_20261030.md).
+Related: E09 native micro accounting, E18 fill/volume conventions, E19 session clocks.
+- Use: when a target is R times the actual fill-to-stop distance, changing entry slippage changes its price and
+  potentially its exit. Rebuild the target in an execution stress; subtracting extra fees from an unchanged ledger
+  answers a different question. For this declared source, adverse two-tick fills and four-tick fills were tested
+  separately, retaining both exact and fixed-ledger sensitivities.
+- Timing: at the OR-end instant, base-bar and five-minute callback ordering can determine which three candles
+  sit in a rolling buffer. The indicator class and callback scheduler were not supplied. Implementing prose's
+  intended opening bars does not establish exact engine parity. Count limit validity in the callback's actual
+  units (here one-minute ticks), and distinguish marking a direction as traded on order placement from an actual fill.
+- Evidence: source inspection, pre-return synthetic path/gap/trade-through tests and a maker-audited historical
+  NQ-data proxy. One-MNQ design net was $5,828.40 at two ticks and $5,623.40 at four ticks; no current-account,
+  native MNQ, Liqport trade-match or independent verification result. Strategy controls failed; no allocation earned.
+- Limits: observed-bar NQ VWAP with missing overnight prefix minutes is not full native MNQ VWAP. Missing day
+  paths, including circuit-breaker/stress dates, remain unknown; do not book them as zero or infer risk from their
+  absence. Intraday flatness does not eliminate overnight VWAP roll-splice effects. A median drawdown rank among
+  shuffled days tests sequence luck, not source selection or the existence of an edge.
+- Prerequisites/next check when a future parity task needs them: native contract/volume and trade ledger,
+  indicator/session settings and callback trace; align signal, submission, next-open fill, protection activation
+  and target price. Do not retune this failed strategy or install the supplied class to resolve a research question.
+- Status: execution reference retained; failed strategy test remains a separate negative evidence record.
+
+### E36 — Stop-limit protection: price control is not a loss cap
+
+Source: user-pasted QuantJourney O08 daily-SPY/QQQ/IWM example and screenshot, 2026-10-30.
+[Saved review](results/qj_stop_limit_20261030.md), [pretest plan](plans/qj_stop_limit_mechanics_20261030.md).
+Related: E03 order-state reconciliation, E05 missed fills/opportunity costs, E18 bar-fill conventions.
+- Use: a sell stop-limit can activate after a gap yet remain unfilled below its limit. A hypothetical entry $100,
+  stop $96/limit $95.50 remained held through prices $90 then $80 in our fixture. Price control on completed fills does
+  not cap the open-position loss; commission also reduces net proceeds below the gross fill-price floor.
+- Evidence: eight predeclared synthetic scenario groups executed the archived strategy class and unchanged public
+  execution modules at QuantJourneyOrg/quantjourney-bt commit4f403d8. The source's separate daily protection branch left
+  the entry day unprotected, consumed a simultaneous bearish crossover, and kept its protection flag set after
+  an injected order rejection. Ordinary cancellation/exit and a partial-fill remainder case behaved as recorded.
+- Limits: public engine 0.12.5 is not certified as the packet's 0.10.0+private engine. These constructed mechanics
+  are not observed failure rates, native fills, execution savings or an independently reproduced return test.
+  The educational source's reported 1.99% CAGR/0.02 Sharpe provides no demonstrated current-account contribution.
+- Prerequisites/next check for a separately justified execution project: actual parent/child order IDs and states,
+  entry-fill/protection clocks, post-trigger quotes/prints, partials, cancellations and explicit fallback/deadline
+  policy. A boolean set at submission is not proof of accepted protection. Bar high/low alone cannot establish queue fills.
+- Status: execution reference retained; zero economic return trials, no plan placement or execution-policy change.
+
+### E37 — Realized payoff expectancy, costs and account survival
+
+Source: user screenshots of Veles, *Wrong 80% of the Time and Still Winning: Paul Tudor Jones and the Payoff Equation*,
+reviewed 2026-10-30. [Saved review](results/payoff_equation_review_20261030.md). Original PDF/version not authenticated.
+Related: E09 cash/cost reconciliation, E15 tail risk, E35 fill-anchored exits and E36 nonguaranteed protection.
+- Use: for nonzero closed outcomes, expectancy is `pW-(1-p)L`, with realized net winner/loser magnitudes.
+  A target-to-stop setting is not the realized average-win/loss ratio. Do not subtract fees twice when outcomes
+  already include them; when using gross outcomes, include all execution costs explicitly. Track zero outcomes separately.
+- Evidence: deterministic arithmetic independently checked, including 20% wins/5x payoff -> +0.20 average-loss units.
+  Higher payoff with a lower win fraction need not improve expectancy. Celebrity fund statistics remain unverified;
+  Odean's primary table supports the cited disposition effect, not a futures alpha rule.
+- Limits: average realized loss is not necessarily initial stop risk or margin. Closed trades alone can omit open
+  losses; positive expectancy can coexist with long losing streaks and an account breach before the next winner.
+  A last 50 trades snapshot does not establish stable after-cost edge or valid current-account placement.
+- Prerequisites/next check when a separately justified strategy is tested: reconcile quantities, closed/open cash,
+  protective fills, costs, timing and full daily marks; evaluate actual integer-size account paths. Any target/stop
+  change alters outcomes and must pass the existing preregistration/trial/account gates.
+- Status: risk/execution diagnostic reference; no standalone candidate, new return test or plan/exit change.
+
+### E38 — Commodity stop overlays, exposure redistribution and return/NAV accounting
+
+Source: Hossein Rad, December 2012 EDHEC MSc thesis, SSRN 2614241; uploaded full 56-page PDF reviewed 2026-10-31.
+[Saved review](results/rad_double_sort_review_20261031.md), [feasibility sheet](evidence/rad_double_sort_20261031.md).
+Related: E09 cash/contract accounting, E15 tail risk, E36 nonguaranteed protection, E37 payoff/account survival.
+- Use: distinguish a daily-close calculation affecting the following day from an accepted intraday protective order.
+  Removing one position and redistributing its weight among survivors can preserve gross exposure and increase
+  concentration. It is a different experiment from holding the freed risk in cash. Record both trade removal and
+  exposure transfer, their fees and decision-to-fill clocks; reopening needs explicit state and weight rules.
+- Evidence: full-source inspection and deterministic arithmetic only. The source reports a 5% whole-book overlay
+  reducing 30-day 99% VaR 20.27%→13.76% and annual volatility 24.91%→22.47%, while annual excess return 20.22%→19.93%,
+  before costs. Preserve that reported risk reduction rather than saying every stop failed; no raw returns or
+  independent economic replication support it. Paired daily-mean p=0.079 does not test the VaR change's significance.
+- Accounting lesson: instrument log returns, portfolio simple/log returns, additive fixed-notional P&L and compounded
+  NAV are different quantities. Here Table 1's 663.66% sum gives 1+6.6366=7.6366, matching the author's $7.63 chart;
+  it is not reconciled compounded wealth. Exponentiating the sum also does not repair weighted long/short log
+  accounting. Reconcile actual quantities, variation margin, collateral, rolls, open marks and costs first.
+- Limits: monthly eight-position commodity book at 2x gross exposure is ineligible for the four Apex homes as written.
+  Selected thresholds, missing-return weight redistribution and ambiguous trigger/reopening details prevent an
+  execution saving or maximum-loss claim. The source's stop overlays are not evidence to remove current protection.
+- Prerequisites/next check for a separately justified project: identified contracts, both signal maturities and
+  availability clocks, exact trigger/weight/cash policy, executable next-day prices and native fees; reconcile one
+  formation/roll month before any return study. Non-positive prices cannot silently disappear from a log-return test.
+- Status: execution/risk/accounting reference retained; no new return trial, account placement or exit-policy change.
+  [Offline build checkpoint](results/rad_double_sort_build_20261031.md) adds strict missing-panel, contract/clock,
+  integer reference-notional and delivery-action checks. Its23 synthetic cases do not verify historical fills or NAV.
+
+### E39 — Unfinished MC positions and stale report coverage during a data rebuild
+
+Source/review + date: [extended-data audit](results/extended_data_refresh_20261030.md), 2026-10-30;
+Claude source snapshot `86df2c0`, `analysis/codex_refresh_audit.py` and its saved coverage tables.
+- Use: distinguish a report's `open` sentinel from an actual exit, and price-history coverage from strategy-ticket coverage.
+- Evidence: reproduced standard-builder failure on a funded-ONB EntryShort at 10/12 09:15 paired with an `open` ExitShort
+  labeled midnight. It creates exit-before-entry indices and an empty path. A scoped adapter excludes the unfinished
+  position; the complete original rebuild succeeds with 343 closed ONB trades. Five regression checks pass.
+- Coverage: raw NQ through 10/30; dashboard cache through 10/09; the four live-strategy reports end 10/09–10/13.
+  Importing old tickets onto a longer grid does not regenerate signals; padded zero days are not verified no-trade days.
+- Limits: no current missed-trade count, native broker fill finding, strategy improvement or current-plan revalidation.
+  Production importer is unchanged; the adapter is an offline research artifact.
+- Next check: fresh same-input reports, explicit cache coverage gate, then expected/chart/broker reconciliation;
+  earlier unavailable chart logs remain unknown. Related: E04 (record semantics), E23 (account/logger fields).
+
+
+### E40 — ES order-flow shocks are absorbed within one second; macro releases raise price impact
 
 Source: Takahashi, arXiv 2508.06788 (paper, scout 2026-10-29); papers/SCOUT_LOG.md.
 - Use: one-second structural VAR on ES returns and order-flow imbalance per 15-minute interval: impulse responses die out almost entirely within a second; around macro announcements price impact per unit of flow rises, flow impact falls, return volatility spikes. Spreads / liquidity drive intraday variation of impact.
@@ -338,7 +664,7 @@ Source: Takahashi, arXiv 2508.06788 (paper, scout 2026-10-29); papers/SCOUT_LOG.
 - Next check: none; relevant when sizing orders at 07:30 / 09:00 CT releases.
 - Status: market-behavior reference.
 
-### E30 — No-stop overnight edges: a protective stop can delete the whole edge
+### E41 — No-stop overnight edges: a protective stop can delete the whole edge
 
 Source: Nocturne research note (L. Franceschetti, user upload 2026-10-30), rebuild [nocturne_test.py](../../analysis/nocturne_test.py). Claude, 2026-10-30.
 - Use: before bolting a stop onto a strategy that was found without one, test it: the profit may come from holding through the drops.
@@ -348,7 +674,7 @@ Source: Nocturne research note (L. Franceschetti, user upload 2026-10-30), rebui
 - Next check: size no-stop overnight pieces so the worst historical night stays below half the account's trailing room.
 - Status: market-behavior reference; Nocturne C, watchlist.
 
-### E31 — Backtest-live parity: six implementation defects and a ten-point checklist
+### E42 — Backtest-live parity: six implementation defects and a ten-point checklist
 
 Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SCOUT_LOG.md.
 - Use: one live intraday stock system, six defects that summary statistics never showed: (1) default data feed carried
@@ -366,6 +692,17 @@ Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SC
   Chicago offsets differ); after any data rebuild, match one live fill to the tick; for each MultiCharts input, confirm in
   the trade log that changing it changes an order (e.g. size inputs after cushion sizing).
 - Status: process reference; no strategy.
+
+
+### E43 — Better trade accounting need not improve funded-account outcomes
+
+Source/review + date: [Swing Target exit-kind replay](results/swing_kind_replay_20261031.md), 2026-10-31; runner `analysis/codex_swing_kind_replay.py` and retained paired histories.
+Execution question and useful lesson: numeric exit types govern both fill costs and the final adverse mark. After correcting them, replay the account; payout timing and subsequent integer sizing can change the sign of the effect.
+Evidence: synthetic stop/target fixtures plus historical account simulation, 500 paired 500-day histories per account. Corrected ST nets gain $132 total per MNQ, but the 50K ADD arm has one additional failed history (7.8% -> 8.0% blown); selected 50K/150K replacements have unchanged two-year outcomes versus legacy and do not establish gains versus BASE.
+Market/platform and timing limits: historical roster and repaired CODE_BE ledger, not exact holiday-skipping v3 or today's T_ONESIDE roster; inherited continuous bars, NQ/10 fees, OT/CLS adverse and MOC close-mark approximations. No native fill evidence.
+Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, shared simulators, paired block histories and EMPTY controls; full manifest retained.
+Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
+Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E40-E42 during this handoff merge; existing Codex E29-E38 identifiers are retained.
 
 ## Minimum record for any later execution comparison
 

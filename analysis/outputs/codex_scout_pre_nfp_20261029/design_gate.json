@@ -1,0 +1,72 @@
+{
+  "phase": "design",
+  "period": "2018-2022",
+  "native_size": "1 MES",
+  "metrics_mes": {
+    "trades": 55,
+    "win": 0.5636363636363636,
+    "avg": -12.468787878787904,
+    "annual": -133.14129429892165,
+    "sharpe": -0.3907467538605307,
+    "sortino": -0.4447391538243582,
+    "profit_factor": 0.706282934044111,
+    "max_dd": 913.3433333333378,
+    "calmar": -0.14577354368264692,
+    "ulcer": 0.8794622988976284,
+    "ulcer_perf": -0.3027788558209012,
+    "t": -0.8851392821013851,
+    "total": -685.7833333333347
+  },
+  "metrics_es": {
+    "trades": 55,
+    "win": 0.5636363636363636,
+    "avg": -117.28787878787897,
+    "annual": -1252.3959938366738,
+    "sharpe": -0.3678470414237559,
+    "sortino": -0.4199133076924486,
+    "profit_factor": 0.7215968351016001,
+    "max_dd": 8770.833333333343,
+    "calmar": -0.1427909921714021,
+    "ulcer": 8.372660750689688,
+    "ulcer_perf": -0.2991632005951057,
+    "t": -0.8326078672499597,
+    "total": -6450.833333333343
+  },
+  "gross_es": {
+    "trades": 55,
+    "win": 0.5636363636363636,
+    "avg": -87.28787878787898,
+    "annual": -932.0570107858264,
+    "sharpe": -0.2745034439440313,
+    "sortino": -0.31728224561017876,
+    "profit_factor": 0.7861623547752493,
+    "max_dd": 7596.6666666666715,
+    "calmar": -0.12269289303894153,
+    "ulcer": 7.058234250969835,
+    "ulcer_perf": -0.2641048674908338,
+    "t": -0.6196426719063456,
+    "total": -4800.833333333344
+  },
+  "placebo_p": 0.8191808191808192,
+  "placebo_average_net_mes": -1.995780303030305,
+  "mean_net_mes_ci90": [
+    -35.80944444444449,
+    11.974285714285712
+  ],
+  "stress_mean_mes": -14.968787878787904,
+  "gates": {
+    "min_40_trades": true,
+    "positive_native_net": false,
+    "t_at_least_2": false,
+    "four_positive_years": false,
+    "year_bootstrap_low_positive": false,
+    "matched_placebo_p_le_05": false,
+    "two_tick_each_fill_stress_positive": false
+  },
+  "passed": false,
+  "long_only": true,
+  "shorts": "No short rule registered or run",
+  "recent_tested": false,
+  "accounts_tested": false,
+  "engineering_recovery": "CSV-only; numpy.bool_ JSON serialization failure; no rerun or rule changes"
+}

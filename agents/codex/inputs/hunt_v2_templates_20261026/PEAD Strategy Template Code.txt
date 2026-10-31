@@ -1,0 +1,872 @@
+{
+=========================================================================
+  PEAD Multi-Stock Strategy - FINAL VERSION
+  Built on insights from four full backtests on 20-stock universe (2018-2026)
+
+  CONFIGURATIONS TESTED:
+    Run 1: Filter ON,  Threshold 0%, long+short  -> Calmar 0.68, DD 17.4%
+    Run 2: Filter OFF, Threshold 0%, long+short  -> Calmar 0.69, DD 32.5%
+    Run 3: Filter OFF, Threshold 5%, long+short  -> Calmar 0.67, DD 25.6%
+    Run 4: Filter ON,  Threshold 5%, long+short  -> Calmar 0.36, DD 20.1% (broken)
+    Long-only Run 1:   Filter ON,  Threshold 0%  -> Calmar 0.66, DD 19.8%, PF 2.68
+
+  KEY INSIGHTS DRIVING THIS VERSION:
+    1. Calmar ceiling ~0.67-0.69 across sensible setups. The edge is real
+       but modest. No parameter combination breaks above that ceiling.
+    2. Short side lost money in EVERY backtest (-14k to -19k cumulative).
+       Default: shorts disabled. Long-only.
+    3. Concordant reaction filter improves trade quality (PF 1.99 -> 2.68
+       when also long-only). Keep it ON.
+    4. Surprise magnitude threshold actively BREAKS the strategy when
+       combined with the reaction filter (Run 4 Calmar 0.36). Keep it 0%.
+    5. Hold 60 trading days per Bernard & Thomas (1989) canonical window.
+    6. 10% of equity per trade as sizing baseline.
+
+  STOPS ADDED (per request, defaulted ON):
+    - Hard stop loss at fixed % below entry
+    - Trailing stop activated after position reaches profit threshold
+    Both can be toggled OFF to compare against the academic baseline.
+
+  CAVEAT ON STOPS:
+    The PEAD literature does not endorse stops. The drift is statistical
+    over 60 days, and stops can systematically cut winners that pull back
+    before continuing. Test these empirically against the no-stop baseline
+    before deploying live.
+
+  Papers:
+    - Ball & Brown (1968): Drift exists after earnings announcements
+    - Bernard & Thomas (1989): SUE-decile sort, 60-day drift window
+    - Livnat & Mendenhall (2006): Modern entry methodology (t+2 open)
+    - Fink (2021): PEAD still confirmed in recent samples
+=========================================================================
+}
+
+Inputs:
+    { ----- Core PEAD parameters (keep these defaults) ----- }
+    HoldDays(60),
+    MinAbsSurprisePct(0.0),
+    UseReactionFilter(True),
+    PctOfCapital(10),
+
+    { ----- Trade direction toggles ----- }
+    TradeLongs(True),
+    TradeShorts(False),
+
+    { ----- Risk management (toggle these to A/B test) ----- }
+    UseHardStop(True),
+    HardStopPct(10.0),
+    UseTrailingStop(True),
+    TrailActivationPct(5.0),
+    TrailStopPct(7.0);
+
+Arrays:
+    EvtSymbol[700](""),
+    EvtDate[700](0),
+    EvtSurprise[700](0),
+    IsAMC[700](False),
+
+    MyEvtDate[60](0),
+    MyEvtSurprise[60](0),
+    MyIsAMC[60](False);
+
+Variables:
+    NumEvents(0),
+    MyNumEvents(0),
+    MySymbol(""),
+    BarsHeld(0),
+    ReactionPct(0),
+    PendingSignal(0),
+    ReactionDay(False),
+    idx(0),
+    CurrentEquity(0),
+    ShareSize(0),
+    HighSinceEntry(0),
+    LowSinceEntry(0);
+
+{ ----- Initialize master event data on bar 1 ----- }
+If CurrentBar = 1 then begin
+    MySymbol = GetSymbolName;
+
+    NumEvents = 0;
+
+    { ----- AAPL ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1180201; EvtSurprise[NumEvents] = 2.11; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1180501; EvtSurprise[NumEvents] = 1.49; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1180731; EvtSurprise[NumEvents] = 7.41; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1181101; EvtSurprise[NumEvents] = 4.29; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1190129; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1190430; EvtSurprise[NumEvents] = 5.08; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1190730; EvtSurprise[NumEvents] = 5.77; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1191030; EvtSurprise[NumEvents] = 7.04; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1200128; EvtSurprise[NumEvents] = 10.62; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1200430; EvtSurprise[NumEvents] = 23.08; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1200730; EvtSurprise[NumEvents] = 25.49; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1201029; EvtSurprise[NumEvents] = 5.80; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1210127; EvtSurprise[NumEvents] = 19.15; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1210428; EvtSurprise[NumEvents] = 40.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1210727; EvtSurprise[NumEvents] = 30.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1211028; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1220127; EvtSurprise[NumEvents] = 11.11; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1220428; EvtSurprise[NumEvents] = 6.29; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1220728; EvtSurprise[NumEvents] = 5.26; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1221027; EvtSurprise[NumEvents] = 2.38; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1230202; EvtSurprise[NumEvents] = -2.59; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1230504; EvtSurprise[NumEvents] = 5.56; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1230803; EvtSurprise[NumEvents] = 5.88; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1231102; EvtSurprise[NumEvents] = 5.04; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1240201; EvtSurprise[NumEvents] = 4.31; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1240502; EvtSurprise[NumEvents] = 1.32; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1240801; EvtSurprise[NumEvents] = 4.48; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1241031; EvtSurprise[NumEvents] = 10.07; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1250130; EvtSurprise[NumEvents] = 1.69; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1250501; EvtSurprise[NumEvents] = 2.48; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1250731; EvtSurprise[NumEvents] = 10.56; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1251030; EvtSurprise[NumEvents] = 6.94; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1260129; EvtSurprise[NumEvents] = 7.17; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AAPL"; EvtDate[NumEvents] = 1260430; EvtSurprise[NumEvents] = 4.69; IsAMC[NumEvents] = True;
+    { ----- AMD ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1180130; EvtSurprise[NumEvents] = 60.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1180425; EvtSurprise[NumEvents] = 22.22; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1180725; EvtSurprise[NumEvents] = 16.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1181024; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1190129; EvtSurprise[NumEvents] = -11.11; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1190430; EvtSurprise[NumEvents] = 20.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1190730; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1191029; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1200128; EvtSurprise[NumEvents] = 6.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1200428; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1200728; EvtSurprise[NumEvents] = 12.50; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1201027; EvtSurprise[NumEvents] = 13.89; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1210126; EvtSurprise[NumEvents] = 10.64; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1210427; EvtSurprise[NumEvents] = 18.18; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1210727; EvtSurprise[NumEvents] = 16.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1211026; EvtSurprise[NumEvents] = 10.61; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1220201; EvtSurprise[NumEvents] = 22.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1220503; EvtSurprise[NumEvents] = 24.18; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1220802; EvtSurprise[NumEvents] = 1.94; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1221101; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1230131; EvtSurprise[NumEvents] = 4.55; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1230502; EvtSurprise[NumEvents] = 7.14; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1230801; EvtSurprise[NumEvents] = 1.75; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1231031; EvtSurprise[NumEvents] = 2.94; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1240130; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1240430; EvtSurprise[NumEvents] = 3.33; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1240730; EvtSurprise[NumEvents] = 2.99; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1241029; EvtSurprise[NumEvents] = 1.10; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1250204; EvtSurprise[NumEvents] = 1.87; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1250506; EvtSurprise[NumEvents] = 3.23; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1250805; EvtSurprise[NumEvents] = 2.13; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1251104; EvtSurprise[NumEvents] = 2.56; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1260203; EvtSurprise[NumEvents] = 15.91; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMD"; EvtDate[NumEvents] = 1260505; EvtSurprise[NumEvents] = 5.38; IsAMC[NumEvents] = True;
+    { ----- AMZN ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1180201; EvtSurprise[NumEvents] = 22.22; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1180426; EvtSurprise[NumEvents] = 166.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1180726; EvtSurprise[NumEvents] = 108.33; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1181025; EvtSurprise[NumEvents] = 81.25; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1190131; EvtSurprise[NumEvents] = 7.14; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1190425; EvtSurprise[NumEvents] = 52.17; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1190725; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1191024; EvtSurprise[NumEvents] = -4.55; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1200130; EvtSurprise[NumEvents] = 60.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1200430; EvtSurprise[NumEvents] = -21.88; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1200730; EvtSurprise[NumEvents] = 466.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1201029; EvtSurprise[NumEvents] = 67.57; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1210202; EvtSurprise[NumEvents] = 100.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1210429; EvtSurprise[NumEvents] = 61.22; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1210729; EvtSurprise[NumEvents] = 24.59; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1211028; EvtSurprise[NumEvents] = -29.55; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1220203; EvtSurprise[NumEvents] = 631.58; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1220428; EvtSurprise[NumEvents] = -52.27; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1220728; EvtSurprise[NumEvents] = -33.33; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1221027; EvtSurprise[NumEvents] = -9.09; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1230202; EvtSurprise[NumEvents] = 40.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1230427; EvtSurprise[NumEvents] = 47.62; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1230803; EvtSurprise[NumEvents] = 85.29; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1231026; EvtSurprise[NumEvents] = 46.55; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1240201; EvtSurprise[NumEvents] = 24.69; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1240430; EvtSurprise[NumEvents] = 36.14; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1240801; EvtSurprise[NumEvents] = 17.14; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1241031; EvtSurprise[NumEvents] = 25.44; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1250206; EvtSurprise[NumEvents] = 22.37; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1250501; EvtSurprise[NumEvents] = 17.78; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1250731; EvtSurprise[NumEvents] = 26.32; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1251030; EvtSurprise[NumEvents] = 23.42; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1260205; EvtSurprise[NumEvents] = -1.52; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "AMZN"; EvtDate[NumEvents] = 1260429; EvtSurprise[NumEvents] = -2.50; IsAMC[NumEvents] = True;
+    { ----- CAT ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1180125; EvtSurprise[NumEvents] = 22.03; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1180424; EvtSurprise[NumEvents] = 33.65; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1180730; EvtSurprise[NumEvents] = 11.65; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1181023; EvtSurprise[NumEvents] = 1.06; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1190128; EvtSurprise[NumEvents] = -14.43; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1190424; EvtSurprise[NumEvents] = 3.52; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1190724; EvtSurprise[NumEvents] = -9.29; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1191023; EvtSurprise[NumEvents] = -5.67; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1200131; EvtSurprise[NumEvents] = 10.97; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1200428; EvtSurprise[NumEvents] = -9.09; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1200731; EvtSurprise[NumEvents] = 56.06; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1201027; EvtSurprise[NumEvents] = 16.52; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1210129; EvtSurprise[NumEvents] = 45.21; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1210429; EvtSurprise[NumEvents] = 48.70; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1210730; EvtSurprise[NumEvents] = 9.24; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1211028; EvtSurprise[NumEvents] = 17.70; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1220128; EvtSurprise[NumEvents] = 20.63; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1220428; EvtSurprise[NumEvents] = 8.27; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1220802; EvtSurprise[NumEvents] = 6.00; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1221027; EvtSurprise[NumEvents] = 23.82; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1230131; EvtSurprise[NumEvents] = -2.28; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1230427; EvtSurprise[NumEvents] = 29.55; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1230801; EvtSurprise[NumEvents] = 23.06; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1231031; EvtSurprise[NumEvents] = 16.21; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1240205; EvtSurprise[NumEvents] = 9.87; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1240425; EvtSurprise[NumEvents] = 9.37; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1240806; EvtSurprise[NumEvents] = 8.32; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1241030; EvtSurprise[NumEvents] = -3.00; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1250130; EvtSurprise[NumEvents] = 3.42; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1250430; EvtSurprise[NumEvents] = -1.16; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1250805; EvtSurprise[NumEvents] = -3.28; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1251029; EvtSurprise[NumEvents] = 9.51; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1260129; EvtSurprise[NumEvents] = 10.49; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CAT"; EvtDate[NumEvents] = 1260430; EvtSurprise[NumEvents] = 21.76; IsAMC[NumEvents] = False;
+    { ----- CRM ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1180228; EvtSurprise[NumEvents] = 6.06; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1180529; EvtSurprise[NumEvents] = 60.87; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1180829; EvtSurprise[NumEvents] = 51.06; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1181127; EvtSurprise[NumEvents] = 22.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1190304; EvtSurprise[NumEvents] = 25.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1190604; EvtSurprise[NumEvents] = 52.46; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1190822; EvtSurprise[NumEvents] = 40.43; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1191203; EvtSurprise[NumEvents] = 13.64; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1200225; EvtSurprise[NumEvents] = 20.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1200528; EvtSurprise[NumEvents] = 1.45; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1200825; EvtSurprise[NumEvents] = 114.93; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1201201; EvtSurprise[NumEvents] = 135.14; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1210225; EvtSurprise[NumEvents] = 38.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1210527; EvtSurprise[NumEvents] = 37.50; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1210825; EvtSurprise[NumEvents] = 62.64; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1211130; EvtSurprise[NumEvents] = 38.04; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1220301; EvtSurprise[NumEvents] = 15.07; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1220531; EvtSurprise[NumEvents] = 5.38; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1220824; EvtSurprise[NumEvents] = 16.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1221130; EvtSurprise[NumEvents] = 15.70; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1230301; EvtSurprise[NumEvents] = 24.44; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1230531; EvtSurprise[NumEvents] = 4.97; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1230830; EvtSurprise[NumEvents] = 11.58; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1231129; EvtSurprise[NumEvents] = 2.43; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1240228; EvtSurprise[NumEvents] = 1.33; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1240529; EvtSurprise[NumEvents] = 2.52; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1240828; EvtSurprise[NumEvents] = 8.94; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1241203; EvtSurprise[NumEvents] = -0.82; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1250226; EvtSurprise[NumEvents] = 6.92; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1250528; EvtSurprise[NumEvents] = 1.57; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1250903; EvtSurprise[NumEvents] = 5.05; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1251203; EvtSurprise[NumEvents] = 14.04; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "CRM"; EvtDate[NumEvents] = 1260225; EvtSurprise[NumEvents] = 25.74; IsAMC[NumEvents] = True;
+    { ----- GOOGL ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1180201; EvtSurprise[NumEvents] = -5.88; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1180423; EvtSurprise[NumEvents] = 8.70; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1180723; EvtSurprise[NumEvents] = 25.53; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1181025; EvtSurprise[NumEvents] = 22.64; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1190204; EvtSurprise[NumEvents] = 16.36; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1190429; EvtSurprise[NumEvents] = 11.32; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1190725; EvtSurprise[NumEvents] = 24.56; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1191028; EvtSurprise[NumEvents] = -19.05; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1200203; EvtSurprise[NumEvents] = 20.31; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1200428; EvtSurprise[NumEvents] = -5.77; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1200730; EvtSurprise[NumEvents] = 21.43; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1201029; EvtSurprise[NumEvents] = 43.86; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1210202; EvtSurprise[NumEvents] = 40.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1210427; EvtSurprise[NumEvents] = 67.95; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1210727; EvtSurprise[NumEvents] = 37.37; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1211026; EvtSurprise[NumEvents] = 20.69; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1220201; EvtSurprise[NumEvents] = 15.04; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1220426; EvtSurprise[NumEvents] = -4.65; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1220726; EvtSurprise[NumEvents] = -4.72; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1221025; EvtSurprise[NumEvents] = -15.20; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1230202; EvtSurprise[NumEvents] = -7.89; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1230425; EvtSurprise[NumEvents] = 10.38; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1230725; EvtSurprise[NumEvents] = 9.09; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1231024; EvtSurprise[NumEvents] = 6.90; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1240130; EvtSurprise[NumEvents] = 2.50; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1240425; EvtSurprise[NumEvents] = 26.85; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1240723; EvtSurprise[NumEvents] = 2.16; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1241029; EvtSurprise[NumEvents] = 15.85; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1250204; EvtSurprise[NumEvents] = 1.42; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1250424; EvtSurprise[NumEvents] = 39.11; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1250723; EvtSurprise[NumEvents] = 7.44; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1251029; EvtSurprise[NumEvents] = 26.99; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1260204; EvtSurprise[NumEvents] = 9.73; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GOOGL"; EvtDate[NumEvents] = 1260429; EvtSurprise[NumEvents] = 93.56; IsAMC[NumEvents] = True;
+    { ----- GS ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1180117; EvtSurprise[NumEvents] = 15.92; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1180417; EvtSurprise[NumEvents] = 22.57; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1180717; EvtSurprise[NumEvents] = 28.05; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1181016; EvtSurprise[NumEvents] = 15.87; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1190116; EvtSurprise[NumEvents] = 23.77; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1190415; EvtSurprise[NumEvents] = 20.46; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1190716; EvtSurprise[NumEvents] = 22.83; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1191015; EvtSurprise[NumEvents] = -4.77; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1200115; EvtSurprise[NumEvents] = -9.81; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1200415; EvtSurprise[NumEvents] = 9.89; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1200715; EvtSurprise[NumEvents] = 57.68; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1201014; EvtSurprise[NumEvents] = 73.48; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1210119; EvtSurprise[NumEvents] = 72.82; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1210414; EvtSurprise[NumEvents] = 89.99; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1210713; EvtSurprise[NumEvents] = 51.72; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1211015; EvtSurprise[NumEvents] = 52.66; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1220118; EvtSurprise[NumEvents] = -10.66; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1220414; EvtSurprise[NumEvents] = 24.97; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1220718; EvtSurprise[NumEvents] = 10.59; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1221018; EvtSurprise[NumEvents] = 10.44; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1230117; EvtSurprise[NumEvents] = -36.76; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1230418; EvtSurprise[NumEvents] = 7.99; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1230719; EvtSurprise[NumEvents] = -5.23; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1231017; EvtSurprise[NumEvents] = 2.82; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1240116; EvtSurprise[NumEvents] = 57.93; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1240415; EvtSurprise[NumEvents] = 35.60; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1240715; EvtSurprise[NumEvents] = 1.17; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1241015; EvtSurprise[NumEvents] = 22.63; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1250115; EvtSurprise[NumEvents] = 48.08; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1250414; EvtSurprise[NumEvents] = 11.09; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1250716; EvtSurprise[NumEvents] = 15.69; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1251014; EvtSurprise[NumEvents] = 10.26; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1260115; EvtSurprise[NumEvents] = 19.03; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "GS"; EvtDate[NumEvents] = 1260413; EvtSurprise[NumEvents] = 7.41; IsAMC[NumEvents] = False;
+    { ----- JNJ ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1180123; EvtSurprise[NumEvents] = 1.16; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1180417; EvtSurprise[NumEvents] = 2.49; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1180717; EvtSurprise[NumEvents] = 1.94; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1181016; EvtSurprise[NumEvents] = 0.99; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1190122; EvtSurprise[NumEvents] = 1.03; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1190416; EvtSurprise[NumEvents] = 3.45; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1190716; EvtSurprise[NumEvents] = 6.61; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1191015; EvtSurprise[NumEvents] = 6.00; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1200122; EvtSurprise[NumEvents] = 1.08; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1200414; EvtSurprise[NumEvents] = 13.30; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1200716; EvtSurprise[NumEvents] = 11.33; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1201013; EvtSurprise[NumEvents] = 10.55; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1210126; EvtSurprise[NumEvents] = 2.76; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1210420; EvtSurprise[NumEvents] = 12.12; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1210721; EvtSurprise[NumEvents] = 8.77; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1211019; EvtSurprise[NumEvents] = 9.70; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1220125; EvtSurprise[NumEvents] = 0.47; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1220419; EvtSurprise[NumEvents] = 2.69; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1220719; EvtSurprise[NumEvents] = 0.78; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1221018; EvtSurprise[NumEvents] = 2.41; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1230124; EvtSurprise[NumEvents] = 5.86; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1230418; EvtSurprise[NumEvents] = 6.77; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1230720; EvtSurprise[NumEvents] = 7.28; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1231017; EvtSurprise[NumEvents] = 5.56; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1240123; EvtSurprise[NumEvents] = 0.88; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1240416; EvtSurprise[NumEvents] = 2.65; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1240717; EvtSurprise[NumEvents] = 4.06; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1241015; EvtSurprise[NumEvents] = 9.01; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1250122; EvtSurprise[NumEvents] = 2.00; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1250415; EvtSurprise[NumEvents] = 7.78; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1250716; EvtSurprise[NumEvents] = 4.14; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1251014; EvtSurprise[NumEvents] = 1.08; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1260121; EvtSurprise[NumEvents] = 1.23; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JNJ"; EvtDate[NumEvents] = 1260414; EvtSurprise[NumEvents] = 1.12; IsAMC[NumEvents] = False;
+    { ----- JPM ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1180112; EvtSurprise[NumEvents] = 4.14; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1180413; EvtSurprise[NumEvents] = 3.95; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1180713; EvtSurprise[NumEvents] = 3.15; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1181012; EvtSurprise[NumEvents] = 4.46; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1190115; EvtSurprise[NumEvents] = -10.00; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1190412; EvtSurprise[NumEvents] = 14.22; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1190716; EvtSurprise[NumEvents] = 3.60; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1191015; EvtSurprise[NumEvents] = 9.84; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1200114; EvtSurprise[NumEvents] = 10.78; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1200414; EvtSurprise[NumEvents] = -54.12; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1200714; EvtSurprise[NumEvents] = 2.99; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1201013; EvtSurprise[NumEvents] = 24.26; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1210115; EvtSurprise[NumEvents] = 39.34; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1210414; EvtSurprise[NumEvents] = 47.54; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1210713; EvtSurprise[NumEvents] = 21.94; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1211013; EvtSurprise[NumEvents] = 24.67; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1220114; EvtSurprise[NumEvents] = 11.74; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1220413; EvtSurprise[NumEvents] = -3.66; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1220714; EvtSurprise[NumEvents] = -3.16; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1221014; EvtSurprise[NumEvents] = 5.41; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1230113; EvtSurprise[NumEvents] = 14.79; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1230414; EvtSurprise[NumEvents] = 20.23; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1230714; EvtSurprise[NumEvents] = 20.72; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1231013; EvtSurprise[NumEvents] = 11.31; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1240112; EvtSurprise[NumEvents] = 6.43; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1240412; EvtSurprise[NumEvents] = 10.77; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1240712; EvtSurprise[NumEvents] = 5.01; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1241011; EvtSurprise[NumEvents] = 8.71; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1250115; EvtSurprise[NumEvents] = 19.35; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1250411; EvtSurprise[NumEvents] = 9.74; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1250715; EvtSurprise[NumEvents] = 9.98; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1251014; EvtSurprise[NumEvents] = 4.97; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1260113; EvtSurprise[NumEvents] = 6.30; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "JPM"; EvtDate[NumEvents] = 1260414; EvtSurprise[NumEvents] = 8.20; IsAMC[NumEvents] = False;
+    { ----- LLY ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1180131; EvtSurprise[NumEvents] = 5.56; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1180424; EvtSurprise[NumEvents] = 18.58; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1180724; EvtSurprise[NumEvents] = 14.50; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1181106; EvtSurprise[NumEvents] = 1.46; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1190206; EvtSurprise[NumEvents] = -2.21; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1190430; EvtSurprise[NumEvents] = 0.76; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1190730; EvtSurprise[NumEvents] = 2.74; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1191023; EvtSurprise[NumEvents] = 3.50; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1200130; EvtSurprise[NumEvents] = 13.82; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1200423; EvtSurprise[NumEvents] = 12.90; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1200730; EvtSurprise[NumEvents] = 19.62; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1201027; EvtSurprise[NumEvents] = -12.50; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1210129; EvtSurprise[NumEvents] = 17.02; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1210427; EvtSurprise[NumEvents] = -11.79; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1210803; EvtSurprise[NumEvents] = -1.06; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1211026; EvtSurprise[NumEvents] = -2.02; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1220203; EvtSurprise[NumEvents] = -0.80; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1220428; EvtSurprise[NumEvents] = 12.93; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1220804; EvtSurprise[NumEvents] = -30.56; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1221101; EvtSurprise[NumEvents] = 0.51; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1230202; EvtSurprise[NumEvents] = 14.21; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1230427; EvtSurprise[NumEvents] = -6.36; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1230808; EvtSurprise[NumEvents] = 6.57; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1231102; EvtSurprise[NumEvents] = 225.00; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1240206; EvtSurprise[NumEvents] = 0.81; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1240430; EvtSurprise[NumEvents] = 1.98; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1240808; EvtSurprise[NumEvents] = 48.48; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1241030; EvtSurprise[NumEvents] = -22.37; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1250206; EvtSurprise[NumEvents] = 5.77; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1250501; EvtSurprise[NumEvents] = -5.11; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1250807; EvtSurprise[NumEvents] = 12.48; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1251030; EvtSurprise[NumEvents] = 16.61; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1260204; EvtSurprise[NumEvents] = 7.87; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "LLY"; EvtDate[NumEvents] = 1260430; EvtSurprise[NumEvents] = 21.10; IsAMC[NumEvents] = False;
+    { ----- META ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1220727; EvtSurprise[NumEvents] = -1.60; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1221026; EvtSurprise[NumEvents] = -12.77; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1230201; EvtSurprise[NumEvents] = 41.51; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1230426; EvtSurprise[NumEvents] = 34.69; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1230726; EvtSurprise[NumEvents] = 12.54; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1231025; EvtSurprise[NumEvents] = 21.27; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1240201; EvtSurprise[NumEvents] = 10.35; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1240424; EvtSurprise[NumEvents] = 9.03; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1240731; EvtSurprise[NumEvents] = 9.79; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1241030; EvtSurprise[NumEvents] = 16.18; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1250129; EvtSurprise[NumEvents] = 20.06; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1250430; EvtSurprise[NumEvents] = 23.18; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1250730; EvtSurprise[NumEvents] = 22.47; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1251029; EvtSurprise[NumEvents] = 9.68; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1260128; EvtSurprise[NumEvents] = 8.16; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "META"; EvtDate[NumEvents] = 1260429; EvtSurprise[NumEvents] = 8.94; IsAMC[NumEvents] = True;
+    { ----- MSFT ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1180131; EvtSurprise[NumEvents] = 11.63; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1180426; EvtSurprise[NumEvents] = 11.76; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1180719; EvtSurprise[NumEvents] = 5.61; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1181024; EvtSurprise[NumEvents] = 18.75; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1190130; EvtSurprise[NumEvents] = 0.92; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1190424; EvtSurprise[NumEvents] = 14.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1190718; EvtSurprise[NumEvents] = 13.22; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1191023; EvtSurprise[NumEvents] = 10.40; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1200129; EvtSurprise[NumEvents] = 14.39; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1200429; EvtSurprise[NumEvents] = 10.24; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1200722; EvtSurprise[NumEvents] = 5.80; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1201027; EvtSurprise[NumEvents] = 18.95; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1210126; EvtSurprise[NumEvents] = 23.78; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1210427; EvtSurprise[NumEvents] = 10.80; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1210727; EvtSurprise[NumEvents] = 14.21; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1211026; EvtSurprise[NumEvents] = 10.19; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1220125; EvtSurprise[NumEvents] = 8.30; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1220426; EvtSurprise[NumEvents] = 1.83; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1220726; EvtSurprise[NumEvents] = -2.19; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1221025; EvtSurprise[NumEvents] = 2.62; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1230124; EvtSurprise[NumEvents] = 2.20; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1230425; EvtSurprise[NumEvents] = 10.36; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1230725; EvtSurprise[NumEvents] = 5.91; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1231024; EvtSurprise[NumEvents] = 12.83; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1240130; EvtSurprise[NumEvents] = 6.16; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1240425; EvtSurprise[NumEvents] = 4.63; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1240730; EvtSurprise[NumEvents] = 1.72; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1241030; EvtSurprise[NumEvents] = 7.14; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1250129; EvtSurprise[NumEvents] = 3.86; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1250430; EvtSurprise[NumEvents] = 8.12; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1250730; EvtSurprise[NumEvents] = 8.96; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1251029; EvtSurprise[NumEvents] = 13.15; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1260128; EvtSurprise[NumEvents] = 6.70; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "MSFT"; EvtDate[NumEvents] = 1260429; EvtSurprise[NumEvents] = 4.91; IsAMC[NumEvents] = True;
+    { ----- NKE ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1180322; EvtSurprise[NumEvents] = 30.77; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1180628; EvtSurprise[NumEvents] = 7.81; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1180925; EvtSurprise[NumEvents] = 8.06; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1181220; EvtSurprise[NumEvents] = 15.56; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1190321; EvtSurprise[NumEvents] = 7.94; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1190627; EvtSurprise[NumEvents] = -6.06; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1190924; EvtSurprise[NumEvents] = 21.13; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1191219; EvtSurprise[NumEvents] = 20.69; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1200324; EvtSurprise[NumEvents] = 44.44; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1200625; EvtSurprise[NumEvents] = -2650.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1200922; EvtSurprise[NumEvents] = 97.92; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1201218; EvtSurprise[NumEvents] = 23.81; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1210318; EvtSurprise[NumEvents] = 20.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1210624; EvtSurprise[NumEvents] = 82.35; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1210923; EvtSurprise[NumEvents] = 3.57; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1211220; EvtSurprise[NumEvents] = 31.75; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1220321; EvtSurprise[NumEvents] = 19.18; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1220627; EvtSurprise[NumEvents] = 11.11; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1220929; EvtSurprise[NumEvents] = 2.20; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1221220; EvtSurprise[NumEvents] = 30.77; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1230321; EvtSurprise[NumEvents] = 51.92; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1230629; EvtSurprise[NumEvents] = -1.49; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1230928; EvtSurprise[NumEvents] = 27.03; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1231221; EvtSurprise[NumEvents] = 22.62; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1240321; EvtSurprise[NumEvents] = 42.03; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1240627; EvtSurprise[NumEvents] = 18.82; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1241001; EvtSurprise[NumEvents] = 34.62; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1241219; EvtSurprise[NumEvents] = 23.81; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1250320; EvtSurprise[NumEvents] = 92.86; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1250626; EvtSurprise[NumEvents] = 16.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1250930; EvtSurprise[NumEvents] = 81.48; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1251218; EvtSurprise[NumEvents] = 43.24; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NKE"; EvtDate[NumEvents] = 1260331; EvtSurprise[NumEvents] = 20.69; IsAMC[NumEvents] = True;
+    { ----- NVDA ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1180208; EvtSurprise[NumEvents] = 33.33; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1180510; EvtSurprise[NumEvents] = 25.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1180816; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1181115; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1190214; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1190516; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1190815; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1191114; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1200213; EvtSurprise[NumEvents] = 25.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1200521; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1200819; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1201118; EvtSurprise[NumEvents] = 16.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1210224; EvtSurprise[NumEvents] = 14.29; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1210526; EvtSurprise[NumEvents] = 12.50; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1210818; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1211117; EvtSurprise[NumEvents] = 9.09; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1220216; EvtSurprise[NumEvents] = 8.33; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1220525; EvtSurprise[NumEvents] = 7.69; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1220824; EvtSurprise[NumEvents] = -16.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1221116; EvtSurprise[NumEvents] = -14.29; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1230222; EvtSurprise[NumEvents] = 12.50; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1230524; EvtSurprise[NumEvents] = 22.22; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1230823; EvtSurprise[NumEvents] = 28.57; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1231121; EvtSurprise[NumEvents] = 17.65; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1240221; EvtSurprise[NumEvents] = 13.04; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1240522; EvtSurprise[NumEvents] = 10.91; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1240828; EvtSurprise[NumEvents] = 6.25; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1241120; EvtSurprise[NumEvents] = 8.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1250226; EvtSurprise[NumEvents] = 5.95; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1250528; EvtSurprise[NumEvents] = -4.71; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1250827; EvtSurprise[NumEvents] = 5.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1251119; EvtSurprise[NumEvents] = 4.84; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "NVDA"; EvtDate[NumEvents] = 1260225; EvtSurprise[NumEvents] = 6.58; IsAMC[NumEvents] = True;
+    { ----- ORCL ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1180319; EvtSurprise[NumEvents] = 15.28; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1180619; EvtSurprise[NumEvents] = 5.32; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1180917; EvtSurprise[NumEvents] = 4.41; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1181217; EvtSurprise[NumEvents] = 2.56; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1190314; EvtSurprise[NumEvents] = 3.57; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1190619; EvtSurprise[NumEvents] = 8.41; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1190911; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1191212; EvtSurprise[NumEvents] = 2.27; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1200312; EvtSurprise[NumEvents] = 1.04; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1200616; EvtSurprise[NumEvents] = 5.26; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1200910; EvtSurprise[NumEvents] = 8.14; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1201210; EvtSurprise[NumEvents] = 6.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1210310; EvtSurprise[NumEvents] = 4.50; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1210615; EvtSurprise[NumEvents] = 17.56; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1210913; EvtSurprise[NumEvents] = 6.19; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1211209; EvtSurprise[NumEvents] = 9.01; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1220310; EvtSurprise[NumEvents] = -3.42; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1220613; EvtSurprise[NumEvents] = 11.59; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1220912; EvtSurprise[NumEvents] = -3.74; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1221212; EvtSurprise[NumEvents] = 3.42; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1230309; EvtSurprise[NumEvents] = 1.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1230612; EvtSurprise[NumEvents] = 5.70; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1230911; EvtSurprise[NumEvents] = 4.39; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1231211; EvtSurprise[NumEvents] = 1.52; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1240311; EvtSurprise[NumEvents] = 2.92; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1240611; EvtSurprise[NumEvents] = -0.61; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1240909; EvtSurprise[NumEvents] = 5.30; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1241209; EvtSurprise[NumEvents] = -0.68; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1250310; EvtSurprise[NumEvents] = -0.68; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1250611; EvtSurprise[NumEvents] = 3.66; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1250909; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1251210; EvtSurprise[NumEvents] = 38.65; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "ORCL"; EvtDate[NumEvents] = 1260310; EvtSurprise[NumEvents] = 5.29; IsAMC[NumEvents] = True;
+    { ----- SBUX ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1180125; EvtSurprise[NumEvents] = 14.04; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1180426; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1180726; EvtSurprise[NumEvents] = 3.33; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1181101; EvtSurprise[NumEvents] = 5.08; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1190124; EvtSurprise[NumEvents] = 15.38; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1190425; EvtSurprise[NumEvents] = 7.14; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1190725; EvtSurprise[NumEvents] = 8.33; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1191030; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1200128; EvtSurprise[NumEvents] = 3.95; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1200428; EvtSurprise[NumEvents] = 3.23; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1200728; EvtSurprise[NumEvents] = 24.59; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1201029; EvtSurprise[NumEvents] = 54.55; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1210126; EvtSurprise[NumEvents] = 10.91; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1210427; EvtSurprise[NumEvents] = 19.23; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1210727; EvtSurprise[NumEvents] = 31.17; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1211028; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1220201; EvtSurprise[NumEvents] = -10.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1220503; EvtSurprise[NumEvents] = -1.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1220802; EvtSurprise[NumEvents] = 9.09; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1221103; EvtSurprise[NumEvents] = 10.96; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1230202; EvtSurprise[NumEvents] = -2.60; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1230502; EvtSurprise[NumEvents] = 15.63; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1230801; EvtSurprise[NumEvents] = 5.26; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1231102; EvtSurprise[NumEvents] = 9.28; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1240130; EvtSurprise[NumEvents] = -2.17; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1240430; EvtSurprise[NumEvents] = -13.92; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1240730; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1241030; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1250128; EvtSurprise[NumEvents] = 4.55; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1250429; EvtSurprise[NumEvents] = -16.33; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1250729; EvtSurprise[NumEvents] = -23.08; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1251029; EvtSurprise[NumEvents] = -5.45; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1260128; EvtSurprise[NumEvents] = -3.45; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "SBUX"; EvtDate[NumEvents] = 1260428; EvtSurprise[NumEvents] = 13.64; IsAMC[NumEvents] = True;
+    { ----- TSLA ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1180207; EvtSurprise[NumEvents] = 4.76; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1180502; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1180801; EvtSurprise[NumEvents] = -5.26; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1181024; EvtSurprise[NumEvents] = 575.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1190130; EvtSurprise[NumEvents] = -7.14; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1190424; EvtSurprise[NumEvents] = -137.50; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1190724; EvtSurprise[NumEvents] = -75.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1191023; EvtSurprise[NumEvents] = 1300.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1200129; EvtSurprise[NumEvents] = 27.27; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1200429; EvtSurprise[NumEvents] = 900.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1200722; EvtSurprise[NumEvents] = 600.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1201021; EvtSurprise[NumEvents] = 38.89; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1210127; EvtSurprise[NumEvents] = -10.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1210426; EvtSurprise[NumEvents] = 19.23; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1210726; EvtSurprise[NumEvents] = 60.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1211020; EvtSurprise[NumEvents] = 34.78; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1220126; EvtSurprise[NumEvents] = 21.43; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1220420; EvtSurprise[NumEvents] = 48.61; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1220720; EvtSurprise[NumEvents] = 24.59; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1221019; EvtSurprise[NumEvents] = 10.53; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1230125; EvtSurprise[NumEvents] = 9.17; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1230419; EvtSurprise[NumEvents] = 2.41; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1230719; EvtSurprise[NumEvents] = 9.64; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1231018; EvtSurprise[NumEvents] = -8.33; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1240124; EvtSurprise[NumEvents] = -5.33; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1240423; EvtSurprise[NumEvents] = -2.17; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1240723; EvtSurprise[NumEvents] = -16.13; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1241023; EvtSurprise[NumEvents] = 24.14; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1250129; EvtSurprise[NumEvents] = -2.67; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1250422; EvtSurprise[NumEvents] = -38.64; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1250723; EvtSurprise[NumEvents] = 2.56; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1251022; EvtSurprise[NumEvents] = -5.66; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1260128; EvtSurprise[NumEvents] = 11.11; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "TSLA"; EvtDate[NumEvents] = 1260422; EvtSurprise[NumEvents] = 13.89; IsAMC[NumEvents] = True;
+    { ----- UNH ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1180116; EvtSurprise[NumEvents] = 3.60; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1180417; EvtSurprise[NumEvents] = 4.11; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1180717; EvtSurprise[NumEvents] = 3.63; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1181016; EvtSurprise[NumEvents] = 3.33; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1190115; EvtSurprise[NumEvents] = 2.50; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1190416; EvtSurprise[NumEvents] = 3.61; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1190718; EvtSurprise[NumEvents] = 4.05; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1191015; EvtSurprise[NumEvents] = 3.47; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1200115; EvtSurprise[NumEvents] = 3.45; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1200415; EvtSurprise[NumEvents] = 2.20; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1200715; EvtSurprise[NumEvents] = 37.45; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1201014; EvtSurprise[NumEvents] = 17.79; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1210120; EvtSurprise[NumEvents] = 5.44; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1210415; EvtSurprise[NumEvents] = 20.14; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1210715; EvtSurprise[NumEvents] = 6.58; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1211014; EvtSurprise[NumEvents] = 2.49; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1220119; EvtSurprise[NumEvents] = 4.19; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1220414; EvtSurprise[NumEvents] = 1.67; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1220715; EvtSurprise[NumEvents] = 6.30; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1221014; EvtSurprise[NumEvents] = 6.24; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1230113; EvtSurprise[NumEvents] = 3.29; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1230414; EvtSurprise[NumEvents] = 0.32; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1230714; EvtSurprise[NumEvents] = 3.72; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1231013; EvtSurprise[NumEvents] = 3.63; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1240112; EvtSurprise[NumEvents] = 3.01; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1240416; EvtSurprise[NumEvents] = 4.22; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1240716; EvtSurprise[NumEvents] = 2.26; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1241015; EvtSurprise[NumEvents] = 1.85; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1250116; EvtSurprise[NumEvents] = 1.49; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1250417; EvtSurprise[NumEvents] = -0.96; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1250729; EvtSurprise[NumEvents] = -15.70; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1251028; EvtSurprise[NumEvents] = 6.18; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1260127; EvtSurprise[NumEvents] = 0.96; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "UNH"; EvtDate[NumEvents] = 1260421; EvtSurprise[NumEvents] = 11.92; IsAMC[NumEvents] = False;
+    { ----- V ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1180201; EvtSurprise[NumEvents] = 10.20; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1180425; EvtSurprise[NumEvents] = 9.90; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1180725; EvtSurprise[NumEvents] = 11.11; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1181024; EvtSurprise[NumEvents] = 0.83; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1190130; EvtSurprise[NumEvents] = 4.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1190424; EvtSurprise[NumEvents] = 5.65; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1190723; EvtSurprise[NumEvents] = 3.01; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1191024; EvtSurprise[NumEvents] = 2.80; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1200130; EvtSurprise[NumEvents] = 0.00; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1200430; EvtSurprise[NumEvents] = 2.96; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1200728; EvtSurprise[NumEvents] = 3.92; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1201028; EvtSurprise[NumEvents] = 2.75; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1210128; EvtSurprise[NumEvents] = 11.81; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1210427; EvtSurprise[NumEvents] = 9.52; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1210727; EvtSurprise[NumEvents] = 12.03; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1211026; EvtSurprise[NumEvents] = 5.88; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1220127; EvtSurprise[NumEvents] = 7.10; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1220426; EvtSurprise[NumEvents] = 8.48; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1220726; EvtSurprise[NumEvents] = 13.79; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1221025; EvtSurprise[NumEvents] = 3.76; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1230126; EvtSurprise[NumEvents] = 8.46; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1230425; EvtSurprise[NumEvents] = 6.09; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1230725; EvtSurprise[NumEvents] = 2.37; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1231024; EvtSurprise[NumEvents] = 4.48; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1240125; EvtSurprise[NumEvents] = 3.43; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1240423; EvtSurprise[NumEvents] = 3.29; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1240723; EvtSurprise[NumEvents] = 0.41; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1241029; EvtSurprise[NumEvents] = 5.04; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1250130; EvtSurprise[NumEvents] = 3.38; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1250429; EvtSurprise[NumEvents] = 2.99; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1250729; EvtSurprise[NumEvents] = 4.20; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1251028; EvtSurprise[NumEvents] = 0.34; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1260129; EvtSurprise[NumEvents] = 0.96; IsAMC[NumEvents] = True;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "V"; EvtDate[NumEvents] = 1260428; EvtSurprise[NumEvents] = 7.12; IsAMC[NumEvents] = True;
+    { ----- XOM ----- }
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1180202; EvtSurprise[NumEvents] = -16.98; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1180427; EvtSurprise[NumEvents] = -4.39; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1180727; EvtSurprise[NumEvents] = -26.98; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1181102; EvtSurprise[NumEvents] = 20.66; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1190201; EvtSurprise[NumEvents] = 39.81; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1190426; EvtSurprise[NumEvents] = -23.61; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1190802; EvtSurprise[NumEvents] = 7.35; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1191101; EvtSurprise[NumEvents] = 6.25; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1200131; EvtSurprise[NumEvents] = -6.82; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1200501; EvtSurprise[NumEvents] = 1225.00; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1200731; EvtSurprise[NumEvents] = -11.11; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1201030; EvtSurprise[NumEvents] = 35.71; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1210202; EvtSurprise[NumEvents] = 200.00; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1210430; EvtSurprise[NumEvents] = 10.17; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1210730; EvtSurprise[NumEvents] = 7.84; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1211029; EvtSurprise[NumEvents] = 0.64; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1220201; EvtSurprise[NumEvents] = 4.59; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1220429; EvtSurprise[NumEvents] = -8.00; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1220729; EvtSurprise[NumEvents] = 8.95; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1221028; EvtSurprise[NumEvents] = 14.69; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1230131; EvtSurprise[NumEvents] = 2.41; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1230428; EvtSurprise[NumEvents] = 6.79; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1230728; EvtSurprise[NumEvents] = -3.00; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1231027; EvtSurprise[NumEvents] = -3.81; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1240202; EvtSurprise[NumEvents] = 12.22; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1240426; EvtSurprise[NumEvents] = -5.94; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1240802; EvtSurprise[NumEvents] = 4.90; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1241101; EvtSurprise[NumEvents] = 0.52; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1250131; EvtSurprise[NumEvents] = 7.74; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1250502; EvtSurprise[NumEvents] = 1.15; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1250801; EvtSurprise[NumEvents] = 10.07; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1251031; EvtSurprise[NumEvents] = 3.87; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1260130; EvtSurprise[NumEvents] = 1.79; IsAMC[NumEvents] = False;
+    NumEvents = NumEvents + 1; EvtSymbol[NumEvents] = "XOM"; EvtDate[NumEvents] = 1260501; EvtSurprise[NumEvents] = 8.41; IsAMC[NumEvents] = False;
+    { ----- Filter master list to this chart's symbol ----- }
+    MyNumEvents = 0;
+    For idx = 1 to NumEvents begin
+        If EvtSymbol[idx] = MySymbol then begin
+            MyNumEvents = MyNumEvents + 1;
+            MyEvtDate[MyNumEvents] = EvtDate[idx];
+            MyEvtSurprise[MyNumEvents] = EvtSurprise[idx];
+            MyIsAMC[MyNumEvents] = IsAMC[idx];
+        end;
+    end;
+end;
+
+{ ----- Signal generation -----
+  For each event belonging to this chart's symbol, check if today is its
+  reaction day:
+    AMC: reaction day = today if YESTERDAY (Date[1]) was the announcement
+    BMO: reaction day = today if TODAY (Date) is the announcement       }
+PendingSignal = 0;
+
+For idx = 1 to MyNumEvents begin
+    ReactionDay = False;
+
+    If MyIsAMC[idx] and Date[1] = MyEvtDate[idx] then
+        ReactionDay = True;
+
+    If not MyIsAMC[idx] and Date = MyEvtDate[idx] then
+        ReactionDay = True;
+
+    If ReactionDay then begin
+        ReactionPct = (Close - Close[1]) / Close[1] * 100;
+
+        If MyEvtSurprise[idx] > MinAbsSurprisePct
+           and (ReactionPct > 0 or UseReactionFilter = False) then
+            PendingSignal = 1;
+
+        If MyEvtSurprise[idx] < -MinAbsSurprisePct
+           and (ReactionPct < 0 or UseReactionFilter = False) then
+            PendingSignal = -1;
+    end;
+end;
+
+{ ----- Position sizing & entries (open of next bar) ----- }
+If MarketPosition = 0 then begin
+    CurrentEquity = InitialCapital + NetProfit;
+    ShareSize = IntPortion( (CurrentEquity * PctOfCapital / 100) / Close );
+    If ShareSize < 1 then ShareSize = 1;
+
+    If PendingSignal = 1 and TradeLongs then
+        Buy ("PEAD-Long") ShareSize shares next bar at market;
+
+    If PendingSignal = -1 and TradeShorts then
+        SellShort ("PEAD-Short") ShareSize shares next bar at market;
+end;
+
+{ ----- Track holding period & price extremes since entry ----- }
+If MarketPosition <> 0 then
+    BarsHeld = BarsHeld + 1
+else
+    BarsHeld = 0;
+
+If MarketPosition = 1 then
+    HighSinceEntry = Highest(High, BarsHeld + 1);
+
+If MarketPosition = -1 then
+    LowSinceEntry = Lowest(Low, BarsHeld + 1);
+
+{ ----- LONG exits ----- }
+If MarketPosition = 1 then begin
+
+    { Time-based exit after HoldDays }
+    If BarsHeld >= HoldDays then
+        Sell ("Long-TimeExit") next bar at market;
+
+    { Hard stop loss at fixed % below entry }
+    If UseHardStop then
+        Sell ("Long-HardStop") next bar at
+            (EntryPrice * (1 - HardStopPct / 100)) stop;
+
+    { Trailing stop, only after position is up by TrailActivationPct }
+    If UseTrailingStop and
+       (HighSinceEntry - EntryPrice) / EntryPrice * 100 >= TrailActivationPct then
+        Sell ("Long-TrailStop") next bar at
+            (HighSinceEntry * (1 - TrailStopPct / 100)) stop;
+end;
+
+{ ----- SHORT exits ----- }
+If MarketPosition = -1 then begin
+
+    { Time-based exit after HoldDays }
+    If BarsHeld >= HoldDays then
+        BuyToCover ("Short-TimeExit") next bar at market;
+
+    { Hard stop loss at fixed % above entry }
+    If UseHardStop then
+        BuyToCover ("Short-HardStop") next bar at
+            (EntryPrice * (1 + HardStopPct / 100)) stop;
+
+    { Trailing stop, only after position is up by TrailActivationPct }
+    If UseTrailingStop and
+       (EntryPrice - LowSinceEntry) / EntryPrice * 100 >= TrailActivationPct then
+        BuyToCover ("Short-TrailStop") next bar at
+            (LowSinceEntry * (1 + TrailStopPct / 100)) stop;
+end;

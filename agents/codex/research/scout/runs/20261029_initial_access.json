@@ -1,0 +1,123 @@
+{
+  "id": "scan-1",
+  "started_at": "2026-10-29T17:49:48.201804+00:00",
+  "finished_at": "2026-10-29T17:49:48.307252+00:00",
+  "status": "failed",
+  "provider": "Crossref SSRN DOI metadata",
+  "counts": {
+    "received": 0,
+    "added": 0,
+    "seen_again": 0,
+    "already_reviewed": 0,
+    "invalid": 0,
+    "invalid_from_provider": 0,
+    "unique_returned": 0
+  },
+  "attempts": [
+    {
+      "query": "equity index futures scheduled flows rebalancing",
+      "url": "https://api.crossref.org/prefixes/10.2139/works?query=equity+index+futures+scheduled+flows+rebalancing&rows=10&filter=from-pub-date%3A2025-10-29&sort=published&order=desc",
+      "status": "failed",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "stop_reason": "access_denied"
+    },
+    {
+      "query": "index options expiration dealer hedging futures",
+      "url": "https://api.crossref.org/prefixes/10.2139/works?query=index+options+expiration+dealer+hedging+futures&rows=10&filter=from-pub-date%3A2025-10-29&sort=published&order=desc",
+      "status": "skipped",
+      "reason": "access_denied"
+    },
+    {
+      "query": "market close auction imbalance transaction costs",
+      "url": "https://api.crossref.org/prefixes/10.2139/works?query=market+close+auction+imbalance+transaction+costs&rows=10&filter=from-pub-date%3A2025-10-29&sort=published&order=desc",
+      "status": "skipped",
+      "reason": "access_denied"
+    },
+    {
+      "query": "overnight futures risk portfolio diversification",
+      "url": "https://api.crossref.org/prefixes/10.2139/works?query=overnight+futures+risk+portfolio+diversification&rows=10&filter=from-pub-date%3A2025-10-29&sort=published&order=desc",
+      "status": "skipped",
+      "reason": "access_denied"
+    }
+  ],
+  "errors": [
+    "equity index futures scheduled flows rebalancing: <urlopen error Tunnel connection failed: 403 Forbidden>"
+  ],
+  "network_requests": 1,
+  "stop_reason": "access_denied",
+  "return_trials": 0,
+  "reproduction": "Import agents/codex/terminal/scout.py and call discover(root, temporary_runtime,20); network policy must permit provider. No economic code executed.",
+  "fallback": {
+    "method": "connected web search",
+    "date": "2026-10-29",
+    "status": "completed_metadata_discovery",
+    "queries": [
+      "\"Buying Duration\" \"Soebhag\" \"2026\"",
+      "\"The Price Impact of Hedging Expiring Index Options\" pdf",
+      "\"Auctions, Announcements, and Abnormal Returns\" pdf"
+    ],
+    "primary_records": [
+      "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7601879",
+      "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7330098",
+      "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5207418"
+    ],
+    "note": "Search metadata is not full text or independent return evidence. Earlier title/topic searches also supported discovery; this is the recorded final fallback batch."
+  },
+  "owned_zn_inventory": [
+    {
+      "path": "data/ZN_1min_2018.csv",
+      "bytes": 19642495,
+      "header": "date,time,open,high,low,close,volume",
+      "first_time_fields": [
+        "20180101",
+        "1701"
+      ]
+    },
+    {
+      "path": "data/ZN_1min_2019.csv",
+      "bytes": 20338787,
+      "header": "date,time,open,high,low,close,volume",
+      "first_time_fields": [
+        "20190101",
+        "1701"
+      ]
+    },
+    {
+      "path": "data/ZN_1min_2020.csv",
+      "bytes": 20677427,
+      "header": "date,time,open,high,low,close,volume",
+      "first_time_fields": [
+        "20200101",
+        "1701"
+      ]
+    },
+    {
+      "path": "data/ZN_1min_2021.csv",
+      "bytes": 21159781,
+      "header": "date,time,open,high,low,close,volume",
+      "first_time_fields": [
+        "20210103",
+        "1701"
+      ]
+    },
+    {
+      "path": "data/ZN_1min_2022.csv",
+      "bytes": 21486272,
+      "header": "date,time,open,high,low,close,volume",
+      "first_time_fields": [
+        "20220102",
+        "1701"
+      ]
+    }
+  ],
+  "duration_forecast_search": {
+    "queries": [
+      "site.bloombergindices.com \"Treasury\" \"extension\" \"forecast\" historical",
+      "site.data.bloomberglp.com \"duration extension\" \"forecast\" index"
+    ],
+    "provider_methodology": "https://data.bloomberglp.com/professional/sites/27/Fixed-Income-Index-Methodology.pdf",
+    "free_example": "https://archr.com/wp-content/uploads/2020/03/2020-03-30-Summary_Mar_Index_Duration_Changes_and_.pdf",
+    "access": "4-page provider publication on public mirror read via connected reader, no local download/hash",
+    "finding": "March2020 example has a pre-month-end forecast field, index duration as of2020-03-27. Historical publication/receipt timing and a complete2018–22 panel were not acquired. No return/forecast calibration performed."
+  }
+}

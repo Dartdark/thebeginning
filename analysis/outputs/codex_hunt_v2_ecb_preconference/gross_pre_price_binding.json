@@ -1,0 +1,124 @@
+{
+  "prereg": "3b995614ea4a38e53ad3d7cc33cf28b87b0df49d",
+  "implementation_commit": "2d0a14dd34b38dfccdf4830b6b4e932b4740d480",
+  "hashes": {
+    "analysis/codex_hunt_v2_ecb_gross.py": "93f9f509054859db5790f09c5261dbffd2400e0b7a11d2cbeb2b52ccf8acc2a3",
+    "agents/codex/plans/hunt_v2_ecb_preconference.md": "13ea3410468323554ff5a4716a18c15fc81b61127ef7b74c3443194b86268c58",
+    "agents/codex/research/hunt_v2_ecb_release_source.md": "6f3f438a77f324baf3d5a030e05af0078d6678ca1d2b2f4c2c066233004fa299",
+    "analysis/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "analysis/codex_hunt_v2_ldf_delta.py": "8fb312196af06691ee27ca34e532df7c536f107332c865d9794bff70260dd494",
+    "analysis/codex_s03_calendar.py": "705713195b1be61cd648d1b72718442b6cec7581587ca8c537d491cf1312bceb",
+    "analysis/replica.py": "c0ae001152c75395748b0f3fdb4bdcbc589d0a124befce0170ef454c3da6f58f",
+    "agents/codex/RESEARCH_CONTROLS.md": "2537562f9f14acfa58eaf609771c14c0c92e9df8f058180748d877749c99e12f",
+    "analysis/outputs/codex_hunt_v2_ecb_preconference/calendar_attempt.json": "c3bdb54b22548e897a7db4fb40f821ce6b186cfb6ab3059bded185be74d4218d",
+    "analysis/outputs/codex_hunt_v2_ecb_preconference/calendar_pre_acquisition_binding.json": "f6633ad7165fc105b7045dd2caaa226e6442b2a0040a4cc42d40d9a7a69bad66",
+    "analysis/outputs/codex_hunt_v2_ecb_preconference/calendar_byte_binding.json": "78b72ac5662b20b0c3a78e797209f9e887bf839a6dc2814020deb6608f7e39a3",
+    "analysis/outputs/codex_hunt_v2_ecb_preconference/calendar_quality.json": "b899e35ef30369c39b874091a729731952801d00f0693549a8be3b1c8868eb56",
+    "analysis/outputs/codex_hunt_v2_ecb_preconference/calendar_design_clocks.csv": "6ecba1c452aa5e0822c664bc3991ca53ee434ba77b765f3d1b834fdecfa33c99",
+    "analysis/outputs/codex_hunt_v2_ecb_preconference/cache/ecb_calendar.partial": "42196f8a922addf05432cf261f3280abd3413e179b3c24df25f9d9054430a0a4",
+    "analysis/outputs/codex_hunt_v2_ecb_preconference/calendar_verified_execution.json": "12f2dc97cfb60ef542888bf39d0ef7ea10025ea2821c7e91b01c45b7731a82bb",
+    "agents/codex/research/hunt_v2_ecb_calendar_admission.json": "a049079a1d3a6380b070261b1f587ac829d8f927d4bb075a0ba259d952b1cbdf",
+    "data/6E_1min_2018.csv": "bf59d9d0a7c81f1292146a5af6739875c196a1217f1a6f010f143830353782d7",
+    "data/6E_1min_2019.csv": "c66d844e14fa0004e1f132062c5e0a447ad6f610385d24b7c5eba7881e6a2e06",
+    "data/6E_1min_2020.csv": "8f8a564229bff845a6cdf2cfa9780304f9d5bcdb96e0db42c32d74b49ea90b91",
+    "data/6E_1min_2021.csv": "063761aee2dcdc1057e542dfca1b9b2e177a03d151ba77d5dd2edd9672201c14",
+    "data/6E_1min_2022.csv": "cfae6c8b4a26cb9cf39ec96a4279fe6b396f53e1cc1b3018ea92a12da9f9ea3f"
+  },
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  },
+  "source_commit": "f9e756cbbca3a0576178412a48e1e374c9c76cfe",
+  "source_URL": "https://raw.githubusercontent.com/chris-cheshire/project-midas-mk7/f9e756cbbca3a0576178412a48e1e374c9c76cfe/midas/data/calendar/ecb.txt",
+  "timezone_provenance": {
+    "zoneinfo": "Python standard library",
+    "system_zone_files_sha256": {
+      "/usr/share/zoneinfo/Europe/Berlin": "5ee475f71a0fc1a32faeb849f8c39c6e7aa66d6d41ec742b97b3a7436b3b0701",
+      "/usr/share/zoneinfo/America/Chicago": "feba326ebe88eac20017a718748c46c68469a1e7f5e7716dcb8f1d43a6e6f686",
+      "/usr/share/zoneinfo/UTC": "8b85846791ab2c8a5463c83a5be3c043e2570d7448434d41398969ed47e3e6f2"
+    },
+    "clock_table_is_bound_before_prices": true,
+    "actual_historical_receipt_not_established_by_timezone_rules": true
+  },
+  "timezone_interpretation": "Europe/Berlin civilrelease/conference->America/Chicago viazoneinfo;nooffsetsearch",
+  "root_source_review": {
+    "accepted_for_frozen_research": true,
+    "calendar_marker_sha256": "12f2dc97cfb60ef542888bf39d0ef7ea10025ea2821c7e91b01c45b7731a82bb",
+    "original_economic_preregistration": "3b995614ea4a38e53ad3d7cc33cf28b87b0df49d",
+    "decision_utc": "2026-10-26T23:55:18.086622+00:00",
+    "scope": "SOURCE_LIMITED_FROZEN_RESEARCH_ONLY, not primary-authenticated calendar/execution or trading approval",
+    "availability_finding": "The roster identifies objective public scheduled ECB policy-announcement days, with exact official archive/title/exclusion bindings. The attributed primary ECB clock-change text supports the regular release clock R; the event identity is public by that scheduled release, rather than first becoming information at the 2026 archive-download date. The only numeric predictor is completed native market prices R+1..R+5 under the ordinary disclosed close-bar convention, followed by the fixed five-minute processing interval to R+10. This distinguishes an event roster from a later-revised numerical index level. Personal historical receipt logs are not categorically required. Per-date latency and first-party date authentication remain unresolved and are not declared verified.",
+    "evidence": [
+      {
+        "kind": "byte-bound event-roster metadata",
+        "source_commit": "f9e756cbbca3a0576178412a48e1e374c9c76cfe",
+        "artifact": "analysis/outputs/codex_hunt_v2_ecb_preconference/calendar_quality.json",
+        "finding": "40 unique monotonic weekdays,8 each2018-22, source header says ECB Monetary policy decisions press-release dates collected from ecb.europa.eu only; explicit emergency/other-decision exclusions; official archive and calendar URLs retained.",
+        "economic_preregistration_commit": "3b995614ea4a38e53ad3d7cc33cf28b87b0df49d"
+      },
+      {
+        "kind": "previously inspected attributed primary methodology, independently confirmed metadata binding",
+        "source": "LorenzoAlessandro/BdF-Project@1a5e1072dc1f21b2d0d5570748ec64c0d03ae9b1",
+        "path": "Scraper/Main_FED_Scraoe/raw/other-gc-decisions/2022/2022-07-22-gc.txt",
+        "git_blob": "ce4f72bb142b4f0321445320eb164b56de1eb2bb",
+        "original_notice": "https://www.ecb.europa.eu/press/pr/date/2022/html/ecb.pr220627~73acedf868.en.html",
+        "finding": "ECB notice announced on27June2022 changes effective21July2022 from13:45/14:30 to14:15/14:45. Header explicitly uses Frankfurt civil CET/CEST; fixed zoneinfo conversion has independent winter/summer/DST/era fixtures."
+      },
+      {
+        "kind": "source claims distinguished from confirmed reading",
+        "finding": "Header also cites ECB Working Paper2281 and2010release clock examples. Those bodies were NOT read here; their quoted passages are secondary header claims, not newly authenticated primary facts."
+      },
+      {
+        "kind": "independent semantic source review",
+        "path": "agents/codex/reviews/hunt_v2_ecb_calendar_source_admission.md",
+        "finding": "Independent reviewer accepted frozen source-limited research before price access, without claiming primary date certification."
+      }
+    ],
+    "limitations": [
+      "Original calendar was compiled2026-10-10; no individual historical calendar/announcement receipt logs retained.",
+      "Target event dates were not independently authenticated against first-party HTTP. The primary mirror monetary-policy-decision subtree covers1999-2000only; it does not corroborate2018-22dates.",
+      "Actual per-date release/receipt latency is unverified. Scheduled-clock trading and first-five-minute price observation are the fixed research protocol; no actual-rate surprise or hindsight volatility event filter is used.",
+      "The reference roster and copied primary text are documentary research sources; before any qualifying promotion obtain fresh independent primary-calendar/raw-spec checks.",
+      "No6E prices, first5 features, held returns or later-period outcomes were opened to choose this decision. Native source-clock/contract/micro-fill limits must remain visible after price access."
+    ],
+    "primary_date_authentication_claimed": false,
+    "per_date_receipt_verified": false,
+    "actual_6E_price_bytes_read_before_decision": false,
+    "no_rule_clock_cost_or_sample_threshold_change": true
+  },
+  "calendar_marker_sha256": "12f2dc97cfb60ef542888bf39d0ef7ea10025ea2821c7e91b01c45b7731a82bb",
+  "calendar_original_implementation_commit": "3b995614ea4a38e53ad3d7cc33cf28b87b0df49d",
+  "native_inventory": [
+    {
+      "path": "data/6E_1min_2018.csv",
+      "bytes": 17364008,
+      "sha256": "bf59d9d0a7c81f1292146a5af6739875c196a1217f1a6f010f143830353782d7",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/6E_1min_2019.csv",
+      "bytes": 17114209,
+      "sha256": "c66d844e14fa0004e1f132062c5e0a447ad6f610385d24b7c5eba7881e6a2e06",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/6E_1min_2020.csv",
+      "bytes": 17330890,
+      "sha256": "8f8a564229bff845a6cdf2cfa9780304f9d5bcdb96e0db42c32d74b49ea90b91",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/6E_1min_2021.csv",
+      "bytes": 17201888,
+      "sha256": "063761aee2dcdc1057e542dfca1b9b2e177a03d151ba77d5dd2edd9672201c14",
+      "header": "date,time,open,high,low,close,volume"
+    },
+    {
+      "path": "data/6E_1min_2022.csv",
+      "bytes": 17480228,
+      "sha256": "cfae6c8b4a26cb9cf39ec96a4279fe6b396f53e1cc1b3018ea92a12da9f9ea3f",
+      "header": "date,time,open,high,low,close,volume"
+    }
+  ]
+}

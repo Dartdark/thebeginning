@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "source_id": "ssrn:7601879",
+  "status": "partial_source_data_not_test_ready",
+  "provider_forecast_rows": 4,
+  "institutional_quote_rows": 3,
+  "distinct_source_urls": 6,
+  "design_months": 60,
+  "design_months_with_original_provider_table": 3,
+  "design_months_with_any_numeric_observation": 6,
+  "design_months_missing_original_provider_forecast": 57,
+  "provider_rows_outside_design": 1,
+  "verified_original_available_at_rows": 0,
+  "test_eligible_months": 0,
+  "source_pdf_bytes_obtained": 0,
+  "paper_full_text_obtained": false,
+  "new_return_trials": 0,
+  "file_sha256": {
+    "agents/codex/inputs/scout_acquisition_20261029/duration/observations.json": "d62053433b6406565c1af455873f373f54282af05e906f38d16df06aeeeaf196",
+    "agents/codex/inputs/scout_acquisition_20261029/duration/provider_forecasts.csv": "1e26fe91dc903566125f0bc606af2ec4c03183b3867788af5986b1254da5fc3e",
+    "agents/codex/inputs/scout_acquisition_20261029/duration/institutional_quotes.csv": "54d1098e196f8d85dbe95f755a606c3328424ba9a601eeb621aec011ce8673eb",
+    "agents/codex/inputs/scout_acquisition_20261029/duration/coverage_2018_2022.csv": "6c536a373d190028fc32b997126a552eed7e3148fcf5f7ffad61d4eb2e9e408c"
+  },
+  "script_path": "analysis/codex_acquire_duration_free_data.py",
+  "script_sha256": "b2489ebfbab67875054e8919b313fd8b5c39180ee823e92082aa58733cd905fd",
+  "python": "/workspace/venvs/thebeginning/bin/python",
+  "reproduction": "python analysis/codex_acquire_duration_free_data.py",
+  "limits": [
+    "CSV facts were manually transcribed from connected-reader sources; source PDFs are not redistributed.",
+    "As-of dates, issue dates and market-table update clocks do not prove original publication/receipt.",
+    "A retrospective August2020 reference stays known from its November2020 source, never backdated.",
+    "No missing month, original publication time, forecast or return is imputed.",
+    "Mixed source types remain in separate CSVs; partial facts are not a historical source-parity panel."
+  ]
+}

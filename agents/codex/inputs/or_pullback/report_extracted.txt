@@ -1,0 +1,132 @@
+=== PAGE 1 ===
+F9B · NQ  /  STRATEGY RESEARCH NOTE 04.10.2026
+// FINAL RESEARCH NOTE  ·  NQ FUTURES  ·  5-MINUTE
+OPENING-RANGEPULLBACK
+Buy the ﬁrst pullback that holds an opening-range breakout. Selected on 2021–
+23, conﬁrmed on a test period and a sealed holdout — and checked, candidly,
+against the eleven years (2010–2020) it was never built on.
++$12.6
+AVG NET TRADE · 1
+MNQ
+1.23
+PROFIT FACTOR 2021–
+26
+t 3.8
+1,665 TRADES
+6 / 6
+POSITIVE YEARS 2021–
+26
+Bottom line. A real, steady edge in the post-2020 Nasdaq market — every year since 2021 positive, the sealed
+holdout included — with no edge at all in 2010–2020. Trade it as a regime strategy: small size, live monitoring,
+a written switch-oﬀ rule.
+INSTRUMENT
+NQ / MNQ
+TIMEFRAME
+5 min (+1 min ﬁlls)
+SAMPLE
+1,665 trades
+PERIOD
+2021 – 07/2026
+OPENING-RANGE PULLBACK · NQ FUTURES 01 / 05
+
+=== PAGE 2 ===
+F9B · NQ  /  STRATEGY RESEARCH NOTE 01 / HYPOTHESIS
+01 / HYPOTHESIS & RULES
+Wait for the break to be defended
+Initiative at the open, conﬁrmed by a pullback that fails to re-enter the range.
+A break of the ﬁrst ﬁfteen minutes' range shows one side taking initiative. Buying the break itself often buys the top
+of the impulse. Waiting for the ﬁrst counter-colour 5-minute candle that still closes outside the range enters at a
+better price — and only after the market has shown it is defending the break. The 15-minute range, 5-minute
+conﬁrmation and ﬁxed bracket were chosen in a structured search over opening-range variants on 2021–23 data,
+then frozen.
+Execution assumptions. Entry at the signal bar's close; exits on 1-minute bars; 1 point per MNQ round trip (≈
+commission + one tick of slippage each side). Fixed size, no averaging, no scaling.
+Opening range = high and low of 09:30–09:45 New York time.01
+Long: armed once a 5-minute bar closes above the range high. Trigger = the ﬁrst later red bar that still closes
+above it. Enter at that close.
+02
+Short: mirror image — armed by a close below the range low; trigger = the ﬁrst later green bar still closing
+below it.
+03
+One trigger per side per day; a trigger blocked by a guard still uses up that side.04
+Bracket: stop 50 points, target 100 points from entry. If both are touched in the same minute, the stop is
+assumed ﬁrst.
+05
+Time exit: ﬂat at 15:55. Guards: one position at a time, max 2 trades and 2 losing trades per day, entries on
+bars closing 09:35–15:30.
+06
+OPENING-RANGE PULLBACK · NQ FUTURES 02 / 05
+
+=== PAGE 3 ===
+F9B · NQ  /  STRATEGY RESEARCH NOTE 02 / RESULTS
+02 / RESULTS
+Selection, test, sealed holdout
+1 MNQ, net of costs. The holdout was opened once, after the rules were frozen.
+PERIOD TRADES WIN PF AVG $ NET $ MAX DD $ T
+2021–2023 · selection 902 45% 1.25 +13.35 +12,046 -1,540 +3.04
+2024 – Jul 2025 · test 477 40% 1.17 +9.58 +4,568 -1,868 +1.54
+Aug 2025 – Jul 2026 · sealed holdout 286 42% 1.27 +15.51 +4,434 -1,428 +1.86
+2021 – 2026 · all 1,665 43% 1.23 +12.64 +21,048 -1,868 +3.83
+Longs 883 44% 1.24 +13.06 +11,530 -1,344 +2.93
+Shorts 782 42% 1.21 +12.17 +9,518 -1,876 +2.48
+Cumulative net P&L per MNQ, 2010–2026. Shaded: the 2021+ period the rules were developed and validated on.
+Low win rate by design. Targets are twice the stop, so
+43% winners is enough. Exits 2021–26: 887 stops, 495
+targets, 283 at 15:55.
+Both sides work. Longs +$13.1 and shorts +$12.2 per
+trade, proﬁt factors 1.24 and 1.21 — the edge is not a
+disguised long-only drift.
+OPENING-RANGE PULLBACK · NQ FUTURES 03 / 05
+
+=== PAGE 4 ===
+F9B · NQ  /  STRATEGY RESEARCH NOTE 03 / REGIME
+03 / THE REGIME QUESTION
+Eleven years it was never built on
+Average net $ per trade per MNQ, by year. Every year 2010–2017 negative; every year since 2021 positive.
+CHECK RESULT READING
+Same rules, NQ 2010–2020 2,693 trades · PF 0.94 · −$1.4 · t −1.1 no edge before 2021
+Random direction, same entries, 2010–20 −$1.5 / trade direction carried no information
+then
+Bracket scaled to price (50/100 at NQ 15,000) 2010–20 −$1.3 · 2021–26 +$11.1 not an artifact of ﬁxed points
+ES, same rules scaled to price 2010–20 t −3.5 · 2021–26 t +0.9 does not transfer well to ES
+Gold (GC), scaled, NY session 2017–20 t −0.6 · 2021–26 t −1.4 no edge on gold
+0DTE natural experiment (NQ Tue/Thu expiries,
+Oct 2022)
+Tue/Thu vs Mon/Wed/Fri gain −1.8 bp · t
+−0.4 no 0DTE ﬁngerprint
+Reading. Something changed in NQ around 2020–21 — candidates include the growth of short-dated options,
+the retail/options boom and mega-cap concentration — and the opening-range pullback started to carry
+information on every weekday at once. The cause cannot be pinned down from price data. The edge is real in
+the current market; nobody can say when that market ends.
+OPENING-RANGE PULLBACK · NQ FUTURES 04 / 05
+
+=== PAGE 5 ===
+F9B · NQ  /  STRATEGY RESEARCH NOTE 04 / SETUP
+04 / PROP USE · LIMITS · SETUP
+How to run it
+Thin per-trade edge, steady path, regime-dependent.
+In a prop evaluation. Alone at 2 MNQ under 50K
+LucidFlex-style rules ($3k target, $2k end-of-day trailing
+drawdown, 50% consistency), pass within 60 days: 41%
+(2021–23), 35% (2024–25), 44% (holdout). Better as one
+component of a diversiﬁed set of strategies than as a
+stand-alone evaluation strategy.
+Switch-oﬀ rule. Track the rolling 6-month net proﬁt ÷
+max drawdown; size to zero below half its backtest norm
+and resume when it recovers. Historically this cut the
+2010–16 losses by about three-quarters, at the cost of a
+third of 2021–26 proﬁt.
+Limits.
+Regime dependence — section 03.
+Thin edge — +$12.6 per MNQ ≈ 6 points; two
+extra ticks of slippage a side remove a sixth of it.
+Selection — the rules came from a search; the
+holdout sits inside the same 2021+ regime.
+Fixed points — 50/100 is tuned to 2021–26
+prices; PriceScaled keeps the proportion.
+MultiCharts. Signal PB_F9b_ORPullback.txt. NQ or MNQ, 5-minute bars, bar-close stamps, intra-bar order
+generation oﬀ, Bar Magniﬁer 1 minute. Chart time zone = Exchange; ChartIsCentral = true for Chicago-
+time feeds, false for New-York-stamped bars. Set commission and slippage in Strategy Properties.
+Data: NQ continuous 1-minute bars 2010-06 – 2026-07; ES 2010–2026; GC 2017–2026. Win rate = trades with positive net P&L. Proﬁt factor =
+gross wins ÷ gross losses. Max DD = peak-to-trough closed-trade equity. Research only — not trading advice.
+OPENING-RANGE PULLBACK · NQ FUTURES 05 / 05

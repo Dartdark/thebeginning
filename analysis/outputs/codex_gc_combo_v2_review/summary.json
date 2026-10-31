@@ -1,0 +1,180 @@
+{
+  "scope": "Source/previously reported arithmetic only",
+  "verdict": "WATCH / NEEDS DATA; no current-plan addition established",
+  "claude_ref": "a67035be4189b493098c80f1def979348520fd5d",
+  "codex_parent": "df70a580bfcd906f90a4ff4f176a7cc84acdb81b",
+  "new_strategy_return_trials": 0,
+  "account_simulations": 0,
+  "input_sha256": {
+    ".gitattributes": "012b507da5832e4fd82883048ff1874d93226cf3db3749656265313a0480e447",
+    "GCCOMBO.txt": "0202590d61499d924b5382aab32356660b920c3d6111a7d0316fcf63d380b9e8",
+    "report.pdf": "bfaf43b5172b347ce1aa13dc301c7956fe156b27b095b33a32711c2ff1a0aa54",
+    "report_extracted.txt": "f84385294af39c6feeede1fe8408ac3cecc3d1e2b8c02a491af562c9359788ff",
+    "strategy.txt": "228f4fd3c3f80f6614d9f47c036801d6fd80345d94ce632a34a089c92f74bae3"
+  },
+  "script_sha256": "4a6fa60443436d8fbc7c1498590177dedda5c2e73fe774eb0c89527a846cb50a",
+  "companion_file": {
+    "rows": 2605,
+    "first_date": "2016-10-03",
+    "last_date": "2026-09-25",
+    "columns": [
+      "Date",
+      "Time",
+      "Open",
+      "High",
+      "Low",
+      "Close",
+      "Volume"
+    ],
+    "timestamps": [
+      "05:00:00"
+    ],
+    "open_values": [
+      "10",
+      "11"
+    ],
+    "close_values": [
+      "9",
+      "10",
+      "11"
+    ],
+    "volumes": [
+      "1"
+    ],
+    "duplicate_dates": 0,
+    "non_weekdays": 0,
+    "missing_weekdays": 0,
+    "invalid_ohlc": 0,
+    "encoded_decouple_values": [
+      "0",
+      "1"
+    ],
+    "encoded_gld_values": [
+      "-1",
+      "0",
+      "1"
+    ],
+    "timestamp_is_publication_evidence": false
+  },
+  "source_flags": {
+    "default_gld_and_decouple_on": true,
+    "data3_date_gate": true,
+    "blend_continues_without_data3": true,
+    "blend_dollar_stop_off": true,
+    "risk_sizing_off": true,
+    "optional_risk_budget_5000": true,
+    "stretch_stop_prearmed": true,
+    "optional_blend_cap_post_position": true,
+    "blend_exact_clock_exit": true,
+    "stretch_exact_clock_exit": true,
+    "explicit_early_close_code": false,
+    "stretch_range_is_mean_session_hl": true,
+    "data1_up_down_flow": true,
+    "true_bid_ask_signed_data_supplied": false,
+    "gld_and_decouple_generator_supplied": false
+  },
+  "source_defaults": {
+    "ETminusChart": "1",
+    "MinScore": "2",
+    "ConvictionScore": "3",
+    "BaseQty": "1",
+    "ConvictionQty": "2",
+    "AnchorET": "820",
+    "DecisionET": "1000",
+    "BlendExitET": "1330",
+    "OilZ": "1.5",
+    "OilLen": "20",
+    "StretchQty": "1",
+    "StretchK": "0.5",
+    "StopATR": "0.505",
+    "TargetR": "2.0",
+    "AtrLen": "15",
+    "StretchStartET": "820",
+    "StretchEndET": "1500",
+    "StretchExitET": "1600",
+    "MaxSigPerSess": "2",
+    "SigGapBars": "60",
+    "UseDollarStop": "false",
+    "MaxLossUSD": "5000",
+    "UseRiskSizing": "false",
+    "WorstMovePct": "1.8"
+  },
+  "static_missing_data_example": {
+    "A": 1,
+    "B": 1,
+    "C": -1,
+    "D": 0,
+    "E": 0,
+    "five_vote_score": 1,
+    "score_without_data3": 2
+  },
+  "author_reported": {
+    "all_trades": 1204,
+    "net_usd": "225916",
+    "average_usd": "187.64",
+    "win_rate": "0.525",
+    "pf": "1.37",
+    "max_drawdown_usd": "43747",
+    "is_trades": 974,
+    "is_average_usd": "163.71",
+    "oos_trades": 230,
+    "oos_average_usd": "288.98",
+    "oos_win_rate": "0.465",
+    "is_gross_bp": "7.5",
+    "oos_gross_bp": "4.4",
+    "oos_t_gross_bp": "0.9",
+    "programme_trials": 10831,
+    "author_says_dsr_fails": true,
+    "direction_pairs_claimed": 884,
+    "lucid_pass": "0.90",
+    "lucid_bust": "0.049"
+  },
+  "by_year_counts": {
+    "2017": 29,
+    "2018": 122,
+    "2019": 136,
+    "2020": 123,
+    "2021": 133,
+    "2022": 156,
+    "2023": 119,
+    "2024": 156,
+    "2025": 157,
+    "2026": 73
+  },
+  "arithmetic": {
+    "counts_reconcile": true,
+    "year_counts_reconcile": true,
+    "weighted_net_from_rounded_period_means": "225918.94",
+    "difference_from_reported_net": "2.94",
+    "mean_rounding_tolerance": "6.020",
+    "rounded_means_consistent": true,
+    "reported_2018_2022_trades": 670,
+    "mfe_mae_daily_paths_and_net_return_sd_supplied": false
+  },
+  "contract_arithmetic": {
+    "gc_multiplier": 100,
+    "mgc_multiplier": 10,
+    "gc_tick_usd": 10,
+    "mgc_tick_usd": 1,
+    "commission_per_gc_side": "2.30",
+    "two_one_tick_sides_gc_cost": "24.60",
+    "illustrative_same_count_mgc_dd": "4374.7",
+    "apex_initial_eod_trail_usd": 2000,
+    "is_account_simulation": false,
+    "is_measured_mgc_result": false,
+    "changing_data1_to_mgc_also_changes_flow_and_vwap_inputs": true
+  },
+  "repo_gc_header": "date,time,open,high,low,close,volume",
+  "author_preregistry_trade_list_settings_and_generator_supplied": false,
+  "next_evidence": [
+    "Point-in-time Data3 generator and dated raw inputs",
+    "GC up/down trade-volume history matching chart/vendor",
+    "Exact-source MultiCharts settings and timestamped trade/daily-path export",
+    "Original freeze and predeclared marks / selection ledger",
+    "Holiday and signal-vs-execution symbol specification"
+  ],
+  "sources": [
+    "https://www.cmegroup.com/education/lessons/product-gold",
+    "https://www.cmegroup.com/education/lessons/micro-gold-and-micro-silver-futures-product-overview"
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "sha": "16145ab15c09fa9489a58ef651f5711c1ef2599f",
+  "fixtures": [
+    {
+      "kind": "stop",
+      "slips": 2,
+      "exit": 89.5,
+      "exit_minute_worst_per_MNQ": -40.725,
+      "close_per_MNQ": -21.725
+    },
+    {
+      "kind": 0,
+      "slips": 2,
+      "exit": 89.5,
+      "exit_minute_worst_per_MNQ": -21.725,
+      "close_per_MNQ": -21.725
+    },
+    {
+      "kind": "target",
+      "slips": 2,
+      "exit": 109.5,
+      "exit_minute_worst_per_MNQ": 15.275,
+      "close_per_MNQ": 18.275
+    },
+    {
+      "kind": 1,
+      "slips": 1,
+      "exit": 109.75,
+      "exit_minute_worst_per_MNQ": 15.275,
+      "close_per_MNQ": 18.775
+    }
+  ],
+  "ledger_rows": 602,
+  "kind_counts": {
+    "1": 265,
+    "2": 254,
+    "0": 83
+  },
+  "reason_counts": {
+    "target": 265,
+    "time": 254,
+    "stop": 47,
+    "breakeven": 36
+  },
+  "extra_cost_string_vs_numeric_per_NQ": 1325.0,
+  "string_kind_net_minus_ledger_net_per_NQ": -1324.9999999999943,
+  "frozen_recorded_daily_paths": {
+    "holiday_repair_dates": [
+      "2018-05-28",
+      "2022-06-20",
+      "2023-07-03"
+    ],
+    "corrected_minus_original_close_per_MNQ_total": 132.0,
+    "daily_min_changed_days": 48,
+    "daily_min_lift_max_per_MNQ": 58.275000000001455,
+    "daily_min_lift_max_date": "2024-09-18",
+    "examples": [
+      {
+        "date": "2024-09-18",
+        "reason": "stop",
+        "original_daily_low_per_MNQ": -523.225,
+        "corrected_daily_low_per_MNQ": -464.94999999999857,
+        "difference": 58.275000000001455
+      },
+      {
+        "date": "2025-07-16",
+        "reason": "stop",
+        "original_daily_low_per_MNQ": -350.225,
+        "corrected_daily_low_per_MNQ": -301.18499999999915,
+        "difference": 49.04000000000087
+      },
+      {
+        "date": "2021-02-26",
+        "reason": "stop",
+        "original_daily_low_per_MNQ": -364.725,
+        "corrected_daily_low_per_MNQ": -316.6550000000003,
+        "difference": 48.06999999999971
+      },
+      {
+        "date": "2023-12-20",
+        "reason": "stop",
+        "original_daily_low_per_MNQ": -288.225,
+        "corrected_daily_low_per_MNQ": -241.1774999999994,
+        "difference": 47.04750000000058
+      },
+      {
+        "date": "2026-04-23",
+        "reason": "stop",
+        "original_daily_low_per_MNQ": -547.725,
+        "corrected_daily_low_per_MNQ": -502.29499999999973,
+        "difference": 45.43000000000029
+      },
+      {
+        "date": "2022-09-21",
+        "reason": "stop",
+        "original_daily_low_per_MNQ": -392.225,
+        "corrected_daily_low_per_MNQ": -358.35749999999973,
+        "difference": 33.86750000000029
+      }
+    ]
+  },
+  "protective_exit_bar_check": {
+    "matched": 82,
+    "with_excess_adverse": 81,
+    "max_excess_per_MNQ": 60.5,
+    "examples": [
+      {
+        "date": "2026-08-28",
+        "reason": "breakeven",
+        "side": 1,
+        "entry": 29704.5,
+        "exit": 29704.5,
+        "slipped_exit": 29704.0,
+        "raw_time": 1041,
+        "low": 29673.75,
+        "high": 29722.5,
+        "excess_adverse_per_MNQ": 60.5
+      },
+      {
+        "date": "2024-09-18",
+        "reason": "stop",
+        "side": 1,
+        "entry": 19850.25,
+        "exit": 19618.6375,
+        "slipped_exit": 19618.1375,
+        "raw_time": 1406,
+        "low": 19589.0,
+        "high": 19658.0,
+        "excess_adverse_per_MNQ": 58.275000000001455
+      },
+      {
+        "date": "2025-07-16",
+        "reason": "stop",
+        "side": -1,
+        "entry": 22842.25,
+        "exit": 22991.98,
+        "slipped_exit": 22992.48,
+        "raw_time": 1056,
+        "low": 22943.5,
+        "high": 23017.0,
+        "excess_adverse_per_MNQ": 49.04000000000087
+      },
+      {
+        "date": "2021-02-26",
+        "reason": "stop",
+        "side": -1,
+        "entry": 12764.0,
+        "exit": 12921.465,
+        "slipped_exit": 12921.965,
+        "raw_time": 947,
+        "low": 12917.5,
+        "high": 12946.0,
+        "excess_adverse_per_MNQ": 48.06999999999971
+      },
+      {
+        "date": "2023-12-20",
+        "reason": "stop",
+        "side": 1,
+        "entry": 17027.5,
+        "exit": 16907.77375,
+        "slipped_exit": 16907.27375,
+        "raw_time": 1352,
+        "low": 16883.75,
+        "high": 16911.0,
+        "excess_adverse_per_MNQ": 47.04750000000058
+      },
+      {
+        "date": "2026-04-23",
+        "reason": "stop",
+        "side": 1,
+        "entry": 27093.0,
+        "exit": 26842.715,
+        "slipped_exit": 26842.215,
+        "raw_time": 1241,
+        "low": 26819.5,
+        "high": 26864.0,
+        "excess_adverse_per_MNQ": 45.43000000000029
+      }
+    ]
+  }
+}

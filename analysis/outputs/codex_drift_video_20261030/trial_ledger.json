@@ -1,0 +1,41 @@
+{
+  "family": "Existing DriftPullback family; not a new scout discovery",
+  "prior_family": "At least15 prior definitions in drift_pullback_test.py; simplifiedv3 also previously tested",
+  "definitions": [
+    {
+      "id": 1,
+      "name": "Consecutive-loss primary",
+      "selected": true
+    },
+    {
+      "id": 2,
+      "name": "Total-loss robustness",
+      "selected": false
+    },
+    {
+      "id": 3,
+      "name": "Random-side conditional null",
+      "draws": 100
+    },
+    {
+      "id": 4,
+      "name": "Random-time conditional null",
+      "draws": 100
+    },
+    {
+      "id": 5,
+      "name": "Higher-fee/tick stress with net-loss-cap replay"
+    }
+  ],
+  "implementation_runs": [
+    {
+      "commit": "ae629418567183d7b21c21c0c803027d801cd09e",
+      "status": "Half-day cutoff implementation mismatch; failed screen preserved"
+    },
+    {
+      "commit": "3f20093",
+      "status": "Restored frozen cutoff; no threshold/rule search; failed screen"
+    }
+  ],
+  "later_stages": "Not earned; no recent or account returns"
+}

@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "checks": {
+    "zero_price_no_qty": true,
+    "negative_price_no_qty": true,
+    "nan_atr_no_qty": true,
+    "risk_cap_is_binding": true,
+    "notional_cap_is_binding": true,
+    "reference_margin_cap_is_binding": true,
+    "MES_published_open_value_missing_multiplier": true,
+    "MNQ_published_open_value_missing_multiplier": true,
+    "CL_published_open_value_missing_multiplier": true,
+    "GC_published_open_value_missing_multiplier": true,
+    "atr_separate_assets_and_simple_mean": true,
+    "55_prior_rows_required": true,
+    "breakout_excludes_current_high": true,
+    "inside_band_carries_and_resizes_position": true,
+    "flat_inside_band_does_not_remember_direction": true,
+    "opposite_breakout_delta_covers_and_reverses": true,
+    "active_pending_order_skips_symbol": true
+  },
+  "count": 17,
+  "return_trials": 0,
+  "source_sha256": "27ec4cb4922b55a77d8fbb7a1c80f3b6b82d0e88d7039819cc52037f14f8949f",
+  "code_sha256": "f536b8588739aaabc5e4310ce668cc7eff68119abc3faad744a4c3da081e6785",
+  "performance_status": "Published claims only; no historical return replication",
+  "never_executed": [
+    "_credentials",
+    "main",
+    "Backtester",
+    "authenticated API"
+  ],
+  "source_fact_url": "https://backtester.quantjourney.cloud/strategies/example-orders-20-futures-donchian-contracts/performance_report.json",
+  "source_fact_snapshot_sha256": "3bf4ecea5515b9655770775043069b35e4214ef5f91642799878a3b3500504c9",
+  "limits": [
+    "Sizing bounds are necessary notional-only conditions at2025-12-31prices; ATR/margin can reduce further",
+    "Reference margins are source constants, not current broker requirements",
+    "Synthetic rule checks are not economic evidence or an independent backtest"
+  ]
+}

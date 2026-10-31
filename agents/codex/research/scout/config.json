@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "scheduled_agent_configured": true,
+  "automation_id": "6ae3863373308191b6f40c63f610a800",
+  "cadence": "daily",
+  "timezone": "America/Los_Angeles",
+  "schedule": "BEGIN:VEVENT\nDTSTART:20261029T174623Z\nRRULE:FREQ=DAILY\nEND:VEVENT",
+  "schedule_status": "created_enabled",
+  "status_verified_at": "2026-10-29T17:45:44.867Z",
+  "status_note": "Enabled when created. This local view does not query live scheduler status; app automation settings are authoritative.",
+  "local_discovery_only": true,
+  "automatic_backtests": false,
+  "scheduled_research": "gated_agent",
+  "workflow_path": "agents/codex/research/scout/WORKFLOW.md",
+  "budget": {
+    "max_hypotheses": 10,
+    "max_economic_definitions": 30,
+    "max_full_reviews_per_cycle": 3,
+    "max_new_hypotheses_per_cycle": 1
+  },
+  "notifications": "Completed material test/portfolio outcomes or genuine user-action blockers only. A worthwhile lead triggers continued development/testing, not a standalone alert.",
+  "research_objective": "Find academic market hypotheses that can become testable trading strategies for evaluation, funded or personal portfolios. Execution/risk references support this objective.",
+  "blocked_lead_policy": "Record specific worthwhile missing-data leads once and move on. No repeated unchanged acquisition loops; parked leads do not preempt compatible research.",
+  "prompt_updated_at": "2026-10-29 22:28:22 UTC",
+  "prompt_update_receipt": "agents/codex/research/scout/runs/20261029_persistent_search.json",
+  "handoff_policy": "Proceed autonomously through all earned gates and current-portfolio BASE/ADD/REPLACE/EMPTY comparisons; provide reproducible results for the user to send to Claude. Independent verification remains pending until completed.",
+  "search_profile_path": "agents/codex/research/scout/SEARCH_PROFILE.md",
+  "discovery_priority": "owned_data_compatible_hypotheses_first",
+  "batch_checkpoint_policy": "Per-cycle limits are checkpoints within persistent discovery; blocked/rejected leads do not end the authorized search. Overall10hypotheses/30definitions and all gates preserved."
+}

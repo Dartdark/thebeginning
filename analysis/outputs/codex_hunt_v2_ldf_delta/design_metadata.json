@@ -1,0 +1,55 @@
+{
+  "phase": "design",
+  "period": "2018-22 only",
+  "daily_schema": {
+    "columns": [
+      "date",
+      "BASE",
+      "LEGACY",
+      "STRICT30"
+    ],
+    "date_format": "YYYY-MM-DD",
+    "net_unit": "USD per 1 MNQ",
+    "commission_rt": 1.24,
+    "slippage_per_market_stop_fill": 0.5,
+    "fill_count_per_trade": 2
+  },
+  "warmup_first_eligible_date": "2018-01-22",
+  "design_last_date": "2022-12-30",
+  "daily_calendar_basis": "All normal and early cash days after first known prior-ATR warmup; excluded entry days remain zero.",
+  "native_audit": {
+    "source": "native",
+    "identical_duplicate_rows": 0,
+    "conflicting_duplicate_keys": 0,
+    "unique_rows": 1751608
+  },
+  "execution_audit": {
+    "base_replays": 1,
+    "frozen_base_events": 485,
+    "executed_base_tickets": 485,
+    "total_invalid_held_minutes": 0,
+    "exits_after_1430": 0,
+    "exits_after_1559": 0,
+    "target_exits": 0,
+    "entry_bar_stops": 0,
+    "no_queued_signal_or_counterfactual_reentry": true,
+    "source_eligibility_not_regenerated": true,
+    "micro_fill_parity_verified": false,
+    "price_paths": "NQ native bars with separately calculated MNQ fees"
+  },
+  "v2_evaluations_before": 0,
+  "v2_evaluations_after": 3,
+  "v2_hypotheses": 1,
+  "prior_t6_evaluations": 65,
+  "cumulative_t6_plus_v2_evaluations": 68,
+  "new_strict_formulas": 1,
+  "repeated_reference_models": [
+    "BASE",
+    "LEGACY"
+  ],
+  "nonexecutable_random_subset_paths": 2000,
+  "initial_zero_drawdown_correction": true,
+  "validation_run": false,
+  "account_tests_run": false,
+  "next_action": "Immediate current personal19 design bench if passed; otherwise close H01. No additional robustness/2023+ access here."
+}

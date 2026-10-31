@@ -1,0 +1,58 @@
+{ NQ bar exporter - MultiCharts PowerLanguage indicator
+
+  Writes this chart's bars to CSV files, one file per year:
+    <Folder><FilePrefix><year>.csv   e.g. C:\NQdata\NQ_1min_2018.csv
+  with columns: date (YYYYMMDD), time (HHMM, bar close, chart time zone),
+  open, high, low, close, volume.
+
+  Only bars closing between StartTime and EndTime are written, which keeps
+  the files small enough to upload (about 5 MB per year for 1-minute bars).
+  If StartTime is later than EndTime the window runs past midnight, e.g.
+  StartTime(1516) EndTime(759) writes the overnight bars from 15:16 CT to
+  07:59 CT the next morning (about 10 MB per year). Use a different
+  FilePrefix for that export (e.g. "NQ_1min_ON_") so it does not replace the
+  08:00-15:15 files.
+
+  Use: create the folder first (e.g. C:\NQdata), then add this indicator to
+  a 1-minute @NQ chart (Exchange time zone) loaded back to 12/01/2017. The
+  files are complete once the chart has finished calculating. For full-day
+  exports of other markets use StartTime 0 and EndTime 2359, and set Decimals
+  to the contract's precision (ZN 6, 6E 5). Every time the
+  indicator recalculates, the files are deleted and written again from the
+  start, so they never contain duplicate rows. }
+
+Inputs:
+	Folder("C:\NQdata\"),   { must already exist; keep the trailing backslash }
+	FilePrefix("NQ_1min_"),
+	StartTime(800),          { first bar close time written (CT) }
+	EndTime(1515),           { last bar close time written (CT); earlier than StartTime = past midnight }
+	Decimals(2);             { price decimals: 2 for NQ / ES / GC / CL, 6 for ZN (1/64 ticks), 5 for 6E }
+
+Variables:
+	FileName(""), BarYear(0), LastYear(0), Row(""), Y(0), InWindow(false);
+
+{ Start from empty files on every (re)calculation }
+Once begin
+	for Y = 2000 to 2040 begin
+		FileDelete(Folder + FilePrefix + NumToStr(Y, 0) + ".csv");
+	end;
+end;
+
+if StartTime <= EndTime then
+	InWindow = Time >= StartTime and Time <= EndTime
+else
+	InWindow = Time >= StartTime or Time <= EndTime;
+
+if BarStatus(1) = 2 and InWindow then begin
+	BarYear = Year(Date) + 1900;
+	FileName = Folder + FilePrefix + NumToStr(BarYear, 0) + ".csv";
+	if BarYear <> LastYear then begin
+		FileAppend(FileName, "date,time,open,high,low,close,volume" + NewLine);
+		LastYear = BarYear;
+	end;
+	Row = NumToStr(Date + 19000000, 0) + "," + NumToStr(Time, 0) + ","
+		+ NumToStr(Open, Decimals) + "," + NumToStr(High, Decimals) + ","
+		+ NumToStr(Low, Decimals) + "," + NumToStr(Close, Decimals) + ","
+		+ NumToStr(Ticks, 0);
+	FileAppend(FileName, Row + NewLine);
+end;

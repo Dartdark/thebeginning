@@ -1,0 +1,566 @@
+{
+  "seed": 20261029,
+  "paths_per_null": 1000,
+  "event_count": 411,
+  "baseline_complete": true,
+  "baseline": {
+    "trades": 408,
+    "win": 0.48284313725490197,
+    "avg": 12.000196078431365,
+    "annual": 986.2607194244598,
+    "sharpe": 0.5352552257053079,
+    "sortino": 0.8532569286902619,
+    "profit_factor": 1.1911624721713998,
+    "max_dd": 2406.599999999998,
+    "calmar": 0.40981497524493493,
+    "ulcer": 1.9231598152138443,
+    "ulcer_perf": 1.0256669379448253,
+    "net_total": 4896.079999999997,
+    "trade_t": 1.2179408013675908,
+    "daily_NW5": 1.1951533180949774
+  },
+  "baseline_stop_first": {
+    "trades": 408,
+    "win": 0.48284313725490197,
+    "avg": 12.000196078431365,
+    "annual": 986.2607194244598,
+    "sharpe": 0.5352552257053079,
+    "sortino": 0.8532569286902619,
+    "profit_factor": 1.1911624721713998,
+    "max_dd": 2406.599999999998,
+    "calmar": 0.40981497524493493,
+    "ulcer": 1.9231598152138443,
+    "ulcer_perf": 1.0256669379448253,
+    "net_total": 4896.079999999997,
+    "trade_t": 1.2179408013675908,
+    "daily_NW5": 1.1951533180949774
+  },
+  "baseline_path": {
+    "attempted": 411,
+    "admitted": 408,
+    "blocked": 3,
+    "known_trades": 408,
+    "unknown_trades": 0,
+    "complete": true,
+    "unknown_states": "{}",
+    "known_net_subtotal": 4896.08,
+    "net_cents": 489608,
+    "dd_cents": 240660,
+    "long_trades": 204,
+    "short_trades": 204,
+    "exposure_minutes": 106878.0,
+    "known_exposure_minutes": 106878.0,
+    "long_minutes_known": 54052.0,
+    "short_minutes_known": 52826.0,
+    "earlier_attempts": 0,
+    "equal_attempts": 411,
+    "later_attempts": 0,
+    "earlier_admitted": 0,
+    "equal_admitted": 408,
+    "later_admitted": 0,
+    "collision_count": 0,
+    "commission_known": 505.92,
+    "slippage_known": 408.0,
+    "extra_cost_net": 3982.16,
+    "stop_first_net": 4896.08,
+    "stop_first_dd_cents": 240660,
+    "stop_first_net_cents": 489608,
+    "trades": 408,
+    "win": 0.48284313725490197,
+    "avg": 12.000196078431365,
+    "annual": 986.2607194244598,
+    "sharpe": 0.5352552257053079,
+    "sortino": 0.8532569286902619,
+    "profit_factor": 1.1911624721713998,
+    "max_dd": 2406.599999999998,
+    "calmar": 0.40981497524493493,
+    "ulcer": 1.9231598152138443,
+    "ulcer_perf": 1.0256669379448253,
+    "net_total": 4896.079999999997,
+    "trade_t": 1.2179408013675908,
+    "daily_NW5": 1.1951533180949774
+  },
+  "baseline_daily_verified": true,
+  "statistic_basis": "Native-cost total net; exact integer cents and ties; 19p is limited family context.",
+  "RT_scope": "Noncausal same-session risk/date-matched counterfactual; not a promotion placebo.",
+  "RS": {
+    "complete_paths": 1000,
+    "unknown_paths": 0,
+    "ties_profit": 0,
+    "ties_dd": 0,
+    "ties_joint": 0,
+    "p_profit": 0.1068931068931069,
+    "p_profit_bounds": [
+      0.1068931068931069,
+      0.1068931068931069
+    ],
+    "p_profit_19": 1.0,
+    "p_profit_19_bounds": [
+      1.0,
+      1.0
+    ],
+    "baseline_profit_rank_bounds": [
+      107,
+      107
+    ],
+    "p_dd": 0.1008991008991009,
+    "p_dd_bounds": [
+      0.1008991008991009,
+      0.1008991008991009
+    ],
+    "p_dd_19": 1.0,
+    "p_dd_19_bounds": [
+      1.0,
+      1.0
+    ],
+    "baseline_dd_rank_bounds": [
+      101,
+      101
+    ],
+    "p_joint": 0.056943056943056944,
+    "p_joint_bounds": [
+      0.056943056943056944,
+      0.056943056943056944
+    ],
+    "p_joint_19": 1.0,
+    "p_joint_19_bounds": [
+      1.0,
+      1.0
+    ],
+    "baseline_joint_rank_bounds": [
+      57,
+      57
+    ],
+    "quantiles": {
+      "net_total": {
+        "5": -6387.678000000003,
+        "50": 317.35999999999757,
+        "95": 6349.200999999996
+      },
+      "admitted": {
+        "5": 392.0,
+        "50": 396.0,
+        "95": 401.0
+      },
+      "known_exposure_minutes": {
+        "5": 102547.35,
+        "50": 104480.5,
+        "95": 106415.25
+      },
+      "exposure_minutes": {
+        "5": 102547.35,
+        "50": 104480.5,
+        "95": 106415.25
+      },
+      "long_trades": {
+        "5": 182.0,
+        "50": 198.0,
+        "95": 214.0
+      },
+      "short_trades": {
+        "5": 182.0,
+        "50": 198.0,
+        "95": 215.0
+      },
+      "earlier_admitted": {
+        "5": 0.0,
+        "50": 0.0,
+        "95": 0.0
+      },
+      "equal_admitted": {
+        "5": 392.0,
+        "50": 396.0,
+        "95": 401.0
+      },
+      "later_admitted": {
+        "5": 0.0,
+        "50": 0.0,
+        "95": 0.0
+      },
+      "extra_cost_net": {
+        "5": -7274.606,
+        "50": -576.03,
+        "95": 5455.776999999999
+      },
+      "stop_first_net": {
+        "5": -6387.678,
+        "50": 317.36,
+        "95": 6349.200999999999
+      }
+    },
+    "stop_first": {
+      "complete_paths": 1000,
+      "unknown_paths": 0,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "p_profit": 0.1068931068931069,
+      "p_profit_bounds": [
+        0.1068931068931069,
+        0.1068931068931069
+      ],
+      "p_profit_19": 1.0,
+      "p_profit_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_profit_rank_bounds": [
+        107,
+        107
+      ],
+      "p_dd": 0.1008991008991009,
+      "p_dd_bounds": [
+        0.1008991008991009,
+        0.1008991008991009
+      ],
+      "p_dd_19": 1.0,
+      "p_dd_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_dd_rank_bounds": [
+        101,
+        101
+      ],
+      "p_joint": 0.056943056943056944,
+      "p_joint_bounds": [
+        0.056943056943056944,
+        0.056943056943056944
+      ],
+      "p_joint_19": 1.0,
+      "p_joint_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_joint_rank_bounds": [
+        57,
+        57
+      ]
+    },
+    "unknown_admitted_states": {},
+    "artifacts": {
+      "path_summary": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RS/path_summary.csv",
+      "paths": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RS/paths.npz"
+    }
+  },
+  "RT": {
+    "complete_paths": 1000,
+    "unknown_paths": 0,
+    "ties_profit": 0,
+    "ties_dd": 0,
+    "ties_joint": 0,
+    "p_profit": 1.0,
+    "p_profit_bounds": [
+      1.0,
+      1.0
+    ],
+    "p_profit_19": 1.0,
+    "p_profit_19_bounds": [
+      1.0,
+      1.0
+    ],
+    "baseline_profit_rank_bounds": [
+      1001,
+      1001
+    ],
+    "p_dd": 0.999000999000999,
+    "p_dd_bounds": [
+      0.999000999000999,
+      0.999000999000999
+    ],
+    "p_dd_19": 1.0,
+    "p_dd_19_bounds": [
+      1.0,
+      1.0
+    ],
+    "baseline_dd_rank_bounds": [
+      1000,
+      1000
+    ],
+    "p_joint": 0.999000999000999,
+    "p_joint_bounds": [
+      0.999000999000999,
+      0.999000999000999
+    ],
+    "p_joint_19": 1.0,
+    "p_joint_19_bounds": [
+      1.0,
+      1.0
+    ],
+    "baseline_joint_rank_bounds": [
+      1000,
+      1000
+    ],
+    "quantiles": {
+      "net_total": {
+        "5": 16070.663999999999,
+        "50": 19723.759999999995,
+        "95": 23398.777
+      },
+      "admitted": {
+        "5": 384.0,
+        "50": 387.0,
+        "95": 390.0
+      },
+      "known_exposure_minutes": {
+        "5": 89837.95,
+        "50": 92697.5,
+        "95": 95796.15
+      },
+      "exposure_minutes": {
+        "5": 89837.95,
+        "50": 92697.5,
+        "95": 95796.15
+      },
+      "long_trades": {
+        "5": 190.0,
+        "50": 194.0,
+        "95": 198.0
+      },
+      "short_trades": {
+        "5": 188.0,
+        "50": 193.0,
+        "95": 197.0
+      },
+      "earlier_admitted": {
+        "5": 89.0,
+        "50": 101.0,
+        "95": 113.0
+      },
+      "equal_admitted": {
+        "5": 54.0,
+        "50": 67.0,
+        "95": 80.0
+      },
+      "later_admitted": {
+        "5": 204.0,
+        "50": 219.0,
+        "95": 232.04999999999995
+      },
+      "extra_cost_net": {
+        "5": 15199.528,
+        "50": 18853.519999999997,
+        "95": 22527.529
+      },
+      "stop_first_net": {
+        "5": 16070.663999999999,
+        "50": 19723.760000000002,
+        "95": 23398.777
+      }
+    },
+    "stop_first": {
+      "complete_paths": 1000,
+      "unknown_paths": 0,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "p_profit": 1.0,
+      "p_profit_bounds": [
+        1.0,
+        1.0
+      ],
+      "p_profit_19": 1.0,
+      "p_profit_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_profit_rank_bounds": [
+        1001,
+        1001
+      ],
+      "p_dd": 0.999000999000999,
+      "p_dd_bounds": [
+        0.999000999000999,
+        0.999000999000999
+      ],
+      "p_dd_19": 1.0,
+      "p_dd_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_dd_rank_bounds": [
+        1000,
+        1000
+      ],
+      "p_joint": 0.999000999000999,
+      "p_joint_bounds": [
+        0.999000999000999,
+        0.999000999000999
+      ],
+      "p_joint_19": 1.0,
+      "p_joint_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_joint_rank_bounds": [
+        1000,
+        1000
+      ]
+    },
+    "unknown_admitted_states": {},
+    "artifacts": {
+      "path_summary": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RT/path_summary.csv",
+      "paths": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RT/paths.npz"
+    }
+  },
+  "RD": {
+    "complete_paths": 1000,
+    "unknown_paths": 0,
+    "ties_profit": 0,
+    "ties_dd": 0,
+    "ties_joint": 0,
+    "p_profit": 0.21178821178821178,
+    "p_profit_bounds": [
+      0.21178821178821178,
+      0.21178821178821178
+    ],
+    "p_profit_19": 1.0,
+    "p_profit_19_bounds": [
+      1.0,
+      1.0
+    ],
+    "baseline_profit_rank_bounds": [
+      212,
+      212
+    ],
+    "p_dd": 0.5364635364635365,
+    "p_dd_bounds": [
+      0.5364635364635365,
+      0.5364635364635365
+    ],
+    "p_dd_19": 1.0,
+    "p_dd_19_bounds": [
+      1.0,
+      1.0
+    ],
+    "baseline_dd_rank_bounds": [
+      537,
+      537
+    ],
+    "p_joint": 0.16983016983016982,
+    "p_joint_bounds": [
+      0.16983016983016982,
+      0.16983016983016982
+    ],
+    "p_joint_19": 1.0,
+    "p_joint_19_bounds": [
+      1.0,
+      1.0
+    ],
+    "baseline_joint_rank_bounds": [
+      170,
+      170
+    ],
+    "quantiles": {
+      "net_total": {
+        "5": 417.4769999999979,
+        "50": 3465.4199999999973,
+        "95": 6415.4519999999975
+      },
+      "admitted": {
+        "5": 386.0,
+        "50": 390.0,
+        "95": 394.0
+      },
+      "known_exposure_minutes": {
+        "5": 73879.65,
+        "50": 76220.5,
+        "95": 78528.2
+      },
+      "exposure_minutes": {
+        "5": 73879.65,
+        "50": 76220.5,
+        "95": 78528.2
+      },
+      "long_trades": {
+        "5": 191.0,
+        "50": 195.0,
+        "95": 198.04999999999995
+      },
+      "short_trades": {
+        "5": 191.0,
+        "50": 195.0,
+        "95": 199.0
+      },
+      "earlier_admitted": {
+        "5": 0.0,
+        "50": 0.0,
+        "95": 0.0
+      },
+      "equal_admitted": {
+        "5": 103.0,
+        "50": 116.0,
+        "95": 129.0
+      },
+      "later_admitted": {
+        "5": 261.0,
+        "50": 274.0,
+        "95": 287.0
+      },
+      "extra_cost_net": {
+        "5": -462.17099999999994,
+        "50": 2588.3100000000004,
+        "95": 5548.897
+      },
+      "stop_first_net": {
+        "5": 417.4770000000001,
+        "50": 3465.42,
+        "95": 6415.452
+      }
+    },
+    "stop_first": {
+      "complete_paths": 1000,
+      "unknown_paths": 0,
+      "ties_profit": 0,
+      "ties_dd": 0,
+      "ties_joint": 0,
+      "p_profit": 0.21178821178821178,
+      "p_profit_bounds": [
+        0.21178821178821178,
+        0.21178821178821178
+      ],
+      "p_profit_19": 1.0,
+      "p_profit_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_profit_rank_bounds": [
+        212,
+        212
+      ],
+      "p_dd": 0.5364635364635365,
+      "p_dd_bounds": [
+        0.5364635364635365,
+        0.5364635364635365
+      ],
+      "p_dd_19": 1.0,
+      "p_dd_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_dd_rank_bounds": [
+        537,
+        537
+      ],
+      "p_joint": 0.16983016983016982,
+      "p_joint_bounds": [
+        0.16983016983016982,
+        0.16983016983016982
+      ],
+      "p_joint_19": 1.0,
+      "p_joint_19_bounds": [
+        1.0,
+        1.0
+      ],
+      "baseline_joint_rank_bounds": [
+        170,
+        170
+      ]
+    },
+    "unknown_admitted_states": {},
+    "artifacts": {
+      "path_summary": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RD/path_summary.csv",
+      "paths": "/workspace/thebeginning/analysis/outputs/codex_choch_placebos_20261029/design/paths/RD/paths.npz"
+    }
+  }
+}

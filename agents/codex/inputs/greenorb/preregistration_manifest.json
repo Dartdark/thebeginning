@@ -1,0 +1,67 @@
+{
+  "candidate": "GreenORB",
+  "family": "opening_drive_orb",
+  "task": "user_uploaded_code",
+  "scope": "NQ observed-bar VWAP proxy,1MNQ",
+  "date": "2026-10-30",
+  "return_outcomes_before_registration": 0,
+  "reserved_definitions": [
+    "GO_PRIMARY",
+    "GO_NO_COLOUR",
+    "GO_NESTED_COLOUR",
+    "GO_RANDOM_SIDE",
+    "GO_RANDOM_TIME"
+  ],
+  "reserved_candidate_definitions": 3,
+  "previous_global_trial_rows": 274,
+  "previous_global_trial_variants": 1226,
+  "scout_budget_changed": false,
+  "synthetic_tests": "PASS",
+  "run_command": "/workspace/venvs/thebeginning/bin/python analysis/codex_greenorb.py design",
+  "inputs": [
+    {
+      "path": "analysis/codex_greenorb.py",
+      "sha256": "db59f7f1737fcabd79f1ca55ccb43f071e3eb5a1cb17604b72eead5a48300be3"
+    },
+    {
+      "path": "data/NQ_1min_2018.csv",
+      "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237"
+    },
+    {
+      "path": "data/NQ_1min_2019.csv",
+      "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e"
+    },
+    {
+      "path": "data/NQ_1min_2020.csv",
+      "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4"
+    },
+    {
+      "path": "data/NQ_1min_2021.csv",
+      "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500"
+    },
+    {
+      "path": "data/NQ_1min_2022.csv",
+      "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2"
+    },
+    {
+      "path": "data/NQ_1min_ON_2018.csv",
+      "sha256": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2"
+    },
+    {
+      "path": "data/NQ_1min_ON_2019.csv",
+      "sha256": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d"
+    },
+    {
+      "path": "data/NQ_1min_ON_2020.csv",
+      "sha256": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9"
+    },
+    {
+      "path": "data/NQ_1min_ON_2021.csv",
+      "sha256": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e"
+    },
+    {
+      "path": "data/NQ_1min_ON_2022.csv",
+      "sha256": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0"
+    }
+  ]
+}

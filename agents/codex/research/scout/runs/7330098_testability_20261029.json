@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "run_id": "7330098_testability_20261029",
+  "ssrn_id": "7330098",
+  "title": "The Price Impact of Hedging Expiring Index Options",
+  "reviewed_at": "2026-10-29T18:31:37Z",
+  "status": "needs_data",
+  "return_eligibility": "NEEDS DATA",
+  "full_text_accessed": true,
+  "full_text_review_scope": "Directional analysis, position construction, key tables and appendix placebos; connected PDF reader, not merely metadata",
+  "source": {
+    "url": "https://algoseek.com/wp-content/uploads/2026/10/ssrn-7330098.pdf",
+    "provenance_url": "https://algoseek.com/research/the-price-impact-of-hedging-expiring-index-options/",
+    "author_url": "https://pedrogares.wordpress.com/2026/08/28/the-price-impact-of-hedging-expiring-index-options-2026/",
+    "doi": "10.2139/ssrn.7330098",
+    "version_on_pdf_title_page": "August 13, 2026",
+    "ssrn_advertised_last_revision": "2026-08-22",
+    "pages": 76,
+    "access_method": "Publicly linked PDF via connected web reader",
+    "local_path": null,
+    "sha256": null,
+    "hash_status": "No PDF bytes retained locally: initial shell proxy connection failure, then HTTP403 through the configured proxy with network permission. Connected PDF reader access succeeded; no byte hash claimed.",
+    "return_gate_source_artifact_ready": false
+  },
+  "access_attempts": [
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7330098",
+      "method": "connected web search/open",
+      "result": "Indexed metadata available; direct page open returned 403 Forbidden"
+    },
+    {
+      "url": "https://pedrogares.wordpress.com/2026/08/28/the-price-impact-of-hedging-expiring-index-options-2026/",
+      "method": "connected web open from author homepage",
+      "result": "Author abstract and SSRN download link; no independently hosted manuscript link"
+    },
+    {
+      "url": "https://algoseek.com/wp-content/uploads/2026/10/ssrn-7330098.pdf",
+      "method": "connected web click from public research listing; PDF parser",
+      "result": "Accessible 76-page full text; relevant methods/results read"
+    },
+    {
+      "url": "https://algoseek.com/wp-content/uploads/2026/10/ssrn-7330098.pdf",
+      "method": "curl --location --max-time 25 --fail --silent --show-error --output /tmp/scout_7330098.pdf",
+      "result": "exit 7: Failed to connect to proxy port 8080 after 0 ms: Could not connect to server; no PDF obtained"
+    },
+    {
+      "url": "https://datashop.cboe.com/download/sample/218",
+      "method": "connected reader click on public Open-Close sample",
+      "result": "400 Unsupported content-type: application/x-zip-compressed; no sample bytes obtained"
+    },
+    {
+      "url": "https://datashop.cboe.com/download/sample/289",
+      "method": "connected reader click on public TBT sample",
+      "result": "400 Unsupported content-type: application/x-zip-compressed; no sample bytes obtained"
+    },
+    {
+      "url": "https://datashop.cboe.com/documents/Open_Close_10m_Spec_v1.6.pdf",
+      "method": "connected PDF reader",
+      "result": "4-page v1.6 dated 20260217 inspected; MM signed volume, cumulative snapshots, GTH coverage and field definitions"
+    },
+    {
+      "url": "https://datashop.cboe.com/documents/Open_Close_1m_Spec_v1.5.pdf",
+      "method": "connected PDF reader",
+      "result": "5-page v1.5 dated 20260327 inspected; streaming timing/corrections caveats and MM volume fields"
+    },
+    {
+      "url": "https://algoseek.com/wp-content/uploads/2026/10/ssrn-7330098.pdf",
+      "method": "curl through inherited proxy with network-enabled execution; no proxy or policy bypass",
+      "observed_at": "2026-10-29T18:35:32.698769+00:00",
+      "result": "HTTP403, curl exit22; no manuscript bytes obtained. Stopped on denial."
+    },
+    {
+      "url": "https://datashop.cboe.com/download/sample/218",
+      "method": "curl through inherited proxy with network-enabled execution; no proxy or policy bypass",
+      "observed_at": "2026-10-29T18:35:32.698778+00:00",
+      "result": "HTTP403, curl exit22; no free Open-Close ZIP sample bytes obtained. Stopped on denial."
+    }
+  ],
+  "public_code_data_search": {
+    "queries": [
+      "\"7330098\" data code replication",
+      "\"7330098\" \"github\"",
+      "\"7330098\" \"replication\"",
+      "\"The Price Impact of Hedging Expiring Index Options\" \"data\" \"github\"",
+      "\"Garcia-Ares\" \"hedging\" \"replication\""
+    ],
+    "result": "No author-linked public replication code or signed-position panel located in these searches; not a proof that none exists",
+    "purchases_accounts_or_keys_created": false
+  },
+  "owned_data_inventory": {
+    "method": "Configured Python csv-header inspection across each family; selected boundary reads and SHA256; no returns computed",
+    "python": "/workspace/venvs/thebeginning/bin/python",
+    "families": [
+      {
+        "glob": "data/GEX_1min_*.csv",
+        "file_count": 5,
+        "schema": "date,time,close,flip,flip_steep,centroid,maj_pos,maj_neg,basis,spot,dte,flip_oi,maj_pos_oi,maj_neg_oi,big_trade,big_trade_px,bid_depth10,ask_depth10",
+        "signed_spx_mm_positions": false
+      },
+      {
+        "glob": "data/GEXOI_*.csv",
+        "file_count": 5,
+        "schema": "date,time,basis,dte,strike,gex,call_oi,put_oi",
+        "signed_spx_mm_positions": false
+      },
+      {
+        "glob": "data/OF_1min_*.csv",
+        "file_count": 35,
+        "schema": "date,time,open,high,low,close,volume,upvol,downvol,spread_ticks,bid_sz_top,ask_sz_top,size_imb,count_imb,qdepl_bid,qdepl_ask,pulled_bid,pulled_ask,ice_bid,ice_ask,trade_rate,cum_delta,event_rate,levels_bid,levels_ask,big_trade,big_trade_px,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,vwap,vwap_sd,poc,poc_prev,vah,val",
+        "signed_spx_mm_positions": false
+      }
+    ],
+    "options_sample_directory": "scratch_data/options_sample",
+    "options_sample_directory_present": false,
+    "selected_boundaries": [
+      {
+        "path": "data/GEX_1min_2022.csv",
+        "rows": 28045,
+        "first": [
+          "20220901",
+          "930"
+        ],
+        "last": [
+          "20221230",
+          "1615"
+        ]
+      },
+      {
+        "path": "data/GEX_1min_2023.csv",
+        "rows": 83472,
+        "first": [
+          "20230103",
+          "930"
+        ],
+        "last": [
+          "20231229",
+          "1615"
+        ]
+      },
+      {
+        "path": "data/GEX_1min_2026.csv",
+        "rows": 42240,
+        "first": [
+          "20260102",
+          "930"
+        ],
+        "last": [
+          "20260707",
+          "1615"
+        ]
+      },
+      {
+        "path": "data/GEXOI_2022.csv",
+        "rows": 22693,
+        "first": [
+          "20220901",
+          "931"
+        ],
+        "last": [
+          "20221230",
+          "1530"
+        ]
+      },
+      {
+        "path": "data/GEXOI_2026.csv",
+        "rows": 39156,
+        "first": [
+          "20260102",
+          "931"
+        ],
+        "last": [
+          "20260707",
+          "1530"
+        ]
+      }
+    ],
+    "selected_file_sha256": {
+      "data/GEX_1min_2022.csv": "1f7382346b31f56e9fe3ddeed27e23d68c9a9d78f8a7f48dba3e7219968f7cf6",
+      "data/GEXOI_2022.csv": "829b9751394f2d16c5391324cf1574112faf833e4daf95b09fbb93bc3038688b",
+      "data/OF_1min_2018_1.csv": "2bc0e1ad344cc93d8685b6016b255ef1e642f30d6364245f51557e6999eff114",
+      "tools/exporters/OFB_GexOI_Exporter.txt": "029e6b0e1974c3e94b1cb8b3add4855a5f0706dd9086ec1f45e45a3be79db798",
+      "tools/exporters/OFB_Gamma_Exporter.txt": "dd6967f4279af06aa6a598ef179487d257ac1ac90c08192bcc66ee651ef1bd25",
+      "agents/codex/results/flow_evidence_sheets.md": "61aed591a54d56469884415ab230ff1d456c8d38a2ed732ea1457247cb8e293d",
+      "analysis/spx_gex_sample_test.py": "0a27350d2dcd4c89b0176ad22ed7752fb8f67ba0efd8c043617eeff23d3f2c9d"
+    },
+    "reproduction_script": "analysis/codex_scout_7330098_input_inventory.py",
+    "reproduction_command": "python analysis/codex_scout_7330098_input_inventory.py --output analysis/outputs/codex_scout_7330098_input_inventory.json",
+    "reproduction_output": "analysis/outputs/codex_scout_7330098_input_inventory.json"
+  },
+  "blockers": [
+    "No retained/hash-bound manuscript bytes for subsequent TEST admission",
+    "No owned signed SPXW dealer-position history from series inception",
+    "No complete quote/IV surface and native receipt history for the proposed feature",
+    "Paper start-minute labels and end-minute quotes require a source/data clock reconciliation before an executable fill",
+    "Public summary products require inception inventory, overnight/session and correction reconciliation; pre-December-2023 GTH intraday coverage is absent",
+    "TBT is T+1, not an available same-day forecast",
+    "No native MES cost, fill, power or account-value gate completed"
+  ],
+  "next_check": "No-return reconstruction of one expiring series using lawful MM-capacity records and quotes, from inception to actual receipt/decision, including prior inventory, overnight flow and corrections. Only complete point-in-time input history can advance to evidence TEST and committed preregistration.",
+  "deeper_investigation_warranted": true,
+  "eligible_family_selected": false,
+  "new_economic_definitions": 0,
+  "return_trials": 0,
+  "preregistration_created": false,
+  "plan_or_live_changes": false,
+  "report_path": "agents/codex/results/scout_7330098_testability_20261029.md"
+}

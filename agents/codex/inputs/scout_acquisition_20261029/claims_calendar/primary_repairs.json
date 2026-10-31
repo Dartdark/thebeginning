@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "scope": "Actual official-source header repairs and a stronger alternate PDF source; no generated event dates",
+  "verified_rows": [
+    {
+      "release_date": "2019-01-03",
+      "embargo_time_et": "08:30:00",
+      "timezone": "America/New_York",
+      "reference_week_ending": "2018-12-29",
+      "source_url": "https://www.dol.gov/sites/dolgov/files/OPA/newsreleases/ui-claims/20190008.pdf",
+      "source_location": "PDF p1 embargo header and first paragraph",
+      "evidence_method": "direct_pdf_header",
+      "web_ref": "turn861429view2",
+      "header_excerpt": "8:30 A.M. (Eastern) Thursday, January 3, 2019",
+      "original_schedule_available_at": null,
+      "actual_publication_or_receipt_at": null
+    },
+    {
+      "release_date": "2019-10-17",
+      "embargo_time_et": "08:30:00",
+      "timezone": "America/New_York",
+      "reference_week_ending": "2019-10-12",
+      "source_url": "https://www.dol.gov/newsroom/releases/eta/eta20191017",
+      "source_location": "Indexed official release embargo header and first paragraph; direct open403 stopped",
+      "evidence_method": "indexed_primary_header",
+      "web_ref": "turn362587search14",
+      "header_excerpt": "8:30 A.M. (Eastern) Thursday, October 17, 2019",
+      "original_schedule_available_at": null,
+      "actual_publication_or_receipt_at": null
+    },
+    {
+      "release_date": "2018-11-21",
+      "embargo_time_et": "08:30:00",
+      "timezone": "America/New_York",
+      "reference_week_ending": "2018-11-17",
+      "source_url": "https://www.dol.gov/sites/dolgov/files/OPA/newsreleases/ui-claims/20181882.pdf",
+      "source_location": "PDF p1 embargo header and first paragraph",
+      "evidence_method": "direct_pdf_header",
+      "web_ref": "turn755189view1",
+      "header_excerpt": "8:30 A.M. (Eastern) Wednesday, November 21, 2018",
+      "original_schedule_available_at": null,
+      "actual_publication_or_receipt_at": null
+    }
+  ],
+  "extra_access_receipts": [
+    {"url":"https://www.dol.gov/newsroom/releases/eta/eta20191017","result":"Direct403; no bypass. Indexed primary header read through permitted connected search."},
+    {"url":"https://www.dol.gov/sites/dolgov/files/legacy-files/documents/newsroom/releases/eta/20180005.pdf","result":"Current direct404; dated primary header remains indexed; no local PDF hash."},
+    {"url":"https://oui.doleta.gov/unemploy/archive.asp?year=2018","result":"Reader inaccessible; no complete official form-year export acquired."},
+    {"url":"https://huggingface.co/api/datasets/ZipLime/us-economic-events/tree/main","result":"Network-enabled normal proxyHTTP403; stopped. No dataset bytes acquired."},
+    {"url":"https://datasets-server.huggingface.co/rows?dataset=ZipLime%2Fus-economic-events&config=releases&split=train&offset=0&length=1","result":"Reader inaccessible; no row API payload acquired."}
+  ],
+  "limits": "Official embargo facts are separate from actual receipt and from original advance schedule publication. All those knowledge clocks remain unknown. No returns."
+}

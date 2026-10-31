@@ -1,0 +1,94 @@
+{
+  "plan_commit": "832f27735c0f3a5cb60f1837311b01311151e25e",
+  "phase": "DESIGN COMPLETE BEFORE ALTERNATIVE VALIDATION",
+  "models": [
+    {
+      "model": "BASE",
+      "target": 40.0,
+      "stop": 75.0,
+      "positive_design_years": 5,
+      "gates": {
+        "positive": true,
+        "t2": true,
+        "pf120": true,
+        "four_positive_years": true,
+        "calmar_not_worse": true,
+        "material_risk_or_reward": false
+      },
+      "risk_objective": false,
+      "reward_objective": false,
+      "survives": false
+    },
+    {
+      "model": "S60",
+      "target": 40.0,
+      "stop": 60.0,
+      "positive_design_years": 5,
+      "gates": {
+        "positive": true,
+        "t2": true,
+        "pf120": true,
+        "four_positive_years": true,
+        "calmar_not_worse": false,
+        "material_risk_or_reward": false
+      },
+      "risk_objective": false,
+      "reward_objective": false,
+      "survives": false
+    },
+    {
+      "model": "S50",
+      "target": 40.0,
+      "stop": 50.0,
+      "positive_design_years": 5,
+      "gates": {
+        "positive": true,
+        "t2": true,
+        "pf120": false,
+        "four_positive_years": true,
+        "calmar_not_worse": false,
+        "material_risk_or_reward": false
+      },
+      "risk_objective": false,
+      "reward_objective": false,
+      "survives": false
+    },
+    {
+      "model": "T50",
+      "target": 50.0,
+      "stop": 75.0,
+      "positive_design_years": 5,
+      "gates": {
+        "positive": true,
+        "t2": true,
+        "pf120": false,
+        "four_positive_years": true,
+        "calmar_not_worse": false,
+        "material_risk_or_reward": false
+      },
+      "risk_objective": false,
+      "reward_objective": false,
+      "survives": false
+    },
+    {
+      "model": "T60",
+      "target": 60.0,
+      "stop": 75.0,
+      "positive_design_years": 5,
+      "gates": {
+        "positive": true,
+        "t2": true,
+        "pf120": true,
+        "four_positive_years": true,
+        "calmar_not_worse": true,
+        "material_risk_or_reward": false
+      },
+      "risk_objective": false,
+      "reward_objective": false,
+      "survives": false
+    }
+  ],
+  "survivors": [],
+  "cluster_context_only": true,
+  "full_bench_allowed": false
+}

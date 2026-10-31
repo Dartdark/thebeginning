@@ -1,0 +1,34 @@
+# H06 ECB calendar: ACCEPT for frozen research with source limits
+
+Independent semantic source/availability decision, 2026-10-26, BEFORE any6E input bytes or economic outcomes. Scope: committed plan, source note, calendar-only header/quality/clock table and byte/marker proofs. No price, financial ledger, workbook, model or return data was opened or executed. No new web request or blocked-host retry occurred. This review adds0 hypotheses, gross screens or economic evaluations.
+
+**Decision: accepted for this frozen historical research definition, with the limits below.** This is not independent first-party authentication of all dates, verified historical receipt, a promotion pass or permission to trade. ROOT must commit its explicit admission against the exact marker before the code may inspect6E inputs.
+
+## Exact admitted object
+
+- Economic/calendar preregistration: `3b995614ea4a38e53ad3d7cc33cf28b87b0df49d`.
+- Calendar marker: `analysis/outputs/codex_hunt_v2_ecb_preconference/calendar_verified_execution.json`, SHA256 **`12f2dc97cfb60ef542888bf39d0ef7ea10025ea2821c7e91b01c45b7731a82bb`**. Phase is `calendar_only_no_prices`; no prices/returns were read by that phase.
+- Source: `chris-cheshire/project-midas-mk7@f9e756cbbca3a0576178412a48e1e374c9c76cfe:midas/data/calendar/ecb.txt`,3,650bytes; Git blob **`68cba6e08e80c47c7476277f07caeec320ef9995`**; SHA256 **`42196f8a922addf05432cf261f3280abd3413e179b3c24df25f9d9054430a0a4`**.
+- Exact marker and all5 saved artifact SHA bindings checked successfully. Calendar quality reports40 unique monotonic weekday dates,8 per2018–22year, no invalid/duplicate/nonmonotonic lines. These are parser/consistency findings, not authentication by count.
+
+## Supported availability finding
+
+RESEARCH_CONTROLS requires the feature to be available by the decision; it does not categorically require an original private receipt log for every public event. A retrospective file's compilation date must not be substituted for the historical knowledge time of an objective event it records. Conversely, a retrospective label that depends on subsequent prices, revised numeric data or unpublished classification would need its own justified knowledge clock.
+
+The actual header identifies these rows as regular ECB Governing Council decision-announcement dates, using official ECB policy-decision archive/per-year URLs and the specific public release title **“Monetary policy decisions”**. It expressly excludes unscheduled/emergency decisions, other releases and non-policy meetings; it names2020-03-18PEPP as excluded. This is a documented public-event roster, not a selection of later large returns. The2026-10-10 retrieval/compilation date does not mean an ECB announcement in2018 became public only in2026. The scheduled event identity can be known from the public schedule, and by the release itself, before this protocol's delayed entry.
+
+The prior source inquiry actually read attributed primary ECB clock-change text in the bound BdF mirror under **“New times for the ECB’s monetary policy decisions and press conference”**, original ECB notice27June2022. It explicitly describes publication/conference times changing from13:45/14:30 to14:15/14:45 from21July2022. The source note binds mirror blob `ce4f72bb142b4f0321445320eb164b56de1eb2bb` and the original ECB URL. This review relies on that recorded read and its quoted passage; it does not claim a new original-host response or a fresh document-body authentication. A no-lazy-fetch local check found no cached body, and no request was made to reacquire it.
+
+The actual header additionally explains Frankfurt civil time, including summer CEST. The saved clocks use Europe/Berlin→UTC/America/Chicago, retain the pre/post21July2022 eras and handle US/EU DST mismatch dates rather than optimizing offsets. The2019-04-10Wednesday remains included; a Thursday-only assumption would have been incorrect. The header quotes Working Paper2281 and a2010 release, but their bodies were **not read** here or in the documented primary-clock inquiry; neither is asserted as independently confirmed evidence.
+
+Importantly, this rule does not consume the policy decision's numeric value, surprise, text or a subsequently revised indicator. Its only directional feature is the completed native6E price reaction over the frozen wall-clock window. The feature closes atR+5; the fixed extra5-minute allowance leads to assumed availability/decision atR+10 and nativeOPEN[R+11] at wallR+10. Thus the recorded order is **feature eventR+5 ≤ assumed availabilityR+10 = decision/entry wallR+10**. An actual policy-publication delay can weaken the economic interpretation or make the fixed-window rule lose; it does not let the implementation inspect future policy information, since no such field is used.
+
+Taken together, the specific public-event provenance and documented release schedule are sufficient to test this fixed scheduled-date/price-window hypothesis with explicit source limits. This is a supported research availability finding, not an exemption based merely on a positive parser flag, a five-minute wait or40 matching dates. No favorable market outcome has been seen to motivate this admission.
+
+## Limits that remain binding
+
+The file is a third-party transcription with explicit primary citations. Original per-date ECB HTTP responses, prospective schedule vintages, actual publication delays and local/news receipt logs are not authenticated. The mirror's policy-decisions subtree does not contain the2018–22date documents; its tree cannot independently corroborate these40 dates. This review does not silently turn those missing confirmations into completed primary checks. Each historical date, scheduled/emergency classification and exact primary clock must receive fresh primary-calendar/raw-spec checking before promotion or a stronger source-certification claim. Any discovered contradiction remains a blocker and cannot be repaired using6E returns.
+
+The fixed roster, eras, windows, side rule and all exclusions stay unchanged. Do not add PEPP/emergency events, drop an inconvenient date, search a clock offset or substitute a different calendar after prices. Count, native-source, reaction/wait/held-path and gross-cost gates still apply before any economic/account stage. Native bar clock/receipt, continuous-contract identity and M6E executable-liquidity assumptions remain separate source/execution limits. Public event knowledge is not proof of a fill or of a forced flow.
+
+**Finding for ROOT's admission record:** `accepted_for_frozen_research=true` is defensible for the exact marker above, with this availability basis and all stated limitations retained. It does not authenticate unread primary documents, complete later validation or authorize any rule change, promotion or live action.

@@ -1,0 +1,81 @@
+{
+  "passed": false,
+  "design_passed": false,
+  "primary": "STRICT30",
+  "selected": null,
+  "basic_gates": {
+    "at_least_100_trades": true,
+    "positive_net": true,
+    "trade_t_at_least_2": true,
+    "daily_nw5_at_least_1_5": true,
+    "profit_factor_at_least_1_2": true,
+    "at_least_4_positive_years": false,
+    "positive_four_tick_stress": true
+  },
+  "filter_gates": {
+    "kept_total_at_least_base": false,
+    "removed_total_negative": false,
+    "removed_mean_negative": false,
+    "matched_joint_beat_at_least_90pct": false
+  },
+  "quality_gates": {
+    "complete_held_paths": true,
+    "exits_before_1559": true,
+    "exact_base_ticket_subsets": true,
+    "unchanged_frozen_source": true
+  },
+  "primary_metrics": {
+    "model": "STRICT30",
+    "period": "2018-22",
+    "side": "all",
+    "basis": "MNQ",
+    "gross": 4204.5,
+    "cost": 857.9200000000003,
+    "trades": 383,
+    "win": 0.5430809399477807,
+    "avg": 8.737806788511751,
+    "annual": 676.8364044943818,
+    "sharpe": 1.152324136160548,
+    "sortino": 1.9732280673065385,
+    "profit_factor": 1.4763475909187955,
+    "max_dd": 1402.440000000001,
+    "calmar": 0.48261344834316,
+    "ulcer": 1.0426324635173478,
+    "ulcer_perf": 1.2983221378146168,
+    "total": 3346.5800000000004,
+    "t_trade": 2.5753470594501318,
+    "t_nw5": 2.276980683631377,
+    "sessions": 1246
+  },
+  "primary_four_tick_net": 2197.579999999999,
+  "filter_diagnostics": {
+    "model": "STRICT30",
+    "seed": 20261027,
+    "samples": 1000,
+    "strata": "year x side x completed-signal hour",
+    "paths_are_nonexecutable_diagnostics": true,
+    "base_trades": 485,
+    "kept_trades": 383,
+    "removed_trades": 102,
+    "base_net": 3504.5999999999995,
+    "kept_net": 3346.579999999999,
+    "removed_net": 158.0199999999999,
+    "removed_average": 1.5492156862745088,
+    "removed_t": 0.32864445900130507,
+    "actual_kept_max_dd": 1402.440000000001,
+    "jointly_beaten_fraction": 0.329,
+    "joint_comparison": "strictly higher profit AND strictly lower max drawdown",
+    "random_profit_at_least_actual_p": 0.17582417582417584,
+    "random_dd_at_most_actual_p": 0.6563436563436563
+  },
+  "configurations_evaluated": [
+    "BASE",
+    "LEGACY",
+    "STRICT30"
+  ],
+  "counted_evaluations": 3,
+  "hypotheses": 1,
+  "validation_authorized": false,
+  "next_stage": "close_H01",
+  "downstream_requires_success_marker_and_all_artifact_hashes": true
+}

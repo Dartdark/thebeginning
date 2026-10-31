@@ -1,0 +1,585 @@
+{ ============================================================================
+  NOME DELLO STUDY:  S848_VALERIS  (VERIFICA su @NQ: input come Valeris, ArrotondaStop 0 e OraChiusuraLucid 0)
+  TIPO:              Signal (strategia) - un solo file, nessuna funzione da creare
+
+  ORB A 5 MINUTI: LA PRIMA CANDELA DECIDE - 848 NQ 5 minuti, "grezzo OP800"
+  (Valeris Alpha, strategia "848 NQ 5 grezzo OP800": run 11, lotto 709c6201,
+  ottimizzazione dal paper grezzo, gemello con almeno 800 operazioni;
+  candidata pack "1 su 2". Paper 848: Zarattini, Aziz 2023, "Can Day Trading
+  Really Be Profitable? Evidence of Sustainable Long-term Profits from
+  Opening Range Breakout (ORB) Day Trading Strategy vs. Benchmark in the US
+  Stock Market", SSRN 4416622.)
+
+  LA REGOLA (barre da 5 minuti, ora di Chicago, tutto calcolato sul micro):
+  1. Il verso: la prima candela della seduta regolare. Alla chiusura della
+     barra delle 08:35 si guarda la chiusura delle 08:35 meno la chiusura
+     delle 08:30: sopra zero lungo, sotto zero corto, zero niente.
+  2. Filtro Supertrend (come VectorBT: 10 barre, moltiplicatore 2, su tutte
+     le barre da 5 minuti anche di notte): (chiusura - linea del Supertrend)
+     nel verso del trade, diviso l'ATR 14 delle barre (Wilder), deve essere
+     almeno 1,5 (e sotto 99). Cioe' il prezzo e' gia' ben lontano dalla linea,
+     dalla parte giusta.
+  3. Si entra alla CHIUSURA della barra delle 08:35. Non nei festivi della
+     lista, non nelle mezze giornate, non se manca la barra delle 08:30,
+     non nei primi 14 giorni del grafico (servono ATR e ADR di ieri).
+  4. Uscite (ADR 14 = media delle escursioni massimo-minimo delle ultime 14
+     sedute regolari, di ieri):
+     - stop a 0,1 ADR dal prezzo d'entrata (SetStopLoss, dalla barra dopo);
+       con ArrotondaStop = 1 (di serie) la distanza e' arrotondata per
+       eccesso ai tick interi (0,25): sui prezzi veri, che stanno sui tick,
+       lo stop scatta esattamente nelle stesse barre di Valeris, e l'uscita
+       e' al tick sotto (lungo) il livello con la virgola di Valeris;
+     - pareggio: quando il massimo (lungo) o il minimo (corto) delle barre
+       dopo l'entrata arriva a 0,5 ADR di guadagno, dalla barra dopo lo stop
+       va al prezzo d'entrata;
+     - target a 5 ADR (SetProfitTarget; in pratica non si tocca mai);
+     - altrimenti alla chiusura della barra delle 15:00.
+  5. Rientri, stesso verso, fino a 4 operazioni nella seduta (la base + 3):
+     dalla 5a barra dopo quella d'uscita (4 barre di pausa), alla chiusura
+     della barra in cui la chiusura PASSA il livello: lungo quando la
+     chiusura va sopra (chiusura di ieri - 0,25 ATR 14 di ieri) dopo che la
+     barra prima era sotto o uguale; corto quando va sotto (chiusura di ieri
+     + 0,25 ATR 14) dopo che la barra prima era sopra o uguale. Stesse uscite
+     (stop 0,1 ADR dal nuovo prezzo, pareggio, target), e a orario alla
+     chiusura della 6a barra dopo quella delle 15:00 (le 15:30), mai oltre
+     la barra delle 15:40. I rientri si cercano fino alla barra prima.
+  6. Taglia: Valeris usa una taglia dinamica: peso = (mediana dell'ADR 14
+     delle ultime 250 sedute regolari / ADR 14 di ieri) ^ 0,5, fra 0,25 e 4
+     (1 finche' la mediana non ha almeno 125 valori). Con TagliaDinamica = 1
+     il Signal usa NumContracts x peso, arrotondato, almeno 1 micro; con 0
+     sempre NumContracts.
+  7. Lato (input): 0 = entrambi i versi, come Valeris (di serie); 1 = solo
+     long; -1 = solo short. Con Lato = 1 una seduta in cui il verso del
+     trade (candela x VersoRegola) e' corto non fa niente: niente base e
+     niente rientri, passa come una seduta senza segnale. Lato = -1 allo
+     specchio. Indicatori, dati di ieri, taglia e sedute dell'altro verso
+     restano identici: con Lato = 1 si fanno esattamente le operazioni
+     lunghe di Lato = 0, con Lato = -1 esattamente quelle corte.
+  ATR 14 e ADR 14 giornalieri: sedute regolari 08:35-15:00 (massimo, minimo;
+  chiusura delle 15:00, o delle 12:00 nelle mezze giornate), non festive,
+  sempre di IERI. ATR alla Wilder come pandas in Valeris.
+
+  Verifica: l'emulatore Python di questo codice (emula/S848_emula.py), sui
+  dati del mini di Valeris, dal 2017: con ArrotondaStop = 0 e
+  OraChiusuraLucid = 0 le 2454 operazioni di Valeris identiche (1008 su
+  1008 dal 26/10/2022): stesse ore, versi, prezzi di entrata e di uscita.
+  Con gli input di serie le stesse 2454 entrate e le stesse barre d'uscita;
+  le uscite allo stop escono al tick vero, in media 0,12 punti peggio del
+  livello con la virgola di Valeris. Vedi emula/S848_confronto.txt. Il testo
+  di questo file e' stato eseguito com'e' da un traduttore dentro
+  l'emulatore. In MultiCharts: la versione di prima, senza Lato, e' stata
+  compilata come VA_848_NQ5_VER (S848_VALERIS su @NQ, 08/10/2026: 1008
+  su 1008 dal 26/10/2022, vedi LEGGIMI); questa con Lato non ancora.
+  Input Lato (08/10/2026), verificato con l'emulatore e col testo eseguito
+  com'e', dal 2017: con Lato = 0 le stesse operazioni di prima; con Lato = 1
+  le 1267 operazioni lunghe di Valeris e nessuna corta, con Lato = -1 le
+  1187 corte e nessuna lunga, identiche una per una (sezione 10 del
+  confronto).
+
+  IMPOSTAZIONI DEL GRAFICO
+  Data1 = @MNQ (micro E-mini Nasdaq-100), 5 MINUTI. Qui si calcola il
+  segnale e qui partono gli ordini. NESSUNA Data2 (la regola non usa il
+  volume ne' altri mercati).
+  Time zone = Exchange (ora di Chicago). Sessione COMPLETA CME Globex
+  17:00-16:00 (il modello CME del simbolo), barre marcate alla chiusura.
+  NON il modello "US Stocks": su MNQ in ora Exchange diventa 09:30-16:00
+  (niente barra delle 08:35, Supertrend senza la notte).
+  Continuo NON aggiustato, con il cambio di scadenza lo stesso giorno di
+  @NQ nei dati di Valeris (dal 2025 il lunedi' sera della settimana della
+  scadenza): da controllare sul grafico.
+  Storia: il grafico deve partire dal 1 ottobre 2021 (o prima) per avere
+  dal 26 ottobre 2022 le stesse operazioni E la stessa taglia di Valeris
+  (la mediana dell'ADR vuole 250 sedute regolari). Le sole operazioni sono
+  gia' uguali partendo dal 3 ottobre 2022 (servono 14 sedute regolari).
+  Attenzione: in un MultiCharts in inglese le date si scrivono mese/giorno/
+  anno (1 ottobre 2021 = 10/01/2021).
+  Proprieta' della strategia: Maximum number of bars study will reference =
+  5 (User specified: il codice guarda solo la barra prima; tutti gli
+  indicatori sono ricorsivi o in array propri). Intrabar Order Generation
+  = NO (spenta), fissata anche dalla riga [IntrabarOrderGeneration = false]
+  qui sotto: con IOG accesa lo script girerebbe a ogni tick e la candela
+  delle 08:35 si leggerebbe al primo tick della barra, non alla chiusura.
+  Bar Magnifier spento. Una posizione alla volta, niente
+  piramide. Backtesting: limit eseguite quando il prezzo TOCCA il livello
+  (di serie). Costi: quelli reali del micro.
+  Stop e target: SetStopContract + SetStopLoss( 0,1 ADR ai tick interi x
+  BigPointValue ) e SetProfitTarget( 5 ADR x BigPointValue ), per
+  contratto: i livelli sono in punti di prezzo, uguali sul micro e sul mini. Il pareggio e' un ordine
+  stop esplicito al prezzo d'entrata ("848 BE LX" / "848 BE SX").
+  Nomi d'ordine tutti diversi: 848 L, 848 S, 848 RL, 848 RS (entrate),
+  848 fine LX (Sell), 848 fine SX (BuyToCover), 848 BE LX, 848 BE SX,
+  848 sic LX, 848 sic SX, piu' Stop Loss e Profit Target di MultiCharts.
+  LucidFlex: OraChiusuraLucid = 1545 (di serie) chiude alla chiusura della
+  barra delle 15:40 (5 minuti prima delle 15:45) e da li' non si entra. In
+  Valeris l'uscita piu' tarda e' gia' alle 15:40 (fino a meta' 2021, con la
+  pausa del CME 15:15-15:30) e dal 2021 alle 15:30: 1545 non cambia niente.
+  0 = come Valeris, solo per il confronto.
+  Feste e mezze giornate scritte qui sotto fino al 2027 (il 2027 dal
+  calendario NYSE: ricontrollarlo su quello CME); per il 2028 aggiungere le
+  date in coda e alzare NFeste / NMezze (posti: 151 e 61).
+  L'esecuzione automatica resta SPENTA finche' non la accendi tu.
+  ============================================================================ }
+
+[IntrabarOrderGeneration = false]
+
+inputs:
+    NumContracts( 1 ),        { micro MNQ a peso 1 (la taglia la sceglie Luca) }
+    TagliaDinamica( 1 ),      { 1: contratti = NumContracts x peso di Valeris, arrotondato, almeno 1; 0: sempre NumContracts }
+    Lato( 0 ),                { 0 = entrambi i versi (come Valeris), 1 = solo long, -1 = solo short: le sedute dell'altro
+                                verso non fanno niente (ne' base ne' rientri) }
+    OraBase( 830 ),           { la candela va dalla chiusura di questa barra ... (lasciare 830: la stessa barra
+                                rende anche "regolare" la seduta, come la barra delle 08:30 in Valeris) }
+    OraEntrata( 835 ),        { ... alla chiusura di questa: qui si entra (lasciare 835: in Valeris la candela
+                                finisce sempre alle 08:35, qui finirebbe all'ora d'entrata) }
+    OraUscita( 1500 ),        { uscita a orario della base }
+    VersoRegola( 1 ),         { +1 nel verso della candela, -1 contro }
+    SogliaAtr( 0 ),           { |candela| >= SogliaAtr x ATR 14 di ieri (0: basta che non sia zero) }
+    StPeriodo( 10 ),          { Supertrend: ATR di Wilder a 10 barre da 5 minuti }
+    StMolt( 2 ),              { Supertrend: bande (H+L)/2 +- 2 ATR }
+    AtrBarre( 14 ),           { ATR di Wilder a 14 barre, il metro del filtro }
+    FiltroMin( 1.5 ),         { si entra con FiltroMin <= (chiusura - linea) x verso / ATR barre < FiltroMax }
+    FiltroMax( 99 ),
+    KAtr( -0.25 ),            { livello dei rientri: chiusura di ieri + KAtr x ATR 14 (lungo), - KAtr x ATR 14 (corto) }
+    NMax( 4 ),                { operazioni nella seduta: la base + i rientri }
+    Pausa( 4 ),               { barre dopo quella d'uscita prima di poter rientrare }
+    Oltre( 6 ),               { i rientri escono 6 barre dopo quella delle 15:00 ... }
+    OraCap( 1540 ),           { ... ma mai oltre la barra delle 15:40 }
+    StopAdr( 0.1 ),           { stop: 0,1 ADR 14 di ieri dal prezzo d'entrata }
+    TargetAdr( 5 ),           { target: 5 ADR 14 }
+    PareggioAdr( 0.5 ),       { pareggio dopo 0,5 ADR 14 di guadagno }
+    AdrGiorni( 14 ),          { ADR: media semplice di massimo - minimo regolari (massimo 50) }
+    AtrGiorni( 14 ),          { ATR giornaliero di Wilder }
+    TagliaE( 0.5 ),           { peso = (mediana ADR / ADR di ieri) ^ TagliaE ... }
+    TagliaTetto( 4 ),         { ... fra 1 / TagliaTetto e TagliaTetto }
+    TagliaSedute( 250 ),      { la mediana sulle ultime 250 sedute regolari (massimo 260) ... }
+    TagliaMin( 125 ),         { ... con almeno 125 ADR validi }
+    ArrotondaStop( 0 ),       { 1: distanza dello stop arrotondata ai tick interi, lontano dall'entrata (stesse operazioni di
+                                Valeris, uscita allo stop al tick vero); 0: la distanza di Valeris con la virgola }
+    TickPunti( 0.25 ),        { il tick di NQ e MNQ }
+    OraChiusuraLucid( 0 ); { LucidFlex: tutto chiuso alla chiusura della barra che finisce 5 minuti prima di
+                                quest'ora (con 1545 la barra delle 15:40), e da li' non si entra; 0 = come Valeris }
+
+variables:
+    Primo( true ), NuovaSeduta( false ), NFeste( 0 ), NMezze( 0 ), jj( 0 ), kk( 0 ), Tmp( 0 ), ComW( 0 ),
+    AG( 0 ), FG( 0 ), AlfaSt( 0 ), FSt( 0 ), AlfaAb( 0 ), FAb( 0 ),
+    ColBase( 0 ), ColEntrata( 0 ), ColUscita( 0 ), ColCap( 0 ), ColLucid( 9999 ), Minuti( 0 ), Col( 0 ),
+    SessData( 0 ), Festa( false ), Mezza( false ), Ha830( false ), Ha1200( false ), Ha1500( false ), PrimaReg( true ),
+    Chi830( 0 ), MaxReg( 0 ), MinReg( 0 ), Chi1200( 0 ), Chi1500( 0 ), ChiOggi( 0 ), RangeOggi( 0 ), TrG( 0 ),
+    NReg( 0 ), ChiIeri( 0 ), WAtr( 0 ), AtrIeri( 0 ), AtrOk( false ),
+    AdrOggi( 0 ), AdrValida( false ), AdrIeri( 0 ), AdrOk( false ),
+    Slot( 0 ), NOrd( 0 ), PosOrd( 0 ), Fatto( false ), MedIeri( 0 ), MedOk( false ), Peso( 1 ), Contratti( 1 ),
+    TrB( 0 ), StN( 0 ), StHaW( false ), StW( 0 ), StHaUp( false ), StHaLo( false ), StUp( 0 ), StLo( 0 ),
+    StDir( 1 ), StLinea( 0 ), StOk( false ), AbHaW( false ), AbW( 0 ), AbOk( false ),
+    MedB( 0 ), UpB( 0 ), LoB( 0 ), CPrec( 0 ), CIeriBarra( 0 ),
+    HaFi( false ), FiBar( -1 ), AlFr( false ), Lucid( false ),
+    Fase( 0 ), Verso( 0 ), NTrade( 0 ), InPos( false ), BarIn( -1 ), UscitaBar( -1 ),
+    Candela( 0 ), Zeta( 0 ), Entra( false ), LevL( 0 ), LevS( 0 ), Lev( 0 ), Migliore( 0 ), BeOk( false ),
+    StopPunti( 0 ), TargetPunti( 0 ), PareggioPunti( 0 ), DistStop( 0 ), NTick( 0 );
+
+arrays:
+    Feste[150]( 0 ), Mezze[60]( 0 ), RangeG[50]( 0 ),
+    AdrSto[260]( 0 ), AdrStoOk[260]( 0 ),   { ADR 14 delle ultime 250 sedute regolari (in giro) e se valido }
+    Ordina[260]( 0 );                       { gli ADR validi della finestra, in ordine crescente (per la mediana) }
+
+{ ==========================================================================
+  0. UNA VOLTA SOLA: festivi e mezze giornate (data MultiCharts: anno - 1900,
+     mese, giorno; le stesse liste di Valeris, da aggiornare ogni anno),
+     coefficienti delle medie di Wilder, colonne delle ore.
+  ========================================================================== }
+if Primo then begin
+    Feste[0] = 1170102;  Feste[1] = 1170116;  Feste[2] = 1170220;  Feste[3] = 1170414;
+    Feste[4] = 1170529;  Feste[5] = 1170704;  Feste[6] = 1170904;  Feste[7] = 1171123;
+    Feste[8] = 1171225;  Feste[9] = 1180101;  Feste[10] = 1180115;  Feste[11] = 1180219;
+    Feste[12] = 1180330;  Feste[13] = 1180528;  Feste[14] = 1180704;  Feste[15] = 1180903;
+    Feste[16] = 1181122;  Feste[17] = 1181205;  Feste[18] = 1181225;  Feste[19] = 1190101;
+    Feste[20] = 1190121;  Feste[21] = 1190218;  Feste[22] = 1190419;  Feste[23] = 1190527;
+    Feste[24] = 1190704;  Feste[25] = 1190902;  Feste[26] = 1191128;  Feste[27] = 1191225;
+    Feste[28] = 1200101;  Feste[29] = 1200120;  Feste[30] = 1200217;  Feste[31] = 1200410;
+    Feste[32] = 1200525;  Feste[33] = 1200703;  Feste[34] = 1200907;  Feste[35] = 1201126;
+    Feste[36] = 1201225;  Feste[37] = 1210101;  Feste[38] = 1210118;  Feste[39] = 1210215;
+    Feste[40] = 1210402;  Feste[41] = 1210531;  Feste[42] = 1210705;  Feste[43] = 1210906;
+    Feste[44] = 1211125;  Feste[45] = 1211224;  Feste[46] = 1220117;  Feste[47] = 1220221;
+    Feste[48] = 1220415;  Feste[49] = 1220530;  Feste[50] = 1220620;  Feste[51] = 1220704;
+    Feste[52] = 1220905;  Feste[53] = 1221124;  Feste[54] = 1221226;  Feste[55] = 1230102;
+    Feste[56] = 1230116;  Feste[57] = 1230220;  Feste[58] = 1230407;  Feste[59] = 1230529;
+    Feste[60] = 1230619;  Feste[61] = 1230704;  Feste[62] = 1230904;  Feste[63] = 1231123;
+    Feste[64] = 1231225;  Feste[65] = 1240101;  Feste[66] = 1240115;  Feste[67] = 1240219;
+    Feste[68] = 1240329;  Feste[69] = 1240527;  Feste[70] = 1240619;  Feste[71] = 1240704;
+    Feste[72] = 1240902;  Feste[73] = 1241128;  Feste[74] = 1241225;  Feste[75] = 1250101;
+    Feste[76] = 1250109;  Feste[77] = 1250120;  Feste[78] = 1250217;  Feste[79] = 1250418;
+    Feste[80] = 1250526;  Feste[81] = 1250619;  Feste[82] = 1250704;  Feste[83] = 1250901;
+    Feste[84] = 1251127;  Feste[85] = 1251225;  Feste[86] = 1260101;  Feste[87] = 1260119;
+    Feste[88] = 1260216;  Feste[89] = 1260403;  Feste[90] = 1260525;  Feste[91] = 1260619;
+    Feste[92] = 1260703;  Feste[93] = 1260907;  Feste[94] = 1261126;  Feste[95] = 1261225;
+    Feste[96] = 1270101;  Feste[97] = 1270118;  Feste[98] = 1270215;  Feste[99] = 1270326;    { 2027 (NYSE) }
+    Feste[100] = 1270531;  Feste[101] = 1270618;  Feste[102] = 1270705;  Feste[103] = 1270906;
+    Feste[104] = 1271125;  Feste[105] = 1271224;
+    NFeste = 106;
+    Mezze[0] = 1170703;  Mezze[1] = 1171124;  Mezze[2] = 1180703;  Mezze[3] = 1181123;
+    Mezze[4] = 1181224;  Mezze[5] = 1190703;  Mezze[6] = 1191129;  Mezze[7] = 1191224;
+    Mezze[8] = 1201127;  Mezze[9] = 1201224;  Mezze[10] = 1211126;  Mezze[11] = 1221125;
+    Mezze[12] = 1230703;  Mezze[13] = 1231124;  Mezze[14] = 1240703;  Mezze[15] = 1241129;
+    Mezze[16] = 1241224;  Mezze[17] = 1250703;  Mezze[18] = 1251128;  Mezze[19] = 1251224;
+    Mezze[20] = 1261127;  Mezze[21] = 1261224;
+    Mezze[22] = 1271126;  { 2027 }
+    NMezze = 23;
+    { ATR giornaliero come pandas in Valeris: alfa = 1 / (1 + com), com = (1 - 1/n) / (1/n) }
+    Tmp = 1 / AtrGiorni;
+    ComW = ( 1 - Tmp ) / Tmp;
+    AG = 1 / ( 1 + ComW );
+    FG = 1 - AG;
+    { Supertrend e ATR delle barre come VectorBT: alfa = 1 / n }
+    AlfaSt = 1 / StPeriodo;
+    FSt = 1 - AlfaSt;
+    AlfaAb = 1 / AtrBarre;
+    FAb = 1 - AlfaAb;
+    { colonne da 5 minuti nella seduta (0 = 17:00, 186 = 08:30, 187 = 08:35, 264 = 15:00, 272 = 15:40) }
+    Minuti = IntPortion( OraBase / 100 ) * 60 + Mod( OraBase, 100 );
+    ColBase = IntPortion( Mod( Minuti - 1020 + 1440, 1440 ) / 5 );
+    Minuti = IntPortion( OraEntrata / 100 ) * 60 + Mod( OraEntrata, 100 );
+    ColEntrata = IntPortion( Mod( Minuti - 1020 + 1440, 1440 ) / 5 );
+    Minuti = IntPortion( OraUscita / 100 ) * 60 + Mod( OraUscita, 100 );
+    ColUscita = IntPortion( Mod( Minuti - 1020 + 1440, 1440 ) / 5 );
+    Minuti = IntPortion( OraCap / 100 ) * 60 + Mod( OraCap, 100 );
+    ColCap = IntPortion( Mod( Minuti - 1020 + 1440, 1440 ) / 5 );
+    if OraChiusuraLucid > 0 then begin
+        Minuti = IntPortion( OraChiusuraLucid / 100 ) * 60 + Mod( OraChiusuraLucid, 100 );
+        ColLucid = IntPortion( Mod( Minuti - 1020 + 1440, 1440 ) / 5 ) - 1;
+    end;
+    Primo = false;
+end;
+
+{ ==========================================================================
+  1. SEDUTA: una barra dopo le 16:30 appartiene alla seduta del giorno dopo.
+  All'inizio di ogni seduta, la seduta regolare appena finita (con la barra
+  delle 08:30 e quella delle 12:00 o delle 15:00, non festiva) aggiorna i
+  dati di "ieri": chiusura, ATR 14, ADR 14, mediana dell'ADR, peso.
+  ========================================================================== }
+if Time > 1630 then
+    NuovaSeduta = CurrentBar > 1 and ( Time[1] <= 1630 or Date[1] <> Date )
+else
+    NuovaSeduta = CurrentBar > 1 and Time[1] <= 1630 and Date[1] <> Date;
+
+if NuovaSeduta then begin
+    if Ha830 and ( Ha1200 or Ha1500 ) and Festa = false and PrimaReg = false then begin
+        if Ha1500 then ChiOggi = Chi1500 else ChiOggi = Chi1200;
+        NReg = NReg + 1;
+        RangeOggi = MaxReg - MinReg;
+        { vero range con la chiusura regolare di ieri (la prima giornata solo massimo - minimo) }
+        if NReg = 1 then TrG = RangeOggi
+        else TrG = MaxList( RangeOggi, AbsValue( MaxReg - ChiIeri ), AbsValue( MinReg - ChiIeri ) );
+        { ATR 14 alla Wilder, come pandas: valido dalla 14a giornata }
+        if NReg = 1 then WAtr = TrG
+        else if WAtr <> TrG then WAtr = ( FG * WAtr + AG * TrG ) / ( FG + AG );
+        { ADR 14: media semplice delle ultime 14 escursioni massimo - minimo }
+        RangeG[ Mod( NReg - 1, AdrGiorni ) ] = RangeOggi;
+        AdrValida = NReg >= AdrGiorni;
+        if AdrValida then begin
+            Tmp = 0;
+            for kk = 0 to AdrGiorni - 1 begin
+                Tmp = Tmp + RangeG[ Mod( NReg + kk, AdrGiorni ) ];
+            end;
+            AdrOggi = Tmp / AdrGiorni;
+        end;
+        { la finestra delle ultime TagliaSedute sedute regolari: esce la piu' vecchia, entra l'ADR di oggi;
+          Ordina tiene gli ADR validi della finestra in ordine crescente }
+        Slot = Mod( NReg - 1, TagliaSedute );
+        if NReg > TagliaSedute and AdrStoOk[Slot] = 1 then begin
+            Tmp = AdrSto[Slot];
+            PosOrd = -1;
+            for jj = 0 to NOrd - 1 begin
+                if PosOrd < 0 then begin
+                    if Ordina[jj] = Tmp then PosOrd = jj;
+                end;
+            end;
+            if PosOrd >= 0 then begin
+                for jj = PosOrd to NOrd - 2 begin
+                    Ordina[jj] = Ordina[jj + 1];
+                end;
+                NOrd = NOrd - 1;
+            end;
+        end;
+        AdrSto[Slot] = AdrOggi;
+        if AdrValida then AdrStoOk[Slot] = 1 else AdrStoOk[Slot] = 0;
+        if AdrValida then begin
+            PosOrd = NOrd;
+            Fatto = false;
+            for jj = NOrd downto 1 begin
+                if Fatto = false then begin
+                    if Ordina[jj - 1] > AdrOggi then begin
+                        Ordina[jj] = Ordina[jj - 1];
+                        PosOrd = jj - 1;
+                    end
+                    else Fatto = true;
+                end;
+            end;
+            Ordina[PosOrd] = AdrOggi;
+            NOrd = NOrd + 1;
+        end;
+        { la mediana (con un numero pari di valori, la media dei due di mezzo) }
+        if NOrd >= TagliaMin then begin
+            if Mod( NOrd, 2 ) = 1 then MedIeri = Ordina[ IntPortion( NOrd / 2 ) ]
+            else MedIeri = ( Ordina[ IntPortion( NOrd / 2 ) - 1 ] + Ordina[ IntPortion( NOrd / 2 ) ] ) / 2;
+            MedOk = true;
+        end
+        else MedOk = false;
+        { i dati di ieri }
+        AtrOk = NReg >= AtrGiorni;
+        AtrIeri = WAtr;
+        AdrOk = AdrValida and AdrOggi > 0;
+        AdrIeri = AdrOggi;
+        ChiIeri = ChiOggi;
+        { il peso della taglia dinamica di Valeris }
+        Peso = 1;
+        if AdrOk and MedOk then begin
+            Peso = Power( MedIeri / AdrIeri, TagliaE );
+            if Peso < 1 / TagliaTetto then Peso = 1 / TagliaTetto;
+            if Peso > TagliaTetto then Peso = TagliaTetto;
+        end;
+    end;
+    { sicurezza: mai una posizione aperta in una seduta nuova (in Valeris non succede) }
+    if MarketPosition > 0 then Sell ( "848 sic LX" ) this bar on close;
+    if MarketPosition < 0 then BuyToCover ( "848 sic SX" ) this bar on close;
+    if MarketPosition <> 0 then Print( "S848 AVVISO ", Date, " ", Time, " posizione aperta a inizio seduta: chiusa" );
+end;
+
+if NuovaSeduta or CurrentBar = 1 then begin
+    if Time > 1630 then SessData = JulianToDate( DateToJulian( Date ) + 1 ) else SessData = Date;
+    Festa = false;
+    for jj = 0 to NFeste - 1 begin
+        if Feste[jj] = SessData then Festa = true;
+    end;
+    Mezza = false;
+    for jj = 0 to NMezze - 1 begin
+        if Mezze[jj] = SessData then Mezza = true;
+    end;
+    Ha830 = false;
+    Ha1200 = false;
+    Ha1500 = false;
+    PrimaReg = true;
+    Fase = 0;
+    Verso = 0;
+    NTrade = 0;
+    InPos = false;
+    BarIn = -1;
+    UscitaBar = -1;
+    HaFi = false;
+    FiBar = -1;
+    { stop, target e pareggio della seduta in punti, dall'ADR 14 di ieri; livelli dei rientri; contratti }
+    if AdrOk then begin
+        StopPunti = StopAdr * AdrIeri;
+        TargetPunti = TargetAdr * AdrIeri;
+        PareggioPunti = PareggioAdr * AdrIeri;
+    end
+    else begin
+        StopPunti = 0;
+        TargetPunti = 0;
+        PareggioPunti = 0;
+    end;
+    { la distanza dello stop: quella di Valeris, o arrotondata per eccesso ai tick interi (i prezzi stanno sui tick:
+      lo stop arrotondato lontano dall'entrata e' toccato esattamente quando e' toccato quello di Valeris) }
+    DistStop = StopPunti;
+    if ArrotondaStop = 1 and StopPunti > 0 then begin
+        NTick = IntPortion( StopPunti / TickPunti );
+        if StopPunti / TickPunti > NTick then NTick = NTick + 1;
+        DistStop = NTick * TickPunti;
+    end;
+    LevL = ChiIeri + KAtr * AtrIeri;
+    LevS = ChiIeri - KAtr * AtrIeri;
+    if TagliaDinamica = 1 then Contratti = MaxList( 1, IntPortion( NumContracts * Peso + 0.5 ) )
+    else Contratti = NumContracts;
+    if CurrentBar = 1 then Fase = 9;             { la prima seduta del grafico e' a meta': niente }
+end;
+
+{ --- la seduta regolare di oggi: barre 08:35-15:00, chiusura delle 15:00 o delle 12:00 --- }
+if Time = OraBase then begin
+    Ha830 = true;
+    Chi830 = Close;
+end;
+if Time > 830 and Time <= 1500 then begin
+    if PrimaReg then begin
+        MaxReg = High;
+        MinReg = Low;
+        PrimaReg = false;
+    end
+    else begin
+        if High > MaxReg then MaxReg = High;
+        if Low < MinReg then MinReg = Low;
+    end;
+end;
+if Time = 1200 then begin
+    Ha1200 = true;
+    Chi1200 = Close;
+end;
+if Time = 1500 then begin
+    Ha1500 = true;
+    Chi1500 = Close;
+end;
+
+{ --- la colonna della barra nella seduta (0 = 17:00, 1 = 17:05, 187 = 08:35, 264 = 15:00) --- }
+Minuti = IntPortion( Time / 100 ) * 60 + Mod( Time, 100 );
+Col = IntPortion( Mod( Minuti - 1020 + 1440, 1440 ) / 5 );
+
+{ ==========================================================================
+  2. SUPERTREND (10, 2) E ATR 14 DELLE BARRE come VectorBT (SUPERTREND.run e
+  ATR.run), su tutte le barre da 5 minuti del grafico, anche di notte: veri
+  range dalla seconda barra, medie di Wilder (alfa = 1/n) valide dalla n-esima;
+  bande base (H+L)/2 +- 2 ATR; bande finali che si stringono; verso che cambia
+  solo se la chiusura supera la banda opposta; linea = banda bassa se il verso
+  e' su, banda alta se e' giu'.
+  ========================================================================== }
+if CurrentBar = 1 then begin
+    StDir = 1;
+    StHaUp = false;
+    StHaLo = false;
+    StN = 0;
+    StHaW = false;
+    StOk = false;
+    AbHaW = false;
+    AbOk = false;
+end
+else begin
+    TrB = MaxList( AbsValue( High - Low ), AbsValue( High - CPrec ), AbsValue( Low - CPrec ) );
+    StN = StN + 1;
+    if StHaW then begin
+        if StW <> TrB then StW = ( FSt * StW + AlfaSt * TrB ) / ( FSt + AlfaSt );
+    end
+    else begin
+        StW = TrB;
+        StHaW = true;
+    end;
+    if AbHaW then begin
+        if AbW <> TrB then AbW = ( FAb * AbW + AlfaAb * TrB ) / ( FAb + AlfaAb );
+    end
+    else begin
+        AbW = TrB;
+        AbHaW = true;
+    end;
+    AbOk = StN >= AtrBarre;
+    if StN >= StPeriodo then begin
+        MedB = ( High + Low ) / 2;
+        UpB = MedB + StMolt * StW;
+        LoB = MedB - StMolt * StW;
+        if StHaUp = false or UpB < StUp or CPrec > StUp then StUp = UpB;
+        if StHaLo = false or LoB > StLo or CPrec < StLo then StLo = LoB;
+        StHaUp = true;
+        StHaLo = true;
+        if Close > StUp then StDir = 1
+        else if Close < StLo then StDir = -1;
+        if StDir > 0 then StLinea = StLo else StLinea = StUp;
+        StOk = true;
+    end;
+end;
+CIeriBarra = CPrec;
+CPrec = Close;
+
+{ --- la fine dei rientri: 6 barre dopo quella delle 15:00, mai oltre la barra delle 15:40; LucidFlex --- }
+if HaFi = false and Col >= ColUscita and Col <= 282 then begin
+    HaFi = true;
+    FiBar = CurrentBar;
+end;
+AlFr = ( HaFi and CurrentBar >= FiBar + Oltre ) or ( Col >= ColCap and Col <= 282 );
+Lucid = Col >= ColLucid and Col <= 282;
+
+{ ==========================================================================
+  3. un'operazione chiusa dallo stop, dal pareggio o dal target dentro questa
+  barra: si annota la barra d'uscita (la pausa dei rientri parte da qui)
+  ========================================================================== }
+if InPos and CurrentBar > BarIn and MarketPosition = 0 then begin
+    InPos = false;
+    UscitaBar = CurrentBar;
+    if NTrade >= NMax then Fase = 9 else Fase = 3;
+end;
+
+{ ==========================================================================
+  4. uscite a orario: la base alla chiusura della barra delle 15:00, i
+  rientri alla fine dei rientri (15:30; 15:40 al massimo); LucidFlex
+  ========================================================================== }
+if InPos and MarketPosition <> 0 then begin
+    if ( NTrade = 1 and Col >= ColUscita and Col <= 282 ) or ( NTrade >= 2 and AlFr ) or Lucid then begin
+        if MarketPosition > 0 then Sell ( "848 fine LX" ) this bar on close;
+        if MarketPosition < 0 then BuyToCover ( "848 fine SX" ) this bar on close;
+        InPos = false;
+        UscitaBar = CurrentBar;
+        if NTrade >= NMax or Lucid then Fase = 9 else Fase = 3;
+    end;
+end;
+
+{ ==========================================================================
+  5. la base alla barra delle 08:35: il verso della prima candela, il filtro
+  Supertrend, l'entrata alla chiusura
+  ========================================================================== }
+if Col = ColEntrata and Fase = 0 then begin
+    Entra = false;
+    if Festa = false and Mezza = false and Ha830 and AtrOk and AdrOk and StOk and AbOk and Lucid = false then begin
+        Candela = Close - Chi830;
+        Verso = 0;
+        if Candela > 0 then Verso = VersoRegola;
+        if Candela < 0 then Verso = -VersoRegola;
+        if Verso <> 0 and AbsValue( Candela ) >= SogliaAtr * AtrIeri and AbW > 0 then begin
+            Zeta = Verso * ( Close - StLinea ) / AbW;
+            if Zeta >= FiltroMin and Zeta < FiltroMax then Entra = true;
+        end;
+    end;
+    { Lato: 1 solo long, -1 solo short; una seduta dell'altro verso non entra (Fase 9: niente base e niente rientri) }
+    if Lato <> 0 and Verso <> Lato then Entra = false;
+    if Entra then begin
+        if Verso > 0 then Buy ( "848 L" ) Contratti contracts this bar on close;
+        if Verso < 0 then SellShort ( "848 S" ) Contratti contracts this bar on close;
+        Fase = 2;
+        InPos = true;
+        BarIn = CurrentBar;
+        NTrade = 1;
+        Migliore = Close;
+        BeOk = false;
+    end
+    else Fase = 9;
+end;
+
+{ ==========================================================================
+  6. i rientri: la chiusura passa il livello chiusura di ieri -/+ 0,25 ATR 14
+  (la barra prima dalla parte di prima, questa dall'altra), nello stesso verso
+  ========================================================================== }
+if Fase = 3 and MarketPosition = 0 and InPos = false then begin
+    if AlFr or Lucid then Fase = 9
+    else if CurrentBar >= UscitaBar + 1 + Pausa then begin
+        if Verso > 0 then Lev = LevL else Lev = LevS;
+        Entra = false;
+        if Verso > 0 and Close > Lev and CIeriBarra <= Lev then Entra = true;
+        if Verso < 0 and Close < Lev and CIeriBarra >= Lev then Entra = true;
+        if Entra then begin
+            if Verso > 0 then Buy ( "848 RL" ) Contratti contracts this bar on close;
+            if Verso < 0 then SellShort ( "848 RS" ) Contratti contracts this bar on close;
+            Fase = 4;
+            InPos = true;
+            BarIn = CurrentBar;
+            NTrade = NTrade + 1;
+            Migliore = Close;
+            BeOk = false;
+        end;
+    end;
+end;
+
+{ ==========================================================================
+  7. il pareggio: il prezzo migliore dalle barre DOPO quella d'entrata; a 0,5
+  ADR di guadagno lo stop va al prezzo d'entrata, dalla barra dopo
+  ========================================================================== }
+if InPos and MarketPosition <> 0 and CurrentBar > BarIn then begin
+    if Verso > 0 and High > Migliore then Migliore = High;
+    if Verso < 0 and Low < Migliore then Migliore = Low;
+    if PareggioPunti > 0 and ( Migliore - EntryPrice ) * Verso >= PareggioPunti then BeOk = true;
+    if BeOk then begin
+        if MarketPosition > 0 then Sell ( "848 BE LX" ) next bar at EntryPrice stop;
+        if MarketPosition < 0 then BuyToCover ( "848 BE SX" ) next bar at EntryPrice stop;
+    end;
+end;
+
+{ ==========================================================================
+  STOP E TARGET di MultiCharts, per contratto, dalla barra dopo l'entrata:
+  0,1 ADR (ai tick interi con ArrotondaStop = 1) e 5 ADR 14 di ieri in punti
+  (SetStopLoss e SetProfitTarget vogliono dollari per contratto: punti x
+  BigPointValue, cioe' 2 $ a punto sul micro)
+  ========================================================================== }
+SetStopContract;
+if DistStop > 0 then SetStopLoss( DistStop * BigPointValue );
+if TargetPunti > 0 then SetProfitTarget( TargetPunti * BigPointValue );

@@ -1,0 +1,153 @@
+STRATEGY OVERVIEW · NQ / MNQ
+
+
+OB v2 — Overnight Bias ORB with an ATR regime filter
+E-mini Nasdaq-100 · 15-minute bars · Chicago time · long or short, up to 4 trades a day · entries 08:45–12:00 CT ·
+flat at 14:30 CT · based on The Bridge's OvernightBias ORB signal
+
+
+ Net, 1 MNQ                Profit factor           Trades a year          Win rate               Max drawdown            Robustness grade
+
+ $23,094                   1.75                    64                     52.2%                  $1,178                     S
+MultiCharts backtest, 2017-05-25 → 2026-10-16, 603 trades, costs included, 1 MNQ (×10 = 1 NQ). Max drawdown counts closed equity plus
+each trade's worst open loss. Closed-trade drawdown $1,088. Nothing is held overnight.
+
+
+Equity path and drawdown
+
+
+
+
+Worst drawdowns (including open-trade loss)                                By year
+ Depth, 1 MNQ      Peak               Low           Recovered      Days     Year              Trades               1 MNQ               1 NQ
+
+      $1,178.25 2024-01-08            2024-02-16    2024-05-14      127     2017                   31             $166.00            $1,660
+
+      $1,085.25 2023-02-21            2023-03-29    2023-09-21      212     2018                   44             $103.00            $1,030
+
+      $1,053.75 2026-09-21            2026-10-05    2026-10-16       25     2019                   57             $626.00            $6,260
+
+        $986.75    2026-04-15         2026-05-20    2026-06-05       50     2020                   49           $1,997.00           $19,970
+
+Now $0.00 from the peak.                                                    2021                   71           $1,477.00           $14,770
+
+                                                                            2022                   72           $3,854.00           $38,540
+
+                                                                            2023                   90           $1,763.00           $17,630
+
+                                                                            2024                   80           $5,227.00           $52,270
+
+                                                                            2025                   37             $965.00            $9,650
+
+                                                                            2026                   72           $6,916.50           $69,165
+
+                                                                           2017 from 2017-05-25; 2026 to 2026-10-16. Positive years 10 of 10.
+
+
+The trade story
+Where NQ opens inside its overnight range shows which side the night favoured. An open in the top third of the
+overnight range allows only longs that day, an open in the bottom third only shorts, and anything in between is a
+no-trade day. After the first 15 minutes, the strategy takes the first 15-minute close beyond that opening range in
+the allowed direction, but only when the market is trending (ADX) and the breakout bar is not an exhaustion bar.
+Stop and target scale with daily volatility. v2 adds one condition: recent volatility must be in a normal range
+compared with the last 100 days, which skips the most unusual markets.
+
+Rules
+Day's direction                Open at 08:30 CT inside the overnight range (midnight → 08:30 CT; the date change resets it):
+                               top third (≥ 0.67) = longs only, bottom third (≤ 0.33) = shorts only, otherwise no trade.
+
+Opening range                  08:30–08:45 CT high and low. Day skipped if that range is more than 2 × its recent (20-day)
+                               average.
+
+Entry                          First 15-minute close beyond the opening range in the allowed direction, 08:45–12:00 CT, with
+                               ADX(16) ≥ 20 and the bar's range ≤ 2.5 × the average of the prior 20 bars; market order on the
+                               next bar. One position at a time, up to 4 trades a day.
+
+Exits                          Stop 0.30 × ATR from the signal close, where ATR = the 15-day average true range of the
+                               08:30–15:00 session; target 3 × the stop; market exit at 14:30 CT.
+
+v2 regime filter               Trade only when that 15-day ATR ÷ the 100-day ATR is between 0.6 and 1.2.
+
+
+
+  Why it should work                                               Risks and caveats
+  The open's position in the overnight range reads                    How the filter was found: on 2017–2022, a 1.5
+  which side carried inventory into the US session;                   cap was best with a 100-day lookback and 1.2
+  the breakout trades with it. There is no published                  with a 50-day one; a lower limit under 0.6
+  effect size for this rule.                                          changes nothing. On 2023–26, with the 1.2 cap,
+        Every year positive in the backtest above (10 of              lookbacks of 80, 100 and 120 days all gave the
+        10).                                                          same worst drawdown ($1,201 vs $1,855.50 for
+                                                                      the original) and PF about 1.92 vs 1.62, for about
+        The filter is a drawdown filter: on 2023 →
+                                                                      $600–700 less profit; 50, 60 and 150 days were
+        2026-10-01 it cut the worst closed drawdown
+                                                                      clearly worse. 100 days sits in the middle of that
+        from $1,855.50 to $1,201 for about 5% less profit
+                                                                      plateau.
+        (PF 1.91–1.94 vs about 1.62), and lookbacks of
+        80, 100 and 120 days gave the same drawdown.                  What it does: it skips volatility-expansion days.
+                                                                      Those days paid in 2017–2022, so there the filter
+        Data source matters: the same original signal
+                                                                      made less than the original ($8,223 vs about
+        made $17,016 on The Bridge's data vs
+                                                                      $11,019.50) with a much smaller drawdown
+        $13,823.50 on dxFeed over 2023-01-25 → 2026-
+                                                                      ($985 vs $1,857.50); in 2023–26 they cost money,
+        07-01. The two feeds' bars differ in timing
+                                                                      mostly in 2025. It is kept for the drawdown cut,
+        around some entries and exits; the full cause is
+                                                                      not for profit.
+        not settled.
+                                                                      Clean test: 2023–26 was part of the lookback
+                                                                      comparison, so live results are the clean test.
+                                                                      Concentrated: 2024 and 2026 make 53% of the
+                                                                      net.
+                                                                      Warm-up: it takes no trade until 100 sessions of
+                                                                      history exist.
+Robustness grade S
+ Split at 2023-01-01, 1 MNQ                                                                      2017–2022                                       2023 →
+ Trades                                                                                                   324                                        279
+
+ Expected value per trade                                                                             $25.38                                      $53.30
+
+ Kept in 2023 →                                                                            210% of the 2017–2022 edge · P(edge ≤ 0) = 0.0001
+
+ 2023 → net / max drawdown                                                                 $14,872 / $1,088 (closed) · return ÷ drawdown 13.67
+
+ Monte-Carlo max drawdown                                                              median $1,534 · 75th $1,856 · 95th $2,495 · 99th $3,125
+
+Graded 2026-10-17 on this export. 2023 → was viewed while comparing filter lookbacks, so read that column as a check, not a blind test.
+Expected value from a 10,000-draw bootstrap; drawdowns from a 20,000-path Monte Carlo of the trade sequence (closed equity).
+
+
+Tried and rejected — do not repeat
+ When               Tried                                              Result (1 MNQ, 2017–2022 unless noted)                          Verdict
+ 2026-10-06         Intraday ATR stop, trailing stop, 5R               525 trades, $8,031, PF 1.36, drawdown $1,930                    Trail rejected
+                    target (four changes at once)
+
+ 2026-10-06         Skip breakouts that close too far                  No cap beats no cap: best $10,100–$10,400 vs                    Rejected
+                    beyond the range (cap 0.05–1.00 × ATR)             $11,019.50
+
+ 2026-10-06         Other target multiples                             About the same or worse (report not kept)                       Target 3 kept
+
+ 2026-10-06         Regime filter with 50, 60 or 150-day               −⁠$1,737, −⁠$1,595, −⁠$4,268 vs the original; 80–120            100 days kept
+                    lookbacks (2023 → 2026-10-01)                      days only about −⁠$600 to −⁠$700
+
+
+Kill test — what would prove it wrong
+ Watch                                          From the data                                                           Warning sign
+ Drawdown                                       Worst so far $1,178 (incl. open loss); Monte-Carlo 75th                 Beyond the 75th percentile.
+                                                percentile $1,856 (closed equity)
+
+ Win rate                                       52.2%; it needs 38.6% to make money (average win                        Win rate sliding toward
+                                                $171.54, average loss −⁠$107.81)                                        38.6%.
+
+ Trade count                                    ≈ 64 a year                                                             Materially more or fewer:
+                                                                                                                        setup drift.
+
+ The filter                                     Run the unfiltered signal alongside on a sim chart                      v2 stops having the smaller
+                                                                                                                        drawdown.
+
+Long 328 trades $13,908 · short 275 trades $9,186 · largest win $870.00, loss −⁠$318.50 · positive months 72 of 114. Source: MultiCharts backtests; rules
+from the strategy code. Backtests, not account results. Prepared 2026-10-23.
+

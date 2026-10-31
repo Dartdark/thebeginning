@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "run_id": "scout-underused-20261029",
+  "recorded_at": "2026-10-29T21:40:01Z",
+  "checked_remote_head": "926ba72f8e82f8e111a32180dab26167aee732aa",
+  "discovery_method": "Connected public web search fallback; unchanged restricted executor policy blocks data hosts/Crossref. No bypass.",
+  "search_groups": [
+    "SSRN commodity index roll price pressure forced rebalancing natural gas agricultural",
+    "SSRN delivery forced liquidation livestock grain calendar spreads",
+    "platinum palladium index rebalancing",
+    "Liquidity Timing Neuhierl Thompson PDF and author page",
+    "One Contract Two Deals author and conference source",
+    "Goldman Roll Mou PDF and CFTC studies",
+    "free individual livestock contracts and CME spread samples",
+    "cotton on-call, coffee roll and forced delivery sources"
+  ],
+  "resumed_work_check": {
+    "active_reservation": false,
+    "lease": null,
+    "prior_blocked_ids": [
+      "7601879",
+      "5207418",
+      "7330098"
+    ],
+    "action": "Reviewed committed gaps and user-confirmed neither licensed source. Awaiting input, no unchanged denial retries; proceeded to new source triage.",
+    "paused_programs": "t6 and Hunt v2 unchanged"
+  },
+  "paper_records": [
+    "agents/codex/research/scout/records/1716841.json",
+    "agents/codex/research/scout/records/7425358.json",
+    "agents/codex/research/scout/records/2682698.json",
+    "agents/codex/research/scout/records/3357455.json",
+    "agents/codex/research/scout/records/1478195.json"
+  ],
+  "full_source_reviews": 2,
+  "metadata_only_records": 3,
+  "new_hypotheses": 0,
+  "new_economic_definitions": 0,
+  "return_tests_executed": false,
+  "download_attempts": [
+    {
+      "url": "https://farmdoc.illinois.edu/assets/meetings/nccc134/conf_2026/pdf/Richie_Ma_Ma_Serra_Peterson_Irwin_NCCC-134_2026.pdf",
+      "method": "Configured Python urllib via inherited proxy;12-second timeout; network permission granted",
+      "outcome": "Tunnel connection failed:403 Forbidden",
+      "bytes_saved": 0,
+      "retried": false
+    },
+    {
+      "url": "https://www.cftc.gov/idc/groups/public/%40swaps/documents/file/plstudy_33_yu.pdf",
+      "method": "Configured Python urllib via inherited proxy;12-second timeout; network permission granted",
+      "outcome": "Tunnel connection failed:403 Forbidden",
+      "bytes_saved": 0,
+      "retried": false
+    },
+    {
+      "url": "https://www.cmegroup.com/market-data/datamine-historical-data/files/xcbt_md_zs_fut_spd_20200312-r-00094.gz",
+      "method": "Configured Python urllib via inherited proxy;12-second timeout; network permission granted",
+      "outcome": "Tunnel connection failed:403 Forbidden",
+      "bytes_saved": 0,
+      "retried": false
+    },
+    {
+      "url": "https://www.turtletrader.com/cddata/lh.zip",
+      "method": "Configured Python urllib via inherited proxy;12-second timeout; network permission granted",
+      "outcome": "Tunnel connection failed:403 Forbidden",
+      "bytes_saved": 0,
+      "retried": false
+    }
+  ],
+  "source_access": [
+    {
+      "url": "https://www.cftc.gov/idc/groups/public/%40swaps/documents/file/plstudy_33_yu.pdf",
+      "method": "connected PDF reader",
+      "status": "46-page source accessible; executor PDF download403"
+    },
+    {
+      "url": "https://farmdoc.illinois.edu/assets/meetings/nccc134/conf_2026/pdf/Richie_Ma_Ma_Serra_Peterson_Irwin_NCCC-134_2026.pdf",
+      "method": "author to Illinois to connected PDF reader",
+      "status": "57-page conference source accessible; executor PDF download403; SSRN59-page source403"
+    },
+    {
+      "url": "https://aneuhierl.github.io/research/",
+      "method": "connected HTML reader",
+      "status": "Current author page points2682698 to SSRN; no alternative manuscript found"
+    },
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2682698",
+      "method": "connected reader",
+      "status": "403; public indexed abstract used only"
+    },
+    {
+      "url": "https://soas-repository.worktribe.com/output/385832",
+      "method": "connected reader",
+      "status": "403; indexed institutional/SSRN metadata only"
+    }
+  ],
+  "free_data_routes": [
+    {
+      "url": "https://cmegroupclientsite.atlassian.net/wiki/spaces/EPICSANDBOX/pages/457091894/Market+Depth",
+      "status": "Official soybean-spread2020-03-12 sample and security-definition links located. Reader gzip unsupported; executor sample403. No quotes acquired or parsed. A sample does not establish panel coverage."
+    },
+    {
+      "url": "https://www.turtletrader.com/hpd/",
+      "status": "Original public free archive located; hog ZIP reader unsupported and executor403. Static archive not asserted to supply2018\u201322."
+    },
+    {
+      "url": "https://huggingface.co/datasets/Viharikvs/TFSMAG/blob/main/README.md",
+      "status": "Secondary card only: deep spreads1959\u20132004; recent spreads2021\u20132026. No complete2018\u201322; rights, identities and raw values unaudited. No files copied."
+    }
+  ],
+  "additional_discovery": [
+    {
+      "url": "https://cottonmarketing.tamu.edu/recent-price-patterns-and-short-term-influences/on-call-sales-report/",
+      "status": "Public extension explanation: unfixed cotton sales can imply later hedge buybacks. Not a reviewed SSRN paper, no tested rule or claimed alpha."
+    },
+    {
+      "url": "https://catalog.data.gov/dataset/cotton-on-call",
+      "status": "Government catalog describes weekly unfixed quantities by corresponding futures. No historical values or original availability acquired."
+    }
+  ],
+  "deduplication": [
+    "TIER_LIST.md CL business-day1\u20134 outright roll short; prior calendar/window selection retained",
+    "agents/codex/research/hunt_v2_annual_index_reweight_source.md read only; no resumption",
+    "results/TODO/WATCHLIST/execution/scout records checked by IDs, titles, authors and families; no existing1716841/7425358 dedicated review found",
+    "1478195 and2693084 retained as same-title version aliases, not independent hypotheses"
+  ],
+  "no_external_action": true,
+  "source_original_hashes": "Unknown: no original PDF bytes obtained. Do not hash notes as if original PDFs."
+}

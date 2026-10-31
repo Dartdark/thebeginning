@@ -1,0 +1,632 @@
+{
+  "preregistration": "eb7b8b07fd54e8083a13b04f25d1c5b59c68a00b",
+  "published_files": [
+    "analysis/codex_nqdb2_replay.py",
+    "analysis/codex_nqdb2_run_profiles.py",
+    "analysis/codex_nqdb2_diagnostics.py",
+    "analysis/codex_nqdb2_accounts.py",
+    "analysis/codex_nqdb2_test.py",
+    "agents/codex/inputs/nqdb2/test_context.json",
+    "agents/codex/results/nqdb2_test.md",
+    "agents/codex/results/nqdb2_independent_review.md",
+    "analysis/outputs/codex_nqdb2_test/all_period_metrics.csv",
+    "analysis/outputs/codex_nqdb2_test/design_metrics.csv",
+    "analysis/outputs/codex_nqdb2_test/recent_metrics.csv",
+    "analysis/outputs/codex_nqdb2_test/design_yearly.csv",
+    "analysis/outputs/codex_nqdb2_test/recent_yearly.csv",
+    "analysis/outputs/codex_nqdb2_test/design_gate.json",
+    "analysis/outputs/codex_nqdb2_test/accounts_gate.json",
+    "analysis/outputs/codex_nqdb2_test/design_manifest.json",
+    "analysis/outputs/codex_nqdb2_test/recent_manifest.json",
+    "analysis/outputs/codex_nqdb2_test/environment.json",
+    "analysis/outputs/codex_nqdb2_test/trial_ledger.csv",
+    "analysis/outputs/codex_nqdb2_test/recent_A1_bootstrap.csv",
+    "analysis/outputs/codex_nqdb2_test/recent_A1_bootstrap_extra.json",
+    "analysis/outputs/codex_nqdb2_test/baselineall_metrics.csv",
+    "analysis/outputs/codex_nqdb2_test/baselineall_metadata.json",
+    "analysis/outputs/codex_nqdb2_test/design_current_vb_metadata.json",
+    "analysis/outputs/codex_nqdb2_test/literal_carry_trades.csv",
+    "analysis/outputs/codex_nqdb2_test/design_A0.csv",
+    "analysis/outputs/codex_nqdb2_test/design_A1.csv",
+    "analysis/outputs/codex_nqdb2_test/recent_A0.csv",
+    "analysis/outputs/codex_nqdb2_test/recent_A1.csv",
+    "analysis/outputs/codex_nqdb2_test/design_A1_orders.csv",
+    "analysis/outputs/codex_nqdb2_test/recent_A1_orders.csv",
+    "analysis/outputs/codex_nqdb2_test/design_A1_daily.csv",
+    "analysis/outputs/codex_nqdb2_test/recent_A1_daily.csv",
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_full_audit.json",
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_calendar_audit.json",
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_raw_gap_evidence.json",
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_held_data_gaps.csv",
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_calendar_violations.csv",
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_timing_price_violations.csv",
+    "analysis/outputs/codex_nqdb2_test/accounts/run_launcher.json",
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/summary.json",
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/A_filter_removed_trades.csv",
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/A_filter_new_reentry_trades.csv",
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/S_filter_removed_trades.csv",
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/S_filter_new_reentry_trades.csv",
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/summary.json",
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/A_filter_removed_trades.csv",
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/A_filter_new_reentry_trades.csv",
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/S_filter_removed_trades.csv",
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/S_filter_new_reentry_trades.csv",
+    "analysis/outputs/codex_nqdb2_test/publication_manifest.json"
+  ],
+  "generated_files": {
+    "analysis/outputs/codex_nqdb2_test/recent_A1_daily.csv": {
+      "bytes": 16098,
+      "sha256": "872c37a1bf6aca010e491cf5e32e0269834e4eef52849b3334d4c8a2200b00c3",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_S0_orders.csv": {
+      "bytes": 327327,
+      "sha256": "4a5e0b45bd6472c5cb085489a4e47ae29c4ca9cc2ca9de06effff97266db69cc",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_S0_orders.csv": {
+      "bytes": 381263,
+      "sha256": "7b277bb8e3b100911d531361e6d8d9a20bc583ca517d564d6168f39cc0db7d0c",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_A1_reconciliation.csv": {
+      "bytes": 24636,
+      "sha256": "3dd0681d7c232c4810e1b1d9135010b4859616108354588e61ef5cc7b36eaaf1",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/literal_carry_trades.csv": {
+      "bytes": 1810,
+      "sha256": "cfcb224f4ebe228b998a0b36327cdc592c683d65e0596a009a0617bc83975dc4",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/design_S0_reconciliation.csv": {
+      "bytes": 25004,
+      "sha256": "e8eb6350d679d552bbd927d7d39696edad3420b68384cc3e27864576041500c8",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_manifest.json": {
+      "bytes": 2027,
+      "sha256": "0af0c58afee70b773461fb9a3b4ef185e0eb32e6dc1b32b2cb1ef1f7957d4109",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/design_S1_reconciliation.csv": {
+      "bytes": 24666,
+      "sha256": "1f413048654aafa2acaa5a42329d478fe5f05d6e54a22d99f7c5886c149cf263",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_A0_daily.csv": {
+      "bytes": 16096,
+      "sha256": "38ae16e336d0422752c494b256a437949c61ebb243d7460202db3053fb400331",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_S1_orders.csv": {
+      "bytes": 376846,
+      "sha256": "71ece449dca77cb2881735804622a740b3a1e12ba76411ef5e962b05de7d6820",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_A0.csv": {
+      "bytes": 172742,
+      "sha256": "75e6e65c30803fc2fc4db5b51ef758788e43f486fb915c57fbc6a6e5e42f921b",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_A1_reconciliation.csv": {
+      "bytes": 22530,
+      "sha256": "432ab8e86f5a848ee978cd8d3b25980c14bb3b3b0ab134931c28defd73a3be50",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_E1.csv": {
+      "bytes": 171055,
+      "sha256": "83c23c4a2a6db22ead450826689d55c7c49992f956649a6e0697e87ad4f37ca5",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/baselineall_daily.csv": {
+      "bytes": 37155,
+      "sha256": "0f0bc8f5f65748da593a0132ef98c9b411377db1c886d23653650655aebb1aec",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_A1.csv": {
+      "bytes": 187364,
+      "sha256": "e9cbadb372146d5bed6e0586b581e0620f9a15bd5927efc53b17eff688a8cba5",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_A1_bootstrap.csv": {
+      "bytes": 580,
+      "sha256": "438ff5fd5e3c613f06b9f9504f98ccd62f138a5753dab06bc3a7d9b84b1abd7e",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_A1_orders.csv": {
+      "bytes": 321307,
+      "sha256": "516a3e1d81b2e68c1311a0a344d33ada9f3c214503859e27bc8fa27ef95e0b14",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/trial_ledger.csv": {
+      "bytes": 900,
+      "sha256": "1279b529404d9011df8c6b989ee72272d0a5e6cd7f25f1ca949797af7078e14c",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_E1_audit.json": {
+      "bytes": 1487,
+      "sha256": "c939fe4261f345df934e2798f1a842b8a46ac8b969541fc6549f83f35440b17c",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_S0_audit.json": {
+      "bytes": 1537,
+      "sha256": "05bb6360ff67e7d09bd41838803794d636c89cf2f927c7c669c7fcc8e6cde250",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_A1_orders.csv": {
+      "bytes": 376235,
+      "sha256": "63ad26d8bdd2ef675e41cf62d4f0b7cedc8a615790a6a30054514a5d01a09d79",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_S0.csv": {
+      "bytes": 173918,
+      "sha256": "8f7689dbfe056424f6ce799d957594e2585f0588dc6fb7c9c5343850e751f689",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_E1_audit.json": {
+      "bytes": 1508,
+      "sha256": "f276bfe917080f9ba951a6af15e20ab734925b5c933c4b35105d5c5757628f8a",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_S0_daily.csv": {
+      "bytes": 21246,
+      "sha256": "5d5bc6bef1a75713b702b30c4a4c7d090e3484d1734ad723c76dbc689cf59438",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_S1_reconciliation.csv": {
+      "bytes": 22688,
+      "sha256": "08edd2e4a736f48839ca4477d383cf1e625a9ecfe579178111ca1ef9c227504f",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_S1_daily.csv": {
+      "bytes": 21234,
+      "sha256": "64a2a7d0863774e4bc388889c3d37d9635655c442dafc542ec9325a74ac4603c",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/candidate_A1.csv": {
+      "bytes": 357634,
+      "sha256": "b7b8b56a0b8d2d873fa0a05695c60b7d0efbbbc82a15ee2849c1af44f907aca6",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_current_vb.csv": {
+      "bytes": 123390,
+      "sha256": "741e600b9d630d66317c8ca14cbc1193ee98bd9a67d4abbb3ca08acfc17af902",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_E1_reconciliation.csv": {
+      "bytes": 24660,
+      "sha256": "88275d873e9a567068186fd2ed88885bba53a0247c0fc3fb7e4a17ca03f05195",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_A0_audit.json": {
+      "bytes": 1507,
+      "sha256": "316062ee7dffa27445dac6530783083587042a9e81c47af70349ca11aeeb9e03",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_features.pkl": {
+      "bytes": 21558459,
+      "sha256": "1436973413122ed9dd8b17ccb0959171eb8b1b68bcf0525eb12569bf8e4ba980",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_summary.json": {
+      "bytes": 30495,
+      "sha256": "53afabc84a9dd2a00cb0c0369c6ed780e4659990f1fefa0ebf66805716f0cc59",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_E1_orders.csv": {
+      "bytes": 321307,
+      "sha256": "516a3e1d81b2e68c1311a0a344d33ada9f3c214503859e27bc8fa27ef95e0b14",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_S1_audit.json": {
+      "bytes": 1540,
+      "sha256": "a6c7bb4b0a1e87a27c79cf701ad3082cc7548671a6f208cde2f3daed0d974a87",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_gate.json": {
+      "bytes": 913,
+      "sha256": "d30dfd47403d0418a09dade4cf634fa229d750284c094732b732b1f0c26b76e6",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/design_A1_daily.csv": {
+      "bytes": 21224,
+      "sha256": "df77df9965cd1382d5e874a5fac21ef8add4899978984068735bb9e5d72725a5",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/baselineall.csv": {
+      "bytes": 254502,
+      "sha256": "76d5eec5602aac900ceb554baf8ebc0082ff088dbbca7edeb8f33218c6abb030",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_S1_orders.csv": {
+      "bytes": 323791,
+      "sha256": "b60d986c4b5546164bc7be4ed263d0fe6aab2d4d0598fb6456a86f9dd8f62092",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_metrics.csv": {
+      "bytes": 2968,
+      "sha256": "9d12199792c53dc5b53399f0d40c1bd9ffbc0bb542380375d0f0cfd24fc78d25",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_S0_daily.csv": {
+      "bytes": 16111,
+      "sha256": "3883a218ad2ed0226cb64b69b176bfee44331c27c6aa6187253c70978aed828d",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_S1_daily.csv": {
+      "bytes": 16113,
+      "sha256": "4d940d863409e721beb7776624c978045fa8b995bb4e88ba0b36b6a64f3ac2fe",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_A1_audit.json": {
+      "bytes": 1487,
+      "sha256": "675ad2cd6813d705b3569162acedb6a4b710a1e70d20f6f289cbfcf37a8b0874",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_E1_daily.csv": {
+      "bytes": 21227,
+      "sha256": "b762f8bbe8180d4434f3de94020eb27a5cf5dc841dc7e8bd64a8df9027466762",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/environment.json": {
+      "bytes": 281,
+      "sha256": "49fc92af27bc6aa401a93fe46d220bfd4506fd14cea9328f25ed569d531681c8",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/design_A0.csv": {
+      "bytes": 189746,
+      "sha256": "7c71d30d3973ba37dd31d62864948a73d4d66b52806b384d930933a05bbe6574",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_A1_bootstrap_extra.json": {
+      "bytes": 353,
+      "sha256": "b541073c2a88f85da32d8f6f0324740bcd1a37712091389fbcce5e5bc4cb9a6b",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_yearly.csv": {
+      "bytes": 4621,
+      "sha256": "6024d5c8ae5dad39b73abdf006830d280b7047557b3a2155adefc3c6f35053f6",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/design_current_vb_daily.csv": {
+      "bytes": 21103,
+      "sha256": "707f6861e6f1fdae1d83fba7596850128722a16af9d893fee4590aa5457a33c8",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_A0_orders.csv": {
+      "bytes": 380652,
+      "sha256": "251a115027cb6d359e0b9f8db370ca9071de1f35a76e914a5a623b51c3868d68",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_A1.csv": {
+      "bytes": 170601,
+      "sha256": "d0444cd834fa5e5c66e3a28e52088074b7b7c3cb7b335ea6e4ce561f511c7985",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_A0_reconciliation.csv": {
+      "bytes": 22820,
+      "sha256": "192c6b87cceb45eb03526f5879fd0ff2d4ba98a7b8c841d8908609fc24eac77e",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_A0_reconciliation.csv": {
+      "bytes": 24974,
+      "sha256": "6649e6c5dd2beca11687538733fd288f930f7e27cf3bc0768927923d9ba15d8f",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_yearly.csv": {
+      "bytes": 5679,
+      "sha256": "bf47846cc337e49a4026f4b4c4c96ba7141c0c6dc2e44ca98227fd74bce1a73a",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_S0_audit.json": {
+      "bytes": 1518,
+      "sha256": "1882937d95968b339eabc40ca14dd73bf283c3fcf9f7ea9cfe9d0eac5a82d4a3",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/baselineall_metrics.csv": {
+      "bytes": 2952,
+      "sha256": "07b540fd1de39ad30e5994756354db8a2204446c873405274eb8863c14c1bde6",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_S1_audit.json": {
+      "bytes": 1513,
+      "sha256": "6c10f425b1f65b48829030e5e861507eb1bc9c8494fa686a40143595d503ae6d",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_summary.json": {
+      "bytes": 27786,
+      "sha256": "b061cd327d2d498db5be605e8bbf1c6bf1ba90ebc94e53943f7b230b56a0d925",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_S1.csv": {
+      "bytes": 187564,
+      "sha256": "d37690f7084f37c09da1cf117a17195f3ec9b27ed875d18f600c22a6e90ce403",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_E1_daily.csv": {
+      "bytes": 16096,
+      "sha256": "666ef401364a090d2b81ec5cd72c4baf78493d7724dddaf774fd30e161a3973c",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_current_vb_metadata.json": {
+      "bytes": 5461,
+      "sha256": "73a1956d9346a90b1c9c0c32492851affc3cfbb56b0bbb44a1988de4cd68eae2",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/design_E1_orders.csv": {
+      "bytes": 376235,
+      "sha256": "63ad26d8bdd2ef675e41cf62d4f0b7cedc8a615790a6a30054514a5d01a09d79",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_current_vb_metrics.csv": {
+      "bytes": 1530,
+      "sha256": "0973998261078f6e15e23d2633625af990930afe8f6387bf1088cad68bf3ea68",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/accounts_gate.json": {
+      "bytes": 1374,
+      "sha256": "b69da6d28b7d00f4a835f72d21802791f16e56becee4f68c9009209913714001",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/baselineall_metadata.json": {
+      "bytes": 8829,
+      "sha256": "c179b596851a88825045e94dc13f5e0cf66f8493ff9e0fda93f2d5b07973cef5",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/design_features.pkl": {
+      "bytes": 12334893,
+      "sha256": "00f33d03870adccb1a059c74a75202149a942b6d8a3df982d0a3c4827af22747",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_A0_daily.csv": {
+      "bytes": 21236,
+      "sha256": "542a833d2eed821c686527309eeda4ec65746db09ec15ceb787e71e382885569",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_S0.csv": {
+      "bytes": 189946,
+      "sha256": "b905f8e8b629734e37593194b396eedd7c5454a6a9cfeb580560f28ff293e81b",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_A0_orders.csv": {
+      "bytes": 324847,
+      "sha256": "85ab553d904a720edef2ee53a2ad3b811b508bdae4aaa56d9154e79b627d14a0",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_E1.csv": {
+      "bytes": 187784,
+      "sha256": "4c30ca861f06b67e1c35332c63a1ded445b47c4899a09240f41666692e055d65",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_S0_reconciliation.csv": {
+      "bytes": 22982,
+      "sha256": "ada42c9956a0ec6697dee547809dcfd37abfd03e4ff26a46e2789cc069eb5893",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_S1.csv": {
+      "bytes": 171776,
+      "sha256": "32fc58b9ab028aa1c0dc2c3ac658c34c9d6128f4d74d4404979015287214de7f",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_A0_audit.json": {
+      "bytes": 1483,
+      "sha256": "591bd503b1d921e2d17df12d0de833d7ef19f9ba49f955efa461441dc35716f2",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_A1_audit.json": {
+      "bytes": 1507,
+      "sha256": "0fa2813bbea342c16035ed9d1934848a605d33a36486e18e5d7bd4fa312637b3",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/design_metrics.csv": {
+      "bytes": 2958,
+      "sha256": "8f8d23ddf5bb85dfb5e5f007e3217c096cfc418d91d425414f091db4642c3d69",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/all_period_metrics.csv": {
+      "bytes": 4261,
+      "sha256": "86c50c3b205d768c4fefa345160db3cf87b636a792da53b24e44b65aafe621db",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_E1_reconciliation.csv": {
+      "bytes": 22532,
+      "sha256": "043d75993fed9c2620c6b2be0376f7a98bb3876bbc280e7644f91097eaef3dec",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/recent_manifest.json": {
+      "bytes": 2139,
+      "sha256": "7db8a9c9e7d53b4092bff097616d30090bc6a400fc8ad58e13bfafa6ba213041",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/A_filter_matched_net_count_samples.csv": {
+      "bytes": 67333,
+      "sha256": "e7826ac01a11736603ced64d1afe52c3c87fb9ff492cea49958674d841d2f4d9",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/A_filter_removed_trades.csv": {
+      "bytes": 8594,
+      "sha256": "e54136996b93f3f7a8f8708d22f64d8e627956376eb518b50b9d0402d6aff18f",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/S_signal_null_samples.csv": {
+      "bytes": 66854,
+      "sha256": "d3179759e79066d8ad17fdf16d438abf379436db3c61c143c2b79bbe87bd4e79",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/S_filter_removed_trades.csv": {
+      "bytes": 8834,
+      "sha256": "5d079caa02b1e49a0eb4abb9e8ab5db2ea3081eb7fbf5419648745429e70c870",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/A_filter_new_reentry_trades.csv": {
+      "bytes": 6460,
+      "sha256": "e51f31183f8c23c4c42a43398906bea6e6e5e43d3ad306d1eb201d5e0524213b",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/S_filter_matched_net_count_samples.csv": {
+      "bytes": 66375,
+      "sha256": "d09468314d888fe9dd53252c0d0b923966ea79e1bbda6a50eab35e9717e21e26",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/placebos_random_time_samples.csv": {
+      "bytes": 7646,
+      "sha256": "324e29bbd1405c96703272fe70641a02de5c38a11fadc1342d38ad8dd7806ad6",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/placebos_random_side_samples.csv": {
+      "bytes": 6953,
+      "sha256": "3c109d42b8476e641d5fcd38de93aaf05377117876aea67a4d68412595c52ac5",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/summary.json": {
+      "bytes": 14746,
+      "sha256": "308826da99e8212c650abf1807fbdffa02e83dcf80df1ab501aea199fa412f55",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/S_filter_new_reentry_trades.csv": {
+      "bytes": 6699,
+      "sha256": "23710f9bfd7e812d4d8f83e29c4805956e99e016d92e4002e647b18ffee3703f",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/A_signal_null_samples.csv": {
+      "bytes": 66590,
+      "sha256": "4e4848b24d1a118b76e60f0964f88257e99c5579a894ee57e4782c8bcc14a140",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/S_filter_gross_removed_count_samples.csv": {
+      "bytes": 67376,
+      "sha256": "dfa11d0226628ca88bb19587483e927a38c47eedded64a52df2bec7f09b69d66",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_recent/A_filter_gross_removed_count_samples.csv": {
+      "bytes": 67304,
+      "sha256": "e58a15a024522b119c4ffa3ca9a8e53f544b0d241f26e9b0a1bf01acc2e98df4",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_full_audit.json": {
+      "bytes": 3920,
+      "sha256": "4eff0fc5055a874cb813788e39bdf8aafbe806c69bd0008edbdf1d8f6d2d24b5",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_calendar_audit.json": {
+      "bytes": 237,
+      "sha256": "4579f10d5ff5f4bfeecac5989741e7a116f4c974293f945860c76246567a9506",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_timing_price_violations.csv": {
+      "bytes": 331,
+      "sha256": "05932762ae0685756004d5b3b6396d62591a6f27378efbaef27766023a213e0d",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/accounts/run_launcher.json": {
+      "bytes": 436,
+      "sha256": "a5c88ea1a76425a39a21a754b87a8667431f6c825d21d70731890386c6c6ff77",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_held_data_gaps.csv": {
+      "bytes": 44640,
+      "sha256": "4c3d84c41b13f016ae44e7589691dd44d5a8fd20150c4d35337979c535268425",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_calendar_violations.csv": {
+      "bytes": 331,
+      "sha256": "05932762ae0685756004d5b3b6396d62591a6f27378efbaef27766023a213e0d",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/accounts/candidate_raw_gap_evidence.json": {
+      "bytes": 2455,
+      "sha256": "22e85eefaeaea35a12332743a75fd5b476afdaa30d8ea98ad5d7a30f82ad79c4",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/A_filter_matched_net_count_samples.csv": {
+      "bytes": 67517,
+      "sha256": "0402c572bb441c1ad9bb0a5e4f205057e69d9632a617360de404bc319abab156",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/A_filter_removed_trades.csv": {
+      "bytes": 8725,
+      "sha256": "b8ba1adfc31e57f47cd5615a1996034a2aeb9a5fc71da49030195ca46ca58699",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/S_signal_null_samples.csv": {
+      "bytes": 66514,
+      "sha256": "18ba5a37bc5ac87ebf68cea99a93fc4d5263ac4c6567a5be42a7b01efe8d5c62",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/S_filter_removed_trades.csv": {
+      "bytes": 8725,
+      "sha256": "4d33aa8fad55f4c6fc25842c54671216611eaeaeee68798c68c2e9a1ee3ca354",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/A_filter_new_reentry_trades.csv": {
+      "bytes": 6345,
+      "sha256": "9d1198b4d7c76b271207f9365a7edf66b82c16c689d6d59c71f16aeaac51fed0",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/placebos_random_time_samples_before_count_fix.csv": {
+      "bytes": 6709,
+      "sha256": "417488e1c2834fe69f959381e3535258619992df89c939786a3ec8e5d94a48e4",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/S_filter_matched_net_count_samples.csv": {
+      "bytes": 66661,
+      "sha256": "251a4536f164f49c1d8ef712b4ca794547e9dccc0679f37f5d9b8bcff273359c",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/placebos_random_time_samples.csv": {
+      "bytes": 7576,
+      "sha256": "537112a97b0641d9a1ebdd29a853f3e89d419f462dd5fe96636275e6c2188443",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/summary_before_time_count_fix.json": {
+      "bytes": 13611,
+      "sha256": "8b27610ca1eadb91bedb4211a2e18392ce1ffe2077bf45dd02cc92d3d6ff8e9e",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/placebos_random_side_samples.csv": {
+      "bytes": 7005,
+      "sha256": "5a30e45038732e0f49dc6bc80de85cdfa11a44b5608472e78c9a92c83602cbf3",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/summary.json": {
+      "bytes": 14787,
+      "sha256": "cfd54adfce5a0f5a75bad693ec83f292108f0e2c9df950bf1f988aa433a4d33a",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/S_filter_new_reentry_trades.csv": {
+      "bytes": 6345,
+      "sha256": "1a7d4d29ba449dc4aa321389c9074ee528e96932be100582d19fa6eeea8d3190",
+      "published": true
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/A_signal_null_samples.csv": {
+      "bytes": 66343,
+      "sha256": "df758d4684f854938d160bd8e1c1bcb4c43b78aa855c609ec49f1b0d176b60dd",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/S_filter_gross_removed_count_samples.csv": {
+      "bytes": 66350,
+      "sha256": "3301ae0b03e14f9359c53946cc0da837d40b5193c206355d9b97e82ec5419c74",
+      "published": false
+    },
+    "analysis/outputs/codex_nqdb2_test/diagnostics_design/A_filter_gross_removed_count_samples.csv": {
+      "bytes": 67250,
+      "sha256": "55cd20fa85bab1fbd4dc0881f33fb6eae04c5dfa094c7c2bee8f1e56184a0b8b",
+      "published": false
+    }
+  },
+  "account_simulations_run": 0,
+  "note": "Large derived feature pickles, redundant null sample arrays and nonprimary order ledgers regenerate from committed scripts and are not uploaded.",
+  "concurrent_workflow_refresh": {
+    "commit": "fe84522df3ffc4c6b6041fc9a7bd88bedaa692bf",
+    "workflow_blob": "11d532bd92264f6ecb00774ffc34e5ac2ab995e7",
+    "all_destinations_limiting_condition_recorded": true
+  },
+  "script_sha256": {
+    "analysis/codex_nqdb2_replay.py": "965c137ffad088e7b989af88cc0cc3b54664347179fd2f0e4f5422c285158771",
+    "analysis/codex_nqdb2_run_profiles.py": "69b94ff3b3bc0a7c7da8bd015f851025511c86723dee84c0dd8df99b5e08bb74",
+    "analysis/codex_nqdb2_diagnostics.py": "77a4184b835a312a4b24e2def9958b3b4b592182801c27ee3fd4acce28fa4b2e",
+    "analysis/codex_nqdb2_accounts.py": "f18b5463739fc46ec4de20c52235dd83bccdaf0012d0d2ebbe6b5c3306a4c77d",
+    "analysis/codex_nqdb2_test.py": "518f576e391f92f1200d5c00922933caa452e00203f0058eb12d15acf2b87bc5"
+  }
+}

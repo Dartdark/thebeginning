@@ -1,0 +1,38 @@
+{
+  "native": {
+    "source": "native_day_only",
+    "identical_duplicate_rows": 0,
+    "conflicting_duplicate_keys": 0,
+    "unique_rows": 628741
+  },
+  "flow": {
+    "source": "OF",
+    "identical_duplicate_rows": 0,
+    "conflicting_duplicate_keys": 0,
+    "unique_rows": 515156,
+    "source_clock": "ET close labels minus60minutes toCT; US DST dates shared",
+    "rows_outside_native_grid": 0
+  },
+  "source_history": "literalv3:20storedRTH08:31..15:00ranges;2storedextrema;new-datepre831backstop",
+  "source_entry_only": true,
+  "protective_stop_target_BE_evaluated": false,
+  "no_mc_exits_or_net_read": true,
+  "raw_exit": "nativeOPENj900=14:59wallCT;noSL/TP/BE/net",
+  "parent_first_entry_cap": 1,
+  "ambiguity_path": "nearerextremefirst,tiesHIGHfirst;pairedOCOassumptionnotverifiedintrabar",
+  "calendar": "literalv3HOL UNIONsharedholiday/early/mourning/GF;historynotcalendarfiltered",
+  "no_g_trading_or_last_j_eligibility": true,
+  "no2017_trades": true,
+  "no_ON_or2023_inputs": true,
+  "source_classification": "OFvolume=upvol,buy+sell=nativeV,closeswithin.25;all15required,nonnegativeperminute,positiveaggregatetape;neutralP/DKEEP_KNOWN;invalidUNKNOWN_KEEP",
+  "input_schema_eras": "annualnativeCTclose andOFETclose exports;historicalreceiptunverified",
+  "flow_known_events": 321,
+  "base_entry_events": 331,
+  "both_level_entry_minutes": 0,
+  "worse_open_gap_entries": 0,
+  "unexplained_base_reference_events": 34,
+  "unresolved_parent_prefix_days": 5,
+  "unresolved_base_held_events": null,
+  "raw_returns_calculated": false,
+  "native_MNQ_spread_fills_verified": false
+}

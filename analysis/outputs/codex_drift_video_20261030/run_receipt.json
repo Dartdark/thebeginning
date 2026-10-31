@@ -1,0 +1,63 @@
+{
+  "task": "User video Drift VWAP Pullback from5:34",
+  "branch": "codex/work",
+  "preregistration_commit": "ae629418567183d7b21c21c0c803027d801cd09e",
+  "implementation_correction_commit": "3f20093",
+  "input_period": "2018-2022 only",
+  "inputs": [
+    {
+      "path": "/workspace/drift_video_inputs/design/NQ_1min_2018.csv",
+      "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237"
+    },
+    {
+      "path": "/workspace/drift_video_inputs/design/NQ_1min_2019.csv",
+      "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e"
+    },
+    {
+      "path": "/workspace/drift_video_inputs/design/NQ_1min_2020.csv",
+      "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4"
+    },
+    {
+      "path": "/workspace/drift_video_inputs/design/NQ_1min_2021.csv",
+      "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500"
+    },
+    {
+      "path": "/workspace/drift_video_inputs/design/NQ_1min_2022.csv",
+      "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2"
+    }
+  ],
+  "source_transcript_sha256": "4e51e79b65734a0911a9507fff31f4b9429f161d1652da1e4bb2b248b4a5967c",
+  "python": "3.12.14",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "numba": "0.68.0",
+    "openpyxl": "3.1.5",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0"
+  },
+  "script_sha256": "0062f6460161cdf0be0384ee5ba0810ebdba74d805ec8c2d9403211c51d26def",
+  "audit": "Independent implementation/accounting review by a second agent; not blind economic replication, native fill validation, or Monte Carlo verification",
+  "audit_passed": true,
+  "candidate_definitions": 2,
+  "control_families": 2,
+  "control_draws_each": 100,
+  "execution_stresses": 1,
+  "total_definitions": 5,
+  "implementation_runs": 2,
+  "prior_failed_run_preserved": "pre_correction_halfday",
+  "first_run_primary_unchanged": true,
+  "recent_tested": false,
+  "account_tests_run": false,
+  "account_inputs_prepared_but_unused": true,
+  "signal_seed": 301034,
+  "bootstrap_seed": 301035,
+  "roster_ref": "7a42ea76c62838109d45d168887f57a922933ef2",
+  "limits": [
+    "No author source code/MC parity",
+    "NQ continuous-price and volume proxy, not native MNQ fills",
+    "Twelve unknown complete-session paths excluded, including March2020 halt dates",
+    "Random-time null conditions on complete-day count and side order, not a tradable alternative",
+    "No independent blind economic replication or forward result"
+  ]
+}

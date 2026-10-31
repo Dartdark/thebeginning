@@ -1,0 +1,60 @@
+{
+  "operation": "static source/document and independent clock audit only",
+  "new_strategy_return_trials": 0,
+  "published_annual_claims_summed": {
+    "full": {
+      "v1_trades": 1566,
+      "v1_claimed_net_MNQ": 31253.0,
+      "v2_trades": 785,
+      "v2_claimed_net_MNQ": 24586.5
+    },
+    "2017_22": {
+      "v1_trades": 960,
+      "v1_claimed_net_MNQ": 20624.5,
+      "v2_trades": 462,
+      "v2_claimed_net_MNQ": 14189.0
+    },
+    "2018_22": {
+      "v1_trades": 811,
+      "v1_claimed_net_MNQ": 21148.0,
+      "v2_trades": 387,
+      "v2_claimed_net_MNQ": 14018.0
+    },
+    "2023_plus": {
+      "v1_trades": 606,
+      "v1_claimed_net_MNQ": 10628.5,
+      "v2_trades": 323,
+      "v2_claimed_net_MNQ": 10397.5
+    }
+  },
+  "power_arithmetic_only": {
+    "v2_claimed_design_n": 387,
+    "mean_for_t2_as_multiple_of_unknown_SD": 0.10166571355506979,
+    "note": "iid upper-bound count; no SD, actual power or new return test computed"
+  },
+  "source_flags": {
+    "iog_off": true,
+    "builtin_stop_present": false,
+    "this_bar_on_close_count": 4,
+    "next_bar_stop_count": 2,
+    "v1_default_last_date": 1221231,
+    "v2_date_gate_present": false
+  },
+  "london_open_clock_check": {
+    "start": "2017-01-01",
+    "end": "2026-10-23",
+    "weekdays_checked": 2560,
+    "formula_minutes_after_midnight_counts": {
+      "120": 2390,
+      "180": 170
+    },
+    "mismatches": []
+  },
+  "cost_arithmetic_only": {
+    "author_NQ_round_trip": 15,
+    "author_scaled_MNQ_round_trip": 1.5,
+    "verified_actual_MNQ_cost": false
+  },
+  "existing_Claude_research_snapshot": "3d74b9a",
+  "read_in_progress_Claude_strategy_returns": false
+}

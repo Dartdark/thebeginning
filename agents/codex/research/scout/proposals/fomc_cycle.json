@@ -1,0 +1,77 @@
+{
+  "hypothesis_id": "intermeeting-fomc-cycle-equity-repricing",
+  "run_id": "scout-fomc-cycle-20261030",
+  "lease_owner": "codex-root",
+  "source_id": "ssrn:2687614",
+  "phase": "design",
+  "design_start": "2018-01-01",
+  "design_end": "2022-12-31",
+  "candidate_variants": 1,
+  "control_variants": 2,
+  "definition_ids": [
+    "FOMC246_ES_RTH",
+    "FOMC246_CALENDAR_NULL",
+    "FOMC246_COST_STRESS"
+  ],
+  "review_record": "agents/codex/research/scout/records/2687614.json",
+  "evidence_path": "agents/codex/evidence/scout_fomc_cycle.md",
+  "plan_path": "agents/codex/plans/scout_fomc_cycle.md",
+  "code_paths": [
+    "analysis/codex_scout_fomc_cycle.py"
+  ],
+  "inputs": [
+    {
+      "path": "data/ES_1min_2018.csv",
+      "sha256": "ad4027b8230de0a91f83d1b6f3b798933f92cedebc39e56fe9223447c4b9d751",
+      "permission": "owned_upload",
+      "provenance": "User-owned close-stamped Central ES minute OHLCV export; continuous front, reference-screen only"
+    },
+    {
+      "path": "data/ES_1min_2019.csv",
+      "sha256": "b9c09d6c9a702e560119bd33770cc71e05423fc0a7a227fcc046e73bf22f22c5",
+      "permission": "owned_upload",
+      "provenance": "User-owned close-stamped Central ES minute OHLCV export; continuous front, reference-screen only"
+    },
+    {
+      "path": "data/ES_1min_2020.csv",
+      "sha256": "c22514904bd19b8ee9e3611bcd8af4017290730550b4799b9d92da73f8e7d550",
+      "permission": "owned_upload",
+      "provenance": "User-owned close-stamped Central ES minute OHLCV export; continuous front, reference-screen only"
+    },
+    {
+      "path": "data/ES_1min_2021.csv",
+      "sha256": "67cd2dee366b86f555d09d45fb4cb9f6163347531b4f3f230f73704a1fff8096",
+      "permission": "owned_upload",
+      "provenance": "User-owned close-stamped Central ES minute OHLCV export; continuous front, reference-screen only"
+    },
+    {
+      "path": "data/ES_1min_2022.csv",
+      "sha256": "00db614dd10674f7fe2f14940ae43f523b57ac48db1b0619b0eb084c5f50f601",
+      "permission": "owned_upload",
+      "provenance": "User-owned close-stamped Central ES minute OHLCV export; continuous front, reference-screen only"
+    },
+    {
+      "path": "agents/codex/inputs/scout_fomc_cycle_20261030/calendar.json",
+      "sha256": "709f1f6fa402b8eacf5690a7bab8effe1e715d10cd813ce3e0e9215760ed2a1f",
+      "permission": "permitted_access",
+      "provenance": "39past official statement-header facts crosschecked with owned regular FOMC calendar; used at least9weekdays after publication, no forward notice assumption"
+    },
+    {
+      "path": "agents/codex/inputs/scout_fomc_cycle_20261030/nyse_sessions.csv",
+      "sha256": "3b7294fbf6e7437587ab66843676da42811743b0c36c8f9796168e555df8333c",
+      "permission": "permitted_access",
+      "provenance": "NYSE full/short session calendar generated before returns from permitted PyPI pandas_market_calendars4.4.2; no outcome filters"
+    }
+  ],
+  "information_clock": "Past regular statement anchordate known >=9weekdays before08:29:59CTdecision; weekday ages9-13/19-23/29-33; NYSE390minute sessions; OPEN08:31label toCLOSE15:00CT. No private receipt or future schedule used.",
+  "native_costs": "1standardES benchmark50USD/point,tick.25=$12.50;5commissionRT+25slippage=$30;stress55RT. No MES/account fee claim.",
+  "entry_exit_rule": "Fixed long RTH reference in weeks2/4/6; no stop,target,pricecondition or fitted parameters; all484candidate endpoints required.",
+  "gross_stop_rule": "Netmean>0,net t>=2,1000year/month/weekdaymatched null p<=.05,stress netmean>0; otherwise stop and continue another family.",
+  "data_failure_stop_rule": ">=400candidate events and all candidate endpoints;>=99%control endpoint coverage; unknown2020-11-30excluded visibly, no imputation. Positive execution requires nativepath/roll/MEScost/protection audits.",
+  "artifact_sha256": {
+    "agents/codex/research/scout/records/2687614.json": "df892eb6512d01afd1eb34a97a5c34db95b419e23dce0caa7e98951914c4aa8e",
+    "agents/codex/evidence/scout_fomc_cycle.md": "7661690460b4b133ff3db4fbbfdd316c049515f43c9689dbac3c5dfcc3a0d37c",
+    "agents/codex/plans/scout_fomc_cycle.md": "317af0a4b282f9ea02aa67e9feee6edeed1fde523e2e4e3a7174bee928f460ac",
+    "analysis/codex_scout_fomc_cycle.py": "edfc1ff63cfe6828b80f479a2226c52427e249ad743c3e69e3a2ef7c76b16e1d"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "seconds": 14.904263309000271,
+  "script_sha256": "3a44d30a96c63a2058ad847e4ebb4fa91d28318f7dd8a0f39b11ce366baa9878",
+  "inputs": {
+    "BRIDGE100_full_trades.csv": "a0a9aef928a85c0b47aad0d0e900948319c6406aae37f475611c3f3a5856f16e",
+    "OBV2_full_trades.csv": "f1f82897a01a3c249faa0cc6d64d3e2ba32cfbc4e8ec06553473a72b513aa20a"
+  },
+  "metadata_sha256": "bd5b17cf2acd3e1fe152292ddc8b434dd0866a4162c1d3a771954db60168e732",
+  "historical_gate_explicitly_confirmed": true,
+  "funded": {
+    "n": 1000,
+    "H": 500,
+    "L": 20,
+    "seed": 1,
+    "fmin": 0.5,
+    "fmax": 1,
+    "ref": 1500,
+    "CI_resamples": 5000,
+    "CI_seed": 902,
+    "original_five_output_parity_required": true
+  },
+  "evaluation": {
+    "window": 21,
+    "full_length_starts_only": true,
+    "CI_block": 60,
+    "CI_resamples": 5000,
+    "CI_seed": 903
+  },
+  "limitations": [
+    "Combined open-position tier cap is not enforced by existing account simulators; no new cap introduced",
+    "Existing CL constant-daily adverse and MOC close-path approximations retained",
+    "Scaled-NQ commission is .725/MNQ primary; extra challenger-only stress 1.275/MNQ",
+    "Existing combine_levers target/breach same-minute priority retained"
+  ],
+  "script_sha256_at_original_run": "fd5d3351886aa3ca694f1e72d1264e22b4f311362f0a6fe956c7032706eb061f",
+  "baseline_cache_sha256": {
+    "lab.pkl": "34492db2e7121c6c6e6bd9ce1cc59010cf8dcdfa3cf020c99a2f928fa7fa09bc",
+    "ge.pkl": "a5d1aba2d10aba7093c27da557b3220e019d2810a97e76bf195bc208d561b322",
+    "cl.pkl": "8c58fb24a5a35ab24acd54db998f22b431d6a5a612fced43888aae558786328a",
+    "s_rank_gap2.pkl": "67cc3100f1ea658ba92238347ab7fbff084999319bd39e1469a0eba7acf9bed9",
+    "single_print_sessions.pkl": "a7a9eb16b0830fddeab075c0772c222b64eb35b6156de4867f8e236d84a9c656",
+    "rs_trades.csv": "db5bba61ad0d21837b75789499fb81a8e212642682bba7f4bc15e6afa18f2d66"
+  },
+  "final_calendar_and_price_net_identity_validation": true,
+  "post_run_change_note": "Added calendar identity validation, baseline cache hashes and an independent synthetic fee-timing fixture only; account engine and historical account outputs unchanged. No historical rerun on finalization.",
+  "independent_review": "No material mismatch in exact lookup/state machine/fee separation; approved by root for finalization."
+}

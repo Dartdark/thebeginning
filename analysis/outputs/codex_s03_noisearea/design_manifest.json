@@ -1,0 +1,118 @@
+{
+  "stage": "design",
+  "prereg_commit": "d9ef177df4f2a788dc4e9d108c4cdc1fbc4880ad",
+  "plan_sha256": "ec135137d244afc7d24ca53f62bc77936e07d5e64259757d85dcc20ce3d2d879",
+  "source_sha256": "05a176b0c4f6804d48d427ad484175076d125a61b62122736c34c6797c0d2b52",
+  "cache_path": "scratch_data/g24.pkl",
+  "cache_sha256": "69868d1cbc5ca6acdbbba0899eb01ca1ad7d036e00160f33c3f1992d5a385595",
+  "cache_first_date": "2017-12-01T00:00:00",
+  "cache_last_date": "2026-10-09T00:00:00",
+  "years": [
+    2018,
+    2022
+  ],
+  "prices_exclusive_end": "2023-01-01T00:00:00",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "synthetic_checks": [
+    "exact_previous14_full_cash_sessions_excludes_gaps_holidays_and_today",
+    "prior_complete_session_only_and_current_future_gap_causality",
+    "missing_normal_prior_endpoint_is_unavailable_and_not_full_history",
+    "holiday_excluded_early_cash_close_included_in_prior_close",
+    "missing_early_calendar_endpoint_is_unavailable",
+    "strict_band_and_vwap_confirmation_zero_volume_unavailable",
+    "short_vwap_confirmation_and_strict_equality_no_action",
+    "both_sides_entry_minute_stop_rounding_and_no_double_cost",
+    "same_direction_no_pyramid_and_1500_decision_1501_open",
+    "both_sides_check_exit_waits_next_open",
+    "opposite_check_reversal_separate_round_turn_costs",
+    "gap_stop_pending_reversal_priority_single_position",
+    "missing_fill_minute_waits_observed_open_and_blocks_complete_path",
+    "missing_flatten_catchup_real_close_then_real_open_unknown_path",
+    "missing_end_no_fabricated_last_close_trade",
+    "unfilled_entry_endpoint_is_unmatched_and_blocks_account_path",
+    "2023_gate_before_feature_or_return_computation"
+  ],
+  "feature_seconds": 0.3825806340028066,
+  "feature_rows_by_anchor": {
+    "831": 17238,
+    "830": 17238
+  },
+  "elapsed_seconds": 12.06072020099964,
+  "gate_path": null,
+  "gate_sha256": null,
+  "script_sha256": "26fb4244c6910f4b80792d43e4fdfc85eb4b1b0780127bbd228f13c942e04732",
+  "replay_sha256": "d51a65e34e877a173b4d07e73a5792c317164a7fe11770c6d817326e9361ca00",
+  "calendar_sha256": "705713195b1be61cd648d1b72718442b6cec7581587ca8c537d491cf1312bceb",
+  "profiles": {
+    "V2": {
+      "trades": 1366,
+      "total_net": 159646.5,
+      "mean_net": 116.87152269399706,
+      "trade_t": 3.938283400519173,
+      "positive_years": 5,
+      "annual_net": {
+        "2018": 44176.25,
+        "2019": 999.5,
+        "2020": 31912.25,
+        "2021": 23527.75,
+        "2022": 59030.75
+      },
+      "unknown_held_minutes_count": 0,
+      "censored_position_count": 0,
+      "unmatched_order_count": 0
+    },
+    "V1": {
+      "trades": 1073,
+      "total_net": 140195.75,
+      "mean_net": 130.65773532152843,
+      "trade_t": 3.1032558451415433,
+      "positive_years": 5,
+      "annual_net": {
+        "2018": 41080.5,
+        "2019": 2169.0,
+        "2020": 26037.0,
+        "2021": 26696.75,
+        "2022": 44212.5
+      },
+      "unknown_held_minutes_count": 0,
+      "censored_position_count": 0,
+      "unmatched_order_count": 0
+    },
+    "C2": {
+      "trades": 1357,
+      "total_net": 145716.75,
+      "mean_net": 107.38154016212233,
+      "trade_t": 3.6417603565860777,
+      "positive_years": 4,
+      "annual_net": {
+        "2018": 44763.0,
+        "2019": -260.5,
+        "2020": 30803.0,
+        "2021": 21034.5,
+        "2022": 49376.75
+      },
+      "unknown_held_minutes_count": 0,
+      "censored_position_count": 0,
+      "unmatched_order_count": 0
+    },
+    "E2": {
+      "trades": 1366,
+      "total_net": 132326.5,
+      "mean_net": 96.87152269399706,
+      "trade_t": 3.2643324996088254,
+      "positive_years": 4,
+      "annual_net": {
+        "2018": 39076.25,
+        "2019": -4160.5,
+        "2020": 26732.25,
+        "2021": 17907.75,
+        "2022": 52770.75
+      },
+      "unknown_held_minutes_count": 0,
+      "censored_position_count": 0,
+      "unmatched_order_count": 0
+    }
+  }
+}

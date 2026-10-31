@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:5207418",
+  "ssrn_id": "5207418",
+  "title": "Auctions, Announcements, and Abnormal Returns",
+  "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5207418",
+  "doi": "10.2139/ssrn.5207418",
+  "authors": [
+    "Ingomar Krohn",
+    "Rishi Vala"
+  ],
+  "posted": "2025-04-21",
+  "revised": "2026-03-20",
+  "source_revision": "March2026 SSRN abstract; April2025 HKUST indexed first page/abstract. Version parity not established.",
+  "source_sha256": null,
+  "verdict": "needs_full_text",
+  "full_text_read": false,
+  "evidence_level": "metadata_only",
+  "summary": "Acquired943primaryBLS/BEA/Fedcalendarfacts and261officiallycorroboratedweeklyclaimsdates;249claimsembargoclocksverified,12unknown. Full source/eventuniverse and original schedule/receipt clocks remain open; no returns.",
+  "report_path": "agents/codex/results/scout_fx_calendar_acquisition_20261029.md",
+  "evidence_path": "agents/codex/evidence/scout_fx_auctions_20261029.md",
+  "about": "Treasury auctions conditioning FX returns around following-day US macroeconomic releases.",
+  "findings": "Authors claim roughly8bp foreign-currency appreciation on announcement days following auctions versus near zero on other announcement days, with pre-announcement drift. No tables, source ledger or net return independently verified.",
+  "mechanism": "Proposed dealer-capacity and safe-asset-demand spillovers from Treasury issuance into FX. Tradable sign/size and profit after announcement costs remain unestablished.",
+  "build_on": "Specific merit remains, but no exact source rule was recovered. Owned6E and auction files establish partial feasibility only. Need full pinned source, its event universe and clocks, historical releases, contract/roll and nativecost audit. Both15:59CT flat and standing overnight restrictions remain binding; no Apex fit is inferred. No return test.",
+  "economic_family": "fx-auction-next-day-macro-interaction",
+  "deduplication": [
+    "TIER_LIST.md Treasury auction pressure",
+    "analysis/treasury_auction_test.py",
+    "agents/codex/results/six_e_cross_asset_review_20261027.md"
+  ],
+  "access": [
+    {
+      "url": "https://fina.hkust.edu.hk/sites/finance/files/paper/Auctions_Announcements_and_Abnormal_Returns.pdf",
+      "method": "connected web reader",
+      "status": "two fetch timeouts; indexed abstract/first page only; no PDF bytes/hash"
+    },
+    {
+      "method": "owned data inventory and primary calendar search",
+      "status": "6E2017–26/auction records inspected; Fed/BEA readable, BLS inaccessible, FiscalData403; no complete as-of calendar acquired"
+    }
+  ],
+  "new_economic_trials": 0,
+  "updated_at": "2026-10-29T20:38:56.600548+00:00",
+  "notification_key": "ssrn:5207418:revised2026-03-20:needs_full_text:interaction-v1",
+  "initial_report_path": "agents/codex/results/scout_fx_auctions_20261029.md",
+  "testability_receipt": "agents/codex/research/scout/runs/5207418_testability_20261029.json",
+  "return_eligibility": "NEEDS DATA",
+  "testability_report_path": "agents/codex/results/scout_5207418_testability_20261029.md",
+  "acquisition": {
+    "primary_calendar_csv": "agents/codex/inputs/scout_acquisition_20261029/fx_calendar/primary_release_calendar_2018_2022.csv",
+    "secondary_inventory_csv": "agents/codex/inputs/scout_acquisition_20261029/fx_calendar/secondary_calendar_inventory_2018_2022.csv",
+    "claims_calendar_csv": "agents/codex/inputs/scout_acquisition_20261029/claims_calendar/claims_calendar_2018_2022.csv",
+    "primary_rows": 943,
+    "secondary_rows": 591,
+    "status": "calendar_facts_acquired_source_and_asof_gates_open",
+    "claims_dates": 261,
+    "claims_printed_clocks_corroborated": 249,
+    "claims_unknown_clocks": 12
+  }
+}

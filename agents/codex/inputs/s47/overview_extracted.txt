@@ -1,0 +1,212 @@
+STRATEGY OVERVIEW · NQ / MNQ
+
+
+S47 — Europe-Open Impulse, and S47 v2
+E-mini Nasdaq-100 · 1-minute bars · Chicago time · one trade a day, long or short · enters 09:31, flat at 15:00 CT · v2 =
+S47A, "London and New York agree"
+
+
+ 1 MNQ, whole backtest                   Net       PF       Trades / yr     Win rate       Average       Max DD        Closed DD       Grade
+
+ S47                                 $31,253      1.30             161         44.3%         $19.96        $3,610           $3,568            C
+
+ S47 v2                              $24,586      1.49               81        49.7%         $31.32        $1,739           $1,618            A
+
+MultiCharts backtests: S47 2017-01-25 → 2026-10-16, 1566 trades; S47 v2 2017-01-25 → 2026-10-05, 785 trades; costs included, 1 MNQ (×10 = 1
+NQ). Max DD counts closed equity plus each trade's worst open loss.
+
+
+Equity path and drawdown
+
+
+
+
+The trade story
+The idea: Europe sets the direction first. S47 measures how far NQ travels around the London cash open — 15
+minutes before to 30 minutes after 08:00 London — in units of the overnight range. If that push is big enough it waits
+out New York's first hour, then trades the same way from 09:31 CT with a stop sized to the overnight range, and
+closes at 15:00 CT. v2 also requires New York's own first hour (08:30 → 09:30 CT) to point the same way: the European
+push confirmed by the US open, in the same market.
+
+Rules
+ Volatility unit                   ATR_ON = average overnight range (17:01 → 08:30 CT) of the previous 20 trading days, at least 15
+                                   usable.
+
+ London signal                     s = (close at London 08:30 − close at London 07:45) ÷ ATR_ON — normally 02:30 and 01:45 CT.
+                                   Long if s > +0.0625, short if s < −0.0625.
+
+ v2 only                           Trade only if 09:30 CT close − last close at or before 08:30 CT has the same sign as s.
+
+ Entry / exits                     Market at the 09:31 bar · stop 0.5 × ATR_ON from the bar after entry · exit at the 15:00 CT close · no
+                                   target · one trade a day.
+
+ Skipped days                      Quarterly roll days, early-close holidays, unusable overnight sessions.
+Worst drawdowns (including open-trade loss)
+
+S47                                                                    S47 v2
+ Depth, 1 MNQ       Peak            Low           Recovered    Days     Depth, 1 MNQ     Peak         Low          Recovered     Days
+        $3,610.25 2024-01-29        2024-10-04    2025-03-04    400          $1,738.75   2022-07-27   2022-10-12   2022-10-21      86
+
+        $3,082.25 2025-04-01        2025-08-01    2026-03-20    353          $1,630.25   2025-05-02   2025-08-01   2025-11-06     188
+
+        $3,058.25 2022-07-01        2022-10-12    2023-06-26    360          $1,599.25   2024-01-29   2024-07-17   2024-08-07     191
+
+Now: S47 −⁠$1,541.00 and S47 v2 −⁠$751.50 from their peaks.
+
+
+By year, 1 MNQ
+ Year                                  S47 trades                        S47 net                 v2 trades                      v2 net
+
+ 2017                                         149                      −⁠$523.50                        75                     $171.00
+
+ 2018                                         165                      $4,391.00                        78                $1,887.00
+
+ 2019                                         145                        $223.50                        69                     $800.50
+
+ 2020                                         162                      $4,626.50                        74                $2,884.00
+
+ 2021                                         159                      $4,024.00                        77                $2,684.50
+
+ 2022                                         180                      $7,883.00                        89                $5,762.00
+
+ 2023                                         174                      $2,202.50                       104                $1,932.00
+
+ 2024                                         160                     −⁠$2,106.00                       84                     $505.00
+
+ 2025                                         152                      $4,219.00                        77                $5,845.50
+
+ 2026                                         120                      $6,313.00                        58                $2,115.00
+
+2026 to the end of each backtest.
+
+
+  Why it should work                                                      Risks and caveats
+  The direction set at the European open carries into                        Regime-dependent: most development profit
+  the US session once its first hour is out of the way.                      came from sell-off periods (2018 H2, 2020 H1,
+  There is no published effect size for this exact rule.                     2022 H1: 76% of net); the calm years 2017 and
+        Signal vs random direction (same days, clock and                     2019 were flat to negative for S47.
+        stop, 2017–2022): a random direction averages PF                     Tail-dependent: the top 10 trades are 42% of
+        1.14; the London signal 1.41 (p 0.003 before                         S47's development net.
+        correcting for the ≈3,700 grid cells searched).                      Out of sample: each rule was frozen before its
+        Other index futures, same frozen settings: ES PF                     2023 → run and each run was made once, but the
+        1.26 (random 95th percentile 1.17), YM 1.19 (1.18).                  same 2023 → window was read four times for this
+        v2: in development, agreement days made PF 1.64                      signal: a VXN-gated twin, then S47 (2026-10-03),
+        and were positive every year; disagreement days                      then v2 and a release-day variant (2026-10-08).
+        made PF 1.23 and lost in 2017 and 2019 (a split                      S47 was kept over the gated twin after both
+        made after seeing the trades; the per-trade                          results, and v2 survived while the release-day
+        difference has t ≈ 1.6). Out of sample v2 stayed                     variant died. The v2 condition was found on the
+        positive in 2024 ($505.00) when plain S47 lost                       2017–2022 trades, after S47's 2023 → result was
+        −⁠$2,106.00.                                                         known. The clean test is data after 2026-10-08.
+                                                                             Drawdown: worst so far $3,610 for S47 against
+                                                                             $1,739 for v2 (1 MNQ, incl. open loss).
+Robustness grade
+ Split at 2023-01-01, 1 MNQ                                                                     S47    C                                S47 v2     A
+
+ Trades in / out of sample                                                                      960 / 606                                   462 / 323
+
+ Expected value per trade, in → out                                                     $21.48 → $17.54                             $30.71 → $32.19
+
+ Kept out of sample · P(edge ≤ 0)                                                           82% · 0.0379                               105% · 0.0101
+
+ Out-of-sample net / max DD (closed)                                                    $10,628 / $3,568                            $10,398 / $1,508
+
+ Return ÷ drawdown, out of sample                                                                     2.98                                        6.89
+
+ Monte-Carlo max DD, median / 75th / 95th / 99th                     $3,711 / $4,527 / $6,184 / $7,831           $2,409 / $2,930 / $4,018 / $5,046
+
+Expected value from a 10,000-draw bootstrap; drawdowns from a 20,000-path Monte Carlo of the trade sequence (closed equity). Risk unit = in-
+sample average loss ($93.40 and $98.63 per MNQ). Grade scale S–D combines edge kept out of sample, confidence it is above zero, and return ÷
+drawdown. Each rule was frozen before its single 2023 → run; the window itself was read four times for this signal (see Risks), so the out-of-sample
+column is not a first look.
+
+
+Development and out-of-sample runs, 1 MNQ
+                        S47 · development                 S47 · out of sample                       v2 · in sample                v2 · out of sample
+
+ Window                        2017 → 2022         2023-01-25 → 2026-09-01           2017-01-25 → 2022-12-30            2023-01-25 → 2026-10-01
+
+ Source                               Python                       MultiCharts                        MultiCharts                        MultiCharts
+
+ Trades                      970 (≈162 / yr)                                581                     462 (≈77 / yr)                                319
+
+ Net                                 $20,533                            $11,296                            $14,189                        $10,840.50
+
+ Profit factor                          1.411                               1.22                               1.64                               1.40
+
+ Win rate                              44.1%                            44.06%                               51.08%                           47.96%
+
+ Average trade                        $21.17                             $19.44                              $30.71                            $33.98
+
+ Max drawdown                $2,938 (closed)                             $3,636                          $1,888.50                             $2,559
+
+Runs at $15 per NQ round trip, shown per MNQ (÷10). Max drawdown is MultiCharts' max strategy drawdown except where marked closed. The v2 in-
+sample run matched the Python emulation to the dollar.
+Tried and rejected — do not repeat
+ When               Tried                                           Result (1 MNQ, 2017–2022 unless noted)                                   Verdict
+
+ 2026-10-08         Stop 0.3 / 0.4 / 0.6 × ATR_ON instead           0.4: net $20,259.50 vs $20,533, PF 1.451 vs 1.411, closed                Not adopted
+                    of 0.5                                          DD $2,202.50 vs $2,938; PF smooth from 0.3 to 0.6                        — rules stay
+                                                                                                                                             frozen
+
+ 2026-10-08         ATR regime filter (ATR20 ÷ ATR100: ≥            Misses the worst drawdown (it sits in a normal-ATR                       Rejected
+                    0.8, 0.6–1.2, ≤ 1.5, 0.8–1.5)                   period); an upper cap cuts profit from volatility-expansion
+                                                                    days
+
+ 2026-10-08         Entry at 10:00 instead of 09:31                 Net −⁠$3,123.50 lower (−14%), closed drawdown 26%                        Not adopted
+                    (MultiCharts)                                   lower
+
+ 2026-10-08         Weekday filter                                  Differences are noise (F-test p 0.72)                                    Rejected
+
+ 2026-10-08         Clock-hour analysis                             No losing hour; 56% of stop-outs come before 11:00                       No filter
+
+ 2026-10-08         Quiet-day measures: opening-hour                None orders the trades                                                   Rejected
+                    range, overnight range, opening
+                    volume, ADX(14) on 15-min and daily
+                    bars
+
+ 2026-10-08         Release days only (NFP, CPI, PCE,               In sample PF 1.90; out of sample 2023-01-27 → 2026-10-                   Dead
+                    GDP, ISM, FOMC)                                 01: PF 1.03, $417, closed DD $5,185
+
+ 2026-10-08         London and New York agree                       In sample PF 1.41 → 1.64, every year positive; out of                    Adopted as v2
+                                                                    sample PF 1.40
+
+ 2026-09-30         Same signal with a VXN gate or an               Out of sample (VXN gate): 363 trades, $7,390, PF 1.20 vs                 S47 kept over
+                    ES-agreement gate (C04)                         plain S47's $11,296, PF 1.22                                             it, chosen after
+                                                                                                                                             both 2023 →
+                                                                                                                                             results
+
+2017–2022 screens use the Python reference (970/970 trades identical to an emulation of the PowerLanguage file) or the native 2017–2022 trade list.
+The stop, regime, entry-time, weekday, hour and quiet-day screens did not use 2023 →; the release-day, agreement and gate rows were decided on
+their 2023 → runs.
+
+
+Recent window (S47 v2)
+Backtest 2023-01-25 → 2026-10-05: 87 trades a year · net $10,722.0 · PF 1.39 · average $33.40 · max drawdown $1,630.25 (closed
+$1,508.00) · last 3 months $901.0.
+
+
+After 2024 — does the regime still show up?
+For v2, yes: $505.00 in 2024 (weak but positive), $5,845.50 in 2025 and $2,115.00 in 2026 to 2026-10-05. Plain S47 lost
+−⁠$2,106.00 in 2024, then made $4,219.00 in 2025 and $6,313.00 in 2026 to 2026-10-16 (1 MNQ). The calm-market
+weakness seen in 2017 and 2019 is the thing to watch.
+
+Kill test — what would prove it wrong
+ Watch                                 S47                                    S47 v2                                Warning sign
+
+ Drawdown                              Worst $3,610; Monte-Carlo              Worst $1,739; Monte-Carlo             Beyond the 75th percentile.
+                                       75th $4,527                            75th $2,930
+
+ Win rate vs the win rate it           44.3% vs 38.0% needed                  49.7% vs 39.9% needed                 Win rate sliding toward the
+ needs to make money                                                                                                needed level.
+
+ Trade count                           ≈ 161 a year                           ≈ 81 a year                           Materially different: setup drift.
+
+ Signal vs random direction            Clearly above a random direction on the same days (PF ≈                      Falls to the random level.
+                                       1.14 on NQ)
+
+ v2 agreement                          Agreement days beat disagreement days                                        No difference: v2 is just S47 with
+                                                                                                                    fewer trades.
+
+S47: long 808 $14,751, short 758 $16,502, largest loss −⁠$477.00, positive months 66/118. S47 v2: long 410 $10,195, short 375 $14,392, largest loss −⁠$460.00,
+positive months 79/118. Source: MultiCharts backtests; rules from the strategy code. Backtests, not account results. Prepared 2026-10-22.
+

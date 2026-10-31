@@ -1,0 +1,75 @@
+{
+  "requested_start": "2026-08-25",
+  "requested_end": "2026-10-25",
+  "available_end": "2026-10-09",
+  "missing_after_cutoff": true,
+  "requested_observed_sessions": 34,
+  "carried_drawdown_at_window_start": 719.0,
+  "maximum_carried_eod_drawdown_inside_window": 6179.25,
+  "ending_carried_eod_drawdown": 3888.25,
+  "comparisons": [
+    {
+      "pool": "design_2018_2022",
+      "sessions": 34,
+      "actual_net": -3169.25,
+      "actual_max_dd": 5460.25,
+      "earlier_pool_sessions": 1289,
+      "bootstrap_runs": 5000,
+      "block_sessions": 10,
+      "bootstrap_net_p5_p50_p95": [
+        -4186.8125,
+        1613.75,
+        7584.2875
+      ],
+      "bootstrap_dd_p5_p50_p95": [
+        729.5,
+        2814.0,
+        6255.450000000002
+      ],
+      "net_lower_tail_frequency": 0.08498300339932013,
+      "dd_upper_tail_frequency": 0.09138172365526895,
+      "recent_minus_prior_daily_mean_90ci": [
+        -327.3004343882627,
+        -57.04649922420481,
+        214.75548162049947
+      ],
+      "historical_window_count": 1256,
+      "overlapping_window_net_lower_fraction": 0.059713375796178345,
+      "overlapping_window_dd_upper_fraction": 0.052547770700636945,
+      "historical_verdict": "within historical range; deterioration inconclusive",
+      "current_account_verdict": "INSUFFICIENT VERIFIED FILLS"
+    },
+    {
+      "pool": "all_pre_window",
+      "sessions": 34,
+      "actual_net": -3169.25,
+      "actual_max_dd": 5460.25,
+      "earlier_pool_sessions": 2228,
+      "bootstrap_runs": 5000,
+      "block_sessions": 10,
+      "bootstrap_net_p5_p50_p95": [
+        -4803.7625,
+        2195.75,
+        9869.537500000002
+      ],
+      "bootstrap_dd_p5_p50_p95": [
+        1111.75,
+        3061.5,
+        7677.9125
+      ],
+      "net_lower_tail_frequency": 0.10557888422315537,
+      "dd_upper_tail_frequency": 0.16636672665466906,
+      "recent_minus_prior_daily_mean_90ci": [
+        -334.8977159018904,
+        -76.30616353363607,
+        198.45029405164217
+      ],
+      "historical_window_count": 2195,
+      "overlapping_window_net_lower_fraction": 0.09020501138952164,
+      "overlapping_window_dd_upper_fraction": 0.16400911161731208,
+      "historical_verdict": "within historical range; deterioration inconclusive",
+      "current_account_verdict": "INSUFFICIENT VERIFIED FILLS"
+    }
+  ],
+  "caution": "Conditional historical comparisons, not independent p-values or proof of permanent deterioration."
+}

@@ -1,0 +1,82 @@
+IFT_NQ5_Flow_Signal: NQ 5-min volume-spike continuation (long cash open / short overnight)
+
+
+Hypothesis:
+A 5-min NQ bar with a volume spike, a strong close in its direction and agreement with the short-term trend is a footprint of size being worked. That flow should continue for 1.5–3R before it is absorbed. I think the edge depends on the session:
+- Long in the cash morning (08:35–11:00 CT), when the opening flow sets the day's direction.
+- Short only overnight (23:00–08:30 CT), and only when sellers clearly win the bar's aggressor volume. Globex is thin, so a real seller keeps pushing price. The same short in the day session has no edge.
+- Strategy is propfirm friendly if traded on MNQ.
+
+
+Method:
+- Instrument / data: @NQ continuous, 5-min bars, MultiCharts, CT exchange time, CME Globex session, trade volume with Up/Down volume, 1-min Bar Magnifier, Classic mode. 2 contracts.
+- Volume note: on an intraday MultiCharts chart the EasyLanguage Volume keyword returns UP volume, not total volume. So the volume ratio, its rank and the "volume above prior bar" check all run on up volume. The short's delta (Up − Down) / Up ≤ −0.35 means down volume ≥ 1.35× up volume.
+- Long: up bar, up-volume ratio vs SMA(20) ≥ 1.5 and above the prior bar, percentile rank (last 500 bars) ≥ 95, EMA9 > EMA21, close > EMA9, body ≥ 40% of range.
+- Short: down bar, up-volume ratio ≥ 2.5 and above the prior bar, delta as above, rank ≥ 80, EMA9 < EMA13, close < EMA9, body ≥ 40%.
+- Execution: signal on the closed bar, entry at market on the next bar.
+- Exits: stop beyond the last 2 bars' extreme ± 0.1/0.3 ATR (skip the trade if risk > 2.5 ATR). Contract 1 at 1.5R, then stop to breakeven. Contract 2 at 3R or on a close back through the slow EMA. Flat at 14:55 CT. The first position of a session locks the direction for that session.
+- Development: tuned on dxFeed Apr 2025–Oct 2026. The short side came from a ~6,000-config search on 2020+ data.
+- Period: Oct 2018 – Oct 2026. My data has no Up/Down volume before Sep 2018, and the strategy depends on it, so I excluded everything earlier.
+- In-sample: the final inputs over the whole period (chosen with hindsight).
+- Out-of-sample: four tests on a Python port that reproduces the MultiCharts trade list (391 of 399 positions, same P&L):
+
+
+1. Untouched period (Oct 2018 – Dec 2019).
+2. Anchored walk-forward 2020–2026: every January, re-optimise over 774 input combinations on past data only, then trade that year blind.
+3. Plateau check of all combinations.
+4. Same inputs on @ES.
+
+
+- Costs: $15 per contract round turn on NQ, $30 on ES (commission + 1 tick slippage each side).
+
+
+Results:
+In-sample, final inputs, Oct 2018 – Oct 2026, after costs:
+- 407 positions, PF 1.66, net +$177k, max drawdown $22.7k, 49% winners. Long PF 1.62, short PF 1.85.
+- By year (PF): 2019 1.51 | 2020 1.43 | 2021 1.19 | 2022 1.63 | 2023 0.69 (−$14.6k) | 2024 1.85 | 2025 2.06 | 2026 3.28
+
+
+Out-of-sample, after costs:
+- Untouched Oct 2018 – Dec 2019: 71 positions, PF 1.35, +$6.2k, max drawdown $3.1k.
+- Walk-forward 2020–2026: 681 positions, PF 1.31, +$177k, max drawdown $21.6k.
+Every year was profitable:
+- PF by year: 2020 1.04 | 2021 1.60 | 2022 1.13 | 2023 1.24 | 2024 1.71 | 2025 1.25 | 2026 1.30
+- The final inputs over the same years show PF 1.68, so hindsight adds about 0.35 PF.
+- Plateau: 95% of 486 long combinations and 82% of 288 short combinations are profitable.
+The final inputs sit at the 85th percentile (long) and the middle (short), so this isn't one lucky setting.
+- @ES, same inputs, May 2025 – Oct 2026: 86 positions, PF 1.22, +$11.1k. NQ in the same window was PF 2.65.
+
+
+The ugly:
+- The headline PF 2–3 of 2025–26 is hindsight; it drops to ~1.3 when inputs are chosen blind.
+- The walk-forward only re-picks numbers. The structure (sessions, ribbon, delta filter) was designed after seeing 2020–2026.
+- Drawdowns of ~$22k on 2 contracts. The walk-forward was underwater from late 2020 to mid 2021.
+- Selecting inputs by PF instead of net profit picks thin configs and fails (2026 PF 0.69).
+- The entry bar has no stop: exit orders only exist after the first bar closes in position.
+
+
+Follow-up tests on my own open questions:
+Each variant went through the same yearly walk-forward 2020–2026, after costs, so these are out-of-sample comparisons. Baseline: PF 1.31, max drawdown $21.6k.
+- Is the long just the opening drive? No. 36% of longs come from the first cash bar (signal 08:30–08:35), but those trades have PF 1.60 and the later ones PF 1.63. Removing the 08:35 signal entirely gives the same walk-forward PF, 1.31 (drawdown $26.4k).
+- Time-of-day volume normalisation (08:35 vs past 08:35 bars): worse. Walk-forward PF 1.13, drawdown $34k. The signal works because volume jumps against the last ~100 minutes, not because it's unusual for that time of day.
+- Up volume vs total volume: up volume wins. Total volume gives walk-forward PF 1.26 with drawdown $41.9k (vs $21.6k). A true-delta filter on the long was never chosen by the walk-forward: a 0.05 threshold cuts the long trades by more than half, and 0.10 or higher turns them into a loss.
+- Walk-forward design: the result doesn't depend on it. Anchored or rolling 3-year, net profit or net/drawdown selection: PF 1.28–1.33, and every year profitable in all four versions.
+- Regime filters: a fit, not an edge. Skipping low-volatility regimes looks great in-sample (PF 1.89). As a walk-forward choice it adds almost nothing (PF 1.33 vs 1.31), and the filter it picks changes from year to year. Skipping high volatility hurts (PF 1.25): the strategy needs volatility.
+- Slippage (per tick on the market entry and on stop/market exits): walk-forward PF goes 1.34 at 0 ticks, 1.31 at 1, 1.29 at 2, 1.27 at 3, 1.24 at 4. The overnight short is the most sensitive: PF 1.33 at 0 ticks, 1.18 at 4.
+- Unprotected entry bar: a stop from the fill would have stopped 25 positions (6%) inside the entry bar. Leaving the bar unprotected lost $7.4k less on those trades, but the worst single loss is $3,110 instead of $2,420. Protecting the bar: PF 1.66 → 1.63.
+
+
+Conclusion:
+I believe the edge is real but modest. It survives an untouched period, a walk-forward, four walk-forward designs, a parameter plateau, a second market and 4 ticks of slippage. A realistic expectation is PF ~1.25–1.35 after costs, with drawdowns of $20–25k on 2 contracts.
+The edge looks like "up volume accelerating against the last ~100 minutes, in the trend direction", not an opening-bar artifact. Up volume does better than total volume, mostly through half the drawdown. Regime filters didn't survive the walk-forward, so I'm leaving them out.
+What I'm still unsure about:
+- Why up volume works better than total volume. I found it by accident, so I don't have a mechanism.
+- The strategy's structure (sessions, ribbon, delta filter) was designed after seeing 2020–2026. Only the inputs were tested blind.
+
+
+What I want feedback on:
+1. How would you test the structure itself out of sample, not just the inputs? Is ES (PF 1.22) plus Oct 2018–2019 (PF 1.35) enough?
+2. Why might up-volume spikes be a cleaner signal than total-volume spikes on NQ? Is there a microstructure reason, or is it noise?
+3. Entry bar: would you run it unprotected (better on average, fatter tail) or with a stop from the fill?
+4. What slippage do you see on NQ market and stop orders between 23:00 and 08:30 CT? The short side is the part most exposed to it.
+5. Sizing: NQ is ~4× higher in price than in 2018 and I trade a fixed 2 contracts. Would you size by ATR or dollar risk, and test it that way?

@@ -1,0 +1,24 @@
+{
+  "reference": "e1a94f7",
+  "returns_computed": false,
+  "synthetic": {
+    "midnight_crossing_same_CME_day": true,
+    "real_session_break_rejected": true,
+    "candidate_before_entry_zero": true,
+    "market_exit_excludes_later_low": true,
+    "Sunday_qty_before_cushion_rounding": true,
+    "quantity_weighted_personal_costs": true,
+    "fixed_20_overlap_configurations": true
+  },
+  "script_sha256": "985e4b3085858a3affa93d2bec726b3f0f2fd578ba4ee2fea008d412f3e12368",
+  "metadata_and_synthetic_only": true,
+  "limitations": [
+    "Crossing calendar midnight is not crossing the16:00\u201317:00 CME session break. Intended17\u219203 nights are within one account day.",
+    "Old builder overnight wording is interpreted through the currently adopted OT17\u219203 plan; this is a fixed research-policy assumption, not fresh broker-rule verification.",
+    "Prepared Bridge Monday starts at Monday00:00 and omits Sunday19\u2192midnight adverse exposure. It cannot certify Sunday2 joint risk.",
+    "Prepared CLS/OT use whole-day constant adverse proxies that can invent simultaneous positions. No material Apex benefit is claimed from them.",
+    "OT order-flow history ends2026-07-07; later zeros are incomplete baseline evidence, not verified no-trade days.",
+    "Personal preserves published17-leg fees/marks: per-nonzero-day plan commissions undercount some reentries, MOC/S30 retain inherited approximations, Twin is the marked v1 checker ledger.",
+    "Personal daily drawdown does not certify intraday margin/liquidation safety or hedge delivery before an account breach."
+  ]
+}

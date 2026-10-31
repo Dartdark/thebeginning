@@ -1,0 +1,30 @@
+{
+  "checks": {
+    "positive_fill_prices": true,
+    "two_trade_nightly_cap": true,
+    "one_first_leg_each_night": true,
+    "all_long": true,
+    "native_gross_identity": true,
+    "native_net_identity": true,
+    "stress_identity": true,
+    "source_cost_identity": true,
+    "night_and_trade_totals": true,
+    "filtered_result_total": true,
+    "r2_gate_exact": true,
+    "target_reference_identity": true,
+    "reentry_after_target_next5bar": true
+  },
+  "audit_type": "CSV-only self-audit, not independent replication",
+  "new_market_return_trials": 0,
+  "source_arithmetic": {
+    "reported_total_nq": 213356,
+    "reported_oos_mean_mnq_if_same860trades": 9.74593023255814,
+    "claimed_oos_mean_mnq": 9.92,
+    "source_worst_night_dollars_beforecost_by_mnq": {
+      "1": 1136,
+      "2": 2272,
+      "4": 4544,
+      "5": 5680
+    }
+  }
+}

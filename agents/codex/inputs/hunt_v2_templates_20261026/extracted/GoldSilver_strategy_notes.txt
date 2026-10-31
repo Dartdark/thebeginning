@@ -1,0 +1,231 @@
+1 What the strategy does
+The Gold/Silver Reversion signal trades gold futures against a move that gold has made relative to silver.
+You run it on a gold chart with silver as the second data series. Silver is never traded. It is the reference
+that tells the signal whether gold's move was gold's own or part of a move in both metals.
+
+1.1 The signal
+Every bar the signal measures how far gold has moved over the last WinBars bars and subtracts
+HedgeRatio times silver's move over the same bars. The result is the relative move. It divides the relative
+move by its normal size, taken from the last VolSamples such moves, and calls that z. When z reaches
+ZEntry the signal sells gold. When z reaches minus ZEntry it buys gold. One setup per session, at
+market on the next bar.
+After a trade the measuring window starts again on the exit bar and grows back to WinBars. No bar from
+inside a finished trade is measured twice.
+
+1.2 The exits
+There is no end-of-day flatten in this build. A position stays open until one of these closes it:
+- Stop - gold has moved GoldStopSd session-sigmas against you since the signal bar.
+- Target - gold has moved GoldTpSd session-sigmas in your favour since the signal bar.
+- Trail - optional; off by default. See section 4.3.
+
+One session-sigma is the usual size of a one-session gold move, taken from the last RallySamples
+sessions. A stop of 2.0 is therefore about two normal sessions of gold against you, whatever the year.
+
+    An open position blocks every new entry. With no flatten, a trade that never reaches its stop or its
+    target can sit for weeks and the signal takes nothing else meanwhile. Watch the open trade, not the
+    entry count.
+2 Setting it up
+The signal needs two data series on one chart and a bar count large enough for its samplers. Everything
+else is in the inputs. The chart it expects:
+
+Group               Gold relative-move fade, multi-day holds
+
+Instrument          GC (QGC#C)
+
+Data 1              5 Min (execution and signal)
+
+Data 2              5 Min QSI#C (reference)
+
+Time zone           CT. Defaults are set for an Exchange (Chicago) chart.
+
+
+Step 1. Build the chart. Gold as Data1, silver as Data2, both 5-minute, both on the same session
+template, chart time zone set to Exchange (Chicago). The signal reads Close data2 for silver; if silver is
+missing or on a different resolution the numbers are wrong without any error message.
+Step 2. Set the bars back. In the strategy properties set Maximum bars back to at least WinBars plus
+RallyBars plus ExtBars plus five, or leave it on auto-detect. The default inputs need 365.
+Step 3. Load the signal. Compile GoldSilverReversion_NoEOD_FINAL, add it to the chart, and
+check that the input list matches section 3.
+Step 4. Run once before you change anything. The first VolSamples windows and the first
+RallySamples sessions are warm-up. No trade appears before about 50 sessions of data.
+
+  Changing the bar size changes every bar-count input. WinBars 36 is three hours on 5-minute bars
+  and 36 minutes on 1-minute bars. Convert WinBars, RallyBars and ExtBars together or the signal
+  is a different signal.
+3 The inputs
+These are the defaults in the FINAL build. Inputs marked off are kept in the code for testing and do nothing
+at -1 or false.
+
+3.1 Signal
+The inputs that decide when a setup fires:
+
+INPUT                    DEFAULT      WHAT IT DOES
+
+WinBars                  36           Length of the measuring window in bars.
+
+ZEntry                   2.0          How unusual the relative move must be before a trade is taken.
+
+HedgeRatio               5.0          Weight of silver's move inside the relative move. See section 4.
+
+BetaDays                 0            0 uses HedgeRatio as given. A number above 1 estimates it from that many
+                                      sessions instead.
+
+VolSamples               300          How many past windows define a normal relative move.
+
+ShortNeedsGoldUp         true         A short is only taken when gold itself rose over the window.
+
+SkipBlocksDay            true         A refused signal uses up the session's one entry.
+
+MaxEntriesDay            1            Entries per session. Anything above 1 does nothing without an intraday exit.
+
+
+ZEntry is measured in whatever unit HedgeRatio produces, so the two are read together.
+
+3.2 Exits
+The inputs that decide how a trade ends. All distances are in session-sigmas of gold:
+
+INPUT                    DEFAULT      WHAT IT DOES
+
+GoldStopSd               2.0          Stop distance. -1 is off.
+
+GoldTpSd                 4.0          Target distance. -1 is off.
+
+GoldTrailMode            3            1 fixed distance, 2 breakeven, 3 fraction of the best point.
+
+GoldArmSd                -1           The trail switches on once the trade is this far in your favour. -1 keeps the trail
+                                      off.
+
+GoldTrailSd              1.0          Mode 1 only: how much may be given back.
+
+GoldTrailFrac            0.5          Mode 3 only: what share of the best point may be given back.
+
+RallyBars                288          Bars in one session, the base of the session-sigma.
+
+RallySamples             100          How many sessions define a normal session move.
+
+
+The stop is the only exit that ends a losing trade. Leave it on.
+3.3 Filters, window and size
+Inputs you rarely touch:
+
+INPUT                       DEFAULT     WHAT IT DOES
+
+RallyFlipSd                 -1          Turns a long after a gold rally into a short. Measured worse than off.
+
+LongMaxRallySd              -1          Drops a long after a gold rally. Measured worse than off.
+
+GoldExtSd                   -1          Requires gold itself to be extended against the trade. Measured worse than
+                                        off.
+
+LongNeedsGoldDown           false       Mirror of ShortNeedsGoldUp for longs. Measured worse than off.
+
+ExtBars                     36          Window for GoldExtSd. Unused while that filter is off.
+
+StartCT,                    1700,       Entry window in Chicago time. It wraps midnight.
+NoEntryAfterCT              1530
+
+AnchorCT                    1700        Session start for the daily counter and the beta estimate.
+
+Dir                         1           -1 reverses both sides. A control run, not a setting.
+
+PrintEvents                 false       Writes nothing in this build.
+
+NumContracts                1           Contracts per entry.
+
+
+Everything in this last table stays as delivered unless you are running a control.
+4 What happens when you move an input
+Every sweep below was run on 2017 to 2022 on 5-minute bars. The behaviour repeats across all the
+versions tested; the exact numbers do not, so none are given here.
+
+4.1 HedgeRatio
+HedgeRatio decides what the signal is actually measuring. Silver moves about 1.7 times as much as
+gold, so its weight matters more than the number suggests.
+- 0.25 to 0.75 - the relative move is gold's move net of its usual co-movement with silver. This is the
+  version where you fade gold's own excess move.
+- 1.0 - silver already dominates. The relative move is mostly minus silver.
+- above 2 - gold's own move is a small correction. z is silver's three-hour extreme with the sign turned
+  round, and the trade is gold following silver back. This is a lead-lag trade, not a fade of the gold-silver
+  relationship.
+- 5 - gold contributes about a fifth of the signal. At 20 it contributes nothing; use 20 as the control run. If
+  the trades barely change, gold plays no part in the entry.
+In every sweep the average result rose towards the top of the HedgeRatio range. That is this effect, and
+at high values the long side tends to be long gold in metals rallies.
+
+    Do not read a high HedgeRatio as a better hedge. Above 1 you are no longer hedging gold's move,
+    you are trading silver's move with a gold contract.
+
+
+4.2 ZEntry, WinBars and VolSamples
+These three set how often the signal fires and how big the moves it fires on are.
+- ZEntry lower - more trades, but the added ones sit just above the threshold, and between 1.5 and
+  2.0 they lost money in every version tested. Higher: fewer and larger divergences.
+- WinBars shorter - faster bursts qualify and each is worth less; below about 12 bars the trades sit at the
+  cost floor. Longer: rarer, larger, slower to react.
+- VolSamples fewer - the yardstick follows the recent weeks, so a stress week lifts the bar for the next
+  one. More: a stable yardstick. Between 100 and 500 little changes.
+ZEntry is measured in the unit that HedgeRatio produces. 2.0 at HedgeRatio 5 is a silver-sigma
+threshold and is not comparable to 2.5 at 0.75.
+
+4.3 The exits
+All three exits measure gold's move since the signal bar in session-sigmas. They do not look at silver and
+they do not look at the relative move.
+-   GoldStopSd tight (1.0 to 1.5) - cuts adverse moves that mostly came back; with an end-of-day
+    flatten every level below 3 lowered the average trade. Without a flatten a tight stop is what keeps the
+    trade count up, because it is the only thing that ends a losing trade.
+-   GoldStopSd wide (3 and above) - touches single trades. Without a flatten one open loser can block
+    entries for weeks.
+-   GoldTpSd - in the no-flatten sweeps 4 was the level that held across stop settings. 2 and 3 cut the
+    multi-day winners short; 5 and 6 are rarely reached.
+-   Trail, mode 3 with GoldArmSd 1.0 and GoldTrailFrac 0.3 - roughly halved the drawdown for
+    about a third of the profit. No trail setting beat no trail on profit.
+-   Trail, mode 2 - only acts when armed late and then does nothing.
+
+4.4 The two side rules
+ShortNeedsGoldUp and SkipBlocksDay decide which shorts you take and what happens to a refused
+signal.
+- ShortNeedsGoldUp on - at HedgeRatio 0.75 it removes about a third of the shorts, the ones where
+  silver fell harder than gold. At HedgeRatio 1 and above it removes most shorts, because z reaches the
+  short threshold mainly when both metals dropped.
+- SkipBlocksDay off - a later crossing the same day trades instead. Those replacement trades were the
+  losing population every time they were measured.
+
+    Check the long/short split after every change to HedgeRatio. A run with almost no shorts is not a
+    mean-reversion strategy any more; it is a long gold position triggered by silver.
+
+
+4.5 The entry window
+Entries after the Globex open, 17:00 to 02:00 Chicago time, had the highest average per trade. The US
+session added many small positive trades that fill the quiet stretches. Cutting the daytime raised the
+average and the drawdown together, so the full window stays.
+
+4.6 Running without the end-of-day flatten
+The FINAL build has no flatten. Compared with the intraday version this changes three things at once: the
+trade count falls sharply, because a position blocks entries for its whole life; the profit and the loss per
+trade grow by an order of magnitude; and the result becomes a multi-day exposure to gold's direction.
+Settings that looked stable on 2017 to 2022 in this mode did not repeat on 2023 to 2026.
+5 What was tested and dropped
+Each line is one idea, what it changed, and why it is not in the FINAL build.
+-   Level spread against a rolling mean - earned in quiet years but ran long-heavy at the hedge ratio it
+    needed; same regime pattern as the burst signal.
+-   Kalman-filter spread - adapts the hedge ratio bar by bar; ranked third of the entry statistics tried.
+-   Range position - where the spread sits in its recent high-low range; noisy, same regime pattern.
+-   MAD scale and percentile threshold - neither beat the standard deviation.
+-   Stall entry - wait for a retrace before entering; traded count for average, profit unchanged.
+-   Reversal-bar confirmation - fitted the test years and failed the later ones.
+-   Volume and volatility gates at entry - cost more than half the profit.
+-   Filters on gold's own position - the longs entered into gold rallies were on average the better longs;
+    every filter that removed them cost money.
+-   Rally flip - turning those longs into shorts was worse in every cell.
+-   Spread-measured stops and targets - the spread's excursions were unrelated to the profit of the
+    trade; the largest adverse spread moves were the best trades.
+-   Fixed-dollar stops and targets - every level lowered the average; the profit was in the tail.
+-   Time exit - closing a trade that is not ahead after 15 bars removed winners as well as losers.
+-   Silver-measured stops and targets - best setting was off.
+-   Evening-only window - higher average, half the profit, no drawdown benefit.
+6 Open items
+- HedgeRatio 20 control - if the result is unchanged, gold's own move plays no part in the signal.
+- Long/short split of the FINAL build - on both periods, to see how much of the result is long gold.
+- Drawdown per contract - one contract against a prop-firm limit is a sizing question that the signal does
+  not answer.
+

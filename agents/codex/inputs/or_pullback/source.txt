@@ -1,0 +1,112 @@
+// ============================================================================
+// ORPullback - NQ opening-range pullback 
+//   Author         
+//
+//   Chart        NQ or MNQ, 5-MINUTE bars (bar-close stamps), any session template that
+//                includes 09:30-16:00 ET. Strategy Properties: IOG OFF, Bar Magnifier ON
+//                at 1 minute (the stop/target fill inside the 5-min bars, as in the live core).
+//   Time zone    leave the chart on Exchange. Bridge ASCII bars (New York time) ->
+//                ChartIsCentral = false; a CME / IBKR / MultiCharts @NQ feed (Chicago) -> true.
+//                All time inputs are ET.
+//   Costs        set commission + slippage in Strategy Properties (research used 1 pt per MNQ
+//                round trip = fees + ~1 tick a side).
+//
+//   RULES (ET)
+//     Opening range = high / low of the 09:30-09:45 bars.
+//     LONG:  armed once a 5-min bar closes above the OR high. Trigger = the first LATER red
+//            bar (close < open) that still closes above the OR high. Enter at that bar's close.
+//     SHORT: armed once a bar closes below the OR low. Trigger = the first later green bar
+//            that still closes below the OR low. Enter at its close.
+//     One trigger per side per day (a trigger blocked by a guard still uses up that side).
+//     Stop 50 pts, target 100 pts from the entry; flat at the 15:55 bar close.
+//     Guards: one position at a time, max 2 trades and max 2 losing trades per day,
+//     entries only on bars closing 09:35-15:30.
+//
+//   EVIDENCE (1 MNQ, 1 pt cost): 2021-26 1,665 trades, 43% win, PF 1.23, +$12.6/trade, t 3.8;
+//   2010-20 2,693 trades, PF 0.94, -$1.4/trade = no edge before 2021 (see the research note).
+// ============================================================================
+
+Inputs:
+    ChartIsCentral(false),    // true for a Chicago-time chart
+    StopPts(50),              // index points (NQ = MNQ points)
+    TargetPts(100),
+    PriceScaled(false),       // true: stop/target x (session open / ScaleRef) - the bracket at 2021-23 price levels
+    ScaleRef(15000),
+    MaxTradesPerDay(2),
+    MaxLossesPerDay(2),
+    NumContracts(1);
+
+Variables:
+    tz(0), tOR0(930), tOR1(945), tFirst(935), tLast(1530), tFlat(1555),
+    orH(0), orL(0), orDone(false), armedL(false), armedS(false), doneL(false), doneS(false),
+    trades(0), losses(0), sessOpen(0), stp(0), tgt(0), lastTT(0), dirn(0), inRTH(false);
+
+once begin
+    if ChartIsCentral then tz = 100 else tz = 0;
+    tOR0 = 930 - tz;  tOR1 = 945 - tz;  tFirst = 935 - tz;  tLast = 1530 - tz;  tFlat = 1555 - tz;
+end;
+
+// ---- new session: reset at the first bar of the cash session
+inRTH = Time > tOR0 and Time <= 1600 - tz;
+if inRTH and (Time[1] <= tOR0 or Date <> Date[1]) then begin
+    orH = High;  orL = Low;  orDone = false;
+    armedL = false;  armedS = false;  doneL = false;  doneS = false;
+    trades = 0;  losses = 0;  sessOpen = Open;
+end;
+
+// ---- loss counting (a position closed since the last bar)
+if TotalTrades > lastTT then begin
+    if PositionProfit(1) < 0 then losses = losses + 1;
+    lastTT = TotalTrades;
+end;
+
+// ---- opening range (bars closing 09:35, 09:40, 09:45 ET)
+if inRTH and Time <= tOR1 then begin
+    if High > orH then orH = High;
+    if Low < orL then orL = Low;
+end;
+if inRTH and Time > tOR1 then orDone = true;
+
+// ---- trigger first (with the arming from EARLIER bars), then arm with this bar's close
+dirn = 0;
+if orDone and Time > tOR1 and Time <= 1600 - tz then begin
+    if armedL and doneL = false and Close < Open and Close > orH then begin
+        dirn = 1;  doneL = true;
+    end
+    else if armedS and doneS = false and Close > Open and Close < orL then begin
+        dirn = -1;  doneS = true;
+    end;
+    if Close > orH then armedL = true;
+    if Close < orL then armedS = true;
+end;
+
+// ---- entry (guards as in the live core)
+if dirn <> 0 and MarketPosition = 0 and Time >= tFirst and Time <= tLast
+   and trades < MaxTradesPerDay and losses < MaxLossesPerDay then begin
+    if PriceScaled and ScaleRef > 0 then begin
+        stp = StopPts * sessOpen / ScaleRef;  tgt = TargetPts * sessOpen / ScaleRef;
+    end
+    else begin
+        stp = StopPts;  tgt = TargetPts;
+    end;
+    if dirn = 1 then Buy ("F9b.L") NumContracts contracts this bar at close
+    else SellShort ("F9b.S") NumContracts contracts this bar at close;
+    trades = trades + 1;
+end;
+
+// ---- exits: re-issued every bar from the bar after entry
+if MarketPosition = 1 then begin
+    if Time >= tFlat then Sell ("F9b.LX") this bar at close
+    else begin
+        Sell ("F9b.LS") next bar at EntryPrice - stp stop;
+        Sell ("F9b.LT") next bar at EntryPrice + tgt limit;
+    end;
+end;
+if MarketPosition = -1 then begin
+    if Time >= tFlat then BuyToCover ("F9b.SX") this bar at close
+    else begin
+        BuyToCover ("F9b.SS") next bar at EntryPrice + stp stop;
+        BuyToCover ("F9b.ST") next bar at EntryPrice - tgt limit;
+    end;
+end;
+SetExitOnClose;

@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:7330098",
+  "ssrn_id": "7330098",
+  "title": "The Price Impact of Hedging Expiring Index Options",
+  "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7330098",
+  "doi": "10.2139/ssrn.7330098",
+  "authors": [
+    "Pedro Angel Garcia-Ares",
+    "Aurelio Vasquez",
+    "Neil D. Pearson",
+    "Diego Amaya"
+  ],
+  "written": "2026-08-13",
+  "posted": "2026-08-25",
+  "revised": "2026-08-22",
+  "verdict": "needs_data",
+  "full_text_read": true,
+  "evidence_level": "source_review",
+  "source_sha256": null,
+  "summary": "No signed SPXbook acquired. Saved one retrospective public illustration and concrete Cboe intake. Fixed2022H2free sample requires eligible vendor access; notactivated. 2025product introduction and2–5min delivery lag remain material historical-timing limits.",
+  "about": "Cash-settled SPXW expiry hedge removal, distinguished from gamma rebalancing.",
+  "findings": "Authors report17bp high-minus-low dealer-delta quintile ES return differences over final30minutes and12.5bp over15minutes inJuly2020–June2023. Retrospective gross groups, not independently reproduced or verified executable net profit.",
+  "mechanism": "Positive expiring option dealer delta implies a short hedge; removing it can create ES buying, and negative delta can create selling. Actual hedge netting and tradable timing remain unverified.",
+  "build_on": "Specific full-source merit warrants a queue entry. Need signed C1 SPXW MMpositions from inception and same-time deltas/quotes, prior inventory, complete sessions/corrections and actual receipt time. Owned NDX GEX/OI and NQ tape do not identify this book. Minute-start labels/end-minute quotes require lag audit; T+1 data cannot become same-day signals. Publicsamplefailed; no TEST family selected.",
+  "economic_family": "index-options-expiry-dealer-hedging",
+  "deduplication": [
+    "TIER_LIST.md options open-interest/gamma and expiration entries; no direct7330098 review found"
+  ],
+  "access": [
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7330098",
+      "method": "public indexed metadata via connected web search",
+      "status": "abstract read only; full text not requested this cycle"
+    },
+    {
+      "url": "https://algoseek.com/wp-content/uploads/2026/10/ssrn-7330098.pdf",
+      "method": "connected PDF reader",
+      "status": "Fulltext accessible76pages; shellproxyHTTP403, no local PDF/hash"
+    }
+  ],
+  "new_economic_trials": 0,
+  "updated_at": "2026-10-29T20:38:56.600548+00:00",
+  "notification_key": "ssrn:7330098:pdf2026-08-13:needs_data:full-source-v1",
+  "initial_disposition": {
+    "verdict": "metadata_only",
+    "full_text_read": false,
+    "evidence_level": "metadata_only",
+    "updated_at": "2026-10-29T17:54:16.115837+00:00"
+  },
+  "return_eligibility": "NEEDS DATA",
+  "source_revision": "Public76-page PDF title date2026-08-13; SSRN advertises last revision2026-08-22; byte/version parity not established.",
+  "source_url": "https://algoseek.com/wp-content/uploads/2026/10/ssrn-7330098.pdf",
+  "full_text_read_scope": "Directional analysis, position construction, key tables and appendix placebos via connected PDF reader; no local PDF bytes/hash.",
+  "report_path": "agents/codex/results/scout_spx_positions_acquisition_20261029.md",
+  "evidence_path": "agents/codex/evidence/scout_spx_expiry_delta_20261029.md",
+  "testability_receipt": "agents/codex/research/scout/runs/7330098_testability_20261029.json",
+  "testability_report_path": "agents/codex/results/scout_7330098_testability_20261029.md",
+  "acquisition": {
+    "vendor_access": "agents/codex/inputs/scout_acquisition_20261029/spx_positions/vendor_access.json",
+    "unsent_request_spec": "agents/codex/inputs/scout_acquisition_20261029/spx_positions/REQUEST_SPEC.md",
+    "raw_capacity_rows": 0,
+    "reconstructed_book_rows": 0,
+    "public_retrospective_illustrations": 1,
+    "free_sample_fixed_period": [
+      "2022-07-01",
+      "2022-12-31"
+    ],
+    "activated": false,
+    "historical_public_availability_verified": false,
+    "status": "vendor_access_and_book_still_missing"
+  }
+}

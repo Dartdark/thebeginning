@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "prices_or_strategy_returns_read": false,
+  "runtime_versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  },
+  "checks": [
+    "close-label clocks405/330/120",
+    "native MNQ gross hurdle",
+    "gap/ordered/deduplicated short levels",
+    "strict below not crossing; ignores long signals",
+    "inclusive final scan; no next-observed gaps",
+    "causal scan-prefix failure",
+    "exact prior14 complete calendar slots and missing-slot veto",
+    "current/future RTH cannot alter prior references",
+    "calendar skip and calendar roll guard",
+    "real date/integer/clock metadata integrity",
+    "later RTH gap never suppresses earlier trigger",
+    "held/end-point gaps retained; no next-observed/fallback",
+    "idealized clock field causality",
+    "missing eligible prefix retained unresolved",
+    "frozen four-tick per fill later cost-only stress",
+    "zero-event schema/audits/failed gate",
+    "missing native entry retained and PM completeness",
+    "gross min-sample/endpoint/held/scan conjunction"
+  ],
+  "script_sha256": "6c22e946279a1c7fe8ceb11c801ca861f0c150e448ee713d5dd5d788c6a0b530"
+}

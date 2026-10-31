@@ -1,0 +1,51 @@
+{
+  "features": {
+    "structure_core_parity": true,
+    "prefix_invariance": true,
+    "mirror": true,
+    "reset_and_asof_confirmation": true,
+    "prior20_range_clock": true,
+    "future_fill_and_range_invariance": true,
+    "missing_history_not_replaced": true
+  },
+  "execution": {
+    "entry_gap_charged": true,
+    "entry_bar_protection": true,
+    "target_through": true,
+    "collision_and_stop_first": true,
+    "worse_gap_preserved": true,
+    "time_exit_open": true,
+    "missing_entry_blocks": true,
+    "missing_path_unresolved": true,
+    "early_flatten": true,
+    "long_short_symmetry": true
+  },
+  "subsets": {
+    "partition": true,
+    "exact_counts": true,
+    "year_side_signal_hour_matching": true,
+    "saved_membership_unique": true,
+    "daily_sums": true,
+    "baseline_daily_parity": true,
+    "market_data_read": false
+  },
+  "foundation": {
+    "shared_core": {
+      "groups": 10,
+      "causal_prefix_checks": true,
+      "mirror_symmetry": true,
+      "shared_entry_stop_gap_target_checks": true
+    },
+    "calendar": {
+      "pre_pause_end": true,
+      "post_pause_end": true,
+      "maintenance": true
+    },
+    "hourly_expected_minutes": true,
+    "intraday_and_early_close": true,
+    "target_2R": true,
+    "planned_exit_open": true,
+    "entry_stop_and_gap": true,
+    "unknown_entry": true
+  }
+}

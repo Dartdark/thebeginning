@@ -1,0 +1,106 @@
+{
+  "reviewed_ref": "16145ab15c09fa9489a58ef651f5711c1ef2599f",
+  "passed": true,
+  "meaning": "All five reported defects reproduced; this does not mean the reviewed implementations passed",
+  "new_strategy_return_trials": 0,
+  "live_access": false,
+  "findings": {
+    "floor_path": {
+      "defect_reproduced": true,
+      "source_line": 85,
+      "bad_literal_hex": "24 4c 6f 67 73 02 2a 2e 63 73 76",
+      "bad_matches_daily_log": false,
+      "corrected_matches_daily_log": true,
+      "verification_limit": "Python byte/wildcard/control-flow check; PowerShell and installed VPS not exercised"
+    },
+    "integer_sizing": {
+      "defect_reproduced": true,
+      "fixtures": [
+        {
+          "case": "150K ONB",
+          "stop_points": 100,
+          "simulated_mnq": 12.5,
+          "executable_mnq": 13
+        },
+        {
+          "case": "150K EOS",
+          "stop_points": 150,
+          "simulated_mnq": 2.5,
+          "executable_mnq": 4
+        },
+        {
+          "case": "50K ONB, half1100cushion",
+          "stop_points": 100,
+          "simulated_mnq": 2.5,
+          "executable_mnq": 2
+        }
+      ],
+      "account_outcome_effect": "Not simulated; direction unresolved"
+    },
+    "g10_same_bar": {
+      "defect_reproduced": true,
+      "fixture_fills": 12,
+      "direct_valid_fraction": 0.6666666666666666,
+      "original_report_valid_fraction": 1.0,
+      "corrected_fixture_valid_fraction": 0.6666666666666666,
+      "report_closed_rows": 1756,
+      "excluded_same_bar_rows": 572,
+      "excluded_exit_types": {
+        "Profit Target": 389,
+        "Stop Loss": 109,
+        "VB EOD": 74
+      },
+      "verification_limit": "Synthetic impossible fills; excluded historical fills have not been judged invalid. Open-sentinel identification needs explicit treatment."
+    },
+    "swing_target_kind": {
+      "defect_reproduced": true,
+      "synthetic_fixtures": [
+        {
+          "kind": "stop",
+          "slips": 2,
+          "worst_per_mnq": -40.725,
+          "close_per_mnq": -21.725
+        },
+        {
+          "kind": 0,
+          "slips": 2,
+          "worst_per_mnq": -21.725,
+          "close_per_mnq": -21.725
+        },
+        {
+          "kind": "target",
+          "slips": 2,
+          "worst_per_mnq": -40.725,
+          "close_per_mnq": 18.275
+        },
+        {
+          "kind": 1,
+          "slips": 1,
+          "worst_per_mnq": -40.725,
+          "close_per_mnq": 18.775
+        }
+      ],
+      "fixed_ledger_reconciliation": "kind_adapter_audit.json",
+      "account_outcome_effect": "Not simulated"
+    },
+    "premarket_capture_age": {
+      "defect_reproduced": true,
+      "asof": "2026-10-30T08:22:00-05:00",
+      "fixtures": [
+        {
+          "capture": 5,
+          "original_status": "ALL GREEN",
+          "elapsed_seconds": 29820.0,
+          "proposed_capture_fresh": false
+        },
+        {
+          "capture": 815,
+          "original_status": "ALL GREEN",
+          "elapsed_seconds": 420.0,
+          "proposed_capture_fresh": true
+        }
+      ],
+      "verification_limit": "Fake files and stubbed floor/version helpers; demonstrates stale-record acceptance, not installed runtime behavior"
+    }
+  }
+}

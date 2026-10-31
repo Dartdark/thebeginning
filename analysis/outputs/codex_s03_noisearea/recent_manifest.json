@@ -1,0 +1,114 @@
+{
+  "stage": "recent",
+  "prereg_commit": "d9ef177df4f2a788dc4e9d108c4cdc1fbc4880ad",
+  "plan_sha256": "ec135137d244afc7d24ca53f62bc77936e07d5e64259757d85dcc20ce3d2d879",
+  "source_sha256": "05a176b0c4f6804d48d427ad484175076d125a61b62122736c34c6797c0d2b52",
+  "cache_path": "scratch_data/g24.pkl",
+  "cache_sha256": "69868d1cbc5ca6acdbbba0899eb01ca1ad7d036e00160f33c3f1992d5a385595",
+  "cache_first_date": "2017-12-01T00:00:00",
+  "cache_last_date": "2026-10-09T00:00:00",
+  "years": [
+    2023,
+    2026
+  ],
+  "prices_exclusive_end": "2027-01-01T00:00:00",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "synthetic_checks": [
+    "exact_previous14_full_cash_sessions_excludes_gaps_holidays_and_today",
+    "prior_complete_session_only_and_current_future_gap_causality",
+    "missing_normal_prior_endpoint_is_unavailable_and_not_full_history",
+    "holiday_excluded_early_cash_close_included_in_prior_close",
+    "missing_early_calendar_endpoint_is_unavailable",
+    "strict_band_and_vwap_confirmation_zero_volume_unavailable",
+    "short_vwap_confirmation_and_strict_equality_no_action",
+    "both_sides_entry_minute_stop_rounding_and_no_double_cost",
+    "same_direction_no_pyramid_and_1500_decision_1501_open",
+    "both_sides_check_exit_waits_next_open",
+    "opposite_check_reversal_separate_round_turn_costs",
+    "gap_stop_pending_reversal_priority_single_position",
+    "missing_fill_minute_waits_observed_open_and_blocks_complete_path",
+    "missing_flatten_catchup_real_close_then_real_open_unknown_path",
+    "missing_end_no_fabricated_last_close_trade",
+    "unfilled_entry_endpoint_is_unmatched_and_blocks_account_path",
+    "2023_gate_before_feature_or_return_computation"
+  ],
+  "feature_seconds": 0.921279019996291,
+  "feature_rows_by_anchor": {
+    "831": 30043,
+    "830": 30043
+  },
+  "elapsed_seconds": 10.95040615099424,
+  "gate_path": "analysis/outputs/codex_s03_noisearea/design_gate.json",
+  "gate_sha256": "712c8831068c285b16703f72ba079d494409ff53d8b31b8cf21a2c9d5501aaec",
+  "script_sha256": "26fb4244c6910f4b80792d43e4fdfc85eb4b1b0780127bbd228f13c942e04732",
+  "replay_sha256": "d51a65e34e877a173b4d07e73a5792c317164a7fe11770c6d817326e9361ca00",
+  "calendar_sha256": "705713195b1be61cd648d1b72718442b6cec7581587ca8c537d491cf1312bceb",
+  "profiles": {
+    "V2": {
+      "trades": 1013,
+      "total_net": 124670.75,
+      "mean_net": 123.07082922013821,
+      "trade_t": 2.007718909362173,
+      "positive_years": 4,
+      "annual_net": {
+        "2023": 52628.0,
+        "2024": 12630.75,
+        "2025": 40037.25,
+        "2026": 19374.75
+      },
+      "unknown_held_minutes_count": 3,
+      "censored_position_count": 0,
+      "unmatched_order_count": 0
+    },
+    "V1": {
+      "trades": 767,
+      "total_net": 125934.25,
+      "mean_net": 164.1906779661017,
+      "trade_t": 1.853273240024811,
+      "positive_years": 4,
+      "annual_net": {
+        "2023": 45126.0,
+        "2024": 38308.75,
+        "2025": 24417.75,
+        "2026": 18081.75
+      },
+      "unknown_held_minutes_count": 3,
+      "censored_position_count": 0,
+      "unmatched_order_count": 0
+    },
+    "C2": {
+      "trades": 1005,
+      "total_net": 119678.75,
+      "mean_net": 119.08333333333333,
+      "trade_t": 1.9240484655859031,
+      "positive_years": 4,
+      "annual_net": {
+        "2023": 54274.75,
+        "2024": 15353.0,
+        "2025": 33117.75,
+        "2026": 16933.25
+      },
+      "unknown_held_minutes_count": 3,
+      "censored_position_count": 0,
+      "unmatched_order_count": 0
+    },
+    "E2": {
+      "trades": 1013,
+      "total_net": 104410.75,
+      "mean_net": 103.07082922013821,
+      "trade_t": 1.6814484320956318,
+      "positive_years": 4,
+      "annual_net": {
+        "2023": 47588.0,
+        "2024": 6770.75,
+        "2025": 34857.25,
+        "2026": 15194.75
+      },
+      "unknown_held_minutes_count": 3,
+      "censored_position_count": 0,
+      "unmatched_order_count": 0
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "reviewed_claude_ref": "302abe292498361820018fadd0716972f3606847",
+  "review_mode": "post-read acceptance followup, not blind independent research",
+  "original_independent_assessment_unchanged": true,
+  "new_strategy_return_trials": 0,
+  "account_return_simulations_run": false,
+  "VPS_or_broker_access": false,
+  "checks": {
+    "watchdog": {
+      "literal_fixed": true,
+      "PowerShell_or_installed_runtime_test": false
+    },
+    "integer_sizing": {
+      "actual_ONB_expressions": [
+        {
+          "risk": 2750,
+          "stop_points": 100,
+          "mnq": 13
+        },
+        {
+          "risk": 550,
+          "stop_points": 100,
+          "mnq": 2
+        }
+      ],
+      "actual_150K_EOS_150point_stop": 4,
+      "final_quantities_integral": true,
+      "account_returns_rerun_by_this_audit": false
+    },
+    "ST_adapter": {
+      "numeric_and_holiday_kinds_pass": true,
+      "full_corrected_account_replay": "still pending in Claude summary",
+      "direction_of_payout_change": "not established by per-trade accounting improvement"
+    },
+    "L1_gate": {
+      "planted_same_bar_impossible_fills_now_fail": true,
+      "valid_fraction": 0.6666666666666666,
+      "all_same_bar_input": "AttributeError: 'DataFrame' object has no attribute 'orig'",
+      "whole_plan_sweep": "Claude saved3512VBfills checked; not rerun here"
+    },
+    "premarket": {
+      "original_midnight_case_fixed": true,
+      "remaining_false_green_cases": [
+        {
+          "case": "capture22min_old",
+          "ACCT_time": 800,
+          "stored_bar_age_seconds": 0,
+          "POS_time": 800,
+          "SIG_time": 800,
+          "effective_feed_age_minutes": 22.0,
+          "alerts": [],
+          "returned_ALL_GREEN": true
+        },
+        {
+          "case": "14min_old_bar_captured7min_ago",
+          "ACCT_time": 815,
+          "stored_bar_age_seconds": 840,
+          "POS_time": 815,
+          "SIG_time": 815,
+          "effective_feed_age_minutes": 21.0,
+          "alerts": [],
+          "returned_ALL_GREEN": true
+        },
+        {
+          "case": "fresh_ACCT_but_stale_POS_SIG",
+          "ACCT_time": 815,
+          "stored_bar_age_seconds": 0,
+          "POS_time": 5,
+          "SIG_time": 5,
+          "effective_feed_age_minutes": 7.0,
+          "alerts": [],
+          "returned_ALL_GREEN": true
+        }
+      ],
+      "complete_fixtures": [
+        {
+          "case": "midnight_stale",
+          "ACCT_time": 5,
+          "stored_bar_age_seconds": 0,
+          "POS_time": 5,
+          "SIG_time": 5,
+          "effective_feed_age_minutes": 497.0,
+          "alerts": [
+            "VB-2: the chart monitor's last line is 0005 CT, 497 min old: chart frozen or closed? Check it."
+          ],
+          "returned_ALL_GREEN": false
+        },
+        {
+          "case": "fresh_control",
+          "ACCT_time": 815,
+          "stored_bar_age_seconds": 0,
+          "POS_time": 815,
+          "SIG_time": 815,
+          "effective_feed_age_minutes": 7.0,
+          "alerts": [],
+          "returned_ALL_GREEN": true
+        },
+        {
+          "case": "capture22min_old",
+          "ACCT_time": 800,
+          "stored_bar_age_seconds": 0,
+          "POS_time": 800,
+          "SIG_time": 800,
+          "effective_feed_age_minutes": 22.0,
+          "alerts": [],
+          "returned_ALL_GREEN": true
+        },
+        {
+          "case": "14min_old_bar_captured7min_ago",
+          "ACCT_time": 815,
+          "stored_bar_age_seconds": 840,
+          "POS_time": 815,
+          "SIG_time": 815,
+          "effective_feed_age_minutes": 21.0,
+          "alerts": [],
+          "returned_ALL_GREEN": true
+        },
+        {
+          "case": "fresh_ACCT_but_stale_POS_SIG",
+          "ACCT_time": 815,
+          "stored_bar_age_seconds": 0,
+          "POS_time": 5,
+          "SIG_time": 5,
+          "effective_feed_age_minutes": 7.0,
+          "alerts": [],
+          "returned_ALL_GREEN": true
+        }
+      ],
+      "post_DST_clock_example": {
+        "utc": "2026-11-02T14:22:00+00:00",
+        "actual_CT": "08:22",
+        "script_fixed_UTC_minus5": "09:22"
+      },
+      "installed_system_accessed": false
+    },
+    "summary_ratio_units": [
+      {
+        "pass_pct": 50.1,
+        "breach_pct": 48.1,
+        "unfinished_pct": 1.9,
+        "breaches_per_pass": 0.9600798403193613,
+        "all_nonpasses_per_pass": 0.996007984031936
+      },
+      {
+        "pass_pct": 41.0,
+        "breach_pct": 56.6,
+        "unfinished_pct": 2.3,
+        "breaches_per_pass": 1.380487804878049,
+        "all_nonpasses_per_pass": 1.4390243902439024
+      }
+    ]
+  }
+}

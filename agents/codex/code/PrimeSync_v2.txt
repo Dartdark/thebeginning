@@ -1,0 +1,283 @@
+{ =====================================================================
+  PrimeSync v2 - RESEARCH PROTOTYPE, 2026-10-27. MultiCharts PowerLanguage.
+  Reconstructed from a description; thresholds below are our assumptions.
+  Not compiled or verified in MultiCharts; no live deployment approval.
+
+  Data1 only: ES/NQ or MES/MNQ, 15 or 30 MINUTE, full Globex, Exchange CT.
+  Set MaxBarsBack=200; load 1000+ bars before the requested test start.
+  IOG is ON; Bar Magnifier 1-minute required for the historical stop path.
+  Use total futures volume Ticks, not intraday up-volume Volume.
+
+  ExitMode=0 (selected on 2018-22): milestones only, ALL out at4.5R.
+  ExitMode=1: thirds at1.5/2.5/4.5R; stop moves AFTER partial fills.
+  FixedSizeContracts=1: frozen account-test projection,1 contract per entry.
+  The original3-unit risk-eligibility screen remains unchanged.
+  FixedSizeContracts=0 restores the original variable-risk comparison.
+  Partial ExitMode1 requires FixedSizeContracts0 and quantities divisible by3.
+  RiskDollars500 may be too small for3 full ES/NQ: SKIP, never force size.
+  MES/MNQ fit smaller budgets, but their native volume differs from the
+  NQ/ES volume used in our Python micro-equivalent research screen.
+
+  INITIAL stop/4.5R target are built-in and active on the entry bar.
+  Additional stops/partials update intrabar, at the NEXT execution event.
+  A stop is an order, not a guarantee of a maximum loss. No compounding.
+  Do not add another strategy/stop manager to this research chart.
+  ===================================================================== }
+
+[IntrabarOrderGeneration = true]
+
+Inputs:
+    TrendLength(150),
+    VolumeLength(20), VolumeMultiplier(1.5),
+    RangeLength(20), RangeMultiplier(1.2),
+    ADXLength(14), MinADX(20),
+    ATRLength(14), StopATRMult(1.5),
+    TP1R(1.5), TP2R(2.5), TP3R(4.5),
+    EnableEntries(true),
+    FixedSizeContracts(1),      { 1=account-test size;0=original risk-sized comparison }
+    ExitMode(0),                 { 0=milestones;1=thirds }
+    TradeDirection(0),          { 0=both;1=long;-1=short }
+    RiskDollars(500),
+    CostReservePerContract(5),  { sizing reserve ONLY; configure report costs separately }
+    MaxContracts(30),
+    CooldownBars(4),
+    MinimumStudyBars(100),      { plus MaxBarsBack200 = approx300 raw bars }
+    VWAPStartCT(830),
+    LastEntryCT(1430),          { signal strictly earlier }
+    FlattenCT(1500),
+    PrintSignals(false);
+
+Variables:
+    PS_MA(0), PS_VolBase(0), PS_RangeBase(0), PS_ATR(0), PS_ADX(0),
+    PS_Tick(0), PS_RiskCandidate(0), PS_UnitBudget(0), PS_QCandidate(0),
+    PS_Long(false), PS_Short(false), PS_ConfigOK(false),
+    PS_hYear(0), PS_hMonth(0), PS_hDay(0), PS_hDow(0),
+    PS_EA(0), PS_EB(0), PS_EC(0), PS_ED(0), PS_EE(0), PS_EF(0),
+    PS_EG(0), PS_EH(0), PS_EI(0), PS_EK(0), PS_EL(0), PS_EM(0),
+    PS_EasterMonth(0), PS_EasterDay(0), PS_EasterDate(0), PS_GoodFriday(0),
+    IntrabarPersist PS_CalendarDate(0),
+    IntrabarPersist PS_NoTradeDate(false),
+    IntrabarPersist PS_LastCloseBar(-1),
+    IntrabarPersist PS_VWAPDate(0),
+    IntrabarPersist PS_PV(0),
+    IntrabarPersist PS_Vol(0),
+    IntrabarPersist PS_VWAP(0),
+    IntrabarPersist PS_Pending(false),
+    IntrabarPersist PS_SignalBar(-1),
+    IntrabarPersist PS_OrderQty(0),
+    IntrabarPersist PS_Risk(0),
+    IntrabarPersist PS_Entry(0),
+    IntrabarPersist PS_EntryDate(0),
+    IntrabarPersist PS_EntryQty(0),
+    IntrabarPersist PS_Slice(0),
+    IntrabarPersist PS_Stop(0),
+    IntrabarPersist PS_T1(0),
+    IntrabarPersist PS_T2(0),
+    IntrabarPersist PS_T3(0),
+    IntrabarPersist PS_D1(0),
+    IntrabarPersist PS_D2(0),
+    IntrabarPersist PS_D3(0),
+    IntrabarPersist PS_Stage(0),
+    IntrabarPersist PS_LastMP(0),
+    IntrabarPersist PS_LastClosedTrades(0),
+    IntrabarPersist PS_ExitBar(-100000),
+    IntrabarPersist PS_EndDay(false);
+
+{ Functions evaluate continuously; entry tests run once per completed bar. }
+PS_MA = AverageFC(Close, TrendLength);
+PS_VolBase = AverageFC(Ticks[1], VolumeLength);
+PS_RangeBase = AverageFC(High[1] - Low[1], RangeLength);
+PS_ATR = AverageFC(TrueRange, ATRLength);
+PS_ADX = ADX(ADXLength);
+If PriceScale > 0 then PS_Tick = MinMove / PriceScale;
+
+PS_ConfigOK = BarType = 1 and (BarInterval = 15 or BarInterval = 30)
+    and TrendLength >= 2 and VolumeLength >= 2 and RangeLength >= 2
+    and ATRLength >= 2 and ADXLength >= 2 and StopATRMult > 0
+    and TP1R > 0 and TP2R > TP1R and TP3R > TP2R
+    and (ExitMode = 0 or ExitMode = 1)
+    and (TradeDirection = 0 or TradeDirection = 1 or TradeDirection = -1)
+    and FixedSizeContracts >= 0 and FixedSizeContracts = IntPortion(FixedSizeContracts)
+    and (FixedSizeContracts = 0 or ExitMode = 0)
+    and RiskDollars > 0 and CostReservePerContract >= 0
+    and MaxContracts >= 3 and CooldownBars >= 0
+    and VWAPStartCT < LastEntryCT and LastEntryCT < FlattenCT
+    and FlattenCT <= 1500 and PS_Tick > 0 and BigPointValue > 0;
+
+{ Known cash holidays/half-days skipped rather than carrying through halts.
+  Mirrors the Python research calendar; exceptional future closures need review. }
+If Date <> PS_CalendarDate then begin
+    PS_CalendarDate = Date;
+    PS_EndDay = false;
+    PS_hYear = Year(Date) + 1900;
+    PS_hMonth = Month(Date);
+    PS_hDay = DayOfMonth(Date);
+    PS_hDow = DayOfWeek(Date);
+    { Gregorian Easter -> Good Friday. }
+    PS_EA = Mod(PS_hYear,19);
+    PS_EB = IntPortion(PS_hYear/100);
+    PS_EC = Mod(PS_hYear,100);
+    PS_ED = IntPortion(PS_EB/4);
+    PS_EE = Mod(PS_EB,4);
+    PS_EF = IntPortion((PS_EB+8)/25);
+    PS_EG = IntPortion((PS_EB-PS_EF+1)/3);
+    PS_EH = Mod(19*PS_EA+PS_EB-PS_ED-PS_EG+15,30);
+    PS_EI = IntPortion(PS_EC/4);
+    PS_EK = Mod(PS_EC,4);
+    PS_EL = Mod(32+2*PS_EE+2*PS_EI-PS_EH-PS_EK,7);
+    PS_EM = IntPortion((PS_EA+11*PS_EH+22*PS_EL)/451);
+    PS_EasterMonth = IntPortion((PS_EH+PS_EL-7*PS_EM+114)/31);
+    PS_EasterDay = Mod(PS_EH+PS_EL-7*PS_EM+114,31)+1;
+    PS_EasterDate = (PS_hYear-1900)*10000+PS_EasterMonth*100+PS_EasterDay;
+    PS_GoodFriday = CalcDate(PS_EasterDate,-2);
+    PS_NoTradeDate = PS_hDow = 0 or PS_hDow = 6
+        or (PS_hMonth=1 and (PS_hDay=1 or (PS_hDay=2 and PS_hDow=1)))
+        or (PS_hMonth=1 and PS_hDow=1 and PS_hDay>=15 and PS_hDay<=21)
+        or (PS_hMonth=2 and PS_hDow=1 and PS_hDay>=15 and PS_hDay<=21)
+        or Date=PS_GoodFriday
+        or (PS_hMonth=5 and PS_hDow=1 and PS_hDay>=25)
+        or (PS_hYear>=2022 and PS_hMonth=6 and
+            (PS_hDay=19 or (PS_hDay=18 and PS_hDow=5) or (PS_hDay=20 and PS_hDow=1)))
+        or (PS_hMonth=7 and (PS_hDay=3 or PS_hDay=4 or (PS_hDay=5 and PS_hDow=1)))
+        or (PS_hMonth=9 and PS_hDow=1 and PS_hDay<=7)
+        or (PS_hMonth=11 and PS_hDow=4 and PS_hDay>=22 and PS_hDay<=28)
+        or (PS_hMonth=11 and PS_hDow=5 and PS_hDay>=23 and PS_hDay<=29)
+        or (PS_hMonth=12 and (PS_hDay=24 or PS_hDay=25 or (PS_hDay=26 and PS_hDow=1)))
+        or Date=1181205 or Date=1250109;
+end;
+
+{ Recognize a fully closed trade, including entry and exit within one bar.
+  Partial exits do not start the cooldown while a position remains open. }
+If MarketPosition = 0 and
+   (PS_LastMP <> 0 or TotalTrades > PS_LastClosedTrades) then begin
+    PS_ExitBar = CurrentBar;
+    PS_Pending = false;
+    PS_Risk = 0;
+    PS_EntryQty = 0;
+    PS_Stage = 0;
+end;
+
+{ A historical market entry fills completely at the next event. Partial live
+  entry fills/order rejection behavior has NOT been verified by this prototype. }
+If MarketPosition <> 0 and PS_LastMP = 0 then begin
+    PS_Pending = false;
+    PS_Entry = AvgEntryPrice;
+    PS_EntryDate = Date;
+    PS_EntryQty = CurrentContracts;
+    PS_Slice = IntPortion(PS_EntryQty/3);
+    PS_Stage = 0;
+    PS_D1 = Ceiling(PS_Risk*TP1R/PS_Tick)*PS_Tick;
+    PS_D2 = Ceiling(PS_Risk*TP2R/PS_Tick)*PS_Tick;
+    PS_D3 = Ceiling(PS_Risk*TP3R/PS_Tick)*PS_Tick;
+    PS_Stop = PS_Entry - MarketPosition*PS_Risk;
+    PS_T1 = PS_Entry + MarketPosition*PS_D1;
+    PS_T2 = PS_Entry + MarketPosition*PS_D2;
+    PS_T3 = PS_Entry + MarketPosition*PS_D3;
+end;
+
+{ Management sees the current calculation price, not a future bar extreme. }
+If MarketPosition <> 0 then begin
+    If ExitMode = 0 then begin
+        If MarketPosition*(Close-PS_Entry) >= PS_D2 then PS_Stage = MaxList(PS_Stage,2)
+        else If MarketPosition*(Close-PS_Entry) >= PS_D1 then PS_Stage = MaxList(PS_Stage,1);
+    end
+    else begin
+        If CurrentContracts <= PS_EntryQty-2*PS_Slice then PS_Stage = MaxList(PS_Stage,2)
+        else If CurrentContracts <= PS_EntryQty-PS_Slice then PS_Stage = MaxList(PS_Stage,1);
+    end;
+    If MarketPosition = 1 then begin
+        If PS_Stage >= 1 then PS_Stop = MaxList(PS_Stop,PS_Entry);
+        If PS_Stage >= 2 then PS_Stop = MaxList(PS_Stop,PS_T1);
+        If PS_EndDay or Date <> PS_EntryDate or Close <= PS_Stop then
+            Sell ("PS_LMarket") all contracts next bar at market
+        else begin
+            If PS_Stage > 0 then
+                Sell ("PS_LStop") all contracts next bar at PS_Stop stop;
+            If ExitMode = 1 and PS_Slice > 0 then begin
+                If CurrentContracts > PS_EntryQty-PS_Slice then
+                    Sell ("PS_LT1") PS_Slice contracts next bar at PS_T1 limit;
+                If CurrentContracts > PS_EntryQty-2*PS_Slice then
+                    Sell ("PS_LT2") PS_Slice contracts next bar at PS_T2 limit;
+            end;
+        end;
+    end
+    else begin
+        If PS_Stage >= 1 then PS_Stop = MinList(PS_Stop,PS_Entry);
+        If PS_Stage >= 2 then PS_Stop = MinList(PS_Stop,PS_T1);
+        If PS_EndDay or Date <> PS_EntryDate or Close >= PS_Stop then
+            BuyToCover ("PS_SMarket") all contracts next bar at market
+        else begin
+            If PS_Stage > 0 then
+                BuyToCover ("PS_SStop") all contracts next bar at PS_Stop stop;
+            If ExitMode = 1 and PS_Slice > 0 then begin
+                If CurrentContracts > PS_EntryQty-PS_Slice then
+                    BuyToCover ("PS_ST1") PS_Slice contracts next bar at PS_T1 limit;
+                If CurrentContracts > PS_EntryQty-2*PS_Slice then
+                    BuyToCover ("PS_ST2") PS_Slice contracts next bar at PS_T2 limit;
+            end;
+        end;
+    end;
+end;
+
+{ Completed-bar calculations. With IOG, a parent bar's Time is its ending
+  label even at its first tick: do NOT flatten from Time alone intrabar. }
+If BarStatus(1) = 2 and CurrentBar <> PS_LastCloseBar then begin
+    PS_LastCloseBar = CurrentBar;
+    If Date <> PS_VWAPDate then begin
+        PS_VWAPDate = Date;
+        PS_PV = 0; PS_Vol = 0; PS_VWAP = 0;
+    end;
+    If Time > VWAPStartCT and Time <= FlattenCT and Ticks > 0 then begin
+        PS_PV = PS_PV + ((High+Low+Close)/3)*Ticks;
+        PS_Vol = PS_Vol + Ticks;
+        If PS_Vol > 0 then PS_VWAP = PS_PV/PS_Vol;
+    end;
+    If Time >= FlattenCT and Time <= 1600 then begin
+        PS_EndDay = true;
+        If MarketPosition = 1 then Sell ("PS_LEOD") all contracts next bar at market;
+        If MarketPosition = -1 then BuyToCover ("PS_SEOD") all contracts next bar at market;
+    end;
+    If PS_Pending and MarketPosition = 0 and CurrentBar > PS_SignalBar+1 then begin
+        PS_Pending = false; PS_Risk = 0;
+    end;
+    If EnableEntries and PS_ConfigOK and not PS_NoTradeDate and not PS_EndDay
+       and CurrentBar >= MinimumStudyBars and CurrentBar-PS_ExitBar >= CooldownBars
+       and Time > VWAPStartCT and Time < LastEntryCT
+       and MarketPosition = 0 and not PS_Pending and PS_Vol > 0
+       and PS_VolBase > 0 and PS_RangeBase > 0 and PS_ATR > 0
+       and Ticks > VolumeMultiplier*PS_VolBase
+       and High-Low > RangeMultiplier*PS_RangeBase and PS_ADX >= MinADX then begin
+        PS_Long = Close > PS_MA and Close[1] <= PS_MA[1] and Close > PS_VWAP;
+        PS_Short = Close < PS_MA and Close[1] >= PS_MA[1] and Close < PS_VWAP;
+        PS_RiskCandidate = Ceiling(PS_ATR*StopATRMult/PS_Tick)*PS_Tick;
+        PS_UnitBudget = PS_RiskCandidate*BigPointValue+CostReservePerContract;
+        PS_QCandidate = 0;
+        If PS_UnitBudget > 0 then
+            PS_QCandidate = 3*IntPortion(MinList(MaxContracts,IntPortion(RiskDollars/PS_UnitBudget))/3);
+        If PS_QCandidate >= 3 and
+           ((PS_Long and TradeDirection <> -1) or (PS_Short and TradeDirection <> 1)) then begin
+            PS_Risk = PS_RiskCandidate;
+            PS_OrderQty = PS_QCandidate;
+            If FixedSizeContracts > 0 then
+                PS_OrderQty = MinList(FixedSizeContracts,PS_QCandidate);
+            PS_Pending = true;
+            PS_SignalBar = CurrentBar;
+            If PS_Long then Buy ("PS_LE") PS_OrderQty contracts next bar at market
+            else SellShort ("PS_SE") PS_OrderQty contracts next bar at market;
+            If PrintSignals then
+                Print("PrimeSync ",Date:0:0," ",Time:4:0," qty=",PS_OrderQty:0:0,
+                      " riskPts=",PS_Risk:0:5," exitMode=",ExitMode:0:0);
+        end;
+    end;
+end;
+
+{ Initial protection is armed when an entry is submitted, rather than waiting
+  until the first position bar has closed. The final target covers the remainder. }
+SetStopContract;
+If PS_Risk > 0 then begin
+    SetStopLoss(PS_Risk*BigPointValue);
+    SetProfitTarget(Ceiling(PS_Risk*TP3R/PS_Tick)*PS_Tick*BigPointValue);
+end;
+PS_LastMP = MarketPosition;
+PS_LastClosedTrades = TotalTrades;
+

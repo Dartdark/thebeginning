@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "observed_date": "2026-10-29",
+  "product": "Cboe C1 Open-Close Volume Summary",
+  "source_url": "https://datashop.cboe.com/cboe-options-open-close-volume-summary",
+  "fee_schedule": {
+    "url": "https://cdn.cboe.com/resources/membership/Cboe_FeeSchedule.pdf",
+    "version_on_document": "October1 2026",
+    "printed_page": 12,
+    "local_bytes_obtained": false,
+    "sha256": null
+  },
+  "published_standard_fees_usd": {
+    "one_minute_monthly_subscription": 12000,
+    "one_minute_annual_subscription": 144000,
+    "one_minute_historical_month_last_four_years": 4000,
+    "one_minute_historical_month_five_or_more_years": 2500
+  },
+  "fee_limit": "Published schedule categories, not a requested binding quote. No cost total, tax, proration or entitlement assumed.",
+  "free_sample_offer": {
+    "period_start": "2022-07-01",
+    "period_end": "2022-12-31",
+    "products": [
+      "one-minute C1 Open-Close",
+      "ten-minute C1 Open-Close",
+      "EOD C1 Open-Close"
+    ],
+    "eligibility": "TPHs/non-TPHs not previously subscribed to the corresponding product or received its sample; vendor confirmation required",
+    "is_any_selectable_six_months": false,
+    "activated": false,
+    "account_created": false,
+    "entitlement_confirmed": false,
+    "delivery_authorized": false,
+    "note": "Current schedule fixes2022H2; earlier regulatory filing describes a six-month trial generally. No account/licence/trial was opened."
+  },
+  "tbt_trial_offer": {
+    "up_to_months": 1,
+    "eligibility": "First-time eligible TPH/non-TPH; not activated",
+    "printed_page": 13,
+    "same_day_signal": false
+  },
+  "historical_starts": {
+    "C1_EOD": "2005-01-03",
+    "C1_10minute": "2011-01-03",
+    "C1_1minute": "2019-10-07",
+    "C1_GTH": "2023-12-11"
+  },
+  "delivery": {
+    "EOD": "Overnight after midnight America/New_York",
+    "one_minute_expected_delay_after_interval_end_minutes": [
+      2,
+      5
+    ],
+    "latency_source": "https://www.govinfo.gov/content/pkg/FR-2026-02-13/html/2026-02892.htm",
+    "latency_source_location": "printed6932,footnote6",
+    "historical_availability_limit": "One-minute commercial product introduced2025; archived2019+ event timestamps do not prove that a subscriber received those inputs contemporaneously."
+  },
+  "licence": {
+    "raw_external_redistribution": "prohibited by current product page",
+    "internal_use": "Requires applicable licence/entitlement; not obtained",
+    "private_repository_not_automatically_authorized": true,
+    "licence_accepted": false
+  },
+  "contacts_sent": false,
+  "orders_placed": false,
+  "paid_trials_started": false,
+  "new_accounts_or_keys": false,
+  "money_spent_usd": 0,
+  "acquired_raw_capacity_rows": 0,
+  "acquired_reconstructed_book_rows": 0,
+  "public_rounded_example_rows": 1,
+  "return_eligible_rows": 0,
+  "remaining_blocker": "No complete signed SPXW series inventory/Greek/history or actual publication/receipt data acquired; fixed2022H2 vendor sample and approved access are a concrete next route, not granted access."
+}

@@ -1,0 +1,209 @@
+{
+  "scope": "synthetic execution mechanics only",
+  "scenario_count": 8,
+  "scenarios": [
+    {
+      "scenario": "entry_day_protection_delay",
+      "expectation_reproduced": true,
+      "entry_fill": [
+        {
+          "side": "buy",
+          "quantity": 150.0,
+          "price": 100.05,
+          "commission": 1.0,
+          "slippage": 0.04999999999999716
+        }
+      ],
+      "entry_day_low": 90.0,
+      "protective_order_earliest_bar": "2020-02-05",
+      "orders": [
+        {
+          "type": "market",
+          "side": "buy",
+          "quantity": 150,
+          "remaining": 0.0,
+          "status": "filled",
+          "stop": null,
+          "limit": null,
+          "activated": false
+        },
+        {
+          "type": "stop_limit",
+          "side": "sell",
+          "quantity": 150.0,
+          "remaining": 150.0,
+          "status": "pending",
+          "stop": 96.05,
+          "limit": 95.55,
+          "activated": false
+        }
+      ]
+    },
+    {
+      "scenario": "bearish_cross_consumed_while_arming",
+      "expectation_reproduced": true,
+      "orders": [
+        {
+          "type": "stop_limit",
+          "side": "sell",
+          "quantity": 100,
+          "remaining": 100.0,
+          "status": "pending",
+          "stop": 96.0,
+          "limit": 95.5,
+          "activated": false
+        }
+      ],
+      "prev_signal": 0
+    },
+    {
+      "scenario": "gap_below_limit_no_fill",
+      "expectation_reproduced": true,
+      "orders": [
+        {
+          "type": "stop_limit",
+          "side": "sell",
+          "quantity": 100,
+          "remaining": 100.0,
+          "status": "pending",
+          "stop": 96,
+          "limit": 95.5,
+          "activated": true
+        }
+      ],
+      "held_quantity": 100,
+      "lowest_observed_price": 80,
+      "fill_count": 0,
+      "limit_is_not_a_maximum_loss": true
+    },
+    {
+      "scenario": "later_recovery_limit_fill",
+      "expectation_reproduced": true,
+      "fills": [
+        {
+          "side": "sell",
+          "quantity": 100.0,
+          "price": 95.5,
+          "commission": 1.0,
+          "slippage": 0.0
+        }
+      ],
+      "net_sale_per_share": 95.49
+    },
+    {
+      "scenario": "rejected_protection_flag_not_reconciled",
+      "expectation_reproduced": true,
+      "orders": [
+        {
+          "type": "stop_limit",
+          "side": "sell",
+          "quantity": 100,
+          "remaining": 100.0,
+          "status": "rejected",
+          "stop": 96.0,
+          "limit": 95.5,
+          "activated": false
+        }
+      ],
+      "has_stop_flag": true,
+      "retry_count": 0
+    },
+    {
+      "scenario": "ordinary_bearish_exit_cancels_protection",
+      "expectation_reproduced": true,
+      "orders": [
+        {
+          "type": "stop_limit",
+          "side": "sell",
+          "quantity": 100,
+          "remaining": 100.0,
+          "status": "cancelled",
+          "stop": 96.0,
+          "limit": 95.5,
+          "activated": false
+        },
+        {
+          "type": "market",
+          "side": "sell",
+          "quantity": 100,
+          "remaining": 100.0,
+          "status": "pending",
+          "stop": null,
+          "limit": null,
+          "activated": false
+        }
+      ]
+    },
+    {
+      "scenario": "partial_exit_cancels_remainder_and_uses_actual_position",
+      "expectation_reproduced": true,
+      "fills": [
+        {
+          "side": "sell",
+          "quantity": 10.0,
+          "price": 95.5,
+          "commission": 1.0,
+          "slippage": 0.0
+        }
+      ],
+      "orders": [
+        {
+          "type": "stop_limit",
+          "side": "sell",
+          "quantity": 100,
+          "remaining": 90.0,
+          "status": "cancelled",
+          "stop": 96.0,
+          "limit": 95.5,
+          "activated": true
+        },
+        {
+          "type": "market",
+          "side": "sell",
+          "quantity": 90,
+          "remaining": 90.0,
+          "status": "pending",
+          "stop": null,
+          "limit": null,
+          "activated": false
+        }
+      ]
+    },
+    {
+      "scenario": "flat_above_sma_waits_for_new_cross",
+      "expectation_reproduced": true,
+      "orders": [
+        {
+          "type": "market",
+          "side": "buy",
+          "quantity": 150,
+          "remaining": 150.0,
+          "status": "pending",
+          "stop": null,
+          "limit": null,
+          "activated": false
+        }
+      ]
+    }
+  ],
+  "historical_backtest_run": false,
+  "economic_definitions": 0,
+  "scout_budget_changed": false,
+  "no_credentials_helper_or_main_executed": true,
+  "engine_version_parity_with_published_run": false,
+  "independent_verification": "pending",
+  "source_hashes": {
+    "agents/codex/inputs/qj_stop_limit_20261030/source.py": "e707ba72f0a55616842ccb225fae43808d615f8b14bdbaf22d868c786205f65c",
+    "analysis/codex_qj_stop_limit.py": "b7d353d0e54fef008475c1fce7052c063968ddd229b7720e268b08ee107c75b7",
+    "agents/codex/inputs/qj_stop_limit_20261030/upstream/LICENSE": "cd66c90c3b626a3de7ca8b54ab0e3f054659dd8b9bf90e72b6692d2f364e72d9",
+    "agents/codex/inputs/qj_stop_limit_20261030/upstream/pyproject.toml": "49fcb234c60552d753ee8a03ef72bc73a5523c0fcc6af79f2e78c095ea6ead8a",
+    "agents/codex/inputs/qj_stop_limit_20261030/upstream/README.md": "7fd8166f5e54b536af4c6dd6cff8d0c6b9268dae6d23cbde920011d6b781446a",
+    "agents/codex/inputs/qj_stop_limit_20261030/upstream/backtester/sample_data.py": "97d0d05e79e368e0e632d175b925d30efc2b13ac3d4144910022a5bbe47597f1",
+    "agents/codex/inputs/qj_stop_limit_20261030/upstream/backtester/core.py": "f86346b0c736c4da900df881536632d79faa0458d528f3f3fa6a492e7e81050f",
+    "agents/codex/inputs/qj_stop_limit_20261030/upstream/backtester/execution/simulator.py": "e7cc4783bcd55298bed00617a472a6656b2ff6312e0027a20ef2db61457a070d",
+    "agents/codex/inputs/qj_stop_limit_20261030/upstream/backtester/execution/slippage.py": "f40864a4c8ba9fddd0e5886f06cea1f987e2f777c94fc9e6b9c82a86d98f436e",
+    "agents/codex/inputs/qj_stop_limit_20261030/upstream/backtester/execution/commission.py": "bc76af1a6a9cde5660cbcae1e6931eb49f44f11ada27ab5326b67264c8a6b4de",
+    "agents/codex/inputs/qj_stop_limit_20261030/upstream/backtester/execution/fill_engine.py": "aa5c08aaea3c7739dd07ad9fd8bc8e6bdb67d19c61d3b9cf79742da5643585e1",
+    "agents/codex/inputs/qj_stop_limit_20261030/upstream/backtester/execution/order_types.py": "154352969531be6c8baf805ff01e4ac4ce5e1b12a5eb89b4c461b6d6f28f88ef"
+  }
+}

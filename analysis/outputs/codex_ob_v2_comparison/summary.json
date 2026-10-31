@@ -1,0 +1,132 @@
+{
+  "operation": "source comparison, published-claim arithmetic and reading existing result files",
+  "new_strategy_return_trials": 0,
+  "independent_replication_of_uploaded_strategy": false,
+  "author_annual_claim_totals": {
+    "full": {
+      "claimed_trades": 603,
+      "claimed_net_MNQ": 23094.5,
+      "claimed_net_NQ": 230945.0
+    },
+    "2017_22": {
+      "claimed_trades": 324,
+      "claimed_net_MNQ": 8223.0,
+      "claimed_net_NQ": 82230.0
+    },
+    "2018_22": {
+      "claimed_trades": 293,
+      "claimed_net_MNQ": 8057.0,
+      "claimed_net_NQ": 80570.0
+    },
+    "2023_plus": {
+      "claimed_trades": 279,
+      "claimed_net_MNQ": 14871.5,
+      "claimed_net_NQ": 148715.0
+    }
+  },
+  "implied_author_full_average_NQ": 382.9933665008292,
+  "prior_unfiltered_comparison_2018_26": {
+    "Bridge ORB (Python replica)": {
+      "trades": 779,
+      "win_pct": 52.0,
+      "average_NQ": 313.0,
+      "PF": 1.52,
+      "t": 4.4
+    },
+    "ours: ONB ADX30 (MC, combine)": {
+      "trades": 676,
+      "win_pct": 51.0,
+      "average_NQ": 372.0,
+      "PF": 1.66,
+      "t": 4.9
+    },
+    "ours: ONB ML v2 (MC, funded)": {
+      "trades": 343,
+      "win_pct": 56.0,
+      "average_NQ": 636.0,
+      "PF": 2.12,
+      "t": 5.0
+    }
+  },
+  "prior_combine_pair_pass_pct": {
+    "our_ADX30": 46.9,
+    "unfiltered_Bridge": 38.9
+  },
+  "prior_bench_is_uploaded_v2": false,
+  "defaults": {
+    "uploaded": {
+      "SessStart": 830.0,
+      "OREnd": 845.0,
+      "LastEntry": 1200.0,
+      "FlatTime": 1430.0,
+      "SessEnd": 1500.0,
+      "MaxTradesPerDay": 4.0,
+      "BiasLongMin": 0.67,
+      "BiasShortMax": 0.33,
+      "ADXLen": 16.0,
+      "ADXMin": 20.0,
+      "BreakSkipMult": 2.5,
+      "BarAvgLen": 20.0,
+      "MinORx": 0.0,
+      "MaxORx": 2.0,
+      "ORMedianDays": 20.0,
+      "ATR_k": 0.3,
+      "ATR_Days": 15.0,
+      "TakeProfitRR": 3.0,
+      "NumContracts": 1.0,
+      "LongATRDays": 100.0,
+      "MinATRRatio": 0.6,
+      "MaxATRRatio": 1.2
+    },
+    "our_ADX30": {
+      "EntryBufTicks": 2.0,
+      "ONStart": 2300.0,
+      "ONEnd": 830.0,
+      "OREnd": 845.0,
+      "BiasFraction": 0.3333,
+      "ADXLength": 14.0,
+      "ADXMin": 30.0,
+      "AtrDays": 15.0,
+      "StopAtrPct": 0.25,
+      "RewardRisk": 3.0,
+      "LastEntryTime": 1400.0,
+      "ExitTime": 1430.0,
+      "RiskPerTrade": 0.0,
+      "UseHolidayTimes": true,
+      "EarlyLastEntry": 1100.0,
+      "EarlyExitTime": 1130.0,
+      "NumContracts": 1.0
+    },
+    "our_funded_ML": {
+      "EntryBufTicks": 2.0,
+      "ONStart": 2300.0,
+      "ONEnd": 830.0,
+      "OREnd": 845.0,
+      "BiasFraction": 0.3333,
+      "ADXLength": 14.0,
+      "ADXMin": 20.0,
+      "AtrDays": 15.0,
+      "StopAtrPct": 0.3,
+      "RewardRisk": 3.0,
+      "LastEntryTime": 1400.0,
+      "ExitTime": 1430.0,
+      "RiskPerTrade": 0.0,
+      "UseHolidayTimes": true,
+      "EarlyLastEntry": 1100.0,
+      "EarlyExitTime": 1130.0,
+      "NumContracts": 1.0,
+      "UseMLFilter": true,
+      "LongMinScore": 0.03,
+      "ShortMinScore": 0.0,
+      "EnableLongs": true,
+      "EnableShorts": true
+    }
+  },
+  "source_features": {
+    "preissues_bracket_with_entry": true,
+    "uploaded_contains_SetExitOnClose": true,
+    "raw_MC_report_supplied": false,
+    "source_comments_request_IOG_off_but_no_directive": true
+  },
+  "inventory_snapshot": "e7c394f"
+}

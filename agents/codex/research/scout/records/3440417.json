@@ -1,0 +1,29 @@
+{
+  "id": "ssrn:3440417",
+  "ssrn_id": "3440417",
+  "title": "Predictable End-of-Month Treasury Returns",
+  "url": "https://ssrn.com/abstract=3440417",
+  "verdict": "dont_test",
+  "full_text_read": true,
+  "evidence_level": "source_review",
+  "hypothesis_id": "treasury_month_end_benchmark_clock_correction",
+  "return_eligibility": "DONT_TEST",
+  "about": "Monthly timing of Treasury returns and insurer purchases",
+  "findings": "Table8source10-yearfutures last3days0.17percent,SE0.02percent; not own results",
+  "mechanism": "Insurer/index demand for duration and benchmark additions",
+  "build_on": "One intraday adaptation incorporating independently documented2021indexclock change; priorfamilyfailuresretained",
+  "evidence_path": "agents/codex/evidence/scout_treasury_close_20261029.md",
+  "plan_path": "agents/codex/plans/scout_treasury_close_20261029.md",
+  "report_path": "agents/codex/results/scout_treasury_close_20261029.md",
+  "source_artifact": {
+    "path": "agents/codex/inputs/scout_treasury_close_20261029/local/source.txt",
+    "sha256": "658822837ee22beceedfaa9a912efa5ea43cfe6abec205790bf71ba621547eae",
+    "permission": "permitted_access",
+    "provenance": "Primary author-associated Wharton public41-page source via connected PDF reader",
+    "version": "November22 2019; complete944line rendering,not PDFbytes",
+    "access_method": "Connected primary PDF reader; textual extraction; figure captions not original pixels"
+  },
+  "new_economic_trials": 3,
+  "design_result": "agents/codex/results/scout_treasury_close_20261029.md",
+  "result": "175longs1ZN;gross15.8929,net-29.8571,t-3.4523,all5yearsnegative;relativecalendarp0.001but costs dominate."
+}

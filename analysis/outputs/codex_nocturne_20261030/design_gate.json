@@ -1,0 +1,63 @@
+{
+  "period": "2018-2022",
+  "replication": "assumed adaptation, not author code",
+  "native_size": "1MNQ",
+  "filtered": {
+    "trades": 1085,
+    "win": 0.7161290322580646,
+    "avg": 8.74801843317972,
+    "annual": 2430.7756097560964,
+    "sharpe": 1.8958703874055773,
+    "sortino": 2.4158474165985346,
+    "profit_factor": 1.3808305601719184,
+    "max_dd": 1280.1199999999917,
+    "calmar": 1.8988654264882239,
+    "ulcer": 0.6334928398512051,
+    "ulcer_perf": 7.674200738644615,
+    "total": 9491.599999999995,
+    "daily_t": 3.7463290674814984
+  },
+  "unfiltered": {
+    "trades": 1640,
+    "win": 0.7182926829268292,
+    "avg": 4.317012195121948,
+    "annual": 1813.1451219512176,
+    "sharpe": 0.99586729792815,
+    "sortino": 1.1883819657880148,
+    "profit_factor": 1.1570802016689783,
+    "max_dd": 1528.2799999999734,
+    "calmar": 1.1863958973167514,
+    "ulcer": 1.0483705365539937,
+    "ulcer_perf": 3.458977639549175,
+    "total": 7079.899999999992,
+    "daily_t": 1.9678806264219357
+  },
+  "kept_nights": 649,
+  "eligible_nights": 984,
+  "gross_filtered": 11582.5,
+  "source_cost_filtered": 10795.874999999998,
+  "stress_filtered": 8746.099999999997,
+  "removed_mean": -7.1991044776119475,
+  "removed_t": -0.947449958457217,
+  "random_keep_joint_win_fraction": 0.899,
+  "mean_daily_ci90": [
+    5.896297764227638,
+    13.586517276422763
+  ],
+  "gates": {
+    "at_least300_kept_nights": true,
+    "positive_net": true,
+    "daily_t_at_least2": true,
+    "four_positive_years": true,
+    "block_mean_lower_positive": true,
+    "stress_positive": true,
+    "filtered_total_ge_unfiltered": true,
+    "removed_negative_t_le_minus2": false,
+    "matched_random_keep_joint_ge95": false
+  },
+  "passed": false,
+  "recent_tested": false,
+  "accounts_tested": false,
+  "shorts": "not registered",
+  "worst_filtered_night": -559.48
+}

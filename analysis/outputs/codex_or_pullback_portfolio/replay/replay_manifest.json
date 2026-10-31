@@ -1,0 +1,106 @@
+{
+  "preregistration_commit": "1ad4306",
+  "cache_path": "scratch_data/g24.pkl",
+  "replay_module_sha256": "71c0d2be7a27812b0883f732b507c8c43744df6854b9feded4bdaf7d85ddc541",
+  "cache_first_date": "2017-12-01",
+  "cache_last_date": "2026-10-09",
+  "calendar_rows": 3235,
+  "trading_rows": 2262,
+  "execution_order": [
+    {
+      "period": "design",
+      "timing_mode": "reported_rule",
+      "requested_days": 1289,
+      "eligible_days": 1278,
+      "incomplete_days": 11,
+      "trades": 1502
+    },
+    {
+      "period": "design",
+      "timing_mode": "literal_mc_delay",
+      "requested_days": 1289,
+      "eligible_days": 1278,
+      "incomplete_days": 11,
+      "trades": 1502
+    },
+    {
+      "period": "recent",
+      "timing_mode": "reported_rule",
+      "requested_days": 973,
+      "eligible_days": 968,
+      "incomplete_days": 5,
+      "trades": 1174
+    },
+    {
+      "period": "recent",
+      "timing_mode": "literal_mc_delay",
+      "requested_days": 973,
+      "eligible_days": 968,
+      "incomplete_days": 5,
+      "trades": 1174
+    }
+  ],
+  "synthetic_checks": {
+    "invented_prices_only": true,
+    "market_data_loaded": false,
+    "protection_timing_and_gap_stop": "pass",
+    "stop_first_tie": "pass",
+    "favorable_target_gap_and_event_walker": "pass",
+    "blocked_trigger_consumes_side": "pass",
+    "early_flat_adapter": "pass",
+    "missing_day_exclusion": "pass"
+  },
+  "timing_specs": {
+    "reported_rule": {
+      "rule": "ORPullback supplied source, PriceScaled=False",
+      "timing_mode": "reported_rule",
+      "protection_delay_minutes": 1,
+      "entry_phase": "close",
+      "stop_points": 50.0,
+      "target_points": 100.0,
+      "max_trades": 2,
+      "max_losses": 2,
+      "loss_counter": "gross_points < 0",
+      "target_fill_through_points": 1.0,
+      "target_fill_price": "target level or better favorable minute open",
+      "stop_gap_price": "adverse minute open, including first protected minute",
+      "same_minute_stop_target": "stop first",
+      "regular_last_entry_j": 870,
+      "regular_flat_j": 895,
+      "early_flat_j": 690,
+      "early_entry_cutoff": "strictly before early_flat_j",
+      "early_calendar": "replica.is_early_close",
+      "account_adapter": "early 11:30 CT flatten in both timing modes",
+      "missing_policy": "exclude session before signals unless all OHLC minutes 08:31..scheduled_flat are finite; no backdated fills",
+      "costs": "not applied; raw close-entry geometry only",
+      "price_scaled": false,
+      "path_note": "entry-minute OHLC is excluded; first held minute entry_j+1"
+    },
+    "literal_mc_delay": {
+      "rule": "ORPullback supplied source, PriceScaled=False",
+      "timing_mode": "literal_mc_delay",
+      "protection_delay_minutes": 6,
+      "entry_phase": "close",
+      "stop_points": 50.0,
+      "target_points": 100.0,
+      "max_trades": 2,
+      "max_losses": 2,
+      "loss_counter": "gross_points < 0",
+      "target_fill_through_points": 1.0,
+      "target_fill_price": "target level or better favorable minute open",
+      "stop_gap_price": "adverse minute open, including first protected minute",
+      "same_minute_stop_target": "stop first",
+      "regular_last_entry_j": 870,
+      "regular_flat_j": 895,
+      "early_flat_j": 690,
+      "early_entry_cutoff": "strictly before early_flat_j",
+      "early_calendar": "replica.is_early_close",
+      "account_adapter": "early 11:30 CT flatten in both timing modes",
+      "missing_policy": "exclude session before signals unless all OHLC minutes 08:31..scheduled_flat are finite; no backdated fills",
+      "costs": "not applied; raw close-entry geometry only",
+      "price_scaled": false,
+      "path_note": "entry-minute OHLC is excluded; first held minute entry_j+1"
+    }
+  },
+  "new_candidate_variants": 2
+}

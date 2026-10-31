@@ -1,0 +1,26 @@
+{
+  "independent_arithmetic_checks": 2112,
+  "diagnostic_rows": 240,
+  "funded_rows": 32,
+  "evaluation_rows": 48,
+  "simulator_parity_checks": 160,
+  "exact_simulator_checks": true,
+  "source_version": {
+    "prior_context": "febc65f1573040abf9a697d1d3468e1bce48c4c0",
+    "prior_family_trades": 874,
+    "new_raw_source_trades": 867,
+    "date_leg_both": 847,
+    "new_only": 20,
+    "prior_only": 27,
+    "same_side_when_both": 847,
+    "comparison_is_author_parity": false,
+    "two_modes_actual_trades_identical": true
+  },
+  "status": "PASS WITH CONCERNS",
+  "concerns": [
+    "8 incomplete morning sessions, including March2020 stress dates",
+    "no exact author MultiCharts execution parity",
+    "accepted delayed-stop and tick-rounding model assumptions",
+    "inherited current-plan path approximations and small saved-baseline difference"
+  ]
+}

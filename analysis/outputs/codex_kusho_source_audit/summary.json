@@ -1,0 +1,130 @@
+{
+  "operation": "source/document arithmetic and synthetic code counterexamples only",
+  "new_strategy_return_trials": 0,
+  "independently_reproduced_strategy_performance": false,
+  "claimed_annual_totals": {
+    "full": {
+      "far_trades": 3142,
+      "far_claimed_net_MNQ": 31448.0,
+      "v9_trades": 3586,
+      "v9_claimed_net_MNQ": 40308.0
+    },
+    "2017_22": {
+      "far_trades": 1948,
+      "far_claimed_net_MNQ": 17581.0,
+      "v9_trades": 2242,
+      "v9_claimed_net_MNQ": 23347.5
+    },
+    "2018_22": {
+      "far_trades": 1581,
+      "far_claimed_net_MNQ": 16371.5,
+      "v9_trades": 1875,
+      "v9_claimed_net_MNQ": 22277.5
+    },
+    "2023_plus": {
+      "far_trades": 1194,
+      "far_claimed_net_MNQ": 13867.0,
+      "v9_trades": 1344,
+      "v9_claimed_net_MNQ": 16960.5
+    }
+  },
+  "author_reported_sides": {
+    "v9_long_trades": 3116,
+    "v9_short_trades": 470,
+    "v9_long_net_MNQ": 31794,
+    "v9_short_net_MNQ": 8514
+  },
+  "incremental_claim_arithmetic": {
+    "total_net_MNQ": 8860,
+    "short_net_MNQ": 8514,
+    "long_net_change_MNQ": 346,
+    "long_count_change": -26,
+    "net_trade_count_change": 444
+  },
+  "source_flags": {
+    "far_final.txt": {
+      "defaults": {
+        "EODTime": 2100.0,
+        "MaxSwingRiskTicks": 500.0,
+        "SwingRR": 3.0,
+        "SwingBE_R": 0.5,
+        "BEPufferTicks": 5.0,
+        "WickTolTicks": 70.0,
+        "HardStopTicks": 200.0,
+        "TargetTicks": 200.0
+      },
+      "iog_directive_present": false,
+      "builtin_stop_present": false,
+      "builtin_target_present": false,
+      "positive_RiskTicks_guard_present": false,
+      "stop_orders_next_bar": 1
+    },
+    "v9.txt": {
+      "defaults": {
+        "EODTime": 2100.0,
+        "MaxSwingRiskTicks": 500.0,
+        "SwingRR": 3.0,
+        "SwingBE_R": 0.5,
+        "BEPufferTicks": 5.0,
+        "WickTolTicks": 70.0,
+        "HardStopTicks": 200.0,
+        "TargetTicks": 200.0
+      },
+      "iog_directive_present": false,
+      "builtin_stop_present": false,
+      "builtin_target_present": false,
+      "positive_RiskTicks_guard_present": false,
+      "stop_orders_next_bar": 2
+    }
+  },
+  "synthetic_wrong_side_swing": {
+    "long": {
+      "synthetic_entry": 100.0,
+      "synthetic_swing": 101.0,
+      "risk_ticks": -4.0,
+      "passes_upper_bound": true,
+      "target": 97.0,
+      "source_never_checked_positive_risk": true
+    },
+    "short": {
+      "synthetic_entry": 100.0,
+      "synthetic_swing": 99.0,
+      "risk_ticks": -4.0,
+      "passes_upper_bound": true,
+      "target": 103.0,
+      "source_never_checked_positive_risk": true
+    }
+  },
+  "synthetic_BE_pre_fill_case": {
+    "synthetic_limit_entry": 100.0,
+    "valid_swing_stop": 90.0,
+    "entry_bar_high_before_fill": 110.0,
+    "highest_price_after_fill": 102.0,
+    "entry_bar_close": 101.0,
+    "trigger": 105.0,
+    "source_bar_high_arms_BE": true,
+    "post_fill_excursion_arms_BE": false,
+    "raised_stop": 101.25
+  },
+  "power_arithmetic_only": {
+    "far": {
+      "claimed_design_n": 1581,
+      "mean_for_t2_as_multiple_of_unknown_SD": 0.05029954548278569
+    },
+    "v9": {
+      "claimed_design_n": 1875,
+      "mean_for_t2_as_multiple_of_unknown_SD": 0.046188021535170064
+    }
+  },
+  "NQ_default_point_arithmetic": {
+    "tick": 0.25,
+    "wick_points": 17.5,
+    "fallback_stop_points": 50.0,
+    "max_positive_swing_risk_points": 125.0,
+    "fallback_nominal_MNQ_risk": 100.0,
+    "max_positive_swing_nominal_MNQ_risk": 250.0
+  },
+  "repo_inventory_snapshot": "e7c394f",
+  "raw_MC_reports_supplied": false,
+  "instructions_in_uploaded_sources_not_executed": true
+}

@@ -1,0 +1,57 @@
+{
+  "prereg": "03e2b52",
+  "implementation_commit": "03e2b521ed5b7ba1117acbd1671065593d67d254",
+  "bound_files_sha256": {
+    "analysis/codex_hunt_v2_cme_margin_metadata.py": "29e7b12936bf3f11426abdab056265c8110edd84be372f989473cd4a7ff5d136",
+    "agents/codex/plans/hunt_v2_cme_margin_metadata_intake.md": "93d3f8f43a85487a7c3d05c92d51fd2fa2dc16b8d4ee0a5c1b6600422dba4fc7",
+    "agents/codex/evidence/hunt_v2_new_primary_nomination.md": "8e61b5e9bcd367fc29889f0d5ab2888f167a39137567108f3e109b3e11f40ef5",
+    "agents/codex/research/hunt_v2_new_primary_nomination.md": "1a9205ed260734503e6d349769ad9f71ceaca73d5c6394490a6f0cfd91c52a79",
+    "analysis/outputs/codex_hunt_v2_cme_margin_metadata/.gitignore": "c9278cbda1d205de4178104c6a904feed72a4b448db486744ff1b0003d11244b",
+    "agents/codex/RESEARCH_CONTROLS.md": "2537562f9f14acfa58eaf609771c14c0c92e9df8f058180748d877749c99e12f"
+  },
+  "versions": {
+    "python": "3.12.14"
+  },
+  "dependencies": "Python standard library only",
+  "source": {
+    "repository": "BrunoProgramming/cme_margin",
+    "commit": "93cc090bd7f680292436012b13c4e6fb44fc411f",
+    "path": "data/cme_margin.csv",
+    "URL": "https://raw.githubusercontent.com/BrunoProgramming/cme_margin/93cc090bd7f680292436012b13c4e6fb44fc411f/data/cme_margin.csv",
+    "expected_bytes": 26989907,
+    "expected_git_blob_sha1": "21c9202c0918bd2ea017fa80baeb1e467e10241c"
+  },
+  "timeout_seconds": 45,
+  "retry_count": 0,
+  "redirects_permitted": false,
+  "required_header_subset": [
+    "Time",
+    "Exchange",
+    "Asset Class",
+    "Product Name",
+    "Product Code",
+    "Start Period",
+    "End Period",
+    "Maintenance",
+    "Currency",
+    "Maint. Vol. Scan"
+  ],
+  "interpreted_metadata_fields": [
+    "Time",
+    "Exchange",
+    "Asset Class",
+    "Product Name",
+    "Product Code",
+    "Start Period",
+    "End Period",
+    "Currency"
+  ],
+  "fixed_targets": [
+    "NQ",
+    "MNQ",
+    "ES",
+    "MES"
+  ],
+  "all_other_financial_fields_opaque": true,
+  "collector_MIT_software_license_is_not_CME_data_redistribution_permission": true
+}
