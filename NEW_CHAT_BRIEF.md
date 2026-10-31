@@ -5,41 +5,41 @@ github.com/Dartdark/thebeginning (branch `claude/nq-trading-strategy-params-5h9d
 Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history of this brief (up to 2026-10-28) is in
 `archive/brief_history_2026-10.md`; ticked to-dos are in `archive/TODO_done_2026-10.md`.
 
-## Now (2026-10-29)
+## Now (2026-10-31)
 
 - **Live accounts (Apex, VPS QuantVPS Chicago, MultiCharts + Rithmic, data dxFeed):**
-  - #1 APEX-681524-01 50K evaluation: **blown 2026-10-26** (was ~$398 above its trailing line; plan size kept).
-  - #2 APEX-681524-02 50K evaluation: last reported $49,424.18 (10/21), floor ~$48,000. Combine set: VB 8, ONB ADX30
-    $1,100, EOS $500, Bridge Monday 2.
-  - #3 APEX-681524-03 150K No-Activation from 10/26: **blown 2026-10-30** (Apex liquidated the ONB short at 09:38 CT on an
-    intraday touch of the $146,000 floor; see MULTICHARTS_PITFALLS). Was: combine set x 2.5 (VB 20, ONB $2,750, EOS $1,250, Bridge 5);
-    +$9,000 target in 30 days, $4,000 EOD trailing, $2,000 daily loss pause. 10/26: #3's copied charts first sent 150K-size
-    orders to #2 (account field on the strategy, see `MULTICHARTS_PITFALLS.md`). 10/28 evening (Order and Position Tracker):
-    #2 $50,764.42, #3 $147,822.60 (~$1,823 above its $146,000 floor; one VB 20 stop ~ $3,000). **User 2026-10-29: keep full
-    size on #3** (thin-cushion lesson: cutting VB doesn't lower fails per pass).
-  - Gate ~mid-December: ~40-70 live trades at >= 75% of backtest, no drift alarm -> then +2 x 150K No-Activation a week to 20.
-- **Master session (user, 2026-10-28):** `session_01Wk1fPXwvHF5qTjW7bUhYx9` ('★ Master session'). Scheduled jobs run in
-  'Scheduled jobs' `session_014DKffATms37kZigaa2xR2P`: journal + dashboard weekdays 16:40 CT, Friday review 16:47 CT,
-  to-do reminder Sun/Wed 10:52 CT, MNQ roll reminder 12/10.
-- **Dashboard 'Apex Live Desk':** https://claude.ai/artifact/3oqbHWqBFTrUQd95wMmuL8 (accounts, trades, VPS health), data from
-  `analysis/dashboard_data.py`. Balances = last Apex balance the user reported + logged gross P&L since.
-- **Plans** (details: `funded_strategies/FUNDED_PLAN.md`, `funded_strategies/README.md`, `personal_strategies/PORTFOLIO.md`):
-  - Evaluation (combine) set: VB 8 / ONB ADX30 $1,100 / EOS $500 / Bridge 2; backtest pass 50.1% (150K x 2.5: 41.6%).
-  - 50K funded: 10 strategies; 2026-10-28 Relative Strength longs -> **T_ONESIDE fade 1 MNQ** (`NQ_T_Oneside_Fade.txt`);
-    Overnight Tick / VIX 1 MNQ in place of the Monday Long; Vault Break 1/1 + Swing Target v3 1 when funded.
-  - 150K funded: plan x 1.5 + RS 1 + Overnight Tick 2; Swing Target 2 in the slot first given to Dual Thrust (2026-10-25).
-  - Personal (from the first payouts, ~Feb 2027): 19 pieces at 1 micro incl. Dual Thrust, Swing Target, PAPERTREND, Kusho v9,
-    S47 v2, S30 IBS; capital ladder in `PORTFOLIO.md`; 'Capital-expansion bench' table there.
-- **Forward logs (paper, from 10/26):** FC 2B, S47 v2, Kusho v9, S30, BB_MRM (`agents/codex/FORWARD_LOG.md`, frozen bands).
-- **Live guard (2026-10-29):** Apex Chart Monitor on all 8 charts (ACCT rows: balance, auto-trading, feed age); watchdog
-  ntfy alerts; VPS intraday push every 30 min (task VpsIntradayPush, installs itself); pre-market check 08:21 CT into the
-  master session (`analysis/premarket_check.py`); 16:40 check `analysis/vps_health.py` vs `live/expected_setup.json`.
-- **Open for Claude:** automatic cushion sizing after the user's Apex Account Check; live-monitoring plan
-  (`live/vps/LIVE_GUARD_PLAN.md`); the VPS 'rejected_today' count looks like whole-file counts (10/28: 3,228, last reject
-  dated 10/26) and 10/28 had no 08:15 open check-in.
-- **Open for the user:** see `TODO.md` 'This week and next' (account #3 charts check, Friday exports into `live/`, VIX file on
-  the VPS, FC 2B re-export 11/06, MNQ roll 12/10).
-- **Every reply ends with a PushNotification** (CLAUDE.md).
+  - #1 APEX-681524-01 50K: **blown 10/26**. #3 APEX-681524-03 150K: **blown 10/30** (Apex liquidated the ONB short on an
+    intraday touch of the $146,000 floor; MULTICHARTS_PITFALLS). Its 150 charts are retired (watchdog shows them OFF until closed).
+  - #2 APEX-681524-02 50K evaluation: ~$49,828, ~$1,064 above its $48,764 floor; model pass odds ~46%. Combine set VB 8,
+    ONB ADX30 $1,100, EOS $500, Bridge Monday 2. **Full size stays** (thin-cushion test, rerun with whole contracts).
+  - **#4: 150K No-Activation, user buys it Sunday 11/01** -> add its id to `live/expected_setup.json`, `ACCTS` in
+    `analysis/live_panels.py`, `ACCOUNTS` in `analysis/dashboard_data.py`, `account_tools.EVALS` (floor alarm). Set = combine x 2.5
+    (VB 20, ONB $2,750, EOS $1,250, Bridge 5). **No new 50Ks.**
+- **Buying plan (TODO):** job Nov 10 - Dec 24, $25/h x 8 h, paid weekly, all of it for evaluations: 150K No-Activation only,
+  3-4 per payday, one a day, stop on the drift alarm. `analysis/ramp_budget_test.py`: nothing funded by 12/31 13-31%; first
+  payouts late Feb - Mar 2027; 2027 at 75% edge ~$89-116k (job ends) / ~$176-182k (job kept*). Personal account ~Apr-May.
+  Business plan v3 (rewritten 10/30): `reports/Trading_Business_Plan_2026-10-30.pdf` (source html + `render_business_plan.js`).
+- **Live guard (10/30):** rejected-orders limit 10 on every strategy; watchdog Apex floor alarm (ACCTFAIL/NEARFLOOR, ran clean
+  on the VPS 10/30); `HB_Ver` code-version stamps in SIG rows (user repasted); `analysis/live_guard.py`; pre-market check 08:22 CT
+  (`premarket_check.py`: Chicago clock/DST, each ACCT/POS/SIG row aged vs its own interval + 15 min); payout tracker
+  (`account_tools.FUNDED`, fill as accounts pass); `live/vps/VPS_MAINTENANCE.md` (Saturday updates/restart, Sunday pre-open
+  routine by 16:30 CT, done by user).
+- **Weekly cross-review 10/30:** Codex found 5 defects in Claude's week code, all fixed; follow-ups fixed through a01be1b
+  (`agents/cross_review/2026-10-30_summary.md`, Codex `agents/codex/results/weekly_fix_reply_20261030.md`). Lesson: Claude's
+  weekly side reviews its OWN code too.
+- **Open for Claude:** full Swing Target account replay with the corrected exit kinds (Codex: adoption not yet re-proven);
+  heartbeat + HB_Ver in all 9 funded strategies + funded floor rules before the first funded account (~late Nov); Brier-score
+  pass odds after ~20 finished evaluations; rerun backtests on extended data; futures-trend upload waits in
+  `checks/candidates/futures_trend/` (test at ~$150k).
+- **Recent research verdicts:** CHoCH D, Nocturne C (WATCHLIST #26), Setup Generator F, Prior VWAP Trap bench-only; GreenORB and
+  video Drift rejected (Codex). Execution references E01-E31 (`agents/codex/EXECUTION_REFERENCES.md`, next E32). Paper scout:
+  `/scout`, also Mon/Wed/Fri in the Papers session.
+- **Sessions:** master `session_01Wk1fPXwvHF5qTjW7bUhYx9`; Papers `session_01Wk1fPYzv9RyXGytT4z6XbK`; scheduled jobs
+  `session_014DKffATms37kZigaa2xR2P` (16:40 journal + dashboard, Friday review 16:47, reminders Sun/Wed, MNQ roll 12/10).
+  Dashboard 'Apex Live Desk' https://claude.ai/artifact/3oqbHWqBFTrUQd95wMmuL8.
+- **Plans:** `funded_strategies/FUNDED_PLAN.md`, `funded_strategies/README.md`, `personal_strategies/PORTFOLIO.md` (50K funded:
+  RS longs -> T_ONESIDE 1; 150K funded: DT 2 -> Swing Target 2).
+- **Every reply ends with a PushNotification** (CLAUDE.md); alerts also via `python3 analysis/send_alert.py`.
 
 ## Who / what
 
