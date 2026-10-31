@@ -1,0 +1,44 @@
+{
+  "review_date": "2026-10-30",
+  "paper": "SSRN 2874907, uploaded 2016-11-04 version",
+  "kind": "No-return source/data discovery; no subscriptions or messages",
+  "queries": [
+    "\"Rousse\" \"Sévi\" \"Informed trading\" data replication",
+    "\"2874907\" data Bloomberg forecasts",
+    "EIA crude oil inventory historical individual analyst forecasts Bloomberg standard deviation data",
+    "\"Informed trading in the WTI\" replication data Rousse Sevi",
+    "\"Informed trading in oil-futures market\" dataset supplement",
+    "\"crude oil\" \"Bloomberg\" \"survey\" \"standard deviation\" historical data download"
+  ],
+  "checks": [
+    {
+      "url": "https://sites.google.com/site/benoitsevi/",
+      "outcome": "Opened; publication and slides link found; matching replication dataset not exposed on inspected page. Its separate data link belongs to a different comovement paper."
+    },
+    {
+      "url": "https://drive.google.com/open?id=1qZ1Wn45xRG92PXG-GrQebRkaCqLckY3-",
+      "outcome": "Author-linked slides; connected tool returned 404; no contents acquired."
+    },
+    {
+      "url": "https://iaee.org/ej/ejexec/EJ40-2_Rousse_ExecSum.pdf",
+      "outcome": "Search index excerpt; direct open returned 404. No downloaded full text."
+    },
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2874907",
+      "outcome": "Search result confirms title/authors/date. Full-source review uses uploaded PDF; no replication panel obtained."
+    },
+    {
+      "url": "https://www.eia.gov/petroleum/supply/weekly/",
+      "outcome": "Opened; official releases and past issues accessible. Does not supply Bloomberg survey dispersion or CL tape."
+    }
+  ],
+  "required_fields": [
+    "event and exact actual inventory series",
+    "individual survey forecasts or same-survey median and cross-sectional SD",
+    "survey vintage and receipt",
+    "actual first-publication vintage and release/receipt",
+    "sequenced same-contract CL transactions"
+  ],
+  "result": "No matching point-in-time survey/tick panel identified in this bounded check. No claim of exhaustive unavailability.",
+  "economic_trials": 0
+}

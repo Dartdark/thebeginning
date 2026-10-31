@@ -824,6 +824,25 @@ Source: [SSRN 666541](https://ssrn.com/abstract=666541), uploaded June 8, 2005 d
 - Status: execution reference only. Zero strategy-return trials; no plan or live changes.
 
 
+### E49 — EIA surprise labels, tick-rule signs and announcement execution clocks
+
+Source/review + date: Rousse and Sévi, [SSRN 2874907](https://ssrn.com/abstract=2874907), uploaded 2016 working paper;
+[full review](results/rousse_sevi_oil_2874907.md), 2026-10-30.
+- Use: verify information availability and order-flow sign before deriving an event trade from a conditional chart.
+  A surprise classification using the released actual cannot select a pre-release entry. Window OI is known after
+  its tape arrives; a post-release strategy must enter after public data receipt and misses the initial jump.
+- Evidence: source claims 402 inventory announcements in 2007–14, with 43 positive 3σ surprises and about −0.25%
+  preceding drift. Table 3's positive-surprise OI coefficient is −3.529 (t=−3.154); this is not a strategy-return t.
+  Abstract/body buyer wording conflicts with OI=(B−S)/(B+S), negative coefficients and the selling conclusion.
+- Method limits: second-level volume-weighted transaction prices followed by tick-rule signs are not reproducible
+  from minute OHLCV. Normalized imbalance alone does not measure dollar demand or prove information leakage.
+  Forecast cross-sectional SD cannot be replaced by historical SD of inventory changes.
+- Prerequisites: survey vintages/median/dispersion, matching first-release actuals, exceptional event/receipt clocks,
+  sequenced same-contract tape, native CL/MCL costs and a causal rule. The strongest window is tied to the sample's
+  former pit opening; persistence after the source-noted 2015 pit closure is unverified.
+- Next check only with matching new inputs: one-event series/clock/tick-sign reconciliation, then no-return power
+  census. Old EIA price-only follow/fade studies are already negative; do not substitute them for a replication.
+- Status: execution/research reference; no new economic trials, net-return demonstration or allocation.
 
 ### E48 — Slow FX signal diversification needs roll, cash and selection-clock reconciliation
 
