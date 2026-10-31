@@ -517,6 +517,12 @@ margin. Index-roll anticipation needs actual two-maturity identities, both-leg c
 price pressure can be anticipated and disappear. The article provides examples, not measured net returns or execution
 savings. Retain existing quote/sample gates; no continuous-price replacement or new economic trial is justified.
 
+E30 acquisition follow-up (2026-10-31): [actual wheat data audit](results/commodity_roll_data_20261031.md).
+Downloaded multiple-price fields with maturity IDs are better than continuous prices, but their selected annual
+December holdings need not match a benchmark's nearby roll. A mini-price series cannot inherit standard-contract
+liquidity or execution costs. Any paired intraday observation is not a complete synchronized executable path.
+No return or execution-saving test was run.
+
 ### E31 — Closing-auction state, final print and executable entry are different clocks
 
 Sources: Challet/Gourianov [arXiv1802.01921v2](https://arxiv.org/html/1802.01921v2), Sections2/4;
