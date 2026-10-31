@@ -228,6 +228,15 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **FX carry/trend multi-strategy — NEEDS SOURCE CLARIFICATION / DATA (SSRN 3322717; reviewed 2026-10-30).**
+  Personal-account research only, low priority. Merit: author reports Sharpe 0.88 versus 0.55 for its best single
+  signal across eight FX futures; not independently reproduced or established after executable costs.
+  Source prose misidentifies the winning allocator; performance-pruning dates, exact signal/solver definitions,
+  execution clocks and roll/collateral accounting are unresolved. Only 6E of the source futures is owned.
+  Smallest next check when matching evidence arrives: author rules/code and one dated futures/yield/rebalance/roll
+  month reconciled before any design test. No invented NQ or daily-flat variant, return trial, Apex placement or allocation.
+  [Review](agents/codex/results/fx_multistrategy_3322717.md) · [Evidence](agents/codex/evidence/fx_multistrategy_3322717.md).
+
 **Standing rule:** when a reviewed strategy has documented merits but its results or implementation are not yet verified,
 add it here for later review. Record the merit, what is missing, the smallest next check and the source review; merge
 duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.

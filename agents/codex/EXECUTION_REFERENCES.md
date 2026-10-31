@@ -174,6 +174,18 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   from completed-ticket paths rather than infer a next-date fill or drop all same-bar trades. The general
   builder still needs that upstream repair. No live/plan change or standalone strategy promotion follows.
 
+- Leung et al. (2015), SSRN 2695405 ([full-source review](results/leung_futures_2015_review.md)):
+  mean-reverting spot alone does not establish positive futures drift; separate historical P estimates from Q
+  curve calibration. The paper's Eq2.12 inequality reverses when mu_Q < mu_P; a deterministic Ito check using
+  its Figure4b parameters confirms the sign qualification. Its printed stopping generators also use Q drift
+  despite P-valued objectives; absent author code, the numerical implementation remains unverified.
+  Two fitted VIX curves and numerical stopping boundaries are not historical net trading returns. Its roll
+  yield is a price-difference decomposition, not automatically a percentage return or a roll-date cash payment.
+  Translate price-value objectives into actual futures margin/cash and native costs before account claims.
+  Evidence: full uploaded 2015 PDF and deterministic arithmetic only; no return test or live change.
+  Limits/next check: no owned dated VX/spot curve panel; a separate justified project would first reconcile
+  one timestamped curve, physical/pricing calibration and a cash ledger. No current NQ/ES/Apex allocation earned.
+
 ### E10 — Liquidity compensation, turnover and costs
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
@@ -812,6 +824,40 @@ Source: [SSRN 666541](https://ssrn.com/abstract=666541), uploaded June 8, 2005 d
 - Status: execution reference only. Zero strategy-return trials; no plan or live changes.
 
 
+### E49 — EIA surprise labels, tick-rule signs and announcement execution clocks
+
+Source/review + date: Rousse and Sévi, [SSRN 2874907](https://ssrn.com/abstract=2874907), uploaded 2016 working paper;
+[full review](results/rousse_sevi_oil_2874907.md), 2026-10-30.
+- Use: verify information availability and order-flow sign before deriving an event trade from a conditional chart.
+  A surprise classification using the released actual cannot select a pre-release entry. Window OI is known after
+  its tape arrives; a post-release strategy must enter after public data receipt and misses the initial jump.
+- Evidence: source claims 402 inventory announcements in 2007–14, with 43 positive 3σ surprises and about −0.25%
+  preceding drift. Table 3's positive-surprise OI coefficient is −3.529 (t=−3.154); this is not a strategy-return t.
+  Abstract/body buyer wording conflicts with OI=(B−S)/(B+S), negative coefficients and the selling conclusion.
+- Method limits: second-level volume-weighted transaction prices followed by tick-rule signs are not reproducible
+  from minute OHLCV. Normalized imbalance alone does not measure dollar demand or prove information leakage.
+  Forecast cross-sectional SD cannot be replaced by historical SD of inventory changes.
+- Prerequisites: survey vintages/median/dispersion, matching first-release actuals, exceptional event/receipt clocks,
+  sequenced same-contract tape, native CL/MCL costs and a causal rule. The strongest window is tied to the sample's
+  former pit opening; persistence after the source-noted 2015 pit closure is unverified.
+- Next check only with matching new inputs: one-event series/clock/tick-sign reconciliation, then no-return power
+  census. Old EIA price-only follow/fade studies are already negative; do not substitute them for a replication.
+- Status: execution/research reference; no new economic trials, net-return demonstration or allocation.
+
+### E48 — Slow FX signal diversification needs roll, cash and selection-clock reconciliation
+
+Source/review: Srivastava et al., *A Multi Strategy Approach to Trading Foreign Exchange Futures*, January 25, 2019,
+SSRN 3322717; [uploaded-paper review](results/fx_multistrategy_3322717.md).
+- Useful lesson: walk-forward allocation weights do not establish past-only selection of the strategies being weighted.
+  Risk targeting and more futures symbols also do not eliminate shared USD exposure or executable roll/collateral costs.
+- Evidence: author tables report single-signal Sharpe 0.55, shared-weight best 0.67, currency-specific best 0.88;
+  source-table audit only, no independent return replication. The narrative calls a different optimizer best despite
+  Table 4's 0.35 versus 0.67; source settings/pruning need clarification before implementing the claimed winner.
+- Limits: daily multi-day FX allocations, monthly combination rebalancing; no measured fill savings or NQ/ES edge.
+  No disclosed executable cost decomposition, native integer sizing or Apex daily-flat protocol.
+- Next check: source clarification and one dated formation/rebalance/roll month with futures cash/fees and
+  yield availability reconciled. Owned 6E alone does not supply the eight-currency panel.
+- Status: methodological/accounting reference; personal research lead parked, no return test or live change.
 
 ### E48 — Dated volatility futures: maturity clocks, RMS units and signed hedges
 
