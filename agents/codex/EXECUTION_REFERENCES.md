@@ -618,6 +618,15 @@ Related: E09 cash/contract accounting, E15 tail risk, E36 nonguaranteed protecti
   formation/roll month before any return study. Non-positive prices cannot silently disappear from a log-return test.
 - Status: execution/risk/accounting reference retained; no new return trial, account placement or exit-policy change.
 
+### E09 follow-up — corrected fills and account-state transitions (2026-10-30)
+
+[Fixed-ledger account replay](results/swing_kind_account_replay_20261030.md) settles the previously unrun
+Swing Target kind comparison. In its common-source window, numeric kinds restore $129/MNQ and change 48 daily
+minima; canonical-simulator parity passes. This does not imply monotone payout improvement: 150K recent-pool
+first-year payouts decrease $6 while two-year payouts and blown share are unchanged. The adopted replacements
+do not clear both base and empty-slot comparisons. Evidence is historical simulated accounting with inherited
+path approximations, not native fills or a plan change. Supersedes only the earlier "account replay unrun" status.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
