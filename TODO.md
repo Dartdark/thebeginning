@@ -228,6 +228,50 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **FOMC short nearby VX — NEEDS DATA AND SPECIFICATION (SSRN2544445).**
+  Conditional personal-research lead: scheduled uncertainty-release mechanism; author claims34selected2010–14trades,
+  +28.68%total/Sharpe1.085/0.7%DD, not independently reproduced. Need individual-contract intradayVXprices/quotes,
+  event-clock eras, source11:00timezone and the chart-only`min-Maturity=5`units/contract-selection rule. Printed Eq3
+  negative leverage reverses the sign; screenshotpositive3.5matches the short17example. Cboe/FirstRate/Portara products
+  found, but public sample attempts yielded no admitted panel; final cost unverified, no purchase. Smallest next check
+  when matching inputs/clarification arrive: reconcile one dated event/contract/clock/stop, then committed design/cost/power
+  screen. No daily/spotVIXorESproxy, parameter rescue, plan placement or return trial. This is separate from the failed
+  naked Calvados component. [Review](agents/codex/results/fomc_vx_2544445_review.md) ·
+  [Evidence](agents/codex/evidence/fomc_vx_2544445.md) · [Data gate](agents/codex/inputs/fomc_vx_2544445/data_gate.md).
+
+- [ ] **ANANTA interest-rate differential momentum — NEEDS DATA AND SPECIFICATION (SSRN 2419243).**
+  Low-priority personal FX lead: two-year swap-rate differential changes across eleven currencies, rebalanced
+  at London 18:00 and New York 17:00. Author reports net 3.5/5 bp per dollar traded in 2003–2013; unverified.
+  Literal pseudocode reverses its verbal rate-momentum direction; percentile, zero-divisor and gross-sizing
+  rules need clarification. A declared synthetic interpretation exceeds the stated 20% concentration bound.
+  Need synchronized original-vintage swap/FX snapshots, availability/fill clocks, financing and native costs.
+  Owned data and bounded BOE/ICE/CME checks did not provide the exact panel. Resume only with genuinely new
+  matching inputs/source clarification: reconcile one two-clock day and cashflows before a committed data/cost
+  gate. Continuous 6E, daily policy rates or OIS proxies are not an exact replication. No paid data or returns
+  attempted; no Apex adaptation, allocation or tier promotion.
+  [Review](agents/codex/results/ananta_2419243_review.md) · [Evidence](agents/codex/evidence/ananta_2419243.md).
+
+
+- [ ] **Monthly low-frequency FX momentum — NEEDS DATA / SOURCE CONVENTIONS (SSRN 1259661; 2026-10-30).**
+  Lower-priority personal lead: recursively fitted HP trend (monthly penalty 14,400), then MA(1,2) on the trend.
+  Author's 1993–2008 basket Sharpe 0.76 versus raw MA 0.41; carry included, costs ignored, not independently
+  reproduced. Public Fed-mirror daily FX panel and metadata acquired; euro starts 1999, source carry/pre-euro
+  history and exact basket/quote/endpoint conventions missing. Kernel bandwidth units also unresolved.
+  Resume only on genuinely new matching inputs or author clarification: reconcile one dated month and signal
+  vintage, then coverage/power/cost gate before a committed bounded HP/raw-MA design test. Monthly holds fail
+  all four Apex homes. No spot-only/subset/intraday proxy, return trial or allocation admitted.
+  [Review](agents/codex/results/fx_low_frequency_1259661_review.md) · [Evidence](agents/codex/evidence/fx_low_frequency_1259661.md).
+
+- [ ] **Daily Dow-stock RL selector — WATCH METHOD / ORIGINAL ENGINE FAILS REPRODUCTION GATE (SSRN 3690996; 2026-10-30).**
+  Low-priority personal-account method lead: authors report 13.0% annual return, Sharpe 1.30 and -9.7% drawdown
+  in 2016–2020; not independently reproduced. Recovered exact paper-era source and verified public stock/benchmark
+  data. Five synthetic groups expose same-close observation/fills, fee-inclusive negative cash, fractional shares,
+  misleading fee counters and a paper/code turbulence mismatch. Stop before historical agent training or portfolio tests.
+  Resume only with a clarified frozen source/protocol: reconcile one causal feature → later executable fill and
+  fee-inclusive integer-share ledger, then universe/corporate-action, fold-local turbulence and seed/checkpoint audit.
+  No unbounded training, proxy futures conversion or allocation; correcting this engine would be a new protocol.
+  [Review](agents/codex/results/rl_ensemble_3690996_20261030.md) · [Five-group checks](analysis/outputs/codex_rl_ensemble_3690996_audit/mechanics.json).
+
 - [ ] **WASDE pre-release futures/options volume — NEEDS DATA AND SPECIFICATION (SSRN 4841490; 2026-10-30).**
   Lower-priority personal-account lead: author reports positive futures-volume and negative options-volume
   associations with subsequent 5–20-day agricultural futures returns (1995–2018); no net strategy independently

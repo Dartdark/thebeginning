@@ -1,0 +1,61 @@
+{
+  "source": "Uploaded ssrn-1360783.pdf",
+  "title": "A Model of Portfolio Delegation and Strategic Trading",
+  "authors": [
+    "Albert S. Kyle",
+    "Hui Ou-Yang",
+    "Bin Wei"
+  ],
+  "version": "May 2010",
+  "url": "https://ssrn.com/abstract=1360783",
+  "review_base_commit": "7ab6d304edbc9c7a7541268f9e374613cb97bc20",
+  "files": {
+    "page23.png": {
+      "sha256": "5bc33d63350a4c176385eff357d754282610c7354dd09812bf6fa65c539844bb",
+      "bytes": 232921
+    },
+    "source.pdf": {
+      "sha256": "81062ac47c5270882f2fc0cacfe5cee7258a08f71b8edb53eec6c95c894655bd",
+      "bytes": 431733
+    },
+    "source.txt": {
+      "sha256": "6334f72c418d178725520d89e37d6db39107292c7cb96b9afbbdc3c59407ecac",
+      "bytes": 122587
+    }
+  },
+  "inspected_owned_schemas": {
+    "data/NQ_1min_2022.csv": [
+      "date",
+      "time",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume"
+    ],
+    "data/ES_1min_2022.csv": [
+      "date",
+      "time",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume"
+    ],
+    "data/COT_NQ.csv": [
+      "date",
+      "time",
+      "tff_net",
+      "tff_rank13",
+      "tff_rank26",
+      "tff_ok",
+      "leg_net",
+      "leg_rank13",
+      "leg_rank26",
+      "leg_ok"
+    ]
+  },
+  "return_trials": 0,
+  "decision": "DONT TEST: theoretical reference, no observable directional strategy",
+  "external_acquisition": "Not attempted: no source-defined empirical panel or executable strategy; more OHLCV cannot identify private model states."
+}

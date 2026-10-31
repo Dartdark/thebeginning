@@ -1,0 +1,41 @@
+{
+  "source_sha256": "79b40052ee36e8663bd6f9a04d6a5f173a708f6b369aae96499777240dbceabb",
+  "review_commit": "3bd592507c3549da195cde95f9806875a68701a9",
+  "source": "Donninger, Dec2014, Revision1 Jan5 2015, four-page user upload",
+  "equation1_quantity": -15,
+  "equation3_literal_negative_leverage": 18,
+  "equation3_positive_UI_magnitude": -17,
+  "min_maturity_UI": 5,
+  "min_maturity_units": "not defined in prose; days type/selection rule unresolved",
+  "nominal_5pct_stop_per_VX": 1000.0,
+  "nominal_stop_source_15VX": 15000.0,
+  "source_15VX_roundtrip_cost": 900.0,
+  "stop_plus_cost_equity_fraction": 0.0318,
+  "stop_limit_note": "Trigger level arithmetic, not a fill or maximum loss guarantee",
+  "source_cost_per_VX": 60.0,
+  "source_cost_breakeven_points": 0.06,
+  "illustrative_one_tick_per_fill_plus_10_commission": 110,
+  "zero_stops_in_34_iid_upper95": 0.08433964335062538,
+  "iid_note": "Hypothetical stationary independent Bernoulli upper bound; not a forecast of jump or stop risk",
+  "power": {
+    "assumed_events": 34,
+    "assumed_trade_sd_per_VX": 500.0,
+    "net_mean_for_t2": 171.49858514250883,
+    "gross_mean_for_t2_source_cost": 231.49858514250883,
+    "status": "Assumptions only; neither SD nor modern event eligibility estimated"
+  },
+  "nominal_5year_CAGR": 0.05172503152846497,
+  "owned_vix_named_files": [
+    "data/VIX3M_daily.csv",
+    "data/VIXY_daily.csv",
+    "data/VIX_daily.csv"
+  ],
+  "source_figures_inspected": [
+    2,
+    3,
+    4
+  ],
+  "strategy_return_trials": 0,
+  "account_simulations": 0,
+  "evidence_status": "Source arithmetic/filename inventory only; no matching intraday VX panel acquired"
+}
