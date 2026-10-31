@@ -1262,6 +1262,10 @@ E11 information clocks, E18 research/platform fill conventions and E43 accountin
   universe, corporate actions, fold-local features, turbulence, seeds and benchmarks before economic replication.
 - Status: original engine fails reproduction admission; broader personal-allocation method is a low-priority queue
   lead. Zero historical agent training, strategy-return trials, portfolio comparisons, native savings or live changes.
+- Related upload [SSRN 7013523 review](results/ssrn_7013523_review_20261030.md): all 30 performance-table cells
+  match the archived original; do not count the 2026 upload as independent confirmation. A separate constructed
+  check of its printed reward expansion disagrees with NAV accounting for a buy from zero holdings. This is a
+  source-equation finding, not a claim that an unavailable runtime used it; no new economic trial or method queue entry.
 
 ### E09/E11 follow-up — Duration, signed price impact and constructed event clocks
 
