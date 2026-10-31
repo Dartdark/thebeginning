@@ -228,6 +228,10 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+**Data shopping/export register:** [Research leads awaiting data](agents/codex/DATA_NEEDED.md) consolidates previous
+data-blocked leads, exact missing inputs, partial acquisitions, next checks and superseded requests. Maintain it for future
+worthwhile NEEDS DATA leads. Acquisition preference: **free sources only**; a listing does not authorize a return test.
+
 - [ ] **Bitcoin spot/inverse-futures utility allocation — NEEDS MATCHING DATA AND SPECIFICATION (SSRN3441913).**
   Conditional personal-account research: explicit utility-allocation formulas; authors report Sharpe4.86–5.07
   versus spot4.40 on111days in2019, not independently reproduced net returns. Main formula/payoff audit passes;

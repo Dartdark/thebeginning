@@ -136,6 +136,14 @@ Read the **Promising strategies awaiting verification** section in [TODO.md](../
 or data-blocked review. Add qualifying candidates there for later review instead of letting them disappear in chat.
 Apply the same rule to future uploads; mark the verification outcome when it is established and link the evidence.
 
+## Data-needs register (user, 2026-10-31)
+
+Maintain [DATA_NEEDED.md](DATA_NEEDED.md) for interesting leads that need data for further testing, including earlier
+leads. Record exact fields/dates/contracts, clock and source-rule gaps, partial acquisitions/access attempts, smallest next
+check and evidence links. Merge shared inputs, check later results and preserve failures/superseded requests. Keep this
+linked from TODO's verification queue. User acquisition constraint: **free sources only**; no purchases or paid access.
+The register does not waive evidence/preregistration gates, revive failed rules or resume paused programs.
+
 ## Show results in chat (user, 2026-10-27)
 
 Always include the key results directly in the final chat reply as well as saving the report. Links supplement the
