@@ -1,0 +1,570 @@
+             An Extreme Firm-Specific News Sentiment Asymmetry
+                           Based Trading Strategy
+
+        Qiang Song, Anqi Liu, Steve Y. Yang                                          Anil Deane, Kaushik Datta
+            Financial Engineering Department                                            Civil Finance Group
+             Stevens Institute of Technology                                   Northrop Grumman Information Systems
+               Hoboken, New Jersey, USA                                                  McLean, VA, USA
+                 syang14@stevens.edu                                                    anil.deane@ngc.com
+
+
+    Abstract— News sentiment has been empirically observed to         generate trading signals for individual stocks. We first filter
+have impact on financial market returns. In this study, we            company stocks by the news frequency to ensure that their
+investigate firm-specific news from the Thomson Reuters News          sentiment movements follow a consistent statistical pattern.
+Analytics data from 2003 to 2014 and propose an optimal trading       The design of our trading strategy is based on the hypothesis
+strategy based on a sentiment shock score and a sentiment trend
+                                                                      that the rankings of news sentiment of a set of firms reflect the
+score which measure extreme positive and negative sentiment
+levels for individual stocks. The intuition behind this approach is   relative confidence of investors toward these firms, and hence
+that the impact of events that generate extreme investor              their relative market performance in the near future. The
+sentiment changes tends to have long and lasting effects to           primary contribution of this paper is to document that a long–
+market movement and hence provides better prediction to               only strategy based on extreme positive sentiment shocks and
+market returns. We document that there exists an optimal signal       trend can generate robust trading signals and consequently
+region for both indicators. And we also show extreme positive         outperform the buy-and-hold S&P500 index strategy during
+sentiment provides better a signal than extreme negative              both high volatility and low volatility market conditions.
+sentiment, which presents an asymmetric market behavior in            Furthermore, we investigate the inconsistency of predictive
+terms of news sentiment impact. The backtest results show that
+                                                                      power according to different sentiment polarities. Several
+extreme positive sentiment generates robust and superior trading
+signals in all market conditions, and its risk-adjusted returns       studies have tested the hypothesis that there exists an
+significantly outperform the S&P 500 index over the same time         asymmetric market reaction to news. For example, investors
+period.                                                               underreact to the official news (e.g. earning announcements)
+                                                                      and overreact to a series of good or bad news [2]. Smales
+   Keywords— News Sentiment; Thomson Reuters News                     pointed out that in the Gold future market, the negative news
+Analytics; Extreme Sentiment Shock and Sentiment Trend;               has superior impacts on volatility to positive sentiment [13].
+Trading Strategy.                                                     Generally, negative news is more informative and therefore
+                                                                      the reaction to it is more vigorous [14]. By comparing the
+                                                                      long-only and short-only strategies, we demonstrate that
+                       I. INTRODUCTION                                extreme positive sentiment is a more reliable signal to predict
+     Many studies have demonstrated that news media can               potential increasing of stock prices than extreme negative
+affect financial markets and often becomes drivers of market          sentiment. This presents a reversal effect of previous findings.
+activities [1]–[6]. Analyzing news contents and translating                The rest of the paper is structured as the following: We
+them into trading signals have become an attractive research          first review the existing literature about financial news and
+topic in both academia and industry. There have been a                market reactions as well as the existing techniques in
+number of studies that further document the value of using            exploiting these relationships in section II. In section III, we
+media sentiment to make trading decisions [9]–[11]. The               discuss the Thomson Reuters News Analytics data and present
+motivation of this study is based on recent findings that news        the aggregated sentiment and market return data used in this
+content affects investor sentiment and market volatility [5],         study. We then formulate the two extreme sentiment scores
+[7], [8]. We propose a trading strategy based on extreme news         and propose a long-short strategy framework in section IV.
+sentiment levels on individual stocks, and we further explore         We perform the strategy parameter optimization and discuss
+the effect of a long and short strategy based on extreme              the backtest results in section V. Finally, we conclude the
+positive and negative sentiment on these stocks.                      findings and highlight contributions of this study in section
+                                                                      VI.
+     In a previous study, we showed that not all news has the
+same impact on an investor’s sentiment toward financial                       II. BACKGROUND AND LITERATURE REVIEW
+markets, and the abnormal shocks of news sentiment can
+                                                                      A. Financial News Impacts to Market Activity
+provide us better signals in predicting cumulative market
+return and implied volatility of the S&P 500 index [12]. For               In general, research on financial news impact on market
+this study, we utilize the same trend and shock indicators to         activities has been targeted to answer two primary questions:
+capture abnormal patterns of firm-specific news sentiment and         1) Does the news information lead to financial market
+
+
+
+
+                               Electroniccopy
+                             Electronic   copy available
+                                               available at:
+                                                         at:https://ssrn.com/abstract=2631135
+                                                             http://ssrn.com/abstract=2631135
+activities or price movements? 2) Can special patterns of news         selected, and ETFs, exchange traded funds, are removed); the
+sentiment form indicators that reliably predict subsequent             second step is to filter out stocks with too few news reports
+market price or volatility changes?                                    (stocks on average with less than one news article per week
+     A number of studies have provided sufficient empirical            are excluded from the trading universe). The resulting stock
+evidence that there exist statistical relationships between news       universe includes 596 stocks. Fig. 1 shows the GICS (Global
+and financial markets. Three types of news influences have             Industry Classification Standard) sectors of the selected
+been investigated for different market features. First, news           stocks. Comparing with S&P 500 index, we show that our
+information is associated with subsequent market return. By            selected stock universe is a good approximation of the large-
+analyzing millions of messages from Yahoo! Finance and                 cap market.
+Raging Bull, Antweiler and Frank documented that the
+number of posts has significant correlation with market return
+                                                                       Telecommunication Services
+[4]. Second, financial news helps to predict market volatility.
+In our previous study, a linear regression model has been                                Utilities
+
+developed to demonstrate that the abnormal news sentiment                       Consumer Staples
+has significant prediction power to the implied volatility of                           Materials
+S&P 500 index in the following few days [12]. Third, news                                 Energy
+sentiment impacts trading volume. Ahmad et al. conducted
+                                                                                      Health Care
+sentiment analysis on firm-specific news and concluded that
+the sentiment is related to stock trading volume [16].                     Information Technology
+
+Antweiler and Frank discussed this question from the view                              Industrials
+point of disagreement in news and confirmed that fluctuations              Consumer Discretionary
+of sentiment polarity raise trading volume [4].                                        Financials
+                                                                                                     0   20     40      60       80   100
+B. Trading Strategies using News Sentiment
+     The findings of news impact on financial market has led
+                                                                                          Fig. 1. Number of Stocks by GICS sectors.
+to further studies of designing algorithmic strategies based on
+news sentiment. Tetlock applied firm-specific news content of          B. News Senetiment data
+a previous trading day in a trading strategy and concluded that
+                                                                           Thomson Reuters is a major financial data provider.
+the negative content in media information provides significant
+                                                                       Thomson Reuters News Analytics automatically analyzes news
+predictive power in risk-adjusted returns [17]. In a similar           and provides quantified insight into the events in the news, and
+study, Nassirtoussi et al. implemented a multi-layer dimension         its numerical form can be directly used by automated trading
+reduction algorithm on news headlines to predict the intraday          systems. The whole data range is from January 2003 to
+direction of the USD-EUR pair and achieved an accuracy of              December 2014. There are more than 80 metadata fields in the
+83% [18]. Mitra incorporated both market information and               Thomson Reuters News Analytics, and the fields listed below
+news sentiment in estimating equity portfolio volatility [19].         are used in this study.
+In another study, Healy designed a real-time news analytics
+framework and used Thomson Reuters News Scope data to                      Date/Time: The date and time of the news article.
+manage investment risks and returns [20]. Leinweber justified             Stock RIC: Reuters Instrument Code (RIC) of the stock for
+the predictability of news sentiment to market returns and             which the sentiment scores apply.
+designed sentiment based portfolio strategies [21].
+                                                                          Sentiment Classification: A integer number indicate the
+                           III. DATA                                   predominant sentiment value for a news with respect to a stock
+                                                                       identified by the RIC. Possible values are 1 for positive
+   We use market data and financial news sentiment data                sentiment, 0 for neutral and -1 for negative sentiment.
+from Bloomberg terminal and Thomson Reuters News
+Analytics respectively. The data range is from January 2003 to             Sent_POS: Positive Sentiment Probability, the probability
+December 2014.                                                         that the sentiment of the news article is positive for the stock.
+                                                                       The possible value ranges from 0 to 1.
+A. Market data
+                                                                           Sent_NEUT: Neutral Sentiment Probability, the probability
+    The market data with stock price and trading volume are            that the sentiment of the news article is neutral for the stock.
+obtained from Bloomberg terminal. Returns are calculated to            The possible value ranges from 0 to 1.
+match the range of the news sentiment data. To design a
+trading strategy, we need to first define a stock universe, and            Sent_NEG: Negative Sentiment Probability, the probability
+stocks that are out of this universe will not be considered in         that the sentiment of the news article is negative for the stock.
+trading. In this study, we only include stocks that are traded in      The possible value ranges from 0 to 1. The sum of the three
+the US market. The stock universe is selected with two steps:          probabilities (Sent_POS, Sent_NEUT, Sent_NEG) equals 1.
+the first step is to select stocks with high liquidity (as a result,       Relevance: A real-valued number between 0 and 1
+the top 1000 stocks with highest average trading volume are            indicating the relevance of the news item to a stock. A single
+
+
+
+
+                                Electroniccopy
+                              Electronic   copy available
+                                                available at:
+                                                          at:https://ssrn.com/abstract=2631135
+                                                              http://ssrn.com/abstract=2631135
+news article may refer to multiple stocks, by comparing the                                                                  0.25                                                                         Average News Sentiment
+number of occurrences within the text, the stock with the most                                                               0.20
+mentions will be assigned with the highest relevance, a stock                                                                0.15
+with a lower number of mentions will have a lower relevance                                                                  0.10
+value.                                                                                                                       0.05
+                                                                                                                              0.00
+   In order to calculate a sentiment score for each stock                                                                   40000                                                    	  
+mentioned in one news item, we first calculate the expected                                                                 30000
+                                                                                                                                                                                                               Total Number of News
+
+value of the sentiment score, and then generate the weighted
+                                                                                                                            20000
+expected value using its relevance value. Finally, the weighted
+                                                                                                                            10000
+weekly average sentiment score is calculated as follows:
+                                                                                                                                  0
+                                ((𝑆𝑒𝑛𝑡_𝑃𝑂𝑆×1                                                                                                                                         	                          S&P 500 Index Return
+           1                    +𝑆𝑒𝑛𝑡_𝑁𝐸𝑈𝑇×0                                                                                   0.1
+𝐴𝑣𝑔_𝑆𝑒𝑛𝑡 =                                                                                                          (1)
+           𝑁             !     +𝑆𝑒𝑛𝑡_𝑁𝐸𝐺×(−1))                                                                                 0.0
+
+                               ×𝑅𝑒𝑙𝑒𝑣𝑎𝑛𝑐𝑒)  ,                                                                                 -­‐0.1
+
+                                                                                                                              -­‐0.2
+where N is the total number of new articles for a stock within                                                                         2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014
+one week. The weighted weekly average sentiment is later                                                                                                                             	  
+used as the input for computing the other two sentiment
+scores.                                                                                                                    Fig. 2. Monthly Aggregated News Data Comparing with Market Returns
+
+
+
+C. Summary Statistics of Sentiment Data
+                                                                                                                          IV. TRADING STRATEGY DESIGN AND OPTIMIZATION
+Table I shows the summary statistics of the news sentiment                                                                     News sentiment has been shown to have significant impact
+data, and it includes the mean, standard deviation, maximum,                                                               on the financial market, but how to use the sentiment to design
+minimum, and 5th, 50th, and 95th percentile of each variable.                                                              a trading system is not straightforward. In this study, we take
+The top row shows the calculated average sentiment for each                                                                advantage of the Thomson Reuters New Analytics data and
+stock; the bottom row shows the number of news articles for                                                                explore the abnormal levels of the news sentiment data. We
+each stock.                                                                                                                propose two sentiment scores to characterize shocks (i.e. spike
+                                                                                                                           up or down) and trends in the sentiment time series. The
+TABLE I.        SATISTICS OF CALCULATED AVERAGE SENTIMENT                                                                  calculation is based on the weekly average news sentiment
+                                                                                                                           scores for each stock. In order to reduce the number of
+                 MEAN          STD.           MAX            MIN            5%            50%            95%
+                                                                                                                           parameters in the trading strategy and avoid over-fitting, we
+                                                                                                                           optimize the calculation parameters for each GICS sector. All
+                                                                                                                           stocks within the same sector use the same parameter. The
+AVG.SENTIMENT     0.09          0.24          0.83          -0.78          -0.20          0.00           0.60
+                                                                                                                           trading strategy is designed to monitor the calculated
+                                                                                                                           sentiment scores and generate buy-and-sell signals for each
+ NO. OF NEWS      5.18         11.69           830             0              0             2             22               stock.
+                                                                                                                           A. Sentiment Shock and Trend Scores
+    In Fig. 2, we plot the monthly aggregated average news                                                                     The time series data of news sentiment, like shown in the
+sentiment for all 596 stock, the total number of news articles                                                             top chart of Fig. 2, may not directly correlate with the return
+(hereinafter “number of news”) for each month, and the S&P                                                                 of an individual stock. For example, the absolute value of the
+500 index monthly return. As shown in the chart, the average                                                               sentiment scores is not a direct predictor for the magnitude of
+news sentiment is positively correlated with market return with                                                            future stock returns. We need to look into the structure of the
+a correlation coefficient of 0.21, the total number of news is                                                             time series and consider both the current sentiment value and
+negatively correlates with market return with a correlation                                                                previous values. Here we propose to two sentiment scores: a
+coefficient of -0.14. Through lead-lag analysis, the news                                                                  sentiment shock score and a sentiment trend score to
+sentiment is also shown to lead the market return, but market                                                              characterize the shocks and trend in the news sentiment time
+return has no effect on the future news sentiment.
+                                                                                                                           series data.
+                                                                                                                              Sentiment shocks are spikes observed from the time series
+                                                                                                                           plot, these sentiment shocks are often caused by the release of
+                                                                                                                           unexpected macroeconomic data, financial report results, and
+                                                                                                                           corporate actions. The sentiment shock score is calculated as
+                                                                                                                           below:
+                                                                                                                                                       (𝑆!! − 𝜇)/𝜎,                                                                                                  (2)
+
+
+
+
+                                               Electronic copy available at: https://ssrn.com/abstract=2631135
+where St0 is sentiment value on week t0, t0 represents the                                                                                   threshold are considered as short signals. As it shows in Fig. 3,
+current week, µ is the mean of sentiment values from week t0-                                                                                the majority of the sentiment scores are centered around zero.
+N to t0-1, and σ is the standard deviation of sentiment values                                                                               This means, as we choose larger thresholds, the sentiment
+from week t0-N to t0-1. N is the total number of look-back                                                                                   value diminishes quickly and only the extreme values are of
+weeks.                                                                                                                                       significance in providing signals. This effect is particularly
+                                                                                                                                             pronounced in the sentiment trend score, as it has a broader
+    The sentiment trend score is the aggregated change of
+                                                                                                                                             non-zero region in the cumulative distribution function than
+sentiment or the sum of deltas of sentiment levels. The change
+                                                                                                                                             that in the sentiment shock score. We will further discuss the
+of sentiment may be more informative than the absolute
+                                                                                                                                             optimal selection criterion for this threshold next.
+sentiment levels, especially after being aggregated over a                                                                                                                     Emprical CDF of Sentiment Trend Scores
+period of time. This kind of sentiment trend may be caused by                                                                                            1
+
+
+a series of good news or bad news, and this may have a strong                                                                                           0.8
+
+
+impact on investor sentiment and future asset prices. The                                                                                               0.6
+
+
+
+
+                                                                                                                                                 F(x)
+                                                                                                                                                        0.4
+sentiment trend score is calculated as below:                                                                                                           0.2
+
+                        !!                                                                                                                               0
+
+                                 Δ𝑆!                                                                                               (3)
+                                                                                                                                                          -2     -1.5         -1         -0.5    0        0.5           1        1.5   2
+
+
+                        !!!!!!                                                                                                                                                 Emprical CDF of Sentiment Shock Scores
+                                                                                                                                                         1
+
+where ΔSi is the change of sentiment in week i, and t0                                                                                                  0.8
+
+represents the current week. N is the moving window size,                                                                                               0.6
+
+
+
+
+                                                                                                                                                 F(x)
+summing the change of sentiment within it.                                                                                                              0.4
+
+                                                                                                                                                        0.2
+
+B. Parameters Optimization                                                                                                                               0
+                                                                                                                                                         -15            -10         -5           0              5           10         15
+
+    Each of the sentiment shock or trend score has a parameter
+N (the look-back window) to choose. To find the best                                                                                          Fig. 3. Empirical cummulative distribution functions (CDFs) of sentiment
+                                                                                                                                                              trend scores and sentiment shock socres.
+parameter, we use Spearman rank correlation as the objective
+value. In order to reduce the number of parameters and avoid
+                                                                                                                                                2) Trading Procedure
+over-fitting, N is optimized for each GISC sector, and stocks
+in the same sector use the same value. The method we use to                                                                                      We design a dynamic trading framework with an
+optimize these parameters is to maximize the Spearman rank                                                                                   evaluation period of 4 weeks. We determine the threshold of
+correlation between the sentiment scores and the next week’s                                                                                 extreme sentiment, for example, 90% as positive threshold and
+stock return. The Spearman rank correlation is a measure of                                                                                  10% as negative threshold. Each firm-specific sentiment score
+rank dependence between two variables. For a sample of size                                                                                  is evaluated and compared with the threshold to make trading
+n, the two variable   𝑋! , 𝑌! are converted to ranks 𝑥! ,  𝑦! , the                                                                          decision. If the firm’s sentiment exceeds (or below) the
+correlation coefficient is computed as:                                                                                                      positive (or negative) threshold, we long (or short) its stock.
+                                                                                                                                             The position re-adjustment is scheduled every 4 weeks. To
+                                     !!!
+                                     !
+                      𝜌=1−                                                                                                         (4)       avoid severe loss before re-adjusting, we set a stop loss limit
+                                    !
+                                 ! ! !!
+                                                                                                                                             of 10% drop. In the trading system, the return is recorded
+where  𝑑! = 𝑥! − 𝑦! . By maximizing the rank correlation, the                                                                                every week and the re-adjustment process is enforced as long
+calculated sentiment scores are most informative for future                                                                                  as the loss exceeds -10% (see Fig. 4).
+stock return.
+C. Trading Strategy
+    Using the optimized look-back windows for each sector,
+we then construct the time series of sentiment shock and
+sentiment trend scores for each stock from 2003 to 2014. The
+design of our trading strategy is based on the hypothesis that
+extreme sentiment has a persistent effect on subsequent stock
+returns. Therefore, the trading process is to long stocks with
+extremely high positive sentiment scores or short stocks with
+extremely low negative sentiment scores.
+   1) Extreme Sentiment Threshold
+    The cutoff of extreme sentiment score versus regular score
+range is defined according to the probability distribution of
+sentiment scores during the training period (see Fig. 3). A
+threshold of bottom 5% means the sentiment score in the 5%
+bottom percentile in the training data is the break point of                                                                                                   Fig. 4. Trading Strategy Diagram (Long Strategy)
+extreme negative sentiment, and scores lower than that
+
+
+
+
+                                 Electronic copy available at: https://ssrn.com/abstract=2631135
+                                                     V. RESULTS AND DISCUSSION                                                             perspectives. 1) When the cutoff percentile rises, more stocks
+                                                                                                                                           are added into the trading portfolio. The Sharpe ratio increases
+    In this section, we discuss the parameter optimization
+                                                                                                                                           in the first stage because more companies with superior returns
+results and backtest results using the framework and the
+                                                                                                                                           are included for better diversification. 2) The following
+trading strategy defined in the previous section. To optimize                                                                              decrease of Sharpe ratio is primarily caused by the diminishing
+parameters, we use 4 years of data from 2003 to 2006 so that                                                                               effect of the news influence, and it plateaus when there is a
+we can test how the strategies perform during the 2008                                                                                     little market impact that can be added into the portfolio.
+financial crisis. TABLE II. summarizes the optimized look-                                                                                 Moreover, the trend indicator strategy performs better than the
+back windows of sentiment indicators for each sector.                                                                                      shock indicator strategy in terms of higher Sharpe ratio in
+                                                                                                                                           every cutoff percentile. More interestingly, we find there is a
+TABLE II.                                        OPTIMIZED NUMBER OF WEEKS FOR SENTIMENT SCORES                                            range of cutoffs for the extreme sentiment trend indicator that
+                                    Sector Name                   Sentiment Shock           Sentiment Trend                                yield optimal risk-adjusted returns, while there is only one
+                                                                                                                                           peak cutoff that exists for the extreme sentiment shock
+                  Consumer Discretionary                                  15                               14                              indicator. Opposite to the good performance of long strategies,
+                   Information Technology                                 11                               30                              the results of short strategies result in negative Sharpe ratios.
+                               Consumer Staples
+                                                                                                                                           The different results for long and short strategies demonstrate
+                                                                          18                               19
+                                                                                                                                           the asymmetric response of the market to extreme positive and
+                                       Materials                          15                               16                              negative sentiment. Thus we will not include the short
+                                       Industrials                        21                               18                              strategies in the following performance measures.
+                                        Utilities                         16                               28                                  In order to test the robustness of the trading strategies, we
+                                    Health Care                           10                               15
+                                                                                                                                           recorded the trading activities for each strategy (Table III). For
+                                                                                                                                           both sentiment indicators, the number of winning trades almost
+                                        Energy                            25                               20                              doubles the number of losing trades. This indicates that the
+                                       Financials                         11                               25                              consistent performance of the strategy, and the good results are
+Telecommunication Services
+                                                                                                                                           not from several lucky trades.
+                                                                          19                               24
+
+                                                                                                                                                                                 TABLE III.                 BACKTEST STATISTICS FOR LONG STRATEGIES
+
+                            0.7                                                                                                                                                                                                                                               Avg.
+                                                                                                                                                                                                                                                       No. of      No. of
+                                                                                                                                                                                         Max.                              No. of                                           Holding
+                            0.6                                                                                                                                Strategy                                                                                Wining      Losing
+                                                                                                                                                                                       Drawdown                            Trades                                            Period
+                                                                                                                                                                                                                                                       Trades      Trades
+                            0.5                                                                                                                                                                                                                                             (Weeks)
+                                                                                                                                                 Sentiment
+S ha rpe 	  R a tio	  
+
+
+
+
+                            0.4
+                                                                                                                                                                                           49.09%                             673                       449         224      9.51
+                                                                                                                                                   Trend
+                            0.3
+                                                                                                                                    	  
+
+
+
+
+                                                                                                                                                 Sentiment
+                                                                                             L ong 	  S tra te g ie s                                                                     56.37%                             896                       576         320      6.96
+                            0.2
+                                                                                                    	  T re nd
+                                                                                                                                                  Shock
+                            0.1                                                                     	  S hoc k
+                                                                                                    	  S &P 500	  Inde x                                                 4.5
+                                                                            	  
+                              0.0
+                           -­‐0.4                                                                                                                                          4.0         	  S e ntime nt	  T re nd
+                                                                                             S hort	  S tra te g ie s                                                     3.5         	  S e ntime nt	  S hoc k
+                                                                                                                                            C um ula tiv e 	  R e turns
+
+
+
+
+                           -­‐0.5                                                                 	  T re nd                                                                          	  B uy	  a nd	  H old	  S &P 	  5 0 0 	  Inde x
+                                                                                                                                                                           3.0
+                                                                                                  	  S hoc k
+                                                                                                                                                                           2.5
+ S ha rpe 	  R a tio
+
+
+
+
+                                                                                                                                                                                                                                                                                    	  
+                           -­‐0.6                                                                                                                                          2.0
+                                                                                                                                    	  
+
+
+
+
+                                                                                                                                                                           1.5
+
+                           -­‐0.7                                                                                                                                          1.0
+
+                                                                                                                                                                           0.5                                                                  	  
+
+                           -­‐0.8                                                                                                                                          0.6                                                                  	  
+                                0.00      0.02      0.04   0.06   0.08   0.10      0.12   0.14       0.16          0.18      0.20
+                                                                            	                                                                                             0.5
+                                                                                                                                            Ma rk e t	  V ola tility
+
+
+
+
+Fig. 5. Strategy Sharpe ratios by changing extreme sentiment selection                                                                                                     0.4
+percentile. Top chart shows long strategy with threshold from top 1% to 20%
+and bottom chart shows short strategy with threshold from bottom 1% to 20%.                                                                                                0.3
+                                                                                                                                                                                                                                                                                    	  
+
+
+
+
+                                                                                                                                                                           0.2
+   We backtested both long and short trading strategies using                                                                                                              0.1
+sentiment shock and trend scores from 2007 to 2014. To obtain
+                                                                                                                                                                            0.0
+the optimal extreme sentiment threshold, we tested the cutoff                                                                                                              12/1/2006               12/1/2008                             12/1/2010              12/1/2012    12/1/2014
+
+ranges from top 1% to top 20% and bottom 1% to bottom 20%                                                                                                                                                                                       	  
+
+for long and short strategy respectively. The cutoff score is
+determined by the sentiment distribution during the training                                                                               Fig. 6. Cumulative returns of Sentiment Trend and Shock strategy
+period (see Fig. 3). For the long strategy, both shock indicator                                                                           benckmarked with Buy and Hold S&P500 Index. Top chart shows the Long
+                                                                                                                                           strategy, bottom chart shows the market volatilty for the same time peroid.
+and trend indicator have better Sharpe ratios than the S&P500
+(see Fig. 5). In addition, as we increase the cutoff percentile,                                                                               The top chart of Fig.6 shows the cumulative returns of our
+the Sharpe ratio rises to a peak and gradually flattens out. This                                                                          trading strategies, the result from the buy-and-hold strategy of
+phenomenon can be explained from the following two                                                                                         S&P 500 index is also included as a benchmark, the bottom
+
+
+
+
+                                                                         Electronic copy available at: https://ssrn.com/abstract=2631135
+chart of Fig.3 shows the market volatility. As shown in the top        order to reduce the number of parameters in the trading
+chart, the long strategies outperform the buy-and-hold strategy        strategy design to avoid over-fitting, we optimized the
+for the whole test period, and this also confirms that sentiment       parameters for each GICS sector, stocks that are in same sector
+trend trading strategy has better performance than sentiment           use the same parameters. The parameters are selected so that
+shock. In addition, to further test the performance of strategies      the cross-sectional ranks of the sentiment scores are most
+in different market conditions, we split the backtest period into      aligned with the ranks of futures returns. Based on the
+high volatility regime and low volatility regime using 6-month         empirical distribution of the sentiment scores, we designed a
+realized market volatility (see bottom chart in Fig. 6). We set        long and a short trading strategy. Long stocks with sentiment
+the threshold as two standard deviations larger than the               scores fall in the top percentiles, or short stocks with sentiment
+average, which is 36.93%. The high volatility regime during            in the bottom percentiles.
+2003 to 2014 was from 10/2008 to 05/2009. Both sentiment
+                                                                           The backtest results demonstrate that extreme positive
+indicator strategies show higher profitability than the
+benchmark strategy in high volatility regime. In the low               sentiment can generate robust trading signals in both high
+                                                                       volatility and low volatility regimes, and the performance of
+volatility regime that was bull market period, the trend
+indicator outperform the benchmark in terms of higher return           long-only strategy is superior to buy-and-hold S&P 500 in
+                                                                       terms of mean return and Sharpe ratio, but the short strategy
+and Sharpe ratio. The shock indicator exhibits the same level of
+performance compared with the buy-and-hold strategy with a             using extreme negative sentiment underperforms the
+                                                                       benchmark in all market conditions. Our results show that the
+slightly lower Sharpe ratio (see TABLE IV. ). This result
+demonstrates that both sentiment indicators have good                  extreme positive sentiment for individual stocks generates
+                                                                       more reliable trading signals than the extreme negative
+performance in predicting subsequent market returns in the
+long run, and the sentiment trend indicator provides more              sentiment. This is also an indication of the asymmetric
+                                                                       response of the market to positive and negative sentiment. This
+robust trading signals than the sentiment shock indicator. As
+shown in Table III, the long strategies using the extreme              finding seems contradictory to Tetlock’s earlier finding that
+                                                                       firm-specific negative content has reliable prediction to returns
+positive sentiment outperform S&P 500 index in both high and
+low market volatility regimes.                                         [17]. However, we believe it might be the effect of behavior
+                                                                       reversal under the extreme circumstances. This is out of the
+                                                                       scope of this paper, but this will be a new topic for future
+ TABLE IV.      BACKTEST RESULTS IN DIFFERENT MARKET CONDITIONS
+                                                                       research.
+
+                             Annualized Performance Measures
+        Strategy
+                         Mean Return      Volatility   Sharpe Ratio                              REFERENCES
+                        Total Backtest Period
+    Sentiment Trend         16.90%         26.50%         0.64         [1]     M. Mitchell, M. Mitchell, H. Mulherin, and H.
+    Sentiment Shock         12.24%         25.22%         0.49                 Mulherin, “The Impact of Public Information on the
+   Buy&Hold S&P 500         6.30%          21.18%         0.30                 Stock Market,” J. Finance, vol. 49, no. 3, pp. 923–950,
+                       High Volatility Regime                                  1994.
+
+    Sentiment Trend         56.40%         52.60%         1.07
+                                                                       [2]     N. Barberis, A. Shleifer, and R. Vishny, “A model of
+    Sentiment Shock         49.21%         54.28%         0.91                 investor sentiment,” J. financ. econ., vol. 49, no. 3, pp.
+   Buy&Hold S&P 500        -19.94%         47.92%         -0.42
+                                                                               307–343, Sep. 1998.
+
+                        Low Volatility Regime
+                                                                       [3]     L. Mitra and G. Mitra, The Handbook of News
+    Sentiment Trend         13.61%         23.11%         0.59                 Analytics in Finance. Chichester, West Sussex, UK:
+    Sentiment Shock         9.15%          21.18%         0.43
+                                                                               John Wiley & Sons, Ltd., 2011.
+
+   Buy&Hold S&P 500         8.49%          17.29%         0.49
+                                                                       [4]     W. Antweiler and M. Z. Frank, “Is All That Talk Just
+                                                                               Noise? The Information Content of Internet Stock
+                                                                               Message Boards,” J. Finance, vol. 59, no. 3, pp.
+                       VI. CONCLUSION
+                                                                               1259–1294, Jun. 2004.
+    In this study, we use firm-specific news data from
+Thomson Reuters News Analytics, and we propose a sentiment
+                                                                       [5]     B. M. Barber and T. Odean, “All That Glitters: The
+shock score and a sentiment trend score for individual stocks to
+                                                                               Effect of Attention and News on the Buying Behavior
+identify extreme sentiment levels and used them as trading
+signals. A previous study has shown that abnormal news                         of Individual and Institutional Investors,” Rev. Financ.
+sentiment, like sentiment shocks and trends, are predictive for                Stud., vol. 21, no. 2, pp. 785–818, Dec. 2007.
+future market return and volatility[12]. For individual stock
+level, the same intuition still applies, viz. that a big jump of the   [6]     J. Scott, M. Stumpp, and P. Xu, “News, not trading
+sentiment or a trend of sentiment change in the same direction                 volume, builds momentum,” Financ. Anal. J., vol. 59,
+will trigger persistent impact on stock price movement. In                     no. 2, pp. 45–54, 2003.
+
+
+
+
+                                Electronic copy available at: https://ssrn.com/abstract=2631135
+[7]    D. DiBartolomeo and S. Warrick, Linear Factor           [15]   S. Yin, K. Mo, A. Liu, and S. Y. Yang, “News
+       Models in Finance. Elsevier, 2005.                             Sentiment to Market Impact and its Feedback Effect,”
+                                                                      SSRN Working Paper, Apr. 2015.
+[8]    P. C. Tetlock, M. Saar-Tsechansky, and S. MacSkassy,
+       “More Than Words: Quantifying Language to               [16]   K. Ahmad, C. Kearney, and S. Liu, “No news is good
+       Measure Firms’ Fundamentals,” J. Finance, vol. 63,             news: A time-varying story of how firm-specific
+       no. 3, pp. 1437–1467, Jun. 2008.                               textual sentiment drives firm-level performance,” Eur.
+                                                                      Financ. Manag. May, 2013.
+[9]    W. Zhang and S. Skiena, “Trading Strategies to
+       Exploit Blog and News Sentiment.,” Icwsm, vol. 34,      [17]   Tetlock, “Giving Content to Investor Sentiment: The
+       pp. 375–378, 2010.                                             Role of Media in the Stock Market,” J. Finance, vol.
+                                                                      62, no. 3, pp. 1139–1168, Jun. 2007.
+[10]   S. F. Crone and C. Koeppel, “Predicting exchange
+       rates with sentiment indicators: An empirical           [18]   A. Khadjeh Nassirtoussi, S. Aghabozorgi, T. Ying
+       evaluation using text mining and multilayer                    Wah, and D. C. L. Ngo, “Text mining of news-
+       perceptrons,” in 2014 IEEE Conference on                       headlines for FOREX market prediction: A Multi-
+       Computational Intelligence for Financial Engineering           layer Dimension Reduction Algorithm with semantics
+       & Economics (CIFEr), 2014, pp. 114–121.                        and sentiment,” Expert Syst. Appl., vol. 42, no. 1, pp.
+                                                                      306–324, Jan. 2015.
+[11]   M. Kaya, “Stock price prediction using financial news
+       articles,” Inf. Financ. Eng. ICIFE 2010 2nd IEEE Int.   [19]   L. Mitra, G. Mitra, D. Dibartolomeo¶, and D.
+       Conf., pp. 478–482, 2010.                                      Dibartolomeo, “Equity portfolio risk estimation using
+                                                                      market information and sentiment,” Quant. Financ.,
+[12]   S. Y. Yang, Q. Song, S. Yin, K. Mo, K. Datta, and A.           vol. 9, no. 8, pp. 887–895, Dec. 2009.
+       Deane, “The Impact of Abnormal News Sentiment on
+       Financial Markets,” J. Bus. Econ., vol. Accepted,       [20]   A. D. Healy and A. W. Lo, “Managing real-time risks
+       2015.                                                          and returns: The Thomson Reuters NewsScope event
+                                                                      indicies. Handbook of News Analytics in Finance.”
+[13]   L. a. Smales, “Asymmetric volatility response to news          John Wiley & Sons, 2011.
+       sentiment in gold futures,” J. Int. Financ. Mark.
+       Institutions Money, vol. 34, pp. 161–172, Jan. 2015.    [21]   D. Leinweber and J. Sisk, Relating news Analytics to
+                                                                      Stock Returns. Handbook of News Analytics in
+[14]   R. Riordan, A. Storkenmaier, M. Wagener, and S.                Finance.” John Wiley & Sons, 2011.
+       Sarah Zhang, “Public information arrival: Price
+       discovery and liquidity in electronic limit order
+       markets,” J. Bank. Financ., vol. 37, no. 4, pp. 1148–
+       1159, Apr. 2013.
+
+
+
+
+                             Electronic copy available at: https://ssrn.com/abstract=2631135
+

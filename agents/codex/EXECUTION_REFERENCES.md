@@ -206,6 +206,29 @@ No strategy trial, promising-queue entry, plan placement or execution-policy cha
 
 ### E10 — Liquidity compensation, turnover and costs
 
+- [Ates–Wang floor/screen FX review](results/ssrn754946.md), SSRN754946, May 2005:
+  2003–04 electronic venues had tighter reversal-estimated spreads and an increasing
+  price-discovery role. This is historical venue evidence, not a profitable lead/lag
+  signal or our executable savings. Preserve quote-versus-trade estimator distinctions,
+  stale-price/receipt clocks, contract/tick regimes and Hasbrouck ordering bounds.
+  Daily fitted weights and full-contract-period volatility buckets are retrospective;
+  no entry can use them as contemporaneously known features without a past-only redesign.
+  Owned one-minute 6E OHLCV lacks the paired venue histories and executable quotes.
+  Source inspection and table-arithmetic checks only; no empirical replication or
+  strategy-return trial. Two visibly inconsistent source-table cells remain unresolved.
+
+- Event-time follow-up, retained 2026-10-30: Bowe, Hyde and McFarlane (2007),
+  [SSRN 1025241](https://ssrn.com/abstract=1025241), [full review](results/mexder_duration_1025241_review.md).
+  Historical MexDer TIIE28 duration/volume effects depend on structural specification and processed event clocks.
+  Equal-price thinning, same-time aggregation, overnight compression and seasonal adjustment alter what duration
+  and volume measure. Preserve contract/event identity and available-at clocks before comparing fills or impact.
+  A current-trade explanatory coefficient is not a pre-order forecast, a negative signed-volume coefficient is
+  not a short signal, and a model-implied liquidity share is not achievable execution savings.
+  Printed-table audit finds Table6's spread formula does not reproduce its headline using either Table4 panel;
+  nearby duration/volume t-statistics are weak under two-sided inference. Source data and transformations remain
+  unverified. Retain measurement/model-risk caution only; no alpha trial, cost calibration or live-order change.
+
+
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 [Saved review](results/equity_premium_liquidity_review_20261029.md). Retained by user 2026-10-29.
 - Use: distinguish turnover from spread, depth, impact and resilience; distinguish compensation for illiquidity from predictive alpha. Large trading volume need not imply cheap executable liquidity.
@@ -292,6 +315,15 @@ uploaded manuscript; [review and formula audit](results/speed_competition_494096
   events and identifiable participation, then fixed-parent-signal delay comparisons including noncompletion,
   adverse selection and costs at actual size. No infrastructure, protective-order or live-policy change follows.
 - Status: execution/identification reference; DON'T TEST as source-defined alpha, zero economic return trials.
+
+E11 follow-up — Song et al.2015, SSRN2631135, retained2026-10-31:
+[review/data gate](results/news_sentiment_2631135_20261031.md). Weekly news features must use available entity-level
+analytics and wait until all included articles/scores have arrived before a later fill. News source timestamps,
+analytics availability/receipt and subsequently corrected archive/model versions are separate clocks. Sample API
+messages are not historical entitlement or point-in-time coverage. Preserve missing news, duplicates and revisions.
+The source's weekly10%loss review is not an intraday protective stop; its reported strategy DD is49.09%/56.37%.
+Evidence: source/schema inspection plus two feature-arithmetic fixtures; no independent return, execution saving
+or live-policy change. Need actual dated article/entity/price ledgers and explicit loss-review execution first.
 
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
@@ -1001,6 +1033,8 @@ measurement, E15 overnight tails, E19 session clocks, E30 paired-leg execution.
 - Status: execution/accounting reference retained; naked component rejected, preferred hedge unverified. No execution
   saving, plan placement, trading, broker or live-policy change is claimed.
 
+- FOMC-only follow-up, separate paper [SSRN2544445](results/fomc_vx_2544445_review.md): rendered source charts show an undefined`min-Maturity=5`which prose“nearest”does not capture. Printed Eq3 with negative3.5%leverage gives+18VXunder mathematical floor; screenshotpositive3.5gives intended−17. Preserve source sign/rounding and source-era monthly-contract universe before replication. Cboe legacy/current product documentation has a2018timestamp/schema transition; provider bar labels/timezones differ. A35-minute post-statement cover now crosses the usual press-conference start. Source0.7%sampleDDand zero triggered stops do not cap5%stop/gap risk. Product discovery and failed sample reads are recorded; no intraday panel or return test admitted. Retain a distinct conditional personal lead; the Calvados component failure does not falsify it.
+
 ETP lifecycle/clock follow-up, 2026-10-30: Bordonado, Molnár and Samdal (2016),
 [SSRN2753300](https://ssrn.com/abstract=2753300), [full uploaded-source review](results/vix_etp_2753300.md).
 The front-VX/spot basis XIV/VXX switching example reports 69% annualized return, Sharpe2.11 and −24.5% DD in
@@ -1088,6 +1122,28 @@ Smallest justified next check: apply these clock/model checks if independently
 undertaking activity-risk research; this source does not earn a new return test.
 Status: methodological reference only; no demonstrated executable edge, zero
 return trials, no promising-candidate queue entry or plan/live change.
+
+### E54 follow-up — Post-news activity predicts later volume, not execution costs
+
+Source: uploaded anonymized preprint *Trading Intensity, Forecast Disagreement, and Post-Announcement Volume
+Persistence in European Index Futures*, [SSRN 7446599](https://ssrn.com/abstract=7446599),
+[review / diagnostic-kernel scope](results/volume_persistence_7446599.md), 2026-10-30.
+- Useful lesson: distinguish elevated volume, normalized one-sidedness, price direction and executable liquidity.
+  Initial activity explains later excess volume in the reported FTSE/DAX/CAC sample; the R² rise 0.130 -> 0.395
+  is historical fit for a volume outcome, not a return forecast. Directional concentration adds about 0.06 pp.
+- Evidence: source historical associations, not independently re-estimated. NFP forecast dispersion is negatively
+  associated with later volume. Matched non-announcement windows also show activity persistence. No uniform
+  quote/book history, native fills, execution savings or trading profits are supplied.
+- Timing: primary same-day contract selection uses end-of-day volume; next-day activation is the causal alternative
+  tested by the author. Full-sample average-path boundaries require past-only fitting for a forecast. Initial activity
+  arrives after the observation interval; AUC120, fitted decay and confirmed baseline duration are later labels.
+- Code: a fixed-five-minute numeric measurement kernel plus synthetic arithmetic checks is retained in
+  `analysis/codex_volume_persistence_7446599.py`; it does not validate upstream event clocks/contracts, fit a forecast,
+  classify trade directions, route orders or measure costs. It reports baseline onset separately from confirmation.
+- Next check only for a justified execution study: reconcile one dated event using prior seasonal days and actual
+  quotes/fills, then test incremental spread/depth/markout/cost evidence at native size. Tick-rule concentration is
+  not participant identity, and high activity can coexist with improving liquidity.
+- Status: supporting measurement reference; no source-defined directional strategy or new economic return trial.
 
 ### E55 — Strategic futures demand, welfare and executable basis
 
@@ -1227,6 +1283,48 @@ E11 information clocks, E18 research/platform fill conventions and E43 accountin
   universe, corporate actions, fold-local features, turbulence, seeds and benchmarks before economic replication.
 - Status: original engine fails reproduction admission; broader personal-allocation method is a low-priority queue
   lead. Zero historical agent training, strategy-return trials, portfolio comparisons, native savings or live changes.
+- Related upload [SSRN 7013523 review](results/ssrn_7013523_review_20261030.md): all 30 performance-table cells
+  match the archived original; do not count the 2026 upload as independent confirmation. A separate constructed
+  check of its printed reward expansion disagrees with NAV accounting for a buy from zero holdings. This is a
+  source-equation finding, not a claim that an unavailable runtime used it; no new economic trial or method queue entry.
+
+### E09/E11 follow-up — Duration, signed price impact and constructed event clocks
+
+Source: Bowe, Hyde and McFarlane, October 2007, SSRN1025241;
+[full-source review](results/bowe_duration_1025241_review.md), retained October 30, 2026.
+- Use: distinguish raw intertrade duration from the paper's thinned price-changing event process. Equal-price
+  trades/volumes and simultaneous timestamps are combined; overnight time is removed. Event construction
+  changes the modeled process and must be frozen before claiming transfer to native CME events.
+- Evidence: author regressions on 69,981 TIIE28 information ticks, 2000–2006, not independently replicated.
+  Longer expected duration has larger signed effects in main models; the information parameter changes sign
+  after augmentation. Nearby duration/volume t-statistics are only 1.35/−1.27; robust generality is unproven.
+- Accounting check: Table6's 2.1014 spread and 73.74% liquidity share match absolute Table4A coefficient
+  magnitudes, not the displayed signed sum. This flags a convention/presentation ambiguity, not verified
+  author-code failure. Structural cost shares are not observed commissions, spreads or execution savings.
+- Clock/sign limits: current direction multiplies duration/volume; coefficients do not justify a buy-after-silence
+  or sell-high-volume rule. Completed durations and posttrade marks are not automatically predecision features.
+- Next check only for a separately justified native execution project: timestamped same-contract trades/quotes,
+  initiator side, quote age, raw/filtered events, pretrade midpoint and posttrade fee-adjusted markout; then
+  past-only seasonality/model fits versus simple spread/volume/time-of-day baselines. Minute OHLCV cannot supply this.
+- Status: execution-method reference; no market-return replication, alpha trial, strategy queue entry or live change.
+
+### E18 follow-up — Future-extreme buffers and partly observed targets
+
+Source: González-Maiz-Jiménez, López-Herrera and Reyes-Santiago, SSRN6401038, uploaded March2026 preprint;
+[review and mathematical audit](results/straddle_buffer_6401038_review_20261031.md).
+- Use: an order priced from the execution day's final high/low needs a causal estimator or as-of update policy.
+  A daily bar touching a hindsight level does not show that the order existed then; wider buffers and slippage
+  stress do not remove that information problem. Retain non-fills, cancellations, queue and trade-through evidence.
+- Evidence: source inspection and constructed identical-prefix/different-continuation counterexample only.
+  Paper's claimed Sharpe7.26–14.86 is not independently reproduced or demonstrated executable alpha.
+- Accounting: equal static long/short entries cancel before costs. Combined UP profit is close minus short-cover
+  price; DOWN profit is long-exit minus close. Inventory held before prediction creates no automatic advantage.
+- Target clock: predicting tomorrow's close relative to yesterday's open includes already-observed price movement.
+  In an explicit IID equal-variance Gaussian thought experiment, known-component sign predicts the combined sign
+  with75% accuracy while predicting the future component stays50%. High old-anchor accuracy is not tradable edge.
+- Next check only for separately evidenced research: prefix-only order levels, prediction/label maturity clocks,
+  genuine forward-return baseline, native net positions/cash/margin and executable fills. No current strategy,
+  sizing, protective-order or account-policy change; no new return trial or measured execution saving.
 
 ### E09 follow-up — WTI genetic optimization still needs native contract and cost units
 
