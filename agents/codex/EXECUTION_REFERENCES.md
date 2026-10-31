@@ -108,6 +108,16 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 
 ### E09 — Native micro costs, turnover and roll reconciliation
 
+- [Bitcoin inverse-futures allocation](results/bitcoin_inverse_3441913_review.md), Deng et al., SSRN3441913,
+  uploaded2019-08-23 version: a $K inverse contract earns `K*(1/Fentry−1/Fexit)` BTC when long; USD P&L needs
+  an explicit spot conversion/collateral ledger. Inverse is settlement convention, not short direction. Both
+  source-calibrated positions are long BTC. CME linear futures and index levels are not interchangeable executable inputs.
+  Continuous utility-optimal controls omit native rebalancing cost and liquidation; near-singular covariance can magnify
+  allocation estimates. Main formula agrees with the matrix solution; rendered AppendixB.2 has a contradictory sign.
+  Evidence: source inspection and synthetic formula/payoff checks only; source Sharpe4.86–5.07 over111days is unreplicated.
+  Four BitMEX API probes hit proxy403. Need identified dated contracts/spot clocks, native lots/marks/margin and conversion
+  before a return test; a perpetual adaptation also needs its own funding. No verified execution saving or current placement.
+
 - [Leveraged Fibonacci paper review](results/ssrn2011743.md), SSRN2011743, retained
   2026-10-30: distinguish margin allocation, notional leverage and loss-at-stop.
   A 60% equity margin commitment at 10x implies 6x equity notional under a simple

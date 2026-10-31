@@ -228,6 +228,18 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **Bitcoin spot/inverse-futures utility allocation — NEEDS MATCHING DATA AND SPECIFICATION (SSRN3441913).**
+  Conditional personal-account research: explicit utility-allocation formulas; authors report Sharpe4.86–5.07
+  versus spot4.40 on111days in2019, not independently reproduced net returns. Main formula/payoff audit passes;
+  AppendixB.2 has a confirmed sign discrepancy. Both calibrated legs are long BTC, not a neutral hedge.
+  Need exact source BitMEX contract IDs and spot/index clocks, executable spot, rebalancing, native lots,
+  collateral/mark liquidation and costs. Four public API probes hit network proxy403; owned CME/spot bars
+  are not matching inverse inputs. Next step only with new matching inputs: reconcile one native BTC/USD
+  contract/spot interval and availability clock, then committed coverage/cost/power gates before returns.
+  No new economic trial, Apex placement, modern perpetual substitution or allocation.
+  [Review](agents/codex/results/bitcoin_inverse_3441913_review.md) ·
+  [Evidence](agents/codex/evidence/bitcoin_inverse_3441913.md).
+
 - [ ] **ANANTA interest-rate differential momentum — NEEDS DATA AND SPECIFICATION (SSRN 2419243).**
   Low-priority personal FX lead: two-year swap-rate differential changes across eleven currencies, rebalanced
   at London 18:00 and New York 17:00. Author reports net 3.5/5 bp per dollar traded in 2003–2013; unverified.

@@ -1,0 +1,175 @@
+{
+  "source_title": "Optimal Bitcoin Trading with Inverse Futures",
+  "source_version": "August 23, 2019",
+  "source_commit": "6594f625dc8eef40a1b770e0d9f4f736291dd0ff",
+  "file_sha256": {
+    "agents/codex/inputs/ssrn3441913/.gitattributes": "3a7849516f0a5dc024c7dce1c786d0cb7ce1bf3dfe5e9abcc02c96301c3ae5a0",
+    "agents/codex/inputs/ssrn3441913/acquisition_receipts.json": "6a1ee3ba861b4b5aeb59fff9f35b59ed885f84d0dac5d16c5dc837bd48bbb459",
+    "agents/codex/inputs/ssrn3441913/page12.png": "cb31ec7571cb3f6698dd4d8cd57ab57e9fbd8731817d889a525e16d0fd3b4ca5",
+    "agents/codex/inputs/ssrn3441913/page26.png": "4b756be70f754a43bd9bea8dc57af1f075d98238f1b9b8e771fa58bc06058577",
+    "agents/codex/inputs/ssrn3441913/source.pdf": "924b452dcf1bc86ecc96d7c7b4e2cf3f0d6f9da08d7792c7819b53627929d0ad",
+    "agents/codex/inputs/ssrn3441913/source.txt": "907f838af6ed3cb7ce9247f17ddf1328b1717176265c6497bf6027001c133e99"
+  },
+  "script_sha256": "385e7aa77f3dc5793e2baa0f4d558058b18dbf9259cf4611794e6dcf408c7a89",
+  "primary_calibration": {
+    "rho": 0.59,
+    "C1": 0.525586421391032,
+    "C2": 1.3215951936521102,
+    "determinant": 0.05173806405049561,
+    "condition_number": 4.271941565124342,
+    "printed_B2_implied_C2": 4.389550401506075,
+    "B2_minus_theorem_C2": 3.067955207853965
+  },
+  "correlation_diagnostics": [
+    {
+      "rho": 0.59,
+      "C1": 0.525586421391032,
+      "C2": 1.3215951936521102,
+      "determinant": 0.05173806405049561,
+      "condition_number": 4.271941565124342,
+      "printed_B2_implied_C2": 4.389550401506075,
+      "B2_minus_theorem_C2": 3.067955207853965
+    },
+    {
+      "rho": 0.9,
+      "C1": -0.3934135956540349,
+      "C2": 2.168621648738873,
+      "determinant": 0.015079355989560011,
+      "condition_number": 20.273195407233114,
+      "printed_B2_implied_C2": 12.69493743821255,
+      "B2_minus_theorem_C2": 10.526315789473678
+    },
+    {
+      "rho": 0.99,
+      "C1": -9.84537432308955,
+      "C2": 14.147501004602175,
+      "determinant": 0.0015793641273276105,
+      "condition_number": 211.12486689704704,
+      "printed_B2_implied_C2": 114.6500135674156,
+      "B2_minus_theorem_C2": 100.50251256281342
+    },
+    {
+      "rho": 0.9962,
+      "C1": -26.928864375874255,
+      "C2": 35.9294599372948,
+      "determinant": 0.0006020282085272184,
+      "condition_number": 557.1235838472768,
+      "printed_B2_implied_C2": 299.588306482562,
+      "B2_minus_theorem_C2": 263.65884654526724
+    }
+  ],
+  "power_weights_at_Z1": [
+    {
+      "alpha": -2.0,
+      "spot_weight": 0.17519547379701064,
+      "futures_face_value_to_wealth": 0.44053173121737005
+    },
+    {
+      "alpha": -0.5,
+      "spot_weight": 0.3503909475940213,
+      "futures_face_value_to_wealth": 0.8810634624347401
+    },
+    {
+      "alpha": 0.1,
+      "spot_weight": 0.5839849126567022,
+      "futures_face_value_to_wealth": 1.4684391040579001
+    }
+  ],
+  "source_table2_claims": [
+    {
+      "utility": "exponential",
+      "risk_parameter": 0.5,
+      "sharpe": 5.07,
+      "sortino": 2.28
+    },
+    {
+      "utility": "exponential",
+      "risk_parameter": 1.0,
+      "sharpe": 4.96,
+      "sortino": 2.09
+    },
+    {
+      "utility": "exponential",
+      "risk_parameter": 1.5,
+      "sharpe": 4.86,
+      "sortino": 1.99
+    },
+    {
+      "utility": "power",
+      "risk_parameter": -2.0,
+      "sharpe": 4.86,
+      "sortino": 1.87
+    },
+    {
+      "utility": "power",
+      "risk_parameter": -0.5,
+      "sharpe": 4.91,
+      "sortino": 1.89
+    },
+    {
+      "utility": "power",
+      "risk_parameter": 0.1,
+      "sharpe": 4.93,
+      "sortino": 1.9
+    },
+    {
+      "utility": "all_in_spot",
+      "sharpe": 4.4,
+      "sortino": 1.59
+    }
+  ],
+  "inverse_payoff_example": {
+    "contract_face_usd": 1,
+    "entry": 100,
+    "exit": 200,
+    "conversion_spot": 205,
+    "pnl_btc": 0.005,
+    "pnl_usd": 1.025
+  },
+  "inspected_owned_schemas": {
+    "data/BTC_1min_2019.csv": [
+      "date",
+      "time",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume"
+    ],
+    "data/BTCUSD_spot_1min_2019.csv": [
+      "date",
+      "time",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume"
+    ]
+  },
+  "acquisition_receipt": [
+    {
+      "name": "instrument_m19",
+      "url": "https://www.bitmex.com/api/v1/instrument?symbol=XBTM19&count=1",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "name": "instrument_u19",
+      "url": "https://www.bitmex.com/api/v1/instrument?symbol=XBTU19&count=1",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "name": "daily_m19",
+      "url": "https://www.bitmex.com/api/v1/trade/bucketed?binSize=1d&partial=false&symbol=XBTM19&count=3&startTime=2018-12-17T00%3A00%3A00Z&reverse=false",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "name": "index_bxbt",
+      "url": "https://www.bitmex.com/api/v1/trade/bucketed?binSize=1d&partial=false&symbol=.BXBT&count=3&startTime=2018-12-17T00%3A00%3A00Z&reverse=false",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    }
+  ],
+  "assertions": "PASS: matrix/closed formula agreement, residual, payoff signs/units, singular guard",
+  "return_trials": 0,
+  "empirical_replication": false,
+  "decision": "NEEDS MATCHING DATA AND SPECIFICATION; accounting reference retained"
+}
