@@ -725,6 +725,21 @@ Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, sha
 Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
 Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E40-E42 during this handoff merge; existing Codex E29-E38 identifiers are retained.
 
+### E44 — Slow FX signal diversification needs roll, cash and selection-clock reconciliation
+
+Source/review: Srivastava et al., *A Multi Strategy Approach to Trading Foreign Exchange Futures*, January 25, 2019,
+SSRN 3322717; [uploaded-paper review](results/fx_multistrategy_3322717.md).
+- Useful lesson: walk-forward allocation weights do not establish past-only selection of the strategies being weighted.
+  Risk targeting and more futures symbols also do not eliminate shared USD exposure or executable roll/collateral costs.
+- Evidence: author tables report single-signal Sharpe 0.55, shared-weight best 0.67, currency-specific best 0.88;
+  source-table audit only, no independent return replication. The narrative calls a different optimizer best despite
+  Table 4's 0.35 versus 0.67; source settings/pruning need clarification before implementing the claimed winner.
+- Limits: daily multi-day FX allocations, monthly combination rebalancing; no measured fill savings or NQ/ES edge.
+  No disclosed executable cost decomposition, native integer sizing or Apex daily-flat protocol.
+- Next check: source clarification and one dated formation/rebalance/roll month with futures cash/fees and
+  yield availability reconciled. Owned 6E alone does not supply the eight-currency panel.
+- Status: methodological/accounting reference; personal research lead parked, no return test or live change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

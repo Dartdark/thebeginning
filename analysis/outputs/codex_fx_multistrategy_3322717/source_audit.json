@@ -1,0 +1,39 @@
+{
+  "source_sha256": "b9adabff200e39a412423300f598ebcf9014d8ac0e02e68c16388dd51b750aea",
+  "extracted_table_rows": 32,
+  "author_best_single_sharpe": 0.55,
+  "author_best_shared_weight_sharpe": 0.67,
+  "author_best_product_indicator_sharpe": 0.88,
+  "arithmetic_relative_sharpe_gain": 0.5999999999999999,
+  "return_trials": 0,
+  "author_results_independently_reproduced": false,
+  "verdict": "NEEDS DATA / SOURCE CLARIFICATION; no Apex fit as written",
+  "inspected_proxy_headers": {
+    "macro_proxies_daily.csv": [
+      "date",
+      "IEF",
+      "GC=F",
+      "TIP",
+      "FVX",
+      "HYG",
+      "LQD",
+      "HG=F",
+      "IRX",
+      "TNX"
+    ],
+    "ndx_gold_daily.csv": [
+      "date",
+      "NDX",
+      "GLD",
+      "GC=F",
+      "QQQ"
+    ]
+  },
+  "blockers": [
+    "Seven source FX futures absent from owned panel",
+    "No complete dated 1Y/10Y yields and linked equity/commodity panel verified",
+    "Heuristic product/indicator pruning has no stated train-only calendar",
+    "Allocation formulas/constraints and execution clocks insufficiently specified",
+    "No explicit transaction-cost, futures cash/collateral or roll-cost reconciliation"
+  ]
+}
