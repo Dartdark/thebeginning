@@ -201,8 +201,10 @@ def run():
                           spread_cost=float(fills.spread_cost.sum()), net_pnl=float(trades.net.sum()))
         if name == "switch":
             for year, frame in daily.groupby(daily.index.year):
+                first_location = daily.index.get_loc(frame.index[0])
+                start_nav = CAPITAL if first_location == 0 else daily.nav.iloc[first_location - 1]
                 byyear.append(dict(year=int(year), pnl=float(frame.pnl.sum()),
-                                   return_pct=float((1 + frame.nav.pct_change().fillna(0.)).prod() - 1)))
+                                   return_pct=float(frame.nav.iloc[-1] / start_nav - 1)))
             for asset in ["XIV", "VIXY"]:
                 selected = trades[trades.asset == asset]
                 m = metrics.perf(daily[asset + "_pnl"], selected.net, capital=CAPITAL)
