@@ -500,6 +500,13 @@ Source: Ma, Serra, Peterson and Irwin, [SSRN7425358](https://ssrn.com/abstract=7
 - Status: execution reference, not a directional strategy or allocation. Official sample download was blocked;
   record the gap and continue research on other leads.
 
+E30 source follow-up — Till/Eagleeye (2017), SSRN2942340, reviewed2026-10-31:
+[full review](results/till_2942340_20261031.md). A storage operator's buy-summer/sell-winter transaction includes
+physical delivery, storage capacity, financing and operating costs. Futures-only spread P&L is not the same locked
+margin. Index-roll anticipation needs actual two-maturity identities, both-leg cashflows and synchronized execution;
+price pressure can be anticipated and disappear. The article provides examples, not measured net returns or execution
+savings. Retain existing quote/sample gates; no continuous-price replacement or new economic trial is justified.
+
 ### E31 — Closing-auction state, final print and executable entry are different clocks
 
 Sources: Challet/Gourianov [arXiv1802.01921v2](https://arxiv.org/html/1802.01921v2), Sections2/4;
