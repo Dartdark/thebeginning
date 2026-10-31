@@ -618,6 +618,16 @@ Related: E09 cash/cost reconciliation, E15 tail risk, E35 fill-anchored exits an
   change alters outcomes and must pass the existing preregistration/trial/account gates.
 - Status: risk/execution diagnostic reference; no standalone candidate, new return test or plan/exit change.
 
+- Follow-up: Maymin and Maymin, [SSRN 1896146](https://ssrn.com/abstract=1896146),
+  [full-source review](results/optimal_indicator_framework_1896146_review.md), retained 2026-10-30.
+  A known conditional mean gives a maximum-gross-return direction rule under a notional cap; conditional
+  first/second moments give a different information-ratio sizing rule. These are theoretical benchmarks, not
+  estimated net execution savings. The source explicitly allows easier or cheaper execution to favor another rule.
+  Turnover costs depend on the previous position; bounded notional does not model Apex's intraday floor or payouts.
+  Before applying this to a separately justified predictor, freeze availability/label clocks, past-only estimates,
+  turnover, integer quantities and cost accounting; compare net account paths against the unchanged base.
+  No predictor, return trial, size change or implemented execution change follows from this review.
+
 ### E38 — Commodity stop overlays, exposure redistribution and return/NAV accounting
 
 Source: Hossein Rad, December 2012 EDHEC MSc thesis, SSRN 2614241; uploaded full 56-page PDF reviewed 2026-10-31.
