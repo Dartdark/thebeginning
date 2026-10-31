@@ -1,0 +1,2179 @@
+        A Model of Portfolio Delegation and Strategic Trading
+                             Albert S. Kyle, Hui Ou-Yang, Bin Wei∗
+
+                                      This Version: May 2010
+
+
+
+
+Abstract
+This paper endogenizes information acquisition and portfolio delegation in a one-period
+strategic trading model. The equilibrium concept constrains prices, demands, and contracts
+to be linear functions. We find that when the informed portfolio manager is relatively
+risk tolerant (averse), price informativeness increases (decreases) with the amount of noise
+trading. Our results diﬀer from those obtained in the traditional market microstructure
+literature, in which price informativeness is independent of or decreases with the amount of
+noise trading. When noise trading is endogenized, the linear equilibrium in the traditional
+literature breaks down under a wide range of parameter values regarding the number, the
+risk aversion, and the endowment risk of noise traders. In contrast, a linear equilibrium
+always exists in our model. In a conventional portfolio delegation model under a competitive
+partial equilibrium, the manager’s eﬀort of acquiring information is independent of a linear
+incentive contract. In our strategic trading model, however, a higher powered linear contract
+induces the manager to exert more eﬀort for information acquisition, but the manager’s
+trading intensity can be either higher or lower.
+
+
+       Keywords: Portfolio Delegation, Information Acquisition, Strategic Trading
+       JEL Classifications: G14, G12, G11
+
+
+
+
+   ∗
+    We are very grateful to two anonymous referees and Laura Starks (the editor) for oﬀering many insightful
+comments and suggestions that have improved the paper immensely. We would also like to thank Archishman
+Chakraborty, Peter DeMarzo, Nengjiu Ju, Mike Lemmon, Lin Peng, Bob Schwartz, and seminar participants
+at Baruch, HKUST, Insead, and 2009 China International Conference in Finance for their comments. Albert
+S. Kyle is at Robert H. Smith School of Business, University of Maryland. Phone: (1)301-405-9864, Email:
+akyle@rhsmith.umd.edu. Hui Ou-Yang is at CKGSB and Nomura Securities. Phone: 852-2536-7433. Email:
+hui.ou-yang@nomura.com. Bin Wei is at Zicklin School of Business, Baruch College, the City University of
+New York. Phone: (1)646-312-3469, Email: bin.wei@baruch.cuny.edu.
+
+
+                                                     1
+1        Introduction
+
+Institutional investors now dominate both equity ownership and trading activity. Gompers
+and Metrick (1996) report that by December 1996, mutual funds, pension funds, and other
+financial intermediaries held discretionary control over more than half of the U.S. equity
+market. Jones and Lipson (2004) report that non-retail trading accounted for 96% of New
+York Stock Exchange trading volume in 2002. As pointed out by Bennett, Sias, and Starks
+(2003), “This institutionalization of equity holdings almost certainly means that, for most
+firms, the price-setting marginal investor is an institution.” It is thus of great importance
+to study the impact of institutional trading on stock prices and to integrate into one model
+both asset pricing and delegated portfolio management, as advocated by Allen (2001).
+        Although there is a voluminous literature on strategic informed trading, two fundamental
+issues remain unaddressed. First, this literature assumes that agents trade for their own
+accounts.1 Consequently, there still does not exist a strategic trading model that studies
+the impact of institutional trading on stock prices. Second, in an extension of the Kyle
+(1985) model, Spiegel and Subrahmanyam (1992) demonstrate that when noise trading is
+endogenized, a linear equilibrium does not exist or the market breaks down under a wide
+range of parameter values. This result suggests that it is important to develop a robust
+strategic trading model in which an equilibrium always exists.
+        Admati and Pfleiderer (1997) endogenize information acquisition in the context of a
+general agency problem between a portfolio manager and outside investors. They solve
+a competitive partial equilibrium model in which the portfolio manager is a price-taker.2
+In addition to results on the use of benchmark portfolios in a manager’s compensation,
+Admati and Pfleiderer show that the manager’s eﬀort is independent of the slope of a
+linear contract.3 This result challenges the traditional principal-agent literature in which a
+
+    1
+      See Glosten and Milgrom (1985), Kyle (1985), Easley and O’Hara (1987), Admati and Pfleiderer
+(1988), Back (1992), Holden and Subrahmanyam (1992), Spiegel and Subrahmanyam (1992), Foster and
+Viswanathan (1996), Back, Cao, and Willard (2000), and Vayanos (2001).
+    2
+      For other competitive partial equilibrium models with information acquisition and portfolio delegation,
+see Stoughton (1993), Ding, Gervais, and Kyle (2008), and Garcia and Vanden (2008).
+    3
+      See also Stoughton (1993) on the independence between a linear contract and eﬀort in a partial equi-
+librium context. For research on optimal contracting in delegated portfolio management, see Ross (1974),
+
+
+                                                     2
+portfolio manager is absent and in which a higher slope typically induces a higher level of
+eﬀort from the agent.4
+   In this paper, we develop an integrated model of strategic trading and portfolio dele-
+gation. Specifically, we consider a linear equilibrium model in which asset prices, optimal
+contracts, and information acquisition are determined simultaneously. We illustrate that
+incentives do influence the manager’s eﬀort and that a linear equilibrium always exists.
+We further show that more noise trading may lead to a more informative stock price due
+to information acquisition and optimal contracting. This result diﬀers from the traditional
+market microstructure literature, where price informativeness is independent of or decreases
+with the amount of noise trading.
+   In our baseline model that is built upon Kyle (1985), there is an uninformed risk-neutral
+investor (the principal), a risk-averse informed portfolio manager (the agent), competitive
+risk-neutral market makers, and noise traders. There is one risky stock and one risk-free
+bond available for trading. The uninformed investor entrusts her money to the informed
+manager.5 The manager has skill at acquiring private information about the stock’s liqui-
+dation value, and bases his trades on the acquired information. The manager’s trades aﬀect
+the asset price as market makers take into account adverse selection in the determination of
+the asset price. At the end of one period, the asset’s liquidation value is realized and trading
+profits are determined. The manager is compensated according to a contract designed by
+the investor at the beginning of the period.
+   Moral hazard arises because acquiring information is costly to the manager and the eﬀort
+the manager spends acquiring information is unobservable to the investor. We require the
+contract to be a linear function of trading profits. The investor is a Stackelberg leader in
+
+Bhattacharya and Pfleiderer (1985), Starks (1987), Kihlstrom (1988), Allen (1990), Ou-Yang (2003), Ca-
+denillas, Cvitanic, and Zapatero (2007), Li and Tiwari (2009), and Dybvig, Farnsworth, and Carpenter
+(2010).
+   4
+     See Ross (1973), Mirrlees (1976), Harris and Raviv (1979), Holmstrom (1979), Grossman and Hart
+(1983), Holmstrom and Milgrom (1987), Schattler and Sung (1993), Prendergast (2002), Ou-Yang (2005),
+Cvitanic, Wan, and Zhang (2006), DeMarzo and Urosevic (2006), Ju and Wan (2008), Sannikov (2008), and
+He (2009). See Guo and Ou-Yang (2006) for a counterexample in which a higher slope may induce a lower
+eﬀort.
+   5
+     We shall use principal (agent) and investor (manager or informed agent) interchangeably.
+
+
+
+                                                  3
+the sense that after she announces the contract, other market participants take the contract
+as given and play Nash equilibrium against one another. Specifically, given the investor’s
+contract, the manager first chooses an eﬀort level for information acquisition and then
+decides on the optimal portfolio allocation. The competitive risk-neutral market makers
+determine the equilibrium stock price, based on the total demand by the informed manager
+and noise traders. Consequently, as the Stackelberg leader, the investor takes the responses
+of other players into account when determining the optimal contract.
+   One of our main results states that when the risk aversion (Ra ) of the informed agent is
+relatively low (high), an increase in the variance of noise trading (σ 2u ) increases (decreases)
+the informativeness of stock prices (Q), measured by the precision of the asset’s liquidation
+value conditional on the equilibrium asset price. In the absence of risk aversion, portfo-
+lio delegation, and information acquisition, Kyle (1985) shows that Q is independent of
+σ 2u because the risk-neutral agent scales up trading in such a way that Q is unchanged.
+Subrahmanyam (1991) finds that when the informed agent is risk averse, an increase in σ 2u
+decreases Q, because a risk-averse informed agent trades less aggressively than a risk-neutral
+one. Notice that in Kyle and Subrahmanyam, the precision of private information is fixed,
+regardless of noise trading.
+   The intuition for our result is easier to see with information acquisition only. There are
+two eﬀects at play. On the one hand, holding eﬀort constant, an increase in noise trading or
+a decrease in informed trading decreases Q. On the other hand, an increase in eﬀort ρ not
+only has a direct positive eﬀect on Q since the private information is more accurate, but
+also indirectly enhances Q since it enables the informed agent to trade more aggressively on
+better information. In the prior studies without information acquisition, the increase in the
+intensity of informed trading is exactly canceled out or dominated by the increase in noise
+trading. Therefore, Q is independent of or decreases with σ 2u . However, once information
+acquisition is possible, when noise trading becomes more volatile, a relatively less risk-averse
+agent first acquires more accurate information and then trades more aggressively, leading
+to a more informative price in equilibrium. Because the informed agent has an exponential
+utility function and all random variables are normally distributed, the marginal benefits of
+
+
+                                               4
+trading more aggressively and acquiring more accurate information decrease with Ra . When
+the informed agent is very risk averse, the increases in his eﬀort for information acquisition
+and trading aggressiveness are dominated by the increase in noise trading, resulting in a
+less informative price in equilibrium.
+   In the presence of portfolio delegation, Q increases with σ 2u for a wider range of Ra
+values than in the case without portfolio delegation. The slope of the linear contract, b,
+plays two major roles in our model. On the one hand, b changes the eﬀective risk aversion
+of the portfolio manager. For example, a lower b reduces the eﬀective risk aversion, so that
+the manager trades more aggressively in the stock. On the other hand, a lower b reduces the
+manager’s share of trading profits, which lowers the manager’s incentive to expend eﬀort
+because the manager incurs a personal, unobserved cost for eﬀort. For a wider range of Ra
+values, when σ 2u increases, a lower b allows the portfolio manager to trade more aggressively
+against the noise traders. As a result, the first eﬀect dominates the second one, leading to
+a higher Q. Only when the manager is very risk averse, will the marginal benefit of the
+manager’s trading aggressiveness decline. The second eﬀect will then dominate the first
+one, resulting in a lower Q when σ 2u increases.
+   Extending the irrelevance result of Admati and Pfleiderer (1997), we show that higher
+incentives induce higher levels of eﬀort, thus recovering the well-known result in the tradi-
+tional principal-agent literature. The fact that in reality many of the contracts for portfolio
+managers such as mutual fund, pension fund, or endowment fund managers are linear, it is
+important to see that the incentive component of the contract comes out mattering.
+   In our model of strategic trading, market impact mitigates the manager’s incentive to
+“undo” changes in the linear contract, which occurs in the Admati-Pfleiderer model. For
+example, when the slope (b) of the contract is doubled, the manager can reduce his stock
+holdings (β) by half so that bβ remains the same. In our strategic model, however, due
+to the market impact of the manager’s trades on the stock price, the manager leverages
+up or down the position less than he does in the price-taking case. As a result, bβ, or the
+sensitivity of the manager’s compensation to the stock payoﬀ, increases with b. This implies
+that given a higher b, the manager tends to exert more eﬀort.
+
+
+                                              5
+   We extend the baseline model by endogenizing noise trading. Following Spiegel and
+Subrahmanyam (1992), we assume that noise traders are risk-averse uninformed hedgers
+who hedge their endowment risk optimally. Hence, the optimal hedging demand of the
+hedgers creates endogenous noise trading. When noise trading is endogenized, equilibrium
+asset pricing and optimal contracting are aﬀected by the number, the endowment risk,
+and the risk aversion of the noise traders or uninformed hedgers. Optimal contracting
+and informed trading are aﬀected by the trading behavior of the uninformed hedgers. We
+demonstrate that the positive relationships between incentives and eﬀort and between the
+informativeness of prices and the level of noise trading still hold in this case.
+   In our model we show that there always exists an equilibrium. By contrast, in Spiegel
+and Subrahmanyam (1992) where both information acquisition and portfolio delegation are
+absent, there exists no equilibrium under a wide range of parameter values, or the market
+breaks down. In the Spiegel-Subrahmanyam model, the uninformed risk-averse noise traders
+face an endowment risk. On the one hand, they would like to hedge this risk, but on the
+other hand, they would not like to lose to the informed trader. Hence, their trade-oﬀ is
+between the utility gain from hedging the endowment risk and the utility loss from losing
+to the informed trader. For example, if the risk aversion or the endowment risk of the noise
+traders is very low and if the quality of the informed trader’s private information is very
+high, then the noise traders do not take any position in the stock to avoid losing to the
+informed trader. As a result, the market breaks down.
+   If the informed trader can change eﬀort to adjust the quality of private information,
+then it is always in his best interest to lower the quality of information to avoid the market
+breakdown when the hedging demand from the hedgers is not strong enough. The informed
+trader’s eﬀort choice is correctly anticipated ex ante by the hedgers and market makers.
+Therefore, an equilibrium always exists no matter how little noise trading there may seem to
+be ex ante. This result highlights the important role of endogenous information acquisition.
+   We now briefly review the related literature. Our paper is closely related to Kyle (1985),
+Subrahmanyam (1991), and Spiegel and Subrahmanyam (1992). Kyle develops a multi-
+period model of strategic trading with a risk-neutral informed trader. Subrahmanyam
+
+
+                                               6
+extends the one-period version of the Kyle model by introducing a risk-averse informed
+trader; Spiegel-Subrahmanyam endogenize noise trading.6 Portfolio delegation is absent in
+all of these models.
+        Dow and Gorton (1997) construct an equilibrium model with strategic trading and
+portfolio delegation. The risk neutral portfolio manager may or may not receive a valuable
+signal about the asset payoﬀ. The signal is obtained without eﬀort expenditure but there is
+still an agency problem. When the manager does not receive a valuable signal, no trading
+is optimal for the manager and the principal, but the manager may still trade like a noise
+trader.
+        The rest of this paper is organized as follows. Section 2 presents the baseline model with
+exogenous noise trading. Section 3 extends the baseline model by endogenizing noise trad-
+ing. Section 4 considers a risk-averse principal as well as discusses the empirical implications
+of our model. Section 5 concludes the paper. All proofs are given in the Appendix.
+
+
+2        The Baseline Model
+
+Following Kyle (1985), the vast majority of strategic trading models assume exogenous
+noise trading. For comparison, we first build the baseline model of portfolio delegation and
+strategic trading based on Kyle. We will extend it in the next section to allow for endogenous
+noise trading by following Spiegel and Subrahmanyam (1992). Consider a market with an
+informed trader, a number of noise traders, and competitive risk-neutral market makers.
+These traders buy and sell a single asset at a price pe at time 0. At time 1, the liquidation
+                    ν ∼ N (v, σ 2 ), is announced, and the holders of the asset are paid. The
+value of the asset, e
+asset price, determined by the competitive market makers who earn zero expected profit, is
+set to equal the expectation of the liquidation value. The demand of noise traders for the
+                          e ∼ N (0, σ 2u ).7
+risky asset is denoted by u
+
+    6
+      Kyle (1981) considers endogenous noise trading in a diﬀerent model. Mendelson and Tunca (2004)
+extend the endogenous noise trading model of Glosten (1989) to multiple periods as well as endogenize
+information acquisition. Lee (2008) considers the acquisition of diﬀerent types of information.
+    7
+      Throughout the paper, a letter with the tilde symbol ˜ (e.g. u   h) denotes a random variable, and the
+letter itself (e.g. u) denotes the realization of the random variable.
+
+
+                                                     7
+    Diﬀerent from Kyle (1985), we assume that the informed trader can decide on the
+extent to which he is informed through an endogenous information acquisition process. In
+particular, upon input of a level of eﬀort ρ, the agent obtains a noisy signal about the asset
+value e   ν + e, where e ∼ N (0, σ 2 ) is uncorrelated with e
+      θ = e                                                 ν , and σ 2 is inversely related
+to the agent’s eﬀort ρ, satisfying σ 2 = σ 2 /ρ. The cost of exerting eﬀort ρ is assumed
+to be C(ρ) = kρ2 /2, where k is a positive constant. The informed trader thus bases
+his trade on the private information e                            e, is a function of e
+                                     θ, and his order, denoted by x                   θ.
+The market makers observe only the total order flow ye = x
+                                                         e+u
+                                                           e and set the price to be
+pe = P (e e) = v + λ (e
+        x+u             e).
+                      x+u
+    We further assume that the informed trader sells his private information in the form
+of a fund in which a representative uninformed, risk-neutral, investor (principal) entrusts
+her money to the informed trader who serves as the fund manager (agent). The principal
+                                                     f ) = a + bW
+designs an optimal linear sharing rule, denoted by S(W          f , to induce the agent to
+
+exert eﬀort both for information acquisition and for subsequent trading in the stock. Here
+f denotes the agent’s trading profits, and a and b are constants. Moral hazard arises due
+W
+to the inability of the principal to observe eﬀort. The agent has a negative exponential
+utility function:
+
+                                                 h   ³             ´i
+                           f ; ρ, a, b) ≡ − 1 exp −Ra S(W
+                       UA (W                            f ) − C (ρ) ,
+                                           Ra
+
+where Ra is the informed agent’s risk aversion coeﬃcient.
+    In summary, the timeline of the model is as follows.
+
+                                                                   f to the agent. The
+   1. In Stage 1, the principal assigns a linear contract S = a + bW
+      contract is publicly announced.
+
+   2. In Stage 2, the market makers believe that under the contract S, the agent would
+      exert eﬀort ρm (b) that depends on b.8 They are committed to this belief, which turns
+      out to be correct in equilibrium (i.e., they have rational expectations).
+
+   8
+     Note that the constant payment a in the contract does not aﬀect the agent’s eﬀort ρ because the agent
+has an exponential utility function.
+
+
+                                                    8
+  3. In Stage 3, under the contract and taking into account the belief held by the market
+     makers ρm (b), the informed agent exerts eﬀort ρ = RHO (ρm , b) and observes a signal
+     θ. Here RHO (ρm , b) denotes the optimal eﬀort, and e
+     e                                                   θ=e
+                                                           ν +e is a noisy signal about
+     the liquidation value whose precision increases with eﬀort ρ: σ 2 = σ 2 /ρ.
+
+  4. In Stage 4, the informed agent chooses the optimal trading strategy and submits his
+           e = X (θ; ρ, ρm , b) to market makers.
+     order x
+
+  5. In Stage 5, the risk-neutral competitive market makers determine the stock price
+     pe = P (y; ρm , b) based on the total order flow y and their belief about the informed
+     agent’s eﬀort ρm .
+
+  6. In Stage 6, the liquidation value e
+                                       ν is realized. The principal and the informed agent
+     are compensated.
+
+   We solve the model backward.
+   Step 1: In stage 5, market makers set the stock price to earn zero expected profit. Given
+                                                         f ) = a + bW
+the total order flow y = x + u and the linear contract S(W          f , they set the price
+
+based on their beliefs about the agent’s eﬀort:
+
+
+                    P (y; ρm , b) = E [e                         e, ρ = ρm ] .
+                                       ν |y = X (θ; ρ, ρm , b) + u
+
+
+   Step 2: In stage 4, the informed agent solves for the optimal trading strategy. After
+having exerted eﬀort ρ and obtained signal e
+                                           θ = θ, the informed agent’s expected utility is
+given by
+                                                h                  ¯    i
+                                                     f ; ρ, a, b) ¯¯e
+                       U A (x; θ, ρ, ρm , b) = E UA (W               θ=θ ,
+
+      f = x (e
+where W      ν − P (y; ρm , b)) = x [e          e; ρm , b)]. The informed agent’s optimal
+                                     ν − P (x + u
+trading strategy maximizes his expected utility U A , that is,
+
+
+                          X (θ; ρ, ρm , b) = arg max U A (x; θ, ρ, ρm , b) .
+                                                   x
+
+
+   Step 3: To determine the agent’s optimal eﬀort, we solve the game in stage 3. The
+
+                                                  9
+agent’s expected utility, before exerting eﬀort ρ and obtaining signal e
+                                                                       θ, is
+
+                                          h   ³ ³            ´              ´i
+                     U A (ρ; b, ρm ) ≡ Ehθ U A X e
+                                                 θ; ρ, ρm , b ; e
+                                                                θ, ρ, ρm , b .
+
+
+Thus, the agent’s optimal eﬀort satisfies
+
+
+                             RHO (ρm , b) = arg max U A (ρ; ρm , b) .
+                                                       ρ
+
+
+   Step 4: In stage 2, market makers form rational expectations. That is, for a given
+contract, their belief ρm (b) coincides with the informed agent’s optimal eﬀort choice:
+
+
+                                    ρm (b) = RHO (ρm (b) , b) .
+
+
+   Step 5: In the final step, we solve for the optimal contract, which is designed by the
+principal in stage 1. The principal is risk neutral and her expected utility is denoted by
+               f −S(W
+U P (a, b) ≡ E[W    f )] = E[(1−b)W
+                                  f −a]. The optimal contract then maximizes U P (a, b):
+
+
+                                   (a∗ , b∗ ) = arg max U P (a, b) ,
+                                                   (a,b)
+
+
+subject to various constraints to be specified next.
+   We formally define the equilibrium as follows.
+
+Definition 1 An equilibrium consists of an optimal contract (a∗ , b∗ ), rational prior belief
+ρ = ρm (b), an optimal eﬀort choice ρ∗ (ρm , b) = RHO (ρm , b), optimal trading strategy
+x∗ (θ; ρ, ρm , b) = X (θ; ρ, ρm , b), and an optimal pricing function: p∗ (y; ρm , b) = P (y; ρm , b).
+The optimal contract (a∗ , b∗ ) maximizes the principal’s expected utility:
+
+
+                                   (a∗ , b∗ ) = arg max U P (a, b) ,                              (1)
+                                                   (a,b)
+
+
+
+
+                                                  10
+subject to the following constraints:
+
+
+                               ρ∗ (ρm , b) = arg max U A (ρ; ρm , b) ,                     (2a)
+                                                      ρ
+
+                          x∗ (θ; ρ, ρm , b) = arg max U A (x; θ, ρ, ρm , b) ,              (2b)
+                                                      x
+
+                                        U A (ρ∗ ; ρm , b∗ ) = U ,                          (2c)
+
+                                        ρm (b) = ρ∗ (ρm , b) ,                             (2d)
+
+                     p∗ (y; ρm , b) = E [e
+                                         ν |y = x∗ (θ; ρ, ρm , b) + u
+                                                                    e, ρ = ρm ] .          (2e)
+
+
+   In Definition 1, Equation (1) determines the optimal contract, subject to the incen-
+tive compatibility constraints in Equations (2a—b), the individual participation constraint
+in Equation (2c), the rational expectations constraint in Equation (2d), and the market
+eﬃciency constraint in Equation (2e).
+
+Proposition 1 In Stage 5, given a linear contract (a, b) and the belief ρm (b), market mak-
+ers believe that the informed agent’s strategy is X (θ; ρ = ρm , ρm , b) = β m (ρm , b) (θ − v).
+Consequently, market makers set the pricing rule as P (y; ρm , b) ≡ v + λm (ρm , b) y, where
+y is the total order flow and λm is given by
+
+                                                      βm
+                                 λm =        2                         .                    (3)
+                                           β m (1 + 1/ρm ) + σ 2u /σ 2
+
+Note that λm and β m are both functions of ρm and b. For notational ease, we omit their
+arguments. We use the subscript m to indicate that these variables are determined under
+the belief ρm of other market participants.
+   In Stage 4, the informed agent’s optimal trading strategy is shown as X (θ; ρ, ρm , b) =
+β ∗ (ρ; ρm , b) (θ − v) with the trading intensity β given by
+
+                                                     ρ/ (1 + ρ)
+                       β ∗ (ρ; ρm , b) =                                        ,           (4)
+                                           2λm + Ra b[σ 2 /(1 + ρ) + λ2m σ 2u ]
+
+where ρ is the agent’s eﬀort chosen in Stage 3.
+   In Stage 3, the agent’s optimal eﬀort ρ∗ (ρm , b) = RHO (ρm , b) satisfies a first-order
+
+
+                                                    11
+condition:
+                                            bσ 2          1              dβ ∗ (ρ; ρm , b)
+                       Cρ (ρ (ρm , b)) =                ∗                                 ,      (5)
+                                             2 Ra bσ 2 β (ρ; ρm , b) + 1       dρ
+
+which can be simplified to the following cubic equation:
+
+                                   £¡                     ¢                 ¤   b 2
+                       ρ (ρ + 1)        2λm + Ra bσ 2u λ2m (ρ + 1) + Ra bσ 2 =    σ .            (6)
+                                                                               2k
+
+    In Stage 2, market makers have rational expectations by correctly anticipating the agent’s
+eﬀort choice and trading strategy. That is,
+
+
+              ρm (b) = ρ∗ (ρm (b) , b) , β m (ρm , b) = β ∗ (ρ∗ ; ρm , b) , λm (ρm , b) = λ∗ .   (7)
+
+
+Note that the optimal responses are all functions of b, hence we denote them by ρ∗ (b), β ∗ (b),
+and λ∗ (b).
+    In Stage 1, the optimal contract is determined through the following optimization:
+
+                    ©                                                                ª
+                 max (1 − b) β ∗ (b) σ 2 [1 − λ∗ (b) β ∗ (b) (1 + 1/ρ∗ (b))] − a∗ (b) ,          (8)
+                   b
+
+
+where a∗ (b) is chosen to satisfy the participation constraint as follows:
+
+                                ¡     ¢ 1               1     ¡                  ¢
+              a∗ (b) = −Ra−1 log −U Ra + k [ρ∗ (b)]2 −     log Ra bβ ∗ (b)σ 2 + 1 .              (9)
+                                        2              2Ra
+
+    In the proposition below, we prove the existence and uniqueness of the equilibrium from
+                                                            f . The existence of the
+Stage 2 on, following the announcement of contract S = a + bW
+overall equilibrium follows immediately from the proposition because the optimal contract
+is determined by solving the principal’s optimization problem over the compact interval of
+[0, 1].
+
+                                                   f , the optimal response functions
+Proposition 2 Following the announcement of S = a+bW
+ρ∗ , β ∗ , and λ∗ exist and are unique.
+
+    The proof of Proposition 2, which is presented in the appendix, suggests a way to solve
+
+
+                                                        12
+our model. First holding b and ρ fixed, we can obtain the unique solution β ∗ (ρ, b) by
+solving Equation (23) in the Appendix, which is derived from Equations (3) and (4). We
+can then determine λ∗ (ρ, b) from Equation (3). We next solve for the agent’s optimal eﬀort
+ρ∗ (b) from the first-order condition in Equation (6), which admits a unique solution as
+proved in the proposition. Lastly, we substitute ρ∗ (b), β ∗ (ρ∗ (b) , b), and λ∗ (ρ∗ (b) , b) into
+the principal’s objective function in Equation (8) and search for the optimal b∗ within the
+interval of [0, 1].
+
+
+2.1    The relationship between incentives and eﬀort
+
+Admati and Pfleiderer (1997) develop an innovative portfolio delegation model under a
+competitive partial equilibrium. Among many important findings, they obtain a striking
+result, that is, the manager’s eﬀort of acquiring information is independent of the incentive
+contract. Intuitively, because the manager’s portfolio choice is undertaken after the eﬀort
+is expended, he has the incentive to undo the incentive eﬀect of the linear contract. Admati
+and Pfleiderer term this as the irrelevance result. This irrelevance result challenges the
+traditional principal-agent literature in which a higher slope (b) in a linear contract typically
+induces a higher level of eﬀort (ρ) from the agent. Their result also highlights the diﬀerences
+between a traditional principal-agent model in which the agent expends eﬀort only and
+a portfolio delegation model in which the manager first expends eﬀort for information
+acquisition and then trades in the stock based on the acquired information. In our portfolio
+delegation model that features both strategic trading and endogenous stock price, we recover
+the traditional result that all else being equal, a higher b induces a higher ρ. We next discuss
+the reasons why diﬀerent results arise in the competitive model of Admati and Pfleiderer
+(1997) and our strategic equilibrium model.9
+    We first note that in a competitive partial equilibrium, the portfolio manager is a price
+
+   9
+     The discussions presented in this subsection are essentially taken from a referee report. We are extremely
+grateful to this referee for his/her significant contribution to the understanding of our model. We are of
+course responsible for any potential misunderstandings.
+
+
+
+
+                                                      13
+taker whose optimal position in the stock, after he has exerted eﬀort ρ, is given by
+
+                                 Eθ (e
+                                     ν) − P      ρ (θ − v)
+                       X (θ) =                 =           ≡ β (θ − v) ,
+                                 Ra bV arθ (e
+                                            ν)    Ra bσ 2
+
+where P is the stock price, equal to the unconditional mean v, and β is given by
+
+                                                ρ
+                                         β=           .                                  (10)
+                                              Ra bσ 2
+
+The manager’s wealth is thus given by
+
+
+                              fA = a + Eθ (e
+                              W
+                                           ν) − P
+                                                    (e
+                                                     ν − P).
+                                       Ra V arθ (e
+                                                 ν)
+
+Notice that bβ is independent of b, so the manager’s wealth does not depend on b.
+   In our strategic trading model, given a level of eﬀort ρ, the manager’s optimal position
+β in the stock is given in Equation (4). Only when λm is zero, will Equation (4) reduce to
+Equation (10). In general, because of the market impact cost associated with the manager’s
+trading, bβ is no longer independent of b. In the case of price taking, if we double b, then
+the manager would reduce his position by half given a fixed ρ, resulting in the same amount
+of eﬀective exposure (bβ) to the asset payoﬀ. In our case of strategic trading, the manager
+would leverage up or down the position less than he does in the price-taking case. Hence,
+the manager’s exposure to the risky asset payoﬀ is higher. This implies that given a higher
+incentive slope b, the manager tends to exert more information collection eﬀort ρ. We have
+performed numerous numerical calculations and confirmed that a higher b always leads to
+a higher bβ, inducing a higher ρ from the manager.
+   We present one of the calculations in Figure 1. The (red) dashed lines in Figure 1
+correspond to the competitive equilibrium of Admati and Pfleiderer (1997) in which the
+asset price is exogenously assumed (particularly λ = 0 as shown in Subplot A4) and ρ
+is independent of b. To facilitate the comparison with our model, we fix ρ to be 0.197
+in Admati and Pfleiderer, which is the optimal eﬀort level in our model without portfolio
+delegation (i.e., b = 1). From Subplot A3 of Figure 1, we can see that the optimal ρ increases
+
+
+                                              14
+with b in our model.
+   In Admati and Pfleiderer, the agent’s trading intensity β is inversely related to b. For
+example, when b converges to zero, β approaches infinity because his trading has no price
+impact. In our strategic trading case, β increases with ρ but decreases with the manager’s
+eﬀective risk aversion Ra b. Suppose the agent is very risk averse (say Ra = 2 in Figure
+1). When b is very small, Ra b remains very small initially, so β is mainly determined by ρ.
+When b increases, ρ also increases, so β and λ both increase. When b increases to a certain
+level, the eﬀect of Ra b on β dominates that of ρ. Hence, an increase in b results in lower β
+and λ. We thus arrive at the hump-shaped relationship between β (or λ) and b in Subplot
+A1 (or A4) of Figure 1.
+
+
+2.2   Information acquisition and price informativeness
+
+We next examine the impact of introducing information acquisition on the price informa-
+tiveness. To distinguish its impact from that of portfolio delegation, we assume in this
+subsection that the agent trades for his own account. Portfolio delegation will be reintro-
+duced in the next subsection. As in Kyle (1985), we define the price informativeness as the
+posterior precision of ve conditional on the equilibrium price:
+
+                                       1         1           1       1
+                         v |P )]−1 =
+              Q = [V ar (e                +                = 2+ 2               .       (11)
+                                       σ 2 σ 2 + σ 2u /β 2  σ  σ /ρ + σ 2u /β 2
+
+   Two eﬀects determine the price informativeness Q. On the one hand, holding eﬀort
+constant, an increase in noise trading or a decrease in informed trading decreases Q. In the
+Kyle model in which the informed agent is risk neutral, Q is independent of the variance
+of noise trading σ 2u . When the informed agent is risk averse, Subrahmanyam (1991) finds
+that Q decreases with σ 2u because the risk-averse trader responds less aggressively to an
+increase in σ 2u . On the other hand, an increase in eﬀort ρ not only has a direct positive
+eﬀect on Q since the private information is more accurate, but also indirectly enhances Q
+since it enables the informed agent to trade more aggressively on better information (i.e., β
+increases). We show that when the agent is suﬃciently risk tolerant (small Ra ), the second
+
+
+
+                                               15
+eﬀect can dominate the first one, hence, Q increases with σ 2u .
+       Figure 2 demonstrates the relation between Q and σ 2u for three diﬀerent values of risk
+aversion coeﬃcient (Ra = 0.1, 1, 2). Let us focus on Subplots A4—A6 for now. We will
+study Subplots A1—A3 in the next subsection after we reintroduce portfolio delegation.
+In the absence of both information acquisition and portfolio delegation, depicted by the
+(red) dashed lines in Subplots A4—A6 where eﬀort is exogenously fixed at the level of
+0.26 and b = 1, Q always decreases with σ 2u , which is consistent with the original result of
+Subrahmanyam (1991).10 When information acquisition is allowed, according to the (black)
+dash-dotted lines in Subplots A4—A6, if Ra is around 0.1, Q increases monotonically with
+σ 2u , whereas if Ra is around 1, it decreases monotonically. From unreported results, the
+relationship exhibits a hump-shape when Ra is between 0.1 and 1.
+   Absent information acquisition (ρ is fixed at 0.26, depicted by the (red) dashed line),
+                                                             √
+when noise trading increases (e.g., σ u increases by 41% from 2 to 2), Q decreases because
+the informed trader’s trading intensity β does not increase as much (e.g., it increases only
+by 33% from 0.52 to 0.69). Once information acquisition is allowed, for the same increase of
+41% in σ u , the trader is now able to exert more eﬀort to collect more accurate information.
+In particular, the level of his eﬀort increases by 19% from 0.36 to 0.43, both of which
+are higher than the fixed level of 0.26 in the absence of information acquisition. With
+more accurate information the agent trades more aggressively, increasing β by 44% from
+0.61 to 0.88. The significant increase in the informed trading, along with the increase in
+eﬀort, dominates the increase in noise trading, resulting in higher price informativeness.
+Therefore, the positive relation between price informativeness and noise trading for a small
+Ra is mainly attributable to the dramatic increase in trading intensity that is fueled by
+better information acquired due to the increase in eﬀort itself. This result highlights the
+importance of information acquisition.
+       From Subplots A5 and A6 in Figure 2 we can see that if the informed trader is more
+risk averse (say Ra = 1 or 2), Q decreases monotonically with σ 2u even when information
+
+  10
+    The exogenous eﬀort of 0.26 is the optimal eﬀort level under information acquisition and portfolio
+delegation in our baseline specification of parameters where Ra = 1, σ2 = k = 1, and σ2u = 2.
+
+
+
+                                                 16
+acquisition is allowed. This is because the informed trader has an exponential utility func-
+tion and all random variables are normally distributed, the marginal benefits of trading
+more aggressively and acquiring more accurate information decrease with Ra . When the
+informed agent is very risk averse, the increases in his eﬀort for information acquisition and
+trading aggressiveness are dominated by the increase in noise trading, resulting in a less
+informative price in equilibrium.
+    We summarize the above results in Proposition 3, whose proof is given in the appendix.
+
+Proposition 3 If Ra is suﬃciently small (or large), Q increases (or decreases) monoton-
+ically with σ 2u .
+
+
+2.3     Portfolio delegation, optimal contract, and price informativeness
+
+In this subsection we introduce portfolio delegation. Specifically, from Subplots A1—A3 in
+Figure 2, the price informativeness Q increases with σ 2u for Ra = 0.1 or 1, and Q initially
+increases but then decreases with σ 2u for Ra = 2. Subplot A5 demonstrates that without
+portfolio delegation Q generally decreases with σ 2u except for Ra = 0.1. Therefore, portfolio
+delegation allows Q to increase with σ 2u for a wider range of Ra values, due to optimal
+contracting.
+    To understand the results under portfolio delegation, we examine the expression for the
+price informativeness given in Equation (11). We can see that Q depends positively on ρ
+and β and negatively on σ 2u . Lowering the slope b in a linear contract has certain competing
+eﬀects on Q. First, a lower b leads to a lower ρ, which tends to decrease Q. This result
+obtains because a lower b reduces the manager’s share of his trading profits and thus lowers
+his incentive to expend eﬀort for information acquisition. On the other hand, a lower ρ
+induced by a lower b diminishes the manager’s informational advantage and hence has a
+direct negative eﬀect on β. But it also has an indirect positive eﬀect on β. The reason
+is that a lower ρ signals to the market makers that the quality of the manager’s private
+information is lower, which helps alleviate the market impact of the manager’s trades,
+tending to increase β indirectly. Last and importantly, lowering b reduces the eﬀective risk
+aversion (Ra b) of the manager, which has a direct positive eﬀect on β, making the price
+
+                                             17
+more informative. Which eﬀect dominates depends on the risk aversion of the manager, as
+we discuss below.
+   We first consider the case in which the manager is very risk tolerant (say Ra = 0.1).
+As σ 2u increases, if b remains the same, the manager would first exert a very high level of
+eﬀort and then trade very aggressively against the noise traders. In equilibrium, the market
+makers understand the manager’s trading behavior and would impose a very high market
+impact cost on the manager’s trades. To reduce market impact, the principal lowers b as
+σ 2u increases, as shown in Subplot A1 of Figure 3. Compared to the case without portfolio
+delegation (i.e., b = 1), the equilibrium eﬀort in our model still increases with the increase in
+noise trading, but to a less degree, as shown in Subplot A4 of Figure 3. Both more aggressive
+trading and more precise private information contribute to higher price informativeness (see
+Subplot A1 of Figure 2).
+   When the manager is more risk averse, say Ra = 1, the direct eﬀect of reducing b on his
+eﬀective risk aversion or the second term in the denominator of Equation (4) becomes more
+prominent. As such, the principal reduces b even more to make the manager eﬀectively
+less risk averse. Consequently, as σ 2u increases, the manager trades much more aggressively,
+enhancing the price informativeness. This explains the negative relationship between b and
+σ 2u in Subplot A2 of Figure 3, as well as the result on β in Subplot A8 of Figure 3. Without
+portfolio delegation, the agent’s risk aversion cannot be reduced, so his trading intensity
+does not increase as much as noise trading goes up, as illustrated in Subplot A8 of Figure
+3. Hence, the price informativeness decreases in this case (see Subplot A2 of Figure 2).
+   It becomes less profitable for the principal to lower b when the manager becomes even
+more risk averse. For example, when Ra is very large (say Ra = 2), the principal cannot
+lower b too much to reduce the agent’s eﬀective risk aversion, because doing so leads to
+little eﬀort and very poor information. As a result, when the manager is very risk averse,
+his eﬀective risk aversion can still remain high and the increase in noise trading eventually
+dominates the increase in the manager’s trading intensity, implying that Q will eventually
+decrease with σ 2u after it reaches a certain level. This explains Subplot A3 of Figure 2.
+
+
+
+
+                                               18
+3    The Extended Model With Endogenous Noise Trading
+
+In this section we extend the baseline model by endogenizing noise trading based on Spiegel
+and Subrahmanyam (1992). In the Spiegel-Subrahmanyam model, besides multiple risk-
+neutral informed traders and market makers, there are m uninformed risk-averse hedgers
+who maximize their expected utilities to hedge their endowment risk. Each hedger j has
+an endowment zej ∼ N (0, σ 2z ) of the asset, and his order for the stock is a function of zej ,
+                                                                       P
+           ej . The sum of the hedgers’ orders is denoted by u
+denoted by u                                                      e= m       ej . The hedgers
+                                                                         j=1 u
+
+have negative exponential utility with a common risk-aversion coeﬃcient Rh . Specifically,
+hedger j’s utility is given by
+
+                                                    1     h       i
+                                 UH (Vej ; zj ) = −    exp −Rh Vej ,
+                                                    Rh
+
+where given the realization of his endowment zj , Vej (uj ; zj ) is his payoﬀ given by
+
+
+                                  Vej (uj ; zj ) = e
+                                                   ν (uj + zj ) − uj pe.
+
+
+Spiegel and Subrahmanyam (1992) construct a linear equilibrium in which the optimal
+                                                   ej = γe
+strategies for the uninformed hedgers are given by u     zj .
+    We introduce portfolio delegation and study optimal contracting between a risk-neutral
+investor and a risk-averse informed agent as in the previous section. The key diﬀerence is
+that the level of noise trading is endogenously determined by the hedging demand of the
+hedgers. Therefore, when assigning a contract, the investor need consider the eﬀects of
+the contract on the hedgers’ trading intensity, as well as on the trading and pricing by the
+informed agent and market makers.
+    The timeline of the model is similar as before, except that in Stage 2 following the
+                                  f , the hedgers share the same rational belief with the
+announcement of a contract S = a+bW
+market makers that the agent would exert eﬀort ρm (b) that depends on b. And then in Stage
+4 when the informed agent chooses the optimal trading strategy, simultaneously, uninformed
+                                                                ej = Uj (zj ; ρm , b) to market
+hedger j chooses his optimal trading strategy and submits order u
+
+
+
+                                                   19
+makers, j = 1, · · · , m. Following Spiegel and Subrahmanyam (1992), we assume that all
+hedgers are identical but their initial endowments are independently distributed. Therefore,
+symmetric equilibrium trading strategies exist where they have identical equilibrium trading
+strategies: Uj (·; ρm , b) ≡ U (·; ρm , b), ∀ j.
+    Specifically in Stage 4, hedger j’s payoﬀ Vj is given by
+
+                                               ³                               P        ´
+  Vj = νe (uj + zj ) − uj P = e
+                              ν (uj + zj ) − uj v + λm β m (θ − v) + λm uj + λm k6=j γzk .
+
+
+Conditional on zj , Vj is normally distributed with the mean and the variance given as
+follows:
+
+
+        E [Vj |zj ] = vzj − λm (uj )2 ,
+
+    V ar [Vj |zj ] = ((1 − λm β m ) uj + zj )2 σ 2 + (uj λm β m )2 σ 2 + (m − 1) (uj λm γ)2 σ 2z .
+
+
+Hedger j’s optimal trading strategy uj = U (zj ; ρm , b) maximizes his expected utility or
+equivalently maximizes E [Vj |zj ] − 0.5Rh V ar [Vj |zj ]. The first-order condition is given by
+
+   n                                               h                                     io
+−Rh ((1 − λm β m ) uj + zj ) (1 − λm β m ) σ 2 + uj (λm β m )2 σ 2 + (m − 1) (λm γ)2 σ 2z = 2λuj .
+
+
+Therefore, we have
+
+                                                   Rh (1 − λm β m ) σ 2 zj
+ u∗j = U (zj ; ρm , b) = −             h                                                           i
+                               2λm + Rh (1 − λm β m )2 σ 2 + (λm β m )2 σ 2 + (m − 1) (λm γ)2 σ 2z
+      ≡ γ m (ρm , b) zj ,
+
+
+where
+
+                                            Rh (1 − λm β m ) σ 2
+    γ m (ρm , b) = −           h                                                           i.        (12)
+                       2λm + Rh (1 − λm β m )2 σ 2 + (λm β m )2 σ 2 + (m − 1) (λm γ)2 σ 2z
+
+    The informed agent’s trading strategy and the market makers’ pricing function are
+
+
+
+
+                                                   20
+similar as before, except that σ 2u is now replaced by mγ 2m σ 2z , that is,
+
+                                                   βm
+                     λm (ρm , b) =       2                               ,                 (13)
+                                       β m (1 + 1/ρm ) + mγ 2m σ 2z /σ 2
+                                                    ρ/ (1 + ρ)
+                    β (ρ; ρm , b) =                                               .        (14)
+                                       2λm + Ra b[σ 2 /(1 + ρ) + λ2m mγ 2m σ 2z ]
+
+The agent’s optimal eﬀort choice problem and the principal’s optimization problem have
+the same functional forms as in Equations (5), (8), and (9).
+    The solution procedure is similar as before. For a given b, we start with an initial guess
+                                                               q ¡       ¢2
+ (0)                                                     (0)
+γ = −1. Treating the implied level of noise trading σ u = m γ (0) σ 2z as exogenously
+given, we can then follow the methodology for the case of exogenous noise trading to solve
+for β (0) (b) and λ(0) (b), based on which we next obtain an updated value γ (1) from Equation
+(12). If γ (1) is equal to γ (0) , then we are done; otherwise, repeat the previous steps until
+γ (0) , γ (1) , · · · converge. Upon convergence, we arrive at the optimal response functions
+β ∗ (b), λ∗ (b), and γ ∗ (b) for a given b. Lastly, we maximize the principal’s expected utility
+to solve for the optimal b∗ within the interval of [0, 1].
+
+
+3.1    A recap of Spiegel and Subrahmanyam (1992)
+
+For convenience of comparison, we report the main results of Spiegel and Subrahmanyam
+when there is only one risk-neutral informed trader.
+
+Proposition 4 If
+                                        ¡          ¢2  ¡         ¢
+                               Rh2 mσ 2z σ 2 + 2σ 2 > 4 σ 2 + σ 2 ,                        (15)
+
+then the unique linear equilibrium is given by
+                                      £                        ¤
+                               Rh σ 2 (2m − 1) /mσ 2 + 4σ 2
+                  λ =  p         h                             p          i,               (16)
+                      4 σ 2 + σ 2 Rh m1/2 σ z (σ 2 + 2σ 2 ) − 2 σ 2 + σ 2
+                       h           ¡          ¢     p          i
+                      2 Rh m1/2 σ z σ 2 + 2σ 2 − 2 σ 2 + σ 2
+                  β =      p                                     ,                         (17)
+                        Rh σ 2 + σ 2 [(2m − 1) /mσ 2 + 4σ 2 ]
+                         h           ¡          ¢     p           i
+                        2 Rh m1/2 σ z σ 2 + 2σ 2 − 2 σ 2 + σ 2
+                  γ = −      √                                      .                      (18)
+                           Rh mσ z [(2m − 1) /mσ 2 + 4σ 2 ]
+
+                                                 21
+Moreover, the stock price informativeness Q is given by
+                                              ¡         ¢
+                                    −1     β 2 σ 2 + σ 2 + mγ 2 σ 2z 1   1
+               Q = [V ar (e
+                          v |P )]        =      £ 2            ¤ = 2+ 2         .                 (19)
+                                              2      2
+                                             σ β σ + mγ σ z2 2       σ σ + 2σ 2
+
+Proof. See the proof of Proposition 1 in Spiegel and Subrahmanyam (1992).
+    Note that when a hedger is more risk averse (i.e., Rh is larger) or his endowment is
+more volatile (i.e., σ z is larger), his hedging demand is higher (i.e., |γ| and V ar (uj ) are
+both larger). In a limiting case in which there is one hedger (i.e., m = 1), who is infinitely
+                                                  2        2
+risk averse (i.e., Rh = ∞), we have γ = − 2σ  +4σ
+                                           σ2 +4σ2
+                                                   . This case corresponds to the Kyle (1985)
+                                                        P
+model with exogenous noise trading when we let u    e= m       ej ∼ N (0, σ 2u ) with σ 2u = γ 2 σ 2z .
+                                                           j=1 u
+
+    Because the risk-averse hedgers are uninformed about the stock payoﬀ, an increase in
+the uninformed hedging demand decreases Q. On the other hand, when the uninformed
+hedging demand increases, the informed trader will increase his demand to take advantage
+of the uninformed trading, which increases Q. When the informed trader is risk neutral,
+the two eﬀects oﬀset each other exactly, so that Q is independent of m, Rh , and σ z , as given
+in Equation (19).
+
+
+3.2    Will the market break down?
+
+In the Spiegel-Subrahmanyam model the market breaks down when the condition in Equa-
+tion (15) is violated. Specifically, this condition requires that Rh , σ 2z , or m be large enough
+for an equilibrium to exist. In their model, the risk-averse noise traders face an endowment
+risk. On the one hand, they would like to hedge this risk, but on the other hand, they would
+not like to lose to the informed trader. Hence, their trade-oﬀ is between the utility gain
+from hedging the endowment risk and the utility loss from losing to the informed trader.
+For example, if the risk aversion or the endowment risk of the noise traders is very low
+and if the quality of the informed trader’s private information is very high, then the noise
+traders would not take any position in the stock to avoid losing to the informed trader. As
+a result, the market would break down.
+    We observe that the possibility of the market break-down in Spiegel and Subrahmanyam
+
+
+
+                                                      22
+(1992) is due to the absence of information acquisition. We show that once information
+acquisition is allowed, there always exists a linear equilibrium. The reason is that even if
+there is not suﬃcient noise trading to support an equilibrium for a given σ 2 , the informed
+agent is aware of this and will optimally lower his eﬀort to become less informed, resulting
+in a higher σ 2 . The agent’s eﬀort choice is correctly anticipated ex ante by the hedgers and
+market makers. Therefore, an equilibrium always exists no matter how small Rh , σ 2z , or
+m might be, as long as the hedgers are risk averse (Rh > 0).11 This result highlights the
+important role of information acquisition.
+      To illustrate this point, we conduct an asymptotic analysis regarding Rh in a special
+case in which Ra = 0 and m = 1. We show that as long as Rh is strictly positive, no matter
+how close Rh is to zero, there always exists an equilibrium under information acquisition.
+
+Proposition 5 With endogenous information acquisition, no matter how small Rh is, there
+always exists an equilibrium. The equilibrium solutions have the following asymptotic ex-
+pressions:
+
+                                                              ¡       ¢−1 −2
+           ρ∗ ≈ σ 2 σ 2z Rh2 ,   β ∗ ≈ 2kσ 2 σ 4z Rh4 ,   λ∗ ≈ 4kσ 2z    Rh ,    γ ∗ ≈ −2kσ 2 σ 2z Rh3 .
+
+
+      Figure 4 depicts the optimal response functions with respect to Rh that is between 0
+and 5. Unless otherwise specified, we use σ 2 = 1, k = 1, σ 2z = 5, and m = 1, similar
+to those used by Spiegel and Subrahmanyam (1992). This figure confirms the asymptotic
+expressions in the proposition above for small Rh (e.g., Rh < 0.01). The optimal response
+functions depicted in Figure 4 have an intuitive interpretation. As Rh becomes smaller, the
+hedger becomes less risk averse and thus has less motive to hedge, which implies less noise
+trading, i.e., smaller |γ|. In anticipation of this, the informed agent scales back his eﬀort
+and trading intensity, and the market makers decrease λ.
+      We next prove the existence of an equilibrium in the general case. The sketch of the
+proof is as follows. First, from the existence of an equilibrium in the case of exogenous noise
+trading shown in Proposition 2, given a value γ < 0, if we define σ 2u ≡ mγ 2 σ 2z , there always
+
+ 11
+      Intuitively, the condition in Equation (15) can always be satisfied by increasing σ2 .
+
+
+                                                           23
+exists a set of solutions β (γ), λ (γ), and ρ (γ) to Equations (3), (4), (6), and (7). Second,
+if we denote the right-hand side of Equation (12) as an operator T (γ), that is,
+
+                                           Rh (1 − λ (γ) β (γ)) σ 2
+T (γ) ≡ −               h                                                                             i,
+             2λ (γ) + Rh (1 − λ (γ) β (γ))2 σ 2 + (λ (γ) β (γ))2 σ 2 /ρ (γ) + (m − 1) (λ (γ) γ)2 σ 2z
+
+then we prove that there exists a fixed point γ ∗ < 0, such that T (γ ∗ ) = γ ∗ . Hence, the
+optimal responses are given by ρ∗ = ρ (γ ∗ ), β ∗ = β (γ ∗ ), and λ∗ = λ (γ ∗ ). To prove the
+existence of the fixed point, we must show that there exist γ a and γ b , such that γ b < γ a < 0,
+T (γ a ) < γ a , and T (γ b ) > γ b .
+    In contrast, in Spiegel and Subrahmanyam (1992) where ρ is exogenously fixed, γ a that
+satisfies T (γ a ) < γ a does not always exist. Consequently, the condition in Equation (15) is
+needed to ensure the existence of γ a .
+
+Proposition 6 With endogenous information acquisition, there always exists an equilib-
+rium.
+
+
+3.3     Incentives, eﬀort, and price informativeness
+
+Notice that the informed manager’s trading intensity β, as expressed in Equation (14), takes
+the same form as in Equation (4). Due to the presence of market impact, the manager cannot
+leverage up or down as much as in Admati and Pfleiderer (1997). As a result, bβ increases
+with b. Consequently, we find that higher incentives lead to higher eﬀort, as in the case of
+exogenous noise trading.
+    Subplot A3 of Figure 1 presents one of the calculations. For a given b, the optimal ρ
+in the current case is lower than that in the case of exogenous noise trading whose results
+are depicted by the (blue) solid lines. The intuition is the following. When b is close to
+zero, there is little private information or informed trading because ρ and β are both close
+to zero. In this case, the uncertainty about the asset’s liquidation value is very high and
+the informed trading is very low, allowing the uninformed hedgers to almost fully hedge
+
+
+
+
+                                                  24
+their endowments, that is, γ is close to −1.12 For any positive b, there is positive informed
+trading, the hedgers do not fully hedge their endowments due to adverse selection, resulting
+in less noise trading. As a result, the market is less liquid than in the case of exogenous
+noise trading, as shown in Subplot A4 of Figure 1. The informed agent’s trading intensity
+β is thus lower, so is his exposure to the risky asset payoﬀ, bβ, as shown in Subplots A2 and
+A3. Consequently, the agent exerts lower eﬀort than in the case of exogenous noise trading.
+       The optimal contract and price informativeness depend critically on the properties of
+the uninformed hedgers, such as, the number of hedgers (m), their endowment risk (σ 2z ),
+and their risk aversion coeﬃcients (Rh ). For example, we obtain that b decreases as m
+increases, similar to the negative relationship between b and σ 2u in the case of exogenous
+noise trading as shown in Subplots A1-A3 of Figure 3. We have demonstrated that when m
+is fixed, bβ increases with b. When noise trading or m goes up, increasing b is not optimal
+for two reasons. Given a higher b and a higher m, the manager exerts a much higher level
+of eﬀort ρ for private information. This would not only increase the market impact cost
+on the manager’s trade but also reduce the uninformed hedgers’ incentive to trade, both of
+which reduce the manager’s trading profit. Consequently, when the number of uninformed
+hedgers goes up, lowering incentives is optimal for the principal.
+       In addition, one of the main results in the case of exogenous noise trading is that the
+price informativeness Q generally increases (decreases) with the level of noise trading if Ra
+is small (large) enough. We next demonstrate that this result still holds when noise trading
+is endogenized.
+       We can express the price informativeness as
+                                             ¡         ¢
+                                   −1     β 2 σ 2 + σ 2 + mγ 2 σ 2z   1         1
+               Q = [V ar (e
+                          v |P )]       =      £ 2                ¤ = 2+                      .          (20)
+                                            σ 2 β σ 2 + mγ 2 σ 2z    σ   σ 2 + mγ 2 σ 2z /β 2
+
+  12
+       Mathematically, when b is small enough, we have
+                                              
+                                          2kA2                   σ2 b1/3                       b1/3
+             ρ∗ (b) ≈ Ab2/3 , β ∗ (b) ≈      2
+                                                 b1/3 , λ∗ (b) ≈         ,   γ ∗ (b) ≈ −1 +          ,
+                                           σ                      4kA                         2kRh A
+              √   2/3
+             mσσ z
+where A =     2k
+                        . In the limiting case where b = 0, we obtain that γ ∗ = −1. In Figure 1, we choose
+m = 1 and σ2z = σ2u = 2 so that the noise levels in both cases of endogenous and exogenous noise trading
+are the same when b = 0.
+
+
+                                                       25
+Figure 5 illustrates the relationship between Q and m. In Spiegel and Subrahmanyam
+(1992) where eﬀort ρ is exogenously fixed and the informed agent is risk neutral, Q, as
+given in Equation (19), is independent of m. Subplot A1 confirms this independence result.
+Subplots A2 and A3 show that when the informed agent is risk averse, Q decreases with m;
+the more risk averse the informed agent, the more quickly Q decreases. This result makes
+sense because a risk-averse informed agent does not trade as aggressively as a risk-neutral
+one, and the less aggressive informed trading makes the price less informative.
+       The results for endogenous eﬀort are reported in the second column of Figure 5. When
+the informed agent is risk neutral, Q increases with m, as shown in Subplot B1. On the one
+hand, trading by more uninformed hedgers makes the price less informative. On the other
+hand, with more uninformed hedgers in the market, the informed agent can potentially
+profit more from trading against the uninformed hedgers. The informed agent thus exerts
+more eﬀort in acquiring more accurate information. More aggressive trading by the informed
+agent with more accurate information leads to higher price informativeness.13 The second
+eﬀect dominates the first one, so Q increases with m.
+       When the informed agent’s risk aversion is low, say Ra = 0.1, Q increases with m initially
+when m is small. When m becomes large enough, the first eﬀect dominates the second one,
+driving down Q. When we further introduce portfolio delegation and when Ra = 0.1, Q
+increases monotonically with m, as opposed to increasing initially and decreasing later in
+the absence of portfolio delegation. As we discussed earlier, the optimal b decreases with m.
+Hence, with optimal contracting, the eﬀective risk aversion of the informed agent decreases
+as the number of uninformed hedgers increases. In equilibrium, the second eﬀect dominates
+the first one, leading to higher price informativeness. When Ra becomes large, we cannot
+lower b too much because with a low b, the agent’s eﬀort for information will be low. As
+a result, the eﬀective risk aversion of the informed agent, Ra b, remains at a certain level,
+which limits the informed agent’s trading intensity or the amount of private information
+being incorporated into the price. Consequently, when the informed agent is suﬃciently
+
+  13
+    Under diﬀerent settings, Fishman and Hagerty (1992) and Leland (1992) discuss the impact of insider
+trading on the price informativeness.
+
+
+
+                                                  26
+risk averse, the eﬀect of uninformed trading will dominate that of the informed trading,
+driving down the price informativeness, as shown in Subplot C2 of Figure 5.
+
+
+4     Further Discussions
+
+In this section, we extend the model to include a risk-averse principal as well as discuss the
+empirical implications of our model.
+
+
+4.1   Risk-averse Principal
+
+When the principal is risk averse, the solution techniques are essentially the same as those
+for a risk-neutral principal. The expressions for the equilibrium λ, β, and ρ take the same
+forms as in Proposition 1. Due to the risk aversion of the principal, his objective function
+                                                       f ]. This term does not introduce
+contains an additional variance term, 1/2(1 − b)2 V ar[W
+much diﬃculty in our calculations.
+    For simplicity, we consider the case of exogenous noise traders and find that the results
+remain qualitatively the same. For example, Figure 6 demonstrates that when the agent’s
+risk aversion is relatively small, the price informativeness increases with, the agent’s incen-
+tive and market liquidity decrease with, and the agent’s eﬀort and trading intensity increase
+with the amount of noise trading, as in the case of a risk-neutral principal. Due to the risk
+sharing between the principal and the manager, the optimal incentive slope b increases with
+the principal’s risk aversion.
+
+
+4.2   Empirical Implications
+
+Our model shows that an increase in noise trading may make the stock price more informa-
+tive; and importantly, the presence of portfolio delegation makes this positive relationship
+more likely to hold. We identify two natural experiments in which there is an exogenous
+increase in the level of noise trading.
+    The first experiment is the addition of stocks to a stock index (e.g., S&P 500 or Russell
+1000). We investigate the price informativeness of a stock before and after its addition
+
+
+                                              27
+into the index. After a stock is added into an index, the passive index funds, whose trades
+are considered uninformed, will be required to purchase the stock. Hence, there will be
+an increase in uninformed trading in the stock. A traditional microstructure model would
+conclude that due to increased uninformed trading, the price informativeness will decrease
+after a stock is added to the index. In our model, however, with more uninformed trading,
+investors, particularly active portfolio managers will have more incentives to acquire private
+information. They will then trade more aggressively in the stock, which increases the price
+informativeness. Cross-sectionally, controlling for other factors, our model predicts a stock
+with higher institutional ownership to experience a less decrease or even an increase in its
+price informativeness following its addition. We propose the following panel regression to
+test this prediction:
+
+
+                Qi,t = a + b ∗ Additioni,t + c ∗ IOi,t × Additioni,t + other terms,
+
+
+where Qi,t is a measure of price informativeness for stock i at time t,14 and Additioni,t is a
+dummy variable which equals zero (or one) before (at and after) the date when the stock
+is added to the index, and IOi,t is stock i’s institutional ownership. IOi,t measures the
+extent of portfolio delegation. According to our model, holding everything else equal, the
+same increase in noise trading results in less decrease in the price informativeness for stocks
+with higher institutional ownership. That is, the coeﬃcient for the interaction term c is
+predicted to be positive. Furthermore, a positive (b + c ∗ IOi,t ) is also consistent with our
+model, implying that the price informativeness may even increase with noise trading.
+       The second natural experiment is the passage of a country’s first-time enforcement of
+insider trading laws. Fernandes and Ferreira (2009) test the relation between a country’s
+first-time enforcement of insider trading laws and stock price informativeness, as measured
+by idiosyncratic stock return variation.15 They find that enforcement of insider trading laws
+
+  14
+     For various price informativeness measures, see, for example, French and Roll (1986), Roll (1988),
+Kothari and Sloan (1992), Hasbrouck (1993), Easley, Kiefer, and O’Hara (1997), Llorente, Michaely, Saar,
+and Wang (2002), and Durnev, Morck, Yeung, and Zarowin (2003).
+  15
+     French and Roll (1986) and Roll (1988) argue that idiosyncratic stock return variation measures the rate
+of information incorporation into stock prices through trading. This measure can be estimated by 1 − R2 ,
+
+
+                                                     28
+improves price informativeness in developed countries, but it does not lead to significant
+improvement in emerging market countries. They cast their findings as a puzzle for the
+traditional microstructure models. Their reasoning is that with the enforcement of insider
+trading laws, more investors will have incentives to become informed, which should lead to
+higher price informativeness across markets including emerging markets.
+    We argue that in developed countries, there are more institutions that trade on behalf
+of individual investors. When there is less insider trading due to the enforcement of insider
+trading laws, there will be more liquidity trading. The reason is that the uninformed hedgers
+will be more likely to hedge their liquidity risk when they are less likely to lose to inside
+traders. There will also be more informed trading by institutions because they have more
+incentives to acquire private information when insider trading declines. Our model shows
+that given the same increase in noise trading, portfolio delegation results in higher price
+informativeness because a portfolio manager trades more aggressively in the stock than an
+investor who trades for himself. Hence, our model can potentially provide an explanation
+for the empirical result of Fernandes and Ferreira (2009).
+    We can further test our model with an extension to the empirical setup of Fernandes
+and Ferreira (2009) in which they test
+
+
+                          Qi,t = a + b ∗ Enf orcementi,t + other terms,
+
+
+where Enf orcementi,t is a dummy variable that takes the value of one in the year of country
+i’s first insider trading enforcement case and thereafter, and zero otherwise. According to
+our results on portfolio delegation, we can add an interaction term, IOi,t × Enforcementi,t .
+Our model predicts a positive coeﬃcient for this interaction term.
+    Our model can also be used to explain certain empirical findings, which present chal-
+lenges to the traditional microstructure models. For example, in the Kyle-type models both
+the price informativeness Q and the price impact λ decrease with the level of noise trading.
+As a result, one would expect that the correlation between Q and λ is positive. Saar and
+
+where R2 is from a regression of the firm’s return on the systematic returns.
+
+
+
+                                                    29
+Yu (2002) test this implication. They find that “despite our expectation that more trading
+by investors who are informed about future cash flows would increase the informativeness
+of prices with respect to future earnings,16 the two permanent price impact measures seem
+to be either negatively correlated or not significantly correlated with the measures of price
+informativeness.” Based on this finding, they cast doubt on the role of the price impact
+measures in describing information asymmetry. Our result that Q may increase with σ 2u
+suggests that the correlation between Q and λ may be negative, which provides a potential
+explanation for the empirical result of Saar and Yu (2002).
+
+
+5    Conclusion
+
+This paper highlights the importance of developing an integrated model of portfolio delega-
+tion and strategic trading. An equilibrium always exists in our integrated model. We find
+that when the risk aversion of the informed manager is small (large), the price informative-
+ness increases (decreases) with the number, the risk aversion, and the endowment risk of
+the uninformed hedgers. We also find that all else being equal, higher incentives lead to
+higher eﬀort levels. These results diﬀer significantly from those derived from pure strategic
+trading models or portfolio delegation models under competitive trading.
+    In conclusion, our model may be viewed as a first step towards the integration of portfolio
+delegation and strategic trading. For tractability, we consider only a one-period model. It
+would be of great interest to develop an integrated model in multiple periods.
+
+
+
+
+  16
+     See, for example, Kothari and Sloan (1992) and Durnev, Morck, Yeung, and Zarowin (2003) for the
+development of this measure.
+
+
+                                                30
+References
+Admati, A., and P. Pfleiderer, 1988, A theory of intraday patterns: Volume and price
+variability, Review of Financial Studies, 1, 3—40.
+
+Admati, A., and P. Pfleiderer, 1997, Does it all add up? Benchmark and the compensation
+of active portfolio managers, Journal of Business, 70, 323—350.
+
+Allen, F., 1990, The market for information and the origin of financial intermediation,
+Journal of Financial Intermediation, 1, 3—30.
+
+Allen, F., 2001, Do financial institutions matter, Journal of Finance, 56, 1165—1175.
+
+Back, K., 1992, Insider trading in continuous time, Review of Financial Studies, 5, 387—409.
+
+Back, K., H. Cao, and G. A. Willard, 2000, Imperfect competition among informed traders,
+Journal of Finance, 55, 2117—2155.
+
+Bennett, J. A., R. W. Sias, and L. T. Starks, 2003, Greener pastures and the impact of
+dynamic institutional preferences, Review of Financial Studies, 16, 1203—38.
+
+Bhattacharya, S., and P. Pfleiderer, 1985, Delegated portfolio management, Journal of
+Economic Theory, 36, 163—187.
+
+Cadenillas, A., J. Cvitanic, and F. Zapatero, 2007, Optimal risk-sharing with eﬀort and
+project choice, Journal of Economic Theory, 133, 403—440.
+
+Cvitanic, J., X. Wan, and J. Zhang, 2006, Optimal contracts in continuous-time models,
+Journal of Applied Mathematics and Stochastic Analysis, 2006, 1—27
+
+DeMarzo, P. M., and B. Urosevic, 2006, Ownership dynamics and asset pricing with a large
+shareholder, Journal of Political Economy, 114, 774—815.
+
+Ding, F., S. Gervais, and A. S. Kyle, 2008, Institutional trading: Design making and em-
+ployee compensation, Work in progress, HKUST, Duke, and Maryland.
+
+Dow, J., and G. Gorton, 1997, Noise trading, delegated portfolio management, and economic
+welfare, Journal of Political Economy, 105, 1024—1050.
+
+Durnev, A., R. Morck, B. Yeung, and P. Zarowin, 2003, Does greater firm-specific return
+variation mean more or less informed stock pricing? Journal of Accounting Research, 41,
+797—836.
+
+Dybvig, P. H., H. K. Farnsworth, and J. N. Carpenter, 2010, Portfolio performance and
+agency, Review of Financial Studies, 23, 1—23.
+
+Easley, D., N. M. Kiefer, and M. O’Hara, 1997, One day in the life of a very common stock,
+Review of Financial Studies, 10, 805—835.
+
+
+
+                                            31
+Easley, D., and M. O’Hara, 1987, Price, trade size, and information in securities markets,
+Journal of Financial Economics, 19, 69—90.
+
+Fishman, M. J., and K. Hagerty, 1992, Insider trading and the eﬃciency of stock prices,
+RAND Journal of Economics, 23, 106—122.
+
+Foster, F. D., and S. Viswanathan, 1996, Strategic trading when agents forecast the forecasts
+of others, Journal of Finance, 51, 1437—1478.
+
+French, K., and R. Roll, 1986, Stock return variances: The arrival of information and the
+reaction of traders, Journal of Financial Economics, 17, 5—26.
+
+Garcia, D., and J. M. Vanden, 2008, Information acquisition and mutual funds, Working
+paper, UNC and Penn State.
+
+Glosten, L., 1989, Insider trading, liquidity, and the role of the monopolist, Journal of
+Business, 62, 211—235.
+
+Glosten, L., and P. Milgrom, 1985, Bid, ask, and transaction prices in a specialist market
+with heterogeneously informed traders, Journal of Financial Economics, 13, 71—100.
+
+Gompers, P. A., and A. Metrick, 2001, Institutional investors and equity prices, Quarterly
+Journal of Economics, 116, 229—59.
+
+Grossman, S. J., and O. Hart, 1983, An analysis of the principal-agent problem, Economet-
+rica, 51, 7—45.
+
+Guo, M., and H. Ou-Yang, 2006, Incentives and performance in the presence of wealth
+eﬀects and endogenous risk, Journal of Economic Theory, 129, 150—191.
+
+Harris, M., and A. Raviv, 1979, Optimal incentive contracts with imperfect information,
+Journal of Economic Theory, 20, 231—259.
+
+Hasbrouck, J., 1993, Assessing the quality of a security market: A new approach to
+transaction-cost measurement, Review of Financial Studies, 6, 191—212.
+
+He, Z., 2009, Optimal executive compensation when firm size follows geometric brownian
+motion, Review of Financial Studies, 22, 859—892.
+
+Holden, C. W., and A. Subrahmanyam, 1992, Long-lived private information and imperfect
+competition, Journal of Finance, 47, 247—270.
+
+Holmstrom, B., 1979, Moral hazard and observability, Bell Journal of Economics, 10, 74—91.
+
+Holmstrom, B., and P. Milgrom, 1987, Aggregation and linearity in the provision of in-
+tertemporal incentives, Econometrica, 55, 303—328.
+
+Holmstrom, B., and J. Tirole, 1993, Market liquidity and performance monitoring, Journal
+of Political Economy, 101, 678—709.
+
+                                             32
+Jones, C. M., and M. L. Lipson, 2004, Are retail orders diﬀerent? Working paper, Columbia
+University.
+
+Ju, N., and X. Wan, 2008, Optimal compensation and pay-performance sensitivity in a
+continuous-time principal-agent model, Working paper, HKUST.
+
+Kihlstrom, R. E., 1988, Optimal contracts for security analysts and portfolio managers,
+Studies in Banking and Finance, 5, 291—325.
+
+Kothari, S. P., and R. G. Sloan, 1992, Information in prices about future earnings: Im-
+plications for earnings reseponse coeﬃcients, Journal of Accounting and Economics, 15,
+143—171.
+
+Kyle, A. S., 1981, An equilibrium model of speculation and hedging, University of Chicago,
+unpublished Ph.D. dissertation.
+
+Kyle, A. S., 1985, Continuous auctions and insider trading, Econometrica, 53, 1315—1335.
+
+Lee, S., 2008, Market liquidity, active investment, and markets for information, Working
+paper, NYU.
+
+Leland, H. E., 1992, Insider trading: Should it be prohibited? Journal of Political Economy,
+100, 859—887.
+
+Li, W., and A. Tiwari, 2009, Incentive contracts in delegated portfolio management, Review
+of Financial Studies, 22, 4681—4714.
+
+Llorente, G., R. Michaely, G. Saar, and J. Wang, 2002, Dynamic volume-return relation of
+individual stocks, Review of Financial Studies, 15, 1005—1047.
+
+Mendelson, H., and T. I. Tunca, 2004, Strategic trading, liquidity, and information acqui-
+sition, Review of Financial Studies, 17, 295—337.
+
+Mirrlees, J., 1976, The optimal structure of incentives and authority within an organization,
+Bell Journal of Economics, 7, 105—131.
+
+Morck, R., B. Yeung, and W. Yu, 2000, The information content of stock markets: Why
+do emerging markets have synchronous stock price movements? Journal of Financial Eco-
+nomics, 58, 215—60.
+
+Ou-Yang, H., 2003, Optimal contracts in a continuous-time delegated portfolio management
+problem, Review of Financial Studies, 16, 173—208.
+
+Ou-Yang, H., 2005, An equilibrium model of asset pricing and moral hazard, Review of
+Financial Studies, 18, 1253—1303.
+
+Prendergast, C., 2002, The tenuous trade-oﬀ between risk and incentives, Journal of Polit-
+ical Economy, 110, 1071—1102.
+
+
+                                             33
+Roll, R., 1988, R2 , Journal of Finance, 43, 541-566.
+
+Ross, S. A., 1973, The economic theory of agency: the principal’s problem, American
+Economic Review, 63, 134—139.
+
+Ross, S. A., 1974, On the economic theory of agency and the principal of similarity, in
+Essays on Economic Behavior under Uncertainty, ed. by M. Galch, D. McFadden, and S.
+Wu, North Holland, Amsterdam.
+
+Saar, G., and L. Yu, 2002, Information asymmetry about the firm and the permanent price
+impact of trades: Is there a connection? Working paper, NYU.
+
+Sannikov, Y., 2008, A continuous-time version of the principal-agent problem, Review of
+Economic Studies, 75, 957—984.
+
+Schattler, H., and J. Sung, 1993, The first-order approach to the continuous-time principal-
+agent problem with exponential utility, Journal of Economic Theory, 61, 331—371.
+
+Spiegel, M., and A. Subrahmanyam, 1992, Informed speculation and hedging in a noncom-
+petitive securities market, Review of Financial Studies, 5, 307—329.
+
+Starks, L. T., 1987, Performance incentive fees: An agency theoretic approach, Journal of
+Financial and Quantitative Analysis, 22, 17-32.
+
+Stoughton, N. M., 1993, Moral hazard and the portfolio management problem, Journal of
+Finance, 48, 2009—2028.
+
+Subrahmanyam, A., 1991, Risk aversion, market liquidity, and price eﬃciency, Review of
+Financial Studies, 4, 417—441.
+
+Vayanos, D., 2001, Strategic trading in a dynamic noisy market, Journal of Finance, 56,
+131—171.
+
+
+
+
+                                             34
+Appendix
+Proof of Proposition 1. In Stage 5, market makers determine the asset price under
+their prior about the agent’s eﬀort and the conjecture about the agent’s trading strategies.
+In particular, they believe that the agent spent eﬀort ρm in Stage 3, and conjecture the
+agent’s trading strategy as x = X (θ; ρ = ρm , ρm , b) = β m (ρm , b) (θ − v). The competitive,
+risk-neutral, market makers set the asset price to equal the expectation of its liquidation
+value conditioning on the total order flow under the belief ρm . By Bayes rule the posterior
+density function, f (e
+                     v |y ), is normally distributed and its mean is given by
+
+                                  P (y; ρm , b) ≡ v + λm (ρm , b) y,
+
+where λm (ρm , b) is given in Equation (3).
+   In Stage 4, the informed agent’s maximization problem is
+               ∙                      ¸       ∙                        ¸
+                          1                           f     1 2     f
+         max Eθ (S) − Ra V arθ (S) = max a + bEθ (W ) − Ra b V arθ (W ) ,
+           x              2                 x               2
+
+      f = x (e
+where W         ν − P ) = x[e ν − v − λm x − λm u                      f ) = xEθ (e
+                                                     e]. Note that Eθ (W              ν − v) − λm x2 ,
+           f ) = x2 [V arθ (e
+and V arθ (W                ν ) + λ2m σ 2u ]. Hence, the agent’s maximization problem becomes
+                   ∙                                                                ¸
+                                2                       1   2 2              2 2
+               max a − bλm x + bxEθ (e        ν − v) − Ra b x [V arθ (e
+                                                                      ν ) + λm σ u ] .
+                 x                                      2
+
+Therefore, the agent’s optimal trading strategy is given by
+                                     ¡          ¢
+                                σ2 / σ2 + σ2
+       X (θ; ρ, ρm , b) =                                    (θ − v) ≡ β (ρ, ρm , b) (θ − v) .
+                                            ν ) + λ2m σ 2u ]
+                          2λm + Ra b[V arθ (e
+
+Hence, the expression for β (ρ, ρm , b) in Equation (4) is derived. Under his optimal trading
+strategy, the agent’s expected utility, after exerting eﬀort ρ and obtaining signal eθ = θ, is
+given by
+                                            ∙                                      ¸
+                                      −1                         Ra bρβ          2
+            U A (x; θ, ρ, ρm , b) = −Ra exp Ra C (ρ) − Ra a −             (θ − v) .
+                                                                2 (1 + ρ)
+
+    In Stage 3, the agent chooses the optimal eﬀort. His expected utility is equal to
+
+                                                   exp(Ra C (ρ) − Ra a)
+                             U A (ρ; b, ρm ) = −       p                .                        (21)
+                                                     Ra Ra bσ 2 β + 1
+
+Diﬀerentiating the right-hand side of the above equation with respect to ρ, we obtain the
+first-order condition as shown in Equation (5). The first (total) derivative of β with respect
+to ρ is derived below:
+                           dβ          £          ¡              ¢¤
+                              = β 2 ρ−2 2λm + Ra b λ2m σ 2u + σ 2 > 0.                           (22)
+                           dρ
+
+                                                   35
+Substituting Equation (22) into Equation (5), we obtain the result in Equation (6).
+    In Stage 2, the market makers rationally anticipate the agent’s optimal eﬀort in Stage
+3. That is, ρm is chosen such that ρ∗ = ρm in Stage 3. We can thus omit the subscript
+“m” hereafter. In Stage 1, we solve the principal’s optimization problem to determine the
+optimal contract. Specifically, a is chosen to satisfy the agent’s participation constraint,
+and then b is chosen to maximize the principal’s expected utility. To satisfy the individual
+participation constraint, we substitute the optimal ρ∗ and β ∗ back into Equation (21) and
+set the maximum expected utility to the agent’s reservation utility. We have
+                                             µ                    ¶
+                               1                        1      ∗2
+                     − p                  exp −Ra a + Ra kρ         =U
+                       Ra Ra bβ ∗ σ 2 + 1               2
+
+which implies Equation (9). Given the expression for a in Equation (9), we can show that
+the risk-neutral principal’s optimization problem is the one stated in Equation (8).
+
+Proof of Proposition 2. Proving the existence and uniqueness of the equilibrium starting
+from Stage 2 is equivalent to proving that for a given b there exists a unique set of solutions
+(ρ∗ , β ∗ , λ∗ ) to the system of equations (3), (4), (6), and (7). The proof proceeds in two
+steps. In the first step, we prove that holding b and an arbitrary ρm ≥ 0 fixed, under the
+belief ρ = ρm , the solutions to Equations (3) and (4), denoted by β m (ρm , b) and λm (ρm , b),
+exist and are unique. In fact, if we substitute the expression of λ from Equation 3 into
+Equation 4 and replace ρ by ρm , then we obtain the following quintic equation for β
+
+ (ρ+1)2 σ 6 Ra bβ 5 +ρ(ρ+1)2 σ 4 β 4 +ρ(ρ+1)(ρ+2)σ 4 σ 2u Ra bβ 3 +ρ2 σ 2 σ 4u Ra bβ −ρ3 σ 4u = 0. (23)
+                                                                              q
+                                                                                  ρm
+If b = 0, then the solution is unique and positive, given by β m ≡ σσu 1+ρ            > 0. If ρm = 0
+                                                                                    m
+and b > 0, then β must be zero. If b, ρm > 0, we prove below that there always exists a
+unique positive solution in the interval (0, β m ). If we denote the left hand side of Equation
+(23) by f (β), then we have
+
+      f 0 (β)
+           £                                                                ¤
+  = Ra bσ 2 5(ρm + 1)2 σ 4 β 4 + 3ρm (ρm + 1)(ρm + 2)σ 2 σ 2u β 2 + ρ2m σ 4u + 4ρm (ρm + 1)2 σ 4 β 3
+  > 0
+
+and
+
+      f (0) = −ρ3m σ 4u < 0
+     ¡ ¢          h                                                                    i
+                                 5                                 3
+    f β m = Ra b (ρm + 1)2 σ 6 β m + ρm (ρm + 1)(ρm + 2)σ 4 σ 2u β m + ρ2m σ 2 σ 4u β m > 0.
+
+Thus by continuity, there must exist a positive and unique solution within the interval
+(0, β m ).
+    To complete the proof, in the second step, we need to show that the second-order
+condition is satisfied, that is, the agent’s objective function is concave with respect to ρ at
+the point of optimal solutions ρm = ρ∗ , β m = β ∗ , and λm = λ∗ . The proof is the following.
+
+                                                  36
+In Stage 3, before the agent exerts eﬀort, his expected utility is given by
+
+                                                      exp(Ra C (ρ) − Ra a)
+                                   U A (ρ; S) = −         p                ,
+                                                        Ra Ra bσ 2 β + 1
+
+which implies
+                                                   ∙                             ¸
+               dU A (ρ; S)    exp(Ra C (ρ) − Ra a)    1 Ra bσ 2 dβ
+                           =−     p                 −                    + Ra Vρ
+                   dρ           Ra Ra bσ 2 β + 1      2 Ra bσ 2 β + 1 dρ
+
+and
+
+          d2 U A (ρ; S)
+               dρ2
+                               ∙                               ¸2
+          exp(Ra C (ρ) − Ra a)     1 Ra bσ 2 dβ
+      = −     p                 −                     + Ra Vρ
+            Ra Ra bσ 2 β + 1       2 Ra bσ 2 β + 1 dρ
+                               "                                ¡         ¢2  µ ¶2       #
+          exp(Ra C (ρ) − Ra a)          Ra bσ 2      d2 β         Ra bσ 2      dβ
+        −     p                  −                        +                        + Ra k .
+            Ra Ra bσ 2 β + 1       2 (Ra bσ 2 β + 1) dρ2    2 (Ra bσ 2 β + 1)2 dρ
+                        ¡              ¢
+   Denote χ ≡ 2λ∗ + Ra b λ∗2 σ 2u + σ 2 . From Equation (4), we have
+
+                           dβ                β ∗2
+                               |ρ=ρ∗    =         χ
+                           dρ                ρ∗2
+                          d2 β                               dβ
+                               |ρ=ρ∗    = 2β ∗ (ρ∗ )−2 χ        |ρ=ρ∗ − 2β ∗2 (ρ∗ )−3 χ.
+                          dρ2                                dρ
+
+Because at ρ∗ the first-order condition is satisfied (i.e., dU Adρ(ρ;S) |ρ=ρ∗ = 0), we have
+                                              ¡              ¢
+                      dβ                    2 Ra bσ 2 β ∗ + 1
+                          |ρ=ρ∗        =                       Ra kρ∗
+                      dρ                         Ra bσ 2
+                                                  ¡              ¢
+                     d2 β                   4β ∗ Ra bσ 2 β ∗ + 1
+                          |ρ=ρ∗        =        χ                  Ra k − 2β ∗2 (ρ∗ )−3 χ
+                     dρ2                     ρ∗        Ra bσ 2
+
+
+and
+                                              ∙                                          ¸
+d2 U A (ρ; S)          exp(Ra V (ρ∗ ) − Ra a)    2β ∗ χk      bσ 2 β ∗2 χ          2 ∗2
+              |ρ=ρ∗ = − p                      −         + ∗3               + 2Ra k ρ + k .
+     dρ2                    Ra bσ 2 β ∗ + 1        ρ∗     ρ (Ra bσ 2 β + 1)
+
+From the above equations, we obtain
+                                                ¡               ¢
+                                       β ∗2    2 Ra bσ 2 β ∗ + 1
+                                            χ=                    Ra kρ∗ .
+                                       ρ∗2         Ra bσ 2
+
+
+
+                                                        37
+From Equations (4) and (5), we obtain
+
+                                  β∗χ       1       Ra bσ 2 β ∗
+                                        =        +              .
+                                   ρ∗     1 + ρ∗     1 + ρ∗
+                                   bσ 2 = 2kρ∗2 (ρ∗ + 1) /β ∗ .
+
+We thus arrive at
+                                                           ∙                         ¸
+          d2 U A (ρ; S)            exp(Ra V (ρ∗ ) − Ra a)      2β ∗          2  ∗2
+                        |ρ=ρ∗ = − p                          − ∗ χk + 2Ra k ρ + 3k
+               dρ2                      Ra bσ 2 β ∗ + 1         ρ
+                                    ∙    µ                        ¶                ¸
+                          ∗
+            exp(Ra V (ρ ) − Ra a)              1        Ra bσ β ∗
+                                                             2
+                                                                           2 ∗2
+        = − p                        −2k             +              + 2Ra k ρ + 3k
+                  Ra bσ 2 β ∗ + 1           1 + ρ∗       1 + ρ∗
+                                      ∙             ¸
+            k exp(Ra V (ρ∗ ) − Ra a)          2
+        = −      p                     3−             < 0.
+                   Ra bσ 2 β ∗ + 1         1 + ρ∗
+
+
+
+Proof of Proposition 3. When the agent is risk averse, Equation (4) gives
+
+                    dβ          2λ + Ra σ 2u λ2 + Ra σ 2         β + Ra σ 2 β 2
+                       = £¡               ¢                 ¤2 =                .        (24)
+                    dρ      2λ + Ra σ 2 λ2 (1 + ρ) + Ra σ 2        ρ (1 + ρ)
+                                       u
+
+Substituting Equation (24) into the first-order condition in Equation (5), we have
+
+                                                2k 2
+                                           β=      ρ (1 + ρ) .                           (25)
+                                                σ2
+   When Ra is very small, Equation (23) is approximately given by
+
+                                   ρ(ρ + 1)2 σ 4 β 4 − ρ3 σ 4u ≈ 0,
+             √             2/3                            d(σ 2u /β 2 )
+that is, ρ ≈ 1+4(σσu2/(2k)) −1 . It can be verified that     dσ u       < 0. Together with the
+                   dρ                1       1
+observations that dσu > 0 and Q = σ2 + σ2 /ρ+σ2 /β 2 , we have
+                                                        u
+
+
+                                 dQ
+                                      > 0 when Ra is very small.
+                                 dσ u
+
+
+
+
+                                                   38
+   When Ra is very large, Equation (23) becomes the following:
+                       "                µ ¶4                                 µ ¶2            #
+                                          2k                                  2k
+   0 = 2ρ (ρ + 1) Ra k ρ6 (ρ + 1)6 σ 4         + ρ3 (1 + ρ)3 (ρ + 2)σ 2 σ 2u          + σ 4u
+                                          σ2                                  σ2
+                        µ ¶4
+           6        6 4 2k
+        +ρ (ρ + 1) σ           − σ 4u
+                          σ2
+                       "                µ ¶4                           µ ¶2          #
+                                          2k                            2k
+     ≈ 2ρ (ρ + 1) Ra k ρ6 (ρ + 1)6 σ 4         + 2ρ3 (1 + ρ)3 σ 2 σ 2u        + σ 4u
+                                          σ2                            σ2
+                        µ ¶4
+           6        6 4 2k
+        +ρ (ρ + 1) σ           − σ 4u , (because ρ + 2 is close to 2)
+                          σ2
+
+Therefore, we have
+                       "                 µ        ¶2            #2                   µ        ¶4
+                           3       3 2       2k                                          2k
+       2ρ (ρ + 1) Ra k ρ (ρ + 1) σ                     + σ 2u           6      6 4
+                                                                     + ρ (ρ + 1) σ                 − σ 4u ≈ 0.
+                                             σ2                                          σ2
+
+The above equation is approximately equal to: 0 ≈ 2ρ (ρ + 1) Ra kσ 4u − σ 4u , because the
+first term in the square brackets is negligible compared to the second term σ 2u . Therefore,
+               1
+ρ (ρ + 1) ≈ 2kR  a
+                   , which shows that the optimal ρ is independent of σ u to the first-order
+                                                                       dQ
+approximation, so is β. Consequently, Q decreases with σ 2u , that is, dσ u
+                                                                            < 0, when Ra is
+very large.
+
+Proof of Proposition 5. From Equations (6) and (12)-(14) and note that σ 2u = mγ 2 σ 2z ,
+in the special case with endogenous information acquisition only and Ra = 0, m = 1, we
+have
+            2kρ∗2 (1 + ρ∗ ) ∗         σ2                      2Rh (ρ∗ + 1) (ρ∗ + 2)
+     β∗ =           2
+                           ,λ =               2 , γ∗ = −                                  ,
+                  σ             4kρ∗ (1 + ρ∗ )           2/ (kρ∗ ) + Rh (ρ∗ + 1) (ρ∗ + 4)
+                ρ∗ (ρ∗ + 1) [2 + Rh kρ∗ (ρ∗ + 1) (ρ∗ + 4)]2 = σ 2 σ 2z Rh2 (ρ∗ + 2)2 .
+
+From the last equation, if we let Rh go to zero, then ρ∗ goes to zero as well. Therefore, it
+implies
+                             4ρ∗ + o (ρ∗ ) = 4σ 2 σ 2z Rh2 + o (ρ∗ ) .
+It follows that ρ∗ ≈ σ 2 σ 2z Rh2 . Substituting this asymptotic expression into the first three
+equations regarding λ∗ , β ∗ , and γ ∗ , we can easily obtain the other three expressions in
+Proposition 5.
+
+Proof of Proposition 6. We prove the existence of the equilibrium in two steps. First,
+from the existence of a unique equilibrium in the case of exogenous noise trading proved
+in Proposition 2, given a value γ < 0, if we define σ 2u ≡ mγ 2 σ 2z , then there exists a set of
+solutions β (γ), λ (γ), and ρ (γ) to Equations (3), (4), (6), and (7). Second, we denote the
+
+
+                                                       39
+operator T from Equation (12) as follows:
+
+                                          Rh (1 − λ (γ) β (γ)) σ 2
+T (γ) ≡ −              h                                                                             i,
+            2λ (γ) + Rh (1 − λ (γ) β (γ))2 σ 2 + (λ (γ) β (γ))2 σ 2 /ρ (γ) + (m − 1) (λ (γ) γ)2 σ 2z
+
+we then prove that there exists a fixed point γ ∗ < 0, such that T (γ ∗ ) = γ ∗ , which completes
+the proof. In the following we prove the existence of such a fixed point.
+                                    £                              ¤−1
+   First, because λ (γ) β (γ) = β 2 β 2 (1 + 1/ρ) + mγ 2 σ 2z /σ 2     < 1, T (γ) is always strictly
+negative. Furthermore, when γ goes to zero from below, we have
+              µ               ¶1/3                         µ             ¶1/3                          µ              ¶1/3
+                  mσ 2 σ 2z              2/3                   m2 σ 4z              4/3                      σ4
+    ρ (γ) ≈                          γ         , β (γ) ≈                        γ         , λ (γ) ≈                          γ −2/3 ,
+                   4k2                                         2kσ 2                                       16kmσ 2z
+
+which implies
+                                                                 µ              ¶−1/3
+                                                   Rh σ 2              σ4
+                                         T (γ) ≈ −                                           γ 2/3 .
+                                                    2                16kmσ 2z
+As a result, there exists a γ a < 0 that is close enough to zero so that T (γ a ) < γ a .17
+    Next, we show that there exists a γ b < γ a that is negative enough so that T (γ b ) > γ b .
+Then by the intermediate value theorem and the continuity of T (γ), there must exist a
+value γ ∗ ∈ (γ b , γ a ), so that T (γ ∗ ) = γ ∗ . To prove the former statement, we investigate the
+asymptotic behavior of T (γ) when γ goes to −∞. We first consider the case where Ra = 0.
+Let σ 2u ≡ mγ 2 σ 2z for a given γ, then when the agent is risk neutral, from Equations (3) and
+(4) in Proposition 1, we have
+                                            r                   r
+                                         σu        ρ       1 σ      ρ
+                                   β=                 ,λ =             .
+                                          σ 1+ρ            2 σu 1 + ρ
+
+Furthermore, from Equation (6), we can easily show
+                                  q
+                                    1 + (4σσ u /k)2/3 − 1
+                             ρ=                           .
+                                             2
+
+  17
+     By contrast, in Spiegel and Subrahmanyam (1992) where ρ is exogenously fixed, a γ a that satisfies
+T (γ a ) < γ a does not always exist. In fact, the condition in Equation (15) is needed to ensure the
+existence of γ a . We can prove it by contradiction. For simplicity, we assume Ra = 0 as in Spiegel
+and Subrahmanyam. Suppose that the condition     t        in Equation t (15) does not hold, which is equivalent
+                                                     ρ                   ρ
+to Rh (1 − βλ) σ2 ≤ −2γλ, where β = σσu 1+ρ             , λ = 12 σσu 1+ρ    . Moreover, since γ < 0 it follows
+                                                                                                   
+that Rh (1 − βλ) σ ≤ −2γλ ≤ −γ 2λ + Rh (1 − λβ) σ + (λβ) σ /ρ + (m − 1) (λγ)2 σ2z . That is,
+                     2                                         2 2         2 2
+
+T (γ) ≥ γ for all γ < 0, implying that no equilibrium exists. On the other hand, when the condition
+holds (i.e., Rh (1 − βλ) σ 2 > −2γλ), if we let γ go to zero from below,  then there must exist a γ a so that
+−2γλ ≈ −γ 2λ + Rh (1 − λβ)2 σ2 + (λβ)2 σ2 /ρ + (m − 1) (λγ)2 σ2z , implying T (γ a ) < γ a . This result
+together with the existence of γ b that satisfies T (γ b ) > γ b , guarantees the existence of an equilibrium.
+
+
+
+
+                                                                  40
+Therefore, when γ is suﬃciently small (i.e., σ 2u suﬃciently large),
+             ³ σσ ´1/3       µ            ¶1/3
+                 u               σmσ 2z                              m1/2 σ z               σ
+   ρ (γ) ≈               =                       γ 2/3 , β (γ) ≈ −            γ, λ (γ) ≈ − 1/2 γ −1 .
+               2k                 2k                                   σ                  2m σ z
+                                       2m
+It follows that T (γ) converges to − (2m−1)  when γ goes to −∞. Therefore, there must exist
+a suﬃciently small γ b such that T (γ b ) > γ b .
+    When the agent is risk averse, from Equation ³(6), as |γ| or σ 2u goes´to infinity, it must be
+                                                     p
+true that ρ converges to a finite number ρ∞ ≡ 12       1 + 2/ (Ra k) − 1 , and σ 2u λ2 converges
+to zero, implying that λ converges
+                            ¡      ¢ to zero as well. It is easy to see from Equation (4) that
+                                 2
+β converges to β ∞ ≡ ρ∞ / Ra σ . As a result, T (γ) converges to −1. Thus again in this
+case, there must exist a suﬃciently small γ b such that T (γ b ) > γ b .
+
+
+
+
+                                                         41
+             Figure 1: Comparison With Admati and Pfleiderer (1997)
+
+   The (red) dashed lines correspond to the competitive equilibrium of Admati and Pflei-
+derer (1997) where both the eﬀort and the asset price are exogenously assumed and the
+manager is a price taker. The (blue) solid lines correspond to our benchmark model of
+portfolio delegation and strategic trading in the case of exogenous noise trading. Other
+parameters are Ra = σ 2u = 2, k = σ 2 = 1. The (black) dash-dotted lines correspond to our
+general model of portfolio delegation and strategic trading in the case of endogenous noise
+trading. Other parameters are Ra = σ 2z = 2, Rh = m = k = σ 2 = 1.
+
+
+                                   A1                                                 A2
+             0.5                                               0.15
+
+             0.4
+                                                                0.1
+             0.3
+                                                         b*β
+         β
+
+
+
+
+             0.2
+                                                               0.05
+             0.1
+
+              0                                                  0
+                   0   0.2   0.4        0.6   0.8   1                 0   0.2   0.4        0.6   0.8   1
+                                   b                                                  b
+                                   A3                                                 A4
+            0.25                                               0.12
+
+             0.2                                                0.1
+
+                                                               0.08
+            0.15
+                                                               0.06
+        ρ
+
+
+
+
+                                                         λ
+
+
+
+
+             0.1
+                                                               0.04
+            0.05                                               0.02
+
+              0                                                  0
+                   0   0.2   0.4        0.6   0.8   1                 0   0.2   0.4        0.6   0.8   1
+                                   b                                                  b
+
+
+
+
+                                                    42
+ Figure 2: Price Informativeness (Q) Vs. the Variance of Noise Trading (σ 2u )
+
+    The (blue) solid lines correspond to the general case of information acquisition and port-
+folio delegation; the (red) dashed lines correspond to the case of exogenous information and
+without portfolio delegation; the (black) dash-dotted lines correspond to the case of endoge-
+nous information acquisition without portfolio delegation (i.e., b = 1). Other parameters
+are σ 2 = k = 1, σ 2u ranges from 0.1 to 5, and Ra = 0.1, 1, 2.
+
+
+                       A1: Ra=0.1                      A2: Ra=1                            A3: Ra=2
+            1.16                           1.048                              1.0265
+
+            1.14                           1.046                               1.026
+                                           1.044
+            1.12                                                              1.0255
+        Q
+
+
+
+
+                                       Q
+
+
+
+
+                                                                          Q
+                                           1.042
+             1.1                                                               1.025
+                                            1.04
+            1.08                           1.038                              1.0245
+
+            1.06                           1.036                               1.024
+                   0     2         4               0        2         4                0    2         4
+                             σ2u                                σ2u                             σ2u
+                       A4: Ra=0.1                      A5: Ra=1                            A6: Ra=2
+            1.16                            1.08                                1.06
+
+                                            1.07                                1.05
+            1.14
+                                            1.06
+                                                                                1.04
+            1.12                            1.05
+        Q
+
+
+
+
+                                       Q
+
+
+
+
+                                                                          Q
+
+
+
+
+                                                                                1.03
+             1.1                            1.04
+                                                                                1.02
+                                            1.03
+            1.08                                                                1.01
+                                            1.02
+
+            1.06                            1.01                                  1
+                   0     2         4               0        2         4                0    2         4
+                             σ2u                                σ2u                             σ2u
+
+
+
+
+                                                       43
+Figure 3: Comparative Statics with respect to the Variance of Noise Trading
+             (σ 2u ) for Various Degrees of Risk Aversion (Ra )
+
+    The (blue) solid lines correspond to the general case of information acquisition and port-
+folio delegation; the (red) dashed lines correspond to the case of exogenous information and
+without portfolio delegation; the (black) dash-dotted lines correspond to the case of endoge-
+nous information acquisition without portfolio delegation (i.e., b = 1). Other parameters
+are σ 2 = k = 1, σ 2u ranges from 0.1 to 5, and Ra = 0.1, 1, 2.
+
+
+                    A1: Ra=0.1                     A2: Ra=1                      A3: Ra=2
+          0.5                            0.5                           0.5
+      b
+
+
+
+
+                                     b
+
+
+
+
+                                                                   b
+           0                              0                             0
+                0      2         4             0     2         4             0     2         4
+                    A4: Ra=0.1                     A5: Ra=1                      A6: Ra=2
+
+          0.3                            0.3                           0.3
+      ρ
+
+
+
+
+                                     ρ
+
+
+
+
+                                                                   ρ
+          0.2                            0.2                           0.2
+          0.1                            0.1                           0.1
+                0      2         4             0     2         4             0     2         4
+                    A7: Ra=0.1                     A8: Ra=1                      A9: Ra=2
+           1                              1                             1
+
+          0.5                            0.5                           0.5
+      β
+
+
+
+
+                                     β
+
+
+
+
+                                                                   β
+
+
+
+
+           0                              0                             0
+                0      2         4             0     2         4             0     2         4
+                    A10: Ra=0.1                    A11: Ra=1                     A12: Ra=2
+          0.5                            0.5                           0.5
+      λ
+
+
+
+
+                                     λ
+
+
+
+
+                                                                   λ
+
+
+
+
+           0                              0                             0
+                0      2         4             0     2         4             0     2         4
+                            2                             2                             2
+                           σu                            σu                            σu
+
+
+
+
+                                                   44
+     Figure 4: Optimal Response Functions w.r.t. Rh Under Information
+                               Acquisition
+
+    This figure depicts the optimal response functions with respect to Rh in the case of
+endogenous noise trading with a monopolistic risk-neutral informed trader (Ra = 0) under
+information acquisition only. Other parameters are σ 2 = k = m = 1, σ 2z = 5.
+
+
+           0.7                                       2
+
+           0.6
+                                                    1.5
+           0.5
+
+           0.4
+                                                     1
+       ρ
+
+
+
+
+                                                β
+           0.3
+
+           0.2
+                                                    0.5
+           0.1
+
+            0                                        0
+                 0   1   2        3   4   5               0   1   2        3   4   5
+                             R                                        R
+                              h                                        h
+
+
+
+
+            1                                        0
+
+                                                   −0.2
+           0.8
+                                                   −0.4
+           0.6                                     −0.6
+       λ
+
+
+
+
+                                               γ
+
+
+
+
+           0.4                                     −0.8
+
+                                                    −1
+           0.2
+                                                   −1.2
+
+            0                                      −1.4
+                 0   1   2        3   4   5               0   1   2        3   4   5
+                             Rh                                       Rh
+
+
+
+
+                                          45
+     Figure 5: Price Informativeness (Q) Vs. the Number of Hedgers (m)
+
+    The first, second, and third columns report the results for the cases of exogenous in-
+formation, endogenous information alone, and both endogenous information and portfolio
+delegation, respectively. The first, second, and third rows report the results for Ra = 0, 0.1,
+and 2, respectively. Other parameters are Rh = 3, σ 2 = k = 1, σ 2z = 5.
+
+
+            A1: Exogenous Effort (ρ=1)              B1: Endogenous Effort
+        1.3333                                1.4
+                               Ra=0                                 Ra=0
+        1.3333                               1.35
+    Q
+
+
+
+
+        1.3333                                1.3
+
+        1.3333                               1.25
+                 2   4    6    8       10            2    4    6    8       10
+
+                         A2                                   B2                          C1: Portfolio Delegation
+          1.35                              1.175                                  1.18
+                              Ra=0.1                               Ra=0.1                                 Ra=0.1
+           1.3
+                                             1.17                                  1.16
+     Q
+
+
+
+
+          1.25
+                                            1.165                                  1.14
+           1.2
+
+          1.15                               1.16
+                 2   4    6    8       10            2    4    6    8       10              2    4    6     8      10
+
+                         A3                                   B3                                     C2
+          1.06                              1.003                                1.0256
+                               Ra=2                                 Ra=2                                   Ra=2
+                                                                                 1.0255
+          1.04                              1.002
+     Q
+
+
+
+
+                                                                                 1.0254
+          1.02                              1.001
+                                                                                 1.0253
+
+            1                                  1                                 1.0252
+                 2   4    6    8       10            2    4    6    8       10              2    4    6     8      10
+                         m                                    m                                      m
+
+
+
+
+                                                         46
+Figure 6: Comparative Statics with respect to Principal’s Risk Aversion (Rp )
+
+    This figure plots various endogenous variables in response to changes in Rp , for Ra = 2
+(blue solid line) or Ra = 0.1 (red dashed line) in the case of exogenous noise trading. The
+parameters are σ 2 = k = 1, σ 2u = 2, and Rp ranges from 0.1 to 5.
+
+                              A1                                                A2
+             1                                          1.15
+                                       Ra=2                                              Ra=2
+                                       Ra=0.1                                            Ra=0.1
+            0.8
+
+                                                         1.1
+            0.6
+                                                    Q
+        b
+
+
+
+
+            0.4
+                                                        1.05
+
+            0.2
+
+
+             0                                            1
+                  0   1   2        3   4        5              0   1        2        3   4        5
+                              Rp                                                Rp
+
+                              A3                                                A4                                           A5
+            0.4                                          0.8                                              0.18
+                                       Ra=2                                              Ra=2                                         Ra=2
+           0.35                        Ra=0.1            0.7                             Ra=0.1           0.16                        Ra=0.1
+
+            0.3                                          0.6                                              0.14
+
+           0.25                                          0.5                                              0.12
+       ρ
+
+
+
+
+                                                    β
+
+
+
+
+                                                                                                      λ
+
+            0.2                                          0.4                                               0.1
+
+           0.15                                          0.3                                              0.08
+
+            0.1                                          0.2                                              0.06
+
+           0.05                                          0.1                                              0.04
+                  0   1   2        3   4        5              0   1        2        3   4        5              0   1   2        3   4        5
+                              R                                                 R                                            R
+                               p                                                 p                                            p
+
+
+
+
+                                                                       47
+
