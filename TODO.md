@@ -242,6 +242,22 @@ add it here for later review. Record the merit, what is missing, the smallest ne
 duplicates. Keep reported results labelled as claims. Missing information alone does not make a strategy promising.
 A queue entry does not add it to a trading plan or start a backtest; review when prerequisites arrive or the user prioritizes it.
 
+- [ ] **Calvados 2.0 preferred VX + ES hedge — conditional personal research / unverified (2026-10-30).**
+  Merit: specific dated-volatility basis normalization and an equity hedge; author claims +273.7% gross with 11.3% DD
+  in selected 2010–14 leveraged simulations. These are not verified current returns. The separately registered naked
+  component FAILED 2018–22: one VX, 58 trades, gross −$2,980 / net −$9,360, marked DD $18,385; no later/account stages.
+  Do not revive that component or claim its failure falsifies the untested hedge. Preferred-source work needs a verified
+  dated ES chain/roll cashflows, additive hedge-equation correction, explicit adjustment clock and actual integer sizes;
+  one VX often maps to less than one ES, and prelaunch MES/VXM histories must not be invented. Smallest next check:
+  authenticate vendor/price type and clock in the newly found public quarterly ES archive, audit complete paired prices,
+  then freeze the hedge protocol before a separately committed test. Three full samples were inspected; this is an
+  actual data lead, not a claim that no free ES chain exists. [ES gate](agents/codex/inputs/calvados_2379985_20261030/es_hedge_gate/es_hedge_feasibility.md).
+  Multiday VX is ineligible
+  for all four Apex homes as written; any personal addition/replacement must earn historical validation and native
+  account/margin comparison. [Review/results](agents/codex/results/calvados_2379985_20261030.md) ·
+  [Evidence](agents/codex/evidence/calvados_2379985_20261030.md) ·
+  [Acquisition](agents/codex/inputs/calvados_2379985_20261030/acquisition.md).
+
 - [ ] **Nocturne — verify archived assumed replay only; NOT ADMITTED (2026-10-30).**
   Merit: user-authorized R²/target/reentry assumptions produce1085design trades,+$8.75/MNQ,PF1.38,
   all5years positive, compared with+$4.32withoutR². These are conditional2018–22screen results, not independent

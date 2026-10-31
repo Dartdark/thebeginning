@@ -1,0 +1,76 @@
+{
+  "component": "Naked Eq3/4 only,1VX, next-session dailyOpen references",
+  "period": "2018-2022",
+  "metrics": {
+    "trades": 58,
+    "win": 0.3620689655172414,
+    "avg": -161.37931034482756,
+    "annual": -1871.9999999999995,
+    "sharpe": -0.25403242156347006,
+    "sortino": -0.3138259978836006,
+    "profit_factor": 0.7735849056603773,
+    "max_dd": 18385.0,
+    "calmar": -0.10182213761218382,
+    "ulcer": 1.8264278759917991,
+    "ulcer_perf": -0.20499030097024265,
+    "total": -9359.999999999998,
+    "daily_t": -0.5680337631048025,
+    "trade_t": -0.7477395557855687,
+    "gross": -2980.000000000002,
+    "fees": 580.0,
+    "slippage": 5800.0,
+    "stress_total": -15160.0
+  },
+  "year_net": {
+    "2018": -3490.0000000000036,
+    "2019": 5950.0,
+    "2020": 240.00000000000136,
+    "2021": -10313.5,
+    "2022": -1746.5
+  },
+  "random_side_p": 0.5894105894105894,
+  "gates": {
+    "at_least20_closed_trades": true,
+    "positive_net": false,
+    "daily_t_at_least2": false,
+    "four_positive_years": false,
+    "stress_positive": false,
+    "block_annual_p5_positive": false,
+    "random_side_p_le05": false
+  },
+  "passed": false,
+  "preferred_hedged_tested": false,
+  "account_comparisons_run": false,
+  "code_sha256": "6480913fbaabe97717dabc2e561674e57e00d46188edcd068468283174662c71",
+  "plan_sha256": "28c826b9f67d299d826838a1e58b36a5e98bbf3b4a15852043183e23ee322c12",
+  "input_sha256": {
+    "cfe_calendar.csv": "4a0ddf53f37c3562344603780acdd15e6aa5b39462a61e4cd2e7b19f6e7b8f84",
+    "acquisition.md": "5373a4c9c37da8e61a9b71ad79a0c588b7b08c6633c6dfa6761869ee69569056",
+    "data_gate.json": "cf424ca1b1c92696ecea7632f9e88cd34db37175ef5a978203a54c38197272b9",
+    "official_access_receipt.json": "6a40d41181f11114c5900f33cb3a1ac4b43c6f7c3ec2e1ad692dfb4f5c9bb84b",
+    "panel_manifest.json": "e521cdbc13e5fd5d52ca77824acfda377b666a1ec194205edcc16a05dd325045",
+    "paper.txt": "b2377269f5e95278cb77beb0e17c1683b20039fee9a1e98351a418475eb315ee",
+    "paper.pdf": "734b38191d172c1431a7474906e577415d737e1ca80fa9ad9c5174bdb5544bde",
+    "panel_metadata_audit.json": "eebc66d16f9a9bf1a5a40adb0454b224599588818076ec4aa6ff1395692a80e7"
+  },
+  "spot_sha256": "155eacd1de1513dfd4d70f04727b66100980b424b55dbc2e3dcdd6a4a7d49563",
+  "shared_code_sha256": {
+    "metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a"
+  },
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "numba": "0.68.0",
+    "openpyxl": "3.1.5",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0"
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "seeds": {
+    "side": 2379985,
+    "bootstrap": 2379986
+  },
+  "plan_commit": "0ba35d11125bf8e3088796c1b4195ad262e96087"
+}
