@@ -1054,6 +1054,20 @@ Source: Panigrahi, Vachhani and Sisodia, SSRN4013524,2021;
   paths, exit and fees. No adaptation or protective-order change is warranted from this paper.
 - Status: accounting/timing reference; no return trial, execution saving or portfolio placement.
 
+### E10 follow-up — Bubble detection frequency and cost compounding
+
+Source: Liu, Chuang and Xu, SSRN4494963, uploaded15-page preprint;
+[review](results/bubble_riding_4494963_review_20261031.md),2026-10-31.
+- Use: gross signal performance can disappear as decision frequency and turnover increase. Authors' daily
+  DPSYI wealth7.90 before costs falls to1.37 after their assumed costs; these are unverified Chinese index results.
+- Evidence: printed-table audit only. Multiplying gross wealth by0.995 for each reported trading period roughly
+  reconciles daily endpoints. This does not verify that actual turnover or round-trip fees were charged correctly.
+- Clock lesson: Tuesday detection followed by Wednesday execution separates measurement from trading. Historical
+  bubble labels, bootstrapped critical values and interpolated CPI still require independent availability audits.
+- Limits/next check: for a separately justified strategy, freeze causal inputs, tradable vehicles, position changes,
+  dividend/FX cash, per-leg fees and fill clocks. Do not import the paper's ambiguous Sharpe-percent row or cost rate
+  as current CME evidence. No new backtest, measured saving or portfolio allocation.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
