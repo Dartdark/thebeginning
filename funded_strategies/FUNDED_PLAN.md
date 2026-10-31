@@ -965,3 +965,11 @@ stand; rounding UP to 2 is worse (blown 6.0%, y2 −$800). VB flagged 2 scored y
 $600, Monday Long 1, EOS risk $1,050, Late-Day Flow 3, NFP risk $750, Bridge Monday 1, CL Sunday fade 3 MCL, ES MOC 3 MES,
 Relative Strength 1, Dual Thrust 2, Overnight Tick / VIX 2. Below full size each chart trades floor(input x f), f = cushion /
 3,000 (min 0.5); the bench now trades exactly these inputs.
+
+## Bench limits: opposing positions and overnight minutes (2026-10-31, Codex portfolio audit step 2)
+
+`../analysis/opposing_overlap_check.py`: the funded benches mark every trade at its own worst price each minute, so when NQ longs
+and shorts are open together the smaller side's range is counted twice. 50K: 88 of 2,436 days (3.6%), avg $20 a minute, worst
+$271; 150K: 416 days (17%), avg $20, worst $406. This only OVERSTATES risk (failure rates slightly pessimistic, never
+optimistic) and it hits every plan in a comparison alike, so no decision changes; not corrected. Overnight Tick is stored as one
+whole-night worst value on its exit day (also conservative). Missing overnight minutes in the data can't be rebuilt: limit noted.

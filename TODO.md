@@ -63,6 +63,7 @@ bottom). Times are Central (CT).
 - [ ] On the VPS after `git pull` (2026-10-30 fix): PowerShell `powershell -ExecutionPolicy Bypass -File C:\TradingRepo\live\vps\watchdog.ps1`
       once, then `Get-Content C:\TradingLogs\alerts.txt -Tail 5`: no errors = the floor alarm can read the logs.
 - [x] Claude: 150K funded whole-number inputs (Codex audit): round the 1.5s down to 1, results unchanged (`FUNDED_PLAN.md`).
+- [x] Claude: opposing-position overlap measured (Codex audit step 2): benches overstate risk slightly on 4-17% of days; conservative, no decision changes (`FUNDED_PLAN.md`).
 - [ ] Claude: update the personal ladder (`PORTFOLIO.md` still says 16-piece core; full book needs ~$35k; tested subsets for smaller starts).
 - [x] Claude: replay the Swing Target account benches with the corrected exit kinds -> ties; user reverted both funded swaps 2026-10-31.
 - Claude: a new funded account -> `FUNDED` in analysis/account_tools.py (payout tracker); each payout you request -> its list.
