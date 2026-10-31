@@ -1,0 +1,140 @@
+{
+  "source_commit": "86df2c0fa4b0e530b2c29caddd364830d12edab3",
+  "data": [
+    {
+      "path": "data/NQ_1min_2026.csv",
+      "rows": 92585,
+      "first_key": 202601020800,
+      "last_key": 202610301515,
+      "duplicate_keys": 0
+    },
+    {
+      "path": "data/NQ_1min_ON_2026.csv",
+      "rows": 203390,
+      "first_key": 202601011701,
+      "last_key": 202610300759,
+      "duplicate_keys": 0
+    }
+  ],
+  "reports": [
+    {
+      "strategy": "VB",
+      "path": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+      "entries": 1743,
+      "exits": 1743,
+      "report_end": "2026-10-09 16:00:00",
+      "last_entry": "2026-10-06 13:30:00",
+      "last_exit": "2026-10-06 14:30:00",
+      "issues": 0
+    },
+    {
+      "strategy": "ONB30",
+      "path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx",
+      "entries": 677,
+      "exits": 677,
+      "report_end": "2026-10-13 04:45:00",
+      "last_entry": "2026-10-12 09:15:00",
+      "last_exit": "2026-10-12 14:30:00",
+      "issues": 0
+    },
+    {
+      "strategy": "MON_BR",
+      "path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx",
+      "entries": 217,
+      "exits": 217,
+      "report_end": "2026-10-13 10:15:00",
+      "last_entry": "2026-10-04 19:00:00",
+      "last_exit": "2026-10-05 09:30:00",
+      "issues": 0
+    },
+    {
+      "strategy": "EOS",
+      "path": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+      "entries": 105,
+      "exits": 105,
+      "report_end": "2026-10-11 19:35:00",
+      "last_entry": "2026-09-18 08:35:00",
+      "last_exit": "2026-09-18 10:00:00",
+      "issues": 0
+    },
+    {
+      "strategy": "ONB_ML2_MC",
+      "path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+      "entries": 344,
+      "exits": 344,
+      "report_end": "2026-10-12 14:15:00",
+      "last_entry": "2026-10-12 09:15:00",
+      "last_exit": "2026-10-12 00:00:00",
+      "issues": 1
+    }
+  ],
+  "report_issues": [
+    {
+      "strategy": "ONB_ML2_MC",
+      "pair": 343,
+      "entry_time": "2026-10-12 09:15:00",
+      "exit_time": "2026-10-12 00:00:00",
+      "exit_signal": "open",
+      "unfinished": true,
+      "exit_before_entry": true
+    }
+  ],
+  "chart_logs": [
+    {
+      "path": "live/trades/20261020.csv",
+      "close_rows": 2,
+      "unique_close_rows": 2
+    },
+    {
+      "path": "live/trades/20261021.csv",
+      "close_rows": 4,
+      "unique_close_rows": 4
+    },
+    {
+      "path": "live/trades/20261022.csv",
+      "close_rows": 0,
+      "unique_close_rows": 0
+    },
+    {
+      "path": "live/trades/20261023.csv",
+      "close_rows": 0,
+      "unique_close_rows": 0
+    },
+    {
+      "path": "live/trades/20261025.csv",
+      "close_rows": 0,
+      "unique_close_rows": 0
+    },
+    {
+      "path": "live/trades/20261026.csv",
+      "close_rows": 29,
+      "unique_close_rows": 9
+    },
+    {
+      "path": "live/trades/20261027.csv",
+      "close_rows": 28,
+      "unique_close_rows": 9
+    },
+    {
+      "path": "live/trades/20261028.csv",
+      "close_rows": 0,
+      "unique_close_rows": 0
+    },
+    {
+      "path": "live/trades/20261029.csv",
+      "close_rows": 0,
+      "unique_close_rows": 0
+    },
+    {
+      "path": "live/trades/20261030.csv",
+      "close_rows": 9,
+      "unique_close_rows": 2
+    }
+  ],
+  "limitations": [
+    "Report End Date is coverage; last trade is not a coverage end.",
+    "Chart CLOSE rows do not establish broker fills.",
+    "A fresh price grid does not extend saved report trade lists.",
+    "No expected-trade replay, cache refresh, plan bench, or trading change performed."
+  ]
+}

@@ -199,6 +199,33 @@ after 15:59 CT, never with a position open.
 - [ ] **When a 50K account is funded:** Vault Break `NumContracts` 1 (was 2), `FlaggedContracts` 1, + Swing Target v3 `Qty` 1. **150K funded:** Swing Target `Qty` 2 instead of Dual Thrust (`FUNDED_PLAN.md`).
 
 
+## Later
+
+- [ ] **Export 1-minute data for NG, ZC and ZS** (natural gas, corn, soybeans), Jan 2018 to now, same way as the CL / ZN files
+  (Exchange time, 24-hour session), into `data/` (or `C:\TradingVault`, then sync). Claude then tests the NG storage report
+  (Thursdays 9:30 CT) and the USDA WASDE report (monthly, 11:00 CT) on ZC / ZS (2026-10-20,
+  `agents/results/MARKET_PROFILES_REVIEW.md`). Also check whether Apex offers NG / ZC / ZS (and the micros).
+
+- [ ] Before the CL Sunday fade goes live: confirm Apex allows MCL on the account.
+- [ ] When an account goes funded: paste the funded files (all have the stop guard):
+  [ONB ML](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Overnight_Bias_ML.txt),
+  [Monday Long](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Monday_Long.txt),
+  [Late-Day Flow](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Late_Day_Flow.txt),
+  [NFP Fade](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_NFP_Fade.txt),
+  [CL Sunday Fade](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/CL_Sunday_Gap_Fade.txt),
+  VB SP, EOS.
+- [ ] **Thu 12/10 (after the close): roll Symbol Mapping on the VPS** (phone reminder set for 12/10 07:00 CT; all three @MNQ / MNQZ6 lines) `@MNQ (dxFeed) -> MNQH7` (was MNQZ6; before the
+  December roll ~12/11), then auto-trading off / on and a 1-MNQ test order per account. Reminder set: 12/10 08:00 CT
+  (scheduled-jobs session).
+- [ ] **Mid-December gate:** ~40–70 live trades at ≥ 75% of backtest and no ALARM → start scaling (FUNDED_PLAN.md).
+- [ ] Optional: add an `OPENAI_API_KEY` to the environment's secrets for a second, different-lab strategy checker.
+
+## Reminders
+
+Claude reminds you every **Sunday and Wednesday at 10:52 CT** (Central). Since 2026-10-20 the reminders run in the
+separate session 'Scheduled jobs (journal, Friday review, reminders)', together with the 16:40 CT journal trades and the
+Friday review. Say "stop the reminders" to turn them off, or ask for a different schedule.
+
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
 **Standing rule:** when a reviewed strategy has documented merits but its results or implementation are not yet verified,
@@ -383,29 +410,3 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   [Cycle/source reviews](agents/codex/results/scout_closing_auctions_cycle_20261029.md) ·
   [Evidence/data gates](agents/codex/evidence/scout_closing_auction_imbalances_20261029.md).
 
-## Later
-
-- [ ] **Export 1-minute data for NG, ZC and ZS** (natural gas, corn, soybeans), Jan 2018 to now, same way as the CL / ZN files
-  (Exchange time, 24-hour session), into `data/` (or `C:\TradingVault`, then sync). Claude then tests the NG storage report
-  (Thursdays 9:30 CT) and the USDA WASDE report (monthly, 11:00 CT) on ZC / ZS (2026-10-20,
-  `agents/results/MARKET_PROFILES_REVIEW.md`). Also check whether Apex offers NG / ZC / ZS (and the micros).
-
-- [ ] Before the CL Sunday fade goes live: confirm Apex allows MCL on the account.
-- [ ] When an account goes funded: paste the funded files (all have the stop guard):
-  [ONB ML](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Overnight_Bias_ML.txt),
-  [Monday Long](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Monday_Long.txt),
-  [Late-Day Flow](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_Late_Day_Flow.txt),
-  [NFP Fade](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/NQ_NFP_Fade.txt),
-  [CL Sunday Fade](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/funded_strategies/CL_Sunday_Gap_Fade.txt),
-  VB SP, EOS.
-- [ ] **Thu 12/10 (after the close): roll Symbol Mapping on the VPS** (phone reminder set for 12/10 07:00 CT; all three @MNQ / MNQZ6 lines) `@MNQ (dxFeed) -> MNQH7` (was MNQZ6; before the
-  December roll ~12/11), then auto-trading off / on and a 1-MNQ test order per account. Reminder set: 12/10 08:00 CT
-  (scheduled-jobs session).
-- [ ] **Mid-December gate:** ~40–70 live trades at ≥ 75% of backtest and no ALARM → start scaling (FUNDED_PLAN.md).
-- [ ] Optional: add an `OPENAI_API_KEY` to the environment's secrets for a second, different-lab strategy checker.
-
-## Reminders
-
-Claude reminds you every **Sunday and Wednesday at 10:52 CT** (Central). Since 2026-10-20 the reminders run in the
-separate session 'Scheduled jobs (journal, Friday review, reminders)', together with the 16:40 CT journal trades and the
-Friday review. Say "stop the reminders" to turn them off, or ask for a different schedule.
