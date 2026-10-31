@@ -858,6 +858,10 @@ SSRN 3322717; [uploaded-paper review](results/fx_multistrategy_3322717.md).
 - Next check: source clarification and one dated formation/rebalance/roll month with futures cash/fees and
   yield availability reconciled. Owned 6E alone does not supply the eight-currency panel.
 - Status: methodological/accounting reference; personal research lead parked, no return test or live change.
+  [Requested code-building checkpoint](results/fx_multistrategy_build.md): a declared Python interpretation now
+  produces as-of reference positions with clock/contract/risk/margin checks; 26 synthetic mechanics tests pass.
+  Static-exposure sleeve covariance is not the source's historical dynamic-sleeve return covariance. No native
+  execution, roll/cash reconciliation or economic validation was established by this build.
 
 ### E50 — Treasury volume/OI proxies, contract construction and liquidity measures
 

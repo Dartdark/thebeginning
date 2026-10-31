@@ -10,6 +10,7 @@ commodity-index momentum. Yield gaps use percentage-point differences, permittin
 windows, volatility direction and common commodity-index choice are our explicit assumptions.
 
 Expanding prior-only percentile ranks (midrank ties), at least 63 earlier valid values per signal/currency.
+This requires at least 316 complete sessions for the 252-session momentum's 63 earlier ranks.
 Covariance: trailing 252-session correlation times mean 21/63/252-session standard deviations, annualized;
 fixed 5% diagonal shrinkage for numerical stability. Signed risk-budget sleeves target 10% annualized risk,
 subject to gross-notional 3x. No performance-based pruning or inference of absent source settings.
