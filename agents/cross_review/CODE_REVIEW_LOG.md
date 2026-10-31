@@ -49,3 +49,23 @@ Claude's code.
    Plan fit: none. The rule trades BitMEX-style inverse futures, held for days, which can't run on Apex (CME, flat by
    15:59). CME micro Bitcoin futures are linear, so the personal account couldn't trade it as written. It stays research
    only, gated on data.
+
+## 2026-10-31 (3): codex/work 9f02f8d..192b697
+
+New code: Codex's reinforcement-learning build (SSRN 3690996), in two versions: daily stocks and intraday MNQ
+(`analysis/codex_rl3690996_core.py` / `_env.py` / `_train.py`). Codex's verdict is REJECT: neither selector passed its
+frozen design gate. The other commits are the inverse Bitcoin packet, already reviewed in (2).
+
+1. **No defect in the MNQ engine (read in full).**
+   - **Clocks:** the arrays start at 08:31 CT (index 0 = minute 511), so the decision at k reads the bar that closes at
+     08:35 + 5k, fills at the next minute's open (08:36 + 5k), and flattens at 14:56. Nothing is read ahead.
+   - **Inputs:** the turbulence threshold uses only earlier scores (shifted), and the ATR is the prior 15 sessions
+     (shifted).
+   - **Stops:** a stop that gaps fills at the worse of the open and the stop, minus a tick of slippage. Stops are already
+     live on the entry bar.
+   - **Sizes and P&L:** positions are whole contracts (-1 / 0 / +1). The cost bridge reconciles: gross minus fees minus
+     slippage equals net.
+2. **Cost note, not a defect.** Codex charges $2.24 per MNQ round trip ($0.62 a side plus a tick a side). Our standard
+   is about $1.73 ($0.725 plus a tick per fill). At our cost, the SELECTOR gains about $0.52 a trade x 3,538 trades, about
+   +$1.8k over 2018-22: roughly $3.9k in five years, still below the passive long-RTH control ($5.4k) and nowhere near a
+   pass (it averaged $0.59 a trade, NW t 0.35). The REJECT stands. Plan fit: none.
