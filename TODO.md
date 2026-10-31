@@ -283,6 +283,8 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   fee-inclusive integer-share ledger, then universe/corporate-action, fold-local turbulence and seed/checkpoint audit.
   No unbounded training, proxy futures conversion or allocation; correcting this engine would be a new protocol.
   [Review](agents/codex/results/rl_ensemble_3690996_20261030.md) · [Five-group checks](analysis/outputs/codex_rl_ensemble_3690996_audit/mechanics.json).
+  Related [SSRN 7013523 upload review](agents/codex/results/ssrn_7013523_review_20261030.md): 30/30 table cells
+  match the original; no newer test or corrected implementation established. Same method lead; no duplicate trial.
 
 - [ ] **WASDE pre-release futures/options volume — NEEDS DATA AND SPECIFICATION (SSRN 4841490; 2026-10-30).**
   Lower-priority personal-account lead: author reports positive futures-volume and negative options-volume
