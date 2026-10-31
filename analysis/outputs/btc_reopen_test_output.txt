@@ -1,0 +1,44 @@
+BTC Reopen MR V4 (H1B_z_lb60_abs1.5; user's NinjaTrader package, 2026-10-24; MultiCharts port and source in
+futures 2018-12-17 02:29:00 -> 2026-10-13 05:24:00 (1,772,434 bars); spot 2018-05-31 19:01:00 -> 2026-10-23 19:00:00 (4,411,907 bars)
+eligible reopen events 1834 (weekend 359), with a z 1774, |z| >= 1.5 172
+
+1 tick(s) a fill ($25 + $50 a round trip), per CME BTC contract:
+   author's window (2018-12 .. 2024-09-01)  n= 136 win 45% $   -116 total $  -15,725 PF 0.80 t -0.8 yrs+ 3/6 | gross $   -41
+   sealed period (2024-09-02 ..)            n=  36 win 39% $   -922 total $  -33,175 PF 0.43 t -1.8 yrs+ 1/3 | gross $  -847
+   all                                      n= 172 win 44% $   -284 total $  -48,900 PF 0.64 t -1.8 yrs+ 4/8 | gross $  -209
+      longs                                 n=  85 win 51% $   -162 total $  -13,750 PF 0.77 t -0.8 yrs+ 4/8 | gross $   -87
+      shorts                                n=  87 win 37% $   -404 total $  -35,150 PF 0.54 t -1.7 yrs+ 1/8 | gross $  -329
+      weekend reopens                       n=  73 win 41% $   -712 total $  -51,950 PF 0.44 t -2.2 yrs+ 2/8 | gross $  -637
+      daily reopens                         n=  99 win 45% $     31 total $    3,050 PF 1.07 t  0.2 yrs+ 5/8 | gross $   106
+   by year (net): {2019: -4450, 2020: -6450, 2021: 2275, 2022: 9475, 2023: 4275, 2024: -30550, 2025: -23800, 2026: 325}
+
+2 tick(s) a fill ($25 + $100 a round trip), per CME BTC contract:
+   author's window (2018-12 .. 2024-09-01)  n= 136 win 42% $   -166 total $  -22,525 PF 0.72 t -1.2 yrs+ 3/6 | gross $   -41
+   sealed period (2024-09-02 ..)            n=  36 win 39% $   -972 total $  -34,975 PF 0.41 t -1.8 yrs+ 1/3 | gross $  -847
+   all                                      n= 172 win 41% $   -334 total $  -57,500 PF 0.59 t -2.1 yrs+ 4/8 | gross $  -209
+      longs                                 n=  85 win 46% $   -212 total $  -18,000 PF 0.71 t -1.0 yrs+ 3/8 | gross $   -87
+      shorts                                n=  87 win 37% $   -454 total $  -39,500 PF 0.50 t -2.0 yrs+ 1/8 | gross $  -329
+      weekend reopens                       n=  73 win 40% $   -762 total $  -55,600 PF 0.41 t -2.4 yrs+ 2/8 | gross $  -637
+      daily reopens                         n=  99 win 42% $    -19 total $   -1,900 PF 0.96 t -0.1 yrs+ 5/8 | gross $   106
+
+4 tick(s) a fill ($25 + $200 a round trip), per CME BTC contract:
+   author's window (2018-12 .. 2024-09-01)  n= 136 win 38% $   -266 total $  -36,125 PF 0.60 t -1.9 yrs+ 2/6 | gross $   -41
+   sealed period (2024-09-02 ..)            n=  36 win 36% $  -1072 total $  -38,575 PF 0.38 t -2.0 yrs+ 0/3 | gross $  -847
+   all                                      n= 172 win 38% $   -434 total $  -74,700 PF 0.51 t -2.7 yrs+ 2/8 | gross $  -209
+      longs                                 n=  85 win 42% $   -312 total $  -26,500 PF 0.60 t -1.4 yrs+ 3/8 | gross $   -87
+      shorts                                n=  87 win 33% $   -554 total $  -48,200 PF 0.44 t -2.4 yrs+ 1/8 | gross $  -329
+      weekend reopens                       n=  73 win 37% $   -862 total $  -62,900 PF 0.36 t -2.7 yrs+ 2/8 | gross $  -637
+      daily reopens                         n=  99 win 38% $   -119 total $  -11,800 PF 0.78 t -0.9 yrs+ 5/8 | gross $   106
+
+Random side at the same events (200 runs, 1 tick): $-74 (p95 $191) vs $-284
+   |z| >= 1.0                               n= 365 win 44% $   -148 total $  -54,075 PF 0.79 t -1.5 yrs+ 4/8 | gross $   -73
+   |z| >= 2.0                               n=  86 win 42% $   -428 total $  -36,800 PF 0.51 t -1.9 yrs+ 3/8 | gross $  -353
+   hold 30 min                              n= 172 win 42% $   -265 total $  -45,525 PF 0.58 t -2.0 yrs+ 3/8 | gross $  -190
+   hold 120 min                             n= 172 win 40% $   -563 total $  -96,875 PF 0.51 t -2.7 yrs+ 2/8 | gross $  -488
+   no roll guard                            n= 172 win 44% $   -284 total $  -48,900 PF 0.64 t -1.8 yrs+ 4/8 | gross $  -209
+
+Standard metrics (1 tick, per contract):
+           trades win   avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+BTC reopen    172 44% $-284 $-4,821  -0.56   -0.66          0.64 $55,875  -0.09 41.40      -0.23
+longs          85 51% $-162 $-1,356  -0.24   -0.29          0.77 $34,575  -0.04 21.33      -0.13
+shorts         87 37% $-404 $-3,465  -0.54   -0.63          0.54 $36,200  -0.10 29.80      -0.23

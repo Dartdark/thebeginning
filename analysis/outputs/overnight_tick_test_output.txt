@@ -1,0 +1,41 @@
+NQ Overnight Anomaly 'Optimized' = Overnight TickRSV / VIX (user's description + screenshots, 2026-10-24; Codex source
+nights 2252 (2018 -> 2026-10-09), down-day nights 1003, with order-flow data 965 (order flow ends 2026-07-07)
+
+1. Per NQ after costs (17:05 -> 03:00 CT):
+   rule, VIX SMA 25 (author's pick)             n= 536 avg $ 374.1 PF 1.98 t  5.2 SR  3.6 yrs+ 9/9 | 18-22 $ 278.8 23-26 $ 517.5
+   rule, VIX SMA 20 (code default)              n= 531 avg $ 346.2 PF 1.87 t  4.8 SR  3.3 yrs+ 9/9 | 18-22 $ 259.1 23-26 $ 488.0
+   baseline: every down-day night (same span)   n= 965 avg $ 174.9 PF 1.35 t  3.1 SR  1.6 yrs+ 8/9 | 18-22 $ 105.6 23-26 $ 276.7
+   every night (same span)                      n=2109 avg $ 108.4 PF 1.23 t  3.1 SR  1.1 yrs+ 9/9 | 18-22 $  61.1 23-26 $ 175.5
+
+   the four cells (down days, SMA 25):
+   RSV < 0, VIX > SMA   (taken)                 n= 329 avg $ 419.4 PF 1.99 t  4.3 SR  3.8 yrs+ 9/9 | 18-22 $ 351.0 23-26 $ 517.7
+   RSV >= 0, VIX <= SMA (taken)                 n= 207 avg $ 302.2 PF 1.96 t  2.9 SR  3.2 yrs+ 8/9 | 18-22 $ 169.4 23-26 $ 517.2
+   RSV < 0, VIX <= SMA  (skipped)               n= 241 avg $ -62.5 PF 0.89 t -0.6 SR -0.6 yrs+ 3/9 | 18-22 $-242.3 23-26 $ 200.0
+   RSV >= 0, VIX > SMA  (skipped)               n= 188 avg $ -88.6 PF 0.88 t -0.6 SR -0.7 yrs+ 5/9 | 18-22 $  50.3 23-26 $-280.4
+
+   author's periods (rule, SMA 25):
+   IS 2018 -> 2024-02-12                        n= 385 avg $ 276.6 PF 1.87 t  4.2 SR  3.4 yrs+ 7/7 | 18-22 $ 278.8 23-26 $ 265.0
+   OOS 2024-02-13 ->                            n= 151 avg $ 622.9 PF 2.16 t  3.3 SR  4.2 yrs+ 3/3 | 18-22 $   nan 23-26 $ 622.9
+      baseline down days, OOS                   n= 278 avg $ 330.4 PF 1.46 t  2.2 SR  2.1 yrs+ 3/3 | 18-22 $   nan 23-26 $ 330.4
+   by year (rule SMA 25 / baseline): {2018: '3,331 / -6,020', 2019: '9,290 / 12,148', 2020: '33,224 / 20,542', 2021: '14,148 / 22,607', 2022: '29,792 / 11,342', 2023: '14,129 / 14,787', 2024: '22,829 / 10,107', 2025: '32,172 / 39,853', 2026: '41,618 / 43,453'}
+
+2. Sensitivity (not chosen on): VIX SMA length / second RSV proxy
+   VIX SMA 10                                   n= 515 avg $ 334.9 PF 1.84 t  4.6 SR  3.2 yrs+ 9/9 | 18-22 $ 218.6 23-26 $ 512.2
+   VIX SMA 20                                   n= 531 avg $ 346.2 PF 1.87 t  4.8 SR  3.3 yrs+ 9/9 | 18-22 $ 259.1 23-26 $ 488.0
+   VIX SMA 25                                   n= 536 avg $ 374.1 PF 1.98 t  5.2 SR  3.6 yrs+ 9/9 | 18-22 $ 278.8 23-26 $ 517.5
+   VIX SMA 30                                   n= 535 avg $ 338.9 PF 1.85 t  4.7 SR  3.2 yrs+ 9/9 | 18-22 $ 242.1 23-26 $ 482.8
+   VIX SMA 40                                   n= 543 avg $ 335.3 PF 1.86 t  4.8 SR  3.3 yrs+ 9/9 | 18-22 $ 214.0 23-26 $ 510.9
+   RSV from bar-direction volume, SMA 25        n= 540 avg $ 271.5 PF 1.56 t  3.2 SR  2.2 yrs+ 9/9 | 18-22 $ 205.9 23-26 $ 369.9
+     same, after the order-flow data ends       n=  19 avg $ 123.3 PF 1.10 t  0.1 SR  0.5 yrs+ 1/1 | 18-22 $   nan 23-26 $ 123.3
+   agreement of the two RSV signs: 62%
+
+3. Random down-day nights, same count 536 (2,000 draws): mean $175.5, p95 $257.6; rule $374.1; share of draws >= rule 0.0%
+   VIX regime shuffled across nights (500): mean $171.0, p95 $265.1; share >= rule 0.0%
+
+4. Standard metrics per NQ (rule SMA 25; long only):
+   rule all                           Sharpe 1.73 Sortino 3.26 PF 1.98 Calmar 1.78 Ulcer 2.91 maxDD $12,801
+   rule 2023+                         Sharpe 1.89 Sortino 3.56 PF 2.11 Calmar 2.39 Ulcer 2.55 maxDD $12,801
+   baseline down days all             Sharpe 1.04 Sortino 1.54 PF 1.35 Calmar 1.07 Ulcer 7.30 maxDD $17,990
+   Monte Carlo 1 MNQ (x0.1): trades 536 | total p5 $13,722 / p50 $20,056 / p95 $26,579, P(total <= 0) 0.0%
+      max DD actual $1,280 (rank 42%), shuffled p50 $1,352 / p95 $2,279 / p99 $2,802; losing streak actual 5, p95 9
+      252-day block bootstrap: P&L p5 $147 / p50 $2,145 / p95 $4,544, P(loss) 3.9%, max DD p50 $619 / p95 $1,294, return/DD 3.47, P(hit $2,000 trailing, EOD check only) 0.3%

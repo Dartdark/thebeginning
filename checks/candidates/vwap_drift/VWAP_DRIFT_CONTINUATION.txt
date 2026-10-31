@@ -1,0 +1,631 @@
+{====================================================================
+ VWAP Drift Continuation - Entry Mode A/B/C
+
+ EntryMode ({NOU} test structural al pullback-ului):
+   0 = PULLBACK (comportamentul V8/ancora):
+       long  intra pe o lumanare rosie (Close < Open) in fereastra de armare
+       short intra pe o lumanare verde (Close > Open)
+   1 = IMMEDIATE: intra pe prima bara dupa armare, fara sa astepte pullback
+   2 = CONTEXT-CLOSE: intra pe bara la care contextul devine adevarat
+       (in aceeasi directie cu drift-ul, la inchiderea barei de semnal)
+
+ Toate trei folosesc EXACT aceeasi conditie de armare, acelasi ADX gate,
+ aceleasi filtre si acelasi management. Difera DOAR declansatorul intrarii.
+ Asa comparatia izoleaza contributia pullback-ului
+ MultiCharts PowerLanguage Signal
+
+ Chart:
+   Data1 = @NQ / @MNQ, 15 Minute
+   Data2 = acelasi simbol, 60 Minute
+
+ ------------------------------------------------------------------
+ NOU FATA DE V6
+ ------------------------------------------------------------------
+ 1. Fereastra de date (UseDateWindow / WinStart / WinEnd)
+    Permite rularea separata in-sample si out-of-sample fara sa
+    modifici intervalul graficului.
+
+    Format PowerLanguage pentru Date: YYYMMDD, unde YYY = an - 1900
+        2020-01-01 -> 1200101
+        2023-12-31 -> 1231231
+        2024-01-01 -> 1240101
+        2026-12-31 -> 1261231
+
+    Impartirea propusa:
+        IN-SAMPLE      WinStart = 1200101, WinEnd = 1231231
+        OUT-OF-SAMPLE  WinStart = 1240101, WinEnd = 1261231
+
+    Fereastra blocheaza doar INTRARILE noi. Pozitiile deschise sunt
+    gestionate normal pana la iesire.
+
+ 2. Log CSV al intrarilor (LogEntries / LogPath)
+    Scrie cate o linie la fiecare intrare, pentru analiza ulterioara:
+        Date, Time, Side, Cts, StopPts, ATRfrozen, ATRavg, Close
+    Side: 1 = long, -1 = short
+    Time = bara de SEMNAL (intrarea se executa la deschiderea
+    urmatoarei bare).
+
+    Folosire: creeaza folderul din LogPath inainte de rulare,
+    si sterge fisierul vechi intre rulari, altfel se adauga la el.
+
+ ------------------------------------------------------------------
+ NOTA IMPORTANTA despre MaxATRratio
+ ------------------------------------------------------------------
+ Implicit este 0 (OPRIT), intentionat.
+
+ Literatura pe momentum intraday (Gao et al. 2018, Baltussen et al.
+ 2021) arata ca efectul este MAI PUTERNIC in volatilitate ridicata.
+ Un filtru care blocheaza intrarile in vol mare ar taia exact zona
+ unde ar trebui sa existe edge-ul.
+
+ Riscul din volatilitate mare se trateaza prin DIMENSIONARE
+ (MaxSLusd + SizeMode 3), nu prin excluderea trade-urilor.
+ ------------------------------------------------------------------
+
+ IMPORTANT: MaxBarsBack = 300 (fix, nu auto-detect).
+====================================================================}
+
+Inputs:
+    {================ 0. Fereastra de date {NOU} ================}
+    UseDateWindow( false ),
+    WinStart( 1200101 ),
+    WinEnd( 1261231 ),
+
+    {================ 0b. Instrumentare {NOU} ================}
+    LogEntries( false ),
+    LogPath( "C:\temp\drift_entries.csv" ),
+
+    {================ 1. PLAFON DE RISC ================}
+    MaxSLusd( 2400 ),          { pierderea maxima pe pozitie, in $. 0 = fara plafon }
+    IfOverLimit( 0 ),          { 0 = strange stopul ca sa incapa | 1 = sari trade-ul }
+    BPVoverride( 0 ),          { 0 = automat | 20 = NQ | 2 = MNQ }
+    UseMMbackstop( true ),     { protectie activa din bara de intrare }
+
+    {================ 2. Cum se calculeaza stopul ================}
+    StopMode( 0 ),             { 0 = ATR/puncte | 1 = $ pe contract | 2 = $ pe pozitie }
+    FixedSLusd( 2400 ),
+
+    MinStopPts( 25 ),
+    MaxStopPts( 150 ),         { 0 = fara plafon }
+
+    {================ 3. Dimensionare ================}
+    SizeMode( 3 ),
+    BaseCts( 3 ),
+    MinCts( 1 ),
+    MaxCts( 3 ),
+    RiskPctEquity( 2.0 ),
+    StartEquity( 100000 ),
+    CushionStep( 2000 ),
+    CushionAdj( 0 ),
+
+    {================ 4. Logica de baza ================}
+    TradeDirection( 0 ),
+    AnchorType( 2 ),
+    MALen( 5 ),                { NEFOLOSIT cand AnchorType = 2 }
+    DriftLen( 6 ),
+    DriftThreshPct( 0.15 ),
+    PullbackWindow( 2 ),
+    EntryMode( 0 ),            { 0=pullback | 1=immediate | 2=context-close {NOU} }
+    UseClosedData2( true ),
+
+    {================ 5. Take profit ================}
+    ExitMode( 1 ),
+    ATRExitLen( 12 ),
+    LongSLpts( 20 ),
+    LongTPpts( 40 ),
+    ShortSLpts( 60 ),
+    ShortTPpts( 50 ),
+    LongSLatr( 3.0 ),
+    LongTPatr( 1.5 ),
+    ShortSLatr( 3.0 ),
+    ShortTPatr( 1.9 ),
+    TPasR( 0 ),
+
+    {================ 6. Protectia stopului in trade ================}
+    BEtrigATR( 0 ),            { 0 = off. Suspect pentru caderea win rate-ului }
+    BEoffsetPts( 0 ),
+    TrailATR( 0 ),
+    TrailStartATR( 1.0 ),
+
+    {================ 7. Filtre si limite zilnice ================}
+    MaxATRratio( 0 ),          { 0 = OFF. Vezi nota din antet }
+    ATRRegimeLen( 200 ),
+    UseADXGate( true ),        { {NOU V8} true = intra doar cand ADX >= ADXThr }
+    ADXThr( 20 ),              { pragul de elevatie ADX (conventia Wilder) }
+    ADXLen( 14 ),
+    MaxTradesPerDay( 3 ),
+    MaxLossesPerDay( 1 ),
+    MaxDailyLossPct( 3.0 ),
+
+    {================ 8. Program ================}
+    SessStart( 0830 ),
+    SessEnd( 1500 ),
+    FlatTime( 1555 ),
+    VwapStart( 0830 ),
+    VwapEnd( 1630 );
+
+Vars:
+    anchorNow( 0 ),
+    anchorPrev( 0 ),
+    anchorReady( false ),
+    driftPct( 0 ),
+    lastData2Time( -1 ),
+    updateData2( false ),
+    longContext( false ),
+    shortContext( false ),
+    longArmed( false ),
+    shortArmed( false ),
+    armedBars( 0 ),
+    justArmed( false ),
+
+    tradesToday( 0 ),
+    lossesToday( 0 ),
+    prevMP( 0 ),
+    closedTradeCount( 0 ),
+    dayStartNP( 0 ),
+    dayPL( 0 ),
+    dailyStopOK( true ),
+    dateOK( true ),
+
+    sessionPV( 0 ),
+    sessionVol( 0 ),
+    sessionVWAP( 0 ),
+    sessionVWAPPrev( 0 ),
+
+    atrNow( 0 ),
+    atrAvg( 0 ),
+    atrFrozen( 0 ),
+    volOK( true ),
+    adxVal( 0 ),
+    adxOK( true ),
+
+    bpv( 1 ),
+    equityNow( 0 ),
+    riskUSD( 0 ),
+    riskNow( 0 ),
+    rawCts( 0 ),
+    curCts( 1 ),
+    cushion( 0 ),
+    stopPtsUse( 0 ),
+    stopPtsFrozen( 0 ),
+    ctsFrozen( 1 ),
+    mmRiskUSD( 0 ),
+    tpPts( 0 ),
+    okToTrade( false ),
+    sideSig( 0 ),
+
+    hiSinceEntry( 0 ),
+    loSinceEntry( 0 ),
+    protStop( 0 ),
+    baseStopPts( 0 ),
+
+    canLong( false ),
+    canShort( false );
+
+canLong  = TradeDirection >= 0;
+canShort = TradeDirection <= 0;
+
+{-------------------- Fereastra de date --------------------}
+dateOK = true;
+If UseDateWindow Then
+    dateOK = Date >= WinStart And Date <= WinEnd;
+
+{-------------------- Valoarea unui punct --------------------}
+If BPVoverride > 0 Then
+    bpv = BPVoverride
+Else
+    bpv = BigPointValue;
+
+If bpv <= 0 Then bpv = 1;
+
+{-------------------- Volatilitate si regim --------------------}
+atrNow = AvgTrueRange( ATRExitLen );
+atrAvg = Average( atrNow, ATRRegimeLen );
+
+volOK = true;
+If MaxATRratio > 0 And atrAvg > 0 Then
+    volOK = ( atrNow / atrAvg ) <= MaxATRratio;
+
+{-------------------- ADX gate {NOU V8} --------------------}
+adxVal = ADX( ADXLen );
+adxOK = true;
+If UseADXGate Then
+    adxOK = adxVal >= ADXThr;
+
+equityNow = StartEquity + NetProfit;
+
+{-------------------- Reset zilnic --------------------}
+If CurrentBar = 1 Or Date <> Date[1] Then Begin
+    tradesToday = 0;
+    lossesToday = 0;
+    longArmed = false;
+    shortArmed = false;
+    armedBars = 0;
+
+    longContext = false;
+    shortContext = false;
+    anchorReady = false;
+    anchorNow = 0;
+    anchorPrev = 0;
+    driftPct = 0;
+    lastData2Time = -1;
+
+    sessionPV = 0;
+    sessionVol = 0;
+    sessionVWAP = 0;
+    sessionVWAPPrev = 0;
+
+    dayStartNP = NetProfit;
+
+    If CurrentBar = 1 Then Begin
+        prevMP = MarketPosition;
+        closedTradeCount = TotalTrades;
+    End;
+
+    If StopMode <> 2 Then Begin
+        If SizeMode = 2 And CushionStep > 0 Then Begin
+            cushion = MaxList( 0, NetProfit + CushionAdj );
+            curCts = BaseCts + IntPortion( cushion / CushionStep );
+            curCts = MinList( curCts, MaxList( MaxCts, 1 ) );
+            curCts = MaxList( curCts, 1 );
+        End
+        Else If SizeMode = 1 Then
+            curCts = MaxList( BaseCts, 1 );
+    End;
+End;
+
+dayPL = NetProfit - dayStartNP;
+
+dailyStopOK = true;
+If MaxDailyLossPct > 0 Then
+    dailyStopOK = dayPL > -( equityNow * MaxDailyLossPct / 100 );
+
+{-------------------- VWAP de sesiune pe Data1 --------------------}
+If AnchorType = 2 Then Begin
+    If Time > VwapStart And Time <= VwapEnd Then Begin
+        sessionPV  = sessionPV + ( ( High + Low + Close ) / 3 ) * Volume;
+        sessionVol = sessionVol + Volume;
+    End;
+
+    If sessionVol > 0 Then
+        sessionVWAP = sessionPV / sessionVol;
+End;
+
+{-------------------- Sincronizare Data2 --------------------}
+updateData2 = false;
+justArmed = false;   { {FIX V9} reset la fiecare bara Data1, nu doar la update Data2 }
+
+If UseClosedData2 Then Begin
+    If BarStatus( 2 ) = 2 Then
+        updateData2 = true;
+End
+Else Begin
+    If Time of Data2 <> lastData2Time Then Begin
+        updateData2 = true;
+        lastData2Time = Time of Data2;
+    End;
+End;
+
+{-------------------- Ancora, drift si armare --------------------}
+If updateData2 Then Begin
+    anchorReady = false;
+
+    If AnchorType = 0 Then Begin
+        anchorNow  = Average( Close of Data2, MALen );
+        anchorPrev = Average( Close[1] of Data2, MALen );
+        anchorReady = true;
+    End
+    Else If AnchorType = 1 Then Begin
+        If Summation( Volume of Data2, MALen ) > 0
+           And Summation( Volume[1] of Data2, MALen ) > 0 Then Begin
+
+            anchorNow =
+                Summation(
+                    ( ( High of Data2 + Low of Data2 + Close of Data2 ) / 3 )
+                    * Volume of Data2,
+                    MALen
+                )
+                / Summation( Volume of Data2, MALen );
+
+            anchorPrev =
+                Summation(
+                    ( ( High[1] of Data2 + Low[1] of Data2
+                        + Close[1] of Data2 ) / 3 )
+                    * Volume[1] of Data2,
+                    MALen
+                )
+                / Summation( Volume[1] of Data2, MALen );
+
+            anchorReady = true;
+        End;
+    End
+    Else Begin
+        anchorNow = sessionVWAP;
+
+        If sessionVWAPPrev > 0 Then
+            anchorPrev = sessionVWAPPrev
+        Else
+            anchorPrev = anchorNow;
+
+        anchorReady = sessionVol > 0 And sessionVWAP > 0;
+    End;
+
+    driftPct = 0;
+    If Close[DriftLen] of Data2 <> 0 Then
+        driftPct = ( Close of Data2 - Close[DriftLen] of Data2 )
+                   / Close[DriftLen] of Data2 * 100;
+
+    longContext = anchorReady
+                  And canLong
+                  And Close of Data2 > anchorNow
+                  And anchorNow > anchorPrev
+                  And driftPct >= DriftThreshPct;
+
+    shortContext = anchorReady
+                   And canShort
+                   And Close of Data2 < anchorNow
+                   And anchorNow < anchorPrev
+                   And driftPct <= -DriftThreshPct;
+
+    justArmed = false;
+    If longContext Then Begin
+        longArmed = true;
+        shortArmed = false;
+        armedBars = 0;
+        justArmed = true;
+    End
+    Else If shortContext Then Begin
+        shortArmed = true;
+        longArmed = false;
+        armedBars = 0;
+        justArmed = true;
+    End
+    Else Begin
+        longArmed = false;
+        shortArmed = false;
+        armedBars = 0;
+    End;
+
+    If AnchorType = 2 And anchorReady Then
+        sessionVWAPPrev = anchorNow;
+End;
+
+{-------------------- Durata de viata a setup-ului --------------------}
+If longArmed Or shortArmed Then Begin
+    armedBars = armedBars + 1;
+
+    If armedBars > PullbackWindow Then Begin
+        longArmed = false;
+        shortArmed = false;
+    End;
+End;
+
+{-------------------- Numararea trade-urilor pierzatoare --------------------}
+If TotalTrades > closedTradeCount Then Begin
+    If PositionProfit( 1 ) < 0 Then
+        lossesToday = lossesToday + 1;
+
+    closedTradeCount = TotalTrades;
+End;
+
+{-------------------- Urmarirea pozitiei deschise --------------------}
+If MarketPosition <> 0 And prevMP = 0 Then Begin
+    tradesToday = tradesToday + 1;
+    hiSinceEntry = High;
+    loSinceEntry = Low;
+End
+Else If MarketPosition <> 0 Then Begin
+    hiSinceEntry = MaxList( hiSinceEntry, High );
+    loSinceEntry = MinList( loSinceEntry, Low );
+End;
+
+prevMP = MarketPosition;
+
+{====================================================================
+  INTRARE
+====================================================================}
+sideSig = 0;
+
+If MarketPosition = 0
+   And dateOK
+   And Time >= SessStart
+   And Time < SessEnd
+   And tradesToday < MaxTradesPerDay
+   And lossesToday < MaxLossesPerDay
+   And dailyStopOK
+   And volOK
+   And adxOK Then Begin
+
+    If EntryMode = 1 Then Begin
+        { IMMEDIATE: intra imediat ce e armat, fara pullback }
+        If canLong And longArmed Then
+            sideSig = 1
+        Else If canShort And shortArmed Then
+            sideSig = -1;
+    End
+    Else If EntryMode = 2 Then Begin
+        { CONTEXT-CLOSE: intra doar pe bara la care s-a armat contextul }
+        If justArmed Then Begin
+            If canLong And longArmed Then
+                sideSig = 1
+            Else If canShort And shortArmed Then
+                sideSig = -1;
+        End;
+    End
+    Else Begin
+        { PULLBACK (implicit, ca V8): asteapta lumanarea contra-trend }
+        If canLong And longArmed And Close < Open Then
+            sideSig = 1
+        Else If canShort And shortArmed And Close > Open Then
+            sideSig = -1;
+    End;
+End;
+
+If sideSig <> 0 Then Begin
+
+    atrFrozen = atrNow;
+    okToTrade = true;
+
+    {---------- Pasul 1: distanta bruta a stopului ----------}
+    If StopMode = 1 Then
+        stopPtsUse = FixedSLusd / bpv
+    Else If sideSig = 1 Then
+        stopPtsUse = Iff( ExitMode = 0, LongSLpts,  LongSLatr  * atrFrozen )
+    Else
+        stopPtsUse = Iff( ExitMode = 0, ShortSLpts, ShortSLatr * atrFrozen );
+
+    {---------- Pasul 2: limite in puncte ----------}
+    If MinStopPts > 0 Then
+        stopPtsUse = MaxList( stopPtsUse, MinStopPts );
+    If MaxStopPts > 0 Then
+        stopPtsUse = MinList( stopPtsUse, MaxStopPts );
+
+    {---------- Pasul 3: numarul de contracte ----------}
+    If StopMode = 2 Then Begin
+        rawCts = 0;
+        If stopPtsUse > 0 Then
+            rawCts = IntPortion( FixedSLusd / ( stopPtsUse * bpv ) );
+    End
+    Else If SizeMode = 3 Then Begin
+        riskUSD = equityNow * RiskPctEquity / 100;
+        rawCts = 0;
+        If stopPtsUse > 0 Then
+            rawCts = IntPortion( riskUSD / ( stopPtsUse * bpv ) );
+    End
+    Else
+        rawCts = curCts;
+
+    curCts = MaxList( MinCts, MinList( rawCts, MaxList( MaxCts, 1 ) ) );
+
+    {---------- Pasul 4: plafonul absolut in dolari ----------}
+    If MaxSLusd > 0 Then Begin
+
+        riskNow = curCts * stopPtsUse * bpv;
+
+        If riskNow > MaxSLusd Then Begin
+
+            rawCts = IntPortion( MaxSLusd / ( stopPtsUse * bpv ) );
+
+            If rawCts >= 1 Then
+                curCts = rawCts
+            Else Begin
+                If IfOverLimit = 1 Then
+                    okToTrade = false
+                Else Begin
+                    curCts = 1;
+                    stopPtsUse = MaxSLusd / bpv;
+
+                    If MinStopPts > 0 And stopPtsUse < MinStopPts Then
+                        okToTrade = false;
+                End;
+            End;
+        End;
+    End;
+
+    {---------- Pasul 5: ordinul ----------}
+    If okToTrade And stopPtsUse > 0 Then Begin
+
+        stopPtsFrozen = stopPtsUse;
+        ctsFrozen = curCts;
+
+        If sideSig = 1 Then
+            Buy ( "DriftPB.L" ) curCts contracts next bar at market
+        Else
+            SellShort ( "DriftPB.S" ) curCts contracts next bar at market;
+
+        {---------- Log CSV {NOU} ----------}
+        If LogEntries Then
+            Print( File( LogPath ),
+                   NumToStr( Date, 0 ),          ",",
+                   NumToStr( Time, 0 ),          ",",
+                   NumToStr( sideSig, 0 ),       ",",
+                   NumToStr( curCts, 0 ),        ",",
+                   NumToStr( stopPtsFrozen, 2 ), ",",
+                   NumToStr( atrFrozen, 2 ),     ",",
+                   NumToStr( atrAvg, 2 ),        ",",
+                   NumToStr( Close, 2 ) );
+
+        longArmed = false;
+        shortArmed = false;
+    End;
+End;
+
+{====================================================================
+  BACKSTOP MONEY-MANAGEMENT
+====================================================================}
+If UseMMbackstop And stopPtsFrozen > 0 Then Begin
+
+    mmRiskUSD = ctsFrozen * stopPtsFrozen * bpv;
+
+    If MaxSLusd > 0 Then
+        mmRiskUSD = MinList( mmRiskUSD, MaxSLusd );
+
+    If mmRiskUSD > 0 Then Begin
+        SetStopPosition;
+        SetStopLoss( mmRiskUSD );
+    End;
+End;
+
+{-------------------- Iesiri LONG --------------------}
+If MarketPosition = 1 Then Begin
+
+    If stopPtsFrozen > 0 Then
+        baseStopPts = stopPtsFrozen
+    Else
+        baseStopPts = Iff( ExitMode = 0, LongSLpts, LongSLatr * atrFrozen );
+
+    protStop = EntryPrice - baseStopPts;
+
+    If BEtrigATR > 0 And atrFrozen > 0
+       And hiSinceEntry >= EntryPrice + BEtrigATR * atrFrozen Then
+        protStop = MaxList( protStop, EntryPrice + BEoffsetPts );
+
+    If TrailATR > 0 And atrFrozen > 0
+       And hiSinceEntry >= EntryPrice + TrailStartATR * atrFrozen Then
+        protStop = MaxList( protStop, hiSinceEntry - TrailATR * atrFrozen );
+
+    If TPasR > 0 Then
+        tpPts = baseStopPts * TPasR
+    Else
+        tpPts = Iff( ExitMode = 0, LongTPpts, LongTPatr * atrFrozen );
+
+    If Time >= FlatTime Then
+        Sell ( "L.Flat" ) next bar at market
+    Else Begin
+        Sell ( "L.SL" ) next bar at protStop stop;
+        Sell ( "L.TP" ) next bar at EntryPrice + tpPts limit;
+    End;
+End;
+
+{-------------------- Iesiri SHORT --------------------}
+If MarketPosition = -1 Then Begin
+
+    If stopPtsFrozen > 0 Then
+        baseStopPts = stopPtsFrozen
+    Else
+        baseStopPts = Iff( ExitMode = 0, ShortSLpts, ShortSLatr * atrFrozen );
+
+    protStop = EntryPrice + baseStopPts;
+
+    If BEtrigATR > 0 And atrFrozen > 0
+       And loSinceEntry <= EntryPrice - BEtrigATR * atrFrozen Then
+        protStop = MinList( protStop, EntryPrice - BEoffsetPts );
+
+    If TrailATR > 0 And atrFrozen > 0
+       And loSinceEntry <= EntryPrice - TrailStartATR * atrFrozen Then
+        protStop = MinList( protStop, loSinceEntry + TrailATR * atrFrozen );
+
+    If TPasR > 0 Then
+        tpPts = baseStopPts * TPasR
+    Else
+        tpPts = Iff( ExitMode = 0, ShortTPpts, ShortTPatr * atrFrozen );
+
+    If Time >= FlatTime Then
+        BuyToCover ( "S.Flat" ) next bar at market
+    Else Begin
+        BuyToCover ( "S.SL" ) next bar at protStop stop;
+        BuyToCover ( "S.TP" ) next bar at EntryPrice - tpPts limit;
+    End;
+End;
+
+SetExitOnClose;

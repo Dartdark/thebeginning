@@ -1,0 +1,223 @@
+{ =====================================================================================================
+  GC_COMBO_v2 - COMMUNITY EDITION  (gold futures, 1-minute, MultiCharts / PowerLanguage)
+
+  WITH ALL INPUTS AT THEIR DEFAULTS THIS IS EXACTLY THE TESTED STRATEGY:
+    2017-09 .. 2024-12 in-sample (1 GC base, $2.30/side + 1 tick): ~973 trades, ~2.6/week, every year positive.
+    Sealed out-of-sample 2025-01 .. 2026-08: 230 trades, +$284/trade, 2.76/week - passed all pre-declared checks.
+
+  TWO SLEEVES, ONE POSITION AT A TIME (first signal wins):
+    BLEND   - at 10:00 ET, add up to five votes. If the total is >= MinScore go long, <= -MinScore go short,
+              next bar at market; exit at the close of the 13:30 ET bar.
+                A PRICE    sign(close 10:00 - close 08:20)            (morning move continues)
+                B FLOW     -sign(up volume - down volume, 08:21-10:00) (fade morning taker flow)
+                C GLD      GLD ETF holdings changed by >= 1 creation basket yesterday (+1 / -1 / 0)   [data3]
+                D OIL      yesterday's crude (CL) 17:00->17:00 move >= 1.5x its recent average size  [data2]
+                E DECOUPLE vote A counts twice when gold has been ignoring the dollar lately         [data3]
+              Conviction sizing: BaseQty at |score| = MinScore, ConvictionQty at |score| >= ConvictionScore.
+    STRETCH - short when price closes 0.5 x ATR below the session VWAP (08:20-15:00 ET); stop 0.505 x ATR,
+              target 2 x stop, flat at the close of the 16:00 ET bar. Max 2 signals a session, 60 bars apart.
+
+  CHART
+    Data1 @GC 1-minute, FULL Globex session, "Build volume on: Trade volume" (vote B needs up/down volume).
+    Data2 @CL 1-minute.  Data3 GCCOMBO (GCCOMBO_daily_holdout.txt imported as a 1-MINUTE ASCII symbol with a
+    24-hour session; Open-10 = decoupled flag, Close-10 = GLD vote).
+    No CL or GCCOMBO?  Put any symbol in that slot and switch the vote(s) it feeds OFF (UseVoteOil = false for
+    data2; UseVoteGLD = false and UseVoteDecouple = false for data3). The code still needs 3 data series.
+    ETminusChart: hours to ADD to chart time to get New York time (Chicago/exchange chart = 1, NY chart = 0).
+    Strategy properties: commission and 1 tick slippage per side; limit fills "1 tick beyond".
+
+  FILTERS (all OFF by default - none of them improved the tested strategy; ADX and RVOL were tested and dropped)
+    UseADXFilter   trade only when ADX(ADXLen) of the chart bars >= ADXMin at the signal bar
+    UseRVOLFilter  blend only: 08:21-10:00 volume / average of the prior RVOLDays sessions >= RVOLMin
+    UseDayFilter   trade only on the weekdays switched on (TradeMon .. TradeFri)
+    FiltersOnBlend / FiltersOnStretch choose which sleeve the filters apply to.
+    UseDollarStop  hard per-position stop of MaxLossUSD (blend: placed from the bar after entry; stretch: caps
+                   its ATR stop).
+    UseRiskSizing  size so the worst move seen 2017-2024 (WorstMovePct = 1.8% of price) costs <= MaxLossUSD:
+                   top size = floor(MaxLossUSD / (1.8% x price x point value)); base and stretch = half (min 1);
+                   0 = no trade. Set only from the 2017-2024 data and the $5K rule, never tuned on 2025-26.
+                   On @GC at $1,300 gold this gives the tested 2/1; at $4,000+ gold 1 GC is too big, so run it on
+                   an @MGC chart (same data2/data3), where it gives about 6/3.
+
+  READ BEFORE YOU OPTIMISE
+    Every input you change and keep because it looked better is a new test on data this strategy was built on.
+    Try 20 settings and one will look great by luck. The 2025-26 hold-out is already SPENT (we have seen it), so
+    it can no longer prove a new version. Honest ways to improve it: decide a change BEFORE testing, judge it on
+    a period you did not use to choose it (walk-forward), prefer settings whose neighbours also work, and then
+    forward-test it on live/sim data before trusting it.
+  ===================================================================================================== }
+
+inputs:
+  ETminusChart(1),
+  { ---- BLEND ---- }
+  UseBlend(true), UseVotePrice(true), UseVoteFlow(true), UseVoteGLD(true), UseVoteOil(true), UseVoteDecouple(true),
+  MinScore(2), ConvictionScore(3), BaseQty(1), ConvictionQty(2), AllowLong(true), AllowShort(true),
+  AnchorET(820), DecisionET(1000), BlendExitET(1330), OilZ(1.5), OilLen(20),
+  { ---- STRETCH ---- }
+  UseStretch(true), StretchQty(1), StretchK(0.5), StopATR(0.505), TargetR(2.0), AtrLen(15),
+  StretchStartET(820), StretchEndET(1500), StretchExitET(1600), MaxSigPerSess(2), SigGapBars(60),
+  { ---- OPTIONAL FILTERS (off = tested strategy) ---- }
+  UseADXFilter(false), ADXLen(14), ADXMin(20),
+  UseRVOLFilter(false), RVOLDays(20), RVOLMin(1.0),
+  UseDayFilter(false), TradeMon(true), TradeTue(true), TradeWed(true), TradeThu(true), TradeFri(true),
+  FiltersOnBlend(true), FiltersOnStretch(false),
+  UseDollarStop(false), MaxLossUSD(5000),
+  { ---- RISK SIZING (off = fixed BaseQty / ConvictionQty / StretchQty) ---- }
+  UseRiskSizing(false), WorstMovePct(1.8);
+
+variables:
+  tET(0), prevT(-1), j(0), vol(0), adxVal(0), dayOK(true), adxOK(true),
+  sessHi(0), sessLo(0), cumPV(0), cumV(0), vwapS(0), nRng(0), atrPts(0),
+  sigCount(0), lastSigBar(-99999), stopDist(0), stretchSig(false), stretchAllowed(false),
+  anchorPx(0), haveOpen(false), flowSum(0), morningVol(0), nMV(0), mvSum(0), rvol(0), rvolOK(true),
+  prevCL(0), clRet(0), absSum(0), zOil(0), oilVote(0), nRets(0),
+  vA(0), score(0), blQty(1), blendAllowed(false), sleeve(0), pendSleeve(0), capPx(0),
+  rsTop(0), rsBase(0), stQty(1);
+
+arrays: rngs[100](0), rets[100](0), mvs[100](0);
+
+once begin
+  if AtrLen > 100 or OilLen > 100 or RVOLDays > 100 then RaiseRunTimeError("AtrLen, OilLen, RVOLDays must be <= 100");
+end;
+
+tET = Mod(Time + ETminusChart * 100, 2400);
+vol = MaxList(UpTicks + DownTicks, 1);
+adxVal = ADX(ADXLen);                                            { series function: evaluated on every bar }
+
+{ ---- filters shared by both sleeves ---- }
+dayOK = true;
+if UseDayFilter then begin
+  j = DayOfWeek(Date);
+  dayOK = (j = 1 and TradeMon) or (j = 2 and TradeTue) or (j = 3 and TradeWed) or (j = 4 and TradeThu) or (j = 5 and TradeFri);
+end;
+adxOK = (UseADXFilter = false) or adxVal >= ADXMin;
+
+{ ---- risk sizing: largest size whose worst historical move (WorstMovePct of price) stays <= MaxLossUSD ---- }
+if UseRiskSizing then begin
+  rsTop = IntPortion(MaxLossUSD / (WorstMovePct * 0.01 * Close * BigPointValue));
+  rsBase = IntPortion(rsTop / 2);
+  if rsTop >= 1 and rsBase < 1 then rsBase = 1;
+  stQty = rsBase;
+end
+else stQty = StretchQty;
+
+{ ---- new Globex session at 18:01 ET: store range, ATR, reset VWAP ---- }
+if tET >= 1801 and prevT < 1801 and prevT >= 0 then begin
+  if sessHi > 0 then begin
+    for j = AtrLen downto 2 begin rngs[j] = rngs[j - 1]; end;
+    rngs[1] = sessHi - sessLo;
+    nRng = nRng + 1;
+  end;
+  atrPts = 0;
+  if nRng >= AtrLen then begin
+    for j = 1 to AtrLen begin atrPts = atrPts + rngs[j]; end;
+    atrPts = atrPts / AtrLen;
+  end;
+  sessHi = High; sessLo = Low; cumPV = 0; cumV = 0; sigCount = 0; lastSigBar = -99999;
+end
+else begin
+  if High > sessHi then sessHi = High;
+  if Low < sessLo or sessLo = 0 then sessLo = Low;
+end;
+cumPV = cumPV + (High + Low + Close) / 3 * vol;
+cumV = cumV + vol;
+vwapS = cumPV / cumV;
+
+{ ---- vote D: CL 17:00 ET return vs the average size of the prior OilLen returns ---- }
+if tET = 1700 then begin
+  if prevCL > 0 then begin
+    clRet = Close of data2 / prevCL - 1;
+    absSum = 0;
+    for j = 1 to OilLen begin absSum = absSum + AbsValue(rets[j]); end;
+    zOil = 0;
+    if nRets >= OilLen and absSum > 0 then zOil = clRet / (absSum / OilLen);
+    oilVote = 0;
+    if AbsValue(zOil) >= OilZ then oilVote = Sign(zOil);
+    for j = OilLen downto 2 begin rets[j] = rets[j - 1]; end;
+    rets[1] = clRet;
+    nRets = nRets + 1;
+  end;
+  prevCL = Close of data2;
+end;
+
+if MarketPosition = 0 then sleeve = 0
+else if sleeve = 0 then sleeve = pendSleeve;
+
+{ ================= STRETCH SHORT ================= }
+stretchSig = false;
+if tET >= StretchStartET and tET <= StretchEndET and atrPts > 0 and Close <= vwapS - StretchK * atrPts
+   and sigCount < MaxSigPerSess and BarNumber - lastSigBar >= SigGapBars then begin
+  sigCount = sigCount + 1;                                       { counted even when not taken, as tested }
+  lastSigBar = BarNumber;
+  stretchAllowed = UseStretch and (FiltersOnStretch = false or (dayOK and adxOK));
+  if MarketPosition = 0 and stretchAllowed and stQty >= 1 then begin
+    stopDist = StopATR * atrPts;
+    pendSleeve = 2;
+    stretchSig = true;
+    SellShort ("ST_S") stQty contracts next bar at market;
+  end;
+end;
+
+{ ================= BLEND ================= }
+if tET = AnchorET then begin
+  anchorPx = Close; flowSum = 0; morningVol = 0; haveOpen = true;
+end
+else if haveOpen and tET > AnchorET and tET <= DecisionET then begin
+  flowSum = flowSum + UpTicks - DownTicks;
+  morningVol = morningVol + UpTicks + DownTicks;
+end;
+
+if tET = DecisionET and haveOpen then begin
+  { RVOL: this morning's volume vs the average of the prior RVOLDays mornings }
+  rvol = 0;
+  if nMV >= RVOLDays and mvSum > 0 then rvol = morningVol / (mvSum / RVOLDays);
+  rvolOK = (UseRVOLFilter = false) or (nMV >= RVOLDays and rvol >= RVOLMin);
+  if nMV >= RVOLDays then mvSum = mvSum - mvs[RVOLDays];
+  for j = RVOLDays downto 2 begin mvs[j] = mvs[j - 1]; end;
+  mvs[1] = morningVol;
+  mvSum = mvSum + morningVol;
+  nMV = nMV + 1;
+
+  vA = Sign(Close - anchorPx);
+  score = 0;
+  if UseVotePrice then score = score + vA;
+  if UseVoteFlow then score = score - Sign(flowSum);
+  if UseVoteOil then score = score + oilVote;
+  if Date of data3 = Date then begin
+    if UseVoteGLD then score = score + (Close of data3 - 10);
+    if UseVoteDecouple and Open of data3 - 10 = 1 then score = score + vA;
+  end;
+
+  if UseRiskSizing then begin
+    if AbsValue(score) >= ConvictionScore then blQty = rsTop else blQty = rsBase;
+  end
+  else if AbsValue(score) >= ConvictionScore then blQty = ConvictionQty else blQty = BaseQty;
+  blendAllowed = UseBlend and (FiltersOnBlend = false or (dayOK and adxOK and rvolOK));
+  if MarketPosition = 0 and stretchSig = false and blendAllowed and blQty >= 1 then begin
+    if score >= MinScore and AllowLong then begin pendSleeve = 1; Buy ("BL_L") blQty contracts next bar at market; end
+    else if score <= -MinScore and AllowShort then begin pendSleeve = 1; SellShort ("BL_S") blQty contracts next bar at market; end;
+  end;
+  haveOpen = false;
+end;
+
+{ ================= EXITS ================= }
+if sleeve = 2 or stretchSig then begin
+  SetStopContract;
+  if UseDollarStop then SetStopLoss(MinList(stopDist * BigPointValue, MaxLossUSD / MaxList(stQty, 1)))
+  else SetStopLoss(stopDist * BigPointValue);
+  SetProfitTarget(TargetR * stopDist * BigPointValue);
+end;
+
+if sleeve = 1 and UseDollarStop and MarketPosition <> 0 then begin
+  capPx = MaxLossUSD / (BigPointValue * CurrentContracts);
+  if MarketPosition = 1 then Sell ("BL_CAP_L") next bar at EntryPrice - capPx stop;
+  if MarketPosition = -1 then BuyToCover ("BL_CAP_S") next bar at EntryPrice + capPx stop;
+end;
+
+if sleeve = 1 and tET = BlendExitET then begin
+  Sell ("BL_LX") this bar at close;
+  BuyToCover ("BL_SX") this bar at close;
+end;
+if sleeve = 2 and tET = StretchExitET then BuyToCover ("ST_X") this bar at close;
+
+prevT = tET;

@@ -17,6 +17,12 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 New-Item -ItemType Directory -Force "live\health" | Out-Null
+# one-time (2026-10-29): intraday push every 30 min in RTH (-Mode intraday: logs + alerts only, no health line), so
+# Claude's master session can see a problem during the day, not only at 16:10
+schtasks /Query /TN "VpsIntradayPush" 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    schtasks /Create /TN "VpsIntradayPush" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 08:45 /RI 30 /DU 06:30 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\push_trade_logs.ps1 -Mode intraday" /F | Out-Null
+}
 schtasks /Query /TN "VpsWatchdog" 2>$null | Out-Null
 if ($LASTEXITCODE -ne 0) {
     schtasks /Create /TN "VpsWatchdog" /SC WEEKLY /D MON,TUE,WED,THU,FRI /ST 08:15 /RI 5 /DU 07:00 /TR "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\TradingRepo\live\vps\watchdog.ps1" /F | Out-Null
@@ -41,16 +47,23 @@ foreach ($r in $roots) {
     Get-ChildItem $r -Recurse -File -Include *.log, *.txt -ErrorAction SilentlyContinue |
         Where-Object { $_.LastWriteTime.Date -eq (Get-Date).Date -and $_.Length -lt 200MB } | ForEach-Object {
             $hits = Select-String -Path $_.FullName -Pattern "Rejected|Invalid .* order|not found|done for day" -SimpleMatch:$false -ErrorAction SilentlyContinue
+            # count only lines stamped today (MultiCharts writes dd.MM.yyyy/HH:mm:ss): a log file touched today still
+            # holds older days' lines (10/28 counted 3,228, the last from 10/26) (2026-10-29)
+            $hits = @($hits | Where-Object { $_.Line -like ("*" + (Get-Date).ToString("dd.MM.yyyy") + "/*") })
             if ($hits) { $rej += @($hits).Count; $rejmsg = ($hits[-1].Line -replace ',', ';' -replace '\s+', ' ').Substring(0, [math]::Min(160, $hits[-1].Line.Length)) }
         }
 }
 New-Item -ItemType Directory -Force "live\health" | Out-Null
 $line = "$Mode,$(Get-Date -Format 'yyyy-MM-dd HH:mm'),mc_processes=$mc,disk_free_gb=$disk,last_boot=$boot,tz=$tz,log_rows_today=$rows,push_errors=$errs,rejected_today=$rej,last_reject=$rejmsg"
-Add-Content "live\health\$day.csv" $line
+if ($Mode -ne "intraday") { Add-Content "live\health\$day.csv" $line }
 
 New-Item -ItemType Directory -Force "live\trades" | Out-Null
 Copy-Item "$Logs\*.csv" "live\trades\" -Force -ErrorAction SilentlyContinue
-git add live/trades live/health
+# daily 1-minute bars from the NQ Daily Bar Feed indicator (2026-10-29) -> data/live_bars/
+New-Item -ItemType Directory -Force "$Logs\bars" | Out-Null
+New-Item -ItemType Directory -Force "data\live_bars" | Out-Null
+Copy-Item "$Logs\bars\*.csv" "data\live_bars\" -Force -ErrorAction SilentlyContinue
+git add live/trades live/health data/live_bars
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {
     git commit -m "live trades + health $(Get-Date -Format yyyy-MM-dd) ($Mode)"

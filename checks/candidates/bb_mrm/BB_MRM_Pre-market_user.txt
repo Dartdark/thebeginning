@@ -1,0 +1,716 @@
+[IntrabarOrderGeneration = false]
+Inputs:
+    // --- Bollinger Band ---
+    BBLength(50),
+    BBAlpha(3.0),
+
+    // --- NUOVO v21: Alpha-reduction sul TP (avvicina il target alla SMA verso l'Entry) ---
+    AlphaReductionActive(true),  // false = comportamento v20 (TP = SMA esatta, nessuna riduzione)
+    AlphaReductionPct(15),       // X%: riduzione dei ticks necessari per il TP, calcolata su abs(Entry-SMA)
+                                  // TP_long = SMA - X%*abs(Entry-SMA) | TP_short = SMA + X%*abs(Entry-SMA)
+
+    // --- Stop-loss soft (basato su sigma congelata al segnale) ---
+    StopMultiplier(2.8),
+
+    // --- Restringimento progressivo dello Stop soft verso Breakeven (time-based) ---
+    StopTighteningActive(true),   // false = Stop soft sempre fisso a EntryStopLong/Short
+    StopTightenStartBar(2),       // BarsSinceEntry fino al quale lo stop resta invariato (100% SL)
+    StopTightenEndBar(20),        // BarsSinceEntry a cui lo stop coincide col breakeven (0% SL / 100% BE)
+
+    // --- Durata massima trade ---
+    MaxBarsHeld(20),
+
+    // --- Filtro anti-espansione banda ---
+    BandExpLookback(3),
+    BandExpAlpha(1.25),
+
+    // --- NUOVO v23: Filtro di volume sul bar di segnale (v24: periodo indipendente) ---
+    VolumeSpikeActive(false),     // false = filtro disattivo, comportamento identico alla v22
+    VolumeSpikeMultiplier(2.5),  // il Volume della barra di segnale deve essere >= a questa X volte la media recente
+    VolumeSpikeLookback(3),      // numero di barre PRECEDENTI su cui si calcola la media (la barra corrente non e' mai inclusa)
+
+    // --- Cap outlier: uscita intrabar hard SL, in ticks ---
+    HardLossTicks(300),
+
+    // --- Breakeven: soglia di innesco, in ticks ---
+    BEThresholdTicks(170),
+
+    // --- pullback richiesto in ingresso, in ticks, come "fast alpha" overlay ---
+    PullbackTicks(3),
+
+    // --- Strumento: SOLO come riferimento/confronto, il calcolo reale usa RealTickSize ---
+    TickSize(0.25),
+
+    // --- Filtro orario di trading (ora locale italiana) - definisce anche la finestra su cui si calcolano i percentili di Volume ---
+    TradingEnabledOn(true),     // interruttore generale: false = disattiva tutto il filtro orario
+    Session_Open_H(8),          // apertura mercati asiatici, ora italiana
+    Session_Open_M(05),
+    Offset_H(1),                // durata della finestra di trading: ore da sommare all'apertura per ottenere la chiusura
+    Offset_M(05),               // durata della finestra di trading: minuti da sommare all'apertura per ottenere la chiusura
+    OpenBufferMin(0),          // minuti di attesa dopo l'apertura prima di abilitare il trading
+    CloseBufferMin(0),         // minuti di anticipo rispetto alla chiusura per disabilitarlo
+
+    // --- Debug ---
+    DebugPrint(False),                 // log degli eventi di trade: fill, uscite, hard-SL, breakeven
+    DebugPrintSession(false),         // log del toggle giornaliero del filtro orario + eventi volume-log (rumoroso!)
+    LogToFile(false),                  // scrive anche su file, oltre che nel pannello Output
+    LogFilePath("C:\Users\Alessandro\Documents\Multicharts\MRM_BB\BB_MeanReversion_debug.txt"), // percorso file di log (la cartella deve gia' esistere)
+    VolLogFilePath("C:\Users\Alessandro\Documents\Multicharts\MRM_BB\BB_MeanReversion_volume_percentiles_log.txt"); // log dedicato ai percentili di Volume, una riga per sessione, sempre (anche senza trade)
+
+Vars:
+    MAval(0), StdDevVal(0), UpperBand(0), LowerBand(0),
+    EntryStopLong(0), EntryStopShort(0),
+    SigStdDevLong(0), SigStdDevShort(0),
+    BandRange(0), MinBandRange10(0), BandFilterOK(false),
+    VolAvgRecent(0), VolSpikeOK(false),
+    HardStopLongPrice(0), HardStopShortPrice(0),
+    BEArmedLong(false), BEArmedShort(false),
+    Session_Open_MinOfDay(0), Session_Close_MinOfDay(0), OffsetMinutes(0),
+    TradingWindowStart(0), TradingWindowEnd(0),
+    CurrentMinOfDay(0),
+    TradingEnabled(false),
+    RealTickSize(0.25),
+    LongLimitPrice(0), ShortLimitPrice(0), TPLongPrice(0), TPShortPrice(0),
+    { --- NUOVO v20: restringimento progressivo dello Stop soft verso Breakeven --- }
+    TightenRatio(0),          { 0 = Stop soft invariato, 1 = Stop soft coincidente col breakeven (EntryPrice) }
+    CurrentSoftStopLong(0),   { livello di Stop soft EFFETTIVO (dopo il restringimento) usato per l'uscita long }
+    CurrentSoftStopShort(0),  { livello di Stop soft EFFETTIVO (dopo il restringimento) usato per l'uscita short }
+    DebugMsg(""),
+
+    { --- log percentili di Volume per sessione (nessuna media tra sessioni) - INVARIATO --- }
+    VolArrayMaxSize(3000),
+    SessionBarCount(0), NBarsUsed(0),
+    ii(0), jj(0), TempVal(0), PctIdx(0),
+    P10Vol(0), P30Vol(0), P50Vol(0), P70Vol(0), P90Vol(0),
+    VolLogMsg("");
+
+arrays:
+    SessionVolumeArray[2999](0);   { buffer per i Volume della sessione corrente, capacita' 3000 barre }
+
+{ ---------------------------------------------------------------------------------------
+  Setup una tantum: dipende solo dagli Input e dalle proprieta' dello strumento, non
+  dai dati di barra
+--------------------------------------------------------------------------------------- }
+Once Begin
+
+    Session_Open_MinOfDay  = Session_Open_H * 60 + Session_Open_M;
+    OffsetMinutes          = Offset_H * 60 + Offset_M;
+    Session_Close_MinOfDay = Session_Open_MinOfDay + OffsetMinutes;
+    TradingWindowStart     = Session_Open_MinOfDay + OpenBufferMin;
+    TradingWindowEnd       = Session_Close_MinOfDay - CloseBufferMin;
+
+    DebugMsg = "=== SETUP FINESTRA ORARIA (v22) === Apertura=" + NumToStr(Session_Open_H, 0) + ":" + NumToStr(Session_Open_M, 0)
+             + " | Offset=" + NumToStr(Offset_H, 0) + "h" + NumToStr(Offset_M, 0) + "m (" + NumToStr(OffsetMinutes, 0) + " minuti)"
+             + " | Chiusura calcolata=" + NumToStr(IntPortion(Session_Close_MinOfDay / 60), 0) + ":" + NumToStr(Mod(Session_Close_MinOfDay, 60), 0)
+             + " | Finestra effettiva (con buffer)=[" + NumToStr(TradingWindowStart, 0) + "-" + NumToStr(TradingWindowEnd, 0) + "] minuti dalla mezzanotte";
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+
+    RealTickSize = MinMove / PriceScale;
+
+    DebugMsg = "=== SETUP TICK SIZE (v20) === TickSize input=" + NumToStr(TickSize, 5)
+             + " | RealTickSize (MinMove/PriceScale)=" + NumToStr(RealTickSize, 5)
+             + " | MinMove=" + NumToStr(MinMove, 0) + " | PriceScale=" + NumToStr(PriceScale, 0)
+             + " | PullbackTicks=" + NumToStr(PullbackTicks, 0);
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+
+    If AbsValue(RealTickSize - TickSize) > 0.0001 Then Begin
+        DebugMsg = "*** ATTENZIONE: TickSize impostato manualmente (" + NumToStr(TickSize, 5)
+                 + ") DIVERSO dal tick size reale dello strumento (" + NumToStr(RealTickSize, 5)
+                 + "). Da qui in poi hard-SL, breakeven e pullback usano RealTickSize, ma questa "
+                 + "discrepanza va capita: probabile disallineamento in Format Strategy "
+                 + "Properties per questo grafico. ***";
+        Print(DebugMsg);
+        If LogToFile Then Print(File(LogFilePath), DebugMsg);
+    End;
+
+    DebugMsg = "=== SETUP MA-EXIT FIX (ereditato da v16) === Uscita su tocco Media Mobile usa Limit intrabar "
+             + "con target aggiornato ogni barra (non congelato all'entry)";
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+
+    DebugMsg = "=== SETUP SIZING (v20) === Position sizing SEMPLIFICATO: ogni ENTRY usa sempre 1 Contract "
+             + "(rimossi VolPositionSizing e DynamicSizing). Le uscite chiudono sempre CurrentContracts "
+             + "(size reale della posizione).";
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+
+    If StopTighteningActive Then
+        DebugMsg = "=== SETUP STOP TIGHTENING (v20) === StopTighteningActive=TRUE | StopTightenStartBar="
+                 + NumToStr(StopTightenStartBar, 0) + " | StopTightenEndBar=" + NumToStr(StopTightenEndBar, 0)
+                 + " | Lo Stop soft si contrae linearmente verso il breakeven tra queste due barre "
+                 + "dall'entry (prima di StartBar: SL pieno, da EndBar in poi: SL = EntryPrice)"
+    Else
+        DebugMsg = "=== SETUP STOP TIGHTENING (v20) === StopTighteningActive=FALSE (Stop soft sempre fisso)";
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+
+    If AlphaReductionActive Then
+        DebugMsg = "=== SETUP ALPHA-REDUCTION (v21) === AlphaReductionActive=TRUE | AlphaReductionPct="
+                 + NumToStr(AlphaReductionPct, 1) + "% | TP_long = SMA - " + NumToStr(AlphaReductionPct, 1)
+                 + "%*abs(Entry-SMA) | TP_short = SMA + " + NumToStr(AlphaReductionPct, 1) + "%*abs(Entry-SMA)"
+                 + " (TP piu' vicino all'Entry rispetto alla SMA esatta)"
+    Else
+        DebugMsg = "=== SETUP ALPHA-REDUCTION (v21) === AlphaReductionActive=FALSE (TP=SMA esatta, comportamento identico alla v20)";
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+
+    If VolumeSpikeActive Then
+        DebugMsg = "=== SETUP VOLUME SPIKE FILTER (v24) === VolumeSpikeActive=TRUE | VolumeSpikeMultiplier="
+                 + NumToStr(VolumeSpikeMultiplier, 2) + " | VolumeSpikeLookback=" + NumToStr(VolumeSpikeLookback, 0)
+                 + " barre precedenti (la barra corrente non e' mai inclusa nella media) | condizione: Volume "
+                 + "barra segnale >= " + NumToStr(VolumeSpikeMultiplier, 2) + " * media Volume ultime "
+                 + NumToStr(VolumeSpikeLookback, 0) + " barre"
+    Else
+        DebugMsg = "=== SETUP VOLUME SPIKE FILTER (v24) === VolumeSpikeActive=FALSE (filtro disattivo, comportamento identico alla v22)";
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+
+    DebugMsg = "=== SETUP VOLUME LOG (v20) === Finestra sessione=[" + NumToStr(TradingWindowStart, 0) + "-" + NumToStr(TradingWindowEnd, 0)
+             + "] | Capacita' buffer volumi per sessione=" + NumToStr(VolArrayMaxSize, 0)
+             + " barre (aumentare la costante dell'array se si usano bar-type molto granulari con piu' barre a sessione)";
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+
+    { Header del file di log dei percentili di volume.
+      N.B.: Print(File(...)) apre in append: per un file "pulito" cancella/rinomina
+      VolLogFilePath manualmente prima di un nuovo run. }
+    Print(File(VolLogFilePath), "Date;BarsInSession;P10_Volume;P30_Volume;P50_Volume;P70_Volume;P90_Volume");
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Bollinger Bands
+--------------------------------------------------------------------------------------- }
+MAval     = Average(Close, BBLength);
+StdDevVal = StdDev(Close, BBLength);
+UpperBand = MAval + BBAlpha * StdDevVal;
+LowerBand = MAval - BBAlpha * StdDevVal;
+
+{ ---------------------------------------------------------------------------------------
+  Target di uscita sulla media mobile aggiornato OGNI BARRA con il valore corrente
+  di MAval, finche' si e' in posizione. NUOVO v21: se AlphaReductionActive=true, il target
+  non e' piu' la SMA esatta ma un livello piu' vicino all'Entry, di una frazione
+  AlphaReductionPct% della distanza Entry-SMA corrente (target "segue" la SMA che si
+  muove, mantenendo sempre la stessa riduzione percentuale).
+--------------------------------------------------------------------------------------- }
+If MarketPosition = 1 Then Begin
+    If AlphaReductionActive Then
+        TPLongPrice = MAval - (AlphaReductionPct / 100) * AbsValue(EntryPrice - MAval)
+    Else
+        TPLongPrice = MAval;
+End;
+
+If MarketPosition = -1 Then Begin
+    If AlphaReductionActive Then
+        TPShortPrice = MAval + (AlphaReductionPct / 100) * AbsValue(EntryPrice - MAval)
+    Else
+        TPShortPrice = MAval;
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Filtro anti-espansione
+--------------------------------------------------------------------------------------- }
+BandRange = UpperBand - LowerBand;
+
+If CurrentBar > BBLength + BandExpLookback Then Begin
+    MinBandRange10 = Lowest(BandRange[1], BandExpLookback);
+    BandFilterOK = BandRange <= MinBandRange10 * BandExpAlpha;
+End
+Else Begin
+    BandFilterOK = true;
+End;
+
+{ ---------------------------------------------------------------------------------------
+  NUOVO v23 (v24: periodo indipendente): Filtro di volume sul bar di segnale.
+  Average(Volume[1], VolumeSpikeLookback) calcola la media SOLO sulle VolumeSpikeLookback
+  barre precedenti (parte da Volume[1], mai da Volume[0] = barra corrente): la barra di
+  chiusura/segnale non entra mai nel calcolo della propria soglia di confronto.
+  Se VolumeSpikeActive=false, VolSpikeOK e' sempre true (nessun effetto).
+--------------------------------------------------------------------------------------- }
+If VolumeSpikeActive = false Then Begin
+    VolSpikeOK = true;
+End
+Else If CurrentBar > VolumeSpikeLookback Then Begin
+    VolAvgRecent = Average(Volume[1], VolumeSpikeLookback);
+    VolSpikeOK = Volume >= VolumeSpikeMultiplier * VolAvgRecent;
+End
+Else Begin
+    VolSpikeOK = true;
+End;
+
+{ ---------------------------------------------------------------------------------------
+  TradingEnabled: ricalcolato ogni barra (dipende da Time, che cambia barra per barra)
+--------------------------------------------------------------------------------------- }
+CurrentMinOfDay = IntPortion(Time / 100) * 60 + Mod(Time, 100);
+
+TradingEnabled = TradingEnabledOn and
+                  CurrentMinOfDay >= TradingWindowStart and
+                  CurrentMinOfDay <= TradingWindowEnd;
+
+If DebugPrintSession and TradingEnabled <> TradingEnabled[1] Then Begin
+    If TradingEnabled Then
+        DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " TRADING ENABLED -> TRUE"
+    Else
+        DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " TRADING ENABLED -> FALSE";
+    DebugMsg = DebugMsg + " | MinOfDay=" + NumToStr(CurrentMinOfDay, 0)
+             + " | Finestra=[" + NumToStr(TradingWindowStart, 0) + "-" + NumToStr(TradingWindowEnd, 0) + "]";
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Reset del contatore barre di sessione all'apertura della finestra
+--------------------------------------------------------------------------------------- }
+If TradingEnabled and TradingEnabled[1] = false Then Begin
+    SessionBarCount = 0;
+
+    If DebugPrintSession Then Begin
+        DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " [VOL] Sessione iniziata, reset contatore barre per i percentili di Volume";
+        Print(DebugMsg);
+        If LogToFile Then Print(File(LogFilePath), DebugMsg);
+    End;
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Accumulo del Volume di ogni barra della sessione (SOLO per il log dei percentili di
+  fine sessione - INVARIATO rispetto alla v19). Nessuna media mobile o buffer condiviso
+  tra sessioni: ogni sessione viene profilata SOLO sui propri dati.
+--------------------------------------------------------------------------------------- }
+If TradingEnabled Then Begin
+
+    If SessionBarCount < VolArrayMaxSize Then Begin
+        SessionVolumeArray[SessionBarCount] = Volume;
+        SessionBarCount = SessionBarCount + 1;
+    End
+    Else Begin
+        If SessionBarCount = VolArrayMaxSize Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " [VOL] ATTENZIONE: buffer volumi di sessione pieno ("
+                     + NumToStr(VolArrayMaxSize, 0) + " barre) - i percentili verranno calcolati solo sulle prime "
+                     + NumToStr(VolArrayMaxSize, 0) + " barre della sessione";
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+        SessionBarCount = SessionBarCount + 1;
+    End;
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Chiusura sessione -> ordinamento del buffer volumi e calcolo dei percentili
+  10/30/50/70/90 sul Volume dell'intera finestra di sessione (metodo "nearest rank":
+  indice = arrotondamento di p * (N-1)). Log SEMPRE scritto, indipendentemente dal fatto
+  che ci sia stato un trade: ogni sessione e' calcolata da zero sui propri dati, nessuna
+  calibrazione necessaria.
+--------------------------------------------------------------------------------------- }
+If TradingEnabled = false and TradingEnabled[1] = true Then Begin
+
+    If SessionBarCount > 0 Then Begin
+
+        NBarsUsed = MinList(SessionBarCount, VolArrayMaxSize);
+
+        { --- ordinamento (bubble sort) del sotto-array [0..NBarsUsed-1] --- }
+        For ii = 0 to NBarsUsed - 2 Begin
+            For jj = 0 to NBarsUsed - 2 - ii Begin
+                If SessionVolumeArray[jj] > SessionVolumeArray[jj + 1] Then Begin
+                    TempVal = SessionVolumeArray[jj];
+                    SessionVolumeArray[jj] = SessionVolumeArray[jj + 1];
+                    SessionVolumeArray[jj + 1] = TempVal;
+                End;
+            End;
+        End;
+
+        { --- percentili --- }
+        PctIdx = Round(0.10 * (NBarsUsed - 1), 0); PctIdx = MaxList(0, MinList(NBarsUsed - 1, PctIdx)); P10Vol = SessionVolumeArray[PctIdx];
+        PctIdx = Round(0.30 * (NBarsUsed - 1), 0); PctIdx = MaxList(0, MinList(NBarsUsed - 1, PctIdx)); P30Vol = SessionVolumeArray[PctIdx];
+        PctIdx = Round(0.50 * (NBarsUsed - 1), 0); PctIdx = MaxList(0, MinList(NBarsUsed - 1, PctIdx)); P50Vol = SessionVolumeArray[PctIdx];
+        PctIdx = Round(0.70 * (NBarsUsed - 1), 0); PctIdx = MaxList(0, MinList(NBarsUsed - 1, PctIdx)); P70Vol = SessionVolumeArray[PctIdx];
+        PctIdx = Round(0.90 * (NBarsUsed - 1), 0); PctIdx = MaxList(0, MinList(NBarsUsed - 1, PctIdx)); P90Vol = SessionVolumeArray[PctIdx];
+
+        { --- log dedicato, SEMPRE scritto --- }
+        VolLogMsg = NumToStr(Date, 0)
+                  + ";" + NumToStr(NBarsUsed, 0)
+                  + ";" + NumToStr(P10Vol, 0)
+                  + ";" + NumToStr(P30Vol, 0)
+                  + ";" + NumToStr(P50Vol, 0)
+                  + ";" + NumToStr(P70Vol, 0)
+                  + ";" + NumToStr(P90Vol, 0);
+        Print(File(VolLogFilePath), VolLogMsg);
+
+        If DebugPrintSession Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " [VOL] Sessione chiusa | Barre=" + NumToStr(NBarsUsed, 0)
+                     + " | P10=" + NumToStr(P10Vol, 0) + " P30=" + NumToStr(P30Vol, 0) + " P50=" + NumToStr(P50Vol, 0)
+                     + " P70=" + NumToStr(P70Vol, 0) + " P90=" + NumToStr(P90Vol, 0);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+
+    End
+    Else Begin
+        If DebugPrintSession Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " [VOL] Sessione chiusa senza barre valide nella finestra - nessuna riga scritta nel log volumi";
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Flatten immediato quando la finestra di trading si chiude
+--------------------------------------------------------------------------------------- }
+If MarketPosition <> 0 and TradingEnabled = false Then Begin
+
+    If MarketPosition = 1 Then
+        Sell ("Flat_TradingOff_Long") CurrentContracts Contracts next bar at market;
+
+    If MarketPosition = -1 Then
+        Buy to Cover ("Flat_TradingOff_Short") CurrentContracts Contracts next bar at market;
+
+    If DebugPrint Then Begin
+        DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " TRADING DISABILITATO - CHIUSURA IMMEDIATA, MP=" + NumToStr(MarketPosition, 0);
+        Print(DebugMsg);
+        If LogToFile Then Print(File(LogFilePath), DebugMsg);
+    End;
+
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Entry: solo se piatti, filtro anti-espansione OK, filtro volume OK (v23), E finestra di
+  trading attiva. Ordine LIMIT con pullback di PullbackTicks rispetto al Close della barra
+  di segnale. Size fissa a 1 Contract per ogni entry.
+--------------------------------------------------------------------------------------- }
+If MarketPosition = 0 and BandFilterOK and VolSpikeOK and TradingEnabled Then Begin
+    TPLongPrice = 0;
+    TPShortPrice = 0;
+    If Close crosses below LowerBand Then Begin
+        SigStdDevLong  = StdDevVal;
+        LongLimitPrice = Close - PullbackTicks * RealTickSize;
+        Buy ("BB_Long") 1 Contracts next bar at LongLimitPrice Limit;
+
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG SIGNAL (BB cross) | Close="
+                     + NumToStr(Close, 2) + " | Limit entry piazzato @" + NumToStr(LongLimitPrice, 2)
+                     + " (pullback " + NumToStr(PullbackTicks, 0) + " tick), valido solo 1 barra"
+                     + " | Volume=" + NumToStr(Volume, 0) + " (media recente=" + NumToStr(VolAvgRecent, 0) + ")"
+                     + " | Contracts=1";
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+
+    If Close crosses above UpperBand Then Begin
+        SigStdDevShort  = StdDevVal;
+        ShortLimitPrice = Close + PullbackTicks * RealTickSize;
+        SellShort ("BB_Short") 1 Contracts next bar at ShortLimitPrice Limit;
+
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT SIGNAL (BB cross) | Close="
+                     + NumToStr(Close, 2) + " | Limit entry piazzato @" + NumToStr(ShortLimitPrice, 2)
+                     + " (pullback " + NumToStr(PullbackTicks, 0) + " tick), valido solo 1 barra"
+                     + " | Volume=" + NumToStr(Volume, 0) + " (media recente=" + NumToStr(VolAvgRecent, 0) + ")"
+                     + " | Contracts=1";
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+
+End
+Else If DebugPrint and MarketPosition = 0 and TradingEnabled and BandFilterOK and VolSpikeOK = false
+        and (Close crosses below LowerBand or Close crosses above UpperBand) Then Begin
+    DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " ENTRY SCARTATA: cross valido ma VOLUME INSUFFICIENTE | Volume="
+             + NumToStr(Volume, 0) + " | soglia richiesta=" + NumToStr(VolumeSpikeMultiplier, 2) + "*" + NumToStr(VolAvgRecent, 0)
+             + "=" + NumToStr(VolumeSpikeMultiplier * VolAvgRecent, 0);
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Snapshot alla barra di fill
+--------------------------------------------------------------------------------------- }
+If MarketPosition = 1 and BarsSinceEntry = 0 Then Begin
+    EntryStopLong        = EntryPrice - StopMultiplier * SigStdDevLong;
+    HardStopLongPrice    = EntryPrice - HardLossTicks * RealTickSize;
+    BEArmedLong          = false;
+    If AlphaReductionActive Then
+        TPLongPrice = MAval - (AlphaReductionPct / 100) * AbsValue(EntryPrice - MAval)
+    Else
+        TPLongPrice = MAval;
+    CurrentSoftStopLong  = EntryStopLong;   { alla barra di fill lo stop tightening riparte da zero (SL pieno) }
+
+    If DebugPrint Then Begin
+        DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG FILL @" + NumToStr(EntryPrice, 2)
+                 + " | Contracts=" + NumToStr(CurrentContracts, 0)
+                 + " | SoftStop=" + NumToStr(EntryStopLong, 2)
+                 + " | HardSL=" + NumToStr(HardStopLongPrice, 2)
+                 + " | TP(live, alpha-reduction " + NumToStr(AlphaReductionPct, 1) + "%)=" + NumToStr(TPLongPrice, 2)
+                 + " | BE trigger @" + NumToStr(EntryPrice + BEThresholdTicks * RealTickSize, 2)
+                 + " | StopTightening: da barra " + NumToStr(StopTightenStartBar, 0) + " a barra " + NumToStr(StopTightenEndBar, 0) + " verso BE @" + NumToStr(EntryPrice, 2);
+        Print(DebugMsg);
+        If LogToFile Then Print(File(LogFilePath), DebugMsg);
+    End;
+End;
+
+If MarketPosition = -1 and BarsSinceEntry = 0 Then Begin
+    EntryStopShort        = EntryPrice + StopMultiplier * SigStdDevShort;
+    HardStopShortPrice    = EntryPrice + HardLossTicks * RealTickSize;
+    BEArmedShort          = false;
+    If AlphaReductionActive Then
+        TPShortPrice = MAval + (AlphaReductionPct / 100) * AbsValue(EntryPrice - MAval)
+    Else
+        TPShortPrice = MAval;
+    CurrentSoftStopShort  = EntryStopShort;   { alla barra di fill lo stop tightening riparte da zero (SL pieno) }
+
+    If DebugPrint Then Begin
+        DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT FILL @" + NumToStr(EntryPrice, 2)
+                 + " | Contracts=" + NumToStr(CurrentContracts, 0)
+                 + " | SoftStop=" + NumToStr(EntryStopShort, 2)
+                 + " | HardSL=" + NumToStr(HardStopShortPrice, 2)
+                 + " | TP(live, alpha-reduction " + NumToStr(AlphaReductionPct, 1) + "%)=" + NumToStr(TPShortPrice, 2)
+                 + " | BE trigger @" + NumToStr(EntryPrice - BEThresholdTicks * RealTickSize, 2)
+                 + " | StopTightening: da barra " + NumToStr(StopTightenStartBar, 0) + " a barra " + NumToStr(StopTightenEndBar, 0) + " verso BE @" + NumToStr(EntryPrice, 2);
+        Print(DebugMsg);
+        If LogToFile Then Print(File(LogFilePath), DebugMsg);
+    End;
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Arm del breakeven (intrabar via High/Low) -- ad innesco su prezzo
+--------------------------------------------------------------------------------------- }
+If MarketPosition = 1 and BEArmedLong = false Then Begin
+    If High >= EntryPrice + BEThresholdTicks * RealTickSize Then Begin
+        BEArmedLong = true;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG BE ARMATO @ EntryPrice=" + NumToStr(EntryPrice, 2)
+                     + " (High=" + NumToStr(High, 2) + ")";
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+End;
+
+If MarketPosition = -1 and BEArmedShort = false Then Begin
+    If Low <= EntryPrice - BEThresholdTicks * RealTickSize Then Begin
+        BEArmedShort = true;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT BE ARMATO @ EntryPrice=" + NumToStr(EntryPrice, 2)
+                     + " (Low=" + NumToStr(Low, 2) + ")";
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Restringimento progressivo dello Stop soft verso Breakeven (time-based).
+--------------------------------------------------------------------------------------- }
+If MarketPosition = 1 Then Begin
+
+    If StopTighteningActive = false or BarsSinceEntry <= StopTightenStartBar Then
+        TightenRatio = 0
+    Else If BarsSinceEntry >= StopTightenEndBar Then
+        TightenRatio = 1
+    Else
+        TightenRatio = (BarsSinceEntry - StopTightenStartBar) / (StopTightenEndBar - StopTightenStartBar);
+
+    CurrentSoftStopLong = EntryStopLong + (EntryPrice - EntryStopLong) * TightenRatio;
+
+    If DebugPrint and TightenRatio <> TightenRatio[1] Then Begin
+        DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG STOP TIGHTENING | BarsSinceEntry=" + NumToStr(BarsSinceEntry, 0)
+                 + " | TightenRatio=" + NumToStr(TightenRatio * 100, 1) + "% verso BE"
+                 + " | SoftStop originale=" + NumToStr(EntryStopLong, 2) + " -> SoftStop effettivo=" + NumToStr(CurrentSoftStopLong, 2)
+                 + " | BE(EntryPrice)=" + NumToStr(EntryPrice, 2);
+        Print(DebugMsg);
+        If LogToFile Then Print(File(LogFilePath), DebugMsg);
+    End;
+
+End;
+
+If MarketPosition = -1 Then Begin
+
+    If StopTighteningActive = false or BarsSinceEntry <= StopTightenStartBar Then
+        TightenRatio = 0
+    Else If BarsSinceEntry >= StopTightenEndBar Then
+        TightenRatio = 1
+    Else
+        TightenRatio = (BarsSinceEntry - StopTightenStartBar) / (StopTightenEndBar - StopTightenStartBar);
+
+    CurrentSoftStopShort = EntryStopShort + (EntryPrice - EntryStopShort) * TightenRatio;
+
+    If DebugPrint and TightenRatio <> TightenRatio[1] Then Begin
+        DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT STOP TIGHTENING | BarsSinceEntry=" + NumToStr(BarsSinceEntry, 0)
+                 + " | TightenRatio=" + NumToStr(TightenRatio * 100, 1) + "% verso BE"
+                 + " | SoftStop originale=" + NumToStr(EntryStopShort, 2) + " -> SoftStop effettivo=" + NumToStr(CurrentSoftStopShort, 2)
+                 + " | BE(EntryPrice)=" + NumToStr(EntryPrice, 2);
+        Print(DebugMsg);
+        If LogToFile Then Print(File(LogFilePath), DebugMsg);
+    End;
+
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Diagnostica: log nel momento esatto in cui l'hard-SL viene toccato
+--------------------------------------------------------------------------------------- }
+If DebugPrint and MarketPosition = 1 and HardStopLongPrice > 0 and Low <= HardStopLongPrice Then Begin
+    DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG HARDSL TOCCATO: Low=" + NumToStr(Low, 2)
+             + " <= Stop=" + NumToStr(HardStopLongPrice, 2);
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+End;
+
+If DebugPrint and MarketPosition = -1 and HardStopShortPrice > 0 and High >= HardStopShortPrice Then Begin
+    DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT HARDSL TOCCATO: High=" + NumToStr(High, 2)
+             + " >= Stop=" + NumToStr(HardStopShortPrice, 2);
+    Print(DebugMsg);
+    If LogToFile Then Print(File(LogFilePath), DebugMsg);
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Exit long
+--------------------------------------------------------------------------------------- }
+If MarketPosition = 1 Then Begin
+
+    If HardStopLongPrice > 0 Then Begin
+        Sell ("ExitLong_HardSL") CurrentContracts Contracts next bar at HardStopLongPrice Stop;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG EXIT ORDER: HARD_SL | Stop=" + NumToStr(HardStopLongPrice, 2)
+                     + " | Close=" + NumToStr(Close, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+
+    If BEArmedLong Then Begin
+        Sell ("ExitLong_BE") CurrentContracts Contracts next bar at EntryPrice Stop;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG EXIT ORDER: BREAKEVEN | Stop=" + NumToStr(EntryPrice, 2)
+                     + " | Close=" + NumToStr(Close, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+
+    If TPLongPrice > 0 Then Begin
+        Sell ("ExitLong_TPAlpha") CurrentContracts Contracts next bar at TPLongPrice Limit;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG EXIT ORDER: TP_ALPHA (Limit intrabar) | TP="
+                     + NumToStr(TPLongPrice, 2) + " (SMA=" + NumToStr(MAval, 2) + ") | Close=" + NumToStr(Close, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+
+    If HardStopLongPrice > 0 and Close <= HardStopLongPrice Then Begin
+        Sell ("ExitLong_HardSL_MKT") CurrentContracts Contracts next bar at market;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG EXIT EMERGENZA: HARD_SL gia' oltrepassato a Close "
+                     + "(scavalca soft-stop/time) | Close=" + NumToStr(Close, 2) + " Stop=" + NumToStr(HardStopLongPrice, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End
+    Else If BEArmedLong and Close <= EntryPrice Then Begin
+        Sell ("ExitLong_BE_MKT") CurrentContracts Contracts next bar at market;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG EXIT EMERGENZA: BREAKEVEN gia' oltrepassato a Close "
+                     + "(scavalca soft-stop/time) | Close=" + NumToStr(Close, 2) + " BE=" + NumToStr(EntryPrice, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End
+
+    Else If Close crosses below CurrentSoftStopLong Then Begin
+        Sell ("ExitLong_Stop") CurrentContracts Contracts next bar at market;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG EXIT ORDER: SOFT_STOP | Close=" + NumToStr(Close, 2)
+                     + " SoftStop effettivo=" + NumToStr(CurrentSoftStopLong, 2)
+                     + " (originale=" + NumToStr(EntryStopLong, 2) + ", TightenRatio=" + NumToStr(TightenRatio * 100, 1) + "%)";
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End
+    Else If BarsSinceEntry >= MaxBarsHeld Then Begin
+        Sell ("ExitLong_Time") CurrentContracts Contracts next bar at market;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " LONG EXIT ORDER: TIME | BarsSinceEntry=" + NumToStr(BarsSinceEntry, 0)
+                     + " MaxBarsHeld=" + NumToStr(MaxBarsHeld, 0) + " Close=" + NumToStr(Close, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+
+End;
+
+{ ---------------------------------------------------------------------------------------
+  Exit short (stessa logica, speculare)
+--------------------------------------------------------------------------------------- }
+If MarketPosition = -1 Then Begin
+
+    If HardStopShortPrice > 0 Then Begin
+        Buy to Cover ("ExitShort_HardSL") CurrentContracts Contracts next bar at HardStopShortPrice Stop;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT EXIT ORDER: HARD_SL | Stop=" + NumToStr(HardStopShortPrice, 2)
+                     + " | Close=" + NumToStr(Close, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+
+    If BEArmedShort Then Begin
+        Buy to Cover ("ExitShort_BE") CurrentContracts Contracts next bar at EntryPrice Stop;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT EXIT ORDER: BREAKEVEN | Stop=" + NumToStr(EntryPrice, 2)
+                     + " | Close=" + NumToStr(Close, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+
+    If TPShortPrice > 0 Then Begin
+        Buy to Cover ("ExitShort_TPAlpha") CurrentContracts Contracts next bar at TPShortPrice Limit;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT EXIT ORDER: TP_ALPHA (Limit intrabar) | TP="
+                     + NumToStr(TPShortPrice, 2) + " (SMA=" + NumToStr(MAval, 2) + ") | Close=" + NumToStr(Close, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+
+    If HardStopShortPrice > 0 and Close >= HardStopShortPrice Then Begin
+        Buy to Cover ("ExitShort_HardSL_MKT") CurrentContracts Contracts next bar at market;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT EXIT EMERGENZA: HARD_SL gia' oltrepassato a Close "
+                     + "(scavalca soft-stop/time) | Close=" + NumToStr(Close, 2) + " Stop=" + NumToStr(HardStopShortPrice, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End
+    Else If BEArmedShort and Close >= EntryPrice Then Begin
+        Buy to Cover ("ExitShort_BE_MKT") CurrentContracts Contracts next bar at market;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT EXIT EMERGENZA: BREAKEVEN gia' oltrepassato a Close "
+                     + "(scavalca soft-stop/time) | Close=" + NumToStr(Close, 2) + " BE=" + NumToStr(EntryPrice, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End
+    Else If Close crosses above CurrentSoftStopShort Then Begin
+        Buy to Cover ("ExitShort_Stop") CurrentContracts Contracts next bar at market;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT EXIT ORDER: SOFT_STOP | Close=" + NumToStr(Close, 2)
+                     + " SoftStop effettivo=" + NumToStr(CurrentSoftStopShort, 2)
+                     + " (originale=" + NumToStr(EntryStopShort, 2) + ", TightenRatio=" + NumToStr(TightenRatio * 100, 1) + "%)";
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End
+    Else If BarsSinceEntry >= MaxBarsHeld Then Begin
+        Buy to Cover ("ExitShort_Time") CurrentContracts Contracts next bar at market;
+        If DebugPrint Then Begin
+            DebugMsg = NumToStr(Date, 0) + " " + NumToStr(Time, 0) + " SHORT EXIT ORDER: TIME | BarsSinceEntry=" + NumToStr(BarsSinceEntry, 0)
+                     + " MaxBarsHeld=" + NumToStr(MaxBarsHeld, 0) + " Close=" + NumToStr(Close, 2);
+            Print(DebugMsg);
+            If LogToFile Then Print(File(LogFilePath), DebugMsg);
+        End;
+    End;
+
+End;

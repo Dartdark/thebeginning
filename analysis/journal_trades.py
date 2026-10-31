@@ -14,6 +14,10 @@ NAMES = {"VB": "Vault Break", "ONB": "ONB ADX30", "EOS": "EOS", "MON_BR": "Bridg
 START, END = "<!-- auto-trades:start -->", "<!-- auto-trades:end -->"
 
 
+CLOSED = {"VB": "20261026",     # tag -> last live day; account #1 (APEX-681524-01, tag VB) blown 2026-10-26 (user)
+          **{t: "20261030" for t in ("VB150", "ONB150", "EOS150", "MON_BR150")}}   # #3 (150K) blown 2026-10-30
+
+
 def name(tag):
     """VB -> Vault Break; VB-2 -> Vault Break (acct 2): tags may carry an account suffix."""
     base, _, acct = str(tag).partition("-")
@@ -30,14 +34,18 @@ def load(day):
     files = [f for f in files if lo <= os.path.basename(f)[:8] <= hi]
     if not files: return pd.DataFrame(columns=COLS)
     df = pd.concat([pd.read_csv(f, header=None, names=COLS, dtype=str) for f in files], ignore_index=True)
-    return df.drop_duplicates()
+    df = df.drop_duplicates()
+    for tag, last in CLOSED.items():          # accounts closed: their chart may still log trades, which never fill
+        df = df[~((df.tag == tag) & (df.bar_date > last))]
+    return df
 
 
 def block(day, df):
     d = day.strftime("%Y%m%d")
     closed = df[(df.event == "CLOSE") & (df.bar_date == d)].copy()
     opens = df[(df.event == "OPEN") & (df.bar_date == d)]
-    lines = [START, "## Trades (auto, from the VPS trade log; gross, before commissions)", ""]
+    lines = [START, "## Trades (auto, from the VPS trade log; gross, before commissions)", "",
+             "_The log records MultiCharts' chart trades, not broker fills: confirm on the Apex dashboard (10/20 was logged but never filled)._", ""]
     if closed.empty and opens.empty:
         lines += ["No trades logged today. (If a strategy should have traded, check its chart, auto-trading and the VPS.)"]
     else:

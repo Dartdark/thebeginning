@@ -73,7 +73,9 @@ Inputs:
 	SPMinTicks(8),          { minimum single-print run, ticks }
 	NR7Contracts(-1),       { contracts on the session after an NR7 day; -1 = filter off (candidate, see header) }
 	NRDays(7),              { NR7 = narrowest regular-session range of the last NRDays sessions }
-	ShowFlag(true);         { print the flag in the Output window each session }
+	ShowFlag(true),         { print the flag in the Output window each session }
+	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / VB150; empty = no heartbeat };
+Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Vault_Break_SP 2026-10-30");   { code version (live guard 2026-10-30): bump the date on every change }
 
 Variables:
 	BarVol(0), CumPV(0), CumVol(0), DayVwap(0),
@@ -284,3 +286,17 @@ if MarketPosition > 0 and Low <= EntryPrice - StopPts then
 
 if MarketPosition > 0 and Time >= DayFlatten then
 	Sell ("VB EOD") this bar on close;
+
+// ---------- strategy heartbeat (2026-10-29; live guard, LIVE_GUARD_PLAN.md) ----------
+// Writes a SIG row to the trade log every bar in real time, only while THIS strategy is compiled and running. If the
+// code fails to compile or the signal is removed, the heartbeat stops and the 08:21 pre-market check / watchdog alert.
+// Log only: no orders. Set HeartbeatTag to the chart's logger tag (VB-2, ONB150, ...); empty = off.
+if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
+	HB_Key = CurrentDate * 10000 + CurrentTime;
+	if HB_Key <> HB_Last then begin
+		HB_Day = NumToStr(CurrentDate + 19000000, 0);
+		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
+			+ NumToStr(MarketPosition * CurrentContracts, 0) + ",,,,,,,," + HB_Day + "," + NumToStr(CurrentTime, 0) + NewLine);
+		HB_Last = HB_Key;
+	end;
+end;
