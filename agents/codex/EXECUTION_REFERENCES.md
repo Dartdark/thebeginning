@@ -216,6 +216,16 @@ Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 
 ### E11 — Event-information clocks and attribution
 
+- Recursive-smoother follow-up, retained 2026-10-30: Harris and Yilmaz,
+  [SSRN 1259661](https://ssrn.com/abstract=1259661), [full review](results/fx_low_frequency_1259661_review.md).
+  A full-history smooth trend is not a historical signal vintage. Their illustrative decomposition is explicitly
+  full-sample; their trading evaluation is described as recursive. Do not conflate those or diagnose a leak merely
+  from the use of HP/kernel smoothing. Freeze each signal's available-at data and specify whether the prior
+  endpoint is refitted at today's decision or retained from its earlier vintage. Their returns include carry and
+  ignore trading costs; neither smoothing accuracy nor low turnover establishes executable net savings.
+  Monthly spot/forward carry and dated-futures collateral/roll accounting are different implementations.
+  Evidence: source inspection plus public FX data intake only, no strategy or execution-return replication.
+
 - WASDE follow-up, retained 2026-10-30: Zhang, [SSRN 4841490](https://ssrn.com/abstract=4841490),
   [full-source review](results/wasde_volume_4841490_review.md). An announcement-day-inclusive return is not
   necessarily executable using a forecast revealed that day. Monthly USDA forecast revisions are not consensus
