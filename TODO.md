@@ -62,12 +62,12 @@ bottom). Times are Central (CT).
 - [ ] On the VPS: `cd C:\TradingRepo; git pull` (watchdog: account-floor alarm and Apex-lock hint).
 - [ ] On the VPS after `git pull` (2026-10-30 fix): PowerShell `powershell -ExecutionPolicy Bypass -File C:\TradingRepo\live\vps\watchdog.ps1`
       once, then `Get-Content C:\TradingLogs\alerts.txt -Tail 5`: no errors = the floor alarm can read the logs.
-- [ ] Claude: replay the Swing Target account benches with the corrected exit kinds (expected: ST adoption only stronger).
+- [x] Claude: replay the Swing Target account benches with the corrected exit kinds -> ties; user reverted both funded swaps 2026-10-31.
 - Claude: a new funded account -> `FUNDED` in analysis/account_tools.py (payout tracker); each payout you request -> its list.
 - [ ] Claude, once ~20 evaluations have finished: Brier-score the dashboard's pass odds (account_tools.pass_odds at each start)
       against actual pass / fail, to check they aren't too optimistic (idea from the 'Simulate like a quant desk' X article, 10/30).
 - [ ] Claude, before the first funded account (~late Nov): heartbeat + HB_Ver stamp in every funded strategy file that lacks
-      them (ONB ML, LDF, NFP, ES MOC, CL fade, Overnight Tick, Swing Target, T_ONESIDE, Monday Long); funded floor rules in
+      them (ONB ML, LDF, NFP, ES MOC, CL fade, Overnight Tick, Dual Thrust, T_ONESIDE, Monday Long); funded floor rules in
       expected_setup.json (150K: trail 4,000, lock 150,100); rejected-orders limit 10 on every funded chart.
 
 ## 150K buying plan, Nov-Dec 2026 (user, 2026-10-30; job Nov 10 - Dec 24, $25 x 8 h, paid weekly, all pay to evaluations)
@@ -196,7 +196,7 @@ after 15:59 CT, never with a position open.
 
 - [ ] **Personal account (when it starts): PAPERTREND v2 at `Qty` 1** ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/papertrend/PAPERTREND_v2_claude.txt)), 5-min MNQ, Exchange time, IOG off, `StopATRMult` 2, logger tag `PT`.
 - [ ] **Personal account (when it starts): Swing Target v3 at `Qty` 1**, 1-min MNQ, Exchange time, IOG off, ClockShiftMin 0, logger tag `ST` (user 2026-10-25).
-- [ ] **When a 50K account is funded:** Vault Break `NumContracts` 1 (was 2), `FlaggedContracts` 1, + Swing Target v3 `Qty` 1. **150K funded:** Swing Target `Qty` 2 instead of Dual Thrust (`FUNDED_PLAN.md`).
+- [ ] **When a 50K account is funded:** Vault Break `NumContracts` 2, `FlaggedContracts` 1, no Swing Target. **150K funded:** Dual Thrust `Qty` 2, no Swing Target (reverted 2026-10-31, `FUNDED_PLAN.md`).
 
 
 ## Later

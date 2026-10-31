@@ -23,7 +23,7 @@ current plans (`../analysis/t_oneside_bench2.py`, two independent runs of 1,000 
 
 | Plan | Change | Effect (run 1 / run 2) | Decision |
 |---|---|---|---|
-| **50K funded** | **Relative Strength longs 1 MNQ -> T fade 1 MNQ** | y2 +$194 / +$182, blown 5.9 -> 4.3% / 5.6 -> 4.2%, all 6 payouts in 2y 93 -> 95%, y2 p5 $2,925 -> $10,000 / $1,500 -> $13,000; y1 −$55 / −$70, 6th payout +5 / +8 days | **in the plan; 2026-10-31 replay with corrected exit kinds: a TIE** (y1 $9,822 vs $9,818, y2 −$7, blown 6.2% vs 6.4%): user to decide keep / revert |
+| **50K funded** | **Relative Strength longs 1 MNQ -> T fade 1 MNQ** | y2 +$194 / +$182, blown 5.9 -> 4.3% / 5.6 -> 4.2%, all 6 payouts in 2y 93 -> 95%, y2 p5 $2,925 -> $10,000 / $1,500 -> $13,000; y1 −$55 / −$70, 6th payout +5 / +8 days | **REVERTED (user 2026-10-31)**: replay with corrected exit kinds = a TIE (y1 $9,822 vs $9,818, y2 −$7, blown 6.2% vs 6.4%) -> back to VB 2/1, no Swing Target |
 | 50K funded | + T 1 / 2 MNQ, OT -> T, ONB ML -> T | noise or worse | not used |
 | 150K funded | + T 1-3 MNQ, OT 2 -> T 2 | within $80 of the plan (cap-bound) | not used (RS stays both sides) |
 
@@ -77,7 +77,7 @@ report: 595 trades 2018-26, $305 per NQ, PF 1.63, t 4.55, 9/9 years, 0 overnight
 | Plan | Change | Effect | Decision |
 |---|---|---|---|
 | **50K funded** | **Vault Break 2/1 -> 1/1 + Swing Target 1 MNQ** | y1 $10,159 vs $9,940, y2 $12,347 vs $12,163, blown 5.0% vs 6.8%, y2 p5 $7,500 vs $1,500 | **in the plan** |
-| **150K funded** | **Dual Thrust 2 MNQ -> Swing Target 2 MNQ** | y1 $18,083 vs $17,870, y2 $20,296 vs $20,137, blown 1.0% vs 1.8%, 6th payout day 204 vs 209 | **in the plan** (DT stays personal); **2026-10-31 replay: a TIE** (y1 +$25, y2 −$7, blown 1.8% vs 1.8%): user to decide |
+| **150K funded** | **Dual Thrust 2 MNQ -> Swing Target 2 MNQ** | y1 $18,083 vs $17,870, y2 $20,296 vs $20,137, blown 1.0% vs 1.8%, 6th payout day 204 vs 209 | **REVERTED (user 2026-10-31)**: replay = a TIE (y1 +$25, y2 −$7, blown 1.8% vs 1.8%) -> back to Dual Thrust 2 MNQ |
 | Evaluations (50K / 150K) | add, or replace VB | add: 50.0% vs 50.1%; VB -> ST 42.6-44.8% | not used |
 
 Chart: 1-minute MNQ, Exchange time (CT), CME 24h session, IOG off, `ClockShiftMin` 0, `Qty` 1 (50K) / 2 (150K), defaults
@@ -118,8 +118,8 @@ Flow are MultiCharts-confirmed (`../analysis/nfp_vcs_confirm.py`); full size sta
 
 | Strategy | File | Chart | Funded inputs (full size) | Trades |
 |---|---|---|---|---|
-| Vault Break | `../apex_strategies/NQ_Vault_Break_SP.txt` | 30 min MNQ | **`NumContracts` 1**, `FlaggedContracts` 1 (2 / 1 until 2026-10-25, Swing Target took one contract; 3 / 1 until 2026-10-17) | ~107 a year |
-| **Swing Target v3 (2026-10-25)** | `NQ_Swing_Target_v3.txt` | 1 min MNQ | `Qty` 1 (150K: 2, in place of Dual Thrust) | ~70 a year |
+| Vault Break | `../apex_strategies/NQ_Vault_Break_SP.txt` | 30 min MNQ | **`NumContracts` 2**, `FlaggedContracts` 1 (back to 2 / 1 2026-10-31, Swing Target reverted; 1 / 1 2026-10-25 to 10-31; 3 / 1 until 2026-10-17) | ~107 a year |
+| **Swing Target v3 (2026-10-25)** | `NQ_Swing_Target_v3.txt` | 1 min MNQ | **not in the funded plans since 2026-10-31** (tie after the exit-kind fix; personal only) | ~70 a year |
 | Overnight Bias ML (v2) | `NQ_Overnight_Bias_ML.txt` | 15 min MNQ | `RiskPerTrade` 400 | ~38 a year |
 | ~~Monday Long~~ **50K: replaced 2026-10-24** by Overnight Tick / VIX (150K keeps it at 1) | `NQ_Monday_Long.txt` | 5 min MNQ | `NumContracts` 1, `RiskPerTrade` 0 | every Monday |
 | **Overnight Tick / VIX (2026-10-24)** | `NQ_Overnight_Tick_VIX.txt` | 5 min MNQ + VIX daily (Data2, Map ASCII) | `NumContracts` 1 | ~60 a year (17:05 → 03:00 CT after down days) |
@@ -141,11 +141,11 @@ kept between 0.5 and 1; multiply each full-size input by f and round down:
 
 | Cushion | f | VB normal / flagged | Swing Target | ONB ML risk | OT / VIX | EOS risk | LDF | NFP risk | Bridge Monday | CL Sunday | ES MOC | T fade (was RS longs) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| $1,500 or more | 1.0 | 1 / 1 | 1 | 400 | 1 | 700 | 2 | 500 | 1 | 2 MCL | 2 MES | 1 |
-| $1,125 | 0.75 | 0 / 0 (off) | 0 (off) | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
-| $750 or less | 0.5 | 0 / 0 (off) | 0 (off) | 200 | 0 (off) | 350 | 1 | 250 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
+| $1,500 or more | 1.0 | 2 / 1 | 0 (reverted) | 400 | 1 | 700 | 2 | 500 | 1 | 2 MCL | 2 MES | 1 |
+| $1,125 | 0.75 | 1 / 0 | 0 | 300 | 0 (off) | 525 | 1 | 375 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
+| $750 or less | 0.5 | 1 / 0 | 0 | 200 | 0 (off) | 350 | 1 | 250 | 0 (off) | 1 MCL | 1 MES | 0 (off) |
 
-(Table updated 2026-10-28: VB 1/1 + Swing Target 1 since 2026-10-25, T fade in place of RS longs since 2026-10-28; 1-lot pieces round down to 0 below full size, as benched.) Any cushion in between:
+(Table updated 2026-10-31: Swing Target reverted, VB back to 2/1 (user, tie after the exit-kind fix); earlier: VB 1/1 + ST 1 2026-10-25, T fade in place of RS longs since 2026-10-28; 1-lot pieces round down to 0 below full size, as benched.) Any cushion in between:
 f = cushion / 1,500, multiply, round DOWN to whole contracts (risk inputs: multiply, no rounding). Evaluations (combines)
 are NOT cushion-sized: they run the combine set at fixed size.
 

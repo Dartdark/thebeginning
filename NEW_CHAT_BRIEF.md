@@ -27,8 +27,7 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
 - **Weekly cross-review 10/30:** Codex found 5 defects in Claude's week code, all fixed; follow-ups fixed through a01be1b
   (`agents/cross_review/2026-10-30_summary.md`, Codex `agents/codex/results/weekly_fix_reply_20261030.md`). Lesson: Claude's
   weekly side reviews its OWN code too.
-- **Open for Claude:** full Swing Target account replay with the corrected exit kinds (Codex: adoption not yet re-proven);
-  heartbeat + HB_Ver in all 9 funded strategies + funded floor rules before the first funded account (~late Nov); Brier-score
+- **Open for Claude:** heartbeat + HB_Ver in all 9 funded strategies + funded floor rules before the first funded account (~late Nov); Brier-score
   pass odds after ~20 finished evaluations; rerun backtests on extended data; futures-trend upload waits in
   `checks/candidates/futures_trend/` (test at ~$150k).
 - **Recent research verdicts:** CHoCH D, Nocturne C (WATCHLIST #26), Setup Generator F, Prior VWAP Trap bench-only; GreenORB and
@@ -38,7 +37,7 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   `session_014DKffATms37kZigaa2xR2P` (16:40 journal + dashboard, Friday review 16:47, reminders Sun/Wed, MNQ roll 12/10).
   Dashboard 'Apex Live Desk' https://claude.ai/artifact/3oqbHWqBFTrUQd95wMmuL8.
 - **Plans:** `funded_strategies/FUNDED_PLAN.md`, `funded_strategies/README.md`, `personal_strategies/PORTFOLIO.md` (50K funded:
-  RS longs -> T_ONESIDE 1; 150K funded: DT 2 -> Swing Target 2).
+  RS longs -> T_ONESIDE 1, VB 2/1; 150K funded: Dual Thrust 2. Swing Target funded swaps reverted 10/31: ties after the fix).
 - **Every reply ends with a PushNotification** (CLAUDE.md); alerts also via `python3 analysis/send_alert.py`.
 
 ## Who / what
