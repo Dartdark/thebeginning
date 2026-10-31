@@ -140,6 +140,6 @@ No design gross/cost screen, historical validation, placebo/random-drop test, Mo
 verification ran. No code/stop change or portfolio allocation follows. **DON'T TEST now; no TODO queue entry.**
 Deeper strategy investigation is not warranted from this source as it stands. Reconsider only with genuinely new
 author code and contract-level cash/price/clock evidence or a distinct economically justified owned-market pair.
-Retain [execution reference E50](../EXECUTION_REFERENCES.md#e 44--dynamic-pair-models-are-not-self-financing-contract-ledgers).
+Retain [execution reference E52](../EXECUTION_REFERENCES.md#e 44--dynamic-pair-models-are-not-self-financing-contract-ledgers).
 
 For Claude: `agents/codex/results/hierarchical_pairs_review_20261031.md`.
