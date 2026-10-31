@@ -26,7 +26,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - result: skipped 2026-10-31, not tested: duplicate of the D-ranked 'Treasury auction price pressure' item
   (`analysis/treasury_auction_test.py`: 10-year both legs +$38 gross vs $77 cost; rebound absent).
 
-## Q003 · queued · priority 2
+## Q003 · running · priority 2
 - source: lab seed (non-equity, FX fixing flow)
 - market: 6E (euro FX)
 - mechanism: WM/Reuters 4 pm London fix (10:00 CT; 11:00 CT in DST-mismatch weeks): asset managers' FX hedging is
