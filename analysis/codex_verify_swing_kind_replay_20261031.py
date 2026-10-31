@@ -46,5 +46,5 @@ for account, cap in ((50, 13000), (150, 20500)):
         changed_first_payout_day_histories=int(np.count_nonzero(result["REPLACE_FIXED"][:, 4] - result["REPLACE_OLD"][:, 4])),
         changed_first_year_histories=int(np.count_nonzero(year["REPLACE_FIXED"] - year["REPLACE_OLD"])))
 checks["all_checks_passed"] = True
-(OUT / "verification.json").write_text(json.dumps(checks, indent=2) + "\n")
+(OUT / "verification_extended_grid.json").write_text(json.dumps(checks, indent=2) + "\n")
 print(json.dumps(checks, indent=2))

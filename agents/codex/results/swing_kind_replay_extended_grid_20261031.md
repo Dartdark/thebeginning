@@ -6,7 +6,7 @@ Fixed 50K swap vs BASE: first-year -$213, two-year -$95, failures +0.4 percentag
 Fixed 150K swap vs BASE: first-year +$601, two-year +$357, failures -1.8 points; vs EMPTY it mainly improves payout speed.
 These are historical-roster comparisons with inherited simulator limitations; no trading allocation was changed.
 
-Plan: [frozen replay](../plans/swing_kind_replay_20261031.md), commit `0b72684`.
+Plan: [frozen replay](../plans/swing_kind_replay_extended_grid_20261031.md), original commit `0b72684` before its publication rename.
 Code: [replay](../../../analysis/codex_swing_kind_replay_20261031.py), commit `7a1f2d9`;
 [saved-output verification](../../../analysis/codex_verify_swing_kind_replay_20261031.py).
 Evidence: [output directory](../../../analysis/outputs/codex_swing_kind_replay_20261031/).
@@ -46,7 +46,7 @@ Ten resumable checkpoints use contiguous slices of the one registered RNG histor
   Corrected daily closes reconcile to reconstructed trade cash, and every corrected adverse-path mark is at least
   as high as its original counterpart. This does not establish monotone payouts through a stateful account simulator.
 - Saved summaries and paired standard errors independently reconcile to all 20 checkpoint files. Bounds, payout counts,
-  cap arithmetic, finite values, script hash and checkpoint identities pass. See [verification.json](../../../analysis/outputs/codex_swing_kind_replay_20261031/verification.json).
+  cap arithmetic, finite values, script hash and checkpoint identities pass. See [verification](../../../analysis/outputs/codex_swing_kind_replay_20261031/verification_extended_grid.json).
 
 ## 50K funded: original benefit not reproduced
 
@@ -111,7 +111,7 @@ retain the original RS-long roster to isolate the October 25 adoption and Octobe
 the 50K placement as validated for the current book, freeze and test the actual T_ONESIDE roster with matching
 component coverage. The separate extended-data/live missed-trade refresh also remains open.
 
-For Claude: review `agents/codex/results/swing_kind_replay_20261031.md`; revise the joint summary's
+For Claude: review `agents/codex/results/swing_kind_replay_extended_grid_20261031.md`; revise the joint summary's
 "can only strengthen" claim, distinguish the two account results, and handle the shared builder's explicit
 open-position placeholder. No action on the VPS or live sizing follows from this report.
 
@@ -124,3 +124,19 @@ fails at the open sentinel described above; these two grids are its unchanged fi
 Run the replay script with arguments `SOURCE_CHECKOUT SCRATCH prepare`, then `SOURCE_CHECKOUT SCRATCH 50`
 and `SOURCE_CHECKOUT SCRATCH 150`. Finally run `analysis/codex_verify_swing_kind_replay_20261031.py`.
 Input hashes, exact rosters, fixed RNG settings, code hash, cache hash and dependency versions are saved with the outputs.
+
+## Concurrent evidence discovered on the final pull
+
+Remote codex/work reached `d5f2769` during this run and already contains multiple separately preregistered replays.
+Its [common-coverage replay](swing_kind_replay_20261031.md) freezes dates through 2026-10-09 and uses seeds 1/2,
+250 histories each. Both selected swaps have approximately -$7 two-year payout differences versus BASE there,
+with uncertainty spanning zero. A second retained replay uses seed 1 alone and is also inconclusive.
+This run instead registered seed 20261031 and keeps the rebuilt grid through October 30, including component
+coverage gaps documented above. It is an additional sensitivity record, not independent strategy verification
+or a replacement for the common-coverage result. Do not select its favorable 150K table as the answer or pool
+these samples without auditing overlap and different generators. Taken together, adoption remains inconclusive;
+the shared robust finding is the $132/MNQ accounting correction without monotone portfolio improvement.
+
+To preserve both sets, this report/plan and its verification filename were renamed before merging; numeric
+outputs, worker script, preregistration commits and checkpoint hashes are unchanged. The verifier changed only
+its output filename. No return rerun followed the concurrent results.
