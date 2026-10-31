@@ -23,7 +23,7 @@ current plans (`../analysis/t_oneside_bench2.py`, two independent runs of 1,000 
 
 | Plan | Change | Effect (run 1 / run 2) | Decision |
 |---|---|---|---|
-| **50K funded** | **Relative Strength longs 1 MNQ -> T fade 1 MNQ** | y2 +$194 / +$182, blown 5.9 -> 4.3% / 5.6 -> 4.2%, all 6 payouts in 2y 93 -> 95%, y2 p5 $2,925 -> $10,000 / $1,500 -> $13,000; y1 −$55 / −$70, 6th payout +5 / +8 days | **in the plan** |
+| **50K funded** | **Relative Strength longs 1 MNQ -> T fade 1 MNQ** | y2 +$194 / +$182, blown 5.9 -> 4.3% / 5.6 -> 4.2%, all 6 payouts in 2y 93 -> 95%, y2 p5 $2,925 -> $10,000 / $1,500 -> $13,000; y1 −$55 / −$70, 6th payout +5 / +8 days | **in the plan; 2026-10-31 replay with corrected exit kinds: a TIE** (y1 $9,822 vs $9,818, y2 −$7, blown 6.2% vs 6.4%): user to decide keep / revert |
 | 50K funded | + T 1 / 2 MNQ, OT -> T, ONB ML -> T | noise or worse | not used |
 | 150K funded | + T 1-3 MNQ, OT 2 -> T 2 | within $80 of the plan (cap-bound) | not used (RS stays both sides) |
 
@@ -77,7 +77,7 @@ report: 595 trades 2018-26, $305 per NQ, PF 1.63, t 4.55, 9/9 years, 0 overnight
 | Plan | Change | Effect | Decision |
 |---|---|---|---|
 | **50K funded** | **Vault Break 2/1 -> 1/1 + Swing Target 1 MNQ** | y1 $10,159 vs $9,940, y2 $12,347 vs $12,163, blown 5.0% vs 6.8%, y2 p5 $7,500 vs $1,500 | **in the plan** |
-| **150K funded** | **Dual Thrust 2 MNQ -> Swing Target 2 MNQ** | y1 $18,083 vs $17,870, y2 $20,296 vs $20,137, blown 1.0% vs 1.8%, 6th payout day 204 vs 209 | **in the plan** (DT stays personal) |
+| **150K funded** | **Dual Thrust 2 MNQ -> Swing Target 2 MNQ** | y1 $18,083 vs $17,870, y2 $20,296 vs $20,137, blown 1.0% vs 1.8%, 6th payout day 204 vs 209 | **in the plan** (DT stays personal); **2026-10-31 replay: a TIE** (y1 +$25, y2 −$7, blown 1.8% vs 1.8%): user to decide |
 | Evaluations (50K / 150K) | add, or replace VB | add: 50.0% vs 50.1%; VB -> ST 42.6-44.8% | not used |
 
 Chart: 1-minute MNQ, Exchange time (CT), CME 24h session, IOG off, `ClockShiftMin` 0, `Qty` 1 (50K) / 2 (150K), defaults
