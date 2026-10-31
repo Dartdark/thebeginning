@@ -69,3 +69,12 @@ for each micro,1tick per market/stop fill. Preserve1.24RT/1tick as the second de
 and use doubled main fees2.08RT/2ticks for `stress`. This replaces the provisional low/main/stress schedules above
 before all economic outcomes. It is a user-provided cost clarification, not an outcome-selected fee reduction.
 Source MNQ evidence is the user's measured range; MES/MCL remain assumptions, not verified fee schedules.
+
+## Preparation admission correction, before baseline/account outcomes
+
+The first preparation attempt stopped at the no-missing-flag assertion: the existing single-print cache omits
+some holidays/partial sessions. Do not inherit the old fillna(False) allocation. On a recorded VB trade day with
+an unknown flag, mark both funded VB size branches unknown and exclude that day from that funded baseline's
+conditional accounting pool. A missing flag on a day with no recorded VB trade cannot change an executed size.
+Keep the raw VB evaluation ledger intact and retain every flag omission in coverage_issues.csv. No economic
+allocation result was produced or used to choose this treatment; the stopped attempt is retained in the run log.

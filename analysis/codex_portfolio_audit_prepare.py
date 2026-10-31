@@ -114,8 +114,10 @@ mc("ONB30","mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minute
 mc("BRIDGE","mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx")
 
 flags=pd.read_pickle(SCRATCH/"single_print_sessions.pkl").flag.reindex(days)
-assert flags.notna().all(),"Missing preexisting single-print size flag"
-for nm,mask in [("VB_F",flags), ("VB_N",~flags.astype(bool))]:
+unknown_flags=days[flags.isna() & days.isin(ledgers["VB"].session)]
+for d in unknown_flags:
+    issues.append(dict(key="VB_N/VB_F",entry=d,exit=d,issue="missing single-print size flag on a recorded VB trade day"))
+for nm,mask in [("VB_F",flags.eq(True)), ("VB_N",flags.eq(False))]:
     z=ledgers["VB"].copy(); m=z.session.map(mask).fillna(False)
     record(nm,"NQ",z[m],"VB ledger + existing single_print_sessions.pkl")
 
@@ -191,6 +193,8 @@ def build_unit(key,z):
     D=len(days);W=np.zeros((D,1440));R=np.zeros_like(W);Q=np.zeros_like(W)
     F=np.zeros_like(W);S=np.zeros_like(W);G=np.zeros(D);N=np.zeros(D);L=np.zeros(D);short=np.zeros(D)
     valid=np.ones(D,bool); rows=[];pv,tick=MARKETS[z.market.iloc[0]]
+    if key in ["VB_N","VB_F"]:
+        valid[days.isin(unknown_flags)]=False
     for r in z.itertuples():
         if r.session not in pos:continue
         d=pos[r.session];a,b=coord(r.entry_at),coord(r.exit_at)
