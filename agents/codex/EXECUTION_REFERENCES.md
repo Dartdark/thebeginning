@@ -1001,6 +1001,8 @@ measurement, E15 overnight tails, E19 session clocks, E30 paired-leg execution.
 - Status: execution/accounting reference retained; naked component rejected, preferred hedge unverified. No execution
   saving, plan placement, trading, broker or live-policy change is claimed.
 
+- FOMC-only follow-up, separate paper [SSRN2544445](results/fomc_vx_2544445_review.md): rendered source charts show an undefined`min-Maturity=5`which prose“nearest”does not capture. Printed Eq3 with negative3.5%leverage gives+18VXunder mathematical floor; screenshotpositive3.5gives intended−17. Preserve source sign/rounding and source-era monthly-contract universe before replication. Cboe legacy/current product documentation has a2018timestamp/schema transition; provider bar labels/timezones differ. A35-minute post-statement cover now crosses the usual press-conference start. Source0.7%sampleDDand zero triggered stops do not cap5%stop/gap risk. Product discovery and failed sample reads are recorded; no intraday panel or return test admitted. Retain a distinct conditional personal lead; the Calvados component failure does not falsify it.
+
 ETP lifecycle/clock follow-up, 2026-10-30: Bordonado, Molnár and Samdal (2016),
 [SSRN2753300](https://ssrn.com/abstract=2753300), [full uploaded-source review](results/vix_etp_2753300.md).
 The front-VX/spot basis XIV/VXX switching example reports 69% annualized return, Sharpe2.11 and −24.5% DD in
@@ -1224,6 +1226,31 @@ tests or change trading from the theoretical impact result alone.
 Status: reference only, zero return trials, no execution policy or plan/live change.
 Related: E04 opportunity-complete diagnostics, E25 raw-flow negative evidence,
 E40 short-horizon price impact and E54 activity-availability clocks.
+
+### E58 — RL stock simulators: observation/fill clocks, cash and reported fee counters
+
+Source: Yang, Liu, Zhong and Walid, *Deep Reinforcement Learning for Automated Stock Trading: An Ensemble Strategy*,
+ICAIF 2020, SSRN 3690996; [paper/code review](results/rl_ensemble_3690996_20261030.md),
+[pretest plan](plans/rl_ensemble_3690996_mechanics_20261030.md). Pinned public FinRL-Trading source at
+5b9290ed706efa34aaff96e10761af428a154076, with original Git blobs verified. Related: E09 cash/cost reconciliation,
+E11 information clocks, E18 research/platform fill conventions and E43 accounting-to-account effects.
+- Use: a close-derived state followed by a fill at the same close needs an actual causal order/auction protocol.
+  Value and reward calculations cannot establish availability of that fill. Distinguish the actual cash charged from
+  a separately reported fee counter; a counter error alone does not prove costs were omitted from net cash.
+- Evidence: five predeclared synthetic groups executed original source class methods/function bodies via AST, not
+  trained agents. All three environments can spend $1,001 from $1,000 cash on 100 shares at $10 with a 0.1% fee,
+  retain 12.345 shares from a continuous action, and report $0 in the cost counter on a fully closed $100 sale even
+  though cash correctly receives $99.90. Same observation close is used as fill before advancing to the next close.
+- Specification lesson: source turbulence uses price levels instead of paper-defined returns; backward filling needs
+  fold/ticker availability checks. A common positive Sharpe annualization scale does not alter model ranking.
+  README/paper/code windows and end dates differ; a paper-era snapshot is not proof of the exact published run.
+- Limits: synthetic incidence is not a measured historical failure rate or Sharpe inflation. Public data acquisition
+  and panel shape were verified, but trained policy checkpoints, point-in-time universe/adjustment identity and
+  portfolio attribution remain unverified. Source daily cash-equity fees do not translate to native futures.
+- Next check only with clarified source/protocol: one causal observation/order/fill/cash/share trace, then verified
+  universe, corporate actions, fold-local features, turbulence, seeds and benchmarks before economic replication.
+- Status: original engine fails reproduction admission; broader personal-allocation method is a low-priority queue
+  lead. Zero historical agent training, strategy-return trials, portfolio comparisons, native savings or live changes.
 
 ## Minimum record for any later execution comparison
 
