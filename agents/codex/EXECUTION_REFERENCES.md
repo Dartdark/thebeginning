@@ -158,6 +158,16 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   Preserve schemas, assert numeric enum sets, and reconcile closed cash and marked paths before account claims.
   This is existing-ledger accounting evidence, not a new strategy, native-fill result or plan change.
 
+- Swing Target account replay 2026-10-31 ([results](results/swing_replay_20261031.md)): 500 paired two-year histories
+  per account, fixed empirical pool through 2026-10-09. The $132/MNQ fixed-ledger improvement changes neither
+  selected replacement's two-year payouts nor failures in this sample; year-one mean changes are +$7 (50K)
+  and +$20 (150K), with intervals spanning zero. An accounting correction is necessary but does not establish
+  portfolio superiority. Against base, 50K VB replacement has two-year −$83 and failures +0.6 pp; 150K DT replacement
+  +$43 and −0.4 pp; both inconclusive. These are legacy NQ-equivalent bench costs, not native fee/fill evidence.
+  Rebuild also exposes an unfinished MC `Signal=open` valuation with a 00:00 exit sentinel: exclude it explicitly
+  from completed-ticket paths rather than infer a next-date fill or drop all same-bar trades. The general
+  builder still needs that upstream repair. No live/plan change or standalone strategy promotion follows.
+
 ### E10 — Liquidity compensation, turnover and costs
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
