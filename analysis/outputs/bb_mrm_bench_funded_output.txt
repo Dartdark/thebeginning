@@ -1,0 +1,25 @@
+BB_MRM (analysis/bb_mrm_test.py, exchange clock 08:05-09:20 CT) in the Apex plans.
+[CL fade trades 96, avg $653 per CL]
+
+B. 50K funded, bootstrapped (1000 paired histories, 20-day blocks, 2 years):
+                  y1 y1_p5      y2  y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+plan          $9,349    $0 $12,078     $0 $13,000  7.2%   91.8%   258      50.0%      $0       0.0%
++ BB 1 MNQ    $9,554    $0 $12,002     $0 $13,000  7.7%   91.3%   249      49.8%    $-76       0.5%
++ BB 2 MNQ    $9,695    $0 $11,479     $0 $13,000 12.5%   87.3%   234      47.9%   $-599       5.3%
++ BB shorts 1 $9,517    $0 $12,098 $1,425 $13,000  6.9%   92.1%   254      50.2%     $20      -0.3%
+EOS -> BB 1   $8,744    $0 $12,264 $4,900 $13,000  4.9%   92.5%   278      50.5%    $186      -2.3%
+LDF -> BB 1   $8,832    $0 $11,773     $0 $13,000  9.2%   88.9%   268      48.4%   $-305       2.0%
+
+   Daily correlation of BB with the plan pieces:
+BB            1.00
+VB_N         -0.01
+VB_F         -0.02
+ONB_ML2_MC   -0.03
+MON_MC       -0.04
+EOS           0.02
+LDF_MC       -0.00
+NFP_MC       -0.06
+MON_BR_MC     0.02
+CLS           0.00
+MOC_MES       0.02
+RS_L         -0.04

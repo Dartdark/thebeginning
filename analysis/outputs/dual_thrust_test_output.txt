@@ -1,0 +1,78 @@
+NQ Dual Thrust v4, Central-time build (user's file, 2026-10-24; code in checks/candidates/dual_thrust/).
+
+1. Rebuild (v4 as coded), per NQ after costs, 2018-01-02 -> 2026-10-08:
+   all                                    n=1611 win 45% $  140 PF 1.28 t  4.4 yrs+ 9/9 | 18-22 $ 125 (t 3.1) | 23+ $ 159 (t 3.1)
+   longs                                  n= 821 win 47% $  126 PF 1.26 t  2.9 yrs+ 8/9 | 18-22 $ 153 (t 2.8) | 23+ $  95 (t 1.4)
+   shorts                                 n= 790 win 44% $  155 PF 1.30 t  3.3 yrs+ 6/9 | 18-22 $  97 (t 1.6) | 23+ $ 228 (t 3.0)
+   by year ($ per NQ): {2018: 26902, 2019: 16425, 2020: 9843, 2021: 19862, 2022: 38085, 2023: 6760, 2024: 59523, 2025: 29414, 2026: 19441}
+   exits: {'stop': 758, 'flat': 428, 'target': 425} | worst $-1,042, best $1,988
+   days allowed 82% (band skip 15%), trade on 87% of allowed days; median signal time 903
+   tail: top 5% (81) trades $161,008, the rest $65,248
+   v3 (no entry-bar stop)                 n=1611 win 45% $  140 PF 1.28 t  4.4 yrs+ 9/9 | 18-22 $ 125 (t 3.1) | 23+ $ 158 (t 3.1)
+
+2. Controls (same exits):
+   same signal bar, random side (20 runs): $22 (max $62) vs $140
+   random allowed day, random bar 08:31-14:30, random side, same count (20 runs): $-4 (max $54)
+   sensitivity (not optimised; the user's settings stay):
+   K 0.4                                  n=1730 win 43% $  114 PF 1.22 t  3.7 yrs+ 9/9 | 18-22 $ 113 (t 3.0) | 23+ $ 115 (t 2.3)
+   K 0.6                                  n=1495 win 44% $  123 PF 1.25 t  3.8 yrs+ 8/9 | 18-22 $ 120 (t 3.0) | 23+ $ 127 (t 2.4)
+   K 0.7                                  n=1365 win 45% $  127 PF 1.26 t  3.8 yrs+ 9/9 | 18-22 $ 106 (t 2.5) | 23+ $ 153 (t 2.8)
+   no band filter                         n=1798 win 44% $  109 PF 1.21 t  3.6 yrs+ 8/9 | 18-22 $ 100 (t 2.7) | 23+ $ 122 (t 2.5)
+   band 1.9 (v2)                          n=1773 win 44% $  116 PF 1.22 t  3.8 yrs+ 9/9 | 18-22 $ 102 (t 2.7) | 23+ $ 134 (t 2.7)
+   no holiday filter                      n=1639 win 45% $  138 PF 1.28 t  4.4 yrs+ 9/9 | 18-22 $ 121 (t 3.1) | 23+ $ 159 (t 3.1)
+   stop 40 / target 80                    n=1611 win 43% $  106 PF 1.24 t  4.0 yrs+ 8/9 | 18-22 $ 118 (t 3.5) | 23+ $  92 (t 2.2)
+   stop 60 / target 120                   n=1611 win 47% $  176 PF 1.31 t  4.8 yrs+ 8/9 | 18-22 $ 178 (t 3.9) | 23+ $ 173 (t 2.9)
+   target 150                             n=1611 win 42% $  176 PF 1.33 t  4.7 yrs+ 9/9 | 18-22 $ 150 (t 3.3) | 23+ $ 208 (t 3.4)
+   no target                              n=1611 win 40% $  203 PF 1.37 t  4.4 yrs+ 9/9 | 18-22 $ 181 (t 3.5) | 23+ $ 229 (t 2.8)
+
+3. Standard metrics per NQ:
+            trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+Dual Thrust   1611 45% $140 $24,909   1.46    2.64          1.28 $19,621   1.27  3.55      14.02
+longs          821 47% $126 $11,417   0.97    1.72          1.26 $16,016   0.71  3.46       6.60
+shorts         790 44% $155 $13,491   1.08    2.01          1.30 $24,140   0.56  9.90       2.72
+                                  actual        p5       p50       p95
+name              metric                                              
+Dual Thrust 2023+ sharpe            1.55      0.88      1.57      2.30
+                  sortino           2.85      1.56      2.88      4.39
+                  pf_day            1.28      1.15      1.28      1.44
+                  calmar            1.50      0.68      1.81      3.73
+                  ulcer             7.87      2.80      5.23     11.58
+                  max_dd       19,620.75 10,803.66 16,148.12 26,999.19
+                  P(Sharpe<=0)       NaN       NaN      0.00       NaN
+longs 2023+       sharpe            0.69     -0.11      0.67      1.47
+                  sortino           1.21     -0.18      1.19      2.75
+                  pf_day            1.16      0.98      1.16      1.39
+                  calmar            0.56     -0.04      0.50      1.68
+                  ulcer             7.02      4.26      9.78     26.99
+                  max_dd       16,015.75 10,711.77 18,095.50 34,256.53
+                  P(Sharpe<=0)       NaN       NaN      0.07       NaN
+shorts 2023+      sharpe            1.49      0.82      1.52      2.19
+                  sortino           2.86      1.50      2.92      4.46
+                  pf_day            1.40      1.21      1.41      1.66
+                  calmar            1.35      0.67      1.85      3.74
+                  ulcer             9.43      2.27      4.11      9.36
+                  max_dd       15,148.00  7,214.25 11,139.38 19,045.70
+                  P(Sharpe<=0)       NaN       NaN      0.00       NaN
+                  actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+Dual Thrust 2023+   $19,621      57% $18,751 $28,510 $34,030        100%        100%        100%
+longs 2023+         $16,016      33% $18,009 $28,611 $34,316        100%        100%        100%
+shorts 2023+        $15,148      69% $13,244 $20,810 $25,275        100%        100%        100%
+   Monte Carlo 1 MNQ (x0.1): trades 1611 | total p5 $14,086 / p50 $22,590 / p95 $31,196, P(total <= 0) 0.0%
+      max DD actual $1,962 (rank 32%), shuffled p50 $2,209 / p95 $3,594 / p99 $4,403; losing streak actual 9, p95 16
+      252-day block bootstrap: P&L p5 $-16 / p50 $2,534 / p95 $5,051, P(loss) 5.1%, max DD p50 $1,000 / p95 $1,890, return/DD 2.53, P(hit $2,000 trailing, EOD check only) 3.2%
+   Monte Carlo 3 MNQ (x0.3): trades 1611 | total p5 $42,257 / p50 $67,770 / p95 $93,588, P(total <= 0) 0.0%
+      max DD actual $5,886 (rank 32%), shuffled p50 $6,627 / p95 $10,781 / p99 $13,208; losing streak actual 9, p95 16
+      252-day block bootstrap: P&L p5 $-48 / p50 $7,603 / p95 $15,153, P(loss) 5.1%, max DD p50 $3,001 / p95 $5,671, return/DD 2.53, P(hit $2,000 trailing, EOD check only) 44.3%
+
+4. Overlap with the plan (agents/tasks/plan_daily_pnl.csv, per micro):
+   VaultBreak               corr +0.16   days both trade 708
+   OvernightBiasML          corr +0.15   days both trade 239
+   MondayLong               corr +0.07   days both trade 286
+   ExpirationOpenShort      corr +0.09   days both trade 78
+   LateDayFlow              corr +0.03   days both trade 740
+   NFPFade                  corr +0.02   days both trade 57
+   BridgeMondayLong         corr +0.06   days both trade 165
+   CLSundayFade_perMCL      corr +0.03   days both trade 59
+   ESMOCFollow_perMES       corr -0.02   days both trade 141
+   RelativeStrength         corr +0.21   days both trade 858
+   plan total (1 micro each)  corr +0.26

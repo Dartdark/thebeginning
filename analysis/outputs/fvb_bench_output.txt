@@ -1,0 +1,42 @@
+FVB First Valid Breakout (rebuild analysis/fvb_test.py; PT = the whole rule, PS = its shorts only) in every plan: add
+
+A. 50K evaluation (every start day):
+   combine set + FVB 0 MNQ        pass 50.1% (18-22 46.7%, 23-26 54.5%), fail 48.1%
+   combine set + FVB 1 MNQ        pass 47.2% (18-22 47.6%, 23-26 46.5%), fail 51.8%
+   combine set + FVB 2 MNQ        pass 46.0% (18-22 47.6%, 23-26 44.0%), fail 53.6%
+   combine set + FVB 3 MNQ        pass 44.8% (18-22 46.5%, 23-26 42.5%), fail 55.0%
+   Bridge Monday -> FVB 1 MNQ     pass 46.2% (18-22 46.1%, 23-26 46.3%), fail 52.6%
+   Bridge Monday -> FVB 2 MNQ     pass 44.8% (18-22 46.1%, 23-26 43.0%), fail 54.6%
+   VB 8 -> 6 + FVB 1 MNQ          pass 47.1% (18-22 46.5%, 23-26 47.8%), fail 51.3%
+   VB 8 -> 6 + FVB 2 MNQ          pass 47.3% (18-22 48.4%, 23-26 45.7%), fail 51.9%
+
+B. 150K evaluation (combine set x 2.5):
+   x 2.5 + FVB 0 MNQ              pass 41.6% (18-22 38.8%, 23-26 45.4%), fail 55.8%
+   x 2.5 + FVB 1 MNQ              pass 39.9% (18-22 38.2%, 23-26 42.1%), fail 57.2%
+   x 2.5 + FVB 2 MNQ              pass 39.1% (18-22 38.1%, 23-26 40.5%), fail 58.4%
+   x 2.5 + FVB 3 MNQ              pass 39.1% (18-22 38.6%, 23-26 39.7%), fail 59.0%
+   x 2.5 + FVB 5 MNQ              pass 38.0% (18-22 38.2%, 23-26 37.9%), fail 60.5%
+
+E. Personal portfolio (1 micro each; FVB alone $3,841 a year, corr with the rest +0.35, with Dual Thrust +0.35):
+   17 pieces (now)            $ 37,090 a year, Sharpe 3.04, max DD $ 5,903, MC p50 $ 36,377, DD p95 $ 6,727, return/DD 8.3, capital $ 33,636
+   + FVB                      $ 40,930 a year, Sharpe 3.01, max DD $ 6,382, MC p50 $ 40,245, DD p95 $ 7,505, return/DD 8.2, capital $ 37,523
+   + FVB shorts               $ 39,895 a year, Sharpe 3.17, max DD $ 6,043, MC p50 $ 39,106, DD p95 $ 6,846, return/DD 8.9, capital $ 34,228
+   Dual Thrust -> FVB         $ 38,509 a year, Sharpe 2.97, max DD $ 6,357, MC p50 $ 37,779, DD p95 $ 7,360, return/DD 8.0, capital $ 36,802
+
+C. 50K funded, bootstrapped (500 paired 2-year histories):
+                           y1 y1_p5      y2  y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+50K plan               $9,818    $0 $12,182 $1,500 $13,000  6.4%   93.0%   244      50.0%      $0       0.0%
++ FVB 1 MNQ            $9,455    $0 $11,755     $0 $13,000  9.6%   89.4%   248      48.1%   $-427       3.2%
++ FVB shorts 1        $10,185    $0 $11,926     $0 $13,000  8.2%   91.2%   230      48.9%   $-256       1.8%
+RS longs -> FVB 1      $9,384    $0 $11,709     $0 $13,000 10.0%   89.2%   254      48.0%   $-473       3.6%
+EOS -> FVB 1           $8,942    $0 $11,996     $0 $13,000  7.4%   91.4%   269      49.2%   $-186       1.0%
+VB 2/1 -> 1/1 + FVB 1  $9,339    $0 $12,184     $0 $13,000  6.0%   92.8%   254      49.5%      $2      -0.4%
+
+D. 150K funded, bootstrapped (500 paired 2-year histories):
+                          y1  y1_p5      y2   y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+150K plan            $17,861 $8,500 $20,139 $20,500 $20,500  1.8%   97.8%   214      50.0%      $0       0.0%
++ FVB 1 MNQ          $17,577 $5,500 $19,846 $20,500 $20,500  3.0%   96.4%   214      49.2%   $-293       1.2%
++ FVB 2 MNQ          $16,421     $0 $18,836      $0 $20,500  8.2%   91.4%   221      46.6% $-1,303       6.4%
++ FVB shorts 1       $17,809 $8,350 $19,954 $20,500 $20,500  2.6%   97.0%   209      49.5%   $-185       0.8%
+DT 2 -> FVB 2        $16,072     $0 $19,089      $0 $20,500  6.6%   92.4%   234      47.2% $-1,050       4.8%
+DT 2 -> DT 1 + FVB 1 $17,127 $5,500 $19,866 $20,500 $20,500  3.0%   96.6%   222      49.3%   $-273       1.2%

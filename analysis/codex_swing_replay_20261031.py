@@ -10,6 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 import pickle
+import platform
 import shutil
 import sys
 import warnings
@@ -156,8 +157,45 @@ def run(which, n):
         st_trades=len(t), st_exit_kinds=t.kind.value_counts().to_dict(), plans=plans), indent=2) + "\n")
 
 
+def audit():
+    """Cash/path reconciliation and bounds on the saved account simulations."""
+    from funded_lab import with_slippage
+    g = pickle.load(open(SP / "g24.pkl", "rb"))
+    t = ST.pt_trades(g)
+    a = with_slippage(t)
+    w, c = portfolio.paths(g, a)
+    net = ((a.exit - a.entry) * a.side * 20 - 7.25).sum()
+    np.testing.assert_allclose(net, c[:, -1].sum(), atol=1e-6)
+    legacy = t.copy()
+    raw = pd.read_csv(SP / "swing_be.csv")
+    legacy["kind"] = raw.reason.astype(object)
+    legacy.loc[raw.apex_flat_violation, "kind"] = 2
+    lw, lc = portfolio.paths(g, with_slippage(legacy))
+    checks = dict(python=platform.python_version(), numpy=np.__version__, pandas=pd.__version__,
+        trades=len(t), kind_counts=t.kind.value_counts().to_dict(),
+        holiday_repairs=int(raw.apex_flat_violation.sum()), closed_cash_matches_paths=True,
+        corrected_cash_per_nq=float(net), cash_improvement_per_mnq=float((c[:, -1] - lc[:, -1]).sum() / 10),
+        changed_daily_minima=int((np.abs(w.min(1) - lw.min(1)) > 1e-7).sum()),
+        changed_any_daily_path=int(np.any(np.abs(w - lw) > 1e-7, axis=1).sum()))
+    for which, cap in [(50, 13000), (150, 20500)]:
+        res, y1 = pickle.load(open(SP / f"codex_st{which}_results.pkl", "rb"))
+        n = len(next(iter(res.values())))
+        for name, x in res.items():
+            assert x.shape == (n, 5) and np.isfinite(x).all()
+            assert ((x[:, 0] >= 0) & (x[:, 0] <= cap)).all()
+            assert np.isin(x[:, 3], [0, 1]).all()
+            assert np.isin(x[:, 1], range(7)).all()
+            assert (y1[name] <= x[:, 0]).all()
+        checks[str(which)] = dict(plans=len(res), histories_per_plan=n,
+            finite_and_payout_bounds=True, year1_not_above_year2=True)
+    (OUT / "checks.json").write_text(json.dumps(checks, indent=2) + "\n")
+    print(json.dumps(checks, indent=2))
+
+
 if __name__ == "__main__":
     if ARGS == ["prep"]:
         prep()
+    elif ARGS == ["audit"]:
+        audit()
     else:
         run(int(ARGS[0]), int(ARGS[1]) if len(ARGS) > 1 else 500)

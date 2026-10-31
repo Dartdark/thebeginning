@@ -1,0 +1,19 @@
+'Beat the Market' intraday momentum (Zarattini, Aziz, Barbon, SSRN 4824172), the user's EasyLanguage SPY replication
+
+ES RTH days 2435 (2017-01-03 .. 2026-10-09); results 2018-01-02 onward, costs = the paper's unless stated.
+   the user's version (LB 90, 30-min VWAP, fill at close) total    294%  IRR 17.1%  vol 14.5%  Sharpe 1.16  MDD -15.1%  round trips  1798  hit/trip 38.7%  hit/day 44.3%  avg win/avg loss 1.98
+   paper VWAP (1-minute bars)                   total    325%  IRR 18.2%  vol 14.5%  Sharpe 1.22  MDD -14.5%  round trips  1774  hit/trip 38.6%  hit/day 44.5%  avg win/avg loss 2.02
+   fill at the next minute's open               total    293%  IRR 17.1%  vol 14.5%  Sharpe 1.16  MDD -15.2%  round trips  1798  hit/trip 38.8%  hit/day 43.9%  avg win/avg loss 1.97
+   1-min VWAP + next-minute fill                total    324%  IRR 18.1%  vol 14.5%  Sharpe 1.22  MDD -14.6%  round trips  1774  hit/trip 38.7%  hit/day 44.0%  avg win/avg loss 2.00
+   LookBack 14 (paper base)                     total    379%  IRR 19.8%  vol 14.8%  Sharpe 1.30  MDD -24.0%  round trips  1926  hit/trip 39.7%  hit/day 45.5%  avg win/avg loss 1.91
+   slippage $0.005 / share (~half a cent spread) total    262%  IRR 16.0%  vol 14.5%  Sharpe 1.10  MDD -15.7%  round trips  1798  hit/trip 38.7%  hit/day 44.0%  avg win/avg loss 1.96
+   no costs                                     total    333%  IRR 18.4%  vol 14.5%  Sharpe 1.24  MDD -14.6%  round trips  1798  hit/trip 38.7%  hit/day 44.6%  avg win/avg loss 1.97
+   ES futures costs ($5 round trip + 1 tick a side = $0.03 a SPY share a side) total    131%  IRR 10.1%  vol 14.5%  Sharpe 0.74  MDD -19.4%  round trips  1798  hit/trip 36.7%  hit/day 40.9%  avg win/avg loss 1.99
+   ES futures costs, LookBack 14                total    163%  IRR 11.8%  vol 14.8%  Sharpe 0.83  MDD -29.1%  round trips  1926  hit/trip 38.0%  hit/day 43.3%  avg win/avg loss 1.88
+   2018-2026, 30-min VWAP, from 2019 (check)    total    173%  IRR 13.9%  vol 13.9%  Sharpe 1.01  MDD -15.1%  round trips  1538  hit/trip 39.1%  hit/day 44.1%  avg win/avg loss 1.88
+
+   30-min vs 1-min VWAP at the decision points: mean difference +0.08 bp, mean |difference| 1.81 bp, 95th pct 5.9 bp; the band sits ~43 bp from the open
+   same-day result sign agreement 30-min vs 1-min VWAP: 99%; daily return corr 1.00
+
+   by year (user's version): {2018: '+44%', 2019: '+8%', 2020: '+17%', 2021: '+18%', 2022: '+29%', 2023: '+19%', 2024: '+18%', 2025: '+13%', 2026: '-12%'}
+   by year (1-min VWAP):      {2018: '+46%', 2019: '+10%', 2020: '+17%', 2021: '+19%', 2022: '+29%', 2023: '+20%', 2024: '+22%', 2025: '+14%', 2026: '-11%'}

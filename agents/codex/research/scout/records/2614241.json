@@ -25,7 +25,7 @@
   "report_path": "agents/codex/results/rad_double_sort_review_20261031.md",
   "evidence_path": "agents/codex/evidence/rad_double_sort_20261031.md",
   "access_receipt": "agents/codex/inputs/rad_double_sort_20261031/source_access.json",
-  "updated_at": "2026-10-31T02:02:21Z",
+  "updated_at": "2026-10-31T02:07:56.100534+00:00",
   "origin": "user_uploaded_paper_review",
   "cycle_id": null,
   "new_economic_trials": 0,
@@ -33,7 +33,7 @@
   "return_eligibility": "NEEDS DATA",
   "summary": "Explicit monthly four-long/four-short commodity momentum/carry rule; old pre-cost source claims and unreconciled NAV. Broad identified front/second panel unavailable; parked personal-only, no return test.",
   "about": "Monthly commodity momentum/term-structure double sort and daily-monitored next-day stop overlays.",
-  "findings": "Author claims 20.22% annual excess return and 24.91% volatility over February1979–October2011, before costs. Whole-book 5% cutoff claims VaR20.27%→13.76%, return19.93%. Our arithmetic finds additive wealth/log-accounting and reporting inconsistencies; no historical result reproduced.",
+  "findings": "Author claims 20.22% annual excess return and 24.91% volatility over February1979\u2013October2011, before costs. Whole-book 5% cutoff claims VaR20.27%\u219213.76%, return19.93%. Our arithmetic finds additive wealth/log-accounting and reporting inconsistencies; no historical result reproduced.",
   "mechanism": "Potential price persistence and inventory/convenience-yield/hedging risk premia; not a verified scheduled forced flow or guaranteed carry.",
   "build_on": "Conditional low-priority personal research. Need actual broad front/second maturity panel, executable clocks, integer sizes, costs and self-financing contract/cash/NAV ledger. Bounded owned/free check failed; no substitute strategy or later-stage account test. Reconcile one formation/roll month only if genuinely new matching inputs arrive.",
   "economic_family": "commodity-cross-sectional-monthly-momentum-carry-double-sort",
@@ -55,5 +55,13 @@
     "standalone_scout_alert_sent": false,
     "key": null,
     "reason": "Direct user upload review; no completed return/portfolio result and no user-action request"
+  },
+  "implementation_checkpoint": {
+    "report_path": "agents/codex/results/rad_double_sort_build_20261031.md",
+    "code_path": "analysis/codex_rad_double_sort.py",
+    "test_path": "analysis/codex_rad_double_sort_test.py",
+    "schema_path": "agents/codex/research/rad_double_sort/README.md",
+    "synthetic_checks_passed": 23,
+    "status": "offline_signal_and_integer_reference_planner_only_no_returns"
   }
 }

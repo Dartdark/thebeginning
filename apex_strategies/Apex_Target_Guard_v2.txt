@@ -1,0 +1,54 @@
+// Apex Target Guard v2 (2026-10-29, Claude) - exit-only signal for an EVALUATION account. NOT INSTALLED YET (see STATUS).
+// Same job as Apex_Target_Guard.txt (close this chart's position the moment the account would reach TargetBalance), but
+// the balance comes from Rithmic by itself: GetRTAccountEquity(AccountName). No StartBalance to type every evening.
+// The Apex Chart Monitor showed (2026-10-29) that Rithmic reports NetWorth 0 for Apex accounts but Equity = the balance
+// in the Order and Position Tracker (APEX-681524-02 50,764.42 / -03 147,822.60).
+//
+// How it works, per bar (IOG off, as v1; the limit order sits inside the bar):
+//   Base = account equity without THIS chart's open profit  = Equity - OpenPositionProfit   (EquityHasOpenPL true)
+//                                                            = Equity                        (EquityHasOpenPL false)
+//   Need = (TargetBalance - Base) / (BigPointValue x contracts) points;  limit exit at AvgEntryPrice +/- Need.
+//   With EquityHasOpenPL true, other charts' open profit on the same account counts too, so the guard exits when the
+//   ACCOUNT reaches the target (v1 counted only its own trade).
+// Safety: Equity <= 0 or missing -> falls back to StartBalance (v1 behaviour); both 0 -> guard off. Never enters trades.
+//
+// Before installing (one check): watch the Chart Monitor's ACCT lines during an open trade. If Equity moves with the open
+// P&L, keep EquityHasOpenPL true; if it only changes when a trade closes, set it false.
+// Setup: Format Signals > Add on every evaluation chart, next to the strategy (replaces v1). Inputs: AccountName =
+// APEX-681524-02 / -03 typed exactly, TargetBalance 53050 (50K) / 159050 (150K), StartBalance 0.
+
+inputs: TargetBalance(53050), AccountName(""), EquityHasOpenPL(true), StartBalance(0), PrintDiag(false);
+variables: Tk(0), Eq(0), Base(0), Need(0), Px(0), LastPrint(-1);
+
+Tk = MinMove / PriceScale;
+
+if MarketPosition <> 0 and CurrentContracts > 0 then begin
+	Eq = 0;
+	if AccountName <> "" and GetAppInfo(aiRealTimeCalc) = 1 then Eq = GetRTAccountEquity(AccountName);
+	if Eq > 0 then begin
+		if EquityHasOpenPL then Base = Eq - OpenPositionProfit else Base = Eq;
+	end
+	else
+		Base = StartBalance;
+	if Base > 0 and TargetBalance > Base then begin
+		Need = (TargetBalance - Base) / (BigPointValue * CurrentContracts);
+		if MarketPosition > 0 then begin
+			Px = IntPortion((AvgEntryPrice + Need) / Tk + 0.999999) * Tk;
+			Sell ("Target Guard LX") next bar at Px limit;
+		end
+		else begin
+			Px = IntPortion((AvgEntryPrice - Need) / Tk + 0.000001) * Tk;
+			BuyToCover ("Target Guard SX") next bar at Px limit;
+		end;
+	end
+	else if Base > 0 and TargetBalance <= Base and Base < TargetBalance * 1.05 then begin   // > 5% above = wrong account / bad data: do nothing
+		// the account is already at or above the target: close this position now
+		if MarketPosition > 0 then Sell ("Target Guard LM") next bar at market
+		else BuyToCover ("Target Guard SM") next bar at market;
+	end;
+	if PrintDiag and Time <> LastPrint then begin
+		Print("TargetGuard2 ", NumToStr(Date + 19000000, 0), " ", NumToStr(Time, 0), " acct=", AccountName, " equity=",
+			NumToStr(Eq, 2), " openPL=", NumToStr(OpenPositionProfit, 2), " base=", NumToStr(Base, 2), " limit=", NumToStr(Px, 2));
+		LastPrint = Time;
+	end;
+end;

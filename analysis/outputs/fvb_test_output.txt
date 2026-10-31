@@ -1,0 +1,120 @@
+FVB 'First Valid Breakout' (user's fvb_final.py + submission, 2026-10-25; checks/candidates/fvb/). Port of the locked config
+
+1. NQ, the author's costs ($4.12 + 2 ticks), stop fills at the stop, 2018-2025 (submission: IS 1,534 trades PF 1.31 +355R, OOS 507 PF 1.34 +126R, win ~26%; 52 roll days dropped here):
+   IS 2018-23: 1462 trades, PF 1.29, +300R, win 29.3%, t 3.5; $ per NQ 122
+   OOS 2024-25: 482 trades, PF 1.48, +158R, win 30.7%, t 2.8; $ per NQ 324
+   exits: {'stop': 1480, 'eod': 670} | levels: {'pm_high': 814, 'pm_low': 572, 'structural_pdh': 453, 'structural_pdl': 203, 'pdh_break': 68, 'pdl_break': 40} | 2nd trades: 523
+
+2. NQ with our costs ($7.25 + 1 tick per fill), 2018-2026:
+   the rule (stop fills at the stop)            n= 2150 $  166 R +0.219 PF 1.29 t  3.8 win 29% yrs+ 9/9 | IS18-23 PF 1.25 t  2.9 | OOS24-25 PF 1.47 t  2.8 | 23+ t  2.7 | L 1335 $  75 S 815 $ 314
+   stop fills at the open on gap-through        n= 2150 $  166 R +0.219 PF 1.29 t  3.8 win 29% yrs+ 9/9 | IS18-23 PF 1.25 t  2.9 | OOS24-25 PF 1.47 t  2.8 | 23+ t  2.7 | L 1335 $  75 S 815 $ 314
+   gap-through cost: $0.00 a trade; stops that opened through: 0 of 1480
+   worst stop-out in R (at-stop model) -1.00; gap model worst -1.00R
+   fast markets: on the stop bar, price ran past the stop by median 13 ticks, 90th pct 57, max 326; if each stop filled halfway to that bar's extreme: $126 a trade, t 2.9
+   2 more ticks on every stop fill: $159 a trade, t 3.7
+   4 more ticks on every stop fill: $152 a trade, t 3.5
+   8 more ticks on every stop fill: $138 a trade, t 3.2
+   by year $ per NQ: {2018: 34032, 2019: 14759, 2020: 18388, 2021: 30442, 2022: 55151, 2023: 20498, 2024: 72686, 2025: 81829, 2026: 28786}
+   by year R: {2018: 88, 2019: 44, 2020: 27, 2021: 48, 2022: 52, 2023: 32, 2024: 87, 2025: 70, 2026: 23}
+   first trades only                            n= 1627 $  165 R +0.224 PF 1.28 t  3.4 win 29% yrs+ 9/9 | IS18-23 PF 1.22 t  2.3 | OOS24-25 PF 1.49 t  2.7 | 23+ t  2.6 | L 1080 $  95 S 547 $ 302
+   re-entries only                              n=  523 $  170 R +0.202 PF 1.30 t  1.7 win 31% yrs+ 7/9 | IS18-23 PF 1.36 t  1.9 | OOS24-25 PF 1.39 t  1.0 | 23+ t  0.9 | L 255 $ -10 S 268 $ 341
+   level structural_pdh                         n=  453 $   73 R +0.159 PF 1.12 t  0.9 win 29% yrs+ 5/9 | IS18-23 PF 1.22 t  1.3 | OOS24-25 PF 1.13 t  0.5 | 23+ t  0.9 | L 453 $  73 S 0 $   0
+   level pm_high                                n=  814 $   75 R +0.137 PF 1.13 t  1.3 win 30% yrs+ 8/9 | IS18-23 PF 1.20 t  1.6 | OOS24-25 PF 0.97 t -0.1 | 23+ t  0.2 | L 814 $  75 S 0 $   0
+   level structural_pdl                         n=  203 $  238 R +0.226 PF 1.37 t  1.5 win 25% yrs+ 6/9 | IS18-23 PF 1.22 t  0.7 | OOS24-25 PF 2.60 t  1.9 | 23+ t  0.7 | L 0 $   0 S 203 $ 238
+   level pm_low                                 n=  572 $  374 R +0.425 PF 1.69 t  3.5 win 31% yrs+ 8/9 | IS18-23 PF 1.44 t  2.3 | OOS24-25 PF 2.15 t  2.6 | 23+ t  2.8 | L 0 $   0 S 572 $ 374
+   level pdl_break                              n=   40 $ -149 R -0.100 PF 0.76 t -0.7 win 28% yrs+ 3/9 | IS18-23 PF 0.57 t -1.2 | OOS24-25 PF 1.61 t  0.7 | 23+ t -0.1 | L 0 $   0 S 40 $-149
+   level pdh_break                              n=   68 $   88 R +0.024 PF 1.15 t  0.4 win 29% yrs+ 5/9 | IS18-23 PF 1.10 t  0.2 | OOS24-25 PF 1.37 t  0.6 | 23+ t  0.4 | L 68 $  88 S 0 $   0
+   shorts only (longs / shorts split)           n=  815 $  314 R +0.350 PF 1.55 t  3.7 win 29% yrs+ 6/9 | IS18-23 PF 1.34 t  2.2 | OOS24-25 PF 2.20 t  3.2 | 23+ t  2.8 | L 0 $   0 S 815 $ 314
+   shorts by year $ per NQ: {2018: 23787, 2019: -936, 2020: -4200, 2021: 18510, 2022: 57931, 2023: -8435, 2024: 59515, 2025: 84437, 2026: 25643}
+
+3. Fat tails (question 1):
+   without the best  10 trades: +338R of +470R, t 3.4
+   without the best  25 trades: +204R of +470R, t 2.2
+   without the best  50 trades: +19R of +470R, t 0.2
+   without the best 100 trades: -283R of +470R, t -3.8
+   winners capped at 3R (as a target): $-50 a trade, t -1.6
+   winners capped at 5R (as a target): $81 a trade, t 2.2
+   winners capped at 8R (as a target): $141 a trade, t 3.5
+   trades > 3R: 277 (12.9%), +1457R; per year: {2018: 40, 2019: 29, 2020: 26, 2021: 34, 2022: 31, 2023: 31, 2024: 38, 2025: 26, 2026: 22}
+   per year, R from > 3R trades / from the rest: {2018: (229, -142), 2019: (163, -118), 2020: (114, -87), 2021: (156, -108), 2022: (146, -95), 2023: (161, -129), 2024: (208, -121), 2025: (159, -89), 2026: (119, -96)}
+
+4. Robustness:
+   stop 0.10 ATR                                n= 2326 $  100 R +0.223 PF 1.26 t  3.0 win 18% yrs+ 9/9 | IS18-23 PF 1.22 t  2.3 | OOS24-25 PF 1.41 t  2.2 | 23+ t  2.2 | L 1452 $  81 S 874 $ 130
+   stop 0.15 ATR                                n= 2207 $  122 R +0.194 PF 1.24 t  3.1 win 25% yrs+ 9/9 | IS18-23 PF 1.23 t  2.6 | OOS24-25 PF 1.32 t  2.0 | 23+ t  2.1 | L 1374 $  65 S 833 $ 215
+   stop 0.20 ATR                                n= 2124 $  161 R +0.192 PF 1.26 t  3.6 win 31% yrs+ 9/9 | IS18-23 PF 1.23 t  2.7 | OOS24-25 PF 1.45 t  2.7 | 23+ t  2.6 | L 1320 $  60 S 804 $ 328
+   stop 0.25 ATR                                n= 2067 $  166 R +0.156 PF 1.24 t  3.4 win 36% yrs+ 9/9 | IS18-23 PF 1.20 t  2.5 | OOS24-25 PF 1.39 t  2.5 | 23+ t  2.4 | L 1275 $  67 S 792 $ 325
+   stop 0.30 ATR                                n= 2009 $  136 R +0.116 PF 1.17 t  2.6 win 39% yrs+ 9/9 | IS18-23 PF 1.15 t  1.9 | OOS24-25 PF 1.31 t  2.1 | 23+ t  1.8 | L 1246 $  28 S 763 $ 312
+   entry window 60 min                          n= 1870 $  165 R +0.215 PF 1.28 t  3.6 win 29% yrs+ 9/9 | IS18-23 PF 1.24 t  2.6 | OOS24-25 PF 1.46 t  2.6 | 23+ t  2.5 | L 1179 $  67 S 691 $ 334
+   entry window 90 min                          n= 2045 $  156 R +0.209 PF 1.27 t  3.5 win 29% yrs+ 9/9 | IS18-23 PF 1.24 t  2.8 | OOS24-25 PF 1.39 t  2.4 | 23+ t  2.5 | L 1282 $  74 S 763 $ 295
+   entry window 180 min                         n= 2279 $  144 R +0.196 PF 1.25 t  3.5 win 29% yrs+ 9/9 | IS18-23 PF 1.22 t  2.7 | OOS24-25 PF 1.41 t  2.5 | 23+ t  2.3 | L 1422 $  59 S 857 $ 284
+   one trade a day                              n= 1627 $  165 R +0.224 PF 1.28 t  3.4 win 29% yrs+ 9/9 | IS18-23 PF 1.22 t  2.3 | OOS24-25 PF 1.49 t  2.7 | 23+ t  2.6 | L 1080 $  95 S 547 $ 302
+   no filters (range / premarket / strong-day)  n= 3012 $   40 R +0.086 PF 1.07 t  1.1 win 26% yrs+ 6/9 | IS18-23 PF 1.05 t  0.8 | OOS24-25 PF 1.16 t  1.3 | 23+ t  0.6 | L 1548 $  26 S 1464 $  54
+   no prior-range filter                        n= 2392 $  116 R +0.176 PF 1.20 t  2.9 win 28% yrs+ 9/9 | IS18-23 PF 1.18 t  2.3 | OOS24-25 PF 1.34 t  2.2 | 23+ t  1.9 | L 1516 $  21 S 876 $ 280
+   no premarket-range filter                    n= 2233 $  150 R +0.200 PF 1.26 t  3.6 win 29% yrs+ 9/9 | IS18-23 PF 1.23 t  2.8 | OOS24-25 PF 1.44 t  2.7 | 23+ t  2.5 | L 1379 $  74 S 854 $ 273
+   shorts allowed after strong days             n= 2531 $   98 R +0.143 PF 1.17 t  2.5 win 28% yrs+ 8/9 | IS18-23 PF 1.12 t  1.7 | OOS24-25 PF 1.31 t  2.1 | 23+ t  1.8 | L 1315 $  76 S 1216 $ 122
+   exit at 11:00 CT                             n= 2150 $   83 R +0.117 PF 1.16 t  2.4 win 35% yrs+ 9/9 | IS18-23 PF 1.12 t  1.6 | OOS24-25 PF 1.30 t  2.1 | 23+ t  1.9 | L 1335 $   8 S 815 $ 206
+   exit at 13:00 CT                             n= 2150 $  117 R +0.164 PF 1.21 t  3.0 win 32% yrs+ 9/9 | IS18-23 PF 1.16 t  2.1 | OOS24-25 PF 1.42 t  2.6 | 23+ t  2.3 | L 1335 $  41 S 815 $ 243
+   exit at 14:00 CT                             n= 2150 $  139 R +0.187 PF 1.25 t  3.4 win 31% yrs+ 9/9 | IS18-23 PF 1.18 t  2.3 | OOS24-25 PF 1.45 t  2.8 | 23+ t  2.6 | L 1335 $  59 S 815 $ 272
+   exit at 14:59 CT                             n= 2150 $  165 R +0.215 PF 1.29 t  3.8 win 29% yrs+ 9/9 | IS18-23 PF 1.24 t  2.9 | OOS24-25 PF 1.50 t  2.9 | 23+ t  2.7 | L 1335 $  77 S 815 $ 310
+
+5. Placebos:
+   same entries and exit times, random side (stops not re-placed, so a proxy): avg $-20, 95th pct $43; the rule $166
+   (the same days and bars entered the other way, with the mirrored stop:)
+   reverse side, same stop distance             n= 2150 $  -52 R +0.000 PF 0.92 t -1.3 win 23% yrs+ 2/9 | IS18-23 PF 1.01 t  0.1 | OOS24-25 PF 0.82 t -1.4 | 23+ t -2.1 | L 815 $ -70 S 1335 $ -41
+
+6. Other markets (the author: works on ES / YM, fails on metals / energy):
+   ES                                           n= 1967 $   45 R +0.092 PF 1.13 t  1.9 win 28% yrs+ 8/9 | IS18-23 PF 1.06 t  0.8 | OOS24-25 PF 1.23 t  1.5 | 23+ t  2.0 | L 1229 $  50 S 738 $  38
+   ES gap-through stops                         n= 1967 $   45 R +0.092 PF 1.13 t  1.9 win 28% yrs+ 8/9 | IS18-23 PF 1.06 t  0.8 | OOS24-25 PF 1.23 t  1.5 | 23+ t  2.0 | L 1229 $  50 S 738 $  38
+   YM                                           n= 2054 $   13 R +0.063 PF 1.05 t  0.8 win 28% yrs+ 5/9 | IS18-23 PF 1.02 t  0.2 | OOS24-25 PF 1.27 t  1.9 | 23+ t  1.2 | L 1265 $   3 S 789 $  29
+   YM gap-through stops                         n= 2054 $   13 R +0.063 PF 1.05 t  0.8 win 28% yrs+ 5/9 | IS18-23 PF 1.02 t  0.2 | OOS24-25 PF 1.27 t  1.9 | 23+ t  1.2 | L 1265 $   3 S 789 $  29
+   GC                                           n= 1972 $  -23 R -0.082 PF 0.93 t -1.0 win 24% yrs+ 2/9 | IS18-23 PF 0.93 t -0.9 | OOS24-25 PF 0.99 t -0.1 | 23+ t -0.6 | L 1179 $ -39 S 793 $   1
+   GC gap-through stops                         n= 1972 $  -23 R -0.082 PF 0.93 t -1.0 win 24% yrs+ 2/9 | IS18-23 PF 0.93 t -0.9 | OOS24-25 PF 0.99 t -0.1 | 23+ t -0.6 | L 1179 $ -39 S 793 $   1
+   CL                                           n= 1760 $  -32 R -0.121 PF 0.87 t -2.2 win 25% yrs+ 2/9 | IS18-23 PF 0.81 t -2.7 | OOS24-25 PF 0.93 t -0.6 | 23+ t -1.2 | L 1111 $ -24 S 649 $ -47
+   CL gap-through stops                         n= 1760 $  -32 R -0.121 PF 0.87 t -2.2 win 25% yrs+ 2/9 | IS18-23 PF 0.81 t -2.7 | OOS24-25 PF 0.93 t -0.6 | 23+ t -1.2 | L 1111 $ -24 S 649 $ -47
+
+7. Metrics, per 1 NQ (MNQ = /10), gap-through stops:
+               trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+whole 2018-26    2150 29% $166 $40,659   1.30    2.88          1.29 $28,174   1.44  3.44      23.61
+whole 2023+       942 29% $216 $54,061   1.38    3.14          1.30 $28,174   1.92  6.67      16.22
+longs 2018-26    1335 30%  $75 $11,439   0.54    1.12          1.13 $31,359   0.36  5.24       4.36
+longs 2023+       584 28%  $73 $11,311   0.44    0.91          1.10 $31,359   0.36 10.12       2.24
+shorts 2018-26    815 29% $314 $29,220   1.25    3.70          1.55 $21,202   1.38  6.83       8.55
+shorts 2023+      358 30% $450 $42,750   1.44    4.51          1.64 $21,202   2.02 12.06       7.09
+
+   2023+ bootstrap / permutation (daily, 1 NQ):
+                             actual        p5       p50       p95
+name         metric                                              
+whole 2023+  sharpe            1.38      0.67      1.40      2.08
+             sortino           3.14      1.40      3.19      5.22
+             pf_day            1.33      1.15      1.34      1.57
+             calmar            1.92      0.48      1.54      3.45
+             ulcer             6.67      3.96      8.56     23.46
+             max_dd       28,174.50 22,273.09 34,829.50 60,055.43
+             P(Sharpe<=0)       NaN       NaN      0.00       NaN
+longs 2023+  sharpe            0.44     -0.36      0.45      1.18
+             sortino           0.91     -0.68      0.94      2.67
+             pf_day            1.11      0.92      1.11      1.31
+             calmar            0.36     -0.14      0.31      1.31
+             ulcer            10.12      7.19     18.64     59.08
+             max_dd       31,359.25 21,510.20 37,692.50 73,766.21
+             P(Sharpe<=0)       NaN       NaN      0.17       NaN
+shorts 2023+ sharpe            1.44      0.72      1.45      2.11
+             sortino           4.51      1.89      4.55      7.69
+             pf_day            1.68      1.28      1.68      2.18
+             calmar            2.02      0.53      1.84      4.36
+             ulcer            12.06      3.11      6.85     18.60
+             max_dd       21,202.25 14,244.11 23,085.62 40,915.14
+             P(Sharpe<=0)       NaN       NaN      0.00       NaN
+             actual_dd pct_rank    dd50    dd95    dd99 P(dd>=5000) P(dd>=10000) P(dd>=20000)
+whole 2023+    $28,174      13% $36,518 $57,745 $70,521        100%         100%         100%
+longs 2023+    $31,359      20% $39,129 $61,580 $72,340        100%         100%         100%
+shorts 2023+   $21,202      43% $22,029 $34,605 $41,714        100%         100%          66%
+
+   Monte Carlo at 1 MNQ:
+   Monte Carlo FVB 1 MNQ (x0.1): trades 2150 | total p5 $21,027 / p50 $35,581 / p95 $51,357, P(total <= 0) 0.0%
+      max DD actual $2,901 (rank 13%), shuffled p50 $3,844 / p95 $6,394 / p99 $7,897; losing streak actual 17, p95 27
+      252-day block bootstrap: P&L p5 $-465 / p50 $4,061 / p95 $8,885, P(loss) 7.1%, max DD p50 $1,763 / p95 $3,490, return/DD 2.30, P(hit $2,000 trailing, EOD check only) 23.4%
+
+   daily corr with Dual Thrust +0.35, with PAPERTREND +0.30, with ES FVB +0.62
+
+   trials counted here: 27; t threshold 2.90; deflated Sharpe (N=27) 0.98
