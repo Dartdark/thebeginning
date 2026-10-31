@@ -1394,6 +1394,20 @@ Source: [five-home portfolio audit](results/portfolio_audit_20261031.md),
 - Next check: dated exact-version research exports with native fills/fees, StopPts/ATR/qty and missing-minute capture
   semantics; then shared-price chronological account replay and independent review before allocation/safety claims.
 
+### E09/E43 latest-source qualification — Claude's audit updates
+
+[Follow-up review](results/portfolio_audit_claude_updates_20261030.md), source `d654fda13d43f3b481441168336586bb89bd9d9e`.
+- Addressed:150K intended integer inputs now explicitly round three1.5 intentions to1; refreshed personal ladder
+  uses19 labels and keeps four forward-only sleeves separate. No further duplicate request to define those inputs.
+- Qualification: the overlap diagnostic uses the older50K RS-long roster, excludes OT and multiplies raw risk
+  bases without executable lot flooring. It measures a potential exposure bias, not corrected account failures.
+- Synthetic canonical-account evidence: applying the same$20 adverse bias to two hypothetical plans can cause
+  one to fail and the other to survive. Thus conservatism alone does not establish unchanged relative decisions.
+  This does not show that an actual allocation should change. Missing input paths can still understate risk.
+- Personal ladder:120 cleared-subset plus10 forward-subset comparisons use the same historical reporting sample;
+  new ranking is exploratory, with the inherited Twin/Kusho/OT/margin limits. No new historical returns were run
+  in this source/settings/synthetic follow-up, no measured execution savings, live action or allocation change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

@@ -1,0 +1,140 @@
+{
+  "source_commit": "d654fda13d43f3b481441168336586bb89bd9d9e",
+  "code_sha256": "4afc82418a5dfd811a256a86de2ca2123bc41121c154ada23b7337e2f18345cd",
+  "independent_historical_return_reruns": 0,
+  "new_alpha_definitions": 0,
+  "verified_updates": {
+    "explicit150K_integer_chart_inputs": true,
+    "integer_sizing_fixtures": [
+      {
+        "cushion_factor": 0.5,
+        "old": {
+          "VB_F": 0,
+          "MON_MC": 0,
+          "MON_BR_MC": 0
+        },
+        "new": {
+          "VB_F": 0,
+          "MON_MC": 0,
+          "MON_BR_MC": 0
+        }
+      },
+      {
+        "cushion_factor": 0.75,
+        "old": {
+          "VB_F": 1,
+          "MON_MC": 1,
+          "MON_BR_MC": 1
+        },
+        "new": {
+          "VB_F": 0,
+          "MON_MC": 0,
+          "MON_BR_MC": 0
+        }
+      },
+      {
+        "cushion_factor": 1.0,
+        "old": {
+          "VB_F": 1,
+          "MON_MC": 1,
+          "MON_BR_MC": 1
+        },
+        "new": {
+          "VB_F": 1,
+          "MON_MC": 1,
+          "MON_BR_MC": 1
+        }
+      }
+    ],
+    "DT2_retained_ST_not_reintroduced": true,
+    "current19_label_ladder_refreshed": true,
+    "four_forward_only_sleeves_remain_separate": true
+  },
+  "qualifications": {
+    "overlap50_roster": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1
+    },
+    "overlap50_roster_is_historical_RS_long_not_current_TOS": true,
+    "overlap_uses_fractional_risk_bases_without_executable_floor": true,
+    "overlap_excludes_overnight_tick": true,
+    "no_full_shared_price_account_replay_in_three_updates": true,
+    "common_bias_can_change_relative_failure_outcomes": {
+      "A": {
+        "original": [
+          0.0,
+          0.0,
+          4.0,
+          0.0,
+          -1.0
+        ],
+        "common_20_dollar_adverse_bias": [
+          0.0,
+          0.0,
+          4.0,
+          1.0,
+          -1.0
+        ]
+      },
+      "B": {
+        "original": [
+          0.0,
+          0.0,
+          4.0,
+          0.0,
+          -1.0
+        ],
+        "common_20_dollar_adverse_bias": [
+          0.0,
+          0.0,
+          4.0,
+          0.0,
+          -1.0
+        ]
+      }
+    },
+    "greedy_cleared_subset_comparisons": 120,
+    "greedy_forward_subset_comparisons": 10,
+    "greedy_ranking_uses_same_historical_assembly_and_bootstrap_for_selection": true,
+    "new_independent_validation_in_personal_ladder": false,
+    "four_piece_capital_threshold_from_saved_output": 10935,
+    "four_piece_DD_p95_from_saved_output": 2187,
+    "DD_fraction_of_10000": 0.2187,
+    "inherited_Twin_v1_Kusho_exit_day_OT_cutoff_limits_unchanged": true
+  },
+  "sources": {
+    "analysis/plan150_integer_test.py": "e80dfa8211de7defd681c599320daae8588a0397c93d64487c412e7019d8807b",
+    "analysis/outputs/plan150_integer_test_output.txt": "545791f9bbcce977e052c3c0c20ccef030461f8b0d59ab9ac59740d3e333c191",
+    "analysis/opposing_overlap_check.py": "1074b126697a6ee85067c7f21c9bbc3d8b199877f7fe74bfd721181b95cec6cd",
+    "analysis/outputs/opposing_overlap_check_output.txt": "3699d9ecf183c0b0d00a57133a1856aa149a94b0c5f7f1d0af8a8ec209246342",
+    "analysis/personal_ladder.py": "4ca9ed6884e1e8eb7eafcb626371306d87655b331bfafc1674f49e08c28785e0",
+    "analysis/outputs/personal_ladder_output.txt": "80bdf537f748bc3b6f2da720f50255530d3fda142cba8f4aa5722c50b0b020b2",
+    "analysis/personal_portfolio.py": "58af6a2338b0a3b819d30351911197bc5e498879169d41e5839b17fca8c08c97",
+    "analysis/funded_sim.py": "6ee40aadf1ead47958a4637e63248221b871acd74881738368a401950d84707f",
+    "analysis/funded_sim150.py": "15dbc97f349a0e29ec9cbfb8068f15d5fe50246dc904ea453c7bd891aada0302",
+    "analysis/overnight_tick_bench.py": "ced9d73dae8ba340f85428a36b6835fd3ee2e4c1daa3d4c58af0daadaf964e76",
+    "analysis/swing_target_bench.py": "f4956d2be529846da5a5d7f006a32e924bcd693d2694a4459c7ec291a6088b27",
+    "funded_strategies/FUNDED_PLAN.md": "03c82f7d55d09279eaed58dd2238b5778e40f4c6a16386674252a0bd1d5db4fa",
+    "personal_strategies/PORTFOLIO.md": "1310080e32e6e89bdef86f859582eaac690e1e945e037df926cb1c2d46be9f15",
+    "TODO.md": "6565e807acdb126eb57b9844f59a03ea82893b63498a613e8cbd2187296ec5af"
+  },
+  "evidence_boundary": "Source/settings verification and synthetic account counterexample; Claude saved performance numbers are not independently rerun here"
+}

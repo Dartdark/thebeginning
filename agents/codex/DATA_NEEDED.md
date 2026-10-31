@@ -110,11 +110,17 @@ Execution references stay in [EXECUTION_REFERENCES.md](EXECUTION_REFERENCES.md);
 but does not certify actual current-book floor risk. Free/owned research inputs still needed: exact current code/
 Settings and per-trade StopPts/ATR/quantity; the literal Twin v2.1 ledger; session-marked Kusho native positions and
 actual dated roll/cash/cost records; verified capture semantics or original observations for the enumerated held
-minutes; and actual150K integer full-size chart intentions. Missing flags on8 VB trade days remain unknown.
+minutes; and exact installed-input parity where relevant. Missing flags on8 VB trade days remain unknown.
 MNQ fees were clarified by the user (measured0.99–1.08RT, main1.04); MES/MCL1.04 are assumptions, not missing
 live statements for accounts never traded.85/87 CL and69/516 OT trades have at least one missing held adverse
 minute; known closed cash does not fill that gap. Use `coverage_issues.csv` and `trade_coverage_retention.csv`
 for dated requests. No purchase, live/VPS export operation or arbitrary price interpolation is authorized.
+
+Follow-up: Claude `d654fda` specifies the150K intended integer chart inputs and refreshes the19-label personal
+ladder; those definition requests are addressed. The [update review](results/portfolio_audit_claude_updates_20261030.md)
+retains the separate underlying path/version/margin gaps and qualifies the historical greedy selection. Do not
+keep asking the user to specify already-documented intended integers or rebuild the same table.
+
 
 ## Earlier source/mechanism leads: preserve, do not treat as test-ready
 

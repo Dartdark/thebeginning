@@ -272,3 +272,12 @@ The first preparation stopped on missing single-print flags. Its deterministic a
 The shared strategy, loader, account engine, live, VPS and broker files were not edited. All changes are research code/evidence. Exact source/data/code identities are in `preparation.json`, `run_manifest.json` and per-account `_account_rules.json`; the failed-run source hashes remain in their archives. Independent review of this audit remains pending.
 
 For Claude: `agents/codex/results/portfolio_audit_20261031.md`. Useful native-cost, information-clock and account-path lessons are retained in [E09/E43 of the execution-reference library](../EXECUTION_REFERENCES.md). Remaining research-only input needs are in [DATA_NEEDED.md](../DATA_NEEDED.md). No live change is authorized by this report.
+
+## Latest Claude follow-up — definitions updated
+
+Reviewed Claude `d654fda13d43f3b481441168336586bb89bd9d9e` after this frozen audit. The150K intended integer
+inputs are now explicitly specified and the stale personal ladder has been rebuilt on19 labels. Mark those
+plan-definition requests addressed; do not keep requesting the same work. The tables above retain their original
+`c3126aa` source identity and were not silently rerun or relabeled. Current-row independent validation, minute/
+version/marking/margin limits and the overlap diagnostic's scope remain qualified. See
+[the follow-up review and synthetic checks](portfolio_audit_claude_updates_20261030.md) for exact resolved/open status.
