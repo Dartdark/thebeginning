@@ -1,0 +1,47 @@
+{
+  "source_pdf_sha256": "b59595017113864c9380eb200f48c0633ecc83f0579b23458a6fa1ad6a2c4b3e",
+  "source": "Bowe/Hyde/McFarlane October2007, SSRN1025241",
+  "spread_checks": {
+    "Table4_A": {
+      "printed_parameters": {
+        "phi1": 0.037,
+        "phi2": 0.4448,
+        "phi3": -0.33,
+        "theta1": -0.2389
+      },
+      "formula": "Table6: S=2*(theta1+phi1+phi2+phi3)",
+      "calculated_spread": -0.17420000000000008,
+      "reported_Table6_spread": 2.1014,
+      "difference": -2.2756,
+      "max_rounding_error_from_four_4decimal_coefficients": 0.0004,
+      "reconciles_with_printed_formula": false
+    },
+    "Table4_B": {
+      "printed_parameters": {
+        "phi1": 0.0522,
+        "phi2": 1.0258,
+        "phi3": -0.8854,
+        "theta1": 0.769
+      },
+      "formula": "Table6: S=2*(theta1+phi1+phi2+phi3)",
+      "calculated_spread": 1.9232000000000002,
+      "reported_Table6_spread": 2.1014,
+      "difference": -0.1781999999999997,
+      "max_rounding_error_from_four_4decimal_coefficients": 0.0004,
+      "reconciles_with_printed_formula": false
+    }
+  },
+  "nearby_Table8": {
+    "expected_duration": {
+      "t": 1.345909,
+      "approximate_two_sided_normal_p": 0.17833186596140072
+    },
+    "volume": {
+      "t": -1.269357,
+      "approximate_two_sided_normal_p": 0.2043137652151594
+    }
+  },
+  "scope": "Printed-source arithmetic only; no model fitting or raw-data reproduction",
+  "limits": "No raw transactions, quote signs, fitted estimates or undisclosed transformations supplied. p-values are normal-reference approximations, not re-estimated inference.",
+  "new_economic_trials": 0
+}
