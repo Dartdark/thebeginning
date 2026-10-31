@@ -27,7 +27,8 @@ def now():
 
 def runs_today(L=None, day=None):
     day = day or now().date().isoformat()
-    return sum(1 for r in (L or ledger()) if r.get("date", "")[:10] == day)
+    # BLOCKED rows (skipped before any testing) do not count toward the cap (lab/README.md)
+    return sum(1 for r in (L or ledger()) if r.get("date", "")[:10] == day and r.get("verdict") != "BLOCKED")
 
 
 def looks_quarter(L=None, d=None):
