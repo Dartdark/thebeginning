@@ -896,6 +896,18 @@ E10 liquidity compensation, E11 information clocks and E29 signed participant po
   directional identification before returns. Our aggregate COT and continuous OHLCV do not supply these states.
 - Status: execution/market-structure reference; no new return trial, strategy queue entry, allocation or live change.
 
+Delegation/information-production follow-up: Kyle, Ou-Yang and Wei, *A Model of Portfolio Delegation and Strategic
+Trading*, May2010, [SSRN1360783 review](results/portfolio_delegation_1360783_review.md),
+[evidence](evidence/portfolio_delegation_1360783.md). Source-only theoretical result: incentives change information
+acquisition, effective risk aversion and impact jointly; higher incentives increase effort but need not raise trading
+intensity. More uninformed trading can increase price informativeness for sufficiently risk-tolerant managers.
+Total observed volume is not identified uninformed demand, and estimated price impact is not an unconditional
+informativeness measure. Informational rents in the model require a private payoff signal, not a public-volume rule.
+The p.23 inverse-square lambda asymptotic contradicts adjacent prose; resolve before numerical implementation.
+Owned OHLCV/COT do not identify private signals, compensation or participant hedges. A simulator is feasible, but
+no executable signal, measured execution saving, return test or plan placement follows. Retain theory reference only;
+any later empirical extension needs its own observable states, availability clocks and preregistration.
+
 ### E47 — Obizhaeva–Wang: replenishing depth and large-order execution
 
 Source: [SSRN 666541](https://ssrn.com/abstract=666541), uploaded June 8, 2005 draft,
