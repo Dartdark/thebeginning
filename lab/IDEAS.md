@@ -4,7 +4,7 @@ Top `queued` idea runs next (priority 1 first, then order). One idea per line bl
 market, mechanism (why someone must trade at a bad price), rule sketch, Apex-legal?, data. Runner fills `result:`.
 New ideas: append with the next ID; follow-ups from a failure get `parent:` and go to the end.
 
-## Q001 · queued · priority 1
+## Q001 · running · priority 1
 - source: Codex portfolio audit 2026-10-31 (diversify away from NQ: scheduled non-equity events)
 - market: CL (MCL)
 - mechanism: EIA weekly petroleum status report, Wed 09:30 CT. The first minutes overreact to the headline crude draw/build
