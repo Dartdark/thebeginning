@@ -1,0 +1,38 @@
+{
+  "source_sha256": "ed88f4c24ac56de26b79716835c824282458597a38179dc4dfda13b8cdb52287",
+  "kind": "arithmetic of author-reported rounded table; not independent return replication",
+  "return_trials": 0,
+  "test_months": 10,
+  "positive_months": 7,
+  "positive_fraction": 0.7,
+  "source_conclusion_positive_fraction_claim": 0.75,
+  "test_mean_pct": 1.071,
+  "test_sample_sd_pct": 1.97302615852457,
+  "worst_test_month_pct": -2.19,
+  "months_below_minus_one_pct": 3,
+  "illustrative_mean_t": 1.7165506698466606,
+  "illustrative_mean_95pct_ci_pct": [
+    -0.3404178881613227,
+    2.4824178881613226
+  ],
+  "inference_limits": "Assumes ten independent monthly observations, ignores all model/search selection and source accounting errors. Not a selection-adjusted significance result, prediction interval, drawdown bound or future-performance guarantee.",
+  "source_ga": {
+    "population": 60,
+    "generations": 1000,
+    "elite": 5,
+    "MA_min": 2,
+    "MA_max": 180,
+    "unique_candidates_evaluated": "not disclosed"
+  },
+  "table_m1_greater_than_m2_all_rows": true,
+  "naming_limit": "Figure 7 calls m1=11 short and m2=179 long; Table 2 set 7 prints m1=179,m2=11. Do not silently infer author code's direction from column names.",
+  "literal_CL_contract_interpretation_only": {
+    "source_quantity_claim": 2000,
+    "source_initial_usd": 2000000,
+    "CL_barrels_per_contract": 1000,
+    "illustrative_price_move_usd_per_barrel": 1,
+    "printed_q_times_price_move": 2000,
+    "native_CL_price_pnl_usd": 2000000,
+    "qualification": "Dimensional illustration only; source code/quantity units unavailable. Does not establish how authors actually computed their results."
+  }
+}
