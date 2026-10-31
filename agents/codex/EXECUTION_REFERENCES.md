@@ -1069,6 +1069,33 @@ Source: Panigrahi, Vachhani and Sisodia, SSRN4013524,2021;
   paths, exit and fees. No adaptation or protective-order change is warranted from this paper.
 - Status: accounting/timing reference; no return trial, execution saving or portfolio placement.
 
+### E56 — Autocorrelated order flow can coexist with unforecastable price changes
+
+Source/review + date: Gounas, *Information in Noise*, 2021-03-15,
+[SSRN3692479](https://ssrn.com/abstract=3692479); user upload,
+[review](results/autocorrelated_orders_ssrn3692479.md), retained 2026-10-30.
+Execution question/useful lesson: distinguish raw signed flow from its innovation
+relative to information already public. Lemma 1/equation (7), p.11 prices the
+innovation, not the expected quantity. Knowing future buying is not by itself a
+demonstrated after-cost return or cheaper execution policy.
+Evidence: theoretical Gaussian, risk-neutral batch-auction equilibrium and author
+numerical comparative statics; not a CME forecast, historical backtest or measured
+execution saving. Private-signal agents' model profits are not public-data alpha.
+Market/platform limits: current aggregate flow is observed by the maker before
+the clearing price is set, then becomes public. No pre-update fill is implied.
+Only market orders; no limit queue, partial fills or cancellation-latency model.
+Symmetry restrictions/common-knowledge distributions limit transfer; autocorrelation
+alone cannot identify actual orders as informed or uninformed.
+Data/prerequisites: dated decision/order/quote/fill clocks, past-only flow
+expectations, fixed parent opportunities/quantities, native costs, original-timing
+and price-only/raw-flow controls, retained no-fill and missed-order outcomes.
+Smallest justified next check: preserve these controls if separately conducting
+an authorized flow/execution comparison. Do not relaunch failed NQ flow alpha
+tests or change trading from the theoretical impact result alone.
+Status: reference only, zero return trials, no execution policy or plan/live change.
+Related: E04 opportunity-complete diagnostics, E25 raw-flow negative evidence,
+E40 short-horizon price impact and E54 activity-availability clocks.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
