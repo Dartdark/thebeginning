@@ -657,6 +657,16 @@ Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SC
 - Status: process reference; no strategy.
 
 
+### E42 — Better trade accounting need not improve funded-account outcomes
+
+Source/review + date: [Swing Target exit-kind replay](results/swing_kind_replay_20261031.md), 2026-10-31; runner `analysis/codex_swing_kind_replay.py` and retained paired histories.
+Execution question and useful lesson: numeric exit types govern both fill costs and the final adverse mark. After correcting them, replay the account; payout timing and subsequent integer sizing can change the sign of the effect.
+Evidence: synthetic stop/target fixtures plus historical account simulation, 500 paired 500-day histories per account. Corrected ST nets gain $132 total per MNQ, but the 50K ADD arm has one additional failed history (7.8% -> 8.0% blown); selected 50K/150K replacements have unchanged two-year outcomes versus legacy and do not establish gains versus BASE.
+Market/platform and timing limits: historical roster and repaired CODE_BE ledger, not exact holiday-skipping v3 or today's T_ONESIDE roster; inherited continuous bars, NQ/10 fees, OT/CLS adverse and MOC close-mark approximations. No native fill evidence.
+Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, shared simulators, paired block histories and EMPTY controls; full manifest retained.
+Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
+Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E39-E41 during this handoff merge; existing Codex E29-E38 identifiers are retained.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

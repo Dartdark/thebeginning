@@ -190,8 +190,54 @@ def summarize():
     print(pd.DataFrame(pairs).round(3).to_string(index=False))
 
 
+def verify():
+    from types import SimpleNamespace
+    from portfolio import paths
+    # A stop must end at its slipped exit; an unrecognized string instead
+    # retains the entire exit bar's adverse extreme. Targets pay entry only.
+    g=SimpleNamespace(o=np.ones((1,2))*100, l=np.array([[100.,80.]]),
+                      h=np.array([[100.,120.]]))
+    fixture=[]
+    for kind, px in ((0,90.),('stop',90.),(1,110.),('target',110.)):
+        t=pd.DataFrame([dict(day=0,j0=0,j1=1,side=1,entry=100.,exit=px,kind=kind)])
+        slipped=with_slippage(t)
+        w,r=paths(g,slipped)
+        fixture.append(dict(kind=kind,slips=int(slipped.slips.iloc[0]),
+                            last_worst=float(w[0,-1]),net=float(r[0,-1])))
+    assert np.isclose(fixture[0]['last_worst'],fixture[0]['net'])
+    assert fixture[1]['last_worst']<fixture[1]['net']
+    assert fixture[2]['slips']==1 and fixture[3]['slips']==2
+    manifest=json.loads((OUT/'manifest.json').read_text())
+    assert all(hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h
+               for p,h in manifest['hashes'].items() if p!=str(Path(__file__).relative_to(ROOT)))
+    changes=[]
+    for which in (50,150):
+        df=pd.concat([pd.read_csv(OUT/f'paths_{which}_{s}.csv') for s in (1,2)])
+        assert not df.duplicated(['plan','seed','history']).any()
+        assert df.groupby('plan').size().eq(500).all()
+        base=f'{which}K plan'
+        # BASE/EMPTY are represented once and shared by both accounting arms.
+        for name,p in allocations(which).items():
+            if name==base or name.startswith('EMPTY'):
+                assert 'ST' not in p and 'ST_OLD' not in p
+        by={k:v.sort_values(['seed','history']).reset_index(drop=True) for k,v in df.groupby('plan')}
+        for name,d in by.items():
+            if 'legacy: '+name not in by: continue
+            delta=d[['paid1','paid2','blown']]-by['legacy: '+name][['paid1','paid2','blown']]
+            changes.append(dict(account=which,plan=name,
+                paid1_changed=int(delta.paid1.ne(0).sum()),paid2_changed=int(delta.paid2.ne(0).sum()),
+                more_blown=int(delta.blown.gt(0).sum()),fewer_blown=int(delta.blown.lt(0).sum())))
+    save('verification.json',dict(status='PASS',fixtures=fixture,paired_changes=changes,
+        baseline_and_empty_controls='Shared verbatim across the two accounting arms',
+        source_hashes_match=True,unique_complete_histories=True,
+        script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        code_change_after_run='Verification-only command added; worker/prepare/summarize unchanged'))
+    print('PASS: fixture mechanics, source hashes, shared controls, complete paired histories')
+
+
 if __name__=='__main__':
     if mode=='prepare': prepare()
     elif mode=='worker': worker(*map(int,args))
     elif mode=='summarize': summarize()
+    elif mode=='verify': verify()
     else: raise ValueError(mode)
