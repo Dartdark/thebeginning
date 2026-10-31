@@ -984,6 +984,9 @@ Source: Vojtko and Padyšák, [SSRN 3507947](https://ssrn.com/abstract=3507947),
 - Next check: identified full panel, formation/fill clocks, contract-specific rolls, native integer positions and
   fees under a frozen replication plan. A bootstrap percentile is not a maximum-loss guarantee.
 - Status: retained personal-account research lead, NEEDS DATA/details; ineligible for current Apex intraday use as written.
+- [Code build](results/commodity_skew_build_20261030.md): offline rank/whole-contract planner and generated fixture;
+  29 constructed checks plus CLI pass. Same-contract returns, 100% gross reference sizing and native cost/deadline
+  checks are explicit adaptations. No historical return, held-book ledger, live execution or source-parity claim.
 
 ### E54 — Unexpected activity is not automatically a forecast or executable depth
 

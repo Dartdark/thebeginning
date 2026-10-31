@@ -255,6 +255,15 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   clock and native identity remain unverified. Complete free2018–22paired ZW panel is not admitted; zero returns.
 
 
+- [ ] **Monthly commodity skewness — OFFLINE CODE BUILT / NEEDS FULL PANEL (SSRN 3507947; 2026-10-30).**
+  Personal-account lead: monthly long four lowest-skew / short four highest-skew across 22 commodities.
+  Authors report 6.67% annual return after modeled costs and -0.32 equity correlation; neither is independently
+  reproduced or established for our portfolio. Offline planner, schema and synthetic checks built at the user's request.
+  Need identified full-universe daily contracts/settlements, return/roll conventions and native cost/cash accounting.
+  Smallest next check: map those inputs to the packet and reconcile one formation/roll month before a separately
+  committed return test; do not substitute CL/GC or an NQ daily-flat rule. No economic trials or plan allocation.
+  [Source review](agents/codex/results/ssrn_3507947_review_20261030.md) ·
+  [Code/checkpoint](agents/codex/results/commodity_skew_build_20261030.md).
 
 - [ ] **FX carry/trend multi-strategy — NEEDS SOURCE CLARIFICATION / DATA (SSRN 3322717; reviewed 2026-10-30).**
   Personal-account research only, low priority. Merit: author reports Sharpe 0.88 versus 0.55 for its best single
