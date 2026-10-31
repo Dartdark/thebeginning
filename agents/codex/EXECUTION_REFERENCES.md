@@ -934,6 +934,18 @@ measurement, E15 overnight tails, E19 session clocks, E30 paired-leg execution.
 - Status: execution/accounting reference retained; naked component rejected, preferred hedge unverified. No execution
   saving, plan placement, trading, broker or live-policy change is claimed.
 
+ETP lifecycle/clock follow-up, 2026-10-30: Bordonado, Molnár and Samdal (2016),
+[SSRN2753300](https://ssrn.com/abstract=2753300), [full uploaded-source review](results/vix_etp_2753300.md).
+The front-VX/spot basis XIV/VXX switching example reports 69% annualized return, Sharpe2.11 and −24.5% DD in
+2006–14, with explicit 0.20% fee plus 0.15% spread each side. Preserve those as unreplicated source claims:
+prelaunch indicative histories, after-close futures settlement versus same-close ETP fills, and historical
+product identities require separate audits. Common-factor price leadership is not verified arbitrage P&L.
+Issuer SEC notices establish XIV's February2018 acceleration and SVXY's change from−1x to−0.5x afterFebruary27.
+Do not splice a terminated product into a perpetual synthetic series or substitute SVXY/shortVIXY/SVIX without
+a separately specified protocol. The termination event alone does not prove this switching rule held XIV then.
+Next gate: one-day availability/fill/product-terms reconciliation plus source-era coverage; no new returns,
+modern adaptation, purchase, current allocation or Apex eligibility is established by this review.
+
 ### E52 — Dynamic pair models are not self-financing contract ledgers
 
 Source: Yang, Huang and Chen, unreviewed 38-page preprint SSRN 5017127, indexed posting 2024-11-11;
