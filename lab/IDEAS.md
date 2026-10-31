@@ -56,10 +56,16 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   V2 opposite sign; V3 threshold 1.5.
 - Apex: yes (two legs, both intraday). data: g24.pkl, ge.pkl
 
-## Q007 · blocked · priority 2
-- source: Codex audit 2026-10-31
-- market: NG (natural gas)
-- mechanism: EIA storage report Thu 09:30 CT. Blocked: no NG minute data in data/. Needs NG 1-min 2018-26.
+## Q007 · queued · priority 1
+- source: Codex audit 2026-10-31; data supplied by the user 2026-10-31 (NG 1-min 2017-2026, converted ET -> CT)
+- market: NG (QG / MNG micro: confirm which NG contract Apex lists)
+- mechanism: EIA weekly natural-gas storage report, Thursday 09:30 CT (moved to Wed/Fri in holiday weeks). The first
+  minutes react to the headline injection/withdrawal vs consensus; weather-driven hedgers and utilities trade after.
+  Volume x10 on the 09:31 bar confirms the timing (2018-01-11). Test fade vs follow of the first 5 minutes.
+- rule sketch: if |NG 09:30->09:35 move| >= 0.15 x 14-day ATR, enter at the 09:36 open: V1 fade, V2 follow, stop 0.3 ATR,
+  out 10:30 CT; V3 V1 only in the heating season (Nov-Mar). Release days = Thursdays plus holiday shifts (infer from the
+  09:31 volume spike when a Thursday is a holiday; never from returns).
+- Apex: check NG/QG/MNG on the Apex product list. data: data/NG_1min_*.csv (CT, bar-end stamps like CL)
 
 ## Q008 · blocked · priority 3
 - source: Codex audit 2026-10-31
