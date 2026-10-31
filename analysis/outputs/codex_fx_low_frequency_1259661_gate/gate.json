@@ -1,0 +1,175 @@
+{
+  "checked_at_utc": "2026-10-31T02:49:58.066611+00:00",
+  "source_pdf_sha256": "215c1efbace467091b867acba38d801bda5580772ee407a44781a4d9aae1c36f",
+  "owned_fx_filename_matches": [
+    "data/6E_1min_2017.csv",
+    "data/6E_1min_2018.csv",
+    "data/6E_1min_2019.csv",
+    "data/6E_1min_2020.csv",
+    "data/6E_1min_2021.csv",
+    "data/6E_1min_2022.csv",
+    "data/6E_1min_2023.csv",
+    "data/6E_1min_2024.csv",
+    "data/6E_1min_2025.csv",
+    "data/6E_1min_2026.csv"
+  ],
+  "access": [
+    {
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXUSEU",
+      "purpose": "public metadata/data sample only; no strategy returns",
+      "error_type": "URLError",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/datasets/exchange-rates/main/data/daily.csv",
+      "purpose": "public metadata/data sample only; no strategy returns",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/datasets/exchange-rates/main/data/daily.csv",
+      "sampled_bytes": 7648466,
+      "sha256": "5f82c543467ae6398e766fb110fe57abe446b95c4ad13b2eaca8954911c6259d",
+      "content_type": "text/plain; charset=utf-8",
+      "truncated": false,
+      "sample_path": "analysis/outputs/codex_fx_low_frequency_1259661_gate/access_1.sample",
+      "columns": [
+        "Date",
+        "Country",
+        "Exchange rate"
+      ],
+      "min_date": "1971-01-04",
+      "max_date": "2026-10-23",
+      "rows": 273921,
+      "country_date_coverage": {
+        "Australia": {
+          "rows": 14560,
+          "first": "1971-01-04",
+          "last": "2026-10-23"
+        },
+        "Brazil": {
+          "rows": 8300,
+          "first": "1995-01-02",
+          "last": "2026-10-23"
+        },
+        "Canada": {
+          "rows": 14560,
+          "first": "1971-01-04",
+          "last": "2026-10-23"
+        },
+        "China": {
+          "rows": 11951,
+          "first": "1981-01-02",
+          "last": "2026-10-23"
+        },
+        "Denmark": {
+          "rows": 14560,
+          "first": "1971-01-04",
+          "last": "2026-10-23"
+        },
+        "Euro": {
+          "rows": 7255,
+          "first": "1999-01-04",
+          "last": "2026-10-23"
+        },
+        "Hong Kong": {
+          "rows": 11951,
+          "first": "1981-01-02",
+          "last": "2026-10-23"
+        },
+        "India": {
+          "rows": 14039,
+          "first": "1973-01-02",
+          "last": "2026-10-23"
+        },
+        "Japan": {
+          "rows": 14560,
+          "first": "1971-01-04",
+          "last": "2026-10-23"
+        },
+        "Malaysia": {
+          "rows": 14560,
+          "first": "1971-01-04",
+          "last": "2026-10-23"
+        },
+        "Mexico": {
+          "rows": 8600,
+          "first": "1993-11-08",
+          "last": "2026-10-23"
+        },
+        "New Zealand": {
+          "rows": 14560,
+          "first": "1971-01-04",
+          "last": "2026-10-23"
+        },
+        "Norway": {
+          "rows": 14560,
+          "first": "1971-01-04",
+          "last": "2026-10-23"
+        },
+        "Singapore": {
+          "rows": 11951,
+          "first": "1981-01-02",
+          "last": "2026-10-23"
+        },
+        "South Africa": {
+          "rows": 12213,
+          "first": "1980-01-02",
+          "last": "2026-10-23"
+        },
+        "South Korea": {
+          "rows": 11880,
+          "first": "1981-04-13",
+          "last": "2026-10-23"
+        },
+        "Sweden": {
+          "rows": 14560,
+          "first": "1971-01-04",
+          "last": "2026-10-23"
+        },
+        "Switzerland": {
+          "rows": 14560,
+          "first": "1971-01-04",
+          "last": "2026-10-23"
+        },
+        "Taiwan": {
+          "rows": 11235,
+          "first": "1983-10-03",
+          "last": "2026-10-23"
+        },
+        "Thailand": {
+          "rows": 11951,
+          "first": "1981-01-02",
+          "last": "2026-10-23"
+        },
+        "United Kingdom": {
+          "rows": 14560,
+          "first": "1971-01-04",
+          "last": "2026-10-23"
+        },
+        "Venezuela": {
+          "rows": 6995,
+          "first": "2000-01-03",
+          "last": "2026-10-23"
+        }
+      }
+    },
+    {
+      "url": "https://data.bis.org/topics/CBPOL",
+      "purpose": "public metadata/data sample only; no strategy returns",
+      "error_type": "URLError",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/datasets/exchange-rates/main/README.md",
+      "purpose": "public metadata/data sample only; no strategy returns",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/datasets/exchange-rates/main/README.md",
+      "sampled_bytes": 1405,
+      "sha256": "cca33cf3997844d5cb75310074be58012faf81355b0babbf7626bce117044131",
+      "content_type": "text/plain; charset=utf-8",
+      "truncated": false,
+      "sample_path": "analysis/outputs/codex_fx_low_frequency_1259661_gate/access_3.sample"
+    }
+  ],
+  "economic_trials": 0,
+  "limitations": "Filename census and bounded public-source intake only. Public reference spots and policy rates are not the original Reuters spots and Datastream money-market carry. No matched 1986 warm-up, nine-currency spot/carry execution panel verified.",
+  "verdict": "NEEDS DATA AND SOURCE CONVENTIONS"
+}
