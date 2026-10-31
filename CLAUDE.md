@@ -18,6 +18,9 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `funded_strategies/
 - **Code reviewer session (user, 2026-10-31):** `session_01Wk1fPW6LVWayRousRwL7mU` ("🔍 Code reviewer", nested under the master):
   on "review" it checks Claude's and Codex's new code for correctness bugs, fixes confirmed defects in Claude's code, logs in
   `agents/cross_review/CODE_REVIEW_LOG.md` and sends the master a short verdict.
+- **Strategy lab (user, 2026-10-31):** autonomous research loop, 5 runs a day (scheduled task 'Strategy lab', fresh session each
+  run, skill `.claude/skills/lab/SKILL.md`, rules `lab/README.md`): one queued idea per run from `lab/IDEAS.md`, staged gates,
+  ledger `lab/ledger.json`, kill switch `lab/STOP`. It never changes plans, charts or the VPS; stage-4+ results go to the master.
 - **Paper scout (user, 2026-10-29):** `/scout` (skill `.claude/skills/scout/SKILL.md`) searches arXiv / NBER / SSRN for
   strategy hypotheses, reads and tests free full texts and lists SSRN-only PDFs for the user; log `papers/SCOUT_LOG.md`.
   Run it whenever the user says "scout" (any session; the Papers session by default), plus scheduled Mon/Wed/Fri runs there.
