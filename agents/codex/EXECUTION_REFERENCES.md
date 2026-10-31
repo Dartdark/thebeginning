@@ -951,6 +951,12 @@ states its XIV OHL endsAugust2017 and warns futures opens became asynchronous wi
 synthetic-OHLC package alone would not establish a next-open termination replay. Early VX scale, zero-price
 rows and original-versus-successor VXX identities remain unresolved; no raw reference file is a validated fill.
 
+Available-data replay follow-up: [frozen XIV/VIXY proxy result](results/vix_etp_available_period_2753300.md)
+now verifies next-open signals and retained overnight gaps over364sessions. It exited XIVJanuary30,2018,
+then entered VIXYFebruary5; thus the rule did not hold XIV through that collapse in this sample.
+Net+63.3%, DD−35.2%,29positions; one VIXY trade supplies75%of net. This is a secondary-price,
+fractional-share historical proxy, not verified fill savings, source replication or a current allocation.
+
 ### E52 — Dynamic pair models are not self-financing contract ledgers
 
 Source: Yang, Huang and Chen, unreviewed 38-page preprint SSRN 5017127, indexed posting 2024-11-11;
