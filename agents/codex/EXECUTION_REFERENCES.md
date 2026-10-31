@@ -762,7 +762,28 @@ and stronger independent net evidence; no proxy or intraday conversion is earned
 Status: retain accounting/implementation caution; source-defined strategy rejected
 at evidence gate, zero return trials, no promising-candidate or trading-plan change.
 
-### E46 — Obizhaeva–Wang: replenishing depth and large-order execution
+### E46 — Spot market power: endogenous supply incentives and hidden participant identity
+
+Source: Muermann and Shore, *Spot Market Power and Futures Market Trading*, March 2005, SSRN 681202;
+uploaded 36-page full text. [Review](results/spot_market_power_681202_20261030.md),
+[evidence decision](evidence/spot_market_power_681202_20261030.md). Related: E09 complete leg/cash accounting,
+E10 liquidity compensation, E11 information clocks and E29 signed participant positions.
+- Use: distinguish profits earned by controlling physical supply from profits available to an outside observer.
+  Futures positions can change the supplier's subsequent optimal spot action; market makers anticipate that incentive.
+  Hidden participant identity matters, so aggregate volume or commercial positioning is not an identified producer signal.
+- Evidence: analytical equilibria and source inspection only. In the concealed-position model, the producer randomizes
+  direction; the separate non-producer model earns on an earlier derivative while accepting losses on later price-moving
+  trades. Retain both legs and exact contract payoffs. No empirical return, measured price impact or execution saving.
+- Limits: stylized linear demand, competitive risk-neutral market makers, specified inference/beliefs and no effective
+  storage; Section 4's initial contract pays on an intermediate futures price. No calibrated contemporary NQ/ES/CL rule.
+  The complete-hedging impossibility concerns price-contingent contracts in the model; demand-contingent contracts
+  provide an explicit complete-hedging exception. Historical oil-liquidity remarks are not current CL observations.
+- Data/next check only for a separately justified event: legally observable, as-of actor-linked positions, physical
+  supply/inventory decisions, contract-stage payoffs, contemporaneous quotes and native costs; audit availability and
+  directional identification before returns. Our aggregate COT and continuous OHLCV do not supply these states.
+- Status: execution/market-structure reference; no new return trial, strategy queue entry, allocation or live change.
+
+### E47 — Obizhaeva–Wang: replenishing depth and large-order execution
 
 Source: [SSRN 666541](https://ssrn.com/abstract=666541), uploaded June 8, 2005 draft,
 [review and data gate](results/ssrn666541.md), [model arithmetic](../../analysis/outputs/codex_ssrn666541/model_arithmetic.json).
@@ -779,6 +800,7 @@ Source: [SSRN 666541](https://ssrn.com/abstract=666541), uploaded June 8, 2005 d
 - Next check: establish material self-impact using native fills and synchronized quotes/depth
   before testing any slicing schedule; then include latency, noncompletion and opportunity cost.
 - Status: execution reference only. Zero strategy-return trials; no plan or live changes.
+
 
 
 ## Minimum record for any later execution comparison
