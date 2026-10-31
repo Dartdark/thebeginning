@@ -232,6 +232,15 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 data-blocked leads, exact missing inputs, partial acquisitions, next checks and superseded requests. Maintain it for future
 worthwhile NEEDS DATA leads. Acquisition preference: **free sources only**; a listing does not authorize a return test.
 
+- [ ] **NG storage announcement short — SOURCE/DATA GATE, SSRN3575861 (2026-10-30).**
+  Specific merit: indexed primary summary reports shorting 90 minutes before the release and covering 30 minutes
+  after, with author Sharpe 1.76 after costs; authors also warn the effect weakened. No result reproduced here.
+  Merge the existing NG export task and [D12](agents/codex/DATA_NEEDED.md); no duplicate data request.
+  Need full executable source, native NG/micro contract/roll history, release exceptions and native fees/slippage.
+  Smallest next check after matching inputs arrive: timestamp-only 2018–22 event census, then evidence/power/cost
+  review before any committed return test. No current portfolio place or measured diversification benefit.
+  [Targeted feasibility report](agents/codex/results/targeted_diversification_20261030.md).
+
 - [ ] **Bitcoin spot/inverse-futures utility allocation — CODE BUILT / NEEDS MATCHING DATA AND SPECIFICATION (SSRN3441913).**
   Conditional personal-account research: explicit utility-allocation formulas; authors report Sharpe4.86–5.07
   versus spot4.40 on111days in2019, not independently reproduced net returns. Main formula/payoff audit passes;

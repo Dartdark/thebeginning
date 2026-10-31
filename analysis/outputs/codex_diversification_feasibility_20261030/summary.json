@@ -1,0 +1,70 @@
+{
+  "return_tests_executed": false,
+  "price_columns_read": false,
+  "design_opportunities": 20,
+  "years": [
+    2018,
+    2022
+  ],
+  "source_mean_cash_bps": 12.62,
+  "source_sd_cash_bps": 43.15,
+  "expected_gross_t_if_source_distribution_transfers": 1.30795725960822,
+  "gross_mean_cash_bps_needed_for_t2": 19.297266645823182,
+  "gross_events_needed_for_t2": 47,
+  "illustrative_gross_calendar_sharpe": 0.584936268829664,
+  "illustrative_gross_calendar_return_pct": 0.5047999999999999,
+  "timestamp_complete_events": 6,
+  "endpoints_present": 19,
+  "native_zn_round_trip_fee_scenario_usd": 7.25,
+  "native_zn_slippage_one_tick_each_fill_usd": 31.25,
+  "native_zn_total_cost_scenario_usd": 38.5,
+  "costs_status": "Assumed fee scenario, not measured user ZN costs; no cash-bond to ZN return conversion.",
+  "assumptions": [
+    "20independent events;source distribution transfers;no cost deduction in power math",
+    "No statistical power target or promotion claim from expected t alone",
+    "No as-of calendar,contract/roll,bar-label or native fill certification",
+    "Calendar Sharpe is an illustration,not reconstruction of Table5"
+  ],
+  "inputs": [
+    {
+      "path": "data/ZN_1min_2018.csv",
+      "sha256": "db0571f4b128672e7d53008aeeeeae299587efda52413894a52fcd9f2a7599f6",
+      "columns_read": [
+        "date",
+        "time"
+      ]
+    },
+    {
+      "path": "data/ZN_1min_2019.csv",
+      "sha256": "afc50608c0144af4b0fadd198c993551698063aacef14ec61ac030c0731cb824",
+      "columns_read": [
+        "date",
+        "time"
+      ]
+    },
+    {
+      "path": "data/ZN_1min_2020.csv",
+      "sha256": "9007d755b51e5f94f18bdc6da0de8e65bdb57e555a3a0682c6d5b0e4ae889ee0",
+      "columns_read": [
+        "date",
+        "time"
+      ]
+    },
+    {
+      "path": "data/ZN_1min_2021.csv",
+      "sha256": "aaf5c15358ae221e58b9c022bab4cec537bf9eb4fbdae06521b6aec255de7f2d",
+      "columns_read": [
+        "date",
+        "time"
+      ]
+    },
+    {
+      "path": "data/ZN_1min_2022.csv",
+      "sha256": "fdad701e25ced9b99919fbeab2fe4b3122cd75227448f51731caaa87da3f3c71",
+      "columns_read": [
+        "date",
+        "time"
+      ]
+    }
+  ]
+}
