@@ -367,6 +367,15 @@ Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SC
   the trade log that changing it changes an order (e.g. size inputs after cushion sizing).
 - Status: process reference; no strategy.
 
+### E32 — NG EIA storage report: the 09:31 CT bar is the release clock; the first 5 minutes are priced in
+
+Source: lab Q007 (2026-10-31), `analysis/lab_Q007.py`, `checks/candidates/lab_Q007/PREREG.md`; historical test.
+- Use: on release days the 09:30-09:31 CT NG bar trades a median 15.6x the median of 09:16-09:30 (1.2x on other days), so
+  the release day (Thursday, or Wed/Fri in holiday weeks; 493 found 2017-26, 97% Thursdays) can be found from volume alone,
+  without a calendar. The 09:30-09:35 move (>= 0.15 ATR) neither fades nor follows to 10:30: follow +$20 gross per NG,
+  fade -$57 gross, vs $25 round-trip cost (2018-22, 131 trades). Same result as CL EIA (TIER_LIST F).
+- Limits: 1-minute bars; 11:00 CT holiday releases not detected (skipped). Status: verified behaviour; no strategy.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

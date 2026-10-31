@@ -1,23 +1,71 @@
 {
- "updated": "2026-10-31T16:31-05:00",
+ "updated": "2026-10-31T17:16-05:00",
  "state": "running",
- "studies": 0,
- "today": 0,
+ "studies": 3,
+ "today": 1,
  "cap": 5,
  "looks_quarter": 0,
  "looks_budget": 40,
  "passed_stage": {
-  "1": 0,
+  "1": 1,
   "2": 0,
   "3": 0,
   "4": 0,
   "5": 0
  },
- "queued": 7,
+ "queued": 5,
  "blocked": 1,
- "next": "Q001",
- "t_bar": 3.63,
- "n_trials": 357,
+ "next": "Q003",
+ "t_bar": 3.64,
+ "n_trials": 361,
  "alive": [],
- "recent": []
+ "recent": [
+  {
+   "id": "Q007",
+   "title": "NG EIA storage report first-5-minute fade/follow",
+   "market": "NG",
+   "stage": 1,
+   "verdict": "FAIL",
+   "gate": "stage 1: best t -0.04 < 2.0, PF 0.98",
+   "t_design": -0.04,
+   "t_holdout": null,
+   "looks": 0,
+   "tier": "F",
+   "lesson": "first 5 minutes priced in; follow +$20 gross < $25 cost, fade -$57 gross",
+   "follow_ups": [
+    "Q009"
+   ],
+   "date": "2026-10-31T17:16-05:00"
+  },
+  {
+   "id": "Q002",
+   "title": "ZN 10-year auction pre-hedge short / post-auction long",
+   "market": "ZN",
+   "stage": 0,
+   "verdict": "BLOCKED",
+   "gate": "duplicate of D-ranked TIER_LIST item",
+   "t_design": null,
+   "t_holdout": null,
+   "looks": 0,
+   "tier": "D (existing)",
+   "lesson": "already tested in treasury_auction_test.py",
+   "follow_ups": [],
+   "date": "2026-10-31T17:16-05:00"
+  },
+  {
+   "id": "Q001",
+   "title": "CL EIA first-5-minute fade/follow",
+   "market": "CL",
+   "stage": 0,
+   "verdict": "BLOCKED",
+   "gate": "duplicate of F-ranked TIER_LIST item",
+   "t_design": null,
+   "t_holdout": null,
+   "looks": 0,
+   "tier": "F (existing)",
+   "lesson": "already tested in cl_forced_flows_test.py",
+   "follow_ups": [],
+   "date": "2026-10-31T17:16-05:00"
+  }
+ ]
 }
