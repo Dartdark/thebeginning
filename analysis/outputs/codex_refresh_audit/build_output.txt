@@ -1,0 +1,122 @@
+g24 done
+ge done
+VB 1743 trades
+ONB_ML2_MC 343 trades
+EOS 105 trades
+OND_MC 1043 trades
+MON_MC 451 trades
+LDF_MC 898 trades
+NFP_MC 79 trades
+VCS_MC 71 trades
+MON_BR_MC (Bridge Monday Long, MC) added
+previous plan (5 strategies, $2,000 cushion), 1y: $7,019 blown 14%
+previous plan (5 strategies, $2,000 cushion), 2y: $10,951 blown 13%
+previous plan (7 strategies, full size from $1,500 cushion), 1y: $8,017 blown 12%
+previous plan (7 strategies, full size from $1,500 cushion), 2y: $11,151 blown 11%
+current plan (8 strategies: + Bridge Monday Long 1 MNQ), 1y: $8,524 blown 11%
+current plan (8 strategies: + Bridge Monday Long 1 MNQ), 2y: $11,331 blown 10%
+{
+  "raw_grid_end": "2026-10-30",
+  "raw_last_trading_date": "2026-10-30",
+  "dashboard_daily_end": "2026-10-09",
+  "dashboard_last_trade": {
+    "VB": "2026-10-06",
+    "ONB30": "2026-10-07",
+    "MON_BR": "2026-10-05",
+    "EOS": "2026-09-18"
+  },
+  "lab_rebuilt": true,
+  "report_coverage": [
+    {
+      "strategy": "VB",
+      "report": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+      "report_end": "2026-10-09 16:00:00",
+      "last_closed_exit": "2026-10-06 14:30:00",
+      "closed_trades": 1743,
+      "open_positions": 0
+    },
+    {
+      "strategy": "ONB_ML2_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+      "report_end": "2026-10-12 14:15:00",
+      "last_closed_exit": "2026-10-05 14:30:00",
+      "closed_trades": 343,
+      "open_positions": 1
+    },
+    {
+      "strategy": "EOS",
+      "report": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+      "report_end": "2026-10-11 19:35:00",
+      "last_closed_exit": "2026-09-18 10:00:00",
+      "closed_trades": 105,
+      "open_positions": 0
+    },
+    {
+      "strategy": "OND_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report OND v1.xlsx",
+      "report_end": "2026-10-11 19:40:00",
+      "last_closed_exit": "2026-10-09 03:00:00",
+      "closed_trades": 1052,
+      "open_positions": 0
+    },
+    {
+      "strategy": "MON_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+      "report_end": "2026-10-12 15:55:00",
+      "last_closed_exit": "2026-10-12 15:00:00",
+      "closed_trades": 451,
+      "open_positions": 0
+    },
+    {
+      "strategy": "LDF_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+      "report_end": "2026-10-12 16:00:00",
+      "last_closed_exit": "2026-10-12 14:30:00",
+      "closed_trades": 898,
+      "open_positions": 0
+    },
+    {
+      "strategy": "NFP_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
+      "report_end": "2026-10-13 02:20:00",
+      "last_closed_exit": "2026-10-02 09:00:00",
+      "closed_trades": 79,
+      "open_positions": 0
+    },
+    {
+      "strategy": "VCS_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx",
+      "report_end": "2026-10-13 02:20:00",
+      "last_closed_exit": "2026-06-08 15:00:00",
+      "closed_trades": 71,
+      "open_positions": 0
+    },
+    {
+      "strategy": "ONB30",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx",
+      "report_end": "2026-10-13 04:45:00",
+      "last_closed_exit": "2026-10-12 14:30:00",
+      "closed_trades": 677,
+      "open_positions": 0
+    },
+    {
+      "strategy": "MON_BR_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx",
+      "report_end": "2026-10-13 10:15:00",
+      "last_closed_exit": "2026-10-05 09:30:00",
+      "closed_trades": 217,
+      "open_positions": 0
+    }
+  ],
+  "excluded_open_positions": [
+    {
+      "strategy": "ONB_ML2_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+      "entry": "2026-10-12 09:15:00",
+      "exit_label": "2026-10-12 00:00:00",
+      "signal": "open",
+      "marked_pnl": 1505.0
+    }
+  ],
+  "limitation": "New raw bars do not create new MC trades. Do not label uncovered days as no-signal days."
+}

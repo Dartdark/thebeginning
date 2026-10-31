@@ -108,6 +108,15 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 
 ### E09 — Native micro costs, turnover and roll reconciliation
 
+- Replay readiness 2026-10-31 ([report](results/swing_replay_readiness_20261031.md)):
+  a MultiCharts exit row labeled `open` is a valuation mark, not a closed fill.
+  ONB ML's final export mark maps to an exit before entry and crashes a clean
+  funded-cache rebuild. Explicitly excluding this sentinel permits the 343 closed
+  ONB paths to build; other cross-date closed trades remain errors needing their
+  own handling. Never use a generic reversed-time filter that silently removes
+  real overnight/holiday holds. Verified report/parser behavior only; corrected
+  ST account replay and native-fill parity remain unverified.
+
 [6E package review](results/six_e_cross_asset_review_20261027.md), 2026-10-27.
 - Use: measure arrival-mid shortfall, spread, native-tick stresses, integer quantities and total turnover; a +2 to −2 reversal trades four contracts.
 - Evidence: methodological requirements from the source review, not verified M6E execution results.
@@ -148,6 +157,16 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   closing cashflow by$132/MNQ total and48daily minima; corrected payout/risk comparisons remain unrun.
   Preserve schemas, assert numeric enum sets, and reconcile closed cash and marked paths before account claims.
   This is existing-ledger accounting evidence, not a new strategy, native-fill result or plan change.
+
+- Swing Target account replay 2026-10-31 ([results](results/swing_replay_20261031.md)): 500 paired two-year histories
+  per account, fixed empirical pool through 2026-10-09. The $132/MNQ fixed-ledger improvement changes neither
+  selected replacement's two-year payouts nor failures in this sample; year-one mean changes are +$7 (50K)
+  and +$20 (150K), with intervals spanning zero. An accounting correction is necessary but does not establish
+  portfolio superiority. Against base, 50K VB replacement has two-year −$83 and failures +0.6 pp; 150K DT replacement
+  +$43 and −0.4 pp; both inconclusive. These are legacy NQ-equivalent bench costs, not native fee/fill evidence.
+  Rebuild also exposes an unfinished MC `Signal=open` valuation with a 00:00 exit sentinel: exclude it explicitly
+  from completed-ticket paths rather than infer a next-date fill or drop all same-bar trades. The general
+  builder still needs that upstream repair. No live/plan change or standalone strategy promotion follows.
 
 ### E10 — Liquidity compensation, turnover and costs
 
@@ -617,15 +636,33 @@ Related: E09 cash/contract accounting, E15 tail risk, E36 nonguaranteed protecti
   availability clocks, exact trigger/weight/cash policy, executable next-day prices and native fees; reconcile one
   formation/roll month before any return study. Non-positive prices cannot silently disappear from a log-return test.
 - Status: execution/risk/accounting reference retained; no new return trial, account placement or exit-policy change.
+  [Offline build checkpoint](results/rad_double_sort_build_20261031.md) adds strict missing-panel, contract/clock,
+  integer reference-notional and delivery-action checks. Its23 synthetic cases do not verify historical fills or NAV.
 
-### E09 follow-up — corrected fills and account-state transitions (2026-10-30)
+### E39 — Unfinished MC positions and stale report coverage during a data rebuild
 
-[Fixed-ledger account replay](results/swing_kind_account_replay_20261030.md) settles the previously unrun
-Swing Target kind comparison. In its common-source window, numeric kinds restore $129/MNQ and change 48 daily
-minima; canonical-simulator parity passes. This does not imply monotone payout improvement: 150K recent-pool
-first-year payouts decrease $6 while two-year payouts and blown share are unchanged. The adopted replacements
-do not clear both base and empty-slot comparisons. Evidence is historical simulated accounting with inherited
-path approximations, not native fills or a plan change. Supersedes only the earlier "account replay unrun" status.
+Source/review + date: [extended-data audit](results/extended_data_refresh_20261030.md), 2026-10-30;
+Claude source snapshot `86df2c0`, `analysis/codex_refresh_audit.py` and its saved coverage tables.
+- Use: distinguish a report's `open` sentinel from an actual exit, and price-history coverage from strategy-ticket coverage.
+- Evidence: reproduced standard-builder failure on a funded-ONB EntryShort at 10/12 09:15 paired with an `open` ExitShort
+  labeled midnight. It creates exit-before-entry indices and an empty path. A scoped adapter excludes the unfinished
+  position; the complete original rebuild succeeds with 343 closed ONB trades. Five regression checks pass.
+- Coverage: raw NQ through 10/30; dashboard cache through 10/09; the four live-strategy reports end 10/09–10/13.
+  Importing old tickets onto a longer grid does not regenerate signals; padded zero days are not verified no-trade days.
+- Limits: no current missed-trade count, native broker fill finding, strategy improvement or current-plan revalidation.
+  Production importer is unchanged; the adapter is an offline research artifact.
+- Next check: fresh same-input reports, explicit cache coverage gate, then expected/chart/broker reconciliation;
+  earlier unavailable chart logs remain unknown. Related: E04 (record semantics), E23 (account/logger fields).
+
+### E09 follow-up — common-coverage account-state replay (2026-10-30)
+
+[Fixed-ledger account replay](results/swing_kind_account_replay_20261030.md) adds 1,000 paired histories per
+account/cohort over a common-source window ending July 7. Numeric kinds restore $129/MNQ and change 48 daily
+minima; 160 exact canonical-simulator parity checks pass. This does not imply monotone payout improvement:
+150K recent-pool first-year payouts decrease $6 while two-year payouts and blown share are unchanged.
+The adopted replacements do not clear both base and empty-slot comparisons. Evidence is historical simulated
+accounting with inherited path approximations, not native fills or a plan change. The broader-window replay
+above uses a different pool and seed; the two reports consistently leave adoption unproven.
 
 ## Minimum record for any later execution comparison
 
