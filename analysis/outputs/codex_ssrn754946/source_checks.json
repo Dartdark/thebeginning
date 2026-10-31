@@ -1,0 +1,55 @@
+{
+  "source_sha256": "473516dad95e2a73b065d4ded6a31ab9ae6a9bda8fb4c02eb8bde694d8c0d182",
+  "source_version": "May 2005, SSRN754946",
+  "source_pdf_pages": 54,
+  "sample": "2003-01-02 through 2004-03-05",
+  "source_table1_all_contracts_estimated_spreads_usd_per_contract": [
+    {
+      "market": "Japanese Yen",
+      "floor": 22.01,
+      "screen": 18.22,
+      "floor_minus_screen": 3.79
+    },
+    {
+      "market": "British Pound",
+      "floor": 23.07,
+      "screen": 17.54,
+      "floor_minus_screen": 5.53
+    },
+    {
+      "market": "Euro FX",
+      "floor": 21.74,
+      "screen": 15.94,
+      "floor_minus_screen": 5.8
+    }
+  ],
+  "source_common_factor_globex_weights": {
+    "yen_march2003": 0.2865,
+    "yen_march2004": 0.5011,
+    "euro_march2003": 0.5427,
+    "euro_march2004": 0.7377
+  },
+  "visually_confirmed_printed_table_inconsistencies": [
+    {
+      "table": "3.C",
+      "label": "March 2004 Yen: mean information-share midpoint",
+      "floor_printed": 0.4932,
+      "globex_printed": 0.586,
+      "globex_lower": 0.2447,
+      "globex_upper": 0.7689,
+      "printed_midpoint_sum": 1.0792,
+      "midpoint_from_printed_globex_bounds": 0.5068
+    },
+    {
+      "table": "5.B",
+      "label": "September 2003 Euro: mean common-factor weights",
+      "floor_printed": 0.3019,
+      "globex_printed": 0.6891,
+      "printed_weight_sum": 0.9910000000000001
+    }
+  ],
+  "interpretation": "Internal arithmetic discrepancies, potentially printing errors; not evidence that all underlying estimates are wrong",
+  "new_strategy_return_trials": 0,
+  "estimates_independently_reproduced": false,
+  "native_execution_savings_measured": false
+}
