@@ -1,0 +1,627 @@
+{
+  "observed_utc": "2026-10-31",
+  "repo": "Pustak-007/ml_risk_overlay",
+  "commit": "7a8df4089664c339de9a4c5900cecdbe9d5b954e",
+  "scope": "Metadata and two raw file samples only; zero candidate return tests",
+  "sourceNote": "### Working on Remaining Attributes pertaining VIX Futures Term Structure\n\nWe need to address the remaining two attributes related to VIX Futures Term structure:\n\n**Term_Structure_Ratio_1_0**\n\n**Term_Structure_Slope_2_1**\n\n**Current Challenge:**  \nAccessing VIX Futures Historical Data via WRDS is not possible with the current institutional access through HKU.\n\n**Proposed Solution:**  \nWe will implement web scraping to obtain the necessary data. \n\n**Implementation Details:**  \n- A module named `vix_extract_web_scrapper.py` has been created for this purpose.  \n- This module includes functions to:  \n  1. Scrape the relevant VIX Futures data from the cboe websites: https://www.cboe.com/us/futures/market_statistics/historical_data/ and https://www.cboe.com/us/futures/market_statistics/historical_data/archive/ .  \n  2. Store the downloaded data into the designated folders for further processing.\n",
+  "relevant_files": [
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-01-17.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "92ac06e51e3bee115faa0a880fd661e4058be637",
+      "size": 16031,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/92ac06e51e3bee115faa0a880fd661e4058be637"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-02-14.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7872c48b9160a852d474119b7cff0cf917dcae46",
+      "size": 16059,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/7872c48b9160a852d474119b7cff0cf917dcae46"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-03-21.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a796603cb98955d13c3de8449b05985c2f01a3d4",
+      "size": 16117,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/a796603cb98955d13c3de8449b05985c2f01a3d4"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-04-18.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "db96d240afa7cbc999f88cbb4afa8230fafde10d",
+      "size": 16016,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/db96d240afa7cbc999f88cbb4afa8230fafde10d"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-05-16.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "40baa103cb8ee6e4eb6045239ce2097fc8173306",
+      "size": 16053,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/40baa103cb8ee6e4eb6045239ce2097fc8173306"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-06-20.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5039a6ef3397bf3cd9f7d33ba59ccb3c14614806",
+      "size": 16073,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/5039a6ef3397bf3cd9f7d33ba59ccb3c14614806"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-07-18.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e7f6d280bc0085961175b3245e613de8496ee4be",
+      "size": 15967,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/e7f6d280bc0085961175b3245e613de8496ee4be"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-08-22.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ac7f78e327ee09497326953bf0670421b520b804",
+      "size": 16404,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/ac7f78e327ee09497326953bf0670421b520b804"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-09-19.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b05f20a76498a64b5282cf265e8590c5feaa76a1",
+      "size": 16000,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/b05f20a76498a64b5282cf265e8590c5feaa76a1"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-10-17.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3675780fc39abb6a762466691c26be88fdc4494e",
+      "size": 16227,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/3675780fc39abb6a762466691c26be88fdc4494e"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-11-21.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59618f6fa22f2af62e5e2856b135e49cc414db5b",
+      "size": 16690,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/59618f6fa22f2af62e5e2856b135e49cc414db5b"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2018-12-19.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4eac4ad8de36f39fb750097160a65a8977c4a8cb",
+      "size": 16228,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/4eac4ad8de36f39fb750097160a65a8977c4a8cb"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-01-16.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b86bddd01e8b71a916ea127b65f54f4863e4f670",
+      "size": 16072,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/b86bddd01e8b71a916ea127b65f54f4863e4f670"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-02-13.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ceea6168d1630174a2d60055f27c1aeaee44178b",
+      "size": 16019,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/ceea6168d1630174a2d60055f27c1aeaee44178b"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-03-19.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c81f43cc8af5527ac1f9482b20fe97e0a9ea761d",
+      "size": 15966,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/c81f43cc8af5527ac1f9482b20fe97e0a9ea761d"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-04-17.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2a1302a9531d2ef704a58cbabbd0c225dc9d197f",
+      "size": 16193,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/2a1302a9531d2ef704a58cbabbd0c225dc9d197f"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-05-22.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e3fea68b1a267ae14111c493c82364db88b2c6e0",
+      "size": 16103,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/e3fea68b1a267ae14111c493c82364db88b2c6e0"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-06-19.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c57d82d4eede42ea2cec9d8c485db215524d7591",
+      "size": 16127,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/c57d82d4eede42ea2cec9d8c485db215524d7591"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-07-17.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "85e24a8aab78178c7f3164087323a613e3d19266",
+      "size": 15952,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/85e24a8aab78178c7f3164087323a613e3d19266"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-08-21.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6155bed77b888cf9fd5b569142f81ff122f93256",
+      "size": 16100,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/6155bed77b888cf9fd5b569142f81ff122f93256"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-09-18.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ff66aca6110859a0450cb28e8012fba358a8a508",
+      "size": 15998,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/ff66aca6110859a0450cb28e8012fba358a8a508"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-10-16.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "18fbbc2924e90d87ed2813af773354d3dc1a93b6",
+      "size": 16120,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/18fbbc2924e90d87ed2813af773354d3dc1a93b6"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-11-20.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "53ed7f4f618754f6cb181ffea9cb5b006c557164",
+      "size": 16690,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/53ed7f4f618754f6cb181ffea9cb5b006c557164"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2019-12-18.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d91b16b1686d2a0de9ed6436f047723eacf4362",
+      "size": 16291,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/8d91b16b1686d2a0de9ed6436f047723eacf4362"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-01-22.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8723312e6f58b2da27e211b64498cea8837fedde",
+      "size": 16432,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/8723312e6f58b2da27e211b64498cea8837fedde"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-02-19.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bb377c801cf821a004b0a4129762c7499e8e8c2c",
+      "size": 15898,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/bb377c801cf821a004b0a4129762c7499e8e8c2c"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-03-18.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "498d7689b188608709d72565b6747954622ed3a0",
+      "size": 15992,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/498d7689b188608709d72565b6747954622ed3a0"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-04-15.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "37150305549ff1a93ebb3d2d6c117b35c9fba1d7",
+      "size": 16010,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/37150305549ff1a93ebb3d2d6c117b35c9fba1d7"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-05-20.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "72880fb5c632ef8fac30491b5cc7fd8081f879f0",
+      "size": 16008,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/72880fb5c632ef8fac30491b5cc7fd8081f879f0"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-06-17.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4cdbd1a19c07f3e86f7731aa97f896d06bf708d6",
+      "size": 15951,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/4cdbd1a19c07f3e86f7731aa97f896d06bf708d6"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-07-22.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eac8ad5b384bd77974634940f38a9a256e174b12",
+      "size": 16200,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/eac8ad5b384bd77974634940f38a9a256e174b12"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-08-19.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "09f5fc3a3be769e1d0a4fff13a0cb875e6b3e876",
+      "size": 15756,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/09f5fc3a3be769e1d0a4fff13a0cb875e6b3e876"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-09-16.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5336121c422f00cf75380bd439a8e7bef073e94a",
+      "size": 16535,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/5336121c422f00cf75380bd439a8e7bef073e94a"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-10-21.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f2172168e99439dd00a700f30b3b30314425875f",
+      "size": 18645,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/f2172168e99439dd00a700f30b3b30314425875f"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-11-18.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "52fa9693f42f0c63db20c2a889b2006f6e30bfd6",
+      "size": 20181,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/52fa9693f42f0c63db20c2a889b2006f6e30bfd6"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2020-12-16.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "37c96bd05407db7c4caac776be391646e4503f38",
+      "size": 15678,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/37c96bd05407db7c4caac776be391646e4503f38"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-01-20.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "265d3dbf8a85e2936e0c8e6cf10e85a01e9ae52d",
+      "size": 15810,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/265d3dbf8a85e2936e0c8e6cf10e85a01e9ae52d"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-02-17.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "069aaffe7ea389a313a44917cb406919698086e7",
+      "size": 15347,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/069aaffe7ea389a313a44917cb406919698086e7"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-03-17.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "67bd3e459250cdae62e46a4859d51700c9c9dc90",
+      "size": 15494,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/67bd3e459250cdae62e46a4859d51700c9c9dc90"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-04-21.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "31b00f833e2e28e1a54992a65611b10db4868af3",
+      "size": 15492,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/31b00f833e2e28e1a54992a65611b10db4868af3"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-05-19.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "435e81764185a0eb18fcdb155992f8831ddc3a16",
+      "size": 15602,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/435e81764185a0eb18fcdb155992f8831ddc3a16"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-06-16.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b8f0b07bb504554287d2acc70947d7398254bff8",
+      "size": 15551,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/b8f0b07bb504554287d2acc70947d7398254bff8"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-07-21.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6f31569ac049659b46419a1f0415105dc86f309f",
+      "size": 15500,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/6f31569ac049659b46419a1f0415105dc86f309f"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-08-18.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ed2a9939cf28e85736cdc18365c1e589946f5f95",
+      "size": 15519,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/ed2a9939cf28e85736cdc18365c1e589946f5f95"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-09-15.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "33f1d83ef6d5aef2ca8ceda2eed9482e3d8556c3",
+      "size": 15468,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/33f1d83ef6d5aef2ca8ceda2eed9482e3d8556c3"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-10-20.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5a263830468bec3d51d8a902bbb528185ded806e",
+      "size": 15839,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/5a263830468bec3d51d8a902bbb528185ded806e"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-11-17.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e50538edddc6285ad50cf253a43a1277ef3bb5c",
+      "size": 15985,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/0e50538edddc6285ad50cf253a43a1277ef3bb5c"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2021-12-22.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5026182571432d871bb1c27426a0135372b966a8",
+      "size": 16373,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/5026182571432d871bb1c27426a0135372b966a8"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-01-19.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b6f34bfadaec9afb44a202d166275146db50e1e4",
+      "size": 15805,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/b6f34bfadaec9afb44a202d166275146db50e1e4"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-02-16.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "09b7f8367e24b8bbfb231de38c01c4a990d92eb3",
+      "size": 15814,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/09b7f8367e24b8bbfb231de38c01c4a990d92eb3"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-03-15.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fb927814a4ed91997113de880248124cf843333b",
+      "size": 15712,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/fb927814a4ed91997113de880248124cf843333b"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-04-20.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2eee2f823e069f5518227bd6a8ffd805dbd9e438",
+      "size": 15790,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/2eee2f823e069f5518227bd6a8ffd805dbd9e438"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-05-18.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "33d4f3da34b087046919b57b97f94ce69d7ddff5",
+      "size": 15871,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/33d4f3da34b087046919b57b97f94ce69d7ddff5"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-06-15.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dafe548953a99ae0bb99b2b57accb588b62e9860",
+      "size": 15844,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/dafe548953a99ae0bb99b2b57accb588b62e9860"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-07-20.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bf79a01fed3d3b22e20525fad9589bb179af7e2c",
+      "size": 15654,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/bf79a01fed3d3b22e20525fad9589bb179af7e2c"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-08-17.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5c9c940fb121cc2e24bf3c1e9460761f5650c2b1",
+      "size": 15727,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/5c9c940fb121cc2e24bf3c1e9460761f5650c2b1"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-09-21.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d88580598a323967dacc948a80bb3fd2ab7fce7c",
+      "size": 15819,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/d88580598a323967dacc948a80bb3fd2ab7fce7c"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-10-19.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dec6d5c7ce6ce1c861492ca1df1d4cd813aa608a",
+      "size": 15850,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/dec6d5c7ce6ce1c861492ca1df1d4cd813aa608a"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-11-16.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "345698a09cb7891807106e27104c86ff879688a6",
+      "size": 15880,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/345698a09cb7891807106e27104c86ff879688a6"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2022-12-21.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bbf591abd555d90ea66491a6ae0a1083b4d1211e",
+      "size": 16360,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/bbf591abd555d90ea66491a6ae0a1083b4d1211e"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-01-18.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4bb579f02ebed62715af91649ead1666cc2d1fa1",
+      "size": 15684,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/4bb579f02ebed62715af91649ead1666cc2d1fa1"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-02-15.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e37261e802b016cc78694161c1433327cc666d96",
+      "size": 15700,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/e37261e802b016cc78694161c1433327cc666d96"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-03-22.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "78a21514dabf0b1bf2bbdd4f190f5126a1569833",
+      "size": 16045,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/78a21514dabf0b1bf2bbdd4f190f5126a1569833"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-04-19.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "148c0d32d134b2e80f54676c308daa1ccf874b20",
+      "size": 15776,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/148c0d32d134b2e80f54676c308daa1ccf874b20"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-05-17.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59ec7dc33f6f22fecb3e20e1e844de1542e16b2e",
+      "size": 15773,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/59ec7dc33f6f22fecb3e20e1e844de1542e16b2e"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-06-21.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa81e747a20bacf452a479e46943e1f8e7a763e7",
+      "size": 15699,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/fa81e747a20bacf452a479e46943e1f8e7a763e7"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-07-19.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e4ec86b968d811e9bd7eaf98637ee68361e1c5a1",
+      "size": 15610,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/e4ec86b968d811e9bd7eaf98637ee68361e1c5a1"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-08-16.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d44a9c132446a54376e30a5efffdf17a65b78d65",
+      "size": 15686,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/d44a9c132446a54376e30a5efffdf17a65b78d65"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-09-20.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf3f9f8f0334e0b112e0b91aea906c649f7fd6d3",
+      "size": 15697,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/cf3f9f8f0334e0b112e0b91aea906c649f7fd6d3"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-10-18.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b24cfdfade668d9a136b1ceec7fcbd25f08d3506",
+      "size": 15926,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/b24cfdfade668d9a136b1ceec7fcbd25f08d3506"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-11-15.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f4a1e36092caaa9ecf06b95b19f42f8068e816fc",
+      "size": 15950,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/f4a1e36092caaa9ecf06b95b19f42f8068e816fc"
+    },
+    {
+      "path": "data/raw/vix_futures_data/VX_2023-12-20.csv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3cee4062e9b9f0205763363530e5d7c1adec9be1",
+      "size": 15988,
+      "url": "https://api.github.com/repos/Pustak-007/ml_risk_overlay/git/blobs/3cee4062e9b9f0205763363530e5d7c1adec9be1"
+    }
+  ],
+  "samples": [
+    {
+      "url": "https://github.com/Pustak-007/ml_risk_overlay/blob/7a8df4089664c339de9a4c5900cecdbe9d5b954e/data/raw/vix_futures_data/VX_2018-01-17.csv",
+      "git_blob_sha": "92ac06e51e3bee115faa0a880fd661e4058be637",
+      "header": "Trade Date,Futures,Open,High,Low,Close,Settle,Change,Total Volume,EFP,Open Interest",
+      "records": 186,
+      "first_trade_date": "2017-04-24",
+      "last_trade_date": "2018-01-17",
+      "first_row": "2017-04-24,F (Jan 2018),0.0000,16.6500,17.4000,0.0000,17.0000,0,0,0,0",
+      "last_row": "2018-01-17,F (Jan 2018),11.8000,11.9500,11.4000,11.9500,12.6100,0.8350,8948,0,50946"
+    },
+    {
+      "url": "https://github.com/Pustak-007/ml_risk_overlay/blob/7a8df4089664c339de9a4c5900cecdbe9d5b954e/data/raw/vix_futures_data/VX_2022-12-21.csv",
+      "git_blob_sha": "bbf591abd555d90ea66491a6ae0a1083b4d1211e",
+      "header": "Trade Date,Futures,Open,High,Low,Close,Settle,Change,Total Volume,EFP,Open Interest",
+      "records": 192,
+      "first_trade_date": "2022-03-21",
+      "last_trade_date": "2022-12-21",
+      "first_row": "2022-03-21,Z (Dec 2022),0.0000,25.6500,49.9000,0.0000,26.55,0,0,0,0",
+      "last_row": "2022-12-21,Z (Dec 2022),21.5000,21.5000,20.5500,20.5500,20.25,-1.2348,1397,0,25977"
+    }
+  ],
+  "limitations": [
+    "Independent mirror, not official acquisition, no raw equality verification against Cboe.",
+    "No explicit data license observed in repository tree; original Cboe data rights remain applicable.",
+    "Expiry metadata is in filename rather than a dedicated CSV column; must reconcile against official calendar/final settlement archive.",
+    "2018–22 expiry files alone do not include far months needed late 2022; include 2023 expiry files and census by trade date."
+  ],
+  "official_links": [
+    "https://www.cboe.com/markets/us/futures/market-statistics/historical-data/futures/",
+    "https://cdn.cboe.com/data/us/futures/market_statistics/historical_data/VX/VX_{YYYY-MM-DD_expiry}.csv",
+    "https://cdn-api.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv",
+    "https://cdn.cboe.com/resources/futures/archive/volume-and-price/CFE_FinalSettlement_Archive.csv",
+    "https://www.cboe.com/terms",
+    "https://www.cboe.com/use-of-content"
+  ],
+  "official_fetch_observations": [
+    "VIX_History.csv direct official link: unsupported text/csv; no payload available to tool.",
+    "Dated VX_2022-06-01.csv official sample: unsupported text/csv.",
+    "2018-01-17 and2022-12-21 official dated sample URLs: not accessible via web tool.",
+    "Shell network attempt to GitHub failed because inherited proxy:8080 unavailable; no bypass attempted."
+  ]
+}
