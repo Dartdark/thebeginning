@@ -697,6 +697,20 @@ Source: Cieslak/Morse/Vissing-Jorgensen, [SSRN2687614](https://ssrn.com/abstract
 - Next check for a distinct future study: explicit clock/session census before outcomes. Do not retune this family.
 - Status: execution/input-design reference; no claimed saving or allocation.
 
+E34 follow-up2026-10-31 — [calendar-overlap source assessment](results/scout_owned_data_discovery_20261031.md),
+SSRN6818821, author-uploaded selected sections, not a complete paper replication. A close-to-open outcome signed
+by the completed day's close cannot assume the direction is known before a guaranteed same-close entry. Bind
+signal availability and order acceptance separately; a later futures entry or reopen changes the return interval.
+Date-only provisional2018–22audit finds0/20quarter ends on third Fridays and0/5June last Fridays on third Fridays;
+check source prose against actual calendar code. This does not disprove daily LETF overlap or estimate a saving.
+Next check for an eligible new study: freeze exact kernels/intensities and official calendar provenance before returns.
+
+E34/E18 discovery note2026-10-31 — SSRN7458058's abstract describes an NG fill-convention bracket and matched
+random-entry populations with identical exits/costs. Useful proposed controls; full paper/rule/tape not obtained,
+so its numerical advantage is an author claim, not verified execution savings. Minute OHLCV cannot establish
+queue position or first-tape-print fills. Record the fill bracket for future execution studies; do not infer an NG
+strategy from generic mean reversion. See the same discovery report and per-paper7458058record.
+
 ### E35 — GreenORB: fill-anchored targets, engine callbacks and source parity
 
 Source: user-uploaded GreenORB PDF/post and Liqport class, 2026-10-30.

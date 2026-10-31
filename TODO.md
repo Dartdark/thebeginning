@@ -228,6 +228,23 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **COT top-four concentration -> gold — SOURCE/CAUSAL-CLOCK CHECK (Liu et al.2023).**
+  Merit: author Table5links CL top-four net concentration to GC(coefficient0.0457,SE0.0154); specific cross-market
+  information distinct from previously rejected dealer/nonreportable ranks. Owned COTheaders contain the fields;
+  net strategy profit is unverified. Smallest check: resolve`r[t+4]`target alignment and actual Friday/backlog
+  availability, then certify GC/CLhistory/rolls/costs before any bounded preregistration. No Tuesday look-ahead,
+  assumed four-week hold or shifted-horizon rescue. No return reservation. Move on while source specifics are absent.
+  [Selected-source assessment](agents/codex/results/scout_owned_data_discovery_20261031.md).
+
+- [ ] **Cross-calendar overlap and overnight continuation — SOURCE SETTINGS CHECK, not TEST (SSRN6818821).**
+  Merit: specific interaction among scheduled flows, rather than another single-family timing rule; author reports
+  −5.03bp/SD in sign-adjusted reversal,t−2.61,2016–24. Not verified net profit;2006–22source result is weak.
+  Prerequisites: complete source/exact footprint intensities, accurate calendars, causal entry clock and native costs.
+  Smallest next check: reconcile source calendar identities and obtain fixed constants before considering one
+  registered ES/NQ adaptation. Final cash-close direction cannot earn a guaranteed same-close fill. No quarter-end
+  reversal rescue, no return reservation, no repeated404or paid-data loop; continue other owned-data leads meanwhile.
+  [Selected-section assessment](agents/codex/results/scout_owned_data_discovery_20261031.md).
+
 **Data shopping/export register:** [Research leads awaiting data](agents/codex/DATA_NEEDED.md) consolidates previous
 data-blocked leads, exact missing inputs, partial acquisitions, next checks and superseded requests. Maintain it for future
 worthwhile NEEDS DATA leads. Acquisition preference: **free sources only**; a listing does not authorize a return test.

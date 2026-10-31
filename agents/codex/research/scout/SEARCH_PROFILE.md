@@ -24,6 +24,7 @@ trigger acquisition attempts/alerts. This updates search priority, not evidence,
 |---|---|---|
 | ES/NQ/YM/GC/CL/ZN/6E/BTC named1-minute exports | Intraday/session timing, scheduled-flow price reactions, cross-market hypotheses | Exact sessions/holes/bar clocks, contract/roll identity and native costs; file years are not coverage certification |
 | NQ order-flow exports | New source-supported flow hypotheses with actual matching fields | Publication/capture timing and schema eras; many imbalance/big-print definitions already failed |
+| Corrected NG1-minute exports2017–26 (`agents/codex/inputs/ng_corrected_20261031/raw/`) | Distinct source-supported NG mechanisms; see corrected intake audit | Owned2,959,522-bar panel is not paired delivery months, forecast vintages, bid/ask tape or automatic TEST admission. Storage calendar short3575861is closed at the source gate; no side/window rescue |
 | VIX/VXN daily | Lagged volatility-state or risk-scaling hypotheses | Daily close available later; not an intraday IV surface, VIX term structure or variance-swap payoff |
 | GEX/GEXOI exports | Only hypotheses matching the actual index/field/period | NDX data are not signed SPX dealer books; limited history cannot silently replace2018–22 design |
 | COT legacy/financial archives and COT_NQ | Lagged publicly available positioning/risk-premium hypotheses | Tuesday position date differs from publication; not observed CTA orders or an index-trader supplement |
