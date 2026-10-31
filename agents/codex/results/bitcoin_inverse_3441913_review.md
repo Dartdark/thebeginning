@@ -1,5 +1,8 @@
 # Bitcoin spot/inverse-futures utility allocation: NEEDS MATCHING DATA AND SPECIFICATION
 
+**Implementation follow-up:** user-requested [strategy code/review packet](bitcoin_inverse_3441913_build.md) now built;20 synthetic tests pass.
+This supersedes the earlier audit-only implementation status, not the source-data or profitability limits. Zero return trials.
+
 Summary: Deng et al. derive explicit allocations to Bitcoin spot and BTC-settled inverse futures.
 They report Sharpe4.86–5.07 versus spot4.40 over111days in2019; these are unreplicated source statistics, not demonstrated net returns.
 Our arithmetic checks confirm the main formulas and show both calibrated exposures are long Bitcoin, not a neutral hedge.

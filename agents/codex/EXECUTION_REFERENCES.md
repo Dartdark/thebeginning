@@ -115,6 +115,9 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   Continuous utility-optimal controls omit native rebalancing cost and liquidation; near-singular covariance can magnify
   allocation estimates. Main formula agrees with the matrix solution; rendered AppendixB.2 has a contradictory sign.
   Evidence: source inspection and synthetic formula/payoff checks only; source Sharpe4.86–5.07 over111days is unreplicated.
+  [User-requested strategy code](results/bitcoin_inverse_3441913_build.md) now has20 passing synthetic checks for reciprocal
+  entry basis, partial closes/reversals, native BTC fees and a reconciled quote-priced BTC/USD cost bridge. Pooled research
+  wallet transfers are not verified cross-venue settlement; ordered proposals are not actual fills. No return test added.
   Four BitMEX API probes hit proxy403. Need identified dated contracts/spot clocks, native lots/marks/margin and conversion
   before a return test; a perpetual adaptation also needs its own funding. No verified execution saving or current placement.
 
