@@ -61,7 +61,7 @@ Related work is not a substitute: Treasury auction pressure is already tested in
 | 150K funded | No eligible strategy from this paper; account bench not run |
 | Personal portfolio | No eligible strategy from this paper; account bench not run |
 
-This is absence of a specified tradable edge, not measured harm to each portfolio. Return trials and account simulations: **zero**. Retained in [execution references](../EXECUTION_REFERENCES.md), E44. Do not add to the promising-strategy queue or assign an empirical strategy grade. No live/trading-plan/schedule change.
+This is absence of a specified tradable edge, not measured harm to each portfolio. Return trials and account simulations: **zero**. Retained in [execution references](../EXECUTION_REFERENCES.md), E50. Do not add to the promising-strategy queue or assign an empirical strategy grade. No live/trading-plan/schedule change.
 
 The previous paper's retained lesson is now explicit in [Codex research controls](../RESEARCH_CONTROLS.md): preserve frozen alternatives' evidence cutoffs and distinguish operations from comparative merit. That is a user-requested local process adaptation; neither document's internal instructions are treated as user commands.
 

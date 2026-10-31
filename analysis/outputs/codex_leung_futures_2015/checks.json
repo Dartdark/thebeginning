@@ -1,0 +1,23 @@
+{
+  "scope": "source formula and synthetic arithmetic only; no historical trading returns",
+  "source": "SSRN 2695405, uploaded November 25 2015 version, pp6,13,17",
+  "source_pdf_sha256": "dc5bd948d1eda42ac927d3e925ff9b7ee4d019e7d0266bfc4b214bc9a14acdae",
+  "code_sha256": "0465df03b61cea16944b0937ad0df1a25ff24cf26ba1867edb48a35736e9653d",
+  "parameters": {
+    "mu_p": 8.57,
+    "mu_q": 4.08,
+    "theta_p": 3.03,
+    "theta_q": 3.06,
+    "sigma": 1.63,
+    "tau": 0.2619047619047619
+  },
+  "synthetic_spot": 22.197951281441636,
+  "log_spot": 3.1,
+  "log_drift_threshold": 3.0027394209354115,
+  "eq_2_12_printed_greater_than_condition": true,
+  "actual_futures_drift": -3.0237380313932736,
+  "independent_finite_difference_ito_drift": -3.023738751041722,
+  "interpretation": "Eq2.12 greater-than direction needs mu_q>mu_p; it reverses for Figure4b parameters",
+  "same_measure_undiscounted_futures_drift": 0.0,
+  "generator_notation": "Objectives use historical P, but printed Eqs4.2-4.4 use pricing Q tilde drifts; numerical implementation unverified"
+}
