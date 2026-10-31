@@ -135,6 +135,23 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   cost/night accounting and failed gates. No place in personal,50K/150Kevaluation or50K/150Kfunded plans is earned.
   [Results](agents/codex/results/nocturne_20261030.md) · [Frozen assumptions](agents/codex/plans/nocturne_20261030.md).
 
+- [ ] **Monthly commodity momentum/carry double-sort — PARKED / NEEDS PAIRED DATA AND NAV AUDIT (2026-10-31), SSRN 2614241.**
+  Specific merit: prior-month momentum selects eight winners/eight losers; curve signal `ln(front/second)` narrows
+  to four longs/four shorts held one month. Proposed trend plus inventory/hedging premia may diversify a personal
+  futures book; that benefit is unmeasured. The December 2012 thesis claims 20.22% annual excess return/24.91%vol
+  over February 1979–October 2011 at 2x gross, before costs. Its $7.63 endpoint matches additive return accumulation,
+  not demonstrated compounded NAV; no author result independently reproduced. This specifies the broad commodity
+  storage/momentum family already noted in TIER_LIST; it does not reopen the failed CL/GC hedging-pressure trial.
+  Need a point-in-time broad commodity first/second-contract panel, executable clocks, roll/cash/short-weight rules,
+  native costs and integer sizing. Owned CL/GC OHLCV and the bounded free check do not supply these inputs.
+  Smallest next check **when genuinely new matching inputs arrive**: reconcile one formation/roll month with
+  identified maturities and self-financing quantities/cash, then a no-return 2018–22 coverage/power census.
+  Low-priority personal research only; monthly holds fail all four Apex homes as written. No proxy, stop-overlay
+  rescue, recurring unchanged acquisition loop, return trial or allocation. Separate rule from weekly basis reversal
+  below, sharing its paired-data prerequisite. Risk-method findings retained in execution reference E38.
+  [Full-source review](agents/codex/results/rad_double_sort_review_20261031.md) ·
+  [Evidence](agents/codex/evidence/rad_double_sort_20261031.md).
+
 - [ ] **Weekly commodity basis reversal — NEEDS FULL TEXT / PAIRED DATA (2026-10-29), SSRN5250499.**
   Merit: specific adjacent-maturity relative-return reversal claimed in the primary abstract, distinct from an
   outright price reversal; public secondary code defines a delayed weekly two-leg implementation. No net return

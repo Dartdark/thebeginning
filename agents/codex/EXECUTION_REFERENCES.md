@@ -593,6 +593,31 @@ Related: E09 cash/cost reconciliation, E15 tail risk, E35 fill-anchored exits an
   change alters outcomes and must pass the existing preregistration/trial/account gates.
 - Status: risk/execution diagnostic reference; no standalone candidate, new return test or plan/exit change.
 
+### E38 — Commodity stop overlays, exposure redistribution and return/NAV accounting
+
+Source: Hossein Rad, December 2012 EDHEC MSc thesis, SSRN 2614241; uploaded full 56-page PDF reviewed 2026-10-31.
+[Saved review](results/rad_double_sort_review_20261031.md), [feasibility sheet](evidence/rad_double_sort_20261031.md).
+Related: E09 cash/contract accounting, E15 tail risk, E36 nonguaranteed protection, E37 payoff/account survival.
+- Use: distinguish a daily-close calculation affecting the following day from an accepted intraday protective order.
+  Removing one position and redistributing its weight among survivors can preserve gross exposure and increase
+  concentration. It is a different experiment from holding the freed risk in cash. Record both trade removal and
+  exposure transfer, their fees and decision-to-fill clocks; reopening needs explicit state and weight rules.
+- Evidence: full-source inspection and deterministic arithmetic only. The source reports a 5% whole-book overlay
+  reducing 30-day 99% VaR 20.27%→13.76% and annual volatility 24.91%→22.47%, while annual excess return 20.22%→19.93%,
+  before costs. Preserve that reported risk reduction rather than saying every stop failed; no raw returns or
+  independent economic replication support it. Paired daily-mean p=0.079 does not test the VaR change's significance.
+- Accounting lesson: instrument log returns, portfolio simple/log returns, additive fixed-notional P&L and compounded
+  NAV are different quantities. Here Table 1's 663.66% sum gives 1+6.6366=7.6366, matching the author's $7.63 chart;
+  it is not reconciled compounded wealth. Exponentiating the sum also does not repair weighted long/short log
+  accounting. Reconcile actual quantities, variation margin, collateral, rolls, open marks and costs first.
+- Limits: monthly eight-position commodity book at 2x gross exposure is ineligible for the four Apex homes as written.
+  Selected thresholds, missing-return weight redistribution and ambiguous trigger/reopening details prevent an
+  execution saving or maximum-loss claim. The source's stop overlays are not evidence to remove current protection.
+- Prerequisites/next check for a separately justified project: identified contracts, both signal maturities and
+  availability clocks, exact trigger/weight/cash policy, executable next-day prices and native fees; reconcile one
+  formation/roll month before any return study. Non-positive prices cannot silently disappear from a log-return test.
+- Status: execution/risk/accounting reference retained; no new return trial, account placement or exit-policy change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

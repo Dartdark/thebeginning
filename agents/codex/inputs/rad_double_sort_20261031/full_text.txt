@@ -1,0 +1,2518 @@
+             Double-sort trading strategy on
+
+              commodity futures: performance
+
+       evaluation and stop-loss implementation
+
+                                              Master Thesis
+                           Master	  of	  Science	  in	  Financial	  Markets	  
+	  
+	  
+	  
+                                                        By:	  
+                                                      	  
+                                                Hossein RAD
+                                                           	  
+                                                           	  
+                                                           	  
+                                                           	  
+                                                   Supervisor:
+
+                                               Joëlle MIFFRE
+                                                           	  
+                                                           	  
+                                                           	  
+                                                           	  
+	  
+	  
+	  
+                                          EDHEC	  BUSINESS	  SCHOOL	  
+                                              December	  2012	  
+
+
+
+
+   EDHEC Business School does not express approval or disapproval concerning the opinions given in this paper which
+                                      are the sole responsibility of the author
+
+	                                                        i	  
+Abstract
+
+This	   master	   thesis,	   first,	   re-­‐examines	   the	   performance	   of	   the	   double-­‐sort	   trading	  
+
+strategy	   on	   commodity	   futures	   using	   the	   data	   from	   January	   1979	   to	   October	   2011.	  
+
+The	   double-­‐sort	   strategy	   is	   an	   active	   strategy	   that	   uses	   momentum	   and	   term-­‐
+
+structure	   signals	   to	   form	   a	   long-­‐short	   portfolio	   of	   commodity	   futures.	   Second,	   the	  
+
+performance	  of	  the	  strategy	  is	  studied	  before	  the	  beginning	  of	  the	  financial	  crisis	  at	  
+
+2007	   and	   compared	   to	   the	   performance	   of	   the	   strategy	   during	   the	   crisis,	   i.e.	   after	  
+
+2007.	  We	  find	  that	  the	  strategy	  performs	  better	  during	  the	  crisis.	  Third,	  in	  an	  effort	  to	  
+
+reduce	  the	  risk	  measures	  of	  the	  strategy,	  stop-­‐loss	  methods	  are	  introduced	  and	  added	  
+
+to	   the	   strategy.	   Four	   different	   stop-­‐loss	   methods	   are	   implemented:	   cumulative,	  
+
+exponentially	  weighted	  average,	  consecutive,	  and	  full-­‐portfolio	  stop-­‐loss.	  We	  find	  that	  
+
+none	   of	   these	   methods	   are	   able	   to	   reduce	   the	   risk-­‐measures	   of	   the	   strategy	  
+
+considerably.	  
+
+
+
+
+	                                                                  i	  
+Table of Contents
+ABSTRACT	  ....................................................................................................................................................	  I	  
+TABLE	  OF	  CONTENTS	  ..............................................................................................................................	  II	  
+TABLE	  OF	  FIGURES	  .................................................................................................................................	  III	  
+TABLE	  OF	  TABLES	  ...................................................................................................................................	  IV	  
+1.	  INTRODUCTION	  ....................................................................................................................................	  1	  
+2.	  LITERATURE	  REVIEW	  .........................................................................................................................	  3	  
+      2.1	  COMMODITY	  FUTURES	  MARKET	  ........................................................................................................................	  3	  
+      2.2	  RELATIONSHIP	  BETWEEN	  SPOT	  AND	  FUTURE	  PRICE	  ......................................................................................	  3	  
+         2.2.1	  Storage	  theory	  ................................................................................................................................................	  3	  
+         2.2.2	  Normal	  Backwardation	  ..............................................................................................................................	  6	  
+         2.2.3	  Combining	  storage	  and	  normal	  backwardation	  theory	  ..............................................................	  8	  
+      2.3	  COMMODITY	  TRADING	  STRATEGIES,	  TERM	  STRUCTURE,	  ROLL	  RETURNS,	  AND	  MOMENTUM	  SIGNALS	  11	  
+      2.4	  OTHER	  STUDIES	  ..................................................................................................................................................	  14	  
+3.	  DATA	  ......................................................................................................................................................	  15	  
+4.	  DOUBLE-­‐SORT	  STRATEGY	  ...............................................................................................................	  18	  
+      4.1	  METHODOLOGY	  ...................................................................................................................................................	  18	  
+      4.2	  PERFORMANCE	  OF	  FULL	  SAMPLE	  DATA	  ..........................................................................................................	  20	  
+      4.3	  PERFORMANCE	  OF	  THE	  DOUBLE	  SORT	  STRATEGY,	  PRE	  AND	  DURING	  THE	  CRISIS.	  ..................................	  23	  
+5.	  STOP-­‐LOSS	  METHODS	  .......................................................................................................................	  28	  
+      5.1	  DOUBLE-­‐SORT	  STRATEGY	  WITH	  STOP-­‐LOSS	  ..................................................................................................	  28	  
+      5.2	  METHODOLOGY	  ...................................................................................................................................................	  28	  
+         5.2.1	  Cumulative	  loss	  method	  ..........................................................................................................................	  29	  
+         5.2.2	  Exponentially	  weighted	  average	  stop-­‐loss	  method	  .....................................................................	  31	  
+         5.2.3	  Consecutive	  loss	  stop-­‐loss	  method	  ......................................................................................................	  32	  
+         5.2.4	  Full-­‐portfolio	  cumulative	  stop-­‐loss	  method	  ....................................................................................	  33	  
+      5.3	  PERFORMANCE	  OF	  THE	  STOP-­‐LOSS	  METHODS	  ..............................................................................................	  34	  
+         5.3.1	  Cumulative	  stop-­‐loss	  method	  ................................................................................................................	  34	  
+         5.3.2	  Exponentially	  weighted	  average	  stop-­‐loss	  method	  .....................................................................	  37	  
+         5.3.3	  Consecutive	  stop-­‐loss	  method	  ...............................................................................................................	  39	  
+         5.3.4	  Full-­‐portfolio	  stop-­‐loss	  method	  ............................................................................................................	  41	  
+6.	  SUMMARY	  AND	  CONCLUSION	  .........................................................................................................	  44	  
+7.	  BIBLIOGRAPHY	  ...................................................................................................................................	  48	  
+8.	  REFERENCES	  ...........................................................................................................................................	  I	  
+      8.1.	  DOUBLE-­‐SORT	  STRATEGY’S	  PERFORMANCE	  PRE	  AND	  DURING	  THE	  CRISIS	  WITH	  AND	  WITHOUT	  
+      CUMULATIVE	  STOP-­‐LOSS	  (13%	  THRESHOLD)	  .........................................................................................................	  I	  
+      8.2.	  	  DOUBLE-­‐SORT	  STRATEGY’S	  PERFORMANCE	  PRE	  AND	  DURING	  THE	  CRISIS	  WITH	  AND	  WITHOUT	  
+      EXPONENTIAL	  AVERAGE	  STOP-­‐LOSS	  (5%	  THRESHOLD,	  0.6	  EXPONENTIAL	  FACTOR)	  ......................................	  II	  
+      8.3.	  DOUBLE-­‐SORT	  STRATEGY’S	  PERFORMANCE	  PRE	  AND	  DURING	  THE	  CRISIS	  WITH	  AND	  WITHOUT	  
+      CONSECUTIVE	  STOP-­‐LOSS	  (5	  DAY	  THRESHOLD)	  .....................................................................................................	  III	  
+
+
+
+	                                                                                            ii	  
+Table of figures
+
+
+Figure	  1	  -­‐	  Contango	  commodity	  term	  structure	  .............................................................................	  4	  
+Figure	  2	  -­‐	  Backwardation	  commodity	  term	  structure	  .................................................................	  4	  
+Figure	  3	  -­‐	  The	  evolution	  of	  $1	  invested	  in	  double-­‐sort	  strategy	  compared	  to	  
+    benchmarks	  .........................................................................................................................................	  23	  
+Figure	  4	  -­‐	  Performance	  of	  the	  double-­‐sort	  strategy	  pre	  and	  during	  the	  crisis	  ................	  25	  
+Figure	  5	  -­‐	  Performance	  of	  the	  double-­‐sort	  strategy	  compared	  to	  S&P	  GSCI	  and	  S&P	  
+    500	  pre	  and	  during	  the	  crisis	  ......................................................................................................	  27	  
+Figure	  6	  -­‐	  Double-­‐sort	  trading	  strategy	  performance	  with	  and	  without	  cumulative	  
+    stop-­‐loss	  ................................................................................................................................................	  36	  
+Figure	  7	  -­‐	  Double-­‐sort	  strategy	  performance	  with	  and	  without	  exponentially	  
+    weighted	  average	  stop-­‐loss	  ..........................................................................................................	  38	  
+Figure	  8	  -­‐	  Double-­‐sort	  strategy's	  performance	  with	  and	  without	  consecutive	  stop-­‐loss
+    	  ...................................................................................................................................................................	  41	  
+Figure	  9	  -­‐	  Double-­‐sort	  strategy's	  performance	  with	  and	  without	  full-­‐portfolio	  stop-­‐
+    loss	  ..........................................................................................................................................................	  42	  
+
+
+
+
+	                                                                                      iii	  
+Table of tables
+
+Table	  1	  -­‐	  Performance	  of	  the	  double-­‐sort	  strategy	  using	  data	  from	  1979	  to	  2011	  .......	  21	  
+Table	  2	  -­‐	  Performance	  of	  the	  double-­‐sort	  strategy	  pre	  and	  during	  the	  crisis	  ..................	  24	  
+Table	  3	  -­‐	  Performance	  of	  the	  double-­‐sort	  strategy	  without	  stop-­‐loss	  and	  with	  
+    cumulative	  stop-­‐loss,	  13%	  and	  5%	  thresholds	  ...................................................................	  35	  
+Table	  4	  -­‐	  Performance	  comparison	  between	  13%	  threshold	  cumulative	  stop-­‐loss	  with	  
+    and	  without	  reopening	  ...................................................................................................................	  37	  
+Table	  5	  -­‐	  Exponentially	  weighted	  average	  stop-­‐loss	  and	  without	  stop-­‐loss	  strategies	  
+    performance	  comparison	  ..............................................................................................................	  38	  
+Table	  6	  -­‐	  Consecutive	  stop-­‐loss	  and	  without	  stop-­‐loss	  strategies	  performance	  
+    comparison	  ..........................................................................................................................................	  40	  
+Table	  7	  -­‐	  Full-­‐portfolio	  stop-­‐loss	  and	  without	  stop-­‐loss	  strategies	  performance	  
+    comparison	  ..........................................................................................................................................	  42	  
+
+
+
+
+	                                                                              iv	  
+	  
+
+
+
+1. Introduction
+	  
+       In the last decade, commodity and commodity investment have become popular and a
+
+separate asset class for investment purposes. According to a Barclays Capital survey of
+
+over 250 institutional investors, commodities institutional investment has risen from $18
+
+billion in 2003 to $250 billion in 2010. Nowadays, commodity market players are not
+
+limited to producers and consumers, traditional and alternative asset managers also include
+
+commodities in their portfolio more frequently. The existence of commodity risk premium
+
+has been at the center of debate since 1930. The attraction of commodity investment lies in
+
+different reasons. First, commodities are proven to have equity-like returns. Second,
+
+commodities have long been shown to be a natural hedge against inflation. Third, their
+
+considerably low correlation with other asset classes such as equities would help make
+
+well-diversified portfolios when included in the investment. (See (Bodie & Rosansky,
+
+1980); (Erb & Harvey, 2005); (Gorton & Rouwenhorst, 2004); (Chong & Miffre, 2010);
+
+(Baur & McDermott, 2010)). Other more recent researches have shown that commodity
+
+futures trading strategies are also capable of generating considerably high returns (Erb &
+
+Harvey, 2005) (Miffre & Rallis, 2006) (Basu & Miffre, 2012) (Fuertes, Miffre, & Rallis,
+
+2010). Such strategies mainly employ a combination of signals that are built on the
+
+foundation of the two main theories behind the variation of commodity future prices:
+
+Storage Theory (Working 1939) and Normal Backwardation (Keynes, 1930). However,
+
+long short strategies are based on the hedging pressure hypothesis or the theory of storage -
+
+not normal backwardation which implies that investors should be long only. Mainly,
+
+momentum, hedging pressure, and term structure signals are used for identifying
+
+commodity futures risk premiums and try to build a portfolio that captures such risk
+
+premiums. Fuertes, Miffre, and Rallis (2010) use an active strategy that uses both
+
+	                                           1	  
+	  
+momentum and term structure signals to build a profitable trading strategy. Using the data
+
+from 1979-2007, they prove the long-short portfolio resulted from the strategy generates
+
+abnormal high returns as high as 23.55%. Such results motivate asset managers to include
+
+this strategy in their portfolio. However, the global economy has experienced a strong
+
+downturn since 2008 due to first, the sub-prime crisis and now, the credit crisis. Some may
+
+argue that the significant high returns of such strategies would fade during a global
+
+economic turbulence. Thus, it would seem necessary to verify that whether the strategy is
+
+still capable of generating such results in years after 2007. The result of such comparison
+
+would also shed light on the performance of such strategies in different market conditions
+
+using real market data. Therefore, this study at first re-implements and re-examines the
+
+performance of the double-sort strategy using a dataset from 1979 to 2011.
+
+       Moreover, although the double-sort strategy (Fuertes, Miffre, and Rallis, 2010) has high
+
+risk to reward ratio, it would prove useful to try to decrease the absolute risk measures
+
+such as volatility and value at risk, which are nominally high. This study adds four
+
+different stop-loss methods to the double-sort strategy in an effort to achieve this goal.
+
+Different criteria are used to implement the stop-loss methods.
+
+       The rest of the paper is structured as follow: Chapter 2 reviews the existing literature on
+
+commodity markets and commodities investment strategies. Chapter 3 presents the
+
+methodology and results of the double-sort strategy and compares the performance of the
+
+strategy on pre and during crisis eras. In chapter 4, the stop-loss method is introduced and
+
+results of the four different stop-loss methods are discussed. Chapter 5 summarizes and
+
+concludes the findings.
+
+
+
+
+	                                                2	  
+	  
+
+
+
+
+2. Literature Review
+
+
+2.1 Commodity Futures Market
+
+       There are currently two related but separate major markets in which commodities are
+
+traded; the spot market (cash market) and the futures market. In the spot market physical
+
+commodities are bought and sold and the exchange of the product occurs at the same time
+
+that the transaction occurs. In contrast, in futures market future obligations are traded. The
+
+future contract obliges the participants to make or take delivery at some date in future
+
+(Garner, 2010).
+
+
+2.2 Relationship between spot and future price
+
+       The future contracts prices on commodities are almost always different from their spot
+
+price. Two major theories are available to explain this variation: storage theory and normal
+
+backwardation theory. The two theories date back as far as 1930.
+
+
+2.2.1 Storage theory
+
+       Due to cost of storage and delivery, the spot price is normally different from the futures
+
+price. Naturally, as the cost of storage cannot be negative, the spot price of a commodity
+
+would be cheaper than its futures price. Based on the same reasoning, the near-month
+
+expiring future contracts would be cheaper than the distant-month expiring future
+
+contracts. This normal market condition is generally known as contango (Figure 1).
+
+       However, in reality, it is observable that sometimes the spot price of a commodity is
+
+higher than its future price. Explaining this phenomenon with delivery and storage costs is
+	                                             3	  
+	  
+not straightforward. To resolve this issue, Kaldor (1939) has introduced the concept of
+
+convenience yield. The implicit revenue associated with stock holding is a simple
+
+definition of the convenience yield (Lautier, 2009):
+
+          “In normal circumstances, stocks of all goods possess a yield, measured in
+
+          terms of themselves, and this yield which is a compensation to the holder of
+
+          stocks, must be deducted from carrying costs proper in calculating net carrying
+
+          cost. The latter can, therefore, be negative or positive.” (Kaldor, 1939)
+
+       In other words, the usual condition where the price of the futures is higher than the spot
+
+price is only true when there is no disruption in the supply. Any shortage in the short-term
+
+supply would naturally push the spot prices higher than the futures price. Consequently,
+
+the price tends to fall as we go farther on the term structure curve towards the farther
+
+maturity future contracts. This scenario is referred to as backwardation (Figure 2).
+
+
+
+
+                                                                       	                                                                                  	  
+Figure	  1	  -­‐	  Contango	  commodity	  term	  structure	             Figure	  2	  -­‐	  Backwardation	  commodity	  term	  structure	  
+
+
+
+
+       Two other theories explaining the variations of future prices and their relation to storage
+
+and inventories are Working (1949) and Brennan (1958). Working (1933, 1948) has
+
+investigated the Chicago’s wheat market. He observes that when the difference between
+
+spot and futures prices, price of storage, is negative and large, the amount of wheat stored
+
+declines. Similarly, the amount stored rises when the price of storage is positive and large.
+
+
+	                                                                            4	  
+	  
+The graph showing this relationship is known as the Working Curve and explanation of the
+
+shape of the graph is called Supply of Storage Theory (Working, 1949).
+
+       Brennan and Williams (1989), Benirschka and Binkley (1995), and Brennan, Williams
+
+and Wright (1997) challenge Working’s argument that convenience yield results in
+
+negative carrying charges. These authors propose that the data aggregation creates the
+
+Working curve. Specifically, it is possible that for market reporting purposes stocks of
+
+commodities may be aggregated across different qualities and physical locations.
+
+Therefore during backwardation, there should be no sign of holding stocks, after stocks
+
+and prices are measured for the associated quality and physical location.
+
+       Moreover, as Brennan (1958) stated, one would have the opportunity to profit from a
+
+sudden increase in demand, if they hold inventories:
+
+         “The convenience yield is attributed to the advantage (in terms of less delay
+
+         and lower costs) of being able to keep regular customers satisfied or of being
+
+         able to take advantage of a rise in demand and price without resorting to a
+
+         revision of the production schedule.”
+
+Empirical tests of the traditional Theory of Storage examine the theory’s central
+
+assumption utilizing the convenience yield inferred from the (interest-adjusted) basis.
+
+Fama and French (1988) and Ng and Pirrong (1994), examine the Theory of Storage’s
+
+central assumption empirically. They use testable implications of the convenience yield to
+
+study the behavior of the spot and futures prices and their volatilities. They use data on
+
+metals, and their results are inline with the theory. However, because the inventory data is
+
+not used, as they use the futures data, their evidence is indirect. Moreover, when Brennan
+
+(1991) and (1994) used inventory data to test that theory, their finding was that the
+
+convenience yield is a decreasing and convex function of inventory for some commodities,
+
+including metals. There has been more recent evidence on this theory: Dinceler, Khokher
+
+and Simin (2005) for Gold, Copper, Crude Oil, and Natural Gas, and Carbonez, Nguyen,
+	                                       5	  
+	  
+and Sercu (2009) for Wheat, Corn, and Oats using weekly data from two different periods,
+
+1885-1935 and 1985-2005.
+
+
+
+
+2.2.2 Normal Backwardation
+
+       Why do the commodities futures markets exist in the first place? “The classic economic
+
+rationale for futures markets is that they facilitate hedging” (Chang, 1985). Commodity
+
+producers have to sell their production, even with a loss. Futures markets allow those who
+
+deal in commodities to obtain contracts through which the risk of price change would be
+
+transferred to those (speculators) who are willing to take it. Based on Keynes’ (1930) and
+
+Hicks’ (1939) theory of normal backwardation, the purpose behind using futures markets
+
+for hedgers is that they want to avoid uncertainty and risk. As everything has its price
+
+hedgers are willing to pay a significant premium to others who are willing to take the risk,
+
+i.e. speculators. This can be looked at as a kind of insurance. Based on Keynes theory the
+
+future prices are an estimate, and often not a precise one, of what the spot price will be on
+
+the date of the expiration of the future contract. His conclusion is based on the argument
+
+that the long (short) speculator profit by not buying a contract from the short (long) hedger
+
+unless they buy at a price below (above) the expected spot price in future.
+
+              “...In normal conditions the spot price exceeds the forward price i.e. there is
+
+              backwardation. In other words, the normal supply price on the spot includes
+
+              remuneration for the risk of price fluctuation during the period of production,
+
+              whilst the forward price excludes this.” (Keynes, 1930)
+
+       However, as opposed to market backwardation, the normal backwardation is not
+
+observable1. Cootner (1960) and Deaves and Krinsky (1995) note that there is a rather big
+
+	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  
+1	  “There	  are	  two	  components	  of	  market	  backwardation:	  the	  market	  consensus	  expected	  future	  spot	  
+price	  and	  a	  possible	  risk	  premium.	  While	  it	  is	  possible	  to	  observe	  market	  backwardation,	  it	  is	  
+impossible	  to	  observe	  normal	  backwardation	  because	  neither	  the	  expected	  future	  spot	  price	  nor	  the	  
+possible	  risk	  premium	  are	  observable”	  (Erb	  and	  Harvey,	  2005)	  
+	                                                                                                               6	  
+	  
+assumption in Keynes’ theory of normal backwardation. Keynes is assuming that hedgers
+
+are always long the underlying commodity, i.e. hedgers have the underlying commodity,
+
+and by selling the futures contract, they aim to lessen the negative risk of price
+
+fluctuations. Therefore, to persuade investors to buy the commodity futures, the future
+
+price is expected to rise over time. In this case, if backwardation holds when hedgers are
+
+net short the future contracts and contango holds when hedgers are net long future
+
+contracts, both backwardated and contango commodities might have risk premium.
+
+Bessembinder (1992) examines the return of sixteen nonfinancial futures over the time
+
+period from 1967 to 1989. He finds substantial evidence regarding the influence of net
+
+hedging on average returns. In other words, on average, the commodities showed positive
+
+excess return when the net position of hedgers was short in those commodities whilst
+
+commodities showed negative excess return when the net position was long in those
+
+commodities.
+
+       There have been other researches as an effort to verify normal backwardation theory.
+
+These researches show contradictory results and therefore neither confirm nor reject the
+
+theory. Dusak (1973), Bodie and Rosansky (1980), Richard and Sudaresan (1981),
+
+Bessembinder (1993) use either static or inter-temporal capital asset pricing model to
+
+examine the futures’ risk premium and all obtained contradictory results. The critiques of
+
+the theory say that, first, even if the mentioned premium exists, the chances are that it is
+
+not constant and positive. Second, by saying the hedgers are not always net short, they also
+
+attack the first assumption of the theory. Empirical studies also show contradictory results:
+
+for some commodities and different periods there may also be, an opposite so called,
+
+normal contango.
+
+       Kolb (1992), to test for normal backwardation, looked at 29 different future contracts
+
+and stated that 16 commodities had returns that were not statistically significant, 9
+
+commodities exhibited statistically significant positive returns, and 4 commodities had
+
+	                                             7	  
+	  
+statistically significant negative returns. Thus, he concluded that normal backwardation is
+
+not normal.
+
+
+2.2.3 Combining storage and normal backwardation theory
+
+       Having stated that neither of the two above theories have been solidly verified and
+
+proven the other wrong, there have been efforts, for example Cootner, (1967), Hirshleifer’s
+
+(1990), and Khan et al. (2008), on combining the two theories to help explaining the
+
+different situations in commodities futures markets. The generalized hedging pressure
+
+hypothesis of Hirshleifer (1990) relates the viewpoints of Keynes and Working, where
+
+hedging pressure is the natural tendency of market participants to be net long (Miffre and
+
+Basu, 2009).
+
+       Cootner (1960) and Deaves and Krinsky (1995) state that both backwardated and
+
+contango commodities could have the risk premium mentioned by Keynes in one scenario.
+
+That scenario is that when the net position of hedgers is short we see backwardation and,
+
+vice versa, when the net position of hedgers is long we see contango. Bessembinder (1992)
+
+found evidence to support this theory. He found that for 16 non-financial commodities,
+
+over the time period 1967 to 1989, the hedging pressure (the degree of net hedging) has
+
+influenced the returns. On average, commodities that hedgers were net short had positive
+
+excess return and commodities that hedgers were net long had negative excess return
+
+during the period. De Roon, Nijman and Veld (2000) also provide similar results regarding
+
+the existence of risk premium based on hedging pressure of producers and consumers.
+
+       Carter and Giha (2007) utilize the statistical data that Working had used originally to re-
+
+examine his theory. To eliminate the potential geographical aggregation issues, they only
+
+use Chicago stocks. They also take into account the different grades of wheat to eliminate
+
+any further possible problems. Supporting the original Working curve’s shape while
+
+challenging the aggregation arguments’ influence on the shape of the curve, they find that
+
+wheat stocks were backwardated in a single location.
+	                                                8	  
+	  
+                     With respect to Workings original data, their findings are definitive. However, two
+
+issues remain. First, it can still be doubted whether the rather old data (1920s and 1930s)
+
+can be validly generalized and be used in the current commodity markets. Second issue is
+
+the limitation of Carter and Giha’s analysis, as they only use the wheat market. They do
+
+not provide proof that the wheat market’s results can be generalized to other important
+
+commodity markets. Since, storage under backwardation has a great influence on
+
+commodity storage models, other researches has been done on this subject. (See below for
+
+Joseph, Irwin, and Garcia, 2011).
+
+                     Joseph, Irwin, and Garcia (2011) come up with evidence on stock holding when
+
+backwardation holds. Using weekly stock data from KCBOT2 wheat and CBOT3 wheat,
+
+soybeans, and corn from 1990 to 2010, they investigate the existence of Working curve
+
+with spot and future prices. They process the commodities on various markets. They
+
+assess, first, the conventional measure of backwardation, future less spot price, and, next,
+
+the futures spread measure. They measure against the local stock held at various physical
+
+delivery locations. Based on their results, all four commodities that they have tested show
+
+signs of storage under backwardation at delivery locations. However, they state identifying
+
+the shape of the curve is more complicated.
+
+                     The results from the analysis of commodities across different markets provide evidence
+
+for storage under backwardation at delivery locations for all four commodities. However,
+
+they state that exact form of the Working curve is less straightforward to identify.
+
+                     De Roon, Nijman, and Veld (2000) present a simple model in spirit of Mayers (1976),
+
+Stoll (1979), and Hirshleifer (1988, 1989) in which agents face multiple sources of
+
+nonmarketable risks. The model implies that future risk premium depends on both own-
+
+market and cross-market hedging pressure. They gather empirical evidence from 20 futures
+
+	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  
+2	  Kansas City Board of Trade	  
+3	  Chicago Board of Trade	  
+
+	                                                                                                                                                                                                                                 9	  
+	  
+markets and divide them into four groups: financial, agricultural, mineral, and currency.
+
+They conclude that after controlling for systematic risk, both the futures own hedging
+
+pressure and cross-hedging pressure from within the group significantly affects the future
+
+returns. They show that the effects remain significant after controlling for a measure of
+
+price pressure and also that hedging pressure also contains explanatory power for returns
+
+on underlying asset.
+
+
+
+
+       Gorton, Hayashi, and Rouwenhorst (2012) preform a thorough study on commodity
+
+future returns. They introduce a simple two-period model that integrates the Theory of
+
+Storage and the Theory of Normal Backwardation. Using a dataset on 31 commodity
+
+futures and physical inventories between 1971 and 2010, they show that inventory levels
+
+affect the basis 4 and risk premium. They preform two tests in order to verify the
+
+hypothesis; first they regress the excess return (whose expected return is the risk premium)
+
+on lagged inventory levels and second, they show that inventory levels can be used as a
+
+signal to form a portfolio. This signal significantly spreads the portfolio returns, with
+
+portfolios that contain low-inventory commodities earning higher returns. They also show
+
+that price based signals such as futures basis, prior future returns, prior spot returns and
+
+spot price volatility reflect the state of inventory and are informative about the commodity
+
+futures risk premium. Based on their findings, building a portfolio using commodities with
+
+high past returns and relatively high basis outperforms portfolios using commodities with
+
+low past return and relatively low basis. Their final contribution is to characterize the
+
+behavior of market future markets’ participants in response to inventories. Since researches
+
+have linked “hedging pressure”, measured by the relative size of positions held by
+
+producers, to the risk premium, in empirical implementations of the Theory of Normal
+
+Backwardation, this contribution could be important. They show that the positions of
+
+	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  
+4	  The basis is defined as the difference between the current spot price and the contemporaneous futures price.
+
+	                                                                                                                                                                                                                               10	  
+	  
+traders are contemporaneously correlated with inventories and futures prices. However,
+
+They find no evidence to support the correlation between these positions and subsequent
+
+commodity futures returns.
+
+
+2.3 Commodity trading strategies, term structure, roll returns, and
+momentum signals
+
+       Term structure, in general, depicts the relationship between prices at different
+
+maturities. In commodities, backwardation and contango can be interpreted using the term
+
+structure of commodities. Also, the degree of the backwardation and contango can be
+
+viewed using the term structure. As stated earlier, an upward sloping term structure of
+
+future prices is associated with contango, where the price of the future contract rises as the
+
+maturity increases. Similarly, a downward sloping term structure shows backwardation,
+
+where the price of the future contact falls as the maturity increases. This introduces
+
+possibility to take advantage of the roll returns5.
+
+       Jegadeesh and Titman (1993), although not directly connected to commodity
+
+investment, examine a variety of momentum strategies and document that strategies that
+
+buy stocks with high returns over some period and sell stocks with poor returns over the
+
+same time period are profitable. They find that the profitability of these strategies is not
+
+due to their systematic risk or to delayed stock price reactions to common factors. Their
+
+momentum strategies on stock markets have been adopted by different researches on
+
+commodities futures market and are the foundation of momentum signal trading strategies
+
+on commodities market. (Erb and Harvey, 2005; Miffre and Rallis, 2006; Fuertes, Miffre,
+
+and Rallis, 2010)
+
+       Erb and Harvey’s (2005) contribution to commodity trading strategies is notable. They
+
+put some doubt on the predictability of commodity returns over time. They argue that
+
+	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  
+5	  	  “The roll return is defined as the difference between a commodity future’s spot return and excess return,
+and the term structure of commodity futures prices is the driver of the roll return” (Erb and Harvey, 2005).	  
+	                                                                                                                                                                                                                               11	  
+	  
+historically commodity futures have shown performance similar to that of equities.
+
+However, over time, the return pattern has changed and therefore the common risk factors
+
+are unable to explain the changes over time. They also challenge the inflation hedge
+
+property of commodities by saying that the hedge is inconsistent with unexpected inflation.
+
+Also, they argue than the weighting allocation of portfolios of commodity futures is the
+
+main reason behind historically high average returns of them. As evidence, they say that a
+
+portfolio that contains equally weighted commodity futures and contains only long
+
+positions would have had a return of 0% over the last 25 years. In contrast, they provide
+
+evidence that tactically allocating assets using commodity future contracts would yield
+
+distinct benefits. They employ momentum and term structure signals to tactically allocate
+
+assets to commodity futures. They conclude that between long-only and tactical allocation
+
+strategies, the latter is preferred as it generates higher average returns while having lower
+
+risk.
+
+       Miffre and Rallis (2006) use momentum and contrarian strategies to build a profitable
+
+portfolio of commodity futures. They test for the presence of short-term continuation and
+
+long-term reversal in commodity future prices. The momentum strategies are very simple.
+
+They buy the commodities that have preformed well in the recent past while sell the
+
+commodity futures that have underperformed in the same time period. The contrarian
+
+strategies do the exact opposite. They buy the commodity futures that underperformed in
+
+the distant past, sell the commodity futures that outperformed. Miffre and Rallis (2006)
+
+form a long short portfolio and hold it for periods ranging from 2 to 5 years. To put this
+
+differently, they test to see if the short-term price continuation and the long-term mean
+
+reversion identified by Jegadeesh and Titman (1993, 2001) and De Bondt and Thaler
+
+(1985) in equity markets are observable in commodity futures markets. While the
+
+contrarian strategies do not prove profitable, they identify 13 profitable momentum
+
+
+
+
+	                                            12	  
+	  
+strategies. Momentum strategies being profitable are inline with Erb and Harvey’s (2005)
+
+findings.
+
+       To capture the risk premium of commodity returns, Miffre and Basu (2009) explore a
+
+trading strategy on commodities futures market which takes advantage of the hedging
+
+pressure. Based on the generalized hedging pressure hypothesis of Hirshleifer (1990), they
+
+construct a portfolio in which commodities are selected based on the open interest of either
+
+hedgers or speculators. They then combine the two selection methods to form an
+
+alternative double-sort trading strategy. Using a cross sectional dataset for 27 commodity
+
+futures from 1992 to 2011, their empirical results support the hypothesis that hedging
+
+pressure is a systematic factor in determining the commodity futures risk premium, with
+
+finding positive and significant risk premiums. They also find a positive relationship
+
+between hedging pressure risk premium and the lagged-volatility of equally weighted
+
+portfolio of all commodities. Moreover, they find that the hedging pressure risk premiums
+
+diversify equity risk better than long-only commodity portfolios. However, this
+
+diversification comes at the cost of losing inflation-hedge property of commodities (Bodie
+
+and Rosansky 1980; Bodie, 1983). Finally, they report that the hedging pressure risk
+
+premiums explain the performance of active commodity strategies better than long-only
+
+commodity benchmarks such as S&P GSCI.
+
+       Fuertes, Miffre, and Rallis (2010) employ an active double sort strategy that combines
+
+the momentum and term structure signals to build a profitable portfolio on commodity
+
+futures. They expand on the term structure-only strategy of Erb and Harvey (2005) by
+
+analyzing the term structure profits to the roll-return definition, the frequency of
+
+rebalancing of the long-short positions and the date of portfolio formation. They also
+
+provide an in-depth analysis of the risk, performance, and trading costs of each of the
+
+momentum-only, term structure-only and combined portfolios. They find that combining
+
+the two strategies, i.e. momentum and term structure, considerably enhances the
+
+	                                             13	  
+	  
+performance of either of the individual single-sort strategies. They also suggest that these
+
+strategies, due to the very low correlation of their return with those of other asset classes,
+
+are excellent candidates to increase diversification of portfolios.
+
+
+2.4 Other Studies
+       Egelkraut, Woodard, Garcia, and Pennings (2005) look at a different aspect of the
+
+portfolio formation; leverage. Their work is an extension of previous works that have
+
+studied the effects of including commodities in portfolios. They use data from 1994 to
+
+2003 on one index and nine commodity futures. The new aspect of their research is to
+
+study the influence of including leverage into portfolio optimization. Their first finding is
+
+that using or not using leverage does not affect the performance of the actual strategy.
+
+However, if restriction on investment behavior is forced the performance of levered and
+
+collateralized strategies differ. The performances of strategies that use or not use leverage
+
+are similar and using leverage would not cause a margin call number so high that disrupts
+
+the strategy. They also find that rebalancing the portfolio more frequently does not always
+
+improve the performance of the strategy.
+
+
+
+
+	                                            14	  
+	  
+
+
+
+
+3. Data
+
+       The dataset from datastream international, which is used to conduct this research,
+
+consists of daily returns and roll-returns on 37 commodity futures from January 1, 1979 to
+
+October 31, 2011. The list of 37 commodities consist of 10 metal commodity futures
+
+(aluminum, copper, gold, lead, nickel, palladium, platinum, silver, tin, zinc), 4 livestock
+
+commodity futures (feeder cattle, frozen pork bellies, lean hogs, live cattle), 6 energy
+
+commodity futures (Brent crude oil, crude oil, gas oil, heating oil, natural gas, unleaded
+
+gasoline), 13 agricultural commodity futures (cocoa, coffee, corn, cotton, oats, orange
+
+juice, soybean meal, soybean oil, soybeans, sugar, wheat Kansas City, wheat CBOT, white
+
+wheat), the futures on milk and lumber and two non overlapping diammonium phosphate
+
+contracts. To avoid survivorship bias, contracts that started trading after January 1979 or
+
+were delisted before January 2007 are included. The total sample size ranges from a low of
+
+22 contracts at the beginning of the sample period to a peak of 35 contracts from July 1997
+
+onwards.
+
+           !
+       If 𝑃! is the closing price of commodity j at day i, the return of the commodity j at day i
+
+is defined as follows:
+
+                                                              !
+                                           !              !!
+                                         𝑟!    = ln       !            (1)
+                                                      !!!!
+
+
+
+
+	                                               15	  
+	  
+                  !                                                                     !
+       Also, if 𝑁𝐹! is the nearest future closing price of commodity j at time i and 𝑆𝐹! is the
+
+second nearest future contract’s closing price on the commodity j and time i, the roll return
+
+is defined as follows:
+
+                                                           !
+                                            !            !"!
+                                        𝑟𝑜𝑙𝑙! = ln         !   (2)
+                                                         !!!
+
+
+
+       The factor identifying the roll return is term structure of commodity futures prices.
+
+There are three different scenarios possible. First, when futures prices and spot prices are
+
+the same, or in other words we have an absolutely flat term structure of futures prices, we
+
+should have the same excess and spot return. Second, when spot prices are above the future
+
+prices, then excess returns should be above spot returns. Last, when spot prices are lower
+
+than future prices, then excess returns should be lower than spot returns. To further
+
+illustrate roll returns, an example from Erb and Harvey (2005) based on the price of crude
+
+oil futures is given. The crude oil future price drops at the beginning of June 2004, as the
+
+maturity of the future contract rises. July 2004 future contract was priced at $40.95 per
+
+barrel and $36.65 per barrel for June 2005 contact, which gives the definition of market
+
+backwardation. Assuming the spot price to be equal to the nearest future contract price,
+
+going long the July 2005 oil contract would yield a roll return of 14% (ln($40.95/$36.65)
+
+= 13.8%). This definition is directly extracted from Erb and Harvey (2005) and would be
+
+a measure for the degree of backwardation and contago of commodities. To minimize the
+
+possible liquidity issue, the strategy would trade the nearest future contract and hold it until
+
+the end of the month prior to its maturity and roll to the second-nearest future contract
+
+(Fuertes, Miffre, and Rallis, 2010).
+
+       The strategy assumes the investor holds a fully collateralized long and a fully
+
+collateralized short sub-portfolio. As the same collateral is used for both long and short
+
+sub-portfolios, the portfolio of long and short positions are therefore, by definition, 50%
+
+collateralized. In other words, the investor is using a leverage ratio of 2 in this strategy.
+
+	                                              16	  
+	  
+The return of the final portfolio at day i is simply calculated as the return of the long
+
+portfolio minus the return of the short portfolio (Gorton and Rouwenhorst, 2006) as
+
+follows:
+
+                       𝑅! = 𝐿𝑜𝑛𝑔  𝑃𝑜𝑟𝑡𝑓𝑜𝑙𝑖𝑜 ! 𝑠  𝑅! − 𝑆ℎ𝑜𝑟𝑡  𝑃𝑜𝑟𝑡𝑓𝑜𝑙𝑖𝑜 ! 𝑠  𝑅!   (3)
+
+       The total return of the strategy from day 1 to day n is simply the sum of all returns (the
+
+log returns are linear and can be added together):
+
+                                                          !
+                                     𝑅!"#$"%&' =          !!!(𝑅! )     (4)
+
+       The amount held as collateral is used to cover any possible margin call and is also
+
+assumed to be earning interest at the risk free rate. The performance is measured and
+
+reported as the excess return, which will eliminate the need to use a proxy for the risk free
+
+rate. However, any possible margin call payment will, in practice, be excluded from the
+
+collateral and therefore not earn interest anymore. This research underestimates the
+
+performance of the strategy by the amount of interest earned on the collateral minus the
+
+amount used for any margin call payments. If the strategy loses more than 50% in total,
+
+there would be a need for additional money to pay the margin calls.
+
+	  
+
+
+
+
+	                                               17	  
+	  
+
+4. Double-sort Strategy
+
+
+
+4.1 Methodology
+
+       Implementing trading strategies on equity markets that select their portfolio based on
+
+momentum signals have been studied extensively and shown to generate abnormal return
+
+(Jegadeesh and Titman, 1993, 2001). It has also been proven that such strategies could be
+
+used to generate high returns on commodity futures markets Miffre and Rallis (2007).
+
+       Although it may seem that the two selection criteria, selection based on momentum and
+
+selection based on roll-return, are somehow overlapping and would both result in similar
+
+short-list of commodities as outcome, Fuertes, Miffre, and Rallis (2010) have shown the
+
+methods have rather low correlation (correlation between 10.92% and 56.96%). This
+
+encourages implementing and studying this double-sort strategy for various reasons such
+
+as generating returns and risk diversification.
+
+       Double-sort strategy based on roll return and momentum signals on commodity futures
+
+market has been implemented in Fuertes, Miffre, and Rallis (2010). This research
+
+implements a strategy identical to that of the mentioned paper. The portfolio consists of
+
+long and short positions. A short-list of commodities is used to form a portfolio at any
+
+given time. This short-list is derived as a result of sorting all the available commodities on
+
+two different levels. On the first level, the commodities are sorted based on their average
+
+momentum return during the ranking period (R). Using the results, the commodities are
+
+divided into three groups. The first group, winner, contains the 8 commodities with highest
+
+average return during the ranking period. The second group, loser, contains the 8
+
+commodities with the lowest average return during the ranking period. The third group,
+
+which are commodities with average return lower than the winner group but higher than
+
+
+	                                             18	  
+	  
+the loser groups are ignored. Next, the second sort based on the roll-returns are applied
+
+which further narrows down the outcome of the first sort. We start with sorting the winner
+
+group based on the commodities average roll-returns during the ranking period (Basu and
+
+Miffre, 2012). The 4 commodities with the highest roll-return are then labeled as winner-
+
+high and are used to form the long positions in the final portfolio. Similarly, the 4
+
+commodities with the lowest roll-return, loser-low, are selected from the loser group and
+
+form the short positions of the final portfolio. The rest of the commodities from the first
+
+sort are ignored and don’t play a role in the portfolio formation. Thus, the final portfolio
+
+consists of 4 long positions, winner-high, and 4 short positions, loser-low. This portfolio is
+
+then held for the holding period (H). No rebalancing would occur on this portfolio during
+
+the holding period.
+
+       At any day, if for any reason no return is available for a certain commodity that is
+
+included in the portfolio at that time, the weight of that specific commodity is distributed
+
+evenly among other commodities available in the portfolio and the return of the portfolio is
+
+calculated accordingly.
+
+       The order of the sort, i.e. first sort based on momentum or first sort based on roll-
+
+returns, would not change the results meaningfully (Fuertes, Miffre, and Rallis, 2010) and
+
+therefore this research has focused on the strategy which sorts firstly based on momentum
+
+and secondly on roll-returns.
+
+       Fuertes, Miffre, and Rallis (2010) have tested different ranking and holding periods and
+
+concluded that choosing ranking period and holding period equal to one month would
+
+maximize the performance. We, therefore avoid testing this theory again and use holding
+
+period and ranking periods of 1 month to give the best results.
+
+       The long and short sub-portfolios are independently equally weighted at the formation
+
+date. The strategy, to avoid unnecessary rebalancing costs, allows weights to evolve based
+
+on the performance of each commodity involved in the portfolio formation. To do so, after
+	                                       19	  
+	  
+the return of the portfolio is calculated at each day, the new position weights are calculated
+
+based on the return of each of the commodities that are available in the portfolio and their
+
+contribution to the final portfolio’s return for that day. The position weights are then
+
+updated accordingly. Consequently, commodities that have lost value during the trading
+
+day would be less weighted in the tomorrow’s portfolio and commodities that have gained
+
+value during the trading day would weight more in tomorrow’s portfolio. At the end of
+
+each month and after the commodities are resorted and the new portfolio is formed, the
+
+portfolio would once again be equally weighted.
+
+       The strategy is tested in two different stages. For the first stage, the complete dataset,
+
+from January 1, 1979 to October 31, 2011, is used. This would allow examining the
+
+strategy in full and studying the performance of the double-sort strategy on commodity
+
+futures throughout a period of more than thirty years. It would give a dependable
+
+conclusion on whether such strategy is profitable in general and in long-term. This strategy
+
+has already been tested with data going up to 2007 (Fuertes, Miffre, and Rallis, 2010).
+
+       The second stage test is one of main purposes of this study; to check the performance of
+
+the strategy on different market conditions. For this stage, the data is divided into two
+
+different categories: pre-crisis and during-crisis. Data from January 1, 1979 to January 31,
+
+2007 is used to calculate the strategy’s performance before the recent financial crisis starts.
+
+For the second category, the data from February 1, 2007 to October 31, 2011 is used which
+
+would allow the comparison of the strategy’s performance before and during the recent
+
+financial crisis. It is worth noting that, the data used in the second stage includes the sub-
+
+prime crisis of 2008 and the more recent and ongoing liquidity crisis.
+
+
+4.2 Performance of full sample data
+
+       Table 1 illustrates the summary statistics when data from January 1,1979 to October 31,
+
+2011 is used to preform the double sort strategy. The table shows the performance of the
+
+long, short, and combined portfolios separately. The strategy yields a positive return of
+	                                        20	  
+	  
+20.22% per annum6 throughout the dates February 1, 1979 and October 31, 2011. Note that
+
+the January 1979 data is used for ranking the commodities and forming the initial portfolio
+
+and have not been included in the results. This return is both economically and, with a t-
+
+value of 4.58, statistically significant at 95% confidence interval. During this time the long
+
+and short sub-portfolio have generated a return of 12.28% and 7.94%7 respectively. The
+
+strategy has an annual volatility of 24.91%. The long sub-portfolio has a slightly higher
+
+annual volatility, 20.54%, compared to the short sub-portfolio with 19.05%. Another
+
+meaningful statistic to consider is downside volatility. Downside volatility is calculated as
+
+the volatility of negative returns. The strategy shows 17.13% as for the downside volatility
+
+with 14.52% for the long and 13.15% for the short sub-portfolios. The “reward to risk” and
+
+“sortino” ratios of the portfolio are 0.81 and 1.18 respectively.
+
+
+
+
+                                                                                                                                                                                                                                            	  
+                                                                    Table	  1	  -­‐	  Performance	  of	  the	  double-­‐sort	  strategy	  using	  data	  from	  1979	  to	  2011	  
+
+	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  
+6	  Return is annualized on actual/actual basis.	  
+7
+  Since the short positions would generate positive returns when their mathematical return is negative, the
+final return is reported in this report rather than the mathematical return.
+
+	                                                                                                                                                                                                                                 21	  
+	  
+                                                                                                                                                                                                                                     	  
+
+                     In the double sort strategy, the portfolio consists of long and short positions at the same
+
+time. Out of the 20.22% total return per annum of the strategy, the long positions and short
+
+positions return 12.28% (60.7% of total return) and 7.94% (39.3% of total return) annually.
+
+Thus, even with the same number of long and short positions in the final portfolio at all
+
+times the strategy generates the higher percentage of its performance out of available long
+
+positions in the portfolio rather than short positions. Moreover, the annual volatility of the
+
+long and short sub-portfolios is 20.54% and 19.05% respectively, which are both below the
+
+final portfolio’s annual volatility of 24.91%. However, the reward to risk and sortino ratios
+
+show that including long and short positions in the portfolio at the same time improves the
+
+risk-adjusted investment over any of the sub-portfolios individually. The reward to risk
+
+ratio of long, short and combined portfolio are 0.6, 0.42, and 0.81 respectively; similarly,
+
+0.85, 0.6, 1.18 as for the sortino ratios of the long, short, and combined portfolio.
+
+                     Figure 3 shows the $1 evolution graph and compares it to S&P GSCI8 (Goldman Sachs
+
+Commodity Index) and S&P500 equity index as two benchmarks. $1 investment in the
+
+double sort strategy on February 1, 1979 would have evolved into $7.63 by the end of
+
+October 2011.
+
+
+
+
+	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  	  
+8
+ Note that the S&P GSCI is not available until January 8, 1991. For the sake of comparison, the initial dollar
+value invested in S&P GSCI is set equal to the return of the double sort strategy at the beginning of the index
+availability.
+	                                                                                                                                                                                                                                 22	  
+	  
+
+
+
+
+                                                                                                                                               	  
+           Figure	  3	  -­‐	  The	  evolution	  of	  $1	  invested	  in	  double-­‐sort	  strategy	  compared	  to	  benchmarks
+
+
+
+
+4.3 Performance of the double sort strategy, pre and during the crisis.
+
+       Is the high performance of double sort strategy due to the fact that commodity prices
+
+have been in an uptrend for a long period of time? Does this performance fade away within
+
+the financial crisis and, consequently, the drop of commodity prices? Although this may
+
+be probable for long-only investments, this strategy is using both long and short positions
+
+to form a portfolio. In this section, in order to shed light on the performance of such
+
+trading strategies, we would examine the performance of the double-sort strategy during
+
+different market cycles.
+
+       As explained in the methodology, the data has been separated into two different
+
+categories; first, data from January 1, 1979 up to January 31, 2007, which hereafter is
+
+called pre-crisis era and second, data from February 1, 2007 to October 31, 2011, which is
+
+referred to as crisis era. The result of this comparison will show how a specific long-short
+
+strategy, double-sort strategy on commodity futures, would preform both in an uptrend
+
+market condition and in one of the most serious economic downtrends in recent history.
+
+       The long-short strategy, by definition, should be able to preform well in both uptrends
+
+and downtrends with long positions making profit as the prices rise and the short positions
+
+	                                                                       23	  
+	  
+as the prices fall. Table 2 and Figure 4 summarize the results for the pre and during the
+
+crisis periods. Not surprisingly, the double-sort strategy yields a positive annual return of
+
+17.12% in the pre-crisis era. The same strategy interestingly generates a considerable
+
+positive return of 34.50% per annum during the crisis. This return is both economically and
+
+statistically significant at 95% confidence level. The volatility of the strategy rises from
+
+24.36% for pre-crisis to 27.92% during the crisis. However, the reward to risk and sortino
+
+ratios show that the higher return more than compensates for the higher risk associated
+
+with the crisis. Reward to risk and sortino ratios are 0.7 and 1.02 for the pre-crisis and 1.24
+
+and 1.83 for the during-crisis respectively. Downside volatility has also risen from 16.85%
+
+to 18.88% as we move from pre-crisis to the crisis period.
+
+
+
+
+                                                                                                                                      	  
+                Table	  2	  -­‐	  Performance	  of	  the	  double-­‐sort	  strategy	  pre	  and	  during	  the	  crisis
+
+
+
+
+       During the same time, the S&P GSCI shows a 110% increase in return from 4.34%
+
+before-crisis to 9.10% during-crisis while the double sort strategy shows a slightly less
+
+percentage rise in return with a 102% increase. However, the reward to risk and sortino
+
+	                                                                     24	  
+	  
+ratios of the double sort strategy show 77% and 79% improvement compared to 41% and
+
+39% of the benchmark. This means that during the crisis the double-sort strategy increases
+
+its risk-adjusted performance more than S&P GSCI does. The double-sort strategy’s
+
+increase in the risk measures is more than compensated by the increase in the return. The
+
+above results are due to the fact that long-short strategies generate higher returns in volatile
+
+market conditions. The annual volatility of the S&P GSCI has risen from 19.34% before
+
+the crisis to 29.1% during the crisis.
+
+       A correlation study would help explain the results further. The correlation of double sort
+
+strategy and S&P GSCI as a commodity index is 13.23% before the crisis. Interestingly
+
+this correlation drops to -9.75% during the crisis, i.e. from February 1, 2007 to October 31,
+
+2011. According to this result, it is safe to conclude that although both the returns of the
+
+double sort strategy and S&P GSCI have risen more than 100% as the crisis appears, the
+
+higher double sort strategy is not correlated with the climbing of the benchmark.
+
+
+
+
+                                                                                                                                        	  
+                 Figure	  4	  -­‐	  Performance	  of	  the	  double-­‐sort	  strategy	  pre	  and	  during	  the	  crisis
+
+       It would also be interesting to study the performance of the double sort strategy based
+
+on the long and short positions available in the portfolio individually. As for the pre-crisis
+
+era, with a return of 9.63% per annum, the long positions are responsible for 56.25% of the
+
+	                                                                      25	  
+	  
+portfolio’s total performance while at the same time the short positions have yielded 7.49%
+
+per annum. During the crisis, the long positions are generating 67.9% of the strategy’s total
+
+return. Despite the initial feeling that promotes the higher role for the short positions in
+
+generating the total performance, the short positions have contributed to 32.1% of the total
+
+performance, which has fallen from 43.75% in the pre-crisis period.
+
+       Also comparing the double-sort strategy to S&P 500 equity index as a second
+
+benchmark would be useful. As shown in figure 5, the S&P 500 returns are 7.83% and -
+
+2.83% pre and during the crisis. This is significantly below the return of the double-sort
+
+strategy. Moreover, the Annual volatility and downside volatility of the benchmark is
+
+comparable to those of the double-sort strategy, leaving the benchmark’s risk-adjusted
+
+performance far below that of the double-sort strategy. The pre-crisis risk to reward ratio
+
+of the benchmark is 0.59 compared to 0.7 for the double-sort strategy. Similarly, the
+
+sortino ratio of the benchmark is 0.82 is below that of the double-sort strategy with 1.02.
+
+The difference in the performance between the strategy and the benchmark becomes bigger
+
+as the crisis emerges. In the crisis, the reward to risk ratio and sortino ratio of the
+
+benchmark are -0.11 and -0.14 while for the double-sort strategy the ratios are 1.24 and
+
+1.83 respectively.
+
+       As results show, the double sort strategy is a profitable strategy not only during the
+
+periods when the market is preforming well but also in periods of crisis. The strategy also
+
+outperforms the S&P GSCI and S&P 500 in both return and risk-adjusted return
+
+considerably. Figure 5 gives a comparison of double-sort strategy with S&P GSCI and
+
+S&P 500 as two benchmarks. The strategy’s performance improves notably in the crisis era
+
+and therefore, it’s safe to conclude that the strategy is profitable during both upward and
+
+downward market conditions. Importantly, during the crisis, when other asset classes such
+
+as equity tend to preform badly, the long-short double-sort strategy on commodities futures
+
+
+
+	                                             26	  
+	  
+can generate high returns. Therefore, it’s valuable to include such strategy in ones
+
+investment portfolio.
+
+
+
+
+                                                                                                                                                                                     	  
+Figure	   5	   -­‐	   Performance	   of	   the	   double-­‐sort	   strategy	   compared	   to	   S&P	   GSCI	   and	   S&P	   500	   pre	   and	   during	   the	  
+crisis	  
+
+	                                                         	  
+
+
+
+
+	                                                                                     27	  
+	  
+	  
+
+
+5. Stop-loss Methods
+
+5.1 Double-sort strategy with stop-loss
+
+       As discussed the double-sort strategy presents a profitable trading strategy on
+
+commodities futures market, both on a increasing and decreasing market conditions. The
+
+risk-adjusted performance is also high enough to motivate investors to include such
+
+strategy in their final portfolio both for generating returns and diversification. However,
+
+the risk numbers in isolation are higher than those of benchmarks such as S&P GSCI and
+
+S&P 500. If the strategy could be modified in a way to reduce risk numbers, it would be
+
+even more interesting and also safer to adapt such strategy. One way to do so is to include
+
+a stop-loss in the strategy with the hope of reducing the risk measures. In this study we
+
+attach various types of stop-loss triggers and study the performance of the adapted strategy
+
+compared to that of the double-sort strategy without a stop-loss, which we call the classic
+
+double-sort strategy. The goal is to keep the return at nearly the same level whilst reducing
+
+the risk measures such as volatility, downside volatility and consequently increasing the
+
+reward to risk and sortino ratios.
+
+
+
+
+5.2 Methodology
+
+       Stop-loss is defined as a trigger by which the commodity future positions in the final
+
+portfolio are closed when the portfolio is losing value with the hope of cutting the future
+
+losses. As stated in the last section, the double-sort strategy builds a portfolio by buying
+
+the high-winner commodity future contracts and selling the low-loser ones and holding
+
+such combination of future contract positions for the duration of the holding period. In the
+
+holding period the positions would evolve in weight based on their performance but no
+
+	                                             28	  
+	  
+position altering would occur. The stop-loss simply monitors the portfolio’s performance
+
+both on a combined and individual level during the holding period and closes positions, by
+
+going long the short positions and shorting the long positions, based on certain criteria to
+
+reduce the possible loss of the strategy. Therefore, by definition, the stop-loss would not
+
+affect the selection process of the commodities, i.e. the double-sort selection criteria, and
+
+only affects the commodities already selected to build the portfolio at the beginning of the
+
+holding period. Clearly, the criteria by which the stop-loss would close the losing positions
+
+is the vital part of the process. We have implemented and studied the stop-loss using four
+
+different triggering criteria which are described separately below.
+
+
+5.2.1 Cumulative loss method
+
+       The simplest method in triggering the stop-loss is the cumulative loss method. In this
+
+method the stop-loss component monitors each of the long and short positions in the
+
+portfolio since the day of the portfolio formation, i.e. the beginning of the holding period.
+
+The stop-loss component, at each day, calculates the cumulative loss of all the individual
+
+positions that are available in the current portfolio starting from the current day and going
+
+back as far as the first day of the current holding period. The cumulative loss is defined as
+
+the negative of the sum of the returns for the long positions and sum of the returns for the
+
+short positions during the current holding period. If the cumulative loss of any specific
+
+position is higher than a pre-specified threshold, that position is stopped and excluded from
+
+the portfolio, starting the next day and for the remainder of the current holding period.
+
+Stopping the position is implemented by forcing the weight of the position to zero and
+
+distributing that weight evenly among other available positions in the portfolio. This
+
+process is repeated every day with the remaining positions in the portfolio. There is also no
+
+restriction forced on the minimum number of available positions in the portfolio. This
+
+means that based on the performance of the commodities during any holding period, it is
+
+
+
+	                                             29	  
+	  
+possible that all the positions would be eventually stopped and thus, there would be no
+
+portfolio available until the next holding period.
+
+       Choosing the value for the threshold is also an important measure. A small threshold
+
+would stop the positions too often and possibly unnecessarily and would therefore decrease
+
+the profit of the strategy while a big threshold would decrease the number of stop
+
+occurrences and make the strategy similar to one without any stop-loss. Different values
+
+for the threshold has been tested during the implementation phase but two are reported in
+
+this report: 5% and 13%. Any value below 5% dramatically decreases the return of the
+
+strategy without improving the risk-adjusted performance. Similarly, with values above
+
+13% the performance of the strategy is not meaningfully different from that of the double-
+
+sort strategy without a stop-loss and therefore ignored.
+
+       An extension to the mentioned stop-loss strategy is one in which the stopped positions
+
+are still monitored even after they are closed. The intention is to allow the possibility of
+
+reopening the stopped positions if they make back their loss before the end of the holding
+
+period. To do so, at each day a cumulative gain is calculated for the stopped positions
+
+during the period of the day they were stopped and the current day. The cumulative gain is
+
+defined as the sum of returns for the stopped long positions and the negative of sum of
+
+returns for the stopped short positions during the mentioned period above. If the
+
+cumulative gain is above the same threshold that was used to stop the positions, the
+
+positions would be reopened from the next day. To reopen a position, its weight would be
+
+set to the same weight it had on the day of its stop and that weight would be evenly
+
+deducted from the weight of other available positions in the portfolio at that time. From
+
+that point, the reopened position is regarded as a normal position and is subject to being
+
+stopped if its cumulative loss reaches the threshold again. The performance of the
+
+cumulative stop-loss method is discussed thoroughly in results section.
+
+
+
+	                                             30	  
+	  
+5.2.2 Exponentially weighted average stop-loss method
+
+       One possible drawback of the cumulative stop-loss method is that it gives the same
+
+weight to losses occurred on any day during the holding period. It would be reasonable to
+
+assume that if prices follow a momentum-like behavior, a stop-loss trigger that gives more
+
+weight to recent losses is preferable. In this case, the recent losses would have more
+
+influence on the stop-loss trigger than the data from the early days of the holding period.
+
+For example, when a sudden change in the trend of one of the positions occurs, the stop-
+
+loss would not wait until the whole past profits of the position is wiped out and a loss
+
+bigger than the threshold has accumulated before it stops the losing position.
+
+       To modify the stop-loss trigger to take into account the day weights, we have employed
+
+an exponential average model. In this method instead of a simple cumulative loss,
+
+exponential average loss is calculated using the formulas below:
+
+
+                                 !        1 − 𝜆 𝜆!!!    !
+                                𝑙! =        !    !!!
+                                                     −𝑟!                       (5)
+                                            !!! 𝜆
+
+                                                 !
+                                          !             !
+                                          𝐿 =         𝑙!                               (6)
+                                                !!!
+
+
+               !                                                                               !
+       Where 𝑙! is the exponential loss of commodity j at day k, 𝜆 is the exponential factor, 𝑟!
+
+is the return of commodity j on day k, 𝐿! is the exponential average loss of commodity j
+
+during the period that starts at the first day of the holding period and ends on the current
+
+day (n). We have used a exponential factor of 0.6 (λ  =  0.6)  for the calculation. This means
+
+that the model uses a 40% weight for the loss occurred on the current day in the calculation
+
+of the average. The weights exponentially decrease as the data move away from current
+
+day towards the beginning of the holding period.
+
+       In this method, we calculate the exponential average loss for each commodity in the
+
+long and short portfolios at any day. If this average loss is bigger than a certain threshold,
+
+the losing position would be closed until the end of the holding period and its weight
+	                                        31	  
+	  
+would be evenly distributed among other available positions within its portfolio
+
+(depending on whether the losing position is a long or short position). This procedure
+
+repeats itself every day until the next holding period where the commodities are resorted
+
+and a new portfolio is formed. The results for exponentially weighted average with an
+
+exponential factor of 0.6 and a threshold of 5% are discussed in the results section.
+
+
+5.2.3 Consecutive loss stop-loss method
+
+       Another way to look at the price trend is to emphasize the number of losing days instead
+
+of the amount of loss. The number of days a commodity future contract is making or losing
+
+money in a period could be an alternative signal for trend change. As for the stop-loss
+
+strategy, we expand on this idea and present a stop-loss method that triggers based on the
+
+consecutive number of losing days. In this method, as opposed to the previous two
+
+methods, the amount of loss is ignored. Instead, a consecutive loss measure is calculated at
+
+each day.
+
+       Consecutive loss is simply defined as the number of days that a long position has had
+
+negative returns or a short position has had positive returns. For the calculation, we start at
+
+the current day and go back until we reach the first day of the holding period or the loss
+
+pattern breaks, whichever occurs first. Next, the consecutive loss measure is compared to a
+
+pre-specified threshold. If the consecutive loss is bigger than the threshold, i.e. the position
+
+has lost more than “threshold number of days in a row”, the position will be stopped from
+
+the next day and throughout the end of the current holding period. The closing is done by
+
+setting the weight of the losing position to zero and evenly distributing its weight among
+
+other available positions in its sub-portfolio, depending on it being a long or a short
+
+position. This procedure is repeated every day for the remainder of the holding period.
+
+       Different amounts for threshold has been tested, but we report the results when the
+
+threshold is set to 5 days as the optimum number in the results section.
+
+
+	                                              32	  
+	  
+5.2.4 Full-portfolio cumulative stop-loss method
+
+       In all the previous stop-loss methods, the positions are monitored in isolation and based
+
+on different criteria the stop-loss would close the losing position and eliminate it from the
+
+current positions in the portfolio. The rest of the positions, however, would be remained
+
+open and the portfolio continues to accumulate returns. The performance of any of the
+
+commodities in the portfolio would not affect the other commodities.
+
+       In this method, we would not monitor all the available positions in the portfolio
+
+separately. Rather, the performance of the portfolio as a whole is under supervision. We
+
+implement the stop-loss similar to the cumulative stop-loss but this time the monitoring
+
+occurs on a portfolio level instead of individual positions.
+
+       To do so, we redefine the cumulative loss measure. The cumulative loss is defined as
+
+the negative of return of the portfolio at each day. At the end of each day, the cumulative
+
+loss is compared to a pre-specified threshold. If the cumulative loss is bigger than the
+
+threshold, all the available positions in the portfolio, including long and short positions, are
+
+closed for the next day. Closing the portfolio is done by setting all the weights of the
+
+individual positions to zero. Once the portfolio is closed, it will neither gain nor lose any
+
+value from the next day until the next holding period starts. On the next holding period, the
+
+commodities are resorted and a new portfolio is formed using the double-sort strategy.
+
+       A similar extension to that of the cumulative stop-loss method is implemented as well.
+
+This extension allows the possibility of reopening the closed portfolio should the losses
+
+have been recovered. To do so, after the portfolio is closed the theoretical return of the
+
+portfolio is calculated, as it was still open. If at any day the calculated return is above the
+
+threshold that was used to close the portfolio, the portfolio would be reopened the next
+
+day. Reopening the portfolio is done by setting the weight of the participating commodities
+
+in the closed portfolio to the same amount they had on the closing day of the portfolio.
+
+
+
+	                                              33	  
+	  
+From that point, the portfolio is considered as a normal portfolio and is subject to reclosing
+
+should the loss increases above the threshold once again.
+
+       Different values for the threshold are examined and the results for the threshold of 5%
+
+are reported in the results section.
+
+
+5.3 Performance of the stop-loss methods
+
+       In this section, we present the results of the doubt-sort strategy with the proposed stop-
+
+loss triggers and discuss these results compared to that of the classis double-sort strategy,
+
+i.e. double-sort strategy without stop-loss. At the end of this section, we can decide
+
+whether adding a stop-loss to the double-sort strategy affects the performance of the
+
+strategy and reduces the risk-measures.
+
+
+5.3.1 Cumulative stop-loss method
+
+       Table 3 illustrates the performance of the cumulative stop-loss method with both 13%
+
+and 5% thresholds and compares them to the classic double-sort strategy without stop-loss.
+
+The cumulative stop-loss only slightly improves the performance of the strategy in 13%
+
+threshold whilst with 5% threshold the strategy performs worse than without stop-loss.
+
+Also, when preforming a paired-sample t-test on the strategy without a stop-loss and the
+
+strategy with cumulative stop-loss and 13% threshold, we can reject the null-hypothesis of
+
+the two samples being the same at 5% confidence level with a p-value of 3.62%. However,
+
+with a p-value of 64.75%, the results of the strategy without a stop-loss and a cumulative
+
+stop-loss of 5% are not statistically different.
+
+
+
+
+	                                               34	  
+	  
+
+
+
+
+                                                                                                                                                                             	  
+Table	   3	   -­‐	   Performance	   of	   the	   double-­‐sort	   strategy	   without	   stop-­‐loss	   and	   with	   cumulative	   stop-­‐loss,	   13%	  
+and	  5%	  thresholds
+
+       The return of the strategy with 13% threshold, 20.97%, is very close to that of without
+
+stop-loss, 20.22%. However with a threshold of 5% the return drops to 15.65%. The annual
+
+volatility of the strategy with 13% threshold and 5% threshold are 25.07% and 27.56%,
+
+which are higher than 24.91% for the strategy without s stop-loss. The number of positive
+
+months for all three strategies is almost the same. On the risk-adjusted performance level,
+
+the 5% threshold strategy is performing worse than the three with a reward to risk ratio of
+
+0.57 and sortino ratio of 0.81. These ratios for the 5% threshold strategy is slightly better
+
+than those of the classic strategy with 0.84 (reward to risk) and 1.22 (sortino) for the 13%
+
+threshold and 0.81 and 1.18 for the classic strategy. Also inline with the results above is
+
+the VaR measure. The 99% 30 day VaR for the classic, 13% and 5% thresholds are
+
+20.27%, 20.88%, and 22.47% respectively. Figure 6 below shows a graphical comparison
+
+of the 3 strategies.
+
+       With the presented numbers, we can see that the cumulative stop-loss is not improving
+
+the performance of the double-sort strategy as expected. Although the results of 13%
+
+threshold are marginally better than that of the classic double-sort strategy, we have to
+
+keep in mind that the stop-loss strategy will also increase the transaction costs as more
+
+
+
+	                                                                                35	  
+	  
+trades occur as the result of stopping positions while in the classic double-sort strategy the
+
+trades occur only at the formation of the portfolio.
+
+
+
+
+                                                                                                                                             	  
+          Figure	  6	  -­‐	  Double-­‐sort	  trading	  strategy	  performance	  with	  and	  without	  cumulative	  stop-­‐loss
+
+The performance of the double-sort trading strategy with reopening is not statistically
+
+different from that of without reopening; a paired-sample t-test shows a p-value of 19.06%.
+
+The summary of the comparison between the two is shown in table 4 below. The strategy
+
+with reopening shows indistinguishable risk-adjusted performance when compared to the
+
+stop-loss without reopening.
+
+       Thus it is safe to conclude, neither of the two forms of the cumulative stop-loss method,
+
+i.e. with and without reopening, are improving the performance of the strategy
+
+meaningfully. As stated above, if including the transaction costs in the calculations it is
+
+highly probable that the stop-loss even reduces the performance of the double-sort strategy
+
+because of the extra costs accumulated as a result of the additional contract closing and
+
+reopening. In the next section we study the performance of the exponentially weighted
+
+average stop-loss method as an alternative method to the cumulative stop-loss method.
+
+
+
+
+	                                                                     36	  
+	  
+
+
+
+
+                                                                                                                                                   	  
+Table	   4	   -­‐	   Performance	   comparison	   between	   13%	   threshold	   cumulative	   stop-­‐loss	   with	   and	   without	  
+reopening
+
+
+
+
+5.3.2 Exponentially weighted average stop-loss method
+
+As stated in the methodology, different values for the exponential factor and threshold
+
+have been used to test the strategy (see equations 5 and 6). The results for the best
+
+combination of values, i.e. exponential factor of 0.6 and threshold of 5% are reported in
+
+this section. The results of the exponentially weighted average stop-loss method are worse
+
+than the classic double-sort strategy without stop-loss. As the main result, the return of the
+
+method has dropped to 18.6% from the 20.22% of the classic method.
+
+       However, the return alone is not conclusive as long as the risk-measures also drop. The
+
+risk measures are the same as those of the classic strategy. The annual volatility is at
+
+24.92% compared to 24.91% for the classic strategy. Downside volatility of the
+
+exponentially weighted average stop-loss method is 17.26% while this measure is 17.13%
+
+for the classic strategy. The 30-day VaR (99%) has slightly increased from 20.27% to
+
+21.42% in the new method. Given the same risk measures and the lower return, the risk-
+
+adjusted performance of the new method is slightly below that of the classic strategy. The
+	                                        37	  
+	  
+reward to risk and sortino ratios of the new method are 0.75 and 1.08 while the same ratios
+
+are 0.81 and 1.18 for the classic method respectively. Table 5 and figure 7 summarize the
+
+results and compare them to the classic double-sort strategy without stop-loss.
+
+
+
+
+                                                                                                                                                    	  
+Table	   5	   -­‐	   Exponentially	   weighted	   average	   stop-­‐loss	   and	   without	   stop-­‐loss	   strategies	   performance	  
+comparison
+
+Also, with a p-value of 14.72%, a paired-sample t-test statistically shows that the null
+
+hypothesis of the two samples not being different cannot be rejected.
+
+
+
+
+                                                                                                                                                    	  
+Figure	  7	  -­‐	  Double-­‐sort	  strategy	  performance	  with	  and	  without	  exponentially	  weighted	  average	  stop-­‐loss
+
+
+
+
+	                                                                     38	  
+	  
+       The performance of the exponentially weighted average stop-loss method is
+
+disappointing. The result of this method is even weaker than that of cumulative stop-loss.
+
+Due to extra transactions that may be necessary for stopping a position, this method also
+
+can have higher transaction costs compared to the strategy without stop-loss. If these cost
+
+are taken into account it will further reduce the performance of this method.
+
+
+5.3.3 Consecutive stop-loss method
+
+       In this section we study the results of the consecutive stop-loss method. We have tested
+
+different values for the threshold in this method and the results of the threshold of 5 days,
+
+as the threshold that achieves the highest performance among other thresholds, is
+
+presented.
+
+       This method yields a return of 20.99% per annum as compared to the similar 20.22%
+
+for the classic double-sort strategy method. The annual volatility of the strategy rises from
+
+24.91% for the classic double-sort strategy to 25.72% for the consecutive stop-loss
+
+method. Downside volatility for both methods is almost the same: 17.13% for the strategy
+
+without stop-loss and 17.70% for the recent method. The 30-day VaR (99%) of the recent
+
+method has dropped from 20.27% for the strategy without stop-loss to 18.88% for the
+
+consecutive stop-loss method.
+
+
+
+
+	                                              39	  
+	  
+
+
+
+
+                                                                                                                                         	  
+           Table	  6	  -­‐	  Consecutive	  stop-­‐loss	  and	  without	  stop-­‐loss	  strategies	  performance	  comparison
+
+       On risk-adjusted level, the performance is indistinguishable for the two methods. The
+
+reward to risk ratio is 0.81 and 0.82 in favor of the consecutive stop-loss method and,
+
+similarly, the sortino ratio is 1.18 and 1.19 for the classic and consecutive stop-loss method
+
+respectively. Table 6 and figure 8 present a summary on the findings and compares them to
+
+the results of the classic double-sort strategy.
+
+       Paired sample t-test rejects the null hypothesis of the two samples being the same at 5%
+
+level with a p-value of 3.62%. However, the results are not economically different from
+
+each other. Despite the slightly higher return of the modified strategy, the stop-loss has
+
+failed to improve the risk-adjusted performance of the classic double-sort strategy
+
+meaningfully. Similar to previous findings, the performance of the stop-loss strategy would
+
+decrease, if the extra-transaction costs were taken into account.
+
+
+
+
+	                                                                    40	  
+	  
+
+
+
+
+                                                                                                                                        	  
+             Figure	  8	  -­‐	  Double-­‐sort	  strategy's	  performance	  with	  and	  without	  consecutive	  stop-­‐loss
+
+5.3.4 Full-portfolio stop-loss method
+
+       The results of the full-portfolio stop-loss method with a threshold of 5% is presented in
+
+this section and compared to the classic double-sort strategy without stop-loss. The return
+
+of the method is consistent with that of the classic double-sort strategy; 20.22% for the
+
+classic strategy and 19.93% for the full-portfolio stop-loss method. The stop-loss has
+
+reduced the annual volatility of the strategy by more than 2% from 24.91% to 22.47%. The
+
+downside volatility has also slightly decreased from 17.13% for the classic strategy to
+
+15.20% for the recent method. The 30-day VaR (99%) shows a bigger decrease in value.
+
+The 30-day VaR for the classis strategy and the full-portfolio stop-loss method are 20.27%
+
+and 13.76% respectively. Table 7 and figure 9 present the results and comparison of the
+
+full-portfolio stop-loss and classic double-sort strategy in detail.
+
+
+
+
+	                                                                    41	  
+	  
+
+
+
+
+                                                                                                                                             	  
+          Table	  7	  -­‐	  Full-­‐portfolio	  stop-­‐loss	  and	  without	  stop-­‐loss	  strategies	  performance	  comparison
+
+       The risk-adjusted performance of the recent stop-loss method, however with a slight
+
+improvement, does not show an economically meaningful increase over the classic double-
+
+sort strategy performance. The reward to risk ratio and sortino ratio for the full-portfolio
+
+stop-loss method are 0.89 and 1.31 compared to 0.81 and 1.18 for the classic strategy
+
+respectively. A paired sample t-test does not statistically reject the hypothesis of the two
+
+samples being indifferent at 5% with a p-value of 7.9%.
+
+
+
+
+                                                                                                                                             	  
+            Figure	  9	  -­‐	  Double-­‐sort	  strategy's	  performance	  with	  and	  without	  full-­‐portfolio	  stop-­‐loss
+
+
+
+	                                                                      42	  
+	  
+       The method is also tested when reopening the position is allowed with a threshold of
+
+5%. The performance of such extension on the method was the same as the case for the
+
+cumulative stop-loss method; the performance is worse in all levels, i.e. return, risk
+
+measures, and risk-adjusted performance, when the reopening is allowed. Therefore, the
+
+detail of the results is not provided in this study.
+
+       The performance of the full-portfolio stop-loss is an improvement over the previous
+
+stop-loss methods and a slight improvement over the classic double-sort strategy. The
+
+return is higher and the risk measures are lower, thus the risk-adjusted performance of the
+
+strategy is higher than the classic double-sort strategy, which was the goal of implementing
+
+the stop-loss methods. However, the results are far below expectations and the
+
+improvement is only marginal. Also, this study does not take into account the transaction
+
+costs and therefore their exact influence on the performance is unknown.
+
+
+
+
+	                                             43	  
+	  
+
+6. Summary and Conclusion
+
+       For reasons such as equity-like returns, risk diversification, and inflation hedge,
+
+commodities have become a popular asset class for investment. There have been many
+
+studies exploring this opportunity and presenting ideas on profitable trading strategies on
+
+commodities.
+
+       Double-sort trading strategy was introduced by Fuertes, Miffre, and Rallis (2010). This
+
+active strategy, which is implemented on commodities futures market, sorts the
+
+commodities based on their past momentum and term-structure performance and forms a
+
+long-short portfolio of commodity futures. The portfolio is then held for a specific amount
+
+of time, i.e. the holding period. The strategy has shown to generate abnormal returns over
+
+the relatively long timeframe on which it was tested (from 1979 to 2007).
+
+       In this study, we, first, re-implemented the strategy and tested its performance on data
+
+from 1979 to 2011. We have come to the same conclusion as Fuertes, Miffre, and Rallis
+
+(2010) on the profitability of the strategy. The strategy has been tested for one month
+
+ranking period and one month holding period and yields 20.22% per annum from January
+
+1979 to October 2010. The strategy’s annual volatility, downside volatility and 30-day
+
+VaR (99%) are 24.91%, 17.13%, and 20.27% respectively. With a reward to risk ratio of
+
+0.81 and sortino ratio of 1.18, the strategy proves profitable compared to two benchmarks,
+
+i.e. S&P GSCI with 0.24 and 0.34 for reward to risk and sortino ratios and S&P 500 with
+
+0.43 and 0.59 for the same ratios respectively.
+
+        Next, we have tested to confirm the profitability of this strategy on different market
+
+conditions. For this purpose, we divided the data to two non-overlapping groups that
+
+represent two non-similar market conditions: pre and during the crisis. The pre-crisis era
+
+contains data from January 1979 to January 2007 and the crisis era from February 2007 to
+
+October 2011. Our findings confirm that the strategy is profitable during both eras.
+	                                              44	  
+	  
+Interestingly the strategy performs better during market fluctuations. The strategy returns
+
+17.12% per annum before the crisis and 34.50% per annum during the crisis. Not
+
+surprisingly the risk measures also increase during the crisis. The strategy’s annual
+
+volatility, downside volatility, and 30-day VaR (99%) are 24.36%, 16.85%, and 20.79%
+
+before the crisis whilst the same measures are 27.92%, 18.88%, and 14.08% during the
+
+crisis. The higher risk measures are, however, more than compensated by the higher return
+
+which results in a reward to risk and sortino ratio of 1.24 and 1.83 during the crisis
+
+compared to 0.70 and 1.02 before crisis.
+
+       The fact that the strategy’s performance is boosted during the crisis comes from two
+
+possible reasons. First, the strategy builds a long-short portfolio, in contrast to a long-only
+
+strategy such as the S&P GSCI. The long positions make profit when prices are rising and
+
+short positions when prices are falling. Second, the strategy is an active strategy. This
+
+means that the portfolio is reconstructed at the beginning of every holding period based on
+
+the performance of the commodities and the commodities included in the previous
+
+portfolio have no priority in the new selection. If a commodity is not among top winners or
+
+losers it will be excluded from the portfolio.
+
+       The drawback of the double-sort strategy is the relatively high risk measures. Although
+
+these measures are not discouraging when they are looked at in combination with the high
+
+return, reducing them would make the strategy even more desirable. For this purpose, we
+
+have constructed a number of stop-loss methods and added them to the strategy.
+
+       First, a cumulative stop-loss method is constructed. The method monitors each position
+
+in the portfolio and closes the position should the loss of the position reach above a
+
+threshold. Two thresholds of 5% and 13% were presented in the results. In summary, the
+
+cumulative stop-loss method fails to achieve the expected improvement on the classic
+
+double-sort strategy. The risk-adjusted performance of such strategy is the same as that of
+
+the classic strategy. The method is also modified to allow reopening the closed positions
+	                                               45	  
+	  
+should they regain the cumulated loss. The result of this modification is also disappointing.
+
+The performance of the stop-loss method slightly drops when reopening is applied. In
+
+addition, the stop-loss method, in general, may have extra transaction costs. This is due to
+
+the possible higher number of transactions in a stop-loss method than in a method without
+
+stop-loss.
+
+       Second, we replace the cumulative stop-loss method with an exponentially weighted
+
+average stop-loss method. The exponentially weighted average assigns more weight to
+
+recent losses. The motivation behind this method is to take into account the time that the
+
+loss occurs and make the recent loses more influential on the stop-loss decision-making
+
+process. However, the results show that this method fails to achieve the goal. This method
+
+of stop-loss reduces the performance of the double-sort strategy more than the cumulative
+
+stop-loss method does. The risk-adjusted performance of this method is below that of the
+
+cumulative stop-loss and the classic double-sort strategy in every aspect.
+
+       Third, an alternative strategy of stop-loss is practiced. Instead of looking at the
+
+accumulated loss, the consecutive stop-loss method takes into account the consecutive
+
+number of days that a position is losing. When a threshold of 5 days is reached, the losing
+
+position is closed. The results of this method are marginally better than those of the two
+
+last methods. While the risk-adjusted performance of the consecutive stop-loss method is
+
+nearly the same as the classic strategy, the method reduces the 30-day VaR (99%) by more
+
+than 1%.
+
+       Last, we replace the position monitoring with portfolio monitoring. In other words, in
+
+the three previous stop-loss methods, the positions were monitored on an individual level.
+
+In this method, the portfolio as a whole is monitored. If the portfolio loss reaches above a
+
+threshold, 5% in this case, all the positions are closed. An extension of this method is also
+
+implemented to allow reopening the closed positions but only after the losses are regained.
+
+At 5% level threshold, the risk-adjusted performance of the full-portfolio stop-loss method
+	                                             46	  
+	  
+is the best among other stop-loss methods. However, the results experience only a marginal
+
+improvement over the classic double-sort strategy and are not as expected. The 30-day
+
+VaR (99%) is noticeably improved over the classic method’s.
+
+       To conclude, the double-sort strategy on commodities futures is a profitable strategy.
+
+With high return, it is advisable to include such strategy into investors’ portfolio. The low
+
+correlation between this strategy and other strategies and asset classes such as equities and
+
+long-only commodity strategies advocates the risk diversification benefits of including this
+
+portfolio in any investment. The fact that the strategy is still profitable during market
+
+turmoil, such as the two recent crises, is another advantage of such strategy.
+
+       The effort to reduce the risk measures of the double-sort strategy by introducing a stop-
+
+loss did not achieve attractive results. None of the four implemented stop-loss methods
+
+improved the risk-adjusted performance of the double-sort strategy considerably. This may
+
+be due to the fact that the same measure, i.e. momentum, which is used to form the
+
+portfolio, is also used as a signal for stopping a losing position. In other words, when a
+
+commodity is included in the portfolio, it means that the commodity has shown a high past
+
+return (or a low past return if it is included in the short positions). Therefore, using the
+
+same measure to cut the position out of the portfolio is not going to give accurate results
+
+and increase the performance. Cutting the position based on that same measure will
+
+interfere with the double-sort’s methodology, which is keeping the position for the holding
+
+period. Designing a different stop-loss method that uses signals other than those used to
+
+form a portfolio would an interesting and untouched field for further research.
+
+
+
+
+	                                              47	  
+	  
+
+
+
+7. References
+
+Baur,	  D.	  G.,	  &	  McDermott,	  T.	  K.	  (2010).	  Is	  gold	  a	  safe	  haven?	  International	  evidence.	  
+
+Journal	  of	  banking	  and	  finance	  .	  
+
+Basu,	  D.,	  &	  Miffre,	  J.	  (2012).	  Capturing	  the	  risk	  premium	  of	  commodity	  futures:	  The	  
+
+role	  of	  hedging	  pressure.	  
+
+Benirschka,	  M.,	  &	  Binkley,	  J.	  K.	  Optimal	  Storage	  and	  Marketing	  Over	  Space	  and	  Time.	  
+
+American	  journal	  of	  agricultural	  economies	  ,	  77	  (3),	  512-­‐524.	  
+
+Bessembinder,	  H.	  (1992).	  Systematic	  Risk,	  Hedging	  Pressure	  and	  Risk	  Premiums	  in	  
+
+Futures	  Markets.	  Review	  of	  Financial	  Studies	  ,	  5	  (4),	  637-­‐667.	  
+
+Bodie,	  Z.,	  &	  Rosansky,	  V.	  (1980,	  May/June).	  Risk	  and	  returns	  in	  commodity	  futures.	  
+
+Financial	  Analysts	  Journal	  ,	  27-­‐39.	  
+
+Brennan,	  D.,	  Williams,	  J.,	  &	  Wright,	  B.	  D.	  (1997).	  Convenience	  yield	  without	  the	  
+
+convenience:	  a	  spatial–temporal	  interpretation	  of	  storage	  under	  backwardation.	  The	  
+
+Economic	  Journal	  ,	  107	  (443),	  1009-­‐1023.	  
+
+Brennan,	  M.	  (1958).	  The	  Supply	  of	  Storage.	  American	  economic	  review	  ,	  47,	  50-­‐72.	  
+
+Carbonez,	  K.,	  Nguyen,	  T.	  T.,	  &	  Sercu,	  P.	  (2009).	  Do	  Inventories	  Really	  Yield	  a	  
+
+Convenience?	  An	  Empirical	  Analysis	  of	  the	  Risk-­‐adjusted	  Spread.	  
+
+Carter,	  C.	  A.,	  &	  Giha,	  C.	  L.	  (2007).	  The	  working	  Curve	  and	  Commodity	  Storage	  under	  
+
+Backwardation.	  American	  Journal	  of	  Agricultural	  Economies	  ,	  89	  (4),	  864-­‐872.	  
+
+Chang,	  E.	  C.	  (1985).	  Returns	  to	  speculators	  and	  the	  theory	  of	  normal	  backwardation.	  
+
+Journal	  of	  finance	  ,	  XL	  (1).	  
+
+Chong,	  J.,	  &	  Miffre,	  J.	  (2010).	  Conditional	  correlation	  and	  volatility	  in	  commodity	  
+
+futures	  and	  traditional	  asset	  markets.	  Journal	  of	  alternative	  investments	  ,	  12	  (3).	  
+
+
+
+
+	                                                                48	  
+	  
+Cootner,	  P.	  H.	  (1960).	  Returns	  to	  Speculators:	  Telser	  Versus	  Keynes.	  Journal	  of	  
+
+Political	  Economy	  ,	  68,	  396-­‐404.	  
+
+Egelkraut,	  T.	  M.,	  Woodard,	  J.	  D.,	  Garcia,	  P.,	  &	  Pennings,	  J.	  M.	  (2005).	  Portfolio	  
+
+Diversification	  with	  Commodity	  Futures:	  Properties	  of	  Levered	  Futures.	  
+
+Erb,	  C.	  B.,	  &	  Harvey,	  C.	  R.	  (2005,	  March).	  The	  tactical	  and	  strategic	  value	  of	  commodity	  
+
+futures.	  
+
+Dusak,	  K.	  (1973).	  Futures	  Trading	  and	  Investor	  Returns:	  an	  Investigation	  of	  
+
+Commodity	  Market	  Risk	  Premiums.	  Journal	  of	  political	  economy	  ,	  81,	  1387-­‐1406.	  
+
+De	  Bondt,	  W.,	  &	  Thaler,	  R.	  (1985).	  Does	  stock	  market	  overreact?	  Journal	  of	  finance	  ,	  
+
+40,	  793-­‐807.	  
+
+de	  Roon,	  F.	  A.,	  Nijman,	  T.	  E.,	  &	  Veld,	  C.	  (2000).	  Hedging	  pressure	  effects	  on	  future	  
+
+markets.	  Journal	  of	  finance	  ,	  LV	  (3).	  
+
+Deaves,	  R.,	  &	  Krinsky,	  I.	  (1995,	  September).	  Do	  Futures	  Prices	  For	  Commodities	  
+
+Embody	  Risk	  Premiums.	  Journal	  of	  Fuutres	  Markets	  ,	  637-­‐648.	  
+
+Dinceler,	  C.,	  Khoker,	  Z.,	  &	  Simin,	  T.	  (2005).	  An	  Empirical	  Analysis	  of	  Commodity	  
+
+Convenience	  Yields.	  
+
+Fuertes,	  A.-­‐M.,	  Miffre,	  J.,	  &	  Rallis,	  G.	  (2010).	  Tactical	  allocation	  in	  commodity	  futures	  
+
+markets:	  Combining	  momentum	  and	  term	  structure	  signals.	  
+
+Fama,	  E.,	  &	  French,	  K.	  (1988).	  Business	  Cycles	  and	  the	  Behavior	  of	  Metals	  Prices.	  
+
+Journal	  of	  finance	  ,	  43,	  1075-­‐1093.	  
+
+Garner,	  C.	  (2010).	  A	  Trader's	  First	  Book	  on	  Commodities.	  Pearson	  Education,	  FT	  Press.	  
+
+Gorton,	  G.	  B.,	  Hayashi,	  F.,	  &	  Rouwenhorst,	  G.	  K.	  (2007).	  The	  Fundamentals	  of	  
+
+Commodity	  Futures	  Returns.	  
+
+Gorton,	  G.,	  &	  Rouwenhorst,	  G.	  (2004).	  Facts	  and	  Fantasies	  about	  Commodity	  Futures.	  
+
+Yale	  ICF	  Working	  Paper	  .	  
+
+Hicks,	  J.	  R.	  (1939).	  Value	  and	  Capital.	  
+
+	                                                                  49	  
+	  
+Hirshleifer,	  D.	  (1990).	  Hedging	  Pressure	  and	  Futures	  Price	  Movements	  in	  a	  General	  
+
+Equilibrium	  Model.	  Econometrica	  ,	  58	  (2),	  411-­‐428.	  
+
+Jegadeesh,	  N.,	  &	  Titman,	  S.	  (1993).	  Returns	  to	  buying	  winners	  and	  selling	  losers;	  
+
+Implications	  for	  stock	  market	  efficiency.	  Journal	  of	  finance	  ,	  48	  (1),	  65-­‐91.	  
+
+Kaldor,	  N.	  (1939).	  Speculation	  and	  Economic	  Theory.	  Review	  of	  economic	  study	  ,	  7,	  1-­‐
+
+27.	  
+
+Keynes,	  M.	  (1930).	  A	  Treatise	  on	  Money:	  The	  Applied	  Theory	  of	  Money	  (2nd	  Edition	  
+
+ed.).	  
+
+Kishore,	  J.,	  Irwin,	  S.	  H.,	  &	  Garcia,	  P.	  (2011).	  Commodity	  Storage	  under	  Backwardation:	  
+
+Does	  the	  Working	  Curve	  Still	  Work?	  
+
+Kolb,	  R.	  W.	  (1992).	  Is	  Normal	  Backwardation	  Normal?	  Journal	  of	  Futures	  Markets	  ,	  12	  
+
+(1),	  75-­‐90.	  
+
+Lautier,	  D.	  (2009).	  Term	  structure	  models	  of	  commodity	  prices:	  a	  review.	  
+
+Ng,	  V.,	  &	  Pirrong,	  S.	  (1994).	  Fundamentals	  and	  Volatility:	  Storage,	  Spreads,	  and	  the	  
+
+Dynamics	  of	  Metals	  Prices.	  Journal	  of	  business	  ,	  67	  (2),	  203-­‐230.	  
+
+Miffre,	  J.,	  &	  Rallis,	  G.	  (2006).	  Momentum	  Strategies	  in	  Commodity	  Futures	  Markets.	  
+
+Pindyck,	  R.	  (1994).	  Inventories	  and	  the	  Short-­‐Run	  Dynamics	  of	  Commodity	  Prices.	  
+
+RAND	  Journal	  of	  economics	  ,	  25	  (1),	  141-­‐159.	  
+
+Richard,	  S.	  F.,	  &	  Sundaresan,	  M.	  (1981).	  A	  Continuous	  Time	  Equilibrium	  Model	  of	  
+
+Forward	  Prices	  and	  Future	  Prices	  in	  a	  Multigood	  Economy.	  Journal	  of	  Financial	  
+
+Economics	  ,	  9,	  347-­‐371.	  
+
+Rouwenhorst,	  G.	  (1998).	  International	  momentum	  strategies.	  Journal	  of	  finance	  ,	  53	  
+
+(1),	  267-­‐284.	  
+
+Williams,	  J.,	  &	  Wright,	  B.	  (1991).	  Storage	  and	  Commodity	  Markets.	  
+
+Working,	  H.	  (1949).	  The	  Theory	  of	  the	  Price	  of	  Storage.	  American	  economic	  review	  ,	  
+
+39,	  1254-­‐1266.	  
+
+	                                                                50	  
+	  
+Wright,	  B.	  D.,	  &	  Williams,	  J.	  C.	  (1989).	  A	  theory	  of	  negative	  prices	  for	  storage.	  Journal	  
+
+of	  futures	  markets	  ,	  9	  (1),	  1-­‐13.	  
+
+	  
+	  
+
+
+
+
+	                                                                  51	  
+
