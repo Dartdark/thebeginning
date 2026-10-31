@@ -240,6 +240,17 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   intraday adaptation, return trial, paid acquisition or allocation is earned.
   [Review](agents/codex/results/wasde_volume_4841490_review.md) · [Evidence](agents/codex/evidence/wasde_volume_4841490.md).
 
+- [ ] **Commodity-index roll calendar spreads — conditional personal research / NEEDS SPECIFICATION AND DATA (SSRN2942340).**
+  Till/Eagleeye2017 identifies predictable sell-front/buy-deferred index demand and anticipatory spreads, but supplies
+  no net backtest or exact dated protocol. Distinct from weekly basis reversal; do not recycle failed outright CL
+  timing proxies (prior t1.4 and GSCI/BCOM t0.5/0.7). Need historical/current index rules and weights, actual paired
+  commodity maturities, synchronized prices, native both-leg costs and delivery/margin handling. Smallest next check
+  when matching evidence arrives: reconcile one specified index roll and its two-leg cashflows, then complete the
+  evidence/preregistration gate before returns. Source brings no new dataset; existing acquisition blockers remain.
+  Multiday description earns no Apex placement; personal contribution is unverified. Zero new trials.
+  [Review](agents/codex/results/till_2942340_20261031.md) · [Evidence](agents/codex/evidence/till_2942340_20261031.md).
+
+
 - [ ] **FX carry/trend multi-strategy — NEEDS SOURCE CLARIFICATION / DATA (SSRN 3322717; reviewed 2026-10-30).**
   Personal-account research only, low priority. Merit: author reports Sharpe 0.88 versus 0.55 for its best single
   signal across eight FX futures; not independently reproduced or established after executable costs.
