@@ -228,6 +228,18 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **WASDE pre-release futures/options volume — NEEDS DATA AND SPECIFICATION (SSRN 4841490; 2026-10-30).**
+  Lower-priority personal-account lead: author reports positive futures-volume and negative options-volume
+  associations with subsequent 5–20-day agricultural futures returns (1995–2018); no net strategy independently
+  reproduced. Need dated agricultural futures/options volumes, option-underlying/expiry mapping, paired basis
+  inputs, vintaged forecasts, publication clocks and exact pre-event aggregation. Day-zero return inclusion,
+  retrospective normalization and forecast-revision versus consensus-surprise distinctions need resolution.
+  Owned filename census found no matching panel; public USDA/CME checks returned proxy tunnel 403.
+  Resume only with genuinely new matching inputs/specification: reconcile one report/contract without returns,
+  then a committed coverage/cost/power gate. Source multiday holdings fail all four Apex homes; no NQ proxy,
+  intraday adaptation, return trial, paid acquisition or allocation is earned.
+  [Review](agents/codex/results/wasde_volume_4841490_review.md) · [Evidence](agents/codex/evidence/wasde_volume_4841490.md).
+
 - [ ] **FX carry/trend multi-strategy — NEEDS SOURCE CLARIFICATION / DATA (SSRN 3322717; reviewed 2026-10-30).**
   Personal-account research only, low priority. Merit: author reports Sharpe 0.88 versus 0.55 for its best single
   signal across eight FX futures; not independently reproduced or established after executable costs.

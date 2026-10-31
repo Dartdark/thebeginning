@@ -198,6 +198,16 @@ Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 
 ### E11 — Event-information clocks and attribution
 
+- WASDE follow-up, retained 2026-10-30: Zhang, [SSRN 4841490](https://ssrn.com/abstract=4841490),
+  [full-source review](results/wasde_volume_4841490_review.md). An announcement-day-inclusive return is not
+  necessarily executable using a forecast revealed that day. Monthly USDA forecast revisions are not consensus
+  surprises; unsigned futures/options volume is not signed informed flow. The source's same-month non-event
+  volume baseline can include future observations and cannot directly become a pre-event feature.
+  Source regressions are not net trade returns or measured execution savings. Confirm historical release/session
+  regimes, input publication/receipt, option-underlying mapping, pre-event aggregation and first executable price
+  before a separately registered test. More event volume does not establish lower spreads or price impact.
+  Matching agricultural/options data and exact specifications are missing; zero return trials and no live changes.
+
 Source: Ahluwalia, [SSRN 7674953](https://ssrn.com/abstract=7674953).
 [Saved review](results/fomc_monthly_coefficients_review_20261029.md), 2026-10-29.
 - Use: separate returns before the event, statement, press conference and later windows; a feature measured over an event window is unavailable at that window's start.
