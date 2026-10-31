@@ -213,7 +213,10 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   Do not revive that component or claim its failure falsifies the untested hedge. Preferred-source work needs a verified
   dated ES chain/roll cashflows, additive hedge-equation correction, explicit adjustment clock and actual integer sizes;
   one VX often maps to less than one ES, and prelaunch MES/VXM histories must not be invented. Smallest next check:
-  resolve source-data and hedge-protocol gates before a separately committed hedged test. Multiday VX is ineligible
+  authenticate vendor/price type and clock in the newly found public quarterly ES archive, audit complete paired prices,
+  then freeze the hedge protocol before a separately committed test. Three full samples were inspected; this is an
+  actual data lead, not a claim that no free ES chain exists. [ES gate](agents/codex/inputs/calvados_2379985_20261030/es_hedge_gate/es_hedge_feasibility.md).
+  Multiday VX is ineligible
   for all four Apex homes as written; any personal addition/replacement must earn historical validation and native
   account/margin comparison. [Review/results](agents/codex/results/calvados_2379985_20261030.md) ·
   [Evidence](agents/codex/evidence/calvados_2379985_20261030.md) ·
