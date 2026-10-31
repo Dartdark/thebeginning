@@ -78,3 +78,19 @@ an unknown flag, mark both funded VB size branches unknown and exclude that day 
 conditional accounting pool. A missing flag on a day with no recorded VB trade cannot change an executed size.
 Keep the raw VB evaluation ledger intact and retain every flag omission in coverage_issues.csv. No economic
 allocation result was produced or used to choose this treatment; the stopped attempt is retained in the run log.
+
+## Distinguish known closed P&L from unknown minute adverse risk
+
+Coverage inspection after the first accounting run (before inspecting its return/payout tables) showed missing
+held minutes on85/87 CL trades and69 OT trades. Requiring every held minute for all accounting would discard
+almost the entire CL leg and could not represent the unchanged portfolio. Preserve that entire first run under
+`initial_complete_path_subset/` as a coverage diagnostic, not a representative current-book estimate.
+
+Keep two explicit masks: `known` for recorded entry/exit prices, session and size identity; `valid` for complete
+held-minute paths as well. Daily closed-P&L/cost diagnostics use the known-ledger pool. The inherited sparse-bar
+account model can be shown on that pool only as a conditional model sensitivity, with missing-path counts and
+no certified breach/payout/pass probability. The subset with complete minutes remains a separate diagnostic.
+Never interpret a missing adverse quote as observed zero. Internal source-style sparse-path arithmetic at that
+minute is an unverified proxy; neither its filled value nor omitted complete-subset trades is a fact about risk.
+No signal, allocation, costs, stop, exit or seed changes. This is an accounting/admission correction, not rescue
+selection. Full current-book floor certification remains blocked where original adverse observations are missing.

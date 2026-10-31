@@ -45,7 +45,8 @@ def quantity(plan):
 
 def diagnostics(home,keys,unit,base,fee,ticks,scenario):
     q=np.floor(base+1e-9)
-    valid=np.logical_and.reduce([u["valid"] for u in unit])&np.isfinite(base).all(0)
+    valid=np.logical_and.reduce([u["known"] for u in unit])&np.isfinite(base).all(0)
+    complete=np.logical_and.reduce([u["valid"] for u in unit])&valid
     C=np.asarray([u["G"]-fee*u["N"]-ticks*u["S"][:,-1] for u in unit])
     gross=sum(q[i]*u["G"] for i,u in enumerate(unit))
     fees=sum(q[i]*fee*u["N"] for i,u in enumerate(unit))
@@ -53,7 +54,7 @@ def diagnostics(home,keys,unit,base,fee,ticks,scenario):
     components=pd.DataFrame((q*C).T,index=dates,columns=keys)
     d=components.sum(axis=1).to_numpy()
     assert np.allclose(d,gross-fees-slips)
-    frame=components.copy();frame["net"]=d;frame["gross"]=gross;frame["fees"]=fees;frame["slippage"]=slips;frame["admitted"]=valid
+    frame=components.copy();frame["net"]=d;frame["gross"]=gross;frame["fees"]=fees;frame["slippage"]=slips;frame["admitted"]=valid;frame["complete_minute_paths"]=complete
     frame.index.name="date";frame.to_csv(OUT/f"{home}_{scenario}_daily.csv")
     for cohort,mask in [("all",valid),("2018_22",valid&(dates.year<2023)),("2023_plus",valid&(dates.year>=2023))]:
         z=perf(d[mask]);z.update(home=home,scenario=scenario,cohort=cohort,sessions=int(mask.sum()),
@@ -152,7 +153,8 @@ for home,plan in ROSTERS.items():
             del Wv,Cv,table,B
         admission.append(dict(home=home,scenario=scenario,total_sessions=len(dates),admitted_sessions=int(valid.sum()),
                               excluded_sessions=int((~valid).sum()),native_fee_RT=fee,ticks_per_market_stop_fill=ticks,
-                              certification="conditional historical ledger audit; actual fills/current-version parity unverified"))
+                              complete_minute_path_sessions=int((np.logical_and.reduce([u["valid"] for u in units])&valid).sum()),
+                              certification="conditional recorded-ledger/sparse-bar path model; missing adverse observations and actual/current-version fills unverified"))
         del W,R;gc.collect()
         pd.DataFrame(rows).to_csv(OUT/"baseline_metrics.csv",index=False)
         pd.DataFrame(account_rows).to_csv(OUT/"account_summary.csv",index=False)
@@ -164,7 +166,6 @@ for home,plan in ROSTERS.items():
 
 # Personal source assembly, stopped before its printing, MonteCarlo or allocation sweeps.
 # This preserves the published component identities; known version/marking limits are audited, not hidden.
-source=receipt=None
 source=(SOURCE/"analysis/personal_portfolio.py").read_text()
 prefix=source[:source.index("    names = {")]
 prefix=prefix.replace('sp="scratch_data/"', 'sp='+repr(str(SCRATCH)+"/"))
@@ -178,7 +179,7 @@ for scenario,(fee,ticks) in SCENARIOS.items():
     for col,key in PERSONAL_CORE.items():
         u=dict(np.load(RUNTIME/(key+".npz")))
         x=pd.Series(u["G"]-fee*u["N"]-ticks*u["S"][:,-1],index=dates)
-        P[col]=x.reindex(P.index);valid&=pd.Series(u["valid"],index=dates).reindex(P.index,fill_value=False)
+        P[col]=x.reindex(P.index);valid&=pd.Series(u["known"],index=dates).reindex(P.index,fill_value=False)
         del u
     # Published extras use per-NQ7.25 commission plus .55 extra per micro trade =1.275RT.
     for col,path,exit_col in [

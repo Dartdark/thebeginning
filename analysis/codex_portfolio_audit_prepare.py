@@ -192,15 +192,17 @@ def prices_for_session(grid,d):
 def build_unit(key,z):
     D=len(days);W=np.zeros((D,1440));R=np.zeros_like(W);Q=np.zeros_like(W)
     F=np.zeros_like(W);S=np.zeros_like(W);G=np.zeros(D);N=np.zeros(D);L=np.zeros(D);short=np.zeros(D)
-    valid=np.ones(D,bool); rows=[];pv,tick=MARKETS[z.market.iloc[0]]
+    valid=np.ones(D,bool);known=np.ones(D,bool); rows=[];pv,tick=MARKETS[z.market.iloc[0]]
     if key in ["VB_N","VB_F"]:
         valid[days.isin(unknown_flags)]=False
+        known[days.isin(unknown_flags)]=False
     for r in z.itertuples():
         if r.session not in pos:continue
         d=pos[r.session];a,b=coord(r.entry_at),coord(r.exit_at)
         if r.entry_session!=r.session or b<a:
-            valid[d]=False
-            if r.entry_session in pos:valid[pos[r.entry_session]]=False
+            valid[d]=False;known[d]=False
+            if r.entry_session in pos:
+                valid[pos[r.entry_session]]=False;known[pos[r.entry_session]]=False
             issues.append(dict(key=key,entry=r.entry_at,exit=r.exit_at,issue="crosses Apex17:00 session; current ledger/source parity unresolved"));continue
         p=prices_for_session(grids[r.market],r.session)
         q=float(r.qty);slips=1+int(r.kind!=1);gross=(r.exit-r.entry)*r.side*pv*q
@@ -209,7 +211,9 @@ def build_unit(key,z):
         adverse=p["l"][a:b+1] if r.side>0 else p["h"][a:b+1]
         missing=int((~np.isfinite(adverse)).sum())
         if missing or not np.isfinite(r.entry) or not np.isfinite(r.exit):valid[d]=False
-        if hasattr(r,"entry_touch") and (not r.entry_touch or not r.exit_touch): valid[d]=False
+        if not np.isfinite(r.entry) or not np.isfinite(r.exit):known[d]=False
+        if hasattr(r,"entry_touch") and (not r.entry_touch or not r.exit_touch):
+            valid[d]=False;known[d]=False
         if missing:issues.append(dict(key=key,entry=r.entry_at,exit=r.exit_at,issue="missing held-minute adverse quote",missing=missing))
         path=(np.nan_to_num(adverse,nan=r.entry)-r.entry)*r.side*pv*q
         if r.kind==0 or r.exit_open:path[-1]=gross
@@ -225,7 +229,7 @@ def build_unit(key,z):
                          j0=a,j1=b,side=r.side,qty=q,entry=r.entry,exit=r.exit,kind=int(r.kind),
                          gross=gross,fee_units=q,slippage_one_tick=trade_slip,missing_held_bars=missing,
                          exit_after_1559=bool(r.exit_at.hour*60+r.exit_at.minute>959 and r.exit_at.hour<17)))
-    np.savez_compressed(RUNTIME/(key+".npz"),W=W,R=R,Q=Q,F=F,S=S,G=G,N=N,L=L,short=short,valid=valid)
+    np.savez_compressed(RUNTIME/(key+".npz"),W=W,R=R,Q=Q,F=F,S=S,G=G,N=N,L=L,short=short,valid=valid,known=known)
     frame=pd.DataFrame(rows);frame.to_csv(OUT/(key+"_unit_ledger.csv"),index=False)
     print(key,len(frame),"valid sessions",int(valid.sum()),flush=True)
     assert np.allclose(R[:,-1],G)
