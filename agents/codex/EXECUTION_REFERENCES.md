@@ -640,6 +640,8 @@ Related: E09 cash/cost reconciliation, E15 tail risk, E35 fill-anchored exits an
   turnover, integer quantities and cost accounting; compare net account paths against the unchanged base.
   No predictor, return trial, size change or implemented execution change follows from this review.
 
+- Harris source follow-up ([SSRN2810170 review](results/ssrn2810170_review.md)): identical toy returns/mean/sample SD/final wealth can produce different chronological drawdowns. Our supplied-number audit gives10% versus27.1%, correcting the source's approximately33% second value. This illustrates path risk, not measured Apex probabilities. Historical-bootstrap and significance results do not guarantee stability through an unseen regime; source p.8's quoted mean/SD also fails to establish its “more than7 SD” claim. No market return replication or native execution result; preserve existing statistical, chronological account and frozen monitoring gates.
+
 ### E38 — Commodity stop overlays, exposure redistribution and return/NAV accounting
 
 Source: Hossein Rad, December 2012 EDHEC MSc thesis, SSRN 2614241; uploaded full 56-page PDF reviewed 2026-10-31.
