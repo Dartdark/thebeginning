@@ -83,6 +83,12 @@ Above ~$36k: scale the whole book (x 2 at ~$72k, x 4 at ~$144k, 1 mini per piece
 without adding drawdown. Monday Long, Vault Break and Relative Strength are the last cleared pieces in: in a personal book they
 add money at lower return per risk (they overlap the RTH NQ pieces). Twin holds overnight with a wide stop (check overnight
 margin). Add a row only at its line; drop back one after a 20% drawdown. Live expectation: >= 75% of these backtests.
+**Holdout check (Codex 2026-10-31: the ladder picks and reports on the same history):** order chosen on 2018-22 only, scored on
+2023+. Small rows are NOT stable: the 2018-22 pick shares only 2 of its first 4 pieces with the table (Twin comes 13th there),
+and its 4-piece set made $8.3k at ret/DD 3.25 on 2023+ vs the table's set $12.4k / 5.58. From ~12 pieces it is stable (11 of 12
+the same; 2023+ ret/DD 6.3 vs 7.0, capital line $16.6k vs $17.4k). The 2023+ capital lines run higher than the table: 12 pieces
+~$15-17k (table $14.9k), all 15 cleared ~$29k (table $24.3k). **So: plan the personal start at the ~12-piece row with ~$15-17k;
+rows below 12 pieces are history-fitted guesses, not tested sets.** Capital lines stay research estimates.
 Old table (2026-10-24, 16-piece core, before Swing Target / PAPERTREND): in git history.
 
 **Units:** every '$ a year' is the backtest at the sizes in its row; '1 micro' = 1 MNQ / MES / MCL per piece, so the core

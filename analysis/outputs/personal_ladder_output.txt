@@ -22,3 +22,22 @@ step  + piece               pieces  $ a year p50  bad year p5    DD p95  ret/DD 
    2  S47                       17  $     32,716  $    17,627  $  5,312    6.16  $      26,559
    3  FC2B                      18  $     35,005  $    19,112  $  5,769    6.07  $      28,846
    4  S30                       19  $     40,543  $    22,614  $  7,222    5.61  $      36,112
+
+Holdout: order chosen on 2018-22, scored on 2023+ (vs the full-history order, also scored on 2023+)
+  n  2018-22 pick          2023+ $ p50 ret/DD   capital   full-history pick     2023+ $ p50 ret/DD   capital
+  1  OvernightBiasML       $     2,836   1.47 $   9,680   OvernightTick         $     2,708   2.11 $   6,414
+  2  OvernightTick         $     5,658   2.99 $   9,476   TwinContinuation      $     8,479   4.57 $   9,276
+  3  SwingTarget           $     8,154   3.22 $  12,674   OvernightBiasML       $    11,379   5.11 $  11,139
+  4  ESMOCFollow_perMES    $     8,333   3.25 $  12,803   LateDayFlow           $    12,441   5.58 $  11,140
+  5  CLSundayFade_perMCL   $     9,321   3.46 $  13,471   DualThrust            $    15,430   5.55 $  13,911
+  6  ExpirationOpenShort   $    10,112   4.07 $  12,433   BridgeMondayLong      $    16,917   6.26 $  13,506
+  7  BridgeMondayLong      $    11,638   4.95 $  11,762   SwingTarget           $    19,553   6.33 $  15,442
+  8  LateDayFlow           $    12,702   5.24 $  12,127   CLSundayFade_perMCL   $    20,614   6.73 $  15,308
+  9  PaperTrend            $    14,943   4.99 $  14,969   ExpirationOpenShort   $    21,402   7.06 $  15,166
+ 10  DualThrust            $    18,017   5.91 $  15,241   NFPFade               $    21,927   7.16 $  15,320
+ 11  NFPFade               $    18,622   6.19 $  15,046   ESMOCFollow_perMES    $    22,137   7.24 $  15,299
+ 12  VaultBreak            $    20,921   6.28 $  16,648   PaperTrend            $    24,311   6.98 $  17,414
+ 13  TwinContinuation      $    26,414   6.81 $  19,389   MondayLong            $    28,126   7.44 $  18,896
+ 14  RelativeStrength      $    31,292   5.92 $  26,447   VaultBreak            $    30,353   7.12 $  21,325
+ 15  MondayLong            $    35,164   6.10 $  28,823   RelativeStrength      $    35,164   6.10 $  28,823
+   same first 12 pieces (any order): False; shared in the first 4: ['OvernightBiasML', 'OvernightTick']; first 12: 11 of 12

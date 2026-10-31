@@ -1,4 +1,13 @@
-50 missing: []
-50K: minutes long+short at once 10,845 on 88 of 2436 days; overstated worst per such minute avg $20, max $271; worst day-max $[139. 147. 154. 177. 271.]
-150 missing: []
-150K: minutes long+short at once 59,171 on 416 of 2436 days; overstated worst per such minute avg $20, max $406; worst day-max $[245. 286. 296. 332. 406.]
+Opposing-position overlap in the funded benches (Codex portfolio audit 2026-10-31; v2 same day after Codex's follow-up).
+
+50K plan ['CLS', 'EOS', 'LDF_MC', 'MOC_MES', 'MON_BR_MC', 'NFP_MC', 'ONB_ML2_MC', 'OT', 'T', 'VB_F', 'VB_N']:
+  long+short NQ open together: 8,594 minutes on 76 of 2436 days; double-counted per such minute avg $17, worst $166
+                      y1  y1_p5      y2  y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+bench as run      $9,761 $1,425 $12,196 $1,500 $13,000  6.4%   93.0%   250      50.0%      $0       0.0%
+overlap corrected $9,761 $1,425 $12,196 $1,500 $13,000  6.4%   93.0%   250      50.0%      $0       0.0%
+
+150K plan ['CLS', 'DT', 'EOS', 'LDF_MC', 'MOC_MES', 'MON_BR_MC', 'MON_MC', 'NFP_MC', 'ONB_ML2_MC', 'OT', 'RS', 'VB_F', 'VB_N']:
+  long+short NQ open together: 59,171 minutes on 416 of 2436 days; double-counted per such minute avg $20, worst $406
+                       y1  y1_p5      y2   y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+bench as run      $17,689 $8,500 $20,095 $20,500 $20,500  2.0%   97.8%   215      50.0%      $0       0.0%
+overlap corrected $17,689 $8,500 $20,095 $20,500 $20,500  2.0%   97.8%   215      50.0%      $0       0.0%

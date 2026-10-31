@@ -29,6 +29,21 @@ def ladder(P, pool, start=()):
     return chosen, rows
 
 
+def holdout(P):
+    """Codex 2026-10-31: the ladder picks subsets on the same history it reports. Pick the order on 2018-22 only, then score
+    that order on 2023+ (never seen) next to the full-history order, and the 2023+ capital line of each row."""
+    A, B = P[P.index.year <= 2022], P[P.index.year >= 2023]
+    cleared = [c for c in P.columns if c not in FWD]
+    chA, _ = ladder(A, cleared); chF, _ = ladder(P, cleared)
+    print("\nHoldout: order chosen on 2018-22, scored on 2023+ (vs the full-history order, also scored on 2023+)")
+    print(f"{'n':>3}  {'2018-22 pick':<22}{'2023+ $ p50':>11} {'ret/DD':>6} {'capital':>9}   {'full-history pick':<22}{'2023+ $ p50':>11} {'ret/DD':>6} {'capital':>9}")
+    for n in range(1, len(cleared) + 1):
+        a = mc(B[chA[:n]].sum(axis=1)); f = mc(B[chF[:n]].sum(axis=1))
+        print(f"{n:>3}  {chA[n - 1]:<22}${a[0]:>10,.0f} {a[0] / a[2]:>6.2f} ${a[2] / 0.2:>8,.0f}   {chF[n - 1]:<22}${f[0]:>10,.0f} {f[0] / f[2]:>6.2f} ${f[2] / 0.2:>8,.0f}")
+    print(f"   same first 12 pieces (any order): {sorted(chA[:12]) == sorted(chF[:12])}; "
+          f"shared in the first 4: {sorted(set(chA[:4]) & set(chF[:4]))}; first 12: {len(set(chA[:12]) & set(chF[:12]))} of 12")
+
+
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
     sys.argv = ["x", "scratch_data"]
@@ -42,3 +57,5 @@ if __name__ == "__main__":
         print(f"-- {tier}")
         for i, (k, n, p50, p5, dd, rd) in enumerate(rows, 1):
             print(f"{i:>4}  {k:<22}{n:>6}  ${p50:>11,.0f}  ${p5:>10,.0f}  ${dd:>7,.0f}  {rd:>6.2f}  ${dd / 0.2:>12,.0f}")
+    holdout(P)
+

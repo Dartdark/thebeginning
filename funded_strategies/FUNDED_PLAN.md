@@ -968,8 +968,11 @@ Relative Strength 1, Dual Thrust 2, Overnight Tick / VIX 2. Below full size each
 
 ## Bench limits: opposing positions and overnight minutes (2026-10-31, Codex portfolio audit step 2)
 
-`../analysis/opposing_overlap_check.py`: the funded benches mark every trade at its own worst price each minute, so when NQ longs
-and shorts are open together the smaller side's range is counted twice. 50K: 88 of 2,436 days (3.6%), avg $20 a minute, worst
-$271; 150K: 416 days (17%), avg $20, worst $406. This only OVERSTATES risk (failure rates slightly pessimistic, never
-optimistic) and it hits every plan in a comparison alike, so no decision changes; not corrected. Overnight Tick is stored as one
+`../analysis/opposing_overlap_check.py` (v2 after Codex's follow-up: CURRENT rosters, 50K with T fade 1 in place of RS longs and
+VB 2/1, 150K whole-number inputs; VB flagged contracts only on flagged days): the benches mark every trade at its own worst price
+each minute, so when NQ longs and shorts are open together the smaller side's range is counted twice. 50K: 76 of 2,436 days,
+avg $17 a minute, worst $166; 150K: 416 days (17%), avg $20, worst $406. **Corrected replay** (the double-count added back as a
+credit piece, 500 bootstrapped 2-year histories): identical to the bench as run (50K blown 6.4%, y2 $12,196; 150K blown 2.0%,
+y2 $20,095): no failure in any history falls in an overlap minute. Wiring proven: the same piece as a 10x debit raised 50K
+blown 3% -> 16%. So no allocation result depends on it. Overnight Tick is stored as one
 whole-night worst value on its exit day (also conservative). Missing overnight minutes in the data can't be rebuilt: limit noted.
