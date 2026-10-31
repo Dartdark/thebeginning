@@ -108,6 +108,15 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 
 ### E09 — Native micro costs, turnover and roll reconciliation
 
+- [Leveraged Fibonacci paper review](results/ssrn2011743.md), SSRN2011743, retained
+  2026-10-30: distinguish margin allocation, notional leverage and loss-at-stop.
+  A 60% equity margin commitment at 10x implies 6x equity notional under a simple
+  fixed-exposure illustration, not 60% notional or a 60% loss cap. Reserves and
+  maintenance margin do not guarantee maximum loss; suggested option hedges require
+  explicit expiry/strike/premium and marked cash accounting. Confirming a signal
+  at a daily close does not establish a fill at that same close. Source review and
+  conditional arithmetic only: no verified return, fill, savings or new strategy test.
+
 - Replay readiness 2026-10-31 ([report](results/swing_replay_readiness_20261031.md)):
   a MultiCharts exit row labeled `open` is a valuation mark, not a closed fill.
   ONB ML's final export mark maps to an exit before entry and crashes a clean
