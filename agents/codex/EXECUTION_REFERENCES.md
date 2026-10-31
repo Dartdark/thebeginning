@@ -711,6 +711,12 @@ Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SC
 
 ### E43 — Better trade accounting need not improve funded-account outcomes
 
+Additional replay: [5,000-history rebuilt bench](results/swing_target_exit_replay_20261030.md),
+source 86df2c0. Same $132/MNQ ledger correction; selected corrected-minus-legacy
+two-year payouts +$2 (50K) / -$2 (150K), with paired 90% intervals crossing zero.
+The rebuilt day universe extends to 10/30, unlike the other frozen 10/09 replays;
+do not pool them or attribute cross-run differences solely to the accounting fix.
+
 Source/review + date: [Swing Target exit-kind replay](results/swing_kind_replay_20261031.md), 2026-10-31; runner `analysis/codex_swing_kind_replay.py` and retained paired histories.
 Execution question and useful lesson: numeric exit types govern both fill costs and the final adverse mark. After correcting them, replay the account; payout timing and subsequent integer sizing can change the sign of the effect.
 Evidence: synthetic stop/target fixtures plus historical account simulation, 500 paired 500-day histories per account. Corrected ST nets gain $132 total per MNQ, but the 50K ADD arm has one additional failed history (7.8% -> 8.0% blown); selected 50K/150K replacements have unchanged two-year outcomes versus legacy and do not establish gains versus BASE.

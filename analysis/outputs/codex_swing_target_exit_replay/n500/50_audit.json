@@ -1,0 +1,232 @@
+{
+  "audit": {
+    "trades": 602,
+    "reasons": {
+      "target": 265,
+      "time": 254,
+      "stop": 47,
+      "breakeven": 36
+    },
+    "holiday_exits": 3,
+    "daily_net_per_nq": 198478.35,
+    "trade_net_per_nq": 198478.35000000003,
+    "legacy_net_per_nq": 197158.34999999998,
+    "trading_days": 2451,
+    "first": "2017-05-01 00:00:00",
+    "last": "2026-10-30 00:00:00",
+    "source_sha256": "ae64cf4ca453050281994d7d2e1578c11d010bfadb8b7c3e3f924d3a1ee8e4a2"
+  },
+  "plans": {
+    "50K plan": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1
+    },
+    "+ ST 1 MNQ": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1,
+      "ST": 1
+    },
+    "RS longs -> ST 1": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "OT": 1,
+      "ST": 1
+    },
+    "EOS -> ST 1": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1,
+      "ST": 1
+    },
+    "VB 2/1 -> 1/1 + ST 1": {
+      "VB_N": 1,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1,
+      "ST": 1
+    },
+    "replacement slot empty": {
+      "VB_N": 1,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1
+    },
+    "adopted, legacy encoding": {
+      "VB_N": 1,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1,
+      "ST_legacy": 1
+    }
+  },
+  "seed": 20261030,
+  "histories": 500,
+  "block_days": 20,
+  "horizon": 500,
+  "paired": {
+    "50K plan": {
+      "y1": {
+        "mean": -318.0,
+        "p5": -540.0,
+        "p95": -104.0
+      },
+      "y2": {
+        "mean": -96.0,
+        "p5": -371.0,
+        "p95": 164.0
+      },
+      "blown": {
+        "mean": -0.002,
+        "p5": -0.024,
+        "p95": 0.02
+      }
+    },
+    "replacement slot empty": {
+      "y1": {
+        "mean": 457.0,
+        "p5": 285.0,
+        "p95": 624.0
+      },
+      "y2": {
+        "mean": -156.0,
+        "p5": -329.0,
+        "p95": 16.0
+      },
+      "blown": {
+        "mean": 0.012,
+        "p5": -0.002,
+        "p95": 0.026
+      }
+    },
+    "adopted, legacy encoding": {
+      "y1": {
+        "mean": -9.0,
+        "p5": -34.0,
+        "p95": 12.0
+      },
+      "y2": {
+        "mean": -23.0,
+        "p5": -63.0,
+        "p95": 0.0
+      },
+      "blown": {
+        "mean": 0.002,
+        "p5": 0.0,
+        "p95": 0.006
+      }
+    }
+  }
+}
