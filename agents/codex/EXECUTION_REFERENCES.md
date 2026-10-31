@@ -145,7 +145,11 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   [correction proposals](proposals/weekly_cross_review_20261030.md)): numeric exit kinds are part of the accounting
   interface. Swing Target's text `reason` replaced numeric `kind`, so target cost handling and protective-stop
   exit-minute capping differed from its recorded fills. A fixed-ledger check, retaining holiday repairs, changes
-  closing cashflow by$132/MNQ total and48daily minima; corrected payout/risk comparisons remain unrun.
+  closing cashflow by$132/MNQ total and48daily minima. The [paired account replay](results/swing_kind_replay_20261031.md)
+  subsequently ran 500 two-year histories per account size: old/fixed swaps have identical two-year payouts and failure flags;
+  first-year average payouts change +$2 (50K) and -$8 (150K). Better isolated accounting does not establish
+  monotone account payouts. The 50K swap's earlier benefit was not reproduced on this frozen sample; the 150K
+  comparison was favorable, subject to the historical-roster and simulator limits in the report.
   Preserve schemas, assert numeric enum sets, and reconcile closed cash and marked paths before account claims.
   This is existing-ledger accounting evidence, not a new strategy, native-fill result or plan change.
 
