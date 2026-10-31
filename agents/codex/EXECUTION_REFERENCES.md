@@ -894,7 +894,69 @@ measurement, E15 overnight tails, E19 session clocks, E30 paired-leg execution.
 - Status: execution/accounting reference retained; naked component rejected, preferred hedge unverified. No execution
   saving, plan placement, trading, broker or live-policy change is claimed.
 
-### E52 — Strategic futures demand, welfare and executable basis
+### E52 — Dynamic pair models are not self-financing contract ledgers
+
+Source: Yang, Huang and Chen, unreviewed 38-page preprint SSRN 5017127, indexed posting 2024-11-11;
+owned full PDF reviewed 2026-10-31. [Saved review](results/hierarchical_pairs_review_20261031.md).
+Related: E09 cash/multiplier reconciliation, E19 information clocks, E38 return/NAV accounting.
+- Use: changing an estimated hedge ratio changes the definition of a model spread. That movement is not
+  necessarily P&L on the positions previously held. With constant prices 100/100, changing beta 1→0.9 moves
+  `Y-beta*X` from 0→10 while held-book price P&L stays 0 before costs. Rebalancing requires actual signed quantities,
+  executable leg prices, multipliers, margin/FX cash, fees and daily open-position marks.
+- Evidence: source inspection and a constructed accounting identity, not a finding that the authors' unavailable
+  implementation committed this error. Their validation Sharpe 4.19/return 13.318% remain unverified source claims.
+  The paper acknowledges its continuous/weighted series cannot be directly traded; signals need identified
+  contracts and an explicit roll/conversion ledger. Its stated uniform 0.1% commission is not a native all-in cost.
+- Timing/coverage: a delayed entry crossing back through a threshold differs from the first outward breach.
+  Freeze initialization, half-life fit, filtering versus smoothing, decision time and first executable fill.
+  Interpolated prices cannot establish two executable legs; missing or suspended legs remain unknown.
+- Limits: dynamic beta and cointegration do not guarantee neutrality or convergence; shared contracts across
+  many pairs must be netted without removing actual gross turnover/leg costs. Printed SD/covariance errors and
+  unspecified source settings cannot be silently repaired and called exact replication.
+- Prerequisites/next check for an independently justified future project: one dated-contract trade/rebalance/roll
+  example reconciled from signal through fills and cash/NAV, with causal model fitting and both-leg cost records.
+  Do not restart failed CME index-pair variants from this method citation alone.
+- Status: methodology/execution reference; no new return test, measured saving, portfolio place or trading change.
+
+### E53 — Commodity skew ranks require clean returns, native sizing and delivery-safe rolls
+
+Source: Vojtko and Padyšák, [SSRN 3507947](https://ssrn.com/abstract=3507947), PDF pp. 4–9;
+[full review](results/ssrn_3507947_review_20261030.md), retained 2026-10-30.
+- Use: a monthly long-four/short-four commodity ranking needs the full universe and a specified return construction;
+  splice jumps can distort measured skew, while reduced-universe ranks define a different strategy.
+- Evidence: source/model inspection only. Author cost assumptions and 6.67% modeled annual return are not measured
+  native costs, executable micro performance or a replication. No new returns were run.
+- Limits: the text combines most-liquid-contract holding with a first-day-of-delivery-month roll. Actual notice,
+  delivery and broker deadlines require instrument-specific checks before execution. $1m/$5m capital figures are
+  modeling assumptions, not universal account minimums; smaller native contracts do not cover every exposure automatically.
+- Next check: identified full panel, formation/fill clocks, contract-specific rolls, native integer positions and
+  fees under a frozen replication plan. A bootstrap percentile is not a maximum-loss guarantee.
+- Status: retained personal-account research lead, NEEDS DATA/details; ineligible for current Apex intraday use as written.
+
+### E54 — Unexpected activity is not automatically a forecast or executable depth
+
+Source/review + date: Sakthivel & Kamaiah, [SSRN1589962](https://ssrn.com/abstract=1589962),
+user full-text upload; [review](results/nifty_activity_volatility_ssrn1589962.md), 2026-10-30.
+Execution question and useful lesson: separate activity known before an order
+from same-day activity explained afterward. Daily futures OI is outstanding
+contracts, not signed pressure or available bid/ask depth. A volatility relation
+does not establish lower spread, fill costs, directional alpha or a useful filter.
+Evidence: author Nifty spot/futures variance regressions, 2000–08, with ARMA(5,5)
+expected/unexpected daily activity. Unexpected coefficients positive, expected
+negative. No future forecast or execution test. Printed GJR feedback arithmetic
+is 1.1235 under symmetric innovations; the source's 0.75 comparison omits its
+gamma term. Retained arithmetic script is not an empirical re-estimation.
+Market/platform limits: old Indian near-month daily series, not NQ/ES intraday
+quotes/fills; OI publication timing and model fitting clocks are unverified.
+Data/prerequisites: dated contract-level volume/OI and availability clocks,
+roll/expiry mapping, past-only estimation, variance-validity checks, lagged
+price-only forecast baseline, then paired net strategy/account outcomes.
+Smallest justified next check: apply these clock/model checks if independently
+undertaking activity-risk research; this source does not earn a new return test.
+Status: methodological reference only; no demonstrated executable edge, zero
+return trials, no promising-candidate queue entry or plan/live change.
+
+### E55 — Strategic futures demand, welfare and executable basis
 
 Source: Hugues Dastarac, *Strategic Trading, Welfare and Prices with Futures Contracts*, Banque de France WP 841,
 October 2021, SSRN 3947960, supplied 82-page PDF. [Review](results/strategic_futures_3947960_20261030.md),
