@@ -1,0 +1,499 @@
+// ============================================================================
+// MNQ_Portfolio_SharedCap - corrected version, entry-hour filter REMOVED.
+//
+// WHY THIS CHANGED: BlockShortMiddayEntries (blocking NA short entries
+// 11:00-13:59 CT) was derived by pattern-mining hour-of-day performance
+// on the full 2022-2026 dataset. A proper blind walk-forward test -
+// re-discovering the "weak hour" pattern using ONLY 2022-Sep 2025 data,
+// then applying that rule unchanged to the untouched Sep 2025-Jul 2026
+// holdout - FAILED: the hours flagged as weak in-sample (PF 0.50-0.76)
+// performed WELL out-of-sample (PF 3.14), while the "safe" kept hours
+// lost money (PF 0.90) in that same holdout. A sign-flip like that is the
+// signature of a data-mined rule rather than a real structural edge, not
+// just noise softening a real one. Filtering this on the holdout would
+// have turned a +$637 stretch into a -$1,025 one.
+//
+// This does NOT mean time-of-day is irrelevant to this signal - it means
+// THIS SPECIFIC hour range, chosen by scanning the full historical P&L,
+// isn't trustworthy as-is. If time-of-day filtering gets re-added later,
+// it needs to be re-derived from an in-sample-only window and validated
+// blind against a fresh holdout before going back into this file - not
+// re-added from the original full-period scan.
+//
+// Everything else is unchanged from the prior MNQ_Portfolio_SharedCap.cs:
+// same NA noise-boundary logic (minus the hour block), same ON/TOTM logic,
+// same shared -$750 daily governor across all three legs. BlockMondayEntries
+// is LEFT IN for now - it was checked split across two halves of the sample
+// earlier in this project, which is closer to a real test than the hour
+// filter got before today, but it has NOT been through this same strict
+// blind-discovery-then-holdout methodology either. Treat it as "checked
+// more than the hour filter was, but not to this same bar" - worth putting
+// through the identical blind test before fully trusting it.
+// ============================================================================
+
+using System;
+using PowerLanguage.Function;
+
+namespace PowerLanguage.Strategy
+{
+    public class MNQ_Portfolio_SharedCap_v2 : SignalObject
+    {
+        // ---- NA (noise-area) inputs ----
+        [Input] public int NoiseLookbackDays { get; set; }
+        [Input] public int NAContracts { get; set; }
+        [Input] public int EntryStartHHMM { get; set; }
+        [Input] public int EntryEndHHMM { get; set; }
+        [Input] public bool UseVwapInStop { get; set; }
+        [Input] public bool UseHolidayBlackout { get; set; }
+        [Input] public bool BlockMondayEntries { get; set; }
+        // REMOVED: BlockShortMiddayEntries, ShortBlockStartHHMM, ShortBlockEndHHMM
+        // - failed blind walk-forward, see header note.
+
+        // ---- ON/TOTM inputs ----
+        [Input] public double ZThreshold { get; set; }
+        [Input] public int LookbackN { get; set; }
+        [Input] public int OnContracts { get; set; }
+        [Input] public int TotmContracts { get; set; }
+        [Input] public int TotmDayRankTarget { get; set; }
+        [Input] public int TrendMALength { get; set; }
+
+        // ---- SHARED ----
+        [Input] public double SharedLossCap { get; set; }
+        [Input] public double SharedProfitCap { get; set; }
+        [Input] public double PointValue { get; set; }
+
+        private IOrderMarket naLongEntry, naLongExit, naShortEntry, naShortExit;
+        private IOrderMarket onShortEntry, onShortExit, totmLongEntry, totmLongExit;
+
+        private const int RTH_START = 830;
+        private const int RTH_END = 1500;
+        private const int MINUTES_PER_DAY = 390;
+
+        private double[,] moveHistory;
+        private int[] historyCount;
+        private int daySlot, completedDays;
+        private double[] todayMoves;
+        private bool[] todayMoveSet;
+        private double dayOpen, prevRthClose, lastRthClose;
+        private double cumPV, cumV;
+        private bool naLongOpen, naShortOpen;
+        private double naEntryPrice;
+
+        private double priorRTHClose;
+        private int dayRank, curMonth, curYear;
+        private double lastZ;
+        private double[] onHist;
+        private int histCount, histIndex;
+        private double sumX, sumX2;
+        private bool onShortOpen, totmLongOpen;
+
+        private double[] closeHist;
+        private int closeHistCount, closeHistIndex;
+        private double sumClose;
+        private double trendMA;
+        private double entryPriceON, entryPriceTOTM;
+
+        private double dailyRealizedPnL;
+        private bool dailyCapHit;
+
+        private bool inRTHPrev;
+
+        public MNQ_Portfolio_SharedCap_v2(object _ctx) : base(_ctx) { }
+
+        protected override void Create()
+        {
+            NoiseLookbackDays = 14;
+            NAContracts = 2;
+            EntryStartHHMM = 900;
+            EntryEndHHMM = 1430;
+            UseVwapInStop = true;
+            UseHolidayBlackout = true;
+            BlockMondayEntries = true;
+
+            ZThreshold = 1.0;
+            LookbackN = 20;
+            OnContracts = 3;
+            TotmContracts = 3;
+            TotmDayRankTarget = 3;
+            TrendMALength = 50;
+
+            SharedLossCap = 750;
+            SharedProfitCap = 0;      // 0 = disabled by default; set explicitly if consistency-rule
+                                       // compliance is needed for a specific eval phase
+            PointValue = 2.0;
+
+            naLongEntry = OrderCreator.MarketThisBar(
+                new SOrderParameters(Contracts.UserSpecified, "NA_Long", EOrderAction.Buy));
+            naLongExit = OrderCreator.MarketThisBar(
+                new SOrderParameters(Contracts.UserSpecified, "NA_LongX", EOrderAction.Sell));
+            naShortEntry = OrderCreator.MarketThisBar(
+                new SOrderParameters(Contracts.UserSpecified, "NA_Short", EOrderAction.SellShort));
+            naShortExit = OrderCreator.MarketThisBar(
+                new SOrderParameters(Contracts.UserSpecified, "NA_ShortX", EOrderAction.BuyToCover));
+
+            onShortEntry = OrderCreator.MarketThisBar(
+                new SOrderParameters(Contracts.UserSpecified, "ON_Short", EOrderAction.SellShort));
+            onShortExit = OrderCreator.MarketThisBar(
+                new SOrderParameters(Contracts.UserSpecified, "ON_Exit", EOrderAction.BuyToCover));
+            totmLongEntry = OrderCreator.MarketThisBar(
+                new SOrderParameters(Contracts.UserSpecified, "TOTM_Long", EOrderAction.Buy));
+            totmLongExit = OrderCreator.MarketThisBar(
+                new SOrderParameters(Contracts.UserSpecified, "TOTM_Exit", EOrderAction.Sell));
+        }
+
+        protected override void StartCalc()
+        {
+            moveHistory = new double[MINUTES_PER_DAY, NoiseLookbackDays];
+            historyCount = new int[MINUTES_PER_DAY];
+            todayMoves = new double[MINUTES_PER_DAY];
+            todayMoveSet = new bool[MINUTES_PER_DAY];
+            daySlot = 0; completedDays = 0;
+            dayOpen = 0; prevRthClose = 0; lastRthClose = 0;
+            cumPV = 0; cumV = 0;
+            naLongOpen = false; naShortOpen = false;
+
+            onHist = new double[LookbackN];
+            histCount = 0; histIndex = 0;
+            sumX = 0; sumX2 = 0;
+            priorRTHClose = 0;
+            dayRank = 0; curMonth = 0; curYear = 0;
+            lastZ = 0;
+            onShortOpen = false; totmLongOpen = false;
+
+            closeHist = new double[TrendMALength];
+            closeHistCount = 0; closeHistIndex = 0;
+            sumClose = 0; trendMA = 0;
+
+            dailyRealizedPnL = 0;
+            dailyCapHit = false;
+            inRTHPrev = false;
+
+            Output.Clear();
+            Output.WriteLine("MNQ_Portfolio_SharedCap_v2 started (entry-hour filter REMOVED - see header).");
+            Output.WriteLine("NA: LookbackDays={0} NAContracts={1} EntryWindow={2}-{3} BlockMondayEntries={4}",
+                NoiseLookbackDays, NAContracts, EntryStartHHMM, EntryEndHHMM, BlockMondayEntries);
+            Output.WriteLine("ON/TOTM: ZThreshold={0} LookbackN={1} OnContracts={2} TotmContracts={3} TotmDayRankTarget={4} TrendMALength={5}",
+                ZThreshold, LookbackN, OnContracts, TotmContracts, TotmDayRankTarget, TrendMALength);
+            Output.WriteLine("SHARED: SharedLossCap={0:F2} SharedProfitCap={1:F2} (0=disabled) PointValue={2:F2}",
+                SharedLossCap, SharedProfitCap, PointValue);
+        }
+
+        private double SigmaAtMinute(int m)
+        {
+            int n = historyCount[m];
+            if (n <= 0) return -1;
+            double sum = 0;
+            for (int i = 0; i < n; i++) sum += moveHistory[m, i];
+            return sum / n;
+        }
+
+        private bool IsHolidayBlackout(DateTime bt)
+        {
+            if (!UseHolidayBlackout) return false;
+            int mo = bt.Month, d = bt.Day;
+            bool christmasCluster = (mo == 12 && d >= 23) || (mo == 1 && d <= 2);
+            bool independenceDay = (mo == 7 && d >= 2 && d <= 5);
+            bool thanksgivingWeek = (mo == 11 && d >= 20 && d <= 29);
+            return christmasCluster || independenceDay || thanksgivingWeek;
+        }
+
+        private double UnrealizedNow(double naClose)
+        {
+            double u = 0;
+            if (naLongOpen) u += (naClose - naEntryPrice) * PointValue * NAContracts;
+            if (naShortOpen) u += (naEntryPrice - naClose) * PointValue * NAContracts;
+            if (onShortOpen) u += (entryPriceON - naClose) * PointValue * OnContracts;
+            if (totmLongOpen) u += (naClose - entryPriceTOTM) * PointValue * TotmContracts;
+            return u;
+        }
+
+        private void FlattenEverything(DateTime bt, double px, string reason)
+        {
+            if (naLongOpen)
+            {
+                naLongExit.Send(NAContracts);
+                dailyRealizedPnL += (px - naEntryPrice) * PointValue * NAContracts;
+                naLongOpen = false;
+            }
+            if (naShortOpen)
+            {
+                naShortExit.Send(NAContracts);
+                dailyRealizedPnL += (naEntryPrice - px) * PointValue * NAContracts;
+                naShortOpen = false;
+            }
+            if (onShortOpen)
+            {
+                onShortExit.Send(OnContracts);
+                dailyRealizedPnL += (entryPriceON - px) * PointValue * OnContracts;
+                onShortOpen = false;
+            }
+            if (totmLongOpen)
+            {
+                totmLongExit.Send(TotmContracts);
+                dailyRealizedPnL += (px - entryPriceTOTM) * PointValue * TotmContracts;
+                totmLongOpen = false;
+            }
+            Output.WriteLine("{0} {1} - everything flattened. dailyRealizedPnL={2:F2}", bt, reason, dailyRealizedPnL);
+        }
+
+        protected override void CalcBar()
+        {
+            DateTime bt = Bars.Time[0];
+            int t = bt.Hour * 100 + bt.Minute;
+
+            bool inRTHNow = (t > RTH_START) && (t <= RTH_END);
+            bool sessionStart = inRTHNow && !inRTHPrev;
+            bool sessionEnd = !inRTHNow && inRTHPrev;
+            bool exit1300 = (bt.Hour == 12 && bt.Minute == 0);
+
+            if (sessionStart)
+            {
+                prevRthClose = lastRthClose;
+                dayOpen = Bars.Open[0];
+                cumPV = 0; cumV = 0;
+                dailyRealizedPnL = 0;
+                dailyCapHit = false;
+                for (int i = 0; i < MINUTES_PER_DAY; i++) todayMoveSet[i] = false;
+
+                int thisMonth = bt.Month;
+                int thisYear = bt.Year;
+                if (curMonth == 0 || thisMonth != curMonth || thisYear != curYear)
+                {
+                    dayRank = 1; curMonth = thisMonth; curYear = thisYear;
+                }
+                else
+                {
+                    dayRank = dayRank + 1;
+                }
+
+                if (priorRTHClose > 0)
+                {
+                    double onReturn = (Bars.Open[0] - priorRTHClose) / priorRTHClose;
+                    if (histCount >= LookbackN)
+                    {
+                        double mean = sumX / LookbackN;
+                        double variance = (sumX2 / LookbackN) - (mean * mean);
+                        double sd = variance > 0 ? Math.Sqrt(variance) : 0;
+                        lastZ = sd > 0 ? (onReturn - mean) / sd : 0;
+                        sumX = sumX - onHist[histIndex] + onReturn;
+                        sumX2 = sumX2 - (onHist[histIndex] * onHist[histIndex]) + (onReturn * onReturn);
+                    }
+                    else
+                    {
+                        lastZ = 0;
+                        sumX += onReturn; sumX2 += onReturn * onReturn; histCount++;
+                    }
+                    onHist[histIndex] = onReturn;
+                    histIndex = (histIndex + 1) % LookbackN;
+
+                    if (histCount >= LookbackN && lastZ >= ZThreshold && OnContracts > 0 && !onShortOpen && !dailyCapHit)
+                    {
+                        onShortEntry.Send(OnContracts);
+                        onShortOpen = true;
+                        entryPriceON = Bars.Close[0];
+                        Output.WriteLine("{0} ON_SHORT entry, z={1:F2}", bt, lastZ);
+                    }
+                }
+
+                bool trendOK = closeHistCount >= TrendMALength && priorRTHClose > trendMA;
+                if (dayRank == TotmDayRankTarget && TotmContracts > 0 && !totmLongOpen && !dailyCapHit)
+                {
+                    if (trendOK)
+                    {
+                        totmLongEntry.Send(TotmContracts);
+                        totmLongOpen = true;
+                        entryPriceTOTM = Bars.Close[0];
+                        Output.WriteLine("{0} TOTM_LONG entry, dayRank={1}, trendMA={2:F2}", bt, dayRank, trendMA);
+                    }
+                    else
+                    {
+                        Output.WriteLine("{0} TOTM_LONG SKIPPED (trend filter)", bt);
+                    }
+                }
+            }
+
+            if (inRTHNow && dayOpen > 0)
+            {
+                int m = (bt.Hour * 60 + bt.Minute) - (8 * 60 + 31);
+                if (m >= 0 && m < MINUTES_PER_DAY)
+                {
+                    double move = Math.Abs(Bars.Close[0] / dayOpen - 1.0);
+                    todayMoves[m] = move; todayMoveSet[m] = true;
+
+                    cumPV += Bars.Close[0] * Bars.Volume[0];
+                    cumV += Bars.Volume[0];
+                    double vwap = cumV > 0 ? cumPV / cumV : Bars.Close[0];
+
+                    double sigma = SigmaAtMinute(m);
+                    bool naReady = (completedDays >= NoiseLookbackDays) && (sigma >= 0) && (prevRthClose > 0);
+
+                    if (!dailyCapHit && (naLongOpen || naShortOpen || onShortOpen || totmLongOpen))
+                    {
+                        double markToMarket = dailyRealizedPnL + UnrealizedNow(Bars.Close[0]);
+                        bool profitCapActive = SharedProfitCap > 0 && markToMarket >= SharedProfitCap;
+                        bool lossCapHit = markToMarket <= -SharedLossCap;
+
+                        if (profitCapActive || lossCapHit)
+                        {
+                            dailyCapHit = true;
+                            FlattenEverything(bt, Bars.Close[0],
+                                string.Format("SHARED CAP HIT (markToMarket={0:F2}, lossCap={1:F2}, profitCap={2:F2})",
+                                    markToMarket, SharedLossCap, SharedProfitCap));
+                        }
+                    }
+
+                    if (naReady)
+                    {
+                        double anchorHigh = Math.Max(dayOpen, prevRthClose);
+                        double anchorLow = Math.Min(dayOpen, prevRthClose);
+                        double upperB = anchorHigh * (1.0 + sigma);
+                        double lowerB = anchorLow * (1.0 - sigma);
+
+                        if (naLongOpen)
+                        {
+                            double stop = UseVwapInStop ? Math.Max(upperB, vwap) : upperB;
+                            if (Bars.Close[0] < stop)
+                            {
+                                naLongExit.Send(NAContracts);
+                                dailyRealizedPnL += (Bars.Close[0] - naEntryPrice) * PointValue * NAContracts;
+                                naLongOpen = false;
+                                Output.WriteLine("{0} NA LONG stop-exit", bt);
+                            }
+                        }
+                        else if (naShortOpen)
+                        {
+                            double stop = UseVwapInStop ? Math.Min(lowerB, vwap) : lowerB;
+                            if (Bars.Close[0] > stop)
+                            {
+                                naShortExit.Send(NAContracts);
+                                dailyRealizedPnL += (naEntryPrice - Bars.Close[0]) * PointValue * NAContracts;
+                                naShortOpen = false;
+                                Output.WriteLine("{0} NA SHORT stop-exit", bt);
+                            }
+                        }
+
+                        bool halfHour = (bt.Minute == 0 || bt.Minute == 30);
+                        bool inEntryWindow = (t >= EntryStartHHMM) && (t <= EntryEndHHMM);
+                        bool holidayBlocked = IsHolidayBlackout(bt);
+                        bool mondayBlocked = BlockMondayEntries && (bt.DayOfWeek == DayOfWeek.Monday);
+                        // NOTE: no shortHourBlocked check anymore - removed, see header
+
+                        if (halfHour && inEntryWindow && !holidayBlocked && !mondayBlocked && !dailyCapHit && NAContracts > 0)
+                        {
+                            if (Bars.Close[0] > upperB && !naLongOpen)
+                            {
+                                if (naShortOpen)
+                                {
+                                    naShortExit.Send(NAContracts);
+                                    dailyRealizedPnL += (naEntryPrice - Bars.Close[0]) * PointValue * NAContracts;
+                                    naShortOpen = false;
+                                }
+                                naLongEntry.Send(NAContracts);
+                                naLongOpen = true;
+                                naEntryPrice = Bars.Close[0];
+                                Output.WriteLine("{0} NA LONG entry", bt);
+                            }
+                            else if (Bars.Close[0] < lowerB && !naShortOpen)
+                            {
+                                if (naLongOpen)
+                                {
+                                    naLongExit.Send(NAContracts);
+                                    dailyRealizedPnL += (Bars.Close[0] - naEntryPrice) * PointValue * NAContracts;
+                                    naLongOpen = false;
+                                }
+                                naShortEntry.Send(NAContracts);
+                                naShortOpen = true;
+                                naEntryPrice = Bars.Close[0];
+                                Output.WriteLine("{0} NA SHORT entry", bt);
+                            }
+                        }
+                    }
+
+                    lastRthClose = Bars.Close[0];
+                }
+            }
+
+            if (exit1300 && onShortOpen && !dailyCapHit)
+            {
+                onShortExit.Send(OnContracts);
+                dailyRealizedPnL += (entryPriceON - Bars.Close[0]) * PointValue * OnContracts;
+                onShortOpen = false;
+                Output.WriteLine("{0} ON_SHORT exit (13:00)", bt);
+            }
+
+            if (sessionEnd)
+            {
+                if (naLongOpen || naShortOpen || totmLongOpen)
+                {
+                    if (naLongOpen)
+                    {
+                        naLongExit.Send(NAContracts);
+                        dailyRealizedPnL += (lastRthClose - naEntryPrice) * PointValue * NAContracts;
+                        naLongOpen = false;
+                    }
+                    if (naShortOpen)
+                    {
+                        naShortExit.Send(NAContracts);
+                        dailyRealizedPnL += (naEntryPrice - lastRthClose) * PointValue * NAContracts;
+                        naShortOpen = false;
+                    }
+                    if (totmLongOpen)
+                    {
+                        totmLongExit.Send(TotmContracts);
+                        dailyRealizedPnL += (Bars.Close[0] - entryPriceTOTM) * PointValue * TotmContracts;
+                        totmLongOpen = false;
+                    }
+                    Output.WriteLine("{0} EOD flat", bt);
+                }
+
+                double todayClose = Bars.Close[1];
+                if (closeHistCount >= TrendMALength)
+                    sumClose = sumClose - closeHist[closeHistIndex] + todayClose;
+                else
+                {
+                    sumClose += todayClose; closeHistCount++;
+                }
+                closeHist[closeHistIndex] = todayClose;
+                closeHistIndex = (closeHistIndex + 1) % TrendMALength;
+                trendMA = closeHistCount >= TrendMALength ? (sumClose / TrendMALength) : 0;
+                priorRTHClose = todayClose;
+
+                if (todayMoveSet.Length > 0)
+                {
+                    int stored = 0;
+                    for (int i = 0; i < MINUTES_PER_DAY; i++)
+                    {
+                        if (todayMoveSet[i])
+                        {
+                            moveHistory[i, daySlot] = todayMoves[i];
+                            if (historyCount[i] < NoiseLookbackDays) historyCount[i]++;
+                            stored++;
+                        }
+                    }
+                    if (stored > 0)
+                    {
+                        daySlot = (daySlot + 1) % NoiseLookbackDays;
+                        completedDays++;
+                    }
+                }
+            }
+
+            inRTHPrev = inRTHNow;
+        }
+    }
+}
+
+// ============================================================================
+// BEFORE RUNNING:
+//   1. Compile clean.
+//   2. Run over the same 02/22/2022-07/24/2026 window, $50K sim account,
+//      MNQ Realistic commission + 3 ticks slippage, no bar magnifier.
+//   3. Expect PF to come down somewhat from the 1.86 figure the filtered
+//      version showed - that number included whatever edge the (now-
+//      removed) filter appeared to add on the historical window it was
+//      built from. This run is the real, trustworthy baseline going
+//      forward - treat it as the new reference point, not a regression
+//      from the old one.
+//   4. Re-check: DLL breach count (should still be 0 at SharedLossCap=750),
+//      worst single day, and net profit.
+// ============================================================================

@@ -1,0 +1,61 @@
+MNQ ADX + Accelerator Oscillator, 1% risk (user's file, 2026-10-24; code in checks/candidates/adx_ac/).
+
+1. Rebuild, main reading (1-min Eastern RTH chart = entries 08:30-14:51 CT), per NQ after costs:
+   all                                n=22925 win 13% $ -21.8 PF 0.71 t -14.1 yrs+ 0/9 | 18-22 $-20.0 (t -12.3) | 23+ $-24.3 (t -8.3)
+   longs                              n=11382 win 13% $ -22.6 PF 0.69 t -10.5 yrs+ 0/9 | 18-22 $-21.3 (t -9.2) | 23+ $-24.2 (t -6.1)
+   shorts                             n=11543 win 14% $ -21.1 PF 0.73 t  -9.4 yrs+ 0/9 | 18-22 $-18.6 (t -8.3) | 23+ $-24.4 (t -5.7)
+   by year ($ per NQ): {2018: -64437, 2019: -51413, 2020: -63375, 2021: -34034, 2022: -51414, 2023: -49736, 2024: -62808, 2025: -55865, 2026: -66641}
+   exits: {'be': 14805, 'stop': 5075, 'target': 3042, 'close': 3} | trades a day 10.1 on 2262 days, median ATR 8.3 pts, gross $-5.2 vs costs $16.6 a trade
+
+2. The user's standard chart: 1-min, Exchange time (CT), CME 24-hour session; indicators on all bars,
+   entries 09:30-15:51 CT, SetExitOnClose = the 16:00 CT session end (Apex needs flat by 15:59: also shown at 15:58):
+   24h CT chart, exit 16:00           n=22470 win 13% $ -19.4 PF 0.71 t -14.1 yrs+ 0/9 | 18-22 $-17.5 (t -11.5) | 23+ $-22.1 (t -8.9)
+      longs                           n=11084 win 13% $ -19.7 PF 0.70 t -10.2 yrs+ 0/9 | 18-22 $-18.4 (t -8.4) | 23+ $-21.5 (t -6.2)
+      shorts                          n=11386 win 14% $ -19.2 PF 0.72 t  -9.8 yrs+ 0/9 | 18-22 $-16.5 (t -7.8) | 23+ $-22.6 (t -6.3)
+   by year: {2018: -60614, 2019: -51230, 2020: -43531, 2021: -36640, 2022: -32580, 2023: -51601, 2024: -57185, 2025: -51252, 2026: -52232} | exits {'be': 14444, 'stop': 5000, 'target': 2985, 'close': 41}
+   24h CT chart, flat 15:58           n=22470 win 13% $ -19.5 PF 0.71 t -14.1 yrs+ 0/9 | 18-22 $-17.5 (t -11.5) | 23+ $-22.1 (t -8.9)
+   RTH bars, times as CT (09:30-14:51) n=19845 win 13% $ -19.5 PF 0.71 t -13.3 yrs+ 0/9 | 18-22 $-18.8 (t -11.9) | 23+ $-20.4 (t -7.5)
+   5-min Eastern RTH                  n= 4092 win 14% $ -29.8 PF 0.81 t  -3.6 yrs+ 0/9 | 18-22 $-28.2 (t -3.2) | 23+ $-31.8 (t -2.1)
+      5-min longs                     n= 1889 win 14% $ -31.2 PF 0.80 t  -2.6 yrs+ 0/9 | 18-22 $-21.7 (t -1.6) | 23+ $-43.8 (t -2.0)
+      5-min shorts                    n= 2203 win 14% $ -28.6 PF 0.82 t  -2.6 yrs+ 2/9 | 18-22 $-34.0 (t -2.9) | 23+ $-21.9 (t -1.1)
+
+3. Controls (1-min main reading, same entries and exits):
+   same signal bars, random side (5 runs): $-17.4 (max $-15.9) vs $-21.8
+   no AC threshold (AC sign only)     n=23877 win 13% $ -22.3 PF 0.70 t -14.8 yrs+ 0/9 | 18-22 $-20.6 (t -13.2) | 23+ $-24.5 (t -8.6)
+   no break-even                      n=23171 win 12% $ -20.9 PF 0.69 t -15.0 yrs+ 0/9 | 18-22 $-19.7 (t -13.6) | 23+ $-22.6 (t -8.6)
+
+4. Standard metrics per NQ (main reading):
+       trades win  avg   annual sharpe sortino profit_factor   max_dd calmar  ulcer ulcer_perf
+ADX AC  22925 13% $-22 $-54,991  -4.58   -5.50          0.71 $499,779  -0.11 551.81      -0.20
+longs   11382 13% $-23 $-28,248  -3.67   -4.69          0.69 $257,564  -0.11 276.65      -0.20
+shorts  11543 14% $-21 $-26,743  -3.02   -3.97          0.73 $243,153  -0.11 275.21      -0.19
+                              actual         p5        p50        p95
+name         metric                                                  
+ADX AC 2023+ sharpe            -4.05      -4.96      -4.03      -3.04
+             sortino           -4.95      -5.71      -4.93      -4.04
+             pf_day             0.49       0.42       0.49       0.58
+             calmar            -0.26      -0.26      -0.25      -0.25
+             ulcer            253.60     200.53     266.37     330.57
+             max_dd       235,050.75 184,821.91 234,545.77 284,692.78
+             P(Sharpe<=0)        NaN        NaN       1.00        NaN
+longs 2023+  sharpe            -3.27      -4.15      -3.25      -2.33
+             sortino           -4.26      -5.09      -4.24      -3.23
+             pf_day             0.57       0.49       0.57       0.67
+             calmar            -0.25      -0.26      -0.25      -0.24
+             ulcer            116.13      94.48     133.48     171.12
+             max_dd       117,220.39  87,638.14 117,314.96 145,996.15
+             P(Sharpe<=0)        NaN        NaN       1.00        NaN
+shorts 2023+ sharpe            -2.76      -3.67      -2.75      -1.86
+             sortino           -3.60      -4.54      -3.61      -2.62
+             pf_day             0.59       0.50       0.60       0.70
+             calmar            -0.26      -0.26      -0.25      -0.23
+             ulcer            138.46      89.98     135.83     181.38
+             max_dd       118,630.14  85,342.72 120,447.59 156,650.38
+             P(Sharpe<=0)        NaN        NaN       1.00        NaN
+             actual_dd pct_rank     dd50     dd95     dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+ADX AC 2023+  $235,051      12% $236,891 $243,203 $246,532        100%        100%        100%
+longs 2023+   $117,220      26% $118,274 $122,904 $125,552        100%        100%        100%
+shorts 2023+  $118,630      10% $120,785 $126,815 $130,459        100%        100%        100%
+   Monte Carlo 1 MNQ (x0.1): trades 22925 | total p5 $-55,809 / p50 $-49,995 / p95 $-44,046, P(total <= 0) 100.0%
+      max DD actual $50,030 (rank 48%), shuffled p50 $50,213 / p95 $56,010 / p99 $58,524; losing streak actual 82, p95 77
+      252-day block bootstrap: P&L p5 $-7,651 / p50 $-5,466 / p95 $-3,509, P(loss) 100.0%, max DD p50 $5,642 / p95 $7,775, return/DD -0.97, P(hit $2,000 trailing, EOD check only) 100.0%

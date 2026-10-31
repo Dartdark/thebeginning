@@ -4,6 +4,9 @@ Read before writing or changing any MultiCharts code. **After every compile erro
 MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → fix), so it is not repeated.
 
 ## Compile errors
+- **"unrecognized token: #" at line 1** (2026-10-24, 'Overnight Ticks Auto VIX Updater' signal): a PowerShell script
+  (`tools/vix_update.ps1`) was pasted into a MultiCharts signal. `.ps1` files run in Windows PowerShell / Task Scheduler,
+  never in MultiCharts; only `.txt` PowerLanguage files go into the editor. Delete the signal and run the script in PowerShell.
 - **"Unknown Function" on `IIFString`** (NQ_Vault_Break_SP, line 199): not a built-in in our MultiCharts.
   Use an if / else with two `Print` statements (or `IFF` for numbers only).
 - **"unverified function"**: every OFB_* function must be compiled once before a signal that calls it.
@@ -19,6 +22,15 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
 - **Holidays / early closes**: hard-coded times (e.g. last entry 14:30, flatten 15:55) trade into a 12:00 CT close.
   Fix: the `IsEarlyClose` date list + `UseHolidayTimes`, `EarlyLastEntry 1100`, `EarlyFlatten 1130` (as in Vault Break
   and Twin Continuation v2.1).
+- **A day-session chart doesn't stop a holiday trade at the 12:00 CT halt** (FC 2B, 2026-10-23): with ExitTime 14:58
+  and `SetExitOnClose`, MultiCharts held 26 holiday trades through the halt and exited them at the 17:00 reopen. Every
+  strategy needs the `IsEarlyClose` list and an early flatten, whatever the chart's session.
+- **`Volume` on intraday bars is up-tick volume; `Ticks` is the total** (Codex, FC 2B review 2026-10-23). Our exporter
+  writes `Ticks`, so a Python replay of a strategy that uses `Volume` is only approximate; use the MC report as the reference.
+- **A raised stop can already be through the market** when it is sent at the bar close (break-even / trail after a fast
+  reversal): live it is rejected. Exit at market next bar when the new stop is at or beyond the close.
+- **The wrong code under the right name** (2026-10-23): "Study is missing Data 2" on FC 2B meant the Overnight Sentiment
+  code (4 data series) had been pasted into the FC 2B signal. Check the first comment lines after every paste.
 - **Old input values survive a code replace**: pasting new code into an existing signal keeps inputs with the same name
   (an old ExitTime 1100 broke a backtest). Check the report's Settings sheet after every change.
 - **Bar-time minutes vs HHMM**: when porting, 15:30 CT is minute 1350 / HHMM 1530, not 1290 (a Python port bug,
@@ -31,6 +43,30 @@ MultiCharts-vs-Python mismatch is solved, add it here** (symptom → cause → f
   bar). Fix: `SetStopLoss` / `SetProfitTarget` (they work on the entry bar) plus the bar-close stop guard.
 - **Counting entries with `MarketPosition <> 0 and MarketPosition[1] = 0`** misses trades that open and close in one bar.
   Fix: `TotalTrades` at the day's start vs now.
+
+## Symbol Mapping: how to check and fix it (step by step, 2026-10-22)
+**Symptom:** orders rejected instantly ('Invalid Market / StopMarket order parameters ... @MNQ'); in the Order and Position
+Tracker (Ctrl+Shift+O, Orders tab) the **Instrument column shows `@MNQ`** instead of `MNQZ6` and **Broker Order ID is 0**.
+The trade logger still writes OPEN / CLOSE rows (it logs MultiCharts' strategy position, not broker fills), so a rejected
+day can look traded in `live/trades/`: always confirm fills in the tracker or on the Apex dashboard. Happened 10/14-16
+(PC) and 10/20 (VPS).
+
+**Cause:** `@MNQ` is dxFeed's continuous symbol; Rithmic only accepts a real contract. The mapping is stored per
+MultiCharts installation, so a new machine (the VPS) starts with the default `@MNQ -> @MNQ`.
+
+**Fix** (after 15:59 CT or on a weekend, every account flat):
+1. MultiCharts: **File → Broker Profiles → Rithmic → Symbol Mapping**.
+2. Find the row for `@MNQ` (data source dxFeed). Set the broker symbol to the **current contract**: search `MNQ` (no @) in
+   the Rithmic lookup and pick **MNQZ6** (Rithmic uses one-digit years), exchange CME. Same for `@MES -> MESZ6` and the
+   MCL contract when those strategies go live.
+3. Save / OK. Then on every live chart: auto-trading **off, then on** (initial position Flat); Strategy Positions all flat.
+4. **Test:** one manual 1-MNQ order through MultiCharts per account; the tracker must show `MNQZ6`, a real broker ID and
+   Filled; the fill appears on the Apex dashboard. Flatten it.
+5. Do steps 1-4 on **every** machine that trades (PC and VPS have separate mappings).
+
+**Rolls (quarterly):** change the broker symbol before each roll: **Thu 2026-12-10 after the close: MNQZ6 → MNQH7**
+(and MESZ6 → MESH7); then March → MNQM7, June → MNQU7, September → MNQZ7. Repeat steps 3-4 after each change. A roll
+reminder is scheduled for 12/10 08:00 CT.
 
 ## Live order rejections
 - **'Invalid StopMarket order parameters' on a protective stop** (EOS, 2026-10-16, 6:34 PT = 8:34 CT: "Buy Stop 1 @MNQ @ 30168"
@@ -111,7 +147,16 @@ Do it after 15:59 CT or on a weekend, with every account flat. Each line is an e
 - Several signals on one chart form ONE strategy sharing one position: an exit-only signal (e.g. `Apex_Target_Guard`)
   added next to a strategy closes that strategy's position. It cannot see or close positions on other charts.
 - Report Settings sheet to check: name, inputs, Compression, Bar Magnifier, commission / slippage 0, fill limit +1 point.
+- **"Fill limit price exceeded by 1 points" means 1 TICK on NQ, not 1 index point** (found 2026-10-22 from Codex's VB
+  parity check): of 896 VB target fills in the MC report, none was a touch-only fill, but 43 had only 0.25-0.75 point
+  through. MultiCharts' "point" is the symbol's smallest price unit. Our Python tests require 1 full point through, so
+  Python is slightly stricter than MC (conservative); to reproduce an MC report trade-for-trade, use 1 tick through.
 - Data: Map ASCII with Exchange CME, time zone Exchange, start row 2, bar-close conversion unchecked.
+- **COMEX / NYMEX symbols (@GC, @CL) run on NEW YORK time in our MultiCharts** (2026-10-24, GC_COMBO): "Exchange" time zone on
+  a gold chart = Eastern, unlike @NQ / @ES (Central). Found from the GC_COMBO report: every 'chart 09:01' entry was our 08:01 CT
+  price, so its ETminusChart had to be 0, not the author's 1. A chart mixing CME and COMEX symbols (or an ASCII file mapped as
+  CME) on Exchange time gives "Instruments from different time zones cannot be mixed": map the ASCII symbol with the same
+  exchange as Data1 (COMEX), or put every instrument on Local time.
 - Auto trading: Format Signals > Properties > Auto Trading (broker, account), mode AA, initial position Flat, no automatic
   position sync, intra-bar order generation off. Tracker: Ctrl+Shift+O.
 - The ACCOUNT is behind the gear icon next to the broker plug-in (Strategy Properties > Auto Trading > Rithmic > gear).
@@ -126,3 +171,77 @@ Do it after 15:59 CT or on a weekend, with every account flat. Each line is an e
 ## Reading MultiCharts reports
 - No CSV conversion is needed: `analysis/portfolio.load_mc(g, "<report>.xlsx")` reads the "List of Trades" sheet
   directly (entry rows + exit rows), and `analysis/resampling.py` does the Monte Carlo / bootstrap.
+
+## "Can't open/create file" on a third-party strategy (2026-10-25, BB_MRM)
+`Print(File(path), ...)` fails and stops the study when the folder in `path` doesn't exist on this PC. BB_MRM's
+`VolLogFilePath` (default `C:\Users\Alessandro\...\MRM_BB\`, the author's PC) is written every session, whatever
+`LogToFile` says. Fix: in Format Signal set `VolLogFilePath` (and `LogFilePath`) to a folder that exists, e.g.
+`C:\MC_logs\BB_MRM_vol.txt` after creating `C:\MC_logs`. Check every imported strategy for hard-coded file paths.
+
+## "this word has already been defined" on a variable name (2026-10-25, Swing Target v3)
+`Short` is a reserved word in PowerLanguage (like `Buy`, `Sell`, `Long`): a variable named `Short` fails to compile.
+Renamed to `IsHol`. Avoid market-direction words as variable names.
+
+## Half-day sessions that a holiday list misses (2026-10-25, Codex's NQ Day Flow Six review)
+A fixed-time exit (`Time >= ExitTime`) never fires when the session ends early, so the position rides the halt and exits at
+the next session's first bar. Found in our own MC trade lists: **Monday Long 2023-07-03** (Monday before a Tuesday July 4,
+early close 12:15 CT) held 08:31 -> 17:05; **NFP Fade 2023-04-07** (payroll on Good Friday, shortened equity session) held to
+Sunday 17:05. Both are Apex violations live. Fix: Monday Long's early-close list now has July 3 and Dec 24; NFP Fade skips
+Good Friday (Easter computed in the code). Rule for every new strategy: list the early-close days it can trade (Jul 3,
+Nov Fri after Thanksgiving, Dec 24, Good Friday, Monday holidays) and skip them or exit before the early close; check the MC
+trade list for exits after 15:59 CT or on a later date.
+
+## A copied chart keeps the strategy's ACCOUNT (2026-10-26, live incident, account #3)
+Account #3's (150K, APEX-681524-03) chart set was copied from #2's: the chart-trading panel showed -03, but the strategies'
+Auto Trading gear still said **APEX-681524-02**. Result: #3 never traded, and its 150K-sized orders (VB 20) went to #2, which
+held 28 MNQ instead of 8 (a 75-pt stop = ~$4,200 vs a ~$400 cushion). Fixed live: AA off on #3's VB chart (its 20-lot closed,
+#2 back to 8), gear typed as APEX-681524-03 (the drop-down was empty; typing works). Rule: after copying a chart, open
+Format Signals > Properties > Auto Trading > Rithmic > gear on EVERY strategy and check the account; then check the Orders
+tab's Account column (widen it) on the first orders.
+
+## "Your session has been terminated ... started on a different machine" (2026-10-29, VPS)
+Cause: a half-closed copy of MultiCharts was still running on the VPS itself, so the new start counted as a second session
+(the PC was not the cause; closing MultiCharts there changed nothing). Fix: restart the VPS (Start > Restart), start only
+MultiCharts64, wait for Rithmic to connect, check positions in the Order and Position Tracker, then auto-trading on per chart
+(Flat). Faster check next time: Task Manager > Details on the VPS for a leftover MultiCharts64 / TradingServer / tsServer
+process before restarting the whole machine.
+
+## A signal that silently failed to compile keeps the chart 'on' (2026-10-27, live: missed ONB trade)
+Overnight Bias ADX30 signalled long 10/27 10:00 -> 14:30 CT (+135 pts; ~4 MNQ on #2 = ~$1,080, ~12 MNQ on #3 = ~$3,240 gross)
+but no order was sent: the ONB code had not compiled, so the strategy was not running, while the chart, the logger
+(POS rows: strategy 0, broker 0) and the AA button looked normal. Caught by the missed-trade panel (ONB 7 quiet days,
+backtest chance ~5%), confirmed by the chart's trade list. Rule: after every paste, read the PowerLanguage Editor's Output
+for 'compiled successfully' (no red errors) before leaving it, then check the chart's Format Signals list shows the signal
+with no warning; after any code change, compare the chart's trade arrows with the Orders tab on the next signal day.
+
+## PowerShell: "$t:" inside a string breaks the whole script (2026-10-29, VPS watchdog)
+`"Chart $t: ..."` is read as a drive-scoped variable (`$t:`), a PARSE error, so PowerShell runs none of the file. The
+watchdog had this since 2026-10-21: it never ran and no ntfy alarm was ever sent. Fix: `${t}:` (braces) before a colon.
+Test every .ps1 change once by hand on the VPS (`-Test` on the watchdog) before trusting it. Verified 2026-10-29:
+after the fix, `watchdog.ps1 -Test` delivered all 8 test alerts to the phone (ntfy).
+
+## Scheduled task runs but fails with Last Result 1 (2026-10-29, ClaudeAlertRelay on the VPS)
+A task that called `powershell ... -File script.ps1` directly ran every minute but failed before the script logged anything,
+while the same script worked by hand; a long /TR string pasted over several lines broke the next attempt. Fix: point the
+task at a short .cmd launcher in the repo (`live/vps/run_relay.cmd`: `cd /d`, `powershell -NoProfile ...`, output to a log
+file). Verified: test alerts arrived on their own.
+
+## PowerShell [int] ROUNDS, it doesn't truncate (2026-10-29, watchdog false 'no heartbeat' alarms)
+`[int](855 / 100)` is 9, not 8 (banker's rounding), so HHMM -> minutes was wrong whenever the minutes were 30-59: at 08:55 a
+09:00 heartbeat looked 55 minutes old and every live chart alarmed. Fix: `[math]::Floor(x / 100)`. Same trap in any
+HHMM arithmetic in PowerShell.
+
+## Watchdog 'MultiCharts has no live internet connections' while trading was fine (2026-10-29, false alarm)
+The NO_NET check looked for internet sockets owned by processes named MultiCharts* / TradingServer* / *Rithmic*; the
+broker and data sockets belong to another MultiCharts helper process, so it alarmed every hour (08:15-11:25) while every
+chart's ACCT row showed bars 0-1 s old. Fix: NO_NET now fires only if no chart wrote a fresh bar in the last 10 minutes.
+Check before acting on that alarm: the Chart Monitor's ACCT rows (bar age) or the chart itself ticking.
+
+## Apex liquidation shows as a 'Manual Trading' market order, then 2,000+ price-0 exit rejections (2026-10-30, #3 blown)
+#3 (150K, ~$1,823 above its $146,000 floor) went short 8 MNQ (ONB150) at 28,664.5 at 09:30. At 09:38:50 Apex's risk
+system flattened it when equity touched the floor INTRADAY: in the Orders tab a 'Manual Trading' Market Buy 8 filled at
+28,780 (the ONB stop was 28,818, not hit). MultiCharts still believed it was short and re-sent 'Stop Loss' / 'Profit Target'
+with price 0 several times a second: all Rejected (the watchdog counted 2,301). Same family as the 10/19 daily-loss lock.
+Read it this way: a 'Manual Trading' fill you didn't make = Apex closed the position; price-0 exit orders = the chart is out
+of sync. Fix: auto-trading OFF / ON (initial position Flat) on that chart, check Strategy Positions = Flat; if the account
+failed, auto-trading off on all its charts. EOD-trailing accounts still fail on an INTRADAY touch of the floor.

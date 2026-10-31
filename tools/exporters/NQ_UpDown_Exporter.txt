@@ -1,0 +1,39 @@
+{ NQ up / down volume exporter (full Globex) - MultiCharts PowerLanguage indicator (Claude, 2026-10-26, for Codex's
+  IFT_NQ5_Flow_Signal test: agents/codex/results/ift_nq5_flow_review.md on codex/work).
+
+  Writes every bar of this chart (all 24 hours) to one CSV per year:
+    <Folder><FilePrefix><year>.csv   e.g. C:\NQdata\NQ_5min_UD_2018.csv
+  columns: date (YYYYMMDD), time (HHMM bar close, chart time zone), open, high, low, close, volume, upticks, downticks.
+
+  Chart: @NQ 5-minute, Exchange time zone (CT), CME 24h session template (Sun-Fri 17:00-16:00), loaded from 06/01/2017,
+  same data feed as your other charts. Format Instrument -> Settings: Volume = Trade Volume ("Build Volume On: Trade
+  Volume") so UpTicks / DownTicks hold up and down VOLUME; note which mode you used. Home PC, not the live VPS.
+  Create the folder first. The files are rewritten from scratch on every recalculation. }
+
+Inputs:
+	Folder("C:\NQdata\"),
+	FilePrefix("NQ_5min_UD_"),
+	Decimals(2);
+
+Variables:
+	FileName(""), BarYear(0), LastYear(0), Row(""), Y(0);
+
+Once begin
+	for Y = 2000 to 2040 begin
+		FileDelete(Folder + FilePrefix + NumToStr(Y, 0) + ".csv");
+	end;
+end;
+
+if BarStatus(1) = 2 then begin
+	BarYear = Year(Date) + 1900;
+	FileName = Folder + FilePrefix + NumToStr(BarYear, 0) + ".csv";
+	if BarYear <> LastYear then begin
+		FileAppend(FileName, "date,time,open,high,low,close,volume,upticks,downticks" + NewLine);
+		LastYear = BarYear;
+	end;
+	Row = NumToStr(Date + 19000000, 0) + "," + NumToStr(Time, 0) + ","
+		+ NumToStr(Open, Decimals) + "," + NumToStr(High, Decimals) + ","
+		+ NumToStr(Low, Decimals) + "," + NumToStr(Close, Decimals) + ","
+		+ NumToStr(Volume, 0) + "," + NumToStr(UpTicks, 0) + "," + NumToStr(DownTicks, 0);
+	FileAppend(FileName, Row + NewLine);
+end;

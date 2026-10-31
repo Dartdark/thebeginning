@@ -1,0 +1,388 @@
+{ ================================================================ }
+{  MERGED STRATEGY - OvernightBiasORB (RTH) + OvernightAnomaly (overnight) }
+{                                                                   }
+{  Two independent signal blocks sharing one chart / one account.  }
+{  Block A: OFB_OvernightBiasORB  - active 08:30-15:00 CT           }
+{  Block B: ONRB v4.1 Anomaly     - active 17:30-02:30 CT           }
+{  No time overlap between the two blocks, no name collisions.     }
+{  Required: NQ futures, Chart 15min, Bar Magnifier 1-minute (intraday), IOG OFF, MaxBarsBack 250 }
+{  Ring buffer warmup: 20 trading days minimum (set two months to be safe) }
+{ ================================================================ }
+
+// ------------------- Inputs: Block A (OvernightBiasORB) -------------------
+inputs:
+    SessStart( 0830 ),
+    OREnd( 0845 ),
+    LastEntry( 1200 ),
+    FlatTime( 1430 ),
+    SessEnd( 1500 ),
+    MaxTradesPerDay( 4 ),
+    BiasLongMin( 0.67 ),
+    BiasShortMax( 0.33 ),
+    ADXLen( 16 ), ADXMin( 20 ),
+    BreakSkipMult( 2.5 ), BarAvgLen( 20 ),
+    MinORx( 0 ), MaxORx( 2 ),
+    ORMedianDays( 20 ),
+    ATR_k( 0.30 ),
+    ATR_Days( 15 ),
+    TakeProfitRR( 3 ),
+    NumContracts( 1 ),
+
+// ------------------- Inputs: Block B (OvernightAnomaly) -------------------
+    Entry_H_CT(17),
+    Entry_M_CT(30),
+    Exit_H_CT(2),
+    Exit_M_CT(30),
+    RTH_Open_H_CT(8),
+    RTH_Open_M_CT(30),
+    RTH_Close_H_CT(15),
+    RTH_Close_M_CT(0),
+    UseDisasterStop(true),
+    Stop_Vol_Mult(4.0),
+    Num_Contracts_B(1),               
+    UseVolTargetSizing(true),
+    Risk_Per_Trade_USD(2200),
+    Max_Contracts(20),
+    VolAvgLen(20),
+    UsePriorRTHFilter(true),
+    SkipAfterEarlyClose(true),
+    HalfDay_RTH_Cutoff(1400),
+    ShowLog(false);
+
+// ------------------- Variables: Block A (OvernightBiasORB) -------------------
+variables:
+    intrabarpersist orHigh( 0 ), intrabarpersist orLow( 999999 ),
+    intrabarpersist orDone( false ),
+    intrabarpersist tradesToday( 0 ),
+    intrabarpersist sessOpenPx( 0 ),
+    intrabarpersist onHigh( 0 ), intrabarpersist onLow( 999999 ),
+    intrabarpersist onBias( 0 ),
+    intrabarpersist orMedApprox( 0 ), intrabarpersist orCount( 0 ),
+    intrabarpersist regimeOK( true ),
+    intrabarpersist stopPx( 0 ), intrabarpersist tgtPx( 0 ),
+    intrabarpersist atrRthHi( 0 ), intrabarpersist atrRthLo( 999999 ),
+    intrabarpersist atrRthCl( 0 ), intrabarpersist atrRthSeen( false ),
+    intrabarpersist atrPrevCl( 0 ),
+    intrabarpersist atrPos( 0 ), intrabarpersist atrFilled( 0 ),
+    intrabarpersist atrRef( 0 ), intrabarpersist atrOK( false ),
+    intrabarpersist stopPts( 0 ),
+    onPos( 0 ),
+    canWork( false ),
+    adxOK( true ), barRngOK( true ), avgRng( 0 ),
+    trVal( 0 ), trSum( 0 ), kk( 0 ),
+    atrStopOK( false ),
+
+// ------------------- Variables: Block B (OvernightAnomaly) -------------------
+    Entry_Time(0),
+    Exit_Time(0),
+    RTH_Open_Time(0),
+    RTH_Close_Time(0),
+    Entry_MinOfDay(0),
+    Exit_Span(0),
+    Bar_MinOfDay(0),
+    Bar_Span(0),
+    Bar_Time(0),
+    Prev_Bar_Time(0),
+    RTH_OpenPx(0),
+    RTH_ClosePx(0),
+    RTH_LastTime(0),
+    Prior_HalfDay(false),
+    PriorRTH_Neg(false),
+    Win_Tracking(false),
+    Win_Hi(0),
+    Win_Lo(0),
+    Win_Range(0),
+    Avg_WinRange(0),
+    Filter_OK(true),
+    EP(0),
+    Pos_SL(0),
+    Was_Long(false),
+    Risk_Pts(0),
+    Num_Contracts_Dyn(0),
+    OnrbPos(false);
+
+arrays:
+    trBuf[200](0);
+
+// ================================================================
+// BLOCK B SETUP (Anomaly) - one-time init, runs once regardless of block A
+// ================================================================
+Once begin
+    Entry_Time     = Entry_H_CT * 100 + Entry_M_CT;
+    Exit_Time      = Exit_H_CT * 100 + Exit_M_CT;
+    RTH_Open_Time  = RTH_Open_H_CT * 100 + RTH_Open_M_CT;
+    RTH_Close_Time = RTH_Close_H_CT * 100 + RTH_Close_M_CT;
+
+    Entry_MinOfDay = Entry_H_CT * 60 + Entry_M_CT;
+    Exit_Span = (Exit_H_CT * 60 + Exit_M_CT) - Entry_MinOfDay;
+    if Exit_Span <= 0 then
+        Exit_Span = Exit_Span + 1440;
+end;
+
+if CurrentBar < 2 then begin
+    Prev_Bar_Time = Time;
+end;
+
+// ================================================================
+// BLOCK A CALCULATIONS (OvernightBiasORB) - RTH 08:30-15:00 CT
+// ================================================================
+if CurrentBar = 1 and ( ATR_Days < 1 or ATR_Days > 200 ) then
+    RaiseRunTimeError( "ATR_Days must be between 1 and 200 (trBuf array size)." );
+
+if Date <> Date[1] then begin
+    if atrRthSeen then begin
+        trVal = atrRthHi - atrRthLo;
+        if atrPrevCl > 0 then begin
+            if AbsValue( atrRthHi - atrPrevCl ) > trVal then trVal = AbsValue( atrRthHi - atrPrevCl );
+            if AbsValue( atrRthLo - atrPrevCl ) > trVal then trVal = AbsValue( atrRthLo - atrPrevCl );
+        end;
+        trBuf[atrPos] = trVal;
+        atrPos = atrPos + 1;
+        if atrPos >= ATR_Days then atrPos = 0;
+        if atrFilled < ATR_Days then atrFilled = atrFilled + 1;
+        atrPrevCl = atrRthCl;
+    end;
+    atrRthHi = 0;  atrRthLo = 999999;  atrRthCl = 0;  atrRthSeen = false;
+    atrOK = atrFilled >= ATR_Days;
+    if atrOK then begin
+        trSum = 0;
+        for kk = 0 to ATR_Days - 1 begin
+            trSum = trSum + trBuf[kk];
+        end;
+        atrRef = trSum / ATR_Days;
+    end
+    else
+        atrRef = 0;
+    orHigh = 0;  orLow = 999999;  orDone = false;
+    tradesToday = 0;
+    sessOpenPx = 0;  onBias = 0;
+    onHigh = High;  onLow = Low;
+end
+else begin
+    if Time <= SessStart then begin
+        if High > onHigh then onHigh = High;
+        if Low  < onLow  then onLow  = Low;
+    end;
+end;
+
+if Time > SessStart and Time <= SessEnd then begin
+    if atrRthSeen = false then begin
+        atrRthHi = High;  atrRthLo = Low;  atrRthSeen = true;
+    end
+    else begin
+        if High > atrRthHi then atrRthHi = High;
+        if Low  < atrRthLo then atrRthLo = Low;
+    end;
+    atrRthCl = Close;
+end;
+
+if sessOpenPx = 0 and Time > SessStart and Time <= OREnd then begin
+    sessOpenPx = Open;
+    if onHigh > onLow then begin
+        onPos = ( sessOpenPx - onLow ) / ( onHigh - onLow );
+        if onPos >= BiasLongMin then onBias = 1
+        else if onPos <= BiasShortMax then onBias = -1
+        else onBias = 9;
+    end;
+end;
+
+if Time > SessStart and Time <= OREnd then begin
+    if High > orHigh then orHigh = High;
+    if Low  < orLow  then orLow  = Low;
+end;
+if orDone = false and Time > OREnd and orHigh > 0 then begin
+    orDone = true;
+    regimeOK = true;
+    if orMedApprox > 0 then
+        regimeOK = ( orHigh - orLow ) >= MinORx * orMedApprox
+               and ( orHigh - orLow ) <= MaxORx * orMedApprox;
+    if orMedApprox = 0 then orMedApprox = orHigh - orLow
+    else orMedApprox = orMedApprox + ( 2 / ( ORMedianDays + 1 ) ) * ( ( orHigh - orLow ) - orMedApprox );
+    orCount = orCount + 1;
+    if orCount < ORMedianDays then regimeOK = true;
+end;
+stopPts   = ATR_k * atrRef;
+atrStopOK = atrOK and stopPts > 0;
+
+adxOK  = ADX( ADXLen ) >= ADXMin;
+avgRng = Average( High - Low, BarAvgLen )[1];
+barRngOK = avgRng = 0 or ( High - Low ) <= BreakSkipMult * avgRng;
+canWork = orDone and regimeOK and adxOK
+          and atrStopOK
+          and Time > OREnd and Time <= LastEntry
+          and MarketPosition = 0 and tradesToday < MaxTradesPerDay;
+
+// Block A entries - guarded so Block A never fires while Block B owns a position /// MODIF
+if canWork and OnrbPos = false then begin                       /// MODIF - added OnrbPos guard for safe coexistence
+    if Close > orHigh then begin
+        if barRngOK and onBias = 1 then begin
+            stopPx = Close - stopPts;
+            tgtPx  = Close + stopPts * TakeProfitRR;
+            Buy ( "ORB_L" ) NumContracts contracts next bar at market;
+            Sell ( "L-SL-FB" ) next bar at stopPx stop;
+            Sell ( "L-TP-FB" ) next bar at tgtPx limit;
+            tradesToday = tradesToday + 1;
+        end;
+    end
+    else if Close < orLow then begin
+        if barRngOK and onBias = -1 then begin
+            stopPx = Close + stopPts;
+            tgtPx  = Close - stopPts * TakeProfitRR;
+            SellShort ( "ORB_S" ) NumContracts contracts next bar at market;
+            BuyToCover ( "S-SL-FB" ) next bar at stopPx stop;
+            BuyToCover ( "S-TP-FB" ) next bar at tgtPx limit;
+            tradesToday = tradesToday + 1;
+        end;
+    end;
+end;
+
+// Block A exits - guarded so Block A never manages a Block B position /// MODIF
+if MarketPosition = 1 and OnrbPos = false then begin             /// MODIF - added OnrbPos guard
+    if Time >= FlatTime then
+        Sell ( "XL" ) next bar at market
+    else begin
+        Sell ( "L-SL" ) next bar at stopPx stop;
+        Sell ( "L-TP" ) next bar at tgtPx limit;
+    end;
+end;
+if MarketPosition = -1 and OnrbPos = false then begin            /// MODIF - added OnrbPos guard
+    if Time >= FlatTime then
+        BuyToCover ( "XS" ) next bar at market
+    else begin
+        BuyToCover ( "S-SL" ) next bar at stopPx stop;
+        BuyToCover ( "S-TP" ) next bar at tgtPx limit;
+    end;
+end;
+
+// ================================================================
+// BLOCK B CALCULATIONS (OvernightAnomaly) - overnight 17:30-02:30 CT
+// ================================================================
+if CurrentBar >= 2 then begin
+
+    Bar_Time = Time;
+
+    Bar_MinOfDay = IntPortion(Bar_Time / 100) * 60 + Mod(Bar_Time, 100);
+    Bar_Span = Bar_MinOfDay - Entry_MinOfDay;
+    if Bar_Span < 0 then
+        Bar_Span = Bar_Span + 1440;
+
+    if Bar_Time > RTH_Open_Time and Bar_Time <= RTH_Close_Time then begin
+        if Prev_Bar_Time <= RTH_Open_Time then
+            RTH_OpenPx = Open;
+        RTH_ClosePx = Close;
+        RTH_LastTime = Bar_Time;
+    end;
+
+    if Bar_Time >= Entry_Time
+       and Prev_Bar_Time < Entry_Time
+       and Bar_Span < Exit_Span then begin
+
+        Prior_HalfDay = (RTH_LastTime > 0)
+            and (RTH_LastTime < HalfDay_RTH_Cutoff);
+        RTH_LastTime = 0;
+        PriorRTH_Neg = (RTH_OpenPx > 0) and (RTH_ClosePx < RTH_OpenPx);
+
+        Win_Tracking = true;
+        Win_Hi = High;
+        Win_Lo = Low;
+
+        Filter_OK = true;
+        if UsePriorRTHFilter then
+            Filter_OK = PriorRTH_Neg;
+        if SkipAfterEarlyClose and Prior_HalfDay then
+            Filter_OK = false;
+
+        if Filter_OK and MarketPosition = 0 then begin           /// MODIF - MarketPosition=0 also guarantees no Block A position is open at 17:30+ since Block A flattens by SessEnd 15:00
+
+            if UseVolTargetSizing and Avg_WinRange > 0 then begin
+                if UseDisasterStop then
+                    Risk_Pts = Stop_Vol_Mult * Avg_WinRange
+                else
+                    Risk_Pts = Avg_WinRange;
+                if Risk_Pts > 0 and BigPointValue > 0 then begin
+                    Num_Contracts_Dyn =
+                        IntPortion( Risk_Per_Trade_USD / ( Risk_Pts * BigPointValue ) );
+                    if Num_Contracts_Dyn < 1 then
+                        Num_Contracts_Dyn = 1;
+                    if Num_Contracts_Dyn > Max_Contracts then
+                        Num_Contracts_Dyn = Max_Contracts;
+                end
+                else
+                    Num_Contracts_Dyn = Num_Contracts_B;          /// MODIF - uses renamed Num_Contracts_B
+            end
+            else
+                Num_Contracts_Dyn = Num_Contracts_B;              /// MODIF - uses renamed Num_Contracts_B
+
+            EP = Close;
+            if UseDisasterStop and Avg_WinRange > 0 then
+                Pos_SL = EP - Stop_Vol_Mult * Avg_WinRange
+            else
+                Pos_SL = 0;
+
+            Buy ("HOLD-L") Num_Contracts_Dyn contracts this bar on close;
+            OnrbPos = true;
+
+            if Pos_SL > 0 then
+                Sell ("L-DS-E") next bar at Pos_SL stop;
+
+            if ShowLog then
+                Print("v4.1 entry  Date=", Date,
+                      "  Time=", Bar_Time,
+                      "  Contracts=", Num_Contracts_Dyn,
+                      "  SL=", Pos_SL,
+                      "  AvgWinRange=", Avg_WinRange,
+                      "  PriorRTHNeg=", PriorRTH_Neg,
+                      "  PriorHalfDay=", Prior_HalfDay);
+        end;
+    end
+    else begin
+        if Win_Tracking then begin
+            if High > Win_Hi then Win_Hi = High;
+            if Low < Win_Lo then Win_Lo = Low;
+        end;
+    end;
+
+    if Win_Tracking and Bar_Span >= Exit_Span then begin
+        Win_Tracking = false;
+        Win_Range = Win_Hi - Win_Lo;
+        if Prior_HalfDay = false and Win_Range > 0 then begin
+            if Avg_WinRange = 0 then
+                Avg_WinRange = Win_Range
+            else
+                Avg_WinRange = (Avg_WinRange * (VolAvgLen - 1) + Win_Range) / VolAvgLen;
+        end;
+        if ShowLog then
+            Print("v4.1 window closed  Date=", Date,
+                  "  Range=", Win_Range,
+                  "  AvgWinRange=", Avg_WinRange);
+    end;
+
+    if MarketPosition = 1 and OnrbPos then                       /// MODIF - added OnrbPos guard so Block A long trades never set Was_Long
+        Was_Long = true;
+
+    if MarketPosition = 0 and Was_Long then begin
+        Was_Long = false;
+        Pos_SL   = 0;
+        OnrbPos  = false;
+    end;
+
+    if OnrbPos
+       and MarketPosition = 1
+       and Bar_Span >= Exit_Span then begin
+        Sell ("TIME-X") this bar on close;
+        OnrbPos = false;
+        Was_Long = false;
+        Pos_SL = 0;
+    end;
+
+    if OnrbPos
+       and MarketPosition = 1
+       and UseDisasterStop
+       and Pos_SL > 0 then
+        Sell ("L-DS") next bar at Pos_SL stop;
+
+    Prev_Bar_Time = Bar_Time;
+
+end;
+
+SetExitOnClose;

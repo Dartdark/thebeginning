@@ -50,6 +50,7 @@ Inputs:
 	NumContracts(1);
 
 Variables:
+	EY(0), Ea(0), Eb(0), Ec(0), Ed(0), Ee(0), Ef(0), Eg(0), Eh(0), Ei(0), Ek(0), El(0), Em(0), EMonth(0), EDay(0), IsGoodFriday(false),
 	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
 	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
 	RefPx(0), SpikeRange(0), SpikeBase(0), IsSpike(false), SpCount(0), SpIdx(0),
@@ -127,9 +128,22 @@ if Time = SpikeBarTime and DayOfWeek(Date) >= 1 and DayOfWeek(Date) <= 5 then be
 	if SpCount < SpikeDays then SpCount = SpCount + 1;
 end;
 
+{ ---------- Good Friday (2026-10-25 fix, Codex's NQ Day Flow Six review) ----------
+  CME equity futures close early on Good Friday (2023-04-07: payroll at 7:30, the session ended before the 9:00 exit, and the
+  backtest held the trade to Sunday 17:05 = an Apex violation). Easter by the anonymous Gregorian algorithm; Good Friday =
+  Easter - 2 days; no entry that day (backtest: one -$85 per NQ trade removed). }
+if Date <> Date[1] then begin
+	EY = Year(Date) + 1900;
+	Ea = Mod(EY, 19); Eb = IntPortion(EY / 100); Ec = Mod(EY, 100); Ed = IntPortion(Eb / 4); Ee = Mod(Eb, 4);
+	Ef = IntPortion((Eb + 8) / 25); Eg = IntPortion((Eb - Ef + 1) / 3); Eh = Mod(19 * Ea + Eb - Ed - Eg + 15, 30);
+	Ei = IntPortion(Ec / 4); Ek = Mod(Ec, 4); El = Mod(32 + 2 * Ee + 2 * Ei - Eh - Ek, 7); Em = IntPortion((Ea + 11 * Eh + 22 * El) / 451);
+	EMonth = IntPortion((Eh + El - 7 * Em + 114) / 31); EDay = Mod(Eh + El - 7 * Em + 114, 31) + 1;
+	IsGoodFriday = (DateToJulian(Date) + 2 = DateToJulian((EY - 1900) * 10000 + EMonth * 100 + EDay));
+end;
+
 { ---------- Entry at 7:45: fade the payroll reaction ---------- }
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
-if Time = ReactBarTime and IsSpike and DayOfWeek(Date) = 5 and DayOfMonth(Date) <= MaxDayOfMonth
+if Time = ReactBarTime and IsSpike and DayOfWeek(Date) = 5 and DayOfMonth(Date) <= MaxDayOfMonth and IsGoodFriday = false
 	and RefPx > 0 and ATRv > 0 and MarketPosition = 0 and TradedToday = false then begin
 	Reaction = Close - RefPx;
 	StopPts = StopAtrPct * ATRv;
