@@ -1,0 +1,39 @@
+{
+  "source_sha256": "5ea09865caac31cc93dcd74ebb57baf2a95825db676e23b2b5c0bb09e4b079eb",
+  "source_bytes": 188197,
+  "evidence_kind": "printed-parameter arithmetic, not independent estimation",
+  "return_trials": 0,
+  "garch_table2": {
+    "alpha": "0.3878",
+    "beta": "0.5659"
+  },
+  "gjr_table3": {
+    "alpha": "0.150",
+    "beta": "0.601",
+    "gamma": "0.745"
+  },
+  "garch_alpha_plus_beta": "0.9537",
+  "gjr_alpha_plus_beta_omits_asymmetry": "0.751",
+  "gjr_symmetric_innovation_feedback": "1.1235",
+  "qualification": "alpha+beta+gamma/2 is the standard GJR feedback under symmetric standardized innovations. Exogenous variance regressors require additional assumptions; no empirical stationarity conclusion is established here.",
+  "selected_t_statistics_marked_one_percent": {
+    "GARCH alpha0": {
+      "printed_t": 2.381,
+      "two_sided_asymptotic_normal_p": 0.017265711952350493
+    },
+    "GJR alpha1": {
+      "printed_t": 2.148,
+      "two_sided_asymptotic_normal_p": 0.03171375546113345
+    },
+    "GJR gamma1": {
+      "printed_t": 2.557,
+      "two_sided_asymptotic_normal_p": 0.01055792175227696
+    },
+    "GJR delta3": {
+      "printed_t": -2.315,
+      "two_sided_asymptotic_normal_p": 0.02061293206945082
+    }
+  },
+  "garch_expected_volume_table2": "-0.3486",
+  "garch_expected_volume_prose_page10": "-3.483"
+}

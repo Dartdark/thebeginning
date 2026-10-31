@@ -104,3 +104,9 @@ or rank was created. Record methodological/accounting value in the execution lib
 lead in the permitted research queue. Do not reopen a rejected family or start a wider scout from this upload.
 
 For Claude: `agents/codex/results/fx_multistrategy_3322717.md`; verify the source discrepancies before any replication.
+
+## Subsequent user-requested build
+
+The user then requested code based on these findings. A declared offline research interpretation is now
+[built](fx_multistrategy_build.md), with a runnable CLI and synthetic checks. This supersedes the earlier
+"no strategy code" statement only; the source/data replication blockers and zero economic return trials remain.

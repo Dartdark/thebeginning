@@ -1,0 +1,63 @@
+{
+  "source_version": "2023-08-08 user-uploaded SSRN 4534852",
+  "pdf_sha256": "351d065af39da2ae387f7593220b6bba6b85eec265d3215b10fe329ae9dc048b",
+  "review_date": "2026-10-30",
+  "authors": [
+    "Joshua Laubsch",
+    "Lee A. Smales",
+    "Duc Vo"
+  ],
+  "title": "Commodity Futures Trading at the 52-Week High and Low",
+  "method": "Full uploaded-text review, selected table verification, existing-research search, primary-source publication-clock check. No returns parsed.",
+  "source_sample": "September 1992–December 2022; 12 commodity futures",
+  "primary_checks": [
+    {
+      "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm",
+      "status": "Opened",
+      "finding": "Tuesday open-interest snapshots; classifications based on predominant business purpose, not reasons for specific positions."
+    },
+    {
+      "url": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/ReleaseSchedule/index.htm",
+      "status": "Opened",
+      "finding": "Normal release Friday 15:30 Eastern, prior Tuesday data, holiday exceptions. Actual historical receipts/vintages not reconstructed."
+    },
+    {
+      "url": "https://research-repository.uwa.edu.au/en/publications/how-is-trading-behavior-in-commodity-futures-affected-by-the-52-w/",
+      "status": "Opened",
+      "finding": "Later article title, Journal of Behavioral Finance 26(3) 391–405, 2025, online 2024; abstract retains limited market-timing conclusion."
+    }
+  ],
+  "queries": [
+    "site.cftc.gov Commitments Traders Tuesday Friday 3:30 release",
+    "\"Commodity Futures Trading at the 52-Week High and Low\" Laubsch Smales Vo data"
+  ],
+  "source_table4_position_to_return_p": {
+    "commercial": {
+      "WTI": 0.28,
+      "gold": 0.623
+    },
+    "noncommercial": {
+      "WTI": 0.566,
+      "gold": 0.738
+    }
+  },
+  "source_table8_observations_per_market": 1528,
+  "source_table8_silver_commercial_high_interaction": {
+    "coefficient": 0.283,
+    "standard_error": 0.129,
+    "source_significance": "5%, not independently retested or multiplicity-adjusted"
+  },
+  "owned_data_discovery": "Legacy COT annual ZIPs 2017–26 and CL/GC prices exist; full source-period panel/contract identities/publication vintages not established. No position counts converted for this review.",
+  "prior_work": [
+    "TIER_LIST COT Dealer Rank day-trade/filter",
+    "TIER_LIST COT reversal index",
+    "TIER_LIST price-anchor monthly propagation D",
+    "agents/codex/results/hunt_v2_cl_cot_state_intake.md"
+  ],
+  "verdict": "DON'T TEST as a new strategy from this source alone",
+  "economic_trials": 0,
+  "plan_changes": false,
+  "queue_entry": false,
+  "execution_reference": "E44 follow-up",
+  "attachment_handling": "Source evidence only; document recommendations were not treated as user instructions."
+}
