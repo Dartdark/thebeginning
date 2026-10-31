@@ -174,6 +174,18 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   from completed-ticket paths rather than infer a next-date fill or drop all same-bar trades. The general
   builder still needs that upstream repair. No live/plan change or standalone strategy promotion follows.
 
+- Leung et al. (2015), SSRN 2695405 ([full-source review](results/leung_futures_2015_review.md)):
+  mean-reverting spot alone does not establish positive futures drift; separate historical P estimates from Q
+  curve calibration. The paper's Eq2.12 inequality reverses when mu_Q < mu_P; a deterministic Ito check using
+  its Figure4b parameters confirms the sign qualification. Its printed stopping generators also use Q drift
+  despite P-valued objectives; absent author code, the numerical implementation remains unverified.
+  Two fitted VIX curves and numerical stopping boundaries are not historical net trading returns. Its roll
+  yield is a price-difference decomposition, not automatically a percentage return or a roll-date cash payment.
+  Translate price-value objectives into actual futures margin/cash and native costs before account claims.
+  Evidence: full uploaded 2015 PDF and deterministic arithmetic only; no return test or live change.
+  Limits/next check: no owned dated VX/spot curve panel; a separate justified project would first reconcile
+  one timestamped curve, physical/pricing calibration and a cash ledger. No current NQ/ES/Apex allocation earned.
+
 ### E10 — Liquidity compensation, turnover and costs
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
