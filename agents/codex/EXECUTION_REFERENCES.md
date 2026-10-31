@@ -725,6 +725,16 @@ Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, sha
 Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
 Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E40-E42 during this handoff merge; existing Codex E29-E38 identifiers are retained.
 
+### E44 — Treasury volume/OI proxies, contract construction and liquidity measures
+
+Source/review: Wenchao Liao, 2008 CUNY dissertation, SSRN1028432; [review](results/ssrn1028432_review.md), archived uploaded PDF and source manifest.
+- Execution question/useful lesson: distinguish active-contract liquidity from aggregate activity, and volume from spread/depth/resilience. Volume is not identified speculative flow; total OI is neither identified hedging nor signed demand.
+- Evidence status: author-reported daily 1991–2006 Treasury VAR associations, not our replication. Positive volume/volatility association and volume persistence; OI effects depend on contract construction and risk estimator. Chapter2 depth/squeeze material reviews other sources, not new native fill evidence.
+- Timing/platform limits: daily data and old Treasury market structure; no demonstrated NQ/ES transfer, execution improvement, price-direction strategy or modern broker fills. Daily finalized OI requires a verified availability clock; adjacent-day interpolation would introduce future information in a live predictor.
+- Data/prerequisites: contract-specific daily settlement/high/low/volume/OI, delivery/roll metadata and release/revision clocks. Inspected owned ZN minute schema lacks OI and contract ID; weekly COT is not a daily substitute.
+- Smallest justified next check: when a separately specified risk/execution hypothesis exists, establish these fields and compare past-only forecasts against volatility/calendar/roll controls before costed account tests. No acquisition or return study is triggered by this source alone.
+- Status: retained methods/execution reference; zero new return trials or measured savings. Related E10 (liquidity/turnover), E12 (risk measurement), E25 (predictive horizon limits).
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
