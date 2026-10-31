@@ -966,6 +966,20 @@ undertaking activity-risk research; this source does not earn a new return test.
 Status: methodological reference only; no demonstrated executable edge, zero
 return trials, no promising-candidate queue entry or plan/live change.
 
+### E09 follow-up — Bank Nifty close marks versus protective execution
+
+Source: Panigrahi, Vachhani and Sisodia, SSRN4013524,2021;
+[full article review](results/bank_nifty_4013524_review_20261031.md), retained2026-10-31.
+- Use: a close-to-close index-point ledger does not demonstrate a stated gap-down exit, intraday stop or target.
+  Final daily candle color is unknown five minutes before its close; freeze the actual observation/fill clock.
+- Evidence: our audit confirms the136 printed rows equal20 times index-close changes, totaling₹358,346.40 gross.
+  This verifies source-table arithmetic only, not signal completeness, executable derivative P&L or net edge.
+- Limits: futures need basis, dated contracts, historical lot sizes, fills and costs; ITM calls additionally need
+  strike/expiry/premium paths. Excel forecasts and ANOVA against generated groups are not out-of-sample validation.
+- Next check only for separately justified research: reconcile a real signal through native entry, gap/stop/target
+  paths, exit and fees. No adaptation or protective-order change is warranted from this paper.
+- Status: accounting/timing reference; no return trial, execution saving or portfolio placement.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

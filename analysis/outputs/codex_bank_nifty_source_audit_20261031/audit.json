@@ -1,0 +1,32 @@
+{
+  "scope": "Printed source-table arithmetic only, not independent historical strategy verification",
+  "rows": 136,
+  "positive_rows": 84,
+  "printed_positive_row_fraction": 0.6176470588235294,
+  "sum_printed_one_lot_rupees": 358346.4,
+  "max_point_difference_rounding_error": 5.9117155615240335e-12,
+  "max_lot_multiplication_error": 0.0,
+  "anova_on_printed_actual_and_generated_forecasts": {
+    "trade_count": {
+      "F": 22.222222222222214,
+      "p": 0.0015137497982136547
+    },
+    "winning_count": {
+      "F": 19.236363636363652,
+      "p": 0.0023302139306749185
+    },
+    "losing_count": {
+      "F": 14.449999999999987,
+      "p": 0.005226858972498109
+    },
+    "winning_accuracy_printed": {
+      "F": 0.4101834715368786,
+      "p": 0.5397831658730845
+    }
+  },
+  "caveat": "Forecast groups are generated from historical data, not independent realized outcomes. ANOVA compares means, not correlation or predictive accuracy.",
+  "new_economic_return_trials": 0,
+  "account_simulations": 0,
+  "source_sha256": "6083a4306168a3e6b72276d2f740cce1a16bd20ee63446e43f448fefde47a769",
+  "code_sha256": "bf11f2e5bb24afbb1648971b2fd34e9b541309558ada0e321bc5d99f1183bed3"
+}
