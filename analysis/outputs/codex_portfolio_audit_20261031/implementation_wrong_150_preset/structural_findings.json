@@ -1,0 +1,36 @@
+{
+  "current_source": "c3126aa01796133f3aecb368e688726931dea440",
+  "source_plan_reversion": "6082472: VB2/1 and T fade on50K; DT2 on150K; ST remains personal",
+  "source_document_conflict": "FUNDED_PLAN T_ONESIDE row says REVERTED but NEW_CHAT_BRIEF and current cushion table explicitly retain T; baseline follows those current inputs",
+  "evaluation_VB_risk_before_fees": {
+    "stop_points": 75,
+    "50K_8MNQ": 1200,
+    "150K_20MNQ": 3000
+  },
+  "latest_brief_50K_cushion": 1064,
+  "fiftyK_full_size_VB_stop_exceeds_reported_cushion": true,
+  "fiftyK_evaluation_DLL": 1000,
+  "fiftyK_brief_buffer_between_DLL_and_floor_before_cost_or_gaps": 64,
+  "DLL_qualification": "On a continuous price path the1000 DLL should pause before the1064 cushion is exhausted; stop risk alone is not a predicted floor breach",
+  "personal_contract_legs": {
+    "NQ": 17,
+    "ES": 2,
+    "CL": 1,
+    "strategy_labels": 19
+  },
+  "personal_identity_limits": [
+    "Twin v1 ledger is not literal current v2.1",
+    "Kusho weekend/overnight P&L remains exit-day booked",
+    "continuous-contract rolls/actual micro quotes and margin solvency not certified",
+    "personal printed core ladder16 pieces predates ST and PAPERTREND additions; current ex-S30 is18 strategy labels"
+  ],
+  "account_model_limits": [
+    "sparse missing adverse quotes are not actual zero losses",
+    "per-strategy same-market long/short adverse extrema can be mutually inconsistent within a minute",
+    "no broker-level netting/order routing, account position caps or rejected-order execution modeled",
+    "source risk budget uses proxy prior15-day Grid24 ATR, not per-trade logged MC StopPts",
+    "current Apex terms were not independently reverified; account tools retain source rule assumptions",
+    "historical ledger and resampled estimates do not establish future edge or current live-account odds"
+  ],
+  "decisions": "No live change; no removal/resizing/new allocation selected from these attributions"
+}

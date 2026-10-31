@@ -1,0 +1,12 @@
+{
+  "all_passed": true,
+  "checks": [
+    "native fee split, one-tick sides, final-flat cash bridge",
+    "target limit exit pays commission without another adverse tick",
+    "native short sign and symmetric costs",
+    "all reentries counted, no per-active-day cost shortcut",
+    "missing held quote fails admission, not imputed as an observed zero",
+    "cross-session source mismatch remains unknown",
+    "150K risk floors at its own budget; cushion lots are integer"
+  ]
+}

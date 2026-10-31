@@ -1,0 +1,1400 @@
+{
+  "source_commit": "c3126aa01796133f3aecb368e688726931dea440",
+  "plan_commit": "671f7f1",
+  "source_inputs": {
+    "NEW_CHAT_BRIEF.md": {
+      "sha256": "11353790f1e7329a15bc3d41516383500f210d4769c76300f4f114eff054c6b4",
+      "bytes": 7055
+    },
+    "funded_strategies/FUNDED_PLAN.md": {
+      "sha256": "3eb286b5a5590f1f19f9e035b7cbeb6ccfcf46e45f6ae8df83b57393906a8924",
+      "bytes": 69634
+    },
+    "personal_strategies/PORTFOLIO.md": {
+      "sha256": "d356bd6de8ebf20e481c646cdf683f59282cf0723c3a04102d35f9d1cf34cf63",
+      "bytes": 14488
+    },
+    "analysis/personal_portfolio.py": {
+      "sha256": "58af6a2338b0a3b819d30351911197bc5e498879169d41e5839b17fca8c08c97",
+      "bytes": 17679
+    },
+    "analysis/portfolio.py": {
+      "sha256": "f61ad81f4412843daf88942d2cbd051eb1203456b815bf3f5703eb7c6692f45e",
+      "bytes": 8441
+    },
+    "analysis/funded_sim.py": {
+      "sha256": "6ee40aadf1ead47958a4637e63248221b871acd74881738368a401950d84707f",
+      "bytes": 9451
+    },
+    "analysis/funded_sim150.py": {
+      "sha256": "15dbc97f349a0e29ec9cbfb8068f15d5fe50246dc904ea453c7bd891aada0302",
+      "bytes": 9698
+    },
+    "agents/tasks/plan_daily_pnl.csv": {
+      "sha256": "631e3c3b558a3279e804c233566371f7e0051e85996bf8ac1c7ee5a9f4db1dfb",
+      "bytes": 127925
+    },
+    "checks/candidates/fc_2b/trades.csv": {
+      "sha256": "5e2f46eaf0c4015bdb8bccb2cd6298068f8fb8e1628a08aef2ad02cce1e1eac1",
+      "bytes": 36656
+    },
+    "checks/candidates/twin_continuation/trades.csv": {
+      "sha256": "2e0fe7f717a711bd2416ccee377886287da0c6ed5a0dfd5653dcccd1c30c549e",
+      "bytes": 75389
+    },
+    "checks/candidates/dual_thrust/trades.csv": {
+      "sha256": "90142c79a4f90b7588aab15dbe03843870bdee3691bd2fb65b0fb1ae4e8004d1",
+      "bytes": 70483
+    },
+    "checks/candidates/kusho/python_trades_v9_rolladj.csv": {
+      "sha256": "14efb97dce86dfea2b0f916d3b7aa1d6c0b2aa59cc717811480400cbc1584345",
+      "bytes": 251192
+    },
+    "checks/candidates/s47_v2/python_trades_v2.csv": {
+      "sha256": "5b2d28af69ead36d2fa22df0a3060fd16842586942af34872734040af148dec6",
+      "bytes": 63079
+    },
+    "checks/candidates/overnight_tick/trades.csv": {
+      "sha256": "f497a907d0fa45680c944f512daed463f935d56c4e87eda59804fb7e98f9b5cf",
+      "bytes": 11114
+    },
+    "checks/candidates/swing_target/mc_trades_v3.csv": {
+      "sha256": "ee4776e1fe7abc32ff42074579836bfe42301b24e986cf7f85f1e9231f75eb34",
+      "bytes": 50062
+    },
+    "checks/candidates/papertrend/mc_trades_claude.csv": {
+      "sha256": "2d4053c53630e2b6f13846e96a25488f359cea30f5bc9236120e8441eee60039",
+      "bytes": 45033
+    },
+    "checks/candidates/s30_ibs/daily_nq_es_per_micro.csv": {
+      "sha256": "0c56721d7fb3a20ec7e5d4b0a3b366fa15183a874a3a201768d579164738bb87",
+      "bytes": 37348
+    },
+    "checks/candidates/s30_ibs/python_trades_NQ.csv": {
+      "sha256": "c275203106397fc33928d632dfc8e18f882b4ef44105b7f956673929785afce2",
+      "bytes": 16469
+    },
+    "checks/candidates/s30_ibs/python_trades_ES.csv": {
+      "sha256": "be35c0f3ccca413212288a25676668e21ab8c7f010dffdbece3ed68c58420140",
+      "bytes": 14775
+    }
+  },
+  "dependencies": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "numba": "0.68.0",
+    "openpyxl": "3.1.5",
+    "matplotlib": "3.10.8"
+  },
+  "audit_code": {
+    "codex_portfolio_audit_manifest.py": "1a7544e52e23ff8c9ff14210b7b7e53a339d2e6c9b053063bfe6a692feaf0091",
+    "codex_portfolio_audit_diagnostics.py": "5c2386c8897003191fcb9b8d665b59d9d849f484e5dd79d8c0c5019284134021",
+    "codex_portfolio_audit_config.py": "d1d483adb57e2af24f5f89b03b7b89759bd35471a0e9c622acc0e52d9b2d321e",
+    "codex_portfolio_audit_prepare.py": "03e9f7899f15d60456b30f113dff4f771cf043769f8856be5ce877f06d85e65a",
+    "codex_portfolio_audit_verify.py": "0509587daf5bc9bf5af63d4cdf10f8079f9c39f0f7a9d968b249225fe60abcfc",
+    "codex_portfolio_audit_run.py": "ddf858e0ee07b03855832dc32b9aa291c79ddf149a59950895ef2704239c590b",
+    "codex_portfolio_audit_report.py": "c11b8a0751de6afe00e5c643685577b4a007361852b481f0bfe5ff330b716c57"
+  },
+  "final_run_logical_identity": "verified root outputs only; archived account preset failures are invalid150K evidence",
+  "output_files": {
+    "evaluation_150_years.csv": {
+      "sha256": "84cdca6a5cc770f7892e1871b023c2eeaf920f4fe6df91fe892f8db110afbe24",
+      "bytes": 441
+    },
+    "evaluation_150_correlations.csv": {
+      "sha256": "910285e55aa56e282e68012d92bb03c29c52c21bb158628b99f1132583d381c7",
+      "bytes": 307
+    },
+    "evaluation_50_correlations.csv": {
+      "sha256": "81dcc59c78bd87dc8937ef367e5cf627ae32b16bbcdb3d62eff51af1ed9821b1",
+      "bytes": 307
+    },
+    "evaluation_150_fee_124_accounts.csv": {
+      "sha256": "8d4e601cf906da3b2d99442a433086a997b68e470db36ca95f7929b9067eadcb",
+      "bytes": 43204
+    },
+    "VB_N_unit_ledger.csv": {
+      "sha256": "7ef8c4ee0e0c859f45550830046c91551d489427fb1d27bc3acebf22beb390d6",
+      "bytes": 130252
+    },
+    "admission.csv": {
+      "sha256": "8860ea41247d5e8e9288cf12a2e6a974965fd2784901a8afc884918d32da237d",
+      "bytes": 2156
+    },
+    "funded_50_stress_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "EOS_unit_ledger.csv": {
+      "sha256": "e25f4cd3098745e7bd20b0bc91a0bebd78aae2c10a546c9859056970d04fad21",
+      "bytes": 11428
+    },
+    "funded_150_years.csv": {
+      "sha256": "a2f4fd3b86b75ece2d235720686e1da1296b38b63771baade425bb9d36fcfbcc",
+      "bytes": 522
+    },
+    "personal_contributions.csv": {
+      "sha256": "983b66e33d8c8104d8755ce144b0a9c97534056ee7aec21dce546a83b8e179ac",
+      "bytes": 2065
+    },
+    "ONB30_settings.json": {
+      "sha256": "27b90acb6e03121a5f3bfbdca5b18ba99331c8d038581c779fdd71c04db888bf",
+      "bytes": 1236
+    },
+    "evaluation_150_NQ_occupancy.csv": {
+      "sha256": "aa5163590d2e49f1ca171af5058828686693bf40da5a36c74f355589626b6de6",
+      "bytes": 86954
+    },
+    "funded_150_contributions.csv": {
+      "sha256": "bbcd073439cb74230fad93d5ee4fd87540c6f81e3a3af82734962eebb6b65763",
+      "bytes": 1348
+    },
+    "long_short_attribution.csv": {
+      "sha256": "ce0a8e049b9f29d3008eacd507a57d00b90d34f6937645c37636a42585e25de2",
+      "bytes": 2562
+    },
+    "funded_150_ES_occupancy.csv": {
+      "sha256": "aa2aa5ef5fc99d024e02ac3153bbfdc5b4be57ff0efcb379893e59eea358f2cc",
+      "bytes": 30007
+    },
+    "personal_main_bootstrap_draws.csv": {
+      "sha256": "3afb830780b3aab9f9ff1a9b62bf1e0fef372cd9ce7a1633d78a77e71dba53e5",
+      "bytes": 182251
+    },
+    "funded_50_correlations.csv": {
+      "sha256": "a016cc8e29b7b9fca67cad226adac5001787595fdffdadfce2dd0ee4c7cc35bd",
+      "bytes": 2479
+    },
+    "funded_50_stress_accounts.csv": {
+      "sha256": "b2f714d99056a98a9d2d070e9df7efd1735331d13b22108bd0db3816fc034fdd",
+      "bytes": 17140
+    },
+    "evaluation_50_fee_124_daily.csv": {
+      "sha256": "739c72db95598228378bd724bf6678890813afc426ce3ead15e5bc44f55170ac",
+      "bytes": 139314
+    },
+    "evaluation_50_years.csv": {
+      "sha256": "906db429fad98029a5ae7730681bb5a43ce96abc5d87794b668054bbf37a7d08",
+      "bytes": 392
+    },
+    "personal_bootstrap.csv": {
+      "sha256": "377091222b0ff1d11c64de3c521b961ffd05fba5962f3aa27d1e185be3a07911",
+      "bytes": 757
+    },
+    "funded_50_years.csv": {
+      "sha256": "8fe88887f1551c44fc9c988349fac5d1b90e3ba1acb10fd0a782ef3015d09f77",
+      "bytes": 517
+    },
+    "personal_published_daily.csv": {
+      "sha256": "6afc37de5cee4e7330c752dcfc6cc06e7629a684eb2e1dd543dc2d46594443b0",
+      "bytes": 289486
+    },
+    "MON_settings.json": {
+      "sha256": "63d9b5972287749d2e3a3148eca028b2ac3de16bac16a5de9c075b62b1618192",
+      "bytes": 1077
+    },
+    "funded_150_fee_124_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "evaluation_50_stress_accounts.csv": {
+      "sha256": "8f70a3caa064e78bb8baa575ad044070dadaeb1f6c7047563c2e9d0800919cbc",
+      "bytes": 42556
+    },
+    "funded_50_contributions.csv": {
+      "sha256": "734640e3aaaa6357ed097be8163418148cac2427e0939cc80f2d7d9fabd3fd28",
+      "bytes": 1140
+    },
+    "ONBML_settings.json": {
+      "sha256": "173990712c1e980323d6ea0cafa2b4fccd25b977d293a530086688b205c3c4e8",
+      "bytes": 1393
+    },
+    "funded_150_main_accounts.csv": {
+      "sha256": "c4821e826783682b4aeb2433ff4614bc466c4410656bf7fb0a6be9b2da98c2ec",
+      "bytes": 17495
+    },
+    "evaluation_150_main_accounts.csv": {
+      "sha256": "476208e894e76a4efe36d9a8d0abd00f38523feb14ec59b3b3eb261f729298f1",
+      "bytes": 43174
+    },
+    "concentration.png": {
+      "sha256": "1318a3032ecb05b542292b6758bd5f88505104dbd35c24534d2bcedb872c63a4",
+      "bytes": 45704
+    },
+    "evaluation_150_fee_124_daily.csv": {
+      "sha256": "7ef147ff34b1787bee9861f8fd72f54c4cddfa9e30275ee2ed8f89d55a6ef894",
+      "bytes": 145020
+    },
+    "trade_coverage_retention.csv": {
+      "sha256": "de1ca77310340048d6091382d6cf1a1a56262cd52aecc98260fd280dd301c841",
+      "bytes": 1502
+    },
+    "mechanics.json": {
+      "sha256": "6a80f967aac2bb37d527aa1bb3f91cad5a32dd8b6b256ea1ecdb97e3e3c77066",
+      "bytes": 480
+    },
+    "funded_50_fee_124_daily.csv": {
+      "sha256": "750ea63463b0dec126fd42452c5c795df7531567757359f4ef6c701f5acc8db1",
+      "bytes": 212735
+    },
+    "evaluation_50_main_accounts.csv": {
+      "sha256": "d170f6b2434f4670adc2328d4779db90926d70661eeaab7401f3d5d6a5a74f55",
+      "bytes": 42377
+    },
+    "OT_unit_ledger.csv": {
+      "sha256": "3d6a435ad90d51a27cdc8e433a3eadbafdb0ce649dda5e8bf3cea2d50e0bb811",
+      "bytes": 56461
+    },
+    "funded_50_account_rules.json": {
+      "sha256": "0234fa4a15a961e79728d13609391f5bf2774e76429c86d23d2c40467e6efaf3",
+      "bytes": 340
+    },
+    "evaluation_50_fee_124_accounts.csv": {
+      "sha256": "27900a711b00312519f95a54b5f1373875cda56684cd7134ae707caedf2ab866",
+      "bytes": 42406
+    },
+    "funded_150_NQ_occupancy.csv": {
+      "sha256": "dc787019fd26c47463cc320f8b1dfc7b6053b68f40f789318fb545b4f6b0a477",
+      "bytes": 92607
+    },
+    "baseline_metrics.csv": {
+      "sha256": "adea5726a56e23c521e3b956fd713de7ca0740324f6bdf49c0b3d724953d0b98",
+      "bytes": 15627
+    },
+    "EOS_settings.json": {
+      "sha256": "67b093a8c6c19dcd3cff724929a1f8bc41e008b32724cd032a94b333b034067c",
+      "bytes": 1179
+    },
+    "evaluation_150_stress_accounts.csv": {
+      "sha256": "63197ddc6ab57da0af3ce35c6f21e56636f33b91de080465e73f6acf713562c5",
+      "bytes": 43436
+    },
+    "run_manifest.json": {
+      "sha256": "f21acd1d8cae9f95fe0abfb62981f0499cb2df44bb6853534f7168ce50e50a78",
+      "bytes": 2346
+    },
+    "funded_50_ES_occupancy.csv": {
+      "sha256": "e44ee660b7f6f362aebf8d7a69da11c35e97a8f10d6e4396f4ee46956393d8ab",
+      "bytes": 30015
+    },
+    "funded_150_worst5pct_days.csv": {
+      "sha256": "079f56e6d940dc6d6bc7abe003776397cd68f77a7b967e81dbf2148c805c42ef",
+      "bytes": 13860
+    },
+    "personal_ladder_diagnostic.json": {
+      "sha256": "61e9c889e143673fb8e3cad2b7682f530c0823f391d6b926eccb0896768eb955",
+      "bytes": 1037
+    },
+    "DT_unit_ledger.csv": {
+      "sha256": "b34479fcda8d59aad27aed75712dbe166ce8f26740e91a27af8b376696bc577d",
+      "bytes": 172328
+    },
+    "BRIDGE_unit_ledger.csv": {
+      "sha256": "af872e9f93caa6e4b6b30a93f202c31192b122730249828a5cd6cc95e768720c",
+      "bytes": 24249
+    },
+    "personal_fee_124_components.csv": {
+      "sha256": "3bbdd3ec938b8c8bbdc28641063390553c5ce38a5e140016605b410e1e5d719f",
+      "bytes": 260999
+    },
+    "funded_150_stress_daily.csv": {
+      "sha256": "ac77f98998e75772ee5c62c645c0ad6031dbba6560303ecc57040fccaadc9312",
+      "bytes": 256514
+    },
+    "funded_150_account_rules.json": {
+      "sha256": "b007c8e73776815065edafbbf60fad3f99976b8bab3aed7444a32af8596995e5",
+      "bytes": 344
+    },
+    "TOS_unit_ledger.csv": {
+      "sha256": "2711895daa680f240a160b85f46655bc1859c7d3c4c17d27311b340854772ea5",
+      "bytes": 40221
+    },
+    "funded_50_main_daily.csv": {
+      "sha256": "2c3ba18a9fa024f330cd2c7ad2205f734de26166db4cb30955a302a861434735",
+      "bytes": 204935
+    },
+    "VB_unit_ledger.csv": {
+      "sha256": "b23dc8ca495238518bcfc56e00bf09f62bece3baa3a797c4bdc77d362be76645",
+      "bytes": 187671
+    },
+    "verification.json": {
+      "sha256": "444aba89194eae19d7c7caa5c6d73379253ef8234cdef45b96964628aca810d4",
+      "bytes": 2158
+    },
+    "evaluation_50_exposure.csv": {
+      "sha256": "17f5464a6d295c11a8cde07f0595f6b905f609e39de9c8fef5c8b92f911c6732",
+      "bytes": 239
+    },
+    "market_concentration.csv": {
+      "sha256": "4b4a033f92dc064ef5d53486e88a3741b8cf5ea56959edf49c5767278da57024",
+      "bytes": 2529
+    },
+    "coverage_issues.csv": {
+      "sha256": "fb73cb906b68a37bd96b806e14a39ae0f0d7f91e6bfb3318af056bac59b2906b",
+      "bytes": 22059
+    },
+    "account_summary.csv": {
+      "sha256": "3e6491dade5c8c9b42b5ed01bd13b6325629aa16eef625e1308f8bfc9e4c545d",
+      "bytes": 4579
+    },
+    "evaluation_150_main_daily.csv": {
+      "sha256": "9cdbccc2c15d81ccfc6e401caa497205bf3daec0f46311db177ab34f23b6e82b",
+      "bytes": 151129
+    },
+    "funded_150_CL_occupancy.csv": {
+      "sha256": "cbaa29d76e9549cee6017fdc058106db1fb9dcb0a5cba137b95a5283e1c2a5be",
+      "bytes": 76625
+    },
+    "ONBML_unit_ledger.csv": {
+      "sha256": "ea9af15f725dce6408300c182de20309886329871b581fc517a6d3f9814e7293",
+      "bytes": 36708
+    },
+    "personal_bootstrap_corrected.csv": {
+      "sha256": "088fc9f61f4ec5edc5fbfda015ae6df149b0df1cce7048a78bf166ea60b8c5e4",
+      "bytes": 713
+    },
+    "preparation.json": {
+      "sha256": "cfef985802680c4f37b7a646e0bb1dc2e6c3117b9eee4e11ddbcef17e3fee026",
+      "bytes": 3365
+    },
+    "evaluation_50_stress_daily.csv": {
+      "sha256": "558cdc3c3449e90acce2e22cef3af1227f97940500726beaa73a30ba402a7048",
+      "bytes": 140126
+    },
+    "evaluation_150_worst5pct_days.csv": {
+      "sha256": "37a93671f69b0464b764dd0d746f49d1ab20308729e00b555989e6271a9fb452",
+      "bytes": 9663
+    },
+    "funded_150_main_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "BRIDGE_settings.json": {
+      "sha256": "081f619bdf3b76cdf980d3ee27ead9dbb23c585045bb967b7052171e8cf42319",
+      "bytes": 1056
+    },
+    "funded_50_NQ_occupancy.csv": {
+      "sha256": "964b81f6d1b02862963c3487776f491c8ba47553d1e96d5991697c6cea3f0a85",
+      "bytes": 93361
+    },
+    "NFP_unit_ledger.csv": {
+      "sha256": "07cc759f40874b59777d354852649f3e2beb6fcd70885bcd22fef7525bc5d6a1",
+      "bytes": 8252
+    },
+    "funded_50_exposure.csv": {
+      "sha256": "5cb4e83c0948c292cfe1af054604b33e9948eec8191108522d4d083c24d68f54",
+      "bytes": 336
+    },
+    "evaluation_50_contributions.csv": {
+      "sha256": "fdb12e4d50822f81819fee29b59111321439efe91d01d80438749fbb5a83c77b",
+      "bytes": 451
+    },
+    "structural_findings.json": {
+      "sha256": "7f4a101a9df045167d8448bdd3b6477bb29cfc548599cbabee9291a64bad2f5a",
+      "bytes": 1978
+    },
+    "funded_150_correlations.csv": {
+      "sha256": "4859950e2c9707db860667fa4503fccdfb67b14f755b7abcef812c2ef70dc0a6",
+      "bytes": 3441
+    },
+    "evaluation_50_main_daily.csv": {
+      "sha256": "1b8237919844b8e982b55625993a89ff60ebe5d793d5c441494bdb36edd354c2",
+      "bytes": 137091
+    },
+    "personal_stress_components.csv": {
+      "sha256": "5dfc45acf96ffe28a8b8b2f1f3e0b773ff95d439d74ad4973cc116f05a9cc801",
+      "bytes": 266628
+    },
+    "personal_correlations.csv": {
+      "sha256": "85e5511d5e02a7383413efb29f1b9867da63d7e27eef7d6520bbaac47439e4b2",
+      "bytes": 7581
+    },
+    "personal_main_components.csv": {
+      "sha256": "f8e765937bfee0a91834274fb169bd72f75fbfd72a4007e3085c72f4f2afe3a2",
+      "bytes": 285915
+    },
+    "funded_50_fee_124_accounts.csv": {
+      "sha256": "b39663005567ebcdaafd84c3b97db39fa13bc7accfb391294e6607ea8751a91f",
+      "bytes": 17367
+    },
+    "ONB30_unit_ledger.csv": {
+      "sha256": "043c129f2ae7c694b98d682dcfc8f323198cb4c5a4d923f17eaf9791f973705f",
+      "bytes": 74395
+    },
+    "simulator_parity.json": {
+      "sha256": "c8398298cb9cb6078018167fabdb00458311e9214377b260d32ae91130d9758b",
+      "bytes": 6463
+    },
+    "evaluation_150_stress_daily.csv": {
+      "sha256": "414c7939d8b852bec602dd00ed2f2a41d595f4aae2e3b835a72290db60dd6927",
+      "bytes": 153157
+    },
+    "personal_years.csv": {
+      "sha256": "b983352744691ca23da75ec67f83b3dafa03d664f7b341f9f6fb1878e0ad2c1b",
+      "bytes": 218
+    },
+    "source_coverage.csv": {
+      "sha256": "009449af911d665778220084bc694911745c4d66686f1a01733d285c8b648ad2",
+      "bytes": 1959
+    },
+    "funded_50_fee_124_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "fixed_lot_sizing_audit.csv": {
+      "sha256": "091a3d82e87e6fa73f658e07a5e7288f793798e94ab08220b7c64d94f782ab86",
+      "bytes": 2527
+    },
+    "funded_50_main_accounts.csv": {
+      "sha256": "c2717d81f37871e74aa53733cda10b929b938d545d2ae9105408fd6c4c55164b",
+      "bytes": 17366
+    },
+    "LDF_settings.json": {
+      "sha256": "5612bdde09eb5229533726f5f120b510239dfb259e02e26885d0f78434f04612",
+      "bytes": 1076
+    },
+    "personal_fee_124_bootstrap_draws.csv": {
+      "sha256": "0872ca01846b4c4d2b76e6b7cf6f272733bc4408d0d0b204ac2619513fcdc346",
+      "bytes": 182005
+    },
+    "funded_150_exposure.csv": {
+      "sha256": "efd08474edd7e7824e0ea10d16f9d577e5f827183f70e8507d46497c75175972",
+      "bytes": 339
+    },
+    "personal_stress_bootstrap_draws.csv": {
+      "sha256": "f051dbfc9f264202e334dc7ca81da418c910851f28210c20ebb5504f2474234a",
+      "bytes": 182194
+    },
+    "evaluation_150_contributions.csv": {
+      "sha256": "6d03b462001e52b0b3fa5b7a17eb53253aa2c316ce6497d48ea1bfbbc9d55a7b",
+      "bytes": 487
+    },
+    "VB_settings.json": {
+      "sha256": "db474a102a8392a5da99748f86b641cdc4427e38c0f890708d96f72a3c8cea1b",
+      "bytes": 1163
+    },
+    "MON_unit_ledger.csv": {
+      "sha256": "26b314670131af4f5894197c00975c1bffe8fbd5e105e8cbcc76df85479b8d86",
+      "bytes": 48119
+    },
+    "funded_50_CL_occupancy.csv": {
+      "sha256": "07269ca2296cc08b0f19f4bf1cc95ff05113db2546dd1498a80bae0686c4c079",
+      "bytes": 76539
+    },
+    "CLS_unit_ledger.csv": {
+      "sha256": "d3b773d68ed0cf6a1389afa52fa7bd6c14916cca914c3fa07ffb2db509578e0a",
+      "bytes": 10561
+    },
+    "LDF_unit_ledger.csv": {
+      "sha256": "68cc91771c4c63dce0817f9afde7d114cb248cd31df3b3116dc06726a22008b2",
+      "bytes": 97124
+    },
+    "funded_150_main_daily.csv": {
+      "sha256": "72c77d4cf925402881d7b69d035305eb39c105864cd82ab9b9d1f5860e130b0a",
+      "bytes": 251660
+    },
+    "NFP_settings.json": {
+      "sha256": "964ad708ad581f79d6a1471762ce93085ebd9630305140f7ebf867fa467203d0",
+      "bytes": 1110
+    },
+    "funded_150_fee_124_daily.csv": {
+      "sha256": "a63df68ebcaf145a153d7393af7c8cb60afdd3bf489482c4855ad30b663015eb",
+      "bytes": 264160
+    },
+    "MOC_unit_ledger.csv": {
+      "sha256": "456a7a85470d0675307c7b717c68a3ffeeed7d5c7338a7d0dcc515d5e7d7b108",
+      "bytes": 21603
+    },
+    "evaluation_50_NQ_occupancy.csv": {
+      "sha256": "d869d2d029475a7cd41cf170f85894c6ea31dea5f2e936d2bbf4c2bad5178e01",
+      "bytes": 88140
+    },
+    "funded_50_worst5pct_days.csv": {
+      "sha256": "88ba831edd1b91b5f1a0ddc199ce61e444bd3d061bc5a09110694ceb3b9be6e4",
+      "bytes": 11492
+    },
+    "funded_150_stress_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "evaluation_50_worst5pct_days.csv": {
+      "sha256": "db17c9c93b8038a8efb9acd32c0eb491daef25433d16479ce32afcef8e4a8e93",
+      "bytes": 8330
+    },
+    "VB_F_unit_ledger.csv": {
+      "sha256": "d89e9b2ada95fcfe9d065bd78a23c4b6de2ed8d1ecd2e416dff63303c28ffee9",
+      "bytes": 59946
+    },
+    "RS_unit_ledger.csv": {
+      "sha256": "897c2b7160d7aa8709e2cb03ce190ff2f9bbd81aedb62bad08f5194aea70bda9",
+      "bytes": 128591
+    },
+    "funded_150_fee_124_accounts.csv": {
+      "sha256": "28329f6984980b031a126fc8569a36622a5f7efbce52c17b178c5377f8fbb33f",
+      "bytes": 17484
+    },
+    "funded_50_main_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "evaluation_150_exposure.csv": {
+      "sha256": "688368d0b1eed8aa9005df7febddcee6e3ee2ee3ca1a0a97eefa985ea9f9aad4",
+      "bytes": 242
+    },
+    "funded_150_stress_accounts.csv": {
+      "sha256": "390530b8a469430f16e728364eb03b4ea2bd03cb67bbe1b7fed3a63c25dee960",
+      "bytes": 17422
+    },
+    "funded_50_stress_daily.csv": {
+      "sha256": "cc46ccb36e13dcc10a0b4c558cf8b7ab3ec7c25ec1879f843dec31369444fb29",
+      "bytes": 208278
+    },
+    "initial_complete_path_subset/evaluation_150_years.csv": {
+      "sha256": "197be25117988286faf8c4bd028d29de98c466ca1b837e0b9d4ae6895a50810c",
+      "bytes": 429
+    },
+    "initial_complete_path_subset/evaluation_150_correlations.csv": {
+      "sha256": "8bb917df36ac16021fc2d41b87d787586a6d734b71adb8b7d053b44d273f677c",
+      "bytes": 313
+    },
+    "initial_complete_path_subset/evaluation_50_correlations.csv": {
+      "sha256": "d35cfa935a2bd0ca9cdf91b7a991cb3d6af8514568758470cad0c075dd6c2702",
+      "bytes": 309
+    },
+    "initial_complete_path_subset/evaluation_150_fee_124_accounts.csv": {
+      "sha256": "7dfd9e3a85af5b71d32a195b20f7fb508dc8f0b5ebc7ae5e6ec7100a473f067a",
+      "bytes": 22766
+    },
+    "initial_complete_path_subset/VB_N_unit_ledger.csv": {
+      "sha256": "7ef8c4ee0e0c859f45550830046c91551d489427fb1d27bc3acebf22beb390d6",
+      "bytes": 130252
+    },
+    "initial_complete_path_subset/admission.csv": {
+      "sha256": "5a6b7f223727453541c0dc82500120651445a7b2f3cc02728fe8d69c537bf33d",
+      "bytes": 1604
+    },
+    "initial_complete_path_subset/funded_50_stress_history_dates.npy": {
+      "sha256": "406e60c81f3a444fa6fe833a03f65926781ee4c73de91ff1d3efa271879f2d7b",
+      "bytes": 2000128
+    },
+    "initial_complete_path_subset/EOS_unit_ledger.csv": {
+      "sha256": "e25f4cd3098745e7bd20b0bc91a0bebd78aae2c10a546c9859056970d04fad21",
+      "bytes": 11428
+    },
+    "initial_complete_path_subset/funded_150_years.csv": {
+      "sha256": "da38f0e686ebe6a81e876f68440caddd99677338c6d31f4d92c854eb25235c56",
+      "bytes": 501
+    },
+    "initial_complete_path_subset/personal_contributions.csv": {
+      "sha256": "0b2939974bf017e0570d839f730982b6c4cd8b695e7015b27e2a4f62b64f9c96",
+      "bytes": 2063
+    },
+    "initial_complete_path_subset/ONB30_settings.json": {
+      "sha256": "27b90acb6e03121a5f3bfbdca5b18ba99331c8d038581c779fdd71c04db888bf",
+      "bytes": 1236
+    },
+    "initial_complete_path_subset/evaluation_150_NQ_occupancy.csv": {
+      "sha256": "0a1cf6706bdb5a49d57a6f9dc8ddcf53a1a2b219b3c5c50cd7ee705731ff0912",
+      "bytes": 88058
+    },
+    "initial_complete_path_subset/funded_150_contributions.csv": {
+      "sha256": "e80b5de03dd03ad85020c270d2a7d8796c91309e1ec9de32455eb96fc2b34d80",
+      "bytes": 1356
+    },
+    "initial_complete_path_subset/funded_150_ES_occupancy.csv": {
+      "sha256": "26404dbf8b1489065fdec711ea89e545a3fb88e1c34bb298515f38278e984cfe",
+      "bytes": 30016
+    },
+    "initial_complete_path_subset/funded_50_correlations.csv": {
+      "sha256": "ccbad362cc10854ab9ed379aa95b21203a331879e5030dd2bbaf316845f46969",
+      "bytes": 2477
+    },
+    "initial_complete_path_subset/funded_50_stress_accounts.csv": {
+      "sha256": "99ea41c5d88fbf20bf2f6c3edc3cc4b4334fcd59a9dab2b0839dc5b9f1aa0ec0",
+      "bytes": 17040
+    },
+    "initial_complete_path_subset/evaluation_50_fee_124_daily.csv": {
+      "sha256": "f60b432172a94916986f80db773bc81d70b31f78c06254aa78d0b2e38653a240",
+      "bytes": 128636
+    },
+    "initial_complete_path_subset/evaluation_50_years.csv": {
+      "sha256": "42e12409b299334bab5e228856b68af8506f1c8d5b85625b7613e783bf366ce9",
+      "bytes": 367
+    },
+    "initial_complete_path_subset/personal_bootstrap.csv": {
+      "sha256": "843ceefae87e3301b3340d444587e90be3dfa8284972247ca70a0b7f01213ec9",
+      "bytes": 752
+    },
+    "initial_complete_path_subset/funded_50_years.csv": {
+      "sha256": "854c765e38a18c7fbe90c060062d2a2bff3e7b5eb90e2bdab4b5fea9fb9f7f34",
+      "bytes": 519
+    },
+    "initial_complete_path_subset/personal_published_daily.csv": {
+      "sha256": "6afc37de5cee4e7330c752dcfc6cc06e7629a684eb2e1dd543dc2d46594443b0",
+      "bytes": 289486
+    },
+    "initial_complete_path_subset/MON_settings.json": {
+      "sha256": "63d9b5972287749d2e3a3148eca028b2ac3de16bac16a5de9c075b62b1618192",
+      "bytes": 1077
+    },
+    "initial_complete_path_subset/funded_150_fee_124_history_dates.npy": {
+      "sha256": "7ba8b6debea1a657d4c35f05abbf005a8182ac90b6f67215905f311eeeed9cce",
+      "bytes": 2000128
+    },
+    "initial_complete_path_subset/evaluation_50_stress_accounts.csv": {
+      "sha256": "d639cfc73edade69bbd939ff987c1887676ae3602b5935ecdb590ff33613a847",
+      "bytes": 22360
+    },
+    "initial_complete_path_subset/funded_50_contributions.csv": {
+      "sha256": "3507092cb8c69a70cec12bc028c3c5c445cfd90a8b01a648a09432667f1b19bb",
+      "bytes": 1126
+    },
+    "initial_complete_path_subset/ONBML_settings.json": {
+      "sha256": "173990712c1e980323d6ea0cafa2b4fccd25b977d293a530086688b205c3c4e8",
+      "bytes": 1393
+    },
+    "initial_complete_path_subset/funded_150_main_accounts.csv": {
+      "sha256": "99b2e4e99f37e3a9eba33f6bbe9a64a4dda049bf84e95dec55be622a9da8cfc5",
+      "bytes": 16447
+    },
+    "initial_complete_path_subset/evaluation_150_main_accounts.csv": {
+      "sha256": "0ed8107a8eea8ccb517566755ce127726334780361484c4d1c175066d3fd7013",
+      "bytes": 22759
+    },
+    "initial_complete_path_subset/evaluation_150_fee_124_daily.csv": {
+      "sha256": "2e2709e13dae4cc1025684449b99abc1de400e75505bde95c7c26eeb40a61f14",
+      "bytes": 134342
+    },
+    "initial_complete_path_subset/mechanics.json": {
+      "sha256": "6a80f967aac2bb37d527aa1bb3f91cad5a32dd8b6b256ea1ecdb97e3e3c77066",
+      "bytes": 480
+    },
+    "initial_complete_path_subset/funded_50_fee_124_daily.csv": {
+      "sha256": "42c4c1cb17a9383c7b7ccc731aa2a3fa35ddca45c33fa1c27d99a9bc29f72408",
+      "bytes": 202049
+    },
+    "initial_complete_path_subset/evaluation_50_main_accounts.csv": {
+      "sha256": "e72d609124dc4251eb1d23a775177171ce3d2dca0785cfb121d78e4dbba96027",
+      "bytes": 22293
+    },
+    "initial_complete_path_subset/OT_unit_ledger.csv": {
+      "sha256": "3d6a435ad90d51a27cdc8e433a3eadbafdb0ce649dda5e8bf3cea2d50e0bb811",
+      "bytes": 56461
+    },
+    "initial_complete_path_subset/evaluation_50_fee_124_accounts.csv": {
+      "sha256": "b864f32a4f9d04c6b6dfd5e693500f0ae9edc59103524afb2ef091172e9f891f",
+      "bytes": 22298
+    },
+    "initial_complete_path_subset/funded_150_NQ_occupancy.csv": {
+      "sha256": "1e9131b0f38c447c1e5f517a7e681bc36bc7a7359f6890a07651de0cf7ccb77e",
+      "bytes": 93901
+    },
+    "initial_complete_path_subset/baseline_metrics.csv": {
+      "sha256": "c7579feee44bd6ea1ae70f42af25deebd0defdbfad7203cd90b44203b6dafb78",
+      "bytes": 15718
+    },
+    "initial_complete_path_subset/EOS_settings.json": {
+      "sha256": "67b093a8c6c19dcd3cff724929a1f8bc41e008b32724cd032a94b333b034067c",
+      "bytes": 1179
+    },
+    "initial_complete_path_subset/evaluation_150_stress_accounts.csv": {
+      "sha256": "56b695aedd651042c5df66c02d4b7a33a46124f067db86be9b61d8bba6dc5faf",
+      "bytes": 22851
+    },
+    "initial_complete_path_subset/run_manifest.json": {
+      "sha256": "6c2d01fccbcb92c7623f1b56135aa8c2ed1bd14132cb2ab8f968f71febdfedea",
+      "bytes": 2234
+    },
+    "initial_complete_path_subset/funded_50_ES_occupancy.csv": {
+      "sha256": "8fdafbd2c2341687edf0caf73d59a856ba7a452de1a947db23bb1016cb9a8b49",
+      "bytes": 30015
+    },
+    "initial_complete_path_subset/funded_150_worst5pct_days.csv": {
+      "sha256": "491c30719c7fcafaa93c3844753fa32632f07b2857ab0edefc0315bf261654c9",
+      "bytes": 11728
+    },
+    "initial_complete_path_subset/personal_ladder_diagnostic.json": {
+      "sha256": "46eed1d4760244c79cf26bd87f5be39dcc00c27548f9d86fcd33160812a87db9",
+      "bytes": 1039
+    },
+    "initial_complete_path_subset/DT_unit_ledger.csv": {
+      "sha256": "b34479fcda8d59aad27aed75712dbe166ce8f26740e91a27af8b376696bc577d",
+      "bytes": 172328
+    },
+    "initial_complete_path_subset/BRIDGE_unit_ledger.csv": {
+      "sha256": "af872e9f93caa6e4b6b30a93f202c31192b122730249828a5cd6cc95e768720c",
+      "bytes": 24249
+    },
+    "initial_complete_path_subset/personal_fee_124_components.csv": {
+      "sha256": "c1a150e10375aa250d3bd5d26e223e782033869b3315fa4ba3652ef9a6108433",
+      "bytes": 261156
+    },
+    "initial_complete_path_subset/funded_150_stress_daily.csv": {
+      "sha256": "784c394090a96fcac3c93f38290485c78c11c038484bfac202eebf2b3f27aed0",
+      "bytes": 245828
+    },
+    "initial_complete_path_subset/TOS_unit_ledger.csv": {
+      "sha256": "2711895daa680f240a160b85f46655bc1859c7d3c4c17d27311b340854772ea5",
+      "bytes": 40221
+    },
+    "initial_complete_path_subset/funded_50_main_daily.csv": {
+      "sha256": "0734e7c63ab7263e918b0ddef549ae004fdcba8da8af6f6df300eb2f3c6e028c",
+      "bytes": 194249
+    },
+    "initial_complete_path_subset/VB_unit_ledger.csv": {
+      "sha256": "b23dc8ca495238518bcfc56e00bf09f62bece3baa3a797c4bdc77d362be76645",
+      "bytes": 187671
+    },
+    "initial_complete_path_subset/evaluation_50_exposure.csv": {
+      "sha256": "39d54eb8aa0f86a9f12f2ab542ef3768afccbf486c1fe58951e5c4d0fd26acfc",
+      "bytes": 239
+    },
+    "initial_complete_path_subset/coverage_issues.csv": {
+      "sha256": "fb73cb906b68a37bd96b806e14a39ae0f0d7f91e6bfb3318af056bac59b2906b",
+      "bytes": 22059
+    },
+    "initial_complete_path_subset/account_summary.csv": {
+      "sha256": "dfcd14b9928a3372e0fa0aa3c7c1390815f52a85d10ee8cdf35a6aa42bcb8440",
+      "bytes": 4551
+    },
+    "initial_complete_path_subset/evaluation_150_main_daily.csv": {
+      "sha256": "c015d73aa6a1ff3c8eca13b8e1545a30479c6add532af278741d7073fb8179f0",
+      "bytes": 140451
+    },
+    "initial_complete_path_subset/funded_150_CL_occupancy.csv": {
+      "sha256": "b82d5094f80d4cfec19eddcdedd0bda8bff2bcecc77bcf1c6344a42513dc1097",
+      "bytes": 38979
+    },
+    "initial_complete_path_subset/ONBML_unit_ledger.csv": {
+      "sha256": "ea9af15f725dce6408300c182de20309886329871b581fc517a6d3f9814e7293",
+      "bytes": 36708
+    },
+    "initial_complete_path_subset/preparation.json": {
+      "sha256": "f0995bc995dd8b335265b59d416e64e9e9a0c301e28e5bff9ecbcf06d2a7152f",
+      "bytes": 3365
+    },
+    "initial_complete_path_subset/evaluation_50_stress_daily.csv": {
+      "sha256": "72e29648838f9217559ea2cbc5991126ff75d51dd0871d585c485d6ee44870e0",
+      "bytes": 129448
+    },
+    "initial_complete_path_subset/evaluation_150_worst5pct_days.csv": {
+      "sha256": "7ba589949f7ba316fcbc5130b904dcf30ea8adf1d48dbde7bcf6c0c6075af681",
+      "bytes": 8768
+    },
+    "initial_complete_path_subset/funded_150_main_history_dates.npy": {
+      "sha256": "7ba8b6debea1a657d4c35f05abbf005a8182ac90b6f67215905f311eeeed9cce",
+      "bytes": 2000128
+    },
+    "initial_complete_path_subset/BRIDGE_settings.json": {
+      "sha256": "081f619bdf3b76cdf980d3ee27ead9dbb23c585045bb967b7052171e8cf42319",
+      "bytes": 1056
+    },
+    "initial_complete_path_subset/funded_50_NQ_occupancy.csv": {
+      "sha256": "83c5ea0824f08b3e3dcce0bd7315bcf43cea151ec79e4fe8a8172f4d6374d45f",
+      "bytes": 93767
+    },
+    "initial_complete_path_subset/NFP_unit_ledger.csv": {
+      "sha256": "07cc759f40874b59777d354852649f3e2beb6fcd70885bcd22fef7525bc5d6a1",
+      "bytes": 8252
+    },
+    "initial_complete_path_subset/funded_50_exposure.csv": {
+      "sha256": "1ce3173895f980cf7976086ec78c4cdf4f440fcdeeedfc0078d6d06b6191b747",
+      "bytes": 337
+    },
+    "initial_complete_path_subset/evaluation_50_contributions.csv": {
+      "sha256": "949a4c31e102baa2f1b675de39fc1c30d3505c85de96b94a97c283d2ca97d083",
+      "bytes": 481
+    },
+    "initial_complete_path_subset/funded_150_correlations.csv": {
+      "sha256": "51735555544e848b09a35029314d9189e5b063f3b6b075520230735488364e79",
+      "bytes": 3435
+    },
+    "initial_complete_path_subset/evaluation_50_main_daily.csv": {
+      "sha256": "c21e4c54094c96a4660e0e2f79926892eacf2690f943c75d108c03b259891f1f",
+      "bytes": 126413
+    },
+    "initial_complete_path_subset/personal_stress_components.csv": {
+      "sha256": "3d17246da103aab6de88dae1032065ccb0bbab7c2e6a0a8055d6bc83d180ce92",
+      "bytes": 266785
+    },
+    "initial_complete_path_subset/personal_correlations.csv": {
+      "sha256": "ccc0c6b1e0e3d940f114405c48139f99c402f8e2cc8d849b7626fe4c2fc6acf2",
+      "bytes": 7595
+    },
+    "initial_complete_path_subset/personal_main_components.csv": {
+      "sha256": "455525fca990a47c3ad4e95b80cdbf6a6779d6aa04a4b10f4baa33b5dcf2061b",
+      "bytes": 286072
+    },
+    "initial_complete_path_subset/funded_50_fee_124_accounts.csv": {
+      "sha256": "cd00f59ca7e0446cf13060576f1c3238b7617266b64edca91262d9af36eb3a11",
+      "bytes": 17225
+    },
+    "initial_complete_path_subset/ONB30_unit_ledger.csv": {
+      "sha256": "043c129f2ae7c694b98d682dcfc8f323198cb4c5a4d923f17eaf9791f973705f",
+      "bytes": 74395
+    },
+    "initial_complete_path_subset/simulator_parity.json": {
+      "sha256": "6eff29e4f4027b767799ed76ef31676b4e4ea963439df480384ecff7ec35d866",
+      "bytes": 6459
+    },
+    "initial_complete_path_subset/evaluation_150_stress_daily.csv": {
+      "sha256": "66e38e20f6f201734e4cdf21aa1daf515649f73d20a4e8f18129dadece9312e9",
+      "bytes": 142479
+    },
+    "initial_complete_path_subset/personal_years.csv": {
+      "sha256": "43d8c2b92ad422f1cb168970389ac182460ef74410e358d5071855e5f3b3ea2e",
+      "bytes": 220
+    },
+    "initial_complete_path_subset/source_coverage.csv": {
+      "sha256": "009449af911d665778220084bc694911745c4d66686f1a01733d285c8b648ad2",
+      "bytes": 1959
+    },
+    "initial_complete_path_subset/funded_50_fee_124_history_dates.npy": {
+      "sha256": "406e60c81f3a444fa6fe833a03f65926781ee4c73de91ff1d3efa271879f2d7b",
+      "bytes": 2000128
+    },
+    "initial_complete_path_subset/funded_50_main_accounts.csv": {
+      "sha256": "c810596e7cb3dabc0e5277797aab6a1d36535cdd33530edc137af53ae419af73",
+      "bytes": 17271
+    },
+    "initial_complete_path_subset/LDF_settings.json": {
+      "sha256": "5612bdde09eb5229533726f5f120b510239dfb259e02e26885d0f78434f04612",
+      "bytes": 1076
+    },
+    "initial_complete_path_subset/funded_150_exposure.csv": {
+      "sha256": "c08ba4e047b61cf61467a3a3d9de60caed473e77aa4e1929e3c34b93d5ab3640",
+      "bytes": 338
+    },
+    "initial_complete_path_subset/evaluation_150_contributions.csv": {
+      "sha256": "53b905a9f73279c505ae0930a333f651769400b3e7284c6e4dc8ea0c1275fd31",
+      "bytes": 463
+    },
+    "initial_complete_path_subset/VB_settings.json": {
+      "sha256": "db474a102a8392a5da99748f86b641cdc4427e38c0f890708d96f72a3c8cea1b",
+      "bytes": 1163
+    },
+    "initial_complete_path_subset/MON_unit_ledger.csv": {
+      "sha256": "26b314670131af4f5894197c00975c1bffe8fbd5e105e8cbcc76df85479b8d86",
+      "bytes": 48119
+    },
+    "initial_complete_path_subset/funded_50_CL_occupancy.csv": {
+      "sha256": "300c7b4d27097053cd6a5ee386d724473d64c490e60b12b1acb52e9f24370304",
+      "bytes": 39537
+    },
+    "initial_complete_path_subset/CLS_unit_ledger.csv": {
+      "sha256": "d3b773d68ed0cf6a1389afa52fa7bd6c14916cca914c3fa07ffb2db509578e0a",
+      "bytes": 10561
+    },
+    "initial_complete_path_subset/LDF_unit_ledger.csv": {
+      "sha256": "68cc91771c4c63dce0817f9afde7d114cb248cd31df3b3116dc06726a22008b2",
+      "bytes": 97124
+    },
+    "initial_complete_path_subset/funded_150_main_daily.csv": {
+      "sha256": "43b027768ff8d57f6ccc1ad2fc890ac017000b67135c4a236822b2f64175ae0a",
+      "bytes": 240974
+    },
+    "initial_complete_path_subset/NFP_settings.json": {
+      "sha256": "964ad708ad581f79d6a1471762ce93085ebd9630305140f7ebf867fa467203d0",
+      "bytes": 1110
+    },
+    "initial_complete_path_subset/funded_150_fee_124_daily.csv": {
+      "sha256": "41e44150d06320e186e5c8c111c786b7b74e9c320b1d4cd633022009af897b71",
+      "bytes": 253474
+    },
+    "initial_complete_path_subset/MOC_unit_ledger.csv": {
+      "sha256": "456a7a85470d0675307c7b717c68a3ffeeed7d5c7338a7d0dcc515d5e7d7b108",
+      "bytes": 21603
+    },
+    "initial_complete_path_subset/evaluation_50_NQ_occupancy.csv": {
+      "sha256": "971fdac30697c619630900cdb2da23a911fa5ff806291fd722b708bc2bb49008",
+      "bytes": 89028
+    },
+    "initial_complete_path_subset/funded_50_worst5pct_days.csv": {
+      "sha256": "7a526f11fb82cbb5377138b94055fc13d469390ed639c293d1cc8ee08af3022f",
+      "bytes": 9746
+    },
+    "initial_complete_path_subset/funded_150_stress_history_dates.npy": {
+      "sha256": "7ba8b6debea1a657d4c35f05abbf005a8182ac90b6f67215905f311eeeed9cce",
+      "bytes": 2000128
+    },
+    "initial_complete_path_subset/evaluation_50_worst5pct_days.csv": {
+      "sha256": "e186ad63ed1602f9d9c1ef0e95b7c8883401580d78ebbe7aaa7ad650bfaa52fd",
+      "bytes": 7448
+    },
+    "initial_complete_path_subset/VB_F_unit_ledger.csv": {
+      "sha256": "d89e9b2ada95fcfe9d065bd78a23c4b6de2ed8d1ecd2e416dff63303c28ffee9",
+      "bytes": 59946
+    },
+    "initial_complete_path_subset/RS_unit_ledger.csv": {
+      "sha256": "897c2b7160d7aa8709e2cb03ce190ff2f9bbd81aedb62bad08f5194aea70bda9",
+      "bytes": 128591
+    },
+    "initial_complete_path_subset/funded_150_fee_124_accounts.csv": {
+      "sha256": "bd2523b9e927016a86bea2a6a0f5ea8435c7d5e03eedd89229564307d7d7586c",
+      "bytes": 16424
+    },
+    "initial_complete_path_subset/funded_50_main_history_dates.npy": {
+      "sha256": "406e60c81f3a444fa6fe833a03f65926781ee4c73de91ff1d3efa271879f2d7b",
+      "bytes": 2000128
+    },
+    "initial_complete_path_subset/evaluation_150_exposure.csv": {
+      "sha256": "e5fb8a8a57199e28bfb8dc033c79a743e84c3892e667e0622412b0935b901d26",
+      "bytes": 242
+    },
+    "initial_complete_path_subset/funded_150_stress_accounts.csv": {
+      "sha256": "ed1a6f18a403a0b26b4a38e27bb17a48bcbfae081a6b5e93fdfbbfee5f3221c7",
+      "bytes": 16108
+    },
+    "initial_complete_path_subset/funded_50_stress_daily.csv": {
+      "sha256": "e84c52cf5e61ca0b8f6c312c398c41759824c8e35358d95daa6d925963487435",
+      "bytes": 197592
+    },
+    "implementation_wrong_150_preset/evaluation_150_years.csv": {
+      "sha256": "84cdca6a5cc770f7892e1871b023c2eeaf920f4fe6df91fe892f8db110afbe24",
+      "bytes": 441
+    },
+    "implementation_wrong_150_preset/evaluation_150_correlations.csv": {
+      "sha256": "910285e55aa56e282e68012d92bb03c29c52c21bb158628b99f1132583d381c7",
+      "bytes": 307
+    },
+    "implementation_wrong_150_preset/evaluation_50_correlations.csv": {
+      "sha256": "81dcc59c78bd87dc8937ef367e5cf627ae32b16bbcdb3d62eff51af1ed9821b1",
+      "bytes": 307
+    },
+    "implementation_wrong_150_preset/evaluation_150_fee_124_accounts.csv": {
+      "sha256": "8d4e601cf906da3b2d99442a433086a997b68e470db36ca95f7929b9067eadcb",
+      "bytes": 43204
+    },
+    "implementation_wrong_150_preset/VB_N_unit_ledger.csv": {
+      "sha256": "7ef8c4ee0e0c859f45550830046c91551d489427fb1d27bc3acebf22beb390d6",
+      "bytes": 130252
+    },
+    "implementation_wrong_150_preset/admission.csv": {
+      "sha256": "8860ea41247d5e8e9288cf12a2e6a974965fd2784901a8afc884918d32da237d",
+      "bytes": 2156
+    },
+    "implementation_wrong_150_preset/funded_50_stress_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "implementation_wrong_150_preset/EOS_unit_ledger.csv": {
+      "sha256": "e25f4cd3098745e7bd20b0bc91a0bebd78aae2c10a546c9859056970d04fad21",
+      "bytes": 11428
+    },
+    "implementation_wrong_150_preset/funded_150_years.csv": {
+      "sha256": "a2f4fd3b86b75ece2d235720686e1da1296b38b63771baade425bb9d36fcfbcc",
+      "bytes": 522
+    },
+    "implementation_wrong_150_preset/personal_contributions.csv": {
+      "sha256": "983b66e33d8c8104d8755ce144b0a9c97534056ee7aec21dce546a83b8e179ac",
+      "bytes": 2065
+    },
+    "implementation_wrong_150_preset/ONB30_settings.json": {
+      "sha256": "27b90acb6e03121a5f3bfbdca5b18ba99331c8d038581c779fdd71c04db888bf",
+      "bytes": 1236
+    },
+    "implementation_wrong_150_preset/evaluation_150_NQ_occupancy.csv": {
+      "sha256": "aa5163590d2e49f1ca171af5058828686693bf40da5a36c74f355589626b6de6",
+      "bytes": 86954
+    },
+    "implementation_wrong_150_preset/funded_150_contributions.csv": {
+      "sha256": "bbcd073439cb74230fad93d5ee4fd87540c6f81e3a3af82734962eebb6b65763",
+      "bytes": 1348
+    },
+    "implementation_wrong_150_preset/long_short_attribution.csv": {
+      "sha256": "ce0a8e049b9f29d3008eacd507a57d00b90d34f6937645c37636a42585e25de2",
+      "bytes": 2562
+    },
+    "implementation_wrong_150_preset/funded_150_ES_occupancy.csv": {
+      "sha256": "aa2aa5ef5fc99d024e02ac3153bbfdc5b4be57ff0efcb379893e59eea358f2cc",
+      "bytes": 30007
+    },
+    "implementation_wrong_150_preset/personal_main_bootstrap_draws.csv": {
+      "sha256": "3afb830780b3aab9f9ff1a9b62bf1e0fef372cd9ce7a1633d78a77e71dba53e5",
+      "bytes": 182251
+    },
+    "implementation_wrong_150_preset/funded_50_correlations.csv": {
+      "sha256": "a016cc8e29b7b9fca67cad226adac5001787595fdffdadfce2dd0ee4c7cc35bd",
+      "bytes": 2479
+    },
+    "implementation_wrong_150_preset/funded_50_stress_accounts.csv": {
+      "sha256": "b2f714d99056a98a9d2d070e9df7efd1735331d13b22108bd0db3816fc034fdd",
+      "bytes": 17140
+    },
+    "implementation_wrong_150_preset/evaluation_50_fee_124_daily.csv": {
+      "sha256": "739c72db95598228378bd724bf6678890813afc426ce3ead15e5bc44f55170ac",
+      "bytes": 139314
+    },
+    "implementation_wrong_150_preset/evaluation_50_years.csv": {
+      "sha256": "906db429fad98029a5ae7730681bb5a43ce96abc5d87794b668054bbf37a7d08",
+      "bytes": 392
+    },
+    "implementation_wrong_150_preset/personal_bootstrap.csv": {
+      "sha256": "377091222b0ff1d11c64de3c521b961ffd05fba5962f3aa27d1e185be3a07911",
+      "bytes": 757
+    },
+    "implementation_wrong_150_preset/funded_50_years.csv": {
+      "sha256": "8fe88887f1551c44fc9c988349fac5d1b90e3ba1acb10fd0a782ef3015d09f77",
+      "bytes": 517
+    },
+    "implementation_wrong_150_preset/personal_published_daily.csv": {
+      "sha256": "6afc37de5cee4e7330c752dcfc6cc06e7629a684eb2e1dd543dc2d46594443b0",
+      "bytes": 289486
+    },
+    "implementation_wrong_150_preset/MON_settings.json": {
+      "sha256": "63d9b5972287749d2e3a3148eca028b2ac3de16bac16a5de9c075b62b1618192",
+      "bytes": 1077
+    },
+    "implementation_wrong_150_preset/funded_150_fee_124_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "implementation_wrong_150_preset/evaluation_50_stress_accounts.csv": {
+      "sha256": "8f70a3caa064e78bb8baa575ad044070dadaeb1f6c7047563c2e9d0800919cbc",
+      "bytes": 42556
+    },
+    "implementation_wrong_150_preset/funded_50_contributions.csv": {
+      "sha256": "734640e3aaaa6357ed097be8163418148cac2427e0939cc80f2d7d9fabd3fd28",
+      "bytes": 1140
+    },
+    "implementation_wrong_150_preset/ONBML_settings.json": {
+      "sha256": "173990712c1e980323d6ea0cafa2b4fccd25b977d293a530086688b205c3c4e8",
+      "bytes": 1393
+    },
+    "implementation_wrong_150_preset/funded_150_main_accounts.csv": {
+      "sha256": "e06a64123cf9c874e734ba86d0fb5fb5339de3ac4f9fc0b188b9cd3cdd00c833",
+      "bytes": 16403
+    },
+    "implementation_wrong_150_preset/evaluation_150_main_accounts.csv": {
+      "sha256": "476208e894e76a4efe36d9a8d0abd00f38523feb14ec59b3b3eb261f729298f1",
+      "bytes": 43174
+    },
+    "implementation_wrong_150_preset/evaluation_150_fee_124_daily.csv": {
+      "sha256": "7ef147ff34b1787bee9861f8fd72f54c4cddfa9e30275ee2ed8f89d55a6ef894",
+      "bytes": 145020
+    },
+    "implementation_wrong_150_preset/trade_coverage_retention.csv": {
+      "sha256": "de1ca77310340048d6091382d6cf1a1a56262cd52aecc98260fd280dd301c841",
+      "bytes": 1502
+    },
+    "implementation_wrong_150_preset/mechanics.json": {
+      "sha256": "6a80f967aac2bb37d527aa1bb3f91cad5a32dd8b6b256ea1ecdb97e3e3c77066",
+      "bytes": 480
+    },
+    "implementation_wrong_150_preset/funded_50_fee_124_daily.csv": {
+      "sha256": "750ea63463b0dec126fd42452c5c795df7531567757359f4ef6c701f5acc8db1",
+      "bytes": 212735
+    },
+    "implementation_wrong_150_preset/evaluation_50_main_accounts.csv": {
+      "sha256": "d170f6b2434f4670adc2328d4779db90926d70661eeaab7401f3d5d6a5a74f55",
+      "bytes": 42377
+    },
+    "implementation_wrong_150_preset/OT_unit_ledger.csv": {
+      "sha256": "3d6a435ad90d51a27cdc8e433a3eadbafdb0ce649dda5e8bf3cea2d50e0bb811",
+      "bytes": 56461
+    },
+    "implementation_wrong_150_preset/evaluation_50_fee_124_accounts.csv": {
+      "sha256": "27900a711b00312519f95a54b5f1373875cda56684cd7134ae707caedf2ab866",
+      "bytes": 42406
+    },
+    "implementation_wrong_150_preset/funded_150_NQ_occupancy.csv": {
+      "sha256": "dc787019fd26c47463cc320f8b1dfc7b6053b68f40f789318fb545b4f6b0a477",
+      "bytes": 92607
+    },
+    "implementation_wrong_150_preset/baseline_metrics.csv": {
+      "sha256": "adea5726a56e23c521e3b956fd713de7ca0740324f6bdf49c0b3d724953d0b98",
+      "bytes": 15627
+    },
+    "implementation_wrong_150_preset/EOS_settings.json": {
+      "sha256": "67b093a8c6c19dcd3cff724929a1f8bc41e008b32724cd032a94b333b034067c",
+      "bytes": 1179
+    },
+    "implementation_wrong_150_preset/evaluation_150_stress_accounts.csv": {
+      "sha256": "63197ddc6ab57da0af3ce35c6f21e56636f33b91de080465e73f6acf713562c5",
+      "bytes": 43436
+    },
+    "implementation_wrong_150_preset/run_manifest.json": {
+      "sha256": "4f887a8d0977fbef3efd5ce7d1431748d3ee381135c81886cf7744a93eb5a135",
+      "bytes": 2346
+    },
+    "implementation_wrong_150_preset/funded_50_ES_occupancy.csv": {
+      "sha256": "e44ee660b7f6f362aebf8d7a69da11c35e97a8f10d6e4396f4ee46956393d8ab",
+      "bytes": 30015
+    },
+    "implementation_wrong_150_preset/funded_150_worst5pct_days.csv": {
+      "sha256": "079f56e6d940dc6d6bc7abe003776397cd68f77a7b967e81dbf2148c805c42ef",
+      "bytes": 13860
+    },
+    "implementation_wrong_150_preset/personal_ladder_diagnostic.json": {
+      "sha256": "61e9c889e143673fb8e3cad2b7682f530c0823f391d6b926eccb0896768eb955",
+      "bytes": 1037
+    },
+    "implementation_wrong_150_preset/DT_unit_ledger.csv": {
+      "sha256": "b34479fcda8d59aad27aed75712dbe166ce8f26740e91a27af8b376696bc577d",
+      "bytes": 172328
+    },
+    "implementation_wrong_150_preset/BRIDGE_unit_ledger.csv": {
+      "sha256": "af872e9f93caa6e4b6b30a93f202c31192b122730249828a5cd6cc95e768720c",
+      "bytes": 24249
+    },
+    "implementation_wrong_150_preset/personal_fee_124_components.csv": {
+      "sha256": "3bbdd3ec938b8c8bbdc28641063390553c5ce38a5e140016605b410e1e5d719f",
+      "bytes": 260999
+    },
+    "implementation_wrong_150_preset/failure.json": {
+      "sha256": "23f0151a292a6203b285b42fe81b0d365e49bd24f62cf77267344fc31da9b5bb",
+      "bytes": 327
+    },
+    "implementation_wrong_150_preset/funded_150_stress_daily.csv": {
+      "sha256": "ac77f98998e75772ee5c62c645c0ad6031dbba6560303ecc57040fccaadc9312",
+      "bytes": 256514
+    },
+    "implementation_wrong_150_preset/TOS_unit_ledger.csv": {
+      "sha256": "2711895daa680f240a160b85f46655bc1859c7d3c4c17d27311b340854772ea5",
+      "bytes": 40221
+    },
+    "implementation_wrong_150_preset/funded_50_main_daily.csv": {
+      "sha256": "2c3ba18a9fa024f330cd2c7ad2205f734de26166db4cb30955a302a861434735",
+      "bytes": 204935
+    },
+    "implementation_wrong_150_preset/VB_unit_ledger.csv": {
+      "sha256": "b23dc8ca495238518bcfc56e00bf09f62bece3baa3a797c4bdc77d362be76645",
+      "bytes": 187671
+    },
+    "implementation_wrong_150_preset/verification.json": {
+      "sha256": "518337acfd6171242c8e7bd1003630661a47437cc21ced875d01391a9a8083f5",
+      "bytes": 2098
+    },
+    "implementation_wrong_150_preset/evaluation_50_exposure.csv": {
+      "sha256": "17f5464a6d295c11a8cde07f0595f6b905f609e39de9c8fef5c8b92f911c6732",
+      "bytes": 239
+    },
+    "implementation_wrong_150_preset/market_concentration.csv": {
+      "sha256": "4b4a033f92dc064ef5d53486e88a3741b8cf5ea56959edf49c5767278da57024",
+      "bytes": 2529
+    },
+    "implementation_wrong_150_preset/coverage_issues.csv": {
+      "sha256": "fb73cb906b68a37bd96b806e14a39ae0f0d7f91e6bfb3318af056bac59b2906b",
+      "bytes": 22059
+    },
+    "implementation_wrong_150_preset/account_summary.csv": {
+      "sha256": "604f23611e6c59a535083a1ce2defcdec21175aee36f9957f02709a9504cfcf6",
+      "bytes": 4549
+    },
+    "implementation_wrong_150_preset/evaluation_150_main_daily.csv": {
+      "sha256": "9cdbccc2c15d81ccfc6e401caa497205bf3daec0f46311db177ab34f23b6e82b",
+      "bytes": 151129
+    },
+    "implementation_wrong_150_preset/funded_150_CL_occupancy.csv": {
+      "sha256": "cbaa29d76e9549cee6017fdc058106db1fb9dcb0a5cba137b95a5283e1c2a5be",
+      "bytes": 76625
+    },
+    "implementation_wrong_150_preset/ONBML_unit_ledger.csv": {
+      "sha256": "ea9af15f725dce6408300c182de20309886329871b581fc517a6d3f9814e7293",
+      "bytes": 36708
+    },
+    "implementation_wrong_150_preset/personal_bootstrap_corrected.csv": {
+      "sha256": "088fc9f61f4ec5edc5fbfda015ae6df149b0df1cce7048a78bf166ea60b8c5e4",
+      "bytes": 713
+    },
+    "implementation_wrong_150_preset/preparation.json": {
+      "sha256": "cfef985802680c4f37b7a646e0bb1dc2e6c3117b9eee4e11ddbcef17e3fee026",
+      "bytes": 3365
+    },
+    "implementation_wrong_150_preset/evaluation_50_stress_daily.csv": {
+      "sha256": "558cdc3c3449e90acce2e22cef3af1227f97940500726beaa73a30ba402a7048",
+      "bytes": 140126
+    },
+    "implementation_wrong_150_preset/evaluation_150_worst5pct_days.csv": {
+      "sha256": "37a93671f69b0464b764dd0d746f49d1ab20308729e00b555989e6271a9fb452",
+      "bytes": 9663
+    },
+    "implementation_wrong_150_preset/funded_150_main_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "implementation_wrong_150_preset/BRIDGE_settings.json": {
+      "sha256": "081f619bdf3b76cdf980d3ee27ead9dbb23c585045bb967b7052171e8cf42319",
+      "bytes": 1056
+    },
+    "implementation_wrong_150_preset/funded_50_NQ_occupancy.csv": {
+      "sha256": "964b81f6d1b02862963c3487776f491c8ba47553d1e96d5991697c6cea3f0a85",
+      "bytes": 93361
+    },
+    "implementation_wrong_150_preset/NFP_unit_ledger.csv": {
+      "sha256": "07cc759f40874b59777d354852649f3e2beb6fcd70885bcd22fef7525bc5d6a1",
+      "bytes": 8252
+    },
+    "implementation_wrong_150_preset/funded_50_exposure.csv": {
+      "sha256": "c0822171ea1f3f1964c93c2a880b475ee2b69727e6a38f0cafb682d19b906679",
+      "bytes": 336
+    },
+    "implementation_wrong_150_preset/evaluation_50_contributions.csv": {
+      "sha256": "fdb12e4d50822f81819fee29b59111321439efe91d01d80438749fbb5a83c77b",
+      "bytes": 451
+    },
+    "implementation_wrong_150_preset/structural_findings.json": {
+      "sha256": "7f4a101a9df045167d8448bdd3b6477bb29cfc548599cbabee9291a64bad2f5a",
+      "bytes": 1978
+    },
+    "implementation_wrong_150_preset/funded_150_correlations.csv": {
+      "sha256": "4859950e2c9707db860667fa4503fccdfb67b14f755b7abcef812c2ef70dc0a6",
+      "bytes": 3441
+    },
+    "implementation_wrong_150_preset/evaluation_50_main_daily.csv": {
+      "sha256": "1b8237919844b8e982b55625993a89ff60ebe5d793d5c441494bdb36edd354c2",
+      "bytes": 137091
+    },
+    "implementation_wrong_150_preset/personal_stress_components.csv": {
+      "sha256": "5dfc45acf96ffe28a8b8b2f1f3e0b773ff95d439d74ad4973cc116f05a9cc801",
+      "bytes": 266628
+    },
+    "implementation_wrong_150_preset/personal_correlations.csv": {
+      "sha256": "85e5511d5e02a7383413efb29f1b9867da63d7e27eef7d6520bbaac47439e4b2",
+      "bytes": 7581
+    },
+    "implementation_wrong_150_preset/personal_main_components.csv": {
+      "sha256": "f8e765937bfee0a91834274fb169bd72f75fbfd72a4007e3085c72f4f2afe3a2",
+      "bytes": 285915
+    },
+    "implementation_wrong_150_preset/funded_50_fee_124_accounts.csv": {
+      "sha256": "b39663005567ebcdaafd84c3b97db39fa13bc7accfb391294e6607ea8751a91f",
+      "bytes": 17367
+    },
+    "implementation_wrong_150_preset/ONB30_unit_ledger.csv": {
+      "sha256": "043c129f2ae7c694b98d682dcfc8f323198cb4c5a4d923f17eaf9791f973705f",
+      "bytes": 74395
+    },
+    "implementation_wrong_150_preset/simulator_parity.json": {
+      "sha256": "abe69fa920b75eb2873f5e208cd8ac57d64bf406b9335927c33d8658c1fa847b",
+      "bytes": 6463
+    },
+    "implementation_wrong_150_preset/evaluation_150_stress_daily.csv": {
+      "sha256": "414c7939d8b852bec602dd00ed2f2a41d595f4aae2e3b835a72290db60dd6927",
+      "bytes": 153157
+    },
+    "implementation_wrong_150_preset/personal_years.csv": {
+      "sha256": "b983352744691ca23da75ec67f83b3dafa03d664f7b341f9f6fb1878e0ad2c1b",
+      "bytes": 218
+    },
+    "implementation_wrong_150_preset/source_coverage.csv": {
+      "sha256": "009449af911d665778220084bc694911745c4d66686f1a01733d285c8b648ad2",
+      "bytes": 1959
+    },
+    "implementation_wrong_150_preset/funded_50_fee_124_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "implementation_wrong_150_preset/fixed_lot_sizing_audit.csv": {
+      "sha256": "091a3d82e87e6fa73f658e07a5e7288f793798e94ab08220b7c64d94f782ab86",
+      "bytes": 2527
+    },
+    "implementation_wrong_150_preset/funded_50_main_accounts.csv": {
+      "sha256": "c2717d81f37871e74aa53733cda10b929b938d545d2ae9105408fd6c4c55164b",
+      "bytes": 17366
+    },
+    "implementation_wrong_150_preset/LDF_settings.json": {
+      "sha256": "5612bdde09eb5229533726f5f120b510239dfb259e02e26885d0f78434f04612",
+      "bytes": 1076
+    },
+    "implementation_wrong_150_preset/personal_fee_124_bootstrap_draws.csv": {
+      "sha256": "0872ca01846b4c4d2b76e6b7cf6f272733bc4408d0d0b204ac2619513fcdc346",
+      "bytes": 182005
+    },
+    "implementation_wrong_150_preset/funded_150_exposure.csv": {
+      "sha256": "7f1ebba8568b64e8c75faefd981a23c051f92a8a0195825fccfe2def748dc0b6",
+      "bytes": 339
+    },
+    "implementation_wrong_150_preset/personal_stress_bootstrap_draws.csv": {
+      "sha256": "f051dbfc9f264202e334dc7ca81da418c910851f28210c20ebb5504f2474234a",
+      "bytes": 182194
+    },
+    "implementation_wrong_150_preset/evaluation_150_contributions.csv": {
+      "sha256": "6d03b462001e52b0b3fa5b7a17eb53253aa2c316ce6497d48ea1bfbbc9d55a7b",
+      "bytes": 487
+    },
+    "implementation_wrong_150_preset/VB_settings.json": {
+      "sha256": "db474a102a8392a5da99748f86b641cdc4427e38c0f890708d96f72a3c8cea1b",
+      "bytes": 1163
+    },
+    "implementation_wrong_150_preset/MON_unit_ledger.csv": {
+      "sha256": "26b314670131af4f5894197c00975c1bffe8fbd5e105e8cbcc76df85479b8d86",
+      "bytes": 48119
+    },
+    "implementation_wrong_150_preset/funded_50_CL_occupancy.csv": {
+      "sha256": "07269ca2296cc08b0f19f4bf1cc95ff05113db2546dd1498a80bae0686c4c079",
+      "bytes": 76539
+    },
+    "implementation_wrong_150_preset/CLS_unit_ledger.csv": {
+      "sha256": "d3b773d68ed0cf6a1389afa52fa7bd6c14916cca914c3fa07ffb2db509578e0a",
+      "bytes": 10561
+    },
+    "implementation_wrong_150_preset/LDF_unit_ledger.csv": {
+      "sha256": "68cc91771c4c63dce0817f9afde7d114cb248cd31df3b3116dc06726a22008b2",
+      "bytes": 97124
+    },
+    "implementation_wrong_150_preset/funded_150_main_daily.csv": {
+      "sha256": "72c77d4cf925402881d7b69d035305eb39c105864cd82ab9b9d1f5860e130b0a",
+      "bytes": 251660
+    },
+    "implementation_wrong_150_preset/NFP_settings.json": {
+      "sha256": "964ad708ad581f79d6a1471762ce93085ebd9630305140f7ebf867fa467203d0",
+      "bytes": 1110
+    },
+    "implementation_wrong_150_preset/funded_150_fee_124_daily.csv": {
+      "sha256": "a63df68ebcaf145a153d7393af7c8cb60afdd3bf489482c4855ad30b663015eb",
+      "bytes": 264160
+    },
+    "implementation_wrong_150_preset/MOC_unit_ledger.csv": {
+      "sha256": "456a7a85470d0675307c7b717c68a3ffeeed7d5c7338a7d0dcc515d5e7d7b108",
+      "bytes": 21603
+    },
+    "implementation_wrong_150_preset/evaluation_50_NQ_occupancy.csv": {
+      "sha256": "d869d2d029475a7cd41cf170f85894c6ea31dea5f2e936d2bbf4c2bad5178e01",
+      "bytes": 88140
+    },
+    "implementation_wrong_150_preset/funded_50_worst5pct_days.csv": {
+      "sha256": "88ba831edd1b91b5f1a0ddc199ce61e444bd3d061bc5a09110694ceb3b9be6e4",
+      "bytes": 11492
+    },
+    "implementation_wrong_150_preset/funded_150_stress_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "implementation_wrong_150_preset/evaluation_50_worst5pct_days.csv": {
+      "sha256": "db17c9c93b8038a8efb9acd32c0eb491daef25433d16479ce32afcef8e4a8e93",
+      "bytes": 8330
+    },
+    "implementation_wrong_150_preset/VB_F_unit_ledger.csv": {
+      "sha256": "d89e9b2ada95fcfe9d065bd78a23c4b6de2ed8d1ecd2e416dff63303c28ffee9",
+      "bytes": 59946
+    },
+    "implementation_wrong_150_preset/RS_unit_ledger.csv": {
+      "sha256": "897c2b7160d7aa8709e2cb03ce190ff2f9bbd81aedb62bad08f5194aea70bda9",
+      "bytes": 128591
+    },
+    "implementation_wrong_150_preset/funded_150_fee_124_accounts.csv": {
+      "sha256": "a0d694461fc780bf301a83aae0235b3490292a9d45b5f697f0cbe854ac1d1915",
+      "bytes": 16396
+    },
+    "implementation_wrong_150_preset/funded_50_main_history_dates.npy": {
+      "sha256": "6cd97966b14370bd7e9ffb2b1ae029bb2cb475be2189f32a6112bbc08a235208",
+      "bytes": 2000128
+    },
+    "implementation_wrong_150_preset/evaluation_150_exposure.csv": {
+      "sha256": "688368d0b1eed8aa9005df7febddcee6e3ee2ee3ca1a0a97eefa985ea9f9aad4",
+      "bytes": 242
+    },
+    "implementation_wrong_150_preset/funded_150_stress_accounts.csv": {
+      "sha256": "d5a3fa10f4017ac654fb0bb60599775fef67db526c77e107788ab76416927844",
+      "bytes": 16155
+    },
+    "implementation_wrong_150_preset/funded_50_stress_daily.csv": {
+      "sha256": "cc46ccb36e13dcc10a0b4c558cf8b7ab3ec7c25ec1879f843dec31369444fb29",
+      "bytes": 208278
+    }
+  },
+  "no_new_alpha_definitions": true,
+  "independent_review_pending": true
+}

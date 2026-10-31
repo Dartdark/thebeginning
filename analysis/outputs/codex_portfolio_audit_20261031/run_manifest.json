@@ -1,0 +1,116 @@
+{
+  "source_commit": "c3126aa01796133f3aecb368e688726931dea440",
+  "plan_commit": "671f7f1",
+  "rosters": {
+    "evaluation_50": {
+      "VB": 8,
+      "ONB30": [
+        "risk",
+        1100,
+        0.25
+      ],
+      "EOS": [
+        "risk",
+        500,
+        0.3
+      ],
+      "BRIDGE": 2
+    },
+    "evaluation_150": {
+      "VB": 20,
+      "ONB30": [
+        "risk",
+        2750,
+        0.25
+      ],
+      "EOS": [
+        "risk",
+        1250,
+        0.3
+      ],
+      "BRIDGE": 5
+    },
+    "funded_50": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONBML": [
+        "risk",
+        400,
+        0.3
+      ],
+      "OT": 1,
+      "EOS": [
+        "risk",
+        700,
+        0.3
+      ],
+      "LDF": 2,
+      "NFP": [
+        "risk",
+        500,
+        0.5
+      ],
+      "BRIDGE": 1,
+      "CLS": 2,
+      "MOC": 2,
+      "TOS": 1
+    },
+    "funded_150": {
+      "VB_N": 3,
+      "VB_F": 1.5,
+      "ONBML": [
+        "risk",
+        600,
+        0.3
+      ],
+      "MON": 1.5,
+      "EOS": [
+        "risk",
+        1050,
+        0.3
+      ],
+      "LDF": 3,
+      "NFP": [
+        "risk",
+        750,
+        0.5
+      ],
+      "BRIDGE": 1.5,
+      "CLS": 3,
+      "MOC": 3,
+      "RS": 1,
+      "DT": 2,
+      "OT": 2
+    }
+  },
+  "scenarios": {
+    "main": [
+      1.04,
+      1
+    ],
+    "fee_124": [
+      1.24,
+      1
+    ],
+    "stress": [
+      2.08,
+      2
+    ]
+  },
+  "seed": 20261031,
+  "bootstrap_histories": 500,
+  "block_days": 20,
+  "personal_draws": 5000,
+  "code": {
+    "codex_portfolio_audit_diagnostics.py": "5c2386c8897003191fcb9b8d665b59d9d849f484e5dd79d8c0c5019284134021",
+    "codex_portfolio_audit_config.py": "d1d483adb57e2af24f5f89b03b7b89759bd35471a0e9c622acc0e52d9b2d321e",
+    "codex_portfolio_audit_prepare.py": "03e9f7899f15d60456b30f113dff4f771cf043769f8856be5ce877f06d85e65a",
+    "codex_portfolio_audit_verify.py": "0509587daf5bc9bf5af63d4cdf10f8079f9c39f0f7a9d968b249225fe60abcfc",
+    "codex_portfolio_audit_run.py": "ddf858e0ee07b03855832dc32b9aa291c79ddf149a59950895ef2704239c590b"
+  },
+  "backend": {
+    "codex_ob_v2_accounts.py": "3a44d30a96c63a2058ad847e4ebb4fa91d28318f7dd8a0f39b11ce366baa9878",
+    "codex_anson_accounts.py": "a1d47a3a7cf03fd039163e95c115fc128e9da40bbc898a2b5b109e9e8193eda7"
+  },
+  "decisions": "audit only; no allocations selected, retired or changed"
+}

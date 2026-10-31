@@ -1,0 +1,31 @@
+{
+  "documented_piece_count": 19,
+  "actual_contract_sleeves": 20,
+  "description": "S30 combines MNQ+MES; the printed ladder still names an older16-piece core",
+  "no_S30_current18_sleeve_metrics": {
+    "trades": 2123,
+    "win": 0.5209609043805935,
+    "avg": 144.04194023095775,
+    "annual": 36179.27786657346,
+    "sharpe": 3.4226561245786944,
+    "sortino": 7.564828197113462,
+    "profit_factor": 1.9420583825576216,
+    "max_dd": 5155.462408223131,
+    "calmar": 7.017659135457244,
+    "ulcer": 2.1613990228938036,
+    "ulcer_perf": 167.3882401322389,
+    "net": 305801.0391103233
+  },
+  "no_S30_current18_sleeve_MC": {
+    "horizon": 252,
+    "pnl_p5": 19965.53109913905,
+    "pnl_p50": 35412.541210784766,
+    "pnl_p95": 54409.214859195345,
+    "p_loss": 0.0,
+    "dd_p50": 3387.4966100058227,
+    "dd_p95": 5476.804457482054,
+    "p_trail_hit": 0.0,
+    "ret_dd": 10.453897165884955
+  },
+  "source_sizing_floor": "personal_portfolio.py max(1,floor(...)) always prints at least1x even when the20% risk budget cannot fund1x"
+}

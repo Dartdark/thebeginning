@@ -104,6 +104,18 @@ Execution references stay in [EXECUTION_REFERENCES.md](EXECUTION_REFERENCES.md);
 | **D44 — Native NQ versus auxiliary OF price provenance.** | Producer/feed/build/roll/receipt identity for native and OF files, verified historical session/closure events and original observations for missing/conflicting minutes. | Diagnostic intake found OF-only bars but did not authenticate replacements. Verify provenance before any merge; no return-selected splice, interpolation or resurrection of closed H03/H04. [Intake](results/hunt_v2_native_OF_gap_intake.md). |
 | **D45 — Passive equity fills and replenishing-depth execution models.** | Equity order/routing/venue/quote/fill/fee/borrow records for subpenny comparisons; event-level native depth/trades, parent orders, cancellations and recovery for Obizhaeva–Wang/slicing calibration. | Analytical arithmetic is not empirical savings. First show material self-impact or a real fill advantage at the actual size, including opportunity/noncompletion costs. One-minute volume cannot calibrate queue recovery. [Subpenny review](results/subpenny_equity_paper_review_20261029.md), [OW review](results/ssrn666541.md), [execution library](EXECUTION_REFERENCES.md). |
 
+### D42 current-portfolio audit follow-up (2026-10-31)
+
+[Completed audit](results/portfolio_audit_20261031.md) records positive historical native-cost cash diagnostics,
+but does not certify actual current-book floor risk. Free/owned research inputs still needed: exact current code/
+Settings and per-trade StopPts/ATR/quantity; the literal Twin v2.1 ledger; session-marked Kusho native positions and
+actual dated roll/cash/cost records; verified capture semantics or original observations for the enumerated held
+minutes; and actual150K integer full-size chart intentions. Missing flags on8 VB trade days remain unknown.
+MNQ fees were clarified by the user (measured0.99–1.08RT, main1.04); MES/MCL1.04 are assumptions, not missing
+live statements for accounts never traded.85/87 CL and69/516 OT trades have at least one missing held adverse
+minute; known closed cash does not fill that gap. Use `coverage_issues.csv` and `trade_coverage_retention.csv`
+for dated requests. No purchase, live/VPS export operation or arbitrary price interpolation is authorized.
+
 ## Earlier source/mechanism leads: preserve, do not treat as test-ready
 
 These earlier notes identify an interesting obligation or primary-source lead but lack enough evidence to join the promising-strategy queue. Data alone may not make them eligible. Keeping them here avoids losing the request without overstating their status.

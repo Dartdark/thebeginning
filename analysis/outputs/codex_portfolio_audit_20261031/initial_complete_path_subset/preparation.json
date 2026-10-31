@@ -1,0 +1,66 @@
+{
+  "source_commit": "c3126aa01796133f3aecb368e688726931dea440",
+  "plan_commit": "671f7f1",
+  "first": "2018-04-02 00:00:00",
+  "last": "2026-07-07 00:00:00",
+  "sessions": 2131,
+  "inputs": {
+    "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx": {
+      "sha256": "7169ba79c9f23cb55a8f8324b950c6e956aefdd130ca581fd52d9fdd203f3ccf",
+      "bytes": 6815488
+    },
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx": {
+      "sha256": "f5d9beee8f4e0a2a94870e6101526a7ee79c1874bdbe96145de3aa73d03b00fc",
+      "bytes": 6095770
+    },
+    "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx": {
+      "sha256": "2a1c7dd88a261ad0b0df67f310e3c0c33b17d3faf85f7a94c53e9d910f63bc8f",
+      "bytes": 5692550
+    },
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx": {
+      "sha256": "d67673c0485d2c780b1f2d810d2929aac5360e4409cf767ef772ca980fff4085",
+      "bytes": 6481765
+    },
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx": {
+      "sha256": "cf1bc66f4cf459a2d1adc94e434be3176937ddd147d0906c6c91e037f12f5814",
+      "bytes": 6330133
+    },
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx": {
+      "sha256": "7ed08ee978faa0bc4364d38b4863c11cf1d285610501a2dcf24cc19532fb2fe8",
+      "bytes": 5685096
+    },
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx": {
+      "sha256": "c01e8985f6327884528d9bdb78e93bc3fc6cd0bb28acab7c80c0af81fc46fdfe",
+      "bytes": 6484500
+    },
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx": {
+      "sha256": "1c5bd433c0af727659262bcf3f65c61e87b2f53bf542572332ff8e5225b5f436",
+      "bytes": 6002856
+    },
+    "checks/candidates/overnight_tick/python_trades.csv": {
+      "sha256": "28cb6716a1e1c6aa00e75491a1a23299263e826930b196079ec3cb69626a4228",
+      "bytes": 43882
+    }
+  },
+  "cache_inputs": {
+    "g24.pkl": "7d18e832e3d599cbf9aa66aba8da14286250d2aaee7c72b53189d0e4f4947900",
+    "ge.pkl": "a5d1aba2d10aba7093c27da557b3220e019d2810a97e76bf195bc208d561b322",
+    "cl.pkl": "8c58fb24a5a35ab24acd54db998f22b431d6a5a612fced43888aae558786328a",
+    "rs_trades.csv": "df6fe985b2b55473a19cd49dbbde08f7772f54cc9b63396904f7d6a3b4ec643b",
+    "s_rank_gap2.pkl": "a7e70fe57eff8b6229df3709e6293f77b111f3b020ba8ea3213e56ca35cfa61a",
+    "single_print_sessions.pkl": "461576250b62308fcd470c0c59c3795fa99284834b620ebee339c7033923f1fd"
+  },
+  "code": {
+    "codex_portfolio_audit_config.py": "d1d483adb57e2af24f5f89b03b7b89759bd35471a0e9c622acc0e52d9b2d321e",
+    "codex_portfolio_audit_prepare.py": "569f9d15d80d555d1894b5ccf8cbcc84a46d2056fe8e1e875184c159650bf302",
+    "codex_portfolio_audit_verify.py": "0cf6274e8f60d5c05ebd819ccf1fd49b14ae8a8ba3377e9eebfceb516f4e7e85",
+    "codex_portfolio_audit_run.py": "aa22ede6ae241e16d669d25d779d5006e8f04fe0b802fcddcab6ded0ada5313b"
+  },
+  "limits": [
+    "report intrabar first-touch clocks are inferred",
+    "NQ/ES/CL continuous proxies for micro executions",
+    "per-strategy adverse extrema are a conservative overlap approximation",
+    "no source certification for missing held bars",
+    "current code/report settings and holiday parity need independent review"
+  ]
+}

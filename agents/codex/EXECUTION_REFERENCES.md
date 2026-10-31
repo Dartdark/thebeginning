@@ -1372,6 +1372,28 @@ Source: Aragón, Mejía & Zapata(2018), [SSRN3387570](https://ssrn.com/abstract=
 - Status: accounting caution, NEEDS SOURCE SPECIFICATION; zero return trials,
   no new optimizer/execution policy, promising-queue or plan/live change.
 
+### E09/E43 follow-up — Current-book native fees, source coverage and account-preset identity (2026-10-31)
+
+Source: [five-home portfolio audit](results/portfolio_audit_20261031.md),
+[frozen protocol](plans/portfolio_audit_20261031.md), [code guide](code/portfolio_audit_20261031/README.md).
+- Evidence: existing recorded-ledger historical diagnostics, native integer-lot costs, seven synthetic groups,
+  independent ledger reconciliation and24 exact account-engine parity comparisons. User reports MNQ0.99–1.08RT,
+  use1.04; MES/MCL1.04 remain assumptions. Source order-flow ends July7; later missing signals stay unknown.
+- Use: a recorded closed trade can reconcile cash while its missing held minute still blocks adverse-path certainty.
+  Requiring all minutes for every cash diagnostic removes85/87 CL trades here; that subset cannot represent the book.
+  Keep separate cash/size and minute-risk admission. Source-style sparse-bar model outputs are conditional, not live odds.
+- Netting: opposite NQ positions occur on70/390 days in50K/150K funded full-size recorded paths. Adding each strategy's
+  separate high/low adverse marks can invent simultaneous losses. A low daily correlation does not resolve order or
+  shared-price chronology. Broker netting, rejects and source StopPts/ATR/actual quantities need independent traces.
+- Preset identity: the audit runner's initial suffix check treated funded_150 as ending in50, selecting50K rules.
+  Canonical-engine parity alone passed against that wrong preset. Independent start/cumulative-cap checks caught it;
+  archived invalid runs remain, and the explicit account mapping now verifies13000/20500 six-payout ladders.
+- Sizing: fractional full-size intentions1.5 followed by cushion-flooring differ from an actual integer input1 followed
+  by flooring. Current150K input identity must be resolved before claiming installed-sizing parity. No allocation
+  selected from historical attribution; no shared/live/broker/VPS change or measured execution saving.
+- Next check: dated exact-version research exports with native fills/fees, StopPts/ATR/qty and missing-minute capture
+  semantics; then shared-price chronological account replay and independent review before allocation/safety claims.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
