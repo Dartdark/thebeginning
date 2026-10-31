@@ -60,7 +60,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   V2 opposite sign; V3 threshold 1.5.
 - Apex: yes (two legs, both intraday). data: g24.pkl, ge.pkl
 
-## Q007 · running · priority 1
+## Q007 · done · priority 1
 - source: Codex audit 2026-10-31; data supplied by the user 2026-10-31 (NG 1-min 2017-2026, converted ET -> CT)
 - market: NG (QG / MNG micro: confirm which NG contract Apex lists)
 - mechanism: EIA weekly natural-gas storage report, Thursday 09:30 CT (moved to Wed/Fri in holiday weeks). The first
@@ -70,8 +70,20 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   out 10:30 CT; V3 V1 only in the heating season (Nov-Mar). Release days = Thursdays plus holiday shifts (infer from the
   09:31 volume spike when a Thursday is a holiday; never from returns).
 - Apex: yes (user confirmed 2026-10-31). data: data/NG_1min_*.csv (CT, bar-end stamps like CL)
+- result: FAIL stage 1 (2026-10-31). 2018-22, 131 trades: V1 fade -$82 net (t -1.5, 1/5 yrs), V2 follow -$5 (t -0.1;
+  gross +$20 < $25 cost), V3 fade Nov-Mar -$2 (38 trades). Holdout not opened. `analysis/lab_Q007.py`.
 
 ## Q008 · blocked · priority 3
 - source: Codex audit 2026-10-31
 - market: ZC / ZS / ZW (grains)
 - mechanism: USDA WASDE monthly 11:00 CT. Blocked: no grain minute data, and Apex eligibility of grains to confirm.
+
+## Q009 · queued · priority 2
+- source: follow-up of Q007 (parent: Q007, depth 1)
+- market: NG (QG)
+- mechanism: pre-announcement drift: traders who must be flat or hedged into the storage number (utilities, weather funds
+  cutting risk) trade before it, so NG drifts in a consistent direction 08:00 -> 09:29 CT on release days (event-risk premium,
+  cf. Lucca & Moench 2015 pre-FOMC drift); different from Q007 (which traded the reaction).
+- rule sketch: release days found by the 09:31 volume spike (as Q007). V1 long 08:00 -> 09:29, V2 short, V3 follow the
+  overnight 17:00 -> 07:59 move into 09:29. Stop 0.3 x 14-day ATR. Placebo: same window on non-release weekdays.
+- Apex: yes. data: data/NG_1min_*.csv (scratch ng.pkl)
