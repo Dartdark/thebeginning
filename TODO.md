@@ -228,6 +228,18 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **Extreme positive firm-news sentiment — low-priority personal-stock lead / NEEDS DATA AND RULES (SSRN2631135).**
+  Merit: nonprice company-information feature with reported2007–14long trend mean16.90%,Sharpe0.64;
+  source DD49.09%, unspecified costs and test-period cutoff scanning limit that claim. No independent net edge.
+  Need lawful TRNA probabilities/relevance with entity/receipt/model vintages, historical equity universe/sectors,
+  corporate-action cash ledgers, exact weights and position lifecycle. Actual owned/exact-title/GitHub/official
+  LSEG checks found documentation and manuscript records, not a full free admitted news panel.
+  Smallest next check when matching inputs arrive: audit an entitled historical sample and clocks, freeze a
+  training-only protocol, then cheap design screen. No NQ substitute, Apex placement or new return trial.
+  Python research code is feasible with those inputs; code feasibility is not profitability.
+  [Review](agents/codex/results/news_sentiment_2631135_20261031.md) · [Evidence](agents/codex/evidence/news_sentiment_2631135_20261031.md).
+
+
 - [ ] **ANANTA interest-rate differential momentum — NEEDS DATA AND SPECIFICATION (SSRN 2419243).**
   Low-priority personal FX lead: two-year swap-rate differential changes across eleven currencies, rebalanced
   at London 18:00 and New York 17:00. Author reports net 3.5/5 bp per dollar traded in 2003–2013; unverified.

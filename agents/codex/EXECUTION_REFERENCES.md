@@ -293,6 +293,15 @@ uploaded manuscript; [review and formula audit](results/speed_competition_494096
   adverse selection and costs at actual size. No infrastructure, protective-order or live-policy change follows.
 - Status: execution/identification reference; DON'T TEST as source-defined alpha, zero economic return trials.
 
+E11 follow-up — Song et al.2015, SSRN2631135, retained2026-10-31:
+[review/data gate](results/news_sentiment_2631135_20261031.md). Weekly news features must use available entity-level
+analytics and wait until all included articles/scores have arrived before a later fill. News source timestamps,
+analytics availability/receipt and subsequently corrected archive/model versions are separate clocks. Sample API
+messages are not historical entitlement or point-in-time coverage. Preserve missing news, duplicates and revisions.
+The source's weekly10%loss review is not an intraday protective stop; its reported strategy DD is49.09%/56.37%.
+Evidence: source/schema inspection plus two feature-arithmetic fixtures; no independent return, execution saving
+or live-policy change. Need actual dated article/entity/price ledgers and explicit loss-review execution first.
+
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
 Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5 and Figure 1 p.27.
