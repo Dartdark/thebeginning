@@ -206,6 +206,17 @@ No strategy trial, promising-queue entry, plan placement or execution-policy cha
 
 ### E10 — Liquidity compensation, turnover and costs
 
+- Event-time follow-up, retained 2026-10-30: Bowe, Hyde and McFarlane (2007),
+  [SSRN 1025241](https://ssrn.com/abstract=1025241), [full review](results/mexder_duration_1025241_review.md).
+  Historical MexDer TIIE28 duration/volume effects depend on structural specification and processed event clocks.
+  Equal-price thinning, same-time aggregation, overnight compression and seasonal adjustment alter what duration
+  and volume measure. Preserve contract/event identity and available-at clocks before comparing fills or impact.
+  A current-trade explanatory coefficient is not a pre-order forecast, a negative signed-volume coefficient is
+  not a short signal, and a model-implied liquidity share is not achievable execution savings.
+  Printed-table audit finds Table6's spread formula does not reproduce its headline using either Table4 panel;
+  nearby duration/volume t-statistics are weak under two-sided inference. Source data and transformations remain
+  unverified. Retain measurement/model-risk caution only; no alpha trial, cost calibration or live-order change.
+
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 [Saved review](results/equity_premium_liquidity_review_20261029.md). Retained by user 2026-10-29.
 - Use: distinguish turnover from spread, depth, impact and resilience; distinguish compensation for illiquidity from predictive alpha. Large trading volume need not imply cheap executable liquidity.

@@ -1,0 +1,1478 @@
+        Working Paper Series
+        Duration, trading volume and the price impact of
+        trades in an emerging futures market
+
+
+        Michael Bowe
+        Stuart Hyde
+        Lavern McFarlane
+
+
+
+        Manchester Business School Working Paper No 519
+        October 2007
+
+
+
+
+Manchester Business School
+Copyright © 2007, Bowe, Hyde and McFarlane. All rights reserved.
+Do not quote or cite without permission from the author.
+
+Manchester Business School
+The University of Manchester
+Booth Street West
+Manchester M15 6PB
+
++44(0)161 306 1320
+http://www.mbs.ac.uk/research/working-papers/default.aspx
+
+The working papers are produced by The University of Manchester - Manchester Business School and are to be
+circulated for discussion purposes only. Their contents should be considered to be preliminary. The papers are
+expected to be published in due course, in a revised form and should not be quoted without the authors’
+permission.
+                               Electronic
+                               Electroniccopy
+                                          copyavailable
+                                              availableat:
+                                                        at:https://ssrn.com/abstract=1025241
+                                                           http://ssrn.com/abstract=1025241
+Author(s) and affiliation
+
+Prof. Michael Bowe
+Professor of International Finance
+Founding Director, Centre for the Analysis of Investment Risk (CAIR)
+Manchester Business School
+Booth Street West
+Manchester M15 6PB
+Phone: +44 161-306-3407
+Fax: +44 161-275-4023
+E-Mail: mike.bowe@mbs.ac.uk
+Web : http://www.mbs.ac.uk
+
+Dr. Stuart Hyde
+Manchester Business School
+Booth Street West
+Manchester M15 6PB
+Phone: +44 161-275-4017
+Fax: +44 161-275-4023
+E-Mail: stuart.hyde@mbs.ac.uk
+Web : http://www.personal.mbs.ac.uk/stuart-hyde/
+
+Lavern McFarlane
+Manchester Business School
+Booth Street West
+Manchester M15 6PB
+E-Mail: lavern.mcfarlane@dom01.mbs.ac.uk
+
+
+Keywords
+Emerging futures markets, trading intensity, autoregressive conditional volume, autoregressive
+conditional duration
+
+
+Abstract
+
+This paper examines the price impact of trading intensity on an emerging futures market. Utilizing a
+novel volume-augmented duration model of price discovery, the intensity effect is decomposed into
+liquidity and information components for the MexDer 28-day interest rate futures contract. We find
+that the duration between transactions exerts a positive influence on price changes. Increases in
+order flow and trade volume exert a positive and negative influence on price changes, respectively.
+The liquidity and information coefficients exhibit a contrasting effect on returns. The dominance of the
+liquidity component suggests that it is the liquidity traders who dictate the time to trade.
+
+How to quote or cite this document
+
+Bowe, M., Hyde, S. and McFarlane, L. (2007). Duration, trading volume and the price impact of trades
+in an emerging futures market. Manchester Business School Working Paper, Number 2007-01,
+available: http://www.mbs.ac.uk/research/working-papers.aspx.
+
+
+
+
+                         Electronic
+                         Electroniccopy
+                                    copyavailable
+                                        availableat:
+                                                  at:https://ssrn.com/abstract=1025241
+                                                     http://ssrn.com/abstract=1025241
+Duration, trading volume and the price impact of trades in
+               an emerging futures market
+
+     Michael Bowe*                        Stuart Hyde†               Lavern McFarlane‡
+
+
+                                      This draft: October 2007
+
+
+
+                                                Abstract
+
+This paper examines the price impact of trading intensity on an emerging futures market.
+Utilizing a novel volume-augmented duration model of price discovery, the intensity effect is
+decomposed into liquidity and information components for the MexDer 28-day interest rate
+futures contract. We find that the duration between transactions exerts a positive influence on
+price changes. Increases in order flow and trade volume exert a positive and negative influence
+on price changes, respectively. The liquidity and information coefficients exhibit a contrasting
+effect on returns. The dominance of the liquidity component suggests that it is the liquidity
+traders who dictate the time to trade.
+
+
+
+JEL Classification: G15, G14, C32
+Keywords: Emerging futures markets, trading intensity, autoregressive conditional volume,
+autoregressive conditional duration
+
+
+
+
+*
+  Manchester Business School, email: mike.bowe@mbs.ac.uk, tel: (0044) 161 306 3407.
+†
+  Manchester Business School, UK. email: stuart.hyde@mbs.ac.uk, tel: (0044) 161 275 4017.
+‡
+  Corresponding author: Manchester Business School, University of Manchester, Booth Street West, Manchester,
+M15 6PB, email: lavern.mcfarlane@dom01.mbs.ac.uk.
+McFarlane wishes to gratefully acknowledge the financial support of the Commonwealth Scholarship Commission.
+The authors wish to thank MexDer, Mercardo Mexicano de Derivados, S.A. de C.V. for providing the data.
+
+
+
+
+                     Electronic copy available at: https://ssrn.com/abstract=1025241
+1 Introduction
+
+       Theoretical models generally explain trading activity in financial markets as arising from
+either information or liquidity considerations. Understanding market microstructure and the
+relationship between prices, trading volume and duration (the time between consecutive trades),
+is critical to determining both the information and liquidity aspects of trading activity and the
+underlying value of a financial asset. This paper examines the price impact of trading intensity
+utilizing a novel volume-augmented duration model of price discovery. Empirical analysis is
+conducted on more than six years of high-frequency (tick by tick) data taken from an emerging
+futures market, the Mexican derivatives market (MexDer), a pure limit order book market.
+       The analytical focus is upon the relationship between key trading process variables,
+specifically; order flow, duration, and trading volume and subsequent asset price changes. Prior
+research customarily focuses upon the price impact of one or two specific trade process variables
+in isolation, rather than their combined effects. For example, Madhavan et al. (1997) concentrate
+solely on the order flow variable assuming trade size to be constant. They argue both that this
+allows for a more parsimonious model estimation and also, if markets are truly anonymous,
+informed traders will split up their large trades, implying that trade direction should be more
+informative than trade size. In contrast, for De Jong et al. (1996) trade size constitutes one of the
+key components of the bid ask spread, while several theoretical market microstructure models
+(Easley and O’Hara (1987), Engle (2000) and Manganelli (2005)) maintain that trading volume
+reflects market relevant information.
+       The contribution of this paper is twofold. First, we explicitly include trading volume as a
+component of the trade direction indicator. This choice can be rationalized along several
+dimensions. Easley and O’Hara (1987) argue that considerations relating to both liquidity and
+optimal trading strategy dictate that informed traders may sometimes choose to engage in high
+volume intensive trading, while others segment their trades in order to generate a larger number
+of informationally based trades over a period of time. Thus, trade volume conveys information
+relating to market conditions and may have a direct effect upon prices. Duration has also
+variously been considered as an indicator of trading intensity and liquidity, estimated with
+various trading-activity related measures. We believe that volume is also potentially relevant as
+one such activity measure. Indeed, Engle (2000) and Manganelli (2005) model volume as a
+
+
+
+                                                                                                   1
+
+                    Electronic copy available at: https://ssrn.com/abstract=1025241
+stochastic process when estimating the trading impact of duration. Moreover, De Jong et al.
+(1996) provide evidence that transaction size (and by association trading volume) is positively
+related to measured pricing effects. On the basis of these arguments, we extend the Ben Sita and
+Westerholm (2006) model of the price effects of trading intensity by incorporating the all
+important volume variable. The extended model is then estimated in the context of an emerging
+futures market.
+         This constitutes our second contribution. We are among the first to examine the price
+effects of duration for an important developing (emerging) financial market. Prior research in
+this area almost universally focuses upon highly liquid equity, derivative or foreign exchange
+spot markets of developed economies, where traditionally trades tend to be more frequent and
+the level of liquidity greater than that in developing financial markets. 1,2 We also maintain that
+the analysis of a futures market offers further potential insights on the price impact of the
+components of the bid-ask spread, and how both public and private information contributes to
+the determination of market equilibrium prices than can be obtained solely from spot market
+studies. This is because many spot markets are characterized by institutional rigidities such as
+position limits on traders or short-sales constraints which by their very nature mediate the
+response of asset prices to informational shocks. The present analysis seek to understand if
+certain theoretical predictions of existing market microstructure models continue to hold in a
+futures market setting, where traders can take long or short positions with equal facility.
+Moreover, trading volume in a futures market is likely to be an important factor impacting price
+variability, since the time to contract maturity is known to influence futures trading patterns as,
+for example, traders seek to unwind or rollover positions close to contract maturity. We examine
+trading on the MexDer using the 28-day equilibrium interbank interest rate futures contract (Tasa
+de Interes Interbancaria de Equilibrio or TIIE28), the most actively traded futures contract listed
+on the MexDer. In October 2006, the TIIE28 accounted for 93% of MexDer trading volume and
+98.9% of the open interest on the exchange. 3 Indeed, volume increased 188.5% on the previous
+year and the TIIE28 ranks as the 4th most actively traded derivatives contract world-wide.
+
+
+1
+  See, interalia, Dufour and Engle (2000), Holder et al. (2004), Chung et al. (2005) and Ben Sita and Westerholm
+(2006).
+2
+  Zhong et al. (2004) investigate the role of price discovery between the Mexican futures and spot market using daily
+data on the IPC equity contract.
+3
+  MexDer.
+
+
+                                                                                                                   2
+
+                       Electronic copy available at: https://ssrn.com/abstract=1025241
+Overall, the MexDer ranks as the 8th largest derivative exchange by volume globally.4 We
+provide a key insight into the microstructure of this significant market and important contract.
+           We demonstrate that both duration and trading volume play a significant role in the
+pricing behavior of Mexder TIIE28 futures contracts. First, our investigations involving
+transaction duration shows that the transient and permanent components of duration exert
+positive and negative influences on price changes, respectively. Overall, the net effect is similar
+to the evidence provided by Ben Sita and Westerholm (2006). In contrast to the results of Dufour
+and Engle (2000), we find that long duration has a greater impact on price changes than short
+duration. Second, our analysis of trading volume suggests that price changes tend to decrease
+when there is an increase in trade volume. Additionally, increases in order flow exert a positive
+influence on price changes, albeit to a lesser extent than the influence of duration.
+           The present paper is structured as follows. In the next section we present an overview of
+the existing literature. Section three discusses the econometric model and the methodology
+employed. Section four presents the empirical analysis and section five briefly concludes.
+
+
+2 Literature Review
+
+           In theoretical microstructure models of financial markets, trading occurs either for
+information (information-based models) or for liquidity-motivated (inventory-based models)
+reasons. Information-based models focus on the adverse selection or asymmetric information
+costs arising from the private information of informed traders, and encompass both sequential
+trade models (for example Glosten and Milgrom, 1985 and Easley and O’Hara, 1987, 1992) and
+strategic models (for example, Kyle, 1985 and Admati and Pfleiderer, 1988). Sequential trade
+models examine the determinants of the bid-ask spread in a competitive environment with
+information distributed heterogeneously across agents. They are characterized by a probability
+structure in which prices act as informational signals and there is a learning problem confronting
+market participants. Strategic trade models maintain that private information generates incentives
+for agents to act strategically to maximize trading profits by selecting the timing and size of their
+trades. This strategic behavior might be affected by the trading mechanism (Kyle, 1985). These
+types of models generally induce patterns in trading activity, returns, and volatility.
+4
+    Holz (2007).
+
+
+                                                                                                   3
+
+                      Electronic copy available at: https://ssrn.com/abstract=1025241
+       Several comments are relevant in the context of this study. First, time per se is not
+explicitly accounted for in either class of models. Second, closer inspection reveals that these
+models differ in their treatment of informed traders. For example, Glosten and Milgrom (1985)
+maintain that informed traders will trade intensively as if immediacy provides their sole
+opportunity to trade, while in Kyle (1985) they choose to trade gradually so as not to reveal their
+private information to others. Third, it is clear that there is implicitly a time dimension present in
+these models because prices converge at different rates for uninformed and informed traders.
+Indeed, when comparing the above two models Back and Baruck (2004) demonstrate that
+informed (uninformed) traders trade with a lower (higher) trading rate (that corresponds to one
+time unit (the square root of that time unit)). Despite these differences, they find evidence that
+the Kyle (1985) and Glosten and Milgrom (1985) models actually capture the same underlying
+phenomenon, namely that trades move prices reflecting the possibility that the trader is better
+informed than the market at large. Easley and O’Hara (1992) further demonstrate the
+significance of time in price discovery in a framework where information flow is discontinuous
+as informed traders abstain from trading on occasions, and market makers equate the absence of
+informed traders to a lack of news. However, this finding holds only under the assumption that
+there is sufficient liquidity to allow informed traders to trade at their convenience, and that they
+do not exhibit patience in the sense of Kyle (1985).
+       In inventory models, the trading process is effectively a matching problem in which the
+dealer or market maker uses prices to balance their inventory. The key factors are the inventory
+position and the uncertainty about order flow. Dealers achieve inventory control by altering their
+bid and ask quotes to elicit the desired imbalance of buy and sell orders (see for example, Ho and
+Stoll, 1983 and O’Hara and Oldfield, 1986) thereby mediating deviations in orderflow. These
+deviations depend on the behavior of the market in the short run, so a dealer’s effect on prices is
+temporary because their trades are independent of information, depending on trading costs, the
+dealer’s previous position and net demand to the dealer.
+       Time is first explicitly accorded prominence and incorporated into market microstructure
+models in Diamond and Verrecchia (1987) and Easley and O’Hara (1992). In the sequential
+model of Diamond and Verrecchia (1987) set in the context of an equities market the
+commencement of trading coincides with one of two possible informational events, the arrival of
+good or bad news, observed by the informed traders. Upon receiving good news, an informed
+
+
+
+                                                                                                    4
+
+                    Electronic copy available at: https://ssrn.com/abstract=1025241
+trader will always purchase the stock. If news is bad, a trader will wish to sell or alternatively sell
+short if they do not own the stock. If institutional rigidities dictate a trader informed of bad news
+faces a short-sales constraint there may be no trading. The implication is that informed traders
+will always trade unless they do not own the stock and/or short-sales constraints exist, the
+presence of which mitigates the adjustment of prices to private information, especially with
+respect to bad news. An uninformed trader is assumed to trade for reasons unrelated to the arrival
+of information. Accordingly, long durations are more likely to be associated with bad news.
+        Easley and O’Hara (1992) provide a different explanation for the role of time, relating
+trade timing to the existence of new information. Once again, an uninformed trader’s decision to
+trade is independent of the existence of new information. However, an informed trader will only
+choose to transact if there is new information on the market, so a lack of trading can provide a
+signal of no price-relevant information arriving on the market. It follows that variations in
+trading intensity in Easley and O’Hara (1992) are closely associated with the change in the
+participation rate of informed traders. More generally, the receipt of new information may cause
+informed traders to trade more frequently, and hence their presence may quickly be ascertained
+by observing large volumes of trade (Easley and O’Hara, 1987). In the knowledge that this may
+move prices and quotes against themselves, restricting profit opportunities and correspondingly
+their incentive to trade, informed traders may choose to segment large volume trades, generating
+a larger number of smaller volume informationally-based trades. It follows that both trading
+intensity (which results in both short and long durations between trades), and trading volumes
+may provide information concerning the behaviour of market participants, in particular informed
+traders (Dufour and Engle, 2000). In our view, this justifies the explicit modeling of the impact
+of volume, which we undertake in this paper. Moreover, as a futures market operates without any
+short-sales constraints, futures prices are able to reflect good and bad news symmetrically. Thus,
+there is no institutionally-based rationale for the view that long duration is customarily
+associated with bad news. A pertinent question therefore is, in such a market is there evidence
+that information-based trades continue to exist at longer durations?
+       Empirical analysis of the operation of markets customarily employs time series data of a
+given frequency, where the variables of interest are separated by equally spaced fixed points in
+time. Alternatively stated, time is non-stochastic. With the availability of high frequency data,
+empirical work on microstructure issues can now investigate the importance of time by modeling
+
+
+
+                                                                                                     5
+
+                    Electronic copy available at: https://ssrn.com/abstract=1025241
+it as a stochastic process. The necessity to consider the time dimension of the price process is
+stressed in much of the market microstructure literature (Easley and O’Hara, 1992; O’Hara,
+1995; Easley et al., 1997). However, an issue arises when dealing with ultra-high frequency data
+as observations on duration, the time between consecutive transactions, are irregularly spaced.
+Engle and Russell (1998) suggest tackling this feature by explicitly modeling the duration
+between trades using an autoregressive conditional duration (ACD) model, allowing the time
+elapsed between two market events to convey meaningful market relevant information.
+         Duration, has been utilized to proxy several variables when testing market microstructure
+hypotheses. The two main theoretical predictions subject to empirical corroboration are those of
+Easley and O’Hara (1992), that short duration reflects information-based trading, and Diamond
+and Verrecchia (1987), that long durations lead to declining prices. Engle (2000) uses duration as
+a proxy for trading intensity to test these hypotheses obtaining results consistent with both
+predictions. Dufour and Engle (2000) formulate a VAR specification to analyze the price impact
+of trades adopting duration as a measure of liquidity, an important component of the bid-ask
+spread. 5 In this context, duration can be considered as a natural measure of the speed by which
+market liquidity is enhanced and prices incorporate new information. The results of the model
+reveal that short durations are associated with larger spreads, larger volumes, and a higher price
+impact of trades, which is consistent with Easley and O’Hara (1992) predictions. Finally,
+duration is also utilized as a measure of trading risk (Gouriéoux et al., 1999; Renault and
+Werker, 2002; Ghysels et al., 2004). In these studies, duration is modeled as a process capturing
+the risk associated with trading under both price and time uncertainty. Of particular relevance to
+this paper is Renault and Werker (2002), who decompose duration into a deterministic
+component, with a transient impact on returns which they relate to expected duration, and a
+stochastic component with permanent effects on return variance, capturing innovations in trading
+activity.
+         Examining the price effects of trade intensity, Madhavan et al. (1997) provide evidence
+showing that the trade indicator captures short-term deviations of the observed price from the
+fundamental (efficient) price. On the basis of a structural model, they show that the transitory
+price effects account for approximately 60.0 per cent of the total price variance. They
+
+
+5
+ Other studies that utilise duration as a proxy for liquidity are, for example, Engle and Lange (2001) and Engle and
+Lunde (2003).
+
+
+                                                                                                                   6
+
+                       Electronic copy available at: https://ssrn.com/abstract=1025241
+hypothesize that a number of variables can be considered to capture these effects. De Jong et al.
+(1996) provide evidence showing that the price effect increases with the transaction size, and is
+estimated to lie between 25.0 per cent and 60.0 per cent of the bid-ask spread. The relation
+between duration and returns is further investigated in Dufour and Engle (2000) who extend the
+Hasbrouck (1991) vector autoregression (VAR) model. Dufour and Engle (2000) provide
+evidence showing that prices, bid-ask spreads and price volatility all increase when traders
+observe short durations. This finding is consistent with the Easley and O’Hara (1992) prediction
+that market makers revise their prices upward in the presence of informed traders.
+
+
+3 Econometric Methodology
+
+3.1 Foundation for the model
+       There are two generic sources of information on which traders rely when conveying their
+beliefs about an asset’s future value; public information obtained through news on fundamentals
+and private information that aggregates the information of informed traders. In contrast to public
+information, private information is first revealed through the order flow of informed traders, who
+buy (sell) when prices are below (above) fundamental value. Traders also learn from past price
+movements (Glosten and Milgrom, 1985), price duration (Easley and O’Hara, 1992) and price
+size (Easley and O’Hara, 1987). These three dimensions are important when characterizing the
+pricing process in financial markets. Earlier studies investigate these price dimensions using
+either the direction of trade (Glosten and Harris, 1988) or both the size and the direction of trade
+(Hasbrouck, 1991). Key to our analysis Dufour and Engle (2000) provide evidence supporting
+the hypothesis that informed trading is associated with short trade durations consistent with
+Easley and O’Hara (1992) who predict that market makers revise their prices upward in the
+presence of informed traders. Contrary to this proposition is the view that short durations are
+associated with the presence of liquidity traders who prefer to trade when the market is “thick”
+(Admati and Pfleiderer, 1988). When liquidity is high because of volatility, informed traders are
+not likely to trade at opening or at closings as expected. Therefore, when examining the role of
+time in the price discovery process, we utilize normalized duration measures with expectations
+about unity, to adjust for any intra-day seasonal patterns. We extend the Dufour and Engle
+(2000) empirical model by separating the component of duration associated with liquidity from
+
+
+                                                                                                  7
+
+                    Electronic copy available at: https://ssrn.com/abstract=1025241
+that associated with information. Further, motivated by Renault and Werker (2002) who show
+that duration can be split into transient and permanent effects, we model the returns as a function
+of the order flow, the expected duration, duration innovations and the trade volume.
+
+
+3.2 The Structural Model
+        In this section, we specify a simple model that decomposes the bid-ask spread into order-
+handling, liquidity and adverse selection costs utilizing the trade direction indicator, duration and
+a trade volume variable. The order handling cost is a fee charged by the liquidity supplier for
+standing ready to match buy and sell orders; inventory holding costs are associated with the risk
+of holding inventory stock, while adverse selections costs arise as a result of trading with
+informed agents. Several studies evaluate the relative importance of each component of the bid-
+ask spread by means of a cross-sectional decomposition of the spread into its respective
+components, operating on both cross-sectional stock portfolios and individual stocks. Glosten
+and Harris use the trade indicator variable to decompose the spread into permanent and transitory
+components. Stoll (1989) estimates the three components using a covariance based model for a
+cross section of NASDAQ stocks. Similarly, Roll (1984) infers the components of the bid-ask
+spread from the serial covariance properties of observed trade prices. Madhavan et al. (1997)
+suggest a quote-based model using order flow to decompose the spread into order handling and
+adverse selection costs, while Huang and Stoll (1997) use both the trading indicator and the
+trading volume to decompose the bid ask spread into all three components. The present model
+both modifies and extends the approach of Ben Sita and Westerholm (2006) 6 with respect to our
+inclusion of a trade volume variable, mediated by a trade direction indicator. The rationale for
+including trading volume is that previously outlined. Easley and O’Hara (1987) maintain trade
+volume conveys information relating to market conditions and may have a direct effect upon
+prices. Duration has variously been utilised as an indicator of trading intensity and liquidity,
+estimated with various trading-activity related measures. We maintain that volume is also
+potentially relevant in this respect. Finally, De Jong et al. (1996) provide evidence that
+transaction volume may be related to pricing impact. The initial model is:
+
+
+
+6
+  In turn they extend the Madhavan et al. (1997) model by including trade duration, decomposed into both
+permanent and transitory components
+
+
+                                                                                                      8
+
+                    Electronic copy available at: https://ssrn.com/abstract=1025241
+                                     [
+                     mt = mt −1 + φ1 + (φ2 + ρ qθ1 )Tt + φ3vt ) qt + et ]                                                       (1)
+
+
+where mt is the unobservable (efficient) price at time t, such that mt = E pt* Φ t ; here p t* is the      [         ]
+(log) fundamental value and mt is the expected value of p t* . Tt is the transaction time, vt the
+
+trade volume, qt is the buy-sell trade direction indicator variable (taking -1 for seller-initiated
+
+trades, +1 for buyer-initiated trades, and 0 for trades occurring within the bid-ask spread), and et
+
+is a serially uncorrelated public information shock. Equation (1) decomposes the impact on the
+efficient price, mt into five trading-related parameters: φ 1 captures the cost of processing a
+
+trade, φ 2 the speed at which transactions occur, θ1 reflects private information revealed by order
+flow and trading intensity, 7 φ 3 reflects private information revealed by trading volume and ρ q is
+
+the temporal dependence in the order flow resulting either from informed traders in their efforts
+to take advantage of incipient liquidity or noise traders unable to reverse the direction of trade.
+While the efficient price, m t is unobservable, the trade price, p t , is observed albeit measured
+
+with error. Following decomposition of the duration variable into temporal and permanent
+effects (Renault and Werker, 2002), we obtain the first difference of equation (1), and substitute
+the trade price, p t , as a proxy for the unobservable efficient price, mt :
+
+
+rt = φ1 Δq t + φ 2 (Tt qt − Tt −1 q t −1 ) + ρ qθ 1 (Tt qt − Tt −1 q t −1 ) + φ 3 (vt q t − vt −1 q t −1 ) + ε t + nt − nt −1
+
+
+where et − et −1 is translated into nt − nt −1 which are serially correlated rounding errors (again
+
+proxying trade price for the efficient price, where nt summarizes the effects of noise trading).
+Gathering like terms gives:
+
+
+                           [                                                ]
+                     rt = φ1 Δqt + (φ 2ψ t + ρ qθ 1C t + φ3 z t ) qt + (ε t + ( nt − nt −1 ))                                   (2)
+
+Where rt is the continuously compounded log return in percent, ψ t is the conditional duration
+
+process, C t is the innovation in trading intensity which is defined as the covariance of the
+
+
+7
+    This variable is intended to capture the theoretical predictions of Easley and O’Hara (1992).
+
+
+                                                                                                                                      9
+
+                           Electronic copy available at: https://ssrn.com/abstract=1025241
+standardized residual of duration, ( xt ψ t )(( xt ψ t ) − 1) . Δqt is the residual in the order flow, z t is the
+
+conditional change in volume. ε t is the serially uncorrelated public information shock which is
+
+equivalent to the change in the unobservable fundamental value (price), mt − mt −1 . nt − nt −1 is
+
+the serially correlated rounding error term which arises since the observable trade price, p t ,
+
+measures the unobservable efficient price, mt , with error. Equation (2) implies that the return, rt ,
+
+reflects both the public information shock (through ε t ) and trading friction effects (through nt )
+
+which are associated with the trade price, p t .
+
+        Equation (2) decomposes actual duration, xt , into a temporal component (measured by
+
+the expected duration, ψ t ) which captures liquidity effects and a permanent component
+
+(measured by the duration innovation component, C t ) which captures information effects. These
+
+two components are obtained from an ACD(1,1) model. Analogously the expected change in
+volume z t is obtained from an ACV(1,1) model. In addition, the residual term is decomposed
+
+into a fundamental component (ε t ) and a transitory component (nt − nt −1 ) . The fundamental
+
+error component induces permanent price changes, and is related to the fundamental volatility
+that consists of random price changes that do not revert. The transitory component is related to
+the transitory volatility that is taken as an implicit transaction cost and a measure of the market
+quality, (Hasbrouck, 1993). As such, it is important and relevant for market regulators to be able
+to distinguish between the fundamental and the transitory volatility when addressing issues
+related to excess volatility. A standardized measure of market quality can be derived as (Ben Sita
+and Westerholm, 2006):
+
+
+                       − σ n2 + (2(φ1φ 2 + φ 2φ3 + φ1φ3 ) + φ12 ) ρ q
+                 ρ=                                                                                     (3)
+                        (φ1 + φ 2 + φ3 ) 2 + ρ qθ12 + σ ε2 + 2σ n2
+
+
+where ρ is the ratio of the first order covariance to the variance. The larger the absolute value of
+the ratio, ignoring intensity effects on the price process, the better a market’s quality of trading,
+since a lower coefficient is an indication that the duration and volume variables either increase
+
+
+
+
+                                                                                                              10
+
+                      Electronic copy available at: https://ssrn.com/abstract=1025241
+the covariance bias or decrease the variance in the trading process. A smaller variance or greater
+covariance suggests greater pricing efficiency and thus improved market quality.
+
+
+3.3 The ACD Model
+           This analysis employs an Autoregressive Conditional Duration (ACD) approach that
+directly models the time between events to explicitly model time, a formulation particularly
+suited to irregularly spaced data. In this framework, the time elapsed between two market events,
+(for example, a trade, a specific type of trade such as a large buy, a revision of the bid-ask quote,
+and so on) conveys meaningful information and is the object of modeling. The ACD is a type of
+dependent point process particularly suited for modeling characteristics of duration series, such
+as clustering and overdispersion. This parameterization is most easily expressed in terms of the
+waiting time between events.
+           Let xt = Tt − Tt −1 be the interval of time between event arrivals, our measure of duration.
+
+The distribution of the duration is conditioned directly upon past duration. According to Engle
+and Russell (2004), the ACD model is specified by taking the expectation of duration given past
+arrival times, ψ t , such that: 8
+
+
+                     E ( xt xt −1 , xt − 2 ,K, x1 ) = ψ t ( xt −1 , xt − 2 ,K, x1 ) = ψ t        (4)
+
+and,
+                                          xt = ψ t ε t                                           (5)
+
+
+where ε t ~ i.i.d. with density p (ε ; ϕ ) . Engle and Russell (1998) suggest and subsequently apply
+
+a linear parameterization for the expectation which is given by:
+
+
+                                    p               q
+                    ψ t = ω + ∑ α j xt − j + ∑ β jψ t − j                                        (6)
+                                   j =1             j =1
+
+
+
+
+since the conditional expectation of the duration depends on p lags of the duration and q lags of
+the expected duration, this is termed an ACD(p,q) model. The ACD model is utilised as a model
+8
+    We refer the interested reader to Engle and Russell (1998) for a more detailed discussion.
+
+
+                                                                                                       11
+
+                          Electronic copy available at: https://ssrn.com/abstract=1025241
+for intertemporally correlated event arrival times and seeks to capture trading time (duration)
+clustering. In analogous fashion, the Autoregressive Conditional Volume (ACV) trade volume
+clustering can be captured using an Autoregressive Conditional Volume (ACV) model,
+ACV(p,q), specified as:
+
+
+                            p                 q
+               z t = τ + ∑ α j wt − j + ∑ β j z t − j                                         (7)
+                           j =1              j =1
+
+
+
+
+where wt = vt − vt −1 . Both the ACD(p,q) model of equation (6) and the ACV(p,q) model of
+
+equation (7) exhibit strong similarities to the (G)ARCH(p,q) models of Engle (1982) and
+Bollerslev (1986) and can be modeled as such. Further the models can be augmented with extra
+explanatory variables. We augment the ACD (ACV) with past changes in volume (duration) to
+examine and to explicitly account for the inter-relationship between volume and duration. We
+theorize that the relationship between duration and volume has a significant influence on price
+changes. In particular, we hypothesize that price effects increases for larger volumes traded at
+longer durations. To test this hypothesis, we use the estimates of the expected duration, ψ t ,
+
+from the A-ACD model, as well as the estimate of expected volume, z t , from the A-ACV model.
+
+
+3.4 Alternative Empirical Models
+       In order to provide a robustness check and cross-validate our findings in the context of
+existing literature, we also examine a set of closely related alternative models for the estimation
+of the implied bid-ask spread. These are the models proposed by Madhavan et al. (1997)
+(equation 8a), Dufour and Engle (2000) (equation 8b), De Jong et al. (1996) (equation 8c) and
+Ben Sita and Westerholm (2006) (equation 8d):
+
+
+               rt = θ ( q t − ρ q q t −1 ) + φ (q t − q t −1 ) + u1t                          (8a)
+
+               rt = (γ 0 qt + γ 1 qt −1 ) + [δ 0 ln( xt )qt + δ 1 ln( xt −1 )qt −1 ] + u 2t   (8b)
+
+               rt = a 0 + ( R0 Δqt + R1 Δqt z t ) + (e0 qt −1 + e1 qt z t −1 ) + u 3t         (8c)
+
+                     [                                      ]
+               rt = φ1 Δq t + (φ 2ψ t + ρ qθ 1C t )q t + (ε t + ( nt − nt −1 ))               (8d)
+
+
+
+                                                                                                     12
+
+                     Electronic copy available at: https://ssrn.com/abstract=1025241
+where u1t , u 2t , and u3t are random error terms. In equation (8a) the order processing cost is
+
+captured by φ and the adverse selection cost by θ . In equation (8b) the order processing costs are
+given by (γ 0 − γ 1 )q and the adverse selection costs by (δ 0 − δ 1 ) ln( x)q while in equation (8c) the
+
+order processing cost component is R0 − e0 − e1α + ( R1 − 0.5e1 ) z , where α is the median of
+
+transaction size distribution (divided by the natural logarithm of 2), and the adverse selection
+component is given by e0 + e1α − 0.5e1 z . This model differs from the other two, since price
+
+revisions in this model are associated with changes in the expectations of the true value of the
+stock, given the size of the transaction. In equation 8(d) the Ben Sita and Westerholm (2006)
+specification extends the Madavan et al. (1997) model by adding duration measures to the
+structural model to measure the contribution of durations to the bid-ask spread in a limit order
+book market. In this context, the order processing cost is captured by φ1 and the adverse
+
+selection cost is given by θ1 . We estimate equations (8a) and (8d) using a maximum likelihood
+estimator (MLE). This method is preferred to the generalized method of moments (GMM),
+simply on the basis that the MLE provides more efficient (robust) coefficients and corrects for
+any misspecification in the model. Further, by using MLE, we eliminate any potential
+imprecision that may arise in the results from over- or under- identification in the GMM.
+Equations (8b) and (8c) are estimated using an OLS estimator with Heteroskedasticity and
+Autocorrelation consistent Covariance (HAC) robust errors using the Newey-West estimator.
+
+
+
+4 Empirical Analysis
+
+4.1 Data
+        The Mexican Derivatives Exchange (MexDer) commenced operations on December 15,
+1998, trading a Mexican Peso-US Dollar futures contracts. Trading on the stock index (IPC)
+began on April, 15 1999, and in interest rate futures one month later. The market operated via
+open outcry until May 8, 2000 when electronic trading was introduced. Trading on the MexDer
+is now conducted through a completely automated system, such that prices are revealed to the
+general public both domestically and globally. Market makers trade in a limit order book market
+
+
+
+                                                                                                      13
+
+                     Electronic copy available at: https://ssrn.com/abstract=1025241
+and maintain bid and ask quotes for futures contracts for which they are registered, in order to
+promote their trading.
+       We examine trading on the MexDer using futures data spanning the period from August
+28, 2000 to October 13, 2006. Specifically, we use tick by tick data for the 28-day equilibrium
+interbank interest rate futures contract (Tasa de Interes Interbancaria de Equilibrio or TIIE28),
+the most actively traded futures contract listed on the MexDer. The trading session for this
+contract runs from 7:30am to 2:15pm Mexico City time. The contract is based on the short-term
+(28-day) Mexican interbank interest rates, has a face value of 100,000 Mexican pesos with a
+yield expressed in annualized percentile terms. A 28-day TIIE contract is cash settled based on
+the 28-day TIIE calculated by the Banco de Mexico based on quotations submitted daily by full-
+service banks using a mechanism designed to reflect conditions in the Mexican Peso Money
+Market. MexDer lists TIIE futures contracts with maturity dates on a monthly basis for up to the
+next ten years. The data includes comprehensive information relating to all transactions,
+maturities, trade prices, opening prices and trading volume for 2,220 trading days giving rise to
+88,562 recorded transactions. However, these transactions do not equal the 88,562 information
+ticks since some transactions in close proximity to each other are redundant.
+       To prepare the data for the analysis, we drop any transactions that are recorded as
+occurring either before the official opening time, 7:30am, or after the designated closing time
+2:15pm. To obtain active price movements, we also thin the trade price process in a similar
+fashion to Ben Sita and Westerholm (2006). This thinning process consists of ignoring a price at
+time t-1 if this price equals the price at time t and in such a case adding the trading volume of the
+price at time t-1 to that at time t. We then compute the duration between trades, treating the
+overnight period as if it did not exist, for example, implying the time elapsing between 13:59:30
+of day t-1 and 7:30:10 of day t is only 40 seconds. We adopt this strategy due to the infrequent
+trading nature of the futures contracts. Manganelli (2005) argues that eliminating the duration of
+the overnight period causes the loss of important information for futures trading. The underlying
+assumption here is that the information flow to the market is continuous. By eliminating the
+duration of the overnight period when there is no trade, we remove the suggestion that there is no
+price relevant news, which is otherwise implied by including the unadjusted overnight duration.
+Additionally, we eliminate all transaction data with a zero duration. We treat these transactions
+
+
+
+
+                                                                                                  14
+
+                    Electronic copy available at: https://ssrn.com/abstract=1025241
+as one single transaction, summing up all relevant volumes. Taking these adjustments into
+consideration, the sample size is reduced from 88,562 to 69,981 information ticks.
+             Furthermore, we also adjust for the time of day effects which potentially influence both
+duration and volume. There is a consensus in the literature that both duration and volume exhibit
+a typical pattern over the course of the trading day, with very high trading activity occurring both
+at the beginning and at the end of a typical session. In order to remove this seasonal feature from
+the data, the duration and volume series were diurnally adjusted in the manner suggested by
+Engle (2000). To adjust both the trade duration and volume for the time of day effects, we
+regress duration and volume on a piecewise linear function of the daily trading time, namely:
+
+
+                              xt = xt E [xt f (t )]
+                              ~                                                                                 (9)
+                              ~ = w E [w f (t )]
+                              w                                                                                 (10)
+                               t   t    t
+
+
+where
+                                              4
+                               f (t ) = β 0 + ∑ β j (t − k j )
+                                              j =1
+
+
+for k j fixed at 27000 (7:30am), 34200 (9:30am), 41400 (11:30am) and 48600 (1:30pm)
+
+seconds. 9
+
+
+4.2 Descriptive Statistics
+             In Table 1 we report summary statistics for the variables used in the analysis. We note
+that the returns ( ri ) exhibit negative skewness and leptokurtosis, typical characteristics of
+
+financial returns data. Negative skewness is an indication that the probability of observing a
+large negative jump in the interest rate futures price exceeds the corresponding positive jump
+probability during the sample period. The returns indicate that there is both clustering and
+overdispersion in the data (the standard deviation is larger than the mean). The adjusted variables
+(~  ~ ) are close to their expected values of unity. Dealing with adjusted variables allows us to
+ x ;wi   i
+
+
+investigate the effects of excess dispersion on the returns, enabling us to investigate the extent to
+
+
+9
+    We note that β k are consistent (but inefficient) OLS estimates, as we regress the respective trade duration and trade
+volumes on f(t).
+
+
+
+                                                                                                                       15
+
+                          Electronic copy available at: https://ssrn.com/abstract=1025241
+which incorporating adjusted duration and volume might enhance the analysis of Madhavan et al.
+(1997) that implicitly assumes duration and volume effects equal 1. Neither the mean nor the
+median of the trade indicator variable, ( qi ), gives any indication that this variable is zero as
+
+expected under the null hypothesis that a trade at bid (ask) is immediately followed by a trade at
+ask (bid). The derived variable ( C i ) which measures the covariance of the standardized residual
+
+of duration, is an attempt to capture the forces that serve to drive prices away from their
+fundamental values. The summary statistics of table 1 indicate that the average duration between
+successive events for the interest rate futures during exchange opening times is approximately 1
+hour and 33 minutes. The average trading volume corresponding to each time stamp is 1.7
+million Mexican pesos, with each contract traded corresponding to 100,000 Mexican pesos.
+
+
+4.3 Estimation Results
+       Table 2 reports the coefficients for the ACD(1,1) model and the volume augmented-
+ACD(1,1) model. The results of the ACD(1,1) model in table 2a indicate that the model captures
+trading momentum. The basic ACD model appears to capture the dynamics of the duration
+process reasonably well, signifying that the duration process is significantly persistent. The
+coefficients are all positive and significant, implying that long (short) durations tend to be
+followed by long (short) durations. When augmented to include volume in table 2b, the
+coefficients of the A-ACD(1,1) model again reveal a persistent duration process. The coefficient
+for the volume variable, however, indicates that there is a significantly negative relationship
+between duration and trading volume. The implication is that increased trading volume results in
+higher price volatility. These results may be indicating the prominence and influence of informed
+traders on price formation.
+       The estimated autoregressive coefficients of the ACV(1,1) model and the duration
+augmented-ACV(1,1) model, are reported in table 3. Table 3a reveals that all the coefficients are
+highly significant. Our results show that changes in volume exhibit persistence, providing
+evidence of trading volume clustering. This is consistent with Admati and Pfleiderer (1988) who
+demonstrate that, in equilibrium, all discretionary liquidity traders choose to trade together
+generating clustering of trading volume. A potential underlying intuition for clustering in the
+trading volume revolves around the behavior of discretionary liquidity traders. The decision of
+discretionary liquidity traders to postpone their trading until an announcement has been released
+
+
+                                                                                               16
+
+                   Electronic copy available at: https://ssrn.com/abstract=1025241
+will make it easier for the market to infer the informed agent’s reasons for trading. The
+coefficients of the ACV(1,1) model are all positive and significant, indicating that large
+transaction size increases the expected transaction size of the next trade. The coefficients of the
+augmented ACV(1,1) model (table 3, panel b) tentatively suggest a negative relationship
+between trading volume and duration, implying that shorter durations result in higher trading
+volume volatility. This corroborates the theoretical predictions in the market microstructure
+literature suggesting that durations are informative about intra-day trading volatility, specifically
+the shorter the duration, the higher the trading intensity.
+         Table 4, panel A reports the coefficients obtained from the maximum likelihood
+estimates of the model in equation (2). The results indicate a significant relationship between
+both volume and duration on pricing effects. However, contrary to the prediction that the price
+impact increases with transaction size and/or trade volume, the φ3 coefficient is negative and
+significant, indicating that price impact decreases with volume. 10 The proposition in the existing
+literature that prices increases when traders observe short durations is predicated upon the link
+between short durations and good news and the possible existence of short-sales constraints
+precluding the ability to sell an asset when encountering bad news. 11 Here, the coefficient φ2
+captures the relationship between duration and price changes and is positive and significant,
+indicating that greater price increases are associated with longer duration. The positive
+coefficient on the duration variable indicates that transactions arriving after a long time have a
+larger price impact than transaction arriving after a previous trade. The intuition is that when
+trades are further apart, it is more difficult to find suppliers/traders willing to take the opposite
+side of a transaction, and so trades have a higher impact on prices.
+         However, one must view this apparent inconsistency in findings in the appropriate market
+context. For interest rate futures unlike assets such as equities there is no a priori reason to
+believe that expected changes in the underlying in any given direction represent “better” news
+than those in the opposite direction. Moreover, unlike cash market equity trades, in a futures
+market there is no asymmetry in terms of a trader’s ability to assume a long (buy) or short (sell)
+position, so short-sales constraints on trading are irrelevant. The φ2 coefficient is the largest in
+
+
+10
+   De Jong et al. (1996). Also note that this finding is dependant upon the precise specification of the model and the
+use of mid-quotes versus transaction prices.
+11
+   Dufour and Engle (2000).
+
+
+                                                                                                                    17
+
+                       Electronic copy available at: https://ssrn.com/abstract=1025241
+absolute magnitude, implying that the price impact originates mainly from the expected duration
+of trade, with longer durations generating greater price effects.            The expected duration
+innovation coefficient, θ1 , is, however, negatively related to returns. Despite the liquidity ( φ2 )
+
+and information ( θ1 ) coefficients have contrasting effects on returns, the dominance of the
+liquidity component suggests liquidity traders dictate the time to trade. This interpretation is
+consistent with the results of the ACV model.
+       In panel B of table 4 we report the results of the model of equation (2) using the estimates
+from the A-ACD and A-ACV models. We maintain that the relationship between volume and
+duration has significant influence on price effects. The results of the model appear to confirm
+this, since the coefficients on duration and volume are much larger than in the model using
+estimates from the ACD and ACV models. Further, we highlight that both the transitory and
+permanent duration components are positive and significant. Importantly, the coefficient on the
+permanent duration term ( C t ) is now positive and significant. The reversal in sign and increase
+
+in size of the coefficient confirms the significant influence of the relationship between volume
+and duration and implies that price effects are indeed larger for volumes traded at longer
+durations.
+
+
+5 Sensitivity Analysis
+
+5.1 Alternative Empirical Models
+       Table 5 presents the empirical results of the alternative models. Specifically, panel A
+reports the results of the Madhavan et al. (1997) model which uses only the trade indicator
+variable to split the price effects into transitory and permanent effects. In panel B we present the
+results of the Dufour and Engle (2000) model which uses the duration variable to investigate
+whether it can capture trading behavior. Panel C reports the results of the De Jong et al. (1996)
+specification which includes trade size in the structural model. Finally, panel D gives the Ben
+Sita and Westerholm (2006) specification which include both trade indicator and duration
+variables to decompose the price effects into transitory and permanent effects. The general
+results from these models indicate that, with the exception of Ben Sita and Westerholm’s (2006)
+model, order handling cost is the dominant component influencing price effects.
+
+
+
+                                                                                                  18
+
+                    Electronic copy available at: https://ssrn.com/abstract=1025241
+         The implied bid-ask spread and the components are reported in table 6. The results show
+that the implied bid-ask spread is 2.1014 and is based on trade prices in the TIIE. The proportion
+of the adverse selection cost in the spread is 22.74 per cent, while liquidity costs account for
+73.74 per cent of the implied spread. The comparative evidence from the other models reveal
+that our present model produces the largest implied bid-ask spread with the smallest spread of
+0.1388 obtained in the De Jong et al (1996) model. The liquidity component of the implied
+spread in the Ben Sita and Westerholm (2006) model is 64.33 per cent, 9.4 percentage points
+smaller than that of the current model and is partly attributable to the exclusion of the volume
+variable. In essence, the implied bid-ask spread lies between 0.1388 for the lowest case based on
+the De Jong et al (1996) model and 2.1014 the largest according to our model. A cursory look at
+the results indicates that the implied bid-ask spread increases with the inclusion of more trade
+process variables. The theoretical motivation for this is not known and would require further
+investigation.
+        Analogous to Madhavan et al (1997) model’s decomposition of price volatility, we
+decompose our model’s estimation of price volatility accordingly. The results are reported in
+Table 7. From equation (2) we derive price volatility as
+                         var[rt ] = (φ1 + φ 2 + φ3 ) 2 + ρ qθ12 + σ ε2 + 2σ n2              (11)
+
+where σ ε2 reflects the variance in public news shocks. The remaining components such as price
+
+discreteness ( 2σ n2 ), adverse selection costs ( ρ qθ12 ), order handling costs ( φ12 ), liquidity costs
+
+( φ 22 + φ 32 + 2φ 2φ 3 ), and an interaction cost ( 2φ1φ 2 + 2φ1φ3 ) constitute market microstructure noise.
+Intuitively, the fraction of variance attributable to trading frictions (including price discreteness)
+is π 1 , while the fraction of volatility attributable to pricing errors is π 2 , where
+
+                                   2σ n2 + ρ qθ12 + (φ1 + φ 2 + φ3 ) 2
+                         π1 =                                                               (12)
+                                σ ε2 + 2σ n2 + ρ qθ 12 + (φ1 + φ 2 + φ3 ) 2
+
+                                              2σ n2
+and                      π2 = 2                                                             (13)
+                             σ ε + 2σ n2 + ρ qθ12 + (φ1 + φ 2 + φ3 ) 2
+        The estimates of our model produce a price risk of 0.0247, comparable to the price
+volatility of 0.0188 from the Ben Sita and Westerholm (2006) model. These two values are
+approximately half of the price risk of 0.0449 derived in the Madhavan (1997) model. This
+
+
+
+                                                                                                          19
+
+                     Electronic copy available at: https://ssrn.com/abstract=1025241
+striking difference indicates that, ceteris paribus, accounting for duration and volume decreases
+price volatility. One explanation maybe that better hedging strategies are devised when more
+market microstructure variables are taken into consideration. This is a salient feature that should
+be considered by traders and investors. Interestingly, the proportion of variance attributable to
+pricing errors, π 2 , is much smaller for the Madhavan (1997) model, 0.00125, compared to our
+
+estimate of 0.0226. The fraction of variance attributable to trading frictions, π 1 , is 95.41 per cent
+and differs slightly from the respective estimates of 97.44 per cent and 94.27 per cent for
+Madhavan’s and Ben Sita and Westerholm’s models. This result accords with the perception that
+price volatility in the TIIE28 contract on the MexDer is largely the result of market
+microstructure noise.
+       Overall, the results are somewhat contrasting with those from our volume augmented
+duration structural specification. In particular in these models the order handling cost component
+is generally more dominant in generating pricing impact, whereas in our present model duration
+is the dominant factor. Nonetheless, perhaps the most salient point regarding the results of all
+models is that the theoretical predictions of the microstructure models appear reliant on the
+model specification and the underlying nature of the markets.
+
+
+5.2 Nearby Contracts
+       As a further robustness check, the empirical estimation is executed on data taken
+exclusively from the nearby contracts (those closest to maturity), the rationale being that they
+customarily exhibit the highest liquidity and convey the important information on investor
+trading patterns. Nearby contracts defined in this market context are those trading in the month
+prior to their maturity: we do not include observations on contracts trading in the maturity
+month, simply to avoid biases caused by unusual market activity near maturity as traders unwind
+or rollover positions. The data pertaining to nearby contracts are the tick by tick trade prices for
+contracts trading in the month prior to maturity. The sample of tick by tick trades on the TIIE28
+contracts on the MexDer consists of 11,687 trades in nearby contracts covering the period
+August 28, 2000 to October 13, 2006. To analyze the price impact of volume, duration and
+orderflow we estimate the empirical models outlined above using the nearby contracts.
+
+
+
+
+                                                                                                    20
+
+                    Electronic copy available at: https://ssrn.com/abstract=1025241
+         The empirical results of the structural model outlined in table 8 indicate that the results
+are consistent with those from the full sample model. 12 In particular, the coefficient for expected
+duration ( φ2 ) is positive and significant at the 10 per cent level and volume has a negative effect
+on prices. The results indicate that there is no significant change in the trading impact of trade
+process variables when contracts are close to maturity. This is further supported by the results of
+the alternative empirical microstructure models reported in table 9.
+
+
+
+6 Conclusions
+         This paper examines the pricing impact of duration in the context of a structural
+microstructure model of price discovery using data from the emerging futures market of Mexico,
+MexDer. We incorporate both elapsed transaction time and trade volume in the model in order to
+investigate their effects on price changes. In their empirical study, Dufour and Engle (2000)
+document that long duration has a lower impact on price than short duration. Extending Dufour
+and Engle (2000) by decomposing the duration effect into liquidity and information effects, Ben
+Sita and Westerholm (2006) find evidence that both components exert a positive influence on
+price changes.
+         We examine six years of tick by tick data on the 28-day equilibrium interbank interest
+rate futures contract (TIIE28) on MexDer. In November 2005 this contract accounted for 94.5%
+of total MexDer trading volume and was one of the most actively traded futures contracts world-
+wide. Our findings involving transaction duration show that the transient and permanent
+components of duration exert positive and negative influences on price changes, respectively.
+Overall, the net effect is similar to the evidence provided by Ben Sita and Westerholm (2006). In
+contrast to Dufour and Engle (2000), we find that long duration has a greater impact on price
+changes than short duration. Our analysis of trading volume suggests that price changes tend to
+decrease when there is an increase in trade volume. Additionally, increases in order flow exert a
+positive influence on price changes, albeit to a lesser extent than the influence of duration.
+Viewed collectively, this evidence suggests that managing time and trading volume are
+important aspects of optimum trading strategy in the Mexican futures market. Further, the results
+of this paper suggest that trading constraints such as position limits, or short sales constraints
+
+12
+  For space considerations we only report the final model results using nearby contracts. Full results are available
+from the corresponding author on request.
+
+
+                                                                                                                       21
+
+                       Electronic copy available at: https://ssrn.com/abstract=1025241
+dictated by the specific institutional market context in which trading occurs may be relevant in
+determining the pricing impact of trading process variables.
+
+
+
+
+                                                                                             22
+
+                   Electronic copy available at: https://ssrn.com/abstract=1025241
+References
+Admati, A., Pfleiderer, P., 1988. A theory of intraday patterns: volume and price volatility.
+   Review of Financial Studies 1, 3-40.
+Back, K., Baruch, S., 2004. Information in securities market: Kyle meets Glosten and Milgrom.
+   Econometrica 2, 433-467.
+Ben Sita, B., Westerholm, P.J., 2006. The role of time in price discovery: Ultra-high frequency
+       trading in a limit order book market. Discussion paper, University of Sydney.
+Bollerslev, T., 1986. Generalized Autoregressive Conditional Heteroskedasticity. Journal of
+   Econometrics 31, 307-327.
+Chung, K.H., Li, M., McInish, T., 2005, Information based trading, price impact of trades, and
+   trade autocorrelation, Journal of Banking and Finance 29, 1645-1669.
+Clark, P., 1973. A subordinated stochastic process model with finite variance for speculative
+   prices. Econometrica 41, 135-156.
+Diamond, D., Verrecchia, R.E., 1987. Constraints on short-selling and asset price adjustments to
+   private information. Journal of Financial Economics 18, 277-311.
+DeJong, F., Nijman, T., Roëll, A., 1996. Price effects of trading and components of the bid-ask
+   spread on the Paris Bourse. Journal of Empirical Finance 3, 193-213.
+Dufour, A., Engle, R.F., 2000. Time and the Price Impact of a Trade. Journal of Finance 55,
+   2467-2498.
+Easley, D., O’Hara, M., 1987. Price, trade size, and information in securities markets. Journal of
+   Financial Economics 19, 69-90.
+Easley, D., O’Hara, M., 1992. Time and the process of security price adjustment. Journal of
+   Finance 47, 557-605.
+Easley, D., Kiefer, M.N., O’Hara, M., 1997. The information content of the trading process.
+   Journal of Empirical Finance 4, 159-186.
+Engle, R.F., 1982. Autoregressive Conditional Heteroskedasticity with estimates of the variance
+   of U.K. inflation. Econometrica 61, 909-927.
+Engle, R.F., 1996. The econometrics of ultra-high frequency data. Discussion paper 96-15,
+   Department of Economics, University of California, San Diego.
+Engle, R.F., 2000. The econometrics of ultra-high frequency data. Econometrica 68, 1-22.
+
+
+
+
+                                                                                               23
+
+                   Electronic copy available at: https://ssrn.com/abstract=1025241
+Engle, R.F., Lange, J., 2001. Predicting VNET: A model of the dynamics of market depth.
+       Journal of Financial Markets 4, 113-142.
+Engle, R.F., Lunde, A., 2003. Trades and quotes: A bivariate point process. Journal of Financial
+       Econometrics 1, 159-188.
+Engle, R.F., Russell, J.R., 1997. Forecasting the frequency of changes in quoted foreign
+       exchange prices with the autoregressive conditional duration model. Journal of Empirical
+       Finance 4, 187-212.
+Engle, R.F., Russell, J.R., 1998. Autoregressive conditional duration: a new model for irregularly
+       spaced transactions data. Econometrica 66, 1127-1162.
+Engle, R.F., Russell, J.R., 2004. Analysis of high frequency data. Discussion paper 04-10,
+       Department of Economics, University of California, San Diego.
+Ghysels, E., Gouriéroux, C., Jasiak, J., 2004. Stochastic volatility duration models. Journal of
+       Econometrics 119, 413-433.
+Ghysels, E., Jasiak, J., 1998. GARCH for irregularly spaced financial data: The ACD-GARCH
+       model. Studies on Nonlinear Dynamics and Econometrics 2, 133-149.
+Glosten, L., Milgrom, P., 1985. Bid, ask, and transaction prices in a specialist market with
+       heterogeneously informed traders. Journal of Financial Economics 14, 71-100.
+Glosten, L., Harris, L., 1988. Estimating the components of the bid-ask spread. Journal of
+       Financial Economics 21, 123-142.
+Gouriéroux, C., Jasiak, J., LeFol, G., 1999. Intraday trading activity. Journal of Financial
+       Markets 2, 193-226.
+Grammig, J., Wellner, M., 2002. Modeling the interdependence of volatility and inter-duration
+       processes. Journal of Econometrics 106, 369-400.
+Hasbrouck, J., 1991. Measuring the information content of stock trades. Journal of Finance 46,
+       179-207.
+Hasbrouck, J., 1993. Assessing the quality of a security market: A new approach to transaction-
+       cost measurement. Review of Financial Studies 6, 191-212.
+Holder, M.E., Qi, M., Sinha, L., 2004. The Impact of Time Duration between trades on the price
+       of Treasury Note Futures contracts. Journal of Futures Markets 24(10), 965-980.
+Huang, R.D., Stoll, H.R., 1997. The components of the bid-ask spread: A general approach,
+       Review of Financial Studies 10, 995-1034.
+
+
+
+                                                                                               24
+
+                   Electronic copy available at: https://ssrn.com/abstract=1025241
+Ho, T.S.Y., Stoll, H.R., 1983. The Dynamics of dealer markets under competition. Journal of
+       Finance 38, 1053-1075.
+Holz, R., 2007. Nearly 10 billion contracts traded worldwide in 10 months. Futures Industry
+       Magazine, January-February, 10-13.
+Kyle, A.S., 1985. Continuous auctions and insider trading. Econometrica 53, 1315-1335.
+Locke, P., Onayev, Z., 2005. Trade Duration: Information and Trade Disposition. The Financial
+       Review 40, 113-129.
+Madhavan, A., Richardson, M., Roomans, M., 1997. Why do security prices change? A
+       transaction-level analysis of NYSE stocks. Review of Financial Studies 10, 1035-1064.
+Manganelli, S., 2005. Duration, volume, and the price impact of trades. Journal of Financial
+       Markets 8, 377-399.
+O’Hara, M., 1995. Market Microstructure Theory. Basil Blackwell.
+O’Hara, M., 2003. Presidential address: Liquidity and price discovery. Journal of Finance 58,
+       1335-1354.
+O’Hara, M., Oldfield, G.S., 1986. The Microeconomics of market making. Journal of Financial
+       and Quantitative Analysis 21, 361-376.
+Renault, E., Werker, B.J.M., 2002. Stochastic volatility with transaction time risk. Discussion
+       paper, University of Montreal.
+Roll, R., 1984. A simple implicit measure of effective bid-ask spread in an efficient market.
+       Journal of Finance 39, 1127-1139.
+Zhong, M., Darrat, A.F., Otero, R., 2004. Price discovery and volatility spillovers in index
+       futures markets: Some evidence from Mexico. Journal of Banking and Finance 28, 3037-
+       3054.
+
+
+
+
+                                                                                               25
+
+                    Electronic copy available at: https://ssrn.com/abstract=1025241
+                                      Table 1 : Summary Statistics
+This table presents descriptive statistics for the analysed series based on tick-by-tick data for the TIIE28,
+28-day interbank interest rate futures contract on MexDer. The sample consists of 69,981 information ticks
+between August 28, 2000 and October 13, 2006. ri is the return, xi is duration, ~             xi is adjusted
+                                              ~ is the adjusted change in trading volume, ψ is the
+duration, wi is the change in trading volume, wi                                           i
+
+conditional duration from an ACD(1,1) model, z i is conditional change in trading volume from an
+ACV(1,1) model, qi is the trade indicator and C i is the signed duration innovation.
+
+
+        Mean        Median        Std Dev       Skewness        Kurtosis Minimum Maximum
+ri     -0.0347      0.0000         1.1984        -0.8323        50.1478  -25.2644 23.6533
+xi      8.4783      8.0161         2.8096        -0.1444         2.0298   4.6052  14.3433
+~
+xi      1.0002      1.0004         0.0336       -128.0778       29074.22  -6.0735  3.5986
+wi      7.4780      7.6009         1.0200         -1.8300        17.9973        0.0000          12.9575
+~
+w       0.9954      1.0003         0.0677        -14.6110       214.7299        0.0000           1.2499
+  i
+
+ψi      1.0002      1.0002         0.0007        128.0758       29073.61        0.9476           1.1433
+zi      0.9954      0.9968         0.0199        -14.6109       214.7268        0.7027           1.0702
+qi     -0.0063      -1.0000        1.0000         0.0126          1.0002        -1.0000          1.0000
+Ci      0.0002      -0.0002        0.0190         86.6003       9627.237        -0.2479          2.4773
+
+
+
+
+                                                                                                                26
+
+                     Electronic copy available at: https://ssrn.com/abstract=1025241
+             Table 2 : Results of Autoregressive Conditional Duration models
+This table reports the coefficient estimates and corresponding t-statistics from two Autogressive
+Conditional Duration models. Panel A reports the ACD(1,1) model:
+
+                                      ψ t = ω + αxt −1 + βψ t −1
+Panel B reports the Augmented-ACD(1,1) model:
+
+                                  ψ t = ω + αxt −1 + βψ t −1 + δwt −1
+
+
+A: ACD(1,1) model
+                                         Coefficient                       t-statistic
+             ω                            0.0031                             6.4524
+             α                            0.0400                            22.5914
+             β                            0.9530                           371.6673
+
+B: A-ACD(1,1) model
+                                         Coefficient                       t-statistic
+             ω                             0.0031                            6.4635
+             α                             0.0398                           22.6462
+             β                             0.9532                          374.9224
+             δ                            -0.2874                           -8.6460
+
+
+
+
+                                                                                                    27
+
+                   Electronic copy available at: https://ssrn.com/abstract=1025241
+              Table 3 : Results of Autoregressive Conditional Volume models
+This table reports the coefficient estimates and corresponding t-statistics from two Autoregressive
+Conditional Volume models. Panel A reports the ACV(1,1) model:
+
+                                        z t = τ + αwt −1 + β z t −1
+Panel B reports the Augmented-ACV(1,1) model:
+
+                                    z t = τ + αwt −1 + β z t −1 + θxt −1
+
+A: ACV(1,1) model
+                                          Coefficient                        t-statistic
+             τ                             0.0010                             62.9227
+             α                             0.0421                             97.6075
+             β                             0.9466                            2539.919
+
+B: A-ACV(1,1) model
+                                          Coefficient                        t-statistic
+             τ                              0.0010                            62.8901
+             α                              0.0421                            97.5914
+             β                              0.9467                           2542.334
+             θ                             -0.0613                            -1.4790
+
+
+
+
+                                                                                                      28
+
+                   Electronic copy available at: https://ssrn.com/abstract=1025241
+                          Table 4 : Estimation Results of the Trade model
+This table reports the coefficient estimates and corresponding t-statistics of the estimated trade equation:
+                             [                                          ]
+                        rt = φ1 Δq t + (φ 2ψ t + ρ qθ 1C t + φ 3 z t )q t + (ε t + nt − nt −1 )
+Estimation is based on tick-by-tick data for the TIIE28, 28-day interbank interest rate futures contract on
+MexDer using a sample consisting of 69,981 information ticks between August 28, 2000 and October 13,
+2006.
+
+
+A: Using estimates from ACD(1,1) and ACV(1,1) models
+                                   Coefficient                                           t-statistic
+            φ1                       0.0370                                                 8.1807
+            φ2                       0.4448                                                 4.7969
+            φ3                      -0.3300                                                -3.5241
+            θ1                      -0.2389                                               -11.7153
+B: Using estimates from A-ACD(1,1) and A-ACV(1,1) models
+                                  Coefficient                                            t-statistic
+             φ1                      0.0522                                               11.5217
+            φ2                       1.0258                                               10.6348
+            φ3                      -0.8854                                               -9.0935
+             θ1                      0.7690                                               11.6801
+
+
+
+
+                                                                                                               29
+
+                     Electronic copy available at: https://ssrn.com/abstract=1025241
+                    Table 5 : Estimation Results of Alternative Empirical Models
+This table reports the coefficient estimates and corresponding t-statistics from the estimation of four alternative
+empirical models. Panel A reports the Madahavan et al. (1997) model:
+
+                                       rt = θ (q t − ρ q q t −1 ) + φ (q t − q t −1 ) + u t
+Panel B reports the Dufour and Engle (2000) model:
+
+                           rt = (γ 0 qt − γ 1 qt −1 ) + [δ 0 ln( xt )qt + δ 1 ln( xt −1 )qt −1 ] + u t
+Panel C reports the DeJong et al. (1996) model:
+
+                            rt = a 0 + (R0 Δqt + R1 Δqt z t ) + (e0 qt −1 + e1 qt z t −1 ) + u t
+Panel D reports the Ben Sita and Westerholm (2006) model:
+
+                                 [                                      ]
+                           rt = φ1 Δq t + (φ 2ψ t + ρ qθ 1C t )qt + (ε t + nt − nt −1 )
+Estimation is based on tick-by-tick data for the TIIE28, 28-day interbank interest rate futures contract on
+MexDer using a sample consisting of 69,981 information ticks between August 28, 2000 and October 13,
+2006.
+
+A: Madahavan et al. (1997) model
+                                                    Coefficient                                  t-statistic
+                θ                                    0.0187                                       19.9909
+                φ                                    0.1374                                       34.8376
+
+B: Dufour and Engle (2000) model
+                                                    Coefficient                                  t-statistic
+                γ0                                     0.1561                                     34.4212
+                γ1                                   -0.03427                                     -7.5591
+                δ0                                     0.0000                                      0.2616
+                δ1                                    -0.0001                                     -0.5779
+
+C: DeJong et al. (1996) model
+                                                    Coefficient                                  t-statistic
+                a0                                   -0.0339                                      -7.5462
+                R0                                    0.1970                                      10.5701
+                R1                                   -0.0058                                      -0.6470
+                e0                                    0.1566                                       9.2008
+                e1                                   -0.0354                                      -2.2170
+
+D: Ben Sita and Westerholm (2006) model
+                                  Coefficient                                                    t-statistic
+            φ1                      0.0345                                                          7.625
+            φ2                      0.1221                                                         20.027
+            θ1                      0.0332                                                         0.3105
+
+
+
+                                                                                                                      30
+
+                       Electronic copy available at: https://ssrn.com/abstract=1025241
+                           Table 6 : Estimation Results of the implied bid-ask spread
+
+This table reports the estimates of the implied bid-ask spread from each of the respective models, the
+implied spread in our trade model is S = 2(θ1 + φ1 + φ 2 + φ 3 ) . The proportion of adverse selection,
+                                                                                               θ
+order handling and liquidity costs in spread are given by ϑ1 = θ +φ +1φ +φ ,
+                                                                                           1   1   2   3
+                                                                                                           ϑ 2 = θ +φ φ+φ +φ
+                                                                                                                   1    1
+                                                                                                                            1
+                                                                                                                                2   3
+                                                                                                                                        and
+
+ϑ3 = θ +φφ ++φφ +φ . In the Ben Sita and Westerholm (2006) model (BS & W) the implied spread is
+       1
+           2
+           1
+               3
+               2   3
+
+
+S = 2(θ + φ1 + φ 2 ) with the proportion of adverse selection cost, order handling and liquidity costs
+                                          φ                              φ
+given by ϑ1 = θ +φθ +φ , ϑ 2 = θ +φ1 +φ                   and ϑ3 = θ +φ 2+φ . In Madahavan et al. (1997) model the implied
+                       1    2         1   1       2                      1   2
+
+spread is S = 2(θ + φ ) while in the Dufour and Engle (2000) model (D&F) it is given by S = 2(ϕ + ϑ ) ,
+where ϕ =| (γ 0 − γ 1 ) | q and ϑ =| δ 0 − δ 1 | ln( ~
+                                                     xi ) , and the proportion of adverse selection cost is
+ϑ1 = ϑϑ+ϕ . In the DeJong et al. (1996) model, the implied spread is calculated as S = 2(ϕ + ϑ ) where
+ϕ = R − e − e α + ( R − 0.5e ) ~z and ϑ = e + e α − 0.5e ~z with the proportion of adverse
+       0       0       1        1             1       i              0           1   1 i
+
+selection cost given by ϑ1 = ϑ +ϕ .  ϑ
+
+
+
+
+Estimates of the implied bid-ask spread and the components
+      Our Model       BS & W       Madhavan et al.      D&E                                                    DeJong et al.
+
+S          2.1014                   0.3796                         0.3122                  0.3807                      0.1388
+ϑ1          22.74                    17.49                          11.98                     0                         61.29
+ϑ2           3.52                    18.18                          88.02                   100.0                       38.71
+ϑ3          73.74                    64.33
+
+
+
+
+                                                                                                                                              31
+
+                            Electronic copy available at: https://ssrn.com/abstract=1025241
+                            Table 7 : Estimation Results of Price Volatility
+This table reports the estimates of price volatility and its components for the respective models. For our
+trade model, price volatility is calculated as var[Δpt ] = [φ1 + φ 2 + φ3 ]                                      + ρ q + θ12 + σ ε2 + 2σ n2 , with
+                                                                                                             2
+
+
+the fraction of the variance attributable to trading frictions, π 1 , and the fraction of variance attributable to
+                                                 2σ n2 + ρ qθ12 + (φ1 +φ2 +φ3 ) 2                                          2σ n2
+pricing errors, π 2 , given by π 1 =                                                   and π 2 =                                                  . For the Ben
+                                              σ ε + 2σ n2 + ρ qθ12 + (φ1 +φ2 +φ3 ) 2
+                                                2
+                                                                                                         σ ε2 + 2σ n2 + ρ qθ12 + (φ1 +φ 2 +φ3 ) 2
+Sita     and      Westerholm              (2006)                model,                 price         volatility              is          calculated                   as
+ var[Δpt ] = φ12 + φ 22 + θ12 + 2θ1φ 2 ρ q + σ ε2 + 2σ n2 and the fraction of the variance attributable to
+                                       2σ n2 +φ12 +φ22 +θ12 + 2θ1φ2 ρ q
+trading frictions, π 1 , is π 1 =                                               and the fraction of variance attributable to pricing
+                                    σ ε + 2σ n2 +θ12 +φ12 +φ22 + 2θ1φ2 ρ q
+                                      2
+
+
+                                                       2σ n2
+errors, π 2 , is given by π 2 =                                                     . For the Madhavan et al. (1997) model, price
+                                       σ ε + 2σ n +θ1 +φ12 +φ 22 + 2θ1φ 2 ρ q
+                                          2     2    2
+
+
+
+volatility is calculated as var[Δp t ] = [(θ + φ ) + (θρ + φ ) − 2(θ + φ )(θρ + φ ) ρ ] + σ ε + 2σ n and
+                                                                  2                       2                                                    2               2
+
+                                                                                                             2σ n2 +[(θ +φ ) 2 + (θρ +φ ) 2 − 2 (θ +φ )(θρ +φ ) ρ ]
+the fraction of the variance attributable to trading frictions is π 1 =
+                                                                                                          σ ε + 2σ n2 +[(θ +φ ) 2 + (θρ +φ ) 2 − 2 (θ +φ )(θρ +φ ) ρ ]
+                                                                                                            2
+
+
+                                                                                                                        2σ n2
+with the fraction of variance attributable to pricing errors, π 2 =                                                                                        .
+                                                                                               σ ε + 2σ n +[(θ +φ ) + (θρ +φ ) 2 − 2 (θ +φ )(θρ +φ ) ρ ]
+                                                                                                 2      2          2
+
+
+
+
+Estimates of price volatility and its components
+
+                                Our Model                          Ben Sita and Westerholm                                     Madhavan et al.
+
+var[Δpt ]                                 0.0247                                        0.0188                                            0.0449
+π1                                        0.9541                                        0.9427                                            0.9744
+π2                                        0.0226                                        0.0297                                            0.0012
+Liquidity costs                           0.0132                                        0.0149
+Transactions costs                        0.0014                                        0.0012                                            0.0378
+Adverse selection costs                0.0000                                           0.0010                                            0.0004
+
+
+
+
+                                                                                                                                                                           32
+
+                      Electronic copy available at: https://ssrn.com/abstract=1025241
+          Table 8: Estimation Results of the Trade model on the Nearby contracts
+This table reports the coefficient estimates and corresponding t-statistics of the estimated trade equation:
+                             [                                          ]
+                        rt = φ1 Δq t + (φ 2ψ t + ρ qθ 1C t + φ 3 z t )q t + (ε t + nt − nt −1 )
+Estimation is based on tick-by-tick data for the TIIE28, 28-day interbank interest rate futures contract on
+MexDer using a sample consisting of 11,687 information ticks on nearby contracts between August 28,
+2000 and October 13, 2006.
+
+
+Trade model – Nearby Contracts
+                                                Coefficient                              t-statistic
+               φ1                                 0.21699                                 18.17733
+               φ2                                 2.06346                                 1.345909
+               φ3                                -1.94542                                -1.269357
+               θ1                                 3.47964                                 13.25258
+
+
+
+
+                                                                                                               33
+
+                     Electronic copy available at: https://ssrn.com/abstract=1025241
+ Table 9 : Estimation Results of Alternative Empirical Models on the nearby contracts
+This table reports the coefficient estimates and corresponding t-statistics from the estimation of four alternative
+empirical models. Panel A reports the Madahavan et al. (1997) model:
+
+                                       rt = θ (q t − ρ q q t −1 ) + φ (q t − q t −1 ) + u t
+Panel B reports the Dufour and Engle (2000) model:
+
+                           rt = (γ 0 qt − γ 1 qt −1 ) + [δ 0 ln( xt )qt + δ 1 ln( xt −1 )qt −1 ] + u t
+Panel C reports the DeJong et al. (1996) model:
+
+                            rt = a 0 + (R0 Δqt + R1 Δqt z t ) + (e0 qt −1 + e1 qt z t −1 ) + u t
+Panel D reports the Ben Sita and Westerholm (2006) model:
+
+                                 [                                      ]
+                            rt = φ1 Δq t + (φ 2ψ t + ρ qθ 1C t )qt + (ε t + nt − nt −1 )
+Estimation is based on tick-by-tick data for the TIIE28, 28-day interbank interest rate futures contract on MexDer using
+a sample consisting of 11,687 information ticks on nearby contracts between August 28, 2000 and October 13, 2006.
+
+A: Madahavan et al. (1997) model
+                                                    Coefficient                                  t-statistic
+                θ                                   -4.618185                                    -8.475703
+                φ                                    4.817981                                     8.719046
+
+B: Dufour and Engle (2000) model
+                                                    Coefficient                                  t-statistic
+                γ0                                   0.207753                                     3.527667
+                γ1                                  -0.066664                                    -1.131929
+                δ0                                  -0.007971                                    -0.138077
+                δ1                                  -0.010535                                    -0.182493
+
+C: DeJong et al. (1996) model
+                                                    Coefficient                                  t-statistic
+                a0                                   -0.01492                                    -1.349278
+                R0                                    0.21555                                     11.56336
+                R1                                   -0.01502                                    -0.835671
+                e0                                    0.12784                                     7.717657
+                e1                                   -0.00790                                     -0.57123
+
+D: Ben Sita and Westerholm (2006) model
+                                  Coefficient                                                    t-statistic
+            φ1                     0.074439                                                      6.437355
+            φ2                     0.125621                                                      8.674408
+            θ1                     0.311961                                                      0.433944
+
+
+
+
+                                                                                                                           34
+
+                       Electronic copy available at: https://ssrn.com/abstract=1025241
+
