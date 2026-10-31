@@ -1,0 +1,27 @@
+# Research leads awaiting data: Claude's additions (2026-10-31)
+
+Additions to Codex's register `agents/codex/DATA_NEEDED.md` (on `codex/work`; Claude doesn't push there). The user asked
+for every lead Claude thinks is worth researching but blocked by data. Codex: fold these in under new D-numbers after D45
+and keep the C-number as an alias. These are leads from Claude's side (watchlist, S-rank program, plans, paid-data list)
+that the register doesn't already cover. The register's rules apply: free sources first, a data delivery is not a test
+verdict, and no rescue of failed rules.
+
+Already covered, no new row: NG / ZC / ZS exports (D12); SPY / QQQ auction messages (D13; C04 below adds the futures MOC
+leads that would use the same data); calendar spreads (D43).
+
+## Owned exporters: free, highest value
+
+| ID / lead and merit | Exact missing data | What exists; smallest next check |
+|---|---|---|
+| **C01: order-flow and gamma refresh, 2026-07-07 to now.** One export unlocks several leads. (1) **Overnight Tick / VIX** (A, MC-confirmed, in the personal portfolio): its backtest stops at 07-07 because its order-flow input stops there; the 24 MultiCharts trades since then averaged -$280 per NQ. We can't tell decay from noise without the data. (2) WATCHLIST #1 (LDF sized by the 0DTE gamma flip; funded bench $10,924 vs $10,489, blown 3% vs 7%), #5 (Vol-Control Sell above the flip, t 2.5 on 27 trades, needs 15+ more), #15 (earnings-night dealer-gamma rule, 65 sessions, t 1.6) and the order-flow filter on #10 (MOC follow). (3) A first EOS expiry-pinning check from the OI levels in `GEXOI` (`maj_pos_oi` / `maj_neg_oi`). | `OF_1min_2026_3.csv`, `GEX_1min_2026.csv` and `GEXOI_2026.csv` from 2026-07-07 onward, same columns and session as the existing files, through the latest close. | All three files in `data/` end **2026-07-07**. Exporters: `tools/exporters/OFB_OrderFlow_Exporter.txt`, `OFB_Gamma_Exporter.txt`, `OFB_GexOI_Exporter.txt` (home PC, same chart settings). Smallest check: export with a few days of overlap, confirm the overlap matches the old files exactly, then rerun `analysis/gamma_regime_test.py` and the Overnight Tick rebuild (`checks/candidates/overnight_tick/`), with the watchlist items' promote / drop rules unchanged. |
+| **C02: plan MultiCharts reports through 2026-10-30.** Needed for the 10/12-10/30 live-vs-backtest reconciliation and the missed-trade panel, and to rerun the plan benches on the extended grid (Codex's refresh audit, `agents/codex/results/extended_data_refresh_20261030.md`). | The same-input reports for VB, ONB ADX30, EOS and Bridge Monday (evaluation set), then the funded-plan legs, re-exported through 10/30 with the existing file names and settings. | Saved reports end 10/09-10/13. Prices already reach 10/30, and the `open`-trade import defect is fixed (0928461). Smallest check: one report re-exported; its overlapping trades must match the old file trade for trade before the cache is extended. |
+
+## Paid or unavailable for free: record only (from `agents/claude_evidence/PAID_DATA_LIST.md`; nothing bought)
+
+| ID / lead and merit | Exact missing data | What exists; smallest next check |
+|---|---|---|
+| **C03: Sunday-reopen indicative opening price.** WATCHLIST #22: NQ's first-minute push at the Sunday reopen earned $182 a trade 2023-26 (t 2.6), but backtests fill at the first print and entering after the open is worthless. The CME pre-open indicative price could give a signal before the open. | CME MDP 3.0 pre-open messages (indicative opening price and quantity) for NQ / ES, Sundays 16:00-17:05 CT, 2018-26. | Paid only (CME DataMine / Databento). Free step: ask for a sample and confirm the message timestamps. Until then, keep logging first print vs fill in the journal (WATCHLIST #22's forward rule). |
+| **C04: real closing imbalance for the futures MOC follow.** WATCHLIST #10 / #12 (NQ / ES / YM follow 14:51-15:00 CT, t 3.1-3.5 on a price proxy) and #20 (ES MOC Follow, funded candidate, weaker since 2023: $109 vs $206 a trade). Using the real 14:50 CT imbalance instead of the price proxy is the obvious next step. | NYSE closing imbalance publications (TAQ Order Imbalance, at least the index-weighted aggregate) and Nasdaq NOII closing cross, with exact publication times, 2018-26. | Shares D13's data family. Paid (NYSE list price about $58.5k; Nasdaq: quote only). Free step: a sample to check whether the aggregate imbalance at 14:50 adds anything to the price proxy on a few months. |
+| **C05: expiry-day delta-decay hedging in ES.** Market-maker SPX option volume on expiry afternoons, 14:32-14:49 CT (Codex's earlier idea D, Claude's paid list #4). | Cboe Open-Close Volume Summary, 10-minute intraday, SPX, 2018-26, with the original delivery times. | Paid (Cboe DataShop, quote only). Delivery timing of old intraday files is the first thing to verify. |
+| **C06: GC options-expiry pinning** (S-rank round 3, GC). | COMEX gold options open interest by strike, as known before each expiry, 2018-26. | Not owned and not free historically. Low priority: GC intraday leads have mostly failed (gold-rates-dollar, Asian breakout C). |
+| **C07: Bitcoin spot-ETF flows around the 15:00 CT benchmark** (S-rank round 3, BTC: the only BTC idea left after the weekend gap disappeared). | Per-fund creations / redemptions with the time the order is struck (not end-of-day totals), 2024-26. | Daily totals are free (issuer sites), but they're published after the close, so they can't tell what was known at 15:00. Low priority until a timed source exists. |

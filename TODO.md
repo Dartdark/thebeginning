@@ -201,6 +201,10 @@ after 15:59 CT, never with a position open.
 
 ## Later
 
+- [ ] **Export order-flow + gamma from 2026-07-07 to now** (home PC; `OFB_OrderFlow_Exporter`, `OFB_Gamma_Exporter`,
+  `OFB_GexOI_Exporter` in `tools/exporters/`, same charts and settings as before, a few days of overlap). All three files
+  in `data/` stop on 07-07. This unblocks Overnight Tick / VIX's backtest (24 live-period MC trades averaged -$280 per NQ)
+  and watchlist #1 / #5 / #15. List: `agents/claude_evidence/DATA_NEEDED_CLAUDE.md` (C01) (Claude, 2026-10-31).
 - [ ] **Export 1-minute data for NG, ZC and ZS** (natural gas, corn, soybeans), Jan 2018 to now, same way as the CL / ZN files
   (Exchange time, 24-hour session), into `data/` (or `C:\TradingVault`, then sync). Claude then tests the NG storage report
   (Thursdays 9:30 CT) and the USDA WASDE report (monthly, 11:00 CT) on ZC / ZS (2026-10-20,
