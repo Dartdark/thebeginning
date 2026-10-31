@@ -61,3 +61,11 @@ No unbounded rebuild, purchased data, new strategies, rescue tuning, leave-one-o
 or retirement/adoption. Zero new alpha definitions; five existing homes x three declared cost stresses, with the
 same frozen allocations throughout. Publish all attempted/failed checks and conditional outputs. Independent
 verification pending; no account improvement claim without a separately frozen comparison passing existing gates.
+
+## Fee clarification before code freeze / before any new return
+
+User supplied: MNQ measured0.99–1.08RT, use1.04; MES/MCL never traded live,1.04 assumed. Main is therefore1.04RT
+for each micro,1tick per market/stop fill. Preserve1.24RT/1tick as the second declared fee sensitivity (`fee_124`),
+and use doubled main fees2.08RT/2ticks for `stress`. This replaces the provisional low/main/stress schedules above
+before all economic outcomes. It is a user-provided cost clarification, not an outcome-selected fee reduction.
+Source MNQ evidence is the user's measured range; MES/MCL remain assumptions, not verified fee schedules.
