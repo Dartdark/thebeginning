@@ -1,0 +1,127 @@
+3.4. Empirical Implications
+
+The advancement of speed technology has become one of the most salient developments in
+recent securities trading. This trend has driven a rapid rise in machine-driven trading,
+particularly characterized by speed. Empirically, extensive discussions have addressed factors
+that could influence stock market price informativeness. This paper outlines several testable
+empirical implications.
+
+Prediction 1. (Speed competition and price informativeness). i) Short-run price
+informativeness increases with speed competition; ii) There exists a hump-shaped relationship
+between speed competition and long-run price informativeness.
+                                                                                              □
+     Existing empirical studies appear to provide indirect support for these predictions. For
+example, short-term (intraday) measures of price efficiency (e.g., order flow predictability,
+serial correlation) seem to improve (Brogaard et al., 2014; Hirschey, 2018), while long-term
+price informativeness seems negatively affected (e.g., Weller, 2018). To formally test these
+theoretical predictions, we would need clear measures of both price informativeness and speed
+
+
+                                                13
+competition. In the following, we suggest potential databases and outline a proposed empirical
+procedure.
+
+      Sample Construction: The main sample could include the U.S.-listed companies trading
+on the NYSE, NASDAQ, and AMEX, with firm-level financial statement data drawn from
+Compustat, supplemented by intangible capital estimates from Peters and Taylor (2017) in
+WRDS. Stock price information could be sourced from CRSP. Since this study focuses on
+strategic traders, metrics of speed competition might be constructed by extracting institutional
+holdings data from Thomson Reuters 13F and gathering fund strategies from the SEC’s
+EDGAR database. Using these data, variables such as fast and slow institutional ownership
+concentration could be created for each firm-quarter.
+      For firm-level empirical tests, we might select the most recent ownership variables relative
+to each firm’s fiscal year-end and then merge them with firm-level financial data. Sampling
+criteria would exclude firms with a stock price below $1 or a market cap below $500 million,
+as well as firms in the financial industry and those with fewer than four years of continuous
+accounting data. We could further require that sample firms have at least one institutional
+investor. For metrics that rely on firm-level concentration, requiring a minimum of five active
+institutional investors could prevent extreme values. Unless otherwise specified, these criteria
+would apply consistently throughout all the proposed analyses.
+
+      Measures of Speed Competition: Classifying institutions as fast or slow investors could
+follow Abis (2022) machine learning-based classification. This method uses data from the
+"Principal Investment Strategies" (PIS) section of mutual fund prospectuses, part of the N-1A
+filing since December 1999.11 In this proposed procedure, a random sample of PIS sections
+would be reviewed by expert classifiers, with their classifications used to train a machine
+learning algorithm—a random forest—to categorize institutions as fast or slow. This algorithm
+is transparent and interpretable, providing a ranked list of features (e.g., keywords and
+combinations) that inform classification.
+      Firm-level fast institutional ownership could be calculated as
+                                                         𝑁
+                                                         𝑖
+                                                                                                        (5)
+                                                       ∑𝑗=1 𝑆𝑖,𝑗,𝑡
+                                             𝑠𝑐𝑖,𝑡 =     𝑀
+                                                         𝑖
+                                                                     ,
+                                                       ∑𝑗=1 𝑆𝑖,𝑗,𝑡
+
+where 𝑆𝑖,𝑗,𝑡 denotes the equity shares of stock 𝑖 owned by institution 𝑗 at time 𝑡 and 𝑁𝑖 is
+the number of fast institutions holding stock 𝑖 and 𝑀𝑖 is the total number of institutions
+holding stock 𝑖.
+
+     Measures of Price Informativeness: The empirical literature provides various
+approaches to measuring price informativeness. Following Bai et al. (2016), we propose a
+metric for price informativeness, denoted as FPE (forecasting price efficiency), to capture
+
+
+
+11
+   Funds must “Explain in general terms how the Fund's adviser decides which securities to buy and sell”. This
+requirement was added after the 1998 amendment of mandatory disclosures; all funds were required to comply
+beginning in December 1999. Focusing on mandatory disclosures allows for more reliable information than
+analyzing other self-reported material.
+
+
+                                                        14
+information on future cash flows embedded in prices. We can conduct the following regression
+of the future earnings,
+                            𝐸𝑖,𝑡+𝑘                     𝑀𝑖,𝑡           𝐸𝑖,𝑡                                       (6)
+                                   = 𝑎𝑡,𝑘 + 𝑏𝑡,𝑘 𝑙𝑜𝑔 (      ) + 𝑐𝑡,𝑘 ( ) + 𝐶𝑜𝑛𝑡𝑟𝑜𝑙𝑠.
+                             𝐴𝑖,𝑡                      𝐴𝑖,𝑡           𝐴𝑖,𝑡
+where 𝑘 denotes the prediction horizons; 𝑀𝑖,𝑡 /𝐴𝑖,𝑡 denotes the market price of firm 𝑖 in fiscal
+year 𝑡, computed as the market capitalization at the end of March after year 𝑡, scaled by total
+assets in year 𝑡; 𝐸𝑖,𝑡+𝑘 /𝐴𝑖,𝑡 (𝐸𝑖,𝑡 /𝐴𝑖,𝑡 ) denotes future (current) earnings, computed as cash flow
+in year 𝑡 + ℎ (𝑡) scaled by total assets in year 𝑡. The market-level FPE in year 𝑡 at prediction
+horizon 𝑘 is then calculated as the forecasting coeffcient 𝑏𝑡,𝑘 in Equation (6) multiplied by
+𝜎𝑡 (𝑙𝑜𝑔(𝑀/𝐴)) the cross-sectional standard deviation of the scaled market price 𝑙𝑜𝑔(𝑀/𝐴) in
+year 𝑡:
+                                                                    𝑀𝑡
+                                           𝐹𝑃𝐸𝑡,𝑘 = 𝑏𝑡,𝑘 × 𝜎𝑡 (𝑙𝑜𝑔 ( )).
+                                                                    𝐴𝑡
+The predicted variation is a measure of FPE, the amount of information about future cash flows
+contained in prices, which is the most relevant for the role of stock prices in capital allocation.
+      Running cross-sectional regressions could yield a time series of FPE measures, which
+could be used to examine in relation to market-level fast institutional ownership. However, this
+cross-sectional approach may not be well-suited for firm-level analysis, as firm-level speed
+competition is typically panel data, while price informativeness is time-series data. Kacperczyk
+et al. (2021) address this limitation by proposing a pooled regression model, which can be used
+to investigate the effects of firm-level speed competition on price informativeness.
+
+    Speed Competition and Price Informativeness: Firm-level Evidence: To examine the
+hypothetical effect of firm-level speed competition on FPE, we could follow Kacperczyk et al.
+(2021) and adopt a pooled regression model of future earnings on speed competition based on
+annual firm-level data,
+      𝐸𝑖,𝑡+𝑘                                2                                     2
+                                                                                            𝑀𝑖,𝑡          𝐸𝑖,𝑡   (7)
+             = 𝛼𝑘 + 𝛽𝑘,1 × 𝑠𝑐𝑖,𝑡 + 𝛽𝑘,2 × 𝑠𝑐𝑖,𝑡 + (𝛾𝑘,0 + 𝛾𝑘,1 × 𝑠𝑐𝑖,𝑡 + 𝛾𝑘,2 × 𝑠𝑐𝑖,𝑡 )𝑙𝑜𝑔 (      ) + 𝛿𝑡 ( )
+       𝐴𝑖,𝑡                                                                                  𝐴𝑖,𝑡         𝐴𝑖,𝑡
+
+                          + 𝐶𝑜𝑛𝑡𝑟𝑜𝑙𝑠,
+where 𝑘 denotes the prediction horizons, 𝑠𝑐𝑖,𝑡 denotes the speed competition, measured by
+Equation (5). Other variables are defined as in Equation (6).
+     The coefficients 𝛾𝑘,1 and 𝛾𝑘,2 are of interest to capture the sensitivity of future earnings
+to current prices, conditional on speed competitions. Based on Prediction 1, we would expect
+a positive coefficient 𝛾𝑘,1 for short-run such as 𝑘 = 1, and insignificant coefficient 𝛾𝑘,2 . For
+long-run such as 𝑘 = 3, the coefficient 𝛾𝑘,2 is negative.
+     We consider two further extensions in the following. The first extension considers
+information dissemination and highlights the relationship between the overall price
+informativeness and speed competition. The second extension renders fast traders trade at both
+early and late periods and examines how high-frequency trading affects the relationship
+between speed competition and overall price informativeness.
+
+
+
+
+                                                            15
+
