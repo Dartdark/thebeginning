@@ -1,0 +1,192 @@
+{
+  "n": 500,
+  "seed": 1,
+  "block": 20,
+  "horizon": 500,
+  "cutoff": "2026-10-09",
+  "source_days": 2262,
+  "compressed_minutes": 958,
+  "st_trades": 602,
+  "st_exit_kinds": {
+    "1": 264,
+    "2": 256,
+    "0": 82
+  },
+  "plans": {
+    "50K plan": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1
+    },
+    "+ ST 1 MNQ": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1,
+      "ST": 1
+    },
+    "RS longs -> ST 1": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "OT": 1,
+      "ST": 1
+    },
+    "EOS -> ST 1": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1,
+      "ST": 1
+    },
+    "VB 2/1 -> 1/1 + ST 1": {
+      "VB_N": 1,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1,
+      "ST": 1
+    },
+    "EMPTY VB_N": {
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1,
+      "VB_N": 1
+    },
+    "EMPTY RS_L": {
+      "VB_N": 2,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "OT": 1
+    },
+    "adopted, legacy accounting": {
+      "VB_N": 1,
+      "VB_F": 1,
+      "ONB_ML2_MC": [
+        "risk",
+        400
+      ],
+      "EOS": [
+        "risk",
+        700
+      ],
+      "LDF_MC": 2,
+      "NFP_MC": [
+        "risk",
+        500
+      ],
+      "MON_BR_MC": 1,
+      "CLS": 2,
+      "MOC_MES": 2,
+      "RS_L": 1,
+      "OT": 1,
+      "ST_legacy": 1
+    }
+  }
+}

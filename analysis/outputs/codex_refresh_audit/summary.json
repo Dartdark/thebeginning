@@ -1,0 +1,122 @@
+{
+  "raw_grid_end": "2026-10-30",
+  "source_commit": "86df2c0fa4b0e530b2c29caddd364830d12edab3",
+  "raw_last_trading_date": "2026-10-30",
+  "dashboard_daily_end": "2026-10-09",
+  "dashboard_last_trade": {
+    "VB": "2026-10-06",
+    "ONB30": "2026-10-07",
+    "MON_BR": "2026-10-05",
+    "EOS": "2026-09-18"
+  },
+  "lab_rebuilt": true,
+  "report_coverage": [
+    {
+      "strategy": "VB",
+      "report": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+      "report_end": "2026-10-09 16:00:00",
+      "last_closed_exit": "2026-10-06 14:30:00",
+      "closed_trades": 1743,
+      "open_positions": 0
+    },
+    {
+      "strategy": "ONB_ML2_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+      "report_end": "2026-10-12 14:15:00",
+      "last_closed_exit": "2026-10-05 14:30:00",
+      "closed_trades": 343,
+      "open_positions": 1
+    },
+    {
+      "strategy": "EOS",
+      "report": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+      "report_end": "2026-10-11 19:35:00",
+      "last_closed_exit": "2026-09-18 10:00:00",
+      "closed_trades": 105,
+      "open_positions": 0
+    },
+    {
+      "strategy": "OND_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report OND v1.xlsx",
+      "report_end": "2026-10-11 19:40:00",
+      "last_closed_exit": "2026-10-09 03:00:00",
+      "closed_trades": 1052,
+      "open_positions": 0
+    },
+    {
+      "strategy": "MON_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+      "report_end": "2026-10-12 15:55:00",
+      "last_closed_exit": "2026-10-12 15:00:00",
+      "closed_trades": 451,
+      "open_positions": 0
+    },
+    {
+      "strategy": "LDF_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+      "report_end": "2026-10-12 16:00:00",
+      "last_closed_exit": "2026-10-12 14:30:00",
+      "closed_trades": 898,
+      "open_positions": 0
+    },
+    {
+      "strategy": "NFP_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
+      "report_end": "2026-10-13 02:20:00",
+      "last_closed_exit": "2026-10-02 09:00:00",
+      "closed_trades": 79,
+      "open_positions": 0
+    },
+    {
+      "strategy": "VCS_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx",
+      "report_end": "2026-10-13 02:20:00",
+      "last_closed_exit": "2026-06-08 15:00:00",
+      "closed_trades": 71,
+      "open_positions": 0
+    },
+    {
+      "strategy": "ONB30",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx",
+      "report_end": "2026-10-13 04:45:00",
+      "last_closed_exit": "2026-10-12 14:30:00",
+      "closed_trades": 677,
+      "open_positions": 0
+    },
+    {
+      "strategy": "MON_BR_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx",
+      "report_end": "2026-10-13 10:15:00",
+      "last_closed_exit": "2026-10-05 09:30:00",
+      "closed_trades": 217,
+      "open_positions": 0
+    }
+  ],
+  "excluded_open_positions": [
+    {
+      "strategy": "ONB_ML2_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+      "entry": "2026-10-12 09:15:00",
+      "exit_label": "2026-10-12 00:00:00",
+      "signal": "open",
+      "marked_pnl": 1505.0
+    }
+  ],
+  "limitation": "New raw bars do not create new MC trades. Do not label uncovered days as no-signal days.",
+  "logged_files": [
+    "live/trades/20261020.csv",
+    "live/trades/20261021.csv",
+    "live/trades/20261022.csv",
+    "live/trades/20261023.csv",
+    "live/trades/20261025.csv",
+    "live/trades/20261026.csv",
+    "live/trades/20261027.csv",
+    "live/trades/20261028.csv",
+    "live/trades/20261029.csv",
+    "live/trades/20261030.csv"
+  ],
+  "review_window": {
+    "start": "2026-10-12",
+    "end": "2026-10-28"
+  }
+}

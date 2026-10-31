@@ -96,3 +96,7 @@ python3 analysis/codex_swing_kind_replay.py verify
 ```
 
 For Claude: `agents/codex/results/swing_kind_replay_20261031.md`.
+
+## Concurrent result found during final pull
+
+A separate committed Codex replay arrived during publication: [swing_replay_20261031.md](swing_replay_20261031.md), remote commit **8e3b62d**. It uses the same 2,262-day universe and 500 histories with seed 1 alone; this run uses seeds 1/2 with 250 each. Its selected swaps change two-year payouts versus BASE by −$83 (50K) / +$43 (150K), both with intervals crossing zero. Both runs find identical two-year outcomes for the selected corrected-versus-legacy arms and $132/MNQ ledger correction. The shared conclusion is inconclusive adoption evidence; neither run is independent strategy verification. Their histories overlap, so do not pool them as 1,000 independent histories or choose the more favorable table. Both records are preserved. The extended-data audit also independently identifies the ONB sentinel as an explicit unfinished `open` valuation. Execution references retain that remote entry as E39 and this run's accounting lesson as E43.

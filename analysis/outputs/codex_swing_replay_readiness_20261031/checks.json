@@ -1,0 +1,176 @@
+{
+  "status": "BLOCKED_BEFORE_ACCOUNT_REPLAY",
+  "new_strategy_trials": 0,
+  "account_simulations": 0,
+  "reports": [
+    {
+      "strategy": "VB",
+      "report": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+      "loaded_rows": 1743,
+      "open_sentinels": 0,
+      "invalid_minute_rows": 0,
+      "proposed_adapter": "valid",
+      "closed_rows": 1743
+    },
+    {
+      "strategy": "ONB_ML2_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+      "loaded_rows": 344,
+      "open_sentinels": 1,
+      "invalid_minute_rows": 1,
+      "proposed_adapter": "valid",
+      "closed_rows": 343,
+      "canonical_paths_complete_after_explicit_open_exclusion": true
+    },
+    {
+      "strategy": "EOS",
+      "report": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+      "loaded_rows": 105,
+      "open_sentinels": 0,
+      "invalid_minute_rows": 0,
+      "proposed_adapter": "valid",
+      "closed_rows": 105
+    },
+    {
+      "strategy": "OND_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report OND v1.xlsx",
+      "loaded_rows": 1052,
+      "open_sentinels": 0,
+      "invalid_minute_rows": 5,
+      "proposed_adapter": "blocked",
+      "reason": "5 closed cross-date trades need explicit handling"
+    },
+    {
+      "strategy": "MON_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+      "loaded_rows": 451,
+      "open_sentinels": 0,
+      "invalid_minute_rows": 0,
+      "proposed_adapter": "valid",
+      "closed_rows": 451
+    },
+    {
+      "strategy": "LDF_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+      "loaded_rows": 898,
+      "open_sentinels": 0,
+      "invalid_minute_rows": 0,
+      "proposed_adapter": "valid",
+      "closed_rows": 898
+    },
+    {
+      "strategy": "NFP_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
+      "loaded_rows": 79,
+      "open_sentinels": 0,
+      "invalid_minute_rows": 0,
+      "proposed_adapter": "blocked",
+      "reason": "1 closed cross-date trades need explicit handling"
+    },
+    {
+      "strategy": "VCS_MC",
+      "report": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx",
+      "loaded_rows": 71,
+      "open_sentinels": 0,
+      "invalid_minute_rows": 0,
+      "proposed_adapter": "valid",
+      "closed_rows": 71
+    }
+  ],
+  "invalid_paths": [
+    {
+      "strategy": "ONB_ML2_MC",
+      "date": "2026-10-12",
+      "entry_minute": 546,
+      "exit_minute": 0,
+      "kind": 2
+    },
+    {
+      "strategy": "OND_MC",
+      "date": "2018-01-01",
+      "entry_minute": 1026,
+      "exit_minute": 180,
+      "kind": 2
+    },
+    {
+      "strategy": "OND_MC",
+      "date": "2019-12-25",
+      "entry_minute": 1026,
+      "exit_minute": 180,
+      "kind": 2
+    },
+    {
+      "strategy": "OND_MC",
+      "date": "2023-12-25",
+      "entry_minute": 1026,
+      "exit_minute": 180,
+      "kind": 2
+    },
+    {
+      "strategy": "OND_MC",
+      "date": "2024-01-01",
+      "entry_minute": 1026,
+      "exit_minute": 180,
+      "kind": 2
+    },
+    {
+      "strategy": "OND_MC",
+      "date": "2026-01-01",
+      "entry_minute": 1026,
+      "exit_minute": 180,
+      "kind": 2
+    }
+  ],
+  "swing_target": {
+    "rows": 602,
+    "numeric_kind_counts": {
+      "1": 264,
+      "2": 256,
+      "0": 82
+    },
+    "holiday_repairs": 3,
+    "enum_matches_frozen_ledger": true,
+    "targets": 264,
+    "corrected_target_cash_delta_per_one_MNQ": 132.0
+  },
+  "missing_scratch_files": [
+    "lab.pkl",
+    "cl.pkl",
+    "s_rank_gap2.pkl",
+    "single_print_sessions.pkl",
+    "rs_trades.csv",
+    "swing_be.csv"
+  ],
+  "remaining": [
+    "Rebuild complete baseline with explicit open-sentinel policy and documented holiday handling",
+    "Rebuild CL gap frames, VB flags and RS trades; reconcile cache calendars",
+    "Run paired historical and current-roster BASE/ADD/REPLACE/EMPTY account comparisons"
+  ],
+  "limitations": [
+    "Canonical ONB path completion checks finiteness, not native-fill parity",
+    "ST historical loader flattens three holiday holds; deployed v3 skips those dates",
+    "No fresh payout, risk, timing, standalone performance or adoption result"
+  ],
+  "source_head": "8f534a9e6c1d9029046feb56b6880cc1ee27549b",
+  "files": {
+    "analysis/build_lab.py": "7c19e7bfd74ab21b31ab016d677bd651f8badcfde6866142b1f6237f6be2e16c",
+    "analysis/portfolio.py": "7e8830f889854e2452a683c2eecdb44e9743d7f1c9bdcf2cc426f750f4f357c8",
+    "analysis/swing_target_bench.py": "f4956d2be529846da5a5d7f006a32e924bcd693d2694a4459c7ec291a6088b27",
+    "analysis/funded_lab.py": "b0ce67e6ab26c72b278d6a2a6a6369d5d0cba9aae770313ebbfe750ec6ef0f15",
+    "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx": "7169ba79c9f23cb55a8f8324b950c6e956aefdd130ca581fd52d9fdd203f3ccf",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx": "f5d9beee8f4e0a2a94870e6101526a7ee79c1874bdbe96145de3aa73d03b00fc",
+    "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx": "2a1c7dd88a261ad0b0df67f310e3c0c33b17d3faf85f7a94c53e9d910f63bc8f",
+    "mc_reports/Backtesting Strategy Performance Report OND v1.xlsx": "b52ae7ca46ebdf33fb48c1a69e4d0db5593de268989ea5756f3eba57b7ab3e85",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx": "cf1bc66f4cf459a2d1adc94e434be3176937ddd147d0906c6c91e037f12f5814",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx": "d67673c0485d2c780b1f2d810d2929aac5360e4409cf767ef772ca980fff4085",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx": "7ed08ee978faa0bc4364d38b4863c11cf1d285610501a2dcf24cc19532fb2fe8",
+    "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx": "c6147c1d54df1bf6c43296fc1ff3493c1fe12bc7dda641cb1288d6517ace45c2",
+    "checks/candidates/swing_target/codex_be_trades.csv": "ae64cf4ca453050281994d7d2e1578c11d010bfadb8b7c3e3f924d3a1ee8e4a2",
+    "analysis/codex_swing_replay_readiness_20261031.py": "445780b0f41963f3e28a3add3760db2aab0a341060b6ad3e869e8c88972e5498"
+  },
+  "versions": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "numpy": "2.5.4",
+    "pandas": "2.2.3"
+  }
+}

@@ -161,3 +161,7 @@ Only a passed evidence gate can advance to the existing committed budget/preregi
 No user action is requested; owned-data-compatible scout discovery should pass over this unchanged parked lead.
 
 For the user to send Claude: `agents/codex/results/rad_double_sort_review_20261031.md`.
+
+Subsequent user-requested [code build](rad_double_sort_build_20261031.md): monthly selector and draft integer
+reference allocation implemented with23 synthetic mechanics checks. This does not change the source/economic
+verdict, supply missing paired data or constitute historical returns/account verification.
