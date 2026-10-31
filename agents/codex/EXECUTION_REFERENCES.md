@@ -738,6 +738,15 @@ Source: Nocturne research note (L. Franceschetti, user upload 2026-10-30), rebui
 
 ### E42 — Backtest-live parity: six implementation defects and a ten-point checklist
 
+- Source-version follow-up, retained 2026-10-30: Krishnamurthy, [SSRN 3124271](https://ssrn.com/abstract=3124271),
+  [full-PDF and figure review](results/mean_reversion_beta_zero_3124271_review.md). A reported year of paper trading
+  used a one-day liquidity lookback; the intended five-day version was subsequently backtested without reported
+  prospective validation. A forward record validates only the implemented frozen version, not its revised intent.
+  Preserve code/input hashes, ranked holdings and order clocks with each report, and keep old/new evidence separate.
+  A zero-beta target does not establish realized neutrality or protection from sector/news, borrow and funding losses.
+  Evidence: author screenshots and admitted code correction, not independently verified fills or execution savings.
+  No current strategy rerun, monitoring installation or portfolio change is warranted by this note alone.
+
 Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SCOUT_LOG.md.
 - Use: one live intraday stock system, six defects that summary statistics never showed: (1) default data feed carried
   0.1-2% of the real opening-minute volume, (2) dividend-adjusted history vs unadjusted live fills, (3) a field only the
