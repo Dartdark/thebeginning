@@ -1228,6 +1228,26 @@ E11 information clocks, E18 research/platform fill conventions and E43 accountin
 - Status: original engine fails reproduction admission; broader personal-allocation method is a low-priority queue
   lead. Zero historical agent training, strategy-return trials, portfolio comparisons, native savings or live changes.
 
+### E09 follow-up — WTI genetic optimization still needs native contract and cost units
+
+Source: Aragón, Mejía & Zapata(2018), [SSRN3387570](https://ssrn.com/abstract=3387570);
+[source review](results/wti_genetic_ma_ssrn3387570.md), retained2026-10-30.
+- Lesson: optimizer fitness only measures the ledger it is given. A printed
+  quantity-times-price-change formula is not native futures dollar P&L without
+  specified signed units/multiplier, fills, turnover costs and roll cashflows.
+- Evidence: source/Table2 and deterministic rounded-table/unit audit, no price
+  replication. Article calls its example2,000WTI contracts on$2m while its equation
+  does not show the CL1,000-barrel multiplier. Literal-contract interpretation
+  changes dollar P&L by1,000×; this does not prove unavailable code used that error.
+- Limits: generic Bloomberg15-minute closes,2017–18; no disclosed all-in costs,
+  native fill ledger, complete intraday losses or session/roll convention. Ten
+  test months are not an account-risk limit. GA search cannot fix missing units.
+- Smallest next check if reopened: one identified contract trade reconciled from
+  signal time through signed fill quantities, cash P&L, fees and roll before
+  optimizing or mapping percentage returns into CL/MCL account sizes.
+- Status: accounting caution, NEEDS SOURCE SPECIFICATION; zero return trials,
+  no new optimizer/execution policy, promising-queue or plan/live change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
