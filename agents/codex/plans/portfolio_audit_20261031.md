@@ -94,3 +94,13 @@ Never interpret a missing adverse quote as observed zero. Internal source-style 
 minute is an unverified proxy; neither its filled value nor omitted complete-subset trades is a fact about risk.
 No signal, allocation, costs, stop, exit or seed changes. This is an accounting/admission correction, not rescue
 selection. Full current-book floor certification remains blocked where original adverse observations are missing.
+
+## Account-preset implementation correction
+
+The first known-ledger run finished, but an independent cap arithmetic check caught `funded_150` matching
+`endswith("50")`: that audit runner selected the50K engine for the150K funded roster. The canonical engines
+are not defective. Archived all those outputs under `implementation_wrong_150_preset/`; the earlier complete-
+path subset's150K account outputs are affected too and invalid. Added an explicit home-to-engine map, start/
+cap assertions and independent per-payout-ladder reconciliation. Rerun the same frozen rosters/costs/histories;
+this corrects implementation, not allocation selection or an additional alpha definition. Actual minute-risk
+and source-version limits remain. Never use the failed150K amounts as portfolio evidence.

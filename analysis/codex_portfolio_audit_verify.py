@@ -84,10 +84,19 @@ def saved():
     # Paired fee scenarios share actual admitted historical date histories.
     for home in ["funded_50","funded_150"]:
         base=np.load(OUT/f"{home}_main_history_dates.npy")
+        caps=np.array([1500,1500,2000,2500,2500,3000] if home=="funded_50" else [2500,3000,3000,3000,4000,5000])
+        expected=np.r_[0,np.cumsum(caps)]
+        rules=json.loads((OUT/f"{home}_account_rules.json").read_text())
+        assert rules["start"]==({"funded_50":50000,"funded_150":150000}[home])
+        assert np.array_equal(rules["caps"],caps)
         for scenario in SCENARIOS:
             assert np.array_equal(base,np.load(OUT/f"{home}_{scenario}_history_dates.npy"))
+            r=pd.read_csv(OUT/f"{home}_{scenario}_accounts.csv")
+            assert np.array_equal(r.paid,expected[r.payouts.astype(int)])
+            assert (r.y1<=r.paid).all() and r.paid.max()<=caps.sum()
     dump(OUT/"verification.json",dict(all_passed=True,component_checks=checked,account_parity_records=len(p),
-        fee_scenarios_share_history_dates=True,limits="checks certify arithmetic and inherited simulator parity, not actual orders/fills or source-version parity"))
+        fee_scenarios_share_history_dates=True,account_identity_and_each_payout_ladder_verified=True,
+        limits="checks certify arithmetic and inherited simulator parity, not actual orders/fills or source-version parity"))
 
 
 if __name__=="__main__":

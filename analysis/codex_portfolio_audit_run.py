@@ -134,8 +134,14 @@ for home,plan in ROSTERS.items():
             chg=np.zeros(W.shape[2],bool);chg[-1]=True;chg[0]=True
             chg[1:]|=(np.diff(Wv,axis=2)!=0).any(axis=(0,1))
             Wv=np.ascontiguousarray(Wv[:,:,chg]);Cv=np.ascontiguousarray(Cv)
-            f=F50 if home.endswith("50") else F150
+            f={"funded_50":F50,"funded_150":F150}[home]
             params=ENGINE.rules(f,"50K_funded" if f is F50 else "150K_funded")
+            expected_start={"funded_50":50000.,"funded_150":150000.}[home]
+            expected_cap={"funded_50":13000.,"funded_150":20500.}[home]
+            assert params[0]==expected_start and np.isclose(sum(params[5]),expected_cap)
+            dump(OUT/f"{home}_account_rules.json",dict(start=params[0],mll=params[1],lock=params[2],
+                safety=params[3],qualifying_day=params[4],caps=params[5].tolist(),cushion_ref=params[6],
+                dll_mode=params[7],qualifying_days=params[8],source="pinned repository account rules; not newly verified Apex terms"))
             # Canonical synchronized20-day block history generator; same seed/allocation/scenario pairing.
             dummy=SimpleNamespace(g=SimpleNamespace(ts=dates[use].to_numpy()),tr=np.arange(len(use)))
             hist=FB.Boot(dummy,start=START)._histories(500,500,20,20261031)
@@ -143,6 +149,8 @@ for home,plan in ROSTERS.items():
             table=TABLE.make_table(Wv,Cv,B)
             parity+=ENGINE.parity_check(Wv,Cv,table,hist[:2],f,params,f"{home}/{scenario}")
             result=ENGINE.run_table(table,hist,500,params);y1=ENGINE.run_table(table,hist,250,params)[:,0]
+            paid_by_n=np.r_[0.,np.cumsum(params[5])]
+            assert np.array_equal(result[:,0],paid_by_n[result[:,1].astype(int)])
             t=pd.DataFrame(result,columns=["paid","payouts","days","blown","first"]);t["y1"]=y1
             t.to_csv(OUT/f"{home}_{scenario}_accounts.csv",index=False)
             t6=np.where(t.payouts==6,t.days,np.inf)
