@@ -186,6 +186,15 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   Limits/next check: no owned dated VX/spot curve panel; a separate justified project would first reconcile
   one timestamped curve, physical/pricing calibration and a cash ledger. No current NQ/ES/Apex allocation earned.
 
+E09 source follow-up — Dogs of the Dow conceptual review, SSRN2697334 (2026-10-31):
+[review](results/dogs_dow_2697334_20261031.md). The source describes mixed cited evidence and cases where
+apparent outperformance disappears after risk, costs and taxes; it performs no original execution/return test.
+For any separately justified equity replication, reconcile actual price P&L, dividend cash, corporate actions,
+fees and taxes. Do not double-count distributions through adjusted prices plus cash credits. That cash-accounting
+check is our implementation lesson, not an execution saving measured by this paper. Historical yield ranks need
+as-of dividends and membership; yield alone does not establish safe recovery or current net alpha.
+No strategy trial, promising-queue entry, plan placement or execution-policy change is earned from this source.
+
 ### E10 — Liquidity compensation, turnover and costs
 
 Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
