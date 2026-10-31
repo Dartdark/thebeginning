@@ -1,0 +1,120 @@
+{
+  "stocks": {
+    "chronological_folds_and_pretrade_selection": true,
+    "policies": {
+      "PPO": {
+        "sessions": 503,
+        "fills": 6292,
+        "closed_realizations": 3154,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "A2C": {
+        "sessions": 503,
+        "fills": 6156,
+        "closed_realizations": 3052,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "DDPG": {
+        "sessions": 503,
+        "fills": 5174,
+        "closed_realizations": 2581,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "SELECTOR": {
+        "sessions": 503,
+        "fills": 5262,
+        "closed_realizations": 2623,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "PASSIVE": {
+        "sessions": 503,
+        "fills": 483,
+        "closed_realizations": 227,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "OVERLAY": {
+        "sessions": 503,
+        "fills": 1307,
+        "closed_realizations": 645,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "LINEAR": {
+        "sessions": 503,
+        "fills": 4227,
+        "closed_realizations": 2133,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "SELECTOR_2X_COST": {
+        "sessions": 503,
+        "fills": 5037,
+        "closed_realizations": 2514,
+        "clock_cash_fee_position_reconciliation": true
+      }
+    },
+    "all_checks_passed": true
+  },
+  "futures": {
+    "chronological_folds_and_pretrade_selection": true,
+    "policies": {
+      "PPO": {
+        "sessions": 1238,
+        "fills": 5632,
+        "closed_realizations": 2816,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "A2C": {
+        "sessions": 1238,
+        "fills": 7480,
+        "closed_realizations": 3740,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "DDPG": {
+        "sessions": 1238,
+        "fills": 15578,
+        "closed_realizations": 7789,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "SELECTOR": {
+        "sessions": 1238,
+        "fills": 7076,
+        "closed_realizations": 3538,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "PASSIVE": {
+        "sessions": 1238,
+        "fills": 3192,
+        "closed_realizations": 1596,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "OVERLAY": {
+        "sessions": 1238,
+        "fills": 8486,
+        "closed_realizations": 4243,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "LINEAR": {
+        "sessions": 1238,
+        "fills": 12380,
+        "closed_realizations": 6190,
+        "clock_cash_fee_position_reconciliation": true
+      },
+      "SELECTOR_2X_COST": {
+        "sessions": 1238,
+        "fills": 7040,
+        "closed_realizations": 3520,
+        "clock_cash_fee_position_reconciliation": true
+      }
+    },
+    "all_checks_passed": true
+  },
+  "all_checks_passed": true,
+  "dependencies": {
+    "torch": "2.5.1+cpu",
+    "stable-baselines3": "2.4.1",
+    "gymnasium": "1.0.0",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8"
+  }
+}

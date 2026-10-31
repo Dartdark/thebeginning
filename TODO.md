@@ -262,15 +262,16 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   all four Apex homes. No spot-only/subset/intraday proxy, return trial or allocation admitted.
   [Review](agents/codex/results/fx_low_frequency_1259661_review.md) · [Evidence](agents/codex/evidence/fx_low_frequency_1259661.md).
 
-- [ ] **Daily Dow-stock RL selector — WATCH METHOD / ORIGINAL ENGINE FAILS REPRODUCTION GATE (SSRN 3690996; 2026-10-30).**
-  Low-priority personal-account method lead: authors report 13.0% annual return, Sharpe 1.30 and -9.7% drawdown
-  in 2016–2020; not independently reproduced. Recovered exact paper-era source and verified public stock/benchmark
-  data. Five synthetic groups expose same-close observation/fills, fee-inclusive negative cash, fractional shares,
-  misleading fee counters and a paper/code turbulence mismatch. Stop before historical agent training or portfolio tests.
-  Resume only with a clarified frozen source/protocol: reconcile one causal feature → later executable fill and
-  fee-inclusive integer-share ledger, then universe/corporate-action, fold-local turbulence and seed/checkpoint audit.
-  No unbounded training, proxy futures conversion or allocation; correcting this engine would be a new protocol.
-  [Review](agents/codex/results/rl_ensemble_3690996_20261030.md) · [Five-group checks](analysis/outputs/codex_rl_ensemble_3690996_audit/mechanics.json).
+- [x] **Corrected stock + intraday MNQ RL selectors — TESTED / REJECT DESIGN (SSRN 3690996; 2026-10-30).**
+  User requested both corrected adaptations after the original-source audit. Frozen quarterly PPO/A2C/DDPG selector:
+  stocks2018–2019 lost$120 on$10,000 versus equal-weight+$1,790; fixed1MNQ2018–2022 made$2,090 versus
+  long-control+$5,404, and lost$5,188 at doubled costs. Both fail their prespecified advancement gates; no earned
+  personal,50K/150K evaluation or funded allocation. Later periods/seeds/portfolio tests were not earned.
+  Integer positions, later-bar fills, causal features and reconciled ledgers are implemented in a new bounded protocol;
+  the original paper's13%/Sharpe1.30 remain unreplicated. Static28-stock/no-dividend panel ends2020; futures condition
+  on complete observed NQ sessions as MNQ proxies. No rescue tuning or live changes.
+  [Build/results](agents/codex/results/rl3690996_build_20261030.md) · [Code guide](agents/codex/code/rl3690996/README.md) ·
+  [Original-source review](agents/codex/results/rl_ensemble_3690996_20261030.md).
 
 - [ ] **WASDE pre-release futures/options volume — NEEDS DATA AND SPECIFICATION (SSRN 4841490; 2026-10-30).**
   Lower-priority personal-account lead: author reports positive futures-volume and negative options-volume

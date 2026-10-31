@@ -1,0 +1,104 @@
+{
+  "profile": "futures",
+  "phase": "design",
+  "seed": 3690996,
+  "steps_per_algorithm_quarter": 8192,
+  "elapsed_seconds": 662.0775382518768,
+  "data_sha256": "81121ad5a1fa3635b72bba1c22fd0bbd6646d5599b553c97851351b746fb32f8",
+  "code": {
+    "codex_rl3690996_core.py": "e7b58ead9f436c34627fb7bfb0c355f7cce53ceccc67f802a4419dc9a70533b5",
+    "codex_rl3690996_env.py": "abc8c1abbe4fff19455ccec9a113d52ab6b48ea8c17ecfe20de2006b45c12356",
+    "codex_rl3690996_train.py": "00e12ae0f0902f0c50ae5504dbb56f0b32f7899909191580b4775d628d02ffd9"
+  },
+  "plan_commit": "30187666db966efde21fdbeb7e2c0bdc69927522",
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "torch": "2.5.1+cpu"
+  },
+  "definitions": [
+    "PPO",
+    "A2C",
+    "DDPG",
+    "SELECTOR",
+    "PASSIVE",
+    "OVERLAY",
+    "LINEAR",
+    "SELECTOR_2X_COST"
+  ],
+  "source_preparation": {
+    "stock": {
+      "raw_sha256": "1fa004731c88bc2e202ec30e5f59b4f35cb40ced0566135bdd564fdd8e2a63eb",
+      "assets": [
+        "AAPL",
+        "AXP",
+        "BA",
+        "CAT",
+        "CSCO",
+        "CVX",
+        "DIS",
+        "GS",
+        "HD",
+        "IBM",
+        "INTC",
+        "JNJ",
+        "JPM",
+        "KO",
+        "MCD",
+        "MMM",
+        "MRK",
+        "MSFT",
+        "NKE",
+        "PFE",
+        "PG",
+        "TRV",
+        "UNH",
+        "V",
+        "VZ",
+        "WBA",
+        "WMT",
+        "XOM"
+      ],
+      "rows": 2926,
+      "first": 20090102,
+      "last": 20200817,
+      "valid_days": 2421,
+      "excluded_names": [
+        "DD",
+        "RTX"
+      ],
+      "limits": [
+        "static author-provided universe, not point-in-time certified",
+        "dividends absent",
+        "factor-ratio split ledger is conditional, not verified corporate-action cash"
+      ]
+    },
+    "futures": {
+      "grid_sha256": "7d18e832e3d599cbf9aa66aba8da14286250d2aaee7c72b53189d0e4f4947900",
+      "admitted_days": 2354,
+      "valid_days": 2338,
+      "incomplete_days": 97,
+      "first": 20170501,
+      "last": 20261030,
+      "limits": [
+        "conditional on complete observed RTH sessions",
+        "NQ bars proxy MNQ executions",
+        "no actual contract/auction queue/latency certification"
+      ]
+    },
+    "defaults": {
+      "stock_capital": 10000.0,
+      "stock_fee": 0.001,
+      "stock_slip": 0.0005,
+      "stock_weight_cap": 0.1,
+      "futures_fee": 0.62,
+      "futures_tick": 0.25,
+      "futures_pv": 2.0,
+      "futures_daily_loss": 250.0,
+      "turbulence_quantile": 0.95,
+      "timesteps": 8192,
+      "primary_seed": 3690996
+    },
+    "script_sha256": "e7b58ead9f436c34627fb7bfb0c355f7cce53ceccc67f802a4419dc9a70533b5"
+  }
+}

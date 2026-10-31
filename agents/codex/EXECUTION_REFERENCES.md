@@ -1260,8 +1260,21 @@ E11 information clocks, E18 research/platform fill conventions and E43 accountin
   portfolio attribution remain unverified. Source daily cash-equity fees do not translate to native futures.
 - Next check only with clarified source/protocol: one causal observation/order/fill/cash/share trace, then verified
   universe, corporate actions, fold-local features, turbulence, seeds and benchmarks before economic replication.
-- Status: original engine fails reproduction admission; broader personal-allocation method is a low-priority queue
+- Status at the original source-only review: original engine fails reproduction admission; broader personal-allocation method is a low-priority queue
   lead. Zero historical agent training, strategy-return trials, portfolio comparisons, native savings or live changes.
+
+- Follow-up2026-10-30: the user explicitly requested new corrected stock and intraday MNQ protocols. Both Python
+  engines are now built and tested;12 synthetic mechanics groups pass. Independent CSV replay reconciles integer
+  stock cash/shares/NAV and native-MNQ fill/roundtrip/daily fees, slippage and P&L for all declared policies.
+  [Frozen build plan](plans/rl3690996_build_20261030.md), [results](results/rl3690996_build_20261030.md),
+  [guide](code/rl3690996/README.md). These are adaptations, not repaired-source TableII reproductions.
+- Economic outcome: stock selector-$120 on$10,000 in2018–2019 (equal-weight+$1,790); fixed1MNQ selector+$2,090
+  in2018–2022 (long control+$5,404), doubled-cost selector-$5,188. Both fail design advancement. Stock turnover
+  costs exceed its executed-path gross gain. Correct accounting does not establish an RL edge or savings.
+- Remaining boundary: dividends/point-in-time stock lineage, opening-auction execution and actual MNQ contract quotes
+  remain uncertified; incomplete futures sessions are enumerated. The$250 session loss budget is not an Apex floor.
+  No dependent holdout/seeds/account contribution, live changes or measured execution savings; retain this negative
+  result instead of reopening the same definition. Any materially different project needs its own source/evidence gate.
 
 ### E09/E11 follow-up — Duration, signed price impact and constructed event clocks
 
