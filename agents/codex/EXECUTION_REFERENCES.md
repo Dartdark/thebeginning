@@ -725,6 +725,28 @@ Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, sha
 Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
 Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E40-E42 during this handoff merge; existing Codex E29-E38 identifiers are retained.
 
+### E44 — Cointegrated log prices do not specify an executable futures hedge
+
+Source/review + date: Ungever (2015), [SSRN2896370](https://ssrn.com/abstract=2896370),
+user-uploaded full text; [review](results/agri_cointegration_ssrn2896370.md), 2026-10-30.
+Execution question and useful lesson: translate a statistical log-price spread into
+explicit native-contract quantities, multipliers and roll/cash accounting. Equal
+dollar legs and cointegration coefficients do not automatically imply identical
+portfolios or market neutrality. Resolve trade direction before implementing it.
+Evidence: source inspection, not return replication. Upper-bound prose on p.30
+shorts cotton/buys coffee; the profit equation on p.31 is long cotton/short coffee.
+Costs are ignored (p.27); only two/three completed trading-period trades support
+the reported annualizations. No independently verified execution savings or alpha.
+Market/platform limits: Bloomberg daily rolled agricultural futures, 2004–15;
+trading holds average 159/142 days. Not intraday Apex or NQ/ES evidence.
+Data/prerequisites: timestamped native-contract prices, unambiguous leg direction,
+integer hedge and rebalance rule, both-leg and roll costs, capital/margin definition,
+and per-trade ledger. Matching local price histories were not found.
+Smallest justified next check: only reconsider with corrected source specification
+and stronger independent net evidence; no proxy or intraday conversion is earned.
+Status: retain accounting/implementation caution; source-defined strategy rejected
+at evidence gate, zero return trials, no promising-candidate or trading-plan change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
