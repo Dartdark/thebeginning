@@ -1,0 +1,67 @@
+{
+  "source_commit": "8759abf55f0cad7304a6bcd62b9c368d8f8aa6cd",
+  "paper_sha256": "0708671686a07b5a759629f1b32a85acbee6d7d0a5a1bf9c776ccdf72bb50eb2",
+  "owned_schema_dates": [
+    {
+      "path": "data/VIX_daily.csv",
+      "columns": [
+        "DATE",
+        "OPEN",
+        "HIGH",
+        "LOW",
+        "CLOSE"
+      ],
+      "rows": 9301,
+      "first_date": "1990-01-02",
+      "last_date": "2026-10-23",
+      "sha256": "98d98bc0f60e2ce4cf89ad7f2816013824f9e5ca3409ebfa4375c4ffe7794aa3"
+    },
+    {
+      "path": "data/VIXY_daily.csv",
+      "columns": [
+        "date",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "adjclose"
+      ],
+      "rows": 3975,
+      "first_date": "2011-01-04",
+      "last_date": "2026-10-23",
+      "sha256": "404d2dfb96e904feeb56e99cdf7294eacb5fcc6bcf66acaeb3b0535b52d9f46d"
+    },
+    {
+      "path": "data/SPY_daily.csv",
+      "columns": [
+        "DATE",
+        "CLOSE"
+      ],
+      "rows": 2457,
+      "first_date": "2017-01-03",
+      "last_date": "2026-10-09",
+      "sha256": "5fab02f9223f1ac88a0bdff72a8bdf0b1a9020099ac1f3284998bfa8b4c280dd"
+    },
+    {
+      "path": "data/VIX3M_daily.csv",
+      "columns": [
+        "DATE",
+        "OPEN",
+        "HIGH",
+        "LOW",
+        "CLOSE"
+      ],
+      "rows": 4301,
+      "first_date": "2009-09-18",
+      "last_date": "2026-10-23",
+      "sha256": "be9ccf151866896985e95c9cc56c443cb1bbcb881087f6e3be776e2702c3d438"
+    }
+  ],
+  "prior_dated_VX_scratch_exists": false,
+  "prior_dated_VX_manifest": "agents/codex/inputs/calvados_2379985_20261030/downloaded_panel_manifest.json",
+  "candidate_ETP_filenames": [],
+  "economic_trials": 0,
+  "price_returns_read": false,
+  "limitation": "Filename/schema/date audit, not an exhaustive inventory or source reproduction."
+}

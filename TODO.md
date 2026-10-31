@@ -239,6 +239,29 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   naked Calvados component. [Review](agents/codex/results/fomc_vx_2544445_review.md) ·
   [Evidence](agents/codex/evidence/fomc_vx_2544445.md) · [Data gate](agents/codex/inputs/fomc_vx_2544445/data_gate.md).
 
+- [ ] **ANANTA interest-rate differential momentum — NEEDS DATA AND SPECIFICATION (SSRN 2419243).**
+  Low-priority personal FX lead: two-year swap-rate differential changes across eleven currencies, rebalanced
+  at London 18:00 and New York 17:00. Author reports net 3.5/5 bp per dollar traded in 2003–2013; unverified.
+  Literal pseudocode reverses its verbal rate-momentum direction; percentile, zero-divisor and gross-sizing
+  rules need clarification. A declared synthetic interpretation exceeds the stated 20% concentration bound.
+  Need synchronized original-vintage swap/FX snapshots, availability/fill clocks, financing and native costs.
+  Owned data and bounded BOE/ICE/CME checks did not provide the exact panel. Resume only with genuinely new
+  matching inputs/source clarification: reconcile one two-clock day and cashflows before a committed data/cost
+  gate. Continuous 6E, daily policy rates or OIS proxies are not an exact replication. No paid data or returns
+  attempted; no Apex adaptation, allocation or tier promotion.
+  [Review](agents/codex/results/ananta_2419243_review.md) · [Evidence](agents/codex/evidence/ananta_2419243.md).
+
+
+- [ ] **Monthly low-frequency FX momentum — NEEDS DATA / SOURCE CONVENTIONS (SSRN 1259661; 2026-10-30).**
+  Lower-priority personal lead: recursively fitted HP trend (monthly penalty 14,400), then MA(1,2) on the trend.
+  Author's 1993–2008 basket Sharpe 0.76 versus raw MA 0.41; carry included, costs ignored, not independently
+  reproduced. Public Fed-mirror daily FX panel and metadata acquired; euro starts 1999, source carry/pre-euro
+  history and exact basket/quote/endpoint conventions missing. Kernel bandwidth units also unresolved.
+  Resume only on genuinely new matching inputs or author clarification: reconcile one dated month and signal
+  vintage, then coverage/power/cost gate before a committed bounded HP/raw-MA design test. Monthly holds fail
+  all four Apex homes. No spot-only/subset/intraday proxy, return trial or allocation admitted.
+  [Review](agents/codex/results/fx_low_frequency_1259661_review.md) · [Evidence](agents/codex/evidence/fx_low_frequency_1259661.md).
+
 - [ ] **WASDE pre-release futures/options volume — NEEDS DATA AND SPECIFICATION (SSRN 4841490; 2026-10-30).**
   Lower-priority personal-account lead: author reports positive futures-volume and negative options-volume
   associations with subsequent 5–20-day agricultural futures returns (1995–2018); no net strategy independently
@@ -260,7 +283,21 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   evidence/preregistration gate before returns. Source brings no new dataset; existing acquisition blockers remain.
   Multiday description earns no Apex placement; personal contribution is unverified. Zero new trials.
   [Review](agents/codex/results/till_2942340_20261031.md) · [Evidence](agents/codex/evidence/till_2942340_20261031.md).
+  [Actual acquisition follow-up](agents/codex/results/commodity_roll_data_20261031.md): downloaded pinned public
+  WHEAT/WHEAT_mini multi-maturity files and read2018/current roll documentation. Standard WHEAT holds annual
+  December contracts, not the required nearby pair. Mini prices have delivery-cycle identities but missingness,
+  clock and native identity remain unverified. Complete free2018–22paired ZW panel is not admitted; zero returns.
 
+
+- [ ] **Monthly commodity skewness — OFFLINE CODE BUILT / NEEDS FULL PANEL (SSRN 3507947; 2026-10-30).**
+  Personal-account lead: monthly long four lowest-skew / short four highest-skew across 22 commodities.
+  Authors report 6.67% annual return after modeled costs and -0.32 equity correlation; neither is independently
+  reproduced or established for our portfolio. Offline planner, schema and synthetic checks built at the user's request.
+  Need identified full-universe daily contracts/settlements, return/roll conventions and native cost/cash accounting.
+  Smallest next check: map those inputs to the packet and reconcile one formation/roll month before a separately
+  committed return test; do not substitute CL/GC or an NQ daily-flat rule. No economic trials or plan allocation.
+  [Source review](agents/codex/results/ssrn_3507947_review_20261030.md) ·
+  [Code/checkpoint](agents/codex/results/commodity_skew_build_20261030.md).
 
 - [ ] **FX carry/trend multi-strategy — NEEDS SOURCE CLARIFICATION / DATA (SSRN 3322717; reviewed 2026-10-30).**
   Personal-account research only, low priority. Merit: author reports Sharpe 0.88 versus 0.55 for its best single

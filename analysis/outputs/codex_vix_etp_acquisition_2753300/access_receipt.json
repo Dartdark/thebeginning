@@ -1,0 +1,67 @@
+{
+  "task": "User asks to obtain matching inputs for SSRN2753300",
+  "date": "2026-10-30",
+  "raw_root": "/workspace/vix2753300_acquisition",
+  "acquired": [
+    {
+      "source": "Pustak-007/ml_risk_overlay",
+      "commit": "7a8df4089664c339de9a4c5900cecdbe9d5b954e",
+      "archive_bytes": 4240816,
+      "archive_sha256": "71dc39799b8290e608b1fca8c62b55e6c58fc1d9975ad4ba41a34f42d4fe330b",
+      "url": "https://codeload.github.com/Pustak-007/ml_risk_overlay/zip/7a8df4089664c339de9a4c5900cecdbe9d5b954e",
+      "scope": "Extracted 240 raw monthly VX CSVs; metadata only; raw not redistributed."
+    },
+    {
+      "source": "systematicinvestor/SIT",
+      "commit": "f9b1185036d9a97764e8c5e12f091b8338926190",
+      "archive_bytes": 1278507,
+      "archive_sha256": "99c7a0035792421320be9c9c4ba0c300b90c11638d8e31b67356ae8cf4659316",
+      "url": "https://codeload.github.com/systematicinvestor/SIT/zip/f9b1185036d9a97764e8c5e12f091b8338926190",
+      "scope": "ZIP inventory/source text discovery only; no XIV/VXX-named members. No downloaded code executed."
+    },
+    {
+      "source": "xjcarter/data",
+      "commit": "7d705ada2d3ca483700eb695772e7de9cfc75cbc",
+      "url": "https://raw.githubusercontent.com/xjcarter/data/7d705ada2d3ca483700eb695772e7de9cfc75cbc/VXX.csv",
+      "sha256": "275c50ff7a4137c381802bebf13ae4f1c59250bd281e3f96b755e8c284a5971f",
+      "scope": "VXX CSV begins2018-01-25; not admitted as original source-era VXX."
+    },
+    {
+      "source": "ChartExchange public table",
+      "url": "https://chartexchange.com/symbol/nasdaq-xiv/historical/",
+      "scope": "Parsed converted connected-web text for inspected table portions into a 364-row secondary OHLCV snapshot; original HTML/complete history not obtained; no native provenance or adjustment certification."
+    }
+  ],
+  "failed_or_insufficient": [
+    {
+      "source": "systematicinvestor/SIT.test",
+      "result": "Public page404; no archive acquired."
+    },
+    {
+      "source": "https://dl.dropboxusercontent.com/s/jk6der1s5lxtcfy/XIVlong.TXT",
+      "result": "Prior attempt inaccessible; ordinary www.dropbox.com/s/...?...dl=1 share download form also inaccessible through connected web."
+    },
+    {
+      "source": "https://dl.dropboxusercontent.com/s/950x55x7jtm9x2q/VXXlong.TXT",
+      "result": "Prior attempt inaccessible; ordinary www.dropbox.com/s/...?...dl=1 share download form also inaccessible through connected web."
+    },
+    {
+      "source": "https://www.sixfigureinvesting.com/2013/09/backtests-for-volatility-etn-etf/",
+      "result": "Vendor describes original synthetic closing histories for purchase; no exact-field/date quotation or data payload obtained."
+    },
+    {
+      "source": "https://www.sixfigureinvesting.com/2014/09/simulating-open-high-low-vxx-vixy-tvix-uvxy-xiv-svxy/",
+      "result": "Vendor states XIV OHL stopsAugust2017 and synthetic futures opens diverge from ETP session opens. Package alone insufficient for assumed next-open termination replay."
+    },
+    {
+      "source": "https://www.sixfigureinvesting.com/shop/",
+      "result": "No usable current prices/checkout surfaced in inspected page."
+    }
+  ],
+  "controls": [
+    "Inherited network proxy and TLS trust preserved; allowed GitHub downloads only in shell.",
+    "No paywall bypass, credentials, purchase, external messages, original-data overwrite or raw-data redistribution.",
+    "No returns, basis signals, post-selection market substitutions or fitted parameters."
+  ],
+  "admission": "PARTIAL_ACQUISITION_NOT_READY_FOR_RETURNS"
+}

@@ -1,0 +1,207 @@
+          Mean Reversion + Beta-Zero Targeting
+
+
+
+
+                               A Long/Short Equity Strategy by
+                                        Raj Krishnamurthy
+
+
+
+
+Summary                                                                                  2
+Motivation and Rationale                                                                 2
+Current Methodology                                                                      3
+Initial Results                                                                          3
+Next Steps and Analysis Iterations                                                       5
+Academic References                                                                      5
+Performance Update                                                                       6
+Corrections                                                                              7
+
+
+
+Krishnamurthy                                                                                1
+
+
+                       Electroniccopy
+                     Electronic   copyavailable
+                                       available at:
+                                                 at: https://ssrn.com/abstract=3124271
+                                                     https://ssrn.com/abstract=3124271
+                                                Summary
+
+      Research supports the idea that a mean reversion strategy, particularly with a near-zero beta, can be
+successful. These findings were examined by creating and backtesting an algorithm that would trade
+autonomously while following a set of instructions with optimized parameters. With the results from the
+backtest and live paper trading, it can be concluded that the strategy could plausibly perform well, but some
+improvements should be made to make it more robust.
+
+
+
+
+                                  Motivation and Rationale
+
+        The idea of creating an algorithm that would trade on its own and perform well is interesting both
+personally and professionally. To that end, after considering potential strategies, a mean reversion strategy
+with a beta-zero targeting overlay was chosen as a starting point.
+
+       Market research reports evidence that returns are negatively serially correlated.2 The hypothesis that
+stock prices follow a random walk can be rejected1 and it can be shown that there is significant
+autocorrelation in long-horizon returns.2 If implemented properly, a mean reversion strategy can be used to
+generate alpha - a suggestion supported by Fama and French.
+
+         In addition to mean reversion, a mechanism that would minimize the portfolio’s beta could enhance
+performance. Black, Jensen, and Scholes [BJS, 1972] and Miller and Scholes [1972] found that in the period
+from 1931 through 1965, low-beta stocks in the United States did better than the capital asset pricing model
+predicts, while high-beta stocks did worse. Several authors find that this pattern continued in subsequent
+years, at least through 1989. Fama and French extend it through 1990.1 Extending the same idea to portfolios
+- that low-beta portfolios will outperform high-beta portfolios over long periods of time - could prove to be
+true.
+
+       Quantopian.com, a website that provides historical data and an online development environment, was
+used to code the algorithm in Python and run backtests.
+
+
+
+
+Krishnamurthy                                                                                                   2
+
+
+                           Electroniccopy
+                         Electronic   copyavailable
+                                           available at:
+                                                     at: https://ssrn.com/abstract=3124271
+                                                         https://ssrn.com/abstract=3124271
+                                     Current Methodology
+
+       The algorithm is outlined below:
+
+Mean Reversion
+1. After the market closes on Friday, scrub the week’s trading data to find the stocks with the highest dollar
+   volume liquidity. In this case, the top 3% of stocks by dollar volume in a one-day lookback.
+2. Define the “low return group” as the set of the stocks with the bottom 3.6% of weekly returns among
+   those in the high dollar volume group
+3. Define the “high return group” as the set of the stocks with the highest 0.4% of weekly returns among
+   those in the high dollar volume group
+4. Buy the low return group and short the high return group on Monday at noon
+Beta-Zero Targeting
+5. Buy/short the index (SPY) and/or the 20-year treasury bond (TLT) to target a beta of 0 (relative to SPY),
+   based on a one-year lookback
+
+      The variables here - shown in red above - were all datamined to produce the best results in backtests,
+so some more thought should be put into their exact values for a more robust solution. Going forward,
+perhaps a Monte Carlo analysis or some more research could aid in finding ideal parameters.
+
+
+                                            Initial Results
+
+
+
+
+                                                                                  Fig. 1: Ten Year Backtest Results
+Krishnamurthy                                                                                                    3
+
+
+                          Electronic copy available at: https://ssrn.com/abstract=3124271
+      A ten-year backtest showed promising results. In a backtest from 1/1/2007 to 1/1/2017, the strategy
+produced a total return of 1303.51% against an S&P 500 total return of 93.16%, or an annualized return of
+30.23% against a benchmark annualized return of 6.81%.
+
+         The algorithm began paper trading on 1/23/17, and its results are below in Fig. 2. While the sample
+size is limited, it is performing well out-of-sample.
+
+
+
+
+                                                              Fig. 2: Live Paper Trading Results, 1/23/17-10/3/17
+
+
+
+
+Krishnamurthy                                                                                                  4
+
+
+                          Electronic copy available at: https://ssrn.com/abstract=3124271
+                         Next Steps and Analysis Iterations
+
+•   Optimization vs. Robustness
+
+        The values of the algorithm’s current parameters make it somewhat optimized, but its robustness can
+        be improved. Its maximum drawdown since it began trading is -10.52%, which is far from ideal. A
+        Monte Carlo analysis could be performed to ascertain the ideal parameters for the algorithm.
+
+•   Sector Concentration Considerations
+
+        Because the strategy focuses solely on high dollar volume stocks, highly traded sectors are
+        automatically favored. For example, healthcare and pharmaceutical stocks are often shorted the week
+        after news of their successful drug trials. A check could be put into place to limit sector concentration
+        to lower risk.
+
+•   Potential Role of Human Intervention
+
+        The fundamentals are ignored in purely technical strategies like this one, so mistakes are bound to be
+made without human intervention - for example, this strategy went long Equifax the Monday after
+their data breach was announced. Using the algorithm as a guide rather than a rulebook is necessary.
+A potential solution could involve producing the next week’s proposed trades on Friday after the
+market closes and then doing research over the weekend to validate those trades before execution.
+
+
+
+
+                                    Academic References
+
+
+1. Black, F. (1993). Beta and Return. The Journal of Portfolio Management, 20(1), 8-18.
+
+2. Ceccheti, S.G., Lam, P., & Mark, N.C. (1990). Mean Reversion in Equilibrium Asset Prices.
+
+       American Economic Review, 80(3), 398-418.
+
+3. Poterba, J.M., & Summers, L.H. (1988). Mean Reversion in Stock Prices: Evidence and
+
+       Implications. Journal of Financial Economics, 22(1), 27-59.
+
+
+
+
+Krishnamurthy                                                                                                    5
+
+
+                          Electronic copy available at: https://ssrn.com/abstract=3124271
+                                     Performance Update
+
+Below are updated performance metrics as of 1/23/18, one year since the start of live trading.
+
+
+
+
+                                                              Fig. 3: Live Paper Trading Results, 1/23/17-1/23/18
+
+
+
+
+Krishnamurthy                                                                                                  6
+
+
+                          Electronic copy available at: https://ssrn.com/abstract=3124271
+                                                Corrections
+
+        Upon going over the code while attempting to refine the strategy, it was discovered that a one-day lookback was
+being used to define the high dollar volume group rather than a five-day lookback. This has been corrected in the
+methodology section on page 3, but because the intention was to use a five-day lookback rather than a one-day
+lookback, 10-year backtest results for the corrected algorithm are shown below and it remains to be seen how well the
+corrected algorithm performs while live paper trading.
+
+
+
+
+                                                            Fig. 4: Ten Year Backtest Results, Corrected Algorithm
+
+
+
+
+Krishnamurthy                                                                                                         7
+
+
+                            Electronic copy available at: https://ssrn.com/abstract=3124271
+

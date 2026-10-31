@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:4494963",
+  "ssrn_id": "4494963",
+  "title": "Sector Trading and Bubble Riding Behavior: Construction and Evaluation of Trading Strategy Based on Bubble Test",
+  "authors": [
+    "Haoran Liu",
+    "O-Chia Chuang",
+    "Jin Xu"
+  ],
+  "url": "https://ssrn.com/abstract=4494963",
+  "verdict": "dont_test",
+  "full_text_read": true,
+  "evidence_level": "full_source_and_table_arithmetic_only",
+  "report_path": "agents/codex/results/bubble_riding_4494963_review_20261031.md",
+  "source_sha256": "d03d8a7c44ac61089e65cbd28b08b62771cd1106ec9ab5927d9dfa1190080c8d",
+  "source_revision": "Uploaded15-page preprint, PDF modified2023-06-29; no independently checked revision history",
+  "source_artifact": {
+    "path": "agents/codex/inputs/bubble_riding_4494963_20261031/source.pdf",
+    "sha256": "d03d8a7c44ac61089e65cbd28b08b62771cd1106ec9ab5927d9dfa1190080c8d",
+    "permission": "owned_upload",
+    "provenance": "sediment://file_00000000667882309182643c44b0523f",
+    "access_method": "download_file, pdftotext -layout; all15 pages read and Table4/5 visually inspected"
+  },
+  "new_economic_trials": 0,
+  "updated_at": "2026-10-31T02:48:51.380585+00:00",
+  "summary": "Weekly Chinese sector rotation claims13.41% versus11.87%; daily costs undermine returns. No eligible owned-futures candidate.",
+  "about": "Use GSADF bubble flags to rotate among ten CSI300 sectors, otherwise broad index.",
+  "findings": "Author-selected two-period rule claims13.41% annually2006\u20132020. Daily variants trail BH after costs; no independent return replication.",
+  "mechanism": "Proposed sector trend persistence and delayed arbitrage; no identified forced flow.",
+  "build_on": "Method reference only. No specific justified owned-market adaptation or new TODO candidate. Current books not tested.",
+  "execution_reference": "E10 follow-up bubble frequency/costs",
+  "origin": "direct_user_upload_review"
+}

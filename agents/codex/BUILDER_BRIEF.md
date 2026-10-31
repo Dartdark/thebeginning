@@ -146,11 +146,16 @@ invent numbers to fill a table. Keep the full detail in the linked report.
 
 ## Paper-review questions (user, 2026-10-29)
 
-For every paper review, answer these four questions explicitly in the saved review and in chat:
+For every paper review, answer these five questions explicitly in the saved review and in chat:
 1. What is it about?
 2. What does it find?
 3. Why does it make money, if it does? Distinguish a demonstrated return from a proposed mechanism or a cited study.
 4. Can we build on it? Explain fit to our markets/plans, missing prerequisites and the smallest justified next step.
+5. Can a strategy code be made? State yes, no, or only with specified missing inputs. Identify whether the paper
+   supports a directional strategy, an execution algorithm or a research tool, and outline the implementable
+   rules/data requirements. Code feasibility does not establish profitability or waive the testing gates.
+
+Question 5 is the user's standing addition for all project chats (2026-10-30); keep it separate from question 4.
 
 Use the answers to decide whether a deeper look is warranted. Negative findings and methodological value count;
 do not force a trading hypothesis from a paper that does not support one. Retain the five-line Summary limit,

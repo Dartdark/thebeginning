@@ -79,3 +79,8 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `funded_strategies/
 - **Papers / articles:** summarize (what it's about, findings, why it should make money), say
   whether a strategy can be built on top of it as a foundation, test it when there's a fit,
   and **rank every tested item in `TIER_LIST.md`** (S–F).
+  **Standing addition for all project chats (user, 2026-10-30):** explicitly answer a fifth question in the
+  saved review and in chat: **"Can a strategy code be made?"** Keep this separate from "Can we build on it?"
+  State yes/no/conditional, the implementable rule and missing rules/data; distinguish a directional
+  strategy from an execution algorithm or research tool. Coding feasibility does not establish profitability
+  or waive evidence, preregistration, validation or live-operation boundaries.

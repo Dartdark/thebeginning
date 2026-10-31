@@ -1,5 +1,11 @@
 # User collaboration preference
 
+2026-10-30: Across project chats, every paper review must explicitly answer the fifth question,
+**"Can a strategy code be made?"**, in the saved review and in chat, alongside the existing four questions.
+Say whether code is feasible now, infeasible from the source, or requires specific missing rules/data.
+Distinguish a directional strategy from an execution algorithm/research tool and code feasibility from
+evidence of profitability. Shared entry points: `AGENTS.md`, `CLAUDE.md`, and `BUILDER_BRIEF.md`.
+
 2026-10-28: Take initiative, state the recommended next step, and implement it when the user approves. Complete already approved work without repeatedly requesting confirmation. Distinguish a built/reviewable research artifact from installed or live changes. This preference does not authorize live trading, broker/VPS configuration changes, external messages, or unrelated work.
 
 2026-10-28, superseded preference: initially requested complete code pasted into chat.

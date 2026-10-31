@@ -1,0 +1,85 @@
+{
+  "scope": "deterministic source/clock checks; zero economic trials and no observed market returns",
+  "source_sha256": "94876145e51529535b40b61d60e9475e5c01d17fcedf5be93ad0577751952fe8",
+  "script_sha256": "506cb7b5e6925d2fc2ea914d86b5c29afaa5e102423ae15f1bae4f781c6b2973",
+  "pair_example": {
+    "mean_difference": 1.0,
+    "current_difference": 2.0,
+    "subsignal": 1.0,
+    "literal_country1_change": 1,
+    "literal_country2_change": -1,
+    "finding": "Country2 relative rate rises, but literal formula sells its currency"
+  },
+  "concentration_example": {
+    "seed": 2419243,
+    "interpretation": "global median, raw scores then normalize ten tradable legs",
+    "currency_order": [
+      "AUD",
+      "CAD",
+      "CHF",
+      "DKK",
+      "EUR",
+      "GBP",
+      "JPY",
+      "NOK",
+      "NZD",
+      "SEK",
+      "USD"
+    ],
+    "average_yields": [
+      0.6347456001866629,
+      4.516821989861977,
+      2.484693877810695,
+      3.45675354797186,
+      2.06567357904296,
+      0.40337007871720487,
+      4.679999864851022,
+      3.3696831731704484,
+      4.437985637966111,
+      0.8626375440853947,
+      2.370934136027699
+    ],
+    "current_yields": [
+      0.5515971665502255,
+      4.521514598527551,
+      2.3543759984653883,
+      3.459398309309096,
+      1.8684166802362743,
+      0.3638212557245669,
+      4.7450446138643185,
+      3.392158139999389,
+      4.46838862164777,
+      0.93267482066395,
+      2.255122737100395
+    ],
+    "scores": [
+      1,
+      1,
+      5,
+      -2,
+      10,
+      -1,
+      -5,
+      -4,
+      -2,
+      -5,
+      2
+    ],
+    "gross_tradable_score": 36,
+    "maximum_absolute_weight": 0.2777777777777778,
+    "finding": "20% bound does not follow under this declared interpretation; extra sizing rules needed"
+  },
+  "zero_mean_differential_undefined": true,
+  "clocks": [
+    {
+      "date": "2014-03-20",
+      "london_close_ct": "2014-03-20T13:00:00-05:00",
+      "ny_close_ct": "2014-03-20T16:00:00-05:00"
+    },
+    {
+      "date": "2014-04-10",
+      "london_close_ct": "2014-04-10T12:00:00-05:00",
+      "ny_close_ct": "2014-04-10T16:00:00-05:00"
+    }
+  ]
+}

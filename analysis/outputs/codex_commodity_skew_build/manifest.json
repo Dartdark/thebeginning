@@ -1,0 +1,26 @@
+{
+  "status": "SYNTHETIC_ENGINEERING_ONLY",
+  "economic_trials": 0,
+  "checked_base_commit": "b6cf6ca1e586041cc4d5f7ec70fe7d1d907ca49c",
+  "fixture_seed": 731,
+  "checks": 29,
+  "checks_passed": true,
+  "cli_passed": true,
+  "commands": [
+    "python3 agents/codex/test_commodity_skew.py",
+    "python3 agents/codex/research/commodity_skew/synthetic_example.py scratch_data/commodity_skew_packet.json",
+    "python3 analysis/codex_commodity_skew.py scratch_data/commodity_skew_packet.json --output analysis/outputs/codex_commodity_skew_build/synthetic_plan.json"
+  ],
+  "sha256": {
+    "analysis/codex_commodity_skew.py": "f3fcb72118c698d7236fa80458dd51b373d27e9d8388653c914ce4056597de9e",
+    "analysis/codex_rad_double_sort.py": "911505138885afdb08f02e44dbfaac7e84dd5cf9aeea1912907def1a16326510",
+    "agents/codex/test_commodity_skew.py": "4f567b6c1a9fa022301734584012e7992d7a40bed6940499004c26936d5fca1e",
+    "agents/codex/research/commodity_skew/synthetic_example.py": "fc5e19f9d0f49e09479e4c2fb9896eb5c5727e3be6b831c45dc5d633dbbf4d0c",
+    "scratch_data/commodity_skew_packet.json": "bf13594d444c24dca6cec7d25d7873d20e83c31d4ee86d4a92e9190ab77de8e0",
+    "analysis/outputs/codex_commodity_skew_build/synthetic_plan.json": "c2676314ae50f2012c1c40743a2f4055edd1d6c5e23a31bcbdb49dc73e82d97b",
+    "analysis/outputs/codex_commodity_skew_build/engineering_checks.txt": "4d1c8fcb3249ba39ad38dc54f32e08cba54fbc308d414a545a0b0d9614cc14bd",
+    "agents/codex/plans/commodity_skew_build_20261030.md": "aba545cda737c63fbd381164f20cd6aeaf31df35f384886a855e19f4711b0064"
+  },
+  "original_pre_rebase_build_plan_commit": "b6cf6ca1",
+  "build_plan_path": "agents/codex/plans/commodity_skew_build_20261030.md"
+}
