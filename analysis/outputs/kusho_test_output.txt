@@ -1,0 +1,168 @@
+Kusho FAR final, Kusho v9 and C03 (Kusho's intraday version), user's files 2026-10-23 (checks/candidates/kusho/).
+
+== FAR ==
+   FAR, fills ours                    n= 2723 win 58% $   97 PF 1.34 t  4.6 yrs+ 9/9 | 18-22 $  93 (t 3.8) | 23+ $ 102 (t 2.7)
+     longs                            n= 2723 win 58% $   97 PF 1.34 t  4.6 yrs+ 9/9 | 18-22 $  93 (t 3.8) | 23+ $ 102 (t 2.7)
+   by year: {2018: 15214, 2019: 5212, 2020: 46681, 2021: 34122, 2022: 43494, 2023: 34836, 2024: 40922, 2025: 33272, 2026: 10060}
+   exits: {'stop': 1894, 'eod': 441, 'target': 388} | swing 88% | held overnight 5% | per MNQ $9.69, 311 a year
+   held over a weekend: 122 trades, $114,950 of $263,813 (44%); the other 2601 trades $57 each
+   tail: best 10% $668,348, rest $-404,535
+   FAR, fills touch                   n= 2759 win 58% $  106 PF 1.38 t  5.0 yrs+ 9/9 | 18-22 $ 100 (t 4.2) | 23+ $ 114 (t 3.0)
+   placebo (random signal bars in the window, same limit order / exits, 5 runs, ~3274 trades): $21 (max $39) vs $97
+     no wick condition                n= 3242 win 57% $   84 PF 1.27 t  4.1 yrs+ 9/9 | 18-22 $  82 (t 3.4) | 23+ $  85 (t 2.5)
+     no EMA condition                 n= 4814 win 56% $   49 PF 1.18 t  3.4 yrs+ 9/9 | 18-22 $  55 (t 3.4) | 23+ $  39 (t 1.5)
+
+== v9 ==
+   v9, fills ours                     n= 3149 win 57% $  108 PF 1.37 t  5.3 yrs+ 9/9 | 18-22 $ 108 (t 4.5) | 23+ $ 108 (t 3.0)
+     longs                            n= 2698 win 58% $   99 PF 1.35 t  4.6 yrs+ 9/9 | 18-22 $  95 (t 3.9) | 23+ $ 104 (t 2.7)
+     shorts                           n=  451 win 57% $  165 PF 1.50 t  2.6 yrs+ 5/9 | 18-22 $ 175 (t 2.2) | 23+ $ 145 (t 1.4)
+   by year: {2018: 21106, 2019: 2072, 2020: 46805, 2021: 29748, 2022: 99506, 2023: 33214, 2024: 37807, 2025: 50230, 2026: 20708}
+   exits: {'stop': 2183, 'target': 498, 'eod': 468} | swing 87% | held overnight 4% | per MNQ $10.84, 359 a year
+   held over a weekend: 134 trades, $137,488 of $341,195 (40%); the other 3015 trades $68 each
+   tail: best 10% $805,238, rest $-464,044
+   v9, fills touch                    n= 3189 win 58% $  117 PF 1.41 t  5.7 yrs+ 9/9 | 18-22 $ 115 (t 4.8) | 23+ $ 118 (t 3.3)
+   placebo (random signal bars in the window, same limit order / exits, 5 runs, ~3817 trades): $0 (max $25) vs $108
+     no wick condition                n= 3881 win 56% $   91 PF 1.28 t  4.7 yrs+ 9/9 | 18-22 $  93 (t 3.9) | 23+ $  89 (t 2.8)
+     no EMA condition                 n= 5257 win 56% $   58 PF 1.22 t  4.2 yrs+ 9/9 | 18-22 $  71 (t 4.3) | 23+ $  41 (t 1.7)
+
+== C03 ==
+   C03, fills ours                    n= 3490 win 54% $   64 PF 1.19 t  3.2 yrs+ 7/9 | 18-22 $  43 (t 1.9) | 23+ $  93 (t 2.6)
+     longs                            n= 2994 win 54% $   54 PF 1.17 t  2.8 yrs+ 7/9 | 18-22 $  26 (t 1.3) | 23+ $  90 (t 2.6)
+     shorts                           n=  496 win 54% $  126 PF 1.26 t  1.7 yrs+ 5/9 | 18-22 $ 130 (t 1.5) | 23+ $ 117 (t 0.8)
+   by year: {2018: -11133, 2019: -13387, 2020: 19654, 2021: 103, 2022: 92007, 2023: 38159, 2024: 22392, 2025: 63335, 2026: 11829}
+   exits: {'stop': 1975, 'target': 986, 'flat': 529} | swing 52% | held overnight 0% | per MNQ $6.39, 398 a year
+   held over a weekend: 0 trades, $0 of $222,960 (0%); the other 3490 trades $64 each
+   tail: best 10% $830,806, rest $-607,847
+   C03, fills touch                   n= 3558 win 55% $   76 PF 1.23 t  3.9 yrs+ 7/9 | 18-22 $  52 (t 2.4) | 23+ $ 109 (t 3.1)
+   placebo (random signal bars in the window, same limit order / exits, 5 runs, ~4113 trades): $-12 (max $2) vs $64
+     no wick condition                n= 4286 win 53% $   39 PF 1.11 t  2.2 yrs+ 6/9 | 18-22 $  22 (t 1.1) | 23+ $  62 (t 2.0)
+     no EMA condition                 n= 5295 win 54% $   32 PF 1.10 t  2.1 yrs+ 6/9 | 18-22 $  36 (t 2.1) | 23+ $  27 (t 1.0)
+
+== Apex-shaped Kusho: v9 / FAR flat at 15:45 (early closes at the scheduled close), everything else as coded ==
+   FAR flat 15:45                     n= 2723 win 57% $   79 PF 1.29 t  4.0 yrs+ 9/9 | 18-22 $  71 (t 3.2) | 23+ $  90 (t 2.6)
+     longs                            n= 2723 win 57% $   79 PF 1.29 t  4.0 yrs+ 9/9 | 18-22 $  71 (t 3.2) | 23+ $  90 (t 2.6)
+   by year: {2018: 7014, 2019: 3778, 2020: 29221, 2021: 24528, 2022: 45939, 2023: 39676, 2024: 34162, 2025: 31218, 2026: 124} | exits: {'stop': 1793, 'flat': 583, 'target': 347}
+   v9 flat 15:45                      n= 3149 win 57% $   92 PF 1.33 t  4.8 yrs+ 8/9 | 18-22 $  89 (t 3.9) | 23+ $  95 (t 2.9)
+     longs                            n= 2698 win 57% $   80 PF 1.29 t  4.0 yrs+ 9/9 | 18-22 $  72 (t 3.2) | 23+ $  91 (t 2.6)
+     shorts                           n=  451 win 56% $  159 PF 1.51 t  2.7 yrs+ 5/9 | 18-22 $ 174 (t 2.3) | 23+ $ 126 (t 1.4)
+   by year: {2018: 16286, 2019: -174, 2020: 30035, 2021: 19198, 2022: 98461, 2023: 38079, 2024: 31047, 2025: 48175, 2026: 7088} | exits: {'stop': 2074, 'flat': 627, 'target': 448}
+
+FAR: standard metrics per NQ (our fills)
+      trades win avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+FAR     2723 58% $97 $29,056   1.53    2.87          1.34 $15,569   1.87  3.75      15.49
+longs   2723 58% $97 $29,056   1.53    2.87          1.34 $15,569   1.87  3.75      15.49
+                            actual        p5       p50       p95
+name        metric                                              
+FAR 2023+   sharpe            1.38      0.60      1.38      2.10
+            sortino           2.61      1.06      2.61      4.37
+            pf_day            1.36      1.14      1.36      1.63
+            calmar            1.96      0.39      1.43      3.24
+            ulcer             4.61      3.53      7.16     17.75
+            max_dd       15,569.25 13,740.08 21,439.50 36,623.19
+            P(Sharpe<=0)       NaN       NaN      0.00       NaN
+longs 2023+ sharpe            1.38      0.60      1.38      2.10
+            sortino           2.61      1.06      2.61      4.37
+            pf_day            1.36      1.14      1.36      1.63
+            calmar            1.96      0.39      1.43      3.24
+            ulcer             4.61      3.53      7.16     17.75
+            max_dd       15,569.25 13,740.08 21,439.50 36,623.19
+            P(Sharpe<=0)       NaN       NaN      0.00       NaN
+   Monte Carlo 1 MNQ (x0.1): trades 2723 | total p5 $16,743 / p50 $26,328 / p95 $35,881, P(total <= 0) 0.0%
+      max DD actual $1,557 (rank 6%), shuffled p50 $2,254 / p95 $3,617 / p99 $4,469; losing streak actual 9, p95 12
+      252-day block bootstrap: P&L p5 $-64 / p50 $2,878 / p95 $5,927, P(loss) 5.4%, max DD p50 $1,137 / p95 $2,207, return/DD 2.53, P(hit $2,000 trailing, EOD check only) 6.4%
+
+v9: standard metrics per NQ (our fills)
+       trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+v9       3149 57% $108 $37,579   1.78    3.41          1.37 $18,060   2.08  4.03      18.66
+longs    2698 58%  $99 $29,378   1.54    2.90          1.35 $15,569   1.89  3.89      15.11
+shorts    451 57% $165  $8,201   0.86    1.97          1.50 $15,089   0.54  8.75       1.88
+                             actual        p5       p50       p95
+name         metric                                              
+v9 2023+     sharpe            1.55      0.76      1.56      2.30
+             sortino           2.94      1.32      2.97      4.82
+             pf_day            1.41      1.18      1.41      1.68
+             calmar            2.02      0.57      1.71      3.69
+             ulcer             5.02      3.26      6.56     15.71
+             max_dd       18,060.25 13,709.15 21,242.75 35,066.16
+             P(Sharpe<=0)       NaN       NaN      0.00       NaN
+longs 2023+  sharpe            1.39      0.61      1.39      2.12
+             sortino           2.65      1.08      2.65      4.41
+             pf_day            1.37      1.15      1.37      1.64
+             calmar            1.99      0.41      1.46      3.27
+             ulcer             4.58      3.46      7.06     17.19
+             max_dd       15,569.25 13,516.12 21,152.25 35,826.45
+             P(Sharpe<=0)       NaN       NaN      0.00       NaN
+shorts 2023+ sharpe            0.70     -0.11      0.70      1.36
+             sortino           1.61     -0.18      1.59      4.02
+             pf_day            1.63      0.93      1.63      2.67
+             calmar            0.66     -0.05      0.65      2.33
+             ulcer             6.69      2.35      5.43     14.36
+             max_dd        8,234.75  4,548.45  8,128.88 15,886.50
+             P(Sharpe<=0)       NaN       NaN      0.07       NaN
+   Monte Carlo 1 MNQ (x0.1): trades 3149 | total p5 $23,652 / p50 $34,089 / p95 $44,848, P(total <= 0) 0.0%
+      max DD actual $1,806 (rank 16%), shuffled p50 $2,275 / p95 $3,601 / p99 $4,424; losing streak actual 9, p95 12
+      252-day block bootstrap: P&L p5 $498 / p50 $3,713 / p95 $7,181, P(loss) 3.1%, max DD p50 $1,149 / p95 $2,125, return/DD 3.23, P(hit $2,000 trailing, EOD check only) 5.2%
+
+C03: standard metrics per NQ (our fills)
+       trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+C03      3490 54%  $64 $24,557   1.06    1.92          1.19 $30,840   0.80 21.31       2.30
+longs    2994 54%  $54 $17,690   0.89    1.61          1.17 $22,856   0.77 14.75       2.40
+shorts    496 54% $126  $6,867   0.54    1.14          1.26 $18,265   0.38 13.01       1.06
+                             actual        p5       p50       p95
+name         metric                                              
+C03 2023+    sharpe            1.29      0.54      1.30      1.99
+             sortino           2.44      0.90      2.41      4.19
+             pf_day            1.33      1.12      1.33      1.58
+             calmar            1.50      0.38      1.43      3.37
+             ulcer             5.37      3.54      7.45     19.94
+             max_dd       23,153.32 15,243.77 23,824.29 42,515.58
+             P(Sharpe<=0)       NaN       NaN      0.00       NaN
+longs 2023+  sharpe            1.21      0.52      1.24      1.90
+             sortino           2.32      0.87      2.36      4.08
+             pf_day            1.32      1.12      1.33      1.58
+             calmar            1.68      0.35      1.39      3.21
+             ulcer             4.63      3.52      7.19     18.68
+             max_dd       17,805.63 14,046.66 21,556.67 37,010.21
+             P(Sharpe<=0)       NaN       NaN      0.00       NaN
+shorts 2023+ sharpe            0.40     -0.31      0.35      0.98
+             sortino           0.78     -0.51      0.67      2.24
+             pf_day            1.28      0.83      1.24      1.83
+             calmar            0.29     -0.14      0.28      1.38
+             ulcer             6.80      3.96      9.35     26.51
+             max_dd       17,102.97  8,618.51 14,733.27 27,838.45
+             P(Sharpe<=0)       NaN       NaN      0.18       NaN
+   Monte Carlo 1 MNQ (x0.1): trades 3490 | total p5 $10,682 / p50 $22,214 / p95 $33,370, P(total <= 0) 0.1%
+      max DD actual $3,138 (rank 40%), shuffled p50 $3,373 / p95 $5,661 / p99 $7,224; losing streak actual 15, p95 13
+      252-day block bootstrap: P&L p5 $-819 / p50 $2,348 / p95 $6,547, P(loss) 12.2%, max DD p50 $1,383 / p95 $2,697, return/DD 1.70, P(hit $2,000 trailing, EOD check only) 13.7%
+
+v9_RTH: standard metrics per NQ (our fills)
+       trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+v9_RTH   3149 57%  $92 $31,742   1.61    2.98          1.33 $18,351   1.73  4.59      13.85
+longs    2698 57%  $80 $23,866   1.34    2.43          1.29 $16,452   1.45  6.93       6.89
+shorts    451 56% $159  $7,876   0.89    2.04          1.51 $11,940   0.66  7.23       2.18
+                             actual        p5       p50       p95
+name         metric                                              
+v9_RTH 2023+ sharpe            1.46      0.66      1.49      2.28
+             sortino           2.72      1.10      2.79      4.66
+             pf_day            1.37      1.15      1.38      1.65
+             calmar            1.74      0.40      1.46      3.46
+             ulcer             4.59      3.31      6.97     18.36
+             max_dd       18,351.00 13,653.49 21,921.00 37,442.51
+             P(Sharpe<=0)       NaN       NaN      0.00       NaN
+longs 2023+  sharpe            1.31      0.52      1.34      2.10
+             sortino           2.44      0.89      2.51      4.32
+             pf_day            1.34      1.12      1.34      1.61
+             calmar            1.65      0.32      1.29      3.16
+             ulcer             4.21      3.47      7.28     19.03
+             max_dd       16,452.00 12,952.71 20,877.00 36,960.40
+             P(Sharpe<=0)       NaN       NaN      0.00       NaN
+shorts 2023+ sharpe            0.68     -0.28      0.66      1.33
+             sortino           1.57     -0.45      1.46      3.94
+             pf_day            1.60      0.84      1.55      2.61
+             calmar            0.61     -0.11      0.56      2.18
+             ulcer             6.26      2.29      5.33     15.03
+             max_dd        7,749.00  4,196.85  7,655.88 15,302.61
+             P(Sharpe<=0)       NaN       NaN      0.10       NaN
+   Monte Carlo 1 MNQ (x0.1): trades 3149 | total p5 $19,120 / p50 $28,852 / p95 $38,829, P(total <= 0) 0.0%
+      max DD actual $1,900 (rank 23%), shuffled p50 $2,267 / p95 $3,674 / p99 $4,527; losing streak actual 9, p95 12
+      252-day block bootstrap: P&L p5 $145 / p50 $3,155 / p95 $6,449, P(loss) 4.5%, max DD p50 $1,121 / p95 $2,154, return/DD 2.82, P(hit $2,000 trailing, EOD check only) 5.8%

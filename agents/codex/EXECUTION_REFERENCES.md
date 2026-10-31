@@ -108,6 +108,15 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 
 ### E09 — Native micro costs, turnover and roll reconciliation
 
+- Replay readiness 2026-10-31 ([report](results/swing_replay_readiness_20261031.md)):
+  a MultiCharts exit row labeled `open` is a valuation mark, not a closed fill.
+  ONB ML's final export mark maps to an exit before entry and crashes a clean
+  funded-cache rebuild. Explicitly excluding this sentinel permits the 343 closed
+  ONB paths to build; other cross-date closed trades remain errors needing their
+  own handling. Never use a generic reversed-time filter that silently removes
+  real overnight/holiday holds. Verified report/parser behavior only; corrected
+  ST account replay and native-fill parity remain unverified.
+
 [6E package review](results/six_e_cross_asset_review_20261027.md), 2026-10-27.
 - Use: measure arrival-mid shortfall, spread, native-tick stresses, integer quantities and total turnover; a +2 to −2 reversal trades four contracts.
 - Evidence: methodological requirements from the source review, not verified M6E execution results.
@@ -145,13 +154,25 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
   [correction proposals](proposals/weekly_cross_review_20261030.md)): numeric exit kinds are part of the accounting
   interface. Swing Target's text `reason` replaced numeric `kind`, so target cost handling and protective-stop
   exit-minute capping differed from its recorded fills. A fixed-ledger check, retaining holiday repairs, changes
-  closing cashflow by$132/MNQ total and48daily minima. The [paired account replay](results/swing_kind_replay_20261031.md)
+  closing cashflow by$132/MNQ total and48daily minima. The [extended-grid paired replay](results/swing_kind_replay_extended_grid_20261031.md)
   subsequently ran 500 two-year histories per account size: old/fixed swaps have identical two-year payouts and failure flags;
   first-year average payouts change +$2 (50K) and -$8 (150K). Better isolated accounting does not establish
   monotone account payouts. The 50K swap's earlier benefit was not reproduced on this frozen sample; the 150K
-  comparison was favorable, subject to the historical-roster and simulator limits in the report.
+  comparison was favorable, subject to the historical-roster and simulator limits in the report. Concurrent
+  [common-coverage results](results/swing_kind_replay_20261031.md) are inconclusive for both swaps; preserve
+  the different seeds/universes and do not select the most favorable run or pool overlapping samples.
   Preserve schemas, assert numeric enum sets, and reconcile closed cash and marked paths before account claims.
   This is existing-ledger accounting evidence, not a new strategy, native-fill result or plan change.
+
+- Swing Target account replay 2026-10-31 ([results](results/swing_replay_20261031.md)): 500 paired two-year histories
+  per account, fixed empirical pool through 2026-10-09. The $132/MNQ fixed-ledger improvement changes neither
+  selected replacement's two-year payouts nor failures in this sample; year-one mean changes are +$7 (50K)
+  and +$20 (150K), with intervals spanning zero. An accounting correction is necessary but does not establish
+  portfolio superiority. Against base, 50K VB replacement has two-year −$83 and failures +0.6 pp; 150K DT replacement
+  +$43 and −0.4 pp; both inconclusive. These are legacy NQ-equivalent bench costs, not native fee/fill evidence.
+  Rebuild also exposes an unfinished MC `Signal=open` valuation with a 00:00 exit sentinel: exclude it explicitly
+  from completed-ticket paths rather than infer a next-date fill or drop all same-bar trades. The general
+  builder still needs that upstream repair. No live/plan change or standalone strategy promotion follows.
 
 ### E10 — Liquidity compensation, turnover and costs
 
@@ -621,6 +642,82 @@ Related: E09 cash/contract accounting, E15 tail risk, E36 nonguaranteed protecti
   availability clocks, exact trigger/weight/cash policy, executable next-day prices and native fees; reconcile one
   formation/roll month before any return study. Non-positive prices cannot silently disappear from a log-return test.
 - Status: execution/risk/accounting reference retained; no new return trial, account placement or exit-policy change.
+  [Offline build checkpoint](results/rad_double_sort_build_20261031.md) adds strict missing-panel, contract/clock,
+  integer reference-notional and delivery-action checks. Its23 synthetic cases do not verify historical fills or NAV.
+
+### E39 — Unfinished MC positions and stale report coverage during a data rebuild
+
+Source/review + date: [extended-data audit](results/extended_data_refresh_20261030.md), 2026-10-30;
+Claude source snapshot `86df2c0`, `analysis/codex_refresh_audit.py` and its saved coverage tables.
+- Use: distinguish a report's `open` sentinel from an actual exit, and price-history coverage from strategy-ticket coverage.
+- Evidence: reproduced standard-builder failure on a funded-ONB EntryShort at 10/12 09:15 paired with an `open` ExitShort
+  labeled midnight. It creates exit-before-entry indices and an empty path. A scoped adapter excludes the unfinished
+  position; the complete original rebuild succeeds with 343 closed ONB trades. Five regression checks pass.
+- Coverage: raw NQ through 10/30; dashboard cache through 10/09; the four live-strategy reports end 10/09–10/13.
+  Importing old tickets onto a longer grid does not regenerate signals; padded zero days are not verified no-trade days.
+- Limits: no current missed-trade count, native broker fill finding, strategy improvement or current-plan revalidation.
+  Production importer is unchanged; the adapter is an offline research artifact.
+- Next check: fresh same-input reports, explicit cache coverage gate, then expected/chart/broker reconciliation;
+  earlier unavailable chart logs remain unknown. Related: E04 (record semantics), E23 (account/logger fields).
+
+### E09 follow-up — common-coverage account-state replay (2026-10-30)
+
+[Fixed-ledger account replay](results/swing_kind_account_replay_20261030.md) adds 1,000 paired histories per
+account/cohort over a common-source window ending July 7. Numeric kinds restore $129/MNQ and change 48 daily
+minima; 160 exact canonical-simulator parity checks pass. This does not imply monotone payout improvement:
+150K recent-pool first-year payouts decrease $6 while two-year payouts and blown share are unchanged.
+The adopted replacements do not clear both base and empty-slot comparisons. Evidence is historical simulated
+accounting with inherited path approximations, not native fills or a plan change. The broader-window replay
+above uses a different pool and seed; the two reports consistently leave adoption unproven.
+
+### E40 — ES order-flow shocks are absorbed within one second; macro releases raise price impact
+
+Source: Takahashi, arXiv 2508.06788 (paper, scout 2026-10-29); papers/SCOUT_LOG.md.
+- Use: one-second structural VAR on ES returns and order-flow imbalance per 15-minute interval: impulse responses die out almost entirely within a second; around macro announcements price impact per unit of flow rises, flow impact falls, return volatility spikes. Spreads / liquidity drive intraday variation of impact.
+- Evidence (author claim): ES E-mini, one-second data, heteroskedasticity-identified SVAR.
+- Limits: no trading test; confirms E25 (order flow doesn't predict NQ at 5-30 min) at the 1-second end; release-time fills pay more impact.
+- Next check: none; relevant when sizing orders at 07:30 / 09:00 CT releases.
+- Status: market-behavior reference.
+
+### E41 — No-stop overnight edges: a protective stop can delete the whole edge
+
+Source: Nocturne research note (L. Franceschetti, user upload 2026-10-30), rebuild [nocturne_test.py](../../analysis/nocturne_test.py). Claude, 2026-10-30.
+- Use: before bolting a stop onto a strategy that was found without one, test it: the profit may come from holding through the drops.
+- Evidence (historical test): NQ long 17:05 -> 07:20 with an R^2 filter, 1,449 nights 2017-26: no stop $90 a night (t 2.56), worst night -$11,402;
+  with a 0.5 x 15-day ATR stop $39 a night (t 1.35), 2024-26 negative. Overnight Tick / VIX (plan, no stop either) shares 338 of its nights.
+- Limits: one rule, one stop width; Apex evaluations can't carry an unbounded night (floor touched intraday = failed, see E21).
+- Next check: size no-stop overnight pieces so the worst historical night stays below half the account's trailing room.
+- Status: market-behavior reference; Nocturne C, watchlist.
+
+### E42 — Backtest-live parity: six implementation defects and a ten-point checklist
+
+Source: Vidovich & Zerjal, arXiv 2610.21846 (paper, scout 2026-10-30); papers/SCOUT_LOG.md.
+- Use: one live intraday stock system, six defects that summary statistics never showed: (1) default data feed carried
+  0.1-2% of the real opening-minute volume, (2) dividend-adjusted history vs unadjusted live fills, (3) a field only the
+  backtest had, (4) UTC timestamps read as New York time, (5) the replay requested different inputs than live, (6) settings
+  switched on that never reached the order code. None was found from results; each by one concrete look (one live trade
+  against the cache, one bar from several sources). Matching decisions on 7 of 8 live days did not catch a broken harness.
+- Our equivalents: (1) MultiCharts `Volume` = up-ticks vs our CSV totals (FC 2B near-threshold mismatches); (2)
+  unadjusted continuous futures, roll jumps at 03:32 / 17:01 CT (drop roll bars); (4) the CL Sunday report runs on Eastern
+  time (found by `analysis/leak_checks.py` L1 at −60 min, 2026-10-30); (6) the account field on copied charts sent #3's
+  150K-size orders to #2 (MULTICHARTS_PITFALLS, 10/26). Their checks we already run: replay live trades and match prices
+  (`analysis/live_vs_backtest.py`, Apex Trade Logger), daily live-behaviour checks (`analysis/vps_health.py` vs
+  `live/expected_setup.json`), fill-in-bar check (leak_checks L1).
+- Gaps to close (smallest next checks): test every timestamp helper on a winter and a summer day (DST weeks where London /
+  Chicago offsets differ); after any data rebuild, match one live fill to the tick; for each MultiCharts input, confirm in
+  the trade log that changing it changes an order (e.g. size inputs after cushion sizing).
+- Status: process reference; no strategy.
+
+
+### E43 — Better trade accounting need not improve funded-account outcomes
+
+Source/review + date: [Swing Target exit-kind replay](results/swing_kind_replay_20261031.md), 2026-10-31; runner `analysis/codex_swing_kind_replay.py` and retained paired histories.
+Execution question and useful lesson: numeric exit types govern both fill costs and the final adverse mark. After correcting them, replay the account; payout timing and subsequent integer sizing can change the sign of the effect.
+Evidence: synthetic stop/target fixtures plus historical account simulation, 500 paired 500-day histories per account. Corrected ST nets gain $132 total per MNQ, but the 50K ADD arm has one additional failed history (7.8% -> 8.0% blown); selected 50K/150K replacements have unchanged two-year outcomes versus legacy and do not establish gains versus BASE.
+Market/platform and timing limits: historical roster and repaired CODE_BE ledger, not exact holiday-skipping v3 or today's T_ONESIDE roster; inherited continuous bars, NQ/10 fees, OT/CLS adverse and MOC close-mark approximations. No native fill evidence.
+Data/prerequisites: frozen ledger, minute grids, hashed MultiCharts reports, shared simulators, paired block histories and EMPTY controls; full manifest retained.
+Smallest justified next check: independent review of this replay; separately preregister current-roster/exact-v3 validation at actual micro fees before changing the adoption rationale.
+Status and superseding evidence: adapter mechanics verified; account adoption gains inconclusive. No live or plan change. Claude's three colliding E29-E31 additions are preserved as E40-E42 during this handoff merge; existing Codex E29-E38 identifiers are retained.
 
 ## Minimum record for any later execution comparison
 

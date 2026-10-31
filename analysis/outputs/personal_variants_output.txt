@@ -1,0 +1,19 @@
+Conservative and aggressive versions of the personal stack (user, 2026-10-25), from analysis/personal_portfolio.py (1 micro
+
+conservative: 14 pieces, 14 micros
+   $24,442 a year, Sharpe 3.20, max DD $5,371, worst day $-1,790, worst month $-2,743
+   Monte Carlo 1 year: p5 $11,876 / p50 $23,744 / p95 $38,414, P(loss) 0.0%, DD p95 $4,587, return/DD 9.0, capital $22,933
+   by year: {2018: 5927, 2019: 3255, 2020: 25113, 2021: 25680, 2022: 33289, 2023: 23404, 2024: 27757, 2025: 32150, 2026: 42825}
+   sizes: {'VaultBreak': 1, 'OvernightBiasML': 1, 'MondayLong': 1, 'ExpirationOpenShort': 1, 'LateDayFlow': 1, 'NFPFade': 1, 'BridgeMondayLong': 1, 'CLSundayFade_perMCL': 1, 'ESMOCFollow_perMES': 1, 'RelativeStrength': 1, 'TwinContinuation': 1, 'OvernightTick': 1, 'SwingTarget': 1, 'PaperTrend': 1}
+
+current: 19 pieces, 19 micros
+   $41,475 a year, Sharpe 3.15, max DD $6,592, worst day $-4,067, worst month $-2,739
+   Monte Carlo 1 year: p5 $22,805 / p50 $40,536 / p95 $61,055, P(loss) 0.0%, DD p95 $7,279, return/DD 9.0, capital $36,396
+   by year: {2018: 11794, 2019: 9740, 2020: 49107, 2021: 43697, 2022: 66388, 2023: 37950, 2024: 40401, 2025: 57714, 2026: 55492}
+   sizes: {'VaultBreak': 1, 'OvernightBiasML': 1, 'MondayLong': 1, 'ExpirationOpenShort': 1, 'LateDayFlow': 1, 'NFPFade': 1, 'BridgeMondayLong': 1, 'CLSundayFade_perMCL': 1, 'ESMOCFollow_perMES': 1, 'RelativeStrength': 1, 'FC2B': 1, 'TwinContinuation': 1, 'OvernightTick': 1, 'DualThrust': 1, 'Kusho': 1, 'S47': 1, 'S30': 1, 'SwingTarget': 1, 'PaperTrend': 1}
+
+aggressive: 19 pieces, 24 micros
+   $55,753 a year, Sharpe 3.29, max DD $7,325, worst day $-4,079, worst month $-3,100
+   Monte Carlo 1 year: p5 $31,658 / p50 $54,353 / p95 $82,299, P(loss) 0.0%, DD p95 $8,275, return/DD 10.0, capital $41,374
+   by year: {2018: 17146, 2019: 12851, 2020: 62791, 2021: 55850, 2022: 92305, 2023: 48724, 2024: 60364, 2025: 75088, 2026: 75333}
+   sizes: {'VaultBreak': 1, 'OvernightBiasML': 2, 'MondayLong': 1, 'ExpirationOpenShort': 1, 'LateDayFlow': 1, 'NFPFade': 1, 'BridgeMondayLong': 1, 'CLSundayFade_perMCL': 1, 'ESMOCFollow_perMES': 1, 'RelativeStrength': 1, 'FC2B': 1, 'TwinContinuation': 2, 'OvernightTick': 2, 'DualThrust': 2, 'Kusho': 2, 'S47': 1, 'S30': 1, 'SwingTarget': 1, 'PaperTrend': 1}

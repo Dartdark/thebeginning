@@ -1,0 +1,76 @@
+Regime gauges side by side (user, 2026-10-25): the macro cycle checklist of the user's PDF 'application_1' (Expansion / Peak /
+
+1. Macro gauge, months by label (2018-2026): {'transition': 44, 'Expansion': 40, 'Peak': 16, 'Recession': 5, 'Recovery': 1} | quadrants: {'Reflation': 45, 'Deflationary bust': 28, 'Goldilocks': 21, 'Stagflation': 12}
+   label by year (most common): {2018: 'Expansion', 2019: 'transition', 2020: 'transition', 2021: 'transition', 2022: 'transition', 2023: 'Peak', 2024: 'Expansion', 2025: 'transition', 2026: 'Expansion'}
+   vol gauge: VIX<15 on 25% of days; low trend-day rate on 44%; either 58%
+
+2. Rules on the 17-piece book ($ a year, Sharpe, max DD, return/DD), design 2018-22 | holdout 2023-26 | pass?
+   base (no gauge)                                $ 31,539 Sh 3.11 DD $ 5,903 R/DD  5.3 | $ 44,443 Sh 3.07 DD $ 5,319 R/DD  8.4
+   M1 macro transition -> book x0.5               $ 23,562 Sh 3.04 DD $ 4,189 R/DD  5.6 | $ 40,005 Sh 2.96 DD $ 5,207 R/DD  7.7 | fail
+   M2 macro Peak/Recession -> momentum x0.5       $ 30,988 Sh 3.08 DD $ 5,903 R/DD  5.2 | $ 42,818 Sh 3.06 DD $ 5,319 R/DD  8.1 | fail
+   M3 stagflation/bust quadrant -> momentum x0.5  $ 30,166 Sh 3.13 DD $ 5,903 R/DD  5.1 | $ 43,457 Sh 3.06 DD $ 5,207 R/DD  8.3 | fail
+   V1 VIX < 15 -> momentum x0.5                   $ 31,296 Sh 3.10 DD $ 5,903 R/DD  5.3 | $ 43,556 Sh 3.07 DD $ 5,031 R/DD  8.7 | fail
+   V2 low trend-day rate -> momentum x0.5         $ 30,715 Sh 3.14 DD $ 5,580 R/DD  5.5 | $ 42,369 Sh 3.10 DD $ 5,429 R/DD  7.8 | fail
+   V3 V1 or V2 -> momentum x0.5                   $ 30,496 Sh 3.13 DD $ 5,580 R/DD  5.5 | $ 41,838 Sh 3.10 DD $ 5,031 R/DD  8.3 | fail
+
+3. Descriptive: average $ a day per piece by macro regime (2018-2026):
+                     Expansion  Peak  Recession  Recovery  transition
+VaultBreak                 2.7  15.7       12.5      24.9         6.2
+OvernightBiasML           13.4   5.1        5.1       1.7         8.4
+MondayLong                13.1  12.7       26.2      11.9         0.3
+ExpirationOpenShort        2.0   3.5        0.7      -2.2         2.1
+LateDayFlow                6.0   0.3       -4.4      -3.2         3.5
+NFPFade                    1.9   2.9       -0.3       9.6        -0.2
+BridgeMondayLong           5.6   7.2        8.3      18.9         3.3
+CLSundayFade_perMCL        4.8   0.6       -0.2       0.0         2.1
+ESMOCFollow_perMES         1.6  -1.0        0.5       1.6         2.1
+RelativeStrength          19.5  12.4       24.1      29.3        11.6
+FC2B                       4.6  16.4       20.4      18.6         9.6
+TwinContinuation          17.3  20.2       11.9      -8.1        10.8
+OvernightTick              8.6  12.6        8.2      -0.8         7.7
+DualThrust                 9.6  12.3        1.3     -15.6        10.2
+Kusho                     12.7  13.1        4.6      33.4        16.6
+S47                       10.9   5.3       19.3      15.5        11.5
+S30                       22.3  36.3       41.5      67.5        17.2
+
+   by quadrant:
+                     Deflationary bust  Goldilocks  Reflation  Stagflation
+VaultBreak                         6.3         6.9        7.3          6.3
+OvernightBiasML                    7.7         5.9       12.9          7.8
+MondayLong                         5.5        11.0        8.0         11.5
+ExpirationOpenShort                2.1         2.0        2.1          3.0
+LateDayFlow                        2.9         1.5        5.0          3.4
+NFPFade                           -0.5         3.8        0.9          1.4
+BridgeMondayLong                   2.5         4.7        7.6          3.0
+CLSundayFade_perMCL                0.4         4.3        4.0          0.6
+ESMOCFollow_perMES                 1.4         2.5        0.7          1.7
+RelativeStrength                  15.3        10.6       19.7          8.8
+FC2B                               9.4         9.3       10.1          6.8
+TwinContinuation                   6.7        14.8       18.7         17.2
+OvernightTick                      4.9        11.0       12.9         -1.5
+DualThrust                        10.2        11.2       12.5         -4.9
+Kusho                             14.8        12.7       14.9         12.9
+S47                               11.3         3.7       14.5          8.0
+S30                               27.9        23.7       22.5         18.3
+
+   by trend-day-rate tercile (low / mid / high, prior 20 sessions vs the trailing year):
+                      low   mid  high
+VaultBreak            3.9   7.9  10.7
+OvernightBiasML      10.1   5.9  13.0
+MondayLong           11.0   8.2   3.9
+ExpirationOpenShort   2.7   1.6   1.9
+LateDayFlow           3.8   3.3   3.3
+NFPFade               1.4  -0.1   2.3
+BridgeMondayLong      4.5   5.1   6.3
+CLSundayFade_perMCL   1.3   3.2   4.8
+ESMOCFollow_perMES    1.3   1.6   1.2
+RelativeStrength      9.9  25.2  13.5
+FC2B                 10.3   5.3  12.7
+TwinContinuation     19.6   7.8  13.9
+OvernightTick        11.8   6.2   6.5
+DualThrust           10.8   6.8  10.8
+Kusho                11.4  10.3  23.7
+S47                  13.0   6.1  12.3
+S30                  39.6   9.8  12.5
+
+   days per label: {'transition': 940, 'Expansion': 845, 'Peak': 347, 'Recession': 109, 'Recovery': 21} | trend terciles: {'low': 1000, 'mid': 688, 'high': 574}

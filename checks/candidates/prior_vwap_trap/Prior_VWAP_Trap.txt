@@ -1,0 +1,364 @@
+{ Prior VWAP Trap - NQ / MNQ. PowerLanguage strategy for MultiCharts (v1.0). Rules and results: see the PDF.
+
+  CHART: @NQ 1-minute, dxFeed continuous (unadjusted), Exchange time zone (Chicago), session template
+  "CME Equity 17-16 CT", Format Symbol > Build Volume On = Trade Volume, Intrabar Order Generation OFF.
+  Costs: commission $2.50 per contract per side, slippage $5 per order. Load data from 2016-07.
+  The roll-jump and short-session lists below end 2026-10-23; extend them before running past that date.
+
+  INPUTS (defaults = the tested values)
+    PrevMoveMax 0.5, EntryStart 835, HoldCheck 1000, MinTimeLeft 180, ExitStamp 1500, StopMult 0.5,
+    ADRLen 10, MinSessionBars 200, AllowSecondSide false, ContractQty 1. Times are HHMM CT. }
+
+Inputs:
+    PrevMoveMax(0.5),
+    EntryStart(835),
+    HoldCheck(1000),
+    MinTimeLeft(180),
+    ExitStamp(1500),
+    StopMult(0.5),
+    ADRLen(10),
+    MinSessionBars(200),
+    AllowSecondSide(false),
+    ContractQty(1);
+
+Variables:
+    MP(0), BarMins(0), DateJul(0), SessJul(0), SessDate(0), CurSess(0), InCash(false),
+    RollCnt(0), RollK(0), CumJump(0),
+    ShortCnt(0), ShortK(0), TodayN(0), TodayLast(0), TodayLastMins(0),
+    SHigh(0), SLow(0), SClose(0), SN(0), SCum(0), SFirstCum(0), SPV(0), SV(0),
+    P1VWAP(0), P1VOK(false), P1Close(0), P1N(0), P2Close(0), PrevCount(0),
+    RngPos(0), RngCount(0), RngSum(0), J(0),
+    ADRv(0), PrevMove(0), DayOK(false), Scanning(false), PDH(0), PDL(0),
+    AllowLong(false), AllowShort(false), GapAbove(false), GapBelow(false), BelowSeen(false), AboveSeen(false),
+    DoneLong(false), DoneShort(false), EntryEndMins(0), EntryStartMins(0), HoldMins(0), ExitMins(0),
+    SigDir(0), WasIn(false), ExitBar(false), TradeSess(0), Dist(0), BestPx(0), StopPx(0), ExitSent(false);
+
+Arrays:
+    RollD[60](0), RollT[60](0), RollJ[60](0), RollJul[60](0),
+    ShortD[200](0), ShortN[200](0), ShortL[200](0),
+    RngH[60](0);
+
+If CurrentBar = 1 then begin
+    { [A] roll jumps: the research code's own roll detection on the NQ 1-minute data (date, first bar CT, jump in points) }
+    RollD[0] = 1160909; RollT[0] = 332; RollJ[0] = -4;
+    RollD[1] = 1161209; RollT[1] = 332; RollJ[1] = -2;
+    RollD[2] = 1170310; RollT[2] = 332; RollJ[2] = 3;
+    RollD[3] = 1170609; RollT[3] = 332; RollJ[3] = 7.75;
+    RollD[4] = 1170908; RollT[4] = 333; RollJ[4] = 7.75;
+    RollD[5] = 1171208; RollT[5] = 333; RollJ[5] = 19;
+    RollD[6] = 1180309; RollT[6] = 333; RollJ[6] = 25.75;
+    RollD[7] = 1180608; RollT[7] = 332; RollJ[7] = 23.25;
+    RollD[8] = 1180914; RollT[8] = 332; RollJ[8] = 28.25;
+    RollD[9] = 1181214; RollT[9] = 333; RollJ[9] = 25.25;
+    RollD[10] = 1190308; RollT[10] = 333; RollJ[10] = 26.5;
+    RollD[11] = 1190614; RollT[11] = 332; RollJ[11] = 29;
+    RollD[12] = 1190913; RollT[12] = 332; RollJ[12] = 21.75;
+    RollD[13] = 1191213; RollT[13] = 332; RollJ[13] = 24.25;
+    RollD[14] = 1200313; RollT[14] = 332; RollJ[14] = -46.5;
+    RollD[15] = 1200612; RollT[15] = 332; RollJ[15] = -12.5;
+    RollD[16] = 1200911; RollT[16] = 333; RollJ[16] = -14.75;
+    RollD[17] = 1201211; RollT[17] = 330; RollJ[17] = -4;
+    RollD[18] = 1210312; RollT[18] = 332; RollJ[18] = -9;
+    RollD[19] = 1210611; RollT[19] = 333; RollJ[19] = -7.25;
+    RollD[20] = 1210910; RollT[20] = 333; RollJ[20] = -9.25;
+    RollD[21] = 1211210; RollT[21] = 332; RollJ[21] = 6.5;
+    RollD[22] = 1220311; RollT[22] = 332; RollJ[22] = -6.75;
+    RollD[23] = 1220610; RollT[23] = 333; RollJ[23] = 24.5;
+    RollD[24] = 1220911; RollT[24] = 1701; RollJ[24] = 111.75;
+    RollD[25] = 1221211; RollT[25] = 1701; RollJ[25] = 118.5;
+    RollD[26] = 1230312; RollT[26] = 1701; RollJ[26] = 121.5;
+    RollD[27] = 1230611; RollT[27] = 1701; RollJ[27] = 168.25;
+    RollD[28] = 1230910; RollT[28] = 1701; RollJ[28] = 188.75;
+    RollD[29] = 1231210; RollT[29] = 1701; RollJ[29] = 207.25;
+    RollD[30] = 1240310; RollT[30] = 1701; RollJ[30] = 245.5;
+    RollD[31] = 1240915; RollT[31] = 1701; RollJ[31] = 229.5;
+    RollD[32] = 1241212; RollT[32] = 1701; RollJ[32] = 90.5;
+    RollD[33] = 1250317; RollT[33] = 1701; RollJ[33] = 209.75;
+    RollD[34] = 1250616; RollT[34] = 1701; RollJ[34] = 240;
+    RollD[35] = 1250915; RollT[35] = 1701; RollJ[35] = 237.25;
+    RollD[36] = 1251215; RollT[36] = 1701; RollJ[36] = 244.25;
+    RollD[37] = 1260308; RollT[37] = 1701; RollJ[37] = -226;
+    RollD[38] = 1260615; RollT[38] = 1701; RollJ[38] = 308;
+    RollD[39] = 1260913; RollT[39] = 1701; RollJ[39] = -394;
+    RollCnt = 40;
+    For J = 0 to RollCnt - 1 begin
+        RollJul[J] = DateToJulian(RollD[J]);
+    end;
+    { [A] cash sessions with fewer than 390 bars or not ending 15:00 CT (Globex date, cash bars, last cash bar CT) }
+    ShortD[0] = 1160802; ShortN[0] = 60; ShortL[0] = 930;
+    ShortD[1] = 1160803; ShortN[1] = 60; ShortL[1] = 930;
+    ShortD[2] = 1160804; ShortN[2] = 60; ShortL[2] = 930;
+    ShortD[3] = 1160805; ShortN[3] = 60; ShortL[3] = 930;
+    ShortD[4] = 1160808; ShortN[4] = 60; ShortL[4] = 930;
+    ShortD[5] = 1160905; ShortN[5] = 210; ShortL[5] = 1200;
+    ShortD[6] = 1161124; ShortN[6] = 205; ShortL[6] = 1200;
+    ShortD[7] = 1161125; ShortN[7] = 225; ShortL[7] = 1215;
+    ShortD[8] = 1161215; ShortN[8] = 271; ShortL[8] = 1500;
+    ShortD[9] = 1170116; ShortN[9] = 205; ShortL[9] = 1200;
+    ShortD[10] = 1170125; ShortN[10] = 385; ShortL[10] = 1500;
+    ShortD[11] = 1170220; ShortN[11] = 210; ShortL[11] = 1200;
+    ShortD[12] = 1170529; ShortN[12] = 204; ShortL[12] = 1200;
+    ShortD[13] = 1170703; ShortN[13] = 225; ShortL[13] = 1215;
+    ShortD[14] = 1170704; ShortN[14] = 210; ShortL[14] = 1200;
+    ShortD[15] = 1170904; ShortN[15] = 210; ShortL[15] = 1200;
+    ShortD[16] = 1171123; ShortN[16] = 210; ShortL[16] = 1200;
+    ShortD[17] = 1171124; ShortN[17] = 225; ShortL[17] = 1215;
+    ShortD[18] = 1180115; ShortN[18] = 210; ShortL[18] = 1200;
+    ShortD[19] = 1180219; ShortN[19] = 210; ShortL[19] = 1200;
+    ShortD[20] = 1180430; ShortN[20] = 389; ShortL[20] = 1500;
+    ShortD[21] = 1180528; ShortN[21] = 210; ShortL[21] = 1200;
+    ShortD[22] = 1180703; ShortN[22] = 225; ShortL[22] = 1215;
+    ShortD[23] = 1180704; ShortN[23] = 210; ShortL[23] = 1200;
+    ShortD[24] = 1180726; ShortN[24] = 388; ShortL[24] = 1500;
+    ShortD[25] = 1180828; ShortN[25] = 386; ShortL[25] = 1500;
+    ShortD[26] = 1180903; ShortN[26] = 210; ShortL[26] = 1200;
+    ShortD[27] = 1181122; ShortN[27] = 210; ShortL[27] = 1200;
+    ShortD[28] = 1181123; ShortN[28] = 225; ShortL[28] = 1215;
+    ShortD[29] = 1181224; ShortN[29] = 225; ShortL[29] = 1215;
+    ShortD[30] = 1190121; ShortN[30] = 210; ShortL[30] = 1200;
+    ShortD[31] = 1190218; ShortN[31] = 210; ShortL[31] = 1200;
+    ShortD[32] = 1190527; ShortN[32] = 210; ShortL[32] = 1200;
+    ShortD[33] = 1190703; ShortN[33] = 225; ShortL[33] = 1215;
+    ShortD[34] = 1190704; ShortN[34] = 210; ShortL[34] = 1200;
+    ShortD[35] = 1190902; ShortN[35] = 210; ShortL[35] = 1200;
+    ShortD[36] = 1191128; ShortN[36] = 210; ShortL[36] = 1200;
+    ShortD[37] = 1191129; ShortN[37] = 225; ShortL[37] = 1215;
+    ShortD[38] = 1191205; ShortN[38] = 388; ShortL[38] = 1500;
+    ShortD[39] = 1191224; ShortN[39] = 225; ShortL[39] = 1215;
+    ShortD[40] = 1200120; ShortN[40] = 209; ShortL[40] = 1200;
+    ShortD[41] = 1200217; ShortN[41] = 210; ShortL[41] = 1200;
+    ShortD[42] = 1200309; ShortN[42] = 376; ShortL[42] = 1500;
+    ShortD[43] = 1200312; ShortN[43] = 377; ShortL[43] = 1500;
+    ShortD[44] = 1200316; ShortN[44] = 376; ShortL[44] = 1500;
+    ShortD[45] = 1200318; ShortN[45] = 377; ShortL[45] = 1500;
+    ShortD[46] = 1200525; ShortN[46] = 210; ShortL[46] = 1200;
+    ShortD[47] = 1200703; ShortN[47] = 210; ShortL[47] = 1200;
+    ShortD[48] = 1200907; ShortN[48] = 210; ShortL[48] = 1200;
+    ShortD[49] = 1201126; ShortN[49] = 210; ShortL[49] = 1200;
+    ShortD[50] = 1201127; ShortN[50] = 225; ShortL[50] = 1215;
+    ShortD[51] = 1201224; ShortN[51] = 225; ShortL[51] = 1215;
+    ShortD[52] = 1210118; ShortN[52] = 210; ShortL[52] = 1200;
+    ShortD[53] = 1210215; ShortN[53] = 210; ShortL[53] = 1200;
+    ShortD[54] = 1210531; ShortN[54] = 210; ShortL[54] = 1200;
+    ShortD[55] = 1210705; ShortN[55] = 210; ShortL[55] = 1200;
+    ShortD[56] = 1210906; ShortN[56] = 210; ShortL[56] = 1200;
+    ShortD[57] = 1210917; ShortN[57] = 389; ShortL[57] = 1500;
+    ShortD[58] = 1211125; ShortN[58] = 210; ShortL[58] = 1200;
+    ShortD[59] = 1211126; ShortN[59] = 225; ShortL[59] = 1215;
+    ShortD[60] = 1220117; ShortN[60] = 210; ShortL[60] = 1200;
+    ShortD[61] = 1220221; ShortN[61] = 210; ShortL[61] = 1200;
+    ShortD[62] = 1220308; ShortN[62] = 388; ShortL[62] = 1500;
+    ShortD[63] = 1220530; ShortN[63] = 210; ShortL[63] = 1200;
+    ShortD[64] = 1220620; ShortN[64] = 210; ShortL[64] = 1200;
+    ShortD[65] = 1220704; ShortN[65] = 210; ShortL[65] = 1200;
+    ShortD[66] = 1220905; ShortN[66] = 210; ShortL[66] = 1200;
+    ShortD[67] = 1221124; ShortN[67] = 210; ShortL[67] = 1200;
+    ShortD[68] = 1221125; ShortN[68] = 225; ShortL[68] = 1215;
+    ShortD[69] = 1230116; ShortN[69] = 210; ShortL[69] = 1200;
+    ShortD[70] = 1230220; ShortN[70] = 210; ShortL[70] = 1200;
+    ShortD[71] = 1230529; ShortN[71] = 210; ShortL[71] = 1200;
+    ShortD[72] = 1230619; ShortN[72] = 210; ShortL[72] = 1200;
+    ShortD[73] = 1230703; ShortN[73] = 225; ShortL[73] = 1215;
+    ShortD[74] = 1230704; ShortN[74] = 210; ShortL[74] = 1200;
+    ShortD[75] = 1230904; ShortN[75] = 210; ShortL[75] = 1200;
+    ShortD[76] = 1231123; ShortN[76] = 210; ShortL[76] = 1200;
+    ShortD[77] = 1231124; ShortN[77] = 225; ShortL[77] = 1215;
+    ShortD[78] = 1240115; ShortN[78] = 210; ShortL[78] = 1200;
+    ShortD[79] = 1240219; ShortN[79] = 210; ShortL[79] = 1200;
+    ShortD[80] = 1240527; ShortN[80] = 210; ShortL[80] = 1200;
+    ShortD[81] = 1240619; ShortN[81] = 210; ShortL[81] = 1200;
+    ShortD[82] = 1240703; ShortN[82] = 225; ShortL[82] = 1215;
+    ShortD[83] = 1240704; ShortN[83] = 210; ShortL[83] = 1200;
+    ShortD[84] = 1240902; ShortN[84] = 210; ShortL[84] = 1200;
+    ShortD[85] = 1241009; ShortN[85] = 387; ShortL[85] = 1500;
+    ShortD[86] = 1241024; ShortN[86] = 388; ShortL[86] = 1500;
+    ShortD[87] = 1241128; ShortN[87] = 210; ShortL[87] = 1200;
+    ShortD[88] = 1241129; ShortN[88] = 225; ShortL[88] = 1215;
+    ShortD[89] = 1241224; ShortN[89] = 225; ShortL[89] = 1215;
+    ShortD[90] = 1250120; ShortN[90] = 210; ShortL[90] = 1200;
+    ShortD[91] = 1250217; ShortN[91] = 210; ShortL[91] = 1200;
+    ShortD[92] = 1250526; ShortN[92] = 210; ShortL[92] = 1200;
+    ShortD[93] = 1250602; ShortN[93] = 389; ShortL[93] = 1500;
+    ShortD[94] = 1250619; ShortN[94] = 210; ShortL[94] = 1200;
+    ShortD[95] = 1250703; ShortN[95] = 225; ShortL[95] = 1215;
+    ShortD[96] = 1250704; ShortN[96] = 210; ShortL[96] = 1200;
+    ShortD[97] = 1250901; ShortN[97] = 210; ShortL[97] = 1200;
+    ShortD[98] = 1251114; ShortN[98] = 387; ShortL[98] = 1500;
+    ShortD[99] = 1251127; ShortN[99] = 210; ShortL[99] = 1200;
+    ShortD[100] = 1251128; ShortN[100] = 225; ShortL[100] = 1215;
+    ShortD[101] = 1251224; ShortN[101] = 225; ShortL[101] = 1215;
+    ShortD[102] = 1260119; ShortN[102] = 210; ShortL[102] = 1200;
+    ShortD[103] = 1260216; ShortN[103] = 210; ShortL[103] = 1200;
+    ShortD[104] = 1260525; ShortN[104] = 210; ShortL[104] = 1200;
+    ShortD[105] = 1260619; ShortN[105] = 210; ShortL[105] = 1200;
+    ShortD[106] = 1260703; ShortN[106] = 210; ShortL[106] = 1200;
+    ShortD[107] = 1260806; ShortN[107] = 389; ShortL[107] = 1500;
+    ShortD[108] = 1260907; ShortN[108] = 209; ShortL[108] = 1159;
+    ShortD[109] = 1261021; ShortN[109] = 389; ShortL[109] = 1500;
+    ShortCnt = 110;
+    EntryStartMins = IntPortion(EntryStart * 0.01) * 60 + Mod(EntryStart, 100);
+    HoldMins = IntPortion(HoldCheck * 0.01) * 60 + Mod(HoldCheck, 100);
+    ExitMins = IntPortion(ExitStamp * 0.01) * 60 + Mod(ExitStamp, 100);
+end;
+
+MP = MarketPosition;
+If WasIn and MP = 0 then ExitBar = true else ExitBar = false;
+BarMins = IntPortion(Time * 0.01) * 60 + Mod(Time, 100);
+DateJul = DateToJulian(Date);
+If BarMins >= 1020 then SessJul = DateJul + 1 else SessJul = DateJul;            { [S] Globex date }
+If BarMins >= 511 and BarMins <= 900 then InCash = true else InCash = false;      { [S] cash bars 08:31-15:00 CT }
+
+{ [A] roll jumps from the Python's own list: the jump applies from its bar on }
+While RollK < RollCnt and (DateJul > RollJul[RollK] or (DateJul = RollJul[RollK] and Time >= RollT[RollK])) begin
+    CumJump = CumJump + RollJ[RollK];
+    RollK = RollK + 1;
+end;
+
+{ [S] the first cash bar of a session closes yesterday's record and sets up the day }
+If InCash and SessJul <> CurSess then begin
+    If CurSess <> 0 and SN > 0 then begin
+        RngH[RngPos] = SHigh - SLow;
+        RngPos = Mod(RngPos + 1, 60);
+        RngCount = RngCount + 1;
+        P2Close = P1Close;
+        P1Close = SClose - SCum;
+        If SV > 0 then begin                                          { [S] cash-session VWAP = sum(close x volume) / sum(volume) }
+            P1VWAP = SPV / SV - SCum;
+            P1VOK = true;
+        end else
+            P1VOK = false;
+        P1N = SN;
+        PrevCount = PrevCount + 1;
+    end;
+    CurSess = SessJul;
+    SHigh = High;
+    SLow = Low;
+    SN = 0;
+    SPV = 0;
+    SV = 0;
+    SFirstCum = CumJump;
+    { [A] today's cash-bar count and last cash bar from the list }
+    SessDate = JulianToDate(SessJul);
+    While ShortK < ShortCnt and ShortD[ShortK] < SessDate begin
+        ShortK = ShortK + 1;
+    end;
+    TodayN = 390;
+    TodayLast = 1500;
+    If ShortK < ShortCnt and ShortD[ShortK] = SessDate then begin
+        TodayN = ShortN[ShortK];
+        TodayLast = ShortL[ShortK];
+    end;
+    TodayLastMins = IntPortion(TodayLast * 0.01) * 60 + Mod(TodayLast, 100);
+    { [S] ADR = mean range of the previous ADRLen cash sessions }
+    ADRv = 0;
+    If RngCount >= ADRLen then begin
+        RngSum = 0;
+        For J = 1 to ADRLen begin
+            RngSum = RngSum + RngH[Mod(RngPos - J + 60, 60)];
+        end;
+        ADRv = RngSum / ADRLen;
+    end;
+    DayOK = false;
+    Scanning = false;
+    If ADRv > 0 and PrevCount >= 2 then begin
+        PrevMove = (P1Close - P2Close) / ADRv;
+        PDH = P1VWAP + SFirstCum;                                     { [S] the same level for both sides }
+        PDL = PDH;
+        If PrevMove <= PrevMoveMax then AllowLong = true else AllowLong = false;
+        If PrevMove >= -PrevMoveMax then AllowShort = true else AllowShort = false;
+        If TodayN >= MinSessionBars and P1N >= 200 and P1VOK and (AllowLong or AllowShort) then DayOK = true;
+    end;
+    If DayOK then begin
+        If Open > PDH then GapAbove = true else GapAbove = false;
+        If Open < PDL then GapBelow = true else GapBelow = false;
+        If GapAbove then BelowSeen = false else BelowSeen = true;
+        If GapBelow then AboveSeen = false else AboveSeen = true;
+        If AllowLong then DoneLong = false else DoneLong = true;
+        If AllowShort then DoneShort = false else DoneShort = true;
+        EntryEndMins = TodayLastMins - MinTimeLeft;
+        Scanning = true;
+    end;
+end;
+If InCash and SessJul = CurSess then begin
+    If High > SHigh then SHigh = High;
+    If Low < SLow then SLow = Low;
+    SClose = Close;
+    SN = SN + 1;
+    SCum = CumJump;
+    SPV = SPV + Close * Ticks;                                         { Ticks = total bar volume (Build Volume On = Trade Volume) }
+    SV = SV + Ticks;
+end;
+
+{ [S] exits: trailing stop, time exit, early-close exit }
+If MP <> 0 then begin
+    If WasIn = false then begin                                       { the fill bar }
+        TradeSess = CurSess;
+        Dist = StopMult * ADRv;
+        BestPx = EntryPrice;
+        If MP = 1 then StopPx = EntryPrice - Dist else StopPx = EntryPrice + Dist;
+    end;
+    If MP = 1 then begin
+        If High > BestPx then BestPx = High;
+        If BestPx - Dist > StopPx then StopPx = BestPx - Dist;
+    end else begin
+        If Low < BestPx then BestPx = Low;
+        If BestPx + Dist < StopPx then StopPx = BestPx + Dist;
+    end;
+    ExitSent = false;
+    If SessJul <> TradeSess then begin                                { [A] backstop }
+        Sell ("PV-LB") from entry ("PV-L") next bar at market;
+        BuyToCover ("PV-SB") from entry ("PV-S") next bar at market;
+        ExitSent = true;
+    end else if ExitMins <= TodayLastMins then begin
+        If BarMins >= ExitMins - 1 and BarMins < 1020 then begin
+            Sell ("PV-LT") from entry ("PV-L") next bar at market;
+            BuyToCover ("PV-ST") from entry ("PV-S") next bar at market;
+            ExitSent = true;
+        end;
+    end else if BarMins >= TodayLastMins and BarMins < 1020 then begin
+        Sell ("PV-LE") from entry ("PV-L") this bar on close;
+        BuyToCover ("PV-SE") from entry ("PV-S") this bar on close;
+        ExitSent = true;
+    end;
+    If ExitSent = false then begin
+        Sell ("PV-LS") from entry ("PV-L") next bar at StopPx stop;
+        BuyToCover ("PV-SS") from entry ("PV-S") next bar at StopPx stop;
+    end;
+end;
+
+{ [S] the day's scan, one cash bar at a time in the Python's order }
+If Scanning and InCash and SessJul = CurSess then begin
+    If MP = 0 and ExitBar = false then begin
+        If BarMins > EntryEndMins or BarMins >= TodayLastMins then
+            Scanning = false
+        else begin
+            If Close <= PDH then BelowSeen = true;
+            If Close >= PDL then AboveSeen = true;
+            SigDir = 0;
+            If BarMins >= EntryStartMins then begin
+                If DoneLong = false then begin
+                    If Close > PDH and BelowSeen then SigDir = 1
+                    else if GapAbove and BelowSeen = false and BarMins >= HoldMins then SigDir = 1;
+                end;
+                If SigDir = 0 and DoneShort = false then begin
+                    If Close < PDL and AboveSeen then SigDir = -1
+                    else if GapBelow and AboveSeen = false and BarMins >= HoldMins then SigDir = -1;
+                end;
+            end;
+            If SigDir = 1 then begin
+                Buy ("PV-L") ContractQty contracts next bar at market;
+                DoneLong = true;
+            end;
+            If SigDir = -1 then begin
+                SellShort ("PV-S") ContractQty contracts next bar at market;
+                DoneShort = true;
+            end;
+            If SigDir <> 0 and (AllowSecondSide = false or (DoneLong and DoneShort)) then Scanning = false;
+        end;
+    end else begin
+        If Close <= PDH then BelowSeen = true;                        { [S] the level state continues through a trade }
+        If Close >= PDL then AboveSeen = true;
+    end;
+end;
+
+If MP <> 0 then WasIn = true else WasIn = false;

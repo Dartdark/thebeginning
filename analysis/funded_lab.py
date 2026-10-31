@@ -43,6 +43,7 @@ class Lab:
         self.D = len(self.tr)
         self.yr = pd.DatetimeIndex(g.ts[self.tr]).year
         self.W, self.C, self.stop = {}, {}, {}
+        self.N, self.J0 = {}, {}            # round trips per trading day (contracts per NQ unit), first entry minute
 
     def add(self, name, trades, stop_pts=None, slippage=True):
         """stop_pts: per-calendar-row stop distance in points (for risk sizing)."""
@@ -50,9 +51,32 @@ class Lab:
         w, r = paths(self.g, t)
         self.W[name] = w[self.tr] / 10
         self.C[name] = r[self.tr][:, -1] / 10
+        q = t["qty"].to_numpy() if "qty" in t else np.ones(len(t))
+        R = len(self.g.ts)
+        self.N[name] = np.bincount(t["day"], weights=q, minlength=R)[self.tr]
+        j0 = np.full(R, self.W[name].shape[1]); np.minimum.at(j0, t["day"].to_numpy(), t["j0"].to_numpy())
+        self.J0[name] = j0[self.tr]
         if stop_pts is not None:
             self.stop[name] = np.nan_to_num(np.asarray(stop_pts)[self.tr], nan=1e12)
         return self
+
+    def real_fees(self, extra, names=None):
+        """Add `extra` $ per micro round trip on top of the bench's $0.725 (= $7.25 per NQ / 10), in place. Pieces
+        not built with add() (CLS, MOC_MES, VB_F / VB_N splits) count one round trip per traded day, charged from the
+        first minute their path moves. Returns {name: total extra $ per micro} for the record."""
+        out = {}
+        for k in (names or list(self.C)):
+            W, C = self.W[k], self.C[k]
+            if k in self.N:
+                n, j0 = self.N[k], self.J0[k]
+            else:
+                n = ((C != 0) | (np.abs(W).max(axis=1) > 0)).astype(float)
+                mv = np.abs(W) > 0; j0 = np.where(mv.any(axis=1), mv.argmax(axis=1), W.shape[1])
+            fee = extra * n
+            mask = np.arange(W.shape[1])[None, :] >= np.minimum(j0, W.shape[1] - 1)[:, None]
+            self.W[k] = W - fee[:, None] * mask; self.C[k] = C - fee
+            out[k] = fee.sum()
+        return out
 
     def daily(self, name):
         return self.C[name] * 10            # $ per NQ per trading day
