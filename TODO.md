@@ -249,6 +249,11 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   evidence/preregistration gate before returns. Source brings no new dataset; existing acquisition blockers remain.
   Multiday description earns no Apex placement; personal contribution is unverified. Zero new trials.
   [Review](agents/codex/results/till_2942340_20261031.md) · [Evidence](agents/codex/evidence/till_2942340_20261031.md).
+  [Actual acquisition follow-up](agents/codex/results/commodity_roll_data_20261031.md): downloaded pinned public
+  WHEAT/WHEAT_mini multi-maturity files and read2018/current roll documentation. Standard WHEAT holds annual
+  December contracts, not the required nearby pair. Mini prices have delivery-cycle identities but missingness,
+  clock and native identity remain unverified. Complete free2018–22paired ZW panel is not admitted; zero returns.
+
 
 
 - [ ] **FX carry/trend multi-strategy — NEEDS SOURCE CLARIFICATION / DATA (SSRN 3322717; reviewed 2026-10-30).**

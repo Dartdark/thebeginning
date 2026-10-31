@@ -1,0 +1,227 @@
+{
+  "pinned_source_commit": "164328bd76d2937d3dd61491377704c488283bc2",
+  "files": [
+    {
+      "instrument": "WHEAT",
+      "raw_path": "/workspace/commodity_roll_data/WHEAT.csv",
+      "sha256": "a038800ee43cc86d30c0cf2989225f5190ebd9a2499dd10bca83528703ab912e",
+      "git_blob_sha": "b111df84abf4eee835aee840450745395b67d854",
+      "first": "1973-12-19 23:00:00",
+      "last": "2024-03-28 23:00:00",
+      "design_rows": 14501,
+      "design_observed_dates": 1326,
+      "rows_with_both_price_forward": 3251,
+      "dates_with_any_paired_observation": 987,
+      "missing_by_column": {
+        "DATETIME": 0,
+        "CARRY": 3859,
+        "CARRY_CONTRACT": 0,
+        "PRICE": 831,
+        "PRICE_CONTRACT": 0,
+        "FORWARD": 11140,
+        "FORWARD_CONTRACT": 0
+      },
+      "duplicate_timestamps": 0,
+      "price_contract_months": [
+        12
+      ],
+      "unique_design_identity_triples": [
+        {
+          "PRICE_CONTRACT": 20181200,
+          "CARRY_CONTRACT": 20180900,
+          "FORWARD_CONTRACT": 20191200
+        },
+        {
+          "PRICE_CONTRACT": 20191200,
+          "CARRY_CONTRACT": 20190900,
+          "FORWARD_CONTRACT": 20201200
+        },
+        {
+          "PRICE_CONTRACT": 20201200,
+          "CARRY_CONTRACT": 20200900,
+          "FORWARD_CONTRACT": 20211200
+        },
+        {
+          "PRICE_CONTRACT": 20211200,
+          "CARRY_CONTRACT": 20210900,
+          "FORWARD_CONTRACT": 20221200
+        },
+        {
+          "PRICE_CONTRACT": 20221200,
+          "CARRY_CONTRACT": 20220900,
+          "FORWARD_CONTRACT": 20231200
+        },
+        {
+          "PRICE_CONTRACT": 20231200,
+          "CARRY_CONTRACT": 20230900,
+          "FORWARD_CONTRACT": 20241200
+        }
+      ],
+      "limitation": "Any paired intraday observation is NOT a certified synchronized close or complete event path"
+    },
+    {
+      "instrument": "WHEAT_mini",
+      "raw_path": "/workspace/commodity_roll_data/WHEAT_mini.csv",
+      "sha256": "46421224457d235291378db951f1090c82e22a408981cc3f0ae952ffdb8f81d8",
+      "git_blob_sha": "07964943c7a8b44c0221f4d80ff031e9918f3add",
+      "first": "1970-08-17 23:00:00",
+      "last": "2024-03-28 23:00:00",
+      "design_rows": 12357,
+      "design_observed_dates": 1310,
+      "rows_with_both_price_forward": 10221,
+      "dates_with_any_paired_observation": 1299,
+      "missing_by_column": {
+        "DATETIME": 0,
+        "CARRY": 1367,
+        "CARRY_CONTRACT": 0,
+        "PRICE": 769,
+        "PRICE_CONTRACT": 0,
+        "FORWARD": 1367,
+        "FORWARD_CONTRACT": 0
+      },
+      "duplicate_timestamps": 0,
+      "price_contract_months": [
+        3,
+        5,
+        7,
+        9,
+        12
+      ],
+      "unique_design_identity_triples": [
+        {
+          "PRICE_CONTRACT": 20180300,
+          "CARRY_CONTRACT": 20180500,
+          "FORWARD_CONTRACT": 20180500
+        },
+        {
+          "PRICE_CONTRACT": 20180500,
+          "CARRY_CONTRACT": 20180700,
+          "FORWARD_CONTRACT": 20180700
+        },
+        {
+          "PRICE_CONTRACT": 20180700,
+          "CARRY_CONTRACT": 20180900,
+          "FORWARD_CONTRACT": 20180900
+        },
+        {
+          "PRICE_CONTRACT": 20180900,
+          "CARRY_CONTRACT": 20181200,
+          "FORWARD_CONTRACT": 20181200
+        },
+        {
+          "PRICE_CONTRACT": 20181200,
+          "CARRY_CONTRACT": 20190300,
+          "FORWARD_CONTRACT": 20190300
+        },
+        {
+          "PRICE_CONTRACT": 20190300,
+          "CARRY_CONTRACT": 20190500,
+          "FORWARD_CONTRACT": 20190500
+        },
+        {
+          "PRICE_CONTRACT": 20190500,
+          "CARRY_CONTRACT": 20190700,
+          "FORWARD_CONTRACT": 20190700
+        },
+        {
+          "PRICE_CONTRACT": 20190700,
+          "CARRY_CONTRACT": 20190900,
+          "FORWARD_CONTRACT": 20190900
+        },
+        {
+          "PRICE_CONTRACT": 20190900,
+          "CARRY_CONTRACT": 20191200,
+          "FORWARD_CONTRACT": 20191200
+        },
+        {
+          "PRICE_CONTRACT": 20191200,
+          "CARRY_CONTRACT": 20200300,
+          "FORWARD_CONTRACT": 20200300
+        },
+        {
+          "PRICE_CONTRACT": 20200300,
+          "CARRY_CONTRACT": 20200500,
+          "FORWARD_CONTRACT": 20200500
+        },
+        {
+          "PRICE_CONTRACT": 20200500,
+          "CARRY_CONTRACT": 20200700,
+          "FORWARD_CONTRACT": 20200700
+        },
+        {
+          "PRICE_CONTRACT": 20200700,
+          "CARRY_CONTRACT": 20200900,
+          "FORWARD_CONTRACT": 20200900
+        },
+        {
+          "PRICE_CONTRACT": 20200900,
+          "CARRY_CONTRACT": 20201200,
+          "FORWARD_CONTRACT": 20201200
+        },
+        {
+          "PRICE_CONTRACT": 20201200,
+          "CARRY_CONTRACT": 20210300,
+          "FORWARD_CONTRACT": 20210300
+        },
+        {
+          "PRICE_CONTRACT": 20210300,
+          "CARRY_CONTRACT": 20210500,
+          "FORWARD_CONTRACT": 20210500
+        },
+        {
+          "PRICE_CONTRACT": 20210500,
+          "CARRY_CONTRACT": 20210700,
+          "FORWARD_CONTRACT": 20210700
+        },
+        {
+          "PRICE_CONTRACT": 20210700,
+          "CARRY_CONTRACT": 20210900,
+          "FORWARD_CONTRACT": 20210900
+        },
+        {
+          "PRICE_CONTRACT": 20210900,
+          "CARRY_CONTRACT": 20211200,
+          "FORWARD_CONTRACT": 20211200
+        },
+        {
+          "PRICE_CONTRACT": 20211200,
+          "CARRY_CONTRACT": 20220300,
+          "FORWARD_CONTRACT": 20220300
+        },
+        {
+          "PRICE_CONTRACT": 20220300,
+          "CARRY_CONTRACT": 20220500,
+          "FORWARD_CONTRACT": 20220500
+        },
+        {
+          "PRICE_CONTRACT": 20220500,
+          "CARRY_CONTRACT": 20220700,
+          "FORWARD_CONTRACT": 20220700
+        },
+        {
+          "PRICE_CONTRACT": 20220700,
+          "CARRY_CONTRACT": 20220900,
+          "FORWARD_CONTRACT": 20220900
+        },
+        {
+          "PRICE_CONTRACT": 20220900,
+          "CARRY_CONTRACT": 20221200,
+          "FORWARD_CONTRACT": 20221200
+        },
+        {
+          "PRICE_CONTRACT": 20221200,
+          "CARRY_CONTRACT": 20230300,
+          "FORWARD_CONTRACT": 20230300
+        },
+        {
+          "PRICE_CONTRACT": 20230300,
+          "CARRY_CONTRACT": 20230500,
+          "FORWARD_CONTRACT": 20230500
+        }
+      ],
+      "limitation": "Any paired intraday observation is NOT a certified synchronized close or complete event path"
+    }
+  ],
+  "economic_trials": 0,
+  "returns_computed": false
+}
