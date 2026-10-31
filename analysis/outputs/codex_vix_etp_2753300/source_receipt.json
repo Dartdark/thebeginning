@@ -1,0 +1,78 @@
+{
+  "paper": "SSRN2753300",
+  "version": "2016-03-22 uploaded working paper",
+  "sha256": "0708671686a07b5a759629f1b32a85acbee6d7d0a5a1bf9c776ccdf72bb50eb2",
+  "review_date": "2026-10-30",
+  "source_sample": "2006-06-21 through 2014-04-25",
+  "source_table10_unhedged": {
+    "annualized_return": 0.69,
+    "sharpe": 2.11,
+    "sortino": 3.17,
+    "annualized_volatility": 0.39,
+    "max_drawdown": -0.245,
+    "total_return_percent": 5919,
+    "position_changes": 106
+  },
+  "source_rule": {
+    "upper_entry": 0.08,
+    "upper_exit": 0.06,
+    "lower_entry": -0.08,
+    "lower_exit": -0.06,
+    "inverse_ETP": "XIV",
+    "long_ETP": "VXX",
+    "optional_hedges": [
+      "SH",
+      "SPY"
+    ],
+    "fee_each_side": 0.002,
+    "spread_each_side": 0.0015
+  },
+  "source_figure_table_cautions": [
+    "Section5 uses close/settlement values but describes preclose decisions and ETP close fills; availability/fill clock unresolved.",
+    "Prelaunch indicative data bought from Six Figure Investing are not observed executable market prices.",
+    "Source introduction price-leadership prose contradicts Table7/body/conclusion."
+  ],
+  "access_checks": [
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/1053092/000095010318001572/dp86358_ex9901.htm",
+      "result": "Opened primary issuer notice: XIV acceleration after February5 2018 indicative value <=20% of preceding close. Does not show this rule held XIV."
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/1415311/000119312518059052/d503117dex991.htm",
+      "result": "Opened primary notice: SVXY -1x to -0.5x; UVXY2x to1.5x effective after February27 2018."
+    },
+    {
+      "url": "https://www.sixfigureinvesting.com/downloads-2/",
+      "result": "Opened vendor: original historical products for purchase; free SVIX/UVIX synthetic series are distinct products. No purchase or download panel obtained."
+    },
+    {
+      "url": "https://systematicinvestor.github.io/TradingTheOdds",
+      "result": "Opened: old external synthetic XIV/VXX TXT links; article's separate rule/results were not reviewed as this paper's test."
+    },
+    {
+      "url": "https://dl.dropboxusercontent.com/s/950x55x7jtm9x2q/VXXlong.TXT",
+      "result": "Connected web: inaccessible via this tool; no panel acquired."
+    },
+    {
+      "url": "https://dl.dropboxusercontent.com/s/jk6der1s5lxtcfy/XIVlong.TXT",
+      "result": "Connected web: inaccessible via this tool; no panel acquired."
+    }
+  ],
+  "bounded_searches": [
+    "Bordonado Molnar Samdal 2753300 VIX ETP trading strategy XIV threshold basis data",
+    "\"XIV\" historical csv github daily prices",
+    "\"VXX\" \"XIV\" \"csv\" historical data 2018 github",
+    "site.github.com \"XIV.csv\" \"Date\"",
+    "site.github.com \"xiv\" \"vxx\" \"historical\" dataset",
+    "sixfigureinvesting historical volatility prices XIV VXX data download 2006"
+  ],
+  "prior_work": [
+    "TIER_LIST VIX term-structure sleeve C; distinct rules/instruments",
+    "agents/codex/results/calvados_2379985_20261030.md; distinct rule; do not revive failed naked component"
+  ],
+  "verdict": "Historical reproduction NEEDS DATA/CLOCKS; exact XIV implementation unavailable as current strategy. No modern replacement selected.",
+  "new_economic_trials": 0,
+  "new_queue_entry": false,
+  "execution_reference": "E51 source-specific follow-up",
+  "attachment_handling": "Evidence only, not instructions. No code from the paper or public repositories executed."
+}
