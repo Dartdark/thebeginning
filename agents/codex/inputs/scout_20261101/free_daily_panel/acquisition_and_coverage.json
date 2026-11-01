@@ -1,0 +1,556 @@
+{
+  "retrieved_at": "2026-11-01T18:46:32.763239+00:00",
+  "repository": "ArturSepp/TrendFollowingSystems",
+  "commit": "8994f98bc31e954fa65c76c006e59eda266de745",
+  "scope": "public research acquisition and nonempty/date coverage only; NO return calculation or screening",
+  "rights": "Repository MIT software licence and explicit documented public research purpose retained; vendor-derived history not independently licensed/certified. Raw data not redistributed.",
+  "raw_files_git_tracked": false,
+  "return_tests_executed": false,
+  "rows": 17487,
+  "columns": 84,
+  "adjacent_duplicate_date_rows": 0,
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/ArturSepp/TrendFollowingSystems/8994f98bc31e954fa65c76c006e59eda266de745/LICENSE",
+      "file": "agents/codex/inputs/scout_20261101/free_daily_panel/local/LICENSE",
+      "status": 200,
+      "bytes": 1085,
+      "sha256": "e14dfe2be5628826093a69f297dc09dcff3a418ec1d6a0da6e4e000abb6f0e93"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ArturSepp/TrendFollowingSystems/8994f98bc31e954fa65c76c006e59eda266de745/README.md",
+      "file": "agents/codex/inputs/scout_20261101/free_daily_panel/local/README.md",
+      "status": 200,
+      "bytes": 26347,
+      "sha256": "1ad87a891158c5b2f13fcb18e8016bc79a97db34f7d2ab89e624eab48a6d0e49"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ArturSepp/TrendFollowingSystems/8994f98bc31e954fa65c76c006e59eda266de745/src/trendfollowing/universe.py",
+      "file": "agents/codex/inputs/scout_20261101/free_daily_panel/local/universe.py",
+      "status": 200,
+      "bytes": 5830,
+      "sha256": "2c775baa9c4e50aa082327e01ddaaab793562d54a70ecc81df0e248e9190d1bf"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ArturSepp/TrendFollowingSystems/8994f98bc31e954fa65c76c006e59eda266de745/src/trendfollowing/resources/futures/tf_system_data_descriptive_df.csv",
+      "file": "agents/codex/inputs/scout_20261101/free_daily_panel/local/tf_system_data_descriptive_df.csv",
+      "status": 200,
+      "bytes": 2299,
+      "sha256": "0240b62b3fe6241e9619892d5738d2b92d21159e4738732b26ff3a3df801f97e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ArturSepp/TrendFollowingSystems/8994f98bc31e954fa65c76c006e59eda266de745/src/trendfollowing/resources/futures/tf_system_data_prices.csv",
+      "file": "agents/codex/inputs/scout_20261101/free_daily_panel/local/tf_system_data_prices.csv",
+      "status": 200,
+      "bytes": 18249126,
+      "sha256": "454c0292dea4d817526042ff10db9e7b35b6c5c1ebb210f97ca97a449a739ace"
+    }
+  ],
+  "coverage": {
+    "ES1 Index": {
+      "first_date": "1962-01-02",
+      "last_date": "2026-07-10",
+      "nonempty": 16834,
+      "design_nonempty": 1305
+    },
+    "NQ1 Index": {
+      "first_date": "1985-02-04",
+      "last_date": "2026-07-10",
+      "nonempty": 10810,
+      "design_nonempty": 1305
+    },
+    "RTY1 Index": {
+      "first_date": "1978-12-29",
+      "last_date": "2026-07-10",
+      "nonempty": 12401,
+      "design_nonempty": 1305
+    },
+    "DM1 Index": {
+      "first_date": "1962-01-02",
+      "last_date": "2026-07-10",
+      "nonempty": 16834,
+      "design_nonempty": 1305
+    },
+    "MES1 Index": {
+      "first_date": "1987-12-31",
+      "last_date": "2026-07-10",
+      "nonempty": 10052,
+      "design_nonempty": 1305
+    },
+    "VG1 Index": {
+      "first_date": "1986-12-31",
+      "last_date": "2026-07-10",
+      "nonempty": 10313,
+      "design_nonempty": 1305
+    },
+    "GX1 Index": {
+      "first_date": "1962-01-02",
+      "last_date": "2026-07-10",
+      "nonempty": 16834,
+      "design_nonempty": 1305
+    },
+    "CF1 Index": {
+      "first_date": "1987-07-09",
+      "last_date": "2026-07-10",
+      "nonempty": 10177,
+      "design_nonempty": 1305
+    },
+    "EO1 Index": {
+      "first_date": "1983-01-03",
+      "last_date": "2026-07-10",
+      "nonempty": 11355,
+      "design_nonempty": 1305
+    },
+    "Z 1 Index": {
+      "first_date": "1983-12-30",
+      "last_date": "2026-07-10",
+      "nonempty": 11096,
+      "design_nonempty": 1305
+    },
+    "SM1 Index": {
+      "first_date": "1998-09-22",
+      "last_date": "2026-07-10",
+      "nonempty": 7254,
+      "design_nonempty": 1305
+    },
+    "QC1 Index": {
+      "first_date": "1986-12-18",
+      "last_date": "2026-07-10",
+      "nonempty": 10322,
+      "design_nonempty": 1305
+    },
+    "NO1 Index": {
+      "first_date": "1970-01-05",
+      "last_date": "2026-07-10",
+      "nonempty": 14745,
+      "design_nonempty": 1305
+    },
+    "TP1 Index": {
+      "first_date": "1962-01-04",
+      "last_date": "2026-07-10",
+      "nonempty": 16832,
+      "design_nonempty": 1305
+    },
+    "XP1 Index": {
+      "first_date": "1992-05-29",
+      "last_date": "2026-07-10",
+      "nonempty": 8901,
+      "design_nonempty": 1305
+    },
+    "PT1 Index": {
+      "first_date": "1982-01-29",
+      "last_date": "2026-07-10",
+      "nonempty": 11596,
+      "design_nonempty": 1305
+    },
+    "TWT1 Index": {
+      "first_date": "2000-06-16",
+      "last_date": "2026-07-10",
+      "nonempty": 6801,
+      "design_nonempty": 1305
+    },
+    "HI1 Index": {
+      "first_date": "1970-01-02",
+      "last_date": "2026-07-10",
+      "nonempty": 14746,
+      "design_nonempty": 1305
+    },
+    "HC1 Index": {
+      "first_date": "1993-07-15",
+      "last_date": "2026-07-10",
+      "nonempty": 8607,
+      "design_nonempty": 1305
+    },
+    "XU1 Index": {
+      "first_date": "2007-01-01",
+      "last_date": "2026-07-10",
+      "nonempty": 5095,
+      "design_nonempty": 1305
+    },
+    "JGS1 Index": {
+      "first_date": "1990-07-03",
+      "last_date": "2026-07-10",
+      "nonempty": 9399,
+      "design_nonempty": 1305
+    },
+    "TU1 Comdty": {
+      "first_date": "1962-01-01",
+      "last_date": "2026-07-10",
+      "nonempty": 16835,
+      "design_nonempty": 1305
+    },
+    "FV1 Comdty": {
+      "first_date": "1962-01-05",
+      "last_date": "2026-07-10",
+      "nonempty": 16831,
+      "design_nonempty": 1305
+    },
+    "TY1 Comdty": {
+      "first_date": "1962-01-05",
+      "last_date": "2026-07-10",
+      "nonempty": 16831,
+      "design_nonempty": 1305
+    },
+    "UXY1 Comdty": {
+      "first_date": "1962-01-05",
+      "last_date": "2026-07-10",
+      "nonempty": 16831,
+      "design_nonempty": 1305
+    },
+    "US1 Comdty": {
+      "first_date": "1962-01-05",
+      "last_date": "2026-07-10",
+      "nonempty": 16831,
+      "design_nonempty": 1305
+    },
+    "WN1 Comdty": {
+      "first_date": "2010-01-13",
+      "last_date": "2026-07-10",
+      "nonempty": 4303,
+      "design_nonempty": 1305
+    },
+    "DU1 Comdty": {
+      "first_date": "1992-04-06",
+      "last_date": "2026-07-10",
+      "nonempty": 8940,
+      "design_nonempty": 1305
+    },
+    "OE1 Comdty": {
+      "first_date": "1991-10-08",
+      "last_date": "2026-07-10",
+      "nonempty": 9069,
+      "design_nonempty": 1305
+    },
+    "RX1 Comdty": {
+      "first_date": "1962-03-01",
+      "last_date": "2026-07-10",
+      "nonempty": 16792,
+      "design_nonempty": 1305
+    },
+    "UB1 Comdty": {
+      "first_date": "1992-04-06",
+      "last_date": "2026-07-10",
+      "nonempty": 8940,
+      "design_nonempty": 1305
+    },
+    "G 1 Comdty": {
+      "first_date": "1962-03-01",
+      "last_date": "2026-07-10",
+      "nonempty": 16792,
+      "design_nonempty": 1305
+    },
+    "JB1 Comdty": {
+      "first_date": "1985-10-22",
+      "last_date": "2026-07-10",
+      "nonempty": 10624,
+      "design_nonempty": 1305
+    },
+    "OAT1 Comdty": {
+      "first_date": "1992-04-06",
+      "last_date": "2026-07-10",
+      "nonempty": 8940,
+      "design_nonempty": 1305
+    },
+    "CN1 Comdty": {
+      "first_date": "1962-03-01",
+      "last_date": "2026-07-10",
+      "nonempty": 16792,
+      "design_nonempty": 1305
+    },
+    "XM1 Comdty": {
+      "first_date": "1987-09-22",
+      "last_date": "2026-07-10",
+      "nonempty": 10124,
+      "design_nonempty": 1305
+    },
+    "IK1 Comdty": {
+      "first_date": "1992-04-06",
+      "last_date": "2026-07-10",
+      "nonempty": 8940,
+      "design_nonempty": 1305
+    },
+    "SFR5 Comdty": {
+      "first_date": "2018-05-04",
+      "last_date": "2026-07-10",
+      "nonempty": 2136,
+      "design_nonempty": 1216
+    },
+    "SFI5 Comdty": {
+      "first_date": "2018-06-04",
+      "last_date": "2026-07-10",
+      "nonempty": 2115,
+      "design_nonempty": 1195
+    },
+    "ER4 Comdty": {
+      "first_date": "1998-12-09",
+      "last_date": "2026-07-10",
+      "nonempty": 7198,
+      "design_nonempty": 1305
+    },
+    "IR4 Comdty": {
+      "first_date": "1989-06-13",
+      "last_date": "2026-07-10",
+      "nonempty": 9674,
+      "design_nonempty": 1305
+    },
+    "EC1 Curncy": {
+      "first_date": "1978-05-02",
+      "last_date": "2026-07-10",
+      "nonempty": 12574,
+      "design_nonempty": 1305
+    },
+    "BP1 Curncy": {
+      "first_date": "1971-09-01",
+      "last_date": "2026-07-10",
+      "nonempty": 14313,
+      "design_nonempty": 1305
+    },
+    "SF1 Curncy": {
+      "first_date": "1971-09-01",
+      "last_date": "2026-07-10",
+      "nonempty": 14313,
+      "design_nonempty": 1305
+    },
+    "CD1 Curncy": {
+      "first_date": "1971-09-01",
+      "last_date": "2026-07-10",
+      "nonempty": 14313,
+      "design_nonempty": 1305
+    },
+    "JY1 Curncy": {
+      "first_date": "1971-09-01",
+      "last_date": "2026-07-10",
+      "nonempty": 14313,
+      "design_nonempty": 1305
+    },
+    "AD1 Curncy": {
+      "first_date": "1978-05-02",
+      "last_date": "2026-07-10",
+      "nonempty": 12574,
+      "design_nonempty": 1305
+    },
+    "NV1 Curncy": {
+      "first_date": "1978-05-02",
+      "last_date": "2026-07-10",
+      "nonempty": 12574,
+      "design_nonempty": 1305
+    },
+    "SE1 Curncy": {
+      "first_date": "1971-09-01",
+      "last_date": "2026-07-10",
+      "nonempty": 14313,
+      "design_nonempty": 1305
+    },
+    "NO1 Curncy": {
+      "first_date": "1971-09-01",
+      "last_date": "2026-07-10",
+      "nonempty": 14313,
+      "design_nonempty": 1305
+    },
+    "PE1 Curncy": {
+      "first_date": "1990-01-01",
+      "last_date": "2026-07-10",
+      "nonempty": 9530,
+      "design_nonempty": 1305
+    },
+    "CL1 Comdty": {
+      "first_date": "1989-01-04",
+      "last_date": "2026-07-10",
+      "nonempty": 9788,
+      "design_nonempty": 1305
+    },
+    "CO1 Comdty": {
+      "first_date": "1988-06-27",
+      "last_date": "2026-07-10",
+      "nonempty": 9925,
+      "design_nonempty": 1305
+    },
+    "HO1 Comdty": {
+      "first_date": "1986-07-02",
+      "last_date": "2026-07-10",
+      "nonempty": 10443,
+      "design_nonempty": 1305
+    },
+    "XB1 Comdty": {
+      "first_date": "2005-10-05",
+      "last_date": "2026-07-10",
+      "nonempty": 5418,
+      "design_nonempty": 1305
+    },
+    "QS1 Comdty": {
+      "first_date": "1989-07-05",
+      "last_date": "2026-07-10",
+      "nonempty": 9658,
+      "design_nonempty": 1305
+    },
+    "CUA1 Comdty": {
+      "first_date": "2007-09-03",
+      "last_date": "2026-07-10",
+      "nonempty": 4920,
+      "design_nonempty": 1305
+    },
+    "NG1 Comdty": {
+      "first_date": "1990-04-05",
+      "last_date": "2026-07-10",
+      "nonempty": 9462,
+      "design_nonempty": 1305
+    },
+    "GC1 Comdty": {
+      "first_date": "1975-01-06",
+      "last_date": "2026-07-10",
+      "nonempty": 13440,
+      "design_nonempty": 1305
+    },
+    "HG1 Comdty": {
+      "first_date": "1988-12-08",
+      "last_date": "2026-07-10",
+      "nonempty": 9807,
+      "design_nonempty": 1305
+    },
+    "SI1 Comdty": {
+      "first_date": "1975-01-06",
+      "last_date": "2026-07-10",
+      "nonempty": 13440,
+      "design_nonempty": 1305
+    },
+    "PL1 Comdty": {
+      "first_date": "1986-04-03",
+      "last_date": "2026-07-10",
+      "nonempty": 10507,
+      "design_nonempty": 1305
+    },
+    "PA1 Comdty": {
+      "first_date": "1986-04-03",
+      "last_date": "2026-07-10",
+      "nonempty": 10507,
+      "design_nonempty": 1305
+    },
+    "SCO1 Comdty": {
+      "first_date": "2016-01-05",
+      "last_date": "2026-07-10",
+      "nonempty": 2744,
+      "design_nonempty": 1305
+    },
+    "C 1 Comdty": {
+      "first_date": "1959-07-03",
+      "last_date": "2026-07-10",
+      "nonempty": 17486,
+      "design_nonempty": 1305
+    },
+    "W 1 Comdty": {
+      "first_date": "1959-07-03",
+      "last_date": "2026-07-10",
+      "nonempty": 17486,
+      "design_nonempty": 1305
+    },
+    "KW1 Comdty": {
+      "first_date": "1973-01-03",
+      "last_date": "2026-07-10",
+      "nonempty": 13963,
+      "design_nonempty": 1305
+    },
+    "MWE1 Comdty": {
+      "first_date": "1988-12-08",
+      "last_date": "2026-07-10",
+      "nonempty": 9807,
+      "design_nonempty": 1305
+    },
+    "CA1 Comdty": {
+      "first_date": "2007-01-03",
+      "last_date": "2026-07-10",
+      "nonempty": 5093,
+      "design_nonempty": 1305
+    },
+    "S 1 Comdty": {
+      "first_date": "1959-07-03",
+      "last_date": "2026-07-10",
+      "nonempty": 17486,
+      "design_nonempty": 1305
+    },
+    "SM1 Comdty": {
+      "first_date": "1964-01-03",
+      "last_date": "2026-07-10",
+      "nonempty": 16311,
+      "design_nonempty": 1305
+    },
+    "BO1 Comdty": {
+      "first_date": "1964-01-03",
+      "last_date": "2026-07-10",
+      "nonempty": 16311,
+      "design_nonempty": 1305
+    },
+    "RS1 Comdty": {
+      "first_date": "1982-01-05",
+      "last_date": "2026-07-10",
+      "nonempty": 11614,
+      "design_nonempty": 1305
+    },
+    "IJ1 Comdty": {
+      "first_date": "2007-01-03",
+      "last_date": "2026-07-10",
+      "nonempty": 5093,
+      "design_nonempty": 1305
+    },
+    "LC1 Comdty": {
+      "first_date": "1972-01-04",
+      "last_date": "2026-07-10",
+      "nonempty": 14224,
+      "design_nonempty": 1305
+    },
+    "LH1 Comdty": {
+      "first_date": "1986-04-03",
+      "last_date": "2026-07-10",
+      "nonempty": 10507,
+      "design_nonempty": 1305
+    },
+    "FC1 Comdty": {
+      "first_date": "1978-01-04",
+      "last_date": "2026-07-10",
+      "nonempty": 12658,
+      "design_nonempty": 1305
+    },
+    "SB1 Comdty": {
+      "first_date": "1972-01-04",
+      "last_date": "2026-07-10",
+      "nonempty": 14224,
+      "design_nonempty": 1305
+    },
+    "QW1 Comdty": {
+      "first_date": "1989-01-13",
+      "last_date": "2026-07-10",
+      "nonempty": 9781,
+      "design_nonempty": 1305
+    },
+    "KC1 Comdty": {
+      "first_date": "1972-08-18",
+      "last_date": "2026-07-10",
+      "nonempty": 14061,
+      "design_nonempty": 1305
+    },
+    "DF1 Comdty": {
+      "first_date": "2008-01-16",
+      "last_date": "2026-07-10",
+      "nonempty": 4823,
+      "design_nonempty": 1305
+    },
+    "CC1 Comdty": {
+      "first_date": "1965-01-05",
+      "last_date": "2026-07-10",
+      "nonempty": 16049,
+      "design_nonempty": 1305
+    },
+    "QC1 Comdty": {
+      "first_date": "1989-01-05",
+      "last_date": "2026-07-10",
+      "nonempty": 9787,
+      "design_nonempty": 1305
+    },
+    "CT1 Comdty": {
+      "first_date": "1967-06-16",
+      "last_date": "2026-07-10",
+      "nonempty": 15411,
+      "design_nonempty": 1305
+    }
+  },
+  "admission": "NOT admitted: continuous daily panel; no individual delivery curves, roll ledger, settlement clocks, native contract multipliers/quotes or intraday adverse paths certified."
+}

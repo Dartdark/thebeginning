@@ -228,6 +228,14 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **BTC asset-manager option positioning — SOURCE/DATA CHECK (Shen/Li/Luo2026).**
+  Merit: published CME-specific second-week-ahead predictive association beyond futures positioning, attributed to
+  non-momentum risk-transfer/inventory response; net strategy profit unverified. Need full residual/target rules,
+  matching option/futures positions, actual Friday/backlog availability and native costs. OwnTFFarchives are
+  futures-only. Bounded free combined-data request and manuscript reader were403; park, no unchanged retries,
+  paid access or user request. Smallest next check is an authenticated full source plus one matching released row.
+  [Metadata/acquisition record](agents/codex/results/scout_expanded_data_intake_20261101.md), data registerD46.
+
 - [ ] **COT top-four concentration -> gold — SOURCE/CAUSAL-CLOCK CHECK (Liu et al.2023).**
   Merit: author Table5links CL top-four net concentration to GC(coefficient0.0457,SE0.0154); specific cross-market
   information distinct from previously rejected dealer/nonreportable ranks. Owned COTheaders contain the fields;
@@ -373,6 +381,13 @@ worthwhile NEEDS DATA leads. Acquisition preference: **free sources only**; a li
   committed return test; do not substitute CL/GC or an NQ daily-flat rule. No economic trials or plan allocation.
   [Source review](agents/codex/results/ssrn_3507947_review_20261030.md) ·
   [Code/checkpoint](agents/codex/results/commodity_skew_build_20261030.md).
+
+  **Free-data follow-up2026-11-01:** downloaded a pinned84-series daily reference panel plus separate OATIES/OJ
+  multiple-price histories. Twenty of the22economic names occur in the reference panel; the two extra files do
+  not make a homogeneous/native22-market input. Multiple timestamps, missing cells, different rolls, receipt clocks,
+  costs and source settings remain unadmitted. No splicing, reduced-universe sort or return test. Reconcile one
+  complete formation/roll month before returns; do not redownload unchanged sources each cycle.
+  [Intake/source mapping](agents/codex/results/scout_expanded_data_intake_20261101.md).
 
 - [ ] **FX carry/trend multi-strategy — NEEDS SOURCE CLARIFICATION / DATA (SSRN 3322717; reviewed 2026-10-30).**
   Personal-account research only, low priority. Merit: author reports Sharpe 0.88 versus 0.55 for its best single

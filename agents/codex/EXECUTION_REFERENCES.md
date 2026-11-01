@@ -711,6 +711,16 @@ so its numerical advantage is an author claim, not verified execution savings. M
 queue position or first-tape-print fills. Record the fill bracket for future execution studies; do not infer an NG
 strategy from generic mean reversion. See the same discovery report and per-paper7458058record.
 
+E34 follow-up2026-11-01 — [public daily-input intake](results/scout_expanded_data_intake_20261101.md).
+Use: a public continuous daily replication panel is not a dated-contract ledger or an intraday fill/adverse path.
+The acquired84-series panel and separate oats/OJhistories have different constructions. Supplemental2018–22
+date-label counts include multiple observations on1,257oats and1,260OJdates; do not choose daily last rows
+without a verified settlement/receipt clock. Name/coverage matches are not native contract certification.
+Evidence: pinned downloads, hashes and schema/date/value-quality scans only; no strategy returns or execution savings.
+Limits: no input admission, source roll replication, integer portfolio or funded inference; raw data remain local.
+Next check for an eligible future study: reconcile one complete source-compatible formation/roll month and preserve
+missing observations. Do not fill returns with zeros or import third-party proportional costs as broker tick fees.
+
 ### E35 — GreenORB: fill-anchored targets, engine callbacks and source parity
 
 Source: user-uploaded GreenORB PDF/post and Liqport class, 2026-10-30.

@@ -35,6 +35,13 @@ signed SPX dealer inventory, intraday option surfaces and futures curves. Do not
 prices, OHLC, unsigned OI or daily VIX. Keep source/data-blocked leads, including weekly basis reversal, parked
 until genuinely new inputs arrive; do not let them displace compatible research.
 
+**Reference intake2026-11-01:** `agents/codex/inputs/scout_20261101/free_daily_panel/`records a newly downloaded
+84-series continuous daily research panel and separate oats/OJ multiple-price files. Raw data stay local/ignored;
+pinned retrieval/coverage/quality manifests are committed. This is **not an admitted native input universe**:
+different series constructions, multiple daily observations, missing cells, original release/settlement clocks,
+dated roll legs and native quantities/costs require source-specific review. No automatic broad-universe return
+test, missing-contract proxy or funded-account daily surrogate. Consult the intake before repeating acquisition.
+
 ## User search bank
 
 Prioritize forced/scheduled flows, while checking their actual input needs:
