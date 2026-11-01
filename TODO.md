@@ -55,7 +55,7 @@ bottom). Times are Central (CT).
   150K funded stack (FUNDED_PLAN.md). Add its account number to the logger / live reports.
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
-## Kill switch install (2026-11-01) - next weekend, never mid-session
+## Kill switch install (2026-11-01) - LATER, when you choose a weekend (never mid-session)
 - [ ] You: on the VPS, check EL Collections: PowerLanguage Editor > New indicator, paste
       `if LastBarOnChart then Print(ELC.PathExists("C:\TradingLogs"));`, compile. Tell Claude if it does NOT compile.
 - [ ] You: `git pull`, then repaste the 2026-11-01 versions of every live strategy (VB / VB_SP, ONB ADX30, EOS, Bridge) and
