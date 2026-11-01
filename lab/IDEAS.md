@@ -37,7 +37,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   t 0.85, 3/5 yrs); V2 month-end post-fix fade -$6 (t -0.3); V3 every day -$15 (gross +$2, t -7.3). Month-end beats the
   same clock on other days (placebo p 0.000) but too few trades for t 2. Holdout not opened. `analysis/lab_Q003.py`.
 
-## Q004 · queued · priority 2
+## Q004 · done · priority 2
 - source: lab seed (positioning)
 - market: NQ (personal/weekly) or as a filter on ONB / Monday Long
 - mechanism: extreme speculator positioning (COT non-commercial net long/short z-score) precedes mean reversion over 1-4
@@ -45,16 +45,20 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - rule sketch: weekly: COT z(52w) of NQ non-commercial net; V1 long NQ Tue->Tue when z <= -1.5, V2 short when z >= 1.5,
   V3 as a size filter on ONB (2x when aligned). Personal-only for V1/V2 (multi-day).
 - Apex: V3 only. data: data/COT_NQ.csv
+- result: skipped 2026-11-01, not tested: same signal as the ranked COT items (Bridge COT Dealer Rank weekly hold C,
+  as a day trade / plan filter F; CoT reversal index gate F). A z-score instead of a rank is a parameter tweak.
 
-## Q005 · queued · priority 2
+## Q005 · done · priority 2
 - source: lab seed (gold)
 - market: GC (MGC)
 - mechanism: COMEX open 07:20 CT: physical/ETF flows hit after the overnight Asian/London price discovery; London PM fix
   (09:00 CT) is a benchmark trade time for bullion dealers. Test drift into the PM fix and reversal after.
 - rule sketch: V1 follow the 07:20->08:55 move into 09:00; V2 fade 09:00->10:30; V3 V2 only on days |move| >= 0.3 ATR.
 - Apex: MGC yes. data: data/GC_*, scratch gc.pkl
+- result: skipped 2026-11-01, not tested: duplicate of F items (Antigravity edges: GC follow 7:20->8:30 and the PM fix
+  8:45->9:00 to 10:30, t -0.5 / -0.8; S-rank round 1 LBMA AM / PM follow; LBMA auction short D).
 
-## Q006 · queued · priority 3
+## Q006 · done · priority 3
 - source: lab seed (relative value, lowers net equity beta)
 - market: NQ vs ES spread (MNQ/MES)
 - mechanism: index arbitrage and rebalancing keep NQ/ES tied intraday; large intraday divergences (ratio z) partly close
@@ -62,6 +66,8 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - rule sketch: at 12:00 CT if NQ/ES ratio return since 08:30 z(60d) >= 2: short NQ / long ES dollar-neutral to 14:55;
   V2 opposite sign; V3 threshold 1.5.
 - Apex: yes (two legs, both intraday). data: g24.pkl, ge.pkl
+- result: skipped 2026-11-01, not tested: duplicate of F items (decoupled NQ-ES mornings follow / fade t <= 0.6;
+  NQ-ES Kalman pairs 17/18 versions lose, divergences keep widening from |z| >= 2).
 
 ## Q007 · done · priority 1
 - source: Codex audit 2026-10-31; data supplied by the user 2026-10-31 (NG 1-min 2017-2026, converted ET -> CT)
@@ -81,7 +87,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - market: ZC / ZS / ZW (grains)
 - mechanism: USDA WASDE monthly 11:00 CT. Blocked: no grain minute data, and Apex eligibility of grains to confirm.
 
-## Q009 · queued · priority 2
+## Q009 · running · priority 2
 - source: follow-up of Q007 (parent: Q007, depth 1)
 - market: NG (QG)
 - mechanism: pre-announcement drift: traders who must be flat or hedged into the storage number (utilities, weather funds
