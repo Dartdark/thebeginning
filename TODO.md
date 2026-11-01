@@ -60,6 +60,10 @@ bottom). Times are Central (CT).
       you, then retype the final version **in your own words** (both drafts are Claude-written and carry the text
       watermark; your own rewrite removes it). Then apply to Mercor's Generalist role and Finance Expert pool.
 - [ ] You: optional, finish practice 4 (paused at line 4) when you want more code-reading practice.
+- [ ] You (LOW PRIORITY, start when you say go): 4-week 'build it yourself' backtester (Karpathy loop, 2026-11-01).
+      Wk 1 pick the concept (an honest backtest) · Wk 2 type a ~30-line backtester yourself on one simple rule, Claude
+      explains each line first · Wk 3 plant the practice-round bugs (look-ahead, no costs, same-bar) and fix them ·
+      Wk 4 record yourself explaining it; add it to `portfolio/` as the piece you wrote. ~1-2 h a week.
 
 ## Live guard additions (2026-10-30) - this weekend
 - [x] VPS: follow `live/vps/VPS_MAINTENANCE.md` (updates only on Saturdays, weekly Saturday restart, Sunday pre-open routine).
