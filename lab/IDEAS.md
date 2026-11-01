@@ -233,3 +233,17 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   V3 V1 only after a down US session (07:20 -> 12:25 return < 0). No stop for V1 (overnight gaps; note E30), 0.5 ATR for
   V2. Placebo: random 14-h windows; compare with GC's buy-and-hold drift over the same hours.
 - Apex: yes (overnight within one Apex day). data: data/GC_1min_*.csv
+
+## Q019 · queued · priority 2
+- tier_check: master 2026-11-01, dupcheck 'ICT' / 'manipulation' / 'sweep': F 'ICT Accumulation-Manipulation-Distribution / Power of 3 on NQ' tested the London sweep of the Asia range (no direction, t -1.0); the 4H candle chain and the 8:30 news fake-out are untested; queued as a distinct test, expect weak
+- who_pays: structural: traders with stop orders resting beyond the previous 4H candle's high / low; large orders fill against their stops when price runs them, then price reverses
+- source: user 2026-11-01, 'If and Then price theory' sheet (ICT 4H profiling: 2AM / 6AM / 10AM EST candles; 'IF a candle manipulates THEN the next continues')
+- market: NQ (MNQ); ES (MES) as V2
+- mechanism: a 4H candle that takes out the prior 4H candle's high (low) and closes back inside its range has swept resting stops; the next 4H candle continues the other way.
+- rule sketch (definition fixed, CT clock: 4H candles start 17:00, 21:00, 01:00, 05:00, 09:00 CT): 'manipulates' = the candle's
+  high > prior candle's high and its close < prior candle's high (bearish sweep), or low < prior low and close > prior low
+  (bullish). Trade the NEXT candle in the reversal direction: enter at its open, stop beyond the sweep candle's extreme
+  (+1 tick), exit at that candle's close (flat by 15:55 CT). V1 NQ, only the 01:00 / 05:00 / 09:00 CT sweep candles
+  (= the sheet's 2AM / 6AM / 10AM EST); V2 same on ES; V3 NQ 8:30 CT 'red folder' days (CPI, NFP, PPI, retail sales): if
+  07:30-08:30 CT sweeps the 06:30-07:30 range and closes back inside, trade 08:31-09:30 CT in the reversal direction.
+- Apex: yes (intraday). data: data/NQ_1min_*, data/ES_1min_*; release calendar from the NFP / CPI files used by the plan.
