@@ -24,3 +24,10 @@ exit bar.
 non-release weekdays (same count, 500 draws) p < 0.05; >= 4 of 5 years positive. Stage 3 one look on 2023-onward: same
 sign, t >= 1.5, PF >= 1.1. t bar `lab_tools.bar()` 3.64 (N 373); pre-registered mechanism with 3 variants -> full-sample
 t >= 2.0 + clean placebo. Apex: yes (MES / ZN intraday).
+
+## Amendment 1 (2026-11-01, after the first run; day selection only, not a variant)
+The 0901 volume confirmation (>= 3x the 0846-0900 median) is unusable on ES: at 09:00 CT ES is 30 minutes into the cash
+session, so the median ratio is 1.9 on ISM days and 1.3 on Conference Board days; only 18 / 60 ISM and 2 / 60 CB days
+(2018-22) passed, leaving 10 trades. The release dates are fixed by the agencies' calendars, so the confirmation is dropped:
+days = the calendar rule alone, still dropping days with an ES 0731 volume spike (>= 3x). Variants, exits, costs, gates
+unchanged. First run kept in the record: V2 +$184 (t 1.49, 10 trades), V1 +$116 (t 0.81), V3 ZN -$83; placebo p 0.12.

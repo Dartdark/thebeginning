@@ -174,7 +174,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   1-hour ZN move of ~4 ticks: stop at stage 1 unless gross > $50.
 - Apex: yes. data: data/ZN_1min_*.csv
 
-## Q016 · running · priority 1
+## Q016 · done · priority 1
 - source: scout 2026-11-01: Kurov, Sancetta, Strasser & Wolfe, 'Price Drift before U.S. Macroeconomic News: Private
   Information about Public Announcements?' (ECB WP 1901 / JFQA 2019; `papers/ecb-wp1901-kurov-predrift.pdf`). Not in
   TIER_LIST (only the CL EIA pre-release drift is ranked).
@@ -190,6 +190,10 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   V1 ES follow from the 08:59 open to 09:10; V2 ES follow to 09:30; V3 = V1 on ZN. Stop 0.3 ATR. Placebo: same clock on
   non-release weekdays. Power: ~24 events a year, ~120 in 2018-22.
 - Apex: yes (intraday). data: data/ES_1min_*.csv, data/ZN_1min_*.csv
+- result: FAIL stage 1 (2026-11-01). Amended day selection (calendar only; the ES 09:00 volume confirm kept 13 days):
+  95 design days, 75 ES trades: V1 to 09:10 +$36 (gross $66, PF 1.28, t 0.76, 2/5 yrs: 2022 = +$3,140 of +$2,670),
+  V2 to 09:30 +$50 (t 0.73, 4/5), V3 ZN -$35 (gross +$2, t -2.1); non-release days -$22, placebo p 0.06. First run
+  (10 trades) V2 t 1.49. Holdout not opened. `analysis/lab_Q016.py`. No follow-ups.
 
 ## Q017 · queued · priority 2
 - source: scout 2026-11-01: Van Hemert, 'MOM-TOM: Momentum and the Turn of the Month' (2014 working paper; SSRN PDF not
