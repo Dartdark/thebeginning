@@ -26,14 +26,19 @@ and `agents/codex/EXECUTION_REFERENCES.md` for any fill question. Work on `claud
    Report Sharpe, Sortino, PF, Calmar, Ulcer (analysis/metrics.py) for the best variant, longs and shorts separately.
    Keep a run inside ~60 minutes: if a stage can't finish, log `ERROR` with what's missing and leave the idea `queued`.
 5. **Record.** `python3 analysis/lab_tools.py log '<json>'` (id, title, market, stage reached, verdict, gate, t_design,
-   t_holdout, looks, tier, lesson, follow_ups). Set the idea `done` with a `result:` line. One line in `lab/LESSONS.md`.
+   t_holdout, looks, tier, lesson, follow_ups) **plus the receipt** (enforced): `verified` (what was actually run and
+   checked), `not_verified` (what was NOT run: e.g. holdout, benches, checker, MultiCharts), `risks`. An ERROR row also
+   needs `error_class`: missing_data / too_few_events (never retried), code_error / timeout (retried once; fix something
+   first), other. Two ERROR rows hold the idea for the user. Set the idea `done` with a `result:` line. One line in `lab/LESSONS.md`.
    Rank it in `TIER_LIST.md` (stage 1-2 fail: F/D; 3: D/C; 4: C or the capital-expansion bench; 5 PASS: B candidate).
    Any fill / market-behavior finding -> `agents/codex/EXECUTION_REFERENCES.md` (next E number).
 6. **Follow-ups.** After a FAIL, at most 2 new ideas with their own mechanism (not parameter tweaks), depth <= 2
    (`parent:`), appended to the END of `lab/IDEAS.md`.
 7. **Refill.** If fewer than 3 ideas are queued, add up to 3 from: `papers/SCOUT_LOG.md` leads, `WATCHLIST.md` items due,
    `lab/LESSONS.md`, Codex's results on `codex/work` (read only). Prefer non-NQ / scheduled-flow mechanisms (the books
-   are 92-96% NQ risk). Never re-queue an idea `TIER_LIST.md` already ranked D/F.
+   are 92-96% NQ risk). Every new idea needs a `- tier_check:` line right under its heading, written after
+   `python3 analysis/lab_tools.py dupcheck '<2-3 key words>'` (words used + result); without it `next` skips the idea.
+   Never queue an idea `TIER_LIST.md` already ranked C/D/F for the same market and mechanism.
 8. **Commit + push** to `claude/nq-trading-strategy-params-5h9d20`, `claude/quirky-noether-4dla64` and your designated
    branch (pull first). No model IDs in commits.
 9. **Report.** Only a stage-4+ result or a stage-5 PASS is news: send the master session

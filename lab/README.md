@@ -12,6 +12,9 @@ follow-up ideas. **Nothing the lab finds goes into a plan, a chart or the VPS wi
 - **Multiple testing:** every study is a trial. A lab idea needs t >= `metrics.t_threshold(N)` with N = ranked items in
   TIER_LIST + lab studies so far (`lab_tools.bar()`), unless pre-registered from a stated economic mechanism with <= 3
   variants (then t >= 2.0 and clean placebo). Each idea may test at most 3 variants, fixed before any return is seen.
+- **Rules in code (2026-11-01):** `lab_tools.py` refuses ideas with no `- tier_check:` line, rows with no receipt
+  (verified / not_verified / risks), ERROR rows with no `error_class`; non-retryable errors and a second error hold the idea
+  for the user (shown as 'needs_user' in the panel data).
 - **Follow-ups:** a failed idea may spawn at most 2 follow-up ideas, depth <= 2 (no fishing chains), each with its own
   mechanism; follow-ups go to the END of the queue.
 

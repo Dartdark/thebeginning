@@ -5,6 +5,12 @@ the sealed-look budget and the multiple-testing bar, and write the dashboard's L
   python3 analysis/lab_tools.py bar               -> current t bar for a lab idea
   python3 analysis/lab_tools.py log '<json>'      -> append one study row (fields below) and rebuild the panel
   python3 analysis/lab_tools.py summary           -> rebuild analysis/outputs/dashboard/lab.json
+  python3 analysis/lab_tools.py dupcheck 'w1 w2'  -> TIER_LIST rows ranked C / D / F containing every word (queue-time check)
+Harness rules in code (2026-11-01, user: 'build all 4'):
+  - an idea is only runnable with a '- tier_check:' line (who checked TIER_LIST, the words used, the result);
+  - ERROR rows need error_class; 'missing_data' / 'too_few_events' are not retried, 'code_error' / 'timeout' once; an idea with
+    2 ERROR rows is held for the user (needs_user in the panel);
+  - every logged row carries a receipt: verified / not_verified / risks (lists; empty only when true).
 Study row: id, title, market, stage (0-5 reached), verdict (PASS / FAIL / BLOCKED / ERROR), gate (the gate that failed, or ''),
 t_design, t_holdout, looks (holdout openings in this study, 0 or 1), tier, lesson, follow_ups (list of IDs).
 """
@@ -40,12 +46,37 @@ def ideas():
     out, cur = [], None
     for line in open(IDEAS, encoding="utf-8"):
         m = re.match(r"^## (Q\d+) · (\w+) · priority (\d)", line)
-        if m: cur = dict(id=m.group(1), status=m.group(2), priority=int(m.group(3)), order=len(out)); out.append(cur)
+        if m: cur = dict(id=m.group(1), status=m.group(2), priority=int(m.group(3)), order=len(out), tier_check=False); out.append(cur)
+        elif cur is not None and line.startswith("- tier_check:"): cur["tier_check"] = True
+    return out
+
+
+RETRY_ONCE, NO_RETRY = {"code_error", "timeout"}, {"missing_data", "too_few_events"}
+ERROR_CLASSES = RETRY_ONCE | NO_RETRY | {"other"}
+
+
+def held(i, L=None):
+    """Why an idea may not run again ('' = free): no TIER_LIST check, a non-retryable error, or 2 errors (user decides)."""
+    if not i["tier_check"]: return "no tier_check line (grep TIER_LIST first: lab_tools.py dupcheck)"
+    errs = [r for r in (L if L is not None else ledger()) if r.get("id") == i["id"] and r.get("verdict") == "ERROR"]
+    if len(errs) >= 2: return "2 errors: held for the user"
+    if errs and errs[-1].get("error_class") not in RETRY_ONCE: return f"error '{errs[-1].get('error_class')}' is not retried"
+    return ""
+
+
+def dupcheck(words):
+    """TIER_LIST rows in tiers C / D / F that contain every word (case-insensitive)."""
+    ws, tier, out = [w.lower() for w in words.split()], None, []
+    for line in open("TIER_LIST.md", encoding="utf-8"):
+        m = re.match(r"^## ([SABCDF]\+?)\s*$", line.strip())
+        if m: tier = m.group(1); continue
+        if tier in ("C", "D", "F") and line.startswith("| ") and all(w in line.lower() for w in ws):
+            out.append(f"{tier}: {line[2:160].strip()}")
     return out
 
 
 def next_idea():
-    q = [i for i in ideas() if i["status"] == "queued"]
+    L = ledger(); q = [i for i in ideas() if i["status"] == "queued" and not held(i, L)]
     return min(q, key=lambda i: (i["priority"], i["order"]))["id"] if q else None
 
 
@@ -53,7 +84,9 @@ def can_run():
     if os.path.exists(STOP): return "STOPPED: lab/STOP exists (kill switch)."
     n = runs_today()
     if n >= CAP_DAY: return f"CAP: {n} studies already today (max {CAP_DAY})."
-    if not next_idea(): return "EMPTY: no queued idea in lab/IDEAS.md."
+    if not next_idea():
+        L = ledger(); h = [f"{i['id']} ({held(i, L)})" for i in ideas() if i["status"] == "queued" and held(i, L)]
+        return "EMPTY: no runnable queued idea in lab/IDEAS.md." + (" Held: " + "; ".join(h) if h else "")
     return "OK"
 
 
@@ -67,8 +100,10 @@ def bar():
 
 def log(row):
     L = ledger(); row = dict(row); row.setdefault("date", now().isoformat(timespec="minutes"))
-    need = {"id", "title", "stage", "verdict"}
-    assert need <= set(row), f"missing {need - set(row)}"
+    need = {"id", "title", "stage", "verdict", "verified", "not_verified", "risks"}
+    assert need <= set(row), f"missing {need - set(row)} (every row needs a receipt: verified / not_verified / risks)"
+    if row["verdict"] == "ERROR":
+        assert row.get("error_class") in ERROR_CLASSES, f"ERROR rows need error_class in {sorted(ERROR_CLASSES)}"
     if row.get("looks", 0) and looks_quarter(L) + int(row["looks"]) > LOOKS_QUARTER:
         raise SystemExit(f"sealed-look budget spent ({LOOKS_QUARTER} a quarter): ask the user")
     L.append(row); json.dump(L, open(LEDGER, "w"), indent=1); summary(L)
@@ -82,7 +117,7 @@ def summary(L=None):
                 studies=len(L), today=runs_today(L), cap=CAP_DAY, looks_quarter=looks_quarter(L), looks_budget=LOOKS_QUARTER,
                 passed_stage={s: sum(1 for r in L if r.get("stage", 0) >= s) for s in range(1, 6)},
                 queued=sum(1 for i in I if i["status"] == "queued"), blocked=sum(1 for i in I if i["status"] == "blocked"),
-                next=next_idea(), t_bar=t, n_trials=n_items, alive=alive[-20:], recent=L[-15:][::-1])
+                next=next_idea(), needs_user=[f"{i['id']}: {held(i, L)}" for i in I if i["status"] == "queued" and held(i, L)], t_bar=t, n_trials=n_items, alive=alive[-20:], recent=L[-15:][::-1])
     os.makedirs(os.path.dirname(OUT), exist_ok=True); json.dump(data, open(OUT, "w"), indent=1)
     # dashboard tables (Apex Live Desk 'Strategy lab' panel): one stats row + one row per study, newest first
     stats = {k: data[k] for k in ("state", "studies", "today", "cap", "queued", "blocked", "looks_quarter", "looks_budget",
@@ -100,6 +135,7 @@ if __name__ == "__main__":
     if cmd == "can_run":
         r = can_run(); print(r); sys.exit(0 if r == "OK" else 1)
     if cmd == "next": print(next_idea() or "")
+    if cmd == "dupcheck": print("\n".join(dupcheck(sys.argv[2])) or "no C/D/F row contains all of: " + sys.argv[2])
     if cmd == "bar": print("N %d, t bar %.2f" % bar())
     if cmd == "log": log(json.loads(sys.argv[2])); print("logged")
     if cmd == "summary": d = summary(); print({k: d[k] for k in ("studies", "today", "queued", "next", "t_bar")})

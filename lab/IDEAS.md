@@ -145,6 +145,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   -$11, placebo p 0.19; first (ADP-contaminated) run: V2 +$37, t 0.59. Holdout not opened. `analysis/lab_Q012.py`.
 
 ## Q013 · queued · priority 2
+- tier_check: master 2026-11-01, dupcheck 'NFP 6E': only the F-ranked 6E London-fix reversal (different event); clear
 - source: lab refill 2026-11-01 (NFP on 6E untested; NQ NFP fade is a plan strategy, 6E is not)
 - market: 6E (M6E)
 - mechanism: US payrolls (07:30 CT, first Friday) reprice the dollar; FX order flow after macro news persists (Evans &
@@ -154,6 +155,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - Apex: yes. data: data/6E_1min_*.csv
 
 ## Q014 · queued · priority 2
+- tier_check: master 2026-11-01, dupcheck 'golden week' / 'lunar new year': only an unrelated gold-valuation paper; clear
 - source: lab refill 2026-11-01 (not in TIER_LIST: no Golden Week / Lunar New Year item)
 - market: GC (MGC)
 - mechanism: Chinese physical gold demand (SGE, the largest physical market) is absent while China is closed for Lunar
@@ -165,6 +167,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - Apex: yes (MGC). data: data/GC_1min_*.csv; SGE holiday dates (to build, write data/sge_holidays.csv first)
 
 ## Q015 · queued · priority 3
+- tier_check: master 2026-11-01, dupcheck 'ZN settle': no ZN settlement row (CL / GC settlement are F, per its source line); clear
 - source: lab refill 2026-11-01 (ZN daily settlement not in TIER_LIST; CL / GC settlement versions are F)
 - market: ZN
 - mechanism: Treasury futures settle on the 13:59-14:00 CT window; TAS orders and hedgers marking books to settlement
@@ -196,6 +199,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   (10 trades) V2 t 1.49. Holdout not opened. `analysis/lab_Q016.py`. No follow-ups.
 
 ## Q017 · queued · priority 2
+- tier_check: master 2026-11-01, dupcheck 'turn of the month': C equity calendar row + D personal overnight round (ES/NQ TOM long); trend-direction commodity TOM is new; clear
 - source: scout 2026-11-01: Van Hemert, 'MOM-TOM: Momentum and the Turn of the Month' (2014 working paper; SSRN PDF not
   in repo, summaries via Quantpedia / CXO): 90% of the Newedge trend index return came on the 3 turn-of-month days
   2000-14, partly reversed after, strongest in less liquid commodities. Not in TIER_LIST (its 'Turn of the month' rows
@@ -212,6 +216,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - Apex: yes (all intraday). data: data/{CL,NG,GC,ZN,6E}_1min_*.csv (24 h files; roll weeks excluded as usual)
 
 ## Q018 · queued · priority 3
+- tier_check: master 2026-11-01, dupcheck 'gold overnight' / 'GC night': Nocturne (C) and the overnight round (D) are NQ/ES only; GC overnight untested; clear
 - source: scout 2026-11-01: Blose, Gondhalekar & Kort (2018, COMEX gold front month and GLD 1985-2012: overnight returns
   significantly positive, day returns significantly negative; cited in Branch & Ma, SSRN 3259614; the basis of the
   Nocturne note, which tested NQ only). GC itself not in TIER_LIST.
