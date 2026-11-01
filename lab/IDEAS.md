@@ -163,3 +163,13 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   used). V1 short GC 07:20 -> 12:25 CT on each closure weekday; V2 long the first 2 sessions after the reopening;
   V3 V1 only on the first 3 closure days. Stop 0.3 ATR. Placebo: same clock on random non-closure weekdays.
 - Apex: yes (MGC). data: data/GC_1min_*.csv; SGE holiday dates (to build, write data/sge_holidays.csv first)
+
+## Q015 · queued · priority 3
+- source: lab refill 2026-11-01 (ZN daily settlement not in TIER_LIST; CL / GC settlement versions are F)
+- market: ZN
+- mechanism: Treasury futures settle on the 13:59-14:00 CT window; TAS orders and hedgers marking books to settlement
+  trade into it, and dealers' basis / roll hedges are executed against it daily. Test follow into and fade after.
+- rule sketch: V1 follow the 12:00 -> 13:55 move 13:56 -> 14:00; V2 fade the 12:00 -> 14:00 move 14:01 -> 15:00; V3 V2 only
+  when |move| >= 0.3 ATR. Stop 0.3 ATR. Power: ~250 trades a year. Cost warning: ZN round trip $36.25 vs a typical
+  1-hour ZN move of ~4 ticks: stop at stage 1 unless gross > $50.
+- Apex: yes. data: data/ZN_1min_*.csv
