@@ -26,7 +26,8 @@ MultiCharts code; add every solved error) · `DEVELOPMENT_PROCESS.md` · `RUNBOO
 - **Testing standard:** costs $7.25/NQ ($5/ES) + 1 tick per market/stop fill; 2018-2026, by year and 2023 onward; placebo /
   walk-forward where relevant. Always report Sharpe, Sortino, PF, Calmar, Ulcer (`analysis/metrics.py`), whole and longs /
   shorts separately, bootstrap intervals + drawdown permutation on the 2023+ holdout (`analysis/resampling.py`), Monte Carlo
-  at trading size (`analysis/montecarlo.py`). Plan decisions on the bootstrapped funded bench (`analysis/funded_bootstrap.py`).
+  at trading size (`analysis/montecarlo.py`). Plan decisions on the bootstrapped funded bench (`analysis/funded_bootstrap.py`). Saved outputs carry a provenance
+  line (code commit + data range/fingerprint): run them as `tools/run_stamped.sh analysis/x.py ... > analysis/outputs/x.txt`.
   Promotion above C needs t >= `metrics.t_threshold(N_items)` (`analysis/trials.py`) or deflated Sharpe >= 0.95 unless
   pre-registered, and the `strategy-checker` agent on `checks/candidates/<name>/`. Longs and shorts analysed separately.
 - **Add or replace (2026-10-18):** test every candidate as an addition AND as a replacement of the plan piece it overlaps

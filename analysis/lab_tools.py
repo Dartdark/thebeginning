@@ -109,6 +109,7 @@ def bar():
 
 def log(row):
     L = ledger(); row = dict(row); row.setdefault("date", now().isoformat(timespec="minutes"))
+    import provenance; row.setdefault("provenance", provenance.stamp())        # review gap #5 (2026-11-01)
     need = {"id", "title", "stage", "verdict", "verified", "not_verified", "risks"}
     assert need <= set(row), f"missing {need - set(row)} (every row needs a receipt: verified / not_verified / risks)"
     if row["verdict"] == "ERROR":
