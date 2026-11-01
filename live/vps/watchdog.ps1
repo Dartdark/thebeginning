@@ -97,7 +97,7 @@ if ($cfg -and $hhmm -ge 815 -and $hhmm -le 1600) {
         $peak = [double]$v.start; $eqNow = $null
         Get-ChildItem "$Logs\2*.csv" | Where-Object { $_.BaseName -ge $v.started } | Sort-Object Name | ForEach-Object {
             $last = $null
-            Get-Content $_.FullName | Where-Object { $_ -like ("ACCT,*," + $v.id + ",*") } | ForEach-Object { $e = [double]($_.Split(",")[6]); if ($e -gt 0) { $last = $e } }
+            Get-Content $_.FullName | Where-Object { $_ -like "ACCT,*" } | ForEach-Object { $c = $_.Split(","); if ($c.Length -gt 6 -and $c[3] -eq $v.id) { $e = 0.0; if ([double]::TryParse($c[6], [ref]$e) -and $e -gt 0) { $last = $e } } }   # column 4 only (Codex review 2026-11-01 #1: column 9 = route)
             if ($null -ne $last) { if ($_.BaseName -eq $day) { $eqNow = $last } else { $peak = [math]::Max($peak, $last) } }
         }
         if ($null -eq $eqNow) { continue }

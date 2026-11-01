@@ -33,9 +33,11 @@ CLOSED_AFTER = {"#1": "20261026", "#3": "20261030"}
 OUT = "analysis/outputs/dashboard"
 
 
-def split(tag):
+def split(tag, day=""):
+    """Tag -> (strategy, account). The 150 tags belonged to #3 until it closed (2026-10-30) and to #4 from its first
+    session 2026-11-02 (Codex review 2026-11-01 #2: date-effective, old #3 trades keep #3)."""
     tag = str(tag)
-    if tag.endswith("150"): return tag[:-3], "#3"
+    if tag.endswith("150"): return tag[:-3], ("#4" if str(day) >= "20261102" else "#3")
     base, _, acct = tag.partition("-")
     return base, {"": "#1", "2": "#2"}.get(acct, "#" + acct)
 
@@ -45,7 +47,7 @@ def main():
     df = df[df.event == "CLOSE"].drop_duplicates()
     rows = []
     for r in df.itertuples():
-        strat, acct = split(r.tag)
+        strat, acct = split(r.tag, r.exit_date)
         if acct in CLOSED_AFTER and r.exit_date > CLOSED_AFTER[acct]: continue
         d = f"{r.exit_date[:4]}-{r.exit_date[4:6]}-{r.exit_date[6:]}"
         rows.append(dict(trade_id=f"{acct}-{r.tag}-{r.entry_date}-{r.entry_time}", date=d, account=acct,

@@ -40,13 +40,17 @@ $status = [ordered]@{
 }
 $status | ConvertTo-Json -Depth 5 | Set-Content "$Out\status.json" -Encoding UTF8
 
-# one-commit branch (amended each run), force-pushed (history never grows)
-Set-Location $Out
+# one-commit branch (amended each run), force-pushed (history never grows). Fail closed (Codex review 2026-11-01 #4): every
+# git call names the status repo explicitly (-C $Out), and nothing runs unless that repo's top level IS $Out and its branch
+# is vps-status, so a failed directory change can never stage or amend C:\TradingRepo.
 $url = (git -C "C:\TradingRepo" remote get-url origin)
-if (-not (Test-Path ".git")) { git init -q; git checkout -q -b vps-status; $first = $true }
-git -c user.name="VPS status" -c user.email="vps@localhost" add -A
+if (-not (Test-Path "$Out\.git")) { git -C $Out init -q; git -C $Out checkout -q -b vps-status; $first = $true }
+$top = (git -C $Out rev-parse --show-toplevel 2>$null); $br = (git -C $Out rev-parse --abbrev-ref HEAD 2>$null)
+if (-not $top -or ((Resolve-Path $top).Path.TrimEnd("\") -ne (Resolve-Path $Out).Path.TrimEnd("\")) -or ($br -ne "vps-status" -and -not $first)) {
+    Say "ABORT: status repo check failed (top '$top', branch '$br'); nothing staged"; exit 1 }
+git -C $Out -c user.name="VPS status" -c user.email="vps@localhost" add -A
 $amend = @(); if (-not $first) { $amend = @("--amend") }
-git -c user.name="VPS status" -c user.email="vps@localhost" commit -q @amend -m "VPS status $((Get-Date).ToString('yyyy-MM-dd HH:mm'))"
-git push -q -f $url vps-status:vps-status 2>&1 | Out-Null
+git -C $Out -c user.name="VPS status" -c user.email="vps@localhost" commit -q @amend -m "VPS status $((Get-Date).ToString('yyyy-MM-dd HH:mm'))"
+git -C $Out push -q -f $url vps-status:vps-status 2>&1 | Out-Null
 if ($LASTEXITCODE -eq 0) { Say "pushed ($($procs.Count) MC processes)" } else { Say "push FAILED" }
 exit 0

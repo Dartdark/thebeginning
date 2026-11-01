@@ -37,7 +37,8 @@ def gate():
     edge = live / bt if bt > 0 else None
     if why_pause: return "PAUSE", why_pause, trades, edge
     if trades < MIN_TRADES: return "PLAN ONLY", [f"{trades} live trades < {MIN_TRADES}: evidence too thin to scale past the plan"], trades, edge
-    if edge is None or edge < MIN_EDGE: return "PLAN ONLY", [f"live edge {edge:.0%} of backtest < {MIN_EDGE:.0%}"], trades, edge
+    if edge is None: return "PLAN ONLY", ["live edge UNKNOWN (no backtest reference): insufficient evidence"], trades, edge   # Codex 2026-11-01 #6
+    if edge < MIN_EDGE: return "PLAN ONLY", [f"live edge {edge:.0%} of backtest < {MIN_EDGE:.0%} (trade-weighted points, not dollars)"], trades, edge
     return "GO", [f"{trades} live trades, live edge {edge:.0%} of backtest, no alarm"], trades, edge
 
 
