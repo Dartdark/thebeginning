@@ -77,3 +77,13 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - Never write PowerShell or Windows paths through a Python string: "\2" became an invisible control character and silenced
   the new floor alarm (2026-10-30, Codex cross-review). Use raw strings or write the file directly.
 - The weekly review must check Claude's own week of code, not only Codex's: five defects this week were all in new Claude code (2026-10-30).
+
+## Corrections from the user (one line per correction, added in the same reply; user rule 2026-11-01)
+- (2026-10-30, "you sent me the v2 version") Before sending a deliverable, open the exact file being sent and check its
+  title, version and date match what was asked; regenerate rather than resend an older copy.
+- (2026-10-30, "the agreed plan is not what we just discussed") When a document restates numbers or a plan, re-derive
+  them from the latest decision in this conversation / TODO, not from the document's earlier version.
+- (2026-11-01, "why are your replies double?") Write the reply text once, after the PushNotification call, never before
+  and after it.
+- (2026-11-01, "where's the code?") Don't assume the user can open a file link on the phone: when they need to read
+  something now (a task, code to review), put it in the reply as well as the link.
