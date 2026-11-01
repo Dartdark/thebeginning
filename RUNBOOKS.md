@@ -18,3 +18,8 @@ days, act on problems (fix / `MULTICHARTS_PITFALLS.md` / `TODO.md`), test ideas 
 2026-10-19 Claude (Cowork on the user's PC) writes the daily notes from the user's answers; keep the user's own words, never
 invent fills or numbers. Trades come from the VPS trade log (`apex_strategies/Apex_Trade_Logger.txt` ->
 `live/trades/YYYYMMDD.csv`); `analysis/journal_trades.py` writes them into the note (weekday task 16:40 CT).
+
+## Morning brief (user 2026-11-01)
+Scheduled task 'Morning brief' (`trig_01D4QcEmooHTMpSJQPCqSroR`) wakes the master session daily at 07:47 CT:
+`python3 analysis/morning_brief.py 24 --send` (headline to ntfy) and the full brief (max 15 lines) as the reply. Pure code:
+lab ledger + queue, scout log, new lab ideas, Code reviewer and Codex commits, what is waiting on the user, open 'You' to-dos.
