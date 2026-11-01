@@ -113,3 +113,13 @@ Found on the way:
 - Rebuilding `scratch_data` also needs `gy.pkl` (YM) and `btc.pkl` (BTC) grids before `s_rank_gap_round2_test.py`, which
   writes `s_rank_gap2.pkl` for the bench lab. `build_lab` doesn't make those two grids; I built them with Grid24 on the
   full-day files.
+
+## 2026-11-01: GC USA -> Asia continuation (user upload; code + paper; "one more variable to cut the drawdown")
+
+- **Code review:** no logic defect found. The DST rule, weekend skip, regime / ATR buffers and fallbacks are causal.
+- **Points to check:**
+  - The chart clock: on a New York-time GC chart every window is one hour earlier. That reproduces the report best.
+  - The 1-contract floor breaks the risk budget in volatile years.
+- **Test:** four variables pre-registered, chosen on 2018-22. None cuts the 2023+ drawdown, and since 2023 the
+  continuation condition adds nothing over Asia-hours drift. Tier D. Details in
+  `checks/candidates/gc_asia_continuation/verdict.md`.

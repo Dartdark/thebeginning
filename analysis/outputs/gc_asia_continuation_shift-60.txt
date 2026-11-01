@@ -1,0 +1,97 @@
+Clock: shift -60 min vs the code read in CT (-60 = the user's chart on New York time: closest to the report)
+USA-up signals 2018+: 888; after the 90-day regime filter: 556 trades (2018-03-06 .. 2026-10-08); GC data to 2026-10-13
+
+== Base rule as uploaded (regime on), user's report: 2018-22 254 trades PF 1.64, 2023-26 245 trades PF 1.31 (ATR sizing, their costs)
+              set   n       net    avg   pf    t    maxdd  ret_dd  win
+     2018-22 1 GC 288  14242.00  49.45 1.23 1.28  5852.25    2.43 0.50
+2018-22 ATR-sized 288 130006.25 451.41 1.34 1.72 34383.00    3.78 0.50
+       2023+ 1 GC 268  38797.00 144.76 1.22 0.95 34217.00    1.13 0.53
+  2023+ ATR-sized 268  94814.75 353.79 1.27 1.45 34217.00    2.77 0.53
+
+by year (1 GC): date   2018    2019    2020    2021    2022    2023    2024     2025     2026
+size   19.0    59.0    84.0    98.0    28.0    60.0    71.0     93.0     44.0
+sum  -928.0 -3828.0  8481.0  5770.0  4747.0  1305.0  4175.0  21006.0  12311.0
+mean  -49.0   -65.0   101.0    59.0   170.0    22.0    59.0    226.0    280.0
+
+== Benchmark: long EVERY Asia session (same regime / weekend rules), 1 GC; and USA-down nights only
+                      set   n      net    avg   pf     t    maxdd  ret_dd  win
+      2018-22 every night 548  -7853.0 -14.33 0.94 -0.50 19639.25   -0.40 0.48
+2018-22 USA up (the rule) 288  14242.0  49.45 1.23  1.28  5852.25    2.43 0.50
+         2018-22 USA down 260 -22095.0 -84.98 0.72 -1.98 24292.50   -0.91 0.46
+        2023+ every night 534  70248.5 131.55 1.19  1.10 51650.25    1.36 0.52
+  2023+ USA up (the rule) 268  38797.0 144.76 1.22  0.95 34217.00    1.13 0.53
+           2023+ USA down 266  31451.5 118.24 1.16  0.64 41987.75    0.75 0.52
+
+Worst 8 nights 2023+ (1 GC):  asia_date      net1  usa_ret
+2026-04-02 -17797.25     0.79
+2025-04-25  -6377.25     1.10
+2026-02-24  -5747.25     1.49
+2026-05-12  -5577.25     0.48
+2026-01-07  -5287.25     0.81
+2026-04-21  -5267.25     0.07
+2026-02-10  -4697.25     1.14
+2025-05-27  -3967.25     0.28
+
+== Candidates (1 GC). kept / removed; return/DD vs the base; placebo = random removal of the same share (1,000 draws)
+                         variable  period keep  kept_n  kept_avg  removed_avg  kept_pf  kept_t  base_ret_dd  kept_ret_dd  base_dd  kept_dd  placebo_ret_dd_p50 beats_placebo
+         V1 close location >= 0.5 2018-22  90%     258     49.84        46.08     1.23    1.19         2.43         2.43  5852.25  5287.75                2.29           57%
+         V1 close location >= 0.5   2023+  87%     232    140.08       174.97     1.22    0.83         1.13         0.88 34217.00 36792.50                1.01           38%
+              V2 last USA hour up 2018-22  47%     136     42.68        55.51     1.19    0.75         2.43         1.30  5852.25  4460.75                1.43           46%
+              V2 last USA hour up   2023+  56%     149    145.57       143.76     1.19    0.59         1.13         0.64 34217.00 33724.25                0.91           38%
+            V3 6E USA return <= 0 2018-22  39%     111    111.49        10.55     1.55    1.61         2.43         3.49  5852.25  3546.25                1.24           88%
+            V3 6E USA return <= 0   2023+  39%     105     66.27       195.33     1.08    0.23         1.13         0.27 34217.00 26239.00                0.81           32%
+V4 SGE open (skip China holidays) 2018-22  97%     278     59.87      -240.25     1.29    1.51         2.43         2.84  5852.25  5852.25                2.39           85%
+V4 SGE open (skip China holidays)   2023+  93%     249    157.85       -26.72     1.24    0.97         1.13         1.10 34217.00 35792.25                1.09           51%
+
+Chosen on 2018-22 only: V4 SGE open (skip China holidays)
+                         variable  period keep  kept_n  kept_avg  removed_avg  kept_pf  kept_t  base_ret_dd  kept_ret_dd  base_dd  kept_dd  placebo_ret_dd_p50 beats_placebo
+V4 SGE open (skip China holidays) 2018-22  97%     278     59.87      -240.25     1.29    1.51         2.43         2.84  5852.25  5852.25                2.39           85%
+V4 SGE open (skip China holidays)   2023+  93%     249    157.85       -26.72     1.24    0.97         1.13         1.10 34217.00 35792.25                1.09           51%
+
+Chosen variable, ATR-sized (the user's sizing), both periods:
+                                        set   n       net    avg   pf    t    maxdd  ret_dd  win
+                               2018-22 base 288 130006.25 451.41 1.34 1.72 34383.00    3.78 0.50
+                                 2023+ base 268  94814.75 353.79 1.27 1.45 34217.00    2.77 0.53
+2018-22 + V4 SGE open (skip China holidays) 278 146401.75 526.62 1.40 1.97 34383.00    4.26 0.51
+  2023+ + V4 SGE open (skip China holidays) 249 104806.50 420.91 1.32 1.63 35792.25    2.93 0.54
+by year kept (1 GC): {2018: -928.0, 2019: -3783.0, 2020: 8436.0, 2021: 7976.0, 2022: 4944.0, 2023: 1274.0, 2024: 5649.0, 2025: 22632.0, 2026: 9750.0}
+
+== base: metrics per GC (daily, calendar of business days)
+        trades win  avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+whole      556 51%  $95 $5,210   0.37    0.55          1.23 $34,217   0.15  8.08       1.29
+2018-22    288 50%  $49 $2,750   0.56    0.91          1.23  $5,852   0.47  3.97       1.38
+2023+      268 53% $145 $8,473   0.41    0.61          1.22 $34,217   0.25 13.42       1.26
+                           actual        p5       p50       p95
+name       metric                                              
+base 2023+ sharpe            0.41     -0.44      0.41      1.28
+           sortino           0.61     -0.55      0.60      2.51
+           pf_day            1.19      0.83      1.19      1.74
+           calmar            0.25     -0.17      0.27      1.45
+           ulcer            13.42      6.00     17.68     54.30
+           max_dd       34,217.00 15,824.86 29,800.13 60,598.85
+           P(Sharpe<=0)       NaN       NaN      0.22       NaN
+           actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
+base 2023+   $34,217      61% $31,505 $48,472 $56,625        100%        100%        100%
+   Monte Carlo base 1 MGC (x0.1): trades 556 | total p5 $-1,637 / p50 $5,316 / p95 $12,298, P(total <= 0) 10.4%
+      max DD actual $3,422 (rank 63%), shuffled p50 $2,948 / p95 $5,975 / p99 $7,898; losing streak actual 7, p95 12
+      252-day block bootstrap: P&L p5 $-1,565 / p50 $369 / p95 $3,483, P(loss) 36.5%, max DD p50 $926 / p95 $2,377, return/DD 0.40, P(hit $2,000 trailing, EOD check only) 9.2%
+
+== + V4 SGE open (skip China holidays): metrics per GC (daily, calendar of business days)
+        trades win  avg annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+whole      527 52% $106 $5,531   0.40    0.59          1.25 $35,792   0.15  8.10       1.37
+2018-22    278 51%  $60 $3,214   0.66    1.09          1.29  $5,852   0.55  3.93       1.64
+2023+      249 54% $158 $8,603   0.42    0.62          1.24 $35,792   0.24 13.73       1.25
+                                                          actual        p5       p50       p95
+name                                      metric                                              
++ V4 SGE open (skip China holidays) 2023+ sharpe            0.42     -0.50      0.39      1.27
+                                          sortino           0.62     -0.62      0.57      2.48
+                                          pf_day            1.20      0.80      1.18      1.77
+                                          calmar            0.24     -0.18      0.24      1.41
+                                          ulcer            13.73      6.23     18.48     58.25
+                                          max_dd       35,792.25 16,442.19 31,414.62 64,262.11
+                                          P(Sharpe<=0)       NaN       NaN      0.24       NaN
+                                          actual_dd pct_rank    dd50    dd95    dd99 P(dd>=1000) P(dd>=2000) P(dd>=3000)
++ V4 SGE open (skip China holidays) 2023+   $35,792      70% $31,216 $48,035 $55,555        100%        100%        100%
+   Monte Carlo + V4 SGE open (skip China holidays) 1 MGC (x0.1): trades 527 | total p5 $-1,308 / p50 $5,588 / p95 $12,499, P(total <= 0) 9.2%
+      max DD actual $3,579 (rank 70%), shuffled p50 $2,868 / p95 $5,881 / p99 $7,720; losing streak actual 7, p95 11
+      252-day block bootstrap: P&L p5 $-1,660 / p50 $385 / p95 $3,523, P(loss) 36.5%, max DD p50 $941 / p95 $2,407, return/DD 0.41, P(hit $2,000 trailing, EOD check only) 9.7%

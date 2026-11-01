@@ -1,0 +1,547 @@
+{ ==========================================================================
+  Strategy : Gold_USA_Asia_Continuation v4 (regime + ATR sizing + SL/TP/BE in ATR)
+  Asset    : Gold (GC / MGC futures)
+  Type     : Signal (MultiCharts PowerLanguage - standard EasyLanguage syntax)
+
+  MULTICHARTS SETUP
+  -----------------
+    Symbol           : GC or MGC (COMEX gold futures, continuous contract)
+    Chart Time Zone  : Exchange (Central Time, CT - Chicago)
+    Session template : CME: Equity Index Futures [E-mini] GLOBEX
+                       Expected hours: Sun-Fri 17:00 - 16:00 CT,
+                       daily break 16:00 - 17:00 CT (same Globex hours
+                       as COMEX gold). Check in QuoteManager (Session
+                       Settings) that no other breaks are defined.
+    Resolution       : time-based minute bars aligned with the session = 1-MIN
+    Input times      : ALWAYS in CST (UTC-6), HHMM format (see "Times").
+    Note             : the 16:00 - 17:00 CT break falls inside the USA
+                       session and does not affect the logic.
+
+  Idea:
+    If the USA session closes up (session Close > session Open) go long
+    at the open of the Asian session; if it closes down go short.
+    The position is closed at the end of the Asian session.
+
+  Regime filter (enable_Regime_Filter):
+    For EVERY Asian session (traded or not) the return is recorded
+        asiaRet = 100 * (Close at Asia end - Open at Asia start) / Open at Asia start
+    The "Asia contribution" is the sum of the asiaRet of the sessions
+    completed in the last Regime_Days calendar days (e.g. 90 = ~3 months).
+        long  allowed only if contribution >  Regime_Threshold_Pct
+        short allowed only if contribution < -Regime_Threshold_Pct
+    If the contribution turns negative, the "patient" flow from the East
+    is fading -> no more longs.
+    No trading until the history covers Regime_Days days.
+    The filter also applies to the benchmark (enable_USA_continuation = false).
+    Memory: up to 1000 Asian sessions (about 4 years).
+
+  ATR sizing (Sizing_Mode = 1):
+    Since there is no real stop, the risk of one contract is measured
+    with the typical volatility of the Asian session:
+        rangeAsia = High - Low of the Asian session
+        ATR_Asia  = ATR_Percentile percentile of the last ATR_Len rangeAsia
+                    (complete sessions, 21 = ~1 month)
+                    ATR_Percentile = 50 -> median
+                    ATR_Percentile < 50 -> lower ATR  (more contracts)
+                    ATR_Percentile > 50 -> higher ATR (fewer contracts, more conservative)
+                    Percentile with linear interpolation between sorted values.
+        risk per contract (USD) = Risk_ATR_Pct% * ATR_Asia * BigPointValue
+        contracts = floor( Risk_Per_Trade_USD / risk per contract )
+                    minimum 1, maximum Max_Contracts
+    Example GC (BigPointValue 100), Risk_ATR_Pct 100, Risk_Per_Trade_USD 5000:
+        ATR_Asia 10 points -> 1000 $/contract -> 5 contracts
+        ATR_Asia 50 points -> 5000 $/contract -> 1 contract
+    The ATR used is the one of the Asian sessions already completed at
+    decision time (end of USA session): no future data.
+    No trading until ATR_Len complete sessions are available.
+    Sizing_Mode = 0 -> fixed contracts (Num_Contracts), for comparison.
+
+  Stop loss and take profit in ATR (SL_ATR_Mult / TP_ATR_Mult, 0 = disabled):
+        stop loss   = entry price -/+ SL_ATR_Mult * ATR_Asia
+        take profit = entry price +/- TP_ATR_Mult * ATR_Asia
+    The ATR is the one fixed at the entry decision.
+    Implemented with the built-in stops (SetStopLoss / SetProfitTarget,
+    per contract): active from the entry bar.
+    If SL_ATR_Mult / TP_ATR_Mult = 0 the fixed amounts
+    Stop_Loss_Amt / Profit_Target_Amt are used (0 = no stop / target).
+    Note: with BE_ATR_Mult >= TP_ATR_Mult the breakeven never triggers
+    (the target is hit first or at the same time).
+
+  Breakeven (BE_ATR_Mult, 0 = disabled):
+    When the maximum favorable excursion of the position exceeds
+        BE_ATR_Mult * ATR_Asia   (e.g. 0.66 * ATR)
+    the stop is moved to the entry price. The ATR is the one fixed at the
+    entry decision.
+    The check is done at bar close (bar High/Low); the stop is active from
+    the next bar. If at bar close the price is already back beyond the
+    entry price, exit at market (a stop on the wrong side of the market
+    would be rejected by the broker).
+
+  Benchmark:
+    With enable_USA_continuation = false the strategy enters EVERY Asian
+    session (same times, same weekend filter), ignoring the USA session
+    and Min_Move_Pct. Run it with only one side enabled:
+        only Enable_Long  -> always long  in Asia
+        only Enable_Short -> always short in Asia
+
+  Paper sessions (UTC):
+        Asia                00:00 - 08:00
+        Europe              08:00 - 14:30   (not used by the strategy)
+        USA + evening tail  14:30 - 24:00
+
+  Times:
+    Chart set to Time Zone = Exchange (Chicago time).
+    Input times must ALWAYS be entered in CST (UTC-6), HHMM format:
+        start_session_USA   830   (14:30 UTC)
+        end_session_USA    1800   (24:00 UTC)
+        start_session_ASIA 1800   (00:00 UTC)
+        end_session_ASIA    200   (08:00 UTC)
+    With enable_CST_CDT = true, during US daylight saving time (CDT, UTC-5:
+    from the second Sunday of March to the first Sunday of November)
+    all times are shifted by +1 hour, so the sessions stay anchored to the
+    paper's UTC times all year round.
+
+  Technical notes:
+    - Use time-based (minute) bars aligned with the session times
+      (e.g. 1, 5, 15, 30 min). With misaligned bars or data gaps the
+      fallback logic enters/exits one bar late.
+    - Bars are identified by their CLOSING time: a bar belongs to the
+      session if  start < Time <= end.
+    - Only standard EasyLanguage keywords/functions (no MultiCharts
+      proprietary keywords).
+  ========================================================================== }
+
+Inputs:
+    Enable_Long(true),          { enable long entries  (USA closes up) }
+    Enable_Short(false),        { enable short entries (USA closes down) }
+    enable_USA_continuation(true), { true = direction from the USA session; false = benchmark (always enter) }
+    enable_CST_CDT(true),       { true = +1 hour to the times during US daylight saving time (CDT) }
+    start_session_USA(830),     { USA session start  (HHMM, CST) }
+    end_session_USA(1800),      { USA session end    (HHMM, CST) }
+    start_session_ASIA(1800),   { Asia session start (HHMM, CST) }
+    end_session_ASIA(200),      { Asia session end   (HHMM, CST) }
+    Min_Move_Pct(0),            { minimum USA session move in % (0 = any move) }
+    enable_Regime_Filter(true), { true = trade only if the Asia contribution agrees }
+    Regime_Days(90),            { rolling window in calendar days (90 = ~3 months) }
+    Regime_Threshold_Pct(0),    { threshold of the cumulative Asia contribution, in % }
+    Trade_After_Weekend(false), { false = skip Monday's Asia (USA session split by the weekend) }
+    Sizing_Mode(1),             { 0 = fixed contracts (Num_Contracts), 1 = ATR normalization }
+    Num_Contracts(1),           { fixed contracts, used only with Sizing_Mode = 0 }
+    ATR_Len(21),                { number of Asian sessions for the ATR (max 250, 21 = ~1 month) }
+    ATR_Percentile(50),         { percentile of the ranges used as ATR (50 = median, 0..100) }
+    Risk_ATR_Pct(100),          { risk per contract = Risk_ATR_Pct% of the Asian session ATR }
+    Risk_Per_Trade_USD(6000),   { risk budget per trade in USD }
+    Max_Contracts(20),          { maximum number of contracts }
+    BE_ATR_Mult(0),             { breakeven stop beyond this fraction of ATR (0 = disabled) }
+    SL_ATR_Mult(0),             { stop loss   = SL_ATR_Mult * ATR from entry (0 = disabled) }
+    TP_ATR_Mult(0),             { take profit = TP_ATR_Mult * ATR from entry (0 = disabled) }
+    Stop_Loss_Amt(0),           { fixed stop per contract in USD, used only if SL_ATR_Mult = 0 }
+    Profit_Target_Amt(0);       { fixed target per contract in USD, used only if TP_ATR_Mult = 0 }
+
+Variables:
+    dMonth(0), dDay(0), dDow(0),
+    isCDT(false),               { true if the chart date is in US daylight saving time }
+    sUSA(0), eUSA(0),           { effective USA session times  (CST or CDT) }
+    sASIA(0), eASIA(0),         { effective Asia session times (CST or CDT) }
+    inUSA(false), inUSAprev(false),
+    inASIA(false), inASIAprev(false),
+    usaOpen(0),
+    usaClose(0),
+    usaValid(false),            { true if the current USA session was observed from its start }
+    usaGap(false),              { true if the USA session spans the weekend }
+    usaComplete(false),
+    movePct(0),
+    pendingDir(0),              { 1 = long to open, -1 = short to open, 0 = no signal }
+    goEntry(false),
+    { regime monitor }
+    asiaActive(false),          { true if the current Asian session was observed from its start }
+    asiaOpen(0),
+    asiaClose(0),
+    asiaRet(0),
+    asiaEnd(false),
+    bufIdx(0),                  { last position written in the circular buffer }
+    bufCount(0),                { number of stored sessions }
+    firstJul(0),                { (Julian) date of the first recorded Asian session }
+    curJul(0),
+    regimeSum(0),               { cumulative Asia contribution in the window, in % }
+    regimeN(0),                 { number of Asian sessions in the window }
+    regimeReady(false),
+    k(0),
+    { ATR sizing }
+    asiaHigh(0),
+    asiaLow(0),
+    effATRLen(0),
+    atrIdx(0),                  { last position written in the ATR buffer }
+    atrCount(0),                { number of stored ranges }
+    atrSum(0),
+    atrAsia(0),                 { Asian session ATR in points (0 = not yet available) }
+    riskPerCtr(0),
+    qtyNext(0),                 { contracts for the next entry }
+    j(0), atrPos(0),
+    { percentile }
+    m(0), tmpVal(0),
+    pctPos(0), pctLo(0), pctFrac(0),
+    { breakeven }
+    atrEntry(0),                { ATR fixed at the entry decision }
+    hiSince(0), loSince(0),     { highest high / lowest low since the entry bar }
+    beArmed(false),             { true = stop moved to breakeven }
+    { stop loss / take profit }
+    slAmt(0), tpAmt(0);         { amounts per contract in USD }
+
+Arrays:
+    asiaRetBuf[1000](0),        { % returns of the Asian sessions }
+    asiaJulBuf[1000](0),        { (Julian) end date of each session }
+    atrBuf[250](0),             { High-Low ranges of the Asian sessions }
+    atrSort[250](0);            { sorted copy of the last ATR_Len ranges }
+
+{ ---------------------------------------------------------------------------
+  0) Effective times: CST or CDT (+1 hour)
+     US daylight saving time: from the second Sunday of March to the first
+     Sunday of November. DayOfWeek: 0 = Sunday ... 6 = Saturday.
+     The change happens at 02:00 on Sunday, with the market closed.
+  --------------------------------------------------------------------------- }
+isCDT = false;
+
+If enable_CST_CDT then begin
+    dMonth = Month(Date);
+    dDay   = DayOfMonth(Date);
+    dDow   = DayOfWeek(Date);
+
+    If dMonth > 3 and dMonth < 11 then
+        isCDT = true
+    else if dMonth = 3 and dDay - dDow >= 8 then
+        isCDT = true
+    else if dMonth = 11 and dDay - dDow < 1 then
+        isCDT = true;
+end;
+
+sUSA  = start_session_USA;
+eUSA  = end_session_USA;
+sASIA = start_session_ASIA;
+eASIA = end_session_ASIA;
+
+If isCDT then begin
+    sUSA  = sUSA  + 100;
+    eUSA  = eUSA  + 100;
+    sASIA = sASIA + 100;
+    eASIA = eASIA + 100;
+    If sUSA  >= 2400 then sUSA  = sUSA  - 2400;
+    If eUSA  >= 2400 then eUSA  = eUSA  - 2400;
+    If sASIA >= 2400 then sASIA = sASIA - 2400;
+    If eASIA >= 2400 then eASIA = eASIA - 2400;
+end;
+
+{ ---------------------------------------------------------------------------
+  1) Bar membership in the sessions (handles the midnight crossing)
+  --------------------------------------------------------------------------- }
+If sUSA < eUSA then
+    inUSA = Time > sUSA and Time <= eUSA
+else
+    inUSA = Time > sUSA or Time <= eUSA;
+
+If sASIA < eASIA then
+    inASIA = Time > sASIA and Time <= eASIA
+else
+    inASIA = Time > sASIA or Time <= eASIA;
+
+{ ---------------------------------------------------------------------------
+  2) USA session tracking (open / close)
+  --------------------------------------------------------------------------- }
+If inUSA and inUSAprev = false then begin
+    usaOpen  = Open;
+    usaValid = CurrentBar > 1;  { if the history starts mid-session, discard it }
+    usaGap   = false;
+    pendingDir = 0;
+end;
+
+If inUSAprev and CurrentBar > 1 then begin
+    If DateToJulian(Date) - DateToJulian(Date[1]) >= 2 then
+        usaGap = true;
+end;
+
+If inUSA then
+    usaClose = Close;
+
+{ an unexecuted signal expires when the Asian session has ended }
+If inASIAprev and inASIA = false then
+    pendingDir = 0;
+
+{ ---------------------------------------------------------------------------
+  2b) Regime monitor: record the return of every Asian session
+      (whether it was traded or not)
+  --------------------------------------------------------------------------- }
+If inASIA and inASIAprev = false then begin
+    asiaOpen   = Open;
+    asiaHigh   = High;
+    asiaLow    = Low;
+    asiaActive = CurrentBar > 1;
+end;
+
+If inASIA then begin
+    asiaClose = Close;
+    If High > asiaHigh then asiaHigh = High;
+    If Low  < asiaLow  then asiaLow  = Low;
+end;
+
+asiaEnd = false;
+If asiaActive then begin
+    If inASIA and Time = eASIA then
+        asiaEnd = true
+    else if inASIA = false and inASIAprev then
+        asiaEnd = true;
+end;
+
+If asiaEnd then begin
+    asiaActive = false;
+    If asiaOpen > 0 then begin
+        asiaRet = 100 * (asiaClose - asiaOpen) / asiaOpen;
+
+        bufIdx = bufIdx + 1;
+        If bufIdx > 1000 then
+            bufIdx = 1;
+        asiaRetBuf[bufIdx] = asiaRet;
+        asiaJulBuf[bufIdx] = DateToJulian(Date);
+        If bufCount < 1000 then
+            bufCount = bufCount + 1;
+        If firstJul = 0 then
+            firstJul = DateToJulian(Date);
+
+        { Asian session ATR: percentile of the last ATR_Len High-Low ranges }
+        atrIdx = atrIdx + 1;
+        If atrIdx > 250 then
+            atrIdx = 1;
+        atrBuf[atrIdx] = asiaHigh - asiaLow;
+        If atrCount < 250 then
+            atrCount = atrCount + 1;
+
+        effATRLen = MinList(MaxList(ATR_Len, 1), 250);
+        If atrCount >= effATRLen then begin
+            { copy of the last effATRLen ranges }
+            atrPos = atrIdx;
+            For j = 1 to effATRLen begin
+                atrSort[j] = atrBuf[atrPos];
+                atrPos = atrPos - 1;
+                If atrPos < 1 then
+                    atrPos = 250;
+            end;
+
+            { ascending sort (insertion sort) }
+            For j = 2 to effATRLen begin
+                tmpVal = atrSort[j];
+                m = j - 1;
+                While m >= 1 and atrSort[m] > tmpVal begin
+                    atrSort[m + 1] = atrSort[m];
+                    m = m - 1;
+                end;
+                atrSort[m + 1] = tmpVal;
+            end;
+
+            { percentile with linear interpolation }
+            pctPos  = 1 + MinList(MaxList(ATR_Percentile, 0), 100) * 0.01 * (effATRLen - 1);
+            pctLo   = IntPortion(pctPos);
+            pctFrac = pctPos - pctLo;
+            If pctLo >= effATRLen then
+                atrAsia = atrSort[effATRLen]
+            else
+                atrAsia = atrSort[pctLo] + pctFrac * (atrSort[pctLo + 1] - atrSort[pctLo]);
+        end
+        else
+            atrAsia = 0;
+    end;
+end;
+
+{ ---------------------------------------------------------------------------
+  3) End of USA session -> direction calculation
+     a) normal case: the bar closes exactly at the USA end time
+     b) fallback: first bar outside the session after a USA bar
+  --------------------------------------------------------------------------- }
+usaComplete = false;
+
+If usaValid then begin
+    If inUSA and Time = eUSA then
+        usaComplete = true
+    else if inUSA = false and inUSAprev then
+        usaComplete = true;
+end;
+
+If usaComplete then begin
+    usaValid   = false;
+    pendingDir = 0;
+
+    If usaOpen > 0 then
+        movePct = 100 * (usaClose - usaOpen) / usaOpen
+    else
+        movePct = 0;
+
+    If Trade_After_Weekend or usaGap = false then begin
+
+        If enable_USA_continuation then begin
+            { strategy: direction given by the USA session close }
+            If movePct <> 0 and AbsValue(movePct) >= Min_Move_Pct then begin
+                If movePct > 0 and Enable_Long then
+                    pendingDir = 1;
+                If movePct < 0 and Enable_Short then
+                    pendingDir = -1;
+            end;
+        end
+        else begin
+            { benchmark: enter every Asian session, ignoring the USA session
+              (if Enable_Long and Enable_Short are both true, long wins) }
+            If Enable_Long then
+                pendingDir = 1
+            else if Enable_Short then
+                pendingDir = -1;
+        end;
+
+    end;
+
+    { regime filter: Asia contribution over the last Regime_Days days }
+    If enable_Regime_Filter and pendingDir <> 0 then begin
+        curJul    = DateToJulian(Date);
+        regimeSum = 0;
+        regimeN   = 0;
+
+        For k = 1 to bufCount begin
+            If asiaJulBuf[k] > curJul - Regime_Days then begin
+                regimeSum = regimeSum + asiaRetBuf[k];
+                regimeN   = regimeN + 1;
+            end;
+        end;
+
+        regimeReady = firstJul > 0 and curJul - firstJul >= Regime_Days and regimeN > 0;
+
+        If regimeReady = false then
+            pendingDir = 0
+        else if pendingDir = 1 and regimeSum <= Regime_Threshold_Pct then
+            pendingDir = 0
+        else if pendingDir = -1 and regimeSum >= -Regime_Threshold_Pct then
+            pendingDir = 0;
+    end;
+
+    { ATR fixed for SL / TP / breakeven of the next trade }
+    atrEntry = atrAsia;
+
+    { with SL / TP / BE in ATR enabled, no trading without an ATR }
+    If (SL_ATR_Mult > 0 or TP_ATR_Mult > 0 or BE_ATR_Mult > 0) and atrEntry <= 0 then
+        pendingDir = 0;
+
+    { sizing: number of contracts for the next entry }
+    qtyNext = 0;
+    If pendingDir <> 0 then begin
+        If Sizing_Mode = 1 then begin
+            riskPerCtr = Risk_ATR_Pct * 0.01 * atrAsia * BigPointValue;
+            If riskPerCtr > 0 then begin
+                qtyNext = IntPortion(Risk_Per_Trade_USD / riskPerCtr);
+                qtyNext = MaxList(qtyNext, 1);
+                qtyNext = MinList(qtyNext, MaxList(Max_Contracts, 1));
+            end
+            else
+                pendingDir = 0;     { ATR not yet available: no trading }
+        end
+        else
+            qtyNext = MaxList(Num_Contracts, 1);
+    end;
+end;
+
+{ ---------------------------------------------------------------------------
+  4) Entry at the open of the Asian session
+     a) normal case: the bar closes at the Asia start time -> the next
+        bar is the first of the Asian session
+     b) fallback: we are already inside the Asian session
+  --------------------------------------------------------------------------- }
+If pendingDir <> 0 then begin
+    goEntry = Time = sASIA or (inASIA and Time <> eASIA);
+
+    If goEntry then begin
+        If pendingDir = 1 then
+            Buy ("USA_Up_LE") qtyNext contracts next bar at market
+        else
+            SellShort ("USA_Dn_SE") qtyNext contracts next bar at market;
+        pendingDir = 0;
+    end;
+end;
+
+{ ---------------------------------------------------------------------------
+  5) Exits
+     5a) end of the Asian session
+         - normal case: the bar closes exactly at the Asia end time
+         - fallback: the position is still open outside the Asian session
+     5b) breakeven: after a favorable move >= BE_ATR_Mult * ATR the stop
+         is moved to the entry price
+  --------------------------------------------------------------------------- }
+If MarketPosition <> 0 then begin
+
+    { highest high / lowest low since the entry bar }
+    If BarsSinceEntry = 0 then begin
+        hiSince = High;
+        loSince = Low;
+        beArmed = false;
+    end
+    else begin
+        If High > hiSince then hiSince = High;
+        If Low  < loSince then loSince = Low;
+    end;
+
+    { breakeven activation }
+    If BE_ATR_Mult > 0 and atrEntry > 0 and beArmed = false then begin
+        If MarketPosition = 1 and hiSince - EntryPrice >= BE_ATR_Mult * atrEntry then
+            beArmed = true;
+        If MarketPosition = -1 and EntryPrice - loSince >= BE_ATR_Mult * atrEntry then
+            beArmed = true;
+    end;
+
+    If Time = eASIA or inASIA = false then begin
+        { 5a) time exit }
+        Sell ("Asia_End_LX") next bar at market;
+        BuyToCover ("Asia_End_SX") next bar at market;
+    end
+    else if beArmed then begin
+        { 5b) breakeven stop }
+        If MarketPosition = 1 then begin
+            If Close > EntryPrice then
+                Sell ("BE_LX") next bar at EntryPrice stop
+            else
+                Sell ("BE_LX_Mkt") next bar at market;
+        end;
+        If MarketPosition = -1 then begin
+            If Close < EntryPrice then
+                BuyToCover ("BE_SX") next bar at EntryPrice stop
+            else
+                BuyToCover ("BE_SX_Mkt") next bar at market;
+        end;
+    end;
+end;
+
+{ ---------------------------------------------------------------------------
+  6) Stop loss / take profit (per contract)
+     In ATR if SL_ATR_Mult / TP_ATR_Mult > 0, otherwise fixed amounts.
+     Distance in points * BigPointValue = amount per contract in USD.
+  --------------------------------------------------------------------------- }
+SetStopContract;
+
+slAmt = 0;
+If SL_ATR_Mult > 0 then begin
+    If atrEntry > 0 then
+        slAmt = SL_ATR_Mult * atrEntry * BigPointValue;
+end
+else
+    slAmt = Stop_Loss_Amt;
+
+tpAmt = 0;
+If TP_ATR_Mult > 0 then begin
+    If atrEntry > 0 then
+        tpAmt = TP_ATR_Mult * atrEntry * BigPointValue;
+end
+else
+    tpAmt = Profit_Target_Amt;
+
+If slAmt > 0 then
+    SetStopLoss(slAmt);
+If tpAmt > 0 then
+    SetProfitTarget(tpAmt);
+
+{ ---------------------------------------------------------------------------
+  7) State for the next bar
+  --------------------------------------------------------------------------- }
+inUSAprev  = inUSA;
+inASIAprev = inASIA;
