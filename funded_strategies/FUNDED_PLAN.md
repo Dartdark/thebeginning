@@ -976,3 +976,16 @@ credit piece, 500 bootstrapped 2-year histories): identical to the bench as run 
 y2 $20,095): no failure in any history falls in an overlap minute. Wiring proven: the same piece as a 10x debit raised 50K
 blown 3% -> 16%. So no allocation result depends on it. Overnight Tick is stored as one
 whole-night worst value on its exit day (also conservative). Missing overnight minutes in the data can't be rebuilt: limit noted.
+
+## Firm-level risk: accounts bought close together fail together (2026-11-01, `../analysis/firm_risk_test.py`)
+Batches of four 150K evaluations, combine set, every start day 2018-01 .. 2023-08 (output stamped with code + data version):
+| Batch of 4 | passes avg | P(0 pass) | P(all 4 fail) | outcome corr |
+|---|---|---|---|---|
+| one a day, same mix (the plan) | 1.58 | 48% | 45% | 0.73 |
+| one a WEEK, same mix | 1.58 | 29% | 26% | 0.29 |
+| one a day, 2 of 4 at VB 10 | 1.51 | 48% | 42% | 0.67 |
+| ~1 year apart (independent) | 1.71 | 14% | 12% | 0.09 |
+Accounts started within days of each other are close to ONE bet (corr 0.73): same expected passes, but half the time a whole
+batch fails together. Spacing purchases a week apart halves that (29%) at the same expected passes; a different mix doesn't
+help (fewer passes, still corr 0.67). Expected value is unchanged either way: spacing buys smoother results, not more passes.
+The budget ramp (`../analysis/ramp_budget_test.py`) already models same-week starts as correlated.
