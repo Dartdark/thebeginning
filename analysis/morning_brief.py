@@ -42,13 +42,19 @@ def brief(hours=24):
     git("fetch", "-q", "origin", "codex/work")
     cx = git("log", f"--since={since_s}", "--format=%s", "origin/codex/work").splitlines()
     lines.append(f"CODEX: {len(cx)} commit(s)" + (f", latest: {cx[0][:110]}" if cx else ""))
+    # chain-broken backstop (2026-11-01): a scheduled job that silently stopped shows up here
+    broken = []
+    lab_any = [r for r in L.ledger() if r.get("date", "")[:10] >= since.date().isoformat()]
+    if not lab_any and not __import__("os").path.exists(L.STOP) and s["queued"]: broken.append("LAB ran no study (5 runs a day expected)")
+    if not new: broken.append("SCOUT logged nothing (5 runs a day expected)")
+    if broken: lines.insert(0, "CHAIN BROKEN: " + "; ".join(broken))
     # waiting for the user
     wait = [f"lab idea {x}" for x in s.get("needs_user", [])] + [f"{r['id']} reached stage {r['stage']}: your call" for r in adv]
     todo = [l.strip()[6:90] for l in open("TODO.md", encoding="utf-8") if l.strip().startswith("- [ ] You")][:3]
     lines.append("WAITING ON YOU: " + ("; ".join(wait) if wait else "nothing new"))
     for t in todo: lines.append(f"  todo: {t}")
     head = (f"Morning brief {now:%m/%d}: lab {len(rows)} studies, {len(adv)} to benches; scout +{added} ideas; "
-            f"{'action needed' if wait else 'nothing waiting on you'}")
+            f"{'action needed' if wait else 'nothing waiting on you'}" + (" | CHAIN BROKEN" if broken else ""))
     return head, lines[:14]
 
 

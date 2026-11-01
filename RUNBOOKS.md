@@ -23,3 +23,4 @@ invent fills or numbers. Trades come from the VPS trade log (`apex_strategies/Ap
 Scheduled task 'Morning brief' (`trig_01D4QcEmooHTMpSJQPCqSroR`) wakes the master session daily at 07:47 CT:
 `python3 analysis/morning_brief.py 24 --send` (headline to ntfy) and the full brief (max 15 lines) as the reply. Pure code:
 lab ledger + queue, scout log, new lab ideas, Code reviewer and Codex commits, what is waiting on the user, open 'You' to-dos.
+First line "CHAIN BROKEN" when the lab ran no study (and is not stopped, with ideas queued) or the scout logged nothing in the window.
