@@ -1491,3 +1491,13 @@ Status and superseding evidence:
 - Evidence: synthetic mechanics and exact-source review, not a historical re-estimation or measured execution loss. The affected saved design candidates failed; no allocation or profitable alternative follows.
 - Limits/next check: dated official event calendars and complete observed holding/exit paths are prerequisites. Retain failed protocols, missing-data counts and amended universes; any justified rerun must preserve trials and existing admission gates. Otherwise record the gap and move on.
 - Supporting process reference: [Jane Street interview assessment](results/jane_street_interview_review_20261101.md) motivates artifact-backed tests, explicit permissions and reproducible setup, with no verified trading or execution savings.
+
+
+### E20/E22/E23 follow-up — Routing identity, ACCT schema and kill acceptance
+
+[November1 formal review](results/REVIEW_2026-11-01.md), baseline dff44f1 plus latest29416b9.
+- Use: separate the monitor's typed balance-query account from GetAccountID's chart auto-trading account, and both from native order/fill evidence. Adding a route field requires exact-column tests for every equity reader.
+- Verified: invented rows reproduce lost #4 trades through inherited150 tags and a pending-version mute; a source wildcard can misattribute typed#2 equity to route#4 in the PowerShell floor reader. Latest Python equity readers use the exact typed field; #4's missing max_stop was supplied and its fixture passes.
+- Kill evidence: source/control-flow checks show shared local/remote stop ownership and unknown remote reads can enable resume. Source presence, file creation or alert delivery does not establish working-order cancellation, broker flattening or installed acceptance.
+- Limits: no PowerLanguage compilation, PowerShell runtime, VPS access or real orders. GetAccountID semantics checked against the official MultiCharts reference; installed/off-automation behavior remains unverified.
+- Next check: responsible disconnected/paper-account acceptance of explicit account IDs, source/input version, stop ownership, failure paths, entry cancellation and broker/strategy position reconciliation. No live change is authorized by retention.

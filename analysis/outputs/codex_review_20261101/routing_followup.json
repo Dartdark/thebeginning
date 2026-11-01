@@ -1,0 +1,25 @@
+{
+  "Claude_latest_followup": "29416b993a619cf9c3e23fd7d050f59db5d35e4e",
+  "missing_max_stop_closed": {
+    "id": "APEX-681524-04",
+    "date": "20261102",
+    "equity": 150000.0,
+    "peak": 150000.0,
+    "floor": 146000.0,
+    "room": 4000.0,
+    "max_stop": 3000.0
+  },
+  "Python_floor_matches_typed_column_only": true,
+  "watchdog_wildcard_matches_wrong_typed_account_via_route": true,
+  "watchdog_counterexample_equity_USD": 50000,
+  "unjustified_150K_floor_USD": 146000,
+  "ACCT_fields": 14,
+  "health_reader": {
+    "right_route": [],
+    "wrong_route": [
+      "- **ROUTING VB150**: the chart SENDS ORDERS TO APEX-681524-02, should be APEX-681524-04. Fix its Auto Trading gear account."
+    ],
+    "legacy_blank_route": []
+  },
+  "limits": "Python helper and simple wildcard/source checks, not native PowerShell/MC execution or real routing evidence."
+}

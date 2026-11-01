@@ -1,0 +1,98 @@
+{
+  "kind": "unchanged historical design replication",
+  "Claude_commit": "dff44f136141aaf78c99c7042a8aca570bbff29a",
+  "new_definitions": 0,
+  "prior_variants_retained": [
+    1,
+    2,
+    3
+  ],
+  "holdout_return_rows_read": 0,
+  "variants": {
+    "1": {
+      "trades": 58,
+      "average": 14.612068965519926,
+      "gross_average": 32.112068965519924,
+      "t": 0.8509864353467836,
+      "PF": 1.3427704752275769,
+      "by_year": {
+        "2018": -103.74999999997007,
+        "2019": 515.0000000000034,
+        "2020": 20.00000000000435,
+        "2021": 458.7500000000513,
+        "2022": -42.49999999993332
+      },
+      "stage1": false,
+      "metrics": {
+        "sharpe": 0.3748067646128173,
+        "sortino": 0.6566859310143007,
+        "profit_factor": 1.3427704752275769,
+        "calmar": 0.5074578989575913,
+        "ulcer": 0.2542107261701179
+      }
+    },
+    "2": {
+      "trades": 59,
+      "average": -6.377118644066199,
+      "gross_average": 11.122881355933801,
+      "t": -0.29751687142879946,
+      "PF": 0.9040790312301066,
+      "by_year": {
+        "2018": -116.24999999999642,
+        "2019": -241.24999999995492,
+        "2020": -1098.7499999999418,
+        "2021": 646.2499999999752,
+        "2022": 433.75000000001234
+      },
+      "stage1": false,
+      "metrics": {
+        "sharpe": -0.13171522475447622,
+        "sortino": -0.1892099170660281,
+        "profit_factor": 0.9040790312301066,
+        "calmar": -0.041606397946330254,
+        "ulcer": 1.9239236996709155
+      }
+    },
+    "3": {
+      "trades": 1262,
+      "average": -15.419968304278568,
+      "gross_average": 2.0800316957214324,
+      "t": -7.280707947984375,
+      "PF": 0.5625000000000052,
+      "by_year": {
+        "2018": -3074.999999999986,
+        "2019": -4552.499999999949,
+        "2020": -3368.7499999999955,
+        "2021": -4479.999999999907,
+        "2022": -3983.749999999716
+      },
+      "stage1": false,
+      "metrics": {
+        "sharpe": -3.1972289029959082,
+        "sortino": -4.1622646647753365,
+        "profit_factor": 0.5625000000000052,
+        "calmar": -0.1901356323293044,
+        "ulcer": 22.322907268082332
+      }
+    }
+  },
+  "best_variant": 1,
+  "placebo_draws": 500,
+  "placebo_p": 0.0,
+  "stage1_pass": false,
+  "independent_price_arithmetic_reconciled": true,
+  "run_script_SHA256": "f71cf3ba6aeae293d85277045c3b0fb63ebcd1381b772acab7d3c5bed1583858",
+  "inputs": {
+    "data/6E_1min_2018.csv": "bf59d9d0a7c81f1292146a5af6739875c196a1217f1a6f010f143830353782d7",
+    "data/6E_1min_2019.csv": "c66d844e14fa0004e1f132062c5e0a447ad6f610385d24b7c5eba7881e6a2e06",
+    "data/6E_1min_2020.csv": "8f8a564229bff845a6cdf2cfa9780304f9d5bcdb96e0db42c32d74b49ea90b91",
+    "data/6E_1min_2021.csv": "063761aee2dcdc1057e542dfca1b9b2e177a03d151ba77d5dd2edd9672201c14",
+    "data/6E_1min_2022.csv": "cfae6c8b4a26cb9cf39ec96a4279fe6b396f53e1cc1b3018ea92a12da9f9ea3f"
+  },
+  "source_SHA256": {
+    "analysis/lab_Q003.py": "343becc96d25823fe390bea06ad4c64abba68b1937ed910174ed589cfe0d1164",
+    "analysis/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791"
+  },
+  "limits": "No original author data, actual fills, account benches or holdout returns; source eligibility/calendar conventions preserved."
+}
