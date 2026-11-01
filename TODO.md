@@ -64,6 +64,12 @@ bottom). Times are Central (CT).
       Steps: `live/vps/KILL_SWITCH.md`.
 - [ ] Claude, after your install: remove `pending_install` from `live/expected_setup.json` (the old-version alert is muted until then).
 
+## Firm view panel (2026-11-01, user yes) - after #4 is set up
+- [ ] Claude: once #4's account number is in and 2+ accounts are live, add a 'Firm view' panel to the Apex Live Desk:
+      total open risk and combined day P&L across all accounts, worst-case if every open position hits its stop, and a
+      flag when several accounts sit near their floors at once (the 'one bet' risk from `analysis/firm_risk_test.py`).
+      Also test correlated funded-account blow-ups before running many funded accounts.
+
 ## Failover (2026-11-01)
 - [ ] You: fill in the table in `live/vps/FAILOVER.md` (VPS dashboard + support, Apex support, a second way into Rithmic)
       and test logging in to R Trader Pro from your own PC once, on a quiet weekend.
