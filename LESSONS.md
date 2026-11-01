@@ -83,6 +83,7 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 
 ## Corrections from the user (one line per correction, added in the same reply; user rule 2026-11-01)
 - (2026-10-30, "you sent me the v2 version") Before sending a deliverable, open the exact file being sent and check its
+- 2026-11-01: "i alr did?" (I said the x150 charts routed to closed #3 from the ACCT log rows; those rows show the Chart Monitor's typed AccountName input, not the order routing). Rule: know what a log field measures before calling it a defect; ACCT.account = monitor input only.
 - 2026-11-01: "dont drop it i want to do it" (I removed the VPS screenshot after Defender blocked it, without asking). Rule: when something the user asked for hits a blocker, keep it and offer the safe way through; ask before dropping a feature.
   title, version and date match what was asked; regenerate rather than resend an older copy.
 - (2026-10-30, "the agreed plan is not what we just discussed") When a document restates numbers or a plan, re-derive
