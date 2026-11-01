@@ -48,13 +48,16 @@ def brief(hours=24):
     if not lab_any and not __import__("os").path.exists(L.STOP) and s["queued"]: broken.append("LAB ran no study (5 runs a day expected)")
     if not new: broken.append("SCOUT logged nothing (5 runs a day expected)")
     if broken: lines.insert(0, "CHAIN BROKEN: " + "; ".join(broken))
+    # buy gate (2026-11-01): PAUSE / PLAN ONLY / GO for buying new evaluations
+    import buy_gate as BG
+    v, why, n, e = BG.gate(); lines.insert(0 if v == "PAUSE" else len(lines), f"BUY GATE: {v}: {'; '.join(why)[:150]}")
     # waiting for the user
     wait = [f"lab idea {x}" for x in s.get("needs_user", [])] + [f"{r['id']} reached stage {r['stage']}: your call" for r in adv]
     todo = [l.strip()[6:90] for l in open("TODO.md", encoding="utf-8") if l.strip().startswith("- [ ] You")][:3]
     lines.append("WAITING ON YOU: " + ("; ".join(wait) if wait else "nothing new"))
     for t in todo: lines.append(f"  todo: {t}")
     head = (f"Morning brief {now:%m/%d}: lab {len(rows)} studies, {len(adv)} to benches; scout +{added} ideas; "
-            f"{'action needed' if wait else 'nothing waiting on you'}" + (" | CHAIN BROKEN" if broken else ""))
+            f"{'action needed' if wait or v == 'PAUSE' else 'nothing waiting on you'}" + (" | CHAIN BROKEN" if broken else ""))
     return head, lines[:14]
 
 

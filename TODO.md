@@ -64,6 +64,10 @@ bottom). Times are Central (CT).
       Steps: `live/vps/KILL_SWITCH.md`.
 - [ ] Claude, after your install: remove `pending_install` from `live/expected_setup.json` (the old-version alert is muted until then).
 
+## Failover (2026-11-01)
+- [ ] You: fill in the table in `live/vps/FAILOVER.md` (VPS dashboard + support, Apex support, a second way into Rithmic)
+      and test logging in to R Trader Pro from your own PC once, on a quiet weekend.
+
 ## Career (2026-11-01)
 - [ ] You: compare `career/resume_section.md` (v1) with `career/resume_section_v2_my_voice.md` (v2), pick what sounds like
       you, then retype the final version **in your own words** (both drafts are Claude-written and carry the text

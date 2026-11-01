@@ -24,3 +24,8 @@ Scheduled task 'Morning brief' (`trig_01D4QcEmooHTMpSJQPCqSroR`) wakes the maste
 `python3 analysis/morning_brief.py 24 --send` (headline to ntfy) and the full brief (max 15 lines) as the reply. Pure code:
 lab ledger + queue, scout log, new lab ideas, Code reviewer and Codex commits, what is waiting on the user, open 'You' to-dos.
 First line "CHAIN BROKEN" when the lab ran no study (and is not stopped, with ideas queued) or the scout logged nothing in the window.
+
+## Buy gate (2026-11-01)
+`python3 analysis/buy_gate.py` before buying any evaluation: PAUSE (drift alarm, account below its backtest range, or 2
+accounts failed within ~10 trading days -> 7-day cool-off), PLAN ONLY (< 40 live trades: buy per the budget plan, don't
+accelerate), GO (40+ trades, live edge >= 75% of backtest). Shown in the morning brief. The user decides; the gate advises.
