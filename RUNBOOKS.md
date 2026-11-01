@@ -29,3 +29,6 @@ First line "CHAIN BROKEN" when the lab ran no study (and is not stopped, with id
 `python3 analysis/buy_gate.py` before buying any evaluation: PAUSE (drift alarm, account below its backtest range, or 2
 accounts failed within ~10 trading days -> 7-day cool-off), PLAN ONLY (< 40 live trades: buy per the budget plan, don't
 accelerate), GO (40+ trades, live edge >= 75% of backtest). Shown in the morning brief. The user decides; the gate advises.
+
+## VPS status (2026-11-01)
+`python3 analysis/vps_status.py <scratch>/vps` -> status + trade tail; Read `<scratch>/vps/screen.jpg` to see the desktop. Setup: `live/vps/VPS_STATUS.md`.

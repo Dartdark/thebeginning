@@ -261,3 +261,6 @@ after 15:59 CT, never with a position open.
 Claude reminds you every **Sunday and Wednesday at 10:52 CT** (Central). Since 2026-10-20 the reminders run in the
 separate session 'Scheduled jobs (journal, Friday review, reminders)', together with the 16:40 CT journal trades and the
 Friday review. Say "stop the reminders" to turn them off, or ask for a different schedule.
+
+## VPS status for Claude (2026-11-01)
+- [ ] Install the 5-minute status snapshot: steps in [live/vps/VPS_STATUS.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/live/vps/VPS_STATUS.md) (git pull, test with -Diag, one schtasks line), then tell Claude "status installed".
