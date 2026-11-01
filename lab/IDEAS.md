@@ -130,7 +130,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   0.017 ATR normally. The expiring contract's 13:00-13:30 settlement is not in the data; needs a contract-specific export
   (NGx expiring month, 1-min, last 5 days) from MultiCharts.
 
-## Q012 · running · priority 2
+## Q012 · done · priority 2
 - source: lab refill 2026-11-01 (ECB not in TIER_LIST)
 - market: 6E (M6E)
 - mechanism: ECB policy decision (07:15 CT since 2022, 06:45 CT before) and press conference (+30 min): FX order flow
@@ -140,6 +140,9 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   year). V1 follow decision -> press-conference end (+90 min) into 10:30 CT; V2 fade it; V3 follow the press-conference
   part only (+30 -> +90). Stop 0.3 ATR. Placebo: same clock on other Thursdays. Event study: >= 40 trades needs 2018-22's ~40.
 - Apex: yes. data: data/6E_1min_*.csv
+- result: FAIL stage 1 (2026-11-01). Amended calendar (13:45 Berlin before 2022-07, 14:15 after; volume >= 5x finds 33 of
+  ~40 meetings 2018-22): V2 fade +$31 (gross $49, PF 1.18, t 0.40, 4/5 yrs), V3 +$27 (t 0.37), V1 -$34; other Thursdays
+  -$11, placebo p 0.19; first (ADP-contaminated) run: V2 +$37, t 0.59. Holdout not opened. `analysis/lab_Q012.py`.
 
 ## Q013 · queued · priority 2
 - source: lab refill 2026-11-01 (NFP on 6E untested; NQ NFP fade is a plan strategy, 6E is not)

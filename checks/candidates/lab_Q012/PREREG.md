@@ -22,3 +22,9 @@ Skip if the side is 0.
 CT clock on random non-ECB Thursdays (same count, 500 draws), p < 0.05; >= 4 of 5 years positive. Stage 3 one look on
 2023-onward: same sign, t >= 1.5, PF >= 1.1. t bar `lab_tools.bar()` 3.64 (N 371); pre-registered mechanism with 3 variants
 -> full-sample t >= 2.0 + clean placebo. Apex: yes (6E / M6E).
+
+## Amendment 1 (2026-11-01, after the first run; a calendar fix, not a variant)
+The two-candidate detector also caught US ADP releases (08:15 ET = 14:15 Berlin) on non-ECB Thursdays in holiday weeks
+(2018-01-04, 2018-09-06). The ECB decision time is fixed by date instead: 13:45 Berlin before 2022-07-01, 14:15 Berlin
+from then on (ECB's July 2022 change); ECB day if that single candidate's ratio >= 5. Variants, exits, costs and gates
+unchanged. The first run (mixed calendar) is kept in the record: best V2 fade +$37, t 0.59, 43 trades, placebo p 0.10.
