@@ -78,3 +78,29 @@ Points to check:
 **D**: as tested, the continuation effect makes about nothing at a fixed size (whole t ~1.1). It is not distinguishable from
 Asia-session drift since 2023, and it depends on the session clock. It fits no Apex plan; no plan bench was run, since the
 standalone result is far below the bar.
+
+## 7. Protective stop in Asia-ATR units (user: "test the ATR stop", 2026-11-01)
+I pre-registered one value: a stop at 1.0 x the Asia ATR, the code's SL_ATR_Mult. The rule was to adopt it only if it
+improves return / max DD at 1 GC in both 2018-22 and 2023+ on the New York clock and doesn't reverse on the CT clock.
+Script: `analysis/gc_asia_atr_stop_test.py`; output: `analysis/outputs/gc_asia_atr_stop_test.txt`.
+
+**Result: fails, not adopted.**
+
+| 1 GC, New York clock | 2018-22 | 2023+ |
+|---|---|---|
+| Trades stopped | 10% | 11% |
+| Avg per trade | $49 -> $28 | $145 -> $139 |
+| Return / max DD | 2.43 -> 1.34 | 1.13 -> 1.36 |
+| t | 1.28 -> 0.76 | 0.95 -> 0.96 |
+| Max DD | | $34.2k -> $27.5k |
+| Worst night | | -$17.8k -> -$10.3k (gap fill) |
+
+- **CT clock:** worse in both periods (2023+ return/DD 0.28 -> 0.13).
+- **All years:** the 58 stopped trades lose $100k at the stop vs $92.7k at the time exit. On average a night that runs one
+  ATR against the entry recovers part of it by the exit, so the stop costs more than it saves.
+- **Sensitivity (labelled, not a choice):** 0.5 / 0.75 / 1.5 / 2.0 x ATR. No value improves both periods on the New York
+  clock.
+
+The stop only trades the 2018-22 edge for a smaller 2026 tail. The tail is a size problem: 1 GC carried an Asia ATR of
+$8-10k in 2026 against a $6,000 budget. The fix is sizing in MGC against the budget, and that alone didn't lower the
+drawdown either (section 3). Tier unchanged: D.

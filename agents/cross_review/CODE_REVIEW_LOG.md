@@ -123,3 +123,6 @@ Found on the way:
 - **Test:** four variables pre-registered, chosen on 2018-22. None cuts the 2023+ drawdown, and since 2023 the
   continuation condition adds nothing over Asia-hours drift. Tier D. Details in
   `checks/candidates/gc_asia_continuation/verdict.md`.
+- 2026-11-01 follow-up, the ATR stop: 1.0 x the Asia ATR, pre-registered. It cuts 2023+ max DD $34.2k -> $27.5k but
+  halves 2018-22 (return/DD 2.43 -> 1.34) and is worse on the CT clock. The stopped trades lose more at the stop than at
+  the time exit. Not adopted; tier D stands (`analysis/gc_asia_atr_stop_test.py`).
