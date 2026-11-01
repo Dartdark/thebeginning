@@ -88,7 +88,20 @@
  ],
  "_accounts_about": "start / trail / lock / max_stop / started per live account (2026-10-30): the watchdog computes the Apex EOD trailing floor from the Chart Monitor's equity (floor = min(peak EOD equity - trail, lock)) and alarms when equity nears or touches it. phase: evaluation or funded.",
  "pending_install": {
-  "2026-11-01": "kill switch update: muted in the pre-market version check until the user installs it (TODO 'Kill switch install'); remove this entry after the install"
+  "_about": "kill-switch update (2026-11-01): the pre-market check ignores ONLY these exact old versions, only while the repo has repo_version, until expires. Remove after the install.",
+  "expires": "2026-11-08",
+  "allow_old": {
+   "NQ_Vault_Break": "NQ_Vault_Break 2026-10-30",
+   "NQ_Overnight_Bias_ADX30": "NQ_Overnight_Bias_ADX30 2026-10-30",
+   "NQ_Expiration_Open_Short": "NQ_Expiration_Open_Short 2026-10-30",
+   "Bridge_Monday_Long_L644NQ": "Bridge_Monday_Long_L644NQ 2026-10-30"
+  },
+  "repo_version": {
+   "NQ_Vault_Break": "NQ_Vault_Break 2026-11-01",
+   "NQ_Overnight_Bias_ADX30": "NQ_Overnight_Bias_ADX30 2026-11-01",
+   "NQ_Expiration_Open_Short": "NQ_Expiration_Open_Short 2026-11-01",
+   "Bridge_Monday_Long_L644NQ": "Bridge_Monday_Long_L644NQ 2026-11-01"
+  }
  },
  "_charts_account_about": "account per chart (2026-11-01): the watchdog compares it with the Chart Monitor's route_account (GetAccountID) and its typed AccountName"
 }

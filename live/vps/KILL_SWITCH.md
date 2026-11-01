@@ -35,5 +35,9 @@ Level 1 stays on until you decide to trade again, so a restarted chart can't re-
    NQ_Overnight_Bias_ADX30, NQ_Expiration_Open_Short, Bridge_Monday_Long_L644NQ. Confirm **compiled successfully** each time.
    The pre-market check flags any chart still on the old version.
 4. The relay task picks up the remote kill by itself (it already runs every minute).
-5. **Test on Sunday before the open:** run `kill.ps1`, check ntfy says KILL ACTIVE and `C:\TradingLogs\KILL` exists; then
+5. **Latch test first (2026-11-01, Codex review #3):** `powershell -ExecutionPolicy Bypass -File C:\TradingRepo\live\vps\kill_test.ps1`
+   -> every line PASS, last line `ALL PASS` (scratch folder, no alerts, no charts touched). Two latches: KILL_LOCAL (kill.ps1)
+   and KILL_REMOTE (Claude via the relay); the strategies' KILL file stays while either is set, so a remote RESUME never
+   clears a kill you made on the VPS, and a failed GitHub read never resumes anything.
+6. **Live test on Sunday before the open:** run `kill.ps1`, check ntfy says KILL ACTIVE and `C:\TradingLogs\KILL` exists; then
    `kill.ps1 -Resume`. Then ask Claude to send a remote KILL and RESUME and watch both alerts arrive.

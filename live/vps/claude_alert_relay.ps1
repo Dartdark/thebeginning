@@ -12,19 +12,22 @@ $State = "C:\TradingLogs\claude_alerts_sent.txt"
 Set-Location "C:\TradingRepo"
 $Log = "C:\TradingLogs\relay_log.txt"
 function Say($m) { $line = "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) $m"; Add-Content $Log $line; if ($Diag) { $line } }
-git fetch -q origin $branch 2>$null
-# remote kill switch (2026-11-01, live/vps/KILL_SWITCH.md): live/KILL on the branch = kill; removed = resume. Only a kill made
-# remotely is resumed remotely; a kill made on the VPS (kill.ps1) stays until kill.ps1 -Resume.
-$remote = [bool](git ls-tree --name-only "origin/${branch}" live/KILL 2>$null)
-$flag = "C:\TradingLogs\KILL"; $mark = "C:\TradingLogs\KILL_REMOTE"
-if ($remote -and -not (Test-Path $flag)) {
+git fetch -q origin $branch 2>$null; $fetchOk = ($LASTEXITCODE -eq 0)
+# remote kill switch (2026-11-01, live/vps/KILL_SWITCH.md): live/KILL on the branch = kill; removed = resume (remote latch
+# only: kill.ps1 keeps a local kill on). Unknown state never resumes (Codex review 2026-11-01 #3): a RESUME needs a successful
+# fetch AND a successful tree read that positively lists the branch without live/KILL; a KILL is applied from any readable
+# state (cached or fresh). Read errors change nothing and are logged.
+$tree = @(git ls-tree --name-only "origin/${branch}" live/ 2>$null); $treeOk = ($LASTEXITCODE -eq 0) -and ($tree.Count -gt 0)
+$remoteKill = $treeOk -and ($tree -contains "live/KILL")
+$latch = "C:\TradingLogs\KILL_REMOTE"
+if ($remoteKill -and -not (Test-Path $latch)) {
     $why = (git show "origin/${branch}:live/KILL" 2>$null | Select-Object -First 1)
-    & powershell -ExecutionPolicy Bypass -File "C:\TradingRepo\live\vps\kill.ps1" -Why "remote: $why" | Out-Null
-    Set-Content $mark "1"; Say "remote KILL applied: $why"
-} elseif (-not $remote -and (Test-Path $mark)) {
-    & powershell -ExecutionPolicy Bypass -File "C:\TradingRepo\live\vps\kill.ps1" -Resume -Why "remote resume" | Out-Null
-    Remove-Item $mark -Force; Say "remote RESUME applied"
-}
+    $r = & powershell -NoProfile -ExecutionPolicy Bypass -File "C:\TradingRepo\live\vps\kill.ps1" -Remote -Why "remote: $why"
+    Say "remote KILL applied (exit $LASTEXITCODE): $r"
+} elseif ($fetchOk -and $treeOk -and -not $remoteKill -and (Test-Path $latch)) {
+    $r = & powershell -NoProfile -ExecutionPolicy Bypass -File "C:\TradingRepo\live\vps\kill.ps1" -Remote -Resume -Why "remote resume"
+    Say "remote RESUME applied (exit $LASTEXITCODE): $r"
+} elseif (-not ($fetchOk -and $treeOk)) { Say "kill state UNKNOWN (fetch ok=$fetchOk, tree ok=$treeOk): nothing changed" }
 $lines = @(git show "origin/${branch}:live/claude_alerts.txt" 2>$null)
 if ($Diag) { Say "fetched; alert lines in repo: $($lines.Count)" }
 if ($lines.Count -eq 0) { Say "no alert file on the branch"; exit 0 }

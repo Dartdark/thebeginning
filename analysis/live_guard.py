@@ -6,7 +6,7 @@ versions() Code-version stamps: the HB_Ver string in every strategy file that wr
 stale_versions() Repo files edited (git) after the date in their HB_Ver: the version wasn't bumped.
   python3 analysis/live_guard.py          (prints all three)
 """
-import glob, json, os, re, subprocess
+import datetime as dt, glob, json, os, re, subprocess
 import pandas as pd
 
 COLS = ["event", "tag", "symbol", "side", "contracts", "entry_date", "entry_time", "entry_price", "exit_date",
@@ -53,8 +53,11 @@ def chart_versions(df, charts):
         if not ver: old.append(tag); continue
         stem = ver.split(" ")[0]
         pend = json.load(open("live/expected_setup.json")).get("pending_install", {})
-        if stem in repo and repo[stem] != ver and repo[stem].split(" ")[-1] in pend:
-            continue                                      # update not installed yet on purpose (user muted it, 2026-11-01)
+        # muted on purpose until installed (Codex review 2026-11-01 #5): only the EXACT old version named for this strategy,
+        # only while the repo still has the version the mute was written for, and only until the expiry date
+        if (stem in repo and repo[stem] != ver and pend.get("allow_old", {}).get(stem) == ver
+                and pend.get("repo_version", {}).get(stem) == repo[stem] and str(dt.date.today()) <= pend.get("expires", "")):
+            continue
         if stem in repo and repo[stem] != ver:
             out.append(f"{tag}: runs {ver}, the repo has {repo[stem]}: paste the new code.")
     if old: out.append(f"Code version not stamped on {len(old)} chart(s) ({', '.join(old)}): repaste their strategies once (weekend).")
