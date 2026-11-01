@@ -144,7 +144,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   ~40 meetings 2018-22): V2 fade +$31 (gross $49, PF 1.18, t 0.40, 4/5 yrs), V3 +$27 (t 0.37), V1 -$34; other Thursdays
   -$11, placebo p 0.19; first (ADP-contaminated) run: V2 +$37, t 0.59. Holdout not opened. `analysis/lab_Q012.py`.
 
-## Q013 · running · priority 2
+## Q013 · done · priority 2
 - who_pays: information: slower FX participants (European real-money hedgers) act on the payrolls news hours after it prints
 - tier_check: master 2026-11-01, dupcheck 'NFP 6E': only the F-ranked 6E London-fix reversal (different event); clear
 - source: lab refill 2026-11-01 (NFP on 6E untested; NQ NFP fade is a plan strategy, 6E is not)
@@ -154,6 +154,9 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - rule sketch: NFP days from the plan's NFP calendar (NFP_Fade). V1 follow the 07:30 -> 07:45 move from 07:46 to 09:55 CT;
   V2 fade it; V3 V1 only when |move| >= 0.3 ATR. Stop 0.3 ATR. Placebo: same clock on other Fridays.
 - Apex: yes. data: data/6E_1min_*.csv
+- result: FAIL stage 1 (2026-11-01). 62 NFP days 2018-22 (volume >= 5x at 07:31; 12-14 a year, a few may be CPI Fridays):
+  V1 follow -$47 (t -1.2, 0/5 yrs), V2 fade -$8 (gross +$10, t -0.2), V3 big moves follow -$36 (17 trades); other Fridays
+  -$27, placebo p 0.23. Holdout not opened. `analysis/lab_Q013.py`. No follow-ups.
 
 ## Q014 · queued · priority 2
 - who_pays: structural: Chinese physical buyers are absent while Shanghai is closed, so London / US selling meets fewer bids
