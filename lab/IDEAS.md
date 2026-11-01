@@ -130,7 +130,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   0.017 ATR normally. The expiring contract's 13:00-13:30 settlement is not in the data; needs a contract-specific export
   (NGx expiring month, 1-min, last 5 days) from MultiCharts.
 
-## Q012 · queued · priority 2
+## Q012 · running · priority 2
 - source: lab refill 2026-11-01 (ECB not in TIER_LIST)
 - market: 6E (M6E)
 - mechanism: ECB policy decision (07:15 CT since 2022, 06:45 CT before) and press conference (+30 min): FX order flow
