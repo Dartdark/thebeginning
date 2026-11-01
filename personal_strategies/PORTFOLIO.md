@@ -146,3 +146,12 @@ Review this list whenever the account steps up a ladder row: re-test each at tha
 **User 2026-10-25: Swing Target stays at 1 MNQ; plans to switch to the aggressive version eventually.** Keep the aggressive row current whenever the book changes, and before the switch re-check its five 2-micro pieces on live and forward-log results, not only backtest Sharpe.
 The aggressive weights pick pieces by their backtest Sharpe, so part of its edge over 'current' is hindsight; two of the five
 (Kusho, Dual Thrust) are not live-proven yet. Pieces promote from conservative to current as they clear the forward log.
+
+## Inverse-volatility weights (tested 2026-11-01, `analysis/personal_invvol_test.py`; awaiting the user's decision)
+Weights set on 2018-22 (w ~ 1 / daily stdev per micro), scored on 2023+ (never seen), same total micros, whole micros.
+15 cleared pieces: ret/DD 6.10 (equal) -> 6.53 at ~1 micro a piece (drops Relative Strength and Twin), 7.32 at 2, 7.46 at
+4+; Sharpe 3.58 -> 3.76-3.99; capital for the same micros $57.6k -> $32.0k at 2 a piece. Full 19: 6.69 -> 7.74 (2) /
+8.50 (4+). Per $ of capital, inverse-vol at ~$32k earns ~20% more than the equal book at ~$29k. It shrinks the high-vol
+pieces (S30 0.18x, Relative Strength 0.34-0.39x, Twin, Kusho ~0.45x) and grows the quiet ones (ES MOC 2.5-2.9x, NFP fade,
+CL fade, EOS ~1.5-2x), so the book leans harder on smaller, weaker-per-trade pieces (ES MOC is on the watchlist, #20).
+Rounding makes it useless at ~1 micro a piece; it only works from ~2 micros a piece (the ~$32k+ rows).

@@ -37,6 +37,8 @@ MultiCharts code; add every solved error) · `DEVELOPMENT_PROCESS.md` · `RUNBOO
 - **Folders:** `apex_strategies/` = challenge-only; `funded_strategies/` = funded. Data in `data/`, results in
   `analysis/outputs/`, MC reports in `mc_reports/`, old material in `archive/`.
 - **A confirmed accounting / execution defect goes to the user immediately**, not on Friday.
+- **Effort (user, 2026-11-01):** before starting any non-trivial task, say which effort level you recommend (low / medium /
+  high / max) and why in one line, so the user can set it before you go.
 - **Corrections (user, 2026-11-01):** whenever the user corrects you, add one line to `LESSONS.md` ('Corrections from the
   user': date, their words, the rule that prevents it) in the same reply. Read that section at session start.
 
