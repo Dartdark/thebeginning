@@ -19,4 +19,4 @@ is noise and isn't tested.
 **What isn't here:** the strategies I trade, and the market data (vendor licence). The replication script runs on any
 1-minute NQ CSV and includes a synthetic self-test.
 
-Contact: (add)
+Daniel Moton · dmoton110@gmail.com
