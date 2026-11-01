@@ -1,0 +1,111 @@
+{
+  "Claude_commit": "dff44f136141aaf78c99c7042a8aca570bbff29a",
+  "mode": "synthetic/source review only",
+  "checks": {
+    "new_account_floor_crash": {
+      "exception": "KeyError('max_stop')",
+      "all_real_logs_unread": true
+    },
+    "new_account_tags_rejected": {
+      "tag_mapping": {
+        "VB150": [
+          "VB",
+          "#3"
+        ],
+        "ONB150": [
+          "ONB",
+          "#3"
+        ],
+        "EOS150": [
+          "EOS",
+          "#3"
+        ],
+        "MON_BR150": [
+          "MON_BR",
+          "#3"
+        ]
+      },
+      "new_account4_trades_dropped_on_20261102": true
+    },
+    "pending_mute_masks_any_old_version": {
+      "with_pending": [],
+      "after_removing_pending": [
+        "VB150: runs NQ_Vault_Break 2020-01-01, the repo has NQ_Vault_Break 2026-11-01: paste the new code."
+      ]
+    },
+    "manual_kill_cleared_by_remote_resume": {
+      "source_control_flow_replay": true,
+      "after_remote_then_manual_then_remote_resume_flag": false
+    },
+    "failed_remote_read_can_resume": {
+      "failed_ls_tree_empty_output_cast": false,
+      "source_replay_action": "resume",
+      "flag_after": false,
+      "no_native_powershell_run": true
+    },
+    "status_failed_directory_change_path": {
+      "conditional_on_failed_SetLocation": true,
+      "original_cwd": "C:\\TradingRepo",
+      "git_add_and_amend_target": "inherited working repo",
+      "remote_push_refspec": "vps-status:vps-status",
+      "native_script_not_executed": true
+    },
+    "remote_command_does_not_fail_on_push_failure": {
+      "push_helper_returned_normally": true,
+      "failed_pushes": 3,
+      "actual_git_calls": 0
+    },
+    "buy_gate_undefined_edge_crash": {
+      "exception": "unsupported format string passed to NoneType.__format__"
+    },
+    "account4_rules_arithmetic": {
+      "trail": 4000,
+      "lock": 150100,
+      "target_source": 159000,
+      "VB_stop_USD": 3000,
+      "ONB_intended_risk_USD": 2750
+    },
+    "not_started_guard": {
+      "20261101_before_20261102_busdays": 0
+    },
+    "six_strategy_source_checks": {
+      "apex_strategies/NQ_Vault_Break.txt": {
+        "real_time_guard": true,
+        "entry_gate_present": true,
+        "both_strategy_position_exit_branches": true,
+        "compiled_or_trade_matched": false
+      },
+      "apex_strategies/NQ_Vault_Break_SP.txt": {
+        "real_time_guard": true,
+        "entry_gate_present": true,
+        "both_strategy_position_exit_branches": true,
+        "compiled_or_trade_matched": false
+      },
+      "apex_strategies/NQ_Overnight_Bias.txt": {
+        "real_time_guard": true,
+        "entry_gate_present": true,
+        "both_strategy_position_exit_branches": true,
+        "compiled_or_trade_matched": false
+      },
+      "apex_strategies/NQ_Overnight_Bias_ADX30.txt": {
+        "real_time_guard": true,
+        "entry_gate_present": true,
+        "both_strategy_position_exit_branches": true,
+        "compiled_or_trade_matched": false
+      },
+      "funded_strategies/NQ_Expiration_Open_Short.txt": {
+        "real_time_guard": true,
+        "entry_gate_present": true,
+        "both_strategy_position_exit_branches": true,
+        "compiled_or_trade_matched": false
+      },
+      "apex_strategies/Bridge_Monday_Long_L644NQ.txt": {
+        "real_time_guard": true,
+        "entry_gate_present": true,
+        "both_strategy_position_exit_branches": true,
+        "compiled_or_trade_matched": false
+      }
+    }
+  },
+  "script_SHA256": "f71cf3ba6aeae293d85277045c3b0fb63ebcd1381b772acab7d3c5bed1583858"
+}
