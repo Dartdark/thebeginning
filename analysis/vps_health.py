@@ -72,6 +72,10 @@ def monitor_check(df, day, cfg):
         if acct not in ids or (want and acct != want[0]):
             out.append(f"- **ACCOUNT {tag}**: monitor AccountName is '{acct}', this chart belongs to {want[0] if want else 'a live account'}. "
                        "Check the strategy's Auto Trading gear account too (MULTICHARTS_PITFALLS.md, copied charts).")
+        route = str(g.exit_date.iloc[-1]) if "exit_date" in g and str(g.exit_date.iloc[-1]) not in ("nan", "") else ""
+        wid = cfg["accounts"].get(cfg["charts"][tag].get("account", ""), {}).get("id")
+        if route and wid and route != wid:   # route_account = GetAccountID (2026-11-01): where orders really go
+            out.append(f"- **ROUTING {tag}**: the chart SENDS ORDERS TO {route}, should be {wid}. Fix its Auto Trading gear account.")
         off = g[g.contracts.astype(float) == 0]
         if len(off): out.append(f"- **AUTO-TRADING OFF {tag}** at {', '.join(f'{int(t):04d}' for t in off.bar_time.unique()[:6])} CT: the strategy could not trade.")
         old = g[g.entry_price.astype(float) > 600]

@@ -133,7 +133,7 @@ def payouts():
         for f in sorted(glob.glob("live/trades/2*.csv")):
             d = os.path.basename(f)[:8]
             if d < a["funded"].replace("-", ""): continue
-            eq = [float(l.split(",")[6]) for l in open(f) if l.startswith("ACCT,") and f",{a['id']}," in l and l.split(",")[6]]
+            eq = [float(r[6]) for r in (l.split(",") for l in open(f) if l.startswith("ACCT,")) if len(r) > 6 and r[3] == a["id"] and r[6]]
             eq = [e for e in eq if e > 0]
             if eq: eod[d] = eq[-1]
         out.append(dict(account=name, id=a["id"], size=a["size"], **payout_status(eod, PAYOUT_RULES[a["size"]], a["funded"], a["payouts"])))

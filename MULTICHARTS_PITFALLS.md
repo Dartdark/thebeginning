@@ -254,3 +254,5 @@ failed, auto-trading off on all its charts. EOD-trailing accounts still fail on 
   strategy's Auto Trading gear -> Account. Only a screenshot of each chart's gear (or the first fill in the Order and
   Position Tracker) proves routing.
 - Before calling any MultiCharts defect: name the source and what writes it; label VERIFIED or GUESS.
+- Since 2026-11-01 the Chart Monitor writes `GetAccountID` (the strategy's real Auto Trading account) in ACCT column 9
+  (route_account; empty while auto-trading is off). That column, not column 4, is the routing evidence.

@@ -30,45 +30,54 @@
    "started": "20261102",
    "start": 150000.0,
    "trail": 4000.0,
-   "lock": 150100.0
+   "lock": 150100.0,
+   "max_stop": 3000.0
   }
  },
  "charts": {
   "VB-2": {
    "strategy": "Vault Break",
-   "qty": 8
+   "qty": 8,
+   "account": "#2"
   },
   "ONB-2": {
    "strategy": "Overnight Bias ADX30",
    "qty": null,
-   "max_qty": 10
+   "max_qty": 10,
+   "account": "#2"
   },
   "EOS-2": {
    "strategy": "EOS",
    "qty": null,
-   "max_qty": 6
+   "max_qty": 6,
+   "account": "#2"
   },
   "MON_BR-2": {
    "strategy": "Bridge Monday Long",
-   "qty": 2
+   "qty": 2,
+   "account": "#2"
   },
   "VB150": {
    "strategy": "Vault Break",
-   "qty": 20
+   "qty": 20,
+   "account": "#4"
   },
   "ONB150": {
    "strategy": "Overnight Bias ADX30",
    "qty": null,
-   "max_qty": 25
+   "max_qty": 25,
+   "account": "#4"
   },
   "EOS150": {
    "strategy": "EOS",
    "qty": null,
-   "max_qty": 15
+   "max_qty": 15,
+   "account": "#4"
   },
   "MON_BR150": {
    "strategy": "Bridge Monday Long",
-   "qty": 5
+   "qty": 5,
+   "account": "#4"
   }
  },
  "retired_tags": [
@@ -80,5 +89,6 @@
  "_accounts_about": "start / trail / lock / max_stop / started per live account (2026-10-30): the watchdog computes the Apex EOD trailing floor from the Chart Monitor's equity (floor = min(peak EOD equity - trail, lock)) and alarms when equity nears or touches it. phase: evaluation or funded.",
  "pending_install": {
   "2026-11-01": "kill switch update: muted in the pre-market version check until the user installs it (TODO 'Kill switch install'); remove this entry after the install"
- }
+ },
+ "_charts_account_about": "account per chart (2026-11-01): the watchdog compares it with the Chart Monitor's route_account (GetAccountID) and its typed AccountName"
 }

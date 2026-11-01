@@ -76,6 +76,19 @@ if ($hhmm -ge 830 -and $hhmm -le 1500) {
     }
 }
 
+# 2e. order routing (2026-11-01, after a false 'wrong account' call): the Chart Monitor's route_account (column 9,
+#     GetAccountID = where the chart's orders really go) and its typed AccountName (column 4, used for the balance) must
+#     both be the account expected_setup.json assigns to the tag. Any hour the watchdog runs: a wrong route is urgent.
+if ($cfg) {
+    foreach ($t in $acct.Keys) {
+        $ch = $cfg.charts.$t; if (-not $ch -or -not $ch.account) { continue }
+        $want = $cfg.accounts.($ch.account).id; $c = $acct[$t]
+        $route = ""; if ($c.Length -gt 8) { $route = $c[8].Trim() }
+        if ($route -ne "" -and $route -ne $want) { $problems += "ROUTE_$t|Chart ${t} SENDS ORDERS TO $route, should be $want ($($ch.account)). Fix the Auto Trading gear account now." }
+        if ($c[3] -ne $want) { $problems += "MONACCT_$t|Chart ${t}: Chart Monitor AccountName is '$($c[3])', should be $want (balance / floor alarm read the wrong account)." }
+    }
+}
+
 # 2d. Apex trailing floor (2026-10-30, after #3 failed on an intraday touch): equity from the Chart Monitor's ACCT rows vs the
 #     EOD trailing floor = min(peak end-of-day equity - trail, lock) since the account started (expected_setup.json)
 if ($cfg -and $hhmm -ge 815 -and $hhmm -le 1600) {

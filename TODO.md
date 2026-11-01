@@ -264,3 +264,6 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## VPS status for Claude (2026-11-01)
 - [ ] Install the 5-minute status snapshot: steps in [live/vps/VPS_STATUS.md](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/live/vps/VPS_STATUS.md) (git pull, test with -Diag, one schtasks line), then tell Claude "status installed".
+
+## Routing check (2026-11-01)
+- [ ] Repaste **Apex Chart Monitor** ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Chart_Monitor.txt)) in the PowerLanguage Editor, compile (F7); on each of the 8 charts auto-trading off/on (Flat). Then tell Claude: it confirms every chart's real order account from the VPS feed.

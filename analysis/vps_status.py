@@ -16,6 +16,18 @@ for x in s.get("processes") or []: print(f"  proc {x['name']} '{x.get('title')}'
 if not s.get("processes"): print("  NO MultiCharts process running")
 for t in s.get("tasks") or []: print(f"  task {t['task']}: {t.get('last_run')} result {t.get('last_result', '')}")
 tail = os.path.join(out, "trades_tail.csv")
+# routing check (2026-11-01): latest ACCT row per tag; route_account (col 9, GetAccountID) vs live/expected_setup.json
+cfg = json.load(open("live/expected_setup.json")); last = {}
+if os.path.exists(tail):
+    for r in (l.strip().split(",") for l in open(tail, errors="replace")):
+        if r[0] == "ACCT" and len(r) > 8: last[r[1]] = r
+print("routing (VERIFIED only where route_account is filled; empty = old monitor or auto-trading off):")
+for tag, ch in cfg["charts"].items():
+    want = cfg["accounts"].get(ch.get("account", ""), {}).get("id"); r = last.get(tag)
+    if not r: print(f"  {tag:<10} no ACCT row in the tail"); continue
+    route = r[8].strip()
+    v = "OK" if route == want else ("UNKNOWN (no route_account)" if not route else f"WRONG: sends to {route}")
+    print(f"  {tag:<10} want {want}  route {route or '-':<16} {v}; monitor AccountName {r[3]}{'' if r[3] == want else ' (WRONG)'}; auto {r[4]}")
 if os.path.exists(tail): print("trade log (last 15):\n" + "".join(open(tail, errors="replace").readlines()[-15:]))
 for f in ("screen_status.txt", "screen.jpg"):
     if os.path.exists(os.path.join(out, f)): print(f"{f}: {os.path.join(out, f)}" + (" -> " + open(os.path.join(out, f)).read().strip() if f.endswith("txt") else ""))

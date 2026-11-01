@@ -23,7 +23,7 @@ def floors(day=None, cfg=None):
         for f in sorted(glob.glob("live/trades/2*.csv")):
             d = os.path.basename(f)[:8]
             if d < v["started"] or (day and d > day): continue
-            rows = [l.split(",") for l in open(f) if l.startswith("ACCT,") and f",{v['id']}," in l]
+            rows = [r for r in (l.split(",") for l in open(f) if l.startswith("ACCT,")) if len(r) > 6 and r[3] == v["id"]]   # column 4 only (route_account added 2026-11-01)
             eq = [float(r[6]) for r in rows if r[6] and float(r[6]) > 0]
             if eq: eod[d] = eq[-1]
         if not eod: continue
