@@ -62,6 +62,7 @@ bottom). Times are Central (CT).
       confirm "compiled successfully" each time (the pre-market check flags old versions until then).
 - [ ] You: Sunday test: `kill.ps1` -> ntfy KILL ACTIVE -> `kill.ps1 -Resume`; then a remote KILL / RESUME via Claude.
       Steps: `live/vps/KILL_SWITCH.md`.
+- [ ] Claude, after your install: remove `pending_install` from `live/expected_setup.json` (the old-version alert is muted until then).
 
 ## Career (2026-11-01)
 - [ ] You: compare `career/resume_section.md` (v1) with `career/resume_section_v2_my_voice.md` (v2), pick what sounds like

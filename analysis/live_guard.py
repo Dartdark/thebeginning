@@ -52,6 +52,9 @@ def chart_versions(df, charts):
         ver = str(s.iloc[-1].side) if pd.notna(s.iloc[-1].side) else ""
         if not ver: old.append(tag); continue
         stem = ver.split(" ")[0]
+        pend = json.load(open("live/expected_setup.json")).get("pending_install", {})
+        if stem in repo and repo[stem] != ver and repo[stem].split(" ")[-1] in pend:
+            continue                                      # update not installed yet on purpose (user muted it, 2026-11-01)
         if stem in repo and repo[stem] != ver:
             out.append(f"{tag}: runs {ver}, the repo has {repo[stem]}: paste the new code.")
     if old: out.append(f"Code version not stamped on {len(old)} chart(s) ({', '.join(old)}): repaste their strategies once (weekend).")
