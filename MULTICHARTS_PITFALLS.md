@@ -248,3 +248,9 @@ with price 0 several times a second: all Rejected (the watchdog counted 2,301). 
 Read it this way: a 'Manual Trading' fill you didn't make = Apex closed the position; price-0 exit orders = the chart is out
 of sync. Fix: auto-trading OFF / ON (initial position Flat) on that chart, check Strategy Positions = Flat; if the account
 failed, auto-trading off on all its charts. EOD-trailing accounts still fail on an INTRADAY touch of the floor.
+
+## Reading live state (2026-11-01, after a false "wrong account" alarm)
+- ACCT rows' `account` = the Apex Chart Monitor's typed `AccountName` input, NOT where orders go. Order routing = the
+  strategy's Auto Trading gear -> Account. Only a screenshot of each chart's gear (or the first fill in the Order and
+  Position Tracker) proves routing.
+- Before calling any MultiCharts defect: name the source and what writes it; label VERIFIED or GUESS.
