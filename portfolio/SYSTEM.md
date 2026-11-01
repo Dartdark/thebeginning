@@ -31,5 +31,5 @@ paper scout ──> idea queue ──> pre-registration ──> staged gates ─
 **Independent review:** a second agent reviews the week's code and results and tries to break them; a separate code
 reviewer checks new code against planted-error fixtures. Results go to a S–F ranked list kept across all research.
 
-Outcome so far: of the first 13 studies, none passed stage 1. That's expected, and it's the point: the loop kills dead
+Outcome so far: of the first 12 studies, none passed stage 1. That's expected, and it's the point: the loop kills dead
 ideas cheaply, before they cost money.
