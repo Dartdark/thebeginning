@@ -21,6 +21,16 @@
    "id": "APEX-681524-01",
    "suffix": "",
    "status": "closed 2026-10-26"
+  },
+  "#4": {
+   "id": "APEX-681524-04",
+   "suffix": "150",
+   "status": "live",
+   "phase": "evaluation",
+   "started": "20261102",
+   "start": 150000.0,
+   "trail": 4000.0,
+   "lock": 150100.0
   }
  },
  "charts": {
@@ -41,17 +51,31 @@
   "MON_BR-2": {
    "strategy": "Bridge Monday Long",
    "qty": 2
+  },
+  "VB150": {
+   "strategy": "Vault Break",
+   "qty": 20
+  },
+  "ONB150": {
+   "strategy": "Overnight Bias ADX30",
+   "qty": null,
+   "max_qty": 25
+  },
+  "EOS150": {
+   "strategy": "EOS",
+   "qty": null,
+   "max_qty": 15
+  },
+  "MON_BR150": {
+   "strategy": "Bridge Monday Long",
+   "qty": 5
   }
  },
  "retired_tags": [
   "VB",
   "ONB",
   "EOS",
-  "MON_BR",
-  "VB150",
-  "ONB150",
-  "EOS150",
-  "MON_BR150"
+  "MON_BR"
  ],
  "_accounts_about": "start / trail / lock / max_stop / started per live account (2026-10-30): the watchdog computes the Apex EOD trailing floor from the Chart Monitor's equity (floor = min(peak EOD equity - trail, lock)) and alarms when equity nears or touches it. phase: evaluation or funded.",
  "pending_install": {

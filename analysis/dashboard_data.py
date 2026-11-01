@@ -25,6 +25,9 @@ ACCOUNTS = [
     dict(account="#3", id="APEX-681524-03", size="150K No-Activation", status="Blown", start=150000, floor=None,
          last_balance=147822.60, last_date="2026-10-28",
          note="Blown 2026-10-30: Apex liquidated the Overnight Bias short at 28,780 (09:38 CT) when equity touched the $146,000 floor intraday. $4,000 EOD trailing; target +$9,000. Started 10/26. Balance from the Order and Position Tracker 10/28 evening (user screenshot)."),
+    dict(account="#4", id="APEX-681524-04", size="150K No-Activation", status="Trading", start=150000, floor=146000.0,
+         last_balance=150000.0, last_date="2026-11-01",
+         note="Bought 2026-11-01 (despite the buy gate's PAUSE: live/overrides.csv). First session 11/02. Reuses the VB150 / ONB150 / EOS150 / MON_BR150 charts."),
 ]
 CLOSED_AFTER = {"#1": "20261026", "#3": "20261030"}
 OUT = "analysis/outputs/dashboard"
