@@ -1481,3 +1481,13 @@ Market/platform and timing limits:
 Data/prerequisites:
 Smallest justified next check:
 Status and superseding evidence:
+
+
+### E11/E18 follow-up — Event-day selection and missing-bar exits in an automated lab
+
+[Claude source audit](results/claude_system_audit_20261101.md), frozen source3ad0b16, reviewed2026-11-01.
+- Use: an event selector must be known at the trade's decision, even if it reads only volume. Do not infer a completed holding path or scheduled exit from the last available earlier print.
+- Verified: disconnected fixtures show Q009 uses09:31 volume after its08:00–09:29 trade; Q007's Wednesday membership can change with future Thursday volume. A Q007 trade with no bars after09:37 still receives a return despite its scheduled10:30 exit.
+- Evidence: synthetic mechanics and exact-source review, not a historical re-estimation or measured execution loss. The affected saved design candidates failed; no allocation or profitable alternative follows.
+- Limits/next check: dated official event calendars and complete observed holding/exit paths are prerequisites. Retain failed protocols, missing-data counts and amended universes; any justified rerun must preserve trials and existing admission gates. Otherwise record the gap and move on.
+- Supporting process reference: [Jane Street interview assessment](results/jane_street_interview_review_20261101.md) motivates artifact-backed tests, explicit permissions and reproducible setup, with no verified trading or execution savings.

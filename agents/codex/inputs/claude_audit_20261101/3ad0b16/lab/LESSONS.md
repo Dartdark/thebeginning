@@ -1,0 +1,13 @@
+# Lab lessons
+
+One line per finished study: what it taught (why it failed or passed), so the queue stops re-testing dead ideas.
+Format: `- Q00X (date, stage reached): lesson. Follow-ups: Q0YY, Q0ZZ / none.`
+- Q001, Q002 (2026-10-31, stage 0): skipped, already D/F in TIER_LIST (CL EIA first 5 minutes; ZN auction pressure). Check TIER_LIST before queueing. Follow-ups: none.
+- Q007 (2026-10-31, stage 1): NG storage report first 5 minutes are priced in by 09:35: follow +$20 gross, fade -$57 gross per NG vs $25 cost, as in CL EIA: headline-reaction fades/follows in energy reports are dead. Follow-ups: Q009 (pre-release drift).
+- Q003 (2026-10-31, stage 1): 6E into the London fix: on every day the pre-fix drift is gone (gross +$2 over 5 min vs $17.50 cost); on month-ends it is real against the same clock on other days (gross $32, placebo p 0.000) but 12 trades a year never reach t 2. Use an ex-ante month-end direction, not the pre-fix move. Follow-ups: Q010.
+- Q004, Q005, Q006 (2026-11-01, stage 0): skipped, duplicates of ranked COT / gold-fix / NQ-ES pair items: the seed queue was written without a TIER_LIST check; refills must grep TIER_LIST first. Follow-ups: none.
+- Q009 (2026-11-01, stage 1): no NG run-up into the storage report; the long side's -$116 is NG's general morning weakness plus a tight 0.3 ATR stop, not an event premium (short +$13, placebo p 0.33). Follow-ups: none.
+- Q011 (2026-11-01, stage 0): blocked: our NG continuous series rolls the evening before expiry (volume 4.9x), so expiry-day flows of the expiring contract need a per-contract export. Check the roll before queueing any expiry idea. Follow-ups: none.
+- Q010 (2026-11-01, stage 1): the month's ES move does not set the 6E month-end direction (V3 +$5, t 0.17; 08:30 -> fix -$47); with Q003, the month-end fix flow is a size effect without a usable sign. Follow-ups: none.
+- Q012 (2026-11-01, stage 1): ECB days on 6E: no follow / fade edge (best t 0.40). Two lessons: (1) ~8 events a year cannot reach t 2 in 5 design years unless the edge is > 0.6 sd a trade; do a power check before queueing rare events; (2) volume-spike calendars catch other releases at the same minute (US ADP 08:15 ET = 14:15 Berlin): fix event times by date. Follow-ups: none.
+- Q016 (2026-11-01, stage 1): the Kurov et al. pre-release drift on ISM / Conference Board days does not carry into the post-release minutes in 2018-22 (ES t 0.76, carried by 2022; ZN loses every year). Also: an ES volume spike cannot confirm 09:00 CT releases (cash session already busy, median ratio 1.3-1.9): use the calendar. Follow-ups: none.

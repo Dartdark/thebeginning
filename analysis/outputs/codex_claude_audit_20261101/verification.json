@@ -1,0 +1,123 @@
+{
+  "frozen_Claude_commit": "3ad0b16e7101ace22b870fe32dbf09fd4e2a80ee",
+  "kind": "synthetic implementation audit only",
+  "new_return_tests": 0,
+  "audit_script_SHA256": "10ff5d66537312be544cd1d137f24c8e0d59eafc10058f12a1c604c07f720b62",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "checks": {
+    "weekly_event_membership_depends_on_future_day": {
+      "same_Wednesday_information": true,
+      "before_rows": [
+        0
+      ],
+      "after_future_Thursday_volume_change": [
+        1
+      ]
+    },
+    "Q009_after_exit_selection": {
+      "entry_CT": "08:00",
+      "exit_CT": "09:29",
+      "selector_bar_end_CT": "09:31",
+      "before": [],
+      "after": [
+        1
+      ]
+    },
+    "missing_time_exit_accepted": {
+      "trade_count": 1,
+      "synthetic_net_USD": 975.0,
+      "last_observed_CT": "09:37",
+      "required_exit_CT": "10:30",
+      "missing_path_after_last_observation": true
+    },
+    "budget_check_after_execution": {
+      "looks_spent": 40,
+      "can_run": "OK",
+      "log_after_one_more_look": "sealed-look budget spent (40 a quarter): ask the user"
+    },
+    "receipt_does_not_certify_gates": {
+      "synthetic_stage5_PASS_accepted_without_artifacts": true,
+      "no_preregistration_or_return_files_created": true
+    },
+    "failed_git_reads_fail_open": {
+      "simulated_git_stdout": "",
+      "before_errors": [],
+      "after_errors": [],
+      "real_git_or_push_called": false
+    },
+    "data_stamp_unchanged_after_same_length_edit": {
+      "stamp_before": "NQ 20200101-20200102 #9f322421",
+      "stamp_after": "NQ 20200101-20200102 #9f322421",
+      "content_SHA256_changed": true
+    },
+    "undefined_edge_crashes_buy_gate": {
+      "live_trades": 40,
+      "backtest_denominator": 0,
+      "error": "unsupported format string passed to NoneType.__format__",
+      "live_input_reads": 0
+    }
+  },
+  "sources": {
+    "RUNBOOKS.md": "a67ff4120ca3ce910527ef8aab8215893bd6d64e33121e5ea2a5ab781d398b9c",
+    "LESSONS.md": "71fc141399a20c8f9a8539f7fa44b68ce847d8a3a9ee191401cf090fc5ff422c",
+    "CLAUDE.md": "5d0f951a1a2c67f68065a24e9e7c5f54cb48dfa57955dfceebcd2d1e02695a65",
+    "TODO.md": "79ef23ce76d8a9a7d8955abf40b6eea913998df79278de678228fe3ddd4d46c9",
+    "papers/SCOUT_LOG.md": "b7c343464ca8940b406990346e1fc3a3c17415e5deedab40cb5e451d98470223",
+    "portfolio/README.md": "2892b862fcc58941bf833cb976d18eb100f0d1e34b921e12ef629c06f7754e41",
+    "portfolio/FAILURE_LOG.md": "7bfbc024646290c581453d7845b0edc18b75b71ca10b3f7344b51108d3d2ffec",
+    "portfolio/SYSTEM.md": "c31081a7cb0466066d1943fdd005f668735f9a1f2e7d99cb60f3a72c4288f91a",
+    "tools/run_stamped.sh": "7b4b2f2740b950207e894bdcf2bcb58509f1c592eb2692b4d62795025b7cb8e1",
+    "tools/prepush_check.py": "b2289fd77ed3d9252cb86b62c5f2f39e3a8f5b40e473393eb088b1374fdaf569",
+    "analysis/prop_sim.py": "1ed864095617f2b0f14d891b07cb6779959397e1414bffaea6683e02e0cf3016",
+    "analysis/plan150_integer_test.py": "e80dfa8211de7defd681c599320daae8588a0397c93d64487c412e7019d8807b",
+    "analysis/gc_asia_atr_stop_test.py": "2d6b9ec63cfc02bf8ab5c92b8fc516853c46d6604e2741580bb8d0dc1fa0ece6",
+    "analysis/personal_ladder.py": "65bca316fa2dc18f382dc7d52e287db34a629916ac89d61866fdbe522005b940",
+    "analysis/lab_Q016.py": "00c039bdb615161b8d6e5ac3ca88b31bac00b5a2bbb4d24651d439e265503e40",
+    "analysis/lab_tools.py": "4e2ec86a3cd0109de1213b94437a5378ca506a9694bea662cee1b2cd1cbce08e",
+    "analysis/lab_Q003.py": "343becc96d25823fe390bea06ad4c64abba68b1937ed910174ed589cfe0d1164",
+    "analysis/montecarlo.py": "751f8f4d1bbf39cead435020b6da1862f407d356dd7f7501727ea4c094961cd4",
+    "analysis/morning_brief.py": "ff35588ce3836b6e6ecbff07bd43d5012c70bcc325ae72cb66ba6afb7715cf00",
+    "analysis/portfolio.py": "f61ad81f4412843daf88942d2cbd051eb1203456b815bf3f5703eb7c6692f45e",
+    "analysis/firm_risk_test.py": "c94996be9079d354319cda38607136fb87a91fab7b9ac2c3d72edf4b85af9b62",
+    "analysis/rollzone_bench.py": "de6869e08a5c2ff6587a587906d2f9be97d52b57b4ed9c1bc646724b58882d7f",
+    "analysis/opposing_overlap_check.py": "2759417dc311372ef28954663fa9d4645588b425a81b07b7e05aa7091c0f8373",
+    "analysis/gc_asia_continuation_test.py": "79cf689c51555ebf4d7b599fca0df1de60641f180143449129a54b6f9e5035af",
+    "analysis/provenance.py": "d852efa92d7eef24d9b3d003126fd4a1f812f8101b8c34a4a5480b091f9aada1",
+    "analysis/personal_invvol_test.py": "a0cbc30a4a961c634009b0e613b3be0060bc4731fc208948d593fa18d623e618",
+    "analysis/rollzone_24h_test.py": "467f7c801e71eb0dd96a52685219bfc1ca117f94477a462e8c9ef7c34d3fe4e1",
+    "analysis/buy_gate.py": "1e01d6697ebea0632bc0b3e9e72f2e9c01b2331f6a5a0dfc2d5075530f55403e",
+    "analysis/lab_Q010.py": "caa1bea65411dd37e24a8d80484ea1c9e35cf96d5e30ae3c128a1482470099e6",
+    "analysis/personal_invvol_confirm.py": "30a62cfe9c7ece575e6906b147fc199c0e51d74310c35870e727d2d15120f770",
+    "analysis/lab_Q007.py": "33a34057cd3ed2e2ef930ff41c9ac05c943ca1fc37320ca68bd4709ad2ee633b",
+    "analysis/lab_Q009.py": "e5679c7ad8ead4cc742e107bbf02e1d9a4ba97cc4aa7e87bcd09b9a207c0db7f",
+    "analysis/lab_Q012.py": "74d71dcc063caee31cb74f5bedb97d39c08ca4bcdee7a0db7a74561638aba068",
+    "analysis/swing_target_bench.py": "f4956d2be529846da5a5d7f006a32e924bcd693d2694a4459c7ec291a6088b27",
+    "personal_strategies/PORTFOLIO.md": "edbfa8656dfe6eccc5788fbcd3e1d06720cee1a512873712f24f2f5a00b6b4da",
+    "lab/IDEAS.md": "5c5c194901896c87aaf4d0f6f99f5421ba855ab94cc6ebc036ed56fbac19c1aa",
+    "lab/LESSONS.md": "b301179eb90c0ca73e64b7b2255e0f3d4831bf2217178c0ffd87f0c00f9daed6",
+    "lab/README.md": "97c33a644f75649eade046553f39b8dd2b8d9dc48c70cf81592354c34d2fae5b",
+    "lab/ledger.json": "23590f3cbf05acd155edf4de24b384bbeb92885a9a1a0866dbd59fb5301c5a7a",
+    "portfolio/replication/README.md": "9b3f05acf4435b659c007bc25303eae76ba3ec81cbcacfd8b0aeb61824b2e4b0",
+    "portfolio/replication/overnight_nq.py": "5d94f6d95631fffaa8a191c2080809afd06ebff1cbbf0817a3e68800972cc052",
+    "agents/cross_review/CODE_REVIEW_LOG.md": "e6344c665804782bedc8a48b9e9c6488d60722ccf39344a41ef0f1ea2af573e4",
+    "analysis/outputs/swing_target_bench_personal.txt": "53599b35b0f70c12a1ee6b0eb2cdf226f3d8f4dec92dae34ee3ff68a24641831",
+    "analysis/outputs/firm_risk_test_output.txt": "8f309ff5a0879dd9b6411d4014fe90d5885b4a942738535fadd6b6c7e8c8a0b1",
+    "analysis/outputs/personal_invvol_test_output.txt": "732b4febf58ae4302ad5c6c198526ef4b630fda3e6b6581f184396ca81f600a2",
+    "analysis/outputs/personal_invvol_confirm_output.txt": "5c600aceb6a9e2f79ae88fb77e41ac23ae29aa28e909b77bbc23bffe67bdbeb1",
+    "analysis/outputs/swing_target_bench_funded.txt": "63c2126c76e2a9536f3138729b592e0ba98ada2643a1035ca3761e4435860b6f",
+    "analysis/outputs/swing_target_bench_evals.txt": "32ed2d6e6d5d7a0a985d44e9ccde07e242c29d9b871abad6da56af3b91e3b90b",
+    "checks/candidates/lab_Q003/PREREG.md": "8a9095039d0fe1f22cb53d275a2d57409018dd7bcdf043a451d41f221d659bcc",
+    "checks/candidates/lab_Q010/PREREG.md": "f71923b0fe1f0bbd8ed1ecc9e6491f0853421d2740e50f3a92a3e9cd5ff6925e",
+    "checks/candidates/gc_asia_continuation/verdict.md": "48315716cecc7bfe77bd646d2c69c45ab35d785b24c43f241be730e789f4f9b6",
+    "checks/candidates/lab_Q016/PREREG.md": "86003c02eae503bfbf9021ab1edaab017182798992927ea25b1a5e41d41b0c4f",
+    "checks/candidates/lab_Q012/PREREG.md": "420db8bea3aa2bfed4b5e07a074a6202608db86c57aa96e55d6d814e1bda9803",
+    "checks/candidates/lab_Q009/PREREG.md": "ffe2d2ca695bb16320911b704df11d26e5834f94dafcf4c3dc31103aaff1e835",
+    "checks/candidates/lab_Q007/PREREG.md": "86eef0052a0bd025b9a8939838cab4448d88ae8e0e36a04259bc754a40b54eff",
+    "checks/candidates/rollzone_24h/spec.md": "0aae6864af5fe37b8844d10641c47cb16c25adccd340720ab3934522205aa227",
+    "checks/candidates/rollzone_24h/verdict.md": "beb0f76c9cb5843e6eaa01846de26ded070e7f2bf4b5c0eac30a6de6789ea5e8",
+    ".claude/skills/scout/SKILL.md": "b435bba403a4e2bfefa18d052903ba7351dc063567d6ac0e8c59420f6b9f4dcb",
+    ".claude/skills/lab/SKILL.md": "68d2d73462ab6eef31f524f1d61f8b453424ce696bd3f152fdaeb90881515126"
+  }
+}
