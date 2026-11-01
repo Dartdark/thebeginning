@@ -87,7 +87,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - market: ZC / ZS / ZW (grains)
 - mechanism: USDA WASDE monthly 11:00 CT. Blocked: no grain minute data, and Apex eligibility of grains to confirm.
 
-## Q009 · running · priority 2
+## Q009 · done · priority 2
 - source: follow-up of Q007 (parent: Q007, depth 1)
 - market: NG (QG)
 - mechanism: pre-announcement drift: traders who must be flat or hedged into the storage number (utilities, weather funds
@@ -96,6 +96,9 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - rule sketch: release days found by the 09:31 volume spike (as Q007). V1 long 08:00 -> 09:29, V2 short, V3 follow the
   overnight 17:00 -> 07:59 move into 09:29. Stop 0.3 x 14-day ATR. Placebo: same window on non-release weekdays.
 - Apex: yes. data: data/NG_1min_*.csv (scratch ng.pkl)
+- result: FAIL stage 1 (2026-11-01). 2018-22, 254 release days: V1 long -$116 (t -3.4, 0/5 yrs), V2 short +$13 (gross $38,
+  PF 1.08, t 0.36), V3 follow the overnight -$44 (t -1.2); non-release days -$2 (placebo p 0.33). Holdout not opened.
+  `analysis/lab_Q009.py`. No follow-ups.
 
 ## Q010 · queued · priority 2
 - source: follow-up of Q003 (parent: Q003, depth 1)
@@ -107,3 +110,35 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   fix (10:00 / 11:00 CT); V2 enter at fix-30, out at the fix; V3 V1 on the last 2 sessions. No stop. Placebo: same rule
   mid-month (15th or next session).
 - Apex: yes. data: data/6E_1min_*.csv, ge.pkl (ES)
+
+## Q011 · queued · priority 1
+- source: lab refill 2026-11-01 (non-NQ scheduled flow; TIER_LIST has no NG expiry item)
+- market: NG (QG)
+- mechanism: NG final settlement (last trade = 3 business days before the 1st of the delivery month, settles 13:30 CT on
+  the 13:00-13:30 VWAP) sets the price of monthly-index physical gas ("bidweek"); utilities and marketers who buy or sell
+  next month's gas at index must hedge into that window, and the expiring contract's volume rolls to the next. Test the
+  settlement-window drift and the reversal after, on the front contract.
+- rule sketch: expiry day from the CME rule (3 business days before the 1st, NYMEX holidays): V1 follow the 08:00 -> 12:55
+  move 13:00 -> 13:29; V2 fade it 13:31 -> 14:30 (next contract only if the data has rolled; check first); V3 V1 on the
+  day before expiry. Stop 0.3 ATR.
+- Apex: yes (check the contract roll in data/NG_1min_*: unadjusted front month?). data: data/NG_1min_*.csv
+
+## Q012 · queued · priority 2
+- source: lab refill 2026-11-01 (ECB not in TIER_LIST)
+- market: 6E (M6E)
+- mechanism: ECB policy decision (07:15 CT since 2022, 06:45 CT before) and press conference (+30 min): FX order flow
+  after scheduled macro news keeps moving the price for hours as real-money accounts reposition (Evans & Lyons 2008:
+  order flow carries news slowly); the press-conference move is the information, the decision headline mostly priced.
+- rule sketch: ECB days inferred from the 6E volume spike at the decision minute on Thursdays (never from returns; ~8 a
+  year). V1 follow decision -> press-conference end (+90 min) into 10:30 CT; V2 fade it; V3 follow the press-conference
+  part only (+30 -> +90). Stop 0.3 ATR. Placebo: same clock on other Thursdays. Event study: >= 40 trades needs 2018-22's ~40.
+- Apex: yes. data: data/6E_1min_*.csv
+
+## Q013 · queued · priority 2
+- source: lab refill 2026-11-01 (NFP on 6E untested; NQ NFP fade is a plan strategy, 6E is not)
+- market: 6E (M6E)
+- mechanism: US payrolls (07:30 CT, first Friday) reprice the dollar; FX order flow after macro news persists (Evans &
+  Lyons 2008), and European real-money hedgers act after their lunch, before the London close (10:00 CT fix).
+- rule sketch: NFP days from the plan's NFP calendar (NFP_Fade). V1 follow the 07:30 -> 07:45 move from 07:46 to 09:55 CT;
+  V2 fade it; V3 V1 only when |move| >= 0.3 ATR. Stop 0.3 ATR. Placebo: same clock on other Fridays.
+- Apex: yes. data: data/6E_1min_*.csv
