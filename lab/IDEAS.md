@@ -37,7 +37,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   t 0.85, 3/5 yrs); V2 month-end post-fix fade -$6 (t -0.3); V3 every day -$15 (gross +$2, t -7.3). Month-end beats the
   same clock on other days (placebo p 0.000) but too few trades for t 2. Holdout not opened. `analysis/lab_Q003.py`.
 
-## Q004 · queued · priority 2
+## Q004 · done · priority 2
 - source: lab seed (positioning)
 - market: NQ (personal/weekly) or as a filter on ONB / Monday Long
 - mechanism: extreme speculator positioning (COT non-commercial net long/short z-score) precedes mean reversion over 1-4
@@ -45,16 +45,20 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - rule sketch: weekly: COT z(52w) of NQ non-commercial net; V1 long NQ Tue->Tue when z <= -1.5, V2 short when z >= 1.5,
   V3 as a size filter on ONB (2x when aligned). Personal-only for V1/V2 (multi-day).
 - Apex: V3 only. data: data/COT_NQ.csv
+- result: skipped 2026-11-01, not tested: same signal as the ranked COT items (Bridge COT Dealer Rank weekly hold C,
+  as a day trade / plan filter F; CoT reversal index gate F). A z-score instead of a rank is a parameter tweak.
 
-## Q005 · queued · priority 2
+## Q005 · done · priority 2
 - source: lab seed (gold)
 - market: GC (MGC)
 - mechanism: COMEX open 07:20 CT: physical/ETF flows hit after the overnight Asian/London price discovery; London PM fix
   (09:00 CT) is a benchmark trade time for bullion dealers. Test drift into the PM fix and reversal after.
 - rule sketch: V1 follow the 07:20->08:55 move into 09:00; V2 fade 09:00->10:30; V3 V2 only on days |move| >= 0.3 ATR.
 - Apex: MGC yes. data: data/GC_*, scratch gc.pkl
+- result: skipped 2026-11-01, not tested: duplicate of F items (Antigravity edges: GC follow 7:20->8:30 and the PM fix
+  8:45->9:00 to 10:30, t -0.5 / -0.8; S-rank round 1 LBMA AM / PM follow; LBMA auction short D).
 
-## Q006 · queued · priority 3
+## Q006 · done · priority 3
 - source: lab seed (relative value, lowers net equity beta)
 - market: NQ vs ES spread (MNQ/MES)
 - mechanism: index arbitrage and rebalancing keep NQ/ES tied intraday; large intraday divergences (ratio z) partly close
@@ -62,6 +66,8 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - rule sketch: at 12:00 CT if NQ/ES ratio return since 08:30 z(60d) >= 2: short NQ / long ES dollar-neutral to 14:55;
   V2 opposite sign; V3 threshold 1.5.
 - Apex: yes (two legs, both intraday). data: g24.pkl, ge.pkl
+- result: skipped 2026-11-01, not tested: duplicate of F items (decoupled NQ-ES mornings follow / fade t <= 0.6;
+  NQ-ES Kalman pairs 17/18 versions lose, divergences keep widening from |z| >= 2).
 
 ## Q007 · done · priority 1
 - source: Codex audit 2026-10-31; data supplied by the user 2026-10-31 (NG 1-min 2017-2026, converted ET -> CT)
@@ -81,7 +87,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - market: ZC / ZS / ZW (grains)
 - mechanism: USDA WASDE monthly 11:00 CT. Blocked: no grain minute data, and Apex eligibility of grains to confirm.
 
-## Q009 · queued · priority 2
+## Q009 · done · priority 2
 - source: follow-up of Q007 (parent: Q007, depth 1)
 - market: NG (QG)
 - mechanism: pre-announcement drift: traders who must be flat or hedged into the storage number (utilities, weather funds
@@ -90,8 +96,11 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - rule sketch: release days found by the 09:31 volume spike (as Q007). V1 long 08:00 -> 09:29, V2 short, V3 follow the
   overnight 17:00 -> 07:59 move into 09:29. Stop 0.3 x 14-day ATR. Placebo: same window on non-release weekdays.
 - Apex: yes. data: data/NG_1min_*.csv (scratch ng.pkl)
+- result: FAIL stage 1 (2026-11-01). 2018-22, 254 release days: V1 long -$116 (t -3.4, 0/5 yrs), V2 short +$13 (gross $38,
+  PF 1.08, t 0.36), V3 follow the overnight -$44 (t -1.2); non-release days -$2 (placebo p 0.33). Holdout not opened.
+  `analysis/lab_Q009.py`. No follow-ups.
 
-## Q010 · queued · priority 2
+## Q010 · done · priority 2
 - source: follow-up of Q003 (parent: Q003, depth 1)
 - market: 6E (M6E)
 - mechanism: month-end FX hedge rebalancing (Melvin & Prins 2015): foreign holders of US equities hedge the dollar; when
@@ -101,3 +110,66 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   fix (10:00 / 11:00 CT); V2 enter at fix-30, out at the fix; V3 V1 on the last 2 sessions. No stop. Placebo: same rule
   mid-month (15th or next session).
 - Apex: yes. data: data/6E_1min_*.csv, ge.pkl (ES)
+- result: FAIL stage 1 (2026-11-01). 2018-22: V1 08:30 -> fix -$47 (t -0.9), V2 fix-30 -> fix -$12 (t -0.3), V3 last 2
+  sessions +$5 (gross $23, PF 1.05, t 0.17; longs +$15, shorts -$15); mid-month control -$31; placebo p 0.13. Holdout not
+  opened. `analysis/lab_Q010.py`. No follow-ups (depth limit reached for a strong mechanism).
+
+## Q011 · blocked · priority 1
+- source: lab refill 2026-11-01 (non-NQ scheduled flow; TIER_LIST has no NG expiry item)
+- market: NG (QG)
+- mechanism: NG final settlement (last trade = 3 business days before the 1st of the delivery month, settles 13:30 CT on
+  the 13:00-13:30 VWAP) sets the price of monthly-index physical gas ("bidweek"); utilities and marketers who buy or sell
+  next month's gas at index must hedge into that window, and the expiring contract's volume rolls to the next. Test the
+  settlement-window drift and the reversal after, on the front contract.
+- rule sketch: expiry day from the CME rule (3 business days before the 1st, NYMEX holidays): V1 follow the 08:00 -> 12:55
+  move 13:00 -> 13:29; V2 fade it 13:31 -> 14:30 (next contract only if the data has rolled; check first); V3 V1 on the
+  day before expiry. Stop 0.3 ATR.
+- Apex: yes (check the contract roll in data/NG_1min_*: unadjusted front month?). data: data/NG_1min_*.csv
+- result: BLOCKED 2026-11-01 (no returns run). data/NG_1min_* rolls to the next contract at the evening open before
+  the expiry session: expiry-day 08:00-13:30 volume 4.9x the day before (median, 107 expiries), evening-open gap 0.038 vs
+  0.017 ATR normally. The expiring contract's 13:00-13:30 settlement is not in the data; needs a contract-specific export
+  (NGx expiring month, 1-min, last 5 days) from MultiCharts.
+
+## Q012 · done · priority 2
+- source: lab refill 2026-11-01 (ECB not in TIER_LIST)
+- market: 6E (M6E)
+- mechanism: ECB policy decision (07:15 CT since 2022, 06:45 CT before) and press conference (+30 min): FX order flow
+  after scheduled macro news keeps moving the price for hours as real-money accounts reposition (Evans & Lyons 2008:
+  order flow carries news slowly); the press-conference move is the information, the decision headline mostly priced.
+- rule sketch: ECB days inferred from the 6E volume spike at the decision minute on Thursdays (never from returns; ~8 a
+  year). V1 follow decision -> press-conference end (+90 min) into 10:30 CT; V2 fade it; V3 follow the press-conference
+  part only (+30 -> +90). Stop 0.3 ATR. Placebo: same clock on other Thursdays. Event study: >= 40 trades needs 2018-22's ~40.
+- Apex: yes. data: data/6E_1min_*.csv
+- result: FAIL stage 1 (2026-11-01). Amended calendar (13:45 Berlin before 2022-07, 14:15 after; volume >= 5x finds 33 of
+  ~40 meetings 2018-22): V2 fade +$31 (gross $49, PF 1.18, t 0.40, 4/5 yrs), V3 +$27 (t 0.37), V1 -$34; other Thursdays
+  -$11, placebo p 0.19; first (ADP-contaminated) run: V2 +$37, t 0.59. Holdout not opened. `analysis/lab_Q012.py`.
+
+## Q013 · queued · priority 2
+- source: lab refill 2026-11-01 (NFP on 6E untested; NQ NFP fade is a plan strategy, 6E is not)
+- market: 6E (M6E)
+- mechanism: US payrolls (07:30 CT, first Friday) reprice the dollar; FX order flow after macro news persists (Evans &
+  Lyons 2008), and European real-money hedgers act after their lunch, before the London close (10:00 CT fix).
+- rule sketch: NFP days from the plan's NFP calendar (NFP_Fade). V1 follow the 07:30 -> 07:45 move from 07:46 to 09:55 CT;
+  V2 fade it; V3 V1 only when |move| >= 0.3 ATR. Stop 0.3 ATR. Placebo: same clock on other Fridays.
+- Apex: yes. data: data/6E_1min_*.csv
+
+## Q014 · queued · priority 2
+- source: lab refill 2026-11-01 (not in TIER_LIST: no Golden Week / Lunar New Year item)
+- market: GC (MGC)
+- mechanism: Chinese physical gold demand (SGE, the largest physical market) is absent while China is closed for Lunar
+  New Year and the October Golden Week; dealers' Asian bids that normally absorb London / US selling are missing, so
+  gold drifts weaker on those days and recovers after Shanghai reopens.
+- rule sketch: SGE closure days from the official holiday calendar (hard-code 2018-26 from the SGE notices; no returns
+  used). V1 short GC 07:20 -> 12:25 CT on each closure weekday; V2 long the first 2 sessions after the reopening;
+  V3 V1 only on the first 3 closure days. Stop 0.3 ATR. Placebo: same clock on random non-closure weekdays.
+- Apex: yes (MGC). data: data/GC_1min_*.csv; SGE holiday dates (to build, write data/sge_holidays.csv first)
+
+## Q015 · queued · priority 3
+- source: lab refill 2026-11-01 (ZN daily settlement not in TIER_LIST; CL / GC settlement versions are F)
+- market: ZN
+- mechanism: Treasury futures settle on the 13:59-14:00 CT window; TAS orders and hedgers marking books to settlement
+  trade into it, and dealers' basis / roll hedges are executed against it daily. Test follow into and fade after.
+- rule sketch: V1 follow the 12:00 -> 13:55 move 13:56 -> 14:00; V2 fade the 12:00 -> 14:00 move 14:01 -> 15:00; V3 V2 only
+  when |move| >= 0.3 ATR. Stop 0.3 ATR. Power: ~250 trades a year. Cost warning: ZN round trip $36.25 vs a typical
+  1-hour ZN move of ~4 ticks: stop at stage 1 unless gross > $50.
+- Apex: yes. data: data/ZN_1min_*.csv
