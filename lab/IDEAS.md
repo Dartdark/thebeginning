@@ -111,7 +111,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   mid-month (15th or next session).
 - Apex: yes. data: data/6E_1min_*.csv, ge.pkl (ES)
 
-## Q011 · queued · priority 1
+## Q011 · running · priority 1
 - source: lab refill 2026-11-01 (non-NQ scheduled flow; TIER_LIST has no NG expiry item)
 - market: NG (QG)
 - mechanism: NG final settlement (last trade = 3 business days before the 1st of the delivery month, settles 13:30 CT on
