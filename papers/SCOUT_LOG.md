@@ -49,3 +49,4 @@ READ (-> TIER_LIST grade) / NEED PDF (user downloads from SSRN and drops it in t
 | 2026-11-01 | Kellard, Jiang & Liu 2020 JFM; Zhou (AUT); GFJ 2025 | Chinese gold / silver futures night session | SKIP: SHFE effects; Shanghai open / SGE items already F |
 | 2026-11-01 | LSEG 2024 research paper | How markets react to CPI surprises | SKIP: reaction to surprise needs consensus data; ZN after 07:30 releases already F |
 | 2026-11-01 | Baltas & Kosowski; GSCI rebalancing study (AgEcon) | CTA capacity / index-roll flows | SKIP: GSCI / BCOM roll windows already F |
+| 2026-11-01 17:43 UTC | scheduled run | (no search) | STOP: 6 ideas already queued in lab/IDEAS.md (Q013-Q018 >= 5); nothing added |
