@@ -4,14 +4,15 @@
 # that replaces the last (force push: the repo never grows). Read-only: never touches MultiCharts, Rithmic or orders.
 # Claude reads it with: python3 analysis/vps_status.py
 #   Install once:  schtasks /Create /TN "VpsStatusPush" /SC MINUTE /MO 5 /TR "C:\TradingRepo\live\vps\run_status.cmd" /F
-# No screenshot (2026-11-01: Windows Defender blocked the screen-capture version as spyware-like; correct call, not bypassed).
+# Screenshot: separate script screen_push.ps1 (Defender may block it; this one keeps working).
 param([switch]$Diag)
 $ErrorActionPreference = "SilentlyContinue"
 $Out = "C:\TradingStatus"; $Logs = "C:\TradingLogs"; $Log = "$Logs\status_push_log.txt"
 function Say($m) { $l = "$((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) $m"; Add-Content $Log $l; if ($Diag) { $l } }
 if ((Get-Date).DayOfWeek -eq 'Saturday' -and -not $Diag) { exit 0 }   # market closed all Saturday
 New-Item -ItemType Directory -Force $Out | Out-Null
-Get-ChildItem $Out -Force | Where-Object { $_.Name -ne ".git" } | Remove-Item -Recurse -Force
+Get-ChildItem $Out -Force | Where-Object { $_.Name -notin ".git", "screen_new.jpg", "screen_status.txt" } | Remove-Item -Recurse -Force
+if (Test-Path "$Out\screen_new.jpg") { Move-Item "$Out\screen_new.jpg" "$Out\screen.jpg" -Force }   # from screen_push.ps1
 
 # 2. MultiCharts processes, window titles, established TCP connections (broker / data feed proxy)
 $procs = @(Get-Process | Where-Object { $_.ProcessName -like "MultiCharts*" -or $_.ProcessName -like "*QuoteManager*" -or $_.ProcessName -like "*Rithmic*" -or $_.ProcessName -like "tsServer*" })

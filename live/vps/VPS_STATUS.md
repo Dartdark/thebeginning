@@ -10,7 +10,13 @@ the last 200 trade-log lines and the last 30 alerts. Read-only: nothing on the V
 3. Schedule it: `schtasks /Create /TN "VpsStatusPush" /SC MINUTE /MO 5 /TR "C:\TradingRepo\live\vps\run_status.cmd" /F`
 4. Tell Claude "status installed": Claude reads the snapshot and confirms what it sees.
 
-## No screenshot (2026-11-01)
-The first version also captured the screen; Windows Defender blocked it as spyware-like (screen capture + upload). That
-is the right call and is not bypassed. When Claude needs to see the screen (chart settings, connection lights), send a
-screenshot by hand.
+## Screenshot (optional, 2026-11-01)
+`screen_push.ps1` captures the desktop every 5 min; the status push carries it. Windows Defender flagged the first version
+(screen capture + upload looks like spyware). Allowing it is your call on your own VPS; the script is short and readable,
+check it first. In an **administrator** PowerShell:
+1. `Add-MpPreference -ExclusionPath "C:\TradingRepo\live\vps\screen_push.ps1"` (only this one file, not the folder)
+2. Test: `powershell -ExecutionPolicy Bypass -File C:\TradingRepo\live\vps\screen_push.ps1; Get-Content C:\TradingStatus\screen_status.txt` -> `... ok`
+3. Schedule: `schtasks /Create /TN "VpsScreenshot" /SC MINUTE /MO 5 /TR "C:\TradingRepo\live\vps\run_screen.cmd" /F`
+If Defender still blocks it after the exclusion, stop there (screenshots by hand); don't widen the exclusion.
+Undo: `Remove-MpPreference -ExclusionPath "C:\TradingRepo\live\vps\screen_push.ps1"` and `schtasks /Delete /TN VpsScreenshot /F`.
+Black image = Remote Desktop minimized or disconnected; keep it open, or disconnect with `tscon %sessionname% /dest:console`.

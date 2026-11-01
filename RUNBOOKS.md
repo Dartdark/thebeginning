@@ -31,4 +31,4 @@ accounts failed within ~10 trading days -> 7-day cool-off), PLAN ONLY (< 40 live
 accelerate), GO (40+ trades, live edge >= 75% of backtest). Shown in the morning brief. The user decides; the gate advises.
 
 ## VPS status (2026-11-01)
-`python3 analysis/vps_status.py <scratch>/vps` -> status + trade tail (no screenshot: Defender blocks it). Setup: `live/vps/VPS_STATUS.md`.
+`python3 analysis/vps_status.py <scratch>/vps` -> status + trade tail; `screen.jpg` if the screenshot task is installed. Setup: `live/vps/VPS_STATUS.md`.
