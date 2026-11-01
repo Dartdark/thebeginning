@@ -100,7 +100,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   PF 1.08, t 0.36), V3 follow the overnight -$44 (t -1.2); non-release days -$2 (placebo p 0.33). Holdout not opened.
   `analysis/lab_Q009.py`. No follow-ups.
 
-## Q010 · running · priority 2
+## Q010 · done · priority 2
 - source: follow-up of Q003 (parent: Q003, depth 1)
 - market: 6E (M6E)
 - mechanism: month-end FX hedge rebalancing (Melvin & Prins 2015): foreign holders of US equities hedge the dollar; when
@@ -110,6 +110,9 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   fix (10:00 / 11:00 CT); V2 enter at fix-30, out at the fix; V3 V1 on the last 2 sessions. No stop. Placebo: same rule
   mid-month (15th or next session).
 - Apex: yes. data: data/6E_1min_*.csv, ge.pkl (ES)
+- result: FAIL stage 1 (2026-11-01). 2018-22: V1 08:30 -> fix -$47 (t -0.9), V2 fix-30 -> fix -$12 (t -0.3), V3 last 2
+  sessions +$5 (gross $23, PF 1.05, t 0.17; longs +$15, shorts -$15); mid-month control -$31; placebo p 0.13. Holdout not
+  opened. `analysis/lab_Q010.py`. No follow-ups (depth limit reached for a strong mechanism).
 
 ## Q011 · blocked · priority 1
 - source: lab refill 2026-11-01 (non-NQ scheduled flow; TIER_LIST has no NG expiry item)
@@ -146,3 +149,14 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
 - rule sketch: NFP days from the plan's NFP calendar (NFP_Fade). V1 follow the 07:30 -> 07:45 move from 07:46 to 09:55 CT;
   V2 fade it; V3 V1 only when |move| >= 0.3 ATR. Stop 0.3 ATR. Placebo: same clock on other Fridays.
 - Apex: yes. data: data/6E_1min_*.csv
+
+## Q014 · queued · priority 2
+- source: lab refill 2026-11-01 (not in TIER_LIST: no Golden Week / Lunar New Year item)
+- market: GC (MGC)
+- mechanism: Chinese physical gold demand (SGE, the largest physical market) is absent while China is closed for Lunar
+  New Year and the October Golden Week; dealers' Asian bids that normally absorb London / US selling are missing, so
+  gold drifts weaker on those days and recovers after Shanghai reopens.
+- rule sketch: SGE closure days from the official holiday calendar (hard-code 2018-26 from the SGE notices; no returns
+  used). V1 short GC 07:20 -> 12:25 CT on each closure weekday; V2 long the first 2 sessions after the reopening;
+  V3 V1 only on the first 3 closure days. Stop 0.3 ATR. Placebo: same clock on random non-closure weekdays.
+- Apex: yes (MGC). data: data/GC_1min_*.csv; SGE holiday dates (to build, write data/sge_holidays.csv first)
