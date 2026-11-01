@@ -46,9 +46,17 @@ def ideas():
     out, cur = [], None
     for line in open(IDEAS, encoding="utf-8"):
         m = re.match(r"^## (Q\d+) · (\w+) · priority (\d)", line)
-        if m: cur = dict(id=m.group(1), status=m.group(2), priority=int(m.group(3)), order=len(out), tier_check=False); out.append(cur)
+        if m: cur = dict(id=m.group(1), status=m.group(2), priority=int(m.group(3)), order=len(out), tier_check=False, who_pays="",
+                         payer=""); out.append(cur)
         elif cur is not None and line.startswith("- tier_check:"): cur["tier_check"] = True
+        elif cur is not None and line.startswith("- who_pays:"):
+            w = line.split(":", 1)[1].strip().lower(); cur["who_pays"] = next((k for k in PAYERS if w.startswith(k)), "")
     return out
+
+
+# 'Who is paying you, and why do they keep paying?' (user 2026-11-01, after Ruuj's quant roadmap): every idea names its
+# source of return; 'no one I can name' is noise and is never queued.
+PAYERS = ("risk premium", "behavioral", "structural", "information")
 
 
 RETRY_ONCE, NO_RETRY = {"code_error", "timeout"}, {"missing_data", "too_few_events"}
@@ -58,6 +66,7 @@ ERROR_CLASSES = RETRY_ONCE | NO_RETRY | {"other"}
 def held(i, L=None):
     """Why an idea may not run again ('' = free): no TIER_LIST check, a non-retryable error, or 2 errors (user decides)."""
     if not i["tier_check"]: return "no tier_check line (grep TIER_LIST first: lab_tools.py dupcheck)"
+    if not i.get("who_pays"): return "no '- who_pays:' line naming risk premium / behavioral / structural / information (and who)"
     errs = [r for r in (L if L is not None else ledger()) if r.get("id") == i["id"] and r.get("verdict") == "ERROR"]
     if len(errs) >= 2: return "2 errors: held for the user"
     if errs and errs[-1].get("error_class") not in RETRY_ONCE: return f"error '{errs[-1].get('error_class')}' is not retried"

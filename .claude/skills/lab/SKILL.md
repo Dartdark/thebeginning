@@ -37,7 +37,9 @@ and `agents/codex/EXECUTION_REFERENCES.md` for any fill question. Work on `claud
 7. **Refill.** If fewer than 3 ideas are queued, add up to 3 from: `papers/SCOUT_LOG.md` leads, `WATCHLIST.md` items due,
    `lab/LESSONS.md`, Codex's results on `codex/work` (read only). Prefer non-NQ / scheduled-flow mechanisms (the books
    are 92-96% NQ risk). Every new idea needs a `- tier_check:` line right under its heading, written after
-   `python3 analysis/lab_tools.py dupcheck '<2-3 key words>'` (words used + result); without it `next` skips the idea.
+   `python3 analysis/lab_tools.py dupcheck '<2-3 key words>'` (words used + result), and a `- who_pays:` line: one of
+   risk premium / behavioral / structural / information, then who pays and why they keep paying. Without both lines `next`
+   skips the idea. If you can't name who pays, it's noise: don't queue it.
    Never queue an idea `TIER_LIST.md` already ranked C/D/F for the same market and mechanism.
 8. **Commit + push** to `claude/nq-trading-strategy-params-5h9d20`, `claude/quirky-noether-4dla64` and your designated
    branch (pull first). No model IDs in commits.
