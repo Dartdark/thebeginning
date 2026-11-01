@@ -155,3 +155,9 @@ Weights set on 2018-22 (w ~ 1 / daily stdev per micro), scored on 2023+ (never s
 pieces (S30 0.18x, Relative Strength 0.34-0.39x, Twin, Kusho ~0.45x) and grows the quiet ones (ES MOC 2.5-2.9x, NFP fade,
 CL fade, EOS ~1.5-2x), so the book leans harder on smaller, weaker-per-trade pieces (ES MOC is on the watchlist, #20).
 Rounding makes it useless at ~1 micro a piece; it only works from ~2 micros a piece (the ~$32k+ rows).
+**Confirmation (2026-11-01, `analysis/personal_invvol_confirm.py`):** weights re-estimated every year from earlier years only
+(walk-forward 2020-26) and capped at 2x equal. 15 cleared, ~2 micros a piece: ret/DD 2020-26 6.54 (equal) -> 7.82
+(inv-vol) -> 8.12 (capped); 2023+ 6.10 -> 7.33 -> 7.69; capital ~$57.6k -> ~$31.4k for the same micros. ~4 a piece: 6.54 ->
+8.26 / 8.50. Full 19: 6.71 -> 8.27 / 8.60 at ~2; at ~4 the cap costs a little (8.99 -> 8.45 on 2023+) but stays well above
+equal. The gain survives yearly re-estimation; the 2x cap costs nothing on the cleared book. Proposed: capped inverse-vol
+from the ~$32k row up (cleared book), equal weights below; awaiting the user's yes.
