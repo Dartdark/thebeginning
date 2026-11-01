@@ -174,7 +174,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   1-hour ZN move of ~4 ticks: stop at stage 1 unless gross > $50.
 - Apex: yes. data: data/ZN_1min_*.csv
 
-## Q016 · queued · priority 1
+## Q016 · running · priority 1
 - source: scout 2026-11-01: Kurov, Sancetta, Strasser & Wolfe, 'Price Drift before U.S. Macroeconomic News: Private
   Information about Public Announcements?' (ECB WP 1901 / JFQA 2019; `papers/ecb-wp1901-kurov-predrift.pdf`). Not in
   TIER_LIST (only the CL EIA pre-release drift is ranked).
