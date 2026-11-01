@@ -144,7 +144,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   ~40 meetings 2018-22): V2 fade +$31 (gross $49, PF 1.18, t 0.40, 4/5 yrs), V3 +$27 (t 0.37), V1 -$34; other Thursdays
   -$11, placebo p 0.19; first (ADP-contaminated) run: V2 +$37, t 0.59. Holdout not opened. `analysis/lab_Q012.py`.
 
-## Q013 · queued · priority 2
+## Q013 · running · priority 2
 - who_pays: information: slower FX participants (European real-money hedgers) act on the payrolls news hours after it prints
 - tier_check: master 2026-11-01, dupcheck 'NFP 6E': only the F-ranked 6E London-fix reversal (different event); clear
 - source: lab refill 2026-11-01 (NFP on 6E untested; NQ NFP fade is a plan strategy, 6E is not)
