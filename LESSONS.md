@@ -4,6 +4,7 @@ For the user and for Claude. One line each, newest at the bottom of each section
 Claude adds to this during the Friday review (and whenever a mistake is caught); the user can add or strike lines anytime.
 
 ## Trading and evidence
+- Saving money is making money: the same return on less capital (or with less drawdown) counts as a real gain (user, 2026-11-01).
 - One winning trade is not a strategy; being on the right side at the right time looks like skill. Judge rules over
   hundreds of trades, never by the last trade (user, 2026-10-18).
 - Price patterns fail out of sample here again and again; edges that hold have a reason someone is forced to trade at a
