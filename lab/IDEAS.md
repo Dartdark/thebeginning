@@ -173,3 +173,49 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   when |move| >= 0.3 ATR. Stop 0.3 ATR. Power: ~250 trades a year. Cost warning: ZN round trip $36.25 vs a typical
   1-hour ZN move of ~4 ticks: stop at stage 1 unless gross > $50.
 - Apex: yes. data: data/ZN_1min_*.csv
+
+## Q016 · queued · priority 1
+- source: scout 2026-11-01: Kurov, Sancetta, Strasser & Wolfe, 'Price Drift before U.S. Macroeconomic News: Private
+  Information about Public Announcements?' (ECB WP 1901 / JFQA 2019; `papers/ecb-wp1901-kurov-predrift.pdf`). Not in
+  TIER_LIST (only the CL EIA pre-release drift is ranked).
+- market: ES and ZN (MES / ZN)
+- mechanism: for 7 of 21 market-moving releases (2008-14) ES and ZN start moving in the eventual direction ~30 minutes
+  before the 09:00 CT release and the pre-move is about half the total reaction; the authors trace it to leakage and to
+  traders who collect proprietary data and must act before the number (someone trades early at the informed side's
+  price). Test whether the pre-move still predicts the post-release continuation in 2018-22 (leakage may have fallen
+  after the 2013-15 SEC / lock-up changes; a fail is informative).
+- rule sketch: release days from fixed calendar rules, no returns used: ISM Manufacturing (1st business day, 09:00 CT)
+  and Conference Board consumer confidence (last Tuesday, 09:00 CT); confirm each date by the 09:00 volume spike, drop
+  days with a 07:30 release in the same session. Signal = sign of the 08:35 -> 08:58 move (skip if < 0.05 x 14-day ATR).
+  V1 ES follow from the 08:59 open to 09:10; V2 ES follow to 09:30; V3 = V1 on ZN. Stop 0.3 ATR. Placebo: same clock on
+  non-release weekdays. Power: ~24 events a year, ~120 in 2018-22.
+- Apex: yes (intraday). data: data/ES_1min_*.csv, data/ZN_1min_*.csv
+
+## Q017 · queued · priority 2
+- source: scout 2026-11-01: Van Hemert, 'MOM-TOM: Momentum and the Turn of the Month' (2014 working paper; SSRN PDF not
+  in repo, summaries via Quantpedia / CXO): 90% of the Newedge trend index return came on the 3 turn-of-month days
+  2000-14, partly reversed after, strongest in less liquid commodities. Not in TIER_LIST (its 'Turn of the month' rows
+  are long-equity calendar trades, not trend-direction flow in commodities).
+- market: CL, NG, GC, ZN, 6E (micros), pooled at equal ATR risk
+- mechanism: CTA fund flows arrive at month-end and are invested at the turn of the month in the direction of each
+  market's trend, so trend-direction buying / selling is concentrated on known days; it is price pressure (partly
+  reverses), so the trade is in the flow's direction on those days only.
+- rule sketch: TOM days = last business day + first 2 business days of each month. Side per market = sign of its
+  63-day return at the prior close. Hold each market's day session: open (CL / NG 08:00, GC 07:20, ZN 07:20, 6E 07:20 CT)
+  to 13:25 CT, no overnight. V1 all 5 markets pooled; V2 CL + NG only (least liquid, per the paper); V3 252-day trend
+  instead of 63. Stop 0.5 x 14-day ATR per market. Placebo: same rule on days 10-12 of each month. Power: ~36 days a year
+  x 5 markets.
+- Apex: yes (all intraday). data: data/{CL,NG,GC,ZN,6E}_1min_*.csv (24 h files; roll weeks excluded as usual)
+
+## Q018 · queued · priority 3
+- source: scout 2026-11-01: Blose, Gondhalekar & Kort (2018, COMEX gold front month and GLD 1985-2012: overnight returns
+  significantly positive, day returns significantly negative; cited in Branch & Ma, SSRN 3259614; the basis of the
+  Nocturne note, which tested NQ only). GC itself not in TIER_LIST.
+- market: GC (MGC)
+- mechanism: Asian and London physical buying (SGE, jewellery and central-bank demand, London AM fix) prices gold in the
+  US night, while US-hours futures selling (hedgers, ETF creation / redemption) meets thin buyers; a time-zone clientele
+  split, the same family as the equity overnight effect but with a physical-demand reason.
+- rule sketch: V1 long GC 17:00 -> 07:15 CT (inside one Apex day), every night; V2 short GC 07:20 -> 12:25 CT, every day;
+  V3 V1 only after a down US session (07:20 -> 12:25 return < 0). No stop for V1 (overnight gaps; note E30), 0.5 ATR for
+  V2. Placebo: random 14-h windows; compare with GC's buy-and-hold drift over the same hours.
+- Apex: yes (overnight within one Apex day). data: data/GC_1min_*.csv

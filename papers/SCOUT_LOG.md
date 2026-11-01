@@ -40,3 +40,12 @@ READ (-> TIER_LIST grade) / NEED PDF (user downloads from SSRN and drops it in t
 | 2026-10-30 | arXiv 2604.26063 | A Volume-Price-Adjusted MACD Trading Strategy for U.S. Equity Indices | SKIP: indicator paper (user's skip list) |
 | 2026-10-30 | arXiv 2606.08586 | Cross-sectional topological anomaly scores and intraday return predictability in the S&P 500 | SKIP: stock cross-section, ML |
 | 2026-10-30 | arXiv 2608.05373 | Detection of Intraday Options Market Manipulation | SKIP: surveillance, options |
+| 2026-11-01 | ECB WP 1901 (JFQA 2019) https://ecb.europa.eu/pub/pdf/scpwps/ecbwp1901.lv.pdf | Price Drift before U.S. Macroeconomic News (Kurov, Sancetta, Strasser & Wolfe) | READ (method + release list) -> lab idea Q016 (ES / ZN pre-release drift at 09:00 CT releases) |
+| 2026-11-01 | Van Hemert 2014 (SSRN; summaries Quantpedia / CXO) | MOM-TOM: Momentum and the Turn of the Month | LAB IDEA Q017 (CTA flow on TOM days in CL / NG / GC / ZN / 6E); NEED PDF optional for the lab |
+| 2026-11-01 | Blose, Gondhalekar & Kort 2018 (J. Futures Markets?) | Gold overnight vs day returns, COMEX 1985-2012 | LAB IDEA Q018 (GC overnight long / day short); NEED PDF optional |
+| 2026-11-01 | AEA 2023 slides (Ge, Kang, Tang & Yang) | WTI negative price: settlement-window closing pressure | SKIP: CL settlement window already F (cl_forced_flows_test.py) |
+| 2026-11-01 | IAEE proceedings 2025 | Intraday seasonality in Brent futures | SKIP: ICE Brent (no data / not Apex); CL seasonality covered by CL forced-flow rows |
+| 2026-11-01 | OPEC meeting-window hedging study (MPRA) | OPEC meeting cycles and commercial hedging | SKIP: ~2-4 meetings a year, fails the lab's power check (Q012 lesson) |
+| 2026-11-01 | Kellard, Jiang & Liu 2020 JFM; Zhou (AUT); GFJ 2025 | Chinese gold / silver futures night session | SKIP: SHFE effects; Shanghai open / SGE items already F |
+| 2026-11-01 | LSEG 2024 research paper | How markets react to CPI surprises | SKIP: reaction to surprise needs consensus data; ZN after 07:30 releases already F |
+| 2026-11-01 | Baltas & Kosowski; GSCI rebalancing study (AgEcon) | CTA capacity / index-roll flows | SKIP: GSCI / BCOM roll windows already F |
