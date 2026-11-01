@@ -23,7 +23,8 @@ funded). Start with `NEW_CHAT_BRIEF.md` (latest state), then `funded_strategies/
   ledger `lab/ledger.json`, kill switch `lab/STOP`. It never changes plans, charts or the VPS; stage-4+ results go to the master.
 - **Paper scout (user, 2026-10-29):** `/scout` (skill `.claude/skills/scout/SKILL.md`) searches arXiv / NBER / SSRN for
   strategy hypotheses, reads and tests free full texts and lists SSRN-only PDFs for the user; log `papers/SCOUT_LOG.md`.
-  Run it whenever the user says "scout" (any session; the Papers session by default), plus scheduled Mon/Wed/Fri runs there.
+  Run it whenever the user says "scout" (any session; the Papers session by default), plus scheduled runs there 5 times a day, 30 minutes before each lab run (00:43 / 06:43 / 11:43 / 16:43 / 20:43 CT), feeding
+  `lab/IDEAS.md` (keeps >= 3 queued; stops early when 5+ are queued).
 - **Master session (user, 2026-10-28):** `session_01Wk1fPXwvHF5qTjW7bUhYx9` (desktop app, pinned) is the user's master session: it
   tracks the other sessions, collects the decisions waiting on the user and starts new sessions. Other sessions: put a
   decision for the user in your reply as usual; the master session reads it from there.
