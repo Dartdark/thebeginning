@@ -256,3 +256,5 @@ failed, auto-trading off on all its charts. EOD-trailing accounts still fail on 
 - Before calling any MultiCharts defect: name the source and what writes it; label VERIFIED or GUESS.
 - Since 2026-11-01 the Chart Monitor writes `GetAccountID` (the strategy's real Auto Trading account) in ACCT column 9
   (route_account; empty while auto-trading is off). That column, not column 4, is the routing evidence.
+- EL Collections (`ELC.*`) is NOT installed on the VPS ("Unknown Function", 2026-11-01). To test whether a file exists use
+  `DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;` then `GetFileAttributesA(path) <> -1` (compiled on the VPS).

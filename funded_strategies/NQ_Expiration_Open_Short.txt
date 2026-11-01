@@ -35,6 +35,9 @@
   2022, 2025; Juneteenth 2026). Add future ones to ClosedFriday1..6 when the
   exchange calendar is published (MultiCharts dates are 1YYMMDD, e.g.
   1260619 = 2026-06-19). }
+// kill-switch file check through Windows (2026-11-01: EL Collections is not installed on the VPS; this line compiled there)
+DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;
+
 
 Inputs:
 	EntryBarTime(830),      { the bar closing at 8:30 -> short at the next bar's open }
@@ -108,9 +111,9 @@ IsExpiration = (IsThirdFri and IsClosedFri = false)
 
 { ---------- Kill switch (2026-11-01, live/vps/KILL_SWITCH.md) ----------
   While C:\TradingLogs\KILL exists (made by live/vps/kill.ps1 or by the relay's remote KILL): no new entries, and an open
-  position exits at market on the next bar. Real time only, so backtests are unchanged. Needs EL Collections (ELC.PathExists). }
+  position exits at market on the next bar. Real time only, so backtests are unchanged. Reads the flag with Windows' GetFileAttributesA (-1 = no file). }
 KillOn = false;
-if GetAppInfo(aiRealTimeCalc) = 1 then KillOn = ELC.PathExists("C:\TradingLogs\KILL");
+if GetAppInfo(aiRealTimeCalc) = 1 then KillOn = GetFileAttributesA("C:\TradingLogs\KILL") <> -1;
 
 { ---------- Entry: short at the 8:30 open ---------- }
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;

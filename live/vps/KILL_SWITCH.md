@@ -26,10 +26,9 @@ For a real emergency (crash, news shock, runaway orders), do this AND Level 1:
 Level 1 stays on until you decide to trade again, so a restarted chart can't re-enter.
 
 ## Install (weekend only, never mid-session)
-1. **Check EL Collections first (1 minute).** PowerLanguage Editor > New indicator, paste
-   `if LastBarOnChart then Print(ELC.PathExists("C:\TradingLogs"));` and compile. "Compiled successfully" means the
-   library is there. If it fails to compile, stop and tell Claude: the strategies need another way to read the flag, and
-   Level 2 is the kill switch until then.
+1. **File check (done 2026-11-01):** EL Collections is NOT installed on the VPS ("Unknown Function"), so the strategies
+   read the flag with Windows' own `GetFileAttributesA` (kernel32.dll, `DefineDLLFunc`); that declaration compiled on the
+   VPS on 2026-11-01. -1 = no file.
 2. `cd C:\TradingRepo; git pull`.
 3. Paste the new code of each live strategy (version date 2026-11-01) from the repo: NQ_Vault_Break(_SP),
    NQ_Overnight_Bias_ADX30, NQ_Expiration_Open_Short, Bridge_Monday_Long_L644NQ. Confirm **compiled successfully** each time.

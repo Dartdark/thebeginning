@@ -38,6 +38,9 @@
   costs): 997 trades, 49% winners, average $280, profit factor 1.40,
   positive every year; 1.23-1.47 across nearby settings. Confirm with a
   MultiCharts backtest. }
+// kill-switch file check through Windows (2026-11-01: EL Collections is not installed on the VPS; this line compiled there)
+DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;
+
 
 Inputs:
 	EntryBufTicks(2),       { live: enter at market if price is within this many ticks of / through the stop level }
@@ -180,9 +183,9 @@ end;
 
 { ---------- Kill switch (2026-11-01, live/vps/KILL_SWITCH.md) ----------
   While C:\TradingLogs\KILL exists (made by live/vps/kill.ps1 or by the relay's remote KILL): no new entries, and an open
-  position exits at market on the next bar. Real time only, so backtests are unchanged. Needs EL Collections (ELC.PathExists). }
+  position exits at market on the next bar. Real time only, so backtests are unchanged. Reads the flag with Windows' GetFileAttributesA (-1 = no file). }
 KillOn = false;
-if GetAppInfo(aiRealTimeCalc) = 1 then KillOn = ELC.PathExists("C:\TradingLogs\KILL");
+if GetAppInfo(aiRealTimeCalc) = 1 then KillOn = GetFileAttributesA("C:\TradingLogs\KILL") <> -1;
 
 { ---------- Entries: stop orders at the opening-range high / low ---------- }
 { a trade that opened and closed inside one bar still counts }

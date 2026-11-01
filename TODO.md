@@ -56,8 +56,8 @@ bottom). Times are Central (CT).
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
 ## Kill switch install (2026-11-01) - LATER, when you choose a weekend (never mid-session)
-- [ ] You: on the VPS, check EL Collections: PowerLanguage Editor > New indicator, paste
-      `if LastBarOnChart then Print(ELC.PathExists("C:\TradingLogs"));`, compile. Tell Claude if it does NOT compile.
+- [x] File check: EL Collections not installed; switched to Windows GetFileAttributesA, compiled on the VPS (2026-11-01).
+- [x] Latch test kill_test.ps1: ALL PASS (2026-11-01).
 - [ ] You: `git pull`, then repaste the 2026-11-01 versions of every live strategy (VB / VB_SP, ONB ADX30, EOS, Bridge) and
       confirm "compiled successfully" each time (the pre-market check flags old versions until then).
 - [ ] You: Sunday test: `kill.ps1` -> ntfy KILL ACTIVE -> `kill.ps1 -Resume`; then a remote KILL / RESUME via Claude.
