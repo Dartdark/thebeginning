@@ -100,7 +100,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   PF 1.08, t 0.36), V3 follow the overnight -$44 (t -1.2); non-release days -$2 (placebo p 0.33). Holdout not opened.
   `analysis/lab_Q009.py`. No follow-ups.
 
-## Q010 · queued · priority 2
+## Q010 · running · priority 2
 - source: follow-up of Q003 (parent: Q003, depth 1)
 - market: 6E (M6E)
 - mechanism: month-end FX hedge rebalancing (Melvin & Prins 2015): foreign holders of US equities hedge the dollar; when
@@ -111,7 +111,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   mid-month (15th or next session).
 - Apex: yes. data: data/6E_1min_*.csv, ge.pkl (ES)
 
-## Q011 · running · priority 1
+## Q011 · blocked · priority 1
 - source: lab refill 2026-11-01 (non-NQ scheduled flow; TIER_LIST has no NG expiry item)
 - market: NG (QG)
 - mechanism: NG final settlement (last trade = 3 business days before the 1st of the delivery month, settles 13:30 CT on
@@ -122,6 +122,10 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   move 13:00 -> 13:29; V2 fade it 13:31 -> 14:30 (next contract only if the data has rolled; check first); V3 V1 on the
   day before expiry. Stop 0.3 ATR.
 - Apex: yes (check the contract roll in data/NG_1min_*: unadjusted front month?). data: data/NG_1min_*.csv
+- result: BLOCKED 2026-11-01 (no returns run). data/NG_1min_* rolls to the next contract at the evening open before
+  the expiry session: expiry-day 08:00-13:30 volume 4.9x the day before (median, 107 expiries), evening-open gap 0.038 vs
+  0.017 ATR normally. The expiring contract's 13:00-13:30 settlement is not in the data; needs a contract-specific export
+  (NGx expiring month, 1-min, last 5 days) from MultiCharts.
 
 ## Q012 · queued · priority 2
 - source: lab refill 2026-11-01 (ECB not in TIER_LIST)
