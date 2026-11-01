@@ -37,6 +37,10 @@ MultiCharts code; add every solved error) · `DEVELOPMENT_PROCESS.md` · `RUNBOO
 - **Folders:** `apex_strategies/` = challenge-only; `funded_strategies/` = funded. Data in `data/`, results in
   `analysis/outputs/`, MC reports in `mc_reports/`, old material in `archive/`.
 - **A confirmed accounting / execution defect goes to the user immediately**, not on Friday.
+- **KILL / RESUME (user, 2026-11-01):** when the user writes KILL (or RESUME) about trading, run
+  `python3 analysis/kill_switch.py kill "<their words>"` (or `resume`) at once, no questions, then remind them of the manual
+  FLATTEN steps in `live/vps/KILL_SWITCH.md`. **Overrides:** when they say they skipped, closed early, resized or paused a
+  live trade by hand, log it with `python3 analysis/override_log.py add ...` in the same reply.
 - **Effort (user, 2026-11-01):** before starting any non-trivial task, say which effort level you recommend (low / medium /
   high / max) and why in one line, so the user can set it before you go.
 - **Corrections (user, 2026-11-01):** whenever the user corrects you, add one line to `LESSONS.md` ('Corrections from the

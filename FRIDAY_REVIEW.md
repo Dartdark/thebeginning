@@ -21,3 +21,7 @@
   `analysis/lab_tools.py`, a test), is it still true (accounts, sizes, sessions)? Then: enforceable -> code; outdated ->
   fix; no longer useful -> move to `archive/retired_rules.md` with the date and reason (never delete outright). Keep
   `CLAUDE.md` a short map (under ~6,000 characters). Report what changed in the Friday summary.
+
+- **Manual overrides (every Friday, user 2026-11-01):** `python3 analysis/override_log.py summary`. Fill the results of the
+  week's rows first (what actually happened vs the strategy's own result: the other account's same trade, or the backtest
+  list). Report whether overriding made or cost money; after ~20 overrides, recommend keeping or stopping the habit.

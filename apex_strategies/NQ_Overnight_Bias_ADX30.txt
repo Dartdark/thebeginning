@@ -48,7 +48,7 @@ Inputs:
 	EarlyExitTime(1130),
 	NumContracts(1),
 	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
-Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Bias_ADX30 2026-10-30");   { code version (live guard 2026-10-30): bump the date on every change }
+Variables: KillOn(false), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Bias_ADX30 2026-11-01");   { code version (live guard 2026-10-30): bump the date on every change }
 
 Variables:
 	EntryBuf(0),
@@ -168,6 +168,12 @@ else begin
 	DayExit = ExitTime;
 end;
 
+{ ---------- Kill switch (2026-11-01, live/vps/KILL_SWITCH.md) ----------
+  While C:\TradingLogs\KILL exists (made by live/vps/kill.ps1 or by the relay's remote KILL): no new entries, and an open
+  position exits at market on the next bar. Real time only, so backtests are unchanged. Needs EL Collections (ELC.PathExists). }
+KillOn = false;
+if GetAppInfo(aiRealTimeCalc) = 1 then KillOn = ELC.PathExists("C:\TradingLogs\KILL");
+
 { ---------- Entries: stop orders at the opening-range high / low ---------- }
 { a trade that opened and closed inside one bar still counts }
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
@@ -177,7 +183,7 @@ if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition 
 	StopPts = StopAtrPct * ATRv;
 	Qty = NumContracts;
 	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
-	if Qty >= 1 then begin
+	if Qty >= 1 and KillOn = false then begin
 		{ live fix (2026-10-14): a stop order on the wrong side of the market is rejected by the broker
 		  ("Invalid StopMarket order parameters"), so when price is already at / through the level
 		  (within EntryBufTicks) enter at market instead, which is how the backtest fills a gapped stop }
@@ -216,6 +222,10 @@ if MarketPosition <> 0 and Time >= DayExit then begin
 	Sell ("ON Bias LX") this bar on close;
 	BuyToCover ("ON Bias SX") this bar on close;
 end;
+
+{ kill switch: flatten while C:\TradingLogs\KILL exists (see the Kill switch block above) }
+if KillOn and MarketPosition > 0 then Sell ("KILL LX") next bar at market;
+if KillOn and MarketPosition < 0 then BuyToCover ("KILL SX") next bar at market;
 
 // ---------- strategy heartbeat (2026-10-29; live guard, LIVE_GUARD_PLAN.md) ----------
 // Writes a SIG row to the trade log every bar in real time, only while THIS strategy is compiled and running. If the

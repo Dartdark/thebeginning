@@ -81,7 +81,7 @@ inputs:
     HeartbeatTag( "" );       // live guard: the chart's logger tag (MON_BR-2 / MON_BR150); empty = no heartbeat
 
 variables:
-    HB_Last( -1 ), HB_Key( 0 ), HB_Day( "" ), HB_Ver( "Bridge_Monday_Long_L644NQ 2026-10-30" ),   { code version: bump the date on every change }
+    KillOn( false ), HB_Last( -1 ), HB_Key( 0 ), HB_Day( "" ), HB_Ver( "Bridge_Monday_Long_L644NQ 2026-11-01" ),   { code version: bump the date on every change }
     NewSession( false ), SessionDay( 0 ), SessionDate( 0 ),
     Has830( false ), Has1200( false ), Has1500( false ), IsHoliday( false ), FirstRTHBar( true ),
     Open830( 0 ), Close1200( 0 ), Close1500( 0 ), RTHHigh( 0 ), RTHLow( 0 ), TodayClose( 0 ),
@@ -323,9 +323,15 @@ end;
 // ==========================================================================
 //  ENTRY: on Monday, at the close of the Sunday evening bar
 // ==========================================================================
+{ ---------- Kill switch (2026-11-01, live/vps/KILL_SWITCH.md) ----------
+  While C:\TradingLogs\KILL exists (made by live/vps/kill.ps1 or by the relay's remote KILL): no new entries, and an open
+  position exits at market on the next bar. Real time only, so backtests are unchanged. Needs EL Collections (ELC.PathExists). }
+KillOn = false;
+if GetAppInfo(aiRealTimeCalc) = 1 then KillOn = ELC.PathExists("C:\TradingLogs\KILL");
+
 if Time = EntryTime and SessionDay = SessionWeekday and MarketPosition = 0
    and NoTradeDay = false and PrevADX >= 0 then begin
-    if PrevADX >= AdxMin and PrevADX < AdxMax and PrevDIDiff > 0 then
+    if PrevADX >= AdxMin and PrevADX < AdxMax and PrevDIDiff > 0 and KillOn = false then
         Buy ( "MonLong" ) NumContracts contracts this bar on close;
 end;
 
@@ -340,6 +346,10 @@ if MarketPosition <> 0 and Time >= ExitTime and Time <= 1630 then begin
     if MarketPosition > 0 then Sell ( "Time.LX" ) this bar on close;
     if MarketPosition < 0 then BuyToCover ( "Time.SX" ) this bar on close;
 end;
+
+{ kill switch: flatten while C:\TradingLogs\KILL exists (see the Kill switch block above) }
+if KillOn and MarketPosition > 0 then Sell ("KILL LX") next bar at market;
+if KillOn and MarketPosition < 0 then BuyToCover ("KILL SX") next bar at market;
 
 // ==========================================================================
 //  STRATEGY HEARTBEAT (2026-10-29, live guard; log only, no orders)

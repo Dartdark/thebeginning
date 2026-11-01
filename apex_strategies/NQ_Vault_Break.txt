@@ -44,7 +44,7 @@ Inputs:
 	EarlyFlattenTime(1130),
 	NumContracts(1),        { 1 for NQ backtests; 10 MNQ = 1 NQ }
 	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
-Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Vault_Break 2026-10-30");   { code version (live guard 2026-10-30): bump the date on every change }
+Variables: KillOn(false), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Vault_Break 2026-11-01");   { code version (live guard 2026-10-30): bump the date on every change }
 
 Variables:
 	BarVol(0), CumPV(0), CumVol(0), DayVwap(0),
@@ -131,13 +131,19 @@ else begin
 	DayFlatten = FlattenTime;
 end;
 
+{ ---------- Kill switch (2026-11-01, live/vps/KILL_SWITCH.md) ----------
+  While C:\TradingLogs\KILL exists (made by live/vps/kill.ps1 or by the relay's remote KILL): no new entries, and an open
+  position exits at market on the next bar. Real time only, so backtests are unchanged. Needs EL Collections (ELC.PathExists). }
+KillOn = false;
+if GetAppInfo(aiRealTimeCalc) = 1 then KillOn = ELC.PathExists("C:\TradingLogs\KILL");
+
 { ---------- Entries ---------- }
 TradesToday = TotalTrades - DayStartTrades;
 if MarketPosition <> 0 then TradesToday = TradesToday + 1;
 
 if ATRv > 0 and Time >= FirstDecision and Time < DayLastEntry
 	and MarketPosition = 0 and TradesToday < MaxTradesPerDay
-	and Close > Noise and Close > DayVwap then
+	and Close > Noise and Close > DayVwap and KillOn = false then
 	Buy ("VaultBreak") NumContracts contracts next bar at market;
 
 { ---------- Exits ---------- }
@@ -153,6 +159,10 @@ if MarketPosition > 0 and Low <= EntryPrice - StopPts then
 
 if MarketPosition > 0 and Time >= DayFlatten then
 	Sell ("VB EOD") this bar on close;
+
+{ kill switch: flatten while C:\TradingLogs\KILL exists (see the Kill switch block above) }
+if KillOn and MarketPosition > 0 then Sell ("KILL LX") next bar at market;
+if KillOn and MarketPosition < 0 then BuyToCover ("KILL SX") next bar at market;
 
 // ---------- strategy heartbeat (2026-10-29; live guard, LIVE_GUARD_PLAN.md) ----------
 // Writes a SIG row to the trade log every bar in real time, only while THIS strategy is compiled and running. If the

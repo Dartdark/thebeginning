@@ -55,6 +55,14 @@ bottom). Times are Central (CT).
   150K funded stack (FUNDED_PLAN.md). Add its account number to the logger / live reports.
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
+## Kill switch install (2026-11-01) - next weekend, never mid-session
+- [ ] You: on the VPS, check EL Collections: PowerLanguage Editor > New indicator, paste
+      `if LastBarOnChart then Print(ELC.PathExists("C:\TradingLogs"));`, compile. Tell Claude if it does NOT compile.
+- [ ] You: `git pull`, then repaste the 2026-11-01 versions of every live strategy (VB / VB_SP, ONB ADX30, EOS, Bridge) and
+      confirm "compiled successfully" each time (the pre-market check flags old versions until then).
+- [ ] You: Sunday test: `kill.ps1` -> ntfy KILL ACTIVE -> `kill.ps1 -Resume`; then a remote KILL / RESUME via Claude.
+      Steps: `live/vps/KILL_SWITCH.md`.
+
 ## Career (2026-11-01)
 - [ ] You: compare `career/resume_section.md` (v1) with `career/resume_section_v2_my_voice.md` (v2), pick what sounds like
       you, then retype the final version **in your own words** (both drafts are Claude-written and carry the text
