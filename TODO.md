@@ -55,6 +55,12 @@ bottom). Times are Central (CT).
   150K funded stack (FUNDED_PLAN.md). Add its account number to the logger / live reports.
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
+## Career (2026-11-01)
+- [ ] You: compare `career/resume_section.md` (v1) with `career/resume_section_v2_my_voice.md` (v2), pick what sounds like
+      you, then retype the final version **in your own words** (both drafts are Claude-written and carry the text
+      watermark; your own rewrite removes it). Then apply to Mercor's Generalist role and Finance Expert pool.
+- [ ] You: optional, finish practice 4 (paused at line 4) when you want more code-reading practice.
+
 ## Live guard additions (2026-10-30) - this weekend
 - [x] VPS: follow `live/vps/VPS_MAINTENANCE.md` (updates only on Saturdays, weekly Saturday restart, Sunday pre-open routine).
 - [x] Repaste the live strategies once (VB, Overnight Bias, EOS, Bridge) from the repo: their heartbeat now stamps a code
