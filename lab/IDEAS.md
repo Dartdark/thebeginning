@@ -158,7 +158,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   V1 follow -$47 (t -1.2, 0/5 yrs), V2 fade -$8 (gross +$10, t -0.2), V3 big moves follow -$36 (17 trades); other Fridays
   -$27, placebo p 0.23. Holdout not opened. `analysis/lab_Q013.py`. No follow-ups.
 
-## Q014 · queued · priority 2
+## Q014 · running · priority 2
 - who_pays: structural: Chinese physical buyers are absent while Shanghai is closed, so London / US selling meets fewer bids
 - tier_check: master 2026-11-01, dupcheck 'golden week' / 'lunar new year': only an unrelated gold-valuation paper; clear
 - source: lab refill 2026-11-01 (not in TIER_LIST: no Golden Week / Lunar New Year item)
