@@ -158,7 +158,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   V1 follow -$47 (t -1.2, 0/5 yrs), V2 fade -$8 (gross +$10, t -0.2), V3 big moves follow -$36 (17 trades); other Fridays
   -$27, placebo p 0.23. Holdout not opened. `analysis/lab_Q013.py`. No follow-ups.
 
-## Q014 · running · priority 2
+## Q014 · done · priority 2
 - who_pays: structural: Chinese physical buyers are absent while Shanghai is closed, so London / US selling meets fewer bids
 - tier_check: master 2026-11-01, dupcheck 'golden week' / 'lunar new year': only an unrelated gold-valuation paper; clear
 - source: lab refill 2026-11-01 (not in TIER_LIST: no Golden Week / Lunar New Year item)
@@ -170,6 +170,9 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   used). V1 short GC 07:20 -> 12:25 CT on each closure weekday; V2 long the first 2 sessions after the reopening;
   V3 V1 only on the first 3 closure days. Stop 0.3 ATR. Placebo: same clock on random non-closure weekdays.
 - Apex: yes (MGC). data: data/GC_1min_*.csv; SGE holiday dates (to build, write data/sge_holidays.csv first)
+- result: FAIL stage 1 (2026-11-02). Calendar data/sge_holidays.csv (97 weekdays 2018-26). 2018-22: V1 short closure days
+  52 trades -$80 (t -0.85, 1/5 yrs), V2 long reopen -$81 (20 trades), V3 short first 3 days -$251 (t -2.1, 0/5: gold ROSE,
+  opposite sign; 30 trades, not flipped post hoc). Placebo p 0.62. Holdout not opened. `analysis/lab_Q014.py`. No follow-ups.
 
 ## Q015 · queued · priority 3
 - who_pays: structural: TAS orders and dealers' basis / roll hedges must trade at the ZN settlement window, whatever the price

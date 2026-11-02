@@ -211,5 +211,37 @@
   ],
   "date": "2026-11-01T17:16-06:00",
   "provenance": "[provenance] code 2c55da4 | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261030 #da1a47a1; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189"
+ },
+ {
+  "id": "Q014",
+  "title": "GC while the Shanghai Gold Exchange is closed",
+  "market": "GC",
+  "stage": 1,
+  "verdict": "FAIL",
+  "gate": "stage 1: best t -0.61 < 2.0",
+  "t_design": -0.61,
+  "t_holdout": null,
+  "looks": 0,
+  "tier": "F",
+  "lesson": "no closure weakness; first 3 closure days rose (t -2.1 for the short), not flipped post hoc",
+  "follow_ups": [],
+  "verified": [
+   "calendar data/sge_holidays.csv written before any return (97 weekdays, all with GC data)",
+   "stage 1 on 2018-22: 3 pre-registered variants, $25 costs, 0.3 ATR stop",
+   "stage 2 placebo 500 draws on non-holiday weekdays, p 0.62"
+  ],
+  "not_verified": [
+   "holiday dates checked against SGE notices (entered from the State Council schedule)",
+   "holdout 2023-onward (sealed)",
+   "benches",
+   "checker",
+   "MultiCharts"
+  ],
+  "risks": [
+   "hand-entered calendar may be off by a day on some holidays; 2020 includes the COVID extension",
+   "V2 / V3 below 40 trades (power stated in the pre-registration)"
+  ],
+  "date": "2026-11-01T21:16-06:00",
+  "provenance": "[provenance] code 100deae dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261030 #da1a47a1; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189"
  }
 ]
