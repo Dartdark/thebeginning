@@ -266,5 +266,5 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Routing check (2026-11-01)
 - [ ] Repaste **Apex Chart Monitor** ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Chart_Monitor.txt)) in the PowerLanguage Editor, compile (F7); on each of the 8 charts auto-trading off/on (Flat). Then tell Claude: it confirms every chart's real order account from the VPS feed.
-- [ ] Codex follow-up #3: CODED 2026-11-01 (versions 2026-11-02). Repaste VB, ONB ADX30, EOS tonight; Bridge Monday after 16:00. Was:: strategies treat any read failure of the KILL file as "no kill". Proposal: also
+- [x] Codex follow-up #3: INSTALLED 2026-11-01 18:45 CT, all 8 charts on 2026-11-02 (VPS feed). Was:: strategies treat any read failure of the KILL file as "no kill". Proposal: also
       check C:\TradingLogs; if the folder can't be read -> no new entries. Next weekend repaste, with a distinct version tag.
