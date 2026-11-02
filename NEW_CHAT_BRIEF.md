@@ -5,7 +5,26 @@ github.com/Dartdark/thebeginning (branch `claude/nq-trading-strategy-params-5h9d
 Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history of this brief (up to 2026-10-28) is in
 `archive/brief_history_2026-10.md`; ticked to-dos are in `archive/TODO_done_2026-10.md`.
 
-## Now (2026-10-31)
+## Now (2026-11-01 evening; master moved to a new session this night)
+
+- **Live accounts:** #1 blown 10/26, #3 blown 10/30. **#2** APEX-681524-02 50K eval ~$49,828 (~$1,064 above floor $48,764: one
+  full VB loss ~$1,200 could fail it; user not yet asked to resize). **#4** APEX-681524-04 150K No-Activation, bought 11/01
+  despite the buy-gate PAUSE (live/overrides.csv), first session 11/02; reuses tags VB150/ONB150/EOS150/MON_BR150 (dashboard +
+  journal: #3 through 10/30, #4 from 11/02). Floor $146,000, lock $150,100, target $159,000. Buy gate PAUSE until 11/06.
+- **VERIFIED 11/01 18:45 (VPS feed):** all 8 charts on 2026-11-02 strategy versions; routing (GetAccountID) #2 -> -02, #4 -> -04;
+  auto-trading on; flat. Bridge Monday Long could enter 19:00 Sunday (2 MNQ #2, 5 MNQ #4).
+- **VPS feed (new 11/01):** `python3 analysis/vps_status.py <scratch>/vps` -> status, routing table, trade tail, screen.jpg
+  (Read it). Branch `vps-status`, every 5 min. Setup `live/vps/VPS_STATUS.md`. Defender exclusion on screen_push.ps1 only.
+- **Kill switch (installed 11/01):** strategies read C:\TradingLogs\KILL via kernel32 GetFileAttributesA (EL Collections NOT
+  installed); folder unreadable -> no new entries. Two latches (KILL_LOCAL / KILL_REMOTE), relay self-repair every minute,
+  kill_test.ps1 16/16 PASS, remote KILL/RESUME tested end to end. User KILL -> `python3 analysis/kill_switch.py kill "..."`.
+- **Codex:** review 11/01 (7 findings) + follow-up 11/02 (3) all fixed/installed. Packet `agents/codex/TASK_review_2026-11-01.md`.
+- **Rule (11/01, LESSONS):** every MultiCharts claim names its source and says VERIFIED or GUESS. ACCT column 4 = typed
+  monitor account, column 9 = real routing.
+- **Open:** firm view panel (after #4, TODO); funded heartbeats; Brier pass odds after ~20 evals; DATA_NEEDS.md (free MC exports
+  first: NG expiring contracts unblock lab Q011); local kill.ps1 phone alert untested (optional, Monday after 16:00).
+
+## Earlier (2026-10-31)
 
 - **Live accounts (Apex, VPS QuantVPS Chicago, MultiCharts + Rithmic, data dxFeed):**
   - #1 APEX-681524-01 50K: **blown 10/26**. #3 APEX-681524-03 150K: **blown 10/30** (Apex liquidated the ONB short on an
@@ -33,7 +52,7 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
 - **Recent research verdicts:** CHoCH D, Nocturne C (WATCHLIST #26), Setup Generator F, Prior VWAP Trap bench-only; GreenORB and
   video Drift rejected (Codex). Execution references E01-E31 (`agents/codex/EXECUTION_REFERENCES.md`, next E32). Paper scout:
   `/scout`, also Mon/Wed/Fri in the Papers session.
-- **Sessions:** master `session_01Wk1fPXwvHF5qTjW7bUhYx9`; Papers `session_01Wk1fPYzv9RyXGytT4z6XbK`; scheduled jobs
+- **Sessions:** master `session_01Wk1fPYssjbaEfe21f4v6vD` (previous `session_01Wk1fPXwvHF5qTjW7bUhYx9`, retired 11/01); Papers `session_01Wk1fPYzv9RyXGytT4z6XbK`; scheduled jobs
   `session_014DKffATms37kZigaa2xR2P` (16:40 journal + dashboard, Friday review 16:47, reminders Sun/Wed, MNQ roll 12/10).
   Dashboard 'Apex Live Desk' https://claude.ai/artifact/3oqbHWqBFTrUQd95wMmuL8.
 - **Plans:** `funded_strategies/FUNDED_PLAN.md`, `funded_strategies/README.md`, `personal_strategies/PORTFOLIO.md` (50K funded:

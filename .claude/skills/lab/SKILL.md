@@ -44,7 +44,7 @@ and `agents/codex/EXECUTION_REFERENCES.md` for any fill question. Work on `claud
 8. **Commit + push** to `claude/nq-trading-strategy-params-5h9d20`, `claude/quirky-noether-4dla64` and your designated
    branch (pull first). No model IDs in commits.
 9. **Report.** Only a stage-4+ result or a stage-5 PASS is news: send the master session
-   (`session_01Wk1fPXwvHF5qTjW7bUhYx9`) one short message (send_message) and `python3 analysis/send_alert.py "LAB: ..."`.
+   (`session_01Wk1fPYssjbaEfe21f4v6vD`) one short message (send_message) and `python3 analysis/send_alert.py "LAB: ..."`.
    Failures at stages 1-3 are silent (ledger only).
 
 Never: change a plan, a chart, `live/`, the VPS or the trading settings; open a holdout before stages 1-2 pass; test more

@@ -48,7 +48,7 @@ MultiCharts code; add every solved error) · `DEVELOPMENT_PROCESS.md` · `RUNBOO
   user': date, their words, the rule that prevents it) in the same reply. Read that section at session start.
 
 ## Sessions and schedules
-- **Master** `session_01Wk1fPXwvHF5qTjW7bUhYx9` (pinned): tracks the other sessions, collects decisions, starts sessions.
+- **Master** `session_01Wk1fPYssjbaEfe21f4v6vD` (from 2026-11-01 evening; previous master `session_01Wk1fPXwvHF5qTjW7bUhYx9` retired: context full): tracks the other sessions, collects decisions, starts sessions.
   Other sessions put user decisions in their reply.
 - **Papers** `session_01Wk1fPYzv9RyXGytT4z6XbK`: user uploads papers; sends the master a verdict per paper. Paper scout
   (`.claude/skills/scout/SKILL.md`, log `papers/SCOUT_LOG.md`) on "scout" and 5x a day (00:43 / 06:43 / 11:43 / 16:43 /

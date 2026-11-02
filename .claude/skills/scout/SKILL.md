@@ -36,7 +36,7 @@ NQ / ES intraday (or a funded-safe overnight hold), with data we have (`data/`, 
 
 ## 5. Report
 - Commit + push (CLAUDE.md 'Branches'; pull first).
-- If running in the Papers session: send_message the master session (`session_01Wk1fPXwvHF5qTjW7bUhYx9`) one short
+- If running in the Papers session: send_message the master session (`session_01Wk1fPYssjbaEfe21f4v6vD`) one short
   verdict line per paper read, plus the NEED PDF list.
 - Notify the user (PushNotification + `python3 analysis/send_alert.py`) ONLY when a paper rates C or better or a PDF is
   needed: "Scout: N new, best X (grade). Need PDFs: <links>". Nothing found -> no alert, just the log row.
