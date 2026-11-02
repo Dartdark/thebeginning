@@ -55,14 +55,13 @@ bottom). Times are Central (CT).
   150K funded stack (FUNDED_PLAN.md). Add its account number to the logger / live reports.
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
-## Kill switch install (2026-11-01) - LATER, when you choose a weekend (never mid-session)
+## Kill switch install (2026-11-01) - installed 11/01 evening; live test left
 - [x] File check: EL Collections not installed; switched to Windows GetFileAttributesA, compiled on the VPS (2026-11-01).
 - [x] Latch test kill_test.ps1: ALL PASS (2026-11-01).
-- [ ] You: `git pull`, then repaste the 2026-11-01 versions of every live strategy (VB / VB_SP, ONB ADX30, EOS, Bridge) and
-      confirm "compiled successfully" each time (the pre-market check flags old versions until then).
+- [x] Repasted the 2026-11-01 versions of VB, ONB ADX30, EOS, Bridge: all 8 charts report them (VPS feed 18:05, 2026-11-01).
 - [ ] You: Sunday test: `kill.ps1` -> ntfy KILL ACTIVE -> `kill.ps1 -Resume`; then a remote KILL / RESUME via Claude.
       Steps: `live/vps/KILL_SWITCH.md`.
-- [ ] Claude, after your install: remove `pending_install` from `live/expected_setup.json` (the old-version alert is muted until then).
+- [x] Claude: `pending_install` removed (2026-11-01).
 
 ## Firm view panel (2026-11-01, user yes) - after #4 is set up
 - [ ] Claude: once #4's account number is in and 2+ accounts are live, add a 'Firm view' panel to the Apex Live Desk:
