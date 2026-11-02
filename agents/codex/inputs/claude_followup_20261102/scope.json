@@ -1,0 +1,84 @@
+{
+  "reviewed_head": "cf4cc1ef0105b30b936ff954a8d0d63e9cf2f202",
+  "last_reviewed_Claude_head": "29416b993a619cf9c3e23fd7d050f59db5d35e4e",
+  "codex_parent": "49c9ae8c2aef7611483bdc8692bc93a13fd6b406",
+  "commits": [
+    {
+      "sha": "f927239383c5c4292e59c3c82c9f2f89d6aba76d",
+      "subject": "Scheduled scout 2026-11-01 16:43 CT: 5 lab ideas queued, stopped early (log only)"
+    },
+    {
+      "sha": "ec1d493e732a967c2e03ed41cfe646569da6eec2",
+      "subject": "Fix Codex review 2026-11-01 #1 #2 #4 #6: watchdog floor reads ACCT column 4 only; 150 tags -> #3 until 10/30, #4 from 11/02 (dashboard + journal); status push fails closed (git -C, repo identity check); buy gate UNKNOWN edge no longer crashes"
+    },
+    {
+      "sha": "94174f23d1ce9e8a39585791402131f09e8fc1b2",
+      "subject": "Merge branch 'claude/nq-trading-strategy-params-5h9d20' of https://github.com/Dartdark/thebeginning into claude/relaxed-knuth-pvsc4q"
+    },
+    {
+      "sha": "560327faacaa7c73ecfb6a5ef0256b76a9af617f",
+      "subject": "Kill switch: two latches (local/remote; remote resume can't clear a local kill), unknown GitHub state never resumes, verified writes/pushes, VPS-confirmed status, latch test script; version mute limited to exact old versions with expiry (Codex review #3, #5)"
+    },
+    {
+      "sha": "5a30d8b4a116b9d5f53a688113a841ddee03966f",
+      "subject": "Kill switch: read the flag with Windows GetFileAttributesA (EL Collections not installed on the VPS; declaration compiled there)"
+    },
+    {
+      "sha": "c2bd51fe08b58b5a1f91671f828cea18d39b34a7",
+      "subject": "Kill switch installed on all 8 charts (2026-11-01 versions confirmed by the VPS feed); version mute removed"
+    },
+    {
+      "sha": "01898095523b91ce598932b24e0d1fc163671303",
+      "subject": "KILL switch ON: remote install test (user asked)"
+    },
+    {
+      "sha": "4019f4a3131f3b52bbc8cc61b8dbb6b4c562bedd",
+      "subject": "KILL switch OFF (resume)"
+    },
+    {
+      "sha": "87ebd4250f2a631316fc935c3c5ba06247958b34",
+      "subject": "Kill switch: remote KILL/RESUME tested end to end (phone alert + VPS flag)"
+    },
+    {
+      "sha": "cf4cc1ef0105b30b936ff954a8d0d63e9cf2f202",
+      "subject": "Inverse-vol ladder: exact generator; table now shows causal walk-forward 2023+ (was in-sample sizing), deploy vectors unchanged (Codex review #7)"
+    }
+  ],
+  "changed_paths": [
+    "MULTICHARTS_PITFALLS.md",
+    "TODO.md",
+    "agents/codex/TASK_review_2026-11-01.md",
+    "analysis/buy_gate.py",
+    "analysis/dashboard_data.py",
+    "analysis/journal_trades.py",
+    "analysis/kill_switch.py",
+    "analysis/live_guard.py",
+    "analysis/outputs/personal_invvol_ladder_output.txt",
+    "analysis/personal_invvol_ladder.py",
+    "apex_strategies/Bridge_Monday_Long_L644NQ.txt",
+    "apex_strategies/NQ_Overnight_Bias.txt",
+    "apex_strategies/NQ_Overnight_Bias_ADX30.txt",
+    "apex_strategies/NQ_Vault_Break.txt",
+    "apex_strategies/NQ_Vault_Break_SP.txt",
+    "funded_strategies/NQ_Expiration_Open_Short.txt",
+    "live/expected_setup.json",
+    "live/vps/KILL_SWITCH.md",
+    "live/vps/claude_alert_relay.ps1",
+    "live/vps/kill.ps1",
+    "live/vps/kill_test.ps1",
+    "live/vps/status_push.ps1",
+    "live/vps/watchdog.ps1",
+    "papers/SCOUT_LOG.md",
+    "personal_strategies/PORTFOLIO.md"
+  ],
+  "runtime_download": {
+    "url": "https://github.com/PowerShell/PowerShell/releases/download/v7.6.9/powershell-7.6.9-linux-x64.tar.gz",
+    "sha256": "sha256:1da6d6d6035d651f20e70ddee7c4c15ac6ab8b9fb40ee92240d91263f28a884b"
+  },
+  "source_reference": {
+    "url": "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getfileattributesa",
+    "accessed": "2026-11-02 connected web",
+    "lesson": "INVALID_FILE_ATTRIBUTES denotes API failure; GetLastError distinguishes absence from other failure."
+  },
+  "boundaries": "No live/VPS access, no order/alert/broker/settings changes, no new return tests. Native PowerShell 7.6.9 on Linux only in temporary directories with -NoAlert; Windows/MC and installed acceptance not independently verified."
+}

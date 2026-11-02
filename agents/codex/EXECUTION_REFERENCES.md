@@ -1501,3 +1501,13 @@ Status and superseding evidence:
 - Kill evidence: source/control-flow checks show shared local/remote stop ownership and unknown remote reads can enable resume. Source presence, file creation or alert delivery does not establish working-order cancellation, broker flattening or installed acceptance.
 - Limits: no PowerLanguage compilation, PowerShell runtime, VPS access or real orders. GetAccountID semantics checked against the official MultiCharts reference; installed/off-automation behavior remains unverified.
 - Next check: responsible disconnected/paper-account acceptance of explicit account IDs, source/input version, stop ownership, failure paths, entry cancellation and broker/strategy position reconciliation. No live change is authorized by retention.
+
+
+### E20/E22 follow-up — Two-latch fixes and effective-flag acceptance
+
+[November2 follow-up](results/REVIEW_claude_followup_20261102.md), Claude cf4cc1e.
+- Prior exact-column equity parser, date-effective150 tags, status-worktree boundary, removed version mute and unknown-edge fixes are supplied. Do not reopen their first implementation.
+- Actual isolated PowerShell7.6.9/Linux tests with temporary -Dir and -NoAlert confirm the normal script-created local/remote latch sequence, but show direct KILL-file manual instructions can be overridden and failed effective-flag reconstruction on resume can return success with a local latch still active.
+- Windows GetFileAttributesA's failure sentinel is not uniquely a missing file; GetLastError distinguishes reasons. Current signals treat any failure as flag absent. API/source evidence only, not an observed Windows read failure.
+- Claude reports installation and remote file/phone tests; no independent VPS, phone delivery, cancellation, broker flatten or native Windows/MC acceptance is established here.
+- Next check: supported manual interface, effective flag equals OR of latches under failures, and explicit unknown-read handling; retain separate broker/strategy/order-clock checks. No live modification or strategy-return trial.

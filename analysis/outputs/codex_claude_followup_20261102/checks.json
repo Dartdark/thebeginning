@@ -1,0 +1,158 @@
+{
+  "Claude_head": "cf4cc1ef0105b30b936ff954a8d0d63e9cf2f202",
+  "checks": {
+    "date_effective_tags": {
+      "VB150": {
+        "20261030": "#3",
+        "20261031": "#3",
+        "20261101": "#3",
+        "20261102": "#4",
+        "20261103": "#4"
+      },
+      "ONB150": {
+        "20261030": "#3",
+        "20261031": "#3",
+        "20261101": "#3",
+        "20261102": "#4",
+        "20261103": "#4"
+      },
+      "EOS150": {
+        "20261030": "#3",
+        "20261031": "#3",
+        "20261101": "#3",
+        "20261102": "#4",
+        "20261103": "#4"
+      },
+      "MON_BR150": {
+        "20261030": "#3",
+        "20261031": "#3",
+        "20261101": "#3",
+        "20261102": "#4",
+        "20261103": "#4"
+      }
+    },
+    "unknown_edge_no_longer_crashes": [
+      "PLAN ONLY",
+      [
+        "live edge UNKNOWN (no backtest reference): insufficient evidence"
+      ],
+      40,
+      null
+    ],
+    "version_mute_removed": [
+      "VB150: runs NQ_Vault_Break 2020-01-01, the repo has NQ_Vault_Break 2026-11-01: paste the new code."
+    ],
+    "failed_commit_not_reported_pushed": false,
+    "source_boundary_fixes": {
+      "watchdog_balance_exact_column": true,
+      "status_git_explicit_worktree": true,
+      "status_branch_identity_check": true
+    },
+    "win32_error_mapping": {
+      "all_six_same_rule": true,
+      "missing_file_return": -1,
+      "other_failure_return": -1,
+      "source_KillOn_on_either": false,
+      "native_Windows_API_called": false
+    },
+    "actual_powershell_latch_sequence": [
+      {
+        "code": 0,
+        "stdout": "KILL ACTIVE (remote, manual on the VPS): no new entries; open positions exit at market on their next bar. For an instant exit, flatten by hand (KILL_SWITCH.md).",
+        "stderr": "",
+        "flag": true,
+        "local": false,
+        "remote": true
+      },
+      {
+        "code": 0,
+        "stdout": "KILL ACTIVE (local, manual on the VPS): no new entries; open positions exit at market on their next bar. For an instant exit, flatten by hand (KILL_SWITCH.md).",
+        "stderr": "",
+        "flag": true,
+        "local": true,
+        "remote": true
+      },
+      {
+        "code": 0,
+        "stdout": "remote resume done, but KILL STAYS ON: KILL_LOCAL still set. Strategies still blocked.",
+        "stderr": "",
+        "flag": true,
+        "local": true,
+        "remote": false
+      },
+      {
+        "code": 0,
+        "stdout": "RESUME (local, manual on the VPS): no kill latch left. Strategies trade again from their next bar.",
+        "stderr": "",
+        "flag": false,
+        "local": false,
+        "remote": false
+      }
+    ],
+    "documented_by_hand_kill_can_be_cleared": {
+      "remote_kill": {
+        "code": 0,
+        "stdout": "KILL ACTIVE (remote, manual on the VPS): no new entries; open positions exit at market on their next bar. For an instant exit, flatten by hand (KILL_SWITCH.md).",
+        "stderr": "",
+        "flag": true,
+        "local": false,
+        "remote": true
+      },
+      "after_manual_KILL_file_then_remote_resume": {
+        "code": 0,
+        "stdout": "RESUME (remote, manual on the VPS): no kill latch left. Strategies trade again from their next bar.",
+        "stderr": "",
+        "flag": false,
+        "local": false,
+        "remote": false
+      }
+    },
+    "resume_effective_flag_verification_gap": {
+      "code": 0,
+      "stdout": "RESUME (remote, manual on the VPS): no kill latch left. Strategies trade again from their next bar.",
+      "stderr": "Set-Content: /workspace/thebeginning/agents/codex/inputs/claude_followup_20261102/cf4cc1e/live/vps/kill.ps1:21\nLine |\n  21 |  \u2026 ($active) { Set-Content $Flag ((Get-Content $active[0] -Raw).Trim())  \u2026\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | injected effective flag write failure",
+      "flag": false,
+      "local": true,
+      "remote": false
+    },
+    "unknown_remote_read_resume_guard": {
+      "requires_successful_fetch_and_tree_read": true,
+      "native_relay_not_executed": true
+    },
+    "runtime": {
+      "PowerShell": "7.6.9",
+      "platform": "linux",
+      "Windows_native_acceptance": false,
+      "live_folders_touched": false,
+      "alerts_sent": false
+    }
+  },
+  "script_SHA256": "7d3daa771dbd7d220e071dbb629c909d294ce74b35f17318f483dbe44e87af82",
+  "source_SHA256": {
+    "MULTICHARTS_PITFALLS.md": "9245014f1df03aa1afa97d225b4f324c7162167df4df966531edfdca66c9cc68",
+    "TODO.md": "44b44d864e1e83f8ab909825635d413731503ee85406fc7e3b2b6befb6b45d22",
+    "papers/SCOUT_LOG.md": "e8636042c818f75d6874164ff322464682ab12431bce2021522f41617c1d3484",
+    "funded_strategies/NQ_Expiration_Open_Short.txt": "0dec27c427acc8a281ba3e1118578c9f111cc0e8e7cd291a537632fab6599bf6",
+    "analysis/journal_trades.py": "9011c8a65a65022255e1cb036ab913fe46ac9c62350f821b18d84582596e3f5a",
+    "analysis/kill_switch.py": "502bedd5f3ccf8b7a4a6f3172a39c38aad41596834e8200a8c2d8699e17c5231",
+    "analysis/dashboard_data.py": "473c5f4075e3f5937d437456ca587587675f7e791f4b934d89c5d1344c8d1d42",
+    "analysis/buy_gate.py": "667f0a7a5ea4922d9d5da0fcef6645c1d7f8270c20c1bc3e387a0c41abfe2659",
+    "analysis/personal_invvol_ladder.py": "cd24f3eadc917c6f911b53f6f4aa5aceffcf11d0af126945eea81141821ced6b",
+    "analysis/live_guard.py": "775cae92fe814546ea4b1d0f9b2281410dbf5f337da991794eaa68d45ddd4639",
+    "personal_strategies/PORTFOLIO.md": "d689d9451e46fcafe32b46680375b15e69247aa2f5b417cf3fd16374f9967a54",
+    "apex_strategies/NQ_Overnight_Bias_ADX30.txt": "60f85a4e894af2899f9821f25b4b30140cace72a65042ad2e96bee6636dcef32",
+    "apex_strategies/NQ_Overnight_Bias.txt": "7a0b90915a782644c9440a9709cac1dd3eeecc57a390ea3d015c6f1ab7216185",
+    "apex_strategies/NQ_Vault_Break.txt": "c3eb486b936c6236ed88ff99309c647597954a784bb09893f72c4734d8b35bbd",
+    "apex_strategies/Bridge_Monday_Long_L644NQ.txt": "449e2d65bfc504a098950ac6c1c81c4cb98c6e19eb5a3bea2e751be6cc422ce3",
+    "apex_strategies/NQ_Vault_Break_SP.txt": "4bb24cc59bffb8d350be03e514ff14bbc4477bd08a5313f1e8a108734d3b5a9c",
+    "live/expected_setup.json": "19ebc9074253f88b2b36aee755a6ba08381bd8b37feeb72008e51fea997338fd",
+    "agents/codex/TASK_review_2026-11-01.md": "8c2c4f226e65b5446ec79247fc7b99e246841c84212060ea41ea8e2980f2eeb2",
+    "analysis/outputs/personal_invvol_ladder_output.txt": "86441a5fe0e59e2c9dc48021afeca1d1d689896665d65d2fb31052779dd299a9",
+    "live/vps/KILL_SWITCH.md": "6167f7fb374888c7d6685dd6e672c3c9996657a5d8ce455c52a08934fc668962",
+    "live/vps/kill_test.ps1": "4ba9ccc623f7c7f65c28d982c4d5b78955a1d592a00702264c0faa34632ffba3",
+    "live/vps/status_push.ps1": "b2b7beff0b3acc53a1f5486f17852cf8c859a53325d6e7917d7ae2051485c946",
+    "live/vps/watchdog.ps1": "8b45f0333bf7c2e0f2f298cd9a64e761df5605007da6da38cfdf8b7aa6f0ab8b",
+    "live/vps/claude_alert_relay.ps1": "157467706a43ec9c5bb8f9826913515b223dd0cf4912c3aed1413901ce7e50c1",
+    "live/vps/kill.ps1": "a42a637736a20166ee60ad757e2103eea6b9f26906c174a70ab66d42cdedccbc"
+  }
+}
