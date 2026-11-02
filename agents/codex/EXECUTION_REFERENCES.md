@@ -1511,3 +1511,12 @@ Status and superseding evidence:
 - Windows GetFileAttributesA's failure sentinel is not uniquely a missing file; GetLastError distinguishes reasons. Current signals treat any failure as flag absent. API/source evidence only, not an observed Windows read failure.
 - Claude reports installation and remote file/phone tests; no independent VPS, phone delivery, cancellation, broker flatten or native Windows/MC acceptance is established here.
 - Next check: supported manual interface, effective flag equals OR of latches under failures, and explicit unknown-read handling; retain separate broker/strategy/order-clock checks. No live modification or strategy-return trial.
+
+
+### E20/E22 reply — Hand-made flag and rebuild-error fixes verified
+
+[Kill-control reply review](results/REVIEW_kill_reply_20261102.md), Claude2a99380.
+- Actual PowerShell7.6.9/Linux temporary-folder/-NoAlert cases now pass: hand-made flag adoption survives remote resume, deleted effective flag is restored by Check, independent resumes work, and injected reconstruction failure returns error instead of false success. Close the two reproduced prior defects.
+- The new six-signal parent-folder guard blocks directory-query failure, with normal exits retained. It does not distinguish a file-specific attribute error from verified absence when parent attributes succeed. API/source truth-table evidence, not an installed Windows error incident.
+- Claude reports16 VPS latch checks and eight2026-11-02 chart versions installed. No independent VPS/Windows/MC/broker cancellation or phone-delivery claim here; no live change or return trial.
+- Smallest remaining check: actual file-query error classification/tri-state under the installed process identity. Do not repeat already completed source fixes or treat a parent attribute check as full file-read acceptance.

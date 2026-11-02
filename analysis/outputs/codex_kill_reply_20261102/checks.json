@@ -1,0 +1,119 @@
+{
+  "Claude_head": "2a9938052011c2d33d5e4682f8bbdd72d46f5835",
+  "checks": {
+    "empty_hand_flag_survives_remote_resume": {
+      "code": 0,
+      "stdout": "remote resume done, but KILL STAYS ON: KILL_LOCAL still set. Strategies still blocked.",
+      "stderr": "",
+      "flag": true,
+      "local": true,
+      "remote": false
+    },
+    "deleted_flag_restored_on_check": {
+      "code": 0,
+      "stdout": "KILL switch repaired: KILL file was out of step with its latches (made or deleted by hand?). Now: KILL ON (KILL_LOCAL). Resume only with kill.ps1 -Resume.",
+      "stderr": "",
+      "flag": true,
+      "local": true,
+      "remote": false
+    },
+    "hand_check_then_independent_resumes": [
+      {
+        "code": 0,
+        "stdout": "KILL switch repaired: KILL file was out of step with its latches (made or deleted by hand?). Now: KILL ON (KILL_LOCAL + KILL_REMOTE). Resume only with kill.ps1 -Resume.",
+        "stderr": "",
+        "flag": true,
+        "local": true,
+        "remote": true
+      },
+      {
+        "code": 0,
+        "stdout": "remote resume done, but KILL STAYS ON: KILL_LOCAL still set. Strategies still blocked.",
+        "stderr": "",
+        "flag": true,
+        "local": true,
+        "remote": false
+      },
+      {
+        "code": 0,
+        "stdout": "RESUME (local, manual on the VPS): no kill latch left. Strategies trade again from their next bar.",
+        "stderr": "",
+        "flag": false,
+        "local": false,
+        "remote": false
+      }
+    ],
+    "no_latches_check_stays_off": {
+      "code": 0,
+      "stdout": "",
+      "stderr": "",
+      "flag": false,
+      "local": false,
+      "remote": false
+    },
+    "failed_rebuild_now_errors": {
+      "code": 1,
+      "stdout": "KILL SWITCH ERROR: remote resume (manual on the VPS): state not consistent (KILL file MISSING, latches: KILL_LOCAL; injected effective flag write failure). Flatten by hand if needed (KILL_SWITCH.md) and tell Claude.",
+      "stderr": "",
+      "flag": false,
+      "local": true,
+      "remote": false
+    },
+    "six_signal_truth_table": [
+      {
+        "case": "historical",
+        "kill": false,
+        "no_entry": false,
+        "forced_exit": false
+      },
+      {
+        "case": "known_absent",
+        "kill": false,
+        "no_entry": false,
+        "forced_exit": false
+      },
+      {
+        "case": "present",
+        "kill": true,
+        "no_entry": true,
+        "forced_exit": true
+      },
+      {
+        "case": "folder_failure",
+        "kill": false,
+        "no_entry": true,
+        "forced_exit": false
+      },
+      {
+        "case": "file_specific_error_parent_ok",
+        "kill": false,
+        "no_entry": false,
+        "forced_exit": false
+      }
+    ],
+    "relay_maintenance_order": {
+      "remote_mutation_before_Check": true,
+      "separate_child_processes": true,
+      "no_relay_executed": true
+    },
+    "runtime": {
+      "PowerShell": "7.6.9",
+      "platform": "linux",
+      "native_Windows_or_MC": false
+    }
+  },
+  "script_sha256": "bc91194cf844b2963171d7fdb39656d413b2227e0a5afb9cf44777d9e74925f3",
+  "sources": {
+    "TODO.md": "d25857be6e0676b6d9650236ca7574378e9c960ec2471e469233cfb28a57aee2",
+    "funded_strategies/NQ_Expiration_Open_Short.txt": "1be1475dd4c3c5034e4b70182e1ef23eda54f3815a8f3e95b0b10a0c61378a8d",
+    "apex_strategies/NQ_Overnight_Bias_ADX30.txt": "4ca2fa0547b255f2e6fed3d82a31be65f735bf2798e65a637c5040547202b5eb",
+    "apex_strategies/NQ_Overnight_Bias.txt": "84c1e7c7fc5c460d316ed121c8f1529b5150d23bda89180f10d7c7e486f48c9c",
+    "apex_strategies/NQ_Vault_Break.txt": "a4e21bf6396bc7f4f0052e1bcd6f8ac15c1bc5391ed34e1af96b117f4c228e77",
+    "apex_strategies/Bridge_Monday_Long_L644NQ.txt": "58082e99325eb9bb8db76ed7461b23d7795b80409b572d7c99ac8700e6a92d4a",
+    "apex_strategies/NQ_Vault_Break_SP.txt": "254b47efc0a86894439aedd4428fe26a0a731180f7388118a4a57e85a35dd346",
+    "live/vps/KILL_SWITCH.md": "b6e73c4d74437950ef91a738541c6742330793be62b0af2fbf452fbd2b9624c7",
+    "live/vps/kill_test.ps1": "3329414c4da09fe8fce1899874b7b6f5c017de72b48f68e94ffce8d99412ed40",
+    "live/vps/claude_alert_relay.ps1": "14a2386bed527dc790a8c6d5169a56ea35885ea7af7b92c95da0d2fcc172387f",
+    "live/vps/kill.ps1": "d717b9ec454874980ee977a5447a8b00134b2e68bd90463f35d3d2f94748aa0a"
+  }
+}

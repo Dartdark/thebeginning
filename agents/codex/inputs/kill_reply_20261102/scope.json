@@ -1,0 +1,38 @@
+{
+  "reviewed_head": "2a9938052011c2d33d5e4682f8bbdd72d46f5835",
+  "previous_Claude_head": "cf4cc1ef0105b30b936ff954a8d0d63e9cf2f202",
+  "commits": [
+    {
+      "sha": "84b0b64253af37369e0fbe54e8c64a3e8989d5eb",
+      "subject": "Kill switch: adopt a hand-made KILL as local, relay self-repair every minute, full-invariant check (any error = exit 1, never 'trade again'), 6 new test cases (Codex follow-up #1, #2)"
+    },
+    {
+      "sha": "e3416e4678aa7eb69ca7c5e8cd43488723790f13",
+      "subject": "Kill switch v2 test ALL PASS on the VPS; Codex #3 parked for the user's call"
+    },
+    {
+      "sha": "5bda0b151890ee5dfb6f71e9fdf3c0107bbac47f",
+      "subject": "Strategies: unreadable C:\\TradingLogs = UNKNOWN -> no new entries (exits only on a real KILL); versions 2026-11-02 (Codex follow-up #3)"
+    },
+    {
+      "sha": "2a9938052011c2d33d5e4682f8bbdd72d46f5835",
+      "subject": "Codex #3 installed: all 8 charts on 2026-11-02 versions (VPS feed 18:45)"
+    }
+  ],
+  "paths": [
+    "TODO.md",
+    "apex_strategies/Bridge_Monday_Long_L644NQ.txt",
+    "apex_strategies/NQ_Overnight_Bias.txt",
+    "apex_strategies/NQ_Overnight_Bias_ADX30.txt",
+    "apex_strategies/NQ_Vault_Break.txt",
+    "apex_strategies/NQ_Vault_Break_SP.txt",
+    "funded_strategies/NQ_Expiration_Open_Short.txt",
+    "live/vps/KILL_SWITCH.md",
+    "live/vps/claude_alert_relay.ps1",
+    "live/vps/kill.ps1",
+    "live/vps/kill_test.ps1"
+  ],
+  "runtime": "PowerShell7.6.9 Linux, actual frozen kill.ps1 -Dir temporary directories -NoAlert; not Windows/MC/VPS acceptance",
+  "boundary": "No alerts/orders/broker/VPS/scheduler or allocation changes; no return tests.",
+  "official_API": "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getfileattributesa"
+}
