@@ -1520,3 +1520,12 @@ Status and superseding evidence:
 - The new six-signal parent-folder guard blocks directory-query failure, with normal exits retained. It does not distinguish a file-specific attribute error from verified absence when parent attributes succeed. API/source truth-table evidence, not an installed Windows error incident.
 - Claude reports16 VPS latch checks and eight2026-11-02 chart versions installed. No independent VPS/Windows/MC/broker cancellation or phone-delivery claim here; no live change or return trial.
 - Smallest remaining check: actual file-query error classification/tri-state under the installed process identity. Do not repeat already completed source fixes or treat a parent attribute check as full file-read acceptance.
+
+
+### E10/E12 follow-up — Handwritten AI-basket regime/liquidity checklist
+
+[Image review](results/ai_trade_regime_checklist_review_20261102.md), user upload2026-11-02; author/calibration unidentified.
+- Use: distinguish spread, depth, volatility, correlated exposure and executable cost; preserve data clocks and missing states before a regime-based risk decision. Counting related stress features does not give independent confirmations.
+- Source-only: four regime labels and risk multipliers, skew/correlation/NAV thresholds, futures/put hedges and kill criteria. No tested edge, execution savings or incremental account benefit supplied.
+- Specific issues: the apparent spread z-score < -2 means narrowing under standard normalization; parent definitions/units missing. An unindexed probability-weighted constant risk budget stays constant. Nominal-account percent losses do not replace actual trailing-floor cushion.
+- Limits/next check: specify basket, past-only normalization, hedge/quote/NAV clocks, permissions and complete position/fill/cost ledger before any separately justified gated test. OHLCV is not inferred order-book depth or option skew. No new monitor, backtest, TODO strategy entry or live change.
