@@ -596,3 +596,13 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   [Cycle/source reviews](agents/codex/results/scout_closing_auctions_cycle_20261029.md) ·
   [Evidence/data gates](agents/codex/evidence/scout_closing_auction_imbalances_20261029.md).
 
+
+- [ ] **Cross-asset futures OFI residual reversal — METADATA WATCH, not TEST (2026-11-02), SSRN7245981.**
+  Specific merit: lagged idiosyncratic flow pressure may unwind while PCA-rotation refits address changing common
+  institutional flows; author claims net/low-exposure results, but these are unverified and expressly not formal OOS.
+  This uses order-flow residuals, not a revival of the rejected price-spread/PCA pairs family. Needs full rules,
+  matching20-market L1tick OFI, native clocks/fills/costs and admissible2018–22history; own NQminute aggregates and
+  other-market OHLCV do not provide it. Smallest next check only on genuinely new source/data: authenticate the
+  exact universe and one complete matching observation. Bounded owned/free check completed; parked, no repeat crawl,
+  return reservation or user-action request. [Data D47](agents/codex/DATA_NEEDED.md#2026-11-02-owned-field-screen),
+  [record](agents/codex/research/scout/records/7245981.json), [report](agents/codex/results/scout_owned_source_20261102.md).

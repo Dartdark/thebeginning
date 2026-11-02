@@ -252,6 +252,13 @@ Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 
 ### E11 — Event-information clocks and attribution
 
+- Commodity-turning-point follow-up2026-11-02: [source-method review](results/scout_overreaction_source_gate_20261102.md),
+  Borgards/Czudaj/Hoang2021, DOI10.1016/j.resourpol.2020.101966. Capturing a fixed fraction of an ex-post reversal
+  does not define causal entry/exit availability. The inspected model assumes20%capture and omits fees/slippage;
+  no net return or execution saving reproduced. An extremum event time differs from its confirmation time;
+  distinguish descriptive labels from executable fills and keep quote gaps visible. Reject this convention at
+  the source gate; a different real-time rule needs independent merit and preregistration, not a rescue variant.
+
 - Recursive-smoother follow-up, retained 2026-10-30: Harris and Yilmaz,
   [SSRN 1259661](https://ssrn.com/abstract=1259661), [full review](results/fx_low_frequency_1259661_review.md).
   A full-history smooth trend is not a historical signal vintage. Their illustrative decomposition is explicitly

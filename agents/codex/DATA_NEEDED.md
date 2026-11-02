@@ -190,3 +190,9 @@ committed pinned acquisition scripts if absent. No need for a licence/account re
 Related new metadata that do not yet merit a trading nomination: quarter-hour Binance algorithmic flow needs
 actual signed trade events and size roundness, not CME/spot OHLCbar proxies; USDA option-volatility premia need
 option histories, not the newly found daily grain references. These data gaps do not preempt distinct discovery.
+
+## 2026-11-02 owned-field screen
+
+|Lead|Exact missing input and bounded check|Next justified step/status|
+|---|---|---|
+|**D47 — Cross-asset OFI residual reversal / PCA-rotation trigger, SSRN7245981.** Specific transient-pressure hypothesis; author claims net returns and lower factor exposure, but explicitly no formal OOS and no independent reproduction.|Complete primary rules and simultaneous20-market level1ticks with native OFI/quote/receipt clocks, contracts, execution/latency/cost settings and2018–22design coverage. Owned NQminute aggregates have up/down volume and book-summary columns; other owned instruments are OHLCV. The minute schema is not a20-market tick panel. One focused free-author/engine/data search found only the paper listing; no matching free dataset acquired.|Park and move on. First require exact universe/formula/refit/available-at specification and one matching observation, then inspect whether a lawful/free design panel exists. Do not infer tick OFI from minute price signs, silently shrink the universe, use2025–26as2018–22or reopen failed price-residual strategies. [Scout report](results/scout_owned_source_20261102.md), [record](research/scout/records/7245981.json).|
