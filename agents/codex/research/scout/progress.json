@@ -442,24 +442,69 @@
       "revision": "Indexed SSRN primary metadata on2026-11-02; full source not read",
       "disposition": "metadata_only",
       "record_path": "agents/codex/research/scout/records/4568171.json"
+    },
+    {
+      "ssrn_id": null,
+      "id": "doi:10.1016/j.frl.2021.102531",
+      "revision": "Malinska, March2020, IES7/2020 working paper,47pages; published FRL47(2022),102531 is a different version",
+      "disposition": "dont_test",
+      "record_path": "agents/codex/research/scout/records/doi_frl_2021_102531.json"
+    },
+    {
+      "ssrn_id": "5392801",
+      "id": "ssrn:5392801",
+      "revision": "Liu/Zhang/Bouri, written2025-08-15, posted2025-08-19,36pages; indexed primary abstract only",
+      "disposition": "needs_full_text",
+      "record_path": "agents/codex/research/scout/records/5392801.json"
+    },
+    {
+      "ssrn_id": null,
+      "id": "doi:10.1002/fut.70128",
+      "revision": "Conlon/Corbet/Larkin/Muniz, firstpublished2026-07-15, JFM46,1719\u20131747; primaryHTML selected sections",
+      "disposition": "dont_test",
+      "record_path": "agents/codex/research/scout/records/doi_fut_70128.json"
+    },
+    {
+      "ssrn_id": null,
+      "id": "doi:10.1016/j.eneco.2014.02.005",
+      "revision": "Auer2014, EnergyEconomics43,82\u201388; primary publisher preview plus indexed abstract",
+      "disposition": "dont_test",
+      "record_path": "agents/codex/research/scout/records/doi_eneco_2014_02_005.json"
+    },
+    {
+      "ssrn_id": "2515900",
+      "id": "ssrn:2515900",
+      "revision": "VanHemert2014, SSRN12pages, posted2014-10-30, datewritten2014-10-28; primary indexed abstract",
+      "disposition": "needs_full_text",
+      "record_path": "agents/codex/research/scout/records/2515900.json"
+    },
+    {
+      "ssrn_id": "4965790",
+      "id": "ssrn:4965790",
+      "revision": "Dubois/Marechal,2024-09-24,38pages; version-linked earlier3942440,37pages,2023-01-18; indexed primary abstracts",
+      "disposition": "metadata_only",
+      "record_path": "agents/codex/research/scout/records/4965790.json"
     }
   ],
   "last_run": {
-    "run_id": "scout-owned-source-20261102",
-    "recorded_at": "2026-11-02T18:34:52.868440+00:00",
-    "status": "source_checkpoint_discovery_continues",
+    "run_id": "scout-owned-source-b2-20261102",
+    "checked_parent": "4c01b92dbf99189abe1c785ce76362e331a166ee",
+    "recorded_at": "2026-11-02T18:48:51.601525+00:00",
+    "status": "context_checkpoint_discovery_unfinished",
     "new_full_reviews": 0,
     "new_hypotheses": 0,
     "new_economic_definitions": 0,
     "return_tests_executed": false,
-    "report_path": "agents/codex/results/scout_owned_source_20261102.md",
+    "report_path": "agents/codex/results/scout_owned_source_followon_20261102.md",
     "lease": null,
-    "query_count": 47,
-    "next_work": "Continue distinct owned-field-compatible discovery within the same scout; no active return reservation. Reject ex-post reversal-capture construction; park unmatched20-market tick OFI, stock-flow and source-gapped currency leads. Preserve all prior closed/paused exclusions.",
+    "query_count": 39,
+    "invocation_query_count": 86,
+    "previous_checkpoint_queries": 47,
+    "next_work": "Resume distinct owned-field-compatible discovery from continuation.json. No active return reservation; parked source watches are not next tasks.",
     "notification": {
       "actionable": false,
       "key_created": false,
-      "reason": "Source-only checkpoint; no completed material return/account test or user-action blocker."
+      "reason": "No completed material return/account result or genuine user-action blocker. Source-only leads retained without standalone alert."
     }
   },
   "last_notification_key": "ssrn:5250499:prototype-v1:real-data-blocked",
@@ -1205,6 +1250,27 @@
         "actionable": false,
         "key_created": false,
         "reason": "Source-only checkpoint; no completed material return/account test or user-action blocker."
+      }
+    },
+    {
+      "run_id": "scout-owned-source-b2-20261102",
+      "checked_parent": "4c01b92dbf99189abe1c785ce76362e331a166ee",
+      "recorded_at": "2026-11-02T18:48:51.601525+00:00",
+      "status": "context_checkpoint_discovery_unfinished",
+      "new_full_reviews": 0,
+      "new_hypotheses": 0,
+      "new_economic_definitions": 0,
+      "return_tests_executed": false,
+      "report_path": "agents/codex/results/scout_owned_source_followon_20261102.md",
+      "lease": null,
+      "query_count": 39,
+      "invocation_query_count": 86,
+      "previous_checkpoint_queries": 47,
+      "next_work": "Resume distinct owned-field-compatible discovery from continuation.json. No active return reservation; parked source watches are not next tasks.",
+      "notification": {
+        "actionable": false,
+        "key_created": false,
+        "reason": "No completed material return/account result or genuine user-action blocker. Source-only leads retained without standalone alert."
       }
     }
   ],

@@ -606,3 +606,21 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   exact universe and one complete matching observation. Bounded owned/free check completed; parked, no repeat crawl,
   return reservation or user-action request. [Data D47](agents/codex/DATA_NEEDED.md#2026-11-02-owned-field-screen),
   [record](agents/codex/research/scout/records/7245981.json), [report](agents/codex/results/scout_owned_source_20261102.md).
+
+- [ ] **Crude-oil distribution asymmetry OIS — METADATA WATCH / NEEDS FULL SOURCE (2026-11-02), SSRN5392801.**
+  Specific merit: authors claim OOS forecasting/allocation improvement beyond historical mean and realized skewness;
+  these are unverified primary-abstract claims. Owned CL prices may supply raw distribution inputs, conditional on
+  exact formation/forecast/roll rules. No formula, threshold or strategy inferred from a secondary summary.
+  Smallest next check only when genuinely new primary text arrives: authenticate OIS/target construction and map
+  one dated formation to actual owned fields/clocks before any trial. Primary403 and no-file author listing recorded;
+  parked, no repeated crawl or user-action request. [Data/source D48](agents/codex/DATA_NEEDED.md#2026-11-02-source-watches),
+  [record](agents/codex/research/scout/records/5392801.json), [report](agents/codex/results/scout_owned_source_followon_20261102.md).
+
+- [ ] **CTA subscription/redemption month-turn pressure — METADATA WATCH / NEEDS FULL SOURCE (2026-11-02), SSRN2515900.**
+  Specific merit: a timed fund-flow mechanism and author claim of concentrated CTA-index returns on three month-turn
+  days. This is not a verified net futures strategy or a forecast-accuracy statistic. Exact replication signal,
+  universe/weights, calendars, flow sign and costs remain unknown; existing CTA flip/fade and generic month-end
+  selections remain prior history. Smallest next check on new primary availability: identify a causal source rule
+  and its exact owned-field map; no invented CTA positions or trend window. Primary403, bounded author/institution
+  search found no authenticated full copy; parked and move on. [Data/source D49](agents/codex/DATA_NEEDED.md#2026-11-02-source-watches),
+  [record](agents/codex/research/scout/records/2515900.json), [report](agents/codex/results/scout_owned_source_followon_20261102.md).

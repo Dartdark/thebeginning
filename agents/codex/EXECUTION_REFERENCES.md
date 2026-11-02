@@ -1536,3 +1536,17 @@ Status and superseding evidence:
 - Source-only: four regime labels and risk multipliers, skew/correlation/NAV thresholds, futures/put hedges and kill criteria. No tested edge, execution savings or incremental account benefit supplied.
 - Specific issues: the apparent spread z-score < -2 means narrowing under standard normalization; parent definitions/units missing. An unindexed probability-weighted constant risk budget stays constant. Nominal-account percent losses do not replace actual trailing-floor cushion.
 - Limits/next check: specify basket, past-only normalization, hedge/quote/NAV clocks, permissions and complete position/fill/cost ledger before any separately justified gated test. OHLCV is not inferred order-book depth or option skew. No new monitor, backtest, TODO strategy entry or live change.
+
+### E11/E12 follow-up — Time-varying estimates and available-at forecasts
+
+[November2 scout source check](results/scout_owned_source_followon_20261102.md), Malinska IES7/2020,
+method/data/result sections of the university manuscript; not a full-paper review or return test.
+- Use: lagged predictors alone do not make a coefficient available at the historical entry. Record the estimator's
+  training endpoint, kernel support, bandwidth selection, controls' release clocks and missing-value treatment.
+- Source check: Equation7 sums over the sample throughT; no past-only endpoint forecasting protocol was established
+  in the inspected sections. Source controls include linear interpolation of missing observations. Using future
+  observations in an entry forecast or interpolating across a later value can contaminate a tradable interpretation.
+- Limit: a descriptive smooth is not inherently a defective descriptive analysis. It does not supply a costed
+  historical trading rule. No measured forecast advantage, fill improvement or economic verification is claimed.
+- Next check for any separately justified future hypothesis: freeze causal estimation and native clocks/costs before
+  returns; do not use plots, full-sample signs or missing-data interpolation as historical entry information.
