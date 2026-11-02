@@ -55,7 +55,7 @@ bottom). Times are Central (CT).
   150K funded stack (FUNDED_PLAN.md). Add its account number to the logger / live reports.
 - [ ] Optional: rerun the ONB ADX30 MultiCharts backtest once with the new code (should be nearly identical).
 
-## Kill switch install (2026-11-01) - installed 11/01 evening; live test left
+## Kill switch install (2026-11-01) - DONE 11/01 evening (remote KILL 18:07 -> phone + VPS flag ON 18:10; RESUME -> flag OFF 18:15)
 - [x] File check: EL Collections not installed; switched to Windows GetFileAttributesA, compiled on the VPS (2026-11-01).
 - [x] Latch test kill_test.ps1: ALL PASS (2026-11-01).
 - [x] Repasted the 2026-11-01 versions of VB, ONB ADX30, EOS, Bridge: all 8 charts report them (VPS feed 18:05, 2026-11-01).
