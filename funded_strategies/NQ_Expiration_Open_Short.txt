@@ -53,7 +53,7 @@ Inputs:
 	ClosedFriday5(0),
 	ClosedFriday6(0),
 	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
-Variables: KillOn(false), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Expiration_Open_Short 2026-11-01");   { code version (live guard 2026-10-30): bump the date on every change }
+Variables: KillOn(false), NoEntry(false), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Expiration_Open_Short 2026-11-02");   { code version (live guard 2026-10-30): bump the date on every change }
 
 Variables:
 	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
@@ -114,6 +114,10 @@ IsExpiration = (IsThirdFri and IsClosedFri = false)
   position exits at market on the next bar. Real time only, so backtests are unchanged. Reads the flag with Windows' GetFileAttributesA (-1 = no file). }
 KillOn = false;
 if GetAppInfo(aiRealTimeCalc) = 1 then KillOn = GetFileAttributesA("C:\TradingLogs\KILL") <> -1;
+{ read check (Codex follow-up 2026-11-02 #3): -1 on the KILL file means "no file" only if the folder itself is readable.
+  Folder unreadable = state UNKNOWN: no new entries (open positions keep their normal exits; only a real KILL forces exits). }
+NoEntry = KillOn;
+if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 then NoEntry = true;
 
 { ---------- Entry: short at the 8:30 open ---------- }
 TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
@@ -122,7 +126,7 @@ if IsExpiration and Time = EntryBarTime and MarketPosition = 0 and TradedToday =
 	StopPts = StopAtrPct * ATRv;
 	Qty = NumContracts;
 	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
-	if Qty >= 1 and KillOn = false then
+	if Qty >= 1 and NoEntry = false then
 		SellShort ("Exp Open S") Qty contracts next bar at market;
 end;
 

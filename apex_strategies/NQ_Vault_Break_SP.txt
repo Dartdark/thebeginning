@@ -78,7 +78,7 @@ Inputs:
 	NRDays(7),              { NR7 = narrowest regular-session range of the last NRDays sessions }
 	ShowFlag(true),         { print the flag in the Output window each session }
 	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / VB150; empty = no heartbeat };
-Variables: KillOn(false), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Vault_Break_SP 2026-11-01");   { code version (live guard 2026-10-30): bump the date on every change }
+Variables: KillOn(false), NoEntry(false), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Vault_Break_SP 2026-11-02");   { code version (live guard 2026-10-30): bump the date on every change }
 
 Variables:
 	BarVol(0), CumPV(0), CumVol(0), DayVwap(0),
@@ -267,6 +267,10 @@ end;
   position exits at market on the next bar. Real time only, so backtests are unchanged. Reads the flag with Windows' GetFileAttributesA (-1 = no file). }
 KillOn = false;
 if GetAppInfo(aiRealTimeCalc) = 1 then KillOn = GetFileAttributesA("C:\TradingLogs\KILL") <> -1;
+{ read check (Codex follow-up 2026-11-02 #3): -1 on the KILL file means "no file" only if the folder itself is readable.
+  Folder unreadable = state UNKNOWN: no new entries (open positions keep their normal exits; only a real KILL forces exits). }
+NoEntry = KillOn;
+if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 then NoEntry = true;
 
 { ---------- Entries ---------- }
 TradesToday = TotalTrades - DayStartTrades;
@@ -279,7 +283,7 @@ if ATRv > 0 and Time >= FirstDecision and Time < DayLastEntry
 	Qty = NumContracts;
 	if NRFlag and NR7Contracts >= 0 then Qty = NR7Contracts;
 	if SPFlag and FlaggedContracts >= 0 then Qty = FlaggedContracts;
-	if Qty > 0 and KillOn = false then Buy ("VaultBreak") Qty contracts next bar at market;
+	if Qty > 0 and NoEntry = false then Buy ("VaultBreak") Qty contracts next bar at market;
 	end;
 
 { ---------- Exits ---------- }
