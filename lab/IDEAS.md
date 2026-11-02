@@ -207,7 +207,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   V2 to 09:30 +$50 (t 0.73, 4/5), V3 ZN -$35 (gross +$2, t -2.1); non-release days -$22, placebo p 0.06. First run
   (10 trades) V2 t 1.49. Holdout not opened. `analysis/lab_Q016.py`. No follow-ups.
 
-## Q017 · queued · priority 2
+## Q017 · running · priority 2
 - who_pays: structural: trend-following funds (CTAs) rebalance on fixed turn-of-month dates, trading size in the trend direction
 - tier_check: master 2026-11-01, dupcheck 'turn of the month': C equity calendar row + D personal overnight round (ES/NQ TOM long); trend-direction commodity TOM is new; clear
 - source: scout 2026-11-01: Van Hemert, 'MOM-TOM: Momentum and the Turn of the Month' (2014 working paper; SSRN PDF not
