@@ -72,7 +72,7 @@ class TerminalTests(unittest.TestCase):
         path='analysis/outputs/codex_vrp_monthly_proxy_20261029/primary_endpoints/endpoint_metrics.csv'
         status,x=self.request('/api/result?path='+path);self.assertEqual(status,200)
         self.assertEqual(x['rows'][0]['name'],'P');self.assertFalse(x['truncated'])
-        for path in ['/','/style.css','/app.js']:
+        for path in ['/','/style.css','/app.js','/desk.js']:
             status,_=self.request(path);self.assertEqual(status,200)
 
     def test_invalid_note_shape_and_oversized_body(self):

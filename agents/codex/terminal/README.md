@@ -21,10 +21,14 @@ The cloud executor's localhost is not your computer's localhost; the Windows lau
 
 ## What works
 
-- Overview: actual report/evidence/preregistration/reference counts and recently saved files.
+- Overview: local checkout/freshness, report and scout counts, review desk, saved trial budget/checkpoint and recent reports.
 - Research library: full-text search, document-type and verdict filters, sorting, readable source documents.
-- Strategy research: the evidence, plan and report catalog. Source labels do not certify independent verification.
-- Results lab: existing CSV output viewer, row filtering and CSV export. Original names/units remain visible.
+- Strategy research: searchable analyst records, source/evidence/plan status, five-question detail and source reports.
+  File presence does not certify a research gate or independent verification. All evidence/plans/reports remain in the library.
+- Strategy results: registered BASE/ADD/REPLACE/EMPTY comparisons for personal, 50K/150K funded and evaluation homes.
+  PrimeSync is the initial registered historical comparison, with its archived baselines, dates, sizing, costs and limitations.
+  It is not a retest against today's portfolios. Missing/duplicate rows stay unknown. **Browse raw CSV files** retains the
+  existing CSV viewer, row filtering and export; original names and units remain visible.
 - Verification queue: reads the promising-strategy section of TODO.md, including negative follow-ups.
 - Execution references: searchable, expandable entries from EXECUTION_REFERENCES.md.
 - Paper inbox: local PDF upload/drop, SHA-256 deduplication, native PDF preview and optional pdftotext extraction.
@@ -52,7 +56,7 @@ The separate **SSRN research scout** app automation was created enabled on 2026-
 Its identifier and creation-time status are recorded in `agents/codex/research/scout/config.json`.
 App automation settings are authoritative; this terminal displays a saved configuration, not live scheduler status.
 The task uses Codex's connected search/GitHub and an execution environment when available, independent of this local web server.
-It discovers and deduplicates papers, reads obtainable full text, answers the four review questions, and retains execution lessons.
+It discovers and deduplicates papers, reads obtainable full text, answers the five review questions, and retains execution lessons.
 For an eligible strategy it can autonomously acquire owned/free data, preregister and run gated research tests.
 Material source/data gaps stop dependent tests. An unavailable execution environment means source work only.
 No new external service key is needed; this does not guarantee every future source or test is accessible.
@@ -72,7 +76,30 @@ It intentionally offers no arbitrary command runner or generic filesystem browse
 ## Check
 
     cd agents/codex/terminal
-    /workspace/venvs/thebeginning/bin/python -m unittest -v test_terminal.py test_scout.py test_scout_gates.py
+    /workspace/venvs/thebeginning/bin/python -m unittest -v test_terminal.py test_scout.py test_scout_gates.py test_desk.py
     node --check static/app.js
+    node --check static/desk.js
+    node test_desk.js
 
 Integration tests use a temporary isolated note/inbox store; they do not edit real user data or run return tests.
+
+Optional browser acceptance (development environment with Playwright and Chromium already installed):
+
+    /workspace/venvs/thebeginning/bin/python review_ui.py --output /tmp/terminal-ui-review
+
+This starts a temporary localhost server with an isolated runtime. It checks every displayed registered CSV value,
+unknown/duplicate/error states, stale-response races, source reading, keyboard skip/escape and 360/390/768px layouts.
+It saves screenshots, input/code hashes and a review receipt. It performs no discovery, return tests or live access.
+
+## Design and review
+
+Both Claude and Codex should read [PRODUCT.md](PRODUCT.md), [DESIGN.md](DESIGN.md) and the local [AGENTS.md](AGENTS.md)
+before editing the interface. The design contract uses Google DESIGN.md's shared-context idea and manually applied
+Impeccable Operate/audit guidance; no upstream installer, binary, hooks or agents are installed.
+
+`result_sets.json` is an explicit presentation registry, not an automatic schema/units guesser. Additional result schemas
+need reviewed mappings, source reports, provenance and parity checks before joining the comparison view. Raw supported
+CSV files remain available without a registry entry. The terminal never changes the source results or consumes trials.
+
+2026-11-02 handoff: [review report](../results/terminal_ui_review_20261102.md),
+[Claude review task](../TASK_terminal_ui_review_20261102.md), [screenshots/receipt](review/20261102/).

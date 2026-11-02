@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "sets": [
+    {
+      "id": "primesync-accounts",
+      "schema": "primesync_accounts_v1",
+      "title": "PrimeSync · frozen account comparison",
+      "report_path": "agents/codex/results/primesync_accounts.md",
+      "plan_path": "agents/codex/plans/primesync_accounts.md",
+      "sample": "2018-01-02 through 2026-07-07; historical simulations",
+      "sizing": "Candidate: one micro per frozen eligible entry. Baseline: archived funded/evaluation stacks and published 19-piece personal reference (Claude 6416de2).",
+      "costs": "Evaluation/funded: $1.04 per micro round trip plus one adverse tick on market/stop/time fills. Personal candidate: $1.275 per unit round trip; inherited portfolio accounting applies.",
+      "method": "Funded: 1,000 paired two-year histories, 20-day blocks. Personal: 1,000 paired 252-day histories. Evaluation: 2,174 complete 21-day starts, including 885 since 2023.",
+      "outcome": "No tested placement clears its preregistered materiality gates. Closest personal ES30 addition improves mean-profit/p95-drawdown by 1.8%, below the 5% requirement.",
+      "verification": "Native MultiCharts parity and independent signal validation outstanding. These are saved historical results, not a rerun against today's portfolio.",
+      "limits": "Conditional on sampled history. Funded paths retain CL/OT daily-adverse and MOC close-path approximations; personal bookkeeping retains mixed marking/fee approximations. Two-year funded payout is cumulative, not year-two income.",
+      "contexts": ["NQ15", "NQ30", "ES15", "ES30"],
+      "configurations": {"BASE": "BASE", "ADD": "ADD", "REPLACE": "REPLACE_VB", "EMPTY": "EMPTY_VB"},
+      "comparison_note": "REPLACE substitutes PrimeSync for Vault Break; EMPTY removes Vault Break without a substitute.",
+      "files": {
+        "personal": "analysis/outputs/codex_primesync_accounts/personal.csv",
+        "funded": "analysis/outputs/codex_primesync_accounts/funded.csv",
+        "evaluations": "analysis/outputs/codex_primesync_accounts/evaluations.csv"
+      }
+    }
+  ]
+}

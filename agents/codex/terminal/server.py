@@ -11,6 +11,7 @@ import subprocess
 import threading
 import webbrowser
 import scout
+import desk
 from urllib.parse import unquote, urlsplit, parse_qs
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -82,9 +83,13 @@ def catalog():
         kind=p.parent.name if p.name not in ['TODO.md','EXECUTION_REFERENCES.md','RESEARCH_CONTROLS.md'] else 'reference'
         docs.append(dict(path=relative(p),title=title,summary=summary,kind=kind,status=status,
                          updated=p.stat().st_mtime,search=content.lower()))
-    try: commit=subprocess.check_output(['git','rev-parse','--short','HEAD'],cwd=ROOT,text=True).strip()
-    except (OSError,subprocess.CalledProcessError): commit='unavailable'
-    return dict(documents=docs,commit=commit,branch='codex/work',
+    try:
+        commit=subprocess.check_output(['git','rev-parse','--short','HEAD'],cwd=ROOT,text=True).strip()
+        branch=subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip() or 'detached HEAD'
+        modified=bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())
+    except (OSError,subprocess.CalledProcessError): commit=branch='unavailable';modified=None
+    return dict(documents=docs,commit=commit,branch=branch,modified=modified,
+                desk=desk.snapshot(ROOT,document_paths(),result_paths()),
                 results=[dict(path=relative(p),name=relative(p).replace('analysis/outputs/','')) for p in result_paths()],
                 queue=(ROOT/'TODO.md').read_text(encoding='utf-8').split('## Promising strategies awaiting verification',1)[-1].split('\n## Later',1)[0],
                 execution=(ROOT/'agents/codex/EXECUTION_REFERENCES.md').read_text(encoding='utf-8'))
@@ -128,7 +133,7 @@ class Handler(BaseHTTPRequestHandler):
                 item=next((x for x in state()['inbox'] if x['id']==file_id),None)
                 if not item: raise ValueError('Unknown PDF')
                 return self.respond((RUNTIME/(file_id+'.pdf')).read_bytes(),ctype='application/pdf')
-            paths={'/':'index.html','/app.js':'app.js','/style.css':'style.css'}
+            paths={'/':'index.html','/app.js':'app.js','/desk.js':'desk.js','/style.css':'style.css'}
             if u.path not in paths:return self.respond({'error':'Not found'},404)
             p=STATIC/paths[u.path]
             mime={'html':'text/html','js':'text/javascript','css':'text/css'}[p.suffix[1:]]
