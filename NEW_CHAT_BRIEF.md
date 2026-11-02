@@ -18,7 +18,7 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
 - **Kill switch (installed 11/01):** strategies read C:\TradingLogs\KILL via kernel32 GetFileAttributesA (EL Collections NOT
   installed); folder unreadable -> no new entries. Two latches (KILL_LOCAL / KILL_REMOTE), relay self-repair every minute,
   kill_test.ps1 16/16 PASS, remote KILL/RESUME tested end to end. User KILL -> `python3 analysis/kill_switch.py kill "..."`.
-- **Codex:** review 11/01 (7 findings) + follow-up 11/02 (3) all fixed/installed. Packet `agents/codex/TASK_review_2026-11-01.md`.
+- **Codex:** review 11/01 (7 findings) + follow-up 11/02 (3) all fixed/installed. Codex kill-reply review 11/02: 2 closed, 1 medium left (file-error tri-state), user: fold into next repaste (TODO). Packet `agents/codex/TASK_review_2026-11-01.md`.
 - **Rule (11/01, LESSONS):** every MultiCharts claim names its source and says VERIFIED or GUESS. ACCT column 4 = typed
   monitor account, column 9 = real routing.
 - **Open:** firm view panel (after #4, TODO); funded heartbeats; Brier pass odds after ~20 evals; DATA_NEEDS.md (free MC exports

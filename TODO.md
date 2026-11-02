@@ -100,6 +100,10 @@ bottom). Times are Central (CT).
 - [ ] Claude, before the first funded account (~late Nov): heartbeat + HB_Ver stamp in every funded strategy file that lacks
       them (ONB ML, LDF, NFP, ES MOC, CL fade, Overnight Tick, Dual Thrust, T_ONESIDE, Monday Long); funded floor rules in
       expected_setup.json (150K: trail 4,000, lock 150,100); rejected-orders limit 10 on every funded chart.
+- [ ] Claude, with the NEXT planned repaste of the live charts (user, 2026-11-02: "fold it", not a repaste of its own):
+      kill-switch file-error tri-state (Codex REVIEW_kill_reply_20261102, medium). KILL file query = -1 with a readable
+      parent folder is now read as 'no KILL'; check GetLastError: 2/3 (not found) = no KILL, anything else = UNKNOWN ->
+      NoEntry. All 6 kill-switch strategy files; VPS compile + check inputs survive the paste.
 
 ## 150K buying plan, Nov-Dec 2026 (user, 2026-10-30; job Nov 10 - Dec 24, $25 x 8 h, paid weekly, all pay to evaluations)
 - [ ] Sun Nov 1: buy 150K No-Activation #4 (afternoon, before ~18:00 CT), set up its 4 charts, send Claude the account number.
