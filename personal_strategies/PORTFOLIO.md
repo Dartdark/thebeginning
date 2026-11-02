@@ -77,19 +77,23 @@ re-ranked.) ret/DD here = median year / DD p95 (stricter than the old median / m
 | ~$28,800 | + FC 2B v2 once cleared (18) | $35,000 | $19,100 | $5,770 | 6.07 |
 | ~$36,100 | + S30 IBS once cleared (19 = full book) | $40,500 | $22,600 | $7,220 | 5.61 |
 
-**From ~$32k up: capped inverse-vol weights (adopted by the user 2026-11-01).** Micros per piece = weight x size, weight =
-1 / 2018-25 daily stdev, capped at 2x equal, rounded to whole micros (`analysis/personal_invvol_confirm.py`; re-estimate the
-weights each January). Numbers below are 2023+ (unseen when the method was chosen); forward-log pieces join only once cleared.
+**From ~$31k up: capped inverse-vol weights (adopted by the user 2026-11-01).** Micros per piece = weight x size, weight =
+1 / 2018-25 daily stdev, capped at 2x equal, rounded to whole micros; re-estimate the weights each January. Exact generator:
+`analysis/personal_invvol_ladder.py` (output `analysis/outputs/personal_invvol_ladder_output.txt`). The micros column is the
+forward DEPLOY vector (2018-25 weights, on purpose). The $ / DD columns are the CAUSAL yearly walk-forward on 2023+ (each year
+sized from earlier years only); corrected 2026-11-01 (Codex review #7): the first version showed the 2018-25 vector scored on
+2023+, whose weights had seen 2023-25 (in-sample sizing; up to +4% on the big rows). 2023+ was already seen when the method,
+cap and sizes were chosen: not an untouched holdout. Forward-log pieces join only once cleared.
 
 | Account | Book | $ a year (MC p50, 2023+) | DD p95 | Micros per piece |
 |---|---|---|---|---|
-| ~$32k | 15 cleared, ~2 a piece | $47,100 | $6,360 | VB 1, ONB ML 1, Monday 1, EOS 3, LDF 2, NFP 4, Bridge 2, CL fade 4 MCL, ES MOC 4 MES, RS 1, Twin 1, OT 2, DT 1, ST 1, PT 1 |
+| ~$31k | 15 cleared, ~2 a piece | $48,200 | $6,270 | VB 1, ONB ML 1, Monday 1, EOS 3, LDF 2, NFP 4, Bridge 2, CL fade 4 MCL, ES MOC 4 MES, RS 1, Twin 1, OT 2, DT 1, ST 1, PT 1 |
 | ~$43k | full 19, ~2 a piece | $65,300 | $8,580 | as above but VB 2, ONB 2, EOS 4, LDF 3, ST 2; + FC 2B 1, Kusho 1, S47 1 (S30 0) |
-| ~$63k | 15 cleared, ~4 a piece | $95,200 | $12,640 | VB 3, ONB 3, Monday 2, EOS 6, LDF 5, NFP 8, Bridge 4, CL 8, ES MOC 8, RS 1, Twin 2, OT 3, DT 2, ST 3, PT 2 |
-| ~$90k | full 19, ~4 a piece | $145,800 | $18,060 | VB 4, ONB 3, Monday 3, EOS 7, LDF 6, NFP 8, Bridge 5, CL 8, ES MOC 8, RS 2, Twin 2, OT 4, DT 3, ST 4, PT 3, FC 2B 3, Kusho 2, S47 2, S30 1 |
-| ~$214k | full 19, ~10 a piece | $352,800 | $42,720 | VB 9, ONB 8, Monday 7, EOS 18, LDF 15, NFP 20, Bridge 12, CL 20, ES MOC 20, RS 4, Twin 6, OT 9, DT 7, ST 9, PT 7, FC 2B 7, Kusho 5, S47 6, S30 2 |
+| ~$63k | 15 cleared, ~4 a piece | $94,400 | $12,600 | VB 3, ONB 3, Monday 2, EOS 6, LDF 5, NFP 8, Bridge 4, CL 8, ES MOC 8, RS 1, Twin 2, OT 3, DT 2, ST 3, PT 2 |
+| ~$83k | full 19, ~4 a piece | $140,300 | $16,600 | VB 4, ONB 3, Monday 3, EOS 7, LDF 6, NFP 8, Bridge 5, CL 8, ES MOC 8, RS 2, Twin 2, OT 4, DT 3, ST 4, PT 3, FC 2B 3, Kusho 2, S47 2, S30 1 |
+| ~$206k | full 19, ~10 a piece | $346,500 | $41,130 | VB 9, ONB 8, Monday 7, EOS 18, LDF 15, NFP 20, Bridge 12, CL 20, ES MOC 20, RS 4, Twin 6, OT 9, DT 7, ST 9, PT 7, FC 2B 7, Kusho 5, S47 6, S30 2 |
 
-Below ~$32k the table above (equal, 1 micro each) stands: rounding makes inverse vol useless at ~1 micro a piece. 10 MNQ
+Below ~$31k the table above (equal, 1 micro each) stands: rounding makes inverse vol useless at ~1 micro a piece. 10 MNQ
 can be traded as 1 NQ (lower commissions). Re-run the ladder and the 'Capital-expansion bench' at each step.
 **Reading it:** with ~$10-11k start at row 2 (4 pieces); ~$13.3k already carries 11 pieces, because the small pieces add profit
 without adding drawdown. Monday Long, Vault Break and Relative Strength are the last cleared pieces in: in a personal book they
@@ -166,10 +170,10 @@ Weights set on 2018-22 (w ~ 1 / daily stdev per micro), scored on 2023+ (never s
 8.50 (4+). Per $ of capital, inverse-vol at ~$32k earns ~20% more than the equal book at ~$29k. It shrinks the high-vol
 pieces (S30 0.18x, Relative Strength 0.34-0.39x, Twin, Kusho ~0.45x) and grows the quiet ones (ES MOC 2.5-2.9x, NFP fade,
 CL fade, EOS ~1.5-2x), so the book leans harder on smaller, weaker-per-trade pieces (ES MOC is on the watchlist, #20).
-Rounding makes it useless at ~1 micro a piece; it only works from ~2 micros a piece (the ~$32k+ rows).
+Rounding makes it useless at ~1 micro a piece; it only works from ~2 micros a piece (the ~$31k+ rows).
 **Confirmation (2026-11-01, `analysis/personal_invvol_confirm.py`):** weights re-estimated every year from earlier years only
 (walk-forward 2020-26) and capped at 2x equal. 15 cleared, ~2 micros a piece: ret/DD 2020-26 6.54 (equal) -> 7.82
 (inv-vol) -> 8.12 (capped); 2023+ 6.10 -> 7.33 -> 7.69; capital ~$57.6k -> ~$31.4k for the same micros. ~4 a piece: 6.54 ->
 8.26 / 8.50. Full 19: 6.71 -> 8.27 / 8.60 at ~2; at ~4 the cap costs a little (8.99 -> 8.45 on 2023+) but stays well above
 equal. The gain survives yearly re-estimation; the 2x cap costs nothing on the cleared book. Proposed: capped inverse-vol
-from the ~$32k row up (cleared book), equal weights below; ADOPTED by the user 2026-11-01 (ladder rows above).
+from the ~$31k row up (cleared book), equal weights below; ADOPTED by the user 2026-11-01 (ladder rows above).
