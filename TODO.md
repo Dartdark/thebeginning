@@ -57,7 +57,7 @@ bottom). Times are Central (CT).
 
 ## Kill switch install (2026-11-01) - DONE 11/01 evening (remote KILL 18:07 -> phone + VPS flag ON 18:10; RESUME -> flag OFF 18:15)
 - [x] File check: EL Collections not installed; switched to Windows GetFileAttributesA, compiled on the VPS (2026-11-01).
-- [x] Latch test kill_test.ps1: ALL PASS (2026-11-01).
+- [x] Latch test kill_test.ps1: ALL PASS (2026-11-01; 16 checks incl. Codex follow-up cases, 18:3x CT).
 - [x] Repasted the 2026-11-01 versions of VB, ONB ADX30, EOS, Bridge: all 8 charts report them (VPS feed 18:05, 2026-11-01).
 - [ ] You: Sunday test: `kill.ps1` -> ntfy KILL ACTIVE -> `kill.ps1 -Resume`; then a remote KILL / RESUME via Claude.
       Steps: `live/vps/KILL_SWITCH.md`.
@@ -266,3 +266,5 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Routing check (2026-11-01)
 - [ ] Repaste **Apex Chart Monitor** ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Chart_Monitor.txt)) in the PowerLanguage Editor, compile (F7); on each of the 8 charts auto-trading off/on (Flat). Then tell Claude: it confirms every chart's real order account from the VPS feed.
+- [ ] Codex follow-up #3 (MEDIUM, user's call): strategies treat any read failure of the KILL file as "no kill". Proposal: also
+      check C:\TradingLogs; if the folder can't be read -> no new entries. Next weekend repaste, with a distinct version tag.
