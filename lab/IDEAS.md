@@ -253,3 +253,20 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   (= the sheet's 2AM / 6AM / 10AM EST); V2 same on ES; V3 NQ 8:30 CT 'red folder' days (CPI, NFP, PPI, retail sales): if
   07:30-08:30 CT sweeps the 06:30-07:30 range and closes back inside, trade 08:31-09:30 CT in the reversal direction.
 - Apex: yes (intraday). data: data/NQ_1min_*, data/ES_1min_*; release calendar from the NFP / CPI files used by the plan.
+
+## Q020 · queued · priority 2
+- who_pays: structural: 2x / -2x natural-gas ETFs (BOIL / KOLD, plus 3x ETNs abroad) must buy after up days and sell after down days to reset daily leverage, trading near the 13:30 CT settlement whatever the price; their size is large relative to NG volume, unlike CL's
+- tier_check: scout 2026-11-02, dupcheck 'NG settlement' / 'natural gas settle' / 'BOIL': no NG settlement row (D: equity post-settlement reversal; F: CL settlement follow / fade in 'CL forced flows'); NG daily-settlement LETF flow is new; clear
+- source: scout 2026-11-02: Todorov, 'Passive Funds Actively Affect Prices: Evidence from the Largest ETF Markets' (2019,
+  SSRN; summary via CXO Advisory): in VIX and commodity futures incl. natural gas, the rebalancing needed to keep constant
+  daily leverage is the largest of three ETF price-impact channels (roll, flows, leverage). Caution: the CL settlement
+  follow / fade is already F, so the test must show NG is different (larger LETF share).
+- market: NG (QG / MNG)
+- mechanism: leveraged ETFs' end-of-day rebalancing demand is proportional to (leverage^2 - leverage) x AUM x the day's
+  return, so on big-move days they buy (sell) into the settlement window in the move's direction, then the pressure eases.
+- rule sketch: move = NG 08:00 -> 13:15 CT return; ATR = 14-day. V1 follow the move 13:16 -> 13:29 when |move| >= 0.5 ATR;
+  V2 same on all days with |move| >= 0.2 ATR; V3 fade 13:31 -> 14:15 when |move| >= 0.5 ATR (pressure released). Stop
+  0.3 ATR. Exclude NG expiry week (our series rolls the evening before expiry, Q011 lesson). Placebo: same windows shifted
+  one hour earlier (12:16 -> 12:29 / 12:31 -> 13:15). Power: ~250 days a year (V2), ~60 a year (V1 / V3). Costs $5 + 1 tick
+  a side; stop at stage 1 unless gross per trade > 2x cost.
+- Apex: yes (intraday). data: data/NG_1min_*.csv (CT)

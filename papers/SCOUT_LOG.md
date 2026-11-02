@@ -52,3 +52,5 @@ READ (-> TIER_LIST grade) / NEED PDF (user downloads from SSRN and drops it in t
 | 2026-11-01 17:43 UTC | scheduled run | (no search) | STOP: 6 ideas already queued in lab/IDEAS.md (Q013-Q018 >= 5); nothing added |
 | 2026-11-01 22:43 UTC | scheduled run (re-run after a worker restart) | (no search) | STOP: 5 ideas already queued in lab/IDEAS.md (Q014, Q015, Q017, Q018, Q019); nothing added |
 | 2026-11-02 02:44 UTC | scheduled run | (no search) | STOP: 5 ideas already queued in lab/IDEAS.md (Q014, Q015, Q017, Q018, Q019); nothing added |
+| 2026-11-02 06:44 UTC | Todorov 2019 'Passive Funds Actively Affect Prices' (SSRN; CXO summary https://www.cxoadvisory.com/?p=33572) | ETF leverage-rebalancing price impact in VIX / commodity futures | LAB IDEA Q020 (NG settlement-window LETF flow); queue had 4 queued before |
+| 2026-11-02 06:44 UTC | IEEE 10772770; arXiv 2010.13036 (agent-based Nikkei LETF) | LETF rebalancing simulations | SKIP: simulation, no futures data test |
