@@ -207,7 +207,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   V2 to 09:30 +$50 (t 0.73, 4/5), V3 ZN -$35 (gross +$2, t -2.1); non-release days -$22, placebo p 0.06. First run
   (10 trades) V2 t 1.49. Holdout not opened. `analysis/lab_Q016.py`. No follow-ups.
 
-## Q017 · running · priority 2
+## Q017 · done · priority 2
 - who_pays: structural: trend-following funds (CTAs) rebalance on fixed turn-of-month dates, trading size in the trend direction
 - tier_check: master 2026-11-01, dupcheck 'turn of the month': C equity calendar row + D personal overnight round (ES/NQ TOM long); trend-direction commodity TOM is new; clear
 - source: scout 2026-11-01: Van Hemert, 'MOM-TOM: Momentum and the Turn of the Month' (2014 working paper; SSRN PDF not
@@ -224,6 +224,9 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   instead of 63. Stop 0.5 x 14-day ATR per market. Placebo: same rule on days 10-12 of each month. Power: ~36 days a year
   x 5 markets.
 - Apex: yes (all intraday). data: data/{CL,NG,GC,ZN,6E}_1min_*.csv (24 h files; roll weeks excluded as usual)
+- result: FAIL stage 1 (2026-11-02). 2018-22 in R (net $ / 0.5 ATR risk): V1 all 5, 63-day 860 trades -0.037R (t -1.1,
+  1/5 yrs), V2 CL + NG +0.008R (347 trades, PF 1.02, t 0.15; shorts +0.13R t 1.65, longs -0.09R), V3 252-day -0.017R
+  (t -0.5); days 10-12 control +0.013R; placebo p 0.23. Holdout not opened. `analysis/lab_Q017.py`. No follow-ups.
 
 ## Q018 · queued · priority 3
 - who_pays: risk premium: holders of gold through the Asian / London session (less liquid hours) are paid for carrying it; plus Asian physical demand

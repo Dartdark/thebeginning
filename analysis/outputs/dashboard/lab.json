@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-01T21:16-06:00",
+ "updated": "2026-11-02T01:27-06:00",
  "state": "running",
- "studies": 14,
- "today": 5,
+ "studies": 15,
+ "today": 1,
  "cap": 5,
  "looks_quarter": 0,
  "looks_budget": 40,
  "passed_stage": {
-  "1": 8,
+  "1": 9,
   "2": 0,
   "3": 0,
   "4": 0,
@@ -15,12 +15,43 @@
  },
  "queued": 4,
  "blocked": 2,
- "next": "Q017",
+ "next": "Q019",
  "needs_user": [],
  "t_bar": 3.65,
- "n_trials": 380,
+ "n_trials": 382,
  "alive": [],
  "recent": [
+  {
+   "id": "Q017",
+   "title": "MOM-TOM: trend-direction turn-of-month flow in CL/NG/GC/ZN/6E",
+   "market": "CL/NG/GC/ZN/6E",
+   "stage": 1,
+   "verdict": "FAIL",
+   "gate": "stage 1: best t 0.15 < 2.0",
+   "t_design": 0.15,
+   "t_holdout": null,
+   "looks": 0,
+   "tier": "F",
+   "lesson": "no TOM trend flow in day sessions 2018-22; pooled 5 markets -0.04R",
+   "follow_ups": [],
+   "verified": [
+    "stage 1 on 2018-22: 3 pre-registered variants, 860 / 347 / 755 trades, $5 + 1 tick per fill, 0.5 ATR stop, pooled in R",
+    "stage 2 placebo 500 draws on random non-TOM sessions per market, p 0.23; days 10-12 control"
+   ],
+   "not_verified": [
+    "holdout 2023-onward (sealed)",
+    "benches",
+    "checker",
+    "MultiCharts",
+    "roll-adjusted trend signs"
+   ],
+   "risks": [
+    "unadjusted continuous series: rolls inside the 63/252-day window can flip the trend sign",
+    "day-session window only (CTA execution near the close / overnight not covered)"
+   ],
+   "date": "2026-11-02T01:27-06:00",
+   "provenance": "[provenance] code 9a76196 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261030 #da1a47a1; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189"
+  },
   {
    "id": "Q014",
    "title": "GC while the Shanghai Gold Exchange is closed",
