@@ -28,6 +28,9 @@ if ($remoteKill -and -not (Test-Path $latch)) {
     $r = & powershell -NoProfile -ExecutionPolicy Bypass -File "C:\TradingRepo\live\vps\kill.ps1" -Remote -Resume -Why "remote resume"
     Say "remote RESUME applied (exit $LASTEXITCODE): $r"
 } elseif (-not ($fetchOk -and $treeOk)) { Say "kill state UNKNOWN (fetch ok=$fetchOk, tree ok=$treeOk): nothing changed" }
+# every minute: keep KILL in step with its latches (Codex follow-up 2026-11-02 #1: a hand-made or hand-deleted KILL file)
+$r = & powershell -NoProfile -ExecutionPolicy Bypass -File "C:\TradingRepo\live\vps\kill.ps1" -Check
+if ($r) { Say "kill check: $r" }
 $lines = @(git show "origin/${branch}:live/claude_alerts.txt" 2>$null)
 if ($Diag) { Say "fetched; alert lines in repo: $($lines.Count)" }
 if ($lines.Count -eq 0) { Say "no alert file on the branch"; exit 0 }

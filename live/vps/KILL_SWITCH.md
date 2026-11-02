@@ -12,7 +12,9 @@ Three ways to switch it on:
   **RESUME** in the chat switches it off (only a kill made this way).
 - **On the VPS:** `powershell -ExecutionPolicy Bypass -File C:\TradingRepo\live\vps\kill.ps1`
   (off again: same with `-Resume`).
-- **By hand:** create an empty file named `KILL` (no extension) in `C:\TradingLogs`; delete it to resume.
+- **By hand (if PowerShell won't run):** create a file named `KILL` (no extension) in `C:\TradingLogs`. Within a minute the relay
+  adopts it as YOUR (local) kill, so a remote RESUME can't clear it. **Never delete KILL by hand to resume:** the relay puts
+  it back while a latch is set. Resume with `kill.ps1 -Resume` (local) or RESUME to Claude (remote).
 
 Every switch sends an ntfy alert and a line to `C:\TradingLogs\kill_log.txt`.
 
