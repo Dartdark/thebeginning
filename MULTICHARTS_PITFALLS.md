@@ -258,3 +258,8 @@ failed, auto-trading off on all its charts. EOD-trailing accounts still fail on 
   (route_account; empty while auto-trading is off). That column, not column 4, is the routing evidence.
 - EL Collections (`ELC.*`) is NOT installed on the VPS ("Unknown Function", 2026-11-01). To test whether a file exists use
   `DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;` then `GetFileAttributesA(path) <> -1` (compiled on the VPS).
+
+- **Session template 'US Stocks (Regular Trading Hours)' on @NQ ran 09:30-16:00 CENTRAL, not 08:30-15:00 (2026-11-03, VERIFIED from the
+  user's report: first bar closed 09:45 CT, every entry at a bar open; the port on a 09:30-16:00 CT session matched 99.3% of 4,704 entries).
+  Claude recommended that template on a guess. For an NQ RTH chart use a custom session 08:30-15:00 in Exchange time, then check the
+  first bar of the day closes at 08:45 and the last at 15:00 before trusting the report.
