@@ -1,0 +1,12 @@
+[provenance] code 85623af1 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261102 #a2064cc0; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Bridge noise-area NQ 15-min (port analysis/bridge_noise_15m_test.py, RTH chart; trades analysis/outputs/
+
+E. Personal portfolio (19 pieces at 1 micro), + the MC-confirmed noise 15-min (1 MNQ):
+   corr of the current pieces with NBL: VaultBreak +0.40, OvernightBiasML +0.12, MondayLong +0.15, LateDayFlow +0.12, RelativeStrength +0.16, FC2B +0.30, TwinContinuation +0.21, DualThrust +0.21, Kusho +0.24, S47 +0.14, S30 +0.18, PaperTrend +0.25
+   current                  $ 41,475 a year, Sharpe 3.15, max DD $ 6,592, MC p50 $ 40,536, DD p95 $ 7,279, return/DD 9.0, capital $ 36,396
+   + NBL 1                  $ 43,111 a year, Sharpe 3.16, max DD $ 6,761, MC p50 $ 42,074, DD p95 $ 7,428, return/DD 9.3, capital $ 37,138
+   + NBL 2                  $ 44,748 a year, Sharpe 3.15, max DD $ 6,929, MC p50 $ 43,678, DD p95 $ 7,688, return/DD 9.4, capital $ 38,438
+   + NB (both) 1            $ 43,571 a year, Sharpe 3.14, max DD $ 6,908, MC p50 $ 42,463, DD p95 $ 7,705, return/DD 8.9, capital $ 38,526
+   VaultBreak -> NBL 1      $ 41,388 a year, Sharpe 3.17, max DD $ 6,996, MC p50 $ 40,299, DD p95 $ 7,202, return/DD 9.2, capital $ 36,012
+   DualThrust -> NBL 1      $ 40,689 a year, Sharpe 3.11, max DD $ 6,577, MC p50 $ 39,719, DD p95 $ 7,346, return/DD 8.7, capital $ 36,729
+   SwingTarget -> NBL 1     $ 41,180 a year, Sharpe 3.09, max DD $ 6,408, MC p50 $ 40,183, DD p95 $ 7,312, return/DD 8.9, capital $ 36,561
