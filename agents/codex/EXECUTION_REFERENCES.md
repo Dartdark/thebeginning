@@ -1550,3 +1550,24 @@ method/data/result sections of the university manuscript; not a full-paper revie
   historical trading rule. No measured forecast advantage, fill improvement or economic verification is claimed.
 - Next check for any separately justified future hypothesis: freeze causal estimation and native clocks/costs before
   returns; do not use plots, full-sample signs or missing-data interpolation as historical entry information.
+
+### E09/E11/E19 follow-up — Revised15-minute Globex noise-band code
+
+[Completed design review](results/noise15_20261103.md), user upload2026-11-03. Two frozen candidates fail design;
+no validation/account advancement or live/platform change.
+- Verified source arithmetic: SetStopContract and actual BigPointValue preserve50/25point distances on NQ/MNQ.
+  This supersedes the older CODE.txt's unchanged-input micro-conversion concern for this revised source only.
+  Default2NQstill risks$2,000nominally before costs/gaps; the counter is not an account loss cap.
+- User confirms full Globex. Calendar-date reset therefore uses the midnight-area chart bar, rather than an
+  explicit08:30or17:00open. EMA and historical slot inputs also depend on complete chart-session observations.
+  Fifteen-minute alignment supplies one update per slot/date; the older five-minute sampling concern is not
+  asserted for this supplied configuration. Slot23at14:30does not disable the separate flat branch.
+- Reproduction evidence: prearmed fill-anchored brackets, next-chart-bar orders, stop gaps and target trade-through
+  modeled with repository execution helpers. Literal has3cross-date and5combined late/cross-date closed-trade flags;
+  protected has0. Holding gaps and partial feature histories remain explicit, not repaired or treated as certain fills.
+- Accounting: two reconciliation stops preserved; complete-trade/date aggregation and repeated-date handling fixed
+  before same-rule reruns. Original literal trade fields match all attempts. Six synthetic checks and trade/day/cost
+  conservation pass; this is not independent native-platform verification or measured execution savings.
+- Next check only for a separately justified later task: complete matching source chart/report and dated native
+  quote/roll/fill evidence. Current statistical/data gates already reject advancement; do not turn gaps into a
+  recurring data request, optimization or automatic rerun. No allocation follows from this reference.

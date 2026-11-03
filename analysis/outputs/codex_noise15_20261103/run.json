@@ -1,0 +1,57 @@
+{
+  "status": "design_reject",
+  "source_rule_unchanged": true,
+  "original_preregistration": "3780dde0970c4c7a71477d752f056cdf87aa4b3e",
+  "accounting_amendments": [
+    "ebf69a0be42c078085fd2b8fa4f2d89c8d9ae24a",
+    "84a753e3213d9e55e3f975e8d89a8b9634606fc9"
+  ],
+  "completed_command": "python analysis/codex_noise15_20261103.py design --commit 84a753e3213d9e55e3f975e8d89a8b9634606fc9",
+  "economic_definitions_executed": [
+    "N15_LITERAL_GLOBEX",
+    "N15_PROTECTED_GLOBEX"
+  ],
+  "literal_engine_executions": 3,
+  "protected_engine_executions": 1,
+  "stopped_attempts": [
+    "attempt1/receipt.json",
+    "attempt2/receipt.json"
+  ],
+  "same_trade_checks": {
+    "attempt1": "All original literal trade fields equal completed execution.",
+    "attempt2": "All original literal trade fields equal completed execution."
+  },
+  "controls_not_executed": [
+    "N15_RANDOM_SIDE",
+    "N15_RANDOM_TIME",
+    "N15_RANDOM_DROP"
+  ],
+  "historical_validation_executed": false,
+  "independent_review": "pending",
+  "account_comparisons_executed": false,
+  "homes": {
+    "50K evaluation": "No advancement: design gates failed; no measured BASE/ADD/REPLACE/EMPTY comparison.",
+    "150K evaluation": "No advancement: design gates failed; no measured BASE/ADD/REPLACE/EMPTY comparison.",
+    "50K funded": "No advancement: design gates failed; no measured BASE/ADD/REPLACE/EMPTY comparison.",
+    "150K funded": "No advancement: design gates failed; no measured BASE/ADD/REPLACE/EMPTY comparison.",
+    "personal ladder/full portfolio": "No advancement: design gates failed; no measured BASE/ADD/REPLACE/EMPTY comparison."
+  },
+  "scout_budget_unchanged": {
+    "hypotheses": 4,
+    "economic_definitions": 10
+  },
+  "metrics_supplement": {
+    "literal_globex": {
+      "known_ranked_plus_new_minimum": 358,
+      "multiplicity_t_lower_bound": 3.6337517743508996,
+      "per_trade_dsr_lower_bound_trials": 0.17316127724932157,
+      "complete_trades_with_tainted_history": 831
+    },
+    "protected_globex": {
+      "known_ranked_plus_new_minimum": 358,
+      "multiplicity_t_lower_bound": 3.6337517743508996,
+      "per_trade_dsr_lower_bound_trials": 0.13914798995033867,
+      "complete_trades_with_tainted_history": 825
+    }
+  }
+}
