@@ -46,7 +46,7 @@ def ema(x, n):
 
 
 def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, longs=True, shorts=True, last_entry=1400,
-        count=True):
+        count=True, through=0.0):
     if count: NTRIAL["n"] += 1
     tp = sl * rr
     row, t, O, H, L, C, J = (S[k].to_numpy() for k in ("row", "t", "o", "h", "l", "c", "j"))
@@ -85,7 +85,7 @@ def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, lo
                 stp, tgt = e - pos * sl, e + pos * tp
                 if (g.l[r, m] <= stp) if pos > 0 else (g.h[r, m] >= stp):
                     close_trade((min(g.o[r, m], stp) if pos > 0 else max(g.o[r, m], stp)) - pos * TICK, "stop", k); break
-                if (g.h[r, m] >= tgt) if pos > 0 else (g.l[r, m] <= tgt):
+                if (g.h[r, m] >= tgt + through) if pos > 0 else (g.l[r, m] <= tgt - through):
                     close_trade(tgt, "target", k); break
         # ---- bar k closes: the signal code ----
         tt = t[k]
@@ -187,8 +187,13 @@ if __name__ == "__main__":
     print("\n2. Variants (same family checks as the 30-min test), RTH chart:")
     V = {"no target (stop 50 only)": dict(rr=100.0), "target 50 / stop 50": dict(rr=1.0), "target 100 / stop 50": dict(rr=2.0),
          "no stop, no target (paper exits)": dict(sl=1e6, rr=1.0), "longs only": dict(shorts=False), "shorts only": dict(longs=False),
-         "lookback 14 (paper)": dict(look=14), "1 entry a day": dict(maxtr=1)}
+         "lookback 14 (paper)": dict(look=14), "1 entry a day": dict(maxtr=1),
+         "target fills only 1 tick THROUGH (no touch fills)": dict(through=TICK), "target 1 tick through, longs only": dict(through=TICK, shorts=False)}
     for nm, kw in V.items(): print(line(run(S["rth"], **kw), nm))
+    for s_ in ("rth",):
+        for th, nm in ((0.0, "touch"), (TICK, "1 tick through")):
+            T2 = run(S[s_], through=th).copy(); T2["net"] -= np.where(T2.kind == "target", 1, 2) * TICK * PV
+            print(line(T2, f"+1 more tick per market/stop fill, target {nm}"))
     for s in ("rth", "24h"):
         pl = placebo(base[s], None)
         x = base[s][base[s].date >= "2018"].net
