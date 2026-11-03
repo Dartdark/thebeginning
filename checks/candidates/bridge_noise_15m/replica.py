@@ -37,7 +37,7 @@ def load():
 
 def run(lookback=20, mult=1.0, ema_len=20, stop_pts=50.0, rr=0.5, long_on=True, short_on=True,
         max_trades=10, max_stops=3, slip=TICK, comm=COMM, shift_band=False, collect_fills=False, through=False,
-        skip_dates=None, band_lag=0):
+        skip_dates=None, band_lag=0, random_entry=None):
     G = load(); g, b, rows, I = G["g"], G["b"], G["rows"], G["I"]
     tgt_pts = stop_pts * rr
     alpha = 2.0 / (ema_len + 1)
@@ -126,7 +126,11 @@ def run(lookback=20, mult=1.0, ema_len=20, stop_pts=50.0, rr=0.5, long_on=True, 
                         if hhmm < 1430:
                             if pos == 0 and trades_today < max_trades and stops_today < max_stops and hhmm <= 1400 \
                                     and not (skip_dates is not None and g.dates[r] in skip_dates):
-                                if long_on and c[ii] > ub and c[ii] > o[ii]:
+                                if random_entry is not None:      # placebo A: coin-flip entry, same exits
+                                    if random_entry[0].random() < random_entry[1]:
+                                        acts = ["long" if (not short_on or random_entry[0].random() < 0.5) else "short"]
+                                        trades_today += 1
+                                elif long_on and c[ii] > ub and c[ii] > o[ii]:
                                     acts = ["long"]; trades_today += 1
                                 elif short_on and c[ii] < lb and c[ii] < o[ii]:
                                     acts = ["short"]; trades_today += 1
