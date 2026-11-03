@@ -37,7 +37,7 @@ def load():
 
 def run(lookback=20, mult=1.0, ema_len=20, stop_pts=50.0, rr=0.5, long_on=True, short_on=True,
         max_trades=10, max_stops=3, slip=TICK, comm=COMM, shift_band=False, collect_fills=False, through=False,
-        skip_dates=None, band_lag=0, random_entry=None):
+        skip_dates=None, band_lag=0, random_entry=None, delay_bars=0, delay_min=0):
     G = load(); g, b, rows, I = G["g"], G["b"], G["rows"], G["I"]
     tgt_pts = stop_pts * rr
     alpha = 2.0 / (ema_len + 1)
@@ -52,6 +52,7 @@ def run(lookback=20, mult=1.0, ema_len=20, stop_pts=50.0, rr=0.5, long_on=True, 
         idx = np.where(ok)[0]
         today_open = None; trades_today = 0; stops_today = 0
         pos = 0; entry = None; entry_t = None; stop = tgt = None
+        carry = None; pending_delayed = False
         pending = None          # list of actions at next bar open: ('exit',) / ('long',) / ('short',)
         closed_since = []       # trades closed since last bar-close check
         day = pd.Timestamp(str(g.dates[r]))
@@ -60,6 +61,14 @@ def run(lookback=20, mult=1.0, ema_len=20, stop_pts=50.0, rr=0.5, long_on=True, 
             tmin = bi * 15                 # close time in minutes
             hhmm = (tmin // 60) * 100 + tmin % 60
             # ---- fill pending market orders at this bar's open
+            entry_j = tmin - 14
+            if carry:                       # entry delayed by whole bars (stress test)
+                pending = (pending or []) + carry; carry = None; pending_delayed = True
+            if pending and delay_bars and any(a in ("long", "short") for a in pending) and not pending_delayed:
+                carry = [a for a in pending if a in ("long", "short")]
+                pending = [a for a in pending if a not in ("long", "short")]
+                if delay_bars > 1: raise NotImplementedError
+            pending_delayed = False
             if pending:
                 px = o[ii]
                 for act in pending:
@@ -74,13 +83,17 @@ def run(lookback=20, mult=1.0, ema_len=20, stop_pts=50.0, rr=0.5, long_on=True, 
                             trades.append(_tr(day, pos, entry, xp, "reversal", comm, entry_t, day + pd.Timedelta(minutes=int(tmin))))
                             closed_since.append(trades[-1]); pos = 0
                         if pos == 0:
+                            if delay_min:
+                                entry_j = tmin - 14 + delay_min
+                                while np.isnan(g.o[r, entry_j]) and entry_j < tmin: entry_j += 1
+                                px = g.o[r, entry_j]
                             pos = sd; entry = px + slip * sd
                             entry_t = day + pd.Timedelta(minutes=int(tmin))
                             stop = entry - stop_pts * sd; tgt = entry + tgt_pts * sd
                 pending = None
             # ---- stop / target on the 1-minute path inside this bar
             if pos != 0:
-                for j in range(tmin - 14, tmin + 1):
+                for j in range(entry_j, tmin + 1):
                     mo, mh, ml = g.o[r, j], g.h[r, j], g.l[r, j]
                     if np.isnan(mo):
                         continue
