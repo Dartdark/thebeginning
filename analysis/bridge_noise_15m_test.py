@@ -52,30 +52,30 @@ def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, lo
     row, t, O, H, L, C, J = (S[k].to_numpy() for k in ("row", "t", "o", "h", "l", "c", "j"))
     E = ema(C, emalen)
     hist = [[] for _ in range(23)]
-    rows = []; pos = 0; e = 0.0; t_in = None; pend = None
+    rows = []; pos = 0; e = 0.0; t_in = None; j_in = 0; pend = None
     today_open = prev_close = 0.0; trades = stops = 0; flagged = 0
     n = len(S)
 
-    def close_trade(px, kind, k):
+    def close_trade(px, kind, k, jx):
         nonlocal pos, stops
         pts = (px - e) * pos
         if pts <= -sl: stops += 1
-        rows.append((g.ts[row[k]], pos, e, px, kind, t_in, t[k]))
+        rows.append((g.ts[row[k]], pos, e, px, kind, t_in, t[k], row[k], j_in, jx))
         pos = 0
 
     for k in range(n):
         newday = k == 0 or row[k] != row[k - 1]
         if newday:
             if pos != 0:                                             # no 14:30 bar yesterday: the code would hold it
-                flagged += 1; close_trade(C[k - 1] - pos * TICK, "held past session (closed at last bar)", k - 1)
+                flagged += 1; close_trade(C[k - 1] - pos * TICK, "held past session (closed at last bar)", k - 1, J[k - 1])
             pend = None
             today_open = O[k]; prev_close = C[k - 1] if k > 0 else 0.0; trades = stops = 0
         # ---- bar k opens: the pending market order fills at its open ----
         if pend is not None:
             if pend[0] in ("out", "rev") and pos != 0:
-                close_trade(O[k] - pos * TICK, pend[2], k)
+                close_trade(O[k] - pos * TICK, pend[2], k, J[k] - 14)
             if pend[0] in ("in", "rev") and pend[1] != 0:
-                pos = pend[1]; e = O[k] + pos * TICK; t_in = t[k]
+                pos = pend[1]; e = O[k] + pos * TICK; t_in = t[k]; j_in = J[k] - 14
             pend = None
         # ---- stop / target inside bar k, 1-minute path ----
         if pos != 0:
@@ -84,9 +84,9 @@ def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, lo
                 if np.isnan(g.c[r, m]): continue
                 stp, tgt = e - pos * sl, e + pos * tp
                 if (g.l[r, m] <= stp) if pos > 0 else (g.h[r, m] >= stp):
-                    close_trade((min(g.o[r, m], stp) if pos > 0 else max(g.o[r, m], stp)) - pos * TICK, "stop", k); break
+                    close_trade((min(g.o[r, m], stp) if pos > 0 else max(g.o[r, m], stp)) - pos * TICK, "stop", k, m); break
                 if (g.h[r, m] >= tgt + through) if pos > 0 else (g.l[r, m] <= tgt - through):
-                    close_trade(tgt, "target", k); break
+                    close_trade(tgt, "target", k, m); break
         # ---- bar k closes: the signal code ----
         tt = t[k]
         if 900 <= tt <= 1430 and today_open > 0 and prev_close > 0:
@@ -118,7 +118,7 @@ def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, lo
                 if len(hs) > 100: hs.pop(0)
         if tt == 1430 and pos != 0:
             pend = ("out", 0, "flat 14:30")
-    T = pd.DataFrame(rows, columns=["date", "side", "entry", "exit", "kind", "t0", "t1"])
+    T = pd.DataFrame(rows, columns=["date", "side", "entry", "exit", "kind", "t0", "t1", "row", "j0", "j1"])
     T["date"] = pd.to_datetime(T.date)
     T["net"] = (T.exit - T.entry) * T.side * PV - COMM
     T.attrs["flagged"] = flagged
