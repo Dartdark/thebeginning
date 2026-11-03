@@ -36,7 +36,8 @@ def load():
 
 
 def run(lookback=20, mult=1.0, ema_len=20, stop_pts=50.0, rr=0.5, long_on=True, short_on=True,
-        max_trades=10, max_stops=3, slip=TICK, comm=COMM, shift_band=False, collect_fills=False):
+        max_trades=10, max_stops=3, slip=TICK, comm=COMM, shift_band=False, collect_fills=False, through=False,
+        skip_dates=None, band_lag=0):
     G = load(); g, b, rows, I = G["g"], G["b"], G["rows"], G["I"]
     tgt_pts = stop_pts * rr
     alpha = 2.0 / (ema_len + 1)
@@ -86,14 +87,14 @@ def run(lookback=20, mult=1.0, ema_len=20, stop_pts=50.0, rr=0.5, long_on=True, 
                     if pos == 1:
                         if ml <= stop:
                             xp = min(stop, mo) - slip; kind = "stop"
-                        elif mh >= tgt:
+                        elif mh >= tgt + (TICK if through else 0):
                             xp = tgt; kind = "target"
                         else:
                             continue
                     else:
                         if mh >= stop:
                             xp = max(stop, mo) + slip; kind = "stop"
-                        elif ml <= tgt:
+                        elif ml <= tgt - (TICK if through else 0):
                             xp = tgt; kind = "target"
                         else:
                             continue
@@ -115,15 +116,16 @@ def run(lookback=20, mult=1.0, ema_len=20, stop_pts=50.0, rr=0.5, long_on=True, 
                 if 1 <= slot <= 22:
                     move = abs(c[ii] / today_open - 1)
                     H = hist[slot]
-                    if len(H) >= lookback:
-                        avg = np.mean(H[-lookback:])
+                    if len(H) >= lookback + band_lag:
+                        avg = np.mean(H[len(H) - lookback - band_lag:len(H) - band_lag])
                         ub = max(today_open, pc) * (1 + avg * mult)
                         lb = min(today_open, pc) * (1 - avg * mult)
                         ltr = max(ub, ema); st = min(lb, ema)
                         last_bar = (k == len(idx) - 1)
                         acts = []
                         if hhmm < 1430:
-                            if pos == 0 and trades_today < max_trades and stops_today < max_stops and hhmm <= 1400:
+                            if pos == 0 and trades_today < max_trades and stops_today < max_stops and hhmm <= 1400 \
+                                    and not (skip_dates is not None and g.dates[r] in skip_dates):
                                 if long_on and c[ii] > ub and c[ii] > o[ii]:
                                     acts = ["long"]; trades_today += 1
                                 elif short_on and c[ii] < lb and c[ii] < o[ii]:
@@ -146,11 +148,8 @@ def run(lookback=20, mult=1.0, ema_len=20, stop_pts=50.0, rr=0.5, long_on=True, 
                             if last_bar and any(a in ("long", "short") for a in acts) and pos == 0:
                                 skipped_last_bar += 1
                             pending = acts
-                    if not shift_band:
-                        H.append(move)
-                    else:
-                        H.append(move)   # placeholder (leak test below uses run_leak)
-                    if len(H) > 100:
+                    H.append(move)                     # stored AFTER today's decision (no look-ahead)
+                    if len(H) > 100 + band_lag:
                         del H[0]
             if hhmm == 1430 and pos != 0:
                 pending = ["exit"]
@@ -196,7 +195,8 @@ if __name__ == "__main__":
         rows = []
         for kw in [dict(), dict(lookback=14), dict(lookback=30), dict(ema_len=10), dict(ema_len=40),
                    dict(stop_pts=40, rr=0.5), dict(stop_pts=60, rr=0.5), dict(mult=0.8), dict(mult=1.2),
-                   dict(stop_pts=50, rr=1.0), dict(slip=0.5)]:
+                   dict(stop_pts=50, rr=1.0), dict(slip=0.5), dict(through=True), dict(through=True, slip=0.5),
+                   dict(band_lag=1), dict(max_stops=99), dict(max_trades=1)]:
             T = run(short_on=False, **kw)
             rows.append(summ(T, str(kw) or "base"))
         print(pd.DataFrame(rows).to_string(index=False))
