@@ -1,0 +1,38 @@
+{
+  "preregistration_commit": "3780dde0970c4c7a71477d752f056cdf87aa4b3e",
+  "command": "python analysis/codex_noise15_20261103.py design --commit 3780dde0970c4c7a71477d752f056cdf87aa4b3e",
+  "status": "accounting_assertion_stopped",
+  "error": "closed.sum() != known.net_nq.sum(): complete trades on days also containing unknown-path trades were excluded from the daily index but kept in trade totals.",
+  "executed_definitions": [
+    "N15_LITERAL_GLOBEX"
+  ],
+  "protected_executed": false,
+  "files": [
+    {
+      "file": "literal_globex_years.csv",
+      "sha256": "ddc37e587f01a14d4f0dd0c0203d1e6c7e53cec25a8a3dfdefa7d4459b4100e1",
+      "bytes": 1291
+    },
+    {
+      "file": "literal_globex_trades.csv",
+      "sha256": "363d8f092ba4fec489ca1a18219a6353dfe2c4c95be70d8957e6808627c67f04",
+      "bytes": 524868
+    },
+    {
+      "file": "design_data_audit.csv",
+      "sha256": "70f68ea3a1dc941003e5e123313c7fe1228d1407d12be6a6b3b692480b2abf8e",
+      "bytes": 84602
+    },
+    {
+      "file": "literal_globex_marks.csv",
+      "sha256": "1df96f00e4a022867eeeab8482b71e01986d0f0c7d5577a88ee56ba74509d769",
+      "bytes": 35991
+    },
+    {
+      "file": "literal_globex_metrics.csv",
+      "sha256": "d028e1da922821022bc7865d293ad56b29fa2a05311d3cff1c27ae6b3f7216af",
+      "bytes": 774
+    }
+  ],
+  "economic_rules_or_fills_changed": false
+}

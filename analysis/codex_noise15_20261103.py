@@ -251,6 +251,10 @@ def design(commit):
                     'unknown_held_minutes','entry_delay_minutes','tainted_history_samples']:t[col]=t[col].astype(int)
         t['entry_date']=dates[t.entry_flat.to_numpy()//1440].to_numpy()
         t['exit_date']=dates[t.exit_flat.to_numpy()//1440].to_numpy()
+        # Closed weekend exits belong to the following weekday report. This
+        # changes booking only, never a price, entry decision or exit fill.
+        rd=pd.DatetimeIndex(t.exit_date)
+        t['report_date']=rd+pd.to_timedelta(np.where(rd.dayofweek==6,1,np.where(rd.dayofweek==5,2,0)),unit='D')
         t['entry_j']=t.entry_flat%1440;t['exit_j']=t.exit_flat%1440
         t['cross_date']=t.entry_date!=t.exit_date
         t['path_known']=(t.unknown_held_minutes==0)&(t.entry_delay_minutes==0)
@@ -260,7 +264,7 @@ def design(commit):
         # Completed-trade outcomes with unknown paths remain explicitly unknown.
         known=t[t.path_known].copy()
         day_bad=set(pd.DatetimeIndex(t.loc[~t.path_known,'entry_date']))|set(pd.DatetimeIndex(t.loc[~t.path_known,'exit_date']))
-        valid_days=trading[~trading.isin(list(day_bad))]
+        valid_days=trading.union(pd.DatetimeIndex(known.report_date)).sort_values()
         # Calendar-date marked equity, sampled at that date's actual final chart
         # close; NOT a broker EOD mark or an executable closing fill.
         fullmarks=pd.Series(marks,index=dates)
@@ -273,11 +277,13 @@ def design(commit):
         active=active[np.isfinite(active)&(~active.index.isin(list(day_bad)))]
         # All ordinary intraday days coincide with closed-trade accounting;
         # retain separate closed-trade daily results for audit of carry trades.
-        closed=known.groupby('exit_date').net_nq.sum().reindex(valid_days,fill_value=0.)
+        # Conditional COMPLETE-TRADE contribution, not a full-strategy daily
+        # return when another trade on the same date has an unknown path.
+        closed=known.groupby('report_date').net_nq.sum().reindex(valid_days,fill_value=0.)
         sides=[]
         for side,label in [(0,'both'),(1,'long'),(-1,'short')]:
             tt=known if side==0 else known[known.side==side]
-            dd=tt.groupby('exit_date').net_nq.sum().reindex(valid_days,fill_value=0.)
+            dd=tt.groupby('report_date').net_nq.sum().reindex(valid_days,fill_value=0.)
             rr=metric(dd,tt.net_nq);rr['side']=label;sides.append(rr)
         pd.DataFrame(sides).to_csv(OUT/(model+'_metrics.csv'),index=False)
         years=[]
