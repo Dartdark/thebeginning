@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "doi:10.1007/s11408-021-00380-w",
+  "ssrn_id": null,
+  "title": "Gold and oil prices: abnormal returns, momentum and contrarian effects",
+  "url": "https://link.springer.com/article/10.1007/s11408-021-00380-w",
+  "verdict": "dont_test",
+  "full_text_read": false,
+  "summary": "Source gate only, not full appendix review; don't relabel ex-post abnormal-day averages as an entry signal.",
+  "report_path": "agents/codex/results/scout_owned_source_20261103.md",
+  "about": "Hourly timing around unusually large daily gold/oil moves.",
+  "findings": "Authors report same-day continuation and next-day differences; their simulations omit costs.",
+  "mechanism": "Proposed under/overreaction; no causal, net native-futures edge verified.",
+  "build_on": "Selected timings use MetaQuotes GMT+3 data; full-sample labels/calibration and unclear rolling n block faithful translation.",
+  "can_strategy_code_be_made": "Not faithfully as specified. Do not silently repair the printed negative-threshold sign or infer a rolling window.",
+  "evidence_level": "selected_primary_sections",
+  "source_version": "Published2021-04-05; DOI10.1007/s11408-021-00380-w; primary HTML methods/results",
+  "economic_family": "commodity-abnormal-day-timing",
+  "new_economic_trials": 0,
+  "updated_at": "2026-11-03T19:02:44+00:00",
+  "reading_scope": "Selected primary sections only; not a completed full-paper/appendix review.",
+  "return_eligibility": "NOT_TEST",
+  "independent_economic_verification": "not_performed",
+  "notification": {
+    "actionable": false,
+    "key_created": false
+  },
+  "authors": [
+    "Guglielmo Maria Caporale",
+    "Alex Plastun"
+  ],
+  "access_receipt": "agents/codex/inputs/scout_20261103/access.json"
+}

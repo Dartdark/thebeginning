@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "observed_on": "2026-11-03",
+  "exported_at": "2026-11-03T19:02:44+00:00",
+  "source_contract": "No original full-paper bytes or full-review certificate obtained. Reader/excerpt scope is recorded separately.",
+  "access_route": "Connected public search/reader fallback",
+  "network": {
+    "shell_fetch_command": "git fetch origin refs/heads/codex/work:refs/remotes/origin/codex/work",
+    "shell_fetch_outcome": "Failed to connect to configured proxy port8080 at task start.",
+    "github_ref_checked": "29fd25ac8fabcf39c2d9e3014cae5bf1a7041da1",
+    "crossref": "Not queried through shell; not on enforced desired-domain list. Connected search used.",
+    "policy_bypass": false,
+    "credential_inspection": false
+  },
+  "sources": [
+    {
+      "ids": [
+        "4892666"
+      ],
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4892666",
+      "method": "connected reader open",
+      "status": "403",
+      "scope": "indexed abstract only; no full source",
+      "fallback": "Institutional seminar2024-12-04 at https://en.saif.sjtu.edu.cn/faculty-research/seminars/442.html provided no manuscript. Bounded title/author search returned listings."
+    },
+    {
+      "ids": [
+        "3314221"
+      ],
+      "url": "https://www.sciencedirect.com/science/article/pii/S0304405X21000350",
+      "method": "connected reader open and find in one call before denial known",
+      "status": "403",
+      "scope": "indexed primary abstract/preview only",
+      "fallback": "Author institutional CV confirms title/publication; no matching full text obtained."
+    },
+    {
+      "ids": [
+        "1108050"
+      ],
+      "url": "https://business.columbia.edu/sites/default/files-efs/pubfiles/3200/investor_inattention.pdf",
+      "method": "connected primary PDF reader",
+      "status": "readable",
+      "version": "ManagementScience2012,58(2),336–350;15pages",
+      "scope": "Selected introduction, methods/results, Table2 discussion and later sections; not complete full-paper/appendix reading",
+      "key_locations": [
+        "printed341–344: original releases, Bloomberg expectations, holdings and costs",
+        "Table2 discussion: three-day65bp author estimate"
+      ],
+      "source_bytes_obtained": false
+    },
+    {
+      "ids": [
+        "2449315"
+      ],
+      "url": "https://www.carloalberto.org/wp-content/uploads/2018/11/Liquidityprovision-Luxembourg2.pdf",
+      "method": "connected primary conference PDF reader",
+      "status": "readable",
+      "version": "2018-08-08,59pages; later2019SSRN61pages not parity-verified",
+      "scope": "Selected pp6–14, Table4 and related time-series table excerpts; not full-paper/appendix reading",
+      "source_bytes_obtained": false
+    },
+    {
+      "ids": [
+        "3881922"
+      ],
+      "url": "https://acfr.aut.ac.nz/__data/assets/pdf_file/0006/530781/P3.pdf",
+      "method": "connected institutional conference PDF reader",
+      "status": "readable",
+      "version": "2021-07-14,48pages;2023publication parity unknown",
+      "scope": "Abstract and selected introduction pp1–4 only",
+      "source_bytes_obtained": false
+    },
+    {
+      "ids": [
+        "4882538"
+      ],
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/fut.70098",
+      "method": "connected publisher HTML reader",
+      "status": "readable",
+      "version": "first published2026-03-12",
+      "scope": "Abstract/introduction only",
+      "source_bytes_obtained": false
+    },
+    {
+      "ids": [
+        "doi_s11408_2021_00380_w"
+      ],
+      "url": "https://link.springer.com/article/10.1007/s11408-021-00380-w",
+      "method": "connected publisher HTML reader",
+      "status": "readable",
+      "version": "published2021-04-05",
+      "scope": "Selected methods/results; equations2–6, simulation definitions and source clock; linked tables/supplement not fully inspected",
+      "source_bytes_obtained": false
+    },
+    {
+      "ids": [
+        "doi_econmod_2023_106214"
+      ],
+      "url": "https://www.sciencedirect.com/science/article/pii/S0264999323000263",
+      "method": "connected reader open",
+      "status": "403",
+      "scope": "indexed primary preview only",
+      "fallback": "Bounded title/author searches found no authenticated full source; ResearchGate listing requires author request. No request sent."
+    },
+    {
+      "ids": [
+        "3315135"
+      ],
+      "url": "https://research-repository.uwa.edu.au/en/publications/the-effect-of-treasury-auctions-on-10-year-treasury-note-futures/",
+      "method": "connected institutional and publisher readers",
+      "status": "abstract_only",
+      "version": "published2021; online2020-03-24",
+      "scope": "Institutional/publisher abstracts, bibliographic links; no primary full manuscript",
+      "publisher_url": "https://onlinelibrary.wiley.com/doi/10.1111/acfi.12635",
+      "excluded_route": "Unattributed assets.super.so search hit was not treated as an authenticated author copy."
+    },
+    {
+      "ids": [
+        "3474459",
+        "7543402",
+        "7177744",
+        "7217599"
+      ],
+      "method": "connected indexed primary SSRN metadata",
+      "status": "metadata_only",
+      "scope": "abstracts only; full source not acquired",
+      "source_bytes_obtained": false
+    }
+  ],
+  "free_input_checks": [
+    {
+      "lead": "1108050",
+      "urls": [
+        "https://www.metatrader.com/en/economic-calendar/united-states/leading-economic-index?page=6",
+        "https://assets.realclear.com/files/2018/02/820_Preview.pdf"
+      ],
+      "scope": "One dated public history versus contemporary survey example",
+      "result": "For2018-02-22,0.5%and0.6%forecasts respectively; not certified as source Bloomberg median, no complete design panel acquired."
+    },
+    {
+      "lead": "2449315",
+      "owned_inventory": "agents/codex/inputs/scout_20261103/position_inventory.json",
+      "scope": "Five owned legacy archives, market-code schema/date coverage; no signals or returns",
+      "result": "783rows,261perCL/GC/NG; no duplicate dates or invalid selected numeric cells.2022aliases resolve by stable CFTC code; no public-release/receipt columns."
+    },
+    {
+      "lead": "2449315",
+      "urls": [
+        "https://www.cftc.gov/MarketReports/CommitmentsofTraders/ReleaseSchedule/index.htm",
+        "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm",
+        "https://www.cftc.gov/PressRoom/PressReleases/7864-19"
+      ],
+      "scope": "Current indexed normal schedule plus primary historical holiday/shutdown notice; no full release-vintage panel",
+      "result": "2018Christmas/NewYear use Monday observations.2019-01-29notice planned2018-12-24positions for2019-02-01; not verified actual receipt. No universal Tuesday+3days assumption."
+    }
+  ],
+  "artifact_engineering_receipt": {
+    "initial_query_export": "Oversized shell argument rejected before process creation; recovered with apply_patch.",
+    "initial_position_inventory": "Name-only lookup undercounted2022CL/NG after label changes; fixed to established CFTC market codes before final artifact.",
+    "return_work_in_either_attempt": false
+  },
+  "backtests_run": false,
+  "full_reviews_completed": 0
+}

@@ -624,3 +624,28 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   and its exact owned-field map; no invented CTA positions or trend window. Primary403, bounded author/institution
   search found no authenticated full copy; parked and move on. [Data/source D49](agents/codex/DATA_NEEDED.md#2026-11-02-source-watches),
   [record](agents/codex/research/scout/records/2515900.json), [report](agents/codex/results/scout_owned_source_followon_20261102.md).
+
+- [ ] **Post-publication commercial-position liquidity spread — conditional WATCH / NEEDS DATA (2026-11-03), SSRN2449315.**
+  Merit: the2018primary manuscript's Table4 reports29bp top-minus-bottom on days5–10after Tuesday formation
+  (t3.73), after its public-information boundary. This is an unreplicated26-market spread, not verified CL alpha.
+  Merge the related3881922robustness paper and2023HPM source watch (DOI10.1016/j.econmod.2023.106214) here;
+  do not count new titles as separate trials. Prior2311859/4534852clock cautions and failed Williams COT-index
+  tests remain history. Owned legacy archives contain783CL/GC/NG position-date rows, not the native26-market
+  portfolio, original released vintages or source roll legs. Smallest next check only with genuinely new matching
+  evidence: reconcile one source-specific public-release/formation/dated-contract roll week, retaining holidays,
+  shutdown catch-up and initial-versus-revised data; then assess the full design panel and native costs before
+  any bounded preregistration. No three-market substitute, Tuesday look-ahead or Apex intraday port. Park and
+  continue other discovery. [D50](agents/codex/DATA_NEEDED.md#2026-11-03-conditional-positioning-and-lei-watches),
+  [record](agents/codex/research/scout/records/2449315.json), [source checkpoint](agents/codex/results/scout_owned_source_20261103.md).
+
+- [ ] **LEI stale-information post-release reversal — conditional personal WATCH / NEEDS DATA (2026-11-03), SSRN1108050.**
+  Merit: authors report a transient ES response to publicly reconstructable information and65bp gross over the
+  complete three-day trade, not independently verified profit. The source's10:05ETpost-release reversal lasts
+  through next-day close; no Apex-compatible adaptation is supplied. Need original LEI releases, exact Bloomberg
+  consensus/receipt vintages, overlap calendar and native ES paths/rolls/costs. A bounded free check found public
+  forecasts but no faithful consensus panel: February22,2018MetaTrader0.5%versus contemporary ActionEconomics0.6%.
+  Smallest later check with new matching inputs: authenticate one surprise's available-at sign and source-leg
+  timing, then inspect complete2018–22coverage/power before reserving a test. No hindsight pre-release sign,
+  price-sign substitute, shortened hold or repeated vendor crawl. Park and move on.
+  [D51](agents/codex/DATA_NEEDED.md#2026-11-03-conditional-positioning-and-lei-watches),
+  [record](agents/codex/research/scout/records/1108050.json), [source checkpoint](agents/codex/results/scout_owned_source_20261103.md).

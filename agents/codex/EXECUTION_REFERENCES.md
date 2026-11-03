@@ -1571,3 +1571,37 @@ no validation/account advancement or live/platform change.
 - Next check only for a separately justified later task: complete matching source chart/report and dated native
   quote/roll/fill evidence. Current statistical/data gates already reject advancement; do not turn gaps into a
   recurring data request, optimization or automatic rerun. No allocation follows from this reference.
+
+### E11/E44 follow-up — Public positioning, revisions and forecast vintages
+
+[November3 scout checkpoint](results/scout_owned_source_20261103.md); selected primary sections/metadata only,
+not a full-paper or return reproduction. Related sources: Kang/Rouwenhorst/Tang SSRN2449315, Maréchal3881922,
+Gilbert et al.1108050 and Höllmann4882538. Merge with existing COT/event-clock references; no execution policy changes.
+- Use: keep position observation, public release, revision, local receipt and first executable fill separate.
+  Source2449315's days1–4and5–40distinction does not make all Tuesday-based regressions tradable at Tuesday close.
+  Its post-publication portfolio remains an unverified26-market construction, not a three-market outright return.
+- Owned-input check:783CL/GC/NG position-date rows across five legacy annual ZIPs, no duplicate dates or invalid
+  selected numerical cells; stable market codes preserve2022name changes. Schema coverage is not released-vintage
+  or native futures roll/quote evidence. Legacy aggregates do not identify operational/swap-dealer groups or orders.
+- Free source check: [CFTC historical notices](https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm)
+  and [2019catch-up notice](https://www.cftc.gov/PressRoom/PressReleases/7864-19) show holiday Monday observations
+  and shutdown delays. The latter planned February1publication of December24,2018positions; this is a schedule,
+  not a verified receipt for the whole design panel. A universal Tuesday+3days rule would expose future data.
+- LEI input check: public February22,2018forecasts differ (MetaTrader0.5%; contemporary Regions/ActionEconomics0.6%).
+  A vendor forecast field is not automatically the Bloomberg median used in SSRN1108050. Do not infer survey identity,
+  original-release vintage or pre-release knowledge from a current historical page.
+- Limits/next check: only for a separately justified, fully gated proposal, reconcile one original observation,
+  actual release/revision/receipt, same-contract executable entry and native cash/roll ledger. Missing fields stay
+  unknown. No measured slippage saving, new return test, account improvement or deployment follows.
+
+### E12 follow-up — Abnormal-day labels and forecasting targets
+
+Caporale/Plastun2021 [primary methods](https://link.springer.com/article/10.1007/s11408-021-00380-w),
+selected sections only; [scout record](research/scout/records/doi_s11408_2021_00380_w.json).
+- A completed day's abnormal-return label and calibrated hourly average are not necessarily available when the
+  proposed trade starts. Freeze a past-only trigger and its exact formation period before any justified return work.
+  Do not silently repair the printed negative-threshold sign or import MetaQuotes GMT+3session boundaries into GC/CL.
+- Costs omitted from a source simulation remain omitted; do not adopt the assertion that commissions disappeared
+  as a native futures fee model. Höllmann's hedging-position target also does not establish a return forecast.
+- Status: source/clock/model caution only. No full appendix review, synthetic/economic check, execution saving,
+  strategy grade or automatic follow-up test is claimed.
