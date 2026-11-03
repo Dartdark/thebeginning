@@ -264,7 +264,8 @@ def design(commit):
         # Completed-trade outcomes with unknown paths remain explicitly unknown.
         known=t[t.path_known].copy()
         day_bad=set(pd.DatetimeIndex(t.loc[~t.path_known,'entry_date']))|set(pd.DatetimeIndex(t.loc[~t.path_known,'exit_date']))
-        valid_days=trading.union(pd.DatetimeIndex(known.report_date)).sort_values()
+        valid_days=trading.union(pd.DatetimeIndex(known.report_date)).unique().sort_values()
+        assert valid_days.is_unique
         # Calendar-date marked equity, sampled at that date's actual final chart
         # close; NOT a broker EOD mark or an executable closing fill.
         fullmarks=pd.Series(marks,index=dates)
@@ -338,7 +339,11 @@ def fixtures():
     h[0]=126.;l[0]=100.
     _,x,kind,_=_walk(o,h,l,c,0,0,1,50.,125.,1.)
     assert kind==1 and x==125.
-    print('PASS: five synthetic clock/history/entry-stop/target checks; no market returns.')
+    days=pd.DatetimeIndex(['2020-01-02','2020-01-03'])
+    fake=pd.Series([100.,-25.],index=pd.DatetimeIndex(['2020-01-02','2020-01-02']))
+    index=days.union(fake.index).unique()
+    assert index.is_unique and fake.groupby(level=0).sum().reindex(index,fill_value=0.).sum()==75.
+    print('PASS: six synthetic clock/history/entry-stop/target/daily-accounting checks; no market returns.')
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('phase',choices=['inventory','fixtures','design']);p.add_argument('--commit')

@@ -75,6 +75,44 @@
         }
       ],
       "economic_rules_or_fills_changed": false
+    },
+    {
+      "preregistration_commit": "ebf69a0be42c078085fd2b8fa4f2d89c8d9ae24a",
+      "command": "design --commit ebf69a0be42c078085fd2b8fa4f2d89c8d9ae24a",
+      "status": "accounting_assertion_stopped",
+      "error": "DatetimeIndex.union preserved repeated trade dates, duplicating daily rows. A unique daily index reconciles; source trade fields exactly equal attempt1.",
+      "executed_definitions": [
+        "N15_LITERAL_GLOBEX"
+      ],
+      "protected_executed": false,
+      "files": [
+        {
+          "file": "literal_globex_years.csv",
+          "sha256": "b85dde8157082aed5b2e9b91f9de918bc1f0c6c41bcf35e4805c4e412ad29391",
+          "bytes": 1268
+        },
+        {
+          "file": "literal_globex_trades.csv",
+          "sha256": "c7e7d4b913ed2ac655198f91d34f13ab12229cdd60068ba24901a587de324818",
+          "bytes": 563578
+        },
+        {
+          "file": "design_data_audit.csv",
+          "sha256": "70f68ea3a1dc941003e5e123313c7fe1228d1407d12be6a6b3b692480b2abf8e",
+          "bytes": 84602
+        },
+        {
+          "file": "literal_globex_marks.csv",
+          "sha256": "1df96f00e4a022867eeeab8482b71e01986d0f0c7d5577a88ee56ba74509d769",
+          "bytes": 35991
+        },
+        {
+          "file": "literal_globex_metrics.csv",
+          "sha256": "9a38db3a802eeb68fb1ad34c62486fc1e601755ce6387ed05daced0b1b52eaa2",
+          "bytes": 806
+        }
+      ],
+      "economic_rules_or_fills_changed": false
     }
   ]
 }
