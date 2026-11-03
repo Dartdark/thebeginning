@@ -46,7 +46,7 @@ def ema(x, n):
 
 
 def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, longs=True, shorts=True, last_entry=1400,
-        count=True, through=0.0):
+        count=True, through=0.0, anchor=None):
     if count: NTRIAL["n"] += 1
     tp = sl * rr
     row, t, O, H, L, C, J = (S[k].to_numpy() for k in ("row", "t", "o", "h", "l", "c", "j"))
@@ -54,6 +54,7 @@ def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, lo
     hist = [[] for _ in range(23)]
     rows = []; pos = 0; e = 0.0; t_in = None; j_in = 0; pend = None
     today_open = prev_close = 0.0; trades = stops = 0; flagged = 0
+    last_rth_close = 0.0
     n = len(S)
 
     def close_trade(px, kind, k, jx):
@@ -70,6 +71,9 @@ def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, lo
                 flagged += 1; close_trade(C[k - 1] - pos * TICK, "held past session (closed at last bar)", k - 1, J[k - 1])
             pend = None
             today_open = O[k]; prev_close = C[k - 1] if k > 0 else 0.0; trades = stops = 0
+        if anchor is not None and t[k] == anchor[0]:                 # RTH anchor on a 24h chart: open of the 08:30 bar
+            today_open = O[k]; prev_close = last_rth_close
+        if anchor is not None and t[k] == anchor[1]: last_rth_close = C[k]
         # ---- bar k opens: the pending market order fills at its open ----
         if pend is not None:
             if pend[0] in ("out", "rev") and pos != 0:

@@ -1,4 +1,4 @@
-# Personal-account portfolio (2026-10-23; Dual Thrust, Kusho v9, S47 v2, S30 IBS and Overnight Tick / VIX added 2026-10-24; Overnight Anomaly replaced; BB_MRM added and removed 2026-10-25; Swing Target v3 and PAPERTREND v2 added 2026-10-25)
+# Personal-account portfolio (2026-10-23; noise-area 15-min longs added 2026-11-03; Dual Thrust, Kusho v9, S47 v2, S30 IBS and Overnight Tick / VIX added 2026-10-24; Overnight Anomaly replaced; BB_MRM added and removed 2026-10-25; Swing Target v3 and PAPERTREND v2 added 2026-10-25)
 
 From everything tested so far; numbers from `analysis/personal_portfolio.py` (output in
 `analysis/outputs/personal_portfolio_output.txt`). Backtest 2018-01 → 2026-10, after costs, micro commissions charged at
@@ -26,6 +26,7 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | Swing Target v3 (prior 2-day RTH level break, target 0.35 / stop 0.7 x range, BE, flat 14:59) | MNQ | $1,932 | $2,642 | $1,446 | 1.43 | B, MC-confirmed (t 4.55); personal (user 2026-10-25) + funded swaps; `funded_strategies/NQ_Swing_Target_v3.txt` |
 | PAPERTREND v2 (RTH open ± 0.5 ATR break at 15-min marks, gap side only, flat 14:55, 2 x ATR disaster stop) | MNQ | $2,453 | $2,528 | $2,647 | 1.42 | B, MC-confirmed (Claude's code, t 4.35); personal only (user 2026-10-25); `checks/candidates/papertrend/PAPERTREND_v2_claude.txt` |
 | NFP Fade | MNQ | $291 | $467 | $826 | 0.60 | funded plan |
+| **Noise-area 15-min, longs only** (The Bridge's code, RTH-anchored; band from the 08:30 open, follow closes beyond it, stop 50 / target 25, flat 14:45) | MNQ | $1,637 | $2,585 | $1,245 | 1.54 | B, MC-confirmed (t 5.4, checker PASS WITH CONCERNS); **personal (user 2026-11-03)**: book return/DD 9.0 -> 9.3. Before live: early-close flat + fill-latency check (1 min late halves it). `checks/candidates/bridge_noise_15m/NQ_Noise_RTH_Anchor.txt` (LongTrade only) |
 
 ## Whole portfolio, every piece at 1 micro (19 pieces since 2026-10-25: Swing Target and PAPERTREND in, BB_MRM out)
 - **$41,500 a year**, every year positive.

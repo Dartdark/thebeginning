@@ -81,6 +81,24 @@ if __name__ == "__main__":
             Ws = sum(P[x][0] * qq[x] for x in qq); Rs = sum(P[x][1] * qq[x] for x in qq)
             rep(nm, [P150.evaluation(Ws, Rs, s0, D, P150.R150) for s0 in range(D)])
         print(f"[evals done {time.time() - T0:.0f}s]"); sys.exit()
+    if MODE == "personal":
+        import io, runpy, contextlib, montecarlo as MC, bridge_noise_15m_mc_check as K
+        with contextlib.redirect_stdout(io.StringIO()):
+            gg = runpy.run_path("analysis/personal_portfolio.py", run_name="__main__")
+        P, days, ft = gg["P"], gg["days"], gg["from_trades"]; tot = P.sum(axis=1); yrs = len(days) / 252
+        A = K.load("RTH Anchor")                                    # MC-confirmed trades (RTH-anchored code), our costs, per NQ
+        print(f"\nE. Personal portfolio ({P.shape[1]} pieces at 1 micro), + the MC-confirmed noise 15-min (1 MNQ):")
+        print("   corr of the current pieces with NBL:", end=" ")
+        o, _ = ft(None, "NBL", A[A.side > 0][["date", "net"]]); ob, _ = ft(None, "NB", A[["date", "net"]])
+        print(", ".join(f"{c} {np.corrcoef(o, P[c])[0, 1]:+.2f}" for c in P if abs(np.corrcoef(o, P[c])[0, 1]) >= 0.1))
+        rows = [("current", tot), ("+ NBL 1", tot + o), ("+ NBL 2", tot + 2 * o), ("+ NB (both) 1", tot + ob)]
+        for c in ("VaultBreak", "DualThrust", "SwingTarget"):
+            if c in P: rows.append((f"{c} -> NBL 1", tot - P[c] + o))
+        for nm, x in rows:
+            d = MC.daily_mc(x.values, horizon=252, n=5000, block=20, trail=1e12); e = x.cumsum()
+            print(f"   {nm:<24} ${x.sum() / yrs:>7,.0f} a year, Sharpe {x.mean() / x.std() * np.sqrt(252):.2f}, max DD ${-(e - e.cummax()).min():>6,.0f}, "
+                  f"MC p50 ${d['pnl_p50']:>7,.0f}, DD p95 ${d['dd_p95']:>6,.0f}, return/DD {d['ret_dd']:.1f}, capital ${d['dd_p95'] / 0.2:>7,.0f}")
+        sys.exit()
     if MODE in ("worker50", "worker150"):
         which = 50 if MODE == "worker50" else 150; seed, n = int(sys.argv[3]), int(sys.argv[4])
         lab = OTB.lab_for(which); RZB.add_rz(lab); add_nb(lab)
