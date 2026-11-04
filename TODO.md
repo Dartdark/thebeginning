@@ -5,7 +5,7 @@ bottom). Times are Central (CT).
 
 ## This week and next
 
-- [ ] **Claude: re-run the backtests on the extended NQ data (daily feed, data now to 10/28; 2026-10-29).** Rebuild
+- [x] (2026-11-04, VB + ONB live replay 10/20-11/04: `analysis/outputs/live_replay_1020_1104_output.txt`; VB 15/15 trades identical, ONB: 10/27 missed (known compile miss), 11/04 entered one bar later (ADX 30.12 at 09:15 = knife-edge), same loss) **Claude: re-run the backtests on the extended NQ data (daily feed, data now to 10/28; 2026-10-29).** Rebuild
   scratch_data (`analysis/build_lab.py`), refresh `analysis/live_panels.py` (bt_cache.json) and the plan benches, and compare
   each live strategy's trades on 10/12-10/28 with what its backtest would have done (first real missed-trade check).
 
