@@ -92,5 +92,6 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - (2026-11-01, "why are your replies double?") Write the reply text once, after the PushNotification call, never before
   and after it.
 - 2026-11-02: "2pm pst" (I read "Wed 2 at 2pm" as Central). Rule: a time the user gives without a zone is ambiguous; ask or state the zone assumed in the reply before scheduling.
+- 2026-11-04: "maybe make it a soft guide not a strict rule" (I wrote the Sharpe > 3.15 x corr pre-screen as a rule). Rule: heuristics go in the docs as guides; only the bench decides.
 - (2026-11-01, "where's the code?") Don't assume the user can open a file link on the phone: when they need to read
   something now (a task, code to review), put it in the reply as well as the link.

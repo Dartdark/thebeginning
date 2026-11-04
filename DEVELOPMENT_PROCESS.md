@@ -391,7 +391,7 @@ ONB $1,100), no cushion sizing. Bootstrap 90% intervals for Sharpe; permutation 
 
 ## Pre-screen: will a new strategy help the book? (2026-11-04, user asked to keep this)
 
-**Rule of thumb: a new piece improves the personal book if its Sharpe > (book Sharpe) x (its daily correlation with the book).**
+**Soft guide (not a rule; the bench decides): a new piece usually improves the personal book if its Sharpe > (book Sharpe) x (its daily correlation with the book).**
 Book Sharpe = 3.15 (20 pieces at 1 micro, 2018-26, after costs). Hurdle by correlation: 0.0 -> any edge; 0.2 -> 0.63; 0.3 -> 0.95;
 0.4 -> 1.26; 0.5 -> 1.58. The margin above the hurdle sets the size of the gain (noise-area longs: 1.54 vs 3.15 x 0.42 = 1.32 ->
 return/DD only 9.0 -> 9.3). A screen, not a substitute for the bench; valid for a small piece next to a large book.
