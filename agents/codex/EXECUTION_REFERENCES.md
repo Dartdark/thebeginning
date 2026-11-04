@@ -1618,3 +1618,22 @@ selected sections only; [scout record](research/scout/records/doi_s11408_2021_00
   independently established. No OHLC scalping adaptation, new trial, allocation or live change follows.
 - Smallest check only if genuinely new matching tick data and a separately justified proposal arrive: full source
   fill/cost rules, historical tick/quote clocks, sequential order replay and native fee/latency reconciliation.
+
+### E09/E11/E19 follow-up — Ricochet hindsight exclusions and early-close carry
+
+[Ricochet S1144 review](results/ricochet1144_20261104.md), complete user-uploaded November4note/PL;
+two fixed causal design replays fail advancement. No MC compilation, native trade matching or execution saving proved.
+- Default SaltaSenza830=1uses six2020dates selected for a later missing08:30bar. At the prior evening17:05entry,
+  that future feed/session state is unavailable. Price-prefix equality alone would not expose a shared hardcoded
+  future exclusion mask. Both bounded replay profiles disable it before outcomes; original bytes remain archived.
+- Source15:00exit does not occur on a half-day without that bar. Observed-path source-style replay has3daily-flat
+  crossings; a predeclared11:30known-half-day exit has0. This is model/code evidence, not installed-platform acceptance.
+- Midnight crossing alone is within the current17→16account day; the funded plan explicitly permits such overnight
+  sessions. Check actual daily flat deadlines and native joint paths rather than rejecting a calendar-date change.
+- Same-close entries require clock/fill assumptions. Stops begin after a close-filled entry, not at an earlier low;
+  one-minute chronology and1point target-through differ from the supplied5-minute BarMagnifierOFF setup.
+- Exact-completeness flags preserve partial bars, unknown held paths and persistent Wilder-history uncertainty.
+  A partial bar is not automatically a bad closing fill; a profitable flagged stream is not certified executable alpha.
+  No outcome-selected deletion, fill interpolation or after-result gate relaxation was used.
+- Next check only under a separately justified new task: original MC settings/trade ledger and matched native
+  contract/roll/quote clocks. This failed candidate earns no automatic re-test, data chase, allocation or live change.

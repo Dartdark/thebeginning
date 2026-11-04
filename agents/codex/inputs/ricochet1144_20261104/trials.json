@@ -1,21 +1,67 @@
 {
   "program": "user-upload-ricochet1144-20261104",
-  "status": "reserved_before_returns",
+  "status": "design_reject_no_dependent_advancement",
   "family": "existing_cash_down_overnight_long_with_supplied_S1_reentries",
   "prior_author_chain_claim": 5867006,
   "prior_author_batch_claim": 9900000,
   "prior_repo_trials": "Preserved in TRIALS.csv; include count in significance, never reset.",
   "definitions": [
-    {"id":"R1144_CAUSAL","role":"candidate","status":"reserved"},
-    {"id":"R1144_PROTECTED","role":"candidate","status":"reserved"},
-    {"id":"R1144_NO_REENTRY","role":"unselectable_control","status":"reserved_if_design_passes"},
-    {"id":"R1144_RANDOM_SIDE","role":"unselectable_control","status":"reserved_if_design_passes"},
-    {"id":"R1144_RANDOM_TIME","role":"unselectable_control","status":"reserved_if_design_passes"}
+    {
+      "id": "R1144_CAUSAL",
+      "role": "candidate",
+      "status": "executed_design_reject"
+    },
+    {
+      "id": "R1144_PROTECTED",
+      "role": "candidate",
+      "status": "executed_design_reject"
+    },
+    {
+      "id": "R1144_NO_REENTRY",
+      "role": "unselectable_control",
+      "status": "not_run_failed_parent_gate"
+    },
+    {
+      "id": "R1144_RANDOM_SIDE",
+      "role": "unselectable_control",
+      "status": "not_run_failed_parent_gate"
+    },
+    {
+      "id": "R1144_RANDOM_TIME",
+      "role": "unselectable_control",
+      "status": "not_run_failed_parent_gate"
+    }
   ],
   "max_definitions": 5,
   "parameter_search": false,
   "source_claims_verified": false,
-  "scout_counts_unchanged": {"hypotheses":4,"economic_definitions":10},
+  "scout_counts_unchanged": {
+    "hypotheses": 4,
+    "economic_definitions": 10
+  },
   "literal_future_skiplist": "Rejected statically; not executed as an economic outcome definition.",
-  "source_protocol_status": "Not admitted by source author; exploratory only."
+  "source_protocol_status": "Not admitted by source author; exploratory only.",
+  "executed_economic_definitions": 2,
+  "unused_reserved_definitions": 3,
+  "return_commands_executed": [
+    {
+      "preregistration_commit": "6d6d3e7351ec02b146b0e06a8e6d057b53efc20e",
+      "command": "/workspace/venvs/thebeginning/bin/python analysis/codex_ricochet1144_20261104.py design --commit 6d6d3e7351ec02b146b0e06a8e6d057b53efc20e",
+      "economic_simulations_completed": 2,
+      "exit_code": 1,
+      "outcomes_preserved": true,
+      "error_stage": "Final stdout serialization after complete result.json and all ledgers; numpy boolean rejected by plain json.dumps.",
+      "subsequent_engine_changes": "Final display only; no economic signal/fill/gate change.",
+      "market_simulation_rerun": false
+    }
+  ],
+  "engineering_checks": {
+    "synthetic_pre_outcome_checks": 9,
+    "saved_ledger_accounting_audit": "PASS",
+    "independent_review": "pending",
+    "multicharts_compilation": "not_performed",
+    "author_2238_trade_matching": "not_performed"
+  },
+  "validation": "not_run_failed_design",
+  "account_tests": "not_run_failed_design"
 }

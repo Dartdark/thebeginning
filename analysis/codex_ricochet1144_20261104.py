@@ -252,8 +252,12 @@ def design(commit):
        source_input_manifest_sha256=digest(INPUT/'inventory.json'),candidates=output,
        controls='Reserved, not run unless a candidate clears all design gates.',validation_run=False,
        account_tests_run=False,independent_verification='pending'))
+    # Display-only repair after the first completed run: dump() above has already
+    # converted numpy booleans/scalars. No signal, fill, gate or ledger changes.
+    saved=json.loads((OUT/'result.json').read_text())
     print(json.dumps({n:{'closed':r['closed_trades'],'complete':r['complete_trades'],
-        'conditional':r['complete_path'],'gates':r['gates']} for n,r in output.items()},indent=2))
+        'conditional':r['complete_path'],'gates':r['gates']}
+        for n,r in saved['candidates'].items()},indent=2))
 
 def selftest():
     # Real stop gap; conservative same-minute bracket path; one-point target-through.
