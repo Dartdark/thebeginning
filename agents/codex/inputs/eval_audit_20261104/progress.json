@@ -3,7 +3,7 @@
   "authorized_scope": "Existing-strategy evaluation allocation and risk comparison; no live changes",
   "checked_head": "0da4e8f1b7f42309ab3ad84635ad082b9ae895bf",
   "source_claude_head": "13e29ca7b45daabeb0ed2d8c286448610f594dab",
-  "phase": "joint_initial_selection_committed_before_derived",
+  "phase": "final_nomination_before_historical_validation",
   "lease": {
     "owner": "codex/root/eval_audit_20261104",
     "acquired_utc": "2026-11-04T22:54:00Z",
@@ -15,16 +15,18 @@
     "initial_registered_definitions": 2485,
     "reserved_derived_definitions": 30,
     "maximum_planned_definitions": 2975,
-    "executed_definitions": 2945,
+    "executed_definitions": 2965,
     "note": "Costs and starting-state sensitivities are frozen unselectable scenarios; all views retained.",
     "additional_fixed_registered_definitions": 460,
-    "derived_definitions_registered_after_joint_selection": 20
+    "derived_definitions_registered_after_joint_selection": 20,
+    "derived_definitions_executed": 20,
+    "unused_under_hard_cap": 35
   },
   "preregistration_commit": "a087708b13697df4c3dd0b0814f98cb53a2b254a",
-  "initial_selection_commit": null,
+  "initial_selection_commit": "67bab2a2daa808ffc7c50ebde150ed857df51b69",
   "validation_selection_commit": null,
   "lease_confirmation": "Preregistration and budget reservation checked from committed a087708 before market preparation; source branch and other research leases untouched.",
-  "continuation": "Commit exact joint initial nomination and20 derived rules before their2018\u201322outcomes. No2023account outcomes yet.",
+  "continuation": "Commit final frozen nomination before once-only previously seen2023+ historical validation,12prespecified cost/cushion views; current baseline UNKNOWN bounds remain material.",
   "original_design": {
     "definitions": 2485,
     "starts_per_definition": 244,
@@ -34,7 +36,7 @@
     "summary_path": "agents/codex/inputs/eval_audit_20261104/initial_design_summary.json"
   },
   "amendment_commit": "e8e249b4e7c8946d517e8e4c9a4a3b4e62063e24",
-  "account_cases_completed": 718580,
+  "account_cases_completed": 723460,
   "nominees_initial": [
     {
       "candidate_id": "E150_395f4dd37fc6a16e",
@@ -55,6 +57,52 @@
       "candidate_id": "E50_1deb9a364426d4d0",
       "account": 50,
       "label": "FIXED_ONLY_ONBML_20MICRO"
+    }
+  ],
+  "nominees_final": [
+    {
+      "candidate_id": "E150_d789eb79de196ae7",
+      "account": 150,
+      "label": "FIXED_ONLY_FC2B_20MICRO_MARKET_TARGET_GUARD",
+      "governor": {
+        "aggregate_stop_fraction": 1.0,
+        "cushion_buffer": 0.0,
+        "risk_fraction": 0.0,
+        "target_guard": true
+      }
+    },
+    {
+      "candidate_id": "E150_3d21e9e3a872b8e1",
+      "account": 150,
+      "label": "FIXED_ONLY_LDF_20MICRO",
+      "governor": {
+        "aggregate_stop_fraction": 1.0,
+        "cushion_buffer": 0.0,
+        "risk_fraction": 0.0,
+        "target_guard": false
+      }
+    },
+    {
+      "candidate_id": "E50_2d2e3f2a54976449",
+      "account": 50,
+      "label": "FIXED_ONLY_FC2B_20MICRO_MARKET_TARGET_GUARD",
+      "governor": {
+        "aggregate_stop_fraction": 1.0,
+        "cushion_buffer": 0.0,
+        "risk_fraction": 0.0,
+        "target_guard": true
+      }
+    },
+    {
+      "candidate_id": "E50_a7956dcbc05dc7c9",
+      "account": 50,
+      "label": "FIXED_ONLY_ONBML_20MICRO_MARKET_TARGET_GUARD",
+      "governor": {
+        "aggregate_stop_fraction": 1.0,
+        "cushion_buffer": 0.0,
+        "risk_fraction": 0.0,
+        "target_guard": true
+      }
     }
   ]
 }
