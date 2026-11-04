@@ -118,6 +118,8 @@ So it runs at full weight only between ~$33.6k and ~$54.1k, then at half, then a
 75%, ~$190k at 60%).
 
 
+Pre-screen before sending a strategy: `DEVELOPMENT_PROCESS.md` "Pre-screen" (Sharpe > 3.15 x correlation with the book).
+
 ## Capital-expansion bench (user, 2026-10-24)
 Strategies that add money only by needing more capital (lower return per unit of drawdown at the current size) go here,
 not into the plan, for later when the account is large enough or sizes can be weighted finely (minis / many micros).

@@ -388,3 +388,21 @@ ONB $1,100), no cushion sizing. Bootstrap 90% intervals for Sharpe; permutation 
   blow-ups.
 - ONB ML longs' full-period drawdown ($3,916) ranks above every shuffle: it is all 2018
   (−$2,491 that year), the first year of the frozen model; 2019–2026 were all positive.
+
+## Pre-screen: will a new strategy help the book? (2026-11-04, user asked to keep this)
+
+**Rule of thumb: a new piece improves the personal book if its Sharpe > (book Sharpe) x (its daily correlation with the book).**
+Book Sharpe = 3.15 (20 pieces at 1 micro, 2018-26, after costs). Hurdle by correlation: 0.0 -> any edge; 0.2 -> 0.63; 0.3 -> 0.95;
+0.4 -> 1.26; 0.5 -> 1.58. The margin above the hurdle sets the size of the gain (noise-area longs: 1.54 vs 3.15 x 0.42 = 1.32 ->
+return/DD only 9.0 -> 9.3). A screen, not a substitute for the bench; valid for a small piece next to a large book.
+
+- t says how SURE we are the edge exists (grows with sqrt(trades)); t / sqrt(trades) and $/trade say how BIG it is.
+- Another NQ morning breakout (08:30-11:00) correlates ~0.4 with the book: needs Sharpe 1.3+ to help, 1.8+ to help a lot.
+  Other markets, overnight, weekend or event trades correlate ~0: almost any real edge (Sharpe 0.6-1.0) helps.
+- Apex is stricter: drawdown per MNQ well under $1,000 and profits on days Vault Break / ONB lose.
+
+Book piece stats (personal, per micro, 2018-26; corr = daily corr with the other pieces), medians: $2,153 a year, t 4.0,
+Sharpe 1.33, max DD $1,574, return/max DD 1.28 a year, 73 active days a year, 56% winning days, corr 0.23. Leaders:
+Twin (ret/DD 2.25, Sharpe 1.77, corr 0.30), Kusho (2.03, 1.68, 0.31), Overnight Tick (1.72, 1.68, 0.20): high Sharpe AND a time
+of day / week the rest of the book doesn't trade. Low-corr small pieces (CL Sunday fade, EOS, ES MOC: corr ~0) earn little but
+cut book risk. Recompute: `analysis/personal_portfolio.py` P (daily per piece).
