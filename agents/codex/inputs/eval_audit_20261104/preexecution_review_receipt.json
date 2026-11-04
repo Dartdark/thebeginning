@@ -1,0 +1,41 @@
+{
+  "reviewer": "eval_loss_forensics",
+  "scope": "Independent pre-preregistration policy/selection/orchestration review; bounded interface check only for other owners; no review of own forensic/calendar work",
+  "status": "PASS_conditional_research_readiness",
+  "blocking_issues_remaining": [],
+  "requires": "Commit exact reviewed preregistration before any market calculation; follow staged selection commits",
+  "source_sha256": {
+    "analysis/codex_eval_policies_20261104.py": "468be23ddbdd470ba217bbf87e0745f83cb3a640884a02fed5b6173acfef0a3a",
+    "analysis/codex_eval_selection_20261104.py": "737d2e601a28ee0ceeecef76cb0ff4c5219c6b42137e80cedc47d9f8569a96bc",
+    "analysis/codex_eval_run_20261104.py": "30c93b7354de9c969c3581ed8ffdf186d0477897387224d70152f28614966cf6",
+    "analysis/codex_eval_engine_20261104.py": "cbbe04970b52c2bd2d2e088a6e146b044a611d812544a6fa15da37dda54f1996",
+    "analysis/codex_eval_paths_20261104.py": "767694333f4eb69039ea5c6ed3568883a80abe5e0502f1baf4a188226b4d10b1",
+    "analysis/codex_eval_extra_ledgers_20261104.py": "8d9b54b839fe227f7d7774032cc92d8140ea2d616e14abd606039501aaba9ae5",
+    "agents/codex/inputs/eval_audit_20261104/config.json": "724faf41b75477eab74a814213f1c35dbcd56ff2424005311e14e920d0f7a438",
+    "agents/codex/inputs/eval_audit_20261104/policies.json": "8feae0c4410ba7208c9f804c2492b28abb6671a2a017356e52f97d0e786bc321",
+    "agents/codex/plans/eval_audit_20261104.md": "23bb096820cd7499b07549b735693c0bc26d5817954f4db984f375604a5e74a3",
+    "agents/codex/evidence/eval_audit_20261104.md": "1a28c927b4c7cd340a4f2b304eb4e0c13f41f37538677c1900e360200e344a19",
+    "agents/codex/inputs/eval_audit_20261104/preexecution_review.md": "bdbbeea22c8d5521124b8db930b60dcab470af6caf944cb2fce3d0b9457e1fb5"
+  },
+  "metadata_checks": {
+    "registered_inputs_matched": 118,
+    "raw_files": 40,
+    "static_ledgers": 14,
+    "source_keys": 18
+  },
+  "synthetic_commands_passed": [
+    "selection --selftest",
+    "runner selftest",
+    "paths selftest",
+    "extra_ledgers selftest"
+  ],
+  "new_owned_market_outcomes_run": false,
+  "independent_economic_verification": "pending",
+  "limits": [
+    "Conditional OHLC chronology and source-ledger model",
+    "Detected missing required risk inputs invalidated; zero gaps not original-feed completeness proof",
+    "Conservative full-expiry source coverage",
+    "Sparse visited minima not exact joint drawdown",
+    "Historical validation already seen; no global optimality or live change"
+  ]
+}

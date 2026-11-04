@@ -1,0 +1,331 @@
+{
+  "DT": {
+    "example": {
+      "bar_close_label": "14:56",
+      "date": "2018-04-11",
+      "ledger_exit": 6592.0,
+      "missing_held_bars": 0,
+      "raw_close": 6588.25,
+      "raw_open": 6592.0,
+      "source_exit_open_flag": false
+    },
+    "exit_phase_unknown_kind_counts": {
+      "1": 56,
+      "2": 390
+    },
+    "exit_phase_unknown_rows": 446,
+    "explanation": "Source flat uses next observed bar open; prior adapter default exit_open=False collapsed flat into kind2 and frozen builder checks close. Target-through failures are separate, unchanged.",
+    "flat_exit_clocks": {
+      "14:56:00": 400,
+      "14:57:00": 1
+    },
+    "flat_kind2_count": 401,
+    "flat_phase_mismatches": 390,
+    "frozen_source_sha256": {
+      "analysis/codex_portfolio_audit_prepare.py": "03e9f7899f15d60456b30f113dff4f771cf043769f8856be5ce877f06d85e65a",
+      "analysis/dual_thrust_test.py": "f6823325cfed5a88d392e4df3ee1c431adad1122882b9e24950d5ad130b284cc",
+      "analysis/outputs/codex_portfolio_audit_20261031/DT_unit_ledger.csv": "b34479fcda8d59aad27aed75712dbe166ce8f26740e91a27af8b376696bc577d"
+    },
+    "kind_counts": {
+      "0": 712,
+      "1": 408,
+      "2": 401
+    },
+    "target_phase_unknown": 56,
+    "total": 1521
+  },
+  "ONB_first_design_risk": {
+    "bad_candles": [
+      {
+        "close_label": "05:45",
+        "date": "2018-03-09",
+        "missing_expected_open_minutes": [
+          "2018-03-09T05:45:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "16:00",
+        "date": "2018-03-09",
+        "missing_expected_open_minutes": [
+          "2018-03-09T15:48:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "01:45",
+        "date": "2018-03-12",
+        "missing_expected_open_minutes": [
+          "2018-03-12T01:40:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:15",
+        "date": "2018-03-12",
+        "missing_expected_open_minutes": [
+          "2018-03-12T17:01:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:30",
+        "date": "2018-03-12",
+        "missing_expected_open_minutes": [
+          "2018-03-12T17:24:00",
+          "2018-03-12T17:29:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:45",
+        "date": "2018-03-12",
+        "missing_expected_open_minutes": [
+          "2018-03-12T17:45:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "18:00",
+        "date": "2018-03-12",
+        "missing_expected_open_minutes": [
+          "2018-03-12T17:48:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "22:15",
+        "date": "2018-03-12",
+        "missing_expected_open_minutes": [
+          "2018-03-12T22:03:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "22:30",
+        "date": "2018-03-12",
+        "missing_expected_open_minutes": [
+          "2018-03-12T22:23:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "22:45",
+        "date": "2018-03-12",
+        "missing_expected_open_minutes": [
+          "2018-03-12T22:34:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "23:15",
+        "date": "2018-03-12",
+        "missing_expected_open_minutes": [
+          "2018-03-12T23:03:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "00:45",
+        "date": "2018-03-13",
+        "missing_expected_open_minutes": [
+          "2018-03-13T00:35:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "01:30",
+        "date": "2018-03-13",
+        "missing_expected_open_minutes": [
+          "2018-03-13T01:28:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "02:00",
+        "date": "2018-03-13",
+        "missing_expected_open_minutes": [
+          "2018-03-13T01:51:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:15",
+        "date": "2018-03-13",
+        "missing_expected_open_minutes": [
+          "2018-03-13T17:01:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "23:15",
+        "date": "2018-03-13",
+        "missing_expected_open_minutes": [
+          "2018-03-13T23:08:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:15",
+        "date": "2018-03-14",
+        "missing_expected_open_minutes": [
+          "2018-03-14T17:01:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:15",
+        "date": "2018-03-15",
+        "missing_expected_open_minutes": [
+          "2018-03-15T17:01:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:15",
+        "date": "2018-03-19",
+        "missing_expected_open_minutes": [
+          "2018-03-19T17:01:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:15",
+        "date": "2018-03-20",
+        "missing_expected_open_minutes": [
+          "2018-03-20T17:01:00",
+          "2018-03-20T17:14:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "18:45",
+        "date": "2018-03-20",
+        "missing_expected_open_minutes": [
+          "2018-03-20T18:41:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "20:15",
+        "date": "2018-03-20",
+        "missing_expected_open_minutes": [
+          "2018-03-20T20:15:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "23:15",
+        "date": "2018-03-20",
+        "missing_expected_open_minutes": [
+          "2018-03-20T23:05:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "23:30",
+        "date": "2018-03-20",
+        "missing_expected_open_minutes": [
+          "2018-03-20T23:26:00",
+          "2018-03-20T23:29:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "23:45",
+        "date": "2018-03-20",
+        "missing_expected_open_minutes": [
+          "2018-03-20T23:42:00",
+          "2018-03-20T23:44:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "00:15",
+        "date": "2018-03-21",
+        "missing_expected_open_minutes": [
+          "2018-03-21T00:14:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "00:45",
+        "date": "2018-03-21",
+        "missing_expected_open_minutes": [
+          "2018-03-21T00:39:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:15",
+        "date": "2018-03-22",
+        "missing_expected_open_minutes": [
+          "2018-03-22T17:01:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:15",
+        "date": "2018-03-26",
+        "missing_expected_open_minutes": [
+          "2018-03-26T17:01:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:15",
+        "date": "2018-03-27",
+        "missing_expected_open_minutes": [
+          "2018-03-27T17:01:00"
+        ],
+        "observed_closed_contradictions": []
+      },
+      {
+        "close_label": "17:15",
+        "date": "2018-03-28",
+        "missing_expected_open_minutes": [
+          "2018-03-28T17:01:00"
+        ],
+        "observed_closed_contradictions": []
+      }
+    ],
+    "compression_minutes": 15,
+    "conclusion": "The first31-incomplete-candle risk gate independently reproduces from raw quote availability and frozen closures. Ten17:15candles lack17:01; other missing expected-open minutes remain. This is not solely a time-exit phase flag or an inferred holiday closure. No missing price/extreme was filled, and no source risk/returns were recomputed.",
+    "expected_open_missing_minutes": 35,
+    "incomplete_candles_at1715": 10,
+    "incomplete_source_candles": 31,
+    "known_stop_is_NaN": true,
+    "observed_closed_contradiction_minutes": 0,
+    "prior15_stored_dates": [
+      "2018-03-09",
+      "2018-03-12",
+      "2018-03-13",
+      "2018-03-14",
+      "2018-03-15",
+      "2018-03-16",
+      "2018-03-19",
+      "2018-03-20",
+      "2018-03-21",
+      "2018-03-22",
+      "2018-03-23",
+      "2018-03-26",
+      "2018-03-27",
+      "2018-03-28",
+      "2018-03-29"
+    ],
+    "signal": "ONB30 2018-04-02 10:31"
+  },
+  "limits": [
+    "The frozen study retains original UNKNOWN outcomes; this diagnostic does not authorize an uncommitted repair.",
+    "A source-open correction needs its own checked amendment and source-match receipt, preserving all original definitions/results.",
+    "An absent expected-open minute does not establish its unobserved high/low or its effect on source ATR. Diagnostic owned-feed stop estimates are not admitted risk values.",
+    "No2023account outcomes were inspected or computed. DT source metadata counts span the prepared source history without account-performance analysis."
+  ],
+  "prepared_artifact_sha256": {
+    "prepare_receipt.json": "21bb3e1955e7e95f91e18c07093318d8888612de3ffa3032d5fe25381004d45b",
+    "quality.csv": "28f4f529a6aab9e006d664fadd510dac4abfd1e5a77b3ac01eee0f34c82810e6",
+    "trades.csv": "98029b1fa63864ed75aef620983dfc74a10ca7006c5d9e81ce55778180bc7554"
+  },
+  "preregistration_commit": "a087708b13697df4c3dd0b0814f98cb53a2b254a",
+  "scope": "Prepared source/clock and raw input availability diagnosis only; no new account outcomes or economic definitions."
+}

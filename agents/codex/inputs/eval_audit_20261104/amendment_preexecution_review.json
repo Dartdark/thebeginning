@@ -1,0 +1,61 @@
+{
+  "reviewer": "eval_loss_forensics",
+  "status": "PASS_bounded_conditional_amendment_readiness",
+  "original_preregistration_commit": "a087708b13697df4c3dd0b0814f98cb53a2b254a",
+  "new_amendment_commit": "Required before new outcomes; enforced by wrapper",
+  "original_guard": "PASS: committed implementation/config and118registeredinputhashes",
+  "source_sha256": {
+    "analysis/codex_eval_fixed_arm_20261104.py": "33a5903a393d44059caf18eeebc91d155df887692ae1257d56080031086a53a0",
+    "analysis/codex_eval_source_overlay_20261104.py": "f9f23256911f1659770e398917d1c7117c8afd0db8180a746158212fb05f6b8f",
+    "analysis/codex_eval_amended_run_20261104.py": "e011074a80334a92d90ca6d37712df73bffbc4b2f65dcce4486278c9aacb9564",
+    "agents/codex/inputs/eval_audit_20261104/fixed_policies.json": "1449fbf76897c5f8073a9c778419ab6f1d3b4c4e50cab10f894ded99d8d2c899",
+    "agents/codex/plans/eval_audit_fixed_arm_20261104.md": "12c677fadffa811837170b9e10df6c33c07a2c46704227a502a259c8209225bf",
+    "agents/codex/evidence/eval_audit_fixed_arm_20261104.md": "38b47b5b98e156ed482f0798e0a5514eecf3e9d3a0b75678266c92dfc932e1cd",
+    "agents/codex/inputs/eval_audit_20261104/amendment_preexecution_review.md": "2f3df79a75ec628a25e3c561e7e2899a1eb555be420784aa8405ee20104257c1"
+  },
+  "corroborating_metadata_source": {
+    "path": "checks/candidates/dual_thrust/python_trades.csv",
+    "sha256": "76ce311d560e36fbf320f011429b255317fa87f3355ae965c4526b576fb80618",
+    "read_columns": [
+      "date",
+      "kind"
+    ],
+    "common_window_kind_counts": {
+      "flat": 401,
+      "stop": 712,
+      "target": 408
+    },
+    "not_new_execution_input": true,
+    "separately_commit_guarded_by_overlay": false
+  },
+  "trial_accounting": {
+    "original": 2485,
+    "new": 460,
+    "aliases_reused": 16,
+    "joint_unique": 2945,
+    "shared_derived_reservation": 30,
+    "maximum": 2975,
+    "hard_cap": 3000
+  },
+  "synthetic_tests": [
+    "fixed_generator PASS",
+    "source_overlay PASS",
+    "amended_runner PASS"
+  ],
+  "new_market_outcomes_run": false,
+  "blocking_issues_remaining": [],
+  "independent_economic_verification": "pending",
+  "overlay_cohort_guard": {
+    "flat_kind2_exits": 401,
+    "clock_counts": {
+      "14:56": 400,
+      "14:57": 1
+    },
+    "same_epoch_new_entry_collision": "UNKNOWN at first equal-time row"
+  },
+  "overlay_source_sha256": {
+    "analysis/dual_thrust_test.py": "f6823325cfed5a88d392e4df3ee1c431adad1122882b9e24950d5ad130b284cc",
+    "analysis/codex_portfolio_audit_prepare.py": "03e9f7899f15d60456b30f113dff4f771cf043769f8856be5ce877f06d85e65a",
+    "checks/candidates/dual_thrust/trades.csv": "90142c79a4f90b7588aab15dbe03843870bdee3691bd2fb65b0fb1ae4e8004d1"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "review_scope": "New source overlay and fixed-arm generator only; code/source inspection, synthetic fixtures and metadata generation before actual amended execution.",
+  "status": "PASS",
+  "reviewed_sha256": {
+    "analysis/codex_eval_source_overlay_20261104.py": "e795b59dbe74d175e0cb8fe75fe49199b0831ee139bf3a26c166864749bdd5c5",
+    "analysis/codex_eval_fixed_arm_20261104.py": "33a5903a393d44059caf18eeebc91d155df887692ae1257d56080031086a53a0",
+    "agents/codex/plans/eval_audit_fixed_arm_20261104.md": "104b2108fc5be1a7ee582f53c91178f92c43ee117c7802ea2a457eb10aeb3381",
+    "agents/codex/evidence/eval_audit_fixed_arm_20261104.md": "38b47b5b98e156ed482f0798e0a5514eecf3e9d3a0b75678266c92dfc932e1cd"
+  },
+  "checks": {
+    "synthetic_overlay_selftest": "PASS",
+    "synthetic_generator_selftest": "PASS",
+    "overlay_all_DT_kind2_not_only_mismatches": true,
+    "overlay_exact_known_open_no_touch_search": true,
+    "overlay_input_event_copy_and_price_time_identity": true,
+    "overlay_only_selected_exit_row_raw_fill_fields": true,
+    "overlay_other_events_and_original_outcomes_preserved": true,
+    "integer_fixed_lots_governor_false_targetguard_false": true,
+    "original_registry_immutable": true,
+    "canonical_original_aliases_reused": true,
+    "aliases_containing_DT": 0,
+    "conservative_not_independent_economic_counts": true
+  },
+  "counts": {
+    "original_definitions": 2485,
+    "requested_definitions": 476,
+    "new_definitions": 460,
+    "aliases_to_original_count": 16,
+    "total_unique_definitions": 2945,
+    "reserved_derived_governors": 30,
+    "maximum_with_reserved": 2975,
+    "per_account": {
+      "50": {
+        "new_definitions": 229,
+        "requested_definitions": 238,
+        "aliases_to_original": 9
+      },
+      "150": {
+        "new_definitions": 231,
+        "requested_definitions": 238,
+        "aliases_to_original": 7
+      }
+    },
+    "per_family": {
+      "fixed_quantity_standalone": {
+        "new_definitions": 200,
+        "requested_definitions": 216
+      },
+      "fixed_quantity_two_leg": {
+        "new_definitions": 260,
+        "requested_definitions": 260
+      }
+    }
+  },
+  "actual_overlay_applied": false,
+  "amended_account_outcomes_computed": false,
+  "2023_account_outcomes_inspected": false,
+  "independent_economic_verification": "pending; source-clock/metadata correctness and synthetic fixtures do not certify native fills or profitability"
+}

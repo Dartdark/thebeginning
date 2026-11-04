@@ -3,7 +3,7 @@
   "authorized_scope": "Existing-strategy evaluation allocation and risk comparison; no live changes",
   "checked_head": "0da4e8f1b7f42309ab3ad84635ad082b9ae895bf",
   "source_claude_head": "13e29ca7b45daabeb0ed2d8c286448610f594dab",
-  "phase": "preregistration",
+  "phase": "fixed_arm_preregistration",
   "lease": {
     "owner": "codex/root/eval_audit_20261104",
     "acquired_utc": "2026-11-04T22:54:00Z",
@@ -14,12 +14,22 @@
     "hard_cap": 3000,
     "initial_registered_definitions": 2485,
     "reserved_derived_definitions": 30,
-    "maximum_planned_definitions": 2515,
-    "executed_definitions": 0,
-    "note": "Costs and starting-state sensitivities are frozen unselectable scenarios; all views retained."
+    "maximum_planned_definitions": 2975,
+    "executed_definitions": 2485,
+    "note": "Costs and starting-state sensitivities are frozen unselectable scenarios; all views retained.",
+    "additional_fixed_registered_definitions": 460
   },
-  "preregistration_commit": null,
+  "preregistration_commit": "a087708b13697df4c3dd0b0814f98cb53a2b254a",
   "initial_selection_commit": null,
   "validation_selection_commit": null,
-  "continuation": "Finish exact code/input admission review; commit and push preregistration before prepare or account outcomes."
+  "lease_confirmation": "Preregistration and budget reservation checked from committed a087708 before market preparation; source branch and other research leases untouched.",
+  "continuation": "Preserve all original cases; commit fixed-quantity arm and factual DT source-clock overlay before its outcomes. Joint nomination uses one shared30-definition derivative reservation.",
+  "original_design": {
+    "definitions": 2485,
+    "starts_per_definition": 244,
+    "account_cases": 606340,
+    "completion_path": "agents/codex/runtime/eval_audit_20261104/design_initial/completed_main_fresh.json",
+    "completion_sha256": "46aa46abb457e971a4d14dbf58d61547c4ff26bab06436ac79167406f8b391b8",
+    "summary_path": "agents/codex/inputs/eval_audit_20261104/initial_design_summary.json"
+  }
 }

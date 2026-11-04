@@ -1,0 +1,21 @@
+{
+  "scope": "Separate code-only factual DT exit-clock overlay review. No historical transform or returns run.",
+  "reviewed_at_utc": "2026-11-04T23:10:26.040504+00:00",
+  "sha256": {
+    "analysis/codex_eval_source_overlay_20261104.py": "f9f23256911f1659770e398917d1c7117c8afd0db8180a746158212fb05f6b8f",
+    "analysis/dual_thrust_test.py": "f6823325cfed5a88d392e4df3ee1c431adad1122882b9e24950d5ad130b284cc",
+    "analysis/codex_portfolio_audit_prepare.py": "03e9f7899f15d60456b30f113dff4f771cf043769f8856be5ce877f06d85e65a",
+    "checks/candidates/dual_thrust/trades.csv": "90142c79a4f90b7588aab15dbe03843870bdee3691bd2fb65b0fb1ae4e8004d1"
+  },
+  "checks": {
+    "fabricated_overlay_selftest": "PASS",
+    "compile": "PASS",
+    "source_date_kind_metadata": "1521 rows:712stop/408target/401flat/0close in2018-04-02..2026-07-07",
+    "mutation_scope_static": "Only selected own exit row/raw; prices/times preserved; segment nodes recomputed",
+    "same_epoch_entry_priority": "PASS after conservative own-NaN guard; final fabricated selftest rerun",
+    "exact_original_DT_cohort": "401 exit clocks and original ledger SHA guard inspected; sourceCSV pinned as third source"
+  },
+  "status": "Final bounded code-only review complete on this hash. No unresolved defect found under original hash-verified Tape loader precondition. Distinct committed amendment and pinned sources required before actual overlay or returns. Rebuild window node indexes on corrected tape. Original frozen review/code/results untouched.",
+  "report": "agents/codex/inputs/eval_audit_20261104/overlay_review.md",
+  "supersedes_overlay_sha256": "f9f23256911f1659770e398917d1c7117c8afd0db8180a746158212fb05f6b8f"
+}

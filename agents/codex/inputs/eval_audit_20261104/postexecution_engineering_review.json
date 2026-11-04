@@ -1,0 +1,163 @@
+{
+  "candidate_id": "E50_7ba98d03398338e0",
+  "canonical_cases_path": "agents/codex/runtime/eval_audit_20261104/design_initial/main/fresh/E50_7ba98d03398338e0.csv",
+  "canonical_cases_sha256": "8e5d99ccdf37fd9489732479b3869a22fae9637f1fe076d9d061274f90521d7d",
+  "canonical_result": {
+    "account": "50K",
+    "calendar_days": 0.75,
+    "candidate_id": "E50_7ba98d03398338e0",
+    "cash": 50000.0,
+    "commission": "0.0",
+    "cost_scenario": "main",
+    "dll_pauses": "0.0",
+    "equity": 50000.0,
+    "expiry_ct": "2018-05-01T17:00:00-05:00",
+    "expiry_epoch": "1525212000",
+    "fill_count": "0.0",
+    "floor": 48000.0,
+    "forced_cutoff_flats": "0.0",
+    "initial_equity": "50000.0",
+    "initial_floor": "48000.0",
+    "initial_state": "fresh",
+    "label": "CURRENT",
+    "last_epoch": 1522683000.0,
+    "liquidation_cost": "0.0",
+    "max_net_micro_exposure": "0.0",
+    "minimum_equity": "50000.0",
+    "minimum_equity_lower_bound": "50000.0",
+    "minimum_equity_scope": "visitednodes_and_potential-risksegments;see_lower_bound",
+    "observed_trading_sessions": "1",
+    "open_virtual_positions": "0.0",
+    "purchase_ct": "2018-04-01T16:30:00-05:00",
+    "reason": "duplicate_or_invalid_entry",
+    "rejected_entries": "0.0",
+    "skipped_raw_rows": "476.0",
+    "source_fill_slippage": "0.0",
+    "start_id": "2018-04-02",
+    "start_weekday": 0,
+    "start_year": 2018,
+    "status": "unknown",
+    "total_modeled_cost": 0.0,
+    "trimmed_entries": "0.0"
+  },
+  "checks": {
+    "BRIDGE_no_invented_stop": true,
+    "BRIDGE_requested2_micros": true,
+    "VB_fixed75_source_stop": true,
+    "VB_requested8_micros": true,
+    "all_requests_native_integer": true,
+    "canonical_cash": true,
+    "canonical_commission": true,
+    "canonical_dll_pauses": true,
+    "canonical_equity": true,
+    "canonical_fill_count": true,
+    "canonical_floor": true,
+    "canonical_forced_cutoff_flats": true,
+    "canonical_last_epoch": true,
+    "canonical_liquidation_cost": true,
+    "canonical_max_net_micro_exposure": true,
+    "canonical_open_virtual_positions": true,
+    "canonical_rejected_entries": true,
+    "canonical_source_fill_slippage": true,
+    "canonical_trimmed_entries": true,
+    "fast_bound_encloses_raw_minimum": true,
+    "fast_visited_minimum_not_below_raw": true,
+    "reason": true,
+    "source_fee_sum": true,
+    "source_slippage_sum": true,
+    "status": true
+  },
+  "checks_pass": true,
+  "limits": [
+    "Frozen common-OHLC phase path and source-fill insertions remain conditional, not native tick chronology.",
+    "Most account core source was written by this reviewer; this reproduces engineering identities, not a fully independent economic implementation.",
+    "One reference case cannot establish calibrated pass probabilities, data sufficiency or optimality.",
+    "No2023portfolio validation was inspected or computed.",
+    "Pinned first case has zero admitted fills; source-cost sum identities are vacuous and do not independently verify historical fills/costs."
+  ],
+  "native_source_order_checks": [],
+  "policy": {
+    "account": 50,
+    "aliases": [
+      "CURRENT_x1.0",
+      "ONB30_VB8_risk1100_EOS500_Bridge2"
+    ],
+    "book": {
+      "BRIDGE": {
+        "kind": "lots",
+        "value": 2
+      },
+      "EOS": {
+        "kind": "risk",
+        "value": 500.0
+      },
+      "ONB30": {
+        "kind": "risk",
+        "value": 1100.0
+      },
+      "VB": {
+        "kind": "lots",
+        "value": 8
+      }
+    },
+    "candidate_id": "E50_7ba98d03398338e0",
+    "exposure_vector": {
+      "BRIDGE": 0.1,
+      "EOS": 0.25,
+      "ONB30": 0.55,
+      "VB": 0.4
+    },
+    "family_id": "reference",
+    "governor": {
+      "aggregate_stop_fraction": 1.0,
+      "cushion_buffer": 0.0,
+      "risk_fraction": 0.0,
+      "target_guard": false
+    },
+    "label": "CURRENT",
+    "parent_id": null,
+    "role": "reference",
+    "source_rules": "Frozen source strategy signals/exits; allocation only. Intraday broker stops/target guard modeled."
+  },
+  "prepare_receipt": {
+    "artifacts": {
+      "metadata.json": "eed489dfa86dce8364550ae67c2d668ece360cd751dfcfd3260565bd1fa56f46",
+      "quality.csv": "28f4f529a6aab9e006d664fadd510dac4abfd1e5a77b3ac01eee0f34c82810e6",
+      "tape.npz": "16ef9436bb8dc9dc9f4feb7d4ef873ad0d473e7c2ec518cd4b8f3e9a5968fd26",
+      "trades.csv": "98029b1fa63864ed75aef620983dfc74a10ca7006c5d9e81ce55778180bc7554"
+    },
+    "config_sha256": "724faf41b75477eab74a814213f1c35dbcd56ff2424005311e14e920d0f7a438",
+    "preregistration_commit": "a087708b13697df4c3dd0b0814f98cb53a2b254a",
+    "rows": 4587054,
+    "source_events": 19818,
+    "status": "conditional common-OHLC research tape; independent raw-spec/broker verification pending"
+  },
+  "preregistration_commit": "a087708b13697df4c3dd0b0814f98cb53a2b254a",
+  "raw_result": {
+    "cash": 50000.0,
+    "commission": 0.0,
+    "dll_pauses": 0.0,
+    "equity": 50000.0,
+    "fill_count": 0.0,
+    "floor": 48000.0,
+    "forced_cutoff_flats": 0.0,
+    "last_row": 484.0,
+    "liquidation_cost": 0.0,
+    "max_net_micro_exposure": 0.0,
+    "minimum_equity": 50000.0,
+    "minimum_equity_lower_bound": 50000.0,
+    "minimum_equity_scope": "allvisitedquotes",
+    "open_virtual_positions": 0.0,
+    "reason": 9.0,
+    "reason_name": "duplicate_or_invalid_entry",
+    "rejected_entries": 0.0,
+    "skipped_raw_rows": 0.0,
+    "source_fill_slippage": 0.0,
+    "status": 4.0,
+    "status_name": "unknown",
+    "trimmed_entries": 0.0
+  },
+  "scope": "One previously completed2018CURRENT50K reference, same-rule raw-vs-fast engineering reproduction; no new hypothesis/definition or2023outcomes.",
+  "source_cost_check_exercised": false,
+  "start": "2018-04-02"
+}
