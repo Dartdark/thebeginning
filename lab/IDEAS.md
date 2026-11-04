@@ -273,3 +273,20 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   one hour earlier (12:16 -> 12:29 / 12:31 -> 13:15). Power: ~250 days a year (V2), ~60 a year (V1 / V3). Costs $5 + 1 tick
   a side; stop at stage 1 unless gross per trade > 2x cost.
 - Apex: yes (intraday). data: data/NG_1min_*.csv (CT)
+
+## Q021 · queued · priority 1
+- who_pays: structural / behavioral: weekend weather-model runs (GFS / ECMWF, Saturday-Sunday) and news force hedgers and weather funds to reprice NG at the thin Sunday 17:00 CT reopen, when liquidity providers are few and demand a premium; the overshoot is given back as Monday liquidity arrives (the same mechanism that pays the plan's CL Sunday up-gap fade, rank A)
+- tier_check: scout 2026-11-04, dupcheck 'Sunday gap' / 'NG Sunday' / 'natural gas weekend' / 'weekend gap': CL Sunday up-gap fade A (in the plan); Sunday-gap fade / follow on GC, NQ, ES, YM tested in S-rank round 2 (C / F); BTC weekend gap C / F; NG never tested (NG data added 2026-10-31); clear
+- source: scout 2026-11-04: cross-market port of the plan's CL Sunday up-gap fade (`funded_strategies/CL_Sunday_Gap_Fade.txt`,
+  `analysis/s_rank_gap_round2_test.py`, `analysis/cl_sunday_fade_confirm.py`); no paper. Rules copied unchanged from CL
+  (no new parameters).
+- market: NG (QG / MNG)
+- mechanism: weekend information arrives with no market open; the Sunday reopen prices it in a few thin minutes and
+  overshoots; fade the gap into Monday's liquid session.
+- rule sketch (CL's rule, unchanged): gap = first NG open at / after the Sunday 17:01 bar minus Friday's last price, in
+  15-day ATR units. V1 (CL's exact form): short at the Sunday 17:05 open when gap >= +0.1 ATR, out Monday 09:00 CT, stop
+  0.75 ATR; V2 both sides (long the down gaps <= -0.1 ATR, same exits); V3 V1 with gap >= +0.3 ATR. Drop every weekend
+  whose Friday -> exit window contains an NG roll bar (our series rolls the evening before expiry: Q011 lesson) and holiday
+  reopens. Placebo: same entry / exit on random weekday evenings 17:05 -> 09:00 with the same gap sign rule from the prior
+  17:00 price. Power: ~45 Sundays a year, ~20-25 with an up gap >= 0.1 ATR (~110 in 2018-22 for V1).
+- Apex: yes (Sunday 17:00 starts Monday's Apex day; flat Monday 09:00). data: data/NG_1min_*.csv (CT, 24 h)
