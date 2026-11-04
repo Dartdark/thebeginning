@@ -1,0 +1,2033 @@
+{
+  "scope": "Metadata/source inventory only; zero new strategy returns or portfolio combinations computed. Routing is research eligibility, not a tier/allocation change.",
+  "codex_head": "0da4e8f1b7f42309ab3ad84635ad082b9ae895bf",
+  "latest_claude_ref": "13e29ca7b45daabeb0ed2d8c286448610f594dab",
+  "registry_rows": 368,
+  "curated_strategy_families": 36,
+  "current_eval_rosters": {
+    "50K": {
+      "VB": 8,
+      "ONB30_risk": 1100,
+      "ONB30_ATR": 0.25,
+      "EOS_risk": 500,
+      "EOS_ATR": 0.3,
+      "BRIDGE": 2
+    },
+    "150K": {
+      "VB": 20,
+      "ONB30_risk": 2750,
+      "ONB30_ATR": 0.25,
+      "EOS_risk": 1250,
+      "EOS_ATR": 0.3,
+      "BRIDGE": 5
+    }
+  },
+  "normalized_ledger_metadata": [
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/BRIDGE_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 24249,
+      "sha256": "af872e9f93caa6e4b6b30a93f202c31192b122730249828a5cd6cc95e768720c",
+      "rows": 207,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-30 00:00:00",
+          "last": "2026-06-22 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-29 19:00:00",
+          "last": "2026-06-21 18:56:00"
+        },
+        "exit_at": {
+          "first": "2018-04-30 15:55:00",
+          "last": "2026-06-21 19:03:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/CLS_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 10561,
+      "sha256": "d3b773d68ed0cf6a1389afa52fa7bd6c14916cca914c3fa07ffb2db509578e0a",
+      "rows": 87,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-23 00:00:00",
+          "last": "2026-06-22 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-22 17:06:00",
+          "last": "2026-06-21 17:06:00"
+        },
+        "exit_at": {
+          "first": "2018-04-23 09:00:00",
+          "last": "2026-06-22 09:00:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/DT_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 172328,
+      "sha256": "b34479fcda8d59aad27aed75712dbe166ce8f26740e91a27af8b376696bc577d",
+      "rows": 1521,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-02 00:00:00",
+          "last": "2026-07-07 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-02 09:34:00",
+          "last": "2026-07-07 08:40:00"
+        },
+        "exit_at": {
+          "first": "2018-04-02 12:45:00",
+          "last": "2026-07-07 08:40:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/EOS_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 11428,
+      "sha256": "e25f4cd3098745e7bd20b0bc91a0bebd78aae2c10a546c9859056970d04fad21",
+      "rows": 99,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-20 00:00:00",
+          "last": "2026-06-18 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-20 08:31:00",
+          "last": "2026-06-18 08:31:00"
+        },
+        "exit_at": {
+          "first": "2018-04-20 10:00:00",
+          "last": "2026-06-18 10:00:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/LDF_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 97124,
+      "sha256": "68cc91771c4c63dce0817f9afde7d114cb248cd31df3b3116dc06726a22008b2",
+      "rows": 848,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-02 00:00:00",
+          "last": "2026-07-02 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-02 14:01:00",
+          "last": "2026-07-02 14:01:00"
+        },
+        "exit_at": {
+          "first": "2018-04-02 14:30:00",
+          "last": "2026-07-02 14:30:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/MOC_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 21603,
+      "sha256": "456a7a85470d0675307c7b717c68a3ffeeed7d5c7338a7d0dcc515d5e7d7b108",
+      "rows": 187,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-09 00:00:00",
+          "last": "2026-06-17 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-09 14:51:00",
+          "last": "2026-06-17 14:51:00"
+        },
+        "exit_at": {
+          "first": "2018-04-09 15:00:00",
+          "last": "2026-06-17 15:00:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/MON_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 48119,
+      "sha256": "26b314670131af4f5894197c00975c1bffe8fbd5e105e8cbcc76df85479b8d86",
+      "rows": 423,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-02 00:00:00",
+          "last": "2026-07-06 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-02 08:31:00",
+          "last": "2026-07-06 08:31:00"
+        },
+        "exit_at": {
+          "first": "2018-04-02 09:36:00",
+          "last": "2026-07-06 15:00:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/NFP_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 8252,
+      "sha256": "07cc759f40874b59777d354852649f3e2beb6fcd70885bcd22fef7525bc5d6a1",
+      "rows": 72,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-06 00:00:00",
+          "last": "2026-03-06 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-06 07:46:00",
+          "last": "2026-03-06 07:46:00"
+        },
+        "exit_at": {
+          "first": "2018-04-06 09:00:00",
+          "last": "2026-03-06 09:00:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/ONB30_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 74395,
+      "sha256": "043c129f2ae7c694b98d682dcfc8f323198cb4c5a4d923f17eaf9791f973705f",
+      "rows": 639,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-02 00:00:00",
+          "last": "2026-07-07 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-02 10:31:00",
+          "last": "2026-07-07 09:31:00"
+        },
+        "exit_at": {
+          "first": "2018-04-02 14:30:00",
+          "last": "2026-07-07 11:14:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/ONBML_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 36708,
+      "sha256": "ea9af15f725dce6408300c182de20309886329871b581fc517a6d3f9814e7293",
+      "rows": 315,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-02 00:00:00",
+          "last": "2026-06-16 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-02 08:46:00",
+          "last": "2026-06-16 09:20:00"
+        },
+        "exit_at": {
+          "first": "2018-04-02 10:38:00",
+          "last": "2026-06-16 14:30:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/OT_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 56461,
+      "sha256": "3d6a435ad90d51a27cdc8e433a3eadbafdb0ce649dda5e8bf3cea2d50e0bb811",
+      "rows": 516,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-09 00:00:00",
+          "last": "2026-07-03 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-08 17:06:00",
+          "last": "2026-07-02 17:06:00"
+        },
+        "exit_at": {
+          "first": "2018-04-09 03:01:00",
+          "last": "2026-07-03 03:01:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/RS_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 128591,
+      "sha256": "897c2b7160d7aa8709e2cb03ce190ff2f9bbd81aedb62bad08f5194aea70bda9",
+      "rows": 1092,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-03 00:00:00",
+          "last": "2026-07-06 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-03 09:01:00",
+          "last": "2026-07-06 09:01:00"
+        },
+        "exit_at": {
+          "first": "2018-04-03 14:12:00",
+          "last": "2026-07-06 15:00:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/TOS_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 40221,
+      "sha256": "2711895daa680f240a160b85f46655bc1859c7d3c4c17d27311b340854772ea5",
+      "rows": 345,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-04 00:00:00",
+          "last": "2026-06-23 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-04 08:30:00",
+          "last": "2026-06-23 08:30:00"
+        },
+        "exit_at": {
+          "first": "2018-04-04 08:45:00",
+          "last": "2026-06-23 08:45:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/VB_F_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 59946,
+      "sha256": "d89e9b2ada95fcfe9d065bd78a23c4b6de2ed8d1ecd2e416dff63303c28ffee9",
+      "rows": 519,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-09 00:00:00",
+          "last": "2026-07-06 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-09 11:01:00",
+          "last": "2026-07-06 10:31:00"
+        },
+        "exit_at": {
+          "first": "2018-04-09 14:23:00",
+          "last": "2026-07-06 11:57:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/VB_N_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 130252,
+      "sha256": "7ef8c4ee0e0c859f45550830046c91551d489427fb1d27bc3acebf22beb390d6",
+      "rows": 1131,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-04 00:00:00",
+          "last": "2026-06-29 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-04 11:31:00",
+          "last": "2026-06-29 12:01:00"
+        },
+        "exit_at": {
+          "first": "2018-04-04 14:00:00",
+          "last": "2026-06-29 12:11:00"
+        }
+      }
+    },
+    {
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/VB_unit_ledger.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 187671,
+      "sha256": "b23dc8ca495238518bcfc56e00bf09f62bece3baa3a797c4bdc77d362be76645",
+      "rows": 1658,
+      "columns": [
+        "key",
+        "market",
+        "date",
+        "entry_at",
+        "exit_at",
+        "j0",
+        "j1",
+        "side",
+        "qty",
+        "entry",
+        "exit",
+        "kind",
+        "gross",
+        "fee_units",
+        "slippage_one_tick",
+        "missing_held_bars",
+        "exit_after_1559"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-04-04 00:00:00",
+          "last": "2026-07-06 00:00:00"
+        },
+        "entry_at": {
+          "first": "2018-04-04 11:31:00",
+          "last": "2026-07-06 10:31:00"
+        },
+        "exit_at": {
+          "first": "2018-04-04 14:00:00",
+          "last": "2026-07-06 11:57:00"
+        }
+      }
+    }
+  ],
+  "other_asset_metadata": [
+    {
+      "path": "checks/candidates/fc_2b/trades.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 36656,
+      "sha256": "5e2f46eaf0c4015bdb8bccb2cd6298068f8fb8e1628a08aef2ad02cce1e1eac1",
+      "rows": 773,
+      "columns": [
+        "date",
+        "side",
+        "net",
+        "entry",
+        "exit",
+        "kind"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-01-02 00:00:00",
+          "last": "2026-10-16 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/fc_2b/mc_v2_trades_all.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 60996,
+      "sha256": "62495108fe4fc86495ece9977b89e94bb967e2644aeeb3e766e5b36c08384d96",
+      "rows": 826,
+      "columns": [
+        "date",
+        "side",
+        "entry",
+        "exit",
+        "kind",
+        "t_in",
+        "t_out",
+        "exit_date",
+        "gross",
+        "net"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2017-05-30 00:00:00",
+          "last": "2026-10-16 00:00:00"
+        },
+        "exit_date": {
+          "first": "2017-05-30 00:00:00",
+          "last": "2026-10-16 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/dual_thrust/trades.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 70483,
+      "sha256": "90142c79a4f90b7588aab15dbe03843870bdee3691bd2fb65b0fb1ae4e8004d1",
+      "rows": 1611,
+      "columns": [
+        "date",
+        "side",
+        "net",
+        "entry",
+        "exit",
+        "kind"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-01-02 00:00:00",
+          "last": "2026-10-08 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/dual_thrust/mc_trades.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 123362,
+      "sha256": "7bbc7430ea45b3e0d391826355105683eab516ba504a54255b9961647bf507ed",
+      "rows": 1723,
+      "columns": [
+        "date",
+        "side",
+        "entry",
+        "exit",
+        "kind",
+        "t_in",
+        "t_out",
+        "exit_date",
+        "gross",
+        "net"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2017-05-30 00:00:00",
+          "last": "2026-10-22 00:00:00"
+        },
+        "exit_date": {
+          "first": "2017-05-30 00:00:00",
+          "last": "2026-10-22 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/swing_target/mc_trades_v3.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 50062,
+      "sha256": "ee4776e1fe7abc32ff42074579836bfe42301b24e986cf7f85f1e9231f75eb34",
+      "rows": 668,
+      "columns": [
+        "date",
+        "side",
+        "entry",
+        "exit",
+        "kind",
+        "t_in",
+        "t_out",
+        "exit_date",
+        "gross",
+        "net"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2017-01-31 00:00:00",
+          "last": "2026-10-22 00:00:00"
+        },
+        "exit_date": {
+          "first": "2017-01-31 00:00:00",
+          "last": "2026-10-22 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/papertrend/mc_trades_claude.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 45033,
+      "sha256": "2d4053c53630e2b6f13846e96a25488f359cea30f5bc9236120e8441eee60039",
+      "rows": 636,
+      "columns": [
+        "date",
+        "side",
+        "entry",
+        "exit",
+        "kind",
+        "t_in",
+        "t_out",
+        "exit_date",
+        "gross",
+        "net"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2017-01-24 00:00:00",
+          "last": "2026-10-22 00:00:00"
+        },
+        "exit_date": {
+          "first": "2017-01-24 00:00:00",
+          "last": "2026-10-22 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/t_oneside/mc_trades_T_ONESIDE_v2.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 25221,
+      "sha256": "c6837fe19af5fa74e6c144d0563b3279be8ac2c8ae989325bac7a0419266255b",
+      "rows": 359,
+      "columns": [
+        "date",
+        "side",
+        "entry",
+        "exit",
+        "kind",
+        "t_in",
+        "t_out",
+        "exit_date",
+        "gross",
+        "net"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-01-30 00:00:00",
+          "last": "2026-10-15 00:00:00"
+        },
+        "exit_date": {
+          "first": "2018-01-30 00:00:00",
+          "last": "2026-10-15 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/relative_strength/trades.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 76770,
+      "sha256": "344fe1e7b043e509c46540c42d85f844bc9c969552784c0b9d5360302098e8ad",
+      "rows": 1161,
+      "columns": [
+        "date",
+        "side",
+        "net",
+        "kind",
+        "entry",
+        "exit",
+        "z"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-01-09 00:00:00",
+          "last": "2026-10-09 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/fvb/trades.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 264575,
+      "sha256": "edb047e88377ad251e4ac0e40506b15158250c048844ac9baaf4bad00f25b5d8",
+      "rows": 2150,
+      "columns": [
+        "date",
+        "side",
+        "level",
+        "n",
+        "entry",
+        "exit",
+        "stop",
+        "kind",
+        "sd",
+        "atr",
+        "pts",
+        "net",
+        "r",
+        "j0",
+        "j1",
+        "row"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-01-05 00:00:00",
+          "last": "2026-10-08 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/s47_v2/mc_trades_S47_v2.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 58111,
+      "sha256": "3ecccddcc6a4b3a8914dfdbacfe1faecaaa451cf18ac49db6c66e9ab3e9c7423",
+      "rows": 786,
+      "columns": [
+        "date",
+        "side",
+        "entry",
+        "exit",
+        "kind",
+        "t_in",
+        "t_out",
+        "exit_date",
+        "gross",
+        "net"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2017-01-25 00:00:00",
+          "last": "2026-10-22 00:00:00"
+        },
+        "exit_date": {
+          "first": "2017-01-25 00:00:00",
+          "last": "2026-10-22 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/kusho/python_trades_v9_RTH_rolladj.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 251683,
+      "sha256": "bd72ed6afad7f6c28d5c35804f8f9eafcd83ff4c937c3bb8f92ea7fab5baee19",
+      "rows": 3152,
+      "columns": [
+        "date",
+        "exit_date",
+        "side",
+        "entry",
+        "exit",
+        "kind",
+        "swing",
+        "fm",
+        "xm",
+        "net",
+        "weekend"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-01-02 00:00:00",
+          "last": "2026-10-07 00:00:00"
+        },
+        "exit_date": {
+          "first": "2018-01-02 00:00:00",
+          "last": "2026-10-07 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/twin_continuation/trades.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 75389,
+      "sha256": "2e0fe7f717a711bd2416ccee377886287da0c6ed5a0dfd5653dcccd1c30c549e",
+      "rows": 1074,
+      "columns": [
+        "date",
+        "side",
+        "net",
+        "setup",
+        "entry_date",
+        "entry_time_ct",
+        "exit_time_ct",
+        "entry",
+        "exit"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-01-02 00:00:00",
+          "last": "2026-10-08 00:00:00"
+        },
+        "entry_date": {
+          "first": "2018-01-02 00:00:00",
+          "last": "2026-10-08 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/bb_mrm/mc_trades.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 139187,
+      "sha256": "ed6d3a7f19eccb8721f829727195bd5cf58eecf069926f49be3f380ef0186788",
+      "rows": 1762,
+      "columns": [
+        "date",
+        "side",
+        "entry",
+        "exit",
+        "kind",
+        "t_in",
+        "t_out",
+        "exit_date",
+        "gross",
+        "net"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2017-05-01 00:00:00",
+          "last": "2026-10-23 00:00:00"
+        },
+        "exit_date": {
+          "first": "2017-05-01 00:00:00",
+          "last": "2026-10-23 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/overnight_tick/python_trades.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 43882,
+      "sha256": "28cb6716a1e1c6aa00e75491a1a23299263e826930b196079ec3cb69626a4228",
+      "rows": 536,
+      "columns": [
+        "date",
+        "sess",
+        "net",
+        "adv",
+        "rsv",
+        "rsv_bar",
+        "side"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-01-10 00:00:00",
+          "last": "2026-07-03 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/s30_ibs/daily_nq_es_per_micro.csv",
+      "source": "local",
+      "available": true,
+      "bytes": 37348,
+      "sha256": "0c56721d7fb3a20ec7e5d4b0a3b366fa15183a874a3a201768d579164738bb87",
+      "rows": 2288,
+      "columns": [
+        "Unnamed: 0",
+        "0"
+      ],
+      "date_coverage": {}
+    },
+    {
+      "path": "analysis/outputs/codex_s03_v2/v2_trades.csv",
+      "source": "local",
+      "available": false
+    },
+    {
+      "path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx",
+      "source": "local",
+      "available": true,
+      "bytes": 6484500,
+      "sha256": "c01e8985f6327884528d9bdb78e93bc3fc6cd0bb28acab7c80c0af81fc46fdfe"
+    },
+    {
+      "path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+      "source": "local",
+      "available": true,
+      "bytes": 6095770,
+      "sha256": "f5d9beee8f4e0a2a94870e6101526a7ee79c1874bdbe96145de3aa73d03b00fc"
+    },
+    {
+      "path": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+      "source": "local",
+      "available": true,
+      "bytes": 6815488,
+      "sha256": "7169ba79c9f23cb55a8f8324b950c6e956aefdd130ca581fd52d9fdd203f3ccf"
+    },
+    {
+      "path": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+      "source": "local",
+      "available": true,
+      "bytes": 5692550,
+      "sha256": "2a1c7dd88a261ad0b0df67f310e3c0c33b17d3faf85f7a94c53e9d910f63bc8f"
+    },
+    {
+      "path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx",
+      "source": "local",
+      "available": true,
+      "bytes": 6002856,
+      "sha256": "1c5bd433c0af727659262bcf3f65c61e87b2f53bf542572332ff8e5225b5f436"
+    },
+    {
+      "path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx",
+      "source": "local",
+      "available": true,
+      "bytes": 5389087,
+      "sha256": "c6147c1d54df1bf6c43296fc1ff3493c1fe12bc7dda641cb1288d6517ace45c2"
+    },
+    {
+      "path": "analysis/outputs/bridge_noise_15m_trades_rth_longs.csv",
+      "source": "claude:13e29ca7b45daabeb0ed2d8c286448610f594dab",
+      "available": true,
+      "bytes": 180038,
+      "sha256": "4f27ea3975da07b921a2fe57cc6524f5870c42f3da4bd51345aeebeb1dd56903",
+      "rows": 2652,
+      "columns": [
+        "date",
+        "side",
+        "entry",
+        "exit",
+        "kind",
+        "t0",
+        "t1",
+        "row",
+        "j0",
+        "j1",
+        "net"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2017-06-02 00:00:00",
+          "last": "2026-11-02 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/trades.csv",
+      "source": "claude:13e29ca7b45daabeb0ed2d8c286448610f594dab",
+      "available": true,
+      "bytes": 117286,
+      "sha256": "d69023e21f515d77ecf15f76a67b5ae0ac52ffa8d0a9fd8defd38260ba37177a",
+      "rows": 2579,
+      "columns": [
+        "date",
+        "side",
+        "net",
+        "entry",
+        "exit",
+        "kind"
+      ],
+      "date_coverage": {
+        "date": {
+          "first": "2018-01-02 00:00:00",
+          "last": "2026-11-02 00:00:00"
+        }
+      }
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/fills.csv",
+      "source": "claude:13e29ca7b45daabeb0ed2d8c286448610f594dab",
+      "available": true,
+      "bytes": 151250,
+      "sha256": "e3dc82eaa6682c9ea170c24a71e91927ea0e8e72d4757e12ea9ae360aca65958",
+      "rows": 2580,
+      "columns": [
+        "entry_time",
+        "exit_time",
+        "side",
+        "entry",
+        "exit"
+      ],
+      "date_coverage": {}
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/NQ_Noise_RTH_Anchor.txt",
+      "source": "claude:13e29ca7b45daabeb0ed2d8c286448610f594dab",
+      "available": true,
+      "bytes": 7717,
+      "sha256": "686e745d48f2920d6be68e72024a245cabd5877c10ef3b65799fc22063a3e7e4"
+    }
+  ],
+  "candidates": [
+    {
+      "key": "VB",
+      "name": "Vault Break",
+      "market": "NQ",
+      "reported_tier": "A",
+      "evaluation_routing": "baseline",
+      "normalized_key": "VB",
+      "source_path": "mc_reports/Backtesting Strategy Performance Report VB v1.xlsx",
+      "limits": "Existing eval driver; high overlap/correlation needs account replay, not standalone profit selection.",
+      "entry_stop_specification": {
+        "type": "fixed_points",
+        "points": 75,
+        "target_points": 40,
+        "source": "MC VB v1 Settings StopPts75/TargetPts40 verified; apex_strategies/NQ_Vault_Break.txt"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/VB_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MCconfirmed established core; live-match recent claims separately audited. Actual default stop75points verified in MCSettings."
+    },
+    {
+      "key": "ONB30",
+      "name": "Plain Overnight Bias ADX30",
+      "market": "NQ",
+      "reported_tier": "A",
+      "evaluation_routing": "baseline",
+      "normalized_key": "ONB30",
+      "source_path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx",
+      "limits": "Current eval uses plain ONB ADX30/0.25ATR, not funded ML. Latest losing stretch is not a new independent selection sample.",
+      "entry_stop_specification": {
+        "type": "prior_ATR_multiple",
+        "multiple": 0.25,
+        "length": 15,
+        "target_R": 3,
+        "source": "MCplainONB Settings ADXMin30,StopAtrPct0.25,AtrDays15 verified; chart own weekday calendar-dateTR semantics must match"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/ONB30_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MCconfirmed original eval ADX30/.25ATR. Not the MLv2model; current defaultsource .30 differs from evalInputs."
+    },
+    {
+      "key": "EOS",
+      "name": "Expiration Open Short",
+      "market": "NQ",
+      "reported_tier": "A",
+      "evaluation_routing": "baseline",
+      "normalized_key": "EOS",
+      "source_path": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+      "limits": "Rare (~monthly) event; dollar-risk sizing is floored separately per account.",
+      "entry_stop_specification": {
+        "type": "prior_ATR_multiple",
+        "multiple": 0.3,
+        "length": 15,
+        "source": "MCEOSv1 Settings StopAtrPct0.30,AtrDays15 verified"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/EOS_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MCconfirmed established rare-event strategy; no new verification here."
+    },
+    {
+      "key": "BRIDGE",
+      "name": "Bridge Monday Long",
+      "market": "NQ",
+      "reported_tier": "A",
+      "evaluation_routing": "baseline",
+      "normalized_key": "BRIDGE",
+      "source_path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Bridge Monday Longs.xlsx",
+      "limits": "Sunday19:00→Monday15:55 within one account session; no source stop; path/overlap and calendar checks required.",
+      "entry_stop_specification": {
+        "type": "no_protective_stop",
+        "points": null,
+        "target_points": 100,
+        "source": "BridgeMonday fixed source and current plan; fixed2/5MNQ baseline, no invented stop-risk sizing"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/BRIDGE_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MC217/217matched prior claim; current two/five native lots, no stop. Price-touch/session inference limits remain."
+    },
+    {
+      "key": "ONBML",
+      "name": "Overnight Bias ML v2",
+      "market": "NQ",
+      "reported_tier": "S",
+      "evaluation_routing": "conditional_existing_alternative",
+      "normalized_key": "ONBML",
+      "source_path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+      "limits": "High-priority source-supported swap. Preserve original fold/filter training and explicit unfinished open-position row; do not invent a stronger filter.",
+      "entry_stop_specification": {
+        "type": "prior_ATR_multiple",
+        "multiple": 0.3,
+        "length": 15,
+        "target_R": 3,
+        "source": "MCONBMLv2 Settings ADXMin20,StopAtrPct0.30,AtrDays15 verified; existing frozen WFfilter"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/ONBML_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "Existing frozenMLv2MCreport and sourcewalk-forward claims; MLfilter fit/cutoff must remain pinned, not freshly selected."
+    },
+    {
+      "key": "LDF",
+      "name": "Late-Day Flow",
+      "market": "NQ",
+      "reported_tier": "A",
+      "evaluation_routing": "conditional_existing_alternative",
+      "normalized_key": "LDF",
+      "source_path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+      "limits": "Current funded core, fixed14:00flow rule; late-time footprint differs but still equity beta.",
+      "entry_stop_specification": {
+        "type": "prior_ATR_multiple",
+        "multiple": 0.25,
+        "length": 15,
+        "source": "build_lab.REPORTS LDF_MC and fixed source; verify actual settings/clock before native sizing"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/LDF_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MCconfirmed current funded core, lagged source clocks unchanged."
+    },
+    {
+      "key": "MON",
+      "name": "Monday Long",
+      "market": "NQ",
+      "reported_tier": "A",
+      "evaluation_routing": "conditional_existing_alternative",
+      "normalized_key": "MON",
+      "source_path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+      "limits": "Current150Kfunded keeps it;50Kfunded replaced with OT. Apply current holiday exclusions, not historical mis-sized Monday rows.",
+      "entry_stop_specification": {
+        "type": "prior_ATR_multiple",
+        "multiple": 0.5,
+        "length": 15,
+        "source": "build_lab.REPORTS MON_MC; current holiday exclusions apply"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/MON_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MCconfirmed; later source/calendar excludes July3/December24holiday-Monday rows."
+    },
+    {
+      "key": "NFP",
+      "name": "NFP Fade",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "conditional_existing_alternative",
+      "normalized_key": "NFP",
+      "source_path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
+      "limits": "Sparse monthly calendar; observed early loss/offset timing matters more than annual correlation.",
+      "entry_stop_specification": {
+        "type": "prior_ATR_multiple",
+        "multiple": 0.5,
+        "length": 15,
+        "source": "build_lab.REPORTS NFP_MC; GoodFriday exclusion applies"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/NFP_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MCconfirmed; later source excludes GoodFriday row."
+    },
+    {
+      "key": "CLS",
+      "name": "CL Sunday up-gap fade",
+      "market": "CL",
+      "reported_tier": "A",
+      "evaluation_routing": "conditional_existing_alternative",
+      "normalized_key": "CLS",
+      "source_path": "funded_strategies/CL_Sunday_Gap_Fade.txt",
+      "limits": "Principal existing non-equity diversifier. Prior normalized audit flags missing held bars on85/87trades; full native path admission is not automatic.",
+      "entry_stop_specification": {
+        "type": "prior_ATR_multiple",
+        "multiple": 0.75,
+        "length": 15,
+        "source": "cl_sunday_fade_confirm.python_trades sourcefr.atr; exact chart/TR and rawfr construction need matching"
+      },
+      "native_point_value": 100.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/CLS_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MC96/97prior match; normalized audit85/87trades missing heldminutes. Quotes/roll/fills not independently certified."
+    },
+    {
+      "key": "MOC",
+      "name": "ES MOC Follow",
+      "market": "ES",
+      "reported_tier": "B",
+      "evaluation_routing": "conditional_existing_alternative",
+      "normalized_key": "MOC",
+      "source_path": "analysis/es_moc_confirm.py",
+      "limits": "ES adds instrument diversity but remains equity beta;2023+weaker. Original report/fixed raw source needed, not daily curve.",
+      "entry_stop_specification": {
+        "type": "prior_ATR_multiple",
+        "multiple": 0.25,
+        "length": 15,
+        "source": "s_rank_es_round1_test fixed ES MOC; native MES $5/point"
+      },
+      "native_point_value": 5.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/MOC_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MC199trade prior match/sourceclaim; recent weaker; legacy whole-day/close-mark shortcuts do not certify nativefloor."
+    },
+    {
+      "key": "RS",
+      "name": "Relative Strength NQ/ES",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "conditional_existing_alternative",
+      "normalized_key": "RS",
+      "source_path": "checks/candidates/relative_strength/trades.csv",
+      "limits": "Both/long settings are already separately studied. Preserve beta/Zclock and do not treat daily NQ hedge signal as a second uncorrelated market.",
+      "entry_stop_specification": {
+        "type": "prior_mean_RTH_range_multiple",
+        "multiple": 0.6,
+        "length": 20,
+        "target_multiple": 1.0,
+        "source": "relative_strength_test.trades average08:30–15:00range of20clean prior sessions; not WilderATR"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/RS_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MC1157shared-day P&Lcorr1.000priorclaim/checkerPASS_WITH_CONCERNS. Sourcebeta anddata clocks required."
+    },
+    {
+      "key": "DT",
+      "name": "Dual Thrust v4",
+      "market": "NQ",
+      "reported_tier": "A",
+      "evaluation_routing": "conditional_existing_alternative",
+      "normalized_key": "DT",
+      "source_path": "checks/candidates/dual_thrust/trades.csv",
+      "limits": "MCconfirmed. Current150Kfunded DT2retained; prior evaluation swaps/adds were worse or tied. Count all old selection.",
+      "entry_stop_specification": {
+        "type": "fixed_points",
+        "points": 50,
+        "target_points": 100,
+        "source": "DualThrustv4 declared/current MCconfirmed source"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/DT_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MC1610vs1611,1609identical priorclaim/checkerPASS_WITH_CONCERNS; DSR0.939concern. Current150KfundedDT2retained."
+    },
+    {
+      "key": "TOS",
+      "name": "T_ONESIDE stopped fade T",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "conditional_existing_alternative",
+      "normalized_key": "TOS",
+      "source_path": "checks/candidates/t_oneside/mc_trades_T_ONESIDE_v2.csv",
+      "limits": "50Kfunded replaces RS longs with fade T only. Full T+OS strategy differs;08:29pre-bell fill sensitivity matters.",
+      "entry_stop_specification": {
+        "type": "prior_mean_RTH_range_multiple",
+        "multiple": 0.4,
+        "length": 20,
+        "source": "Tfade only with note stop; ATRd means prior20full-session08:31–15:00meanhigh-low, not true range. OS0.30is a different sleeve."
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/TOS_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MCfade348/358priorclaim,checkerPASS_WITH_CONCERNS; requires stoppedTfade source, not unprotectedfullbook."
+    },
+    {
+      "key": "OT",
+      "name": "Overnight Tick/VIX",
+      "market": "NQ",
+      "reported_tier": "A",
+      "evaluation_routing": "conditional_existing_alternative",
+      "normalized_key": "OT",
+      "source_path": "checks/candidates/overnight_tick/python_trades.csv",
+      "limits": "Source order-flow design panel stops2026-07-07; later no rows are missing coverage, not verified zero signals.69/516held-path gaps in normalized audit; no stop, overnight tail risk.",
+      "entry_stop_specification": {
+        "type": "no_protective_stop",
+        "points": null,
+        "source": "OvernightTick/VIX source; fixed native quantity, no stop-distance/risk-budget guarantee"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "normalized_ledger_metadata",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/outputs/codex_portfolio_audit_20261031/OT_unit_ledger.csv",
+      "ledger_units": "Native micro raw gross/fee_units/slippage_one_tick; recompute costed path, not NQnet/10.",
+      "normalized_window": "2018-04-02–2026-07-07 fixed audit universe; first/last actual ticket is not a no-signal coverage certificate.",
+      "mc_and_reviewer_status": "MC529sharednights97%andcorr1.000priorclaim; underlyingOFendsJuly7. Nativetimes recovered bysource ratherthan dailyextrema."
+    },
+    {
+      "key": "FC2B",
+      "name": "Flow-Confirmed Opening Drive v2",
+      "market": "NQ",
+      "reported_tier": "A",
+      "evaluation_routing": "conditional_research_alternative",
+      "normalized_key": null,
+      "source_path": "checks/candidates/fc_2b/mc_v2_trades_all.csv",
+      "limits": "Use MCv2reference (up-tick Volume semantics/holiday flatten), not overconfident proxy. Prior eval add1–3MNQapproximately no gain; current personal forward log.",
+      "entry_stop_specification": {
+        "type": "fixed_points",
+        "points": 100,
+        "trail_points": 150,
+        "break_even_trigger_points": 66,
+        "source": "FC_2B_v2.txt SLpoints100,TrailPts150,BreakEvenR0.66; MCv2reference"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "checks/candidates/fc_2b/mc_v2_trades_all.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "MCv2reference773trades; checkerPASS_WITH_CONCERNS. Python Volume/up-tick mismatch makesMCledgerreference; forwardlogged."
+    },
+    {
+      "key": "ST",
+      "name": "Swing Target v3",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "conditional_research_alternative",
+      "normalized_key": null,
+      "source_path": "checks/candidates/swing_target/mc_trades_v3.csv",
+      "limits": "Latest funded swaps reverted10/31 after corrected replay; adoption gain inconclusive. Use exact MCv3 ledger and numeric stop/target/time kinds; historical CODE_BEholiday repairs are not exactv3.",
+      "entry_stop_specification": {
+        "type": "prior_mean_RTH_range_multiple",
+        "multiple": 0.7,
+        "length": 20,
+        "target_multiple": 0.35,
+        "break_even_trigger_multiple": 0.3,
+        "source": "NQ_Swing_Target_v3.txt; exact v3knowncalendar skips, not oldCODE_BEpatchedlateexit"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "checks/candidates/swing_target/mc_trades_v3.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "MCv3matched581of602priorrecordeddays and99%entryprices,checker/parity/adoptionnotallindependent. Numeric exit-kind accounting correction invalidates strong oldswapclaim."
+    },
+    {
+      "key": "PT",
+      "name": "PAPERTREND v2",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "conditional_research_alternative",
+      "normalized_key": null,
+      "source_path": "checks/candidates/papertrend/mc_trades_claude.csv",
+      "limits": "Source matching MCledger preferred; original upload was different PL. Long/short and disaster-stop settings preserve source. Prior eval50K+1tie/150Kno gain.",
+      "entry_stop_specification": {
+        "type": "prior_mean_RTH_range_multiple",
+        "multiple": 2.0,
+        "length": 14,
+        "source": "PAPERTRENDv2disaster stop; papertrend_test atr means mean14RTHhigh-low, not WilderATR"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "checks/candidates/papertrend/mc_trades_claude.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "MCClaude-codeledger supports currentpersonal; originalposteduploadwasothercode. CheckeroldPythonFAILDSR; sourceMCt4.35claim doesnotadmitApex."
+    },
+    {
+      "key": "VCS",
+      "name": "Vol-Control Sell Flow",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "conditional_research_alternative",
+      "normalized_key": null,
+      "source_path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx",
+      "limits": "Previously removed funded and omitted eval tiny gain after search; not unexplored. Requires exact lagged vol-control source; source MCavailable.",
+      "entry_stop_specification": {
+        "type": "prior_ATR_multiple",
+        "multiple": 0.25,
+        "length": 15,
+        "source": "build_lab.REPORTS VCS_MC; original lagged volmodelsettings still need match"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Vol-Control Sell Flow.xlsx",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Previously removed funded and omitted eval tiny gain after search; not unexplored. Requires exact lagged vol-control source; source MCavailable."
+    },
+    {
+      "key": "FVB",
+      "name": "First Valid Breakout",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "research_only_not_promotion",
+      "normalized_key": null,
+      "source_path": "checks/candidates/fvb/trades.csv",
+      "limits": "Fat-tail positive Bledger, prior all eval/funded comparisons worse; shorts-only improvement post-hoc. Freeze original whole rule if inspected; no rescued short selection.",
+      "entry_stop_specification": {
+        "type": "per_trade_stop_field",
+        "column": "stop",
+        "source": "checks/candidates/fvb/trades.csv; source0.18ATR14fromsignal; native entry-stop distance not inferred from realized loss"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "checks/candidates/fvb/trades.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "CheckerPASS_WITH_CONCERNS,source1944vs2041claimed mismatch,concentration; priorApexaccounttestsnegative."
+    },
+    {
+      "key": "S47",
+      "name": "Europe-Open Impulse v2",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "research_only_not_promotion",
+      "normalized_key": null,
+      "source_path": "checks/candidates/s47_v2/mc_trades_S47_v2.csv",
+      "limits": "MCparity exists but~3700searches and agreement condition added after2023+. Entry/exit fixes/version mapping needed; personal forward only, prior evaltie/worse.",
+      "entry_stop_specification": {
+        "type": "current_completed_overnight_range_multiple",
+        "multiple": 0.5,
+        "source": "S47v2fixed source; known before09:31entry; exact overnight clock needed"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "checks/candidates/s47_v2/mc_trades_S47_v2.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "MC710/714entriespriorclaim; source~3700settings/NYagreementafter2023+seen. Correctedentry-barstop/versionneedsmapping."
+    },
+    {
+      "key": "NBL",
+      "name": "Bridge noise-area15m RTH-anchored longs",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "blocked_current_early_close_code",
+      "normalized_key": null,
+      "source_path": "claude:13e29ca7b45daabeb0ed2d8c286448610f594dab:analysis/outputs/bridge_noise_15m_trades_rth_longs.csv",
+      "limits": "Newlatest11/03personal addition. MC98.9%entries and longs t5.4sourceclaims; raw code misses earlyclose flat (9port/4checker carries). No Apex admission until separately frozen repair; 1minute entry delay reduces edge. Prior50Kadd small,150Kno gain.",
+      "entry_stop_specification": {
+        "type": "fixed_points",
+        "points": 50,
+        "target_points": 25,
+        "source": "LatestClaudeRTHanchor source; historical earlyclose defect prevents present Apex admission"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "claude:13e29ca7b45daabeb0ed2d8c286448610f594dab:analysis/outputs/bridge_noise_15m_trades_rth_longs.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "LatestMC RTH-anchor98.9%entries/longt5.4sourceclaim,checkerPASS_WITH_CONCERNS; early-close carries stillknown. CodexpriorfullGlobexvariantdifferentfrozenrules wasrejected."
+    },
+    {
+      "key": "TWIN",
+      "name": "Twin Continuation v2.1",
+      "market": "NQ",
+      "reported_tier": "A",
+      "evaluation_routing": "blocked_current_Apex_path_and_risk",
+      "normalized_key": null,
+      "source_path": "checks/candidates/twin_continuation/trades.csv",
+      "limits": "Personalonly: wide/multiday swing stop; v1ledger differs fromv2.1holiday/SetExitOnClose fixes. Prior capped Apex variants/36replacements mostlytie/worse. No new 15:45/stop-cap rescue.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "checks/candidates/twin_continuation/trades.csv"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "checks/candidates/twin_continuation/trades.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Personalonly: wide/multiday swing stop; v1ledger differs fromv2.1holiday/SetExitOnClose fixes. Prior capped Apex variants/36replacements mostlytie/worse. No new 15:45/stop-cap rescue."
+    },
+    {
+      "key": "KUSHO",
+      "name": "Kusho v9",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "blocked_original_multiday_held_exposure",
+      "normalized_key": null,
+      "source_path": "checks/candidates/kusho/python_trades_v9_rolladj.csv",
+      "limits": "Original21:00/weekend holds personal-only. Existing15:45RTHvariant ledger available separately but already weaker Apex bench; no silent shortening.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "checks/candidates/kusho/python_trades_v9_rolladj.csv"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "checks/candidates/kusho/python_trades_v9_rolladj.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Original21:00/weekend holds personal-only. Existing15:45RTHvariant ledger available separately but already weaker Apex bench; no silent shortening."
+    },
+    {
+      "key": "S30",
+      "name": "S30 IBS reversal NQ+ES",
+      "market": "NQ/ES",
+      "reported_tier": "B",
+      "evaluation_routing": "blocked_multiday_no_stop",
+      "normalized_key": null,
+      "source_path": "checks/candidates/s30_ibs/daily_nq_es_per_micro.csv",
+      "limits": "Personal-only multi-day/no-stop. Daily series not an evaluation native path. New daily-flat conversion would be a new strategy.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "checks/candidates/s30_ibs/daily_nq_es_per_micro.csv"
+      },
+      "native_point_value": null,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "checks/candidates/s30_ibs/daily_nq_es_per_micro.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Personal-only multi-day/no-stop. Daily series not an evaluation native path. New daily-flat conversion would be a new strategy."
+    },
+    {
+      "key": "S03",
+      "name": "Noise-area S03v2",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "research_only_not_promotion",
+      "normalized_key": null,
+      "source_path": "agents/codex/results/s03_v2.md",
+      "limits": "Existing family tested extensively, account gains weak/negative; cannot treat BridgeNBLor recent uploaded15mcode as independent new evidence.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "agents/codex/results/s03_v2.md"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "agents/codex/results/s03_v2.md",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Existing family tested extensively, account gains weak/negative; cannot treat BridgeNBLor recent uploaded15mcode as independent new evidence."
+    },
+    {
+      "key": "PVT",
+      "name": "Prior VWAP Trap",
+      "market": "NQ",
+      "reported_tier": "B",
+      "evaluation_routing": "research_only_not_promotion",
+      "normalized_key": null,
+      "source_path": "checks/candidates/prior_vwap_trap/trades_python.csv",
+      "limits": "Prior Apex benches worse, placebo levels similarly strong; personal capital-expansion bench only.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "checks/candidates/prior_vwap_trap/trades_python.csv"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "checks/candidates/prior_vwap_trap/trades_python.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Prior Apex benches worse, placebo levels similarly strong; personal capital-expansion bench only."
+    },
+    {
+      "key": "BBMRM",
+      "name": "Bollinger open mean reversion",
+      "market": "NQ",
+      "reported_tier": "C",
+      "evaluation_routing": "closed_unless_forward_checkpoint",
+      "normalized_key": null,
+      "source_path": "checks/candidates/bb_mrm/mc_trades.csv",
+      "limits": "Removed byuser after MCweaker than Python; post-hoc49winning extra trades overstated original. Do not restore from old Bsectionheading.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "checks/candidates/bb_mrm/mc_trades.csv"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "checks/candidates/bb_mrm/mc_trades.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Removed byuser after MCweaker than Python; post-hoc49winning extra trades overstated original. Do not restore from old Bsectionheading."
+    },
+    {
+      "key": "REBOUND",
+      "name": "NQ Overnight Rebound",
+      "market": "NQ",
+      "reported_tier": "C",
+      "evaluation_routing": "closed_no_allocation",
+      "normalized_key": null,
+      "source_path": "agents/codex/results/overnight_rebound.md",
+      "limits": "One thousand fixed-source trades positive but filter/timing benefit unproven and personal profit/DDworse; not new current risk diversifier.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "agents/codex/results/overnight_rebound.md"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "agents/codex/results/overnight_rebound.md",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "One thousand fixed-source trades positive but filter/timing benefit unproven and personal profit/DDworse; not new current risk diversifier."
+    },
+    {
+      "key": "NOCTURNE",
+      "name": "Nocturne N0",
+      "market": "NQ",
+      "reported_tier": "C",
+      "evaluation_routing": "closed_weak_recent_stop_kills",
+      "normalized_key": null,
+      "source_path": "checks/candidates/nocturne/python_nights.csv",
+      "limits": "Recent2024–26t0.75, no stop; stop erases edge; frozen forward checkpoint not a new evalsearchcandidate.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "checks/candidates/nocturne/python_nights.csv"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "checks/candidates/nocturne/python_nights.csv",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Recent2024–26t0.75, no stop; stop erases edge; frozen forward checkpoint not a new evalsearchcandidate."
+    },
+    {
+      "key": "PRIMESYNC",
+      "name": "PrimeSync",
+      "market": "ES/NQ",
+      "reported_tier": "not_admitted",
+      "evaluation_routing": "closed_failed_account_gates",
+      "normalized_key": null,
+      "source_path": "agents/codex/results/primesync_accounts.md",
+      "limits": "Already tested one micro/frozen entry on all homes; no allocation gate passed. Code not compiled/trade matched.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "agents/codex/results/primesync_accounts.md"
+      },
+      "native_point_value": null,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "agents/codex/results/primesync_accounts.md",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Already tested one micro/frozen entry on all homes; no allocation gate passed. Code not compiled/trade matched."
+    },
+    {
+      "key": "R1144",
+      "name": "Ricochet S1144",
+      "market": "NQ",
+      "reported_tier": "not_admitted",
+      "evaluation_routing": "closed_failed_design",
+      "normalized_key": null,
+      "source_path": "agents/codex/results/ricochet1144_20261104.md",
+      "limits": "Latest directupload two causal profiles fail adjusted significance and source/data gates. Not an eligible rescue through portfolio search.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "agents/codex/results/ricochet1144_20261104.md"
+      },
+      "native_point_value": 2.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "agents/codex/results/ricochet1144_20261104.md",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Latest directupload two causal profiles fail adjusted significance and source/data gates. Not an eligible rescue through portfolio search."
+    },
+    {
+      "key": "GC_ASIA",
+      "name": "Gold Asian-range breakout",
+      "market": "GC",
+      "reported_tier": "C/watch",
+      "evaluation_routing": "closed_prior_eval_no_gain",
+      "normalized_key": null,
+      "source_path": "analysis/gold_asian_breakout_gc_test.py",
+      "limits": "Userparked10/14; filtered rarity/weak standalone; no prior evaluation improvement. Native MGCcosts/quote risk need distinct admission.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "analysis/gold_asian_breakout_gc_test.py"
+      },
+      "native_point_value": 10.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/gold_asian_breakout_gc_test.py",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Userparked10/14; filtered rarity/weak standalone; no prior evaluation improvement. Native MGCcosts/quote risk need distinct admission."
+    },
+    {
+      "key": "GC_COMBO",
+      "name": "GC Combo v2",
+      "market": "GC",
+      "reported_tier": "source_needs_data",
+      "evaluation_routing": "blocked_signed_tick_field_and_source_match",
+      "normalized_key": null,
+      "source_path": "agents/codex/results/gc_combo_v2_review.md",
+      "limits": "UpTicks/DownTicks sign missing from existing GCexports; price proxy fails. LucidFlexclaims are not Apex results.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "agents/codex/results/gc_combo_v2_review.md"
+      },
+      "native_point_value": 10.0,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "agents/codex/results/gc_combo_v2_review.md",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "UpTicks/DownTicks sign missing from existing GCexports; price proxy fails. LucidFlexclaims are not Apex results."
+    },
+    {
+      "key": "ZN_AUCTION",
+      "name": "Treasury auction flow",
+      "market": "ZN",
+      "reported_tier": "F",
+      "evaluation_routing": "closed_cost_failure",
+      "normalized_key": null,
+      "source_path": "analysis/treasury_auction_test.py",
+      "limits": "Prior intraday drift below roundtrip costs and postauctionrebound absent; COT/auctiondate new filters cannot silently revive.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "analysis/treasury_auction_test.py"
+      },
+      "native_point_value": null,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "analysis/treasury_auction_test.py",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Prior intraday drift below roundtrip costs and postauctionrebound absent; COT/auctiondate new filters cannot silently revive."
+    },
+    {
+      "key": "NG_STORAGE",
+      "name": "NG unconditional storage-calendar short",
+      "market": "NG",
+      "reported_tier": "dont_test",
+      "evaluation_routing": "closed_source_gate_failure",
+      "normalized_key": null,
+      "source_path": "agents/codex/results/ng_3575861_full_review_20261030.md",
+      "limits": "Fullsource post2011netnegative; corrected NGdata retained for distinct ideas, not a late portfolio rescue.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "agents/codex/results/ng_3575861_full_review_20261030.md"
+      },
+      "native_point_value": null,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "agents/codex/results/ng_3575861_full_review_20261030.md",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Fullsource post2011netnegative; corrected NGdata retained for distinct ideas, not a late portfolio rescue."
+    },
+    {
+      "key": "6E_FIX",
+      "name": "Europe-fix drift",
+      "market": "6E",
+      "reported_tier": "design_reject",
+      "evaluation_routing": "closed_design_reject",
+      "normalized_key": null,
+      "source_path": "agents/codex/results/scout_europe_fix_20261029.md",
+      "limits": "Existing scout failed gross/cost gate; source/data-blocked unrelated FXhypotheses do not make this eligible.",
+      "entry_stop_specification": {
+        "type": "excluded_or_unverified_no_assumed_stop",
+        "source": "agents/codex/results/scout_europe_fix_20261029.md"
+      },
+      "native_point_value": null,
+      "coverage_reference": "other_asset_metadata or declared source_path",
+      "independent_review_status": "Existing MC/checker claims only; no new independent return review in this inventory. See limits and source registry.",
+      "ledger_path": "agents/codex/results/scout_europe_fix_20261029.md",
+      "ledger_units": "Inspect schema/provenance; most MCcandidate CSV gross/net are per1NQ, original price units retained.",
+      "normalized_window": null,
+      "mc_and_reviewer_status": "Existing scout failed gross/cost gate; source/data-blocked unrelated FXhypotheses do not make this eligible."
+    }
+  ],
+  "current_roster_notes": [
+    "LatestClaudeNEW_CHAT_BRIEFconfirms#2/#4failed11/04; evalroster unchanged.",
+    "Funded latest keeps50KVB2/1+Tfade,150KDT2; SwingTargetfundedswapsreverted10/31.",
+    "Latestpersonalpieces table addsNBL11/03(total20labels), while whole-portfolio narrative still says19; stale prose is not canonical roster."
+  ],
+  "native_costs": {
+    "NQmicro": {
+      "point_value": 2,
+      "tick": 0.25
+    },
+    "ESmicro": {
+      "point_value": 5,
+      "tick": 0.25
+    },
+    "CLmicro": {
+      "point_value": 100,
+      "tick": 0.01
+    },
+    "commission": "Prior native audit main1.04RT,fee1.24RTsensitivity,one tickpermarket/stop fill; MES/MCL1.04assumed. Reconcile actual fees/current source before tests; no blanketNQnet/10."
+  },
+  "no_new_return_tests": true
+}

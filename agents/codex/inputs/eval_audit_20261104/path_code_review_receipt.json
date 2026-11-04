@@ -1,0 +1,26 @@
+{
+  "scope": "Independent code-only builder/adapter review before preregistration. No historical path/return/account calculations.",
+  "reviewed_at_utc": "2026-11-04T22:57:36.538102+00:00",
+  "reviewer": "eval_path_builder/path_code_review",
+  "sha256": {
+    "analysis/codex_eval_paths_20261104.py": "767694333f4eb69039ea5c6ed3568883a80abe5e0502f1baf4a188226b4d10b1",
+    "analysis/codex_eval_extra_ledgers_20261104.py": "8d9b54b839fe227f7d7774032cc92d8140ea2d616e14abd606039501aaba9ae5"
+  },
+  "checks": {
+    "builder_selftest": "PASS",
+    "adapter_selftest": "PASS",
+    "separate_builder_engine_same_phase_roundtrip": "PASS; synthetic only",
+    "source_clock_mismatch_regressions": "PASS after owner fixes",
+    "source_chart_ATR_past_only_regression": "PASS",
+    "preallocation_bound_static_review": "PASS",
+    "source_clock_offset_regression": "PASS; Eastern23:00CT bank and source-date lookup inspected",
+    "whole_absent_intraday_candle": "PASS after correction; strict missing-risk gate inspected",
+    "source_target_postcrossing_trade_through": "Inspected; synthetic selftest PASS",
+    "unallocated_unmatched_fill_preserves_common_quote": "PASS; final builder selftest",
+    "final_builder_selftest": "PASS",
+    "final_adapter_selftest": "PASS"
+  },
+  "status": "Final bounded code-only review complete on these hashes. No unresolved builder/adapter engineering defect found; conditional OHLC, source-feed and calendar/edge-completeness limits remain. Core hash owned separately. Root committed preregistration and exact input/config checks required before market calculations.",
+  "report": "agents/codex/inputs/eval_audit_20261104/path_code_review.md",
+  "supersedes_builder_sha256": "da3086f7650c231d71b9429fee595ed81c820cff34a9d7626879cd7334a05fcc"
+}

@@ -1,0 +1,59 @@
+{
+  "scope": "Synthetic account checks only; no historical strategy returns.",
+  "checks": {
+    "native_fees_and_market_slippage": 50001.759999999995,
+    "gross_target_without_net_target_does_not_pass": true,
+    "target_flatten_charges_real_costs": 53001.759999999995,
+    "target_guard_cost_below_net_target_does_not_pass": true,
+    "inclusive_floor_touch_fails": true,
+    "dll_gap_fills_current_quote_not_threshold": 48100.0,
+    "dll_liquidation_can_cross_account_floor": 48099.259999999995,
+    "eval_floor_does_not_stop_at_start_plus_100": 1200.0,
+    "opposite_sleeves_mark_one_common_asset_price": true,
+    "offset_locked_basis_known_even_without_later_quote": true,
+    "broker_net_flat_locked_profit_meets_target": true,
+    "net_flat_target_includes_source_costs_not_guard_buffer": true,
+    "contract_excess_rejects_order_without_account_failure": true,
+    "floor_governor_integer_quantity": 4,
+    "unknown_stop_not_sized_from_future_outcome": true,
+    "governor_also_reserves_daily_loss_room": true,
+    "missing_active_price_is_unknown": true,
+    "flat_missing_quote_is_not_imputed_return": true,
+    "unallocated_key_does_not_require_missing_source_quote": true,
+    "relevant_nan_raw_fill_is_account_unknown_not_wrapper_exception": true,
+    "unallocated_nan_raw_fill_does_not_block_other_portfolios": true,
+    "market_fill_must_match_event_reference": true,
+    "known_daily_cutoff_flattens_and_blocks_later_source_exit": true,
+    "cutoff_cost_below_net_target_does_not_pass": true,
+    "cutoff_realized_target_counts_below_guard_buffer": true,
+    "zero_allocation_is_not_broker_rejection": true,
+    "missing_cutoff_quote_not_backfilled": true,
+    "fractional_quantity_rejected": true,
+    "same_time_source_exit_before_entry": true,
+    "same_phase_own_roundtrip_closes_after_own_entry": true,
+    "segment_skip_matches_raw_100_synthetic_tapes": true,
+    "safe_segment_actually_skips_raw_rows": true,
+    "disabled_logs_same_outcome_and_zero_log_rows": true,
+    "inherited_50K_150K_tie_difference": {
+      "50K_function": [
+        "pass",
+        1
+      ],
+      "150K_function_with50Kparameters": [
+        "time",
+        21
+      ]
+    },
+    "inherited_PA_lock_can_change_eval_outcome": {
+      "PA_lock": [
+        "pass",
+        4
+      ],
+      "eval_lock": [
+        "fail",
+        3
+      ]
+    }
+  },
+  "count": 35
+}

@@ -1637,3 +1637,21 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
   No outcome-selected deletion, fill interpolation or after-result gate relaxation was used.
 - Next check only under a separately justified new task: original MC settings/trade ledger and matched native
   contract/roll/quote clocks. This failed candidate earns no automatic re-test, data chase, allocation or live change.
+
+### Evaluation audit — Remaining cushion, account rules and broker evidence
+
+[November4 loss forensics](inputs/eval_audit_20261104/loss_forensics.md),
+[rule audit](inputs/eval_audit_20261104/engine_audit.md) and
+[dated calendar evidence](inputs/eval_audit_20261104/calendar_audit.md).
+- A strategy stop can sit beyond the account liquidation floor. On November4 the recorded50K/150K remaining
+  cushions were931.34/1939.60, versus nominal ONB stop risks1062/2478 before costs. A fixed dollar-risk budget
+  must not be confused with remaining loss capacity. A prospective cushion governor still needs account testing.
+- Chart strategy logs can continue after broker rejection, DLL lock or account failure. Reconcile broker fills,
+  equity, floor and account status before treating later virtual chart trades as executable account P&L.
+- Current EOD evaluation floor rules differ from the funded PA starting-balance+100 lock. Model DLL liquidation
+  at observed prices with costs,30calendar-day expiration and realized target balance after closing costs.
+- The index15:15–15:30CT pause ended with trade-date2021-06-28. Use dated schedules; do not label every historical
+  missing quote a closure. Source-chart compression/timezone also changes daily ATR risk inputs, notably CLS's
+  Eastern calendar reset. Incomplete required sizing inputs remain unknown, not a finite estimated risk budget.
+- These are forensic/model lessons. They establish no independently verified replacement strategy, live setting,
+  execution saving or allocation. Exact account outcome comparisons are a separate preregistered study.

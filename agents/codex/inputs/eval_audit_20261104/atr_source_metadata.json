@@ -1,0 +1,135 @@
+{
+  "scope": "Source/settings metadata only; no historical returns or risk series computed",
+  "daily_bank_semantics": "At first observed source chart bar on new Date, bank previous observed Date TR if its weekday is Monday-Friday. TR=max(DayHi,PrevDayClose)-min(DayLo,PrevDayClose), or hi-lo if no previous close. PrevDayClose updates for every observed Date, including Sunday. New Date DayHi/Lo starts with current entire chart candle. Ring mean15; source chart midnight candle includes previous bar_minutes-1 native minutes. Date/weekday are source chart timezone, not necessarily CT. Last close is last observed source chart candle, not an imputed23:59 minute.",
+  "risk_boundary_warning": "ONB30/ML15min; EOS/LDF/MON/NFP/MOC5min. CLS5min Eastern Date reset is23:00CT, so CT civil daily_atr is not source-exact. Gaps/feed mismatch cannot silently authorize risk sizing.",
+  "records": {
+    "ONB30": {
+      "workbook": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Overnight Bias.xlsx",
+      "workbook_sha256": "c01e8985f6327884528d9bdb78e93bc3fc6cd0bb28acab7c80c0af81fc46fdfe",
+      "source": "apex_strategies/NQ_Overnight_Bias_ADX30.txt",
+      "source_sha256": "8d16af02d25ffc960ddbc5115d89503a694dec60f27f458bc0cd2e9dd66c2209",
+      "chart_timezone": "America/Chicago",
+      "timezone_evidence": "source setup instructions; Settings has no explicit timezone field",
+      "settings": {
+        "Compression": "15 Minutes",
+        "Bar Magnifier": "Enabled1 Minute",
+        "AtrDays": "15",
+        "StopAtrPct": "0.25",
+        "Start Date": "2018-01-02 09:00:00",
+        "End Date": "2026-10-13 04:45:00"
+      }
+    },
+    "ONBML": {
+      "workbook": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes Overnight Bias ML (funded) v2.xlsx",
+      "workbook_sha256": "f5d9beee8f4e0a2a94870e6101526a7ee79c1874bdbe96145de3aa73d03b00fc",
+      "source": "funded_strategies/NQ_Overnight_Bias_ML.txt",
+      "source_sha256": "c894acf104a96fae16fac201e7c6f1a565ae3d42105535fc3b315c5a245b9b25",
+      "chart_timezone": "America/Chicago",
+      "timezone_evidence": "source setup instructions; Settings has no explicit timezone field",
+      "settings": {
+        "Compression": "15 Minutes",
+        "Bar Magnifier": "Enabled1 Minute",
+        "AtrDays": "15",
+        "StopAtrPct": "0.30",
+        "Start Date": "2018-01-02 09:00:00",
+        "End Date": "2026-10-12 14:15:00"
+      }
+    },
+    "EOS": {
+      "workbook": "mc_reports/Backtesting Strategy Performance Report EOS v1.xlsx",
+      "workbook_sha256": "2a1c7dd88a261ad0b0df67f310e3c0c33b17d3faf85f7a94c53e9d910f63bc8f",
+      "source": "funded_strategies/NQ_Expiration_Open_Short.txt",
+      "source_sha256": "bb7ea82fb772e31f92a9764f8dcd60554e6a984198929e8c6625960e77e324d7",
+      "chart_timezone": "America/Chicago",
+      "timezone_evidence": "source setup instructions; Settings has no explicit timezone field",
+      "settings": {
+        "Compression": "5 Minutes",
+        "Bar Magnifier": "Enabled1 Minute",
+        "AtrDays": "15",
+        "StopAtrPct": "0.30",
+        "Start Date": "2018-01-19 08:35:00",
+        "End Date": "2026-10-11 19:35:00"
+      }
+    },
+    "LDF": {
+      "workbook": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes Late Day Flow.xlsx",
+      "workbook_sha256": "d67673c0485d2c780b1f2d810d2929aac5360e4409cf767ef772ca980fff4085",
+      "source": "funded_strategies/NQ_Late_Day_Flow.txt",
+      "source_sha256": "b34d7eecd12a72132491bc1db4c6014f0a47355d15e7dadcf58a1d9a814a061a",
+      "chart_timezone": "America/Chicago",
+      "timezone_evidence": "source setup instructions; Settings has no explicit timezone field",
+      "settings": {
+        "Compression": "5 Minutes",
+        "Bar Magnifier": "Enabled1 Minute",
+        "AtrDays": "15",
+        "StopAtrPct": "0.25",
+        "Start Date": "2017-12-28 14:05:00",
+        "End Date": "2026-10-12 16:00:00"
+      }
+    },
+    "MON": {
+      "workbook": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NQ Monday Longs.xlsx",
+      "workbook_sha256": "cf1bc66f4cf459a2d1adc94e434be3176937ddd147d0906c6c91e037f12f5814",
+      "source": "funded_strategies/NQ_Monday_Long.txt",
+      "source_sha256": "3bbad8f40e8fbfc718f4bae1523525d1c7f08b3a413a5b718b0d66e597f3b922",
+      "chart_timezone": "America/Chicago",
+      "timezone_evidence": "source setup instructions; Settings has no explicit timezone field",
+      "settings": {
+        "Compression": "5 Minutes",
+        "Bar Magnifier": "Enabled1 Minute",
+        "AtrDays": "15",
+        "StopAtrPct": "0.50",
+        "Start Date": "2018-01-08 08:35:00",
+        "End Date": "2026-10-12 15:55:00"
+      }
+    },
+    "NFP": {
+      "workbook": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 5 Minutes NFP Fade.xlsx",
+      "workbook_sha256": "7ed08ee978faa0bc4364d38b4863c11cf1d285610501a2dcf24cc19532fb2fe8",
+      "source": "funded_strategies/NQ_NFP_Fade.txt",
+      "source_sha256": "b4278155562141f29ff30b33b9a2462b4bb4a25647f6b38c26cb1d06b6ec674f",
+      "chart_timezone": "America/Chicago",
+      "timezone_evidence": "source setup instructions; Settings has no explicit timezone field",
+      "settings": {
+        "Compression": "5 Minutes",
+        "Bar Magnifier": "Enabled1 Minute",
+        "AtrDays": "15",
+        "StopAtrPct": "0.50",
+        "Start Date": "2018-01-05 07:50:00",
+        "End Date": "2026-10-13 02:20:00"
+      }
+    },
+    "MOC": {
+      "workbook": "mc_reports/Backtesting Strategy Performance Report _ @ES - 5 Minutes ES MOC Follow.xlsx",
+      "workbook_sha256": "57d7f12cb2da4871407c84584cc08587aeb6151bd7c48bb4cefe5d20608b79fb",
+      "source": "funded_strategies/ES_MOC_Follow.txt",
+      "source_sha256": "6fd2dadbba594d75e114530dedf5a95f38f1cd2aa1dadb3f8380f9705bfccada",
+      "chart_timezone": "America/Chicago",
+      "timezone_evidence": "source setup instructions; Settings has no explicit timezone field",
+      "settings": {
+        "Compression": "5 Minutes",
+        "Bar Magnifier": "Disabled",
+        "AtrDays": "15",
+        "StopAtrPct": "0.25",
+        "Start Date": "2018-01-26 14:55:00",
+        "End Date": "2026-10-16 16:00:00"
+      }
+    },
+    "CLS": {
+      "workbook": "mc_reports/Backtesting Strategy Performance Report _ CL - 5 Minutes CL Sunday Gap.xlsx",
+      "workbook_sha256": "1353b4b9e0f2d4c7955fcb9dfd47e953acb91df49a9c279e23e657bbfa1d395b",
+      "source": "funded_strategies/CL_Sunday_Gap_Fade.txt",
+      "source_sha256": "478634e8018a62462db3d01a586d3015ab028b1d92da65cb701f737bc9528a0f",
+      "chart_timezone": "America/New_York",
+      "timezone_evidence": "source setup instructions; Settings has no explicit timezone field",
+      "settings": {
+        "Compression": "5 Minutes",
+        "Bar Magnifier": "Enabled1 Minute",
+        "AtrDays": "15",
+        "StopAtrPct": "0.75",
+        "Start Date": "2018-03-25 18:10:00",
+        "End Date": "2026-10-14 11:40:00"
+      }
+    }
+  }
+}

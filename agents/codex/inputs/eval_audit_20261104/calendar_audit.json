@@ -1,0 +1,124 @@
+{
+  "audit_id": "cme_equity_matching_closures_20261104",
+  "accessed_utc": "2026-11-04T22:46:00Z",
+  "scope": "Primary-source calendar and timestamp audit only; no strategy returns or account outcomes",
+  "clock": "America/Chicago civil time; repository close-labeled one-minute bars",
+  "normal_session": {
+    "research_start": "2018-01-01",
+    "research_end": "2026-11-04",
+    "open": "17:00",
+    "close": "16:00",
+    "maintenance_no_matching": ["16:00", "17:00"],
+    "maintenance_close_labels_without_complete_trading_minute": ["16:01", "17:00"],
+    "ordinary_weekend_closed": "Friday 16:00 to Sunday 17:00",
+    "holiday_override_complete": false
+  },
+  "normal_pause_omission_config": {
+    "markets": ["NQ", "ES"],
+    "related_native_contracts": ["MNQ", "MES"],
+    "start_account_date": "2018-01-01",
+    "end_account_date": "2021-06-27",
+    "close_label_start": "15:16",
+    "close_label_end": "15:30",
+    "weekdays": [0, 1, 2, 3, 4],
+    "matching_pause_wall_clock": ["15:15", "15:30"],
+    "last_valid_prepause_close": "15:15",
+    "first_full_postpause_close": "15:31",
+    "elimination_effective_reopening": "2021-06-27 17:00 America/Chicago",
+    "elimination_first_trade_date": "2021-06-28",
+    "post_transition_pause_omission_allowed": false
+  },
+  "source_receipts": [
+    {
+      "id": "cme_21_244R",
+      "url": "https://www.cmegroup.com/market-regulation/rule-filings/2021/6/21-244R_1.pdf",
+      "document_date": "2021-06-11",
+      "method": "Connected public web open; extracted PDF, not locally saved bytes",
+      "reference": "turn287490view1",
+      "locations": "PDF pages 2 and 4; extraction lines 60-73,117,139,146,150",
+      "supports": "Effective pause elimination for 2021-06-28 trade date; ES, MES, NQ, MNQ in Exhibit A",
+      "sha256": null
+    },
+    {
+      "id": "cme_20210621_operational",
+      "url": "https://www.cmegroup.com/notices/electronic-trading/2021/06/20210621.html",
+      "page_title_date": "2021-06-21",
+      "visible_notice_date": "2021-06-24",
+      "method": "Connected public web open/find",
+      "reference": "turn798682view0",
+      "locations": "Market pause elimination section, extraction lines 232-239",
+      "supports": "Operational date, no afternoon pause after change, continuing 16:00-17:00 maintenance; excludes BTIC/TACO and old $250 S&P"
+    },
+    {
+      "id": "cme_19_118",
+      "url": "https://www.cmegroup.com/content/dam/cmegroup/notices/clearing/2019/04/Chadv19-118.pdf",
+      "listing_trade_date": "2019-05-06",
+      "method": "Connected public web open; extracted PDF, not locally saved bytes",
+      "reference": "turn287490view2",
+      "locations": "PDF page 1, extraction lines 1-22",
+      "supports": "Micro launch, old afternoon pause, 17:00-16:00 session, one-hour daily break",
+      "sha256": null
+    },
+    {
+      "id": "cme_20150907",
+      "url": "https://www.cmegroup.com/tools-information/lookups/advisories/electronic-trading/20150907.html",
+      "page_title_date": "2015-09-07",
+      "visible_notice_date": "2015-09-10",
+      "method": "Connected public web search and open",
+      "reference": "turn772076search0 / turn803718view0",
+      "locations": "Changes to Daily Maintenance Period for CME Globex",
+      "supports": "Effective 2015-09-21, CME/CBOT equities close moves from 16:15 to 16:00; normal openings continue"
+    },
+    {
+      "id": "cme_2012_pause",
+      "url": "https://www.cmegroup.com/tools-information/lookups/advisories/clearing/Chadv12-423.html",
+      "corroborating_url": "https://www.cmegroup.com/rulebook/files/ser-6465_Equity_Index_Futures_Options_on_Equity_Index_Futures_20121114.pdf",
+      "effective_trade_date": "2012-11-19",
+      "method": "Connected public search and advisory open",
+      "reference": "turn654504search0 / turn654504search14",
+      "supports": "Historical afternoon pause and now-superseded 16:15 close"
+    },
+    {
+      "id": "cme_current_product_corrob",
+      "urls": [
+        "https://www.cmegroup.com/markets/equities/nasdaq/e-mini-nasdaq-100.timeAndSales.html?videoId=6396076863112",
+        "https://www.cmegroup.com/markets/equities/sp/e-mini-sandp500.performance.html",
+        "https://www.cmegroup.com/markets/equities/sp-500-and-nasdaq-100-futures.html"
+      ],
+      "method": "Connected public search metadata; corroboration only",
+      "reference": "turn764115search0-2",
+      "supports": "Currently published NQ/ES normal session and maintenance"
+    },
+    {
+      "id": "cme_holiday_routing",
+      "url": "https://www.cmegroup.com/trading-hours.html",
+      "method": "Connected public web open",
+      "reference": "turn599850view0",
+      "locations": "Extraction lines 50-91 and 190-206",
+      "supports": "Product/date-specific Globex calendar required; pauses have no matching; schedules can change",
+      "limitation": "Dynamic holiday table not exposed in extraction; no full 2018-2026 holiday exception calendar admitted"
+    }
+  ],
+  "timestamp_receipt": "agents/codex/inputs/eval_audit_20261104/calendar_clock_counts.json",
+  "timestamp_reproduction": "/workspace/venvs/thebeginning/bin/python agents/codex/inputs/eval_audit_20261104/calendar_clock_check.py",
+  "independent_timestamp_findings": {
+    "NQ_ES_first_postchange_1516_through1530_date": "2021-06-28",
+    "bridge_sample_17_missing": {
+      "scheduled_pause": 15,
+      "unresolved": ["2018-04-29 23:39", "2018-04-30 14:42"]
+    },
+    "observed_pretransition_pause_rows": {
+      "NQ": ["2018-04-10 15:16"],
+      "ES": ["2018-01-19 15:16", "2018-05-10 15:16", "2018-08-07 15:16", "2018-08-21 15:16"]
+    }
+  },
+  "required_treatment": [
+    "Omit proven nontrading price events; never fill a quote or insert zero returns",
+    "Retain unresolved open-market missing marks as UNKNOWN when net exposure requires them",
+    "Apply the reopening observed gap and liquidation check",
+    "Observed source orders or data contradicting a closure need explicit exception treatment",
+    "Closed NQ alongside open held instruments is not automatically a portfolio-wide closure",
+    "No general holiday, expiry or unscheduled-halt omissions inferred from missing rows"
+  ],
+  "status": "Normal dated pause verified; full holiday exception calendar incomplete; no return or account admission conferred"
+}
