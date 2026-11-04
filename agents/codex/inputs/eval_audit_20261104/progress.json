@@ -3,13 +3,8 @@
   "authorized_scope": "Existing-strategy evaluation allocation and risk comparison; no live changes",
   "checked_head": "0da4e8f1b7f42309ab3ad84635ad082b9ae895bf",
   "source_claude_head": "13e29ca7b45daabeb0ed2d8c286448610f594dab",
-  "phase": "final_nomination_before_historical_validation",
-  "lease": {
-    "owner": "codex/root/eval_audit_20261104",
-    "acquired_utc": "2026-11-04T22:54:00Z",
-    "expires_utc": "2026-11-05T04:54:00Z",
-    "scope": "This study only; paper scout and paused programs untouched"
-  },
+  "phase": "complete_no_certified_replacement",
+  "lease": null,
   "budget": {
     "hard_cap": 3000,
     "initial_registered_definitions": 2485,
@@ -20,13 +15,14 @@
     "additional_fixed_registered_definitions": 460,
     "derived_definitions_registered_after_joint_selection": 20,
     "derived_definitions_executed": 20,
-    "unused_under_hard_cap": 35
+    "unused_under_hard_cap": 35,
+    "unused_reserved_derivatives": 10
   },
   "preregistration_commit": "a087708b13697df4c3dd0b0814f98cb53a2b254a",
   "initial_selection_commit": "67bab2a2daa808ffc7c50ebde150ed857df51b69",
-  "validation_selection_commit": null,
+  "validation_selection_commit": "588e6b692e83154d056a3ecefca8eb1411f78d19",
   "lease_confirmation": "Preregistration and budget reservation checked from committed a087708 before market preparation; source branch and other research leases untouched.",
-  "continuation": "Commit final frozen nomination before once-only previously seen2023+ historical validation,12prespecified cost/cushion views; current baseline UNKNOWN bounds remain material.",
+  "continuation": "Research complete; no simulations running or new variants authorized by this study. User can forward report/exact artifacts to Claude. A later current-baseline comparison needs genuine source-matched risk/quantity evidence; no repeated data chase, proxy or allocation is authorized.",
   "original_design": {
     "definitions": 2485,
     "starts_per_definition": 244,
@@ -36,7 +32,7 @@
     "summary_path": "agents/codex/inputs/eval_audit_20261104/initial_design_summary.json"
   },
   "amendment_commit": "e8e249b4e7c8946d517e8e4c9a4a3b4e62063e24",
-  "account_cases_completed": 723460,
+  "account_cases_completed": 809476,
   "nominees_initial": [
     {
       "candidate_id": "E150_395f4dd37fc6a16e",
@@ -104,5 +100,45 @@
         "target_guard": true
       }
     }
-  ]
+  ],
+  "final_source_claude_check": "75df5219b45c4d6f8700b26c10b6bc48b203b76c",
+  "design_account_cases": 723460,
+  "validation_account_cases": 86016,
+  "validation_scenarios": 12,
+  "validation_starts_per_policy_scenario": 896,
+  "completed_utc": "2026-11-04T23:28:16.914457+00:00",
+  "released_lease": {
+    "owner": "codex/root/eval_audit_20261104",
+    "acquired_utc": "2026-11-04T22:54:00Z",
+    "expires_utc": "2026-11-05T04:54:00Z",
+    "scope": "This study only; paper scout and paused programs untouched",
+    "released_utc": "2026-11-04T23:28:16.914457+00:00"
+  },
+  "recommendation_status": "No efficiency/safety superiority established; current baseline missing quantities, high candidate failures, native guard unverified.",
+  "independent_review": {
+    "synthetic_and_account_engineering": "PASS as specified",
+    "artifact_and_paired_uncertainty_integrity": "PASS",
+    "native_multicharts_trade_matching": "pending",
+    "claude_economic_verification": "pending",
+    "allocation": "not_changed"
+  },
+  "artifacts": {
+    "agents/codex/results/eval_audit_20261104.md": {
+      "sha256": "e12a4718863a561d7de456f80c9b753ec1aa25ddb1fbe12d981d405763eed48f",
+      "bytes": 13374
+    },
+    "agents/codex/results/eval_audit_20261104_metrics.csv": {
+      "sha256": "66cdb6809c73fee90184e9dace2a7a81e768e91c8d680f13aacc81e91775fcff",
+      "bytes": 56056
+    },
+    "agents/codex/results/eval_audit_20261104_cases.zip": {
+      "sha256": "e72dcc6e931bcf35ff40c253b41b93828ad186be03bb49b2ffb5c305c59f7545",
+      "bytes": 62786294
+    },
+    "agents/codex/results/eval_audit_20261104_cases.manifest.json": {
+      "sha256": "a531ab24d682d1b233dfdb5358301156e902995663f42b9e9044b77fe01ffa8c",
+      "bytes": 1198278
+    }
+  },
+  "notification_key": "eval_audit_20261104:2965:e72dcc6e931b:completed_no_certified_replacement"
 }
