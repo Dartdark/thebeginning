@@ -1,0 +1,27 @@
+[provenance] code 4c7f0196 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Ricochet 1144 (user upload 2026-11-04; author's MultiCharts code checks/candidates/ricochet_1144/S1144_signal_multicharts.txt +
+
+Holidays parsed from the code: 106; excluded 2020 sessions: 6; data to 2026-11-03
+
+1. As coded vs the author's note (note: 2,238 trades, $105.54, dev $130.00 t 3.73 / OOS $78.85 t 1.95, 1,070 OOS trades):
+   as coded (ours)                        n= 2193 $  84.4 PF 1.14 t(sessions) 3.08 yrs+ 9/10 | dev $  92.6 t 2.46 | OOS $  76.5 t 1.93 n 1121
+   exits: {'stop': 1268, 'target': 671, 'time': 254}
+   by year $: {2017: 1392, 2018: -6411, 2019: 11194, 2020: 42577, 2021: 9246, 2022: 40770, 2023: 17072, 2024: 26439, 2025: 21516, 2026: 21216}
+   by trade number (dev $ / OOS $): {1: (-18287, 34824), 2: (66299, 64785), 3: (29618, -8013), 4: (21678, -5894)}
+
+2. Controls:
+   base trade only (no re-entries)        n= 1028 $  16.1 PF 1.03 t(sessions) 0.38 yrs+ 6/10 | dev $ -32.6 t -0.61 | OOS $  74.6 t 1.12 n 467
+   max 2 trades                           n= 1617 $  91.3 PF 1.15 t(sessions) 2.80 yrs+ 8/10 | dev $  56.6 t 1.31 | OOS $ 129.5 t 2.62 n 769
+   after an UP day instead (placebo)      n= 2224 $  23.8 PF 1.04 t(sessions) 0.82 yrs+ 5/10 | dev $   1.3 t 0.03 | OOS $  46.1 t 1.06 n 1117
+   every session (no signal)              n= 4417 $  53.9 PF 1.09 t(sessions) 2.70 yrs+ 7/10 | dev $  46.2 t 1.72 | OOS $  61.3 t 2.08 n 2238
+
+3. Metrics per NQ (daily, 2018+):
+                trades win avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+2018-26           2183 39% $84 $20,304   1.02    1.51          1.14 $26,756   0.76  7.03       5.77
+OOS 2022-10-26+   1121 37% $76 $20,827   0.95    1.38          1.12 $26,756   0.78 12.09       3.45
+
+4. Personal book (20 pieces at 1 micro): Ricochet 1 MNQ $1,953 a year, Sharpe 0.98, corr with the book +0.19; guide hurdle 3.16 x corr = 0.61
+   corr with pieces >= 0.15: {'OvernightTick': 0.24, 'S30': 0.28}
+   current book                   $ 43,111 a year, Sharpe 3.16, max DD $ 6,761, MC p50 $ 42,074, DD p95 $ 7,428, return/DD 9.3
+   + Ricochet 1                   $ 45,064 a year, Sharpe 3.18, max DD $ 6,888, MC p50 $ 44,064, DD p95 $ 7,905, return/DD 9.1
+   Overnight Tick -> Ricochet 1   $ 42,863 a year, Sharpe 3.10, max DD $ 6,973, MC p50 $ 41,833, DD p95 $ 8,050, return/DD 8.5

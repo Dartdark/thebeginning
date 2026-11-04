@@ -125,6 +125,7 @@ Strategies that add money only by needing more capital (lower return per unit of
 not into the plan, for later when the account is large enough or sizes can be weighted finely (minis / many micros).
 | Strategy | Tier | Effect when added | Why it waits | Source |
 |---|---|---|---|---|
+| Ricochet 1144 (long after a red day, S1 re-entries) | C | +$1,953 a year at 1 MNQ, return/DD 9.3 -> 9.1 | OOS t 1.93, signal adds little over overnight drift; DD $2.7k per MNQ | `analysis/outputs/ricochet_1144_test_output.txt` |
 | S30 IBS reversal (NQ + ES) | B | +$6k a year, return/DD 9.6 → 8.3, capital +$7.4k | in the ladder only from ~$33.6k, at reduced weight above ~$54k | `analysis/forward_log_plans_test.py` |
 | FVB First Valid Breakout (whole rule) | B | +$3.8k a year, Sharpe 3.04 → 3.01, return/DD 8.3 → 8.2, capital +$3.9k (shorts only: return/DD 8.9, but a post-hoc split) | fat tail, longs weak (PF 1.13) | `analysis/fvb_bench.py` |
 | Swing Target v3, 2nd MNQ | B | 1 → 2 MNQ: +$2.2k a year, return/DD 8.6 → 8.3, capital +$1.8k (Codex ledger) | the 2nd contract lowers return per drawdown; it also loses on the book's bad days | `analysis/swing_target_bench.py` personal |
