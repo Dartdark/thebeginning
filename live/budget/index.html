@@ -1,0 +1,208 @@
+<meta name="dash-one-writer">
+<style>
+  .bg-wrap { max-width: 64rem; margin-inline: auto; display: flex; flex-direction: column; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); }
+  .bg-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .bg-head p { margin: var(--cds-gap-xs) 0 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); }
+  .bg-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--cds-gap-md); }
+  .bg-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+  .bg-tile .lbl { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .bg-tile .num { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; margin-top: var(--cds-gap-xs); }
+  .bg-tile .note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-top: var(--cds-gap-xs); }
+  .bg-neg { color: var(--color-bad); }
+  .bg-pos { color: var(--color-ok); }
+  .bg-card h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .bg-card .sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-xs) 0 var(--cds-gap-md); }
+  .bg-chart { min-height: 220px; position: relative; }
+  .bg-tip { position: absolute; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); pointer-events: none; white-space: nowrap; }
+  .bg-tablebox { overflow-x: auto; }
+  .bg-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); font-variant-numeric: tabular-nums; }
+  .bg-table th { text-align: left; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); }
+  .bg-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+  .bg-table .r { text-align: right; }
+  .bg-pill { font-size: var(--cds-font-size-caption); padding: 0 var(--cds-pad-xs); border-radius: var(--cds-radius); border: 1px solid var(--color-border-line); color: var(--color-fg-muted); }
+  .bg-pill.up { color: var(--color-warn); }
+  [data-dash-source-state=empty] { color: transparent; }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="bg-wrap">
+  <header class="bg-head">
+    <h1>Trading budget</h1>
+    <p>Balance after bills already due: <b data-draw="after" data-source="summary" data-field="after_upcoming">—</b>. Evaluations affordable now (after next month's known bills): <b data-draw="afford" data-source="summary" data-field="affordable">—</b>.</p>
+  </header>
+
+  <section class="bg-tiles" aria-label="Budget summary">
+    <div class="bg-card bg-tile">
+      <div class="lbl">Balance after upcoming bills</div>
+      <div class="num" data-draw="after2" data-source="summary" data-field="after_upcoming">—</div>
+      <div class="note">Paid and upcoming entries</div>
+    </div>
+    <div class="bg-card bg-tile">
+      <div class="lbl">Balance today</div>
+      <div class="num" data-draw="now" data-source="summary" data-field="balance_now">—</div>
+      <div class="note">Paid entries only</div>
+    </div>
+    <div class="bg-card bg-tile">
+      <div class="lbl">Money in</div>
+      <div class="num" data-draw="income" data-source="summary" data-field="income">—</div>
+      <div class="note">Starting budget and paychecks</div>
+    </div>
+    <div class="bg-card bg-tile">
+      <div class="lbl">Money out</div>
+      <div class="num" data-draw="spent" data-source="summary" data-field="spent">—</div>
+      <div class="note">Paid and upcoming</div>
+    </div>
+    <div class="bg-card bg-tile">
+      <div class="lbl">Known bills, next 30 days</div>
+      <div class="num" data-draw="bills" data-source="summary" data-field="recurring_month">—</div>
+      <div class="note">Only bills with a known amount</div>
+    </div>
+    <div class="bg-card bg-tile">
+      <div class="lbl">Evaluations you can buy</div>
+      <div class="num" data-draw="afford2" data-source="summary" data-field="affordable">—</div>
+      <div class="note">150K No-Activation at $249, after keeping next month's bills</div>
+    </div>
+  </section>
+
+  <section class="bg-card">
+    <h2 id="balance">Balance over time</h2>
+    <p class="sub">Running balance after each entry, upcoming entries included</p>
+    <div class="bg-chart" data-draw="chart" data-source="running"></div>
+  </section>
+
+  <section class="bg-card">
+    <h2 id="entries">Every entry</h2>
+    <p class="sub">Newest first. Tell Claude about each paycheck or purchase and it gets added here.</p>
+    <div class="bg-tablebox">
+      <table class="bg-table" data-source="ledger" data-row-key="date,item">
+        <thead><tr>
+          <th data-field="date">Date</th><th data-field="item">What</th><th data-field="category">Category</th>
+          <th data-field="status">Status</th><th class="r" data-field="amount">Amount</th>
+        </tr></thead>
+        <tbody data-draw="ledger"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="bg-card">
+    <h2 id="bills">Monthly bills</h2>
+    <p class="sub">Amounts not yet known are left out of the totals until you tell Claude what they cost.</p>
+    <div class="bg-tablebox">
+      <table class="bg-table" data-source="recurring" data-row-key="item">
+        <thead><tr><th data-field="item">Bill</th><th data-field="next">Next charge</th><th class="r" data-field="amount">Per month</th></tr></thead>
+        <tbody data-draw="recurring"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script>
+  const FEE = 249;   // 150K No-Activation evaluation
+  window.bgMoney = (v) => (v < 0 ? '−$' : '$') + Math.abs(v).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+  dash.calc('summary', {
+    inputs: ['ledger', 'recurring'],
+    title: 'Budget summary',
+    description: 'Totals from every entry; evaluations affordable = what is left after upcoming entries and the next 30 days of known bills, divided by the $249 fee.',
+    fn: (ledger, recurring) => {
+      const amt = (r) => Number(r.amount);
+      const paid = ledger.filter((r) => r.status === 'paid');
+      const balance_now = paid.reduce((s, r) => s + amt(r), 0);
+      const after_upcoming = ledger.reduce((s, r) => s + amt(r), 0);
+      const income = ledger.filter((r) => amt(r) > 0).reduce((s, r) => s + amt(r), 0);
+      const spent = ledger.filter((r) => amt(r) < 0).reduce((s, r) => s + amt(r), 0);
+      const upcomingBills = new Set(ledger.filter((r) => r.status === 'upcoming').map((r) => r.category));
+      const recurring_month = recurring.filter((r) => r.amount !== null && r.amount !== '' && !Number.isNaN(Number(r.amount)))
+        .reduce((s, r) => s + Number(r.amount), 0);
+      const affordable = Math.max(0, Math.floor((after_upcoming - recurring_month) / 249));
+      return [{balance_now, after_upcoming, income, spent, recurring_month, affordable}];
+    }
+  });
+
+  dash.calc('running', {
+    inputs: ['ledger'],
+    title: 'Running balance',
+    description: 'Balance after each entry, in date order.',
+    fn: (ledger) => {
+      let b = 0;
+      return ledger.slice().sort((a, c) => String(a.date).localeCompare(String(c.date)))
+        .map((r) => { b += Number(r.amount); return {date: String(r.date).slice(0, 10), balance: Math.round(b * 100) / 100, status: r.status}; });
+    }
+  });
+
+  const tile = (field, signed) => (el) => {
+    const s = dash.data('summary');
+    if (s.status !== 'ok' || !s.data.length) { el.textContent = '—'; el.className = el.className.replace(/ ?bg-(neg|pos)/g, ''); return; }
+    const v = Number(s.data[0][field]);
+    el.textContent = field === 'affordable' ? String(v) : bgMoney(v);
+    el.classList.toggle('bg-neg', signed && v < 0);
+    el.classList.toggle('bg-pos', signed && v > 0);
+  };
+  dash.draw('after', tile('after_upcoming', true));
+  dash.draw('after2', tile('after_upcoming', true));
+  dash.draw('now', tile('balance_now', true));
+  dash.draw('income', tile('income', false));
+  dash.draw('spent', tile('spent', false));
+  dash.draw('bills', tile('recurring_month', false));
+  dash.draw('afford', tile('affordable', false));
+  dash.draw('afford2', tile('affordable', false));
+
+  dash.draw('ledger', (tb) => {
+    const g = dash.data('ledger');
+    tb.replaceChildren();
+    if (g.status !== 'ok') return;
+    g.data.slice().sort((a, c) => String(c.date).localeCompare(String(a.date))).forEach((r) => {
+      const tr = document.createElement('tr');
+      const td = (t, cls) => { const x = document.createElement('td'); if (cls) x.className = cls; x.textContent = t; tr.appendChild(x); return x; };
+      td(String(r.date).slice(0, 10)); td(r.item); td(r.category);
+      const st = td(''); const pill = document.createElement('span'); pill.className = 'bg-pill' + (r.status === 'upcoming' ? ' up' : ''); pill.textContent = r.status; st.appendChild(pill);
+      const a = td(bgMoney(Number(r.amount)), 'r'); a.classList.add(Number(r.amount) < 0 ? 'bg-neg' : 'bg-pos');
+      tb.appendChild(tr);
+    });
+  });
+
+  dash.draw('recurring', (tb) => {
+    const g = dash.data('recurring');
+    tb.replaceChildren();
+    if (g.status !== 'ok') return;
+    g.data.forEach((r) => {
+      const tr = document.createElement('tr');
+      const td = (t, cls) => { const x = document.createElement('td'); if (cls) x.className = cls; x.textContent = t; tr.appendChild(x); };
+      td(r.item); td(r.next ? String(r.next).slice(0, 10) : 'not known yet');
+      td(r.amount === null || r.amount === '' ? 'amount not known yet' : bgMoney(Number(r.amount)), 'r');
+      tb.appendChild(tr);
+    });
+  });
+
+  dash.draw('chart', (el) => {
+    const g = dash.data('running');
+    el.replaceChildren();
+    if (g.status !== 'ok' || !g.data.length) return;
+    const rows = g.data.map((r) => ({d: new Date(r.date + 'T00:00:00Z'), b: Number(r.balance), up: r.status === 'upcoming'}));
+    const W = Math.max(280, el.clientWidth), H = 220, m = {t: 12, r: 16, b: 26, l: 56};
+    const x = d3.scaleUtc(d3.extent(rows, (r) => r.d), [m.l, W - m.r]);
+    const lo = Math.min(0, d3.min(rows, (r) => r.b)), hi = Math.max(0, d3.max(rows, (r) => r.b));
+    const y = d3.scaleLinear([lo, hi], [H - m.b, m.t]).nice();
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    svg.append('g').selectAll('line').data(y.ticks(5)).join('line')
+      .attr('x1', m.l).attr('x2', W - m.r).attr('y1', (v) => y(v)).attr('y2', (v) => y(v)).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-reference)');
+    const ya = svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat((v) => '$' + d3.format(',')(v)));
+    const xa = svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.min(5, rows.length)).tickFormat(d3.utcFormat('%b %-d')));
+    [ya, xa].forEach((a) => { a.attr('font-size', null).attr('font-family', null); a.selectAll('text').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)'); a.select('.domain').attr('stroke', 'var(--cds-chart-axis)'); a.selectAll('.tick line').remove(); });
+    svg.append('path').datum(rows).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2)
+      .attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round')
+      .attr('d', d3.line().x((r) => x(r.d)).y((r) => y(r.b)).curve(d3.curveStepAfter));
+    const tip = document.createElement('div'); tip.className = 'bg-tip'; tip.hidden = true; el.appendChild(tip);
+    svg.append('g').selectAll('circle').data(rows).join('circle')
+      .attr('cx', (r) => x(r.d)).attr('cy', (r) => y(r.b)).attr('r', 4)
+      .attr('fill', (r) => r.b < 0 ? 'var(--cds-chart-status-critical)' : dash.colors[0])
+      .on('pointerenter', (ev, r) => {
+        tip.textContent = `${d3.utcFormat('%b %-d, %Y')(r.d)}: ${bgMoney(r.b)}${r.up ? ' (upcoming)' : ''}`;
+        tip.hidden = false;
+        const px = Math.min(Math.max(0, x(r.d) / W * el.clientWidth - 60), el.clientWidth - 180);
+        tip.style.left = px + 'px'; tip.style.top = Math.max(0, y(r.b) / H * 220 - 36) + 'px';
+      })
+      .on('pointerleave', () => { tip.hidden = true; });
+  });
+</script>

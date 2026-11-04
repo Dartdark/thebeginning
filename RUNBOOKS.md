@@ -32,3 +32,11 @@ accelerate), GO (40+ trades, live edge >= 75% of backtest). Shown in the morning
 
 ## VPS status (2026-11-01)
 `python3 analysis/vps_status.py <scratch>/vps` -> status + trade tail; `screen.jpg` if the screenshot task is installed. Setup: `live/vps/VPS_STATUS.md`.
+
+## Budget dashboard (user, 2026-11-04)
+'Trading Budget' https://claude.ai/artifact/9S2F8YHC2mdM8adWkzCB1v (Dashboard type). Source of truth in git: `live/budget/ledger.json`
+(every paycheck / purchase / upcoming bill, amount signed) and `live/budget/recurring.json` (monthly bills; unknown amounts null).
+On every paycheck or purchase the user reports: add a row, commit, upload the file to the dashboard (Artifact publish, url, asset: true),
+then `update` `datasets/ledger` (or `recurring`) with the new source.url, updated and edit. Starting point: $500 budget, -$682.35 spent
+before tracking (Claude, ChatGPT, VPS, evals; split unknown), MultiCharts -$152.65 on 11/08 -> -$335.00.
+Buying rule: buy an evaluation only from money left after the deficit and the next 30 days of known bills, and only when the buy gate says GO.
