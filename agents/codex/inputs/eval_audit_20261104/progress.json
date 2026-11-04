@@ -3,7 +3,7 @@
   "authorized_scope": "Existing-strategy evaluation allocation and risk comparison; no live changes",
   "checked_head": "0da4e8f1b7f42309ab3ad84635ad082b9ae895bf",
   "source_claude_head": "13e29ca7b45daabeb0ed2d8c286448610f594dab",
-  "phase": "fixed_arm_preregistration",
+  "phase": "joint_initial_selection_committed_before_derived",
   "lease": {
     "owner": "codex/root/eval_audit_20261104",
     "acquired_utc": "2026-11-04T22:54:00Z",
@@ -15,15 +15,16 @@
     "initial_registered_definitions": 2485,
     "reserved_derived_definitions": 30,
     "maximum_planned_definitions": 2975,
-    "executed_definitions": 2485,
+    "executed_definitions": 2945,
     "note": "Costs and starting-state sensitivities are frozen unselectable scenarios; all views retained.",
-    "additional_fixed_registered_definitions": 460
+    "additional_fixed_registered_definitions": 460,
+    "derived_definitions_registered_after_joint_selection": 20
   },
   "preregistration_commit": "a087708b13697df4c3dd0b0814f98cb53a2b254a",
   "initial_selection_commit": null,
   "validation_selection_commit": null,
   "lease_confirmation": "Preregistration and budget reservation checked from committed a087708 before market preparation; source branch and other research leases untouched.",
-  "continuation": "Preserve all original cases; commit fixed-quantity arm and factual DT source-clock overlay before its outcomes. Joint nomination uses one shared30-definition derivative reservation.",
+  "continuation": "Commit exact joint initial nomination and20 derived rules before their2018\u201322outcomes. No2023account outcomes yet.",
   "original_design": {
     "definitions": 2485,
     "starts_per_definition": 244,
@@ -31,5 +32,29 @@
     "completion_path": "agents/codex/runtime/eval_audit_20261104/design_initial/completed_main_fresh.json",
     "completion_sha256": "46aa46abb457e971a4d14dbf58d61547c4ff26bab06436ac79167406f8b391b8",
     "summary_path": "agents/codex/inputs/eval_audit_20261104/initial_design_summary.json"
-  }
+  },
+  "amendment_commit": "e8e249b4e7c8946d517e8e4c9a4a3b4e62063e24",
+  "account_cases_completed": 718580,
+  "nominees_initial": [
+    {
+      "candidate_id": "E150_395f4dd37fc6a16e",
+      "account": 150,
+      "label": "FIXED_ONLY_FC2B_20MICRO"
+    },
+    {
+      "candidate_id": "E150_3d21e9e3a872b8e1",
+      "account": 150,
+      "label": "FIXED_ONLY_LDF_20MICRO"
+    },
+    {
+      "candidate_id": "E50_00f4f0275caf02ab",
+      "account": 50,
+      "label": "FIXED_ONLY_FC2B_20MICRO"
+    },
+    {
+      "candidate_id": "E50_1deb9a364426d4d0",
+      "account": 50,
+      "label": "FIXED_ONLY_ONBML_20MICRO"
+    }
+  ]
 }

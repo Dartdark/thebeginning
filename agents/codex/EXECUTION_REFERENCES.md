@@ -1655,3 +1655,8 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
   Eastern calendar reset. Incomplete required sizing inputs remain unknown, not a finite estimated risk budget.
 - These are forensic/model lessons. They establish no independently verified replacement strategy, live setting,
   execution saving or allocation. Exact account outcome comparisons are a separate preregistered study.
+- The follow-up [source diagnosis](inputs/eval_audit_20261104/postexecution_source_diagnosis.md) separates actual
+  missing expected-open ATR inputs from an adapter error:390 DT time exits were wrongly checked against CLOSE,
+  although the existing source exits at OPEN. A separately committed overlay fixes all401 such clocks uniformly;
+  it preserves prices, original outcomes and unrelated events. Factual source-clock repairs require their own
+  provenance and pre-outcome code commitment; favorable-touch searches would change the execution claim.
