@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-04T19:19:12+00:00",
+  "checked_remote_head": "80d0d922a8b6929be747e9f201090a9f257460dc",
+  "fetch": {
+    "command": "git fetch origin refs/heads/codex/work:refs/remotes/origin/codex/work",
+    "outcome": "Failed to connect to proxy port8080",
+    "fallback": "Connected GitHub ref confirmed checked_remote_head. No FETCH_HEAD/origin snapshot fabricated; not return admission."
+  },
+  "discovery_access": {
+    "route": "connected public indexed web search",
+    "reason": "Configured restricted network excludes Crossref/publisher destinations; shell proxy unavailable.",
+    "credential_inspection": false,
+    "bypass_attempted": false
+  },
+  "source_reads": [
+    {
+      "url": "https://www.federalreserve.gov/Pubs/feds/2012/201244/index.html",
+      "reference": "turn728230view0",
+      "outcome": "public HTML reader available",
+      "scope": "Abstract/introduction and methods through section3; not the full results, appendices or source bytes.",
+      "source_bytes_obtained": false
+    },
+    {
+      "url": "https://musabe.org/bfr20092020/40-260-1-PB.pdf",
+      "reference": "turn933187view0",
+      "outcome": "public16-page PDF reader available",
+      "scope": "Printed pp35–42, introduction/data/autocorrelation/channel-rule sections; not all16pages.",
+      "source_bytes_obtained": false
+    },
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7298358",
+      "reference": "turn505620view0",
+      "outcome": "403 Forbidden",
+      "scope": "Single primary-page attempt after indexed abstract; no retry/bypass."
+    }
+  ],
+  "paper_records": [
+    "agents/codex/research/scout/records/feds2012_44.json",
+    "agents/codex/research/scout/records/bfr2009_cusatis.json",
+    "agents/codex/research/scout/records/doi_qf_2023_2236159.json",
+    "agents/codex/research/scout/records/2294038.json",
+    "agents/codex/research/scout/records/2976836.json",
+    "agents/codex/research/scout/records/7354354.json",
+    "agents/codex/research/scout/records/885686.json",
+    "agents/codex/research/scout/records/1876555.json",
+    "agents/codex/research/scout/records/7553278.json",
+    "agents/codex/research/scout/records/7412318.json",
+    "agents/codex/research/scout/records/6808358.json",
+    "agents/codex/research/scout/records/4158600.json",
+    "agents/codex/research/scout/records/4797935.json",
+    "agents/codex/research/scout/records/7298358.json",
+    "agents/codex/research/scout/records/doi_fut_70108.json",
+    "agents/codex/research/scout/records/2820252.json"
+  ],
+  "owned_inputs": {
+    "prior_inventory": "agents/codex/inputs/scout_20261102/owned_input_inventory.json",
+    "position_inventory": "agents/codex/inputs/scout_20261103/position_inventory.json",
+    "search_profile": "agents/codex/research/scout/SEARCH_PROFILE.md",
+    "new_acquisition": "None. Signals mapped to owned fields before new full-review/trial spending; incompatible targets were skipped. No recurring acquisition loop.",
+    "admission": "No source/native-input return proposal became eligible."
+  },
+  "new_full_reviews": 0,
+  "return_tests_executed": false
+}

@@ -1605,3 +1605,16 @@ selected sections only; [scout record](research/scout/records/doi_s11408_2021_00
   as a native futures fee model. Höllmann's hedging-position target also does not establish a return forecast.
 - Status: source/clock/model caution only. No full appendix review, synthetic/economic check, execution saving,
   strategy grade or automatic follow-up test is claimed.
+
+### E09/E12 follow-up — Tick reversal is not minute-bar alpha
+
+[November4 scout checkpoint](results/scout_owned_source_20261104.md), Cusatis/Kulkarni/Thomas2009,
+[selected primary pp35–42](https://musabe.org/bfr20092020/40-260-1-PB.pdf); not a full-paper review or return test.
+- Use: distinguish tick price changes, minute returns and executable bid/ask prices. Transaction-price negative
+  correlation may reflect alternating sides of the spread; it does not promise a marketable fill at a recorded extreme.
+- Source rule uses tick-order daily highs/lows,1/2-tick brackets and lagged tick autocorrelation. Owned ZN minute
+  OHLC cannot recover event order, quote side, available depth or all eligible channel events.
+- Limits: original cost/profitability sections not reviewed; no net loss, edge, fill saving or contemporary failure
+  independently established. No OHLC scalping adaptation, new trial, allocation or live change follows.
+- Smallest check only if genuinely new matching tick data and a separately justified proposal arrive: full source
+  fill/cost rules, historical tick/quote clocks, sequential order replay and native fee/latency reconciliation.

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "bfr:2009:cusatis-kulkarni-thomas",
+  "ssrn_id": null,
+  "title": "Intraday Serial Correlation and the Predictability of Returns in the U.S. Treasury Note Futures Market",
+  "url": "https://musabe.org/bfr20092020/40-260-1-PB.pdf",
+  "authors": "Patrick Cusatis; Mukund Kulkarni; Martin Thomas",
+  "source_version": "Banking and Finance Review2009,16-page PDF",
+  "verdict": "dont_test",
+  "full_text_read": false,
+  "evidence_level": "selected_primary_sections",
+  "summary": "Owned ZN one-minute OHLC cannot reconstruct tick order,30-day tick autocorrelation or1/2-tick channel executions. Stop this route before a trial; no bar-frequency substitution.",
+  "about": "Tick-scale Treasury-note price reversals and a channel strategy.",
+  "findings": "Authors describe17,726,552price-change observations on1,077days2000–04 and profitable reversal rules. Full cost/fill results not reviewed or reproduced.",
+  "mechanism": "Negative transaction-price correlation can reflect bid/ask movement; selling a recorded high is not proof a marketable sell can fill there.",
+  "build_on": "Owned ZN one-minute OHLC cannot reconstruct tick order,30-day tick autocorrelation or1/2-tick channel executions. Stop this route before a trial; no bar-frequency substitution.",
+  "can_strategy_code_be_made": "A tick event implementation is possible with matching data and full rules; our minute exports cannot faithfully implement it.",
+  "reading_scope": "Printed pp35–42, introduction/data/autocorrelation/channel-rule sections; not all16pages.",
+  "source_artifact": null,
+  "source_sha256": null,
+  "return_eligibility": "NOT_TEST",
+  "new_economic_trials": 0,
+  "new_economic_definitions": 0,
+  "independent_economic_verification": "not_performed",
+  "updated_at": "2026-11-04T19:19:12+00:00",
+  "report_path": "agents/codex/results/scout_owned_source_20261104.md",
+  "access_receipt": "agents/codex/inputs/scout_20261104/access.json",
+  "notification": {
+    "actionable": false,
+    "key_created": false
+  }
+}
