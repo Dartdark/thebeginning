@@ -19,3 +19,19 @@ B. 150K evaluation (x 2.5 set), every start day 2018+:
    VB 15                              pass 40.8%  fail 54.1%  time-out  5.1%  | 2023+ pass 44.6% | median days to pass    8 | fee per funded $611
    VB 12                              pass 39.6%  fail 53.3%  time-out  7.0%  | 2023+ pass 44.6% | median days to pass    9 | fee per funded $628
    VB 10                              pass 38.2%  fail 53.9%  time-out  8.0%  | 2023+ pass 42.3% | median days to pass    9 | fee per funded $653
+   ONB $2,000                         pass 39.1%  fail 54.8%  time-out  6.1%  | 2023+ pass 46.3% | median days to pass    9 | fee per funded $637
+   ONB $1,400                         pass 35.7%  fail 53.1%  time-out 11.2%  | 2023+ pass 44.6% | median days to pass   10 | fee per funded $698
+   VB 15, ONB $2,000                  pass 37.4%  fail 53.2%  time-out  9.4%  | 2023+ pass 44.6% | median days to pass   10 | fee per funded $666
+   VB 10, ONB $1,400 (half size)      pass 28.6%  fail 42.8%  time-out 28.7%  | 2023+ pass 34.2% | median days to pass   14 | fee per funded $872
+   VB 20 + VB loss cap                pass 41.1%  fail 56.5%  time-out  2.4%  | 2023+ pass 44.0% | median days to pass    8 | fee per funded $605
+   VB 15 + loss cap, ONB $2,000       pass 37.3%  fail 53.3%  time-out  9.4%  | 2023+ pass 44.7% | median days to pass   10 | fee per funded $668
+
+C. The live stretch (Python ports on the extended data; Bridge / EOS had no trades in it):
+   50K from 2026-10-20  plan VB 8, ONB $1,100          -> ('fail', 5); P&L to 11/04 $-3,348, worst day $-2,830
+   50K from 2026-10-20  VB 6, ONB $800                 -> ('fail', 5); P&L to 11/04 $-2,692, worst day $-2,035
+   50K from 2026-10-20  VB 4, ONB $550                 -> ('fail', 12); P&L to 11/04 $-1,498, worst day $-1,240
+   50K from 2026-10-20  VB 6 + loss cap, ONB $800      -> ('fail', 11); P&L to 11/04 $-3,215, worst day $-1,131
+   150K from 2026-11-02  plan VB 20, ONB $2,750         -> ('fail', 3); P&L to 11/04 $-4,294, worst day $-6,900
+   150K from 2026-11-02  VB 15, ONB $2,000              -> ('fail', 3); P&L to 11/04 $-3,132, worst day $-5,087
+   150K from 2026-11-02  VB 10, ONB $1,400              -> ('fail', 3); P&L to 11/04 $-1,971, worst day $-3,275
+   150K from 2026-11-02  VB 15 + loss cap, ONB $2,000   -> ('fail', 3); P&L to 11/04 $-3,250, worst day $-2,827
