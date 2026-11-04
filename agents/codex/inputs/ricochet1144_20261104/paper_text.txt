@@ -1,0 +1,637 @@
+R I C O C H E T         ·     1 1 4 4       N Q     5     G R E Z Z O      O P 8 0 0                                                  R E S E A R C H     N O T E   ·    N A S D A Q - 1 0 0
+
+
+
+
+      !        C A U T I O N            —         N O T       A D M I T T E D     B Y    T H E    P R O T O C O L ,       E X P L O R A T O R Y   O O S
+
+      Ricochet is not admitted by the anti data-mining protocol: its out of sample is exploratory only. Out of sample, from 26 Oct 2022, its t is 1.95
+      against the classic 1.96 threshold. The out-of-sample period was opened only once, with rules and thresholds fixed in advance. Research, not
+      investment advice.
+
+
+
+
+/ /       R E S E A R C H        N O T E      ·         P A P E R     1 1 4 4
+
+
+
+
+RICOCHET
+Buying the Nasdaq after a down day
+When the Nasdaq-100 closes its regular session below the open, Ricochet buys one E-mini at 17:05
+and trades the rebound until 15:00 the next day, with a 50-point stop, a 100-point target and
+re-entries at the S1 pivot. Out of sample: +$84,365, t 1.95.
+
+
+A U T H O R                                          D A T E                                          V E R S I O N                               S T R A T E G Y
+
+Luca Franceschetti                                   4 November 2026                                  1.0                                         1144 NQ 5 grezzo OP800
+
+M A R K E T                                          B A R S                                          D I R E C T I O N                           P E R I O D
+
+NQ · E-mini Nasdaq-100                               5 minutes · Chicago time                         long only                                   2017 / 2026
+
+C L A S S I F I C A T I O N                                                                           P A P E R                                   S T A T U S
+
+Research note · exploratory OOS                                                                       Hu, Jin and Wang (2025)                     not admitted
+
+
+/ /   E Q U I T Y       ·    2 0 1 7 - 2 0 2 6       ·    1     N Q
+
+
+
+
+R I C O C H E T     ·       1 1 4 4   N Q     5     G R E Z Z O       O P 8 0 0    ·    V 1 . 0                                                                         P A G E   0 1   /   1 1
+R I C O C H E T         ·     R E S E A R C H                 N O T E                                                                                            0 0    /    C O N T E N T S
+
+
+
+
+/ /   C O N T E N T S                                                                                           / /     A B S T R A C T
+
+
+
+CONTENTS.                                                                                                       ABSTRACT.
+                                                                                                                A century of US data says that stock market rebounds are more
+01      Summary                                                                                            03   likely after negative days (Hu, Jin and Wang, 2025). Ricochet
+        W H A T    I T      I S   A N D     W H A T         W E    F O U N D                                    turns this into an overnight rule on the E-mini Nasdaq-100: if
+                                                                                                                yesterday’s regular session closed below its open, buy at 17:05
+02      The idea                                                                                           03   Chicago time; stop at 50 points, target at 100, up to three
+        F R O M    A     C E N T U R Y      O F       D A T A      T O     T H E     N A S D A Q                re-entries at the S1 pivot, time exit at 15:00. Long only, always
+                                                                                                                with a stop. Development 2017-2022: +$151,843 on 1,168
+03      The setup on the price                                                                             04
+                                                                                                                trades, t 3.73. Out of sample, from 26 Oct 2022 to Sep 2026,
+        O N E     S E S S I O N ,       S T E P       B Y     S T E P
+                                                                                                                opened once: +$84,365 on 1,070 trades, $78.85 per trade,
+                                                                                                                t 1.95, one step from the classic 1.96 threshold, with every year
+04      Results                                                                                            05
+                                                                                                                positive. The honest part: the raw rebound is barely visible in the
+        D E V E L O P M E N T       A N D       O U T       O F    S A M P L E
+                                                                                                                data, and most of the profit comes from the re-entries found by
+05      Where the profit is                                                                                07   the optimisation. A case study worth following forward.
+        T H E     R E B O U N D ,       T H E     E X I T S ,           T H E    R E - E N T R I E S
+
+
+                                                                                                                      / /   R E A D   T H I S   F I R S T
+06      Hypotheses                                                                                         08
+        W H A T    T H E     D A T A      S U P P O R T                                                               Not validated. Positive out of sample (+$84,365) and one step
+                                                                                                                      from the classic threshold, with a stop; the paper’s premise is
+07      How it was found                                                                                   09         barely visible and the profit comes from re-entries. A case study
+        T H E     C H A I N ,     S T E P       B Y     S T E P                                                       to follow forward.
+
+08      Robustness                                                                                         10
+        W H A T    H O L D S      A N D     W H Y       I T       I S    N O T     A D M I T T E D
+
+
+
+09      Verdict                                                                                            10
+        W H A T    I T      W O U L D     T A K E       T O       B E L I E V E      I T
+
+
+
+10      References                                                                                         11
+        T H E     S O U R C E S     C I T E D         I N     T H I S      N O T E
+
+
+
+A       Glossary                                                                                           11
+        A P P E N D I X      ·    T H E     T E R M S         U S E D
+
+
+
+
+R I C O C H E T     ·       1 1 4 4       N Q     5         G R E Z Z O          O P 8 0 0    ·      V 1 . 0                                                           P A G E   0 2   /   1 1
+R I C O C H E T           ·     R E S E A R C H             N O T E                                                                                     0 1    /     S U M M A R Y
+
+
+
+
+                                            / /       W H A T    I T    I S   A N D    W H A T    W E    F O U N D
+
+
+
+
+01                                          SUMMARY.
+
+/ /     K E Y       F I G U R E S       ·     1       N Q     C O N T R A C T ,    C O S T S     I N C L U D E D
+
+
+    // OUT-OF-SAMPLE T                                        // OUT-OF-SAMPLE NET                        // MEAN PER TRADE                  // DEVELOPMENT T
+
+
+
+    1.95                                                      $84,365                                     $78.85                             3.73
+    from 26 Oct 2022 · threshold 1.96                         1,070 trades · costs included               out of sample · AV threshold $70   2017-2022 · 1,168 trades
+
+
+
+    // STOP · TARGET                                          // MAX DRAWDOWN                             // POSITIVE OOS YEARS              // ADMITTED BY THE PROTOCOL
+
+
+
+    50 · 100 pts                                              $23,801                                     4 of 4                             no
+    −$1,009 · +$1,991 net                                     out of sample · on sessions                 2023, 2024, 2025, 2026             exploratory out of sample
+
+
+
+▪     The idea. After a down day, the US stock market tends to bounce. Documented on US returns since 1897 and on the main
+      foreign markets.
+▪     The rule. If yesterday’s regular session of the Nasdaq-100 closed below its open, buy one E-mini NQ at 17:05 Chicago time.
+      Otherwise, stay out.
+▪     Risk. A 50-point stop (−$1,009 net) and a 100-point target (+$1,991 net) on every trade. Every loss has the same size.
+▪     Re-entries. After a stop or a target, buy again when the price touches the S1 pivot, up to four trades per session; everything closes
+      at 15:00.
+▪     Out of sample. +$84,365 on 1,070 trades, t 1.95, every year positive.
+▪     The catch. The rebound itself is small and weak out of sample; the edge lives in the re-entries.
+
+
+      / /   T H E     V E R D I C T
+
+      Ricochet is the most balanced strategy of this series: a simple idea, a stop on every trade and a positive out-of-sample period of almost
+      four years. It is not admitted by our protocol and the premise is weak in the data, so it is a case study to follow forward, not a strategy
+      to put on an account today.
+
+
+
+
+                                            / /       F R O M    A     C E N T U R Y   O F     D A T A   T O   T H E   N A S D A Q
+
+
+
+
+02                                          THE IDEA.
+
+Hu, Jin and Wang (2025) study the autocorrelation of daily US stock returns from 1897 to 2024. It changes over time, but one feature is
+stable, and appears in the main foreign markets too: rebounds are more likely after negative days. A daily strategy built on this
+asymmetry earns a higher Sharpe ratio than the index.
+
+Ricochet keeps only the asymmetric part and moves it to the E-mini Nasdaq-100 overnight. Two choices are ours: the down day is
+measured from the open to the close of the regular session (the paper uses close to close), and the position is taken at the evening
+reopen, 17:05 Chicago time.
+
+
+
+
+R I C O C H E T       ·       1 1 4 4   N Q       5    G R E Z Z O     O P 8 0 0   ·   V 1 . 0                                                             P A G E    0 3   /   1 1
+R I C O C H E T         ·     R E S E A R C H            N O T E                                                                                0 2    /    T H E     I D E A
+
+
+
+
+/ /     W H A T     W E      T A K E        F R O M       T H E      P A P E R ,   A N D     W H A T     W E     A D D
+
+
+E L E M E N T                         P A P E R                                                  R I C O C H E T
+
+
+market                                US stock market, daily                                     E-mini Nasdaq-100, 5-minute bars
+
+signal                                negative daily return                                      regular session closed below its open
+
+position                              long the next day                                          long from 17:05 to 15:00 the next day
+
+risk                                  -                                                          50-point stop, 100-point target
+
+re-entries                            -                                                          S1 pivot, at most four trades (optimisation)
+
+
+
+      / /   T H E   R E S E A R C H             Q U E S T I O N
+
+      Does the rebound after a down day survive on the Nasdaq futures overnight, and is it what makes Ricochet profitable?
+
+
+
+
+                                           / /        O N E   S E S S I O N ,      S T E P    B Y      S T E P
+
+
+
+
+03                                         THE SETUP ON THE PRICE.
+
+▪      Signal. Yesterday’s regular session (08:30-15:00 Chicago) closed below its open, by any amount.
+▪      Entry. 17:05 Chicago time, at the evening reopen, one E-mini NQ contract ($20 per point).
+▪      Stop and target. 50 points below and 100 points above the entry, checked bar by bar; a bar that opens beyond a level exits at
+       the open.
+▪      Re-entry. After a stop or a target, buy again when the price touches the S1 pivot and closes back above it; one bar of pause; at most
+       four trades per session.
+▪      Time exit. 15:00 Chicago time.
+▪      Costs. $9 per trade, included in every number.
+
+
+
+
+Fig. 1. A session from the out-of-sample period: 8 Sep 2026. Navy: the price; orange: the S1 pivot and, shaded, the re-entry zone just above it; blue dots: entries;
+squares: exits. Trade 1 enters at 17:05 and is stopped soon after (−$1,009). Overnight the price falls back to the S1 pivot: trade 2 re-enters and reaches the
+target (+$1,991). After the 08:30 data the price drops again, trade 3 re-enters and hits the target; trade 4 enters near the close and exits at 15:00 (+$691). Net of
+the session: +$3,664.
+
+
+
+R I C O C H E T     ·       1 1 4 4       N Q     5    G R E Z Z O     O P 8 0 0   ·   V 1 . 0                                                        P A G E   0 4   /   1 1
+R I C O C H E T         ·     R E S E A R C H            N O T E                                                                 0 3   /     T H E       S E T U P     O N   T H E     P R I C E
+
+
+
+
+/ /     T H E   D E F I N I T I O N ,                 F R O Z E N    B E F O R E        T H E    O U T - O F - S A M P L E   P E R I O D
+
+
+E L E M E N T                                                 V A L U E                                                                                                O R I G I N
+
+
+signal                                                        regular session closed below its open (threshold 0%)                                                     paper card
+
+entry · time exit                                             17:05 · 15:00                                                                                            paper card
+
+direction                                                     long only                                                                                                paper card
+
+stop · target                                                 $1,000 · $2,000 (50 · 100 points)                                                                        paper card
+
+re-entries                                                    S1 pivot, touch and close, at most 4 trades                                                              optimisation
+
+filters, entries, exits, size                                 none improved the rule                                                                                   optimisation
+
+
+
+
+                                            / /       D E V E L O P M E N T      A N D      O U T    O F       S A M P L E
+
+
+
+
+04                                          RESULTS.
+
+/ /     R E S U L T S        ( 1      N Q     C O N T R A C T ,       C O S T S         I N C L U D E D )
+
+
+                                                                                       D E V E L O P M E N T                               O U T   O F   S A M P L E                       T O T A L
+
+
+dates                                                                         2017 - 25 Oct 2022                                 26 Oct 2022 - Sep 2026                              2017-2026
+
+trades                                                                                               1,168                                                  1,070                           2,238
+
+sessions with trades                                                                                   656                                                     451                          1,107
+
+net $                                                                                            151,843                                                   84,365                      236,208
+
+mean per trade $                                                                                    130.00                                                  78.85                          105.54
+
+winning trades                                                                                       44.4%                                                  37.3%                           41.0%
+
+profit factor                                                                                         1.25                                                   1.13                            1.19
+
+max drawdown $                                                                                      14,581                                                 23,801                          23,801
+
+t on sessions                                                                                         3.73                                                   1.95                            3.97
+
+The out-of-sample period was opened once. Our protocol also reads it in two parts (to Dec 2023: t 0.93 against 1.96; from 2024: t 1.71 against 4.26); this note judges it
+as one period.
+
+
+
+
+Fig. 2. Cumulative net P&L; on one E-mini Nasdaq-100 contract, costs included. Blue: development, where the rules were chosen. Orange: out of sample, never
+seen while choosing. The dashed line is 26 Oct 2022.
+
+
+
+R I C O C H E T     ·       1 1 4 4    N Q        5    G R E Z Z O   O P 8 0 0     ·     V 1 . 0                                                                         P A G E     0 5     /    1 1
+R I C O C H E T       ·     R E S E A R C H       N O T E                                                                                0 4   /     R E S U L T S
+
+
+
+
+Fig. 3. Drawdown from the previous high. The deepest, $23,801, is in the out-of-sample period, in 2023-2024.
+
+
+
+
+Fig. 4. Net per year with the t of each year. Out of sample every year is positive, between $18,511 and $25,114 a year; no single year has a t above 1.3.
+
+
+
+   / /   R E A D I N G       T H E    C U R V E
+
+   In development the curve climbs faster than out of sample: the mean per trade drops from $130 to $79 and winning trades from 44% to
+   37%. The curve keeps rising, more slowly. That is the normal cost of moving from the data used to choose to data never seen.
+
+
+
+
+R I C O C H E T   ·       1 1 4 4    N Q   5   G R E Z Z O   O P 8 0 0   ·   V 1 . 0                                                       P A G E    0 6   /   1 1
+R I C O C H E T       ·     R E S E A R C H         N O T E                                                                      0 5   /   W H E R E      T H E    P R O F I T     I S
+
+
+
+
+                                       / /       T H E   R E B O U N D ,    T H E    E X I T S ,   T H E   R E - E N T R I E S
+
+
+
+
+05                                     WHERE THE PROFIT IS.
+
+
+
+
+Fig. 5. The premise, without the strategy: the mean move of NQ from 17:05 to 15:00 after a down day (green) and after an up day (grey). In development the
+rebound is there (+9.2 points, t 1.35); out of sample it almost disappears (+2.1 points, t 0.15).
+
+
+
+
+Fig. 6. Left: how trades end; light, development; solid, out of sample. Stops outnumber targets about two to one, as the 1:2 risk-reward implies. Right: net by
+trade number in the session; blue, development; orange, out of sample. The first trade, the one that follows the signal alone, makes little; the profit comes from
+the re-entries.
+
+
+/ /    N E T   B Y        T R A D E     N U M B E R
+
+
+T R A D E                                                           D E V E L O P M E N T   $              T                       O U T   O F   S A M P L E   $                   T
+
+
+1st (17:05)                                                                          5,101             0.16                                           33,681                    1.10
+
+2nd                                                                                 72,202             3.10                                           53,392                    2.19
+
+3rd                                                                                 39,213             2.33                                           −1,285                   −0.07
+
+4th                                                                                 35,327             2.96                                           −1,423                   −0.09
+
+
+
+
+R I C O C H E T   ·       1 1 4 4     N Q    5    G R E Z Z O   O P 8 0 0   ·   V 1 . 0                                                                        P A G E   0 7   /   1 1
+R I C O C H E T        ·     R E S E A R C H          N O T E                                                      0 5   /   W H E R E   T H E   P R O F I T     I S
+
+
+
+
+   / /   W H A T       T H I S       M E A N S
+
+   The paper’s rebound alone would not pay: the first trade earns $5,101 in six years of development. Ricochet works because, on a day
+   that started weak, buying again at the S1 pivot catches the turn. Out of sample the second trade carries the result; the third and fourth
+   add nothing.
+
+
+
+
+                                         / /       W H A T     T H E     D A T A       S U P P O R T
+
+
+
+
+06                                       HYPOTHESES.
+
+
+                                          After a down day the Nasdaq-100 rebounds overnight.
+    H1                                    / /      H O W     I T   I S   T E S T E D
+
+     PARTLY       SUPPORTED               Mean NQ move from 17:05 to 15:00 after down days against up days.
+
+                                          / /      O U T C O M E
+
+                                          Development +9.2 points (t 1.35) against −3.6; out of sample +2.1 (t 0.15) against −1.4. The sign is right, the
+                                          size is small.
+
+
+
+
+                                          The profit comes from the signal itself.
+    H2                                    / /      H O W     I T   I S   T E S T E D
+
+     N O T   S U P P O R T E D            Net of the first trade of each session against the re-entries.
+
+                                          / /      O U T C O M E
+
+                                          First trade: +$5,101 in development (t 0.16), +$33,681 out of sample (t 1.10). Re-entries: the rest.
+
+
+
+
+                                          The rule works on the other US equity indices.
+    H3                                    / /      H O W     I T   I S   T E S T E D
+
+     N O T   S U P P O R T E D            Step 1: the raw rule on every market at 5 minutes, development.
+
+                                          / /      O U T C O M E
+
+                                          YES only on NQ (t 1.58) and ES (t 0.55); NO on the Dow (t 0.23), the Russell 2000 (0.63) and the Nikkei (0.25).
+                                          The ES version, optimised separately, fails out of sample.
+
+
+
+
+                                          The strategy holds out of sample.
+    H4                                    / /      H O W     I T   I S   T E S T E D
+
+     PARTLY       SUPPORTED               One t on sessions from 26 Oct 2022 to the end of the data; classic threshold 1.96.
+
+                                          / /      O U T C O M E
+
+                                          t 1.95, +$84,365, every year positive: one step below the threshold.
+
+
+
+
+R I C O C H E T    ·       1 1 4 4     N Q     5    G R E Z Z O     O P 8 0 0      ·    V 1 . 0                                              P A G E   0 8   /   1 1
+R I C O C H E T         ·     R E S E A R C H       N O T E                                                               0 7     /    H O W   I T   W A S     F O U N D
+
+
+
+
+                                       / /       T H E   C H A I N ,      S T E P      B Y     S T E P
+
+
+
+
+07                                     HOW IT WAS FOUND.
+
+Paper 1144 entered our automated research in November 2026. Step 1 ran the paper’s raw rule on 18 futures markets; it earned a
+YES only on NQ and ES. On NQ the optimisation searched filters, entries, re-entries, confirmations, exits and size in sequence,
+keeping a family only if its plateau beat the previous step.
+
+/ /       T H E   O P T I M I S A T I O N          C H A I N    O N      N Q   A T     5     M I N U T E S
+
+
+S T E P                                                    C H O S E N                                           C O M B I N A T I O N S                      Z O N E   T
+
+
+paper rule (raw)                                           -                                                                          1                            1.58
+
+filters                                                    none                                                              506,538                                    -
+
+entries                                                    none                                                              624,240                                    -
+
+re-entries                                                 S1 pivot                                                       1,205,280                                3.28
+
+confirmations                                              none                                                                 51,840                                  -
+
+exits                                                      none                                                                 91,424                                  -
+
+size                                                       none                                                                    100                                  -
+
+5,867,006 tests in the chain, all counted in our anti data-mining register.
+
+
+
+
+Fig. 7. Zone t at each step. The raw rule (t 1.58, drawdown $60,306) becomes a strategy only with the S1-pivot re-entries; no filter, exit or sizing rule improved it.
+
+
+Before the out-of-sample period was opened, a look-ahead check compared 2,160 cuts of the data: 0 differences. The strategy was
+then rebuilt independently: the same 2,238 trades.
+
+
+
+
+R I C O C H E T     ·       1 1 4 4   N Q    5    G R E Z Z O   O P 8 0 0      ·     V 1 . 0                                                     P A G E     0 9   /    1 1
+R I C O C H E T           ·     R E S E A R C H          N O T E                                                                              0 8   /       R O B U S T N E S S
+
+
+
+
+                                           / /        W H A T    H O L D S    A N D      W H Y     I T   I S    N O T      A D M I T T E D
+
+
+
+
+08                                         ROBUSTNESS.
+
+/ /     S T R E S S           T E S T S     O N       T H E     W H O L E    H I S T O R Y
+
+
+S C E N A R I O                                                                                                                                                              T
+
+
+as defined                                                                                                                                                               3.97
+
+double costs ($18 per trade)                                                                                                                                             3.63
+
+entry one bar later                                                                                                                                                      4.00
+
+all times 5 minutes later                                                                                                                                                4.11
+
+time exit 5 minutes earlier                                                                                                                                              3.88
+
+time exit 5 minutes later                                                                                                                                                4.04
+
+Out of sample the 5 best sessions make 16% of the net from 2024 and 46% of the net to Dec 2023.
+
+
+/ /     T H E       P R O T O C O L
+
+
+C R I T E R I O N                                                                                              V A L U E                                O U T C O M E
+
+
+sample                                                                                                         1,502 sessions, 1,168 trades             pass
+
+double costs                                                                                                   +$141,331, t 3.47                        pass
+
+robust t (HAC)                                                                                                 3.73                                     -
+
+correction for 9.9 million tests                                                                               not significant                          not passed
+
+checks on selection (DSR, PBO, Reality Check)                                                                  not computed for the chain               not passed
+
+base admitted                                                                                                  raw paper rule: exploratory              not passed
+
+
+
+      / /   W H Y     I T       I S     N O T     A D M I T T E D
+
+      The base is the paper’s raw rule, exploratory by construction, and once corrected for the 9.9 million tests of the batch the development
+      result is not significant. Its out-of-sample period counts as use of the data, never as promotion.
+
+
+
+
+                                           / /        W H A T    I T    W O U L D       T A K E    T O   B E L I E V E      I T
+
+
+
+
+09                                         VERDICT.
+
+Ricochet does what most backtests do not: it stays positive on almost four years it never saw, with a stop on every trade and a simple
+idea behind it. Two things keep it a case study: the out-of-sample t is just below 1.96, and the rebound it was built on is weak in the
+data, while the re-entries do the work.
+
+▪     Forward. Follow it on new data with the rules frozen as they are; no re-optimisation.
+▪     Size. One NQ is $20 a point: on a prop account it would run on micro contracts.
+▪     Afternoon. Out of sample, trades opened after noon lose (−$7,480): a known weak spot.
+
+
+
+
+R I C O C H E T       ·       1 1 4 4     N Q     5    G R E Z Z O     O P 8 0 0    ·    V 1 . 0                                                        P A G E    1 0   /   1 1
+R I C O C H E T           ·     R E S E A R C H        N O T E                                                                      0 9   /     V E R D I C T
+
+
+
+
+      / /   I N   O N E        L I N E
+
+      A rebound idea with a century of evidence, a stop on every trade and a positive out of sample at t 1.95: promising, not proven.
+
+
+
+
+                                          / /       T H E   S O U R C E S      C I T E D   I N   T H I S   N O T E
+
+
+
+
+10                                        REFERENCES.
+
+Bailey, D. H., and López de Prado, M. (2014). The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting, and Non-Normality.
+    Journal of Portfolio Management, 40(5), 94-107. https://doi.org/10.3905/jpm.2014.40.5.094
+
+Harvey, C. R., Liu, Y., and Zhu, H. (2016). ... and the Cross-Section of Expected Returns. Review of Financial Studies, 29(1), 5-68.
+   https://doi.org/10.1093/rfs/hhv059
+
+Hu, G. X., Jin, Z., and Wang, J. (2025). Autocorrelation in Daily Stock Market Returns: Time-variation and Asymmetry. SSRN Working Paper
+    5314371, MIT Sloan Research Paper.
+
+Newey, W. K., and West, K. D. (1987). A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorrelation Consistent Covariance Matrix.
+   Econometrica, 55(3), 703-708. https://doi.org/10.2307/1913610
+
+White, H. (2000). A Reality Check for Data Snooping. Econometrica, 68(5), 1097-1126. https://doi.org/10.1111/1468-0262.00152
+
+
+
+
+                                          / /       A P P E N D I X   ·     T H E   T E R M S    U S E D
+
+
+
+
+A                                         GLOSSARY.
+
+▪     Development and out of sample. Development (to 25 Oct 2022): the data used to choose the rules. Out of sample (from 26 Oct 2022): data
+      never used for any choice, opened once.
+▪     Exploratory out of sample. Opened for a strategy the protocol does not admit: it counts as use of the data, never as promotion.
+▪     t on sessions. The mean net of the sessions with trades divided by its standard error; around 2 means the result is unlikely to be chance.
+▪     HAC. A standard error robust to changing variance and correlation between nearby sessions (Newey and West, 1987).
+▪     AV threshold. The minimum mean net per trade for a market, set to cover costs and slippage: $70 on NQ.
+▪     S1 pivot. The first support level of the classic floor-trader pivots, computed from the previous day’s high, low and close.
+▪     Plateau (zone t). The t of a neighbourhood of parameters, not of the single best point.
+
+
+/ /     S I G N E D
+
+
+Luca Franceschetti
+Research note · 4 Nov 2026 · research only, not investment advice
+
+
+
+
+R I C O C H E T       ·       1 1 4 4    N Q    5    G R E Z Z O   O P 8 0 0    ·   V 1 . 0                                           P A G E    1 1   /   1 1
+
