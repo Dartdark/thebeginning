@@ -274,7 +274,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   a side; stop at stage 1 unless gross per trade > 2x cost.
 - Apex: yes (intraday). data: data/NG_1min_*.csv (CT)
 
-## Q021 · queued · priority 1
+## Q021 · running · priority 1
 - who_pays: structural / behavioral: weekend weather-model runs (GFS / ECMWF, Saturday-Sunday) and news force hedgers and weather funds to reprice NG at the thin Sunday 17:00 CT reopen, when liquidity providers are few and demand a premium; the overshoot is given back as Monday liquidity arrives (the same mechanism that pays the plan's CL Sunday up-gap fade, rank A)
 - tier_check: scout 2026-11-04, dupcheck 'Sunday gap' / 'NG Sunday' / 'natural gas weekend' / 'weekend gap': CL Sunday up-gap fade A (in the plan); Sunday-gap fade / follow on GC, NQ, ES, YM tested in S-rank round 2 (C / F); BTC weekend gap C / F; NG never tested (NG data added 2026-10-31); clear
 - source: scout 2026-11-04: cross-market port of the plan's CL Sunday up-gap fade (`funded_strategies/CL_Sunday_Gap_Fade.txt`,
