@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-04T16:41-06:00",
+ "updated": "2026-11-04T17:15-06:00",
  "state": "running",
- "studies": 15,
- "today": 0,
+ "studies": 16,
+ "today": 1,
  "cap": 5,
  "looks_quarter": 0,
  "looks_budget": 40,
  "passed_stage": {
-  "1": 9,
+  "1": 10,
   "2": 0,
   "3": 0,
   "4": 0,
@@ -18,9 +18,40 @@
  "next": "Q019",
  "needs_user": [],
  "t_bar": 3.65,
- "n_trials": 383,
+ "n_trials": 386,
  "alive": [],
  "recent": [
+  {
+   "id": "Q021",
+   "title": "NG Sunday up-gap fade (CL rule ported unchanged)",
+   "market": "NG",
+   "stage": 1,
+   "verdict": "FAIL",
+   "gate": "stage 1: best t -0.73 < 2.0",
+   "t_design": -0.73,
+   "t_holdout": null,
+   "looks": 0,
+   "tier": "F",
+   "lesson": "fade loses on both sides (t -2.2): NG weekend gaps continue; CL mechanism does not port",
+   "follow_ups": [],
+   "verified": [
+    "stage 1 on 2018-22: 3 pre-registered variants (87 / 176 / 47 trades), $5 + 1 tick per fill, 0.75 ATR stop, roll weekends dropped",
+    "stage 2 placebo: Mon-Thu evening reopens, same-share threshold, 500 draws, p 0.80"
+   ],
+   "not_verified": [
+    "holdout 2023-onward (sealed)",
+    "benches",
+    "checker",
+    "MultiCharts",
+    "roll bar dates checked bar by bar (rule: first evening bar of the expiry-day session)"
+   ],
+   "risks": [
+    "roll detection by the calendar rule only; a missed roll weekend can add a fake gap",
+    "US federal calendar used for NYMEX business days"
+   ],
+   "date": "2026-11-04T17:15-06:00",
+   "provenance": "[provenance] code c7d64bb dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189"
+  },
   {
    "id": "Q017",
    "title": "MOM-TOM: trend-direction turn-of-month flow in CL/NG/GC/ZN/6E",
@@ -279,21 +310,6 @@
    "looks": 0,
    "tier": "D (existing)",
    "lesson": "already tested in treasury_auction_test.py",
-   "follow_ups": [],
-   "date": "2026-10-31T17:16-05:00"
-  },
-  {
-   "id": "Q001",
-   "title": "CL EIA first-5-minute fade/follow",
-   "market": "CL",
-   "stage": 0,
-   "verdict": "BLOCKED",
-   "gate": "duplicate of F-ranked TIER_LIST item",
-   "t_design": null,
-   "t_holdout": null,
-   "looks": 0,
-   "tier": "F (existing)",
-   "lesson": "already tested in cl_forced_flows_test.py",
    "follow_ups": [],
    "date": "2026-10-31T17:16-05:00"
   }

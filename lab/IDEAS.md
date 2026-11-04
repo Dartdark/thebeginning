@@ -274,7 +274,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   a side; stop at stage 1 unless gross per trade > 2x cost.
 - Apex: yes (intraday). data: data/NG_1min_*.csv (CT)
 
-## Q021 · running · priority 1
+## Q021 · done · priority 1
 - who_pays: structural / behavioral: weekend weather-model runs (GFS / ECMWF, Saturday-Sunday) and news force hedgers and weather funds to reprice NG at the thin Sunday 17:00 CT reopen, when liquidity providers are few and demand a premium; the overshoot is given back as Monday liquidity arrives (the same mechanism that pays the plan's CL Sunday up-gap fade, rank A)
 - tier_check: scout 2026-11-04, dupcheck 'Sunday gap' / 'NG Sunday' / 'natural gas weekend' / 'weekend gap': CL Sunday up-gap fade A (in the plan); Sunday-gap fade / follow on GC, NQ, ES, YM tested in S-rank round 2 (C / F); BTC weekend gap C / F; NG never tested (NG data added 2026-10-31); clear
 - source: scout 2026-11-04: cross-market port of the plan's CL Sunday up-gap fade (`funded_strategies/CL_Sunday_Gap_Fade.txt`,
@@ -290,3 +290,7 @@ New ideas: append with the next ID; follow-ups from a failure get `parent:` and 
   reopens. Placebo: same entry / exit on random weekday evenings 17:05 -> 09:00 with the same gap sign rule from the prior
   17:00 price. Power: ~45 Sundays a year, ~20-25 with an up gap >= 0.1 ATR (~110 in 2018-22 for V1).
 - Apex: yes (Sunday 17:00 starts Monday's Apex day; flat Monday 09:00). data: data/NG_1min_*.csv (CT, 24 h)
+- result: FAIL stage 1 (2026-11-04). 240 NG weekends 2018-22 (roll weekends dropped, 119 roll bars marked): V1 CL rule
+  short gA >= 0.1 87 trades -$152 (PF 0.67, t -1.3, 1/5 yrs), V2 both sides -$178 (176 trades, t -2.2, 0/5), V3 gA >= 0.3
+  -$115 (47, t -0.7); weekday-evening placebo +$2, p 0.80. NG weekend gaps continue rather than revert; not flipped post
+  hoc. Holdout not opened. `analysis/lab_Q021.py`. No follow-ups.
