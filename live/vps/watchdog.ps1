@@ -1,4 +1,5 @@
 # VPS watchdog (2026-10-21): checks every 5 minutes on weekdays 08:15-15:10 CT and pushes an alert to the user's phone
+# 2026-11-05: phone alerts muted while no account is "live" in live/expected_setup.json (section 4).
 # (ntfy app, topic below) the moment something can affect trading. Installed by push_trade_logs.ps1 as the task
 # 'VpsWatchdog'. Read-only: it never touches MultiCharts, Rithmic or orders.
 # Checks: MultiCharts running; MultiCharts has live network connections (broker / data); every chart's logger heartbeat
@@ -142,6 +143,14 @@ if ($rej -gt $prev) {
 $state["rej_day"] = $day; $state["rej_count"] = $rej
 
 # 4. alert (once an hour per problem), log, save state
+# mute (user 2026-11-05): no phone alerts while no account in expected_setup.json has status "live"; the problems are still
+# written to alerts.txt (marked MUTED). Alerts come back on their own when an account is set to "live" there.
+$anyLive = $true
+if ($cfg) { $anyLive = @($cfg.accounts.PSObject.Properties | Where-Object { $_.Value.status -eq "live" }).Count -gt 0 }
+if (-not $anyLive) {
+    foreach ($p in $problems) { "$($now.ToString('yyyy-MM-dd HH:mm')) MUTED (no live account) $($p.Split('|', 2)[1])" | Add-Content "$Logs\alerts.txt" }
+    $problems = @()
+}
 foreach ($p in $problems) {
     $key, $text = $p.Split("|", 2); $k = "sent_" + ($key -replace '_\d+$', '')
     $lastSent = if ($state[$k]) { [datetime]$state[$k] } else { [datetime]::MinValue }

@@ -110,7 +110,7 @@ bottom). Times are Central (CT).
 - [ ] Each payday (Fri Nov 13, 20, 27, Dec 4, 11, 18; last pay ~Dec 24): buy as many $249 150Ks as the pay covers, ONE a day (same-day buys pass/fail together):
       after tax ~3 (5 days/wk) / ~4 (6 days/wk); without tax 4 (5 days) / 4-5 (6 days). Dec 26 pay (3 days): ~2, January starts.
 - [ ] Each new account: 4 charts, account number typed in every strategy's Auto Trading gear, rejected-orders limit 10,
-      initial position Flat; send Claude the number (watchdog / dashboard / expected_setup.json).
+      initial position Flat; send Claude the number (watchdog / dashboard / expected_setup.json) Claude sets its status to "live" in expected_setup.json: that also un-mutes the watchdog's phone alerts (muted 2026-11-05 while no account is live).
 - [ ] Stop buying if the drift alarm fires (live clearly below backtest). No more new 50Ks; #2 runs to the end.
 - Expected funded 150Ks: after tax ~6 (5 d) / ~8 (6 d) by Dec 31; no tax ~8 (5 d) / ~10 (6 d); +~4-5 more by late January.
 - From January: refill slots up to ~20 from payouts.
