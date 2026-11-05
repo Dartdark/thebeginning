@@ -21,6 +21,7 @@ For every future paper, code upload, article, repository review or research task
 - If a source supports both alpha and execution work, retain the execution lesson here and assess the strategy through the normal evidence/preregistration process.
 - Keep execution-only references here. Use TODO's promising-strategy queue only for a specific strategy with documented merits; lack of data alone is insufficient.
 - State key findings in chat and link the entry. Saving a reference does not demonstrate savings, authorize purchases or change live code.
+- Scout source-only additions follow the user's later completed-results-only notification rule: save supporting lessons and continue discovery; no standalone execution-reference alert.
 
 ## Reference register
 
@@ -1660,3 +1661,28 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
   although the existing source exits at OPEN. A separately committed overlay fixes all401 such clocks uniformly;
   it preserves prices, original outcomes and unrelated events. Factual source-clock repairs require their own
   provenance and pre-outcome code commitment; favorable-touch searches would change the execution claim.
+
+### E11/E12 follow-up — Same-window shocks and completed-day states (2026-11-05)
+
+[Source checkpoint](results/scout_owned_source_20261105.md); selected sections only, no new return tests.
+- [Demand-driven risk premia5095671](research/scout/records/5095671.json), Paris2025 manuscript Eq1/pp6–9:
+  Treasury shock and FX response both span auction−10/+10minutes. A signal using the window's closing price
+  cannot earn that same window's response. This is a descriptive identification boundary, not a criticism of
+  using contemporaneous responses to study transmission. A later tradable payoff must start after observation
+  and execution latency; its edge has not been established by this source check.
+- [Stock-bond correlation4346625](research/scout/records/4346625.json), December2024 AEA manuscript Eq1/pp8–9
+  and Table9/pp44–45: daily correlation uses the day's full regular-session five-minute returns; the intraday
+  lead-lag comparison conditions on that daily state. Do not use final-day correlation or full-sample percentile
+  membership as an entry-time filter earlier that day. A separately justified past-only state needs frozen
+  formation/estimation clocks and economic evidence before returns; no risk-reduction or P&L gain is measured.
+- [Financialization4231994](research/scout/records/4231994.json), related Utrecht22-07 working paper footnote7:
+  monthly reference periods are used without actual publication dates for descriptive linkage tests. Reference
+  month-end is not release/receipt time. Pin the exact version and original vintages before treating a macro
+  series as an available trading input; parity with the2026article remains unconfirmed.
+- [Bond jumps1716759](research/scout/records/1716759.json), related Tilburg thesis event/investment sections:
+  event plots exclude overnight returns and costs, while longer-horizon investment returns use a bond index per
+  unit duration. Those charts are not a continuous native futures cash ledger or integer-contract sizing rule.
+  Retain rolls, all held overnight changes, cash/fees and causal warm-up before any personal/account inference.
+- Status: supporting clock/accounting cautions from selected primary text, not complete source reviews,
+  independently reproduced returns, execution savings, account-stage passes or new allocations. Consult only
+  when a relevant new hypothesis/input arrives; no rescue of closed flow/news/overnight definitions.

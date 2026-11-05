@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "run_id": "scout-owned-source-20261105",
+  "recorded_at": "2026-11-05T18:31:48Z",
+  "checked_remote_head": "08326a10836a0b5aa81c911c4c6c762c7d3e14f0",
+  "fetch": {
+    "command": "git fetch origin refs/heads/codex/work:refs/remotes/origin/codex/work",
+    "outcome": "Successful initial and prepublication fetch; HEAD/origin agreed; no reset/force"
+  },
+  "discovery_access": {
+    "route": "Connected public indexed web search",
+    "reason": "Configured shell egress excludes Crossref and publisher hosts. No Crossref API request attempted.",
+    "credential_inspection": false,
+    "bypass_attempted": false
+  },
+  "source_reads": [
+    {
+      "url": "https://orca.cardiff.ac.uk/id/eprint/19013/",
+      "outcome": "Repository explicitly says full text unavailable; publisher preview only",
+      "scope": "metadata/abstract",
+      "full_text": false
+    },
+    {
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jfir.12223",
+      "outcome": "Redirected to abstract",
+      "scope": "metadata/abstract",
+      "full_text": false
+    },
+    {
+      "url": "https://www.mdpi.com/2227-9091/12/11/180",
+      "outcome": "429 Too Many Requests",
+      "scope": "indexed metadata only",
+      "full_text": false
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13086273/",
+      "outcome": "Browser check / CAPTCHA; stopped",
+      "scope": "indexed metadata only",
+      "full_text": false
+    },
+    {
+      "url": "https://www.paris-december.eu/sites/default/files/papers/2025/6568_IKrohn_2025_complete.pdf",
+      "outcome": "Public reader available;57pages",
+      "scope": "Abstract and selected methodology/data pp6\u20139 Eq1. Not full57pages/PDF bytes.",
+      "full_text": false
+    },
+    {
+      "url": "https://www.aeaweb.org/conference/2025/preliminary/paper/BY4BD4KG",
+      "outcome": "Public reader available;69pages",
+      "scope": "Abstract, Eq1/pp8\u20139, selected lead-lag passages/Table9 pp44\u201345; not full69pages/PDF bytes.",
+      "full_text": false
+    },
+    {
+      "url": "https://arno.uvt.nl/show.cgi?fid=107813",
+      "outcome": "Related thesis reader available;47pages; journal revision parity unknown",
+      "scope": "Selected data, formation, regression, event and investment passages/Table18. Not full thesis or published article/PDF bytes.",
+      "full_text": false
+    },
+    {
+      "url": "https://www.uu.nl/sites/default/files/LEG_USE_WP_22-07.pdf",
+      "outcome": "Earlier2022working-paper reader available;65pages;2026revision parity unknown",
+      "scope": "Abstract and methods/data through readerP11 incl footnote7; not full manuscript/PDF bytes.",
+      "full_text": false
+    },
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1716759",
+      "outcome": "403 Forbidden; no retry/bypass",
+      "scope": "indexed metadata or separately identified related primary source only",
+      "full_text": false
+    },
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6302824",
+      "outcome": "403 Forbidden; no retry/bypass",
+      "scope": "indexed metadata or separately identified related primary source only",
+      "full_text": false
+    },
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7442134",
+      "outcome": "403 Forbidden; no retry/bypass",
+      "scope": "indexed metadata or separately identified related primary source only",
+      "full_text": false
+    },
+    {
+      "url": "https://www.sciencedirect.com/science/article/pii/S0378426626001469",
+      "outcome": "403 Forbidden; no retry/bypass",
+      "scope": "indexed metadata and explicitly separate2022working paper only",
+      "full_text": false
+    }
+  ],
+  "reader_receipts": [
+    "agents/codex/inputs/scout_20261105/reader/batch_01.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_02.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_03.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_04.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_05.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_06.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_07.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_08.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_09.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_10.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_11.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_12.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_13.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_14.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_15.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_16.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_17.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_18.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_19.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_20.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_21.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_22.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_23.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_24.json",
+    "agents/codex/inputs/scout_20261105/reader/batch_25.json"
+  ],
+  "source_bytes_obtained": false,
+  "source_hash_policy": "Reader JSON byte hashes identify captured tool receipts only, not full PDF/source bytes or TEST admission.",
+  "selected_primary_section_records": [
+    "5095671",
+    "4346625",
+    "1716759",
+    "4231994"
+  ],
+  "new_full_reviews": 0,
+  "paper_records": [
+    "agents/codex/research/scout/records/doi_jbankfin_2011_02018.json",
+    "agents/codex/research/scout/records/doi_jfir_12223.json",
+    "agents/codex/research/scout/records/utwente_109422.json",
+    "agents/codex/research/scout/records/risks_2024_180.json",
+    "agents/codex/research/scout/records/7155458.json",
+    "agents/codex/research/scout/records/7442134.json",
+    "agents/codex/research/scout/records/3855181.json",
+    "agents/codex/research/scout/records/996082.json",
+    "agents/codex/research/scout/records/6302824.json",
+    "agents/codex/research/scout/records/5315402.json",
+    "agents/codex/research/scout/records/3031354.json",
+    "agents/codex/research/scout/records/7053198.json",
+    "agents/codex/research/scout/records/4337469.json",
+    "agents/codex/research/scout/records/5095671.json",
+    "agents/codex/research/scout/records/4346625.json",
+    "agents/codex/research/scout/records/1716759.json",
+    "agents/codex/research/scout/records/2026802.json",
+    "agents/codex/research/scout/records/4231994.json",
+    "agents/codex/research/scout/records/doi_fut_70106.json",
+    "agents/codex/research/scout/records/doi_energy_2025_1369707.json",
+    "agents/codex/research/scout/records/uidaho_coffee_2026.json",
+    "agents/codex/research/scout/records/7091018.json",
+    "agents/codex/research/scout/records/7292480.json",
+    "agents/codex/research/scout/records/7046598.json",
+    "agents/codex/research/scout/records/5284206.json"
+  ],
+  "owned_inputs": {
+    "recheck": "agents/codex/inputs/scout_20261105/owned_input_inventory.json",
+    "prior_inventory": "agents/codex/inputs/scout_20261102/owned_input_inventory.json",
+    "position_inventory": "agents/codex/inputs/scout_20261103/position_inventory.json",
+    "scope": "All13files present;12prior hashes match; OF file had no prior hash and newly pinned. No returns, clock/roll completeness or native fill admission."
+  },
+  "free_data_check": "agents/codex/inputs/scout_20261105/free_data_check.json",
+  "return_tests_executed": false,
+  "no_material_test_or_user_action_blocker": true
+}

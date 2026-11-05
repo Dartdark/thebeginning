@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "ssrn:4346625",
+  "ssrn_id": "4346625",
+  "title": "The Stock-Bond Correlation: A Tale of Two Days in the U.S. Treasury Market",
+  "url": "https://www.aeaweb.org/conference/2025/preliminary/paper/BY4BD4KG",
+  "authors": "Grace Xing Hu; Zhao Jin; Jun Pan",
+  "verdict": "dont_test",
+  "full_text_read": false,
+  "summary": "Owned ES/ZN price fields overlap. Using the day's full correlation/top20% class inside that day would leak information. A causal estimator is a different hypothesis, not supplied net evidence.",
+  "report_path": "agents/codex/results/scout_owned_source_20261105.md",
+  "about": "Daily ES/ZN correlation identifies Treasury safety versus risk.",
+  "findings": "Selected Table9 reports 0.15bp next-five-minute ES change per1bp UST change on bond-risky days, t2.65; not reproduced. Eq1 measures correlation across the COMPLETED day.",
+  "mechanism": "Treasury-led risk can propagate to stocks, but ex-post day membership is unavailable at earlier entries.",
+  "build_on": "Owned ES/ZN price fields overlap. Using the day's full correlation/top20% class inside that day would leak information. A causal estimator is a different hypothesis, not supplied net evidence.",
+  "can_strategy_code_be_made": "Descriptive daily-state code feasible; no faithful entry-time regime strategy established.",
+  "economic_family": "stock-bond-daily-state-lead-lag",
+  "evidence_level": "selected_primary_sections",
+  "reading_scope": "Abstract, Eq1 pp8–9, selected intraday lead-lag text and Table9 pp44–45. Not a complete69-page review.",
+  "source_version": "AEA manuscript dated2024-12-28; first draft2023-02-03. Related SSRN4346625/4764281/5533913 title aliases; revision parity unconfirmed.",
+  "source_artifact": null,
+  "source_sha256": null,
+  "return_eligibility": "NOT_TEST",
+  "new_economic_trials": 0,
+  "new_economic_definitions": 0,
+  "independent_economic_verification": "not_performed",
+  "updated_at": "2026-11-05T18:31:48Z",
+  "access_receipt": "agents/codex/inputs/scout_20261105/access.json",
+  "notification": {
+    "actionable": false,
+    "key_created": false
+  },
+  "title_alias_ids": [
+    "ssrn:4764281",
+    "ssrn:5533913"
+  ],
+  "deeper_investigation": "Not a current strategy-development priority under inspected source scope and owned inputs; retain stated evidence and move on."
+}

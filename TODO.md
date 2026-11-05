@@ -228,6 +228,21 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **Signed Treasury jump-risk premium — conditional personal WATCH / NEEDS DATA (2026-11-05), SSRN1716759.**
+  Merit: a specific countercyclical jump-risk predictor; the author abstract reports OOS Sharpe0.52 and the related
+  Tilburg thesis Table18 reports IR0.52 for2003–2009. Neither is our native ZN result. Monthly duration-normalized
+  JP Morgan index bets/CRSP excess-return targets do not establish an Apex intraday strategy. Need authenticated
+  published rules/version parity, causal jump detection/initialization and12/24-month formation, five-year
+  normalization/staggered-bet warm-up, source target/roll/duration reconciliation and actual integer sizing/costs.
+  Own named ZN exports start2017; no complete pre2018warm-up/native ledger is established. A bounded free check
+  found a public project advertising older ZN data, but its README explicitly excludes proprietary raw inputs.
+  Smallest later check only with genuinely new matching source/data: reconcile one fully past-only formation,
+  target and dated-contract position before assessing complete2018–22power or preregistering returns. Do not
+  shorten holds, omit overnights, impute jumps or recycle news-fade definitions. Park and continue discovery.
+  [D52](agents/codex/DATA_NEEDED.md#2026-11-05-treasury-jump-risk-watch),
+  [record](agents/codex/research/scout/records/1716759.json),
+  [source checkpoint](agents/codex/results/scout_owned_source_20261105.md).
+
 - [ ] **BTC asset-manager option positioning — SOURCE/DATA CHECK (Shen/Li/Luo2026).**
   Merit: published CME-specific second-week-ahead predictive association beyond futures positioning, attributed to
   non-momentum risk-transfer/inventory response; net strategy profit unverified. Need full residual/target rules,
