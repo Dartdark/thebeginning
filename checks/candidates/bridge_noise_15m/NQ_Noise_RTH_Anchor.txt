@@ -10,7 +10,8 @@
   Lines marked  // RTH ANCHOR.  Everything else is the posted code unchanged.
   Python port of this exact rule (analysis/bridge_noise_15m_test.py, anchor=(845, 1500)), per NQ after our costs
   2018-26: 5,366 trades, $41 a trade, PF 1.16, t 4.9; longs only $61, t 5.4.
-  Not handled (same as the posted code): early-close days have no 14:30 bar, so a position is NOT flattened there.
+  Early-close days (added 2026-11-05, list as NQ_Vault_Break): no entry after EarlyLastEntry, flat at the EarlyFlattenTime bar
+  (replay: analysis/outputs/bridge_noise_15m_earlyclose_output.txt).
   Backtest only; not for live use as is.
   ========================================================================== }
 
@@ -29,9 +30,13 @@ Inputs:
     LastEntryTime(1400),
     FlatSignalTime(1430),
     RTHFirstBarTime(0845),          // RTH ANCHOR: the 08:30-08:45 bar (bars stamped at their close)
-    RTHLastBarTime(1500);           // RTH ANCHOR: the 14:45-15:00 bar
+    RTHLastBarTime(1500),           // RTH ANCHOR: the 14:45-15:00 bar
+    UseHolidayTimes(true),          // early-close days (2026-11-05)
+    EarlyLastEntry(1100),
+    EarlyFlattenTime(1130);
 
 Vars:
+    CalMonth(0), CalDay(0), CalDow(0), CalYear(0), IsWeekday(false), IsEarlyClose(false), DayLastEntry(0),
     TodayOpen(0),
     PrevClose(0),
     LastRTHClose(0),                // RTH ANCHOR
@@ -111,6 +116,26 @@ FirstHour = IntPortion(FirstEvalTime / 100);
 FirstMinute = FirstEvalTime - FirstHour * 100;
 FirstMinutes = FirstHour * 60 + FirstMinute;
 
+// early-close days (2026-11-05, same list as NQ_Vault_Break)
+CalMonth = Month(Date);
+CalDay = DayOfMonth(Date);
+CalDow = DayOfWeek(Date);
+CalYear = Year(Date) + 1900;
+IsWeekday = CalDow >= 1 and CalDow <= 5;
+IsEarlyClose = UseHolidayTimes and (
+	(CalMonth = 1 and ((CalDay = 1 and IsWeekday) or (CalDay = 2 and CalDow = 1)))
+	or (CalMonth = 1 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 2 and CalDow = 1 and CalDay >= 15 and CalDay <= 21)
+	or (CalMonth = 5 and CalDow = 1 and CalDay >= 25)
+	or (CalMonth = 6 and CalYear >= 2022 and ((CalDay = 19 and IsWeekday)
+		or (CalDay = 18 and CalDow = 5) or (CalDay = 20 and CalDow = 1)))
+	or (CalMonth = 7 and (((CalDay = 3 or CalDay = 4) and IsWeekday) or (CalDay = 5 and CalDow = 1)))
+	or (CalMonth = 9 and CalDow = 1 and CalDay <= 7)
+	or (CalMonth = 11 and CalDow = 4 and CalDay >= 22 and CalDay <= 28)
+	or (CalMonth = 11 and CalDow = 5 and CalDay >= 23 and CalDay <= 29)
+	or (CalMonth = 12 and (((CalDay = 24 or CalDay = 25) and IsWeekday) or (CalDay = 26 and CalDow = 1))));
+if IsEarlyClose then DayLastEntry = EarlyLastEntry else DayLastEntry = LastEntryTime;
+
 if Time >= FirstEvalTime and Time <= FlatSignalTime and TodayOpen > 0 and PrevClose > 0 then
 begin
     Slot = IntPortion((CurrentMinutes - FirstMinutes) / 15) + 1;
@@ -143,7 +168,7 @@ begin
                 if MarketPosition = 0 and ContractsPerTrade >= 1 and TradesToday < MaxTradesPerDay
                    and StopsToday < MaxStopsPerDay then
                 begin
-                    if Time <= LastEntryTime then
+                    if Time <= DayLastEntry then
                     begin
                         if LongTrade = true and Close > UpperBand and Close > Open then
                         begin
@@ -160,7 +185,7 @@ begin
 
                 if MarketPosition = 1 then
                 begin
-                    if Time <= LastEntryTime and ShortTrade = true and Close < LowerBand and Close < Open then
+                    if Time <= DayLastEntry and ShortTrade = true and Close < LowerBand and Close < Open then
                     begin
                         Sell ("LongRevExit") next bar at market;
                         if ContractsPerTrade >= 1 and TradesToday < MaxTradesPerDay and StopsToday < MaxStopsPerDay then
@@ -177,7 +202,7 @@ begin
 
                 if MarketPosition = -1 then
                 begin
-                    if Time <= LastEntryTime and LongTrade = true and Close > UpperBand and Close > Open then
+                    if Time <= DayLastEntry and LongTrade = true and Close > UpperBand and Close > Open then
                     begin
                         BuyToCover ("ShortRevExit") next bar at market;
                         if ContractsPerTrade >= 1 and TradesToday < MaxTradesPerDay and StopsToday < MaxStopsPerDay then
@@ -208,6 +233,13 @@ if Time = FlatSignalTime then
 begin
     if MarketPosition = 1 then Sell ("FlatLong1430") next bar at market;
     if MarketPosition = -1 then BuyToCover ("FlatShort1430") next bar at market;
+end;
+
+// early-close flat (2026-11-05)
+if IsEarlyClose and Time = EarlyFlattenTime then
+begin
+    if MarketPosition = 1 then Sell ("FlatLongEarly") next bar at market;
+    if MarketPosition = -1 then BuyToCover ("FlatShortEarly") next bar at market;
 end;
 
 // RTH ANCHOR: remember the 15:00 close for tomorrow's PrevClose (after the day's logic)

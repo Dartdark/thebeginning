@@ -46,7 +46,9 @@ def ema(x, n):
 
 
 def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, longs=True, shorts=True, last_entry=1400,
-        count=True, through=0.0, anchor=None):
+        count=True, through=0.0, anchor=None, early_flat=False):
+    # early_flat (2026-11-05): on CME early-close days (replica.is_early_close) no entry after 11:00, flat at the 11:30 bar
+    from replica import is_early_close
     if count: NTRIAL["n"] += 1
     tp = sl * rr
     row, t, O, H, L, C, J = (S[k].to_numpy() for k in ("row", "t", "o", "h", "l", "c", "j"))
@@ -54,7 +56,7 @@ def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, lo
     hist = [[] for _ in range(23)]
     rows = []; pos = 0; e = 0.0; t_in = None; j_in = 0; pend = None
     today_open = prev_close = 0.0; trades = stops = 0; flagged = 0
-    last_rth_close = 0.0
+    last_rth_close = 0.0; ec = False; le = last_entry
     n = len(S)
 
     def close_trade(px, kind, k, jx):
@@ -71,6 +73,8 @@ def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, lo
                 flagged += 1; close_trade(C[k - 1] - pos * TICK, "held past session (closed at last bar)", k - 1, J[k - 1])
             pend = None
             today_open = O[k]; prev_close = C[k - 1] if k > 0 else 0.0; trades = stops = 0
+            ec = early_flat and is_early_close(pd.Timestamp(g.ts[row[k]]))
+            le = 1100 if ec else last_entry
         if anchor is not None and t[k] == anchor[0]:                 # RTH anchor on a 24h chart: open of the 08:30 bar
             today_open = O[k]; prev_close = last_rth_close
         if anchor is not None and t[k] == anchor[1]: last_rth_close = C[k]
@@ -105,16 +109,16 @@ def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, lo
                     can = trades < maxtr and stops < maxstops
                     lsig = longs and C[k] > ub and C[k] > O[k]; ssig = shorts and C[k] < lb and C[k] < O[k]
                     if tt < 1430:
-                        if pos == 0 and can and tt <= last_entry:
+                        if pos == 0 and can and tt <= le:
                             if lsig: pend = ("in", 1); trades += 1
                             elif ssig: pend = ("in", -1); trades += 1
                         elif pos == 1:
-                            if tt <= last_entry and ssig:
+                            if tt <= le and ssig:
                                 if can: pend = ("rev", -1, "reverse"); trades += 1
                                 else: pend = ("out", 0, "reverse exit")
                             elif C[k] < ltr: pend = ("out", 0, "band/EMA exit")
                         elif pos == -1:
-                            if tt <= last_entry and lsig:
+                            if tt <= le and lsig:
                                 if can: pend = ("rev", 1, "reverse"); trades += 1
                                 else: pend = ("out", 0, "reverse exit")
                             elif C[k] > strl: pend = ("out", 0, "band/EMA exit")
@@ -122,6 +126,8 @@ def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, lo
                 if len(hs) > 100: hs.pop(0)
         if tt == 1430 and pos != 0:
             pend = ("out", 0, "flat 14:30")
+        if ec and tt == 1130 and pos != 0:
+            pend = ("out", 0, "flat 11:30 early close")
     T = pd.DataFrame(rows, columns=["date", "side", "entry", "exit", "kind", "t0", "t1", "row", "j0", "j1"])
     T["date"] = pd.to_datetime(T.date)
     T["net"] = (T.exit - T.entry) * T.side * PV - COMM

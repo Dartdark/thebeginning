@@ -263,3 +263,8 @@ failed, auto-trading off on all its charts. EOD-trailing accounts still fail on 
   user's report: first bar closed 09:45 CT, every entry at a bar open; the port on a 09:30-16:00 CT session matched 99.3% of 4,704 entries).
   Claude recommended that template on a guess. For an NQ RTH chart use a custom session 08:30-15:00 in Exchange time, then check the
   first bar of the day closes at 08:45 and the last at 15:00 before trusting the report.
+
+- **Kill-switch tri-state (2026-11-05, GUESS until compiled):** `DefineDLLFunc: "kernel32.dll", int, "GetLastError";` read
+  right after `GetFileAttributesA` returns -1; 2 / 3 = not found (no KILL), anything else = UNKNOWN -> no new entries. Risk:
+  MultiCharts may make other Windows calls between the two DLL calls on its thread and overwrite the error code; if the VPS
+  logs NoEntry with no KILL file, that is the cause (then drop the tri-state line, keep the folder check).

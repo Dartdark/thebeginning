@@ -37,7 +37,9 @@ inputs:
     DebugPrint( false ),
     UseStop( true ),
     StopMultT( 0.40 ),
-    StopMultOS( 0.30 );
+    StopMultOS( 0.30 ),
+	HeartbeatTag("");      { live guard: the chart's logger tag; empty = no heartbeat }
+Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_T_Oneside_Fade 2026-11-05");   { code version: bump the date on every change }
 
 variables:
     tSess( 830 ),
@@ -315,3 +317,15 @@ if MarketPosition = 0 and cellT = false and cellOS = false then
     stopUSD = 0;
 
 wasNight = inNight;
+
+// Heartbeat (live guard, as the apex files 2026-10-30; added to the funded files 2026-11-05). Log only: no orders.
+// Set HeartbeatTag to the chart's logger tag; empty = off (backtests unchanged).
+if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
+	HB_Key = CurrentDate * 10000 + CurrentTime;
+	if HB_Key <> HB_Last then begin
+		HB_Day = NumToStr(CurrentDate + 19000000, 0);
+		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
+			+ NumToStr(MarketPosition * CurrentContracts, 0) + ",,,,,,,," + HB_Day + "," + NumToStr(CurrentTime, 0) + NewLine);
+		HB_Last = HB_Key;
+	end;
+end;

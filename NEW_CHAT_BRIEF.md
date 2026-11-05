@@ -21,8 +21,11 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   BTC filter WATCHLIST #27 (post hoc, noise-level). Pre-screen soft guide (DEVELOPMENT_PROCESS): piece Sharpe > ~3.15 x corr with book.
 - **Career:** `career/APPLICATIONS.md` (Mercor, Outlier, Alignerr, Micro1, DataAnnotation, Upwork/Fiverr, Anthropic Residency by
   Nov 22); waiting on the user's background to tailor; tick as applied.
-- **Open for Claude:** kill-switch file-error tri-state in the next repaste; funded heartbeats before the first funded account;
-  pre-market false alarm on VB's 30-min bar stamp.
+- **Done 11/05 (repo, not compiled on the VPS):** kill-switch tri-state (GetLastError; 6 files, HB_Ver 2026-11-05: paste all at
+  the next account setup), funded heartbeats (9 files) + `funded_rules` in expected_setup.json, pre-market VB 30-min stamp fix
+  (replayed 11/03 08:20: no flag), noise-area early-close flat (EL + replay `bridge_noise_15m_earlyclose_output.txt`: +$3.1k, 0 held).
+- **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
+  career tailoring (needs the user's background).
 
 ## Earlier (2026-11-01 to 11-04)
 

@@ -75,5 +75,14 @@
   "MON_BR"
  ],
  "_accounts_about": "start / trail / lock / max_stop / started per live account (2026-10-30): the watchdog computes the Apex EOD trailing floor from the Chart Monitor's equity (floor = min(peak EOD equity - trail, lock)) and alarms when equity nears or touches it. phase: evaluation or funded.",
- "_charts_account_about": "account per chart (2026-11-01): the watchdog compares it with the Chart Monitor's route_account (GetAccountID) and its typed AccountName"
+ "_charts_account_about": "account per chart (2026-11-01): the watchdog compares it with the Chart Monitor's route_account (GetAccountID) and its typed AccountName",
+ "funded_rules": {
+  "_about": "Apex funded (PA) floor rules, added 2026-11-05 before the first funded account; read when a funded account is added.",
+  "150K": {
+   "trail": 4000,
+   "lock": 150100,
+   "start": 150000
+  },
+  "rejected_orders_limit": 10
+ }
 }

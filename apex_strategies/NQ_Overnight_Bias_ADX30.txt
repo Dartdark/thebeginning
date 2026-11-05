@@ -30,6 +30,7 @@
   LIVE (combine): MNQ chart, RiskPerTrade 1100 as now (the tighter stop buys about 20% more MNQ). }
 // kill-switch file check through Windows (2026-11-01: EL Collections is not installed on the VPS; this line compiled there)
 DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;
+DefineDLLFunc: "kernel32.dll", int, "GetLastError";   { kill-switch tri-state (Codex REVIEW_kill_reply_20261102) }
 
 
 Inputs:
@@ -51,7 +52,7 @@ Inputs:
 	EarlyExitTime(1130),
 	NumContracts(1),
 	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
-Variables: KillOn(false), NoEntry(false), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Bias_ADX30 2026-11-02");   { code version (live guard 2026-10-30): bump the date on every change }
+Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Bias_ADX30 2026-11-05");   { code version (live guard 2026-10-30): bump the date on every change }
 
 Variables:
 	EntryBuf(0),
@@ -175,11 +176,18 @@ end;
   While C:\TradingLogs\KILL exists (made by live/vps/kill.ps1 or by the relay's remote KILL): no new entries, and an open
   position exits at market on the next bar. Real time only, so backtests are unchanged. Reads the flag with Windows' GetFileAttributesA (-1 = no file). }
 KillOn = false;
-if GetAppInfo(aiRealTimeCalc) = 1 then KillOn = GetFileAttributesA("C:\TradingLogs\KILL") <> -1;
+KillAttr = -1;
+KillErr = 0;
+if GetAppInfo(aiRealTimeCalc) = 1 then begin
+	KillAttr = GetFileAttributesA("C:\TradingLogs\KILL");
+	if KillAttr <> -1 then KillOn = true else KillErr = GetLastError;   { read right after the call: 2/3 = not found }
+end;
 { read check (Codex follow-up 2026-11-02 #3): -1 on the KILL file means "no file" only if the folder itself is readable.
   Folder unreadable = state UNKNOWN: no new entries (open positions keep their normal exits; only a real KILL forces exits). }
 NoEntry = KillOn;
 if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 then NoEntry = true;
+{ tri-state (2026-11-05): -1 with any error other than 2 (file not found) / 3 (path not found) = state UNKNOWN -> no new entries }
+if GetAppInfo(aiRealTimeCalc) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 then NoEntry = true;
 
 { ---------- Entries: stop orders at the opening-range high / low ---------- }
 { a trade that opened and closed inside one bar still counts }

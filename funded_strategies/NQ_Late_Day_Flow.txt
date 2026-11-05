@@ -49,7 +49,9 @@ Inputs:
 	AtrDays(15),
 	RiskPerTrade(0),        { $ lost at the stop; 0 = trade NumContracts }
 	NumContracts(1),
-	UseHolidayTimes(true);
+	UseHolidayTimes(true),
+	HeartbeatTag("");      { live guard: the chart's logger tag; empty = no heartbeat }
+Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Late_Day_Flow 2026-11-05");   { code version: bump the date on every change }
 
 Variables:
 	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
@@ -149,4 +151,16 @@ if MarketPosition < 0 and StopPts > 0 and High >= EntryPrice + StopPts then
 if MarketPosition <> 0 and Time >= ExitTime then begin
 	Sell ("LateFlow LX") this bar on close;
 	BuyToCover ("LateFlow SX") this bar on close;
+end;
+
+// Heartbeat (live guard, as the apex files 2026-10-30; added to the funded files 2026-11-05). Log only: no orders.
+// Set HeartbeatTag to the chart's logger tag; empty = off (backtests unchanged).
+if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
+	HB_Key = CurrentDate * 10000 + CurrentTime;
+	if HB_Key <> HB_Last then begin
+		HB_Day = NumToStr(CurrentDate + 19000000, 0);
+		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
+			+ NumToStr(MarketPosition * CurrentContracts, 0) + ",,,,,,,," + HB_Day + "," + NumToStr(CurrentTime, 0) + NewLine);
+		HB_Last = HB_Key;
+	end;
 end;

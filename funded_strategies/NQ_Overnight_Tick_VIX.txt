@@ -40,7 +40,9 @@ Inputs:
     EntryTime(1705), ExitTime(300), // CT; entry decision at the first bar stamped >= EntryTime in the evening
     EarlyCloseBefore(1400),         // RTH session whose last bar is before this = early close: no trade
     UseDisasterStop(false), DisasterMult(3), RangeLen(20),
-    PrintDiag(false);
+    PrintDiag(false),
+	HeartbeatTag("");      { live guard: the chart's logger tag; empty = no heartbeat }
+Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Tick_VIX 2026-11-05");   { code version: bump the date on every change }
 
 Variables:
     RTHOpen(0), RTHClose(0), RTHLast(0), InRTH(false),
@@ -113,4 +115,16 @@ If MarketPosition > 0 then begin
         Sell ("OTV_X") next bar at market
     else if UseDisasterStop and StopPx > 0 then
         Sell ("OTV_DS") next bar at StopPx stop;
+end;
+
+// Heartbeat (live guard, as the apex files 2026-10-30; added to the funded files 2026-11-05). Log only: no orders.
+// Set HeartbeatTag to the chart's logger tag; empty = off (backtests unchanged).
+if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
+	HB_Key = CurrentDate * 10000 + CurrentTime;
+	if HB_Key <> HB_Last then begin
+		HB_Day = NumToStr(CurrentDate + 19000000, 0);
+		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
+			+ NumToStr(MarketPosition * CurrentContracts, 0) + ",,,,,,,," + HB_Day + "," + NumToStr(CurrentTime, 0) + NewLine);
+		HB_Last = HB_Key;
+	end;
 end;

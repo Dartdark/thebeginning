@@ -97,10 +97,10 @@ bottom). Times are Central (CT).
 - Claude: a new funded account -> `FUNDED` in analysis/account_tools.py (payout tracker); each payout you request -> its list.
 - [ ] Claude, once ~20 evaluations have finished: Brier-score the dashboard's pass odds (account_tools.pass_odds at each start)
       against actual pass / fail, to check they aren't too optimistic (idea from the 'Simulate like a quant desk' X article, 10/30).
-- [ ] Claude, before the first funded account (~late Nov): heartbeat + HB_Ver stamp in every funded strategy file that lacks
+- [x] (2026-11-05, repo only: heartbeat + HB_Ver in the 9 files, `funded_rules` in expected_setup.json; NOT compiled on the VPS yet, rejected-orders limit is set on each chart when it is made) Claude, before the first funded account (~late Nov): heartbeat + HB_Ver stamp in every funded strategy file that lacks
       them (ONB ML, LDF, NFP, ES MOC, CL fade, Overnight Tick, Dual Thrust, T_ONESIDE, Monday Long); funded floor rules in
       expected_setup.json (150K: trail 4,000, lock 150,100); rejected-orders limit 10 on every funded chart.
-- [ ] Claude, with the NEXT planned repaste of the live charts (user, 2026-11-02: "fold it", not a repaste of its own):
+- [x] (2026-11-05, code in all 6 files, HB_Ver 2026-11-05; compile on the VPS = the next repaste, not yet done) Claude, with the NEXT planned repaste of the live charts (user, 2026-11-02: "fold it", not a repaste of its own):
       kill-switch file-error tri-state (Codex REVIEW_kill_reply_20261102, medium). KILL file query = -1 with a readable
       parent folder is now read as 'no KILL'; check GetLastError: 2/3 (not found) = no KILL, anything else = UNKNOWN ->
       NoEntry. All 6 kill-switch strategy files; VPS compile + check inputs survive the paste.

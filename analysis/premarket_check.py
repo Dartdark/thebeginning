@@ -22,14 +22,16 @@ def has_sig(tag):
 CT = ZoneInfo("America/Chicago")                              # Codex 2026-10-30: fixed UTC-5 was wrong after the DST change
 
 
-def age_min(r, asof):
-    """Minutes from a row's capture (bar_date + bar_time, CT) to asof (aware datetime); None if unparseable or in the future."""
+def age_min(r, asof, ahead=2):
+    """Minutes from a row's capture (bar_date + bar_time, CT) to asof (aware datetime); None if unparseable or more than
+    `ahead` minutes in the future. MultiCharts stamps a bar at its CLOSE, so a row written inside a 30-min bar carries a
+    time up to 30 min ahead (2026-11-03 VB false alarm): callers pass the chart's bar length + 2; such rows count as age 0."""
     try:
         t = dt.datetime.strptime(f"{int(float(r.bar_date))}{int(float(r.bar_time)):04d}", "%Y%m%d%H%M").replace(tzinfo=CT)
     except (TypeError, ValueError):
         return None
     m = (asof - t).total_seconds() / 60
-    return m if m >= -2 else None
+    return max(m, 0.0) if m >= -ahead else None
 
 
 def check(day, asof=None):
@@ -61,10 +63,11 @@ def check(day, asof=None):
             for ev in ("ACCT", "POS", "SIG"):
                 q = df[(df.event == ev) & (df.tag == tag)]
                 if q.empty: continue
-                m, L = age_min(q.iloc[-1], asof), lim(q)
+                L = lim(q)
+                m = age_min(q.iloc[-1], asof, ahead=L - 15 + 2)   # L - 15 = this chart's write interval (bar length)
                 if m is None: out.append(f"{tag}: last {ev} line has a bad or future time: VPS clock? Check it.")
                 elif m > L: out.append(f"{tag}: last {ev} line {int(float(q.iloc[-1].bar_time)):04d} CT is {m:.0f} min old (limit {L:.0f}): chart frozen or closed? Check it.")
-            m, bar_age = age_min(r, asof), float(r.entry_price or 0) / 60
+            m, bar_age = age_min(r, asof, ahead=lim(a) - 15 + 2), float(r.entry_price or 0) / 60
             if m is not None and bar_age + m > lim(a):        # feed age = bar age at capture + time since capture
                 out.append(f"{tag}: chart's last bar is {bar_age + m:.0f} min old at check time (limit {lim(a):.0f}; feed?).")
         elif float(r.entry_price or 0) > 900: out.append(f"{tag}: chart's last bar {float(r.entry_price) / 60:.0f} min old (feed?).")
