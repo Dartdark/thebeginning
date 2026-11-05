@@ -51,8 +51,8 @@ MultiCharts code; add every solved error) · `DEVELOPMENT_PROCESS.md` · `RUNBOO
 - **Master** `session_01Wk1fPYssjbaEfe21f4v6vD` (from 2026-11-01 evening; previous master `session_01Wk1fPXwvHF5qTjW7bUhYx9` retired: context full): tracks the other sessions, collects decisions, starts sessions.
   Other sessions put user decisions in their reply.
 - **Papers** `session_01Wk1fPYzv9RyXGytT4z6XbK`: user uploads papers; sends the master a verdict per paper. Paper scout
-  (`.claude/skills/scout/SKILL.md`, log `papers/SCOUT_LOG.md`) on "scout" and 5x a day (00:43 / 06:43 / 11:43 / 16:43 /
-  20:43 CT), feeding `lab/IDEAS.md` (keeps >= 3 queued).
+  (`.claude/skills/scout/SKILL.md`, log `papers/SCOUT_LOG.md`): **schedule STOPPED by the user 2026-11-05** (with the lab); runs only
+  when the user says "scout".
 - **Strategy lab** `session_01Wk1fPZPJ3brXtvmkNxsoDD`: **STOPPED by the user 2026-11-05 (no finds; `lab/STOP`, schedule disabled)**; was 5x a day, skill
   `.claude/skills/lab/SKILL.md`, rules `lab/README.md`, ledger `lab/ledger.json`, kill switch `lab/STOP`. Never changes
   plans, charts or the VPS; stage-4+ results go to the master.
