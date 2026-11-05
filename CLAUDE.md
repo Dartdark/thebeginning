@@ -58,4 +58,4 @@ MultiCharts code; add every solved error) · `DEVELOPMENT_PROCESS.md` · `RUNBOO
   plans, charts or the VPS; stage-4+ results go to the master.
 - **Code reviewer** `session_01Wk1fPW6LVWayRousRwL7mU`: on "review", checks new code, fixes Claude's defects, logs
   `agents/cross_review/CODE_REVIEW_LOG.md`.
-- **Scheduled jobs** (journal + dashboard 16:40 CT, Friday review): see `RUNBOOKS.md` and `FRIDAY_REVIEW.md`.
+- **Scheduled jobs** (pre-market check + journal/dashboard 16:40 CT PAUSED by the user 2026-11-05 until accounts are bought again; Friday review): see `RUNBOOKS.md` and `FRIDAY_REVIEW.md`.
