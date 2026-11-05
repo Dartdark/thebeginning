@@ -15,6 +15,7 @@ mismatch gets the account closed. Order = fastest money first.
 | 6 | Upwork + Fiverr | https://www.upwork.com, https://www.fiverr.com | gig: "MultiCharts / PowerLanguage strategy coding and backtest review" | [ ] |
 | 7 | Anthropic HackerOne / Gray Swan arena | https://hackerone.com/anthropic, https://app.grayswan.ai | sign up; prize-based, no steady pay | [ ] |
 | 8 | Anthropic Residency (stretch) | https://alignment.anthropic.com/2026/anthropic-residency/ | by **Nov 22**; also opt in to the Fellows Program | [ ] |
+| 9 | AI video gigs (Upwork + Fiverr, added 2026-11-05) | https://www.upwork.com, https://www.fiverr.com | gig: "short AI videos (ads, explainers, social clips) made with an AI workflow". Build 1-2 sample clips first as a portfolio. Workflow: Claude/Codex + a video model; Seedance runs on Volcano Engine (China), so a US-friendly video model may be easier to sign up for. Costs money per second of video: set a budget before starting. Guide: the Eian article (TIER_LIST F row, 2026-11-05) | [ ] |
 
 Each platform asks for a resume: base it on `career/resume_section_v2_my_voice.md` + your own school / work history.
 Expect skills tests or a recorded AI interview on 1-5: take them when rested, they usually allow one try.
