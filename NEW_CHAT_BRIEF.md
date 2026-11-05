@@ -5,7 +5,26 @@ github.com/Dartdark/thebeginning (branch `claude/nq-trading-strategy-params-5h9d
 Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history of this brief (up to 2026-10-28) is in
 `archive/brief_history_2026-10.md`; ticked to-dos are in `archive/TODO_done_2026-10.md`.
 
-## Now (2026-11-01 evening; master moved to a new session this night)
+## Now (2026-11-05)
+
+- **No live accounts.** #1 (10/26), #3 (10/30), #2 and #4 (11/04) all failed. Live replay 10/20-11/04: VB 15/15 trades match the
+  backtest, ONB matches bar the known 10/27 miss: execution OK, a losing stretch (~6.5th percentile, ~5 a year;
+  `analysis/outputs/bad_stretch_freq_output.txt`). Sizing can't fix it (`eval_sizing_bench_output.txt`). Buy gate PAUSE until 11/06;
+  next buy also needs the paycheck to cover the budget deficit.
+- **Budget:** start $500, balance -$335 (MultiCharts $152.65 due 11/08); recurring $252.64/month (MC, Claude, ChatGPT, VPS Lite).
+  `live/budget/` + dashboard https://claude.ai/artifact/9S2F8YHC2mdM8adWkzCB1v (steps: RUNBOOKS 'Budget dashboard'). User reports
+  paychecks weekly (job from Nov 10). VPS downgrade under consideration.
+- **Stopped by the user 11/05:** strategy lab (`lab/STOP`), paper scout schedule, pre-market check, 16:40 journal/dashboard job (restart
+  both checks when an account is bought). Still on: morning brief 07:47 CT, Friday review, to-do reminders, MNQ roll 12/10.
+- **Research 11/03-11/05:** Bridge noise-area longs B (MC RTH-anchor 98.9% match, t 5.0) -> personal plan 1 MNQ (needs early-close
+  flat + fill-latency check before live). Ricochet 1144 C -> capital-expansion bench, last in line. BTC weekend beta C; Monday Long
+  BTC filter WATCHLIST #27 (post hoc, noise-level). Pre-screen soft guide (DEVELOPMENT_PROCESS): piece Sharpe > ~3.15 x corr with book.
+- **Career:** `career/APPLICATIONS.md` (Mercor, Outlier, Alignerr, Micro1, DataAnnotation, Upwork/Fiverr, Anthropic Residency by
+  Nov 22); waiting on the user's background to tailor; tick as applied.
+- **Open for Claude:** kill-switch file-error tri-state in the next repaste; funded heartbeats before the first funded account;
+  pre-market false alarm on VB's 30-min bar stamp.
+
+## Earlier (2026-11-01 to 11-04)
 
 - **Live accounts:** #1 blown 10/26, #3 blown 10/30. **#2** APEX-681524-02 50K eval ~$49,828 (~$1,064 above floor $48,764: one
   full VB loss ~$1,200 could fail it; user not yet asked to resize). **#4** APEX-681524-04 150K No-Activation, bought 11/01
