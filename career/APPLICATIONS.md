@@ -22,7 +22,9 @@ Expect skills tests or a recorded AI interview on 1-5: take them when rested, th
 
 ## Background (user 2026-11-06: "describe everything i've done with u"; Claude's draft from the repo, check every line)
 
-**Education:** University of South Florida (USF), Finance.
+**Education:** University of South Florida (USF), B.S. Finance, 2023. [check: B.S. or B.A.?]
+
+**Freelance coding and trading-strategy development (2023 - now):** strategy coding, backtesting and automation for clients / own accounts. [add a client type or example]
 
 **Independent project: systematic futures trading research and live automation (Oct 2026 - now)**
 - Built a research and trading operation for CME index futures (NQ / ES, also CL, GC, 6E, ZN) aimed at prop-firm (Apex)
@@ -60,7 +62,7 @@ About (≈80 words): I build and test systematic trading strategies for futures.
 from papers and traders with real costs, rules fixed before results, and checks on years never used for tuning; most fail,
 and I record why. I run live automated strategies on prop-firm accounts through MultiCharts and Rithmic on a VPS, with
 alarms for drawdown limits and live-vs-backtest drift. I'm good at finding where a backtest fools itself: look-ahead,
-overfitting, wrong costs, time zones. Finance student at the University of South Florida (USF).
+overfitting, wrong costs, time zones. USF Finance graduate (2023); freelance coder and strategy developer.
 
 ## Answers that come up on the AI-training platforms
 
@@ -69,7 +71,7 @@ overfitting, wrong costs, time zones. Finance student at the University of South
 - **Example of catching an error?** A strategy looked like it traded 15-minute bars from 08:30, but the chart session
   template started at 09:30 Central; the backtest numbers halved. I matched 4,704 trades against a port of the code,
   found the one-hour shift, and fixed the setup. (2026-11-03, `MULTICHARTS_PITFALLS.md`.)
-- **Hours per week?** [your real number around the job, e.g. 10-15 evenings / weekends]
+- **Hours per week?** 10-15 (evenings and weekends).
 - **Coding?** I read, review and debug Python and PowerLanguage; I write code with AI assistants and verify it by running tests (e.g. replaying live trades against the backtest).
 
 ## Upwork / Fiverr gig
