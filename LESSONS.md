@@ -82,6 +82,7 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - The weekly review must check Claude's own week of code, not only Codex's: five defects this week were all in new Claude code (2026-10-30).
 
 ## Corrections from the user (one line per correction, added in the same reply; user rule 2026-11-01)
+- 2026-11-06: "university of san francisco" (I expanded "USF" to South Florida). Rule: never expand an abbreviation or fill a fact about the user (school, employer, dates) by guessing; ask, or keep it exactly as they wrote it.
 - (2026-10-30, "you sent me the v2 version") Before sending a deliverable, open the exact file being sent and check its
 - 2026-11-01: "cmon this is money on the line i need u to be tight especially on checking multicharts". Rule: every MultiCharts claim says its source (screenshot / code line / log field + what writes it) and VERIFIED or GUESS; never send the user to change a live setting on a guess.
 - 2026-11-01: "i alr did?" (I said the x150 charts routed to closed #3 from the ACCT log rows; those rows show the Chart Monitor's typed AccountName input, not the order routing). Rule: know what a log field measures before calling it a defect; ACCT.account = monitor input only.

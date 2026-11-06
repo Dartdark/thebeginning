@@ -22,9 +22,9 @@ Expect skills tests or a recorded AI interview on 1-5: take them when rested, th
 
 ## Background (user 2026-11-06: "describe everything i've done with u"; Claude's draft from the repo, check every line)
 
-**Education:** University of South Florida (USF), B.S. Finance, 2023. [check: B.S. or B.A.?]
+**Education:** University of San Francisco (USF), B.S. Finance, 2023.
 
-**Freelance coding and trading-strategy development (2023 - now):** strategy coding, backtesting and automation for clients / own accounts. [add a client type or example]
+**Freelance coding and trading-strategy development (2023 - now):** coded TradingView / MultiCharts strategies for retail traders and built Python backtests for clients; strategy coding, backtesting and automation.
 
 **Independent project: systematic futures trading research and live automation (Oct 2026 - now)**
 - Built a research and trading operation for CME index futures (NQ / ES, also CL, GC, 6E, ZN) aimed at prop-firm (Apex)
