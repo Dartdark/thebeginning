@@ -123,19 +123,74 @@ Tips: quiet room, camera on, speak in concrete numbers, say "I don't know" rathe
 Title: **I'll code, backtest and audit your MultiCharts / TradeStation strategy**
 - What you get: your idea coded in PowerLanguage/EasyLanguage, a backtest with real commissions and slippage, an audit for
   look-ahead and overfitting, and live-setup notes (sessions, time zones, broker mapping, prop-firm limits).
-- Starter price: [$40-80 for a small strategy] to get first reviews; raise after 3-5 five-star jobs.
+- Starter price: $50 for a small strategy (one entry rule, one market) to get first reviews; raise after 3-5 five-star jobs.
 - Rule: never trade a client's account and never promise returns.
 
 ## Anthropic Residency (stretch; by Nov 22)
 
 Honest positioning: early-career, but a working example of careful empirical research done alone with AI tools.
 Draft answer, "Why do you want to do this / relevant experience" (retype it yourself):
-> For the past [N] weeks I have run a one-person research operation on financial markets, using AI coding agents to
+> For the past several weeks I have run a one-person research operation on financial markets, using AI coding agents to
 > write the code while I set the questions and the rules for what counts as evidence. I learned the hard way that a
 > result is cheap and a trustworthy result is not: I pre-register tests, hold out data, count every trial against a
 > multiple-testing bar, and have a second AI independently rebuild candidates to catch my mistakes. Most of my ideas
 > fail, and I keep records of why. I want to bring that discipline (evaluating whether a system really does what it
 > appears to do) to AI safety, where the same failure modes, overfitting and fooling yourself, matter far more.
-> [Your background in one or two lines.]
+> I graduated from the University of San Francisco with a B.S. in Finance (2023) and have worked since then as a
+> freelance coder and trading-strategy developer.
 
 Attach: resume; optionally a short write-up of one test end to end (the live-vs-backtest replay is a good one).
+
+## Answers for every other application (draft 2026-11-06; forms change, so map these to whatever fields appear)
+
+Reuse everywhere: resume (`career/resume.pdf`), headline and summary from the Mercor section, 10-15 h/week, Central time.
+
+### 2. Outlier (Scale AI)
+- **Expertise areas to pick:** Finance; Mathematics/Statistics (only if you are comfortable with the test); Coding: Python.
+- **Highest education:** Bachelor's, Finance, University of San Francisco, 2023.
+- **Describe your expertise (short):** Systematic futures trading and backtest validation; I review whether a quantitative
+  analysis is correct (look-ahead, overfitting, costs) and write and check Python data analysis.
+- **Screening tasks:** you will grade or write AI answers. Be slow and exact: check every number, say what is wrong and why,
+  follow the style guide literally. Quality scores decide whether you keep getting work.
+
+### 3. Alignerr (Labelbox)
+- **Domain:** Finance / Economics. **Level:** Bachelor's + professional (freelance since 2023).
+- **Why a good fit (2-3 lines):** I spend most of my time judging whether a financial analysis holds up, re-running it with
+  real costs and held-out data. That is the same skill as checking an AI model's finance answers for errors.
+- **Assessment:** finance questions (time value, valuation, derivatives, statistics). Revise futures basics, options
+  Greeks, CAPM, bond pricing before you start.
+
+### 4. Micro1
+- **Role to pick:** Finance expert / Python (data analysis) contributor.
+- **AI interview (spoken, ~20 min):** use the 5 stories in the Mercor section. Likely technical questions: Sharpe vs
+  Sortino, what overfitting is and how you detect it (holdout, placebo, multiple-testing bar), how futures margin and
+  rollover work, a pandas question (groupby, merge, rolling windows).
+
+### 5. DataAnnotation
+- **Starter assessment:** general (writing, fact-checking AI answers) + coding (Python). No essay needed; the test is the
+  application. Write full sentences, justify each rating, catch factual errors. Then take the Finance qualification when
+  offered.
+
+### 6. Upwork + Fiverr (MultiCharts / backtest gig)
+- **Profile title:** Futures Strategy Developer | MultiCharts, EasyLanguage, Python Backtesting
+- **Overview:** I code, backtest and audit trading strategies. You get your rules coded in PowerLanguage / EasyLanguage or
+  Python, a backtest with real commissions and slippage, results by year, and an honest audit: look-ahead bias,
+  overfitting, session and time-zone settings, prop-firm limits. Finance degree (USF 2023), freelancing since 2023. I
+  never trade your account and never promise returns.
+- **Rate:** $40-50/hour or $50 per small fixed job to start; raise after 3-5 five-star reviews.
+- **First proposals (template):** "Hi [name], I read your rules for [strategy]. I'd code it in [platform], backtest
+  [market] [years] with [$ per side] costs, and send the trade list plus a short note on anything that looks too good
+  (e.g. [specific risk you spotted]). Turnaround [2-3] days. One question first: [one real question about their rules]."
+
+### 7. Anthropic HackerOne / Gray Swan arena
+- Sign-up is just an account; no essay. Read each program's rules first, test only in scope, report exactly what you did.
+  Prize-based: treat it as practice, not income.
+
+### 8. Anthropic Residency: see the section above (deadline **Nov 22**).
+
+### 9. Upwork + Fiverr (AI video)
+- **Gig title:** Short AI Videos for Ads and Social Media (concept to finished clip)
+- **Description:** I plan, script and produce short AI-generated videos: story, shot list, consistent characters and
+  style, editing and color. You approve the story and style before anything is generated, so there are no surprises.
+- **Before listing:** make 1-2 sample clips (needs a video-model budget; wait for a paycheck). Price after you know your
+  cost per second of video.
