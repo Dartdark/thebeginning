@@ -20,6 +20,38 @@ mismatch gets the account closed. Order = fastest money first.
 Each platform asks for a resume: base it on `career/resume_section_v2_my_voice.md` + your own school / work history.
 Expect skills tests or a recorded AI interview on 1-5: take them when rested, they usually allow one try.
 
+## Background (user 2026-11-06: "describe everything i've done with u"; Claude's draft from the repo, check every line)
+
+**Education:** University of South Florida (USF), Finance.
+
+**Independent project: systematic futures trading research and live automation (Oct 2026 - now)**
+- Built a research and trading operation for CME index futures (NQ / ES, also CL, GC, 6E, ZN) aimed at prop-firm (Apex)
+  evaluation and funded accounts, working with AI coding assistants (Claude Code, Codex) as research staff.
+- Tested and ranked 370+ strategies and ideas from academic papers, practitioner articles, books and trading forums in
+  one S-to-F tier list; most fail, and each verdict records why.
+- Validation standard I set and enforce: real commissions and slippage on every fill; tests by year from 2018; a sealed
+  2023+ holdout; random-entry placebos; walk-forward; bootstrap intervals and Monte Carlo at trading size; a minimum t-stat
+  or deflated Sharpe that rises with the number of ideas tried; an independent "checker" that rebuilds each rule from its
+  spec before anything is promoted.
+- Replicated published research (e.g. order-flow papers using tick-level order-book data) and showed where reported
+  edges disappear after costs or when filters chosen in-sample are re-tested.
+- Ran automated strategies live on four funded-evaluation accounts through MultiCharts + Rithmic on a Windows VPS:
+  routing checks, a remote kill switch, heartbeats, a pre-market check and a phone watchdog. All four accounts failed
+  during a losing stretch; I then replayed every live trade against the backtest (15 of 15 matched) to prove the
+  execution was right and the loss was the strategy's normal variance, and tested whether position sizing could have
+  saved them (it could not).
+- Managed position sizing under trailing-drawdown rules, a monthly budget for the operation, and the decision of when to
+  stop buying accounts (a buy gate tied to drawdown and cash).
+- Built dashboards and daily journals, and set up code reviews by a second AI model with every finding logged and fixed.
+
+**Skills**
+- Trading / finance: futures market structure, intraday and overnight strategies, order flow, backtest validation,
+  overfitting and look-ahead detection, risk and position sizing, prop-firm rules, reading quant papers.
+- Tools: MultiCharts / PowerLanguage (read, review, debug, deploy), Python (pandas, numpy) for backtests (written with
+  AI assistance, which I review and test), Rithmic, The Bridge order-flow data, Git / GitHub, Windows VPS operations.
+- AI: directing several AI agents (research, independent checking, code review), writing their task specs, and verifying
+  their output instead of trusting it.
+
 ## Short profile (paste into "About" / headline fields)
 
 Headline: **Systematic futures trader and backtest reviewer (MultiCharts, Python, prop-firm risk)**
@@ -28,7 +60,7 @@ About (≈80 words): I build and test systematic trading strategies for futures.
 from papers and traders with real costs, rules fixed before results, and checks on years never used for tuning; most fail,
 and I record why. I run live automated strategies on prop-firm accounts through MultiCharts and Rithmic on a VPS, with
 alarms for drawdown limits and live-vs-backtest drift. I'm good at finding where a backtest fools itself: look-ahead,
-overfitting, wrong costs, time zones. [School / degree / other work, one line.]
+overfitting, wrong costs, time zones. Finance student at the University of South Florida (USF).
 
 ## Answers that come up on the AI-training platforms
 
@@ -38,7 +70,7 @@ overfitting, wrong costs, time zones. [School / degree / other work, one line.]
   template started at 09:30 Central; the backtest numbers halved. I matched 4,704 trades against a port of the code,
   found the one-hour shift, and fixed the setup. (2026-11-03, `MULTICHARTS_PITFALLS.md`.)
 - **Hours per week?** [your real number around the job, e.g. 10-15 evenings / weekends]
-- **Coding?** [be exact: e.g. "I read and review Python and PowerLanguage; I write code with AI assistants and verify it"]
+- **Coding?** I read, review and debug Python and PowerLanguage; I write code with AI assistants and verify it by running tests (e.g. replaying live trades against the backtest).
 
 ## Upwork / Fiverr gig
 
