@@ -9,7 +9,7 @@ mismatch gets the account closed. Order = fastest money first.
 |---|---|---|---|---|
 | 1 | Mercor | https://mercor.com (Explore jobs) | finance / trading / quant domain-expert roles; also "generalist" roles | [ ] |
 | 2 | Outlier (Scale AI) | https://outlier.ai | expert contributor: finance, maths or coding | [ ] |
-| 3 | Alignerr (Labelbox) | https://www.alignerr.com | finance / economics expert | [ ] |
+| 3 | Alignerr (Labelbox) | https://www.alignerr.com | finance / economics expert | **SKIP: not hiring in California (user 2026-11-06); recheck later or apply honestly if you move** |
 | 4 | Micro1 | https://www.micro1.ai | AI interview; finance or Python roles | [ ] |
 | 5 | DataAnnotation | https://www.dataannotation.tech | starter assessment (general + coding) | [ ] |
 | 6 | Upwork + Fiverr | https://www.upwork.com, https://www.fiverr.com | gig: "MultiCharts / PowerLanguage strategy coding and backtest review" | [ ] |
@@ -153,7 +153,7 @@ Reuse everywhere: resume (`career/resume.pdf`), headline and summary from the Me
 - **Screening tasks:** you will grade or write AI answers. Be slow and exact: check every number, say what is wrong and why,
   follow the style guide literally. Quality scores decide whether you keep getting work.
 
-### 3. Alignerr (Labelbox)
+### 3. Alignerr (Labelbox): ON HOLD, not hiring in California (2026-11-06)
 - **Domain:** Finance / Economics. **Level:** Bachelor's + professional (freelance since 2023).
 - **Why a good fit (2-3 lines):** I spend most of my time judging whether a financial analysis holds up, re-running it with
   real costs and held-out data. That is the same skill as checking an AI model's finance answers for errors.
