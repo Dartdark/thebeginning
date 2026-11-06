@@ -64,6 +64,50 @@ and I record why. I run live automated strategies on prop-firm accounts through 
 alarms for drawdown limits and live-vs-backtest drift. I'm good at finding where a backtest fools itself: look-ahead,
 overfitting, wrong costs, time zones. USF Finance graduate (2023); freelance coder and strategy developer.
 
+## Mercor answers (draft 2026-11-06; fields from memory of Mercor's usual form, may differ: retype in your own words)
+
+**Headline:** Finance graduate (USF, B.S. 2023) | Systematic futures strategy developer | Python + MultiCharts backtesting
+
+**Summary:** I develop and validate systematic trading strategies for CME futures. Since 2023 I've freelanced: coding
+TradingView and MultiCharts strategies for retail traders and building Python backtests for clients. My own research
+program has tested 370+ strategy ideas from academic papers and practitioners with real costs, sealed holdout years and
+random-entry placebos; most fail, and I document why. I've run automated strategies live on prop-firm accounts and
+audited live trades against backtests. I'm strong at spotting where an analysis fools itself.
+
+**Work experience**
+- Freelance strategy developer and coder (self-employed), 2023 - present. Coded and debugged TradingView / MultiCharts
+  strategies for retail traders; built Python backtests for clients; reviewed strategies for look-ahead bias, overfitting
+  and unrealistic cost assumptions.
+- Independent systematic futures research and live trading, Oct 2026 - present. 370+ ideas tested and ranked; live
+  automated execution on a VPS with risk controls; live-vs-backtest reconciliation (15/15 trades matched).
+
+**Education:** University of San Francisco, B.S. Finance, 2023.
+
+**Skills (tags):** Quantitative finance, Futures, Algorithmic trading, Backtesting, Risk management, Python, pandas,
+NumPy, PowerLanguage / EasyLanguage, Pine Script [only if you've coded TradingView yourself], Statistics, Git,
+Data analysis, Research paper review.
+
+**Hourly rate expected:** $45-60/hour (Mercor finance-expert roles often list ~$50-100; start mid-range to get hired,
+raise after good reviews).
+
+**Availability:** 10-15 hours a week, evenings and weekends (Central time); can start immediately.
+
+**AI interview (about 15-20 min, spoken): stories to have ready, 1-2 minutes each**
+1. *Walk me through a project.* The research program: an idea comes in from a paper, I freeze the rule before seeing
+   results, test it 2018-2022, look at 2023+ only once, compare to random entries, add commissions and slippage. Most
+   ideas fail; the ones that pass go to an independent check before going live.
+2. *A time you found an error.* The MultiCharts session template started at 09:30 instead of 08:30 Central, so a
+   strategy's backtest halved. I matched 4,704 trades against a code port, found the one-hour shift, fixed the setup.
+3. *A failure.* Four evaluation accounts failed in a losing stretch. Instead of changing the strategy I replayed every
+   live trade against the backtest (all matched), measured how rare the stretch was (about the 6th percentile, ~5 times a
+   year) and tested whether smaller sizing would have helped (it didn't). Lesson: separate execution errors from variance.
+4. *How do you use AI tools?* As research staff: I write the task spec, have one agent build and a second one check, and
+   I verify results by running them; I never trust a number I didn't see computed.
+5. *Why Mercor / AI training?* My work is judging whether an analysis is right; that's what evaluating model answers in
+   finance needs.
+
+Tips: quiet room, camera on, speak in concrete numbers, say "I don't know" rather than guess. Don't claim live profits.
+
 ## Answers that come up on the AI-training platforms
 
 - **Domain expertise?** Futures markets, systematic trading, backtesting and strategy validation, position sizing under
