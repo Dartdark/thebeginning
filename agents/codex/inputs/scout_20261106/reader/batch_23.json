@@ -1,0 +1,70 @@
+{
+  "receipt_type": "access_metadata_only",
+  "reader_result_sha256": "4aa140abcf9f0b7434b7df580874e6678f093828fedaeed3f5a58fff8d20d125",
+  "hash_format": "Exact UTF8 JSON result bytes captured before receipt reduction; original reader body not redistributed or retained as a TEST source artifact.",
+  "reader_result_bytes": 30103,
+  "source_blocks": [
+    {
+      "source_commands": [
+        {
+          "method": "open",
+          "arguments": "{\"ref_id\":\"https://hal.science/hal-01500860/document\",\"lineno\":null}"
+        }
+      ],
+      "urls": [
+        "https://hal.science/hal-01500860/document"
+      ],
+      "statuses": [
+        "reader inaccessible"
+      ],
+      "reader_pages": [],
+      "reader_total_lines": [],
+      "observed_reader_line_range": null
+    },
+    {
+      "source_commands": [
+        {
+          "method": "open",
+          "arguments": "{\"ref_id\":\"https://citeseerx.ist.psu.edu/document?doi=f10fc854a93a10d5122e0c2f6d307f46447e344a&repid=rep1&type=pdf\",\"lineno\":null}"
+        }
+      ],
+      "urls": [
+        "https://citeseerx.ist.psu.edu/document?doi=f10fc854a93a10d5122e0c2f6d307f46447e344a&repid=rep1&type=pdf",
+        "https://citeseerx.ist.psu.edu/document?doi=f10fc854a93a10d5122e0c2f6d307f46447e344a&repid=rep1&type=pdf:"
+      ],
+      "statuses": [
+        "403 Forbidden",
+        "fetch failed"
+      ],
+      "reader_pages": [],
+      "reader_total_lines": [],
+      "observed_reader_line_range": null
+    },
+    {
+      "source_commands": [
+        {
+          "method": "open",
+          "arguments": "{\"ref_id\":\"https://acfr.aut.ac.nz/__data/assets/pdf_file/0019/261622/SPFuturesAndSkew.pdf\",\"lineno\":null}"
+        }
+      ],
+      "urls": [
+        "https://acfr.aut.ac.nz/__data/assets/pdf_file/0019/261622/SPFuturesAndSkew.pdf"
+      ],
+      "statuses": [
+        "PDF reader available"
+      ],
+      "reader_pages": [
+        "31"
+      ],
+      "reader_total_lines": [
+        "1004"
+      ],
+      "observed_reader_line_range": [
+        0,
+        331
+      ]
+    }
+  ],
+  "is_error": false,
+  "scope": "Tool-access receipt, not full source bytes, source hash, complete reading, reproduction or economic verification."
+}

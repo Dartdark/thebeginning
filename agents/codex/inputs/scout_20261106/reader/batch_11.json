@@ -1,0 +1,79 @@
+{
+  "receipt_type": "access_metadata_only",
+  "reader_result_sha256": "7eca39a6c42c82124e69262aa633254458651b203a9436441d4522e76bda2060",
+  "hash_format": "Exact UTF8 JSON result bytes captured before receipt reduction; original reader body not redistributed or retained as a TEST source artifact.",
+  "reader_result_bytes": 26011,
+  "source_blocks": [
+    {
+      "source_commands": [
+        {
+          "method": "open",
+          "arguments": "{\"ref_id\":\"https://repository.up.ac.za/bitstreams/65ce1e90-e2c0-421f-b46d-8890e4037597/download\",\"lineno\":null}"
+        }
+      ],
+      "urls": [
+        "https://repository.up.ac.za/bitstreams/65ce1e90-e2c0-421f-b46d-8890e4037597/download",
+        "https://repository.up.ac.za/bitstreams/65ce1e90-e2c0-421f-b46d-8890e4037597/download:"
+      ],
+      "statuses": [
+        "403 Forbidden",
+        "fetch failed"
+      ],
+      "reader_pages": [],
+      "reader_total_lines": [],
+      "observed_reader_line_range": null
+    },
+    {
+      "source_commands": [
+        {
+          "method": "find",
+          "arguments": "{\"ref_id\":\"turn601318view0\",\"pattern\":\"Bloomberg\"}"
+        }
+      ],
+      "urls": [
+        "https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr1188.pdf?sc_lang=en"
+      ],
+      "statuses": [
+        "PDF reader available"
+      ],
+      "reader_pages": [
+        "87"
+      ],
+      "reader_total_lines": [
+        "2722"
+      ],
+      "observed_reader_line_range": [
+        398,
+        2706
+      ]
+    },
+    {
+      "source_commands": [
+        {
+          "method": "find",
+          "arguments": "{\"ref_id\":\"turn601318view0\",\"pattern\":\"Data\"}"
+        }
+      ],
+      "urls": [
+        "https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr1188.pdf?sc_lang=en"
+      ],
+      "statuses": [
+        "403 Forbidden",
+        "429 rate limit",
+        "PDF reader available"
+      ],
+      "reader_pages": [
+        "87"
+      ],
+      "reader_total_lines": [
+        "2722"
+      ],
+      "observed_reader_line_range": [
+        92,
+        2508
+      ]
+    }
+  ],
+  "is_error": false,
+  "scope": "Tool-access receipt, not full source bytes, source hash, complete reading, reproduction or economic verification."
+}

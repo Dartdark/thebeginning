@@ -228,6 +228,15 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **Lagged-volume intraday risk sizing — conditional SOURCE/EXECUTION WATCH (2026-11-06), SSRN5795584.**
+  Specific merit and unreplicated author results: [record](agents/codex/research/scout/records/5795584.json).
+  Owned price/volume fields overlap; this does not reopen prior generic volatility-targeting failures.
+  Prerequisites: causal preprocessing, observed paths and native costs/integer exposure. Smallest next check,
+  only with genuinely new matching evidence: reconcile one available-at forecast-to-position transition without
+  imputing prices or assuming fractional fills. Park and continue discovery; no allocation or TEST admission.
+  [D53](agents/codex/DATA_NEEDED.md#2026-11-06-volume-conditioned-risk-watch),
+  [checkpoint](agents/codex/results/scout_owned_source_20261106.md).
+
 - [ ] **Signed Treasury jump-risk premium — conditional personal WATCH / NEEDS DATA (2026-11-05), SSRN1716759.**
   Merit: a specific countercyclical jump-risk predictor; the author abstract reports OOS Sharpe0.52 and the related
   Tilburg thesis Table18 reports IR0.52 for2003–2009. Neither is our native ZN result. Monthly duration-normalized

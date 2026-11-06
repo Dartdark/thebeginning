@@ -1,0 +1,47 @@
+{
+  "receipt_type": "access_metadata_only",
+  "reader_result_sha256": "7c261d922c2fb1ebd25608b8d2108b06ed710f49ea31eb4bc13807869d0471f3",
+  "hash_format": "Exact UTF8 JSON result bytes captured before receipt reduction; original reader body not redistributed or retained as a TEST source artifact.",
+  "reader_result_bytes": 28517,
+  "source_blocks": [
+    {
+      "source_commands": [
+        {
+          "method": "find",
+          "arguments": "{\"ref_id\":\"https://hedibert.org/wp-content/uploads/2025/11/MIDASHighFreq_SSRN.pdf\",\"pattern\":\"6.2\"}"
+        }
+      ],
+      "urls": [
+        "https://hedibert.org/wp-content/uploads/2025/11/MIDASHighFreq_SSRN.pdf"
+      ],
+      "statuses": [
+        "403 Forbidden",
+        "429 rate limit",
+        "PDF reader available"
+      ],
+      "reader_pages": [
+        "36"
+      ],
+      "reader_total_lines": [
+        "1405"
+      ],
+      "observed_reader_line_range": [
+        497,
+        1404
+      ]
+    },
+    {
+      "source_commands": [],
+      "urls": [],
+      "statuses": [
+        "invalid tool arguments",
+        "tool resolution failure"
+      ],
+      "reader_pages": [],
+      "reader_total_lines": [],
+      "observed_reader_line_range": null
+    }
+  ],
+  "is_error": false,
+  "scope": "Tool-access receipt, not full source bytes, source hash, complete reading, reproduction or economic verification."
+}

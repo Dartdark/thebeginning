@@ -1,0 +1,61 @@
+{
+  "receipt_type": "access_metadata_only",
+  "reader_result_sha256": "2d2339f139430b5032a119e931a307ad36c992ddaa06c9a60935fc16141c8cd7",
+  "hash_format": "Exact UTF8 JSON result bytes captured before receipt reduction; original reader body not redistributed or retained as a TEST source artifact.",
+  "reader_result_bytes": 30528,
+  "source_blocks": [
+    {
+      "source_commands": [
+        {
+          "method": "open",
+          "arguments": "{\"ref_id\":\"https://www.oru.se/globalassets/oru-sv/institutioner/hh/workingpapers/workingpapers2025/wp-14-2025.pdf\",\"lineno\":null}"
+        }
+      ],
+      "urls": [
+        "https://www.oru.se/globalassets/oru-sv/institutioner/hh/workingpapers/workingpapers2025/wp-14-2025.pdf"
+      ],
+      "statuses": [
+        "403 Forbidden",
+        "PDF reader available"
+      ],
+      "reader_pages": [
+        "40"
+      ],
+      "reader_total_lines": [
+        "1412"
+      ],
+      "observed_reader_line_range": [
+        0,
+        112
+      ]
+    },
+    {
+      "source_commands": [
+        {
+          "method": "open",
+          "arguments": "{\"ref_id\":\"https://hedibert.org/wp-content/uploads/2025/11/MIDASHighFreq_SSRN.pdf\",\"lineno\":305}"
+        }
+      ],
+      "urls": [
+        "https://hedibert.org/wp-content/uploads/2025/11/MIDASHighFreq_SSRN.pdf"
+      ],
+      "statuses": [
+        "403 Forbidden",
+        "429 rate limit",
+        "PDF reader available"
+      ],
+      "reader_pages": [
+        "36"
+      ],
+      "reader_total_lines": [
+        "1405"
+      ],
+      "observed_reader_line_range": [
+        208,
+        432
+      ]
+    }
+  ],
+  "is_error": false,
+  "scope": "Tool-access receipt, not full source bytes, source hash, complete reading, reproduction or economic verification."
+}

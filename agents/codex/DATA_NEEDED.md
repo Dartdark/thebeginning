@@ -216,6 +216,19 @@ These are parked verification leads, not the next scout tasks or a user-action/p
 |**D50 — Commercial liquidity premium after public position reports, SSRN2449315; related3881922and HPM DOI10.1016/j.econmod.2023.106214.** Table4's days5–10spread is a specific post-publication author claim, not our net return.|Owned2018–22legacy ZIPs have261position-date observations each for CL/GC/NG, with aggregate commercial/noncommercial long/short and OI. CFTC market codes resolve2022name changes. Need source-matched26-market native contracts/rolls, released vintages/receipt clocks, complete cost/cash paths and full-source bytes before TEST. Free official CFTC historical notices and2019catch-up schedule were inspected; a normal Friday assumption is insufficient. The HPM primary page returned403; exact formulas/fit rules remain source-blocked.|With genuinely new matching inputs, reconcile one complete source-specific formation/public-release/roll week before expanding acquisition or reserving returns. No shrinking the cross-section, signed-order inference or intraday adaptation. Preserve failed index-COT and prior selection history. [Record](research/scout/records/2449315.json), [inventory](inputs/scout_20261103/position_inventory.json), [report](results/scout_owned_source_20261103.md).|
 |**D51 — LEI stale-information reversal, SSRN1108050.** Specific double-counting/reversal mechanism; original three-day ES return/cost claims unreplicated.|Need original LEI release/consensus vintages and availability, full event-overlap calendar and native futures mark/roll/cost history. Public MetaTrader and contemporary Regions/ActionEconomics forecast values differ for February22,2018(0.5%vs0.6%); neither was admitted as the paper's Bloomberg median. Owned ES/ZN prices are insufficient for the exact surprise sign. Original overnight hold is not Apex-compatible.|On new matching evidence, authenticate one available-at surprise and the10:05ETthrough-next-close source leg, then check complete design coverage/power before preregistration. Do not infer pre-release knowledge, use revised releases or substitute a price sign. [Record](research/scout/records/1108050.json), [access](inputs/scout_20261103/access.json), [report](results/scout_owned_source_20261103.md).|
 
+## 2026-11-06 volume-conditioned risk watch
+
+**D53 — SSRN5795584, conditional source/execution watch.** Specific merit and author estimates are in the
+[record](research/scout/records/5795584.json); no independent reproduction or approved strategy. This is primarily
+a settings/execution gate, not a request for another vendor dataset. Prices and volume overlap owned fields.
+Need exact causal normalization/centering and zero handling, verified sessions/rolls/warm-up, observed native
+paths, integer exposure/turnover and costs. Six Sunday coefficients are resolved; do not list that as missing.
+The bounded check inspected the institutional manuscript and two author listings; no matching implementation
+or new market data was acquired. Missing code alone is not disqualification. Smallest justified future check:
+one fully specified forecast-to-order transition with no imputation or inferred fills, on genuinely new matching
+evidence. Park; continue distinct discovery. No repeated crawl, purchase, alert, reservation or live change.
+[Checkpoint](results/scout_owned_source_20261106.md).
+
 ## 2026-11-05 Treasury jump-risk watch
 
 |Lead and merit|Exact prerequisites and bounded check|Smallest justified next check|

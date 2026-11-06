@@ -1662,6 +1662,18 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
   it preserves prices, original outcomes and unrelated events. Factual source-clock repairs require their own
   provenance and pre-outcome code commitment; favorable-touch searches would change the execution claim.
 
+### Source follow-up — Reaction windows, units and continuous risk weights (2026-11-06)
+
+[Checkpoint](results/scout_owned_source_20261106.md); selected-source scope, no return tests or execution savings.
+- [Auction6447502](research/scout/records/6447502.json): distinguish cash yields, native futures cash P&L,
+  auction cutoff and actual results publication. Realized post-event order flow cannot predict its own payoff window.
+  Preserve the existing failed auction tests; these cautions authorize no new clock/side variant.
+- [NG attention](research/scout/records/doi_fut_70104.json): observing an announcement response does not earn
+  the already-completed response interval. Authenticate surprises and receipt clocks before any later payoff.
+- [Volume-conditioned risk](research/scout/records/5795584.json): a model weight is not an integer fill.
+  Predeclare available-at transforms, observed-path missingness, rounding, turnover/costs and account constraints.
+  Supporting analysis is not source replication, native account benefit or permission to impute missing returns.
+
 ### E11/E12 follow-up — Same-window shocks and completed-day states (2026-11-05)
 
 [Source checkpoint](results/scout_owned_source_20261105.md); selected sections only, no new return tests.
