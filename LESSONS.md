@@ -97,3 +97,5 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - 2026-11-04: "maybe make it a soft guide not a strict rule" (I wrote the Sharpe > 3.15 x corr pre-screen as a rule). Rule: heuristics go in the docs as guides; only the bench decides.
 - (2026-11-01, "where's the code?") Don't assume the user can open a file link on the phone: when they need to read
   something now (a task, code to review), put it in the reply as well as the link.
+- (2026-11-06, Friday review; Codex eval audit) A fixed dollar-risk stop can exceed the account's remaining cushion:
+  three of four failures had the planned ONB stop above room-to-floor. Cap each entry's risk by the live cushion.
