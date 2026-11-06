@@ -1,0 +1,44 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Resume</title><style>
+@page{size:Letter;margin:0.55in 0.6in}
+body{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10.3pt;line-height:1.32;color:#111;margin:0}
+h1{font-size:20pt;margin:0;letter-spacing:.5px}.contact{color:#444;margin:2px 0 8px}
+h2{font-size:10.5pt;text-transform:uppercase;letter-spacing:1px;border-bottom:1.2px solid #222;margin:12px 0 5px;padding-bottom:2px}
+.row{display:flex;justify-content:space-between;font-weight:bold}.sub{font-style:italic;color:#333}
+ul{margin:3px 0 4px 16px;padding:0}li{margin:1.5px 0}p{margin:3px 0}
+</style></head><body>
+<h1>[YOUR NAME]</h1>
+<div class="contact">[City, State] &nbsp;|&nbsp; [phone] &nbsp;|&nbsp; [email] &nbsp;|&nbsp; [LinkedIn or GitHub, optional]</div>
+
+<h2>Summary</h2>
+<p>Finance graduate and systematic futures strategy developer. Builds and validates trading strategies for CME futures
+with realistic costs, sealed holdout years and placebo tests; runs automated strategies live with risk controls. Strong at
+finding where a backtest or analysis fools itself: look-ahead bias, overfitting, wrong costs, time-zone and data errors.</p>
+
+<h2>Experience</h2>
+<div class="row"><span>Independent Systematic Futures Research &amp; Live Trading</span><span>Oct 2026 – Present</span></div>
+<div class="sub">Self-directed; CME index futures (NQ, ES; also CL, GC, 6E, ZN) for prop-firm (Apex) accounts</div>
+<ul>
+<li>Tested and ranked 370+ strategy ideas from academic papers, practitioner research and books in one S-to-F tier list, documenting why each passes or fails.</li>
+<li>Designed the validation standard: commissions and slippage on every fill, results by year from 2018, a sealed 2023+ holdout, random-entry placebos, walk-forward, bootstrap and Monte Carlo at trading size, and a significance bar that rises with the number of ideas tried.</li>
+<li>Replicated published order-flow research on tick-level order-book data and showed where reported edges disappear after costs or when in-sample filters are retested.</li>
+<li>Deployed automated strategies live via MultiCharts and Rithmic on a Windows VPS, with order-routing checks, a remote kill switch, heartbeats, a pre-market check and phone alerts.</li>
+<li>Reconciled live trades against the backtest (15 of 15 matched) to separate execution errors from normal variance after a losing stretch; tested sizing alternatives under trailing-drawdown rules.</li>
+<li>Directed AI agents (Claude Code, Codex) for research, independent strategy checking and code review; verified every result by running it.</li>
+</ul>
+
+<div class="row"><span>Freelance Strategy Developer &amp; Coder</span><span>2023 – Present</span></div>
+<div class="sub">Self-employed</div>
+<ul>
+<li>Coded and debugged TradingView and MultiCharts strategies for retail traders.</li>
+<li>Built Python backtests for clients and reviewed strategies for look-ahead bias, overfitting and unrealistic cost assumptions.</li>
+</ul>
+
+<h2>Education</h2>
+<div class="row"><span>University of San Francisco</span><span>2023</span></div>
+<div class="sub">B.S., Finance</div>
+
+<h2>Skills</h2>
+<p><b>Finance &amp; trading:</b> futures market structure, algorithmic trading, backtest validation, order flow, risk and position sizing, prop-firm drawdown rules, quantitative research review.</p>
+<p><b>Technical:</b> Python (pandas, NumPy), MultiCharts PowerLanguage / EasyLanguage, Rithmic, Git / GitHub, Windows VPS operations, statistics (bootstrap, Monte Carlo, deflated Sharpe).</p>
+<p><b>AI:</b> multi-agent workflows with Claude Code and Codex; writing task specs; verifying model output.</p>
+</body></html>
