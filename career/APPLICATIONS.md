@@ -90,7 +90,7 @@ Data analysis, Research paper review.
 **Hourly rate expected:** $45-60/hour (Mercor finance-expert roles often list ~$50-100; start mid-range to get hired,
 raise after good reviews).
 
-**Availability:** 10-15 hours a week, evenings and weekends (Central time); can start immediately.
+**Availability:** 10-15 hours a week, evenings and weekends (Pacific time); can start immediately.
 
 **AI interview (about 15-20 min, spoken): stories to have ready, 1-2 minutes each**
 1. *Walk me through a project.* The research program: an idea comes in from a paper, I freeze the rule before seeing
@@ -143,7 +143,7 @@ Attach: resume; optionally a short write-up of one test end to end (the live-vs-
 
 ## Answers for every other application (draft 2026-11-06; forms change, so map these to whatever fields appear)
 
-Reuse everywhere: resume (`career/resume.pdf`), headline and summary from the Mercor section, 10-15 h/week, Central time.
+Reuse everywhere: resume (`career/resume.pdf`), headline and summary from the Mercor section, 10-15 h/week, Pacific time.
 
 ### 2. Outlier (Scale AI)
 - **Expertise areas to pick:** Finance; Mathematics/Statistics (only if you are comfortable with the test); Coding: Python.
