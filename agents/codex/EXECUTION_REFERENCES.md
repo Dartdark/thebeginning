@@ -1698,3 +1698,12 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
 - Status: supporting clock/accounting cautions from selected primary text, not complete source reviews,
   independently reproduced returns, execution savings, account-stage passes or new allocations. Consult only
   when a relevant new hypothesis/input arrives; no rescue of closed flow/news/overnight definitions.
+
+
+### E11/E12 follow-up — Position-report clocks, venue units and utility metrics (2026-11-07)
+
+[Source checkpoint](results/scout_owned_source_20261107.md); selected sections/metadata only, no new return tests.
+- [Baur/Smales2022](research/scout/records/doi_fut_22332.json): Tuesday snapshot dates do not establish Tuesday public availability. Source combines CME5BTC and CBOE1BTC positioning after size adjustment; raw counts or CME-only signals are not equivalent. Owned snapshots have no actual publication timestamp column. Audit original releases/holiday backlogs before any later source replication; no universal three-day shift.
+- [Taylor2017](research/scout/records/doi_eneco_2017_07019.json): certainty-equivalent utility is not realized cash return or payout. Interval cost parameters, removed overnight differences and1000-day estimation warm-up need native execution reconciliation; do not shorten history or convert utility tables to account outcomes.
+- [JPM2015](research/scout/records/jpm_momentum_2015.json): keep separate component definitions and their reported performance. Footnote88's three-day expiry rule is not Table41's weekly rule. No combined-index result, in-sample calendar selection or same-settlement mark establishes an executable component fill.
+- [Maciejewski2026, arXiv2609.18019v1](research/scout/records/arxiv_2609_18019.json), abstract only: passive order shadowing follows exchange-order identifiers through add/cancel/trade events. Minute aggregates cannot reproduce order lifecycle, queue placement, latency or slippage. Retain as an offline execution benchmark watch only; no fill saving or directional edge verified.

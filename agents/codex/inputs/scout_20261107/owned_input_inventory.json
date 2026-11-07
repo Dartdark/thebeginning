@@ -1,0 +1,479 @@
+{
+  "scope": "Identity/schema/snapshot-date audit only. No signals, price outcomes, native contract/roll completeness or publication-vintage admission.",
+  "market_returns_computed": false,
+  "prior_selected_files": [
+    {
+      "path": "data/ES_1min_2018.csv",
+      "exists": true,
+      "bytes": 17506050,
+      "sha256": "ad4027b8230de0a91f83d1b6f3b798933f92cedebc39e56fe9223447c4b9d751",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "data/ES_1min_2022.csv",
+      "exists": true,
+      "bytes": 17909640,
+      "sha256": "00db614dd10674f7fe2f14940ae43f523b57ac48db1b0619b0eb084c5f50f601",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "data/NQ_1min_2018.csv",
+      "exists": true,
+      "bytes": 5630086,
+      "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "data/NQ_1min_2022.csv",
+      "exists": true,
+      "bytes": 6122385,
+      "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "data/GC_1min_2018.csv",
+      "exists": true,
+      "bytes": 17219743,
+      "sha256": "6ace4f1d2c8772beb6939d8263c22a7c36854315388ccc77d3930a0e22ec39e9",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "data/GC_1min_2022.csv",
+      "exists": true,
+      "bytes": 17254670,
+      "sha256": "7a800cd77ec404766288b77c724c07ec08e81ac515cf63d075386738de3a663f",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "data/CL_1min_2018.csv",
+      "exists": true,
+      "bytes": 14481455,
+      "sha256": "8a932d5cee6e9caa2026436d0d5c86c65b9014e2bdb0dcdcffa2ccb2dc217198",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "data/CL_1min_2022.csv",
+      "exists": true,
+      "bytes": 14926411,
+      "sha256": "102b1e4d88b8396425f257f79090360817b28324f22340e3f3c603e50a660823",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "data/6E_1min_2018.csv",
+      "exists": true,
+      "bytes": 17364008,
+      "sha256": "bf59d9d0a7c81f1292146a5af6739875c196a1217f1a6f010f143830353782d7",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "data/6E_1min_2022.csv",
+      "exists": true,
+      "bytes": 17480228,
+      "sha256": "cfae6c8b4a26cb9cf39ec96a4279fe6b396f53e1cc1b3018ea92a12da9f9ea3f",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "agents/codex/inputs/ng_corrected_20261031/raw/NG_1min_2018.csv.gz",
+      "exists": true,
+      "bytes": 2807334,
+      "sha256": "26bc7fcdb033386a16b816ba3f9f7c23ac39bb42beeca0a9a203cce8d40a0bfc",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "agents/codex/inputs/ng_corrected_20261031/raw/NG_1min_2022.csv.gz",
+      "exists": true,
+      "bytes": 3367948,
+      "sha256": "d5ef1e5d8c1026afc30d74e8c0173779bf3ee592283f66a2333c5e1e7301e619",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "matches_previous_hash": true
+    },
+    {
+      "path": "data/OF_1min_2018_1.csv",
+      "exists": true,
+      "bytes": 6969477,
+      "sha256": "2bc0e1ad344cc93d8685b6016b255ef1e642f30d6364245f51557e6999eff114",
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "upvol",
+        "downvol",
+        "spread_ticks",
+        "bid_sz_top",
+        "ask_sz_top",
+        "size_imb",
+        "count_imb",
+        "qdepl_bid",
+        "qdepl_ask",
+        "pulled_bid",
+        "pulled_ask",
+        "ice_bid",
+        "ice_ask",
+        "trade_rate",
+        "cum_delta",
+        "event_rate",
+        "levels_bid",
+        "levels_ask",
+        "big_trade",
+        "big_trade_px",
+        "s48",
+        "s49",
+        "s50",
+        "s51",
+        "s52",
+        "s53",
+        "s54",
+        "s55",
+        "s56",
+        "s57",
+        "s58",
+        "s59",
+        "s60",
+        "s61",
+        "vwap",
+        "vwap_sd",
+        "poc",
+        "poc_prev",
+        "vah",
+        "val"
+      ],
+      "matches_previous_hash": true
+    }
+  ],
+  "bitcoin_cot_archives": [
+    {
+      "path": "data/cot/fut_fin_txt_2018.zip",
+      "sha256": "6843d130a25a17c6248df67463810f02077ef4eeafdd629299d21c18f5125e40",
+      "archive_member": "FinFutYY.txt",
+      "venues": [
+        {
+          "code": "133741",
+          "venue": "CME",
+          "rows": 39,
+          "unique_snapshot_dates": 39,
+          "first_snapshot": "2018-04-10",
+          "last_snapshot": "2018-12-31",
+          "market_names": [
+            "BITCOIN - CHICAGO MERCANTILE EXCHANGE"
+          ]
+        },
+        {
+          "code": "1330E1",
+          "venue": "CBOE",
+          "rows": 53,
+          "unique_snapshot_dates": 53,
+          "first_snapshot": "2018-01-02",
+          "last_snapshot": "2018-12-31",
+          "market_names": [
+            "BITCOIN-USD - CBOE FUTURES EXCHANGE"
+          ]
+        }
+      ],
+      "required_fields_present": true,
+      "actual_publication_timestamp_field_present": false
+    },
+    {
+      "path": "data/cot/fut_fin_txt_2019.zip",
+      "sha256": "631b31880d513072aa50d63117c896184dd35db3cc8fcdd6debd80197ee7a661",
+      "archive_member": "FinFutYY.txt",
+      "venues": [
+        {
+          "code": "133741",
+          "venue": "CME",
+          "rows": 52,
+          "unique_snapshot_dates": 52,
+          "first_snapshot": "2019-01-08",
+          "last_snapshot": "2019-12-31",
+          "market_names": [
+            "BITCOIN - CHICAGO MERCANTILE EXCHANGE"
+          ]
+        },
+        {
+          "code": "1330E1",
+          "venue": "CBOE",
+          "rows": 18,
+          "unique_snapshot_dates": 18,
+          "first_snapshot": "2019-01-08",
+          "last_snapshot": "2019-05-07",
+          "market_names": [
+            "BITCOIN-USD - CBOE FUTURES EXCHANGE"
+          ]
+        }
+      ],
+      "required_fields_present": true,
+      "actual_publication_timestamp_field_present": false
+    },
+    {
+      "path": "data/cot/fut_fin_txt_2020.zip",
+      "sha256": "c90d98d94db708772d669f263fb8061c75f8a7f681ba231fb21247e5c9798e6b",
+      "archive_member": "FinFutYY.txt",
+      "venues": [
+        {
+          "code": "133741",
+          "venue": "CME",
+          "rows": 52,
+          "unique_snapshot_dates": 52,
+          "first_snapshot": "2020-01-07",
+          "last_snapshot": "2020-12-29",
+          "market_names": [
+            "BITCOIN - CHICAGO MERCANTILE EXCHANGE"
+          ]
+        },
+        {
+          "code": "1330E1",
+          "venue": "CBOE",
+          "rows": 0,
+          "unique_snapshot_dates": 0,
+          "first_snapshot": null,
+          "last_snapshot": null,
+          "market_names": []
+        }
+      ],
+      "required_fields_present": true,
+      "actual_publication_timestamp_field_present": false
+    },
+    {
+      "path": "data/cot/fut_fin_txt_2021.zip",
+      "sha256": "5c929991038c70ae2501661b6d442b9e784d3c29d3166ceac2e21b45ac93d56a",
+      "archive_member": "FinFutYY.txt",
+      "venues": [
+        {
+          "code": "133741",
+          "venue": "CME",
+          "rows": 52,
+          "unique_snapshot_dates": 52,
+          "first_snapshot": "2021-01-05",
+          "last_snapshot": "2021-12-28",
+          "market_names": [
+            "BITCOIN - CHICAGO MERCANTILE EXCHANGE"
+          ]
+        },
+        {
+          "code": "1330E1",
+          "venue": "CBOE",
+          "rows": 0,
+          "unique_snapshot_dates": 0,
+          "first_snapshot": null,
+          "last_snapshot": null,
+          "market_names": []
+        }
+      ],
+      "required_fields_present": true,
+      "actual_publication_timestamp_field_present": false
+    },
+    {
+      "path": "data/cot/fut_fin_txt_2022.zip",
+      "sha256": "94c9c1fdee9dfbe377a09923ddfe26b88d3460605dd076081f221ad367d88601",
+      "archive_member": "FinFutYY.txt",
+      "venues": [
+        {
+          "code": "133741",
+          "venue": "CME",
+          "rows": 52,
+          "unique_snapshot_dates": 52,
+          "first_snapshot": "2022-01-04",
+          "last_snapshot": "2022-12-27",
+          "market_names": [
+            "BITCOIN - CHICAGO MERCANTILE EXCHANGE"
+          ]
+        },
+        {
+          "code": "1330E1",
+          "venue": "CBOE",
+          "rows": 0,
+          "unique_snapshot_dates": 0,
+          "first_snapshot": null,
+          "last_snapshot": null,
+          "market_names": []
+        }
+      ],
+      "required_fields_present": true,
+      "actual_publication_timestamp_field_present": false
+    }
+  ],
+  "bitcoin_price_files": [
+    {
+      "path": "data/BTC_1min_2018.csv",
+      "sha256": "0512b621ae746e8114ca48d3745a47d9c37ea6dca0fdcac96af6f73291103dd6",
+      "bytes": 258842,
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ]
+    },
+    {
+      "path": "data/BTC_1min_2019.csv",
+      "sha256": "67094a19d27a1201e8ed7cd9ac82f49d811d89ccf20820215d695a740ec4d641",
+      "bytes": 8632490,
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ]
+    },
+    {
+      "path": "data/BTC_1min_2020.csv",
+      "sha256": "7c0f3ac59fe6c649f0d9856241e82bda29b33de5f9b413ab24ee0c02d4343934",
+      "bytes": 11124458,
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ]
+    },
+    {
+      "path": "data/BTC_1min_2021.csv",
+      "sha256": "4cf5339a7ecc29a253c9f90f6f1811692d3ace9363f98f3a3308273f173d902a",
+      "bytes": 12317116,
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ]
+    },
+    {
+      "path": "data/BTC_1min_2022.csv",
+      "sha256": "0fc3e1dede36398cfcd6e4f95ad69da2afa2379a2515a70e0ee7d90f50adc005",
+      "bytes": 11827693,
+      "columns": [
+        "date",
+        "time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ]
+    }
+  ],
+  "source_identity_caution": "Baur/Smales Section2.2 combines CME and size-adjusted CBOE positions. These separate venue counts are not a reconstructed combined signal. Micro-BTC is excluded.",
+  "publication_clock_evidence": "agents/codex/inputs/scout_20261103/access.json: holiday/backlog releases prevent a universal Tuesday+3 rule."
+}
