@@ -2508,3 +2508,29 @@ design checkpoint `324f5c1`;20 market/rule combinations, unchanged recent replay
   fill/queue behavior and intrabar paths before a separately frozen implementation/account comparison.
   Current roll repair is retrospective price-jump identification, not executable rolling. No measured live
   execution saving, new strategy promotion, account survival estimate or live/VPS/broker change follows.
+
+### E04/E09 follow-up — Causal fades, early-close guards and average-trade traps (2026-11-08)
+
+Source: [Anson/R2Vault/S03 ingredient grids](results/ingredients_anson_r2_s03_20261108.md), plan `7320764`,
+syntax-only amendment `65de599`, design checkpoint `70e5d0a`. Fifteen definitions; no changed strategy selected.
+
+- **Keep the execution cursor:** fading R2's upward break means shorting only after the original trigger crossing,
+  then applying the mirrored bracket to the remaining path. An earlier Low is not a short target. S03's fade keeps
+  virtual follow-side band decisions while mirroring actual position and stop. Incompatible follow exits on a fade
+  would test a different rule. Source OHLC sequencing and immediate processing are model conventions, not tick/
+  order-receipt parity. Synthetic causal-cursor/gate checks precede market returns.
+- **A weak average-profit effect does not make a guard decorative:** Anson's early adapter has little profit effect,
+  but removing it produces6/5 late fills across the eras versus0/0 originally, including one recent cross-date
+  trade. Unknown-held-minute labels grow to1,140 recently; closure classification is a proxy. Preserve actual
+  next-observed-chart-open fills and phase timestamps instead of supplying a nonexistent14:55/early close.
+- **Average trade is not total contribution or survival:** removing S03's sigma stop raises recent average$132→$174,
+  yet total net is$132,191→$133,309 while daily DD rises$21,951→$41,219 and count falls1,004→765. Reentries and
+  occupancy change. R2 without its stop has recent DD$76,687 versus$23,569, worst realized loss−$24,147 perNQ,
+  and an observed−$26,952 mark on2025-04-08 before a−$22,007 close. No missing held minutes are flagged on
+  that event. These observations are not native-tape extrema or an account-floor simulation.
+- **No false deletion controls:** entry-gate changes in all three families fail exact event-level nested identity.
+  Multiple trades on a date must match entry time/side/exit, not date alone. Keep whole-policy effects separate
+  from a fixed-trade overlay and baseline side contributions separate from executable side-only reruns.
+- Next justified use is a separately frozen native implementation/quote-path comparison with real clock, contract,
+  fee, closure and floor semantics. The retained standard-NQ fee differs from older micro-equivalent tables;
+  never splice means across units/universes. No live execution saving, admission, allocation or VPS/broker change.
