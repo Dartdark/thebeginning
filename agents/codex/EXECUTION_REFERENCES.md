@@ -380,6 +380,19 @@ annualization and time-zone mapping for any separately justified future comparis
 
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
+- Monthly trend/risk follow-up, retained 2026-11-08: Shi and Lian,
+  [SSRN 5140633 full review](results/ssrn5140633_review_20261108.md), February 17, 2025, pp. 17–25 and 33–35.
+  Compare trend filters using their return-weight kernels and effective horizons before treating a different
+  indicator as new information. EMA centers of mass in the source are not standard EMA periods. A centered
+  smoother uses future observations; a causal rolling estimate needs its own as-of vintage and first-fill clock.
+  Inverse-volatility weights do not equalize covariance-aware risk contributions or guarantee portfolio risk:
+  the source's approximate 12% portfolio-volatility objective accompanies 18.51% reported realized volatility.
+  The combined 1/3/12-month basket's 16.24% annual return / 0.88 Sharpe / −22.63% drawdown is an author claim,
+  without a Table 6 transaction-cost bridge, not verified net returns, execution savings or intraday protection.
+  Monthly crisis alpha does not establish an offset before an Apex breach. For separately justified research,
+  inspect lagged covariance, leverage/margin, netted integer positions and complete native paths before account
+  conclusions; do not use this reference to rerun the already-studied generic trend family. Zero new return trials.
+
 Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5 and Figure 1 p.27.
 [Review](results/variance_risk_premium_review_20261029.md), 2026-10-29.
 - Use: high-frequency squared returns can be contaminated by microstructure frictions; a noisier variance estimate is not necessarily more accurate just because sampling is faster.

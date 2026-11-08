@@ -1,0 +1,1666 @@
+Trend Following Strategies: A Practical Guide
+                            Chuan Shi* 1,2 and Xiangbin Lian3
+                        1
+                         Beijing Liangxin Investment Management Co. Ltd.
+                         2 The Chinese University of Hong Kong, Shenzhen
+                   3 Shenzhen China-Europe Rabbit Fund Management Co. Ltd.
+
+
+
+
+                              This version: February 17, 2025
+
+
+                                               Abstract
+        Trend-following strategies, rooted in time-series momentum, have demonstrated enduring
+   efficacy across diverse asset classes and market conditions. This paper provides a comprehen-
+   sive exploration of the theoretical foundations, risk-return dynamics, and practical implemen-
+   tation of such strategies. Key findings reveal that trend following strategies exhibit convex
+   return profiles with “crisis alpha” properties, thriving during market dislocations while of-
+   fering diversification benefits. The choice of time scale for trend calculation is paramount, as
+   strategies must align with an asset’s return characteristics. Empirical simulations and com-
+   parative analyses of trend measures underscore that methodology matters less than selecting
+   an appropriate time horizon.
+        Empirical evidence from China’s futures markets (1999–2019) confirms the global appli-
+   cability of trend following, with a combined multi-scale strategy achieving a 16.24% annual-
+   ized return and a Sharpe ratio of 0.88, significantly outperforming buy-and-hold approaches.
+   However, challenges persist, including periods of underperformance linked to heightened as-
+   set correlations, reduced market trends, and leverage sensitivity. Critically, the strategy’s
+   success hinges on disciplined risk management and acceptance of short-term drawdowns. By
+   synthesizing academic insights and practical considerations, this study reaffirms trend follow-
+   ing as a resilient, albeit imperfect, tool for portfolio diversification and crisis hedging, urging
+   practitioners to prioritize time-scale alignment and robust risk controls.
+
+
+
+
+* Corresponding author. Email addresses: chuan.shi@liang-xin.com.
+
+
+
+                                                   1
+Trend Following Strategy: A Practical Guide                                                             2025/02/17
+
+1         Introduction
+        In quantitative investment, it is often said that the trend is your friend. Trend following is
+perhaps the most easily understood quantitative investment strategy. When the price of an asset
+rises, it is in an upward trend, and one might consider buying long; when the price of an asset
+falls, it is in a downward trend, and one might consider selling short. Therefore, trend following is
+essentially a time-series momentum strategy, focusing solely on the historical performance of the
+asset itself, without considering the performance of other assets at the current time. In contrast,
+another concept is cross-sectional momentum, with classic research from Jegadeesh and Titman
+(1993). At a given time t, one computes the performance of all assets over a past period, and
+goes long on a basket of relatively strong performing assets (winners) and goes short a basket of
+relatively weak performing assets (losers). Time-series momentum is an absolute concept, while
+cross-sectional momentum is a relative concept.
+        When people talk about trend following, they often refer to time-series momentum. This
+article will mainly focus on time-series momentum. In the following discussion, we will use the
+terms trend following and time-series momentum interchangeably1 . For those interested in cross-
+sectional momentum, please refer to the related literature regarding the momentum factor in
+empirical asset pricing.
+
+
+1.1        Trend Following is Everywhere
+        As a quantitative strategy, trend following is ubiquitous. Moskowitz et al. (2012) construct
+a time-series momentum portfolio using 58 assets including commodity futures, bond futures,
+currency futures, and stock index futures. They found that within a range of 1 to 12 months,
+returns are persistent, meaning assets that have risen in the past are more likely to rise in the
+future, and assets that have fallen in the past are more likely to fall in the future. From 1985 to
+2009, the time-series momentum portfolio performed excellently, with significant excess returns
+greater than 0.
+        Hurst et al. (2017) expand the research scope and time period to include 29 commodities, 11
+equity indices, 15 bond indices, and 12 currency pairs, with empirical data starting from 18802 .
+When constructing the trend following portfolio, they considered three different frequencies: 1
+month, 3 months, and 12 months. From 1880 to 2013, the trend following portfolio achieved an
+annualized return of 14.9%, and even after considering a 2% management fee and 20% performance
+fee, it still achieved an annualized return of 11.2%, with an annualized volatility of only 9.7%.
+Babu et al. (2020) add 82 alternative assets and 16 factor return series to the 58 traditional assets
+    1
+     Generally, strategies that utilize price trends for trading are referred to as trend following in industry, while
+the model proposed by Moskowitz et al. (2012) in academia is termed time-series momentum. These two concepts
+are essentially the same and often lack strict boundaries. Therefore, this article does not distinguish between them.
+   2
+     They used spot prices if futures were not available.
+
+
+
+                                                          2
+Trend Following Strategy: A Practical Guide                                               2025/02/17
+
+covered by Moskowitz et al. (2012), demonstrating that trend following is widespread among these
+assets and remains effective in the long term. By expanding into new asset types, the Sharpe ratio
+of a trend following strategy can be largely improved.
+      These empirical findings all indicate that trend following strategies are present across time
+dimensions, asset categories, and investment cycles, with impressive performance.
+
+
+1.2       Underlying Logic
+      The long-term vitality of trend following must be supported by solid logical foundations. As
+all history is in-sample, therefore when evaluating whether an investment strategy holds water, if
+one focuses too much on risk-return metrics like returns or Sharpe ratios without paying attention
+to why it works, even the most impressive data can be fragile.
+      Academically, when explaining the source of factor returns, two perspectives are often consid-
+ered: risk compensation and mispricing. The former is from the perspective of classical finance,
+suggesting that an anomaly can achieve excess returns because it bears some systematic risk, and
+the excess returns are compensation for that risk; the latter is from the perspective of behav-
+ioral finance, suggesting that either some constraint prevents the anomaly from disappearing, or
+investor cognitive biases lead to irrational behavior.
+      Moskowitz et al. (2012) study the source of trend following returns from a risk perspective.
+Time-series regression results showed that trend following cannot be explained by existing risk
+factors (such as HML, SMB, etc.); not only is it difficult to identify the source of risk, but
+the authors also find that trend following performs well when the market performs poorly, such
+as during the 2008 financial crisis when (Commodity Trading Advisor) CTA funds stood out.
+Therefore, it is difficult to understand trend following from a risk compensation perspective. It is
+much easier to discuss from a behavioral finance perspective, as Clare et al. (2016) and Hurst et al.
+(2017) have done in detail. The efficient market hypothesis suggests that when important new
+information appears, prices will immediately react to match the latest intrinsic value. However,
+due to investor cognitive biases, the market is not completely efficient but slowly absorbs the
+impact of new information.
+      Generally, the formation of a trend can be divided into three stages, as shown in Figure 13 . In
+the initial stage, due to anchoring effects and disposition effects, prices underreact to information.
+
+       Anchoring Effect: Investors tend to anchor their views on recent historical data, unwilling
+        to quickly change their minds, leading to slow reactions to new information and thus slow
+        price reactions.
+
+       Disposition Effect: Investors tend to sell profitable stocks too early to realize gains; con-
+        versely, they are reluctant to cut losses on losing stocks. The consequence is that prices do
+  3
+      This figure is redrawn based on Hurst et al. (2017).
+
+
+                                                             3
+Trend Following Strategy: A Practical Guide                                             2025/02/17
+
+
+
+
+                                Figure 1: Trend Formation Process
+
+     not rise or fall abruptly but move slowly.
+
+    Non-Profit Operations: Some non-profit operations also slow down price reactions, such
+     as central banks intervening in the foreign exchange and fixed income markets to reduce
+     exchange rate and interest rate volatility.
+
+   Once a trend starts, it enters the second stage: trend continuation or even overreaction, often
+due to herding effects, confirmation bias, and representativeness bias.
+
+    Herding Effect: Also known as the bandwagon effect, when investors’ views differ from the
+     majority, they tend to doubt and change their views to align with the group. After a price
+     rise or fall begins, investors will join the trend like a herd.
+
+    Confirmation and Representativeness Bias: After a trend starts, investors use recent price
+     movements to infer the future, selectively focusing on the direction of recent profits; more-
+     over, once they confirm their views, they will seek various data and information to support
+     their views, allowing the price trend to continue.
+
+   Finally, trends do not last forever, and prices do not move in one direction indefinitely. In the
+end, prices may have overreacted, deviating significantly from fundamentals, leading to a reversal
+and the end of the trend.
+
+
+
+                                                   4
+Trend Following Strategy: A Practical Guide                                                   2025/02/17
+
+1.3         Outline
+        The rest of this paper is organized as follows. Chapter 2 discusses the risk-return characteristics
+of trend following strategies, introducing the concepts of divergent risk-taking and the convex
+nature of the return profile. Chapter 3 covers the importance of time scales for calculating trends
+and presents empirical simulations highlighting the effectiveness of different time scales for trend
+following strategies. In Chapter 4, we compare various trend calculation methods, including
+time-series momentum, moving average crossovers, and Kalman filtering, and explore the relative
+effectiveness of each. Chapter 5 examines position sizing and leverage management strategies,
+emphasizing target volatility approaches and their impact on portfolio risk. Chapter 6 addresses
+the essence of trend signals, discussing why trend following is inherently a right-side trading
+strategy and the causes of the signal lag. Chapter 7 explores the properties of trend following
+strategies, including crisis alpha, long-short asymmetry, and the win rate/profit-loss ratio. Chapter
+8 presents extensive empirical evidence from China’s futures markets, analyzing the performance
+of trend following strategies across various sectors. Chapter 9 investigates whether trend following
+strategies have failed and the challenges faced by practitioners. Chapter 10 discusses the critiques
+and controversies surrounding trend following strategies. Finally, Chapter 11 concludes.
+
+
+2         Risk-Return Characteristics
+
+2.1         Divergent Risk Taking
+        Jusselin et al. (2017) point out that the return characteristics of time-series momentum strate-
+gies is convex. When the trend is small, the strategy yields negative returns; only when the trend
+is significant (either upward or downward) does the strategy generate positive returns.
+        According to this analysis, the losses of time-series momentum strategies are limited, while the
+potential gains are unbounded. It is worth noting that the limited losses are conditional, requiring
+that the strategy does not employ excessive leverage (as high leverage non-linearly amplifies both
+gains and losses) and that asset prices are continuous. Examining the PnL curve of trend following
+strategies, it is often observed that such a strategy often experiences a series of small drawdowns,
+followed by a significant upward movement (a large trend), which offsets the previous drawdowns,
+resulting in positive long-term returns. This characteristic of limited losses and unlimited gains
+leads to the positive skewness of the strategy’s return distribution. This distribution is also known
+as the “Holy Grail” distribution.
+        It is precisely this unique characteristic that allows trend following strategies to stand out
+when other assets experience tail risks, which is why they are renowned as crisis alpha4 . Why
+do different strategies exhibit different distribution characteristics in their returns? This can be
+    4
+        We will talk more about this in Section 7.
+
+
+
+                                                       5
+Trend Following Strategy: A Practical Guide                                                2025/02/17
+
+explained by two types of risks. Any investment strategy that aims to generate profits must bear
+certain risks. The type of risk a strategy assumes determines the characteristics of its return
+distribution. Risks can be broadly categorized into convergent risks and divergent risks, and thus
+strategies can also be classified into convergent risk-taking and divergent risk-taking.
+
+    Convergent risks are those that are understood and can be measured through modeling;
+
+    Divergent risks are unknown, unpredictable, and cannot be well-measured risks.
+
+   When constructing a convergent risk-taking strategy, people make investment decisions based
+on prior beliefs about the asset’s price movement derived from financial or economic theory. Con-
+versely, when constructing a divergent risk-taking strategy, people assume that the future move-
+ment of the asset is unknown and make decisions based on the asset’s past price movements
+without using any a prior beliefs about whether the asset will rise or fall.
+   For example, value investing in the stock market is a representative of convergent risk-taking.
+This type of strategy involves in-depth research to uncover the intrinsic value of companies, buying
+when the price is below the intrinsic value, and patiently waiting for the price to revert to its
+intrinsic value, disregarding short-term fluctuations or even sustained declines. These are the
+risks that this type of strategy is willing and actively chooses to bear. On the other hand, trend
+following strategies are representatives of divergent risk-taking. These strategies do not make any
+judgments about the intrinsic value of the asset but strictly trade based on price movements:
+buying when the price rises and selling when the price falls. They gradually increase positions
+when profitable and quickly close positions when incurring losses. Because of this, trend following
+strategies belong to divergent risk-taking strategies, and their returns exhibit the characteristics
+of the holy grail distribution, which is why trend following strategies remain enduringly popular.
+   It is necessary to point out that while the return distribution of a trend following strategy
+is appealing, achieving such an outcome is extremely challenging. The most difficult aspect of
+trend following strategies is holding onto positions during trends to let profits run (as only in this
+way can the right-tail of the return distribution be achieved). However, due to cognitive biases,
+people tend to have an excessive preference for low returns with high certainty, thus often closing
+profitable positions prematurely. Only by overcoming these human errors can one truly enjoy the
+benefits of the holy grail distribution provided by trend following strategies.
+
+
+2.2    Trend vs. Volatility
+   Assuming asset prices follow a geometric Brownian motion:
+
+                                         dP
+                                            = µdt + σdB,                                          (1)
+                                         P
+
+
+
+                                                  6
+Trend Following Strategy: A Practical Guide                                                         2025/02/17
+
+where P is the asset price, µ is the drift rate, σ is the volatility, and B is a standard Brownian
+motion. From this model, it is easy to see that (long) trend following strategies favor positive drift
+rates in returns (i.e., the larger µ, the better) and dislike volatility (i.e., the smaller σ, the better).
+A larger µ and/or a smaller σ indicate a more significant trend5 . Therefore, when evaluating
+whether an asset is suitable for trend following strategies, both µ and σ must be considered.
+Hence, the industry considers the Sharpe ratio an excellent indicator of the strength of an asset’s
+trend. Similarly, for strategies that can short, we pay more attention to the absolute value of the
+Sharpe ratio.
+        Using options pricing terminology, let S represent the net value of the trend following strategy,
+and P and σ represent the price and volatility of the underlying asset, respectively. The Delta
+and Vega of the strategy are:
+                                                        ∂S                  ∂S
+                                             Delta =       ,       Vega =      .                           (2)
+                                                        ∂P                  ∂σ
+Delta can be understood as the impact of changes in asset prices on the net value of the trend
+following strategy. Taking a long strategy that chases upward trends as an example, it should have
+a positive Delta, meaning that as prices rise, the strategy’s net value increases. On the other hand,
+Vega represents the impact of return volatility on the net value of the trend following strategy.
+        Roncalli (2017) points out that trend following strategies have negative Vega, meaning that
+short-term volatility in returns causes a decline in the strategy’s net value. Since “volatility is
+common, while trends are not,” repeated volatility in assets dominates the performance of trend
+following strategies (slow declines, losses) until a significant trend emerges and is captured by the
+strategy. Taking the U.S. stock market as an example, as it reflects economic growth and the profit
+growth of public companies, the market exhibits a slow bull structure. In such a structure, trend
+following strategies that use long-term trend signals perform better than those that use short-term
+trend signals.
+
+
+3         Time Scale for Calculating the Trend
+        Often, one may ask what the most important aspect is to consider for making a profit with
+a trend following strategy. Literature tell us that the key elements in trend following include the
+trend measure (i.e., selecting the best indicator to measure the strength of a trend) and position
+sizing (position management). Undoubtedly, these two points are crucial for trend strategies. How-
+ever, in our view, the most important aspect is choosing the appropriate time scale for calculating
+the trend.
+        For example, Winton Capital conducted a study on the time scales of trend strategies for
+20 assets from four major categories (Winton 2013). In their empirical study, they considered a
+period of 30 years since 1984, and defined trend following strategies of three different time scales
+    5
+        Of course, for strategies that can short, only the absolute value of µ needs to be large.
+
+
+                                                               7
+Trend Following Strategy: A Practical Guide                                              2025/02/17
+
+— fast (short time scale), medium, and slow (long time scale) — based on the turnover rates of the
+strategies (higher turnover implies a shorter time scale) and trades the aforementioned 20 assets.
+After adjusting for risk, the performance of these three strategies can be summarized as follows.
+The high turnover strategy basically became ineffective starting from 2004, while the medium
+and slow trend following strategies remained effective after 2004. Since 2012, the performance of
+the medium strategy has also weakened compared to its previous performance, whereas the slow
+strategy has remained relatively stable, although its absolute return is not as high as that of the
+fast and medium turnover strategies.
+      Let’s look at two other examples. Figure 2 shows long-only trend following strategies using the
+same parameters for the Shanghai Stock Exchange (SSE) Composite Index and the S&P 500 Index
+as assets. These parameters were tuned for the Chinese stock market via backtesting. The results
+show that the trend parameters suitable for the Chinese stock market are completely ineffective
+for the US stock market6 .
+
+
+
+
+                            Figure 2: Examples of Trend Following Strategies
+
+      The sharp contrast illustrates that the effectiveness of a trend following strategy depends on
+  6
+      This is not uncommon in practice.
+
+
+                                                   8
+Trend Following Strategy: A Practical Guide                                               2025/02/17
+
+matching the time scale for calculating the trend with the return characteristics of the asset.
+Next, we explore the return characteristics of assets and how that impact the performance of
+trend following strategies via intensive simulation studies.
+
+
+3.1    Model of Log Return
+   The above examples show that any trend following strategy is only applicable to investment
+assets whose returns conform to its assumptions. So, what are the general characteristics of
+returns for investment assets? How can we use these characteristics to select a suitable trend
+following strategy? To explore this, this section decomposes returns into three parts: (long-term)
+mean, autocorrelation, and white noise, and studies them through simulations. Reviewing what
+we learned in time series analysis lectures, here are the definitions:
+
+    Long-term Mean: It represents the mean of the returns per unit time over the long term.
+
+    Autocorrelation: To simplify the discussion, we only consider the autocorrelation at lag 1
+      here; it represents the correlation of returns between two adjacent units of time.
+
+    White Noise: The random fluctuation of returns within each unit of time; the random
+      fluctuations at different times are independent of each other.
+
+   Among these three parts, white noise is the random disturbance; for the other two parts,
+the higher the long-term mean and the stronger the autocorrelation, the more effective the trend
+following strategy will be. So, which of these two factors is more important? How do they
+respectively affect the performance of a trend following strategy? To facilitate analysis, we use a
+mathematical model to artificially synthesize log returns. These log returns satisfy a predefined
+long-term mean µ, autocorrelation ρ, and the volatility of white noise σ. The procedure to generate
+the return time series is summarized below:
+
+  1. Initialization: b0 ∼ N (0, σ),
+
+  2. White Noise Sequence: et ∼ N (0, σ) for t = 1, 2, . . .,
+
+  3. Auxiliary Series Generation: bt = ρ · bt−1 + et for t = 1, 2, . . .,
+
+  4. Return Series Construction: rt = bt − µb + µ for t = 0, 1, 2, . . ., where µb is the sample
+      mean of bt .
+
+   In the procedure above, et is a white noise series that follows a normal distribution with a
+mean of 0 and a standard deviation of σ. rt is the simulated log return series. To ensure that it
+satisfies the given parameters µ and ρ, an auxiliary series bt is used in the construction process.
+First, the series {bt } is iteratively constructed to satisfy the autocorrelation ρ. Since constructing
+
+                                                  9
+Trend Following Strategy: A Practical Guide                                                    2025/02/17
+
+{bt } may introduce an unexpected mean µb , the process removes µb and adds back the given mean
+µ when constructing rt . Thus, the final generated log return series {rt } satisfies both parameters.
+      Using this mathematical model, with µ, ρ, and σ as inputs, we can generate a log return series.
+To ensure this study is relevant to investment practice, the values of these three parameters need
+to be close to reality. Additionally, since the focus of the study is on the impact of µ and ρ on
+trend following strategies, the value of σ is fixed.
+      Assuming we are synthesizing a daily return series of the stock market, a reasonable value for
+σ is 0.01. When determining the values of µ and ρ, consider the following information as reference:
+
+       SSE Composite Index from May 26, 2005, to May 25, 2017 has a mean of 0.037% and an
+        autocorrelation of 0.023.
+
+       SSE Composite Index during the bull market of 2015 (February 9, 2015, to June 12, 2015)
+        has a mean of 0.6% and an autocorrelation of 0.09.
+
+       SSE Composite Index after the stock crash (March 1, 2016, to May 25, 2017) has a mean of
+        0.049% and an autocorrelation of 0.048.
+
+       S&P 500 Index after the global financial crisis (January 1, 2010, to January 1, 2017) has a
+        mean of 0.04% and an autocorrelation of −0.049.
+
+      As seen, apart from the bull market period in the Chinese stock market7 , the mean log daily
+returns are around 0.04%. In terms of autocorrelation, except for the negative value of the S&P
+5008 , the autocorrelation of the Chinese stock market in different periods ranges from 0.02 to 0.1.
+Based on the above data, we choose the following values µ and ρ:
+
+       µ: 0.01%, 0.05%, 0.1%.
+
+       ρ: 0.01, 0.1, 0.2.
+
+      Combining these two parameters in pairs results in nine different combinatons of µ and ρ,
+allowing us to construct log return series of any length using the aforementioned mathematical
+model. In the simulation, each series contains 2500 points9 . Additionally, since we are generating
+log returns, the cumulative sum of this series represents the corresponding log price curve. In the
+experiment, we assume the initial price of the investment asset is 100. Figure 3 shows a set of
+sample price curves generated under these nine combinatons of µ and ρ.
+      From these simulated price curves, we can observe the following:
+  7
+     Note that the mean return during this period was an order of magnitude higher than usual, which will be
+discussed later.
+   8
+     Although it is negative, it is very close to 0.
+   9
+     Assuming 250 trading days per year, this length corresponds to ten years.
+
+
+
+                                                    10
+Trend Following Strategy: A Practical Guide                                           2025/02/17
+
+
+
+
+                            Figure 3: Examples of Generated Prices
+
+    When µ is much smaller relative to the volatility σ (about two orders of magnitude smaller),
+     the local trend of the price curve is dominated by autocorrelation ρ (and random noise).
+     Since µ is too small relative to the random noise σ, no significant upward trend can be
+     observed on any local scale.
+
+    When µ is between one and two orders of magnitude smaller than σ (which is the typical
+     market condition), the importance of µ to the price trend gradually increases. At this point,
+     small autocorrelation ρ has a minimal impact on the price; when the autocorrelation ρ is
+     large enough, it may cause local phases of rising and falling intervals.
+
+
+                                                11
+Trend Following Strategy: A Practical Guide                                              2025/02/17
+
+    When µ becomes large enough to be only one order of magnitude smaller than the volatility
+        σ or even larger (which is the case in a bull market), the influence of the mean on the price
+        makes the impact of the autocorrelation ρ on the price negligible. The price sequence shows
+        a continuous upward trend.
+
+How do these different parameters affect the trend following strategy? We explore this quesiton
+next.
+
+
+3.2      Trend Following Performance
+   For each combination of µ and ρ, we generated 5000 simulations, each with 2500 data points.
+For each simulation, we implemented a dual moving average strategy with:
+
+    Slow moving average: 50-day simple moving average.
+
+    Fast moving average: 13-day simple moving average.
+
+The trading rules are:
+
+    When not holding any position, buy when the fast moving average crosses above the slow
+        moving average.
+
+    When holding a position, sell when the fast moving average crosses below the slow moving
+        average.
+
+Performance metrics are:
+
+    Annualized return.
+
+    Annualized Sharpe ratio.
+
+    Maximum drawdown.
+
+For each combination of µ and ρ, we ploted histograms for the distributions of these performance
+metrics in Figures 4 to 12.
+
+
+
+
+                                                  12
+Trend Following Strategy: A Practical Guide                          2025/02/17
+
+Case 1: µ = 0.01% and ρ = 0.01
+
+
+
+
+                         Figure 4: Simulation Performance (Case 1)
+
+Case 2: µ = 0.01% and ρ = 0.1
+
+
+
+
+                         Figure 5: Simulation Performance (Case 2)
+
+Case 3: µ = 0.01% and ρ = 0.2
+
+
+
+
+                         Figure 6: Simulation Performance (Case 3)
+
+
+
+
+                                              13
+Trend Following Strategy: A Practical Guide                          2025/02/17
+
+Case 4: µ = 0.05% and ρ = 0.01
+
+
+
+
+                         Figure 7: Simulation Performance (Case 4)
+
+Case 5: µ = 0.05% and ρ = 0.1
+
+
+
+
+                         Figure 8: Simulation Performance (Case 5)
+
+Case 6: µ = 0.05% and ρ = 0.2
+
+
+
+
+                         Figure 9: Simulation Performance (Case 6)
+
+
+
+
+                                              14
+Trend Following Strategy: A Practical Guide                           2025/02/17
+
+Case 7: µ = 0.1% and ρ = 0.01
+
+
+
+
+                         Figure 10: Simulation Performance (Case 7)
+
+Case 8: µ = 0.1% and ρ = 0.1
+
+
+
+
+                         Figure 11: Simulation Performance (Case 8)
+
+Case 9: µ = 0.1% and ρ = 0.2
+
+
+
+
+                         Figure 12: Simulation Performance (Case 9)
+
+
+
+
+                                              15
+Trend Following Strategy: A Practical Guide                                               2025/02/17
+
+    We observe the following from the experimental results for these nine sets of parameters:
+
+    1. In the first to third sets of parameters, since the long-term mean is two orders of magnitude
+       smaller than the random noise, the price curves show frequent fluctuations across different
+       time scales in the long term. As a result, the strategy frequently generates false signals. The
+       average performance of the strategy under these three sets of parameters fails to achieve
+       positive returns.
+
+    2. In the fourth to sixth sets of parameters, as the long-term mean increases, the combined
+       effect of the mean and autocorrelation allows the price curves to overcome random noise
+       and exhibit upward trends across different time scales. When the scale of the upward trend
+       matches the parameter settings of the dual moving average strategy, the strategy achieves
+       positive returns.
+
+    3. In the seventh to ninth sets of parameters, due to the further increase in the long-term mean,
+       the effectiveness of the trend strategy improves. The expected performance (i.e., expected
+       Sharpe ratio and expected return) of the trend following strategy is far from zero.
+
+    From these results, we can draw the following conclusions:
+
+    1. µ dominates over autocorrelation ρ — compared to autocorrelation, the low-frequency com-
+       ponent µ represents the real trend that can be captured by a trend following strategy.
+
+    2. The difference in the orders of magnitude between µ and σ affects the performance of the
+       strategy, which implies that choosing an appropriate time scale for calculating the trend is
+       crucial.
+
+
+4     Which Trend Measure?
+    On the technical side, there are many ways to measure trends: time series momentum based on
+past cumulative returns, moving average crossovers or channel breakouts from technical analysis,
+various state space models like Kalman filter, linear regression methods using prices, and even
+frequency domain analysis (such as Fourier transform, wavelet analysis, etc.).
+    When the backtest results of a particular method are not promising, people’s first reaction is
+always to look for another (and usually more complex) method to calculate the trend. However,
+at their core, all the above methods are based on the information contained in the time series of
+prices or returns. Is there really a method or indicator that significantly outperforms others? This
+is the question that concerns this section.
+
+
+
+
+                                                  16
+Trend Following Strategy: A Practical Guide                                               2025/02/17
+
+4.1    Trend Signature Plots
+   To answer this question, Levine and Pedersen (2016) introduce the concept of trend signature
+plots. The purpose is to plot different trend calculation methods as functions of the weights of
+prices or returns over time steps. This allows us to compare different trend measures. Next,
+we explain trend signature plots using time series momentum and moving average crossovers as
+examples.
+   To facilitate discussion and mathematical derivation, we consider log prices (denoted by pt
+for time t) — because the difference of log prices is the log return (i.e., rt = pt − pt−1 ), which
+allows for a straightforward comparison between prices and returns when evaluating different trend
+calculation methods.
+   Time series momentum is generally calculated by taking a weighted average of returns over a
+past period (commonly using equal weights), resulting in a trend indicator. Assuming the current
+time is t, the time series momentum (TSMOM) indicator at time t is:
+
+                                               ∞
+                                               X
+                                 TSMOMt =            cs (pt−s+1 − pt−s ).                          (3)
+                                               s=1
+
+
+For generality, the above expression is written as an infinite series. In practical applications, for a
+given calculation window N , the weights cs for all s > N are set to zero.
+   Now, let’s look at the moving average crossover. It uses two moving averages — a fast and
+a slow one — to form the trend indicator. Each moving average is a weighted average of the
+price series over a given window (with different weights resulting in simple moving averages,
+exponential moving averages, etc.). The trend signal is the difference between the fast and slow
+moving averages. The mathematical expression for the moving average crossover is:
+                                               P∞
+                                  MAfast
+                                    t    =            fast
+                                                 s=1 ws pt−s+1 ,
+
+
+                                               P∞
+                                 MAslow
+                                   t    =             slow
+                                                 s=1 ws    pt−s+1 ,
+                                                                                                   (4)
+
+                            MACROSSt = MAfast
+                                         t    − MAslowt
+                                       P∞      fast
+                                     =  s=1 (w s    −  wsslow )pt−s+1 .
+
+   Comparing TSMOM and MACROSS methods for calculating trends, they may appear very
+different. However, through simple derivation, we can see that MACROSS can be easily expressed
+as a combination of returns weighted by a specific set of weights. Specifically, starting from the
+
+
+
+
+                                                  17
+Trend Following Strategy: A Practical Guide                                              2025/02/17
+
+definition of TSMOM, we can transform it into the following form:
+                                    P∞
+                     TSMOMt =          s=1 cs (pt−s+1 − pt−s )
+                                = c1 (pt − pt−1 ) + c2 (pt−1 − pt−2 ) + · · ·                    (5)
+                                = c1 pt + (c2 − c1 )pt−1 + (c3 − c2 )pt−2 + · · · .
+
+   Comparing the above expression with the definition of MACROSS, we can see the relationship
+between the weights c and the MACROSS weights wfast and wslow :
+                      s                                      s               s
+
+
+                                c1 = w1fast − w1slow
+
+                                                                                                 (6)
+                                cs = cs−1 + wsfast − wsslow
+                                     Ps       fast
+                                   =    j=1 (wj    − wjslow ), s ≥ 2.
+
+   This result implies that if we weight the returns by cs , the resulting trend signal is equivalent
+to the moving average crossover. Using this equivalence, different trend calculation methods can
+be plotted as the weights of returns over time, resulting in a trend signature plot. It is important
+to note that the sum of the return weight series obtained by converting the price weights does not
+equal 1. To compare the trend signature plots of different methods, the return weights need to be
+normalized.
+   The above derivation for moving average crossovers can also be generalized to more common
+cases. Suppose a trend calculation method is a weighted average of the price series: Σwi pi , then
+the corresponding return weight coefficient is:
+                                           s
+                                           X
+                                  cs = A         wj ,    s = 1, 2, · · · ,                       (7)
+                                           j=1
+
+
+where A is the normalization constant for {cs }. Figure 13 shows the trend signature plots for
+three different methods (with the horizontal axis starting from s = 0 representing the most recent
+moment and increasing to represent larger time lags):
+
+  1. TSMOM signal with a window of 260 trading days and equal weighting.
+
+  2. Moving average crossover signal calculated with simple moving averages over windows of 20
+     and 260 days.
+
+  3. Moving average crossover signal calculated with exponential moving averages with centers
+     of mass of 32 and 128.
+
+   From the figure, it is evident that despite the apparent differences between time series mo-
+mentum and moving average crossovers, their underlying trend signatures are quite similar; the
+
+
+                                                    18
+Trend Following Strategy: A Practical Guide                                           2025/02/17
+
+
+
+
+                                Figure 13: Trend Signature Plot 1
+
+similarity is even higher between simple moving averages and exponential moving averages, which
+are both forms of moving average crossovers. This indicates that it is unrealistic to expect expo-
+nential moving averages to largely outperform simple moving averages.
+
+
+4.2    Other Measures
+   This section considers two other common methods to measure trend: Kalman filter and linear
+regression.
+   Kalman filter (Kalman 1960) is an effective method for estimating the hidden state from a
+noisy dynamic linear system. For a price series, the simplest model is the random walk plus local
+trend, where the value of the trend is unobservable and needs to be estimated using Kalman filter.
+Harvey (1984) points out that when using Kalman filter to analyze the local trend model, the
+optimal estimate of the local trend is the exponential moving average of the return series.
+   Figure 14 compares the trend signature plots of three different trend calculation methods:
+
+  1. TSMOM signal with a window of 260 trading days and equal weighting;
+
+  2. Moving average crossover signal calculated with exponential moving averages with centers
+      of mass of 32 and 128;
+
+  3. Kalman filter trend signal represented by exponential smoothing with a center of mass of
+      96.
+
+   Compared to the other two methods, Kalman filter tends to assign higher weights to recent
+returns. Other common linear filters, such as the Hodrick and Prescott (1997) filter, can yield
+similar results, which will not be elaborated here.
+
+                                                19
+Trend Following Strategy: A Practical Guide                                                    2025/02/17
+
+
+
+
+                                  Figure 14: Trend Signature Plot 2
+
+   Now, let’s look at estimating a linear regression model using OLS. In particular, we regression
+the log price ps to the time index s, i.e., ps = α + βs + e, and use the sign of the regression
+coefficient β as an indicator of an upward or downward trend. Specifically, assume the window
+for regression is N and therefore the sample points are (1, pt−N +1 ), (2, pt−N +2 ), . . ., (N − 1, pt−1 ),
+(N, pt ). The OLS estimator of β is:
+                                          PN                       N +1
+                                                                             
+                                              s=1 (p t−s+1 −  p̄)   2
+                                                                         − s
+                                   β̂ =         PN                    2       ,                        (8)
+                                                           N +1
+                                                    m=1     2
+                                                                 − m
+
+where p̄ is the average price over N periods. Additionally, through simple algebra, we can find:
+
+     N                  "        X N
+                                           #                     
+    X        N +1             N +1                  N +1        N +1
+        p̄        − s = p̄ N        −     s = p̄ N         −N           = 0.                            (9)
+    s=1
+               2                2     s=1
+                                                      2           2
+
+Thus, the expression of β̂ can be further simplified to:
+
+                                        N
+                                              "                        #
+                                                     N +1
+                                                                
+                                        X
+                                                       2
+                                                           −s
+                                 β̂ =             PN              2       pt−s+1 .                    (10)
+                                                         N +1
+                                        s=1        m=1    2
+                                                              − m
+
+This implies that β̂ is a weighted average of the prices. Therefore, we can use the method mentioned
+in the previous section to convert it into weighted average of returns and obtain the trend signature
+plot. Figure 15 compares the trend signature plots of three different trend calculation methods,
+showing that the trend signals calculated by OLS are essentially no different from TSMOM and
+MACROSS:
+
+
+
+                                                         20
+Trend Following Strategy: A Practical Guide                                                 2025/02/17
+
+   1. TSMOM signal with a window of 260 trading days and equal weighting;
+
+   2. Moving average crossover signal calculated with simple moving averages over windows of 20
+      and 260 days;
+
+   3. Trend signal obtained by linear regression.
+
+
+
+
+                                 Figure 15: Trend Signature Plot 3
+
+   In the comparison in this and the previous sections, we deliberately set the parameters of
+different trend calculation methods to the same time scale (only such a comparison is meaningful).
+This is very important as it indicates that once the time scale is chosen, the effectiveness of different
+trend calculation methods is very close. Ultimately, these trend calculation methods can all be
+converted into their respective trend signature plots. Although their forms may differ, they are
+essentially similar weighted averages of returns.
+
+
+4.3    An Example
+   This section uses the example from Levine and Pedersen (2016) to compare the TSMOM and
+MACROSS methods and to confirm that, for trend strategies, the time scale for calculating the
+trend is far more important than the specific method chosen at a given scale.
+   Specifically, for these two methods, consider three time scales: one month, three months, and
+one year. The investment targets are the 58 assets mentioned in Moskowitz et al. (2012) (including
+commodity futures, bonds, stocks, and forex). For these three time scales, the parameters for
+TSMOM and MACROSS are summarized in Table 1. The fast and slow moving averages in
+
+
+
+                                                   21
+Trend Following Strategy: A Practical Guide                                                          2025/02/17
+
+
+                      Table 1: Trend Following Strategies at Different Time Scales
+
+                       Time Scale                 TSMOM                        MACROSS
+                       One Month                TSMOM(22)                    MACROSS(3, 12)
+                      Three Months              TSMOM(66)                    MACROSS(8, 32)
+                        One Year                TSMOM(260)               MACROSS(32, 128)
+
+
+
+                           Table 2: Performance of Trend Following Strategies
+
+        Signal Name            Annual Return           Annualized Volatility           Sharpe Ratio
+     MACROSS(3,12)                   10.3%                       10.2%                        1.01
+     MACROSS(8,32)                   10.9%                       10.3%                        1.06
+    MACROSS(32,128)                  12.8%                       9.7%                         1.33
+        TSMOM(22)                    9.8%                        10.1%                        0.97
+        TSMOM(66)                    12.1%                       10.1%                        1.20
+      TSMOM(260)                     14.2%                       9.8%                         1.45
+    The data in this table are reproduced from Levine and Pedersen (2016).
+
+
+
+MACROSS use exponential moving averages, with the parameters representing the centers of
+mass.
+    The returns, volatility, and Sharpe ratios of the trend following strategies constructed using
+these methods are shown in Table 2. They suggest that for a given time scale, the performances of
+TSMOM and MACROSS are very close; choosing the correct time scale for calculating the trend
+helps improve the strategy’s returns and Sharpe ratios. The key to the success of a trend following
+strategy lies in selecting the appropriate time scale, position control, portfolio construction, and
+risk management. Compared to these factors, the specific indicator or method used to calculate
+the trend is less important.
+
+
+5       Position Sizing
+    Position sizing, also referred to as leverage management, is a critical component of quantitative
+strategies. One common leverage management method is the target volatility (or target risk)
+approach, which dynamically adjusts leverage to maintain portfolio risk at a predefined level. The
+leverage L is determined as:
+                                                        σtgt
+                                                  L=         ,                                             (11)
+                                                        σtp
+where σtgt is the target volatility level, and σtp is the estimated volatility of portfolio p at time t.
+For example, if the target volatility is 10% and the current portfolio volatility is 5%, the leverage
+
+                                                      22
+Trend Following Strategy: A Practical Guide                                                      2025/02/17
+
+is set to 2; if portfolio volatility rises to 20%, leverage is reduced to 0.5 (i.e., 50% position sizing).
+    Empirically, Perchet et al. (2016) demonstrate the efficacy of target volatility strategies across
+assets such as emerging market equities, the Russell 1000, S&P indices, and U.S. high-yield bonds,
+showing significant improvements in Sharpe ratios. Papageorgiou et al. (2017) find that volatility
+timing based on historical averages enhances annual returns by approximately 200 basis points
+while reducing maximum drawdowns in U.S. and Australian equity indices. The popularity of
+target volatility models is further evidenced by indices such as the S&P Dow Jones Target Risk
+series.
+    For trend following portfolios, Moskowitz et al. (2012) adopt a single-asset target volatility
+of 40%, but this approach neglects dynamic cross-asset correlations, leading to unstable realized
+portfolio volatility. Baltas (2015) emphasizes that target volatility should instead be applied at
+the portfolio level to ensure effective risk control. Let σtTF denote the volatility of a trend following
+portfolio. The strategy can be formalized as:
+
+                                                          St
+                                          TF        σtgt X
+                                         rt,t+1 =            ω s rs ,                                     (12)
+                                                    σtTF s=1 t t,t+1
+
+       s
+where rt,t+1 is the return of the trend following signal for asset s, and ωts is its weight. Target
+volatility models provide a dynamic framework for adjusting leverage in trend following strategies,
+aligning portfolio risk-return profiles with investor preferences.
+
+
+6     The Essence of A Trend Signal
+    Trend following is a right-side trading strategy that uses a trend measure to describe the
+strength of an upward or downward trend over a past period, assuming that the trend will continue.
+Regardless of the trend measure used, we cannot predict when a trend will end in advance, so trend
+strategies often incur losses when the trend reverses. This risk-return characteristic is inherent in
+trend strategies.
+    In this section, we attempt to answer why trend strategies are inherently right-side trading
+strategies and why trend signals have a (significant) lag. This explanation begins with the dis-
+cussion about the essence of trend signals, using moving averages as an example. Mathematically,
+the essence of moving averages is a low-pass filter. Its purpose is to filter out high-frequency dis-
+turbances (noise) in a time series while retaining useful low-frequency trends. How can we extract
+the true low-frequency trend from a time series? The following mathematical explanation reveals
+the cause of the lag in trend signals.
+    Assume we have a time series {. . . , rt−2 , rt−1 , rt , rt+1 , rt+2 , . . .}, as shown in Figure 16. Addi-
+tionally, assume we have a filtering function f () that operates on the time domain t (the specific
+form of f is determined by the chosen moving average algorithm).
+
+
+                                                      23
+Trend Following Strategy: A Practical Guide                                               2025/02/17
+
+
+
+
+                                 Figure 16: A Time Series Example
+
+   Theoretically, the low-frequency filtering at any time t (denoted as xt ) can be mathematically
+represented as the convolution of the time series {rt } with the filtering function f over the entire
+time domain:                                      ∞
+                                                  X
+                                          xt =           fi rt−i .                                (13)
+                                                  i=−∞
+
+where fi represents the value of the filtering function at time t − i (which can be understood as
+the weight of rt−i ; for example, simple averaging uses equal weights). In practice, a window of
+length T is usually used to replace this infinite series, meaning that the filtering function f is only
+effective within the window and is zero outside the window, as shown in Figure 17.
+
+
+
+
+                                Figure 17: Apply Window of Size T
+
+   With the window of length T added, the low-frequency filtering at time t becomes the convo-
+lution of the time series {rt } with the filtering function f within this window:
+
+                                                t+(T −1)/2
+                                                  X
+                                        xt =                  fi rt−i .                           (14)
+                                               i=t−(T −1)/2
+
+
+The main problem with the above formula is that it uses future data to calculate the low-frequency
+component at time t. In other words, theoretical low-pass filtering (or moving smoothing) requires
+post-event data, assuming that all data points are known and the low-frequency components at all
+time points are calculated accordingly. However, this is impossible with real-time because, at any
+time t, we do not have future data. Since we cannot use data from t − (T − 1)/2 to t + (T − 1)/2
+in real-time, we can only shift the entire window left by (T − 1)/2 units on the time axis and use
+
+                                                    24
+Trend Following Strategy: A Practical Guide                                                         2025/02/17
+
+data from t − (T − 1) to t to calculate xt , as shown in Figure 18
+
+
+
+
+                        Figure 18: Apply Window of Size T without Future Data
+
+      After this adjustment, the low-frequency filtering of real-time data at time t becomes the
+convolution of the time series with the filtering function f from t − T + 1 to t:
+
+                                                        t
+                                                        X
+                                               xt =              fi rt−i .                                (15)
+                                                      i=t−T +1
+
+
+      Taking the simple moving average as an example, within the window T , the value of the fil-
+tering function at each point is 1/T (equal weights). The result obtained using the above formula
+actually represents the low-frequency component at time t − (T − 1)/2, not at time t, but we have
+to use it as the low-frequency component at time t, thus introducing a lag of (T − 1)/2.
+
+
+    No access to future data in real-time (of course!) is the fundamental reason for
+    the lag in trend signals.
+
+
+      From Eq. (15), we can see that the larger the time window T for calculating moving averages,
+the greater the lag (T − 1)/2 (for example, in stock data, daily moving averages such as MA20,
+MA30, MA50, etc., show more lag as the window T increases). Due to the relationship between
+lag and the time window for calculating moving averages, people instinctively resist using longer
+windows to calculate trends. Additionally, people prefer to use exponential weighting or other
+complex weighting methods to capture trend changes more quickly10 , but the lag caused by the
+lack of future data makes trend following inherently a right-side trading strategy.
+
+
+7       Properties of Trend-Following Strategies
+      To stick to trend following strategies, it is crucial for one to have a deep understanding of its
+risk and return properties and therefore to set correct expectations for its performance, which is
+the topic of this section.
+ 10
+      The financial industry has developed many different moving average algorithms for this purpose.
+
+
+                                                         25
+Trend Following Strategy: A Practical Guide                                                          2025/02/17
+
+7.1       Low Sharpe Ratio
+       Moskowitz et al. (2012) calculate the Sharpe ratios of trend following strategies using a 12-
+month trend measure for different asset classes. Although trend following strategies achieve pos-
+itive Sharpe ratios across all assets, most of the annualized Sharpe ratios are below 0.4. From
+the mainstream (yet irrational) market perspective, such performance is unattractive, but Sharpe
+ratios in this range are representative of the performance of trend following strategies on individual
+assets.
+       While there is limited room for improvement in trend following strategies on individual assets,
+the advantage lies in the low correlation among different asset classes. Thus, we can combine
+strategies on different assets to achieve diversification and improve risk-return characteristics11 .
+
+
+7.2       Crisis Alpha
+       CTA funds employing trend following strategies gained prominence during the 2008 financial
+crisis for their exceptional performance, earning the reputation of a drawdown protector. Corre-
+lation analysis reveals that trend following strategies exhibit a low correlation (−0.09) with the
+Chinese stock market, providing effective diversification benefits. Beyond diversification, these
+strategies excel during market downturns, a feature termed “crisis alpha.” Kaminski (2011) de-
+fines crisis alpha as “Profits gained by exploiting persistent trends that occur across markets during
+times of crisis.”
+       During panic-driven sell-offs, most assets face liquidation, and market sentiment plummets.
+Trend-following strategies profit by shorting declining markets. Hamill et al. (2016) analyze trend
+following performance during equity and bond market crashes. By sorting quarterly equity and
+bond returns into quintiles, they demonstrate that trend following generates significantly higher
+returns in the worst-performing quintiles.
+       Hurst et al. (2017) evaluate trend following performance during the ten largest U.S. equity
+market crises, including the 2008 global financial crisis, the dot-com bubble, and the 1987 crash.
+Trend following delivered positive returns in 8 out of 10 crises, with minimal losses in the remaining
+two. Allocating 20% of a 60/40 portfolio to trend following enhances Sharpe ratios and reduces
+drawdowns.
+       In China, trend following also exhibits crisis alpha properties. Figure 19 plots quarterly returns
+of the Wind All-A Index, CSI Treasury Bond Index, and Nanhua Commodity Index against trend
+following returns. The “time-series momentum smile” (Moskowitz et al. 2012) is evident: trend
+  11
+    In a simulated study, we used Winton’s The Future tool (https://tools.winton.com/thefuture/), which takes
+parameters like the Sharpe ratio and correlation of individual strategies as input and conveniently visualizes the
+combined effect of these individual strategies. We considered 20 individual trend following strategies, each with a
+Sharpe ratio of 0.4 and a correlation of 0.1 between strategies. The simulation results showed that the portfolio’s
+Sharpe ratio increased to 1.16, significantly higher than the 0.4 of individual strategies. The distribution of the
+composite strategy’s Sharpe ratio can be obtained by running more simulations.
+
+
+
+                                                        26
+Trend Following Strategy: A Practical Guide                                             2025/02/17
+
+following thrives during extreme market movements, whether bullish or bearish. Notably, during
+panic-driven declines, trend following profits from short positions, serving as an effective hedge.
+
+
+
+
+                        Figure 19: Time-Series Momentum Smile in China
+
+   To further assess drawdown protection, Figure 20 compares trend following performance during
+seven major drawdowns of the Chinese stock market, including the 2008 crisis, 2015 market crash,
+and 2018 prolonged decline. Trend following strategies generated positive returns in five episodes,
+with a remarkable 60% gain during the 2008 collapse. Even in negative episodes, losses were
+negligible relative to the broader market.
+
+
+
+
+   Figure 20: Trend-Following Performance During Drawdowns of the Chinese Stock Market
+
+
+
+7.3    Long-Short Asymmetry
+   Similar to cross-sectional factor strategies, trend following exhibits long-short asymmetry in
+time-series signals. Zakamulin (2016) explores this asymmetry in S&P 500 timing strategies. While
+shorting during bearish signals (e.g., moving average crossovers) may enhance returns, holding cash
+
+                                                 27
+Trend Following Strategy: A Practical Guide                                             2025/02/17
+
+often yields higher Sharpe ratios due to lower volatility. Jordà et al. (2019) corroborate this by
+analyzing 150 years of global asset returns: equities’ long-term upward drift (7.89% real returns
+globally) makes shorting suboptimal. Thus, “do not fight market beta” remains prudent advice.
+
+
+7.4    Win Rate and Profit-Loss Ratio
+   Grinold (1989) posits that a strategy’s information ratio (IR) depends on the information
+coefficient (IC) and breadth of bets (N ):
+                                                         √
+                                             IR = IC ×    N.                                    (16)
+
+For trend following, analogous metrics include win rate and profit-loss ratio, which jointly deter-
+mine strategy quality. To illustrate this, we consider 36 futures contracts in China. Figure 21
+shows that trend following strategies for these assets achieve an average win rate slightly above
+50%, with profit-loss ratios exceeding 1.0 for most assets, ensuring long-term profitability.
+
+
+
+
+                           Figure 21: Win Rate and Profit-Loss Ratio
+
+
+
+
+                                                  28
+Trend Following Strategy: A Practical Guide                                              2025/02/17
+
+8     Empirical Evidence from China
+    Given the ubiquity and robust theoretical foundations of trend following strategies, this section
+further investigates whether such strategies exhibit comparable efficacy in China. Adopting the
+methodology of Moskowitz et al. (2012), we conduct an empirical study on Chinese futures markets.
+
+
+8.1    Data
+    In selecting the investment universe, this study chooses 36 highly active assets, including three
+stock index futures, two bond futures, four metal futures, five energy and mineral futures, 10
+industrial futures, and 12 agricultural futures. Given the limited number of futures contracts
+in the early years, the sample period begins on June 30, 1997. Since calculating trend following
+signals and variance-covariance matrices requires sufficient data, the actual empirical period starts
+on June 30, 1999, and ends on June 28, 2019, spanning exactly 20 years.
+    As China’s futures market has developed and matured, the range of assets has expanded and
+diversified, ensuring the breadth of strategies is vast, offering ample opportunities for various
+approaches. Figure 22 illustrates the historical evolution of the number of futures assets. Initially,
+there were only three assets, which increased to four around 2000. From 2001 to 2004, the number
+of assets remained at five. Starting in 2007, the number began to grow rapidly, reaching 20
+contracts by 2012. Between 2013 and 2016, the number further expanded, reaching 35. In recent
+years, new futures assets have been steadily introduced, and as of the sample end date, there were
+36 assets.
+
+
+
+
+             Figure 22: Historical Changes in the Number of Futures Assets in China
+
+    Table 3 presents the descriptive statistics of all these assets, including the start dates, the
+sectors they belong to, and monthly return distributions. From this table, it is evident that
+aluminum (AL), copper (CU), and rubber (RU) are the assets with the longest data histories,
+having been listed before the sample period began. Equity assets started having data after the
+
+
+                                                 29
+Trend Following Strategy: A Practical Guide                                                                          2025/02/17
+
+launch of the CSI 300 stock index futures (IF) in April 2010, while government bond futures data
+began after the launch of the 5-year government bond futures (TF) in September 2013. In terms of
+skewness, the left and right skewness are approximately equally distributed. Regarding kurtosis,
+almost all assets exhibit fat-tail characteristics.
+
+                  Table 3: Descriptive Statistics of Futures Used in the Empirical Study
+
+  Asset   Count    Mean     Stdev     Min      25%       50%      75%      Max    Start Date   Skewness   Kurtosis        Sector
+    A      245    0.15%     4.87%   −15.80%   −2.57%   −0.36%    2.93%   16.09%   1999-02-26    0.2416     1.5082      Agricultural
+    C      177    0.15%     3.03%   −8.54%    −1.57%   −0.08%    2.10%    8.82%   2004-10-29    0.0033     0.4772      Agricultural
+   CF      180    −0.19%    5.33%   −13.49%   −2.72%   −0.74%    2.04%   25.90%   2004-07-30    1.6672     6.3892      Agricultural
+   CS       54    0.08%    4.74%    −10.67%   −3.13%   −0.32%    2.70%   12.02%   2015-01-30    0.3210     0.0569      Agricultural
+   JD       67    −0.25%    5.99%   −14.12%   −4.20%   −0.92%    3.47%   19.14%   2013-12-31    0.5016     0.8227      Agricultural
+    M      227     0.69%    6.26%   −18.41%   −3.52%    0.35%    4.11%   19.44%   2000-08-31    0.2591     0.4592      Agricultural
+   OI      144    −0.05%    5.94%   −22.47%   −2.61%    0.53%    2.97%   36.89%   2007-07-31    0.9004     11.147      Agricultural
+    P      140    −0.62%    6.62%   −30.49%   −4.53%   −0.70%    3.23%   24.53%   2007-11-30   −0.3576     3.6449      Agricultural
+  RM        78     0.84%    6.21%   −14.36%   −3.13%    0.78%    4.45%   19.08%   2013-01-31    0.3276     0.4958      Agricultural
+   SR      161    −0.36%    5.50%   −17.52%   −3.49%   −0.82%    2.40%   18.12%   2006-02-28    0.1843     1.5880      Agricultural
+    Y      161    −0.06%    5.83%   −21.62%   −3.55%    0.45%    2.49%   26.98%   2006-02-28    0.1417     3.7670      Agricultural
+    T       51    0.18%     1.07%   −3.10%    −0.34%    0.36%    0.93%    2.41%   2015-04-30   −0.9686     1.2605         Bond
+   TF       69     0.05%    0.86%   −2.97%    −0.50%    0.24%    0.54%    1.61%   2013-10-31   −1.0240     1.6666         Bond
+    I       68     1.70%   10.85%   −25.54%   −4.94%    1.95%    7.68%   24.42%   2013-11-29    0.0266     0.0161    Energy/Minerals
+    J       98    0.44%    10.48%   −23.08%   −6.29%   −0.86%    5.47%   39.77%   2011-05-31    1.0917     2.6716    Energy/Minerals
+   JM       75    0.68%     8.85%   −20.12%   −4.21%   −0.21%    3.20%   29.16%   2013-04-26    0.9491     1.8565    Energy/Minerals
+   SC       15    0.71%    9.10%    −23.45%   −3.76%    3.72%    6.29%   13.85%   2018-04-27   −1.3586     2.4938    Energy/Minerals
+   ZC       69     0.75%    5.79%   −10.08%   −3.45%    0.04%    5.07%   16.65%   2013-10-31    0.2710    −0.2434    Energy/Minerals
+   IC       50     0.84%   8.91%    −24.08%   −3.27%    1.52%    4.03%   23.13%   2015-05-29    0.1505     1.8193         Equity
+   IF      110    0.62%    7.28%    −18.69%   −4.58%    0.67%    4.43%   23.39%   2010-05-31    0.2310     0.8228         Equity
+   IH       50     0.41%    6.49%   −16.73%   −2.68%    0.98%    4.22%   15.19%   2015-05-29   −0.4643     0.3755         Equity
+   BU       68    −0.87%    8.01%   −21.72%   −6.56%   −0.18%    3.27%   22.89%   2013-11-29    0.3925     0.8998       Industrial
+   FG       78     0.42%   4.38%    −9.17%    −2.22%    0.42%    2.37%   12.07%   2013-01-31    0.2156     0.2276       Industrial
+   HC       63    1.28%     7.78%   −19.41%   −3.69%   −0.51%    6.55$   21.38$   2014-04-30    0.2260     0.1261       Industrial
+    L      142     0.28%    7.16%   −44.01%   −3.17%    0.51%    4.57%   23.63%   2007-09-28   −1.4807     10.035       Industrial
+  MA        92    −0.11%    6.63$   −22.56%   −3.69%   −0.48%    4.17%   18.46%   2011-11-30   −0.2415     1.5068       Industrial
+   PP       63     0.81%    6.31%   −11.17%   −3.53%    1.18%    3.22%   20.18%   2014-04-30    0.8000     1.4491       Industrial
+   RB      123    0.26%     6.93%   −23.33%   −3.86%   −0.33%    3.20%   20.79%   2009-04-30    0.3841     1.4957       Industrial
+   RU      263    −0.09%    8.54%   −29.92%   −5.36%   −0.88%    5.95%   31.38%   1997-08-29    0.1584     0.8124       Industrial
+   TA      150    −0.13%    7.29%   −34.47%   −4.38%   −0.49%    3.72%   28.99%   2007-01-31   −0.0440     3.9101       Industrial
+    V      121    −0.14%    5.12%   −12.78%   −3.12%   −0.69%    2.25%   22.59%   2009-06-30    0.7562     2.9211       Industrial
+   AL      263    −0.11%    4.03%   −12.55%   −2.32%   −0.30%    2.17%   15.28%   1997-08-29    0.2654     1.7514         Metal
+   AU      137    0.28%    4.98%    −17.93%   −1.93%   −0.11%    3.41%   13.66%   2008-02-29   −0.2256     1.3034         Metal
+   CU      263    0.61%     6.86%   −40.85%   −3.17%    0.40%    3.82%   35.26%   1997-08-29   −0.1992     7.1003         Metal
+   NI       51     0.14%    6.70%   −11.05%   −5.80%   −1.15%    5.50%   12.28%   2015-04-30    0.2396    −1.1925         Metal
+   ZN      147    −0.07%    6.92%   −37.22%   −3.18%    0.28%    4.08%   16.77%   2007-04-30   −1.2624     5.7459         Metal
+
+
+
+
+8.2       Buy and Hold
+    The long-term performance of individual assets and sector portfolios (constructed using equal-
+weighted constituents) is detailed in Tables 4 and 5, respectively. First, annualized returns demon-
+strate substantial cross-sectional variation: 18 assets exhibit negative returns while 18 show posi-
+tive performance. Bitumen (BU) records the lowest annualized return at −13.56%, whereas iron
+ore (I) achieves the highest return of 14.01%. Treasury bond and equity futures deliver positive
+returns.
+    Second, volatility characteristics reveal pronounced differences across asset classes. Equity,
+industrial commodities, and energy/chemicals sectors display the highest annualized volatility, fol-
+
+                                                                30
+Trend Following Strategy: A Practical Guide                                             2025/02/17
+
+lowed by metals and agricultural commodities, with treasury futures exhibiting minimal volatility.
+Regarding maximum drawdowns, all assets except bond futures experienced substantial historical
+declines, suggesting concentrated exposure to single assets could lead to significant losses.
+   Finally, focusing exclusively on commodity futures, individual assets show near-zero average
+and median annualized returns. However, a diversified and rebalanced long only portfolio generates
+statistically significant positive returns, consistent with Gorton and Rouwenhorst (2006).
+
+                               Table 4: Individual Asset Performance
+
+            Asset     Return     Volatility   Cumulative Return        Maximum Drawdown
+              A       1.49%       16.80%           34.54%                   −42.41%
+             AL      −2.25%       14.27%         −35.98%                    −63.98%
+             AU       1.64%       17.25%           23.74%                   −45.31%
+             BU      −13.56%      27.76%         −55.59%                    −68.41%
+              C       1.11%       10.50%           19.29%                   −29.53%
+             CF      −3.68%       18.46%         −44.04%                    −59.88%
+             CS      −0.91%       16.43%          −1.71%                    −29.37%
+             CU       7.39%       24.22%           326.0%                   −61.11%
+             FG        2.76%      15.17%           29.07%                   −37.36%
+             HC      12.91%       26.96%           85.51%                   −48.69%
+              I       14.01%      37.60%           114.1%                   −57.50%
+             IC        0.38%      30.85%           25.11%                   −36.59%
+             IF       5.73%       25.22%           48.02%                   −44.38%
+             IH       3.50%       22.48%          10.41%                    −32.00%
+              J      −1.11%       36.31%          −7.32%                    −81.65%
+             JD      −4.08%       20.77%         −24.96%                    −51.05%
+             JM       5.21%       30.67%           26.08%                   −55.23%
+              L      −0.05%       24.80%          −0.50%                    −58.68%
+             M        6.34%       21.67%          211.23%                   −39.68%
+            MA       −2.30%       22.97%         −26.40%                    −41.85%
+             NI      −3.45%       23.22%          −3.94%                    −38.59%
+             OI      −3.14%       20.58%         −26.99%                    −64.27%
+              P      −9.67%       22.93%         −69.53%                    −78.65%
+             PP        7.34%      21.86%           47.28%                   −25.58%
+             RB       0.27%       24.01%            2.95%                   −78.17%
+            RM        6.76%       21.53%           65.85%                   −28.84%
+             RU      −5.04%       29.93%         −65.67%                    −88.20%
+             SC      −0.90%       31.54%          −4.50%                    −32.82%
+             SR      −4.67%       19.05%         −55.98%                    −60.01%
+              T       1.55%        3.71%            9.34%                   −6.24%
+             TA      −4.08%       25.24%         −44.75%                    −58.25%
+             TF       0.65%        3.00%            3.02%                   −4.61%
+              V      −3.71%       17.75%         −27.50%                    −62.55%
+              Y      −2.87%       20.21%         −30.63%                    −75.06%
+             ZC        7.32%      20.07%           50.17%                   −51.73%
+             ZN      −4.73%       23.98%         −38.57%                    −72.18%
+
+
+
+
+                                                 31
+Trend Following Strategy: A Practical Guide                                                                              2025/02/17
+
+
+                                        Table 5: Sector Portfolio Performance
+
+                         Agricultural      Metal      Industrial    Energy/Minerals          Equity    Bond       All    All Commodity
+      Annual Return         1.65%          3.24%        0.18%           −2.39%               5.71%    1.08%     2.53%         2.45%
+     Annual Volatility     15.58%         16.58%       24.15%           27.75%              25.37%     3.33%    14.12%       14.36%
+    Cumulative Return      38.61%         99.35%        0.06%          −16.69%              47.75%    5.57%     64.78%       62.33%
+   Maximum Drawdown       −42.32%         −52.52%      −73.98%         −78.72%              −44.38%   −5.42%   −45.24%      −47.95%
+
+
+
+
+8.3       Return Persistence
+   One of the key points to profitability in trend following is the persistence of returns. Generally,
+the better the return persistence, the smoother the trend, and the greater the potential profits for
+the strategy. Before constructing the trend following portfolio, we first explore the persistence of
+returns across different futures assets.
+   The method used is to conduct a panel regression, where the risk-adjusted monthly returns
+of all assets are the dependent variable, and the lagged risk-adjusted monthly returns (lagged h
+months) are independent variables. The significance of the regression coefficients can be used to
+measure return persistence. The panel regression model is:
+                                                                                  
+                                               rt,s                         rt−h,s
+                                                          = α + βh                       + ϵ,                                    (17)
+                                               σt,s                         σt−h,s
+
+where rt,s is the return of asset s in month t, σt,s is the realized volatility of asset s at time t, and
+h is the number of months lagged.
+   The lag period h ranges from 1 to 60 months. For each lag h, a panel regression model is
+estimated, and the t-statistic for the regression coefficient is obtained. Intuitively, if the regression
+coefficient βh is significantly greater than 0, it suggests good return persistence; if βh is significantly
+less than 0, it suggests clear reversal characteristics. The reason for using risk-adjusted returns
+is that volatility varies greatly across assets, and using returns without adjustment would lead to
+incomparable results. The realized volatility for each asset is calculated using an exponentially
+weighted method based on daily returns.
+   Figure 23 plots the t-statistics for all lags under consideration. It can be observed that for lags
+between 1 and 12 months, the regression coefficients are significantly greater than 0 most of the
+time, indicating high return persistence within one year. On the other hand, beyond 12 months,
+a reversal pattern becomes more evident, which aligns with the observations of Moskowitz et al.
+(2012).
+
+
+
+
+                                                                   32
+Trend Following Strategy: A Practical Guide                                                2025/02/17
+
+
+
+
+                               Figure 23: Return Persistence Analysis
+
+8.4    Portfolio Construction
+   Next, following the methods of Moskowitz et al. (2012) and Hurst et al. (2013), we construct
+trend following portfolios. At the end of each month t, for each asset s, we calculate its return
+over the past h months. The direction of the trade is determined based on the sign of this return:
+if positive, the position is long; if negative, the position is short. Specifically, the trend following
+return for asset s in month t + 1 is:
+
+                                         T F,s         s       s
+                                        rt,t+1 = sign(rt−h,t )rt,t+1 ,                             (18)
+
+       s                                               s
+where rt,t+1 is the return of asset s in month t + 1, rt−h,t is the cumulative return of asset s over
+the previous h months, and h is the lookback window, with values of 1, 3, and 12 corresponding
+to 1 month, 3 months, and 1 year.
+   The weight of each asset is determined by the inverse of its volatility. This volatility-inverse
+weighting, also known as naive Risk Parity, is a simplified version of risk parity that considers only
+the volatility of the individual components, not their correlations. Assets with higher volatility
+(such as stock index futures) will have smaller weights, while assets with lower volatility (such
+as bond futures) will have larger weights. Inverse volatility weighting helps ensure that the risk
+contribution of each asset is balanced, thus providing diversification in the portfolio’s risk sources.
+   The leverage for each asset is determined by a fixed target risk, set at an annualized volatility
+of 40%. This means the leverage for each asset is adjusted based on its volatility level to achieve
+the target risk. The reason for setting the target at 40% is not arbitrary, but to ensure that
+the overall trend following portfolio has an annualized volatility of approximately 12%, which
+aligns with classical factor models, such as Fama and French (1993)’s three-factor model. After
+considering the weights and leverage, the trend following return for asset s in month t + 1 is:
+
+                                     T F,s         s         40% s
+                                    rt,t+1 = sign(rt−h,t )        r     .                          (19)
+                                                              σts t,t+1
+
+                                                     33
+Trend Following Strategy: A Practical Guide                                             2025/02/17
+
+    For each asset, we compute its performance over three different periods and combine the results
+using equal weights. The results are shown in Figure 24. It can be seen that 12 out of the 36
+assets have a negative annualized return, accounting for one-third of all assets, with six of them
+being agricultural products. The best-performing sectors are energy and minerals and industrial
+products, with metals such as copper, aluminum, and zinc performing well. Agricultural products
+show greater variation, with some performing better than others. Among stock index futures,
+the CSI 300 has an annualized return exceeding 10%, while the other two have more average
+performances due to insufficient time length. Both government bond futures have negative returns.
+    From a risk perspective, all assets have realized volatilities above 20%, with three-quarters of
+the assets having volatilities above 30%, indicating that trend following strategies for individual
+contracts carry significant risk. However, the majority of assets have volatilities below 40%, which
+is below the target risk level, indicating that multi-period allocation provides a diversification
+effect.
+
+
+
+
+                  Figure 24: Trend-Following Performance of Individual Assets
+
+    Summing all the assets using the following formula results in the trend following portfolio,
+where St represents the number of assets at time t:
+
+                                              St
+                                TF        1 X          s      40% s
+                               rt,t+1 =          sign(rt−h,t ) s rt,t+1 .                      (20)
+                                          St s=1               σt
+
+                                                   34
+Trend Following Strategy: A Practical Guide                                            2025/02/17
+
+Figure 25 and Table 6 show the performance of trend following strategies across three different
+trend signal calculation windows (i.e., 1, 3 and 12 months) and their equal-weight combination (la-
+beled as TSMOM). The Buy-and-Hold strategy is included for comparison, with all assets weighted
+equally and rebalanced monthly. It can be seen that the overall trends of the three different pe-
+riods are similar, although there are slight variations in the results. All strategies achieve high
+annualized returns, but also experience significant drawdowns. The best-performing window is the
+3-month window. The combined three-period equal-weight portfolio has an annualized return of
+16.24%, an annualized volatility of 18.51%, and a maximum drawdown of −22.63%, all of which
+outperform individual periods. When compared to the equal-weight Buy-and-Hold strategy, the
+trend following strategy shows a clear advantage, with a Sharpe ratio of 0.88, compared to the
+Buy-and-Hold Sharpe ratio of 0.18.
+
+
+
+
+                 Figure 25: Performance of Trend Following Strategies in China
+
+
+
+                   Table 6: Risk-Return Analysis of Trend Following Strategies
+
+                             1-month       3-month       12-month        TSMOM       Buy-and-Hold
+      Annual Return           14.32%        16.23%        15.80%          16.24%        2.53%
+     Annual Volatility        20.90%        20.95%        24.15%          18.51%       14.12%
+    Maximum Drawdown         −42.42%       −30.29%       −45.26%         −22.63%       −45.24%
+       Sharpe Ratio            0.69          0.77           0.65           0.88          0.18
+
+
+
+
+   Finally, when compared to common asset classes, trend following demonstrates its distinct
+appeal. Correlation analysis shows that, compared to other assets, trend following has a negative
+correlation with stock market and a near-zero correlation with bond market, allowing for an ideal
+diversification configuration.
+
+
+
+
+                                                35
+Trend Following Strategy: A Practical Guide                                                      2025/02/17
+
+9        Has It Failed?
+       In general, combining trend following strategies across multiple assets can (largely) improve
+risk-adjusted return, i.e., the Sharpe ratio. However, we must also recognize that multi-asset trend
+following strategies can still incur sustained losses in the short to medium term (i.e., 1 to 3 years).
+If one looks at the performance of the famous Barclay CTA Index12 , it is clear that its performance
+since July 2011 has been rather dismal, with almost continuous drawdowns since 2015.
+       Depending on the market conditions, trend following strategies can have periods of good per-
+formance and prolonged periods of losses. In the long run, trend following strategies can yield
+excellent returns and are worth allocating to. However, those who can truly allocate and manage
+it must have a very clear understanding of how poor its performance can be in the short to medium
+term. We next discuss this issue from three aspects, i.e., strategy capacity, asset correlation, and
+lack of trends.
+
+
+9.1       Capacity
+       The success of trend following in 2008 brought it into the spotlight, resulting in a surge of
+attention and influx of capital. Baltas and Kosowski (2013) provide an overview of this phe-
+nomenon. By the end of 2011, CTA funds had surpassed 300billionwithinthe2 trillion hedge fund
+industry. However, CTA performance was underwhelming, and one possible reason for this is that
+the capacity had reached a ceiling.
+       Baltas and Kosowski (2013) use two methods to explore whether market capacity affects trend
+following strategies. The first method was a regression analysis with fund inflows as the inde-
+pendent variable and trend following performance as the dependent variable. The results showed
+that the regression coefficient was negative but not statistically significant, indicating that fund
+inflows did not affect the performance of trend following models. The second method involved ca-
+pacity estimation, assuming the entire AUM of systematic CTAs were invested in trend following
+strategies. The results showed that the positions required for most assets did not exceed the total
+position size of each asset; in fact, the positions of trend following models represented only a small
+fraction of the overall derivatives market. Therefore, the poor performance of trend following was
+not significantly related to capacity.
+
+
+9.2       Increased Asset Correlation
+       Georgopoulou and Wang (2016) also investigate the poor performance of trend following in
+recent years, attributing the primary reason to a shift in asset correlations. Specifically, after the
+financial crisis, central banks worldwide adopted quantitative easing (QE) to stimulate economic
+  12
+    Considering the high proportion of trend following in CTAs, we use the Index’s performance to represent the
+historical performance of trend following strategies.
+
+
+                                                      36
+Trend Following Strategy: A Practical Guide                                               2025/02/17
+
+development, which disrupted and distorted the correlation among various asset classes. Unlike
+cross-sectional momentum, time-series momentum strategies prefer assets with low correlations.
+The increasing correlations led to fewer independent trends, weakening the effectiveness of trend
+following strategies.
+   To confirm this hypothesis, Georgopoulou and Wang (2016) perform a regression with trend
+following returns as the dependent variable and the QE dummy variable as the independent
+variable. The results showed that the QE coefficient was significantly negative, indicating that
+quantitative easing indeed affects trend following performance.
+   Additionally, Baltas (2015) and Baltas and Kosowski (2017) point out that the increase in asset
+correlations might be one of the reasons for the poor performance of trend following strategies.
+Baltas (2015) calculates the average correlation coefficient using intra-month data, then divided
+the assets into four groups based on the strength of their correlations, and evaluated the trend
+following performance for each group. The results showed that the higher the correlation, the lower
+the returns. Baltas and Kosowski (2017) also find that considering the correlation coefficient helps
+improve the performance of trend following strategies.
+
+
+9.3    Lack of Trends
+   AQR’s 2019 report (Babu et al. 2019) provides a detailed analysis of the reasons behind the
+failure of trend following strategies. First, they suggested that the lower risk-free rate after the
+financial crisis might be one of the factors contributing to the poor performance of trend following
+strategies (though not the main cause). This is easy to understand because futures are margin-
+based and do not require full capital allocation. Cash management can boost trend following
+returns, and a lower risk-free rate naturally reduces this boost.
+   Secondly, AQR argued that lack of diversification was not the reason behind the poor per-
+formance of trend following. To verify this, AQR defined a Diversification Multiplier, which is
+calculated by dividing the Sharpe ratio of the trend following portfolio by the average Sharpe ratio
+of individual trend following strategies. The larger this value, the better the diversification effect.
+Comparing the diversification multipliers for the full sample (1880–2018) and for 2010 to 2018,
+they found minimal difference, indicating that insufficient diversification should not be blamed.
+   Finally, AQR pointed the finger at the lack of trends. Their analysis revealed that between
+2010 and 2018 the general trend of assets was weak, which was the main reason for the poor
+performance of trend following strategies. That said, AQR is not pessimistic about the future of
+trend following. If asset trends strengthen in the future, trend following strategies could perform
+significantly better.
+
+
+
+
+                                                  37
+Trend Following Strategy: A Practical Guide                                               2025/02/17
+
+10      Skepticism
+   Although trend following has proven itself over a long period, not everyone is an advocate of
+this strategy.
+   Kim et al. (2016) point out that time-series momentum only outperforms buy-and-hold and
+cross-sectional momentum strategies when volatility adjustments are applied. Without volatility
+adjustments, there is no significant difference between time-series momentum and the buy-and-
+hold strategy. Furthermore, even with volatility adjustments, the difference between time-series
+momentum and buy-and-hold strategies is not significant. They conclude that the reason time-
+series momentum is effective is because it involves the use of leverage.
+   In addition, Huang et al. (2020) publish a paper titled “Time-series momentum: Is it there?”,
+which critically examine Moskowitz et al. (2012). In particular, Huang et al. (2020) study the same
+assets as Moskowitz et al. (2012). The authors first tested the predictive power of raw returns of
+different assets for future returns and only eight (three) assets had significant predictive ability at
+the 10% (5%) significance level. Out-of-sample performance was even worse, with 45 assets having
+negative out-of-sample R-squared values. They then replicated the panel regression of Moskowitz
+et al. (2012), obtaining similar results, but pointed out that Moskowitz et al. (2012) did not include
+an intercept term in their regression, implying an important assumption that assets have the same
+Sharpe ratio. However, it is clear that stocks, commodities, foreign exchange, and bonds do not
+have the same Sharpe ratio.
+   Based on this, Huang et al. (2020) argue that it is necessary to include the average (volatility-
+adjusted) returns of different assets in the model to control for the fixed effects; otherwise, the
+estimation results would be upwardly biased. The authors applied two bootstrap methods for ad-
+justment and found that after controlling for fixed effects, the lagged one-month returns generally
+had no significant predictive ability. Although cumulative returns over a period still exhibited
+significant predictive power, their significance declined sharply. Huang et al. (2020) further test
+out-of-sample performance and find that past returns have significant out-of-sample predictive
+power in the stock market, but not in other markets, especially in the bond and foreign exchange
+markets, where out-of-sample R-squared values are generally negative.
+   Overall, Huang et al. (2020) conclude that past returns do not have significant predictive power,
+suggesting that the foundation of time-series momentum, as proposed by Moskowitz et al. (2012),
+is not robust. They then proposed the TSH strategy, which does not require return predictions
+and determines trade direction based on the asset’s historical average return sign. The test results
+reveal that the equal-weighted time-series momentum and TSH strategies do not have significantly
+different performances, leading to the conclusion that time-series momentum might be driven by
+differences in historical returns between assets. In other words, the excess returns of time-series
+momentum are more likely due to the risk premiums earned from holding positions.
+
+
+
+                                                  38
+Trend Following Strategy: A Practical Guide                                             2025/02/17
+
+11     Conclusion
+   Trend following is widely present across various asset classes, and its underlying logic is well-
+founded. From a technical standpoint, the most important aspect of a successful trend strategy
+is determining the appropriate time scale for the trend. The parameters of the strategy should be
+adapted to the return characteristics of the asset. Once the time scale is established, the specific
+choice of trend measure does not make a fundamental difference. It might be more effective to
+focus efforts on position management to control risk.
+   From a risk perspective, trend following is considered a divergent risk-taking strategy. While
+it may not be a “holy grail,” its return distribution aligns with the “holy grail distribution,”
+which gives it advantages such as crisis alpha, making it highly valuable for portfolio allocation.
+However, it is worth noting that studies have shown that excessive use of leverage amplifies both
+the returns and risks of such strategies in a nonlinear way. Therefore, sound and effective risk
+management is a crucial component of utilizing trend following strategies.
+   Although the return distribution of trend following strategies shows positive skewness, from
+a psychological perspective, successful implementation of trend following strategies requires a
+clear understanding of their risk-return characteristics. The Sharpe ratio of trend strategies on
+individual assets is usually not high, but combining trend strategies of different low-correlation
+assets can significantly enhance the portfolio’s Sharpe ratio. Even so, trend following strategies
+are very likely to experience sustained drawdowns over shorter to medium-term periods (e.g., one
+year). Mastering trend following strategies is not about understanding their positive long-term
+expectation but rather about comprehending their risk-return characteristics and accepting their
+potential underperformance in the short term.
+   As an ancient yet highly resilient strategy, trend following strategies warrant our serious study
+and research.
+
+
+
+References
+Babu, A., A. Levine, Y. H. Ooi, L. H. Pedersen, and E. Stamelos (2020). Trends everywhere.
+  Journal of Investment Management 18 (1), 52–68.
+Babu, A., A. Levine, Y. H. Ooi, S. Schroeder, and E. Stamelos (2019). You can’t always trend
+  when you want. AQR Working Paper. Working Paper.
+Baltas, N. (2015). Trend-following, risk-parity and the influence of correlations. In Risk-Based
+  and Factor Investing, pp. 65–95. Elsevier.
+Baltas, N. and R. Kosowski (2013). Momentum strategies in futures markets and trend-following
+  funds. Paris December 2012 Finance Meeting EUROFIDAI-AFFI Paper.
+Baltas, N. and R. Kosowski (2017). Demystifying time-series momentum strategies: Volatility
+  estimators, trading rules and pairwise correlations. http://ssrn.com/abstract=2140091.
+
+                                                39
+Trend Following Strategy: A Practical Guide                                             2025/02/17
+
+Clare, A., J. Seaton, P. N. Smith, and S. Thomas (2016). The trend is our friend: Risk parity, mo-
+  mentum and trend following in global asset allocation. Journal of Behavioral and Experimental
+  Finance 9, 63–80.
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds.
+  Journal of Financial Economics 33 (1), 3–56.
+Georgopoulou, A. and J. Wang (2016). The trend is your friend: Time-series momentum strategies
+ across equity and commodity markets. Review of Finance 21 (4), 1557–1592.
+Gorton, G. and K. G. Rouwenhorst (2006). Facts and fantasies about commodity futures. Financial
+ Analysts Journal 62 (2), 47–68.
+Grinold, R. C. (1989). The fundamental law of active management. Journal of Portfolio Manage-
+  ment 15 (3), 30–37.
+Hamill, C., S. Rattray, and O. Van Hemert (2016). Trend following: Equity and bond crisis alpha.
+  https://ssrn.com/abstract=2831926. SSRN Working Paper.
+Harvey, A. C. (1984). A unified view of statistical forecasting procedures. Journal of Forecast-
+  ing 3 (3), 245–275.
+Hodrick, R. J. and E. C. Prescott (1997). Postwar u.s. business cycles: An empirical investigation.
+ Journal of Money, Credit, and Banking 29 (1), 1–16.
+Huang, D., J. Li, L. Wang, and G. Zhou (2020). Time series momentum: Is it there? Journal of
+ Financial Economics 135 (3), 774–794.
+Hurst, B., Y. H. Ooi, and L. H. Pedersen (2013). Demystifying managed futures. Journal of
+ Investment Management 11 (3), 42–58.
+Hurst, B., Y. H. Ooi, and L. H. Pedersen (2017). A century of evidence on trend-following investing.
+ Journal of Portfolio Management 44 (1), 15–29.
+Jegadeesh, N. and S. Titman (1993). Returns to buying winners and selling losers: Implications
+  for stock market efficiency. Journal of Finance 48 (1), 65–91.
+Jordà, O., K. Knoll, D. Kuvshinov, M. Schularick, and A. M. Taylor (2019). The rate of return
+  on everything, 1870–2015. The Quarterly Journal of Economics 134 (3), 1225–1298.
+Jusselin, P., E. Lezmi, H. Malongo, C. Masselin, T. Roncalli, and T.-L. Dao (2017). Understanding
+  the momentum risk premium: an in-depth journey through trend-following strategies. https:
+  //ssrn.com/abstract=3042173. SSRN Working Paper.
+Kalman, R. E. (1960). A new approach to linear filtering and prediction problems. Journal of
+ Basic Engineering 82 (1), 35–45.
+Kaminski, K. (2011). In search of crisis alpha: A short guide to investing in managed futures.
+ CME Education Group.
+Kim, A. Y., Y. Tse, and J. K. Wald (2016). Time series momentum and volatility scaling. Journal
+  of Financial Markets 30, 103–124.
+Levine, A. and L. H. Pedersen (2016). Which trend is your friend? Financial Analysts Jour-
+  nal 72 (3), 51–66.
+
+                                                40
+Trend Following Strategy: A Practical Guide                                              2025/02/17
+
+Moskowitz, T., Y. H. Ooi, and L. H. Pedersen (2012). Time series momentum. Journal of Financial
+ Economics 104 (2), 228–250.
+
+Papageorgiou, N. A., J. J. Reeves, and M. Sherris (2017). Equity investing with targeted constant
+  volatility exposure. FIRN Research Paper. https://ssrn.com/abstract=2614828.
+
+Perchet, R., R. L. de Carvalho, T. Heckel, and P. Moulin (2016). Predicting the success of volatility
+  targeting strategies: Application to equities and other asset classes. Journal of Alternative
+  Investments 18 (3), 21–38.
+
+Roncalli, T. (2017). Keep up the momentum. https://ssrn.com/abstract=3083921. SSRN
+  Working Paper.
+
+Winton (2013). Historical performance of trend following. Technical report, Winton Capital
+ Research Note.
+
+Zakamulin, V. (2016). Market timing with moving averages: Anatomy and performance of trading
+  rules. https://ssrn.com/abstract=2585056. SSRN Working Paper.
+
+
+
+
+                                                 41
+
