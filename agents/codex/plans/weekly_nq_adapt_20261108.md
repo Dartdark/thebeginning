@@ -61,3 +61,12 @@ Usemetrics.perf andt_threshold; no newmetricdefinitions except explicit trademea
 No actualread/returnafter2022unlessdesigngatepasses; no sourcepaperclaim reused as observedreturn.
 Record2economicdefinitions plus2fixedcoststresses, allpriorselectionhistory. No live/VPS/broker/APIkey,
 tradingplan,TIER,scouthistory orscheduledautomationchange.
+
+## Pre-return data amendment
+
+Initial committed execution5b383dc stopped in prepare(), before features, trades or returns: no08:01bar on
+2020-03-12. A date/time-only check found2020-03-12first08:02,2020-03-13first08:06and2020-03-16first08:06.
+Amend before any outcomes: use first observed close-labelledbar>=08:01, at its OPEN, record executionbar.
+An08:06barOPEN means08:05CT, not an assumed08:00fill. No fills during absent intervals; this is a delayed
+historical bar-open proxy, not guaranteed native market-order execution. All other gates/rules unchanged.
+Original strict exact08:01abort is retained as a data-preflight failure, not a losing or successful return trial.

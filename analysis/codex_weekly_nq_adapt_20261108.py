@@ -52,10 +52,10 @@ def prepare():
         x['session']=pd.to_datetime(x.date.astype(str),format='%Y%m%d')
         for d,g in x.groupby('session',sort=True):
             if d.dayofweek>=5:continue
-            g=g.sort_values('time'); en=g[g.time==801]
-            if len(en)!=1:raise RuntimeError('missing08:01 execution bar: '+str(d))
+            g=g.sort_values('time'); en=g[g.time>=801].head(1)
+            if len(en)!=1:raise RuntimeError('no executable observed bar: '+str(d))
             pieces.append({'date':d,'open':float(en.open.iloc[0]),'close':float(g.close.iloc[-1]),
-                           'last_bar':int(g.time.iloc[-1]),'bars':len(g)})
+                           'execution_bar':int(en.time.iloc[0]),'last_bar':int(g.time.iloc[-1]),'bars':len(g)})
     daily=pd.DataFrame(pieces).set_index('date').sort_index()
     if daily.index.duplicated().any():raise RuntimeError('duplicate sessions')
     daily['week']=daily.index+pd.to_timedelta(4-daily.index.dayofweek,unit='D')
@@ -170,6 +170,7 @@ def main():
             'data_dates':[str(d.index.min()),str(d.index.max())],
             'weekly_formation_rows':len(w),'first_valid_ema25_week':str(w.ema25.first_valid_index()),
             'quarantine_weeks_design':int(w.loc['2018':'2022'].quarantine.sum()),
+            'delayed_execution_sessions':{str(dt.date()):int(row.execution_bar) for dt,row in d[d.execution_bar>801].iterrows()},
             'inputs':manifest,'preregistration_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
             'code_sha256':hashlib.sha256((ROOT/CODE).read_bytes()).hexdigest(),
             'plan_sha256':hashlib.sha256((ROOT/PLAN).read_bytes()).hexdigest(),

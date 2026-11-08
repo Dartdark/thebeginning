@@ -35,3 +35,6 @@ One full rule plus one EMA-only comparator; no tuning or forced positive outcome
 Decision: TEST a single explicitly assumed full rule and its simplebaseline on2018–22only, with2017warm-up.
 Native dated-roll ledger/full collateral not established by this screen. No funded/evaluationbench; personal
 comparison only after earned validation and fullrisk/native cost gates. No live/plan/rank/scoutchanges.
+
+Pre-return update: exact08:01data check aborted before economic outcomes. Three March2020sessions begin
+later. Frozen amendment executes at first observed bar>=08:01and records timing; no missing-bar fill.
