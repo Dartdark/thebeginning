@@ -99,3 +99,17 @@ Commit/push preregistration and reread the published claim before returns. Lease
 old selection history. The scout gate is hard-coded to a different program; do not falsify its identity or ledger.
 This dedicated user-code admission enforces the corresponding commit/hash/lease boundaries for this project.
 Stop genuine failures, preserve artifacts and checkpoint the same project if execution/context is interrupted.
+
+## Source-clock amendment before unchanged-policy rerun
+
+Initial run under d06d6eae preserved in outputs/attempt1. No parent passed; none advanced to controls/recent data.
+Kusho failed its index-origin check: all3152explicit ledger dates/fm indices uniquely identify2017-12-01,
+while the rebuilt Grid24 starts2017-05-01. Use the ledger's own internally consistent origin; no price-based
+offset search. PAPERTREND's source is a five-minute chart with a next-bar market order, so its t_in label maps
+uniformly to t_in−4minutes and must match that exact first-minute OPEN. Its fixed close exit is unchanged;
+do not find a favorable alternate fill. The pre-existing November4 source adapter confirms this convention.
+Preserve the failed attempt and both diagnoses; commit exact corrections before rerunning. No new signal,
+wait, parameter, price adjustment or weakened gate. Unaffected parents must reproduce their earlier tickets.
+Static existing parent files contain already-seen2023+rows; they are date-filtered before financial arithmetic.
+No new overlay is evaluated on later history. Only raw2017–22OHLC is loaded. The first run's broad
+future_prices_loaded flag referred to raw OHLC; the amended receipt spells out that narrower scope.

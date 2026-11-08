@@ -91,6 +91,12 @@ def classify(label):
     return 'time'
 
 
+def kusho_origin(t):
+    origins=pd.to_datetime(t.date).dt.normalize()-pd.to_timedelta((t.fm//1440).astype(int),unit='D')
+    assert origins.nunique()==1,'Inconsistent explicit Kusho date/index origins'
+    return pd.Timestamp(origins.iloc[0])
+
+
 def generated(spec,g):
     typ=spec['adapter']
     if typ.startswith('twin'):
@@ -115,16 +121,24 @@ def generated(spec,g):
 
 def load_parent(spec,g,cfg):
     typ=spec['adapter'];pv=cfg['markets'][spec['market']]['pv'];tick=cfg['markets'][spec['market']]['tick']
-    if spec['path']: t=pd.read_csv(ROOT/spec['path'])
+    if spec['path']:
+        t=pd.read_csv(ROOT/spec['path'])
+        origin=kusho_origin(t) if typ=='kusho' else None
+        ec='entry_at' if typ=='unit' else 'date'
+        xc='exit_at' if typ=='unit' else 'exit_date' if 'exit_date' in t else 'date'
+        t=t[(pd.to_datetime(t[ec])>=cfg['design_start'])&(pd.to_datetime(t[xc])<pd.Timestamp(cfg['design_end'])+pd.Timedelta(days=1))].copy()
     if typ=='unit':
         z=t[['entry_at','exit_at','entry','exit','side','kind']].copy()
         z['source_gross']=t.gross/t.qty
     elif typ=='mc_csv':
         z=t[['entry','exit','side','kind']].copy();z['entry_at']=stamp(t.date,t.t_in);z['exit_at']=stamp(t.exit_date,t.t_out)
+        if spec['key']=='PT':
+            z['entry_at']-=pd.Timedelta(minutes=4)
+            z['entry_open_required']=True
     elif typ=='s47':
         z=t[['entry','exit','side','kind']].copy();z['entry_at']=pd.to_datetime(t.date)+pd.to_timedelta(t.j0,unit='min');z['exit_at']=pd.to_datetime(t.date)+pd.to_timedelta(t.j1,unit='min')
     elif typ=='kusho':
-        z=t[['entry','exit','side','kind']].copy();start=pd.Timestamp(g.ts[0])
+        z=t[['entry','exit','side','kind']].copy();start=origin
         z['entry_at']=start+pd.to_timedelta(t.fm,unit='min');z['exit_at']=start+pd.to_timedelta(t.xm,unit='min')
         assert (z.entry_at.dt.normalize()==pd.to_datetime(t.date).dt.normalize()).all(),'Kusho index origin mismatch'
         z['exit']+=t.side*tick*(t.kind!='target')
@@ -209,6 +223,8 @@ def replay(t,spec,a,cfg,profile):
         source_missing=missing(a,b,x)
         if source_missing or not fill_match(a,b,r.entry) or not fill_match(a,x,r.exit):
             row.update(status='unknown_source_path_or_fill',unknown=1,source_missing=source_missing);rows.append(row);continue
+        if bool(getattr(r,'entry_open_required',False)) and not np.isclose(a.o[b],r.entry,rtol=0,atol=1e-7):
+            row.update(status='unknown_required_source_open',unknown=1);rows.append(row);continue
         if b==x:
             path=common_path(np.array([a.o[b],a.h[b],a.l[b],a.c[b]]))
             phase=crossing_phase(path,float(r.entry))
@@ -328,7 +344,7 @@ def design(commit):
     pd.DataFrame(standard).to_csv(OUT/'standard_metrics.csv',index=False)
     dump(OUT/'design_dispositions.json',dispositions)
     dump(OUT/'run.json',dict(program=cfg['program'],preregistration_commit=commit,checked_head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
-        design_start=cfg['design_start'],design_end=cfg['design_end'],future_prices_loaded=False,definition_views_executed=sum(3 for d in dispositions if 'source_tickets' in d),
+        design_start=cfg['design_start'],design_end=cfg['design_end'],future_raw_ohlc_loaded=False,static_parent_ledgers_contain_already_seen_later_rows=True,new_overlay_results_2023plus_computed=False,definition_views_executed=sum(3 for d in dispositions if 'source_tickets' in d),
         controls_run=False,historical_validation_run=False,account_tests_run=False,dispositions=dispositions))
 
 
@@ -344,6 +360,8 @@ def selftest():
     c[10]=99.;assert counter(a,5,30,-1,1)==(11,False)
     o[11]=np.nan;assert counter(a,5,30,1,-1)==(-1,True)
     assert classify('Profit Target')=='target' and classify('FT.LX.stp')=='stop' and classify('band/EMA exit')=='signal'
+    origin=kusho_origin(pd.DataFrame(dict(date=['2018-01-01','2018-01-02'],fm=[31*1440+12,32*1440+13])))
+    assert origin==pd.Timestamp('2017-12-01')
     o[11]=99.;o[26]=102.;h[26]=103.;c[25]=101.
     z=pd.DataFrame([dict(ticket_id=0,entry_at=a.start+pd.Timedelta(minutes=5),exit_at=a.start+pd.Timedelta(minutes=20),entry=100.,exit=100.,side=1,kind='stop',source_gross=0.,entry_cost_ticks=1,exit_cost_ticks=1)])
     sp=dict(key='FIXTURE',market='NQ',deadline_hhmm=None,deadline_quote='none')
