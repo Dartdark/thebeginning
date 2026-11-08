@@ -1,0 +1,456 @@
+{ NQ FINRA Short-Volume Longs - RESEARCH / BACKTEST file (personal-account candidate, WATCHLIST #32; NOT for Apex).
+  Generated 2026-11-08 by analysis/finra_mc_export.py from data/finra/short_volume.csv (FINRA data to 2026-11-06).
+
+  Rule: when the equal-weight FINRA off-exchange short-volume ratio of QQQ + AAPL MSFT NVDA AMZN META GOOGL AVGO TSLA COST NFLX
+  is >= 1 sd above its past-60-day mean, buy NQ at the 08:31 CT open the NEXT trading day; stop 0.5 x the daily ATR(15)
+  (weekday calendar dates, as Late-Day Flow / Overnight Bias); exit at the 14:55 CT bar close. One trade a day. The signal
+  dates are embedded below (374 dates, 2018-08 -> 2026-10-02); pending signal: none.
+  Python research (analysis/finra_longs_test.py, per NQ after $7.25 + 1 tick per fill, 2018-08 -> 2026-11-06): 374 trades,
+  $661 a trade, t 3.51, PF 1.78, max DD $23.9k; random-day longs $138 (p 0.000). Post hoc long-only split: forward log first.
+  Chart: @NQ (or MNQ) 1 minute, Exchange time (Central), CME 24-hour session, IOG off. Backtest: Qty 1 on NQ, commission
+  $7.25 per round trip (or $3.63 per side) + 1 tick slippage per side. Expected python trade list:
+  checks/candidates/finra_longs/python_trades.csv (date, net per NQ after costs). Send the MultiCharts report for a trade-by-trade match. }
+
+Inputs:
+	EntryTime(830),         { bar closing 08:30 -> buy at the next bar's open (08:31) }
+	ExitTime(1455),         { exit at the close of this bar }
+	StopAtr(0.5),
+	AtrDays(15),
+	Qty(1);
+
+Variables:
+	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
+	StopPts(0), IsSignal(false), Si(0), DayStartTrades(0), TradedToday(false), NSig(374);
+
+Arrays:
+	TrHist[100](0), SigDate[384](0);
+
+once begin
+	SigDate[0] = 1181101;
+	SigDate[1] = 1181105;
+	SigDate[2] = 1181106;
+	SigDate[3] = 1181107;
+	SigDate[4] = 1181108;
+	SigDate[5] = 1181109;
+	SigDate[6] = 1181116;
+	SigDate[7] = 1181127;
+	SigDate[8] = 1181129;
+	SigDate[9] = 1181130;
+	SigDate[10] = 1181203;
+	SigDate[11] = 1181204;
+	SigDate[12] = 1181206;
+	SigDate[13] = 1181220;
+	SigDate[14] = 1181227;
+	SigDate[15] = 1181228;
+	SigDate[16] = 1181231;
+	SigDate[17] = 1190102;
+	SigDate[18] = 1190103;
+	SigDate[19] = 1190107;
+	SigDate[20] = 1190108;
+	SigDate[21] = 1190109;
+	SigDate[22] = 1190110;
+	SigDate[23] = 1190115;
+	SigDate[24] = 1190117;
+	SigDate[25] = 1190118;
+	SigDate[26] = 1190422;
+	SigDate[27] = 1190515;
+	SigDate[28] = 1190605;
+	SigDate[29] = 1190606;
+	SigDate[30] = 1190607;
+	SigDate[31] = 1190610;
+	SigDate[32] = 1190612;
+	SigDate[33] = 1190614;
+	SigDate[34] = 1190621;
+	SigDate[35] = 1190724;
+	SigDate[36] = 1190916;
+	SigDate[37] = 1190919;
+	SigDate[38] = 1190923;
+	SigDate[39] = 1190926;
+	SigDate[40] = 1190927;
+	SigDate[41] = 1190930;
+	SigDate[42] = 1191004;
+	SigDate[43] = 1191007;
+	SigDate[44] = 1191009;
+	SigDate[45] = 1191016;
+	SigDate[46] = 1191018;
+	SigDate[47] = 1191021;
+	SigDate[48] = 1191022;
+	SigDate[49] = 1191023;
+	SigDate[50] = 1191024;
+	SigDate[51] = 1191025;
+	SigDate[52] = 1191028;
+	SigDate[53] = 1191029;
+	SigDate[54] = 1191030;
+	SigDate[55] = 1191031;
+	SigDate[56] = 1191101;
+	SigDate[57] = 1191106;
+	SigDate[58] = 1191122;
+	SigDate[59] = 1191125;
+	SigDate[60] = 1191216;
+	SigDate[61] = 1191220;
+	SigDate[62] = 1191223;
+	SigDate[63] = 1191226;
+	SigDate[64] = 1200103;
+	SigDate[65] = 1200122;
+	SigDate[66] = 1200123;
+	SigDate[67] = 1200127;
+	SigDate[68] = 1200130;
+	SigDate[69] = 1200207;
+	SigDate[70] = 1200210;
+	SigDate[71] = 1200303;
+	SigDate[72] = 1200304;
+	SigDate[73] = 1200306;
+	SigDate[74] = 1200309;
+	SigDate[75] = 1200323;
+	SigDate[76] = 1200326;
+	SigDate[77] = 1200327;
+	SigDate[78] = 1200330;
+	SigDate[79] = 1200331;
+	SigDate[80] = 1200401;
+	SigDate[81] = 1200402;
+	SigDate[82] = 1200403;
+	SigDate[83] = 1200406;
+	SigDate[84] = 1200408;
+	SigDate[85] = 1200409;
+	SigDate[86] = 1200413;
+	SigDate[87] = 1200414;
+	SigDate[88] = 1200415;
+	SigDate[89] = 1200416;
+	SigDate[90] = 1200417;
+	SigDate[91] = 1200420;
+	SigDate[92] = 1200619;
+	SigDate[93] = 1200622;
+	SigDate[94] = 1201005;
+	SigDate[95] = 1201019;
+	SigDate[96] = 1201106;
+	SigDate[97] = 1201113;
+	SigDate[98] = 1201116;
+	SigDate[99] = 1201118;
+	SigDate[100] = 1201119;
+	SigDate[101] = 1201120;
+	SigDate[102] = 1201123;
+	SigDate[103] = 1201209;
+	SigDate[104] = 1201210;
+	SigDate[105] = 1201214;
+	SigDate[106] = 1201215;
+	SigDate[107] = 1201221;
+	SigDate[108] = 1201222;
+	SigDate[109] = 1201223;
+	SigDate[110] = 1210113;
+	SigDate[111] = 1210219;
+	SigDate[112] = 1210311;
+	SigDate[113] = 1210315;
+	SigDate[114] = 1210322;
+	SigDate[115] = 1210323;
+	SigDate[116] = 1210324;
+	SigDate[117] = 1210325;
+	SigDate[118] = 1210326;
+	SigDate[119] = 1210329;
+	SigDate[120] = 1210330;
+	SigDate[121] = 1210401;
+	SigDate[122] = 1210409;
+	SigDate[123] = 1210412;
+	SigDate[124] = 1210414;
+	SigDate[125] = 1210518;
+	SigDate[126] = 1210519;
+	SigDate[127] = 1210521;
+	SigDate[128] = 1210524;
+	SigDate[129] = 1210526;
+	SigDate[130] = 1210527;
+	SigDate[131] = 1210607;
+	SigDate[132] = 1210610;
+	SigDate[133] = 1210615;
+	SigDate[134] = 1210616;
+	SigDate[135] = 1210617;
+	SigDate[136] = 1210618;
+	SigDate[137] = 1210621;
+	SigDate[138] = 1210624;
+	SigDate[139] = 1210701;
+	SigDate[140] = 1210702;
+	SigDate[141] = 1210707;
+	SigDate[142] = 1210708;
+	SigDate[143] = 1210709;
+	SigDate[144] = 1210712;
+	SigDate[145] = 1210713;
+	SigDate[146] = 1210714;
+	SigDate[147] = 1210715;
+	SigDate[148] = 1210719;
+	SigDate[149] = 1210729;
+	SigDate[150] = 1210802;
+	SigDate[151] = 1210813;
+	SigDate[152] = 1210817;
+	SigDate[153] = 1210820;
+	SigDate[154] = 1210823;
+	SigDate[155] = 1210909;
+	SigDate[156] = 1211008;
+	SigDate[157] = 1211011;
+	SigDate[158] = 1211025;
+	SigDate[159] = 1211026;
+	SigDate[160] = 1211101;
+	SigDate[161] = 1211102;
+	SigDate[162] = 1211104;
+	SigDate[163] = 1211115;
+	SigDate[164] = 1211116;
+	SigDate[165] = 1220127;
+	SigDate[166] = 1220128;
+	SigDate[167] = 1220131;
+	SigDate[168] = 1220201;
+	SigDate[169] = 1220202;
+	SigDate[170] = 1220203;
+	SigDate[171] = 1220204;
+	SigDate[172] = 1220207;
+	SigDate[173] = 1220209;
+	SigDate[174] = 1220210;
+	SigDate[175] = 1220211;
+	SigDate[176] = 1220214;
+	SigDate[177] = 1220215;
+	SigDate[178] = 1220216;
+	SigDate[179] = 1220217;
+	SigDate[180] = 1220302;
+	SigDate[181] = 1220318;
+	SigDate[182] = 1220321;
+	SigDate[183] = 1220324;
+	SigDate[184] = 1220517;
+	SigDate[185] = 1220518;
+	SigDate[186] = 1220526;
+	SigDate[187] = 1220527;
+	SigDate[188] = 1220601;
+	SigDate[189] = 1220602;
+	SigDate[190] = 1220606;
+	SigDate[191] = 1220608;
+	SigDate[192] = 1220609;
+	SigDate[193] = 1220610;
+	SigDate[194] = 1220628;
+	SigDate[195] = 1220629;
+	SigDate[196] = 1220630;
+	SigDate[197] = 1220701;
+	SigDate[198] = 1220706;
+	SigDate[199] = 1220708;
+	SigDate[200] = 1220711;
+	SigDate[201] = 1220712;
+	SigDate[202] = 1220714;
+	SigDate[203] = 1220715;
+	SigDate[204] = 1220816;
+	SigDate[205] = 1220914;
+	SigDate[206] = 1220915;
+	SigDate[207] = 1221006;
+	SigDate[208] = 1221116;
+	SigDate[209] = 1221117;
+	SigDate[210] = 1221216;
+	SigDate[211] = 1221219;
+	SigDate[212] = 1230113;
+	SigDate[213] = 1230118;
+	SigDate[214] = 1230119;
+	SigDate[215] = 1230120;
+	SigDate[216] = 1230123;
+	SigDate[217] = 1230124;
+	SigDate[218] = 1230125;
+	SigDate[219] = 1230126;
+	SigDate[220] = 1230127;
+	SigDate[221] = 1230130;
+	SigDate[222] = 1230131;
+	SigDate[223] = 1230202;
+	SigDate[224] = 1230206;
+	SigDate[225] = 1230207;
+	SigDate[226] = 1230208;
+	SigDate[227] = 1230209;
+	SigDate[228] = 1230215;
+	SigDate[229] = 1230216;
+	SigDate[230] = 1230329;
+	SigDate[231] = 1230502;
+	SigDate[232] = 1230510;
+	SigDate[233] = 1230516;
+	SigDate[234] = 1230518;
+	SigDate[235] = 1230519;
+	SigDate[236] = 1230522;
+	SigDate[237] = 1230616;
+	SigDate[238] = 1230720;
+	SigDate[239] = 1230721;
+	SigDate[240] = 1230724;
+	SigDate[241] = 1230831;
+	SigDate[242] = 1230907;
+	SigDate[243] = 1230913;
+	SigDate[244] = 1230914;
+	SigDate[245] = 1230915;
+	SigDate[246] = 1230918;
+	SigDate[247] = 1231004;
+	SigDate[248] = 1231018;
+	SigDate[249] = 1231019;
+	SigDate[250] = 1231023;
+	SigDate[251] = 1231114;
+	SigDate[252] = 1231115;
+	SigDate[253] = 1231116;
+	SigDate[254] = 1231122;
+	SigDate[255] = 1231212;
+	SigDate[256] = 1231218;
+	SigDate[257] = 1240314;
+	SigDate[258] = 1240411;
+	SigDate[259] = 1240412;
+	SigDate[260] = 1240415;
+	SigDate[261] = 1240425;
+	SigDate[262] = 1240429;
+	SigDate[263] = 1240501;
+	SigDate[264] = 1240503;
+	SigDate[265] = 1240507;
+	SigDate[266] = 1240508;
+	SigDate[267] = 1240510;
+	SigDate[268] = 1240513;
+	SigDate[269] = 1240614;
+	SigDate[270] = 1240618;
+	SigDate[271] = 1240621;
+	SigDate[272] = 1240624;
+	SigDate[273] = 1240709;
+	SigDate[274] = 1240711;
+	SigDate[275] = 1240712;
+	SigDate[276] = 1240722;
+	SigDate[277] = 1240724;
+	SigDate[278] = 1240812;
+	SigDate[279] = 1240813;
+	SigDate[280] = 1240814;
+	SigDate[281] = 1240815;
+	SigDate[282] = 1240816;
+	SigDate[283] = 1240819;
+	SigDate[284] = 1240820;
+	SigDate[285] = 1240821;
+	SigDate[286] = 1240822;
+	SigDate[287] = 1240823;
+	SigDate[288] = 1240827;
+	SigDate[289] = 1240905;
+	SigDate[290] = 1240906;
+	SigDate[291] = 1240909;
+	SigDate[292] = 1240912;
+	SigDate[293] = 1240913;
+	SigDate[294] = 1240916;
+	SigDate[295] = 1240923;
+	SigDate[296] = 1241205;
+	SigDate[297] = 1241212;
+	SigDate[298] = 1241213;
+	SigDate[299] = 1241216;
+	SigDate[300] = 1241217;
+	SigDate[301] = 1241218;
+	SigDate[302] = 1241219;
+	SigDate[303] = 1241220;
+	SigDate[304] = 1241226;
+	SigDate[305] = 1241227;
+	SigDate[306] = 1241230;
+	SigDate[307] = 1250124;
+	SigDate[308] = 1250210;
+	SigDate[309] = 1250403;
+	SigDate[310] = 1250409;
+	SigDate[311] = 1250415;
+	SigDate[312] = 1250424;
+	SigDate[313] = 1250425;
+	SigDate[314] = 1250428;
+	SigDate[315] = 1250429;
+	SigDate[316] = 1250430;
+	SigDate[317] = 1250501;
+	SigDate[318] = 1250502;
+	SigDate[319] = 1250505;
+	SigDate[320] = 1250506;
+	SigDate[321] = 1250508;
+	SigDate[322] = 1250509;
+	SigDate[323] = 1250613;
+	SigDate[324] = 1250722;
+	SigDate[325] = 1250806;
+	SigDate[326] = 1250807;
+	SigDate[327] = 1250808;
+	SigDate[328] = 1250812;
+	SigDate[329] = 1250814;
+	SigDate[330] = 1250815;
+	SigDate[331] = 1250905;
+	SigDate[332] = 1250908;
+	SigDate[333] = 1250910;
+	SigDate[334] = 1250915;
+	SigDate[335] = 1251029;
+	SigDate[336] = 1251202;
+	SigDate[337] = 1251204;
+	SigDate[338] = 1260209;
+	SigDate[339] = 1260210;
+	SigDate[340] = 1260211;
+	SigDate[341] = 1260306;
+	SigDate[342] = 1260309;
+	SigDate[343] = 1260401;
+	SigDate[344] = 1260402;
+	SigDate[345] = 1260406;
+	SigDate[346] = 1260407;
+	SigDate[347] = 1260408;
+	SigDate[348] = 1260409;
+	SigDate[349] = 1260410;
+	SigDate[350] = 1260413;
+	SigDate[351] = 1260414;
+	SigDate[352] = 1260415;
+	SigDate[353] = 1260416;
+	SigDate[354] = 1260417;
+	SigDate[355] = 1260420;
+	SigDate[356] = 1260423;
+	SigDate[357] = 1260427;
+	SigDate[358] = 1260717;
+	SigDate[359] = 1260730;
+	SigDate[360] = 1260731;
+	SigDate[361] = 1260803;
+	SigDate[362] = 1260804;
+	SigDate[363] = 1260805;
+	SigDate[364] = 1260806;
+	SigDate[365] = 1260807;
+	SigDate[366] = 1260811;
+	SigDate[367] = 1260831;
+	SigDate[368] = 1260901;
+	SigDate[369] = 1260917;
+	SigDate[370] = 1260918;
+	SigDate[371] = 1260921;
+	SigDate[372] = 1260923;
+	SigDate[373] = 1261002;
+end;
+
+{ ---------- Daily ATR (weekday calendar dates; same code as NQ_Late_Day_Flow, MultiCharts-confirmed) ---------- }
+if Date <> Date[1] then begin
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	DayHi = High;
+	DayLo = Low;
+	DayStartTrades = TotalTrades;
+	{ is today a signal date? }
+	IsSignal = false;
+	for Si = 0 to NSig - 1 begin
+		if SigDate[Si] = Date then IsSignal = true;
+	end;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+
+{ ---------- Entry at the 08:31 open on signal dates; the stop also protects the entry bar ---------- }
+TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
+if Time = EntryTime and IsSignal and ATRv > 0 and MarketPosition = 0 and TradedToday = false then begin
+	StopPts = StopAtr * ATRv;
+	Buy ("FSV_L") Qty contracts next bar at market;
+	Sell ("FSV_SL0") next bar at Close - StopPts stop;      { entry-bar protection (fill not known yet) }
+end;
+
+{ ---------- Stop and time exit ---------- }
+if MarketPosition > 0 then begin
+	Sell ("FSV_SL") next bar at EntryPrice - StopPts stop;
+	if Time = ExitTime then Sell ("FSV_X") this bar at close;
+end;
