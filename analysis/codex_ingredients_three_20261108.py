@@ -4,6 +4,7 @@ import ast
 import glob
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 import tempfile
@@ -73,7 +74,7 @@ def setup_engines(g,e):
     shared={'np':np,'pd':pd,'PV':20.,'TICK':.25,'COST':7.25}
     dt=functions('dual_thrust_test.py',['holiday','setups','trade','run'],dict(shared))
     # Original RS loader's two pickle assignments replaced by supplied in-memory grids.
-    rs={'np':np,'pd':pd,'jof':lambda hm:(np.asarray(hm)//100)*60+np.asarray(hm)%100,
+    rs={'np':np,'pd':pd,'re':re,'jof':lambda hm:(np.asarray(hm)//100)*60+np.asarray(hm)%100,
         'PV':20.,'TICK':.25,'COMM':7.25,'CODE':str(INPUT/'RelStrength_v3.txt'),'g':g,'e':e}
     functions('relative_strength_test.py',['holidays','signals','trades'],rs)
     tree=ast.parse((INPUT/'relative_strength_test.py').read_text())

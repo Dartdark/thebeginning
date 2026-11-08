@@ -70,3 +70,6 @@ No scout/schedule changes, external messages, paid data, VPS, broker or API-key 
 Pre-return engineering correction: first attempt stopped while constructing the in-memory grid because the
 AST namespace omitted the source's NMIN24=1440 constant. Bind that exact source constant; no data, rule,
 cost, hypothesis or outcomes changed. No strategy function had run when the NameError occurred.
+Second engineering attempt reached RS calendar loading but its namespace lacked the source regex module.
+Supply re explicitly. DT cases had run in memory; no economic summaries were written or inspected. Their
+replay is the same definitions, not a new parameter trial. Preserve both execution failures in the final record.
