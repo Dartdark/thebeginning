@@ -21,7 +21,9 @@ R150 = dict(st=150_000.0, dd=4_000.0, dll=2_000.0, lock=150_100.0, tgt=9_000.0)
 ORDER = ("ONB30", "VB", "EOS")
 
 
-def run(P, q, stop, s, D, r, mode, buf):
+def run(P, q, stop, s, D, r, mode, buf, evalrule=False):
+    # evalrule (Codex weekly review 2026-11-06 #1 / eval audit 2026-11-04): evaluation floor keeps trailing (no PA lock at
+    # start + $100) and a same-minute target / floor tie counts as a FAIL (conservative). Default False = the old engine.
     bal = r["st"]; floor = r["st"] - r["dd"]; capped = skipped = 0
     for n, d in enumerate(range(s, min(s + 21, D)), 1):
         room = bal - floor - buf; qq = {}
@@ -37,12 +39,12 @@ def run(P, q, stop, s, D, r, mode, buf):
         lim = max(floor, bal - r["dll"])
         hit = np.nonzero(bal + w <= lim)[0]; jb = hit[0] if len(hit) else len(w)
         win = np.nonzero(bal + rr - r["st"] >= r["tgt"])[0]; jp = win[0] if len(win) else len(w)
-        if jp < jb: return "pass", n, capped, skipped
+        if jp < jb: return "pass", n, capped, skipped   # a same-minute tie already falls to the floor branch (FAIL)
         if jb < len(w):
             if lim == floor: return "fail", n, capped, skipped
             bal = lim
         else: bal += rr[-1]
-        floor = max(floor, min(bal - r["dd"], r["lock"]))
+        floor = max(floor, bal - r["dd"]) if evalrule else max(floor, min(bal - r["dd"], r["lock"]))
     return ("time", 21, capped, skipped) if s + 21 <= D else None
 
 

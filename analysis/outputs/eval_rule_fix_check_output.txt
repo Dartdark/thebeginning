@@ -1,0 +1,24 @@
+[provenance] code f2edb7f1 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Codex weekly review 2026-11-06 #1: our evaluation engines locked the trailing floor at start + $100 (a funded-PA rule);
+
+50K evaluation, every start day 2018+:
+   plan: VB 8, ONB $1,100 [old lock]        pass 50.0%  fail 48.1%  time-out  1.9% | 2018-22 pass 46.7% / 2023+ 54.4% | median days   6 | fee/funded $498 | capped trades/acct 0.0
+   plan: VB 8, ONB $1,100 [eval rule]       pass 49.0%  fail 49.3%  time-out  1.7% | 2018-22 pass 45.8% / 2023+ 53.3% | median days   6 | fee/funded $508 | capped trades/acct 0.0
+   VB 6 [old lock]                          pass 49.1%  fail 47.4%  time-out  3.5% | 2018-22 pass 46.1% / 2023+ 53.1% | median days   7 | fee/funded $507 | capped trades/acct 0.0
+   VB 6 [eval rule]                         pass 48.2%  fail 48.9%  time-out  2.8% | 2018-22 pass 45.1% / 2023+ 52.4% | median days   7 | fee/funded $516 | capped trades/acct 0.0
+   ONB $550 [old lock]                      pass 49.4%  fail 39.7%  time-out 10.9% | 2018-22 pass 43.1% / 2023+ 57.7% | median days   9 | fee/funded $504 | capped trades/acct 0.0
+   ONB $550 [eval rule]                     pass 48.4%  fail 41.4%  time-out 10.2% | 2018-22 pass 42.4% / 2023+ 56.4% | median days   9 | fee/funded $514 | capped trades/acct 0.0
+   VB 4, ONB $550 [old lock]                pass 37.6%  fail 29.8%  time-out 32.6% | 2018-22 pass 30.6% / 2023+ 47.0% | median days  13 | fee/funded $662 | capped trades/acct 0.0
+   VB 4, ONB $550 [eval rule]               pass 37.4%  fail 30.8%  time-out 31.9% | 2018-22 pass 30.5% / 2023+ 46.5% | median days  13 | fee/funded $666 | capped trades/acct 0.0
+   plan + cushion cap [eval rule]           pass 47.3%  fail 38.1%  time-out 14.6% | 2018-22 pass 44.9% / 2023+ 50.4% | median days   6 | fee/funded $527 | capped trades/acct 11.3
+
+150K evaluation, every start day 2018+:
+   plan: VB 20, ONB $2,750 [old lock]       pass 41.0%  fail 56.5%  time-out  2.5% | 2018-22 pass 38.9% / 2023+ 43.7% | median days   8 | fee/funded $608 | capped trades/acct 0.0
+   plan: VB 20, ONB $2,750 [eval rule]      pass 35.9%  fail 63.3%  time-out  0.8% | 2018-22 pass 35.0% / 2023+ 37.2% | median days   7 | fee/funded $693 | capped trades/acct 0.0
+   VB 15 [old lock]                         pass 40.8%  fail 54.1%  time-out  5.2% | 2018-22 pass 37.9% / 2023+ 44.6% | median days   8 | fee/funded $611 | capped trades/acct 0.0
+   VB 15 [eval rule]                        pass 35.5%  fail 62.4%  time-out  2.1% | 2018-22 pass 33.4% / 2023+ 38.3% | median days   8 | fee/funded $702 | capped trades/acct 0.0
+   ONB $1,400 [old lock]                    pass 35.7%  fail 53.1%  time-out 11.3% | 2018-22 pass 29.0% / 2023+ 44.5% | median days  10 | fee/funded $698 | capped trades/acct 0.0
+   ONB $1,400 [eval rule]                   pass 30.7%  fail 60.9%  time-out  8.5% | 2018-22 pass 25.4% / 2023+ 37.6% | median days   9 | fee/funded $812 | capped trades/acct 0.0
+   VB 10, ONB $1,400 [old lock]             pass 28.5%  fail 42.7%  time-out 28.7% | 2018-22 pass 24.4% / 2023+ 34.1% | median days  14 | fee/funded $872 | capped trades/acct 0.0
+   VB 10, ONB $1,400 [eval rule]            pass 26.4%  fail 52.1%  time-out 21.5% | 2018-22 pass 21.7% / 2023+ 32.5% | median days  14 | fee/funded $944 | capped trades/acct 0.0
+   plan + cushion cap [eval rule]           pass 32.5%  fail 51.2%  time-out 16.2% | 2018-22 pass 30.1% / 2023+ 35.7% | median days   7 | fee/funded $766 | capped trades/acct 13.8

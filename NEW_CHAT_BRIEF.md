@@ -31,6 +31,13 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   combined cap worse. Not adopted for evaluations. **Funded bench 11/08** (`cushion_cap_funded_vb2_output.txt`): blown 8.1 ->
   2.3% per strategy at the same payouts: adopt for funded (FUNDED_PLAN 'Cushion cap'). Code written 11/08 (UseCushion, reads Rithmic Equity; 7 funded files;
   not compiled). Rithmic Equity includes open P&L (verified from ACCT logs). funded_bootstrap.PLAN VB_N 3 -> 2.
+- **Codex weekly review 11/06 (read 11/08), 4 findings on Claude's code, all handled:** (1) evaluation engines locked the floor at
+  start + $100 (funded rule); Apex evaluations keep trailing: corrected engine (`cushion_cap_bench.run(evalrule=True)`,
+  `analysis/outputs/eval_rule_fix_check_output.txt`): **50K plan pass 50.0 -> 49.0%, 150K 41.0 -> 35.9% (fee per funded
+  $608 -> $693)**; ranking of sizes unchanged. Not yet fixed: DLL fill at the limit, 30-calendar-day clock, the other benches
+  (combine_levers_test / plan_150k_test still use the lock). (2) held-path gaps: 4% of long-after-green trades, result unchanged.
+  (3) Bertola / long-after-green charged commission twice: fixed, reruns saved (verdicts unchanged). (4) green-day filters
+  relabelled exploratory.
 - **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
   career tailoring (needs the user's background).
 

@@ -54,7 +54,7 @@ def trades(g, pv, comm, tick, mode, rule):
                 x = (min(oo, stp) if side > 0 else max(oo, stp)) - side * tick; kind = "stop"; break
         if x is None: x = xe - side * tick
         e2 = e + side * tick
-        out.append((pd.Timestamp(g.ts[rn]), side, (x - e2) * side * pv - 2 * comm, kind))
+        out.append((pd.Timestamp(g.ts[rn]), side, (x - e2) * side * pv - comm, kind))   # comm = round trip (Codex weekly review 2026-11-06 #3: was 2 * comm)
     t = pd.DataFrame(out, columns=["date", "side", "net", "kind"])
     return t
 

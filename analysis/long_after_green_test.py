@@ -39,7 +39,7 @@ def run(g, pv, comm, sel, mode="full", sl=0.005):
         if k + 1 >= len(T): continue
         z = one(g, k, mode, sl)
         if z is None: continue
-        out.append((pd.Timestamp(g.ts[T[k + 1]]), z[0] * pv - 2 * comm, z[1]))
+        out.append((pd.Timestamp(g.ts[T[k + 1]]), z[0] * pv - comm, z[1]))   # comm = round trip (Codex weekly review 2026-11-06 #3: was 2 * comm)
     return pd.DataFrame(out, columns=["date", "net", "kind"])
 
 

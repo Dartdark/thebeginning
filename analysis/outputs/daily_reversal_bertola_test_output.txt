@@ -1,30 +1,30 @@
-[provenance] code fe35af9 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+[provenance] code f2edb7f1 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
 Daily mean reversion with a 200-day filter and a 0.50% stop (Bertola 2026, SSRN 7663278; user upload 2026-11-08).
 
 NQ (per 1 contract, 2018-02-07 .. 2026-11-04):
-   A asymmetric (paper's main), 24h stop        n= 1175 $    25 PF 1.02 t   0.3 stop  67% yrs+ 5/9 | 18-22 $   98 t  1.0 | 23+ $  -88 t -0.5 | L $   -3 S $  162
-      by year $: {2018: -6160, 2019: 6387, 2020: 45377, 2021: -15985, 2022: 40547, 2023: 25635, 2024: 4230, 2025: -27832, 2026: -42820}
-   A symmetric, 24h stop                        n= 2111 $   -85 PF 0.92 t  -1.3 stop  66% yrs+ 2/9 | 18-22 $  -12 t -0.2 | 23+ $ -179 t -1.5 | L $   -3 S $ -157
-   B asymmetric, RTH-only stop (info)           n= 1175 $   234 PF 1.18 t   1.9 stop  56% yrs+ 6/9 | 18-22 $  235 t  1.9 | 23+ $  232 t  0.9 | L $  218 S $  310
-   C Apex-legal open->14:59, asym               n= 1175 $    88 PF 1.10 t   1.1 stop  60% yrs+ 5/9 | 18-22 $   94 t  1.2 | 23+ $   78 t  0.5 | L $   87 S $   90
-   control: long every close, 24h stop          n= 2116 $   107 PF 1.11 t   1.7 stop  61% yrs+ 8/9 | 18-22 $   42 t  0.7 | 23+ $  190 t  1.6 | L $  107 S $  nan
-   control: long after GREEN days               n= 1134 $   206 PF 1.23 t   2.5 stop  57% yrs+ 8/9 | 18-22 $   85 t  1.1 | 23+ $  359 t  2.2 | L $  206 S $  nan
-                trades win  avg   annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
-NQ A asym 2018+   1175 30%  $25   $3,249   0.09    0.20          1.02 $90,662   0.04 19.82       0.33
-NQ A asym 2023+    462 32% $-88 $-10,258  -0.26   -0.49          0.94 $90,662  -0.11 39.34      -0.52
-NQ longs           977 31%  $-3    $-296  -0.01   -0.02          1.00 $64,614  -0.00 28.56      -0.02
-NQ shorts          198 25% $162   $3,544   0.22    0.55          1.16 $47,179   0.08 15.45       0.46
+   A asymmetric (paper's main), 24h stop        n= 1175 $    32 PF 1.03 t   0.4 stop  67% yrs+ 5/9 | 18-22 $  106 t  1.1 | 23+ $  -81 t -0.5 | L $    5 S $  169
+      by year $: {2018: -5239, 2019: 7315, 2020: 46203, 2021: -15216, 2022: 42273, 2023: 26404, 2024: 5071, 2025: -26875, 2026: -42037}
+   A symmetric, 24h stop                        n= 2111 $   -78 PF 0.93 t  -1.2 stop  66% yrs+ 2/9 | 18-22 $   -5 t -0.1 | 23+ $ -172 t -1.5 | L $    5 S $ -149
+   B asymmetric, RTH-only stop (info)           n= 1175 $   241 PF 1.18 t   2.0 stop  56% yrs+ 6/9 | 18-22 $  242 t  2.0 | 23+ $  239 t  1.0 | L $  226 S $  317
+   C Apex-legal open->14:59, asym               n= 1175 $    95 PF 1.11 t   1.2 stop  60% yrs+ 5/9 | 18-22 $  101 t  1.3 | 23+ $   85 t  0.5 | L $   94 S $   98
+   control: long every close, 24h stop          n= 2116 $   114 PF 1.12 t   1.8 stop  61% yrs+ 8/9 | 18-22 $   49 t  0.8 | 23+ $  198 t  1.7 | L $  114 S $  nan
+   control: long after GREEN days               n= 1134 $   213 PF 1.24 t   2.6 stop  57% yrs+ 8/9 | 18-22 $   92 t  1.2 | 23+ $  366 t  2.3 | L $  213 S $  nan
+                trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+NQ A asym 2018+   1175 30%  $32  $4,190   0.12    0.26          1.03 $88,972   0.05 18.71       0.45
+NQ A asym 2023+    462 32% $-81 $-9,416  -0.24   -0.45          0.94 $88,972  -0.11 38.04      -0.50
+NQ longs           977 31%   $5    $488   0.02    0.03          1.00 $63,983   0.01 26.78       0.04
+NQ shorts          198 25% $169  $3,703   0.23    0.58          1.17 $46,991   0.08 15.17       0.49
 
 ES (per 1 contract, 2017-10-10 .. 2026-10-09):
-   A asymmetric (paper's main), 24h stop        n= 1199 $    -3 PF 1.00 t  -0.1 stop  57% yrs+ 6/10 | 18-22 $   26 t  0.4 | 23+ $  -52 t -0.6 | L $  -29 S $  123
-      by year $: {2017: 2799, 2018: -976, 2019: -3245, 2020: 17964, 2021: 2195, 2022: 833, 2023: 7653, 2024: 9789, 2025: -15932, 2026: -25101}
-   A symmetric, 24h stop                        n= 2154 $   -72 PF 0.89 t  -2.0 stop  51% yrs+ 4/10 | 18-22 $  -24 t -0.6 | 23+ $ -140 t -2.3 | L $  -29 S $ -109
-   B asymmetric, RTH-only stop (info)           n= 1199 $    82 PF 1.10 t   1.2 stop  49% yrs+ 8/10 | 18-22 $   88 t  1.1 | 23+ $   71 t  0.6 | L $   70 S $  142
-   C Apex-legal open->14:59, asym               n= 1199 $    -4 PF 0.99 t  -0.1 stop  49% yrs+ 5/10 | 18-22 $   -3 t -0.1 | 23+ $   -4 t -0.0 | L $   -8 S $   16
-   control: long every close, 24h stop          n= 2165 $     8 PF 1.01 t   0.2 stop  50% yrs+ 6/10 | 18-22 $  -16 t -0.4 | 23+ $   40 t  0.6 | L $    8 S $  nan
-   control: long after GREEN days               n= 1158 $    42 PF 1.07 t   0.9 stop  46% yrs+ 6/10 | 18-22 $   13 t  0.3 | 23+ $   84 t  1.0 | L $   42 S $  nan
+   A asymmetric (paper's main), 24h stop        n= 1199 $     2 PF 1.00 t   0.0 stop  57% yrs+ 6/10 | 18-22 $   31 t  0.5 | 23+ $  -47 t -0.5 | L $  -24 S $  128
+      by year $: {2017: 2924, 2018: -311, 2019: -2600, 2020: 18609, 2021: 2735, 2022: 1943, 2023: 8183, 2024: 10354, 2025: -15252, 2026: -24611}
+   A symmetric, 24h stop                        n= 2154 $   -67 PF 0.90 t  -1.9 stop  51% yrs+ 4/10 | 18-22 $  -19 t -0.4 | 23+ $ -135 t -2.2 | L $  -24 S $ -104
+   B asymmetric, RTH-only stop (info)           n= 1199 $    87 PF 1.11 t   1.3 stop  49% yrs+ 8/10 | 18-22 $   93 t  1.2 | 23+ $   76 t  0.6 | L $   75 S $  147
+   C Apex-legal open->14:59, asym               n= 1199 $     1 PF 1.00 t   0.0 stop  49% yrs+ 5/10 | 18-22 $    2 t  0.0 | 23+ $    1 t  0.0 | L $   -3 S $   21
+   control: long every close, 24h stop          n= 2165 $    13 PF 1.02 t   0.4 stop  50% yrs+ 6/10 | 18-22 $  -11 t -0.3 | 23+ $   45 t  0.7 | L $   13 S $  nan
+   control: long after GREEN days               n= 1158 $    47 PF 1.08 t   1.0 stop  46% yrs+ 6/10 | 18-22 $   18 t  0.4 | 23+ $   89 t  1.1 | L $   47 S $  nan
                 trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
-ES A asym 2018+   1199 36%  $-3   $-432  -0.02   -0.04          1.00 $59,416  -0.01 22.98      -0.04
-ES A asym 2023+    453 38% $-52 $-6,036  -0.28   -0.47          0.94 $59,416  -0.10 32.58      -0.37
-ES longs           996 37% $-29 $-3,113  -0.18   -0.33          0.96 $56,332  -0.06 42.94      -0.14
-ES shorts          203 26% $123  $2,681   0.23    0.60          1.17 $36,646   0.07 15.88       0.34
+ES A asym 2018+   1199 36%   $2    $212   0.01    0.02          1.00 $58,466   0.00 21.39       0.02
+ES A asym 2023+    453 38% $-47 $-5,456  -0.26   -0.43          0.94 $58,466  -0.09 31.53      -0.35
+ES longs           996 37% $-24 $-2,578  -0.15   -0.27          0.96 $54,487  -0.05 39.55      -0.13
+ES shorts          203 26% $128  $2,790   0.24    0.62          1.17 $36,151   0.08 15.56       0.36

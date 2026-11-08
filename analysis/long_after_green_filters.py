@@ -1,5 +1,6 @@
 """Filters on WATCHLIST #28 (long NQ after a green RTH day; user ask 2026-11-08 'add a volatility filter or something').
-Pre-registered family (written before running; 6 filters, each splits the green days in two; mechanism in brackets):
+EXPLORATORY, not pre-registered (Codex weekly review 2026-11-06 #4: the header was written before running but never committed
+before the run, and every filter's 2023+ result is printed). Family (6 filters, each splits the green days in two; mechanism in brackets):
   F1 volatility: 20-day ATR (RTH ranges) above its 1-year median [continuation is stronger in volatile regimes]
   F2 trend: 15:00 close above its 200-day average [drift supports the overnight long]
   F3 strength: green body >= 0.5 x 20-day ATR [a strong day continues more than a doji]
