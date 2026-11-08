@@ -150,7 +150,9 @@ piece improves return/DD in BOTH periods, so all stay here. 2018-26 (median / DD
 FVB +$4.2k / 5.66 / +$4.4k; ST 2nd shorts only +$1.3k / 5.66 / +$1.8k (2018-22 +0.18); S30 +$5.5k / 5.39 / +$7.0k (2023+ +0.09);
 RollZone +$4.6k / 5.31 / +$6.7k; Prior VWAP Trap +$3.0k / 5.29 / +$5.2k; DriftPullBack v3 +$3.1k / 5.07 / +$6.6k. **Median $ per $ of
 extra capital (add order when capital grows):** Ricochet 1.7, FVB 1.0, ST both 0.9, S30 0.8, ST shorts 0.7, RollZone 0.7, PVT 0.6,
-DP 0.5. Added the same day from Codex's ledgers: R2Vault +$1.8k / 5.62 (-0.19) / +$2.4k (0.7 $ per $ of capital); S03 v2 +$2.9k / 5.46 (-0.35;
+DP 0.5. **Book test of four leads (2026-11-08, `analysis/bench_leads_book_test.py`): S30 NQ with entry IBS < 0.10 improves the book in BOTH
+periods (5.81 -> 6.61; 2018-22 +0.16, 2023+ +1.30; +$4.3k a year at +$58 DD) -> WATCHLIST #34 (forward log; ES leg untested). FVB shorts only
+6.12 (+0.31, but 2018-22 -0.23; capital +$1.2k): replaces FVB both sides on this bench. S03 longs 5.77, Anson longs 5.49: stay.** DP 0.5. Added the same day from Codex's ledgers: R2Vault +$1.8k / 5.62 (-0.19) / +$2.4k (0.7 $ per $ of capital); S03 v2 +$2.9k / 5.46 (-0.35;
 2018-22 +0.05) / +$4.2k (0.7); Anson +$2.1k / 5.17 (-0.64, worse in both periods) / +$5.0k (0.4). Futures trend: never built, not retested.
 
 ## Read this before trusting the numbers
