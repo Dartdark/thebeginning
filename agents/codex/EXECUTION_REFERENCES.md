@@ -1801,3 +1801,21 @@ Source: Chernov, Kelly, Malamud and Schwab, *The Hidden Sharpe Ratio*, SSRN76794
 - Implementation: author output tables annualize squared Sharpe and also multiply diagnostic columns by the annualizer. Preserve raw derivative/grid units; reconcile order1/corner-adjusted outputs with the paper rather than copying order2 examples. No upstream code was executed or installed.
 - Limits: original source assumes a high-dimensional managed-stock/bond universe and statistical conditions including within-window stability/iid innovations. Native integer futures and intraday account floors are a different application. Source prose/figure bond numbers and HJ notation need reconciliation before reuse.
 - Next check only if a later methods task justifies it: validate source/code parity, exact vintages, serial dependence, selection and net executable costs on the actual frozen universe. No new strategy queue item, live change, demonstrated saving or allocation follows.
+
+
+### E09/E11 follow-up — Return-space hedges and ETF primary-flow clocks
+
+Sources: [Joo/Park SSRN4355765](results/bitcoin_commodity_hedges_4355765.md) and
+[Barahhou/Abitbol SSRN7517178](results/etf_flows_7517178.md), uploaded full PDFs.
+- A covariance/variance hedge coefficient on returns is a notional ratio, not a native contract count. Convert with
+  signed exposure/contract multiplier, preserve actual paired rolls, cash, fees and margin; CL is not Brent.
+  HE is fractional variance reduction, not return, drawdown or account-breach protection. Gold's short-window
+  positive HE turns negative over every displayed500–2000 evaluation; no verified hedge benefit for our account.
+- ETF primary creation/redemption flow is not secondary volume or necessarily fresh cash buying: AP inventory,
+  in-kind baskets and netting matter. Historical beginning-month stock weights, classifications and NAV/share
+  publication vintages must precede a signal/fill. A future market-return regression control is not an observable feature.
+- Evidence: source text/table-image inspection and reproducible source arithmetic/filename census only; zero
+  new empirical strategy trials, execution savings or portfolio changes. Public vendor/SEC checks proxy403.
+- Next check only with new matching free inputs: one native hedge/cash interval or ETF monthly flow/weight/receipt
+  reconstruction as appropriate, then its own evidence/preregistration gate. No cross-market price proxy, paid
+  data request, live/logger change, automatic collector or paused-scout restart is implied.

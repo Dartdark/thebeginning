@@ -228,6 +228,16 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **ETF-flow stock selection — NEEDS DATA AND SPECIFICATION (SSRN7517178).**
+  Conditional personal-stock lead: monthly top/bottom50 using z12−z3 of thematic/sector ETF-induced pressure.
+  Authors report17.57%annualized/Sharpe0.98 design; later Jan–Aug2026 earns8.54% versus16.82% benchmark,
+  Sharpe0.54 versus2.01. Source-only, not net verified. Need as-of NAV/shares/splits, historical holdings/category,
+  stock market caps/membership and borrow/financing/cost clocks. Public Trackinsight/SEC checks proxy403;
+  current ETF prices/holdings are not matching historical inputs. Next: one formation month and availability/
+  stock-pressure/cash ledger without returns, then coverage/power and committed protocol. Zero new return trials,
+  NQ/ES substitute or current allocation. [Review](agents/codex/results/etf_flows_7517178.md) ·
+  [Evidence](agents/codex/evidence/etf_flows_7517178.md) · [Data register](agents/codex/DATA_NEEDED.md).
+
 - [ ] **Lagged-volume intraday risk sizing — conditional SOURCE/EXECUTION WATCH (2026-11-06), SSRN5795584.**
   Specific merit and unreplicated author results: [record](agents/codex/research/scout/records/5795584.json).
   Owned price/volume fields overlap; this does not reopen prior generic volatility-targeting failures.

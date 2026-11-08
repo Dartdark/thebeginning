@@ -234,3 +234,19 @@ evidence. Park; continue distinct discovery. No repeated crawl, purchase, alert,
 |Lead and merit|Exact prerequisites and bounded check|Smallest justified next check|
 |---|---|---|
 |**D52 — Signed Treasury jump-risk premium, SSRN1716759; conditional personal WATCH.** Author abstract reports OOS Sharpe0.52; related Tilburg thesis Table18 reports2003–2009 IR0.52. These are unreplicated and not native ZN net results.|Need complete published-source bytes/rules and parity with the related thesis; exact causal jump detector, initialization,12/24-month jump formation, five-year normalization and staggered monthly bets; admissible pre2018warm-up, source JP Morgan/CRSP target or explicitly justified native adaptation, dated rolls/duration/cash/fees/integer size. Named owned ZN minutes span2017–26. A bounded public search plus connected GitHub repository/README/data-directory/ignore-file check found that the advertised2010–26minute parquet and Bloomberg workbook are proprietary and explicitly excluded. No matching input was acquired; no payment, account or external request.|Only on genuinely new matching source/data, reconcile one past-only formation and native dated-contract holding, then assess complete design power/costs before reserving returns. Monthly/yearly source exposure is not Apex intraday evidence. Event plots omitting overnights/costs cannot certify a personal ledger. Park and move on; no repeated acquisition loop. [Record](research/scout/records/1716759.json), [bounded check](inputs/scout_20261105/free_data_check.json), [report](results/scout_owned_source_20261105.md).|
+
+
+## ETF-flow stock-selection follow-up — SSRN7517178
+
+Conditional personal research; no return trial or acquisition purchase. Need historical daily NAV/share counts on
+consistent split bases, beginning-month physical ETF stock weights and as-of category labels, S&P500 membership,
+stock market caps/total returns and publication/receipt clocks, including delistings. Source holdings beginJune2020;
+reproduction needs twelve-month warm-up through2021–25 and the claimed January–August2026 evaluation. Historical
+borrow/fees and gross/net portfolio cash conventions remain required. Current holdings, ETF turnover or price bars
+cannot replace creations/redemptions or their as-of stock mapping. Public Trackinsight/SEC discovery pages returned
+proxy403; no matching histories were downloaded and SEC filing lag/frequency is not equivalent. Free sources only.
+Smallest next check with genuinely new inputs: one formation month, point-in-time share/NAV/weight evidence and
+pressure/z12−z3/stock-cash ledger before an economic protocol. Source later results underperform the benchmark;
+retain that limitation. [Review](results/etf_flows_7517178.md), [evidence](evidence/etf_flows_7517178.md).
+Bitcoin commodity-hedge source4355765 is not a new data-watch allocation candidate: its weak/negative Table4
+is retained in [the review](results/bitcoin_commodity_hedges_4355765.md), rather than reviving a hedge search.
