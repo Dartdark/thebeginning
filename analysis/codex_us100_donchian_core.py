@@ -160,7 +160,8 @@ class NativeCore:
         self.last_time = minute.start
         self.last_contract = minute.contract
         cash_at_start = self.cash
-        open_marks = [self.cash]
+        open_marks = ([self.cash+(minute.open-self.position.entry)*self.value-self.fee]
+                      if self.position else [self.cash])
 
         # An already-crossed protective stop has priority over calendar/signals.
         if self.position and minute.open <= self.position.stop:
