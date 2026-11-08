@@ -1,0 +1,72 @@
+{
+  "scope": "published arithmetic and synthetic risk paths only",
+  "groups": {
+    "annualization": {
+      "source_total_pct": 4879.6,
+      "years": 26.3,
+      "derived_cagr": 0.1601979898563859,
+      "benchmark_cagr": 0.0946230839306359,
+      "calmar": 2.7152201670573883
+    },
+    "alpha": {
+      "printed_5y_inputs_alpha": 0.9268000000000001,
+      "full_span_cagr_alpha": 0.1147356814633223,
+      "author_final_alpha": 0.1147,
+      "qualification": "Final11.47%is consistent with full-span CAGR arithmetic; printed5yinputs are not. CAGR substitution is not an authenticated periodic CAPM regression."
+    },
+    "beta_correlation": {
+      "author_beta": 0.1,
+      "author_table_rho": 0.7,
+      "implied_sigma_ratio": 0.14285714285714288,
+      "uncorrelated_claim_supported": false
+    },
+    "trade_claims": {
+      "derived_5y_cagr": 1.0107219224315682,
+      "wins": 101,
+      "losses": 13,
+      "win_rate": 0.8859649122807017,
+      "mean_trade_pct_from_rounded_inputs": 3.5712280701754384
+    },
+    "close_stop": {
+      "synthetic_entry": 100,
+      "low": 90,
+      "close": 96,
+      "low_loss": -0.09999999999999998,
+      "close_loss": -0.040000000000000036,
+      "close_5pct_rule_triggered": false,
+      "illustrative_entry_NQ_points": 10000,
+      "five_pct_price_points": 500,
+      "one_NQ_dollar_loss": 10000,
+      "one_MNQ_dollar_loss": 1000
+    },
+    "path_risk": {
+      "path_A": [
+        100,
+        110,
+        120
+      ],
+      "path_B": [
+        100,
+        80,
+        120
+      ],
+      "dd_A": 0,
+      "dd_B": -0.19999999999999996,
+      "same_terminal_value": true
+    }
+  },
+  "groups_completed": 6,
+  "assertions_passed": 10,
+  "economic_trials": 0,
+  "historical_returns_computed": false,
+  "portfolio_tests_run": false,
+  "strategy_admission": "FAIL: custom formulas, clocks and native ledger unresolved; no supported neutrality claim",
+  "preregistration_commit": "e9ab52e3640ba74376566bf324a8c513fec1ae1e",
+  "hashes": {
+    "agents/codex/inputs/weekly_nq_5630830_20261108/rules_page18.png": "113984767dc655c3fba3b6be36c4f1be2ab6079b9e53237cc365b4b256c363a3",
+    "agents/codex/inputs/weekly_nq_5630830_20261108/upload.pdf": "2f060f8b99c6c35d84849ecefcd84ab53ff36440972839d6511ec8e30dd255fc",
+    "agents/codex/inputs/weekly_nq_5630830_20261108/upload.txt": "035bdf599823a57520b693e7ebe1d2937f9a03382c7eb9611213b0beac476302"
+  },
+  "code_sha256": "665169f27a3b69f7d99e20f4ce023bea105c9845f352d143e2f48a737ef7f4cd",
+  "plan_sha256": "8b3ccbc55aa6673f6ffbdc30524436b3a8a0f3ef05909f239020278fb170dfbe"
+}

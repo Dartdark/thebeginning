@@ -1,0 +1,57 @@
+{
+  "title": "Backtesting and Analysis of a Quantitative Trading Strategy: A Case Study in Moving Average Crossovers and Portfolio Diversification",
+  "author": "Zachary B. Arnold",
+  "source_date": "April 27, 2026",
+  "source_file_id": "file_00000000104c81fd9df094afec11896d",
+  "review_date": "2026-11-08 America/Los_Angeles",
+  "pages": 34,
+  "scope": "All extracted narrative, tables and references read; Table3 visually inspected; remaining charts not independently digitized; no original code/data or empirical replication",
+  "hashes": {
+    "agents/codex/inputs/crossover_6684499/paper.pdf": "263e2120ef3032715065a59c65c67510abf430cfe776c841d036d60ef7bedda2",
+    "agents/codex/inputs/crossover_6684499/paper.txt": "ea538c90779928159f183bd91fc58d16a6d5e382920ab2ae8bdb07ffde871752",
+    "agents/codex/inputs/crossover_6684499/table3.png": "32412c102915702540c42e79f80301e025d77f8e6801a906d8ab73ee7372fed9",
+    "analysis/codex_crossover_6684499_audit.py": "faa78401ae7d80bf42b696916254320a1d923ab157c86ae6bc6eea4c09818965"
+  },
+  "author_reported_table3_not_reproduced": {
+    "strategy_annual_return_pct": 12.04,
+    "benchmark_annual_return_pct": 17.27,
+    "strategy_sharpe": 0.779,
+    "benchmark_sharpe": 0.849,
+    "strategy_max_dd_pct": -25.79,
+    "benchmark_max_dd_pct": -35.23,
+    "daily_difference_t": -2.169,
+    "p_value": 0.03,
+    "positive_day_rate_pct": 52.1
+  },
+  "arithmetic": {
+    "annual_return_gap_pp": -5.23,
+    "shallower_drawdown_pp": 9.44
+  },
+  "author_table5_OOS_sharpe_pairs_strategy_benchmark": {
+    "AAPL": [
+      0.9,
+      1.112
+    ],
+    "MSFT": [
+      1.12,
+      0.982
+    ],
+    "JPM": [
+      0.329,
+      0.541
+    ],
+    "XOM": [
+      0.58,
+      0.487
+    ],
+    "JNJ": [
+      -0.163,
+      0.332
+    ]
+  },
+  "assumed_source_fee_per_side_decimal": 0.001,
+  "source_return_definition": "(1 + mean daily return)^252 - 1; not geometric path CAGR",
+  "new_economic_trials": 0,
+  "strategy_returns_computed": false,
+  "verdict": "DONT_TEST_RETAIN_NEGATIVE_EVIDENCE"
+}
