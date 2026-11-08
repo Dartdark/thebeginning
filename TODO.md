@@ -228,6 +228,17 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **KSE Sentinel / PSX trend continuation — NEEDS RULES AND VALIDATION (uploaded SSRN7102818).**
+  Low-priority personal-market lead only. Author claims 1,009 trades, PF 2.51, Sharpe 2.08,
+  PKR CAGR 7.47% but USD CAGR −2.96%; unverified. Exact EMA/regime/exit/sizing rules withheld;
+  DSR left as a placeholder, archive/forward outcomes not supplied. Public strategy shortlink
+  returned HTTP 403; bounded title/link search found no reproducible specification. Next only
+  with free new inputs: frozen rules/code plus a small dated trade/blocked-signal and cost/FX
+  ledger before acquiring full PSX point-in-time history or admitting a return experiment.
+  Do not invent settings, use an opaque API as verification, or adapt to NQ/ES automatically.
+  [Review](agents/codex/results/kse_sentinel_7102818_review.md) ·
+  [Data register](agents/codex/DATA_NEEDED.md#kse-sentinel--psx-source-rule-gate-uploaded-ssrn7102818).
+
 - [ ] **International Buffett-indicator allocation — NEEDS DATA AND SPECIFICATION (SSRN4071039).**
   Conditional low-priority personal long-term lead: country-wise matured ten-year-return regressions on
   log(market-cap/GDP), equal-weight top7 of14, reset everyten years. Source composite10.5% versus9.5%,
@@ -240,6 +251,8 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   [Evidence](agents/codex/evidence/buffett_international_4071039.md) · [Data register](agents/codex/DATA_NEEDED.md).
 
 - [ ] **Diversified delta-straddle trend — NEEDS DATA AND SPECIFICATION (SSRN4677166).**
+  User-requested offline signal/whole-lot planner now built:34synthetic mechanical checks pass; no return backtest
+  or personal allocation established. Native replay/cash adapter still requires the matching data below.
   Conditional low-priority personal lead: explicit smooth t-stat signal,32/64/126/252/504-day blend and41-market
   risk-scaled portfolio. Author reports9.27%annual/Sharpe1.03/13.60%DD, not independently reproduced; fast4/8/16-day
   version loses after modeled costs. Need full identified futures/FX total-return/carry panel,504-session warm-up,
@@ -247,7 +260,17 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   Owned/free replication searches did not admit a matching panel. Printed AR(1)t adjustment and fast DD below−100%
   require reconciliation. Next only on new inputs: one rebalance/roll/cash interval, then coverage/cost/power gate
   before committed returns. No NQ subset, intraday port, failed-family rescue or allocation; multiday holds fail Apex.
-  [Review](agents/codex/results/delta_straddle_4677166_review.md) · [Data gate](agents/codex/inputs/delta_straddle_4677166/free_data_gate.md).
+  [Review](agents/codex/results/delta_straddle_4677166_review.md) · [Code/test report](agents/codex/results/delta_straddle_4677166_build.md) ·
+  [Data gate](agents/codex/inputs/delta_straddle_4677166/free_data_gate.md).
+
+- [ ] **SPY “Beat the Market” replication audit — conditional low-priority NEEDS DATA (SSRN7323419).**
+  Author closely replicates the historical SPY noise-band/VWAP result, but reports−8.1%September2025–August2026;
+  final overlays selected after80adaptive SPY alternatives, no clean holdout, and fail to improve QQQ Sharpe.
+  Native SPY minute/dividend/calendar/cash/borrow data and authenticated replication engine/trial package missing
+  after bounded free checks. No new planner built. Existing NQ/ES family failures are retained, not revived.
+  Next only on genuinely new inputs: one causal formation/dividend/early-close/fill cash reconciliation, then
+  coverage/cost gate before economic protocol. No personal or Apex allocation.
+  [Review](agents/codex/results/delgado_7323419_review.md) · [D55 data needs](agents/codex/DATA_NEEDED.md).
 
 - [ ] **ETF-flow stock selection — NEEDS DATA AND SPECIFICATION (SSRN7517178).**
   Conditional personal-stock lead: monthly top/bottom50 using z12−z3 of thematic/sector ETF-induced pressure.

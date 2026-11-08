@@ -1,0 +1,485 @@
+    Entry-Timing Confirmation via Maximum
+   Adverse Excursion: An Empirical Test on a
+       Systematic Index Futures Strategy
+Purvang Gandhi MTS Institute July 2026
+
+Conflict of interest disclosure: The author operates MTS
+Institute and a subscription based market research publication,
+The Regime Report. The systematic signal tested in this paper
+is a separate, proprietary strategy and is not part of the publicly
+marketed research framework used in those products. This
+paper is offered as independent, self funded research and does
+not constitute investment advice or a recommendation to trade
+any instrument.
+
+
+Abstract
+
+Systematic trading research overwhelmingly concentrates on
+signal generation, the rules that determine direction, while
+treating the moment of execution as a fixed consequence of the
+signal rather than a decision variable in its own right. This
+paper isolates entry timing as a distinct layer and tests one
+specific, easily implementable variant: delaying entry until price
+has moved a threshold percentage against the signal’s direction
+(a pullback for long entries, a rally for short entries), using each
+trade’s recorded Maximum Adverse Excursion (MAE, Sweeney,
+1996) to determine, ex post, whether such a delayed limit order
+would have filled. Applied to a proprietary systematic trend-
+continuation signal traded on NSE Nifty index futures over a
+fifteen-year sample (2010 to 2026, N = 3,908 trades), a modest
+pullback-confirmation requirement (approximately 0.25% of the
+underlying) improves the Sharpe ratio from 1.38 to 3.33 and
+the Sortino ratio from 2.59 to 10.11, net of realistic transaction
+
+
+
+                                 1
+costs, while retaining 63% of the original trade population. The
+improvement is robust across a threshold band rather than
+concentrated at a single point, and Monte Carlo resampling
+confirms the result is not an artefact of favorable trade
+ordering. We discuss the likely mechanism (adverse-selection
+filtering of low-conviction signals), the opportunity cost
+(profitable trades foregone when the required pullback never
+materializes), and the boundary conditions under which this
+technique should be expected to generalize.
+
+Keywords: entry timing, maximum adverse excursion,
+systematic trading, execution, limit orders, trend following
+
+AI Disclosure: The author used Claude (Anthropic), an AI
+assistant, for data analysis, statistical computation, and drafting
+assistance in the preparation of this paper. All research design,
+interpretation, and conclusions are the author’s own.
+
+
+1. Introduction
+
+The academic and practitioner literature on systematic trading
+is asymmetric in an easily overlooked way. A large body of work
+addresses signal construction (which conditions should trigger
+a trade) and a separate, largely disconnected body of work
+addresses optimal execution of a decision already made,
+primarily in the market microstructure literature on order
+placement and slicing (Almgren & Chriss, 2000; Guo, de
+Larrard, & Ruan, 2017). Comparatively little attention sits
+between these two layers: given that a signal has fired, is the
+instant of firing actually the optimal moment to act on it, or is
+there a cheap, testable, rule-based way to wait for confirmation
+without forfeiting the edge the signal was designed to capture?
+
+This question is distinct from execution-cost minimization in the
+microstructure sense. It is not about how to fill a given order at
+the lowest impact cost; it is about whether the order should be
+placed at all at the moment the signal fires, versus at a specific,
+
+
+
+                                 2
+worse price that the signal must first reach. This is closer in
+spirit to discretionary trading heuristics (“don’t chase, let it
+come to you”) than to formal execution theory, and to our
+knowledge it has not been subjected to a rigorous, cost-
+adjusted, out-of-sample-style statistical test using a real multi-
+year trade population and a well-established excursion metric.
+
+We use Maximum Adverse Excursion (MAE), introduced by
+Sweeney (1996, 1997) as a tool for empirically calibrating stop-
+loss placement, for a different purpose: to determine, for a
+completed historical trade, whether a hypothetical resting limit
+order at a specified adverse offset from the original signal price
+would have been filled before the trade’s actual exit. This
+allows a clean, non-parametric simulation of a delayed-entry
+rule without requiring tick-level order book reconstruction.
+
+1.1 Contribution
+
+This paper makes three contributions. First, it formalizes a
+simple, MAE-based method for testing delayed, confirmation-
+based entry rules on any existing trade log, requiring only entry
+price, exit price, and per-trade MAE, data that most trade-
+management platforms already record. Second, it provides a
+full empirical test on a real, multi-year systematic strategy,
+including realistic transaction costs and Monte Carlo
+robustness checks, rather than a stylized illustration. Third, it
+documents that the effect, where present, is not knife-edge; the
+improvement holds across a range of thresholds, which is
+evidence against the result being a curve-fitting artefact.
+
+1.2 A Note on Disclosure
+
+The underlying trading signal to which this entry-timing overlay
+is applied is proprietary and its specific rules are withheld,
+consistent with standard practice for practitioner-oriented
+empirical work of this kind. What is fully disclosed, and what
+this paper’s contribution rests on, is the entry-timing
+
+
+
+                                 3
+methodology itself (Section 3.3), which is signal-agnostic and
+can be applied to any systematic strategy with a recorded MAE
+per trade, together with the complete statistical results of
+applying it. A reader cannot reconstruct the underlying signal
+from the material presented here; they can, however, fully
+reconstruct and test the entry-timing technique on their own
+strategy.
+
+
+2. Related Work
+
+Sweeney (1996, 1997) introduced Maximum Adverse Excursion
+as a diagnostic for calibrating stop-loss levels: by plotting MAE
+against final trade outcome across a large trade sample, a
+trader can identify the adverse-excursion level beyond which
+trades rarely recover, informing where a protective stop should
+sit. Subsequent practitioner literature has applied MAE (and its
+counterpart, Maximum Favorable Excursion, MFE) primarily to
+exit-side decisions, stop placement and profit-target calibration,
+with comparatively little published work using MAE to inform
+entry-side decisions.
+
+The market microstructure literature offers a related but
+distinct line of work on optimal order placement in a limit order
+book (Guo, de Larrard, & Ruan, 2017; Almgren & Chriss, 2000),
+which typically takes the decision to trade as given and
+optimizes the mechanics of execution, order size, timing within
+a fixed window, and limit versus market order mix, to minimize
+cost and market impact. This literature generally does not
+address whether the initiating signal itself should be delayed,
+since the models typically begin from a mandate to complete a
+given trade within a horizon (e.g., liquidating a position), rather
+than from a discretionary systematic signal that could simply be
+skipped if not confirmed.
+
+
+
+
+                                 4
+Discretionary trading heuristics around waiting for a pullback
+or retracement before entering a trend are widely discussed in
+practitioner and educational trading literature (e.g.,
+retracement-based entry frameworks common in technical
+analysis), but this literature is generally not statistically
+rigorous: claims are illustrated with selected chart examples
+rather than tested across a full trade population with cost
+adjustment and robustness analysis. This paper aims to bring
+the same empirical standard applied to signal research to this
+specific, execution-adjacent question.
+
+
+3. Data and Methodology
+
+3.1 Data
+
+The sample consists of 3,908 closed round-trip positions
+generated by a proprietary systematic trend-continuation signal
+traded on NSE Nifty 50 index futures, hourly bar resolution,
+from 13 April 2010 to 30 January 2026 (approximately 15.8
+years). Each record includes the signal direction (long or short),
+entry price and timestamp, exit price and timestamp, and the
+trade’s Maximum Adverse Excursion, defined as the worst price
+the position touched (in the position’s unrealized loss direction)
+at any point between entry and exit. All returns are computed
+as a percentage of entry price rather than in index points,
+ensuring comparability across the roughly fivefold range the
+underlying index traversed over the sample period.
+
+3.2 Base Strategy
+
+The base signal’s specific entry and exit rules are proprietary
+and are not disclosed in this paper (Section 1.2). For the
+purpose of this study it should be treated as a black box that
+produces a sequence of directional trade decisions, each with a
+known entry price, exit price, and intra-trade MAE; the overlay
+methodology tested here does not depend on, and is not specific
+
+
+
+
+                                5
+to, any detail of how that signal is generated. The base signal’s
+own unfiltered, cost-adjusted performance (Sharpe ratio 1.38,
+annualized) is reported in Section 4.1 purely as the baseline
+against which the entry-timing overlay is evaluated.
+
+3.3 Pullback-Confirmation Overlay
+
+For a chosen threshold θ (expressed as a percentage of the
+entry price), a trade is redefined as follows:
+
+ • If the trade’s MAE was at least as deep as θ (i.e., price
+   moved against the signal by θ or more at some point before
+   the original exit), the trade is retained. Its entry price is
+   reset to the level θ away from the original signal price in the
+   adverse direction, and its return is recalculated from that
+   revised entry to the original, unchanged exit price.
+ • If the trade’s MAE never reached θ, the trade is excluded
+   from the filtered sample entirely, on the interpretation that a
+   resting limit order placed at the θ offset would never have
+   been filled; price moved directly in the signal’s favor without
+   offering the required confirmation.
+
+This is directly and realistically implementable as a live trading
+rule: upon signal generation, submit a limit order at the entry
+price adjusted by θ against the signal direction, with a time-in-
+force matching the strategy’s typical holding horizon, and
+cancel if unfilled. The method assumes that a resting limit order
+at the θ level would fill without additional slippage once price
+trades through it, and that price moves continuously through
+the θ level en route to the recorded MAE, both standard,
+defensible assumptions at hourly bar resolution, though not
+certainties.
+
+
+
+
+                                6
+3.4 Transaction Costs
+
+All performance figures reported net of cost apply a round-trip
+transaction cost of 6.02 basis points per trade, comprising
+India-specific statutory charges (Securities Transaction Tax,
+exchange transaction charges, stamp duty, applicable at the
+time of writing) and an assumed slippage allowance of two
+index points, consistent with typical execution quality for
+hourly-bar-frequency systematic trading on this instrument.
+This cost is subtracted from every trade in both the baseline
+and filtered samples, ensuring the comparison in Section 4 is
+not an artefact of ignoring execution frictions.
+
+3.5 Performance Metrics and Robustness Testing
+
+Standard performance metrics are reported: compound annual
+growth rate (CAGR), annualized Sharpe ratio (monthly returns,
+risk-free rate = 0), annualized Sortino ratio (downside deviation
+only), Calmar ratio (CAGR divided by maximum drawdown),
+maximum drawdown, win rate, and profit factor. Robustness is
+assessed via Monte Carlo simulation: the retained trade
+sequence is randomly reordered 10,000 times (trade-order
+permutation), holding the set of trade returns fixed, to
+characterize the distribution of maximum drawdown under
+alternative, equally likely historical orderings, following
+standard practice in systematic strategy evaluation.
+
+
+4. Results
+
+4.1 Baseline Performance
+
+Net of transaction cost, the unfiltered base signal produced a
+CAGR of 12.3%, an annualized Sharpe ratio of 1.38, a Sortino
+ratio of 2.59, a Calmar ratio of 1.06, and a maximum drawdown
+of 11.6% over the sample period, with a win rate of 52.4% and a
+profit factor of 1.27.
+
+
+
+
+                                7
+4.2 Pullback-Confirmation Threshold Sweep
+
+Table 1 reports performance across a range of confirmation
+thresholds θ, applied to the combined (long and short) trade
+population.
+
+              Trades     %                                  Max DD
+θ (%)                                   CAGR (%)   Sharpe
+              Retained   Retained                           (%)
+0.00
+              3,908      100            12.3       1.38     -11.6
+(baseline)
+0.05          3,744      96             22.3       2.37     -11.2
+0.10          3,466      89             28.2       2.91     -11.0
+0.15          3,163      81             31.1       3.25     -10.9
+0.20          2,775      71             31.2       3.27     -10.9
+0.25          2,448      63             31.9       3.33     -10.8
+0.30          2,094      54             30.2       3.26     -10.8
+0.40          1,541      39             24.7       3.13     -10.6
+0.50          1,107      28             19.1       2.68     -10.5
+
+
+Table 1. Performance across pullback-confirmation thresholds,
+net of transaction cost.
+
+Performance improves monotonically from the unfiltered
+baseline up to θ ≈ 0.25%, where Sharpe peaks at 3.33 (a 141%
+relative improvement over baseline) and Sortino reaches 10.11
+(baseline 2.59), before gradually declining as further tightening
+of the threshold reduces the retained sample to a point where
+fewer, higher-conviction trades no longer compensate, in
+aggregate compounding terms, for the reduction in trading
+frequency.
+
+4.3 Robustness
+
+The improvement is not concentrated at a single, narrow
+threshold. Sharpe exceeds 3.2 across the entire 0.15% to 0.35%
+band (Table 1 and interpolated values), a range wide enough
+that the result is unlikely to reflect fitting to a single, favorable
+
+
+
+
+                                    8
+data point. Trade-order permutation (10,000 resamples) of the
+θ = 0.25% configuration places the realized historical maximum
+drawdown (10.8%) at the 87th percentile of the simulated
+distribution (i.e., worse than 87% of random reorderings of the
+same trades), indicating the historical result was not an
+unusually fortunate sequencing of an otherwise weaker
+underlying trade population.
+
+4.4 Directional Decomposition
+
+Applying the identical methodology separately to long and short
+trades shows the confirmation effect holds in both directions,
+though of different magnitude: long trades improve from a
+baseline Sharpe of 1.41 to a peak of 2.09 (θ ≈ 0.10 to 0.15%),
+while short trades improve from a materially weaker baseline
+(Sharpe 0.44) to a peak of 2.58 (θ ≈ 0.25 to 0.35%), the largest
+relative improvement of either leg. This is consistent with the
+confirmation filter disproportionately screening out lower-
+conviction entries, an effect that is naturally more visible in the
+segment (short trades, in this sample) that started with more
+low-conviction entries to screen out.
+
+
+5. Discussion
+
+5.1 Candidate Mechanism
+
+We propose three, non-mutually-exclusive explanations for the
+observed improvement. First, a mechanical entry-price effect:
+by construction, every retained trade is entered at a price that
+has already moved in the trade’s eventual favor relative to the
+original signal price, which alone improves realized average
+return per trade, holding the signal’s directional accuracy
+constant. Second, an adverse-selection or confirmation effect: a
+signal that survives an initial adverse move before proceeding
+in the predicted direction may reflect stronger underlying
+conviction (e.g., more committed order flow, less likely to be
+
+
+
+
+                                 9
+transient noise) than a signal that moves directly and
+immediately in the predicted direction, which could equally
+reflect a short-lived, low-conviction move. Third, a selection
+effect on signal quality: if the base signal’s true edge is
+heterogeneous across trades, and lower-edge trades are more
+likely to move immediately without a pullback (because they
+lack the conviction to sustain an initial retracement test), the
+confirmation filter acts as an implicit, non-parametric quality
+filter, which is consistent with the disproportionate
+improvement observed on this study’s weaker (short) leg.
+
+Distinguishing empirically between these three mechanisms is
+beyond the scope of this paper and is a natural direction for
+future work, for instance by testing whether the effect persists
+when the entry price is held fixed at the original signal price
+(isolating the selection effect from the mechanical entry-price
+effect).
+
+5.2 The Cost of Confirmation: Foregone Trades
+
+At the optimal threshold identified in this sample (θ = 0.25%),
+37% of signals are never converted into trades because the
+required pullback never materialized before the original exit.
+These are, by construction, trades that would have been
+profitable at immediate entry; the technique deliberately
+forgoes them in exchange for improved average quality and a
+better risk-adjusted profile on the trades it does take. Whether
+this trade-off is favorable is an empirical question specific to
+each strategy’s trade-return distribution and cannot be
+assumed to generalize; a strategy whose edge derives primarily
+from a small number of large, immediate moves (rather than
+from the interaction between conviction and pullback frequency
+documented here) could plausibly be harmed by this technique
+rather than helped.
+
+
+
+
+                                10
+5.3 Practical Implementation and Limitations
+
+ • This is a backtested simulation using historical MAE data,
+   not a live-execution study; actual limit-order fill rates and
+   any additional slippage on the confirmation fill itself are not
+   modeled and should be validated before capital deployment.
+ • The method assumes intrabar price continuity through the
+   confirmation level, a reasonable approximation at hourly
+   resolution that may not hold at lower (e.g., daily) bar
+   frequency, where a gap could jump past the confirmation
+   level without a valid fill opportunity, or at much higher (tick)
+   frequency, where the underlying MAE recording granularity
+   would need to match.
+ • The specific optimal threshold (θ ≈ 0.25% in this sample) is
+   a property of this particular signal’s trade-return
+   distribution, its typical holding period, and the volatility
+   regime of the instrument tested; it should not be treated as
+   a universal constant, and any application to a different
+   strategy or instrument requires re-estimating the threshold
+   sweep documented in Section 4.2 on that strategy’s own
+   data.
+ • As with any single-sample historical backtest, results are
+   subject to the general risks of regime change, structural
+   market shifts, and, if the technique becomes widely adopted,
+   potential erosion of the effect through crowding.
+
+
+6. Conclusion
+
+This paper isolates entry timing as a distinct, testable layer
+separate from both signal generation and microstructure-level
+execution optimization, and proposes a simple, MAE-based
+methodology for evaluating a specific entry-timing rule:
+delaying entry until a signal has been confirmed by a threshold
+adverse price move. Applied to a real systematic trading signal
+over a fifteen-year sample, the technique produced a large,
+cost-adjusted improvement in risk-adjusted performance
+
+
+
+                                11
+(Sharpe 1.38 to 3.33; Sortino 2.59 to 10.11) that is robust
+across a range of thresholds and survives Monte Carlo
+resequencing analysis, at the acknowledged cost of foregoing a
+meaningful share of trades that would have been profitable
+without the confirmation requirement.
+
+The broader implication is that entry timing deserves treatment
+as its own research question in systematic trading, distinct from
+and complementary to signal design, particularly given how
+inexpensively it can be tested on data that most systematic
+trading operations already collect. We encourage other
+practitioners to apply the methodology in Section 3.3 to their
+own trade logs; the technique requires no new data
+infrastructure beyond what MAE tracking already provides,
+and, as this paper demonstrates, the result can be large enough
+to warrant the investigation.
+
+
+References
+
+Almgren, R., & Chriss, N. (2000). Optimal execution of portfolio
+transactions. Journal of Risk, 3(2), 5 to 39.
+
+Guo, X., de Larrard, A., & Ruan, Z. (2017). Optimal placement
+in a limit order book: An analytical approach. Mathematics and
+Financial Economics, 11(2), 189 to 213.
+
+Sweeney, J. (1996). Campaign Trading: Tactics and Strategies to
+Exploit the Markets. John Wiley & Sons.
+
+Sweeney, J. (1997). Maximum Adverse Excursion: Analyzing
+Price Fluctuations for Trading Management. John Wiley & Sons.
+
+
+
+
+                               12
+
