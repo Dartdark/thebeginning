@@ -190,3 +190,12 @@ mean-variance allocation (6-month lookback, 5% target vol, caps per asset / clas
 Sharpe 0.58, max DD -19%, turnover 42% a month. An investing choice, not a trading piece (TIER_LIST F as a strategy).
 Before using: rerun the open-source code on fresh data, compare with a simple 60/40 or T-bills after costs and taxes, and
 check margin rules (ETFs held as collateral vs cash).
+
+## Candidates from the 2026-11-08 'new sources' test (`../analysis/new_sources_personal.py`; not added yet, user decides)
+
+Personal book (cleared pieces, 1 micro each) return/DD 5.42 (2018-22 5.45, 2023+ 6.10). Adding at 1 micro:
+- **Turn of the month** (long NQ 08:30 -> 15:00 on the last trading day of a month and the first 3 of the next, stop 0.5 x ATR):
+  6.01 (+0.59), better in both periods (+0.17 / +0.80), +$1.7k a year, DD p95 $4,857 -> $4,665. Per NQ $372 a trade, t 2.5 (427 trades).
+  Next: the independent checker (checks/candidates), then add.
+- **Vol-Control Sell Flow** (MC trades, in the funded plan until October): 5.50 (+0.08), better in both periods; small.
+- Not: double top / bottom (+0.53 overall but -0.09 in 2018-22), long after a green day full rule (-0.54), gold Asian range (-0.73).
