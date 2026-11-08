@@ -26,6 +26,9 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
 - **Done 11/05 (repo, not compiled on the VPS):** kill-switch tri-state (GetLastError; 6 files, HB_Ver 2026-11-05: paste all at
   the next account setup), funded heartbeats (9 files) + `funded_rules` in expected_setup.json, pre-market VB 30-min stamp fix
   (replayed 11/03 08:20: no flag), noise-area early-close flat (EL + replay `bridge_noise_15m_earlyclose_output.txt`: +$3.1k, 0 held).
+- **Cushion cap bench 11/08** (`analysis/outputs/cushion_cap_bench_output.txt`, after Codex's 11/04 loss audit): capping each
+  stop at the room above the floor cuts fails (50K 48 -> 37%) but pass rate falls (50 -> 48%), fee per funded $498 -> $519;
+  combined cap worse. Not adopted for evaluations; code not written (user to decide; funded bench not run).
 - **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
   career tailoring (needs the user's background).
 
