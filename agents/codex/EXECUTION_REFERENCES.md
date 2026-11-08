@@ -1662,6 +1662,28 @@ two fixed causal design replays fail advancement. No MC compilation, native trad
   it preserves prices, original outcomes and unrelated events. Factual source-clock repairs require their own
   provenance and pre-outcome code commitment; favorable-touch searches would change the execution claim.
 
+Weekly source/accounting follow-up (week ending 2026-11-06):
+[independent review](../cross_review/2026-11-06_codex.md) and
+[post-read checks/proposed correction](../cross_review/2026-11-06_codex_response.md).
+- Explicitly label fixed charges per side versus round trip. Two daily research helpers subtract twice their
+  documented RT charge: an extra $7.25 per NQ or $5 per ES round trip. A two-line proposal passes eight invented
+  flat/stop cases; it has not been applied to historical results or trading code and does not rescue an edge.
+- Finite entry/exit marks do not establish a known held path. The actual green-day helper emits a finite trade
+  despite an almost entirely unknown held path in a fixture. Require expected-session coverage and retain UNKNOWN;
+  do not silently skip missing minutes or substitute an earlier close for an unavailable required exit mark.
+- The legacy evaluation helpers and Claude's later cushion-cap bench retain a premature PA-like floor lock and
+  21-session expiration. Invented first-passage counterexamples establish model defects, not corrected historical
+  pass rates. Unknown ATR becoming zero size can turn unavailable risk inputs into apparent no-trade outcomes.
+- Combined exposure caps depend on allocation order as well as stop budgets, fees, gaps and simultaneous exposure.
+  The new cap source uses VB before ONB despite declaring ONB first. Freeze the actual ordering and data contract
+  before a registered economic comparison; source checks alone do not certify survival or optimal sizing.
+- Keep PA and evaluation floor contracts distinct. The later funded cap source has a legitimate PA floor lock,
+  but its 50K, CLS-excluded bootstrap improvement (8.1% to 2.3% failures at VB=2) is not a full-book or 150K result.
+  Its chronological two-year starts show 1.5% failures either way. Dependent scenarios and a source-plan adoption
+  statement do not certify execution, causal live cushion inputs, account dominance or deployment readiness.
+- Repeated chart-log rows are not independent broker trades: the cited November 5–6 logs have 102 CLOSE rows but
+  four distinct complete rows. Preserve raw records and reconcile account/broker evidence before inferring fills.
+
 ### Source follow-up — Reaction windows, units and continuous risk weights (2026-11-06)
 
 [Checkpoint](results/scout_owned_source_20261106.md); selected-source scope, no return tests or execution savings.

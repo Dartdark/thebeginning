@@ -1,0 +1,181 @@
+{
+  "scope": "Post-read routine arithmetic/scope/proposed-source checks only",
+  "market_return_tests": 0,
+  "economic_definitions": 0,
+  "actual_account_survival_replay": false,
+  "risk_cap_arithmetic": [
+    {
+      "account": "3",
+      "recorded_cushion": 1822.6,
+      "recorded_quantity": 8,
+      "recorded_nominal_stop_risk": 2456.0,
+      "stop_risk_per_MNQ": 307.0,
+      "proposed_90pct_quantity": 5,
+      "nominal_stop_risk_at_cap": 1535.0,
+      "illustrative_stop_plus_RT2_24": 1546.2,
+      "note": "Arithmetic on recorded trade budgets, not a counterfactual fill, survival probability or account replay."
+    },
+    {
+      "account": "2",
+      "recorded_cushion": 931.34,
+      "recorded_quantity": 3,
+      "recorded_nominal_stop_risk": 1062.0,
+      "stop_risk_per_MNQ": 354.0,
+      "proposed_90pct_quantity": 2,
+      "nominal_stop_risk_at_cap": 708.0,
+      "illustrative_stop_plus_RT2_24": 712.48,
+      "note": "Arithmetic on recorded trade budgets, not a counterfactual fill, survival probability or account replay."
+    },
+    {
+      "account": "4",
+      "recorded_cushion": 1939.6,
+      "recorded_quantity": 7,
+      "recorded_nominal_stop_risk": 2478.0,
+      "stop_risk_per_MNQ": 354.0,
+      "proposed_90pct_quantity": 4,
+      "nominal_stop_risk_at_cap": 1416.0,
+      "illustrative_stop_plus_RT2_24": 1424.96,
+      "note": "Arithmetic on recorded trade budgets, not a counterfactual fill, survival probability or account replay."
+    }
+  ],
+  "risk_cap_qualification": "Stop/cost/gap/concurrency and later losses still matter; new historical0.9cap outcomes need valid inputs and bounded committed registration. Neither legacy nor new audit proves an optimal plan.",
+  "noise_scope": "Codex N15 literal/protected full-Globex only; no RTH-anchor test in that protocol. This does not endorse the distinct RTH-anchor B result or erase previous noise-family history.",
+  "proposed_fee_patch_cases": [
+    {
+      "helper": "long_after_green_test.py",
+      "symbol": "NQ",
+      "fixture": "flat",
+      "original_net": -24.5,
+      "proposed_net": -17.25,
+      "corrected_fixed_RT_charge": 7.25,
+      "entry_exit_decisions_changed": false
+    },
+    {
+      "helper": "long_after_green_test.py",
+      "symbol": "NQ",
+      "fixture": "stop",
+      "original_net": -34.5,
+      "proposed_net": -27.25,
+      "corrected_fixed_RT_charge": 7.25,
+      "entry_exit_decisions_changed": false
+    },
+    {
+      "helper": "long_after_green_test.py",
+      "symbol": "ES",
+      "fixture": "flat",
+      "original_net": -35.0,
+      "proposed_net": -30.0,
+      "corrected_fixed_RT_charge": 5.0,
+      "entry_exit_decisions_changed": false
+    },
+    {
+      "helper": "long_after_green_test.py",
+      "symbol": "ES",
+      "fixture": "stop",
+      "original_net": -60.0,
+      "proposed_net": -55.0,
+      "corrected_fixed_RT_charge": 5.0,
+      "entry_exit_decisions_changed": false
+    },
+    {
+      "helper": "daily_reversal_bertola_test.py",
+      "symbol": "NQ",
+      "fixture": "flat",
+      "original_net": -24.5,
+      "proposed_net": -17.25,
+      "corrected_fixed_RT_charge": 7.25,
+      "entry_exit_decisions_changed": false
+    },
+    {
+      "helper": "daily_reversal_bertola_test.py",
+      "symbol": "NQ",
+      "fixture": "stop",
+      "original_net": -34.5,
+      "proposed_net": -27.25,
+      "corrected_fixed_RT_charge": 7.25,
+      "entry_exit_decisions_changed": false
+    },
+    {
+      "helper": "daily_reversal_bertola_test.py",
+      "symbol": "ES",
+      "fixture": "flat",
+      "original_net": -35.0,
+      "proposed_net": -30.0,
+      "corrected_fixed_RT_charge": 5.0,
+      "entry_exit_decisions_changed": false
+    },
+    {
+      "helper": "daily_reversal_bertola_test.py",
+      "symbol": "ES",
+      "fixture": "stop",
+      "original_net": -60.0,
+      "proposed_net": -55.0,
+      "corrected_fixed_RT_charge": 5.0,
+      "entry_exit_decisions_changed": false
+    }
+  ],
+  "late_cap_source_head": "c055eced4b665946069e8c7c1de52a5c1fec658a",
+  "late_cap_pretarget_fixture_cases": [
+    {
+      "account": "50K",
+      "legacy_cap_result": [
+        "pass",
+        4,
+        0,
+        0
+      ],
+      "note": "Invented pre-target floor counterexample, not a historical return test."
+    },
+    {
+      "account": "150K",
+      "legacy_cap_result": [
+        "pass",
+        4,
+        0,
+        0
+      ],
+      "note": "Invented pre-target floor counterexample, not a historical return test."
+    }
+  ],
+  "late_cap_unknown_ATR_quantity": 0.0,
+  "late_cap_combined_insertion_order_fixtures": [
+    {
+      "insertion_order": [
+        "VB",
+        "ONB30"
+      ],
+      "result": [
+        "pass",
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "insertion_order": [
+        "ONB30",
+        "VB"
+      ],
+      "result": [
+        "time",
+        21,
+        21,
+        21
+      ]
+    }
+  ],
+  "late_cap_qualification": "Attributed new historical results are not independently rerun. The source retains capped evaluation floors, 21-session expiry, threshold DLL cash and unknown-ATR zero sizing. Combined allocation follows q insertion order, despite unused ONB-first ORDER declaration. Policies use absolute buffers 0/200, not the weekly 0.9 proposal.",
+  "funded_update_head": "d08942f545d4b5bb946057c07dff81d9c4222592",
+  "funded_source_scope": "Source/output inspection only. 50K PA model, CLS excluded, initial VB=3 output and later VB=2 output. No independent funded replay; PA floor locking is legitimate in this preset, distinct from the evaluation defect.",
+  "funded_VB2_attributed_model_results": {
+    "bootstrap_2y_baseline_blown_pct": 8.1,
+    "bootstrap_2y_piece_cap_blown_pct": 2.3,
+    "bootstrap_2y_payouts_baseline": 11778,
+    "bootstrap_2y_payouts_piece_cap": 11747,
+    "chronological_2y_blown_pct_both": 1.5,
+    "chronological_2y_payouts_baseline": 12408,
+    "chronological_2y_payouts_piece_cap": 12387
+  },
+  "funded_qualification": "Not a full current-book/150K/account execution verification. Overlapping starts and block-resampled histories are dependent model scenarios. DLL threshold-fill assumption, native coverage, registration and live-cushion clock remain unresolved; source adoption is not reviewer approval.",
+  "fee_patch_scope": "Two research helpers only; source proposal not installed or applied to Claude branch, not a strategy-rule rescue. No historical metric recomputed."
+}
