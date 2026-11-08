@@ -42,6 +42,8 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   Still not modelled: DLL fill at the limit, 30-calendar-day clock. (2) held-path gaps: 4% of long-after-green trades, result unchanged.
   (3) Bertola / long-after-green charged commission twice: fixed, reruns saved (verdicts unchanged). (4) green-day filters
   relabelled exploratory.
+- **Twin Continuation 150K added to the 150K plan 11/08 (user):** `apex_strategies/Twin_Continuation_150K.txt`, 2 MNQ, eval + funded;
+  not compiled yet (TODO 150K section). Python port gained `v21=True` (live holiday rules; 0 session-break crossings).
 - **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
   career tailoring (needs the user's background).
 

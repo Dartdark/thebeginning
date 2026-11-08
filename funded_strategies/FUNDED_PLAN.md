@@ -105,6 +105,13 @@ make it faster; its ~$5,000-a-year at 2 MNQ fits the 150K's $4,000 drawdown but 
 the user's MultiCharts report of v4 for the trade-by-trade check (`../TODO.md`); live, the drift alarm decides.
 Code `../analysis/dual_thrust_150k_test.py`, output `../analysis/outputs/dual_thrust_150k_output.txt`.
 
+## Twin Continuation 150K, 2 MNQ (added 2026-11-08, user)
+
+On 150K accounts (evaluation and funded): `../apex_strategies/Twin_Continuation_150K.txt` (v2.1 rules, BO stop <= 1 ATR, Qty 2 MNQ,
+kill switch, heartbeat, cushion guard). Evaluation set + Twin 2 MNQ 37.9% vs 35.9% pass (paired +2.0 pts, 90% band +1.1 / +3.1;
+`../analysis/twin_cap1_150k_eval.py`); funded plan x 1.5 + Twin 2 MNQ: bootstrap 2y +$260, all 6 payouts 97% vs 94%, 1y +$774
+single history (`../analysis/twin_cap1_150k_funded.py`). Best of 4 sizes (post hoc): expect less live. Not on 50K accounts.
+
 ## Cushion cap (bench 2026-11-08, `../analysis/cushion_cap_funded.py`; adopt before the first funded account, code not written yet)
 
 Each strategy trades at most floor((balance - threshold) / its stop per MNQ) MNQ that day, on top of the cushion sizing (Bridge

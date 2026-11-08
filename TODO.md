@@ -122,6 +122,10 @@ bottom). Times are Central (CT).
 - [ ] Sun Nov 1: buy 150K No-Activation #4 (afternoon, before ~18:00 CT), set up its 4 charts, send Claude the account number.
 - [ ] Each payday (Fri Nov 13, 20, 27, Dec 4, 11, 18; last pay ~Dec 24): buy as many $249 150Ks as the pay covers, ONE a day (same-day buys pass/fail together):
       after tax ~3 (5 days/wk) / ~4 (6 days/wk); without tax 4 (5 days) / 4-5 (6 days). Dec 26 pay (3 days): ~2, January starts.
+- [ ] **150K accounts from the next purchase (user 2026-11-08): a 5th chart, Twin Continuation 150K** (`apex_strategies/Twin_Continuation_150K.txt`):
+      MNQ 1-minute chart, 24h CME session, Data1 only, Intrabar Order Generation OFF; inputs Qty 2, BO_MaxStopMult 1 (defaults),
+      HeartbeatTag TW150 (or TW150-<n> per account); funded accounts also UseCushion true + the cushion inputs (FUNDED_PLAN 'Cushion cap').
+      Compile and read the Output tab ('compiled successfully'; first compile of this file). Claude adds TW150 to expected_setup.json.
 - [ ] Each new account: 4 charts, account number typed in every strategy's Auto Trading gear, rejected-orders limit 10,
       initial position Flat; send Claude the number (watchdog / dashboard / expected_setup.json) Claude sets its status to "live" in expected_setup.json: that also un-mutes the watchdog's phone alerts (muted 2026-11-05 while no account is live).
 - [ ] Stop buying if the drift alarm fires (live clearly below backtest). No more new 50Ks; #2 runs to the end.

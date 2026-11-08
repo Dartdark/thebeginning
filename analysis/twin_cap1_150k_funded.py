@@ -17,7 +17,7 @@ if __name__ == "__main__":
     S = pd.read_pickle("scratch_data/single_print_sessions.pkl"); flag = S.flag.reindex(dates).fillna(False).to_numpy().astype(bool)
     lab.W["VB_F"] = lab.W["VB"] * flag[:, None]; lab.C["VB_F"] = lab.C["VB"] * flag
     lab.W["VB_N"] = lab.W["VB"] * ~flag[:, None]; lab.C["VB_N"] = lab.C["VB"] * ~flag
-    B = tc.flatten(g); T = tc.simulate(B, max_stop_mult=1.0); T = T[T.date >= "2018-01-01"].reset_index(drop=True)
+    B = tc.flatten(g); T = tc.simulate(B, max_stop_mult=1.0, v21=True); T = T[T.date >= "2018-01-01"].reset_index(drop=True)
     Wt, Rt = grids(g, B, T); lab.W["TWIN"] = Wt[lab.tr] / 10; lab.C["TWIN"] = (Rt[lab.tr] / 10)[:, -1]
     PLAN = {"VB_N": 2, "VB_F": 1, "ONB_ML2_MC": ("risk", 400), "MON_MC": 1, "EOS": ("risk", 700), "LDF_MC": 2, "NFP_MC": ("risk", 500), "MON_BR_MC": 1, "CLS": 2}
     sc = lambda p, k: {n: (("risk", v[1] * k) if isinstance(v, tuple) else v * k) for n, v in p.items()}

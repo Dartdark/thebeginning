@@ -22,7 +22,7 @@ if __name__ == "__main__":
     for k, t in {"VB": with_slippage(load_mc(g, REPORTS["VB"][0])), "ONB30": with_slippage(load_mc(g, ONB30)), "MON_BR": load_bridge_mc(g),
                  "EOS": with_slippage(load_mc(g, REPORTS["EOS"][0]))}.items():
         w, r = paths(g, t); P[k] = (w[trr] / 10, r[trr] / 10)
-    B = tc.flatten(g); T = tc.simulate(B, max_stop_mult=1.0); T = T[T.date >= "2018-01-01"].reset_index(drop=True)
+    B = tc.flatten(g); T = tc.simulate(B, max_stop_mult=1.0, v21=True); T = T[T.date >= "2018-01-01"].reset_index(drop=True)
     W, Rr = grids(g, B, T); P["TWIN"] = (W[trr] / 10, Rr[trr] / 10)
     print(f"   Twin cap1: {len(T)} trades, ${T.net.mean():.0f} a trade per NQ")
     C = pd.DataFrame({k: P[k][1][:, -1] for k in P}, index=pd.DatetimeIndex(g.ts[trr]))[yr >= 2018]
