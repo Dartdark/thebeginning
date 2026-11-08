@@ -15,8 +15,8 @@ Independent review pending. No strategy search, original SPY replication or plan
    A missing shadow return resets the30known-calendar-day warmup; never insert zero for missing performance.
 
 All versions start flat at$100,000NAV on2018-01-02; native ES$50point,.25tick. Reinvest known net profit
-between days; risk/sizing uses day-start NAV and available entry-open price. Final marked exposure capped4x
-after every multiplier; deduct entry commission reserve from sizing affordability; position quantity frozen until
+between days; risk/sizing uses day-start NAV and the available **decision-close** price. Requested exposure capped4x
+after every multiplier; deduct full RTcommission reserve from sizing affordability; position quantity frozen until
 exit/reversal. No intratrade rebalance, stop search or other overlays. No broker margin history supplied: the4x
 cap is a research notional guard, not broker-margin certification. Negative NAV stops the path.
 
@@ -40,8 +40,10 @@ open; retain an unknown-path flag and unresolved MTM for the gap. A day with an 
 excluded from complete-day statistics and separately retained; its observed closed-trade P&L is descriptive,
 not asserted complete-day P&L. A wholly absent normal day is NaN, not cash/no trade; all subsequent
 history/vol/performance windows require their stated complete inputs. No selecting away future bad days.
-If a scheduled next-minute fill is missing, defer to the first subsequent observed open, flag that path and
-prevent fresh entry that day. Never use a future open to decide signal side. Terminal unresolved positions halt.
+If a scheduled next-minute exit fill is missing, defer to the first subsequent observed open, flag that path and
+prevent fresh entry that day. An unobserved requested entry is unfilled in the observed-only reconstruction,
+marks its whole day unknown and disables entries; never claim it was an actual exchange cancellation/no-trade.
+Never use a future open to decide signal side. Terminal unresolved positions halt.
 
 Costs: commission$2.50/ES/side plus adverse.25point market slippage/side. Reserve full RTcommission at
 entry; gross-minus-execution-slippage-minus-commission must equal closed net and sum to observed daily net.
@@ -74,3 +76,9 @@ PAPERTREND for personal and VB for prop. If statistical, coverage and execution 
 book and compare BASE/ADD/REPLACE/EMPTY with actual MES/ESinteger size, margins and account rules.
 Without those gates report all five homes unearned; no invented payout/contribution. Personal$100kreference
 is not the user's actual capital or a claim the same strategy is executable in the smaller starter ladder.
+
+Pre-return clock clarification: next-minute fill-open is not available to size the earlier market order. Freeze
+quantity at decision close, cap against current realizedNAV after reserving commission, then fill that fixed
+quantity at the next observed open. Record any actual fill/marked4xbreach; do not secretly reround with a future
+price. A breach blocks native account admission. This corrects a specification ambiguity before any results;
+not a new economic variant or a promise that a market order guarantees a leverage ceiling through a gap.
