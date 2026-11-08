@@ -1,0 +1,17 @@
+[provenance] code ec9ffaa0 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Follow-up to vix_regime_sizing.py (2026-11-08), POST HOC: calm-day x0.5 only on the pieces that were better on volatile days
+
+50K evaluation, every start day 2018+:
+   plan                                     pass 50.0%  fail 48.1%  time-out  1.9% | 2018-22 pass 46.7% / 2023+ 54.4% | median days   6 | fee/funded $498 | capped trades/acct 0.0
+   VB calm x0.5                             pass 49.4%  fail 46.9%  time-out  3.7% | 2018-22 pass 45.5% / 2023+ 54.7% | median days   7 | fee/funded $504 | capped trades/acct 0.0
+   VB calm off                              pass 48.5%  fail 44.9%  time-out  6.6% | 2018-22 pass 44.5% / 2023+ 53.9% | median days   7 | fee/funded $513 | capped trades/acct 0.0
+
+150K evaluation, every start day 2018+:
+   plan                                     pass 41.0%  fail 56.5%  time-out  2.5% | 2018-22 pass 38.9% / 2023+ 43.7% | median days   8 | fee/funded $608 | capped trades/acct 0.0
+   VB calm x0.5                             pass 39.6%  fail 55.6%  time-out  4.8% | 2018-22 pass 37.7% / 2023+ 42.0% | median days   8 | fee/funded $629 | capped trades/acct 0.0
+   VB calm off                              pass 36.9%  fail 55.9%  time-out  7.2% | 2018-22 pass 36.5% / 2023+ 37.4% | median days   8 | fee/funded $675 | capped trades/acct 0.0
+
+Funded 50K plan (VB 2, no CLS), 1,000 paired bootstrap histories, 2 years:
+   plan                   2y payouts $ 11,778  blown  8.1%  all 6 86.7%  beats plan 50.0%  diff $    +0
+   VB + LDF calm x0.5     2y payouts $ 11,992  blown  6.1%  all 6 88.5%  beats plan 51.0%  diff $  +214
+   VB + LDF calm off      2y payouts $ 11,977  blown  6.1%  all 6 87.1%  beats plan 50.5%  diff $  +198
