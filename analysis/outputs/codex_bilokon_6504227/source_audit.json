@@ -1,0 +1,68 @@
+{
+  "scope": "CONSTRUCTED THEORY CHECKS; NOT MARKET DATA OR TRADING RETURNS",
+  "source_written": "2026-04-01",
+  "source_posted": "2026-04-20",
+  "source_pages": 4,
+  "market_return_trials": 0,
+  "strategy_code_built": false,
+  "literal_state_sufficiency_check": {
+    "Z0": "equal-probability bit",
+    "Z1_Z2": 0,
+    "X1": 1,
+    "X2_given_Z0": {
+      "0": -0.4,
+      "1": 0.5
+    },
+    "switch_cost": 0,
+    "terminal_reward": 0,
+    "utility": "clamp(x,-1,1)",
+    "history_adapted_value": 1.25,
+    "reduced_state_markov_value": 1.05,
+    "gap": 0.2,
+    "missing_assumption": "Expected reward conditional on allowed history must depend only on the chosen state; MarkovZ and a regular conditional law alone do not imply that",
+    "status": "Finite counterexample under literal stated assumptions; independent formal review pending"
+  },
+  "utility_not_distribution_sufficiency": {
+    "expected_active_utility_each_state": [
+      0.2,
+      0.2
+    ],
+    "optimal_action_both_states": 1,
+    "I_Z_X_bits": 1.0,
+    "I_constant_action_X_bits": 0.0,
+    "interpretation": "Optimal binary control need not preserve the conditional PnL distribution; minimal predictive sufficiency is not established by the reward objective"
+  },
+  "hysteresis": {
+    "lambda": 0.1,
+    "dynamic_pre_switch_advantage": 0.05,
+    "by_previous_action": {
+      "0": {
+        "action": 0,
+        "q": {
+          "0": 0.0,
+          "1": -0.05
+        }
+      },
+      "1": {
+        "action": 1,
+        "q": {
+          "0": -0.1,
+          "1": 0.05
+        }
+      }
+    },
+    "on_from_off": "D > lambda",
+    "stay_on_from_on": "D > -lambda",
+    "boundary_ties": "Require an explicit tie rule unless excluded by the no-tie assumption"
+  },
+  "zero_reward_zero_cost_ties": {
+    "off_value": 0.0,
+    "on_value": 0.0,
+    "interpretation": "Illustrates the explicitly conditional uniqueness result, not a counterexample to strict separation"
+  },
+  "hashes": {
+    "agents/codex/inputs/bilokon_6504227/full_text.txt": "031b4f35b37d315cea0f888d64407c54fe64ba8c5262c375c7cc94f29ca608ca",
+    "agents/codex/inputs/bilokon_6504227/ssrn-6504227.pdf": "38972388897e0beaf347969768f4498ff4e7305a7f06f4040c01560f988ac088"
+  },
+  "code_sha256": "287b7ac87f1c67659f14de821f338d5ad895732fbcd7df98a4bb5b561264371c"
+}

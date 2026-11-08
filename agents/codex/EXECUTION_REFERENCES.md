@@ -1688,6 +1688,25 @@ Source: Tzotchev, SSRN4677166, February6,2018, [review/source audit](results/del
   No fills/cash ledger or realized savings verified; modeled final-position budgets do not ensure a safe legged
   roll path. Personal profitability still needs D54inputs and a separately admitted native replay.
 
+### Research-method follow-up — Strategy-relative regimes require predictive state and native switching
+
+Source: Bilokon, *Strategy-Relative Market Regimes as Filtration Compressions*, SSRN6504227, April1,2026;
+[full review](results/bilokon_6504227_review.md), [finite mathematical audit](../../analysis/outputs/codex_bilokon_6504227/source_audit.json).
+- Use: define a regime's usefulness for a fixed strategy's future net reward, keep prior activation/holdings and
+  include the cost of switching. A sufficient-state Bellman model implies hysteresis: turn on above+lambda,
+  stay on above−lambda, for pre-switch dynamic advantage. It does not supply the forecast or its estimation.
+- Evidence:4page theory note, no empirical strategy or profitability. Exact constructed example gives history-
+  adapted objective1.25versus1.05for the stated reduced feedback state: MarkovZalone does not make
+  history-dependent strategy rewards Markov. Need explicit reward-state sufficiency. A second fixture has
+  optimal always-on action carrying0bits while observedZcarries1bit aboutX; full-distribution predictive
+  sufficiency/minimality is not established by utility optimization. Independent formal review pending.
+- Execution limits: utility penalty is not a native dollar cost bridge. Preserve shadow baseline outcomes while
+  inactive; a switch with existing positions/orders can change later PnL, so use flat boundaries or replay actual
+  order/position/cash paths. A binary mode need not encode that state. No measured execution savings.
+- Next/status: method only, no trading/data-queue nomination. An actual causal predictor/fit/clock/utility/
+  penalty and native replay must be independently specified before a bounded preregistered return test. Do not
+  invent an ESregime filter after seeing recent baseline losses, reset multiplicity or add monitoring/schedules.
+
 ### Research-method follow-up — Indicator significance, selection and switching costs (2026-11-08)
 
 Source: Fang/Qin/Jacobsen, *Technical Market Indicators: An Overview*, SSRN2449344, user-uploaded manuscript.

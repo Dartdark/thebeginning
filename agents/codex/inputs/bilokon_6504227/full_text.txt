@@ -1,0 +1,155 @@
+    Strategy-Relative Market Regimes as Filtration Compressions
+                                       Paul Alexander Bilokon
+
+                                              1 April 2026
+
+
+                                                Abstract
+         Classical notions of market regimes are defined at the level of the underlying price process.
+     We propose a different formalisation: regimes are defined relative to a given trading strategy
+     through the conditional law of future profit and loss (PnL). We model regimes as adapted binary
+     processes that compress the filtration and separate the distribution of future PnL while remain-
+     ing temporally persistent. We formulate this as a stochastic control problem with switching
+     costs, prove existence and uniqueness of optimal regime processes under mild conditions, and
+     interpret regimes as minimal predictive state variables for strategy performance. Connections
+     to information-theoretic formulations are discussed.
+
+
+1    Introduction
+Market regimes are typically defined as latent or observable states governing the dynamics of
+an underlying price process. In such approaches, the regime is a property of the market itself,
+independent of any trading strategy.
+   However, in practice, the relevant object is not the behaviour of the price process but the
+behaviour of strategy PnL. The same market dynamics may be favourable for one strategy and
+unfavourable for another. This suggests that regimes should be defined relative to a strategy
+rather than intrinsically at the level of the market.
+   We propose a formalisation in which a regime is an adapted binary process that summarises
+available information and separates the conditional distribution of future PnL. The regime is thus a
+compression of the filtration that preserves predictive information relevant for trading performance.
+
+
+2    Set-up
+Let (Ω, F, (Ft )Tt=0 , P) be a filtered probability space.
+   Let Zt be an Ft -adapted process taking values in a Polish space E. This represents the observ-
+able state (e.g. prices and derived features).
+   Let Xt+1 denote the one-step PnL increment of a fixed strategy:
+
+                                          Xt+1 := Πt+1 − Πt ,
+
+with a regular conditional law given Zt .
+Definition 1 (Regime process). A regime process is a binary adapted process
+
+                               st ∈ {0, 1},      st ∈ σ(Z0 , . . . , Zt , st−1 ).
+
+    The interpretation is that st = 1 corresponds to a favourable regime (strategy active), and
+st = 0 to an unfavourable regime.
+
+                                                     1
+3    Objective
+Let u : R → R be a bounded measurable utility function, and let λ ≥ 0 be a switching cost.
+   We define the objective functional
+                             "T −1                                              #
+                              X                                
+                   J(s) = E        u(st Xt+1 ) − λ1{st ̸=st−1 } + h(ZT , sT −1 ) ,
+                                 t=0
+
+where h is a bounded terminal reward.
+
+Definition 2 (Optimal regime process). A regime process s∗ is optimal if it maximises J(s) over
+all admissible regime processes.
+
+
+4    Dynamic Programming Formulation
+Define the augmented state
+                                       Yt := (Zt , st−1 ) ∈ E × {0, 1}.
+    Define
+                                     mt (z, a) := E[u(aXt+1 ) | Zt = z].
+    The reward function is
+                                  rt (z, a, a− ) = mt (z, a) − λ1{a̸=a− } .
+
+
+5    Existence
+Theorem 1 (Existence and Markov structure). Assume:
+
+    • Zt is Markov with transition kernel Pt (· | z),
+    • mt (z, a) is bounded and Borel measurable,
+    • h is bounded and Borel measurable.
+
+Then there exists an optimal regime process s∗ . Moreover, it admits a Markov feedback representa-
+tion
+                                        s∗t = πt∗ (Zt , s∗t−1 )
+for some measurable selector πt∗ .
+
+Proof. Define the Bellman recursion:
+
+                                      VT (z, a− ) = h(z, a− ),
+                                                      Z                             
+                    Vt (z, a− ) = max rt (z, a, a− ) +   Vt+1 (z ′ , a) Pt (dz ′ | z) .
+                                 a∈{0,1}                    E
+
+Since the action space is finite and all functions are measurable and bounded, the maximum exists
+pointwise and measurable selectors exist. Standard backward induction yields optimality.
+
+
+
+
+                                                      2
+6    Uniqueness
+Define the action-value difference
+                               ∆t (z, a− ) := Qt (z, a− , 1) − Qt (z, a− , 0).
+Theorem 2 (Uniqueness under strict separation). If for each t,
+                                 P ∆t (Zt , s∗t−1 ) = 0 = 0,
+                                                       
+
+then the optimal regime process is unique up to indistinguishability.
+Proof. At each time t, optimality requires choosing an action maximising Qt . Under the no-tie
+condition, this maximiser is unique almost surely. Backward induction implies uniqueness of the
+entire process.
+
+
+7    Characterisation
+The optimal regime satisfies
+                                          s∗t = 1{∆t (Zt ,s∗t−1 )>0} .
+    Thus the regime is a threshold rule based on a dynamic advantage function incorporating:
+    • immediate expected PnL,
+    • switching cost,
+    • continuation value.
+
+
+8    Interpretation as Filtration Compression
+The regime process can be written as
+                                             st = ft (Zt , st−1 ),
+i.e. a binary compression of the filtration.
+     The optimal regime balances:
+    • predictive power for future PnL,
+    • temporal persistence,
+    • simplicity of representation.
+Remark 1. Under this interpretation, regimes are not intrinsic properties of the market, but
+minimal predictive state variables for a given strategy.
+
+
+9    Information-Theoretic Perspective
+An alternative formulation considers
+                                  max     I(st ; Xt+1 ) − λE[1{st ̸=st−1 } ],
+                                     s
+
+or more generally
+                    max    I(f (Zt ); Xt+1 ) − βI(f (Zt ); Zt ) − λE[1{f (Zt )̸=f (Zt−1 )} ],
+                     f
+
+which corresponds to a temporally regularised information bottleneck.
+   The control formulation may be viewed as a utility-weighted version of this objective.
+
+                                                       3
+10    Conclusion
+We have proposed a definition of market regimes as adapted binary processes that compress the fil-
+tration while preserving predictive information about future strategy PnL. The resulting framework
+yields existence and uniqueness results, admits a dynamic programming characterisation, and pro-
+vides a natural bridge between stochastic control and information-theoretic approaches to regime
+detection.
+
+
+
+
+                                                4
+
