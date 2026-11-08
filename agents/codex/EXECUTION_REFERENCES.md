@@ -2085,6 +2085,25 @@ preliminary draft, retained November 7, 2026; NYSE/Nasdaq stock switches 2009–
   automatically a specifically identified dark pool. No original TAQ replication, trading signal, measured saving,
   TODO strategy/data-shopping entry, order-routing installation, portfolio change or external message.
 
+
+### E09/E19/E30 follow-up — Cross-venue leveraged products need native units and clocks
+
+SSRN7065278, reviewed 2026-11-08: [source review and registered audit](results/pair7065278_20261108.md).
+The literal author parser converts declared same-unit GBX prices 499/501 into 49900/501. This is a synthetic
+counterexample, not measured historical inflation: fix units from source metadata and corporate-action records,
+never from a price threshold. Even granting its UTC claim, 16:00 UTC is 17:00 London in summer, outside ordinary
+continuous trading, and not a constant 11:00 New York. A date join and lagged position do not certify
+simultaneous executable quotes or later fills. TQQQ and LQQ3 are different issuer/products, not fungible listings.
+
+The paper's multiplicative cost equation reduces losing-trade losses; the actual code/workbook instead
+subtracts costs. Preserve that distinction. Its alpha spreadsheet references the wrong sheet/cells. Define
+NAV, gross exposure, collateral, borrow, FX and native leg costs before interpreting a pair-return difference.
+Fifteen engineering assertions across nine groups reproduced the registered findings; source admission failed.
+No historical return series, execution savings, portfolio result or live recommendation was established.
+Smallest next check only with new matching evidence: one native two-leg timestamp/unit/quantity/cash ledger,
+then a separate corrected protocol. The same accounting lessons apply broadly; its equity/ETP holds are not
+evidence for our Apex futures plans. No live/VPS/broker change.
+
 ### E09/E11/E12 follow-up — RSI ratios need domain, sizing and confirmation clocks
 
 Source: Tamele/Khoong/Bhattacharyya, [COR SSRN7164538 review](results/cor_dip_7164538_review.md),
@@ -2100,3 +2119,11 @@ Evidence: PDF/table images, formula counterexample, unit illustration and pinned
 outputs differ from paper; no author code or market-path return executed. Source holdings do not establish Apex intraday fit.
 Next only with genuinely new evidence: resolve denominator policy, indicator/position units, exact causal dip/exit/fill clocks
 and code/output versions before any eligible preregistered test. No measured savings, strategy/data-shopping entry or live change.
+
+
+E09/E19/E30 reconstruction follow-up (2026-11-08): user-authorized corrected
+[research components](results/pair7065278_reconstruction_20261108.md) pass28synthetic unit, quote-clock,
+causal-indicator and state-transition assertions. Explicit GBX/GBP replaces the price-level heuristic;
+15:00UTC is a provisional ordinary-session overlap, still requiring authenticated calendars and later fills.
+This is not a complete execution/cash engine, measured saving, profitable strategy or reversal of the source
+rejection. New free history probes hit proxy403. Missing native history/borrow/cash keeps returns blocked.

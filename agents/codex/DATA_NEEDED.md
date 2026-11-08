@@ -309,6 +309,29 @@ one country/formation and native release/label/currency cashflow, then full cove
 return protocol. Source Table8 drawdown/composite qualifications remain unresolved. [Review](results/buffett_international_4071039_review.md),
 [evidence](evidence/buffett_international_4071039.md). No independent return trial or allocation.
 
+
+## TQQQ/LQQ3 reproduction inputs — SSRN7065278 (2026-11-08)
+
+**Implementation admission FAILED; conditional audit inputs only, not a promoted strategy or data rescue.**
+The specific convergence hypothesis is unverified; its headline profits failed source mechanics admission.
+[Review](results/pair7065278_20261108.md), [frozen audit](plans/pair7065278_audit_20261108.md).
+
+Acquired free: full uploaded paper; pinned author code/notebook/license and workbook with 405 derived dated
+rows, 2024-04-11–2026-03-20. These lack independent raw LQQ3 and GBPUSD observations. Original hourly
+`tqqq.us.hourly.txt`, `lqq3.uk.hourly.txt`, `gbpusd.hourly.txt` are explicitly excluded from the author repository.
+A bounded Stooq historical-download check returned browser verification; no bypass or purchase.
+
+A future reconstruction needs original DATE/TIME/OPEN records with vendor timezone/bar-label metadata,
+GBp/GBP units and split/corporate-action adjustments, venue calendars/early closes, contemporaneous paired
+bid/ask and FX observations with availability/fill timestamps, borrow availability/fees, financing, native share
+quantities, collateral and cash. Existing derived workbook values do not establish these. A new design would
+also need eligible 2018–22 coverage plus the frozen warm-up; the source's later sample cannot supply that gate.
+
+On genuinely new matching inputs, reconcile one native paired formation/fill/cash ledger before proposing
+a corrected economic protocol. Do not repeatedly crawl, substitute asynchronous daily proxies, optimize a
+repair after seeing source results or revive this failed implementation merely because data arrives. Free
+sources only; no account creation, vendor contact, paid access, plan/live change or user-action request.
+
 ## KSE Sentinel — PSX source-rule gate (uploaded SSRN7102818)
 
 Low-priority personal-market lead, not research-admitted. Exact calibrated rules
@@ -334,3 +357,13 @@ User explicitly requested a separate **own-version MNQ intraday** experiment on 
 that does not resolve the PSX rule/data request. Frozen custom version failed2018–22:1,238trades,
 net−$3,013.62at1MNQ, PF0.90, t−1.23; no recent/account stage or rescue earned.
 [Custom build/test](results/sentinel_mnq_20261108.md). This is not a negative replication of the PSX paper.
+
+SSRN7065278 reconstruction follow-up (2026-11-08; user explicitly requested a corrected attempt):
+[component report](results/pair7065278_reconstruction_20261108.md),
+[three free endpoint receipts](inputs/pair7065278_reconstruction_20261108/free_data_receipts.json).
+Owned TQQQ file is NAV/share/AUM, not native quotes. New Yahoo hourly design-period requests for LQQ3.L,
+TQQQ and GBPUSD=X hit proxy tunnel403; this is an access result, not a provider coverage verdict. Public
+daily adjusted history and subscription intraday listings do not satisfy the missing synchronized inputs.
+Corrected currency/clock/signal components pass28synthetic assertions; no historical profit or economic
+admission. Original source failure stands. No repeat crawl until genuinely new evidence; native quote/receipt,
+unit/action, calendar, borrow and cash prerequisites above remain. No paid acquisition or plan change.
