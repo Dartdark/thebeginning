@@ -1,0 +1,65 @@
+{
+  "title": "Technical Market Indicators: An Overview",
+  "authors": [
+    "Jiali Fang",
+    "Yafeng Qin",
+    "Ben Jacobsen"
+  ],
+  "source_file_id": "file_000000007fcc81fda18ade14a36cf0d1",
+  "source_version": "Undated uploaded manuscript; PDF metadata created 2014-10-23, not an authenticated publication date",
+  "review_date": "2026-11-08 America/Los_Angeles",
+  "pages": 64,
+  "scope": "Main narrative Sections1-7, selected methods/results tables and Appendix4 inspected; Table13 visually inspected; not every table/figure/reference independently audited",
+  "hashes": {
+    "agents/codex/inputs/market_indicators_2449344/paper.pdf": "0f2c3b4f6bc533e5679c5ed8c922240fb445811fb1f8f16f07a21c053eb3ed61",
+    "agents/codex/inputs/market_indicators_2449344/paper.txt": "13d0c2334c3a8354eb7bef4dd26d9854defcd4cc2a66d2adcba9c805e4db7998",
+    "agents/codex/inputs/market_indicators_2449344/table13.png": "1af62d28e67d50b0e2c1851574c6f6d5b2a8013f7f4a8f9aff42bd97b3e6e302",
+    "analysis/codex_market_indicators_2449344_audit.py": "58ead63b16658d37c40ca62ab700887dafc715954c9fd080ef844b140d803dcf"
+  },
+  "author_reported_OLS_screen_counts": {
+    "indicators": 93,
+    "full_sample_p_lt_0_10": 30,
+    "both_halves": 10,
+    "stable_indication": 8,
+    "economic_outperformance": 0
+  },
+  "author_assumed_switch_cost_decimal": 0.001,
+  "selected_reported_exceptions_not_reproduced": {
+    "NYSE total short sales, robust Table13": {
+      "frequency": "weekly",
+      "n": 1788,
+      "buy_hold_display": -0.17,
+      "strategy_display": 2.47,
+      "sharpe_difference_t": 1.89,
+      "alpha_t": 1.99,
+      "source_sharpe_multiplier": 0.01,
+      "buy_hold_period_sharpe": -0.0017000000000000001,
+      "strategy_period_sharpe": 0.024700000000000003
+    },
+    "NYSE weekly advances, robust Appendix4": {
+      "frequency": "weekly",
+      "n": 1843,
+      "buy_hold_display": 2.01,
+      "strategy_display": 3.54,
+      "sharpe_difference_t": 2.16,
+      "alpha_t": 2.31,
+      "source_sharpe_multiplier": 0.01,
+      "buy_hold_period_sharpe": 0.0201,
+      "strategy_period_sharpe": 0.0354
+    },
+    "NYSE weekly net new highs, robust Appendix4": {
+      "frequency": "weekly",
+      "n": 1929,
+      "buy_hold_display": 2.52,
+      "strategy_display": 4.35,
+      "sharpe_difference_t": 2.42,
+      "alpha_t": 2.57,
+      "source_sharpe_multiplier": 0.01,
+      "buy_hold_period_sharpe": 0.0252,
+      "strategy_period_sharpe": 0.0435
+    }
+  },
+  "new_economic_trials": 0,
+  "strategy_returns_computed": false,
+  "verdict": "DONT_TEST_WEAK_SELECTED_EXCEPTIONS_RETAIN_NEGATIVE_EVIDENCE"
+}
