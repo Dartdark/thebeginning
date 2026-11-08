@@ -518,6 +518,15 @@ MultiCharts 598 / $316, same side 100%, P&L corr 0.96):**
 | S30 IBS (NQ) | IBS reversal; hold until IBS > 0.8 (1-day hold $632) | after a down close: worse 2023+ | **entry IBS < 0.10: $2,331 (t 4.9; 2018-22 t 4.0, 2023+ t 3.1), DD $24.8k vs $37.7k, worst -$15k vs -$28k** |
 | Prior VWAP Trap | intraday momentum + 0.5 ADR trailing stop (its review: other levels $107-115, random levels $88-169) | the prior-VWAP level itself (~$30) | - |
 
+**Round 7: the three Codex bench pieces (`analysis/ingredient_ablation7.py`, from Codex's frozen ledgers; alternative models + side splits):**
+
+| Piece | Engine | Supporting / decoration | Post hoc lead |
+|---|---|---|---|
+| Anson momentum | its intended settings (threshold 4.5, hold 20 bars; the uploaded 3 / 6 earn $1) | Apex early flat: no effect | longs $140 (t 2.4) vs shorts $60 (t 1.0) |
+| R2Vault (longs only by design) | the CT 09:30-15:30 window (ET window $15, t 0.8; daily reset $25) | Apex flat halves it ($33) | - |
+| S03 Noise Area v2 | the noise-area breakout (v1 $144 t 3.3) | v2's 0.4 stop factor: t 3.3 -> 3.8, DD $41k -> $22k (supporting) | longs $158 (t 3.5) vs shorts $84 (2023+ $39) |
+(Exit-type splits are shown in the output but are not ablations: stops lose and targets win by construction.)
+
 **Batch of 5 (2026-11-08, pre-registered; TIER_LIST rows):** the engines are market-specific. Morning momentum does not carry to CL / GC / ZN
 (t 0.8 / 0.2 / -1.3; it works on NQ and, weaker, on ES); the noise band loses on CL / GC even before costs; the Overnight Tick signal
 carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on NQ). Cross-mechanism filters failed both ways: overnight

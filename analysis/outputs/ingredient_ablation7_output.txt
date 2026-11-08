@@ -1,0 +1,35 @@
+[provenance] code 61231f01 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Ingredient ablation, round 7: the three Codex bench pieces (Anson momentum, R2Vault, S03 Noise Area v2), from Codex's frozen replay
+
+1. Anson momentum:
+   intended 4.5 / 20 bars (bench)                 n  2059 $   98 t  2.32 PF 1.17 total $  201k maxDD $39.3k | 2018-22 $  50 (t  1.2) 2023+ $ 165 (t  2.0) | worst $-11,057
+   uploaded defaults 3 / 6 bars                   n  8086 $    1 t  0.05 PF 1.00 total $    4k maxDD $91.1k | 2018-22 $ -14 (t -1.2) 2023+ $  20 (t  0.9) | worst $-10,252
+   intended + Apex early flat                     n  2056 $   98 t  2.34 PF 1.17 total $  202k maxDD $39.3k | 2018-22 $  50 (t  1.2) 2023+ $ 166 (t  2.0) | worst $-11,057
+      longs                                       n   962 $  140 t  2.44 PF 1.29 total $  135k maxDD $20.3k | 2018-22 $  90 (t  1.6) 2023+ $ 209 (t  1.9) | worst $-11,057
+      shorts                                      n  1097 $   60 t  0.99 PF 1.09 total $   66k maxDD $31.5k | 2018-22 $  17 (t  0.3) 2023+ $ 124 (t  1.0) | worst $-9,837
+      exit: hold                                  n  1702 $  118 t  2.39 PF 1.19 total $  200k maxDD $35.3k | 2018-22 $  33 (t  0.7) 2023+ $ 235 (t  2.4) | worst $-11,057
+      exit: hold+time_flat                        n    30 $ -446 t -1.89 PF 0.33 total $  -13k maxDD $14.7k | 2018-22 $-306 (t -1.0) 2023+ $-587 (t -1.6) | worst $-4,112
+      exit: time_flat                             n   327 $   43 t  0.72 PF 1.12 total $   14k maxDD $28.7k | 2018-22 $ 160 (t  2.6) 2023+ $-154 (t -1.3) | worst $-3,647
+      by year $: {2018: 25303, 2019: 11355, 2020: -15570, 2021: 22475, 2022: 17396, 2023: 17299, 2024: 63692, 2025: 9727, 2026: 49164}
+
+2. R2Vault:
+   CT window 09:30-15:30 (bench)                  n  2760 $   61 t  2.91 PF 1.13 total $  167k maxDD $26.4k | 2018-22 $  43 (t  1.4) 2023+ $  76 (t  2.7) | worst $-2,347
+   ET window 08:30-14:30 CT                       n  3037 $   15 t  0.76 PF 1.03 total $   46k maxDD $71.6k | 2018-22 $  31 (t  1.1) 2023+ $   0 (t  0.0) | worst $-2,757
+   ET + daily reset                               n   987 $   25 t  0.71 PF 1.05 total $   25k maxDD $22.4k | 2018-22 $  42 (t  0.9) 2023+ $   9 (t  0.2) | worst $-2,567
+   CT + Apex flat                                 n  2856 $   33 t  1.83 PF 1.08 total $   93k maxDD $23.9k | 2018-22 $  22 (t  0.9) 2023+ $  43 (t  1.6) | worst $-1,517
+      longs                                       n  2760 $   61 t  2.91 PF 1.13 total $  167k maxDD $26.4k | 2018-22 $  43 (t  1.4) 2023+ $  76 (t  2.7) | worst $-2,347
+      shorts                                      n     0 $  nan t   nan PF 0.00 total $    0k maxDD $ nank | 2018-22 $ nan (t  nan) 2023+ $ nan (t  nan) | worst $nan
+      exit: stop                                  n   877 $-1522 t -845.55 PF 0.00 total $-1334k maxDD $1332.9k | 2018-22 $-1525 (t -426.0) 2023+ $-1518 (t -1584.5) | worst $-2,347
+      exit: target                                n  1883 $  797 t 185.25 PF 1501418250000000.00 total $ 1501k maxDD $ 0.0k | 2018-22 $ 794 (t 211.4) 2023+ $ 801 (t 108.2) | worst $783
+      by year $: {2018: -10502, 2019: 2247, 2020: 25608, 2021: 29459, 2022: 9562, 2023: 23069, 2024: 23024, 2025: 17354, 2026: 47198}
+
+3. S03 Noise Area v2:
+   v2, stop factor 0.4 (bench)                    n  2369 $  120 t  3.83 PF 1.35 total $  284k maxDD $22.0k | 2018-22 $ 111 (t  3.8) 2023+ $ 132 (t  2.1) | worst $-2,027
+   v1, no stop factor                             n  1844 $  144 t  3.26 PF 1.30 total $  266k maxDD $41.2k | 2018-22 $ 123 (t  2.9) 2023+ $ 174 (t  2.0) | worst $-6,477
+   v2 + Apex flat                                 n  2369 $  120 t  3.83 PF 1.35 total $  284k maxDD $22.0k | 2018-22 $ 111 (t  3.8) 2023+ $ 132 (t  2.1) | worst $-2,027
+      longs                                       n  1160 $  158 t  3.45 PF 1.52 total $  183k maxDD $15.1k | 2018-22 $ 105 (t  2.9) 2023+ $ 230 (t  2.4) | worst $-1,792
+      shorts                                      n  1209 $   84 t  1.96 PF 1.22 total $  101k maxDD $28.0k | 2018-22 $ 117 (t  2.5) 2023+ $  39 (t  0.5) | worst $-2,027
+      exit: band                                  n   458 $   -8 t -0.31 PF 0.95 total $   -4k maxDD $10.1k | 2018-22 $ -23 (t -0.9) 2023+ $  13 (t  0.2) | worst $-1,792
+      exit: source_eod                            n   606 $ 1658 t 17.76 PF 57.52 total $ 1005k maxDD $ 2.4k | 2018-22 $1410 (t 18.1) 2023+ $1989 (t 10.5) | worst $-1,157
+      exit: stop                                  n  1305 $ -549 t -65.27 PF 0.00 total $ -717k maxDD $716.6k | 2018-22 $-442 (t -49.9) 2023+ $-691 (t -51.2) | worst $-2,027
+      by year $: {2018: 39549, 2019: 1101, 2020: 30280, 2021: 23084, 2022: 58064, 2023: 51983, 2024: 18950, 2025: 42558, 2026: 18700}
