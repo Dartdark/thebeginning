@@ -1834,3 +1834,20 @@ Evidence: source/table images, rounded-moment regression consistency, conditiona
 winter/summer clock checks only. No independent market-data return or verified execution saving. Next check only
 for a separately specified auction/valuation question: synchronized predecision GC/FX/auction quotes and actual native
 order/fill/cash rules; no new collector, proxy trade, paid-data request, account or live/policy change.
+
+
+### E11/E46/E57 follow-up — Analyst-affiliated quotes are not observed inventory or a future-event detector
+
+Source: Mizrach, *Analyst Recommendations and Nasdaq Market Making Activity*, December2003 revision,
+[SSRN499103 review](results/analyst_market_makers_499103_review.md),
+[evidence](evidence/analyst_market_makers_499103.md). Historical1999–2000 pre-upgrade bid-appearance pattern
+weakens in2001. The event-week63.61% rate is not prediction accuracy or a fill share. Headline75.0492% and
+$592.077mn are summed/model-attributed event/firm estimates, not portfolio CAGR or observed dealer cash P&L.
+Dealer quotes may be agency or principal; displayed depth/appearance and buyer-initiated trade imputation do not
+identify passive counterparty, filled inventory, reserve depth or queue position. In particular, the source's equal
+allocation of aggressive buys among inside-bid participants is a proxy, not a verified dealer-purchase matching rule.
+Only a public, predecision detector evaluated on all eligible days could address tradability; do not select only
+future upgrades or treat days−1 to+4 abnormal returns as fully post-release. Historical top-quote Nastraq is not
+modern multi-level depth. Need release/receipt clocks, as-of MPID/affiliation, real quote/trade linkage and native costs
+before a separately justified study. Evidence: source/table-image and source-arithmetic/schema checks only; no new
+returns, verified execution savings, strategy queue entry, allocation, paid collection or live/policy change.
