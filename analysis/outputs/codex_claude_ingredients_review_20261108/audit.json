@@ -1,0 +1,36 @@
+{
+  "reviewed_claude_ref": "7fb1ff5131a19e21a7a66f2e5b51a9076644dd93",
+  "scope": "literal function synthetic path and static ablation binding audit only",
+  "ES_path": {
+    "input_net": 470,
+    "copied_function_terminal_realized": 470.0,
+    "copied_function_first_adverse_mark": 250.0,
+    "correct_ES_first_adverse_mark": -80,
+    "inherited_multiplier": 20,
+    "ES_multiplier": 50,
+    "finding": "terminal reconciliation does not validate worst-path units"
+  },
+  "ablation": {
+    "target_expression": "sl * rr",
+    "base_stop": 50,
+    "base_target": 25.0,
+    "no_stop_case_stop": 1000000.0,
+    "no_stop_case_target": 1000000.0,
+    "finding": "no-stop-labelled case removes target too"
+  },
+  "assertions_passed": 5,
+  "economic_trials": 0,
+  "market_returns_computed": false,
+  "hashes": {
+    "agents/codex/inputs/claude_ingredients_review_20261108/DEVELOPMENT_PROCESS.md": "87f14af90275d914f0d3c3ad4d8107a2956d2ac4d30723421082d4ea1ee58b76",
+    "agents/codex/inputs/claude_ingredients_review_20261108/bridge_noise_15m_test.py": "500176e976c247d6ee585bd9301b24ebfedeaad502c857d4a6fea913c4cd1ba7",
+    "agents/codex/inputs/claude_ingredients_review_20261108/ingredient_ablation.py": "119bd1c496a17638607b8eed6857bb95a24228dcc61cee004da12a9ae43315f2",
+    "agents/codex/inputs/claude_ingredients_review_20261108/ingredient_ablation_output.txt": "3324b3584f19ace399d0c6fc81b25e06a1a8b1521e4186f4b3e0632a4dab5a7e",
+    "agents/codex/inputs/claude_ingredients_review_20261108/mo_es_test.py": "fe9d3d8410afa45b4799220a8e0eeebaaab84c3d623e421198129b49032e51b6",
+    "agents/codex/inputs/claude_ingredients_review_20261108/ot_anyday_test_output.txt": "189e98c4e9ae596181bbee2ba24c6250ab524380b58fb54807cd96575f2b994a",
+    "agents/codex/inputs/claude_ingredients_review_20261108/reviewed_ref.txt": "c608a406bfbb9067365f3dce876ade7187ff3a85921dd93bde7b36e38d990935",
+    "agents/codex/inputs/claude_ingredients_review_20261108/twin_continuation_bench.py": "427592f374a11f700256fdcc7a419e04aa49f6354f4079bebe1d71fce3dbfe2d",
+    "agents/codex/inputs/claude_ingredients_review_20261108/twin_rth_bo_test_output.txt": "20ce67470bd35819d3a02dd16cb5e67e1e3a485d642df933577aaffad51b47db"
+  },
+  "preregistration_commit": "ad2d5c517e894ee810fe03365e1e89dd95ff91f1"
+}
