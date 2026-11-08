@@ -4,15 +4,15 @@
   "ssrn_id": "7063478",
   "title": "Entry-Timing Confirmation via Maximum Adverse Excursion: An Empirical Test on a Systematic Index Futures Strategy",
   "url": "https://ssrn.com/abstract=7063478",
-  "verdict": "dont_test",
+  "verdict": "design_reject",
   "full_text_read": true,
-  "evidence_level": "full_source_plus_seven_invented_mechanical_checks_no_market_replication",
-  "summary": "Author claims Sharpe 1.38 to 3.33 for a proprietary Nifty MAE pullback overlay. Same-sample selection, unverifiable fills/paths and a false skipped-winner inference do not justify a fresh cross-book search.",
+  "evidence_level": "full_text_plus_bounded_conditional_NQ_fixed_parent_design",
+  "summary": "Explicit user-selected 0.25% test complete: FC2B and S47 lose net dollars in all five design years. VB subset weakly improves but stays negative with 106 unknown paths. No advancement.",
   "about": "Resting price-offset limits on a proprietary Nifty trend strategy, using original whole-trade MAE to infer eligibility and unchanged original exits.",
-  "findings": "Authors report 12.3% to 31.9% CAGR, 1.38 to 3.33 Sharpe, 2.59 to 10.11 Sortino at 0.25%, retaining 2448/3908 trades, 2010-04-13 through 2026-01-30, with 6.02 bp modeled round-trip cost. Not independently replicated.",
+  "findings": "Author Nifty results remain unverified. New conditional fixed-parent NQ design 2018-04-02 through 2022-12-30, one MNQ: FC2B $11990.50 to $1358.38; S47 $14126.42 to $6228.92; VB conditional -$1281.02 to -$191.34, paired t .66, 106 unknowns.",
   "mechanism": "Mechanical price improvement on retained fixed-exit trades; conviction/adverse-selection filtering is proposed but not isolated. Missed profitable exposure and deterioration can outweigh savings.",
-  "build_on": "Retain execution diagnostic. Aggregate MAE is not automatically look-ahead for a causal resting order but cannot identify executable fill/path risk. No distinct qualified new strategy or current-book gain established; preserve prior timing search history.",
-  "code_feasibility": "A causally specified fixed-parent offset-limit wrapper is codeable with known signals, native tick/fees, exact expiry and complete paths. Proprietary Nifty signal/returns cannot be reproduced. Only source/mechanical audit code built.",
+  "build_on": "Requested bounded test completed; no profile passes. No control, 2023+, independent native or account stage earned. Preserve all prior source and timing history without a new offset rescue.",
+  "code_feasibility": "Causal first-passage/tick-rounded-limit research wrapper built and executed; unchanged virtual-parent exits. Not regenerated native brackets or compiled MultiCharts code.",
   "source_revision": "Purvang Gandhi, MTS Institute, July 2026; 12-page user upload",
   "source_artifact": {
     "id": "ssrn:7063478",
@@ -27,14 +27,27 @@
     "access_method": "pdftotext -layout; full 12-page text read; Table 1 visually inspected"
   },
   "source_sha256": "8717db83a08bb88f69dd9285883dfbb0c6d2a19107ca2dffc0c806de875e6f22",
-  "report_path": "agents/codex/results/ssrn7063478_review_20261108.md",
-  "evidence_path": "agents/codex/evidence/ssrn7063478_20261108.md",
+  "report_path": "agents/codex/results/mae_selected_20261108.md",
+  "evidence_path": "agents/codex/evidence/mae_selected_20261108.md",
   "access_receipt": "analysis/outputs/codex_ssrn7063478_20261108/source_and_mechanics.json",
-  "new_economic_trials": 0,
+  "new_economic_trials": 9,
   "synthetic_cases_passed": 7,
-  "market_return_tests_run": false,
-  "return_eligibility": "DON'T TEST",
+  "market_return_tests_run": true,
+  "return_eligibility": "STOP: frozen design failed",
   "economic_family": "adverse-offset-limit-entry-fixed-virtual-parent",
-  "independent_verification": "Mechanical/source inspection only; no independent economic verification",
-  "updated_at": "2026-11-08T11:05:34.966205+00:00"
+  "independent_verification": "Independent economic/native verification remains pending; no positive profile qualified.",
+  "updated_at": "2026-11-08T11:19:35.940891+00:00",
+  "history": [
+    {
+      "verdict": "dont_test",
+      "summary": "Author claims Sharpe 1.38 to 3.33 for a proprietary Nifty MAE pullback overlay. Same-sample selection, unverifiable fills/paths and a false skipped-winner inference do not justify a fresh cross-book search.",
+      "report_path": "agents/codex/results/ssrn7063478_review_20261108.md",
+      "evidence_path": "agents/codex/evidence/ssrn7063478_20261108.md",
+      "new_economic_trials": 0,
+      "updated_at": "2026-11-08T11:05:34.966205+00:00"
+    }
+  ],
+  "source_review_path": "agents/codex/results/ssrn7063478_review_20261108.md",
+  "trial_scope": "Separate explicit direct-user project user-mae-selected-20261108; 15 cap, 9 executed including cost stress, 6 nulls unused; autonomous scout/lab not resumed or reset.",
+  "entry_replay_selftests_passed": 9
 }
