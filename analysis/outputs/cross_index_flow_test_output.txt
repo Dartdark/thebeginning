@@ -24,3 +24,15 @@ x2_rs_ym:
    longs          n   574 $  -46 t -1.05 PF 0.90 total $  -26k maxDD $34.8k | 2018-22 $ -34 (t -0.6) 2023+ $ -60 (t -0.8) | worst $-3,341
    shorts         n   598 $ -147 t -3.56 PF 0.69 total $  -88k maxDD $89.8k | 2018-22 $-110 (t -2.0) 2023+ $-190 (t -3.0) | worst $-3,376
       by year $: {2018: -2700, 2019: -8559, 2020: -5268, 2021: -10816, 2022: -18423, 2023: -12764, 2024: -8333, 2025: -24847, 2026: -22651} | exits {'flat': 731, 'stop': 352, 'target': 89}
+   random side $-19, 95th $36; real $-98; p 1.00
+   daily corr: {'Late-Day Flow': np.float64(0.0), 'Relative Strength NQ': np.float64(-0.4), 'Twin': np.float64(-0.11)}
+
+   150K evaluation (set + Twin 2 MNQ) alone: pass 38.3% (starts to 2026-09-01)
+   + x2_rs_ym 2 MYM                   pass 34.5% (-3.8%; band -5.6% / -2.2%)
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,031 blown  2.2% all 6 97.2% diff $   +0 beats 50.0%
+      + x2_rs_ym 2 MYM                   2y $ 19,358 blown  4.7% all 6 92.5% diff $ -673 beats 47.5%
+   Personal book 1-year MC return / DD p95 (+ 1 MYM):
+      2018-26: book 5.42 | + 1 MYM 5.28 (-0.14)
+      2018-22: book 5.45 | + 1 MYM 4.69 (-0.76)
+      2023+: book 6.10 | + 1 MYM 6.02 (-0.08)

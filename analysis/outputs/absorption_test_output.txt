@@ -8,3 +8,17 @@ Order-flow absorption, NQ (user 2026-11-08: 'build a strategy around its own mec
    opposite (follow the flow)               n   603 $ -235 t -2.97 PF 0.73 total $ -142k maxDD $149.2k | 2018-22 $-184 (t -1.9) 2023+ $-310 (t -2.3) | worst $-5,215
    no-flow control (sign of the price move) n   603 $  246 t  2.35 PF 1.36 total $  148k maxDD $21.3k | 2018-22 $ 174 (t  1.9) 2023+ $ 350 (t  1.6) | worst $-4,869
    rule side = price-move side on 92% of trade days
+   random side (200 runs, same days): $-1, 95th $124; real $230; p 0.000
+   daily corr: {'VB': 0.17, 'ONB_ML2_MC': 0.14, 'MON_MC': 0.04, 'EOS': -0.01, 'LDF_MC': 0.25, 'TWIN': 0.14} 
+
+   150K evaluation (set + Twin 2 MNQ) alone: pass 38.8% (starts to 2026-06-01)
+   + absorption 2 MNQ                 pass 37.3% (-1.6%; band -3.0% / -0.2%)
+
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-07-07), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,001 blown  2.0% all 6 96.3% diff $   +0 beats 50.0%
+      + absorption 2 MNQ                 2y $ 19,631 blown  3.7% all 6 94.7% diff $ -370 beats 49.1%
+
+   Personal book 1-year MC return / DD p95 (+ 1 MNQ, to 2026-07-07):
+      2018-26: book 5.39 | + absorption 1 MNQ 5.17 (-0.23)
+      2018-22: book 5.45 | + absorption 1 MNQ 5.07 (-0.38)
+      2023+: book 6.65 | + absorption 1 MNQ 6.44 (-0.21)
