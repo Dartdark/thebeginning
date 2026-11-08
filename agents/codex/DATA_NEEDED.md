@@ -49,7 +49,7 @@ Default research design coverage is 2018–2022 plus indicator warm-up. Source r
 |---|---|---|
 | **D13 — Actual SPY/QQQ auction demand.** Shared family: SPY opening pressure, closing pressure/post-auction reversal, QQQ persistence; SSRN3119537/3485840. | Historical SPY Arca and QQQ NOII messages, auction type/sequence, signed quantities, reference/indicative definitions, prints/trailing auction volumes, synchronized ETF and ES/NQ quotes, original publication/receipt clocks and schema eras. | Two Arca sessions and one Nasdaq day do not supply design history; aggregates are not live-observable updates. Audit one complete venue-specific auction and quote alignment, then event coverage. Keep pre-auction pressure and later reversal as separate hypotheses within the shared family. [Flow proposals](results/flow_evidence_sheets.md), [closing-family review](results/scout_closing_auctions_cycle_20261029.md), [SPY gate](evidence/spy_close_imbalance_data_gate.md), [QQQ sheet](evidence/qqq_closing_imbalance_persistence.md). |
 | **D14 — Signed SPXW dealer delta at PM expiry, SSRN7330098.** ES hedge-unwinding channel. | Signed C1 dealer positions from each series' inception, matching deltas/quotes/expiries, prior inventory, complete sessions/corrections and available-at clocks. | No raw signed book. Advertised sample entitlement not activated; historical timestamps do not certify same-day access. Reconstruct one series and delivery delay. NDX GEX/OI or futures delta cannot substitute. [Full-source gate](results/scout_7330098_testability_20261029.md), [acquisition](results/scout_spx_positions_acquisition_20261029.md). |
-| **D15 — Gold leveraged-fund reset pressure.** UGL/GLL mandate-driven exposure adjustment. | Historical as-of assets/NAV/shares/holdings, matched split bases, actual benchmark contracts and weights, original publication vintages, objective/reset/NAV clocks and changes; GC/MGC execution evidence. | Existing Nasdaq fund assets do not supply gold funds. Sponsor endpoint/code is not delivered history; creations/redemptions may offset demand. Authenticate one fund-date and its mandate/contract/clock before large collection. [Evidence](evidence/hunt_v2_gold_letf_reset.md). |
+| **D15 — Gold leveraged-fund reset pressure.** UGL/GLL mandate-driven exposure adjustment. | Historical as-of assets/NAV/shares/holdings, matched split bases, actual benchmark contracts and weights, original publication vintages, objective/reset/NAV clocks and changes; GC/MGC execution evidence. | November8: secondary UGL/GLL histories actually acquired, 4,512 rows each (2008-12-01–2026-11-06), with NAV/shares/assets and current holdings. Basic identity passes; original sponsor comparison, split basis, historical clocks/weights and creations/redemptions remain unresolved. Direct primary downloads failed at cloud proxy; [local task](TASK_new_data_local_20261108.md). Authenticate an original fund-date/mandate/contract/clock before return testing. [Acquisition](results/new_data_20261108.md), [evidence](evidence/hunt_v2_gold_letf_reset.md). |
 | **D16 — Issuer forward-guidance revisions.** New guidance versus issuer's earlier guidance for the same horizon. | Original comparable guidance pairs, fiscal horizon/metric/range/accounting basis, document identity and revisions, exact public/receipt clocks, historical index constituents/weights and evidenced futures transmission. | Earnings calendar/EPS surprise files and public text candidates are partial context, not guidance revisions. Reconcile one original pair and its availability first. No signal side or execution rule selected. [Input gate](results/forward_guidance_input_gate.md), [public-source follow-up](results/forward_guidance_public_sources.md). |
 | **D17 — Extreme positive company-news sentiment, SSRN2631135.** Nonprice stock-selection feature. | Lawfully usable TRNA probabilities/relevance, entity/receipt/model vintages, historical universe/sectors, corporate-action cash ledgers, exact weights and lifecycle. | Documentation/manuscript found, no admitted full free news panel. Source reporting and test-period scanning concerns retained. Audit an entitled sample and clocks before training-only protocol; no NQ proxy. [Review](results/news_sentiment_2631135_20261031.md). |
 | **D18 — Exact factor-beta stock baskets.** Night/day factor attribution and possible stock allocation. | Exact CRSP/FF5 inputs, historical raw share basis, constituents/delistings/acquisition/settlement treatment, borrow, auction execution and native cash ledger. | **Restricted S&P500/SPY-beta screen failed**, with unresolved coverage. Exact full-source study remains distinct. Audit genuine new source inputs; no rescue of the failed restricted filter. [Original review](results/factor_beta_sessions_review_20261029.md), [later test](results/factor_beta_sessions_test_20261029.md). |
@@ -435,3 +435,30 @@ Five fixed2018–22cases completed; the absorption candidate loses$6,386.50perNQ
 No recent acquisition/return test or account stage follows. Heavy-total-volume comparator is not selected as a
 new candidate. This does not certify original native FC/T tick-direction volume or resolve build/roll/receipt
 provenance. Preserve original exports and prior closed programs; no strategy was promoted or plan changed.
+
+## Free commodity-fund / risk-state intake (2026-11-08)
+
+User requested additional useful free data, with a local-chat handoff for cloud access failures.
+[Acquisition report](results/new_data_20261108.md), [raw sources/manifests/audit](inputs/new_data_20261108/README.md),
+[portable downloader](../../analysis/codex_new_data_20261108.py), [local task](TASK_new_data_local_20261108.md).
+
+- D15 now has delivered **secondary** gold-fund histories (above), rather than just nominated endpoints.
+  Also acquired UCO/SCO oil histories (4,516 dates each since2008-11-24) and BOIL/KOLD natural-gas histories
+  (3,796 dates each since2011-10-04), all through2026-11-06, plus one current holdings/metadata snapshot per fund.
+  All six have1,259 shared2018–22 dates. Five histories pass the simple NAV×shares/assets check; **BOIL quarantined**:
+  1,178 errors above1%, 82 zero-share rows, 40 flagged design dates. The secondary collector rounds shares;
+  obtain original sponsor CSV precision and splits, without reconstructing shares using AUM/NAV.
+  Current balanced-WTI/gas benchmark contracts, mandates, weights and clocks must not be mapped backwards.
+- New VVIX/SKEW/VIX9D secondary daily-close histories cover2011-01-04–2026-09-28 (3,955/3,951/3,956 rows).
+  SKEW lacks2018-12-03 and2019-07-05 versus shared fund dates; no fill. Artificial VVIX/SKEW OHLC columns were
+  dropped from normalized files. Original Cboe comparison, actual release clocks and prelaunch flags remain.
+  These inputs do not close D01 native-VX, D05 publication-vintage, D13 imbalance or signed dealer-position gaps.
+- All49 raw source files verified by expected size/Git blob ID and SHA256. Primary comparison remains pending:
+  **18 actual requests failed with cloud proxy403**. The local task prioritizes exact sponsor histories/splits,
+  original Cboe files (also GVZ/OVX), NYFed announced operations/results and funding rates, and Treasury buybacks.
+  NYFed result/history endpoint patterns require primary-spec/limit checks; results are not announcements.
+  Buyback table collection must be followed by original linked announcement/result/special XML/PDF and schedule
+  collection; modern regular-program history since2024 cannot supply the2018–22 design period.
+
+All are acquisition/source-QA records, not demonstrated edges or strategy admissions. No new returns, trials,
+scout-history mutations or portfolio/live changes. Do not revive failed NQ LETF-sizing or paused programs.

@@ -1,0 +1,78 @@
+{
+  "created_at_utc": "2026-11-08T19:39:29.697863+00:00",
+  "notice": "Receipt time is not historical publication time. Primary reconciliation and clock gates remain.",
+  "requests": [
+    {
+      "id": "BOIL_nav",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/BOIL-historical_nav.csv",
+      "requested_at_utc": "2026-11-08T19:39:29.652735+00:00",
+      "page": 1,
+      "status": "FAILED",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "id": "KOLD_nav",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/KOLD-historical_nav.csv",
+      "requested_at_utc": "2026-11-08T19:39:29.672041+00:00",
+      "page": 1,
+      "status": "FAILED",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "id": "fund_splits",
+      "url": "https://accounts.profunds.com/etfdata/etf_splits.csv",
+      "requested_at_utc": "2026-11-08T19:39:29.675298+00:00",
+      "page": 1,
+      "status": "FAILED",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "id": "VIX9D",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX9D_History.csv",
+      "requested_at_utc": "2026-11-08T19:39:29.678151+00:00",
+      "page": 1,
+      "status": "FAILED",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "id": "GVZ",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/GVZ_History.csv",
+      "requested_at_utc": "2026-11-08T19:39:29.681282+00:00",
+      "page": 1,
+      "status": "FAILED",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "id": "OVX",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/OVX_History.csv",
+      "requested_at_utc": "2026-11-08T19:39:29.685352+00:00",
+      "page": 1,
+      "status": "FAILED",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "id": "nyfed_tsy_2018",
+      "url": "https://markets.newyorkfed.org/api/tsy/all/results/details/search.json?startDate=2018-01-01&endDate=2018-12-31",
+      "requested_at_utc": "2026-11-08T19:39:29.688294+00:00",
+      "page": 1,
+      "status": "FAILED",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "id": "nyfed_rates_2018",
+      "url": "https://markets.newyorkfed.org/api/rates/all/search.json?startDate=2018-01-01&endDate=2018-12-31",
+      "requested_at_utc": "2026-11-08T19:39:29.690977+00:00",
+      "page": 1,
+      "status": "FAILED",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "id": "buybacks_security_details",
+      "url": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/buybacks_security_details?format=json&page%5Bsize%5D=10000&page%5Bnumber%5D=1",
+      "requested_at_utc": "2026-11-08T19:39:29.694097+00:00",
+      "page": 1,
+      "status": "FAILED",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    }
+  ]
+}

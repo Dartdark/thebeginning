@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-08",
+  "method": "Python urllib using normal configured cloud networking; no alternative proxy or access-control bypass",
+  "requests": [
+    {
+      "id": "gold_ugl",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/UGL-historical_nav.csv",
+      "status": "FAILED"
+    },
+    {
+      "id": "gold_gll",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/GLL-historical_nav.csv",
+      "status": "FAILED"
+    },
+    {
+      "id": "oil_uco",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/UCO-historical_nav.csv",
+      "status": "FAILED"
+    },
+    {
+      "id": "oil_sco",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/SCO-historical_nav.csv",
+      "status": "FAILED"
+    },
+    {
+      "id": "nyfed_spec",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://markets.newyorkfed.org/static/docs/markets-api.yml",
+      "status": "FAILED"
+    },
+    {
+      "id": "soma_summary",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://markets.newyorkfed.org/api/soma/summary.json",
+      "status": "FAILED"
+    },
+    {
+      "id": "buybacks",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/buybacks_operations?page%5Bsize%5D=10000",
+      "status": "FAILED"
+    },
+    {
+      "id": "vvix",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VVIX_History.csv",
+      "status": "FAILED"
+    },
+    {
+      "id": "skew",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/SKEW_History.csv",
+      "status": "FAILED"
+    }
+  ]
+}

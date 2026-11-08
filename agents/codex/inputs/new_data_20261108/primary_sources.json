@@ -1,0 +1,388 @@
+{
+  "created_date": "2026-11-08",
+  "purpose": "Free primary-source acquisition on local computer; no credentials, purchases, returns or trading. Network failures must remain visible; use normal official downloads only.",
+  "official_reference_pages": [
+    "https://www.proshares.com/our-etfs/leveraged-and-inverse/ugl",
+    "https://www.cboe.com/tradable_products/vix/vix_historical_data",
+    "https://markets.newyorkfed.org/static/docs/markets-api.html",
+    "https://treasurydirect.gov/auctions/buy-backs/"
+  ],
+  "files": [
+    {
+      "id": "UGL_nav",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/UGL-historical_nav.csv",
+      "file": "proshares/UGL-historical_nav.csv",
+      "kind": "nav_csv",
+      "limits": "Current sponsor history; preserve Shares Outstanding (000) precision, reconcile split basis; original vintages and publication times not supplied."
+    },
+    {
+      "id": "UGL_holdings",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/UGL-psdlyhld.csv",
+      "file": "proshares/UGL-psdlyhld.csv",
+      "kind": "holdings_csv",
+      "limits": "Current holdings only; not historical benchmark weights or actual end-of-day reset transactions."
+    },
+    {
+      "id": "UGL_page",
+      "group": "fund_documents",
+      "url": "https://www.proshares.com/our-etfs/leveraged-and-inverse/ugl",
+      "file": "proshares/UGL-page.html",
+      "kind": "html_document",
+      "limits": "Current objective, benchmark and document links only; historical mandate changes require dated documents."
+    },
+    {
+      "id": "GLL_nav",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/GLL-historical_nav.csv",
+      "file": "proshares/GLL-historical_nav.csv",
+      "kind": "nav_csv",
+      "limits": "Current sponsor history; preserve Shares Outstanding (000) precision, reconcile split basis; original vintages and publication times not supplied."
+    },
+    {
+      "id": "GLL_holdings",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/GLL-psdlyhld.csv",
+      "file": "proshares/GLL-psdlyhld.csv",
+      "kind": "holdings_csv",
+      "limits": "Current holdings only; not historical benchmark weights or actual end-of-day reset transactions."
+    },
+    {
+      "id": "GLL_page",
+      "group": "fund_documents",
+      "url": "https://www.proshares.com/our-etfs/leveraged-and-inverse/gll",
+      "file": "proshares/GLL-page.html",
+      "kind": "html_document",
+      "limits": "Current objective, benchmark and document links only; historical mandate changes require dated documents."
+    },
+    {
+      "id": "UCO_nav",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/UCO-historical_nav.csv",
+      "file": "proshares/UCO-historical_nav.csv",
+      "kind": "nav_csv",
+      "limits": "Current sponsor history; preserve Shares Outstanding (000) precision, reconcile split basis; original vintages and publication times not supplied."
+    },
+    {
+      "id": "UCO_holdings",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/UCO-psdlyhld.csv",
+      "file": "proshares/UCO-psdlyhld.csv",
+      "kind": "holdings_csv",
+      "limits": "Current holdings only; not historical benchmark weights or actual end-of-day reset transactions."
+    },
+    {
+      "id": "UCO_page",
+      "group": "fund_documents",
+      "url": "https://www.proshares.com/our-etfs/leveraged-and-inverse/uco",
+      "file": "proshares/UCO-page.html",
+      "kind": "html_document",
+      "limits": "Current objective, benchmark and document links only; historical mandate changes require dated documents."
+    },
+    {
+      "id": "SCO_nav",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/SCO-historical_nav.csv",
+      "file": "proshares/SCO-historical_nav.csv",
+      "kind": "nav_csv",
+      "limits": "Current sponsor history; preserve Shares Outstanding (000) precision, reconcile split basis; original vintages and publication times not supplied."
+    },
+    {
+      "id": "SCO_holdings",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/SCO-psdlyhld.csv",
+      "file": "proshares/SCO-psdlyhld.csv",
+      "kind": "holdings_csv",
+      "limits": "Current holdings only; not historical benchmark weights or actual end-of-day reset transactions."
+    },
+    {
+      "id": "SCO_page",
+      "group": "fund_documents",
+      "url": "https://www.proshares.com/our-etfs/leveraged-and-inverse/sco",
+      "file": "proshares/SCO-page.html",
+      "kind": "html_document",
+      "limits": "Current objective, benchmark and document links only; historical mandate changes require dated documents."
+    },
+    {
+      "id": "BOIL_nav",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/BOIL-historical_nav.csv",
+      "file": "proshares/BOIL-historical_nav.csv",
+      "kind": "nav_csv",
+      "limits": "Current sponsor history; preserve Shares Outstanding (000) precision, reconcile split basis; original vintages and publication times not supplied."
+    },
+    {
+      "id": "BOIL_holdings",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/BOIL-psdlyhld.csv",
+      "file": "proshares/BOIL-psdlyhld.csv",
+      "kind": "holdings_csv",
+      "limits": "Current holdings only; not historical benchmark weights or actual end-of-day reset transactions."
+    },
+    {
+      "id": "BOIL_page",
+      "group": "fund_documents",
+      "url": "https://www.proshares.com/our-etfs/leveraged-and-inverse/boil",
+      "file": "proshares/BOIL-page.html",
+      "kind": "html_document",
+      "limits": "Current objective, benchmark and document links only; historical mandate changes require dated documents."
+    },
+    {
+      "id": "KOLD_nav",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/KOLD-historical_nav.csv",
+      "file": "proshares/KOLD-historical_nav.csv",
+      "kind": "nav_csv",
+      "limits": "Current sponsor history; preserve Shares Outstanding (000) precision, reconcile split basis; original vintages and publication times not supplied."
+    },
+    {
+      "id": "KOLD_holdings",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/ByFund/KOLD-psdlyhld.csv",
+      "file": "proshares/KOLD-psdlyhld.csv",
+      "kind": "holdings_csv",
+      "limits": "Current holdings only; not historical benchmark weights or actual end-of-day reset transactions."
+    },
+    {
+      "id": "KOLD_page",
+      "group": "fund_documents",
+      "url": "https://www.proshares.com/our-etfs/leveraged-and-inverse/kold",
+      "file": "proshares/KOLD-page.html",
+      "kind": "html_document",
+      "limits": "Current objective, benchmark and document links only; historical mandate changes require dated documents."
+    },
+    {
+      "id": "fund_splits",
+      "group": "funds",
+      "url": "https://accounts.profunds.com/etfdata/etf_splits.csv",
+      "file": "proshares/etf_splits.csv",
+      "kind": "splits_csv",
+      "limits": "Do not assume NAV and shares have the same historical adjustment basis."
+    },
+    {
+      "id": "VVIX",
+      "group": "indices",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VVIX_History.csv",
+      "file": "cboe/VVIX_History.csv",
+      "kind": "index_csv",
+      "limits": "Daily index history; original release vintage/timestamp not supplied. Prelaunch observations can be back-calculated. No signed inventory or tradable futures term structure."
+    },
+    {
+      "id": "SKEW",
+      "group": "indices",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/SKEW_History.csv",
+      "file": "cboe/SKEW_History.csv",
+      "kind": "index_csv",
+      "limits": "Daily index history; original release vintage/timestamp not supplied. Prelaunch observations can be back-calculated. No signed inventory or tradable futures term structure."
+    },
+    {
+      "id": "VIX9D",
+      "group": "indices",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX9D_History.csv",
+      "file": "cboe/VIX9D_History.csv",
+      "kind": "index_csv",
+      "limits": "Daily index history; original release vintage/timestamp not supplied. Prelaunch observations can be back-calculated. No signed inventory or tradable futures term structure."
+    },
+    {
+      "id": "GVZ",
+      "group": "indices",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/GVZ_History.csv",
+      "file": "cboe/GVZ_History.csv",
+      "kind": "index_csv",
+      "limits": "Daily index history; original release vintage/timestamp not supplied. Prelaunch observations can be back-calculated. No signed inventory or tradable futures term structure."
+    },
+    {
+      "id": "OVX",
+      "group": "indices",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/OVX_History.csv",
+      "file": "cboe/OVX_History.csv",
+      "kind": "index_csv",
+      "limits": "Daily index history; original release vintage/timestamp not supplied. Prelaunch observations can be back-calculated. No signed inventory or tradable futures term structure."
+    },
+    {
+      "id": "nyfed_spec",
+      "group": "fed_documents",
+      "url": "https://markets.newyorkfed.org/static/docs/markets-api.yml",
+      "file": "nyfed/markets-api.yml",
+      "kind": "spec_document",
+      "limits": "Verify current endpoint schema, query limits, pagination and announcement/history availability before admitting data."
+    },
+    {
+      "id": "nyfed_tsy_2017",
+      "group": "fed_operations",
+      "url": "https://markets.newyorkfed.org/api/tsy/all/results/details/search.json?startDate=2017-01-01&endDate=2017-12-31",
+      "file": "nyfed/treasury_results_2017.json",
+      "kind": "json_data",
+      "limits": "Post-operation results, not pre-operation schedules. Endpoint pattern corroborated by public client; primary spec blocked here. Verify completeness/limits and fetch original dated announcements separately."
+    },
+    {
+      "id": "nyfed_rates_2017",
+      "group": "funding",
+      "url": "https://markets.newyorkfed.org/api/rates/all/search.json?startDate=2017-01-01&endDate=2017-12-31",
+      "file": "nyfed/reference_rates_2017.json",
+      "kind": "json_data",
+      "limits": "Effective date is not release time; preserve revisions/percentiles/volumes/type and identify each rate's start. SOFR live starts 2018."
+    },
+    {
+      "id": "nyfed_tsy_2018",
+      "group": "fed_operations",
+      "url": "https://markets.newyorkfed.org/api/tsy/all/results/details/search.json?startDate=2018-01-01&endDate=2018-12-31",
+      "file": "nyfed/treasury_results_2018.json",
+      "kind": "json_data",
+      "limits": "Post-operation results, not pre-operation schedules. Endpoint pattern corroborated by public client; primary spec blocked here. Verify completeness/limits and fetch original dated announcements separately."
+    },
+    {
+      "id": "nyfed_rates_2018",
+      "group": "funding",
+      "url": "https://markets.newyorkfed.org/api/rates/all/search.json?startDate=2018-01-01&endDate=2018-12-31",
+      "file": "nyfed/reference_rates_2018.json",
+      "kind": "json_data",
+      "limits": "Effective date is not release time; preserve revisions/percentiles/volumes/type and identify each rate's start. SOFR live starts 2018."
+    },
+    {
+      "id": "nyfed_tsy_2019",
+      "group": "fed_operations",
+      "url": "https://markets.newyorkfed.org/api/tsy/all/results/details/search.json?startDate=2019-01-01&endDate=2019-12-31",
+      "file": "nyfed/treasury_results_2019.json",
+      "kind": "json_data",
+      "limits": "Post-operation results, not pre-operation schedules. Endpoint pattern corroborated by public client; primary spec blocked here. Verify completeness/limits and fetch original dated announcements separately."
+    },
+    {
+      "id": "nyfed_rates_2019",
+      "group": "funding",
+      "url": "https://markets.newyorkfed.org/api/rates/all/search.json?startDate=2019-01-01&endDate=2019-12-31",
+      "file": "nyfed/reference_rates_2019.json",
+      "kind": "json_data",
+      "limits": "Effective date is not release time; preserve revisions/percentiles/volumes/type and identify each rate's start. SOFR live starts 2018."
+    },
+    {
+      "id": "nyfed_tsy_2020",
+      "group": "fed_operations",
+      "url": "https://markets.newyorkfed.org/api/tsy/all/results/details/search.json?startDate=2020-01-01&endDate=2020-12-31",
+      "file": "nyfed/treasury_results_2020.json",
+      "kind": "json_data",
+      "limits": "Post-operation results, not pre-operation schedules. Endpoint pattern corroborated by public client; primary spec blocked here. Verify completeness/limits and fetch original dated announcements separately."
+    },
+    {
+      "id": "nyfed_rates_2020",
+      "group": "funding",
+      "url": "https://markets.newyorkfed.org/api/rates/all/search.json?startDate=2020-01-01&endDate=2020-12-31",
+      "file": "nyfed/reference_rates_2020.json",
+      "kind": "json_data",
+      "limits": "Effective date is not release time; preserve revisions/percentiles/volumes/type and identify each rate's start. SOFR live starts 2018."
+    },
+    {
+      "id": "nyfed_tsy_2021",
+      "group": "fed_operations",
+      "url": "https://markets.newyorkfed.org/api/tsy/all/results/details/search.json?startDate=2021-01-01&endDate=2021-12-31",
+      "file": "nyfed/treasury_results_2021.json",
+      "kind": "json_data",
+      "limits": "Post-operation results, not pre-operation schedules. Endpoint pattern corroborated by public client; primary spec blocked here. Verify completeness/limits and fetch original dated announcements separately."
+    },
+    {
+      "id": "nyfed_rates_2021",
+      "group": "funding",
+      "url": "https://markets.newyorkfed.org/api/rates/all/search.json?startDate=2021-01-01&endDate=2021-12-31",
+      "file": "nyfed/reference_rates_2021.json",
+      "kind": "json_data",
+      "limits": "Effective date is not release time; preserve revisions/percentiles/volumes/type and identify each rate's start. SOFR live starts 2018."
+    },
+    {
+      "id": "nyfed_tsy_2022",
+      "group": "fed_operations",
+      "url": "https://markets.newyorkfed.org/api/tsy/all/results/details/search.json?startDate=2022-01-01&endDate=2022-12-31",
+      "file": "nyfed/treasury_results_2022.json",
+      "kind": "json_data",
+      "limits": "Post-operation results, not pre-operation schedules. Endpoint pattern corroborated by public client; primary spec blocked here. Verify completeness/limits and fetch original dated announcements separately."
+    },
+    {
+      "id": "nyfed_rates_2022",
+      "group": "funding",
+      "url": "https://markets.newyorkfed.org/api/rates/all/search.json?startDate=2022-01-01&endDate=2022-12-31",
+      "file": "nyfed/reference_rates_2022.json",
+      "kind": "json_data",
+      "limits": "Effective date is not release time; preserve revisions/percentiles/volumes/type and identify each rate's start. SOFR live starts 2018."
+    },
+    {
+      "id": "nyfed_tsy_2023",
+      "group": "fed_operations",
+      "url": "https://markets.newyorkfed.org/api/tsy/all/results/details/search.json?startDate=2023-01-01&endDate=2023-12-31",
+      "file": "nyfed/treasury_results_2023.json",
+      "kind": "json_data",
+      "limits": "Post-operation results, not pre-operation schedules. Endpoint pattern corroborated by public client; primary spec blocked here. Verify completeness/limits and fetch original dated announcements separately."
+    },
+    {
+      "id": "nyfed_rates_2023",
+      "group": "funding",
+      "url": "https://markets.newyorkfed.org/api/rates/all/search.json?startDate=2023-01-01&endDate=2023-12-31",
+      "file": "nyfed/reference_rates_2023.json",
+      "kind": "json_data",
+      "limits": "Effective date is not release time; preserve revisions/percentiles/volumes/type and identify each rate's start. SOFR live starts 2018."
+    },
+    {
+      "id": "nyfed_tsy_2024",
+      "group": "fed_operations",
+      "url": "https://markets.newyorkfed.org/api/tsy/all/results/details/search.json?startDate=2024-01-01&endDate=2024-12-31",
+      "file": "nyfed/treasury_results_2024.json",
+      "kind": "json_data",
+      "limits": "Post-operation results, not pre-operation schedules. Endpoint pattern corroborated by public client; primary spec blocked here. Verify completeness/limits and fetch original dated announcements separately."
+    },
+    {
+      "id": "nyfed_rates_2024",
+      "group": "funding",
+      "url": "https://markets.newyorkfed.org/api/rates/all/search.json?startDate=2024-01-01&endDate=2024-12-31",
+      "file": "nyfed/reference_rates_2024.json",
+      "kind": "json_data",
+      "limits": "Effective date is not release time; preserve revisions/percentiles/volumes/type and identify each rate's start. SOFR live starts 2018."
+    },
+    {
+      "id": "nyfed_tsy_2025",
+      "group": "fed_operations",
+      "url": "https://markets.newyorkfed.org/api/tsy/all/results/details/search.json?startDate=2025-01-01&endDate=2025-12-31",
+      "file": "nyfed/treasury_results_2025.json",
+      "kind": "json_data",
+      "limits": "Post-operation results, not pre-operation schedules. Endpoint pattern corroborated by public client; primary spec blocked here. Verify completeness/limits and fetch original dated announcements separately."
+    },
+    {
+      "id": "nyfed_rates_2025",
+      "group": "funding",
+      "url": "https://markets.newyorkfed.org/api/rates/all/search.json?startDate=2025-01-01&endDate=2025-12-31",
+      "file": "nyfed/reference_rates_2025.json",
+      "kind": "json_data",
+      "limits": "Effective date is not release time; preserve revisions/percentiles/volumes/type and identify each rate's start. SOFR live starts 2018."
+    },
+    {
+      "id": "nyfed_tsy_2026",
+      "group": "fed_operations",
+      "url": "https://markets.newyorkfed.org/api/tsy/all/results/details/search.json?startDate=2026-01-01&endDate=2026-11-08",
+      "file": "nyfed/treasury_results_2026.json",
+      "kind": "json_data",
+      "limits": "Post-operation results, not pre-operation schedules. Endpoint pattern corroborated by public client; primary spec blocked here. Verify completeness/limits and fetch original dated announcements separately."
+    },
+    {
+      "id": "nyfed_rates_2026",
+      "group": "funding",
+      "url": "https://markets.newyorkfed.org/api/rates/all/search.json?startDate=2026-01-01&endDate=2026-11-08",
+      "file": "nyfed/reference_rates_2026.json",
+      "kind": "json_data",
+      "limits": "Effective date is not release time; preserve revisions/percentiles/volumes/type and identify each rate's start. SOFR live starts 2018."
+    },
+    {
+      "id": "buybacks_operations",
+      "group": "buybacks",
+      "url": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/buybacks_operations?format=json&page%5Bsize%5D=10000",
+      "file": "treasury/buybacks_operations.json",
+      "kind": "fiscal_json",
+      "limits": "Fetch all pages. Current API results do not certify original announcement times. Save linked preliminary/final/result/special XML/PDF and source schema; regular modern program begins 2024."
+    },
+    {
+      "id": "buybacks_security_details",
+      "group": "buybacks",
+      "url": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/buybacks_security_details?format=json&page%5Bsize%5D=10000",
+      "file": "treasury/buybacks_security_details.json",
+      "kind": "fiscal_json",
+      "limits": "Fetch all pages. Current API results do not certify original announcement times. Save linked preliminary/final/result/special XML/PDF and source schema; regular modern program begins 2024."
+    }
+  ]
+}
