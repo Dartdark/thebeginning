@@ -33,7 +33,7 @@ def main():
         ('buy-and-hold', 2.53, 14.12, -45.24, .18),
     ]
     with (OUT / 'author_table6.csv').open('w', newline='') as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator='\n')
         w.writerow(['author_profile', 'annual_return_pct', 'annual_volatility_pct',
                     'maximum_drawdown_pct', 'reported_sharpe'])
         w.writerows(rows)
