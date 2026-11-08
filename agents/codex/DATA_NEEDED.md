@@ -250,3 +250,19 @@ pressure/z12−z3/stock-cash ledger before an economic protocol. Source later re
 retain that limitation. [Review](results/etf_flows_7517178.md), [evidence](evidence/etf_flows_7517178.md).
 Bitcoin commodity-hedge source4355765 is not a new data-watch allocation candidate: its weak/negative Table4
 is retained in [the review](results/bitcoin_commodity_hedges_4355765.md), rather than reviving a hedge search.
+
+
+## International Buffett indicator — SSRN4071039
+
+Conditional personal long-term allocation, not intraday/crash timing. Require1973–2019 quarterly country
+TOTAL-market capitalization (not price index levels), dividend-inclusive RI, nominal annualized seasonally
+adjusted OECD expenditure GDP B1_GE/CARSA with original release/vintage/nowcast availability, plus local
+rates across Australia/Austria/Belgium/Canada/Denmark/France/Germany/Ireland/Italy/Japan/Netherlands/
+Switzerland/UK/US. Need only-matured ten-year fit labels at each formation, exact seven-country/ten-year
+holdings/composite construction, investable instruments and base-currency FX/hedge/cost/cash ledger.
+GDP reference quarter is not release time; revised GDP cannot be backdated. Free OECD and World Bank
+annual-ratio probes hit proxy403; no histories delivered and annual alternative is not matching source
+quarterly coverage. No paid Datastream/GFD access or US-only proxy rescue. Next with new inputs: reconcile
+one country/formation and native release/label/currency cashflow, then full coverage/power and committed
+return protocol. Source Table8 drawdown/composite qualifications remain unresolved. [Review](results/buffett_international_4071039_review.md),
+[evidence](evidence/buffett_international_4071039.md). No independent return trial or allocation.

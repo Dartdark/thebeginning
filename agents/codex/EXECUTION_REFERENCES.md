@@ -1882,3 +1882,19 @@ Retain contextual support for existing product/version/acceptance checks only. N
 current Nasdaq/Bitcoin infrastructure fact, new return trial or execution saving is independently verified. If a concrete
 implementation comparison is later authorized, require actual transaction/latency/cost records and the same-workflow
 baseline. No blockchain build, new monitor, workflow/policy change, candidate/data queue or live action follows.
+
+
+### E09/E11/E12 follow-up — Decade valuation labels mature; GDP quarter-end is not publication
+
+Source: Swinkels/Umlauft, *The Buffett Indicator: International Evidence*, March30,2022,
+[SSRN4071039 review](results/buffett_international_4071039_review.md),
+[evidence](evidence/buffett_international_4071039.md). Source explicitly waits for ten-year return labels before
+fitting; credit this rather than diagnosing leakage from long horizons alone. Its GDP footnote acknowledges
+quarter-end unavailability but supplies no actual vintage/nowcast release bridge. Mature targets and available
+features are separate gates. Raw country ratios are not directly comparable; forecast from within-country histories.
+Nominal annualized GDP, total-market capitalization, local total-return and FX/native cashflow conventions matter.
+Twenty annualized cost bps for maximum two-way turnover is an illustration, not verified FX/fee execution. Source
+composite10.5%/Sharpe0.57 and52.1%drawdown are unreplicated; high ten-year R² is not intraday or crash-timing skill.
+Evidence: source/table-image checks, source cost arithmetic and synthetic availability fixtures only; public free
+probes proxy403. Next with new matching inputs: one country/formation/vintage/mature-label/currency ledger before
+a bounded performance study. No new return trial, execution saving, current placement or live/policy change.

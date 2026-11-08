@@ -228,6 +228,17 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **International Buffett-indicator allocation — NEEDS DATA AND SPECIFICATION (SSRN4071039).**
+  Conditional low-priority personal long-term lead: country-wise matured ten-year-return regressions on
+  log(market-cap/GDP), equal-weight top7 of14, reset everyten years. Source composite10.5% versus9.5%,
+  Sharpe0.57 versus0.49, DD−52.1%; not independently reproduced. Source waits for label maturity but
+  quarter-end GDP publication/vintages are unverified. Need1973–2019 quarterly total-market cap, GDP/RI/
+  rates and native base-currency/FX/composite-cost ledger. OECD/World Bank free probes proxy403; annual
+  proxy is nonmatching. Next: one country/formation identity, released-GDP/mature-label/cash reconciliation,
+  then coverage/power and committed protocol. No intraday/NQ/crash-timing substitute or new return trial.
+  [Review](agents/codex/results/buffett_international_4071039_review.md) ·
+  [Evidence](agents/codex/evidence/buffett_international_4071039.md) · [Data register](agents/codex/DATA_NEEDED.md).
+
 - [ ] **ETF-flow stock selection — NEEDS DATA AND SPECIFICATION (SSRN7517178).**
   Conditional personal-stock lead: monthly top/bottom50 using z12−z3 of thematic/sector ETF-induced pressure.
   Authors report17.57%annualized/Sharpe0.98 design; later Jan–Aug2026 earns8.54% versus16.82% benchmark,
