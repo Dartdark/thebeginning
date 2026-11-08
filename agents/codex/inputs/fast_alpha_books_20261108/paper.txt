@@ -1,0 +1,454 @@
+QuanTips #2
+
+
+
+
+Improving Performance
+with Fast Alphas
+A Tactical Overlay for Intraday Trend Trading
+
+
+
+Carlo Zarattini‡ , Alberto Pagani†                                                                                 February 2026
+
+
+
+
+Abstract                                                                    secutive directional intraday moves, all observed in
+                                                                            high-frequency data. In backtests that assume zero
+This paper examines whether fast-decaying intraday signals                  trading costs and no execution frictions, such signals
+that are not economically viable as standalone strategies                   can exhibit outstanding gross returns.
+can still add value when used as execution overlays for
+slower, monetizable strategies. Using 5-minute SPY data                     Their primary limitation, however, lies not in statistical
+from January 2007 to January 2026, we document a short-                     validity but in economic implementability. Because
+horizon mean-reversion effect that appears persistent in the                fast alphas require frequent rebalancing and immedi-
+sample but becomes economically fragile once realistic trad-                ate execution, they generate elevated turnover. Once
+ing commissions are considered. We then integrate this fast                 realistic transaction costs (bid–ask spreads, fees, and
+alpha into an ATR-based intraday trend-following model by                   slippage) are incorporated, much of the gross edge
+conditioning entry and exit timing on short-term pullbacks.                 typically dissipates. In many cases, the break-even
+In the tested sample, the enhanced strategy improves net                    cost threshold is sufficiently low that even minimal
+performance relative to the baseline, increasing CAGR by                    frictions render the strategy unprofitable. As a result,
+roughly 200 basis points and raising the Sharpe ratio from                  fast alphas often appear compelling in frictionless
+0.87 to 0.99. The results suggest that some high-frequency                  simulations but fail to survive practical execution
+predictors may be more valuable as informational alpha for                  constraints.
+execution refinement than as standalone return-generating
+signals.                                                                    The key question, therefore, is whether such signals
+                                                                            should simply be discarded.
+
+1     Introduction                                                          We argue that the inability to monetize a signal
+                                                                            directly does not imply the absence of economic
+In quantitative research, practitioners frequently                          value. A fast alpha may fail when implemented as
+encounter a class of predictive signals operating at                        a standalone trading strategy, yet still contain useful
+very short horizons, ranging from seconds to several                        information about near-future price dynamics.
+minutes. We refer to these signals as fast-decaying
+alphas (or more simply fast alphas), defined as return                      Our research suggests that successfully harvesting
+predictors whose informational content exhibits a                           the information embedded in fast alphas requires a
+very short half-life1 and whose statistical edge is                         fundamental framework shift: rather than evaluating
+concentrated in the immediate periods following                             such signals in isolation, we find considerable bene-
+signal formation.                                                           fits in studying them jointly with slower, more easily
+                                                                            monetizable alphas.
+Unlike medium- or long-horizon predictors, these
+signals often derive their apparent profitability from                      Stylized Example
+microstructure effects: examples include aggressive
+order-flow imbalances, liquidity dislocations or con-                       Suppose a trading strategy operating at a two-hour
+‡ carlo@concretumgroup.com.                                                 horizon generates a long entry signal. Historically, the
+† alberto@concretumgroup.com.                                               strategy delivers an average gross return of 60 basis
+1 We define the half-life of a predictive signal as the time required for
+                                                                            points per trade, with an average holding period of
+ its expected return to decay by 50% of its initial magnitude.
+
+
+www.concretumgroup.com                                                                                                              1
+QuanTips #2
+
+approximately 120 minutes.                                   efficiency of another strategy operating at a different
+                                                             time scale.
+Now assume that, at the time of entry, a fast-decaying
+alpha (whose predictive content is concentrated in the       In the following sections of this research note, we
+next minute) predicts a short-term market drift of -1        empirically validate the distinction between moneti-
+basis point. While such a signal may exhibit positive        zable and informational alpha. We first construct a
+gross expectancy, its extremely short holding period         fast-decaying signal on SPY that exhibited a strong
+implies prohibitive turnover, rendering it economically      gross-of-fee performance between 2007 and 2026,
+unviable as a standalone strategy under realistic            but becomes economically unviable once trading
+market frictions.                                            commissions are incorporated.
+
+Nevertheless, its informational content remains rel-         We then introduce a baseline intraday trend-following
+evant. If we assume, for the sake of illustration,           model operating at a slower frequency. Finally, we
+that the 60 basis points expected from the two-hour          show empirically that conditioning the execution of the
+strategy accrue approximately uniformly over the 120-        intraday trend model on the fast-decaying alpha sig-
+minute holding period, the expected return over the          nificantly enhances long-term performance. In partic-
+next minute becomes:                                         ular, the fast signal acts as an execution overlay that
+                                                             aims to improve entry timing, reduce short-term ad-
+                       60 bps                                verse drift and increase risk-adjusted returns net of
+          E [R1m ] =           = 0.5 bps/min           (1)
+                       120 min                               costs.
+
+Under the simplifying assumption that both the slow
+and fast signals provide independent forecasts for the       2     The Challenge of Fast Alphas
+next one-minute return and are assigned equal infor-
+mational weight, the combined one-minute expected            To illustrate the nature of fast alphas, we construct a
+return can be expressed as the simple average of the         simple high-frequency signal using 5-minute intraday
+two conditional forecasts. If the slow two-hour strategy     bars of the SPY ETF. Our sample spans from January
+implies an average per-minute drift of 0.5 bps and the       2007 through January 2026. Intraday regular trading
+fast signal predicts a -1 bp return for the minute ahead,    hours (RTH) data are sourced from IQFeed, while
+the combined conditional expectation amounts to:             multi-day time series are obtained from Norgate Data.
+
+               1        1                                    We focus on a parsimonious and transparent specifi-
+  E [R1m ] =     (0.5) + (−1.0) = −0.25 bps/min (2)
+               2        2                                    cation designed to capture short-term mean-reversion
+                                                             effects. Specifically, we examine whether a streak
+Although the two-hour trade exhibits positive un-
+                                                             of consecutive 5-minute bars in the same direction
+conditional expectancy, the short-term conditional
+                                                             contains predictive information about the return of the
+expectancy becomes negative once both predictors
+                                                             subsequent 5-minute bar.
+are considered jointly. Entering immediately therefore
+implies accepting a negative expected drift over the
+                                                             Let Rt denote the return of the 5-minute bar2 ending
+next minute. In such a setting, delaying execution
+                                                             at time t. Define a streak of length N as a sequence
+until the fast signal dissipates or aligns with the slower
+                                                             of at least N consecutive bars sharing the same
+predictor may improve entry price without materially
+                                                             return sign. Conditional on the occurrence of such a
+altering the structural two-hour expected return.
+                                                             streak at time t, we evaluate the average return of bar
+                                                             t + 1.
+More generally, this example suggests that a short-
+lived signal can become valuable through its marginal
+                                                             In the simplest case N = 1, the signal reduces to a
+informational contribution within a multi-horizon
+                                                             one-bar reversal rule:
+framework.
+                                                                 • If the most recent 5-minute return is positive, a
+To formalize this view, we distinguish between                     short position is taken for the next bar.
+monetizable alpha, defined as predictive content
+that survives realistic transaction costs when im-               • If the most recent 5-minute return is negative, a
+plemented directly, and informational alpha, defined               long position is taken for the next bar.
+as predictive content that, while not independently
+tradable, remains economically valuable when used            Formally, the trading signal at the closure of bar t can
+to condition the execution or timing of other strategies.    be expressed as:
+
+The appropriate question, therefore, is not whether a                               St = − sign(Rt )                 (3)
+signal is profitable after costs when traded indepen-
+dently, but whether it improves the implementation           2 Bar returns are computed on a close-to-close basis.
+
+
+
+
+www.concretumgroup.com                                                                                                2
+QuanTips #2
+
+                                                                  As an illustrative example, after four consecutive
+                                                                  positive bars, the average return of the next 5-minute
+                                                                  interval is approximately −0.33 basis points, indicat-
+                                                                  ing a modest pullback. Conversely, after four or more
+                                                                  consecutive negative bars, the subsequent return
+                                                                  averages roughly +0.42 basis points, reflecting a
+                                                                  short-term rebound.
+
+                                                                  These findings are consistent with microstructure-
+                                                                  driven mean-reversion effects commonly observed at
+                                                                  very short horizons. While the predictive edge is
+                                                                  economically small, it appears statistically persistent
+                                                                  across the sample period.
+Figure 1: Average return (in bps and $/share) of bar t+1 fol-
+lowing a streak of at least N consecutive bars in the same
+direction, illustrating the presence of a mean-reversion ef-      Turnover and Economic Fragility
+fect.
+                                                                  From a practitioner’s perspective, the key concern
+                                                                  is not statistical predictability but economic imple-
+This specification intentionally represents an extreme            mentability.
+instance of fast alpha: the signal may flip direction at
+the close of every bar, implying elevated turnover and            Even a visual inspection of the average next-bar
+immediate execution requirements. As such, it pro-                dollar PnL per share presented in Table 1 suggests
+vides a natural stress test for the economic viability of         that the expected return per trade is modest relative
+ultra-short-horizon predictors. We begin by evaluating            to typical trading costs. Generally, when expected
+the statistical properties of this streak-based signal,           returns are measured in fractions of a basis point,
+abstracting from transaction costs.                               execution frictions become a first-order consideration.
+
+Figure 1 reports the average return of bar t + 1 condi-           To evaluate economic viability more rigorously, we
+tional on streak lengths of at least N consecutive bars           isolate the highest-frequency configuration (N = 1),
+moving in the same direction. The results reveal a                which produces a binary signal capable of reversing
+consistent mean-reversion pattern: following upward               position at the close of each 5-minute bar: given its
+streaks, the expected return of the subsequent                    extremely elevated turnover, it represents a conserva-
+5-minute bar is negative; following downward streaks,             tive test of cost sensitivity.
+the expected return is positive.
+                                                                  We then incorporate the following transaction cost as-
+Importantly, this behavior is observed across multiple            sumptions:
+values of N , suggesting that the effect is not confined
+to a particular streak length. The magnitude of the                 • Commissions: Interactive Brokers (IBKR) tiered
+reversal increases moderately with longer streaks,                    rate of $0.0035 per share.
+although the economic size remains small in absolute
+terms.                                                              • Regulatory fees: Sell-side costs doubled to ap-
+                                                                      proximate SEC-related charges.
+
+                                                                    • Slippage: No slippage assumed.
+Table 1: Different specifications of the streak-based signal.
+Average next-bar returns (in bps and $/share) and trading-
+activity statistics are grouped by streak length and direction.     • Other constraints: Fractional share trading per-
+                                                                      mitted; no minimum commission threshold im-
+                                                                      posed.
+  N            Trades      Next-Bar     Next-Bar      Daily
+    Streak
+  ≥             / Day      Ret (bps)     PnL ($)    Turnover
+                                                                  Position sizing targets full notional exposure. At the
+  1   Down      39.32        0.18        0.0038       39.3x       start of each trading day, the number of shares traded
+  2   Down      18.35        0.30        0.0068       18.4x       per signal is determined using the session’s opening
+  3   Down       8.24        0.35        0.0061       8.2x
+  4   Down       3.65        0.42        0.0074       3.7x
+                                                                  price:
+  5   Down       1.59        0.35        0.0031       1.6x                                      AUMt−1
+                                                                                Sharest =                             (4)
+  1     Up      39.45       −0.13       −0.0029       39.5x                                 Session Opent
+  2     Up      19.27       −0.24       −0.0045       19.3x
+  3     Up      9.06        −0.28       −0.0060        9.1x       This quantity remains fixed throughout the entire
+  4     Up      4.19        −0.33       −0.0057       4.2x        trading session.
+  5     Up      1.87        −0.34       −0.0042       1.9x
+
+
+
+www.concretumgroup.com                                                                                                 3
+QuanTips #2
+
+
+
+
+Figure 2: Sensitivity of the fast alpha signal (N = 1) to IBKR standard-tier commission rate. The signal uses the sign of the
+most recent bar’s return as a mean-reversion cue, taking the opposite position on the following 5-minute bar. Despite strong
+gross-of-fee performance, transaction costs completely erode its profitability.
+
+
+Gross Versus Net Performance
+A gross-of-fee simulation of the N = 1 specification
+yields striking results.   Over the sample period,
+the strategy produces a CAGR (Compound Annual
+Growth Rate) of approximately 31.9% and a Sharpe
+ratio exceeding 2. These figures illustrate that even
+extremely simple high-frequency predictors can dis-
+play substantial gross performance when transaction
+costs are ignored.
+
+However, the inclusion of realistic commission costs
+dramatically alters the outcome. As shown in Fig-
+ure 2, once standard IBKR commissions are applied,
+                                                                  Figure 3: Illustrative example of a single trading session:
+the strategy’s net performance becomes negative.
+                                                                  the volatility bands (black) define the breakout thresholds,
+This outcome reveals a structural fragility: the signal’s
+                                                                  while the session open level (purple) acts as the stop price
+expected per-trade return is of the same order of                 for open positions.
+magnitude as per-trade execution costs: as a result,
+even modest transaction costs are sufficient to erode
+profitability.
+                                                                  (ATR)3 indicator to construct dynamic volatility bands
+Given that our signal does not survive as a standalone            around the session’s opening price, allowing positions
+strategy, it may be better interpreted as informational           to be initiated in the direction of meaningful intraday
+alpha rather than monetizable alpha within the frame-             price moves.
+work introduced in Section 1.
+                                                                  At the beginning of each trading session, we compute
+                                                                  an upper and a lower volatility band. The upper band
+3    Baseline Intraday Trend Model                                is defined as the session opening price plus one-half
+                                                                  of the 14-period ATR, while the lower band is defined
+To test our fast alpha signal as execution overlay, we
+first require a robust and economically viable baseline           3 The Average True Range (ATR) is a volatility indicator introduced
+strategy. For this purpose, we adopt a classic intraday            by Wilder (1978), computed as a moving average of the True
+breakout system inspired by Trading Systems and                    Range over a specified lookback period. The True Range is de-
+Methods (Kaufman, 2013).                                           fined as the maximum of: (i) the current high minus the current
+                                                                   low, (ii) the absolute value of the current high minus the previous
+                                                                   close, and (iii) the absolute value of the current low minus the pre-
+The strategy leverages the Average True Range                      vious close.
+
+
+www.concretumgroup.com                                                                                                                4
+QuanTips #2
+
+                                                               double-digit CAGR (Compound Annual Growth Rate)
+                                                               above 13% and a Sharpe ratio of approximately 0.86.
+                                                               Given its structural simplicity and absence of regime
+                                                               filters, these results are economically meaningful.
+
+                                                               Within the terminology introduced in Section 1, this
+                                                               baseline framework qualifies as monetizable alpha: it
+                                                               survives realistic transaction costs and generates per-
+                                                               sistent net returns. It therefore provides a suitable
+                                                               foundation upon which the fast alpha execution over-
+                                                               lay can be evaluated in the following section.
+
+
+
+Figure 4: Evolution of a $100 investment in the baseline       4    Enhancing Execution via Fast
+intraday trend strategy (performance shown is net of trading        Alpha
+fees).
+                                                               We now integrate the 5-minute mean-reversion signal
+                                                               (introduced in Section 2) as a tactical execution over-
+as the session opening price minus the same amount:
+                                                               lay to the baseline intraday trend strategy described
+                                1                              in Section 3.
+   Upper Bandt = Session Opent +  ATR(14),
+                                2                       (5)
+                                1                              The integration logic is conceptually straightforward.
+   Lower Bandt = Session Opent − ATR(14)                       The baseline trend system determines directional ex-
+                                2
+                                                               posure by identifying the dominant breakout direction,
+These bands serve as dynamic breakout thresholds,              effectively providing a lower-frequency estimate of
+illustrated in Figure 3 through a representative intra-        expected price direction. The fast alpha, in contrast,
+day trading session.                                           provides short-horizon information about immediate
+                                                               price drift.
+A long position is initiated whenever the price closes
+above the upper band, signaling an upward intraday             Rather than executing immediately upon breakout
+breakout. Conversely, a short position is initiated            confirmation, entry timing is conditioned on the fast
+when the price closes below the lower band, signaling          alpha. Specifically, when a breakout is detected on
+a downside breakout.                                           the 15-minute time frame, execution is postponed until
+                                                               the fast alpha indicates a short-term pullback in the
+Once a position is opened, it is closed if the price           opposite direction. For long entries, this entails ob-
+returns to the session’s opening level, which acts             serving a negative 5-minute return prior to execution;
+as a stop indicating that the breakout has failed. To          for short entries, a positive 5-minute return is required.
+eliminate overnight exposure, all open positions are
+flattened at the end of the trading day.                       Importantly, the fast alpha overlay is applied not
+                                                               only to entries but also to exits. In the baseline
+Following an approach similar to Zarattini et al.              strategy, positions are closed when price reverts
+(2024), execution is restricted to 15-minute intervals         to the session opening level. Under the enhanced
+(specifically at HH:00, HH:15, HH:30, and HH:45)               framework, liquidation is conditioned on the fast alpha
+in order to mitigate the risk of overtrading caused            signal: rather than exiting immediately at the point of
+by immediate price fluctuations. Moreover, position            maximum short-term dislocation, the strategy waits
+sizing follows the same volatility-targeting framework,        for a brief counter-move before closing the position.
+using the realized volatility of daily SPY returns over        For example, if a long position reaches the stop
+a 14-day lookback window to target a daily portfolio           level, the strategy delays liquidation until a 5-minute
+volatility of 2%.                                              upward move is observed. The same logic applies
+                                                               symmetrically to short positions.
+Importantly, once the target position size is deter-
+mined at the session open, it remains fixed for the            This approach does not alter the structural stop
+entire trading day. Each trade initiated during the            rule itself; rather, it refines the timing of execution
+session is executed using this predetermined quantity.         around stop triggers. In other words, the objective
+                                                               is not to avoid necessary exits, but to improve exit
+Despite its simplicity, the strategy demonstrates long-        price quality by conditioning liquidation on short-term
+term robustness. As shown in Figure 4, a $100 initial          counter-moves.
+investment grows steadily over time on a net-of-fee
+basis. Over the sample period, the strategy delivers a         Figure 5 illustrates both the buy- and sell-side ad-
+
+
+www.concretumgroup.com                                                                                                 5
+QuanTips #2
+
+
+
+
+Figure 5: Illustrative example of execution enhancement using a fast alpha signal. Standard execution logic would force entry
+at the close of the first 15-minute breakout bar; instead, by waiting for a 5-minute bar in the opposite direction, the entry price is
+improved. The end-of-day (EOD) exit remains unaffected by this adjustment. Vertical grid lines indicate the 15-minute timestamps
+at which execution of the base strategy is permitted.
+
+
+justments. Under the standard breakout rule, entry
+would occur at the close of the first bar exceeding the
+volatility band. With the overlay in place, execution is
+delayed until a micro-pullback materializes, potentially
+resulting in a more favorable entry price. The exit
+logic follows the same principle.
+
+This overlay materially changes the execution profile
+of the baseline strategy. Traditional trend-following
+systems are inherently liquidity-consuming: they enter
+positions during expanding volatility and directional
+acceleration, often paying full bid-ask spread and
+accepting short-term adverse selection in exchange
+for immediate exposure.                                                Figure 6: Comparison of the baseline intraday trend strat-
+                                                                       egy and the version enhanced with fast-alpha execution
+By incorporating a mean-reversion overlay, the strat-                  logic.
+egy may introduce elements of liquidity provision.
+Rather than competing aggressively for liquidity during
+breakouts or liquidating immediately at stop breaches,
+                                                                       urgency controls could be introduced to force execu-
+the strategy waits for temporary counter-moves. This
+                                                                       tion after a predefined time window; however, such
+shift may:
+                                                                       refinements fall outside the scope of this research
+   • Improve average entry prices,                                     note.
+
+   • Enhance stop execution quality,                                   To quantify the impact of the fast alpha overlay,
+   • Reduce exposure to microstructure noise.                          we conduct a comparative simulation between the
+                                                                       baseline intraday trend strategy and the enhanced
+Importantly, the overlay does not attempt to monetize                  variant incorporating conditional execution.    The
+the fast alpha directly. Instead, it uses short-horizon                results, reported in Figure 6, indicate a meaningful
+information to refine the conditional execution of a                   improvement in net performance. The enhanced
+lower-frequency monetizable alpha.                                     strategy increases net-of-fee CAGR (Compound
+                                                                       Annual Growth Rate) by approximately 200 basis
+Note — The fast alpha overlay is applied symmetri-                     points and improves the Sharpe ratio from 0.86 to
+cally to both entries and exits. While this approach                   0.99.
+may occasionally delay participation in exceptionally
+strong trends, the pullback requirement is intentionally               Crucially, the performance improvement remains ob-
+mild (a single opposite 5-minute bar), making missed                   servable after transaction costs. By conditioning the
+trades relatively infrequent.      More sophisticated                  high-turnover fast alpha signal on the lower-frequency
+
+
+www.concretumgroup.com                                                                                                              6
+QuanTips #2
+
+trend strategy, the incremental predictive value is
+captured without inheriting the prohibitive turnover
+associated with a standalone implementation.
+                                                          References
+These findings provide empirical support for the dis-
+                                                          Perry J Kaufman. Trading Systems and Methods. John Wiley &
+tinction introduced in Section 1: while the short-          Sons, 5th edition, 2013.
+horizon signal does not qualify as monetizable al-
+pha when traded independently, it contributes eco-        Carlo Zarattini, Andrew Aziz, and Andrea Barbon. Beat the Market:
+                                                            An Effective Intraday Momentum Strategy for S&P500 ETF
+nomically meaningful value when deployed as infor-          (SPY). Available at SSRN 4824172, 2024.
+mational alpha within a multi-horizon framework.
+
+
+5    Conclusion
+                                                          Disclaimer
+This research highlights a central matter in quanti-      The information contained in this publication is provided for
+tative trading: while predictive signals at very short    informational and research purposes only and does not constitute
+horizons are often statistically detectable, their eco-   investment advice, an offer, or a solicitation to buy or sell any
+nomic viability frequently collapses once realistic       financial instrument. Concretum SA is not licensed or supervised
+                                                          by FINMA or any other financial regulatory authority, and does not
+transaction costs are incorporated.                       provide personalized investment advice or services.
+
+Our empirical analysis confirms that fast alphas may
+exhibit strong gross-of-fee performance yet fail to
+survive trading frictions when implemented as stan-
+dalone strategies. Their expected per-trade return is
+typically of the same order of magnitude as execution
+costs, rendering direct monetization economically
+fragile.
+
+However, the absence of standalone profitability does
+not imply the absence of economic value.
+
+When integrated as execution overlays for robust
+lower-frequency strategies, fast alphas can enhance
+implementation efficiency, improve entry and exit
+price quality, and increase risk-adjusted performance
+net of costs. Rather than serving as independent
+return engines, they function as informational filters
+that refine the execution of monetizable alpha.
+
+These findings suggest that evaluating predictive
+signals solely on their standalone net performance
+may understate their true economic relevance. Within
+a multi-horizon framework, signals can generate value
+not by being traded directly, but by improving how
+other strategies are traded.
+
+In light of this evidence, we believe that the distinc-
+tion between monetizable alpha and informational al-
+pha provides a practical lens through which high-
+frequency predictors should be assessed.
+
+
+
+
+                                                                                                       Concretum SA
+                                                                                               Viale Carlo Cattaneo 1
+                                                                                                     CH-6900 Lugano
+                                                                                                          Switzerland
+                                                                                          info@concretumgroup.com
+                                                                                           www.concretumgroup.com
+
+www.concretumgroup.com                                                                                                    7
+

@@ -88,6 +88,21 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 - Next check: reuse original controls and ledgers before proposing another delay; include missed entries, changed exits and opportunity cost.
 - Status: negative/cautionary execution reference, not a new alpha candidate.
 
+**2026-11-08 current-book follow-up:** [completed design report](results/fast_alpha_books_20261108.md),
+[frozen execution runner](../../analysis/codex_fast_alpha_books_20261108.py),
+[reconciliation/coverage](../../analysis/outputs/codex_fast_alpha_books_20261108/reconciliation.json).
+The owned seven-page source uses five-minute **close-to-close returns**, not candle close minus open.
+An opposite return only triggers a next-minute market order; it does not guarantee a better price or passive fill.
+The preregistered fixed-parent execution wrapper covered 24 instrument/version streams mapped to all five books,
+with BASE/ENTRY/BOTH and 72 executed design definitions (48 reserved null definitions unused).
+Design 2018-04-02–2022-12-30, one native micro, $1.24 round-trip commission plus one adverse tick per market/stop fill:
+none passed. All six streams without unresolved paths lost net dollars under both delay policies.
+Positive conditional effects in other streams were weak/incomplete; selected complete-case baselines are not
+full-strategy estimates. No random-delay/drop, 2023+ validation or account stage was earned.
+Delaying stops can increase losses: the observed Kusho paired extra adverse excursion reached $660.50 per micro
+and the maximum additional hold was 60 minutes; these are minute-model observations, not account-floor replay.
+Keep the original search history and amended source clocks; no waiting-window rescue, deployment or allocation follows.
+
 ### E07 — Almgren–Chriss / TWAP and event replay tools
 
 [Public-repositories review](results/public_repositories_review.md), 2026-10-26.
@@ -364,6 +379,19 @@ no native return or account stage is earned. Preserve individual contracts, actu
 annualization and time-zone mapping for any separately justified future comparison. No live changes.
 
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
+
+- Monthly trend/risk follow-up, retained 2026-11-08: Shi and Lian,
+  [SSRN 5140633 full review](results/ssrn5140633_review_20261108.md), February 17, 2025, pp. 17–25 and 33–35.
+  Compare trend filters using their return-weight kernels and effective horizons before treating a different
+  indicator as new information. EMA centers of mass in the source are not standard EMA periods. A centered
+  smoother uses future observations; a causal rolling estimate needs its own as-of vintage and first-fill clock.
+  Inverse-volatility weights do not equalize covariance-aware risk contributions or guarantee portfolio risk:
+  the source's approximate 12% portfolio-volatility objective accompanies 18.51% reported realized volatility.
+  The combined 1/3/12-month basket's 16.24% annual return / 0.88 Sharpe / −22.63% drawdown is an author claim,
+  without a Table 6 transaction-cost bridge, not verified net returns, execution savings or intraday protection.
+  Monthly crisis alpha does not establish an offset before an Apex breach. For separately justified research,
+  inspect lagged covariance, leverage/margin, netted integer positions and complete native paths before account
+  conclusions; do not use this reference to rerun the already-studied generic trend family. Zero new return trials.
 
 Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5 and Figure 1 p.27.
 [Review](results/variance_risk_premium_review_20261029.md), 2026-10-29.
@@ -1550,6 +1578,74 @@ Source: Kim/Mehrotra, SSRN486642, September2003, [review and arithmetic audit](r
   and quote freshness before any concentration/cost claim. Existing DATA_NEEDED D42–D45 apply; no new alpha/data request.
 - Status: historical execution reference; zero trading-return trials, measured savings, allocation or live changes.
 
+### E01/E56 follow-up — Island/Nasdaq: fine-grid priority and conditional maker markouts
+
+Source: Biais/Bisière/Spatt, SSRN302398, November26,2003, [review/audit](results/island_nasdaq_302398_review.md), November7,2026.
+- Use: unrounded competing quotes and synchronized receipt clocks matter. A fine-grid improvement can disappear
+  in coarse displayed data; price priority on one venue is not guaranteed access to another venue's order flow.
+- Evidence: historical seven-stock/two-five-session study, not independently reproduced. Authors infer predecimal
+  rents and weaker simple-model evidence afterward; richer instrument tests still reject restrictions in2001.
+- Profit boundary: marginal executed-book markouts use a thirty-minute midpoint. This is a future label, not an
+  attainable exit or net order-policy P&L. Account for nonfills, partials, cancellations, closing costs and inventory.
+- Identification: spread/markout moments identify handling cost plus rent, not both separately without additional
+  assumptions. Synthetic checks reproduce that nonuniqueness and rounding mechanism, not a profitable strategy.
+- Limits/next check: only for an already-justified execution audit, verify same-contract quotes, source precision,
+  event/receipt/order/fill clocks, actual queue rules, native fees and side-signed markouts. Historical Island stock
+  tick/rebate terms do not transfer to CME futures. Existing D42–D45 data requirements apply.
+- Status: execution reference; no new alpha/data request, return trial, measured saving, allocation or live change.
+
+### E03 follow-up — Venue fragmentation, delay units and cancellation denominators (2026-11-07)
+
+Source: Battalio/Egginton/Van Ness/Van Ness, SSRN1941956, October5,2011 draft.
+[Review](results/nasdaq_fragmentation_1941956_review_20261107.md),
+[source/sign audit](../../analysis/outputs/codex_nasdaq_fragmentation_1941956/source_audit.json).
+- Use: distinguish number of venues from actual flow allocation and reporting facilities from matching venues.
+  Historical cost trends, within-year conditional relationships and causal execution savings are separate claims.
+- Evidence: source narrative/key tables reviewed, Tables10/12 visually checked; no original regression replication.
+  Table10 defines delay in seconds: negative fragmentation coefficients in2002–06 mean shorter delay, positive
+  coefficients in2007–10 mean longer delay. The prose reverses the speed interpretation. Spread associations
+  also vary by year; do not carry an unconditional faster/cheaper claim into execution assumptions.
+- Cancellations: reported2010 percentages include NASDAQ16.3%, ARCA92.1%, ISE97.0%. These reporting averages
+  are not quote-message rates, proof of spoofing/false liquidity or our probability of missing a fill. Reconcile
+  order population, denominator, reporting coverage, time priority, partials and lifecycle before reuse.
+- Limits: historical fragmented US stocks, not a native NQ/ES matching-book study; receipt-to-fill report averages
+  are not broker/network latency. No trading rule, native fill benefit or measured saving follows.
+- Smallest next check only with a separately justified execution task: validate matching report/order populations
+  and clock units against observed lifecycle records. No new data request, allocation, monitor or return trial.
+
+### E09/E12 follow-up — Slow trend signals, actual-position turnover and no-trade bands
+
+Source: Tzotchev, SSRN4677166, February6,2018, [review/source audit](results/delta_straddle_4677166_review.md), November8,2026.
+- Use: execution cost scales with changes in actual held positions; running cost with absolute exposure.
+  Signal-only changes miss turnover from inverse volatility, risk targeting, contract rolls and integer rounding.
+  Preserve last executed holdings and cumulative target drift when applying a no-trade band.
+- Evidence: author simulations show fast4/8/16-day gross gains become losses after modeled costs;0.25band
+  improves reported Sharpe over no band, but was chosen after historical comparison. No native savings reproduced.
+- Limits: bounded CDF signal does not bound inverse-vol leverage; straddle-like geometry is not option protection
+  or a timely account offset. Gross/carry/fees/collateral and native roll cash must reconcile. Printed AR(1)t-stat
+  correction is reversed under marginal volatility; source DD below−100%needs NAV convention clarification.
+- Next check on genuinely new matching inputs: one causal native formation/rebalance/roll/cash interval and cost
+  bridge, preserving full universe, source selection and prior negative trend evidence. D54 records missing data.
+- Status: conditional personal lead and cost-reference only; zero new financial trials, measured savings or live changes.
+
+### Research-method follow-up — Indicator significance, selection and switching costs (2026-11-08)
+
+Source: Fang/Qin/Jacobsen, *Technical Market Indicators: An Overview*, SSRN2449344, user-uploaded manuscript.
+[Review](results/market_indicators_2449344_review_20261108.md),
+[source/unit receipt](../../analysis/outputs/codex_market_indicators_2449344/source_audit.json).
+- Use: distinguish regression significance, stable signs and economic value after switching. Main author screen
+  goes93→30→10→8→0 economic outperformers; selected regime/robust exceptions exist but do not establish a new edge.
+- Evidence: main narrative/selected tables, visual Table13 check, no empirical reproduction. Table13's short-sales
+  Sharpe2.47 is multiplied by10^-2, yielding0.0247 per week; not annual Sharpe2.47. Switching cost0.10% is an
+  author assumption for market/cash timing, not our native futures spread/fee/slippage ledger or measured savings.
+- Clocks: NBER retrospective labels are not contemporaneous inputs; a real-time CFNAI release still requires
+  original vintages and availability. Lagged indicator dates and full-sample-selected candidates do not establish
+  independent tradable validation. Weekly NYSE short-sales data ending2008 cannot be silently replaced by modern
+  daily short volume, short interest or futures volume.
+- Next check only on materially stronger independent evidence: actual data/source clocks, precise forecast/refit
+  conventions and same-opportunity costed holdings. No new data acquisition, return trial, filter, allocation or
+  rejection of existing independently tested strategies follows. Supporting negative/method evidence only.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
@@ -1898,3 +1994,35 @@ composite10.5%/Sharpe0.57 and52.1%drawdown are unreplicated; high ten-year R² i
 Evidence: source/table-image checks, source cost arithmetic and synthetic availability fixtures only; public free
 probes proxy403. Next with new matching inputs: one country/formation/vintage/mature-label/currency ledger before
 a bounded performance study. No new return trial, execution saving, current placement or live/policy change.
+
+### E09/E10/E12 follow-up — Transaction taxes, participation and volatility are not alpha
+
+Source: Velmurugan/Champramary, [SSRN2849388 uploaded-paper review](results/ctt_gold_2849388_review.md),
+retained November 7, 2026. Historical MCX gold study, 2011–16, tax start July 1, 2013.
+- Use: express charges in notional units and distinguish activity, dispersion and executable return prediction.
+  The source's 0.01% seller tax is 1bp of notional, not margin; it is not a CME/MGC fee setting. Reported
+  trading-value declines recompute to 43.95–57.08%; this does not identify a trade sign or a causal tax effect.
+- Evidence: full-source/table-image inspection and published arithmetic only. Table 6's post-tax persistence
+  sums to 0.974387 rather than 0.99; alpha5 p=0.3176 contradicts claimed significance. No raw MCX/GARCH replication,
+  measured savings, risk reduction or strategy profit. Greater volatility need not mean exploitable inefficiency.
+- Next use only for a separately justified cost/participation study: authenticate tax/event/sample clocks,
+  market/contract/roll identity and controls. No new alpha queue/data-shopping item, automatic collector or return
+  test; missing data alone is not merit. No allocation or live change.
+
+### E01/E10/E56 follow-up — Listing transfers, spread components and urgency
+
+Source: Bonini et al., [SSRN3985691 full review](results/listing_switch_3985691_review.md), December 15, 2021
+preliminary draft, retained November 7, 2026; NYSE/Nasdaq stock switches 2009–17, not Nasdaq-100 futures.
+- Use: distinguish quoted from effective/realized spread, and interaction coefficients from total subgroup effects.
+  With aggressor side D, trade price P and same-contract midpoints M0/M5, the paper's full relative spreads satisfy
+  `2*D*(P-M0)/P = 2*D*(P-M5)/P + 2*D*(M5-M0)/P`. Five-minute M5 is a posttrade label, not an available signal.
+  Half-spreads, percentage points/basis points and native cash fees require explicit conversion. Realized spread
+  excludes inventory, hedging and fees and is not net dealer profit; a passive parent's side differs from aggressor side.
+- Evidence: full text/appendix, key table/figure images, source arithmetic and two invented algebra examples only.
+  Large-firm dark effective spread changes +0.068−0.037=+0.031 percentage points, not a decline. Pooled lit effective
+  spread changes −0.019; wider quoted spreads do not imply deterioration of every effective-spread measure.
+  Coefficient-sum significance requires unavailable covariance. Announcement CAR is not significant.
+- Limits/next check when separately warranted: actual fills and order/quote receipt clocks, side, quote age,
+  classified venue, future midpoint coverage, native fees and missed-fill opportunity cost. Off-exchange is not
+  automatically a specifically identified dark pool. No original TAQ replication, trading signal, measured saving,
+  TODO strategy/data-shopping entry, order-routing installation, portfolio change or external message.

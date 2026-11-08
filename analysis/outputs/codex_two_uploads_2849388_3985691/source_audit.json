@@ -1,0 +1,175 @@
+{
+  "scope": "Two requested upload reviews: source arithmetic, units and invented spread identity only",
+  "sources": {
+    "2849388": {
+      "path": "agents/codex/inputs/ctt_gold_2849388",
+      "pdf_pages": 20,
+      "pdf_sha256": "e2b3b1342f07fcbd126071b4d45686cd19d1448a6e05ad6f41122f27d73d38f5",
+      "text_sha256": "add5cb4370c38ea3c0fd4d44f8e0f0527d7ac5eab020df479d754061f61e53af",
+      "transcription_sha256": "d3da6fc62656b41c4def8d5017cf1a4d47aa05c52215419ad221924ee623622e",
+      "pdf_metadata": {
+        "format": "PDF 1.5",
+        "title": "",
+        "author": "awkhaphwr",
+        "subject": "",
+        "keywords": "",
+        "creator": "Microsoft\u00ae Word 2013",
+        "producer": "Microsoft\u00ae Word 2013",
+        "creationDate": "D:20161007151645+05'30'",
+        "modDate": "D:20161007151645+05'30'",
+        "trapped": "",
+        "encryption": null
+      },
+      "visually_inspected_pdf_pages": [
+        8,
+        14,
+        15
+      ]
+    },
+    "3985691": {
+      "path": "agents/codex/inputs/listing_switch_3985691",
+      "pdf_pages": 45,
+      "pdf_sha256": "b2d22bebe5df4b8c616dd3ba2be09732fcd542dd1983dfc2b7702d9f25e4fbad",
+      "text_sha256": "1c3af46c4c9828aee5bb4fb92ae270c007d233f7d1a9a8741059c4e4c8bc67a7",
+      "transcription_sha256": "5013e624843df77ea11e2c2519dcbb830c843cae182f612d653d03281fc567f5",
+      "pdf_metadata": {
+        "format": "PDF 1.5",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "LaTeX with hyperref",
+        "producer": "pdfTeX-1.40.20",
+        "creationDate": "D:20211215004104Z",
+        "modDate": "D:20211215004104Z",
+        "trapped": "",
+        "encryption": null
+      },
+      "visually_inspected_pdf_pages": [
+        29,
+        35,
+        36,
+        37,
+        38
+      ]
+    }
+  },
+  "gold": {
+    "volume": [
+      {
+        "window": 100,
+        "after_before": 0.5605299606467424,
+        "decline_percent": 43.94700393532575
+      },
+      {
+        "window": 150,
+        "after_before": 0.5182317992541805,
+        "decline_percent": 48.17682007458195
+      },
+      {
+        "window": 300,
+        "after_before": 0.4649097628373399,
+        "decline_percent": 53.50902371626601
+      },
+      {
+        "window": 550,
+        "after_before": 0.42924174752808486,
+        "decline_percent": 57.07582524719152
+      },
+      {
+        "window": 767,
+        "after_before": 0.4477561682128277,
+        "decline_percent": 55.22438317871723
+      }
+    ],
+    "volume_decline_range_percent": [
+      43.94700393532575,
+      57.07582524719152
+    ],
+    "volatility_sd": [
+      {
+        "window": 100,
+        "sd_increase_percent": 21.51063655520063
+      },
+      {
+        "window": 150,
+        "sd_increase_percent": 28.15502715499234
+      },
+      {
+        "window": 300,
+        "sd_increase_percent": 32.21343438126501
+      },
+      {
+        "window": 550,
+        "sd_increase_percent": 16.12600214081307
+      },
+      {
+        "window": 767,
+        "sd_increase_percent": 11.441217679276525
+      }
+    ],
+    "garch_pre_persistence": 0.971302,
+    "garch_post_persistence": 0.974387,
+    "garch_alpha5_p": 0.3176,
+    "garch_mean_shift": 0.00032,
+    "garch_mean_shift_p": 0.4682,
+    "historical_source_seller_tax_bps": 1.0,
+    "historical_tax_on_one_lakh_INR": 10.0,
+    "qualification": "Recomputed published-table arithmetic only, not a causal tax estimate or GARCH fit; historical Indian tax is not a CME charge."
+  },
+  "listing_switch": {
+    "quoted_spread_interaction_pp": 0.136,
+    "quoted_spread_interaction_bps": 13.6,
+    "large_dark_volume_total_change_shares": 334653.0,
+    "large_dark_share_total_change_pp": 1.9,
+    "dark_effective_large_total_change_pp": 0.031,
+    "lit_effective_large_total_change_pp": -0.054,
+    "lit_effective_pooled_change_pp": -0.019,
+    "matched_fraction_to_Nasdaq": 0.38181818181818183,
+    "matched_fraction_to_NYSE": 0.7222222222222222,
+    "qualification": "Point-estimate coefficient sums, not fitted regressions. Joint SE/covariance unavailable; no significance for sums inferred. Percent units follow source captions, not relative growth or futures profits."
+  },
+  "invented_spread_cases": [
+    {
+      "side": 1,
+      "price": "100.01",
+      "contemporaneous_midpoint": "100",
+      "future_midpoint": "100.02",
+      "effective_spread_bps": 1.9998000199980002,
+      "realized_spread_bps": -1.9998000199980002,
+      "signed_midpoint_impact_bps": 3.9996000399960003,
+      "identity_holds": true
+    },
+    {
+      "side": -1,
+      "price": "99.99",
+      "contemporaneous_midpoint": "100",
+      "future_midpoint": "99.98",
+      "effective_spread_bps": 2.000200020002,
+      "realized_spread_bps": -2.000200020002,
+      "signed_midpoint_impact_bps": 4.000400040004,
+      "identity_holds": true
+    }
+  ],
+  "owned_filename_census": {
+    "files": 259,
+    "matching_names": [],
+    "inspected_headers": {
+      "data/NQ_1min_2018.csv": "date,time,open,high,low,close,volume",
+      "data/GC_1min_2018.csv": "date,time,open,high,low,close,volume"
+    },
+    "limitation": "Filename/header check only. Owned GC/NQ OHLCV exports do not establish MCX 2011-16 panels or equity NBBO/ATS/event records. No market-return rows loaded."
+  },
+  "budgets": {
+    "hypotheses": 4,
+    "economic_definitions": 10,
+    "progress_trials_sha256": "466ad0eaa585dc809ae92c1f2e4c346ba3ad7b4d5d44330fa9f96c4dd2cedaba",
+    "root_trials_sha256": "40597f5c61a99f0fb913c53067b630b4a2583af2643dcc44a0b567e9a372af4e"
+  },
+  "market_return_tests": 0,
+  "new_hypotheses": 0,
+  "new_economic_definitions": 0,
+  "independent_empirical_verification": false,
+  "original_data_or_author_code_executed": false,
+  "external_messages_or_live_actions": false
+}

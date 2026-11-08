@@ -1,0 +1,41 @@
+# Source: Fortitudo Technologies replication notebook, Copyright 2021-2026; GPLv3-or-later.
+# Original license notice retained in agents/codex/inputs/exposure_stacking_4709317/author_notebook.ipynb.
+def exposure_stacking(L, frontier, num_samples):
+    """Computes the L-fold Exposure Stacking.
+
+    Partitions the first num_samples samples from the frontier into L sets 
+    of equal size and computes the L-fold Exposure Stacking.
+
+    Args:
+        L: Number of partition sets.
+        frontier: Resampled exposures frontier with shape (I, P, B).
+        num_samples: Number of samples to include.
+
+    Returns:
+        Exposure Stacking portfolio.    
+    """
+    partition_size = num_samples // L  # If L does not divide num_bootstraps "remainder data" is not used.
+    M = frontier[:, pf_index, :num_samples].T
+    P = np.zeros((num_samples, num_samples))
+    q = np.zeros((num_samples, 1))
+    for l in range(L):
+        K_l = np.arange(l * partition_size, (l + 1) * partition_size)
+        M_l = copy(M)
+        M_l[K_l, :] = 0
+        P = P + M_l @ M_l.T
+        sum_exposures_K_l = np.sum(frontier[:, pf_index, K_l], axis=1)
+        q = q + (M_l @ sum_exposures_K_l)[:, np.newaxis]
+    P = matrix(2 * partition_size * P)
+    q = matrix(-2 * q)
+    # Weights must sum to one
+    A = matrix(np.ones((1, num_samples)))
+    b = matrix(np.array([[1.]]))
+    # Weights must be nonnegative
+    G = matrix(-np.identity(num_samples))
+    h = matrix(np.zeros((num_samples, 1)))
+    sol = solvers.qp(P, q, G, h, A, b)
+    w = sol['x']
+    exposure = np.squeeze(M.T @ w)
+    return exposure
+
+

@@ -1,0 +1,669 @@
+{
+  "program": "user-fast-alpha-books-20261108",
+  "source_claude_commit": "1ab10568ae0fc42735b15f7a829695e8a6cd4d2c",
+  "checked_parent": "9d21e27e310094799e417c5bf157649f7a4609b8",
+  "design_start": "2018-04-02",
+  "design_end": "2022-12-30",
+  "parents": [
+    {
+      "key": "VB",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/VB_unit_ledger.csv",
+      "deadline_hhmm": 1430,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "VB_BASE",
+        "VB_ENTRY",
+        "VB_BOTH",
+        "VB_RANDOM_DELAY",
+        "VB_RANDOM_DROP"
+      ],
+      "books": [
+        "evaluation_50",
+        "evaluation_150",
+        "funded_50",
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "ONB30",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/ONB30_unit_ledger.csv",
+      "deadline_hhmm": 1430,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "ONB30_BASE",
+        "ONB30_ENTRY",
+        "ONB30_BOTH",
+        "ONB30_RANDOM_DELAY",
+        "ONB30_RANDOM_DROP"
+      ],
+      "books": [
+        "evaluation_50",
+        "evaluation_150"
+      ]
+    },
+    {
+      "key": "ONBML",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/ONBML_unit_ledger.csv",
+      "deadline_hhmm": 1430,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "ONBML_BASE",
+        "ONBML_ENTRY",
+        "ONBML_BOTH",
+        "ONBML_RANDOM_DELAY",
+        "ONBML_RANDOM_DROP"
+      ],
+      "books": [
+        "funded_50",
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "EOS",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/EOS_unit_ledger.csv",
+      "deadline_hhmm": 1000,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "EOS_BASE",
+        "EOS_ENTRY",
+        "EOS_BOTH",
+        "EOS_RANDOM_DELAY",
+        "EOS_RANDOM_DROP"
+      ],
+      "books": [
+        "evaluation_50",
+        "evaluation_150",
+        "funded_50",
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "LDF",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/LDF_unit_ledger.csv",
+      "deadline_hhmm": 1430,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "LDF_BASE",
+        "LDF_ENTRY",
+        "LDF_BOTH",
+        "LDF_RANDOM_DELAY",
+        "LDF_RANDOM_DROP"
+      ],
+      "books": [
+        "funded_50",
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "MON",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/MON_unit_ledger.csv",
+      "deadline_hhmm": 1500,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "MON_BASE",
+        "MON_ENTRY",
+        "MON_BOTH",
+        "MON_RANDOM_DELAY",
+        "MON_RANDOM_DROP"
+      ],
+      "books": [
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "NFP",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/NFP_unit_ledger.csv",
+      "deadline_hhmm": 900,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "NFP_BASE",
+        "NFP_ENTRY",
+        "NFP_BOTH",
+        "NFP_RANDOM_DELAY",
+        "NFP_RANDOM_DROP"
+      ],
+      "books": [
+        "funded_50",
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "BRIDGE",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/BRIDGE_unit_ledger.csv",
+      "deadline_hhmm": 1555,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "BRIDGE_BASE",
+        "BRIDGE_ENTRY",
+        "BRIDGE_BOTH",
+        "BRIDGE_RANDOM_DELAY",
+        "BRIDGE_RANDOM_DROP"
+      ],
+      "books": [
+        "evaluation_50",
+        "evaluation_150",
+        "funded_50",
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "CLS",
+      "market": "CL",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/CLS_unit_ledger.csv",
+      "deadline_hhmm": 900,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "CLS_BASE",
+        "CLS_ENTRY",
+        "CLS_BOTH",
+        "CLS_RANDOM_DELAY",
+        "CLS_RANDOM_DROP"
+      ],
+      "books": [
+        "funded_50",
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "MOC",
+      "market": "ES",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/MOC_unit_ledger.csv",
+      "deadline_hhmm": 1500,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "MOC_BASE",
+        "MOC_ENTRY",
+        "MOC_BOTH",
+        "MOC_RANDOM_DELAY",
+        "MOC_RANDOM_DROP"
+      ],
+      "books": [
+        "funded_50",
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "RS",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/RS_unit_ledger.csv",
+      "deadline_hhmm": 1500,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "RS_BASE",
+        "RS_ENTRY",
+        "RS_BOTH",
+        "RS_RANDOM_DELAY",
+        "RS_RANDOM_DROP"
+      ],
+      "books": [
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "DT",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/DT_unit_ledger.csv",
+      "deadline_hhmm": 1456,
+      "deadline_quote": "open",
+      "new_definition_ids": [
+        "DT_BASE",
+        "DT_ENTRY",
+        "DT_BOTH",
+        "DT_RANDOM_DELAY",
+        "DT_RANDOM_DROP"
+      ],
+      "books": [
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "TOS",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/TOS_unit_ledger.csv",
+      "deadline_hhmm": 845,
+      "deadline_quote": "open",
+      "new_definition_ids": [
+        "TOS_BASE",
+        "TOS_ENTRY",
+        "TOS_BOTH",
+        "TOS_RANDOM_DELAY",
+        "TOS_RANDOM_DROP"
+      ],
+      "books": [
+        "funded_50"
+      ]
+    },
+    {
+      "key": "OT",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/OT_unit_ledger.csv",
+      "deadline_hhmm": 301,
+      "deadline_quote": "open",
+      "new_definition_ids": [
+        "OT_BASE",
+        "OT_ENTRY",
+        "OT_BOTH",
+        "OT_RANDOM_DELAY",
+        "OT_RANDOM_DROP"
+      ],
+      "books": [
+        "funded_50",
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "FC2B",
+      "market": "NQ",
+      "adapter": "mc_csv",
+      "path": "checks/candidates/fc_2b/mc_v2_trades_all.csv",
+      "deadline_hhmm": 1459,
+      "deadline_quote": "open",
+      "new_definition_ids": [
+        "FC2B_BASE",
+        "FC2B_ENTRY",
+        "FC2B_BOTH",
+        "FC2B_RANDOM_DELAY",
+        "FC2B_RANDOM_DROP"
+      ],
+      "books": [
+        "personal"
+      ]
+    },
+    {
+      "key": "ST",
+      "market": "NQ",
+      "adapter": "mc_csv",
+      "path": "checks/candidates/swing_target/mc_trades_v3.csv",
+      "deadline_hhmm": 1500,
+      "deadline_quote": "open",
+      "new_definition_ids": [
+        "ST_BASE",
+        "ST_ENTRY",
+        "ST_BOTH",
+        "ST_RANDOM_DELAY",
+        "ST_RANDOM_DROP"
+      ],
+      "books": [
+        "personal"
+      ]
+    },
+    {
+      "key": "PT",
+      "market": "NQ",
+      "adapter": "mc_csv",
+      "path": "checks/candidates/papertrend/mc_trades_claude.csv",
+      "deadline_hhmm": 1455,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "PT_BASE",
+        "PT_ENTRY",
+        "PT_BOTH",
+        "PT_RANDOM_DELAY",
+        "PT_RANDOM_DROP"
+      ],
+      "books": [
+        "personal"
+      ]
+    },
+    {
+      "key": "S47",
+      "market": "NQ",
+      "adapter": "s47",
+      "path": "checks/candidates/s47_v2/python_trades_v2.csv",
+      "deadline_hhmm": 1500,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "S47_BASE",
+        "S47_ENTRY",
+        "S47_BOTH",
+        "S47_RANDOM_DELAY",
+        "S47_RANDOM_DROP"
+      ],
+      "books": [
+        "personal"
+      ]
+    },
+    {
+      "key": "KUSHO",
+      "market": "NQ",
+      "adapter": "kusho",
+      "path": "checks/candidates/kusho/python_trades_v9_rolladj.csv",
+      "deadline_hhmm": 2100,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "KUSHO_BASE",
+        "KUSHO_ENTRY",
+        "KUSHO_BOTH",
+        "KUSHO_RANDOM_DELAY",
+        "KUSHO_RANDOM_DROP"
+      ],
+      "books": [
+        "personal"
+      ]
+    },
+    {
+      "key": "S30_NQ",
+      "market": "NQ",
+      "adapter": "s30",
+      "path": "checks/candidates/s30_ibs/python_trades_NQ.csv",
+      "deadline_hhmm": null,
+      "deadline_quote": "none",
+      "new_definition_ids": [
+        "S30_NQ_BASE",
+        "S30_NQ_ENTRY",
+        "S30_NQ_BOTH",
+        "S30_NQ_RANDOM_DELAY",
+        "S30_NQ_RANDOM_DROP"
+      ],
+      "books": [
+        "personal"
+      ]
+    },
+    {
+      "key": "S30_ES",
+      "market": "ES",
+      "adapter": "s30",
+      "path": "checks/candidates/s30_ibs/python_trades_ES.csv",
+      "deadline_hhmm": null,
+      "deadline_quote": "none",
+      "new_definition_ids": [
+        "S30_ES_BASE",
+        "S30_ES_ENTRY",
+        "S30_ES_BOTH",
+        "S30_ES_RANDOM_DELAY",
+        "S30_ES_RANDOM_DROP"
+      ],
+      "books": [
+        "personal"
+      ]
+    },
+    {
+      "key": "TWIN",
+      "market": "NQ",
+      "adapter": "twin",
+      "path": null,
+      "deadline_hhmm": 1545,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "TWIN_BASE",
+        "TWIN_ENTRY",
+        "TWIN_BOTH",
+        "TWIN_RANDOM_DELAY",
+        "TWIN_RANDOM_DROP"
+      ],
+      "books": [
+        "personal"
+      ]
+    },
+    {
+      "key": "TWIN_CAP1",
+      "market": "NQ",
+      "adapter": "twin_cap1",
+      "path": null,
+      "deadline_hhmm": 1545,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "TWIN_CAP1_BASE",
+        "TWIN_CAP1_ENTRY",
+        "TWIN_CAP1_BOTH",
+        "TWIN_CAP1_RANDOM_DELAY",
+        "TWIN_CAP1_RANDOM_DROP"
+      ],
+      "books": [
+        "evaluation_150",
+        "funded_150"
+      ]
+    },
+    {
+      "key": "NBL",
+      "market": "NQ",
+      "adapter": "noise",
+      "path": null,
+      "deadline_hhmm": 1431,
+      "deadline_quote": "open",
+      "new_definition_ids": [
+        "NBL_BASE",
+        "NBL_ENTRY",
+        "NBL_BOTH",
+        "NBL_RANDOM_DELAY",
+        "NBL_RANDOM_DROP"
+      ],
+      "books": [
+        "personal"
+      ]
+    }
+  ],
+  "books": {
+    "evaluation_50": [
+      "VB",
+      "ONB30",
+      "EOS",
+      "BRIDGE"
+    ],
+    "evaluation_150": [
+      "VB",
+      "ONB30",
+      "EOS",
+      "BRIDGE",
+      "TWIN_CAP1"
+    ],
+    "funded_50": [
+      "VB",
+      "ONBML",
+      "EOS",
+      "LDF",
+      "NFP",
+      "BRIDGE",
+      "CLS",
+      "MOC",
+      "TOS",
+      "OT"
+    ],
+    "funded_150": [
+      "VB",
+      "ONBML",
+      "EOS",
+      "LDF",
+      "MON",
+      "NFP",
+      "BRIDGE",
+      "CLS",
+      "MOC",
+      "RS",
+      "DT",
+      "OT",
+      "TWIN_CAP1"
+    ],
+    "personal": [
+      "VB",
+      "ONBML",
+      "EOS",
+      "LDF",
+      "MON",
+      "NFP",
+      "BRIDGE",
+      "CLS",
+      "MOC",
+      "RS",
+      "DT",
+      "OT",
+      "FC2B",
+      "ST",
+      "PT",
+      "S47",
+      "KUSHO",
+      "S30_NQ",
+      "S30_ES",
+      "TWIN",
+      "NBL"
+    ]
+  },
+  "markets": {
+    "NQ": {
+      "pv": 2.0,
+      "tick": 0.25
+    },
+    "ES": {
+      "pv": 5.0,
+      "tick": 0.25
+    },
+    "CL": {
+      "pv": 100.0,
+      "tick": 0.01
+    }
+  },
+  "commission_RT": 1.24,
+  "stress_commission_RT": 2.48,
+  "adverse_ticks": 1,
+  "stress_adverse_ticks": 2,
+  "raw_files": [
+    "data/NQ_1min_2017.csv",
+    "data/NQ_1min_2018.csv",
+    "data/NQ_1min_2019.csv",
+    "data/NQ_1min_2020.csv",
+    "data/NQ_1min_2021.csv",
+    "data/NQ_1min_2022.csv",
+    "data/NQ_1min_ON_2017.csv",
+    "data/NQ_1min_ON_2018.csv",
+    "data/NQ_1min_ON_2019.csv",
+    "data/NQ_1min_ON_2020.csv",
+    "data/NQ_1min_ON_2021.csv",
+    "data/NQ_1min_ON_2022.csv",
+    "data/ES_1min_2017.csv",
+    "data/ES_1min_2018.csv",
+    "data/ES_1min_2019.csv",
+    "data/ES_1min_2020.csv",
+    "data/ES_1min_2021.csv",
+    "data/ES_1min_2022.csv",
+    "data/CL_1min_2017.csv",
+    "data/CL_1min_2018.csv",
+    "data/CL_1min_2019.csv",
+    "data/CL_1min_2020.csv",
+    "data/CL_1min_2021.csv",
+    "data/CL_1min_2022.csv"
+  ],
+  "input_sha256": {
+    "data/NQ_1min_2017.csv": "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d",
+    "data/NQ_1min_2018.csv": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+    "data/NQ_1min_2019.csv": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+    "data/NQ_1min_2020.csv": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+    "data/NQ_1min_2021.csv": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+    "data/NQ_1min_2022.csv": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+    "data/NQ_1min_ON_2017.csv": "34096eaeeefe9b8a7330d9df7d6e0d2cb93ce8dfc2a796bdbb43c6c0ce6b451a",
+    "data/NQ_1min_ON_2018.csv": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2",
+    "data/NQ_1min_ON_2019.csv": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d",
+    "data/NQ_1min_ON_2020.csv": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9",
+    "data/NQ_1min_ON_2021.csv": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e",
+    "data/NQ_1min_ON_2022.csv": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0",
+    "data/ES_1min_2017.csv": "9ddc201359c70d1adb174141d0614dbf48e08f3324f63b6f91b97350a0aac442",
+    "data/ES_1min_2018.csv": "ad4027b8230de0a91f83d1b6f3b798933f92cedebc39e56fe9223447c4b9d751",
+    "data/ES_1min_2019.csv": "b9c09d6c9a702e560119bd33770cc71e05423fc0a7a227fcc046e73bf22f22c5",
+    "data/ES_1min_2020.csv": "c22514904bd19b8ee9e3611bcd8af4017290730550b4799b9d92da73f8e7d550",
+    "data/ES_1min_2021.csv": "67cd2dee366b86f555d09d45fb4cb9f6163347531b4f3f230f73704a1fff8096",
+    "data/ES_1min_2022.csv": "00db614dd10674f7fe2f14940ae43f523b57ac48db1b0619b0eb084c5f50f601",
+    "data/CL_1min_2017.csv": "1c92250cd6bb12fd34958af01b5a54871d59f7419cb092524d626be16b0d8f91",
+    "data/CL_1min_2018.csv": "8a932d5cee6e9caa2026436d0d5c86c65b9014e2bdb0dcdcffa2ccb2dc217198",
+    "data/CL_1min_2019.csv": "d6a49a30b4f5a1ac039a7c6db2253dff9dadc2955d2db52548840b5be2f575e3",
+    "data/CL_1min_2020.csv": "966d94e0454e9382adaaad6ff4d2955eebdea6113a8b7b75071afe895978497b",
+    "data/CL_1min_2021.csv": "5f032d4260084867b9ecc027e8e13238e116edbc40b298334b69f457a0e12f3b",
+    "data/CL_1min_2022.csv": "102b1e4d88b8396425f257f79090360817b28324f22340e3f3c603e50a660823",
+    "analysis/outputs/codex_portfolio_audit_20261031/VB_unit_ledger.csv": "b23dc8ca495238518bcfc56e00bf09f62bece3baa3a797c4bdc77d362be76645",
+    "analysis/outputs/codex_portfolio_audit_20261031/ONB30_unit_ledger.csv": "043c129f2ae7c694b98d682dcfc8f323198cb4c5a4d923f17eaf9791f973705f",
+    "analysis/outputs/codex_portfolio_audit_20261031/ONBML_unit_ledger.csv": "ea9af15f725dce6408300c182de20309886329871b581fc517a6d3f9814e7293",
+    "analysis/outputs/codex_portfolio_audit_20261031/EOS_unit_ledger.csv": "e25f4cd3098745e7bd20b0bc91a0bebd78aae2c10a546c9859056970d04fad21",
+    "analysis/outputs/codex_portfolio_audit_20261031/LDF_unit_ledger.csv": "68cc91771c4c63dce0817f9afde7d114cb248cd31df3b3116dc06726a22008b2",
+    "analysis/outputs/codex_portfolio_audit_20261031/MON_unit_ledger.csv": "26b314670131af4f5894197c00975c1bffe8fbd5e105e8cbcc76df85479b8d86",
+    "analysis/outputs/codex_portfolio_audit_20261031/NFP_unit_ledger.csv": "07cc759f40874b59777d354852649f3e2beb6fcd70885bcd22fef7525bc5d6a1",
+    "analysis/outputs/codex_portfolio_audit_20261031/BRIDGE_unit_ledger.csv": "af872e9f93caa6e4b6b30a93f202c31192b122730249828a5cd6cc95e768720c",
+    "analysis/outputs/codex_portfolio_audit_20261031/CLS_unit_ledger.csv": "d3b773d68ed0cf6a1389afa52fa7bd6c14916cca914c3fa07ffb2db509578e0a",
+    "analysis/outputs/codex_portfolio_audit_20261031/MOC_unit_ledger.csv": "456a7a85470d0675307c7b717c68a3ffeeed7d5c7338a7d0dcc515d5e7d7b108",
+    "analysis/outputs/codex_portfolio_audit_20261031/RS_unit_ledger.csv": "897c2b7160d7aa8709e2cb03ce190ff2f9bbd81aedb62bad08f5194aea70bda9",
+    "analysis/outputs/codex_portfolio_audit_20261031/DT_unit_ledger.csv": "b34479fcda8d59aad27aed75712dbe166ce8f26740e91a27af8b376696bc577d",
+    "analysis/outputs/codex_portfolio_audit_20261031/TOS_unit_ledger.csv": "2711895daa680f240a160b85f46655bc1859c7d3c4c17d27311b340854772ea5",
+    "analysis/outputs/codex_portfolio_audit_20261031/OT_unit_ledger.csv": "3d6a435ad90d51a27cdc8e433a3eadbafdb0ce649dda5e8bf3cea2d50e0bb811",
+    "checks/candidates/fc_2b/mc_v2_trades_all.csv": "62495108fe4fc86495ece9977b89e94bb967e2644aeeb3e766e5b36c08384d96",
+    "checks/candidates/swing_target/mc_trades_v3.csv": "ee4776e1fe7abc32ff42074579836bfe42301b24e986cf7f85f1e9231f75eb34",
+    "checks/candidates/papertrend/mc_trades_claude.csv": "2d4053c53630e2b6f13846e96a25488f359cea30f5bc9236120e8441eee60039",
+    "checks/candidates/s47_v2/python_trades_v2.csv": "5b2d28af69ead36d2fa22df0a3060fd16842586942af34872734040af148dec6",
+    "checks/candidates/kusho/python_trades_v9_rolladj.csv": "14efb97dce86dfea2b0f916d3b7aa1d6c0b2aa59cc717811480400cbc1584345",
+    "checks/candidates/s30_ibs/python_trades_NQ.csv": "c275203106397fc33928d632dfc8e18f882b4ef44105b7f956673929785afce2",
+    "checks/candidates/s30_ibs/python_trades_ES.csv": "be35c0f3ccca413212288a25676668e21ab8c7f010dffdbece3ed68c58420140",
+    "analysis/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/replica.py": "c0ae001152c75395748b0f3fdb4bdcbc589d0a124befce0170ef454c3da6f58f",
+    "analysis/codex_eval_paths_20261104.py": "767694333f4eb69039ea5c6ed3568883a80abe5e0502f1baf4a188226b4d10b1",
+    "agents/codex/inputs/eval_audit_20261104/config.json": "724faf41b75477eab74a814213f1c35dbcd56ff2424005311e14e920d0f7a438",
+    "analysis/s30_ibs_test.py": "ddaf756786761e0ec277277711f0cfe4aed64e2ed5710eec9e3b421301d42866",
+    "analysis/s47_test.py": "9adcf58a7d93436af44c5781abc64d67981c4baa85f7231c4557d4274141c199",
+    "analysis/kusho_test.py": "d7aa979692e7fa7ba35849d55ed6fc7effb1f1f4439080f23d94910a5d2cb450",
+    "TRIALS.csv": "40597f5c61a99f0fb913c53067b630b4a2583af2643dcc44a0b567e9a372af4e",
+    "agents/codex/inputs/fast_alpha_books_20261108/source/NEW_CHAT_BRIEF.md": "a0ba433c3a80d3ee868bd204151a1649aabf7eb37ec82b0b9baaeb1dbfdfd2ba",
+    "agents/codex/inputs/fast_alpha_books_20261108/source/funded_strategies/FUNDED_PLAN.md": "fb77de9034faf00ff5797483b6d8eedb85f3bc4b9c7f4305dd3b17ceeec7fe7c",
+    "agents/codex/inputs/fast_alpha_books_20261108/source/personal_strategies/PORTFOLIO.md": "f4f2e50578f886786a7234d3b089dabbf8cf7e2408349aeeb600eaa7fff91ac4",
+    "agents/codex/inputs/fast_alpha_books_20261108/source/TIER_LIST.md": "6150b749b0187af4fe91de3655a3b8fc3d8279f0176a64823b94d8f5f4e73b4a",
+    "agents/codex/inputs/fast_alpha_books_20261108/source/analysis/twin_continuation_test.py": "d626bf15de25f6a018055701aba821f1027fe63bd9b73fed88a8f56950ac1123",
+    "agents/codex/inputs/fast_alpha_books_20261108/source/analysis/bridge_noise_15m_test.py": "500176e976c247d6ee585bd9301b24ebfedeaad502c857d4a6fea913c4cd1ba7",
+    "agents/codex/inputs/fast_alpha_books_20261108/source/analysis/bridge_noise_15m_earlyclose.py": "3ead1a3d3d4bdf1e015a63ec0aa375e25f0e5919e40e72116e1f061c143354f3",
+    "agents/codex/inputs/fast_alpha_books_20261108/source/analysis/outputs/bridge_noise_15m_trades_rth_longs.csv": "4f27ea3975da07b921a2fe57cc6524f5870c42f3da4bd51345aeebeb1dd56903",
+    "agents/codex/inputs/fast_alpha_books_20261108/source/apex_strategies/Twin_Continuation_150K.txt": "c59a04f870b72634cdf38c7257fe4153613219e262a88e8eccaa04349e667ea7",
+    "agents/codex/inputs/fast_alpha_books_20261108/paper.pdf": "f97c0184e04b4511ef6502292781b1333e81552e36b8586c763ab2ea33f91c4f",
+    "analysis/codex_eval_extra_ledgers_20261104.py": "8d9b54b839fe227f7d7774032cc92d8140ea2d616e14abd606039501aaba9ae5"
+  },
+  "max_definitions": 120,
+  "per_parent_max_definitions": 5,
+  "return_scope": "Fixed parent-intent execution overlay, not a regenerated parent alpha or a certified native order-intent feed. Recorded source exits are causal events at their clocks, not future features. Baseline order-level parity and complete paths gate promotion.",
+  "controls": "At most one selected profile per parent; 1000 causal seeded random-delay and 1000 same-year matched random-drop controls only if design gates earn them. No new wait horizon, side/clock/parameter search.",
+  "roster_qualifications": [
+    "Personal has20 named pieces but S30 two distinct instrument legs; table prose still says19.",
+    "Latest150K eval/funded add Twin cap1 2MNQ; preserve it separately from uncapped personal Twin.",
+    "Latest funded50 table still specifies Tfade despite an inconsistent older REVERTED sentence; source contradiction blocks exact funded baseline certification until reconciled.",
+    "New funded cushion code reads signal-time live equity, unlike daily-start benches; it is not assumed reproduced by daily proxies."
+  ],
+  "trial_scope": "Explicit user-requested cross-book experiment with fixed roster and5 definitions/parent, following direct-user N15 precedent; separate from automatic scout4/10,10/30 and stopped t6/Hunt/eval optimization budgets. Prior fast-alpha42parent overlay definitions and standalone/breakout looks retained as already-seen history.",
+  "frozen_files": [
+    "agents/codex/inputs/fast_alpha_books_20261108/config.json",
+    "analysis/codex_fast_alpha_books_20261108.py",
+    "agents/codex/evidence/fast_alpha_books_20261108.md",
+    "agents/codex/plans/fast_alpha_books_20261108.md",
+    "agents/codex/results/fast_alpha_paper_20261108.md",
+    "analysis/grid24.py",
+    "analysis/metrics.py",
+    "analysis/replica.py",
+    "analysis/codex_eval_paths_20261104.py",
+    "agents/codex/inputs/fast_alpha_books_20261108/clock_amendment.json"
+  ]
+}
