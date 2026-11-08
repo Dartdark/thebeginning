@@ -151,6 +151,15 @@ Keep the original search history and amended source clocks; no waiting-window re
 
 ### E09 — Native micro costs, turnover and roll reconciliation
 
+- [US100 Donchian source audit, SSRN6722841](results/ssrn6722841_review_20261108.md), 2026-11-08:
+  author code uses closed-bar signals, once-per-new-bar trailing management and a broker-dependent
+  fixed-reference-risk minimum-lot eligibility filter. Preserve these clocks/eligibility in a port;
+  its default session filter is off and no mandatory daily flatten is implemented. Author closed-trade
+  Monte Carlo is not marked-equity or intraday trailing-floor validation. Static public-source findings
+  only; no compilation, native futures replay, measured savings or independent profitability result.
+  Exact uploaded/public PDF equality remains unverified due to unavailable execution workspace.
+
+
 - [Bitcoin inverse-futures allocation](results/bitcoin_inverse_3441913_review.md), Deng et al., SSRN3441913,
   uploaded2019-08-23 version: a $K inverse contract earns `K*(1/Fentry−1/Fexit)` BTC when long; USD P&L needs
   an explicit spot conversion/collateral ledger. Inverse is settlement convention, not short direction. Both
