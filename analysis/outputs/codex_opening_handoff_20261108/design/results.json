@@ -1,0 +1,366 @@
+{
+  "phase": "design",
+  "selected": null,
+  "gates": {
+    "Continuation": {
+      "passed": false,
+      "checks": {
+        "trades_min": true,
+        "gross_net_positive": true,
+        "t_ge2": false,
+        "PF_ge1_2": true,
+        "positive_years": true,
+        "net_beats_parent": false,
+        "DD_not_worse_parent": true,
+        "Sharpe_not_worse_parent": false,
+        "pure_nested_filter": true,
+        "removed_negative_t": false,
+        "random_profit": false,
+        "random_DD": false,
+        "paired_annual_p5": false,
+        "delay_positive": true,
+        "extra_tick_cost_positive": true
+      }
+    },
+    "Reversal": {
+      "passed": false,
+      "checks": {
+        "trades_min": true,
+        "gross_net_positive": true,
+        "t_ge2": false,
+        "PF_ge1_2": true,
+        "positive_years": true,
+        "net_beats_parent": false,
+        "DD_not_worse_parent": true,
+        "Sharpe_not_worse_parent": false,
+        "pure_nested_filter": true,
+        "removed_negative_t": false,
+        "random_profit": false,
+        "random_DD": false,
+        "paired_annual_p5": false,
+        "delay_positive": true,
+        "extra_tick_cost_positive": true
+      }
+    }
+  },
+  "results": {
+    "Parent": {
+      "trades": 1042,
+      "win": 0.4817658349328215,
+      "avg": 136.71353166986563,
+      "annual": 34451.80998080614,
+      "sharpe": 1.2018453109929719,
+      "sortino": 2.1534882482070365,
+      "profit_factor": 1.2230816812302296,
+      "max_dd": 27225.5,
+      "calmar": 1.265424325753655,
+      "ulcer": 5.112064008510239,
+      "ulcer_perf": 13.478630128047286,
+      "total": 142455.5,
+      "gross": 160430.0,
+      "commission": 7554.5,
+      "slippage": 10420.0,
+      "t_trade": 2.443892859601431,
+      "worst_trade": -2017.25,
+      "native_mnq_total": 13698.5,
+      "native_mnq_worst": -202.25,
+      "missing_held_closes": 0,
+      "positive_years": 5,
+      "extra_tick_cost_total": 132035.5
+    },
+    "Continuation": {
+      "trades": 60,
+      "win": 0.55,
+      "avg": 400.25,
+      "annual": 5807.850287907869,
+      "sharpe": 0.7882075342459836,
+      "sortino": 1.77167519444657,
+      "profit_factor": 1.8061227058734675,
+      "max_dd": 13087.5,
+      "calmar": 0.4437707956376595,
+      "ulcer": 4.2710339989725075,
+      "ulcer_perf": 2.7196460104532427,
+      "total": 24015.0,
+      "gross": 25050.0,
+      "commission": 435.0,
+      "slippage": 600.0,
+      "t_trade": 1.6232496839084671,
+      "worst_trade": -2017.25,
+      "native_mnq_total": 2370.0,
+      "native_mnq_worst": -202.25,
+      "missing_held_closes": 0,
+      "positive_years": 5,
+      "extra_tick_cost_total": 23415.0
+    },
+    "Continuation_delay1m": {
+      "trades": 60,
+      "win": 0.5666666666666667,
+      "avg": 384.75,
+      "annual": 5582.936660268713,
+      "sharpe": 0.7438409901505457,
+      "sortino": 1.6662173686041888,
+      "profit_factor": 1.7628000726948303,
+      "max_dd": 12762.5,
+      "calmar": 0.4374485140269315,
+      "ulcer": 4.239510103504275,
+      "ulcer_perf": 2.633764998297325,
+      "total": 23085.0,
+      "gross": 24120.0,
+      "commission": 435.0,
+      "slippage": 600.0,
+      "t_trade": 1.528365517974028,
+      "worst_trade": -2017.25,
+      "native_mnq_total": 2277.0,
+      "native_mnq_worst": -202.25,
+      "missing_held_closes": 0,
+      "positive_years": 5,
+      "extra_tick_cost_total": 22485.0
+    },
+    "Reversal": {
+      "trades": 58,
+      "win": 0.4827586206896552,
+      "avg": 142.31896551724137,
+      "annual": 1996.2898272552782,
+      "sharpe": 0.30087812050225576,
+      "sortino": 0.5273715201164614,
+      "profit_factor": 1.2353553353767197,
+      "max_dd": 13289.0,
+      "calmar": 0.15022122260932186,
+      "ulcer": 10.053249613787425,
+      "ulcer_perf": 0.39714319328498265,
+      "total": 8254.5,
+      "gross": 9255.0,
+      "commission": 420.5,
+      "slippage": 580.0,
+      "t_trade": 0.6086741869329129,
+      "worst_trade": -2017.25,
+      "native_mnq_total": 795.0,
+      "native_mnq_worst": -202.25,
+      "missing_held_closes": 0,
+      "positive_years": 3,
+      "extra_tick_cost_total": 7674.5
+    },
+    "Reversal_delay1m": {
+      "trades": 58,
+      "win": 0.46551724137931033,
+      "avg": 77.92241379310344,
+      "annual": 1093.007677543186,
+      "sharpe": 0.16737420788259869,
+      "sortino": 0.2788143708520198,
+      "profit_factor": 1.1227299574335197,
+      "max_dd": 14191.25,
+      "calmar": 0.07701983106091331,
+      "ulcer": 10.576150994376105,
+      "ulcer_perf": 0.20669290333021828,
+      "total": 4519.5,
+      "gross": 5520.0,
+      "commission": 420.5,
+      "slippage": 580.0,
+      "t_trade": 0.33788146762566407,
+      "worst_trade": -2017.25,
+      "native_mnq_total": 421.5,
+      "native_mnq_worst": -202.25,
+      "missing_held_closes": 0,
+      "positive_years": 3,
+      "extra_tick_cost_total": 3939.5
+    }
+  },
+  "filter_controls": {
+    "Continuation": {
+      "pure_nested_filter": true,
+      "removed_n": 982,
+      "removed_total": 118440.5,
+      "removed_mean": 120.61150712830957,
+      "removed_t": 2.1009540031355023,
+      "random_drops": 1000,
+      "actual_total": 24015.0,
+      "actual_dd": 13087.5,
+      "random_total_p5_p50_p95": [
+        -12796.0,
+        8997.5,
+        32346.25
+      ],
+      "random_dd_p5_p50_p95": [
+        5473.225,
+        10493.25,
+        20680.462499999998
+      ],
+      "random_profit_ge_actual": 0.153,
+      "random_dd_le_actual": 0.689
+    },
+    "Reversal": {
+      "pure_nested_filter": true,
+      "removed_n": 984,
+      "removed_total": 134201.0,
+      "removed_mean": 136.3831300813008,
+      "removed_t": 2.3660711466894715,
+      "random_drops": 1000,
+      "actual_total": 8254.5,
+      "actual_dd": 13289.0,
+      "random_total_p5_p50_p95": [
+        -14783.75,
+        6764.5,
+        28360.74999999999
+      ],
+      "random_dd_p5_p50_p95": [
+        5350.775000000001,
+        10717.125,
+        22517.6875
+      ],
+      "random_profit_ge_actual": 0.457,
+      "random_dd_le_actual": 0.676
+    }
+  },
+  "paired_effects": {
+    "Continuation": {
+      "total": -118440.5,
+      "annual_p5": -47159.5810940499,
+      "annual_p50": -27123.313819577736,
+      "annual_p95": -10201.710316698654
+    },
+    "Reversal": {
+      "total": -134201.0,
+      "annual_p5": -50731.324376199605,
+      "annual_p50": -30884.84309021113,
+      "annual_p95": -12005.284836852214
+    }
+  },
+  "case_count": 5,
+  "distinct_family_definitions": 5,
+  "inputs": {
+    "NQ_1min_2017.csv": {
+      "blob": "1a235da2d569011833fcc27fc4b8bbe0ad51c012",
+      "sha256": "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d",
+      "bytes": 3720003
+    },
+    "NQ_1min_ON_2017.csv": {
+      "blob": "2b48593ed40b8b6165c566f183b54460918a5523",
+      "sha256": "34096eaeeefe9b8a7330d9df7d6e0d2cb93ce8dfc2a796bdbb43c6c0ce6b451a",
+      "bytes": 872961
+    },
+    "ES_1min_2017.csv": {
+      "blob": "420179855bc49442e8f5c9b51daa3bbda67b1cfb",
+      "sha256": "9ddc201359c70d1adb174141d0614dbf48e08f3324f63b6f91b97350a0aac442",
+      "bytes": 17310586
+    },
+    "NQ_1min_2018.csv": {
+      "blob": "76eb73b44b4b67a08131dc1a4241fd4452b39673",
+      "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+      "bytes": 5630086
+    },
+    "NQ_1min_ON_2018.csv": {
+      "blob": "bf8386738439cb25cbdd160d23a6d3b3f39c5f3b",
+      "sha256": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2",
+      "bytes": 11729558
+    },
+    "ES_1min_2018.csv": {
+      "blob": "577f9e3a2b8b9b75c7615435eb548e46573d9825",
+      "sha256": "ad4027b8230de0a91f83d1b6f3b798933f92cedebc39e56fe9223447c4b9d751",
+      "bytes": 17506050
+    },
+    "NQ_1min_2019.csv": {
+      "blob": "db1c597e7dcac738d2a336fc90ba5a6d132aa535",
+      "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+      "bytes": 5643031
+    },
+    "NQ_1min_ON_2019.csv": {
+      "blob": "2a0dc8d66e208b526621d246d79e7a08699b1562",
+      "sha256": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d",
+      "bytes": 11858009
+    },
+    "ES_1min_2019.csv": {
+      "blob": "adf41d77df2d298c0b8a9f8493912d9a22d22925",
+      "sha256": "b9c09d6c9a702e560119bd33770cc71e05423fc0a7a227fcc046e73bf22f22c5",
+      "bytes": 17631102
+    },
+    "NQ_1min_2020.csv": {
+      "blob": "fc22a2151cf8794527756f75048d89a7adfca1d1",
+      "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+      "bytes": 5890101
+    },
+    "NQ_1min_ON_2020.csv": {
+      "blob": "cd0eaccf6dcc1956dd1f7ef5fd417b6041f74cb8",
+      "sha256": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9",
+      "bytes": 12324066
+    },
+    "ES_1min_2020.csv": {
+      "blob": "0fa3891929dc0a5ffef899bd154b134c5732fa68",
+      "sha256": "c22514904bd19b8ee9e3611bcd8af4017290730550b4799b9d92da73f8e7d550",
+      "bytes": 17667404
+    },
+    "NQ_1min_2021.csv": {
+      "blob": "c978b68c5092abceaba934228970a401b03b65b4",
+      "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+      "bytes": 6118786
+    },
+    "NQ_1min_ON_2021.csv": {
+      "blob": "26a8f20c87383ea421cb7efca5bfc2b03ed6a7a1",
+      "sha256": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e",
+      "bytes": 12996633
+    },
+    "ES_1min_2021.csv": {
+      "blob": "21be847fe2b708aa3d9e779481229adc0391e553",
+      "sha256": "67cd2dee366b86f555d09d45fb4cb9f6163347531b4f3f230f73704a1fff8096",
+      "bytes": 17835299
+    },
+    "NQ_1min_2022.csv": {
+      "blob": "8651c6244bbd46b32e952062d91373348e0c3c9e",
+      "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+      "bytes": 6122385
+    },
+    "NQ_1min_ON_2022.csv": {
+      "blob": "2b0510fa786cfcb9f23b285735097258e77383ce",
+      "sha256": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0",
+      "bytes": 13079168
+    },
+    "ES_1min_2022.csv": {
+      "blob": "03cfa4acaad8bce66056be420b86f73af62eacfa",
+      "sha256": "00db614dd10674f7fe2f14940ae43f523b57ac48db1b0619b0eb084c5f50f601",
+      "bytes": 17909640
+    }
+  },
+  "source_ref": "fe35af99aa90d7f31b91f8693859251bb44dd9ab",
+  "dependencies": {
+    "analysis/codex_ingredients_three_20261108.py": "ed4e4f7e0daa05e659162337686a53b6ae82460cd35176c7adefe01553491a75",
+    "analysis/codex_ingredients_fc_onb_t_20261108.py": "d0b430d16b310895db417ee7dc8c87ffd146d9d985d0680dd3653437adc237b7",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a",
+    "agents/codex/inputs/ingredients_three_20261108/letf_rebalance_test.py": "de58bc8322edb1049bc0c1f33ea78d39fbe0b1682e1630c84567ac17c6211ee6",
+    "agents/codex/inputs/ingredients_three_20261108/relative_strength_test.py": "5fc4bfb4ecf44014ecf781865ca4fdd04ff73dee761786c26048823176b8e44c",
+    "agents/codex/inputs/ingredients_three_20261108/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "agents/codex/inputs/ingredients_three_20261108/dual_thrust_test.py": "f6823325cfed5a88d392e4df3ee1c431adad1122882b9e24950d5ad130b284cc",
+    "agents/codex/inputs/ingredients_three_20261108/RelStrength_v3.txt": "d819039cd0aedb33aa730f4b3b723adcc3169d10f4e9fa57c351e4652dc79b61",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/fc_replica.py": "b81cb1d2ea41e34730ef5127108fdff2654df98111a25618f4d4b4b64bdfd321",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/fc_v2.txt": "97632f4c38adbc1f9fe8ffaca4c6b446c4ae30b482506cd96c0e2eb7147036fe",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/t_source.txt": "c6816a3e95eed41ee002c870ad3118d642c17c2ffce1c23b8575d749431479b1",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/fc_mc.csv": "62495108fe4fc86495ece9977b89e94bb967e2644aeeb3e766e5b36c08384d96",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/onb_ml.txt": "c894acf104a96fae16fac201e7c6f1a565ae3d42105535fc3b315c5a245b9b25",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/calendar.py": "c0ae001152c75395748b0f3fdb4bdcbc589d0a124befce0170ef454c3da6f58f",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/grid.py": "a30ddd4533c9b9d9bdd50f161deded3a2864605f1b81bf4605f74b1d23bc7405",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/dependency_manifest.json": "1b5ec367aaabe7d1711e50df7756417bdddca23c8c5acfc1e89ea6eb9b0d0e1d",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/t_features.py": "2324f301b40a5b0fdb8bb1354dc34e1b8b08d311016c4405a94d08d760c73b2d",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/t_mc.csv": "c6837fe19af5fa74e6c144d0563b3279be8ac2c8ae989325bac7a0419266255b",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/source_manifest.json": "2176f02178f4ca3e8b25c41f630f9953e1a9b0ee5fb86099360aa97d83cca245",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/candidates.py": "d7a8f1aeba9f741b8780e09162cae86c8e09053d2dd9c6f5612cf7e445035f09",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/onb_engine.py": "fffdf8b2092ba89faedf64aaa59e9c42a90b1dd299dc5cba0a1ae269caf2d253"
+  },
+  "code_sha256": "9172d39bab10f084d5dd3fc1f92029bc38d77901859ad825eff4f52be68e092c",
+  "plan_sha256": "16a0f91f65cbcff675a96952636337bb5d4214cae10127a98155c0cc81d9f010",
+  "plan_commit": "9a34a7d8a7f4d8f12c447763297a16451786e5e5",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "numba": "0.68.0",
+    "openpyxl": "3.1.5",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0"
+  },
+  "recent_return_tests_run": false,
+  "portfolio_tests_run": false,
+  "limits": [
+    "price-only interaction; missing native up-tick Volume omitted",
+    "no fitted ML",
+    "prior ingredients and recent history seen",
+    "no promotion or book change"
+  ]
+}

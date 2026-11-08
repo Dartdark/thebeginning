@@ -2328,3 +2328,18 @@ Both ONBs share an opening-range core; ML adds frozen calendar/price/volatility 
 so ADX30/0.25ATR is not its no-ML parent. Full-history-fitted coefficients cannot yield a fresh historical
 ML holdout through a calendar split. Fixed-block deletion changes score level/admission; it is not additive
 causal feature attribution. No account payout or risk improvement, promotion, plan/VPS/broker change claimed.
+
+
+Opening-handoff combination follow-up (2026-11-08):
+[Two-candidate design screen](results/opening_handoff_20261108.md) uses price-only overnight direction,
+ONB location/first-range/ADX confirmation and FCv2 fixed-stop/trailing exits. Native up-tick volume and fitted
+ML are omitted explicitly. Both combinations fail2018–22 (60 trades,t1.62;58,t0.61), so no later-return,
+account or live stage follows. A larger selected-trade mean does not establish a useful execution/entry filter.
+
+A source-adapter mistake requiring an exact17:01 bar admitted only35 sessions; T's rule actually uses the
+first observed reopening bar. Retain the aborted receipt/partial look history, amend before corrected returns,
+and distinguish a source/data-universe correction from an optimized new opening anchor. Never silently treat
+missing reopen bars as price evidence. Nine synthetic stop/gap/trail/fallback/delay/fee groups passed; they
+verify replay logic only. Restore skipped trading dates as zeros for final annualized reporting, rather than
+shortening time; preserve original conditional gate calculations separately. No measured execution savings,
+new independent native parity, trade-plan change or account benefit established.
