@@ -250,6 +250,7 @@ after 15:59 CT, never with a position open.
 
 ## Swing Target NQ v2 (your file + Codex's test, 2026-10-25: B, personal candidate; not Apex-legal as written)
 
+- [ ] **Personal account (when it starts): Overnight Tick / VIX at 2 MNQ** (contracts input 1 -> 2; user 2026-11-08). Same chart and code as now.
 - [ ] **Personal account (when it starts): PAPERTREND v2 at `Qty` 1** ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/checks/candidates/papertrend/PAPERTREND_v2_claude.txt)), 5-min MNQ, Exchange time, IOG off, `StopATRMult` 2, logger tag `PT`.
 - [ ] **Personal account (when it starts): Swing Target v3 at `Qty` 1**, 1-min MNQ, Exchange time, IOG off, ClockShiftMin 0, logger tag `ST` (user 2026-10-25).
 - [ ] **When a 50K account is funded:** Vault Break `NumContracts` 2, `FlaggedContracts` 1, no Swing Target. **150K funded:** Dual Thrust `Qty` 2, no Swing Target (reverted 2026-10-31, `FUNDED_PLAN.md`).

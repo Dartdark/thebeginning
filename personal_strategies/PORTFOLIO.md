@@ -17,7 +17,7 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
 | FC 2B v2 | MNQ | $2,366 | $2,213 | $1,534 | 1.33 | A, MC-confirmed, **forward log first** |
 | Monday Long | MNQ | $2,104 | $3,912 | $2,086 | 1.09 | funded plan |
 | Vault Break | MNQ | $1,723 | $2,237 | $1,385 | 1.30 | live on Apex (combine) |
-| Overnight Tick / VIX (long 17:05 → 03:00 CT after a down day, order-flow × VIX filter) | MNQ | $2,201 | $2,838 | $1,283 | 1.68 | A, MC-confirmed; personal + funded (50K 1, 150K 2) since 2026-10-24 (user); replaced Overnight Anomaly (C); data to 2026-07-07 |
+| Overnight Tick / VIX (long 17:05 → 03:00 CT after a down day, order-flow × VIX filter) | MNQ | $2,201 | $2,838 | $1,283 | 1.68 | A, MC-confirmed; personal + funded (50K 1, 150K 2) since 2026-10-24 (user); replaced Overnight Anomaly (C); data to 2026-07-07; **personal at 2 MNQ (user 2026-11-08)** |
 | Bridge Monday | MNQ | $1,295 | $1,478 | $1,689 | 1.39 | live on Apex (combine) |
 | Late-Day Flow | MNQ | $889 | $1,171 | $1,590 | 1.10 | funded plan |
 | CL Sunday fade | MCL | $692 | $1,042 | $518 | 1.01 | funded plan |
@@ -45,6 +45,10 @@ From everything tested so far; numbers from `analysis/personal_portfolio.py` (ou
   1,704, the rebuild's 49 extra trades were mostly winners (+$13.9k gross per NQ). On the real trade list: $40.6 a trade per NQ net,
   PF 1.17, t 2.5 (below the 3.58 bar), 2023+ t 1.2 carried by 2026 alone (2024 −$11.0k, 2025 −$4.8k, 2026 +$41.1k per NQ), max DD
   $32.7k per NQ, 5/9 years up, and fragile to the band settings. Back in only if the forward log clears its checkpoint (TIER_LIST C).
+- **Overnight Tick at 2 MNQ in the personal account (user, 2026-11-08):** book 1-year MC (to 2026-07-07) median $26.0k -> $28.2k,
+  p5 $14.0k -> $15.4k, DD p95 $4.82k -> $4.93k, return/DD 5.39 -> 5.72 (2023+ 6.65 -> 6.96); OT's daily corr with the rest 0.06.
+  OT alone at 2 MNQ: 1-year DD p95 $2.6k, worst night about -$1,758 (the largest single-night risk in the book). The ladder rows
+  below are still at 1 micro each (re-run `analysis/personal_ladder.py` before the account opens). `analysis/outputs/noise_calm_test_output.txt`.
 - Overnight Tick / VIX in place of Overnight Anomaly (user, 2026-10-24): 17 pieces $36.6k → $37.1k a year, Sharpe 2.96 → 3.04,
   return/DD 7.7 → 8.3, capital $35.6k → $33.6k; core 16: Sharpe 3.17 → 3.24, return/DD 9.2 → 9.6 (`analysis/overnight_tick_bench.py`).
 - S30's effect (16 → 17 pieces, user 2026-10-24): +$6,000 a year, but Sharpe 3.17 → 2.96, return/DD 9.2 → 7.7, max DD
