@@ -238,6 +238,11 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   Do not invent settings, use an opaque API as verification, or adapt to NQ/ES automatically.
   [Review](agents/codex/results/kse_sentinel_7102818_review.md) ·
   [Data register](agents/codex/DATA_NEEDED.md#kse-sentinel--psx-source-rule-gate-uploaded-ssrn7102818).
+  **User-requested custom MNQ follow-up (2026-11-08): REJECT.** Explicitly selected our own
+  intraday version, not PSX replication. Frozen EMA9/21 two-candle rule, design2018–22:
+  1,238trades at1MNQ, gross−$240.50, net−$3,013.62, PF0.90, t−1.23; baseline net−$1,999.62.
+  Failed standalone gate; no2023+/account/PowerLanguage stages or rescue. Original PSX source
+  remains gated; this result does not test its withheld rules. [Build/test](agents/codex/results/sentinel_mnq_20261108.md).
 
 - [ ] **International Buffett-indicator allocation — NEEDS DATA AND SPECIFICATION (SSRN4071039).**
   Conditional low-priority personal long-term lead: country-wise matured ten-year-return regressions on

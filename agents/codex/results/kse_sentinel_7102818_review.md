@@ -14,6 +14,14 @@ Audit: `analysis/codex_kse_sentinel_7102818_audit.py`;
 output: `analysis/outputs/codex_kse_sentinel_7102818/audit.json`.
 Return trials: **0**. Numbers below are author claims, not our PSX backtest.
 
+**Later user-directed follow-up (2026-11-08):** the user chose our own MNQ intraday
+version, rather than exact source recovery. That distinct, preregistered adaptation
+is now [built and rejected at the design gate](sentinel_mnq_20261108.md):1,238trades,
+net−$3,013.62at1MNQ, PF0.90, t−1.23, versus baseline−$1,999.62. One candidate plus
+one baseline, no rescue or2023+/account stages. The source-only review below and
+its zero **PSX-replication** trials remain unchanged; the paper's withheld strategy
+has not been tested or disproved by our different-market construction.
+
 ## 1. What is it about?
 
 A daily rule-based trend-continuation system for30 Pakistani equities. Entry is

@@ -329,3 +329,8 @@ July2026 forward-paper outcomes. Need benchmark ledger and complete trial/DSR
 outputs. Cost wording22.5bp per leg versus round trip is unresolved. Owned CME
 bars are not a matching panel. Do not collect a bulk substitute or invent an EMA
 configuration before the source gate. [Review](results/kse_sentinel_7102818_review.md).
+
+User explicitly requested a separate **own-version MNQ intraday** experiment on November8,2026;
+that does not resolve the PSX rule/data request. Frozen custom version failed2018–22:1,238trades,
+net−$3,013.62at1MNQ, PF0.90, t−1.23; no recent/account stage or rescue earned.
+[Custom build/test](results/sentinel_mnq_20261108.md). This is not a negative replication of the PSX paper.
