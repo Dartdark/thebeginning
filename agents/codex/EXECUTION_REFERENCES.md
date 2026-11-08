@@ -1533,6 +1533,23 @@ Source: Alqahtani, SSRN7511639, user-uploaded undated manuscript.
 - Next check only if new source material arrives: exact labels/horizons, volume field, code/fold dates and same-target
   paired predictions. Existing causal controls already apply; no new data request, monitor, allocation or trial.
 
+### E10/E56 follow-up — Dealer concentration, spread rents and censored persistence
+
+Source: Kim/Mehrotra, SSRN486642, September2003, [review and arithmetic audit](results/nasdaq_dealer_486642_review.md), November7,2026.
+- Use: distinguish nominal dealer counts from actual order-flow concentration. HHI and measured full effective
+  spreads describe historical stock-dealer structure; neither an attributed spread component nor a realized spread is net P&L.
+- Evidence: source reports8.76cents/0.5434%of price and20.3months to halving, the latter only for79.4%with
+  observed crossings. These are not replicated profits, an exponential decay model or modern CME costs.
+- Verified arithmetic: HHI units and the paper's spread-change example; printed Equation5 lacks quote-count
+  normalization (constant quotes give nonzero “variance”). No claim that unavailable original code made that error.
+- Limits/data: old Nasdaq stock dealers, concentration/spread endogeneity, fixed-count HHI lower bound, incomplete
+  halving observations and contradictory group labels. Need actual dealer shares and same-contract trade/quote/receipt
+  clocks. The historical five-second quote lag must not become a modern futures default; completed monthly HHI is not
+  an earlier intramonth feature. Anonymous OHLCV/order-flow summaries do not supply dealer identities.
+- Next check: within an already-authorized execution review, reconcile full versus half spread, actual fills/fees
+  and quote freshness before any concentration/cost claim. Existing DATA_NEEDED D42–D45 apply; no new alpha/data request.
+- Status: historical execution reference; zero trading-return trials, measured savings, allocation or live changes.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
