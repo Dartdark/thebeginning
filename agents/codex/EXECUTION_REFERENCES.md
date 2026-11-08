@@ -2308,3 +2308,23 @@ StandaloneLateRSdesign244trades,$40163perNQ/t3.72/PF2.19lookspromisingbutfails t
 incrementconfidence gate versusLDF. Combinedfilter removes350profitable-in-aggregate LDFtrades andfails.
 No2023+,portfolio,payout,MultiChartsorlive result. Frozen standalone lead retained for independentreview,
 not automatic gate reopening or execution-savings claim. No plan or strategy settings changed.
+
+
+FC/ONB/T ingredient follow-up (2026-11-08):
+[18-case frozen diagnostic](results/ingredients_fc_onb_t_20261108.md) conditions FC 2B v2 and active
+T_ONESIDE fade-only v2 admission on retained MultiCharts event dates/sides because their native up-tick
+Volume is absent from total-tick exports. Original realized entry/gross replay matches all 770 FC and 358 T
+parent trades through 2026-10-09. This establishes conditional exit parity, not a reconstructed up-tick signal
+or native intrabar path. Four early T all-night control directions differ from the MC parent; do not call that
+comparison a pure volume-filter deletion. Exact common-date side/entry/exit/net identity is required first.
+
+T's 08:30-labelled entry is the 08:29 civil CT bar open, before the cash bell; delaying to 08:31-labelled open
+reduces net by $8,695 in 2018–22 and $9,905 in already-seen 2023–2026-10-09, with positive paired annual
+5th–95th intervals. This is historical OHLC timing sensitivity, not measured live fill savings. A later timing
+proposal needs a separate registered test and native bid/ask/path evidence. No live logger or entry change.
+FC no-BE uses the v2 BER>0 guard; stopping it genuinely disables BE. Hold other exit settings fixed.
+
+Both ONBs share an opening-range core; ML adds frozen calendar/price/volatility terms with ADX20/0.30ATR,
+so ADX30/0.25ATR is not its no-ML parent. Full-history-fitted coefficients cannot yield a fresh historical
+ML holdout through a calendar split. Fixed-block deletion changes score level/admission; it is not additive
+causal feature attribution. No account payout or risk improvement, promotion, plan/VPS/broker change claimed.
