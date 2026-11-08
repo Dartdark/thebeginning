@@ -74,6 +74,7 @@ def signals(days, N, E, decide=900, beta_mode="rel"):
                     if beta_mode == "rel": Z[i] = (mn - beta * me) / np.sqrt(res * jd)
                     elif beta_mode == "own": Z[i] = mn / np.sqrt(v1 * jd)
                     elif beta_mode == "mkt": Z[i] = beta * me / np.sqrt(beta * beta * v2 * jd)
+                    elif beta_mode == "raw": Z[i] = mn - beta * me          # 2026-11-08 ablation: residual move in bp, no volatility scaling
         # days that are not OK are not checked (the code requires DayOK at the decision)
     return Z
 
