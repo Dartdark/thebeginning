@@ -1,0 +1,20 @@
+[provenance] code 76687872 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+WATCHLIST #30 combined (user 2026-11-08): 60-min double top (short) + double bottom (long) as ONE rule, exactly as in
+
+combined: n 784 $222 a trade, t 2.77, PF 1.37, win 50%
+   by year $: {2018: 4647, 2019: 1928, 2020: 2773, 2021: 35002, 2022: 50480, 2023: -12053, 2024: 32422, 2025: 52851, 2026: 6007}
+   by year n: {2018: 85, 2019: 85, 2020: 88, 2021: 89, 2022: 99, 2023: 84, 2024: 109, 2025: 82, 2026: 63}
+   2018-22: n 446 $213 t 2.69
+   2023+: n 338 $234 t 1.52
+   longs / shorts: {'DBOT': 'n 384 $187', 'DTOP': 'n 400 $256'}
+   placebo (same side and count per year, 200 runs): mean $-2, 95th $110; p 0.005
+         trades win  avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+combined    784 50% $222 $19,004   0.93    1.89          1.37 $19,942   0.95  5.71       6.65
+2023+       338 48% $234 $19,905   0.78    1.76          1.31 $16,692   1.19 12.71       3.13
+   Monte Carlo double top / bottom 60-min, 1 MNQ (x0.1): trades 784 | total p5 $7,326 / p50 $17,258 / p95 $27,820, P(total <= 0) 0.1%
+      max DD actual $1,994 (rank 12%), shuffled p50 $2,767 / p95 $4,833 / p99 $6,189; losing streak actual 7, p95 12
+      252-day block bootstrap: P&L p5 $-950 / p50 $1,804 / p95 $5,448, P(loss) 15.1%, max DD p50 $1,157 / p95 $2,523, return/DD 1.56, P(hit $2,000 trailing, EOD check only) 11.3%
+   daily corr with plan pieces: {'VaultBreak': 0.1, 'OvernightBiasML': 0.05, 'MondayLong': 0.02, 'ExpirationOpenShort': 0.03, 'LateDayFlow': 0.28, 'NFPFade': 0.0, 'BridgeMondayLong': 0.01, 'CLSundayFade_perMCL': -0.03, 'ESMOCFollow_perMES': 0.0, 'RelativeStrength': 0.03}
+   t needed (N = 408): 3.67; deflated Sharpe 0.42
+
+   wrote checks/candidates/double_top_bottom_60m/ (trades 784, placebo 200 runs)
