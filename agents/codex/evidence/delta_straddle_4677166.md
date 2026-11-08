@@ -29,4 +29,9 @@ Whipsaws, fast reversals, correlated trends, low-volatility leverage, stale pric
 
 ## Decision and next check
 
+User-requested code follow-up: the [offline signal/whole-lot planner](../results/delta_straddle_4677166_build.md)
+passes34synthetic mechanical checks under committed engineering protocol04dbfaee. This authorizes no financial
+trial: the native replay/cash implementation and source-equivalent historical data remain missing. The earlier
+"no trading code" conclusion below means no live/MultiCharts implementation; an offline research module now exists.
+
 NEEDS DATA AND SPECIFICATION. Retain a low-priority personal watch in TODO/data register. On genuinely new full inputs, reconcile one causal formation/rebalance/roll and native cash/margin interval, then no-return coverage/cost/power admission. Only TEST plus committed bounded preregistration unlocks returns. Do not substitute an NQ/ES subset, tune fast-signal rescue caps or change the source to intraday. No Apex placement, live work or trading code.

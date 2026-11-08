@@ -240,6 +240,8 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   [Evidence](agents/codex/evidence/buffett_international_4071039.md) · [Data register](agents/codex/DATA_NEEDED.md).
 
 - [ ] **Diversified delta-straddle trend — NEEDS DATA AND SPECIFICATION (SSRN4677166).**
+  User-requested offline signal/whole-lot planner now built:34synthetic mechanical checks pass; no return backtest
+  or personal allocation established. Native replay/cash adapter still requires the matching data below.
   Conditional low-priority personal lead: explicit smooth t-stat signal,32/64/126/252/504-day blend and41-market
   risk-scaled portfolio. Author reports9.27%annual/Sharpe1.03/13.60%DD, not independently reproduced; fast4/8/16-day
   version loses after modeled costs. Need full identified futures/FX total-return/carry panel,504-session warm-up,
@@ -247,7 +249,8 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   Owned/free replication searches did not admit a matching panel. Printed AR(1)t adjustment and fast DD below−100%
   require reconciliation. Next only on new inputs: one rebalance/roll/cash interval, then coverage/cost/power gate
   before committed returns. No NQ subset, intraday port, failed-family rescue or allocation; multiday holds fail Apex.
-  [Review](agents/codex/results/delta_straddle_4677166_review.md) · [Data gate](agents/codex/inputs/delta_straddle_4677166/free_data_gate.md).
+  [Review](agents/codex/results/delta_straddle_4677166_review.md) · [Code/test report](agents/codex/results/delta_straddle_4677166_build.md) ·
+  [Data gate](agents/codex/inputs/delta_straddle_4677166/free_data_gate.md).
 
 - [ ] **ETF-flow stock selection — NEEDS DATA AND SPECIFICATION (SSRN7517178).**
   Conditional personal-stock lead: monthly top/bottom50 using z12−z3 of thematic/sector ETF-induced pressure.

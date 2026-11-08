@@ -167,6 +167,9 @@ Retain these outcomes so old NEEDS DATA headings do not become accidental new sh
 
 ### D54 — Diversified delta-straddle trend, SSRN4677166 (November8,2026)
 
+- **Code follow-up:** offline signal/whole-lot planner built at user request;34synthetic checks pass. No historical
+  returns, native cash replay or personal placement. Local interpretations are frozen, not authenticated author rules.
+  [Code/test report](results/delta_straddle_4677166_build.md) · [Input schema](research/delta_straddle/README.md).
 - **Merit/status:** conditional low-priority personal WATCH / NEEDS DATA AND SPECIFICATION. Explicit41-market
   slow trend design and author post-modeled-cost diversification claims; no independent net return or allocation.
 - **Need:** exact Appendixp.36futures/FX total-return universe and native dated contracts/roll/carry/collateral cash,

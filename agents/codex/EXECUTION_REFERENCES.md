@@ -1627,6 +1627,10 @@ Source: Tzotchev, SSRN4677166, February6,2018, [review/source audit](results/del
 - Next check on genuinely new matching inputs: one causal native formation/rebalance/roll/cash interval and cost
   bridge, preserving full universe, source selection and prior negative trend evidence. D54 records missing data.
 - Status: conditional personal lead and cost-reference only; zero new financial trials, measured savings or live changes.
+- User-requested build follow-up: [offline code/test report](results/delta_straddle_4677166_build.md),34synthetic
+  mechanical checks pass for actual-held bands, whole lots, roll close/open costs and budget overrides.
+  No fills/cash ledger or realized savings verified; modeled final-position budgets do not ensure a safe legged
+  roll path. Personal profitability still needs D54inputs and a separately admitted native replay.
 
 ### Research-method follow-up — Indicator significance, selection and switching costs (2026-11-08)
 
