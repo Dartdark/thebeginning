@@ -1,0 +1,140 @@
+{
+  "program": "user-mae-selected-20261108",
+  "checked_parent": "1d8ff7d6580eecdb48095f16abd01ddbe8f74e3c",
+  "source_claude_commit": "552bc0ffdffb1006b7948346510bab0f2d29edf9",
+  "design_start": "2018-04-02",
+  "design_end": "2022-12-30",
+  "parents": [
+    {
+      "key": "VB",
+      "market": "NQ",
+      "adapter": "unit",
+      "path": "analysis/outputs/codex_portfolio_audit_20261031/VB_unit_ledger.csv",
+      "deadline_hhmm": 1430,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "PB706_VB_BASE",
+        "PB706_VB_LIMIT025",
+        "PB706_VB_LIMIT025_STRESS",
+        "PB706_VB_RANDOM_TIME",
+        "PB706_VB_RANDOM_DROP"
+      ],
+      "books": [
+        "evaluation_50",
+        "evaluation_150",
+        "funded_50",
+        "funded_150",
+        "personal"
+      ]
+    },
+    {
+      "key": "FC2B",
+      "market": "NQ",
+      "adapter": "mc_csv",
+      "path": "checks/candidates/fc_2b/mc_v2_trades_all.csv",
+      "deadline_hhmm": 1459,
+      "deadline_quote": "open",
+      "new_definition_ids": [
+        "PB706_FC2B_BASE",
+        "PB706_FC2B_LIMIT025",
+        "PB706_FC2B_LIMIT025_STRESS",
+        "PB706_FC2B_RANDOM_TIME",
+        "PB706_FC2B_RANDOM_DROP"
+      ],
+      "books": [
+        "personal"
+      ]
+    },
+    {
+      "key": "S47",
+      "market": "NQ",
+      "adapter": "s47",
+      "path": "checks/candidates/s47_v2/python_trades_v2.csv",
+      "deadline_hhmm": 1500,
+      "deadline_quote": "close",
+      "new_definition_ids": [
+        "PB706_S47_BASE",
+        "PB706_S47_LIMIT025",
+        "PB706_S47_LIMIT025_STRESS",
+        "PB706_S47_RANDOM_TIME",
+        "PB706_S47_RANDOM_DROP"
+      ],
+      "books": [
+        "personal"
+      ]
+    }
+  ],
+  "raw_files": [
+    "data/NQ_1min_2017.csv",
+    "data/NQ_1min_2018.csv",
+    "data/NQ_1min_2019.csv",
+    "data/NQ_1min_2020.csv",
+    "data/NQ_1min_2021.csv",
+    "data/NQ_1min_2022.csv",
+    "data/NQ_1min_ON_2017.csv",
+    "data/NQ_1min_ON_2018.csv",
+    "data/NQ_1min_ON_2019.csv",
+    "data/NQ_1min_ON_2020.csv",
+    "data/NQ_1min_ON_2021.csv",
+    "data/NQ_1min_ON_2022.csv"
+  ],
+  "markets": {
+    "NQ": {
+      "pv": 2.0,
+      "tick": 0.25
+    }
+  },
+  "commission_RT": 1.24,
+  "stress_commission_RT": 2.48,
+  "offset": 0.0025,
+  "entry_activation": "first minute after original event; no fills in original exit minute",
+  "entry_rounding": "buy floor / sell ceiling to native tick",
+  "limit_trade_through_ticks": 1,
+  "seed": 7063478,
+  "controls_repetitions": 1000,
+  "random_time_minutes": [
+    1,
+    60
+  ],
+  "max_definitions": 15,
+  "prior_floor": 10000,
+  "additional_prior_reservations": 238,
+  "trial_scope": "Explicit new user-selected strategy test; separate bounded direct-user project, not restart of stopped scout/lab/eval programs. One offset candidate per parent, five definitions including baseline/stress/nulls; preserve all prior timing looks.",
+  "input_sha256": {
+    "data/NQ_1min_2017.csv": "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d",
+    "data/NQ_1min_2018.csv": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+    "data/NQ_1min_2019.csv": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+    "data/NQ_1min_2020.csv": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+    "data/NQ_1min_2021.csv": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+    "data/NQ_1min_2022.csv": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+    "data/NQ_1min_ON_2017.csv": "34096eaeeefe9b8a7330d9df7d6e0d2cb93ce8dfc2a796bdbb43c6c0ce6b451a",
+    "data/NQ_1min_ON_2018.csv": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2",
+    "data/NQ_1min_ON_2019.csv": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d",
+    "data/NQ_1min_ON_2020.csv": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9",
+    "data/NQ_1min_ON_2021.csv": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e",
+    "data/NQ_1min_ON_2022.csv": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0",
+    "analysis/outputs/codex_portfolio_audit_20261031/VB_unit_ledger.csv": "b23dc8ca495238518bcfc56e00bf09f62bece3baa3a797c4bdc77d362be76645",
+    "checks/candidates/fc_2b/mc_v2_trades_all.csv": "62495108fe4fc86495ece9977b89e94bb967e2644aeeb3e766e5b36c08384d96",
+    "checks/candidates/s47_v2/python_trades_v2.csv": "5b2d28af69ead36d2fa22df0a3060fd16842586942af34872734040af148dec6",
+    "agents/codex/inputs/ssrn7063478_20261108/paper.pdf": "8717db83a08bb88f69dd9285883dfbb0c6d2a19107ca2dffc0c806de875e6f22",
+    "analysis/codex_fast_alpha_books_20261108.py": "0d5151c182d756730cfc36180e74ead5011c05b7daa88f3c08b0d127a0b36839",
+    "analysis/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/replica.py": "c0ae001152c75395748b0f3fdb4bdcbc589d0a124befce0170ef454c3da6f58f",
+    "analysis/codex_eval_paths_20261104.py": "767694333f4eb69039ea5c6ed3568883a80abe5e0502f1baf4a188226b4d10b1",
+    "agents/codex/inputs/eval_audit_20261104/config.json": "724faf41b75477eab74a814213f1c35dbcd56ff2424005311e14e920d0f7a438",
+    "TRIALS.csv": "40597f5c61a99f0fb913c53067b630b4a2583af2643dcc44a0b567e9a372af4e",
+    "agents/codex/inputs/mae_selected_20261108/source/personal_strategies/PORTFOLIO.md": "f4f2e50578f886786a7234d3b089dabbf8cf7e2408349aeeb600eaa7fff91ac4",
+    "agents/codex/inputs/mae_selected_20261108/source/funded_strategies/FUNDED_PLAN.md": "fb77de9034faf00ff5797483b6d8eedb85f3bc4b9c7f4305dd3b17ceeec7fe7c",
+    "agents/codex/inputs/mae_selected_20261108/source/NEW_CHAT_BRIEF.md": "a0ba433c3a80d3ee868bd204151a1649aabf7eb37ec82b0b9baaeb1dbfdfd2ba",
+    "agents/codex/inputs/mae_selected_20261108/source/checks/candidates/fc_2b/FC_2B_v2.txt": "97632f4c38adbc1f9fe8ffaca4c6b446c4ae30b482506cd96c0e2eb7147036fe",
+    "agents/codex/inputs/mae_selected_20261108/source/checks/candidates/s47_v2/S47_v2_fixed.txt": "f20fca993162b8cc77386641f2e188a4118fe20fb6ceb454ba56f4cb1f531c2c",
+    "agents/codex/inputs/mae_selected_20261108/source/apex_strategies/NQ_Vault_Break.txt": "705f555830ef03bfdc60faaf45a69dd9e4b60d3cc3bdf9dca59701b1c171c9b2"
+  },
+  "frozen_files": [
+    "agents/codex/inputs/mae_selected_20261108/config.json",
+    "agents/codex/evidence/mae_selected_20261108.md",
+    "agents/codex/plans/mae_selected_20261108.md",
+    "analysis/codex_mae_selected_20261108.py"
+  ]
+}
