@@ -1,0 +1,136 @@
+{
+  "period": "design",
+  "primary": {
+    "trades": 1238,
+    "win": 0.36106623586429726,
+    "avg": -2.434264943457191,
+    "annual": -613.434765751212,
+    "sharpe": -0.5543984363409902,
+    "sortino": -0.9478040099634227,
+    "profit_factor": 0.9002222932960391,
+    "max_dd": 3519.7199999999752,
+    "calmar": -0.1742851038580386,
+    "ulcer": 2.905266953731073,
+    "ulcer_perf": -0.42229149714687103,
+    "total": -3013.620000000002,
+    "trade_t": -1.2288023935721535,
+    "daily_t": -1.2288023935721535,
+    "days": 1238,
+    "gross": -240.5,
+    "commission": 1535.12,
+    "slippage": 1238.0
+  },
+  "stress": {
+    "trades": 1238,
+    "win": 0.35218093699515346,
+    "avg": -4.674264943457191,
+    "annual": -1177.914765751212,
+    "sharpe": -1.0645534631147457,
+    "sortino": -1.7613308546585984,
+    "profit_factor": 0.81910762001578,
+    "max_dd": 6067.57999999994,
+    "calmar": -0.19462909828839964,
+    "ulcer": 5.857979367893289,
+    "ulcer_perf": -0.40215736238580385,
+    "total": -5786.740000000002,
+    "trade_t": -2.359541004831306,
+    "daily_t": -2.359541004831306,
+    "days": 1238,
+    "gross": -240.5,
+    "commission": 3070.24,
+    "slippage": 2476.0
+  },
+  "baseline": {
+    "trades": 1238,
+    "win": 0.3441033925686591,
+    "avg": -1.6152019386106637,
+    "annual": -407.03088852988725,
+    "sharpe": -0.373484119282204,
+    "sortino": -0.6522159507889862,
+    "profit_factor": 0.9296277161825071,
+    "max_dd": 2918.3000000000015,
+    "calmar": -0.1394753413048305,
+    "ulcer": 2.6944300405548045,
+    "ulcer_perf": -0.3021276354579808,
+    "total": -1999.6200000000017,
+    "trade_t": -0.8278129043150544,
+    "daily_t": -0.8278129043150544,
+    "days": 1238,
+    "gross": 773.5,
+    "commission": 1535.12,
+    "slippage": 1238.0
+  },
+  "paired_daily_t_vs_baseline": -0.545083007608122,
+  "years": {
+    "2018": -428.79999999999995,
+    "2019": -523.52,
+    "2020": 349.46,
+    "2021": -1006.4999999999999,
+    "2022": -1404.2600000000002
+  },
+  "gates": {
+    "at_least300_trades": true,
+    "positive_native_net": false,
+    "daily_t_at_least2": false,
+    "profit_factor_at_least1_1": false,
+    "four_of_five_years_positive": false,
+    "stress_positive": false,
+    "beats_price_only_baseline": false
+  },
+  "cheap_pass": false,
+  "passed": false,
+  "placebos_run": false,
+  "placebo_p": {},
+  "strategy_definitions_run": 2,
+  "selected_variant": "single frozen custom version",
+  "accounts_tested": false,
+  "independent_verification": false,
+  "prereg_commit": "5e066bb56aa587f33c11248eb6bad59e696b1ac4",
+  "script_sha256": "70fb4444cda2acb49d3e7ce886c7fc4c44bd15cbc1317675e40586903e5a797b",
+  "inventory": {
+    "period": "design",
+    "returns_computed": false,
+    "scheduled_sessions": 1259,
+    "normal_sessions": 1249,
+    "eligible": 1238,
+    "path_coverage": 0.9911929543634908,
+    "early_closes_skipped": 10,
+    "unresolved_normal_sessions": 11,
+    "inputs": [
+      {
+        "path": "data/NQ_1min_2018.csv",
+        "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237"
+      },
+      {
+        "path": "data/NQ_1min_2019.csv",
+        "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e"
+      },
+      {
+        "path": "data/NQ_1min_2020.csv",
+        "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4"
+      },
+      {
+        "path": "data/NQ_1min_2021.csv",
+        "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500"
+      },
+      {
+        "path": "data/NQ_1min_2022.csv",
+        "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2"
+      }
+    ],
+    "coverage_sha256": "2434b7e00e29d044882f60ced6dcfadce2f863f0838986ce872a9245213992f4",
+    "sd_assumption_mnq": 100.0,
+    "illustrative_net_daily_mean_for_t2": 5.684204228032045,
+    "power_limit": "Assumed $100 daily SD, one opportunity/day at most; dependence and multiplicity raise hurdle"
+  },
+  "dependencies": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0"
+  },
+  "assumption": "NQ OHLC proxy, $2/point, $1.24 RT fee plus $0.50 per market/stop fill; pre-2019 MNQ synthetic",
+  "stress_assumption": "$2.48 RT fee plus $1 per market/stop fill; unchanged fixed one-trade sizing/state",
+  "breakeven_extra_roundtrip_cost": -2.434264943457191,
+  "next_gate": "STOP; no rescue search or dependent tests"
+}

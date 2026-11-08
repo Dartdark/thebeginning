@@ -92,6 +92,18 @@ This percentage-limit rule is distinct from E06's opposite-five-minute-return po
 this exact offset fails, and its headline is insufficient merit for a new cross-book rescue sweep. No new queue,
 acquisition task, paused-program restart, allocation or live change follows.
 
+**Later explicit user test, 2026-11-08:** [selected-book outcome](results/mae_selected_20261108.md),
+[frozen causal limit runner](../../analysis/codex_mae_selected_20261108.py).
+The user requested a test after the source review. Vault Break, FC2B and S47 were selected before new returns;
+only the fixed 0.25% adverse offset was tried, with one-minute activation, one-tick trade-through, unchanged
+virtual-parent exits and one-MNQ costs ($1.24 RT / one adverse market-stop tick; doubled stress).
+Design 2018-04-02–2022-12-30: FC2B net $11,990.50→$1,358.38 and S47 $14,126.42→$6,228.92, both worse in every
+design year. Their missed BASE trades earned $23,225.62 / $19,883.00, exceeding filled-entry price gains
+$12,476.50 / $11,878.50. VB's incomplete subset improved $1,089.68 but stayed negative, paired t 0.66, with
+106 unknown paths; this is not evidence of a full-VB gain. No profile passed. Nine definitions ran, six nulls
+unused; no controls/2023+/native account stages were earned. Fixed virtual-parent replay is not regenerated
+native brackets, tick/queue parity or measured account protection. No offset/side/window rescue or book change.
+
 ### E06 — Fast-alpha delayed-entry/exit overlay: timing and random-delay controls
 
 Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
@@ -2124,3 +2136,11 @@ Evidence: PDF/table images, formula counterexample, unit illustration and pinned
 outputs differ from paper; no author code or market-path return executed. Source holdings do not establish Apex intraday fit.
 Next only with genuinely new evidence: resolve denominator policy, indicator/position units, exact causal dip/exit/fill clocks
 and code/output versions before any eligible preregistered test. No measured savings, strategy/data-shopping entry or live change.
+
+
+E09/E19/E30 reconstruction follow-up (2026-11-08): user-authorized corrected
+[research components](results/pair7065278_reconstruction_20261108.md) pass28synthetic unit, quote-clock,
+causal-indicator and state-transition assertions. Explicit GBX/GBP replaces the price-level heuristic;
+15:00UTC is a provisional ordinary-session overlap, still requiring authenticated calendars and later fills.
+This is not a complete execution/cash engine, measured saving, profitable strategy or reversal of the source
+rejection. New free history probes hit proxy403. Missing native history/borrow/cash keeps returns blocked.

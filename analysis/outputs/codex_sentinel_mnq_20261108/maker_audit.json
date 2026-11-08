@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "review": "Maker raw-minute implementation/accounting audit, not independent economic verification",
+  "scalar_reconstructed_trades": {
+    "design_trades.csv": 1238,
+    "design_baseline_trades.csv": 1238
+  },
+  "entry_prefix_checks": 1238,
+  "clock_amendment_economic_columns_identical": true,
+  "daily_and_trade_totals_reconcile": true,
+  "native_cost_bridge": true,
+  "no_recent_or_dependent_stages": true,
+  "exit_reasons": {
+    "indicator_next_open": 1188,
+    "stop": 47,
+    "scheduled_flat": 3
+  },
+  "audit_code_sha256": "630e30fe6f912905b35e4e78ac4811f6b9e7e6f666babecb5af3102e15ff66ca",
+  "runner_sha256": "70fb4444cda2acb49d3e7ce886c7fc4c44bd15cbc1317675e40586903e5a797b",
+  "result_sha256": "7dcc1d0fc2e99625b25b4a950e22b0b736199f6d75690245225bf21b19473f3c",
+  "limits": [
+    "Same author/maker; no blind checker",
+    "No native MNQ quotes or broker fills",
+    "Intraminute stop time/order unresolved by OHLC",
+    "No fresh/2023+ return validation earned"
+  ]
+}
