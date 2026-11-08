@@ -1471,6 +1471,21 @@ ladder are specified. New chronological subset results disclose small-row instab
 to the documented12-piece row; the underlying source/marking/margin and historical-selection limits remain.
 Do not request these same implementation/checks again. No new alpha, allocation selection, live or broker change.
 
+### E04/E47 follow-up — Literature Atlas: event paths, reactive fills and attribution
+
+Source: Bandyopadhyay, SSRN7630598 (October18,2026), [focused review](results/literature_atlas_7630598_review.md), reviewed November7,2026.
+- Use: distinguish trade-sign estimates from observed aggressor labels, prediction error from executable net P&L,
+  and realistic-looking synthetic paths from an environment that responds to our orders. Reconcile differences through
+  data, signal, sizing and execution (§12.1–12.3, B6/B12, §18.8).
+- Evidence: title/abstract-based literature synthesis and untested author proposals, not new native fill evidence,
+  measured execution savings or a verified NQ/ES strategy. Aggregate metadata arithmetic does not validate cited studies.
+- Limits/data: event signatures require synchronized order/depth/trade paths; minute summaries cannot recover their
+  ordering or queues. Reactive simulator claims need held-out native evidence. Own-impact relevance must be measured
+  at actual integer size; opportunity/noncompletion costs can exceed a spread saving. Never delay protective exits.
+- Next check: within an already-authorized offline verification, reconcile one complete decision/order/fill lifecycle
+  and its cost ledger. Existing [data requirements D42–D45](DATA_NEEDED.md) apply; no new dataset request or live change.
+- Status: reference only; no return trial, simulator build, monitoring policy, allocation or claim of lower costs.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
