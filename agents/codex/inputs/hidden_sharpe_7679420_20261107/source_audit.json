@@ -1,0 +1,70 @@
+{
+  "status": "PASS",
+  "scope": "Arithmetic/hash/static-source checks only; no theorem, empirical or economic verification",
+  "market_returns_computed": false,
+  "author_package_executed": false,
+  "economic_definitions": 0,
+  "population_algebra_fixture": {
+    "eigenvalues": [
+      0.25,
+      1.0,
+      4.0
+    ],
+    "projected_means": [
+      0.01,
+      0.02,
+      0.03
+    ],
+    "effective_z": 0.5,
+    "oracle_squared_sharpe": 0.001025,
+    "geometric_lower_bound": 0.0009,
+    "infinite_series_100_terms": 0.001025,
+    "gradient_analytic": [
+      0.7500000000000001,
+      2.2499999999999996
+    ],
+    "gradient_finite_difference": [
+      0.7499999999847038,
+      2.250000000008322
+    ]
+  },
+  "source_arithmetic": {
+    "ridge_squared_shortfall_factor": 1.8,
+    "ridge_sharpe_fraction": 0.7453559924999299,
+    "approximate_annualized_ridge_ceilings": {
+      "all_stocks": 5.515634344499482,
+      "ex_micro": 3.7267799624996494
+    }
+  },
+  "static_code_observations": {
+    "whole_dataframe_annualization_methods": [
+      "get_all_lbs",
+      "get_all_ubs"
+    ],
+    "corner_point_equals_lower_bound": true,
+    "empirical_replication": false
+  },
+  "source_discrepancies": {
+    "bond_text": {
+      "equities_point": 7.7,
+      "equities_bonds_point": 8.7,
+      "page": 38
+    },
+    "bond_figure": {
+      "equities_point": 7.46,
+      "equities_bonds_point": 8.23,
+      "equities_ci": [
+        6.28,
+        8.31
+      ],
+      "equities_bonds_ci": [
+        6.9,
+        9.19
+      ],
+      "dates": "January1986\u2013December2025",
+      "page": 39
+    },
+    "reconciled": false
+  },
+  "qualification": "No stock/bond/futures returns were loaded or fitted. Fixture numbers are algebra checks, not strategy performance."
+}
