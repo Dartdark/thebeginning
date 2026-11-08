@@ -49,7 +49,8 @@ def boundary(g, kind):
 
 
 def run(g, version="v8", atr_kind=None, vwap_exit=None, time_exit=None, holidays=None, mult=0.30, tp=40.0, sl=75.0,
-        first=1000, flat=1430, max_tr=3, years=(2018, 2026)):
+        first=1000, flat=1430, max_tr=3, years=(2018, 2026), use_vwap=True):
+    # use_vwap (2026-11-08, ingredient_ablation2.py): False drops the close > VWAP entry condition; default = as before
     v8 = version == "v8"
     atr_kind = atr_kind or ("range" if v8 else "tr")
     vwap_exit = (7 if v8 else 0) if vwap_exit is None else vwap_exit
@@ -95,7 +96,7 @@ def run(g, version="v8", atr_kind=None, vwap_exit=None, time_exit=None, holidays
                 tpv += (h[i] + l[i] + c[i]) / 3 * v[i]; vol += v[i]
             vw = tpv / vol if vol > 0 else c[i]
             below = below + 1 if c[i] < vw else 0
-            if pos is None and not pend and c[i] > noise and c[i] > vw and first <= t < last_e and ntr < max_tr:
+            if pos is None and not pend and c[i] > noise and (not use_vwap or c[i] > vw) and first <= t < last_e and ntr < max_tr:
                 pend = True; ntr += 1
             if pos is not None:
                 if vwap_exit and below >= vwap_exit: xpend = "vwap"
