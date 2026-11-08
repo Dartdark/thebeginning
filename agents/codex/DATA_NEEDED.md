@@ -286,3 +286,26 @@ quarterly coverage. No paid Datastream/GFD access or US-only proxy rescue. Next 
 one country/formation and native release/label/currency cashflow, then full coverage/power and committed
 return protocol. Source Table8 drawdown/composite qualifications remain unresolved. [Review](results/buffett_international_4071039_review.md),
 [evidence](evidence/buffett_international_4071039.md). No independent return trial or allocation.
+
+
+## TQQQ/LQQ3 reproduction inputs — SSRN7065278 (2026-11-08)
+
+**Implementation admission FAILED; conditional audit inputs only, not a promoted strategy or data rescue.**
+The specific convergence hypothesis is unverified; its headline profits failed source mechanics admission.
+[Review](results/pair7065278_20261108.md), [frozen audit](plans/pair7065278_audit_20261108.md).
+
+Acquired free: full uploaded paper; pinned author code/notebook/license and workbook with 405 derived dated
+rows, 2024-04-11–2026-03-20. These lack independent raw LQQ3 and GBPUSD observations. Original hourly
+`tqqq.us.hourly.txt`, `lqq3.uk.hourly.txt`, `gbpusd.hourly.txt` are explicitly excluded from the author repository.
+A bounded Stooq historical-download check returned browser verification; no bypass or purchase.
+
+A future reconstruction needs original DATE/TIME/OPEN records with vendor timezone/bar-label metadata,
+GBp/GBP units and split/corporate-action adjustments, venue calendars/early closes, contemporaneous paired
+bid/ask and FX observations with availability/fill timestamps, borrow availability/fees, financing, native share
+quantities, collateral and cash. Existing derived workbook values do not establish these. A new design would
+also need eligible 2018–22 coverage plus the frozen warm-up; the source's later sample cannot supply that gate.
+
+On genuinely new matching inputs, reconcile one native paired formation/fill/cash ledger before proposing
+a corrected economic protocol. Do not repeatedly crawl, substitute asynchronous daily proxies, optimize a
+repair after seeing source results or revive this failed implementation merely because data arrives. Free
+sources only; no account creation, vendor contact, paid access, plan/live change or user-action request.

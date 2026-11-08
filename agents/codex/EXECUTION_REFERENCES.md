@@ -2030,3 +2030,22 @@ preliminary draft, retained November 7, 2026; NYSE/Nasdaq stock switches 2009–
   classified venue, future midpoint coverage, native fees and missed-fill opportunity cost. Off-exchange is not
   automatically a specifically identified dark pool. No original TAQ replication, trading signal, measured saving,
   TODO strategy/data-shopping entry, order-routing installation, portfolio change or external message.
+
+
+### E09/E19/E30 follow-up — Cross-venue leveraged products need native units and clocks
+
+SSRN7065278, reviewed 2026-11-08: [source review and registered audit](results/pair7065278_20261108.md).
+The literal author parser converts declared same-unit GBX prices 499/501 into 49900/501. This is a synthetic
+counterexample, not measured historical inflation: fix units from source metadata and corporate-action records,
+never from a price threshold. Even granting its UTC claim, 16:00 UTC is 17:00 London in summer, outside ordinary
+continuous trading, and not a constant 11:00 New York. A date join and lagged position do not certify
+simultaneous executable quotes or later fills. TQQQ and LQQ3 are different issuer/products, not fungible listings.
+
+The paper's multiplicative cost equation reduces losing-trade losses; the actual code/workbook instead
+subtracts costs. Preserve that distinction. Its alpha spreadsheet references the wrong sheet/cells. Define
+NAV, gross exposure, collateral, borrow, FX and native leg costs before interpreting a pair-return difference.
+Fifteen engineering assertions across nine groups reproduced the registered findings; source admission failed.
+No historical return series, execution savings, portfolio result or live recommendation was established.
+Smallest next check only with new matching evidence: one native two-leg timestamp/unit/quantity/cash ledger,
+then a separate corrected protocol. The same accounting lessons apply broadly; its equity/ETP holds are not
+evidence for our Apex futures plans. No live/VPS/broker change.
