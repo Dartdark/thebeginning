@@ -1,0 +1,35 @@
+[provenance] code 207f59a7 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Three tests on Codex's 2026-11-08 data (user 2026-11-08: 'do it'). PRE-REGISTERED (header committed before the first run).
+
+T1 LETF-flow fade on CL / GC (frozen rule):
+   CL: UCO median assets $bn by year {2018: np.float64(0.41), 2019: np.float64(0.37), 2020: np.float64(1.02), 2021: np.float64(1.14), 2022: np.float64(0.99), 2023: np.float64(0.7), 2024: np.float64(0.58), 2025: np.float64(0.39), 2026: np.float64(0.42)}
+   CL fade                                    n   512 $   -5 t -0.21 PF 0.97 total $   -2k maxDD $10.3k | 2018-22 $   8 (t  0.3) 2023+ $ -24 (t -0.7) | worst $-1,993
+   CL follow                                  n   512 $  -39 t -2.05 PF 0.77 total $  -20k maxDD $25.1k | 2018-22 $ -45 (t -1.9) 2023+ $ -30 (t -1.0) | worst $-1,713
+      by year $: {2018: 663, 2019: -2126, 2020: 3837, 2021: -2396, 2022: 2457, 2023: 2814, 2024: -1312, 2025: -624, 2026: -5659}
+   random side $-21, 95th $10; real $-5; p 0.190
+   GC: UGL median assets $bn by year {2018: np.float64(0.08), 2019: np.float64(0.09), 2020: np.float64(0.18), 2021: np.float64(0.23), 2022: np.float64(0.22), 2023: np.float64(0.18), 2024: np.float64(0.25), 2025: np.float64(0.52), 2026: np.float64(0.88)}
+   GC fade                                    n   357 $  -13 t -0.44 PF 0.92 total $   -5k maxDD $15.7k | 2018-22 $ -46 (t -2.2) 2023+ $  15 (t  0.3) | worst $-3,746
+   GC follow                                  n   357 $  -50 t -1.83 PF 0.72 total $  -18k maxDD $21.0k | 2018-22 $  -2 (t -0.1) 2023+ $ -90 (t -1.9) | worst $-3,746
+      by year $: {2018: -1613, 2019: -1165, 2020: -386, 2021: -2451, 2022: -1860, 2023: -1280, 2024: 694, 2025: -883, 2026: 4348}
+   random side $-30, 95th $11; real $-13; p 0.250
+
+T2 VIX9D / VIX inversion filter on the 150K plan:
+   inverted days (2018+): 24% of trading days
+   plan (fixed-size pieces) $ a day on inverted days: $94 (n 547, t 4.32; worst $-1,416)
+   plan (fixed-size pieces) $ a day on normal days: $80 (n 1733, t 7.07; worst $-2,007)
+
+   150K evaluation (set + Twin 2 MNQ) alone: pass 38.3% (starts to 2026-09-01)
+   A skip on inverted days            pass 34.0% (-4.3%; band -8.1% / -0.3%)
+
+   150K evaluation (set + Twin 2 MNQ) alone: pass 38.3% (starts to 2026-09-01)
+   B half on inverted days            pass 37.5% (-0.8%; band -2.9% / +1.2%)
+
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,031 blown  2.2% all 6 97.2% diff $   +0 beats 50.0%
+      A skip on inverted days            2y $ 19,223 blown  2.2% all 6 87.2% diff $ -808 beats 44.9%
+      B half on inverted days            2y $ 20,099 blown  1.3% all 6 96.3% diff $  +68 beats 49.8%
+
+T3 Treasury buyback days on ZN:
+   qualifying operations 48 on 48 days (2024-06-20 -> 2026-11-04); buckets {'10Y to 20Y': 29, '5Y to 7Y': 10, '7Y to 10Y': 9}
+   A 10:01 -> 13:00: n 46 $23 t 0.91 | other days $-40 | random days 95th $-6; p 0.000
+   B 12:31 -> 13:00: n 46 $-31 t -4.11 | other days $-36 | random days 95th $-24; p 0.266
