@@ -1,0 +1,169 @@
+{ NQ Expiration Open Short - MultiCharts PowerLanguage signal (funded strategy)
+
+  On the monthly options expiration day (the third Friday; the Thursday before
+  it when the stock market is closed that Friday), sell short at the 8:30 CT
+  open and buy back at the close of the 10:00 CT bar.
+
+  Why: monthly S&P 500 and Nasdaq-100 index options are AM-settled on that
+  Friday's opening prices. Dealer hedges tied to the expiring options come off
+  at the open, and from 2018 to 2026 NQ fell in the first 90 minutes of those
+  mornings far more often than on other Fridays.
+
+  Python test (analysis/calendar_flows.py, 1-minute NQ, 2018-2026, per NQ after
+  $7.25 costs and 1 tick of slippage per fill): 105 trades, 59% winners,
+  average $474, profit factor 1.93, 8 of 9 years positive (2019 -$14);
+  2023-2026 average $691. Placebo (shorting other Fridays) loses. In the
+  funded simulator, adding it at RiskPerTrade 500 to the benchmark plan
+  (Vault Break 3, Overnight Bias $300, Overnight Drift $500) raises expected
+  payouts within 1 year from $5,387 to $6,516 and lowers blown accounts from
+  48% to 41%. Correlation with the other strategies is about 0. Only about
+  12 trades a year, so the evidence is thinner than for Vault Break or
+  Overnight Bias (t = 2.6). Confirm with a MultiCharts backtest.
+
+  Apply to a 5-minute NQ / MNQ chart, Exchange time zone (Central), CME
+  24-hour session (for the ATR), Bar Magnifier on at 1 minute. Load at least
+  25 trading days before the backtest start.
+
+  SIZE: stop = StopAtrPct x 15-day ATR (calendar weekdays, as in Overnight
+  Bias). RiskPerTrade > 0 sizes the trade so a stop-out loses at most that:
+  contracts = Floor(RiskPerTrade / (stop points x point value)); skipped if
+  0. Funded plan: RiskPerTrade 500 on MNQ. Backtest on NQ: RiskPerTrade 0,
+  NumContracts 1.
+
+  HOLIDAYS: when the stock market is closed on the third Friday, options
+  expire on the Thursday. Known cases are listed below (Good Friday 2019,
+  2022, 2025; Juneteenth 2026). Add future ones to ClosedFriday1..6 when the
+  exchange calendar is published (MultiCharts dates are 1YYMMDD, e.g.
+  1260619 = 2026-06-19). }
+// kill-switch file check through Windows (2026-11-01: EL Collections is not installed on the VPS; this line compiled there)
+DefineDLLFunc: "kernel32.dll", int, "GetFileAttributesA", lpstr;
+DefineDLLFunc: "kernel32.dll", int, "GetLastError";   { kill-switch tri-state (Codex REVIEW_kill_reply_20261102) }
+
+
+Inputs:
+	EntryBarTime(830),      { the bar closing at 8:30 -> short at the next bar's open }
+	ExitTime(1000),
+	AtrDays(15),
+	StopAtrPct(0.30),
+	RiskPerTrade(0),        { $ lost at the stop; 0 = trade NumContracts }
+	NumContracts(1),
+	ClosedFriday1(1190419),
+	ClosedFriday2(1220415),
+	ClosedFriday3(1250418),
+	ClosedFriday4(1260619),
+	ClosedFriday5(0),
+	ClosedFriday6(0),
+	HeartbeatTag("")       { live guard: the chart's logger tag, e.g. VB-2 / ONB150; empty = no heartbeat };
+Variables: KillOn(false), NoEntry(false), KillAttr(-1), KillErr(0), HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Expiration_Open_Short 2026-11-05");   { code version (live guard 2026-10-30): bump the date on every change }
+
+Variables:
+	DayHi(0), DayLo(0), DayClose(0), PrevDayClose(0),
+	TR(0), TrCount(0), TrIdx(0), TrSum(0), Ti(0), ATRv(0),
+	StopPts(0), Qty(0), Dom(0), Dow(0), NextDay(0), IsThirdFri(false), IsClosedFri(false),
+	IsExpiration(false), TradedToday(false), DayStartTrades(0);
+
+Arrays:
+	TrHist[100](0);
+
+{ ---------- Daily ATR (weekdays, calendar dates), as in Overnight Bias ---------- }
+if Date <> Date[1] then begin
+	if DayClose > 0 then begin
+		if DayOfWeek(Date[1]) >= 1 and DayOfWeek(Date[1]) <= 5 then begin
+			if PrevDayClose > 0 then
+				TR = MaxList(DayHi, PrevDayClose) - MinList(DayLo, PrevDayClose)
+			else
+				TR = DayHi - DayLo;
+			TrHist[TrIdx] = TR;
+			TrIdx = Mod(TrIdx + 1, AtrDays);
+			if TrCount < AtrDays then TrCount = TrCount + 1;
+		end;
+		PrevDayClose = DayClose;
+	end;
+	DayHi = High;
+	DayLo = Low;
+	DayStartTrades = TotalTrades;
+end
+else begin
+	DayHi = MaxList(DayHi, High);
+	DayLo = MinList(DayLo, Low);
+end;
+DayClose = Close;
+
+ATRv = 0;
+if TrCount >= AtrDays then begin
+	TrSum = 0;
+	for Ti = 0 to AtrDays - 1 begin
+		TrSum = TrSum + TrHist[Ti];
+	end;
+	ATRv = TrSum / AtrDays;
+end;
+
+{ ---------- Expiration day ---------- }
+Dom = DayOfMonth(Date);
+Dow = DayOfWeek(Date);
+IsThirdFri = Dow = 5 and Dom >= 15 and Dom <= 21;
+IsClosedFri = Date = ClosedFriday1 or Date = ClosedFriday2 or Date = ClosedFriday3
+	or Date = ClosedFriday4 or Date = ClosedFriday5 or Date = ClosedFriday6;
+{ the Thursday before a closed third Friday (tomorrow's date, same month) }
+NextDay = Date + 1;
+IsExpiration = (IsThirdFri and IsClosedFri = false)
+	or (Dow = 4 and (NextDay = ClosedFriday1 or NextDay = ClosedFriday2 or NextDay = ClosedFriday3
+		or NextDay = ClosedFriday4 or NextDay = ClosedFriday5 or NextDay = ClosedFriday6));
+
+{ ---------- Kill switch (2026-11-01, live/vps/KILL_SWITCH.md) ----------
+  While C:\TradingLogs\KILL exists (made by live/vps/kill.ps1 or by the relay's remote KILL): no new entries, and an open
+  position exits at market on the next bar. Real time only, so backtests are unchanged. Reads the flag with Windows' GetFileAttributesA (-1 = no file). }
+KillOn = false;
+KillAttr = -1;
+KillErr = 0;
+if GetAppInfo(aiRealTimeCalc) = 1 then begin
+	KillAttr = GetFileAttributesA("C:\TradingLogs\KILL");
+	if KillAttr <> -1 then KillOn = true else KillErr = GetLastError;   { read right after the call: 2/3 = not found }
+end;
+{ read check (Codex follow-up 2026-11-02 #3): -1 on the KILL file means "no file" only if the folder itself is readable.
+  Folder unreadable = state UNKNOWN: no new entries (open positions keep their normal exits; only a real KILL forces exits). }
+NoEntry = KillOn;
+if GetAppInfo(aiRealTimeCalc) = 1 and GetFileAttributesA("C:\TradingLogs") = -1 then NoEntry = true;
+{ tri-state (2026-11-05): -1 with any error other than 2 (file not found) / 3 (path not found) = state UNKNOWN -> no new entries }
+if GetAppInfo(aiRealTimeCalc) = 1 and KillAttr = -1 and KillErr <> 2 and KillErr <> 3 then NoEntry = true;
+
+{ ---------- Entry: short at the 8:30 open ---------- }
+TradedToday = MarketPosition <> 0 or TotalTrades > DayStartTrades;
+if IsExpiration and Time = EntryBarTime and MarketPosition = 0 and TradedToday = false
+	and ATRv > 0 then begin
+	StopPts = StopAtrPct * ATRv;
+	Qty = NumContracts;
+	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
+	if Qty >= 1 and NoEntry = false then
+		SellShort ("Exp Open S") Qty contracts next bar at market;
+end;
+
+{ ---------- Exits ---------- }
+SetStopContract;
+if StopPts > 0 then SetStopLoss(StopPts * BigPointValue);
+{ live guard (2026-10-16): Rithmic rejects a protective buy stop that is already below the market ("Invalid StopMarket
+  order parameters"), which left the 10/16 short without its stop. If the short is still open at the close of a bar that
+  traded at or through the stop level (2026-10-17: High, was Close), cover at market on the next bar. }
+if MarketPosition < 0 and StopPts > 0 and High >= EntryPrice + StopPts then
+	BuyToCover ("Exp Open SG") next bar at market;
+
+if MarketPosition < 0 and Time >= ExitTime then
+	BuyToCover ("Exp Open SX") this bar on close;
+
+{ kill switch: flatten while C:\TradingLogs\KILL exists (see the Kill switch block above) }
+if KillOn and MarketPosition > 0 then Sell ("KILL LX") next bar at market;
+if KillOn and MarketPosition < 0 then BuyToCover ("KILL SX") next bar at market;
+
+// ---------- strategy heartbeat (2026-10-29; live guard, LIVE_GUARD_PLAN.md) ----------
+// Writes a SIG row to the trade log every bar in real time, only while THIS strategy is compiled and running. If the
+// code fails to compile or the signal is removed, the heartbeat stops and the 08:21 pre-market check / watchdog alert.
+// Log only: no orders. Set HeartbeatTag to the chart's logger tag (VB-2, ONB150, ...); empty = off.
+if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then begin
+	HB_Key = CurrentDate * 10000 + CurrentTime;
+	if HB_Key <> HB_Last then begin
+		HB_Day = NumToStr(CurrentDate + 19000000, 0);
+		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
+			+ NumToStr(MarketPosition * CurrentContracts, 0) + ",,,,,,,," + HB_Day + "," + NumToStr(CurrentTime, 0) + NewLine);
+		HB_Last = HB_Key;
+	end;
+end;
