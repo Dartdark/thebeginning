@@ -2264,3 +2264,13 @@ unverified. Calendarroll quarantine avoids knownwindowspans but does not authent
 RTHdailyDD is not full overnightadversepath risk. A pre-return missing08:01bar check led to a committed
 first-observed-bar delay amendment; do not invent prices during missing/halted intervals. No2023+NQreturn
 test, portfolio stage or live change followed failure. This outcome is not evidence of execution savings.
+
+
+E09 cross-instrument path follow-up (2026-11-08):
+[Claude ingredient/ES review](results/claude_ingredients_review_20261108.md) confirmed literal inheritedNQ
+$20/point in a pathhelper called withES$50/point trades. A synthetic ESentry100,exit110,net470,low99
+produces+$250adversemarkinstead of−$80while terminalnetstillmatches. Realizedcashreconciliation alone
+cannot certify intratrade pathunits. Parameterize nativepointvalue and verify adverse/realized marks before
+accountsimulations. Also confirmed the purported stop-onlyablation changes a coupled target; holdother
+exitsettings fixed or label the jointintervention. Sourcecode/static/synthetic evidence only, no new market
+returns, observed execution savings or plan/live changes. Proposed fixes remain for review.
