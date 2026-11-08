@@ -2100,3 +2100,16 @@ Evidence: PDF/table images, formula counterexample, unit illustration and pinned
 outputs differ from paper; no author code or market-path return executed. Source holdings do not establish Apex intraday fit.
 Next only with genuinely new evidence: resolve denominator policy, indicator/position units, exact causal dip/exit/fill clocks
 and code/output versions before any eligible preregistered test. No measured savings, strategy/data-shopping entry or live change.
+
+### E09/E11/E12 follow-up — Donchian Pine activation, protection and risk sizing
+
+Source: Poluri February2026, [SSRN6272239 review](results/donchian_btc_6272239_review.md),
+[evidence](evidence/donchian_btc_6272239.md); MIT Pine pinned b58e642e97bd06bcce804d0ee0e2b513b517a78a.
+Check native trailing units/offset, fill/recalculation settings and first protective-order activation; ATR stop distance
+alone is not risk sizing. Compare current-ATR stops with frozen/ratcheted risk before porting. Never silently repair code
+and call its returns replication. Figure is weekly despite daily methods; profit$41,023.96 is not ending equity on$10,000.
+Source31 trades/PF7.076/90.32% wins also shows51.65% drawdown, not account survival or verified savings.
+Evidence: source screenshot, pinned static code, official Pine-v5 documentation and synthetic stop arithmetic only;
+12 checks pass, zero market-return trials, no Pine runtime verification. BTC venue, tester overrides, sizing and trade ledger
+remain unresolved. Next only with new exact settings/code/trades: reconcile one entry/protective-exit lifecycle before an
+eligible preregistered return study. No new alpha/data-shopping queue, port, allocation, paid collection or live action.
