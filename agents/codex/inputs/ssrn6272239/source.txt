@@ -1,0 +1,293 @@
+Evaluating the Performance of a Donchian Channel Breakout Strategy with
+
+                              ATR-Based Risk Management
+
+
+
+Nitish Poluri
+
+Independent Researcher
+
+United States
+
+February 2026
+
+
+
+                                          ABSTRACT:
+
+
+
+This study examines the performance of the Donchian Channel breakout strategy enhanced with
+
+ the ATR-based volatility regime filter and ATR based risk management. Using BTC (Bitcoin)
+
+daily data, the strategy enters long and short positions on range breakouts while restricting high
+
+   volatility trades. Backtesting results indicate that the strategy significantly outperformed a
+
+  passive based approach over the tested period, however these results were very specific and
+
+     narrow and were highly sensitive to transactional costs, parameter settings, and market
+
+conditions. The findings highlight the importance of volatility filtering and risk controls in trendy
+
+                               systems that follow crypto markets.
+                                                                                         Poluri 2
+
+
+                                      INTRODUCTION:
+
+       Trend-following strategies have long been studied in financial markets, particularly
+
+commodities and futures trading. Richard Donchian’s breakout methodology remains one of the
+
+most popular and widely referenced systematic approaches.
+
+
+Cryptocurrency markets provide a unique testing environment due to:
+
+
+   -   High Volatility
+
+   -   Strong directional regimes
+
+   -   24/7 trading unlike stocks
+
+
+This study investigates whether a Donchian Channel Breakout strategy, combined with volatility
+
+filtering and ATR-based position risk management, can produce superior risk-adjusted returns
+
+compared to passive holding in Bitcoin markets.
+
+
+
+
+                                         METHODS:
+
+2.1 Donchian Channel Construction
+
+The Donchian Channel is defined as:
+
+   •   Upper Band = Highest high over last N bars
+
+   •   Lower Band = Lowest low over last N bars
+
+Breakout conditions:
+
+   •   Enter Long when price closes above Upper [1]
+
+   •   Enter Short when price closes below Lower [1]
+                                                                                      Poluri 3
+
+
+Where Upper [1] and Lower [1] represent the prior period channel values to prevent look-ahead
+
+bias.
+
+Baseline parameter:
+
+    •    Donchian Length (dcLen) = 55
+
+2.2 EMA Trend Filter (Optional)
+
+To reduce counter-trend trades:
+
+    •    Long positions only if price > EMA(emaLen)
+
+    •    Short positions only if price < EMA(emaLen)
+
+Parameter:
+
+    •    EMA Length = 200
+
+This filter attempts to align breakout signals with broader trend direction.
+
+2.3 Volatility Regime Filter
+
+To avoid low-volatility whipsaw environments, trades are only allowed when:
+
+ATR ≥ atrMult × SMA(ATR, atrBaseLen)
+
+Where:
+
+    •    ATR Length = 14
+
+    •    atrBaseLen = 50
+
+    •    atrMult = 1.0
+
+This restricts trading to higher-than-average volatility periods.
+
+2.4 Risk Management
+
+Risk is controlled using ATR-based stops.
+
+Stop Loss:
+
+Stop Distance = riskATR × ATR
+                                                                                          Poluri 4
+
+
+Parameter:
+
+   •   riskATR = 2.0
+
+Optional trailing stop:
+
+Trail Distance = trailATR × ATR
+
+   •   trailATR = 2.5
+
+This creates dynamic risk scaling based on volatility.
+
+
+
+                                        LIMITATIONS:
+
+This study has several limitations:
+
+   •   Slippage not fully modeled
+
+   •   Fee assumption may be unrealistically low for many exchanges
+
+   •   Single asset focus (BTC)
+
+   •   No walk-forward testing
+
+   •   Single time window, which can’t be replicated for all the other cryptocurrencies
+
+Furthermore, crypto markets exhibit regime shifts that may reduce future effectiveness. With the
+
+recent tank in BTC prices and ETH, volatility uncertainty has only increased, thereby making
+
+this model further unstable.
+                                                       Poluri 5
+
+
+                                             DATA:
+
+Asset:
+
+Bitcoin (BTCUSD)
+
+Timeframe:
+
+Daily (1D)
+
+Backtest Environment:
+
+TradingView Strategy Tester (Pine Script v5)
+
+Assumptions:
+
+   •     Commission: 0.02% (optimistic)
+
+   •     Initial Capital: $10,000.00
+
+   •     Slippage: Not fully modeled
+
+   •     Order execution: Market orders at bar close
+
+The following metrics were evaluated:
+
+   •     Total Return
+
+   •     CAGR
+
+   •     Maximum Drawdown
+
+   •     Sharpe Ratio
+
+   •     Win Rate
+
+   •     Profit Factor
+
+   •     Risk-Reward Ratio
+
+   •     Trade Count
+
+Benchmark comparison:
+
+   •     Buy-and-Hold BTC over same period
+                                                                                            Poluri 6
+
+
+Observed in one tested window:
+
+   •   ~410% total return
+
+   •   Lower relative drawdown vs buy-and-hold
+
+   •   Higher trade-based volatility
+
+
+
+
+                                           RESULTS:
+
+
+
+
+We can see in this picture, using TradingView and it’s pine script feature to write the code, the
+
+simulation ran using a initial capital of $10,000.00, the strategy grew the account to slightly
+
+above $41,000, producing a total return of roughly 410%. Across 31 trades, 28 trades were
+
+successful, yielding a win rate of approximately 90.32%. The profit factor was about 7.076,
+
+meaning that the total gains were more than 7 times larger than the total losses, which suggests
+
+that the strategy was not only accurate in this time frame but also effective at winning trades.
+                                                                                            Poluri 7
+
+
+While this data is promising, refer to limitations to understand the extent of this strategy and
+
+what it can achieve. These results show us that rule-based systems can profit from price trends
+
+while using risk controls that are volatility adjusted. The strong performance during trending
+
+periods reinforces the idea that crypto markets often move in extended directional waves, which
+
+illustrate the inapplicable strategy on a universal level. The findings suggest that combining
+
+Donchian breakouts with ATR-based filtering and risk management can produce substantial
+
+long-term gains, but success depends heavily on market structure, volatility conditions, and
+
+execution.
+
+
+                                         CONCLUSION:
+
+        The Donchian Channel breakout strategy, when combined with volatility regime filtering
+
+and ATR-based dynamic risk management, demonstrated strong performance in trending
+
+cryptocurrency markets. However, results were highly regime-dependent and sensitive to
+
+transaction costs and parameter choices. While the system appears robust in trending
+
+environments, its effectiveness declines when no active trends are present. These findings
+
+reinforce the importance of volatility filtering and adaptive risk controls in systematic trading
+
+strategies.
+
+                                        WORKS CITED:
+
+“BTC Daily Chart.” TradingView, TradingView, 2025. Digital.
+
+        https://www.tradingview.com/chart/AvBpfa5K/?symbol=BITSTAMP%3ABTCUSD.
+
+        Accessed 16 Jan 2026.
+
+“Donchian Breakout + ATR Risk (Robust Trend) – TradingView Pine v5”, JustACoder279,
+
+        GitHub. 2026. Digital. https://github.com/JustACoder279/Donchian-Breakout-ATR-
+
+        Risk-TradingView?tab=readme-ov-file. Accessed 19 Jan 2026.
+

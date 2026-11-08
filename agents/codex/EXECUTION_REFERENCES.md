@@ -151,6 +151,15 @@ Keep the original search history and amended source clocks; no waiting-window re
 
 ### E09 — Native micro costs, turnover and roll reconciliation
 
+- [US100 Donchian source audit, SSRN6722841](results/ssrn6722841_review_20261108.md), 2026-11-08:
+  author code uses closed-bar signals, once-per-new-bar trailing management and a broker-dependent
+  fixed-reference-risk minimum-lot eligibility filter. Preserve these clocks/eligibility in a port;
+  its default session filter is off and no mandatory daily flatten is implemented. Author closed-trade
+  Monte Carlo is not marked-equity or intraday trailing-floor validation. Static public-source findings
+  only; no compilation, native futures replay, measured savings or independent profitability result.
+  Exact uploaded/public PDF equality remains unverified due to unavailable execution workspace.
+
+
 - [Bitcoin inverse-futures allocation](results/bitcoin_inverse_3441913_review.md), Deng et al., SSRN3441913,
   uploaded2019-08-23 version: a $K inverse contract earns `K*(1/Fentry−1/Fexit)` BTC when long; USD P&L needs
   an explicit spot conversion/collateral ledger. Inverse is settlement convention, not short direction. Both
@@ -1737,6 +1746,23 @@ Source: Malan, *One Ticker Deep*, SSRN7073258, July2026 draft.
   labeled exclusion/reselection and matched cash/universe/risk benchmarks. No new test, winner-based filter,
   acquisition, monitoring process, guaranteed hedge or allocation follows from this source review.
 
+### E04 follow-up — Crossover metrics, day win rates and cash attribution (2026-11-08)
+
+Source: Arnold, SSRN6684499, April27,2026 capstone study.
+[Review](results/crossover_6684499_review_20261108.md),
+[source/arithmetic receipt](../../analysis/outputs/codex_crossover_6684499/source_audit.json).
+- Evidence: primary text/tables and visual Table3 check, no empirical replication. Author50/200 stock portfolio
+  annualized return12.04% versus17.27%, Sharpe0.779 versus0.849, drawdown−25.79% versus−35.23%. Negative
+  daily benchmark-difference t−2.169 is not a risk-adjusted-alpha or Sharpe-difference test.
+- Units: `(1 + mean daily return)^252 − 1` is not path CAGR; the printed Sharpe daily/annual conventions need
+  code reconciliation. The52.10% win rate is positive days, not winning trades. Cash return and actual timing
+  need matching; lower drawdown alone does not identify diversification or superior payout/account outcomes.
+- Limits: same five-stock basket in both benchmarks; crossover exposure, warm-up and weight maintenance can
+  differ. Constant20% return slots require a reconciled rebalance/cost ledger, beyond charging10bp only on
+  crossover changes. No original code/input histories or native fill evidence supplied; no savings verified.
+- Use only when a separate comparison is justified: freeze metric definitions, cash/benchmark dates and clocks,
+  then reconcile trade-to-portfolio returns. No new data acquisition, MA/ML/regime search, filter or allocation.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
@@ -2153,6 +2179,19 @@ outputs differ from paper; no author code or market-path return executed. Source
 Next only with genuinely new evidence: resolve denominator policy, indicator/position units, exact causal dip/exit/fill clocks
 and code/output versions before any eligible preregistered test. No measured savings, strategy/data-shopping entry or live change.
 
+### E09/E11/E12 follow-up — Donchian Pine activation, protection and risk sizing
+
+Source: Poluri February2026, [SSRN6272239 review](results/donchian_btc_6272239_review.md),
+[evidence](evidence/donchian_btc_6272239.md); MIT Pine pinned b58e642e97bd06bcce804d0ee0e2b513b517a78a.
+Check native trailing units/offset, fill/recalculation settings and first protective-order activation; ATR stop distance
+alone is not risk sizing. Compare current-ATR stops with frozen/ratcheted risk before porting. Never silently repair code
+and call its returns replication. Figure is weekly despite daily methods; profit$41,023.96 is not ending equity on$10,000.
+Source31 trades/PF7.076/90.32% wins also shows51.65% drawdown, not account survival or verified savings.
+Evidence: source screenshot, pinned static code, official Pine-v5 documentation and synthetic stop arithmetic only;
+12 checks pass, zero market-return trials, no Pine runtime verification. BTC venue, tester overrides, sizing and trade ledger
+remain unresolved. Next only with new exact settings/code/trades: reconcile one entry/protective-exit lifecycle before an
+eligible preregistered return study. No new alpha/data-shopping queue, port, allocation, paid collection or live action.
+
 
 E09/E19/E30 reconstruction follow-up (2026-11-08): user-authorized corrected
 [research components](results/pair7065278_reconstruction_20261108.md) pass28synthetic unit, quote-clock,
@@ -2160,3 +2199,23 @@ causal-indicator and state-transition assertions. Explicit GBX/GBP replaces the 
 15:00UTC is a provisional ordinary-session overlap, still requiring authenticated calendars and later fills.
 This is not a complete execution/cash engine, measured saving, profitable strategy or reversal of the source
 rejection. New free history probes hit proxy403. Missing native history/borrow/cash keeps returns blocked.
+
+
+### E09/E19 follow-up — Weekly close exits, equity reconstruction and low-beta claims
+
+[SSRN5630830 source/audit](results/weekly_nq_5630830_20261108.md), retained2026-11-08. Screenshot
+shows a5%loss exit checked **after candle closes**, not an intrabar price-loss ceiling. Invented entry100,
+low90,close96 loses10%intraweek without triggering the5%close condition. Native contract multiplier and
+capital basis matter: price percentages are not account percentages. Weekly holds are not Apex intraday fit.
+
+Source says its weekly returns were reconstructed from trade logs/rescaled to platform total, while retaining
+a separately reported platform drawdown. Equal terminal values do not establish equal drawdowns or margin
+paths. Need actual per-period marked positions/cash/costs, not assumed interpolation; the source does not
+provide its reconstruction algorithm. Lowbeta0.1coexists with reported correlation~0.7; scale/exposure cannot
+be presented as uncorrelated alpha. Final full-span CAGR/alpha arithmetic is consistent, though the earlier
+five-year-alpha input explanation is not. Keep source versions and horizons distinct.
+
+Evidence: full PDF/page18image,6registered arithmetic/synthetic-risk groups and10assertions. No native
+strategy replication, measured execution saving, hedge benefit, portfolio test or live change. Missing custom
+indicator formulas and fill/roll/capital clocks stop dependent returns. Next only with genuinely new matching
+evidence: one source indicator/entry/exit and native mark-to-market cash reconciliation before any strategy trial.
