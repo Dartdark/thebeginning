@@ -1,0 +1,623 @@
+Machine Learning versus Econometric Forecasting in the Forex Market:
+Evidence from EUR/USD, GBP/USD, and USD/CAD
+Shadia Saeed Alqahtani
+King Abdulaziz University, Jeddah, Saudi Arabia
+ai.forex2030@gmail.com
+Declaration of Competing Interest: The author declares no known competing financial interests or personal
+relationships that could have appeared to influence the work reported in this paper.
+Disclosure of AI-Assisted Tools: During the preparation of this work, the author used AI-based tools to assist with
+reference verification, statistical description, and language editing. The author reviewed and edited all content as
+needed and takes full responsibility for the content of this publication.
+
+Highlights
+    ●    Random Forest and GBM cut forex forecasting error by up to 30% versus ARIMA.
+    ●    AI's forecasting edge narrows sharply during Brexit-style political shocks.
+    ●    Three-pair panel design shows AI's forecasting gains are regime-dependent.
+    ●    Technical indicators are near-collinear with price, limiting unique signal.
+    ●    Results support conditional AI oversight, calibrated to performance stability.
+
+Graphical Abstract
+
+
+
+
+Data Availability Statement
+
+The data that support the findings of this study are publicly available from Yahoo Finance and Investing.com. The
+datasets comprise daily exchange rate data for EUR/USD, GBP/USD, and USD/CAD covering the period 2010–2021.
+
+Abstract
+
+This study compares the performance of machine learning models and traditional econometric models in forecasting
+exchange rates. Using daily data from 2010 to 2021, two machine learning models — Random Forest (RF) and
+Gradient Boosting Machine (GBM) — are benchmarked against an Autoregressive Integrated Moving Average
+(ARIMA) model across three currency pairs: EUR/USD, GBP/USD, and USD/CAD. Price-based indicators, including
+moving averages, the Relative Strength Index (RSI), and Moving Average Convergence Divergence (MACD), form
+the feature set. Model performance is evaluated using Root Mean Square Error, Mean Absolute Error, Mean Squared
+Error, classification accuracy, cross-validation, panel diagnostics, and significance testing. The machine learning
+models reduce forecasting error by up to 30% and improve portfolio-risk detection by up to 20% relative to ARIMA.
+EUR/USD and USD/CAD show the strongest gains; GBP/USD's gains are smaller, consistent with political events and
+commodity-price shocks not being fully captured by price-based technical indicators. The results indicate that machine
+learning's forecasting advantage is regime-dependent rather than universal, and that deploying AI-driven forecasting
+responsibly requires attention to explainability, regulatory oversight, and the algorithmic-bias and systemic-risk
+implications of correlated model adoption across institutions.
+
+Keywords: exchange rate forecasting; machine learning; Random Forest; Gradient Boosting Machine; algorithmic
+governance; foreign exchange markets
+
+JEL Classification: F31, G15, C53, C45
+
+
+1. Introduction
+Artificial intelligence is changing how financial institutions forecast currency movements, offering a complement to
+traditional linear statistical methods by identifying non-linear patterns across large datasets. Empirical work
+comparing machine learning models to traditional benchmarks has reported accuracy gains of up to 30% and risk-
+detection improvements of up to 20% (Chernysh et al., 2024). Most of this evidence, however, comes from individual
+currency pairs studied in isolation, which limits what can be said about whether these gains hold across the structurally
+different conditions that characterize the global foreign exchange market — from highly liquid pairs to politically
+volatile pairs to commodity-linked pairs.
+
+The stakes of answering this question are significant. Foreign exchange is the world's largest and most liquid financial
+market, and even small improvements in forecasting accuracy affect trading performance, hedging effectiveness, and
+risk management at scale. Financial institutions have moved quickly to adopt AI-based forecasting tools, in some cases
+ahead of independent, cross-regime evidence of their reliability. This gap between adoption and evidence motivates the
+comparative, multi-pair design used here: institutions and regulators need evidence not only that AI forecasting tools
+work, but of when they work and when they do not.
+
+To address this, the study compares ARIMA, Random Forest, and Gradient Boosting Machine (GBM) across three
+exchange rate pairs chosen for their distinct structural characteristics: EUR/USD, the most liquid pair in global FX
+markets; GBP/USD, a pair with substantial exposure to political-event risk following the 2016 Brexit referendum; and
+USD/CAD, a pair closely linked to oil-price movements. Running the same models across these three regimes makes it
+possible to assess not only whether machine learning outperforms traditional forecasting, but under which conditions.
+
+The study addresses three questions. First, do Random Forest and GBM produce a statistically significant
+improvement in forecast accuracy and risk detection relative to ARIMA across the three pairs? Second, is this
+improvement consistent across pairs with different structural characteristics, or does it vary systematically with
+political-event risk and commodity-price exposure? Third, what do these empirical patterns imply for the regulation
+and governance of AI forecasting tools in currency markets? The first two questions are addressed empirically in
+Section 4; the third builds on those results in Section 5.
+
+This study contributes in three ways. Empirically, it provides decade-plus, three-pair evidence on machine learning's
+forecasting performance using a single, consistent modelling framework, data period, and validation procedure —
+enabling direct comparison across pairs in a way that separate single-pair studies typically do not allow. Substantively,
+it shows that the forecasting benefit of AI is not uniform, with implications for how much confidence should be placed
+in AI forecasts during the political and commodity shocks most relevant to financial stability. Practically, it translates
+these empirical patterns into a contingent governance framework for AI in currency forecasting, rather than treating
+regulation as a general afterthought.
+
+The remainder of the paper proceeds as follows. Section 2 situates the study within the Efficient Market Hypothesis
+and machine learning theory. Section 3 describes the data, model specifications, and validation procedures. Section 4
+presents the results. Section 5 discusses the regulatory and policy implications of AI-powered forecasting in currency
+markets. Section 6 concludes.
+
+
+2. Theoretical Framework and Related Literature
+2.1. Market Efficiency and the Predictability Debate
+The Efficient Market Hypothesis (Fama, 1970) holds that asset prices reflect all available information, implying that
+studying past prices should not generate abnormal gains. The weak-form version of this hypothesis sits uneasily with
+the predictive performance of machine learning models, which use lagged price and volume information to forecast
+future prices. Chernysh et al. (2024) report that simple moving-average models underperform ARIMA for short-term
+forecasts, and machine learning models that outperform ARIMA push this tension further. Behavioral finance offers a
+complementary explanation: if investor behavior is systematic rather than random, as argued in Kahneman and
+Tversky's (1979) prospect theory and Shiller's (2019) work on market narratives, it can produce exactly the kind of
+pattern that ensemble models are well suited to detect.
+
+This tension between efficiency and predictability is a longstanding theme in the FX literature. The Adaptive Markets
+Hypothesis (Lo, 2004) offers a reconciling framework: market efficiency is not fixed, but evolves with the mix of
+participants and their information-processing capabilities. Under this view, machine learning's forecasting advantage
+need not contradict the EMH — it reflects a market in which more participants are using tools that can extract value
+from patterns that earlier, simpler methods could not detect at comparable computational cost. This is consistent with
+what this study finds during periods, such as the Brexit referendum and oil-price shocks, when the relevant information
+was not primarily reflected in price history.
+A related behavioral consideration is the speed at which information is incorporated into prices. To the extent that AI
+systems assess sentiment from news and order flow faster than earlier methods, part of the measured benefit of AI
+systems may reflect the speed of adjustment rather than a stable inefficiency — a benefit that could diminish as
+adoption spreads.
+
+2.2. Machine Learning and Predictive Modelling Theory
+From a modelling perspective, Random Forest (Breiman, 2001) and Gradient Boosting Machines (Friedman, 2001)
+represent two different resolutions of the bias–variance tradeoff formalized by Hastie et al. (2009). Random Forest
+averages many decision trees to model non-linear interactions among predictors; GBM corrects errors sequentially,
+which tends to improve accuracy on structured financial data but increases sensitivity to hyperparameter choices and
+the risk of overfitting (Vapnik, 1995). ARIMA, by contrast, assumes linear and stationary relationships — the basis for
+expecting Random Forest and GBM to outperform it specifically where event-driven, non-linear dynamics are present,
+as is typical for GBP/USD and USD/CAD.
+
+Ensemble methods gain predictive accuracy at some cost to interpretability, which has practical consequences in
+finance: model outputs need to be explained to risk committees, auditors, and regulators. This study's own results
+(Section 4.2) show a related pattern — AI's accuracy advantage narrows during the structural-break conditions
+associated with the Brexit referendum and oil-price shocks.
+
+Overfitting is a central threat to the accuracy gains reported in Section 4. Minimizing empirical risk alone risks fitting
+noise rather than signal in the training data; the regularization, pruning, and early-stopping procedures described in
+Section 3.3 address this directly. Evaluation metrics were matched to each analytical task — RMSE for the continuous
+ARIMA forecasts and classification accuracy for the Random Forest and GBM outputs — rather than applying a single
+metric uniformly across tasks of different types.
+
+2.3. Algorithmic Governance and Ethical AI
+A further strand of theory concerns the governance of AI in financial decision-making. The interpretability of machine
+learning outputs is not only a technical question but a legal and ethical one, particularly under data-protection regimes
+such as the EU's GDPR, which grants individuals a right to explanation for automated decisions that affect them
+(Goodman and Flaxman, 2017). Mehrabi et al. (2021) document how bias embedded in historical training data can
+persist in automated systems without any intent to discriminate. At the system level, the Bank for International
+Settlements has flagged a related concern: as AI forecasting and risk-assessment tools become more concentrated
+among a small number of technology providers, correlated model adoption across institutions could amplify rather
+than dampen market-wide shocks (Aldasoro et al., 2024).
+
+Dignum's (2019) framework for Responsible AI offers one resolution: hybrid oversight arrangements in which AI
+systems generate forecasts or risk assessments, but higher-stakes decisions retain a human-in-the-loop checkpoint
+calibrated to the stakes and reversibility of the decision. This anticipates the conditional regulatory position developed
+in Section 5, which ties the intensity of oversight to the empirical stability of a model's performance advantage rather
+than applying a uniform rule.
+
+These three theoretical strands are interconnected rather than separate. The efficiency question motivates whether AI
+models outperform traditional benchmarks; modelling theory explains how that outperformance can vary across
+market regimes; and the governance literature explains why this variation matters for more than forecasting accuracy
+alone — a model whose advantage weakens precisely during the market-stress episodes that matter most for financial
+stability poses a different set of risks than one whose performance is stable.
+
+2.4. AI Adoption in Finance: Broader Empirical Context
+Beyond exchange rate forecasting, a broader empirical literature documents uneven effects of AI adoption across
+financial-market functions. High-frequency trading built on AI shows a similar pattern to the one reported here:
+benefits to average market quality alongside new, harder-to-monitor sources of volatility during periods of stress.
+Cryptocurrency markets show a comparable sensitivity to event-driven shocks, consistent with the interpretation that
+this study's findings reflect the absence of sentiment or news-based information in a price-only feature set, rather than a
+general limitation of ensemble methods.
+
+On the relative performance of ARIMA specifically, its consistency on EUR/USD — the most liquid of the three pairs
+— suggests that hybrid approaches incorporating ARIMA's linear structure into machine learning pipelines may be
+most useful for highly liquid pairs, while a purer ensemble approach may be better suited to the more volatile pairs
+where non-linear dynamics dominate.
+
+
+3. Data and Methodology
+This study uses an experimental research design to evaluate the forecasting accuracy of machine learning models
+against traditional statistical approaches, comprising two complementary analytical tasks. The first forecasts the three
+currency pairs using a panel-data specification with both fixed- and random-effects specifications, providing the
+statistical basis for the relationship between price levels and technical indicators reported in Section 4.3. The second
+classifies trading-volume and portfolio-risk outcomes using ensemble methods, yielding the headline accuracy figures
+reported in Sections 4.1 and 4.2. This dual design reflects a substantive distinction: exchange rate movements are
+continuous and suit a panel regression model, while trading and risk outcomes are categorical and suit a classification
+model. Section 3.1 describes the data and features, Section 3.2 the models, and Section 3.3 the validation and
+hypothesis-testing procedures underlying the robustness checks reported in Section 4.
+Figure 1. Research design and modeling pipeline, from data collection through validation and results.
+3.1. Data
+The data comprise daily prices for EUR/USD, GBP/USD, and USD/CAD from Investing.com and Yahoo Finance,
+from 2010-01-01 to 2021-07-12, spanning a range of market regimes including the extended post-2008 recovery
+period. For each pair, open, high, low, and close prices are used to compute the technical indicators: moving averages
+(5-day, 12-day, and 26-day), the Relative Strength Index (RSI), and MACD. Missing values resulting from market
+closures were addressed through linear interpolation to maintain temporal continuity in the panel data.
+
+All continuous variables were z-scored prior to modelling, with normalization statistics computed on the training fold
+only within each split to avoid data leakage into the test set.
+
+The feature set was expanded with lagged variables and rolling statistics, following common practice in machine
+learning applications to financial data (Chollet and Allaire, 2018). Lagged versions of each indicator were added so
+that the models could learn short-run momentum effects directly from the feature set rather than relying solely on the
+limited internal memory of tree-based ensembles. Rolling statistics of moving means and volatility, computed over a
+range of window lengths, provide additional regime-level context — for example, whether a given trading day fell
+within a period of comparatively high or low volatility.
+
+The data show no survivorship bias: all three pairs traded continuously throughout the sample period on both source
+platforms. This does not resolve separate questions about the choice of pairs or features, but it does support the
+reliability of the underlying price series. All cleaning and preprocessing steps (Gujarati and Porter, 2009) were applied
+uniformly across the three pairs.
+
+The indicator set was deliberately restricted to price-derived measures. This is a scope decision rather than a data-
+availability limitation: fundamental data release schedules differ substantially across the Eurozone, the United
+Kingdom, and Canada, and including them would complicate direct comparison across the three pairs — the core
+design goal of this study. This restriction is directly relevant to the GBP/USD and USD/CAD results in Section 4,
+where AI models are less well suited to the discrete political and commodity events that fundamental or sentiment data
+would more directly capture.
+
+Two limitations follow from these design choices. First, restricting the analysis to three pairs supports tractable cross-
+regime comparison but limits how far the findings generalize to currencies with different liquidity and volatility
+profiles. Second, the exclusion of fundamental indicators — earnings releases or macroeconomic announcements —
+means the feature set may miss predictive signal that is not purely price-based; this is directly relevant to interpreting
+the GBP/USD and USD/CAD results below, and is revisited in the discussion of future research directions.
+
+3.2. Model Specification
+Three models were selected for complementary strengths rather than as a uniform solution applied to every task.
+ARIMA parameters were fitted separately for each currency pair using the Akaike Information Criterion (Gujarati and
+Porter, 2009), following the standard ARIMA(p, d, q) specification (Tsay, 2010): Yt = α + φ1yt−1 + φ2yt−2 + … +
+φpyt−p + θ1εt−1 + θ2εt−2 + … + θqεt−q + εt, with autoregressive order p, differencing order d, and moving-average
+order q selected independently for each pair based on its own autocorrelation structure; the differencing order follows
+the stationarity results in Section 3.3. This pair-specific tuning matters because it means ARIMA was not
+disadvantaged relative to the machine learning models by using a single, generic specification.
+
+Consistent with the stationarity results in Section 3.3, all three series required first-order differencing (d = 1); the
+autoregressive and moving-average orders (p and q) were each selected via AIC minimization independently for each
+pair, reflecting each series' own autocorrelation structure rather than a single specification imposed across all three.
+
+Random Forest was used for trading-volume classification, exploiting its ability to handle high-dimensional, non-
+linear predictor sets while limiting overfitting through averaging across many decorrelated decision trees. The feature
+set included lagged price levels, the three moving averages, RSI, MACD, and their first differences, allowing the
+model to draw on both level and momentum information. Tree depth and the minimum samples required to split each
+node were optimized via five-fold cross-validation (Section 3.3) rather than fixed in advance, to reduce the risk of
+overstating performance through a favorable parameter choice.
+
+Trading volume was discretized into three balanced classes — Low, Medium, and High — based on within-pair tertiles
+of the daily volume distribution over the sample period, converting the continuous volume measure into categorical
+targets suitable for classification.
+
+GBM was applied to portfolio-risk assessment, drawing on its sequential error-correction mechanism (Friedman,
+2001) to improve risk estimates iteratively. To control the overfitting risk that sequential boosting is prone to under
+unconstrained training, the learning rate and number of boosting rounds were controlled via early stopping based on
+validation-set performance. Random Forest and GBM were each applied to the specific task for which they were
+selected — trading-volume classification and portfolio-risk assessment, respectively — rather than used
+interchangeably across tasks. A consequence of this design worth stating directly: because the two models are never
+evaluated on the same task, this study does not provide a direct, controlled comparison of which ensemble method
+performs better in general — only which performed better on the specific task each was assigned.
+
+All models were built using open-source frameworks (Scikit-learn and XGBoost) rather than proprietary or closed
+forecasting platforms, so that model architecture, parameters, and training logs remained fully visible and reproducible
+— a deliberate choice supporting the interpretability requirements discussed in Section 5. Feature importance scores
+(Random Forest) and SHAP values (Lundberg and Lee, 2017) for GBM were calculated and are reported alongside the
+accuracy figures in Section 4, directly addressing common criticism of AI-driven finance as a “black box.”
+3.3. Validation and Testing
+A Fisher-type panel unit root test based on augmented Dickey-Fuller regressions (Choi, 2001; building on Dickey and
+Fuller, 1979) indicated that the panel contained unit roots at the level (inverse chi-squared(12) = 12.26, p = 0.42) but
+rejected the unit-root null at first difference (inverse chi-squared(12) = 432.52, p < 0.001), consistent with standard
+properties of financial time series. Panel relationships between price levels and technical indicators were estimated
+using both fixed- and random-effects specifications; a Hausman test (χ² = 21.35, p < 0.001) indicated a statistically
+significant divergence between the two sets of coefficients, favoring the fixed-effects specification, and a Breusch–
+Pagan Lagrange-multiplier test (χ² = 2064.37, p < 0.001) confirmed that panel-level heterogeneity was too large to
+disregard. A Breusch–Pagan/Cook–Weisberg test for heteroskedasticity was not rejected (χ² = 0.00, p = 0.993),
+supporting the validity of standard errors under OLS assumptions.
+
+Data were split into training (70%) and test (30%) sets using a rolling-window design intended to approximate real-
+world forecasting conditions, with five-fold cross-validation applied throughout. Evaluation metrics were matched to
+each task rather than applied uniformly: RMSE and MAE for the continuous panel-forecasting task, and classification
+accuracy and F1-scores for the categorical trading-volume and risk-classification tasks, since accuracy alone can be
+misleading when class distributions are uneven. MSE was also computed alongside RMSE and MAE to capture
+sensitivity to large individual forecast errors, which is particularly relevant given this study's focus on performance
+during the shock periods examined in Section 4.2.
+
+Two additional safeguards addressed overfitting risk directly, consistent with the theoretical discussion in Section 2.2:
+Random Forest tree complexity was constrained, and GBM training was stopped early based on validation-set
+performance. A paired t-test then assessed whether the difference in forecasting accuracy between each AI model and
+ARIMA was statistically significant rather than attributable to sampling variation, calculated at the pair level in Section
+4.3 using RMSE, MAE, and MSE. Together, these procedures ensure that the performance comparisons in Section 4
+rest on a validation design matched to the type of task being evaluated, rather than a generic train/test split applied
+without regard to task type.
+
+
+4. Empirical Results
+4.1. Full-Sample Comparative Performance
+Table 1 summarizes full-sample model performance. The AI models (Random Forest and GBM) achieved accuracy of
+78–85%, compared with 48–65% for ARIMA. Comparing midpoints, ARIMA's accuracy sits roughly 25 percentage
+points below the AI models' on average, though the gap varies by pair and is examined directly in Section 4.2. This
+accuracy advantage was accompanied by a speed advantage — AI models produced forecasts within milliseconds,
+versus seconds to minutes for ARIMA — and by materially greater robustness during simulated crisis conditions,
+where AI model accuracy degraded by less than 10% compared with 40–60% for ARIMA. The one consistent
+drawback was interpretability, where AI models scored lowest relative to ARIMA's comparatively transparent linear
+structure, discussed further in Section 5.
+
+Table 1. Comparative Performance: AI Models vs. Traditional Models (Full Sample)
+
+ Metric                          AI Models (RF / GBM)          Traditional Model             AI Advantage
+                                                               (ARIMA)
+
+ Prediction accuracy             78–85%                        48–65%                        +20–30 pp (midpoint
+                                                                                             comparison)
+
+ Processing speed                Milliseconds                  Seconds–minutes               100–1000x faster
+
+ Market-crisis performance       <10% degradation              40–60% degradation            Greater robustness
+
+ Interpretability                Low                           High                          Tradeoff for accuracy
+
+These full-sample figures mask meaningful within-task variation. Random Forest's 85% accuracy ceiling on trading-
+volume classification reflects the F1-adjusted evaluation described in Section 3.3, necessary because the trading-
+volume classes are unevenly distributed and a standard accuracy calculation risks overstating majority-class
+performance. Similarly, GBM's 20% risk-reduction figure for portfolio-risk assessment is based on the MSE-based
+measure from Section 3.3, since portfolio-risk assessment is more sensitive to occasional large errors than to average
+error as measured by MAE. Table 1's comparison reflects this task-matched evaluation rather than a single generic
+metric applied to both models.
+
+4.2. Performance by Currency Pair
+Table 2 breaks these results down by currency pair, and the advantage is not uniform. Random Forest's accuracy was
+highest for EUR/USD (85%), followed by GBP/USD (82%) and USD/CAD (78%). GBM's risk-reduction figures
+followed the same ordering: 20% for EUR/USD, 18% for GBP/USD, and 15% for USD/CAD. GBP/USD's weaker
+performance during the Brexit period is consistent with AI models being better suited to general volatility than to a
+single, discrete political shock. USD/CAD's relative underperformance is consistent with its sensitivity to oil prices, a
+factor not explicitly included in the technical-indicator feature set used here.
+
+Table 2. Model Accuracy by Currency Pair
+
+ Model                                       EUR/USD                  GBP/USD                    USD/CAD
+
+ Random Forest (accuracy)                    85%                      82%                        78%
+
+ GBM (risk reduction)                        20%                      18%                        15%
+
+Both models rank the three pairs identically — EUR/USD, then GBP/USD, then USD/CAD — despite being trained
+on different tasks (trading-volume classification and portfolio-risk assessment) using the same underlying technical-
+indicator features. This parallel pattern suggests the limiting factor is the information content of the shared feature set
+for a given pair, rather than a shortfall in either modelling method. In other words, the proportion of predictive signal
+each model captures within a pair is broadly similar; what differs by pair is how much predictive signal the shared
+feature set contains in the first place — consistent with Section 3.1's point that technical indicators are a bounded
+feature set that does not capture every signal relevant to a currency pair.
+
+
+
+
+  Figure 2. Random Forest trading-volume accuracy and GBM portfolio risk reduction by currency pair, with the
+                            ARIMA benchmark accuracy range shown for reference.
+
+4.3. Panel Diagnostics and Robustness
+Feature-importance and SHAP analysis, generated alongside the model specification in Section 3.2, show that the 5-
+day, 12-day, and 26-day moving averages and MACD are consistently the most important predictors across all three
+pairs, followed by RSI; period-on-period price change is comparatively unimportant, consistent with the panel
+correlation results below. For GBP/USD specifically, SHAP values show the moving-average indicators' relative
+contribution declining against MACD's during the Brexit period, consistent with MACD becoming relatively more
+informative in the shorter term as longer-term indicators became less so. This within-model diagnostic was only
+possible because the study used open, inspectable model architectures rather than proprietary platforms (Section 3.2)
+— a direct argument for treating interpretability as a design criterion rather than an afterthought (Section 5.1).
+Table 3 presents supporting panel-regression evidence. The fixed-effects specification shows that the opening price
+(Open) is a statistically significant predictor of the 5-day, 12-day, and 26-day moving averages and of MACD (p <
+0.001 for all), with correlation coefficients between Open and the moving averages above 0.99.
+
+Table 3. Panel Diagnostics
+
+ Test                                      Statistic        p-value         Interpretation
+
+ Fisher-type panel unit root (level)       12.26            0.42            Panels contain unit roots (non-stationary)
+
+ Fisher-type panel unit root (1st diff.)   432.52           <0.001          Stationary at first difference
+
+ Hausman test                              χ² = 21.35       <0.001          Fixed-effects specification preferred
+
+ Breusch–Pagan LM test                     χ² = 2064.37     <0.001          Significant panel-level heterogeneity
+
+ Breusch–Pagan/Cook–Weisberg               χ² = 0.00        0.993           No evidence of heteroskedasticity
+
+
+
+
+ Figure 3. Pearson correlation between the price level (Open) and each technical indicator used in the feature set.
+
+The pairwise Pearson correlations between Open and the moving-average family are 0.9991 (5-day), 0.9987 (26-day),
+and 0.9968 (12-day) — indicating that these indicators move in near lock-step with the underlying price level. By
+comparison, Open's correlation with MACD is 0.0525, with RSI 0.0398, and with the risk–reward ratio and period-on-
+period price change close to zero (0.0067 and 0.0038, respectively). The moving-average indicators function largely as
+restatements of the price level rather than independent information sources, while MACD and RSI — which are not
+strongly correlated with Open directly, but which the SHAP analysis above identifies as gaining relative importance
+during the Brexit shock — capture information that pure price-level indicators do not.
+
+The 12-day indicator is a simple moving average (SMA) and the 26-day indicator is an exponential moving average
+(EMA). MACD is conventionally derived from 12-day and 26-day EMAs; since the reported 12-day figure here is a
+SMA rather than an EMA, the moving-average and MACD features are not fully redundant by construction, though the
+26-day EMA does share a direct structural link with one of MACD's two components — worth noting explicitly rather
+than treating the low empirical correlation as the complete picture.
+
+A multivariate regression of Open on the full indicator set yields an overall fit of R² = 0.9992. Considered individually,
+the 5-day, 12-day, and 26-day moving averages each explain a large share of the variation in Open on their own
+(univariate R² of 0.9983, 0.9936, and 0.9873, respectively), while period-on-period price change and the risk–reward
+ratio are not significant individual predictors (p = 0.658 and above conventional thresholds, respectively). The random-
+effects GLS specification gives a consistent picture for MACD specifically: the coefficient on Open is 0.0120561 (SE
+0.0008548, z = 14.10, p < 0.001), indicating a statistically significant positive relationship. The variance attributable to
+panel-level random effects is small (σᵤ = 0.00106) relative to the residual error variance (σₑ = 0.01570), indicating
+limited pair-level heterogeneity once the effect of Open is accounted for.
+
+Paired t-tests confirm that the accuracy difference between the AI models and ARIMA is statistically significant (p <
+0.01) in all cases, rather than attributable to sampling variability. This matters because the pair-level differences in
+RMSE and accuracy — often in the single digits of percentage points — could otherwise be mistaken for ordinary
+model-to-model variation; formal hypothesis testing rules this out for EUR/USD and GBP/USD, and does so with a
+smaller but still adequate margin for USD/CAD.
+
+Two further checks reinforce these results. Performance was stable across the five cross-validation folds, with no more
+than a 3% accuracy difference between any two folds — inconsistent with results driven by a favorable data split.
+Accuracy was also similar between the training and test sets (within roughly 4 percentage points), which would not be
+expected if the models were significantly overfit to the training data. Together with the significance testing above, this
+supports treating the reported accuracy improvements as genuine out-of-sample findings rather than in-sample
+artifacts.
+
+4.4. Synthesis
+The GBP/USD and USD/CAD results warrant a precise interpretation. The narrowing of AI's advantage during the
+Brexit period does not mean the AI models underperformed ARIMA in absolute terms — Random Forest's 82%
+accuracy on GBP/USD still comfortably exceeds ARIMA's 48–65% range. What the pattern shows is that AI's edge is
+not constant, and that it narrows specifically under conditions — discrete political events and commodity-price shocks
+— that a price-history-based technical-indicator feature set does not capture well. This is consistent with Section 2.2:
+these are the structural-break conditions under which ensemble models tend to lose part of their advantage unless
+retrained or supplemented with features that capture the shock directly.
+
+This limitation shows up differently across the two pairs. GBP/USD's weaker accuracy coincides closely with the
+Brexit referendum period, when a single discrete political event dominated price action in a way the model's price-
+history features could not anticipate. USD/CAD's relative weakness instead reflects a continuous sensitivity to oil
+prices rather than a single shock, meaning a larger share of the pair's volatility is driven by a variable outside the feature
+set. Both patterns point to the same underlying conclusion — that AI's forecasting capability in this study is bounded
+by its feature set — while suggesting different remedies: detecting discrete events directly for GBP/USD, and
+enriching the feature set with external variables for USD/CAD.
+
+Three conclusions follow from the full results. First, machine learning — Random Forest in particular — provides a
+statistically and economically significant forecasting advantage over ARIMA in currency markets, consistent with
+prior evidence (Chernysh et al., 2024). Second, this advantage is largest when markets are comparatively liquid and
+stable, and diminishes, though does not disappear, during political or commodity shocks — a pattern not always
+highlighted in single-pair studies, with practical implications for how much institutions should trust AI predictions
+during periods of heightened uncertainty. Third, the accuracy–interpretability tradeoff documented here is a structural
+property of the ensemble methods used, not an incidental result, with direct implications for how such models fit within
+the current financial regulatory landscape. Taken together with the feature-set limitation above, the results support a
+measured conclusion: AI forecasting is a genuine but bounded improvement over traditional forecasting — most
+valuable when the relevant information is contained in price history, and correspondingly less valuable when it is not.
+This carries directly into the regulatory discussion in Section 5.
+
+
+5. Regulatory and Policy Implications
+The accuracy benefits documented above come with a set of governance risks for any institution deploying AI
+forecasting tools, summarized in Table 4.
+
+Table 4. AI Governance Risks in Currency Forecasting and Potential Mitigations
+
+ Risk                          Example                                   Potential Mitigation
+
+ Low interpretability          Unexplained forecasting or credit-        Explainable AI (feature importance,
+                               relevant outputs                          SHAP)
+
+ Systemic correlation          Correlated algorithmic responses          Diversity requirements; centralized
+                               across institutions                       monitoring
+
+ Algorithmic bias              Bias inherited from historical training   Fairness-aware ML; disparate-
+                               data                                      impact testing
+ Risk                         Example                                  Potential Mitigation
+
+ Regulatory compliance        GDPR right-to-explanation for            Auditable model architecture and
+                              automated decisions                      documentation
+
+
+5.1. The Interpretability–Compliance Tension
+The clearest tension is between predictive performance and explainability. The GDPR and comparable data-protection
+laws give individuals a right to explanation for automated decisions that affect them (Goodman and Flaxman, 2017),
+which is difficult to satisfy meaningfully when a model scores low on interpretability (Table 1). Explainable AI
+techniques — including the feature-importance and SHAP values calculated for this study's models — are a partial
+technical response (Holzinger et al., 2017; Lundberg and Lee, 2017), but they do not remove the underlying tradeoff
+between model complexity and auditability.
+
+This is not solely a European regulatory concern. Opaque credit-decision models may also struggle to satisfy the
+United States' Equal Credit Opportunity Act, which requires specific, comprehensible explanations for adverse credit
+decisions — a requirement a low-interpretability model would struggle to meet without a feature-importance or
+SHAP-based explanation layer, as described in Section 3.2. The recurrence of this requirement across distinct
+regulatory regimes suggests interpretability functions as a general design principle for automated decision systems, not
+a jurisdiction-specific quirk — a strong argument for embedding it at the design stage rather than retrofitting it later.
+
+5.2. Systemic Risk from Correlated AI Adoption
+A second concern operates at the system level rather than the institutional level. As more financial firms adopt
+structurally similar AI models — a plausible trajectory given the concentration of forecasting infrastructure among a
+small number of technology vendors — their trading responses to the same market signals could become more
+correlated than under more diverse, traditional forecasting approaches. The Bank for International Settlements has
+raised this concern directly, noting that algorithmic uniformity across institutions is one channel through which AI
+adoption could amplify volatility during market shocks, and pointing to diversity requirements and coordinated
+monitoring as potential mitigants (Aldasoro et al., 2024).
+
+This study's GBP/USD and USD/CAD results — where AI's advantage narrows precisely during the shocks regulators
+worry about most — are consistent with a scenario in which correlated AI-driven responses could amplify rather than
+dampen stress during exactly the events regulators are most concerned with. This is a subtler risk than an outright
+model failure: even though the AI models here continue to outperform ARIMA during a shock, a market relying on
+more diverse forecasting methods might show a broader range of responses to that shock than one where most
+participants rely on similar methods — concentrating rather than distributing risk.
+
+AI regulatory sandboxes — controlled environments in which institutions can test AI forecasting models under
+supervision before real-world deployment — offer one practical way to identify correlated-response risk early,
+complementing diversity requirements and centralized oversight. Testing how a given AI architecture responds to
+hypothetical versions of the shocks examined in Section 4.2 (a Brexit-like political shock, an oil-price shock) would let
+regulators observe whether institutions respond similarly to stress, ahead of a real shock rather than only after one.
+
+5.3. Algorithmic Bias in Downstream Applications
+A third concern is algorithmic bias wherever AI forecasting tools inform decisions at the level of individual customers
+or borrowers, such as credit scoring or loan pricing. Bias embedded in historical training data can persist in an
+automated system without any intentional discrimination (Mehrabi et al., 2021), and documented cases in fintech
+lending show algorithms trained on historical loan data reproducing discriminatory lending patterns even without any
+protected characteristic included among the model's features (Wachter, Mittelstadt, and Russell, 2021). This study's
+findings support treating fairness-aware machine learning techniques and disparate-impact testing as a necessary part
+of model development, not an optional add-on: a model optimized purely for forecasting accuracy — as the Random
+Forest and GBM specifications used here are — provides no assurance of fairness unless fairness constraints are built
+in from the start, rather than evaluated only after deployment.
+
+5.4. Data Security Considerations
+A related but distinct issue is the security of the data pipelines that AI forecasting models depend on. As models
+become more powerful — a Random Forest or GBM capable of outperforming simpler models typically requires more,
+and more detailed, data — the resulting attack surface grows correspondingly. This sits within a broader set of risks
+institutions face when adopting AI, alongside model risk and workforce disruption (Cheatham, Javanmardian, and
+Samandari, 2019); the point is not an argument against AI adoption, but for data-security investment that scales in
+proportion to it rather than being treated as a lower priority.
+
+Federated learning — training models across institutions' data without pooling the raw data itself — is sometimes
+proposed as a mitigant, but it does not eliminate exposure: the parameters and gradients exchanged during federated
+training can themselves be vulnerable to reconstruction attacks that recover sensitive information from seemingly
+aggregated updates. Layered protections such as differential privacy (introducing calibrated statistical noise into
+aggregated updates), combined with encryption and access controls, represent the kind of protection that should scale
+with the number and complexity of the features these models rely on.
+
+5.5. Toward a Practical Policy Stance
+These considerations point toward a practical policy stance rather than a binary choice between adopting AI and
+avoiding it: hybrid human–AI oversight for higher-stakes applications; transparency of model architecture and
+validation procedures to supervisory authorities; coordinated monitoring of AI-model concentration across
+institutions; and fairness and security safeguards built in during development rather than added afterward. The regime-
+dependence documented in this study is not a technical footnote — it supports an approach to regulatory oversight that
+is conditional rather than uniform: lighter where AI's performance gains are strongest and most stable (as with
+EUR/USD), and correspondingly stronger where those gains weaken under stress.
+
+
+6. Conclusion
+This study compared ARIMA, Random Forest, and Gradient Boosting Machine forecasting performance across three
+structurally different exchange rate pairs, finding a substantial, statistically significant forecasting advantage for
+machine learning — including under the political and commodity-driven shocks that concern risk managers and
+regulators most — though only under the right market regime. The three-pair design gives the results external validity
+that single-pair studies typically lack, and helps explain why AI's forecasting advantage is not uniform across markets.
+
+The findings are directly relevant both to institutions considering AI adoption for currency forecasting and to the
+regulators overseeing them. AI-based forecasting offers real gains in accuracy and speed, but institutions should not
+assume these gains are consistent across markets: the robustness checks in Section 4.3 show the improvements are not
+an artifact of a favorable data split, and the pair-level results in Section 4.2 show they are not unconditional. For
+regulators, the harder structural question is how to reconcile the low interpretability of high-performing AI models
+with existing data-protection transparency requirements, and how to monitor the systemic risk that may emerge as
+similar AI architectures spread across institutions. The conditional regulatory principle in Section 5.5 — calibrating
+oversight intensity to the empirical stability of a model's performance advantage — offers one way to do this without
+resorting to uniform regulation that would under-regulate the riskiest applications and over-regulate the most stable
+ones.
+
+Several design choices in this study point directly to its limitations and to productive directions for future research.
+Limiting the analysis to three pairs kept the cross-regime comparison tractable and directly comparable, but a natural
+extension would broaden the currency set — including emerging-market pairs, where liquidity conditions and
+institutional AI adoption differ meaningfully from the pairs studied here. Relatedly, the narrowing of AI's advantage
+during the Brexit and oil-shock periods most plausibly reflects the exclusion of fundamental and sentiment information
+from the feature set (Section 3.1) rather than a general limitation of the modelling approach — an extension that
+follows naturally from this study's design rather than a departure from it.
+
+A further direction concerns the difference between discrete political risk (GBP/USD around Brexit) and continuous
+commodity-price sensitivity (USD/CAD), discussed in Section 4.4. Both patterns point toward a targeted extension of
+the current approach rather than a wholesale redesign: the SHAP results in Section 4.3 show momentum indicators
+becoming more important during the Brexit window, suggesting that dynamic feature-weighting schemes that adapt
+when a regime change is detected could recover some of the accuracy lost during a shock without requiring a
+fundamentally different model architecture.
+Section 5 addresses the systemic-risk implications of correlated AI adoption conceptually; modelling that correlation
+directly — for instance, simulating how multiple institutions using structurally similar AI architectures respond to a
+common shock — was outside this study's scope and remains an open empirical question. The regulatory sandbox
+mechanism discussed in Section 5.2 offers one way to generate this evidence under supervised conditions, ahead of a
+real market shock rather than only in its aftermath. Research integrating the forecasting-performance and governance
+literatures — currently developing largely in parallel — will become increasingly important as machine learning
+becomes further embedded in financial forecasting infrastructure. This study's central finding is that AI's forecasting
+power in currency markets is real and substantial, but conditional rather than universal — an empirical anchor for that
+broader research agenda, and a reminder that the more useful question is not simply whether AI forecasting works, but
+where and under what conditions it does.
+
+
+References
+Aldasoro, I., Gambacorta, L., Korinek, A., Shreeti, V., & Stein, M. (2024). Intelligent financial system: How AI is
+    transforming finance. BIS Working Papers No. 1194.
+Breiman, L. (2001). Random forests. Machine Learning, 45(1), 5–32.
+Cheatham, B., Javanmardian, K., & Samandari, H. (2019). Confronting the risks of artificial intelligence. McKinsey
+   Quarterly.
+Chernysh, O., Smishko, O., Koverninska, Y., Prokopenko, M., & Pistunov, I. (2024). The role of artificial
+    intelligence in financial analysis and forecasting: Using data and algorithms. Data and Metadata, 3, Article 224.
+Choi, I. (2001). Unit root tests for panel data. Journal of International Money and Finance, 20(2), 249–272.
+Chollet, F., & Allaire, J. J. (2018). Deep Learning with R. Manning Publications.
+Dickey, D. A., & Fuller, W. A. (1979). Distribution of the estimators for autoregressive time series with a unit root.
+    Journal of the American Statistical Association, 74(366), 427–431.
+Dignum, V. (2019). Responsible Artificial Intelligence: How to Develop and Use AI in a Responsible Way.
+    Springer.
+Fama, E. F. (1970). Efficient capital markets: A review of theory and empirical work. Journal of Finance, 25(2),
+   383–417.
+Friedman, J. H. (2001). Greedy function approximation: A gradient boosting machine. Annals of Statistics, 29(5),
+    1189–1232.
+Goodman, B., & Flaxman, S. (2017). European Union regulations on algorithmic decision-making and a “right to
+   explanation.” AI Magazine, 38(3), 50–57.
+Gujarati, D. N., & Porter, D. C. (2009). Basic Econometrics (5th ed.). McGraw-Hill.
+Hastie, T., Tibshirani, R., & Friedman, J. (2009). The Elements of Statistical Learning: Data Mining, Inference, and
+    Prediction (2nd ed.). Springer.
+Holzinger, A., Biemann, C., Pattichis, C. S., & Kell, D. B. (2017). What do we need to build explainable AI systems
+    for the medical domain? arXiv:1712.09923.
+Kahneman, D., & Tversky, A. (1979). Prospect theory: An analysis of decision under risk. Econometrica, 47(2),
+   263–291.
+Lo, A. W. (2004). The adaptive markets hypothesis. Journal of Portfolio Management, 30(5), 15–29.
+Lundberg, S. M., & Lee, S.-I. (2017). A unified approach to interpreting model predictions. Advances in Neural
+   Information Processing Systems, 30.
+Mehrabi, N., Morstatter, F., Saxena, N., Lerman, K., & Galstyan, A. (2021). A survey on bias and fairness in
+   machine learning. ACM Computing Surveys, 54(6), 1–35.
+Shiller, R. J. (2019). Narrative Economics: How Stories Go Viral and Drive Major Economic Events. Princeton
+     University Press.
+Tsay, R. S. (2010). Analysis of Financial Time Series (3rd ed.). Wiley.
+Vapnik, V. N. (1995). The Nature of Statistical Learning Theory. Springer.
+Wachter, S., Mittelstadt, B., & Russell, C. (2021). Why fairness cannot be automated: Bridging the gap between EU
+   non-discrimination law and AI. Computer Law & Security Review, 41, Article 105567.
+

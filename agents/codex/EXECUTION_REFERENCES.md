@@ -1517,6 +1517,22 @@ Source: Barrette/Goulet Coulombe/Reinicke, SSRN7508198, [review and pinned sourc
   transformed panels were obtained, so this is not a new missing-data alpha lead. No need to repeat acquisition.
 - Status: methods/clock reference, no return trial, new queue entry, allocation, logger or live-system change.
 
+### Research-method follow-up — Match forecasting targets before comparing accuracy (2026-11-08 UTC)
+
+Source: Alqahtani, SSRN7511639, user-uploaded undated manuscript.
+[Review](results/forex_ml_7511639_review_20261108.md),
+[source/arithmetic receipt](../../analysis/outputs/codex_forex_ml_7511639/source_audit.json).
+- Use: volume-class accuracy, risk-error reduction and price forecasting are distinct outcomes. Neither volume
+  accuracy nor MSE reduction establishes directional returns, executable liquidity or account drawdown improvement.
+  Require identical future targets, observations, clocks and baselines before inferring comparative superiority.
+- Evidence: all extracted narrative/tables read; claims not reproduced. RF's reported78–85% is volume-class
+  accuracy. RF/GBM/ARIMA have unmatched tasks, risk labels and volume provenance are incomplete, and an Open/26-day
+  correlation versus univariate R² needs reconciliation. No model fit, return test or execution saving verified.
+- Limits: daily spot-FX volume is not consolidated exchange activity; substitute futures volume changes the source
+  target. Full-sample class boundaries/interpolation need causal checks. No NQ/ES fill or strategy evidence follows.
+- Next check only if new source material arrives: exact labels/horizons, volume field, code/fold dates and same-target
+  paired predictions. Existing causal controls already apply; no new data request, monitor, allocation or trial.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
