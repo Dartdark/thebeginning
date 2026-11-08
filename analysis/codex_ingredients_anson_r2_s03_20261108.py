@@ -105,7 +105,7 @@ def r2_module(variant,a0,calendar):
         text=replace_once(text,'mae_points_observed=max(float(entry) - float(adverse), 0.0)',
                               'mae_points_observed=max((float(entry) - float(adverse)) * SIDE, 0.0)')
         if variant=='no_slope_gate':
-            text=replace_once(text,'and b.slope > 0:',':')
+            text=replace_once(text,'and (b.slope > 0):',':')
         return text
     mod=source_module('codex_r2vault_replay.py',namespace={
         'prepare_observed_bars':a0.prepare_bars,'_gap_records':a0._gap_records,
@@ -201,12 +201,19 @@ def fixtures():
     check(np.array_equal(base.entry_flat,fade.entry_flat) and np.allclose(base.gross_nq,-fade.gross_nq),'Anson fade schedule')
     a.DIRECTION=1;short=a.replay(g,'hold_6',prepared=p).trades
     check(short.bars_held.iloc[-1]<=6 and (short.bars_held==6).any(),'Isolated six-bar hold')
-    r=r2_module('fade_break',a0,calendar)
+    rmods={variant:r2_module(variant,a0,calendar) for variant in FAMILIES['R2']}
+    smods={variant:s03_module(variant) for variant in FAMILIES['S03']}
+    r=rmods['fade_break']
     x=r.entering_minute(100.,230.,10.,180.,140.)
     check(x[0] and x[2]==2 and x[3] and x[4]==215. and x[5]==0,'Fade consumes only post-break path')
-    rn=r2_module('no_stop',a0,calendar)
+    rn=rmods['no_stop']
     check(not rn.held_minute(100.,110.,-1000.,100.,100.,1)[0],'R2 infinite stop still fires')
-    so=s03_module('original');sf=s03_module('fade_direction');sn=s03_module('no_sigma_stop')
+    rp=r0.prepare(g);rp.bars['r2']=.01;rp.bars['slope']=-1.
+    gated=rmods['original'].replay(g,'ct_apex',prepared=rp).trades
+    freed=rmods['no_slope_gate'].replay(g,'ct_apex',prepared=rp).trades
+    check(len(gated)==0 and len(freed)>0,'Positive-slope removal fixture')
+    check(rmods['no_R2_gate'].R2_THRESHOLD==1.,'R² removal initialization')
+    so=smods['original'];sf=smods['fade_direction'];sn=smods['no_sigma_stop']
     shape=(1,1440);o=np.full(shape,100.);h=o+1;l=o-1;c=o.copy();obs=np.ones(shape,bool)
     f=np.full((1,12,7),np.nan);f[0,0]=[99.,98.,99.,.1,100.,1.,0.]
     initial=np.zeros(14);initial[9]=-1
@@ -221,12 +228,16 @@ def fixtures():
     no,_=so.engine(o,h,l,c,obs,f,np.zeros(1,bool),0,902,initial,.4,True,0)
     yes,_=band_off.engine(o,h,l,c,obs,f,np.zeros(1,bool),0,902,initial,.4,True,0)
     check(len(no)==0 and len(yes)>0,'Band-off entry gate fixture')
+    f[0,0]=[99.,98.,101.,.1,100.,1.,0.]
+    no,_=so.engine(o,h,l,c,obs,f,np.zeros(1,bool),0,902,initial,.4,True,0)
+    yes,_=smods['no_entry_VWAP'].engine(o,h,l,c,obs,f,np.zeros(1,bool),0,902,initial,.4,True,0)
+    check(len(no)==0 and len(yes)>0,'VWAP-off entry gate fixture')
     l[0,541]=90.;f[0,0]=[99.,98.,99.,.1,100.,1.,0.]
     stop,_=so.engine(o,h,l,c,obs,f,np.zeros(1,bool),0,542,initial,.4,True,0)
     no_stop,state=sn.engine(o,h,l,c,obs,f,np.zeros(1,bool),0,542,initial,0.,True,0)
     check(len(stop)==1 and len(no_stop)==0 and state[0]==1,'S03 no-stop activation')
     return {'source_anson':a_checks,'source_r2':r_checks,'source_s03':s_checks,
-            'new_intervention_checks_passed':7,'market_returns_computed':False}
+            'new_intervention_checks_passed':10,'market_returns_computed':False}
 
 
 def run(phase):
@@ -295,6 +306,11 @@ def run(phase):
                 if variant=='no_sigma_stop':check(raw.kind.ne(0).all(),'Disabled sigma stop executed')
             t,d,receipt=canonical(raw,family,variant,g,calendar)
             key,stem=family+'/'+variant,family+'__'+variant
+            prior=OUT/'design_attempt_7320764_hook'/(stem+'_trades.csv')
+            if phase=='design' and prior.exists():
+                old=pd.read_csv(prior)
+                parity(t,old)
+                check(np.allclose(t.net,old.net),'Implementation-only rerun changed prior priced net')
             results[key],dailies[key],marks[key]=t,d,receipt
             t.to_csv(dest/(stem+'_trades.csv'),index=False)
             for side in ('all','long','short'):

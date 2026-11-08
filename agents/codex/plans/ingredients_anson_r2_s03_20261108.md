@@ -4,6 +4,10 @@ Summary: Build the requested Change / $ per trade / t / Read grids without selec
 Fifteen market definitions, five per family; baseline side breakdowns are contributions, not side-only reruns.
 Commit evidence, plan, source hashes and exact harness before real returns; design checkpoint before recent.
 
+Implementation-only syntax/fixture amendment after a partial design attempt:
+[`ingredients_anson_r2_s03_20261108_implementation.md`](ingredients_anson_r2_s03_20261108_implementation.md).
+All economic definitions remain unchanged; partial ledgers are preserved and checked against the rerun.
+
 ## Exact definitions
 
 **ANSON, NQ5-minute intended_apex**: current user inputs strength4.5/hold20; momentum=current close−12

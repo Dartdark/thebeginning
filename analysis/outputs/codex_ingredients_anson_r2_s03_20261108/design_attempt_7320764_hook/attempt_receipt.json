@@ -1,0 +1,18 @@
+{
+  "status": "implementation_hook_failure",
+  "harness_commit": "7320764",
+  "priced_cases": [
+    "ANSON__fade_direction",
+    "ANSON__hold_6",
+    "ANSON__no_early_adapter",
+    "ANSON__no_strength_gate",
+    "ANSON__original",
+    "R2__fade_break",
+    "R2__no_R2_gate",
+    "R2__original"
+  ],
+  "failed_before_pricing": "R2/no_slope_gate",
+  "recent_opened": false,
+  "rule_changes": false,
+  "cause": "AST unparse parenthesized b.slope > 0; exact hook lacked parentheses"
+}
