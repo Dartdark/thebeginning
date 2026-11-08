@@ -1600,6 +1600,24 @@ Source: Battalio/Egginton/Van Ness/Van Ness, SSRN1941956, October5,2011 draft.
 - Smallest next check only with a separately justified execution task: validate matching report/order populations
   and clock units against observed lifecycle records. No new data request, allocation, monitor or return trial.
 
+### Research-method follow-up — Indicator significance, selection and switching costs (2026-11-08)
+
+Source: Fang/Qin/Jacobsen, *Technical Market Indicators: An Overview*, SSRN2449344, user-uploaded manuscript.
+[Review](results/market_indicators_2449344_review_20261108.md),
+[source/unit receipt](../../analysis/outputs/codex_market_indicators_2449344/source_audit.json).
+- Use: distinguish regression significance, stable signs and economic value after switching. Main author screen
+  goes93→30→10→8→0 economic outperformers; selected regime/robust exceptions exist but do not establish a new edge.
+- Evidence: main narrative/selected tables, visual Table13 check, no empirical reproduction. Table13's short-sales
+  Sharpe2.47 is multiplied by10^-2, yielding0.0247 per week; not annual Sharpe2.47. Switching cost0.10% is an
+  author assumption for market/cash timing, not our native futures spread/fee/slippage ledger or measured savings.
+- Clocks: NBER retrospective labels are not contemporaneous inputs; a real-time CFNAI release still requires
+  original vintages and availability. Lagged indicator dates and full-sample-selected candidates do not establish
+  independent tradable validation. Weekly NYSE short-sales data ending2008 cannot be silently replaced by modern
+  daily short volume, short interest or futures volume.
+- Next check only on materially stronger independent evidence: actual data/source clocks, precise forecast/refit
+  conventions and same-opportunity costed holdings. No new data acquisition, return trial, filter, allocation or
+  rejection of existing independently tested strategies follows. Supporting negative/method evidence only.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
