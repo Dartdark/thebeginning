@@ -1,0 +1,46 @@
+commit d08942f545d4b5bb946057c07dff81d9c4222592
+Author:     Claude <noreply@anthropic.com>
+AuthorDate: Sun Nov 8 06:01:35 2026 +0000
+Commit:     Claude <noreply@anthropic.com>
+CommitDate: Sun Nov 8 06:01:35 2026 +0000
+
+    Cushion cap on the funded plan: blown 8.1% -> 2.3% at the same payouts
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01Wk1fPXKaVY5qxTFTRepNtr
+
+diff --git a/NEW_CHAT_BRIEF.md b/NEW_CHAT_BRIEF.md
+index 698a24de..4947d131 100644
+--- a/NEW_CHAT_BRIEF.md
++++ b/NEW_CHAT_BRIEF.md
+@@ -28,7 +28,8 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
+   (replayed 11/03 08:20: no flag), noise-area early-close flat (EL + replay `bridge_noise_15m_earlyclose_output.txt`: +$3.1k, 0 held).
+ - **Cushion cap bench 11/08** (`analysis/outputs/cushion_cap_bench_output.txt`, after Codex's 11/04 loss audit): capping each
+   stop at the room above the floor cuts fails (50K 48 -> 37%) but pass rate falls (50 -> 48%), fee per funded $498 -> $519;
+-  combined cap worse. Not adopted for evaluations; code not written (user to decide; funded bench not run).
++  combined cap worse. Not adopted for evaluations. **Funded bench 11/08** (`cushion_cap_funded_vb2_output.txt`): blown 8.1 ->
++  2.3% per strategy at the same payouts: adopt for funded (FUNDED_PLAN 'Cushion cap'); code waits on the live cushion source.
+ - **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
+   career tailoring (needs the user's background).
+ 
+diff --git a/funded_strategies/FUNDED_PLAN.md b/funded_strategies/FUNDED_PLAN.md
+index e100320b..3d69d1bc 100644
+--- a/funded_strategies/FUNDED_PLAN.md
++++ b/funded_strategies/FUNDED_PLAN.md
+@@ -105,6 +105,16 @@ make it faster; its ~$5,000-a-year at 2 MNQ fits the 150K's $4,000 drawdown but
+ the user's MultiCharts report of v4 for the trade-by-trade check (`../TODO.md`); live, the drift alarm decides.
+ Code `../analysis/dual_thrust_150k_test.py`, output `../analysis/outputs/dual_thrust_150k_output.txt`.
+ 
++## Cushion cap (bench 2026-11-08, `../analysis/cushion_cap_funded.py`; adopt before the first funded account, code not written yet)
++
++Each strategy trades at most floor((balance - threshold) / its stop per MNQ) MNQ that day, on top of the cushion sizing (Bridge
++Monday Long has no stop: exempt). 1,000 paired bootstrap histories, 2 years, current plan (VB 2, without CL fade): blown
++**8.1% -> 2.3%** per strategy (payouts -$32, $11,778 -> $11,747), 1.5% if the day's stops together must fit (+$52, needs the
++strategies to share one cushion). Every start day 2018+: blown 1.5% either way (2 years). A $200 buffer cuts blown to ~0% but
++costs ~$450-725 in payouts. Evaluations: no gain (`../analysis/outputs/cushion_cap_bench_output.txt`, fails -> time-outs).
++Open: how the strategies get the cushion live (typed input each evening, or Rithmic equity, which Target Guard v2 must verify);
++cushion sizing (f) needs the same input.
++
+ ## Current plan (updated 2026-10-13): seven strategies (Vol-Control Sell dropped), faster to $13k
+ 
+ Priority: collect all 6 payouts ($13,000) sooner. **New: the Bridge's Monday Long NQ** (it ships with The Bridge,

@@ -1,0 +1,1643 @@
+{
+  "scope": "Metadata coverage of every changed path; categories do not claim line-by-line or economic verification of every file. Material findings and executed checks determine actual audit depth.",
+  "prior_reviews": [
+    "agents/codex/results/REVIEW_2026-11-01.md",
+    "agents/codex/results/REVIEW_claude_followup_20261102.md",
+    "agents/codex/results/REVIEW_kill_reply_20261102.md",
+    "agents/codex/results/noise15_20261103.md",
+    "agents/codex/results/ricochet1144_20261104.md",
+    "agents/codex/results/eval_audit_20261104.md"
+  ],
+  "paths": [
+    {
+      "path": ".claude/agents/strategy-checker.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": ".claude/skills/lab/SKILL.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": ".claude/skills/scout/SKILL.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "CLAUDE.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "DATA_NEEDS.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "DEVELOPMENT_PROCESS.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "FRIDAY_REVIEW.md",
+      "category": "withheld_before_independent_commit",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "LESSONS.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "MULTICHARTS_PITFALLS.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "NEW_CHAT_BRIEF.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "RUNBOOKS.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "TIER_LIST.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "TODO.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "TRIALS.csv",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "WATCHLIST.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "agents/claude_evidence/DATA_NEEDED_CLAUDE.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "agents/codex/EXECUTION_REFERENCES.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "agents/codex/JANE_STREET_NOTES.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "agents/codex/TASK_review_2026-11-01.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "agents/cross_review/2026-10-30_claude.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "agents/cross_review/2026-10-30_summary.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "agents/cross_review/2026-11-06_claude.md",
+      "category": "withheld_before_independent_commit",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "agents/cross_review/CODE_REVIEW_LOG.md",
+      "category": "withheld_before_independent_commit",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/account_tools.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/bad_stretch_freq.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/bridge_noise_15m_bench.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/bridge_noise_15m_earlyclose.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/bridge_noise_15m_mc_check.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/bridge_noise_15m_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/btc_monday_filter_bench.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/btc_weekend_beta_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/buy_gate.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/checker.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/daily_reversal_bertola_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/dashboard_data.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/dual_thrust_bench.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/eval_sizing_bench.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/firm_risk_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/gc_asia_atr_stop_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/gc_asia_continuation_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/journal_trades.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/kill_switch.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/lab_Q003.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/lab_Q007.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/lab_Q009.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/lab_Q010.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/lab_Q012.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/lab_Q013.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/lab_Q014.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/lab_Q016.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/lab_Q017.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/lab_Q021.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/lab_tools.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/leak_checks.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/live_guard.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/live_panels.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/live_replay_1020_1104.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/live_vs_backtest.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/long_after_green_filters.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/long_after_green_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/morning_brief.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/nocturne_bench.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/nocturne_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/onb_cushion_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/opposing_overlap_check.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/bad_stretch_freq_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/bridge_noise_15m_bench_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/bridge_noise_15m_earlyclose_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/bridge_noise_15m_mc_check_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/bridge_noise_15m_personal_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/bridge_noise_15m_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/bridge_noise_15m_trades_24h.csv",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/bridge_noise_15m_trades_rth.csv",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/bridge_noise_15m_trades_rth_longs.csv",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/btc_monday_filter_bench_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/btc_weekend_beta_ES.csv",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/btc_weekend_beta_NQ.csv",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/btc_weekend_beta_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/daily_reversal_bertola_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/accounts.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/calendar.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/checks.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/cushion.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/health.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/lab.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/lab_stats.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/lab_studies.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/live_vs_bt.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/montecarlo.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/pass_odds.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/payouts.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/silence.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/slippage.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/dashboard/trades.json",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/eval_sizing_bench_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/firm_risk_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/gc_asia_atr_stop_test.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/gc_asia_continuation_shift-60.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/gc_asia_continuation_shift0.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/leak_sweep.md",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/live_replay_1020_1104_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/long_after_green_filters_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/long_after_green_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/nocturne_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/onb_cushion_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/opposing_overlap_check_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/personal_invvol_confirm_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/personal_invvol_ladder_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/personal_invvol_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/personal_ladder_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/plan150_integer_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/ramp_budget_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/ricochet_1144_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/rollzone_24h_test_output.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/rollzone_bench_evals.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/rollzone_bench_funded.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/rollzone_bench_personal.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/swing_target_bench_evals.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/swing_target_bench_funded.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/outputs/swing_target_bench_personal.txt",
+      "category": "attributed_saved_result/source-link review; no new return rerun",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/overnight_hourly_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/override_log.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/personal_invvol_confirm.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/personal_invvol_ladder.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/personal_invvol_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/personal_ladder.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/plan150_integer_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/portfolio.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/premarket_check.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/prop_sim.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/provenance.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/ramp_budget_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/ricochet_1144_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/rollzone_24h_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/rollzone_bench.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/setup_generator_nq_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/swing_target_bench.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/t5_ema_adx_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/t5_tstat_test.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/vps_health.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/vps_status.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "apex_strategies/Apex_Chart_Monitor.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "apex_strategies/Bridge_Monday_Long_L644NQ.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "apex_strategies/NQ_Overnight_Bias.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "apex_strategies/NQ_Overnight_Bias_ADX30.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "apex_strategies/NQ_Vault_Break.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "apex_strategies/NQ_Vault_Break_SP.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "apex_strategies/Strategy_Heartbeat_Snippet.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "archive/brief_history_2026-11.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "career/APPLICATIONS.md",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "career/CHEAT_SHEET.md",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "career/practice_trial/TASK.md",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "career/practice_trial/TASK2.md",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "career/practice_trial/cl_reversion.py",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "career/practice_trial/orb_research.py",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "career/resume.html",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "career/resume.pdf",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "career/resume_section.md",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "career/resume_section_v2_my_voice.md",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/NQ_Noise_RTH_Anchor.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/checker_report.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/fills.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/meta.json",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/placebo.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/placebo.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/placebo_longs.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/replica.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/spec.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/trades.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/trades_longs.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/trades_replica_both.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/trades_replica_longs.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m/verdict.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/checker_report.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/fills.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/meta.json",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/placebo.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/trades.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/variants/ema10.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/variants/ema40.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/variants/lb14.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/variants/lb30.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/variants/m08.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/variants/m12.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/variants/nostopcap.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/variants/rr1.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/variants/s40.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/bridge_noise_15m_longs/variants/s60.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/futures_trend/README.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/futures_trend/strategy_upload.py",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/gc_asia_continuation/Gold_USA_Asia_Continuation_v4_uploaded.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/gc_asia_continuation/python_trades_shift-60.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/gc_asia_continuation/python_trades_shift0.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/gc_asia_continuation/verdict.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/lab_Q003/PREREG.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/lab_Q007/PREREG.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/lab_Q009/PREREG.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/lab_Q010/PREREG.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/lab_Q012/PREREG.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/lab_Q013/PREREG.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/lab_Q014/PREREG.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/lab_Q016/PREREG.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/lab_Q017/PREREG.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/lab_Q021/PREREG.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/nocturne/Nocturne.pdf",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/nocturne/python_nights.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/ricochet_1144/Ricochet_1144_research_note.pdf",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/ricochet_1144/S1144_signal_multicharts.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/ricochet_1144/python_trades.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/rollzone_24h/python_trades_ATR.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/rollzone_24h/python_trades_NQCAP.csv",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/rollzone_24h/spec.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "checks/candidates/rollzone_24h/verdict.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NG_1min_2017.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NG_1min_2018.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NG_1min_2019.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NG_1min_2020.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NG_1min_2021.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NG_1min_2022.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NG_1min_2023.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NG_1min_2024.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NG_1min_2025.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NG_1min_2026.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NQ_1min_2026.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/NQ_1min_ON_2026.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/live_bars/20261029.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/live_bars/20261030.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/live_bars/20261101.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/live_bars/20261102.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/live_bars/20261103.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/live_bars/20261104.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/live_bars/20261105.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/live_bars/20261106.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "data/sge_holidays.csv",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "funded_strategies/CL_Sunday_Gap_Fade.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "funded_strategies/ES_MOC_Follow.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "funded_strategies/FUNDED_PLAN.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "funded_strategies/NQ_Dual_Thrust.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "funded_strategies/NQ_Expiration_Open_Short.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "funded_strategies/NQ_Late_Day_Flow.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "funded_strategies/NQ_Monday_Long.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "funded_strategies/NQ_NFP_Fade.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "funded_strategies/NQ_Overnight_Bias_ML.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "funded_strategies/NQ_Overnight_Tick_VIX.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "funded_strategies/NQ_T_Oneside_Fade.txt",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "journal/daily/2026-10-30.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "journal/daily/2026-11-02.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "journal/daily/2026-11-03.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "journal/daily/2026-11-04.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "lab/IDEAS.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "lab/LESSONS.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "lab/README.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "lab/STOP",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "lab/ledger.json",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/budget/index.html",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/budget/ledger.json",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/budget/recurring.json",
+      "category": "nontrading_metadata_only",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/claude_alerts.txt",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/expected_setup.json",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/health/20261030.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/health/20261030_alerts.txt",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/health/20261102.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/health/20261103.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/health/20261103_alerts.txt",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/health/20261104.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/health/20261104_alerts.txt",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/health/20261105.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/health/20261105_alerts.txt",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/health/20261106.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/health/20261106_alerts.txt",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/overrides.csv",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/trades/20261029.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/trades/20261030.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/trades/20261031.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/trades/20261101.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/trades/20261102.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/trades/20261103.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/trades/20261104.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/trades/20261105.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/trades/20261106.csv",
+      "category": "logged_observations_metadata_and_prior_forensics; no broker-fill certification",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/FAILOVER.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/KILL_SWITCH.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/VPS_MAINTENANCE.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/VPS_STATUS.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/claude_alert_relay.ps1",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/kill.ps1",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/kill_test.ps1",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/run_screen.cmd",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/run_status.cmd",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/screen_push.ps1",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/status_push.ps1",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "live/vps/watchdog.ps1",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Noise 24 hr.xlsx",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Noise RTH Anchor.xlsx",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Noise default session.xlsx",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes NQ Noise rth.xlsx",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "papers/SCOUT_LOG.md",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "papers/Wei_2026_who_moves_the_price_gold_silver_sessions.pdf",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "papers/arxiv-2507.04481.pdf",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "papers/arxiv-2610.21846.pdf",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "papers/ecb-wp1901-kurov-predrift.pdf",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "papers/nyfed-sr917-overnight-drift.pdf",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "papers/ssrn-7663278.pdf",
+      "category": "input_artifact_identity; no new market/source-return replication",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "personal_strategies/PORTFOLIO.md",
+      "category": "risk_based_source_review_and_prior_review_cross_reference",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "portfolio/FAILURE_LOG.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "portfolio/README.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "portfolio/SYSTEM.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "portfolio/replication/README.md",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "portfolio/replication/overnight_nq.py",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "reports/Trading_Business_Plan_2026-10-30.pdf",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "reports/business_plan_2026-10-30.html",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "reports/render_business_plan.js",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "tools/prepush_check.py",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "tools/run_stamped.sh",
+      "category": "process/claim/source_context",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/combine_levers_test.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/plan_150k_test.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/grid24.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/grid.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/funded_lab.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/funded_bootstrap.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/funded_sim.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/funded_sim150.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/personal_portfolio.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/personal_variants.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/overnight_tick_bench.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    },
+    {
+      "path": "analysis/metrics.py",
+      "category": "dependency_source_inspection",
+      "independently_reproduced_market_outcomes": false
+    }
+  ]
+}

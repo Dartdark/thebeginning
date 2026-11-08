@@ -1,0 +1,14 @@
+--- a/analysis/long_after_green_test.py
++++ b/analysis/long_after_green_test.py
+@@ -41,3 +41,3 @@
+         if z is None: continue
+-        out.append((pd.Timestamp(g.ts[T[k + 1]]), z[0] * pv - 2 * comm, z[1]))
++        out.append((pd.Timestamp(g.ts[T[k + 1]]), z[0] * pv - comm, z[1]))
+     return pd.DataFrame(out, columns=["date", "net", "kind"])
+--- a/analysis/daily_reversal_bertola_test.py
++++ b/analysis/daily_reversal_bertola_test.py
+@@ -56,3 +56,3 @@
+         e2 = e + side * tick
+-        out.append((pd.Timestamp(g.ts[rn]), side, (x - e2) * side * pv - 2 * comm, kind))
++        out.append((pd.Timestamp(g.ts[rn]), side, (x - e2) * side * pv - comm, kind))
+     t = pd.DataFrame(out, columns=["date", "side", "net", "kind"])

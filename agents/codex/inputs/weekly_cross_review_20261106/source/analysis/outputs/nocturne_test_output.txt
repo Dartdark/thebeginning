@@ -1,0 +1,42 @@
+Nocturne (L. Franceschetti research note, user upload 2026-10-30; checks/candidates/nocturne/): Blose-Gondhalekar-Kort
+
+N0: entries per night avg 1.71 (author: 2,021 trades over ~1,800 nights)
+   2017-2026 all          nights 1449  net $  130,751  avg $  90.2  t  2.56  PF 1.21  win 67%  worst $-11,402
+   dev 2017-22/10         nights  805  net $   79,028  avg $  98.2  t  2.55  PF 1.28  win 64%  worst $-7,580
+   OOS1 22/10-23          nights  200  net $   23,266  avg $ 116.3  t  1.59  PF 1.30  win 63%  worst $-3,907
+   OOS2 2024-26           nights  444  net $   28,457  avg $  64.1  t  0.75  PF 1.11  win 73%  worst $-11,402
+   by year: 2017 $1.0k  2018 $5.9k  2019 $22.3k  2020 $31.9k  2021 $13.4k  2022 $13.0k  2023 $14.8k  2024 $11.0k  2025 $0.2k  2026 $17.3k
+   worst night $-11,402 (2025-04-04), worst open loss $-17,402; nights below -$5,000: 38
+   metrics 2018-26: Sharpe 0.85  Sortino 0.98  PF 1.21  Calmar 0.54  Ulcer 4.87  maxDD $26,702
+   metrics 2023+: Sharpe 0.55  Sortino 0.62  PF 1.13  Calmar 0.42  Ulcer 9.72  maxDD $26,702
+
+N1: entries per night avg 1.67 (author: 2,021 trades over ~1,800 nights)
+   2017-2026 all          nights 1449  net $   56,163  avg $  38.8  t  1.35  PF 1.09  win 61%  worst $-3,976
+   dev 2017-22/10         nights  805  net $   48,284  avg $  60.0  t  1.90  PF 1.18  win 58%  worst $-3,950
+   OOS1 22/10-23          nights  200  net $   12,336  avg $  61.7  t  0.82  PF 1.14  win 62%  worst $-3,076
+   OOS2 2024-26           nights  444  net $   -4,457  avg $ -10.0  t -0.15  PF 0.98  win 67%  worst $-3,976
+   by year: 2017 $0.9k  2018 $-6.3k  2019 $23.9k  2020 $6.9k  2021 $15.4k  2022 $15.7k  2023 $4.1k  2024 $1.6k  2025 $-16.2k  2026 $10.1k
+   worst night $-3,976 (2024-07-19), worst open loss $-3,976; nights below -$5,000: 0
+   metrics 2018-26: Sharpe 0.44  Sortino 0.55  PF 1.09  Calmar 0.18  Ulcer 11.43  maxDD $34,518
+   metrics 2023+: Sharpe -0.01  Sortino -0.01  PF 1.00  Calmar -0.00  Ulcer 24.76  maxDD $34,518
+
+N2: entries per night avg 1.70 (author: 2,021 trades over ~1,800 nights)
+   2017-2026 all          nights 2262  net $   68,335  avg $  30.2  t  0.99  PF 1.06  win 66%  worst $-17,402
+   dev 2017-22/10         nights 1245  net $   37,112  avg $  29.8  t  0.87  PF 1.07  win 64%  worst $-8,724
+   OOS1 22/10-23          nights  304  net $    7,680  avg $  25.3  t  0.40  PF 1.06  win 59%  worst $-3,907
+   OOS2 2024-26           nights  713  net $   23,543  avg $  33.0  t  0.46  PF 1.05  win 72%  worst $-17,402
+   by year: 2017 $1.6k  2018 $4.8k  2019 $13.6k  2020 $29.6k  2021 $0.2k  2022 $-4.0k  2023 $-1.1k  2024 $27.7k  2025 $-2.5k  2026 $-1.6k
+   worst night $-17,402 (2026-06-23), worst open loss $-18,120; nights below -$5,000: 68
+   metrics 2018-26: Sharpe 0.32  Sortino 0.37  PF 1.06  Calmar 0.19  Ulcer 11.04  maxDD $38,500
+   metrics 2023+: Sharpe 0.21  Sortino 0.24  PF 1.04  Calmar 0.15  Ulcer 15.93  maxDD $38,500
+
+R^2 filter (N2 nights split by the filter):
+   R2 >= 0.3              nights 1449  net $  130,751  avg $  90.2  t  2.56  PF 1.21  win 67%  worst $-11,402
+   R2 < 0.3               nights  813  net $  -62,416  avg $ -76.8  t -1.35  PF 0.87  win 64%  worst $-17,402
+   dev 2017-22/10: filtered $99 vs rest $-95 a night
+   OOS1 22/10-23: filtered $92 vs rest $-150 a night
+   OOS2 2024-26: filtered $73 vs rest $-18 a night
+
+Overlap N0 vs Overnight Tick: 338 shared nights of 1449 / 536; daily P&L corr +0.19
+
+Overlap N1 vs Overnight Tick: 338 shared nights of 1449 / 536; daily P&L corr +0.21
