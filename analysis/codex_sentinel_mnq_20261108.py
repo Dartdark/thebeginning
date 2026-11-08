@@ -195,6 +195,10 @@ def replay(g, sig):
     for i, r in t.iterrows():
         s = spec.loc[r.day]
         reason = 'stop' if r.kind == 0 else 'scheduled_flat'
+        if r.kind == 0 and r.j1 > r.j0:
+            stop_px = r.entry - r.side * s.stop
+            if r.side * (g.o[int(r.day), int(r.j1)] - stop_px) <= 0:
+                reason = 'stop_gap'
         if r.kind == 2 and bool(s.dynamic):
             # Stops through the decision close have already been walked. At the
             # next open both a market exit and a gap-through stop fill at the open.
@@ -221,7 +225,12 @@ def replay(g, sig):
     for col, jscol in [('entry_bar_close', 'j0'), ('exit_bar_close', 'j1')]:
         t[col] = pd.to_datetime(t.date) + pd.to_timedelta(480 + t[jscol].astype(int), unit='min')
     t['entry_at'] = t.entry_bar_close - pd.Timedelta(minutes=1)
-    t['exit_at'] = t.exit_bar_close.where(t.reason.eq('scheduled_flat'), t.exit_bar_close - pd.Timedelta(minutes=1))
+    t['exit_interval_start'] = t.exit_bar_close - pd.Timedelta(minutes=1)
+    t['exit_interval_end'] = t.exit_bar_close
+    t['exit_at'] = t.exit_bar_close.where(t.reason.eq('scheduled_flat'), t.exit_interval_start)
+    # OHLC locates an intraminute stop only within an interval. Do not label
+    # that interval's opening boundary as a known execution timestamp.
+    t.loc[t.reason.eq('stop'), 'exit_at'] = pd.NaT
     return t
 
 
