@@ -2458,3 +2458,25 @@ Source: [EOS/NFP/CL ingredient round](results/ingredients_events_20261108.md), f
 - The replay explicitly exposes skipped missing held bars and last-close fallback exits. Source-price agreement
   and five synthetic fixtures do not certify native fills, dated rolls or actual bar/receipt latency. Next use only
   for a separately preregistered changed strategy/account test after those prerequisites; no live/VPS/broker change.
+
+### E09/E15 follow-up — Monday entry clocks, Sunday targets and Bridge path risk (2026-11-08)
+
+Source: [Monday/Bridge/MOC ingredient round](results/ingredients_monday_moc_20261108.md), frozen plan `30b53e7`;
+15 definitions, design checkpoint `756d29d` before unchanged recent replay. This is component attribution,
+not a selected execution change or new account-survival estimate.
+
+- Preserve the actual Sunday target timestamp when attributing a Bridge trade to Monday. The retained source's
+  Monday `j1=0` marker for a Sunday fill is not the execution time. Four design and seven recent original trades
+  complete on Sunday. Start adverse-path inspection after the Sunday 19:00 CLOSE entry, including the path
+  before midnight; an old source next-morning `ovn` mark is not realized overnight P&L after an earlier target.
+- Original Bridge's 2025-01-27 trade shows an observed adverse mark of −$16,427 per NQ before a −$5,757 exit.
+  No held bars are missing on that source event. At the assumed native micro fee this mark is about −$1,643
+  per MNQ. Elsewhere source gaps remain, and neither daily DD nor one observed mark certifies the worst native
+  path or whether other book positions offset it before a breach. A profit target does not cap losing exposure.
+- Bridge's target retains source touch fills and favorable-gap improvement. This is not a queue/trade-through
+  certification or a waiver of future candidate fill controls. Target-bar high/low order remains flagged.
+  Source Monday 08:30 CLOSE differs from Monday Long's 08:31-labelled OPEN at 08:30 civil CT. ES MOC's
+  14:51-labelled OPEN is 14:50 civil CT; preserve its ES $50 multiplier and $12.50 tick separately from NQ.
+- MON's last-close fallbacks and Bridge's retrospective Monday 14:55 coverage check are retained and reported.
+  Source agreement alone cannot validate live-known availability. Keep costs, missing paths, early closes,
+  actual labels/receipts and dated rolls explicit before a separate native/account replay. No live changes follow.
