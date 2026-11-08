@@ -46,13 +46,16 @@ def setups(days, k=0.5, band=1.2, hol=True):
     return pd.DataFrame(rows)
 
 
-def trade(g, up, dn, sl=50.0, tp=100.0, entry_bar_stop=True, last=1430, flat=1455, side_only=0, first=None):
+def trade(g, up, dn, sl=50.0, tp=100.0, entry_bar_stop=True, last=1430, flat=1455, side_only=0, first=None, t_start=0, flip_rng=None):
+    # t_start (CT hhmm: no signal bar before it) and flip_rng (random side at the real signal bar: placebo) added 2026-11-08 (dt_pt_late_test.py)
     t, c = g.time.to_numpy(), g.close.to_numpy()
     o, h, l = g.open.to_numpy(), g.high.to_numpy(), g.low.to_numpy()
     for i in range(len(g) - 1):
         if t[i] > last: return None
         side = first if first is not None else (1 if c[i] > up else -1 if c[i] < dn else 0)
         if side == 0 or (side_only and side != side_only): continue
+        if t[i] < t_start: continue
+        if flip_rng is not None: side = int(flip_rng.choice([-1, 1]))
         e = o[i + 1]; trig = c[i]
         for j in range(i + 1, len(g)):
             if j > i + 1 and t[j - 1] >= flat:
