@@ -126,6 +126,9 @@ bottom). Times are Central (CT).
       MNQ 1-minute chart, 24h CME session, Data1 only, Intrabar Order Generation OFF; inputs Qty 2, BO_MaxStopMult 1 (defaults),
       HeartbeatTag TW150 (or TW150-<n> per account); funded accounts also UseCushion true + the cushion inputs (FUNDED_PLAN 'Cushion cap').
       Compile and read the Output tab ('compiled successfully'; first compile of this file). Claude adds TW150 to expected_setup.json.
+      Then (outside market hours) run a MultiCharts backtest of this file on NQ 1-minute 2018+ with Qty 1, BO_MaxStopMult 1, and send
+      Claude the List of Trades: Claude checks it trade by trade against the Python port (analysis/twin_continuation_test.py, v21=True)
+      so the added kill / heartbeat / cushion blocks change no trades.
 - [ ] Each new account: 4 charts, account number typed in every strategy's Auto Trading gear, rejected-orders limit 10,
       initial position Flat; send Claude the number (watchdog / dashboard / expected_setup.json) Claude sets its status to "live" in expected_setup.json: that also un-mutes the watchdog's phone alerts (muted 2026-11-05 while no account is live).
 - [ ] Stop buying if the drift alarm fires (live clearly below backtest). No more new 50Ks; #2 runs to the end.
