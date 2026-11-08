@@ -2274,3 +2274,23 @@ cannot certify intratrade pathunits. Parameterize nativepointvalue and verify ad
 accountsimulations. Also confirmed the purported stop-onlyablation changes a coupled target; holdother
 exitsettings fixed or label the jointintervention. Sourcecode/static/synthetic evidence only, no new market
 returns, observed execution savings or plan/live changes. Proposed fixes remain for review.
+
+
+### E09/E19 follow-up — Ingredients, exit windows and native micro cost bridges
+
+[Three-strategy diagnostic](results/ingredients_three_20261108.md), user-authorized2026-11-08,13frozen
+DT/RS/LDFcases,2018–22then already-seen2023–2026-10-09. No promotion or livechange. DT's fixedtarget
+clips historical totalprofit but improves recentDD; RS's magnitude threshold concentrates exposure and
+removed profitable early trades; LDF14:30vs15:00exit is strongly period-dependent. These are conditional
+source-port comparisons, not measured forcedflow or universally optimal execution.
+
+Nestedfilter attribution was checked on common-date side/entry/exit/net and compared with1000within-year
+randomdrops. Per-trade mean alone is insufficient. Keep target unchanged in a stop-only intervention; all
+13cases preserve specified nonablated exits. LDFsource embeds ticks in prices, so expose its gross/commission/
+slippage bridge before nativeMNQ conversion. $7.25NQcommission divided by10 is not the modeled$1.25MNQfee.
+
+Source-like missingminute policies and differing target-fill rules remain: unknown nominalheldcloses are
+counted, not futurefilled; RSretains within-rowforwardfill, DTobservednextbar and LDFskippedmissingbars.
+Rerunning a port is not fresh MC/nativefill parity or a risk guarantee. Before any proposed newrule: separate
+preregistration, native path/parity checks, then current-book comparison at integer size. No measured execution
+savings, accountpayout improvement, funding recommendation or new source-data purchase established here.
