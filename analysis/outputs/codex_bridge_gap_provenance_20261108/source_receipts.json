@@ -1,0 +1,65 @@
+{
+  "checked_date": "2026-11-08",
+  "scope": "Public read-only documentation; no authentication, keys, purchases, rebuild or external messages.",
+  "sources": [
+    {
+      "id": "CME_pause_change",
+      "url": "https://www.cmegroup.com/notices/electronic-trading/2021/06/20210621.html",
+      "status": "Primary CME notice opened",
+      "finding": "Eliminates 15:15-15:30 CT pause from trade date 2021-06-28; normal session 17:00-16:00 CT with 16:00-17:00 maintenance."
+    },
+    {
+      "id": "CME_Bush_closure",
+      "url": "https://investor.cmegroup.com/news-releases/news-release-details/cme-group-us-equity-interest-rate-markets-close-national-day",
+      "status": "Primary CME announcement retrieved",
+      "finding": "2018-12-05 US equity products close at 08:30 CT after overnight session and reopen at regular time for next trade date."
+    },
+    {
+      "id": "Databento_continuous",
+      "url": "https://databento.com/docs/conventions/symbology",
+      "status": "Primary vendor documentation opened",
+      "finding": "v uses previous day's trading volume; rank zero selects highest-volume contract; continuous prices are unadjusted. Does not establish this Bridge file's original request/mapping or splice."
+    },
+    {
+      "id": "Databento_OHLCV",
+      "url": "https://databento.com/docs/schemas/ohlcv",
+      "status": "Primary vendor documentation opened",
+      "finding": "Vendor OHLCV emits no record for an interval without trades. Those timestamps mark interval starts; Bridge documentation instead specifies ET minute-close timestamps. Native Bridge engine no-trade policy not independently recovered."
+    },
+    {
+      "id": "Databento_degraded_capture",
+      "url": "https://issues.databento.com/b/6vrl98vl/feature-ideas/support-downloading-of-on-demand-zip-files-for-batch-jobs-in-the-python-client",
+      "status": "Historical primary-vendor issue visible in search-indexed content only; direct issue slug returned generic current board",
+      "finding": "Indexed issue titled Degraded data on GLBX.MDP3 for 2020-02-27, 2020-02-28, 2020-06-30, 2020-07-01, attributed to Tessa Hollinger on 2023-09-14, says captures for June 30 stopped around 16:30Z. Also lists 2017-11-13, 2019-01-15, 2019-02-22, 2019-03-13, 2019-03-26. This is dated vendor corroboration, not a verified exact NQ outage interval or current repair status.",
+      "direct_attempt": "https://issues.databento.com/b/6vrl98vl/feature-ideas/degraded-data-on-glbxmdp3-for-2020-02-27-2020-02-28-2020-06-30-2020-07-01"
+    },
+    {
+      "id": "CME_2019_halt_post",
+      "url": "https://twitter.com/CMEGroup/status/1100573462303776768",
+      "status": "Direct primary post returned 403; embedded CME statement located via contemporary article; event remains candidate",
+      "finding": "Candidate explanation for 2019-02-26 evening gap. No exact per-instrument exchange status records acquired."
+    },
+    {
+      "id": "NYSE_2020_halts",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2021-10-19/pdf/2021-22685.pdf",
+      "status": "Primary regulatory notice retrieved",
+      "finding": "NYSE filing identifies market-wide circuit breakers on March 9, 12, 16 and 18, 2020. Does not authenticate every overnight NQ no-print minute or all Bridge gap boundaries."
+    },
+    {
+      "id": "calendar_code_crosscheck",
+      "url": "https://raw.githubusercontent.com/rsheftel/pandas_market_calendars/master/pandas_market_calendars/calendars/cme.py",
+      "status": "Maintainer implementation inspected as a cross-check, not exchange certification",
+      "finding": "Confirms separate pre/post-2021 pause handling and Good Friday 2021 partial-session exception. Black Friday/Christmas Eve historical close times cannot be certified by the current generic implementation: observed 13:15 ET differs from its generic 12:00 CT rule. No library calendar was treated as authoritative."
+    },
+    {
+      "id": "Bridge_local_docs",
+      "url": null,
+      "paths": [
+        "C:\\Program Files\\The Bridge\\MANUAL.pdf",
+        "C:\\Users\\dmoto\\Downloads\\TheBridge.zip::TheBridge-2.9.3/MANUAL.pdf"
+      ],
+      "status": "Installed and original downloaded-archive manuals read without running installer",
+      "finding": "Both state ET close-stamped bars and a continuous builder joining contract history/features on the same roll, without supplying exact build-bound dated-contract mappings. Original archive manual cover says version 2.7; installed manual cover says 2.9.6 while current executable version is 2.9.13. Documentation/version numbers are not original build receipts."
+    }
+  ]
+}

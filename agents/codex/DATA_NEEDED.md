@@ -412,3 +412,16 @@ This clears basic full-session OHLC/signed-volume availability, not dated-contra
 dealer-position or live-execution data gates. No strategy testing authorized by this receipt.
 [Acquisition report](results/bridge_history_20261108.md),
 [hash/schema audit](../../analysis/outputs/codex_bridge_history_20261108_audit.json).
+
+Follow-up: [gap/build investigation](results/bridge_gap_provenance_20261108.md) preserves every
+source/export hash. CME verifies the pre-June28,2021 daily pause and December5,2018 Bush closure.
+After regular closures, that special closure and **tentative** holiday matches, 3,964 minute labels
+remain unresolved; 1,113 have positive-volume counterpart bars in other owned NQ exports.
+February28,2020 has346 residual minutes and June30,2020 has514, with346/513 counterpart bars;
+a historical indexed vendor capture-degradation issue corroborates those dates, not precise boundaries
+or current fix status. Holiday hypotheses account for another27,136 labels without full direct calendar
+certification. No fill/repair or signed-volume reconstruction. Installer/manual archives were inventoried,
+but original build receipt, dated symbol/ID map and roll-effective clocks remain missing. Current
+NQ.v.0 semantics imply volume-ranked unadjusted prices only **if** the original build used that input
+without later transformation. Next: obtain pre-existing hash-linked build/mapping records and native
+status/trade evidence for listed gaps; no API-key access, purchases or repeat rebuilds.

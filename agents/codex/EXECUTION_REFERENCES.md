@@ -304,6 +304,15 @@ Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 
 ### E11 — Event-information clocks and attribution
 
+- Bridge history follow-up, retained 2026-11-08: [gap/build audit](results/bridge_gap_provenance_20261108.md).
+  Missing one-minute bars mix normal closures, historical schedule changes, no-print intervals and source
+  omissions. CME's daily 15-minute pause ended June 28, 2021; current hours cannot be applied retrospectively.
+  After scheduled closures and tentative holiday matches, 3,964 labels remain unresolved; other owned
+  positive-volume bars corroborate 1,113. They do not restore missing aggressor sides or executable fills.
+  Current NQ.v.0 semantics do not certify original dated rolls/build provenance. Preserve raw hashes and
+  require source/status, mapping and clock reconciliation before replay/fill claims. Original exports
+  unchanged; no imputation, return test, execution-saving estimate or live/platform change.
+
 - Crypto regime/insurance follow-up, retained 2026-11-08: Han,
   [SSRN 6477100 full review](results/ssrn6477100_review_20261108.md), March 2026, Tables 1/3/7/8 and pp. 7–15.
   A regime labelled from final-period buy-and-hold return is unavailable at entry. A causal EMA can avoid that
