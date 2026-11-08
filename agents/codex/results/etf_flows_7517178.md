@@ -74,7 +74,9 @@ Cross-sectional effects can net out at the index level, so there is no justified
 **Conditional personal-stock research**, not current allocation. Need historical daily as-of NAV/share counts on consistent split
 bases, point-in-time ETF category and physical holdings weights, stock market caps/total returns, as-of index membership including
 exits, publication/receipt timestamps, and short availability/fees. Today's ETF holdings cannot recreate a historical formation month.
-An ex-post month-end holdings snapshot must not be used before its actual publication. Current holdings, TQQQ assets or price bars
+An ex-post month-end holdings snapshot must not be used before its actual publication. With holdings beginningJune2020, a full
+twelve-month pressure history would first mature aroundJune2021; any earlier2021 portfolio points need explicit warm-up disclosure.
+Current holdings, TQQQ assets or price bars
 cannot silently substitute for this cross-sectional panel.
 
 Owned filename/schema census found BTC/CME and leveraged-ETF price inputs but no admitted Trackinsight-style historical holdings,
