@@ -2119,3 +2119,11 @@ Evidence: PDF/table images, formula counterexample, unit illustration and pinned
 outputs differ from paper; no author code or market-path return executed. Source holdings do not establish Apex intraday fit.
 Next only with genuinely new evidence: resolve denominator policy, indicator/position units, exact causal dip/exit/fill clocks
 and code/output versions before any eligible preregistered test. No measured savings, strategy/data-shopping entry or live change.
+
+
+E09/E19/E30 reconstruction follow-up (2026-11-08): user-authorized corrected
+[research components](results/pair7065278_reconstruction_20261108.md) pass28synthetic unit, quote-clock,
+causal-indicator and state-transition assertions. Explicit GBX/GBP replaces the price-level heuristic;
+15:00UTC is a provisional ordinary-session overlap, still requiring authenticated calendars and later fills.
+This is not a complete execution/cash engine, measured saving, profitable strategy or reversal of the source
+rejection. New free history probes hit proxy403. Missing native history/borrow/cash keeps returns blocked.
