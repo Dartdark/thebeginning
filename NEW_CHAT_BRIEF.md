@@ -34,8 +34,12 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
 - **Codex weekly review 11/06 (read 11/08), 4 findings on Claude's code, all handled:** (1) evaluation engines locked the floor at
   start + $100 (funded rule); Apex evaluations keep trailing: corrected engine (`cushion_cap_bench.run(evalrule=True)`,
   `analysis/outputs/eval_rule_fix_check_output.txt`): **50K plan pass 50.0 -> 49.0%, 150K 41.0 -> 35.9% (fee per funded
-  $608 -> $693)**; ranking of sizes unchanged. Not yet fixed: DLL fill at the limit, 30-calendar-day clock, the other benches
-  (combine_levers_test / plan_150k_test still use the lock). (2) held-path gaps: 4% of long-after-green trades, result unchanged.
+  $608 -> $693)**; ranking of sizes unchanged. **All engines fixed 11/08** (combine_levers_test, plan_150k_test, portfolio.challenge,
+  onb_cushion, vb_cushion_sizing, profit_cap, twin_150k; funded engines keep the PA lock, correct) and 15 plan benches rerun: budget
+  ramp 150K pass 38.1 -> 33.4% (75% edge 28.9 -> 24.4%), 2027 median (job ends, 1 a day) $252k -> $237k / $89k -> $72k; P(no funded
+  by Dec 31) 14% / 31% unchanged; same-day batch fails together 48 -> 54% (firm_risk); every size / cap / filter ranking unchanged.
+  Not rerun: eval_sizing_bench part C (needs g24_ext), real_fee_bench and replace_weak_bench (need rs_trades.csv), candidate benches.
+  Still not modelled: DLL fill at the limit, 30-calendar-day clock. (2) held-path gaps: 4% of long-after-green trades, result unchanged.
   (3) Bertola / long-after-green charged commission twice: fixed, reruns saved (verdicts unchanged). (4) green-day filters
   relabelled exploratory.
 - **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);

@@ -1,15 +1,16 @@
+[provenance] code 387381f8 | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
 Overnight Bias (and VB) gated by the evaluation cushion (user, 2026-10-30, after #3 failed: ~$1,823 room, ONB short
 
 50K evaluation (x1.0), every start day 2018-26:
-   plan (everything always)           pass 50.1% (18-22 46.7%, 23-26 54.5%)  fail 48.1%  unfinished  1.9%  fails per pass 0.96
-   ONB off when cushion < $1,100      pass 46.7% (18-22 41.8%, 23-26 53.3%)  fail 45.1%  unfinished  8.2%  fails per pass 0.96
-   ONB off when cushion < $1,650      pass 46.3% (18-22 40.3%, 23-26 54.2%)  fail 41.9%  unfinished 11.8%  fails per pass 0.90
-   ONB risk <= 50% of cushion         pass 48.0% (18-22 41.6%, 23-26 56.6%)  fail 44.0%  unfinished  8.0%  fails per pass 0.92
-   ONB + VB off when cushion < $1,200 pass 36.2% (18-22 34.1%, 23-26 39.1%)  fail 11.3%  unfinished 52.5%  fails per pass 0.31
+   plan (everything always)           pass 49.0% (18-22 45.8%, 23-26 53.3%)  fail 49.3%  unfinished  1.7%  fails per pass 1.01
+   ONB off when cushion < $1,100      pass 46.2% (18-22 41.9%, 23-26 51.8%)  fail 45.8%  unfinished  8.1%  fails per pass 0.99
+   ONB off when cushion < $1,650      pass 45.3% (18-22 39.7%, 23-26 52.7%)  fail 43.2%  unfinished 11.5%  fails per pass 0.95
+   ONB risk <= 50% of cushion         pass 46.9% (18-22 40.8%, 23-26 55.1%)  fail 45.0%  unfinished  8.1%  fails per pass 0.96
+   ONB + VB off when cushion < $1,200 pass 35.0% (18-22 33.7%, 23-26 36.8%)  fail 11.5%  unfinished 53.5%  fails per pass 0.33
 
 150K evaluation (x2.5), every start day 2018-26:
-   plan (everything always)           pass 41.0% (18-22 38.9%, 23-26 43.8%)  fail 56.6%  unfinished  2.3%  fails per pass 1.38
-   ONB off when cushion < $2,750      pass 37.2% (18-22 31.4%, 23-26 45.0%)  fail 53.7%  unfinished  9.0%  fails per pass 1.44
-   ONB off when cushion < $4,125      pass 27.6% (18-22 19.6%, 23-26 38.1%)  fail 50.7%  unfinished 21.8%  fails per pass 1.84
-   ONB risk <= 50% of cushion         pass 36.8% (18-22 30.6%, 23-26 45.1%)  fail 52.2%  unfinished 11.0%  fails per pass 1.42
-   ONB + VB off when cushion < $3,000 pass 24.7% (18-22 23.3%, 23-26 26.6%)  fail 10.7%  unfinished 64.6%  fails per pass 0.43
+   plan (everything always)           pass 35.9% (18-22 35.0%, 23-26 37.2%)  fail 63.3%  unfinished  0.8%  fails per pass 1.76
+   ONB off when cushion < $2,750      pass 34.1% (18-22 27.4%, 23-26 43.0%)  fail 59.5%  unfinished  6.4%  fails per pass 1.74
+   ONB off when cushion < $4,125      pass 26.0% (18-22 17.5%, 23-26 37.3%)  fail 54.9%  unfinished 19.1%  fails per pass 2.11
+   ONB risk <= 50% of cushion         pass 33.1% (18-22 27.5%, 23-26 40.5%)  fail 58.6%  unfinished  8.3%  fails per pass 1.77
+   ONB + VB off when cushion < $3,000 pass 18.4% (18-22 19.0%, 23-26 17.6%)  fail 11.5%  unfinished 70.1%  fails per pass 0.62

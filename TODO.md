@@ -132,7 +132,8 @@ bottom). Times are Central (CT).
   ~$100k at 75% / ~$60-70k bad year, nearly all March-December. Plan Jan-Feb with no trading income.
   If the job continues through 2027 (~$850/wk after tax): reach 20 slots by ~February from pay, then switch pay to the
   personal account from ~March: ~$320k backtest / ~$175k at 75% from Apex (median), + personal account ~$30k by autumn.
-  Budget simulation (analysis/ramp_budget_test.py, 10/30): job to Dec 24 -> 2027 median ~$252k backtest / ~$89k at 75% (whole contracts, rerun 10/30);
+  Budget simulation (analysis/ramp_budget_test.py; rerun 11/08 with the corrected evaluation floor, 150K pass 33% / 24% at 75% edge):
+  job to Dec 24 -> 2027 median ~$237k backtest / ~$72k at 75% (was $252k / $89k);
   13-31% of histories have NO funded account by Dec 31 (then $0 in 2027 without the job). Buy ONE evaluation a day,
   not all on payday (same-day accounts pass or fail together).
 
