@@ -13,6 +13,7 @@ bottom). Times are Central (CT).
   typing each evening, and it guards the whole account's target. [Apex_Target_Guard_v2](https://github.com/Dartdark/thebeginning/blob/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Target_Guard_v2.txt)
   ([raw](https://raw.githubusercontent.com/Dartdark/thebeginning/claude/nq-trading-strategy-params-5h9d20/apex_strategies/Apex_Target_Guard_v2.txt)).
   Claude first checks from the logs whether Rithmic's Equity moves with open P&L (next live trade), then tells you to install it.
+  **2026-11-08: checked from the 10/30-11/04 ACCT logs: Equity moves with open P&L -> EquityHasOpenPL true; install with the next account.**
 
 - [x] (2026-10-29, user: feed on the chart) **NQ Daily Bar Feed (2026-10-29; VPS, outside market hours, ~5 min):** create `C:\TradingLogs\bars\`; new 1-minute @NQ
   chart (or @MNQ), Exchange time, CME 24h, loaded from 10/05, no strategy; add the indicator

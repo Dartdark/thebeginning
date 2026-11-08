@@ -112,8 +112,15 @@ Monday Long has no stop: exempt). 1,000 paired bootstrap histories, 2 years, cur
 **8.1% -> 2.3%** per strategy (payouts -$32, $11,778 -> $11,747), 1.5% if the day's stops together must fit (+$52, needs the
 strategies to share one cushion). Every start day 2018+: blown 1.5% either way (2 years). A $200 buffer cuts blown to ~0% but
 costs ~$450-725 in payouts. Evaluations: no gain (`../analysis/outputs/cushion_cap_bench_output.txt`, fails -> time-outs).
-Open: how the strategies get the cushion live (typed input each evening, or Rithmic equity, which Target Guard v2 must verify);
-cushion sizing (f) needs the same input.
+**Code 2026-11-08 (not compiled yet):** `UseCushion` block in VB_SP, ONB ML, Monday Long, LDF, NFP, EOS, CL fade. It reads
+Rithmic Equity (`GetRTAccountEquity(AccountName)`; includes open P&L, verified from the 11/04 logs), tracks the highest
+end-of-day equity itself (day rolls 16:00 CT), threshold = min(LockBalance, peak - TrailDD), then size x clip(cushion / CushionRef,
+CushionMin, 1) and cap at floor(cushion / stop $ per contract). Funded chart inputs: UseCushion true, AccountName exact,
+StartBalance / TrailDD / LockBalance / CushionRef (50K 50000 / 2000 / 50100 / 1500; 150K 150000 / 4000 / 150100 / 3000),
+**PeakSeed = the highest end-of-day balance so far (new account: StartBalance; retype after any restart or recompile, else
+the threshold is understated; 0 = no entries)**. Default UseCushion false: evaluations and backtests unchanged.
+Live sizing differs from the bench in one way: it reads equity at the signal (other charts' open P&L included), the bench
+at the day's start.
 
 ## Current plan (updated 2026-10-13): seven strategies (Vol-Control Sell dropped), faster to $13k
 

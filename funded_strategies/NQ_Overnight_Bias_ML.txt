@@ -77,8 +77,17 @@ Inputs:
 	EnableLongs(true),
 	EnableShorts(true),
 	ScoreFile(""),
-	HeartbeatTag("");      { live guard: the chart's logger tag; empty = no heartbeat }
-Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Bias_ML 2026-11-05");   { code version: bump the date on every change }
+	HeartbeatTag(""),      { live guard: the chart's logger tag; empty = no heartbeat }
+	UseCushion(false),      { FUNDED cushion guard (2026-11-08, FUNDED_PLAN 'Cushion cap'): true on funded charts only }
+	AccountName(""),        { the Apex account, typed exactly, e.g. PA-APEX-681524-05 (Rithmic Equity is read for it) }
+	StartBalance(50000),
+	TrailDD(2000),          { 50K 2000 / 150K 4000 }
+	LockBalance(50100),     { 50K 50100 / 150K 150100 }
+	PeakSeed(0),            { highest END-OF-DAY balance so far (new account: StartBalance); RETYPE after any restart / recompile; 0 = no entries }
+	CushionRef(1500),       { full size from this cushion (50K 1500 / 150K 3000) }
+	CushionMin(0.5);        { size floor of the cushion sizing }
+Variables: CE(0), CEPrev(0), CK(0), CKLast(0), PeakEOD(0), Thr(0), Cush(0), CF(0);   { cushion guard }
+Variables: HB_Last(-1), HB_Key(0), HB_Day(""), HB_Ver("NQ_Overnight_Bias_ML 2026-11-08");   { code version: bump the date on every change }
 
 Variables:
 	EntryBuf(0),
@@ -305,6 +314,19 @@ if ORDone and Bias <> 0 and ATRv > 0 and TradedToday = false and MarketPosition 
 	StopPts = StopAtrPct * ATRv;
 	Qty = NumContracts;
 	if RiskPerTrade > 0 then Qty = Floor(RiskPerTrade / (StopPts * BigPointValue));
+	{ cushion guard (2026-11-08): size by the cushion above Apex's threshold, and never risk more than the cushion at the
+	  stop. Real time only (backtests unchanged). Equity missing or PeakSeed 0 -> no entry. }
+	if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 then begin
+		CE = GetRTAccountEquity(AccountName);
+		Thr = MinList(LockBalance, MaxList(PeakEOD, StartBalance, PeakSeed) - TrailDD);
+		Cush = CE - Thr;
+		if CE <= 0 or Cush <= 0 or PeakSeed <= 0 then Qty = 0
+		else begin
+			CF = MinList(1, MaxList(CushionMin, Cush / CushionRef));
+			Qty = Floor(Qty * CF + 0.000001);
+			if StopPts > 0 then Qty = MinList(Qty, Floor(Cush / (StopPts * BigPointValue)));
+		end;
+	end;
 	if Qty >= 1 then begin
 		{ live fix (2026-10-14): a stop order on the wrong side of the market is rejected by the broker
 		  ("Invalid StopMarket order parameters"), so when price is already at / through the level
@@ -354,5 +376,16 @@ if HeartbeatTag <> "" and GetAppInfo(aiRealTimeCalc) = 1 and LastBarOnChart then
 		FileAppend("C:\TradingLogs\" + HB_Day + ".csv", "SIG," + HeartbeatTag + "," + GetSymbolName + "," + HB_Ver + ","
 			+ NumToStr(MarketPosition * CurrentContracts, 0) + ",,,,,,,," + HB_Day + "," + NumToStr(CurrentTime, 0) + NewLine);
 		HB_Last = HB_Key;
+	end;
+end;
+
+// Cushion guard tracker (2026-11-08): the highest END-OF-DAY account equity (Apex trails the threshold on it). The day
+// rolls at 16:00 CT; the last equity read before the roll is that day's close. Real time only. Log only: no orders.
+if UseCushion and GetAppInfo(aiRealTimeCalc) = 1 then begin
+	CE = GetRTAccountEquity(AccountName);
+	if Time >= 1600 then CK = Date + 1 else CK = Date;
+	if CE > 0 then begin
+		if CKLast <> 0 and CK <> CKLast and CEPrev > 0 then PeakEOD = MaxList(PeakEOD, CEPrev);
+		CKLast = CK; CEPrev = CE;
 	end;
 end;

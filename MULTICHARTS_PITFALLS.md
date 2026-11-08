@@ -268,3 +268,9 @@ failed, auto-trading off on all its charts. EOD-trailing accounts still fail on 
   right after `GetFileAttributesA` returns -1; 2 / 3 = not found (no KILL), anything else = UNKNOWN -> no new entries. Risk:
   MultiCharts may make other Windows calls between the two DLL calls on its thread and overwrite the error code; if the VPS
   logs NoEntry with no KILL file, that is the cause (then drop the tri-state line, keep the folder check).
+
+- **Rithmic account Equity includes open P&L (VERIFIED 2026-11-08 from the Chart Monitor's ACCT logs, field 7 =
+  GetRTAccountEquity):** on 11/04 account -04 read 150,137 -> 148,691 -> 148,420 at 5-minute steps while ONB was open; on
+  10/30 -03 and 11/03 -04 the same. NetWorth reads 0 for Apex. So Target Guard v2's EquityHasOpenPL = true. Not yet verified:
+  that GetRTAccountEquity compiles and returns the same inside a SIGNAL (the monitor is an indicator) -> check the funded
+  strategies' first live day (cushion guard, 2026-11-08).

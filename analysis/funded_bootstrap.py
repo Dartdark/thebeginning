@@ -16,7 +16,8 @@ import numpy as np, pandas as pd
 import funded_sim as F
 
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
-PLAN = {"VB_N": 3, "VB_F": 1, "ONB_ML2_MC": ("risk", 400), "MON_MC": 1, "EOS": ("risk", 700), "LDF_MC": 2,
+# VB_N 3 -> 2 (2026-11-08): FUNDED_PLAN has NumContracts 2 since 2026-10-17
+PLAN = {"VB_N": 2, "VB_F": 1, "ONB_ML2_MC": ("risk", 400), "MON_MC": 1, "EOS": ("risk", 700), "LDF_MC": 2,
         "NFP_MC": ("risk", 500), "MON_BR_MC": 1, "CLS": 2}
 
 
