@@ -1,0 +1,97 @@
+{
+  "phase": "recent",
+  "start": "2023-01-01",
+  "end": "2026-10-09",
+  "rule_cases": 20,
+  "implementation_gates_passed": true,
+  "script_sha256": "99d327fda52918f652c8d01560de36881c40025a078d40f3c2b0337133a653da",
+  "plan_sha256": "2c8fab235bd947ec7429f0eddd3318e8d1323a44fe6052b6dcffbf958f08c7c9",
+  "plan_commit": "f43c4595743be5801dae77b8658760695de696ff",
+  "source_parity": {
+    "S30_NQ": 99,
+    "S30_ES": 96,
+    "S47": {
+      "trades": 323,
+      "check": "unchanged source function"
+    },
+    "KUSHO": 1323
+  },
+  "pure_filter_controls": {
+    "no_NY_agreement": {
+      "pure_nested_filter": true,
+      "removed_n": 281,
+      "removed_total": 2202.75,
+      "removed_mean": 7.838967971530249,
+      "removed_t": 0.05365155956594856,
+      "random_drops": 1000,
+      "actual_total": 103633.25,
+      "actual_dd": 15325.0,
+      "random_total_p5_p50_p95": [
+        6117.500000000002,
+        53343.25,
+        104511.0
+      ],
+      "random_dd_p5_p50_p95": [
+        17901.7,
+        29651.75,
+        48986.212499999994
+      ],
+      "random_profit_ge_actual": 0.055,
+      "random_dd_le_actual": 0.011
+    },
+    "NY_only": {
+      "pure_nested_filter": true,
+      "removed_n": 600,
+      "removed_total": -30485.0,
+      "removed_mean": -50.80833333333333,
+      "removed_t": -0.5013953773814067,
+      "random_drops": 1000,
+      "actual_total": 103633.25,
+      "actual_dd": 15325.0,
+      "random_total_p5_p50_p95": [
+        -30514.5,
+        28228.25,
+        87625.49999999999
+      ],
+      "random_dd_p5_p50_p95": [
+        20368.662500000002,
+        37342.125,
+        70459.775
+      ],
+      "random_profit_ge_actual": 0.021,
+      "random_dd_le_actual": 0.001
+    }
+  },
+  "seed": 80314,
+  "resampling_draws": 1000,
+  "dependency_sha256": {
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a",
+    "analysis/codex_ingredients_three_20261108.py": "ed4e4f7e0daa05e659162337686a53b6ae82460cd35176c7adefe01553491a75",
+    "analysis/codex_ingredients_events_20261108.py": "99818a22a85681aca090c4c8b23a2762977a6f8709e6ab9748397d40eca6966e"
+  },
+  "terminal_counts": {
+    "S30_NQ/original": 0,
+    "S30_NQ/no_low_IBS_entry": 1,
+    "S30_NQ/fixed_5_session_exit": 0,
+    "S30_NQ/opposite_same_schedule": 0,
+    "S30_NQ/close_strength": 1,
+    "S30_ES/original": 0,
+    "S30_ES/no_low_IBS_entry": 1,
+    "S30_ES/fixed_5_session_exit": 0,
+    "S30_ES/opposite_same_schedule": 0,
+    "S30_ES/close_strength": 1,
+    "S47/original": 0,
+    "S47/no_NY_agreement": 0,
+    "S47/NY_only": 0,
+    "S47/opposite_direction": 0,
+    "S47/no_stop": 0,
+    "KUSHO/original": 0,
+    "KUSHO/no_wick": 0,
+    "KUSHO/no_EMA": 0,
+    "KUSHO/no_break_even": 0,
+    "KUSHO/flat_1545": 0
+  },
+  "new_rule_selected": false,
+  "portfolio_tests_run": false
+}

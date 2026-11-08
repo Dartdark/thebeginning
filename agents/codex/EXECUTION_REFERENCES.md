@@ -2480,3 +2480,31 @@ not a selected execution change or new account-survival estimate.
 - MON's last-close fallbacks and Bridge's retrospective Monday 14:55 coverage check are retained and reported.
   Source agreement alone cannot validate live-known availability. Keep costs, missing paths, early closes,
   actual labels/receipts and dated rolls explicit before a separate native/account replay. No live changes follow.
+
+### E04/E09 follow-up — S30 daily clocks and Kusho unprotected fill bars (2026-11-08)
+
+Source: [S30/S47/Kusho ingredient round](results/ingredients_s30_s47_kusho_20261108.md), frozen plan `f43c459`,
+design checkpoint `324f5c1`;20 market/rule combinations, unchanged recent replay. Source attribution only.
+
+- **Marked risk and accounting clock:** S30 NQ whole-history marked DD is$59,548 versus$37,656 booked only at
+  exits; ES$50,003 versus$24,040. This round uses weekday23:59CT last-observed marks, unlike earlier15:00 cash
+  marks. The final trade/daily totals reconcile, but the clocks can produce different DD without an accounting
+  error. Neither is a prop-floor replay. Keep fees, actual fills, crossed roll removal, stale-mark ages and the
+  clock definition with every risk figure. No capital/portfolio sizing update was performed.
+- **A profitable closed trade can hide risk:** S30 ES's2025-04-03→04-09 trade closes+$2,633 after an observed
+  adverse source mark−$30,243 perES. The NQ2024-07-23→08-08 trade shows−$51,492 before a−$28,137 exit.
+  Absent-calendar-minute counts include scheduled closures; they are not all proven missing feed bars or a
+  certified continuous native path. Offsets elsewhere in a book must arrive before a breach, not merely later.
+- **Fill-bar lifecycle:** Kusho's2026-06-17 entry shows−$6,482 before a−$2,782 stop exit; its15-minute fill bar
+  is unprotected. Full-bar high/low used for BE can also precede the actual limit fill.50/27 original trades in
+  the two eras have nonpositive accepted swing risk. Retaining source mechanics for attribution is not native
+  verification or approval to deploy them. S47 likewise retains a one-minute entry protection gap, distinct
+  from the separate fixed MC backstop. Preserve both actual fill time and protection-activation time.
+- **Grouping is not marginal contribution:** about43% of original Kusho profit lies in weekend-held trades,
+  whereas original minus15:45 flattening is$51,095 across the whole history and changes weekday paths too.
+  Neither grouped trade profits nor that broader timing comparison identifies an exact weekend-only premium.
+  State-changing filters also cannot be assessed as pure deletions of original trades.
+- **Next justified use:** verify native contract/roll identifiers, quote/fill and stop-activation clocks, partial
+  fill/queue behavior and intrabar paths before a separately frozen implementation/account comparison.
+  Current roll repair is retrospective price-jump identification, not executable rolling. No measured live
+  execution saving, new strategy promotion, account survival estimate or live/VPS/broker change follows.
