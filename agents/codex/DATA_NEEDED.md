@@ -1,26 +1,5 @@
 # Research leads awaiting data
 
-## KSE Sentinel — PSX source-rule gate (uploaded SSRN7102818)
-
-Low-priority personal-market lead, not research-admitted. Exact calibrated rules
-are deliberately withheld: EMA lengths, master trend, entry/exit/stop conditions,
-signal/fill clocks, risk denominators, concentration and correlation lookbacks,
-gate ordering and short-sale treatment. Need frozen code/specification and a small
-dated trade/blocked-signal sample with actual quantities, prices, costs and FX.
-The supplied `https://shorturl.at/n9GTR` returned HTTP403 on November8,2026;
-bounded public discovery found the matching paper/promotional descriptions but
-no complete rules or ledger. No account creation, credential request, paid data,
-external message or return test. An opaque signal API does not supply the rules.
-
-Only after rule/cash reconciliation: exact 30-stock membership history (including
-delistings and ENGRO/ENGROH transition), dated PSX daily OHLCV/corporate actions,
-lot/short-sale/venue restrictions and liquidity, PKR/USD marks and conversion
-times; primary source window2021–2026 and claimed archive~2000–2020, plus dated
-July2026 forward-paper outcomes. Need benchmark ledger and complete trial/DSR
-outputs. Cost wording22.5bp per leg versus round trip is unresolved. Owned CME
-bars are not a matching panel. Do not collect a bulk substitute or invent an EMA
-configuration before the source gate. [Review](results/kse_sentinel_7102818_review.md).
-
 Created 2026-10-31 at the user's request. This is the central shopping/export list for interesting research blocked by data, source rules or input timing. It backfills the existing TODO queue, earlier evidence sheets, source reviews and research intake notes. Links preserve the detailed evidence and actual acquisition attempts.
 
 **Acquisition limit: free sources only.** Prefer already-owned research exports and legitimately free downloads. No purchases, paid subscriptions, account activation, credential requests or external messages are authorized by this register. Existing vendor listings are discovery records, not recommendations to buy.
@@ -307,3 +286,24 @@ quarterly coverage. No paid Datastream/GFD access or US-only proxy rescue. Next 
 one country/formation and native release/label/currency cashflow, then full coverage/power and committed
 return protocol. Source Table8 drawdown/composite qualifications remain unresolved. [Review](results/buffett_international_4071039_review.md),
 [evidence](evidence/buffett_international_4071039.md). No independent return trial or allocation.
+
+## KSE Sentinel — PSX source-rule gate (uploaded SSRN7102818)
+
+Low-priority personal-market lead, not research-admitted. Exact calibrated rules
+are deliberately withheld: EMA lengths, master trend, entry/exit/stop conditions,
+signal/fill clocks, risk denominators, concentration and correlation lookbacks,
+gate ordering and short-sale treatment. Need frozen code/specification and a small
+dated trade/blocked-signal sample with actual quantities, prices, costs and FX.
+The supplied `https://shorturl.at/n9GTR` returned HTTP403 on November8,2026;
+bounded public discovery found the matching paper/promotional descriptions but
+no complete rules or ledger. No account creation, credential request, paid data,
+external message or return test. An opaque signal API does not supply the rules.
+
+Only after rule/cash reconciliation: exact 30-stock membership history (including
+delistings and ENGRO/ENGROH transition), dated PSX daily OHLCV/corporate actions,
+lot/short-sale/venue restrictions and liquidity, PKR/USD marks and conversion
+times; primary source window2021–2026 and claimed archive~2000–2020, plus dated
+July2026 forward-paper outcomes. Need benchmark ledger and complete trial/DSR
+outputs. Cost wording22.5bp per leg versus round trip is unresolved. Owned CME
+bars are not a matching panel. Do not collect a bulk substitute or invent an EMA
+configuration before the source gate. [Review](results/kse_sentinel_7102818_review.md).
