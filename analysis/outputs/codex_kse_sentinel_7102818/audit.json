@@ -1,0 +1,41 @@
+{
+  "kind": "author-claim transcription and constructed arithmetic; no financial replication",
+  "return_trials": 0,
+  "canonical_author_results": {
+    "trades": 1009,
+    "win_rate": 0.3915,
+    "profit_factor": 2.51,
+    "PKR_cagr": 0.0747,
+    "USD_cagr": -0.0296,
+    "sharpe": 2.08,
+    "max_drawdown": -0.0291
+  },
+  "five_percent_risk_author_results": {
+    "trades": 602,
+    "win_rate": 0.3937,
+    "PKR_cagr": 0.0553,
+    "sharpe": 2.09,
+    "max_drawdown": -0.0268
+  },
+  "implied_profit_factor_using_rounded_payoff": 2.509202958093673,
+  "payoff_implied_by_profit_factor": 3.901238825031928,
+  "DSR": "literal source placeholder: [to be confirmed from run_fresh_dsr_analysis.py output]",
+  "source_trial_floor": 4,
+  "cost_ambiguity": "abstract: 22.5 bp per leg; section 3.4: 22.5 bp in round-trip costs per leg; 45 vs 22.5 bp total cannot be resolved from prose",
+  "illustrative_shuffle_total_invariance": {
+    "original_total": 3.0,
+    "reordered_total": 3.0,
+    "scope": "Reordering fixed outcomes cannot test whether their sum is positive. Sign flipping tests a different null; source implementation unknown."
+  },
+  "finite_randomization_example": {
+    "exceedances": 0,
+    "assumed_draws": 1000,
+    "plus_one_p_estimate": 0.000999000999000999,
+    "scope": "Illustration only; actual source number of draws and statistic undisclosed"
+  },
+  "source_link_check": {
+    "url": "https://shorturl.at/n9GTR",
+    "http_status": 403,
+    "result": "no destination, code, API schema or rule specification obtained"
+  }
+}
