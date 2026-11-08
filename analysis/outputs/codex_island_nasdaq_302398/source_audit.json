@@ -1,0 +1,79 @@
+{
+  "review_local_date": "2026-11-07",
+  "source_claims": {
+    "sample_stocks": [
+      "COMS",
+      "CSCO",
+      "DELL",
+      "INTC",
+      "MSFT",
+      "QCOM",
+      "SUNW"
+    ],
+    "sample_windows": [
+      "2000-03-08 through 2000-03-14 (5 sessions)",
+      "2001-06-18 through 2001-06-22 (5 sessions)"
+    ],
+    "partial_session": "2000-03-10 feed ends14:30 instead of16:00",
+    "nasdaq_spreads_dollars": [
+      0.079,
+      0.014
+    ],
+    "island_spreads_dollars": [
+      0.198,
+      0.0648
+    ],
+    "table4_pooled_theta": [
+      0.02,
+      0.0
+    ],
+    "table4_pooled_theta_t": [
+      2.49,
+      1.53
+    ],
+    "table6_rejections_at_5pct_by_year": [
+      5,
+      6
+    ],
+    "island_passive_rebate_dollars_per_share": 0.001,
+    "island_immediate_fee_dollars_per_share": 0.0025
+  },
+  "rounding_fixture": {
+    "true_ask": 100.05859375,
+    "displayed_ask": 100.0625,
+    "external_ask": 100.0625,
+    "hidden_improvement": 0.00390625
+  },
+  "spread_reductions_pct": {
+    "nasdaq": 82.27848101265822,
+    "island": 67.27272727272728
+  },
+  "identification_fixture": {
+    "spread": 0.1,
+    "markout": 0.03,
+    "alpha": 0.04000000000000001,
+    "theta": 0.031,
+    "cost_rent_pairs": [
+      [
+        0.01,
+        0.020999999999999998
+      ],
+      [
+        0.03,
+        0.0010000000000000009
+      ]
+    ]
+  },
+  "checks": [
+    "rounding can erase price improvement",
+    "passive markout side symmetry",
+    "cost/rent decomposition nonunique"
+  ],
+  "historical_returns_reproduced": false,
+  "new_financial_return_trials": 0,
+  "hashes": {
+    "agents/codex/inputs/island_nasdaq_302398/full_text.txt": "3c513badf1761417a9970bdddd990014b8e988f0e5f98afef1557e251f06bc59",
+    "agents/codex/inputs/island_nasdaq_302398/ssrn-302398.pdf": "6990d1f817f377ad99f7066756769af4c5791a1286add88b69dd3da36fc9ae21"
+  },
+  "script_sha256": "200b167ad8764d451d351a5abda124c5cbf8310cdb5d60b218fd2ff889dda529"
+}

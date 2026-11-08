@@ -1550,6 +1550,22 @@ Source: Kim/Mehrotra, SSRN486642, September2003, [review and arithmetic audit](r
   and quote freshness before any concentration/cost claim. Existing DATA_NEEDED D42–D45 apply; no new alpha/data request.
 - Status: historical execution reference; zero trading-return trials, measured savings, allocation or live changes.
 
+### E01/E56 follow-up — Island/Nasdaq: fine-grid priority and conditional maker markouts
+
+Source: Biais/Bisière/Spatt, SSRN302398, November26,2003, [review/audit](results/island_nasdaq_302398_review.md), November7,2026.
+- Use: unrounded competing quotes and synchronized receipt clocks matter. A fine-grid improvement can disappear
+  in coarse displayed data; price priority on one venue is not guaranteed access to another venue's order flow.
+- Evidence: historical seven-stock/two-five-session study, not independently reproduced. Authors infer predecimal
+  rents and weaker simple-model evidence afterward; richer instrument tests still reject restrictions in2001.
+- Profit boundary: marginal executed-book markouts use a thirty-minute midpoint. This is a future label, not an
+  attainable exit or net order-policy P&L. Account for nonfills, partials, cancellations, closing costs and inventory.
+- Identification: spread/markout moments identify handling cost plus rent, not both separately without additional
+  assumptions. Synthetic checks reproduce that nonuniqueness and rounding mechanism, not a profitable strategy.
+- Limits/next check: only for an already-justified execution audit, verify same-contract quotes, source precision,
+  event/receipt/order/fill clocks, actual queue rules, native fees and side-signed markouts. Historical Island stock
+  tick/rebate terms do not transfer to CME futures. Existing D42–D45 data requirements apply.
+- Status: execution reference; no new alpha/data request, return trial, measured saving, allocation or live change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
