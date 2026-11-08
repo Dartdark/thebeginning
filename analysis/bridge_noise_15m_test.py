@@ -46,11 +46,12 @@ def ema(x, n):
 
 
 def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, longs=True, shorts=True, last_entry=1400,
-        count=True, through=0.0, anchor=None, early_flat=False):
+        count=True, through=0.0, anchor=None, early_flat=False, sl_row=None):
+    # sl_row (2026-11-08, noise_calm_test.py): {grid row: stop pts} per day (target = stop x rr); default None = fixed sl
     # early_flat (2026-11-05): on CME early-close days (replica.is_early_close) no entry after 11:00, flat at the 11:30 bar
     from replica import is_early_close
     if count: NTRIAL["n"] += 1
-    tp = sl * rr
+    tp = sl * rr; sl0 = sl
     row, t, O, H, L, C, J = (S[k].to_numpy() for k in ("row", "t", "o", "h", "l", "c", "j"))
     E = ema(C, emalen)
     hist = [[] for _ in range(23)]
@@ -73,6 +74,7 @@ def run(S, look=20, vm=1.0, emalen=20, sl=50.0, rr=0.5, maxtr=10, maxstops=3, lo
                 flagged += 1; close_trade(C[k - 1] - pos * TICK, "held past session (closed at last bar)", k - 1, J[k - 1])
             pend = None
             today_open = O[k]; prev_close = C[k - 1] if k > 0 else 0.0; trades = stops = 0
+            if sl_row is not None: sl = sl_row.get(row[k], sl0); tp = sl * rr
             ec = early_flat and is_early_close(pd.Timestamp(g.ts[row[k]]))
             le = 1100 if ec else last_entry
         if anchor is not None and t[k] == anchor[0]:                 # RTH anchor on a 24h chart: open of the 08:30 bar
