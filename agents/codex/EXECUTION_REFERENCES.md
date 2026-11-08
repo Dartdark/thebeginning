@@ -1650,6 +1650,25 @@ Source: Fang/Qin/Jacobsen, *Technical Market Indicators: An Overview*, SSRN24493
   conventions and same-opportunity costed holdings. No new data acquisition, return trial, filter, allocation or
   rejection of existing independently tested strategies follows. Supporting negative/method evidence only.
 
+### E04 follow-up — Winner dependence, reselection and warm-up cash (2026-11-08)
+
+Source: Malan, *One Ticker Deep*, SSRN7073258, July2026 draft.
+[Review](results/one_ticker_7073258_review_20261108.md),
+[source/arithmetic receipt](../../analysis/outputs/codex_one_ticker_7073258/source_audit.json).
+- Use: chronological validation still needs constituent/concentration attribution. Excluding the largest winner
+  and refitting measures a counterfactual portfolio, not that name's realized contribution to original holdings.
+  Label both separately; a retrospective removal is not a forward exclusion rule or proof all trend profits are luck.
+- Evidence: all extracted text/tables/appendices read and code statically inspected; no market-return replication.
+  Author99-name OOS Sharpe1.53 falls to1.05 withoutNVDA versusSPY1.30. Full-sample volatility buckets are diagnostic
+  only. Approximate membership still omits delistings; the full99-name list/companion engine are absent here.
+- Risk/clock limits: AppendixA starts targets at index[window], leaving earlier rows in cash; source acknowledges
+  warm-up helped miss COVID. Match pre-sample warm-up/common evaluation dates before attributing protection.
+  Some reported grid/bucket drawdowns exceed SPY, so protection is not universal. A one-row signal lag alone
+  does not establish an executable close fill; preserve actual price basis, next-trade clocks and cash/turnover.
+- Next check within a separately justified portfolio study: frozen realized contribution ledger, separately
+  labeled exclusion/reselection and matched cash/universe/risk benchmarks. No new test, winner-based filter,
+  acquisition, monitoring process, guaranteed hedge or allocation follows from this source review.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
