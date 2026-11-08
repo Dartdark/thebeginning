@@ -749,3 +749,16 @@ A queue entry does not add it to a trading plan or start a backtest; review when
   price-sign substitute, shortened hold or repeated vendor crawl. Park and move on.
   [D51](agents/codex/DATA_NEEDED.md#2026-11-03-conditional-positioning-and-lei-watches),
   [record](agents/codex/research/scout/records/1108050.json), [source checkpoint](agents/codex/results/scout_owned_source_20261103.md).
+
+- [ ] **One-minute post-release macro-surprise sign — conditional low-priority WATCH / NEEDS DATA (2026-11-08), SSRN1920401.**
+  Earlier author-attributed draft SectionVI enters with the surprise sign at the first transaction one minute
+  after release and exits a minute later; simultaneous releases must agree, zero skips. Authors report2001–10
+  cumulative net19.42%Nasdaq/29.27%S&P after one tick each way, not our returns or modern all-in costs.
+  Need full published2014version/parity, initial actual/median-consensus/receipt vintages and native contract/
+  fill/cost reconciliation. Owned price proxies/release calendars are insufficient; bounded free search acquired
+  no matching panel. Smallest later check only with new matching inputs: one source release's sign and first
+  executable transaction/cost ledger, then complete2018–22coverage/power before preregistration.
+  Share D51's forecast-vintage acquisition boundary, while keeping this continuation distinct from LEI's
+  multi-day reversal. No price-sign substitute, ex-post holding-window selection, new return trial or allocation.
+  Park and continue discovery. [Record](agents/codex/research/scout/records/1920401.json),
+  [source checkpoint](agents/codex/results/scout_owned_source_20261108.md).

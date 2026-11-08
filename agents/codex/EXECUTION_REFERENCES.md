@@ -2343,3 +2343,33 @@ missing reopen bars as price evidence. Nine synthetic stop/gap/trail/fallback/de
 verify replay logic only. Restore skipped trading dates as zeros for final annualized reporting, rather than
 shortening time; preserve original conditional gate calculations separately. No measured execution savings,
 new independent native parity, trade-plan change or account benefit established.
+
+### E09/E11/E12 follow-up — Risk forecasts, cash-futures legs and news-sign clocks (2026-11-08)
+
+[Scout checkpoint](results/scout_owned_source_20261108.md); selected sections/metadata only,
+not full-paper reviews or independent economic verification. No return tests or execution savings.
+
+- **Risk Everywhere, SSRN2722591 / DOI10.1093/rfs/hhy041:** selected final-published introduction
+  evaluates risk models with a constant-Sharpe/mean-variance utility framework. Its48bp illustration
+  is modeled willingness-to-pay, not measured cash alpha. A future sizing comparison needs past-only
+  fit/centering, actual integer transitions/turnover and account paths against the same base.
+  Source58-market estimation is not reproduced by substituting one owned future. No new trial now.
+- **OFR21-01, Barth/Kahn:** selected CTD/convergence sections require the deliverable security,
+  coupon cashflows, conversion/financing conventions and repo conditions. Cheapest-to-deliver status
+  can change; continuous ZN is not a complete cash-futures hedge or cash ledger. A later basis test
+  needs identified dated legs and funding constraints before any return/correlation interpretation.
+  The paper interprets March2020unwinds mainly as a consequence of stress; do not assert they caused it.
+- **Earlier SSRN1920401 draft:** SectionVI trades actual-minus-consensus surprise sign after a minute,
+  not first-minute price direction. Simultaneous releases must agree. Descriptive full-day jump labels
+  are not automatically the strategy's live filter: the draft explicitly uses all trading days for its
+  trading analysis. One tick each way is not proof of modern all-in fees/latency. Need original receipt/
+  release vintages, published-version parity and first executable native transactions; no live change.
+- **Pradkhan, fut.21755:** publisher abstract and related thesis summary discuss regime-dependent
+  activity/returns. A retrospective bull/bear state is not an available-at filter. Full journal methods,
+  filtered-versus-smoothed state convention, position publication clocks and native costs precede code
+  claiming a predictive benefit; volume-only bars cannot silently replace source OI/position inputs.
+
+The TOPIX reconstruction and FX subminute-activity records are metadata cautions only. Authenticate
+native mark/index construction and event resolution before using apparent reversals or minute-boundary
+activity as an ES/6E predictor. Neither an abstract nor a file with minute labels verifies a fill.
+Park absent source/data; continue distinct strategy discovery. No automatic gate reopening or allocation.

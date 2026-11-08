@@ -375,3 +375,23 @@ daily adjusted history and subscription intraday listings do not satisfy the mis
 Corrected currency/clock/signal components pass28synthetic assertions; no historical profit or economic
 admission. Original source failure stands. No repeat crawl until genuinely new evidence; native quote/receipt,
 unit/action, calendar, borrow and cash prerequisites above remain. No paid acquisition or plan change.
+
+### D51 shared-input follow-up — one-minute macro-surprise continuation (2026-11-08)
+
+SSRN1920401's earlier author-attributed draft SectionVI supplies a different, intraday rule:
+go with initial actual-minus-consensus sign a minute after release, close a minute later;
+skip zero/mixed simultaneous surprises. Its positive2001–10tick-cost figures are unreplicated,
+and the current2014published-title/version is not authenticated. This is a conditional
+low-priority watch, not the existing LEI multi-day reversal or the closed pre-NFP trial.
+Merge acquisition needs with D51: original initial releases, exact median-consensus snapshots,
+simultaneous-event coverage and receipt timestamps; additionally authenticate native source
+contracts, first-after-minute fills, modern all-in fees and published-rule parity.
+
+Owned macro-proxy/calendar headers were checked and pinned: neither contains the source
+surprise/receipt panel. A bounded connected free-consensus search acquired no matching panel;
+earlier conflicting public forecast values remain unadmitted. No vendor crawl, purchase or
+new account. On genuinely new matching inputs, reconcile one available-at sign/fill/cash
+interval, then design coverage/power/costs before committed returns. Do not replace the
+surprise with a price change, revised release or full-day jump label. Park and move on.
+[Record](research/scout/records/1920401.json), [checkpoint](results/scout_owned_source_20261108.md),
+[access/input evidence](inputs/scout_20261108/access.json).
