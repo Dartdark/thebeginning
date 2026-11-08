@@ -97,30 +97,34 @@ if __name__ == "__main__":
     show("as is", nfp()); show("no spike condition (any first-10-day Friday)", nfp(spike=0)); show("follow instead of fade", nfp(fade=False))
     show("no stop", nfp(stop=None)); show("out 08:30", nfp(t1=830)); show("out 10:00", nfp(t1=1000)); show("reaction 07:30 -> 07:35", nfp(react=735)); show("reaction 07:30 -> 08:00", nfp(react=800))
     # ---------------- CL Sunday
-    print("\n3. CL Sunday Gap Fade (check: 93 trades, $602 per CL):")
+    print("\n3. CL Sunday Gap Fade (check: MultiCharts spec 97 trades, $653 per CL after $27.25):")
     gc = pickle.load(open("scratch_data/cl.pkl", "rb")); g_cur[0] = gc; atc = gc.daily_atr(15); tsc = pd.DatetimeIndex(gc.ts)
     rolls = np.sort(roll_minutes(gc, "CL")); Cf = gc.c.ravel()
+    fr_ = pickle.load(open("scratch_data/s_rank_gap2.pkl", "rb"))["frames"]["CL"]          # the confirmed bench's Sunday events
+    # FIX 2026-11-08 (before reading any variant): gap = Sunday 17:01 OPEN vs Friday's last price (bench / MultiCharts spec), entry at
+    # the open of the 17:06 bar (= 17:05 price), roll weekends kept; the first draft measured the gap at the 17:05 close.
     def reopen_events(weekdays, k=0.1, mode="fade_up", t1=(1, 900), stop=0.75):
         ev = []
-        for r in range(1, gc.D - 2):
-            d = tsc[r]
-            if d < pd.Timestamp("2018-01-01") or d.dayofweek not in weekdays or np.isnan(atc[r]): continue
-            fr = r * 1440 + jof(1705)
-            if not np.isfinite(Cf[fr]): continue
-            prev = Cf[max(0, r * 1440 - 4 * 1440):r * 1440 + jof(1659)]; ok = np.flatnonzero(np.isfinite(prev))
-            if not len(ok): continue
-            last = prev[ok[-1]]; gap = Cf[fr] - last
-            rx = r + t1[0]
-            if t1[0] == 1 and (tsc[rx].dayofweek >= 5 or not np.isfinite(gc.c[rx, jof(t1[1])])): continue      # holiday Monday: no trade
-            fx = rx * 1440 + jof(t1[1])
-            if ((rolls > fr - 3 * 1440) & (rolls <= fx)).any(): continue
-            up, dn = gap >= k * atc[r], gap <= -k * atc[r]
+        if weekdays == {6}:
+            items = [(int(r.sun), int(r.mon), r.gA, r.atr) for r in fr_.itertuples() if r.ok and pd.Timestamp(gc.ts[int(r.sun)]) >= pd.Timestamp("2018-01-01")]
+        else:
+            items = []
+            for r in range(1, gc.D - 2):
+                d = tsc[r]
+                if d < pd.Timestamp("2018-01-01") or d.dayofweek not in weekdays or np.isnan(atc[r]) or tsc[r + 1].dayofweek >= 5: continue
+                o1 = gc.o[r, jof(1701)]; prev = Cf[r * 1440 + jof(1500):r * 1440 + jof(1659)]; ok = np.flatnonzero(np.isfinite(prev))
+                if not np.isfinite(o1) or not len(ok): continue
+                items.append((r, r + 1, (o1 - prev[ok[-1]]) / atc[r], atc[r]))
+        for rs, rm, gA, a_ in items:
+            if not np.isfinite(gA): continue
+            rx = rm if t1[0] == 1 else rs; fx = rx * 1440 + jof(t1[1])
+            up, dn = gA >= k, gA <= -k
             if mode == "fade_up" and up: side = -1
             elif mode == "fade_both" and (up or dn): side = -1 if up else 1
             elif mode == "fade_down" and dn: side = 1
             elif mode == "follow_up" and up: side = 1
             else: continue
-            ev.append((d, fr + 1, fx, side, None if stop is None else stop * atc[r]))
+            ev.append((pd.Timestamp(gc.ts[rm]), rs * 1440 + jof(1706), fx, side, None if stop is None else stop * a_))
         return ev
     cl = dict(pv=1000.0, tick=0.01)
     show("as is", reopen_events({6}), **cl); show("no gap threshold (every up-gap)", reopen_events({6}, k=0.0), **cl); show("gap >= 0.3 ATR", reopen_events({6}, k=0.3), **cl)

@@ -472,6 +472,23 @@ Post hoc leads from the ablation (not adopted, need their own pre-registered tes
 | Stop | RS, LDF | RS no stop: worst -$6.8k -> -$20.2k, DD $35.3k; LDF no stop: $94 t 3.5, DD $15.0k -> $11.9k, worst -$2.7k -> -$3.1k | RS: required (tail); LDF: little effect (post hoc lead, not a change) |
 | Shorts | RS, LDF | RS shorts 2023+ t 1.1 (longs 2.8); LDF shorts $107 vs longs $78 | RS shorts weak recently (50K trades longs only); LDF both sides |
 
+**Round 4 (`analysis/ingredient_ablation4.py`, 2026-11-08; Expiration Open Short, NFP Fade, CL Sunday Gap Fade; rebuilds match: EOS 106 trades
+$501 vs 105 / $474, NFP 78 / $343 vs 76 / $319, CL 96 / $653 = the MultiCharts spec exactly):**
+
+| Ingredient | Where | Evidence (changed -> $ a trade / t) | Status |
+|---|---|---|---|
+| Monthly options expiry (AM settlement) | EOS | other Fridays $-58; long instead $-519; quarterly-only $260 (t 0.8) vs monthly-only $620 (t 2.8) | **Proven** (monthly expiries carry it) |
+| Enter at the 08:30 open | EOS | enter 09:00: $77 (t 0.5) | **Proven** (the edge is the first 30 minutes) |
+| Exit 10:00 | EOS | 09:00 $369 (t 2.85); 11:00 $551; 14:55 $789 (t 2.73; 2018-22 t 2.8, 2023+ t 1.4) | Lead: a later exit adds money at the same t (post hoc) |
+| Fade the payroll reaction | NFP | follow instead $-427 (t -2.6) | **Proven** (direction) |
+| Payroll spike condition (07:31-07:35 range > 3x median) | NFP | any first-10-day Friday: $234 (t 1.8) | Supporting |
+| Reaction window 07:30 -> 07:45 | NFP | 07:35: $236; 08:00: $325 | Supporting (07:45 best) |
+| Stop | EOS, NFP, CL | no stop: EOS $529 (worst -$8.1k), NFP $408 (t 2.2), CL $725 (t 3.5; but a -$16.6k open loss on 2026-03-08) | Risk shape: keep (Apex) |
+| Weekend gap threshold (Sunday 17:01 open >= 0.1 ATR above Friday) | CL | every up-gap $243 (t 2.3); >= 0.3 ATR $708 (n 34) | **Proven**; measured on the FIRST print: the gap at the 17:05 close instead gives $259 |
+| Fade up-gaps only | CL | follow $-664 (t -4.0); long down-gaps $-60; both sides $370 | **Proven** (up-gaps only) |
+| Weekend-specific | CL | the same fade on Mon-Thu reopens $-362 | **Proven** (weekend news gap) |
+| Hold to Monday 09:00 CT | CL | out Sunday 23:59 $146; Monday 07:00 $415; 13:30 $593 | Supporting (09:00 best) |
+
 **Batch of 5 (2026-11-08, pre-registered; TIER_LIST rows):** the engines are market-specific. Morning momentum does not carry to CL / GC / ZN
 (t 0.8 / 0.2 / -1.3; it works on NQ and, weaker, on ES); the noise band loses on CL / GC even before costs; the Overnight Tick signal
 carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on NQ). Cross-mechanism filters failed both ways: overnight
