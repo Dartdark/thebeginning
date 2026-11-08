@@ -1,0 +1,24 @@
+{
+  "status": "PRELIMINARY_CORE_NOT_RUN",
+  "plan_commit": "1c3008cda20911b4e7fcaf5fcb1959f9f55b3d3e",
+  "source_repository": "CookiesWithCream/mt5-algorithmic-trading-research",
+  "source_commit": "3cc0910f537f15327b0d2584dace4d1320d30786",
+  "source_ea_blob": "089eecd4ef915b032969ad7e94eeed87d7eba765",
+  "test_count_authored": 17,
+  "tests_executed": 0,
+  "new_economic_trials_run": 0,
+  "native_instrument": "one integer MNQ",
+  "source_parity": false,
+  "atr_parity": false,
+  "account_simulations": 0,
+  "powerlanguage_created": false,
+  "live_actions": false,
+  "blocker": "No usable execution workspace; backend running status is not proof of executable access",
+  "inputs_missing": [
+    "verified ATR snapshots/seed",
+    "audited native session/calendar and contract-roll bundle",
+    "source report input/broker parity bundle",
+    "upload/public PDF version reconciliation"
+  ],
+  "resume": "python3 -m unittest discover -s agents/codex/tests -p test_us100_donchian_core.py -v"
+}
