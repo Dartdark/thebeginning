@@ -1,0 +1,34 @@
+[provenance] code c2238703 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Bench strategies as filters for live ones (user 2026-11-08). PRE-REGISTERED (header committed before the first run; 6 trials).
+
+1 VB only after a noise-area long entered earlier that day
+   2018-26: kept $   127 (n 1019) vs skipped $    42 (n  724), t  1.92 | kept 58%
+   2018-22: kept $    99 (n  480) vs skipped $    63 (n  374), t  0.63
+   2023+  : kept $   151 (n  539) vs skipped $    20 (n  350), t  1.97
+
+2 ONB ADX30 longs only after a green RTH day
+   2018-26: kept $   258 (n  182) vs skipped $   418 (n  178), t -0.84 | kept 51%
+   2018-22: kept $   177 (n   91) vs skipped $   400 (n   94), t -1.17
+   2023+  : kept $   339 (n   91) vs skipped $   438 (n   84), t -0.29
+
+3 VB longs skipped after a 60-min double top (same day, 4 h)
+   2018-26: kept $    86 (n 1643) vs skipped $   191 (n  100), t -1.21 | kept 94%
+   2018-22: kept $    83 (n  820) vs skipped $   103 (n   34), t -0.15
+   2023+  : kept $    89 (n  823) vs skipped $   236 (n   66), t -1.32
+
+4 Late-Day Flow short days kept only when Vol-Control Sell trades
+   2018-26: kept $    18 (n   15) vs skipped $   121 (n  395), t -0.34 | kept 4%
+   2018-22: kept $   222 (n    9) vs skipped $    73 (n  217), t  0.37
+   2023+  : kept $  -288 (n    6) vs skipped $   180 (n  178), t -0.99
+
+5 Overnight Tick nights only when the last 2 sessions' R^2 >= 0.3
+   2018-26: kept $   355 (n  362) vs skipped $   414 (n  174), t -0.37 | kept 68%
+   2018-22: kept $   194 (n  217) vs skipped $   455 (n  105), t -1.59
+   2023+  : kept $   596 (n  145) vs skipped $   353 (n   69), t  0.75
+
+6 Twin cap1 Morning Momentum only when the 08:30 -> entry move agrees
+   2018-26: n/a | kept 100%
+   2018-22: n/a
+   2023+  : n/a
+
+t needed (N = 417): 3.67; filters with t >= 2: 0 of 6

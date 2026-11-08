@@ -61,7 +61,8 @@ if __name__ == "__main__":
     lab = pickle.load(open("scratch_data/lab.pkl", "rb")); ld = pd.DatetimeIndex(lab.g.ts[lab.tr])
     ls, vcs = lab.C["LDF_MC_S"] * 10, lab.C["VCS_MC"] * 10; m = ls != 0
     res["4 LDF shorts only with VCS"] = score("4 Late-Day Flow short days kept only when Vol-Control Sell trades", ls[m], (vcs != 0)[m], ld[m])
-    ot = pd.read_csv("checks/candidates/overnight_tick/trades.csv", parse_dates=["date", "sess"])
+    ot = pd.read_csv("checks/candidates/overnight_tick/nights.csv", parse_dates=["date", "sess"]); _td = set(pd.read_csv("checks/candidates/overnight_tick/trades.csv").date)
+    ot = ot[ot.date.dt.strftime("%Y-%m-%d").isin(_td)].reset_index(drop=True)   # trade nights only
     def r2(sess):
         i = np.searchsorted(g.dates, int(sess.strftime("%Y%m%d"))); idx = [x for x in T if x <= i][-2:]
         y = np.concatenate([g.c[x, J0:J1 + 1] for x in idx]); y = y[~np.isnan(y)]
