@@ -1550,6 +1550,25 @@ Source: Kim/Mehrotra, SSRN486642, September2003, [review and arithmetic audit](r
   and quote freshness before any concentration/cost claim. Existing DATA_NEEDED D42–D45 apply; no new alpha/data request.
 - Status: historical execution reference; zero trading-return trials, measured savings, allocation or live changes.
 
+### E03 follow-up — Venue fragmentation, delay units and cancellation denominators (2026-11-07)
+
+Source: Battalio/Egginton/Van Ness/Van Ness, SSRN1941956, October5,2011 draft.
+[Review](results/nasdaq_fragmentation_1941956_review_20261107.md),
+[source/sign audit](../../analysis/outputs/codex_nasdaq_fragmentation_1941956/source_audit.json).
+- Use: distinguish number of venues from actual flow allocation and reporting facilities from matching venues.
+  Historical cost trends, within-year conditional relationships and causal execution savings are separate claims.
+- Evidence: source narrative/key tables reviewed, Tables10/12 visually checked; no original regression replication.
+  Table10 defines delay in seconds: negative fragmentation coefficients in2002–06 mean shorter delay, positive
+  coefficients in2007–10 mean longer delay. The prose reverses the speed interpretation. Spread associations
+  also vary by year; do not carry an unconditional faster/cheaper claim into execution assumptions.
+- Cancellations: reported2010 percentages include NASDAQ16.3%, ARCA92.1%, ISE97.0%. These reporting averages
+  are not quote-message rates, proof of spoofing/false liquidity or our probability of missing a fill. Reconcile
+  order population, denominator, reporting coverage, time priority, partials and lifecycle before reuse.
+- Limits: historical fragmented US stocks, not a native NQ/ES matching-book study; receipt-to-fill report averages
+  are not broker/network latency. No trading rule, native fill benefit or measured saving follows.
+- Smallest next check only with a separately justified execution task: validate matching report/order populations
+  and clock units against observed lifecycle records. No new data request, allocation, monitor or return trial.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
