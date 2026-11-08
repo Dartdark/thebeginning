@@ -144,6 +144,14 @@ not into the plan, for later when the account is large enough or sizes can be we
 | DriftPullBack (user's simplified v3 of DriftPullback v2.1) | C | + all: +$2.9k a year, return/DD 8.3 → 8.0, capital $33.6k → $38.8k; shorts only 8.3 → 8.5 (+$1k) but shorts earn $9 a trade since 2023 | funded: blow-ups 3% → 13% (v2.1, 10/13) | `analysis/drift_pullback_v3_test.py` |
 Review this list whenever the account steps up a ladder row: re-test each at that size before adding.
 
+**Retest vs the current book (2026-11-08, `analysis/capex_retest.py`, OT 2 MNQ; base median $28.5k, DD p95 $4.9k, return/DD 5.81):** no
+piece improves return/DD in BOTH periods, so all stay here. 2018-26 (median / DD / return/DD / capital): Ricochet 1144 +$2.0k / +$0.2k /
+5.93 (+0.13; 2018-22 -0.26, 2023+ +0.32; trades carry commission only) / +$1.2k; Swing Target 2nd both sides +$2.0k / 5.67 / +$2.4k;
+FVB +$4.2k / 5.66 / +$4.4k; ST 2nd shorts only +$1.3k / 5.66 / +$1.8k (2018-22 +0.18); S30 +$5.5k / 5.39 / +$7.0k (2023+ +0.09);
+RollZone +$4.6k / 5.31 / +$6.7k; Prior VWAP Trap +$3.0k / 5.29 / +$5.2k; DriftPullBack v3 +$3.1k / 5.07 / +$6.6k. **Median $ per $ of
+extra capital (add order when capital grows):** Ricochet 1.7, FVB 1.0, ST both 0.9, S30 0.8, ST shorts 0.7, RollZone 0.7, PVT 0.6,
+DP 0.5. Not retested (no local trade list): Anson, R2Vault, S03 v2, futures trend.
+
 ## Read this before trusting the numbers
 - **These are backtests on the years the strategies were chosen on.** Expect live results lower; our rule is live ≥ 75%
   of the backtest (`DEVELOPMENT_PROCESS.md`). At 60% of the backtest the full portfolio is ~$13k a year at 1 micro.
