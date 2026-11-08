@@ -1550,6 +1550,41 @@ Source: Kim/Mehrotra, SSRN486642, September2003, [review and arithmetic audit](r
   and quote freshness before any concentration/cost claim. Existing DATA_NEEDED D42–D45 apply; no new alpha/data request.
 - Status: historical execution reference; zero trading-return trials, measured savings, allocation or live changes.
 
+### E01/E56 follow-up — Island/Nasdaq: fine-grid priority and conditional maker markouts
+
+Source: Biais/Bisière/Spatt, SSRN302398, November26,2003, [review/audit](results/island_nasdaq_302398_review.md), November7,2026.
+- Use: unrounded competing quotes and synchronized receipt clocks matter. A fine-grid improvement can disappear
+  in coarse displayed data; price priority on one venue is not guaranteed access to another venue's order flow.
+- Evidence: historical seven-stock/two-five-session study, not independently reproduced. Authors infer predecimal
+  rents and weaker simple-model evidence afterward; richer instrument tests still reject restrictions in2001.
+- Profit boundary: marginal executed-book markouts use a thirty-minute midpoint. This is a future label, not an
+  attainable exit or net order-policy P&L. Account for nonfills, partials, cancellations, closing costs and inventory.
+- Identification: spread/markout moments identify handling cost plus rent, not both separately without additional
+  assumptions. Synthetic checks reproduce that nonuniqueness and rounding mechanism, not a profitable strategy.
+- Limits/next check: only for an already-justified execution audit, verify same-contract quotes, source precision,
+  event/receipt/order/fill clocks, actual queue rules, native fees and side-signed markouts. Historical Island stock
+  tick/rebate terms do not transfer to CME futures. Existing D42–D45 data requirements apply.
+- Status: execution reference; no new alpha/data request, return trial, measured saving, allocation or live change.
+
+### E03 follow-up — Venue fragmentation, delay units and cancellation denominators (2026-11-07)
+
+Source: Battalio/Egginton/Van Ness/Van Ness, SSRN1941956, October5,2011 draft.
+[Review](results/nasdaq_fragmentation_1941956_review_20261107.md),
+[source/sign audit](../../analysis/outputs/codex_nasdaq_fragmentation_1941956/source_audit.json).
+- Use: distinguish number of venues from actual flow allocation and reporting facilities from matching venues.
+  Historical cost trends, within-year conditional relationships and causal execution savings are separate claims.
+- Evidence: source narrative/key tables reviewed, Tables10/12 visually checked; no original regression replication.
+  Table10 defines delay in seconds: negative fragmentation coefficients in2002–06 mean shorter delay, positive
+  coefficients in2007–10 mean longer delay. The prose reverses the speed interpretation. Spread associations
+  also vary by year; do not carry an unconditional faster/cheaper claim into execution assumptions.
+- Cancellations: reported2010 percentages include NASDAQ16.3%, ARCA92.1%, ISE97.0%. These reporting averages
+  are not quote-message rates, proof of spoofing/false liquidity or our probability of missing a fill. Reconcile
+  order population, denominator, reporting coverage, time priority, partials and lifecycle before reuse.
+- Limits: historical fragmented US stocks, not a native NQ/ES matching-book study; receipt-to-fill report averages
+  are not broker/network latency. No trading rule, native fill benefit or measured saving follows.
+- Smallest next check only with a separately justified execution task: validate matching report/order populations
+  and clock units against observed lifecycle records. No new data request, allocation, monitor or return trial.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
@@ -1868,6 +1903,20 @@ future upgrades or treat days−1 to+4 abnormal returns as fully post-release. H
 modern multi-level depth. Need release/receipt clocks, as-of MPID/affiliation, real quote/trade linkage and native costs
 before a separately justified study. Evidence: source/table-image and source-arithmetic/schema checks only; no new
 returns, verified execution savings, strategy queue entry, allocation, paid collection or live/policy change.
+
+
+### E20/E22 follow-up — Nasdaq expansion/pilots are implementation narratives, not measured execution gains
+
+Source: Lennon/Folkinshteyn2017, *From Bit Valley to Bitcoin: The NASDAQ Odyssey*,
+[SSRN3025751 review](results/nasdaq_odyssey_3025751_review.md), supplied19-page journal article.
+The small-sample historical case study proposes management lessons about capabilities, information, conflicting roles
+and reliance on unfinished technology. Its blockchain cost-reduction language has no controlled before/after execution
+or recordkeeping cost dataset. Licensing, an announced pilot, auditable records, operational deployment and verified
+net savings are distinct evidence states; clearing/settlement is not quote-to-fill latency or improved strategy P&L.
+Retain contextual support for existing product/version/acceptance checks only. No causal trading/operational benefit,
+current Nasdaq/Bitcoin infrastructure fact, new return trial or execution saving is independently verified. If a concrete
+implementation comparison is later authorized, require actual transaction/latency/cost records and the same-workflow
+baseline. No blockchain build, new monitor, workflow/policy change, candidate/data queue or live action follows.
 
 ### E09/E10/E12 follow-up — Transaction taxes, participation and volatility are not alpha
 
