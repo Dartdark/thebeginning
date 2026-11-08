@@ -1,0 +1,18 @@
+[provenance] code e3ab87da dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Size UP on volatile-VIX days (user 2026-11-08; follow-up to WATCHLIST #29). Volatile = prior-day VIX above its past-only
+
+Funded 50K (VB 2, no CLS) with the cushion cap, 1,000 paired histories, 2 years:
+   cushion cap (adopted)      2y $ 11,747 (p5 $     0)  blown  2.3%  all 6 86.5%  median days to 6th  316  beats cap 50.0%  diff $   +0
+   VB + LDF x1.5 volatile     2y $ 11,461 (p5 $     0)  blown  4.0%  all 6 85.7%  median days to 6th  292  beats cap 49.4%  diff $ -286
+   VB + LDF x2 volatile       2y $  9,880 (p5 $     0)  blown 12.9%  all 6 73.6%  median days to 6th  289  beats cap 42.8%  diff $-1,867
+   x1.5 volatile, x0.5 calm   2y $ 11,762 (p5 $     0)  blown  2.6%  all 6 87.4%  median days to 6th  297  beats cap 50.4%  diff $  +16
+
+50K evaluation, every start day 2018+:
+   plan                                     pass 50.0%  fail 48.1%  time-out  1.9% | 2018-22 pass 46.7% / 2023+ 54.4% | median days   6 | fee/funded $498 | capped trades/acct 0.0
+   VB x1.25 volatile                        pass 49.5%  fail 49.2%  time-out  1.4% | 2018-22 pass 46.6% / 2023+ 53.2% | median days   6 | fee/funded $503 | capped trades/acct 0.0
+   VB x1.5 volatile                         pass 47.8%  fail 51.0%  time-out  1.2% | 2018-22 pass 44.4% / 2023+ 52.3% | median days   6 | fee/funded $521 | capped trades/acct 0.0
+
+150K evaluation, every start day 2018+:
+   plan                                     pass 41.0%  fail 56.5%  time-out  2.5% | 2018-22 pass 38.9% / 2023+ 43.7% | median days   8 | fee/funded $608 | capped trades/acct 0.0
+   VB x1.25 volatile                        pass 40.4%  fail 57.6%  time-out  2.0% | 2018-22 pass 38.4% / 2023+ 43.0% | median days   7 | fee/funded $616 | capped trades/acct 0.0
+   VB x1.5 volatile                         pass 41.0%  fail 57.4%  time-out  1.6% | 2018-22 pass 38.7% / 2023+ 44.0% | median days   7 | fee/funded $608 | capped trades/acct 0.0
