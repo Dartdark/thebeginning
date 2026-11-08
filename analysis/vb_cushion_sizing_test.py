@@ -30,7 +30,7 @@ def challenge(V, O, Vr, Or, days, vb_fn, all_fn):
         else:
             if lim == floor: return "fail", n
             bal = lim
-        floor = max(floor, min(bal - MLL, START + LOCK))
+        floor = max(floor, bal - MLL)   # evaluation: keeps trailing (Codex 2026-11-06 #1; was capped at START + LOCK)
     return ("time", MAXD) if len(days) >= MAXD else None
 
 

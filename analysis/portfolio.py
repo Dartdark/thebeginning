@@ -159,7 +159,7 @@ def challenge(w, r, day_index, rules=RULES):
             return "pass", n
         if st == "fail":
             return "fail_mll", n
-        floor = max(floor, min(bal - rules["mll"], rules["start"] + rules["lock_above_start"]))
+        floor = max(floor, bal - rules["mll"])   # evaluation: keeps trailing (Codex 2026-11-06 #1; was capped at start + lock_above_start)
     if len(day_index) < rules["max_days"]:
         return None
     return "fail_time", rules["max_days"]
