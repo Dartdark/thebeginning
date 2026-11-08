@@ -422,7 +422,10 @@ whole-strategy tests: it shows which part carries the edge and which parts are d
 **For new combinations:** build only from ingredients in the register below, at most 2-3 per strategy, rules and settings fixed
 before any result, then the full checker (incl. the parameter-perturbation check). Every combination tried counts as a trial.
 
-### Ingredient register (`analysis/ingredient_ablation.py`, 2026-11-08; per NQ, 2018-26)
+### Ingredient register (`analysis/ingredient_ablation.py`, 2026-11-08; per NQ, 2018-26) - historical component evidence (exploratory)
+
+Status words (Proven / Decoration / harmless) label already-seen ablations, not causal estimates: removing a part can change later
+trades, so a new combination still needs its own pre-registered design gate (Codex review 2026-11-08).
 
 | Ingredient | Where it lives | Evidence (removed / alone) | Status |
 |---|---|---|---|
@@ -432,7 +435,7 @@ before any result, then the full checker (incl. the parameter-perturbation check
 | Overnight drift window 17:05 -> 03:00 CT long | Overnight Tick | every night $108, t 3.1 (2018-22 t 1.6) | Supporting (base rate) |
 | Down-day condition for overnight longs | Overnight Tick | down days only $175 vs every night $108 | Supporting |
 | Swing-level stop entries (6h fractals, Osler) | Twin BO | alone $113, t 3.5 (2023+ t 1.5); RTH-only entries $309 a trade with the MO | Weak alone; better in RTH |
-| Stop / stop cap | all | noise-area without a stop: worst trade -$1k -> -$11.8k; Twin uncapped: worst -$2.9k -> -$11.7k | Required for Apex (risk shape, not edge) |
+| Stop / stop cap | all | noise-area without stop AND target (coupled, Codex 2026-11-08): worst trade -$1k -> -$11.8k; Twin uncapped: worst -$2.9k -> -$11.7k | Required for Apex (risk shape, not edge) |
 | Target on short-horizon trades | noise-area | without its 25-pt target $62 t 5.5 -> $123 t 3.7 (fewer, choppier) | Helps consistency |
 | Daily trade / stop limits | noise-area | no effect (t 5.47 vs 5.50) | Decoration |
 | Volatility cap filter (skip after a 2x range day) | Twin | no effect ($248 vs $243) | Decoration (keeps tail days out; harmless) |

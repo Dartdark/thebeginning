@@ -35,7 +35,7 @@ if __name__ == "__main__":
     json.dump({"kind": "strategy", "pre_registered": True, "variants": 1}, open(f"{cd}/meta.json", "w"))
     open(f"{cd}/spec.md", "w").write("# Morning Momentum on ES (Twin v2.1 MO rules, 2026-11-08)\nES 1-minute, 24h. 10-minute buckets; oscillator = (close - EMA21 of bucket closes) / (3 x Wilder ATR14 of buckets) x 100, EMA3-smoothed; long when it crosses above +100 (short below -100) on a full bucket ending 08:40-09:30 CT, one attempt a day, no early-close days; market entry next bar; stop 20 points; no target; exit at 14:50 CT. $5 + 1 tick per fill per ES.\n")
     g = pickle.load(open("scratch_data/g24.pkl", "rb")); trr = list(g.trading); D = len(trr); dts = pd.DatetimeIndex(g.ts[trr]); yr = dts.year
-    We, Re = grids(ge, Be, T); edts = pd.DatetimeIndex(ge.ts); epos = pd.Series(np.arange(len(edts)), index=edts)
+    We, Re = grids(ge, Be, T, pv=50.0); edts = pd.DatetimeIndex(ge.ts); epos = pd.Series(np.arange(len(edts)), index=edts)
     idx = np.array([epos.get(d, -1) for d in dts]); W = np.zeros((D, 1440)); R = np.zeros((D, 1440)); m = idx >= 0
     W[m] = We[idx[m]] / 10; R[m] = Re[idx[m]] / 10                      # per MES
     B = tc.flatten(g); Tn = tc.simulate(B, max_stop_mult=1.0, v21=True); Tn = Tn[Tn.date >= "2018-01-01"]; Wt, Rt = grids(g, B, Tn); Wt, Rt = Wt[trr] / 10, Rt[trr] / 10

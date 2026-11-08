@@ -40,6 +40,6 @@ if __name__ == "__main__":
     import bridge_noise_15m_test as BN
     S = BN.series("rth")
     for nm, kw in (("as is (longs only)", dict(shorts=False)), ("no noise band (vm 0)", dict(shorts=False, vm=0.0)), ("no target", dict(shorts=False, rr=100.0)),
-                   ("no stop", dict(shorts=False, sl=1e6, rr=1.0)), ("no daily trade / stop limits", dict(shorts=False, maxtr=99, maxstops=99)),
+                   ("no stop, no target (both off)", dict(shorts=False, sl=1e6, rr=1.0)), ("no daily trade / stop limits", dict(shorts=False, maxtr=99, maxstops=99)),
                    ("shorts added (both sides)", {})):
         T = BN.run(S, **kw); T = T[T.date >= "2018-01-01"]; print(line(T.net, T.date, nm), flush=True)

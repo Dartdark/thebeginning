@@ -10,13 +10,15 @@ import twin_continuation_test as tc
 SP = (sys.argv[1] if len(sys.argv) > 1 else "scratch_data").rstrip("/") + "/"
 
 
-def grids(g, B, T):
-    """worst / real $ per NQ, shaped like the grid (rows x 1440)."""
+def grids(g, B, T, pv=None):
+    """worst / real $ per contract, shaped like the grid (rows x 1440). pv = $ a point (default NQ; pass the market's own for other
+    instruments: fixed 2026-11-08 after Codex found ES paths marked at NQ's $20 a point)."""
+    pv = tc.PV if pv is None else pv
     W = np.zeros(g.o.shape); Rr = np.zeros(g.o.shape)
     for t in T.itertuples():
         idx = np.arange(t.i0, t.i1 + 1); rows, js = B["row"][idx], B["j"][idx]
-        cost = (t.exit - t.entry) * t.side * tc.PV - t.net                     # commission + slippage of this trade
-        adv = ((B["l"][idx] if t.side > 0 else B["h"][idx]) - t.entry) * t.side * tc.PV - cost
+        cost = (t.exit - t.entry) * t.side * pv - t.net                     # commission + slippage of this trade
+        adv = ((B["l"][idx] if t.side > 0 else B["h"][idx]) - t.entry) * t.side * pv - cost
         adv[-1] = t.net if t.kind == 0 else min(adv[-1], t.net)
         r1 = rows[-1]; m = rows == r1; a = adv[m].copy()
         if (~m).any(): a[0] = min(a[0], adv[~m].min())                       # overnight part carried into the exit day

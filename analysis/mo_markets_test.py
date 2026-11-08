@@ -52,7 +52,7 @@ if __name__ == "__main__":
     json.dump({"kind": "strategy", "pre_registered": True, "variants": 1}, open(f"{cd}/meta.json", "w"))
     open(f"{cd}/spec.md", "w").write(f"# Morning Momentum on {mk} (Twin v2.1 MO rules, own-open window, 2026-11-08)\n{mk} 1-minute, 24h, CT. 10-minute clock buckets; oscillator = (close - EMA21 of bucket closes) / (3 x Wilder ATR14 of buckets) x 100, EMA3-smoothed; long when it crosses above +100 (short below -100) on a full bucket ending {S['win'][0]}-{S['win'][1]} CT, one attempt a day, no CME early-close days; market entry next bar; stop 0.3 x daily ATR(15); no target; exit at {S['ex']} CT. ${COMM:.0f} + 1 tick per fill per contract.\n")
     # ---- benches
-    ctx = BB.setup(); We, Re = grids(gx, Bx, T)
+    ctx = BB.setup(); We, Re = grids(gx, Bx, T, pv=S["pv"])
     W1, R1 = BB.to_nq_days(ctx, gx, We / 10, Re / 10)                      # per micro (1/10 contract)
     dts, yr = ctx["dts"], ctx["yr"]
     lab = ctx["lab"]; mo_nq = ctx["Tn"][ctx["Tn"].setup == "MO"].groupby("date").net.sum().reindex(dts, fill_value=0.0); dd = pd.Series(R1[:, -1], index=dts)

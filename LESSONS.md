@@ -34,6 +34,8 @@ Claude adds to this during the Friday review (and whenever a mistake is caught);
 - In an ablation, a setting of 0 must mean 'off': check the code's guard (FC 2B 'no break-even' run armed break-even
   at once and made the exits look essential; the checker caught it) (2026-10-23).
 - Book a Sunday-evening exit on the Monday trading date, or daily metrics silently drop it (Kusho, 2026-10-23).
+- A path helper must take the instrument's own $ a point: matching trade nets do not prove the intraday worst paths are right
+  (twin_continuation_bench.grids marked ES at NQ's $20; Codex 2026-11-08, fixed, MO-on-ES benches rerun).
 - An engine proven on NQ does not transfer to other markets by moving its clock (MO and noise band failed on CL / GC / ZN,
   2026-11-08); the one that transferred (OT on ES) was the same trade. Test a new market's own mechanism instead.
 - A daily P&L series must add up to the trade nets (costs, fills, roll jumps): check the totals match before using it for
