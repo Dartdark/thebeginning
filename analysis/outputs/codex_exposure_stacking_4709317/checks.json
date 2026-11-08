@@ -1,0 +1,65 @@
+{
+  "evidence_kind": "source notebook inspection and constructed algebra checks, not historical/model-case-study replication",
+  "return_trials": 0,
+  "identical_fully_invested_portfolios": {
+    "base_exposure": [
+      0.6,
+      0.4
+    ],
+    "global_weights": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "published_fold_prediction_budgets": [
+      0.5,
+      0.5
+    ],
+    "published_mean_squared_exposure_error": 0.13,
+    "fold_renormalized_prediction_budgets": [
+      1.0,
+      1.0
+    ],
+    "fold_renormalized_mean_squared_error": 0.0,
+    "final_full_weight_portfolio_budget": 1.0,
+    "qualification": "Renormalization is an illustrative different objective, not a source correction or proposed replacement. Positive loss is built into the published masked objective; it does not alone disprove utility."
+  },
+  "naive_objective_nonunique_weights": {
+    "uniform_weights": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "alternative_weights": [
+      0.5,
+      0.0,
+      0.5,
+      0.0
+    ],
+    "same_exposure": [
+      0.5,
+      0.5
+    ],
+    "same_objective": 0.5
+  },
+  "notebook_risk_adjusted_statistic": "expected return / variance, not expected return / standard deviation",
+  "scale_illustration": [
+    {
+      "exposure_scale": 1.0,
+      "mean": 0.1,
+      "variance": 0.04,
+      "mean_over_variance": 2.5,
+      "zero_rate_mean_over_sd": 0.5
+    },
+    {
+      "exposure_scale": 0.5,
+      "mean": 0.05,
+      "variance": 0.01,
+      "mean_over_variance": 5.0,
+      "zero_rate_mean_over_sd": 0.5
+    }
+  ],
+  "limitations": "No historical weights, native integer quantities, turnover, fees, margin, chronology or Apex account contribution evaluated. No claim that actual author portfolios differ only by leverage."
+}
