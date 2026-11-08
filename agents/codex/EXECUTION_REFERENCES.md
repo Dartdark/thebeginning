@@ -71,11 +71,26 @@ Source pinned vn.py class; reviewed 2026-10-27.
 
 Sources: [existing TIER_LIST entry](../../TIER_LIST.md), [test script](../../analysis/limit_entry_test.py), 2026-10-18.
 - Use: include missed winners and no-fills when comparing passive and market entries.
-- Evidence: repository-reported historical tests, not rerun for this library. Decision-close limits 0–2 ticks better, working 1–5 minutes with one-tick trade-through, were worse across the tested strategies/settings.
+- Evidence: repository-reported historical tests, not rerun for this library. Decision-close limits 0–2 ticks better, working 1–5 minutes with one-tick trade-through, were generally worse. One EOS setting was marginally positive (+$0.70 per original signal); do not describe every setting as losing.
 - Decisive examples: ES MOC lost approximately $76–109 per signal versus original execution despite 65–98% fill rates across the study; missed MOC trades averaged $417–491. Units are the original study's mini-contract comparison, not native micro savings.
 - Limits: this rejects those tested substitutions, not every possible limit policy or the exact SniperAlgo.
 - Next check: inspect the existing ledger and settings first; require a distinct mechanism and frozen replay before any new economic test.
 - Status: negative execution evidence; do not repeat the same search under a new name.
+
+**2026-11-08 MAE follow-up:** Gandhi/MTS Institute, [SSRN 7063478 full review](results/ssrn7063478_review_20261108.md),
+July 2026, 12 pages; [seven-case source/mechanics audit](../../analysis/codex_mae_entry_7063478_audit.py).
+The author reports Nifty Sharpe 1.38→3.33 at a selected 0.25% adverse offset, retaining 2,448/3,908 trades with
+6.02 bp round-trip modeled costs. This is same-history selection on a proprietary signal, not independent net
+execution verification. MAE used to diagnose a causally resting limit is not automatically look-ahead, but an
+aggregate excursion cannot establish first fill, time-in-force eligibility, queue/partial fills or post-entry paths.
+Touch eligibility (`MAE >= offset`) is weaker than trade-through. The source's claim that all missed trades must
+have been profitable is false: an entry 100 / low 99.80 / exit 99.90 misses a 99.75 limit and still loses.
+Preserve nonfills on the original signal/calendar denominator and distinguish fixed virtual-parent exits from
+fill-anchored child brackets. Trade-order permutations condition on assumed selected returns; they do not validate
+threshold choice or future edge. Seven invented checks passed; zero market tests or measured savings.
+This percentage-limit rule is distinct from E06's opposite-five-minute-return policy. Prior negatives do not prove
+this exact offset fails, and its headline is insufficient merit for a new cross-book rescue sweep. No new queue,
+acquisition task, paused-program restart, allocation or live change follows.
 
 ### E06 — Fast-alpha delayed-entry/exit overlay: timing and random-delay controls
 
@@ -1613,6 +1628,26 @@ Source: Battalio/Egginton/Van Ness/Van Ness, SSRN1941956, October5,2011 draft.
 - Smallest next check only with a separately justified execution task: validate matching report/order populations
   and clock units against observed lifecycle records. No new data request, allocation, monitor or return trial.
 
+### E09/E11/E19 follow-up — Replication conventions, overlay caps and valid samples
+
+Source: Delgado, *“Beat the Market” Revisited*, SSRN7323419, August20,2026;
+[review](results/delgado_7323419_review.md), [input/free-data receipt](inputs/delgado_7323419/free_data_gate.md).
+- Use: match typical-price volume-weighted VWAP and entry confirmation before comparing results. Keep
+  price/dividend conventions, minimum commission, early closes and actual post-overlay leverage separate
+  from an earlier engine's results. Cap final marked exposure after every sizing factor, not merely base sizing.
+  A performance overlay's lagged **overlay-free shadow** returns are a separate state from actual scaled P&L.
+- Evidence: author independent historical replication and disclosed engine fixes; not our verified fills/savings.
+  The selected candidate changes several engine/risk conventions after an adaptive search; its seen recent
+  period is not new validation. No new trading code or returns here; previous native futures findings retained.
+- Research limit: retain all80observed SPY alternatives despite10missing reconstructions and preserve actual
+  warmup-valid starts. The38–41%PBO applies to the25-point pre-fix grid, not the final80-trial adaptive search.
+  Near-100%DSR does not establish future profit. Shared mechanism does not make SPY overlays transferable:
+  all three reported QQQ adaptations have lower Sharpe than QQQ base.
+- Missing/next: native SPY minute/dividend/calendar/fill/cash inputs; authenticate one complete interval before
+  replay. Full trial series needed for independent statistical audit only. A new strategy test can instead freeze
+  explicit interpretations on admitted free data. No ETF-cost or IEX-only volume substitution into futures.
+- Status: methods/execution reference and low-priority D55data watch; zero new financial trials, no allocation.
+
 ### E09/E12 follow-up — Slow trend signals, actual-position turnover and no-trade bands
 
 Source: Tzotchev, SSRN4677166, February6,2018, [review/source audit](results/delta_straddle_4677166_review.md), November8,2026.
@@ -1649,6 +1684,25 @@ Source: Fang/Qin/Jacobsen, *Technical Market Indicators: An Overview*, SSRN24493
 - Next check only on materially stronger independent evidence: actual data/source clocks, precise forecast/refit
   conventions and same-opportunity costed holdings. No new data acquisition, return trial, filter, allocation or
   rejection of existing independently tested strategies follows. Supporting negative/method evidence only.
+
+### E04 follow-up — Winner dependence, reselection and warm-up cash (2026-11-08)
+
+Source: Malan, *One Ticker Deep*, SSRN7073258, July2026 draft.
+[Review](results/one_ticker_7073258_review_20261108.md),
+[source/arithmetic receipt](../../analysis/outputs/codex_one_ticker_7073258/source_audit.json).
+- Use: chronological validation still needs constituent/concentration attribution. Excluding the largest winner
+  and refitting measures a counterfactual portfolio, not that name's realized contribution to original holdings.
+  Label both separately; a retrospective removal is not a forward exclusion rule or proof all trend profits are luck.
+- Evidence: all extracted text/tables/appendices read and code statically inspected; no market-return replication.
+  Author99-name OOS Sharpe1.53 falls to1.05 withoutNVDA versusSPY1.30. Full-sample volatility buckets are diagnostic
+  only. Approximate membership still omits delistings; the full99-name list/companion engine are absent here.
+- Risk/clock limits: AppendixA starts targets at index[window], leaving earlier rows in cash; source acknowledges
+  warm-up helped miss COVID. Match pre-sample warm-up/common evaluation dates before attributing protection.
+  Some reported grid/bucket drawdowns exceed SPY, so protection is not universal. A one-row signal lag alone
+  does not establish an executable close fill; preserve actual price basis, next-trade clocks and cash/turnover.
+- Next check within a separately justified portfolio study: frozen realized contribution ledger, separately
+  labeled exclusion/reselection and matched cash/universe/risk benchmarks. No new test, winner-based filter,
+  acquisition, monitoring process, guaranteed hedge or allocation follows from this source review.
 
 ## Minimum record for any later execution comparison
 
@@ -2049,3 +2103,19 @@ No historical return series, execution savings, portfolio result or live recomme
 Smallest next check only with new matching evidence: one native two-leg timestamp/unit/quantity/cash ledger,
 then a separate corrected protocol. The same accounting lessons apply broadly; its equity/ETP holds are not
 evidence for our Apex futures plans. No live/VPS/broker change.
+
+### E09/E11/E12 follow-up — RSI ratios need domain, sizing and confirmation clocks
+
+Source: Tamele/Khoong/Bhattacharyya, [COR SSRN7164538 review](results/cor_dip_7164538_review.md),
+[evidence](evidence/cor_dip_7164538.md), supplied21-page paper. Printed Eq12's absolute before/after asset–market RSI-gap
+ratio can equal20 for valid RSI inputs and is undefined at a zero denominator, contradicting claimed0–1 boundedness.
+A physics analogy does not define a probability, causal flow or fill. Printed Eq10 is not native share sizing if ATR
+has price units; this is not a confirmed code bug because actual notebooks were LFS pointers and materialization hit proxy403.
+“After dip” requires a causal confirmation/available-at ledger; it is not by itself proof of look-ahead.
+Source hourly TSLL COR+ATR reports41.56%,7 trades,85.71% wins, versus43.77%,9 trades,77.78% withoutCOR: higher win rate
+need not improve total profit. Separately optimized results need same-window matched ledgers/removed trades/random-drop controls.
+Source uses zero trading costs/fractional shares; seven trades do not establish future execution or account benefit.
+Evidence: PDF/table images, formula counterexample, unit illustration and pinned CSV/source receipts only. Some stock CSV
+outputs differ from paper; no author code or market-path return executed. Source holdings do not establish Apex intraday fit.
+Next only with genuinely new evidence: resolve denominator policy, indicator/position units, exact causal dip/exit/fill clocks
+and code/output versions before any eligible preregistered test. No measured savings, strategy/data-shopping entry or live change.

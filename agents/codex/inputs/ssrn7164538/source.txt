@@ -1,0 +1,946 @@
+   The COR Strategy: A New Method To Improve The Dip Trip
+                     Traders’ Profitability
+
+                         Jose Tamele1, Wei Hao Khoong2
+                jtamele5@gmail.com1, khoongweihao@hotmail.com2
+
+                               Ritabrata Bhattacharyya3
+                          ritabrata.bhattacharyya@wqu.edu3
+
+                                         Abstract
+   Traditional dip-buying strategies rely heavily on indicators like Relative Strength Index
+(RSI), Bollinger Bands, and moving averages to time entries, but they fail to measure the
+actual velocity and strength of the subsequent bullish pullbacks. To bridge this gap, we
+introduce in this study a novel, physics-inspired technical indicator: the Coefficient of
+Restitution (COR) indicator. Adapting the physics principles of collision dynamics –
+where the coefficient of restitution measures kinetic energy retention after impact – the
+COR indicator is mathematically defined as the ratio of the absolute differences between
+asset and market RSI values before and after price dips, offering a quantitative gauge of
+pullback strength relative to broader market conditions. Using a rigorous backtesting
+framework with walk-forward optimization across multiple timeframes (from 30-minutes
+to daily intervals), we evaluated the COR strategy on Magnificent Seven stocks and
+leveraged ETFs, incorporating volatility-adjusted position sizing via Average True Range
+(ATR). Our findings show that the COR strategy significantly outperforms traditional
+mean-reversion frameworks, particularly on high-volatility assets. Notably, at the 1-hour
+timeframe, the COR indicator combined with the ATR sizing achieved 41.56% total
+return, an 85.71% win rate, and a Sharpe Ratio of 1.51. These results provide market
+practitioners with a robust quantitative framework to validate rebound strength and assets
+trade quality prior to execution.
+
+  Keywords: Swing trading; dip trip strategy; Coefficient of Restitution; COR indicator;
+COR Strategy;
+
+
+1. Introduction
+Swing trading constitutes a vital segment of quantitative asset management, capturing
+short-to-medium-term market inefficiencies by holding positions across horizons of
+several days to weeks. Within this paradigm, mean-reversion and structural dip-buying
+strategies have gained popularity, systematically exploiting temporary price depreciations
+at established support levels within broader macroeconomic uptrends. However,
+practitioners tend to struggle to timing appropriate entry spots and resulting in severe
+drawdowns or capital stagnation during periods of extended market corrections.
+Achieving enhanced risk-adjusted returns requires a mathematically sound entry timing
+approach derived through robust, multi-dimensional validation metrics.
+
+Conventionally, systematic swing traders rely on a deterministic composite of classic
+technical indicators – principally the Relative Strength Index (RSI), Bollinger Bands, and
+Moving Averages – to map structural entry points. While this traditional baseline strategy
+can identify oversold conditions, it possesses a fundamental architectural limitation: it
+fails to quantify strength and velocity of the subsequent bullish pullback. This blind spot
+arises because conventional metrics evaluate asset momentum in isolation based entirely
+on historical, idiosyncratic price series. Consequently, they ignore broader market-wide
+dynamics and systematic risk factors. Such a structural omission prompts a critical
+quantitative question: When an entry signal is triggered by conventional mean-reversion
+parameters, how can practitioners reliably quantify the underlying momentum of the
+bullish pullback to ensure it possesses sufficient kinetic energy to breach immediate
+resistance zones?
+
+To handle this limitation, this paper introduces the Coefficient of Restitution (COR)
+strategy, based on a novel, physics-inspired technical indicator. The conceptual framework
+of the COR indicator is mathematically derived from Newtonian collision mechanics –
+specifically the classic bouncing ball problem [1] – where the coefficient of restitution
+measures the conservation of kinetic energy and velocity retention post-impact. In
+physical systems, this coefficient dictates the maximum rebound height achievable after a
+collision. Translating this principle into financial econometrics, the COR indicator
+operates as an advanced filtering layer alongside traditional signal generators. While
+conventional indicators establish the preliminary trade architecture, the COR indicator
+dynamically assesses position quality by validating the systemic strength of the price
+rebound relative to broader market momentum.
+
+Consequently, the COR framework provides traders with an ex-ante risk management tool
+to verify trade viability before capital allocation. The remainder of this study is organized
+as follows: Section 2 delineates the underlying theoretical framework; Section 3 details
+the empirical methodology and walk-forward optimization framework; Section 4 presents
+the backtesting results and performance metrics across the Magnificent Seven and
+leveraged ETFs; and Section 5 discusses the implications of the findings for algorithmic
+execution.
+
+2. Theoretical Framework
+Our work targets Project Track 7 (Medium/Long‑Term Trading Models), Topic 1 (Swing
+Trading), to apply the COR indicator to the dip trip strategy, and seek to use it as a metric
+to determine the quality of the trading actions for the strategy. The proposed pipeline
+specifies Bollinger Bands, moving averages, RSI for entry timing, COR indicator for
+position quality estimation, volatility‑adjusted stops and targets for exits.
+
+We thus aimed to convert the physics inspired metric alongside traditional financial
+metrics for universe selection, parameter optimization and trading decisions across US
+equities and potentially other liquid asset classes, like leveraged ETFs, to maintain target
+profitability thresholds.
+
+2.1. Technical Analysis
+Technical analysis has a long empirical record with recent studies noting instances of
+economic profitability across speculative markets, but results are mixed and highly
+sensitive to testing choices, data‑snooping control, and cost estimations, thus motivating
+rigorous out‑of‑sample validation and robust inference procedures in design and
+evaluation [2]. Foundational computational work also formalized indicator‑based rules
+and inference challenges, reinforcing the need for careful model selection, validation, and
+statistical testing when deploying moving average, Relative Strength Index (RSI), and
+band‑based swing strategies.
+
+
+
+
+2
+2.1.1. Relative Strength Index (RSI)
+Created by Donald J. Wilder, the Relative Strength Index (RSI) is defined as a “[...]
+momentum oscillator that estimates price changes by measuring how quickly and in which
+direction prices move” [3]. The RSI values’ band ranges from 0 to 100, where values
+below 30 form the oversold zone and the others above 70 constitute the overbought
+region.
+
+The calculation of RSI requires the use of a predefined time window, say, a 14-day period.
+Along such a window:
+
+    1)​ Calculate the average of positive returns (APR)
+                         𝑁𝑢𝑚𝑏𝑒𝑟 𝑜𝑓 𝑝𝑜𝑠𝑖𝑡𝑖𝑣𝑒 𝑟𝑒𝑡𝑢𝑟𝑛𝑠 𝑖𝑛 𝑡ℎ𝑒 𝑤𝑖𝑛𝑑𝑜𝑤
+                𝐴𝑉𝑅 =                       14
+                                                                  ​    ​     (1)
+
+    2)​ Calculate the average of negative returns
+                          𝑁𝑢𝑚𝑏𝑒𝑟 𝑜𝑓 𝑛𝑒𝑔𝑎𝑡𝑖𝑣𝑒 𝑟𝑒𝑡𝑢𝑟𝑛𝑠 𝑖𝑛 𝑡ℎ𝑒 𝑤𝑖𝑛𝑑𝑜𝑤
+                𝐴𝑁𝑅 =                       14
+                                                                   ​   ​     (2)
+
+    3)​ Calculate the smoothed average gain (AG):
+                        (𝐴𝑉𝑅×13+𝐶𝑢𝑟𝑟𝑒𝑛𝑡 𝑃𝑜𝑠𝑖𝑡𝑖𝑣𝑒 𝑅𝑒𝑡𝑢𝑟𝑛)
+                𝐴𝐺 =                 14
+                                                         ​     ​       ​     (3)
+
+    4)​ Calculate the smoothed average loss (AL):
+                       (𝐴𝑁𝑅×13+𝐶𝑢𝑟𝑟𝑒𝑛𝑡 𝑁𝑒𝑔𝑎𝑡𝑖𝑣𝑒 𝑅𝑒𝑡𝑢𝑟𝑛)
+                𝐴𝐿 =                14
+                                                        ​      ​       ​     (4)
+
+    5)​ Calculate the Relative Strength (RS):
+                       𝐴𝐺
+                𝑅𝑆 = 𝐴𝐿 ​             ​     ​        ​         ​       ​     (5)
+
+    6)​ Calculate the RSI:
+                                      100
+                𝑅𝑆𝐼 = 100 − 1+𝑅𝑆 ​          ​        ​         ​       ​     (6)
+
+In buying dip strategy, the RSI indicator is likely to trigger an entry signal if it is below 30
+and the asset price is in bullish pullback.
+
+2.1.2. Bollinger Bands
+Bollinger Bands place a volatility-based formulation around a moving average by adding
+and subtracting a multiple of the rolling standard deviation, and the moving averages are
+simple arithmetic means over a fixed lookback window 𝑁 applied to the asset price. For
+the Bollinger Bands, the midline is an 𝑁-period simple moving average, and the
+upper/lower bands are that average plus/minus 𝐾 standard deviations, where typical
+choices are 𝑁 = 20 and 𝐾 = 2 [4] in many charting conventions.​
+
+2.1.3. Moving Averages
+A simple moving average (SMA) over a window 𝑁 is the arithmetic mean over the last 𝑁
+prices. At time 𝑡, this is given by
+                                𝑁−1
+                            1
+                𝑆𝑀𝐴𝑡 = 𝑁 ∑ 𝑃𝑡−𝑖 ​           ​        ​         ​       ​     (7)
+                                𝑖=0
+where 𝑃𝑡 is the price of the asset at time 𝑡.
+
+
+
+
+                                                                                               3
+For the SMA, a smaller window 𝑁 makes SMA more responsive to short-term price
+changes, while a larger 𝑁 makes SMA less responsive to changes in the series of asset
+prices.
+In swing trading the buying dip entry signal is likely to be generated when a larger
+window SMA crosses its smaller window version, however such a signal is subject to
+confirmation by other indicators.
+
+2.2 Volatility-aware Risk Management: Average True Range
+Inspired by the belief “[...] that the range is directly proportional to volatility and it is
+indicative of trend” [5], J. Welles Wilder created the Average True Range (ATR), a
+non-directional tool that predicts trends using securities’ prices.
+
+The calculation of ATR is a two-step procedure as follows.
+
+Step 1 - Calculate the true range:
+
+               𝑇𝑅 = 𝑚𝑎𝑥(𝐻 − 𝐿, |𝐻 − 𝐶|, |𝐿 − 𝐶|),​                ​        (8)
+
+    where H is the highest high, L is the lowest low, and C is the previous close price.
+
+Step 2 - Calculate the Average True Average:
+                        (𝑁−1)×𝑃𝑟𝑒𝑣𝑖𝑜𝑢𝑠 𝐴𝑇𝑅+𝑇𝑅
+               𝐴𝑇𝑅 =              𝑁
+                                              ​      ​    ​       ​        (9)
+
+with N being the length of the lookback window which is commonly set to 14 periods.
+
+Along the algorithm we use the ATR to generate volatility-adjusted position sizes whose
+mathematical expression is:
+                      𝐴𝑣𝑎𝑖𝑙𝑎𝑏𝑙𝑒 𝐶𝑎𝑠ℎ×𝑅𝑖𝑠𝑘 𝑝𝑒𝑟 𝑡𝑟𝑎𝑑𝑒
+               𝑃𝑆 =              𝐶×𝐴𝑇𝑅
+                                                    ​​   ​        ​       (10)
+
+where C is the previous close price.
+
+2.2.1 Volatility Measures & Performance
+A central result involving scaling exposure inversely to recently realized volatility (among
+volatility‑managed portfolios) is that it increases Sharpe ratios and generates large alphas
+across market and factor strategies because changes in volatility are not matched by
+proportional changes in expected returns [6]. In particular, related work showed that
+momentum and similar trend strategies suffer crash risk in high‑volatility episodes, which
+inspired volatility‑targeting or scaling as a risk‑management overlay [7], which is an idea
+closely aligned with our project’s volatility‑aware sizing and exits. At the same time,
+out‑of‑sample and market‑specific evidence indicates that the efficacy of volatility
+management can attenuate or fail in certain contexts, underscoring the importance of
+sensitivity estimation, regime segmentation, and external validity checks for dip‑trip
+implementations.
+
+Our proposed use of Average True Range (ATR) for price movement volatility assessment
+[8] as a price‑scaled range‑based volatility proxy for entry conditioning and stop and
+target calibration is standard in practice and consistent with our project’s algorithmic
+blueprint, and references to dip‑search strategies using volatility bands. Realized volatility
+computed from high‑frequency or daily returns provides a complementary measure shown
+to relate to cross‑sectional momentum dynamics at the industry level, supporting the
+dual‑proxy approach for sensitivity analysis at trade entry.
+
+
+
+
+4
+Combining Bollinger Bands with short‑term oversold filters (e.g. RSI) and trend filters
+(e.g. moving averages), which we refer to as traditional strategy, reflect common swing
+heuristics designed to trade on localized weakness within broader uptrends, consistent
+with the proposed entry logic and parameter grid. The literature cautions, however, that
+profitability claims for technical rules can be sample‑dependent and subject to selection
+bias, reinforcing the need for the project’s walk‑forward framework and explicit
+performance thresholds in training before out‑of‑sample testing [2].
+
+Volatility‑adjusted stops, trailing profit targets, and risk‑per‑trade position sizing align
+with evidence that expected returns are not linearly compensating for volatility spikes,
+making scaled exposure and volatility‑aware exits valuable for improving realized Sharpe
+and drawdown characteristics in trend‑following strategies [6]. Our proposed dynamic
+stop distance via ATR multiples and volatility‑adjusted profit targets translate this insight
+into concrete trade management mechanics for the dip‑trip strategy.
+
+2.3. The COR strategy for buying dips
+Formally, the Coefficient of Restitution (COR) in Physics’ bouncing ball problem is
+defined by
+                     |𝑣 |      𝑟𝑒𝑙𝑎𝑡𝑖𝑣𝑒 𝑠𝑝𝑒𝑒𝑑 𝑏𝑒𝑓𝑜𝑟𝑒 𝑐𝑜𝑙𝑙𝑖𝑠𝑖𝑜𝑛 (𝑠𝑒𝑝𝑎𝑟𝑎𝑡𝑖𝑜𝑛)
+               𝑒 = |𝑣𝑎| =       𝑟𝑒𝑙𝑎𝑡𝑖𝑣𝑒 𝑠𝑝𝑒𝑒𝑑 𝑎𝑓𝑡𝑒𝑟 𝑐𝑜𝑙𝑙𝑖𝑠𝑖𝑜𝑛 (𝑎𝑝𝑝𝑟𝑜𝑎𝑐ℎ)
+                                                                            ​​   (11)
+                       𝑏
+
+
+where if 𝑒 = 1 then the collision is perfectly elastic (i.e. no kinetic energy is lost) and if
+𝑒 = 0 the collision is perfectly inelastic (i.e. no rebound) [1]. The numerator |𝑣𝑎| would
+consist of metrics in the present time and the denominator |𝑣𝑏| would consist of metrics at
+a particular time in the past.
+
+The COR buying dip strategy, as developed in this work, combines the traditional buying
+dip approach and the COR indicator. While the traditional strategy will simply tell the
+trader what the optimal entry spot or price is, the COR indicator, denoted by the symbol 𝑒,
+provides information on the strength of the bullish pullback movement of the asset price
+relative to the market movement.
+                                                       𝑆
+Now, let 𝑒 denote the COR threshold, 𝑅𝑆𝐼𝑉 denote the RSI of the variable 𝑉 (either an
+asset or market index) at a time step 𝑆. The threshold 𝑒 is thus mathematically given by
+                       ||𝑅𝑆𝐼𝑏𝑒𝑓𝑜𝑟𝑒−𝑅𝑆𝐼𝑏𝑒𝑓𝑜𝑟𝑒 ||
+                        |               𝑚𝑎𝑟𝑘𝑒𝑡|
+               𝑒 =           𝑎𝑠𝑠𝑒𝑡
+                         ||𝑅𝑆𝐼𝑎𝑓𝑡𝑒𝑟−𝑅𝑆𝐼𝑎𝑓𝑡𝑒𝑟 ||
+                                                  ​​       ​      ​          ​   (12)
+                          |   𝑎𝑠𝑠𝑒𝑡    𝑚𝑎𝑟𝑘𝑒𝑡|
+
+
+
+
+           𝑏𝑒𝑓𝑜𝑟𝑒                                                       𝑏𝑒𝑓𝑜𝑟𝑒
+where 𝑅𝑆𝐼𝑎𝑠𝑠𝑒𝑡 is the RSI of the asset before the dip, 𝑅𝑆𝐼𝑚𝑎𝑟𝑘𝑒𝑡 is the RSI of the market
+                               𝑎𝑓𝑡𝑒𝑟                                                    𝑎𝑓𝑡𝑒𝑟
+before the asset’s dip, 𝑅𝑆𝐼𝑎𝑠𝑠𝑒𝑡 is the RSI of the asset after the dip, and 𝑅𝑆𝐼𝑚𝑎𝑟𝑘𝑒𝑡 is the
+RSI of the market after the asset’s dip.
+
+Inspired by the Physics Coefficient of Restitution where it indicates the amount of kinetic
+energy remaining in the bouncing ball right after the collision, the COR indicator has a
+value band ranging from 0 to 1, meaning 0 ≤ 𝑒 ≤ 1. A COR of 0 informs the technical
+analyst on a weak likelihood of profitable pullback or simply a ranging market. On the
+other hand, a COR of 1 informs a perfect propensity to a strong pullback expected to at
+least reach the nearest resistance level. Therefore, in the context of the COR strategy, the
+closer 𝑒 is to 1, there would be a higher inclination to perform a trade. Otherwise without
+
+
+
+
+                                                                                                5
+a substantial movement in the underlying asset(s) price, it would not be a profitable trade
+due to costs such as spread and trading commissions. Note that unlike the original COR
+formula in Physics, the relative speed after ‘collision’ is now the denominator instead of
+the numerator as we are implementing the dip-trip strategy which targets dip buying,
+typically when RSI drops significantly due to the asset being oversold. As a result, when
+the RSI drops, 𝑒 should increase. Conversely, when the asset becomes increasingly
+overbought, 𝑒 → 0.
+
+Here, the formula can be interpreted as that the present relative RSI, the closer it is to the
+previous value the more ‘elastic’ price action is expected to be to the upside in upcoming
+time steps with the highest likelihood to reach the nearest resistance level. Then, if 𝑒𝑡 ≥ 𝐸
+where 0 ≤ 𝐸 ≤ 1 is a tuned threshold parameter, the condition for COR indicator is met
+in the dip trip strategy. Thus, together with the other conditions with Bollinger Bands and
+closing prices above moving averages, the dip trip strategy would be executed.
+
+2.4. Competitor Analysis
+While we have not found any paper that exactly describes modeling trading signals after
+the coefficient of restitution for the dip trip strategy, there are related works which
+modelled after collision dynamics and elastic systems, and from volatility measures for
+trading signals.
+
+The first competitor stems from Volatility‑Managed Portfolios [6], where the authors
+improve Sharpe ratios and alphas across factors by reducing exposure when volatility is
+high. However, the performance can attenuate out‑of‑sample or differ across markets, thus
+requiring careful validation [7]. In our project, we aim to develop a principled template
+for volatility‑aware sizing overlay on dip‑trip entries.
+
+Next, Bergfast introduced a dip-searching swing strategy [8] which directly targets dips
+with band and range‑based logic aligned to our project’s entry design framework.
+However, it is based on a simpler rule set without modern walk‑forward and sensitivity
+quantification. Our proposed framework thus serves as a baseline to benchmark
+incremental value of volatility‑sensitive sizing and exits.
+
+Also from volatility, we have Volatility‑Scaled Momentum [12], where volatility targeting
+reduces crash risk and improves risk‑adjusted returns in trend strategies. However,
+factor‑level results may not translate one‑for‑one to single‑name dip entries. In contrast,
+our project offers a playbook for scaling exposure and risk during high‑vol states in the
+dip‑trip strategy.
+
+On the side of physics-inspired approaches, there was work on modeling price action with
+velocity and mass concepts stemming from the definition of momentum in physics [10].
+The paper established relationships of prices as mass particles but in a financial context,
+and related it to physical momentum but in terms of price action. However, the
+relationships were not adopted to trading strategies such as the dip trip and remain to be
+evaluated and enhanced.
+
+In summary, our project is aimed at exploiting buying dip opportunities through
+“volatility-sensitive sizing and exits” approach adopted from natural occurring events like
+dropping and bouncing ball, combined with a “walk-forward backtesting” which sets its
+uniqueness among competing research works, specially by introducing the missing energy
+retention gauge for pullbacks.
+
+
+
+
+6
+2.5. Backtesting Guardrails
+The plan to use walk‑forward optimization with fixed parameters during testing directly
+addresses data‑snooping concerns raised in classical critiques of technical trading studies,
+where after rule selection the results often overstate efficacy. Incorporating statistical
+guardrails inspired by the data‑snooping literature and maintaining minimum win rate and
+per‑trade return constraints further reduces the risk of spurious rule discovery and
+supports credible slope estimation for volatility and profitability sensitivity analysis.
+
+2.6. Transaction Costs Considerations
+Trading cost realism materially affects short‑horizon strategies, and large‑scale
+institutional evidence indicates that, when measured accurately with live trading data,
+capacity and net returns of anomalies such as momentum can be substantially larger than
+once thought, while short‑term reversal styles are more constrained by costs [9]. This
+underscores the importance of modeling slippage and impact explicitly in the backtest and
+of favoring holding periods and entry and exit mechanics that preserve edge net of costs
+for swing‑horizon dip‑trip trades.
+
+2.7. The Data Considerations
+Furthermore, our decision to test across US equities and potentially add diversified asset
+classes is appropriate for assessing sensitivity stability, with the caveat that volatility
+management effects can vary across markets, suggesting regime identification or
+stratification by volatility state to improve external validity of the estimated slope [7].
+Explicit regime tagging during walk‑forward validation (e.g., high‑volatility versus
+low‑volatility windows) will thus help determine when volatility increases are beneficial
+or detrimental for dip‑trip profitability.
+
+3. Methodology
+Under the scope of this project we seek to solve the problem of untimely entry in buying
+dip strategy. For this, we build a trading algorithm that implements the COR strategy on
+the selected securities. In this section we provide a full description of the tools and
+procedures we used to meet such a goal. We present the data selection, the data
+preprocessing, the implementation procedures of both traditional and the COR methods,
+and the backtesting procedure.
+
+3.1. Data selection
+The selection of securities for swing trading requires rigorous scrutiny in an attempt to
+avoid the negative implication of slippage over the performance of the strategy. Liquidity
+is the key factor for this selection as its increase leads to more volatility and consequently
+more profitable opportunities for swing traders [11].
+
+Under this fact and at this stage of the project, for the sake of algorithm optimization, we
+retrieved from Yahoo Finance Magnificent Seven (US) stock price data in three
+timeframes. These tickers are: Apple, Inc. (AAPL), Amazon.com, Inc. (AMZN),
+Alphabet, Inc. (GOOG), Meta Platforms, Inc. (META), Netflix, Inc. (NFLX), and Tesla,
+Inc (TSLA). Firstly, we pulled 1 year period bulk of 1 hour, 4 hour and daily price data
+spanning October 10th 2024 to October 10th 2025 inclusive. Secondly, we retrieved more
+granular price data, with 30-minute intervals. Due to Yahoo Finance API’s restrictions,
+these shorter frequency datasets could only range September 10th 2025 to October 10th
+2025 inclusive for 30 minute data. In addition to the Magnificent Seven stock price data,
+we collected S&P500 (^GSPC) to be used to compute the COR indicator.
+
+
+
+
+                                                                                            7
+Additionally, for further validation of our hypothesis that extreme volatility could lead to
+potentially more profitable swing trades, we experimented leveraged ETFs with the same
+frequencies and respective time horizons as the Yahoo Finance Magnificent Seven stocks.
+The tickers of choice are: ProShares UltraPro QQQ (Ticker: TQQQ), Direxion Daily
+Semiconductor Bull 3x Shares (Ticker: SOXL), Direxion Daily TSLA Bull 2X Shares
+(Ticker: TSLL), Direxion Daily S&P 500 Bull 3x Shares (Ticker: SPXL), GraniteShares
+2x Long NVDA Daily ETF (Ticker: NVDL), and Direxion Daily Technology Bull 3x
+Shares (Ticker: TECL).
+
+3.1.1 Data preprocessing
+We performed data cleaning in order to make sure no possible anomalies, such as missing
+data and outliers, that can negatively impact the performance of the algorithm.
+Additionally, the data preprocessing step of our dip trip trading algorithm includes the
+computation of all involved indicators.
+
+3.2. The Traditional Buying Dip Approach
+The traditional buying dip approach is employed as a benchmark to evaluate the
+performance of the COR buying dip strategy that we uniquely develop in this project.
+Such an approach is deemed to be traditional as it is one of the commonly used by the
+buying dip practitioners and it consists of a simultaneous use of Relative Strength Index
+(RSI), Bollinger Bands, and Moving Averages to time their entries in bullish pullbacks of
+the asset prices.
+
+From the perspective of the benchmark or traditional strategy described above, the buying
+dip signal will be triggered by a combination of the following circumstances of the asset
+price that is moving upward after bouncing on the support level:
+
+    ●​ The current asset price is above the long-term Simple Moving Average;
+
+    ●​ The current asset price is below the 30-level of the RSI indicator, meaning the
+       asset is still undervalued; and
+
+    ●​ The current asset price is crossing the lower band of the Bollinger Bands
+       indicator, confirming the asset undervaluation.
+
+3.3. The COR Strategy
+The COR buying dip strategy, as developed in this work, combines the traditional buying
+dip approach and the COR indicator. While the traditional strategy will simply tell the
+trader what the optimal entry spot or price is, the COR indicator provides information on
+the strength of the bullish pullback.
+
+Inspired by the Physics Coefficient of Restitution where it indicates the amount of kinetic
+energy remaining in the bouncing ball right after the collision, as introduced in a prior
+section above, when the RSI of the asset dips significantly and depending on market
+conditions via the market’s RSI, 𝑒 tells us how much propensity there is for the asset price
+to rebound. For example, if the market’s RSI before and after remain about the same
+while a large dip was observed for the asset’s RSI, then the asset’s price is expected to
+rebound back to a level aligned to the market’s RSI.
+
+As for the market component of the RSI in the formula for COR, we use the S&P 500
+index (Ticker: ^GSPC) as an indicator of the broader market. Both asset and market data
+would have the same frequency and timeframe.
+
+
+
+
+8
+In the implementation of the COR strategy the buy signal is cumulatively triggered by all
+conditions described in the traditional strategy plus a COR value not below a preset
+threshold. The COR lower threshold is set in order to make sure that at the entry price the
+asset has enough likelihood to continue in the profitable bullish movement.
+
+As part of the risk management procedure, the algorithm uses the volatility-adjusted
+position sizing. Volatility adjustment of the position size involves the use of Average True
+Range as discussed in the Theoretical Framework. The risk (proportion of portfolio cash)
+was also included as a hyperparameter for optimization, ranging between 10% and 90%.
+
+3.4. Exit signal generation
+Both strategies we consider in this project rely on the same exit approach. The algorithm
+will trigger the exit signal as one of the following conditions is met:
+
+    ●​ The current asset price hits the predefined take profit level;
+
+    ●​ The current asset price hits the predefined stop loss level; or
+
+    ●​ The asset movement is experiencing mean reversion.
+
+For the purpose of the goals and objectives of this research the take profit level will be set
+at a predefined threshold not below the halfway to the nearest resistance level from the
+support zone. On the other hand, the stop loss is configured as a trailing stop loss which
+looks to exit the position close to the reversion price.
+
+3.5. Local backtesting
+The plan to use a single-step, out-of-sample chronological split to preserve data integrity
+and prevent lookahead bias with fixed parameters during testing directly addresses
+data‑snooping concerns raised in classical critiques of technical trading studies, where
+after rule selection the results often overstate efficacy. This strict chronological train-test
+split was thus implemented rather than traditional randomized cross-validation. In
+particular, for each asset, the 1-year historical dataset spanning October 10, 2024, to
+October 10, 2025, was segmented into two distinct, non-overlapping windows using an
+optimization split factor of 0.70. The training data spanned approximately October 2024
+to late June 2025. This data was utilized to execute an exhaustive grid search across all
+parameter combinations defined in the optimization grid. The parameter set that
+maximizes the designated objective function “Total Return” was selected for use in the
+test dataset, which spanned approximately late June 2025 to October 10, 2025. Note that
+the optimal parameter set discovered in the training window was locked and evaluated
+exactly once on this unseen test data to compile the final performance metrics (Total
+Return, Win Rate, Sharpe Ratio, and Maximum Drawdown) reported in Section 4.
+
+For parameters that form the trading signal and the underlying derivations that lead to
+specific conditions of the signal, they are added to the optimization grid, each with a
+range of values for hyperparameter search. As there is a large number of combinations,
+optimization is performed in parallel across all available CPUs locally.
+
+3.6. Evaluation
+Sharpe ratio, total return, and maximum drawdown are performance metrics we will use
+to evaluate the COR strategy with the traditional approach serving as the comparative
+benchmark. However, more than just using these metrics to assess the performance of the
+COR strategy against the traditional approach, they will help evaluate the method across
+different timeframes.
+
+
+
+
+                                                                                             9
+4. Results
+The plots of the Magnificent Seven US stock prices over time, in a 1-day frequency, as
+shown in Figure 1, denoted the predominance of a smooth bullish tendency along the
+observation time. Such a behavior appears to be explicitly more expressive for tickers
+META, MSFT, and TSLA. The observed ETFs, in the same period and frequency,
+performed in a similar fashion as demonstrated in Figure 2. Additionally, the overall
+movement for the lower frequencies for both stocks and ETFs followed the tendency of
+the 1-day frequency price movement.
+
+
+
+
+Plotting the realized volatility of the studied securities, as shown in Figure 3, we clearly
+observe that the leveraged ETFs were more volatile than the Magnificent Seven US
+stocks, an overall behavior for 1-hour, 4-hour, and 1-day data frequencies. TSLA and its
+tracking ETF, TSLL, were the most volatile securities among stocks and leveraged ETFs,
+respectively. In addition, the 1-day data frequency was the most volatile among all
+observed frequencies.
+
+
+
+
+10
+In our experimentations with backtesting and optimization of the parameters that form the
+trading signal, a starting cash position of 1,000,000 USD was used for each parameter
+combination. As the number of parameter combinations is large (in the thousands), for the
+purpose of formulating the pipelines to perform the optimization so that adequate
+comparison between methods can be obtained at this stage of the project. Fractional share
+trading was also enabled. Experiments involving an optimization objective of maximizing
+total returns and data frequencies of 1 hour, 4 hour and daily were conducted with a
+timeframe of 1 year, spanning 10th October 2024 to 10th October 2025 inclusive. An
+exception for the 30-minute interval experiments were made to restrict the past 1 month
+spanning 10th September 2025 to 10th October 2025 was made due to API limitations.
+The assumptions that there are neither trading commissions nor risk-free rates were made.
+We also made comparisons between the metrics used in the trading signal, to evaluate the
+tradeoffs between using one or more of the metrics, with the COR metric as the baseline.
+The abbreviations are as follows:
+    ●​ BB: Bollinger Bands
+    ●​ COR: Coefficient of Restitution (Adapted)
+    ●​ RSI: Relative-Strength Index
+
+
+
+
+                                                                                      11
+               Table 1: Results obtained with optimization and fractional trading
+                                                         STOCKS                                                                            LEVERAGED ETFs
+     METRICS                        With COR (BB, RSI, COR)               Without COR (BB, RSI)                            With COR (BB, RSI, COR)             Without COR (BB, RSI)
+                     TICKER                                                                                 TICKER
+                              30Min     1Hour    4Hours     Daily   30Min    1Hour   4Hours     Daily                30Min     1Hour    4Hours     Daily 30Min    1Hour   4Hours     Daily
+Total return (%)
+                               -0.43     1.77         0         0     -0.4     2.16        0            0                0      3.56    12.17        0     0.66        0     12.04           0
+Win rate (%)
+                                 50     42.86       N.A.     N.A.      50        50      N.A.     N.A.                 N.A.      50        75     N.A.      100      N.A.      75      N.A.
+Sarpe ratio
+                      AAPL      -2.4     0.38       N.A.     N.A.    -2.86     0.47      N.A.     N.A.      TQQQ       N.A.     0.34     1.81     N.A.     2.73      N.A.      1.8     N.A.
+Max. Drawdown
+                               -0.67     -3.53        0         0    -0.58      -2.7       0            0                0     -5.02    -4.69        0     -0.29       0     -4.79           0
+Total trades
+                                  2         7         0         0       2         4        0            0                0        8         4        0        1        0        4            0
+
+
+Total return (%)
+                                  0      -1.61        0         0       0     -1.41        0            0                0      4.91    10.97        0     -0.78     6.23    10.97           0
+Win rate (%)
+                                N.A.    54.55       N.A.     N.A.     N.A.    54.55      N.A.     N.A.                 N.A.    57.14       80     N.A.        0     66.67      80      N.A.
+Sarpe ratio
+                      AMZN      N.A.     -0.25      N.A.     N.A.     N.A.    -0.23      N.A.     N.A.      SPXL       N.A.     0.63        2     N.A.     -3.46      0.8       2      N.A.
+Max. Drawdown
+                                  0      -4.28        0         0       0     -5.13        0            0                0     -1.75    -2.64        0     -0.81    -1.75    -2.64           0
+Total trades
+                                  0        11         0         0       0        11        0            0                0        7         5        0        1        6        5            0
+
+
+Total return (%)
+                                0.44      2.9        7.7        0    -0.52     5.12        0            0                0      9.38     6.39     5.57     1.09      8.13    11.18           0
+Win rate (%)
+                                100      62.5       100      N.A.      50     66.67      N.A.     N.A.                 N.A.      75     66.67      100      100       75       75      N.A.
+Sarpe ratio
+                      GOOG      1.73      0.5       2.06     N.A.    -1.72     0.75      N.A.     N.A.      TECL       N.A.     0.83     0.97     2.49     5.06      0.72     1.58     N.A.
+Max. Drawdown
+                               -0.21     -1.94     -2.54        0    -0.96     -2.11       0            0                0     -2.41    -5.34     -0.65       0     -2.41    -5.34           0
+Total trades
+                                  1         8         4         0       2         9        0            0                0        4         3        1        1        4        4            0
+
+
+Total return (%)
+                      META        0      1.25         0      2.03       0      1.44      1.56     2.03      SOXL         0      9.75     8.78        0        0      9.62       0            0
+
+
+
+
+               12
+Win rate (%)
+                          N.A.    57.14   N.A.     100    N.A.   66.67    100     100           N.A.     75     100    N.A.    N.A.     75    N.A.     N.A.
+Sarpe ratio
+                          N.A.     0.17   N.A.    1.17    N.A.    0.35      1    1.17           N.A.    0.68   2.21    N.A.    N.A.    0.65   N.A.     N.A.
+Max. Drawdown
+                             0    -5.23      0    -2.04     0    -2.07   -1.22   -2.04            0    -6.25   -2.47      0      0    -7.23        0      0
+Total trades
+                             0      14       0       1      0       3       1       1             0       4       1       0      0       4         0      0
+
+
+Total return (%)
+                             0     0.33   -0.46   4.75      0     1.86    4.05   4.75             0    15.94   9.06    6.46      0    23.13    -5.9    6.46
+Win rate (%)
+                          N.A.     100      50     100    N.A.    100      75     100           N.A.    100     100     100    N.A.    100         0    100
+Sarpe ratio
+                   NFLX   N.A.     0.19   -0.15   3.03    N.A.    0.65     1.1   3.03    NVDL   N.A.    1.31   1.14    1.38    N.A.    1.74   -1.55    1.38
+Max. Drawdown
+                             0    -1.07   -3.19      0      0    -1.07   -3.93      0             0     -2.9   -5.34   -4.78     0    -1.37    -5.9    -4.78
+Total trades
+                             0       1       2       1      0       2       4       1             0       4       1       1      0       4         1      1
+
+
+Total return (%)
+                          0.82    13.59   6.81       0      0    15.61   12.15      0             0    15.94   9.06    6.46      0    23.13    -5.9    6.46
+Win rate (%)
+                           100    83.33    100    N.A.    N.A.   77.78    100    N.A.           N.A.    100     100     100    N.A.    100         0    100
+Sarpe ratio
+                   TSLA   1.62     1.32   1.71    N.A.    N.A.     1.2    2.09   N.A.    TSLL   N.A.    1.31   1.14    1.38    N.A.    1.74   -1.55    1.38
+Max. Drawdown
+                          -0.49   -4.21   -0.48      0      0    -4.19   -1.27      0             0     -2.9   -5.34   -4.78     0    -1.37    -5.9    -4.78
+Total trades
+                             1       6       1       0      0       9       2       0             0       4       1       1      0       4         1      1
+
+
+
+
+                                                                                                                                              13
+From the results in Table 1, there was no clear relationship between the frequency of the
+data and the results’ metrics. Several tickers also had varying frequencies that had zero
+trades, which contributed to the majority of the 0% maximum drawdowns. The highest
+total returns were recorded with Tesla (Ticker: TSLA) for the strategy without COR (i.e.
+only BB and RSI) on the 1 hour frequency, which recorded a 15.61% total returns and a
+Sharpe ratio of 1.20. However, the strategy with COR yielded high returns of 13.59%
+with Tesla again, but with a higher win rate of 83.33% and a higher Sharpe ratio of 1.32
+compared to the strategy without COR.
+Next, we explored the use of ATR to size our positions instead of maximizing the position
+by allowing fractional trading. This led to the results in Table 2.
+
+
+
+
+14
+               Table 2: Results obtained with optimization and ATR to size positions
+                                                         STOCKS                                                                            LEVERAGED ETFs
+     METRICS                        With COR (BB, RSI, COR)               Without COR (BB, RSI)                            With COR (BB, RSI, COR)             Without COR (BB, RSI)
+                     TICKER                                                                                 TICKER
+                              30Min     1Hour    4Hours     Daily   30Min    1Hour   4Hours     Daily                30Min     1Hour    4Hours     Daily 30Min    1Hour   4Hours     Daily
+Total return (%)
+                               -0.43     1.77         0         0     -0.4     2.16        0            0                0      3.92    13.54        0     0.73        0      13.4           0
+Win rate (%)
+                                 50     42.86       N.A.     N.A.      50        50      N.A.     N.A.                 N.A.      50        75     N.A.      100      N.A.      75      N.A.
+Sarpe ratio
+                      AAPL      -2.4     0.38       N.A.     N.A.    -2.86     0.47      N.A.     N.A.      TQQQ       N.A.     0.34     1.81     N.A.     2.73      N.A.      1.8     N.A.
+Max. Drawdown
+                               -0.67     -3.53        0         0    -0.58      -2.7       0            0                0     -5.57     -5.2        0     -0.32       0     -5.32           0
+Total trades
+                                  2         7         0         0       2         4        0            0                0        8         4        0        1        0          4          0
+
+
+Total return (%)
+                                  0      -1.61        0         0       0     -1.41        0            0                0      5.45    12.23        0     -0.87     6.93    12.23           0
+Win rate (%)
+                                N.A.    54.55       N.A.     N.A.     N.A.    54.55      N.A.     N.A.                 N.A.    57.14       80     N.A.        0     66.67      80      N.A.
+Sarpe ratio
+                      AMZN      N.A.     -0.25      N.A.     N.A.     N.A.    -0.23      N.A.     N.A.      SPXL       N.A.     0.63        2     N.A.     -3.46      0.8         2    N.A.
+Max. Drawdown
+                                  0      -4.28        0         0       0     -5.13        0            0                0     -1.94    -2.93        0      -0.9    -1.94    -2.93           0
+Total trades
+                                  0        11         0         0       0        11        0            0                0        7         5        0        1        6          5          0
+
+
+Total return (%)
+                                0.44      2.9        7.7        0    -0.52     5.12        0            0                0     10.44     7.07        0     1.21      9.04    12.43     6.19
+Win rate (%)
+                                100      62.5       100      N.A.      50     66.67      N.A.     N.A.                 N.A.      75     66.67     N.A.      100       75       75       100
+Sarpe ratio
+                      GOOG      1.73      0.5       2.06     N.A.    -1.72     0.75      N.A.     N.A.      TECL       N.A.     0.83     0.97     N.A.     5.06      0.72     1.58     2.49
+Max. Drawdown
+                               -0.21     -1.94     -2.54        0    -0.96     -2.11       0            0                0     -2.68    -5.93        0        0     -2.68    -5.93    -0.72
+Total trades
+                                  1         8         4         0       2         9        0            0                0        4         3        0        1        4          4          1
+
+
+
+
+                                                                                                                                                                             15
+Total return (%)
+                              0     1.25      0    2.03      0     1.44    1.56   2.03              0    10.83    9.75     0      0    10.69      0      0
+Win rate (%)
+                           N.A.    57.14   N.A.     100    N.A.   66.67    100     100           N.A.      75     100    N.A.   N.A.     75     N.A.   N.A.
+Sarpe ratio
+                    META   N.A.     0.17   N.A.    1.17    N.A.    0.35      1    1.17    SOXL   N.A.     0.68    2.21   N.A.   N.A.    0.65    N.A.   N.A.
+Max. Drawdown
+                              0    -5.23      0    -2.04     0    -2.07   -1.22   -2.04             0    -6.93   -2.73     0      0    -8.01      0      0
+Total trades
+                              0      14       0       1      0       3       1       1              0       4       1      0      0       4       0      0
+
+
+Total return (%)
+                              0     0.33   -0.46   4.75      0     1.86    4.05   4.75              0    17.81   10.07   7.18     0    25.93   -6.56   7.18
+Win rate (%)
+                           N.A.     100      50     100    N.A.    100      75     100           N.A.     100     100    100    N.A.    100       0    100
+Sarpe ratio
+                    NFLX   N.A.     0.19   -0.15   3.03    N.A.    0.65     1.1   3.03    NVDL   N.A.     1.31    1.14   1.39   N.A.    1.74   -1.55   1.39
+Max. Drawdown
+                              0    -1.07   -3.19      0      0    -1.07   -3.93      0              0    -3.22   -5.92   -5.3     0    -1.52   -6.56   -5.3
+Total trades
+                              0       1       2       1      0       2       4       1              0       4       1      1      0       4       1      1
+
+
+Total return (%)
+                           0.82    13.59   6.81       0      0    15.61   12.15      0           1.71    41.56      0      0      0    43.77   27.98     0
+Win rate (%)
+                            100    83.33    100    N.A.    N.A.   77.78    100    N.A.            100    85.71    N.A.   N.A.   N.A.   77.78    100    N.A.
+Sarpe ratio
+                    TSLA   1.62     1.32   1.71    N.A.    N.A.     1.2    2.09   N.A.    TSLL   1.54     1.51    N.A.   N.A.   N.A.    1.35    2.11   N.A.
+Max. Drawdown
+                           -0.49   -4.21   -0.48      0      0    -4.19   -1.27      0           -1.17   -9.35      0      0      0    -9.29   -2.76     0
+Total trades
+                              1       6       1       0      0       9       2       0              1       7       0      0      0       9       2      0
+
+
+
+
+               16
+From the results in Table 2, it was observed that similarly, there was no clear relationship
+between the timeframe of the closing prices and the results’ metrics. In particular, the
+timeframe of daily for Netflix (Ticker: NFLX) yielded the best Sharpe ratio of 3.03 for
+both strategies. However, the best recorded total returns was with the 1 hour frequency
+data with Tesla (Ticker: TSLA), which also yielded a relatively high Sharpe ratio of 1.20
+and highest total returns of 17.44% for the strategy without COR. However, the strategy
+for COR yielded not only the second highest return but also a higher win rate of 83.33%,
+and a higher Sharpe ratio of 1.32. At this point, it was observed that having ATR to size
+positions during trades increases win rate and total returns for the stocks. In particular,
+having COR was found to have increased the win-rate by a notable amount alongside
+Sharpe ratio, while sacrificing a small percentage of returns. However, since the best
+returns were observed for the 1-hour interval instead of higher frequencies, it potentially
+suggests a local maxima for the frequency-volatility-total returns tradeoff. A notable
+observation was that returns were seemingly greater for stocks with greater historical
+volatilities such as Tesla. This effect was found to be even more prominent with ATR.
+Next, to further validate our hypothesis that extreme volatility could potentially reap more
+rewards, leveraged ETFs were also experimented with for the same frequencies and
+respective time horizons. The tickers of choice are: ProShares UltraPro QQQ (Ticker:
+TQQQ), Direxion Daily Semiconductor Bull 3x Shares (Ticker: SOXL), Direxion Daily
+TSLA Bull 2X Shares (Ticker: TSLL), Direxion Daily S&P 500 Bull 3x Shares (Ticker:
+SPXL), GraniteShares 2x Long NVDA Daily ETF (Ticker: NVDL), and Direxion Daily
+Technology Bull 3x Shares (Ticker: TECL).
+From the results in Table 1 and 2, a similar result on having ATR yielding higher total
+returns was observed. Moreover, leveraged ETFs have shown to yield significantly higher
+total returns, and even much more with ATR as shown in Table 2. Our hypothesis that
+higher volatility, moreover so for the same stock ticker but with leverage, could
+potentially reap higher returns rewards appeared to be largely validated by the results in
+Tables 1 and 2. For example, Direxion Daily TSLA Bull 2X Shares (Ticker: TSLL) which
+has the underlying assets in the ETF to track the performance of Tesla stock, using ATR
+yielded significantly higher returns of 43.77% without COR and 41.56% with COR in
+Table 2, as compared to the same 1-hour frequency for Tesla (Ticker: TSLA), which
+yielded 17.44% without COR and 15.16% total returns with COR in Table 2. However, it
+was noted that the maximum drawdowns also significantly increased to -9.35% from
+-4.67%, in the case of using COR with ATR. This result showed that including leverage
+could exacerbate total returns, but also the drawdowns. Other leveraged ETFs in Table 1
+and 2 also showed much higher returns than non-leveraged assets in Tables 1 and 2.
+Our project code is hosted on a GitHub repository, which can be accessed via the link at
+https://github.com/weihao94/WQU-MScFE-690-Capstone-Group-11206.
+
+
+
+
+                                                                                         17
+5. Discussion
+From our initial optimization results with a stock ticker from the magnificent seven
+companies in the US, it was found that there was no clear relationship between higher
+intervals of asset prices and a higher total return and win rate. Moreover, with ATR for
+position sizing in trades, the total returns, win rates and Sharpe ratios were found to be
+higher for the same asset and frequency. These results thus indicate the importance of
+ATR in risk adjustments to our trades. Our results also showed that having COR in the
+strategy helped increase the win-rate and Sharpe ratio without sacrificing much returns,
+which indicated that our proposed COR strategy is effective in ‘securing’ wins when
+added to the vanilla strategy involving the BB and RSI. Moreover, there are a notably
+small number of trades during the evaluation period, which places results with high (or
+perfect) win-rates with caution due to the low number of trades to evaluate the
+effectiveness of our strategy.
+We have also established a relationship with higher volatility assets (e.g. Tesla stock)
+having greater potential for returns, especially with ATR. This volatility relationship with
+returns was found to be exacerbated with leverage, which was validated with the
+leveraged ETF for Tesla (Ticker: TSLL), with and without ATR. As currently we have
+only evaluated a stock’s performance with a leveraged version of its asset, to further
+extend our hypothesis and results, we would thus expand the comparisons in future to
+more pairs of assets and their leveraged versions. This would help to further investigate
+potential relationships between volatility of assets with their total returns, with and
+without ATR. Combinations of metrics will likewise also be sequentially evaluated
+starting with our proposed COR metric, adding in more like Bollinger Bands, RSI, leading
+to a combination of all metrics to determine the trading signal.
+
+6. Conclusion
+Our research successfully demonstrated the potential of physics-inspired technical
+analysis through the development and implementation of the Coefficient of Restitution
+(COR) indicator for swing trading applications. The proposed COR strategy addresses a
+fundamental limitation in traditional dip-buying approaches by providing quantitative
+assessment of pullback strength, thereby improving entry timing and trade quality
+evaluation. The primary contribution of this work resides in the novel adaptation of
+collision dynamics principles to financial market analysis. By translating the physics
+concept of energy retention after collision (i.e. COR) into a metric for measuring price
+momentum recovery, the COR indicator fills a critical gap in existing technical analysis
+frameworks. The mathematical formulation in (12) successfully captures the relationship
+between asset-specific price movements and broader market conditions, providing traders
+with actionable insights about potential trade outcomes.
+Furthermore, our empirical analysis reveals several important insights. Firstly, the
+integration of ATR-based position sizing significantly enhances performance metrics
+across all timeframes, demonstrating the value of volatility-aware risk management.
+Secondly, more volatile assets with leverage consistently produced superior returns and
+risk-adjusted performance, with the 1-hour interval achieving exceptional results
+including 85.71% win rates and positive Sharpe ratios. In particular, with ATR, the 1-hour
+interval yielded the highest total return of 41.56% with COR and 43.77% without COR,
+and a high Sharpe ratio of 1.51 with COR and 1.35 without COR. Lastly, the COR
+strategy's performance improvements over traditional methods validate the theoretical
+foundation and practical applicability of physics-inspired indicators in financial markets.
+Overall, while our initial results appear promising, there are several limitations which
+warrant acknowledgment. The current analysis focuses primarily on selected stocks from
+the magnificent seven in the US and selected leveraged ETFs, which are large companies
+and funds with highly liquid assets during specific market conditions, potentially limiting
+
+
+
+18
+generalizability. As a next step, we seek to expand the universe of assets to include
+diverse sectors, asset classes, historical volatilities and market regimes to validate the
+COR indicator's robustness across varying conditions. More historical data would also be
+extracted for each frequency, subject to the limits of Yahoo Finance’s API, which in our
+frequencies contexts are 60 days for 30-minute data, 2 years for hourly data, and years
+(non-stated limit) for daily data. Moreover, our study period's predominantly bullish
+market conditions may have favored dip-buying strategies. Additional testing during
+known bear markets and high-volatility regimes will be crucial for comprehensive
+strategy validation. The integration of regime identification algorithms could further
+enhance the COR strategy's adaptability to changing market conditions.
+7. Data and Code Availability Statement
+To ensure replicability, transparency, and the academic integrity of this study, all
+computation logic, parameter grids, and backtesting frameworks have been made fully
+open-source. The complete Python implementation scripts, datasets used in the
+experiments and their associated results are publicly hosted on our GitHub repository at:
+https://github.com/weihao94/WQU-MScFE-690-Capstone-Group-11206.
+The empirical analysis relied entirely on historical market data fetched from Yahoo
+Finance. The asset universe comprised of two classes and a market benchmark:
+    ●​ Single Equities: Six selected assets from the US Magnificent Seven companies,
+       including Apple, Inc. (AAPL), Amazon.com, Inc. (AMZN), Alphabet, Inc.
+       (GOOG), Meta Platforms, Inc. (META), Netflix, Inc. (NFLX), and Tesla, Inc.
+       (TSLA).
+    ●​ Leveraged ETFs: ProShares UltraPro QQQ (TQQQ), Direxion Daily
+       Semiconductor Bull 3x Shares (SOXL), Direxion Daily TSLA Bull 2X Shares
+       (TSLL), Direxion Daily S&P 500 Bull 3x Shares (SPXL), GraniteShares 2x Long
+       NVDA Daily ETF (NVDL), and Direxion Daily Technology Bull 3x Shares
+       (TECL).
+    ●​ Market Benchmark: The S&P 500 Index (^GSPC) serves as the baseline proxy
+       for broader market conditions to evaluate the relative RSI differentials within the
+       COR metric.
+Due to the native data distribution limitations of the Yahoo Finance API, two distinct time
+horizons were utilized:
+    1.​ 1-Hour, 4-Hour, and Daily Frequencies: A full 1-year historical window
+        spanning from October 10, 2024, to October 10, 2025, inclusive.
+    2.​ 30-Minute Frequency: A truncated 1-month historical window spanning from
+        September 10, 2025, to October 10, 2025, inclusive, enforced by API structural
+        limits on high-frequency intraday data retrieval.
+The backtesting validation framework initiated with a baseline cash position of
+$1,000,000 USD. To maximize market exposure and optimize capital efficiency during
+trade execution, fractional share trading was enabled. Lastly, to streamline the
+hyperparameter search and isolate the mathematical edge of the technical signals, the
+backtest operated under the assumptions that transaction costs, execution commissions,
+slippage, and risk-free rates were zero.
+
+
+
+
+                                                                                        19
+8. References
+[1] Lashkov, V. A. “Experimental Determination of the Coefficients of Restitution of Particles in
+the Flow of a Gas Suspension in a Collision against the Surface.” Journal of Engineering Physics,
+vol. 60, 1991, pp. 154–159.
+[2] Park, Cheol‑Ho, and Scott H. Irwin. “What Do We Know about the Profitability of Technical
+Analysis?” Journal of Economic Surveys, vol. 21, no. 4, 2007, pp. 786–826. Wiley,
+doi:10.1111/j.1467-6419.2007.00519.x.
+[3] Prahigrini, K. Ashok, Krushal Vachhani, Suman K. Chaudhury. “Trend Identification with the
+Relative Strength Index (RSI) Technical Indicator - A Conceptual Study”. Journal of Management
+Research and Analysis, vol. 8, no. 4, 2021, pp. 159-169. https://doi.org/10.18231/j.jmra.2021.033.
+
+[4] Boxer, Harry. “Profitable Day and Swing Trading - Using Price/Volume Surges and Pattern
+Recognition to Catch Big Moves in the Stock Market”. Wiley Online Library, pp.103-111
+https://doi.org/10.1002/9781118835081.ch13.
+
+[5] Yamanaka, Sharon. “Average True Range”. Stocks & Commodities, vol. 20, no. 3, pp. 76 - 79.
+https://www.fidelity.com/bin-public/060_www_fidelity_com/documents/AverageTrueRange.pdf.
+[6] Moreira, Alan, and Tyler Muir. “Volatility-Managed Portfolios.” The Journal of Finance, vol.
+72, no. 4, 2017, pp. 1611–1644. Wiley Online Library, https://doi.org/10.1111/jofi.12513.
+[7] Cederburg, Scott, Michael S. O’Doherty, Feifei Wang, and Xuemin (Sterling) Yan. “On the
+Performance of Volatility-Managed Portfolios.” Journal of Financial Economics, vol. 138, no. 1,
+2020, pp. 95–117. doi:10.1016/j.jfineco.2020.04.015.
+[8] Bergfast, Anna. Automated Trading Using a Dip Searching Strategy. Master’s thesis, Royal
+Institute of Technology (KTH), Stockholm, Sept. 2009.
+[9] Frazzini, Andrea, Ronen Israel, and Tobias J. Moskowitz. “Trading Costs of Asset Pricing
+Anomalies.” SSRN Electronic Journal, 5 Dec. 2012, https://ssrn.com/abstract=2294498.
+[10] Barroso, Pedro, and Pedro Santa-Clara. “Momentum Has Its Moments.” Journal of Financial
+Economics, vol. 116, no. 2, 2015, pp. 111–120.
+[11] MacCall, Matthew, and Mark Whistler. “The Swing Trader’s Bible - Strategies to Profit from
+Market Volatility”. John Wiley & Sons, Inc. , 2009, pp. 176.
+https://wealthcreator.co.in/wp-content/uploads/2023/03/The_Swing_Traders_Bible_Strategies_to_
+Profit_from_Market_Volatility.pdf.
+[12] Choi, Jaehyung. “Physical Approach to Price Momentum and Its Application to Momentum
+Strategy.” arXiv, 2012, arXiv:1208.2775.
+
+
+9. Disclaimer
+This paper was created as part of a WorldQuant University degree program towards an
+MSc in Financial Engineering. This paper is reproduced with the consent and permission
+of WorldQuant University. All rights reserved.
+
+
+
+
+20
+Appendix
+A. Code Repository
+The following link is to a GitHub repository containing our project code, datasets used
+and results: https://github.com/weihao94/WQU-MScFE-690-Capstone-Group-11206.
+
+
+
+
+                                                                                    21
+

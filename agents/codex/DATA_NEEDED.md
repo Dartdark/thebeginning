@@ -10,6 +10,7 @@ Created 2026-10-31 at the user's request. This is the central shopping/export li
 
 | Dataset or export | Leads it could support | Minimum useful delivery |
 |---|---|---|
+| Native SPY minute prices/volume and replication artifacts | D55 | Declared timestamp/adjustment basis, consolidated OHLCV, dividends/calendars, exact engine/fill/cash and trial-return package. IEX-only volume and daily proxies do not reproduce it. |
 | Individual dated VX and ES contracts | D01–D03 | Unadjusted contract prices, exact expiries, sessions, price type and roll map. D01 specifically needs intraday VX, not daily settlements. |
 | Broad commodity maturity panel | D06–D11 | Identified first/second contracts plus wider universes where required, settlement availability, volume/OI, expiries, rolls and native units. |
 | Actual exchange auction messages | D13 | SPY Arca open/close and QQQ Nasdaq NOII, signed quantities, indicative/reference prices, auction prints and synchronized quotes. |
@@ -185,6 +186,27 @@ Retain these outcomes so old NEEDS DATA headings do not become accidental new sh
   no rescue of failed generic daily trends or repeating unchanged acquisition loops.
 - [Review](results/delta_straddle_4677166_review.md) · [Acquisition/delivery gate](inputs/delta_straddle_4677166/free_data_gate.md).
 
+### D55 — SPY noise-band/VWAP replication audit, SSRN7323419 (November8,2026)
+
+- **Merit/status:** conditional low-priority personal SPY lead / NEEDS DATA AND SPECIFICATION, no code build.
+  Delgado reports close historical replication but−8.1%September2025–August2026; final overlays were adaptively
+  selected on seen history and worsen QQQ Sharpe. Related NQ/ES variants already tested; no futures rescue.
+- **Need:** native SPY1-minute RTHOHLCV,Jan2000–Aug14,2026for exact source,14-session warmup, dividend
+  amounts/ex-dates, real early-close calendar, price/volume/timestamp basis; authenticated final/baseline engine,
+  selected fills/cash/short borrow/margin/minimum fees,129-trial ledger and70daily-return series/freeze identity.
+  Local2018–22design plus prior warmup/earned2023+would be a distinct protocol, not source full reproduction.
+  The full trial matrix is needed for the author's DSR/PBO audit only; a native free panel and frozen explicit
+  interpretations can support a separate strategy test without requiring proprietary author/vendor code.
+- **Have/attempted:** futures minutes/daily/proxy files, no identified owned SPY minute panel. Source PDF has
+  no external package links. Exact author/title/id searches found no authenticated replication download.
+  HFDataLibrary documents IEX-only volume from2022; MarketParquet full minute history paid. HuggingFace
+  Finnhub-origin card exists, SPY tree fails; public metadata shell attempt blocked by proxy CONNECT403 after
+  sandbox retry. Another archive's page/README unreadable. No raw bars admitted, purchases/accounts/contact.
+- **Next:** only genuine new matching inputs: authenticate one normal/dividend/early-close formation and fill/cash
+  interval, then coverage/cost/power before TEST/preregistration. Do not substitute IEXVWAP/RV, ES/10, NQ
+  or build another planner without usable historical inputs. No current allocation or claim of future profit.
+- [Review](results/delgado_7323419_review.md) · [Source/acquisition receipt](inputs/delgado_7323419/free_data_gate.md).
+
 ## Keep this register current
 
 For each future worthwhile data-blocked lead, add or update its shared family here with: merit, market/account fit, exact fields and dates, contract/universe identity, publication/receipt/bar conventions, partial inputs already obtained, actual access attempts, unresolved source rules, smallest next admission check and source links. Use new IDs after the existing ones; keep superseded IDs/history rather than renumbering other leads.
@@ -309,3 +331,24 @@ On genuinely new matching inputs, reconcile one native paired formation/fill/cas
 a corrected economic protocol. Do not repeatedly crawl, substitute asynchronous daily proxies, optimize a
 repair after seeing source results or revive this failed implementation merely because data arrives. Free
 sources only; no account creation, vendor contact, paid access, plan/live change or user-action request.
+
+## KSE Sentinel — PSX source-rule gate (uploaded SSRN7102818)
+
+Low-priority personal-market lead, not research-admitted. Exact calibrated rules
+are deliberately withheld: EMA lengths, master trend, entry/exit/stop conditions,
+signal/fill clocks, risk denominators, concentration and correlation lookbacks,
+gate ordering and short-sale treatment. Need frozen code/specification and a small
+dated trade/blocked-signal sample with actual quantities, prices, costs and FX.
+The supplied `https://shorturl.at/n9GTR` returned HTTP403 on November8,2026;
+bounded public discovery found the matching paper/promotional descriptions but
+no complete rules or ledger. No account creation, credential request, paid data,
+external message or return test. An opaque signal API does not supply the rules.
+
+Only after rule/cash reconciliation: exact 30-stock membership history (including
+delistings and ENGRO/ENGROH transition), dated PSX daily OHLCV/corporate actions,
+lot/short-sale/venue restrictions and liquidity, PKR/USD marks and conversion
+times; primary source window2021–2026 and claimed archive~2000–2020, plus dated
+July2026 forward-paper outcomes. Need benchmark ledger and complete trial/DSR
+outputs. Cost wording22.5bp per leg versus round trip is unresolved. Owned CME
+bars are not a matching panel. Do not collect a bulk substitute or invent an EMA
+configuration before the source gate. [Review](results/kse_sentinel_7102818_review.md).
