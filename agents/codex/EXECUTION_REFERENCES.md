@@ -380,6 +380,19 @@ annualization and time-zone mapping for any separately justified future comparis
 
 ### E12 — Realized-variance measurement: microstructure noise, units and availability
 
+- Monthly trend/risk follow-up, retained 2026-11-08: Shi and Lian,
+  [SSRN 5140633 full review](results/ssrn5140633_review_20261108.md), February 17, 2025, pp. 17–25 and 33–35.
+  Compare trend filters using their return-weight kernels and effective horizons before treating a different
+  indicator as new information. EMA centers of mass in the source are not standard EMA periods. A centered
+  smoother uses future observations; a causal rolling estimate needs its own as-of vintage and first-fill clock.
+  Inverse-volatility weights do not equalize covariance-aware risk contributions or guarantee portfolio risk:
+  the source's approximate 12% portfolio-volatility objective accompanies 18.51% reported realized volatility.
+  The combined 1/3/12-month basket's 16.24% annual return / 0.88 Sharpe / −22.63% drawdown is an author claim,
+  without a Table 6 transaction-cost bridge, not verified net returns, execution savings or intraday protection.
+  Monthly crisis alpha does not establish an offset before an Apex breach. For separately justified research,
+  inspect lagged covariance, leverage/margin, netted integer positions and complete native paths before account
+  conclusions; do not use this reference to rerun the already-studied generic trend family. Zero new return trials.
+
 Source: Zhou (2018), [SSRN 1783624](https://ssrn.com/abstract=1783624), pp.4–5 and Figure 1 p.27.
 [Review](results/variance_risk_premium_review_20261029.md), 2026-10-29.
 - Use: high-frequency squared returns can be contaminated by microstructure frictions; a noisier variance estimate is not necessarily more accurate just because sampling is faster.
@@ -1614,6 +1627,24 @@ Source: Tzotchev, SSRN4677166, February6,2018, [review/source audit](results/del
 - Next check on genuinely new matching inputs: one causal native formation/rebalance/roll/cash interval and cost
   bridge, preserving full universe, source selection and prior negative trend evidence. D54 records missing data.
 - Status: conditional personal lead and cost-reference only; zero new financial trials, measured savings or live changes.
+
+### Research-method follow-up — Indicator significance, selection and switching costs (2026-11-08)
+
+Source: Fang/Qin/Jacobsen, *Technical Market Indicators: An Overview*, SSRN2449344, user-uploaded manuscript.
+[Review](results/market_indicators_2449344_review_20261108.md),
+[source/unit receipt](../../analysis/outputs/codex_market_indicators_2449344/source_audit.json).
+- Use: distinguish regression significance, stable signs and economic value after switching. Main author screen
+  goes93→30→10→8→0 economic outperformers; selected regime/robust exceptions exist but do not establish a new edge.
+- Evidence: main narrative/selected tables, visual Table13 check, no empirical reproduction. Table13's short-sales
+  Sharpe2.47 is multiplied by10^-2, yielding0.0247 per week; not annual Sharpe2.47. Switching cost0.10% is an
+  author assumption for market/cash timing, not our native futures spread/fee/slippage ledger or measured savings.
+- Clocks: NBER retrospective labels are not contemporaneous inputs; a real-time CFNAI release still requires
+  original vintages and availability. Lagged indicator dates and full-sample-selected candidates do not establish
+  independent tradable validation. Weekly NYSE short-sales data ending2008 cannot be silently replaced by modern
+  daily short volume, short interest or futures volume.
+- Next check only on materially stronger independent evidence: actual data/source clocks, precise forecast/refit
+  conventions and same-opportunity costed holdings. No new data acquisition, return trial, filter, allocation or
+  rejection of existing independently tested strategies follows. Supporting negative/method evidence only.
 
 ## Minimum record for any later execution comparison
 
