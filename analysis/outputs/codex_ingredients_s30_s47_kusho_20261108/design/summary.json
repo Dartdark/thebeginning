@@ -1,0 +1,97 @@
+{
+  "phase": "design",
+  "start": "2018-01-01",
+  "end": "2022-12-30",
+  "rule_cases": 20,
+  "implementation_gates_passed": true,
+  "script_sha256": "99d327fda52918f652c8d01560de36881c40025a078d40f3c2b0337133a653da",
+  "plan_sha256": "2c8fab235bd947ec7429f0eddd3318e8d1323a44fe6052b6dcffbf958f08c7c9",
+  "plan_commit": "f43c4595743be5801dae77b8658760695de696ff",
+  "source_parity": {
+    "S30_NQ": 154,
+    "S30_ES": 144,
+    "S47": {
+      "trades": 391,
+      "check": "unchanged source function"
+    },
+    "KUSHO": 1829
+  },
+  "pure_filter_controls": {
+    "no_NY_agreement": {
+      "pure_nested_filter": true,
+      "removed_n": 426,
+      "removed_total": 75721.5,
+      "removed_mean": 177.75,
+      "removed_t": 1.8771681021879123,
+      "random_drops": 1000,
+      "actual_total": 143095.25,
+      "actual_dd": 15725.0,
+      "random_total_p5_p50_p95": [
+        57114.5,
+        105572.75,
+        151422.0
+      ],
+      "random_dd_p5_p50_p95": [
+        13126.525,
+        20129.5,
+        32785.9625
+      ],
+      "random_profit_ge_actual": 0.094,
+      "random_dd_le_actual": 0.199
+    },
+    "NY_only": {
+      "pure_nested_filter": true,
+      "removed_n": 824,
+      "removed_total": 15151.0,
+      "removed_mean": 18.387135922330096,
+      "removed_t": 0.3114459002152114,
+      "random_drops": 1000,
+      "actual_total": 143095.25,
+      "actual_dd": 15725.0,
+      "random_total_p5_p50_p95": [
+        5602.5,
+        53967.75,
+        103151.74999999999
+      ],
+      "random_dd_p5_p50_p95": [
+        13693.7625,
+        21661.125,
+        39937.65
+      ],
+      "random_profit_ge_actual": 0.001,
+      "random_dd_le_actual": 0.138
+    }
+  },
+  "seed": 80314,
+  "resampling_draws": 1000,
+  "dependency_sha256": {
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a",
+    "analysis/codex_ingredients_three_20261108.py": "ed4e4f7e0daa05e659162337686a53b6ae82460cd35176c7adefe01553491a75",
+    "analysis/codex_ingredients_events_20261108.py": "99818a22a85681aca090c4c8b23a2762977a6f8709e6ab9748397d40eca6966e"
+  },
+  "terminal_counts": {
+    "S30_NQ/original": 0,
+    "S30_NQ/no_low_IBS_entry": 1,
+    "S30_NQ/fixed_5_session_exit": 1,
+    "S30_NQ/opposite_same_schedule": 0,
+    "S30_NQ/close_strength": 1,
+    "S30_ES/original": 0,
+    "S30_ES/no_low_IBS_entry": 1,
+    "S30_ES/fixed_5_session_exit": 1,
+    "S30_ES/opposite_same_schedule": 0,
+    "S30_ES/close_strength": 1,
+    "S47/original": 0,
+    "S47/no_NY_agreement": 0,
+    "S47/NY_only": 0,
+    "S47/opposite_direction": 0,
+    "S47/no_stop": 0,
+    "KUSHO/original": 0,
+    "KUSHO/no_wick": 0,
+    "KUSHO/no_EMA": 1,
+    "KUSHO/no_break_even": 0,
+    "KUSHO/flat_1545": 0
+  },
+  "new_rule_selected": false,
+  "portfolio_tests_run": false
+}
