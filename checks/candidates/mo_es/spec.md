@@ -1,0 +1,2 @@
+# Morning Momentum on ES (Twin v2.1 MO rules, 2026-11-08)
+ES 1-minute, 24h. 10-minute buckets; oscillator = (close - EMA21 of bucket closes) / (3 x Wilder ATR14 of buckets) x 100, EMA3-smoothed; long when it crosses above +100 (short below -100) on a full bucket ending 08:40-09:30 CT, one attempt a day, no early-close days; market entry next bar; stop 20 points; no target; exit at 14:50 CT. $5 + 1 tick per fill per ES.
