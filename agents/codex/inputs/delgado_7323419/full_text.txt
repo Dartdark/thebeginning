@@ -1,0 +1,1417 @@
+               “Beat the Market” Revisited
+An Independent Replication and Statistical Audit of an Intraday
+                   Momentum Strategy
+
+
+                                      José Enrique Delgado
+                                         Independent Research
+
+
+                                              August 2026
+
+
+
+
+ Research status. This study independently replicates and extends Zarattini, Aziz, and Barbon’s Swiss
+ Finance Institute Research Paper No. 24-97. It is not affiliated with the original authors or the Swiss
+ Finance Institute. The published strategy is reproduced on an independent one-minute TradeStation dataset,
+ extended through 14 August 2026, and subjected to a documented search and statistical audit covering 80
+ SPY strategy alternatives. The final modified configuration is frozen for prospective observation and is
+ explicitly classified as retrospectively significant but not prospectively validated. This revision also
+ reconciles the authors’ August 2025 post-publication update with the subsequent, previously unpublished
+ 2025–2026 stretch and expands the cross-asset adverse-evidence discussion.
+“Beat the Market” Revisited                                              Independent Replication and Statistical Audit
+
+
+                                                       Abstract
+           Zarattini, Aziz, and Barbon report that a simple intraday time-series momentum strategy applied to
+       SPY produced a total return of 1,985%, an annualized return of 19.6%, and a Sharpe Ratio of 1.33 from
+       May 2007 through April 2024. This paper performs an independent replication and a post-publication
+       extension using approximately 2.6 million one-minute SPY observations from TradeStation spanning
+      January 2000 through August 2026. After reconciling two material implementation details against the
+       authors’ published Python reference code—the use of typical-price Volume Weighted Average Price
+      (VWAP) and VWAP confirmation at entry—the original result is reproduced almost exactly: 1,989% total
+       return and a Sharpe Ratio of 1.317 on the paper window under the closest paper-matching convention.
+      The independent update also closely reproduces the authors’ September 2025 FAQ update: 2024 returns
+       are 31.8% versus their 32.2%, and January–August 2025 returns are 1.4% versus their 1.0%.
+           The longer sample changes the interpretation, but not in the simple form suggested by the pooled May
+       2024–August 2026 Sharpe of 0.35. Disaggregating the post-publication path reveals two sharply different
+       regimes. Under a Q24-comparable monthly convention, May 2024–29 August 2025 returns 19.3% with
+       Sharpe 1.057; using the exact first trading day after the 10 May 2024 publication, the corresponding return
+       is 23.3% with Sharpe 1.284. By contrast, the subsequent 2 September 2025–14 August 2026 stretch returns
+      -8.1% with Sharpe -0.461. Thus the evidence does not support a narrative of immediate post-publication
+       alpha decay; it supports a strong initial post-publication period followed by a materially weak recent
+       regime. A systematic search then evaluates asymmetric short filters, relative-volume sizing, volatility
+       overlays, persistence filters, profit locks, breakeven rules, trade caps, daily loss limits, VWAP-dominance
+       rules, intraday decay, regime overlays, and performance-based overlays. Only a small subset survives
+       the consistent multi-window standard applied during the extension stage. The final frozen selected
+       specification reaches a valid-period Sharpe Ratio of 1.274, a -14.8% maximum drawdown, and a 2110.6%
+       total return over 2000–2026, while deliberately sacrificing terminal wealth relative to the baseline.
+           To address multiple testing, a research ledger of 129 trials is reconstructed and 80 SPY search
+       alternatives are identified. Combinatorially Symmetric Cross-Validation yields a Probability of Backtest
+       Overfitting of 38.49% under the historical convention and 40.87% on a common-valid sample. The
+       Deflated Sharpe Ratio of the final candidate, using 𝑁 = 80 as the primary multiple-testing count, is
+       99.999986796%. These statistics support a strong retrospective edge but do not provide a genuine
+       prospective validation because the search was adaptive and the 2024–2026 data were observed during
+       model development. The correct next experiment is therefore not another retrospective optimization, but
+       the passage of time with frozen parameters.
+
+Keywords: Intraday Momentum; SPY; Time-Series Momentum; VWAP; Replication; Post-Publication
+Performance; Backtest Overfitting; Probability of Backtest Overfitting (PBO); Deflated Sharpe Ratio (DSR);
+Researcher Degrees of Freedom; Prospective Validation.
+
+1 Introduction
+
+Momentum is one of the most persistent and widely studied empirical regularities in asset prices. At
+medium horizons, the canonical evidence of Jegadeesh and Titman documents continuation in relative equity
+performance, while later work extends the idea to time-series momentum and, increasingly, to intraday
+horizons [2, 6]. Gao et al. document intraday continuation in the U.S. equity market [3]; Rosa emphasizes that
+the strength of intraday predictability can decay or become regime-dependent [4]; and Baltussen et al. link
+intraday momentum to hedging demand and market microstructure [5]. These strands motivate systematic
+attempts to distinguish directional price moves from ordinary intraday noise.
+       Zarattini, Aziz, and Barbon (hereafter ZAB) propose one such mechanism in Beat the Market, Swiss
+Finance Institute Research Paper No. 24-97 [1]. Their strategy constructs a time-varying “Noise Area” around
+the opening price, enters trend-following positions when price action indicates an abnormal demand/supply
+imbalance, applies a dynamic trailing stop based on the current Noise Area boundary and Volume Weighted
+Average Price (VWAP), and scales exposure toward a daily volatility target. In the version dated 22 September
+
+                                                           1
+“Beat the Market” Revisited                                              Independent Replication and Statistical Audit
+
+
+2025, the authors report a total return of 1,985%, an annualized return of 19.6%, volatility of 14.3%, and
+a Sharpe Ratio of 1.33 over May 2007–April 2024. Their Frequently Asked Questions (FAQ) section
+subsequently adds code links, parameter-sensitivity tables, a more sophisticated market-impact exercise,
+cross-asset extensions, and—most importantly for this study—an updated equity curve through 29 August
+2025 with the post-publication period explicitly shaded. Their decision to publish executable reference code
+and maintain a living FAQ is unusual and materially increases the falsifiability of the research. It makes the
+present study possible as a genuine reproduction exercise rather than a reverse-engineering exercise from
+prose alone; throughout, disagreements are therefore treated as testable specification or data questions rather
+than as reasons to presume error in the original work.
+       The present study is designed around three questions.
+       First, can the original result be independently reproduced on a different data source and a separately
+written engine? A strong historical result is substantially more credible if its main statistics survive a clean
+implementation and a different vendor feed.
+       Second, what happened after publication? This is not merely a rhetorical question. The 2025 edition
+of the original paper makes the post-publication equity path observable, and the independent TradeStation
+history extends another year through August 2026. That additional period cannot prove permanent alpha
+decay, but it provides a direct test of whether the spectacular in-sample behavior remained representative.
+       Third, can the risk-adjusted profile be improved without hiding failed experiments? Rather than present
+only successful modifications, we maintain a research ledger recording both adopted and rejected ideas. The
+resulting search contains 80 SPY alternatives that could have influenced final selection. This permits a more
+honest treatment of multiple testing than a single polished backtest.
+       The contribution is therefore not intended as a refutation of the original paper. In fact, the first and
+strongest result of this study is that the original backtest is reproducible to a remarkably close degree. The
+contribution is to separate four statements that are often conflated: (i) the historical backtest existed, (ii) the
+underlying historical edge is statistically distinguishable from pure chance, (iii) the parameter optimum is
+stable, and (iv) the edge will persist prospectively. The evidence strongly supports the first two, weakens the
+third, and leaves the fourth unresolved.
+
+2 The Published Strategy
+
+2.1 Noise Area
+
+Let 𝑂 𝑡 denote the regular-session open on day 𝑡, and let 𝐶𝑡 −1 denote the previous regular-session close. For
+each intraday checkpoint ℎ, define the absolute move from the open on prior day 𝑡 − 𝑖 as
+                                                          𝐶𝑡 −𝑖,ℎ
+                                             𝑚 𝑡 −𝑖,ℎ =           −1 .                                             (1)
+                                                          𝑂 𝑡 −𝑖
+Using a lookback of 𝐿 = 14 trading days, the time-of-day noise estimate is
+                                                           𝐿
+                                                      1 ∑︁
+                                              𝜎𝑡 ,ℎ =       𝑚 𝑡 −𝑖,ℎ .                                             (2)
+                                                      𝐿 𝑖=1
+The gap-aware upper and lower boundaries are then
+                                      𝑈𝐵𝑡 ,ℎ = max(𝑂 𝑡 , 𝐶𝑡∗−1 ) 1 + 𝜎𝑡 ,ℎ ,
+                                                                           
+                                                                                                                   (3)
+                                      𝐿𝐵𝑡 ,ℎ = min(𝑂 𝑡 , 𝐶𝑡∗−1 ) 1 − 𝜎𝑡 ,ℎ ,
+                                                                          
+                                                                                                                   (4)
+where 𝐶𝑡∗−1 denotes the previous close after the dividend convention used by the relevant engine. The strategy
+only evaluates signals at semi-hourly checkpoints, ℎ ∈ {10:00, 10:30, . . . , 16:00}.
+
+                                                          2
+“Beat the Market” Revisited                                          Independent Replication and Statistical Audit
+
+
+2.2 VWAP and entry/exit logic
+
+The authors’ published reference implementation computes VWAP from the regular-session typical price,
+consistent with the VWAP-based framework discussed in their earlier work [1, 9],
+                                                                          Í
+                                 𝐻 𝑡 , 𝑗 + 𝐿 𝑡 , 𝑗 + 𝐶𝑡 , 𝑗                 𝑗 ≤ℎ 𝑇 𝑃𝑡 , 𝑗 𝑉𝑡 , 𝑗
+                      𝑇 𝑃𝑡 , 𝑗 =                            , 𝑉𝑊 𝐴𝑃𝑡 ,ℎ =    Í                   . (5)
+                                            3                                   𝑗 ≤ℎ 𝑉𝑡 , 𝑗
+
+For a long position, the dynamic stop is
+
+                                     𝑆𝑡𝑜 𝑝 𝑡𝐿,ℎ = max(𝑈𝐵𝑡 ,ℎ , 𝑉𝑊 𝐴𝑃𝑡 ,ℎ ),                                    (6)
+
+and for a short position,
+                                     𝑆𝑡𝑜 𝑝 𝑡𝑆,ℎ = min(𝐿𝐵𝑡 ,ℎ , 𝑉𝑊 𝐴𝑃𝑡 ,ℎ ).                                    (7)
+The public reference code also requires VWAP confirmation at entry: a long signal is valid only when price is
+above both the upper band and VWAP; a short signal requires price below both the lower band and VWAP.
+This entry requirement is operationally important because a band-only entry rule generates materially more
+signals and was the principal source of the gap between our first textual replication and the published Sharpe
+Ratio.
+
+2.3 Volatility targeting and costs
+
+The flagship variant scales daily exposure using recent SPY volatility. Let b
+                                                                            𝜎𝑡𝑆 𝑃𝑌 denote the sample standard
+deviation of the prior 14 daily SPY returns. The base leverage multiplier is
+                                                             
+                                                         0.02
+                                            ℓ𝑡 = min 4, 𝑆 𝑃𝑌 ,                                            (8)
+                                                         𝜎𝑡
+                                                         b
+
+with share count approximately                              
+                                                 𝐴𝑈 𝑀𝑡 −1 ℓ𝑡
+                                            𝑄𝑡 =               .                                               (9)
+                                                    𝑂𝑡
+The paper models a commission of $0.0035 per share and slippage of $0.001 per share. In FAQ Q15, ZAB
+additionally report an I-Star market-impact sensitivity, based on the Kissell–Malamut framework, in which
+the Sharpe Ratio falls from 1.33 to 1.17 but remains positive [1, 12]. This is relevant to interpretation: more
+conservative transaction-cost assumptions weaken the edge but do not, on the authors’ own analysis, eliminate
+the historical result.
+
+
+3 Data, Engines, and Replication Protocol
+
+3.1 Independent dataset
+
+The primary replication uses SPY one-minute regular-session data exported from TradeStation, covering
+3 January 2000 through 14 August 2026 and containing approximately 2.6 million bars. QQQ data over a
+comparable span are used as an external generalization check. The original paper instead uses one-minute
+IQFeed data from May 2007 through April 2024. The data-source difference is therefore nontrivial: agreement
+cannot be attributed to simply rerunning the authors’ original database.
+
+
+
+
+                                                       3
+“Beat the Market” Revisited                                                  Independent Replication and Statistical Audit
+
+
+3.2 Three distinct engine states
+
+A central lesson of the audit is that “the strategy” is not a single immutable code path. We therefore preserve
+three distinct states:
+                               Table 1: Engine states preserved in the research history.
+
+Component                           PRE_VWAP_FIX                   CORRECTED                      selected specification
+VWAP                                Close-only                     Typical price                  Typical price
+VWAP confirmation at entry          No                             Yes                            Yes
+Dividend adjustment                 Off                            On                             On
+Actual leverage hard cap            No                             No                             Yes, 4x
+Minimum commission                  No                             No                             Yes
+Early-close session fix             No                             No                             Yes
+Role                                Historical search state        Historical search state        Frozen final engine
+
+
+       The PRE_VWAP_FIX state is retained because 31 genuine search trials were observed before the
+reference-code discrepancy was discovered. The CORRECTED state contains 49 subsequent SPY search
+trials. The final engine adds operational corrections after the parameter search: a true 4x leverage cap applied
+after all size multipliers, minimum commission handling, and correct liquidation on shortened sessions.
+These distinctions are essential for reconstructing the true multiple-testing history rather than retroactively
+pretending that all trials were run under the final engine.
+
+3.3 Replication findings and unresolved paper-code convention
+
+Our first implementation, based only on the textual description, produced a broadly similar but materially
+weaker flagship result. Line-by-line comparison with the authors’ published Python notebook identified two
+economically meaningful discrepancies: close-only VWAP instead of typical-price VWAP, and band-only
+entry without VWAP confirmation. Correcting those two issues closes almost the entire gap.
+
+       Table 2: Flagship strategy: published result versus independent replication on May 2007–April 2024.
+
+                        Metric                        ZAB paper        Independent replication
+                        Total return                      1,985%                        1,989.0%
+                        Annualized return                  19.6%                           19.6%
+                        Annualized volatility              14.3%                           14.4%
+                        Sharpe Ratio                         1.33                           1.317
+                        Hit ratio                          43.0%                           43.6%
+                        Maximum drawdown                  -25.0%                          -24.5%
+                        Trades                              7,668                           7,742
+                              The closest paper-matching replication omits the dividend adjustment
+                              because this produces the closest match to the official 1,985% figure.
+                              Applying the dividend adjustment found in the authors’ public code
+                              yields approximately 1,965.4%, Sharpe 1.314, and 7,700 trades. The
+                              residual paper-versus-code convention is documented rather than forced
+                              away.
+
+
+                                                             4
+“Beat the Market” Revisited                                                                         Independent Replication and Statistical Audit
+
+
+      The replication is therefore sufficiently close to support the conclusion that the paper’s central historical
+result is not dependent on an idiosyncratic data vendor or on our particular implementation. The historical
+phenomenon is also present in independent data.
+
+
+4 Post-Publication Evidence
+
+4.1 Recreating the authors’ 2025 update
+
+The September 2025 edition adds FAQ Q24, “How has the strategy performed since the paper was published?”
+[1], and plots the strategy against SPY with the post-publication region shaded in green. We reproduce the
+same visual convention using the independent TradeStation series and extend the endpoint to 14 August 2026.
+The extension adds a second shade because the authors’ latest published update stops at 29 August 2025:
+green denotes the period covered by their Q24 update, while light red denotes the subsequent interval for
+which no author update was available at the time of this study.
+
+                               Intraday Momentum Strategy - Independent Update
+                                                                           Last Update = 14 Aug 2026
+  $3,200,000            Independent Replication
+                        SPY
+                        After publication - covered by ZAB Q24
+                        Subsequent stretch - not covered by Q24
+  $1,600,000
+
+
+   $800,000
+
+
+   $400,000
+
+
+   $200,000
+
+
+   $100,000
+
+
+    $50,000
+               Jan 08
+
+
+
+                                   Jan 10
+
+
+
+                                                   Jan 12
+
+
+
+                                                                  Jan 14
+
+
+
+                                                                               Jan 16
+
+
+
+                                                                                           Jan 18
+
+
+
+                                                                                                         Jan 20
+
+
+
+                                                                                                                    Jan 22
+
+
+
+                                                                                                                               Jan 24
+
+
+
+                                                                                                                                         Jan 26
+
+
+
+
+Figure 1: Independent recreation and extension of the authors’ Q24 chart. The blue line is the frozen independent
+replication of the published strategy and the red line is SPY buy-and-hold. Green marks post-publication observations
+covered by ZAB’s Q24 update through 29 August 2025; light red marks the subsequent observations through 14 August
+2026. The vertical dashed line is the first-version publication date, 10 May 2024.
+
+
+      The independent series also reproduces the authors’ own updated annual figures with striking accuracy:
+
+
+
+
+                                                                                  5
+“Beat the Market” Revisited                                             Independent Replication and Statistical Audit
+
+
+                    Table 3: Authors’ Q24 update versus independent TradeStation replication.
+
+                 Period                    ZAB Q24         Independent replication       Difference
+                 2024 full year                  32.2%                          31.8%       -0.4 pp
+                 2025 Jan–Aug                     1.0%                           1.4%       +0.4 pp
+                 2025 full year                      –                          -2.6%             –
+                 2026 through 14 Aug                 –                          -4.2%             –
+
+
+      The match through August 2025 is important. It provides a second, chronologically post-publication
+replication target beyond the original 2007–2024 window. At the monthly level, all 20 independently
+reconstructed returns from January 2024 through August 2025 lie within 0.65 percentage points of the authors’
+Q24 values, with a mean absolute difference of approximately 0.25 percentage points. The month-by-month
+reconciliation is included in the reproducibility package. The result also forces a correction to an overly
+coarse interpretation of our own earlier analysis. Pooling all observations from May 2024 through August
+2026 gives a Sharpe Ratio near 0.35, but that single number hides two qualitatively different subperiods.
+
+4.2 Disaggregating the post-publication path
+
+Table 4 separates the period covered by the authors’ latest Q24 update from the subsequent interval. Because
+Q24 reports monthly returns, we show both a Q24-comparable convention beginning 1 May 2024 and an exact
+publication convention beginning with the first trading session after the paper’s 10 May 2024 first-version
+date.
+                     Table 4: Post-publication performance disaggregated by information set.
+
+Window                            Total return    Sharpe        Vol.    MDD       Interpretation
+1 May 2024–29 Aug 2025                 19.3%       1.057       13.4%    -9.4%    Q24-comparable monthly convention;
+                                                                                 16 calendar months and includes seven
+                                                                                 trading sessions before first publica-
+                                                                                 tion.
+13 May 2024–29 Aug 2025                23.3%       1.284       13.3%    -9.4%    Exact post-publication convention,
+                                                                                 starting on the first trading session
+                                                                                 after 10 May 2024.
+2 Sep 2025–14 Aug 2026                 -8.1%      -0.461       16.4%   -17.4%    Subsequent weak stretch, not covered
+                                                                                 by the authors’ latest published Q24
+                                                                                 update.
+1 May 2024–14 Aug 2026                  9.7%        0.35       14.7%   -21.0%    Pooled statistic used in our earlier anal-
+                                                                                 ysis; descriptively correct but econom-
+                                                                                 ically heterogeneous.
+
+
+      This disaggregation materially changes the narrative. The strategy did not immediately weaken after
+publication. The independent reconstruction shows a strong first post-publication phase that is consistent with
+the authors’ own public update, followed by a much weaker roughly twelve-month stretch beginning after
+August 2025. The pooled Sharpe of 0.35 remains numerically correct for May 2024–August 2026, but it
+should not be interpreted as evidence of continuous or immediate publication-induced decay.
+      Figure 2 removes the optical effect created by 17 years of compounding and shows the recent period on
+a rebased scale. The two background regimes correspond to the information available in the authors’ last
+
+                                                           6
+“Beat the Market” Revisited                                                                                         Independent Replication and Statistical Audit
+
+
+public update and the later observations added by this study.
+
+                                                            2023-2026 Detail: Reconciliation of Post-Publication Performance
+                                             Published Strategy - Independent Replication
+                                       200   SPY
+                                             Covered by ZAB Q24 (through 29 Aug 2025)
+                                             Not covered by ZAB Q24
+ Growth of $100 (rebased 3 Jan 2023)
+
+
+
+
+                                       180
+
+
+                                       160
+
+
+                                       140
+
+
+                                       120
+
+
+                                       100
+                                        2
+
+
+
+
+                                                     3
+
+
+
+
+                                                                          3
+
+
+
+
+                                                                                             4
+
+
+
+
+                                                                                                    4
+
+
+
+
+                                                                                                                    5
+
+
+
+
+                                                                                                                                 5
+
+
+
+
+                                                                                                                                                 6
+                                   02
+
+
+
+
+                                                   02
+
+
+
+
+                                                                        02
+
+
+
+
+                                                                                            02
+
+
+
+
+                                                                                                   02
+
+
+
+
+                                                                                                                  02
+
+
+
+
+                                                                                                                                02
+
+
+
+
+                                                                                                                                             02
+   v2
+
+
+
+
+                                                 y2
+
+
+
+
+                                                                     v2
+
+
+
+
+                                                                                            y2
+
+
+
+
+                                                                                                   v2
+
+
+
+
+                                                                                                                y2
+
+
+
+
+                                                                                                                               v2
+
+
+
+
+                                                                                                                                            y2
+ No
+
+
+
+
+                                              Ma
+
+
+
+
+                                                                   No
+
+
+
+
+                                                                                        Ma
+
+
+
+
+                                                                                                 No
+
+
+
+
+                                                                                                               Ma
+
+
+
+
+                                                                                                                             No
+
+
+
+
+                                                                                                                                            Ma
+Figure 2: Recent-period detail, rebased to 100 on 3 January 2023. The strategy performs strongly through the authors’
+29 August 2025 update and weakens materially thereafter. This is a more informative decomposition than a single
+pooled May 2024–August 2026 statistic.
+
+
+     For continuity with the earlier analysis, Table 5 still reports the broad pre-paper, paper-window, and
+pooled post-paper partitions under the frozen baseline convention: corrected typical-price VWAP, joint
+band-plus-VWAP entry confirmation, dividend-adjusted gap anchor, and no later operational hard cap.
+
+                                                         Table 5: Published-strategy replication by broad subperiod under baseline.
+
+                                             Period                                                     Total return    CAGR      Sharpe      MDD
+                                             Pre-paper: Jan 2000–Apr 2007                                   70.1%        7.6%        0.53    -20.5%
+                                             Paper window: May 2007–Apr 2024                              1965.7%       19.5%       1.314    -24.6%
+                                             Pooled post-paper: May 2024–Aug 2026                            9.7%        4.1%        0.35    -21.0%
+                                             Full valid sample: Jan 2000–Aug 2026                         3753.5%       14.7%       0.996    -24.6%
+
+
+      The longer historical sample still weakens any claim that 1.33 is a stationary unconditional Sharpe
+estimate: the pre-paper Sharpe is only 0.53, the paper-window Sharpe is approximately 1.31, and the most
+recent twelve-month stretch is negative. What changes is the causal story. The evidence now supports regime
+dependence and recent weakening, not a simple claim that public disclosure immediately caused the edge to
+disappear.
+      The rolling risk-adjusted return in Figure 3 is consistent with that interpretation. The post-publication
+period begins from a historically strong state, stays strong well into the authors’ public update window, and
+then declines sharply during late 2025–2026.
+
+
+
+
+                                                                                                   7
+“Beat the Market” Revisited                                                               Independent Replication and Statistical Audit
+
+
+                                                       Rolling 252-Session Sharpe - Published Strategy
+
+                     3
+
+
+                     2
+ Annualized Sharpe
+
+
+
+
+                     1
+
+
+                     0
+
+
+                     1     First publication (10 May 2024)
+                           Covered by ZAB Q24
+                           Subsequent stretch
+                         2001            2004                2007   2010   2013    2016          2019       2022       2025
+
+Figure 3: Rolling 252-session annualized Sharpe Ratio of the published strategy. Green denotes the post-publication
+period covered by the authors’ latest Q24 update; light red denotes the subsequent stretch. The recent decline is
+economically material, but the available interval is too short to identify permanent alpha decay.
+
+
+5 Parameter Robustness, PBO, and Generalization
+
+5.1 The 25-configuration grid
+
+To evaluate whether the default lookback and Volatility Multiplier (VM) sit on a stable plateau or on an isolated
+spike, the historical PRE_VWAP_FIX engine was reconstructed and the original 5-by-5 parameter grid was
+recovered in full. The lookbacks are {7, 14, 21, 30, 60} sessions and VM values are {0.7, 1.0, 1.3, 1.6, 2.0}.
+
+
+
+
+                                                                            8
+“Beat the Market” Revisited                                                            Independent Replication and Statistical Audit
+
+
+
+                                  Sharpe Sensitivity - 25-Configuration Grid                                    1.20
+                             7    0.91           1.08          1.16             1.15          0.83
+                                                                                                                1.15
+
+                                                                                                                1.10
+                             14   0.85           0.97          1.17             1.14          0.82
+
+
+
+
+                                                                                                                   Annualized Sharpe
+                                                                                                                1.05
+           Lookback (days)
+
+
+
+
+                             21   0.88           1.06          1.18             1.13          0.88
+                                                                                                                1.00
+
+                                                                                                                0.95
+                             30   0.92           1.03          1.20             1.02          1.02
+                                                                                                                0.90
+
+                             60   0.85           1.05          1.11             1.08          0.85              0.85
+
+                                   0.7            1.0            1.3            1.6            2.0
+                                                        Volatility Multiplier
+
+Figure 4: Annualized Sharpe Ratio on the 25-configuration common-valid grid. The solid blue box marks the paper
+default (lookback 14, VM 1.0); the dashed red box marks the highest-Sharpe grid point (lookback 30, VM 1.3). The
+broad VM ≈ 1.0–1.6 plateau argues against a single fragile optimum, while the movement of the optimum across
+subperiods argues against treating any one point as permanent.
+
+      The grid produces an important distinction. The existence of a broad profitable region is evidence
+against a purely accidental isolated optimum. Yet the best point changes across time and market regimes.
+Long lookbacks tend to perform better during persistent crisis trends, while shorter lookbacks fare better in
+choppier periods. This is exactly the form of instability that a visually appealing full-sample heatmap can
+hide.
+
+5.2 Probability of Backtest Overfitting
+
+We apply Combinatorially Symmetric Cross-Validation (CSCV) following Bailey, Borwein, Lopez de Prado,
+and Zhu [10]. The 25-strategy panel is divided into 𝑆 = 10 contiguous blocks, producing 105 = 252 train/test
+partitions. In each split, the best in-sample strategy is selected and ranked out-of-sample. The Probability
+of Backtest Overfitting (PBO) is the proportion of splits in which the selected in-sample winner ranks at or
+below the OOS median under the historical 𝜆 ≤ 0 convention.
+                                         Table 6: CSCV/PBO on the reconstructed 25-strategy grid.
+
+         Sample convention                     PBO (𝜆 ≤ 0)      PBO (𝜆 < 0)        Common start
+         Historical replication                     38.49%            29.37%       3 Jan 2000, warm-up zeros retained
+         Common-valid                               40.87%            33.33%       30 Mar 2000
+
+
+      A PBO near 39–41% is neither a clean bill of health nor a rejection of the strategy class. It says that the
+
+                                                                       9
+“Beat the Market” Revisited                                                                                                  Independent Replication and Statistical Audit
+
+
+exact in-sample winner is unstable often enough to matter. The conclusion is therefore more nuanced than
+“the parameters are not optimized because 14 and 1.0 are not the best.” There is a real edge region, but the
+exact best parameterization is not temporally invariant.
+
+5.3 Cross-asset generalization: QQQ success, IWM adverse evidence
+
+As a separate robustness check, the corrected flagship rules are applied without parameter recalibration to
+other U.S. equity ETFs. QQQ is a clear positive result: over the full available history, the base specification
+produces approximately 3,572% total return, a 14.5% annualized return, a Sharpe Ratio of 0.987, and a
+-30.3% maximum drawdown. This is remarkably close to SPY’s own full-history Sharpe and supports the
+proposition that the base mechanism is not unique to SPY.
+       The extension also preserves a deliberately adverse validation on IWM (Russell 2000 ETF). The
+unmodified base engine produces only Sharpe 0.450 over the ledger’s 2004–2026 validation window, and the
+trial was explicitly classified ADVERSE_EVIDENCE; no attempt was made to optimize IWM after that result.
+Because the exact IWM daily return series is not part of the frozen SPY return-matrix package, we do not
+import finer subperiod claims into the statistical audit. The overall result is nevertheless useful: generalization
+is heterogeneous rather than universal.
+       A second qualification is equally important. SPY-specific improvements do not automatically transfer
+to QQQ. The frozen ledger records QQQ Sharpe 0.987 for the unmodified base engine, versus 0.809 for the
+SPY-derived asymmetric Config J, 0.913 for the SPY relative-volume sizing recipe, and 0.967 for the SPY
+performance-reversion overlay. None improves on the QQQ base Sharpe. This is direct evidence that the base
+mechanism can generalize while the optimization layers remain asset-specific.
+
+                                   Base specification: cross-asset evidence                                                  SPY-tuned layers do not improve QQQ
+                                   0.996            0.987                                                 1.0          0.987                                                     0.967
+                             1.0
+                                                                                                                                                            0.913
+                                                                                                                                          0.809
+                             0.8                                                                          0.8
+ Full-history Sharpe Ratio
+
+
+
+
+                                                                              Full-history Sharpe Ratio
+
+
+
+
+                             0.6                                                                          0.6
+                                                                      0.450
+                             0.4                                                                          0.4
+
+                             0.2                                                                          0.2
+
+                             0.0                                                                          0.0
+                                    SPY              QQQ              IWM                                                                     J                                  lay
+                                                                                                                      base             nfig             l sizi
+                                                                                                                                                              ng
+                                                                                                                                                                             over
+                                                                                                                QQQ                Y Co             l-vo               rf.
+                                                                                                                               + SP          SPY re             SPY pe
+                                                                                                                                           +                  +
+
+Figure 5: Cross-asset evidence preserved in the frozen ledger. Left: full-history/base-validation Sharpe for SPY, QQQ,
+and IWM. Right: applying SPY-selected layers to QQQ does not improve on QQQ’s unmodified base specification.
+IWM is reported as adverse evidence and was not subsequently optimized.
+
+
+      These independent checks do not verify the broader FAQ claims [1] that the same rules work across
+many stocks, ETFs, or 33 futures markets; those remain author-reported evidence. They do, however, sharpen
+the conclusion: the published mechanism shows meaningful transfer to another large-cap index ETF, but
+neither universal cross-asset validity nor universal transfer of our SPY-specific tuning is supported.
+
+
+
+                                                                              10
+“Beat the Market” Revisited                                               Independent Replication and Statistical Audit
+
+
+6 Systematic Search for Extensions
+
+6.1 Research discipline and search universe
+
+The extension stage was explicitly adaptive: each family of ideas was motivated by the observed behavior of
+the previous stage. To prevent the final result from being presented as if it emerged from a single predeclared
+hypothesis, every SPY alternative that could plausibly have affected selection was logged. The final search
+universe contains 80 SPY trials: 31 under PRE_VWAP_FIX and 49 under CORRECTED. The 31 pre-fix
+trials comprise the 25-point grid, three asymmetric short filters, two trade-cap experiments, and one lookback
+retuning experiment. The 49 corrected trials cover the families summarized below.
+
+           Table 7: Corrected-engine search families. All failures remain part of the multiple-testing count.
+
+Family                                Trials   Research question                            Outcome
+Asymmetric short filter                    4   Should short entries require wider bands     Adopted
+                                               and/or smaller size?
+Binary relative-volume filter              4   Should low-participation signals be ex-      Rejected
+                                               cluded?
+Continuous relative-volume sizing          2   Should size scale smoothly with intraday     Adopted
+                                               participation?
+VIX sizing                                 2   Should implied volatility replace or over-   Rejected
+                                               lay realized-vol sizing?
+Persistence filter                         1   Should a breakout persist for two check-     Rejected
+                                               points before entry?
+Profit-lock stops                          5   Can gains be protected more aggres-          Rejected
+                                               sively after favorable moves?
+VWAP-dominance rules                       5   Are VWAP-binding signals structurally        Continuous discount adopted
+                                               better than band-binding signals?
+Intraday decay                             2   Should position size decay later in the      Rejected
+                                               session?
+Risk controls                              7   Do daily loss limits, per-trade caps, or     Rejected
+                                               hard breakeven improve robustness?
+Whipsaw regime overlays                    3   Can recent trade-count intensity forecast    Rejected
+                                               choppy regimes?
+Performance overlay                      14    Should size respond to the strategy’s        Reversal overlay adopted
+                                               own recent performance?
+
+
+       The selected research path should not be mistaken for a monotonic maximization of full-sample Sharpe.
+Figure 6 shows the actual sequence. Config J has the highest Sharpe among some intermediate stages;
+later layers were retained because they improved multi-window robustness, recent-period behavior, or the
+risk/return trade-off, not because every added layer mechanically increased the single full-sample Sharpe
+statistic.
+
+
+
+
+                                                          11
+“Beat the Market” Revisited                                                                                  Independent Replication and Statistical Audit
+
+
+                                              Evolution of the Selected Specification (not a monotonic Sharpe optimization)
+                                                          1.314
+                           1.3                                                                                                   1.264                1.274
+                                                                                1.232                1.224
+ Annualized Sharpe Ratio
+
+
+
+
+                           1.2
+
+
+                           1.1
+
+                                      0.994
+                           1.0
+
+
+                           0.9
+                                     line                  gJ              l sizin
+                                                                                  g
+                                                                                                 scoun
+                                                                                                      t                          sal                   te
+                                 Base                 Confi             -vo                 AP di                    rf.   rever               ncandid
+                                                                                                                                                      a
+                                                                  + rel                 + VW                    + pe                     Froze
+
+Figure 6: Evolution of the selected specification. The path is intentionally non-monotonic in full-sample Sharpe:
+selection used a multi-window robustness standard and explicit risk/return trade-offs, not a greedy maximization of the
+displayed scalar. The final bar is the audited frozen candidate after operational corrections.
+
+
+6.2 Asymmetric short filter
+
+The long and short legs are both profitable historically, but the long leg is materially stronger: in the frozen
+baseline, the long-only Sharpe is approximately 0.90 versus 0.56 for short-only. This motivates asymmetric
+entry thresholds and short sizing. The progression under the corrected engine is shown below.
+
+                                              Table 8: Asymmetric short-filter research path (research-engine metrics).
+
+                                               Configuration                             Sharpe           Total return                 MDD
+                                               Symmetric baseline, VM=1.0                    0.994           3,753.5%             -24.6%
+                                               Symmetric VM=1.3                              1.184           4,870.1%             -17.5%
+                                               VM 𝐿 =1.3, VM𝑆 =1.6                           1.258           4,639.4%             -19.9%
+                                               + short size = 0.75                           1.314           3,145.5%             -16.2%
+
+
+      The final row, called “Config J” in the research ledger, becomes the base for subsequent tests. This is
+not simply a higher-threshold short filter; it is an explicit admission that the two directional legs do not have
+equal historical quality.
+
+6.3 Continuous relative-volume sizing
+
+A binary volume filter initially seemed attractive: exclude breakouts when cumulative volume participation is
+low. It failed. Every tested threshold reduced total return, and aggressive thresholds nearly eliminated the
+strategy. The failure suggested that participation contains useful information but should not be converted into
+a hard yes/no gate.
+      The successful formulation is continuous. Let cumulative relative volume at checkpoint ℎ be
+                                                                              𝐶𝑢𝑚𝑉 𝑜𝑙 𝑡 ,ℎ
+                                                                  𝑅𝑉𝑡 ,ℎ = 1 Í14                 .                                                            (10)
+                                                                           14 𝑖=1 𝐶𝑢𝑚𝑉 𝑜𝑙 𝑡 −𝑖,ℎ
+
+
+                                                                                        12
+“Beat the Market” Revisited                                                Independent Replication and Statistical Audit
+
+
+The size multiplier is                                                
+                                    𝑠𝑡𝑅𝑉
+                                       ,ℎ = min 1.5, max(0.5, 𝑅𝑉𝑡 ,ℎ ) .                                           (11)
+This specification improved total return in all four predeclared validation windows (2000–2012, 2013–2020,
+2021–2024, and 2025–2026) without materially increasing average leverage. It is the cleanest modification
+found in the search.
+
+6.4 VWAP dominance as a continuous discount
+
+The 2024–2026 diagnostics suggest that signals are weaker when the Noise Area boundary, rather than VWAP,
+is the binding component of the dynamic stop. A binary rule requiring VWAP to be binding improves the
+recent period but reduces historical total return by roughly 90%, demonstrating that many early band-dominant
+signals are essential to the historical edge.
+       The adopted compromise retains those signals but discounts their size:
+                                     (
+                              𝐷        1,    VWAP is the binding stop component,
+                             𝑠𝑡 ,ℎ =                                                                     (12)
+                                       0.7, the Noise Area band is binding.
+
+This is explicitly a trade-off rather than a free improvement. Stronger discounts improve the recent window
+further but reduce long-run terminal wealth substantially.
+
+6.5 Performance-reversal overlay
+
+The intuitive version of a performance overlay—increase size after good recent strategy performance and
+decrease after poor performance—failed. Direct measurement of the strategy’s own trailing-versus-forward
+performance revealed why: over the long historical subperiods, recent strategy performance tends to
+mean-revert rather than persist.
+     The selected overlay therefore reverses the intuitive logic. Let
+                                                       30
+                                                       ∑︁
+                                            𝑅𝑡30−1 =         𝑟 𝑡𝑠ℎ𝑎𝑑𝑜𝑤
+                                                                 −𝑖    ,                                           (13)
+                                                       𝑖=1
+
+where 𝑟 𝑠ℎ𝑎𝑑𝑜𝑤 is the return of the same configuration without the overlay and the signal is shifted one full
+day to avoid look-ahead. The multiplier is
+                                                (
+                                            𝑃     0.9, 𝑅𝑡30−1 > 0,
+                                           𝑠𝑡 =                                                         (14)
+                                                  1.1, 𝑅𝑡30−1 ≤ 0,
+
+with a neutral factor of 1.0 during the 30-day warm-up. More aggressive reversal factors yield higher
+in-sample Sharpe but progressively lower terminal wealth. The chosen 0.9/1.1 setting deliberately stays near
+the broad calibration plateau rather than selecting the numerical maximum.
+
+
+7 What Did Not Work
+
+A credible extension study should be at least as explicit about failures as successes. Table 9 summarizes the
+ideas that did not meet the multi-window standard.
+
+
+
+
+                                                       13
+“Beat the Market” Revisited                                             Independent Replication and Statistical Audit
+
+
+                                Table 9: Rejected modifications and why they failed.
+
+Modification                    Finding
+Binary relative-volume filter  Higher Sharpe at some thresholds came at the cost of lower total return in every major
+                               validation window; high thresholds removed most of the strategy.
+VIX replacement sizing         The strategy became systematically under-exposed; implied volatility appears to embed
+                               a structural risk premium that is not equivalent to realized-volatility targeting.
+VIX overlay                    Improved three of four historical windows but failed to solve the 2025–2026 deteriora-
+                               tion.
+Two-checkpoint persistence     Reduced false signals in some periods but roughly halved return in important 2013–2024
+                               windows.
+Profit locks                   Nearly no incremental benefit; the existing current-band/VWAP stop already performs
+                               much of this function.
+Hard breakeven                 Increased trade count by approximately 23% and cut off genuine recoveries; both costs
+                               and premature exits worsened results.
+Daily loss limits / trade caps Small recent-period improvements did not compensate for lower full-sample Sharpe
+                               and return.
+Per-trade loss caps            Essentially no effect in the historically reconstructed configuration.
+Whipsaw regime overlay         Recent trade-count intensity did not persist strongly enough from day to day; all tested
+                               versions worsened the four-window evaluation.
+Binary VWAP-dominance fil- Helped the recent sample but removed the majority of historical edge; the continuous
+ter                            discount was superior.
+Intraday decay                 Lowered both Sharpe and return.
+Intuitive performance momen- Failed; the strategy’s own long-history performance exhibited mean reversion, motivat-
+tum overlay                    ing the inverted rule instead.
+
+
+       Two author FAQ results are consistent with these failures. ZAB report that conditioning short trades on
+high VIX does not improve compounded profitability and that restricting shorts to bear-market states defined
+by long-term simple moving averages sacrifices substantial historical profit. They also test a VWAP-only
+trailing stop: the Sharpe Ratio falls from 1.35 to 1.17 and maximum drawdown increases from 25% to 27%.
+The independent search therefore reaches a similar conclusion by a different route: seemingly obvious ways
+to “clean up” the strategy often remove profitable trend exposures together with the unwanted noise.
+
+8 Diagnosing the 2024–2026 Whipsaw
+
+The post-publication weakening motivated trade-level reconstruction. Over May 2024–August 2026 in the
+diagnostic sample, 110 trades were winners with an average return near +0.41%, 72 were approximately
+breakeven, and 167 were losers averaging about -0.22%. Of the losing trades, 91% exited through the
+dynamic stop and the remainder reached the forced session close while losing. The losses were not merely a
+transaction-cost artifact: the exit price crossed through the entry price in every losing case.
+      The recurrent pattern is a classic whipsaw. A breakout entry is directionally plausible, price pulls
+back enough to cross the dynamic band/VWAP stop, and then the original trend resumes after the position
+has been closed. Tightening the stop appears attractive ex post, but the same pullback shape also occurs
+before genuine recoveries. The attempted mitigations—hard breakeven, trade caps, daily loss limits, and
+choppy-regime overlays—generally provide benefits that are too small to compensate for the performance
+they forgo elsewhere.
+      This matters for interpretation. The post-publication decay is not well described as “the strategy
+suddenly has no signal.” Instead, the signal appears to remain present on some days, but the timing structure
+
+                                                         14
+“Beat the Market” Revisited                                                   Independent Replication and Statistical Audit
+
+
+produces more failed entries and repeated stop-outs. That is compatible with either a temporary regime
+change or structural adaptation. The available two-year post-publication interval does not distinguish those
+explanations reliably.
+
+
+9 The Frozen Candidate
+
+9.1 Rules
+
+The final selected specification is the product of the documented search, not a claim that every retained
+modification is structurally causal. Its frozen parameters are:
+
+                              Table 10: Frozen selected specification specification.
+
+    Component                                     Frozen rule
+    Noise Area lookback                           14 sessions
+    Long VM                                       1.3
+    Short VM                                      1.6
+    Short size multiplier                         0.75
+    Relative-volume sizing                        clip(𝑅𝑉, 0.5, 1.5)
+    Band-dominant size discount                   0.7
+    Performance overlay window                    30 sessions
+    After positive trailing performance           0.9 multiplier
+    After non-positive trailing performance       1.1 multiplier
+    Maximum actual leverage                       hard cap at 4.0x after all size multipliers
+    Other operational corrections                 dividend-aware gap anchor, minimum commission,
+                                                  shortened-session liquidation
+
+
+      In compact form, before the final leverage cap, long and short requested exposure can be written as
+
+                                        𝑄 𝑡𝐿,ℎ = 𝑄 𝑡𝑏𝑎𝑠𝑒 𝑠𝑡𝑅𝑉    𝐷 𝑃
+                                                            ,ℎ 𝑠 𝑡 ,ℎ 𝑠 𝑡 ,                                           (15)
+                                        𝑄 𝑡𝑆,ℎ = 0.75 𝑄 𝑡𝑏𝑎𝑠𝑒 𝑠𝑡𝑅𝑉    𝐷 𝑃
+                                                                 ,ℎ 𝑠 𝑡 ,ℎ 𝑠 𝑡 .                                      (16)
+
+The engine then enforces actual leverage ≤ 4 after all multipliers, avoiding the subtle error of capping only
+the base volatility multiplier.
+
+9.2 Frozen result
+
+The final audit stores 4,170 entries and 8,340 entry/exit trade-log rows, with zero entries above the 4x leverage
+cap. The backtest reference object reports a total return of 2110.6%, a maximum drawdown of -14.8%, and
+a trade hit ratio of 44.4%. For the statistical audit, the 15-session model warm-up is removed, yielding an
+annualized Sharpe Ratio of 1.274, CAGR of 12.4%, and volatility of 9.5% from 25 January 2000 through 14
+August 2026.
+
+
+
+
+                                                           15
+“Beat the Market” Revisited                                                                             Independent Replication and Statistical Audit
+
+
+                                                  Table 11: Full-history comparison of the frozen baseline and final candidate.
+
+                                                          Metric                        baseline   selected specification
+                                                          Total return                  3753.5%                 2110.6%
+                                                          CAGR                            14.7%                   12.4%
+                                                          Annualized volatility           15.0%                    9.5%
+                                                          Sharpe Ratio                     0.996                   1.274
+                                                          Maximum drawdown               -24.6%                  -14.8%
+                                                          Trade hit ratio                 42.5%                   44.4%
+                                                          Trade-log rows                  12,638                   8,340
+
+
+       The candidate does not maximize terminal wealth. It intentionally gives up a large fraction of
+compounded return in exchange for lower volatility and a materially shallower drawdown. Figure 7 makes
+that trade-off visible.
+
+                                                                         Full-History Equity Curves (2000-2026)
+                                          BASELINE_REFERENCE_V1
+                                          CANDIDATE_V1 (retrospective)
+                                          SPY Buy & Hold
+ Equity from $100,000 (log scale)
+
+
+
+
+                                    106
+
+
+
+
+                                    105
+
+
+
+
+                                           2001         2004         2007        2010      2013      2016       2019        2022      2025
+
+Figure 7: Full-history equity curves from $100, 000, plotted on a logarithmic scale. selected specification is smoother
+and has a smaller maximum drawdown than the baseline, but lower terminal wealth. Because the candidate was selected
+using the same historical record, this curve is retrospective evidence only.
+
+
+      The candidate’s May 2024–August 2026 retrospective return is approximately 25.9% with a Sharpe
+Ratio near 0.97. Those numbers are not treated as post-selection validation because this same interval
+influenced model development. The distinction between chronological post-paper data and epistemologically
+clean out-of-sample data is maintained throughout the analysis.
+
+
+
+
+                                                                                          16
+“Beat the Market” Revisited                                          Independent Replication and Statistical Audit
+
+
+10 Multiple Testing and Statistical Audit
+
+10.1 Why the search count is 80
+
+A preliminary version of the research process used a coarse count of 27 family-by-asset clusters as a proxy
+for the number of trials. That approach was discarded. A 25-point grid cannot be treated as one test merely
+because all points share a family label, and bug fixes or diagnostic reruns should not be counted as strategy
+alternatives if they were not selection candidates.
+      The final rule is therefore explicit:
+
+                              𝑁𝑟 𝑎𝑤,𝑆 𝑃𝑌 = 80 = 31 𝑃𝑅𝐸_𝑉𝑊 𝐴𝑃_𝐹 𝐼 𝑋 + 49𝐶𝑂𝑅𝑅𝐸𝐶𝑇 𝐸𝐷 ,                          (17)
+
+where a trial counts only if it is a SPY SEARCH observation marked as selection-relevant. Of the 80, daily return
+series were reconstructed for 70. The remaining 10—seven CORRECTED and three PRE_VWAP_FIX—
+remain documented as unresolved historical reconstructions or historical target conflicts. Importantly, they
+still count toward 𝑁 because the tests were actually observed during research.
+
+10.2 Deflated Sharpe Ratio
+
+The Deflated Sharpe Ratio (DSR) adjusts the observed Sharpe for multiple testing and return non-normality
+[11]. When excess kurtosis 𝜅 is used, the asymptotic denominator must include
+                                                           𝜅+2 2
+                                             1 − 𝛾3 𝑆𝑅 +      𝑆𝑅 ,                                           (18)
+                                                            4
+not 𝜅𝑆𝑅 2 /4. The latter was an earlier implementation error discovered during the audit. Correcting it has
+negligible numerical impact in this specific dataset, but the corrected form is frozen.
+      For the 25-point grid, the best reconstructed strategy is lookback 30 / VM 1.3, with Sharpe 1.196. Its
+DSR is 99.999995%. This result applies to the grid winner, not automatically to the final candidate.
+      For selected specification, the primary DSR retains 𝑁 = 80 but estimates the dispersion of Sharpe ratios
+only from 78 full-history-comparable trials, excluding two trials whose preserved Sharpe was measured only
+over 2024–2026. Candidate moments and sample length are computed from the model-ready date, 25 January
+2000. The principal result is
+                                         𝐷𝑆𝑅selected = 99.999986796%                                      (19)
+with a preserved-only sensitivity of 99.999984715%.
+
+10.3 Effective dimensionality as a sensitivity, not a discount
+
+The 70 reconstructed strategy return series are highly correlated, with average daily-return correlation near
+0.835. A direct eigenvalue participation-ratio calculation on raw returns produces an effective dimension close
+to 1.4, which would be dangerously optimistic if substituted for the 80 actually observed research alternatives.
+      As a sensitivity exercise, we instead use synchronized moving-block bootstrap resampling and calculate
+the correlation matrix of the estimated Sharpe ratios across strategies. The corresponding effective dimensions
+are 1.527, 1.561, and 1.685 for block lengths of 10, 20, and 60 sessions. These values are reported descriptively
+only. Replacing 𝑁 = 80 with 𝑁𝑒 𝑓 𝑓 ≈ 1.56 would mechanically make the DSR even larger, because it assumes
+away most multiple testing. That is the opposite of a conservative correction.
+
+
+
+
+                                                       17
+“Beat the Market” Revisited                                            Independent Replication and Statistical Audit
+
+
+10.4 Why no single PBO is reported for the full ledger
+
+PBO/CSCV requires a flat matrix of genuinely comparable strategies over the same observations. The
+full 80-trial ledger violates that structure: it combines two engine states, heterogeneous families, adaptive
+sequencing, different warm-up requirements, and 10 missing exact daily series. Forcing all 80 into one
+CSCV matrix would produce a precise-looking number without the method’s underlying exchangeability
+assumptions. We therefore report PBO only where it is structurally defensible: the 25-point grid.
+
+
+11 Revisiting the Authors’ 2025 FAQ Claims
+
+The expanded 2025 FAQ materially improves the transparency of the original paper and is central to a fair
+ assessment.
+       Simplified published model. In Q11 the authors explicitly state that the published strategy is a
+ simplified model, not a ready-to-use trading system, and that they trade a slightly modified version in their own
+ accounts. Accordingly, this paper evaluates the published and reproducible rules. It cannot test undisclosed
+ private modifications.
+       Over-optimization. In Q14 the authors argue that the model is unlikely to be over-optimized because it
+ has few main parameters and because the paper defaults are not the ex-post Sharpe-maximizing choices. That
+ is useful evidence, but it is not by itself a multiple-testing correction. Our 25-point PBO of 38.49%–40.87%
+ adds a more direct result: the grid contains a broad profitable plateau, but the exact winner is unstable across
+ samples.
+       Market impact. In Q15 the authors report that an I-Star impact model lowers Sharpe from 1.33 to
+1.17 while preserving strong historical profitability. Our work does not independently reproduce the I-Star
+ implementation, so the 1.17 figure remains author-reported. Nevertheless, it weakens the hypothesis that the
+ entire historical result is an artifact of the paper’s simple slippage assumption.
+       Alpha decay. In Q16 the authors state that they believe alpha-decay risk is minimal, citing SPY liquidity,
+ trend-following structure, and institutional constraints. Our disaggregated evidence is more supportive of
+ that claim than the pooled May 2024–August 2026 Sharpe of 0.35 initially suggested: the strategy performs
+ strongly through the authors’ August 2025 update (Sharpe 1.057 under the Q24-comparable convention, or
+1.284 from the exact post-publication start). The caution arises from the subsequent interval, which returns
+-8.1% with Sharpe -0.461. This is evidence of nonstationarity and recent weakness, not proof that publication
+ caused permanent alpha decay.
+       Short-side filters and volatility. Q19–Q21 report that VIX does not materially explain short-trade
+ profitability and that restricting shorts to high-volatility or bear-market states sacrifices historical return. Our
+ own VIX and regime filters similarly fail to solve the recent weakness cleanly.
+       VWAP-only stop. Q22 shows that removing the current-band component and using VWAP alone
+ reduces risk-adjusted performance. Our binary VWAP-dominance filter fails for a related reason: too much of
+ the historical edge resides in signals that begin before VWAP becomes the dominant stop component.
+       Q24 post-publication update. The close match between the authors’ 2024/2025 update and our
+ independent reconstruction is one of the strongest replication results in this study. It shows that the first
+ post-publication phase was genuinely strong rather than a discrepancy between feeds. It also makes the
+ subsequent September 2025–August 2026 weakening difficult to dismiss as a data-vendor artifact. The
+ methodological lesson is that a pooled post-publication statistic can obscure both facts simultaneously.
+
+
+
+
+                                                         18
+“Beat the Market” Revisited                                         Independent Replication and Statistical Audit
+
+
+12 Limitations and Prospective Protocol
+
+The evidence is strong, but several limitations materially restrict interpretation.
+       First, the search was adaptive rather than preregistered. DSR adjusts for observed multiple testing but
+cannot fully eliminate researcher degrees of freedom when later hypotheses were generated after inspecting
+earlier results.
+       Second, 10 of the 80 SPY search alternatives could not be reconstructed exactly. They are not removed
+from the multiple-testing count, but their missing daily series prevent inclusion in any panel-based CSCV
+extension.
+       Third, the 2024–2026 period is chronologically post-paper but not a clean holdout for selected
+specification. Those data were repeatedly inspected and influenced which modifications were retained.
+Candidate post-2024 metrics are therefore descriptive, not OOS evidence.
+       Fourth, the published strategy and the frozen candidate use different engines in small but economically
+relevant ways. The candidate’s actual 4x cap, minimum commission, and early-close handling were introduced
+after the parameter search. The final statistical audit intentionally evaluates the candidate as frozen rather
+than retroactively rewriting the historical search.
+       Fifth, cross-asset evidence remains limited. QQQ is independently supportive and IWM is preserved as
+adverse evidence, but the authors’ much broader FAQ claims across multiple ETFs, equities, and 33 futures
+markets are not independently reproduced here and remain separate evidence.
+       The prospective protocol follows directly from these limitations. Parameters are frozen. No rule,
+threshold, or overlay should be modified in response to future performance without starting a new research
+version and resetting the epistemic status. New sessions after the freeze constitute the first genuinely
+prospective evidence for selected specification.
+
+
+13 Conclusion
+
+The central result of this study is not that the Beat the Market strategy fails. The historical backtest is
+independently reproducible. On the authors’ official 2007–2024 window, a separately implemented engine on
+TradeStation data produces 1,989% total return and Sharpe 1.317, nearly matching the published 1,985% and
+1.33. The authors’ own 2025 post-publication update is also independently reproduced to within a few tenths
+of a percentage point.
+       The central qualification is temporal stability, but the timing matters. The pooled May 2024–August
+2026 baseline Sharpe of 0.35 initially suggested broad post-publication deterioration. A finer decomposition
+corrects that interpretation: the first 16 calendar months in the Q24-comparable window return 19.3% with
+Sharpe 1.057, closely matching the authors’ own update, whereas the subsequent September 2025–August
+2026 stretch returns -8.1% with Sharpe -0.461. The evidence therefore supports a real historical edge with
+substantial regime sensitivity and uncertain current strength, but not a claim of immediate publication-induced
+decay.
+       The extension search finds no universal repair. Many intuitive mechanisms fail: VIX filters, persistence,
+profit locks, hard breakeven, daily loss limits, trade caps, whipsaw-regime overlays, intraday decay, and binary
+VWAP filters all sacrifice too much elsewhere. A smaller set of modifications—asymmetric short treatment,
+continuous relative-volume sizing, a VWAP-dominance size discount, and a weak performance-reversal
+overlay—improves the historical risk-adjusted profile. The resulting selected specification posts a Sharpe
+Ratio of 1.274 and maximum drawdown of -14.8% over the full historical sample, but its attractive post-2024
+behavior cannot be called validation because those data participated in selection. Cross-asset evidence
+adds another boundary condition: the base engine transfers well to QQQ but only weakly to IWM, and the
+
+
+                                                      19
+“Beat the Market” Revisited                                           Independent Replication and Statistical Audit
+
+
+SPY-selected layers do not improve QQQ’s base Sharpe. The edge should therefore be treated as a mechanism
+with heterogeneous asset dependence, not a universal recipe.
+      The statistical audit reinforces the same distinction. The grid-level PBO is moderate rather than extreme,
+the DSR remains extraordinarily high even after counting 80 observed SPY alternatives, and the broad
+historical edge is difficult to explain as pure multiple-testing noise. Yet none of those calculations can
+manufacture a holdout that no longer exists.
+      The scientifically defensible status is therefore:
+
+            selected specification = retrospectively significant edge, not prospectively validated.
+
+     The next methodological milestone is not another retrospective calculation. It is the passage of time:
+accumulating performance under frozen rules on sessions that did not exist when this research was completed.
+ZAB’s publication of executable code and a living FAQ deserves explicit credit: that level of transparency
+is what made independent reproduction, disagreement resolution, and the present self-correcting extension
+possible. Future revisions of this record should follow the same principle and update only when genuinely
+new prospective data accumulate.
+
+
+A Research Ledger and Reconstruction Coverage
+
+The final ledger contains 129 recorded trials across SPY and external validation work. The statistical selection
+universe is restricted to 80 SPY trials with trial_role=SEARCH and selection_relevant=1. Of those,
+31 belong to PRE_VWAP_FIX and 49 to CORRECTED. Exact or usable daily return series are available for
+70: 28 PRE and 42 CORRECTED. The 10 missing exact series consist of seven CORRECTED unresolved
+reconstructions and three PRE cases (two historical target conflicts and one unresolved reconstruction). These
+10 are retained in 𝑁 = 80.
+      The PRE block itself is composed of 25 parameter-grid trials, three asymmetric short-filter trials,
+two trade-cap trials, and one short-lookback retuning trial. The full 25-point grid is recovered, including
+T0010, whose initially transcribed Sharpe value was corrected after reconciling the source figure with the
+reconstructed return series.
+
+
+B Selected Experiment Metrics
+
+Table 12: Selected research-stage experiments. Metrics are historical search-engine outputs, not the final audited
+candidate unless explicitly stated.
+
+    Trial / family   Configuration               Sharpe      Total return   Decision / interpretation
+    T0054            Symmetric VM 1.3              1.184       4,870.1%     Keep; clear baseline improvement.
+    T0055            VM 𝐿 1.3 / VM𝑆 1.6            1.258       4,639.4%     Keep; improved asymmetric filter.
+    T0057            Above + short size 0.75       1.314       3,145.5%     Keep; base for later research.
+    T0058–           Binary relative-volume     1.298 to       2,742.1%     Reject; total return falls sharply as
+    T0061            thresholds                    0.475      to 111.2%     the gate tightens.
+    T0064            Continuous RV sizing          1.232       5,557.2%     Keep; first modification improving
+                     [0.5,1.5]                                              all four validation windows.
+    T0065            Continuous RV sizing         1.176        6,728.6%     Diagnostic; more return, weaker
+                     [0.5,2.0]                                              Sharpe.
+    T0066            Two-checkpoint persis-       1.330        1,566.0%     Reject; loses too much return in
+                     tence                                                  2013–2024.
+
+                                                       20
+“Beat the Market” Revisited                                               Independent Replication and Statistical Audit
+
+
+
+    Trial / family   Configuration                  Sharpe       Total return     Decision / interpretation
+    T0067–           Profit-lock family              1.222–         5,439.9–      Reject; almost no incremental
+    T0071                                             1.233        5,599.9%       effect.
+    T0072            Require VWAP binding             0.851          510.7%       Reject; recent improvement but
+                                                                                  substantially reduces the historical
+                                                                                  edge.
+    T0075            Band-dominant discount          1.232         3,502.8%       Keep as reasonable trade-off candi-
+                     0.85                                                         date.
+    T0076            Band-dominant discount          1.224         2,176.4%       Keep; selected aggressive
+                     0.70                                                         drawdown/recent-period trade-off.
+    T0077–           Intraday decay                   1.162         3,039.9 /     Reject.
+    T0078                                           / 1.122        2,479.2%
+    T0079–           Daily loss, trade-loss,         1.185–           mixed       Reject; no clean multi-window
+    T0085            breakeven controls               1.313                       benefit.
+    T0086–           Choppy-regime overlay            about           2,441–      Reject; whipsaw does not persist
+    T0088                                              1.26          2,619%       predictably day-to-day.
+    T0089            Intuitive performance-               –                –      Reject; motivated direct autocorre-
+                     momentum overlay                                             lation measurement.
+    T0091            Inverted/reversal overlay       1.296         2,143.1%       Keep; validates reversal direction.
+    T0099            30d, 0.9 after wins / 1.1       1.264         2,182.3%       Keep; selected mild calibration.
+                     after losses
+    Final            selected specification          1.274          2110.6%       Frozen; hard-cap/min-
+                     audited engine                                               commission/early-close fixes
+                                                                                  applied.
+
+
+C Statistical Audit Summary
+
+
+                                          Table 13: Frozen statistical results.
+
+   Statistic                         Definition / role                                                         Result
+   PBO, historical                   25-grid CSCV, 𝜆 ≤ 0, warm-up zeros retained               38.49%
+   PBO, common-valid                 Same grid, all 25 models simultaneously valid              40.87%
+   DSR, grid winner                  Lookback 30 / VM 1.3                                  99.999995%
+   Raw multiple-testing count        All selection-relevant SPY SEARCH alternatives                  80
+   Reconstructed daily series        PRE 28 + CORRECTED 42                                           70
+   𝑁𝑒 𝑓 𝑓 ,𝑆𝑅 sensitivity            5,000 synchronized block bootstraps, 20-session block        1.561
+   DSR, selected specification       Primary: 𝑁 = 80, 𝜎𝑆𝑅 from 78 comparable full- 99.999986796%
+                                     history trials
+
+
+
+
+                                                           21
+“Beat the Market” Revisited                                            Independent Replication and Statistical Audit
+
+
+D Cross-Asset Evidence Preserved in the Ledger
+
+                       Table 14: Selected cross-asset trials from the frozen research ledger.
+
+          Trial    Asset / specification                Sharpe    Total return   Status
+          T0051    QQQ base, lb14 / VM1.0                0.987      3,572.1%     KEEP / validation
+          T0105    QQQ + SPY Config J                    0.809        708.6%     REJECT
+          T0106    QQQ + SPY rel-volume sizing           0.913      4,705.1%     DIAGNOSTIC / mixed
+          T0107    QQQ + SPY performance overlay         0.967      3,148.1%     REJECT
+          T0123    IWM base, 2004–2026                   0.450             –     ADVERSE_EVIDENCE
+
+
+The table intentionally reports only quantities preserved in the frozen ledger. In particular, no finer IWM
+subperiod statistics are imported from secondary drafts without a corresponding frozen series artifact.
+
+References
+
+ [1] C. Zarattini, A. Aziz, and A. Barbon. Beat the Market: An Effective Intraday Momentum Strategy for
+     S&P500 ETF (SPY). Swiss Finance Institute Research Paper Series No. 24-97. First version May 2024;
+     version dated September 22, 2025.
+ [2] N. Jegadeesh and S. Titman. Returns to buying winners and selling losers: implications for stock market
+     efficiency. Journal of Finance, 48(1):65–91, 1993.
+ [3] L. Gao, Y. Han, S. Z. Li, and G. Zhou. Market intraday momentum. Journal of Financial Economics,
+     129(2):394–414, 2018.
+ [4] C. Rosa. Understanding intraday momentum strategies. Journal of Futures Markets, 42(12):2218–2234,
+     2022.
+ [5] G. Baltussen, Z. Da, S. Lammers, and M. Martens. Hedging demand and market intraday momentum.
+     Journal of Financial Economics, 142(1):377–403, 2021.
+ [6] T. J. Moskowitz, Y. H. Ooi, and L. H. Pedersen. Time series momentum. Journal of Financial Economics,
+     104(2):228–250, 2012.
+ [7] A. Frazzini. The disposition effect and underreaction to news. Journal of Finance, 61(4):2017–2046,
+     2006.
+ [8] D. Duffie. Presidential address: asset price dynamics with slow-moving capital. Journal of Finance,
+     65(4):1237–1267, 2010.
+ [9] C. Zarattini and A. Aziz. Volume Weighted Average Price (VWAP): the holy grail for day trading
+     systems. SSRN Electronic Journal, 2023.
+[10] D. H. Bailey, J. M. Borwein, M. Lopez de Prado, and Q. J. Zhu. The Probability of Backtest Overfitting.
+     SSRN research paper; later published in The Journal of Computational Finance.
+[11] D. H. Bailey and M. Lopez de Prado. The Deflated Sharpe Ratio: correcting for selection bias, backtest
+     overfitting, and non-normality. SSRN research paper, 2014.
+[12] R. Kissell. The Science of Algorithmic Trading and Portfolio Management. Academic Press, 2014.
+
+
+                                                        22
+

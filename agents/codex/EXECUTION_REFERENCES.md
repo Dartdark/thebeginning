@@ -1628,6 +1628,26 @@ Source: Battalio/Egginton/Van Ness/Van Ness, SSRN1941956, October5,2011 draft.
 - Smallest next check only with a separately justified execution task: validate matching report/order populations
   and clock units against observed lifecycle records. No new data request, allocation, monitor or return trial.
 
+### E09/E11/E19 follow-up — Replication conventions, overlay caps and valid samples
+
+Source: Delgado, *“Beat the Market” Revisited*, SSRN7323419, August20,2026;
+[review](results/delgado_7323419_review.md), [input/free-data receipt](inputs/delgado_7323419/free_data_gate.md).
+- Use: match typical-price volume-weighted VWAP and entry confirmation before comparing results. Keep
+  price/dividend conventions, minimum commission, early closes and actual post-overlay leverage separate
+  from an earlier engine's results. Cap final marked exposure after every sizing factor, not merely base sizing.
+  A performance overlay's lagged **overlay-free shadow** returns are a separate state from actual scaled P&L.
+- Evidence: author independent historical replication and disclosed engine fixes; not our verified fills/savings.
+  The selected candidate changes several engine/risk conventions after an adaptive search; its seen recent
+  period is not new validation. No new trading code or returns here; previous native futures findings retained.
+- Research limit: retain all80observed SPY alternatives despite10missing reconstructions and preserve actual
+  warmup-valid starts. The38–41%PBO applies to the25-point pre-fix grid, not the final80-trial adaptive search.
+  Near-100%DSR does not establish future profit. Shared mechanism does not make SPY overlays transferable:
+  all three reported QQQ adaptations have lower Sharpe than QQQ base.
+- Missing/next: native SPY minute/dividend/calendar/fill/cash inputs; authenticate one complete interval before
+  replay. Full trial series needed for independent statistical audit only. A new strategy test can instead freeze
+  explicit interpretations on admitted free data. No ETF-cost or IEX-only volume substitution into futures.
+- Status: methods/execution reference and low-priority D55data watch; zero new financial trials, no allocation.
+
 ### E09/E12 follow-up — Slow trend signals, actual-position turnover and no-trade bands
 
 Source: Tzotchev, SSRN4677166, February6,2018, [review/source audit](results/delta_straddle_4677166_review.md), November8,2026.
@@ -1664,6 +1684,25 @@ Source: Fang/Qin/Jacobsen, *Technical Market Indicators: An Overview*, SSRN24493
 - Next check only on materially stronger independent evidence: actual data/source clocks, precise forecast/refit
   conventions and same-opportunity costed holdings. No new data acquisition, return trial, filter, allocation or
   rejection of existing independently tested strategies follows. Supporting negative/method evidence only.
+
+### E04 follow-up — Winner dependence, reselection and warm-up cash (2026-11-08)
+
+Source: Malan, *One Ticker Deep*, SSRN7073258, July2026 draft.
+[Review](results/one_ticker_7073258_review_20261108.md),
+[source/arithmetic receipt](../../analysis/outputs/codex_one_ticker_7073258/source_audit.json).
+- Use: chronological validation still needs constituent/concentration attribution. Excluding the largest winner
+  and refitting measures a counterfactual portfolio, not that name's realized contribution to original holdings.
+  Label both separately; a retrospective removal is not a forward exclusion rule or proof all trend profits are luck.
+- Evidence: all extracted text/tables/appendices read and code statically inspected; no market-return replication.
+  Author99-name OOS Sharpe1.53 falls to1.05 withoutNVDA versusSPY1.30. Full-sample volatility buckets are diagnostic
+  only. Approximate membership still omits delistings; the full99-name list/companion engine are absent here.
+- Risk/clock limits: AppendixA starts targets at index[window], leaving earlier rows in cash; source acknowledges
+  warm-up helped miss COVID. Match pre-sample warm-up/common evaluation dates before attributing protection.
+  Some reported grid/bucket drawdowns exceed SPY, so protection is not universal. A one-row signal lag alone
+  does not establish an executable close fill; preserve actual price basis, next-trade clocks and cash/turnover.
+- Next check within a separately justified portfolio study: frozen realized contribution ledger, separately
+  labeled exclusion/reselection and matched cash/universe/risk benchmarks. No new test, winner-based filter,
+  acquisition, monitoring process, guaranteed hedge or allocation follows from this source review.
 
 ## Minimum record for any later execution comparison
 
