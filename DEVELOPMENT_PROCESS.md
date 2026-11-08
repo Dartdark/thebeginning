@@ -440,3 +440,9 @@ before any result, then the full checker (incl. the parameter-perturbation check
 
 Post hoc leads from the ablation (not adopted, need their own pre-registered test): Overnight Tick's order-flow x VIX cell on any day
 (t 4.8 vs the full rule's 5.2, twice the nights); Twin's breakout entries in RTH only ($309 vs $248 a trade, total $246k vs $274k).
+
+**Batch of 5 (2026-11-08, pre-registered; TIER_LIST rows):** the engines are market-specific. Morning momentum does not carry to CL / GC / ZN
+(t 0.8 / 0.2 / -1.3; it works on NQ and, weaker, on ES); the noise band loses on CL / GC even before costs; the Overnight Tick signal
+carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on NQ). Cross-mechanism filters failed both ways: overnight
+flow does not predict Twin's morning side; the noise-area longs do better on calm VIX days (post hoc lead), not volatile ones. Next ingredient
+work should look for new mechanisms (other places / times), not move the three engines to other markets.
