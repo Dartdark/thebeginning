@@ -425,3 +425,13 @@ but original build receipt, dated symbol/ID map and roll-effective clocks remain
 NQ.v.0 semantics imply volume-ranked unadjusted prices only **if** the original build used that input
 without later transformation. Next: obtain pre-existing hash-linked build/mapping records and native
 status/trade evidence for listed gaps; no API-key access, purchases or repeat rebuilds.
+
+**Cloud transfer and bounded follow-up:** five gzip exports and `transfer_manifest.json` are now committed under
+`agents/codex/inputs/bridge_native_2018_22_20261108/` (transfer1dfa3d8, portable receipt fixf8cd198).
+The cloud verified every compressed and original byte count/SHA256, and the native schema/quantities/clock.
+[Separate user-authorized absorption screen](results/preopen_absorption_20261108.md), plan e2d85b7,
+uses only these native prices/volumes and an explicit exploratory admission/latency/roll-calendar policy.
+Five fixed2018–22cases completed; the absorption candidate loses$6,386.50perNQ on34events,PF0.55 and fails.
+No recent acquisition/return test or account stage follows. Heavy-total-volume comparator is not selected as a
+new candidate. This does not certify original native FC/T tick-direction volume or resolve build/roll/receipt
+provenance. Preserve original exports and prior closed programs; no strategy was promoted or plan changed.

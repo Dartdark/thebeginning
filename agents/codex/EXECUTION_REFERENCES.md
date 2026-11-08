@@ -2382,3 +2382,21 @@ The TOPIX reconstruction and FX subminute-activity records are metadata cautions
 native mark/index construction and event resolution before using apparent reversals or minute-boundary
 activity as an ES/6E predictor. Neither an abstract nor a file with minute labels verifies a fill.
 Park absent source/data; continue distinct strategy discovery. No automatic gate reopening or allocation.
+
+
+Pre-open signed-volume follow-up (2026-11-08):
+[Native absorption screen](results/preopen_absorption_20261108.md) independently verifies the transported
+2018–22gzip/original hashes, ET close→CT clocks, finite quantities and native total=buyer+seller. Native
+aggressor fields are distinct from ordinary PowerLanguage up-tick Volume. The1,755,357bars are not a verified
+raw-contract/tape or historical receipt archive. Preserve original source/build/roll and missing-stress limits.
+
+Features end08:28CT; modeled normal entry08:30-labelledOPEN is08:29civilCT, leaving one minute of assumed
+processing. A delay to08:31OPEN enters at the cash bell. Receipt delay is an assumption, not a measured saving.
+Scheduled08:45OPEN exit preempts that bar's intrabar stop. Ten synthetic fixture groups cover clock/entry/gap/
+rounding/flatten/delay/fees; held paths have no imputed bars. Gross/native-fee/daily ledgers reconcile.
+
+The registered34-event absorption candidate loses$6,386.50perNQ,PF0.55, and fails; no later/account/live stage.
+The contextual [Farmer etal2006 source](https://arxiv.org/html/physics/0602015) concerns adaptive liquidity,
+not demonstrated NQ reversal profits. Keep that evidence distinction. Heavy-total-volume comparison repeats
+known T-style conditioning; its positive design result is not new native parity, a selected strategy or a payout
+improvement. No follow-direction or new clock is tested as a post-result rescue.
