@@ -1,0 +1,2184 @@
+          The Buffett Indicator: International Evidence∗
+
+                      Laurens Swinkels†                Thomas S. Umlauft‡
+
+                                          30 March 2022
+
+
+
+                                               Abstract
+
+           Warren Buffett suggested that the ratio of the market value of publicly traded
+       stocks to economic output could identify equity market mispricings. We extend the
+       existing research from the United States to international equity markets by investigat-
+       ing the return-predictive characteristics of the market value of equity-to-gross domestic
+       product for a dataset comprising fourteen countries. The findings corroborate that the
+       “Buffet indicator” explains a large fraction of ten-year return variation for the major-
+       ity of countries outside the United States. Low ratios have predicted above-average
+       investment returns, while periods of high ratios have, on average, been followed by
+       below-average returns over the subsequent ten-year period. We also compare the “Buf-
+       fett indicator” to other well-known stock market valuation signals and phenomena, such
+       as the cyclically-adjusted price-to-earnings ratio and mean-reversion in stock returns.
+
+
+
+
+Introduction
+At the turn of the millennium, Buffett wondered about the exceptional performance as
+measured by the Dow Jones Industrial Average during the 17-year window between 1981 and
+1998 compared to the dismal performance during the equally long period between 1964 and
+1981 in spite of a significantly more beneficial macroeconomic setup for the latter period, as
+economic output increased at more than twice the rate between 1964 and 1981 than between
+1981-1998. In two Forbes interviews (Buffett and Loomis 1999, 2001), Buffett suggested
+that the market value of equity (MVE) scaled by gross domestic product (GDP), which
+subsequently will be referred to as the MVE/GDP ratio, would have heralded higher returns
+   ∗
+     We thank Guido Baltussen, David Blitz, Kadir Bssila, Iman Honarvar Gheysary, Tobias Hoogteijling,
+Pim van Vliet and Adam Zaremba for valuable insights and helpful comments.
+   †
+     Laurens Swinkels is affiliated with Erasmus University and Robeco. The views expressed in this paper
+are not necessarily shared by Robeco, an asset management company with its headquarters in Rotterdam.
+   ‡
+     Thomas S. Umlauft is affiliated with the University of Vienna and Huber, Reuss & Kollegen. The views
+expressed in this paper are not necessarily shared by Huber, Reuss & Kollegen.
+
+
+                                                   1
+
+                     Electronic copy available at: https://ssrn.com/abstract=4071039
+for 1981-1998 by indicating cheaper valuations for the stock market. In spite of Buffett’s
+claim that the ratio of market capitalisation to economic output is “probably the best single
+measure of where valuations stand at any given moment”, its forecast ability has drawn
+comparatively little academic scrutiny.1 Our research aims to fill this gap.
+The intuition behind the MVE/GDP ratio as a valuation signal is simple. When the price of
+equities, as a claim on future profits, goes up without a commensurate increase in economic
+output, the forward earnings yield decreases, rendering, ceteris paribus, equity investments
+less attractive. Vis-à-vis solely price-oriented valuation techniques, such as the cyclically-
+adjusted price-to-earnings ratio, MVE/GDP has the advantage that its nominator contains
+information on quality (price) as well as quantities (equity issuance) and thereby incorpo-
+rating investor sentiment not captured by purely price-based valuation metrics. New share
+issuance increases (decreases) when equity markets are overvalued (undervalued) if corporate
+managers are able to time the market; see Baker and Wurgler (2002).
+The main challenge with using the MVE/GDP ratio as a signal for long-horizon market
+timing purposes is the lack of a theoretical fundamental level for the ratio to converge to in
+equilibrium. This is one of the reasons why at each point in time, there exist substantial
+differences for the MVE/GDP ratio across countries. For example, by year-end 2019, the
+ratio stood at 148% in the U.S. and only 55% in Germany. The financial structure and
+the regulatory environment are important factors determining the size of the stock market
+in a country. More specifically, the stock market of bank-based systems may reasonably
+be expected to be of less importance than in market-based systems, rendering a direct
+comparison between countries difficult. Rajan and Zingales (2003) also point out that not
+only is the variance of economies’ equilibrium fraction of stock market capitalisation to GDP
+pronounced, but that there exist substantial cross-sectional differences,2 cautioning against
+blindly extrapolating the findings of any country to other countries. This is one of the
+reasons why we look in first instance at time-series predictability of this valuation ratio and
+not at cross-sectional predictability from the ratio itself. However, the predicted returns
+from the time-series analysis will be used to determine which countries have an attractively
+valued stock market, and which countries have not. Hence, the trading strategy invests in
+countries for which the MVE/GDP ratio is low compared to its own history, which is not the
+same as an investment into a country with low MVE/GDP ratio compared to other countries.
+This direct cross-sectional comparison is not useful if fair value levels of the signal across
+countries are different. But even within countries, there may not necessarily exist a time-
+robust equilibrium value. The fair value level may change over time, as the total value of
+the stock market is the discounted value of future cash-flows derived from share ownership.
+The market value therefore increases when cash-flows are expected to have higher growth
+than previously predicted, or if these cash flows are discounted at a lower discount rate.
+   1
+     The Buffet indicator is also popular among investment practitioners. For example, see the arti-
+cles on the CFA blog “Enterprising Investor” by Navin Vohra (https://blogs.cfainstitute.org/investor/
+2021/01/29/the-buffett-indicator-revisited-market-cap-to-gdp-and-valuations), on the “Advisor Perspec-
+tives” blog by Jill Mislinski (https://www.advisorperspectives.com/dshort/updates/2021/08/05/market-
+cap-to-gdp-july-buffett-valuation-indicator) and on the “Fortune Financial” blog by Lawrence Hamtil
+(https://fortunefinancialadvisors.com/blog/applying-the-buffett-indicator-to-other-countries).
+   2
+     See Rajan and Zingales (2003) for an explanation of factors influencing cross-country as well as time-
+series differences.
+
+
+                                                    2
+
+                     Electronic copy available at: https://ssrn.com/abstract=4071039
+The discount rate used to calculate the present value of a company’s dividend stream may
+be affected by the long-term interest rate. Equity markets may appear expensive (cheap)
+when long-term interest rates are low (high). Expecting mean-reversion in the MVE/GDP
+ratio may therefore be partially related to an expectation of mean-reversion in long-term
+interest rates. Also, the willingness to be a public firm may change over time (see, Doidge,
+Karolyi, and Stulz (2017) and McDonald IV (2022)). Moreover, if listed companies transform
+to multinational companies or a stock exchange attracts foreign companies, the link with
+domestic economic growth weakens. Although these trends tend to be slow moving processes,
+they may create noise to this valuation signal. Each of these challenges make it worthwhile
+to examine whether the “Buffett indicator” can be used for long-horizon market timing.
+The contribution of this paper is threefold. First, we analyse the international evidence of
+the forecasting ability of the MVE/GDP ratio for equity market returns. Our research com-
+plements existing research that is limited to the U.S. (see Lleo and Ziemba 2018 and Umlauft
+2020). Our data goes back to 1973, therefore substantially extending the international study
+by Chang and Pak (2018) that starts in 1997.3 Second, we compare this predictor to other
+well-known stock market valuation signals, such as the cyclically-adjusted price-to-earnings
+ratio (CAPE) of Campbell and Shiller (1988, 1998, 2001) and mean-reversion in stock returns
+as documented by, e.g., Poterba and Summers (1987), Fama and French (1988), Spierdijk,
+Bikker and Van den Hoek (2012), Moskowitz, Ooi and Pedersen (2012) and Zaremba, Kizys,
+and Raza (2020). Third, we provide empirical evidence for real-time profitability over the
+backtest period 1985-2019, supplementing the existing literature on long-run stock return
+predictability (see, e.g., Goyal and Welch (2008) and Diris, Palm, and Schotman (2015)).
+Our findings can be summarised as follows: First, using data from the stock markets of
+fourteen countries with data going back to 1973, we show that the “Buffett indicator” pos-
+sesses exceptional forecast qualities over longer horizons. More specifically, we find that
+MVE/GDP explains 83% of overall return variation, ranging from as low as 42% for Austria
+to 94% for Great Britain. Using an expanding window instead of a the full sample reduces
+the explanatory power to still considerable 64%. Secondly, in a predictive regression where
+we include MVE/GDP, naive mean-reversion in returns, and the cyclically-adjusted price
+earnings ratio, only MVE/GDP is statistically significant, suggesting that our findings are
+not subsumed by other popular valuation signals. Importantly, these research findings may
+be transported to practical application. Our backtest shows that a simple strategy based
+on investing in countries with the highest model-predicted returns would have yielded sta-
+tistically significant and economically meaningful alpha over a corresponding buy-and-hold
+   3
+    A notable exception is Kuvshinov and Zimmermann (2020) who analyse the development of the market
+capitalisation for a seventeen-country dataset between 1870 and 2016. Their study, however, deviates in
+important aspects from this study: The use of annual data constructed from a wide range of historical sources
+(primary and secondary) makes an important contribution to the study of historical market capitalisation,
+thereby substantiating and extending the findings of Rajan and Zingales (2003), who study the development
+of market capitalisation for the period 1913–1999. Although the paper provides a short analysis of forward
+returns on the market capitalisation to gross domestic product, that part is limited to showing that there
+exists a – statistically significant – inverse relationship between the market capitalisation and forward returns.
+In addition, the use of annual data in combination with a substantial number of assumptions, where data was
+not available, makes the study less relevant for practical purposes of forecasting equity returns. Moreover,
+the study provides only evidence for the aggregate country dataset, not for individual countries.
+
+
+                                                        3
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+benchmark, while at the same time reducing risk, i.e. with lower volatility, superior Sharpe
+ratio and lower maximum drawdowns. Our backtest over the period 1985-2019 shows that
+a simple strategy based on investing in countries with the highest model-predicted returns
+would have yielded statistically and economically significant alpha of 1% per annum over a
+corresponding buy-and-hold benchmark. At the same time, the strategy has lower risk, sig-
+nificantly increasing the Sharpe ratio from 0.49 to 0.57 and reducing the maximum drawdown
+by 4%-points.
+From 1985 to 2019, the composite, an average of all ten strategies with start years between
+1985 and 1994, returned 10.5%, on average, vis-à-vis the benchmark performance of 9.5%,
+outperforming the latter by an average of 100bps, annually. Additionally, the outperformance
+was accompanied by lower volatility (13.6% vs 14.2%), a superior Sharpe ratio (0.57 vs 0.49)
+and a c. 4%-point reduction in maximum drawdown.
+The remainder of this article is structured as follows: Section 2 explains the data used for the
+analysis and outlines the methodology. Section 3 presents the empirical results and Section
+4 performs a robustness test. In Section 5, the empirical results are discussed. Section 6
+summarises the article and provides a conclusion.
+
+
+Data and methodology
+The countries covered in this article include OECD countries with quarterly data available
+for market capitalization and gross domestic product starting in 1973. The year 1973 is a
+natural cut-off date since data for the majority of countries starts in that year. In addition,
+the requirement of ten-year forward returns in order to evaluate the forecast quality means
+that we have only 38 years even with data going back to 1973. The 1973 cut-off excludes
+Norway, New Zealand, Luxemburg, Portugal, Greece, Finland, Sweden and Spain. Exclusion
+thus mainly affects smaller countries, the only exemption being Spain, whose data starts
+only in 1987. Our final sample consists of fourteen countries. Importantly, all G7 nations –
+Canada, France, Germany, Italy, Japan, United Kingdom, and the United States – make the
+cut. Smaller countries with sufficient data include Australia, Austria, Belgium, Denmark,
+Ireland, the Netherlands as well as Switzerland.
+For the construction of the market value of equity-to-gross domestic product (MVE/GPD)
+ratio, the following data series were used: The nominator, or market value of equity, is
+based on Refinitiv’s Thomson Reuters Datastream country index data, respectively, the
+total market series (TOTMK. . . ) in local currencies. The denominator for the ratio is based
+on quarterly nominal gross domestic product (annualised) data sourced from the OECD
+Quarterly National Accounts statistics: Gross domestic product - expenditure approach –
+National currency, current prices, annual levels, seasonally adjusted (series code: B1_GE
+measure: CARSA).4 Data is in local currencies.
+   4
+    The exact ratio may not be available at the end of each quarter because GDP numbers are released
+with some delay. However, the variability of the Buffett indicator is mainly driven by the variability of stock
+market returns. Moreover, consensus estimates of GDP are typically available, further reducing uncertainty.
+
+
+
+                                                      4
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+For the construction of cyclically-adjusted price-earnings (CAPE, Shiller P/E, P/E10) ratios,
+we follow Shiller (1998). Since the construction of P/E10 ratios requires a ten-year period,
+data availability only starts in 1983. In addition to the ten-year lag, data for Denmark,
+France and Italy are further shortened due to later data availability (Denmark: 31 March
+1988, France: 31 March 2000, Italy: 31 March 1996). For comparability purposes, we
+compute MVE/GDP figures starting from the same date in the context of comparative
+model evaluation in section 4. In other words, 1983 constitutes the default start date for
+both P/E10 as well as MVE/GDP in section 4.1. For Denmark, France and Italy, whose data
+availability for P/E10 data starts later (see above), we adjusted MVE/GDP computation
+periods accordingly as well. Returns are derived from Datastream Global Index (DSGI)
+data, using the total return index (RI) function of the total market (TOTMK. . . ) series.
+The returns are denominated in local currencies and always include dividends.
+Short (three-month) rates for computing excess returns are sourced from Global Financial
+Data (GFD). Missing data was complemented by three-month money market rates provided
+by the OECD for Austria from January 1991 onwards and from January 2009 onwards
+for Ireland. For Denmark and Switzerland, no three-month rates were obtainable for the
+beginning of the period. For Switzerland, the ten-year government bond rate was used
+between March 1973 and December 1979, instead. For Denmark, the policy rate of the
+central bank of Denmark was used for the period between March 1973 and December 1975.
+We test return predictability for MVE/GDP in the spirit of Fama and French (1988) who
+document that the predictable component of return variation increases as the forecasting
+horizon expands. Given the customary use of ten-year timeframes for testing long-term
+return predictability, the remainder of the paper will focus on ten-year observation periods.
+As figure 1 shows, however, MVE/GDP is robust to other forecast horizons as well.5
+Forward ten-year annualised returns are regressed on the starting value of the log of
+MVE/GDP,6 taking the form of:
+
+
+                                                          MV E 
+                                                                 t
+                                Rt:t+10 = α + β × ln                 + t:t+10                            (1)
+                                                           GDPt
+
+Over the last decades, the finance literature has produced substantial evidence for return
+predictability, particularly over long forecast horizons (see, e.g., Fernandez-Perez, Fuertes,
+Miffre 2017; Lioui and Poncet 2019). Recent research sheds doubt on the superiority of
+long-run horizons, however, arguing that the serial-correlation introduced by the use of long-
+term forecast horizons which frequently necessitate the use of overlapping time-periods may
+     5
+     Average and median R2 increase substantially up to the 11-year forecast horizon. Although the maximum
+ 2
+R is reached only for the 20-year forecast horizon, incremental increases beyond the 11-year foreacast horizon
+are immaterial. Given the long-term nature of the Buffett indicator, meaningful statistical robustness as
+well as explanatory power is achieved only towards the seven-year forecast horizon. However, even at shorter
+forecast horizons, MVE/GDP would have yielded impressive results. For further details, see tables 15-20 in
+the appendix for exemplary forecast horizons of five, seven, eight, twelve, thirteen and fifteen years.
+   6
+     Throughout this article, MVE/GDP is computed as ln(MVE/GDP), which provides substantially better
+results. While we only report results for ln(MVE/GDP) in this article, computations based on MVE/GDP
+are available upon request.
+
+
+                                                      5
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+     0.75
+
+
+
+
+     0.50
+R2
+
+
+
+
+     0.25
+
+
+
+
+     0.00
+              1    2    3     4    5    6     7   8     9    10     11     12     13   14   15   16   17   18   19   20
+                                                      Forecast Horizon in Years
+
+
+                                        Figure 1: R2 and forecast horizon
+
+account for higher test-statistics by using artificially low standard errors which inflate t-
+statistics, leading to the rejection of H0 in favour of HA too often (Boudoukh, Richardson
+and Whitelaw (2008); Boudoukh, Israel and Whitelaw (2019)).
+Indeed, the presence of overlapping time-periods introduces subtle but severe statistical
+problems. The common solution to this problem has traditionally been to calculate
+autocorrelation-robust standard errors based on Hansen and Hodrick (1980) and Newey
+and West (1987). As the serial correlation induced in the error terms by overlapping
+data is often very strong, however, the obtained robust estimators tend to have rather
+poor properties for finite samples. Thus, commonly used methods for autocorrelation
+correction may be inadequate and misleading in finite sample data.7 Fortunately, more
+recent theoretical and practical analyses have come up with better procedures to correct
+for the bias induced by overlapping forecast horizons. In addition to the commonly used
+Newey and West (1987) heteroskedasticity- and autocorrelation-consistent (HAC) standard
+errors, we adjust for the overlap-induced bias by computing adjusted t-statistics following
+Hjalmarsson (2008, 2011) who demonstrates that, instead of using autocorrelation-robust
+standard errors, a parsimonious technique of dividing the t-statistics by the square root of
+the forecasting horizon yields not only approximate t-statistics but produces asymptotically
+exact corrections.
+A similar corrective procedure has been suggested by Valkanov√     (2003) by scaling the OLS
+t-value with the square root of the sample size, hence t/ T . As Valkanov (2003) relies
+on the assumption that the forecasting horizon grows at the same pace as the sample size,
+so that the forecasting horizon remains a fixed fraction of the sample size, Hjalmarsson
+(2011) has more practical viability in the present context of forecasting returns in financial
+markets. Boudoukh, Israel, and Whitelaw (2019) also recommend this practical approach,
+especially because it is conservatively assuming that the explanatory variable, in our case the
+Buffet indicator, has a unit root, and therefore addresses the concern of autocorrelation in
+     7
+         See, for instance, Hodrick (1992).
+
+
+                                                             6
+
+                            Electronic copy available at: https://ssrn.com/abstract=4071039
+the predictive variable. As an additional test-statistic, we compute t-values following Harri
+and Brorsen (2009) who, unlike Hjalmarsson (2011), correct for the sample size. Harri and
+Brorsen (2009) assess several alternative methods for correcting the overlap bias suggested
+since Valkanov (2003). Building upon previous literature, Harri and Brorsen (2009) propose
+rescaling OLS standard errors by either of two factors, depending on forecast horizon and
+sample size. Given the parameters of the data used in this article, we obtain rescaled standard
+errors for the computation of bias-corrected t-statistics by using the factor
+
+                                                   s
+                             HB          OLS           2                k
+                        SE        = SE         ×         × k × 0.9 × k ×    ,              (2)
+                                                       3                 n
+
+where SE HB is the rescaled standard error based on Harri and Brorsen (2009), SE OLS is
+the standard error obtained from ordinary least squares regressions, k denotes the level of
+aggregation (i.e. 40 for ten-year forward returns based on quarterly data) and n is the sample
+size.
+
+
+Empirical results
+We start with charting the evolution of MVE/GDP. For practical purposes, we show an equal-
+weighted aggregate of the fourteen-country sample (AGG) along with the United States as
+a yardstick. The Appendix contains figures for all individual countries. As Figure 2 makes
+clear, MVE/GDP is highly variable over time. It is low in the beginning of our sample, when
+financial development through the stock market was less common for many of the countries
+in our international sample, and increases dramatically towards the end of the sample period.
+Moreover, we see suspicious peaks around market tops, especially since the middle of the
+1990s. In the remainder of the article, we evaluate whether MVE/GDP is a predictor for
+equity returns for our sample of international equity markets, complementing the work of
+Umlauft (2020) on the United States.
+Figure 3 depicts graphically the relationship between MVE/GDP and subsequent returns
+for the equal-weighted sample and the United States, demonstrating the close inverse rela-
+tionship between starting valuations and ten-year forward returns.
+Another way to look at this is to examine the model-based expected stock market returns
+with the realised stock market returns over the subsequent ten-year period. Figure 4 dis-
+plays observed trailing ten-year returns along with ten-year lagged model-predicted ten-year
+forward returns for the equal-weighted country aggregate and the United States. The chart
+illustrates that the simple model captures a significant degree of return variation, explaining
+approximately 83% for the period between 1973 and 2019.
+As Table 1 shows, the MVE/GDP ratio has indeed a striking ability to predict future re-
+turns for the pooled-country dataset as well as for individual countries. Table 1 reports the
+explanatory power, R2 , of regressing ten-year forward returns on MVE/GDP by decade and
+
+
+                                                       7
+
+                   Electronic copy available at: https://ssrn.com/abstract=4071039
+                                           Equal−weighted country aggregate                                                               United States
+
+                              1.00
+
+
+
+                                                                                                                   1.2
+                              0.75
+MVE/GDP
+
+
+
+
+                                                                                     MVE/GDP
+                              0.50                                                                                 0.8
+
+
+
+
+                              0.25
+                                                                                                                   0.4
+
+
+
+
+                                       1980       1990      2000       2010   2020                                        1980         1990         2000   2010   2020
+
+
+
+
+                                      Figure 2: Market value of equity-to-gross domestic product, 1973-2019
+                                           Equal−weighted country aggregate                                                               United States
+
+                              0.20                                                                                 0.20
+10−yr forward return (ann.)
+
+
+
+
+                                                                                     10−yr forward return (ann.)
+
+
+
+
+                                                                                                                   0.15
+                              0.15
+
+
+
+                                                                                                                   0.10
+                              0.10
+
+
+                                                                                                                   0.05
+                              0.05
+
+
+                                                                                                                   0.00
+                              0.00
+
+                                     0.1                  0.3                 1.0                                                0.3          0.5           1.0
+                                                     ln(MVE/GDP)                                                                          ln(MVE/GDP)
+
+
+                                              Figure 3: MVE/GDP and 10-year forward returns, 1973-2019
+
+for the full examination period. The table makes clear that MVE/GDP explains a large com-
+ponent of overall return variation (83.2%) for the equal-weighted country data, although the
+degree itself varies over the examination period and across countries. While R2 values can be
+described as robust for most countries, it exhibits considerable heterogeneity across countries,
+ranging from as low as 42.0% for Austria to 93.7% for Great Britain. Some points are worth
+mentioning in this context: First, countries with a long tradition of capital markets-based
+financing exhibit the highest explanatory power: Anglo-American countries, such as Great
+Britain, Australia, Ireland and the United States, exhibit extraordinarily high R2 values of
+93.7%, 83.0%, 78.4% and 74.4%, respectively. The only exception is Canada with a low R2 of
+44.9%. Second, with 42.0% (Austria), 52.6% (Germany) and 44.2% (Switzerland), countries
+which have historically been heavily dependent on bank financing show the lowest R2 .
+The decade from 1980-1989 displays the lowest explanatory power, although some coun-
+
+
+                                                                                     8
+
+                                                 Electronic copy available at: https://ssrn.com/abstract=4071039
+                                         Equal−weighted country aggregate                                                                                      United States
+                              0.25
+                                              Model−predicted return     Realised return                                                              Model−predicted return     Realised return
+
+
+                                                                                                                                  0.2
+                              0.20
+10−yr forward return (ann.)
+
+
+
+
+                                                                                                    10−yr forward return (ann.)
+                              0.15
+
+                                                                                                                                  0.1
+                              0.10
+
+
+
+                              0.05
+                                                                                                                                  0.0
+
+                              0.00
+
+                                      1980         1990           2000            2010       2020                                              1980        1990           2000             2010       2020
+
+
+
+
+                                             Figure 4: Realised and model-predicted 10-year forward returns
+
+                              Table 1: R2 of 10-yr forward returns regressed on ln(MVE/GDP) by decade, 1973-2019
+
+                   Period               AUS      AUT        BEL CAN CHE                    DEU    DNK                                   FRA    GBR    IRL      ITA       JPN       NLD        USA AGG
+                   1973-2009            83.0      42.0       70.1      44.9       44.2     52.6     59.1                                78.3    93.7 78.4 81.9           80.2       81.9       74.4   83.2
+                     1973-1979          65.0      70.2       85.4       3.9       15.9     15.2     60.1                                62.7    83.7 47.8 82.6           26.4       82.6       79.2   46.7
+                     1980-1989          62.6      87.3       64.4       1.2       19.1     22.6     53.3                                54.8    76.0 47.1 65.8           93.5       65.8        0.6   55.5
+                     1990-1999          45.6      17.0       59.5      63.7       82.3     53.2     42.3                                67.2    78.1 80.0 65.3           13.8       65.3       88.9   63.8
+                     2000-2009          80.6      79.0       63.0      85.2       74.4     67.5     35.5                                66.9    92.5 86.7 85.0            9.8       85.0       80.4   81.5
+                   Abbreviations: AUS = Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Ger-
+                   many, DNK = Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD =
+                   Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+tries (Canada, Germany, Switzerland) exhibit low predictive power in the beginning of the
+examination period (1973-1979) as well. Notably, MVE/GDP for Japan has exceptionally
+high explanatory power for 1980-1989. This is probably due to Japan being the only coun-
+try which experienced a major stock market boom in the 1980s (high MVE/GDP) which
+subsequently burst just at the end of the decade, leading to low returns in the ten-year
+period following heightened MVE/GDP ratios. On average, however, MVE/GDP captures
+a substantial share of return variability over the subsequent ten-year period.
+Table 2 summarises mean and median as well as minimum and maximum annualised ten-
+year forward returns based on starting MVE/GDP valuation quintiles. As these quintiles are
+formed based on our full sample of MVE/GDP data, they cannot be interpreted as real time
+trading signals, however. Overall, these results lend credence to the high R2 values reported
+above by showing that both mean and median forward returns monotonically decrease as
+the market value of equity relative to gross domestic product increases. Mean annual total
+returns for the equal-weighted country aggregate amount to 18.3% for MVE/GDP starting
+values in the bottom quintile, with returns lying between 12.3% and 21.0%. At the other
+side of the spectrum, mean returns averaged 3.6% for MVE/GDP ratios in the top quintile,
+with a minimum annualised return of -0.4% and a maximum annualised return of 8.7% over
+
+
+                                                                                                    9
+
+                                                   Electronic copy available at: https://ssrn.com/abstract=4071039
+the subsequent ten-year window. Generally speaking, maximum returns exhibit quintile-
+based linearity comparable to mean and median returns. Minimum returns become lower as
+MVE/GDP increases, as well, albeit not in a comparably consistent manner as with regard
+to mean, median and maximum returns. All in all, these regression results provide robust
+evidence that MVE/GDP ratios are predictive of ten-year forward returns.
+
+  Table 2: Comparing 10-yr forward returns in % based on MVE/GDP starting quintiles
+
+ Quintile AUS   AUT BEL CAN CHE             DEU    DNK    FRA    GBR    IRL    ITA    JPN    NLD    USA AGG
+ Mean returns
+  1      19.3   19.9   19.4   14.0   12.2   12.6   19.4   22.1   22.9 22.6 27.2       17.6   18.8   17.1   18.3
+  2      14.6    7.8   11.9   10.2   12.4   10.9   14.5   15.4   17.8 19.4 13.1        7.3   15.0   16.0   13.6
+  3      12.4    6.9   11.6   13.2   14.3    9.2   12.7   13.3   11.9 15.9 9.6         2.1   15.4   13.5   11.5
+  4      10.5    9.3   10.0   10.1    8.4    8.9   11.3    9.1    8.4 8.5 6.4          0.3    7.2    9.3    8.7
+  5       6.6    3.2    4.3    6.3    2.8    3.7    9.1    4.0    4.3 -0.6 -0.4       -1.6    1.9    4.9    3.6
+ Median returns
+  1      18.5 21.5     19.6   14.0   11.8   12.8   18.7   22.1   22.5   21.5 29.5     18.1   18.9   16.5   18.2
+  2      15.5   9.0    12.4    9.7   13.1   11.0   13.7   15.8   17.0   20.0 13.5      7.9   14.3   15.9   14.4
+  3      12.5   5.4    11.7   12.9   15.5    8.3   12.3   13.2   13.0   16.7 9.7       1.7   16.6   13.0   11.8
+  4      10.2   8.8     9.5    9.9    8.0    8.9   11.3    8.9    8.5   10.6 3.8       1.1    6.2    9.0    8.6
+  5       6.6   2.9     4.3    5.9    2.5    4.6    9.1    3.6    4.9   -0.5 -1.0     -1.8    2.1    7.2    3.6
+ Minimum returns
+  1     11.4 10.9      10.6    9.7    4.8    7.2   13.6   14.3   18.6   18.3   12.5   10.0   16.3   10.4   12.3
+  2      9.0   -3.1     4.1    8.5    1.1    4.9   10.0    8.0   13.2    9.8    7.3   -1.1    9.2    8.6    7.9
+  3      9.2   -0.8     6.4    9.1    8.3    4.3    9.5    7.4    6.1    6.0    0.4   -3.0    5.5    7.3    7.5
+  4      6.3    3.1     3.8    6.4    2.1    2.2    3.8    2.5    6.0   -1.3   -0.5   -5.1    0.6    3.7    3.0
+  5      3.3   -3.0    -3.3    4.0   -0.7   -1.5    4.7   -1.1   -0.5   -6.7   -3.3   -5.9   -4.4   -2.2   -0.4
+ Maximum returns
+  1     27.4 26.0      22.5   18.6   16.5   16.9   27.5   29.5   31.8   28.5   36.2   22.0   20.9   20.0   21.0
+  2     18.7 21.3      16.8   13.7   22.7   17.1   20.8   22.2   26.1   27.1   20.4   15.5   21.4   20.9   19.7
+  3     15.5 15.4      15.4   18.3   21.2   15.9   18.4   20.1   18.2   22.5   15.8    9.8   22.1   20.5   16.4
+  4     13.9 15.4      13.9   14.5   10.7   13.5   17.5   14.3   10.9   15.3   14.7    5.1   11.0   15.7   12.1
+  5     10.0 13.2       8.7   11.2    7.7   10.2   14.9   11.8    8.0   12.5    8.8    5.8    9.9    8.7    8.7
+ Abbreviations: AUS = Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU =
+ Germany, DNK = Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan,
+ NLD = Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+After the explorative overview above, let us now turn to the evaluation of the statistical signif-
+icance. Table 3 below reports R2 values along with Newey–West’s (1987) heteroskedasticity-
+and autocorrelation-consistent standard errors, t-statistics and p-values, as well as standard
+errors, t-statistics and p-values derived from bias-corrective procedures based on Harri and
+Brorsen (2009) and Hjalmarrson (2011). Importantly, the coefficients of all countries exhibit
+exceptionally high t-values, with each country showing statistical significance at the 5%-level
+based on the widely-used Newey and West (1987) heteroskedasticity- and autocorrelation-
+consistent standard errors. However, Table 3 also shows that the serial-correlation-corrective
+procedure of Harri and Brorsen (2009) as well as of Hjalmarrson (2011) results in markedly
+lower t-values than that of Newey and West (1987). Given that both Harri and Brorsen
+(2009) and Hjalmarrson (2011) more accurately account for finite sample properties, these
+results are not surprising. However, even after correcting for the overlapping time-period
+bias based on Harri and Brorsen (2009) and Hjalmarrson (2011), the table shows that for all
+
+                                                    10
+
+                   Electronic copy available at: https://ssrn.com/abstract=4071039
+countries, with the exception of Austria, Canada and Switzerland, the findings are statisti-
+cally significant at the 5%-level. With p-values of 0.07 based on Harri and Brorsen (2009)
+and 0.11 based on Hjalmarrson (2011), the findings for Austria are the lowest, coinciding
+with the sample’s lowest R2 of 0.42. The t-statistics of -4.81 and -4.25 for the equally-
+weighted country aggregate indicate that the relationship is not only economically large, but
+also statistically significant.
+
+     Table 3: Regressing 10-yr forward nominal returns on ln(MVE/GDP), 1973-2019
+
+         R2    coef.      s.e.     t-stat.     p-value    s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+ AUS    0.83 -0.0456 0.0037 -12.21***           0.00      0.0096    -4.77***        0.00      -4.22***     0.00
+ AUT    0.42 -0.0326 0.0085 -3.85***            0.00      0.0177    -1.84*          0.07      -1.63        0.11
+ BEL    0.70 -0.0495 0.0064 -7.74***            0.00      0.0150    -3.31***        0.00      -2.92***     0.00
+ CAN    0.45 -0.0252 0.0054 -4.63***            0.00      0.0129    -1.95*          0.05      -1.73*       0.09
+ CHE    0.44 -0.0300 0.0066 -4.51***            0.00      0.0156    -1.92*          0.06      -1.70*       0.09
+ DEU    0.52   -0.0395    0.0074   -5.31***     0.00      0.0174    -2.28**         0.02      -2.01**      0.05
+ DNK    0.59   -0.0329    0.0056   -5.88***     0.00      0.0127    -2.60**         0.01      -2.30**      0.02
+ FRA    0.78   -0.0471    0.0046   -10.29***    0.00      0.0115    -4.10***        0.00      -3.63***     0.00
+ GBR    0.94   -0.0926    0.0041   -22.77***    0.00      0.0111    -8.33***        0.00      -7.36***     0.00
+ IRL    0.78   -0.0889    0.0092   -9.69***     0.00      0.0216    -4.12***        0.00      -3.64***     0.00
+ ITA 0.82 -0.0766         0.0086 -8.94***       0.00      0.0166    -4.60***        0.00      -4.07***     0.00
+ JPN 0.80 -0.1327         0.0143 -9.3***        0.00      0.0305    -4.36***        0.00      -3.85***     0.00
+ NLD 0.78 -0.0762         0.0065 -11.82***      0.00      0.0188    -4.05***        0.00      -3.58***     0.00
+ USA 0.74 -0.0738         0.0092 -8.02***       0.00      0.0200    -3.68***        0.00      -3.26***     0.00
+ AGG 0.83 -0.0591         0.0050 -11.89***      0.00      0.0123    -4.81***        0.00      -4.25***     0.00
+  Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity-
+ and autocorrelation-consistent (HAC) standard errors. The number of lags is computed based on the non-
+ parametric bandwidth selection procedure suggested by Newey and West (1994). Weights are computed us-
+ ing the Bartlett kernel as described in Newey and West (1987, 1994). Standard errors as well as t-statistics
+ and p-values computed based on Harri and Brorsen (2009) are denoted by superscript H+B , and t-statistics
+ and p-values based on Hjalmarsson (2008, 2011) are denoted by superscript H . Statistical significance at
+ the 1% level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations: AUS =
+ Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK
+ = Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD =
+ Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+As is customary in the financial economics literature, where data particularly for longer-term
+frequencies is scarce, the findings advanced in this paper are conducted in-sample. Goyal
+and Welch (2008) systematically investigate in-sample and out-of-sample performance of
+linear regressions that predict forward returns from academic research. The authors find
+that out-of-sample, most models lost statistical significance vis-à-vis in-sample modelling.
+The authors maintain, however, that some models with very-long term forecast horizons
+deserve more investigation – a criterium which the MVE/GDP ratio clearly meets. Table
+4 shows R2 values for in-sample modelling vis-à-vis an expanding window approach which
+only uses data known to investors at each respective point in time. While explanatory power
+decreases for the expanding window regression, average R2 decreases by only 19 percentage
+points, bringing R2 to a still stellar reading of 64.2%, implying that approximately two thirds
+of the return variation is captured by the model.
+
+                                                         11
+
+                       Electronic copy available at: https://ssrn.com/abstract=4071039
+   Table 4: Explanatory power (R2 ) of full-sample versus expanding window regression
+
+ Measure            AUS    AUT    BEL CAN CHE DEU DNK                    FRA     GBR    IRL   ITA    JPN NLD      USA     AGG
+ Expanding window   73.2   48.5   70.6    21.6    28.3    36.2    60.2    66.9   85.9    58.2 77.8   76.0    64.1 62.2     64.2
+ In-sample          83.0   42.0   70.1    44.9    44.2    52.6    59.1    78.3   93.7    78.4 81.9   80.2    77.8 74.4     83.2
+ Difference         -9.8    6.5    0.5   -23.4   -16.0   -16.4     1.1   -11.4   -7.8   -20.2 -4.1   -4.2   -13.8 -12.2   -19.0
+ Abbreviations: AUS = Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany,
+ DNK = Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD = Netherlands,
+ USA = United States, AGG = equal-weighted country aggregate.
+
+
+Relation to other popular valuation signals
+By design, the MVE/GDP ratio is constructed with a fast-changing nominator and a per-
+sistent denominator. The dominance of MVE in the MVE/GDP ratio gives rise to the
+possibility that the forward return estimate obtained from regressing on the MVE/GDP
+ratio may be driven solely by the nominator. Abstracting from new share issuance and buy-
+backs, the increases and decreases in MVE are caused by realised stock returns. Hence, the
+predictive ability of the “Buffett indicator” may simply be due to mean-reversion in stock
+returns, i.e. high past returns are followed by low future returns, and vice versa. We inves-
+tigate the relation with mean-reversion in stock returns in the next subsection. In addition,
+one can wonder whether the use of GDP is the most logical fundamental for comparison, as
+it includes economic activity that is not captured by the market for listed equity. Another
+popular equity market valuation measure looks at the market value of equities relative to
+the earnings that these companies have produced over the past ten years. In the second
+subsection, we therefore compare the predictive ability of the “Buffett indicator” relative to
+the cyclically-adjusted price-earnings ratio.
+
+
+Mean-reversion in equity market returns
+Given the negative correlation, MVE/GDP hence may capture a mean-reversion effect, as
+observed by e.g., Poterba and Summers (1987), Fama and French (1988), Spierdijk, Bikker
+and Van den Hoek (2012) and Zaremba, Kizys, and Raza (2020). To assess whether the
+MVE/GDP forecast quality is driven by (naïve) mean-reversion, we regress ten-year forward
+returns on five- and ten-year past returns. Table 5 below depicts R2 values for ten-year
+forward returns with two different lookback windows. The lookback windows of five and ten
+years are aligned to our forecast horizon and show that, at least a one-size-fits-all, mean-
+reversion approach has limited explanatory power, explaining less than 10% and 1% of return
+variation, on average, for the ten- and five-year lookback window, respectively.
+In view of the low explanatory power of a naïve implementation of mean-reversion, we may
+reject the possibility that the forecast quality of the market value of equity-to-gross domes-
+tic product ratio may, to any substantial degree, be attributable to capturing an underlying
+mean-reversion process. This is in-line with the mean-reversion literature. Spierdijk, Bikker
+and Van den Hoek (2012), for instance, document mean-reversion half-lives ranging from 2.0
+to 22.6 years with significant cross-sectional as well as time-series variability. We hence can-
+
+                                                             12
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+Table 5: R2 of naïve mean-reversion, regressing 10-yr forward returns on previous 5- and
+10-yr returns
+
+ Measure       AUS    AUT    BEL    CAN CHE       DEU DNK FRA         GBR IRL      ITA JPN NLD       USA AGG
+ 5-yr/10-yr     1.3   35.1    7.2   10.3    1.8   14.9   19.5   0.1   22.3   3.6   0.8   0.4   0.2    1.0   0.4
+ 10-yr/10-yr   13.0   31.0    0.6    4.9   11.0    3.9    0.3   3.6   29.5   7.0   0.7   6.5   2.4    1.4   9.5
+ Abbreviations: AUS = Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU =
+ Germany, DNK = Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD
+ = Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+not expect that a naïve implementation in the form of a one-size-fits-all approach, i.e. look-
+back window, would significantly contribute to the forecasting quality of MVE/GDP based
+on a fixed ten-year forward return horizon.
+
+
+Cyclically-adjusted price-earnings ratio
+Over the past decades, the seminal articles of Campbell and Shiller (1988, 1998, 2001) have
+rendered the so-called cyclically-adjusted price-earnings ratio (alternatively, CAPE, Shiller
+P/E, P/E10) a de-facto benchmark for longer-term return forecasting. Hence, the following
+section compares the forecast quality of MVE/GDP with that of the cyclically-adjusted price-
+earnings ratio. Since P/E10 ratios require a ten-year formation period, data availability only
+starts in 1983. In addition to the ten-year lag, data for Denmark, France and Italy are further
+shortened due to later data availability (Denmark: 31 March 1988, France: 31 March 2000,
+Italy: 31 March 1996). For comparability purposes, we compute MVE/GDP figures starting
+from the same date. In other words, 1983 constitutes the default start date for both P/E10
+as well as MVE/GDP in this section. For Denmark, France and Italy, whose data availability
+for P/E10 data starts later, we adjusted MVE/GDP computation start dates accordingly.
+Table 6 makes clear that compared to the cyclically-adjusted price-to-earnings ratio,
+MVE/GDP is substantially more accurate for individual countries and for the pooled-
+country aggregate, almost unexceptionally exhibiting materially higher t-values. Indeed,
+P/E10 captures more of the return variation of only four countries: Denmark, France, Japan
+and the United States. The difference for two countries – the United States (0.83 vs 0.80)
+and Denmark (0.42 vs 0.41) – is minor, while P/E10’s R2 for France (0.83) is markedly
+higher than that of the MVE/GDP ratio (0.66). For Japan, the MVE/GDP’s explanatory
+power of 0.39 is also markedly lower than that the 0.47 for the cyclically-adjusted price-
+to-earnings ratio. Interestingly, the United States is the only country apart from France
+with a substantial R2 for P/E10 (0.83), although R2 for MVE/GDP is high as well (0.80).
+Notably, the R2 of 0.77 for the equal-weighted pooled-country aggregate for MVE/GDP
+compares quite favourably to the 0.27 for P/E10.
+Also of note is that there exists a striking difference between the statistical significance
+derived from the use of commonly used Newey and West (1987) heteroskedasticity- and
+autocorrelation-consistent (HAC) standard errors and the procedures aimed at correcting
+for finite sample properties (Harri and Brorsen (2009); Hjalmarsson (2011)). While the use
+
+                                                         13
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+Table 6: Comparing results of 10-yr forward nominal returns regressed on ln(MVE/GDP)
+and P/E10, 1983-2019
+
+          R2     coef.    s.e.     t-stat.    p-value   s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+ Market value of equity-to-gross domestic product ratio
+  AUS 0.82 -0.0475 0.0037 -12.79***       0.00  0.0118            -4.01***        0.00      -3.55***     0.00
+  AUT 0.54 -0.0395 0.0062 -6.41***        0.00  0.0195            -2.02**         0.05      -1.79*       0.08
+  BEL 0.62 -0.0460 0.0076 -6.09***        0.00  0.0195            -2.36**         0.02      -2.08**      0.04
+  CAN 0.44 -0.0363 0.0112 -3.23***        0.00  0.0221            -1.64           0.10      -1.45        0.15
+  CHE 0.79 -0.0511 0.0069 -7.44***        0.00  0.0141            -3.63***        0.00      -3.21***     0.00
+  DEU 0.47 -0.0456 0.0117 -3.89***        0.00  0.0263            -1.74*          0.09      -1.53        0.13
+  DNK 0.42 -0.0390 0.0080 -4.88***        0.00  0.0271            -1.44           0.15      -1.27        0.21
+  FRA 0.66 -0.1170 0.0234 -5.01***        0.00  0.0747            -1.57           0.13      -1.39        0.17
+  GBR 0.87 -0.0914 0.0070 -13.07***       0.00  0.0191            -4.8***         0.00      -4.24***     0.00
+  IRL   0.73 -0.1015 0.0157 -6.48***      0.00  0.0335            -3.03***        0.00      -2.68***     0.01
+  ITA   0.90 -0.1242 0.0114 -10.92***     0.00  0.0318            -3.91***        0.00      -3.45***     0.00
+  JPN 0.39 -0.0851 0.0168 -5.06***        0.00  0.0570            -1.49           0.14      -1.32        0.19
+  NLD 0.74 -0.0965 0.0149 -6.46***        0.00  0.0311            -3.1***         0.00      -2.74***     0.01
+  USA 0.80 -0.0911 0.0130 -6.99***        0.00  0.0250            -3.65***        0.00      -3.23***     0.00
+  AGG 0.77 -0.0613 0.0073 -8.42***        0.00  0.0180            -3.41***        0.00      -3.01***     0.00
+ Cyclically-adjusted price-earnings ratio
+  AUS 0.50 -0.0034 0.0007 -5.00***              0.00    0.0019    -1.79*          0.08      -1.65        0.10
+  AUT 0.18 -0.0014 0.0005 -2.55**               0.01    0.0016    -0.84           0.40      -0.77        0.44
+  BEL 0.29 -0.0031 0.0010 -3.01***              0.00    0.0027    -1.15           0.25      -1.06        0.29
+  CAN 0.22 -0.0020 0.0007 -2.86***              0.01    0.0022    -0.95           0.34      -0.87        0.38
+  CHE 0.46 -0.0031 0.0006 -5.29***              0.00    0.0019    -1.64           0.10      -1.51        0.13
+  DEU 0.35 -0.0027 0.0007 -4.12***              0.00    0.0021    -1.31           0.19      -1.20        0.23
+  DNK 0.41 -0.0028 0.0006 -4.24***              0.00    0.0021    -1.31           0.19      -1.25        0.21
+  FRA 0.83 -0.0027 0.0004 -7.63***              0.00    0.0014    -1.94*          0.06      -2.19**      0.03
+  GBR 0.28 -0.0045 0.0015 -3.08***              0.00    0.0041    -1.11           0.27      -1.02        0.31
+  IRL     0.30 -0.0044 0.0011 -4.06***          0.00    0.0038    -1.18           0.24      -1.08        0.28
+  ITA     0.15 -0.0012 0.0003 -3.99***          0.00    0.0023    -0.5            0.62      -0.52        0.60
+  JPN 0.47 -0.0015 0.0003 -5.11***              0.00    0.0009    -1.67*          0.10      -1.54        0.13
+  NLD 0.39 -0.0042 0.0008 -5.11***              0.00    0.0029    -1.42           0.16      -1.31        0.19
+  USA 0.83 -0.0051 0.0004 -11.53***             0.00    0.0013    -3.88***        0.00      -3.57***     0.00
+  AGG 0.27 -0.0027 0.0008 -3.27***              0.00    0.0025    -1.08           0.28      -1.00        0.32
+  Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity-
+ and autocorrelation-consistent (HAC) standard errors. The number of lags is computed based on the non-
+ parametric bandwidth selection procedure suggested by Newey and West (1994). Weights are computed using
+ the Bartlett kernel as described in Newey and West (1987, 1994). Standard errors as well as t-statistics and
+ p-values computed based on Harri and Brorsen (2009) are denoted by superscript H+B , and t-statistics and
+ p-values based on Hjalmarsson (2008, 2011) are denoted by superscript H . Statistical significance at the 1%
+ level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations: AUS = Australia,
+ AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK = Denmark,
+ FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD = Netherlands, USA
+ = United States, AGG = equal-weighted country aggregate.
+
+
+of Newey and West (1987) suggests no material difference between MVE/GDP and P/E10
+as predictors for forward equity returns, both the Harri and Brorsen (2009) as well as the
+Hjalmarsson (2011) adjustment leads P/E10 coefficients to lose statistical significance in
+most cases, while MVE/GDP coefficients, by and large, retain their significance. It should
+
+                                                       14
+
+                     Electronic copy available at: https://ssrn.com/abstract=4071039
+be kept in mind that Denmark, France and Italy have substantially shorter sample lengths
+for P/E10 (see Section 2 for further details). As MVE/GDP computations are aligned
+to the P/E10 data availability for the sake of comparison, this leads to lower statistical
+significance for MVE/GDP and, as a consequence, to a failure to reject the null hypothesis of
+no predictability for Denmark and France for the shortened P/E10-aligned period, although
+statistical significance is exceptionally high for the period 1973-2019 (see Table 3).
+Also noteworthy in this context is that MVE/GDP shows substantially higher explanatory
+power (R2 ), on average, with regard to nominal forward returns (0.77) than with excess
+returns (0.19) and real returns (0.67) between 1983 and 2019. For the purpose of forecasting
+excess returns (i.e. nominal returns in excess of the risk-free rate), the cyclically-adjusted
+price-to-earnings ratio appears to yield better results (see detailed results for comparison
+with excess returns in Tables 9-11 and real returns in Table 12-14 in the Appendix). The
+superior results for P/E10 for the purpose of forecasting excess returns are likely driven by
+the construction of the respective valuation measures. While the cyclically-adjusted price-to-
+earnings ratio uses real earnings in its denominator, MVE/GDP is based on nominal values
+and assumes a convergence to the mean in nominal, not real terms. Since excess returns
+are closely related to real returns, it appears coherent that P/E10 has higher explanatory
+power for excess returns, explaining the fact that R2 increases from 0.27 for nominal returns
+to 0.36 for excess returns for P/E10. While P/E10 explains ten-year excess forward returns
+more accurately than MVE/GDP, it should be kept in mind that the explanatory power of
+MVE/GDP with respect to nominal forward returns is materially higher (0.77) during 1983-
+2019 than the explanatory power of P/E10 with respect to forward excess returns (0.36) over
+the same period.
+To determine which of the two measures drives predictability, we regress ten-year forward
+returns on the log of MVE/GDP and the cyclically-adjusted price-earnings ratio. Although
+past returns, as shown in Table 5, do not appear to meaningfully explain future returns
+in and of itself, we include trailing ten-year returns as an additional factor in the multiple
+regression framework to check whether, in combination with MVE/GDP and P/E10, they
+may contribute to forecasting future returns.
+The regression takes the following form and the results are presented in Table 7.
+
+
+                             MV E 
+                                      t
+        Rt:t+10 = α + β × ln              + γ × P/E10t + δ × RET U RNt−10:t + t:t+10     (3)
+                               GDPt
+
+Table 7 reports adjusted R2 as well as coefficients, t-statistics and p-values for MVE/GDP,
+P/E10 and trailing ten-year returns. In most cases, the explanatory power (see column
+2) increases substantially vis-à-vis the simple linear regression results presented in Table 6
+above. Interestingly, the MVE/GDP coefficients retain statistical significance for all coun-
+tries including the pooled-country aggregate, with the exception of Japan. It should be kept
+in mind, however, that these results are based on Newey and West (1993) standard errors,
+since Harri and Brorsen (2009) as well as Hjalmarsson (2011) may not be used for multiple
+linear regressions. The results serve to demonstrate, however, that MVE/GDP constitutes
+the dominant factor when combined with the cyclically-adjusted price-to-earnings ratio as
+
+                                                15
+
+                  Electronic copy available at: https://ssrn.com/abstract=4071039
+Table 7: Regressing 10-yr forward nominal returns on ln(MVE/GDP), P/E10 and 10-yr
+trailing returns, 1983-2019
+
+                                    MVE/GDP                                   P/E10                         TRAILING 10Y RET.
+        Adj. R2    coef.     s.e.      t-stat.     p-value     coef.   s.e.    t-stat.    p-value   coef.     s.e.     t-stat.   p-value
+ AUS      0.86     -0.0635 0.0085 -7.46***          0.00      0.0010   0.00    1.63        0.11     -0.2666   0.0839 -3.18*** 0.00
+ AUT      0.74     -0.0371 0.0044 -8.45***          0.00     -0.0008   0.00    -3.19***    0.00     -0.1770   0.0860 -2.06** 0.04
+ BEL      0.70     -0.0366 0.0059 -6.25***          0.00     -0.0020   0.00    -2.35**     0.02     0.0838    0.0982 0.85     0.40
+ CAN      0.58     -0.0517 0.0130 -3.97***          0.00      0.0015   0.00    1.90*       0.06     -0.5528   0.1665 -3.32*** 0.00
+ CHE      0.82     -0.0449 0.0086 -5.23***          0.00     -0.0007   0.00    -0.97       0.34     -0.0599   0.1707 -0.35    0.73
+ DEU      0.60     -0.0367   0.0095    -3.85***     0.00     -0.0016   0.00 -2.07**        0.04     -0.0358   0.1765   -0.2     0.84
+ DNK      0.59     -0.0306   0.0106    -2.88***     0.01     -0.0017   0.00 -2.04**        0.04     -0.0723   0.1225   -0.59    0.56
+ FRA      0.94     -0.0391   0.0068    -5.72***     0.00     -0.0012   0.00 -5.24***       0.00     -0.2488   0.0513   -4.85*** 0.00
+ GBR      0.88     -0.1256   0.0263    -4.78***     0.00      0.0022   0.00 1.30           0.20     -0.2401   0.1519   -1.58    0.12
+ IRL      0.74     -0.1094   0.0231    -4.73***     0.00      0.0008   0.00 0.51           0.61     0.0758    0.1375   0.55     0.58
+ ITA      0.91     -0.1271   0.0125    -10.16***    0.00      0.0004   0.00    2.00*       0.05     -0.0711 0.0806     -0.88     0.38
+ JPN      0.51     -0.0127   0.0444    -0.29        0.78     -0.0015   0.00    -1.64       0.10     0.0859 0.1222      0.7       0.48
+ NLD      0.77     -0.0839   0.0223    -3.75***     0.00     -0.0010   0.00    -0.67       0.50     0.2564 0.1610      1.59      0.11
+ USA      0.90     -0.0147   0.0171    -0.86        0.39     -0.0049   0.00    -4.52***    0.00     0.2356 0.1467      1.61      0.11
+ AGG      0.79     -0.0673   0.0130    -5.16***     0.00      0.0002   0.00    0.13        0.89     -0.1444 0.1813     -0.8      0.43
+  Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity- and autocorrelation-
+ consistent (HAC) standard errors. The number of lags is computed based on the non-parametric bandwidth selection procedure
+ suggested by Newey and West (1994). Weights are computed using the Bartlett kernel as described in Newey and West (1987,
+ 1994). Statistical significance at the 1% level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations:
+ AUS = Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK = Denmark,
+ FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD = Netherlands, USA = United States,
+ AGG = equal-weighted country aggregate.
+
+
+
+well as ten-year trailing returns in a multiple regression framework. Overall, the results
+presented in Table 7 suggest that the forecast quality of MVE/GDP may be improved by
+adding P/E10 as a further explanatory variable, and possibly also trailing ten-year returns.
+The ratio of market valuation of equity to economic output has a significant advantage
+vis-à-vis solely price-oriented valuation techniques, such as the cyclically-adjusted price-to-
+earnings ratio. Its nominator contains information on quality (price) as well as quantities
+(equity issuance). Accounting for (net) equity issuances, for instance, incorporates investor
+sentiment not captured by purely price-based valuation metrics. Research shows that firms
+are able to exploit investor exuberance by timing the market and issuing relatively more
+equities at overvalued prices around market tops, and thus before periods of low equity
+returns (Loughran, Ritter, and Rydqvist 1994, Baker and Wurgler 2000). Also, more recently,
+share buybacks have become a popular means to return money to shareholders (Grullon
+and Michaely 2002). These share repurchases may be a signal by management that the
+stock price is undervalued.8 MVE/GDP, thus, adds an additional information layer with
+   8
+    Most studies find that share buybacks are associated with positive excess returns, i.a. Peyer and Ver-
+maelen (2009), Dittmar and Field (2015) and Manconi, Peyer and Vermaelen (2019). However, more recent
+research is less supportive of the long-term value creation hypothesis, arguing that excess returns may merely
+compensate for higher risk (Bargeron, Bonaime and Thomas (2017) and Lin, Stephens and Wu (2014)). The
+increased use of buybacks as a means to distribute cash to shareholders has led to an alternative version of
+the P/E10, which accounts for all corporate payouts to investors. For details, see Bunn and Shiller (2014)
+and Jivraj and Shiller (2017). Since we do not have international data on buybacks, we cannot compare
+the Buffett indicator with this adjusted P/E10 measure. A further improvement to the traditional P/E10
+
+
+                                                                  16
+
+                           Electronic copy available at: https://ssrn.com/abstract=4071039
+incremental explanatory power, which may contribute to the higher explanatory power as
+well as statistical significance.
+
+
+Practical application to investment strategies
+In the following part, we transfer the empirical findings of this paper to a more practice-
+oriented framework, by devising a few simple trading rules. Given the high explanatory
+power of MVE/GDP in explaining subsequent returns, we test whether buying the countries
+with the highest model-predicted returns would have outperformed a simple buy-and-hold
+strategy. It should be noted that, unlike Lleo and Ziemba (2018), we are not concerned with
+forecasting short-term price-action and drawdowns. We forecast long-term equity returns at
+a ten-year horizon. Since, with very few exceptions, at a ten-year horizon equity returns are
+strictly positive, timeseries strategies which attempt to time the market by varying equity
+market exposure, i.e. deviate from full-allocation, are bound to underperform a buy-and-hold
+benchmark unless leverage is employed. A more straight-forward way of utilising the time-
+series return forecasts developed and tested in this paper is, therefore, the use of timeseries
+forecasts for the purpose of allocating to the cross-section – in this context, countries – for
+which the timeseries forecasts are most positive and excluding those with the least attractive
+return predictions. It should also be noted that this is not a cross-sectional approach in the
+traditional sense. In the introduction, we caution against comparing MVE/GDP ratios
+across countries for a variety of reasons. We do not, however, allocate to countries with the
+lowest MVE/GDP, as a traditional cross-sectional approach would. Rather, we use return
+forecasts derived from timeseries analysis for the purpose of evaluating which countries are
+expected to show the highest returns over subsequent ten-year time-period. A strategy based
+on timeseries forecasts in the context of a cross-sectional approach holds the advantage of
+making use of the extraordinarily accurate return forecasts permitted by MVE/GDP and at
+the same time, the approach elegantly circumvents the practical problems associated with
+forecasting long-term returns for asset classes with strictly positive risk premia.
+The backtest is based on the following rules:
+
+   1. We rank countries in ascending order on the basis of their model-predicted ten-year
+      forward return. We then construct a portfolio which equal-weights the upper half
+      of the fourteen-country dataset, i.e. invest in the seven countries with the highest
+      model-predicted ten-year forward return. We ensure that portfolio construction uses
+      only data which was known to investors at any given point in time by using an
+      expanding window regression framework. Our dataset starts in March 1973, and since
+      we perform regressions with a 10-year holding period, the first prediction is only
+      available in June 1983. However, this prediction is based on a regression with only
+      two (overlapping) observations. We allow the model an initial stabilisation period
+      until year-end 1985, at which point 11 quarterly observations are available to make
+ratio constitutes the “Excess CAPE Yield” measure which is defined as the CAPE yield above the ten-year
+interest rate, as advanced by Shiller, Black and Jivraj (2020).
+
+
+                                                  17
+
+                    Electronic copy available at: https://ssrn.com/abstract=4071039
+       the country-specific return forecast. To account for the possibility that 1985 might
+       not be a representative year for the strategy implementation, we report results for
+       strategy implementations starting in each of the following nine years, as well as an
+       average of the ten strategies.
+
+   2. Every ten years, the strategy ranks countries in ascending order of their model-
+      predicted ten-year forward returns again and allocates according to point (1)
+      above.
+
+Figure 5 depicts the excees return of the reference strategy from December 1985 to December
+2019 over the benchmark. The strategy returned an annual average of 10.3%, while a port-
+folio equal-weighted in the sample dataset’s countries returned 9.5%, implying an average
+annual strategy outperformance of approximately 86bps over the 35-year period. Also worth
+mentioning in this context is that the strategy earned its excess return over the buy-and-
+hold index with superior portfolio characteristics, i.e. (marginally) lower volatility (13.9%
+vs 14.2%) and, as a corollary, a higher Sharpe ratio (0.56 vs 0.49) as well as a less severe
+maximum drawdown (-52.1% vs -56.1%). These results can be viewed as representative for
+all ten tested strategies (see Table 8), which outperformed the benchmark by approximately
+1%, on average. Remarkably, all portfolio characteristics (i.e. returns, volatility as well as
+maximum drawdown) in each single year are better for the strategy than for the correspond-
+ing benchmark. In fact, only during 129 out of the total of 3,550 months, or 3.6%, of all ten
+backtested strategies, the strategy trailed the benchmark. Importantly, the trading strategy
+is robust to the most conservative assumption regarding trading costs. Given that rebal-
+ancing is conducted only once every ten years, the maximum annual turnover is 20% of the
+portfolio. Since an average turnover of 20% would only be necessary in the unlikely scenario
+that the full portfolio had to be sold and, analogously, a new portfolio had to be created
+in full (i.e. there is zero overlap between old and new portfolio), the assumption meets the
+criterium of cautious conservativism. Assuming high transaction costs of 1%, the trading
+strategy would have incurred costs of only 20 basis points p.a., thus reducing the average
+annual alpha from 1.0% to 0.8%.9
+   9
+     Stoll (1993) estimates trading costs for US equities fell from 0.95% in 1980 to 0.42% and hence during
+the early, more cost-intensive period of our analysis. Thus, transaction costs of 1% for the entire period in
+all likelihood severely over-estimate trading costs even on an international (developed markets) level.
+
+
+
+
+                                                     18
+
+                     Electronic copy available at: https://ssrn.com/abstract=4071039
+Excess return   1000
+
+
+
+
+                 300
+
+
+
+
+                 100
+
+
+                           1990                     2000                       2010                   2020
+
+
+
+
+            Figure 5: Strategy excess return relative to equal-weighted country index ("Composite")
+
+
+Summarising, the strategy – regardless of implementation year – yielded economically mean-
+ingful alphas over a corresponding buy-and-hold benchmark equal-weighted in the dataset’s
+fourteen countries. The composite strategy, an average of all ten strategies with start years
+between 1985 and 1994, returned 10.5%, on average, annually, vis-à-vis the benchmark per-
+formance of 9.5%, outperforming the latter by an average of c. 100bps per year. Additionally,
+the outperformance was accompanied by lower volatility (13.6% vs 14.2%), a statistically
+significant superior Sharpe ratio (0.57 vs 0.49) and a c. 4%-point reduction in maximum
+drawdown.
+These findings stand in apparent contrast to Lleo and Ziemba (2018) who do not find sta-
+tistical evidence for MVE/GDP as a good predictor for market crashes or corrections.10
+Given the nature of MVE/GDP, however, this is not surprising. Market crashes are, by
+necessity, abrupt and severe, thus the shorter-term horizon of eight quarter employed in the
+study. The spirit of Lleo and Ziemba (2018) is hence to be strictly distinguished from ours.
+We employ a ten-year forecast horizon in the spirit of Fama and French (1988) which is
+also frequently used in testing the forecast quality of other longer-term valuation indicators
+(e.g. Siegel 2016 for the cyclically-adjusted price-earnings ratio). Rather than attempting to
+                10
+    While Lleo and Ziemba (2018) find that an unadjusted MVE/GDP ratio, as used in this article, does
+not provide satisfactory forecast signals for market crashes, a time-varying decision rule based on a 95%
+one-tail confidence interval threshold and a threshold computed using Cantelli’s inequality renders the ratio
+a statistically significant predictor of equity market corrections.
+
+
+                                                           19
+
+                            Electronic copy available at: https://ssrn.com/abstract=4071039
+                                                    Table 8: Backtest results
+
+                  ANN. RETURN (%)        ANN. VOLATILITY (%) MAX. DRAWDOWN (%)                    SHARPE RATIO         JOBSON-KORKIE
+ Strategy start   Strategy     B/M       Strategy        B/M         Strategy         B/M         Strategy    B/M      z-stat.   p-value
+ 1985/12            10.3        9.5        13.9          14.2           -52.3         -56.1         0.56       0.49     1.69       0.09
+ 1986/12             9.8        8.8        13.4          14.2           -52.1         -56.1         0.54       0.45     2.19       0.03
+ 1987/12            10.7        9.5        12.8          13.7           -51.5         -56.1         0.62       0.52     2.79       0.01
+ 1988/12             9.8        8.9        13.0          13.8           -51.2         -56.1         0.57       0.48     2.18       0.03
+ 1989/12             9.0        8.2        13.1          13.9           -52.3         -56.1         0.52       0.44     1.91       0.06
+ 1990/12            10.2        9.2        13.1          13.6           -52.1         -56.1         0.61       0.53     1.98       0.05
+ 1991/12             9.6        9.0        13.2          13.6           -51.4         -56.1         0.58       0.52     1.60       0.11
+ 1992/12             9.9        9.3        13.5          13.7           -52.1         -56.1         0.59       0.54     1.44       0.15
+ 1993/12             8.6        8.3        13.3          13.8           -52.2         -56.1         0.51       0.48     1.01       0.31
+ 1994/12             9.5        8.8        13.4          13.9           -54.3         -15.9         0.58       0.51     1.70       0.09
+ Composite          10.5        9.5        13.6          14.2           -52.1         -56.1         0.57       0.49     2.27       0.02
+  Notes: The table reports strategy results for strategies starting each year between 1985/12 and 1994/12. The average of all strategies is
+ reported in the last row titled "Composite". The strategy’s benchmark ("B/M") is an index equal-weighted at formation in the dataset’s 14
+ countries, Australia, Austria, Belgium, Canada, Denmark, France, Germany, Great Britain, Ireland, Italy, Japan, Netherlands, Switzer-
+ land and the United States. The "Jobson-Korkie" columns report the results of the Jobson-Korkie test based on Jobson and Korkie (1981)
+ and the Memmel (2003) correction of statistically significant difference between the Sharpe ratios of the strategy and the benchmark.
+
+
+
+time short-term market gyrations, or indeed crashes, the ten-year horizon was chosen so as
+to comprise ideally two, but at least one, business cycles, and is thus concerned with fore-
+casting long-term average returns, instead of shorter-term market movements. The findings
+of Lleo and Ziemba (2018) are, in fact, corroborated by Umlauft (2020) who documents high
+R2 values for longer-term forecast horizons based on MVE/GDP in the United States, but
+low explanatory power at shorter frequencies.
+
+
+MVE/GDP in historical context
+Although the MVE/GDP ratio tends to exhibit a considerable degree of mean-reversion, its
+tendency to mean-revert has arguably declined in the recent past. In this context, it is worth
+noting that a regime shift appears to have manifested around the turn of the millennium, as
+virtually all MVE/GDP readings in the upper quintile for the country-average occurred in
+the period since around 2000, coinciding with the internet bubble of the late-1990s and the
+subprime bubble in the early-2000s as well as the subsequent recovery.
+The possibility of a higher equilibrium MVE/GDP ratio is in line with Carlson, Pelz and
+Wohar (2002) who employ breakpoint tests on the means of valuation ratios, providing statis-
+tical evidence for an upward shift of average price-earnings ratios. Similarly, Lansing (2017)
+shows that lower risk-free rates, as measured by r-star, along with the growth rate of poten-
+tial GDP and the core PCE inflation rate explains a significant share of higher CAPE ratios
+since the 1980s. Changes in equilibrium valuation levels are not confined to equity markets,
+however. Knoll, Schularick and Steger (2017), for instance, document a structural break in
+house prices induced by the rising cost of land in the second half of the twentieth century. In
+this context it should be noted that the time-series analysis employed in the present study
+omits a significant amount of twentieth century financial data for which quarterly data is not
+available. As Rajan and Zingales (2003) show, countries have experienced a high time-series
+
+                                                                   20
+
+                             Electronic copy available at: https://ssrn.com/abstract=4071039
+variation in financial development, as proxied by the fraction of stock market capitalisation
+to GDP. The main finding of their “great reversals” hypothesis suggests that countries with
+highly developed financial sectors were more advanced as measured by market capitalisation
+in 1913 than they were in 1980. It was only by the end of the 1990s that the levels reached
+in 1913 were exceeded. Before this background we caution that the sample period studied
+herein might not be fully representative for the twentieth century, as a dominating period
+of the second half of the twentieth century was characterised by what appears to have been
+a catch-up to its 1913 levels, for which data is not available. The high MVE/GDP values
+since the 1990s might therefore not be as exceptional as they might appear at first sight.
+The possibility that a new equilibrium has formed towards the end of the twentieth cen-
+tury is substantiated by Orhangazi (2008) and Fasianos, Guevara and Pierros (2016) who
+demonstrate that the era of “financialisation” led to an increased importance of the financial
+sector and financial markets starting in the 1970s – just as MVE/GDP has begun its long,
+and steady march up from approximately 0.1 in the 1970s and early-1980s to almost 0.80 at
+the height of the internet bubble. Neither during the subsequent collapse nor at any time
+since did the MVE/GDP ratio approach the relatively low readings experienced in the 1970s,
+possibly indicating the establishment of a permanently higher equilibrium ratio.
+
+
+Conclusion
+This paper showed that the market value of equities scaled by gross domestic product pos-
+sesses statistically significant forecast properties for long-term equity returns for our fourteen-
+country dataset, comparable in quality to that of the United States. With R2 values ranging
+from 42.0% to 93.7%, the explanatory power of MVE/GDP for forward returns in our dataset
+is heterogenous, but with 83.2%, on average, comparable to that for the United States.
+The relationship between the market value of equity and economic output is a crude, but
+straight-forward way of measuring the degree of resources directed to capital markets vis-à-
+vis the ‘real’ economy. MVE/GDP can thus be viewed as a yardstick to investor sentiment
+towards stock markets and, by logical extension, towards financial assets in general. As
+a main advantage over purely price-based valuation measures, MVE/GDP incorporates a
+qualitative (i.e. price) as well as a quantitative (i.e. number of shares) dimension. As an
+increasing amount of economic resources is being deployed on capital markets, equity prices
+are being driven up without a commensurate increase in “real” economic activity and ex-
+pected returns fall. If share prices scaled by GDP fall, on the other hand, expected returns
+increase.
+The analysis conducted in this paper demonstrated that the market value of equity relative
+to gross domestic product provides a useful tool for investors. The metric possesses strong
+and robust predictive properties over longer horizons (c. ten years), as market valuations
+relative to economic output have tended to mean-revert to a long-term equilibrium since
+1973, although the latter half of the observation period has witnessed higher MVE/GDP
+ratios than the period until the turn of the millennium. Further research is required to
+determine whether this represents a temporary deviation from a long-term equilibrium, or,
+in fact, may mark a paradigm shift.
+
+                                                 21
+
+                   Electronic copy available at: https://ssrn.com/abstract=4071039
+Given the forecast quality of the market value of equity-to-gross domestic product ratio
+as demonstrated in this article, MVE/GDP constitutes an additional input factor for the
+purpose of equity market valuation and the formation of long-term return expectations.
+MVE/GDP should not replace conventional valuation measures, such as the cyclically-
+adjusted price-to-earnings ratio, however. As Campbell and Shiller (1998) point out, con-
+ventional valuation measures (i.e. price-to dividend and cyclically-adjusted price-to-earnings
+ratio) deserve a special place among forecasting variables due to the high-quality and long
+availability of data, going back to 1871 for the United States. Rather, MVE/GDP should
+be seen as a complementary valuation tool by providing incremental information on a non-
+earnings-based basis. The demonstrably higher explanatory power of P/E10 for the purpose
+of forecasting excess returns makes a convincing case for using MVE/GDP and P/E10 con-
+comitantly.
+Given current valuation levels, the likelihood of subdued returns or pronounced market
+losses over the next ten years is substantial. MVE/GDP thus corroborates the somewhat
+sobering return expectations derived from the (raw) Shiller P/E, according to which forward
+returns will be an order of magnitude smaller than they have been over the past decade.
+MVE/GDP lends further support to the depressed longer-term return forecasts derived from
+elevated Shiller P/E ratios. Valuation levels comparable to those today have led to annualised
+forward returns over the subsequent ten years in the lower single-digit range, and occasionally
+even in negative territory. Current valuations certainly warrant caution, although depressed
+levels of interest rates globally might prove continuously supportive of equity prices in spite
+of valuation levels in the historical upper extreme.
+
+
+References
+Baker, Malcom; Wurgler, Jeffrey (2000): The Equity Share in New Issues and Aggregate
+Stock Returns. The Journal of Finance 55, pp. 2219-2257.
+Bargeron, Leonce.; Bonaime, Alice; Thomas, Shawn (2017): The Timing and Source of
+Long-Run Returns Following Repurchases. Journal of Financial and Quantitative Analysis
+52, pp. 491–517.
+Boudoukh, Jacob; Israel, Ronen; Richardson, Matthew (2019): Long Horizon Predictability:
+A Cautionary Tale. Financial Analysts Journal 75, pp. 17-30.
+Boudoukh, Jacob; Richardson, Matthew; Whitelaw, Robert F. (2008): The Myth of Long-
+Horizon Predictability. The Review of Financial Studies 21, pp. 1577-1605.
+Buffett, Warren; Loomis, Carol J. (1999): Mr. Buffett on the Stock Market. Fortune, 22
+November.
+Buffett, Warren; Loomis, Carol J. (2001): Mr. Buffett on the Stock Market. Fortune, 10
+December.
+Bunn, Oliver D.; Shiller, Robert J. (2014): Changing Times, Changing Values: A Historical
+Analysis of Sectors within the US Stock Market 1872-2013. NBER Working Paper 20370.
+
+
+                                                 22
+
+                   Electronic copy available at: https://ssrn.com/abstract=4071039
+Campbell, John Y.; Shiller, Robert J. (1988): Stock Prices, Earnings, and Expected Divi-
+dends. Journal of Finance 43, pp. 661–676.
+Campbell, John Y.; Shiller, Robert J. (1998): Valuation Ratios and the Long-run Stock
+Market Outlook. Journal of Portfolio Management 24, pp. 11–26.
+Campbell, John Y.; Shiller, Robert J. (2001): Valuation Ratios and the Long-run Stock
+Market Outlook: An Update. NBER Working Paper 8221.
+Carlson, John B.; Pelz, Eduard A.; Wohar, Mark E. (2002): Will Valuation Ratios Revert
+to Historical Means? The Journal of Portfolio Management 28, pp. 23-35.
+Chang, Y.; Pak, D. (2018): Warren Buffett value indicator vs. GDP size – is the relationship
+superlinear? International Journal of Economics and Business Research 15, pp. 223-235.
+Diris, Bart; Palm, Franz; Schotman, Peter (2015): Long-Term Strategic Asset Allocation:
+An Out-of-Sample Evaluation. Management Science 61, pp. 2013-2280.
+Dittmar, Amy K.; Field, Laura Casares (2015): Can Managers Time the Market? Evidence
+Using Repurchase Price Data. Journal of Financial Economics 115, pp. 261–282.
+Doidge, Craig; Karolyi, Andrew G.; Stulz, René M. (2017): The U.S. Listing Gap. Journal
+of Financial Economics 123, pp. 464-487.
+Von Eije, Henk; Megginson, William L. (2008): Dividends and share repurchases in the
+European Union. Journal of Financial Economics 89, pp. 347-374.
+Fama, Eugene; French, Kenneth R. (1988): Permanent and Temporary Components of Stock
+Prices. Journal of Political Economy 96, pp. 246-273.
+Fama, Eugene; French, Kenneth R. (1988a): Dividend Yields and Expected Stock Returns.
+Journal of Financial Economics 22, pp. 3-25.
+Fasianos, Apostolos; Guevara, Diego; Pierros, Christos (2016): Have We Been Here Before?
+Phases of Financialization within the 20th Century in the United States. Levy Economics
+Institute, Working Paper No. 869.
+Fernandez-Perez, Adrian; Fuertes, Ana-Maria; Miffre, Joëlle (2019): A Comprehensive Ap-
+praisal of Style-Integration Methods. Journal of Banking & Finance 105, pp. 134-150.
+Gordon, Myron J. (1959): Dividends, Earnings, and Stock Prices. The Review of Economics
+and Statistics 41, pp. 99-105.
+Gordon, Myron J.; Shapiro, Eli (1955): Capital Equipment Analysis: The Required Rate of
+Profit. Journal of Business 28, pp. 102-110.
+Goyal, Amit; Welch, Ivo (2008): A Comprehensive Look at the Empirical Performance of
+Equity Premium Prediction. Review of Financial Studies 21, pp. 1455-1508.
+Grullon, Gustavo; Michaely, Roni (2002): Dividends, Share Repurchases, and the Substitu-
+tion Hypothesis. Journal of Finance 62, pp. 1649-1684.
+Hansen, Lars Peter; Hodrick, Robert J. (1980): Forward Exchange Rates as Optimal Pre-
+dictors of Future Spot Rates: An Econometric Analysis. Journal of Political Economy 88,
+pp. 829-853.
+
+                                                23
+
+                  Electronic copy available at: https://ssrn.com/abstract=4071039
+Harri, Ardian; Brorsen, B. Wade (2009): The Overlapping Data Problem. Quantitative and
+Qualitative Analysis in Social Sciences 3, pp. 78-115.
+Hjalmarsson, Erik (2008): Inference in Long-Horizon Regressions. Board of Governors of
+the Federal Reserve System, International Finance Discussion Papers No. 853.
+Hjalmarsson, Erik (2011): New Methods for Inference in Long-Horizon Regressions. Journal
+of Financial and Quantitative Analysis 46, pp. 815–839.
+Jivraj, Farouk; Shiller, Robert J. (2017): The Many Colours of CAPE. Yale ICF Working
+Paper No. 2018-22.
+Jobson, J.D.; Korkie, Bob M. (1981): Performance Hypothesis Testing with the Sharpe and
+Treynor Measures. The Journal of Finance 36, pp. 889-908
+Knoll, Katharina; Schularick, Moritz; Steger, Thomas (2017): No Price Like Home: Global
+House Prices, 1870-2012. American Economic Review 107, pp. 331-353.
+Lansing, Kevin J. (2017): Stock Market Valuation and the Macroeconomy. Federal Reserve
+Bank of San Francisco Economic Letter 33.
+Kuvshinov, Dmitry; Zimmermann, Kaspar (2020): The Big Bang: Stock Market Capitaliza-
+tion in the Long Run. CEPR Discussion Paper No. DP14468.
+Lin, Ji-Chai; Stephens, Clifford P.; Wu, YiLin (2014): Limited Attention, Share Repurchases
+and Takeover Risk. Journal of Banking and Finance 42, pp. 283–301.
+Lioui, Abraham; Poncet, Patrice (2019): Long horizon predictability: An asset allocation
+perspective. European Journal of Operational Research 278, pp. 961-975.
+Lleo, Sebastien; Ziemba, Wiliam (2018): Can Warren Buffett Forecast Equity Market Cor-
+rections? European Journal of Finance 25, pp. 369-393.
+Loughran, Tim; Ritter, Jay; Rydqvist, Kristian (1994): Initial Public Offerings: Interna-
+tional Insights. Pacific-Basin Finance Journal 2, pp. 165-199.
+Manconi, Alberto; Peyer, Urs; Vermaelen, Theo (2019): Are Buybacks Good for Long-Term
+Shareholder Value? Evidence from Buybacks around the World. Journal of Financial and
+Quantitative Analysis 5, pp. 1899-1935.
+McDonald IV, Michael B. (2022): The Shrinking Stock Market. Journal of Financial Mar-
+kets, forthcoming.
+Memmel, Christoph (2003): Performance Hypothesis Testing with the Sharpe Ratio. Fi-
+nance Letters 1, pp. 21–23.
+Moskowitz, Tobias J.; Ooi, Yao Hua; Pedersen, Lasse (2012): Time-series Momentum. Jour-
+nal of Financial Economics 104, pp. 228-250.
+Newey, Whitney K.; West, Kenneth D. (1987): A Simple, Positive Semi-Definite, Het-
+eroskedasticity and Autocorrelation Consistent Covariance Matrix. Econometrica 55,
+pp. 703-708.
+Newey, Whitney K.; West, Kenneth D. (1994): Automatic Lag Selection in Covariance
+Matrix Estimation. The Review of Economic Studies 61, pp. 631-653.
+
+                                                24
+
+                  Electronic copy available at: https://ssrn.com/abstract=4071039
+Orhangazi, Özgür (2008): Financialisation and Capital Accumulation in the Non-financial
+Corporate Sector: A Theoretical and Empirical Investigation on the US Economy: 1973–
+2003. Cambridge Journal of Economics 32, pp. 863–886.
+Peyer, Urs; Vermaelen, Theo (2009): The Nature and Persistence of Buyback Anomalies.
+Review of Financial Studies 22, pp. 1693–1745.
+Poterba, James M.; Summers, Lawrence H. (1988): Mean Reversion in Stock Prices. Evi-
+dence and Implications. Journal of Financial Economics 22, pp. 27-59.
+Rajan, Raghuram; Zingales, Luigi (2003): The Great Reversals: The Politics of Financial
+Development in the Twentieth Century. Journal of Financial Economics 69, pp. 5–50.
+Spierdijk, L., Bikker, J., and Van der Hoek, P. (2012): Mean Reversion in International
+Stock Markets: An Empirical Analysis of the 20th Century. Journal of International Money
+and Finance 31, pp. 228-249.
+Shiller, Robert J.; Black, Laurence; Jivraj, Farouk (2020): CAPE and the COVID-19 Pan-
+demic Effect. Barclays QIS Insights, 19 October.
+Siegel, Jeremy J. (2016): The Shiller CAPE Ratio: A New Look. Financial Analysts Journal
+72, pp. 41-50.
+Stoll, Hans R. (1993): Equity Trading Costs. The Research Foundation of The Institute of
+Chartered Financial Analysts, Charlottesville, VA.
+Umlauft, Thomas S. (2020): The Market Value of Equity-to-Gross Domestic Product Ratio
+as a Predictor of Long-term Equity Returns: Evidence from the U.S. Market, 1951-2019.
+SSRN working paper.
+Valkanov, Rossen (2003): Long-horizon Regressions: Theoretical Results and Applications.
+Journal of Financial Economics 68, pp. 201–232.
+Zaremba, Adam; Kizys, Renatas; Raza, Wajid (2020): The Long-run Reversal in the Long
+Run: Insights from Two Centuries of International Equity Returns. Journal of Empirical
+Finance 55, pp. 177-199.
+
+
+
+
+                                               25
+
+                 Electronic copy available at: https://ssrn.com/abstract=4071039
+                        APPENDIX
+
+
+
+
+                              26
+
+Electronic copy available at: https://ssrn.com/abstract=4071039
+                 Equal−weighted country aggregate                                         Australia                                            Austria
+                                                                   1.25
+          1.00
+
+                                                                   1.00
+          0.75                                                                                                                0.4
+MVE/GDP
+
+
+
+
+                                                         MVE/GDP
+
+
+
+
+                                                                                                                    MVE/GDP
+                                                                   0.75
+
+          0.50
+                                                                   0.50                                                       0.2
+
+          0.25                                                     0.25
+
+                                                                   0.00                                                       0.0
+                   1980   1990      2000   2010   2020                      1980    1990       2000   2010   2020                    1980   1990     2000   2010   2020
+
+
+                             Belgium                                                      Canada                                               Denmark
+                                                                   1.2                                                        1.25
+
+          0.75
+                                                                                                                              1.00
+                                                                   0.9
+MVE/GDP
+
+
+
+
+                                                         MVE/GDP
+
+
+
+
+                                                                                                                    MVE/GDP
+                                                                                                                              0.75
+          0.50
+                                                                   0.6
+                                                                                                                              0.50
+
+          0.25                                                     0.3
+                                                                                                                              0.25
+
+
+          0.00                                                     0.0                                                        0.00
+                   1980   1990      2000   2010   2020                     1980    1990       2000    2010   2020                    1980   1990     2000   2010   2020
+
+
+                                 France                                               Germany                                               Great Britain
+          1.00                                                     0.6                                                        1.6
+
+
+          0.75                                                                                                                1.2
+MVE/GDP
+
+
+
+
+                                                         MVE/GDP
+
+
+
+
+                                                                                                                    MVE/GDP
+                                                                   0.4
+          0.50                                                                                                                0.8
+
+
+          0.25                                                     0.2
+                                                                                                                              0.4
+
+
+          0.00
+                   1980   1990      2000   2010   2020                     1980    1990       2000    2010   2020                    1980   1990     2000   2010   2020
+
+
+                             Ireland                                                       Italy                                                   Japan
+          0.8                                                                                                                 1.25
+                                                                   0.6
+
+          0.6                                                                                                                 1.00
+MVE/GDP
+
+
+
+
+                                                         MVE/GDP
+
+
+
+
+                                                                                                                    MVE/GDP
+
+
+
+
+                                                                   0.4
+                                                                                                                              0.75
+          0.4
+
+                                                                   0.2                                                        0.50
+          0.2
+
+                                                                                                                              0.25
+          0.0                                                      0.0
+                  1980    1990      2000   2010   2020                     1980    1990       2000    2010   2020                    1980   1990     2000   2010   2020
+
+
+                           Netherlands                                              Switzerland                                             United States
+
+          1.5
+
+                                                                   2                                                          1.2
+MVE/GDP
+
+
+
+
+                                                         MVE/GDP
+
+
+
+
+                                                                                                                    MVE/GDP
+
+
+
+
+          1.0
+                                                                                                                              0.8
+                                                                   1
+          0.5
+                                                                                                                              0.4
+
+                                                                   0
+                  1980    1990      2000   2010   2020                    1980     1990      2000     2010   2020                    1980   1990     2000   2010   2020
+
+
+
+
+            Figure 6: Market value of equity-to-gross domestic product (MVE/GDP), 1973-2019
+
+                                                                                      27
+
+                                     Electronic copy available at: https://ssrn.com/abstract=4071039
+10−yr forward return (ann.)            Equal−weighted country aggregate                                                                        Australia                                                                                                Austria
+
+
+
+
+                                                                                        10−yr forward return (ann.)
+
+
+
+
+                                                                                                                                                                                             10−yr forward return (ann.)
+                              0.20
+
+                                                                                                                                                                                                                           0.2
+                              0.15                                                                                    0.2
+
+                              0.10
+                                                                                                                                                                                                                           0.1
+
+                              0.05                                                                                    0.1
+
+                                                                                                                                                                                                                           0.0
+                              0.00
+                                        0.1                0.3                  1.0                                                0.1                0.3                        1.0                                                    0.01         0.03           0.10     0.30
+                                                 ln(MVE/GDP)                                                                                ln(MVE/GDP)                                                                                              ln(MVE/GDP)
+                                                      Belgium                                                                                     Canada                                                                                               Denmark
+10−yr forward return (ann.)
+
+
+
+
+                                                                                        10−yr forward return (ann.)
+
+
+
+
+                                                                                                                                                                                             10−yr forward return (ann.)
+                              0.20
+
+                                                                                                                      0.15
+                              0.15                                                                                                                                                                                         0.2
+
+                              0.10
+                                                                                                                      0.10
+                              0.05
+                                                                                                                                                                                                                           0.1
+                              0.00
+                                                                                                                      0.05
+
+                                              0.1                 0.3             1.0                                                    0.1                0.3                   1.0                                               0.03             0.10           0.30          1.00
+                                                 ln(MVE/GDP)                                                                                ln(MVE/GDP)                                                                                              ln(MVE/GDP)
+                                                      France                                                                                    Germany                                                                                              Great Britain
+                              0.3
+10−yr forward return (ann.)
+
+
+
+
+                                                                                        10−yr forward return (ann.)
+
+
+
+
+                                                                                                                                                                                             10−yr forward return (ann.)
+                                                                                                                                                                                                                           0.3
+                                                                                                                      0.15
+
+                              0.2
+                                                                                                                      0.10                                                                                                 0.2
+
+
+                              0.1                                                                                     0.05                                                                                                 0.1
+
+
+                                                                                                                      0.00
+                              0.0                                                                                                                                                                                          0.0
+                                       0.03         0.10          0.30          1.00                                    0.05         0.10                         0.30          0.50                                              0.1                 0.3                   1.0
+                                                ln(MVE/GDP)                                                                                 ln(MVE/GDP)                                                                                              ln(MVE/GDP)
+                                                      Ireland                                                                                      Italy                                                                                                    Japan
+                              0.3
+10−yr forward return (ann.)
+
+
+
+
+                                                                                        10−yr forward return (ann.)
+
+
+
+
+                                                                                                                                                                                             10−yr forward return (ann.)
+
+
+
+
+                                                                                                                                                                                                                           0.2
+                                                                                                                      0.3
+                              0.2
+
+                                                                                                                      0.2                                                                                                  0.1
+                              0.1
+                                                                                                                      0.1
+                                                                                                                                                                                                                           0.0
+                              0.0
+                                                                                                                      0.0
+
+                                0.03           0.10                0.30                                                 0.01        0.03             0.10                0.30                                                                  0.3            0.5                1.0
+                                                ln(MVE/GDP)                                                                                 ln(MVE/GDP)                                                                                              ln(MVE/GDP)
+                                                    Netherlands                                                                                Switzerland                                                                                           United States
+                                                                                                                                                                                                                           0.20
+10−yr forward return (ann.)
+
+
+
+
+                                                                                        10−yr forward return (ann.)
+
+
+
+
+                                                                                                                                                                                             10−yr forward return (ann.)
+
+
+
+
+                               0.20
+                                                                                                                      0.20
+
+                               0.15                                                                                                                                                                                        0.15
+                                                                                                                      0.15
+                               0.10                                                                                                                                                                                        0.10
+                                                                                                                      0.10
+                               0.05
+                                                                                                                                                                                                                           0.05
+                                                                                                                      0.05
+                               0.00
+                                                                                                                                                                                                                           0.00
+                                                                                                                      0.00
+                              −0.05
+                                                    0.3     0.5           1.0                                                0.1            0.3                   1.0                  3.0                                                 0.3              0.5            1.0
+                                                    ln(MVE/GDP)                                                                             ln(MVE/GDP)                                                                                              ln(MVE/GDP)
+
+
+
+
+                                                                 Figure 7: MVE/GDP and forward returns, 1973-2019
+
+                                                                                                                                               28
+
+                                                             Electronic copy available at: https://ssrn.com/abstract=4071039
+                                     Equal−weighted country aggregate                                                                  Australia                                                                           Austria
+                              0.25      Model−predicted return   Realised return                                           Model−predicted return    Realised return                                   0.3    Model−predicted return    Realised return
+10−yr forward return (ann.)
+
+
+
+
+                                                                                     10−yr forward return (ann.)
+
+
+
+
+                                                                                                                                                                         10−yr forward return (ann.)
+                              0.20
+                                                                                                                   0.2                                                                                 0.2
+                              0.15
+
+                              0.10                                                                                                                                                                     0.1
+                                                                                                                   0.1
+                              0.05
+                                                                                                                                                                                                       0.0
+                              0.00
+                                       1980     1990      2000      2010      2020                                        1980     1990       2000     2010       2020                                       1980     1990       2000     2010       2020
+
+
+                                                    Belgium                                                                             Canada                                                                            Denmark
+                              0.3      Model−predicted return    Realised return                                   0.20    Model−predicted return    Realised return                                   0.3    Model−predicted return    Realised return
+10−yr forward return (ann.)
+
+
+
+
+                                                                                     10−yr forward return (ann.)
+
+
+
+
+                                                                                                                                                                         10−yr forward return (ann.)
+                              0.2                                                                                  0.15
+                                                                                                                                                                                                       0.2
+
+                              0.1                                                                                  0.10
+
+                                                                                                                                                                                                       0.1
+                              0.0                                                                                  0.05
+
+
+                                      1980     1990       2000     2010       2020                                        1980      1990      2000      2010      2020                                       1980     1990       2000     2010       2020
+
+
+                                                    France                                                                             Germany                                                                         Great Britain
+                                       Model−predicted return    Realised return                                   0.20    Model−predicted return    Realised return                                          Model−predicted return    Realised return
+10−yr forward return (ann.)
+
+
+
+
+                                                                                     10−yr forward return (ann.)
+
+
+
+
+                                                                                                                                                                         10−yr forward return (ann.)
+                              0.3
+                                                                                                                                                                                                       0.3
+                                                                                                                   0.15
+                              0.2
+                                                                                                                                                                                                       0.2
+                                                                                                                   0.10
+
+                              0.1                                                                                  0.05                                                                                0.1
+
+
+                              0.0                                                                                  0.00
+                                                                                                                                                                                                       0.0
+
+                                      1980     1990       2000     2010       2020                                        1980      1990      2000      2010      2020                                       1980     1990       2000     2010       2020
+
+
+                                                      Ireland                                                                              Italy                                                                             Japan
+                                        Model−predicted return   Realised return                                   0.4     Model−predicted return    Realised return                                          Model−predicted return    Realised return
+10−yr forward return (ann.)
+
+
+
+
+                                                                                     10−yr forward return (ann.)
+
+
+
+
+                                                                                                                                                                         10−yr forward return (ann.)
+
+
+
+
+                               0.3
+                                                                                                                                                                                                       0.2
+                                                                                                                   0.3
+                               0.2
+                                                                                                                   0.2                                                                                 0.1
+                               0.1
+                                                                                                                   0.1
+                               0.0                                                                                                                                                                     0.0
+
+                                                                                                                   0.0
+                              −0.1
+                                       1980     1990      2000      2010      2020                                        1980     1990       2000     2010       2020                                       1980     1990       2000     2010       2020
+
+
+                                                 Netherlands                                                                         Switzerland                                                                       United States
+                                       Model−predicted return    Realised return                                           Model−predicted return    Realised return                                          Model−predicted return    Realised return
+10−yr forward return (ann.)
+
+
+
+
+                                                                                     10−yr forward return (ann.)
+
+
+
+
+                                                                                                                                                                         10−yr forward return (ann.)
+
+
+
+
+                              0.2                                                                                  0.2                                                                                 0.2
+
+
+
+                              0.1                                                                                                                                                                      0.1
+                                                                                                                   0.1
+
+
+                              0.0                                                                                                                                                                      0.0
+                                                                                                                   0.0
+
+                                      1980     1990       2000     2010       2020                                        1980     1990       2000     2010       2020                                       1980     1990       2000     2010       2020
+
+
+
+
+                                                  Figure 8: Realised and model-predicted 10-year forward returns
+
+                                                                                                                                       29
+
+                                                            Electronic copy available at: https://ssrn.com/abstract=4071039
+      Table 9: Regressing 10-yr forward excess returns on ln(MVE/GDP), 1973-2019
+
+        R2    coef.      s.e.     t-stat.    p-value   s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+AUS    0.10   -0.0102    0.0049   -2.08**     0.04     0.0134    -0.76           0.45      -0.67        0.50
+AUT    0.10   -0.0143    0.0092   -1.55       0.12     0.0193    -0.74           0.46      -0.65        0.51
+BEL    0.06   -0.0113    0.0082   -1.37       0.17     0.0191    -0.59           0.55      -0.52        0.60
+CAN    0.18   0.0163     0.0051   3.18***     0.00     0.0159    1.03            0.31      0.91         0.37
+CHE    0.14   -0.0143    0.0069   -2.08**     0.04     0.0158    -0.91           0.36      -0.80        0.42
+DEU 0.08 -0.0138         0.0097   -1.42       0.16     0.0201    -0.68           0.50      -0.60        0.55
+DNK 0.26 0.0226          0.0072   3.14***     0.00     0.0173    1.30            0.20      1.15         0.25
+FRA 0.22 -0.0157         0.0056   -2.82***    0.01     0.0136    -1.16           0.25      -1.02        0.31
+GBR 0.62 -0.0447         0.0072   -6.25***    0.00     0.0159    -2.80***        0.01      -2.48**      0.01
+IRL 0.42 -0.0423         0.0098   -4.31***    0.00     0.0228    -1.85*          0.07      -1.64        0.10
+ITA 0.30 -0.0308 0.0100           -3.09***    0.00     0.0215    -1.43           0.15      -1.26        0.21
+JPN 0.67 -0.0999 0.0153           -6.55***    0.00     0.0321    -3.11***        0.00      -2.75***     0.01
+NLD 0.60 -0.0511 0.0080           -6.36***    0.00     0.0194    -2.64***        0.01      -2.33**      0.02
+USA 0.21 -0.0324 0.0138           -2.35**     0.02     0.0283    -1.14           0.26      -1.01        0.31
+AGG 0.22 -0.0178 0.0065           -2.73***    0.01     0.0152    -1.17           0.24      -1.03        0.30
+ Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987)
+heteroskedasticity- and autocorrelation-consistent (HAC) standard errors. The number of lags is computed
+based on the non-parametric bandwidth selection procedure suggested by Newey and West (1994). Weights
+are computed using the Bartlett kernel as described in Newey and West (1987, 1994). Standard errors as
+well as t-statistics and p-values computed based on Harri and Brorsen (2009) are denoted by superscript
+H+B
+     , and t-statistics and p-values based on Hjalmarsson (2008, 2011) are denoted by superscript H . Sta-
+tistical significance at the 1% level is indicated by ***, at the 5% level by ** and at the 10% level by *.
+Abbreviations: AUS = Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland,
+DEU = Germany, DNK = Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy,
+JPN = Japan, NLD = Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+
+
+                                                       30
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+Table 10: Comparing results of 10-yr forward excess returns regressed on ln(MVE/GDP)
+and P/E10, 1983-2019
+           R2      coef.     s.e.      t-stat.      p-value      s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+ Market value of equity-to-gross domestic product ratio
+  AUS    0.14   -0.0125 0.0064 -1.95*        0.05   0.0166                 -0.75           0.45      -0.67        0.51
+  AUT 0.20      -0.0209 0.0073 -2.88***      0.00   0.0223                 -0.94           0.35      -0.83        0.41
+  BEL    0.05   -0.0119 0.0098 -1.21         0.23   0.0252                 -0.47           0.64      -0.42        0.68
+  CAN 0.01      0.0078   0.0142 0.55         0.58   0.0279                 0.28            0.78      0.25         0.81
+  CHE 0.58      -0.0337 0.0076 -4.41***      0.00   0.0156                 -2.17**         0.03      -1.91*       0.06
+  DEU 0.08      -0.0182 0.0145 -1.26         0.21   0.0311                 -0.59           0.56      -0.52        0.61
+  DNK 0.00      -0.0065 0.0108 -0.61         0.55   0.0358                 -0.18           0.86      -0.16        0.87
+  FRA 0.52      -0.1264 0.0357 -3.54***      0.00   0.1075                 -1.18           0.25      -1.04        0.31
+  GBR 0.36      -0.0393 0.0115 -3.41***      0.00   0.0280                 -1.41           0.16      -1.24        0.22
+  IRL    0.50   -0.0624 0.0168 -3.72***      0.00   0.0334                 -1.87*          0.06      -1.65        0.10
+  ITA    0.88   -0.1170 0.0059 -19.87***     0.00   0.0319                 -3.67***        0.00      -3.24***     0.00
+  JPN    0.25   -0.0703 0.0219 -3.21***      0.00   0.0646                 -1.09           0.28      -0.96        0.34
+  NLD 0.61      -0.0724 0.0175 -4.13***      0.00   0.0315                 -2.3**          0.02      -2.03**      0.04
+  USA    0.51   -0.0611 0.0161 -3.8***       0.00   0.0321                 -1.91*          0.06      -1.68*       0.10
+  AGG 0.19      -0.0218 0.0101 -2.15**       0.03   0.0236                 -0.92           0.36      -0.82        0.42
+ Cyclically-adjusted price-earnings ratio
+  AUS     0.23   -0.0015 0.0005 -3.07***             0.00        0.0015    -0.97           0.33      -0.90        0.37
+  AUT 0.40       -0.0017 0.0004 -4.88***             0.00        0.0012    -1.45           0.15      -1.34        0.18
+  BEL     0.44   -0.0031 0.0007 -4.63***             0.00        0.0020    -1.59           0.11      -1.47        0.14
+  CAN -0.01 0.0000        0.0010 -0.04               0.97        0.0023    -0.02           0.99      -0.02        0.99
+  CHE 0.50       -0.0025 0.0005 -5.42***             0.00        0.0014    -1.79*          0.08      -1.65        0.10
+  DEU 0.52       -0.0030 0.0004 -6.59***             0.00        0.0016    -1.87*          0.06      -1.72*       0.09
+  DNK 0.34       -0.0025 0.0008 -3.16***             0.00        0.0022    -1.13           0.26      -1.07        0.29
+  FRA 0.87       -0.0034 0.0004 -7.87***             0.00        0.0015    -2.29**         0.03      -2.59**      0.01
+  GBR 0.62       -0.0044 0.0005 -8.51***             0.00        0.0019    -2.27**         0.03      -2.09**      0.04
+  IRL     0.33   -0.0034 0.0008 -4.35***             0.00        0.0027    -1.27           0.21      -1.17        0.24
+  ITA     0.33   -0.0016 0.0003 -6.25***             0.00        0.0020    -0.8            0.43      -0.83        0.41
+  JPN     0.59   -0.0017 0.0002 -7.68***             0.00        0.0008    -2.14**         0.03      -1.97*       0.05
+  NLD 0.49       -0.0039 0.0006 -6.05***             0.00        0.0022    -1.73*          0.09      -1.60        0.11
+  USA     0.83   -0.0042 0.0004 -10.14***            0.00        0.0011    -3.9***         0.00      -3.59***     0.00
+  AGG 0.36       -0.0022 0.0006 -3.70***             0.00        0.0017    -1.33           0.19      -1.22        0.22
+  Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity- and
+ autocorrelation-consistent (HAC) standard errors. The number of lags is computed based on the non-parametric band-
+ width selection procedure suggested by Newey and West (1994). Weights are computed using the Bartlett kernel as
+ described in Newey and West (1987, 1994). Standard errors as well as t-statistics and p-values computed based on
+ Harri and Brorsen (2009) are denoted by superscript H+B , and t-statistics and p-values based on Hjalmarsson (2008,
+ 2011) are denoted by superscript H . Statistical significance at the 1% level is indicated by ***, at the 5% level by **
+ and at the 10% level by *. Abbreviations: AUS = Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE
+ = Switzerland, DEU = Germany, DNK = Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA =
+ Italy, JPN = Japan, NLD = Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+
+
+                                                            31
+
+                       Electronic copy available at: https://ssrn.com/abstract=4071039
+Table 11: Regressing 10-yr forward excess returns on ln(MVE/GDP), P/E10 and 10-yr
+trailing returns, 1983-2019
+
+                                MVE/GDP                                     P/E10                         TRAILING 10Y RET.
+        Adj. R2    coef.     s.e.     t-stat.    p-value     coef.   s.e.    t-stat.    p-value   coef.     s.e.     t-stat.   p-value
+ AUS      0.31     -0.0144   0.0141 -1.02         0.31     -0.0006   0.00    -0.73       0.47     -0.2310   0.1404   -1.65    0.10
+ AUT      0.63     -0.0186   0.0047 -3.94***      0.00     -0.0012   0.00    -3.85***    0.00     -0.1755   0.0982   -1.79*   0.08
+ BEL      0.45     0.0022    0.0078 0.28          0.78     -0.0034   0.00    -3.78***    0.00     0.0455    0.1074   0.42     0.67
+ CAN      0.34     -0.0014   0.0162 -0.09         0.93      0.0008   0.00    0.85        0.40     -0.7462   0.1889   -3.95*** 0.00
+ CHE      0.67     -0.0238   0.0089 -2.68***      0.01     -0.0012   0.00    -1.60       0.11     -0.0379   0.1749   -0.22    0.83
+ DEU      0.54     -0.0063   0.0093   -0.68       0.50     -0.0023   0.00    -2.87***    0.01     -0.1594 0.1838 -0.87         0.39
+ DNK      0.44     0.0008    0.0122   0.06        0.95     -0.0023   0.00    -2.26**     0.03     -0.2269 0.1433 -1.58         0.12
+ FRA      0.94     -0.0096   0.0082   -1.17       0.25     -0.0018   0.00    -6.52***    0.00     -0.3698 0.0620 -5.96***      0.00
+ GBR      0.69     -0.0520   0.0295   -1.77*      0.08     -0.0012   0.00    -0.70       0.48     -0.2417 0.1633 -1.48         0.14
+ IRL      0.52     -0.0600   0.0245   -2.45**     0.02     -0.0003   0.00    -0.19       0.85     -0.0655 0.1540 -0.43         0.67
+ ITA      0.91     -0.0885 0.0114 -7.76***        0.00     -0.0002   0.00    -0.75       0.45     -0.2169 0.0692 -3.13***      0.00
+ JPN      0.63     0.0308 0.0343 0.9              0.37     -0.0020   0.00    -2.48**     0.01     -0.0517 0.1109 -0.47         0.64
+ NLD      0.63     -0.0521 0.0258 -2.02**         0.05     -0.0015   0.00    -0.98       0.33     0.0422 0.1794 0.23           0.81
+ USA      0.85     0.0375 0.0192 1.96*            0.05     -0.0063   0.00    -5.43***    0.00     0.2036 0.1621 1.26           0.21
+ AGG      0.40     -0.0203 0.0176 -1.16           0.25     -0.0011   0.00    -0.78       0.44     -0.1616 0.2283 -0.71         0.48
+  Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity- and autocorrelation-
+ consistent (HAC) standard errors. The number of lags is computed based on the non-parametric bandwidth selection procedure
+ suggested by Newey and West (1994). Weights are computed using the Bartlett kernel as described in Newey and West (1987,
+ 1994). Statistical significance at the 1% level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations:
+ AUS = Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK = Denmark,
+ FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD = Netherlands, USA = United States,
+ AGG = equal-weighted country aggregate.
+
+
+
+
+                                                                32
+
+                           Electronic copy available at: https://ssrn.com/abstract=4071039
+      Table 12: Regressing 10-yr forward real returns on ln(MVE/GDP), 1973-2019
+
+        R2     coef.      s.e.     t-stat.    p-value    s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+AUS    0.27 -0.0187       0.0055   -3.4***     0.00      0.0140    -1.34           0.18      -1.18        0.24
+AUT    0.28 -0.0259       0.0093   -2.79***    0.01      0.0189    -1.37           0.17      -1.21        0.23
+BEL    0.44 -0.0353       0.0075   -4.67***    0.00      0.0181    -1.95*          0.05      -1.72*       0.09
+CAN    -0.01 -0.0012      0.0069   -0.18       0.86      0.0158    -0.08           0.94      -0.07        0.94
+CHE    0.21 -0.0153       0.0061   -2.5**      0.01      0.0134    -1.14           0.25      -1.01        0.31
+DEU     0.71   -0.0713 0.0084 -8.46***         0.00      0.0208    -3.43***        0.00      -3.03***     0.00
+DNK     0.01   -0.0050 0.0071 -0.7             0.49      0.0164    -0.30           0.76      -0.27        0.79
+FRA     0.53   -0.0431 0.0081 -5.34***         0.00      0.0188    -2.30**         0.02      -2.03**      0.04
+GBR     0.47   -0.0737 0.0179 -4.13***         0.00      0.0360    -2.05**         0.04      -1.81*       0.07
+IRL     0.26   -0.0297 0.0085 -3.5***          0.00      0.0226    -1.31           0.19      -1.16        0.25
+ITA     0.11   -0.0148 0.0077 -1.92*           0.06      0.0188    -0.79           0.43      -0.70        0.49
+JPN     0.02   0.0178 0.0228 0.78              0.44      0.0465    0.38            0.70      0.34         0.74
+NLD     0.89   -0.0735 0.0030 -24.27***        0.00      0.0120    -6.11***        0.00      -5.40***     0.00
+USA     0.44   -0.0520 0.0122 -4.26***         0.00      0.0270    -1.93*          0.06      -1.70*       0.09
+AGG     0.49   -0.0351 0.0075 -4.7***          0.00      0.0165    -2.13**         0.03      -1.89*       0.06
+ Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity-
+and autocorrelation-consistent (HAC) standard errors. The number of lags is computed based on the non-
+parametric bandwidth selection procedure suggested by Newey and West (1994). Weights are computed us-
+ing the Bartlett kernel as described in Newey and West (1987, 1994). Standard errors as well as t-statistics
+and p-values computed based on Harri and Brorsen (2009) are denoted by superscript H+B , and t-statistics
+and p-values based on Hjalmarsson (2008, 2011) are denoted by superscript H . Statistical significance at the
+1% level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations: AUS = Aus-
+tralia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK =
+Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD = Nether-
+lands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+
+
+                                                        33
+
+                       Electronic copy available at: https://ssrn.com/abstract=4071039
+Table 13: Comparing results of 10-yr forward real returns regressed on ln(MVE/GDP) and
+P/E10, 1983-2019
+           R2      coef.     s.e.      t-stat.      p-value      s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+ Market value of equity-to-gross domestic product ratio
+  AUS    0.66   -0.0360 0.0057 -6.31***      0.00   0.0139                 -2.6**          0.01      -2.30**      0.02
+  AUT 0.49      -0.0356 0.0062 -5.78***      0.00   0.0197                 -1.81*          0.07      -1.60        0.11
+  BEL    0.57   -0.0426 0.0079 -5.42***      0.00   0.0198                 -2.15**         0.03      -1.90*       0.06
+  CAN 0.27      -0.0280 0.0130 -2.16**       0.03   0.0246                 -1.14           0.26      -1.01        0.32
+  CHE 0.05      -0.0078 0.0073 -1.06         0.29   0.0169                 -0.46           0.65      -0.41        0.68
+  DEU 0.71      -0.0696 0.0084 -8.29***      0.00   0.0243                 -2.87***        0.00      -2.53**      0.01
+  DNK 0.39      -0.0431 0.0115 -3.73***      0.00   0.0322                 -1.34           0.18      -1.18        0.24
+  FRA 0.35      -0.1270 0.0494 -2.57**       0.01   0.1506                 -0.84           0.40      -0.75        0.46
+  GBR 0.35      -0.0657 0.0177 -3.7***       0.00   0.0482                 -1.36           0.18      -1.21        0.23
+  IRL    0.06   -0.0158 0.0101 -1.56         0.12   0.0306                 -0.52           0.61      -0.46        0.65
+  ITA    0.57   -0.0889 0.0175 -5.08***      0.00   0.0579                 -1.53           0.13      -1.36        0.18
+  JPN    -0.01 -0.0033 0.0458 -0.07          0.94   0.0964                 -0.03           0.97      -0.03        0.98
+  NLD 0.82      -0.0727 0.0055 -13.25***     0.00   0.0187                 -3.89***        0.00      -3.44***     0.00
+  USA    0.72   -0.0797 0.0142 -5.63***      0.00   0.0268                 -2.98***        0.00      -2.63***     0.01
+  AGG 0.67      -0.0509 0.0082 -6.21***      0.00   0.0191                 -2.66***        0.01      -2.35**      0.02
+ Cyclically-adjusted price-earnings ratio
+  AUS     0.46   -0.0028 0.0005 -5.88***             0.00        0.0017    -1.66           0.10      -1.53        0.13
+  AUT 0.19       -0.0013 0.0005 -2.79***             0.01        0.0015    -0.88           0.38      -0.81        0.42
+  BEL     0.30   -0.0030 0.0010 -3.11***             0.00        0.0026    -1.17           0.24      -1.08        0.28
+  CAN 0.16       -0.0017 0.0008 -2.20**              0.03        0.0022    -0.78           0.44      -0.72        0.47
+  CHE 0.17       -0.0011 0.0005 -1.99**              0.05        0.0013    -0.83           0.41      -0.77        0.44
+  DEU 0.19       -0.0025 0.0010 -2.50**              0.01        0.0028    -0.88           0.38      -0.81        0.42
+  DNK 0.51       -0.0035 0.0008 -4.65***             0.00        0.0022    -1.6            0.11      -1.53        0.13
+  FRA 0.68       -0.0036 0.0009 -4.09***             0.00        0.0028    -1.29           0.20      -1.46        0.15
+  GBR 0.14       -0.0037 0.0014 -2.74***             0.01        0.0050    -0.74           0.46      -0.69        0.49
+  IRL     0.44   -0.0026 0.0006 -4.20***             0.00        0.0017    -1.57           0.12      -1.45        0.15
+  ITA     0.69   -0.0021 0.0003 -7.98***             0.00        0.0012    -1.7*           0.09      -1.77*       0.08
+  JPN     0.10   0.0009   0.0005 1.88*               0.06        0.0015    0.62            0.53      0.58         0.57
+  NLD 0.44       -0.0032 0.0006 -5.10***             0.00        0.0020    -1.59           0.11      -1.47        0.15
+  USA     0.84   -0.0047 0.0004 -11.74***            0.00        0.0011    -4.1***         0.00      -3.78***     0.00
+  AGG 0.29       -0.0025 0.0007 -3.60***             0.00        0.0022    -1.14           0.26      -1.05        0.30
+  Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity- and
+ autocorrelation-consistent (HAC) standard errors. The number of lags is computed based on the non-parametric band-
+ width selection procedure suggested by Newey and West (1994). Weights are computed using the Bartlett kernel as
+ described in Newey and West (1987, 1994). Standard errors as well as t-statistics and p-values computed based on
+ Harri and Brorsen (2009) are denoted by superscript H+B , and t-statistics and p-values based on Hjalmarsson (2008,
+ 2011) are denoted by superscript H . Statistical significance at the 1% level is indicated by ***, at the 5% level by **
+ and at the 10% level by *. Abbreviations: AUS = Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE
+ = Switzerland, DEU = Germany, DNK = Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA =
+ Italy, JPN = Japan, NLD = Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+
+
+                                                            34
+
+                       Electronic copy available at: https://ssrn.com/abstract=4071039
+Table 14: Regressing 10-yr forward real returns on ln(MVE/GDP), P/E10 and 10-yr trailing
+returns, 1983-2019
+
+                                      MVE/GDP                                  P/E10                         TRAILING 10Y RET.
+                 2
+        Adj. R       coef.     s.e.      t-stat.    p-value     coef.   s.e.    t-stat.    p-value   coef.     s.e.     t-stat.   p-value
+ AUS      0.70       -0.0434   0.0123 -3.52***       0.00      0.0002   0.00 0.30           0.76     -0.1900   0.1146   -1.66    0.10
+ AUT      0.70       -0.0336   0.0046 -7.32***       0.00     -0.0009   0.00 -3.36***       0.00     -0.1522   0.0877   -1.74*   0.09
+ BEL      0.67       -0.0321   0.0061 -5.29***       0.00     -0.0022   0.00 -2.56**        0.01     0.1043    0.0990   1.05     0.29
+ CAN      0.45       -0.0418   0.0147 -2.84***       0.01      0.0013   0.00 1.60           0.11     -0.6025   0.1777   -3.39*** 0.00
+ CHE      0.18       0.0004    0.0093 0.04           0.97     -0.0010   0.00 -1.05          0.30     -0.0362   0.2087   -0.17    0.86
+ DEU      0.76       -0.0775 0.0060 -12.88***        0.00      0.0008   0.00    0.81        0.42     -0.4108   0.2137   -1.92*   0.06
+ DNK      0.76       -0.0050 0.0087 -0.58            0.56     -0.0038   0.00    -5.98***    0.00     0.3933    0.0894   4.4***   0.00
+ FRA      0.84       0.0215 0.0241 0.89              0.38     -0.0012   0.00    -1.43       0.16     -0.7134   0.1705   -4.18*** 0.00
+ GBR      0.38       -0.0102 0.0369 -0.28            0.78     -0.0042   0.00    -1.46       0.15     0.3373    0.2202   1.53     0.13
+ IRL      0.68       -0.0003 0.0116 -0.03            0.98     -0.0019   0.00    -2.28**     0.02     -0.3242   0.0638   -5.08*** 0.00
+ ITA      0.85       -0.0298   0.0112    -2.66**     0.01     -0.0014   0.00    -5.29***    0.00     -0.2145 0.1051     -2.04**   0.05
+ JPN      0.72       -0.0266   0.0339    -0.79       0.43     -0.0002   0.00    -0.23       0.82     0.5512 0.1036      5.32***   0.00
+ NLD      0.84       -0.0629   0.0103    -6.12***    0.00     -0.0007   0.00    -1.00       0.32     0.1794 0.0693      2.59**    0.01
+ USA      0.88       0.0073    0.0172    0.42        0.67     -0.0056   0.00    -5.30***    0.00     0.2602 0.1454      1.79*     0.08
+ AGG      0.70       -0.0535   0.0148    -3.62***    0.00     -0.0002   0.00    -0.18       0.86     -0.1168 0.1983     -0.59     0.56
+  Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity- and autocorrelation-
+ consistent (HAC) standard errors. The number of lags is computed based on the non-parametric bandwidth selection procedure
+ suggested by Newey and West (1994). Weights are computed using the Bartlett kernel as described in Newey and West (1987,
+ 1994). Statistical significance at the 1% level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations:
+ AUS = Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK = Denmark,
+ FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD = Netherlands, USA = United States,
+ AGG = equal-weighted country aggregate.
+
+
+
+
+                                                                   35
+
+                             Electronic copy available at: https://ssrn.com/abstract=4071039
+    Table 15: Regressing 5-yr forward nominal returns on ln(MVE/GDP), 1973-2019
+
+        R2    coef.      s.e.     t-stat.     p-value    s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+AUS    0.46   -0.0244    0.0048   -5.13***     0.00      0.0075    -3.24***        0.00      -2.67***     0.01
+AUT    0.12   -0.0136    0.0090   -1.51        0.13      0.0105    -1.30           0.19      -1.07        0.28
+BEL    0.23   -0.0241    0.0103   -2.34**      0.02      0.0125    -1.92*          0.06      -1.58        0.12
+CAN    0.19   -0.0139    0.0042   -3.33***     0.00      0.0081    -1.71*          0.09      -1.41        0.16
+CHE    0.14   -0.0124    0.0057   -2.18**      0.03      0.0086    -1.43           0.15      -1.18        0.24
+DEU    0.21   -0.0238    0.0090   -2.64***     0.01      0.0130    -1.83*          0.07      -1.51        0.13
+DNK    0.14   -0.0144    0.0070   -2.05**      0.04      0.0099    -1.46           0.15      -1.20        0.23
+FRA    0.39   -0.0225    0.0050   -4.48***     0.00      0.0079    -2.84***        0.01      -2.34**      0.02
+GBR    0.76   -0.0481    0.0043   -11.28***    0.00      0.0078    -6.21***        0.00      -5.12***     0.00
+IRL    0.43   -0.0485    0.0114   -4.25***     0.00      0.0159    -3.05***        0.00      -2.51**      0.01
+ITA 0.54      -0.0418    0.0063   -6.67***     0.00      0.0109    -3.84***        0.00      -3.16***     0.00
+JPN 0.54      -0.0783    0.0160   -4.9***      0.00      0.0205    -3.82***        0.00      -3.15***     0.00
+NLD 0.37      -0.0388    0.0095   -4.09***     0.00      0.0145    -2.68***        0.01      -2.21**      0.03
+USA 0.33      -0.0331    0.0082   -4.02***     0.00      0.0133    -2.48**         0.01      -2.04**      0.04
+AGG 0.39      -0.0285    0.0073   -3.9***      0.00      0.0101    -2.81***        0.01      -2.32**      0.02
+ Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity-
+and autocorrelation-consistent (HAC) standard errors. The number of lags is computed based on the non-
+parametric bandwidth selection procedure suggested by Newey and West (1994). Weights are computed us-
+ing the Bartlett kernel as described in Newey and West (1987, 1994). Standard errors as well as t-statistics
+and p-values computed based on Harri and Brorsen (2009) are denoted by superscript H+B , and t-statistics
+and p-values based on Hjalmarsson (2008, 2011) are denoted by superscript H . Statistical significance at
+the 1% level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations: AUS =
+Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK
+= Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD =
+Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+
+
+                                                        36
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+    Table 16: Regressing 7-yr forward nominal returns on ln(MVE/GDP), 1973-2019
+
+        R2    coef.      s.e.     t-stat.     p-value    s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+AUS    0.72   -0.0313    0.0034   -9.3***      0.00      0.0069    -4.53***        0.00      -3.84***     0.00
+AUT    0.21   -0.0213    0.0108   -1.98**      0.05      0.0146    -1.46           0.15      -1.24        0.22
+BEL    0.36   -0.0329    0.0103   -3.2***      0.00      0.0154    -2.14**         0.03      -1.81*       0.07
+CAN    0.28   -0.0172    0.0047   -3.7***      0.00      0.0097    -1.78*          0.08      -1.51        0.13
+CHE    0.23   -0.0174    0.0060   -2.87***     0.00      0.0113    -1.54           0.13      -1.30        0.19
+DEU    0.29   -0.0265    0.0074   -3.56***     0.00      0.0145    -1.82*          0.07      -1.54        0.12
+DNK    0.32   -0.0205    0.0052   -3.94***     0.00      0.0105    -1.95*          0.05      -1.65        0.10
+FRA    0.59   -0.0309    0.0051   -6.1***      0.00      0.0090    -3.41***        0.00      -2.89***     0.00
+GBR    0.89   -0.0650    0.0029   -22.39***    0.00      0.0082    -7.92***        0.00      -6.70***     0.00
+IRL    0.55   -0.0603    0.0105   -5.74***     0.00      0.0193    -3.13***        0.00      -2.65***     0.01
+ITA 0.73      -0.0584    0.0072   -8.15***     0.00      0.0125    -4.68***        0.00      -3.97***     0.00
+JPN 0.68      -0.1032    0.0162   -6.37***     0.00      0.0250    -4.12***        0.00      -3.49***     0.00
+NLD 0.55      -0.0538    0.0072   -7.46***     0.00      0.0172    -3.13***        0.00      -2.65***     0.01
+USA 0.51      -0.0474    0.0079   -5.97***     0.00      0.0163    -2.91***        0.00      -2.46**      0.01
+AGG 0.60      -0.0393    0.0068   -5.79***     0.00      0.0113    -3.47***        0.00      -2.94***     0.00
+ Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity-
+and autocorrelation-consistent (HAC) standard errors. The number of lags is computed based on the non-
+parametric bandwidth selection procedure suggested by Newey and West (1994). Weights are computed us-
+ing the Bartlett kernel as described in Newey and West (1987, 1994). Standard errors as well as t-statistics
+and p-values computed based on Harri and Brorsen (2009) are denoted by superscript H+B , and t-statistics
+and p-values based on Hjalmarsson (2008, 2011) are denoted by superscript H . Statistical significance at
+the 1% level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations: AUS =
+Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK
+= Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD =
+Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+
+
+                                                        37
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+    Table 17: Regressing 8-yr forward nominal returns on ln(MVE/GDP), 1973-2019
+
+        R2    coef.      s.e.     t-stat.     p-value    s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+AUS    0.76   -0.0347    0.0036   -9.57***     0.00      0.0076    -4.58***        0.00      -3.94***     0.00
+AUT    0.27   -0.0251    0.0107   -2.34**      0.02      0.0161    -1.55           0.12      -1.33        0.18
+BEL    0.47   -0.0382    0.0089   -4.3***      0.00      0.0159    -2.40**         0.02      -2.06**      0.04
+CAN    0.30   -0.0193    0.0057   -3.38***     0.00      0.0114    -1.69*          0.09      -1.45        0.15
+CHE    0.29   -0.0209    0.0063   -3.33***     0.00      0.0128    -1.64           0.10      -1.41        0.16
+DEU    0.36   -0.0299    0.0073   -4.11***     0.00      0.0155    -1.92*          0.06      -1.65        0.10
+DNK    0.47   -0.0245    0.0046   -5.3***      0.00      0.0102    -2.40**         0.02      -2.06**      0.04
+FRA    0.64   -0.0358    0.0053   -6.75***     0.00      0.0103    -3.46***        0.00      -2.97***     0.00
+GBR    0.91   -0.0745    0.0027   -27.54***    0.00      0.0090    -8.26***        0.00      -7.09***     0.00
+IRL    0.64   -0.0674    0.0103   -6.53***     0.00      0.0199    -3.39***        0.00      -2.91***     0.00
+ITA 0.78      -0.0651    0.0081   -8.02***     0.00      0.0134    -4.85***        0.00      -4.17***     0.00
+JPN 0.74      -0.1144    0.0154   -7.43***     0.00      0.0264    -4.33***        0.00      -3.72***     0.00
+NLD 0.64      -0.0616    0.0065   -9.52***     0.00      0.0181    -3.41***        0.00      -2.93***     0.00
+USA 0.60      -0.0561    0.0078   -7.17***     0.00      0.0179    -3.13***        0.00      -2.69***     0.01
+AGG 0.69      -0.0456    0.0065   -7.03***     0.00      0.0119    -3.83***        0.00      -3.29***     0.00
+ Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity-
+and autocorrelation-consistent (HAC) standard errors. The number of lags is computed based on the non-
+parametric bandwidth selection procedure suggested by Newey and West (1994). Weights are computed us-
+ing the Bartlett kernel as described in Newey and West (1987, 1994). Standard errors as well as t-statistics
+and p-values computed based on Harri and Brorsen (2009) are denoted by superscript H+B , and t-statistics
+and p-values based on Hjalmarsson (2008, 2011) are denoted by superscript H . Statistical significance at
+the 1% level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations: AUS =
+Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK
+= Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD =
+Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+
+
+                                                        38
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+   Table 18: Regressing 12-yr forward nominal returns on ln(MVE/GDP), 1973-2019
+
+        R2    coef.      s.e.     t-stat.     p-value    s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+AUS    0.88   -0.0551    0.0031   -17.82***     0        0.0110    -4.99***        0.00      -4.55***     0.00
+AUT    0.63   -0.0394    0.0057   -6.86***      0        0.0160    -2.46**         0.02      -2.24**      0.03
+BEL    0.80   -0.0600    0.0053   -11.39***     0        0.0161    -3.73***        0.00      -3.40***     0.00
+CAN    0.51   -0.0303    0.0052   -5.79***      0        0.0160    -1.90*          0.06      -1.73*       0.09
+CHE    0.57   -0.0389    0.0070   -5.59***      0        0.0181    -2.15**         0.03      -1.96*       0.05
+DEU    0.61   -0.0491    0.0073   -6.74***      0        0.0208    -2.37**         0.02      -2.16**      0.03
+DNK    0.61   -0.0394    0.0061   -6.41***      0        0.0168    -2.35**         0.02      -2.14**      0.03
+FRA    0.86   -0.0572    0.0043   -13.34***     0        0.0124    -4.63***        0.00      -4.22***     0.00
+GBR    0.93   -0.1076    0.0061   -17.78***     0        0.0156    -6.91***        0.00      -6.30***     0.00
+IRL    0.87   -0.1112    0.0082   -13.48***     0        0.0231    -4.81***        0.00      -4.38***     0.00
+ITA 0.84      -0.0828    0.0086   -9.58***      0        0.0190    -4.35***        0.00      -3.97***     0.00
+JPN 0.82      -0.1496    0.0176   -8.5***       0        0.0378    -3.96***        0.00      -3.61***     0.00
+NLD 0.85      -0.0887    0.0069   -12.82***     0        0.0201    -4.41***        0.00      -4.02***     0.00
+USA 0.81      -0.0875    0.0090   -9.69***      0        0.0227    -3.86***        0.00      -3.52***     0.00
+AGG 0.89      -0.0716    0.0040   -17.97***     0        0.0136    -5.27***        0.00      -4.80***     0.00
+ Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity-
+and autocorrelation-consistent (HAC) standard errors. The number of lags is computed based on the non-
+parametric bandwidth selection procedure suggested by Newey and West (1994). Weights are computed us-
+ing the Bartlett kernel as described in Newey and West (1987, 1994). Standard errors as well as t-statistics
+and p-values computed based on Harri and Brorsen (2009) are denoted by superscript H+B , and t-statistics
+and p-values based on Hjalmarsson (2008, 2011) are denoted by superscript H . Statistical significance at
+the 1% level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations: AUS =
+Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK
+= Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD =
+Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+
+
+                                                        39
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+   Table 19: Regressing 13-yr forward nominal returns on ln(MVE/GDP), 1973-2019
+
+        R2    coef.      s.e.     t-stat.     p-value    s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+AUS    0.90   -0.0582    0.0030   -19.54***     0        0.0114    -5.09***        0.00      -4.71***     0.00
+AUT    0.65   -0.0397    0.0055   -7.22***      0        0.0168    -2.36**         0.02      -2.19**      0.03
+BEL    0.81   -0.0629    0.0054   -11.7***      0        0.0174    -3.61***        0.00      -3.34***     0.00
+CAN    0.53   -0.0302    0.0048   -6.26***      0        0.0164    -1.84*          0.07      -1.71*       0.09
+CHE    0.60   -0.0421    0.0076   -5.55***      0        0.0196    -2.15**         0.03      -1.99**      0.05
+DEU    0.62   -0.0501    0.0075   -6.72***      0        0.0224    -2.24**         0.03      -2.07**      0.04
+DNK    0.62   -0.0401    0.0058   -6.88***      0        0.0181    -2.22**         0.03      -2.05**      0.04
+FRA    0.90   -0.0604    0.0042   -14.29***     0        0.0117    -5.14***        0.00      -4.76***     0.00
+GBR    0.93   -0.1145    0.0065   -17.66***     0        0.0183    -6.25***        0.00      -5.78***     0.00
+IRL    0.89   -0.1201    0.0080   -15.04***     0        0.0240    -5.01***        0.00      -4.64***     0.00
+ITA 0.86      -0.0842    0.0082   -10.29***     0        0.0198    -4.25***        0.00      -3.93***     0.00
+JPN 0.82      -0.1573    0.0184   -8.54***      0        0.0427    -3.68***        0.00      -3.41***     0.00
+NLD 0.87      -0.0923    0.0068   -13.67***     0        0.0207    -4.46***        0.00      -4.13***     0.00
+USA 0.82      -0.0930    0.0094   -9.84***      0        0.0248    -3.75***        0.00      -3.47***     0.00
+AGG 0.90      -0.0753    0.0042   -17.92***     0        0.0143    -5.26***        0.00      -4.87***     0.00
+ Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity-
+and autocorrelation-consistent (HAC) standard errors. The number of lags is computed based on the non-
+parametric bandwidth selection procedure suggested by Newey and West (1994). Weights are computed us-
+ing the Bartlett kernel as described in Newey and West (1987, 1994). Standard errors as well as t-statistics
+and p-values computed based on Harri and Brorsen (2009) are denoted by superscript H+B , and t-statistics
+and p-values based on Hjalmarsson (2008, 2011) are denoted by superscript H . Statistical significance at
+the 1% level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations: AUS =
+Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK
+= Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD =
+Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+
+
+                                                        40
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+   Table 20: Regressing 15-yr forward nominal returns on ln(MVE/GDP), 1973-2019
+
+        R2    coef.      s.e.     t-stat.     p-value    s.e.H+B   t-stat.H+B   p-valueH+B   t-stat.H   p-valueH
+AUS    0.91   -0.0645    0.0028   -22.91***     0        0.0137    -4.71***        0.00      -4.51***     0.00
+AUT    0.68   -0.0402    0.0042   -9.53***      0        0.0180    -2.23**         0.03      -2.14**      0.03
+BEL    0.80   -0.0680    0.0069   -9.83***      0        0.0223    -3.05***        0.00      -2.92***     0.00
+CAN    0.48   -0.0310    0.0066   -4.71***      0        0.0213    -1.45           0.15      -1.39        0.17
+CHE    0.63   -0.0496    0.0086   -5.8***       0        0.0249    -1.99**         0.05      -1.91*       0.06
+DEU    0.63   -0.0567    0.0082   -6.91***      0        0.0283    -2.00**         0.05      -1.91*       0.06
+DNK    0.69   -0.0425    0.0048   -8.9***       0        0.0187    -2.27**         0.02      -2.18**      0.03
+FRA    0.89   -0.0680    0.0046   -14.8***      0        0.0157    -4.32***        0.00      -4.13***     0.00
+GBR    0.94   -0.1284    0.0069   -18.5***      0        0.0210    -6.11***        0.00      -5.84***     0.00
+IRL    0.92   -0.1318    0.0072   -18.19***     0        0.0258    -5.11***        0.00      -4.89***     0.00
+ITA 0.90      -0.0894    0.0062   -14.52***     0        0.0198    -4.51***        0.00      -4.31***     0.00
+JPN 0.81      -0.1617    0.0181   -8.93***      0        0.0511    -3.16***        0.00      -3.03***     0.00
+NLD 0.89      -0.1035    0.0066   -15.59***     0        0.0233    -4.43***        0.00      -4.24***     0.00
+USA 0.83      -0.1053    0.0107   -9.82***      0        0.0318    -3.31***        0.00      -3.17***     0.00
+AGG 0.90      -0.0836    0.0052   -16.21***     0        0.0185    -4.52***        0.00      -4.32***     0.00
+ Notes: The t-statistics and implied p-values are calculated based on Newey–West’s (1987) heteroskedasticity-
+and autocorrelation-consistent (HAC) standard errors. The number of lags is computed based on the non-
+parametric bandwidth selection procedure suggested by Newey and West (1994). Weights are computed us-
+ing the Bartlett kernel as described in Newey and West (1987, 1994). Standard errors as well as t-statistics
+and p-values computed based on Harri and Brorsen (2009) are denoted by superscript H+B , and t-statistics
+and p-values based on Hjalmarsson (2008, 2011) are denoted by superscript H . Statistical significance at
+the 1% level is indicated by ***, at the 5% level by ** and at the 10% level by *. Abbreviations: AUS =
+Australia, AUT = Austria, BEL = Belgium, CAN = Canada, CHE = Switzerland, DEU = Germany, DNK
+= Denmark, FRA = France, GBR = Great Britain, IRL = Ireland, ITA = Italy, JPN = Japan, NLD =
+Netherlands, USA = United States, AGG = equal-weighted country aggregate.
+
+
+
+
+                                                        41
+
+                      Electronic copy available at: https://ssrn.com/abstract=4071039
+
