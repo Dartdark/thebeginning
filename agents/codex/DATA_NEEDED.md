@@ -395,3 +395,20 @@ interval, then design coverage/power/costs before committed returns. Do not repl
 surprise with a price change, revised release or full-day jump label. Park and move on.
 [Record](research/scout/records/1920401.json), [checkpoint](results/scout_owned_source_20261108.md),
 [access/input evidence](inputs/scout_20261108/access.json).
+
+## Owned NQ aggressor-volume acquisition receipt (2026-11-08)
+
+The Bridge's existing native bars were located at `C:\OFB\ofb_bars_NQ.csv` and
+2018–22 exported to a new local ignored folder,
+`scratch_data/codex_bridge_20261108_01/`: 1,755,357 one-minute OHLC/total/buyer-/seller-initiated
+volume rows with evening, overnight and Sunday coverage. Current installed app confirms
+Globex server history is included with existing membership; no purchase or new data request.
+Native total equals buy+sell throughout. All 515,156 matching legacy OF export rows have
+`volume` equal to native buyer volume; legacy buy/sell fields match native. Preserve old exports;
+use the new native export for subsequent admitted total-volume work. No prior returns rerun.
+Remaining gaps: missing-minute/calendar reconciliation, original contract/roll/adjustment and
+build-version metadata, exceptional aggressor classification and actual availability delay.
+This clears basic full-session OHLC/signed-volume availability, not dated-contract, auction,
+dealer-position or live-execution data gates. No strategy testing authorized by this receipt.
+[Acquisition report](results/bridge_history_20261108.md),
+[hash/schema audit](../../analysis/outputs/codex_bridge_history_20261108_audit.json).
