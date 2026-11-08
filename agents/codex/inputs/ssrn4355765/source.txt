@@ -1,0 +1,2122 @@
+                                                                                          ed
+        Hedging Bitcoin with Commodity Futures: An Analysis
+
+
+
+
+                                                                                       iew
+           with Copper, Gas, Gold, and Crude Oil Futures*
+
+                                      Young C. Joo,†                 Sung Y. Park‡
+
+
+
+
+                                                                            ev
+                                                         Abstract
+       There is increased interest in the dynamic relationships between cryptocurrency and commod-
+
+
+
+
+                                                                r
+       ity futures. This study examines the hedging performance of four well-known commodity fu-
+       tures against fluctuations in Bitcoin prices. Furthermore, this study used the DCC- and ADCC-
+
+                                                             er
+       MGARCH models to estimate conditional correlations and time-varying optimal hedge ratios be-
+       tween the returns of copper, gas, gold, and crude oil futures, and Bitcoin. We use a rolling window
+       method to calculate one-step-ahead time-varying optimal hedge ratios and evaluate hedging per-
+                                                 pe
+       formance. The empirical results show that gas and gold have hedge benefits to Bitcoin. However,
+       crude oil shows poor hedge performance. From the results of one-step-ahead hedge ratios, we find
+       that hedge ratios decreased in 2018 due to economic stagnation but increased in early 2020 due to
+       the impact of COVID-19.
+                                      ot
+                           tn
+
+
+
+       Keywords: DCC-GARCH, ADCC-GARCH, Hedging, Commodity Futures, Cryptocurrency
+                rin
+
+
+
+
+       JEL classification: G11, G17, C32, C58
+     ep
+
+
+
+
+          * This research was supported by the Chung Ang University Research Grants in 2021.
+          †
+            SILC Business School, Shanghai University, 20 Chengzhong Rd., Jiading, Shanghai, China. Email:
+       jooyc@shu.edu.cn.
+Pr
+
+
+
+
+          ‡
+            Corresponding Author: School of Economics, Chung-Ang University, 84 Heukseok-Ro, Dongjak-Gu, Seoul,
+       Korea. Tel: +82-2-820-5622. E-mail: sungpark@cau.ac.kr.
+
+
+                                                              1
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+        Hedging Bitcoin with Commodity Futures: An Analysis
+
+
+
+
+                                                                                  iew
+           with Copper, Gas, Gold, and Crude Oil Futures
+
+
+
+
+                                                                        ev
+                                                       Abstract
+       There is increased interest in the dynamic relationships between cryptocurrency and commod-
+
+
+
+
+                                                             r
+       ity futures. This study examines the hedging performance of four well-known commodity fu-
+       tures against fluctuations in Bitcoin prices. Furthermore, this study used the DCC- and ADCC-
+
+                                                          er
+       MGARCH models to estimate conditional correlations and time-varying optimal hedge ratios be-
+       tween the returns of copper, gas, gold, and crude oil futures, and Bitcoin. We use a rolling window
+       method to calculate one-step-ahead time-varying optimal hedge ratios and evaluate hedging per-
+                                               pe
+       formance. The empirical results show that gas and gold have hedge benefits to Bitcoin. However,
+       crude oil shows poor hedge performance. From the results of one-step-ahead hedge ratios, we find
+       that hedge ratios decreased in 2018 due to economic stagnation but increased in early 2020 due to
+       the impact of COVID-19.
+                                     ot
+                          tn
+
+
+
+       Keywords: DCC-GARCH, ADCC-GARCH, Hedging, Commodity Futures, Cryptocurrency
+                rin
+
+
+
+
+       JEL classification: G11, G17, C32, C58
+     ep
+Pr
+
+
+
+
+                                                           1
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       1     Introduction
+
+       In recent years, cryptocurrency has experienced rapid development and received considerable at-
+
+
+
+
+                                                                                  iew
+       tention. It is considered an alternative investment vehicle, providing a highly profitable opportunity
+
+       and great flexibility. These apparent characteristics of cryptocurrency have promoted investors to
+
+       construct new investment strategies that differ from traditional investments (Pal and Mitra, 2009;
+
+
+
+
+                                                                        ev
+       Ma, Tian, Hsiao, and Deng 2022; Bergsli, Lind, Molnar, and Polasik, 2022). However, cryptocur-
+
+       rency has higher volatility and risk than traditional investment assets and, therefore, requires more
+
+       attention from investors. The increasing interest in cryptocurrency has led to a need for research
+
+
+
+
+                                                             r
+       on the hedging strategy that could offset or mitigate risk with traditional investment.
+
+                                                          er
+           Investment strategies that include cryptocurrency are widely used to achieve high returns. Al-
+
+       though cryptocurrencies are highly volatile and risky, given their previously mentioned characteris-
+                                               pe
+       tics, the return on portfolios that include cryptocurrencies is relatively high (Gandal and Halaburda,
+
+       2014; Eisl, Gasser, and Weinmayer, 2015). Several studies have investigated portfolios that include
+
+       virtual currencies and also hedging assets with cryptocurrencies (Bouri, Azzi, and Haubo, 2016;
+                                     ot
+
+       Baur, Lee, and Hong, 2018; Park, 2022). For instance, Dyhberg (2015a, b) studies the hedging
+
+       capability of cryptocurrency with commodities, equities, and the US dollar and finds that Bitcoin
+                          tn
+
+
+
+       acts as a hedge against uncertainty like other equities. Recent research shows that due to the weak
+
+       positive or even negative correlation between cryptocurrency and equities, cryptocurrency acts as
+
+       an effective diversifier and hedge in portfolios (Bouri, Molnar, Azzi, Roubaud, and Hagfors, 2017).
+                rin
+
+
+
+
+           An asset can be defined as a hedge, diversifier, and haven according to their relationships (Baur
+
+       and Lucey, 2010; Ratner and Chiu, 2013). If an asset is uncorrelated or negatively correlated with
+     ep
+
+
+
+
+       another asset or portfolio, it is a hedge. However, if the asset shows this relationship in only the
+
+       stress or turmoil of market conditions, it is a haven. Unlike a hedge and haven, a diversifier is an
+
+       asset that, on average, positively correlates with another asset or portfolio. Gold has often been
+Pr
+
+
+
+
+                                                           2
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       used as a hedge for risky assets, and many studies have found that it is a hedge and haven for
+
+       stocks and equities (Baur and Lucey, 2010; Baur and McDermott, 2010; Bredin, Conlon, and Poti,
+
+       2015; Lucey and Li, 2014; Ciner, Gurdgiev, and Lucey, 2013). However, recently, some investors
+
+
+
+
+                                                                                  iew
+       have interest in alternative assets other than traditional investment assets, so cryptocurrencies are
+
+       considered an alternative investment asset. Given the surge in interest, cryptocurrencies have been
+
+       examined to identify their role and hedging capabilities against assets (Dyhrberg, 2016; Bouri,
+
+
+
+
+                                                                        ev
+       Gupta, Tiwari, and Roubaud, 2017; Bouri, Molnár, Azzi, Roubaud, and Hagfors, 2017; Corbet,
+
+       Meegan, Larkin, Lucey, and Yarovaya, 2018).
+
+
+
+
+                                                             r
+           This study aims to investigate the relationship between cryptocurrency and commodity futures
+
+       and determine whether cryptocurrency can be classified as a hedge against commodity futures. We
+
+                                                          er
+       attempt to capture the dynamic conditional correlations among assets by employing dynamic con-
+
+       ditional correlation (DCC) and asymmetric dynamic conditional correlation (ADCC) multivariate
+                                               pe
+       generalized autoregressive conditional heteroscedasticity (MGARCH) models. These models help
+
+       uncover behavior of optimal hedge ratios and hedging effectiveness using conditional volatility and
+
+       correlation estimates.
+                                     ot
+
+
+           In analyzing the relationships between commodity futures and Bitcoin, it is of great interest
+
+       examining the hedging capacities of traditional futures investment against cryptocurrency. To this
+                          tn
+
+
+
+       end, we consider the four most commonly invested futures in financial markets: copper, gas, gold,
+
+       and crude oil. To our knowledge, no other study has investigated the hedging capacities between
+                rin
+
+
+
+
+       cryptocurrency and commodity futures. We construct one-step-ahead hedge ratios using a rolling
+
+       window scheme based on dynamic conditional correlation models, enabling us to analyze the effect
+
+       of changing asset variability on the hedge ratios. Moreover, we evaluate the performance of the
+     ep
+
+
+
+
+       hedged portfolios according to the amount of variance reduction compared with unhedged portfo-
+
+       lios.
+Pr
+
+
+
+
+           Our study produced several important results. First, we find that returns of the futures regard-
+
+
+                                                           3
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       ing gas and gold are negatively correlated with Bitcoin, which suggest that these two futures have
+
+       hedge benefits. Furthermore, from the results of the one-step-ahead optimal hedge ratios, we find
+
+       that all hedge ratios dropped in 2018 due to economic stagnation; however, there was a large in-
+
+
+
+
+                                                                                  iew
+       crease in early 2020 due to the shocks induced by COVID-19. These results indicate that hedge
+
+       ratios need to be regularly updated. Finally, the results of hedge effectiveness show that, in the
+
+       case of short-term forecast periods, gold provides the most effective hedge for Bitcoin. In the long
+
+
+
+
+                                                                        ev
+       term, copper shows higher hedge effectiveness than other commodities. However, crude oil has a
+
+       poor hedge performance due to its positive correlations.
+
+
+
+
+                                                             r
+           Our study makes several contributions to the literature. First, we estimate time-varying optimal
+
+       hedge ratios between Bitcoin and four well-known commodity futures using DCC-type multivari-
+
+                                                          er
+       ate GARCH models. Second, we construct one-step-ahead optimal hedge ratios using a rolling
+
+       window method to capture a more comprehensive out-of-sample behavior of optimal hedge ratios.
+                                               pe
+       Third, we conduct an extensive analysis to explore hedge performance by comparing the hedge
+
+       effectiveness for various numbers of model refit (the number of periods to re-estimate the model)
+
+       and lengths of the forecast horizon (the number of one-step-ahead forecasts). This analysis pro-
+                                     ot
+
+
+       vides some results on how robust are the hedging effectiveness to change in numbers of model
+
+       refit and lengths forecast horizon. The results of our analysis provide useful insights to investors,
+                          tn
+
+
+
+       practitioners, and researchers.
+
+           The remainder of our study is organized as follows: Section 2 describes the DCC- and ADCC-
+                rin
+
+
+
+
+       MGARCH models and introduces the optimal hedge ratios. Next, Section 3 describes the data and
+
+       presents the estimation results. Finally, Section 4 summarizes and concludes.
+     ep
+Pr
+
+
+
+
+                                                           4
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                                  ed
+       2     The Models
+
+       2.1    DCC- and ADCC-MGARCH Models
+
+
+
+
+                                                                                               iew
+       We consider the dynamic conditional correlation (DCC, Engle, 2002) and asymmetric dynamic
+
+       conditional correlation (ADCC, Cappiello, Engle, and Sheppard, 2006) MGARCH models to cap-
+
+       ture the volatility dynamics, conditional correlations, and hedge ratios of Bitcoin and copper, gas,
+
+
+
+
+                                                                                   ev
+       gold, and crude oil. From the DCC-MGARCH model, we can capture dynamic conditional corre-
+
+       lation and hedge ratios between assets and four commodity futures. The ADCC-MGARCH model
+
+
+
+
+                                                                 r
+       helps capture a change in conditional correlation and hedge ratios during the market downturn.
+
+           Let rt be a n × 1 vector of asset returns (i.e., returns of Bitcoin and commodity futures). The
+
+                                                              er
+       ARMA(1, 1) process for rt conditional on the information set Ωt−1 can be written as follows:
+                                               pe
+                                  rt = µ + art−1 + bεt−1 + εt ,        εt |Ωt−1 ∼ N(0, Ht ).               (2.1)
+
+           The errors can be expressed as follows:
+
+                                                      εt = Ht1/2 ut ,                                      (2.2)
+                                     ot
+
+
+       where Ht is the conditional covariance matrix of rt and ut is a n × 1 i.i.d. random vector of errors.
+                          tn
+
+
+
+           The DCC-MGARCH model (Engle, 2002) is defined as follows:
+
+                                      εt |Ωt−1 ∼ N(0, Ht ),          t = 1, 2, · · · , T,                  (2.3)
+
+                                           Ht = Dt Rt Dt ,                                                 (2.4)
+                rin
+
+
+
+
+       where Ht is a n × n conditional covariance matrix of r t , Rt = {diag(Qt )−1/2 }Qt {diag(Qt )−1/2 }
+                                                                               
+       is the conditional correlation matrix, and Dt = diag h1/2
+                                                             1t  , · · · , h1/2
+                                                                            nt    is a diagonal matrix with
+     ep
+
+
+
+
+       time-varying conditional standard deviation. Since the conditional variance hit follows univari-
+
+       ate GARCH models, it can be written as follows:
+                                                      p                    q
+Pr
+
+
+
+
+                                                      X                    X
+                                         hit = ωi +         αik ε2it−k +         βil hit−l .               (2.5)
+                                                      k=1                  l=1
+
+
+                                                               5
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                                            ed
+           A symmetric positive definite matrix Qt is given by:
+
+
+                                      Qt = (1 − ξ1 − ξ2 )Q̄ + ξ1 ut−1 u0t−1 + ξ2 Qt−1 ,                               (2.6)
+
+
+
+
+                                                                                                         iew
+       where Q̄ is the n × n unconditional correlation matrix of the standardized residuals uit = εit /h1/2
+                                                                                                        it
+
+       and ut = (u1t , · · · , unt ). The parameters ξ1 and ξ2 are non-negative scalar parameters satisfying
+
+       ξ1 + ξ2 < 1, which guarantees that Qt > 0. These parameters are used to capture the effects of
+
+
+
+
+                                                                                       ev
+       previous shocks on the current dynamic conditional correlation. If ξ1 = ξ2 = 0, then Qt is equal to
+
+       the constant conditional covariance matrix.
+
+
+
+
+                                                                     r
+           For the ADCC-MGARCH model (Cappiello, Engle, and Sheppard, 2006), the individual GARCH
+
+       model has an asymmetric term:
+
+
+                               hit = ωi +
+                                            p
+                                            X
+
+                                            k=1
+                                                  αik ε2it−k +
+                                                                 q
+                                                                 Xer
+                                                                 l=1
+                                                                       βil hit−l +
+                                                                                     m
+                                                                                     X
+
+                                                                                     j=1
+                                                                                           di j ε2it− j I(εit− j ),   (2.7)
+                                                    pe
+       where I(εit− j ) denotes an indicator function that is equal to one if εit− j < 0 and zero otherwise. For
+
+       this specification, a positive di implies that previous negative residuals tend to increase the variance
+
+       more than positive ones, indicating the leverage effect.
+                                     ot
+
+
+           For the ADCC-MGARCH model, the dynamics of Qt are given by:
+                          tn
+
+
+
+                           Qt = (1 − ξ1 − ξ2 )Q̄ − ξ3 M̄ + ξ1 ut−1 u0t−1 + ξ2 Qt−1 + ξ3 ζt−1 ζt−1
+                                                                                              0
+                                                                                                  ,                   (2.8)
+
+
+       where ζt = I[ut < 0] ⊗ ut are zero-threshold standardized errors which are equal to ut when
+
+       less than zero and zero otherwise and M̄ = E[ζt ζt0 ]. I[·] is the indicating function and ⊗ denotes
+                rin
+
+
+
+
+       the element-by-element multiplication operator. The ADCC-MGARCH model also has a sufficient
+
+       and necessary condition, ξ1 +ξ2 +δξ3 < 1, where δ denotes the maximum eigenvalue, Q̄−1/2 M̄ Q̄−1/2 .
+     ep
+
+
+
+
+       The parameter ξ3 is the asymmetric term indicating market downturn periods.
+Pr
+
+
+
+
+                                                                   6
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                         ed
+       2.2      Optimal Conditional Hedge Ratio
+
+       One of the main purposes for futures market participants is to hedge the risk to achieve their
+
+
+
+
+                                                                                      iew
+       individual goals. Specifically, in the case of a risky asset, we usually want to protect exposure to
+
+       asset price fluctuations. The return on a portfolio of a spot and futures position can be represented
+
+       as follows:
+
+
+
+
+                                                                               ev
+                                                    RHt = RS t − γt RFt ,                                   (2.9)
+
+       where RHt is the return on the hedged portfolio to the Bitcoin, RS t represents returns on the spot
+
+
+
+
+                                                                  r
+       position (return of Bitcoin), RFt denotes the returns on the futures position (returns of the futures),
+
+       and γt is the time-varying hedge ratio indicating the number of futures contracts. Specifically, if
+
+                                                               er
+       the investor takes long in the spot position then the hedge ratio indicates the number of futures
+
+       contracts that must be sold for each unit of spot commodity on which price risk is borne. The
+                                                 pe
+       variance of the hedged portfolio conditional on the information set available at time t − 1 is given
+
+       by:
+
+                     Var(RHt |Ωt−1 ) = Var(RS t |Ωt−1 ) − 2γtCov(RFt RS t |Ωt−1 ) + γt2 Var(RFt |Ωt−1 ),   (2.10)
+                                      ot
+
+
+       where Var(RS t |Ωt−1 ), Var(RFt |Ωt−1 ), and Cov(RFt RS t |Ωt−1 ) are the conditional variance and covari-
+
+       ance of spot and futures returns, respectively. The optimal hedge ratios can be obtained by min-
+                          tn
+
+
+
+       imizing the conditional variance (risk) of the hedged portfolio returns, i.e., minγt [Var(RHt |Ωt−1 )].
+
+       The optimal conditional hedge ratio can be obtained by taking the partial derivative of the variance
+                 rin
+
+
+
+
+       with respect to γt and setting the expression equal to zero (Baillie and Myers, 1991) as follows:
+
+                                                           Cov(RS t , RFt |Ωt−1 )
+                                              γt |Ωt−1 =                          .                        (2.11)
+                                                            Var(RFt |Ωt−1 )
+     ep
+
+
+
+
+             In order to estimate the time-varying optimal hedge ratio conditional variance and covariance
+
+       need to be estimated. The conditional covariance matrix estimates from the multivariate condi-
+Pr
+
+
+
+
+       tional volatility model of GARCH models can be used to construct hedge ratios (Kroner and Sul-
+
+
+                                                               7
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       tan, 1993). The optimal conditional hedge ratio between spot and futures positions is as follows:
+
+                                                                  ĥS Ft
+                                                    γ̂t |Ωt−1 =            ,                             (2.12)
+                                                                  ĥFt
+
+
+
+
+                                                                                  iew
+       where ĥS Ft is the estimated conditional covariance between spot and futures positions and ĥFt is the
+
+       estimated conditional variance of futures returns. Some studies propose flexible hedging models
+
+       to achieve better hedging performance in terms of hedging effectiveness (Chang, McAller, and
+
+
+
+
+                                                                               ev
+       Tansuchat, 2011; Park and Jei, 2010; Ku, Chen, and Chen, 2007).
+
+           We evaluate the performance of the hedged portfolio obtained from different MGARCH models
+
+       using the hedging effectiveness (HE) index by the amount of the variance reduction for any hedged
+
+
+
+
+                                                              r
+       portfolio compared with the unhedged portfolio.
+
+                                            HE =           er
+                                                    Var(RUt ) − Var(RHt )
+                                                         Var(RUt )
+                                                                          ,                              (2.13)
+                                               pe
+       where Var(RHt ) is the variance of the return of hedged portfolio, RHt , and Var(RUt ) is the variance
+
+       of the return of unhedged portfolio, RUt . A higher value of the HE index implies larger risk
+
+       reduction, indicating higher hedging effectiveness and an outperformed hedging strategy.
+                                     ot
+
+           Out-of-sample hedge ratios are constructed using a rolling window analysis. At time period t, a
+
+       one-period-ahead conditional volatility forecast is made and these forecasts are used to construct a
+                          tn
+
+
+
+       one-step-ahead hedge ratio. These forecasted hedge ratios are then used to constructing the hedged
+
+       portfolio. We used 1848 estimation window observations to construct 1000 one-step-ahead hedge
+
+       ratios. MGARCH models are refit every 20 observations.
+                rin
+
+
+
+
+       3     Empirical Analysis
+     ep
+
+
+
+
+       3.1    Data
+
+       Our dataset, obtained from Datastream, comprises the daily price of Bitcoin (BTC) and futures of
+Pr
+
+
+
+
+       copper (Copper), natural gas (Gas), gold (Gold), and Brent crude (Oil) for the period August 1,
+
+                                                            8
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       2010, to November 18, 2021. It yields a total of 2848 observations.
+
+
+                                                      [Figure 1]
+
+
+
+
+                                                                                  iew
+           We compute the return series (first difference of the natural logarithmic series), ln(pt /pt−1 ),
+
+       where pt and pt−1 are the prices at time t and t − 1, respectively. Figure 1 plots the price and return
+
+       series to show changes in prices and returns over time. Prices of copper and gold display similar
+
+
+
+
+                                                                        ev
+       movements, and gas and oil also share similar trends. In addition, the return series of copper and
+
+       gold show volatility clustering around 2012-2013. The return series of gas and oil also display
+
+
+
+
+                                                             r
+       volatility clustering around 2020.
+
+
+                                                          er
+                                                       [Table 1]
+                                               pe
+           Table 1 provides the descriptive statistics of the return series. To assess the stationary proper-
+
+       ties of the series, we apply two unit root tests on the return series: the Augmented Dickey–Fuller
+
+       (ADF) and Phillips–Perron (PP) tests. The ADF test results confirm that all return series reject the
+                                     ot
+
+       null hypothesis that the series has a unit root. The PP test results show that all return series are
+
+       stationary, thus rejecting the null hypothesis. Therefore, we use the return series for the empirical
+                          tn
+
+
+
+       analysis.
+
+           All return series have positive mean values. Specifically, BTC has the highest mean value of
+
+       price return at 0.465 followed by Gold, Copper, Gas, and Oil. Although BTC and Gold have neg-
+                rin
+
+
+
+
+       ative skewness (Skew), Copper, Gas, and Oil have positive skewness. Kurtosis (Kurt) of return
+
+       series are greater than 3 except for copper. Thus most returns are skewed and leptokurtic. The test
+     ep
+
+
+
+
+       results of Jarque–Bera (JB) for all return series are statistically significant, indicating that the nor-
+
+       mality assumption for all return series is rejected. These test statistics indicate that all the return
+
+       series exhibit a high degree of non-normality. We consider these return series with non-normal
+Pr
+
+
+
+
+       distribution by applying univariate and multivariate student t-distributions for GARCH model es-
+
+                                                           9
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       timations to generate more robust estimation results. Table 2 presents unconditional correlations
+
+       of variables. It shows that BTC return has significantly positive correlations with Copper returns.
+
+       These are the strongest correlations across all the asset returns. In contrast, BTC return correlates
+
+
+
+
+                                                                                  iew
+       negatively and significantly with Gas return.
+
+
+                                                                [Table 2]
+
+
+
+
+                                                                                ev
+       3.2       Estimation Results
+
+
+
+
+                                                                      r
+       In the following analysis, we analyze returns of BTC, Copper, Gas, Gold, and Oil using DCC- and
+
+       ADCC-MGARCH models to identify the time-varying relationship and the hedge effects between
+
+                                                                   er
+       assets. The DCC- and ADCC-MGARCH models can assist in understanding the dynamics of con-
+
+       ditional correlation between assets and be useful in explaining the flow of the optimal hedge ratios
+                                                       pe
+       over time. The objectives of this analysis are the construction of optimal hedge ratios between
+
+       the high-risk asset and well-known futures and the comparison of the hedge effects between the
+
+       assets. Being well-known, DCC- and ADCC-MGARCH models are estimated by taking two-step
+                                           ot
+
+
+       estimation procedures. We set the specifications of mean and variance equations for the estimation.
+
+       Based on some well-known information criteria (AIC, BIC, SIC, and HQ), the ARMA (1,1) for
+                               tn
+
+
+
+       the conditional mean equation is selected.1 Based on these specifications, we report the results of
+
+       the DCC- and ADCC- MGARCH models with a multivariate t-distribution.
+                  rin
+
+
+
+
+                                                                [Table 3]
+     ep
+
+
+
+
+              In Table 3, we report the estimation results of the DCC- and ADCC-MGARCH models. Firstly,
+
+       we observe that the estimated coefficients, α̂ and β̂ in the conditional variance equation indicates
+
+       the short- and long-term persistence and evidence of volatility clustering. In all cases, long-term
+Pr
+
+
+
+
+          1
+              All other results are available in the supplementary materials.
+
+
+                                                                    10
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       persistence (β̂) is higher than short-term persistence (α̂), and they are statistically significant. In
+
+       addition, it can be seen that there exists a statistically significant positive asymmetric effect, γ̂,
+
+       for Copper and Oil, indicating that negative shocks tend to increase the variance of the returns
+
+
+
+
+                                                                                  iew
+       more than positive shocks. The coefficient on the shape parameter, ν̂, indicates the degree of
+
+       freedom of the multivariate t-distribution. Thus, as the value of ν̂ approaches infinity, the shape of
+
+       the distributions for the return series approaches that of a normal distribution. We find that each
+
+
+
+
+                                                                        ev
+       return series, especially Bitcoin, has a low value for the estimated shape parameter, indicating that
+
+       the distribution of the return series has a heavy tail. The ξ̂1 and ξ̂2 are positive and statistically
+
+
+
+
+                                                             r
+       significant. The sum of ξ̂1 and ξ̂2 is less than one indicating dynamic conditional correlation is
+
+       mean reverting.
+
+                                                          er
+                                                      [Figure 2]
+                                               pe
+           Figure 2 shows the one-step-ahead dynamic conditional correlations for assets from the M
+
+       GARCH models. The results show that the conditional correlations estimated from the ADCC-
+
+       MGARCH model show a higher level than those from the DCC-MGARCH model for all cases.
+                                     ot
+
+
+       Among the four assets, the lowest conditional correlation occurs for BTC/Gas, and, on the other
+                          tn
+
+
+
+       hand, the highest conditional correlation occurs for BTC/Gold. We also find that gold and gas
+
+       are mostly negatively correlated with Bitcoin, implying that these two assets may provide hedging
+
+       opportunities. This result indicates that gold and gas have hedge benefits against Bitcoin. We
+                rin
+
+
+
+
+       also find that BTC/Copper, BTC/Gold, and BTC/Oil show a sharp decline in dynamic conditional
+
+       correlation in early 2020, reflecting the increase in copper, gold, and oil prices and the decline in
+
+       Bitcoin price.
+     ep
+
+
+
+
+                                                      [Figure 3]
+Pr
+
+
+
+
+           Figure 3 plots the optimal conditional hedge ratio estimates for Bitcoin, copper, gas, gold, and
+
+                                                          11
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       oil calculated from DCC- and ADCC-GARCH models. Note that the hedge ratios from the the
+
+       estimated DCC- GARCH model are similar to those of the ADCC-GARCH model, but the DCC
+
+       hedge ratios are generally lower than ADCC hedge ratios. All hedge ratios dropped in early 2018
+
+
+
+
+                                                                                  iew
+       due to economic stagnation and stock market issues, like global trade spats, rising interest rates,
+
+       and Brexit uncertainty. In addition, the hedge ratios for BTC/Copper, BTC/Gas, and BTC/Gold
+
+       experienced a large increase in early 2020 due to the impact of COVID-19 on global financial
+
+
+
+
+                                                                        ev
+       markets.
+
+           We evaluate hedging effectiveness under various cases by calculating the hedge ratios and vari-
+
+
+
+
+                                                             r
+       ance reduction measure under different forecast horizons and numbers of model refit (the number
+
+       of periods to re-estimate the model). Table 4 presents additional hedge ratios and effectiveness
+
+                                                          er
+       results from models refit every 10, 20, and 50 days. From the left side of the Table 4, the hedge
+
+       effectiveness values are presented under the number of model refit periods, 10, 20, and 50 days.
+                                               pe
+       For each number of model refit, we also consider five different forecast lengths, namely 100, 500,
+
+       1,000, 1,500, and 2,000. Furthermore, we report the mean, minimum, and maximum of the esti-
+
+       mated hedge ratios and hedge effectiveness, HE, from the DCC- and ADCC-MGARCH models.
+                                     ot
+
+
+                                                       [Table 4]
+                          tn
+
+
+
+           For a forecast length of 100 days, BTC/Gold shows the highest HE values for all model refit
+
+       levels. This result indicates that gold provides the most effective hedge for Bitcoin in the short
+                rin
+
+
+
+
+       term. For BTC/Copper and BTC/Gas, HE values are mostly positive. In the short-term forecast
+
+       lengths, the copper shows higher HE values. However, in the long-term cases, gas has higher HE
+
+       values. Unlike other assets, BTC/Oil shows a negative HE value for all cases, indicating that it
+     ep
+
+
+
+
+       performs worse than an unhedged portfolio. This result could occur because they are positively
+
+       correlated. For all assets, HE values for DCC are higher than ADCC, which shows that DCC is
+Pr
+
+
+
+
+       better suited to capture the volatile nature of asset prices.
+
+
+                                                          12
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       4     Concluding Remarks
+
+
+
+
+                                                                                  iew
+       In this paper, we used the multivariate GARCH models to explore the usefulness of using copper,
+
+       gas, gold, and oil futures to hedge the risk associated with cryptocurrency investing. Using the
+
+
+
+
+                                                                        ev
+       DCC- and ADCC-MGARCH models, we evaluate the dynamic conditional correlations and one-
+
+       step-ahead volatility to calculate and compare optimal hedge ratios and hedge effectiveness.
+
+           In analyzing the relationships between commodity futures and Bitcoin, examining the hedging
+
+
+
+
+                                                             r
+       capacities of traditional futures investment for cryptocurrency is of great interest. To this end, we
+
+                                                          er
+       consider four of the most commonly invested futures in financial markets: copper, gas, gold, and
+
+       crude oil. To our knowledge, no other study has investigated the out-of-sample hedging perfor-
+                                               pe
+       mance between cryptocurrency and commodity futures. We construct one-step-ahead hedge ratios
+
+       using a rolling window scheme based on dynamic conditional correlation models, enabling us to
+
+       analyze the changing variability in Bitcoin and commodity futures. Moreover, we evaluate the
+                                     ot
+
+       performance of the hedged portfolio by the amount of variance reduction compared with the un-
+
+       hedged portfolio.
+                           tn
+
+
+
+           From the empirical analysis, we find that futures of gas and gold have hedge benefits. However,
+
+       crude oil shows poor hedging performance. We also find that dynamic conditional correlations be-
+
+       tween Bitcoin and copper, gold, and oil decline sharply in early 2020, reflecting the increase in
+                rin
+
+
+
+
+       copper, gold, and oil prices and the decline in Bitcoin price. From the results of one-step-ahead
+
+       hedge ratios, we find that hedge ratios decreased in 2018 due to economic stagnation but increased
+     ep
+
+
+
+
+       in early 2020 due to the impact of COVID-19 shocks, indicating that hedge ratios need to be up-
+
+       dated regularly.
+
+           The results of hedge effectiveness show that, for each hedge, DCC produces better hedging
+Pr
+
+
+
+
+                                                          13
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       effectiveness. This result indicates that DCC is better suited to capture the volatile nature of fu-
+
+       tures prices. In the case of short-term forecast periods, gold provides the most effective hedge for
+
+       Bitcoin, while copper provides better hedging effectiveness in the long term. However, oil has poor
+
+
+
+
+                                                                                  iew
+       hedge performance due to its positive correlations.
+
+
+
+
+                                                             r          ev
+                                                          er
+                                               pe
+                                     ot
+                          tn
+                rin
+     ep
+Pr
+
+
+
+
+                                                          14
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       References
+
+       Baillie, R. T., and R. Myers (1991): “Bivariate GARCH Estimation of the Optimal Commodity
+
+
+
+
+                                                                                  iew
+          Futures Hedge,” Journal of Applied Econometrics, 6, 109–124.
+
+       Baur, D., and T. McDermott (2010): “Is Gold a Safe Haven? International Evidence,” Journal of
+
+          Banking and Finance, 34, 1886–1898.
+
+
+
+
+                                                                        ev
+       Baur, D. G., K. Hong, and A. D. Lee (2018): “Bitcoin: Medium of Exchange or Speculative
+
+          Assets?,” Journal of International Financial Markets, Institutions and Money, 54, 177–189.
+
+
+
+
+                                                             r
+       Bergsli, L. O., A. F. Lind, P. Molnar, and M. Polasik (2022): “Forecasting Volatility of Bitcoin,”
+
+                                                          er
+          Research in International Business and Finance, 29, 101540.
+
+       Bour, D. G., and B. M. Lucey (2010): “Is Gold a Hedge or a Safe Haven? An Analysis of Stocks,
+                                               pe
+          Bonds and Gold,” Financial Review, 45, 217–229.
+
+       Bouri, E., G. Azzi, and A. H. Dyhrberg (2016): “On the return-volatility relationship in the Bitcoin
+                                     ot
+
+          market around the price crash of 2013,” Economics Discussion Papers 2016-41, 1–19.
+
+       Bouri, E., R. Gupta, A. Tiwari, and D. Roubaud (2017): “Does Bitcoin Hedge Global Uncertainty?
+                          tn
+
+
+
+          Evidence from Wavelet-based Quantile-in-Quantile Regressions,” Finance Research Letters, 23,
+
+          87–95.
+                rin
+
+
+
+
+       Bouri, E., P. Molnar, G. Azzi, D. Roubaud, and L. I. Hagfors (2017): “On the Hedge and Safe
+
+          Haven Properties of Bitcoin: Is it Really More Than a Diversifier?,” Finance Research Letters,
+
+          20, 192–198.
+     ep
+
+
+
+
+       Bredin, D., T. Conlon, and V. Poti (2015): “Does Gold Glitter in the Long-run? Gold as a Hedge
+
+          and Safe Haven Across Time and Investment Horizon,” International Review of Financial Anal-
+Pr
+
+
+
+
+          ysis, 41, 320–328.
+
+                                                          15
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       Cappiello, L., R. Engle, and K. Sheppard (2006): “Asymmetric Dynamics in the Correlations of
+
+          Global Equity and Bond Returns,” Journal of Financial Econometrics, 4, 537–572.
+
+
+
+
+                                                                                  iew
+       Chang, C.-L., M. McAleer, and R. Tansuchat (2011): “Crude Oil Hedging Strategies using Dy-
+
+          namic Multivariate GARCH,” Energy Economics, 33, 912–923.
+
+       Ciner, C., C. Gurdgiev, and B. M. Lucey (2013): “Hedges and Safe Havens: An Examination of
+
+
+
+
+                                                                        ev
+          Stocks, Bonds, Gold, Oil and Exchange Rates,” International Review of Financial Analysis, 29,
+
+          202–211.
+
+
+
+
+                                                             r
+       Corbet, S., A. Meegan, C. Larkin, B. Lucey, and L. Yarovaya (2018): “Exploring the Dynamic
+
+          Relationships between Cryptocurrencies and Other Financial Assets,” Economics Letters, 165,
+
+          28–34.                                          er
+                                               pe
+       Dyhrberg, A. H. (2015a): “Bitcoin, Gold and the Dollar - A GARCH Volatility Analysis,” Finance
+
+          Research Letters, 16, 85–92.
+
+                 (2015b): “Hedging Capabilities of Bitcoin. Is it the Virtual Gold?,” Finance Research
+                                     ot
+
+
+          Letters, 16, 139–144.
+                          tn
+
+
+
+       Dyhrberg, A. H. (2016): “Bitcoin, Gold and the Dollar - A GARCH Volatility Analysis,” Finance
+
+          Research Letters, 16, 85–92.
+
+       Eisl, A., S. M. Gasser, and K. Weinmayer (2015): “Caveat Emptor: Does Bitcoin Improve Portfo-
+                rin
+
+
+
+
+          lio Diversification?,” SSRN Working Paper, 1–21.
+
+       Engle, R. (2002): “Dynamic Conditional Correlation: A Simple Class of Multivariate Gener-
+     ep
+
+
+
+
+          alized Autoregressive Conditional Heteroskedasticity Models,” Journal of Business and Eco-
+
+          nomic Statistics, 20, 339–350.
+Pr
+
+
+
+
+                                                          16
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                     ed
+       Gandal, N., and H. Halaburda (2014): “Competition in the Cryptocurrency Market,” CEPR Dis-
+
+          cussion Paper No. DP10157, 1–11.
+
+
+
+
+                                                                                  iew
+       Kroner, K. F., and J. Sultan (1993): “Time-Varying Distributions and Dynamic Hedging with
+
+          Foreign Currency Futures,” Journal of Financial and Quantitative Analysis, 28, 535–551.
+
+       Ku, Y.-H. H., H.-C. Chen, and K.-H. Chen (2017): “On the Application of the Dynamic Conditional
+
+
+
+
+                                                                        ev
+          Correlation Model in Estimating Optimal Time-varying Hedge Ratios,” Applied Economics Let-
+
+          ters, 14, 503–509.
+
+
+
+
+                                                             r
+       Lucey, B. M., and S. Li (2015): “What Precious Metals Act as Safe Havens, and When? Some US
+
+          Evidence,” Applied Economics Letters, 22, 35–45.
+                                                          er
+       Ma, C., Y. Tian, S. Hsiao, and L. Deng (2022): “Monetary policy shocks and Bitcoin prices,”
+                                               pe
+          Research in International Business and Finance, 62, 101711.
+
+       Pal, D., and S. K. Mitra (2019): “Hedging Bitcoin with Other Financial Assets,” Finance Research
+
+          Letters, 30, 30–36.
+                                     ot
+
+
+       Park, B. J. (2022): “The COVID-19 Pandemic, Volatility, and Trading Behavior in the Bitcoin
+                          tn
+
+
+
+          Futures Market,” Research in International Business and Finance, 59, 101519.
+
+       Park, S. Y., and S. Y. Jei (2010): “Estimation and Hedging Effectiveness of Time-varying Hedge
+
+          Ratio: Flexible Bivariate GARCH Approaches,” Journal of Futures Markets, 30, 71–99.
+                rin
+
+
+
+
+       Ratner, M., and C. Chiu (2013): “Hedging Stock Sector Risk with Credit Default Swaps,” Inter-
+
+          national Review of Financial Analysis, 30, 18–25.
+     ep
+Pr
+
+
+
+
+                                                          17
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                            ed
+                                      Table 1: Descriptive Statistics for Return Series
+
+                         Mean    Median     S.D.      Skew      Kurt            ADF         PP            JB
+
+
+
+
+                                                                                         iew
+          BTC            0.465    0.000     7.470     2.447    69.870      -12.974***   -56.315***   581940.036***
+
+          Copper         0.008    0.000     1.368     -0.078   2.210       -14.022***   -55.642***    582.055***
+
+          Gas            0.001    0.000     2.983     0.259    3.852       -15.111***   -55.888***    1791.971***
+
+          Gold           0.016    0.026     1.022     -0.654   6.949       -13.798***   -54.872***    5932.182***
+
+
+
+
+                                                                                  ev
+          Oil            0.000    0.009     2.285     -0.554   26.201      -13.379***   -53.387***   81582.884***
+
+       Notes: The numbers in parentheses are standard errors. *, **, and *** denote significance at 10%, 5%, and
+       1%, respectively.
+
+
+
+
+                                                                  r
+                                  BTC
+                                                               er
+                                    Table 2: Correlation Matrix between Return Series
+
+                                                    Copper               Gas             Gold            Oil
+                                                     pe
+                BTC               1.000             0.040***            -0.030*          0.010         0.040***
+
+                Copper           0.040***            1.000             0.050***         0.260***       0.280***
+
+                Gas              -0.030*            0.050***            1.000            0.010         0.100***
+
+                Gold              0.010             0.260***            0.010            1.000         0.100***
+                                            ot
+
+
+                Oil              0.040***           0.280***           0.100***         0.100***        1.000
+
+       Notes: The numbers in parentheses are standard errors. *, **, and *** denote significance at 10%, 5%, and
+                                 tn
+
+
+
+       1%, respectively.
+                      rin
+     ep
+Pr
+
+
+
+
+                                                               18
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                      ed
+                              Table 3: Estimation Results of DCC and ADCC Models
+               Variables                        DCC                                      ADCC
+                                      Coef.                 S.E.                 Coef.               S.E.
+               µBTC                 0.239***              (0.071)             0.240***             (0.077)
+
+
+
+
+                                                                                   iew
+               aBTC                  -0.406               (0.257)              -0.400*             (0.233)
+               bBTC                   0.398               (0.258)                0.391             (0.235)
+               ωBTC                   0.981               (2.482)                0.952             (2.904)
+               αBTC                 0.223***              (0.056)             0.229***             (0.042)
+               βBTC                 0.776***              (0.178)             0.778***             (0.211)
+               γBTC                                                             -0.017             (0.067)
+               λBTC                 2.897***              (0.126)             2.900***             (0.144)
+               µCopper                0.010               (0.021)                0.004             (0.021)
+
+
+
+
+                                                                        ev
+               aCopper               -0.192               (0.221)               -0.202             (0.208)
+               bCopper                0.132               (0.224)                0.143             (0.211)
+               ωCopper              0.014***              (0.005)             0.014***             (0.005)
+               αCopper              0.030***              (0.003)             0.016***             (0.005)
+               βCopper              0.963***              (0.001)             0.965***             (0.000)
+               γCopper                                                        0.025***             (0.009)
+
+
+
+
+                                                             r
+               λCopper               5.604***             (0.557)             5.710***             (0.571)
+               µGas                   -0.020              (0.037)               -0.014             (0.042)
+               aGas                  0.887***             (0.159)                0.482             (0.392)
+               bGas
+               ωGas
+               αGas
+               βGas
+               γGas
+                                    -0.905***
+                                     0.156***
+                                     0.073***
+                                     0.911***
+                                                          er
+                                                          (0.148)
+                                                          (0.039)
+                                                          (0.009)
+                                                          (0.010)
+                                                                                -0.520
+                                                                              0.152***
+                                                                              0.081***
+                                                                              0.914***
+                                                                                -0.022
+                                                                                                   (0.383)
+                                                                                                   (0.039)
+                                                                                                   (0.011)
+                                                                                                   (0.010)
+                                                                                                   (0.018)
+                                                pe
+               λGas                 6.809***              (0.771)             6.736***             (0.755)
+               µGold                 0.035*               (0.014)             0.036***             (0.014)
+               aGold                 -0.098               (0.191)               -0.099             (0.189)
+               bGold                  0.049               (0.191)                0.048             (0.189)
+               ωGold                0.008***              (0.002)             0.008***             (0.002)
+               αGold                0.029***              (0.003)             0.039***             (0.008)
+               βGold                0.966***              (0.001)             0.965***             (0.001)
+               γGold                                                            -0.015             (0.010)
+                                     ot
+
+               λGold                3.628***              (0.258)             3.625***             (0.258)
+               µOil                   0.018               (0.026)                0.018             (0.026)
+               aOil                   0.183               (0.156)                0.180             (0.153)
+               bOil                  -0.218               (0.154)               -0.216             (0.151)
+                           tn
+
+
+
+               ωOil                 0.051***              (0.019)             0.047***             (0.017)
+               αOil                 0.082***              (0.014)             0.033***             (0.012)
+               βOil                 0.913***              (0.014)             0.922***             (0.015)
+               γOil                                                           0.074***             (0.018)
+               λOil                 4.110***              (0.330)             4.316***             (0.364)
+               ξ1                    0.008*               (0.004)             0.008**              (0.004)
+                rin
+
+
+
+
+               ξ2                   0.979***              (0.017)             0.979***             (0.017)
+               ξ3                                                                0.001             (0.001)
+               ν                    5.677***              (0.201)             5.759***             (0.205)
+               AIC                              20.563                                   20.555
+               BIC                              20.663                                   20.668
+               SIC                              20.562                                   20.554
+     ep
+
+
+
+
+               H-Q                              20.599                                   20.596
+               Loglik                           -29223                                   -29206
+       Notes: The numbers in parentheses are standard errors. *, **, and *** denote significance at 10%, 5%, and
+       1%, respectively.
+Pr
+
+
+
+
+                                                          19
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                                         ed
+                                      Table 4: Hedge Ratios and Hedging Effectiveness
+                                        re=10                                 re=20                                 re=50
+                       fl=100 fl=500 fl=1000 fl=1500 fl=2000 fl=100 fl=500 fl=1000 fl=1500 fl=2000 fl=100 fl=500 fl=1000 fl=1500 fl=2000
+        Model Variable
+
+
+
+
+                                                                                                      iew
+                                                                         BTC/COPPER
+            Mean       0.188 0.236 0.156       0.123 0.103 0.184 0.235 0.154          0.121 0.107 0.169 0.242 0.151          0.116 0.111
+            Min        0.048 -0.166 -0.361    -0.908 -20.648 0.039 -0.166 -0.361     -0.908 -20.027 0.039 -0.176 -0.446     -0.908 -20.648
+        DCC Max        0.367 1.900 1.335       1.336 3.282 0.367 1.878 1.284          1.261 4.607 0.332 2.428 1.341          1.220 5.570
+            HE         0.004 -0.004 0.001     -0.001 0.003 0.004 -0.003 0.001        -0.001 0.007 0.003 -0.010 0.001        -0.001 0.007
+             Mean      0.196 0.249 0.173       0.130 0.115 0.192 0.250 0.173          0.129 0.117 0.178 0.252 0.171          0.128 0.120
+             Min       0.056 -0.155 -0.365    -0.881 -22.794 0.048 -0.155 -0.365     -0.881 -23.015 0.048 -0.164 -0.462     -0.881 -22.794
+
+
+
+
+                                                                                         ev
+        ADCC Max       0.370 1.890 1.480       1.517 2.658 0.370 1.908 1.421          1.458 3.776 0.336 1.996 1.452          1.411 4.504
+             HE        0.004 -0.004 0.000     -0.002 0.000 0.004 -0.004 0.000        -0.002 0.004 0.003 -0.005 0.000        -0.001 0.005
+                                                                            BTC/GAS
+            Mean       -0.055 -0.048 -0.039   -0.048   -0.043 -0.054 -0.048 -0.039   -0.047   -0.043 -0.054 -0.056 -0.037   -0.046   -0.043
+
+
+
+
+                                                                         r
+            Min        -0.154 -0.264 -0.398   -0.664   -2.432 -0.154 -0.266 -0.398   -0.664   -2.582 -0.146 -0.617 -0.398   -0.664   -2.432
+        DCC Max         0.003 0.118 0.597      0.378    0.434 0.003 0.118 0.597       0.378    0.434 0.009 0.118 0.676       0.394    0.459
+            HE          0.002 0.002 -0.004    -0.001    0.009 0.002 0.003 -0.004     -0.001    0.009 0.002 0.004 -0.004     -0.001    0.003
+             Mean
+             Min
+        ADCC Max
+             HE
+                       -0.050 -0.041 -0.031
+                       -0.140 -0.224 -0.381
+                        0.006 0.144 0.584
+                        0.002 0.002 -0.003
+                                              -0.043
+                                              -0.709
+                                               0.317
+                                               0.000
+                                                                      er
+                                                       -0.032 -0.049 -0.042 -0.031
+                                                       -2.594 -0.140 -0.223 -0.381
+                                                        0.440 0.006 0.144 0.584
+                                                        0.009 0.002 0.002 -0.004
+                                                                                     -0.043
+                                                                                     -0.709
+                                                                                      0.317
+                                                                                      0.000
+                                                                                              -0.033 -0.048 -0.045 -0.031
+                                                                                              -2.873 -0.129 -0.320 -0.381
+                                                                                               0.440 0.010 0.144 0.613
+                                                                                               0.008 0.001 0.003 -0.003
+                                                                                                                            -0.042
+                                                                                                                            -0.709
+                                                                                                                             0.341
+                                                                                                                             0.000
+                                                                                                                                     -0.034
+                                                                                                                                     -2.594
+                                                                                                                                      0.440
+                                                                                                                                      0.004
+                                                         pe
+                                                                            BTC/GOLD
+            Mean       -0.142 0.186 0.059     0.038 0.011 -0.142 0.189 0.060         0.042 0.014 -0.154 0.195 0.060         0.046 0.019
+            Min        -0.446 -0.326 -1.157   -1.041 -12.900 -0.446 -0.314 -1.157    -1.041 -13.088 -0.460 -0.314 -1.157    -0.838 -12.900
+        DCC Max         0.063 3.486 2.769      3.542 3.987 0.063 3.805 2.894          3.963 5.164 0.063 5.400 3.039          3.982 5.476
+            HE          0.008 -0.047 -0.020   -0.024 -0.017 0.009 -0.052 -0.021      -0.027 -0.023 0.009 -0.081 -0.022      -0.027 -0.025
+             Mean      -0.130 0.208 0.094     0.071 0.045 -0.129 0.210 0.096         0.073 0.044 -0.138 0.211 0.096         0.072 0.051
+                                           ot
+
+             Min       -0.445 -0.285 -1.125   -0.999 -13.055 -0.445 -0.270 -1.125    -0.999 -13.564 -0.451 -0.270 -1.125    -1.011 -13.055
+        ADCC Max        0.091 3.978 3.271      5.099 6.433 0.088 4.382 3.371          5.512 7.161 0.088 4.986 3.485          5.452 6.033
+             HE         0.007 -0.057 -0.024   -0.040 -0.031 0.008 -0.063 -0.026      -0.044 -0.037 0.008 -0.074 -0.026      -0.045 -0.029
+                                                                            BTC/OIL
+                              tn
+
+
+
+            Mean        0.145 0.167 0.124      0.069    0.077 0.143 0.167 0.124       0.068    0.077 0.137 0.168 0.124       0.069    0.083
+            Min         0.047 -0.045 -0.554   -0.526   -1.562 0.045 -0.045 -0.554    -0.526   -1.562 0.045 -0.045 -0.554    -0.574   -0.706
+        DCC Max         0.277 0.638 1.268      0.578    1.133 0.277 0.638 1.268       0.578    1.133 0.277 0.676 1.263       0.653    1.225
+            HE         -0.005 -0.015 -0.006   -0.004   -0.006 -0.005 -0.016 -0.005   -0.003   -0.007 -0.005 -0.022 -0.006   -0.004   -0.008
+             Mean       0.158 0.180 0.139      0.079    0.098 0.157 0.180 0.139       0.078    0.097 0.151 0.180 0.138       0.078    0.101
+                 rin
+
+
+
+
+             Min        0.055 -0.030 -0.564   -0.543   -1.260 0.053 -0.030 -0.564    -0.543   -1.260 0.053 -0.030 -0.564    -0.607   -0.538
+        ADCC Max        0.304 0.856 1.390      0.602    1.107 0.304 0.856 1.390       0.602    1.107 0.297 0.856 1.403       0.792    1.160
+             HE        -0.006 -0.013 -0.005   -0.004   -0.005 -0.005 -0.015 -0.006   -0.004   -0.006 -0.005 -0.017 -0.006   -0.004   -0.007
+
+       Notes: This table presents the mean, minimum, and maximum values of the hedge ratios and hedge effec-
+     ep
+
+
+
+
+       tiveness values under the model refit (re: the number of periods to re-estimate the model)) in 10, 20, and
+       50 days, respectively. For each model refit, hedge ratios and hedge effectiveness were calculated by five
+       different forecast lengths (fl) of 100, 500, 1,000, 1,500, and 2,000.
+Pr
+
+
+
+
+                                                                       20
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                                                             ed
+                                                            Figure 1: Price and Returns
+
+
+
+
+                                             70000
+
+
+
+
+                                                                                                                           150
+                                             60000
+
+
+
+
+                                                                                                                          iew
+                                                                                                                           100
+                                             50000
+                                             40000
+
+
+
+
+                                                                                                                           50
+                                             30000
+
+
+
+
+                                                                                                                           0
+                                             20000
+                                             10000
+
+
+
+
+                                                                                                                           −50
+                                                                                                          ev
+                                             0
+
+
+
+
+                                                            2012     2014       2016             2018     2020     2022
+
+                                                                                    Time
+
+                                                                            (1) BTC
+
+
+
+
+                                                                                 r
+                                                                                                                                                             20
+                                                                                           6
+           4.5
+
+
+
+
+                                                                              er
+                                                                              5
+
+
+
+
+                                                                                                                                                             10
+           4.0
+
+
+
+
+                                                                                           5
+           3.5
+
+
+
+
+                                                                              0
+
+
+
+                                                                                           4
+                                                               pe
+
+
+                                                                                                                                                             0
+           3.0
+
+
+
+
+                                                                                           3
+
+
+
+
+                                                                                                                                                             −10
+           2.5
+
+
+
+
+                                                                              −5
+
+
+
+                                                                                           2
+           2.0
+
+
+
+
+                   2012   2014       2016            2018     2020     2022                             2012     2014        2016       2018   2020   2022
+                                             ot
+
+                                      Time                                                                                       Time
+
+                                 (2) Copper                                                                             (3) Gas
+           2000
+
+
+
+
+                                                                                           120
+                                                                              5
+                          tn
+
+
+
+                                                                                                                                                             20
+           1800
+
+
+
+
+                                                                                           100
+
+
+
+
+                                                                                                                                                             10
+                                                                              0
+           1600
+
+
+
+
+                                                                                           80
+
+
+
+
+                                                                                                                                                             0
+                                                                                           60
+                  rin
+           1400
+
+
+
+
+                                                                                                                                                             −10
+                                                                              −5
+
+
+
+                                                                                           40
+           1200
+
+
+
+
+                                                                                                                                                             −20
+                                                                                           20
+                                                                              −10
+
+
+
+
+                                                                                                                                                             −30
+
+
+
+
+                   2012   2014       2016            2018     2020     2022                             2012     2014        2016       2018   2020   2022
+     ep
+
+
+
+
+                                      Time                                                                                       Time
+
+                                  (4) Gold                                                                                (5) Oil
+       Notes: The left hand side of vertical axes indicates the price, right hand side of vertical axes is log-price
+       return, respectively.
+Pr
+
+
+
+
+                                                                               21
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                                                                    ed
+                                                     Figure 2: Dynamic Conditional Correlations
+                                                                           DCC                                                                             DCC
+
+
+
+
+                                                                                               0.10
+                                                                           ADCC                                                                            ADCC
+               0.10
+
+
+
+
+                                                                                                                                 iew
+                                                                                               0.05
+                                                                                               0.00
+               0.05
+
+
+
+
+                                                                                               −0.05
+        corr
+
+
+
+
+                                                                                        corr
+
+                                                                                               −0.10
+               0.00
+
+
+
+
+                                                                                               −0.15
+
+
+
+
+                                                                                                                    ev
+                                                                                               −0.20
+                       2018−01−01   2019−01−01   2020−01−01   2021−01−01   2022−01−01                  2018−01−01   2019−01−01   2020−01−01   2021−01−01   2022−01−01
+
+                                                  Time                                                                            Time
+
+                                         (1) BTC/Copper                                                                    (2) BTC/Gas
+
+
+
+
+                                                                                      r
+                                                                           DCC                                                                             DCC
+                                                                           ADCC                                                                            ADCC
+
+
+
+                                                                                               0.15
+               0.15
+
+
+
+
+                                                                                   er          0.10
+               0.10
+               0.05
+
+
+
+
+                                                                                               0.05
+        corr
+
+
+
+
+                                                                                        corr
+                                                                     pe
+               0.00
+
+
+
+
+                                                                                               0.00
+               −0.05
+
+
+
+
+                                                                                               −0.05
+
+
+
+
+                       2018−01−01   2019−01−01   2020−01−01   2021−01−01   2022−01−01                  2018−01−01   2019−01−01   2020−01−01   2021−01−01   2022−01−01
+
+                                                  Time                                                                            Time
+                                                         ot
+
+                                          (3) BTC/Gold                                                                     (4) BTC/Oil
+       Notes: The solid and dotted lines denote the dynamic conditional correlations from the DCC and ADCC
+       models, respectively.
+                                         tn
+                          rin
+     ep
+Pr
+
+
+
+
+                                                                                   22
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+                                                                                                                               ed
+                                             Figure 3: Estimated Optimal Conditional Hedge Ratios
+
+
+
+
+                                                                                           0.6
+                                                                         DCC                                                                          DCC
+                                                                         ADCC                                                                         ADCC
+
+
+
+
+                                                                                                                            iew
+                                                                                           0.4
+             1.0
+
+
+
+
+                                                                                           0.2
+        HR
+
+
+
+
+                                                                                      HR
+             0.5
+
+
+
+
+                                                                                           0.0
+                                                                                           −0.2
+             0.0
+
+
+
+
+                                                                                                               ev
+                                                                                           −0.4
+                   2018−01−01   2019−01−01     2020−01−01   2021−01−01   2022−01−01               2018−01−01   2019−01−01   2020−01−01   2021−01−01   2022−01−01
+
+                                                Time                                                                         Time
+
+                                     (1) BTC/Copper                                                                   (2) BTC/Gas
+
+
+
+
+                                                                                    r
+                                                                         DCC                                                                          DCC
+                                                                         ADCC                                                                         ADCC
+             3
+
+
+
+
+                                                                                 er        1.0
+             2
+
+
+
+
+                                                                                           0.5
+        HR
+
+
+
+
+                                                                                      HR
+             1
+
+
+
+
+                                                                   pe                      0.0
+             0
+
+
+
+
+                                                                                           −0.5
+             −1
+
+
+
+
+                   2018−01−01   2019−01−01     2020−01−01   2021−01−01   2022−01−01               2018−01−01   2019−01−01   2020−01−01   2021−01−01   2022−01−01
+
+                                                Time                                                                         Time
+                                                       ot
+
+                                      (3) BTC/Gold                                                                    (4) BTC/Oil
+       Notes: The solid and dotted lines denote the estimated optimal conditional hedge ratios from the DCC and
+       ADCC models, respectively.
+                                     tn
+                      rin
+     ep
+Pr
+
+
+
+
+                                                                                 23
+
+
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=4355765
+

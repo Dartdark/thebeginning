@@ -1,0 +1,1105 @@
+                   ETF Flows and Stock Market Dynamics:
+              Patterns, Signals and Portfolio Construction Insights
+                      BARAHHOU Inès∗                                        ABITBOL Sacha†
+               ibarahhou@keplercheuvreux.com                           sabitbol@keplercheuvreux.com
+                                                      September 2026
+
+
+                                                           Abstract
+          The rapid growth of exchange-traded funds (ETFs) has raised important questions about the role of
+      ETF flows in the pricing and performance of underlying equities. Using the transparency of the ETF
+      structure, we examine the relationship between past ETF flows and subsequent stock returns. While
+      short-term mean reversion effects are well documented, evidence on longer-term effects remains limited.
+         Based on a broad dataset covering a substantial share of the global ETF market capitalization, we find
+      that flows from thematic and sectoral ETFs are associated with distinct return patterns across investment
+      horizons, with short-term reversal effects and longer-term trend-following dynamics particularly visible
+      in U.S. equities.
+         Building on these findings, we construct a systematic cross-sectional equity signal that combines short-
+      and long-horizon ETF flow information. The resulting portfolios exhibit meaningful return dispersion and
+      low correlation with traditional equity factors, suggesting that ETF flows may provide a complementary
+      source of information for stock selection and systematic portfolio construction. The effects are weaker in
+      European equities, where ETF ownership remains lower.
+
+    Keywords– ETF, ETF flows, ETF ownership, factor investing, smart beta, cross-sectional stock returns, thematic
+investing, portfolio construction
+
+
+
+
+   ∗ Advisory & Quantitative Solutions at Kepler Cheuvreux Solutions
+   † Junior Quantitative Analyst at Kepler Cheuvreux Solutions
+
+      All views expressed in this article are those of the authors and do not represent the views of Kepler Cheuvreux or any of its
+affiliates. This document does not constitute research under MAR or MiFID delegated regulations and has not been prepared
+in accordance with regulatory requirements to promote the independence of investment research. Consequently, the authors
+may not possess a professional financial analyst card as defined by Article 312-20 of the “Réglement général de l’AMF”.
+
+
+                                                                1
+1       Introduction
+    As many segments of the market seem to become more flow-driven than fundamentally driven, an expanding
+strand of the academic literature has focused on the impact of fund flows on underlying equity markets. Whether in
+the context of mutual funds or ETFs, this issue has been a key concern for researchers for years.
+     Prior research has examined the impact of mutual fund flows on the returns of underlying securities. Warther
+(1995) is among the first to examine the relationship between mutual fund flows and subsequent security returns.
+He studies this link across equities, bonds, and gold, and finds that unusually large inflows are contemporaneously
+associated with higher security returns. However, he reports little evidence that expected flows have predictive power
+for future returns. Coval and Stafford (2007) also document that large capital outflows force mutual funds to liquidate
+commonly held positions, generating significant downward price pressure, so-called “fire sales”, while large inflows
+similarly induce price pressure through coordinated purchases. Their evidence suggests that flow-induced trading can
+temporarily push stock prices away from fundamentals, even in highly liquid equity markets. Beyond short-term price
+pressure, the authors provide evidence of a longer-term trend-following dynamic. When inflow-induced purchases are
+broad relative to available sellers, coordinated institutional trading creates persistent price distortions that endure
+for several months, typically around two quarters, and dissipate only slowly over subsequent quarters.
+    With the growing importance of the ETF market, several authors have extended similar analyses specifically to
+ETFs. Global ETF assets under management reached an all-time high of $18 trillion in 20251 , following a prolonged
+period of exponential growth. Over the past decade, investors have increasingly adopted the ETF vehicle, attracted
+by its transparency, tax efficiency, cost efficiency, and intraday trading. The ETF market has evolved substantially
+and now spans virtually all major asset classes. It enables investors to access far more than traditional market
+benchmarks, offering exposure to factor strategies, thematic investments, and quantitative approaches, among others.
+More recently, the expansion of ETF assets under management has been driven in part by the development of active
+ETFs, which blend active portfolio management with the liquidity, transparency, and operational efficiency of the
+ETF structure. This fast-growing segment has outpaced the broader ETF market and encouraged new entrants to
+launch products within the ETF ecosystem.
+    From an academic perspective, the effect of ETF flows on the underlying equity market is of particular interest.
+Owing to their high level of transparency, ETFs provide granular data that facilitate empirical investigation. Fur-
+thermore, in contrast to mutual fund flows which may be partially absorbed through cash holdings, ETF flows
+mechanically result in proportional investment and divestment across the entire underlying portfolio.
+    As highlighted by Ben-David, Franzoni and Moussawi (2017), ETFs can have two opposing effects on stock prices.
+The additional liquidity they provide can enhance price discovery in the underlying securities, making prices more
+informative. At the same time, ETF trading that is not driven by fundamentals may spill over to the underlying
+securities, and potentially leading to mispricing. The authors suggest that these two opposing effects can occur
+simultaneously.
+    Several studies provide evidence that ETF flows generate non-fundamental price effects on underlying securities.
+Da and Shive (2018) show that ETF arbitrageurs act as a transmission channel for non-fundamental shocks to the
+equity market. As a result, stocks included in ETFs display stronger comovement, driven by investor reactions to
+index-related information rather than firm-specific news. Prior research also documents that ETF-induced trading
+activity can create temporary price pressure at the underlying securities level, which is followed by price reversals.
+Using an ETF flow definition that differs from ours, Staer (2017) finds evidence of a price reversal effect that fades
+after a few days. Likewise, Sandberg (2018) develops a model of ETF-induced price impact and documents a modest
+and transitory effect on underlying securities. The author further demonstrates that incorporating an ETF flow
+sensitivity factor into portfolio construction improves risk-adjusted performance.
+    While the literature has extensively documented short-term, non-fundamental price effects of ETF flows, evidence
+on their role in reinforcing longer-term market trends remains limited. The Deutsche Bundesbank, in its October 2018
+Monthly Report (Deutsche Bundesbank 2018), warned that ETFs could amplify market movements during periods
+of correction. The report highlights that procyclicality in ETF investing can amplify existing market trends, as
+passive portfolio rebalancing may trigger mechanical selling of underlying securities following price declines, thereby
+reinforcing market movements and potentially increasing systemic risk during periods of stress.
+    Van der Beck, Bouchaud and Villamaina (2024) document that investors struggle to distinguish between flow-
+driven and fundamental returns, thereby reinforcing self-inflated returns through performance-chasing behaviour.
+The authors introduce the concept of Ponzi funds, showing that some investors are effectively chasing their own price
+impact. Studies pointing to increased comovement are also consistent with a trend-following mechanism.
+    This paper makes several contributions to the literature. First, it documents a short-horizon reversal pattern
+associated with ETF flows. Second, it shows that the predictive content of ETF flows differs materially across ETF
+types: longer-horizon positive return predictability is concentrated in flows from thematic and sectoral ETFs, while it
+is not robustly observed for the broader ETF universe. Third, it documents systematic behavioural patterns among
+ETF investors. Finally, it demonstrates that the information embedded in ETF flows can be exploited to construct
+economically meaningful signals for equity portfolio managers.
+    Most existing studies rely on substantially less comprehensive datasets and focus primarily on ETFs listed in the
+United States. To our knowledge, this study is the first to use a dataset of this breadth and to analyse ETF flows
+across a global universe of ETFs. While most studies also omit data on delisted ETFs, we were able to incorporate
+them into our analysis, thereby limiting survivorship bias.
+
+
+2       Materials and Methods
+2.1     Data
+2.1.1    Data source
+   This study relies on ETF data provided by Trackinsight. As of 02/01/2026, the database covers 18,803 ETFs
+worldwide, of which 13,830 are currently open, while the remainder have been delisted. Delisted ETFs are kept in
+    1 According to Trackinsight
+
+
+
+
+                                                          2
+the sample in order to mitigate survivorship bias and enable point-in-time analysis. The database comprises three
+categories of data :
+   1. Reference data, including 40 technical attributes (e.g., dividend policy, replication method, benchmark index)
+      and 31 fields describing ETF strategies (e.g., asset class, thematic focus, sector exposure).
+   2. Daily time series, covering Net Asset Value (NAV), shares outstanding, dividends, splits, and flows.
+   3. Detailed holdings information for physically replicated ETFs, updated on a monthly basis.
+    Synthetic ETFs are excluded from the analysis because their flows do not necessarily translate directly into
+trading in the underlying stocks. The analysis period starts on 01/06/2020, corresponding to the earliest availability
+of holding data in our database.
+    Active exchange-traded funds (ETFs) are included in our sample, as they represent 31% of the ETFs in our
+database and account for approximately 10% of total assets under management. Their inclusion allows us to capture
+a broader measure of ETF-related ownership and, consequently, to better assess the aggregate effect of ETF activity
+on individual securities. It is important, however, to acknowledge the structural differences between active and passive
+ETFs. In particular, portfolio construction in active ETFs may lead to different portfolio adjustment dynamics in
+response to inflows and outflows.
+
+2.1.2    ETF Ownership: Data and Stylized Facts
+    Our analysis focuses on S&P 500 constituents, with index membership updated monthly to reflect delistings
+and merger-and-acquisition events occurring between quarterly rebalancings. We focus on U.S. equities, as ETF
+ownership is significantly more important in the United States than in Europe. We define ETF ownership as the
+proportion of a company’s market capitalization held by ETFs :
+                                                          P
+                                                            j=1 wi,j ∗ aumj
+                                       ETF ownershipi =                                                    (1)
+                                                                 mci
+    where wi,j represents the weight of the company i in the ETF j, aumj represents the asset under management
+of ETF j and mci represents the market capitalization of the company i.
+     Figure 1 shows the distribution of ETF ownership among S&P 500 and STOXX 600 constituents. ETF ownership
+is significantly more prevalent in U.S. equities than in European equities, with median ownership of 16% for the S&P
+500 versus 6.1% for the STOXX 600.
+
+           Figure 1: Distribution of ETF Ownership among S&P 500 and STOXX 600 companies
+
+
+
+
+                                                                 Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+   Hence, the disparity between Europe and the United States is substantial. ASML, one of the European companies
+with the highest level of ETF ownership, has only 8.5% of its market capitalization held by ETFs, well below the
+median level observed among S&P 500 constituents.
+    An analysis of the time series dynamics of ETF ownership on the S&P 500 reveals a persistent increase in ETF
+stakes over time, as documented in Table 1. This trend underscores the growing influence of ETFs on the equity
+market and suggests that ETF ownership is becoming an increasingly significant factor in the valuation and liquidity
+of S&P 500 stocks.
+    These trends provide a natural motivation for examining whether ETF flows have a measurable impact on the
+return dynamics of individual stocks. These findings suggest that if signals derived from ETF activity can be used
+to identify US equity selection opportunities today, their relevance may strengthen over time as ETF ownership
+continues to expand.
+    Given that the United States can be viewed as a leading laboratory for ETF innovation and adoption, it is
+reasonable to expect that ETFs will exert an increasingly significant influence on stock returns across other geographies
+in the near future. As ETF penetration deepens in Europe, similar dynamics may emerge, potentially allowing for
+the application of comparable analytical frameworks to European equities.
+   Another interesting stylised fact emerging from our analysis is that ETF ownership of stocks associated with
+popular thematic segments tends to increase faster than for the broader market. Figure 2 shows the evolution of
+
+
+                                                           3
+                 Table 1: Distribution of ETF Ownership among S&P 500 Constituents (%)
+
+                                Year    First quartile    Median      Third Quartile
+                                2020          9.9          11.5            13.5
+                                2021         10.2          12.0            14.3
+                                2022         10.9          12.9            15.3
+                                2023         11.7          13.8            15.7
+                                2024         12.3          14.7            16.8
+                                2025         13.6          16.0            18.1
+
+
+
+ETF ownership in Aerospace & Defence stocks relative to the rest of the market. As this theme gained popularity
+among investors, ETFs accumulated positions in Aerospace & Defence companies at a markedly faster pace than in
+other sectors. This pattern suggests that emerging investment trends become visible relatively quickly in ETF data.
+
+      Figure 2: Indexed Evolution of Average ETF Ownership for Defence Companies and the S&P 500
+
+
+
+
+                                                                Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+
+2.2     Methodology
+2.2.1    Classification of ETFs
+    Following Ben-David, Franzoni, Kim and Moussawi (2022), we classify ETFs according to their investment ob-
+jectives, and distinguish four categories :
+   1. Thematic ETFs, as defined by the Trackinsight classification,
+   2. Sectoral ETFs, which track one or multiple sectors,
+   3. Smart beta ETFs, as identified by Trackinsight,
+   4. Other ETFs.
+    We adopt this categorisation to differentiate between market-access ETFs and specialised ETFs. The rationale is
+that flows into specialised ETFs may carry stronger informational content, as they more directly capture investors’
+underlying preferences. It is also worth noting that there is no overlap between sectoral and thematic ETFs in our
+methodology. We adopt this classification based on the intuition that strong trend-following behaviour can emerge in
+ETF markets, as observed during episodes such as the technology rally in 2024 or the defence sector boom in 2025.
+To assess this effect, we compute a correlogram based on Spearman rank correlations, which clearly highlights the
+presence of trend-following dynamics. Specifically, we examine the relationship between ETF flows into individual
+stocks over horizons ranging from 1 to 12 months and their subsequent monthly returns.
+    Depending on the specification, we consider either the full universe of ETFs or restrict to thematic and sectoral
+ETFs. We define ETF-induced flows for a given stock as :
+                                                    P
+                                                       j∈J wi,j,t−m ∗ f lowj, [t−m, t−1]
+                                ET F P ressurei,t =                                                               (2)
+                                                                  mci,t−1
+    where t denotes the beginning of a calendar month, J denotes the set of ETFs considered, wi,j,t−m is the weight
+of company i in ETF j at the start of the month preceding t, f lowj, [t−m, t−1] represents cumulative net flows into
+ETF j over that month, and mci,t−1 denotes the last market capitalization of the company i before date t.
+    This metric measures, for each stock at a given point in time, the cumulative pressure exerted over the past month
+through ETF flows. It reflects the extent to which a stock is exposed to buying or selling pressure associated with
+capital movements into and out of the ETFs that hold it.
+   Flows are computed from ETF share creations and redemptions in the market. We focus exclusively on primary
+market flows and disregard secondary market transactions, making our measure conceptually comparable to mutual
+fund flows, although structurally different. Since each secondary market trade involves a buyer and a seller for the
+
+
+                                                          4
+same quantity, these transactions do not represent directional bets at the aggregate level. Accordingly, we focus
+exclusively on net primary market inflows and outflows:
+
+                                      f lowj,t = N AVj,t ∗ (N OSj,t − N OSj,t−1 )                                      (3)
+    where t denotes a given date, f lowj,t captures net creations or redemptions in ETF j, computed as the change
+in shares outstanding scaled by its net asset value, with N AVj,t denoting the ETF’s net asset value and N OSj,t its
+number of shares outstanding.
+    Daily flows are aggregated to the monthly level. The following measure then captures the total net inflow or
+outflow into ETF j over the month preceding the date t:
+                                                                 t−1
+                                                                 X
+                                          f lowj, [t−m,t−1] =            f lowj,δt                                     (4)
+                                                                δt=t−m
+
+
+   To assess whether each ETF category defined in our classification framework exerts a similar impact on the equity
+market, we conduct two sets of analyses: one based on the full dataset and another restricted to thematic and sectoral
+ETFs.
+
+        Figure 3: Spearman correlations of past cumulative ETF-induced flows and monthly returns
+
+
+
+
+                                                                   Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+    Although the correlations are relatively small, the correlogram provides several informative insights. First, we
+observe a negative relationship between past ETF flows and subsequent returns over short horizons (1 to 5-6 months).
+This pattern is well documented in the academic literature. We observe this pattern both when flows are aggregated
+across the full dataset and only within the subsample of thematic and sectoral ETFs. At longer horizons (6–12
+months), a trend-following effect appears, but only for flows from thematic and sectoral ETFs. Smart beta ETFs do
+not exhibit any distinct behaviour in our analysis, and we therefore exclude this category as a stand-alone group and
+merge it with the Other ETF category from the remainder of the analysis.
+    The correlogram analysis then suggests that flows into sectoral and thematic ETFs are more informative than
+flows into non-specialised ETFs. While this analysis provides useful intuition, these effects are formally tested and
+confirmed in the empirical results section.
+    Another behavioural pattern highlighted by our empirical analysis in Figure 4 is that ETF investors tend to
+allocate capital to recently well-performing products, indicating a pronounced trend-following behaviour.
+
+
+
+
+                                                           5
+               Figure 4: Spearman correlations of returns and subsequent ETF-induced flows
+
+
+
+
+                                                                      Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+    This effect has already been documented in the literature by Clifford, Fulkerson and Jordan (2014), who provide
+evidence of return-chasing behaviour among ETF investors. Coval and Stafford (2007) demonstrate that past per-
+formance is a significant driver of subsequent capital flows in the mutual fund industry. From this perspective, we do
+not detect any meaningful behavioural difference between mutual fund and ETF investors, as flows in both segments
+respond similarly to past returns.
+
+2.2.2    Model
+   We formally examine the relationship suggested by the correlograms between past cumulative ETF pressure and
+subsequent stock returns, with the aim of providing rigorous statistical evidence to validate the observed patterns
+and assess their relevance for empirical research and practical applications.
+    The correlation analysis indicates that flow variations associated with thematic and sectoral ETFs contain sub-
+stantially more informational content, whereas flows from other ETF categories exhibit weaker and less systematic
+relationships with returns. Accordingly, the subsequent empirical analysis concentrates on these two specifications,
+as the regression framework incorporates pressure features constructed either from the full universe of ETFs or
+exclusively from the thematic and sectoral ones, allowing for a direct comparison of their relative explanatory power.
+    Rather than including all accumulation horizons simultaneously in a single regression, we estimate a separate
+regression for each horizon. This approach avoids introducing highly correlated explanatory variables arising from
+overlapping flow-accumulation windows and allows the effect associated with each horizon to be assessed independ-
+ently. Consistent with the correlogram analysis, this approach allows us to study the relationship between returns
+and cumulative flows at each horizon individually, with the objective of isolating and quantifying the statistical
+contribution of each phenomenon separately, improving overall interpretability.
+   Let ri,[t, t+m] denote the return of stock i during the month following date t, and let ET F P ressure i, [t−n·m, t]
+denote the cumulative ETF pressure on stock i during the n months preceding the date t :
+                                                                n−1
+                                                                X
+                                ET F P ressurei, [t−n·m, t] =         ET F P ressurei,t−k·m                               (5)
+                                                                k=0
+
+                                                           M kt
+     We also control for aggregate market conditions. Let r[t, t+m] denote the return of the market during the month
+following date t, measured by the return on the S&P 500 in our empirical specification.
+    For each time lag n, we estimate the following regression across stocks and time:
+                                                                                 M kt
+                       ri,[t, t+m] = α + β · ET F P ressure i, [t−n·m, t] + γ · r[t, t+m] + ϵi,t                          (6)
+   where i indexes stocks, t indexes time, n denotes the length of the accumulation window in months, α is a
+constant, β measures the sensitivity of stock returns to cumulative ETF-induced pressure, γ controls for market-wide
+movements, and εi,t is an idiosyncratic error term.
+    Standard errors are computed under asymptotic normality assumptions, and all statistical tests are two-sided.
+    We account for aggregate market movements by including a market return control in the regression. Rather than
+modelling raw stock returns, we focus on returns net of broad market fluctuations. The coefficient γ captures the
+contribution of market-wide movements, so that the estimation of β relies on variation in stock returns beyond the
+market component. Empirically, omitting this control leads to lower statistical precision, indicating that accounting
+for market dynamics materially reduces noise. Overall, this specification allows us to estimate the cross-sectional
+effect associated with ETF-induced pressure across stocks.
+
+
+3       Empirical results
+3.1     Statistical analysis
+   To validate the intuition outlined in section 2.2.2, we estimate the model specified in Equation 6 using the
+Trackinsight database. We first conduct the analysis on the full sample of ETFs and subsequently restrict the universe
+
+
+                                                            6
+to sectoral and thematic ETFs to examine whether the long-term momentum effect is particularly pronounced within
+this subset from a statistical perspective.
+    We begin by conducting the regression analysis on the full ETF universe. Table 2 reports the estimation results
+of the regressions specified in Equation 6, where ETF pressures are aggregated over horizons ranging from one to
+twelve months.
+    We estimate Equation 6 separately for each accumulation window n ranging from one to twelve months, to avoid
+including highly correlated ETF-pressure measures constructed over overlapping horizons in the same regression. To
+account for aggregate market movements, we include a market return control so that identification primarily relies
+on cross-sectional variation in stock returns beyond the market component. Confidence intervals are reported at the
+90% level and are consistent with the statistical significance indicated by the p-values. We adopt a 10% significance
+level in our regressions, which is standard practice in empirical finance studies of this type.
+
+
+                        Table 2: Regression Results across Horizons (S&P 500, All ETFs)
+
+     Horizon     Coefficient     Standard Error        p-value      90% Confidence Interval         R2      Observations
+        1          -1.03**              0.46             0.03             [-1.79, -0.27]           0.22         23,097
+        2          -0.56**              0.28             0.04             [-1.02, -0.10]           0.22         23,094
+        3           -0.36*              0.21             0.08             [-0.70, -0.02]           0.22         23,091
+        4            -0.18              0.17             0.28              [-0.45, 0.09]           0.22         23,087
+        5          -0.28**              0.14             0.05             [-0.51, -0.05]           0.22         23,083
+        6          -0.27**              0.12             0.03             [-0.47, -0.07]           0.22         23,078
+        7           -0.19*              0.11             0.08             [-0.36, -0.01]           0.22         23,072
+        8            -0.01              0.10             0.96              [-0.17, 0.16]           0.22         23,067
+        9            0.00               0.09             0.96              [-0.15, 0.14]           0.22         23,062
+        10           0.09               0.08             0.27              [-0.05, 0.23]           0.22         23,056
+        11         0.17**               0.08             0.04               [0.04, 0.30]           0.22         23,037
+        12           0.02               0.08             0.82              [-0.11, 0.14]           0.22         22,564
+
+      Notes: *, **, and *** denote statistical significance at the 10%, 5%, and 1% levels, respectively. All tests are two-sided.
+
+
+
+    The results reveal a clear asymmetry between short and long horizon effects. At short horizons, estimated
+coefficients are consistently negative, economically meaningful, and statistically significant at the 5% and 10% levels.
+Confidence intervals lie predominantly below zero, providing robust evidence of a short-term reversal effect. This
+pattern is strongest over horizons ranging from one to six months and remains detectable, though weaker, up to
+approximately eight months.
+    In contrast, there is little evidence of a statistically robust long-term effect. At longer horizons, estimated
+coefficients are small in magnitude and confidence intervals mostly span both sides of zero, indicating a lack of
+reliable directional relationship. Although a positive coefficient appears at the eleven-month horizon, this isolated
+result is not sufficient to support the existence of a persistent long-term effect. We do not observe any contiguous
+range of horizons over which coefficients are both positive and statistically significant.
+    The explanatory power of the regressions remains stable across specifications, with R2 values around 22%. This
+level is consistent with the proportion of return variation typically captured by aggregate market movements. The
+objective of this analysis is not to maximise predictive performance, but rather to detect and assess the statistical
+significance of flow-driven effects. In that respect, the results are internally consistent: the short-term effect is clearly
+identified, whereas longer-term dynamics remain weak and statistically indistinguishable from noise.
+
+
+         Figure 5: Flow Coefficients and 90% Confidence Intervals by Horizon (S&P 500, All ETFs)
+
+
+
+
+                                                                      Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+
+                                                                7
+    The figure provides a visual confirmation of these results. Short-horizon coefficients are clearly negative and
+statistically significant, while longer-horizon estimates cluster around zero with wide confidence intervals. Overall,
+the evidence supports the presence of a short-term price pressure effect, with no robust indication of a persistent
+long-term relationship.
+    We next restrict the construction of ETF-induced pressure to thematic and sector-specific ETFs, in order to
+better capture flows reflecting investors’ targeted allocation decisions. We estimate the same regression specification
+as in the baseline case across all accumulation windows.
+
+             Table 3: Regression Results across Horizons (S&P 500, Thematic and Sectoral ETFs)
+
+    Horizon     Coefficient     Standard Error        p-value     90% Confidence Interval          R2      Observations
+        1           -0.83              0.78            0.29               [-2.10, 0.45]           0.22         22,212
+        2         -1.53***             0.50           < 0.01             [-2.35, -0.71]           0.22         22,210
+        3         -1.10***             0.38           < 0.01             [-1.71, -0.48]           0.22         22,208
+        4           -0.44              0.30            0.14               [-0.93, 0.05]           0.22         22,205
+        5         -0.66***             0.25           < 0.01             [-1.08, -0.24]           0.22         22,202
+        6           -0.29              0.22            0.19               [-0.65, 0.08]           0.22         22,198
+        7            0.04              0.20            0.84               [-0.29, 0.36]           0.22         22,193
+        8            0.29              0.18            0.11               [-0.01, 0.58]           0.22         22,189
+        9           0.29*              0.16            0.08                [0.01, 0.56]           0.22         22,185
+        10        0.41***              0.15           < 0.01               [0.16, 0.66]           0.22         22,180
+        11        0.49***              0.14           < 0.01               [0.26, 0.72]           0.22         22,158
+        12         0.31**              0.14            0.03                [0.08, 0.53]           0.22         21,702
+
+     Notes: *, **, and *** denote statistical significance at the 10%, 5%, and 1% levels, respectively. All tests are two-sided.
+
+
+
+    The results differ markedly from the baseline specification and reveal a clear and structured pattern across
+horizons. At short horizons, especially at two and three months, ETF-induced pressure is associated with negative
+and statistically significant coefficients at the 1% level. Confidence intervals lie entirely below zero, providing strong
+evidence of a short-term reversal effect. This suggests that stocks experiencing strong inflows from thematic and
+sectoral ETFs tend to underperform in the subsequent period, consistent with temporary price pressure.
+    In contrast, a distinct long-term effect emerges at longer horizons. From nine to twelve months, estimated coeffi-
+cients become positive, economically meaningful, and statistically significant at conventional levels. For example, the
+coefficient associated with ETF-induced pressure accumulated over a one-year horizon is statistically significant with
+a p-value of 0.03. Confidence intervals lie entirely above zero over this range, indicating a robust positive association
+between past ETF-induced pressure and subsequent returns. This pattern points to a longer-term effect in which
+flows into thematic and sectoral ETFs are associated with stocks that subsequently exhibit stronger performance.
+   Figure 6 then reports the estimated flow coefficients across all aggregation windows together with their 90%
+confidence intervals and indicates their statistical significance.
+
+Figure 6: Flow Coefficients and 90% Confidence Intervals by Horizon (S&P 500, Thematic & Sectoral ETFs)
+
+
+
+
+                                                                     Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+
+    The figure provides a clear visual confirmation of this dual structure. The separation between these regimes
+highlights the absence of a uniform effect across horizons and reinforces the presence of two distinct mechanisms.
+    Overall, ETF-induced flows from thematic and sectoral ETFs exhibit two distinct horizon-dependent effects. At
+short horizons, the results are consistent with temporary flow-induced price pressure that subsequently reverses. At
+longer horizons, they are positively associated with subsequent returns, suggesting that they reflect more persistent
+
+
+                                                              8
+allocation trends toward stocks that ultimately outperform. These findings indicate that ETF flows should be
+interpreted as a conditional cross-sectional signal whose economic impact depends critically on the investment horizon.
+    This distinction provides a natural foundation for strategy design, where short-term effects may be treated as
+transitory distortions, while longer-horizon flow information can be exploited as a signal of sustained investor demand.
+
+3.2     Temporal Structure and Oscillatory Patterns in Flow Effects
+    Correlograms and horizon-by-horizon regressions indicate that the relationship between ETF-induced flows and
+subsequent stock market returns is neither monotonic nor independent from one aggregation window to another,
+but rather oscillates between opposing phenomena. This dual structure is most clearly visible when ETF-induced
+pressure is constructed using thematic and sector-specific ETFs, and we therefore use the same pressure measure in
+the sinusoidal specification below.
+    To test formally for such an oscillatory structure, we model the horizon-dependent effect as a low-frequency
+sinusoidal function of the time lag n, and we weight lagged ETF pressures accordingly. The resulting empirical
+profile then resembles an oscillatory adjustment rather than a linear propagation of effects.
+   We incorporate this structure directly into the following regression by replacing the cumulative flow term in
+Equation 6 with a sinusoidally weighted sum of past ETF pressures:
+                                                12
+                                                X                                                  M kt
+                          ri,[t, t+m] = α + κ         cos(2πf n + ϕ) ET F P ressurei, t−n·m + γ · r[t, t+m] + ϵi,t ,                                  (7)
+                                                n=1
+    where i indexes stocks and t indexes dates, α is a constant, κ scales the amplitude of the oscillatory component,
+f is the frequency and ϕ is the phase shift, and εi,t is an idiosyncratic error term.
+   Rewriting the sinusoid using κ cos(x + ϕ) = βsin sin(x) + βcos cos(x), the specification can be rewritten in a form
+that is linear in parameters and therefore directly estimable by linear regression:
+
+                            12
+                                                                     !             12
+                                                                                                                             !
+                            X                                                      X                                                  M kt
+ ri,[t, t+m] = α+βsin ·          sin(2πf n) ET F P ressurei, t−n·m       +βcos ·         cos(2πf n) ET F P ressurei, t−n·m       +γ ·r[t, t+m] +ϵi,t . (8)
+                           n=1                                                     n=1
+
+
+ where i indexes stocks and t indexes dates, α is a constant, βsin and βcos scale the amplitudes of the oscillatory
+components, f is the frequency, and εi,t is an idiosyncratic error term.
+    The frequency f is selected via a grid search, and the amplitude and phase of the sinusoid are recovered from the
+estimated coefficients (βsin , βcos ).
+    This specification evaluates the statistical link between returns and a low-frequency Fourier representation of
+ETF-induced pressures. The objective is to determine whether the horizon-dependent structure observed in the
+baseline regressions can be parsimoniously summarized by a single oscillatory component. From an investment
+perspective, this parsimonious representation is particularly useful, as it allows the temporal structure of flow effects
+to be summarized by a small number of interpretable parameters, facilitating implementation in systematic allocation
+frameworks.
+    Figure 7 presents the cumulative sinusoidally weighted flow coefficients implied by the regression, together with
+their 90% confidence intervals.
+
+                Figure 7: Sinusoidal Fit of Flow Effects (S&P 500, Thematic and Sectoral ETFs)
+
+
+
+
+                                                                                   Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+
+    The figure confirms that the relationship between ETF-induced pressure and subsequent returns follows a struc-
+tured oscillatory pattern across horizons. The key point is that the transition from a fully negative regime to a fully
+positive one is consistent with the estimated oscillatory period of 16 months, i.e. 8 months between two extremes.
+    The sinusoidal regression provides direct statistical support for this interpretation. Both βsin and βcos are
+significant at the 1% level, indicating that the oscillatory component is itself statistically significant. In other words,
+the cyclical structure observed in the horizon-by-horizon regressions is not a visual artefact, but a measurable feature
+of the data.
+
+
+                                                                            9
+    The specification also improves explanatory power. The adjusted R2 rises, to approximately 23%, indicating that
+returns are better explained when ETF-induced pressure is weighted according to this estimated temporal structure
+than when pressures are accumulated uniformly across months. This result is economically intuitive. If flow effects
+alternate across horizons, imposing equal weights across lags necessarily masks part of the signal.
+    Overall, the sinusoidal specification shows that ETF-induced pressure does not affect returns in a uniform way
+over time. Its effect evolves in a systematic cycle, consistent with the coexistence of short-term price pressure and
+longer-horizon allocation effects.
+
+3.3     An Application to Equity Portfolio Management
+3.3.1   Simulation of historical performances
+    Our statistical analysis indicates that ETF flows contain measurable information about subsequent stock returns
+within the S&P 500 universe. This finding has material implications for equity portfolio managers operating in this
+market. Accordingly, we conduct a backtest of our proposed signal to evaluate its economic relevance and practical
+usefulness from a portfolio management perspective.
+    We combine the two effects identified in the statistical analysis to exploit both patterns observed in the data. The
+long portfolio targets stocks that have experienced substantial ETF inflows over the past year but limited inflows
+over the most recent three months, while the short portfolio focuses on the opposite configuration.
+    In accordance with the results of the statistical analysis, the signal is constructed exclusively from flows into
+thematic and sectoral ETFs. We implement a long–short equity strategy using a portfolio construction approach
+similar to that employed in the development of Fama–French factors. To mitigate potential backtest overfitting,
+we retain a twelve-month window to capture the long-term pressure effect component and a three-month window
+to capture the short-term component, although alternative horizons (11 and 2 months) produce slightly stronger
+statistical results.
+    ETF flows measured over three- and twelve-month horizons are scaled by market capitalization and converted
+into cross-sectional z-scores. The signal is defined as the difference between the twelve-month and three-month
+standardized pressure measures:
+
+                       St = Z CS ET F P ressure ·, [t−12·m, t] − Z CS ET F P ressure ·, [t−3·m, t]
+                                                                                                  
+                                                                                                                       (9)
+
+   where for any cross-sectional vector X ∈ Rn ,
+
+                                                                 Xi − X̄
+                                                  Z CS (X)i =
+                                                                  σ(X)
+   where i indexes stocks, and X̄ and σ(X) denote the cross-sectional mean and standard deviation of X.
+   Stocks in the S&P 500 are ranked according to this signal. The long (short) portfolio comprises the 50 stocks
+with the highest (lowest) signal values. Portfolios are rebalanced monthly and equally weighted.
+    The backtests presented here are purely hypothetical. In certain market conditions, implementing the short leg of
+the strategy may not be feasible in practice. The purpose of this exercise is therefore not to propose an immediately
+implementable trading strategy, but rather to demonstrate that the signal is informative and potentially valuable for
+equity stock selection.
+    Figure 8 indicates that the signal is informative on both the long leg and short leg. The long leg outperforms the
+S&P 500 Equally Weighted, while the short leg exhibits pronounced underperformance, clearly identifying stocks to
+avoid for users of the signal.
+
+           Figure 8: Performance of the Long and Short Portfolios based on the ETF Flow Signal
+
+
+
+
+                                                                   Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+    Table 4 shows that the long leg outperforms the benchmark by 7.6% per year, while the short leg underperforms
+by 10.3% per year. The long leg exhibits a higher Sharpe ratio than the S&P 500 Equally Weighted, while the short
+leg performs substantially worse on a risk-adjusted basis.
+
+
+
+
+                                                            10
+                     Table 4: Performance Statistics of the Long and Short Portfolio Legs
+                                              Long Leg     Short Leg     S&P 500 Equally Weighted
+              Annualized Return (%)            13.44%        -4.45%               5.82%
+              Annualized Volatility (%)        20.63%       19.47%               17.35%
+              Maximum Drawdown (%)             -23.56%      -30.58%              -21.59%
+              Sharpe Ratio                       0.49         -0.40                0.14
+
+
+    Examining the performance of the long–short portfolio in isolation is particularly informative and suggests the
+presence of a distinct risk premium. The volatility of the long–short portfolio is relatively high, reflecting the
+instability of its market beta. This outcome is not surprising given the construction of the strategy. The long leg
+tends to exhibit a low beta when defensive sectors, such as Utilities or Healthcare, experience substantial inflows.
+Conversely, it tends to display a higher beta when cyclical sectors or themes, for instance Technology, attract strong
+investor demand.
+
+             Figure 9: Performance of the Long/Short Portfolios based on the ETF Flow Signal
+
+
+
+
+                                                                Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+    The long–short strategy achieves a Sharpe ratio of 0.98, substantially exceeding the 0.14 Sharpe ratio of the
+equally weighted S&P 500 benchmark. This finding underscores the informational value of ETF flow–based signals
+for equity portfolio management.
+
+                Table 5: Performance Statistics of the Long–Short Strategy and Benchmarks
+                                          Long-Short     S&P 500 Equally Weighted          Risk-Free Rate
+          Annualized Return (%)             17.57%                5.82%                        3.42%
+          Annualized Volatility (%)         14.38%               17.35%                        0.15%
+          Maximum Drawdown (%)             -15.96%               -21.59%                       0.00%
+          Sharpe Ratio                       0.98                  0.14                         0.00
+          Beta                               0.06                  1.00                         0.00
+
+3.3.2   Out-of-sample performance since model specification
+    The signal specification and portfolio construction rules described above were fixed using data available through
+December 2025. We therefore extend the analysis from January 2026 to August 2026 without re-estimating the model
+or modifying the signal definition, ranking methodology, portfolio size or rebalancing frequency. This post-sample
+period provides an additional assessment of the signal on data that were not used in its original specification.
+   Figure 10 extends Figure 8 over the whole 2021–2026 window, the shaded area marking the out-of-sample period,
+and Figure 11 shows that period on its own.
+
+
+
+
+                                                         11
+           Figure 10: Performance of the Long and Short Portfolios, In-Sample and Out-of-Sample
+
+
+
+
+                                                                  Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+
+
+           Figure 11: Performance of the Long and Short Portfolios over the Out-of-Sample Period
+
+
+
+
+                                                                  Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+    Table 6 shows that the long leg outperformed the equally weighted benchmark by 10.8 percentage points over the
+eight-month period, while the short leg performed broadly in line with the benchmark. Two sector exposures help
+explain the strategy’s performance. In the opening months of 2026, the short portfolio was heavily exposed to energy
+stocks, following a period of strong ETF inflows into the sector in the aftermath of the U.S. intervention in Venezuela.
+The subsequent escalation of tensions in the Middle East, however, triggered a sharp increase in crude oil prices,
+sustaining both investor flows and energy-sector returns rather than allowing the expected reversal to materialize.
+This exogenous shock therefore temporarily disrupted the mean-reversion mechanism underlying the signal. From
+January to March, the short portfolio gained 18.4%, compared with only 0.7% for the equally weighted benchmark,
+resulting in a 13.7% loss for the long–short strategy.
+     The strategy subsequently recovered, supported by its changing exposure to technology stocks. The long portfolio
+was significantly exposed to the technology sector in April and May, before the signal reversed and turned negative
+on the sector in July, shortly before the market correction. From April onwards, the long portfolio returned 24.3%,
+compared with 16.1% for the equally weighted benchmark, while the long–short strategy gained 25.8%. This episode
+illustrates the ability of the signal to adjust to changing flow dynamics, shifting from a positive to a negative exposure
+as investor positioning evolved.
+
+
+                   Table 6: Out-of-Sample Performance Statistics (January to August 2026)
+                                       Long Leg      Short Leg     Long-Short      S&P 500 Equally Weighted
+        Cumulative Return (%)           27.59%        15.97%          8.54%                16.82%
+        Annualized Return (%)           46.78%        26.29%         13.77%                27.75%
+        Annualized Volatility (%)       12.95%        15.72%         18.80%                11.99%
+        Maximum Drawdown (%)            -4.63%        -6.90%        -13.45%                -7.86%
+        Sharpe Ratio                     3.33           1.44            0.54                2.01
+        Beta                             0.69          0.72            -0.03                 1.00
+
+
+
+3.3.3    Case studies
+    Having established the aggregate performance of the strategy, we now examine its behaviour at the thematic and
+sectoral level. The objective of this section is to assess whether the signal captures economically meaningful trends
+
+
+                                                           12
+within major thematic segments of the equity market and whether portfolio exposures adjust in a manner consistent
+with the underlying return dynamics.
+   To link companies to sectors and themes, we assign each company to the sector/theme to which it is most exposed,
+based on Trackinsight’s tagging at the ETF level.
+    We first consider the Artificial Intelligence & Big Data theme, comprising 73 stocks that were constituents of the
+S&P 500 at some point during the five-year sample period. This sector provides a particularly informative setting
+given its pronounced performance cycles and persistent ETF-related capital flows.
+    Figure 12 presents four complementary panels. The top-left panel displays the cumulative returns of the basket
+of Artificial Intelligence & Big Data constituents within the S&P 500, together with the average performance of the
+stocks belonging to the theme that are included in the long leg and, respectively, in the short leg, in order to assess the
+strategy’s stock-selection ability. The top-right panel displays the number of components of the sector held in each leg
+alongside the cumulative performance of the sector within the S&P 500, to assess the strategy’s timing capacity. The
+bottom-left panel displays the cross-sectional median and min–max range of ETF pressure across sector constituents.
+The bottom-right panel displays the corresponding cross-sectional median and min–max range for the standardized
+pressure differential signal Sm defined in Equation 9.
+
+
+ Figure 12: Artificial Intelligence & Big Data Sector: Performance, Exposures, and Flow-Based Measures
+
+
+
+
+                                                                   Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+
+    The top-left panel indicates that the long leg captures the major upward phases of the sector and materially
+outperforms the equally weighted sector benchmark during prolonged upswings. Symmetrically, the short leg exhibits
+pronounced underperformance during sector expansions and tends to identify stocks that subsequently lag the broader
+thematic universe. This asymmetric behaviour suggests that the signal effectively differentiates between persistent
+inflow-driven strength and more transient pressure dynamics.
+    The top-right panel provides further information on portfolio construction. Periods of strong sector momentum
+are associated with a deliberate and economically coherent concentration of holdings. For example, at the end of
+2022, 64% of the short portfolio (32 stocks) consisted of Artificial Intelligence & Big Data constituents. This elevated
+exposure preceded a marked relative decline in sector performance. By contrast, from mid-2024 through 2025, the
+long leg’s exposure increased substantially, reaching 58% of the long portfolio (29 stocks) during a period of prolonged
+sector appreciation. These allocation patterns indicate that the strategy adjusts exposures consistently with evolving
+ETF pressure dynamics.
+    The bottom panels clarify the informational role of the underlying measures. The ETF pressure envelope reflects
+fluctuations in normalised flow intensity across sector constituents. Although informative regarding dispersion, this
+measure alone does not fully reveal directional structure. In contrast, the standardized pressure differential signal
+exhibits clearer trend formation. Periods in which short-term pressure dominates longer-term accumulation coincide
+with deteriorating relative performance and increasing short exposure, whereas phases characterised by strong twelve-
+month accumulation and subdued recent pressure align with expanding long allocations.
+    Taken together, these panels show the internal mechanics of the signal within a long-horizon investment frame-
+work. At each rebalancing date, the strategy incorporates the cumulative information embedded in one year of ETF
+activity while penalising short-term pressure imbalances. Portfolio decisions therefore emerge from the interaction
+of the two components: securities experiencing disproportionate short-term inflows relative to longer-term trends
+are de-emphasised or shorted, whereas those exhibiting sustained accumulation without excessive recent pressure are
+favoured.
+    To assess whether these dynamics extend to sectors with different structural characteristics, we next examine
+the Aerospace & Defence sector. This universe is smaller, comprising 13 stocks that were constituents of the S&P
+500 at some point over the sample period. In recent years, the sector has experienced substantial inflows driven
+by heightened geopolitical tensions and increased defence spending. Its policy-sensitive and capital-intensive profile
+offers a distinct testing ground for the signal’s responsiveness.
+
+
+
+
+                                                            13
+        Figure 13: Aerospace & Defence Sector: Performance, Exposures, and Flow-Based Measures
+
+
+
+
+                                                                 Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+
+    Immediately following the outbreak of the war in Ukraine, substantial inflows into the defence theme were ob-
+served. Given the unusually strong nature of these flows, companies exposed to the theme were added to the short leg.
+From late 2022, the Aerospace & Defence sector recorded a pronounced acceleration in ETF inflows, accompanied
+by strong cumulative performance through to the end of 2024. Over this period, the long leg closely mirrored the
+sector’s upward trajectory, capturing most of its appreciation. This pattern is consistent with the signal identifying
+stocks exposed to sustained capital allocation within the thematic universe.
+    From early 2025, ETF flows became more volatile. This shift was reflected in increased variability of the stand-
+ardised pressure differential signal and resulted in more frequent portfolio rebalancing. Sector exposure within the
+long leg was periodically reduced and, at times, transferred to the short leg, indicating the signal’s sensitivity to
+reversals in short-term pressure relative to longer-term accumulation dynamics.
+    As Aerospace & Defence companies included in the short leg significantly underperformed the sector’s average
+performance, the long leg began to underperform as flows became more erratic. The dispersion envelope indicates
+a widening in cross-sectional flow heterogeneity beginning in late 2022, followed by elevated variability from early
+2025 onwards. The signal responds asymmetrically to these changes, strengthening when twelve-month accumulation
+prevails and adjusting rapidly when short-term pressure intensifies. The renewed increase observed towards the end
+of 2025 is consistent with a re-emergence of sustained accumulation.
+    Taken together, the two case studies reveal complementary features of the framework. In a broad, innovation-
+driven sector such as Artificial Intelligence & Big Data, the signal captures medium-term thematic cycles and real-
+locates capital progressively. In a narrower and policy-sensitive sector such as Aerospace & Defence, it reacts more
+visibly to sharp inflow accelerations and subsequent volatility.
+    Across both settings, portfolio exposures evolve coherently with the cross-sectional structure of ETF pressure.
+Nevertheless, these sectoral behaviours should be interpreted within a broader multi-factor investment environment
+in which macroeconomic conditions, valuation dynamics, and cross-sector relative opportunities jointly influence
+allocation decisions. The interaction between twelve-month accumulation and three-month imbalances appears central
+to identifying both persistent trends and potential inflection points, reinforcing the interpretation of ETF flows as a
+meaningful contributor to cross-sectional equity return dispersion.
+
+3.3.4   Robustness Checks and Implementation Considerations
+    To assess the robustness of our signal, we lag the monthly rebalancing date by one to five business days, and
+recompute the backtest. This exercise verifies that the signal does not rely on a precisely timed execution date and
+remains stable under small implementation delays. The resulting variations remain limited. For the long leg, the
+maximum difference relative to the baseline specification amounts to 2.20% in annualised return, 0.12% in volatility,
+and 1.77% in maximum drawdown. For the short leg, the corresponding maximum differences are 0.87%, 0.21%,
+and 4.32%, respectively. These modest changes indicate that the signal remains informative even when rebalancing
+occurs with small operational delays.
+    The portfolio construction intentionally remains simple. Stocks are ranked independently at each rebalancing
+date using a cross-sectional indicator. Because the ranking is recomputed every month based on contemporaneous
+ETF flow fluctuations, the portfolio composition may change substantially from one date to the next. In addition,
+the strategy does not impose sector allocation constraints and uses equal weighting. These choices are deliberate and
+aim to isolate the informational content of the signal rather than to optimise portfolio construction.
+   To assess the resulting trading activity, we compute portfolio turnover, defined as:
+                                                           N
+                                                        1X
+                                         T urnovert =         |wi,t − wi,t−1 | .                                    (10)
+                                                        2 i=1
+   where wi,t denotes the portfolio weight of stock i at rebalancing date t, and wi,t−1 its weight the day before
+rebalancing.
+    Average monthly turnover amounts to 36.16% for the long leg and 42.20% for the short leg. These elevated
+levels reflect the cross-sectional nature of the signal and the size of the portfolio. While the exercise confirms the
+
+
+                                                          14
+informational relevance of ETF flow signals, it also indicates that practical implementations would require careful
+consideration of transaction costs and portfolio construction techniques aimed at reducing turnover.
+
+3.4    Our signal in the Fama-French Framework
+    Because our strategy may resemble an ETF-flow-based momentum signal, there is a risk that it simply rep-
+resents an alternative construction of the traditional momentum factor. We therefore evaluate our signal within
+the Fama–French asset pricing framework to determine whether it delivers incremental explanatory power beyond
+established risk factors.
+   The Fama–French five-factor model (Fama and French 2015) extends both the CAPM and the earlier three-factor
+model to better explain cross-sectional differences in stock returns. It posits that expected returns are driven by
+exposure to five systematic risk factors:
+   • MKT (Market factor) : the excess return of the market portfolio over the risk-free rate.
+   • SMB (Small Minus Big) : the size premium, capturing the historical outperformance of small-cap stocks relative
+     to large-cap stocks.
+   • HML (High Minus Low) : the value premium, reflecting the tendency of high book-to-market (“value”) firms
+     to outperform low book-to-market (“growth”) firms.
+   • RMW (Robust Minus Weak) : the profitability factor, indicating that firms with strong operating profitability
+     tend to earn higher returns than less profitable firms.
+   • CMA (Conservative Minus Aggressive) : the investment factor, showing that firms that invest conservatively
+     tend to outperform those that invest aggressively.
+    The model’s core insight is that differences in average returns across stocks can largely be explained by their
+sensitivities (betas) to these five common risk factors, which proxy for fundamental dimensions of systematic risk
+related to size, valuation, profitability, and investment behaviour.
+    We augment our analysis by incorporating the momentum factor introduced by (Carhart 1997). Carhart proposes
+the WML (Winners Minus Losers) factor to capture return persistence documented in mutual fund performance.
+We include this factor alongside the Fama–French five-factor framework, as it is conceptually related to our ETF
+flow–based signal and allows us to assess whether our results simply reflect conventional momentum effects.
+   The analysis presented in this section relies on Fama–French five-factor model data retrieved from Kenneth
+French’s data library 1 .
+    We define ITF (Intertemporal Flow Factor) as the long-short portfolio constructed in 3.3. The portfolio goes
+long stocks that receive strong inflows from thematic and sectoral ETFs over a 12-month horizon but relatively weak
+inflows over the most recent three months. It goes short stocks exhibiting the opposite pattern : low 12-month inflows
+and high recent 3-month inflows.
+    The ITF portfolio displays low correlations with the Fama–French five factors, supporting the view that it rep-
+resents an independent source of systematic return variation in the S&P 500. Notably, its correlation with the
+momentum factor (WML) remains modest, indicating that the strategy is not merely a repackaging of traditional
+momentum.
+
+                                           Table 7: Correlation Matrix
+                                  ITF    Mkt-RF      SMB      HML      RMW      CMA      WML
+                       ITF        1.00
+                       Mkt-RF     0.09        1.00
+                       SMB        0.05        0.18    1.00
+                       HML        0.08       -0.43    0.14     1.00
+                       RMW       -0.19       -0.26   -0.49     0.09     1.00
+                       CMA        0.13       -0.45   -0.05     0.78     0.20     1.00
+                       WML        0.20       -0.14   -0.22     0.26     0.04     0.34      1.00
+
+
+    To assess whether our ITF factor has explanatory power for S&P 500 returns, we next evaluate its contribution
+within a standard asset pricing framework by estimating time-series regressions for each stock in the index. Specific-
+ally, for each stock, we estimate regressions of excess returns on the Fama–French five factors and the momentum
+factor, augmented by the ITF factor.
+   Accordingly, we use a first regression model as a benchmark for return explanation :
+                                                                   X
+                               ri − Rf = αi + βM KT · (Rm − Rf ) +     βi,g · Rg + ϵi
+                                                                      g∈F                                        (11)
+                                           F = {SM B, HM L, RM W, CM A, W M L}
+
+    where r stands for the company’s return, βi,g the sensitivity of company i to the factor g, Rg the return of the
+factor g, and Rf stands for the risk-free rate.
+   To assess the marginal contribution of our ITF factor, we define a second model as follows:
+                                                            X
+                      ri − Rf = αi + βM KT · (Rm − Rf ) +       βi,g · Rg + βIT F · RIT F + ϵi                   (12)
+                                                              g∈F
+
+
+    We begin by examining the statistical significance of each factor across stocks. Table 8 reports the proportion of
+stocks for which each factor is significant at the 10%, 5%, and 1% levels.
+
+   1 Data is available here.
+
+
+
+
+                                                         15
+                           Table 8: Share of Statistical Significance across Stocks (%)
+
+                                    Factor      10% level         5% level    1% level
+                                      ITF         36.32            27.71       14.80
+                                   Mkt-RF         98.45            98.28       97.76
+                                    SMB           69.54            63.34       51.81
+                                    HML           68.50            61.10       50.09
+                                   RMW            58.00            51.81       39.59
+                                    CMA           53.87            48.71       36.14
+                                    WML           72.63            67.99       61.62
+
+
+    Consistent with the academic literature, we find that traditional factors and the market factor are significant for
+a large fraction of stocks. The ITF factor is significant for more than one-third of the firms in our sample, suggesting
+that it possesses meaningful explanatory power.
+    To complement this analysis, we also assess the impact of including the ITF factor on the adjusted R2 . We
+compare the adjusted R2 from Equation 12 and Equation 11 to quantify the incremental increase in the explained
+variance of returns. We use the adjusted R2 rather than the R2 , as the latter mechanically increases with the inclusion
+of additional regressors.
+
+                              Table 9: Incremental Explanatory Power of ITF (%)
+
+                                                       All        10% level     5% level   1% level
+                                                 2
+                     Usual Factors adjusted R        37.77           36.98       37.85      37.12
+                     With ITF adjusted R2            37.96           37.59       38.58      38.18
+                     Improvement                     0.19            0.61        0.73        1.06
+
+
+   The inclusion of ITF leads to a consistent increase in explanatory power. While the average improvement is
+modest across all stocks, it becomes more pronounced for stocks where ITF is statistically significant, reaching over
+1% at the 1% level. This indicates that ITF captures meaningful variation in returns precisely where the signal is
+most relevant.
+   Overall, these results suggest that ITF provides incremental explanatory power beyond standard factors, while
+remaining concentrated on a subset of stocks more directly exposed to ETF-driven flows.
+
+3.5    The case of the European market
+    ETF ownership data and the correlogram analysis indicate that the influence of the ETF market on the European
+equity market appears to be more limited than in the United States. To confirm this intuition, we replicated the
+empirical framework on European equities. Specifically, we apply the regression specification detailed in Equation 6
+to the constituents of the STOXX 600 index, using ETF-induced pressure measures constructed from thematic
+and sectoral ETFs. As in the U.S. analysis, we estimate Equation 6 separately for each of the twelve accumulation
+horizons, avoiding the simultaneous inclusion of highly correlated ETF-pressure measures constructed over overlapping
+windows.
+    A key structural difference between the U.S. and European markets concerns the relative importance of ETFs in
+the ownership structure. Whereas ETFs hold approximately 16% of U.S. large-cap equities, their ownership share
+in European large-cap stocks is closer to 6%. This substantial difference may affect the strength of the statistical
+relationship between ETF-induced flows and subsequent stock returns. In addition, the diffusion of ETFs occurred
+later in Europe than in the United States, potentially limiting the persistence and informational content of ETF flows
+over the sample period. Taken together, these institutional differences suggest that weaker statistical associations
+may be expected in the European setting.
+   Table 10 reports the estimation results across cumulative flow windows ranging from one to twelve months.
+    The results reveal a clear short-term effect but no statistically robust long-term relationship. At short horizons,
+coefficients are strongly negative and statistically significant, particularly over two and three month windows with
+significances at the 1% and 5% levels. This provides clear evidence of a mean reversion effect consistent with temporary
+price pressure induced by ETF flows. The effect remains detectable, though weaker, up to horizons of around six to
+seven months.
+    In contrast, no meaningful long-term effect can be identified. Beyond eight months, estimated coefficients are
+small and statistically insignificant, with confidence intervals systematically spanning both sides of zero. Unlike the
+U.S. case, there is no contiguous range of horizons over which coefficients are positive and significant, preventing any
+reliable identification of a long-horizon allocation effect.
+     The explanatory power of the regressions is higher than in the U.S. specification, with R2 values around 31%,
+reflecting the dominant role of market-wide factors. However, this improvement does not translate into stronger flow-
+based explanatory power, as ETF-induced pressure contributes only marginally to cross-sectional return variation.
+    Figure 14 reports the estimated coefficients across horizons together with their 90% confidence intervals and
+indicates their statistical significance.
+
+
+
+
+                                                             16
+         Table 10: Regression Results across Horizons (STOXX 600, Thematic and Sectoral ETFs)
+
+    Horizon     Coefficient     Standard Error        p-value     90% Confidence Interval          R2      Observations
+        1            -2.44             1.84            0.18               [-5.47, 0.58]           0.31         24,344
+        2         -4.26***             1.13           < 0.01             [-6.13, -2.40]           0.31         24,339
+        3          -2.03**             0.90            0.02              [-3.51, -0.55]           0.31         24,333
+        4           -1.29*             0.76            0.09              [-2.54, -0.04]           0.31         24,327
+        5           -1.08*             0.66            0.10               [-2.17, 0.00]           0.31         24,322
+        6           -1.14*             0.58            0.05              [-2.09, -0.18]           0.31         24,317
+        7           -0.92*             0.52            0.07              [-1.77, -0.07]           0.31         24,314
+        8            -0.66             0.47            0.16               [-1.43, 0.12]           0.31         24,311
+        9            -0.08             0.44            0.86               [-0.80, 0.64]           0.31         24,307
+        10           -0.03             0.41            0.94               [-0.71, 0.64]           0.31         24,302
+        11           0.18              0.38            0.64               [-0.45, 0.81]           0.31         24,292
+        12           0.34              0.36            0.35               [-0.26, 0.94]           0.31         24,197
+
+     Notes: *, **, and *** denote statistical significance at the 10%, 5%, and 1% levels, respectively. All tests are two-sided.
+
+
+
+Figure 14: Flow Coefficients and 90% Confidence Intervals by Horizon (STOXX 600, Thematic & Sectoral
+ETFs)
+
+
+
+
+                                                                     Source: Trackinsight, Bloomberg & authors’ calculations.
+
+
+
+    The figure confirms this pattern. Short-horizon coefficients are negative and statistically significant, while longer-
+horizon estimates cluster around zero with wide confidence intervals, indicating the absence of a stable long-term
+effect.
+    Overall, the European evidence highlights a clear asymmetry relative to the U.S. market. While short-term price
+pressure effects are detectable, no statistically robust long-horizon relationship emerges. This suggests that ETF-
+induced flows remain too limited in scale to generate persistent cross-sectional return patterns. The results therefore
+reinforce the interpretation that the stronger effects observed in the U.S. are largely driven by the greater penetration
+of ETFs in the ownership structure of equities.
+
+
+4     Discussion
+    While the empirical results highlight a clear relation between ETF flows and subsequent equity returns, several
+limitations should be acknowledged.
+     First, although our dataset covers a large number of ETFs, it does not include the entirety of global ETF assets
+under management. Measurement error in ETF ownership and in the construction of stock-level pressure indicators
+may therefore attenuate the documented relationships. In addition, the identification of thematic and sectoral ETFs
+relies on the classification framework provided by Trackinsight. Alternative classification schemes could reassign
+certain products across categories and potentially affect the magnitude and the horizons of the estimated effects.
+    Second, the empirical specification relies on fixed horizons to capture short- and longer-term flow dynamics. In
+our portfolio application, we use twelve-month and three-month windows for simplicity and transparency. However,
+other horizon choices may also be informative. Future work could explore more flexible specifications, including
+weighted combinations of horizons guided by the regression results.
+    Our portfolio implementation is intentionally simple. Portfolios are equally weighted and constructed purely from
+the cross-sectional ranking of the signal in order to isolate the informational content of ETF-induced pressure. In
+practical investment settings, alternative constructions may be preferable. Portfolio weights could incorporate market
+
+
+
+                                                             17
+capitalisation, liquidity characteristics, or signal intensity, while additional constraints such as sector allocation limits
+or turnover buffers could be introduced to reduce trading costs.
+    Another natural extension concerns the role of mutual funds. Although ETF flows into physically replicated
+ETFs are transparent and mechanically transmitted to underlying markets, mutual funds still represent a large share
+of delegated equity ownership. Comparing ETF and mutual fund induced pressures would help determine whether
+the documented horizon-dependent structure reflects a feature specific to ETF mechanics or a broader property of
+flow-driven markets.
+    Finally, our results suggest that the strength of ETF flow effects may depend on market structure. The clearer
+evidence observed in U.S. equities is consistent with the higher level of ETF penetration and the greater integration
+of ETFs into equity trading in that market. Examining how ETF ownership affects cross-sectional price dynamics
+across markets remains a possible direction for future research.
+    Another avenue for future research would be to develop a time-series ETF flow–based signal, rather than a cross-
+sectional one, thereby enabling the identification of unusual flows at the individual firm level. Practitioners may also
+be interested in ETF-based signals. In this context, statistical analysis and signal construction could be extended to
+thematic and sectoral ETFs to design trend-following strategies for ETF investors.
+
+
+5     Conclusion
+    This paper studies the relation between ETF flows and underlying equity returns within the S&P 500 universe.
+Our empirical analysis shows that ETF-induced flows contain information about subsequent stock returns, with effects
+that vary across investment horizons. Short-term inflows tend to be followed by partial price reversals, whereas more
+sustained inflows from thematic and sectoral ETFs are associated with persistent return effects. These horizon-
+dependent dynamics are further supported by a sinusoidal specification linking past flows to subsequent returns. The
+short-term reversal effect is consistent with prior studies, although it operates over a slightly longer horizon in our
+setting, while the longer-term pattern suggests that ETF flows tend to reinforce prevailing market trends.
+    Our findings are particularly pronounced for thematic and sectoral ETFs. Flows originating from these products
+appear more informative in highlighting the relationship between flows and returns, likely reflecting tactical investor
+positioning and concentrated capital reallocation across segments of the equity market.
+    From a portfolio management perspective, ETF flow data therefore provide a useful basis for comparing stocks. In
+particular, the signal helps identify securities with particularly high exposure to ETF-induced pressure alongside their
+fundamental drivers, and whether this flow-induced pressure is currently supporting or weighing on their performance.
+Signals derived from ETF-induced pressure may therefore help equity investors identify stocks supported by persistent
+capital inflows, detect securities exposed to short-term flow-driven reversals, and distinguish between positive and
+negative flow effects. Our backtests indicate that the long portfolio outperforms the S&P 500 Equally Weighted
+benchmark, while the short portfolio materially underperforms, suggesting that the signal may be valuable both for
+stock selection and for identifying stocks to avoid.
+   Finally, a comparison between the ETF flow–based factor and traditional risk premia indicates limited correlation
+with the Fama–French factors and with momentum (WML). This suggests that ETF flow dynamics capture a distinct
+dimension of equity market behaviour that may complement existing factor-based allocation frameworks and provide
+economically meaningful information for practitioners. Augmenting the Fama–French model by incorporating our
+ITF factor shows that the ITF factor is significant for 36% of S&P 500 firms at the 10% level. Moreover, the adjusted
+R2 increases by more than one percentage point for firms where the factor is highly significant. These results indicate
+that our factor enhances the explanatory power of return variation.
+
+
+6     Acknowledgments
+    The authors thank Yi Zhong, Arnaud Izard, Alex Sala, as well as colleagues and seminar participants, for helpful
+comments and discussions. The authors also acknowledge the research environment provided by Kepler Cheuvreux.
+All remaining errors are the authors’ own.
+    ChatGPT (OpenAI) was used solely to improve the clarity of the English language and to check for typographical
+errors; it did not contribute to the scientific content of this manuscript.
+
+
+7     Declaration of interest
+    The authors are employed by Kepler Cheuvreux, which is the majority shareholder of Trackinsight. Kepler
+Cheuvreux may develop investment products related to the subject matter of this research. The authors declare that
+this employment relationship did not influence the research design, analysis, interpretation of results, or conclusions.
+
+
+
+
+                                                             18
+References
+Ben-David, Itzhak, Francesco A. Franzoni, Byungwook Kim and Rabih Moussawi (2022). Competition for Attention
+in the ETF Space. National Bureau of Economic Research. url: https://www.nber.org/papers/w28369.
+Ben-David, Itzhak, Francesco A. Franzoni and Rabih Moussawi (2017). ‘Exchange-Traded Funds’. In: Annual Review
+of Financial Economics. url: https://doi.org/10.1146/annurev-financial-110716-032538.
+Carhart, Mark M. (1997). ‘On Persistence in Mutual Fund Performance’. In: Journal of Finance. url: https :
+//doi.org/10.1111/j.1540-6261.1997.tb03808.x.
+Clifford, Christopher P., Jon A. Fulkerson and Bradford D. Jordan (2014). ‘What Drives ETF Flows?’ In: The
+Financial Review. url: https://doi.org/10.1111/fire.12049.
+Coval, Joshua and Erik Stafford (2007). ‘Asset Fire Sales (and Purchases) in Equity Markets’. In: Journal of Financial
+Economics. url: https://doi.org/10.1016/j.jfineco.2006.09.007.
+Da, Zhi and Sophie Shive (2018). ‘Exchange-Traded Funds and Asset Return Correlations’. In: European Financial
+Management. url: https://doi.org/10.1111/eufm.12137.
+Deutsche Bundesbank (2018). The Growing Importance of Exchange-Traded Funds in the Financial Markets. url:
+https : / / www . bundesbank . de / resource / blob / 766600 / 2fd3ae4f0593fb2ce465c092ce40888b / mL / 2018 - 10 -
+exchange-traded-funds-data.pdf.
+Fama, Eugene F. and Kenneth R. French (2015). ‘A Five-Factor Asset Pricing Model’. In: Journal of Financial
+Economics. url: https://doi.org/10.1016/j.jfineco.2014.10.010.
+Sandberg, Daniel J. (2018). A Case of ‘Wag the Dog’ ? ETFs and Stock-Level Liquidity. S&P Global Market Intelli-
+gence. url: https://www.spglobal.com/content/dam/spglobal/mi/en/documents/general/SP-Global-Market-
+Intelligence-ETF-Flow-July-2018.pdf.
+Staer, Arsenio (2017). ‘Fund Flows and Underlying Returns: The Case of ETFs’. In: International Journal of Business.
+url: https://ijb.cyut.edu.tw/var/file/10/1010/img/863/V224-1.pdf.
+Van der Beck, Philippe, Jean-Philippe Bouchaud and Dario Villamaina (2024). Ponzi Funds. arXiv. url: https:
+//arxiv.org/abs/2405.12768.
+Warther, Vincent A. (1995). ‘Aggregate Mutual Fund Flows and Security Returns’. In: Journal of Financial Eco-
+nomics. url: https://doi.org/10.1016/0304-405X(95)00827-2.
+
+
+
+
+                                                         19
+
