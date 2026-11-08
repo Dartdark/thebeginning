@@ -27,7 +27,7 @@ ONB30 = "mc_reports/Backtesting Strategy Performance Report _ @NQ - 15 Minutes N
 START, TARGET, MLL, DLL, LOCK, MAXD = 50_000.0, 3_000.0, 2_000.0, 1_000.0, 100.0, 21
 
 
-def challenge(W, R, days, scale_fn, dstop=DLL, plock=None):
+def challenge(W, R, days, scale_fn, dstop=DLL, plock=None, pa_lock=False):
     bal = START; floor = START - MLL
     for n, d in enumerate(days[:MAXD], 1):
         k = scale_fn(bal - START, bal - floor, n)
@@ -40,12 +40,14 @@ def challenge(W, R, days, scale_fn, dstop=DLL, plock=None):
             lk = np.nonzero(r >= plock)[0]; jl = lk[0] if len(lk) else len(w)
         first = min(jb, jp, jl)
         if first == len(w): bal = bal + r[-1]
-        elif first == jp: return "pass", n
-        elif first == jb:
+        elif first == jb:                                  # floor / DLL first on a same-minute tie (Codex 2026-11-06 #1)
             if lim == floor: return "fail", n
             bal = lim
+        elif first == jp: return "pass", n
         else: bal = bal + r[jl]
-        floor = max(floor, min(bal - MLL, START + LOCK))
+        # evaluation floor keeps trailing until the target (Apex; Codex weekly review 2026-11-06 #1). Was capped at START + LOCK
+        # (the funded-PA lock) until 2026-11-08: pa_lock=True reproduces the old engine.
+        floor = max(floor, min(bal - MLL, START + LOCK)) if pa_lock else max(floor, bal - MLL)
     return ("time", MAXD) if len(days) >= MAXD else None
 
 
