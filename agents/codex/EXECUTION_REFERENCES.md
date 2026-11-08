@@ -71,11 +71,26 @@ Source pinned vn.py class; reviewed 2026-10-27.
 
 Sources: [existing TIER_LIST entry](../../TIER_LIST.md), [test script](../../analysis/limit_entry_test.py), 2026-10-18.
 - Use: include missed winners and no-fills when comparing passive and market entries.
-- Evidence: repository-reported historical tests, not rerun for this library. Decision-close limits 0–2 ticks better, working 1–5 minutes with one-tick trade-through, were worse across the tested strategies/settings.
+- Evidence: repository-reported historical tests, not rerun for this library. Decision-close limits 0–2 ticks better, working 1–5 minutes with one-tick trade-through, were generally worse. One EOS setting was marginally positive (+$0.70 per original signal); do not describe every setting as losing.
 - Decisive examples: ES MOC lost approximately $76–109 per signal versus original execution despite 65–98% fill rates across the study; missed MOC trades averaged $417–491. Units are the original study's mini-contract comparison, not native micro savings.
 - Limits: this rejects those tested substitutions, not every possible limit policy or the exact SniperAlgo.
 - Next check: inspect the existing ledger and settings first; require a distinct mechanism and frozen replay before any new economic test.
 - Status: negative execution evidence; do not repeat the same search under a new name.
+
+**2026-11-08 MAE follow-up:** Gandhi/MTS Institute, [SSRN 7063478 full review](results/ssrn7063478_review_20261108.md),
+July 2026, 12 pages; [seven-case source/mechanics audit](../../analysis/codex_mae_entry_7063478_audit.py).
+The author reports Nifty Sharpe 1.38→3.33 at a selected 0.25% adverse offset, retaining 2,448/3,908 trades with
+6.02 bp round-trip modeled costs. This is same-history selection on a proprietary signal, not independent net
+execution verification. MAE used to diagnose a causally resting limit is not automatically look-ahead, but an
+aggregate excursion cannot establish first fill, time-in-force eligibility, queue/partial fills or post-entry paths.
+Touch eligibility (`MAE >= offset`) is weaker than trade-through. The source's claim that all missed trades must
+have been profitable is false: an entry 100 / low 99.80 / exit 99.90 misses a 99.75 limit and still loses.
+Preserve nonfills on the original signal/calendar denominator and distinguish fixed virtual-parent exits from
+fill-anchored child brackets. Trade-order permutations condition on assumed selected returns; they do not validate
+threshold choice or future edge. Seven invented checks passed; zero market tests or measured savings.
+This percentage-limit rule is distinct from E06's opposite-five-minute-return policy. Prior negatives do not prove
+this exact offset fails, and its headline is insufficient merit for a new cross-book rescue sweep. No new queue,
+acquisition task, paused-program restart, allocation or live change follows.
 
 ### E06 — Fast-alpha delayed-entry/exit overlay: timing and random-delay controls
 

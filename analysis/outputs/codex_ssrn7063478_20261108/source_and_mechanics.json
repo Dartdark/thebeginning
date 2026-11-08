@@ -1,0 +1,136 @@
+{
+  "source": {
+    "id": "ssrn:7063478",
+    "title": "Entry-Timing Confirmation via Maximum Adverse Excursion: An Empirical Test on a Systematic Index Futures Strategy",
+    "author": "Purvang Gandhi, MTS Institute",
+    "version": "July 2026",
+    "pages": 12,
+    "path": "agents/codex/inputs/ssrn7063478_20261108/paper.pdf",
+    "sha256": "8717db83a08bb88f69dd9285883dfbb0c6d2a19107ca2dffc0c806de875e6f22",
+    "permission": "owned_upload",
+    "provenance": "User attachment file_00000000433081fda9a1bc724b534f89",
+    "access_method": "pdftotext -layout; full 12-page text read; Table 1 visually inspected"
+  },
+  "checked_at_utc": "2026-11-08T11:03:47.961212+00:00",
+  "checked_codex_head": "05fbdcfc47442a2636cb4b2c939bfe6312148cc6",
+  "claude_ref": "552bc0ffdffb1006b7948346510bab0f2d29edf9",
+  "author_sample": "Nifty 50 futures, hourly, 2010-04-13 to 2026-01-30",
+  "author_main_threshold_pct": 0.25,
+  "author_sample_trades": 3908,
+  "author_retained_trades": 2448,
+  "author_unfilled": 1460,
+  "exact_retained_fraction": 0.6264073694984647,
+  "author_sharpe_relative_increase_pct": 141.30434782608697,
+  "author_total_table_profiles": 9,
+  "author_nonzero_thresholds": 8,
+  "author_cost_bp_round_trip": 6.02,
+  "synthetic_checks_passed": 7,
+  "synthetic_checks": [
+    {
+      "case": "unfilled_can_be_gross_loser",
+      "original_entry": 100.0,
+      "minimum_price": 99.8,
+      "original_exit": 99.9,
+      "mae_pct": 0.20000000000000281,
+      "limit": 99.75,
+      "baseline_net_pct": -0.16019999999999432,
+      "conclusion": "MAE below threshold does not imply the foregone trade was profitable."
+    },
+    {
+      "case": "unfilled_small_gross_winner_can_lose_after_fees",
+      "original_entry": 100.0,
+      "minimum_price": 99.9,
+      "original_exit": 100.03,
+      "gross_pct": 0.030000000000001137,
+      "net_pct": -0.030199999999998863
+    },
+    {
+      "case": "same_aggregate_excursions_different_execution_path",
+      "invented_paths": [
+        [
+          100.0,
+          99.5,
+          101.0,
+          100.6,
+          100.5
+        ],
+        [
+          100.0,
+          101.0,
+          100.6,
+          99.5,
+          100.5
+        ]
+      ],
+      "first_passage_step": [
+        1,
+        3
+      ],
+      "invented_expiry_step": 2,
+      "fills_before_expiry": [
+        true,
+        false
+      ],
+      "conclusion": "Even MFE plus MAE does not identify fill time, time-in-force eligibility, calendar marks or post-fill path."
+    },
+    {
+      "case": "threshold_touch_not_trade_through",
+      "invented_path": [
+        100.0,
+        99.75,
+        100.5
+      ],
+      "threshold_eligible": true,
+      "strict_trade_through": false,
+      "conclusion": "A price touch does not establish queue fill; equality in MAE >= theta is weaker than trade-through."
+    },
+    {
+      "case": "percentage_denominator_is_side_specific",
+      "theta_pct": 0.25,
+      "original_gross_pct": 0.5,
+      "revised_long_gross_pct": 0.7518796992481203,
+      "revised_short_gross_pct": 0.7481296758104738,
+      "conclusion": "Price improvement is mechanical, but adding theta to a percentage return is not exact; position/notional and fee conventions matter."
+    },
+    {
+      "case": "reordering_fixed_selected_returns_is_not_selection_validation",
+      "invented_returns": [
+        0.01,
+        -0.005,
+        0.02
+      ],
+      "permutations": 6,
+      "terminal_wealth": 1.025049,
+      "conclusion": "Under fixed-fraction compounding, order leaves terminal wealth unchanged. Drawdown permutations do not validate fill rules, threshold selection or future edge."
+    },
+    {
+      "case": "fixed_points_are_not_fixed_basis_points",
+      "illustrative_index_levels": [
+        5000,
+        25000
+      ],
+      "two_point_cost_bp": [
+        4.0,
+        0.8
+      ],
+      "conclusion": "A flat 6.02 bp allowance including two points is a source modeling convention; it is not a dated all-in fee reconstruction across fivefold prices."
+    }
+  ],
+  "prior_limit_output": {
+    "path": "analysis/outputs/limit_entry_test_output.txt",
+    "sha256": "90ac9191f043f90bb07496f3466a65c77b5763a96842ede68f94306ffe5a2d10"
+  },
+  "scout_preserved": {
+    "sha256": "a1a6a234549adeb9f810ea33bcd720a9faca54621bf1188484446552f76e1d45",
+    "hypotheses": 4,
+    "definitions": 10,
+    "lease": null
+  },
+  "root_trials_sha256": "40597f5c61a99f0fb913c53067b630b4a2583af2643dcc44a0b567e9a372af4e",
+  "new_economic_trials": 0,
+  "market_data_loaded": false,
+  "candidate_return_tests": false,
+  "disposition": "dont_test",
+  "independent_economic_verification": false,
+  "interpretation": "No exact proprietary-signal replication. Source assumptions and same-sample selection do not establish a distinct qualified edge for a new cross-book sweep. Preserve existing negative/qualified timing evidence."
+}
