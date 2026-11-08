@@ -75,16 +75,17 @@ def features(g,start,end):
         reason=None;flat=691 if cal_ns['early_close'](date) else 899
         if d==0 or seen<=20:reason='warmup'
         elif date.month in (3,6,9,12) and 5<=date.day<=21:reason='declared_quarterly_roll_calendar'
-        elif not np.isfinite(g.o[d-1,1021]) or not np.isfinite(g.c[d,509]):reason='missing_exact_night_anchor'
+        elif not np.isfinite(g.c[d,509]):reason='missing_night_end'
         elif not all(np.isfinite(getattr(g,c)[d,511:541]).all() for c in ('o','h','l','c')):reason='incomplete_first30'
         elif not np.isfinite(adx[d,36]):reason='ADX_warmup_or_missing'
         elif not all(np.isfinite(getattr(g,c)[d,541:flat+1]).all() for c in ('o','h','l','c')):reason='unknown_execution_path'
         if reason:excluded.append({'date':date,'reason':reason});continue
         n0=(d-1)*1440+1021;n1=d*1440+509;r0=(d-1)*1440+1381;r1=d*1440+510
-        if np.isfinite(C[n0:n1+1]).sum()<30:excluded.append({'date':date,'reason':'short_observed_night'});continue
+        night_bars=np.flatnonzero(np.isfinite(O[n0:n1+1])&np.isfinite(C[n0:n1+1]))
+        if len(night_bars)<30:excluded.append({'date':date,'reason':'short_observed_night'});continue
         hi=np.nanmax(H[r0:r1+1]);lo=np.nanmin(L[r0:r1+1])
         if not np.isfinite(hi+lo) or hi<=lo:excluded.append({'date':date,'reason':'missing_overnight_range'});continue
-        move=g.c[d,509]-g.o[d-1,1021];night=int(np.sign(move))
+        night_first=n0+int(night_bars[0]);move=g.c[d,509]-O[night_first];night=int(np.sign(move))
         drive=int(np.sign(g.c[d,540]-g.o[d,511]));loc=(g.o[d,511]-lo)/(hi-lo)
         bias=1 if loc>=2/3 else -1 if loc<=1/3 else 0
         if not drive:excluded.append({'date':date,'reason':'zero_opening_drive'});continue
@@ -93,7 +94,7 @@ def features(g,start,end):
         confirm=bool(adx[d,36]>30 and breakout)
         cont=drive if drive==night==bias and confirm else 0
         rev=drive if drive==-night and bias==night and night!=0 and confirm else 0
-        rows.append({'date':date,'day':int(d),'night_move':move,'night_side':night,'overnight_high':hi,
+        rows.append({'date':date,'day':int(d),'night_move':move,'night_first_flat_index':night_first,'night_side':night,'overnight_high':hi,
                      'overnight_low':lo,'location':loc,'bias':bias,'drive':drive,'ADX':adx[d,36],
                      'or15_high':orhi,'or15_low':orlo,'breakout':bool(breakout),'Parent':drive,
                      'Continuation':cont,'Reversal':rev,'flat_bar':flat,
@@ -118,7 +119,9 @@ def replay(g,df,f,name,delay=False):
     if raw.date.ne(raw.exit_date).any():raise RuntimeError('cross-date trade')
     raw['day']=[int(np.searchsorted(g.ts,np.datetime64(d))) for d in raw.date]
     raw['j0']=[F.minute(v) for v in raw.t_in];raw['j1']=[F.minute(v) for v in raw.t_out]
-    raw['slippage']=10.;t=F.normalize(raw,g)
+    raw['slippage']=10.
+    for col in ['entry','exit','gross','net']:raw[col]=raw[col].astype(float)
+    t=F.normalize(raw,g)
     if len(t)!=len(ns['FIXED']):raise RuntimeError('missing admitted execution')
     if t.missing_held_closes.sum():raise RuntimeError('unknown held minute')
     t['extra_tick_cost_net']=t.net-10.

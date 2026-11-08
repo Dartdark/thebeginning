@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/workspace/paper_review_20261108/analysis/codex_opening_handoff_20261108.py", line 206, in <module>
+    main(parser.parse_args().phase)
+  File "/workspace/paper_review_20261108/analysis/codex_opening_handoff_20261108.py", line 161, in main
+    for n in names:cases[n]=replay(g,df,f,n);cases[n+'_delay1m']=replay(g,df,f,n,True)
+                            ^^^^^^^^^^^^^^^^
+  File "/workspace/paper_review_20261108/analysis/codex_opening_handoff_20261108.py", line 121, in replay
+    raw['slippage']=10.;t=F.normalize(raw,g)
+                          ^^^^^^^^^^^^^^^^^^
+  File "/workspace/paper_review_20261108/analysis/codex_ingredients_fc_onb_t_20261108.py", line 44, in normalize
+    if not np.isfinite(t[['entry','exit','gross','net']]).all().all():raise RuntimeError('unknown price')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas/core/generic.py", line 2171, in __array_ufunc__
+    return arraylike.array_ufunc(self, ufunc, method, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas/core/arraylike.py", line 407, in array_ufunc
+    result = mgr.apply(getattr(ufunc, method))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 361, in apply
+    applied = b.apply(f, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 393, in apply
+    result = func(self.values, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ufunc 'isfinite' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''

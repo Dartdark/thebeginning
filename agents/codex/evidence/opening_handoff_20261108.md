@@ -19,7 +19,7 @@ explicitly speculative interaction of existing price ingredients, not a verified
 
 ## 2. Direction, size and timing known before entry
 
-At the 09:00-labelled close, use the 17:01 reopen to 08:29 overnight direction, ONB's 23:01–08:30 range,
+At the 09:00-labelled close, use the first observed reopening bar from17:01 to08:29 overnight direction, ONB's 23:01–08:30 range,
 08:31-labelled cash-open price, first15-minute range, first30-minute drive and continuous15-minute ADX.
 Enter 09:01-labelled OPEN; same-bar-known features do not filter earlier fills. Size starts at 1 native MNQ in
 any earned later account comparison. Features, labels and order clocks are frozen in the plan.
@@ -71,3 +71,6 @@ no simultaneous legs or cross-account hedge. Flat 14:59-labelled open, 11:31 on 
 TEST permits the bounded exploratory design screen. Exact code/plan/dependencies must be committed first.
 Failed filters stop later history/account tests. No native-volume or fitted-ML substitution, threshold repair,
 renaming of a failed case, live/plan changes, independent verification claim or automatic promotion.
+
+Adapter/data-universe amendment: see plan appendix and retained aborted exact-anchor receipt. Original35/3/3
+partial trade replays remain execution history; no hidden fresh-sample or zero-look claim.

@@ -11,15 +11,16 @@ Source: evidence `agents/codex/evidence/opening_handoff_20261108.md`; preceding 
 NQ 1-minute bars, Chicago close stamps. 09:00 close is the decision; 09:01-labelled OPEN is executable next
 bar (09:00 civil CT), delayed OPEN09:02 (09:01 civil). No feature from the future entry bar or later.
 
-night_direction = sign(C08:29 − previous calendar date's O17:01), with both anchors finite and >=30 observed
-night bars. ONB range high/low uses previous23:01 through current08:30. Cash-open = O08:31;
+night_direction = sign(C08:29 − first observed bar OPEN in the interval from previous calendar date17:01
+through current08:29), with a finite ending anchor and >=30 observed night bars, matching T's first-observed
+reopen convention. ONB range high/low uses previous23:01 through current08:30. Cash-open = O08:31;
 location = (cash_open − overnight_low)/(overnight_high − overnight_low).
 bias = +1 at location>=2/3, −1 at<=1/3, else0. First15-minute opening range = H/L08:31–08:45.
 drive = sign(C09:00 − O08:31). breakout confirmation = C09:00 above first15 high for long, below low for short,
 strict inequality. ADX = source continuous Wilder14 on15-minute bars, at the09:00 completed bar, gate >30.
 All prices/indicators available by09:00; no model fitting or volume series in the rule.
 
-Common research universe: weekdays2018–22 (2017 for warm-up), observed exact night anchors/positive range,
+Common research universe: weekdays2018–22 (2017 for warm-up), observed first-night/end anchors/positive range,
 >=30 finite night closes, all first30 cash bars, finite source ADX, >=20 preceding RTH sessions, nonzero drive.
 As a causal conservative seam precaution, skip dates5–21 of March/June/September/December. It is a declared
 calendar restriction, not a retrospectively identified largest roll-gap adjustment. Residual seam risk remains.
@@ -86,3 +87,17 @@ its dependent stages. No account benefit inferred from standalone net, DD or app
 Run identity/code/dependency versions, counts, exclusions, gross-cost-native cash bridge and all5cases saved.
 Do not modify trading plans, TIER, live/VPS/broker/API keys, other branches, scout history/schedules, or buy data.
 User handoff includes direct results plus the report for Claude; push only codex/work.
+
+## Adapter amendment after aborted run99d6209, before corrected market replay
+
+The first attempt required an exact17:01 bar, contrary to T source's first-observed reopening bar. The
+no-return receipt admitted35sessions (Continuation3/Reversal0), rejecting1013 dates for missing that minute.
+The run priced Parent35 and Continuation3 plus its3 delay trades in memory, then failed normalizing an empty
+Reversal dataframe; no candidate economic summary was printed or inspected. These partial looks are retained
+as prior execution history, not erased or claimed zero. This is a source-adapter/data-universe correction;
+its economic rule, exits, thresholds, five case definitions and gates are unchanged. Exact-night admission
+and traceback remain in the aborted_exact_anchor directory. Empty numeric columns now retain float dtype.
+
+Source fidelity changes the research universe materially, so this amendment explicitly precedes the corrected
+returns. It is not a newly optimized17:02 anchor or a change selected from P&L. No other first-bar cutoff is
+tested. The initial17:01 protocol is abandoned for missing-data/source mismatch, not economic performance.
