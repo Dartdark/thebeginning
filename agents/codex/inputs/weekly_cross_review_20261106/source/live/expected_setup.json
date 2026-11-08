@@ -1,0 +1,88 @@
+{
+ "_about": "What every live chart should look like (Claude, 2026-10-29). analysis/vps_health.py compares the day's trade log with it in the 16:40 CT job: a missing chart heartbeat, an unexpected chart, or an entry with the wrong size is flagged in the journal and the dashboard. Update it whenever a chart, size or account changes. qty = fixed contracts (null = risk-sized: max_qty is the ceiling).",
+ "accounts": {
+  "#2": {
+   "id": "APEX-681524-02",
+   "suffix": "-2",
+   "status": "closed 2026-11-04"
+  },
+  "#3": {
+   "id": "APEX-681524-03",
+   "suffix": "150",
+   "status": "closed 2026-10-30"
+  },
+  "#1": {
+   "id": "APEX-681524-01",
+   "suffix": "",
+   "status": "closed 2026-10-26"
+  },
+  "#4": {
+   "id": "APEX-681524-04",
+   "suffix": "150",
+   "status": "closed 2026-11-04"
+  }
+ },
+ "charts": {
+  "VB-2": {
+   "strategy": "Vault Break",
+   "qty": 8,
+   "account": "#2"
+  },
+  "ONB-2": {
+   "strategy": "Overnight Bias ADX30",
+   "qty": null,
+   "max_qty": 10,
+   "account": "#2"
+  },
+  "EOS-2": {
+   "strategy": "EOS",
+   "qty": null,
+   "max_qty": 6,
+   "account": "#2"
+  },
+  "MON_BR-2": {
+   "strategy": "Bridge Monday Long",
+   "qty": 2,
+   "account": "#2"
+  },
+  "VB150": {
+   "strategy": "Vault Break",
+   "qty": 20,
+   "account": "#4"
+  },
+  "ONB150": {
+   "strategy": "Overnight Bias ADX30",
+   "qty": null,
+   "max_qty": 25,
+   "account": "#4"
+  },
+  "EOS150": {
+   "strategy": "EOS",
+   "qty": null,
+   "max_qty": 15,
+   "account": "#4"
+  },
+  "MON_BR150": {
+   "strategy": "Bridge Monday Long",
+   "qty": 5,
+   "account": "#4"
+  }
+ },
+ "retired_tags": [
+  "VB",
+  "ONB",
+  "EOS",
+  "MON_BR"
+ ],
+ "_accounts_about": "start / trail / lock / max_stop / started per live account (2026-10-30): the watchdog computes the Apex EOD trailing floor from the Chart Monitor's equity (floor = min(peak EOD equity - trail, lock)) and alarms when equity nears or touches it. phase: evaluation or funded.",
+ "_charts_account_about": "account per chart (2026-11-01): the watchdog compares it with the Chart Monitor's route_account (GetAccountID) and its typed AccountName",
+ "funded_rules": {
+  "_about": "Apex funded (PA) floor rules, added 2026-11-05 before the first funded account; read when a funded account is added.",
+  "150K": {
+   "trail": 4000,
+   "lock": 150100,
+   "start": 150000
+  },
+  "rejected_orders_limit": 10
+ }
+}

@@ -1,0 +1,15 @@
+Overnight Bias (and VB) gated by the evaluation cushion (user, 2026-10-30, after #3 failed: ~$1,823 room, ONB short
+
+50K evaluation (x1.0), every start day 2018-26:
+   plan (everything always)           pass 50.1% (18-22 46.7%, 23-26 54.5%)  fail 48.1%  unfinished  1.9%  fails per pass 0.96
+   ONB off when cushion < $1,100      pass 46.7% (18-22 41.8%, 23-26 53.3%)  fail 45.1%  unfinished  8.2%  fails per pass 0.96
+   ONB off when cushion < $1,650      pass 46.3% (18-22 40.3%, 23-26 54.2%)  fail 41.9%  unfinished 11.8%  fails per pass 0.90
+   ONB risk <= 50% of cushion         pass 48.0% (18-22 41.6%, 23-26 56.6%)  fail 44.0%  unfinished  8.0%  fails per pass 0.92
+   ONB + VB off when cushion < $1,200 pass 36.2% (18-22 34.1%, 23-26 39.1%)  fail 11.3%  unfinished 52.5%  fails per pass 0.31
+
+150K evaluation (x2.5), every start day 2018-26:
+   plan (everything always)           pass 41.0% (18-22 38.9%, 23-26 43.8%)  fail 56.6%  unfinished  2.3%  fails per pass 1.38
+   ONB off when cushion < $2,750      pass 37.2% (18-22 31.4%, 23-26 45.0%)  fail 53.7%  unfinished  9.0%  fails per pass 1.44
+   ONB off when cushion < $4,125      pass 27.6% (18-22 19.6%, 23-26 38.1%)  fail 50.7%  unfinished 21.8%  fails per pass 1.84
+   ONB risk <= 50% of cushion         pass 36.8% (18-22 30.6%, 23-26 45.1%)  fail 52.2%  unfinished 11.0%  fails per pass 1.42
+   ONB + VB off when cushion < $3,000 pass 24.7% (18-22 23.3%, 23-26 26.6%)  fail 10.7%  unfinished 64.6%  fails per pass 0.43

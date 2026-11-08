@@ -1,0 +1,59 @@
+[provenance] code a9fefdc0 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261102 #a2064cc0; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Bridge 'noise area' NQ 15-min (Zarattini / Aziz / Barbon intraday momentum; user's upload 2026-11-03, the Bridge's code).
+
+1. As posted (20 days, 50 / 25 pts, both sides), per NQ, 2018-01 -> 2026-11-02:
+   as posted, RTH chart                           n=5372 $  40 PF 1.16 t  4.9 win 63% yrs+ 8/9 | 18-22 $  36 t  3.3 | 23+ $  45 t  3.6 | L $  63 S $  20
+      exits: {'target': 3236, 'band/EMA exit': 1039, 'stop': 985, 'flat 14:30': 286, 'held past session (closed at last bar)': 9} | early-close days the code would hold: 9
+      by year $: {2018: 28882, 2019: -1476, 2020: 10984, 2021: 31734, 2022: 32031, 2023: 24414, 2024: 35315, 2025: 25928, 2026: 29738}
+   as posted, 24H chart                           n=7065 $  29 PF 1.11 t  4.0 win 62% yrs+ 9/9 | 18-22 $  28 t  2.9 | 23+ $  30 t  2.8 | L $  41 S $  18
+      exits: {'target': 4227, 'stop': 1399, 'band/EMA exit': 1230, 'flat 14:30': 381, 'held past session (closed at last bar)': 7} | early-close days the code would hold: 7
+      by year $: {2018: 24984, 2019: 262, 2020: 5766, 2021: 35477, 2022: 35415, 2023: 21012, 2024: 23576, 2025: 36004, 2026: 25087}
+
+2. Variants (same family checks as the 30-min test), RTH chart:
+   no target (stop 50 only)                       n=2326 $ 100 PF 1.26 t  3.5 win 33% yrs+ 8/9 | 18-22 $  99 t  3.1 | 23+ $ 101 t  2.0 | L $ 126 S $  72
+   target 50 / stop 50                            n=3915 $  54 PF 1.15 t  4.0 win 47% yrs+ 9/9 | 18-22 $  50 t  2.9 | 23+ $  58 t  2.8 | L $  78 S $  33
+   target 100 / stop 50                           n=2973 $  78 PF 1.19 t  3.9 win 37% yrs+ 9/9 | 18-22 $  78 t  3.1 | 23+ $  78 t  2.4 | L $ 127 S $  33
+   no stop, no target (paper exits)               n=2230 $ 111 PF 1.26 t  3.1 win 35% yrs+ 9/9 | 18-22 $  96 t  2.9 | 23+ $ 131 t  1.8 | L $ 147 S $  72
+   longs only                                     n=2580 $  63 PF 1.28 t  5.6 win 63% yrs+ 9/9 | 18-22 $  50 t  3.3 | 23+ $  76 t  4.5 | L $  63 S $ nan
+   shorts only                                    n=2795 $  20 PF 1.07 t  1.6 win 62% yrs+ 7/9 | 18-22 $  25 t  1.6 | 23+ $  13 t  0.7 | L $ nan S $  20
+   lookback 14 (paper)                            n=5389 $  41 PF 1.16 t  4.9 win 62% yrs+ 8/9 | 18-22 $  31 t  2.9 | 23+ $  51 t  4.1 | L $  65 S $  18
+   1 entry a day                                  n=1353 $  37 PF 1.16 t  2.4 win 58% yrs+ 7/9 | 18-22 $  49 t  2.6 | 23+ $  22 t  0.8 | L $  60 S $  11
+   target fills only 1 tick THROUGH (no touch fills) n=5354 $  37 PF 1.14 t  4.5 win 62% yrs+ 8/9 | 18-22 $  34 t  3.1 | 23+ $  41 t  3.2 | L $  59 S $  17
+   target 1 tick through, longs only              n=2570 $  59 PF 1.26 t  5.2 win 63% yrs+ 9/9 | 18-22 $  49 t  3.3 | 23+ $  70 t  4.1 | L $  59 S $ nan
+   +1 more tick per market/stop fill, target touch n=5372 $  33 PF 1.13 t  4.0 win 62% yrs+ 8/9 | 18-22 $  29 t  2.6 | 23+ $  38 t  3.0 | L $  56 S $  13
+   +1 more tick per market/stop fill, target 1 tick through n=5354 $  30 PF 1.12 t  3.6 win 62% yrs+ 8/9 | 18-22 $  27 t  2.5 | 23+ $  34 t  2.6 | L $  52 S $  10
+
+3. Random-entry placebo (RTH; same trades a day, random side and 15-min open 09:15-14:15, same bracket, 200 runs): real $40 vs placebo mean $-23 (95th pct $-9); p = 0.000
+
+3. Random-entry placebo (24H; same trades a day, random side and 15-min open 09:15-14:15, same bracket, 200 runs): real $29 vs placebo mean $-21 (95th pct $-8); p = 0.000
+
+4. Metrics per NQ (daily):
+            trades win avg  annual sharpe sortino profit_factor  max_dd calmar ulcer ulcer_perf
+rth 2018-26   5372 63% $40 $24,066   1.55    2.86          1.16 $13,615   1.77  3.17      15.20
+rth 2023+     2556 66% $45 $29,403   1.67    3.12          1.17 $13,205   2.23  3.95      14.89
+rth longs     2579 63% $63 $17,949   1.66    3.31          1.28 $12,204   1.47  2.69      13.36
+rth shorts    2793 62% $20  $6,116   0.55    0.97          1.07 $19,722   0.31  8.19       1.49
+24h 2018-26   7065 62% $29 $22,964   1.27    2.19          1.11 $14,679   1.56  4.53      10.14
+24h 2023+     3465 65% $30 $26,927   1.29    2.23          1.11 $13,037   2.07  5.56       9.69
+24h longs     3463 62% $41 $15,681   1.26    2.21          1.17 $18,264   0.86  7.55       4.16
+24h shorts    3602 63% $18  $7,282   0.56    0.97          1.06 $30,749   0.24  9.16       1.59
+                                    actual        p5       p50       p95
+name                metric                                              
+RTH as posted 2023+ sharpe            1.67      0.82      1.65      2.44
+                    sortino           3.12      1.43      3.07      4.89
+                    pf_day            1.43      1.19      1.42      1.68
+                    calmar            2.23      0.57      1.72      3.74
+                    ulcer             3.95      2.80      5.40     13.46
+                    max_dd       13,205.00 10,638.45 16,596.00 28,383.59
+                    P(Sharpe<=0)       NaN       NaN      0.00       NaN
+                    actual_dd pct_rank    dd50    dd95    dd99 P(dd>=5000) P(dd>=10000) P(dd>=20000)
+RTH as posted 2023+   $13,205      20% $16,014 $25,110 $31,278        100%          99%          19%
+   Monte Carlo RTH as posted, 1 MNQ (x0.1): trades 5372 | total p5 $14,299 / p50 $21,762 / p95 $29,089, P(total <= 0) 0.0%
+      max DD actual $1,435 (rank 8%), shuffled p50 $1,949 / p95 $3,107 / p99 $3,905; losing streak actual 12, p95 11
+      252-day block bootstrap: P&L p5 $-31 / p50 $2,360 / p95 $4,883, P(loss) 5.3%, max DD p50 $895 / p95 $1,788, return/DD 2.64, P(hit $2,000 trailing, EOD check only) 2.4%
+   Monte Carlo RTH as posted, 2 MNQ (x0.2): trades 5372 | total p5 $28,598 / p50 $43,524 / p95 $58,177, P(total <= 0) 0.0%
+      max DD actual $2,870 (rank 8%), shuffled p50 $3,898 / p95 $6,215 / p99 $7,809; losing streak actual 12, p95 11
+      252-day block bootstrap: P&L p5 $-62 / p50 $4,720 / p95 $9,766, P(loss) 5.3%, max DD p50 $1,790 / p95 $3,577, return/DD 2.64, P(hit $2,000 trailing, EOD check only) 22.0%
+   daily corr with the plan pieces (RTH): {'VaultBreak': 0.28, 'OvernightBiasML': 0.26, 'MondayLong': 0.1, 'ExpirationOpenShort': 0.06, 'LateDayFlow': 0.14, 'NFPFade': 0.03, 'BridgeMondayLong': 0.05, 'CLSundayFade_perMCL': -0.01, 'ESMOCFollow_perMES': 0.04, 'RelativeStrength': 0.25}
+
+   trials here 14; deflated Sharpe (RTH as posted, N = 14) 1.00

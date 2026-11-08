@@ -1,0 +1,18 @@
+[provenance] code 14373da1 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261102 #a2064cc0; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Bridge noise-area 15-min: the user's MultiCharts reports (2026-11-03, 'default session' and '24 hr', both @NQ 15-min,
+
+1. The two reports: 7061 and 7062 trades, identical trade lists: False. The 'default session' is the 24-hour CME session (trades 2018-01-31 -> 2026-11-03).
+   MC gross per NQ (2 contracts / 2): $307,565 over 9 years = $43.6 a trade before costs
+   entries matched by date + bar close time + side: 6997 of MC 7061 / port 7037 (99.1%)
+   entries matched by date + bar open time + side: 2030 of MC 7061 / port 7037 (28.7%)
+
+2. MC's trades at our costs ($7.25 + 1 tick per market / stop fill), per 1 NQ:
+   MC 24h, both sides                 n= 7061 $ 29.3 PF 1.11 t  4.0 yrs+ 8/9 | 18-22 $ 27.7 t  2.8 | 23+ $ 30.9 t  2.8
+   MC 24h, longs                      n= 3465 $ 40.2 PF 1.16 t  4.0 yrs+ 8/9 | 18-22 $ 19.0 t  1.4 | 23+ $ 60.8 t  4.1
+   MC 24h, shorts                     n= 3596 $ 18.8 PF 1.07 t  1.8 yrs+ 7/9 | 18-22 $ 35.7 t  2.5 | 23+ $  0.5 t  0.0
+   by year $ (both): {2018: 25110, 2019: -316, 2020: 6172, 2021: 32113, 2022: 36228, 2023: 24224, 2024: 20840, 2025: 38000, 2026: 24446}
+   by year $ (longs): {2018: 716, 2019: 3462, 2020: -6323, 2021: 22812, 2022: 11861, 2023: 44584, 2024: 12282, 2025: 35495, 2026: 14341}
+   port 24h, same window (both)       n= 7037 $ 29.4 PF 1.11 t  4.0 yrs+ 9/9 | 18-22 $ 28.3 t  2.9 | 23+ $ 30.5 t  2.8
+
+3. Scale: MC net $615,130 at 2 NQ and zero costs = $68,348 a year; at our costs $413,636 = $45,960 a year at 2 NQ, $2,298 a year per MNQ (longs only $1,547).
+   max closed-trade drawdown at our costs, per NQ $15,230 (= $1,523 per MNQ); MC's own max strategy drawdown at 2 NQ, zero costs: $27,890

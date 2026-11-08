@@ -1,0 +1,69 @@
+{
+  "scope": "Invented accounting/cost/data-gap tapes, static source and commit history only",
+  "market_return_tests": 0,
+  "economic_definitions": 0,
+  "live_or_external_actions": false,
+  "source_head": "d441df2f7921d4dc8e971d9ed4be9f08c585dbc0",
+  "account_tie_case": {
+    "50K": [
+      "pass",
+      2
+    ],
+    "150K": [
+      "fail",
+      2
+    ],
+    "note": "Same-minute ordering is ambiguous; sources resolve it differently. No observed path probability inferred."
+  },
+  "pretarget_floor_cases": {
+    "50K_legacy": [
+      "pass",
+      4
+    ],
+    "50K_correct_floor_after_day1": 50500.0,
+    "50K_day3_adverse_equity": 50400.0,
+    "150K_legacy": [
+      "pass",
+      4
+    ],
+    "150K_correct_floor_after_day1": 153000.0,
+    "150K_day3_adverse_equity": 152500.0,
+    "note": "Illustrates premature PA-like floor caps. Not a historical rerun; DLL fills also remain model assumptions."
+  },
+  "neutral_price_cost_cases": {
+    "green_NQ_net": -24.5,
+    "bertola_NQ_net": -24.5,
+    "NQ_documented_RT_plus_ticks": -17.25,
+    "green_ES_net": -35.0,
+    "bertola_ES_net": -35.0,
+    "ES_documented_RT_plus_ticks": -30.0,
+    "cause": "Both helpers subtract2*comm although callers/documentation pass round-trip commission."
+  },
+  "missing_held_path_case": {
+    "rows_emitted": 1,
+    "finite_net": -4.5,
+    "note": "Unknown held path is silently skipped, not rejected or represented as unknown."
+  },
+  "tri_state_sources_present": [
+    "apex_strategies/NQ_Vault_Break.txt",
+    "apex_strategies/NQ_Vault_Break_SP.txt",
+    "apex_strategies/NQ_Overnight_Bias.txt",
+    "apex_strategies/NQ_Overnight_Bias_ADX30.txt",
+    "apex_strategies/Bridge_Monday_Long_L644NQ.txt",
+    "funded_strategies/NQ_Expiration_Open_Short.txt"
+  ],
+  "tri_state_scope": "Source classification supplied; no Windows/MC native acceptance claimed.",
+  "python_sources_ast_parsed": 80,
+  "new_source_commit_histories": {
+    "analysis/daily_reversal_bertola_test.py": [
+      "1ce140289c61232fe8bb9a0f1f0e0b8d15834724 Bertola daily mean reversion (SSRN 7663278): test on NQ/ES, F"
+    ],
+    "analysis/long_after_green_test.py": [
+      "58c03fec32bc2ff114f738c4b90bec5a30b717e0 Long after green day (post hoc) test: C"
+    ],
+    "analysis/long_after_green_filters.py": [
+      "d441df2f7921d4dc8e971d9ed4be9f08c585dbc0 Long after green: 6 pre-registered filters, none adopted"
+    ]
+  },
+  "source_history_scope": "First committed code/results association does not authenticate earlier uncommitted bytes or the full private execution chronology."
+}
