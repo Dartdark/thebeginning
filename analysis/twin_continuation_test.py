@@ -45,7 +45,10 @@ def half_day(d):
 
 
 def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, mo_target=0.0, pv=PV, tick=TICK, comm=COMM, mo_stop=75.0, mo_stop_atr=0.0,
-             level_mode="swing6h", mo_window=(840, 930), off_dates=None, v21=False, vol_cap=2.0, bo_rth_only=False):
+             level_mode="swing6h", mo_window=(840, 930), off_dates=None, v21=False, vol_cap=2.0, bo_rth_only=False,
+             mo_exit=1450, mo_stop_pct=0.0):
+    # mo_exit (CT hhmm, MO flat from this bar) and mo_stop_pct (MO stop = pct x entry price, overrides mo_stop) added 2026-11-08 for
+    # other markets (mo_markets_test.py); defaults = v2.1
     # vol_cap (0 = off) and bo_rth_only (breakout entries only 08:30-15:00 CT) added 2026-11-08 for the ingredient ablation; defaults = v2.1
     # v21=True (2026-11-08): the live MultiCharts v2.1 holiday rules (CME early-close days per replica.is_early_close: no MO, no BO
     # entries from 11:00 to 17:00, flat after the 11:30 bar). Default False = the original port (1,109 cap1 trades).
@@ -81,7 +84,7 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
         # ---------------- fills during bar i (orders from bar i-1) ----------------
         if pos == 0 and pend_mo != 0:
             side = pend_mo if placebo_rng is None else placebo_rng.choice([-1, 1])
-            dist = mo_stop_atr * B["atr"][i] if mo_stop_atr > 0 else mo_stop
+            dist = mo_stop_atr * B["atr"][i] if mo_stop_atr > 0 else (mo_stop_pct * abs(o[i]) if mo_stop_pct > 0 else mo_stop)
             pos, setup, ent, ent_i = side, "MO", o[i], i; stop = ent - side * dist; pend_mo = 0
         elif pos == 0 and pend_bo:
             fl = fs = None
@@ -204,7 +207,7 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
         if fire != 0: armed = False; pend_mo = fire; sig_piv = piv; sig_i = i
         if armed and (pos != 0 or ntr > arm_trades): armed = False
         pend_bo = armed and pos == 0 and sm[i] + 1 < 1350 and fire == 0
-        if pos != 0 and setup == "MO" and 1450 <= (j[i] // 60) * 100 + j[i] % 60 <= 1600: mo_exit_pend = True
+        if pos != 0 and setup == "MO" and mo_exit <= (j[i] // 60) * 100 + j[i] % 60 <= 1600: mo_exit_pend = True
     T = pd.DataFrame(trades)
     T["slips"] = np.where(T.kind == 1, 1, 2)
     T["net"] = (T.exit - T.entry) * T.side * pv - comm - T.slips * tick * pv
