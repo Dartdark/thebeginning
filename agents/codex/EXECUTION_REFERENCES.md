@@ -2439,3 +2439,22 @@ hash-verified transport package. This is direct source-field verification, not a
   any separately preregistered strategy/execution replay. Keep current/future tentative schedules separate from
   completed outcomes and historical programs/tests separate from regular modern buybacks. No inferred result clock,
   automatic gate reopening, execution saving, deployment or live-system change follows.
+
+### E09/E15/E18 follow-up — Event ingredients, source clocks and hidden intratrade risk (2026-11-08)
+
+Source: [EOS/NFP/CL ingredient round](results/ingredients_events_20261108.md), frozen plan `fa2be26`;
+15 diagnostic definitions, design first and unchanged historical recent replay. No changed rule selected.
+
+- A CL no-stop trade attributed to Monday 2026-03-09 closes at about+$3,813 perCL after an observed source adverse
+  mark of−$16,007. The recent no-stop daily DD is unchanged even though its intratrade mark is much worse.
+  Booked profit/daily DD cannot substitute for an account-floor replay. One held source bar is missing on this event;
+  its true worst path is not certified. Do not remove protection because the final cash ledger looks better.
+- Preserve close-stamped bar labels versus civil open times: EOS08:31OPEN is08:30CT; NFP07:46OPEN is07:45CT;
+  CL17:06OPEN is17:05CT, with the actual source exit09:00CT/10:00ET. The older CL10:00CT study is a different horizon.
+  A first observed Sunday open after the five-minute decision cannot be used retrospectively for its gap signal.
+- Source NFP/EOS stops anchor to raw entry, CL to slipped entry. Standard-contract and native-micro commissions
+  are distinct; the sensitivity fee here is assumed$1.25RT perMNQ/MCL, not a verified broker quote. Extra cost on
+  fixed orders is not a latency/stop re-anchoring replay or a demonstrated execution saving.
+- The replay explicitly exposes skipped missing held bars and last-close fallback exits. Source-price agreement
+  and five synthetic fixtures do not certify native fills, dated rolls or actual bar/receipt latency. Next use only
+  for a separately preregistered changed strategy/account test after those prerequisites; no live/VPS/broker change.

@@ -1,0 +1,385 @@
+{
+  "phase": "recent",
+  "start": "2023-01-01",
+  "end": "2026-10-09",
+  "implementation_gates_passed": true,
+  "rule_cases": 15,
+  "source_data_ref": "fe35af99aa90d7f31b91f8693859251bb44dd9ab",
+  "source_inputs": {
+    "NQ_1min_2017.csv": {
+      "bytes": 3720003,
+      "git_blob": "1a235da2d569011833fcc27fc4b8bbe0ad51c012",
+      "sha256": "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d"
+    },
+    "NQ_1min_ON_2017.csv": {
+      "bytes": 872961,
+      "git_blob": "2b48593ed40b8b6165c566f183b54460918a5523",
+      "sha256": "34096eaeeefe9b8a7330d9df7d6e0d2cb93ce8dfc2a796bdbb43c6c0ce6b451a"
+    },
+    "CL_1min_2017.csv": {
+      "bytes": 1112561,
+      "git_blob": "ade2a977c8374f9274db2ceff5eb0a132ee97b38",
+      "sha256": "1c92250cd6bb12fd34958af01b5a54871d59f7419cb092524d626be16b0d8f91"
+    },
+    "NQ_1min_2018.csv": {
+      "bytes": 5630086,
+      "git_blob": "76eb73b44b4b67a08131dc1a4241fd4452b39673",
+      "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237"
+    },
+    "NQ_1min_ON_2018.csv": {
+      "bytes": 11729558,
+      "git_blob": "bf8386738439cb25cbdd160d23a6d3b3f39c5f3b",
+      "sha256": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2"
+    },
+    "CL_1min_2018.csv": {
+      "bytes": 14481455,
+      "git_blob": "7ab69da3b9d5f28ecbd6737175aabe580b7d6e16",
+      "sha256": "8a932d5cee6e9caa2026436d0d5c86c65b9014e2bdb0dcdcffa2ccb2dc217198"
+    },
+    "NQ_1min_2019.csv": {
+      "bytes": 5643031,
+      "git_blob": "db1c597e7dcac738d2a336fc90ba5a6d132aa535",
+      "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e"
+    },
+    "NQ_1min_ON_2019.csv": {
+      "bytes": 11858009,
+      "git_blob": "2a0dc8d66e208b526621d246d79e7a08699b1562",
+      "sha256": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d"
+    },
+    "CL_1min_2019.csv": {
+      "bytes": 14363545,
+      "git_blob": "104544695e6b26f4af6f9c82c3a338f16717e027",
+      "sha256": "d6a49a30b4f5a1ac039a7c6db2253dff9dadc2955d2db52548840b5be2f575e3"
+    },
+    "NQ_1min_2020.csv": {
+      "bytes": 5890101,
+      "git_blob": "fc22a2151cf8794527756f75048d89a7adfca1d1",
+      "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4"
+    },
+    "NQ_1min_ON_2020.csv": {
+      "bytes": 12324066,
+      "git_blob": "cd0eaccf6dcc1956dd1f7ef5fd417b6041f74cb8",
+      "sha256": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9"
+    },
+    "CL_1min_2020.csv": {
+      "bytes": 14483533,
+      "git_blob": "353dafe063c4b6e0bea1f04348a52172ba8a2ddb",
+      "sha256": "966d94e0454e9382adaaad6ff4d2955eebdea6113a8b7b75071afe895978497b"
+    },
+    "NQ_1min_2021.csv": {
+      "bytes": 6118786,
+      "git_blob": "c978b68c5092abceaba934228970a401b03b65b4",
+      "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500"
+    },
+    "NQ_1min_ON_2021.csv": {
+      "bytes": 12996633,
+      "git_blob": "26a8f20c87383ea421cb7efca5bfc2b03ed6a7a1",
+      "sha256": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e"
+    },
+    "CL_1min_2021.csv": {
+      "bytes": 14481189,
+      "git_blob": "794fec45c279a7601aaac5167f7c5ba22a93cff7",
+      "sha256": "5f032d4260084867b9ecc027e8e13238e116edbc40b298334b69f457a0e12f3b"
+    },
+    "NQ_1min_2022.csv": {
+      "bytes": 6122385,
+      "git_blob": "8651c6244bbd46b32e952062d91373348e0c3c9e",
+      "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2"
+    },
+    "NQ_1min_ON_2022.csv": {
+      "bytes": 13079168,
+      "git_blob": "2b0510fa786cfcb9f23b285735097258e77383ce",
+      "sha256": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0"
+    },
+    "CL_1min_2022.csv": {
+      "bytes": 14926411,
+      "git_blob": "f49ab04f29287713b295bc61070c88b80f7a47af",
+      "sha256": "102b1e4d88b8396425f257f79090360817b28324f22340e3f3c603e50a660823"
+    },
+    "NQ_1min_2023.csv": {
+      "bytes": 6085861,
+      "git_blob": "3014a32282825fd4e857430f220ff7770e99c052",
+      "sha256": "902a88f50c773c4cd7c0499ac43d2cb7b7147da6d760c5d32ece4be2107fc03a"
+    },
+    "NQ_1min_ON_2023.csv": {
+      "bytes": 13067423,
+      "git_blob": "a0eb08a9ed287ef0e84f99aab0e5a11c1ce454a0",
+      "sha256": "df8363f41bfd052ac1af29d646b4901bd2b16de3cd71b12812cdda6598cda3f7"
+    },
+    "CL_1min_2023.csv": {
+      "bytes": 14299476,
+      "git_blob": "95cc1c5135a850034f0907f98f1e891b86291bc7",
+      "sha256": "282c034468bc679bc41b9a0e5840944a0a0f3b3bd4f958ac87b3f1b0da78c296"
+    },
+    "NQ_1min_2024.csv": {
+      "bytes": 6118945,
+      "git_blob": "ccc5cdbca04f150251433ec945d13c24c43b50c7",
+      "sha256": "87a5db405d5bdc9aa0914018aed046dbdd50332f630700720ae40fa72ddd056a"
+    },
+    "NQ_1min_ON_2024.csv": {
+      "bytes": 13108186,
+      "git_blob": "cee683a5192e7be2f0a8cea350c8afad529093fe",
+      "sha256": "82e02ddf7e775f01b566f584f4f7245f7c021b6062437b9e2cf14be9e9852607"
+    },
+    "CL_1min_2024.csv": {
+      "bytes": 14237764,
+      "git_blob": "b6e834c0a955322c25291ca34b06b599d1b72fed",
+      "sha256": "a100afbee685ec21133d2444a4890023cc1e21227e0490aded109f14cc8e18ef"
+    },
+    "NQ_1min_2025.csv": {
+      "bytes": 6068360,
+      "git_blob": "31c3ee1fb91d71c2361a306e23665df34cbf2008",
+      "sha256": "5a454139b43adfe59dabca59a777b8373457dcf024ce806aecb939d3fbd1785f"
+    },
+    "NQ_1min_ON_2025.csv": {
+      "bytes": 13027728,
+      "git_blob": "0661049247467fc24e5b9370818e1fc94d83c601",
+      "sha256": "d9401a7321314ff4f8b098950d439687a018c486d8d2d8dcb001da166eb828dd"
+    },
+    "CL_1min_2025.csv": {
+      "bytes": 14064544,
+      "git_blob": "21960a862e9d9fd73730a957a8606a8d96f9cd28",
+      "sha256": "0b7cfee6941c57e2fcea1e915d383ae905dabb989d86ba9cdf30568dbb724797"
+    },
+    "NQ_1min_2026.csv": {
+      "bytes": 5161715,
+      "git_blob": "4a8ebbb692fb41d32af6e6915fee1bcde1730e8a",
+      "sha256": "2145b24f9adad9ed60d1ae76a4c7ca7af9ed824de9784bd347c4c5e80e1202fb"
+    },
+    "NQ_1min_ON_2026.csv": {
+      "bytes": 11099429,
+      "git_blob": "3feab95d97a83484d8df571e4f6e016e23591e01",
+      "sha256": "ba85d29ea9829ffafd60837d2d88c6ca2288a704abd322d8a139f885a57aa32d"
+    },
+    "CL_1min_2026.csv": {
+      "bytes": 11398333,
+      "git_blob": "242b15ca09f483cd599c427caee8d3e90c89382f",
+      "sha256": "845336bd40af8e201203d45d31bf50a3b3909ff27fc16209edda5f48693f78c9"
+    }
+  },
+  "script_sha256": "99818a22a85681aca090c4c8b23a2762977a6f8709e6ab9748397d40eca6966e",
+  "plan_sha256": "5b9a71a869f0f7e81f8df6a09474491a14c919451fbd97527d6f754f7b0da89b",
+  "plan_commit": "fa2be26fc2faab0fc046804f796e719a25c8012b",
+  "source_parity": {
+    "EOS": 45,
+    "NFP": 33,
+    "CL": 55
+  },
+  "pure_filter_controls": {
+    "EOS/no_expiry_gate": {
+      "pure_nested_filter": true,
+      "removed_n": 150,
+      "removed_total": -34500.09999999995,
+      "removed_mean": -230.00066666666632,
+      "removed_t": -1.2197783641532918,
+      "random_drops": 1000,
+      "actual_total": 31083.45000000001,
+      "actual_dd": 7429.299999999988,
+      "random_total_p5_p50_p95": [
+        -21049.685000000045,
+        -1335.2000000000044,
+        22703.620000000017
+      ],
+      "random_dd_p5_p50_p95": [
+        7872.112499999993,
+        14603.099999999991,
+        25771.805000000015
+      ],
+      "random_profit_ge_actual": 0.013,
+      "random_dd_le_actual": 0.037
+    },
+    "NFP/no_spike_gate": {
+      "pure_nested_filter": true,
+      "removed_n": 31,
+      "removed_total": 11714.916666666672,
+      "removed_mean": 377.90053763440875,
+      "removed_t": 0.9566510049304201,
+      "random_drops": 1000,
+      "actual_total": 18195.75,
+      "actual_dd": 4784.0,
+      "random_total_p5_p50_p95": [
+        1959.7333333333336,
+        13795.416666666672,
+        26411.983333333315
+      ],
+      "random_dd_p5_p50_p95": [
+        2931.675,
+        4768.666666666664,
+        8163.999999999999
+      ],
+      "random_profit_ge_actual": 0.269,
+      "random_dd_le_actual": 0.504
+    },
+    "NFP/no_payroll_calendar": {
+      "pure_nested_filter": true,
+      "removed_n": 107,
+      "removed_total": 18384.416666666773,
+      "removed_mean": 171.8169781931474,
+      "removed_t": 0.7333357837929392,
+      "random_drops": 1000,
+      "actual_total": 18195.75,
+      "actual_dd": 4784.0,
+      "random_total_p5_p50_p95": [
+        -9071.166666666662,
+        7480.916666666682,
+        28545.56666666666
+      ],
+      "random_dd_p5_p50_p95": [
+        3601.5708333333328,
+        7750.8333333333285,
+        15918.754166666617
+      ],
+      "random_profit_ge_actual": 0.197,
+      "random_dd_le_actual": 0.17
+    },
+    "CL/no_upgap_gate": {
+      "pure_nested_filter": true,
+      "removed_n": 132,
+      "removed_total": -11393.499999999927,
+      "removed_mean": -86.31439393939338,
+      "removed_t": -0.886149182179163,
+      "random_drops": 1000,
+      "actual_total": 40530.25000000004,
+      "actual_dd": 5156.250000000007,
+      "random_total_p5_p50_p95": [
+        519.9000000000419,
+        16939.250000000033,
+        33799.90000000005
+      ],
+      "random_dd_p5_p50_p95": [
+        4354.45000000001,
+        7429.999999999993,
+        13583.137499999995
+      ],
+      "random_profit_ge_actual": 0.013,
+      "random_dd_le_actual": 0.102
+    }
+  },
+  "fixtures": {
+    "groups_passed": 5,
+    "market_returns_computed": false
+  },
+  "resampling_draws": 1000,
+  "seed": 20261109,
+  "excluded_before_pricing": [
+    {
+      "case": "CL/all",
+      "date": "2023-01-02",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2023-02-06",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2023-04-24",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2023-07-03",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2023-09-18",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2023-10-16",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2023-12-25",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2024-01-01",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2024-02-12",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    },
+    {
+      "case": "CL/all",
+      "date": "2025-03-03",
+      "reason": "invalid_or_late_opening_gap_or_ATR"
+    }
+  ],
+  "dependency_sha256": {
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a",
+    "analysis/codex_ingredients_three_20261108.py": "ed4e4f7e0daa05e659162337686a53b6ae82460cd35176c7adefe01553491a75"
+  },
+  "portfolio_tests_run": false,
+  "selected_changed_or_combined_strategy": false,
+  "source_policy_missing_path_caveat": {
+    "EOS/original": {
+      "missing_held_bars": 0,
+      "last_close_fallbacks": 0
+    },
+    "EOS/no_expiry_gate": {
+      "missing_held_bars": 0,
+      "last_close_fallbacks": 0
+    },
+    "EOS/opposite_direction": {
+      "missing_held_bars": 0,
+      "last_close_fallbacks": 0
+    },
+    "EOS/no_stop": {
+      "missing_held_bars": 0,
+      "last_close_fallbacks": 0
+    },
+    "EOS/exit_0900": {
+      "missing_held_bars": 0,
+      "last_close_fallbacks": 0
+    },
+    "NFP/original": {
+      "missing_held_bars": 0,
+      "last_close_fallbacks": 0
+    },
+    "NFP/no_spike_gate": {
+      "missing_held_bars": 0,
+      "last_close_fallbacks": 0
+    },
+    "NFP/no_payroll_calendar": {
+      "missing_held_bars": 0,
+      "last_close_fallbacks": 0
+    },
+    "NFP/opposite_direction": {
+      "missing_held_bars": 0,
+      "last_close_fallbacks": 0
+    },
+    "NFP/no_stop": {
+      "missing_held_bars": 0,
+      "last_close_fallbacks": 0
+    },
+    "CL/original": {
+      "missing_held_bars": 276,
+      "last_close_fallbacks": 1
+    },
+    "CL/no_upgap_gate": {
+      "missing_held_bars": 2052,
+      "last_close_fallbacks": 1
+    },
+    "CL/opposite_direction": {
+      "missing_held_bars": 274,
+      "last_close_fallbacks": 1
+    },
+    "CL/no_stop": {
+      "missing_held_bars": 278,
+      "last_close_fallbacks": 1
+    },
+    "CL/exit_0300": {
+      "missing_held_bars": 276,
+      "last_close_fallbacks": 0
+    }
+  }
+}
