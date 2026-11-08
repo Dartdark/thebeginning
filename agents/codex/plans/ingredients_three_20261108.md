@@ -66,3 +66,7 @@ No economic pass/fail promotion is sought here. Any future proposed rule change 
 parity/independent review and then actual current-book BASE/ADD/REPLACE/EMPTY tests at integer sizes.
 Do not run account simulations, parameter search or write live/MultiCharts changes as part of this task.
 No scout/schedule changes, external messages, paid data, VPS, broker or API-key access.
+
+Pre-return engineering correction: first attempt stopped while constructing the in-memory grid because the
+AST namespace omitted the source's NMIN24=1440 constant. Bind that exact source constant; no data, rule,
+cost, hypothesis or outcomes changed. No strategy function had run when the NameError occurred.

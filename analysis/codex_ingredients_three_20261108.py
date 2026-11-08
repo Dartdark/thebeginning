@@ -47,7 +47,7 @@ def functions(filename,names,namespace):
 
 def grids(end):
     manifest={}; last_year=pd.Timestamp(end).year
-    G=functions('grid24.py',['jof','Grid24'],{'np':np,'pd':pd,'glob':glob})['Grid24']
+    G=functions('grid24.py',['jof','Grid24'],{'np':np,'pd':pd,'glob':glob,'NMIN24':1440})['Grid24']
     with tempfile.TemporaryDirectory(prefix='ingredients_three_') as tmp:
         tmp=Path(tmp)
         for year in range(2017,last_year+1):
