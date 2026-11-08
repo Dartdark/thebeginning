@@ -2254,3 +2254,13 @@ Evidence: full PDF/page18image,6registered arithmetic/synthetic-risk groups and1
 strategy replication, measured execution saving, hedge benefit, portfolio test or live change. Missing custom
 indicator formulas and fill/roll/capital clocks stop dependent returns. Next only with genuinely new matching
 evidence: one source indicator/entry/exit and native mark-to-market cash reconciliation before any strategy trial.
+
+
+SSRN5630830 user-authorized adaptation outcome (2026-11-08):
+[actual weekly design test](results/weekly_nq_adapt_20261108.md) filled formulas explicitly, then stopped on
+failed registered gates. At1MNQ,2018–22fullrule16trades/$4686net/t0.92/Sharpe0.54vsbaseline27trades/
+$7029net/Sharpe0.50. Dailycash/costs reconcile; customindicator replication and source performance remain
+unverified. Calendarroll quarantine avoids knownwindowspans but does not authenticate datedcontracts;
+RTHdailyDD is not full overnightadversepath risk. A pre-return missing08:01bar check led to a committed
+first-observed-bar delay amendment; do not invent prices during missing/halted intervals. No2023+NQreturn
+test, portfolio stage or live change followed failure. This outcome is not evidence of execution savings.

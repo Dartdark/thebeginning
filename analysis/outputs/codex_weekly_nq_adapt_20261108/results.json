@@ -1,0 +1,136 @@
+{
+  "stage": "2018-22 design only",
+  "definition": "assumed weekly NQ/VIX adaptation, not exact source replication",
+  "results": {
+    "full": {
+      "trades": 16,
+      "win": 0.5625,
+      "avg": 292.875,
+      "annual": 914.6955848179706,
+      "sharpe": 0.5427351185306164,
+      "sortino": 0.7279693657496178,
+      "profit_factor": 1.8754378590444165,
+      "max_dd": 3499.875,
+      "calmar": 0.2613509296240496,
+      "ulcer": 2.615835696966934,
+      "ulcer_perf": 0.6993524752938891,
+      "total": 4686.0,
+      "gross": 4722.0,
+      "commission": 20.0,
+      "slippage": 16.0,
+      "stress_total": 4670.0,
+      "reference_nq_avg": 2934.0,
+      "t_trade": 0.922481758458082,
+      "by_year": {
+        "2018": 1092.75,
+        "2019": -733.75,
+        "2020": 2841.0,
+        "2021": 4535.375,
+        "2022": -3049.375
+      },
+      "short_trades": 0
+    },
+    "baseline": {
+      "trades": 27,
+      "win": 0.5555555555555556,
+      "avg": 260.3425925925926,
+      "annual": 1372.0921766072813,
+      "sharpe": 0.5023709256313298,
+      "sortino": 0.6648438854685104,
+      "profit_factor": 1.728721749948165,
+      "max_dd": 5820.875,
+      "calmar": 0.23571923063238454,
+      "ulcer": 3.69539416966783,
+      "ulcer_perf": 0.7425958442374311,
+      "total": 7029.25,
+      "gross": 7090.0,
+      "commission": 33.75,
+      "slippage": 27.0,
+      "stress_total": 7002.25,
+      "reference_nq_avg": 2608.675925925926,
+      "t_trade": 1.045652436420565,
+      "by_year": {
+        "2018": 377.75,
+        "2019": 1780.625,
+        "2020": 4971.75,
+        "2021": 4969.25,
+        "2022": -5070.125
+      },
+      "short_trades": 0
+    }
+  },
+  "gates": {
+    "trades_ge20": false,
+    "gross_positive": true,
+    "net_positive": true,
+    "trade_t_ge2": false,
+    "sharpe_ge0_5": true,
+    "positive_years_ge3": true,
+    "cost_stress_positive": true,
+    "sharpe_beats_baseline_0_1": false,
+    "calmar_ge_baseline": true
+  },
+  "design_passed": false,
+  "economic_definitions": 2,
+  "execution_stresses": 2,
+  "holdout_read": false,
+  "portfolio_tests_run": false,
+  "data_dates": [
+    "2017-05-01 00:00:00",
+    "2022-12-30 00:00:00"
+  ],
+  "weekly_formation_rows": 296,
+  "first_valid_ema25_week": "2017-10-20 00:00:00",
+  "quarantine_weeks_design": 45,
+  "delayed_execution_sessions": {
+    "2020-03-12": 802,
+    "2020-03-13": 806,
+    "2020-03-16": 806
+  },
+  "inputs": {
+    "NQ_1min_2017.csv": {
+      "git_blob": "1a235da2d569011833fcc27fc4b8bbe0ad51c012",
+      "sha256": "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d",
+      "bytes": 3720003
+    },
+    "NQ_1min_2018.csv": {
+      "git_blob": "76eb73b44b4b67a08131dc1a4241fd4452b39673",
+      "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+      "bytes": 5630086
+    },
+    "NQ_1min_2019.csv": {
+      "git_blob": "db1c597e7dcac738d2a336fc90ba5a6d132aa535",
+      "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+      "bytes": 5643031
+    },
+    "NQ_1min_2020.csv": {
+      "git_blob": "fc22a2151cf8794527756f75048d89a7adfca1d1",
+      "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+      "bytes": 5890101
+    },
+    "NQ_1min_2021.csv": {
+      "git_blob": "c978b68c5092abceaba934228970a401b03b65b4",
+      "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+      "bytes": 6118786
+    },
+    "NQ_1min_2022.csv": {
+      "git_blob": "8651c6244bbd46b32e952062d91373348e0c3c9e",
+      "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+      "bytes": 6122385
+    },
+    "VIX_daily.csv": {
+      "git_blob": "d4101774924ca7d55dd67d014de2e43aaaac3b5e",
+      "sha256": "98d98bc0f60e2ce4cf89ad7f2816013824f9e5ca3409ebfa4375c4ffe7794aa3",
+      "bytes": 325278
+    }
+  },
+  "preregistration_commit": "2a2d27d0431929080cf9b38b7a8206887ad83653",
+  "code_sha256": "df75e98ae72a655baa7bbac1b94b8f222e0bc9e96ac3f514571f83c4922907c2",
+  "plan_sha256": "fb57bcced4a28c5a4f63bcbd5d319821c1fe2aaeeec13b2b15ac106321c19b8b",
+  "limitations": [
+    "RTH daily marks omit overnight intraperiod adverse excursions",
+    "continuous contract identities/actual rolls not authenticated; fixed calendar quarantine",
+    "assumed formulas and Monday08:00 execution differ from paper",
+    "no financing, collateral, margin sufficiency or portfolio certification"
+  ]
+}
