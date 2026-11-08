@@ -88,6 +88,21 @@ Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
 - Next check: reuse original controls and ledgers before proposing another delay; include missed entries, changed exits and opportunity cost.
 - Status: negative/cautionary execution reference, not a new alpha candidate.
 
+**2026-11-08 current-book follow-up:** [completed design report](results/fast_alpha_books_20261108.md),
+[frozen execution runner](../../analysis/codex_fast_alpha_books_20261108.py),
+[reconciliation/coverage](../../analysis/outputs/codex_fast_alpha_books_20261108/reconciliation.json).
+The owned seven-page source uses five-minute **close-to-close returns**, not candle close minus open.
+An opposite return only triggers a next-minute market order; it does not guarantee a better price or passive fill.
+The preregistered fixed-parent execution wrapper covered 24 instrument/version streams mapped to all five books,
+with BASE/ENTRY/BOTH and 72 executed design definitions (48 reserved null definitions unused).
+Design 2018-04-02–2022-12-30, one native micro, $1.24 round-trip commission plus one adverse tick per market/stop fill:
+none passed. All six streams without unresolved paths lost net dollars under both delay policies.
+Positive conditional effects in other streams were weak/incomplete; selected complete-case baselines are not
+full-strategy estimates. No random-delay/drop, 2023+ validation or account stage was earned.
+Delaying stops can increase losses: the observed Kusho paired extra adverse excursion reached $660.50 per micro
+and the maximum additional hold was 60 minutes; these are minute-model observations, not account-floor replay.
+Keep the original search history and amended source clocks; no waiting-window rescue, deployment or allocation follows.
+
 ### E07 — Almgren–Chriss / TWAP and event replay tools
 
 [Public-repositories review](results/public_repositories_review.md), 2026-10-26.

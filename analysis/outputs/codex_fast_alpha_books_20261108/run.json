@@ -1,11 +1,13 @@
 {
   "program": "user-fast-alpha-books-20261108",
-  "preregistration_commit": "d06d6eaeb069edc5c15fb8d44a9908661878936a",
-  "checked_head": "d06d6eaeb069edc5c15fb8d44a9908661878936a",
+  "preregistration_commit": "3b22c7e94e281dd79c45edc5ef75c08a44a3411b",
+  "checked_head": "3b22c7e94e281dd79c45edc5ef75c08a44a3411b",
   "design_start": "2018-04-02",
   "design_end": "2022-12-30",
-  "future_prices_loaded": false,
-  "definition_views_executed": 69,
+  "future_raw_ohlc_loaded": false,
+  "static_parent_ledgers_contain_already_seen_later_rows": true,
+  "new_overlay_results_2023plus_computed": false,
+  "definition_views_executed": 72,
   "controls_run": false,
   "historical_validation_run": false,
   "account_tests_run": false,
@@ -154,7 +156,7 @@
       "parent": "PT",
       "status": "stop_design",
       "statistical_survivors": [],
-      "joint_unknown": 219,
+      "joint_unknown": 1,
       "source_tickets": 316,
       "selection": "largest paired effect among passing profiles, ENTRY before BOTH on ties",
       "selected": null,
@@ -172,8 +174,13 @@
     },
     {
       "parent": "KUSHO",
-      "status": "source_adapter_blocked",
-      "error": "AssertionError('Kusho index origin mismatch')"
+      "status": "stop_design",
+      "statistical_survivors": [],
+      "joint_unknown": 379,
+      "source_tickets": 1738,
+      "selection": "largest paired effect among passing profiles, ENTRY before BOTH on ties",
+      "selected": null,
+      "qualification": "Frozen virtual parent-intent study; no actual account/capital recommendation without independent intent/risk parity and earned control/validation/account stages."
     },
     {
       "parent": "S30_NQ",
