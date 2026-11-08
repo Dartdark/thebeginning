@@ -2294,3 +2294,17 @@ counted, not futurefilled; RSretains within-rowforwardfill, DTobservednextbar an
 Rerunning a port is not fresh MC/nativefill parity or a risk guarantee. Before any proposed newrule: separate
 preregistration, native path/parity checks, then current-book comparison at integer size. No measured execution
 savings, accountpayout improvement, funding recommendation or new source-data purchase established here.
+
+
+Late-dayRS execution/design follow-up (2026-11-08):
+[registered comparison](results/ldf_rs_20261108.md) replayed14:00residual entries with filled-entry ATRstops,
+entrybar/gap handling and14:30flatten. Independent baselinewalker matches all492sourceLDFdesign trades
+on side/net. Five synthetic fixturegroups cover long/shortstops,entrybar,gap,flatten/nativefeesandmissing
+path rejection. No unknownheldOHLCin admitted1242sessions; common-calendarzeros alter Sharpe denominator,
+not profit. Do not label that denominatorchange alpha. Next-bar fills remain modeled;1minute-delay replay
+is a sensitivity, not measuredlatency. Fixedorderextra-tickcostview does not reanchor a newstop path.
+
+StandaloneLateRSdesign244trades,$40163perNQ/t3.72/PF2.19lookspromisingbutfails the registered paired
+incrementconfidence gate versusLDF. Combinedfilter removes350profitable-in-aggregate LDFtrades andfails.
+No2023+,portfolio,payout,MultiChartsorlive result. Frozen standalone lead retained for independentreview,
+not automatic gate reopening or execution-savings claim. No plan or strategy settings changed.

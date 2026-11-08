@@ -1,0 +1,306 @@
+{
+  "stage": "2018-22 design",
+  "rule_definitions": 3,
+  "delay_replays": 2,
+  "account_tests_run": false,
+  "recent_return_tests_run": false,
+  "selected": null,
+  "results": {
+    "LDF": {
+      "trades": 492,
+      "win": 0.540650406504065,
+      "avg": 75.94681571815732,
+      "annual": 7581.473429951704,
+      "sharpe": 1.2096823511240655,
+      "sortino": 2.0340573329855354,
+      "profit_factor": 1.4359531291321201,
+      "max_dd": 15035.999999999967,
+      "calmar": 0.5042214305634292,
+      "ulcer": 9.244979210441295,
+      "ulcer_perf": 1.6401277401228065,
+      "total": 37365.8333333334,
+      "gross": 45852.8333333334,
+      "commission": 3567.0,
+      "slippage": 4920.0,
+      "t_trade": 2.6958595864901294,
+      "native_mnq_total": 3478.28333333334,
+      "worst": -2526.3333333333285,
+      "native_mnq_worst": -253.15833333333285,
+      "cost_stress_total": 32445.8333333334,
+      "positive_years": 3
+    },
+    "LateRS": {
+      "trades": 244,
+      "win": 0.6024590163934426,
+      "avg": 164.6007513661202,
+      "annual": 8148.9299516908195,
+      "sharpe": 1.642451116496271,
+      "sortino": 3.737285009536773,
+      "profit_factor": 2.194189503939739,
+      "max_dd": 4157.249999999993,
+      "calmar": 1.9601731797921302,
+      "ulcer": 1.840660653140548,
+      "ulcer_perf": 8.854353395110673,
+      "total": 40162.58333333333,
+      "gross": 44371.58333333333,
+      "commission": 1769.0,
+      "slippage": 2440.0,
+      "t_trade": 3.7227711621226813,
+      "native_mnq_total": 3888.158333333333,
+      "worst": -1649.5833333333358,
+      "native_mnq_worst": -165.48333333333358,
+      "cost_stress_total": 37722.58333333333,
+      "positive_years": 4
+    },
+    "Combined": {
+      "trades": 142,
+      "win": 0.5985915492957746,
+      "avg": 104.9982394366198,
+      "annual": 3025.166666666669,
+      "sharpe": 1.0477679722303062,
+      "sortino": 1.873204969273344,
+      "profit_factor": 1.7984229409874704,
+      "max_dd": 3247.0,
+      "calmar": 0.9316805256133873,
+      "ulcer": 1.7312265303594074,
+      "ulcer_perf": 3.494824754145416,
+      "total": 14909.750000000011,
+      "gross": 17359.25000000001,
+      "commission": 1029.5,
+      "slippage": 1420.0,
+      "t_trade": 2.3589927254199927,
+      "native_mnq_total": 1416.425000000001,
+      "worst": -1257.25,
+      "native_mnq_worst": -126.25,
+      "cost_stress_total": 13489.750000000011,
+      "positive_years": 4
+    },
+    "LateRS_delay1m": {
+      "trades": 244,
+      "win": 0.5737704918032787,
+      "avg": 138.31967213114754,
+      "annual": 6847.826086956521,
+      "sharpe": 1.4629330230579651,
+      "sortino": 3.0202813537975435,
+      "profit_factor": 1.9360698932186937,
+      "max_dd": 4334.999999999993,
+      "calmar": 1.5796599969911262,
+      "ulcer": 2.112800045660658,
+      "ulcer_perf": 6.482228264828775,
+      "total": 33750.0,
+      "gross": 37959.0,
+      "commission": 1769.0,
+      "slippage": 2440.0,
+      "t_trade": 3.300285494879594,
+      "native_mnq_total": 3246.8999999999996,
+      "worst": -1649.5833333333358,
+      "native_mnq_worst": -165.48333333333358,
+      "cost_stress_total": 31309.999999999996,
+      "positive_years": 4
+    },
+    "Combined_delay1m": {
+      "trades": 142,
+      "win": 0.5704225352112676,
+      "avg": 103.1320422535212,
+      "annual": 2971.39855072464,
+      "sharpe": 1.0686284201470946,
+      "sortino": 1.9067812153482362,
+      "profit_factor": 1.8098628546148328,
+      "max_dd": 2962.0,
+      "calmar": 1.0031730421082512,
+      "ulcer": 1.6305443785361406,
+      "ulcer_perf": 3.6446705650443962,
+      "total": 14644.750000000011,
+      "gross": 17094.25000000001,
+      "commission": 1029.5,
+      "slippage": 1420.0,
+      "t_trade": 2.407651716349606,
+      "native_mnq_total": 1389.925000000001,
+      "worst": -1262.25,
+      "native_mnq_worst": -126.75,
+      "cost_stress_total": 13224.750000000011,
+      "positive_years": 4
+    }
+  },
+  "gates": {
+    "LateRS": {
+      "checks": {
+        "trades_ge30": true,
+        "gross_net_positive": true,
+        "trade_t_ge2": true,
+        "PF_ge1_2": true,
+        "positive_years_ge3": true,
+        "net_beats_LDF": true,
+        "DD_not_worse_LDF": true,
+        "Sharpe_not_worse_LDF": true,
+        "delay1m_positive": true,
+        "extra_tick_cost_positive": true,
+        "paired_annual_p5_positive": false
+      },
+      "passed": false
+    },
+    "Combined": {
+      "checks": {
+        "trades_ge30": true,
+        "gross_net_positive": true,
+        "trade_t_ge2": true,
+        "PF_ge1_2": true,
+        "positive_years_ge3": true,
+        "net_beats_LDF": false,
+        "DD_not_worse_LDF": true,
+        "Sharpe_not_worse_LDF": false,
+        "delay1m_positive": true,
+        "extra_tick_cost_positive": true,
+        "paired_annual_p5_positive": false,
+        "pure_nested_filter": true,
+        "removed_trades_negative": false,
+        "random_drop_profit": false,
+        "random_drop_DD": false
+      },
+      "passed": false
+    }
+  },
+  "paired_effects": {
+    "LateRS": {
+      "total_increment": 2796.7499999999272,
+      "annual_p5": -4890.226207729475,
+      "annual_p50": 343.2536231884013,
+      "annual_p95": 5392.621618357474
+    },
+    "Combined": {
+      "total_increment": -22456.08333333339,
+      "annual_p5": -10037.71256038648,
+      "annual_p50": -4630.93961352658,
+      "annual_p95": 486.78490338162214
+    }
+  },
+  "combined_filter_control": {
+    "pure_nested_filter": true,
+    "removed_n": 350,
+    "removed_total": 22456.08333333339,
+    "removed_mean": 64.16023809523826,
+    "removed_t": 1.8195001732937972,
+    "random_drops": 1000,
+    "actual_total": 14909.750000000011,
+    "actual_dd": 3247.0,
+    "random_total_p5_p50_p95": [
+      -1279.2583333333178,
+      8663.333333333356,
+      18413.862500000007
+    ],
+    "random_dd_p5_p50_p95": [
+      3189.933333333326,
+      6114.291666666661,
+      10118.212499999976
+    ],
+    "random_profit_ge_actual": 0.157,
+    "random_dd_le_actual": 0.056
+  },
+  "source_snapshot": "fe35af99aa90d7f31b91f8693859251bb44dd9ab",
+  "inputs": {
+    "NQ_1min_2017.csv": {
+      "blob": "1a235da2d569011833fcc27fc4b8bbe0ad51c012",
+      "sha256": "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d",
+      "bytes": 3720003
+    },
+    "NQ_1min_ON_2017.csv": {
+      "blob": "2b48593ed40b8b6165c566f183b54460918a5523",
+      "sha256": "34096eaeeefe9b8a7330d9df7d6e0d2cb93ce8dfc2a796bdbb43c6c0ce6b451a",
+      "bytes": 872961
+    },
+    "ES_1min_2017.csv": {
+      "blob": "420179855bc49442e8f5c9b51daa3bbda67b1cfb",
+      "sha256": "9ddc201359c70d1adb174141d0614dbf48e08f3324f63b6f91b97350a0aac442",
+      "bytes": 17310586
+    },
+    "NQ_1min_2018.csv": {
+      "blob": "76eb73b44b4b67a08131dc1a4241fd4452b39673",
+      "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+      "bytes": 5630086
+    },
+    "NQ_1min_ON_2018.csv": {
+      "blob": "bf8386738439cb25cbdd160d23a6d3b3f39c5f3b",
+      "sha256": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2",
+      "bytes": 11729558
+    },
+    "ES_1min_2018.csv": {
+      "blob": "577f9e3a2b8b9b75c7615435eb548e46573d9825",
+      "sha256": "ad4027b8230de0a91f83d1b6f3b798933f92cedebc39e56fe9223447c4b9d751",
+      "bytes": 17506050
+    },
+    "NQ_1min_2019.csv": {
+      "blob": "db1c597e7dcac738d2a336fc90ba5a6d132aa535",
+      "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+      "bytes": 5643031
+    },
+    "NQ_1min_ON_2019.csv": {
+      "blob": "2a0dc8d66e208b526621d246d79e7a08699b1562",
+      "sha256": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d",
+      "bytes": 11858009
+    },
+    "ES_1min_2019.csv": {
+      "blob": "adf41d77df2d298c0b8a9f8493912d9a22d22925",
+      "sha256": "b9c09d6c9a702e560119bd33770cc71e05423fc0a7a227fcc046e73bf22f22c5",
+      "bytes": 17631102
+    },
+    "NQ_1min_2020.csv": {
+      "blob": "fc22a2151cf8794527756f75048d89a7adfca1d1",
+      "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+      "bytes": 5890101
+    },
+    "NQ_1min_ON_2020.csv": {
+      "blob": "cd0eaccf6dcc1956dd1f7ef5fd417b6041f74cb8",
+      "sha256": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9",
+      "bytes": 12324066
+    },
+    "ES_1min_2020.csv": {
+      "blob": "0fa3891929dc0a5ffef899bd154b134c5732fa68",
+      "sha256": "c22514904bd19b8ee9e3611bcd8af4017290730550b4799b9d92da73f8e7d550",
+      "bytes": 17667404
+    },
+    "NQ_1min_2021.csv": {
+      "blob": "c978b68c5092abceaba934228970a401b03b65b4",
+      "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+      "bytes": 6118786
+    },
+    "NQ_1min_ON_2021.csv": {
+      "blob": "26a8f20c87383ea421cb7efca5bfc2b03ed6a7a1",
+      "sha256": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e",
+      "bytes": 12996633
+    },
+    "ES_1min_2021.csv": {
+      "blob": "21be847fe2b708aa3d9e779481229adc0391e553",
+      "sha256": "67cd2dee366b86f555d09d45fb4cb9f6163347531b4f3f230f73704a1fff8096",
+      "bytes": 17835299
+    },
+    "NQ_1min_2022.csv": {
+      "blob": "8651c6244bbd46b32e952062d91373348e0c3c9e",
+      "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+      "bytes": 6122385
+    },
+    "NQ_1min_ON_2022.csv": {
+      "blob": "2b0510fa786cfcb9f23b285735097258e77383ce",
+      "sha256": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0",
+      "bytes": 13079168
+    },
+    "ES_1min_2022.csv": {
+      "blob": "03cfa4acaad8bce66056be420b86f73af62eacfa",
+      "sha256": "00db614dd10674f7fe2f14940ae43f523b57ac48db1b0619b0eb084c5f50f601",
+      "bytes": 17909640
+    }
+  },
+  "dependencies": {
+    "agents/codex/inputs/ingredients_three_20261108/RelStrength_v3.txt": "d819039cd0aedb33aa730f4b3b723adcc3169d10f4e9fa57c351e4652dc79b61",
+    "agents/codex/inputs/ingredients_three_20261108/dual_thrust_test.py": "f6823325cfed5a88d392e4df3ee1c431adad1122882b9e24950d5ad130b284cc",
+    "agents/codex/inputs/ingredients_three_20261108/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "agents/codex/inputs/ingredients_three_20261108/letf_rebalance_test.py": "de58bc8322edb1049bc0c1f33ea78d39fbe0b1682e1630c84567ac17c6211ee6",
+    "agents/codex/inputs/ingredients_three_20261108/relative_strength_test.py": "5fc4bfb4ecf44014ecf781865ca4fdd04ff73dee761786c26048823176b8e44c",
+    "analysis/codex_ingredients_three_20261108.py": "ed4e4f7e0daa05e659162337686a53b6ae82460cd35176c7adefe01553491a75",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a"
+  },
+  "plan_commit": "da2161fe9dec4b52c8afa7803afe978346a74682",
+  "script_sha256": "7c1a9da91fb621e8f418db89bacdbe323e31dcf82c4817abde0bd402e82dfc3b",
+  "plan_sha256": "47140af167d7f5ff5ddab0708e6a88af4965231640de4d8ea012e690012fe6d0",
+  "prior_selection": "new interaction proposed after already-seen ingredient diagnostics; not independent discovery"
+}

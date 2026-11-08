@@ -228,6 +228,17 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
 
 ## Promising strategies awaiting verification (user, 2026-10-27)
 
+- [ ] **Late-day relative-strength continuation — frozen design lead, advancement gate FAILED (2026-11-08).**
+  NQ/ES residual at14:00CT, absZ>=1.25, stop0.25ATR, exit14:30, no ownmovehurdle.
+  Owned2018–22:244trades, net$40163perNQ, t3.72, PF2.19, dailyDD$4157 versusLDF$15036;
+  one-minute delay remainspositive. Merits are standalone design evidence, not verified portfolio benefit.
+  Registered incrementalprofitconfidence gate versusLDFfailed (paired annual5/95%−$4890/+ $5393);
+  **no2023+,accounttests orpromotion**. The proposedLDF+RScombinedfilter separately rejected.
+  Smallest nextcheck: independent code/clock/cost/parity review of frozen engine and source receipts.
+  Further economic work needs a separate committed protocol preserving failure/selectionhistory; no
+  automatic retuning, reopening gate, freshholdout claim or live change. No missing paid dataset requested.
+  [Completed screen](agents/codex/results/ldf_rs_20261108.md) · [Frozen plan](agents/codex/plans/ldf_rs_20261108.md).
+
 - [ ] **KSE Sentinel / PSX trend continuation — NEEDS RULES AND VALIDATION (uploaded SSRN7102818).**
   Low-priority personal-market lead only. Author claims 1,009 trades, PF 2.51, Sharpe 2.08,
   PKR CAGR 7.47% but USD CAGR −2.96%; unverified. Exact EMA/regime/exit/sizing rules withheld;
