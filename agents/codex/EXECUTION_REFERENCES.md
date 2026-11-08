@@ -295,6 +295,18 @@ Source: Swan (2002), [SSRN 251399](https://ssrn.com/abstract=251399).
 
 ### E11 — Event-information clocks and attribution
 
+- Crypto regime/insurance follow-up, retained 2026-11-08: Han,
+  [SSRN 6477100 full review](results/ssrn6477100_review_20261108.md), March 2026, Tables 1/3/7/8 and pp. 7–15.
+  A regime labelled from final-period buy-and-hold return is unavailable at entry. A causal EMA can avoid that
+  particular leak while its chosen strategy/threshold still carries selection and dependent-sample risk.
+  Source EMA switching improves mean period return −2.27%→−0.64% (unadjusted paired p=.036); both remain losses.
+  Relative bear outperformance can be lower beta/cash exposure, not profitable insurance or protection before
+  an account breach. All fee-study means are negative, including .1% cost; no low-fee viability or measured saving
+  follows. No actual human intervention policy was tested. For separately justified comparisons, freeze feature/
+  sentiment availability, first fills, cash-versus-hold behavior and matched exposure/turnover controls before
+  dependence/selection-aware inference and native paths. Source/arithmetic review only; zero return trials,
+  no new monitor/switch/queue candidate or book change. Do not infer competing bot orders from price patterns.
+
 - Commodity-turning-point follow-up2026-11-02: [source-method review](results/scout_overreaction_source_gate_20261102.md),
   Borgards/Czudaj/Hoang2021, DOI10.1016/j.resourpol.2020.101966. Capturing a fixed fraction of an ex-post reversal
   does not define causal entry/exit availability. The inspected model assumes20%capture and omits fees/slippage;
