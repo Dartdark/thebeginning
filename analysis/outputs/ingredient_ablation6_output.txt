@@ -1,0 +1,49 @@
+[provenance] code 3659b64e dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
+Ingredient ablation, round 6: the capital-expansion bench (user 2026-11-08: 'before removing any, see if they can be improved').
+
+1. FVB (check: bench file checks/candidates/fvb/trades.csv):
+   as is                                          n  2168 $  161 t  3.73 PF 1.28 total $  350k maxDD $32.7k | 2018-22 $ 126 (t  2.9) 2023+ $ 205 (t  2.6) | worst $-2,932
+   no regime skip                                 n  2517 $   98 t  2.52 PF 1.17 total $  246k maxDD $33.2k | 2018-22 $  81 (t  2.0) 2023+ $ 118 (t  1.6) | worst $-2,932
+   no strong-day short block                      n  2553 $   92 t  2.38 PF 1.15 total $  236k maxDD $47.8k | 2018-22 $  71 (t  1.8) 2023+ $ 119 (t  1.7) | worst $-2,932
+   1 trade a day                                  n  1638 $  156 t  3.25 PF 1.27 total $  255k maxDD $30.5k | 2018-22 $ 109 (t  2.2) 2023+ $ 216 (t  2.4) | worst $-2,932
+   stop 0.36 ATR                                  n  1963 $  169 t  3.03 PF 1.20 total $  332k maxDD $35.7k | 2018-22 $ 116 (t  2.0) 2023+ $ 238 (t  2.3) | worst $-5,512
+   entry window 60 min                            n  1885 $  159 t  3.42 PF 1.27 total $  299k maxDD $34.9k | 2018-22 $ 124 (t  2.6) 2023+ $ 202 (t  2.4) | worst $-2,932
+   entry window 240 min                           n  2377 $  138 t  3.43 PF 1.24 total $  327k maxDD $33.3k | 2018-22 $ 120 (t  2.9) 2023+ $ 159 (t  2.2) | worst $-2,932
+   longs only                                     n  1348 $   67 t  1.45 PF 1.12 total $   91k maxDD $31.4k | 2018-22 $  77 (t  1.5) 2023+ $  55 (t  0.7) | worst $-2,932
+   shorts only                                    n   820 $  316 t  3.72 PF 1.55 total $  259k maxDD $21.2k | 2018-22 $ 208 (t  2.5) 2023+ $ 451 (t  2.8) | worst $-2,727
+
+2. Ricochet 1144 (check: bench file checks/candidates/ricochet_1144/python_trades.csv):
+   as is                                          n  2183 $   84 t  2.86 PF 1.14 total $  184k maxDD $26.8k | 2018-22 $  85 (t  2.2) 2023+ $  83 (t  1.9) | worst $-1,012
+   no re-entries                                  n  1018 $   15 t  0.35 PF 1.02 total $   15k maxDD $29.6k | 2018-22 $ -26 (t -0.5) 2023+ $  69 (t  1.0) | worst $-1,012
+   after an up day (placebo)                      n  2214 $   25 t  0.87 PF 1.04 total $   55k maxDD $51.0k | 2018-22 $   3 (t  0.1) 2023+ $  48 (t  1.1) | worst $-1,012
+   every session                                  n  4397 $   54 t  2.65 PF 1.09 total $  238k maxDD $39.4k | 2018-22 $  44 (t  1.6) 2023+ $  65 (t  2.1) | worst $-1,012
+   stop 100                                       n  1763 $   74 t  1.69 PF 1.09 total $  131k maxDD $56.7k | 2018-22 $ 128 (t  2.2) 2023+ $  18 (t  0.3) | worst $-2,012
+   target 50                                      n  2393 $   38 t  1.90 PF 1.08 total $   91k maxDD $22.0k | 2018-22 $  56 (t  2.1) 2023+ $  18 (t  0.6) | worst $-1,012
+
+3. DriftPullBack v3:
+   as is                                          n  6061 $   45 t  3.18 PF 1.09 total $  272k maxDD $57.5k | 2018-22 $  58 (t  3.0) 2023+ $  32 (t  1.6) | worst $-3,947
+   no drift condition                             n  6182 $   47 t  3.35 PF 1.10 total $  289k maxDD $46.1k | 2018-22 $  50 (t  2.7) 2023+ $  43 (t  2.1) | worst $-3,947
+   drift 0.20%                                    n  5765 $   37 t  2.51 PF 1.08 total $  211k maxDD $51.7k | 2018-22 $  48 (t  2.4) 2023+ $  25 (t  1.2) | worst $-3,947
+   1 trade a day                                  n  2262 $   60 t  2.63 PF 1.13 total $  136k maxDD $20.8k | 2018-22 $  58 (t  2.1) 2023+ $  63 (t  1.7) | worst $-3,947
+   longs only                                     n  4517 $   30 t  1.99 PF 1.07 total $  137k maxDD $42.6k | 2018-22 $  31 (t  1.5) 2023+ $  29 (t  1.3) | worst $-2,372
+   shorts only                                    n  3948 $   39 t  2.13 PF 1.08 total $  154k maxDD $51.5k | 2018-22 $  71 (t  3.0) 2023+ $   5 (t  0.2) | worst $-3,947
+   target = stop (80)                             n  4804 $   64 t  3.20 PF 1.11 total $  309k maxDD $74.7k | 2018-22 $  89 (t  3.3) 2023+ $  41 (t  1.4) | worst $-3,947
+
+4. RollZone 24h (plain 0.8 ATR stop):
+   as is                                          n  3325 $  126 t  3.03 PF 1.17 total $  418k maxDD $62.6k | 2018-22 $  75 (t  1.8) 2023+ $ 195 (t  2.5) | worst $-11,727
+   no zone (noise 0)                              n  4139 $   26 t  0.81 PF 1.04 total $  108k maxDD $116.8k | 2018-22 $  20 (t  0.6) 2023+ $  34 (t  0.6) | worst $-11,225
+   night entries off                              n  2410 $  146 t  1.95 PF 1.11 total $  352k maxDD $90.5k | 2018-22 $  72 (t  0.9) 2023+ $ 248 (t  1.8) | worst $-12,266
+   target 0.7 ATR                                 n  3423 $  111 t  2.89 PF 1.15 total $  381k maxDD $67.4k | 2018-22 $  62 (t  1.6) 2023+ $ 179 (t  2.4) | worst $-11,727
+   no target (3 ATR)                              n  3306 $  128 t  3.05 PF 1.17 total $  422k maxDD $65.7k | 2018-22 $  74 (t  1.7) 2023+ $ 200 (t  2.5) | worst $-11,727
+   stop 0.4 ATR                                   n  3596 $   77 t  2.19 PF 1.11 total $  278k maxDD $91.3k | 2018-22 $  53 (t  1.5) 2023+ $ 111 (t  1.6) | worst $-6,141
+
+5. S30 IBS, NQ (long; buy 15:01 when IBS < 0.2, sell 15:01 when IBS > 0.8; no stop):
+   as is                                          n   255 $ 1372 t  3.59 PF 1.84 total $  350k maxDD $37.7k | 2018-22 $1303 (t  3.1) 2023+ $1476 (t  2.1) | worst $-28,137
+   entry IBS < 0.10                               n   169 $ 2331 t  4.93 PF 2.80 total $  394k maxDD $24.8k | 2018-22 $1980 (t  4.0) 2023+ $2893 (t  3.1) | worst $-15,252
+   entry IBS < 0.30                               n   328 $ 1070 t  3.13 PF 1.61 total $  351k maxDD $48.5k | 2018-22 $1022 (t  2.7) 2023+ $1143 (t  1.8) | worst $-28,137
+   exit IBS > 0.50                                n   306 $  998 t  3.06 PF 1.69 total $  305k maxDD $48.7k | 2018-22 $ 789 (t  2.4) 2023+ $1300 (t  2.0) | worst $-22,527
+   exit next close (1-day hold)                   n   345 $  632 t  2.39 PF 1.48 total $  218k maxDD $32.5k | 2018-22 $ 464 (t  1.8) 2023+ $ 874 (t  1.6) | worst $-23,047
+   only after a down close                        n   227 $ 1178 t  2.96 PF 1.69 total $  267k maxDD $38.4k | 2018-22 $1336 (t  3.0) 2023+ $ 927 (t  1.3) | worst $-28,137
+
+6. Prior VWAP Trap (from its review, not rerun): as is $153 (t 3.2); yesterday's close as the level $107 (t 2.3); yesterday's midpoint
+   $115 (t 2.4); prior VWAP shifted at random +-0.3 ADR $88-169: the level adds ~$30 a trade, the engine is momentum + a 0.5 ADR trailing stop.

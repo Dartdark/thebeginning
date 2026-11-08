@@ -507,6 +507,17 @@ MultiCharts 598 / $316, same side 100%, P&L corr 0.96):**
 | Break-even at 0.30 x range | Swing Target | none: $321 (t 4.5) vs $316 (t 4.6) | Decoration here (Codex's earlier test: lower DD) |
 | Shorts | Swing Target | shorts $486 (t 4.7), longs $168 (t 1.9) | Post hoc lead: the shorts carry it |
 
+**Round 6: the capital-expansion bench (`analysis/ingredient_ablation6.py`, 2026-11-08; per contract, removed / changed -> $ a trade / t):**
+
+| Piece | Engine (removing it kills the edge) | Supporting / decoration | Post hoc lead |
+|---|---|---|---|
+| FVB | regime skip (off: $98 t 2.5) and strong-day short block (off: $92 t 2.4) | 1 trade a day ~same; window 120 best | **shorts $316 (t 3.7, DD $21k) vs longs $67 (t 1.5)** |
+| Ricochet 1144 | re-entries at S1 (none: $15 t 0.4); after a red day (green: $25; every day $54) | stop 50 / target 100 as is best | - |
+| DriftPullBack v3 | (no single part: drift off is BETTER, $47 t 3.4, DD $46k vs $58k) | target = stop: more $ but DD $75k | 1 trade a day: $60, DD $20.8k (vs $57.5k); shorts dead since 2023 ($5) |
+| RollZone 24h | the noise zone (off: $26 t 0.8) | night entries add (off: t 2.0); target irrelevant; stop 0.4 worse | - |
+| S30 IBS (NQ) | IBS reversal; hold until IBS > 0.8 (1-day hold $632) | after a down close: worse 2023+ | **entry IBS < 0.10: $2,331 (t 4.9; 2018-22 t 4.0, 2023+ t 3.1), DD $24.8k vs $37.7k, worst -$15k vs -$28k** |
+| Prior VWAP Trap | intraday momentum + 0.5 ADR trailing stop (its review: other levels $107-115, random levels $88-169) | the prior-VWAP level itself (~$30) | - |
+
 **Batch of 5 (2026-11-08, pre-registered; TIER_LIST rows):** the engines are market-specific. Morning momentum does not carry to CL / GC / ZN
 (t 0.8 / 0.2 / -1.3; it works on NQ and, weaker, on ES); the noise band loses on CL / GC even before costs; the Overnight Tick signal
 carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on NQ). Cross-mechanism filters failed both ways: overnight
