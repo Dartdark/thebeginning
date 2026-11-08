@@ -1887,3 +1887,17 @@ future upgrades or treat days−1 to+4 abnormal returns as fully post-release. H
 modern multi-level depth. Need release/receipt clocks, as-of MPID/affiliation, real quote/trade linkage and native costs
 before a separately justified study. Evidence: source/table-image and source-arithmetic/schema checks only; no new
 returns, verified execution savings, strategy queue entry, allocation, paid collection or live/policy change.
+
+
+### E20/E22 follow-up — Nasdaq expansion/pilots are implementation narratives, not measured execution gains
+
+Source: Lennon/Folkinshteyn2017, *From Bit Valley to Bitcoin: The NASDAQ Odyssey*,
+[SSRN3025751 review](results/nasdaq_odyssey_3025751_review.md), supplied19-page journal article.
+The small-sample historical case study proposes management lessons about capabilities, information, conflicting roles
+and reliance on unfinished technology. Its blockchain cost-reduction language has no controlled before/after execution
+or recordkeeping cost dataset. Licensing, an announced pilot, auditable records, operational deployment and verified
+net savings are distinct evidence states; clearing/settlement is not quote-to-fill latency or improved strategy P&L.
+Retain contextual support for existing product/version/acceptance checks only. No causal trading/operational benefit,
+current Nasdaq/Bitcoin infrastructure fact, new return trial or execution saving is independently verified. If a concrete
+implementation comparison is later authorized, require actual transaction/latency/cost records and the same-workflow
+baseline. No blockchain build, new monitor, workflow/policy change, candidate/data queue or live action follows.
