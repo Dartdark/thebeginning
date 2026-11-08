@@ -181,3 +181,12 @@ Rounding makes it useless at ~1 micro a piece; it only works from ~2 micros a pi
 8.26 / 8.50. Full 19: 6.71 -> 8.27 / 8.60 at ~2; at ~4 the cap costs a little (8.99 -> 8.45 on 2023+) but stays well above
 equal. The gain survives yearly re-estimation; the 2x cap costs nothing on the cleared book. Proposed: capped inverse-vol
 from the ~$31k row up (cleared book), equal weights below; ADOPTED by the user 2026-11-01 (ladder rows above).
+
+## Idle cash idea (saved 2026-11-08, user): JPMorgan Efficiente 5 replication
+
+For personal-account cash the futures pieces don't use (margin needs only a fraction of the account): a monthly 13-ETF
+mean-variance allocation (6-month lookback, 5% target vol, caps per asset / class), open-source Python replication
+(Jungle Rock Capital 2025, SSRN 7633178, `../papers/ssrn-7633178.pdf`). Replication 2008-25: +3.5% a year over cash, vol 6%,
+Sharpe 0.58, max DD -19%, turnover 42% a month. An investing choice, not a trading piece (TIER_LIST F as a strategy).
+Before using: rerun the open-source code on fresh data, compare with a simple 60/40 or T-bills after costs and taxes, and
+check margin rules (ETFs held as collateral vs cash).
