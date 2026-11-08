@@ -25,6 +25,11 @@ Gates (all from the repo's testing standard; N = ranked items in TRIALS.csv):
   G11 delay        same file: entries one chart bar later keep >= half the per-trade Sharpe (BEND; leak_checks L2)
   G12 look-ahead   only when trades_fullsample.csv is supplied (the rule's fitted parts fitted on all data):
                    full-sample mean per trade <= 1.3x the past-only mean (leak_checks L3)
+  G13 invariance   (2026-11-08, Boutgajouft SSRN 7525240 Gate 2; analysis/invariance.py) trade outcomes distributed alike
+                   across years, past-only VIX regimes (and symbols if given): normalised Wasserstein-1 below its Gaussian
+                   95% reference in every partition (strategy: all trades; filter: kept trades). Outcomes in risk units
+                   (net / 'risk' column if given, else net / trailing 50-trade sd). SOFT gate: reported as CONCERN, not
+                   counted in PASS / FAIL (it flags regime-dependent edges, which the user's rules allow)
 Also printed: Sharpe, Sortino, profit factor, Calmar, Ulcer for all / longs / shorts (filter: kept trades and all trades),
 2023+ bootstrap and drawdown permutation.
   python3 analysis/checker.py checks/candidates/<name>
@@ -128,10 +133,16 @@ def check(cdir):
         Fs = pd.read_csv(fsf, parse_dates=["date"]); Fs = Fs[Fs.date >= "2018-01-01"]
         base = xs.mean(); full = Fs.net.mean()
         G["G12 look-ahead"] = not (full > 1.3 * base and full > 0), f"past-only ${base:.1f} a trade vs full-sample fit ${full:.1f} ({full / base if base else float('nan'):.2f}x)"
+    import invariance as INV
+    Tk = (T if meta["kind"] == "strategy" else T[T.kept.astype(bool)]).reset_index()
+    ok13, txt13, _ = INV.gate2(Tk[[k for k in ("date", "net", "risk", "symbol") if k in Tk]])
+    G["G13 invariance"] = ok13, txt13
     out.append("| Gate | Result | Detail |\n|---|---|---|")
-    for g, (ok, txt) in G.items(): out.append(f"| {g} | {'PASS' if ok else 'FAIL'} | {txt} |")
-    n_fail = sum(not ok for ok, _ in G.values())
-    out.append(f"\n**Gates: {len(G) - n_fail}/{len(G)} pass -> {'PASS' if n_fail == 0 else 'FAIL'}**\n")
+    SOFT = {"G13 invariance"}     # reported as CONCERN, not counted (2026-11-08: on 22 existing candidates it flags most of the
+                                  # plan's pieces; regime-dependent edges are allowed by the user's rules, so it informs, not blocks)
+    for g, (ok, txt) in G.items(): out.append(f"| {g} | {'PASS' if ok else ('CONCERN' if g in SOFT else 'FAIL')} | {txt} |")
+    n_fail = sum(not ok for g, (ok, _) in G.items() if g not in SOFT)
+    out.append(f"\n**Gates: {len(G) - n_fail - sum(1 for g in G if g in SOFT)}/{len(G) - sum(1 for g in G if g in SOFT)} pass -> {'PASS' if n_fail == 0 else 'FAIL'}**\n")
     out.append("## Standard metrics\n```\n" + M.table(rows) + "\n```")
     b, p = R.report({k_: v[0][v[0].index >= "2023-01-01"] for k_, v in rows.items()}, n=2000)
     out.append("## 2023+ bootstrap\n```\n" + b + "\n```\n## 2023+ drawdown permutation\n```\n" + p + "\n```")

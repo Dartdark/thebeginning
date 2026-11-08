@@ -406,3 +406,7 @@ Sharpe 1.33, max DD $1,574, return/max DD 1.28 a year, 73 active days a year, 56
 Twin (ret/DD 2.25, Sharpe 1.77, corr 0.30), Kusho (2.03, 1.68, 0.31), Overnight Tick (1.72, 1.68, 0.20): high Sharpe AND a time
 of day / week the rest of the book doesn't trade. Low-corr small pieces (CL Sunday fade, EOS, ES MOC: corr ~0) earn little but
 cut book risk. Recompute: `analysis/personal_portfolio.py` P (daily per piece).
+
+- **Checker G13 invariance (2026-11-08, Boutgajouft SSRN 7525240 Gate 2):** trade outcomes in risk units compared across
+  years and past-only VIX regimes (normalised Wasserstein-1 vs a Gaussian 95% reference). Soft gate: CONCERN, not FAIL, because
+  regime-dependent edges are allowed; a CONCERN means 'name the regime the edge lives in and size for the other one'.
