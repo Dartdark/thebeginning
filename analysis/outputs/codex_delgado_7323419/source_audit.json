@@ -1,0 +1,94 @@
+{
+  "scope": "SOURCE CLAIMS AND PRIOR EVIDENCE ONLY; NO NEW BACKTEST",
+  "financial_trials": 0,
+  "new_strategy_code_built": false,
+  "source_written": "2026-08-20",
+  "ssrn_posted": "2026-08-21",
+  "source_claims": {
+    "original_paper_window": {
+      "start": "2007-05",
+      "end": "2024-04",
+      "independent_total_return_pct": 1989.0,
+      "annual_return_pct": 19.6,
+      "sharpe": 1.317,
+      "max_dd_pct": -24.5,
+      "trades": 7742,
+      "convention": "Closest paper match omits dividend adjustment; not final engine"
+    },
+    "exact_post_publication": {
+      "start": "2024-05-13",
+      "end": "2025-08-29",
+      "total_return_pct": 23.3,
+      "sharpe": 1.284
+    },
+    "recent_weak": {
+      "start": "2025-09-02",
+      "end": "2026-08-14",
+      "total_return_pct": -8.1,
+      "sharpe": -0.461,
+      "max_dd_pct": -17.4
+    },
+    "full_baseline": {
+      "total_return_pct": 3753.5,
+      "cagr_pct": 14.7,
+      "sharpe": 0.996,
+      "max_dd_pct": -24.6
+    },
+    "selected_retrospective": {
+      "start_valid": "2000-01-25",
+      "end": "2026-08-14",
+      "total_return_pct": 2110.6,
+      "cagr_pct": 12.4,
+      "sharpe": 1.274,
+      "max_dd_pct": -14.8,
+      "entries": 4170,
+      "clean_holdout": false
+    },
+    "search": {
+      "all_ledger_rows": 129,
+      "spy_selection_alternatives": 80,
+      "pre_fix": 31,
+      "corrected": 49,
+      "reconstructed_daily_series": 70,
+      "pbo_scope": "25-point PRE_VWAP_FIX grid only, not selected 80-trial adaptive search",
+      "pbo_historical_pct": 38.49,
+      "pbo_common_valid_pct": 40.87,
+      "selected_dsr_pct": 99.999986796,
+      "dsr_reproduced_here": false
+    },
+    "qqq_sharpe": {
+      "base": 0.987,
+      "spy_config_j": 0.809,
+      "spy_volume": 0.913,
+      "spy_performance_overlay": 0.967
+    },
+    "iwm_base_sharpe": 0.45
+  },
+  "arithmetic_only": {
+    "cscv_partitions": 252,
+    "historical_pbo_implied_count": 97,
+    "common_valid_pbo_implied_count": 103
+  },
+  "prior_evidence_transcription": {
+    "es_proxy_sharpe_lb14_paper_costs": 1.3,
+    "es_proxy_sharpe_lb14_futures_costs": 0.83,
+    "s03_v2_50k_funded_add1_year1_change_usd": -348.5,
+    "s03_v2_personal_equal_dd_profit_change_usd": -484,
+    "warning": "Different strategies/conventions and historical books; not tests of Delgado final"
+  },
+  "owned_minute_equity_filename_candidates": [],
+  "input_hashes": {
+    "agents/codex/inputs/delgado_7323419/full_text.txt": "a5ff9dcf281767959c1bd74141e4d61ae20cf8b58e2298e15f8a472557dd2413",
+    "agents/codex/inputs/delgado_7323419/free_data_gate.md": "ffbd2db43c9e3e73d4abd21291406cc4cac03ccf0d700055373a49bffd4e5e1f",
+    "agents/codex/inputs/delgado_7323419/ssrn-7323419.pdf": "84f454f8c4e41c333b622d3ac0ce04cfb611535715943d55b5691d59ca24bdd9"
+  },
+  "prior_hashes": {
+    "analysis/beat_the_market_es_test.py": "9d59b2fa5c4677b3ad45d41c02b84cc15f1041af532e2f82be08992df195cf87",
+    "analysis/outputs/beat_the_market_es_test_output.txt": "6baa7a7544d69840a68a034c799f39241dad4d5fa448911a445b84bcbd69745b",
+    "agents/codex/results/s03_v2.md": "f04a180ed9af986f08b2aa7408a021d62fbbb0bc15601b61f5b4b49c20398648",
+    "agents/codex/results/s03_noisearea.md": "f855ac1badf0c0c30d1412cdff057f8a36389e169271b30274859a62cb07fc21",
+    "agents/codex/results/s03_noisearea_independent_review.md": "62ab87e9ba35eb61181b7b0aa11ba95ba35394b051e8e424ac4df20c7a78bac7",
+    "agents/codex/results/noise15_20261103.md": "09522d271ed066daa7dc41c2ac5f8d841f7e823dff570d9443d03e54388ffbc6"
+  },
+  "code_sha256": "366caa5aac30b06f229e8df49eeeb6e10bb9c3cf6c3f75ea2cbec52f419cf0eb"
+}

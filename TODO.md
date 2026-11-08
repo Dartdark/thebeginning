@@ -252,6 +252,15 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   [Review](agents/codex/results/delta_straddle_4677166_review.md) · [Code/test report](agents/codex/results/delta_straddle_4677166_build.md) ·
   [Data gate](agents/codex/inputs/delta_straddle_4677166/free_data_gate.md).
 
+- [ ] **SPY “Beat the Market” replication audit — conditional low-priority NEEDS DATA (SSRN7323419).**
+  Author closely replicates the historical SPY noise-band/VWAP result, but reports−8.1%September2025–August2026;
+  final overlays selected after80adaptive SPY alternatives, no clean holdout, and fail to improve QQQ Sharpe.
+  Native SPY minute/dividend/calendar/cash/borrow data and authenticated replication engine/trial package missing
+  after bounded free checks. No new planner built. Existing NQ/ES family failures are retained, not revived.
+  Next only on genuinely new inputs: one causal formation/dividend/early-close/fill cash reconciliation, then
+  coverage/cost gate before economic protocol. No personal or Apex allocation.
+  [Review](agents/codex/results/delgado_7323419_review.md) · [D55 data needs](agents/codex/DATA_NEEDED.md).
+
 - [ ] **ETF-flow stock selection — NEEDS DATA AND SPECIFICATION (SSRN7517178).**
   Conditional personal-stock lead: monthly top/bottom50 using z12−z3 of thematic/sector ETF-induced pressure.
   Authors report17.57%annualized/Sharpe0.98 design; later Jan–Aug2026 earns8.54% versus16.82% benchmark,
