@@ -489,6 +489,24 @@ $501 vs 105 / $474, NFP 78 / $343 vs 76 / $319, CL 96 / $653 = the MultiCharts s
 | Weekend-specific | CL | the same fade on Mon-Thu reopens $-362 | **Proven** (weekend news gap) |
 | Hold to Monday 09:00 CT | CL | out Sunday 23:59 $146; Monday 07:00 $415; 13:30 $593 | Supporting (09:00 best) |
 
+**Round 5 (`analysis/ingredient_ablation5.py`, 2026-11-08; Monday Long, Swing Target v3; ONB ML from Codex's frozen ablation the same day,
+`agents/codex/results/ingredients_fc_onb_t_20261108.md`; rebuilds: Monday 414 trades $436 vs research 452 / $413; Swing Target 602 / $316 vs
+MultiCharts 598 / $316, same side 100%, P&L corr 0.96):**
+
+| Ingredient | Where | Evidence (changed -> $ a trade / t) | Status |
+|---|---|---|---|
+| Monday (weekend inflows / Monday 0DTE hedging) | Monday Long | Tue $73, Wed $56, Thu $15, Fri $69 (t <= 0.6); short $-371 | **Proven** |
+| Buy the 08:30 open, hold to 15:00 | Monday Long | enter 10:00 $163; out 10:00 $216, out 12:00 $282 | **Proven** (the whole session) |
+| After a down Friday | Monday Long | $510 vs $369 after an up Friday | Post hoc lead (both positive) |
+| Overnight location sets the side | ONB (Codex) | no overnight-bias direction: $156 / $173 a trade, DD x3-4 | **Proven** |
+| ML score (calendar terms most) | ONB ML (Codex) | no score $233 / $312 vs $631 / $711; no calendar terms $463 / $556 | Supporting (in-sample attribution) |
+| ADX trend filter | ONB ADX30 (Codex) | no ADX $182 / $316 vs $340 / $409 | Supporting |
+| Break of the prior 2 days' RTH range, in the break's direction | Swing Target | fade instead $-284 (t -3.7); 1-day levels $227, 5-day $170 | **Proven** (2-day levels best) |
+| Skip days that broke a level 08:31-08:45 | Swing Target | no skip: $208 (t 3.5), DD $15.6k -> $25.4k | **Proven** (supporting, strong) |
+| Target 0.35 x range | Swing Target | no target $294 (t 3.4); target 0.7 $315 (t 4.0) | Helps consistency |
+| Break-even at 0.30 x range | Swing Target | none: $321 (t 4.5) vs $316 (t 4.6) | Decoration here (Codex's earlier test: lower DD) |
+| Shorts | Swing Target | shorts $486 (t 4.7), longs $168 (t 1.9) | Post hoc lead: the shorts carry it |
+
 **Batch of 5 (2026-11-08, pre-registered; TIER_LIST rows):** the engines are market-specific. Morning momentum does not carry to CL / GC / ZN
 (t 0.8 / 0.2 / -1.3; it works on NQ and, weaker, on ES); the noise band loses on CL / GC even before costs; the Overnight Tick signal
 carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on NQ). Cross-mechanism filters failed both ways: overnight
