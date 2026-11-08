@@ -45,7 +45,8 @@ def half_day(d):
 
 
 def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, mo_target=0.0, pv=PV, tick=TICK, comm=COMM, mo_stop=75.0, mo_stop_atr=0.0,
-             level_mode="swing6h", mo_window=(840, 930), off_dates=None, v21=False):
+             level_mode="swing6h", mo_window=(840, 930), off_dates=None, v21=False, vol_cap=2.0, bo_rth_only=False):
+    # vol_cap (0 = off) and bo_rth_only (breakout entries only 08:30-15:00 CT) added 2026-11-08 for the ingredient ablation; defaults = v2.1
     # v21=True (2026-11-08): the live MultiCharts v2.1 holiday rules (CME early-close days per replica.is_early_close: no MO, no BO
     # entries from 11:00 to 17:00, flat after the 11:30 bar). Default False = the original port (1,109 cap1 trades).
     # 2026-11-08 variants (twin_ideas_test.py): level_mode swing6h (default) / prevday / prevweek / round100; mo_window = MO signal
@@ -171,7 +172,8 @@ def simulate(B, use_bo=True, use_mo=True, placebo_rng=None, max_stop_mult=0.0, m
                 okl = swh_open and swl is not None and stpl < lvll
                 oks = swl_open and swh is not None and stps > lvls
                 armed = use_bo and (okl or oks) and sm[i] < 1350 - 1      # 15:30 CT = 1350 min after 17:00
-                if volratio > 2.0: armed = False
+                if vol_cap > 0 and volratio > vol_cap: armed = False
+                if bo_rth_only and not (510 <= (j[i] % 1440) - 0 < 900): armed = False   # j = close minute of day; 08:30-15:00 CT
                 if off_dates is not None and int(date[i]) in off_dates: armed = False
                 if v21 and early[i] and 1100 <= hhmm[i] < 1700: armed = False
                 arm_trades = ntr

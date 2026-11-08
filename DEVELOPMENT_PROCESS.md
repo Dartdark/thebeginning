@@ -410,3 +410,33 @@ cut book risk. Recompute: `analysis/personal_portfolio.py` P (daily per piece).
 - **Checker G13 invariance (2026-11-08, Boutgajouft SSRN 7525240 Gate 2):** trade outcomes in risk units compared across
   years and past-only VIX regimes (normalised Wasserstein-1 vs a Gaussian 95% reference). Soft gate: CONCERN, not FAIL, because
   regime-dependent edges are allowed; a CONCERN means 'name the regime the edge lives in and size for the other one'.
+
+## Ingredients, not papers (user 2026-11-08)
+
+Working strategies combine several ideas; a paper usually supplies one. Every upload / paper is reviewed as a list of ingredients:
+1. **Mechanism** (why the money is there), 2. **place and time** where it is strongest, 3. **volatility normalisation**,
+4. **exits that fit the edge** (trend: let it run; short flows: tight), 5. **a filter backed by a second mechanism**.
+
+**For each upload:** list its ingredients, then run a drop-one ablation (remove one at a time, per NQ, both periods) before the
+whole-strategy tests: it shows which part carries the edge and which parts are decoration (knobs that only add fitting room).
+**For new combinations:** build only from ingredients in the register below, at most 2-3 per strategy, rules and settings fixed
+before any result, then the full checker (incl. the parameter-perturbation check). Every combination tried counts as a trial.
+
+### Ingredient register (`analysis/ingredient_ablation.py`, 2026-11-08; per NQ, 2018-26)
+
+| Ingredient | Where it lives | Evidence (removed / alone) | Status |
+|---|---|---|---|
+| Morning momentum: vol-normalised extension from a 21-EMA, 08:40-09:30 CT, held to 14:50, **no target** | Twin MO | alone $518, t 4.6 (both periods); with a 1.5x target $184 (t 5.2 -> lower total) | **Proven** (the engine of Twin) |
+| Noise band: breakout only beyond open / prior close +- the slot's average move | Bridge noise-area | without the band (vm 0) $62 -> $17, t 5.5 -> 2.2 | **Proven** |
+| Closing order flow x VIX regime for the overnight direction | Overnight Tick | alone (any day) $225, t 4.8 (both periods) | **Proven** (stronger than the down-day rule) |
+| Overnight drift window 17:05 -> 03:00 CT long | Overnight Tick | every night $108, t 3.1 (2018-22 t 1.6) | Supporting (base rate) |
+| Down-day condition for overnight longs | Overnight Tick | down days only $175 vs every night $108 | Supporting |
+| Swing-level stop entries (6h fractals, Osler) | Twin BO | alone $113, t 3.5 (2023+ t 1.5); RTH-only entries $309 a trade with the MO | Weak alone; better in RTH |
+| Stop / stop cap | all | noise-area without a stop: worst trade -$1k -> -$11.8k; Twin uncapped: worst -$2.9k -> -$11.7k | Required for Apex (risk shape, not edge) |
+| Target on short-horizon trades | noise-area | without its 25-pt target $62 t 5.5 -> $123 t 3.7 (fewer, choppier) | Helps consistency |
+| Daily trade / stop limits | noise-area | no effect (t 5.47 vs 5.50) | Decoration |
+| Volatility cap filter (skip after a 2x range day) | Twin | no effect ($248 vs $243) | Decoration (keeps tail days out; harmless) |
+| Shorts on NQ trend / momentum rules | noise-area, Donchian | noise-area with shorts $62 -> $40 a trade | Weak (NQ shorts) |
+
+Post hoc leads from the ablation (not adopted, need their own pre-registered test): Overnight Tick's order-flow x VIX cell on any day
+(t 4.8 vs the full rule's 5.2, twice the nights); Twin's breakout entries in RTH only ($309 vs $248 a trade, total $246k vs $274k).
