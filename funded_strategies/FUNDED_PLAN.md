@@ -105,6 +105,16 @@ make it faster; its ~$5,000-a-year at 2 MNQ fits the 150K's $4,000 drawdown but 
 the user's MultiCharts report of v4 for the trade-by-trade check (`../TODO.md`); live, the drift alarm decides.
 Code `../analysis/dual_thrust_150k_test.py`, output `../analysis/outputs/dual_thrust_150k_output.txt`.
 
+## Cushion cap (bench 2026-11-08, `../analysis/cushion_cap_funded.py`; adopt before the first funded account, code not written yet)
+
+Each strategy trades at most floor((balance - threshold) / its stop per MNQ) MNQ that day, on top of the cushion sizing (Bridge
+Monday Long has no stop: exempt). 1,000 paired bootstrap histories, 2 years, current plan (VB 2, without CL fade): blown
+**8.1% -> 2.3%** per strategy (payouts -$32, $11,778 -> $11,747), 1.5% if the day's stops together must fit (+$52, needs the
+strategies to share one cushion). Every start day 2018+: blown 1.5% either way (2 years). A $200 buffer cuts blown to ~0% but
+costs ~$450-725 in payouts. Evaluations: no gain (`../analysis/outputs/cushion_cap_bench_output.txt`, fails -> time-outs).
+Open: how the strategies get the cushion live (typed input each evening, or Rithmic equity, which Target Guard v2 must verify);
+cushion sizing (f) needs the same input.
+
 ## Current plan (updated 2026-10-13): seven strategies (Vol-Control Sell dropped), faster to $13k
 
 Priority: collect all 6 payouts ($13,000) sooner. **New: the Bridge's Monday Long NQ** (it ships with The Bridge,

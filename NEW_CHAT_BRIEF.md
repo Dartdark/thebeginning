@@ -28,7 +28,8 @@ Read `MULTICHARTS_PITFALLS.md` before writing MultiCharts code. The full history
   (replayed 11/03 08:20: no flag), noise-area early-close flat (EL + replay `bridge_noise_15m_earlyclose_output.txt`: +$3.1k, 0 held).
 - **Cushion cap bench 11/08** (`analysis/outputs/cushion_cap_bench_output.txt`, after Codex's 11/04 loss audit): capping each
   stop at the room above the floor cuts fails (50K 48 -> 37%) but pass rate falls (50 -> 48%), fee per funded $498 -> $519;
-  combined cap worse. Not adopted for evaluations; code not written (user to decide; funded bench not run).
+  combined cap worse. Not adopted for evaluations. **Funded bench 11/08** (`cushion_cap_funded_vb2_output.txt`): blown 8.1 ->
+  2.3% per strategy at the same payouts: adopt for funded (FUNDED_PLAN 'Cushion cap'); code waits on the live cushion source.
 - **Open for Claude:** noise-area live fill-latency measurement (needs live fills); Target Guard v2 check (needs a live trade);
   career tailoring (needs the user's background).
 
