@@ -196,6 +196,9 @@ check margin rules (ETFs held as collateral vs cash).
 Personal book (cleared pieces, 1 micro each) return/DD 5.42 (2018-22 5.45, 2023+ 6.10). Adding at 1 micro:
 - **Turn of the month** (long NQ 08:30 -> 15:00 on the last trading day of a month and the first 3 of the next, stop 0.5 x ATR):
   6.01 (+0.59), better in both periods (+0.17 / +0.80), +$1.7k a year, DD p95 $4,857 -> $4,665. Per NQ $372 a trade, t 2.5 (427 trades).
-  Next: the independent checker (checks/candidates), then add.
+  **Checker 2026-11-08 (checks/candidates/turn_of_month/): FAIL 6/8** (t 2.53 below the multiple-testing bar; without its best 5% of
+  trades -$33 a trade; 2018-22 t 1.2). Not added; forward log only.
 - **Vol-Control Sell Flow** (MC trades, in the funded plan until October): 5.50 (+0.08), better in both periods; small.
+  **Checker 2026-11-08: FAIL 7/8, only significance** (t 2.14 on 71 trades; placebo p 0.005, concentration PASS). Closest to clearing;
+  forward log, recheck as trades accumulate (~9 a year).
 - Not: double top / bottom (+0.53 overall but -0.09 in 2018-22), long after a green day full rule (-0.54), gold Asian range (-0.73).
