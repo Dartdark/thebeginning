@@ -1,0 +1,821 @@
+  The Effect of CME Gold Futures and ICE Dollar Index
+            Futures on the KRX Gold Market
+
+Myeong-Hoon Yeom
+Retail Strategy Team, Kiwoom Securities Co.
+
+
+Jae-Seung Baek *
+Department of International Finance, Hankuk University of Foreign Studies
+
+
+
+
+                                                     Abstract
+
+The KRX (Korea Exchange) gold market opened in March 2014 according to the government policy
+legalizing financial transactions, and traded one-gram unit of real gold by Korean currency (KRW) in
+the exchange market. Despite the fact that the KRX gold market shows high efficiency in terms of taxes
+and fees in contrast to the existing gold market, studies on the KRX gold market have been rarely
+conducted until quite recently. We explore the KRX gold market price efficiency by showing price
+discovery factors in the market. According to the existing studies, the futures market has a characteristic
+of leading the spot market. Therefore, this study put forward a hypothesis that the return rate of the gold
+in the CME (Chicago Mercantile Exchange), in which gold futures are traded at night in Korea Standard
+Time, would have a positive impact on the return of the KRX gold market, which starts at 9:00am the
+following day. In addition, this paper goes into detail about the international gold price having a
+negative correlation with the value of the United States (US) dollar. To test the goal of the research,
+both the return rate of CME gold futures at t-1 days and ICE (Intercontinental Exchange) dollar index
+futures at t-1 days are investigated to determine whether they have an impact on the market rate of
+return in the KRX gold market at t day using regression analysis and vector auto-regression (VAR)
+model in order to look closely at the factors that determine the market price of the KRX gold market.
+First, the return rate of CME gold futures at t-1 days has a positive impact of significance on the market
+rate of return in the KRX gold market at t day. Second, the return rate of ICE dollar index futures at t-
+1 days could not be confirmed to significantly determine the market rate of return in the KRX gold
+market at t day.
+
+Key Words KRX Gold Market; CME Gold Futures; ICE Dollar Index Futures; VAR Model
+
+JEL classification: G10, G14, G15
+
+
+* Corresponding author: Jae-Seung Baek, Department of International Finance, Hankuk University of
+  Foreign Studies, 81, Oedae-ro, Mohyun, Yongin-si, Gyeonggi-do, 17035, Korea, Tel: +82-31-330-4936,
+  Fax: +82-31-330-4074, email: jbaek@hufs.ac.kr.
+
+
+
+
+                                                           1
+
+
+
+
+                      Electroniccopy
+                     Electronic copy available
+                                     available at:
+                                               at: https://ssrn.com/abstract=2903671
+                                                   https://ssrn.com/abstract=2903671
+1. Introduction
+
+     With the element symbol Au and atomic number 79, gold is not only the investment asset
+which investors prefer most but also real currency regardless of ages and countries. gold is a
+material with a beautiful color which does not corrode and is easily processed and so gold is
+used in many fields including jewelry, real currency, industry, medical treatment, etc. For a
+long time, men have wished to possess gold because of these characteristics.
+     Kim et al. (2015) explores various statistical approaches to examine the economic index
+which predicts gold prices and the variables having an effect on gold prices and compared their
+results to existing research related to gold. Hong (2013) also investigates factors having an
+effect on the amount of gold transactions so that the rise of variability in the United States (US)
+stock market positively affected the demand of gold futures. According to Lee (2014), gold
+variability has precedence over the variability index. Solt and Swanson (1981), Sjaastad and
+Scacciavillani (1996), and Xu and Fung (2005) conduct studies on the price determination
+factors of gold, and posit that there is a relationship between variability, the prime exchange
+rate, and gold price. As Hiller et al. (2006) points out, in the case of including gold in an
+investment portfolio as the representative of safe property, gold is said to have a diversified
+investment effect, lowering variability of the return rate of the portfolio.
+
+Figure 1 KRX gold price and trade cost transition
+The left axis is KRX gold price and the unit is won (KRW), while the right axis is the amount of KRX gold market
+transaction and the unit is one hundred million won. The sample period is from the 24 th March, 2014 to the 31 st
+August, 2016.
+
+
+    55,000                                                                                               70
+                                      KRX gold price(left, Won)
+                                      trade cost(right, hundred million won)                             60
+
+    50,000
+                                                                                                         50
+
+                                                                                                         40
+    45,000
+                                                                                                         30
+
+                                                                                                         20
+    40,000
+
+                                                                                                         10
+
+    35,000                                                                                               0
+        2014-03             2014-09           2015-03            2015-09           2016-03
+
+
+
+                                                        2
+
+
+
+
+                     Electroniccopy
+                    Electronic copy available
+                                    available at:
+                                              at: https://ssrn.com/abstract=2903671
+                                                  https://ssrn.com/abstract=2903671
+    The methods the Korean investor could directly invest in gold before the day that the KRX
+(Korea Exchange) gold market opened on March 2014 were mainly in the wholesale and retail
+jewelry shops, gold banking in a bank, etc. Although the KRX gold market is implied to be
+highly efficient in regards to fees and taxes the investor must pay, there is little research
+supporting this.
+    In this research, the KRX gold market is examined over 2 years and CME (Chicago
+Mercantile Exchange) gold futures and ICE (Intercontinental Exchange) dollar index futures
+are also considered in terms of their influence on the KRX gold market. As shown in Figure 1,
+the amount of a KRX gold market transaction appeared to be an average of 24 million won
+(Korean currency, Korea Won, KRW) a day in the opening year (2014). It grew constantly
+thereafter and became more than three times bigger than in the opening year, with the average
+trade cost being 77 million won (KRW) a day in 2016.
+    Barclay and Hendershott (2003) and Yeom et al. (2013) verify the price discovery effect
+by analyzing the significance of the influence between spot and futures time difference. As
+stated in Chan (1992), Lee and Lim (2002), Tse et al. (2006), and Yeom and Baek (2015), it is
+commonly accepted that the futures exchange market is leading the spot market. This study
+investigates the significance of influence between the variables and time difference. To test the
+hypotheses of the paper, we investigate whether the return rate of gold derivatives in the United
+States at t-1 days significantly affects the gold spot market in Korea at t day. The return rate of
+CME gold futures at t-1 days is analyzed to determine whether there is a price discovery effect
+on the market rate of return of the KRX gold market by using the daily data from the 24 th March,
+2014 to the 23 rd August, 2014 for the empirical analysis. Moreover, in order to verify the
+proposition that the international price of gold and the value of the US dollar have a negative
+correlation, this study preforms an empirical analysis measuring the influence that the return
+rate of the ICE dollar index futures at t-1 days had on the market rate of return of the KRX
+gold market at t day.
+    The empirical analysis result utilizing the regression analysis and VAR model represents
+that the rate of return of CME gold futures at t-1 days positively affects the market rate of return
+of the KRX gold market at t day, while the significance of the return rate of the ICE dollar index
+futures influencing the market rate of return of the KRX gold market was not clear. This result
+shows that the rate of return of the CME gold futures has the leading market rate of return of the
+KRX gold market, and the KRX gold market will be able to be hedged by utilizing CME gold
+futures. Conversely, our study develops the general concept that the US dollar value is operated
+contrary to the gold price, and examines the influence of the variable with time difference, that
+
+
+
+                                                 3
+
+
+
+
+                    Electroniccopy
+                   Electronic copy available
+                                   available at:
+                                             at: https://ssrn.com/abstract=2903671
+                                                 https://ssrn.com/abstract=2903671
+is, whether the return rates of ICE dollar index futures at t-1 days influence on the market rate of
+return of the KRX gold market at t day, but the statistical significance was unable to be found.
+    The rest of the paper is organized as follows. Section 2 introduces the KRX gold market
+briefly. Section 3 describes research data and method to test the hypotheses. Section 4 explains
+the results and section 6 outlines the conclusions of the study.
+
+
+2. Overview of KRX Gold Market
+
+
+2.1 Trading System of KRX Gold Market
+    According to the government policy for the legalization of gold transaction and the
+development of the precious metal industry, the KRX gold market utilized the HTS (home
+trading system) for the opening of the gold spot market making it possible to make real-time
+transactions, similar to stock trading. The role and goals of the KRX gold market were realized
+as the legalization of the underground economy through the eradication of illegal transactions,
+reliability and enhancement of price and quality, and preparation for the developing
+foundations of the precious metal industry were announced by the Financial Services
+Commission, the Ministry of Strategy and Finance, the Ministry of Trade, Industry and Energy,
+National Tax Service, and the Office of Customs Administration in July, 2013.
+    In the KRX gold market, there are a number of gold traders such as importers of gold, gold
+refiners, normal investor, etc. The traders deposit gold in the Korea Securities Depository,
+which is the custody facility. Meanwhile, gold buyers such as workmanship traders, the
+industry, normal investors, etc. have to deposit the cash being used to purchase the gold into a
+KRX gold account which is set up by the securities company. A normal investor with non-
+membership sends an order into the exchange trading system through the securities company,
+who is the general member of the KRX gold market, for trading in the KRX gold market.
+
+
+2.2 Trading System in KRX Gold Market
+    Gold bullion, which is the sales object of the KRX gold market, has 99.99% purity and its
+weight, as a raw material in gold bar form, is one kilogram. The eligible manufacturer and importer
+whom the Korea Exchange chooses to supply, has to pass a quality standard which the Korea
+Exchange and quality assurance agency choose. On the surface of a gold bullion are engraved the
+name of the refining industry, a trademark, purity, weight, manufacture’s serial number, etc.
+    The unit of transaction is one gram and the asking price is 10 won (KRW). The price is
+shown as won per 1g in the KRX gold market. A limit order is feasible and the maximum
+quantity per one bid is 5kg. The price limits are expressed as an upper price limit and a lower
+                                                 4
+
+
+
+
+                  Electronic copy available at: https://ssrn.com/abstract=2903671
+price limit. The standard price determines the restriction of the price range expressed as the
+upper limit price and lower price limit. The standard price is based on the latest closing price
+from the day before, just before the beginning of a transaction day. The daily restriction of the
+price range is ±10% of the standard price. The trading hours of the KRX gold market are from
+9:00am until 15:30pm. 8:00 am until 9:00 am, that is, one hour before the transaction day starts,
+is the time frame for making a decision about buying at opening, while from 3:20 pm to 3:30
+pm, that is, 10 minutes before closing the transaction day, is the time frame for making a
+decision about buying at closing.
+    Regarding the KRX gold market, a transaction is connected through competitive sales,
+according to the ‘price-time' priority between several asking prices, similar to the stock market.
+It is concluded that an execution of sales deal is feasible as soon as the asking price comes in.
+However, the trading methods of buying on opening and closing prices are accomplished using
+the singular price acquisition method. The payment in the KRX gold market is a same day
+settlement (t day) and the deposit and withdrawal of the gold bullion is feasible in 1kg units. If
+the withdrawal of the gold is requested of the custody facility through the trading securities
+company, the custody facility pays the gold to the fixer.
+
+Table 1 Trading System in the KRX Gold Market
+                            Contents
+Type                       Purity: 99.99%, Weight: 1kg Gold Bullion
+Trade Unit                 1g (Asking Unit: 1g)
+Trading Hours              09:00am ~ 15:30pm
+Price Mark                 Won (KRW) per 1g
+Asking Price Unit          10 Won (KRW)
+Price Limits               Closing Price of the Previous Day ±10%
+Type of Order              Limited Order
+Order Limit                5,000g (5kg) per bid
+Settlement Day             Same Day Settlement (t day)
+Customer Margin            Cash Margin 100%
+
+
+
+2.3 Characteristics of KRX Gold Market
+     The KRX gold market can invest in gold with a lower cost compared with the existing gold
+market, and can utilize HTS on a real time basis, similarly to stock trading, making it possible
+to deal with small (1g) gold transactions. There are many advantages to the KRX gold market.
+First, the KRX gold market has the advantage in terms of price when taking into consideration
+transaction costs including fees, taxes, purchase spread, etc. compared with the existing gold
+over-the-counter market (outside wholesale markets, the bank gold banking, jewelry shops,
+
+                                                   5
+
+
+
+
+                    Electronic copy available at: https://ssrn.com/abstract=2903671
+etc.). There is a tax benefit in which the transfer income tax is not imposed and is not included
+in the object of comprehensive taxation on financial income . As to the gold-related fund and
+gold banking, a 15.4% of profit income tax is imposed.
+     Second, if the spot gold is not delivered from a warehouse, the value added tax is not
+imposed at the KRX gold market. Therefore, in the case of using the KRX gold market for the
+investment purpose of forecasting the gold price rise, the investment efficiency, in comparison
+with the other gold markets, is high. As shown in Table 2, when it is assumed that the price
+rises 10% shortly after purchasing the rate of return on investment using the KRX gold market
+is higher than the other markets. That is, the rate of return in the KRX gold market is 9.6%, the
+account transaction of gold banking is 6.6%, the spot transaction of gold banking -5.6%, and
+the rate of return of the jewelry shop outside the wholesale market is -2.2%.
+
+Table 2 Comparison of return rates according to the gold market types
+The closing price of the KRX gold market represents the purchasing price of gold, final purchase price of the
+Shinhan Bank, and the officially fixed price of the Korea Federation of Jewelry Sales Business by standards on
+the 10 th April of 2015. The unit is by won (KRW).
+                  Purchasing                                  Sale        Income                 Rate of
+                               Buyout Fees    Sale Price                              Surtax
+                    Price                                  Commission       Tax                 Return (%)
+
+   KRX Gold                                                                                         9.6
+                    42,500         128          46,750         140
+    Market
+ Gold Banking
+   (Account         42,742                      46,085                      515                     6.6
+ Transaction)
+ Gold Banking
+    (Spot           44,435                      46,398                                 4,444        -5.6
+ Transaction)
+ Outside Whole
+                    43,040                     46,398                                  4,304        -2.2
+      Sale
+
+
+
+
+3. Data and methodology
+
+
+3.1 Research Data
+    Where there is time difference between the variables, Granger (1969, 1980) interprets this
+kind of dataset as a lead-lag relationship in case there is a cause-and-effect relationship existing
+in the situation. Moreover, considering the existing research that suggests that the futures
+market leads the spot market, it can be estimated that the return rate of CME gold futures and
+of ICE dollar index futures traded at night Korean time have an effect on the market rate of
+return of the KRX gold market when it opens at 09:00am the following day. That is, the prices
+
+                                                      6
+
+
+
+
+                    Electronic copy available at: https://ssrn.com/abstract=2903671
+of CME gold futures and of ICE dollar index futures traded when it is night time in Korea can
+have an effect on the market rate of return of the KRX gold market when it opens because the
+price reflects the financial market news of the United States and major European countries. In
+Table 3, the business hours of CME gold futures, ICE dollar index futures, and the KRX gold
+market are arranged.
+
+Table 3 Description of the Variables
+Daylight Savings Time in the United States is applied from the second Sunday in March until 2:00am on the first
+Sunday of November. Business hours are based on Korean time.
+
+Panel A: Business Hours of Markets
+           Division              Daylight Saving Time Off                        Daylight Saving Time
+KRX Gold Market                     09:00am ～ 15:30pm                      The same
+
+CME Gold Futures                    08:00am ～ the following day 07:00am    07:00am ～ the following day 06:00am
+
+ICE Dollar Index Futures            10:00am ~ the following day 07:00am    09:00am ~ the following day 06:00am
+
+
+Panel B: Variable Descriptions
+  Variable                                                   Description
+              Rate of Return of KRX at t day (= KRX Gold Market Opening price at the t day/Closing Price at
+KRXco,t
+              t-1 days)
+              Rate of Return of CME Gold Futures at t-1 days (= CME Gold Futures Closing Price at t-1
+CMEcc,t-1
+              days/Closing Price at t-2 days)
+              Return Rate of ICE Dollar Index Futures at t-1 days (= ICE Dollar Index Futures Closing Price at
+ICEcc,t-1
+              t-1 days/Closing Price at t-2 days)
+
+
+     In order to utilize the regression analysis and VAR model to provide empirical evidence,
+the daily data of the market rates of return in the KRX gold market from the 24 th March 2014
+to the 23 rd August 2016, is set to the dependent variable. The market rate of return in the KRX
+gold market equals the opening price at t day divided by the closing price at t-1 days minus 1.
+Moreover, after setting the data of daily return rates of both the CME gold futures and ICE
+dollar index futures to the independent variable, it is examined whether the independent
+variables have any significant effects on the market rates of returns of the KRX gold market,
+which are the dependent variable. The rate of return of CME gold futures at t-1 days and the
+return rate of ICE dollar index futures at t-1 days are included by calculating the closing price
+at t-1 days after dividing the t-1 days closing price into the closing price at t-2s day minus 1.
+     Table 4 shows the summary statistics of the market rates of return of the KRX gold market
+at t day, the return rates of CME gold futures at t-1 days, and the return rates of ICE dollar
+index futures at t-1 days. The absolute value of the maximum and minimum values of CME
+gold futures and the KRX gold market, which are based on gold price, are greater than ICE
+dollar index futures because the variability of gold price is greater than the dollar variability.
+                                                         7
+
+
+
+
+                     Electronic copy available at: https://ssrn.com/abstract=2903671
+Table 4 Summary statistics
+Sampling period is from the 24 th March, 2014 to the 23 rd August, 2016. KRXco,t is the market rate of return of the
+KRX gold market at t day, CMEcc,t-1 is the rate of return of CME gold futures at t-1 days, ICEcc,t-1 is the rate of
+return of ICE dollar index futures at t-1 days. S
+                                                                                     Standard
+        Division             Minimum           Maximum              Mean                                  Variance
+                                                                                     Deviation
+         KRXco,t               -6.561             2.990             0.134             0.679                 0.461
+
+        CMEcc,t-1              -3.140             6.211             0.006              0.978                0.956
+
+         ICEcc,t-1             -2.222             2.460             0.029              0.529                0.280
+
+
+     Table 5 represents the result of the interrelation between three variables: the market rate of return
+of the KRX gold market at t day, the return rate of CME gold futures at t-1 days, and the rate of return
+of ICE dollar index futures at t-1 days. The analysis result of the interrelation is that the market rate of
+return of the KRX gold market (KRXco, t) and the return rate of CME gold futures at t-1 days (CMEcc, t-
+1) positively relate at 0.576 with a 1% level of significance. The correlation between the market rate of
+
+return of the KRX gold market at t day (KRXco, t) and the return rate of ICE dollar index futures at t-1
+days (ICEcc, t-1) was negative (-0.147) with significance at the 1% level. It is noticeable that the negative
+correlation between the return rate of CME gold futures at t-1 days and ICE dollar index futures at t-1
+days (-0.344) is more negative than the correlation between the market rate of return of the KRX gold
+market at t day (KRXco, t) and the return rate of CME gold futures at t-1 day (ICEcc, t-1; -0.147) because
+the business hours of CME gold futures and ICE dollar index futures almost coincided with each other
+and night time in Korea Standard Time.
+
+Table 5 Correlation Analysis
+This table presents Pearson correlations among rate of returns from the 24 th March, 2014 to the 23 rd August, 2016.
+KRXco,t is the market rate of return of the KRX gold market at t day, CMEcc,t-1 is the return rate of CME gold futures
+at t-1 days, ICEcc,t-1 is the return rate of ICE dollar index futures at t-1 days. *** denotes the 1% significance level.
+          Division                      KRXco,t                       CMEcc,t-1                      ICEcc,t-1
+
+          KRXco,t                          1                          0.576***                     -0.147***
+
+          CMEcc,t-1                                                      1                         -0.344***
+
+          ICEcc,t-1                                                                                     1
+
+
+
+3.2 Research Method
+     According to the existing research, the futures market can perform the price discovery function and
+the price leading function over the spot market. Yeom and Baek (2015) found that the return rate of
+future stock at t-1 days can have a price discovery effect on the spot market at t day in the case that the
+return rate of the stock price index futures at t-1 days affected the return rate of the spot market at t day
+
+                                                           8
+
+
+
+
+                      Electronic copy available at: https://ssrn.com/abstract=2903671
+in Korea. For this purpose, the result of their empirical analysis showed the return rate of KOSPI200
+night futures at t-1 days affected the significance on the market rate of the return of KOSPI at t day, and
+they interpreted that the derivatives which precede time differences had price leading effects or price
+discovery functions over the spot market which lags in time difference. In addition, related research
+conducted by Rosenberg and Traub (2009), Chen and Gau (2010), and Choudhary and Bajaj (2013)
+showed that the futures market performed at a higher price discovery function than the spot market.
+     This study performs Hypothesis 1 (the return rate of CME gold futures at t-1 days positively
+influences the market rate of return of the KRX gold market at t day) from the estimation that the return
+rate of CME gold futures at t-1 days positively influences the market rate of return of the KRX gold
+market at t day. This estimation is created based on the results of existing research.
+     Meanwhile, Capie et al. (2005) and Kaul and Sapp (2007) noted that the gold price moved in the
+opposite direction of the value of the dollar. Park and Han (2014) suggested that the value of the
+dollar had a negative effect on the international price of gold based on a sampling period where they
+examined the factors that had an effect on the gold price decision. They determined that the negative
+correlation between the value of the dollar and the international price of gold appeared more clearly
+in a specimen period when the international price of gold increased rapidly compared to a more stable
+specimen period. It was generally reported that the international price of gold negatively correlated with
+the value of the dollar in news article1, etc.
+     In order to verify this estimation, Hypothesis 2 (the return rate of ICE dollar index futures at t-1
+days has a negative influence on the market rate of return of the KRX gold market at t day) is formed
+based on the concept that the return rate of ICE dollar index futures at t-1 days negatively influences
+the market rate of return of the KRX gold market at t day. Equation (1) is prepared in order to verify
+Hypothesis 1 and Hypothesis 2. In this research, as shown in equation (1), a regression analysis is
+utilized in order to analyze the influence that the return rate of CME gold futures and ICE dollar index
+futures, the t-1 days independent variables, had on the market rate of return of the KRX gold market at
+t day as the dependent variable. CO means "Close to Open, market rate of return," and CC means "Close
+to Close, the rate of return".
+
+
+Hypothesis 1: The return rate of CME gold futures at t-1 days has a positive influence on the market
+rate of return of the KRX gold market at t day.
+
+
+
+
+1
+  Referencing ‘International Price of Gold, 0.4% Rising With the Weak Dollar’ (Money Today 02/09/2016), ‘International
+Price of Gold, Falling With the Strong Dollar’ (News Tomato 31/08/2016), ‘International Price of Gold, Collapsing 1,320
+dollars With the Strong Dollars’ Influence’ (Money Today 31/08/2016), etc.
+                                                          9
+
+
+
+
+                      Electronic copy available at: https://ssrn.com/abstract=2903671
+Hypothesis 2: The return rate of ICE dollar index futures at t-1 days has a negative influence on the
+market rate of return of the KRX gold market at t day.
+
+
+     KRXco,t =β0 +β1 CMEcc,t-1+β2 ICEcc,t-1+et                                                  (1)
+
+     Rt = (KRXco,t, CMEcc,t, ICEcc,t)T, Rt=C+Σs=1…m AsRt-s+et                                   (2)
+
+     Regression equation (1) includes simple key variables in order to provide important information
+about the effect of the return rate of CME gold futures and ICE dollar index futures on the market rate
+of return of the KRX gold market. By using the unrestricted VAR model represented in equation (2) in
+order to verify possible statistic model error, we conducted robustness testing regarding the price
+discovery function about the market rate of return of the KRX gold market and of the return rates of
+CME gold futures and ICE dollar index futures. Rt is a 3x1 vector of the three variables of return rate:
+the market rate of return of the KRX gold market, and the return rates of CME gold futures and ICE
+dollar index futures while C and As are the coefficient matrix of 3x1, 3x3 per each. In addition, m is the
+length of lag, and et is a vector of prediction error.
+
+
+
+4. Empirical Results
+
+
+4.1 Regression Analysis
+    To perform an empirical test on the daily data of market rates of return of the KRX gold market,
+the return rates of CME gold futures, and the return rates of ICE dollar index futures, we considered
+that specific tendencies can exist because of the influence of a business cycle, etc. Therefore, prior to
+the empirical analysis, as shown in Panel A of Table 6, when the autocorrelation analysis of each
+variable and the partial correlation analysis are performed, no correlation of estimated residual in the
+specimen of each variable could be utilized, making results more reliable. The time difference is
+determined using up to 18 items at maximum, analyzed on the basis of the lowest value of SIC
+(standard industry classification).
+    Moreover, as shown in Panel B of Table 6, in order to confirm the probability of time series data,
+the result of performance of the unit root test (ADF Test; Augmented Dicky-Fuller Test) is interpreted.
+It is determined that there is no unit root or spurious regression phenomenon in the specimen due to
+dismissing the hypothesis of the unit root existence on all variables of significance at the 1% level or
+below.
+
+
+
+
+                                                     10
+
+
+
+
+                    Electronic copy available at: https://ssrn.com/abstract=2903671
+Table 6 Autocorrelation Analysis and ADF Test
+This table shows the results of autocorrelation analysis and ADF test. Sample period is from the 24th March, 2014 to the 23rd
+August, 2016. KRXco,t is the market rate of return of the KRX gold market at t day, CMEcc,t is the return rate of CME
+gold futures at t day, ICEcc,t is the return rate of ICE dollar index futures at t day. The time difference is determined
+using up to 18 items at maximum, analyzed on the basis of the lowest value of SIC.
+
+
+  Panel A: Auto-correlation
+                                  Autocorrelation                                   Partial Autocorrelation
+     구분            KRXco,t           CMEcc,t          ICEcc,t             KRXco,t            CMEcc,t              ICEcc,t
+            1            -0.019         -0.054             -0.058               -0.019           -0.054              -0.058
+            2             0.017         -0.018              0.037               0.016            -0.021               0.033
+            3             0.053         0.009              -0.059               0.053             0.007              -0.055
+            4             0.050         0.019               0.011               0.052             0.019               0.003
+            5            -0.036         0.068              -0.022               -0.035            0.070              -0.018
+            6             0.064         0.005              -0.085               0.058             0.014              -0.092
+            7             0.069         -0.017              0.039               0.068            -0.013               0.032
+            8             0.044         0.001               0.006               0.047            -0.002               0.013
+            9             0.033         0.021               0.058               0.030             0.017               0.048
+          10              0.049         -0.014             -0.061               0.036            -0.016              -0.052
+          11             -0.060         -0.014              0.054               -0.067           -0.016               0.042
+          12              0.043         -0.061             -0.057               0.033            -0.062              -0.050
+          13             -0.038         0.027               0.002               -0.048            0.019              -0.007
+          14              0.035         0.053              -0.060               0.027             0.052              -0.049
+
+  Panel B: Unit Root Test
+           Division                       KRXco,t                       CMEcc,t                         ICEcc,t
+       Time Parameter                                      0                             0                                0
+          t-Statistics                               -24.86                         -25.68                           -25.78
+   Significance probability                            0.00                           0.00                             0.00
+
+
+     The return rate of CME gold futures and ICE dollar index futures at t-1 days is set to the
+independent variable and the market rate of return of the KRX gold market is set to the dependent
+variable in order to examine the influence that CME gold futures and ICE dollar index futures traded in
+the futures exchange market in the United States, at night time in Korea, has on the KRX gold market
+in which the transactions don’t started until 9:00am on the next business day in Korean time. The
+regression analysis results are shown in Table 7. As a result of the analysis, the return rate of CME gold
+futures at t-1 days (CMEcc, t-1) has a positive effect on the market rate of return of the KRX gold market
+with 1% level of significance. This means that Hypothesis 1 (The return rate of CME gold futures at t-
+1 days positively affects the market rate of return of the KRX gold market at t day) is established.
+However, the significance of ICE dollar index futures at t-1 days (ICEcc, t-1) affecting the market rate of
+return of the KRX gold market at t day was not clear. Therefore, Hypothesis 2 (The return rate of ICE
+
+                                                               11
+
+
+
+
+                         Electronic copy available at: https://ssrn.com/abstract=2903671
+dollar index futures at t-1 days negatively affects the market rate of return of the KRX gold market at t
+day) could not be confirmed.
+
+Table 7 Regression Analysis
+This table represents the effect of CME gold futures and ICE dollar index futures on KRX gold market by regression analysis.
+Sample period is from the 24th March, 2014 to the 23rd August, 2016. CMEcc,t-1 is the return rate of CME gold futures at
+t-1 days, ICEcc,t-1 is the return rate of ICE dollar index futures at t-1 days. *** denotes the 1% significance level.
+                                                                             Significance
+       Division               Coefficient             t-Statistics                                      Tolerance
+                                                                              probability
+      (Constant)                 0.130***                 5.712                  0.000
+       CMEcc,t-1                 0.414***               16.707                   0.000                    0.882
+       ICEcc,t-1                 0.075                    1.629                  0.100                    0.882
+        Adjusted R2                         0.333                    Durbin-Watson                     1.930
+
+
+4.2 Empirical Analysis utilizing VAR Model
+     The estimated result of the VAR model examining the influence that the return rate of CME gold
+futures and ICE dollar index futures traded at Korean night time have on the market rate of return of
+the KRX gold market is shown in Table 8. As a result of this analysis, that examined the significance
+that the return rate of CME gold futures at t-1 days had on the market rate of return of the KRX gold
+market at t day in order to verify the Hypothesis 1 (The return rate of CME gold futures at t-1 days
+positively affects the market rate of return of the KRX gold market at t day), the return rate of CME
+gold futures at t-1 days reveals that below the 1% level of significance there is a positive correlation
+(0.414) about the market rate of return of the KRX gold market at t day. Since the return rate of CME
+gold futures at t-1 days has the price discovery function and the leading effect about the market rate of
+return of the KRX gold market at t day, this result is interpreted as one that coincided with the result of
+the regression analysis mentioned above.
+     In addition, our research examines the influence that the return rate of ICE dollar index futures at
+t-1 days has on the market rate of return of the KRX gold market at t day using the estimation of the
+VAR model in order to verify Hypothesis 2 (The return rate of ICE dollar index futures at t-1 days
+negatively affects the market rate of return of the KRX gold market at t day). The result, just like the
+result of the regression analysis mentioned above in Table 7, is of low significance. This indicates that
+there exists no significance relationship between the return rate of ICE dollar index futures and KRX
+gold market price.
+
+
+
+
+                                                            12
+
+
+
+
+                       Electronic copy available at: https://ssrn.com/abstract=2903671
+Table 8 Unrestricted VAR Result
+This table presents unrestricted VAR results among all exchanges. Sample period is from the 24th March, 2014 to the 23rd
+August, 2016. KRXco,t is the market rate of return of the KRX gold market at t day, CMEcc,t is the return rate of CME
+gold futures at t day, ICEcc,t is the return rate of ICE dollar index futures at t day. ***, ** denote the 1% and 5%
+significance level, respectively.
+                   Division                            KRXco,t                CMEcc,t                  ICEcc,t
+                           Coefficient                  0.032                  -0.021                  0.093**
+    KRXco(t-1)        Standard Deviation                (0.041)                (0.073)                 (0.039)
+                              t-value                  [ 0.787]               [-0.291]                [ 2.381]
+                                                               ***
+                           Coefficient                 0.410                  -0.0659                  -0.018
+    CMEcc(t-1)        Standard Deviation                (0.025)               (0.0440)                 (0.024)
+                              t-value                 [ 16.405]               [-1.498]                [-0.782]
+                       Coefficient                      0.070                 -0.0484                  -0.063
+     ICEcc(t-1)       Standard Deviation                (0.046)               (0.0814)                 (0.044)
+                              t-value                  [ 1.509]               [-0.596]                [-1.440]
+                              2
+                  Adjusted R                            0.329                   0.003                   0.006
+                  F- Statistics                         49.317                  0.712                   1.616
+
+     This study also performs variance decomposition and impulse response analysis by utilizing the
+coefficient value of the analyzed results from the unrestricted VAR model in Table 8. In the case of
+variance decomposition, Cholesky decomposition is used and the result of the variance decomposition
+analysis is presented in Table 9. The number of tables indicate predicted error dispersion of the variable
+on the left having an effect on the top variables with percentages. In the analyzed result of variance
+decomposition, one has to take notice of the KRX line in order to examine whether to support
+Hypothesis 1, Hypothesis 2, both or neither. The return rate of CME gold futures contributes to the
+predicted error dispersion of the market rate of return of the KRX gold market being considerably high
+at the 33% level, whereas the return rate of ICE dollar index futures is less than 0.4%. That is, the return
+rate of CME gold futures can be interpreted as having a price discovery effect that is higher than that of
+ICE dollar index futures on the market rate of return of the KRX gold market.
+     Meanwhile, when the line of the return rate of CME gold futures is seen, over 99% of it is explained
+by itself and the predicted error dispersion of the return rate of CME gold futures shows low importance
+of being explained by other variables. That is, the market rate of return of the KRX gold market is
+explained at a considerable level (33% level) by the return rate of CME gold futures but the opposite is
+not the case in this analysis. These results suggest that the price of the KRX gold market is significantly
+affected by the price movements of the CME gold futures market indicating the price synchronization
+of the two global markets.
+
+
+
+
+                                                          13
+
+
+
+
+                      Electronic copy available at: https://ssrn.com/abstract=2903671
+Table 9 Forecast Error Decomposition Analysis
+This table reports unrestricted forecast error decomposition analysis results. Sample period is from the 24th March, 2014 to the
+23rd August, 2016. KRXco,t is the market rate of return of the KRX gold market at t day, CMEcc,t is the return rate of
+CME gold futures at t day, ICEcc,t is the return rate of ICE dollar index futures at t day. *** denotes the 1% significance
+level.
+        Division                  Period                  KRXco,t                     CMEcc,t                   ICEcc,t
+                                     2                     67.047                     32.695                     0.257
+         KRXco,t                     5                     66.593                     33.008                     0.398
+                                    10                     66.592                     33.010                     0.398
+                                     2                      0.017                     99.924                     0.060
+         CMEcc,t                     5                      0.072                     99.639                     0.290
+                                    10                      0.072                     99.639                     0.290
+                                     2                      1.361                     12.216                    86.423
+         ICEcc,t                     5                      1.374                     12.371                    86.256
+                                    10                      1.374                     12.371                    86.256
+
+       As shown in Table 10, the impulse responses of the market rate of return of the KRX gold market
+on the return rate of CME gold futures and ICE dollar index futures are analyzed. It is analyzed how
+KRXco, reacted to KRXco,t, CMEcc,t, and ICEcc,t with one standard error per each given. The market rate
+of return of the KRX gold market at t day will react on the shock of the return rate of CME gold futures
+at t-1 days and ICE dollar index futures at t-1 days, taking business hours into consideration. That is,
+the reaction the following day needs to be examined, not the day of the impact. If the reaction of the
+market rate of return of the KRX gold market about the shock of the return rate of CME gold futures at
+t-1 days is examined, the coefficient is shown as 0.388, which is much bigger than those of the market
+rate of return of the KRX gold market at t-1 days (0.019) and the return rate of ICE dollar index futures
+at t-1 days (0.034).
+     This result can be interpreted as supporting Hypothesis 1 (The return rate of CME gold futures at
+t-1 days positively affects the market rate of return of the KRX gold market at t day) and can also
+support the result of the regression analysis mentioned above.
+     In sum, our empirical results provide that consistent relationships between ICE dollar index
+futures and the KRX gold market do not exist. However, the price movement of the KRX gold market
+reacts positively and significantly to the movement of CME gold futures while there is no significant
+reverse pattern.
+
+
+
+
+                                                              14
+
+
+
+
+                        Electronic copy available at: https://ssrn.com/abstract=2903671
+Table 10 Impulse Response Analysis
+This table presents impulse response analysis results. Sample period is from the 24th March, 2014 to the 23rd August, 2016.
+KRXco,t is the market rate of return of the KRX gold market at t day, CMEcc,t is the return rate of CME gold futures
+at t day, ICEcc,t is the return rate of ICE dollar index futures at t day.
+                                 Period                  KRXco,t                 CMEcc,t                  ICEcc,t
+                                    0                     0.556                    0.000                   0.000
+                                    1                     0.019                    0.388                   0.034
+         KRXco,t
+                                    2                     0.014                   -0.051                  -0.020
+                                    3                     -0.009                   0.001                  -0.017
+                                    0                     0.007                    0.977                   0.000
+                                    1                     -0.011                  -0.055                  -0.024
+         CMEcc,t
+                                    2                     -0.023                  -0.018                  -0.047
+                                    3                     -0.004                  -0.010                   0.005
+                                    0                     -0.031                  -0.186                   0.493
+                                    1                     0.054                   -0.006                  -0.031
+         ICEcc,t
+                                    2                     -0.006                  -0.023                   0.012
+                                    3                     0.003                   -0.002                  -0.001
+
+
+
+
+5. Conclusion
+
+
+     In this paper, we examine the opening of the KRX gold market on 24 th March 2014, and
+also investigate the American derivatives which have an effect on the price movement of the
+KRX gold market. Korean gold investors found a route that they can invest in gold and save
+investment costs such as fees and taxes by the introduction of the KRX gold market. The
+implication of this paper is that the KRX gold market is developing to be the most efficient
+gold market among the existing gold investment methods in Korea. Moreover, despite the
+enormous influence of gold on other real or financial assets in Korea, the related research is
+scarce, especially the investigation of gold market price. In this paper, we introduce the KRX
+gold market and examine the causal sequence between American derivatives market and the
+KRX gold market, which can be a contribution to this field of research.
+     The futures markets could lead spot markets according to existing research on the
+relationship between the futures market and spot market. Moreover, when the time difference
+exists, the futures price at t-1 days affects the t day time point. This can be interpreted as the
+price discovery function. In this research, the regression analysis and VAR model are utilized
+and the empirical analysis is performed regarding the significance of the return rate of CME
+gold futures and ICE dollar index future traded at night time in Korea on the market rate of
+
+                                                           15
+
+
+
+
+                       Electronic copy available at: https://ssrn.com/abstract=2903671
+return of the KRX gold market the next morning. The results show that the return rate of
+CME gold futures at t-1 days significantly positively effects the market rate of return of the
+KRX gold market several hours later.
+    In addition, the result that the return rate of ICE dollar index futures at t-1 days has
+influence on the market rate of return of the KRX gold market is used for the empirical
+analysis in order to check whether a negative significance exists between the value of the
+dollar and gold price. No significance could be discovered. This result can be interpreted as
+supporting the existing evidence that the futures market has a price discovery effect on the
+spot market. However, in order to analyze empirically whether the proposition of 'the value
+of the dollar moves contrary to the gold price', generally mentioned in the news, etc. is
+supported or not, this study could not discover the result of whether or not the return rate of
+ICE dollar index futures at t-1 days negatively affects the significance of the market rate of
+return of the KRX gold market at t day. This may be due to the limit of the empirical analysis
+in the situation where several hours of time differences exist between the t-1 days and t day
+time points. Therefore, future studies need to empirical analyze not only daily data but data
+by minutes.
+
+
+
+
+                                               16
+
+
+
+
+                 Electronic copy available at: https://ssrn.com/abstract=2903671
+                                                    Reference
+
+Barclay, M. J. and T. Hendershott, 2003, Price discovery and trading after hours, Review of Financial Studies 16,
+     pp. 1041-1073.
+Capie, F., T.C. Mills, and G. Wood, 2005, Gold as a hedge against the dollar, Journal of International Financial
+     Markets, Institutions and Money 15, pp. 343-352.
+Chan, K., 1992, A further analysis of the lead-lag relationship between the cash market and stock index futures
+     market, Review of Financial Studies 5, pp. 123-152.
+Chen, Y. L. and Y. F. Gau, 2010, News announcements and price discovery in foreign exchange spot and futures
+     markets, Journal of Banking and Finance 34, pp. 1628-1636.
+Choudhary, K. and S. Bajaj, 2013, Price discovery process in nifty spot and futures markets, Global Business
+     Review 14, pp. 55-88.
+Granger, C.W., 1969, Investigating casual relations by econometric models and cross-spectral methods,
+     Econometrica: Journal of the Economic Society 37, pp. 424-438.
+Granger, C.W. 1980, Testing for casualty: A personal viewpoint, Journal of Economic Dynamics and Control 2,
+     pp. 329-352.
+Hiller, D., P. Draper, and R. Faff, 2006, Do precious metals shine? An investment perspective, Financial Analyst
+     Journal 62, pp. 98–105.
+Hong, J-W., 2013, An empirical study on factors on trading demands of gold futures, Journal of Financial
+     Knowledge Research 11, pp. 47-70.
+Kim, D-H., 2015, Predicting commodity futures basis factor return by basis spread, Asia-Pacific Journal of
+     Financial Studies 44, pp. 587-615.
+Kim, J-Y, Kang, N-E., Heo, J-S., and S-B. Chae, 2015, Statistical analysis of changes in the international gold
+     price forecasts and key economic indicators, Journal of Statistical Studies 19, pp. 138-154.
+Kaul, A. and S. Sapp, 2007, Y2K fears and safe haven trading of the U.S. dollar, Journal of International Money
+     and Finance 25, pp. 760-779.
+Lee, S-W., 2014, A study on the relationship between gold, the KOSPI and the VKOSPI, Journal of Industrial
+     Economics Research 27, pp. 2669-2689.
+Lee, J.H. and S-G. Lim, The Intraday Ex Ante Profitability of Arbitrage between Won/Dollar Spot and Futures,
+     Korean Journal of Financial Studies 30, pp. 267-296.
+Park, S-C. and B-S. Han, 2014, An empirical test on the mediation effects of USD in the determination of gold
+     prices, Korea Management Association Conference, pp. 57-76.
+Rosenberg, J. V. and L. G. Traub, 2009, Price discovery in the foreign currency futures and spot market, Journal
+     of Derivatives 17, pp. 7-25.
+Sjaastad, L.A. and F. Scacciavillani, 1996, The price of gold and the exchange rate, Journal of International
+     Money and Finance 15, pp. 879-897.
+Solt, M. and P. Swanson, 1981, On the efficiency of the markets for gold and silver, Journal of Business 54, pp.
+     453-478.
+Tse, Y., J. Xiang, and J.W. Fung, 2006, Price discovery in the foreign exchange futures market, Journal of Futures
+     Market 26, pp. 1131-1143.
+Xu, X. E. and H-G. Fung, 2005, Cross-market linkages between U.S. and Japanese precious metals futures trading,
+     International Financial Markets, Institutions and Money 15, pp. 107-124.
+Yeom, M-H. and J-S. Baek, 2015, Effect of NYSE on Korean ETF, Korean Journal of Futures and Options 23,
+     pp. 571-595.
+Yeom, M-H., Baek, J-S., and D-J. Ryu, 2013, A study on the impact on market stability in the future of KOSPI200
+     at the night time, Korean Journal of Financial Studies 42, pp. 105-131.
+
+
+
+
+                                                       17
+
+
+
+
+                     Electronic copy available at: https://ssrn.com/abstract=2903671
+
