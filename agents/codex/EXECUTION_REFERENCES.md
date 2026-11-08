@@ -1600,6 +1600,21 @@ Source: Battalio/Egginton/Van Ness/Van Ness, SSRN1941956, October5,2011 draft.
 - Smallest next check only with a separately justified execution task: validate matching report/order populations
   and clock units against observed lifecycle records. No new data request, allocation, monitor or return trial.
 
+### E09/E12 follow-up — Slow trend signals, actual-position turnover and no-trade bands
+
+Source: Tzotchev, SSRN4677166, February6,2018, [review/source audit](results/delta_straddle_4677166_review.md), November8,2026.
+- Use: execution cost scales with changes in actual held positions; running cost with absolute exposure.
+  Signal-only changes miss turnover from inverse volatility, risk targeting, contract rolls and integer rounding.
+  Preserve last executed holdings and cumulative target drift when applying a no-trade band.
+- Evidence: author simulations show fast4/8/16-day gross gains become losses after modeled costs;0.25band
+  improves reported Sharpe over no band, but was chosen after historical comparison. No native savings reproduced.
+- Limits: bounded CDF signal does not bound inverse-vol leverage; straddle-like geometry is not option protection
+  or a timely account offset. Gross/carry/fees/collateral and native roll cash must reconcile. Printed AR(1)t-stat
+  correction is reversed under marginal volatility; source DD below−100%needs NAV convention clarification.
+- Next check on genuinely new matching inputs: one causal native formation/rebalance/roll/cash interval and cost
+  bridge, preserving full universe, source selection and prior negative trend evidence. D54 records missing data.
+- Status: conditional personal lead and cost-reference only; zero new financial trials, measured savings or live changes.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

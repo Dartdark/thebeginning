@@ -165,6 +165,23 @@ Retain these outcomes so old NEEDS DATA headings do not become accidental new sh
 | August2007 quant unwind / literal equity-reversal basket | Risk reference; generic futures port rejected. Literal replication would need a historical individual-stock universe/raw returns/corporate actions/borrow/execution and a separately justified protocol. No current strategy nomination. | [Review](results/august2007_quant_unwind_review_20261027.md). |
 | ETF fails closeouts / dealer awards next-morning trade | Available public balances are late or do not identify a timed obligation. Saved specifications are **DON'T TEST**, not promising merely because participant inventories would be interesting. | [Free-data evidence decision](evidence/SUMMARY_free_data.md). |
 
+### D54 — Diversified delta-straddle trend, SSRN4677166 (November8,2026)
+
+- **Merit/status:** conditional low-priority personal WATCH / NEEDS DATA AND SPECIFICATION. Explicit41-market
+  slow trend design and author post-modeled-cost diversification claims; no independent net return or allocation.
+- **Need:** exact Appendixp.36futures/FX total-return universe and native dated contracts/roll/carry/collateral cash,
+  liquidity-weight vintages, calendars, actual costs/margins/integer lots;504prior trading observations before2018–22
+  design. Exact source1985–2017 replication is separate. Need decision/fill lag, volatility/portfolio-risk initialization
+  and last-executed-position no-trade band. Resolve printed AR(1)correction and source NAV/DD convention.
+- **Have/attempted:** owned minute/daily proxies and source monthly strategy table are insufficient. Bounded public
+  author/title/code/GitHub and Bloomberg-series download searches found discussion/adaptations, no authenticated
+  complete free matching panel or author engine. No paid access. FX`*USDCR`is not spot; source`YM1`is Australian3Y,
+  not Dow. No subset or ED4→SOFR substitution admitted.
+- **Next:** with genuinely new matching evidence, reconcile one causal whole-universe rebalance/roll/cash interval,
+  then coverage/power/native-cost and margin audit before TEST/preregistration. Source multiday holds fail Apex;
+  no rescue of failed generic daily trends or repeating unchanged acquisition loops.
+- [Review](results/delta_straddle_4677166_review.md) · [Acquisition/delivery gate](inputs/delta_straddle_4677166/free_data_gate.md).
+
 ## Keep this register current
 
 For each future worthwhile data-blocked lead, add or update its shared family here with: merit, market/account fit, exact fields and dates, contract/universe identity, publication/receipt/bar conventions, partial inputs already obtained, actual access attempts, unresolved source rules, smallest next admission check and source links. Use new IDs after the existing ones; keep superseded IDs/history rather than renumbering other leads.
