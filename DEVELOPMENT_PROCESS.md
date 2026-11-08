@@ -459,6 +459,19 @@ Post hoc leads from the ablation (not adopted, need their own pre-registered tes
 | Target | VB, DT | VB no target $152 t 2.7 (less steady); DT no target $201, **same t 4.37, total $226k -> $327k, DD $19.6k -> $27.4k** | VB: helps; DT: post hoc lead (needs its own pre-registered test) |
 | Entry-bar stop, holiday list (DT); 2 x ATR disaster stop (PT) | DT, PT | no change (PT's stop is never the exit that matters in the backtest) | Decoration (PT stop kept for tail risk) |
 
+**Round 3 (`analysis/ingredient_ablation3.py`, 2026-11-08; Relative Strength, Late-Day Flow; LDF rebuild 905 trades $91 vs MultiCharts 895 $95):**
+
+| Ingredient | Where | Evidence (removed -> $ a trade / t) | Status |
+|---|---|---|---|
+| NQ's move beyond what ES explains (cross-index residual) | Relative Strength | own momentum only $306 t 4.0 -> $189 t 2.1; market part alone $48 t 0.5; random side $-8 | **Proven** (a different engine from the open-breakout family) |
+| Early fixed decision time (9:00) | Relative Strength | decide 9:15: $220 t 2.8, DD $28.5k -> $42.9k | Supporting (strong) |
+| Big-day condition (move >= 0.4 ATR by 14:00) | Late-Day Flow | follow every day: $91 t 3.4 -> $42 t 2.7 | **Proven** (with the window) |
+| Forced-flow window 14:00 -> 14:30 | Late-Day Flow | signal 14:10: $20 t 0.7; exit 15:00: $72, 2023+ t 0.5 | **Proven** (timing is the edge) |
+| Volatility scaling of the threshold (Z / ATR vs a raw bp / % threshold, trade count matched) | RS, LDF | RS t 4.0 -> 3.9; LDF t 3.4 -> 3.3 | Decoration here (the threshold matters, its scaling does not; count-matched on the full sample) |
+| Target | RS | no target $310 t 3.8 | Decoration |
+| Stop | RS, LDF | RS no stop: worst -$6.8k -> -$20.2k, DD $35.3k; LDF no stop: $94 t 3.5, DD $15.0k -> $11.9k, worst -$2.7k -> -$3.1k | RS: required (tail); LDF: little effect (post hoc lead, not a change) |
+| Shorts | RS, LDF | RS shorts 2023+ t 1.1 (longs 2.8); LDF shorts $107 vs longs $78 | RS shorts weak recently (50K trades longs only); LDF both sides |
+
 **Batch of 5 (2026-11-08, pre-registered; TIER_LIST rows):** the engines are market-specific. Morning momentum does not carry to CL / GC / ZN
 (t 0.8 / 0.2 / -1.3; it works on NQ and, weaker, on ES); the noise band loses on CL / GC even before costs; the Overnight Tick signal
 carries to ES (t 4.4, checker 8/8) but is the same trade (corr 0.94 with OT on NQ). Cross-mechanism filters failed both ways: overnight
