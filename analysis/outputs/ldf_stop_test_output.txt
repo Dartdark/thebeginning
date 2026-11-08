@@ -19,3 +19,13 @@ Late-Day Flow stop: none / wider (user 2026-11-08, lead from ingredient_ablation
       2018-26: book 5.42 | base (stop 0.25 ATR) 5.41 (-0.01) | A no stop 5.42 (-0.00) | B stop 0.5 ATR 5.41 (-0.01)
       2018-22: book 5.45 | base (stop 0.25 ATR) 5.45 (+0.00) | A no stop 5.51 (+0.06) | B stop 0.5 ATR 5.51 (+0.06)
       2023+: book 6.10 | base (stop 0.25 ATR) 6.10 (-0.00) | A no stop 6.08 (-0.02) | B stop 0.5 ATR 6.05 (-0.05)
+
+   50K funded (plan, LDF 2 MNQ replaced), 600 paired 2-year histories:
+                               y1 y1_p5      y2 y2_p5  y2_p95 blown all6_2y days6 beats_base diff_y2 diff_blown
+base (stop 0.25 ATR) 2 MNQ $8,314    $0 $11,818    $0 $13,000  8.8%   89.0%   292      50.0%      $0       0.0%
+A no stop 2 MNQ            $8,367    $0 $11,890    $0 $13,000  8.0%   89.2%   292      50.3%     $72      -0.8%
+B stop 0.5 ATR 2 MNQ       $8,314    $0 $11,818    $0 $13,000  8.7%   88.7%   293      49.8%      $0      -0.2%
+   Funded 150K x 1.5 + Twin 2 (LDF 3.0 MNQ: Python rebuild as the base), 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,065 blown  2.0% all 6 97.3% diff $   +0 beats 50.0%
+      A no stop 3.0 MNQ                  2y $ 20,068 blown  2.0% all 6 97.5% diff $   +3 beats 50.0%
+      B stop 0.5 ATR 3.0 MNQ             2y $ 20,008 blown  2.3% all 6 97.2% diff $  -57 beats 49.8%

@@ -1,2 +1,26 @@
 [provenance] code ae2ae981 dirty | data 6E 20171201-20261014 #b79a38f2; BTC 20181217-20261013 #a1b20239; CL 20171130-20261013 #924cb0dd; ES 20170102-20261011 #d4140b34; GC 20171130-20261013 #0511388e; GEX 20220901-20260707 #5fc2428c; NG 20170102-20261030 #dae393a9; NQ 20170501-20261104 #c5c2522a; OF 20180102-20260707 #ec8b859a; YM 20171201-20261013 #97380a13; ZN 20171201-20261014 #35c30189
 New-mechanism search (user 2026-11-08, after ingredient rounds 1-3): two untested uses of the cross-index engine. PRE-REGISTERED (header
+
+x1_late_relflow:
+   all            n   436 $  108 t  3.05 PF 1.54 total $   47k maxDD $ 7.6k | 2018-22 $ 163 (t  3.7) 2023+ $  39 (t  0.7) | worst $-2,128
+   longs          n   217 $  106 t  2.17 PF 1.56 total $   23k maxDD $ 5.4k | 2018-22 $ 131 (t  2.2) 2023+ $  68 (t  0.8) | worst $-2,128
+   shorts         n   219 $  111 t  2.14 PF 1.53 total $   24k maxDD $ 9.0k | 2018-22 $ 200 (t  3.0) 2023+ $  14 (t  0.2) | worst $-2,023
+      by year $: {2018: 8265, 2019: -1508, 2020: 6240, 2021: 11190, 2022: 15636, 2023: 7769, 2024: 863, 2025: 4533, 2026: -5756} | exits {'flat': 402, 'stop': 34}
+   random side $-17, 95th $38; real $108; p 0.00
+   daily corr: {'Late-Day Flow': np.float64(0.27), 'Relative Strength NQ': np.float64(0.09), 'Twin': np.float64(0.02)}
+
+   150K evaluation (set + Twin 2 MNQ) alone: pass 38.3% (starts to 2026-09-01)
+   + x1_late_relflow 2 MNQ            pass 38.1% (-0.1%; band -0.7% / +0.3%)
+   Funded 150K x 1.5 + Twin 2 MNQ, 600 paired histories (to 2026-10-09), 2 years:
+      base: plan x 1.5 + Twin 2          2y $ 20,031 blown  2.2% all 6 97.2% diff $   +0 beats 50.0%
+      + x1_late_relflow 2 MNQ            2y $ 20,085 blown  2.2% all 6 97.5% diff $  +54 beats 50.3%
+   Personal book 1-year MC return / DD p95 (+ 1 MNQ):
+      2018-26: book 5.42 | + 1 MNQ 5.54 (+0.12)
+      2018-22: book 5.45 | + 1 MNQ 5.81 (+0.36)
+      2023+: book 6.10 | + 1 MNQ 6.08 (-0.02)
+
+x2_rs_ym:
+   all            n  1172 $  -98 t -3.25 PF 0.79 total $ -114k maxDD $118.8k | 2018-22 $ -72 (t -1.9) 2023+ $-127 (t -2.7) | worst $-3,376
+   longs          n   574 $  -46 t -1.05 PF 0.90 total $  -26k maxDD $34.8k | 2018-22 $ -34 (t -0.6) 2023+ $ -60 (t -0.8) | worst $-3,341
+   shorts         n   598 $ -147 t -3.56 PF 0.69 total $  -88k maxDD $89.8k | 2018-22 $-110 (t -2.0) 2023+ $-190 (t -3.0) | worst $-3,376
+      by year $: {2018: -2700, 2019: -8559, 2020: -5268, 2021: -10816, 2022: -18423, 2023: -12764, 2024: -8333, 2025: -24847, 2026: -22651} | exits {'flat': 731, 'stop': 352, 'target': 89}
