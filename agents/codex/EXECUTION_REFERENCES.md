@@ -2400,3 +2400,21 @@ The contextual [Farmer etal2006 source](https://arxiv.org/html/physics/0602015) 
 not demonstrated NQ reversal profits. Keep that evidence distinction. Heavy-total-volume comparison repeats
 known T-style conditioning; its positive design result is not new native parity, a selected strategy or a payout
 improvement. No follow-direction or new clock is tested as a post-result rescue.
+
+### E11/E19 follow-up — Treasury result documents retain earlier announcement times (2026-11-08)
+
+Source: [local primary-data intake](results/new_data_local_20261108.md),
+[independent cloud review](results/primary_data_review_20261108.md) and original TreasuryDirect XMLs in the
+hash-verified transport package. This is direct source-field verification, not a trading or execution-return test.
+
+- **Useful lesson:** retain announcement, operation start/close, result-content publication, download receipt and
+  settlement clocks separately. All 520 audited operation XMLs carry a pre-operation `announcementDTM`, including
+  172 `Results` and 206 `Released` documents; none supplies the parsed result-publication field. Do not make accepted
+  amounts/prices available at the old announcement time just because they share a result document.
+- Original operation-start offsets are 376 `-04:00` and 144 `-05:00`; a fixed year-round EST conversion would be wrong.
+  Filenames encode another source clock and are not announcement times. Current download/Last-Modified times are not
+  historical first public receipt. NYFed result `releaseTime`/`lastUpdated` labels likewise need semantic verification.
+- **Next check and limits:** authenticate the actual historical release/receipt and revisions for one event before
+  any separately preregistered strategy/execution replay. Keep current/future tentative schedules separate from
+  completed outcomes and historical programs/tests separate from regular modern buybacks. No inferred result clock,
+  automatic gate reopening, execution saving, deployment or live-system change follows.
