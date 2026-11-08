@@ -2400,3 +2400,24 @@ The contextual [Farmer etal2006 source](https://arxiv.org/html/physics/0602015) 
 not demonstrated NQ reversal profits. Keep that evidence distinction. Heavy-total-volume comparison repeats
 known T-style conditioning; its positive design result is not new native parity, a selected strategy or a payout
 improvement. No follow-direction or new clock is tested as a post-result rescue.
+
+### E11 follow-up — UGL/GLL valuation, publication and reset clocks (2026-11-08)
+
+[Historical primary-source audit](results/gold_clocks_20261108.md),
+[preserved documents and evidence matrix](inputs/gold_clocks_20261108/README.md), data needD15.
+Before January4,2019 gold NAV follows15:00London, usually10:00ET with US/UK DST mismatch variation.
+January4normal NAV moves to13:30ET and AP cutoff13:00; both funds first strike BCOMGC NAV January7.
+Annual2021/22tables corroborate normal policy. Do not back-map today's futures benchmark or clock to2018.
+The2018 printed sponsor AP cutoff09:30 conflicts with an older-rule09:00 citation; retain uncertainty.
+
+Source evidence supports daily mandates and typical/variable rebalancing around valuation, not exact
+executed reset times or simultaneous counterparty GC hedges. IOPV dissemination is not finalized NAV
+publication. NAV/AUM/shares date labels and current HTTP metadata do not establish historical available_at.
+AP order cutoff, NAV basis, cash/futures settlement, share recognition and hedge timing are distinct;
+historical T+1/T+2 provisions are not a universal lag for daily share changes. Actual daily contracts,
+weights, exception notices, first receipts/revisions and execution records remain missing.
+
+Next useful check: one authenticated original/revised field capture and matching order/settlement/reset
+record, then a DST-mismatch/transition/early-close comparison. Separate2,518policy rows retain blank
+publication/execution clocks and unchanged original data. Evidence is source-policy QA, not measured
+execution savings, historical profitability, strategy admission or authorization for live/broker changes.
