@@ -27,7 +27,7 @@ def main():
                          strategy_sharpe=values[6],benchmark_sharpe=values[7],jk_z=values[8],jk_p=values[9]))
     assert len(rows)==10
     with (OUT/'source_table8.csv').open('w') as f:
-        w=csv.DictWriter(f,fieldnames=rows[0]);w.writeheader();w.writerows(rows)
+        w=csv.DictWriter(f,fieldnames=rows[0],lineterminator='\n');w.writeheader();w.writerows(rows)
     # Synthetic availability fixtures are not a fit, an economic variant or a strategy run.
     fit=datetime(2000,12,31,tzinfo=timezone.utc)
     matured=datetime(2000,9,30,tzinfo=timezone.utc)
