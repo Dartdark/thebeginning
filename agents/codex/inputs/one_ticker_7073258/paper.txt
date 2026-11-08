@@ -1,0 +1,766 @@
+One Ticker Deep: The Trend Strategy That Passed Every Test
+              and Still Shouldn't Be Believed
+                                      Author: Prashant Malan
+                                          Draft: July 2026
+Companion paper to "Do Simple Cross-Sectional Trend Strategies Survive Honest Validation? Evidence
+                           from a Small US Large-Cap Universe, 2020–2024."
+
+
+
+Abstract
+In a companion study I showed that two canonical cross-sectional long-short strategies — moving-
+average crossover and 12-1 momentum — fail walk-forward validation on US large-caps over 2020–
+2024, and that a single train/test split overstates their performance roughly threefold. This paper
+studies the strategy that passed. A directional, long-only time-series trend rule — hold the strongest
+names trading above their own moving average, retreat to cash otherwise — survives the identical
+walk-forward protocol with an out-of-sample Sharpe of 1.36 on the original 26-name universe
+(CAGR 34.1% against 20.8% for the S&P 500), and 1.53 on a broadened 99-name universe selected
+on start-of-sample information. Every cell of its 36-point parameter grid beats buy-and-hold in-
+sample. By the standards of the companion paper, this strategy is validated. I then attribute the
+result, in three layers. Volatility terciles reveal that the performance is monotone in volatility and
+lives entirely in the highest-volatility third of the universe; in the lower two terciles the strategy
+underperforms buy-and-hold. Excluding a single stock — NVIDIA — from either universe collapses
+the walk-forward Sharpe below the S&P 500's (1.13 and 1.05 versus 1.30) and shrinks the CAGR
+edge from over thirteen percentage points to about two. Repairing the survivorship bias of the
+universe does not repair the concentration: the dependence on one historic outlier is a property of
+the strategy, not of the stock list. As a cross-check, the same broadened universe fails to rescue the
+long-short strategies (walk-forward Sharpes of −0.31 and 0.18), rejecting the breadth hypothesis
+advanced in the companion paper. What survives every test is trend-following's drawdown
+reduction — maximum drawdowns of −13% to −19% against −24% to −34% for buy-and-hold — at
+roughly market-like returns. The methodological conclusion extends the companion paper's: a clean
+validation protocol can still bless a lucky strategy. Validate, then attribute, before believing any
+backtest.
+
+Keywords: trend following, time-series momentum, backtest overfitting, attribution, survivorship
+bias, concentration risk
+
+JEL codes: G11, G12, G14
+1. Introduction
+The companion paper to this one ends with a defensible negative: neither a moving-average
+crossover nor classic cross-sectional momentum, implemented dollar-neutral on liquid US large-
+caps, survives walk-forward validation over 2020–2024. The natural question a practitioner asks
+next is whether the validation pipeline is simply too harsh — whether anything can pass it. This
+paper answers that question, and the answer turns out to be more instructive than either a plain yes
+or a plain no.
+
+The candidate is the simplest directional strategy in the practitioner canon: time-series trend
+following (Moskowitz, Ooi and Pedersen, 2012; Faber, 2007). Each stock is compared to its own
+trailing moving average rather than to its peers. Names trading above their average are candidates to
+hold; names below it are sold. The portfolio holds the few strongest candidates and retreats to cash
+when trends die, so the book de-risks mechanically in broad downturns. Unlike the dollar-neutral
+constructions of the companion paper, this strategy deliberately carries market beta; the fair
+benchmark is therefore buy-and-hold itself, and the bar is to beat it.
+
+By every standard applied in the companion paper, the strategy clears the bar. Its in-sample
+parameter surface is not a lucky spike but a uniform plateau: all 36 combinations of trend window
+and portfolio breadth beat the S&P 500's Sharpe ratio, with a median of 1.20 against 0.76. It survives
+the walk-forward protocol that dismantled the long-short strategies, posting an out-of-sample
+Sharpe of 1.36 with a fourteen-percentage-point CAGR advantage over the index. And when I repair
+the most serious data defect of the companion study — a universe hand-picked in 2026, after the
+sample — by re-selecting roughly one hundred names on January 2020 index membership, the walk-
+forward result improves, to 1.53.
+
+A researcher who stopped here would deploy this strategy. The contribution of this paper is to show,
+in three attribution layers, why that would be a mistake — and what a more careful reading of the
+same evidence actually supports.
+
+First, sorting the universe into volatility terciles shows the performance is monotone in volatility
+and concentrated entirely in the top tercile — the NVDA, META, AMZN cohort. In the bottom two
+terciles, covering two-thirds of the universe, the strategy underperforms buy-and-hold. The pattern
+replicates exactly on the survivorship-corrected universe. Whatever this strategy harvests, it is not a
+universal trend effect; it is a property of high-volatility growth names in this particular regime.
+
+Second, removing a single stock — NVIDIA, which rose roughly tenfold over the sample — collapses
+the strategy's walk-forward Sharpe from 1.36 to 1.13 on the original universe and from 1.53 to 1.05
+on the broadened one, in both cases below the S&P 500's 1.30 over the same span. The CAGR
+advantage shrinks from +13.3 and +20.5 percentage points to +2.2 and +2.4. One ticker out of
+twenty-six, or out of ninety-nine, accounts for essentially the entire risk-adjusted edge. Strikingly, the
+ex-NVDA CAGR is almost identical across the two universes (23.0% versus 23.2%): remove the
+outlier and the strategy converges to market-like returns regardless of the stock list.
+Third, the broadened universe serves as a controlled experiment on the companion paper's leading
+conjecture — that the long-short strategies failed for lack of cross-sectional breadth. The conjecture
+is rejected: quadrupling the universe leaves momentum's walk-forward Sharpe essentially
+unchanged (0.18 versus 0.22) and pushes the MA long-short negative (−0.31 versus 0.35). Breadth
+was never the binding constraint; the signals were.
+
+The residual finding, after all three layers, is modest and I believe genuine: the trend rule's cash-
+retreat mechanism reliably truncates drawdowns (−13% to −19% across every specification, against
+−24% to −34% for buy-and-hold) at roughly market-like returns. That is a defensible property with
+independent support in the literature (Faber, 2007; Moskowitz, Ooi and Pedersen, 2012). It is also a
+much smaller claim than the headline backtest appears to support.
+
+The paper's method is its message. The companion study showed that the choice of validation
+protocol can fabricate an edge; this study shows that even a sound protocol can certify one that
+attribution immediately dissolves. Walk-forward validation asks whether a strategy would have
+worked. Attribution asks why — and a "why" of "one historic stock happened to be in the list" is not
+an edge, however clean the protocol that reported it.
+
+Section 2 describes the data and the two universes. Section 3 specifies the strategy and recapitulates
+the shared evaluation machinery. Section 4 presents results in the order the experiments were run
+— baseline, parameter surface, validation, then the three attribution layers — and closes with a
+master comparison of every scenario generated. Section 5 discusses interpretation, Section 6
+limitations, and Section 7 concludes. Appendix A contains the strategy and attribution source code;
+Appendix B gives replication instructions.
+
+
+
+2. Data and universes
+
+2.1 Source
+
+All data are split- and dividend-adjusted daily bars from the Alpaca Market Data API, 2 January 2020
+to 30 December 2024 (1,257 trading days), with fields open, high, low, close, volume, trade count,
+and daily VWAP. Data-integrity checks (adjustment verification at known splits; VWAP within [low,
+high] on 100% of rows) are described in the companion paper. SPY proxies buy-and-hold and is
+never tradable.
+
+2.2 The two universes: a controlled comparison
+
+The companion paper's universe — 26 liquid large-caps across five sectors — was hand-picked in
+2026, i.e. after the sample. That is a textbook survivorship defect: the list contains the names known,
+with hindsight, to have remained large and liquid, and conspicuously includes NVIDIA. For a dollar-
+neutral book the defect is partially self-hedging (both the longs and the shorts come from the same
+flattered list). For a long-only strategy that concentrates in recent winners it is potentially fatal,
+which motivates the second universe.
+The 2020 universe. Ninety-nine names reconstructing S&P 100 membership as of January 2020 —
+selection using nothing known after the sample begins. It therefore includes the subsequent losers a
+2026 list quietly drops: Boeing, General Electric, Walgreens, Intel, Disney, PayPal, Citigroup, 3M and
+others. All 99 names have full 1,257-day coverage on Alpaca.
+
+Two residual biases are documented rather than hidden. Members delisted mid-sample through
+corporate actions (Allergan, acquired May 2020; Raytheon/United Technologies, merged April 2020)
+could not be included because the data vendor does not serve delisted tickers; the list therefore still
+slightly overweights firms that survived 2020–2024 as independent companies (Shumway, 1997,
+documents the general form of this bias). And membership is reconstructed from public sources
+rather than a licensed point-in-time constituents file, so small errors are possible. Neither caveat
+affects the paper's central comparisons, which hold the universe fixed while varying the strategy, or
+vice versa.
+
+
+
+3. Strategy and methodology
+
+3.1 The trend rule
+For stock i on day t, with an n-day simple moving average:
+
+     score_it = P_it / SMA_n(P_i)_t − 1
+
+A positive score means the stock trades above its own n-day average — the time-series definition of
+an uptrend, as distinct from the cross-sectional ranking of the companion paper, in which the same
+arithmetic would be compared across stocks. Here the zero line carries meaning: it is the buy/sell
+boundary.
+
+Each rebalance (every 5 trading days), among stocks with positive scores, the n_hold strongest are
+held at fixed weight 1/ n_hold each. If fewer than n_hold names qualify, the shortfall remains in
+cash; if none qualify, the book is entirely in cash. Sizing is deliberately fixed rather than
+renormalised, so gross exposure floats between 0 and 100% with the breadth of the uptrend — this
+is the mechanism that de-risks the book in broad selloffs without any dedicated crash logic.
+Positions are held constant between rebalances. The default configuration is a 100-day window
+holding 5 names; both parameters are swept in Section 4.2.
+
+3.2 Shared machinery
+
+The backtest engine, cost model and validation protocols are identical to the companion paper, to
+which I refer for detail: no look-ahead (weights lag their signal by one day), costs of 5 bps per unit of
+gross turnover, close-to-close accounting, Sharpe with the risk-free rate at zero (noted as a
+convention; for a long-only book this flatters slightly more than for a dollar-neutral one). The two
+out-of-sample protocols are likewise unchanged: a 60/40 chronological train/test split, and a walk-
+forward that re-selects parameters every 126 trading days on a trailing 378-day window,
+concatenating the out-of-sample blocks. The parameter grid for selection is window ∈ {20, 40, 60,
+80, 100, 125, 150, 200, 250} × n_hold ∈ {3, 5, 8, 10}, 36 combinations.
+
+3.3 Attribution protocols
+
+Three attribution layers, fixed before inspecting their results:
+
+Volatility terciles. Rank the universe by full-sample annualised volatility, split into thirds, and run the
+strategy independently within each tercile. Using full-sample volatility involves mild look-ahead
+(rankings are, however, highly persistent); the diagnostic purpose is to locate the performance, not
+to propose a tradable sort.
+
+Single-name exclusion. Re-run the entire walk-forward — selection and all — on the universe minus
+its largest single contributor, NVIDIA. If a strategy's edge is a portfolio property, removing one of 26
+(or one of 99) names should dent it modestly; if the edge collapses, the "portfolio strategy" was a
+single-stock bet wearing a systematic costume.
+
+Universe replacement. Re-run the walk-forward on the 2020 universe, with and without NVIDIA, and
+— as a cross-check on the companion paper's breadth conjecture — re-run the two long-short
+strategies on the broadened universe as well.
+
+
+
+4. Results
+
+4.1 The baseline looks excellent
+
+Table 1 reports the default configuration (100-day window, 5 names) on the 26-name universe,
+against buy-and-hold.
+
+Table 1. Trend-following baseline versus SPY, 26-name universe, 2020–2024
+
+                   Metric                    Trend-follow 100d/5       SPY buy & hold
+
+                   Total return                             184.1%               95.3%
+
+                   CAGR                                      23.3%               14.4%
+
+                   Sharpe                                      1.12                0.76
+
+                   Maximum drawdown                         −23.2%              −33.8%
+
+                   Annualised volatility                     20.6%               20.6%
+
+                   Average gross exposure                    91.2%               100%
+        Figure 1. Baseline trend-following versus SPY, 2020–2024. The strategy is flat through the February–
+         March 2020 crash — the cash-retreat mechanism operating as designed — then rides the recovery.
+
+
+At identical volatility the strategy earns nearly twice the index's CAGR with a third less drawdown.
+The equity curve shows why: the book was in cash through the COVID crash (partly warm-up, partly
+no names above trend), then fully invested through the recovery. Where the companion paper's
+baseline opened with a failure, this one opens with apparent success — which is precisely why the
+rest of the paper exists.
+
+4.2 The parameter surface is uniformly green — which should raise suspicion, not
+confidence
+
+Sweeping the full grid (window × n_hold, 36 cells) yields the most striking in-sample table of either
+paper: every cell beats buy-and-hold. Sharpe ranges from 0.89 to 1.43 with a median of 1.20,
+against SPY's 0.76.
+
+Table 2. In-sample sweep extremes, 26-name universe (36 cells; SPY Sharpe 0.76)
+
+            Cell                       Sharpe        CAGR        Max DD       Ann. vol       Turnover
+
+            Best: 80d / 3 names            1.43      39.2%       −19.9%          25.3%           0.091
+
+            Worst: 20d / 3 names           0.89      21.3%       −35.7%          25.3%           0.215
+
+            Median of grid                 1.20          —             —             —               —
+       Figure 2. In-sample Sharpe by (window, n_hold). All 36 cells exceed SPY's 0.76. Concentration (3 names)
+           maximises return at deeper drawdowns; breadth (8–10 names) smooths. The 20-day column is
+                                                uniformly the worst.
+
+Two structural observations. First, the horizon lesson of the companion paper recurs for the fifth
+time across these studies: the 20-day column is the worst on the surface, and the comparison of the
+two extreme cells isolates the mechanism. Both run identical volatility (25.3%), but the 20-day cell
+earns barely half the return with 2.4 times the turnover — it whipsaws, selling after dips and re-
+buying after rebounds, so it suffers a worse maximum drawdown than buy-and-hold (−35.7% versus
+−33.8%) despite being a "risk-managed" strategy. Days-scale signals are noise; the viable trend
+horizon is months.
+
+Second, and more importantly: a 36-for-36 sweep on a universe selected after the sample should be
+read as a red flag, not a robustness certificate. When every variant of a long-only "hold the strongest"
+rule beats the market on a list containing the era's biggest winners, the natural hypothesis is that the
+list, not the rule, is doing the work. Sections 4.4–4.6 test that hypothesis directly.
+
+4.3 The strategy survives both validation protocols
+
+Train/test split. Selection on the training window (December 2020 – May 2023) picks 80/3 (train
+Sharpe 1.52). Frozen on the test window it earns a Sharpe of 1.20, CAGR 31.9%, maximum
+drawdown −19.9% (test-optimal oracle: 250/10 at 2.16).
+
+Walk-forward. Table 3 reports the five folds.
+
+Table 3. Walk-forward folds, 26-name universe
+                    Test window                Selected (window/n_hold)           Fold Sharpe
+
+                    Jun 2022 – Dec 2022                               125/3                −0.69
+
+                    Dec 2022 – Jun 2023                               200/3                 3.03
+
+                    Jul 2023 – Dec 2023                                 80/3                0.83
+
+                    Jan 2024 – Jul 2024                                 40/3                3.26
+
+                    Jul 2024 – Dec 2024                                 40/3               −0.61
+
+                    Stitched (629 days)                                                    1.36
+
+
+The stitched out-of-sample record: Sharpe 1.36, CAGR 34.1%, total +108.0%, maximum
+drawdown −18.6%, against SPY's 1.30 and 20.8% over the identical span.
+
+
+
+
+         Figure 3. Stitched walk-forward out-of-sample equity curve versus SPY, 26-name universe. The first
+                            strategy in either paper to beat buy-and-hold out-of-sample.
+
+This is the exact protocol that reduced the companion paper's strategies to Sharpes of 0.35 and 0.22.
+Here it certifies a fourteen-point CAGR advantage with a smaller drawdown. Three cautionary
+details temper the headline even before attribution. The Sharpe advantage itself is thin — 1.36
+versus 1.30 over two and a half years is statistically indistinguishable; the genuine edge is the
+return-drawdown combination. Fold dispersion remains enormous (−0.69 to +3.26), with two of five
+folds negative. And while the selected window lurches between folds (125 → 200 → 80 → 40), the
+selected breadth never does: every fold chooses the most concentrated book allowed, n_hold = 3 .
+The walk-forward is persistently maximising concentration — a detail that foreshadows everything
+that follows.
+4.4 Attribution I: the performance is monotone in volatility
+
+Table 4 runs the strategy independently within volatility terciles of each universe (trend rule at
+100d/top-3; the companion paper's MA long-short within the same buckets for contrast).
+
+Table 4. Performance within volatility terciles, full sample
+
+                        Trend          Trend           MA L/S                   Trend           Trend           MA L/S
+  Bucket
+                       Sharpe           CAGR           Sharpe                  Sharpe            CAGR           Sharpe
+
+                     26-name                                                  99-name
+                      universe                                                universe
+
+  Low vol                 0.60           7.0%              0.08                    0.52          6.9%             −0.34
+
+  Medium
+                          0.84         14.3%              −0.65                    0.71         12.4%             −0.41
+  vol
+
+  High vol                1.52         43.2%               0.76                   1.22         36.6%                  0.16
+
+  SPY                     0.76         14.4%                 —                     0.76         14.4%                  —
+
+
+
+
+        Figure 4. Trend-following within volatility terciles, 26-name universe. Low-vol tercile: JNJ, KO, PEP, WMT,
+          MRK, MCD, PFE, V (annualised vol 19.7–27.9%). High-vol tercile: XOM, CVX, AMZN, BAC, ADBE, CRM,
+                                            INTC, META, NVDA (34.2–53.9%).
+        Figure 5. The same experiment on the 99-name 2020 universe (33 names per tercile). The monotone
+       pattern replicates; the high-vol bucket's deeper drawdown (−38.6%) reveals downside the 2026-picked
+                                                 list had erased.
+
+The pattern is identical on both universes and admits no ambiguity: performance rises
+monotonically with volatility, and the effect lives entirely in the top tercile. In the low and medium
+terciles — two-thirds of either universe — trend-following underperforms buy-and-hold. "Trend-
+following worked in 2020–2024" is the wrong description of these tables. "Trend-following high-
+volatility growth stocks worked in 2020–2024" is the right one, and it is a materially weaker claim: it
+identifies the return engine as a specific, regime-dependent cohort, not a universal effect. The broad-
+universe replication adds one sobering detail: the clean universe's high-vol tercile suffered a −38.6%
+maximum drawdown — worse than buy-and-hold — where the 2026-picked list showed only
+−23.2%. The survivorship-tainted list had erased not just losers but the true downside of the
+winners' cohort.
+
+The volatility sort also suggests why every fold of the walk-forward selects maximal concentration:
+the fewer names the book holds, the higher the share of the era's few explosive winners. Which
+raises the obvious question of how much of the edge is attributable to the single most explosive one.
+
+4.5 Attribution II: remove one stock and the edge is gone
+Table 5 re-runs the complete walk-forward — the selection loop included, so the protocol has every
+chance to adapt — on each universe with NVIDIA excluded.
+
+Table 5. Walk-forward out-of-sample, with and without NVDA
+          Universe           With NVDA                   Without NVDA                                SPY
+
+                                  Sharpe       CAGR               Sharpe       CAGR      Sharpe / CAGR
+
+          26-name                    1.36     34.1%                  1.13     23.0%        1.30 / 20.8%
+
+          99-name (2020)             1.53     41.3%                  1.05     23.2%        1.30 / 20.8%
+
+
+
+
+               Figure 6. Walk-forward out-of-sample equity curve, 26-name universe excluding NVDA.
+
+
+Removing one ticker — out of twenty-six, or out of ninety-nine — moves the strategy from "beats
+the index on every metric" to "risk-adjusted performance below the index" (1.13 and 1.05 versus
+1.30). The CAGR advantage collapses from +13.3 and +20.5 percentage points to +2.2 and +2.4 —
+inside the noise band of a two-and-a-half-year window. Two further details deserve emphasis.
+
+First, the ex-NVDA CAGRs are nearly identical across universes: 23.0% on 26 names, 23.2% on 99.
+Remove the outlier and the strategy converges to essentially the same market-like return regardless
+of the stock list — about as clean a demonstration as the data permit that the excess return was
+NVIDIA.
+
+Second, the drawdown improvement survives the exclusion: −19.2% and −16.7% ex-NVDA, against
+roughly −24% for the index over the same span. What the exclusion destroys is the alpha claim; what
+it leaves intact is the risk-management claim.
+
+4.6 Attribution III: the universe fix does not fix the strategy — and rejects the breadth
+conjecture
+The 99-name results above double as the survivorship experiment. Note the direction of the effect:
+on the cleaner universe, the with-NVDA result got better (1.53 versus 1.36; CAGR 41.3%, drawdown
+−13.4%, no negative folds), because 73 additional 2020-era names gave the selector more high-vol
+winners to rotate through. The survivorship correction, by itself, would have increased confidence in
+the strategy. Only the exclusion test reveals that the improved number rests on the same single-name
+foundation (1.53 → 1.05). Concentration risk is a property of the strategy — a top-3 book will find
+NVIDIA in any universe that contains it — and no amount of universe hygiene removes it.
+
+
+
+
+       Figure 7. Walk-forward out-of-sample equity curve, 99-name 2020 universe (with NVDA): the best out-
+                               of-sample result of either paper — until attribution.
+
+
+
+
+      Figure 8. The same experiment excluding NVDA. The out-of-sample edge over SPY essentially disappears.
+Finally, the broadened universe adjudicates the companion paper's leading conjecture — that its
+long-short strategies failed for want of cross-sectional breadth, momentum's documented edge
+having been established on universes of hundreds to thousands of names. Table 6 reports the same
+walk-forward protocol for all three strategies on both universes.
+
+Table 6. Walk-forward out-of-sample Sharpe, all strategies × both universes
+
+     Strategy                        26-name (2026-picked)      99-name (2020-selected)       SPY
+
+     MA crossover long-short                            0.35                        −0.31     1.30
+
+     Momentum (12-1) long-short                         0.22                         0.18     1.30
+
+     Trend-following (directional)                      1.36                         1.53     1.30
+
+     Trend-following ex-NVDA                            1.13                         1.05     1.30
+
+
+The conjecture is rejected. Quadrupling the universe — with the 2022 losers included, and hence
+more genuine cross-sectional dispersion — leaves momentum essentially unchanged (0.18 versus
+0.22) and pushes the MA long-short from marginally positive to outright negative (−0.31 versus
+0.35), revealing its small-universe result as fragile in its own right. Neither long-short signal has an
+out-of-sample edge at either universe size. The binding constraint was never breadth; it was the
+signals themselves, in this regime. (One construction caveat: the long-short book was held at 5
+names per side on both universes for comparability — 19% tails on 26 names but 5% tails on 99. A
+decile-style construction on the broad universe was not tested and could in principle behave
+differently.)
+
+4.7 The complete scenario comparison
+
+Table 7 collects every scenario generated across the two papers into a single view. In-sample rows
+are shaded by the caveat that applies to them; all walk-forward rows share the identical protocol and
+OOS span (mid-2022 to end-2024, 627–629 trading days).
+
+Table 7. Master comparison of all scenarios
+#             Scenario     Universe            Type     Sharpe      CAGR    Max DD
+
+          Trend 100d/5
+1                               26         in-sample      1.12     23.3%     −23.2%
+               baseline
+
+      Trend sweep, best               in-sample (max
+2                               26                        1.43     39.2%     −19.9%
+            cell (80/3)                       of 36)
+
+     Trend sweep, worst               in-sample (min
+3                               26                        0.89     21.3%     −35.7%
+            cell (20/3)                       of 36)
+
+       Trend, train/test                 OOS (single
+4                               26                        1.20     31.9%     −19.9%
+                   split                       split)
+
+       Trend, train/test                 OOS (single
+5                               99                        1.36     41.3%     −18.1%
+                   split                       split)
+
+          Trend, walk-                   OOS (walk-
+6                               26                        1.36    34.1%     −18.6%
+               forward                     forward)
+
+          Trend, walk-                   OOS (walk-
+7                               99                        1.53    41.3%     −13.4%
+               forward                     forward)
+
+           Trend, walk-                  OOS (walk-
+8                               26                        1.13     23.0%     −19.2%
+      forward, ex-NVDA                      forward)
+
+           Trend, walk-                  OOS (walk-
+9                               99                        1.05     23.2%     −16.7%
+      forward, ex-NVDA                      forward)
+
+         Trend, low-vol                                  0.60 /    7.0% /   −16.9% /
+10                          26 / 99        in-sample
+                 tercile                                  0.52      6.9%     −24.4%
+
+     Trend, medium-vol                                   0.84 /   14.3% /   −24.4% /
+11                          26 / 99        in-sample
+                 tercile                                  0.71     12.4%     −25.1%
+
+        Trend, high-vol                                  1.52 /   43.2% /   −23.2% /
+12                          26 / 99        in-sample
+                 tercile                                  1.22     36.6%     −38.6%
+
+         MA long-short,                  OOS (walk-
+13                              26                        0.35      3.8%     −15.2%
+          walk-forward                      forward)
+
+         MA long-short,                  OOS (walk-
+14                              99                       −0.31     −5.4%     −33.5%
+          walk-forward                      forward)
+
+       Momentum 12-1,                    OOS (walk-
+15                              26                        0.22      2.1%     −23.3%
+          walk-forward                      forward)
+
+       Momentum 12-1,                    OOS (walk-
+16                              99                        0.18      1.7%     −20.9%
+          walk-forward                      forward)
+
+        SPY buy & hold,
+17                               —       benchmark        1.30     20.8%     ~−24%
+              OOS span
+   #               Scenario     Universe              Type       Sharpe           CAGR      Max DD
+
+         SPY buy & hold, full
+  18                                  —          benchmark          0.76          14.4%     −33.8%
+                     sample
+
+
+Read vertically, the table is the paper's argument. Rows 1–7 build an apparently overwhelming case:
+a robust plateau, two passed validation protocols on two universes, culminating in row 7's Sharpe of
+1.53 with a −13.4% drawdown. Rows 8–12 dismantle it: the same protocol minus one stock (rows 8–
+9) drops below the benchmark, and the tercile decomposition (rows 10–12) locates the entire effect
+in one-third of the universe. Rows 13–16 show the long-short alternatives were worse everywhere.
+What remains constant down the entire trend-following block — with or without NVDA, on either
+universe — is the drawdown column sitting well above the benchmark's.
+
+
+
+5. Discussion
+
+5.1 Why validation certified a lucky strategy
+
+The walk-forward protocol did nothing wrong. At every fold it used only trailing information; its
+selections were reasonable; its out-of-sample accounting was clean. It certified the strategy because,
+within the data it was shown, the strategy genuinely would have worked. The failure is one of scope:
+the protocol answers "would this rule, applied to this universe, have beaten the index?" — a question
+whose answer can be dominated by a single constituent. NVIDIA's ascent was real, and a
+concentrated trend rule genuinely would have ridden it. What the protocol cannot say is whether "a
+stock like NVIDIA exists in the universe and the strategy concentrates into it" is a repeatable
+mechanism or a one-draw event. That is an attribution question, and it required exactly three cheap
+experiments to answer: sort by the suspected driver (volatility), delete the suspected driver (NVDA),
+and change the sampling frame (the 2020 universe). Each experiment reuses the existing pipeline;
+together they took minutes of compute. There is no methodological excuse for omitting them, and
+the literature's warnings about multiple testing (Harvey, Liu and Zhu, 2016; Bailey and Ló pez de
+Prado, 2014) apply with equal force to this subtler, single-asset form of luck.
+
+5.2 What the strategy actually is
+
+The three layers agree on a description. The rule is a momentum-concentration device: it channels
+the portfolio into whatever the universe's highest-volatility uptrend is, and 2020–2024 supplied a
+historic one. Its Sharpe advantage is an artefact of that supply. Its drawdown advantage, by contrast,
+is mechanical — the cash-retreat triggers whenever broad trends break, which is a property of the
+rule, not of any particular stock — and accordingly it survives every attribution layer: −18.6%,
+−13.4%, −19.2%, −16.7% across specifications, against −24% to −34% for buy-and-hold. This aligns
+with the established reading of time-series momentum as primarily a tail-risk modifier (Moskowitz,
+Ooi and Pedersen, 2012; Faber, 2007): the honest residual claim is "market-like returns with
+materially smaller drawdowns," not "34% a year."
+It is worth stating what would have to be true for the bigger claim to stand. The strategy would need
+high-volatility trend winners to exist, be identifiable ex ante, and recur across regimes — in effect, a
+stationary supply of NVIDIAs. The sample contains one such episode, which is exactly enough to
+produce these backtests and exactly too few to support the claim.
+
+5.3 The breadth conjecture, and the value of negative controls
+The companion paper closed by conjecturing that its long-short failures reflected universe breadth.
+Table 6 rejects this, and the rejection has independent value: it was produced by a negative control
+— re-running unchanged strategies on the changed universe. Had the broadened universe rescued
+momentum, the survivorship fix would have been confounded with the breadth effect; because
+momentum stayed dead while trend-following improved, the two effects separate cleanly. Designing
+universe changes so that they test more than one hypothesis at a time is cheap, and this paper
+benefited from it twice.
+
+
+
+6. Limitations
+The attribution toolkit here is deliberately elementary — sorts, exclusions, and reruns — and stops
+short of formal factor attribution; regressing the strategy's returns on market, size, momentum and
+volatility factors would quantify what the sorts only locate. The volatility terciles use full-sample
+volatility (mild look-ahead, diagnostic only). The 2020 universe cannot include mid-sample
+delistings, leaving residual survivorship of the Shumway (1997) type. Costs remain 5 bps on
+turnover with no borrow, impact, or capacity modelling — generous to all strategies, though least
+distorting for the low-turnover trend rule (average daily turnover 0.09). The walk-forward has five
+folds; fold-level dispersion (−0.69 to +3.26) implies wide error bands on every stitched number,
+including the benchmark comparisons. All results concern one five-year window containing exactly
+one regime cycle. And the exclusion test removes only the single largest contributor; a top-k
+exclusion curve (k = 1, 2, 3, …) would trace the concentration profile more completely and is left for
+the replication package.
+
+None of these limitations rescues the headline claim; each either weakens it further or leaves it
+unchanged. The drawdown-reduction finding is the one result robust to every variation tested.
+
+
+
+7. Conclusion
+A directional trend-following rule passed, with margin, the validation gauntlet that eliminated two
+canonical long-short strategies in the companion paper: every parameter cell beat buy-and-hold in-
+sample, and walk-forward out-of-sample Sharpes reached 1.36 on the original universe and 1.53 on
+a survivorship-corrected one. Three attribution layers then reduced the claim to its true size: the
+performance is confined to the highest-volatility tercile, collapses below the benchmark when one
+stock is removed from either universe, and improves with universe hygiene only because a cleaner
+list supplies the same concentration mechanism with more fuel. The durable residual is a modest,
+well-precedented property — market-like returns with maximum drawdowns roughly a third
+smaller than buy-and-hold — plus a rejected conjecture: universe breadth does not resurrect the
+long-short signals.
+
+The pair of papers now states a two-part discipline. The first showed that a favourable protocol can
+fabricate out-of-sample evidence: one split reported triple the walk-forward's Sharpe. This one
+shows that a sound protocol can still certify a lucky composition: the walk-forward's approval was
+real, and one ticker deep. Validation asks whether a strategy would have worked; attribution asks
+why; and a backtest deserves belief only after both questions have answers that survive each other.
+
+
+
+References
+Bailey, D. H., Borwein, J. M., Ló pez de Prado, M., and Zhu, Q. J. (2014). Pseudo-mathematics and
+financial charlatanism: The effects of backtest overfitting on out-of-sample performance. Notices of
+the American Mathematical Society, 61(5), 458–471.
+
+Bailey, D. H., and Ló pez de Prado, M. (2014). The deflated Sharpe ratio: Correcting for selection bias,
+backtest overfitting, and non-normality. Journal of Portfolio Management, 40(5), 94–107.
+
+Barroso, P., and Santa-Clara, P. (2015). Momentum has its moments. Journal of Financial Economics,
+116(1), 111–120.
+
+Brock, W., Lakonishok, J., and LeBaron, B. (1992). Simple technical trading rules and the stochastic
+properties of stock returns. Journal of Finance, 47(5), 1731–1764.
+
+Daniel, K., and Moskowitz, T. J. (2016). Momentum crashes. Journal of Financial Economics, 122(2),
+221–247.
+
+Faber, M. T. (2007). A quantitative approach to tactical asset allocation. Journal of Wealth
+Management, 9(4), 69–79.
+
+Harvey, C. R., Liu, Y., and Zhu, H. (2016). …and the cross-section of expected returns. Review of
+Financial Studies, 29(1), 5–68.
+
+Jegadeesh, N., and Titman, S. (1993). Returns to buying winners and selling losers: Implications for
+stock market efficiency. Journal of Finance, 48(1), 65–91.
+
+Ló pez de Prado, M. (2018). Advances in Financial Machine Learning. Wiley.
+
+Malan, P. (2026). Do simple cross-sectional trend strategies survive honest validation? Evidence
+from a small US large-cap universe, 2020–2024. Working paper, SSRN.
+
+Moskowitz, T. J., Ooi, Y. H., and Pedersen, L. H. (2012). Time series momentum. Journal of Financial
+Economics, 104(2), 228–250.
+
+Shumway, T. (1997). The delisting bias in CRSP data. Journal of Finance, 52(1), 327–340.
+Sullivan, R., Timmermann, A., and White, H. (1999). Data-snooping, technical trading rule
+performance, and the bootstrap. Journal of Finance, 54(5), 1647–1691.
+
+
+
+Appendix A. Source code
+The engine, cost model and walk-forward loop are listed in the companion paper's appendix and are
+unchanged; the components below are what this paper adds. Repository layout: research/{data,
+strategies, backtest} .
+
+
+A.1 The trend-following strategy ( research/strategies/trend_follow.py )
+
+ """Directional (long-only) trend following — time-series momentum.
+
+ Each stock is judged against its OWN trend: score = price / SMA(window) - 1.
+ At each rebalance we hold the `n_hold` strongest names among those in an
+ uptrend (score > 0), 1/n_hold weight each. If fewer than n_hold names are
+ trending up, the remainder stays in cash — so the book de-risks automatically
+ in broad downturns."""
+
+ import numpy as np
+ import pandas as pd
+
+
+
+ def trend_score(prices: pd.DataFrame, window: int = 100) -> pd.DataFrame:
+     return prices / prices.rolling(window).mean() - 1.0
+
+
+
+ def weights(prices, window=100, n_hold=5, rebalance_days=5):
+     score = trend_score(prices, window)
+
+      target = pd.DataFrame(np.nan, index=prices.index, columns=prices.columns)
+      rebal_dates = prices.index[window::rebalance_days]
+      for dt in rebal_dates:
+          row = score.loc[dt].dropna()
+          up = row[row > 0].sort_values(ascending=False)
+          w = pd.Series(0.0, index=prices.columns)
+          if len(up) > 0:
+              picks = up.index[:n_hold]
+              w[picks] = 1.0 / n_hold      # fixed sizing; shortfall stays in cash
+          target.loc[dt] = w
+      return target.ffill().fillna(0.0)    # hold between rebalances
+A.2 Volatility terciles ( research/run_vol_buckets.py , core)
+
+ def bucket_universe(prices):
+     """Split the universe into volatility terciles (full-sample annualised
+     vol; mild look-ahead, acceptable for a diagnostic sort)."""
+     vol = (prices.pct_change().std() * np.sqrt(252)).sort_values()
+     n = len(vol)
+     return {
+         "low":    list(vol.index[: n // 3]),
+         "medium": list(vol.index[n // 3: 2 * n // 3]),
+         "high":   list(vol.index[2 * n // 3:]),
+     }
+
+ # Within each bucket the strategies are run unchanged on the sub-panel:
+ #   prices_bucket = all_prices[buckets[name]]
+ #   engine.run(prices_bucket, trend_follow.weights(prices_bucket, 100, 3, 5))
+
+
+
+A.3 Exclusion and universe switching ( research/validation.py , argument handling)
+
+ # Optional args after the strategy name:
+ #   broad        -> use the 99-name start-of-2020 universe (survivorship fix)
+ #   NVDA,META    -> exclude tickers (single-name attribution)
+ excl, use_broad = set(), False
+ for a in sys.argv[2:]:
+     if a.lower() == "broad":
+         use_broad = True
+     else:
+         excl |= set(a.upper().split(","))
+ base = UNIVERSE_2020 if use_broad else UNIVERSE
+ universe = [s for s in base if s not in excl]
+
+
+The walk-forward itself (grid selection on a trailing 378-day window, traded over the following 126
+days, out-of-sample blocks concatenated) is identical to the companion paper's Appendix A.4, with
+the trend strategy's grid being window ∈ {20, 40, 60, 80, 100, 125, 150, 200, 250} × n_hold ∈ {3, 5, 8,
+10}.
+A.4 The 2020 universe ( research/universe_2020.py , abridged)
+
+ """Broad universe selected on START-OF-SAMPLE information (survivorship fix).
+
+ Approximate S&P 100 membership as of January 2020, reconstructed. Selection
+ uses nothing known after 2020-01, so subsequent losers (BA, GE, WBA, INTC,
+ DIS, PYPL, ...) are IN. Documented residual biases: members delisted
+ mid-sample via M&A (AGN; RTN/UTX -> RTX) unavailable from the data vendor;
+ membership reconstructed from public sources, not a licensed point-in-time
+ file."""
+
+ UNIVERSE_2020 = [
+     "AAPL", "ABBV", "ABT", "ACN", "ADBE", "AIG", "ALL", "AMGN", "AMT", "AMZN",
+     # ... 79 further names ...
+     "UNP", "UPS", "USB", "V", "VZ", "WBA", "WFC", "WMT", "XOM",
+ ]   # 99 tickers, all with full 1,257-day coverage
+
+
+
+Appendix B. Replication
+With Alpaca paper-trading keys in a local .env (see companion paper):
+
+ python research/data/fetch_bars.py                      # 26-name universe + SPY
+ python research/data/fetch_bars.py $(python -c "from research.universe_2020 \
+     import UNIVERSE_2020; print(' '.join(UNIVERSE_2020))")   # 99-name universe
+
+ python research/run_trend_follow.py                         # Table 1, Figure 1
+ python research/sensitivity_trend.py                        # Table 2, Figure 2
+ python research/validation.py trend                         # Table 3, Figure 3
+ python research/run_vol_buckets.py                          # Table 4 left, Figure 4
+ python research/run_vol_buckets.py broad                    # Table 4 right, Figure 5
+ python research/validation.py trend NVDA                    # Table 5 row 1, Figure 6
+ python research/validation.py trend broad                   # Table 5 row 2, Figure 7
+ python research/validation.py trend broad NVDA              # Table 5 row 2, Figure 8
+ python research/validation.py ma broad                      # Table 6
+ python research/validation.py mom broad                     # Table 6
+
+
+Figures   are   written   to   research/backtest/ :    trend_follow.png ,   trend_follow_sweep.png ,
+walk_forward_oos_trend.png ,                 vol_buckets.png ,               vol_buckets_broad.png ,
+walk_forward_oos_trend_ex_NVDA.png ,                             walk_forward_oos_trend_broad.png ,
+walk_forward_oos_trend_broad_ex_NVDA.png .
+
