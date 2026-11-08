@@ -462,3 +462,15 @@ User requested additional useful free data, with a local-chat handoff for cloud 
 
 All are acquisition/source-QA records, not demonstrated edges or strategy admissions. No new returns, trials,
 scout-history mutations or portfolio/live changes. Do not revive failed NQ LETF-sizing or paused programs.
+
+Local follow-up2026-11-08: [primary acquisition/reconciliation](results/new_data_local_20261108.md),
+[new immutable source package](inputs/new_data_primary_local_20261108/README.md). All47manifest jobs acquired
+after47sandbox DNS failures; failures and originals retained. All overlapping NAV/share values match secondary;
+tiny AUM serialization differences only. **BOIL remains quarantined: sponsor original also has1,178identity
+failures/82zero shares/40design failures**, so available primary precision does not repair it. Five original
+Cboe histories acquired through2026-11-06; cached closes match; both missing SKEW dates remain absent.
+NYFed primary spec verified;844operations/37,359security details/13,061rate records, with20/20annual queries
+exactly matching disjoint half-year record unions. SOFR begins2018-04-02. Buyback tables233operations/6,369details
+match page totals;1,089supplemental requests saved, including521valid XML/527PDFs and source-clock records.
+Historical public-first-release/revision clocks, exact benchmark/reset/creation offsets and original NYFed
+announced schedules remain open. No return tests or automatic strategy admission; past failures preserved.
