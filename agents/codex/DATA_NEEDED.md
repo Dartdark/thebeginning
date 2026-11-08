@@ -352,3 +352,14 @@ July2026 forward-paper outcomes. Need benchmark ledger and complete trial/DSR
 outputs. Cost wording22.5bp per leg versus round trip is unresolved. Owned CME
 bars are not a matching panel. Do not collect a bulk substitute or invent an EMA
 configuration before the source gate. [Review](results/kse_sentinel_7102818_review.md).
+
+
+SSRN7065278 reconstruction follow-up (2026-11-08; user explicitly requested a corrected attempt):
+[component report](results/pair7065278_reconstruction_20261108.md),
+[three free endpoint receipts](inputs/pair7065278_reconstruction_20261108/free_data_receipts.json).
+Owned TQQQ file is NAV/share/AUM, not native quotes. New Yahoo hourly design-period requests for LQQ3.L,
+TQQQ and GBPUSD=X hit proxy tunnel403; this is an access result, not a provider coverage verdict. Public
+daily adjusted history and subscription intraday listings do not satisfy the missing synchronized inputs.
+Corrected currency/clock/signal components pass28synthetic assertions; no historical profit or economic
+admission. Original source failure stands. No repeat crawl until genuinely new evidence; native quote/receipt,
+unit/action, calendar, borrow and cash prerequisites above remain. No paid acquisition or plan change.
