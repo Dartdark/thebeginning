@@ -1,0 +1,140 @@
+{
+  "phase": "design",
+  "start": "2018-01-01",
+  "end": "2022-12-30",
+  "rule_cases": 15,
+  "implementation_gates_passed": true,
+  "script_sha256": "781242ade59b652c8baa9e9ef1824871ef269bf179c1824e2b34c7208ff529bb",
+  "plan_sha256": "88834afbd2db7cf94b8c23f9d84cf465f03d87415b8986c857fb417d2015a826",
+  "plan_commit": "65de5999798aadae84fd5ac518e00f8f42b2f79d",
+  "source_price_parity": {
+    "ANSON": 1207,
+    "R2": 1402,
+    "S03": 1378
+  },
+  "filter_controls": {
+    "ANSON/no_strength_gate": {
+      "pure_nested_filter": false,
+      "reason": "state/entry/exit schedules differ; paired whole-policy result only"
+    },
+    "R2/no_R2_gate": {
+      "pure_nested_filter": false,
+      "reason": "state/entry/exit schedules differ; paired whole-policy result only"
+    },
+    "R2/no_slope_gate": {
+      "pure_nested_filter": false,
+      "reason": "state/entry/exit schedules differ; paired whole-policy result only"
+    },
+    "S03/no_entry_VWAP": {
+      "pure_nested_filter": false,
+      "reason": "state/entry/exit schedules differ; paired whole-policy result only"
+    },
+    "S03/no_entry_band": {
+      "pure_nested_filter": false,
+      "reason": "state/entry/exit schedules differ; paired whole-policy result only"
+    }
+  },
+  "path_audits": {
+    "ANSON/original": {
+      "cross_date": 0,
+      "unknown_held_minutes": 13,
+      "late_after_1559": 0,
+      "tainted_history_trades": null
+    },
+    "ANSON/fade_direction": {
+      "cross_date": 0,
+      "unknown_held_minutes": 13,
+      "late_after_1559": 0,
+      "tainted_history_trades": null
+    },
+    "ANSON/no_strength_gate": {
+      "cross_date": 0,
+      "unknown_held_minutes": 37,
+      "late_after_1559": 1,
+      "tainted_history_trades": null
+    },
+    "ANSON/hold_6": {
+      "cross_date": 0,
+      "unknown_held_minutes": 13,
+      "late_after_1559": 0,
+      "tainted_history_trades": null
+    },
+    "ANSON/no_early_adapter": {
+      "cross_date": 0,
+      "unknown_held_minutes": 19,
+      "late_after_1559": 6,
+      "tainted_history_trades": null
+    },
+    "R2/original": {
+      "cross_date": 0,
+      "unknown_held_minutes": 9,
+      "late_after_1559": 0,
+      "tainted_history_trades": null
+    },
+    "R2/fade_break": {
+      "cross_date": 0,
+      "unknown_held_minutes": 9,
+      "late_after_1559": 0,
+      "tainted_history_trades": null
+    },
+    "R2/no_R2_gate": {
+      "cross_date": 0,
+      "unknown_held_minutes": 9,
+      "late_after_1559": 0,
+      "tainted_history_trades": null
+    },
+    "R2/no_slope_gate": {
+      "cross_date": 0,
+      "unknown_held_minutes": 10,
+      "late_after_1559": 0,
+      "tainted_history_trades": null
+    },
+    "R2/no_stop": {
+      "cross_date": 0,
+      "unknown_held_minutes": 10,
+      "late_after_1559": 0,
+      "tainted_history_trades": null
+    },
+    "S03/original": {
+      "cross_date": 0,
+      "unknown_held_minutes": 0,
+      "late_after_1559": 0,
+      "tainted_history_trades": 111
+    },
+    "S03/fade_direction": {
+      "cross_date": 0,
+      "unknown_held_minutes": 0,
+      "late_after_1559": 0,
+      "tainted_history_trades": 200
+    },
+    "S03/no_entry_VWAP": {
+      "cross_date": 0,
+      "unknown_held_minutes": 0,
+      "late_after_1559": 0,
+      "tainted_history_trades": 118
+    },
+    "S03/no_entry_band": {
+      "cross_date": 0,
+      "unknown_held_minutes": 15,
+      "late_after_1559": 0,
+      "tainted_history_trades": 651
+    },
+    "S03/no_sigma_stop": {
+      "cross_date": 0,
+      "unknown_held_minutes": 0,
+      "late_after_1559": 0,
+      "tainted_history_trades": 95
+    }
+  },
+  "seed": 80315,
+  "draws": 1000,
+  "dependency_sha256": {
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a",
+    "analysis/codex_ingredients_three_20261108.py": "ed4e4f7e0daa05e659162337686a53b6ae82460cd35176c7adefe01553491a75",
+    "analysis/codex_ingredients_events_20261108.py": "99818a22a85681aca090c4c8b23a2762977a6f8709e6ab9748397d40eca6966e",
+    "analysis/codex_ingredients_s30_s47_kusho_20261108.py": "99d327fda52918f652c8d01560de36881c40025a078d40f3c2b0337133a653da"
+  },
+  "new_rule_selected": false,
+  "portfolio_tests_run": false
+}
