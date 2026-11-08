@@ -29,7 +29,8 @@ def bars15(g):
     return pd.DataFrame(out, columns=["row", "s", "o", "h", "l", "c"])
 
 
-def run(g, B, apex):
+def run(g, B, apex, entry_window=None):
+    # entry_window (2026-11-08, user, POST HOC from the entry-time split): (hhmm_from, hhmm_to) new entries only in that CT window
     o, h, l, c = (B[k].to_numpy() for k in "ohlc"); rows = B.row.to_numpy(); s = B.s.to_numpy(); n = len(B)
     hhmm = (s // 60) * 100 + s % 60
     dates = pd.DatetimeIndex(g.ts[rows]); early = np.array([is_early_close(d) for d in dates]) if apex else np.zeros(n, bool)
@@ -52,7 +53,7 @@ def run(g, B, apex):
             else:
                 st = max(st, c[k] - 2 * atr[k])
                 if o[i] <= st: trades.append((i0, i, e, o[i] - TICK, "stop")); pos = False   # (already handled above)
-        if not pos and not blocked:
+        if not pos and not blocked and (entry_window is None or entry_window[0] <= hhmm[i] < entry_window[1]):
             k = i - 1
             if np.isfinite(atr[k]) and np.isfinite(hi160[k]) and c[k] > hi160[k]:
                 e = o[i] + TICK; st = e - 1.5 * atr[k]; i0 = i; pos = True

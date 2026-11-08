@@ -24,7 +24,8 @@ def placebo(g, B, T, apex, runs=100, seed=3):
     tr = np.r_[h[0] - l[0], np.maximum(h[1:], c[:-1]) - np.minimum(l[1:], c[:-1])]; atr = pd.Series(tr).ewm(alpha=1 / 80, adjust=False).mean().to_numpy()
     lo60 = pd.Series(l).rolling(60).min().shift(1).to_numpy(); yrs = pd.DatetimeIndex(pd.to_datetime(g.ts[rows])).year
     ok = (yrs >= 2018) & ((hhmm < 1545) | (hhmm >= 1700) if apex else True)
-    cnt = T[T.edate >= "2018"].groupby(T.edate.dt.year).size(); rng = np.random.default_rng(seed); means = []
+    if EW: ok = ok & (hhmm >= EW[0]) & (hhmm < EW[1])
+    cnt = T[T.edate >= "2018"].groupby(T.edate.dt.year).size(); rng = np.random.default_rng(seed); means = []; global PL_ROWS; PL_ROWS = []
     for _ in range(runs):
         nets = []
         for y, nn in cnt.items():
@@ -39,16 +40,25 @@ def placebo(g, B, T, apex, runs=100, seed=3):
                     st = max(st, c[j] - 2 * atr[j])
                 if x is None: x = c[min(i + 1999, len(o) - 1)] - TICK
                 nets.append((x - e) * PV - COMM)
-        means.append(np.mean(nets))
+        means.append(np.mean(nets)); PL_ROWS += [(len(means) - 1, x_) for x_ in nets]
     return np.array(means)
 
 
 if __name__ == "__main__":
     print(__doc__.split("\n")[0])
     g = pickle.load(open("scratch_data/g24.pkl", "rb")); B = bars15(g); trr = list(g.trading); D = len(trr); dts = pd.DatetimeIndex(g.ts[trr]); yr = dts.year
-    TS, TA = run(g, B, False), run(g, B, True)
+    EW = (830, 1100) if len(sys.argv) > 1 and sys.argv[1] == "morning" else None
+    if EW: print('   MORNING-ONLY entries 08:30-11:00 CT (post hoc, user 2026-11-08)')
+    TS, TA = run(g, B, False, EW), run(g, B, True, EW)
     for T, apex, nm in ((TS, False, "SOURCE"), (TA, True, "APEX")):
         pl = placebo(g, B, T, apex); real = T[T.edate >= "2018"].net.mean()
+        if EW and apex:
+            import os, json
+            cd = "checks/candidates/donchian_morning_apex"; os.makedirs(cd, exist_ok=True); Tt = T[T.edate >= "2018"]
+            pd.DataFrame(dict(date=Tt.date.dt.strftime("%Y-%m-%d"), side=1, net=Tt.net)).to_csv(f"{cd}/trades.csv", index=False)
+            pd.DataFrame(PL_ROWS, columns=["run", "net"]).to_csv(f"{cd}/placebo.csv", index=False)
+            json.dump({"kind": "strategy", "pre_registered": False, "variants": 4}, open(f"{cd}/meta.json", "w"))
+            open(f"{cd}/spec.md", "w").write("# US100 Donchian, APEX arm, morning-only entries (post hoc, 2026-11-08)\nNQ 15-min 24h bars; long when the last close > prior 160-bar high; stop 1.5 x ATR80, trail 2 x ATR at each bar, exit on a close < prior 60-bar low; entries only on bars starting 08:30-10:45 CT; flat at the 15:45 bar (11:45 early close). $7.25 + 1 tick per fill per NQ. Chosen after an entry-time split of the all-hours version.\n")
         print(f"   placebo {nm}: real ${real:.0f} vs random entries mean ${pl.mean():.0f} (95th ${np.percentile(pl, 95):.0f}); p {np.mean(pl >= real):.2f}", flush=True)
     # APEX arm paths on the trading days (exit day), worst = trade adverse (from 15-min lows)
     rows = B.row.to_numpy(); L = B.l.to_numpy(); pos = {r: i for i, r in enumerate(trr)}; it = []
@@ -74,7 +84,7 @@ if __name__ == "__main__":
         o, v = ev(q * Wa, q * Ra); ps = o == "pass"; d = (ps.astype(float) - (o0 == "pass").astype(float))[v & v0]
         rng = np.random.default_rng(1); nb = int(np.ceil(len(d) / 60)); st = rng.integers(0, len(d), (2000, nb)); mm = d[((st[:, :, None] + np.arange(60)) % len(d)).reshape(2000, -1)[:, :len(d)]].mean(axis=1)
         print(f"   150K eval + APEX Donchian {q} MNQ: pass {ps[v].mean():5.1%} vs {(o0 == 'pass')[v0].mean():5.1%} ({d.mean():+.1%}; {np.percentile(mm, 5):+.1%} / {np.percentile(mm, 95):+.1%})", flush=True)
-    sys.argv = ["x", "scratch_data"]
+    _argv = sys.argv; sys.argv = ["x", "scratch_data"]
     with contextlib.redirect_stdout(io.StringIO()):
         lab = runpy.run_path("analysis/cl_sunday_fade_bench.py", run_name="__main__")["lab"]
     Sp = pd.read_pickle("scratch_data/single_print_sessions.pkl"); flag = Sp.flag.reindex(dts).fillna(False).to_numpy().astype(bool)
