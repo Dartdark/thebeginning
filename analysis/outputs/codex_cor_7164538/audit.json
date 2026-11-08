@@ -1,0 +1,110 @@
+{
+  "source_commit": "9d3cd9f0a10f91721c007a31ef0745696a3b4a10",
+  "script_sha256": "2b0bcd012b44817513d370d601ffe9ee708f15b7ac459db6fb9f2a1bdf079efc",
+  "source_sha256": {
+    "agents/codex/inputs/ssrn7164538/table2_headline.png": "a795a50294636987826c30e0ff90bfd86ff9e1eb4bd6c061cb7f66b992555fbb",
+    "agents/codex/inputs/ssrn7164538/.gitattributes": "3a7849516f0a5dc024c7dce1c786d0cb7ce1bf3dfe5e9abcc02c96301c3ae5a0",
+    "agents/codex/inputs/ssrn7164538/source.txt": "11b39a8c5137055a56a4ed7e7d870d831b2ac870bd9ba4fbf94ee72238b29e19",
+    "agents/codex/inputs/ssrn7164538/source.pdf": "24be1313a0b500b3f1cc3b97a7cf6d4cefc9ec833245c63e5bc934ca0f53a481",
+    "agents/codex/inputs/ssrn7164538/cor_equation.png": "8682ea169a0aadd15a9e9c65dcdf66ce83cc7096c8f6623a784c11cf0ca4d0df",
+    "agents/codex/inputs/ssrn7164538/repository/capstone_project.lfs.txt": "7fe19b0c9b876ed77592a07a9a80edb4c3b6c697583f0f304c162818d5547d53",
+    "agents/codex/inputs/ssrn7164538/repository/notebooks_tree.json": "55ea88d774a283b0d9a2e874ebe7f2f59ef6393ea549b8839ba83ad4a84219f3",
+    "agents/codex/inputs/ssrn7164538/repository/data_tree.json": "38b4acabdd91cbbc308f40b9307a598481de462100f6b6e7df515a4f849a974d",
+    "agents/codex/inputs/ssrn7164538/repository/best_atr_leveraged_1h_no_cor.csv": "91ee1a3240d455e4ffa76f52de0e286dbb7668c26b5dd6200afcf00814d216eb",
+    "agents/codex/inputs/ssrn7164538/repository/root_tree.json": "d56e7f2caaa8c058af79030dac4784714fef653998a43ac3b20846d964cdf346",
+    "agents/codex/inputs/ssrn7164538/repository/lfs_access.json": "93aa0f1c1a85f38dac2420764d1afa89fe2a02a1fbebb1bf744f1aec13c3c6aa",
+    "agents/codex/inputs/ssrn7164538/repository/best_atr_stock_1h.csv": "781653056dd437ce46d749bb6053ea0d10eb9fe5c7434df4e033c044c336f462",
+    "agents/codex/inputs/ssrn7164538/repository/LICENSE.source": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+    "agents/codex/inputs/ssrn7164538/repository/results_tree.json": "2d76d5386138b551a981a40507faf761012f8c5f4e0a31b5f0121bbe988bdbcd",
+    "agents/codex/inputs/ssrn7164538/repository/one_hour_leveraged.lfs.txt": "b5fbc1b540c6a0b3f39e581f09ca4099f02cec98d5ba4af6b546ec1cbd54b79f",
+    "agents/codex/inputs/ssrn7164538/repository/receipt.json": "a0227f1997ad163504ffa8a450f0362de7c9efb29ed3afd131cd7d7035ad0fbe"
+  },
+  "source_headline_comparison": {
+    "with_cor": {
+      "return_pct": 41.56,
+      "win_pct": 85.71,
+      "trades": 7,
+      "sharpe": 1.51,
+      "dd_pct": -9.35
+    },
+    "without_cor": {
+      "return_pct": 43.77,
+      "win_pct": 77.78,
+      "trades": 9,
+      "sharpe": 1.35,
+      "dd_pct": -9.29
+    }
+  },
+  "source_comparison_delta": {
+    "return_percentage_points": -2.210000000000001,
+    "sharpe": 0.15999999999999992,
+    "dd_percentage_points": -0.0600000000000005,
+    "headline_wins_implied": 6,
+    "headline_win_fraction": 0.8571428571428571
+  },
+  "equation12_counterexample": {
+    "before_asset": 70,
+    "before_market": 50,
+    "after_asset": 51,
+    "after_market": 50,
+    "COR": 20.0,
+    "zero_denominator_result": "undefined without extra rule",
+    "bounded_by_one": false
+  },
+  "equation10_conditional_units_example": {
+    "cash_usd": 100000.0,
+    "assumed_loss_risk_fraction": 0.01,
+    "price_usd_per_share": 100.0,
+    "atr_usd_per_share": 2.0,
+    "published_numeric_size": 5.0,
+    "one_atr_loss_distance_share_size": 500.0,
+    "warning": "Printed Eq10 is not native share sizing if ATR has price units; implementation is unavailable"
+  },
+  "pinned_repository_tsll_no_cor": {
+    "ticker": "TSLL",
+    "interval": "1h",
+    "use_cor": "False",
+    "use_atr_for_size": "True",
+    "objective": "total_return",
+    "initial_cash": "1000000.0",
+    "final_cash": "1437735.8000408227",
+    "total_return_pct": "43.77358000408227",
+    "trades": "9",
+    "win_rate": "0.7777777777777778",
+    "avg_trade": "0.04281112962832988",
+    "avg_win": "0.07016267746549244",
+    "avg_loss": "-0.05291928780173907",
+    "sharpe": "1.348397703950891",
+    "max_drawdown": "-0.09294776315359399"
+  },
+  "pinned_repository_tsla_cor": {
+    "ticker": "TSLA",
+    "interval": "1h",
+    "use_cor": "True",
+    "use_atr_for_size": "True",
+    "objective": "total_return",
+    "initial_cash": "1000000.0",
+    "final_cash": "1065118.2255967788",
+    "total_return_pct": "6.511822559677882",
+    "trades": "8",
+    "win_rate": "0.625",
+    "avg_trade": "0.00832417226476254",
+    "avg_win": "0.028754628942839533",
+    "avg_loss": "-0.025726588865365784",
+    "sharpe": "0.589431302770608",
+    "max_drawdown": "-0.057776673560207215"
+  },
+  "paper_TSLA_COR_1h_return_pct": 13.59,
+  "repository_code_status": "Only LFS pointers retrieved; materialized code request proxy403; no author code executed",
+  "owned_filename_census": {
+    "*TSLL*": [],
+    "*TSLA*": [],
+    "*SPXL*": [],
+    "*GSPC*": [],
+    "*TQQQ*": [
+      "data/letf/TQQQ.csv"
+    ]
+  },
+  "return_trials": 0,
+  "verification": "Source/math/CSV checks only, not empirical performance replication"
+}

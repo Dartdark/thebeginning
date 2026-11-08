@@ -2026,3 +2026,19 @@ preliminary draft, retained November 7, 2026; NYSE/Nasdaq stock switches 2009–
   classified venue, future midpoint coverage, native fees and missed-fill opportunity cost. Off-exchange is not
   automatically a specifically identified dark pool. No original TAQ replication, trading signal, measured saving,
   TODO strategy/data-shopping entry, order-routing installation, portfolio change or external message.
+
+### E09/E11/E12 follow-up — RSI ratios need domain, sizing and confirmation clocks
+
+Source: Tamele/Khoong/Bhattacharyya, [COR SSRN7164538 review](results/cor_dip_7164538_review.md),
+[evidence](evidence/cor_dip_7164538.md), supplied21-page paper. Printed Eq12's absolute before/after asset–market RSI-gap
+ratio can equal20 for valid RSI inputs and is undefined at a zero denominator, contradicting claimed0–1 boundedness.
+A physics analogy does not define a probability, causal flow or fill. Printed Eq10 is not native share sizing if ATR
+has price units; this is not a confirmed code bug because actual notebooks were LFS pointers and materialization hit proxy403.
+“After dip” requires a causal confirmation/available-at ledger; it is not by itself proof of look-ahead.
+Source hourly TSLL COR+ATR reports41.56%,7 trades,85.71% wins, versus43.77%,9 trades,77.78% withoutCOR: higher win rate
+need not improve total profit. Separately optimized results need same-window matched ledgers/removed trades/random-drop controls.
+Source uses zero trading costs/fractional shares; seven trades do not establish future execution or account benefit.
+Evidence: PDF/table images, formula counterexample, unit illustration and pinned CSV/source receipts only. Some stock CSV
+outputs differ from paper; no author code or market-path return executed. Source holdings do not establish Apex intraday fit.
+Next only with genuinely new evidence: resolve denominator policy, indicator/position units, exact causal dip/exit/fill clocks
+and code/output versions before any eligible preregistered test. No measured savings, strategy/data-shopping entry or live change.
