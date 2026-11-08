@@ -2148,3 +2148,23 @@ causal-indicator and state-transition assertions. Explicit GBX/GBP replaces the 
 15:00UTC is a provisional ordinary-session overlap, still requiring authenticated calendars and later fills.
 This is not a complete execution/cash engine, measured saving, profitable strategy or reversal of the source
 rejection. New free history probes hit proxy403. Missing native history/borrow/cash keeps returns blocked.
+
+
+### E09/E19 follow-up — Weekly close exits, equity reconstruction and low-beta claims
+
+[SSRN5630830 source/audit](results/weekly_nq_5630830_20261108.md), retained2026-11-08. Screenshot
+shows a5%loss exit checked **after candle closes**, not an intrabar price-loss ceiling. Invented entry100,
+low90,close96 loses10%intraweek without triggering the5%close condition. Native contract multiplier and
+capital basis matter: price percentages are not account percentages. Weekly holds are not Apex intraday fit.
+
+Source says its weekly returns were reconstructed from trade logs/rescaled to platform total, while retaining
+a separately reported platform drawdown. Equal terminal values do not establish equal drawdowns or margin
+paths. Need actual per-period marked positions/cash/costs, not assumed interpolation; the source does not
+provide its reconstruction algorithm. Lowbeta0.1coexists with reported correlation~0.7; scale/exposure cannot
+be presented as uncorrelated alpha. Final full-span CAGR/alpha arithmetic is consistent, though the earlier
+five-year-alpha input explanation is not. Keep source versions and horizons distinct.
+
+Evidence: full PDF/page18image,6registered arithmetic/synthetic-risk groups and10assertions. No native
+strategy replication, measured execution saving, hedge benefit, portfolio test or live change. Missing custom
+indicator formulas and fill/roll/capital clocks stop dependent returns. Next only with genuinely new matching
+evidence: one source indicator/entry/exit and native mark-to-market cash reconciliation before any strategy trial.
