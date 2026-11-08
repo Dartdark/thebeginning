@@ -1,0 +1,117 @@
+{
+  "phase": "audit",
+  "input_audit": {
+    "NQ_1min_native_ET_close_2018.csv.gz": {
+      "rows": 349082,
+      "original_sha256": "70b42a96d851e30d5b02629a02add33e9080c0df4b357f2ea61cc65b7963130a",
+      "compressed_sha256": "c2482cce0ded7488def67070e6806eecf358e563b8618e2fdb64997e2465ccc3"
+    },
+    "NQ_1min_native_ET_close_2019.csv.gz": {
+      "rows": 349844,
+      "original_sha256": "a79247379812b63a2077ce0da6aa4f391f0df59ccc03cd6cb701eb1a4fdf799e",
+      "compressed_sha256": "62d47b02618ec5909dbcf81321898341c3d5e317948b46fef6ab5c8d47237b22"
+    },
+    "NQ_1min_native_ET_close_2020.csv.gz": {
+      "rows": 348926,
+      "original_sha256": "a3fdf4a3f60f4081a83c1acdfa288d0b03fce9d8c0b4f7ceac29e3646f2e60c8",
+      "compressed_sha256": "216b312952c080a3c36cca64699dfa46aaf6e134c5a68de9aefca6121eec4392"
+    },
+    "NQ_1min_native_ET_close_2021.csv.gz": {
+      "rows": 353393,
+      "original_sha256": "de717ad7aaece8892d979b3708236404ce6a7ec996b9476bcf5c65a9482d95fc",
+      "compressed_sha256": "e62d4d37d27ab6ff9ac5373d6cdc9296def40f21887a31541a7f715dc06973ce"
+    },
+    "NQ_1min_native_ET_close_2022.csv.gz": {
+      "rows": 354112,
+      "original_sha256": "bf49bdd2b9608738de96c1446e9d9c53eb7947f249bd6eb06929c1de01d82c37",
+      "compressed_sha256": "cc1c40967a93445923ecec70282c87b23c5b4e8b7e394e903daf4b69b6db17e3"
+    },
+    "calendar_inputs": {
+      "NQ_1min_2018.csv": {
+        "blob": "76eb73b44b4b67a08131dc1a4241fd4452b39673",
+        "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+        "role": "dates only; never price repair"
+      },
+      "NQ_1min_2019.csv": {
+        "blob": "db1c597e7dcac738d2a336fc90ba5a6d132aa535",
+        "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+        "role": "dates only; never price repair"
+      },
+      "NQ_1min_2020.csv": {
+        "blob": "fc22a2151cf8794527756f75048d89a7adfca1d1",
+        "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+        "role": "dates only; never price repair"
+      },
+      "NQ_1min_2021.csv": {
+        "blob": "c978b68c5092abceaba934228970a401b03b65b4",
+        "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+        "role": "dates only; never price repair"
+      },
+      "NQ_1min_2022.csv": {
+        "blob": "8651c6244bbd46b32e952062d91373348e0c3c9e",
+        "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+        "role": "dates only; never price repair"
+      }
+    },
+    "native_rows": 1755357,
+    "calendar_sessions": 1291,
+    "transport_status": "byte-exact; continuous-series provenance remains conditional"
+  },
+  "eligible_sessions": 1022,
+  "counts": {
+    "PlainFade": 1022,
+    "PriceOnly": 459,
+    "HeavyTotal": 203,
+    "Absorption": 34
+  },
+  "exclusions": {
+    "declared_roll_calendar": 236,
+    "prior20_history_warmup": 21,
+    "night_coverage_or_decision_close": 9,
+    "zero_night_direction": 3
+  },
+  "code_sha256": "02d0da3c414abf07ff7979bd413176e4663cb9778a823e20daae64e0d9c40955",
+  "plan_sha256": "d71843e9cf15c1d494e9ded33119c7bfd9e701ac28439d8bb8479b47bd875223",
+  "power_assumed_SD_NQ": 1000,
+  "t2_net_mean_hurdle": {
+    "PlainFade": 62.561124708985446,
+    "PriceOnly": 93.35200560186732,
+    "HeavyTotal": 140.3724812687193,
+    "Absorption": 342.99717028501766
+  },
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "numba": "0.68.0",
+    "openpyxl": "3.1.5",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0"
+  },
+  "returns_computed": false,
+  "source_ref": "f8cd198",
+  "calendar_ref": "fe35af99aa90d7f31b91f8693859251bb44dd9ab",
+  "dependencies": {
+    "analysis/codex_ingredients_three_20261108.py": "ed4e4f7e0daa05e659162337686a53b6ae82460cd35176c7adefe01553491a75",
+    "analysis/codex_ingredients_fc_onb_t_20261108.py": "d0b430d16b310895db417ee7dc8c87ffd146d9d985d0680dd3653437adc237b7",
+    "analysis/metrics.py": "c9980cb4646bcb34068d9429b2d855f124d3317627067d64e6b2e7d165659791",
+    "analysis/resampling.py": "b5bc4c05c712be1453f636d7fd62527e5f4daaab09155d67fc987bcdd95cac8a",
+    "agents/codex/inputs/ingredients_three_20261108/letf_rebalance_test.py": "de58bc8322edb1049bc0c1f33ea78d39fbe0b1682e1630c84567ac17c6211ee6",
+    "agents/codex/inputs/ingredients_three_20261108/relative_strength_test.py": "5fc4bfb4ecf44014ecf781865ca4fdd04ff73dee761786c26048823176b8e44c",
+    "agents/codex/inputs/ingredients_three_20261108/grid24.py": "3f041b5f8c2b2a0d89d299749ec867d2314c78ea006cbe47f699e8d4f0468b9c",
+    "agents/codex/inputs/ingredients_three_20261108/dual_thrust_test.py": "f6823325cfed5a88d392e4df3ee1c431adad1122882b9e24950d5ad130b284cc",
+    "agents/codex/inputs/ingredients_three_20261108/RelStrength_v3.txt": "d819039cd0aedb33aa730f4b3b723adcc3169d10f4e9fa57c351e4652dc79b61",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/fc_replica.py": "b81cb1d2ea41e34730ef5127108fdff2654df98111a25618f4d4b4b64bdfd321",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/fc_v2.txt": "97632f4c38adbc1f9fe8ffaca4c6b446c4ae30b482506cd96c0e2eb7147036fe",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/t_source.txt": "c6816a3e95eed41ee002c870ad3118d642c17c2ffce1c23b8575d749431479b1",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/fc_mc.csv": "62495108fe4fc86495ece9977b89e94bb967e2644aeeb3e766e5b36c08384d96",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/onb_ml.txt": "c894acf104a96fae16fac201e7c6f1a565ae3d42105535fc3b315c5a245b9b25",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/calendar.py": "c0ae001152c75395748b0f3fdb4bdcbc589d0a124befce0170ef454c3da6f58f",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/grid.py": "a30ddd4533c9b9d9bdd50f161deded3a2864605f1b81bf4605f74b1d23bc7405",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/dependency_manifest.json": "1b5ec367aaabe7d1711e50df7756417bdddca23c8c5acfc1e89ea6eb9b0d0e1d",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/t_features.py": "2324f301b40a5b0fdb8bb1354dc34e1b8b08d311016c4405a94d08d760c73b2d",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/t_mc.csv": "c6837fe19af5fa74e6c144d0563b3279be8ac2c8ae989325bac7a0419266255b",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/source_manifest.json": "2176f02178f4ca3e8b25c41f630f9953e1a9b0ee5fb86099360aa97d83cca245",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/candidates.py": "d7a8f1aeba9f741b8780e09162cae86c8e09053d2dd9c6f5612cf7e445035f09",
+    "agents/codex/inputs/ingredients_fc_onb_t_20261108/onb_engine.py": "fffdf8b2092ba89faedf64aaa59e9c42a90b1dd299dc5cba0a1ae269caf2d253"
+  }
+}
