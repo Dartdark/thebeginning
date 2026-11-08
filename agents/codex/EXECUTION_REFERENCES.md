@@ -1725,6 +1725,23 @@ Source: Malan, *One Ticker Deep*, SSRN7073258, July2026 draft.
   labeled exclusion/reselection and matched cash/universe/risk benchmarks. No new test, winner-based filter,
   acquisition, monitoring process, guaranteed hedge or allocation follows from this source review.
 
+### E04 follow-up — Crossover metrics, day win rates and cash attribution (2026-11-08)
+
+Source: Arnold, SSRN6684499, April27,2026 capstone study.
+[Review](results/crossover_6684499_review_20261108.md),
+[source/arithmetic receipt](../../analysis/outputs/codex_crossover_6684499/source_audit.json).
+- Evidence: primary text/tables and visual Table3 check, no empirical replication. Author50/200 stock portfolio
+  annualized return12.04% versus17.27%, Sharpe0.779 versus0.849, drawdown−25.79% versus−35.23%. Negative
+  daily benchmark-difference t−2.169 is not a risk-adjusted-alpha or Sharpe-difference test.
+- Units: `(1 + mean daily return)^252 − 1` is not path CAGR; the printed Sharpe daily/annual conventions need
+  code reconciliation. The52.10% win rate is positive days, not winning trades. Cash return and actual timing
+  need matching; lower drawdown alone does not identify diversification or superior payout/account outcomes.
+- Limits: same five-stock basket in both benchmarks; crossover exposure, warm-up and weight maintenance can
+  differ. Constant20% return slots require a reconciled rebalance/cost ledger, beyond charging10bp only on
+  crossover changes. No original code/input histories or native fill evidence supplied; no savings verified.
+- Use only when a separate comparison is justified: freeze metric definitions, cash/benchmark dates and clocks,
+  then reconcile trade-to-portfolio returns. No new data acquisition, MA/ML/regime search, filter or allocation.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
