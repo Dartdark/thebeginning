@@ -3,6 +3,8 @@ from pathlib import Path
 import json
 import numpy as np
 import pandas as pd
+import codex_opening_handoff_20261108 as S
+import codex_ingredients_three_20261108 as I
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'analysis/outputs/codex_opening_handoff_20261108'
@@ -17,19 +19,30 @@ def table(df,columns):
 
 def main():
     d=OUT/'design';r=json.loads((d/'results.json').read_text());m=pd.read_csv(d/'metrics.csv')
-    rec=[]
+    rec=[];calendar_rows=[]
+    features=pd.read_csv(d/'features_before_returns.csv',parse_dates=['date'])
+    exclusions=pd.read_csv(d/'exclusions.csv',parse_dates=['date'])
+    fullcal=pd.DatetimeIndex(pd.concat([features.date,exclusions.date]).drop_duplicates().sort_values())
     for p in sorted(d.glob('*_trades.csv')):
-        t=pd.read_csv(p);daily=pd.read_csv(p.with_name(p.name.replace('_trades','_daily')))
+        t=pd.read_csv(p,parse_dates=['date']);daily=pd.read_csv(p.with_name(p.name.replace('_trades','_daily')))
         assert np.allclose(t.gross,(t.exit-t.entry)*t.side*20)
         assert np.allclose(t.net,t.gross-t.commission-t.slippage)
         assert np.allclose(t.native_mnq_net,t.gross/10-2.25)
         assert abs(t.net.sum()-daily.net.sum())<.005
         assert abs(t.native_mnq_net.sum()-daily.native_mnq_net.sum())<.005
         assert not t.missing_held_closes.sum()
+        case=p.stem.removesuffix('_trades')
+        for side in ['all','long','short']:
+            a=t if side=='all' else t[t.side.eq(1 if side=='long' else -1)]
+            calendar_rows.append({'case':case,'period':'design','side':side,**S.metric(a,fullcal)})
+        for y in sorted(fullcal.year.unique()):
+            calendar_rows.append({'case':case,'period':str(y),'side':'all',**S.metric(t[t.date.dt.year==y],fullcal[fullcal.year==y])})
         rec.append({'case':p.stem.removesuffix('_trades'),'trades':len(t),'gross':t.gross.sum(),
                     'commission':t.commission.sum(),'slippage':t.slippage.sum(),'net':t.net.sum(),
                     'native_mnq_net':t.native_mnq_net.sum(),'missing_held_minutes':0})
     pd.DataFrame(rec).to_csv(OUT/'cash_reconciliation.csv',index=False)
+    m=pd.DataFrame(calendar_rows)
+    m.to_csv(OUT/'full_calendar_metrics.csv',index=False)
     controls=pd.DataFrame([{'case':k,**v} for k,v in r['filter_controls'].items()])
     effects=pd.DataFrame([{'case':k,**v} for k,v in r['paired_effects'].items()])
     report="""# FC/ONB/T opening handoff combinations: REJECT
@@ -79,15 +92,22 @@ The proposed continuation/reversal pressure mechanism is unverified; prices do n
 Design2018-01-01–2022-12-30,2017 warm-up. All dollars below are total period profit at **1NQ** (20$/point),
 $7.25 round-trip commission plus1tick on each market/stop fill ($17.25 total). No target fills.
 Native1MNQ uses2$/point and$1.25 commission plus$1 round-trip slippage. A smaller commission bridge
-means native MNQ net is not simply NQ net divided by10. Zero-P&L admitted sessions remain in ratios.
+means native MNQ net is not simply NQ net divided by10. Zero-P&L skipped and admitted sessions remain in final reporting ratios.
 These are standalone fixed-size research results, not payout dollars, annual returns or recommended sizes.
 
 ### Five fixed cases
 """
     report+=table(m[m.period.eq('design')&m.side.eq('all')],['case','trades','total','avg','t_trade','profit_factor','sharpe','max_dd','calmar','native_mnq_total'])
     report+="""
+The final standard ratios are recalculated from the saved cash ledgers on all1,289 source trading dates,
+including zeros on declared roll-calendar skips and data exclusions. Original design gates/intervals used
+the1,042 admitted-date denominator and are retained unchanged in design/metrics.csv and results.json.
+This reporting correction changes no trade, P&L, candidate, threshold or failed selection. All full-calendar
+ratios are in full_calendar_metrics.csv; the adverse original paired intervals below retain their labeled
+research-admitted denominator and are not account/calendar-year forecasts.
+
 Continuation concentrates to60 trades and raises average trade to$400, but t1.62 fails even the cheap t2
-hurdle. Its Sharpe0.79 and Calmar are below the parent. Reversal has t0.61 and Sharpe0.30. Both are positive
+hurdle. Its Sharpe and Calmar are below the parent. Reversal has t0.61. Both are positive
 in aggregate but lack the registered evidence needed to advance. The parent itself has t2.44 and is only
 a comparator, not a newly approved strategy. Continuation's larger mean/PF alone is not a pass.
 
@@ -163,7 +183,7 @@ returns there. No improvement to evaluation, funded or personal portfolios is es
 - Calendar dates5–21 of quarterly months are excluded before entry as a conservative roll precaution. This is
   broader than exact roll dates and cannot guarantee all seams are gone. No global largest-gap adjustment or
   future-aware roll signal was applied. The4 incomplete-path exclusions are research data admission; a live
-  strategy cannot know future data quality. All candidates share the same admitted universe.
+  strategy cannot know future data quality. All candidates share the same admitted universe, and final reporting restores excluded dates as cash zeros.
 - Reusing FC exit logic shifts the proposed T reversal into a later confirmation/longer holding interval.
   The original T signal's short pre-open edge does not establish a later continuation of that reversal.
 - The maker has reconciled cash and synthetic execution; independent Claude/native verification is pending.
@@ -177,7 +197,7 @@ It does not reproduce the native FC or T classifier, nor reuse the fitted ONB ML
 
 ## Whole / long / short results
 
-`win` is a fraction; ratios use the admitted common calendar and$50,000 reporting capital. MaxDD uses initial
+`win` is a fraction; ratios use the full common trading calendar and$50,000 reporting capital. MaxDD uses initial
 zero peak. This reporting capital does not establish required margin or safe account size.
 """
     report+=table(m[m.period.eq('design')],['case','side','trades','win','total','avg','t_trade','sharpe','sortino','profit_factor','calmar','ulcer','max_dd','worst_trade'])

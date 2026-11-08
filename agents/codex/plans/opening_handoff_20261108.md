@@ -101,3 +101,10 @@ and traceback remain in the aborted_exact_anchor directory. Empty numeric column
 Source fidelity changes the research universe materially, so this amendment explicitly precedes the corrected
 returns. It is not a newly optimized17:02 anchor or a change selected from P&L. No other first-bar cutoff is
 tested. The initial17:01 protocol is abandoned for missing-data/source mismatch, not economic performance.
+
+## Final reporting denominator supplement (no rule/selection change)
+
+Original gates used research-admitted dates. Preserve them; after the failed gate, restore all source trading
+dates from features plus exclusions when reporting annualized ratios from the frozen saved cash ledgers.
+Skipped roll-calendar/data dates carry zero cash, rather than shortening elapsed time. No new return replay,
+threshold, classification or gate reopening; original conditional metrics/intervals remain auditable.
