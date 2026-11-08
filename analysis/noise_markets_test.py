@@ -128,6 +128,13 @@ if __name__ == "__main__":
     print(f"   noise band on {mk}: n {len(T)} ${T.net.mean():.0f} t {tt(T.net):.2f} PF {T.net[T.net > 0].sum() / -T.net[T.net < 0].sum():.2f} | 2018-22 ${a.mean():.0f} (t {tt(a):.1f}) 2023+ ${b.mean():.0f} (t {tt(b):.1f}) | longs ${T[T.side > 0].net.mean():.0f} (t {tt(T[T.side > 0].net):.1f}, n {int((T.side > 0).sum())}) shorts ${T[T.side < 0].net.mean():.0f} (t {tt(T[T.side < 0].net):.1f}) | worst ${T.net.min():,.0f}")
     print(f"      by year $: {T.groupby(T.date.dt.year).net.sum().round(0).astype(int).to_dict()}")
     print(f"      exits: {T.kind.value_counts().to_dict()} | trade days {T.date.nunique()}")
+    cd = f"checks/candidates/noise_{mk.lower()}"; os.makedirs(cd, exist_ok=True)
+    if tt(T.net) < 2.0:      # stop rule added after the first run (2026-11-08, lab rule: stop at the first failed gate); rules unchanged
+        T.assign(date=T.date.dt.strftime("%Y-%m-%d"))[["date", "side", "net", "risk"]].to_csv(f"{cd}/trades.csv", index=False)
+        json.dump({"kind": "strategy", "pre_registered": True, "variants": 1}, open(f"{cd}/meta.json", "w"))
+        open(f"{cd}/spec.md", "w").write(f"# Noise band on {mk} (2026-11-08)\n" + __doc__.split("PRE-REGISTERED")[1].split("Checks:")[0] + "\nStopped at the first failed gate (t < 2): no placebo or benches.\n")
+        gross = (T.exit - T.entry) * T.side * S["pv"]; print(f"   gross before costs ${gross.mean():.1f} a trade; costs ${(gross - T.net).mean():.1f}")
+        print("   STOPPED at the first failed gate (t < 2.0): no placebo, no benches"); sys.exit(0)
     Pl = placebo(gx, S, T, 100); pm = Pl.groupby("run").net.mean()
     print(f"   placebo (random side and time, same bracket) ${pm.mean():.0f}, 95th ${np.percentile(pm, 95):.0f}; p {np.mean(pm >= T.net.mean()):.2f}", flush=True)
     cd = f"checks/candidates/noise_{mk.lower()}"; os.makedirs(cd, exist_ok=True)

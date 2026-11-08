@@ -36,6 +36,12 @@ if __name__ == "__main__":
     print(f"   MO on {mk}: n {len(T)} ${T.net.mean():.0f} t {tt(T.net):.2f} PF {T.net[T.net > 0].sum() / -T.net[T.net < 0].sum():.2f} | 2018-22 ${a.mean():.0f} (t {tt(a):.1f}) 2023+ ${b.mean():.0f} (t {tt(b):.1f}) | longs ${T[T.side > 0].net.mean():.0f} (t {tt(T[T.side > 0].net):.1f}) shorts ${T[T.side < 0].net.mean():.0f} (t {tt(T[T.side < 0].net):.1f}) | worst ${T.net.min():,.0f}")
     print(f"      by year $: {T.groupby(T.date.dt.year).net.sum().round(0).astype(int).to_dict()}")
     print(f"      exits: {T.kind.map({0: 'stop', 2: 'time'}).value_counts().to_dict()} | median stop ${np.median(stop_d):,.0f} per contract (2023+ ${np.median(stop_d[T.date >= '2023']):,.0f})")
+    cd = f"checks/candidates/mo_{mk.lower()}"; os.makedirs(cd, exist_ok=True)
+    if tt(T.net) < 2.0:      # stop rule added after the first run (2026-11-08, lab rule: stop at the first failed gate); rules unchanged
+        T.assign(date=T.date.dt.strftime("%Y-%m-%d"))[["date", "side", "net", "risk"]].to_csv(f"{cd}/trades.csv", index=False)
+        json.dump({"kind": "strategy", "pre_registered": True, "variants": 1}, open(f"{cd}/meta.json", "w"))
+        open(f"{cd}/spec.md", "w").write(f"# Morning Momentum on {mk} (Twin v2.1 MO rules, own-open window, 2026-11-08)\nWindow {S['win']} CT, flat {S['ex']}, stop 0.3 x daily ATR(15), no target; ${COMM:.0f} + 1 tick per fill. Stopped at the first failed gate (t < 2): no placebo or benches.\n")
+        print("   STOPPED at the first failed gate (t < 2.0): no placebo, no benches"); sys.exit(0)
     rng = np.random.default_rng(6); pl = []
     for run in range(100):
         Tp = tc.simulate(Bx, placebo_rng=rng, **kw); Tp = Tp[Tp.date >= "2018-01-01"]; pl += [(run, x) for x in Tp.net]
