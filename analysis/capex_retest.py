@@ -3,7 +3,8 @@ FC2B / Kusho / S47 / S30 out, as in every personal bench) with Overnight Tick at
 Each bench piece added at 1 micro from its saved trade list (per NQ net / 10 - $0.55 a trade for micro costs; S30 = its own per-micro
 daily file): 1-year block-bootstrap MC (2,000 runs, 20-day blocks): median year, bad year (p5), DD p95, return/DD, capital at the 20%
 rule; 2018-26, 2018-22, 2023+. Promotion rule (PORTFOLIO): return/DD must improve; otherwise it stays on the bench.
-Not retested (no trade list in this repo): Anson momentum, R2Vault, S03 v2 (Codex's results), futures trend (never tested).
+Codex's ledgers (copied from codex/work 2026-11-08, added after the first run at the user's request): Anson intended_raw (net per NQ =
+(gross points x 20 - $17.25) x qty), R2Vault ct_raw fee 1.24 (its own net_mnq), S03 v2 raw (gross_nq - $17.25). Futures trend: never built.
   tools/run_stamped.sh analysis/capex_retest.py > analysis/outputs/capex_retest_output.txt
 """
 import sys, pickle, warnings; warnings.filterwarnings("ignore"); sys.path.insert(0, "analysis")
@@ -24,6 +25,9 @@ if __name__ == "__main__":
     k = pd.read_csv("checks/candidates/ricochet_1144/python_trades.csv", parse_dates=["date"]); C["Ricochet 1144 (commission only)"] = dm(k.date, k.net)
     import drift_pullback_test as DP
     g = pickle.load(open("scratch_data/g24.pkl", "rb")); t = DP.run(g, DP.prep(g), window=99, start=900, end=1430, flat=1455, slip_ticks=1); C["DriftPullBack v3"] = dm(t.date, t.net)
+    an = pd.read_csv("checks/candidates/anson/codex_intended_raw_trades.csv", parse_dates=["date"]); C["Anson momentum (Codex ledger)"] = dm(an.date, (an.gross_points * 20 - 17.25) * an.qty)
+    rv = pd.read_csv("checks/candidates/r2vault/codex_ct_raw_fee1.240_closed_trades.csv", parse_dates=["date"]); C["R2Vault (Codex ledger)"] = rv.groupby("date").net_mnq.sum().reindex(idx, fill_value=0.0)
+    s3 = pd.read_csv("checks/candidates/s03_v2/codex_v2_raw_trades.csv", parse_dates=["date"]); C["S03 Noise Area v2 (Codex ledger)"] = dm(s3.date, s3.gross_nq - 17.25)
     S = swing(g); C["Swing Target 2nd MNQ (both sides)"] = dm(S.date, S.net); C["Swing Target 2nd MNQ (shorts only)"] = dm(S[S.side < 0].date, S[S.side < 0].net)
     def mc(x):
         d = MC.daily_mc(x.values, horizon=252, n=2000, block=20, trail=1e12, seed=1); return d["pnl_p50"], d["pnl_p5"], d["dd_p95"], d["pnl_p50"] / d["dd_p95"]
