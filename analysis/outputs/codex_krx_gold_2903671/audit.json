@@ -1,0 +1,79 @@
+{
+  "source_commit": "a8806ec722ae9539f3250ded15364ca11dbdd377",
+  "script_sha256": "79aa40d421c4dbd8a3d91e2e2fe17ab92ec9454ee7703ee164bf80ee8e62c897",
+  "source_files": {
+    "agents/codex/inputs/ssrn2903671/.gitattributes": "3a7849516f0a5dc024c7dce1c786d0cb7ce1bf3dfe5e9abcc02c96301c3ae5a0",
+    "agents/codex/inputs/ssrn2903671/table2.png": "15e312207236f1bc3077d165ad105cde285c0a397df364e14fd16880afe72121",
+    "agents/codex/inputs/ssrn2903671/source.txt": "057529eb5b2607ac8569647e2721b86e1ca89edd2d07890d12b8596569855006",
+    "agents/codex/inputs/ssrn2903671/table7.png": "fbebd9f6884f34c6626fd6920dd2da3b999c7c672d8f7af75947c98009ccc62f",
+    "agents/codex/inputs/ssrn2903671/source.pdf": "441325a9c4bb7ea5b0d74c6016a878b1f609e1ca642e33c476896bd51e8cd504"
+  },
+  "source_regression_claim": {
+    "gold_beta": 0.414,
+    "gold_t": 16.707,
+    "dollar_beta": 0.075,
+    "dollar_p": 0.1,
+    "adjusted_r2": 0.333
+  },
+  "reconstruction_from_rounded_source_moments": {
+    "gold_beta": 0.4137560243029578,
+    "dollar_beta": 0.07445702602701826,
+    "unadjusted_r2": 0.3347427863675958,
+    "intercept": 0.1293582100993987
+  },
+  "hypothetical_source_table2": {
+    "gross_price_return_pct": 10,
+    "claimed_net_pct": 9.6,
+    "recomputed_on_funded_outlay_pct": 9.341278033217604,
+    "recomputed_on_purchase_price_pct": 9.369411764705882
+  },
+  "information_clock_fixtures": [
+    {
+      "previous_krx_close": "2016-01-12T15:30:00+09:00",
+      "source_futures_session_end": "2016-01-13T07:00:00+09:00",
+      "next_krx_open": "2016-01-13T09:00:00+09:00",
+      "known_at_previous_close": false,
+      "source_clock_assumption_only": true
+    },
+    {
+      "previous_krx_close": "2016-07-12T15:30:00+09:00",
+      "source_futures_session_end": "2016-07-13T06:00:00+09:00",
+      "next_krx_open": "2016-07-13T09:00:00+09:00",
+      "known_at_previous_close": false,
+      "source_clock_assumption_only": true
+    }
+  ],
+  "owned_filename_census": {
+    "*KRX*": [],
+    "*krx*": [],
+    "*KRW*": [],
+    "*krw*": [],
+    "*DX_*": [],
+    "*DXY*": [],
+    "GC_1min_*": [
+      "data/GC_1min_2017.csv",
+      "data/GC_1min_2018.csv",
+      "data/GC_1min_2019.csv",
+      "data/GC_1min_2020.csv",
+      "data/GC_1min_2021.csv",
+      "data/GC_1min_2022.csv",
+      "data/GC_1min_2023.csv",
+      "data/GC_1min_2024.csv",
+      "data/GC_1min_2025.csv",
+      "data/GC_1min_2026.csv"
+    ]
+  },
+  "inspected_headers": {
+    "data/GC_1min_2017.csv": [
+      "date",
+      "time",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume"
+    ]
+  },
+  "return_trials": 0,
+  "verification": "Source arithmetic and assumed-clock checks only; no economic or market-data replication"
+}

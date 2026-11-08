@@ -1819,3 +1819,18 @@ Sources: [Joo/Park SSRN4355765](results/bitcoin_commodity_hedges_4355765.md) and
 - Next check only with new matching free inputs: one native hedge/cash interval or ETF monthly flow/weight/receipt
   reconstruction as appropriate, then its own evidence/preregistration gate. No cross-market price proxy, paid
   data request, live/logger change, automatic collector or paused-scout restart is implied.
+
+
+### E09/E11/E19 follow-up — KRX gold's explained opening gap is not a pre-entry return
+
+Source: Yeom/Baek, [SSRN2903671 full review](results/krx_gold_2903671_review.md), uploaded17-page paper;
+[evidence](evidence/krx_gold_2903671.md). Prior CME gold returns explain KRX close-to-open gaps (source beta0.414),
+but the previous KRX close precedes completion of the futures signal. Do not backdate an entry or equate a predicted
+auction price with a fill at the old close. A post-open strategy targets a different, untested return interval.
+A close field must identify settlement/last/session-close, holiday mapping, DST and KRX historical hour eras.
+KRX is KRW/gram, GC is USD/troy ounce; USD/KRW and local basis/delivery are needed, not an ICE dollar-index proxy.
+Source Table2's9.6% hypothetical net return is about9.34% under its printed buy/sell fees; neither is a realized edge.
+Evidence: source/table images, rounded-moment regression consistency, conditional fee arithmetic and source-assumed
+winter/summer clock checks only. No independent market-data return or verified execution saving. Next check only
+for a separately specified auction/valuation question: synchronized predecision GC/FX/auction quotes and actual native
+order/fill/cash rules; no new collector, proxy trade, paid-data request, account or live/policy change.
