@@ -238,6 +238,11 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   Do not invent settings, use an opaque API as verification, or adapt to NQ/ES automatically.
   [Review](agents/codex/results/kse_sentinel_7102818_review.md) ·
   [Data register](agents/codex/DATA_NEEDED.md#kse-sentinel--psx-source-rule-gate-uploaded-ssrn7102818).
+  **User-requested custom MNQ follow-up (2026-11-08): REJECT.** Explicitly selected our own
+  intraday version, not PSX replication. Frozen EMA9/21 two-candle rule, design2018–22:
+  1,238trades at1MNQ, gross−$240.50, net−$3,013.62, PF0.90, t−1.23; baseline net−$1,999.62.
+  Failed standalone gate; no2023+/account/PowerLanguage stages or rescue. Original PSX source
+  remains gated; this result does not test its withheld rules. [Build/test](agents/codex/results/sentinel_mnq_20261108.md).
 
 - [ ] **International Buffett-indicator allocation — NEEDS DATA AND SPECIFICATION (SSRN4071039).**
   Conditional low-priority personal long-term lead: country-wise matured ten-year-return regressions on
@@ -264,10 +269,16 @@ Friday review. Say "stop the reminders" to turn them off, or ask for a different
   [Data gate](agents/codex/inputs/delta_straddle_4677166/free_data_gate.md).
 
 - [ ] **SPY “Beat the Market” replication audit — conditional low-priority NEEDS DATA (SSRN7323419).**
+  **User-authorized ES adaptation now TESTED / REJECT DESIGN:**2018–22complete-day selected net$25,517.50
+  versus BASE$107,475; return Sharpe.663versus1.281. Three definitions including shadow, no rescue/2023+
+  or account stage. [Actual ES test](agents/codex/results/delgado_es_20261108.md). Exact SPY gate remains separate.
+  User subsequently nominated the unchanged baseline for a separate2023+test: recent net+$49,755but return
+  Sharpe.550,2025nearly flat/2026−$32,910andDD$56,842.50. Baseline's own recent t/bootstrap fail; no allocation.
+  [Baseline validation](agents/codex/results/delgado_es_baseline_20261108.md). No modified-candidate rerun/tuning.
   Author closely replicates the historical SPY noise-band/VWAP result, but reports−8.1%September2025–August2026;
   final overlays selected after80adaptive SPY alternatives, no clean holdout, and fail to improve QQQ Sharpe.
   Native SPY minute/dividend/calendar/cash/borrow data and authenticated replication engine/trial package missing
-  after bounded free checks. No new planner built. Existing NQ/ES family failures are retained, not revived.
+  after bounded free checks. ES historical code/results now exist; existing NQ/ES failures remain retained.
   Next only on genuinely new inputs: one causal formation/dividend/early-close/fill cash reconciliation, then
   coverage/cost gate before economic protocol. No personal or Apex allocation.
   [Review](agents/codex/results/delgado_7323419_review.md) · [D55 data needs](agents/codex/DATA_NEEDED.md).

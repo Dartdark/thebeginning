@@ -1,0 +1,686 @@
+     Pair Trading in Leveraged ETFs:
+    Analysis of a Cross-Jurisdictional
+           Strategy Profitability
+                                      Aarav Shah
+
+                      Westminster School, Dean's Yard, London
+
+                            Email: aarav0608@gmail.com
+
+     GitHub: https://github.com/aaravshah0608/Pairtrading_Strategy_Research
+
+
+
+Abstract
+This paper investigates the empirical profitability of a cross-border pairs trading
+strategy utilizing leveraged Exchange-Traded Funds (ETFs) listed in the US and UK
+that track identical underlying indices and specifically focuses on the pair of TQQQ
+and LQQ3. Despite the theoretical Law of One Price, we identify persistent
+short-term price divergences driven by jurisdictional liquidity shifts and time-zone
+imbalances. Utilizing a Z-score-based mean-reversion model, we demonstrate that
+these discrepancies offer significant market-neutral alpha, performing consistently in
+both bullish and bearish regimes. However, we also conduct an analysis of the
+impacts of transaction costs and bid-ask spreads, which we find can greatly erode
+profits for retail investors who do not have access to an institutional grade set up with
+advantage of scale.
+
+
+
+1. Introduction
+Given the majority of hedge fund activity and academic research focuses on
+intra-market equity pairs within the US, what are the returns from following a
+cross-border strategy that pairs identical indices across different jurisdictions? Is
+there a persistent pricing dislocation between the US and the UK for the same
+underlying asset, and if so, can it be explained by the structural differences between
+these two major markets? In this paper, we attempt to address these questions by
+examining the returns and risk of a specific type of statistical arbitrage known as
+pairs trading, utilizing a dual-listed sample of leveraged ETFs tracking the
+Nasdaq-100 index: TQQQ (listed in the US) and LQQ3 (listed in the UK).
+During the first quarter of 2026, global equity markets experienced significant
+volatility and shifting liquidity regimes. Traditional long-only strategies often faced
+considerable drawdowns during this period. According to broader market
+benchmarks, the early months of 2026 were characterized by rapid price swings that
+challenged conventional portfolio management. Specific Equity Market Neutral
+(EMN) strategies, however, are designed to remain indifferent to such directional
+volatility. This led to a greater focus on market-neutral strategies that could provide
+steady returns. Pairs trading, in particular, has historically been used to navigate
+these conditions by isolating relative value rather than betting on market direction.
+
+Pairs trading is typically classified as an EMN investment strategy based on
+short-term price reversal. Characterized in industry as a form of statistical arbitrage,
+the strategy involves finding two securities that follow a similar trading pattern. When
+the price relationship—expressed as a ratio—deviates from a specified statistical
+rule, positions are taken long in the relatively undervalued security and short in the
+overvalued security, with the expectation that the ratio will converge to its historical
+mean. While traditional pairs trading derives returns from the cross-autocorrelation of
+different stocks, our strategy focuses on the lead-lag relationship between identical
+indices traded in different time zones, specifically during the high-liquidity window of
+the London and New York overlap.
+
+A growing body of research is focused on the performance of pairs trading in foreign
+and specialized markets (Gatev, Goetzmann, and Rouwenhorst 2006; Perlin 2009;
+Do and Faff 2010). Gatev, Goetzmann, and Rouwenhorst (2006) examined pairs
+trading in the US equity market from 1962 to 2002, demonstrating that the strategy
+generated an average annual return of up to 11% with low levels of risk and limited
+exposure to systematic equity factors. Do and Faff (2010) extended this study, noting
+that while returns remained significant, they showed a decline as market efficiency
+increased. Several studies have proposed modifications to the standard
+methodology, such as using Gaussian Markov chain models for the spread (Elliott,
+Van Der Hoek, and Malcolm 2005) or utilizing cointegration for pair selection
+(Vidyamurthy 2004). More recently, research has begun to explicitly model the
+impact of transaction costs on net profitability (Do and Faff 2012).
+
+In this paper, we make four key incremental contributions to the literature on pairs
+trading. we provide extensive evidence on the profitability of a cross-border,
+identical-index strategy, pairing TQQQ and LQQ3 to eliminate the idiosyncratic
+company risk common in traditional equity pairs. Second, we identify a specific
+"time-window alpha," focusing on the 16:00 UTC (11:00 AM NY) period when both
+the London Stock Exchange and the Nasdaq are active, creating a unique
+environment for price discovery. Third, we provide a comprehensive analysis of the
+risks in this strategy using a multi-factor framework, specifically calculating Greeks
+such as Beta and Alpha to measure market neutrality. Finally, we provide an analysis
+of the strategy’s sensitivity to market frictions, incorporating price impact and bid-ask
+spread estimates to evaluate the robustness of the returns.
+
+In this study, we examine the performance of the TQQQ/LQQ3 pair from April 2024
+to March 2026. Over this sample period, our results demonstrate that the strategy
+delivered a cumulative total return of approximately 136%. Notably, the average
+annual standard deviation for the pairs trading portfolio was significantly lower than
+that of the underlying Nasdaq-100 index. These results suggest that by utilizing a
+Z-score-based mean-reversion model, the strategy was able to capture significant
+absolute returns during a period characterized by both falling equity prices and
+spikes in volatility. Unlike previous US studies that report a drop in performance
+through time ( Do and Faff 2010), our findings indicate that jurisdictional "venue
+noise" continues to provide fertile ground for arbitrage.
+
+To examine the risk exposure of the portfolio, strategy returns were regressed
+against common equity factors. Our results show that the systematic risk exposure is
+largely hedged, with the strategy maintaining a near-zero Beta throughout the
+sample period. This confirms that the returns are generated by the closing of the
+pricing gap (the ratio) rather than directional movements in the broader market. This
+market-neutral characteristic makes the strategy particularly advantageous over
+traditional directional investments during periods of high economic uncertainty.
+
+Finally, we address the critical role of market frictions. Previous literature has shown
+that incorporating direct transaction costs can eliminate much of the profitability in
+quantitative strategies (Lesmond, Schill, and Zhou 2004; Stoll and Whaley 1983).
+Our results indicate that while the TQQQ/LQQ3 pair generates robust gross returns,
+the net performance is extremely sensitive to the transaction cost and bid-ask spread
+applied per trade. We find that the strategy’s return can quickly be diminished by
+these impacts which highlights the need for trading platforms that charge low fees.
+
+The remainder of the paper is structured as follows: Section 2 details the Z-score
+and EMA methodology utilized in the study. Section 3 describes the data. Section 4
+outlines the summary statistics and trading statistics. Section 5 reports the
+performance characteristics, Greeks, and the impact of transaction costs, and finally,
+Section 6 offers concluding remarks.
+
+
+
+2. Methodology
+The structural framework of this study is designed to identify and exploit transient
+pricing inefficiencies between the US and UK equity markets. This section details the
+mathematical normalization of dual-listed assets, the statistical signalling process,
+and the rigorous performance metrics used to evaluate the strategy's viability.
+2.1 Data Normalization and Ratio Construction
+
+To facilitate a direct comparison between TQQQ (denominated in USD) and LQQ3
+(denominated in GBP), we must eliminate currency-driven price variance. we
+normalize the UK-listed LQQ3 into US Dollars using the contemporaneous
+GBP/USD exchange rate.
+
+We define the Adjusted Ratio (𝑆𝑡) at time t as:
+
+                                           ((            )
+                          𝑅𝑡 = 𝑃(𝑇𝑄𝑄𝑄,𝑡)/ 𝑃(𝐿𝑄𝑄3,𝑡)/100 * 𝐹𝑋𝑡  )
+Where:
+
+   ●​   𝑃_(𝑇𝑄𝑄𝑄, 𝑡) is the price of the US-listed ETF.
+
+   ●​   𝑃_(𝐿𝑄𝑄3, 𝑡) is the price of the UK-listed ETF, adjusted by a 100 to account for
+        pence-to-pound pricing conventions.
+
+   ●​   𝐹𝑋_𝑡 is the GBP/USD exchange rate.
+
+By fixing the observation window to 16:00 UTC, we ensure that both the London
+Stock Exchange and the Nasdaq are in active session, providing the highest
+possible liquidity and the most accurate reflection of the "Fair Value" of the
+underlying index.
+
+2.2 Statistical Modelling: EMA and Dynamic Volatility
+
+The strategy assumes that while the ratio 𝑅𝑡 may drift due to jurisdictional liquidity
+imbalances, it remains tethered to a long-term equilibrium.We model this equilibrium
+using an Exponential Moving Average (EMA), which acts as a dynamic mean that
+adapts to shifting market regimes:
+
+                            𝐸𝑀𝐴𝑡 = α𝑅𝑡 + (1 − α)𝐸𝑀𝐴(𝑡−1)
+
+The smoothing factor α is derived from a lookback period 𝑁, defined as:
+
+                                    α = 2/(𝑁 + 1)
+
+To quantify the magnitude of a divergence, we calculate the rolling Standard
+Deviation σ𝑡 of the ratio over the same period 𝑁. This allows the model to expand or
+contract its "confidence intervals" based on prevailing market volatility.
+
+2.3 Signal Generation and Parameterization
+
+The strategy utilizes a Z-score to normalize the distance between the current ratio
+and its moving average. The Z-score is calculated as:
+
+                                       (           )
+                                  𝑍𝑡 = 𝑅𝑡 − 𝐸𝑀𝐴𝑡 /σ𝑡
+The trading logic is governed by a set of input parameters that act as the strategy’s
+sensitivity variables. In this paper, we treat these thresholds as configurable inputs to
+facilitate a robustness analysis:
+
+   ●​   Entry Threshold (𝑘(𝑒𝑛𝑡𝑟𝑦)): A position is opened when the absolute value of
+                                              | |
+        the Z-score exceeds this value ( 𝑍𝑡 > 𝑘(𝑒𝑛𝑡𝑟𝑦)) . If 𝑍𝑡 > 𝑘(𝑒𝑛𝑡𝑟𝑦) then 𝑆𝑡 = -1 and
+        if − 𝑍𝑡 > 𝑘(𝑒𝑛𝑡𝑟𝑦) then 𝑆𝑡 = 1 where 𝑆𝑡 is the signal at time t.
+
+   ●​   Exit Threshold (𝑘(𝑒𝑥𝑖𝑡)): A position is held until the ratio reverts toward the
+                                                                                 | |
+        mean, closing when the absolute Z-score falls below this value ( 𝑍𝑡 < 𝑘(𝑒𝑥𝑖𝑡)).
+        When this happens 𝑆𝑡 = 0.
+
+   ●​   Transaction Cost (𝐶): A fixed friction percentage applied to the total capital
+        every time a signal changes, accounting for spreads and commissions.
+
+By treating these values as variable inputs, we can test the strategy’s sensitivity to
+execution quality and statistical significance, ensuring that the observed alpha is not
+a result of "over-fitting" a specific narrow window.
+
+2.4 Portfolio Construction and Daily Return Attribution
+
+To calculate returns, this strategy first calculates the money made on the ETFs
+before subtracting a transaction fee.
+
+A. Signal Application
+
+As in our strategy we aim to invest the same amount of capital into each ETF of our
+strategy, we can calculate our gross daily return by looking at the difference in their
+price movements before multiplying by our signal to take in account the type of
+position we chose to take. Since the position held on any day is dependent on the
+signal generated on the previous day, we take the signal as 𝑆(𝑡−1) .
+
+The Gross Daily Return (𝑅𝑒(𝑔𝑟𝑜𝑠𝑠,𝑡)) is calculated as:
+
+        𝑅𝑒(𝑔𝑟𝑜𝑠𝑠,𝑡) =   ((𝑃(𝑇𝑄𝑄𝑄,𝑡)/𝑃(𝑇𝑄𝑄𝑄,𝑡−1)) − (𝑃(𝐿𝑄𝑄3𝑈𝑆𝐷,𝑡)/𝑃(𝐿𝑄𝑄3𝑈𝑆𝐷,𝑡−1))) * 𝑆(𝑡−1)
+Where:
+
+   ●​   𝑆(𝑡−1) is the signal from the previous period (-1, 0, or 1).
+
+   ●​   𝑃(𝑇𝑄𝑄𝑄) and 𝑃(𝐿𝑄𝑄3𝑈𝑆𝐷) represent the US and currency-adjusted UK prices,
+        respectively.
+This formula captures the divergence or convergence of the ratio. If the signal is 1
+(Long US / Short UK), the strategy profits if the US ETF which is currently
+undervalued does better than the UK ETF and moves the ratio towards the mean. If
+the signal is -1 (Short US / Long UK), the strategy profits if the UK ETF which is
+currently undervalued does better than the US ETF and moves the ratio towards the
+mean. If the signal is 0, no position has been taken and so the strategy makes no
+losses or gains.
+
+B. Accounting for Transaction Frictions
+
+To transition from gross returns to net daily returns (𝑅𝑒(𝑛𝑒𝑡,𝑡)), we must account for the
+costs associated with entering or exiting a position. These costs are only applied
+when the model changes position.
+
+The friction is applied as follows:
+
+                      𝐼𝑓 𝑆𝑡 ≠ 𝑆(𝑡−1) ⇒ 𝑟(𝑛𝑒𝑡,𝑡) = 𝑟(𝑔𝑟𝑜𝑠𝑠,𝑡) * (1 − 𝐶)
+
+                            𝐼𝑓 𝑆𝑡 = 𝑆(𝑡−1) ⇒ 𝑟(𝑛𝑒𝑡,𝑡) = 𝑟(𝑔𝑟𝑜𝑠𝑠,𝑡)
+
+This ensures that the model considers the amount of trading happening and shows
+how the transaction costs and bid/ask spreads that arise from this impact profits.
+
+C. Equity Curve Compounding
+
+The cumulative performance of the strategy is tracked via a cumulative equity (𝐸𝑡) ,
+which represents the growth of a hypothetical $1 investment over the duration of the
+study:
+
+                                               (
+                                 𝐸𝑡 = 𝐸(𝑡−1) * 1 + 𝑟(𝑛𝑒𝑡,𝑡) )
+This compounded equity curve serves as the basis for calculating the Maximum
+Drawdown and the total strategy return presented in the final analysis.
+
+2.5 Performance and Risk Attribution
+
+To evaluate the strategy beyond simple nominal returns, we employ several
+advanced financial metrics. Each is calculated to assess the risk-adjusted quality of
+the returns and the degree of market neutrality.
+
+A. Total Return, Annualization
+
+The primary measure of success is the Total Strategy Return (𝑅(𝑡𝑜𝑡𝑎𝑙)), which
+represents the percentage growth of the investment from the first day of the sample
+to the last. This is derived directly from the final value of the cumulative equity curve
+(𝐸(𝑓𝑖𝑛𝑎𝑙)):
+𝑅𝑒(𝑡𝑜𝑡𝑎𝑙) = 𝐸(𝑓𝑖𝑛𝑎𝑙) − 1
+
+To make this figure comparable to institutional benchmarks and other asset classes,
+we convert it into an Annualized Return (𝑅𝑒(𝑎𝑛𝑛)). Since there are approximately 252
+trading days in a year, we use this number when calculating the power to raise
+𝑅𝑒(𝑡𝑜𝑡𝑎𝑙) to.
+
+The formula is expressed as:
+
+           (
+𝑅𝑒(𝑎𝑛𝑛) = 1 + 𝑅𝑒(𝑡𝑜𝑡𝑎𝑙)  )(252/𝑇) − 1
+Where T is the actual number of trading days observed in our specific data sample.
+
+B. Daily Volatility and Annualized Risk
+
+To measure the risk profile of the strategy, we first calculate the daily volatility (σ(𝑑𝑎𝑖𝑙𝑦)
+). This is defined as the Standard Deviation of the entire series of net daily returns
+from the start date to the end date of the study.
+
+In order to get the annual volatility (σ(𝑎𝑛𝑛)) we multiply by the square root of the
+number of trading days in a year:
+
+                                 σ(𝑎𝑛𝑛) = σ(𝑑𝑎𝑖𝑙𝑦) * (252)
+
+B. Sharpe Ratio
+
+The Sharpe Ratio measures the excess return per unit of risk, providing insight into
+the efficiency of the strategy:
+
+                                         (              )
+                             𝑆ℎ𝑎𝑟𝑝𝑒 = 𝑅𝑒(𝑎𝑛𝑛) − 𝑅𝑒𝑓 /σ(𝑎𝑛𝑛)
+
+
+
+where 𝑅𝑒𝑓 represents the risk-free rate.
+
+C. Maximum Drawdown (𝑀𝐷𝐷)
+
+The MDD identifies the strategy’s worst "peak-to-trough" decline, representing the
+maximum cumulative loss an investor would have faced:
+
+                                        ((
+                         𝑀𝐷𝐷 = 𝑚𝑖𝑛 𝐸𝑞𝑢𝑖𝑡𝑦𝑡 − 𝑃𝑒𝑎𝑘𝑡 /𝑃𝑒𝑎𝑘𝑡   )      )
+
+D. The Greeks: Beta and Alpha
+
+To verify the Market Neutral claim of the strategy, we calculate the Beta (β) and
+Alpha (α) against the benchmark (TQQQ):
+   ●​   Beta: Measures the systematic exposure to the broader market:
+
+                                       (         )
+                              β = 𝐶𝑜𝑣 𝑅𝑒𝑠, 𝑅𝑒𝑚 /𝑉𝑎𝑟 𝑅𝑒𝑚(    )
+Here 𝑅𝑒𝑠 is the list of daily strategy returns and 𝑅𝑒𝑚 is the list of daily market
+benchmark returns. A Beta near zero would confirm the strategy is truly isolated from
+directional market movements.
+
+
+
+   ●​   Jensen's Alpha: Measures the idiosyncratic return generated by the strategy
+        after adjusting for its market risk.
+
+                                       (         (
+                       α = 𝑅𝑒(𝑠,𝑎𝑛𝑛) − 𝑅𝑒𝑓 + β 𝑅𝑒(𝑚,𝑎𝑛𝑛) − 𝑅𝑒𝑓    ))
+
+
+3. Data
+This section details the source of all the data used in this paper, and how it was
+processed before being used to investigate the pair trading strategy.
+
+3.1 Data Sources
+
+The empirical analysis uses historical market data obtained from Stooq.com, a
+publicly available financial database providing historical price data for equities,
+exchange-traded funds (ETFs), currencies and other financial instruments. Three
+hourly datasets were downloaded covering approximately two years of observations:
+
+   ●​   TQQQ, a US-listed 3× leveraged ETF tracking the Nasdaq-100 Index.
+
+   ●​   LQQ3, a UK-listed 3× leveraged ETF tracking the Nasdaq-100 Index.
+
+   ●​   The GBP/USD exchange rate.
+
+These three datasets provide the information required to compare the pricing
+behaviour of two leveraged ETFs tracking the same underlying index while
+accounting for fluctuations in the exchange rate.
+
+3.2 Data Preparation
+
+The original datasets consisted of hourly observations. To ensure a consistent
+comparison between the two ETFs, only observations recorded at 16:00 UTC were
+retained. Selecting a single observation each trading day provides a consistent
+reference point while capturing a period in which both the UK and US markets are
+simultaneously active for much of the sample.
+As TQQQ is denominated in US dollars (USD) while LQQ3 is quoted in pence
+sterling (GBP), the two price series were standardised before analysis. LQQ3 prices
+were first converted from pence into pounds sterling by dividing by 100 before being
+converted into US dollars using the contemporaneous GBP/USD exchange rate.
+
+During data cleansing, a small number of LQQ3 observations were identified as
+being recorded using an alternative price scale (instead of pence they were recorded
+in pounds). These observations were adjusted to ensure that all prices were
+expressed consistently before the currency conversion was applied.
+
+3.3 Data Alignment
+
+Following the time filtering and currency conversion, the three datasets were merged
+using their common trading date. An inner join was used so that only dates for which
+observations existed across all three datasets were retained. This ensured that every
+trading signal was generated from a complete and synchronised set of ETF and
+foreign exchange data.
+
+The final dataset therefore consists of one observation per trading day containing the
+prices of TQQQ, the currency-adjusted prices of LQQ3, and the corresponding
+GBP/USD exchange rate. These variables form the basis for constructing the
+adjusted price ratio, calculating the Exponential Moving Average (EMA), rolling
+standard deviation, Z-score trading signals, and all subsequent portfolio performance
+and risk measures presented in this paper.
+
+
+
+4. Initial Results
+This section presents the empirical findings of the TQQQ/LQQ3 pairs trading
+strategy during the sample period. To establish a baseline for performance, we first
+evaluated the strategy using a fixed set of standard parameters before any advanced
+optimization was applied.
+
+4.1 Baseline Parameterization
+
+For this initial analysis, the model’s sensitivity inputs were configured to represent a
+moderate, standard mean-reversion setup. The baseline parameters were set as
+follows:
+
+   ●​   EMA Window (𝑁): 20 periods. This provides a balanced moving average that
+        is responsive to recent price action without being overly sensitive to intraday
+        noise.
+
+   ●​   Entry Z-Score: 0.75. A position is initiated when the ratio deviates by
+        three-quarters of a standard deviation from the mean, representing a
+        moderate pricing dislocation.
+   ●​   Exit Z-Score: 0.25. The position is held until the ratio reverts to within a
+        quarter of a standard deviation from the mean, ensuring the bulk of the
+        convergence is captured.
+
+   ●​   Transaction Cost: 0.15% per trade. This friction accounts for the bid-ask
+        spread and institutional commission structures across both the US and UK
+        legs.
+
+   ●​   Risk-Free Rate: 4.00% (Annualized). This reflects a standard baseline yield
+        for short-term government treasuries during the period, used to calculate
+        excess returns.
+
+Using these baseline inputs, the strategy generated the following performance
+profile.
+
+4.2 Absolute Returns: Total and Annualized
+
+   ●​   Total Strategy Return: 136.34% over 405 days for which clean data was
+        available
+
+   ●​   Annualized Return: 70.77%
+
+   ●​   Annualized TQQQ Market Return (Benchmark): 29.05% during the period
+
+
+
+
+The return of 136.34% demonstrates that the model successfully identified and
+exploited pricing inefficiencies between the US and UK markets. Generating a return
+of this magnitude over the sample period indicates that the strategy did not rely on a
+few anomalous outlier events, but rather captured a consistent, high-frequency
+series of spread convergences. Every time the EMA/Z-score threshold was
+breached, the model effectively synthesized a profit from the structural misalignment
+of the two identical indices.
+When compounded and scaled to a standard 252-day trading year, the strategy
+yields an Annualized Return of 70.77%. This 70.77% figure is highly significant when
+viewed alongside the underlying benchmark. During the same period, simply buying
+and holding the TQQQ generated an annualized return of 29.05%. The strategy
+outpaced this long-only, highly directional benchmark by more than double (a spread
+of over 41 percentage points). This outperformance implies that the strategy's
+returns are not simply a byproduct of a broader bull market in the tech sector, but
+rather the result of active, uncorrelated alpha generation.
+Crucially, these returns are reported strictly net of the 0.15% transaction cost applied
+to every directional change in the signal. The fact that the total return remained at
+136.34% proves that, with this specific set of parameter inputs, the magnitude of the
+US/UK pricing gap was wide enough—and the average profit per trade was large
+enough—to aggressively overcome the persistent drag of trading fees and bid-ask
+slippage.
+4.3 Risk Profile: Volatility and Drawdown
+   ●​ Annualized Volatility: 10.37%
+   ●​ Benchmark Volatility (TQQQ): 69.17%
+   ●​ Maximum Drawdown: -2.21%
+To accurately evaluate the strategy's triple-digit returns, one must rigorously examine
+the risk profile required to achieve them. The primary challenge in trading TQQQ and
+LQQ3 is their 3x daily reset mechanism, which makes the underlying assets
+inherently hyper-volatile. Typically, a long position in these leveraged ETFs exposes
+an investor to extreme price swings; however, the strategy’s Annualized Volatility
+was remarkably low at just 10.37%. This stands in stark contrast to the 69.17%
+volatility observed in the TQQQ benchmark over the same period.
+This divergence is academically significant. It indicates that the long/short
+construction of the pair successfully neutralized movements of the ETFs they were
+based on. By simultaneously holding long and short positions across the two
+jurisdictions, the strategy effectively "cancels out" the systemic market moves,
+leaving the investor exposed only to the relative pricing gap (the idiosyncratic risk).
+The transition from nearly 70% volatility down to approximately 10% volatility
+demonstrates the efficiency of the statistical arbitrage in consistently achieving
+similar returns.
+This risk reduction is further validated by the Maximum Drawdown of just -2.21%. In
+the context of leveraged instruments, a peak-to-trough decline of merely 2.21% is an
+exceptional result. A drawdown this shallow implies that the strategy rarely suffered
+consecutive losses, and when the ratio did move against the model’s position, it did
+not deviate far before mean-reverting.
+From a portfolio management perspective, this "pain threshold" of approximately 2%
+makes the strategy highly scalable. It suggests returns could be consistently made
+without risking a catastrophic margin call or capital depletion. This level of capital
+preservation is rarely seen in directional equity strategies and highlights the primary
+benefit of the pairs-trading approach.
+
+
+4.4 Risk-Adjusted Performance: The Sharpe Ratio
+
+   ●​   Sharpe Ratio: 6.44
+
+A Sharpe Ratio of 6.44 is an extraordinary outcome and places this TQQQ/LQQ3
+pair in a rare category of efficiency. Mathematically, this figure indicates that for every
+1% of annualized volatility (risk) the strategy endured, it generated a remarkable
+6.44% of excess return above the 4% risk-free rate baseline. This high ratio is a
+direct consequence of the strategy's low volatility which greatly increases its Sharpe
+Ratio
+Beyond the raw numbers, a ratio this high suggests that the strategy’s equity curve is
+exceptionally smooth, characterized by a steady, linear ascent with very little
+variance. In statistical terms, it implies a high degree of confidence that the returns
+are statistically significant and not the result of random chance. It strongly supports
+the hypothesis that the strategy is capturing a persistent, structural pricing
+dislocation between the US and UK jurisdictions resulting in a risk-adjusted profile
+that far exceeds traditional long-only or even most sophisticated long/short equity
+portfolios.
+4.5 Market Neutrality: Correlation and Beta
+   ●​ Correlation to TQQQ: -0.0413
+   ●​ Beta vs. TQQQ: -0.0062
+The primary objective of a pairs trade is to function as a pure "Equity Market Neutral"
+(EMN) strategy. The efficacy of this neutralization is quantified through Correlation
+and Beta, both of which indicate a near-total decoupling from the broader market.
+The Correlation coefficient of -0.0413 demonstrates that there is practically zero
+linear relationship between the daily price movements of the Nasdaq-100 (as
+represented by TQQQ) and the returns of the strategy. While the market may be
+trending strongly in either direction, the strategy’s equity curve remains independent,
+moving according to the internal mechanics of the spread rather than the external
+pressure of the index.
+Furthermore, a Beta of -0.0062 suggests that the strategy carries no systematic
+market risk. Since -0.0062 is statistically indistinguishable from zero, if the broader
+technology sector were to crash or rally significantly in a single session, the
+mathematical expectation for the strategy’s movement—based on market exposure
+alone—would be virtually non-existent.
+This lack of sensitivity implies that the profit is derived purely from the convergence
+of the jurisdictional pricing gap, which protects the portfolio against broader
+macroeconomic shocks, interest rate pivots, or systemic equity sell-offs. This
+provides a diversification benefit as it lets it generate aggressive returns during
+periods of market growth or stagnation.
+4.6 Idiosyncratic Edge: Jensen’s Alpha
+
+   ●​   Alpha (Annualized): 66.93%
+
+Jensen’s Alpha serves as the definitive statistical proof of the strategy’s idiosyncratic
+edge, providing a precise measure of the value added by the model beyond what
+could be earned through simple market exposure. By isolating the return generated
+specifically by the pairs trading logic, alpha removes the noise of broader market
+movements and the baseline risk-free rate. An annualized alpha of 66.93% provides
+a rigorous confirmation that the moving average and Z-score parameters are
+capturing significant, repeatable pricing inefficiencies that far exceed the
+performance of the general market. This helps to quantify the true magnitude of the
+opportunity available when pairing two leveraged ETFs across the UK and the US.
+
+
+
+5. Robustness Check and Sensitivity Analysis
+A critical step in validating any algorithmic strategy is the robustness check. The goal
+is to determine if the strategy’s performance is a result of a specific, narrow set of
+parameters—commonly known as over-fitting—or if the underlying edge is persistent
+across various configurations. By varying the EMA duration, the Z-score spread, and
+the transaction costs, we can identify the strategy's breaking point and its optimal
+operating range.
+
+5.1 Sensitivity to EMA Lookback Duration
+
+The Exponential Moving Average (EMA) serves as the strategy’s anchor, defining the
+"fair value" from which the ratio deviates. We tested the strategy’s total return across
+five different lookback periods to observe how the speed of the mean-reversion
+signal impacts profitability.
+I observed that with different EMAs we received these returns:
+
+   ●​ EMA 10: 128.19%
+
+   ●​   EMA 20: 136.34%
+
+   ●​   EMA 30: 127.59%
+
+   ●​   EMA 40: 127.58%
+
+   ●​   EMA 50: 129.76%
+
+
+
+The results indicate that the strategy is remarkably stable across a wide range of
+lookback periods, with returns consistently hovering between 127% and 136% which
+helps us alleviate fears that the strategy had been overfitting. At an EMA of 10, the
+model is perhaps too reactive to short-term noise, leading to premature entries.
+Conversely, as the EMA extends toward 50, the mean becomes slower to react to
+structural shifts in the ratio, which slightly dampens the return. However, the fact that
+even a 50-period EMA yields nearly 130% suggests that the jurisdictional spread is a
+persistent phenomenon that does not require perfect timing to exploit.
+
+5.2 Sensitivity to Z-Score Thresholds (Spread Width)
+
+The Z-score thresholds determine the "trigger" for entering and exiting trades. A
+narrow spread (0.6 entry / 0.4 exit) seeks to capture smaller, more frequent
+fluctuations, while a wide spread (0.9 entry / 0.1 exit) waits for more significant
+dislocations.
+I observed that with different EMAs we got these returns:
+
+   ●​ Narrow (Entry 0.6, Exit 0.4): 133.35%
+
+   ●​   Medium (Entry 0.75, Exit 0.25): 136.34%
+
+   ●​   Wide (Entry 0.9, Exit 0.1): 123.71%
+
+The medium spread of 0.75/0.25 represents the optimal balance for this strategy.
+The narrow configuration (133.35%) performs admirably but likely suffers from
+increased transaction costs due to a higher frequency of trades. By tightening the
+exit to 0.4, the strategy leaves potential profit on the table by closing positions before
+the ratio has fully reverted to the mean. On the other end of the spectrum, the wide
+configuration (123.71%) suffers from opportunity cost. By waiting for a 0.9 Z-score to
+enter, the model misses several smaller but profitable mean-reversion events.
+Furthermore, an exit at 0.1 requires a near-perfect return to the mean, which may
+keep the strategy in a trade for too long, exposing it to unnecessary risk. The results
+suggest that while the best strategy for jurisdictional arbitrage lies in capturing
+moderate deviations that occur frequently enough to compound capital rapidly,
+significant profits can be earned even when spreads are narrower or wider
+
+5.3 Sensitivity to Transaction Costs (The Friction Limit)
+
+Transaction costs are often very harmful for high-frequency pairs trading. We tested
+the strategy against five levels of cost to find how the strategy reacted to market
+frictions.
+   ●​   0.00% Cost: 211.00%
+
+   ●​   0.15% Cost: 136.34%
+
+   ●​   0.30% Cost: 79.52%
+
+   ●​   0.45% Cost: 36.31%
+
+   ●​   0.75% Cost: 3.46%
+
+This analysis reveals the strategy's extreme sensitivity to execution quality. In a
+frictionless environment (0.00% cost), the strategy is hyper-profitable, returning
+211%. However, as costs increase, the decay in performance is non-linear. At
+0.15%, our baseline, the strategy remains highly viable at 136.34%. By the time
+costs reach 0.45%, the return drops to 36.31%, which barely outperforms the
+buy-and-hold TQQQ benchmark while carrying significantly more operational
+complexity.
+
+At 0.75% cost—which might represent a retail investor paying high commissions and
+wide bid-ask spreads—the strategy effectively breaks, returning only 3.46%. This
+shows that the TQQQ/LQQ3 arbitrage is a strategy that depends heavily on the
+ability to execute trades with low slippage and minimal commissions typical of
+institutions rather than retail investors. The rapid decay in returns as costs rise
+highlights that the spread being captured is relatively thin, requiring a high-volume,
+low-cost execution environment to remain profitable.
+
+5.4 Robustness Conclusion
+Overall, the robustness checks confirm that the strategy is statistically sound. It is not
+overly dependent on a specific moving average window or a hyper-specific Z-score
+entry. However, the cost of execution is a significant factor that can greatly affect
+returns. So long as transaction costs remain below 0.30%, the strategy provides a
+superior risk-adjusted return compared to the benchmark, validating the core thesis
+of cross-border jurisdictional arbitrage.
+
+
+
+6. Concluding Remarks
+We have thoroughly analysed the profitability of a pair trading strategy between
+TQQQ and LQQ3, two ETFs that track the same index but in different countries. We
+have discovered that by using a mean-reversal strategy we can exploit fluctuations in
+the price of the ETFs. This can lead to impressive returns which occur both in bull
+and bear markets. When we analysed how robust the strategy was we found that
+while factors such as the EMA duration and the Z score spread seemed to hardly
+affect the strategy’s return, the amount of transaction cost was crucial with small
+changes greatly changing profits. This shows that there is significant potential in
+cross-country pair trading strategies, and that more research is needed to analyse
+their potential profitability.
+
+
+
+References
+Do, B. and Faff, R. (2010) 'Does Simple Pairs Trading Still Work?', Financial Analysts
+Journal, 66(4), pp. 83–95.
+Do, B. and Faff, R. (2012) 'Are Pairs Trading Profits Robust to Trading Costs?',
+Journal of Financial Research, 35(2), pp. 261–287.
+Elliott, R.J., Van der Hoek, J. and Malcolm, W.P. (2005) 'Pairs Trading', Quantitative
+Finance, 5(3), pp. 271–276.
+Gatev, Goetzmann, W.N. and Rouwenhorst, K.G. (2006) 'Pairs Trading: Performance
+of a Relative-Value Arbitrage Rule', Review of Financial Studies, 19(3), pp. 797–827.
+
+Lesmond, D.A., Schill, M.J. and Zhou, C. (2004) 'The Illusory Nature of Momentum
+Profits', Journal of Financial Economics, 71(2), pp. 349–380.
+
+Perlin, M.S. (2009) 'Evaluation of Pairs Trading Strategy at the Brazilian Financial
+Market', Journal of Derivatives & Hedge Funds, 15(2), pp. 122–136.
+
+Stoll, H.R. and Whaley, R.E. (1983) 'Transaction Costs and the Small Firm Effect',
+Journal of Financial Economics, 12(1), pp. 57–79.
+Vidyamurthy, G. (2004) Pairs Trading: Quantitative Methods and Analysis. Hoboken,
+NJ: John Wiley & Sons.
+
+
+
+Appendix A - Github
+The dataset, Python implementation, and supplementary materials for this study are
+hosted in the public repository:
+https://github.com/aaravshah0608/Pairtrading_Strategy_Research.
+
+The repository includes the Jupyter notebook code used for modelling the strategy
+and a guide for reproducing the results.
+

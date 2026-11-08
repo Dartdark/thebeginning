@@ -47,3 +47,7 @@ engine reconstruction solely to produce another mechanical test. Existing negati
 is retained. If genuinely new inputs arrive, authenticate one dividend/normal/early-close interval and one
 complete baseline/candidate fill/cash bridge, then coverage/cost audit and separate TEST/preregistration.
 The paper's reported near-100%DSR cannot replace that admission or establish future profitability.
+
+Later user clarification explicitly authorizes ES data for a **labeled futures adaptation**. That test was completed:
+`agents/codex/results/delgado_es_20261108.md`. Candidate failed2018–22design versus its matched baseline.
+The earlier no-substitution limit remains about claiming exact SPY reproduction, not a ban on this authorized ES test.

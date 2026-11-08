@@ -92,6 +92,18 @@ This percentage-limit rule is distinct from E06's opposite-five-minute-return po
 this exact offset fails, and its headline is insufficient merit for a new cross-book rescue sweep. No new queue,
 acquisition task, paused-program restart, allocation or live change follows.
 
+**Later explicit user test, 2026-11-08:** [selected-book outcome](results/mae_selected_20261108.md),
+[frozen causal limit runner](../../analysis/codex_mae_selected_20261108.py).
+The user requested a test after the source review. Vault Break, FC2B and S47 were selected before new returns;
+only the fixed 0.25% adverse offset was tried, with one-minute activation, one-tick trade-through, unchanged
+virtual-parent exits and one-MNQ costs ($1.24 RT / one adverse market-stop tick; doubled stress).
+Design 2018-04-02–2022-12-30: FC2B net $11,990.50→$1,358.38 and S47 $14,126.42→$6,228.92, both worse in every
+design year. Their missed BASE trades earned $23,225.62 / $19,883.00, exceeding filled-entry price gains
+$12,476.50 / $11,878.50. VB's incomplete subset improved $1,089.68 but stayed negative, paired t 0.66, with
+106 unknown paths; this is not evidence of a full-VB gain. No profile passed. Nine definitions ran, six nulls
+unused; no controls/2023+/native account stages were earned. Fixed virtual-parent replay is not regenerated
+native brackets, tick/queue parity or measured account protection. No offset/side/window rescue or book change.
+
 ### E06 — Fast-alpha delayed-entry/exit overlay: timing and random-delay controls
 
 Sources: Zarattini and Pagani, Concretum QuanTips #2 (2026);
@@ -1647,6 +1659,15 @@ Source: Delgado, *“Beat the Market” Revisited*, SSRN7323419, August20,2026;
   replay. Full trial series needed for independent statistical audit only. A new strategy test can instead freeze
   explicit interpretations on admitted free data. No ETF-cost or IEX-only volume substitution into futures.
 - Status: methods/execution reference and low-priority D55data watch; zero new financial trials, no allocation.
+- Subsequent user-authorized [ES historical test](results/delgado_es_20261108.md): three definitions fail
+  candidate design advancement; no allocation. Twelve pre-return synthetic checks and gross/net ledger
+  reconciliation pass. Freeze whole-lot quantity at the known decision close, never future fill-open; record
+  fill/marked leverage breaches rather than retrospectively resizing. Unknown requested fills/held paths remain
+  unknown calendar days. Source-like4xrequested exposure is not a broker-margin or gap-loss guarantee.
+- [Unchanged baseline validation](results/delgado_es_baseline_20261108.md) under the user's later nomination
+  verifies2018–22daily/trade CSVs byte-for-byte before inspecting2023+summaries. Preserve exact shared
+  prefixes to distinguish later outcomes from silent implementation changes. Recent strength fails; no measured
+  execution savings, native account promotion or reopening of the rejected modifications.
 
 ### E09/E12 follow-up — Slow trend signals, actual-position turnover and no-trade bands
 
@@ -1703,6 +1724,23 @@ Source: Malan, *One Ticker Deep*, SSRN7073258, July2026 draft.
 - Next check within a separately justified portfolio study: frozen realized contribution ledger, separately
   labeled exclusion/reselection and matched cash/universe/risk benchmarks. No new test, winner-based filter,
   acquisition, monitoring process, guaranteed hedge or allocation follows from this source review.
+
+### E04 follow-up — Crossover metrics, day win rates and cash attribution (2026-11-08)
+
+Source: Arnold, SSRN6684499, April27,2026 capstone study.
+[Review](results/crossover_6684499_review_20261108.md),
+[source/arithmetic receipt](../../analysis/outputs/codex_crossover_6684499/source_audit.json).
+- Evidence: primary text/tables and visual Table3 check, no empirical replication. Author50/200 stock portfolio
+  annualized return12.04% versus17.27%, Sharpe0.779 versus0.849, drawdown−25.79% versus−35.23%. Negative
+  daily benchmark-difference t−2.169 is not a risk-adjusted-alpha or Sharpe-difference test.
+- Units: `(1 + mean daily return)^252 − 1` is not path CAGR; the printed Sharpe daily/annual conventions need
+  code reconciliation. The52.10% win rate is positive days, not winning trades. Cash return and actual timing
+  need matching; lower drawdown alone does not identify diversification or superior payout/account outcomes.
+- Limits: same five-stock basket in both benchmarks; crossover exposure, warm-up and weight maintenance can
+  differ. Constant20% return slots require a reconciled rebalance/cost ledger, beyond charging10bp only on
+  crossover changes. No original code/input histories or native fill evidence supplied; no savings verified.
+- Use only when a separate comparison is justified: freeze metric definitions, cash/benchmark dates and clocks,
+  then reconcile trade-to-portfolio returns. No new data acquisition, MA/ML/regime search, filter or allocation.
 
 ## Minimum record for any later execution comparison
 
@@ -2085,6 +2123,25 @@ preliminary draft, retained November 7, 2026; NYSE/Nasdaq stock switches 2009–
   automatically a specifically identified dark pool. No original TAQ replication, trading signal, measured saving,
   TODO strategy/data-shopping entry, order-routing installation, portfolio change or external message.
 
+
+### E09/E19/E30 follow-up — Cross-venue leveraged products need native units and clocks
+
+SSRN7065278, reviewed 2026-11-08: [source review and registered audit](results/pair7065278_20261108.md).
+The literal author parser converts declared same-unit GBX prices 499/501 into 49900/501. This is a synthetic
+counterexample, not measured historical inflation: fix units from source metadata and corporate-action records,
+never from a price threshold. Even granting its UTC claim, 16:00 UTC is 17:00 London in summer, outside ordinary
+continuous trading, and not a constant 11:00 New York. A date join and lagged position do not certify
+simultaneous executable quotes or later fills. TQQQ and LQQ3 are different issuer/products, not fungible listings.
+
+The paper's multiplicative cost equation reduces losing-trade losses; the actual code/workbook instead
+subtracts costs. Preserve that distinction. Its alpha spreadsheet references the wrong sheet/cells. Define
+NAV, gross exposure, collateral, borrow, FX and native leg costs before interpreting a pair-return difference.
+Fifteen engineering assertions across nine groups reproduced the registered findings; source admission failed.
+No historical return series, execution savings, portfolio result or live recommendation was established.
+Smallest next check only with new matching evidence: one native two-leg timestamp/unit/quantity/cash ledger,
+then a separate corrected protocol. The same accounting lessons apply broadly; its equity/ETP holds are not
+evidence for our Apex futures plans. No live/VPS/broker change.
+
 ### E09/E11/E12 follow-up — RSI ratios need domain, sizing and confirmation clocks
 
 Source: Tamele/Khoong/Bhattacharyya, [COR SSRN7164538 review](results/cor_dip_7164538_review.md),
@@ -2113,3 +2170,11 @@ Evidence: source screenshot, pinned static code, official Pine-v5 documentation 
 12 checks pass, zero market-return trials, no Pine runtime verification. BTC venue, tester overrides, sizing and trade ledger
 remain unresolved. Next only with new exact settings/code/trades: reconcile one entry/protective-exit lifecycle before an
 eligible preregistered return study. No new alpha/data-shopping queue, port, allocation, paid collection or live action.
+
+
+E09/E19/E30 reconstruction follow-up (2026-11-08): user-authorized corrected
+[research components](results/pair7065278_reconstruction_20261108.md) pass28synthetic unit, quote-clock,
+causal-indicator and state-transition assertions. Explicit GBX/GBP replaces the price-level heuristic;
+15:00UTC is a provisional ordinary-session overlap, still requiring authenticated calendars and later fills.
+This is not a complete execution/cash engine, measured saving, profitable strategy or reversal of the source
+rejection. New free history probes hit proxy403. Missing native history/borrow/cash keeps returns blocked.

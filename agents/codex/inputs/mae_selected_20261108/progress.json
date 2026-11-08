@@ -1,0 +1,121 @@
+{
+  "program": "user-mae-selected-20261108",
+  "status": "completed_design_reject",
+  "max_definitions": 15,
+  "executed_definitions": 9,
+  "definitions": [
+    {
+      "id": "PB706_VB_BASE",
+      "parent": "VB",
+      "role": "baseline",
+      "status": "executed_design_no_advance"
+    },
+    {
+      "id": "PB706_VB_LIMIT025",
+      "parent": "VB",
+      "role": "candidate",
+      "status": "executed_design_no_advance"
+    },
+    {
+      "id": "PB706_VB_LIMIT025_STRESS",
+      "parent": "VB",
+      "role": "stress",
+      "status": "executed_design_no_advance"
+    },
+    {
+      "id": "PB706_VB_RANDOM_TIME",
+      "parent": "VB",
+      "role": "control",
+      "status": "unused_released_design_failed"
+    },
+    {
+      "id": "PB706_VB_RANDOM_DROP",
+      "parent": "VB",
+      "role": "control",
+      "status": "unused_released_design_failed"
+    },
+    {
+      "id": "PB706_FC2B_BASE",
+      "parent": "FC2B",
+      "role": "baseline",
+      "status": "executed_design_no_advance"
+    },
+    {
+      "id": "PB706_FC2B_LIMIT025",
+      "parent": "FC2B",
+      "role": "candidate",
+      "status": "executed_design_no_advance"
+    },
+    {
+      "id": "PB706_FC2B_LIMIT025_STRESS",
+      "parent": "FC2B",
+      "role": "stress",
+      "status": "executed_design_no_advance"
+    },
+    {
+      "id": "PB706_FC2B_RANDOM_TIME",
+      "parent": "FC2B",
+      "role": "control",
+      "status": "unused_released_design_failed"
+    },
+    {
+      "id": "PB706_FC2B_RANDOM_DROP",
+      "parent": "FC2B",
+      "role": "control",
+      "status": "unused_released_design_failed"
+    },
+    {
+      "id": "PB706_S47_BASE",
+      "parent": "S47",
+      "role": "baseline",
+      "status": "executed_design_no_advance"
+    },
+    {
+      "id": "PB706_S47_LIMIT025",
+      "parent": "S47",
+      "role": "candidate",
+      "status": "executed_design_no_advance"
+    },
+    {
+      "id": "PB706_S47_LIMIT025_STRESS",
+      "parent": "S47",
+      "role": "stress",
+      "status": "executed_design_no_advance"
+    },
+    {
+      "id": "PB706_S47_RANDOM_TIME",
+      "parent": "S47",
+      "role": "control",
+      "status": "unused_released_design_failed"
+    },
+    {
+      "id": "PB706_S47_RANDOM_DROP",
+      "parent": "S47",
+      "role": "control",
+      "status": "unused_released_design_failed"
+    }
+  ],
+  "lease": null,
+  "source_review": "agents/codex/results/ssrn7063478_review_20261108.md",
+  "user_override": "User explicitly requests testing on selected book strategies after source-only DONT TEST decision; old review preserved.",
+  "scout_progress_sha256": "a1a6a234549adeb9f810ea33bcd720a9faca54621bf1188484446552f76e1d45",
+  "root_trials_sha256": "40597f5c61a99f0fb913c53067b630b4a2583af2643dcc44a0b567e9a372af4e",
+  "continuation": "Complete. No controls, 2023+ or account stage earned. Do not try another offset/side/window under this reservation.",
+  "unused_released_definitions": 6,
+  "last_run": "2026-11-08T11:19:35.940891+00:00",
+  "lease_history": [
+    {
+      "run_id": "user-mae-selected-20261108",
+      "owner": "codex-mae-selected",
+      "claimed_at": "2026-11-08T11:12:26.188711+00:00",
+      "expires_at": "2026-11-08T13:12:26.188711+00:00",
+      "checked_parent": "1d8ff7d6580eecdb48095f16abd01ddbe8f74e3c",
+      "released_at": "2026-11-08T11:19:35.940891+00:00",
+      "reason": "All three profiles stop at frozen design; later stages not earned"
+    }
+  ],
+  "report_path": "agents/codex/results/mae_selected_20261108.md",
+  "run_receipt": "analysis/outputs/codex_mae_selected_20261108/run.json",
+  "preregistration_commit": "6e2b55417b737d33018eb4972f3addd06b81fe12",
+  "notification_key": "ssrn7063478:202607:selected-three:completed-design-reject:20261108"
+}
