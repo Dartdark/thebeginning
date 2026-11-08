@@ -1503,6 +1503,20 @@ Source: Chernov, Kelly, Malamud and Schwab, SSRN7596842, October11,2026 version.
 - Next check only within a separately justified frozen estimator comparison: causal features, common opportunity
   set, chronological fitting, feasible weights, actual costs and account paths. No new data request or return trial.
 
+### E11/E12 follow-up — Assemblage VAR: economic shock versus available trading input
+
+Source: Barrette/Goulet Coulombe/Reinicke, SSRN7508198, [review and pinned source audit](results/assemblage_var_7508198_review.md), November7,2026.
+- Use: distinguish a retrospective, jointly fitted macro index and its recursively identified innovation from a
+  public input known before an order. Changing an index changes the shock; larger macro responses are not trading returns.
+- Evidence: paper/code inspection and synthetic normalization check. Sorting zero-mean inputs does not preserve
+  rank means; actual replication code imposes a mean constraint. No empirical execution saving or strategy result.
+- Limits: monthly revised climate/macro histories, full-history seasonal adjustment/weights, in-block VAR-refit CV,
+  different printed/code penalty conventions and benchmark/assembled gap-dummy handling. No native futures fill model.
+- Prerequisites/next check: only within an independently justified future study, reconcile one original release/vintage,
+  fold-local feature/weight fit and later executable fill; compare identical calendars and actual net units. Free
+  transformed panels were obtained, so this is not a new missing-data alpha lead. No need to repeat acquisition.
+- Status: methods/clock reference, no return trial, new queue entry, allocation, logger or live-system change.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.

@@ -1,0 +1,1481 @@
+     Building Macroeconomically Relevant
+    Climate Indices via the Assemblage VAR
+
+                                      Christophe Barrette
+                                        Bocconi University
+
+                                  Philippe Goulet Coulombe*
+                                 Université du Québec à Montréal
+
+                                            Tim Reinicke
+                                              ETH Zürich
+
+
+
+
+                                                Abstract
+
+        What should a macroeconomically relevant climate index contain? The composition
+        is inherently ambiguous, and aggregation choices affect structural inference. We intro-
+        duce the Assemblage VAR, which jointly estimates nonnegative aggregation weights
+        and VAR parameters by maximizing the system likelihood-gain criterion, effectively
+        outsourcing aggregation to observed macroeconomic dynamics. Two variants op-
+        erate in component-space and rank-space, reweighting named subcomponents or
+        emphasizing regions of the cross-sectional distribution. Applied to disaggregated U.S.
+        climate data from the Actuaries Climate Index and NOAA, VARs using the assembled
+        climate measures yield contractionary impulse responses that are substantially larger
+        than those estimated using fixed-weight benchmarks. Weights emphasize high-wind
+        variables and distributional tails over slow-moving components such as sea level.
+
+
+
+
+  * Contact: p.gouletcoulombe@gmail.com. We thank Karin Klieber for helpful discussions. We also thank
+Mohamed L. A. Guirmeye for research assistance. Replication codes are available here. This draft: 09-22-26.
+1    Introduction
+What is climate from a macroeconomic perspective? Climate is a high-dimensional phenomenon: temper-
+atures, precipitation, winds, drought indices, sea levels, all tracked across many locations and time scales.
+When studying the effects of climate on the economy, empirical work typically represents climate with
+one or a small number of scalar measures (composite indices, temperature or precipitation anomalies, or
+shock series) and estimates their dynamic effects in VARs, local projections, or related macroeconometric
+frameworks (Deschênes and Greenstone, 2007; Dell et al., 2012; Kahn et al., 2021; Faccia et al., 2021;
+Huber et al., 2023; Ciccarelli and Marotta, 2024; Kim et al., 2025; Bilal and Känzig, 2026). This creates a
+measurement problem, not one of noise, but of relevance. Which dimensions of climate actually matter
+for macroeconomic fluctuations is far from obvious.
+    Consider the Actuaries Climate Index (ACI), a composite of six standardized climate variables
+developed by North American actuarial organizations (Mathewson, 2022; Actuaries Climate Index, 2025);
+it is increasingly used in climate-macro research (Sheng et al., 2024; Liao et al., 2024; Kim et al., 2025).
+Sea level rise is first-order for coastal economies but largely irrelevant for the U.S. Midwest. Different
+types of extremes propagate through different channels and at different speeds. Given the input-output
+linkages and geographic complexity of the economy, it is far from obvious how one would aggregate
+these disparate phenomena into a single number that captures what matters for the business cycle. What
+we would like is a maximally macro-relevant climate index.
+
+The Assemblage VAR. We outsource the aggregation problem to the macroeconomic data. Rather
+than building a climate index in a first step and then estimating a VAR in a second, we do both at
+once. The Assemblage VAR endogenizes variable measurement within the VAR itself: aggregation
+weights on disaggregated climate components and VAR parameters are optimized jointly to maximize
+the system-level likelihood gain over a benchmark. The resulting index has a precise interpretation: it is,
+by construction, the climate series that is maximally coherent with a specified VAR of the economy. This
+goes both ways: the assembled variable improves the predictability of macroeconomic outcomes from
+climate, but also improves the predictability of the climate variable itself from the macro system.
+    The approach comes in two variants, both building on the assemblage regression framework of
+Goulet Coulombe et al. (2024). Component-space assemblage learns how the aggregation weights
+are allocated across named constituents (e.g., winds versus sea level). Rank-space assemblage learns
+how the weights are allocated across the cross-sectional distribution, producing a supervised trimming
+rule analogous to the trimmed-mean inflation (Bryan and Cecchetti, 1994). The key departure from
+Goulet Coulombe et al. (2024), who learn core inflation weights by maximizing univariate predictability of
+future headline inflation, is that the objective here is system-wide: the assembled variable must improve
+the coherence of the entire VAR, not just forecast a single target.
+
+Empirical results. We assemble a Macro-Relevant Climate Index (MRCI) at three levels of disaggre-
+gation: national (reweighting five of the six ACI components), regional (34 constituents across seven
+
+
+
+                                                     1
+U.S. regions), and a NOAA-based specification (82 climate and atmospheric variables across ten zones).1
+Under the ACI benchmark, impulse responses of industrial production to an innovation in the benchmark
+climate measure are barely distinguishable from zero. In each specification the object of interest is the
+recursively identified innovation to that specification’s own climate measure, which is ordered first in the
+VAR. The benchmark specification uses the transformed equal-weight analogue of the ACI, while the
+assembled specifications replace that benchmark with a learned climate aggregate. The picture changes
+markedly once the climate measure is assembled rather than fixed. The national specification, which
+reweights the five components, yields a response close to the benchmark’s; it is the regional and NOAA
+specifications, with their richer panels, that yield industrial-production contractions up to twice the
+response estimated using the benchmark measure and render them statistically significant. The responses
+of the other variables are more nuanced, as detailed below. Spatial detail matters: the estimator exploits
+geographic heterogeneity to assign greater weight to regions and climate types that are more strongly
+associated with the macro system according to the learning criterion.
+   The assembled index tracks the ACI through the 1960s–2000s but the two series separate in level
+afterward. The ACI trends persistently upward, reflecting components that may be less relevant at
+business-cycle frequencies. The index was designed by actuaries to price insurance risk, so it natu-
+rally loads on sea level, relevant for insured coastal property but not for business-cycle transmission.
+Component-space weights confirm this pattern in the regional specification: high-wind extremes receive
+about 40% of the weight while sea level drops to single digits, consistent with episodic, high-damage
+events rather than gradual trends. Rank-space weights concentrate on the tails of the cross-sectional
+distribution, locating the macro-relevant variation in the extremes.
+
+Related literature. Several approaches address the tension between high-dimensional disaggregate
+information and low-dimensional VARs; we position the Assemblage VAR relative to each.
+Climate and macroeconomics. A rapidly growing literature studies the macroeconomic effects of climate
+by embedding low-dimensional scalar representations of climate in VARs, local projections, and related
+macroeconometric frameworks. In practice, these scalars take several forms: selected physical variables
+and shock series (temperature/weather anomalies and identified innovations) (Faccia et al., 2021; Lucidi
+et al., 2024; Ciccarelli et al., 2024; Bilal and Känzig, 2026), and the shocks built from richer climate
+information (e.g., drought-exposure measures) (Huber et al., 2023). A related strand uses such scalar
+measures to separate the demand and supply channels through which climate change reaches the
+macroeconomy (Ciccarelli and Marotta, 2024).
+   These scalar objects are typically constructed from expert judgment or equal weighting, unsupervised
+dimension reduction (such as the cross-country temperature factor (Marotta and Mumtaz, 2023) or the
+climate risk factors (Byrne and Vitenu-Sackey, 2024)) or text- and market-based indices (Engle et al., 2020;
+Gavriilidis, 2021; Ardia et al., 2023). The resulting object is not necessarily the one most relevant for
+macroeconomic dynamics: a latent factor that loads heavily on sea level or slow-moving temperature
+  1 Consecutive dry days (CDD) is excluded; see Section 3.1.
+
+
+
+
+                                                        2
+trends may explain most of the cross-section but carry little information about business-cycle transmission.
+The Assemblage VAR takes the opposite approach, learning the aggregation that maximizes coherence
+with a macroeconomic system rather than fidelity to the climate panel itself, applying the train-for-what-
+you-aim principle of Goulet Coulombe et al. (2024).
+Disaggregate information in VARs. One option, following Bańbura et al. (2010), is to include all disaggregate
+series directly in a large Bayesian VAR and rely on shrinkage for tractability. This yields impulse responses
+for every constituent, but not a single coherent index, and averaging those impulse responses does not
+recover the effect of a shock to a composite variable, because the shock to a portfolio is not a linear
+combination of isolated shocks. This connects to Bilal and Känzig (2026), who argue that aggregate
+climate shocks are more informative for macroeconomic outcomes than granular local ones: what matters
+is the joint event, not the sum of its parts. A more structured approach, taken by Chang et al. (2024) and
+Marcellino et al. (2024), embeds the entire cross-sectional distribution as a functional object in the VAR;
+the Assemblage VAR takes a more parsimonious route, reducing the panel to a single scalar but learning
+that reduction from the data. Conceptually, this is also related to the MIDAS approach (Ghysels et al.,
+2004), which parameterizes and learns supervised temporal aggregation to condense high-frequency data
+at a lower frequency; we address the analogous problem in the cross-sectional dimension. Finally, Huber
+et al. (2025) propose coarsened Bayesian VARs that replace the exact likelihood with a robust alternative
+to correct for model misspecification, addressing the downstream consequences of incorrect aggregation,
+whereas the Assemblage VAR corrects the aggregation itself.
+Factor-augmented VARs. The FAVAR of Bernanke et al. (2005) is an economical way to compress a large
+panel and bring its information into a VAR. Its factors, though, are principal components with unre-
+stricted loadings, so the leading factor need not correspond to the combination most relevant for the
+macroeconomic system, especially when the panel is drawn from an outside source, as our climate data
+are. One naturally expects the dominant factor to matter, but the two need not coincide. The Assemblage
+VAR instead builds a single, interpretable index, a non-negative weighted average of named constituents,
+endogenously within the VAR, so that the measurement step is aligned with the system by construction
+rather than carried out in a separate first stage as in principal components.
+Reduced-rank VARs. The method is also related to the literature on reduced-rank and index-structured
+VARs (Reinsel, 1983; Velu et al., 1986; Cubadda, 2025). When the macroeconomic variables depend on
+the lagged climate panel only through a single linear combination, the panel enters the macro block at
+each lag through one shared cross-sectional direction, a per-lag rank-one restriction. The Assemblage
+VAR induces such a structure, imposing the same index direction w at every lag, while further restricting
+the loading vector to a non-negative weighted average of named constituents, which makes it closely
+related to index-augmented autoregressions (Cubadda and Guardabascio, 2019). Unlike an unconstrained
+reduced-rank direction, which may combine constituents with both positive and negative weights, the
+simplex restriction prevents the index from being formed as a contrast of oppositely signed constituents
+and preserves a transparent interpretation of it as an aggregate measure of climate stress. It also avoids
+parameterizing the potentially high-dimensional dynamics of the constituent panel itself, whose dimen-
+
+
+                                                      3
+sion can become substantial when the panel contains dozens or hundreds of climate indicators. The
+rank-space variant departs further from this linear literature, replacing the index w′ Xt with a weighted
+average of order statistics, a nonlinear, threshold-emphasizing measurement.
+Supervised dimension reduction. The Assemblage VAR also builds on a methodological tradition of su-
+pervised aggregation. A large literature constructs core inflation measures by stripping out volatile
+components (Bryan and Cecchetti, 1994; Dolmas and Koenig, 2019), and Goulet Coulombe et al. (2024) for-
+malize this as a supervised aggregation problem, learning trimming weights that maximize predictability
+of future headline inflation. The broader supervised dimension reduction literature typically optimizes
+a single equation: the partial least squares (Kelly and Pruitt, 2015), the targeted predictors (Bai and
+Ng, 2008), or the pre-screened factors (Boivin and Ng, 2006). Recent approaches use flexible function
+approximation to learn nonlinear mappings from disaggregate inputs to macro outcomes (Clark et al.,
+2024; Goulet Coulombe, 2025). The Assemblage VAR optimizes a multivariate objective: the assembled
+variable must not only predict other variables in the system but must itself be predictable by them, so that
+the entire VAR is dynamically coherent.
+
+Outline. Section 2 formalizes the Assemblage VAR and introduces the system-level objective under
+interpretability constraints and regularization. Section 3 assembles a macro-relevant climate index from
+U.S. climate data. Section 4 concludes.
+
+
+
+2     Methodology
+This section formalizes the Assemblage VAR in its component- and rank-space variants.
+
+
+2.1    Setup and Learning Criterion
+Let {yt }tT=1 be a k-dimensional time series containing the benchmark variable of interest, xt , alongside
+other macroeconomic variables. The benchmark variable could be a climate index, a price index, or
+any similar aggregate constructed from a panel of disaggregated constituents. Let Xt ∈ Rd collect the
+disaggregated constituents of the benchmark variable xt ; in our climate application, Xt contains regional
+or component-specific climate measures. For weights w ∈ Rd , the assembled series is
+
+                                              xt∗ (w) ≡ w′ Xt .                                          (1)
+
+We form the VAR state by replacing xt with xt∗ (w):
+
+                                                          (− x ) 
+                                      yt (w) ≡ xt∗ (w), yt           ∈ Rk ,                              (2)
+
+
+
+
+                                                      4
+         (− x )
+where yt          denotes all variables except xt . For each fixed w, consider the reduced-form VAR(p) projection
+of yt (w):
+                                                              p
+                                      y t ( w ) = ν ( w ) + ∑ A j ( w ) y t − j ( w ) + u t ( w ),                (3)
+                                                             j =1
+
+where ν(w) is a k × 1 intercept, A j (w) are the k × k lag-coefficient matrices, and ut (w) is the innovation
+with covariance Σ(w). Equation (3) is a reduced-form description, not a structural one: it holds for each
+w as the projection of yt (w) on its own past. Changing w changes the assembled series, and with it every
+moment of yt (w), so the intercept, the coefficients, the innovation, and its covariance all depend on w.
+The model does not by itself single out a w; the objective below does.
+    For estimation, stack observations t = p + 1, . . . , T into matrices. Let n = T − p denote the effective
+sample size. Define Y(w) ∈ Rn×k as the matrix of dependent observations, with row t equal to yt (w)′ .
+Define the regressor matrix Z(w) ∈ Rn×(kp+1) , with row t equal to (1, yt−1 (w)′ , . . . , yt− p (w)′ ). Stacking
+the intercept and lag coefficients as B(w) = (ν(w)′ , A1 (w)′ , . . . , A p (w)′ )′ ∈ R(kp+1)×k , the system is
+
+                                                Y ( w ) = Z ( w ) B ( w ) + U ( w ),                              (4)
+
+where U(w) ∈ Rn×k is the matrix of residuals. For any fixed w, OLS applied equation by equation yields
+b T (w) = Z(w)′ Z(w) −1 Z(w)′ Y(w), residuals U
+                   
+B                                              b T (w) = Y(w) − Z(w)B b T (w), and residual covariance
+Σ
+b 1,T (w) = n−1 U
+                b T (w)′ U
+                         b T ( w ).
+Learning criterion. We choose w to maximize the VAR’s log-likelihood gain over a mean-only benchmark,
+namely an intercept-only model in which each component of yt (w) is predicted by its sample mean.
+Maximizing the VAR likelihood alone would reward weights that compress the assembled variable’s
+unconditional variance rather than weights that improve its dynamic fit. Differencing against a mean-only
+benchmark neutralizes this, isolating the incremental fit from dynamics. The resulting criterion is a
+multivariate generalization of the R2 improvement used in univariate supervised aggregation.
+    In the spirit of quasi-maximum likelihood, define for a fixed w, the Gaussian quasi-log-likelihood of
+the VAR projection as
+
+                                          nk           n          1 T
+                                                                  2 t=∑
+                      ℓT (B, Σ; w) = −       log(2π ) − log |Σ| −          ut (B; w)′ Σ−1 ut (B; w),              (5)
+                                          2            2              p +1
+
+                                          p
+where ut (B; w) = yt (w) − ν − ∑ j=1 A j yt− j (w). The Gaussian likelihood is used as a scoring rule for the
+reduced-form projection; the construction does not require the VAR innovations to explicitly be Gaussian.
+For each fixed w, all equations share the same regressor matrix Z(w), so equation-by-equation OLS
+coincides with the maximizer of (5) with respect to B.
+                                                                             b T (w) and Σ
+    Let ℓ̂1,T (w) denote the maximized VAR quasi-log-likelihood evaluated at B           b 1,T (w), and let
+                                                                                                            (0)
+ℓ̂0,T (w) denote the maximized quasi-log-likelihood of the mean-only benchmark yt (w) = µ(w) + ut (w)
+
+
+
+
+                                                                    5
+with covariance estimator Σ
+                          b 0,T (w). The feasible sample learning criterion is
+
+
+                                          ST (w) ≡ ℓ̂1,T (w) − ℓ̂0,T (w).                                   (6)
+
+With matching deterministic terms, ST (w) is the in-sample likelihood gain of the VAR over the nested
+mean-only benchmark, so weights are rewarded only insofar as the assembled series improves dynamic
+fit relative to its own mean-only representation. The criterion is a multivariate counterpart to the
+predictability criteria of Lo and MacKinlay (1997) and Goulet Coulombe and Göbel (2023), extended from
+a single forecasting equation to the full system.
+   The population counterpart of the average sample criterion is S(w) ≡ ℓ1⋆ (w) − ℓ0⋆ (w), where ℓ1⋆ (w)
+and ℓ0⋆ (w) are the per-observation Gaussian quasi-log-likelihoods of the VAR and mean-only projections,
+respectively, evaluated at their population projection coefficients and covariance matrices. Under
+                                                                                                 the rele-
+                                      p                                                             |Σ0⋆ (w)|
+                                                                                                        
+vant law of large numbers, n1 ST (w) −
+                                     → S(w). With matching deterministic terms, S(w) = 12 log       |Σ1⋆ (w)|
+                                                                                                                ,
+so S(w) measures the population likelihood gain of the VAR over the mean-only benchmark, equivalently
+one half of the log generalized-variance ratio. The unpenalized population target is the aggregation that
+makes the system most predictable, w∗ = arg minw∈W −S(w), where W ≡ {w ∈ Rd : w ≥ 0, 1′ w = 1}.
+It is defined by this predictability property and is not a physically “true” climate index. The feasible
+estimator regularizes the sample criterion,
+
+                                               
+                                b (λ) = arg min − ST (w) + λ pen(w) ,
+                                w                                                                           (7)
+                                             w∈W
+
+
+where the form of the penalty reflects the parameterization. In component-space, it shrinks named-
+component weights towards the equal-weight reference; in rank-space, it smooths the profile across
+adjacent ranks. The precise forms are given in Equations (9) and (11). Because ST (w) is a sum over
+n = T − p observations, the average sample objective has effective penalty η = λ/n. For any fixed η ≥ 0,
+define the penalized population target
+
+                                w∗ (η ) = arg min − S(w) + η pen(w) .
+                                                 
+                                                                                                            (8)
+                                              w∈W
+
+
+The unpenalized target is w∗ (0) = w∗ . For each specification, b
+                                                                λ is selected by block cross-validation and
+                                λ/n. Conditional on that selected value, w
+the reported estimate uses ηb = b                                            b (b
+                                                                                λ) is interpreted relative to
+w∗ (ηb). We do not assume that the penalty vanishes.
+    Because wb (b
+                λ) is estimated from a finite sample, it carries genuine sampling uncertainty: it is governed
+by the number of time-series observations T at fixed cross-sectional dimension d, and is not driven to zero
+by letting d → ∞ as in factor analysis. Section 2.5 and Appendix A.2 take this uncertainty into account.
+
+
+
+
+                                                        6
+2.2    Component-Space Assemblage
+The first variant answers a natural question: which components are relevant? For a climate index, it
+is far from obvious whether winds, precipitation, temperature extremes, or sea level matter most for
+macroeconomic transmission, and this likely depends on the country’s geography, industrial structure,
+and exposure to specific hazards. Component-space assemblage lets the VAR itself resolve this ambiguity
+by learning basket weights over the original components.
+   When constituents are numerous, overlapping, or weakly informative, the map w 7→ ST (w) can be
+flat or locally irregular, producing unstable finite-sample solutions. Following Goulet Coulombe et al.
+(2024), we impose two forms of discipline. First, simplex and nonnegativity constraints keep xt∗ (w) in
+the benchmark variable units, ensuring the assembled variable remains a proper weighted average of its
+constituents. Second, ridge-type regularization shrinks towards a reference basket wref , preventing the
+optimizer from concentrating weight on one or two idiosyncratic series and forcing the solution to remain
+a reasonably dense mixture.
+   Component-space assemblage learns basket weights directly over the disaggregated components Xt :
+
+                   b c (λ) = arg min −ST (w) + λ∥w − wref ∥22
+                   w                                            s.t.   w ≥ 0, 1′ w = 1,               (9)
+                                w
+
+
+where the ridge penalty shrinks towards reference weights wref . In our climate application, wref corre-
+sponds to the equal weights of the established ACI benchmark. As λ → ∞, the solution approaches wref
+and the standard VAR with official measurement. As λ → 0, weights maximize system coherence subject
+only to simplex restrictions.
+   Equal weights therefore serve as the shrinkage reference in component-space and the empirical
+comparator in the figures. They do not serve as the second term in the learning criterion, because both
+likelihoods must be evaluated on the same candidate index xt∗ (w). Replacing the mean-only likelihood
+with one evaluated on the equal-weight index would make the benchmark independent of w and leave
+the variance-compression incentive intact.
+
+
+2.3    Rank-Space Assemblage
+The second variant addresses a different concern: all constituents may be relevant, but what matters
+is when, specifically, where their realizations fall in the cross-sectional distribution at a given date.
+Rank-space assemblage reweights the cross-sectional distribution of the panel rather than its named
+components, with the weights chosen to maximize coherence with the VAR’s joint dynamics rather
+than fixed in advance. The construction is deliberately flexible: depending on what the data favor, it
+can recover a tail-risk measure, an outlier-robust measure of the kind used in trimmed-mean inflation
+(Bryan and Cecchetti, 1994), or emphasis on a single tail, with the scheme learned rather than imposed.
+For climate the logic points to the tails, since moderate deviations are absorbed by the economy while
+extreme realizations carry threshold damages; and because weights attach to ranks rather than names,
+
+
+                                                   7
+the composition of the assembled index varies over time, loading on whichever constituent occupies the
+relevant region of the distribution.
+    Formally, rank-space assemblage operates on order statistics rather than individual components
+(Goulet Coulombe et al., 2024). At each date t, we sort the d constituent values from lowest to highest and
+collect them as Ot ≡ sort(Xt ) ∈ Rd . The assembled variable is then a weighted average of these order
+statistics,
+                                               xt∗ (w) = w′ Ot ,                                       (10)
+
+and the VAR state yt (w) is formed as before by replacing xt with xt∗ (w). The key difference from the
+component-space formulation is that the j-th weight now attaches to the j-th rank in the cross-sectional
+distribution, not to a fixed named constituent. This makes the assemblage invariant to component
+relabeling and instead learns which regions of the cross-sectional distribution carry the most macro-
+relevant information.
+    The sample criterion ST (w) in (6) is evaluated on this rank-space assembled variable, xt∗ (w) = w′ Ot .
+We solve
+                      b r (λ) = arg min −ST (w) + λ∥Dw∥22
+                      w                                            s.t.   w ≥ 0, 1′ w = 1,             (11)
+                                  w
+
+where D is the first-difference operator. In general one would anchor the assembled variable’s training-
+sample mean to that of the benchmark, n−1 ∑tT= p+1 w′ Ot = n−1 ∑tT= p+1 xt ; because the constituents are
+standardized to zero mean in our application, that restriction holds for every w on the simplex, and the
+normalization 1′ w = 1 anchors the weights instead. Both restrictions are linear in w, since Ot does not
+depend on the weights. The fused ridge penalty, analogous in spirit to Tibshirani et al. (2005), enforces
+smooth weight profiles across adjacent ranks, producing interpretable trimming schemes. A flat weight
+profile recovers the cross-sectional mean, which coincides exactly with the benchmark series when the
+latter uses equal weights. Concentrated weights at the tails then recover a tail-risk measure, and weights
+near the median a robust, median-based one. The non-negativity constraint w ≥ 0 keeps the object
+an index in every case: a weighted average of order statistics is a level in the units of the benchmark,
+whereas signed weights could place positive mass on high ranks and negative mass on low ones, yielding
+a dispersion or volatility measure rather than a level of climate stress. The sort-and-weight construction
+makes xt∗ (w) = w′ Ot a nonlinear, threshold-emphasizing function of the panel Xt , even though the
+VAR that follows is linear in the constructed index; the claim that extremes matter is thus about which
+realizations enter the index, not that the system responds convexly to it, a distinction we revisit when
+reading the impulse responses (Section 3.2).
+
+
+2.4     Optimization, Stability, and Computation
+The constrained optimization in (9)–(11) is solved via Sequential Quadratic Programming (SQP) using
+the solnl function from the NlcOptim R package (Chen and Yin, 2019). Nonnegativity is imposed via
+lower-bound arguments, the simplex constraint through a linear equality, and, where the mean-targeting
+
+
+
+                                                      8
+restriction binds, through a second linear equality. Benchmark weights serve as initial values (equal
+weights otherwise), providing a warm start near the feasible region.
+      The regularization parameter λ is selected by non-overlapping block cross-validation to respect
+temporal dependence. The sample is divided into 5 contiguous blocks; at each fold m, one block is held
+out, the weights w b (−m) (λ) are estimated on the remaining 4 blocks, and a fold-specific held-out criterion
+ (m)
+S (w
+ Tm   b (−m) (λ)) is computed using a VAR estimated on the held-out block alone. The selected value, b      λ,
+maximizes the average held-out criterion, ensuring that the tuning criterion is evaluated on data not used
+to estimate the weights. The specification-specific value b
+                                                          λ is then held fixed in all bootstrap replications.
+Throughout, inference “conditional on b
+                                      λ” refers to this fixed-tuning convention: cross-validation is not
+repeated, so the reported intervals exclude penalty-selection uncertainty.
+      Because ST (w) is non-convex, SQP may in principle converge to a local optimum. We verified stability
+by initializing from random starting points drawn from the simplex. Across all runs, the recovered
+weight solutions were nearly identical, suggesting that the compactness of the feasible set, the ridge
+penalty, and the warm start at economically motivated benchmark weights produce a well-behaved
+objective landscape. The current implementation is well-suited for the application considered here (d on
+the order of tens to low hundreds of constituents); scaling to higher-dimensional panels would benefit
+from gradient-based optimization with automatic differentiation.
+
+
+2.5      Downstream Use and Inference
+                                           λ, the reported estimator is w
+Conditional on the cross-validated penalty b                            b (b
+                                                                           λ), the solution to the regular-
+ized constrained M-estimation problem defined over the unit simplex. Because the parameter space is
+compact and the regularized sample objective is continuous in w whenever the relevant VAR covariance
+matrices are nonsingular, a solution exists. The ℓ2 (or fused ℓ2 ) regularization discourages extreme alloca-
+tions and improves numerical stability, though the objective remains non-convex; the simplex constraint
+and penalization together bound the estimator and mitigate boundary degeneracy in finite samples.
+   Given w    λ) from either approach, we construct x ∗ = x ∗ (w
+           b (b                                              t   b (b
+                                                                    λ)) and estimate the VAR on
+                                                                      t
+{yt (w  λ))}tT=1 . Standard impulse responses and forecast error variance decompositions follow under
+     b (b
+conventional identification schemes.
+Interpreting a shock to the index. A one-standard-deviation innovation to xt∗ is a shock to the assembled
+index, not to any single constituent, so its content is composite. Holding w fixed gives the index a stable
+definition, a fixed mapping from the component panel to the scalar measure, but does not imply a stable
+physical composition of each realized innovation. The same is true of a shock to headline inflation or
+to industrial production, each of which is itself an aggregate. In rank-space, the weights are fixed over
+rank positions, while the named component occupying a given rank may change over time. But that
+composite is the point: rather than presuming that a single physical variable carries the macro-relevant
+climate impulse, the Assemblage VAR estimates the combination of climate phenomena with which
+the macroeconomy is most coherent, and the estimated weight profiles make that combination legible.
+
+
+
+                                                      9
+Working with such an index, rather than tracing each constituent separately, is an advantage: it pools
+common variation and averages out idiosyncratic noise in the individual series.
+    The index is also not redundant with entering the constituents one by one. The orthogonalized
+innovation to a composite variable is not generally the same object as a weighted sum of orthogonalized
+innovations to its constituents, so the response to the assembled-index shock need not equal a weighted
+average of component-specific responses. A researcher who wants the response to one specific phe-
+nomenon can include that constituent directly; the assembled index is complementary, characterizing the
+macro-relevant combination rather than any single channel.
+    Appendix A.2 reports a complementary weight-reestimating pairs bootstrap that re-estimates the
+weights and VAR parameters at the selected penalty. Its conclusions are broadly similar to those obtained
+from the main-text fixed-weights residual bootstrap. Because the two procedures resample different
+objects and use different interval constructions, we interpret this similarity as a robustness finding rather
+than as a clean decomposition of the contribution of weight-estimation uncertainty. Because w
+                                                                                            b is a
+constrained system M-estimator at fixed, moderate d, its sampling uncertainty does not vanish in the
+cross-section, so it must be quantified rather than assumed away.
+
+
+
+3     What is Climate from a Macroeconomic Perspective?
+We assemble a Macro-Relevant Climate Index (MRCI) from U.S. climate data and embed it in a structural
+VAR alongside standard macroeconomic variables. The goal is to construct a climate measure tailored to
+U.S. business-cycle transmission rather than designed for global monitoring.
+
+
+3.1    Data and VAR Setup
+We describe the constituent panel from which the assembled climate index is constructed, then specify
+the VAR system that embeds it.
+
+The constituent panel Xt . We use the U.S. portion of the Actuaries Climate Index (ACI) (Actuaries
+Climate Index, 2025; Mathewson, 2022), which aggregates six standardized components: high-temperature
+extremes (T90), low-temperature extremes (T10), heavy precipitation (Rx5Day), consecutive dry days
+(CDD), high winds (WP90), and sea level. The published ACI applies five-year smoothing to track slow-
+moving trends, well suited for monitoring but potentially misaligned with business-cycle transmission
+analysis. Moreover, the index is standardized relative to 1961–1990, thus inheriting pronounced drift that
+dominates VAR dynamics and contaminates the structural innovation.2
+    We construct an event-oriented analogue: for each component X j,t , we compute month-on-month
+changes and standardize using the 1961–1990 moments. This preserves the ACI’s normalization logic
+    2The 30-year normalization window follows standard WMO convention for defining climate normals. The
+
+components are also transformed so that higher values correspond to more adverse climate stress. Even the
+unsmoothed ACI yields rising industrial production after a climate shock, consistent with low-frequency drift
+contaminating the structural innovation; results available upon request.
+
+
+                                                     10
+while aligning time-series properties with stationary SVAR analysis. The baseline SVAR uses the same
+transformed components to construct the benchmark series xt using equal weights.3 The constituent panel
+Xt , from which the assembled variable xt∗ (w) = w′ Xt is constructed, is stratified into three specifications
+of increasing granularity:
+National (MRCINation ) uses 5 subcomponents corresponding directly to the ACI’s national-level climate
+variables, so that the assemblage simply reweights the five ACI components.
+Regional (MRCIRegion ) uses 34 subcomponents obtained from the ACI’s regional disaggregation, allowing
+the assemblage to exploit spatial heterogeneity by placing more weight on regions whose climate measures
+are more strongly associated with the macro system.4
+NOAA (MRCINOAA ) uses 82 subcomponents drawn from the NOAA dataset containing weather and
+atmospheric measurements across ten U.S. regional zones, including Temperature, Precipitation, Heating
+Degree Days, Cooling Degree Days, and four Palmer drought indices (PDSI, PHDI, PMDI, and Palmer
+Z-Index), as well as global atmospheric CO2 concentrations recorded at the Mauna Loa observatory in
+Hawaii; this is the most granular specification, providing the assemblage estimator with a rich panel of
+climate series.
+                                          (− x )
+The remaining VAR variables yt         . The assembled climate variable enters a VAR alongside
+six macroeconomic series, forming the state vector yt (w). The variables, in Cholesky ordering, are:
+the climate index (ACI or its assembled counterpart), industrial production (INDPRO), PCE inflation
+(PCEPI), unemployment rate (UNRATE), the shadow rate of Wu and Xia (2016) (SHADOWRATE), the
+U.S. dollar/pound sterling exchange rate (EXUSUKx), and housing starts (HOUST). The macroeconomic
+series are taken from the FRED-MD database, except the shadow rate (Wu and Xia, 2016). INDPRO,
+PCEPI, EXUSUKx, and HOUST are transformed by taking log-differences; UNRATE is first-differenced,
+and SHADOWRATE is kept in levels.
+    The climate index is ordered first, reflecting contemporaneous exogeneity of weather to the macroe-
+conomy, the same Cholesky ordering used by Kim et al. (2025) in their ACI-based VAR. The lag length
+is set to p = 12. Structural shocks are identified recursively under this ordering. Across specifications,
+the recursive ordering is unchanged, but the climate variable entering the VAR differs. A one-standard-
+deviation innovation is therefore defined separately for each climate measure. The impulse responses
+compare responses to innovations in alternative climate measures, not responses to a common climate
+shock. They are reported in cumulative form, except for the interest rate.
+    Confidence bands are reported at the 68% level, following the convention adopted by Faccia et al.
+(2021) and Kim et al. (2025) in climate–macroeconomics.5
+   3We exclude consecutive dry days (CDD), which is reported annually and interpolated to monthly frequency, and
+
+would tilt the likelihood-based optimization towards exploiting this mechanical predictability.
+   4The Midwest region does not have a sea level variable.
+   5 The main-text bands are pointwise equal-tailed percentile-t intervals obtained from a fixed-weights residual
+
+bootstrap (Künsch, 1989; Hall, 1992; Brüggemann et al., 2016). Under the fixed-tuning convention of Section 2.4, both
+the selected penalty bλ and the resulting weights w
+                                                  b (b
+                                                     λ) are held fixed across bootstrap replications. Appendix A.1
+
+
+
+                                                         11
+                                   Figure 1: Component-Space Climate Measure Shocks
+                     (a) National                                      (b) Regional                                       (c) NOAA
+
+
+
+
+Notes: Results are based on VAR models estimated using data from 1975:M1 to 2025:M4, excluding the COVID-19 period (2020:M1–2021:M6). All specifications
+include 12 lags and maintain a consistent variable ordering: ACI/MRCI, INDPRO, PCEPI, UNRATE, SHADOWRATE, EXUSUKx, and HOUST. Confidence intervals
+                                 λ and w
+at the 68% level, conditional on b     b (b
+                                          λ). For brevity, we display impulse responses for selected variables only; complete results are available in Appendix D
+(Figure D.1). For the weight-reestimating pairs bootstrap version, with the aggregation weights re-estimated in every replication, see Figure A.3 in Appendix A.
+
+
+3.2       Results
+We first examine what the optimized measurement implies for structural impulse responses, then inspect
+the resulting time series and weight profiles.
+
+
+3.2.1      Impulse Responses
+
+Figures 1 and 2 present responses to positive one-standard-deviation innovations in the component-space
+and rank-space climate measures. We compare these responses with the response estimated using the
+equal-weight benchmark measure. The evidence is strongest for industrial production and more mixed
+for the remaining variables.
+
+details this procedure. Appendix A.2 reports complementary bands from a weight-reestimating pairs bootstrap that
+holds bλ fixed but re-estimates the weights and VAR parameters jointly in each replication.
+
+
+
+
+                                                                              12
+                                         Figure 2: Rank-Space Climate Measure Shocks
+                     (a) National                                      (b) Regional                                       (c) NOAA
+
+
+
+
+Notes: Results are based on VAR models estimated using data from 1975:M1 to 2025:M4, excluding the COVID-19 period (2020:M1–2021:M6). All specifications
+include 12 lags and maintain a consistent variable ordering: ACI/MRCI, INDPRO, PCEPI, UNRATE, SHADOWRATE, EXUSUKx, and HOUST. Confidence intervals
+                                 λ and w
+at the 68% level, conditional on b     b (b
+                                          λ). For brevity, we display impulse responses for selected variables only; complete results are available in Appendix D
+(Figure D.2). For the weight-reestimating pairs bootstrap version, with the aggregation weights re-estimated in every replication, see Figure A.4 in Appendix A.
+
+
+Industrial production. Under the fixed-weight benchmark, a one-standard-deviation climate measure
+innovation reduces industrial production by 0.16% at peak (month 12), while Kim et al. (2025) reported a
+0.15 percentage-point decline using the same ACI in a nonlinear VAR. Component-space specifications
+yield larger estimated responses, though unevenly: the national specification MRCINation
+                                                                                  comps , which reweights
+only five constituents, differs least from the benchmark, while the richer assembled measures yield larger
+                                                                    Region
+contractions. For innovations in the MRCIcomps and MRCINOAA
+                                                       comps measures, the estimated contraction
+ranges from 0.24% to 0.32% and is statistically significant, roughly one and a half to two times the peak
+response estimated using the benchmark measure. Rank-space assemblage is more selective: MRCINation
+                                                                                             ranks
+                                                                                                                                       Region
+adds little over the benchmark, with only five components to rank; the regional MRCIranks stays close
+to the benchmark as well, and only the MRCINOAA
+                                           ranks specification yields an economically meaningful
+estimated contraction, alongside its tail-concentrated rank-weight profile. This pattern is consistent with
+recent climate–macro evidence: Kim et al. (2025) find that severe weather shocks generate meaningful
+contractions in industrial production, and Ciccarelli et al. (2024) document asymmetric temperature
+
+
+                                                                              13
+effects on euro-area inflation, both in VAR/LP-type frameworks. Our contribution is to show that the
+estimated industrial-production response varies materially across alternative climate measures. With
+greater flexibility over regional components and their aggregation, the assembled specifications yield
+contractions up to twice the response estimated using the ACI benchmark. This suggests that alternative
+measures may be worth tracking when assessing climate–macro relationships.
+
+Unemployment. The unemployment response is ambiguous across specifications. The MRCINation
+and MRCIRegion indices point towards an increase, with confidence bands excluding zero at longer
+horizons in component-space. At the highest level of disaggregation, the confidence interval includes
+zero in component-space, while exhibiting a brief but significant rise in the short term in rank-space.
+Unemployment thus yields mixed results depending on the aggregation scheme: rank-space assemblage
+suggests that tail-events trigger a short-lived spike in unemployment, consistent with the immediate
+labor market disruptions (Kim et al., 2025), while component-space assemblage suggests persistent,
+medium-run deterioration.
+
+Housing starts. Housing starts are the outcome for which the benchmark is least informative. Under
+the ACI benchmark, the point estimate is positive, which is counterintuitive for an adverse climate shock,
+but never statistically distinguishable from zero. Assemblage yields a clearer contractionary response:
+in component-space, all three panels imply a significant short-run decline, while in rank-space only the
+NOAA specification remains negative and significant. NOAA is therefore the only case in which the
+housing contraction is supported in both spaces. The housing-start response also varies with the climate
+measure. The response estimated using the ACI benchmark is imprecise, whereas several assembled
+specifications yield a significant contraction.
+
+
+3.2.2   Time Series and Weights
+
+The assembled indices produce different levels of system coherence and different macroeconomic re-
+sponses. The natural question is what drives these differences, and whether the composition implied
+by w makes economic sense. Figures 3 and 4 display the assembled series (top panels) alongside the
+component-space weights (lower left) and rank-space weights (lower right) for the ACI and NOAA
+specifications, respectively.
+   Two broad patterns emerge in every component-space specification, and both cut the same way. The
+components that gain weight are more closely associated with higher-frequency climate variation, such as
+wind and heat extremes, while those that lose weight are slower-moving or less cyclical, such as sea level
+and, to some extent, cold extremes. And the assembled series all bend the same way: they flatten after
+2000 rather than tracking the ACI’s upward drift, suggesting that the persistent drift in the benchmark
+reflects components that are less influential for business-cycle dynamics. We discuss each specification in
+order of increasing complexity.
+
+
+
+
+                                                    14
+MRCINation                                 Nation
+    comps (National, component-space). MRCIcomps aggregates the five national ACI components:
+high-temperature extremes (T90), low-temperature extremes (T10), heavy precipitation (Rx5Day), high
+winds (WP90), and sea level, at the aggregate U.S. level, with no spatial disaggregation. Because it has
+only four degrees of freedom, this is the most constrained specification and provides a clean test of
+whether composition alone, holding the geographic coverage fixed, can move structural inference; at this
+most constrained level it does so only modestly. In Figure 3 (top panel), MRCINation
+                                                                              comps tracks the headline
+ACI through the 1960s–90s; both series register the 1980 heat–drought event, the 1988 shocks, the 1993
+Midwest floods, and the early-2000s hot-drought regime. The two diverge after ∼2000: whereas the ACI
+continues trending upward, MRCINation
+                               comps slows down and undershoots the benchmark because sea level, a
+strongly trending component, now receives zero weight.
+   This is consistent with the weight profile in Figure 3 (lower left, light gray bars): low-temperature
+extremes (T10) and sea level receive minimal weight (0% each). The weight released from these two
+components is absorbed almost entirely by high winds (WP90), whose share rises from the equal-weight
+benchmark of 20% to around 65%. This is consistent with episodic wind events (hurricanes, severe
+storms, and derechos) serving as the main source of macro-predictive climate variation at business-cycle
+frequencies. Sea level exhibits minimal month-to-month variation; its relevance is concentrated at lower
+(long-run) frequencies rather than business cycles. T10 contributes little to the nation-wide acute climate
+stress captured at macro frequencies. Even this minimal reweighting reshapes the index towards the most
+informative components, indicating that equal weighting in the standard ACI aggregates variables with
+varying relevance for business-cycle dynamics.
+       Region
+MRCIcomps (Regional, component-space). The regional specification uses the regionally disag-
+gregated ACI data, taking the same five ACI components across seven U.S. regions and yielding 34
+region-component constituents. The time series in Figure 3 (top panel) follows a similar trajectory to
+MRCINation
+    comps but with lower amplitude post-2000, consistent with spatial averaging diluting localized
+extremes. The added granularity also makes the regional allocation more credible than the national one.
+Restricted to only five aggregate components, MRCINation
+                                                  comps can re-express measurement only through a
+few large shifts, concentrating weight aggressively on the single most predictively relevant component;
+      Region
+MRCIcomps can instead distribute the same macro-informative signal across thirty-four region-specific
+constituents, accommodating genuine spatial heterogeneity rather than forcing it onto a handful of
+national aggregates. The national index is thus the most constrained object in the menu, which is why it
+moves the response the least; it is the heterogeneity of the richer regional and NOAA panels that gives
+assemblage its room to work.
+   The weight profile in Figure 3 (lower left) is broadly aligned with the national pattern (WP90 dominates
+and sea level receives minimal weight) but now reveals regional variation. The contrast with the ACI’s
+equal 20% allocation per component is immediate: high winds receive 40% aggregated weight, reaching
+29% of the global index in the Midwest region alone. Heat extremes (T90) enter with pronounced regional
+heterogeneity: 16% in the Southwest Pacific and around 2% in the Central West Pacific. Precipitation
+
+
+
+                                                    15
+                                Figure 3: Assembled Climate Index (ACI Specification)
+
+
+
+
+                     (a) Component Weights                                                                 (b) Rank Weights
+Notes: The upper panel shows MRCI (National and Regional) and the Headline ACI/MRCI, all shown as five-year moving averages of the standardized compo-
+nents. All series are using the weights estimated from 1975-2025. Moreover, we show a sliding average over two years for the MRCIranks . The lower left panel
+                                                                                                                                          Region
+presents the weights in percent for MRCIcomps National and Regional. In the lower right panel, we present the resulting weights for MRCIranks . To ensure an
+adequate representation, we smooth the displayed weights in rank-space using a trapezoidal kernel spanning eight ranks.
+
+
+
+(Rx5Day) receives up to 25%, concentrated in flood-prone areas such as Alaska, the Midwest and the
+Southwest Pacific.
+     The regional pattern aligns with known structural exposures across sectors: the Southern Plains,
+Southwest Pacific and Midwest, regions with substantial exposure through manufacturing, energy
+infrastructure, and agriculture, allocate more than 35% of their own regional weight to wind extremes,
+consistent with episodic, high-damage events (hurricanes, severe storms) that account for substantial
+macro-level risk (Noy, 2009; Cavallo et al., 2013). Heat extremes receive their largest weights in the
+Southwest Pacific, consistent with the evidence that temperature affects economic activity through
+productivity, energy demand, and sectoral exposure (e.g., agriculture and construction) (Burke et al., 2015;
+Colacito et al., 2019).
+
+MRCINOAA
+    comps (NOAA, component-space). The NOAA specification draws on an entirely different
+data source: 82 subcomponents from NOAA weather and atmospheric measurements across ten U.S.
+
+
+
+                                                                            16
+regional zones, providing a rich and alternative panel. Figure 4 (top panel) shows the time evolution of
+MRCINOAA
+    comps . Its shape reflects dominant loadings on two regional climate blocks (Figure 4, lower left): an
+Ohio Valley thermal block (temperature and heating degree days, approximately 36% of the index weight)
+and a Northern/Northeast hydroclimate block (precipitation and Palmer Z index, approximately 27%).
+The series displays pronounced decadal cyclicality (≈10–15 years), consistent with known low-frequency
+ocean–atmosphere modes such as the Pacific Decadal Oscillation and the Atlantic Multidecadal Oscillation
+(Mantua et al., 1997; McCabe et al., 2004; Newman et al., 2016).
+   In line with Colacito et al. (2019), the thermal block captures macro-relevant temperature variability
+that aligns with energy demand and industrial fluctuations located in the manufacturing corridor, while
+the hydroclimate block, in the spirit of Schlenker and Roberts (2009) and Burke et al. (2015), proxies
+for flood and drought conditions across climate-sensitive sectors. Despite originating from an entirely
+different data environment, the NOAA component-space weights are coherent with the ACI findings:
+both specifications upweight episodic, high-damage phenomena (wind, precipitation extremes) and
+downweight slow-moving or low-variance components.
+   Two independent data environments converge on one geographic corridor: the regional ACI loads on
+the central U.S. (Southern Plains and Midwest), and the NOAA panel on the Ohio Valley. Both identify
+the central U.S. region, home to major manufacturing and agricultural assets, as carrying the highest
+statistical weight for macro-relevant climate variation.
+
+Rank-space specifications. The rank-space estimator operates on cross-sectional order statistics rather
+than named components: it reweights only the shape of the cross-sectional distribution, so it has less
+room to depart from the equal-weight benchmark than component-space, which can single out specific
+series. How far it departs depends on how much distributional structure the panel offers, and the three
+specifications differ sharply on that score (the rank profiles are in Figures 3 and 4, lower-right panels).
+   At the national level MRCINation
+                             ranks adds little: with only five components there is too little cross-sectional
+                                                                      Region
+variation for the rank representation to exploit. The regional MRCIranks does lift the tails, near the 20th
+and 95–100th percentiles, but still places substantial weight across the interior, including near the median,
+so the assembled index stays close to the cross-sectional average, the equal-weight ACI, and its response
+is correspondingly mild, much like the benchmark’s, though somewhat stronger in the first 12 months;
+the panel does not offer enough distributional signal for the rank representation to express what the
+component-space weights can. Only the NOAA MRCINOAA
+                                               ranks carries a sharp distributional signal: about
+three-quarters of its mass sits in the two tails, with the single most heavily weighted ranks receiving
+2.95% on the left and 2.58% on the right against 1.2% under flat weighting, and only about three percent
+falling between the 30th and 55th percentiles. It departs markedly from the flat benchmark and produces
+a response clearly different from it. The two representations moreover agree: the rank- and component-
+space NOAA indices both locate the macro-relevant variation in the extremes and read as temperature-led
+(Appendix B).
+                                                 Region
+   In the time series (Figure 3, top panel), MRCIranks nonetheless rises more strongly than its component-
+space counterpart post-2010, accentuating episodes such as the 2012 drought, Hurricane Harvey (2017),
+
+
+                                                     17
+                              Figure 4: Assembled Climate Index (NOAA Specification)
+
+
+
+
+                     (a) Component Weights                                                                 (b) Rank Weights
+Notes: The top panel shows MRCI (National and NOAA) and the Headline ACI/MRCI, all shown as five-year moving averages of the standardized components.
+All series are using the weights estimated from 1975-2025. Moreover, we show a sliding average over a year for the MRCIranks . The lower left panel presents the
+weights in percent for MRCINOAA                                                                         NOAA
+                             comps . In the lower right panel, we present the resulting weights for MRCIranks . To ensure an adequate representation, we show a
+sliding average over two ranks to smooth the weights in rank-space. See Appendix C for the graphical aggregation of the NOAA components.
+
+
+
+the 2020 Midwest derecho (WP90), and the 2021 Pacific Northwest heat dome (T90) (NOAA National
+Centers for Environmental Information, 2026).
+
+Mapping ranks back to components. Because the rank-space weights attach to distributional
+positions rather than to named series, it is natural to ask which constituents actually occupy the weighted
+ranks. Appendix B pushes the rank weights back through the period-by-period sort to recover a time-
+varying loading on each named constituent and summarizes it as a size-neutral usage measure. The
+picture is interpretable: the NOAA panel concentrates its weight on thermal variables, while the ACI
+panel spreads its weight fairly evenly across names, so the tail-loading documented above does not
+conceal a single dominant named series.
+
+Robustness and weight uncertainty. Because the aggregation weights are themselves estimated,
+Appendix A asks how far they, and the index they produce, can be trusted, and does three things. First,
+
+
+
+                                                                             18
+we trace the weights through time on an expanding window (Appendix A.3, Figure A.5) and find that
+the dominant components are in place early and that the dominant variable families retain their relative
+weights over the sample. Second, we bootstrap the weights jointly with the VAR dynamics (weight-
+reestimating pairs bootstrap), re-estimating them in every replication (Appendix A.2, Figure A.1): the
+individual loadings are noisy, but aggregated to variable families they are stable, and the assembled
+index itself is tightly determined (Figure A.2). Third, we carry this weight uncertainty into the impulse
+responses (Figures A.3 and A.4) and find that the weight-reestimating pairs bootstrap responses remain
+close to their fixed-weights residual-bootstrap counterparts. Because the procedures differ in both their
+resampling schemes and interval constructions, this similarity is evidence of robustness across procedures;
+it does not isolate the contribution of weight-estimation uncertainty.
+
+
+
+4    Conclusion
+The Assemblage VAR endogenizes variable measurement within structural VARs by jointly estimating
+aggregation weights and dynamics, offering component-space and rank-space variants each regularized
+towards conventional benchmarks. Applied to U.S. climate data, several assembled specifications yield
+statistically significant peak responses up to twice the response estimated using the fixed-weight bench-
+mark measure. Component-space weights emphasize high-wind variables, while rank-space weights
+concentrate on distributional tails. Estimated macroeconomic responses can therefore vary materially
+across alternative climate measures. These results show that measurement, the mapping from disag-
+gregates to the VAR variable, is a quantitatively important margin for structural inference, with the
+choice of measurement affecting the resulting empirical conclusions, including those relevant for damage
+assessment and policy design.
+    Several directions remain open for future work. The aggregation weights could be allowed to evolve
+over time, and the VAR could be made modestly nonlinear so that propagation, and not only the
+measurement of extremes, can respond nonlinearly to the shocks the rank-space index emphasizes. On
+the climate side, replacing the ACI’s regional structure with high-resolution gridded data (such as ERA5
+or PRISM) would allow the estimator to learn which geographic cells carry macro-relevant variation,
+while assembling across competing climate model outputs would replace ad hoc model averaging with
+supervised combination. More broadly, the framework applies wherever an aggregate enters a VAR and
+where its construction from subcomponents is contested or conventional, a description that fits not only
+climate indices but also core inflation, financial conditions indices, uncertainty indices, and measures of
+global economic activity.
+
+
+
+
+                                                    19
+References
+Actuaries Climate Index (2025). Actuaries climate index (aci): Home and documentation. Accessed
+    2026-01-21.
+
+Ardia, D., K. Bluteau, K. Boudt, and K. Inghelbrecht (2023). Climate change concerns and the performance
+    of green versus brown stocks. Management Science 69, 7607–7632.
+
+Bai, J. and S. Ng (2008). Forecasting economic time series using targeted predictors. Journal of
+     Econometrics 146, 304–317.
+
+Bańbura, M., D. Giannone, and L. Reichlin (2010). Large bayesian vector autoregressions. Journal of
+     Applied Econometrics 25, 71–92.
+
+Bernanke, B. S., J. Boivin, and P. Eliasz (2005). Measuring the effects of monetary policy: A factor-
+    augmented vector autoregressive (FAVAR) approach. The Quarterly Journal of Economics 120,
+    387–422.
+
+Bilal, A. and D. R. Känzig (2026). The macroeconomic impact of climate change: Global versus local
+     temperature. The Quarterly Journal of Economics.
+
+Boivin, J. and S. Ng (2006). Are more data always better for factor analysis? Journal of Econometrics 132,
+    169–194.
+
+Brüggemann, R., C. Jentsch, and C. Trenkler (2016). Inference in VARs with conditional heteroskedasticity
+    of unknown form. Journal of Econometrics 191(1), 69–85.
+
+Bryan, M. F. and S. G. Cecchetti (1994). Measuring core inflation. In Monetary policy, pp. 195–219. The
+    University of Chicago Press.
+
+Burke, M., S. M. Hsiang, and E. Miguel (2015). Global non-linear effect of temperature on economic
+    production. Nature 527, 235–239.
+
+Byrne, J. P. and P. A. Vitenu-Sackey (2024). The macroeconomic impact of global and country-specific
+    climate risk. Environmental and Resource Economics 87, 655–682.
+
+Cavallo, E., S. Galiani, I. Noy, and J. Pantano (2013). Catastrophic natural disasters and economic growth.
+    The Review of Economics and Statistics 95, 1549–1561.
+
+Chang, M., X. Chen, and F. Schorfheide (2024). Heterogeneity and aggregate fluctuations. Journal of
+    Political Economy 132, 4021–4067.
+
+Chen, X. and X. Yin (2019). NlcOptim: Solve Nonlinear Optimization with Nonlinear Constraints. R
+    package version 0.6.
+
+Ciccarelli, M., F. Kuik, and C. Martínez Hernández (2024). The asymmetric effects of temperature shocks
+     on inflation in the largest euro area countries. European Economic Review 168, 104805.
+
+Ciccarelli, M. and F. Marotta (2024). Demand or supply? an empirical exploration of the effects of climate
+     change on the macroeconomy. Energy Economics 129, 107163.
+
+Clark, T. E., F. Huber, G. Koop, and M. Marcellino (2024). Forecasting US inflation using Bayesian
+    nonparametric models. Annals of Applied Statistics 18, 1421–1444.
+
+
+
+                                                    20
+Colacito, R., B. Hoffmann, and T. Phan (2019). Temperature and growth: A panel analysis of the united
+    states. Journal of Money, Credit and Banking 51, 313–368.
+
+Cubadda, G. (2025). VAR models with an index structure: A survey with new results. arXiv preprint
+   arXiv:2412.11278.
+
+Cubadda, G. and B. Guardabascio (2019). Representation, estimation and forecasting of the multivariate
+    index-augmented autoregressive model. International Journal of Forecasting 35(1), 67–79.
+
+Dell, M., B. F. Jones, and B. A. Olken (2012). Temperature shocks and economic growth: Evidence from
+     the last half century. American Economic Journal: Macroeconomics 4, 66–95.
+
+Deschênes, O. and M. Greenstone (2007). The economic impacts of climate change: Evidence from
+    agricultural output and random fluctuations in weather. American Economic Review 97(1), 354–385.
+
+Dolmas, J. and E. F. Koenig (2019). Two measures of core inflation: A comparison. Federal Reserve Bank
+    of St. Louis Review 101, 245–258.
+
+Engle, R. F., S. Giglio, B. Lee, and J. Stroebel (2020). Hedging climate change news. Review of Financial
+    Studies 33, 1184–1216.
+
+Faccia, D., M. Parker, and L. Stracca (2021). Feeling the heat: extreme temperatures and price stability.
+    Working paper series, European Central Bank.
+
+Gavriilidis, K. (2021). Measuring climate policy uncertainty. Working paper; the U.S. Climate Policy
+    Uncertainty index is hosted at policyuncertainty.com.
+
+Ghysels, E., P. Santa-Clara, and R. Valkanov (2004). The MIDAS touch: Mixed data sampling regression
+    models. CIRANO Working Papers. 2004s-20.
+
+Goulet Coulombe, P. (2025). A neural phillips curve and a deep output gap. Journal of Business &
+    Economic Statistics 43, 669–683.
+
+Goulet Coulombe, P. and M. Göbel (2023). Maximally machine-learnable portfolios. Working paper, arXiv.
+
+Goulet Coulombe, P., K. Klieber, C. Barrette, and M. Goebel (2024). Maximally forward-looking core
+    inflation. Working paper, arXiv.
+
+Hall, P. (1992). The Bootstrap and Edgeworth Expansion. Springer Series in Statistics. New York: Springer.
+
+Huber, F., T. Krisztin, and M. Pfarrhofer (2023). A Bayesian panel vector autoregression to analyze the
+   impact of climate shocks on high-income economies. Annals of Applied Statistics 17, 1543–1573.
+
+Huber, F., M. Marcellino, and T. Scheckel (2025). Coarsened Bayesian VARs—correcting BVARs for
+   incorrect specification. Working paper, arXiv. Under revision, Journal of Business & Economic
+   Statistics.
+
+Kahn, M. E., K. Mohaddes, R. N. Ng, M. H. Pesaran, M. Raissi, and J.-C. Yang (2021). Long-term
+    macroeconomic effects of climate change: A cross-country analysis. Energy Economics 104, 105624.
+
+Kelly, B. and S. Pruitt (2015). The three-pass regression filter: A new approach to forecasting using many
+     predictors. Journal of Econometrics 186, 294–316.
+
+Kim, H. S., C. Matthes, and T. Phan (2025). Severe weather and the macroeconomy. American Economic
+    Journal: Macroeconomics 17, 315–341.
+
+                                                   21
+Künsch, H. R. (1989). The jackknife and the bootstrap for general stationary observations. Annals of
+   Statistics 17, 1217–1241.
+Liao, W., X. Sheng, R. Gupta, and S. Karmakar (2024). Extreme weather shocks and state-level inflation of
+     the united states. Economics Letters 238, 111714.
+Lo, A. W. and A. C. MacKinlay (1997). Maximizing predictability in the stock and bond markets.
+    Macroeconomic Dynamics 1, 102–134.
+Lucidi, F. S., M. M. Pisa, and M. Tancioni (2024). The effects of temperature shocks on energy prices and
+    inflation in the euro area. European Economic Review 166, 104771.
+Mantua, N. J., S. R. Hare, Y. Zhang, J. M. Wallace, and R. C. Francis (1997). A pacific interdecadal climate
+   oscillation with impacts on salmon production. Bulletin of the American Meteorological Society 78,
+   1069–1079.
+Marcellino, M., A. Renzetti, and T. Tornese (2024). Firm heterogeneity and macroeconomic fluctuations: A
+    functional VAR model. Working paper, arXiv.
+Marotta, F. and H. Mumtaz (2023). Vulnerability to climate change: Evidence from a dynamic factor
+    model. Smith School Working Paper 23-06, University of Oxford.
+Mathewson, S. (2022). The actuaries climate index and actuaries climate risk index: A primer. The
+    Actuaries Climate Index and Actuaries Climate Risk Index.
+McCabe, G. J., M. A. Palecki, and J. L. Betancourt (2004). Pacific and atlantic ocean influences on
+   multidecadal drought frequency in the united states. Proceedings of the National Academy of
+   Sciences 101, 4136–4141.
+Newman, M., M. A. Alexander, T. R. Ault, K. M. Cobb, C. Deser, E. Di Lorenzo, N. J. Mantua, and S.-W.
+   Yeh (2016). The pacific decadal oscillation, revisited. Journal of Climate 29, 4399–4427.
+NOAA National Centers for Environmental Information (2026). U.S. Climate Extremes Index (CEI): Def-
+   inition. https://www.ncei.noaa.gov/access/monitoring/cei/definition. Accessed
+   2026-02-13.
+Noy, I. (2009). The macroeconomic consequences of disasters. Journal of Development Economics 88,
+    221–231.
+Reinsel, G. C. (1983). Some results on multivariate autoregressive index models. Biometrika 70(2),
+    369–377.
+Schlenker, W. and M. J. Roberts (2009). Nonlinear temperature effects indicate severe damages to U.S. crop
+     yields under climate change. Proceedings of the National Academy of Sciences 106, 15594–15598.
+Sheng, X., R. Gupta, and O. Cepni (2024). Time-varying effects of extreme weather shocks on output
+    growth of the united states. Finance Research Letters 70, 106318.
+Tibshirani, R., M. Saunders, S. Rosset, J. Zhu, and K. Knight (2005). Sparsity and smoothness via the fused
+     lasso. Journal of the Royal Statistical Society: Series B (Statistical Methodology) 67, 91–108.
+Velu, R. P., G. C. Reinsel, and D. W. Wichern (1986, 04). Reduced rank models for multiple time series.
+    Biometrika 73(1), 105–118.
+Wu, J. C. and F. D. Xia (2016). Measuring the macroeconomic impact of monetary policy at the zero lower
+    bound. Journal of Money, Credit and Banking 48, 253–291.
+
+
+                                                    22
+A     Weight Uncertainty
+We use two bootstrap procedures that address different questions. The fixed-weights residual bootstrap
+measures impulse-response uncertainty conditional on the estimated assemblage weights, whereas the
+weight-reestimating pairs bootstrap assesses weight stability and whether the assembled index and
+impulse responses remain robust when the weights are re-estimated.
+    The fixed-weights residual bootstrap, described in Appendix A.1, follows the fixed-tuning convention
+of Section 2.4. The fixed-weights residual bootstrap bands hold both the selected penalty b    λ and the
+resulting weights w
+                  b (b
+                     λ) fixed, thereby excluding weight-estimation uncertainty. To assess that uncertainty,
+the weight-reestimating pairs bootstrap holds bλ fixed but re-estimates the weights and VAR parameters
+jointly in each of B = 1,000 replications. Because each weight-reestimating pairs bootstrap replication
+re-solves a constrained optimization problem, it does not employ the nested studentization used for the
+main-text bands.
+    Appendix A.2 reads off the resulting bootstrap distribution of the weights, the assembled index and
+the impulse responses in turn. Appendix A.3 complements it by re-estimating the weights on expanding
+sub-samples. The message is the same in both: the individual component loadings are noisy, since
+the panel holds many overlapping series, but every object the paper’s conclusions rest on, namely the
+dominant weight allocations, the tail concentration, the assembled index, and its turning points, survives
+resampling and re-estimation.
+
+
+A.1     Fixed-weights residual bootstrap
+The main-text bands are 68% equal-tailed percentile-t intervals obtained from a fixed-weights residual
+bootstrap (Künsch, 1989; Hall, 1992; Brüggemann et al., 2016). Under the fixed-tuning convention of
+                                       λ and the resulting weights w
+Section 2.4, both the selected penalty b                           b (b
+                                                                      λ) are held fixed.
+    We center the fitted VAR residual vectors and resample overlapping blocks of length ℓ = ⌊n1/3 ⌋ = 8,
+where n is the number of fitted residuals. Resampling the residual vectors jointly retains their contempo-
+raneous cross-equation dependence, while the moving blocks retain temporal dependence within blocks.
+For each of Bouter = 1,000 draws, an artificial series is generated recursively from
+
+                                                        p
+                                                  b+∑A
+                                            y∗t = ν  b j y∗ + u∗t ,
+                                                          t− j                                          (1)
+                                                       j =1
+
+
+initialized at the first p = 12 observed rows. The VAR is then refitted with the same lag order and
+intercept, and the impulse responses are recomputed.
+    At horizon h, the interval is
+                           h                                          i
+                               θbh − qh (1 − α/2)b
+                                                 σh , θbh − qh (α/2)b
+                                                                    σh ,   α = 0.32,                    (2)
+
+
+
+
+                                                         23
+                                      ∗ −θ
+where qh (·) denotes a quantile of (θbb,h bh )/b ∗ across the outer draws. Each b
+                                               σb,h                               ∗ is computed from
+                                                                                σb,h
+Binner = 100 recursive draws from outer replication b, while b
+                                                             σh is computed from 200 additional refits
+from the fitted model.
+   A replication whose companion matrix has an eigenvalue with modulus at least one is redrawn up to
+50 times and otherwise recorded as missing. No outer or inner replication required a redraw, so every
+quantile is based on all 1,000 outer statistics. Computations use set.seed(123).
+
+
+A.2     Weight-reestimating pairs bootstrap
+For the weight-reestimating pairs bootstrap, at the observed cross-validated penalty b
+                                                                                     λ, we form the
+aligned current-outcome and lag-regressor pairs used to evaluate ST (w) and draw overlapping blocks of
+consecutive pair indices with replacement. The pairs are aligned before resampling, so every retained
+observation carries its true lag structure. The block length is ℓ = max{ p + 1, ⌊ T 1/3 ⌋} = 13 in the
+final sample, where the floor at p + 1 binds: blocks shorter than the VAR memory would sever the lag
+dependence the criterion exploits and maximize the fraction of pairs manufactured at block joins.
+   In each replication, holding b
+                                λ fixed, the aggregation weights are re-estimated on the resampled pairs
+subject to the same nonnegativity and normalization constraints as the point estimate, and the VAR
+coefficients and covariance matrix are re-estimated from the same pairs. Impulse responses follow from
+the drawn (B∗ , Σ∗ ) by Cholesky factorization with the assembled index ordered first, cumulated exactly as
+in the point estimate. The optimizer is started at w
+                                                   b in every replication. The procedure does not separately
+resample raw observations or residuals, generate an artificial series recursively, or use bootstrap initial
+conditions.
+   We attempted 1,000 replications for each of the six full-sample specifications. All 1,000 returned a
+weight solution and a usable VAR fit in every case. An optimization error would cause that draw to be
+recorded as failed and discarded, without retry or replacement, but no such error occurred in the final
+runs.
+   The weight bands are pointwise percentile intervals, which respect the simplex support of the con-
+strained estimates. They are interpreted as resampling measures of weight stability rather than as
+boundary-corrected confidence intervals. The reconstructed-index envelopes are likewise pointwise
+percentile intervals of the indices obtained from the bootstrap weight estimates. The impulse-response
+bands from the weight-reestimating pairs bootstrap are pointwise 68% basic (reverse-percentile) intervals,
+[2θb − q∗ , 2θb − q∗ ] where q∗ (γ) is the empirical γ-quantile of θb∗ . These bands are not studentized.
+        0.84      0.16        h                                    b,h
+
+Bootstrap weights. Figure A.1 shows the bootstrap distribution of w,
+                                                                  b aggregated to the named variable
+families. The family totals are well determined and the dominant weight allocations survive resampling,
+high winds at the national and regional levels and temperature at the NOAA level. What the resamples
+do not settle is which of several overlapping regions to credit: whether the Midwest or the Southern
+Plains carries the wind signal shifts from one draw to the next. That is what one expects when several
+regions proxy the same macro signal, and it washes out in the family totals we interpret. The rank-space
+
+
+                                                    24
+                                Figure A.1: Bootstrap stability of the assemblage weights
+                    (a) MRCINation                                        (b) MRCIRegion                                         (c) MRCINOAA
+
+
+
+
+Notes: Bootstrap distribution of the estimated aggregation weights w   b at the 2025 vintage, from B = 1,000 weight-reestimating pairs-bootstrap replications (all
+1,000 replications returned a weight solution and a usable VAR fit; none was discarded), with the cross-validated penalty b
+                                                                                                                          λ held fixed. Top row: component-space
+weights w b c (b
+               λ) aggregated to their variable families; colored bars give the point estimate, the thick dark bar the 68% bootstrap interval, the thin bar the 90%
+interval, and the white dot the bootstrap median. Bottom row: rank-space weights w    b r (b
+                                                                                           λ) shown as a fan of the smoothed rank profile (navy line) wrapped in its
+68% and 90% bands. To ensure an adequate representation, the same smoothing is applied as in the main paper figures. Family totals are determined far more
+precisely than individual loadings.
+
+
+
+profiles keep their tail-loaded shape across draws at the Regional and NOAA levels. The National profile
+is the exception, placing its highest mass near the 80th percentile, which is unsurprising with only five
+series to rank.
+
+The assembled index. What ultimately enters the VAR is the scalar index xt∗ (w    b ′ Xt . It is the
+                                                                             b) = w
+precision of this index, rather than that of the individual weights, which is important for inference.
+Reconstructing it from each bootstrap weight vector (Figure A.2) leaves the chronology emphasized in
+the main text intact: the point estimate shifts only a little, and its broad arc is preserved, the post-2000
+flattening and, in some specifications, a mild downward drift after it. The point index also stays central
+to its own bootstrap distribution, falling within the central 68% at about 88% of dates across the three
+component-space specifications and about 99% in rank-space, the latter tighter in part by construction.
+The reason the index is so much steadier than its ingredients is that several of the standardized series
+carry overlapping information, so shifting weight among them changes the weighted sum they produce
+far less than it changes the weights themselves.
+
+Impulse responses under the weight-reestimating pairs bootstrap. Figures A.3 and A.4 show
+that the weight-reestimating pairs bootstrap responses in component-space and rank-space remain close
+to their fixed-weights residual bootstrap counterparts in Figures 1 and 2. The contraction in industrial pro-
+duction remains the dominant feature, and the difference between the assembled-specification responses
+and the equal-weight benchmark response is preserved.
+
+
+                                                                               25
+                                 Figure A.2: Bootstrap stability of the assembled index
+
+                           (a) MRCIcomps                                                                 (b) MRCIranks
+
+
+
+
+Notes: Each panel reconstructs the assembled index from every estimated bootstrap weight vector (all B = 1,000 replications; none discarded) and reports
+the resulting 68% and 90% pointwise bands (shaded) around the point-estimate index (solid). The headline equal-weighted ACI is shown for reference (green
+line). The two columns are the component-space (MRCIcomps , left column) and the rank-space (MRCIranks , right column); the three rows are the Nation (top
+row), Region (middle row), and NOAA (bottom row) aggregation levels. All series are five-year moving averages of the standardized components, with weights
+estimated over 1975–2025; the rank-space indices are additionally smoothed exactly as in the main paper.
+
+
+A.3        Expanding-window stability of the weights
+The bootstrap asks whether the allocation survives resampling of a fixed sample. The natural complement
+asks whether the same allocation is recovered as the estimation window grows. Figure A.5 re-estimates
+the weights on an expanding window and plots their composition as the window grows over 2005–2025.
+In the National component-space specification, WP90 remains the dominant component throughout,
+accounting on average for roughly 70% of the total weight and never falls below 63%. T90 declines
+slightly from 24% to 22%, while the proportion of Rx5Day increased from 12% to 15%. However, it should
+be noted that there was a significant collapse between 2010 and 2015 to about 2%. Sea level and T10
+remain essentially inactive over the full sample.
+     The Regional specification evolves more smoothly: WP90 increases from 37% to 40%, Rx5Day declines
+from 35% to 23%, and T10 becomes more important towards the end of the sample and increases from 1%
+to 8%.
+     For NOAA, temperature-related indicators gain weight, with temperature rising from about 23% to
+32% and heating degree days more than doubling from about 8% to 19%, while precipitation (26% to
+
+
+                                                                           26
+Figure A.3: Weight-Reestimating Pairs Bootstrap of Component-Space Climate Measure Shocks
+                     (a) National                                       (b) Regional                                        (c) NOAA
+
+
+
+
+Notes: Component-space impulse responses to a one-standard-deviation innovation in the assembled climate index xt∗ (w          b ), with weight-reestimating pairs
+bootstrap bands: each of B = 1,000 replications re-solves for w b and then re-estimates (B, Σ) on the resulting index, with the penalty fixed at its cross-validated
+value. VAR models are estimated on data from 1975:M1 to 2025:M4, excluding the COVID-19 period (2020:M1–2021:M6), with 12 lags and the ordering ACI/MRCI,
+INDPRO, PCEPI, UNRATE, SHADOWRATE, EXUSUKx, HOUST. Bands are at the 68% level. Selected variables are shown; complete results are in Appendix D
+(Figure D.3). This is the weight-reestimating pairs bootstrap counterpart to Figure 1, with the aggregation weights re-estimated in every replication.
+
+
+18%) and the Palmer Z index (21% to 16%) both lose importance. These are slow reallocations, not abrupt
+reversals.
+     rank-space remains stable in all three panels. The only visible movement is a modest reallocation
+within the upper tail in the Regional specification, with some mass shifting from the most extreme rank
+quintile to the adjacent one before stabilizing again after 2017.
+
+
+
+B        From Ranks to Named Components
+This appendix provides a descriptive mapping from rank-space weights to named inputs. Because a
+rank weight attaches to a position in the cross-sectional distribution rather than to a fixed variable, the
+named input occupying that position can change from one month to the next. We use the period-by-
+period sort to recover these time-varying named loadings and to summarize their average usage. This
+
+
+                                                                               27
+    Figure A.4: Weight-Reestimating Pairs Bootstrap of Rank-Space Climate Measure Shocks
+                     (a) National                                       (b) Regional                                        (c) NOAA
+
+
+
+
+Notes: Rank-space impulse responses to a one-standard-deviation innovation in the assembled climate index xt∗ (w      b ), with weight-reestimating pairs bootstrap
+bands constructed as in Figure A.3. VAR models are estimated on data from 1975:M1 to 2025:M4, excluding the COVID-19 period (2020:M1–2021:M6), with 12
+lags and the ordering ACI/MRCI, INDPRO, PCEPI, UNRATE, SHADOWRATE, EXUSUKx, HOUST. Bands are at the 68% level. Selected variables are shown;
+complete results are in Appendix D (Figure D.4). This is the weight-reestimating pairs bootstrap counterpart to Figure 2, with the aggregation weights re-estimated
+in every replication.
+
+
+mapping describes the composition of the index, not the physical composition of its recursively identified
+innovation. It neither identifies a unique wind, flood, temperature, or other physical shock nor makes
+innovations in different VAR specifications a common shock. Their impulse responses remain responses
+to innovations in alternative climate measures.
+
+Mapping rank weights to named inputs. At date t let X(1),t ≤ · · · ≤ X(d),t be the sorted component
+values and πt the permutation linking rank slots to names, X( j),t = X
+                                                                     e π ( j),t , where X
+                                                                        t
+                                                                                        e m,t is named compo-
+nent m. The estimated weight w
+                             b j loads on rank slot j; because the component occupying a slot changes
+from month to month, the effective loading on a name is time varying,
+
+                                                                                                        d
+                                       ωm,t = w
+                                              b π −1 ( m ) ,
+                                                          t
+                                                                          so that          xt∗ =       ∑ ωm,t Xem,t .                                          (1)
+                                                                                                      m =1
+
+
+
+
+                                                                               28
+                                Figure A.5: Expanding-window stability of the weights
+                   (a) MRCINation                                      (b) MRCIRegion                                       (c) MRCINOAA
+
+
+
+
+Notes: Weights re-estimated on an expanding window and plotted vintage by vintage over the 2005–2025 expanding-window period (the COVID window, 2020:M1–
+2021:M6, is held fixed at its December-2019 value). Each band is the share of the corresponding variable family (component-space, top row) or rank quintile
+(rank-space, bottom row) in the assembled index; thin white lines mark individual components, thick black lines mark family/quintile boundaries. To ensure an
+adequate representation, the series are smoothed over a year.
+
+
+
+The rank index is thus an ordinary weighted average of the named components, only with weights that
+reshuffle as the sort does.
+
+A size-neutral measure of named usage. Because every component is standardized, the order-
+statistic basis describes positions within each observation rather than persistent identities: when the
+standardized components are close to exchangeable, each should visit every rank about equally, and the
+average loading ω̄m = T −1 ∑t ωm,t collapses towards the equal weight 1/d, so a raw average hides the
+signal. We read the departure from equal weighting through the rank-occupancy probabilities pmr (the
+fraction of periods in which component m occupies rank r) which combine with the rank weights into the
+size-neutral usage
+                                                                            d
+                                                               ω̄m
+                                                   Um =            −1 = d ∑ w  br pmr − 1,                                                               (2)
+                                                               1/d        r =1
+
+the proportional deviation of component m’s implied loading from equal weight: Um > 0 marks an
+over-weighted name, Um < 0 an under-weighted one. For the NOAA panel we average Um within a
+variable family, so a pooled residual is not inflated by the number of cells it absorbs.
+
+ACI panel. For the national and regional ACI panels, the implied named usage is diffuse and close to
+equal weight. Their rank weights are less concentrated in the tails than those estimated from the NOAA
+panel (Figures 3 and 4); similarly, the expanding-window National quintile shares are nearly flat and the
+Regional profile is only moderately tilted towards the extremes (Appendix A.3, Figure A.5). Because the
+standardized ACI inputs move across ranks over time, the implied loadings within each variable family
+
+
+                                                                            29
+                                           Figure B.1: Deviation from equal weight
+
+
+
+
+    Notes: The NOAA order-statistic index MRCINOAA ranks , over the full estimation sample 1975–2025. Each bar is the rank-implied usage Um (Equation 2),
+    in percent, averaged across the cells sharing a region (color, see legend) and a variable family (horizontal group), with Um = 0 the equal-weight
+    baseline; “Others” collects the variables outside the four named families and “Rest” the regions outside the five named ones. Family-level usage and
+    its rank correlation with the component-space weights (MRCINOAA   comps ) are reported in the text.
+
+
+
+
+tend to fall on both sides of equal weight and largely offset one another. We therefore report this diffuse
+average-usage pattern in words rather than as a separate figure. It provides no basis for assigning either
+rank-space index to a single named climate family.
+
+NOAA panel. For the NOAA panel, the estimated rank weights place about three-quarters of their
+mass in the distributional tails and about three percent on the 30th–55th-percentile interior, with no single
+rank receiving more than 3%. Mapping these rank weights to names yields an average usage pattern
+tilted towards temperature-related families. Heating-degree days (U = +14%) and temperature (+13%)
+are the two most over-weighted families; precipitation and the Palmer drought index are within one
+percentage point of equal weight, and the pooled residual is the most under-weighted (−7%). Average
+usage has a Spearman rank correlation of ρ = 0.80 with the component-space weights (Figure B.1).
+
+
+
+C      Aggregation of the NOAA Panel
+The NOAA specification is estimated throughout using the full set of 82 raw series. Each raw series is
+indexed along two dimensions: a geographic dimension, covering the U.S. climate regions, the contiguous-
+U.S. aggregate, and the Mauna Loa CO2 records, and a climate-variable dimension, covering temperature,
+precipitation, degree-day measures, and the four Palmer drought indices. The consolidation described
+here is used only to display and interpret the component-space weights in Figure 4; it is not used in
+estimation and does not alter the construction of the NOAA index. For this graphical representation, we
+group the raw series along both dimensions. Table 1 maps the raw geographic categories to consolidated
+
+
+                                                                            30
+                             Table 1: Region aggregation for the NOAA specification
+
+     Raw region                                                                                            Aggregated region
+     Upper Midwest                                                                                         Up.MidW.
+     Ohio Valley                                                                                           Ohio.V.
+     Northwest                                                                                             N.West
+     Northern Rockies & Plains                                                                             N.Rockies
+     Northeast                                                                                             N.East
+     Conterminous (Contiguous) United States (Lower 48); South; Rest
+     West; Southeast; Southwest; World emissions series
+    Notes: The mapping keeps five U.S. climate regions as separate groups and assigns every other geographic category (the contiguous-U.S. aggregate,
+    the broad South/West/Southeast/Southwest groupings, and the global-emissions series) to Rest. The two carbon-dioxide series measured at Mauna
+    Loa, Hawaii, do not correspond to a U.S. climate region and are likewise assigned to Rest. Combined with the variable mapping of Table 2, this
+    partitions the raw panel into the region×variable cells that are used to display summed weights.
+
+
+
+regions, retaining the five U.S. climate regions that carry the bulk of the macro-relevant variation and
+collecting the remaining broad aggregates and non-U.S. CO2 series into a single Rest group. Table 2
+maps the raw climate variables to consolidated variable groups, keeping temperature, precipitation,
+heating-degree days, and the Palmer Z-Index as named families and pooling the remaining low-variance
+or closely related measures into Others. Applying the two mappings jointly partitions the 82 raw inputs
+into region×variable cells. For Figure 4 only, we report the sum of the estimated raw-series weights
+within each cell. Thus the displayed NOAA component-space weights are aggregated loadings on named
+region–hazard blocks, while the underlying index remains xt∗ (w) = w′ Xt , where Xt contains the original
+unaggregated 82 NOAA series.
+
+
+
+D      Full Impulse Response Functions
+The main text reports impulse responses for the variables of central interest: industrial production,
+unemployment, and housing starts. This appendix collects the responses of all seven variables in the
+VAR, for all specifications, so that the selected-variable figures of Section 3.2 (Figures 1–2) and the
+weight-reestimating pairs bootstrap figures of Appendix A.2 (Figures A.3–A.4) can be located within
+the full system response. Figures D.1 and D.2 give the fixed-weights residual bootstrap responses
+in component and rank-space; Figures D.3 and D.4 give the corresponding weight-reestimating pairs
+bootstrap responses. Three features are useful for reading the full-system figures. First, each specification
+reports responses to a one-standard-deviation innovation in its own climate measure, so the figures show
+how full-system responses vary across alternative climate measures rather than responses to a common
+shock. Second, the variables not discussed in the main text (PCE inflation, the shadow rate, and the
+exchange rate) display responses that are less robust across specifications than the real-activity variables.
+In several cases the effects are economically muted or imprecisely estimated. Accordingly, the main
+empirical action is most consistently concentrated in the real-activity block, rather than exclusively so.
+Third, every VAR is estimated on 1975:M1–2025:M4 with the COVID-19 window (2020:M1–2021:M6)
+
+
+                                                                          31
+                           Table 2: Variable aggregation for the NOAA specification
+
+     Raw variable                                                                                       Aggregated variable
+     Temperature; Temperature, Average                                                                  Temp.
+     Precipitation                                                                                      Precip.
+     Heating Degree Days                                                                                Heat.DD
+     Palmer Z-Index                                                                                     Palmer.Z
+     Carbon Dioxide, Mauna Loa, Hawaii, Average of Period; Carbon Others
+     Dioxide, Mauna Loa, Hawaii, Trend, Average of Period; Palmer
+     Drought Severity Index; Cooling Degree Days; Palmer Hydrolog-
+     ical Drought Index; Palmer Modified Drought Index
+    Notes: The mapping keeps temperature, precipitation, heating-degree days, and the Palmer Z-Index as separate variable families and pools all
+    remaining measures (the CO2 level and trend, cooling-degree days, and the three other Palmer drought indices) into Others. Combined with the
+    region mapping of Table 1, this yields the consolidated region×variable cells whose summed weights are displayed in Figure 4.
+
+
+
+excluded, 12 lags, and 68% bands, so the figures here are directly comparable to those in the main text
+and differ only in the set of response variables shown.
+
+
+
+
+                                                                        32
+      Figure D.1: Component-Space Climate Measure Shocks (All Variables)
+                        (a) National                     (b) Regional                     (c) NOAA
+
+
+
+
+Notes: Component-space impulse responses of all seven VAR variables to a one-standard-deviation innovation in the assembled
+                                                                     Region
+climate index xt∗ (w
+                   b ), for the National (MRCINation                                           NOAA
+                                              comps ), Regional (MRCIcomps ), and NOAA (MRCIcomps ) specifications. These are the
+full responses underlying the selected-variable Figure 1. VAR models are estimated on data from 1975:M1 to 2025:M4, excluding
+the COVID-19 period (2020:M1–2021:M6), with 12 lags and the ordering ACI/MRCI, INDPRO, PCEPI, UNRATE, SHADOWRATE,
+EXUSUKx, HOUST. Bands are at the 68% level, conditional on the selected penalty b   λ and the fitted weights w
+                                                                                                             b (b
+                                                                                                                λ ).
+
+
+
+
+                                                              33
+               Figure D.2: Rank-Space Climate Measure Shocks (All Variables)
+                           (a) National                       (b) Regional                        (c) NOAA
+
+
+
+
+Notes: Rank-space impulse responses of all seven VAR variables to a one-standard-deviation innovation in the assembled climate index
+                                                         Region
+xt∗ (w
+     b ), for the National (MRCINation                                         NOAA
+                                 ranks ), Regional (MRCIranks ), and NOAA (MRCIranks ) specifications. These are the full responses underly-
+ing the selected-variable Figure 2. Estimation sample, lag length, ordering, and band level are as in Figure D.1; bands are conditional on
+the selected penalty b  λ and the fitted weights w
+                                                 b (b
+                                                    λ ).
+
+
+
+
+                                                                    34
+Figure D.3: Component-Space Climate Measure Shocks: Weight-Reestimating Pairs Bootstrap
+                                    (All Variables)
+                               (a) National                     (b) Regional                      (c) NOAA
+
+
+
+
+      Notes: Component-space impulse responses of all seven VAR variables under the weight-reestimating pairs bootstrap, in which each
+                                              b and re-estimates (B, Σ) at the fixed cross-validated penalty. These are the full responses
+      of B = 1,000 replications re-solves for w
+      underlying the selected-variable Figure A.3. Estimation sample, lag length, ordering, and band level are as in Figure D.1.
+
+
+
+
+                                                                      35
+Figure D.4: Rank-Space Climate Measure Shocks: Weight-Reestimating Pairs Bootstrap
+                                 (All Variables)
+                            (a) National                       (b) Regional                        (c) NOAA
+
+
+
+
+  Notes: Rank-space impulse responses of all seven VAR variables under the weight-reestimating pairs bootstrap, constructed as in Fig-
+  ure D.3. These are the full responses underlying the selected-variable Figure A.4. Estimation sample, lag length, ordering, and band level
+  are as in Figure D.1.
+
+
+
+
+                                                                     36
+
