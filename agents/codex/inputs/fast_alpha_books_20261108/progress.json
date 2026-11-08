@@ -1,0 +1,738 @@
+{
+  "program": "user-fast-alpha-books-20261108",
+  "status": "reserved_before_returns",
+  "max_definitions": 120,
+  "executed_definitions": 0,
+  "lease": {
+    "run_id": "user-fast-alpha-books-20261108",
+    "owner": "codex-fast-alpha-books",
+    "claimed_at": "2026-11-08T10:05:15.070167+00:00",
+    "expires_at": "2026-11-08T12:05:15.070167+00:00",
+    "checked_parent": "9d21e27e310094799e417c5bf157649f7a4609b8"
+  },
+  "definitions": [
+    {
+      "id": "VB_BASE",
+      "parent": "VB",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "VB_ENTRY",
+      "parent": "VB",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "VB_BOTH",
+      "parent": "VB",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "VB_RANDOM_DELAY",
+      "parent": "VB",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "VB_RANDOM_DROP",
+      "parent": "VB",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "ONB30_BASE",
+      "parent": "ONB30",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "ONB30_ENTRY",
+      "parent": "ONB30",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "ONB30_BOTH",
+      "parent": "ONB30",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "ONB30_RANDOM_DELAY",
+      "parent": "ONB30",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "ONB30_RANDOM_DROP",
+      "parent": "ONB30",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "ONBML_BASE",
+      "parent": "ONBML",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "ONBML_ENTRY",
+      "parent": "ONBML",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "ONBML_BOTH",
+      "parent": "ONBML",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "ONBML_RANDOM_DELAY",
+      "parent": "ONBML",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "ONBML_RANDOM_DROP",
+      "parent": "ONBML",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "EOS_BASE",
+      "parent": "EOS",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "EOS_ENTRY",
+      "parent": "EOS",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "EOS_BOTH",
+      "parent": "EOS",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "EOS_RANDOM_DELAY",
+      "parent": "EOS",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "EOS_RANDOM_DROP",
+      "parent": "EOS",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "LDF_BASE",
+      "parent": "LDF",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "LDF_ENTRY",
+      "parent": "LDF",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "LDF_BOTH",
+      "parent": "LDF",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "LDF_RANDOM_DELAY",
+      "parent": "LDF",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "LDF_RANDOM_DROP",
+      "parent": "LDF",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "MON_BASE",
+      "parent": "MON",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "MON_ENTRY",
+      "parent": "MON",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "MON_BOTH",
+      "parent": "MON",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "MON_RANDOM_DELAY",
+      "parent": "MON",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "MON_RANDOM_DROP",
+      "parent": "MON",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "NFP_BASE",
+      "parent": "NFP",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "NFP_ENTRY",
+      "parent": "NFP",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "NFP_BOTH",
+      "parent": "NFP",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "NFP_RANDOM_DELAY",
+      "parent": "NFP",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "NFP_RANDOM_DROP",
+      "parent": "NFP",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "BRIDGE_BASE",
+      "parent": "BRIDGE",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "BRIDGE_ENTRY",
+      "parent": "BRIDGE",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "BRIDGE_BOTH",
+      "parent": "BRIDGE",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "BRIDGE_RANDOM_DELAY",
+      "parent": "BRIDGE",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "BRIDGE_RANDOM_DROP",
+      "parent": "BRIDGE",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "CLS_BASE",
+      "parent": "CLS",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "CLS_ENTRY",
+      "parent": "CLS",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "CLS_BOTH",
+      "parent": "CLS",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "CLS_RANDOM_DELAY",
+      "parent": "CLS",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "CLS_RANDOM_DROP",
+      "parent": "CLS",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "MOC_BASE",
+      "parent": "MOC",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "MOC_ENTRY",
+      "parent": "MOC",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "MOC_BOTH",
+      "parent": "MOC",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "MOC_RANDOM_DELAY",
+      "parent": "MOC",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "MOC_RANDOM_DROP",
+      "parent": "MOC",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "RS_BASE",
+      "parent": "RS",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "RS_ENTRY",
+      "parent": "RS",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "RS_BOTH",
+      "parent": "RS",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "RS_RANDOM_DELAY",
+      "parent": "RS",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "RS_RANDOM_DROP",
+      "parent": "RS",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "DT_BASE",
+      "parent": "DT",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "DT_ENTRY",
+      "parent": "DT",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "DT_BOTH",
+      "parent": "DT",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "DT_RANDOM_DELAY",
+      "parent": "DT",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "DT_RANDOM_DROP",
+      "parent": "DT",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "TOS_BASE",
+      "parent": "TOS",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "TOS_ENTRY",
+      "parent": "TOS",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "TOS_BOTH",
+      "parent": "TOS",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "TOS_RANDOM_DELAY",
+      "parent": "TOS",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "TOS_RANDOM_DROP",
+      "parent": "TOS",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "OT_BASE",
+      "parent": "OT",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "OT_ENTRY",
+      "parent": "OT",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "OT_BOTH",
+      "parent": "OT",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "OT_RANDOM_DELAY",
+      "parent": "OT",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "OT_RANDOM_DROP",
+      "parent": "OT",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "FC2B_BASE",
+      "parent": "FC2B",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "FC2B_ENTRY",
+      "parent": "FC2B",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "FC2B_BOTH",
+      "parent": "FC2B",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "FC2B_RANDOM_DELAY",
+      "parent": "FC2B",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "FC2B_RANDOM_DROP",
+      "parent": "FC2B",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "ST_BASE",
+      "parent": "ST",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "ST_ENTRY",
+      "parent": "ST",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "ST_BOTH",
+      "parent": "ST",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "ST_RANDOM_DELAY",
+      "parent": "ST",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "ST_RANDOM_DROP",
+      "parent": "ST",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "PT_BASE",
+      "parent": "PT",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "PT_ENTRY",
+      "parent": "PT",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "PT_BOTH",
+      "parent": "PT",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "PT_RANDOM_DELAY",
+      "parent": "PT",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "PT_RANDOM_DROP",
+      "parent": "PT",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "S47_BASE",
+      "parent": "S47",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "S47_ENTRY",
+      "parent": "S47",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "S47_BOTH",
+      "parent": "S47",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "S47_RANDOM_DELAY",
+      "parent": "S47",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "S47_RANDOM_DROP",
+      "parent": "S47",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "KUSHO_BASE",
+      "parent": "KUSHO",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "KUSHO_ENTRY",
+      "parent": "KUSHO",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "KUSHO_BOTH",
+      "parent": "KUSHO",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "KUSHO_RANDOM_DELAY",
+      "parent": "KUSHO",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "KUSHO_RANDOM_DROP",
+      "parent": "KUSHO",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "S30_NQ_BASE",
+      "parent": "S30_NQ",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "S30_NQ_ENTRY",
+      "parent": "S30_NQ",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "S30_NQ_BOTH",
+      "parent": "S30_NQ",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "S30_NQ_RANDOM_DELAY",
+      "parent": "S30_NQ",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "S30_NQ_RANDOM_DROP",
+      "parent": "S30_NQ",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "S30_ES_BASE",
+      "parent": "S30_ES",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "S30_ES_ENTRY",
+      "parent": "S30_ES",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "S30_ES_BOTH",
+      "parent": "S30_ES",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "S30_ES_RANDOM_DELAY",
+      "parent": "S30_ES",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "S30_ES_RANDOM_DROP",
+      "parent": "S30_ES",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "TWIN_BASE",
+      "parent": "TWIN",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "TWIN_ENTRY",
+      "parent": "TWIN",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "TWIN_BOTH",
+      "parent": "TWIN",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "TWIN_RANDOM_DELAY",
+      "parent": "TWIN",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "TWIN_RANDOM_DROP",
+      "parent": "TWIN",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "TWIN_CAP1_BASE",
+      "parent": "TWIN_CAP1",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "TWIN_CAP1_ENTRY",
+      "parent": "TWIN_CAP1",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "TWIN_CAP1_BOTH",
+      "parent": "TWIN_CAP1",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "TWIN_CAP1_RANDOM_DELAY",
+      "parent": "TWIN_CAP1",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "TWIN_CAP1_RANDOM_DROP",
+      "parent": "TWIN_CAP1",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "NBL_BASE",
+      "parent": "NBL",
+      "role": "baseline",
+      "status": "reserved"
+    },
+    {
+      "id": "NBL_ENTRY",
+      "parent": "NBL",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "NBL_BOTH",
+      "parent": "NBL",
+      "role": "candidate",
+      "status": "reserved"
+    },
+    {
+      "id": "NBL_RANDOM_DELAY",
+      "parent": "NBL",
+      "role": "unselectable_control",
+      "status": "reserved"
+    },
+    {
+      "id": "NBL_RANDOM_DROP",
+      "parent": "NBL",
+      "role": "unselectable_control",
+      "status": "reserved"
+    }
+  ],
+  "scout_program_unchanged": true,
+  "prior_selection": "Original fast-alpha58+looks, all prior parent/author selection,10,000floor for repository multiplicity; no fresh holdout.",
+  "continuation": "Run frozen design after confirmed published claim; earned later stages only; do not resume paused programs."
+}
