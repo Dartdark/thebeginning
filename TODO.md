@@ -106,6 +106,18 @@ bottom). Times are Central (CT).
       parent folder is now read as 'no KILL'; check GetLastError: 2/3 (not found) = no KILL, anything else = UNKNOWN ->
       NoEntry. All 6 kill-switch strategy files; VPS compile + check inputs survive the paste.
 
+## When an account is FUNDED (passes its evaluation) - do before its first funded trade (added 2026-11-08)
+- [ ] **You:** paste and compile the funded strategy files (VB_SP, ONB ML, Monday Long, Late-Day Flow, NFP, EOS, CL fade;
+      version 2026-11-08); read the Output tab for 'compiled successfully' on each (first compile of `GetRTAccountEquity`
+      inside a strategy: if it fails, send Claude the error).
+- [ ] **You:** on every funded chart set the cushion guard inputs (`funded_strategies/FUNDED_PLAN.md`, 'Cushion cap'):
+      UseCushion true, AccountName = the funded account exactly, StartBalance / TrailDD / LockBalance / CushionRef
+      (50K: 50000 / 2000 / 50100 / 1500; 150K: 150000 / 4000 / 150100 / 3000), **PeakSeed = the start balance**.
+- [ ] **You, from then on:** after ANY MultiCharts restart or recompile, retype PeakSeed = the highest end-of-day balance so
+      far on every funded chart (0 = the strategy takes no trades).
+- [ ] **Claude:** first funded day: check from the logs that each entry's size matches the cushion (balance - threshold)
+      and the stop cap; add the account to `FUNDED` in analysis/account_tools.py and to expected_setup.json.
+
 ## 150K buying plan, Nov-Dec 2026 (user, 2026-10-30; job Nov 10 - Dec 24, $25 x 8 h, paid weekly, all pay to evaluations)
 - [ ] Sun Nov 1: buy 150K No-Activation #4 (afternoon, before ~18:00 CT), set up its 4 charts, send Claude the account number.
 - [ ] Each payday (Fri Nov 13, 20, 27, Dec 4, 11, 18; last pay ~Dec 24): buy as many $249 150Ks as the pay covers, ONE a day (same-day buys pass/fail together):
