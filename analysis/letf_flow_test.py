@@ -78,7 +78,7 @@ if __name__ == "__main__":
     print(line(T.net, T.date, "rule: follow yesterday's LETF flow 14:30-15:00"))
     print(line(T[T.side > 0].net, T[T.side > 0].date, "   longs")); print(line(T[T.side < 0].net, T[T.side < 0].date, "   shorts"))
     print(f"      by year $: {T.groupby(T.date.dt.year).net.sum().round(0).astype(int).to_dict()}")
-    rth = pd.Series(g.c[g.trading, jof(1500)] - g.o[g.trading, jof(831)], index=days); prev = rth.shift(1)
+    rth = pd.Series(g.c[g.trading, jof(1500)] - g.o[g.trading, jof(831)], index=days); prev = rth.shift(1).fillna(0.0)   # bug fix 2026-11-08: NaN days -> no control trade
     Tc = trades(g, sig, lambda d, z: -int(np.sign(prev.get(d, 0.0)))); print(line(Tc.net, Tc.date, "control: fade yesterday's cash session"))
     agree = np.mean([np.sign(z) == -np.sign(prev.get(d, 0.0)) for d, z in sig.items()]); print(f"   rule side = fade-yesterday side on {agree:.0%} of signal days")
     Tw = trades(g, sig, lambda d, z: int(np.sign(z)), t0=1400, t1=1430); print(line(Tw.net, Tw.date, "same rule 14:00-14:30 (info)"))
