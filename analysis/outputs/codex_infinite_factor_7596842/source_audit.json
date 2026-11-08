@@ -1,0 +1,58 @@
+{
+  "title": "Infinite Factor Structure in Conditional Asset Pricing",
+  "authors": [
+    "Mikhail Chernov",
+    "Bryan Kelly",
+    "Semyon Malamud",
+    "Johannes Schwab"
+  ],
+  "source_version": "October11,2026",
+  "review_date": "2026-11-07",
+  "pages": 240,
+  "source_permission": "owned_upload",
+  "source_file_id": "file_000000001e8881f69209dbd822c4e29e",
+  "hashes": {
+    "agents/codex/inputs/infinite_factor_7596842/paper.pdf": "3191ea148ae7c1be0eef54de383213ec36bc64ce2ed19c05c1dcca7374de2863",
+    "agents/codex/inputs/infinite_factor_7596842/paper.txt": "d05777279f5b110f8047369167ee14bd8ce034b813cc02787e52326396d3cd4c",
+    "analysis/codex_infinite_factor_7596842_audit.py": "fe69c936ca5783f242caf9e13c8907951ce20e74a1f08590910383ce2e709dab"
+  },
+  "scope": "Focused source review: introduction, setup/assumptions, Theorem1, conditional-stock setup, Section5 illustrations/pricing/covariance and conclusion; no independent audit of all appendix proofs.",
+  "illustration": {
+    "conditional_a": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "conditional_b": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "pooled": [
+      [
+        0.5,
+        0.0
+      ],
+      [
+        0.0,
+        0.5
+      ]
+    ],
+    "zero_means": true,
+    "pooled_rank": 2,
+    "scope": "Finite algebra only; no return simulation, no profitable strategy, no proof certification"
+  },
+  "new_economic_trials": 0,
+  "strategy_returns_computed": false,
+  "verdict": "METHOD_REFERENCE_NO_STRATEGY_ADMITTED"
+}

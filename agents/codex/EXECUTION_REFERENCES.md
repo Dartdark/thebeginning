@@ -1486,6 +1486,23 @@ Source: Bandyopadhyay, SSRN7630598 (October18,2026), [focused review](results/li
   and its cost ledger. Existing [data requirements D42–D45](DATA_NEEDED.md) apply; no new dataset request or live change.
 - Status: reference only; no return trial, simulator build, monitoring policy, allocation or claim of lower costs.
 
+### Research-method follow-up — Conditional factors versus pooled portfolio risk (2026-11-07)
+
+Source: Chernov, Kelly, Malamud and Schwab, SSRN7596842, October11,2026 version.
+[Focused review](results/infinite_factor_7596842_review_20261107.md),
+[source receipt and finite algebra illustration](../../analysis/outputs/codex_infinite_factor_7596842/source_audit.json).
+- Use: a small unconditional covariance eigenvalue does not by itself imply diversifiable noise. State-dependent
+  managed exposures can add systematic directions under the paper's assumptions. Distinguish explanatory variance,
+  expected-return spanning, sample estimation error and executable portfolio value.
+- Evidence: focused theoretical-source inspection plus a two-state zero-mean covariance illustration; no exhaustive
+  proof audit, empirical replication, native fill evidence or demonstrated savings. More risk directions need not
+  mean positive expected returns. This supplements the Hidden Sharpe frontier caution above.
+- Limits: infinite/growing menus and stock panels are not our finite integer futures book. Regularization can be
+  biased; retaining every noisy component is not proved optimal after costs. No allocation, factor gate or strategy
+  revival follows. Existing observed equity-index concentration findings remain intact.
+- Next check only within a separately justified frozen estimator comparison: causal features, common opportunity
+  set, chronological fitting, feasible weights, actual costs and account paths. No new data request or return trial.
+
 ## Minimum record for any later execution comparison
 
 Freeze parent signals, decision times, quantities, protective exits and eligible opportunities.
