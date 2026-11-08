@@ -1,0 +1,1537 @@
+    Trade-off Between Trade Efficiency and Immediacy:
+          Evidence from Switching to NASDAQ
+                S. Bonini1,? , E. Gousgounis2 , F. Pavesi3 , A. Taatian1
+
+                              1
+                            Stevens Institute of Technology, NJ, USA
+                   2
+                       Commodity Futures Trading Commission (CFTC), USA
+                                    3
+                                        Carlo Cattaneo University, Italy
+
+
+
+                                  Wednesday 15th December, 2021
+
+
+
+
+                                  PRELIMINARY AND INCOMPLETE
+                                   Do not circulate without permission
+
+
+
+
+    The authors thank Adam Kostyal and Frank Hathaway at NASDAQ for helpful initial discussions and
+for providing data on exchange switches. The authors thank seminar participants at the Stevens Institute
+of Technology brown bag series for valuable comments. Any errors remain our own.
+?
+  Corresponding author. Email address: sbonini@stevens.edu
+
+
+
+
+                       Electronic copy available at: https://ssrn.com/abstract=3985691
+   Trade-off Between Trade Efficiency and Immediacy:
+         Evidence from Switching to NASDAQ
+
+
+                                            Abstract
+     The trade-off between execution immediacy and price improvement has explained the
+     choice of traders between dark or lit markets. We show that this choice is altered
+     by the same trade-off resulted from trading in dealer versus auction markets. We
+     find that the switch to NASDAQ increases execution cost, partly due to the higher
+     preferencing agreement in NASDAQ, and in response, uninformed trades, which are
+     more sensitive to cost changes, move to dark markets. Our results show that the
+     informational efficiency improves in the lit market at the expense of lower liquidity,
+     when a firm moves from NYSE to NASDAQ.
+
+
+
+
+JEL classification: G14, G32, G41
+Keywords: NYSE, NASDAQ, listing, dark trading
+
+
+
+
+                  Electronic copy available at: https://ssrn.com/abstract=3985691
+1.      Introduction
+
+     Tse and Devos (2004) show that moving from NYSE to NASDAQ increases the trading
+cost. In this paper, we find the same negative effect on quoted bid-ask spreads when a firm
+moves to NASDAQ, and show that the increase in the execution cost alters the price-time
+equilibrium between dark and lit markets. Following the move to NASDAQ, uninformed
+trades, who are more sensitive to trade cost, are siphoned from lit market to dark pools
+to alleviate the rise in the execution cost at the expense of lower trade immediacy. We
+find that the shift of trades to dark markets increases dark liquidity, measured by relative
+effective spread. Further, we show that the relative realized spread decreases in the lit
+market, indicating an improve in price discovery.
+     Cohen, Maier, Schwartz, and Whitcomb (1981) explain one of the several price-time
+trade-offs before the traders when a trader decides to use a market order versus a limit
+order. If traders have to trade fast on a private information, they are expected to use market
+orders, while if they are patient and care more about price improvement and low cost trade,
+they will choose limit orders. The trade-off between price and time also occurs in the choice
+of a trading venue between auction and dealer markets. Aggarwal and Angel (1997) argue
+that firms face a trade-off between the lower cost of an auction market and the marketing
+advantage of a dealer market. Auction markets, such as NYSE, have a lower execution
+cost and higher price improvement as compared to dealer markets, such as NASDAQ. In
+dealer markets, though, the presence of dealers improves immediacy of order execution, as
+dealers are almost always there to take a position. One of the major reasons for the high
+trading cost in dealer markets is the prevalence of preferencing. Preferencing agreements
+between market centers and brokers who route customers’ orders allow market centers to
+obtain order flow regardless of their quotes and this may result in a lack of competition in
+the market, and even though alternative market centers, whether NYSE or NASDAQ, can
+compete for order flow by posting aggressive quotes, they obtain significant portion of their
+orders through preferencing. These agreements are much more prevalent in NASDAQ due
+
+                                                1
+
+                  Electronic copy available at: https://ssrn.com/abstract=3985691
+to its dealer market nature. Weston (2000) argues that the 1997 NASDAQ reforms have
+reduced NASDAQ dealers’ rents, however, He, Odders-White, and Ready (2006) document
+a persisting high preferencing for NASDAQ stocks and find that dealers in NASDAQ capture
+additional profits of up to 55% of the effective spread.
+   In addition to the aforementioned trade-off mechanisms, Menkveld, Yueshen, and Zhu
+(2017) introduce another price-time trade-off by arguing that after investors receive ur-
+gency or cost shocks in real-time, they move between low-cost, low-immediacy venues (dark
+venues) and high-cost, high-immediacy venues (exchanges). This pecking order theory and
+its predecessors, such as Zhu (2014), explain how the choice between price improvement and
+informational advantage segments the market between dark and lit. Zhu (2014) argues that
+exchanges are more attractive to informed traders, and dark pools are more attractive to
+uninformed traders, referring in part to the higher sensitivity of uninformed traders to trade
+cost. In the arrival of a cost shock, uninformed traders are more motivated to move from
+lit to dark, resulting in price discovery improvement as well as liquidity deterioration in
+exchange (lit) markets. In this paper, we show how the change in the dealer-auction market
+equilibrium can affect the dark-lit market equilibrium, and how liquidity and price discovery
+are affected in the new equilibrium. When a firm switches from NYSE (an auction market)
+to NASDAQ (a dealer market), it creates a cost shock to the traders, both informed and
+uninformed. More sensitive to the cost shock, the uninformed traders decide to leave the
+exchange and move to dark venues to relieve the cost shock. Thus, the liquidity in the lit
+market decreases while informational efficiency and price discovery improve.
+   Establishing the mechanism, we take a step back and discuss whether this mechanism
+can support the decision of the managers to switch from NYSE to NASDAQ, along with
+other reasons expressed in the previous papers, such as Dang, Michayluk, and Pham (2018)
+and Tse and Devos (2004). We test the classical explanations stated by the firms’ managers
+in their switch announcements. Our tests show that while the market reaction to switch an-
+nouncement is insignificant, liquidity and trade volume are negatively affected by the switch,
+
+
+                                                2
+
+                  Electronic copy available at: https://ssrn.com/abstract=3985691
+with relatively large magnitude. We find insignificant increase in coverage of analysts and
+insignificant decrease in institutional investors’ concentration and capital raise. Additionally,
+we find no systematic industry effect that could motivate a decision to move on the basis
+of joining a ”club” of, say, tech firms on NASDAQ. We also examine CEO restlessness as
+a behavioral reason for the switch; however, we find no significant results. Therefore, we
+conjecture that managers choose to switch to NASDAQ to increase price discovery at the
+expense of execution cost, following our proposed price-time trade-offs mechanism.
+     Our paper makes several important contributions to the optimal trading choice and dark
+pools trading literature. It is in line with Jiang, McInish, and Upson (2012), who find that
+the price discovery on exchanges improves in fragmented markets because uninformed traders
+are able to route their order flow to off-exchange trading venues, leaving a larger proportion
+of informed traders at the exchange.
+     The rest of the paper follows this structure: In Section 2, we review the literature on
+dark pools and on comparison between NYSE and NASDAQ, and propose our hypotheses.
+Section 3 explains the data and variable. Section 4 presents our analyses and results. In
+section 5, we examine several rival explanations for switching to NASDAQ. Finally, Section
+6 concludes.
+
+
+
+2.      Dark Trades, Listing Switch, and Hypotheses De-
+        velopment
+
+2.1.    Dark vs. Lit Trades
+
+     Dark pools are one of the forms of ATS (Alternative Trading Systems) markets, in which
+trade transparency is less than in exchange markets. Dark and lit (exchange) trades differ
+in their levels of pre-trade transparency, but not post-trade transparency (Comerton-Forde
+and Putniņš (2015)). Pre-trade transparency is the degree to which information is available
+to market participants about buying or selling interest, including quotes to buy or sell and
+
+                                                 3
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+the volumes available at the quotes. Post-trade transparency is the information about trades
+after they execute. A considerable fraction of trade volume belongs to dark pools. 14% of the
+consolidated volume trades in 19 dark pools in the US. In Europe, 16 dark markets account
+for approximately 4.5% of the volume, and in Canada, dark pools represent 2% of the volume
+(Buti, Rindi, and Werner (2017)). The big development in dark pools came in 2007 when the
+SEC passed Regulation NMS (National Market System), which allowed investors to bypass
+public exchanges to gain price improvements. The goal was to attract a number of new
+players to the market, and, as a result, a large number of dark pools were created over the
+next ten years. It is fair to say that there are three main features differentiate lit markets
+from dark venues, which are partially exempt from the NMS requirements. First, compared
+with lit markets, dark venues currently are not subject to NMS fair-access requirements and
+thus can prohibit or limit clients from accessing their services. Second, dark venues provide
+limited or no pre-trade transparency in that their best-priced bids and offers are not required
+for inclusion in the publicly distributed consolidated quotation data. Finally, executions on
+dark venues occur at finer price increments than on lit markets.
+   There is a considerable body of theoretical and empirical research on the choice of traders
+to trade in dark markets or exchanges. Dark pools are required to match orders at prices
+within the National Best Bid and Offer (NBBO), while exchange orders can be submitted
+to execute immediately even if the resulting execution prices fall outside of the prevailing
+NBBO. While this approach in dark pools can lead to lower bid-ask spread costs, if no
+match within the NBBO exists, then no trade will occur. Menkveld et al. (2017) proposes the
+pecking order hypothesis which predicts that as investors’ trading needs become more urgent,
+they move from low-cost, low-immediacy venues to high-cost, high-immediacy venues. More
+concretely, recent theories of dark pools mentioned above predict that dark venues (low-cost,
+low-immediacy) are at the top of the pecking order, whereas lit venues are at the bottom
+(high-cost, high-immediacy), because dark venues provide potential price improvement but
+lack execution certainty. In another seminal theory papers, Zhu (2014) proposes a model
+
+
+                                                 4
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+of venue choice that allows both informed and uninformed traders to trade on exchanges
+and dark pools. Based on the model, since informed traders trade in the same direction
+and crowd one side of the market, they face a higher execution risk (larger implied bid-ask
+spread, indicating a higher execution cost) in a dark pool than uninformed traders face.
+Therefore, exchanges will be relatively attractive to informed traders, and dark pools will be
+relatively attractive to uninformed traders. Consistently, Jiang et al. (2012) and Foley and
+Putniņš (2016) also show that the traders in dark pools are mainly uninformed. Jiang et al.
+(2012) find that the price discovery on exchanges improves in fragmented markets because
+uninformed traders are able to route their order flow to off-exchange trading venues, leaving
+a larger proportion of informed traders at the exchange.
+
+
+2.2.   Switching to NASDAQ and Its Effect on Dark Trades
+
+   The choice of a stock listing market is a relatively permanent one. Once firms choose to
+IPO on one market, they generally remain listed on that market indefinitely. All the same,
+if a switch occurred, it was exclusively from NASDAQ to NYSE. However, Aeroflex Co. was
+the first company to change its listing to NASDAQ in March 2000. The economic effects of
+this change have been explored with mixed results. Kalay and Portniaguina (2001) found a
+significant positive abnormal return, and a reduce in the daily bid-ask spread and the trading
+volume; On the contrary, Pruitt, Van Ness, and Van Ness (2002) found no improvement in
+trading or quoting behavior, but a deterioration in key metrics. These conflicting results
+might explain the dearth of follow-on switches in the following years. Nevertheless, in 2008,
+the market recorded a jump from essentially none to almost 50 firms opting out of NYSE and
+switching to NASDAQ. In 2009, despite the market-wide drought in listings in the aftermath
+of the crisis, firms kept on switching at an unprecedented number, from NYSE to NASDAQ.
+Switches continued in the following years and, since 2010, the numbers of switches between
+the two markets in the two directions have been essentially the same (excluding ETFs and
+ETNs). Figure (1) illustrates the distribution of switches over the years for both directions.
+
+
+                                                5
+
+                  Electronic copy available at: https://ssrn.com/abstract=3985691
+This phenomenon is economically significant in light of the widely publicized (NASDAQ
+(2017b)) milestone, reached by NASDAQ, which, in September 2017, announced to have
+passed the 1 trillion dollars in market cap, snapped from NYSE.
+
+                                    [Insert Figure 1 here]
+
+   Although the weight of literature is larger on the switches from NASDAQ to NYSE,
+there are very few papers that find benefits in switching to NASDAQ, and try to explain
+the rationale. Among them, Cheon, Christensen, and Smith Bamber (2001) show that
+abnormal returns around the earning announcements are larger for firms listed on NASDAQ
+compared to those on NYSE, and Masulis and Shivakumar (2002) compare the speed of price
+adjustments to seasoned equity offering announcements by NYSE/AMEX and NASDAQ,
+and show that NASDAQ is faster. Execution times for orders in NASDAQ stocks are lower
+than for orders in NYSE-listed stocks, also consistent with Boehmer (2005)’s results. Speed
+is presumably an important aspect of execution quality to traders with short investment
+horizons and to investors who base trading decisions on time-sensitive information (He et al.
+(2006)). The most recent papers that study the aspects of switch to NASDAQ find an
+increase in execution cost upon the switch. Tse and Devos (2004) show that firms that
+move to NASDAQ increase investor recognition and volume at the expense of an increase
+in trading costs. Dang et al. (2018) find the move to the NASDAQ increases trading costs,
+while improves visibility and attracts more liquidity providers in the long term.
+   Few papers have investigated the level of dark trades in the two groups of NYSE-listed
+stocks and the NASDAQ-listed ones. Buti, Rindi, and Werner (2011) show that dark pool
+activity is generally higher for NASDAQ-listed stocks than NYSE-listed ones. They attribute
+this difference in dark pool activity to the type of stocks listed and mainly traded in each
+of these two exchanges. They show that there is an association between dark pool activity
+and firm size (or stock capitalization).
+   The above arguments lead us to propose the following hypotheses: When a firm moves
+
+
+                                                 6
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+to NASDAQ, the preferencing friction increases and therefore the cost of trade (in the entire
+market, including both lit and dark) increases. Accordingly, we expect that upon the switch
+the quoted bid-ask spread widens:
+     Hypothesis 1) Following the switch to NASDAQ, execution cost (quoted bid-ask spread)
+increases.
+     Since the cost of trade is increased, uninformed traders, who are more sensitive to cost
+changes, decide to move to a less expensive markets, namely dark pools:
+     Hypothesis 2) Following the switch to NASDAQ, a significant volume moves from lit
+markets to dark pools.
+     The asymmetry of sensitivity with respect to the execution cost between informed and un-
+informed traders segments the market and increases the relative number of informed traders
+in the lit market. Since more informed traders have moved to the dark markets, its liquidity
+improves. We decompose the quoted bud-ask spread to effective and realized spreads to have
+a more precise measure for the hidden liquidity (effective spread) in the dark pools and price
+efficiency (realized spread) in the lit markets:
+     Hypothesis 3) After switching to NASDAQ, the liquidity (effective spread) in the dark
+market improves, the liquidity in the lit market deteriorates, and the informational efficiency
+(realized spread) in the lit market improves.
+     In the rest of the paper, we test these hypotheses.
+
+
+
+3.      Data and Variables
+
+3.1.    Data Sources
+
+     We obtained the data on the switching firms from NASDAQ Economic and Statistical
+Research Department. The data set includes the full list of issuers who switched to and from
+NASDAQ in the period 2009-2017. Each switching issuer is identified by name, ticker, date
+of announcement, date of effective switch, and market cap at the time of the switch. The
+
+
+                                                  7
+
+                    Electronic copy available at: https://ssrn.com/abstract=3985691
+sample excludes ETFs, ETNs, and includes only corporate switchers. Since the financial
+crisis period has profoundly affected the pricing and trading behavior of all securities, we
+narrow the sample to switches announced in 2009 and later. Our final sample consists of
+110 firms that switched from NYSE to NASDAQ between 2009 and 2017, and 72 firms that
+switched from NASDAQ to NYSE in the same period. Interestingly, there are two firms
+that switched twice: first from NASDAQ to NYSE and after a few years back to NASDAQ.
+While anecdotally interesting, this phenomenon is isolated and does not affect our statistical
+results.
+   We collect the total volume of lit and dark trades from CRSP, reported in vol variable.
+Our source of data for ATSs is TAQ database. Since the late 1970s, all market centers and
+SEC-registered exchanges that trade NYSE- or AMEX-listed securities send their trades and
+quotes to a central consolidator. The Consolidated Tape System (CTS) and Consolidated
+Quotation System (CQS) data streams are produced to be distributed worldwide. CQS
+calculates a National Best Bid and Offer (NBBO) based on the price, size, and time priority
+scheme for every quote message received from a market center. If the quote is a NASDAQ
+market maker quote, CQS also calculates a NASDAQ BBO.
+   We collect additional market data from multiple sources: stock price and volume data,
+used to estimate liquidity and volatility measures, are downloaded from CRSP; accounting
+and financial figures are taken from COMPUSTAT and used as control variables for firm’s
+fundamental attributes and in capital structure analysis. Institutional investors’ holdings
+and identities are pulled from Thomson-Reuters’ Institutional (13F) Holdings data. Analyst
+coverage and forecasts are taken from IBES Thomson-Reuters.
+   The control variables in our regressions are summarized in Table 1: total assets, EBITDA,
+intangible assets, total liability, revenue, and leverage ratio (debt to asset).
+
+
+
+
+                                                 8
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+3.2.   Measuring Liquidity and Price Efficiency
+
+   Prior studies have compared the execution costs in the NYSE and NASDAQ markets
+primarily on the basis of their quoted bid-ask spreads. Along with this measure, we also use
+two other measures for execution quality: effective and realized spreads. If trades can occur
+inside the spread, a better measure of execution costs is effective spread, which is based on
+trade price. Effective spread is given by the signed difference of the trade price minus the
+midpoint of the consolidated best bid or offer at the time of order receipt (Equation (1)).
+Effective spread is a standard measure in microstructure, and it captures the overall cost of
+executing a trade from the viewpoint of a trader submitting a marketable order. While the
+quoted spread reflects disseminated quotes, the effective spread reflects trades at implicit
+quotes not publicly disseminated. Therefore, it is an appropriate proxy for the liquidity
+component of the execution cost. To control for the magnitude of the price, relative effective
+spread is preferred to be used:
+
+
+                                                            2Dk (Pk − Mk )
+                       Relative Ef f ective Spreadk =                                     (1)
+                                                                  Pk
+
+   where Dk is a dummy variable that equals +1 if the kth trade is a buy and -1 if the kth
+trade is a sell, Pk is the price of the kth trade, and Mk is the midpoint of the NBBO quotes
+assigned to the kth trade.
+   Realized spread is the signed difference between the execution price and the midpoint of
+the consolidated quote five minutes after the trade (Equation (2)). Realized spreads capture
+liquidity suppliers’ revenue net of losses to better-informed traders. Therefore it is a proxy
+for price discovery and informational efficiency. To control for the magnitude of the price,
+relative realized spread is preferred to be used:
+
+
+                                                          2Dk (Pk − Mk+5 )
+                       Relative Realized Spreadk =                                        (2)
+                                                                 Pk
+
+   where Mk+5 is the prevailing midpoint five minutes after the midpoint Mk . In the fol-
+
+
+                                                 9
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+lowing sections, we use effective spread as the measure for liquidity and the realized spread
+for price efficiency.
+
+
+3.3.    Descriptive Statistics
+
+   Table 1 presents descriptive statistics of the market cap and fundamentals of the firms
+in the two panels, switchers to NYSE and to NASDAQ. There are 72 firms in our sample
+group that switched to NYSE and 110 firms that switched to NASDAQ, during the period of
+2009-2017. The average numbers indicate that, unconditionally, the switchers to NASDAQ
+are larger firms than the switchers to NYSE, during the period of 2009-2017. However,
+the average leverage ratio (debt to assets) is about 55% for both groups. The difference
+in revenue indicates that, on average, firms that switch to NASDAQ have more revenues
+than those moving in the opposite direction. On the one hand, this result is in line with
+the average market cap that suggested a larger size firms go to NASDAQ. On the other
+hand, it is somewhat unexpected, as it is against the common perception that firms move
+to NYSE after having grown and thus qualified for a larger, more reputable market. The
+minimum values for all the variables are positive, except for EBITDA, suggesting that some
+firms reported operational losses at the time of the switch.
+
+                                      [Insert Table 1 here]
+
+   Table (1) also presents the descriptive statistics for the market characteristics of the firms
+in the two panels on the day before the switch. The mean values of daily return, volatility
+(daily return standard deviation), bid-ask spread, and maximum price over minimum price
+(M axOvM in) in the two panels are not statistically different. The distributions of these
+variables are slightly skewed towards the left in both panels. Standard deviation and min
+values indicate that dispersion was a little higher in those who left NYSE. Volume (daily
+number of traded shares) in those who left NYSE is larger, but the difference is not significant.
+These figures indicate that the two groups of switchers exhibit strongly comparable market
+
+
+                                                  10
+
+                    Electronic copy available at: https://ssrn.com/abstract=3985691
+characteristics at the time of switch.
+     Tables (2) shows the summary statistics of dark pool activities on the day before the
+switch. Dark Share is the ratio of dark trades to all trades in a day, and, unconditionally,
+is about 40%. The average trade volumes indicate that, on average, the volume of trade in
+the lit market (exchange) is 70% higher than in the dark market. The summary statistics’
+numbers are cross-checked with O’Hara and Ye (2011), Foucault, Pagano, Roell, and Röell
+(2013).
+
+                                     [Insert Table 2 here]
+
+
+
+
+4.      Empirical Analysis and Results
+
+4.1.      Switch to NASDAQ and Cost of Execution
+
+     Despite the convergence in fees and microstructures, the preferencing agreements are
+more common in NASDAQ than in NYSE, and this inefficiency and friction in matching with
+the best available price leads to higher execution cost in NASDAQ. To test hypothesis (1),
+we measure the change in different market characteristics, including measures for volatility
+and liquidity, upon the switch to NASDAQ, and control for several co-variates. The uni-
+variate and multivariate results are reported in the appendix. Since the results could be
+potentially driven by factors that we failed to identify and control for in the estimation, we
+resolve the potential endogeneity problem by identifying a set of control firms, matching each
+switching company with a non-switching peer. Crucially, we identify matching observations
+from the population of similar firms in the same market as the switching firm is about to
+leave and on pre-switch financial characteristics. We use PSM (Propensity Score Matching)
+to find a benchmark stock for each of the switching (treatment) stocks, based on market
+cap, industry, and liquidity, prior to the switch time on pre-switch market. We managed to
+match 42 pairs for switchers to NASDAQ, and 52 pairs for switchers to NYSE. Unmatched
+
+
+                                                 11
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+firms are dropped from the diff-in-diff analysis. We estimate the following diff-in-diff model:
+
+
+
+
+  Zi,t = α + β1 preposti,t + β2 T reati,t + β3 preposti,t × T reati,t +
+
+                                                                            ΦControls + γi + δt + i,t
+
+
+       where prepost is a dummy variable which is 0 before switch and 1 after switch, and
+the vector of controls consists of M arkCap, act, EBIT DA, and Leverage. γ and δ are
+respectively year and industry fixed effects. treated is a dummy variable, 1 if the firm is
+treated (switched), and 0 if the firm is a control.
+       Table (3) shows the results of the tests on market characteristics for both NYSE to NAS-
+DAQ and NASDAQ to NYSE switch directions. We compute daily returns as DailyReturn =
+ln( PPt−1
+       t
+          ). We measure volatility by the daily rolling standard deviation based on the last 30-
+day returns (RtrnST D) and the ratio of the daily maximum and minimum trading prices
+(M axOvM in). Similarly, we measure liquidity using the relative quoted bid-ask spread,
+BidAskSpread = ask−bid
+                 bid
+                       , and the Amihud illiquidity measure1 . In Panel (1), the two
+coefficients of the interaction terms in models (4) and (5) show that the execution cost
+increases when a firm switches to NASDAQ. The ratio of the daily maximum and mini-
+mum trading prices (M axOvM in) increases by 21%, and the relative quoted bid-ask spread,
+BidAskSpread, increases by 13%. Our results show that liquidity is negatively affected by
+the switch from NYSE to NASDAQ, with relatively large magnitude.
+
+                                        [Insert Table 3 here]
+
+   1
+    Amihud (2002) presents the liquidity measure for each stock i as the average ratio of the daily return to
+                                                                      P |Rid |
+the (dollar) trading volume on that day, over Di days: ILLIQi = D1i      V OLid
+
+
+
+
+                                                     12
+
+                     Electronic copy available at: https://ssrn.com/abstract=3985691
+4.2.   Shift of Trades From Lit to Dark Market: An Evidence for the Pecking
+       Order Hypothesis
+
+   Dark markets have a lower cost of trade and higher price efficiency compared to exchange
+(lit) markets. In dark pools, the trade request waits until an opportunity happens with in
+the range of NBBO as oppose to market orders in the lit markets. Therefore, we conjecture
+that, following the switch to NASDAQ and the increase in the execution cost, a significant
+volume moves from lit markets to dark pools and the volume of trades in dark pools increases,
+alleviating the high cost in NASDAQ. The model specification is (4).
+
+
+
+
+ Vi,tDark = α + β1 preposti,t + β2 Largei,t + β3 preposti,t × Largei,t + ΦControls + γi + δt + i,t (3)
+
+
+   Vi,tDark is the trade volume in the dark markets. Table (4) shows the change in dark
+trade volume for switches from NYSE to NASDAQ during the period 2009-2017. Model (1)
+shows that after switching to NASDAQ, about 113,000 shares of a switching stock move
+to dark daily. Following Cox (2019), we conjecture that the fragmentation of the trades is
+more pronounced when the firm size is large. Therefore, we interact the dummy variable
+prepost of switch with Large, a dummy variable for firm size. Large is 1 if the total asset
+of the firm is above 1100 million dollars, the median of the size for the firms who switched
+to NASDAQ, and 0 otherwise. The results show an increase in dark trades for firms with
+a total asset value of above 1100 million dollars after the switch to NASDAQ, confirming
+our hypothesis. In Model (2), the coefficient of the interaction term indicates that, upon the
+switch, 418,000 shares change the trade venue from lit to dark. This number translates to
+about 50% increase in daily trade volume for a stock in the dark pools. To show that this
+number of trades are siphoned from the lit to dark markets, Models (3) and (4) measure
+the change in the ratio of dark trades to all trades (dark and lit). Model (3) shows a 0.8%
+increase in the dark trade ratio. Model (4) shows that this increase is 2% for the large firms.
+
+
+                                                  13
+
+                    Electronic copy available at: https://ssrn.com/abstract=3985691
+                                     [Insert Table 4 here]
+
+   Shifting the trades from lit to dark increases the liquidity in the dark market. Table (5)
+presents the effects of switch to NASDAQ on the liquidity of dark venues. Model (1) shows
+an increase in the relative effective spread, and Model (2) shows that the effect changes its
+direction for the large firms. While the liquidity increases for large firms, Models (3) and
+(4) do not show any significant change in the relative realized spread.
+
+                                     [Insert Table 5 here]
+
+
+
+4.3.   Effect of Shifting the Trades to Dark on the Lit Market Quality
+
+   According to Zhu (2014), uninformed traders are more sensitive to trade cost and prefer
+to trade in dark markets when the trade cost in exchanges is high. Therefore, we conjecture
+that the responses of informed and uninformed traders are not the same when a cost shock
+arrives. That said, the uninformed traders are more likely to depart exchanges and go dark,
+leaving the exchange market more populated by the informed ones. Once the relative number
+of informed traders increases, price discovery improves. This improvement in price discovery
+comes at the expense of higher illiquidity and execution cost in the lit market. To test this
+hypothesis, we estimate the following cross-sectional model:
+
+
+
+
+ Yi,t = α + β1 preposti,t + β2 Largei,t + β3 preposti,t × Largei,t + ΦControls + γi + δt + i,t (4)
+
+
+   Yi,t is the relative effective/realized spreads. Table (6) presents the effects on lit markets.
+Models (3) and (4) show that realized spread decreases upon the switch to NASDAQ, showing
+an improvement in informational efficiency and price discovery.
+
+                                     [Insert Table 6 here]
+
+
+
+                                                 14
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+4.4.    Switch to NASDAQ and Market Reaction
+
+     The transfer of uninformed traders to dark would have an implication: lower adverse
+selection cost in the lit market, although the aggregate quoted bid-ask would increase, due
+to lower dealer/broker competition in NASDAQ. To see how market reacts to this trade-off
+between cost and market efficiency, we run an event study around the switch announcement
+date. We estimate a standard market-adjusted model with a 180 days estimation window
+of (-210;-30). Abnormal returns and Cumulative Abnormal Returns (CAR) are computed
+from 5 days before the announcement day up to 10 days after the announcement. Figure
+(2) presents cross-sectional averages of the cumulative abnormal market returns around the
+switch announcement date at 95% confidence interval. CARs are insignificantly different
+from zero in either direction, confirming that investors see the switch as a trade-off with no
+significant value creation.
+
+                                    [Insert Figure 2 here]
+
+
+
+
+5.      Why Do Firms Switch to NASDAQ?
+
+     Finding the reasons that motivate the switch in either direction has become even more
+difficult. In recent years, NYSE and NASDAQ have converged in their type of microstruc-
+ture and quality, as well as requirements and fees for listing. Weston (2000) shows that
+market reforms on NASDAQ mitigated the differences in spreads between the NASDAQ and
+NYSE. Although NYSE used to be, by a considerable margin, a more prestigious and more
+disciplined market, which was only open to ”mature” companies, than NASDAQ, nowadays
+the services and qualities, in terms of price discovery and liquidity, are almost the same for
+both. Among many reforms on the two exchanges, one can refer to the two that paved the
+way for the listed firms to switch from one to the other: first, NYSE became a hybrid market
+in early 2007 due to the increasing popularity of electronic trading. Second, in July 2007, the
+
+
+                                                 15
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+SEC approved a measure under which companies with a three-letter symbol on one exchange
+could migrate to a different exchange and maintain that symbol. This regulatory change is
+important because, from the investor’s point of view, changing ticker involves changing all
+the databases and making the new data compatible with the previous one. Also, it would re-
+quire an extra effort for marketing and informing (mostly non-institutional) investors about
+the new ticker. Among the similarities that the two markets have converged to, fees and
+direct costs are of importance to study. Corwin and Harris (2001) show that although the
+direct issue costs of listing in NYSE is higher, total issue costs (including underpricing) do
+not differ across NYSE and NASDAQ and are unlikely to affect the listing decision. Macey
+and O’Hara (2002) study the economics of listing fees on NYSE. The immediate listing cost,
+which consists of a fixed (entry or listing fee) and a variable (annual fee linked to the number
+of shares outstanding) portion, is not significantly different between the two exchanges. In
+more detail, NASDAQ has three different tiers (NASDAQ (2017a)): The NASDAQ Global
+Select Market, The NASDAQ Global Market, and The NASDAQ Capital Market. Gover-
+nance requirements are the same across all three tiers, while financial requirements are most
+stringent in The NASDAQ Global Select Market. The entry fee ranges from 75,000$ to
+250,000$ depending on the number of total shares outstanding. Also, the annual fee has a
+range from 42,000$ to 155,000$. In NYSE, the entry (listing) fee is in the range of 100,000$
+to 150,000$, and the annual fee ranges from 30,000$ to 85,000$ (NYSE (2017)). While these
+numbers apply to common shares, the rates change for other securities, such as preferred
+shares and structured products. Overall, the difference in fees between the two exchanges
+is relatively small and not large enough to compensate for the direct and indirect switching
+costs.
+   Despite the similarities and convergence, we see migrations of firms from one venue to
+the other, in almost the same number. There have been a number of papers and research
+to study the benefits of switch in each direction and try to explain the managers’ decision.
+Some papers analyzed the switches regardless of their directions. Webb (1999) analyzes the
+
+
+                                                 16
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+timing for switch, and shows that managers switch immediately after a good performance,
+and that performance tends to become poorer after the switch. Some papers propose differ-
+ences between asset pricing models in the two exchanges. Goyal, Pérignon, and Villa (2008)
+demonstrate the absence of complete similarity in return factors between NYSE and NAS-
+DAQ. They show that, although common factors exist, there are exchange-specific factors
+that systematically affect performance. Kaul, Mehrotra, and Stefanescu (2006) show that
+when firms move from NASDAQ to NYSE, the stock price process begins to co-move with the
+NYSE index, and its co-movement with the NASDAQ index declines. This result is at odds
+with fundamentals-based co-movement and is in line with the habitat-based co-movement
+of Barberis, Shleifer, and Wurgler (2005). It supports that moving to NYSE generally has
+positive effects on stock pricing and efficiency. One important implication is that moving
+to NASDAQ should conversely generate adverse effects. This is, however, at odds with the
+recent evidence. Cheng and Stunda (2015) propose that NASDAQ listing has a positive
+effect on short term returns, while NYSE listed firms have a better long term investment
+payoff.
+   The extant literature on the listing choice focuses primarily on companies switching
+to NYSE, and covers the period prior to NYSE’s transition to a hybrid market. Most of
+the papers provide evidence of a positive market reaction and a liquidity and volatility
+improvement favoring the switch from NASDAQ to NYSE. Jain and Kim (2006) show that
+firms that switch to NYSE experience positive cumulative abnormal returns due to the
+increase in their visibility. Atkins and Dyl (1997) show that trading volume decreases for
+those companies switching their listing from NASDAQ to NYSE, but this can be attributed
+to the absence of dealers in NYSE at the time of the study. In an effort to explain the positive
+effects of switching to NYSE, Rao, Davis, and Ward (2000) identified embeddedness, social
+identity, and ties to in-group and out-group affiliation as common factors that positively
+affected switching firms. In particular, they show that firms with growth potential are usually
+listed on NASDAQ. Frieder and Suk (2006) show that firms listed on NYSE are more likely
+
+
+                                                 17
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+to disclose earning forecasts. Lin and Liao (2015) study the manager’s financial reporting
+behavior in relation to exchange switching and show that moving to a more disciplined
+exchange mitigates the manager’s incentive to inflate the financial reporting. Kedia and
+Panchapagesan (2011) show that cost of capital decreases by moving to NYSE due to better
+visibility and liquidity, and firms take this action before raising debt or equity or before an
+acquisition. Baker, Powell, and Weaver (1998) show that, despite the belief that switching
+from NASDAQ to NYSE increases media visibility, in the short term, the change in the
+visibility is not significant. However, in the long term, after switching, small- and medium-
+size firms gain more visibility. They show that the increase in media coverage is more related
+to rapid earnings growth before the switch than it is to the change in listing.
+   In this final section, we complete the studies by Tse and Devos (2004) and Dang et al.
+(2018) and examine other rival hypotheses to further explain the switch to NASDAQ. Similar
+to Dang et al. (2018) and in order to gain insight about the drivers behind the decision to
+switch, we looked at the reasons stated by the firms at the time of the announcement of
+the switch. We manually downloaded all top managers’ interviews, firms’ press releases, and
+statements on the company websites published at the time of the announcement or in the
+immediate vicinity (+10 days) from Factiva. Given the heterogeneity of the narratives, we
+have asked two research assistants to classify the motivations into thirteen categories and
+then compared the classification results. The two classifications were extremely coherent,
+and the few discrepancies have been resolved by the authors. Figure (3) reports the results
+of this exercise. The most commonly reported reasons for a listing switch include visibility,
+peer affiliation, appeal to institutional investors, cost reduction, improvement in liquidity
+and volatility, and, finally, the use of technological services.
+
+                                    [Insert Figure 3 here]
+
+   In the following, we loosely follow the managerial statements to identify and test another
+set of possible reasons to switch to NASDAQ.
+
+
+                                                 18
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+   Industry Effect (Peer Group Benefit). Barberis et al. (2005) suggest that once firms are
+perceived to be in the same business environment, their stocks are more likely to co-move.
+Figure (4) reports an industry breakdown of switchers. The breakdown shows that switch-
+ing firms are distributed across a large variety of industries with no clear difference across
+the two directions of switch, thus, ruling out the hypothesis that firms belong to a specific
+market or seek to list in a market more densely populated by peers.
+
+
+
+                                    [Insert Figure 4 here]
+
+   Institutional Investors. Table (7) shows the results of the cross-sectional tests on in-
+stitutional investors for both directions. We adopt two measures of institutional investor
+ownership: the number of institutional investors (NumInvestors) and the concentration of
+ownership (Concent10 ) calculated as the ratio of the number of shares of the top 10 biggest
+shareholders to the total number of shares held by institutional investors. We find insignifi-
+cant decreases in institutional investors’ concentration.
+   Market Visibility. Table (7), presents the results of a set of multivariate regressions
+testing the change in analyst coverage before and after the switch. We compute the number
+of analysts announcing a forecast on the firm’s target price if the announcement is made
+within 400 days before and after the switch. Although in both panels, the coefficients of the
+number of analysts are positive, indicating an increase in the number of analysts, neither of
+the coefficients is statistically significant. Therefore, we conclude that there is no significant
+change in the visibility of the firms over the course of switch.
+   Capital Raising (or Market Timing). We conjecture that firms’ managers, facing capital
+needs, may choose to switch listing to attract investor attention and create a positive percep-
+tion for subsequent security offerings. We test this conjecture by looking at the equity and
+debt issuance behavior of switching firms before and after the switch. Results in Table (7)
+indicate that there is no significant change in equity issuance after the switch, irrespective
+
+
+                                                 19
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+of the direction of it. Debt issuance is insignificantly different from zero after the switch to
+NYSE but is weakly decreasing for firms that switch to NASDAQ.
+
+                                      [Insert Table 7 here]
+
+     CEO Restlessness. Behavioral Finance proposes the possibility of irrational decisions by
+managers. One possible conjecture is that the CEOs of the switchers to NASDAQ from
+NYSE/AMEX have made an irrational decision. Our conjecture is that they may be ”rest-
+less” managers who want to act radically to either draw attention or distract the market.
+One proxy to measure their maturity (opposite to restlessness) is the CEO’s age. The aver-
+age age of switchers, as well as the average age of all the firms who were eligible to switch to
+NASDAQ over the 2010-2017 period, is 56, which is not too small. Therefore we can (loosely)
+reject the hypothesis that the managers of the switchers, on average, are younger than those
+of typical firms. In fact, they are not young at all. Figure (5) shows the distribution of
+CEO’s age for the switchers to NASDAQ and for all the firms on NYSE who were eligible
+to move to NASDAQ.
+
+                                     [Insert Figure 5 here]
+
+     To conclude, we do not find any strong rival explanation against our trade-off hypothesis.
+Therefore, we propose price-time trade-off as another significant reason, along with other
+proposed explanations in the literature, for the rationale of the switch to NASDAQ.
+
+
+
+6.      Conclusion
+
+     In this paper, we showed a substitute for the trade-off between trading in auction and
+dealer markets. We showed that once the firms change their listing from an auction market
+(NYSE) to a dealer market (NASDAQ), the traders adjust their trade venue in other seg-
+ments of the market, namely dark and lit venues. We showed that upon the switch from
+NYSE to NASDAQ, trades shift from lit (exchange) markets to dark (off-exchange) ones.
+
+                                                  20
+
+                    Electronic copy available at: https://ssrn.com/abstract=3985691
+As a consequence, the liquidity in the dark market increases and in the lit market decreases.
+However, the price discovery in the lit market improves at the expense of lower liquidity.
+   We propose that managers choose to switch to NASDAQ to increase price discovery at
+the expense of execution cost. While our other alternative hypotheses do not show sound
+empirical supports, the trade-off hypothesis can partially explain the rationale of the switch,
+along with other previous explanations in the literature.
+
+
+
+
+                                                 21
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+References
+
+Aggarwal, R., Angel, J. J., 1997. Optimal listing policy: why microsoft and intel do not list
+  on the nyse. Unpublished working paper. Georgetown University .
+
+Amihud, Y., 2002. Illiquidity and stock returns: cross-section and time-series effects. Journal
+  of financial markets 5, 31–56.
+
+Atkins, A. B., Dyl, E. A., 1997. Market structure and reported trading volume: Nasdaq
+  versus the nyse. Journal of Financial Research 20, 291–304.
+
+Baker, H. K., Powell, G. E., Weaver, D. G., 1998. The effect of nyse listing on a firm’s media
+  visibility. Journal of Economics and Finance 22, 19–28.
+
+Barberis, N., Shleifer, A., Wurgler, J., 2005. Comovement. Journal of Financial Economics
+  75, 283–317.
+
+Boehmer, E., 2005. Dimensions of execution quality: Recent evidence for us equity markets.
+  Journal of Financial Economics 78, 553–582.
+
+Buti, S., Rindi, B., Werner, I. M., 2011. Diving into dark pools. Charles A. Dice Center
+  Working Paper .
+
+Buti, S., Rindi, B., Werner, I. M., 2017. Dark pool trading strategies, market quality and
+  welfare. Journal of Financial Economics 124, 244–265.
+
+Cheng, Y., Stunda, R. A., 2015. Where to invest: Nyse or nasdaq? ASBBS E-Journal 11,
+  68.
+
+Cheon, Y. S., Christensen, T. E., Smith Bamber, L., 2001. Factors associated with differ-
+  ences in the magnitude of abnormal returns around nyse versus nasdaq firms’ earnings
+  announcements. Journal of Business Finance & Accounting 28, 1073–1108.
+
+
+
+
+                                                 22
+
+                   Electronic copy available at: https://ssrn.com/abstract=3985691
+Cohen, K. J., Maier, S. F., Schwartz, R. A., Whitcomb, D. K., 1981. Transaction costs, order
+  placement strategy, and existence of the bid-ask spread. Journal of political economy 89,
+  287–305.
+
+Comerton-Forde, C., Putniņš, T. J., 2015. Dark trading and price discovery. Journal of
+  Financial Economics 118, 70–92.
+
+Corwin, S. A., Harris, J. H., 2001. The initial listing decisions of firms that go public.
+  Financial Management pp. 35–55.
+
+Cox, J., 2019. Nasdaq and the nyse: A trade reporting facility comparison. Available at
+  SSRN 3369025 .
+
+Dang, V. A., Michayluk, D., Pham, T. P., 2018. The curious case of changes in trading
+  dynamics: When firms switch from nyse to nasdaq. Journal of Financial Markets 41,
+  17–35.
+
+Foley, S., Putniņš, T. J., 2016. Should we be afraid of the dark? dark trading and market
+  quality. Journal of Financial Economics 122, 456–481.
+
+Foucault, T., Pagano, M., Roell, A., Röell, A., 2013. Market liquidity: theory, evidence, and
+  policy. Oxford University Press.
+
+Frieder, L., Suk, I., 2006. Trading venue and voluntary earnings disclosure:               The
+  nyse specialist market versus the nasdaq dealer market,                    available at SSRN:
+  https://ssrn.com/abstract=950897.
+
+Goyal, A., Pérignon, C., Villa, C., 2008. How common are common return factors across the
+  nyse and nasdaq. Journal of Financial Economics 90, 252–271.
+
+He, C., Odders-White, E., Ready, M. J., 2006. The impact of preferencing on execution
+  quality. Journal of Financial Markets 9, 246–273.
+
+
+
+                                                23
+
+                  Electronic copy available at: https://ssrn.com/abstract=3985691
+Jain, P. K., Kim, J.-C., 2006. Investor recognition, liquidity, and exchange listings in the
+  reformed markets. Financial Management 35, 21–42.
+
+Jiang, C. X., McInish, T. H., Upson, J., 2012. Market fragmentation and information quality:
+  The role of trf trades. Available at SSRN 1960115 .
+
+Kalay, A., Portniaguina, E., 2001. Swimming against the tides: The case of aeroflex move
+  from nyse to nasdaq. Journal of Financial Markets 4, 261–267.
+
+Kaul, A., Mehrotra, V., Stefanescu, C., 2006. Habitats and return comovement: evidence
+  from firms that switch exchanges. Unpublished working paper. University of Alberta, Ed-
+  monton, Alberta, Canada .
+
+Kedia, S., Panchapagesan, V., 2011. Why do only some nasdaq firms switch to the nyse?
+  evidence from corporate transactions. Journal of Financial Markets 14, 109–126.
+
+Lin, W.-C., Liao, T.-L., 2015. Exchange listing type and firm financial reporting behavior.
+  International Review of Economics & Finance 38, 234–249.
+
+Macey, J. R., O’Hara, M., 2002. The economics of stock exchange listing fees and listing
+  requirements. Journal of Financial Intermediation 11, 297–319.
+
+Masulis, R. W., Shivakumar, L., 2002. Does market structure affect the immediacy of stock
+  price responses to news? Journal of Financial and Quantitative Analysis 37, 617–648.
+
+Menkveld, A. J., Yueshen, B. Z., Zhu, H., 2017. Shades of darkness: A pecking order of
+  trading venues. Journal of Financial Economics 124, 503–534.
+
+NASDAQ, 2017a. Initial Listing Guide. https://listingcenter.nasdaq.com/assets/
+  initialguide.pdf.
+
+NASDAQ, 2017b. Listings milestone: Over $1 trillion in market capitalization has transferred
+  to nasdaq. Company Press Realease .
+
+
+                                                24
+
+                  Electronic copy available at: https://ssrn.com/abstract=3985691
+NYSE, 2017. Schedule of Fees and Charges for Exchange Services. https://www.nyse.com/
+  publicdocs/nyse/markets/nyse-arca/NYSE_Arca_Listing_Fee_Schedule.pdf.
+
+O’Hara, M., Ye, M., 2011. Is market fragmentation harming market quality? Journal of
+  Financial Economics 100, 459–474.
+
+Pruitt, S. W., Van Ness, B. F., Van Ness, R. A., 2002. The first of many? the microstructure
+  effects of aeroflex corporation’s move from the nyse to the nasdaq. Journal of Applied
+  Finance 12, 49–78.
+
+Rao, H., Davis, G. F., Ward, A., 2000. Embeddedness, social identity and mobility: Why
+  firms leave the nasdaq and join the new york stock exchange. Administrative Science
+  Quarterly 45, 268–292.
+
+Tse, Y., Devos, E., 2004. Trading costs, investor recognition and market response: An
+  analysis of firms that move from the amex (nasdaq) to nasdaq (amex). Journal of Banking
+  & Finance 28, 63–83.
+
+Webb, G. P., 1999. Evidence of managerial timing: The case of exchange listings. Journal of
+  Financial Research 22, 247–263.
+
+Weston, J. P., 2000. Competition on the nasdaq and the impact of recent market reforms.
+  The Journal of Finance 55, 2565–2598.
+
+Zhu, H., 2014. Do dark pools harm price discovery? The Review of Financial Studies 27,
+  747–789.
+
+
+
+
+                                                25
+
+                  Electronic copy available at: https://ssrn.com/abstract=3985691
+Fig. 1. Distribution of Switches between NYSE and NASDAQ during the Period of 1988-2016
+                                                       Distribution of switches across years
+                                                                                  by number of switches
+                 100
+
+
+
+
+                                                                                                                                                           period of interest
+                          80
+        Number of Switches
+          40      60
+                 20
+                 0
+
+
+
+
+                                 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015
+
+
+
+                                                                              NSQ2NYSE                                            NYSE2NSQ
+                               Source: NASDAQ, Inc
+
+
+
+
+                                                                                                  26
+
+                                    Electronic copy available at: https://ssrn.com/abstract=3985691
+             Fig. 2. Change in Switching Shares’ Abnormal Return; CAR(-5;10)
+
+CAR (Cumulative Abnormal Return) is reported. Risk model is Market-Adjusted model. Event window
+starts 5 days before the event (switch) and ends 10 days after. 100 trading days are used to estimate the
+expected return and residual return variance. 50 trading days is considered between the end of estimation
+window and the beginning of the event window.
+
+
+
+
+                                                   27
+
+                     Electronic copy available at: https://ssrn.com/abstract=3985691
+Fig. 3. Managers’ Stated Motivations for the Change of Listing
+
+
+
+
+                                  28
+
+    Electronic copy available at: https://ssrn.com/abstract=3985691
+                  Fig. 4. Distribution of Switchers across Different Industries
+
+This figure reports the distribution of switchers by industry during 2010-2015, in both directions. For both
+                              panels the vertical axis is the number of switchers
+
+
+
+
+                                                    29
+
+                     Electronic copy available at: https://ssrn.com/abstract=3985691
+                                     Fig. 5. CEO’s Age Effect
+
+The two histograms show the distribution of CEO’s age in all Execucomp firms, and in firms that switched
+to NASDAQ. For the latter, the age at the time of switch is observed. The mean of either group is 56.
+
+
+
+
+                   (a) All firms                               (b) Switchers to NASDAQ
+
+
+
+
+                                                  30
+
+                    Electronic copy available at: https://ssrn.com/abstract=3985691
+                         Table 1: Descriptive Statistics of the Switchers
+This table presents descriptive statistics for switchers to NASDAQ and to NYSE in the period 2009-2017 at
+the day of switch. The data is from COMPUSTAT and CRSP databases. There are 110 firms switched to
+NASDAQ during 2009-2017, and 72 switched to NYSE. M arkCap is firm’s market cap, in million dollars.
+act is total current assets. at is total assets. Intgb is intangible assets. lt is total liabilities. Leverage is
+firm’s debt to asset ratio. P rice is the daily last price. DailyReturn is share’s daily return, log(Pt /Pt−1 ).
+RtrnST D is the i-day standard deviation of DailyReturn. BidAskSpread is the relative difference of
+Closing Ask and Closing Bid prices, (Pask − Pbid )/Pbid . M axOvM in is the ratio of maximum and minimum
+trading prices in the day, PaskHi /PbidLo . V olume is the number of shares traded daily. Significance at 10%,
+5% and 1% level is denoted by by *, ** and *** respectively.
+
+                                            N       mean         stdev        min        max
+
+Panel 1) To NASDAQ:
+M arkCap                                   110      7,590        22,200        26       169,000
+act                                         71      2,336         5,018         6        31,027
+at                                         110     11,450        32,361        15       253,941
+EBIT DA                                     81       941          2,130      -289       13,189
+Intgb                                      110      2,366         7,325         0        48,353
+lt                                         110      8,612        28,710         2       240,918
+Revenue                                    110     5,130*        12,322         0        76,392
+Leverage                                   110      0.554         0.312      0.094         1
+
+P rice($)                                  110     21.442       27.844       1.312     129.745
+DailyReturn                                110       .002         .053       -.192        .337
+RtrnST D                                    78      0.035        0.046       0.006       0.358
+BidAskSpread                               110      0.004        0.006         0         0.029
+M axOvM in                                 110      1.039        0.044       1.004       1.302
+V olume(#shares)(DarkandLit)               110    2,043,559    7,058,595      600     58,600,000
+
+Panel 2) To NYSE:
+M arkCap                                    72      4,715        18,400       27.6      148,232
+act                                         57      2,409         7,816         8        48,138
+at                                          72      7,377        17,479        13        92,568
+EBIT DA                                     67       638          2,315       -45       17,834
+Intgb                                       69      1,620         5,772         0        35,789
+lt                                          72      5,176        12,938      2.804       86,342
+Revenue                                     72      2,328         5,744      0.050       38,275
+Leverage                                    72      0.591         0.243      0.072          1
+
+P rice($)                                   72     26.083        23.261     1.553       113.140
+DailyReturn                                 72        0           0.027     -0.114       0.083
+RtrnST D                                    72      0.024         0.029      0.008       0.235
+BidAskSpread                                72      0.003         0.006        0         0.042
+M axOvM in                                  72      1.035         0.027        1         1.142
+V olume(#shares)(DarkandLit)                72    3,840,224    19,300,000     517     157,000,000
+
+
+
+
+                                                     31
+
+                     Electronic copy available at: https://ssrn.com/abstract=3985691
+                       Table 2: Descriptive Statistics of the Dark Trades
+This table presents descriptive statistics for the trade volumes, daily relative effective spread (D rlt Ef f ),
+and relative realized spread (D rlt Relz) in dark trades, before and after the switch to NASDAQ. The
+sample consists of 110 firms switched to NASDAQ during 2009-2017. DailyT rade is daily trades (shares).
+Dark Share is the ratio of dark trades to all trades in a day.
+
+                                             N       mean       median       stdev       min           max
+
+BEFORE SWITCH:
+
+DailyT rade (Dark and Lit)                 5,691   2,306,016    519,122    4,954,340      300       7.69e+07
+DailyT rade (Dark Trades)                  5,691    816,880     178,565    2,088,935      29        3.67e+07
+DailyT rade (Lit Trades)                   5,691   1,489,135    321,250    3,017,149      84        4.38e+07
+Dark Share                                 5,691      .368        .346        .151       .002          .989
+
+D rlt Ef f (%)                             4,916      .210        .103       .344        .002         10.237
+D rlt Relz(%)                              4,916      .321        .094       6.362     -157.581      310.773
+
+AFTER SWITCH:
+
+DailyT rade (Dark and Lit)                 6,704   2,196,705    358,078    5,693,757       7        1.29e+08
+DailyT rade (Dark Trades)                  6,704    818,068     131,411    2,413,060       3        5.03e+07
+DailyT rade (Lit Trades)                   6,704   1,378,636    212871      3427634        0        7.87e+07
+Dark Share                                 6,704      .384        .369        .152       .004           1
+
+D rlt Ef f (%)                             5,718      .282        .135       .662        .005         30.942
+D rlt Relz(%)                              5,718      .236        .107      16.068     -608.486      875.471
+
+
+
+
+                                                     32
+
+                     Electronic copy available at: https://ssrn.com/abstract=3985691
+               Table 3: Switch from/to NASDAQ and Change of Trade Cost
+This table reports the diff-in-diff regression of liquidity/volatility on the switch. prepost is a dummy vari-
+able: 0 before the switch and 1 after the switch. Treat is dummy equal to 1 if the firm is treated
+(switched). DailyReturn is share’s daily return. RtrnST D is the 1-day standard deviation of the daily
+return. BidAskSpread is the relative difference of Closing Ask and Closing Bid prices. M axOvM in is the
+ratio of maximum and minimum trading prices in the day. V olume is the number of shares traded daily.
+AmihudIliquidity is Amihud illiquidity measure, abs(DailyRetur)/(V olume ∗ P rice). We control for all the
+con-founders mentioned in table 1, industry fixed effect, and year fixed effect. All dependent variables are in
+percentage. Standard errors in parentheses. Significance at 10%, 5% and 1% level is denoted by by *, ** and
+*** respectively.
+
+Panel 1) To NASDAQ:
+                                   DailyReturn     RtrnST D     AmihudIliquidity      M axOvM in    BidAskSpread
+                                        (1)            (2)            (3)                  (4)            (5)
+prepost                               -0.102       -0.645 ***        0.000             -0.601 ***      -0.012 *
+                                     (0.001)         (0.000)        (0.000)              (0.001)        (0.000)
+
+Treat                                   0.014         -0.163        -0.045 ***           0.104         0.002 ***
+                                       (0.001)       (0.001)          (0.000)           (0.001)         (0.000)
+
+prepost ×T reat                         -0.037        -0.096           0.000           0.209 **↑      0.136 ***↑
+                                       (0.001)       (0.001)          (0.000)           (0.001)         (0.000)
+
+Controls                                YES             YES            YES               YES             YES
+
+Industry FE                             YES             YES            YES               YES             YES
+
+Year FE                                 YES             YES            YES               YES             YES
+
+Observations                           13459            13494         13457             13539            13539
+Adjusted R2                            0.002            0.208         0.024             0.176            0.302
+
+
+Panel 2) To NYSE:
+                                   DailyReturn     RtrnST D     AmihudIliquidity      M axOvM in    BidAskSpread
+                                        (1)            (2)            (3)                  (4)            (5)
+prepost                               -0.042       -0.204 ***      0.004 ***            -0.157 *        -0.017
+                                     (0.001)         (0.000)        (0.000)              (0.001)       (0.000)
+
+Treat                                   0.192         0.135            0.024           0.104 ***      -0.242 ***
+                                       (0.001)       (0.000)          (0.000)           (0.001)         (0.000)
+
+prepost ×T reat                      -0.208 * ↓    -0.136 **↓       0.001 ***↑        -0.457 ***↓     -0.079 **↓
+                                       (0.001)       (0.001)          (0.000)           (0.001)         (0.000)
+
+Controls                                YES             YES            YES               YES             YES
+
+Industry FE                             YES             YES            YES               YES             YES
+
+Year FE                                 YES             YES            YES               YES             YES
+
+Observations                           11832            11879         11800             11894            11894
+Adjusted R2                            0.001            0.281         0.125             0.170            0.352
+
+
+                                                   33
+
+                    Electronic copy available at: https://ssrn.com/abstract=3985691
+           Table 4: Switch to NASDAQ and Change in Dark Trade Volume
+This table reports the multivariate regression of daily dark trade volume (Dark T rade) (in
+thousand) on the binary variable of switch from NYSE to NASDAQ. Dark Share is the
+ratio of dark trades to the sum of dark and lit trades in a day. Large is a dummy variable
+which is 1 if the total asset of the firm is above 1100 million dollars, the median of the size
+for the firms who switched to NASDAQ, and 0 otherwise. 110 firms (switchers) are in our
+sample during the period of 2009-2017. Window size is 90 days. Cushion-size is 10 days. We
+control for all the confounding variables mentioned in table 1 and year fixed effect. Standard
+errors in parentheses. Significance at 10%, 5% and 1% level is denoted by by *, ** and ***
+respectively.
+
+                                 Dark T rade       Dark T rade       Dark Share    Dark Share
+                                     (1)                (2)              (3)            (4)
+prepost                          113.324 ***       -83.663 ***        0.008 ***       -0.002
+                                   (27.791)          (17.241)          (0.002)       (0.004)
+
+prepost × Large                                     418.316 ***                     0.021 ***
+                                                      (58.204)                       (0.004)
+
+Large                                               334.612 ***                       -0.142
+                                                      (70.019)                       (0.158)
+
+log at                            -93.041 ***       -43.589 ***           -0.003      -0.000
+                                    (12.277)          (12.486)           (0.032)     (0.032)
+
+Controls                              YES               YES               YES         YES
+
+Firm FE                               YES               YES               YES         YES
+
+Year FE                               YES               YES               YES         YES
+
+Constant                          428.535 ***       359.922 ***        0.615 ***    0.611 ***
+                                    (55.192)          (63.186)          (0.173)      (0.173)
+Observations                         12413             12413             12395        12395
+R2                                   0.594             0.596             0.366        0.367
+
+
+
+
+                                              34
+
+                Electronic copy available at: https://ssrn.com/abstract=3985691
+               Table 5: Switch to NASDAQ and Dark Market Liquidity
+This table reports the multivariate regression of daily relative effective spread (D rlt Ef f )
+and relative realized spread (D rlt Relz) in dark trades on the binary variable of switch from
+NYSE to NASDAQ. Large is a dummy variable which is 1 if the total asset of the firm is
+above 1100 million dollars, the median of the size for the firms who switched to NASDAQ,
+and 0 otherwise. All daily measures are averaged volume-weighted in a day. Relative effective
+spread and relative realized spread are in percentage. 110 firms (switchers) are in our sample
+during the period of 2009-2017. Window-size is 200 days. Cushion-size is 10 days. Standard
+errors in parentheses. Significance at 10%, 5% and 1% level is denoted by by *, ** and ***
+respectively.
+
+                                 D rlt Ef f        D rlt Ef f    D rlt Relz       D rlt Relz
+                                    (1)               (2)            (3)              (4)
+prepost                          0.048 ***         0.068 ***       -0.094           -0.282
+                                  (0.007)           (0.013)       (0.099)          (0.196)
+
+prepost × Large                                    -0.037 **                        0.343
+                                                    (0.015)                        (0.212)
+
+Large                                              -2.563 ***                     -4.344 ***
+                                                     (0.430)                        (0.962)
+
+log at                            0.498 ***        0.490 ***      0.736 ***       0.809 ***
+                                   (0.084)          (0.086)        (0.169)         (0.187)
+
+Controls                             YES             YES             YES            YES
+
+Firm FE                              YES             YES             YES            YES
+
+Year FE                              YES             YES             YES            YES
+
+Constant                          -2.252 ***       -2.230 ***     -3.337 ***      -3.544 ***
+                                    (0.455)          (0.462)        (0.893)         (0.945)
+Observations                         10634            10634          10634           10634
+R2                                   0.204            0.204          0.002           0.003
+
+
+
+
+                                              35
+
+                Electronic copy available at: https://ssrn.com/abstract=3985691
+                Table 6: Switch to NASDAQ and Lit Market Quality
+This table reports the multivariate regression of daily relative effective spread (D rlt Ef f )
+and relative realized spread (D rlt Relz) in lit (exchange) trades on the binary variable of
+switch from NYSE to NASDAQ. Large is a dummy variable which is 1 if the total asset
+of the firm is above 1100 million dollars, the median of the size for the firms who switched
+to NASDAQ, and 0 otherwise. All daily measures are averaged volume-weighted in a day.
+Relative effective spread and relative realized spread are in percentage. 110 firms (switchers)
+are in our sample during the period of 2009-2017. Window-size is 200 days. Cushion-size is
+10 days. Standard errors in parentheses. Significance at 10%, 5% and 1% level is denoted
+by by *, ** and *** respectively.
+
+                                 D rlt Ef f        D rlt Ef f    D rlt Relz       D rlt Relz
+                                    (1)               (2)            (3)              (4)
+prepost                          -0.019 **           0.018       -0.085 ***        -0.123 **
+                                  (0.009)           (0.016)        (0.032)          (0.056)
+
+prepost × Large                                    -0.072 ***                       0.072
+                                                     (0.018)                       (0.066)
+
+Large                                              -3.164 ***                     -2.371 ***
+                                                     (0.789)                        (0.829)
+
+log at                            0.609 ***        0.598 ***      0.429 ***       0.440 ***
+                                   (0.157)          (0.157)        (0.165)         (0.165)
+
+Controls                             YES             YES             YES            YES
+
+Firm FE                              YES             YES             YES            YES
+
+Year FE                              YES             YES             YES            YES
+
+Constant                          -2.905 ***       -2.887 ***     -1.952 **       -1.971 **
+                                    (0.847)          (0.845)       (0.887)         (0.886)
+Observations                         11110            11110         11110           11110
+R2                                   0.276            0.277         0.004           0.004
+
+
+
+
+                                              36
+
+                Electronic copy available at: https://ssrn.com/abstract=3985691
+                  Table 7: Switching the Listing and Alternative Reasons
+In this table, we report the effect of switch on several alternative variables. There are 110 firms switched
+to NASDAQ and 72 firms switched to NYSE during 2009-2017. prepost is a dummy variable: 0 before
+the switch and 1 after the switch. N umInvestors is the number of investors holding the firm’s shares.
+Concentration10 is the ratio of number of shares held by top 10 investors to the total number of shares
+outstanding. N umAnalyst is the number of analysts covering the firm. N EI is quarterly ratio of net
+equity (total stock holders’ equity minus retained earnings) over total assets. N DI is quarterly ratio of
+total long-term debt over total assets. We control for all the confounding variables mentioned in table 1,
+industry fixed effect and year fixed effect. Window-size is 180 days. Cushion-size is 30 days. Standard
+errors in parentheses. Significance at 10%, 5% and 1% level is denoted by by *, ** and *** respectively.
+Variables with (%) label are in percentage.
+
+                         N umInvestors Concentration10(%) N umAnalyst N EI(%) N DI(%)
+                              (1)             (2)             (3)       (4)     (5)
+Panel 1) TO NASDAQ
+prepost                      -16.032               -0.902              0.371         -1.613   -1.152*
+                            (25.260)              (0.018)             (1.935)       (0.010)   (0.006)
+
+Panel 2) TO NYSE
+prepost                      -50.731               0.040               0.333         0.106     0.160
+                            (36.215)              (0.020)            (36.215)       (0.006)   (0.005)
+
+
+
+
+                                                37
+
+                  Electronic copy available at: https://ssrn.com/abstract=3985691
+Appendix
+
+
+
+
+                                     38
+
+       Electronic copy available at: https://ssrn.com/abstract=3985691
+            Table A1: Two-sample t-test for market effects
+This table reports the univariate ttest of the market liquidity/volatility before
+and after switch. The estimated value is Mean(AfterSwitch)-Mean(BeforeSwitch).
+Standard errors in parentheses. Significance at 10%, 5% and 1% level is denoted
+by by *, ** and *** respectively.
+
+                 Panel A (To NYSE)                 Panel B (To NSQ)
+
+DailyReturn          -0.001 ***↓                          -0.001
+                       (0.000)                           (0.001)
+N                       15025                             14188
+
+RtrnSTD              -0.001 ***↓                      -0.005 ***↓
+                       (0.000)                          (0.001)
+N                       15043                            14255
+
+AmihudIL              -0.000 **↓                        -7.88e-08
+                        (0.000)                          (0.000)
+N                        14933                            14179
+
+LogVolume               0.043                         -0.232 ***↓
+                       (0.031)                          (0.044)
+N                       15044                            14276
+
+MaxOvMin             -0.003 ***↓                      -0.003 ***↓
+                       (0.000)                          (0.001)
+N                       15061                            14350
+
+BidAskSpread         -0.002 ***↓                       0.001 ***↑
+                       (0.000)                           (0.000)
+N                       15061                             14349
+
+
+
+
+                                       39
+
+        Electronic copy available at: https://ssrn.com/abstract=3985691
+                          Table A2: Multivariate analysis of market effects
+This table reports the multivariate regression of liquidity and volatility. We control for all the cofounding
+variables mentioned in table 1, industry fixed effect and year fixed effect. Window-size is 180 days. Cushion-
+size is 30 days. Standard errors in parentheses. Significance at 10%, 5% and 1% level is denoted by by *, **
+and *** respectively.
+
+Panel A (To NYSE)
+             DailyReturn RtrnSTD           AmihudIL        LogVolume     MaxOvMin        BidAskSpread
+prepost       -0.002 ** ↓ -0.004 ***↓      0.000 ***↑      -0.160 ***↓   -0.006 ***↓      -0.001 ***↓
+                (0.001)     (0.000)          (0.000)         (0.023)       (0.001)          (0.000)
+
+Controls           YES           YES          YES             YES           YES               YES
+
+Industry FE        YES           YES          YES             YES           YES               YES
+
+Year FE            YES           YES          YES             YES           YES               YES
+
+Observations      7904           7922         7868           7917          7932               7932
+Adjusted R2       0.000          0.281        0.123          0.804         0.194              0.341
+
+Panel B (To NSQ)
+             DailyReturn RtrnSTD           AmihudIL        LogVolume     MaxOvMin        BidAskSpread
+prepost         -0.001   -0.007 ***↓       -3.56e-08       -0.340 ***↓   -0.006 ***↓      0.001 ***↑
+               (0.001)     (0.001)          (0.000)          (0.029)       (0.001)          (0.000)
+
+Controls           YES           YES          YES             YES           YES               YES
+
+Industry FE        YES           YES          YES             YES           YES               YES
+
+Year FE            YES           YES          YES             YES           YES               YES
+
+Observations      9566           9580         9566           9629          9667               9667
+Adjusted R2       0.001          0.204        0.011          0.761         0.190              0.345
+
+
+
+
+                                                      40
+
+                    Electronic copy available at: https://ssrn.com/abstract=3985691
+                            Table A3: Diff-in-diff analysis of market effects
+This table reports the diff-in-diff regression of liquidity/volatility. We control for all the confounders mentioned
+in table 1, industry fixed effect and year fixed effect. interact is the interaction variable. Standard errors in
+parentheses. Significance at 10%, 5% and 1% level is denoted by by *, ** and *** respectively.
+
+Panel A (To NYSE)
+             DailyReturn        RtrnSTD      AmihudIL      LogVolume       MaxOvMin           BidAskSpread
+prepost         -0.000         -0.002 ***    0.000 ***        -0.045        -0.001 *              -0.000
+               (0.001)           (0.000)      (0.000)        (0.033)         (0.001)             (0.000)
+
+Treat              0.001          0.001        0.000           0.317 ***   0.001 ***            -0.002 ***
+                  (0.001)        (0.000)      (0.000)           (0.032)     (0.001)               (0.000)
+
+interact         -0.002 * ↓    -0.001 **↓   0.000 ***↑     -0.239 ***↓     -0.004 ***↓          -0.001 **↓
+                   (0.001)       (0.001)      (0.000)        (0.042)         (0.001)              (0.000)
+
+Controls            YES           YES           YES              YES          YES                  YES
+
+Industry FE         YES           YES           YES              YES          YES                  YES
+
+Year FE             YES           YES           YES              YES          YES                  YES
+
+Observations       11832          11879        11800            11866        11894                11894
+Adjusted R2        0.001          0.281        0.125            0.768        0.170                0.352
+
+
+Panel B (To NSQ)
+             DailyReturn        RtrnSTD      AmihudIL      LogVolume       MaxOvMin           BidAskSpread
+prepost         -0.001         -0.006 ***    -2.00e-08        -0.021       -0.006 ***            -0.000 *
+               (0.001)           (0.000)      (0.000)        (0.032)         (0.001)              (0.000)
+
+Treat              0.000          -0.001     -0.000 ***        1.134 ***      0.001             0.000 ***
+                  (0.001)        (0.001)       (0.000)          (0.033)      (0.001)             (0.000)
+
+interact           -0.000         -0.001     -6.25e-08     -0.182 ***↓     0.002 **↑            0.001 ***↑
+                  (0.001)        (0.001)      (0.000)        (0.048)        (0.001)               (0.000)
+
+Controls            YES           YES           YES              YES          YES                  YES
+
+Industry FE         YES           YES           YES              YES          YES                  YES
+
+Year FE             YES           YES           YES              YES          YES                  YES
+
+Observations       13459          13494        13457            13499        13539                13539
+Adjusted R2        0.002          0.208        0.024            0.674        0.176                0.302
+
+
+
+
+                                                          41
+
+                      Electronic copy available at: https://ssrn.com/abstract=3985691
+                                Table A4: Analysis of institutional investors
+This table reports the univariate, multivariate and diff-in-diff models for analyzing the effect in institutional investors.
+N umInvestors is the number of investors holding the firm’s shares. Concentration10 is the ratio of number of shares held
+by top 10 investors to the total number of shares. The observations are collected within six-quarter windows before and after the
+switch. The observations of three quarters before and after the switch are droppped as cushion. Standard errors in parentheses.
+Significance at 10%, 5% and 1% level is denoted by by *, ** and *** respectively.
+
+Panel A (To NYSE)
+               Model 1                               Model 2                           Model 3
+             NumInvestors      Concentration10    NumInvestors     Concentration10   NumInvestors          Concentration10
+prepost         24.891           -0.037 ***        -74.573 ***          0.025           -6.962                  -0.019
+               (20.745)            (0.014)           (22.051)          (0.013)         (31.463)                (0.018)
+
+Treat                -                 -                 -                -            79.193 ***                -0.015
+                                                                                        (22.988)                (0.016)
+
+interact             -                 -                 -                -              -50.732                 0.000
+                                                                                        (36.215)                (0.020)
+
+Controls             -                 -               YES              YES               YES                    YES
+
+Industry FE          -                 -               YES              YES               YES                    YES
+
+Year FE              -                 -               YES              YES               YES                    YES
+
+Observations        524               505              384               367               482                   466
+Adjusted R2                                           0.772             0.696             0.813                 0.634
+
+
+Panel B (To NSQ)
+               Model 1                              Model 2                            Model 3
+             NumInvestors      Concentration10    NumInvestors     Concentration10   NumInvestors          Concentration10
+prepost          -5.531             0.007           27.373*           -0.031***       42.512 **               -0.031 *
+               (17.695)            (0.018)          (15.198)           (0.011)         (20.161)                (0.017)
+
+Treat                -                 -                 -                -            123.132***             -0.040 ***
+                                                                                        (19.401)                (0.014)
+
+interact             -                 -                 -                -              -16.034                 -0.009
+                                                                                        (25.260)                (0.018)
+
+Controls             -                 -               YES              YES               YES                    YES
+
+Industry FE          -                 -               YES              YES               YES                    YES
+
+Year FE              -                 -               YES              YES               YES                    YES
+
+Observations        494               464              425               396               658                   644
+Adjusted R2                                           0.645             0.797             0.492                 0.527
+
+
+
+
+                                                              42
+
+                          Electronic copy available at: https://ssrn.com/abstract=3985691
+                         Table A5: Change in Analysts Coverage
+This table reports multivariate analysis of analysts coverage. N umAnalyst is the number of
+analysts covering the firm. The observations are collected within a 400-day window, before
+and after switch. The data of two months, centered at the time of switch, are dropped.
+Standard errors in parentheses. Significance at 10%, 5% and 1% level is denoted by by *, **
+and *** respectively.
+
+                   Panel A (To NYSE)                      Panel B (To NSQ)
+                      NumAnalyst                            NumAnalyst
+prepostCov                0.333                                 0.371
+                         (1.192)                               (1.935)
+
+Assets - Total          0.000 ***                               0.000 *
+                         (0.000)                                (0.000)
+
+Year FE                   YES                                    YES
+
+Industry FE               YES                                    YES
+
+Observations                72                                    70
+Adjusted R2               0.487                                  0.314
+
+
+
+
+                    Table A6: Univariate analysis of capital raising
+This table reports univariate analysis of equity and debt issuance. N EI is quarterly ratio
+of net equity (total stock holders’ equity minus retained earnings) over total assets. N DI
+is quarterly ratio of total long-term debt over total assets. The observations are collected
+within a 400-day window before and after switch. The data of two months, centered at the
+time of switch are dropped. It is the Standard errors in parentheses. Significance at 10%,
+5% and 1% level is denoted by by *, ** and *** respectively.
+
+                  Panel A (To NYSE)                 Panel B (To NSQ)
+                         NEI             NDI               NEI                       NDI
+prepostSw                0.001           0.001            -0.016                    -.011*
+                        (0.006)         (0.005)          (0.010)                   (0.006)
+
+Constant               0.016 ***        0.008**          0.035 ***             0.012**
+                        (0.004)         (0.004)           (0.008)              (0.005)
+Observations              457             526               444                  478
+Adjusted R2              -0.002          -0.002            0.004                0.005
+
+
+
+
+                                               43
+
+                 Electronic copy available at: https://ssrn.com/abstract=3985691
+

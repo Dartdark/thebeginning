@@ -1868,3 +1868,35 @@ future upgrades or treat days−1 to+4 abnormal returns as fully post-release. H
 modern multi-level depth. Need release/receipt clocks, as-of MPID/affiliation, real quote/trade linkage and native costs
 before a separately justified study. Evidence: source/table-image and source-arithmetic/schema checks only; no new
 returns, verified execution savings, strategy queue entry, allocation, paid collection or live/policy change.
+
+### E09/E10/E12 follow-up — Transaction taxes, participation and volatility are not alpha
+
+Source: Velmurugan/Champramary, [SSRN2849388 uploaded-paper review](results/ctt_gold_2849388_review.md),
+retained November 7, 2026. Historical MCX gold study, 2011–16, tax start July 1, 2013.
+- Use: express charges in notional units and distinguish activity, dispersion and executable return prediction.
+  The source's 0.01% seller tax is 1bp of notional, not margin; it is not a CME/MGC fee setting. Reported
+  trading-value declines recompute to 43.95–57.08%; this does not identify a trade sign or a causal tax effect.
+- Evidence: full-source/table-image inspection and published arithmetic only. Table 6's post-tax persistence
+  sums to 0.974387 rather than 0.99; alpha5 p=0.3176 contradicts claimed significance. No raw MCX/GARCH replication,
+  measured savings, risk reduction or strategy profit. Greater volatility need not mean exploitable inefficiency.
+- Next use only for a separately justified cost/participation study: authenticate tax/event/sample clocks,
+  market/contract/roll identity and controls. No new alpha queue/data-shopping item, automatic collector or return
+  test; missing data alone is not merit. No allocation or live change.
+
+### E01/E10/E56 follow-up — Listing transfers, spread components and urgency
+
+Source: Bonini et al., [SSRN3985691 full review](results/listing_switch_3985691_review.md), December 15, 2021
+preliminary draft, retained November 7, 2026; NYSE/Nasdaq stock switches 2009–17, not Nasdaq-100 futures.
+- Use: distinguish quoted from effective/realized spread, and interaction coefficients from total subgroup effects.
+  With aggressor side D, trade price P and same-contract midpoints M0/M5, the paper's full relative spreads satisfy
+  `2*D*(P-M0)/P = 2*D*(P-M5)/P + 2*D*(M5-M0)/P`. Five-minute M5 is a posttrade label, not an available signal.
+  Half-spreads, percentage points/basis points and native cash fees require explicit conversion. Realized spread
+  excludes inventory, hedging and fees and is not net dealer profit; a passive parent's side differs from aggressor side.
+- Evidence: full text/appendix, key table/figure images, source arithmetic and two invented algebra examples only.
+  Large-firm dark effective spread changes +0.068−0.037=+0.031 percentage points, not a decline. Pooled lit effective
+  spread changes −0.019; wider quoted spreads do not imply deterioration of every effective-spread measure.
+  Coefficient-sum significance requires unavailable covariance. Announcement CAR is not significant.
+- Limits/next check when separately warranted: actual fills and order/quote receipt clocks, side, quote age,
+  classified venue, future midpoint coverage, native fees and missed-fill opportunity cost. Off-exchange is not
+  automatically a specifically identified dark pool. No original TAQ replication, trading signal, measured saving,
+  TODO strategy/data-shopping entry, order-routing installation, portfolio change or external message.

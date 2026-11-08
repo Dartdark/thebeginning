@@ -1,0 +1,920 @@
+                 CTT infuses inefficiency into Gold futures trading: An empirical Analysis
+                                                          By
+           Dr.Velmurugan.PS, Fulbright Fellow, Asst.Professor, Dept.of Commerce, Pondicherry University
+                                                          &
+             Rinku Champramary, Doctoral Research Scholar, Dept.of Commerce, Pondicherry University
+
+
+
+The rationale behind introduction of CTT by government of India is still unclear. But as per few experts, revenue
+generation was the topmost priority behind the imposition of CTT, besides checking price volatility. In this study
+by adopting the bootstrap, and modified GARCH methodology, we assessed the impact of CTT in non-agriculture
+futures commodities with special reference to gold futures traded in MCX. The study finds that CTT has increased
+the price volatility in gold futures and has significantly reduced the turnover in trading volume, weakening the
+market to great extent. The imposition of CTT not only affected the gold futures market but also contributed to
+the inefficiency of the market as the market has still not yet been able to digest the shock that it had received after
+the implementation of CTT. As per the revenue generation is concerned, if sole purpose for introducing CTT in
+the commodity futures market was to increase the revenue, than it is not suitable for development of commodity
+futures market, because      CTT has already increased the transaction cost, and market players have already
+responded to it as volume came down approximately to 43% to 53%. We conclude that CTT has direct impact on
+policy aspirations as there is a need to transform Indian markets into ‘price setter’ from being ‘price takers.
+
+
+
+Key words: Gold futures, Commodity Transaction Tax, Price Taker, Fiscal Deficit, Bootstrap, MGARCH
+
+
+
+
+                                                          1
+
+
+                            Electroniccopy
+                          Electronic   copy available
+                                            available at:
+                                                      at:https://ssrn.com/abstract=2849388
+                                                          http://ssrn.com/abstract=2849388
+1. Introduction:
+   The levying of Commodity Transaction Tax (CTT) for non-agriculture commodities in India has been under
+   debate since its inception. It is a derived version of securities transaction tax, which dates way back to Keynes
+   19361 and Tobin 19722. Since then its importance has been growing and spreading gradually under various forms
+   to different continents across the globe3. As transaction tax is of great importance to various stake holders, be it
+   policy makers or the investors, the administration may like to raise more revenue for the government or to reduce
+   the speculation, by imposing it. On the other hand such transaction tax may go against the investors and other
+   market participants. Due to such conflicting interests among the stake holders, experts debate on its probable
+   implications with supportive theories and empirical evidence to show the pros and cons of levying such financial
+   transaction tax. Several of such proponents of financial transaction tax argue that transaction taxes will reduce the
+   excess volatility through minimizing speculations and encouraging long term investment4. But, as well said, every
+   merit has its own demerit. Many opponents also argue that such tax on financial transaction will bring down the
+   securities values, liquidity etc. thus reducing market efficiency and driving the investors away to other offshore
+   markets5.
+   In India CTT was first proposed in the union budget 2008-09 @ of 0.017% but failed to succeed due to strong
+   opposition from different point of view expressed by various stake holder. But such apprehension did not last
+   long enough. Again in 28th February 2013, the then finance minister P Chidambaram came with fresh proposal in
+   the union budget 2013-14, to levy @0.01 percent CTT for futures contract on non-agriculture commodities traded
+   in Indian markets, applicable only to the sellers in the future contracts. Thus India finally succeeded in attaining
+   a second place in the world next to Taiwan to impose commodity transaction tax without further validating the
+   causes and consequences of commodity futures trading.
+
+
+
+
+   1
+     John Maynard Keynes proposed STT in US to deal with volatility and speculators in foreign exchange and the stock market.
+   2
+     James Tobin proposes currency transaction tax on spot conversion of currency to other currency in order to indirectly reduce the
+   excess volatility.
+   3
+     Proposed in Europe in 2011 to have a common system of FTT. Currency transaction taxes (CTT-Tobin Tax) levied by Brazil on foreign
+   exchange.
+   4
+     Proponents like Keynes, Tobin, Summers and summers, Stiglitz,(1989)
+   5
+    (Umlauf, 1993), tells that large part of trading activities migrated in response to introduction of such taxes from Sweden to London.
+   (Campbell & Froot, 1994), study suggest that it may lead to reduction in trading via migration in foreign markets or by substituting
+   their investment to other securities.
+
+                                                                     2
+
+
+                                   Electroniccopy
+                                 Electronic   copy available
+                                                   available at:
+                                                             at:https://ssrn.com/abstract=2849388
+                                                                 http://ssrn.com/abstract=2849388
+  The main proponents of commodity transaction tax in India Shri. P. Chidambaram’s rationale behind introducing
+  CTT was to bring commodity market on par with the securities market where a securities transaction tax is levied6.
+  The rationale behind saying that there is “no distinction between securities and commodity derivatives trading’
+  has already sideline the economic functions of commodity derivatives Viz. Price discovery and risk management
+  and in doing so, is likely to deter commodity trading on Indian exchanges and shift transactions to lower cost
+  exchanges overseas, or to illegal markets. As trade volume decreases, so too will any revenues generated by the
+  CTT” (Charles M. Seeger, J.D, (2013).
+
+  Commodities further differ from securities because a “commodity exchange is clearly not a stock exchange”
+  (Pavaskar & Ghosh, 2008) because of their difference in objectives. The main motive of the stock market players
+  is to make profits from the rising stock values and investment in it. But this is not so in the case of commodity
+  futures market because the main purpose in this market is to hedge the price risks in both the falling and the rising
+  markets, depending on their commitments in the physical markets7. Thus opponents are of the view that the
+  imposition of commodity transaction tax in futures markets in India will hamper the price discovery and hedging
+  mechanism that are inherent characteristics of commodity futures market.
+
+  In this background this study tries to find out the effect of CTT on Indian non-agriculture commodity futures
+  market, after the announcement of imposing (CTT) from 1st July 2013 onwards. The papers attempts to put
+  forward the market behavior before and after the imposition of such (CTT), analyzing the changes in Trading
+  Volume, Trading Lots, Market Return and market efficiency after the introduction of CTT in India.
+
+  The study is dealt in following way: Section 2 gives the overview of commodity futures market in India. Section
+  3 gives the review, Section 4 the data and methodology adopted, Section 5: explains the empirical findings. And
+  Section 6 outline the conclusions and discussions.
+
+2. Overview of Indian commodity futures market.
+ Though commodity trading dates way back to 19th century, its revival could be seen only in the new millennium with
+ recognition granted to three national commodity exchanges, particularly MCX, NCDEX and NMCE. Of total 12 recognized
+ commodity exchanges, six are national commodity exchange and six are commodity specific regional exchanges.
+
+
+
+  6
+    In his Budget speech, Chidambaram stated, “There is no distinction between derivative trading in the securities market and derivative
+  trading in the commodities market, only the underlying asset is different. It is time to introduce CTT in a limited way. Hence, I propose
+  to levy CTT on non-agricultural commodities futures contracts at the same rate as on equity futures that is at 0.01 percent of the price
+  of the trade. Trading in commodity derivatives will not be considered as a ‘speculative transaction’ and CTT shall be allowed as
+  deduction if the income from such transaction forms part of business income.”
+  7
+    (Pavaskar & Ghosh, 2008)
+
+                                                                     3
+
+
+                                  Electronic copy available at: https://ssrn.com/abstract=2849388
+Table 1: Total value and volume of trade in major exchanges.
+
+
+                                                                  Value (Rs           % share (In value
+  Name of exchange              Volume of Trade (000 Tons)        crores)             terms)
+
+  MCX                           911,229                           5,634,194                               84.1%
+
+  NCDEX                         217,737                           1,019,588                               15.2%
+
+  NMCE                          6,028                             29,368                                   0.4%
+  Total of National
+  exchanges                     1,134,994                         6,683,150                           99.80%
+
+  Regional exchanges            3,019                             13,230                                   0.2%
+
+  Grand Total                  1,138,013                       6,696,380                              100.0%
+  Note- Natural Gas Volumes are not included in the Total Volume
+  Source- SEBI Annual report 2015-16
+
+
+Chart 1: Percentage share of Total value of commodities traded in MCX
+
+
+
+                                             zinc
+                                             7%        other
+                               Natural Gas          commodiites      Copper…
+                         Nickel    4%                   2%
+                           4%                                              Silver
+                                Lead                                        15%
+                                 5%
+                       Aluminium
+                          3%
+
+                                                                               Gold
+                                    Crude oil                                  22%
+                                      30%
+
+
+                Source: MCX Annual report 2015-16
+
+The four national commodity Exchanges contributed 99.84 % of the total value of trade in the commodity futures
+market. These are MCX Mumbai (80.55 %), NCDEX Mumbai (18.75 %), NMCE Ahmedabad (0.53%) and ACE
+Mumbai (0.02%). review (April to June 2015), the total value of trade in all commodities traded at the recognized
+
+
+                                                             4
+
+
+                             Electronic copy available at: https://ssrn.com/abstract=2849388
+   Exchanges was ₹16.86 lakh crore as against ₹ 16.09 lakh crore during the previous quarter (January to March
+   2015) and ₹14.55 lakh crore during the corresponding period.
+   (Bjursell, Wang, & Yau, 2012) in their paper says that a 0.02 percent transaction tax is big enough to swipe the
+   whole market leaving no space for the government to raise no tax. The expectation of government of India is that
+   CTT will bring revenue of 45 billion to the exchequer without looking at the side effects of it. It has already
+   reflected as it has already created a panic like situation in the non-agriculture futures commodities, as the cost of
+   transaction is increasing from Rs 183 to Rs 683 per crore. “As exchanges charge Rs 183 per crore as a transaction
+   cost as against that CTT is Rs 1,000 per crore on the sales side which results into the increase in the impact cost
+   and increases the cost of hedging transactions, as sellers have to pay 0.01 percent tax, that is, Rs 10 for a
+   transaction value of Rs 1 lakh”8. So in such situation why is still the government in favor of imposing such tax
+   which has no potential at all to generate more revenue.
+
+
+3. Review of literature:
+   The aim of Imposing Financial Transaction taxes has its own purpose, some are to curve the particular issue like
+   crisis etc. and some may be for general purpose which may or may not be achieved9. But, they are often viewed
+   as a tool to reduce market volatility and is likely to be introduced in a period by those countries experiencing high
+   volatility (Capelle-Blancard & Havrylchyk, 2014). Proponents of financial transaction tax like Keynes, Tobin,
+   Stiglitz, Summers & Summers, Edgar Feige, give numerous reasons for proposing financial transaction tax; like
+   curving volatility, speculations, more fair and equitable tax collection 10, feasible and less sensitive to tax
+   avoidance and evasion[11] [12]. With such motives, various financial transaction taxes were proposed by experts.
+   such as securities transaction tax proposed by Keynes for dealings on wall Street, currency transaction tax such
+   as Tobin tax and Spahn tax proposed by James Tobin on all spot conversion of currency to another and Paul
+
+
+
+
+   8
+     http://www.moneycontrol.com/news/commodities/budget-2015-16-expect-commodity-transaction-tax-to-be-removed-says-
+   mcx_1313062.html?utm_source=ref_article
+   9
+     En.Wikipedia.org
+   10
+      The International Monetary Fund (IMF) delivered a report in 2010 titled "A Fair and Substantial Contribution by the Financial
+   Sector" which made reference to a financial transaction tax as one of several options.
+   11
+      Fraser Reilly-King of Halifax Initiative also points out that the key issue and advantage of an FTT is its relatively superior functional
+   ability to prevent tax evasion in the financial sector.
+   12
+      Economist Rodney Schmidt, principal researcher of The North-South Institute, also concurred that a financial transaction tax is
+   more technically feasible than the "bank tax" proposed by the IMF in 2010.
+
+                                                                        5
+
+
+                                    Electronic copy available at: https://ssrn.com/abstract=2849388
+Bernd Spahn consisting of two tiers rate structure13, automated payment transaction tax proposed by Edgar L.
+Feige in extension to the ideas of Keynes and Tobin which consist of flat rate tax on all transactions14.
+As we know every coins has two sides, so also the proponents has its opponents who have different views
+regarding the introduction of such taxes. Some of them are in the view that it will increase the transaction cost
+and bring down the liquidity in the market, thus reducing the values of securities traded (Amihud & Mendelson,
+1991),(Kupiec & Sharpe, 1991), (Grundfest & Shoven, 1991), (Lo, Mamaysky, & Wang, 2000) also the turnover
+(Erickson & Wang, 2000),(Lindgren & Westlund, 1990),(Wang & Yau, 2012) in their study finds that such a tax
+will also reduce trading volume and increase price volatility and will only help in generating low tax revenues.
+(Baltagi, Li, & Li, 2006) find that an increase in the Chinese stamp tax rate from 0.3% to 0.5% reduces the trading
+volume by one third.
+(Roll, 1984) examines whether countries with transaction taxes have a lower volatility, and finds the answer to
+be negative. Similarly, (Umlauf, 1993) finds that the introduction of, or increase in, the Swedish transaction tax
+would lead to an increase in stock market price volatility. Examining the effect of changes in transaction taxes in
+four Asian countries, (Hu, 1998)Hu finds insignificant impact of transaction taxes on price volatility, but
+significant negative impact on stock returns in some countries. (Saporta & Kan, 1997) investigate the effect of
+the UK stamp duty on the volatility of continuously compounded 15-minute returns over daily, weekly and
+monthly time periods. The results reveal that there is no evidence of any kind of effect, positive or negative, on
+the volatility.
+There is also empirical evidence that imposition of /increase in STT would decrease return. Hu (1998) finds that
+upon the announcement of the tax, the average return fell 1.57 per cent in Taiwan and by 0.55 per cent in Korea.
+(Umlauf, 1993) estimates that the Swedish All-Share equity index fell 2.2 per cent when the 1 per cent tax was
+announced in 1983 and by 0.8 per cent when the tax rate was increased in 1986. In the UK, (Saporta & Kan, 1997)
+report that the equity index declined by 3.33 per cent on the announcement of an increase in stamp duty rate from
+1 per cent to 2 per cent. When the stamp duty was decreased from 2 per cent to 1 per cent and then from 1 per
+cent to 0.5 per cent, the index increased by 0.558 per cent and 1.054 per cent respectively.
+
+
+
+
+13
+   Paul Bernd Spahn opposed the original form of a Tobin Tax in a Working Paper “International Financial Flows and Transactions
+Taxes: Survey and Options, concluding "...the original Tobin tax is not viable. This new form of tax, the Spahn tax, was later approved
+by the Belgian Federal Parliament in 2004. It has a two-tier rate structure consisting of a low rate financial transactions tax and an
+exchange surcharge at prohibitive rates.
+14
+   The foundations of the APT tax proposal—a small, uniform tax on all economic transactions—involve simplification, base
+broadening, reductions in marginal tax rates, the elimination of tax and information returns and the automatic collection of tax
+revenues at the payment source.
+
+                                                                   6
+
+
+                                Electronic copy available at: https://ssrn.com/abstract=2849388
+  Though Potential revenue and ease of collection from imposition of a transaction tax are attractive to
+  governments, however, (Umlauf, 1993) reports that the decreased levels of trading in response to transaction tax
+  resulted in decreased capital gains revenue in Sweden. Recently, a study by (Schulmeister, 2008), (Jurečková &
+  Picek, 2007) estimates the transaction tax revenue of different countries. It is seen that the revenue from
+  transaction tax varies between 0.01 for France to 1.7 for Spain, depending on the tax rate.
+  (Chou & Lee, 2002) provide interesting empirical evidence on the effect of the transaction tax on liquidity and
+  market efficiency. They demonstrate that after the tax reduction on the Taiwan Futures Exchange (TAIFEX), the
+  TAIFEX assumed a leading role over the Singapore Stock Exchange (SGX) in the price discovery process for the
+  index futures contracts. Supporting Chou and Lee, (Hsieh, 2009)also notes that the information advantage of SGX
+  has diminished as the TAIFEX lowered its transaction tax. Finally, in a review article(Habermeier & Kirilenko,
+  2003) by ), they conclude that transactions taxes have a significant impact on the transformation of investor
+  demands into transactions. Transaction taxes are found to delay the price discovery process, increase volatility,
+  and reduce market liquidity.
+  Using futures market data, (Aliber, Chowdhry, & Yan, 2003) find a positive relationship between transaction
+  costs and volatility and a negative relation between trading volume and transaction cost in the foreign exchange
+  futures market for the British Pound, Japanese Yen and Swiss Franc (against the U.S. Dollar). (Constantinides,
+  1986),(Hegde & Miller, 1989) show that increases in transaction costs cause investors to reduce the frequency
+  and volume of trading. Another study by (Frino, Stevenson, & Duffy, 1998) by 15% due to increase in transaction
+  fee by $1 per contract for the case of Austria. Similarly, (Chou & Wang, 2006)found that following the reduction
+  in transaction tax, the trading volume had increased and the bid-ask spread had decreased.
+  From the review of literature, it could be understood that both proponents and opponents of financial transaction
+  tax had placed there strong arguments with empirical evidence. It is clear from the review that most of these
+  researcher attempted to find its implication in securities transaction tax concerned with stock markets. There is
+  few evidence from existing literature in the probable implication of transaction taxes of commodity market, which
+  have a different purpose for its existence. Hence, to bridge the gap paper attempts to check the outcome of the
+  imposition of CTT in non-agriculture futures market in India
+
+
+4. Data and methodology:
+  The study is focused only on single commodity futures that is Gold Futures traded in MCX. Gold is the second
+  largest commodity futures traded in the MCX which is next to crude oil and regarded as one of the most active
+  non-agriculture commodity future contract that is driving the commodity futures market in India, but
+
+                                                           7
+
+
+                             Electronic copy available at: https://ssrn.com/abstract=2849388
+unfortunately is included in the purview of CTT. The data in this study covers from 1st January 2011 to 30th July
+2016, covering a total of 1616 observations. First, the log return is calculated for the study 𝑅𝑡 = 𝑃𝑡 /𝑃𝑡−1 for
+which Pt is the price at time t. Apart from this the paper also considers trading value, open interest, trading volume
+etc. The summary statics for the data is given below in Table: 1.
+Chart 1: Bullion futures trading                                                              Chart 2: Agro futures trading
+                                                Bullion
+ 9e+006                                                                    1         300000                                                                           1
+                 bullion   (left)                                                                agro   (left)
+
+
+ 8e+006
+
+                                                                                     250000
+                                                                           0.8                                                                                        0.8
+ 7e+006
+
+
+
+ 6e+006                                                                              200000                             Before CTT      After CTT
+
+                                                                           0.6                                                                                        0.6
+ 5e+006
+
+                                                                                     150000
+
+ 4e+006
+                                                                           0.4                                                                                        0.4
+
+ 3e+006                                                                              100000
+
+
+
+ 2e+006
+                                                                           0.2                                                                                        0.2
+                                                                                      50000
+
+ 1e+006
+
+
+
+      0                                                                    0             0                                                                            0
+          2011                 2012   2013          2014   2015    2016                       2011               2012           2013   2014         2015     2016
+
+
+
+
+Table: 1 Before CTT
+ Year                                        Average        trading Average              trading Average                                      Open Turnover Ratio
+                                             value (in lots)          value in (lakhs)                              Interest (In Lots)                     (%)
+ 2011                                        35100.39                 875795.4                                      11289.2                                310.92
+ 2012                                        28324.21                 839794.4                                      12308.85                               230.1126
+ 2013                                        33197.45*                937209*                                       13460.68*                              246.6254
+*indicate that average trading volume in lots from the month of 1st January to 31st July because this figure is
+before implementation of CTT
+Table 2: After implementation of CTT
+*indicate that average trading volume in lots from the month of July because this figure is after implementation
+
+ Year/month                                  Average        trading Average              trading Average                                      Open Turnover Ratio in
+                                             value (in lots)          value in (lakhs)                              Interest (In Lots)                     (%)
+ 2013                                        16357.28*                479769.8*                                     8267.91*                               197.8406
+ 2014                                        12682.41                 354085.8                                      8072.31                                157.1101
+ 2015                                        13324.57                 351231.5                                      6623.306                               201.177
+ 2016                                        15794.23**               466291.4                                      7172.494                               220.2055
+of CTT.
+**indicated up to the month of august 2016
+Chart: 3 Trading Volume in Lots
+                                                                                 8
+
+
+                                                 Electronic copy available at: https://ssrn.com/abstract=2849388
+If we look at the above given Table:1 and Table: 2 we can clearly observe that there is a continuous decline in
+average trading value (in lots), average trading value in (lakhs), average Open Interest (In Lots) and Turnover
+Ratio. So what we can point out from this table is that the market is weakening. every year, signaling capital is
+moving out of the Gold futures market, which indirectly mean’s the investors are hesitant to participate in this
+market partially attributed to the earlier discussed rise in transaction cost, that is additional burden imposed by
+the proposed mandatory cost in the form of CTT. This reflects that CTT is going against the long term policy
+implication of India that is to have one of the most developed exchange in the world which will act as a market
+leader, that is price setter rather than price taker, and to deliver the benefits of investments in gold from its physical
+form towards the paper format. But if we see the trading volume, open interest etc. CTT is dragging India
+backward way by increasing the transactions cost. That means the cost of investment in physical form is becoming
+more attractive than the paper form in (futures market) because of the increasing cost related issues while dealing
+in gold futures market.
+Gold is an inevitable form of investment especially in a country like India which is treated auspicious, precious
+and currency. So the demand for gold is sure to rise in future for which the policy should be designed in such a
+way that demand does not lead to fiscal burden. In order to deal with such issues policy must be suitable for
+creating favorable avenues for investment in gold in the paper form rather than physical form like gold futures
+market to reduce the fiscal burden. But lack of suitable policy changes like imposition of CTT will only encourage
+the investors to invest in physical form, adding to India’s fiscal burden.
+
+
+
+
+                                                            9
+
+
+                             Electronic copy available at: https://ssrn.com/abstract=2849388
+Table: 3 Summary Statistics
+           Statistics               Before CTT                 After CTT     Total Observation
+ Number of Observations                  766                      850               1616
+ Mean                                0.000323                   0.000255          0.000286
+ Maximum                             0.032066                   0.057692          0.057692
+ Minimum                             -0.082041                 -0.053283          -0.082041
+ Std. Dev.                           0.009421                   0.010372          0.009933
+ Skewness                            -1.558696                  0.555558          -0.298181
+ Kurtosis                            15.00305                   8.077913          10.78755
+MAD*                                 0.006057                   0.007124           0.00636
+ Jarque-Bera                        4908.510**                 956.9505**        4104.900**
+*denotes mean absolute deviation
+** Significance levels denoting significant in this case.
+The above table outlines the summary statistics of the daily return series of Gold futures traded in MCX.
+The paper tries to investigate the economic impact of imposition of CTT from three different aspects of market
+quality parameters i.e. change in turnover (liquidity), market volatility, and market efficiency.
+
+
+4.1: Trading Volume:
+To examine the effect of commodity transaction tax and its impact on trading volume, we calculated the mean
+difference before and after the introduction of CTT. In order to deal with normality related issues, null hypothesis
+of equal trading volume the bootstrap method is employed (Baltagi et al., 2006) . Here, in this case, trading
+volumes were named as tv0 = (tv1, tv2...... tvk) for k trading days before the imposition of CTT, and tv1 = (tv11,
+tv12….... tv1k), for k trading days after the imposition of CTT. The following is the test statistic without assuming
+of equal variance between tv0 and tv1.
+                                                 𝑡𝑣𝑜   ̅̅̅̅̅
+                                                 ̅̅̅̅̅−𝑡𝑣1
+                                  𝑇(𝑥) =          2       2
+                                                √𝜎𝑡𝑣0 + 𝜎𝑡𝑣𝑖
+                                                   𝑘      𝑘
+
+In order to attain the test statistics bootstrap distribution is adopted (Efron & Tibshirani, 1993). For which we
+                                         ̃ 𝑖 = 𝑡𝑣0𝑖 − 𝑡𝑣0
+need to do the following transformation 𝑡𝑣0           ̅̅̅̅̅ + 𝑥̅ 𝑎𝑛𝑑 𝑡𝑣1
+                                                                      ̃ 𝑖 = 𝑡𝑣1𝑖 − 𝑡𝑣1
+                                                                                   ̅̅̅̅̅ + 𝑥̅ 𝑤ℎ𝑒𝑟𝑒 𝑡𝑣0
+                                                                                                    ̅̅̅̅̅ 𝑎𝑛𝑑 𝑡𝑣1
+                                                                                                              ̅̅̅̅̅ are the
+
+group means and 𝑥̅ is the mean of both the sample. Then from n bootstrap sample(𝑡𝑣0∗, 𝑡𝑣1∗ ), in which (z*, y*),
+                                                                                          ̃ = (𝑡𝑣0
+are the samples which are replaced after the result obtained from transformation that is 𝑡𝑣0    ̃ 1 , 𝑡𝑣0
+                                                                                                       ̃ 2 , … 𝑡𝑣0
+                                                                                                                ̃ 𝑧)
+                                                                                                                        𝑘
+
+     ̃ = ( 𝑡𝑣1
+and 𝑡𝑣1     ̃ 1 , 𝑡𝑣1
+                   ̃ 2 … 𝑡𝑣1
+                          ̃ 𝑘 ) respectively.
+
+
+
+                                                                  10
+
+
+                                Electronic copy available at: https://ssrn.com/abstract=2849388
+                                                                      ̅̅̅̅̅∗ − 𝑡𝑣1
+                                                                      𝑡𝑣0      ̅̅̅̅̅∗
+                                                      ∗ (𝑥 ∗ )
+                                                  𝑇              =
+                                                                        2∗
+                                                                     √𝜎𝑡𝑣0 + 𝜎𝑡𝑣1
+                                                                              2∗
+                                                                                  /𝑘
+                                                                       𝑘
+Without making any assumptions on normality (we know that we don’t have anything to worry about assuming
+equal variance15 because we are considering here bootstrap hypothesis test) for comparing means across the
+groups for samples of size 2k, using block resampling, corresponding to z trading days before and z trading days
+after CTT, where Z=100, 150, 300, 550, and 767, in order to obtained the critical value of test statistic (T*) is
+used.
+
+
+4.2: Levene statistic for variance equality
+In order to assess the changes in volatility we are comparing the variances of the returns before and after the
+introduction of CTT. We used levenes test for equality of variances (without assuming equal means across data
+groups) that is across m groups of data (in our case m=2)(Levene, 1960). The null hypothesis is σ12 = σ22 (variance
+assume to be equal) Let 𝑥𝑖𝑗 be the jth observation (𝑗 = 1,2. . 𝑛𝑖 )
+In the 𝑖 𝑡ℎ group (𝑖 = 1, 2), and do the transformation 𝑧𝑖𝑗 = |𝑥𝑖𝑗 − 𝑥̅𝑖 |here 𝑥𝑖 = ∑𝑗 𝑥𝑖𝑗 /𝑛𝑗 . The Levene statistic is
+the ratio of between-group to within-group variances for𝑧𝑖𝑗 :
+
+
+                                                           ∑2𝑖=1 𝑛𝑖 (𝑧̅𝑖 − 𝑧̅. . )2
+                                             𝑊=
+                                                      ∑2𝑖=1 ∑(𝑧𝑖𝑗 −𝑧𝑖 )2 / ∑(𝑛𝑖 − 1)
+                                                                 𝑗              𝑖
+
+                                           𝑧̅𝑖 = ∑ 𝑧𝑖𝑗 / 𝑛𝑖 𝑎𝑛𝑑 𝑧̅. . = ∑ ∑ 𝑧𝑖𝑗 / ∑ 𝑛𝑖
+                                                 𝑗                            𝑖 𝑗       𝑖
+
+Under the assumption that 𝑥𝑖𝑗 is independently and normally distributed, W has an asymptotic 𝐹(2, ∑𝑖 (𝑛𝑖 − 1)
+distribution. However, the Levene statistic W is sensitive to non-normality, as pointed out by (Brown & Forsythe,
+1974). The summary statistics of our return data are presented in Table 1. The Jarque–Bera test show strong
+evidence of non-normality of the returns. (Brown & Forsythe, 1974) suggest two modified Levene statistics
+obtained by replacing the arithmetic mean 𝑥̅𝑖 with either a 10% trimmed mean or the median in the group. The
+modified Levene statistics are found to be robust against non-normality. We will present all the Levene statistics
+which includes originally proposed, non-parametric levene test, as well as median adjusted. To deal with the
+possible complication of non-normality and autocorrelation, we use the bootstrap with block resampling to assess
+
+
+15
+ (Efron & Tibshirani, 1993) in his book introduction to bootstrap ”in considering a bootstrap hypothesis test for comparing two
+means, there is no compelling reasons to assume equal variance hence we don’t make assumption’s”
+
+                                                                      11
+
+
+                               Electronic copy available at: https://ssrn.com/abstract=2849388
+the significance level of the test statistics obtained from a designed sample of 2k daily returns in the following
+manner. Corresponding to k days before and after the event, a sample of 2k daily returns is taken and the Levene
+statistics are calculated. To avoid arbitrariness of the sample length, we let k=100, 150, 300, 550, 767. Then, from
+within the above designed sample of 2k returns, a sample of 2k items is randomly drawn with block resampling
+and subsequently divided into two groups, with the first z items allotted to one group and the rest to another.
+Levene statistics are calculated for the bootstrap sample. This procedure is repeated 1,000 times to yield a
+bootstrap distribution of the Levene statistics. The significance levels of the Levene statistics are identified as the
+percentiles of the bootstrap distribution to which they (the statistics) correspond. For the clarification of bootstrap
+techniques we recommend reading (Efron & Tibshirani, 1993).
+
+
+4.3: Modified GARCH model:
+In this study, an autoregressive conditional variance or GARCH type model is going to be used, which is also
+used in previous studies like(Baltagi et al., 2006). (Engle, 1982) introduces the autoregressive conditionally
+heteroskedastic (ARCH) model, in which the conditional variance is a function of past squared errors. (Bollerslev,
+1986) extends the model (GARCH) in the way that the conditional variance is a function of both past errors and
+past conditional variances. The GARCH (1, 1) model proposed by (Bollerslev, 1986) is
+                                                   𝑟𝑡 = µ0 + ɛ𝑡𝑟
+                                                                  2         2
+                                  𝑣𝑎𝑟 (ɛ𝑡 |𝐼𝑡−1) ≡ 𝜎𝑡2 = 𝛼0 + 𝛼1 𝜀𝑡−1 + 𝛼2 𝜎𝑡−1
+Where 𝐼𝑡−1 denotes the information set up to period t−1. Many extensions of the GARCH model have been
+extensively used to capture different aspects in financial time series. For further reference (Bollerslev, Chou, &
+Kroner, 1992)and (Bera & Higgins, 1993). The below given equation of modified GARCH model allows for
+regime switching in both the mean equation and the conditional variance equation:
+                                                𝑟𝑡 = 𝜇0 + 𝜇1 𝐷𝑡 + 𝜀𝑡
+                                                2         2                    2            2
+                 𝑣𝑎𝑟(𝜀𝑡 |𝐼𝑡−1) ≡ 𝜎𝑡2 = 𝛼0 + 𝛼1 𝜀𝑡−1 + 𝛼2 𝜎𝑡−1 + 𝛼3 𝐷𝑡 + 𝛼4 𝐷𝑡 𝜀𝑡−1 + 𝑎5 𝐷𝑡 𝜎𝑡−1
+                                                     0 𝑖𝑓 1 ≤ 𝑡 ≤ 𝑡 ∗ − 1
+                                            𝐷𝑡 = [                        ]
+                                                     1 𝑖𝑓 𝑡 ∗ ≤ 𝑡
+Where t* is the switching point, in this study it is the date of introduction of commodity transaction test i.e July,
+1, 2013 which is used as switching point. The modified GARCH allows volatility shocks to persist over time.
+Using dummy variables it also captures structural shift in the level and slope of time varying volatility. If no
+structural change occurs, the dummy coefficients will be insignificant. The dummy in the mean equation suggests
+a change in the mean level of returns as a result of the CTT while the dummies in the conditional variance equation
+
+
+                                                           12
+
+
+                            Electronic copy available at: https://ssrn.com/abstract=2849388
+suggest regime switching in the autoregressive structure. Under the assumption of error normality, the log
+                                                                                1                 𝜺𝟐
+likelihood function of the above modified model is:                    ℒ = ∑ − (𝒍𝒏(𝟐𝝅) + 𝒍𝒏𝝈𝟐𝒕 + 𝒕𝟐 )
+                                                                                2                 𝝈𝒕
+
+We will use the BHHH (1974) algorithm to maximize the above log-likelihood function. As suggested by (Lee
+& Ohk, 1992) and (Li, Lin, & Li, 1997), the structural change in conditional variance equation might suggest a
+                                                  2
+change in market efficiency. In the GARCH model, 𝜎𝑡−1 , conditional variance at time t−1, is a function of all past
+                2     2                                                                               2
+squared errors,𝜀𝑡−2, 𝜀𝑡−3 … Negative α4 and positive α5 suggest that, after the event, the effect of 𝜀𝑡−1 𝑜𝑛 𝜎𝑡2
+                                         2                           2    2
+relatively decreases, but the effect of 𝜎𝑡−1 which is a function of 𝜀𝑡−2 𝜀𝑡−3… 𝑜𝑛 𝜎𝑡2 relatively increases. This
+implies that volatility shocks are less quickly reflected and digested in the financial markets after the event, i.e.,
+                                                                                                         2
+the markets become less efficient. Similarly, positive α4 and negative α5 suggests increasing effect of 𝜀𝑡−1 and
+                      2    2
+decreasing effect of 𝜀𝑡−2 𝜀𝑡−3… 𝑜𝑛 𝜎𝑡2 which implies a more efficient market. If α4 and α5 have the same sign, one
+can probably say little about the market efficiency.
+The similar modified GARCH model which allows regime switching in the variance equation, is also used by
+(Lee & Ohk, 1992) to study the effect of stock index futures listing on the underlying index. They find that the
+listing of the index futures has a significant effect on the cash market. Also, that stock market volatility increases
+significantly after the introduction of the index futures. (Li et al., 1997) also uses the same model to study the
+impact of settlement time on the market behavior. Their result shows that when the market employ a longer
+settlement time, the markets become less volatile and less efficient as well.
+
+
+5.Results of the Investigation:
+
+5.1. Trading Volume: The aim is to assess the changes in gold futures turnover, that whether there is any changes
+in the mean of turnover after the imposition of commodity transaction tax in non-agriculture commodities
+particularly Gold. Before and first of July 2013. In order to assess the changes by comparing the mean difference
+before and after the implementation of CTT for different trading period ranging from ± 100 to ±766 (before and
+after). The methodology adopted for generating the test statistic is shown in the methodology part. We adopted
+one of the most robust method to deal with our data as the data we are using is likely to suffer from non-normality
+and lack of equal variance across the group. So, under such circumstance the method that we adopted is best
+fitted. The results presented in Table: 4 shows the mean level of turnover before the imposition of CTT and after
+the imposition of CTT. From the table we can see that there is a change in the mean of before and after the
+implementation of CTT. The mean of trading volume after the implementation of CTT is lower than the mean of
+trading volume before CTT. The t statistics result for all the samples that are taken are significant at 95 percent
+
+                                                          13
+
+
+                            Electronic copy available at: https://ssrn.com/abstract=2849388
+confident level. Which gives us the strong message that there is a significant change in trading volume after the
+introduction of CTT in Gold futures trading value. The trading volume came down by approximately 43 to 53
+percent. From this we can understand that the market players in commodity gold futures actively responded to
+the imposition of CTT by reducing their trade dealings from such commodities.
+
+
+Table: 4. Trading Volume (in Rs. lakhs)
+                     Time Period*
+                          ± 100              ± 150                 ± 300                ± 550             ± 767
+  Mean Before CTT    972451.262500      938223.856133        883466.781367          903498.503618     873603.152855
+  Mean After CTT     545088.067900      486217.437067        410732.331800          387819.276582     391161.200261
+  Ratio**                0.56053           0.518232               0.46491             0.429242          0.447756
+  t statistics         5.617(.001)       7.838    (001)         12.743 (001)         18.874(000)       19.065(000)
+ *Time period is nothing but samples taken for the study, in this case from 0 to 767 trading days.
+ **The ratio is the ratio calculated for mean volume after CTT over Before CTT.
+ Figure in the parentheses are significance levels calculated by bootstrapping method with block resampling.
+5.2. Market Volatility:
+Assessing the impact of CTT on return volatility is considered by using the variance test, for which the detailed
+methodology adopted are given in section above. Before going ahead, let us look and recall back the summary
+statistics given in the Table: 3, where the kurtosis is very high. This gives us an indication that that the daily
+returns series is having a fat tail distribution meaning that non-normality is the issue. From the result given under
+Table: 5 looking at the standard deviation for the subsamples before and after the introduction of CTT, it is
+observed that the standard deviation obtained after the introduction of CTT are larger than the ones assessed
+before CTT.
+Table: 5 Levene Statistics
+                                     Time Period
+  ststistics                             ± 100            ± 150             ± 300          ± 550          ± 767
+  Standard Deviation Before CTT        .0134301        .0114896         .0090782         .0091554       .0094212
+  Standard Deviation After CTT         .0163190        .0147245         .0120026         .0106318       .0104991
+  Original Levene                    4.227(0.41)      7.270(.007)     10.843(.001)      9.190(.002)    9.768(.002)
+  NP LT                              4.072(.045)      6.729(.010)      6.621(.010)      9.260(.002) 15.907(.000)
+  Median-Adjusted                    3.914(.049)      7.095(.008)     11.058(.001)      9.436(.002)    9.820(.002)
+
+
+
+                                                           14
+
+
+                            Electronic copy available at: https://ssrn.com/abstract=2849388
+Apart from this, the Table: 5 has result of three levene statistics like original levene test, Non-parametric levene
+test, Median adjusted is also depicted in the table along with the significant level obtained by using bootstrap
+method. As most of the statistics are found to be significant, it can be concluded that the market tends to be more
+volatile after the introduction of CTT, opposite to what was intended by its proponents in markets like Europe
+and U.S
+
+
+5.3. Market Efficiency
+The modified GARCH model defined in methodology part are estimated for the gold futures return. The results
+are presented in Table: 6., the modified GARCH model allows structural change both in the mean equation as
+well as the conditional variance equation. The bad news is that the imposition of CTT has a negative impact on
+the rate of return.
+
+
+
+
+Table: 6 modified GARH result:
+ SL/NO.        μ0            𝝁𝟏          𝜶𝟎         𝜶𝟏             𝜶𝟐         𝜶𝟑           𝜶𝟒       𝜶𝟓          𝓛
+ Normal        0.000139               2.01E-06 0.071532         0.911222                                     5046.48
+ GARCH
+               (0.5023)               (0.000)    (0.000)        (0.000)                                      1.16092
+ RESULT
+
+ Modified      0.000275   0.000320    9.13E-     0.07503        0.896272 9.94E-06      -          .00326     5176.3
+ GARCH
+               (0.2876)   (0.46820) 05           (0.000)        (0.0000)   (0.0107)    0.000175   (0.3176)
+ results.
+                                      (0.3297)                                         (0.0327)
+
+
+
+
+For the modified GARCH model, before the event day, the persistence of volatility shocks, measured by α1 + α2,
+is 0.97 for gold return before CTT. After the event day, the persistence of volatility shocks, measured by α1 + α2
++ α4 + α5, is 0.99. The dummy Coefficients in the conditional variance are all significant. α4 is significantly
+negative and α5 is significantly positive. These suggest that there is a regime switching in the conditional variance
+equation. As we discussed in the last section, a negative α4 and a negative α5 which means that we cannot speak
+                                                     2                           2    2
+much about the market efficiency. But the effect of 𝜎𝑡−1 which is a function of 𝜀𝑡−2 𝜀𝑡−3… 𝑜𝑛 𝜎𝑡2 relatively
+increases. This implies that volatility shocks are not efficiently assimilated in the Gold futures market after the
+introduction of CTT. Which means that it has significantly reduced the efficiency of risk management in the
+market in post CTT era. Thus negatively impacting the market efficiency. Introducing CTT has increased the
+                                                           15
+
+
+                            Electronic copy available at: https://ssrn.com/abstract=2849388
+transaction cost and discouraged the traders. Due to which, the market fails to respond to the arrived information
+as promptly as before, which leads to a less efficient market. This study shows that market has become more
+volatile as the information shocks are less quickly assimilated. In (Li, Lin, & Li, (1997), the market becomes less
+volatile and less efficient as the settlement time becomes longer. In French et al. (1987, Section 2.2), the GARCH
+(1,2) model is estimated separately for the whole sample period as well as for two sub periods for the daily S and
+P index. They find some evidence that the parameters are not stable across the sub periods in their sample. Their
+model does not allow inference on the stability of the parameters. However, the model in this study explicitly
+allows the parameters to change in sub periods by introducing dummy variables. From this new model we are
+able to make inference on the change and see whether the change is significant. The results reveal that, after the
+introduction of CTT, the immediate lagged error has less impact on the conditional variance, which implies that
+the Gold Futures market reacts less promptly to the information and therefore becomes less efficient.
+
+
+
+
+Conclusions:
+
+Several countries which adopted financial transaction tax such as STT have witnessed its negative effects on the
+growth and development of the financial markets. Results of this paper shows that India too had been experiencing
+such effects, emphasizing the need to act accordingly to ensure that the CTT is repealed and the commodity
+futures market is allowed to function in a fair and orderly manner. The results of the study reveals that, contrary
+to what the common proponents of transaction taxes claim such as (Summers & Summers, 1989), the market
+volatility witnesses an increased after CTT has been introduced in India’s gold futures market. Imposition of CTT
+has affected all the stakeholders in non-agriculture commodity futures market, particularly in gold futures evident
+from the declining trend in open interest, trading value, turnover ratios etc. The comparative chart of Bullion and
+agro- commodity trading value depicts the heat the bullion commodity is facing because of CTT. The Gold
+Futures market had witness decrease in turnover in trading value indirectly affecting the liquidity, also increasing
+volatility in gold futures return which is consistent with findings in (Umlauf, 1993) and (Jones & Seguin, 1997)
+etc. This shows that CTT is not desirable or is contrary to the policy objectives of existence of healthy futures
+trading in commodities and its potential impact on policy aspirations in transforming Indian markets into ‘price
+setter’ from being ‘price taker. If the government sole motive of introducing commodities transaction tax was to
+generate more revenue to its exchequer than we think that it is a big blunder. If we look at the history of financial
+transaction tax right from the congressional budget estimates in U.S in 1990s and estimates in japan we can see
+
+                                                          16
+
+
+                            Electronic copy available at: https://ssrn.com/abstract=2849388
+an over estimation effect by the proponents between the amount expected and actually collected as revenue
+without considering the importance of trading volume(Wang & Yau, 2012) to support the project tax collection
+estimates. So without any further delay this paper recommend the policy makers to reconsider the decisions
+regarding the impositions of CTT, in non-agriculture commodities futures.
+
+References:
+
+Key Proponents of FTT:(Keynes, (1935), (Tobin, (1958), (Spahn, (1996),(Feige, (2007),
+
+Other critiques:
+
+   1. Aliber, R. Z., Chowdhry, B., & Yan, S. (2003). Some evidence that a Tobin tax on foreign exchange
+
+       transactions may increase volatility. Review of Finance, 7(3), 481–510.
+
+   2. Amihud, Y., & Mendelson, H. (1991). Volatility, Efficiency, and Trading: Evidence from the Japanese
+
+       Stock Market. The Journal of Finance, 46(5), 1765. http://doi.org/10.2307/2328572
+
+   3. Baltagi, B. H., Li, D., & Li, Q. (2006). Transaction tax and stock market behavior: evidence from an
+
+       emerging market. Empirical Economics, 31(2), 393–408. http://doi.org/10.1007/s00181-005-0022-9
+
+   4. Bera, A. K., & Higgins, M. L. (1993). ARCH models: properties, estimation and testing. Journal of
+
+       Economic Surveys, 7(4), 305–366.
+
+   5. Bjursell, C. J., Wang, G. H., & Yau, J. (2012). Transaction Tax and Market Quality of US Futures
+
+       Markets: An Ex-Ante Analysisi. Review of Futures Markets, 141–177.
+
+   6. Bollerslev, T. (1986). Generalized autoregressive conditional heteroskedasticity. Journal of
+
+       Econometrics, 31(3), 307–327.
+
+   7. Bollerslev, T., Chou, R. Y., & Kroner, K. F. (1992). ARCH modeling in finance: A review of the theory
+
+       and empirical evidence. Journal of Econometrics, 52(1–2), 5–59.
+
+   8. Brown, M. B., & Forsythe, A. B. (1974). Robust Tests for the Equality of Variances. Journal of the
+
+       American Statistical Association, 69(346), 364. http://doi.org/10.2307/2285659
+
+
+
+
+                                                        17
+
+
+                          Electronic copy available at: https://ssrn.com/abstract=2849388
+9. Campbell, J. Y., & Froot, K. A. (1994). International experiences with securities transaction taxes. In
+
+   The internationalization of equity markets (pp. 277–308). University of Chicago Press.
+
+10. Capelle-Blancard, G., & Havrylchyk, O. (2014). The impact of the French securities transaction tax on
+
+   market liquidity and volatility. Available at SSRN 2378347.
+
+11. Chou, R. K., & Lee, J.-H. (2002). The relative efficiencies of price execution between the Singapore
+
+   exchange and the Taiwan futures exchange. Journal of Futures Markets, 22(2), 173–196.
+
+12. Chou, R. K., & Wang, G. H. (2006). Transaction tax and market quality of the Taiwan stock index
+
+   futures. Journal of Futures Markets, 26(12), 1195–1216.
+
+13. Constantinides, G. M. (1986). Capital market equilibrium with transaction costs. The Journal of
+
+   Political Economy, 842–862.
+
+14. Efron, B., & Tibshirani, R. (1993). An introduction to the bootstrap. New York: Chapman & Hall.
+
+15. Engle, R. F. (1982). Autoregressive conditional heteroscedasticity with estimates of the variance of
+
+   United Kingdom inflation. Econometrica: Journal of the Econometric Society, 987–1007.
+
+16. Erickson, M., & Wang, S. (2000). The effect of transaction structure on price: Evidence from subsidiary
+
+   sales. Journal of Accounting and Economics, 30(1), 59–97.
+
+17. Feige, E. L. (2007). The underground economies: Tax evasion and information distortion. Cambridge
+
+   University Press.
+
+18. Frino, A., Stevenson, M., & Duffy, M. (1998). An Analysis of Intraday Quoted Bid‐Ask Spreads in
+
+   Futures Markets: Evidence from the Sydney Futures Exchange. Australian Journal of Management,
+
+   23(2), 185–202.
+
+19. Grundfest, J. A., & Shoven, J. B. (1991). Adverse implications of a securities transactions excise tax.
+
+   Journal of Accounting, Auditing & Finance, 6(4), 409–442.
+
+
+
+
+                                                     18
+
+
+                       Electronic copy available at: https://ssrn.com/abstract=2849388
+20. Habermeier, K., & Kirilenko, A. A. (2003). Securities transaction taxes and financial markets. IMF
+
+   Economic Review, 50(1), 165–180.
+
+21. Hegde, S. P., & Miller, R. E. (1989). Market-making in initial public offerings of common stocks: An
+
+   empirical analysis. Journal of Financial and Quantitative Analysis, 24(1), 75–90.
+
+22. Hsieh, W.-L. G. (2009). Expiration‐day effects on individual stocks and the overall market: Evidence
+
+   from Taiwan. Journal of Futures Markets, 29(10), 920–945.
+
+23. Hu, S. (1998). The effects of the stock transaction tax on the stock market–Experiences from Asian
+
+   markets. Pacific-Basin Finance Journal, 6(3), 347–364.
+
+24. Jones, C. M., & Seguin, P. J. (1997). Transaction costs and price volatility: evidence from commission
+
+   deregulation. The American Economic Review, 87(4), 728–737.
+
+25. Jurečková, J., & Picek, J. (2007). Shapiro–Wilk-type test of normality under nuisance regression and
+
+   scale. Computational Statistics & Data Analysis, 51(10), 5184–5191.
+
+26. Keynes, J. M. (1935). The Future of the Foreign Exchange. Lloyds Bank Limited Monthly Review, (68).
+
+27. Kupiec, P. H., & Sharpe, S. A. (1991). Animal Spirits, Margin Requirements, and Stock Price Volatility.
+
+   The Journal of Finance, 46(2), 717. http://doi.org/10.2307/2328844
+
+28. Lee, S. B., & Ohk, K. Y. (1992). Stock index futures listing and structural change in time‐varying
+
+   volatility. Journal of Futures Markets, 12(5), 493–509.
+
+29. Levene, H. (1960). Contributions to probability and statistics. Essays in Honor of Harold Hotelling,
+
+   278–292.
+
+30. Li, D., Lin, S.-K., & Li, C. (1997). The impact of settlement time on the volatility of stock markets.
+
+   Applied Financial Economics, 7(6), 689–694.
+
+31. Lindgren, R., & Westlund, A. (1990). Transaction Costs, Trading Volume, and Price Volatility on the
+
+   Stockholm Stock Exchange. Skandinaviska Enskilda Banken Quarterly Review, 2, 30–35.
+
+
+
+                                                     19
+
+
+                       Electronic copy available at: https://ssrn.com/abstract=2849388
+32. Lo, A. W., Mamaysky, H., & Wang, J. (2000). Foundations of technical analysis: Computational
+
+   algorithms, statistical inference, and empirical implementation. The Journal of Finance, 55(4), 1705–
+
+   1770.
+
+33. Pavaskar, M., & Ghosh, N. (2008). Commodity transaction tax: a recipe for disaster. Economic and
+
+   Political Weekly, 17–20.
+
+34. Roll, R. (1984). A simple implicit measure of the effective bid-ask spread in an efficient market. The
+
+   Journal of Finance, 39(4), 1127–1139.
+
+35. Saporta, V., & Kan, K. (1997). The effects of stamp duty on the level and volatility of equity prices.
+
+36. Schulmeister, S. (2008). A general financial transaction tax motives, revenues, feasibility and effects.
+
+   WIFO, March.
+
+37. Spahn, P. B. (1996). The Tobin tax and exchange rate stability. Finance and Development, 33(2), 24–27.
+
+38. Summers, L. H., & Summers, V. P. (1989). When financial markets work too well: a cautious case for a
+
+   securities transactions tax. Journal of Financial Services Research, 3(2–3), 261–286.
+
+39. Tobin, J. (1958). Liquidity Preference as Behavior Towards Risk. The Review of Economic Studies,
+
+   25(2), 65. http://doi.org/10.2307/2296205
+
+40. Umlauf, S. R. (1993). Transaction taxes and the behavior of the Swedish stock market. Journal of
+
+   Financial Economics, 33(2), 227–240.
+
+41. Wang, G. H., & Yau, J. (2012). Would a Financial Transaction Tax Affect Financial Market Activity?
+
+   Insights from Future Markets. Insights from Future Markets (July 9, 2012). Cato Institute Policy
+
+   Analysis, (72).
+
+
+
+
+                                                     20
+
+
+                       Electronic copy available at: https://ssrn.com/abstract=2849388
+
