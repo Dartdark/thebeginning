@@ -1,0 +1,223 @@
+{
+  "phase": "design",
+  "source_snapshot": "fe35af99aa90d7f31b91f8693859251bb44dd9ab",
+  "start": "2018-01-01",
+  "end": "2022-12-30",
+  "case_count": 18,
+  "family_gates": {
+    "ONB30": true,
+    "ONBML": true,
+    "FC2B": true,
+    "Tfade": true
+  },
+  "baseline_audit": {
+    "FC2B": {
+      "baseline_parity": {
+        "passed": true,
+        "common": 443,
+        "entry_within_tick": 1.0,
+        "gross_within_5": 1.0,
+        "all_sides_equal": true,
+        "py_only": 0,
+        "mc_only": 0,
+        "cross_date": 0
+      },
+      "end_state": {
+        "original": {
+          "open_position": 0,
+          "pending": false
+        },
+        "no_flow_gate": {
+          "open_position": 0,
+          "pending": false
+        },
+        "no_BE": {
+          "open_position": 0,
+          "pending": false
+        },
+        "no_trail": {
+          "open_position": 0,
+          "pending": false
+        }
+      },
+      "volume_scope": "MC-selected dates/sides; no native up-tick reconstruction"
+    },
+    "Tfade": {
+      "baseline_parity": {
+        "passed": true,
+        "common": 228,
+        "entry_within_tick": 1.0,
+        "gross_within_5": 1.0,
+        "all_sides_equal": true,
+        "py_only": 0,
+        "mc_only": 0,
+        "cross_date": 0
+      },
+      "calendar_start": "2018-01-30",
+      "volume_scope": "MC selection; all-night counterfactual uses no volume hurdle"
+    }
+  },
+  "pure_filter_controls": {
+    "FC2B": {
+      "pure_nested_filter": true,
+      "removed_n": 844,
+      "removed_total": 21851.0,
+      "removed_mean": 25.889810426540283,
+      "removed_t": 0.44079780635480864,
+      "random_drops": 1000,
+      "actual_total": 129353.25,
+      "actual_dd": 8884.75,
+      "random_total_p5_p50_p95": [
+        1018.2500000000009,
+        51355.75,
+        96990.99999999999
+      ],
+      "random_dd_p5_p50_p95": [
+        14478.0125,
+        23655.0,
+        43378.2625
+      ],
+      "random_profit_ge_actual": 0.004,
+      "random_dd_le_actual": 0.0
+    },
+    "ONBML": {
+      "pure_nested_filter": true,
+      "removed_n": 365,
+      "removed_total": 11013.550000000141,
+      "removed_mean": 30.174109589041482,
+      "removed_t": 0.35446256507839446,
+      "random_drops": 1000,
+      "actual_total": 117294.59999999995,
+      "actual_dd": 7874.349999999977,
+      "random_total_p5_p50_p95": [
+        16360.189999999951,
+        46737.89999999999,
+        79740.12500000001
+      ],
+      "random_dd_p5_p50_p95": [
+        7596.52,
+        11900.175000000003,
+        21773.54249999997
+      ],
+      "random_profit_ge_actual": 0.0,
+      "random_dd_le_actual": 0.065
+    },
+    "Tfade": {
+      "pure_nested_filter": false,
+      "reason": "common-date trades differ; paired strategy comparison only"
+    }
+  },
+  "inputs": {
+    "NQ_1min_2017.csv": {
+      "blob": "1a235da2d569011833fcc27fc4b8bbe0ad51c012",
+      "sha256": "b4005cfcd7ea021174b1eb14534b473ee5d2e4014319f991e9c34b0619bfde8d",
+      "bytes": 3720003
+    },
+    "NQ_1min_ON_2017.csv": {
+      "blob": "2b48593ed40b8b6165c566f183b54460918a5523",
+      "sha256": "34096eaeeefe9b8a7330d9df7d6e0d2cb93ce8dfc2a796bdbb43c6c0ce6b451a",
+      "bytes": 872961
+    },
+    "ES_1min_2017.csv": {
+      "blob": "420179855bc49442e8f5c9b51daa3bbda67b1cfb",
+      "sha256": "9ddc201359c70d1adb174141d0614dbf48e08f3324f63b6f91b97350a0aac442",
+      "bytes": 17310586
+    },
+    "NQ_1min_2018.csv": {
+      "blob": "76eb73b44b4b67a08131dc1a4241fd4452b39673",
+      "sha256": "1f96aa60ec99d2b1f135c21f1656e3d847d36275f0e00738f360e807ecdbd237",
+      "bytes": 5630086
+    },
+    "NQ_1min_ON_2018.csv": {
+      "blob": "bf8386738439cb25cbdd160d23a6d3b3f39c5f3b",
+      "sha256": "edaced1e3791363666d759427dee713685053fbf2d724250526ba8ea926373b2",
+      "bytes": 11729558
+    },
+    "ES_1min_2018.csv": {
+      "blob": "577f9e3a2b8b9b75c7615435eb548e46573d9825",
+      "sha256": "ad4027b8230de0a91f83d1b6f3b798933f92cedebc39e56fe9223447c4b9d751",
+      "bytes": 17506050
+    },
+    "NQ_1min_2019.csv": {
+      "blob": "db1c597e7dcac738d2a336fc90ba5a6d132aa535",
+      "sha256": "a6ebebf31fd82603143da76643bfdfe5a5f01d06b33325e2944a5e7f624ace1e",
+      "bytes": 5643031
+    },
+    "NQ_1min_ON_2019.csv": {
+      "blob": "2a0dc8d66e208b526621d246d79e7a08699b1562",
+      "sha256": "42e356ed4eb9ebce592c4b20bbfe16c1cee52688ac26f8b99a76b65b7d52a89d",
+      "bytes": 11858009
+    },
+    "ES_1min_2019.csv": {
+      "blob": "adf41d77df2d298c0b8a9f8493912d9a22d22925",
+      "sha256": "b9c09d6c9a702e560119bd33770cc71e05423fc0a7a227fcc046e73bf22f22c5",
+      "bytes": 17631102
+    },
+    "NQ_1min_2020.csv": {
+      "blob": "fc22a2151cf8794527756f75048d89a7adfca1d1",
+      "sha256": "8fd0886e6e20fa9065f6d9840dbfa3f39910e3da8038f8ebff7ab4f96971abf4",
+      "bytes": 5890101
+    },
+    "NQ_1min_ON_2020.csv": {
+      "blob": "cd0eaccf6dcc1956dd1f7ef5fd417b6041f74cb8",
+      "sha256": "fcc88c32efa7bd2f6157f729e7ca2404e76cf0133bc33abde224f507c5362ac9",
+      "bytes": 12324066
+    },
+    "ES_1min_2020.csv": {
+      "blob": "0fa3891929dc0a5ffef899bd154b134c5732fa68",
+      "sha256": "c22514904bd19b8ee9e3611bcd8af4017290730550b4799b9d92da73f8e7d550",
+      "bytes": 17667404
+    },
+    "NQ_1min_2021.csv": {
+      "blob": "c978b68c5092abceaba934228970a401b03b65b4",
+      "sha256": "6536836c17017507591ec081e3c266fd5ffffd9675e043540da3bcc3ac8ab500",
+      "bytes": 6118786
+    },
+    "NQ_1min_ON_2021.csv": {
+      "blob": "26a8f20c87383ea421cb7efca5bfc2b03ed6a7a1",
+      "sha256": "a0f49030516ea0bc7a8cf68cc45d6c94cc5b060577b0746767e8dba54e6c141e",
+      "bytes": 12996633
+    },
+    "ES_1min_2021.csv": {
+      "blob": "21be847fe2b708aa3d9e779481229adc0391e553",
+      "sha256": "67cd2dee366b86f555d09d45fb4cb9f6163347531b4f3f230f73704a1fff8096",
+      "bytes": 17835299
+    },
+    "NQ_1min_2022.csv": {
+      "blob": "8651c6244bbd46b32e952062d91373348e0c3c9e",
+      "sha256": "c918d51804c5e19235c331439cea8f804b652a875706e819722b6a1e695ffde2",
+      "bytes": 6122385
+    },
+    "NQ_1min_ON_2022.csv": {
+      "blob": "2b0510fa786cfcb9f23b285735097258e77383ce",
+      "sha256": "e7cb8cc3be1db84467032599bb6ee1a55df1cba76947a676ed206d8cc19106a0",
+      "bytes": 13079168
+    },
+    "ES_1min_2022.csv": {
+      "blob": "03cfa4acaad8bce66056be420b86f73af62eacfa",
+      "sha256": "00db614dd10674f7fe2f14940ae43f523b57ac48db1b0619b0eb084c5f50f601",
+      "bytes": 17909640
+    }
+  },
+  "source_sha256": {
+    "fc_replica.py": "b81cb1d2ea41e34730ef5127108fdff2654df98111a25618f4d4b4b64bdfd321",
+    "fc_v2.txt": "97632f4c38adbc1f9fe8ffaca4c6b446c4ae30b482506cd96c0e2eb7147036fe",
+    "t_source.txt": "c6816a3e95eed41ee002c870ad3118d642c17c2ffce1c23b8575d749431479b1",
+    "fc_mc.csv": "62495108fe4fc86495ece9977b89e94bb967e2644aeeb3e766e5b36c08384d96",
+    "onb_ml.txt": "c894acf104a96fae16fac201e7c6f1a565ae3d42105535fc3b315c5a245b9b25",
+    "calendar.py": "c0ae001152c75395748b0f3fdb4bdcbc589d0a124befce0170ef454c3da6f58f",
+    "grid.py": "a30ddd4533c9b9d9bdd50f161deded3a2864605f1b81bf4605f74b1d23bc7405",
+    "dependency_manifest.json": "1b5ec367aaabe7d1711e50df7756417bdddca23c8c5acfc1e89ea6eb9b0d0e1d",
+    "t_features.py": "2324f301b40a5b0fdb8bb1354dc34e1b8b08d311016c4405a94d08d760c73b2d",
+    "t_mc.csv": "c6837fe19af5fa74e6c144d0563b3279be8ac2c8ae989325bac7a0419266255b",
+    "source_manifest.json": "2176f02178f4ca3e8b25c41f630f9953e1a9b0ee5fb86099360aa97d83cca245",
+    "candidates.py": "d7a8f1aeba9f741b8780e09162cae86c8e09053d2dd9c6f5612cf7e445035f09",
+    "onb_engine.py": "fffdf8b2092ba89faedf64aaa59e9c42a90b1dd299dc5cba0a1ae269caf2d253"
+  },
+  "code_sha256": "d0b430d16b310895db417ee7dc8c87ffd146d9d985d0680dd3653437adc237b7",
+  "plan_sha256": "443b46744b349ee78f2025e7143aafc993d18fc56e28678987ab37db4709aa0c",
+  "plan_commit": "b0e5112e50b775eece7ff98fd13fd8d0dd473f5f",
+  "portfolio_tests_run": false,
+  "ML_fit_scope": "frozen coefficients fitted on2018\u201326; both splits in-sample attribution",
+  "volume_scope": "FC/T baseline admission from retained MC events; totalTicks not substituted for up-tickVolume"
+}
